@@ -9,13 +9,11 @@ The IDS monorepo contains the React component library and supporting packages fo
 - `@iress-oss/ids-tokens` - Design tokens for the Iress Design System
 - `@iress-oss/ids-storybook-addons` - Custom Storybook addon and configuration for IDS
 
-## Using IDS
+## Usage
 
 To use IDS, please refer to the [documentation](https://design.wm.iress.com).
 
 If you find a bug in any of the Design System packages or would like an enhancement, please reach out to us using the [issues tab](https://github.com/iress/design-system/issues).
-
----
 
 ## Development
 
