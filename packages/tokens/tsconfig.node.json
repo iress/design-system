@@ -4,12 +4,7 @@
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "allowSyntheticDefaultImports": true,
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals", "node"]
   },
-  "include": [
-    "docs",
-    "plugins",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+  "include": ["docs", "plugins", "**/*.ts", "**/*.tsx"]
 }
