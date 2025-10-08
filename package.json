@@ -1,0 +1,13 @@
+{
+  "name": "@iress/design-system-monorepo",
+  "version": "0.0.0-development",
+  "author": "Iress",
+  "private": true,
+  "packageManager": "yarn@4.10.3",
+  "type": "module",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  }
+}
