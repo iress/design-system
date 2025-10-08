@@ -1,4 +1,4 @@
-# IDS (Iress Design System) monorepo
+# Iress Design System (IDS)
 
 The IDS monorepo contains the React component library and supporting packages for the Iress Design System.
 
