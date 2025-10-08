@@ -7,7 +7,7 @@ The IDS monorepo contains the React component library and supporting packages fo
 - `@iress-oss/ids-components` - React components that implement the design system
 - `@iress-oss/ids-mcp-server` - Model Context Protocol (MCP) server providing AI assistants with contextual information about IDS components
 - `@iress-oss/ids-tokens` - Design tokens for the Iress Design System
-- `@iress-oss/ids-storybook-addons` - Custom Storybook addon and configuration for IDS
+- `@iress-oss/ids-storybook-addon` - Custom Storybook addon and configuration for IDS
 
 ## Usage
 
@@ -63,3 +63,7 @@ yarn test
 3. Run the tests
 4. Commit and push your changes
 5. Send a pull request
+
+## License
+
+Apache 2.0 License (See the included [LICENSE](/LICENSE) file for more information).
