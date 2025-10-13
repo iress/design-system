@@ -15,7 +15,7 @@ const getWorkspaceConfig = () => {
     if (!workspaces) {
       workspaceConfigCache = {
         patterns: ['packages/*'],
-        regexes: [/^packages\/([^/]+)\//],
+        regexes: [/packages\/([^/]+)\//],
       };
       return workspaceConfigCache;
     }
@@ -27,7 +27,7 @@ const getWorkspaceConfig = () => {
       const regexPattern = pattern
         .replace(/\*/g, '([^/]+)')
         .replace(/\//g, '\\/');
-      return new RegExp(`^${regexPattern}\\/`);
+      return new RegExp(`${regexPattern}\\/`);
     });
 
     workspaceConfigCache = { patterns, regexes };
@@ -36,7 +36,7 @@ const getWorkspaceConfig = () => {
     // Fallback configuration
     workspaceConfigCache = {
       patterns: ['packages/*'],
-      regexes: [/^packages\/([^/]+)\//],
+      regexes: [/packages\/([^/]+)\//],
     };
     return workspaceConfigCache;
   }

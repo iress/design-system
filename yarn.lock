@@ -520,6 +520,8 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:8.44.1"
     "@typescript-eslint/parser": "npm:8.44.1"
     eslint: "npm:9.36.0"
+    eslint-plugin-file-progress: "npm:^3.0.2"
+    eslint-plugin-mdx: "npm:^3.6.2"
     eslint-plugin-prettier: "npm:5.5.4"
     husky: "npm:9.1.7"
     lint-staged: "npm:16.2.1"
@@ -2578,7 +2580,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-file-progress@npm:3.0.2":
+"eslint-plugin-file-progress@npm:3.0.2, eslint-plugin-file-progress@npm:^3.0.2":
   version: 3.0.2
   resolution: "eslint-plugin-file-progress@npm:3.0.2"
   dependencies:
@@ -2590,7 +2592,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-mdx@npm:3.6.2":
+"eslint-plugin-mdx@npm:3.6.2, eslint-plugin-mdx@npm:^3.6.2":
   version: 3.6.2
   resolution: "eslint-plugin-mdx@npm:3.6.2"
   dependencies:
