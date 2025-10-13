@@ -1,4 +1,6 @@
-#!/bin/sh -x
+#!/bin/sh
+# Enable shell tracing if HUSKY_DEBUG=1
+[ "$HUSKY_DEBUG" = "1" ] && set -x
 
 command_exists() {
   command -v "$1" > /dev/null 2>&1
