@@ -88,7 +88,7 @@ const createWorkspaceAwareLintCommand = (files) => {
 
     if (packageName) {
       commands.push(
-        `yarn workspace ${packageName} exec npx eslint ${fileList.join(' ')} --fix`,
+        `yarn workspace ${packageName} exec eslint ${fileList.join(' ')} --fix`,
       );
     } else {
       commands.push(`yarn eslint ${fileList.join(' ')} --fix`);
