@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# shellcheck disable=SC1091
+. "$(dirname "$0")/common.sh"
+
+# Check the yarn lockfile is up to date
+echo "📦 Pre-push: Checking yarn lockfile..."
+yarn install --immutable
+
+# Run comprehensive lint-staged with tests on staged files
+echo "🔍 Pre-push: Running comprehensive lint, format, and tests on staged files..."
+yarn lint-staged --config lint-staged.pre-push.config.cjs
+
+# Check there are no commits with secrets before pushing
+ggshield secret scan pre-push "$@"

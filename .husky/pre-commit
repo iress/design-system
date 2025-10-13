@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# shellcheck disable=SC1091
+. "$(dirname "$0")/common.sh"
+
+echo "🔍 Pre-commit: Running lightweight lint and format on staged files..."
+yarn lint-staged --config lint-staged.pre-commit.config.cjs
+
+echo "🔒 Pre-commit: Scanning for secrets..."
+ggshield secret scan pre-commit "$@"
