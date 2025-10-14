@@ -82,9 +82,9 @@ describe('useControlledState', () => {
         const { setValue } = hook.result.current;
 
         act(() => setValue('test'));
-        expect(onChange).toBeCalledWith('test');
+        expect(onChange).toHaveBeenCalledWith('test');
         act(() => setValue(undefined));
-        expect(onChange).toBeCalledWith(undefined);
+        expect(onChange).toHaveBeenCalledWith(undefined);
       });
 
       it('is called when value is changed using toggleValue', () => {
@@ -95,9 +95,9 @@ describe('useControlledState', () => {
         const { toggleValue } = hook.result.current;
 
         act(() => toggleValue('test', true));
-        expect(onChange).toBeCalledWith('test');
+        expect(onChange).toHaveBeenCalledWith('test');
         act(() => toggleValue('test', false));
-        expect(onChange).toBeCalledWith(undefined);
+        expect(onChange).toHaveBeenCalledWith(undefined);
       });
 
       it('is called when value is changed using toggleValue (multiple)', () => {
@@ -108,9 +108,9 @@ describe('useControlledState', () => {
         const { toggleValue } = hook.result.current;
 
         act(() => toggleValue('test', true));
-        expect(onChange).toBeCalledWith(['test']);
+        expect(onChange).toHaveBeenCalledWith(['test']);
         act(() => toggleValue('test', false));
-        expect(onChange).toBeCalledWith([]);
+        expect(onChange).toHaveBeenCalledWith([]);
       });
 
       it('is not called when value is changed using props', () => {
@@ -124,7 +124,7 @@ describe('useControlledState', () => {
           ) => useControlledState(props),
         );
         hook.rerender({ component: 'test', value: ['test2'] });
-        expect(onChange).not.toBeCalled();
+        expect(onChange).not.toHaveBeenCalled();
       });
     });
 
@@ -200,7 +200,7 @@ describe('useControlledState', () => {
       );
 
       await waitFor(() =>
-        expect(idsLogger).toBeCalledWith(
+        expect(idsLogger).toHaveBeenCalledWith(
           `test: Please use either the defaultValue prop for uncontrolled components, or the value prop for controlled components, rather than both. If you use both, the value of the component may become unpredictable.`,
           'warn',
         ),
@@ -218,7 +218,7 @@ describe('useControlledState', () => {
       );
 
       await waitFor(() =>
-        expect(idsLogger).toBeCalledWith(
+        expect(idsLogger).toHaveBeenCalledWith(
           `test: Please use either the defaultSelected prop for uncontrolled components, or the selected prop for controlled components, rather than both. If you use both, the value of the component may become unpredictable.`,
           'warn',
         ),

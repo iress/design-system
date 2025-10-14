@@ -42,8 +42,6 @@
     "@vitejs/plugin-react": "4.5.2",
     "@vitest/coverage-v8": "3.2.4",
     "@vitest/ui": "3.2.4",
-    "ag-grid-enterprise": "33.3.2",
-    "ag-grid-react": "33.3.2",
     "eslint": "^9.36.0",
     "glob": "10.4.5",
     "jest-axe": "10.0.0",

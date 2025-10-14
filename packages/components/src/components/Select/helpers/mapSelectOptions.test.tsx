@@ -7,7 +7,7 @@ describe('mapSelectOptions', () => {
   describe('warnings', () => {
     it('logs a deprecated warning when used', () => {
       mapSelectOptions([]);
-      expect(idsLogger).toBeCalledTimes(1);
+      expect(idsLogger).toHaveBeenCalledTimes(1);
     });
   });
 

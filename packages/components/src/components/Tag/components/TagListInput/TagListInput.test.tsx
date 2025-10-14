@@ -70,7 +70,7 @@ describe('TagListInput', () => {
           screen.getByRole('button', { name: 'Delete Tag 1' }),
         );
 
-        expect(onTagDelete).toBeCalledTimes(1);
+        expect(onTagDelete).toHaveBeenCalledTimes(1);
       });
     });
 
@@ -86,7 +86,7 @@ describe('TagListInput', () => {
         await userEvent.tab(); // Focus button
         await userEvent.tab(); // Blur button
 
-        expect(onTagDeleteButtonBlur).toBeCalledTimes(1);
+        expect(onTagDeleteButtonBlur).toHaveBeenCalledTimes(1);
       });
     });
 

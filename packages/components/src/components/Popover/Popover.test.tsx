@@ -472,7 +472,7 @@ describe('IressPopover', () => {
         const content = screen.getByText(TEST_ID);
         expect(content).toHaveStyle({ maxWidth: '20rem', width: '100%' });
 
-        expect(idsLogger).toBeCalledTimes(1);
+        expect(idsLogger).toHaveBeenCalledTimes(1);
       });
     });
 

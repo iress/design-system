@@ -35,7 +35,7 @@ describe('useComboboxInlineCompletion', () => {
       setValue,
     });
 
-    expect(setValue).not.toBeCalled();
+    expect(setValue).not.toHaveBeenCalled();
 
     hook.rerender({
       debouncedQuery: 'o',
@@ -45,12 +45,13 @@ describe('useComboboxInlineCompletion', () => {
       setValue,
     });
 
-    expect(setValue).toBeCalledWith(MOCK_LABEL_VALUE_META[0]);
-    expect(setTypedQuery).toBeCalledWith(MOCK_LABEL_VALUE_META[0].label);
+    expect(setValue).toHaveBeenCalledWith(MOCK_LABEL_VALUE_META[0]);
+    expect(setTypedQuery).toHaveBeenCalledWith(MOCK_LABEL_VALUE_META[0].label);
 
     await waitFor(() => {
       // expect 'option 1' to be selected in 'Option 1' after the query input was updated
 
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(queryRef.current.input.setSelectionRange).toHaveBeenCalledWith(
         1,
         8,
@@ -82,8 +83,8 @@ describe('useComboboxInlineCompletion', () => {
       setValue,
     });
 
-    expect(setValue).not.toBeCalled();
-    expect(setTypedQuery).not.toBeCalled();
+    expect(setValue).not.toHaveBeenCalled();
+    expect(setTypedQuery).not.toHaveBeenCalled();
   });
 
   it('does not highlight the active value if autoSelect is disabled', () => {
@@ -105,6 +106,6 @@ describe('useComboboxInlineCompletion', () => {
       setValue,
     });
 
-    expect(setValue).not.toBeCalled();
+    expect(setValue).not.toHaveBeenCalled();
   });
 });

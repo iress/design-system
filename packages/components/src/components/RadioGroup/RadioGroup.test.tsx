@@ -239,7 +239,7 @@ describe('IressRadioGroup', () => {
           value: 'home',
         });
 
-        await waitFor(() => expect(idsLogger).toBeCalledTimes(1));
+        await waitFor(() => expect(idsLogger).toHaveBeenCalledTimes(1));
       });
     });
 

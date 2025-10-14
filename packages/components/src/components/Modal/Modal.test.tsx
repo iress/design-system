@@ -471,7 +471,7 @@ describe('IressModal', () => {
           propertyName: 'opacity',
         });
 
-        await waitFor(() => expect(onExited).toBeCalledTimes(1));
+        await waitFor(() => expect(onExited).toHaveBeenCalledTimes(1));
       });
 
       it('is called when the modal is closed via backdrop click', async () => {
@@ -491,7 +491,7 @@ describe('IressModal', () => {
           propertyName: 'opacity',
         });
 
-        await waitFor(() => expect(onExited).toBeCalledTimes(1));
+        await waitFor(() => expect(onExited).toHaveBeenCalledTimes(1));
       });
 
       it('is called when the modal is closed via escape key', async () => {
@@ -511,7 +511,7 @@ describe('IressModal', () => {
           propertyName: 'opacity',
         });
 
-        await waitFor(() => expect(onExited).toBeCalledTimes(1));
+        await waitFor(() => expect(onExited).toHaveBeenCalledTimes(1));
       });
     });
 
@@ -721,7 +721,7 @@ describe('IressModal', () => {
 
       screen.rerender(<AppWithModalProvider id={TEST_ID} show />);
 
-      await waitFor(() => expect(idsLogger).toBeCalledTimes(1));
+      await waitFor(() => expect(idsLogger).toHaveBeenCalledTimes(1));
     });
   });
 

@@ -101,11 +101,11 @@ describe('IressFilter', () => {
 
         await userEvent.click((await screen.findAllByRole('option'))[0]);
 
-        expect(onChange).toBeCalledWith([MOCK_LABEL_VALUE_META[0]]);
+        expect(onChange).toHaveBeenCalledWith([MOCK_LABEL_VALUE_META[0]]);
 
         await userEvent.click((await screen.findAllByRole('option'))[1]);
 
-        expect(onChange).toBeCalledWith([
+        expect(onChange).toHaveBeenCalledWith([
           MOCK_LABEL_VALUE_META[0],
           MOCK_LABEL_VALUE_META[1],
         ]);

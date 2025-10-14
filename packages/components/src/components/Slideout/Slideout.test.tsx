@@ -644,7 +644,7 @@ describe('IressSlideout', () => {
           propertyName: 'right',
         });
 
-        await waitFor(() => expect(onExited).toBeCalledTimes(1));
+        await waitFor(() => expect(onExited).toHaveBeenCalledTimes(1));
       });
 
       it('is called when the slideout is closed via backdrop click', async () => {
@@ -687,7 +687,7 @@ describe('IressSlideout', () => {
           propertyName: 'right',
         });
 
-        await waitFor(() => expect(onExited).toBeCalledTimes(1));
+        await waitFor(() => expect(onExited).toHaveBeenCalledTimes(1));
       });
     });
 
@@ -812,7 +812,7 @@ describe('IressSlideout', () => {
 
       screen.rerender(<AppWithSlideoutProvider id={TEST_ID} show />);
 
-      await waitFor(() => expect(idsLogger).toBeCalledTimes(1));
+      await waitFor(() => expect(idsLogger).toHaveBeenCalledTimes(1));
     });
   });
 

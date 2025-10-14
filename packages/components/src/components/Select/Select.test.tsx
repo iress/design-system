@@ -87,7 +87,7 @@ describe('IressSelect', () => {
 
         await userEvent.selectOptions(screen.getByRole('combobox'), '2');
 
-        expect(onChange).toBeCalledTimes(1);
+        expect(onChange).toHaveBeenCalledTimes(1);
       });
 
       it('fires onChange event twice when there is no placeholder (to sync value)', async () => {
@@ -97,8 +97,8 @@ describe('IressSelect', () => {
           onChange,
         });
 
-        expect(onChange).toBeCalledTimes(1);
-        expect(onChange).toBeCalledWith(
+        expect(onChange).toHaveBeenCalledTimes(1);
+        expect(onChange).toHaveBeenCalledWith(
           expect.objectContaining({
             target: expect.objectContaining({
               value: '1',
@@ -109,7 +109,7 @@ describe('IressSelect', () => {
 
         await userEvent.selectOptions(screen.getByRole('combobox'), '2');
 
-        expect(onChange).toBeCalledTimes(2);
+        expect(onChange).toHaveBeenCalledTimes(2);
       });
     });
 
@@ -123,7 +123,7 @@ describe('IressSelect', () => {
 
         await userEvent.click(screen.getByRole('combobox'));
 
-        expect(onFocus).toBeCalledTimes(1);
+        expect(onFocus).toHaveBeenCalledTimes(1);
       });
     });
 
@@ -138,7 +138,7 @@ describe('IressSelect', () => {
         await userEvent.click(screen.getByRole('combobox'));
         await userEvent.tab();
 
-        expect(onBlur).toBeCalledTimes(1);
+        expect(onBlur).toHaveBeenCalledTimes(1);
       });
     });
 

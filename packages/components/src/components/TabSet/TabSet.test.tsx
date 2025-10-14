@@ -170,7 +170,7 @@ describe('IressTabs', () => {
         const tabs = screen.getAllByRole('tab');
         await userEvent.click(tabs[1]);
 
-        expect(onChange).toBeCalledWith({ index: 1, value: undefined });
+        expect(onChange).toHaveBeenCalledWith({ index: 1, value: undefined });
       });
 
       it('emits the new index and value when the user changes tab, and tab has value', async () => {
@@ -183,7 +183,7 @@ describe('IressTabs', () => {
         const tabs = screen.getAllByRole('tab');
         await userEvent.click(tabs[1]);
 
-        expect(onChange).toBeCalledWith({ index: 1, value: 'tab-2' });
+        expect(onChange).toHaveBeenCalledWith({ index: 1, value: 'tab-2' });
       });
     });
 
@@ -298,7 +298,7 @@ describe('IressTabs', () => {
         selected: 1,
       });
 
-      await waitFor(() => expect(idsLogger).toBeCalledTimes(1));
+      await waitFor(() => expect(idsLogger).toHaveBeenCalledTimes(1));
     });
   });
 

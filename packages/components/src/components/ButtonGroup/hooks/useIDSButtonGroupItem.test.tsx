@@ -45,7 +45,7 @@ describe('useIDSButtonGroupItem', () => {
       },
     );
     hook.result.current?.toggle();
-    expect(onChange).not.toBeCalled();
+    expect(onChange).not.toHaveBeenCalled();
   });
 
   it('calls onChange when the button is toggled', () => {
@@ -61,13 +61,13 @@ describe('useIDSButtonGroupItem', () => {
 
     act(() => hook.result.current?.toggle());
 
-    expect(onChange).toBeCalledWith({ selected: 'test' });
+    expect(onChange).toHaveBeenCalledWith({ selected: 'test' });
     expect(hook.result.current?.props['aria-pressed']).toBe(true);
     expect(hook.result.current?.className).toContain(styles.active);
 
     act(() => hook.result.current?.toggle());
 
-    expect(onChange).toBeCalledWith({ selected: undefined });
+    expect(onChange).toHaveBeenCalledWith({ selected: undefined });
     expect(hook.result.current?.props['aria-pressed']).toBe(false);
     expect(hook.result.current?.className).not.toContain(styles.active);
   });
@@ -86,13 +86,13 @@ describe('useIDSButtonGroupItem', () => {
 
     act(() => hook.result.current?.toggle());
 
-    expect(onChange).toBeCalledWith({ selected: ['test'] });
+    expect(onChange).toHaveBeenCalledWith({ selected: ['test'] });
     expect(hook.result.current?.props['aria-pressed']).toBe(true);
     expect(hook.result.current?.className).toContain(styles.active);
 
     act(() => hook.result.current?.toggle());
 
-    expect(onChange).toBeCalledWith({ selected: [] });
+    expect(onChange).toHaveBeenCalledWith({ selected: [] });
     expect(hook.result.current?.props['aria-pressed']).toBe(false);
     expect(hook.result.current?.className).not.toContain(styles.active);
   });
