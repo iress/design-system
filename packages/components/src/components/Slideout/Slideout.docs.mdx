@@ -1,0 +1,146 @@
+import { Meta, Markdown } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import * as ComponentStories from './Slideout.stories';
+import * as ProviderStories from './SlideoutProvider.stories';
+import { SlideoutTestDiff } from './mocks/SlideoutTestDiff';
+import { IressButton } from '../../main';
+
+<Meta of={ComponentStories} />
+
+# Slideout
+
+<ComponentOverview
+  description="Slideouts are used to show additional information or to allow users to perform secondary tasks without leaving their normal workflow."
+  readMore={
+    <Markdown>{`
+## Use a slideout when:
+- Providing supplemental tasks that require the underlying page to still be visible
+- Providing non-essential information related to the underlying page
+  `}</Markdown>
+  }
+  story={ComponentStories.Default}
+  stories={ComponentStories}
+/>
+
+## Controlling the slideout
+
+### Using the `show` property
+
+You can use state to control the slideout by setting the `show` property to `true` or `false`. To sync your state with the slideout, you can use the `onShowChange` prop, which is normally passed the set function from `useState`.
+
+<ComponentExample
+  story={ComponentStories.ShowWithState}
+  stories={ComponentStories}
+/>
+
+### Using the `IressSlideoutProvider`
+
+You can use the `IressSlideoutProvider` to open and close slideout from anywhere in your application, as long as the slideout has a unique `id`. In this case you would use the `useSlideout` hook to open and close the slideout.
+
+To use, wrap your `<App/>` or the component that you want to use the `useSlideout` hook with `<IressSlideoutProvider />`.
+
+<ComponentExample
+  api={{
+    details:
+      'These are some settings you can use to customise the provider, such as setting where the slideouts are rendered in the DOM.',
+    heading: 'Props',
+    headingId: 'provider-api',
+  }}
+  story={ProviderStories.Provider}
+  stories={ProviderStories}
+/>
+
+## Examples
+
+### Modes
+
+Slideouts can be used in two modes - `overlay` and `push`. In `overlay` mode the slideout sits on top of the content, useful if space is at a premium. In `push` mode the slideout will push the page container to make it smaller; this means you can see all of the page content when the page is available. Overlay is the default.
+
+<ComponentExample story={ComponentStories.Modes} stories={ComponentStories} />
+
+### Position
+
+Slideouts can appear from the left or the right of the screen. The default is right, but you can use the `position` prop to set it to slide in from the left.
+
+<ComponentExample
+  story={ComponentStories.Position}
+  stories={ComponentStories}
+/>
+
+### Size
+
+The width of your slideout can be set using the `size` prop. By default it is `sm`, but it can be made larger by setting `size` to `md`.
+
+<ComponentExample story={ComponentStories.Size} stories={ComponentStories} />
+
+### Padding
+
+Slideout padding now is a global styling prop.
+
+<p>
+  <IressButton href="/?path=/docs/styling-props-spacing--docs#padding">
+    Learn more
+  </IressButton>
+</p>
+
+### Footer
+
+The `footer` prop is used to set content that should appear underneath the main content. Usually used for extra controls like buttons etc.
+
+<ComponentExample story={ComponentStories.Footer} stories={ComponentStories} />
+
+### Absolute position slideouts
+
+By default, slideout is set to `position: fixed` which means it will appear from the edge of the browser window. By setting the `position: 'absolute'` in custom inline style, the slideout can appear from the edge of its closest relative positioned container. You will also need to set the `container` prop to the a reference of the relatively positioned container, so it can appear in the correct place in the DOM.
+
+If you're using an absolutely positioned slideout you may also want to change the vertical and horizontal positioning. By default this will be the top left or top right of the container, but you can use inline style `style={{top: '30px', height: 'calc(100% - 30px)'}}` to adjust that if you need to.
+
+<ComponentExample
+  story={ComponentStories.AbsolutePosition}
+  stories={ComponentStories}
+/>
+
+## Migrating to version 5
+
+### Adding the provider
+
+For your components to work as previously, you will need to set up the `IressSlideoutProvider` at the root of your application. This will allow you to use the `useSlideout` hook to open and close slideouts from anywhere in your application using the ID of the slideout.
+
+```tsx
+const App = () => (
+  <IressSlideoutProvider>Rest of app here</IressSlideoutProvider>
+);
+```
+
+### Testing
+
+In version 5, slideouts are rendered conditionally, meaning they will not be available in the DOM until they are shown. This means that you will need to update your tests to account for this, as you cannot interact with its contents until it is shown, unlike in version 4.
+
+See below for an example in version 4 and version 5.
+
+<SlideoutTestDiff />
+
+### Speed up tests
+
+You can speed up tests by wrapping your tests in a provider that overrides the theme tokens for animations.
+
+```tsx
+const themeOverrides: Record<string, string> = {
+  '--iress-slideout-animation-duration': '0s',
+};
+
+export const TestAppProvider = ({ children }: PropsWithChildren) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <IressModalProvider container={containerRef}>
+      <div style={themeOverrides} ref={containerRef}>
+        {children}
+      </div>
+    </IressModalProvider>
+  );
+};
+```

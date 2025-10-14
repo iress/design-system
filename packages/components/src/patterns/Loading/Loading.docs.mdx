@@ -1,0 +1,408 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import { IressRow, IressCol, IressAlert } from '@/main';
+import * as Stories from './Loading.stories';
+import * as SuspenseStories from './LoadingSuspense.stories';
+import * as ComponentStories from './components/ComponentLoading.stories';
+import * as DefaultStories from './components/DefaultLoading.stories';
+import * as LongStories from './components/LongLoading.stories';
+import * as PageStories from './components/PageLoading.stories';
+import * as StartUpStories from './components/StartUpLoading.stories';
+import * as ValidateStories from './components/ValidateLoading.stories';
+import loadingTimeMatrix from './assets/ux-collective-loading-time-matrix.webp';
+
+<Meta of={Stories} />
+
+# Loading
+
+<ComponentOverview
+  apiProps={{
+    include: ['pattern'],
+  }}
+  canvasProps={{
+    refresh: true,
+    story: {
+      inline: false,
+      height: '600px',
+    },
+  }}
+  description="The loading pattern is used to indicate that content is being loaded or processed consistently across Iress products. It can be used in various scenarios, such as loading entire applications, pages, components or server-side validation."
+  story={Stories.Wizard}
+  stories={Stories}
+/>
+
+## Usage
+
+The main prop for the `IressLoading` component is the `pattern` prop. This prop determines the type of loading pattern to be used. The available options are:
+
+1. `component`: This pattern is used to indicate that a specific component is loading. It is typically used when the there is a slower compoent on the page that requires its own loading state. Examples include:
+   - Loading a table with a large number of rows
+   - Loading a chart with a large number of data points
+2. `default`: This pattern is used when no other pattern matches a scenario, and will only indicate loading if something is taking a long time to load. It is used when long loading times are not expected. Examples include:
+   - Navigation
+3. `long`: Loading pattern for a component that is expected to take longer than 10 seconds to load. It displays a checklist of items that are being loaded. Examples:
+   - Calling multiple slow APIs to load data
+   - Loading results from AI
+   - Processing a large amount of data as a queue (eg. bulk uploading or large media file uploads)
+4. `page`: This pattern is used to indicate that a page is loading. It is the most common loading pattern, allowing the users to see the entire content at once where possible. Examples include:
+   - Detail page for a record
+   - Form/Article page
+   - Dashboard page
+5. `start-up`: This pattern is used to indicate that the application is loading. It is typically used when the application is first launched. Examples include:
+   - Loading a new application
+   - Switching from a different application to a new application
+   - Switching from a client's website to an Iress application
+   - Switching themes
+6. `validate`: This pattern is used to indicate that a server-side validation is in progress. It is typically used when the user is submitting a form or performing an action that requires validation. Examples include:
+   - Submitting a form
+   - Saving a record
+
+It is **recommended** to read the Patterns section of the documentation to understand how to use the loading patterns effectively.
+
+### Be consistent
+
+Apart from using the `IressLoading` component, there are a few things you need to do to ensure you are using the loading patterns correctly to ensure consistency across Iress products.
+
+- Consider the difference between what the system is doing and what the user is doing. For example, when a user is submitting a form, the system may be calling different APIs and you may be tempted to use the different loading patterns for each API. However, the user is only submitting the form once, so you should only use one loading pattern for the entire form submission process. In most cases, it will be the `page` loading pattern.
+- When switch between different applications, consider using the same loading pattern. This will help mask the loading time and improve the user experience.
+
+## Behaviour
+
+The `IressLoading` component is designed to create a seamless experience for users when loading content. They have been designed to meet best practices and improve user perception of loading times.
+
+<img
+  alt="Wait times less than 1 second, no loading indicator. Short wait times (1-3 seconds), use a loading indicator. Long wait times (3-10 seconds), use a loading indicator and provide feedback. Wait times longer than 10 seconds should be a background process."
+  src={loadingTimeMatrix}
+  style={{ maxWidth: '100%', height: 'auto' }}
+/>
+
+Image &copy; [UX Collective](https://uxdesign.cc/loading-progress-indicators-ui-components-series-f4b1fc35339a)
+
+---
+
+To match the above image, the default behaviour of the loading patterns are as follows:
+
+- Between 0 - 500ms: No loading indicator, it will be assumed that the content is already loaded.
+- Between 500ms - 2 seconds: A loading indicator will animate in. It will either be a skeleton or a progress bar.
+- Between 2 - 5 seconds: A loading message will animate in.
+- Between 5 - 10 seconds: Some components support additional loading messages. These will animate in and out to indicate that the content is still loading and as well as give the user the perception something is happening in the background.
+- After 10 seconds: Components display a list of messages to indicate what actions the system is doing to complete the user's request. These are checked off as they are completed. This is to give the user the perception that something is happening in the background and to keep them informed of what is happening.
+
+In future releases, we will be adding support for the following:
+
+- After 10 seconds (background): it is always best not to block the user from using the application even if the system is busy. This will be a future feature of the `long` loading pattern.
+
+---
+
+The `IressLoading` patterns have been built using `IressSkeleton`, `IressSpinner` and `IressProgressBar` and other components, reducing the need to create custom loading components.
+
+## Patterns
+
+### `component`
+
+The `component` loading pattern is used to indicate that a specific component is loading. It is typically used when the there is a slower component on the page that requires its own loading state. You would usually use this pattern when loading data visualisations such as charts and tables.
+
+#### Behavior
+
+1. When `loaded` is false, a skeleton will be displayed immediately (configured using `timeout.skeleton`). This skeleton can be customised using the `template` prop.
+2. When `loaded` is true, the skeleton will be removed and the `children` will be displayed.
+3. When `updated` is true, the `children` will be faded out to indicate the component is loading.
+4. After 1000ms (configured using `timeout.update`), the `Updating...` message will be fade in. This message can be customised using the `updated` prop.
+
+#### Custom skeletons
+
+The skeleton representing the component should be as simple as possible, it does not need to be a perfect representation of the component. In most cases a simple rectangle is sufficient that takes up the approximate same space as the component that is loading.
+
+<ComponentOverview
+  apiProps={{
+    headingLevel: 4,
+  }}
+  canvasProps={{
+    refresh: true,
+  }}
+  story={ComponentStories.Component}
+  stories={ComponentStories}
+/>
+
+### `default`
+
+The `default` loading pattern is used when no other pattern matches a scenario, and will only indicate loading if something is taking a long time to load. It is used when long loading times are not expected.
+
+This pattern is used when the user is navigating between different pages or sections of the application.
+
+#### Behavior
+
+1. Displays nothing by default
+
+2. After 3000ms (configured using `timeout`), the `This is taking longer than expected...` message will be slide in from top center. This message can be customised using the `children` prop.
+
+<ComponentOverview
+  apiProps={{
+    headingLevel: 4,
+  }}
+  canvasProps={{
+    refresh: true,
+  }}
+  story={DefaultStories.Default}
+  stories={DefaultStories}
+/>
+
+### `long`
+
+The `long` loading pattern is used to indicate an expected long loading time, usually longer than 10 seconds to complete. It is typically used when calling multiple third-party APIs, AI generation and other long running tasks.
+
+It has a required prop, `messageList`, which is an object map where the key is the time you want the message to be marked as completed and the value is the message to display. The messages will be completed (checked off) as the time elapses.
+
+#### Behavior
+
+1. When `loaded` is false, a progress bar and check list will be displayed after 500ms (configured using `timeout.message`). This progress bar can be customised using the `renderProgress` prop.
+2. The messages will rotate until the `loaded` prop is set to true.
+   - When a message falls within its elapsed time, it will be displayed with an animated ellipsis, indicating that the system is still working on it.
+   - When a message is completed, it will be displayed with a check mark.
+3. When `loaded` is true, all items in the checklist are completed and the progress bar and message will begin fading out. To see the fade out, you will need to use the `IressLoading.shouldRender` hook.
+4. When `error` is true, the error message will be displayed, overriding the progress bar and checklist. This message can be customised using the `error` prop. The error message will be displayed with a red background.
+
+#### Adjusting the progress bar
+
+The `long` loading pattern uses a progress bar to indicate that the application is loading alongside an `estimatedFinishTime` prop. This prop is used to indicate the estimated time until the application is fully loaded, and is used to help the user understand how long they will need to wait and assure them something is happening. The progress bar will animate based on the estimated time.
+
+If your application is capable of calculating real progress, you can pass the `progress` prop to the `IressLoading` component and that value will be used instead.
+
+Once the `loaded` prop is set to true, the progress bar will always be set to 100% and the loading pattern will fade out.
+
+<ComponentOverview
+  apiProps={{
+    headingLevel: 4,
+  }}
+  canvasProps={{
+    refresh: true,
+  }}
+  story={LongStories.Long}
+  stories={LongStories}
+/>
+
+### `page`
+
+The `page` loading pattern is used to indicate that a page is loading. It is the most common loading pattern, allowing the users to see the entire content at once where possible.
+
+#### Behavior
+
+1. When `loaded` is false, a skeleton will be displayed after 500ms (configured using `timeout`). This skeleton can be customised using the `template` prop.
+2. If `critical` is set whilst `loaded` is false, the critical content will be displayed immediately. This is useful for showing critical content while the rest of the page is loading.
+3. When `loaded` is true, the skeleton will begin fading out. To see the fade out, you will need to use the `IressLoading.shouldRender` hook.
+
+#### Custom skeletons
+
+The skeleton does not need to be a perfect representation of the page. It is recommended to follow the guidelines below when creating custom `template` skeletons:
+
+- If there are multiple rows, only create a skeleton of the first row. This is enough to give the user an idea of what the content will look like.
+- If there are multiple filters, only create a few filters in the general area where they will appear.
+- For cards, keep the skeleton as simple as possible. It does not need to be a perfect representation of the card. In most cases a title, description and image is sufficient.
+
+For your convenience, we have provided a few templates that you can use in the `template` prop, including: `page`, `form` and `dashboard`.
+
+#### Critical content
+
+In some cases it may be useful to show critical content while the rest of the page is loading. This gives the user a preview of what to expect. The example below shows a loading page with critical content by using the `critical` prop.
+
+<ComponentOverview
+  apiProps={{
+    headingLevel: 4,
+  }}
+  canvasProps={{
+    refresh: true,
+  }}
+  story={PageStories.Page}
+  stories={PageStories}
+/>
+
+### `start-up`
+
+The `start-up` loading pattern is used to indicate that the application is loading. It is typically used when the application is first launched. This pattern is used when the application is first launched or when switching from a different application to a new application. It is also used when switching from a client's website to an Iress application or switching themes.
+
+#### Behavior
+
+1. When `loaded` is false, a progress bar will be displayed after 500ms (configured using `timeout.progress`). This progress bar can be customised using the `renderProgress` prop.
+2. When `loaded` is false after 2.5 seconds (configured using `timeout.message`), the message will be displayed. This message can be customised using the `children` or `messageList` prop.
+3. If using `messageList`, the messages will rotate until the `loaded` prop is set to true.
+4. When `loaded` is true, the progress bar and message will begin fading out. To see the fade out, you will need to use the `IressLoading.shouldRender` hook.
+
+#### Adjusting the progress bar
+
+The `start-up` loading pattern uses a progress bar to indicate that the application is loading alongside an `estimatedFinishTime` prop. This prop is used to indicate the estimated time until the application is fully loaded, and is used to help the user understand how long they will need to wait and assure them something is happening. The progress bar will animate based on the estimated time.
+
+If your application is capable of calculating real progress, you can pass the `progress` prop to the `IressLoading` component and that value will be used instead.
+
+Once the `loaded` prop is set to true, the progress bar will always be set to 100% and the loading pattern will fade out.
+
+#### Rotating messages
+
+The start-up process is often used initialise the application and load any necessary data. This can include loading user preferences, settings, and any other data that is required to make using the application quicker and easier, however this may add burden to the loading time.
+
+To compensate for this, you can pass multiple messages to the pattern using the `messageList` prop. The `messageList` accepts an object map where the key is the time you want the message to start displaying (in milliseconsds) and the value is the message to display. The messages will rotate until the `loaded` prop is set to true.
+
+<ComponentOverview
+  apiProps={{
+    headingLevel: 4,
+  }}
+  canvasProps={{
+    refresh: true,
+    story: {
+      inline: false,
+      height: '600px',
+    },
+  }}
+  story={StartUpStories.StartUp}
+  stories={StartUpStories}
+/>
+
+### `validate`
+
+The `validate` loading pattern is used to indicate that a server-side validation is in progress. It is typically used when the user is submitting a form or performing an action that requires validation and the user is not expected to leave the page.
+
+#### Behavior
+
+1. When `loading` is false, the button will be displayed immediately (customised using the `renderButton` prop, or the `children` prop if you do not mind passing in the `loading` prop twice).
+2. When `loading` is true, the button will be disabled and a spinner will be displayed.
+3. When `loading` is true after 2.5 seconds (configured using `timeout`), the message will be displayed. This message can be customised using the `message` prop. Its placement can be adjusted using the `position` prop.
+
+#### Message position
+
+Forms come in all shapes and sizes, and the `IressLoading` component is designed to be flexible enough to work with any form. The `position` prop allows you to adjust the placement of the loading message. The available options are:
+
+- `top`: The message will be displayed above the button. It is absolute positioned to the top of the button, and will not disrupt the layout of the form.
+- `bottom` (default): The message will be displayed below the button. It is absolute positioned to the bottom of the button, and will not disrupt the layout of the form.
+- `right`: The message will be displayed on the right of the button. It is inline, and will push any content to the right of the button down.
+
+<ComponentOverview
+  apiProps={{
+    headingLevel: 4,
+  }}
+  canvasProps={{
+    refresh: true,
+  }}
+  story={ValidateStories.Validate}
+  stories={ValidateStories}
+/>
+
+## Suspense
+
+Since React 18, React has introduced a new way to handle loading states using `Suspense`, allowing you to lazy load components in an efficient manner.
+
+The `IressLoadingSuspense` component is a wrapper around the `IressLoading` component that uses `Suspense` to handle loading states. It is used in the same way as the `IressLoading` component, however you do not need to pass the `loaded` prop or use the `IressLoading.shouldRender` hook. The `IressLoadingSuspense` component will automatically handle the loading state for you.
+
+The wizard example can be translated to use `IressLoadingSuspense` as follows (it includes the slow and fast examples).
+
+**Differences in behaviour**
+
+- The `IressLoadingSuspense` component will automatically handle the loading state for you, so you do not need to pass the `loaded` prop or use the `IressLoading.shouldRender` hook.
+- Nested suspense components will be handled by the highest `IressLoadingSuspense` component. This means that if you have multiple nested `IressLoadingSuspense` components, only the top most one will display a loading state. You can see this in the example when you click the Next button, you no longer see the component loading pattern due to it being nested under the page loading pattern.
+
+<IressRow gutter="md">
+  <IressCol span={6}>
+    <ComponentExample
+      refresh
+      story={SuspenseStories.Suspense}
+      storyProps={{
+        inline: false,
+        height: '600px',
+      }}
+      stories={SuspenseStories}
+    />
+  </IressCol>
+  <IressCol span={6}>
+    <ComponentExample
+      refresh
+      story={SuspenseStories.FastSuspense}
+      storyProps={{
+        inline: false,
+        height: '600px',
+      }}
+      stories={SuspenseStories}
+    />
+  </IressCol>
+</IressRow>
+
+## Hooks
+
+### `IressLoading.shouldRender`
+
+The `IressLoading.shouldRender` hook is used to determine whether the loading pattern should be displayed or not. It is used to control the visibility of the loading pattern based on the `loaded` prop.
+
+Its main function is to delay the un-mounting of the loading pattern when the `loaded` prop is set to true to allow for a fade out animation.
+
+```tsx
+const [loaded, setLoaded] = useState(false);
+const renderLoading = IressLoading.shouldRender(loaded);
+
+// Use renderLoading instead of !loaded for the smooth transition.
+if (renderLoading) return <IressLoading pattern="page" loaded={loaded} />;
+else return <IressText>Content is loaded</IressText>;
+```
+
+### `IressLoadingSuspense.use`
+
+The `IressLoadingSuspense.use` hook is a polyfill for the React 19 `use` hook, allowing you to have similar functionality in React 18. It is used to handle loading states when using `IressLoadingSuspense`.
+
+It is not as smart as the `use` hook in React 19, it will cache the result of the promise and will not re-fetch the data if the component is re-mounted. You can clear a function's results in the cache by using the `IressLoadingSuspense.uncache` function.
+
+<IressAlert status="warning" heading="Avoid in React 19">
+  If you are using React 19, it is recommended to use the built-in `use` hook
+  instead of this one. In future releases, this hook will be deprecated and
+  removed from the library.
+</IressAlert>
+
+```tsx
+const HomePage = () => {
+  const pageData = IressLoadingSuspense.use(API.fetchPage('home'));
+
+  return (
+    <IressText>
+      <h2>{pageData.title}</h2>
+      <p>{pageData.description}</p>
+    </IressText>
+  );
+};
+
+export const App = () => (
+  <IressLoadingSuspense pattern="start-up">
+    <HomePage />
+  </IressLoadingSuspense>
+);
+```
+
+## Examples
+
+Below are some examples of how to use the `IressLoading` component in different scenarios.
+
+### Wizard
+
+Here you can see how a wizard can use the `IressLoading` component at different stages of the application. The first example shows a `slow` wizard, and the second example shows how the same code looks when the requests are fast. The main difference is you see minimal loading inidicators in the second example, improving the perception that the system is fast.
+
+<IressRow gutter="md">
+  <IressCol span={6}>
+    <ComponentExample
+      refresh
+      story={Stories.Wizard}
+      storyProps={{
+        inline: false,
+        height: '600px',
+      }}
+      stories={Stories}
+    />
+  </IressCol>
+  <IressCol span={6}>
+    <ComponentExample
+      refresh
+      story={Stories.FastWizard}
+      storyProps={{
+        inline: false,
+        height: '600px',
+      }}
+      stories={Stories}
+    />
+  </IressCol>
+</IressRow>

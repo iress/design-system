@@ -1,0 +1,122 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import { IressAlert } from '../../main';
+import * as ComponentStories from './Input.stories';
+
+<Meta of={ComponentStories} />
+
+# Input
+
+<ComponentOverview
+  description={
+    <>
+      Inputs allow a user to input and interact with data. This component should
+      be used as a child of the <code>IressField</code> component to ensure the
+      correct placement of elements like label, error & hint text.
+    </>
+  }
+  story={ComponentStories.Default}
+  stories={ComponentStories}
+/>
+
+## Examples
+
+### Types
+
+The input component's `type` can be set to one of the following value: `text` (default), `date`, `email`, `number`, `password`, `search`, `tel`, `url`, `time`, `color` and `file`.
+
+For more information about each type, please see the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types).
+
+<ComponentExample story={ComponentStories.Types} stories={ComponentStories} />
+
+<IressAlert heading="Hidden inputs" status="info" mb="lg">
+  If you need to use a hidden input in a form, you can use a native Input
+  element with its `type` set to `hidden`. Remember to set the `name` attribute
+  so it can be included in form submissions.
+</IressAlert>
+
+### Input modes
+
+The `inputmode` attribute provides a hint to browsers for devices with onscreen keyboards (usually mobile devices) to help them decide which keyboard to display when a user has selected any input or textarea element.
+
+For more information about each mode (and their expected user experience), please see the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode).
+
+<ComponentExample
+  story={ComponentStories.InputModes}
+  stories={ComponentStories}
+/>
+
+### Clearable
+
+By setting the `clearable` prop to `true` a clear button will appear when the user has entered a value into the input.
+
+Clearing will set the focus on the input and trigger the `onClear` handler. Use this handler to clear the input value if your input is controlled.
+
+<ComponentExample
+  story={ComponentStories.Clearable}
+  stories={ComponentStories}
+/>
+
+### Sizing
+
+Inputs can be resized to suit a specific number of characters. This sets an expectation of what data a user has to enter; for example using the `Sixteen` width for a credit card number.
+
+The width in this case refers to the actual input and ensures that it is wide enough for a set number of characters. If you add any appended or prepended content, the overall size of the `IressInput` will increase.
+
+Widths can also be set as a percentage, allowing the input to take up a proportion of the width of its container. In this case, the width of the actual input decreases if you add appended or prepended content.
+
+<ComponentExample story={ComponentStories.Sizing} stories={ComponentStories} />
+
+### Textareas
+
+You can also use `IressInput` to render a `textarea` instead of an `input`. Simply set the rows prop to the number of lines of text you'd like to display. This will set the height of the `textarea`; if a user enters more lines of text than the number of rows, a scrollbar will be displayed.
+
+<ComponentExample
+  story={ComponentStories.TextAreas}
+  stories={ComponentStories}
+/>
+
+### Slot props
+
+Content (typically icons) can be added to slots (`append` and `prepend`) within the `IressInput` component.
+
+- **Prepend**: appears before the input
+- **Append**: appears after the input
+
+<ComponentExample story={ComponentStories.Slots} stories={ComponentStories} />
+
+### Read only
+
+The `readOnly` prop can be set to prevent the user from changing the value of the input. This will change the input to a custom read-only style and the user will not be able to interact with the input.
+
+If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](?path=/docs/components-readonly--docs).
+
+<ComponentExample
+  story={ComponentStories.ReadOnly}
+  stories={ComponentStories}
+/>
+
+### Formatter
+
+`formatter` allows you to display the value in a different format when the input is not focused. A typical use case is to format a string with currency symbols and commas.
+
+This prop powers the `IressInputCurrency` component to allow friendly and consistent currency display in Iress products.
+
+**Notes:**
+
+- When `formatter` is set, the `type` of the input is changed to `text` when not in focus. Keep this in mind when you are testing the component. If you have set the `type` to number and have set a `formatter`, the role of the input will be `textbox` when not in focus, but `spinbutton` when in focus.
+- The value of the native input will be the formatted value, not the raw value. If you need the raw value, you can use the `onChange` prop to capture the raw value.
+
+The example below changes the value entered to uppercase when the input is not focused.
+
+<ComponentExample
+  story={ComponentStories.Formatter}
+  stories={ComponentStories}
+/>
+
+### `onChange` and `onInput`
+
+As of version 5, the `onChange` and `onInput` events are now consistent with how React handles the events. This means that the `onChange` event will fire at the same time as `onInput`.

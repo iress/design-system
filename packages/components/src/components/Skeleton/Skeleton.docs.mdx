@@ -1,0 +1,58 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import * as ComponentStories from './Skeleton.stories';
+
+<Meta of={ComponentStories} />
+
+# Skeleton
+
+<ComponentOverview
+  description="Skeletons can increase perceived performance for users. As opposed to spinners, skeletons make it feel as though things are happening/loading immediately, then the information is incrementally displayed on the screen."
+  story={ComponentStories.Default}
+  stories={ComponentStories}
+/>
+
+## Examples
+
+### Modes
+
+The `mode` prop can be set to `text` (default), `rect` or `circle`.
+
+<ComponentExample story={ComponentStories.Mode} stories={ComponentStories} />
+
+### Text
+
+`text` mode allows you to use `IressSkeleton` in place of `IressText` and keep the same sizing. To achieve this you can use `text` mode in conjunction with the `textVariant` prop.
+
+`text` also accepts the width prop but does not use the `height` prop like other modes. The height is achieved through font size and line height.
+
+<ComponentExample story={ComponentStories.Text} stories={ComponentStories} />
+
+### Rect
+
+`rect` mode allows you to use `IressSkeleton` in place of block elements, a good example would be in place of images.
+
+`rect` accepts both `width` and `height` props for sizing. It will default to 100% width and 100px height.
+
+<ComponentExample story={ComponentStories.Rect} stories={ComponentStories} />
+
+### Circle
+
+`circle` mode allows you to use `IressSkeleton` in place of circular elements, a good example would be for profile images.
+
+`circle` accepts both `width` and `height` props for sizing. It will default to 100% width and 100px height.
+
+<ComponentExample story={ComponentStories.Circle} stories={ComponentStories} />
+
+### Size
+
+`width` and `height` props can be used to match the layout of the loaded content.
+
+These props accept any unit of dimension, but if no unit is provided it will default to pixels.
+
+**Note:** `height` will be ignored for text mode as this is calculated using the `IressText` component.
+
+<ComponentExample story={ComponentStories.Size} stories={ComponentStories} />

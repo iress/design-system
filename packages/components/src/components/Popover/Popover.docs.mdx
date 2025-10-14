@@ -1,0 +1,111 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import * as ComponentStories from './Popover.stories';
+import * as InputPopoverStories from './InputPopover/InputPopover.stories';
+
+<Meta of={ComponentStories} />
+
+# Popover
+
+<ComponentOverview
+  description="A popover is panel that is toggled on/off by an activator button or text input. The panel is positioned relative to its activator element."
+  story={ComponentStories.Activator}
+  stories={ComponentStories}
+/>
+
+## Usage
+
+### Activator
+
+For the popover to render, the `activator` property is required. It is the element used to trigger the popover, and works best with an `IressButton`.
+
+Anything added as the children of the `IressPopover` component will be displayed in the popover panel.
+
+<ComponentExample
+  story={ComponentStories.Activator}
+  stories={ComponentStories}
+/>
+
+### The `show` property
+
+You can use state to control the popover by setting the `show` property to `true` or `false`. To sync your state with the popover, you can use the `onActivated` and `onDeactivated` prop.
+
+<ComponentExample
+  story={ComponentStories.ShowWithState}
+  stories={ComponentStories}
+/>
+
+## Behaviour
+
+- The popover is opened when the activator is pressed
+- Once activated, the popover will set focus to popover content
+- When the activator is pressed whilst the popover is open, it will close
+- When the escape key is pressed while it is open, it will close
+- When the popover panel loses focus, it will close
+
+## Examples
+
+### Align
+
+The popover panel can be aligned in one of 12 positions relative to the activator element. The default value is `auto`.
+
+The popover panel's position will change dynamically based on the amount of space available in it's container window, so that it doesn't overflow.
+
+<ComponentExample story={ComponentStories.Align} stories={ComponentStories} />
+
+### Width
+
+Occasionally, you may have more information to display than the width set by the theme can comfortably show.
+
+<ComponentExample story={ComponentStories.Width} stories={ComponentStories} />
+
+### Overflow
+
+Popovers can contain a wide variety of different content, including components that use popovers themselves (like Combobox). This can cause issues with overflowing content, so by default we allow popovers to grow in height based on their content.
+
+If you need to fix the height of a popover, you can set a maximum height using the `maxHeight` and `overflowY` css on your popover's `contentStyle` prop.
+
+<ComponentExample
+  story={ComponentStories.Overflow}
+  stories={ComponentStories}
+/>
+
+### Container
+
+By default, the popover will be rendered where its parent is rendered. If you need to render the popover in a different container, you can use the `container` prop.
+
+**Note:** If the `container` doesn’t exist when the portal is mounted, ensure you pass an element directly (not a ref) and specify null as the default value before it is set. This lets it wait for the root to be available.
+
+This will be the case when you are rendering into its parent container, which is not yet rendered when the popover is mounted. The example below shows how to use state instead of a reference to change where the popover is rendered.
+
+<ComponentExample
+  story={ComponentStories.ParentContainer}
+  stories={ComponentStories}
+/>
+
+## `IressInputPopover`
+
+If you need a popover that is triggered by input changes, you can use the `IressInputPopover` component. This component has an additional `minLength` prop that allows you to specify the minimum number of characters required before the popover is shown.
+
+### Behaviour
+
+Input popovers work slightly different to normal popovers, where the focus inside the popover is **virtual**. This means that the popover content will act as if it is in focus, but the input will still be the actual focus.
+
+- The popover is opened when the input has content that meets the `minLength` requirement
+- The popover is closed when the input no longer meets the `minLength` requirement
+- Once activated, virtual focus will be set to the popover content if it contains a menu (e.g. items will highlight as if in focus, but the user can still type in the input)
+- When the `minLength` is 0, it will open on focus
+- When the escape key is pressed while it is open, it will close
+- When the input loses focus, it will close
+
+<ComponentExample
+  api={{
+    heading: 'Props',
+    headingId: 'input-popover-api',
+  }}
+  story={InputPopoverStories.Activator}
+  stories={ComponentStories}
+/>

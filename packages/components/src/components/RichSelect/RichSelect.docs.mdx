@@ -1,0 +1,372 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+  ComponentApiExpander,
+} from '@iress-storybook/components';
+import { IressRow, IressCol } from '../../main';
+import * as ComponentStories from './RichSelect.stories';
+import * as BodyStories from './SelectBody/SelectBody.stories';
+import * as CreateStories from './SelectCreate/SelectCreate.stories';
+import * as HeadingStories from './SelectHeading/SelectHeading.stories';
+import * as LabelStories from './SelectLabel/SelectLabel.stories';
+import * as MenuStories from './SelectMenu/SelectMenu.stories';
+import * as SearchStories from './SelectSearch/SelectSearch.stories';
+import * as SearchInputStories from './SelectSearchInput/SelectSearchInput.stories';
+import * as TagsStories from './SelectTags/SelectTags.stories';
+import subComponentMapping from './assets/ids-rich-select--sub-component-mapping.svg?url';
+
+<Meta of={ComponentStories} />
+
+# Rich select
+
+<ComponentOverview
+  description="Rich selects provide select and multi-select functionality with the benefit of live filtering."
+  propsDetails={
+    <p>
+      Below are the custom props you can access when using{' '}
+      <code>IressRichSelect</code>. In addition to these, you have access to the
+      original props of the underlying{' '}
+      <a href="?path=/docs/components-popover--docs">
+        <code>IressPopover</code> element
+      </a>
+      , which itself extends the native{' '}
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <code>div</code> element
+      </a>
+      , hence any props available to a <code>div</code> element can be used on
+      an <code>IressRichSelect</code> (eg. <code>className</code>,{' '}
+      <code>onBlur</code>, etc) .
+    </p>
+  }
+  story={ComponentStories.SingleSelect}
+  stories={ComponentStories}
+/>
+
+## Usage
+
+`IressRichSelect` is an alternative to `IressSelect` when you have a large number of options and want to provide a search functionality to help the user find the option they are looking for.
+
+### When To Use
+
+- If you have less than 5 options to choose from, consider using `IressRadioGroup` instead.
+- If your application is expected to be used on mobile devices, consider using `IressSelect` instead to make use of the native select functionality.
+- You probably need `IressAutoComplete` if you're looking for an input box that can be typed.
+- Otherwise, `IressRichSelect` is the way to go.
+
+## Accessibility
+
+This component follows the [WAI combobox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/).
+
+There are two key differences:
+
+- For better usability, virtual focus is used to highlight the suggestions inside the popover. This means focus remains on the input, but the suggestions are highlighted as if they are in focus, allowing the user to type and navigate the suggestions with the arrow keys.
+  To denote the highlighted suggestion to screen readers, the aria-activedescendant attribute is used.
+- Instead of displaying the input to filter options directly, the input is only shown once the user has activated the dropdown. This allows for an intuitive user experience by separating the display of the current value, and the filtering of options.
+
+## Examples
+
+### Single select
+
+The `options` prop is required for `IressRichSelect`. You can provide an array of `LabelValueMeta[]` objects to the `options` prop.
+
+<ComponentExample story={ComponentStories.SingleSelect} />
+
+### Multi-select
+
+Adding the `multiSelect` prop will allow the user to select multiple options.
+
+<ComponentExample story={ComponentStories.MultiSelect} />
+
+### Asynchronous options
+
+If you would like to render suggestions from the server, you can pass a function to the `options` prop. It accepts a string parameter and returns a promise that resolves to an array of `LabelValueMeta[]` objects.
+
+The user experience slightly changes as well. Instead of displaying the options immediately, the user will see a search input that will filter the options as they type.
+
+No filtering is done for asynchronous options, you must filter the options yourself using the query. However, the results are automatically highlighted based on the query when rendered in the UI.
+
+<ComponentExample story={ComponentStories.AsyncOptions} />
+
+### Minimum search length for async options
+
+When using asynchronous options, you can set a minimum number of characters required before triggering the search using the `minSearchLength` prop. This prevents unnecessary API calls and loading states for very short queries.
+
+By default, async searches are triggered after 1 character. Setting a higher value (e.g., 3) means no search request will be made and no loading spinner will appear until the user types at least that many characters.
+
+<ComponentExample story={ComponentStories.AsyncOptionsMinSearchLength} />
+
+### Initial options
+
+If you are using asynchronous options, you can provide an initial set of options to display before the user has interacted with the select using the `initialOptions` prop.
+
+<ComponentExample story={ComponentStories.InitialOptions} />
+
+### Sizing
+
+Rich selects can be resized to suit a specific number of characters. This sets an expectation of what data is to be presented; for example using the `16` width for a credit card number.
+
+Widths can also be set as a percentage, allowing the select to take up a proportion of the width of its container.
+
+<ComponentExample story={ComponentStories.Sizing} />
+
+### Custom label
+
+You can provide a custom label for the selected options by passing a function to the `renderLabel` prop. It expects a function that returns a ReactNode.
+
+It passes `SelectLabelRenderProps` as an argument, which contains the selected options and some other useful properties for customising a label.
+
+As per the example here, you can use this prop to render `IressSelectLabel` as a simple text label instead of tags when using the `multiSelect` prop.
+
+**Note:** As the label is expected to activate the dropdown, it is best to provide a button or other interactive element as the label. If the interactive element is nested, it should have the `role="combobox"` to indicate the intention that it will be activating the dropdown (as is the case of `IressSelectTags` which has multiple Buttons, but adds the combobox role to the chevron).
+
+<ComponentExample story={ComponentStories.CustomLabel} />
+
+### Custom options
+
+In some cases, you may need to customise the options that are displayed. You can pass a function to the `renderOptions` prop. It expects a function that returns a ReactNode.
+
+It passes `SelectOptionRenderProps` as an argument, which contains the options and some other useful properties for customising the options.
+
+<ComponentExample story={ComponentStories.CustomOptions} />
+
+### Create new option
+
+You can use the `renderOptions` prop to add additional functionality to the options list. This is useful for allowing users to create new options.
+
+<ComponentExample story={ComponentStories.CreateNewOption} />
+
+### Header and Footer
+
+Use the `header` `footer` prop to add a header/footer to the select panel. They can be any component you like, but you need to manage the styling on your own. If you want to keep the padding align with option items, try to wrap inside `<IressMenuText>` (it's essentially a div container, see the example below):
+
+<ComponentExample story={ComponentStories.HeaderFooter} />
+
+### Readonly
+
+The `readOnly` prop can be set to `true` to prevent the user from changing the value of the select. This will change the select to a custom read-only style, and will display multiple values seperated with a comma.
+
+If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](?path=/docs/components-readonly--docs).
+
+<ComponentExample story={ComponentStories.Readonly} />
+
+### Long text content in select options
+
+When working with options that contain long text content, you can control how the dropdown width behaves using the `matchActivatorWidth` prop.
+
+By default (`matchActivatorWidth={true}`), the dropdown width matches the width of the select input, which constrains long text content and may cause truncation. This is ideal for consistent layouts where you want the dropdown to align with the input size.
+
+Setting `matchActivatorWidth={false}` allows the dropdown to expand to accommodate the content width, which is useful when displaying long option labels or when content readability is more important than layout consistency.
+
+This example demonstrates both single-select and multi-select behavior with long text content, allowing you to toggle between the two width behaviors to see the difference.
+
+<ComponentExample story={ComponentStories.LongTextOptions} />
+
+## Sub-components
+
+`IressRichSelect` is composed of several sub-components that can be used to customise the appearance and behaviour of the select.
+
+These are completely optional, the default behaviour should be sufficient for most use cases. They have been exposed to allow you to customise the select based on any use case.
+
+Below is a mapping of the available sub-components to the previous [Create new option example](#create-new-option).
+
+<img
+  src={subComponentMapping}
+  alt=""
+  loading="lazy"
+  style={{
+    maxWidth: '100%',
+    height: 'auto',
+  }}
+/>
+
+### IressSelectBody
+
+A container for the options list. It accepts `header` and `footer` props, allowing you to fix content to the top or bottom of the dropdown.
+
+<ComponentExample
+  api={{
+    heading: 'Props',
+    headingId: 'select-body-props',
+  }}
+  story={BodyStories.Body}
+/>
+
+### IressSelectCreate
+
+A button designed to create an option if the desired option is not in the list. Use the `onCreate` prop to handle the creation of the new option.
+
+<ComponentExample
+  api={{
+    heading: 'Props',
+    headingId: 'select-create-props',
+  }}
+  story={CreateStories.Create}
+/>
+
+### IressSelectHeading
+
+A heading designed to allow clearing of a list. To show the clear all button, you can set `clearAll` (it can be a string if you want to override the text). Use the `onClearAll` prop to handle the clearing of the list.
+
+<ComponentExample
+  api={{
+    heading: 'Props',
+    headingId: 'select-heading-props',
+  }}
+  story={HeadingStories.Heading}
+/>
+
+### IressSelectLabel
+
+A button designed to display a text representation of the selected items. It supports both single and multiple selected items.
+
+It is used to render the activator of the `IressRichSelect` in single select mode when no `renderLabel` prop is provided.
+
+<IressRow gap="md">
+  <IressCol>
+    <ComponentExample story={LabelStories.NoneSelected} />
+  </IressCol>
+  <IressCol>
+    <ComponentExample story={LabelStories.OneSelected} />
+  </IressCol>
+  <IressCol>
+    <ComponentExample story={LabelStories.MultipleSelected} />
+  </IressCol>
+</IressRow>
+
+<ComponentApiExpander
+  className="iress-mt--n-lg"
+  headingId="select-label-props"
+  headingLevel={4}
+  story={LabelStories.NoneSelected}
+/>
+
+### IressSelectMenu
+
+A menu component designed to transform an array of `LabelValueMeta[]` into a listbox menu. It accepts a `heading` and `noResults` prop to provide context to the user in certain scenarios. It also accepts a range of other props to customise appearance and behaviour.
+
+It is used to render the available options of the `IressRichSelect` in single select mode when no `renderOptions` prop is provided.
+
+<IressRow gap="md">
+  <IressCol>
+    <ComponentExample story={MenuStories.Results} />
+  </IressCol>
+  <IressCol>
+    <ComponentExample story={MenuStories.NoResults} />
+  </IressCol>
+</IressRow>
+
+<ComponentApiExpander
+  className="iress-mt--n-lg"
+  headingId="select-menu-props"
+  headingLevel={4}
+  story={MenuStories.Results}
+/>
+
+### IressSelectSearch
+
+A custom inline search navigator, designed to create a search experience within a dropdown. The activator passed in will be pinned on the top of the dropdown when used in `IressRichSelect`. It can be combined with other components to create a rich select experience, including:
+
+- Keeping focus on the input while the user navigates the options with the arrow keys.
+- Combine with different components such as `IressSelectBody`, `IressSelectCreate` and `IressSelectMenu` to allow multiple items to be pinned to the top of the dropdown.
+
+It is used to filter the available options of the `IressRichSelect` when an asynchronous `options` function is used and no `renderOptions` prop is provided.
+
+<ComponentExample
+  api={{
+    heading: 'Props',
+    headingId: 'select-search-props',
+    details: (
+      <>
+        The <code>IressSelectSearch</code> component is a simple wrapper around
+        the <code>IressInputPopover</code> component, with additional styling to
+        match the design requirements of the rich select component.
+      </>
+    ),
+  }}
+  story={SearchStories.Search}
+/>
+
+### IressSelectSearchInput
+
+A custom input designed specifically to be used inside a dropdown. It has a simple appearance, with only a single border used to divide it from the rest of the dropdown. The border will change depending on its location inside the dropdown. It should not be used outside of a dropdown.
+
+It is used to filter the available options of the `IressRichSelect` when an asynchronous `options` function is used and no `renderOptions` prop is provided.
+
+<ComponentExample
+  api={{
+    heading: 'Props',
+    headingId: 'select-search-input-props',
+  }}
+  story={SearchInputStories.SearchInput}
+/>
+
+### IressSelectTags
+
+A component designed to display multiple selected items as tags, as well as providing functionality to delete each tag without having to open the dropdown. It supports both single and multiple selected items.
+
+It is used to render the activator of the `IressRichSelect` if `multiSelect` has been set and no `renderLabel` prop is provided.
+
+<IressRow gap="md">
+  <IressCol>
+    <ComponentExample story={TagsStories.NoneSelected} />
+  </IressCol>
+  <IressCol>
+    <ComponentExample story={TagsStories.Selected} />
+  </IressCol>
+</IressRow>
+
+<ComponentApiExpander
+  className="iress-mt--n-lg"
+  headingId="select-tags-props"
+  headingLevel={4}
+  story={TagsStories.NoneSelected}
+/>
+
+#### Maximum tag limit
+
+By default, the maximum number of tags that can be displayed is 5. If more than 5 tags are selected, the label will display the number of selected items. This can be changed using the `limit` prop.
+
+<ComponentExample story={TagsStories.LimitReached} />
+
+## Testing
+
+### Getting the value
+
+The value of the rich select is not accessed the same way as other inputs because it is not an input but a button. To get the value, you need to use `getByText` instead of `getByValue`.
+
+```jsx
+render(<IressRichSelect options={options} value={{ label: 'Option 1' }} />);
+
+const select = screen.getByRole('combobox');
+
+// Will work
+expect(select).toHaveTextContent('Option 1');
+
+// Won't work
+expect(select).toHaveValue('Option 1');
+```
+
+If the `multiSelect` prop is set to true, the value will be prefixed by the text `Selected: `, as per below.
+
+```jsx
+render(
+  <IressRichSelect
+    options={options}
+    value={[{ label: 'Option 1' }]}
+    multiSelect
+  />,
+);
+
+const select = screen.getByRole('combobox');
+
+// Will work
+expect(select).toHaveTextContent('Selected: Option 1');
+
+// Won't work
+expect(select).toHaveValue('Option 1');
+```

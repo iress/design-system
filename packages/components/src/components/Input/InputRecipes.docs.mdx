@@ -1,0 +1,32 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import * as ComponentStories from './InputRecipes.stories';
+import { ComponentExample, DocsFeedback } from '@iress-storybook/components';
+
+<Meta of={ComponentStories} />
+
+# Recipes
+
+## Percentage formatting
+
+You can use `IressInput` to display percentage formatting. When the field is focused, it can display the raw value, and when blurred, it can display the formatted percentage value.
+
+<DocsFeedback
+  form="https://docs.google.com/forms/d/e/1FAIpQLSfnZxALC04QOYgnuPgb5PVnaMKuE7hxBGh4MOuJelNgw46B3g/viewform?embedded=true"
+  formTitle="Percentage formatting feedback"
+/>
+
+<ComponentExample
+  story={ComponentStories.Percentage}
+  stories={ComponentStories}
+/>
+
+## Using with React Hook Forms
+
+You can use `IressInput` with React Hook Forms quite easily. The recommended way is to use the [`Controller` component from react-hook-forms](https://www.react-hook-form.com/get-started/#IntegratingwithUIlibraries). However, you can use the `register` method directly, with a few customisations to cater for custom `ref` as seen in the code example here.
+
+Where possible, please use `IressFormField` within an [`IressForm` component](/docs/components-form--docs).
+
+<ComponentExample
+  story={ComponentStories.ReactHookForms}
+  stories={ComponentStories}
+/>

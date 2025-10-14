@@ -1,0 +1,159 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import * as ComponentStories from './Menu.stories';
+
+<Meta of={ComponentStories} />
+
+# Menu
+
+<ComponentOverview
+  description="A menu can display grouped action buttons, navigation items or headings."
+  propsDetails={
+    <p>
+      Below are the custom props you can access when using{' '}
+      <code>IressMenu</code>. In addition to these, you have access to the
+      original props of the underlying{' '}
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <code>div</code> element
+      </a>
+      .
+    </p>
+  }
+  story={ComponentStories.Basic}
+  stories={ComponentStories}
+/>
+
+## Usage
+
+### Basic
+
+`IressMenuDivider`, `IressMenuHeading`, `IressMenuItem` and `IressMenuText` should be supplied as `children` of the menu.
+
+- `IressMenuDivider` can be used to display a divider, it supports all of the props of `hr`. It will adjust according to the menu's role and layout.
+- `IressMenuHeading` is used to display headings. It supports all of the props of `IressText` and will adjust according to the menu's role and layout.
+- `IressMenuItem` is used to display an interactive item. If provided a `href` prop will render the item as a link, otherwise it will render as a button.
+- `IressMenuText` can be used to display other non-interactive text. It supports all of the props of `IressText`.
+
+<ComponentExample story={ComponentStories.Basic} stories={ComponentStories} />
+
+### Complex
+
+`IressMenuItem`, `IressMenuHeading` and `IressMenuText` support `prepend`, `divider` and `append` slots, to allow you to create complex menu items.
+
+Note: Instead of using the `divider` prop on `IressMenuItem`, you can use `IressMenuDivider` to separate items. This gives you more control over where the divider sits.
+
+<ComponentExample story={ComponentStories.Complex} stories={ComponentStories} />
+
+## Examples
+
+### Secondary navigation
+
+When the `href` prop is set on `IressMenuItem`, it will render as a link.
+
+When rendering a set of links for navigation purposes (as a secondary nav in this example) make sure you wrap the `IressMenu` in a nav element and set the menu's `role` prop to list.
+
+<ComponentExample
+  story={ComponentStories.SecondaryNavigation}
+  stories={ComponentStories}
+/>
+
+### Headings
+
+Using the `IressMenuHeading` component, you can create headings within the menu. Simply set the `element` or `textStyle` prop to your desired heading level.
+
+<ComponentExample
+  story={ComponentStories.Headings}
+  stories={ComponentStories}
+/>
+
+### Dividers
+
+When the `divider` prop is set, the `IressMenuItem`, `IressMenuHeading` and `IressMenuText` will render a bottom border.
+
+In situations where a bottom border will not work, you can also use `IressMenuDivider` inside the menu to separate items.
+
+<ComponentExample
+  story={ComponentStories.Dividers}
+  stories={ComponentStories}
+/>
+
+### Fluid menus
+
+By setting the `fluid` prop on the menu component, the menu will stretch to the width of its containing element.
+
+<ComponentExample story={ComponentStories.Fluid} stories={ComponentStories} />
+
+### Layout
+
+The `layout` prop comes with three options:
+
+- `stack` (default) - menu items will stack on top of each other
+- `inline` - menu items will be inline
+- `inline-equal-width` - menu items will be inline and have equal width
+
+<ComponentExample story={ComponentStories.Layout} stories={ComponentStories} />
+
+### Text wrapping
+
+By default, menu item text will wrap on to the next line when it exceeds the menu width. Using the `noWrap` prop, you set the menu item text to not wrap.
+
+<ComponentExample story={ComponentStories.NoWrap} stories={ComponentStories} />
+
+### Slot props
+
+`IressMenuItem`, `IressMenuHeading` and `IressMenuText` provide `prepend` and `append` props to position content either before or after its content.
+
+<ComponentExample
+  story={ComponentStories.SlotProps}
+  stories={ComponentStories}
+/>
+
+### Roles
+
+The `role` prop that comes with the menu component not only changes the aria-role of the menu to allow it to be easily recognised in screen readers, but also changes how the menu is interacted with.
+
+There are four roles supported:
+
+- `list` (default): The menu is treated as a list of items. Child menu subcomponents render with the `listitem` role where appropriate. The user navigates using the `tab` key.
+- `menu`: The menu is treated as a menu of items. Child menu subcomponents render with the `menuitem` role where appropriate. The user navigates using `arrow` keys.
+- `listbox`: The menu is treated as a list of selectable items, similar to a `<select />`. Child menu subcomponents render with the `option` role where appropriate. The user navigates using `arrow` keys.
+
+**Note:** When menu is used as a child of popover, the `type` that is set on popover will be applied to menu (so you don't need to set it twice).
+
+#### List
+
+The default role for the menu component is `list`. It is most often used for navigation and its items can be navigated (using the keyboard) with the `tab` key.
+
+<ComponentExample
+  story={ComponentStories.ListRole}
+  stories={ComponentStories}
+/>
+
+#### Menu
+
+The `menu` role is used when the items in the menu has an action that performs a task in the application. The items can be navigated (using the keyboard) with the `arrow` keys, depending on the layout.
+
+<ComponentExample
+  story={ComponentStories.MenuRole}
+  stories={ComponentStories}
+/>
+
+#### Listbox
+
+The `listbox` role is used for lists from which a user may select one or more items.
+
+A value is supplied to `IressMenuButton` (like you would with an option element inside a select) and a `onChange` event is emitted with the selected value(s) whenever the selection is changed by the user.
+
+Set the `multiSelect` prop to true for a multi-selectable listbox.
+
+<ComponentExample
+  story={ComponentStories.ListboxRole}
+  stories={ComponentStories}
+/>

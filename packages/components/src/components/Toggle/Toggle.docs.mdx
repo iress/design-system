@@ -1,0 +1,57 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import * as ComponentStories from './Toggle.stories';
+import { IressAlert } from '../../main';
+
+<Meta of={ComponentStories} />
+
+# Toggle
+
+<ComponentOverview
+  description="Toggles allow users to turn things on or off. When toggled, the associated change happens straight away."
+  story={ComponentStories.Default}
+  stories={ComponentStories}
+/>
+
+## Usage
+
+Toggles are typically on / off switches, similar to a household light switch. They allow users to choose between two mutually exclusive options, and will always have a default value.
+
+The `IressToggle` component should only be used for actions that happen immediately, for example switching a device's WiFi connection on or off.
+
+<IressAlert status="warning" heading="Don't use Toggles in forms" mb="xl">
+  Toggles shouldn’t be used as part of a form as they don’t have the correct
+  semantics, and won’t submit a value when the form data is submitted. If you
+  need a toggleable component in a form, use a checkbox or radio group instead.
+</IressAlert>
+
+### Labels
+
+Toggles should always have a label, which is set via its `children`.
+
+<ComponentExample story={ComponentStories.Default} />
+
+### Hidden labels
+
+Labels can be hidden via the `hiddenLabel` prop; this will hide the label from view, but it'll still be available to screen reader users.
+
+<ComponentExample story={ComponentStories.HiddenLabel} />
+
+### Checked
+
+The on / off state of the toggle can be controlled by setting the `checked` prop.
+
+<ComponentExample story={ComponentStories.Checked} />
+
+### Layout
+
+The `layout` prop allows you to control the position of the label in relation to the control. The default layout is `inline`, but you can also choose the following options:',
+
+- `inline-between` similar to inline, but this positions the label and control at opposite ends of their container
+- `inline-reverse` renders the label after the control instead of before the control
+- `stack` positions the label above the control
+
+<ComponentExample story={ComponentStories.Layout} />

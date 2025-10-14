@@ -1,0 +1,110 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import { IressAlert, IressButton } from '../../main';
+import * as ComponentStories from './Icon.stories';
+
+<Meta of={ComponentStories} />
+
+# Icon
+
+<ComponentOverview
+  description="Icons enhance experiences by visually communicating meaning, actions, status, and feedback."
+  story={ComponentStories.Default}
+  stories={ComponentStories}
+/>
+## Installation
+
+If you are planning to include the `<IressIcon />` component in your application, you need to include the Font Awesome CSS.
+
+The easiest way to import the Font Awesome CSS is to use the `combined.css` file and add it to the `<head />` if your application. This file includes both the [Pro Light](https://fontawesome.com/v5/search?o=r&s=light) and [Brand](https://fontawesome.com/v5/search?o=r&f=brands) icon sets.
+
+<IressAlert status="info" heading="Microfrontends" mb="md">
+  If you are using a Microfrontend, you need to include the Font Awesome CSS in
+  the parent application as well as the Microfrontend. This is because
+  `@font-face` declarations are not supported inside the Shadow DOM.
+</IressAlert>
+
+```html
+<link
+  href="https://cdn.iress.com/icons/5.15.4/css/combined.min.css"
+  rel="stylesheet"
+/>
+```
+
+## Supported library sets and names
+
+`IressIcon` currently supports Font Awesome (V5) [Light](https://fontawesome.com/v5/search?o=r&s=light) and [Brand](https://fontawesome.com/v5/search?o=r&f=brands) sets. The library sets are controlled by the `set` prop and it defaults to the Light set (`fal`).
+
+The `name` prop controls which icon is shown, and needs to match the icon name exactly as displayed on the [Font Awesome website](https://fontawesome.com/v5/search). Icon names should be lower case, and separated by hyphens where required; for example `home-alt` or `check-circle.` Icon names should not include the `fa-` prefix.
+
+## Behaviour
+
+### Screen Reader Text
+
+By default icons are hidden from screen readers. The `screenreaderText` prop makes icons visible to screen readers users, providing a description of the icon.
+
+If you use an icon to improve the visual appeal of content, for example by replacing the default list icons with tick marks when listing product features, you don't need to add any screen reader text.
+
+If you use an icon to convey meaning, for example using an icon as the only content inside a button, you do need to supply a value for the `screenreaderText`; if you don't the button meaning will be completely lost for screen reader users.
+
+<ComponentExample
+  story={ComponentStories.ScreenReaderText}
+  stories={ComponentStories}
+/>
+
+### Size
+
+The `size` prop has been removed. It will now inherit the size of the parent component.
+
+For larger icons, it is recommended to use `IressImage` with stylised illustrations.
+
+### Mode
+
+Mode has been removed. Please use the `color` prop instead.
+
+<p>
+  <IressButton href="/?path=/docs/styling-props-colour--docs#color">
+    Learn more
+  </IressButton>
+</p>
+
+### Flip
+
+The `flip` prop can be set to horizontal, vertical or both.
+
+<ComponentExample story={ComponentStories.Flip} stories={ComponentStories} />
+
+### Rotate
+
+The `rotate` prop can be set to 90, 180 or 270 degrees.
+
+<ComponentExample story={ComponentStories.Rotate} stories={ComponentStories} />
+
+### Spin
+
+The `spin` prop can be set to half (fastest), 1, 2 or 3 (slowest) to control the speed of the icon spin animation, useful for loading spinners.
+
+<ComponentExample story={ComponentStories.Spin} stories={ComponentStories} />
+
+### Fixed Width
+
+Because of the wide variety of Font Awesome icons, not every icon is the same size. This can cause alignment issued when the icons stack vertically, so you can use the `fixedWidth` prop to ensure each icon is the same width. Very useful when using icons in menus.
+
+<ComponentExample
+  story={ComponentStories.FixedWidth}
+  stories={ComponentStories}
+/>
+
+## Examples
+
+### External link
+
+Icons now inherit the size of the parent component. This means you can use them inside buttons, links and other components without needing to set a size.
+
+<ComponentExample
+  story={ComponentStories.ExternalLink}
+  stories={ComponentStories}
+/>

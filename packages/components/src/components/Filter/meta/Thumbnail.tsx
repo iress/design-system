@@ -1,0 +1,135 @@
+import { image } from '@/components/Image';
+import { cssVars } from '@iress-oss/ids-tokens';
+
+const Thumbnail = () => (
+  <svg
+    viewBox="0 0 751 467"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={image()}
+  >
+    <g clipPath="url(#clip0_1016_2483)">
+      <rect
+        width="751"
+        height="467"
+        style={{ fill: cssVars.colour.neutral[10] }}
+      />
+      <path
+        d="M749.941 228.213L1.19067 228.52C0.874886 228.52 0.572035 228.395 0.34874 228.172C0.125444 227.948 0 227.645 0 227.33C0 227.014 0.125444 226.711 0.34874 226.488C0.572035 226.264 0.874886 226.139 1.19067 226.139L749.941 225.832C750.256 225.832 750.559 225.957 750.783 226.18C751.006 226.404 751.131 226.706 751.131 227.022C751.131 227.338 751.006 227.641 750.783 227.864C750.559 228.087 750.256 228.213 749.941 228.213Z"
+        fill="#CACACA"
+      />
+      <rect
+        width="751"
+        height="229"
+        style={{ fill: cssVars.colour.neutral[20] }}
+      />
+      <g filter="url(#filter0_d_1016_2483)">
+        <rect
+          x="50"
+          y="199"
+          width="660"
+          height="230"
+          rx="25"
+          style={{ fill: cssVars.colour.neutral[10] }}
+        />
+        <rect
+          x="50.25"
+          y="199.25"
+          width="659.5"
+          height="229.5"
+          rx="24.75"
+          stroke="#091E42"
+          strokeOpacity="0.15"
+          strokeWidth="0.5"
+        />
+      </g>
+      <path
+        d="M51 224C51 210.745 61.7452 200 75 200H685C698.807 200 710 211.193 710 225V315H51V224Z"
+        style={{ fill: cssVars.colour.primary.surface }}
+      />
+      <rect
+        x="86"
+        y="248"
+        width="590"
+        height="27"
+        rx="13.5"
+        style={{ fill: cssVars.colour.primary.text }}
+      />
+      <rect
+        x="86"
+        y="355"
+        width="590"
+        height="27"
+        rx="13.5"
+        style={{ fill: cssVars.colour.neutral[50] }}
+      />
+      <rect
+        x="51"
+        y="81"
+        width="401"
+        height="93"
+        rx="24"
+        style={{ fill: cssVars.colour.primary.surface }}
+        stroke={cssVars.colour.primary.text}
+        strokeWidth="2"
+      />
+      <path
+        d="M410.622 116.064C411.126 116.559 411.126 117.252 410.622 117.746L389.357 138.629C388.853 139.124 388.147 139.124 387.643 138.629L366.378 117.746C365.874 117.252 365.874 116.559 366.378 116.064L367.083 115.371C367.587 114.876 368.293 114.876 368.797 115.371L388.55 134.67L408.203 115.371C408.707 114.876 409.413 114.876 409.917 115.371L410.622 116.064Z"
+        style={{ fill: cssVars.colour.primary.text }}
+      />
+      <rect
+        x="86"
+        y="114"
+        width="259"
+        height="27"
+        rx="13.5"
+        style={{ fill: cssVars.colour.primary.text }}
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_d_1016_2483"
+        x="32"
+        y="191"
+        width="696"
+        height="266"
+        filterUnits="userSpaceOnUse"
+        colorInterpolationFilters="sRGB"
+      >
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dy="10" />
+        <feGaussianBlur stdDeviation="9" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0.0352941 0 0 0 0 0.117647 0 0 0 0 0.258824 0 0 0 0.15 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_1016_2483"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow_1016_2483"
+          result="shape"
+        />
+      </filter>
+      <clipPath id="clip0_1016_2483">
+        <rect
+          width="751"
+          height="467"
+          style={{ fill: cssVars.colour.neutral[10] }}
+        />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
+export default Thumbnail;

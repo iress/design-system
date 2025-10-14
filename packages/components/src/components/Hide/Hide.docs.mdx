@@ -1,0 +1,79 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import { HideBreakpointTable } from './mocks/HideBreakpointTable';
+import { HideUtilityBreakpointTable } from './mocks/HideUtilityBreakpointTable';
+import * as ComponentStories from './Hide.stories';
+
+<Meta of={ComponentStories} />
+
+# Hide
+
+<ComponentOverview
+  description={
+    <>
+      <code>IressHide</code> makes it easier for designers and developers to
+      create adaptive designs that work for all screen sizes.
+    </>
+  }
+  story={ComponentStories.Default}
+  stories={ComponentStories}
+/>
+
+## Usage
+
+### `hiddenOn`
+
+The `hiddenOn` prop accepts a `ResponsiveSizing<boolean>` object, which is an object that uses a breakpoint as a key, and a boolean as a value.
+
+It determines which screen sizes the component's children will be hidden on. It's set up as an object containing the following IDS breakpoints:
+
+<HideBreakpointTable />
+
+## Behaviour
+
+If the breakpoint in the `hiddenOn` prop is set to true, the content will be hidden for both sighted users and screen reader users. If the value is false, or the breakpoint is omitted, the content will be visible.
+
+You don't need to include every breakpoint, just the ones where you want content to become hidden. If you want to hide content on medium screens and above, you can set `hiddenOn` like this:
+
+```tsx
+<IressHide hiddenOn={{ md: true }} />
+```
+
+If you want to hide content only on certain screen sizes, you'll need to specify which screen size the content should become visible again on. To set content to be hidden on medium screens, and visible on extra large screens and above, you can do the following:
+
+```tsx
+<IressHide hiddenOn={{ md: true, xl: false }} />
+```
+
+## Examples
+
+### Hidden on
+
+Here are a few variations of the `hiddenOn` prop in action.
+
+<ComponentExample
+  story={ComponentStories.HiddenOn}
+  stories={ComponentStories}
+/>
+
+### Visually hidden
+
+This `visuallyHidden` prop is used if you don't want content to be visible on screen, but you do want it to be available to screen reader users.
+
+<ComponentExample
+  story={ComponentStories.VisuallyHidden}
+  stories={ComponentStories}
+/>
+
+## Utility classes
+
+To make it easier for developers to hide content, we've exposed the classes we use for the hide component as part of our global styles.
+
+This means you can use them without having to use the Hide component. Unlike the Hide component, the utility classes only apply to a single breakpoint:
+
+<HideUtilityBreakpointTable />
+
+If you use `iress-hidden` or `iress-sr-only` without the breakpoint suffix, it will apply to all screen sizes.

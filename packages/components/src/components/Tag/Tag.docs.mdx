@@ -1,0 +1,50 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+  ComponentStatus,
+} from '@iress-storybook/components';
+import * as ComponentStories from './Tag.stories';
+import * as TagInputStories from './TagInput/TagInput.stories';
+
+<Meta of={ComponentStories} />
+
+# Tag
+
+<ComponentOverview
+  description="Tags represent individual units in a group of selected items."
+  story={ComponentStories.Tag}
+  stories={ComponentStories}
+/>
+
+## Usage
+
+### Deleting tags
+
+The delete button will not automatically remove the tag from the screen. Instead it will trigger the `onDelete` event. Use this event within your app to handle the display of tags.
+
+The text a screen reader will announce defaults to "Delete" but can be changed using the `deleteButtonText` prop.
+
+<ComponentExample
+  story={ComponentStories.DeletingTags}
+  stories={ComponentStories}
+/>
+
+### Custom button
+
+You can completely override the delete button by passing a custom component to the `deleteButton` prop.
+
+<ComponentExample
+  story={ComponentStories.CustomButton}
+  stories={ComponentStories}
+/>
+
+## IressTagInput
+
+<ComponentStatus className="iress-mb--md" stories={TagInputStories} />
+
+`IressTagInput` allows you to manage multiple tags, and is often used for managing email addresses, domains or other simple metadata that does not have to be selected from a list.
+
+If you need to manage tags that are selected from a existing list, use `IressRichSelect` with the `multiple` prop.
+
+<ComponentExample story={TagInputStories.TagInput} stories={TagInputStories} />

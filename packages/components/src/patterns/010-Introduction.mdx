@@ -1,0 +1,18 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import { HideSidebar } from '@iress-storybook/components';
+import { IressText } from '@/main';
+import * as ComponentStories from './010-Introduction.stories.tsx';
+
+<Meta of={ComponentStories} />
+<HideSidebar />
+
+# Patterns
+
+<IressText textStyle="typography.body.lg">
+  Patterns are pre-made and opinionated combinations of components that solve
+  common design problems. They are designed to be reusable and adaptable,
+  allowing you to quickly implement consistent experiences within and across
+  multiple products in the Iress ecosystem.
+</IressText>
+
+<Story of={ComponentStories.Default} />

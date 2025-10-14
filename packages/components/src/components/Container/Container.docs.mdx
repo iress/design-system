@@ -1,0 +1,36 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import { ContainerBreakpointTable } from './mocks/ContainerBreakpointTable';
+import * as ComponentStories from './Container.stories';
+
+<Meta of={ComponentStories} />
+
+# Container
+
+<ComponentOverview
+  description={
+    <>
+      <code>IressContainer</code> provides a means to center and horizontally
+      pad your site’s contents.
+    </>
+  }
+  story={ComponentStories.Container}
+  stories={ComponentStories}
+/>
+
+## Behaviour
+
+The `IressContainer` snaps to fixed max widths at different breakpoints. Those max widths are as follows:
+
+<ContainerBreakpointTable />
+
+## Examples
+
+### Fluid
+
+If you want the `IressContainer` to fill its containing element, you can set the `fluid` prop. Resize the example below to see how the IressContainer is 100% for all screen sizes.
+
+<ComponentExample story={ComponentStories.Fluid} stories={ComponentStories} />

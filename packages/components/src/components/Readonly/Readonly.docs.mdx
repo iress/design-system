@@ -1,0 +1,36 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import * as ComponentStories from './Readonly.stories';
+
+<Meta of={ComponentStories} />
+
+# Readonly
+
+<ComponentOverview
+  description="Readonly displays a value that cannot be edited by the user. It renders a hidden input field to ensure the value is submitted with the form."
+  story={ComponentStories.Default}
+  stories={ComponentStories}
+/>
+
+## Examples
+
+### Rich Content
+
+You can pass in stylised content that represents the value by using the `children` prop. If no `children` is provided, it will display the `value` directly.
+
+<ComponentExample
+  story={ComponentStories.RichContent}
+  stories={ComponentStories}
+/>
+
+### Inline
+
+You can make the prepend/append element closer to the input content using the `inline` prop.
+
+<ComponentExample
+  story={ComponentStories.InlineStyle}
+  stories={ComponentStories}
+/>

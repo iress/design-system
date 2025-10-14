@@ -1,0 +1,36 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ComponentExample, ComponentApi } from '@iress-storybook/components';
+import { IressAlert } from '../../main';
+import * as AutocompleteRecipes from './AutocompleteRecipes.stories';
+
+<Meta of={AutocompleteRecipes} />
+
+# Recipes
+
+<IressAlert status="info" heading="Experimental" mb="md">
+  This API is experimental. It may change in the future based on usage. The team
+  is testing if these use cases exist and see if its worth maintaining this API.
+  If you have any questions, concerns or feedback, please reach out to the
+  design system team.
+</IressAlert>
+
+## `useAutocompleteSearch`
+
+`IressAutocomplete` uses the `useAutocompleteSearch` hook to provide search functionality. If provided an array of `LabelValueMeta`, it will search options based on the `label` property. To fully customise how to search the objects, pass a function instead.
+
+It has been exposed in case you need it in your application to provide custom search functionality.
+
+### Use cases
+
+1. You want to provide filtering in a certain area of the application (eg. a table).
+
+<ComponentExample
+  story={AutocompleteRecipes.Table}
+  stories={AutocompleteRecipes}
+/>
+
+<ComponentApi
+  story={AutocompleteRecipes.Table}
+  heading="Parameters"
+  headingLevel={3}
+/>

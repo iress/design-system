@@ -1,0 +1,76 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import * as ComponentStories from './Tooltip.stories';
+
+<Meta of={ComponentStories} />
+
+# Tooltip
+
+<ComponentOverview
+  description="A component that shows concise, informative text about an element when focussed upon, hovered over or on a long touch."
+  story={ComponentStories.Default}
+  stories={ComponentStories}
+/>
+
+## Usage
+
+The content that will be displayed in the tooltip is passed using the `tooltipText` prop.
+
+This content can only be plain text; there is no parsing of any markup or styling. This is by design as we do not allow complex structures in a tooltip as they are meant to be concise, informative pieces of text.
+
+Text content will wrap on to a new line if it exceeds the tooltip's maximum width. You can also manually format your content into multiple lines by passing an array of strings into the `tooltipText` prop.
+
+<ComponentExample story={ComponentStories.TooltipText} />
+
+## Behaviour
+
+The behaviour of tooltips varies according to how they're shown:
+
+- When a pointer is moved over the activator the tooltip will be shown, and will remain visible for a short period of time after the pointer has moved away (500ms is the default time)
+- If the activator receives keyboard focus the tooltip will be visible. The tooltip will hide immediately after the focus moves away from the activator.
+- If the user long presses on the activator (on a touch device). The tooltip will remain visible until the user taps somewhere else on the screen
+
+If the user activates a tooltip via a pointing device and then moves the pointer over the tooltip, it will remain on screen until the pointer is moved away. This is for accessibility purposes where a user may be using magnifying software for example.
+
+## Accessibility
+
+The WCAG guidelines for content that is displayed on hover or focus can be found here: [WCAG 2.1 - 1.4.13 (AA)](https://www.w3.org/TR/WCAG21/#content-on-hover-or-focus).
+
+Other things to keep in mind:
+
+- For best accessibility, you should only use tooltips on focusable items (eg. `IressButton` and `IressMenuItem`), allowing them to be seen when navigating to the tooltip activator by keyboard
+
+**Notes:**
+
+- If the text you wish to display is more than a handful of words then
+  consider using an IressModal with an information button.
+- Tooltips must not be used for help text as they are not immediately visible
+  to the user. We suggest adding hint text to assist the user when filling out
+  forms.
+- Also think about placement using the align prop. The tooltip should not
+  obscure any critical screen content. Another reason to keep them short.
+
+## Examples
+
+### Align
+
+The tooltip can be aligned in one of 12 positions relative to the activator element.
+
+The tooltip's position will change dynamically based on the amount of space available in its container window, so that it doesn't overflow the edge. For example, if the tooltip is about to scroll off the top of the screen, it will change its position to bottom. Likewise with left and right scrolling.
+
+<ComponentExample story={ComponentStories.Align} />
+
+### Delay
+
+The `delay` prop requires a number that is the number of milliseconds that pass after the activator has received a `mouseEnter` event and the display of the tooltip.
+
+<ComponentExample story={ComponentStories.Delay} />
+
+### The title attribute
+
+The component will not make any provision for existing title HTML attributes. If one exists, it will be activated along with the tooltip, potentially overlaying it making it difficult to ascertain the information being imparted. The title could also contain different content to the tooltip increasing the chance of confusing the end user.
+
+We suggest removing the title attribute on elements that will use tooltip.
