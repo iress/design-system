@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "types": ["vitest/globals"],
+    "paths": {
+      "~/*": ["./src/*"],
+      "~/extras/*": ["../extras/*"]
+    },
+    "checkJs": true,
+    "target": "ES2022",
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    /* Linting */
+    "strictNullChecks": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "generated"],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}
