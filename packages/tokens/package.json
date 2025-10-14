@@ -18,8 +18,8 @@
     "clean": "rimraf build dist coverage src/generated",
     "cssVars": "tsx plugins/generateCssVars.ts",
     "lint": "eslint . --ext=.js,.jsx,.ts,.tsx,.mjs,.cjs,.mdx --max-warnings=0",
-    "test": "vitest run --config vitest.config.ts --coverage",
-    "test:watch": "vitest --config vitest.config.ts --watch",
+    "test": "vitest --config vitest.config.ts --watch",
+    "test:coverage": "vitest run --config vitest.config.ts --coverage",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "watch": "vite build --watch"
   },

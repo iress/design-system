@@ -31,11 +31,14 @@ module.exports = {
       const matchedRegex = regexes.find((regex) => regex.test(file));
       if (matchedRegex) {
         const workspaceName = file.match(matchedRegex)[1];
-        (workspaceFiles[workspaceName] ??= []).push(file);
+        if (!workspaceFiles[workspaceName]) {
+          workspaceFiles[workspaceName] = [];
+        }
+        workspaceFiles[workspaceName].push(file);
       }
     });
 
-    // For each affected workspace, check if it has test scripts and run them
+    // For each affected workspace, check if it has test and typecheck scripts and run them
     Object.keys(workspaceFiles).forEach((workspaceName) => {
       for (const pattern of patterns) {
         const workspaceDir = pattern.replace('*', workspaceName);
@@ -46,6 +49,11 @@ module.exports = {
             const packageJson = JSON.parse(
               fs.readFileSync(packageJsonPath, 'utf8'),
             );
+
+            // Check if the workspace has a typecheck script
+            if (packageJson.scripts?.typecheck && packageJson.name) {
+              commands.push(`yarn workspace ${packageJson.name} run typecheck`);
+            }
 
             // Check if the workspace has a test script
             if (packageJson.scripts?.test && packageJson.name) {
@@ -80,7 +88,10 @@ module.exports = {
       const matchedRegex = regexes.find((regex) => regex.test(file));
       if (matchedRegex) {
         const workspaceName = file.match(matchedRegex)[1];
-        (workspaceFiles[workspaceName] ??= []).push(file);
+        if (!workspaceFiles[workspaceName]) {
+          workspaceFiles[workspaceName] = [];
+        }
+        workspaceFiles[workspaceName].push(file);
       }
     });
 
@@ -94,6 +105,11 @@ module.exports = {
             const packageJson = JSON.parse(
               fs.readFileSync(packageJsonPath, 'utf8'),
             );
+
+            // Check if the workspace has a typecheck script
+            if (packageJson.scripts?.typecheck && packageJson.name) {
+              commands.push(`yarn workspace ${packageJson.name} run typecheck`);
+            }
 
             if (packageJson.scripts?.test && packageJson.name) {
               commands.push(`yarn workspace ${packageJson.name} run test`);

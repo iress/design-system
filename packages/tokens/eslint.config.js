@@ -18,7 +18,7 @@ export default [
   baseJavaScriptConfig,
   createTypeScriptConfig(import.meta.dirname, [
     './tsconfig.json',
-    './tsconfig.app.json',
+    './tsconfig.lib.json',
     './tsconfig.base.json',
     './tsconfig.node.json',
   ]),

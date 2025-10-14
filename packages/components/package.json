@@ -19,10 +19,10 @@
     "lint": "eslint . --max-warnings 0",
     "panda:prepare": "panda cssgen && panda codegen",
     "panda:watch": "panda --watch",
-    "test": "vitest run --config vitest.config.ts --coverage",
+    "test": "vitest --config vitest.config.ts --watch",
+    "test:coverage": "vitest run --config vitest.config.ts --coverage",
     "test:ui": "vitest --config vitest.config.ts --ui",
-    "test:watch": "vitest --config vitest.config.ts --watch",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.lib.json"
   },
   "devDependencies": {
     "@iress-oss/ids-tokens": "6.0.0-alpha.0",

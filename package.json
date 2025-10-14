@@ -26,6 +26,9 @@
     "prettier": "3.6.2"
   },
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "yarn workspaces foreach -Apt run test",
+    "test:coverage": "yarn workspaces foreach -Apt run test:coverage",
+    "typecheck": "yarn workspaces foreach -Apt run typecheck"
   }
 }
