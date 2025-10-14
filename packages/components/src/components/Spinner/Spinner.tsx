@@ -1,27 +1,18 @@
-import { GlobalCSSClass } from '@/enums';
-import { IressIcon, type IressIconProps } from '../Icon';
-import { spinner } from './Spinner.styles';
-import { cx } from '@/styled-system/css';
-
-export interface IressSpinnerProps extends Omit<IressIconProps, 'name'> {
-  /**
-   * Spin speed of spinner.
-   * @default half
-   **/
-  spin?: IressIconProps['spin'];
-}
+import classNames from 'classnames';
+import { type IressSpinnerProps } from './Spinner.types';
+import { IressIcon } from '../Icon';
+import styles from './Spinner.module.scss';
 
 export const IressSpinner = ({
   className,
+  name = 'spinner-third',
   spin = 'half',
   ...restProps
-}: IressSpinnerProps) => {
-  return (
-    <IressIcon
-      {...restProps}
-      className={cx(className, spinner(), GlobalCSSClass.Spinner)}
-      name="spinner-third"
-      spin={spin}
-    />
-  );
-};
+}: IressSpinnerProps) => (
+  <IressIcon
+    {...restProps}
+    className={classNames(className, styles.spinner)}
+    name={name}
+    spin={spin}
+  />
+);

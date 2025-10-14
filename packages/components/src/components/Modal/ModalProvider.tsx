@@ -1,14 +1,12 @@
-import { type PropsWithChildren, useCallback, useMemo, useState } from 'react';
-import { type FloatingUIContainer } from '@/types';
-import { ModalContext } from './hooks/useModal';
+import { createContext, useCallback, useMemo, useState } from 'react';
+import {
+  type IressModalContextValue,
+  type IressModalProviderProps,
+} from './Modal.types';
 
-export interface IressModalProviderProps extends PropsWithChildren {
-  /**
-   * The container element to render the modal into.
-   * By default, the modal will render at the end of the document body.
-   */
-  container?: FloatingUIContainer;
-}
+export const IressModalContext = createContext<
+  IressModalContextValue | undefined
+>(undefined);
 
 export const IressModalProvider = ({
   children,
@@ -44,8 +42,8 @@ export const IressModalProvider = ({
   );
 
   return (
-    <ModalContext.Provider value={updatedValue}>
+    <IressModalContext.Provider value={updatedValue}>
       {children}
-    </ModalContext.Provider>
+    </IressModalContext.Provider>
   );
 };

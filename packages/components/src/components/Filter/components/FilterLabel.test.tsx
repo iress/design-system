@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import { FilterLabel, FilterLabelProps } from './FilterLabel';
+import { FilterLabel } from './FilterLabel';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
 
 const TEST_LABEL = 'Label';
 
-const renderFilterLabel = <TMultiple extends boolean = false>(
-  props: Partial<FilterLabelProps<TMultiple>> = {},
+const renderFilterLabel = (
+  props: Partial<Parameters<typeof FilterLabel>[0]> = {},
 ) => {
   return render(<FilterLabel {...props} label={props.label ?? TEST_LABEL} />);
 };
@@ -28,7 +28,7 @@ describe('FilterLabel', () => {
   });
 
   it('renders label with number of items, if multiple values', () => {
-    renderFilterLabel<true>({
+    renderFilterLabel({
       selectedOptionsText: '{{numOptions}} items',
       value: MOCK_LABEL_VALUE_META,
     });

@@ -1,20 +1,21 @@
 import { renderHook } from '@testing-library/react';
 import { PropsWithChildren } from 'react';
 import { useMenuItemRole } from './useMenuItemRole';
-import { IressMenu, IressMenuProps } from '../../Menu';
-import { IressPopover, IressPopoverProps } from '@/components/Popover';
+import { MenuProviderProps } from '../../Menu.types';
+import { MenuProvider } from '../../MenuProvider';
+import { IressPopover, IressPopoverProps } from '@/main';
 
-function renderHookInMenu(wrapperProps: Partial<IressMenuProps> = {}) {
+function renderHookInMenu(wrapperProps: Partial<MenuProviderProps> = {}) {
   return renderHook(() => useMenuItemRole(), {
     wrapper: ({ children }: PropsWithChildren) => (
-      <IressMenu
+      <MenuProvider
         {...wrapperProps}
         id={wrapperProps.id ?? 'test'}
         layout={wrapperProps.layout ?? 'stack'}
         role={wrapperProps.role ?? 'list'}
       >
         {children}
-      </IressMenu>
+      </MenuProvider>
     ),
   });
 }
@@ -61,13 +62,13 @@ describe('useMenuItemRole', () => {
 
   describe('inside popover', () => {
     it('returns option if popover type=listbox', () => {
-      const hook = renderHookInPopover({ type: 'listbox' });
+      const hook = renderHookInPopover({ type: IressPopover.Type.Listbox });
       const role = hook.result.current;
       expect(role).toBe('option');
     });
 
     it('returns menuitem if popover type=menu', () => {
-      const hook = renderHookInPopover({ type: 'menu' });
+      const hook = renderHookInPopover({ type: IressPopover.Type.Menu });
       const role = hook.result.current;
       expect(role).toBe('menuitem');
     });

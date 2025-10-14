@@ -51,7 +51,7 @@ describe('useControlledState', () => {
           useControlledState({
             component: 'test',
             multiple: true,
-            defaultValue: ['test'],
+            defaultValue: 'test',
           }),
         );
         const { value } = hook.result.current;
@@ -61,7 +61,7 @@ describe('useControlledState', () => {
       it('syncs value prop to an array in multiSelect', () => {
         const hook = renderHook(
           (
-            props: ControlledStateProps<FormControlValue, true> = {
+            props: ControlledStateProps<FormControlValue[]> = {
               component: 'test',
               multiple: true,
               value: [],
@@ -82,9 +82,9 @@ describe('useControlledState', () => {
         const { setValue } = hook.result.current;
 
         act(() => setValue('test'));
-        expect(onChange).toHaveBeenCalledWith('test');
+        expect(onChange).toBeCalledWith('test');
         act(() => setValue(undefined));
-        expect(onChange).toHaveBeenCalledWith(undefined);
+        expect(onChange).toBeCalledWith(undefined);
       });
 
       it('is called when value is changed using toggleValue', () => {
@@ -95,9 +95,9 @@ describe('useControlledState', () => {
         const { toggleValue } = hook.result.current;
 
         act(() => toggleValue('test', true));
-        expect(onChange).toHaveBeenCalledWith('test');
+        expect(onChange).toBeCalledWith('test');
         act(() => toggleValue('test', false));
-        expect(onChange).toHaveBeenCalledWith(undefined);
+        expect(onChange).toBeCalledWith(undefined);
       });
 
       it('is called when value is changed using toggleValue (multiple)', () => {
@@ -108,9 +108,9 @@ describe('useControlledState', () => {
         const { toggleValue } = hook.result.current;
 
         act(() => toggleValue('test', true));
-        expect(onChange).toHaveBeenCalledWith(['test']);
+        expect(onChange).toBeCalledWith(['test']);
         act(() => toggleValue('test', false));
-        expect(onChange).toHaveBeenCalledWith([]);
+        expect(onChange).toBeCalledWith([]);
       });
 
       it('is not called when value is changed using props', () => {
@@ -124,7 +124,7 @@ describe('useControlledState', () => {
           ) => useControlledState(props),
         );
         hook.rerender({ component: 'test', value: ['test2'] });
-        expect(onChange).not.toHaveBeenCalled();
+        expect(onChange).not.toBeCalled();
       });
     });
 
@@ -200,7 +200,7 @@ describe('useControlledState', () => {
       );
 
       await waitFor(() =>
-        expect(idsLogger).toHaveBeenCalledWith(
+        expect(idsLogger).toBeCalledWith(
           `test: Please use either the defaultValue prop for uncontrolled components, or the value prop for controlled components, rather than both. If you use both, the value of the component may become unpredictable.`,
           'warn',
         ),
@@ -218,7 +218,7 @@ describe('useControlledState', () => {
       );
 
       await waitFor(() =>
-        expect(idsLogger).toHaveBeenCalledWith(
+        expect(idsLogger).toBeCalledWith(
           `test: Please use either the defaultSelected prop for uncontrolled components, or the selected prop for controlled components, rather than both. If you use both, the value of the component may become unpredictable.`,
           'warn',
         ),

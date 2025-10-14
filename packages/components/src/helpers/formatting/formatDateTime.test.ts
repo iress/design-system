@@ -1,4 +1,5 @@
 import { formatISODateTime, formatRelativeTime } from './formatDateTime';
+import { type DateValue } from './formatDate';
 
 describe('Component library formatting tests', () => {
   const dateNumber = 1631883423423;
@@ -32,6 +33,17 @@ describe('Component library formatting tests', () => {
       expect(formatRelativeTime(dateNumber, null)).toBe('next year');
       expect(formatRelativeTime(dateObj, null)).toBe('next year');
       expect(formatRelativeTime(dateString, null)).toBe('next year');
+    });
+
+    it('returns empty string for undefined values', () => {
+      const undefinedValue = undefined as unknown as DateValue;
+      expect(formatRelativeTime(undefinedValue)).toBe('');
+    });
+
+    it('returns empty string for invalid date values', () => {
+      expect(formatRelativeTime('invalid-date')).toBe('');
+      const nullValue = null as unknown as DateValue;
+      expect(formatRelativeTime(nullValue)).toBe('');
     });
   });
 });

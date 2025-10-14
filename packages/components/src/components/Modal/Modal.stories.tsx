@@ -1,10 +1,6 @@
-import {
-  type Meta,
-  type ReactRenderer,
-  type StoryObj,
-} from '@storybook/react-vite';
-import { type ArgsStoryFn } from 'storybook/internal/types';
-import { IressModal, type IressModalProps, IressModalProvider } from '.';
+import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import { ArgsStoryFn } from '@storybook/types';
+import { IressModal, IressModalProps, IressModalProvider } from '.';
 import { IressButton } from '../Button';
 import { useModal } from './hooks/useModal';
 import {
@@ -20,6 +16,8 @@ import { IressStack, IressText } from '../../main';
 import { CurrentBreakpoint } from '@iress-storybook/components';
 import { ModalSizes } from './mocks/ModalSizes';
 import ModalSizesSource from './mocks/ModalSizes.tsx?raw';
+import { ModalPaddings } from './mocks/ModalPaddings';
+import ModalPaddingsSource from './mocks/ModalPaddings.tsx?raw';
 
 const MODAL_ID = 'storybook-modal';
 
@@ -45,7 +43,6 @@ type Story = StoryObj<typeof IressModal>;
 export default {
   title: 'Components/Modal',
   component: IressModal,
-  tags: ['updated'],
 } as Meta<typeof IressModal>;
 
 export const Default: Story = {
@@ -262,16 +259,30 @@ export const ResponsiveSize: Story = {
     children: <CurrentBreakpoint />,
     footer: '',
     id: MODAL_ID,
-    width: {
-      xs: 'overlay.sm',
-      md: 'overlay.md',
-      xxl: 'overlay.lg',
+    size: {
+      md: 'sm',
+      lg: 'md',
+      xl: 'lg',
     },
   },
   argTypes: {
     ...disableArgTypes(['show', 'children']),
   },
   render: renderWithButtonFn('Responsive modal'),
+};
+
+export const Padding: Story = {
+  ...Default,
+  args: {
+    footer: '',
+  },
+  argTypes: {
+    ...disableArgTypes(['children', 'show', 'padding', 'id']),
+  },
+  render: (args) => <ModalPaddings {...args} />,
+  parameters: {
+    ...withCustomSource(ModalPaddingsSource),
+  },
 };
 
 export const DisableClosing: Story = {
@@ -283,7 +294,7 @@ export const DisableClosing: Story = {
     const { showModal } = useModal();
 
     return (
-      <IressStack gap="md">
+      <IressStack gutter="md">
         <IressButton onClick={() => showModal('disable-backdrop-click')} fluid>
           Disable backdrop click
         </IressButton>
@@ -325,14 +336,5 @@ export const DisableClosing: Story = {
         />
       </IressStack>
     );
-  },
-};
-
-export const Static: Story = {
-  args: {
-    children: 'Modal content',
-    footer: 'Footer slot',
-    show: true,
-    static: true,
   },
 };

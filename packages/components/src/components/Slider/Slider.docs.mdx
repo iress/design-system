@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -67,12 +67,12 @@ You can also use the `formatValue` prop to provide a formatted node to replace t
 
 ### Hidden labels
 
-Specific labels can be hidden for all or specified breakpoints. This can be done by using the `srOnly` property in the `TickLabel` object.
+Specific labels can be hidden for all or specified breakpoints. This can be done by using the `hiddenOn` property in the `TickLabel` object.
 
 When a label is set to hide on a certain breakpoint, it will be hidden on the screen from that breakpoint onwards. You can reveal it on a larger breakpoint by setting the larger breakpoint to false.
 
-1. To set the label to hide on all breakpoints you can set the xs property to true: `srOnly: { xs: true }`.
-2. To only show on md and above you can `srOnly: { xs: true, md: false }`.
+1. To set the label to hide on all breakpoints you can set the xs property to true: `hiddenOn: { xs: true }`.
+2. To only show on md and above you can `hiddenOn: { xs: true, md: false }`.
 
 #### Behavior considerations
 
@@ -84,13 +84,13 @@ When a label is set to hide on a certain breakpoint, it will be hidden on the sc
   stories={ComponentStories}
 />
 
-### Read only
+### Readonly
 
-Sliders can be set to read only by using the `readOnly` property. When set to read only the slider will render a read only input and display the specified value.
+Sliders can be set to read only by using the `readonly` property. When set to read only the slider will render a read only input and display the specified value.
 
 If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](?path=/docs/components-readonly--docs).
 
 <ComponentExample
-  story={ComponentStories.ReadOnly}
+  story={ComponentStories.Readonly}
   stories={ComponentStories}
 />

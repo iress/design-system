@@ -1,30 +1,8 @@
-import { type FloatingUIContainer } from '@/types';
-import { useContext, useMemo, createContext } from 'react';
-
-export interface ModalContextValue {
-  /**
-   * An array of modal IDs that are currently open.
-   */
-  opened: string[];
-
-  /**
-   * The container element to render the modal into.
-   * By default, the modal will render at the end of the document body.
-   */
-  container?: FloatingUIContainer;
-
-  /**
-   * Show or hide a modal by ID.
-   */
-  showModal: (id: string, flag?: boolean) => void;
-}
-
-export const ModalContext = createContext<ModalContextValue | undefined>(
-  undefined,
-);
+import { useContext, useMemo } from 'react';
+import { IressModalContext } from '../ModalProvider';
 
 export const useModal = () => {
-  const context = useContext(ModalContext);
+  const context = useContext(IressModalContext);
 
   return useMemo(
     () => ({

@@ -1,15 +1,13 @@
-import { RenderResult, render, within } from '@testing-library/react';
+import { RenderResult, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import {
-  IressCheckboxGroup,
-  IressCheckboxGroupProps,
-  checkboxGroup as checkboxGroupStyles,
-} from '.';
+import { IressCheckboxGroup, IressCheckboxGroupProps } from '.';
+import styles from './CheckboxGroup.module.scss';
+import checkboxStyles from '../Checkbox/Checkbox.module.scss';
 import { getFinancialReviewCheckboxes } from './mocks/checkboxGroupChildren';
 import { IressFieldGroup, IressFieldGroupProps } from '../Field';
-import userEvent from '@testing-library/user-event';
-import { IressCheckbox, checkbox as checkboxStyles } from '../Checkbox';
 import { GlobalCSSClass } from '@/enums';
+import userEvent from '@testing-library/user-event';
+import { IressCheckbox } from '../Checkbox/Checkbox';
 
 const TEST_ID = 'test-component';
 const CHILDREN_TEST_ID = 'test-children';
@@ -59,8 +57,9 @@ describe('IressCheckboxGroup', () => {
     const component = screen.getByTestId(TEST_ID);
     expect(component).toHaveAttribute('role', 'group');
     expect(component).toHaveClass(
-      checkboxGroupStyles({ layout: 'stack' }),
-      GlobalCSSClass.CheckboxGroup,
+      'test-class',
+      styles.checkboxGroup,
+      styles.stack,
     );
 
     screen.getAllByRole('checkbox').forEach((input) => {
@@ -90,11 +89,8 @@ describe('IressCheckboxGroup', () => {
           hiddenCheckbox: true,
         });
 
-        screen.getAllByTestId(CHILDREN_TEST_ID).forEach((checkboxContainer) => {
-          const checkbox = within(checkboxContainer).getByRole('checkbox');
-          expect(checkbox).toHaveClass(
-            checkboxStyles({ hiddenControl: true }).input!,
-          );
+        screen.getAllByTestId(CHILDREN_TEST_ID).forEach((checkbox) => {
+          expect(checkbox).toHaveClass(GlobalCSSClass.SROnly);
         });
       });
     });
@@ -106,9 +102,7 @@ describe('IressCheckboxGroup', () => {
         });
 
         const checkboxGroup = screen.getByTestId(TEST_ID);
-        expect(checkboxGroup).toHaveClass(
-          checkboxGroupStyles({ layout: 'inline' }),
-        );
+        expect(checkboxGroup).toHaveClass(styles.inline);
       });
     });
 
@@ -153,7 +147,6 @@ describe('IressCheckboxGroup', () => {
           expect.objectContaining({
             target: input,
           }),
-          true,
           'home',
         );
         expect(input).toBeChecked();
@@ -165,21 +158,20 @@ describe('IressCheckboxGroup', () => {
           expect.objectContaining({
             target: input,
           }),
-          false,
           'home',
         );
         expect(input).not.toBeChecked();
       });
     });
 
-    describe('readOnly', () => {
+    describe('readonly', () => {
       it('renders a hidden input with the correct value, if checked', () => {
         const screen = renderComponent({
           value: ['home'],
-          readOnly: true,
+          readonly: true,
         });
 
-        // No checkbox is rendered in readOnly mode
+        // No checkbox is rendered in readonly mode
         const checkbox = screen.queryByRole('checkbox');
         expect(checkbox).not.toBeInTheDocument();
 
@@ -193,10 +185,10 @@ describe('IressCheckboxGroup', () => {
 
       it('renders nothing, if nothing checked', () => {
         const screen = renderComponent({
-          readOnly: true,
+          readonly: true,
         });
 
-        // No checkbox is rendered in readOnly mode if none were selected
+        // No checkbox is rendered in readonly mode if none were selected
         const checkboxGroup = screen.getByRole('group');
         expect(checkboxGroup.innerHTML).toBe('');
       });
@@ -252,7 +244,7 @@ describe('IressCheckboxGroup', () => {
       });
 
       screen.getAllByRole('checkbox').forEach((checkbox) => {
-        expect(checkbox).toHaveClass(checkboxStyles({ touch: true }).input!);
+        expect(checkbox).toHaveClass(checkboxStyles.input);
       });
     });
   });

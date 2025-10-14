@@ -1,8 +1,8 @@
 import {
   IressTable,
   IressTableFormattedValue,
-  type IressTableProps,
-  type TableColumn,
+  IressTableProps,
+  TableColumn,
 } from '@/main';
 
 type Props = Partial<IressTableProps<Row, never>>;
@@ -40,7 +40,7 @@ const columns: TableColumn<Row>[] = [
   {
     key: 'cost',
     label: 'Cost (sorts by net cost if available)',
-    textAlign: 'right',
+    align: 'right',
     format: (value: number, row) => {
       return (
         <>

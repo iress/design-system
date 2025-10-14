@@ -1,5 +1,10 @@
+const postcssPresetEnv = require('postcss-preset-env');
+
 module.exports = {
-  plugins: {
-    '@pandacss/dev/postcss': {},
-  },
+  plugins: [
+    postcssPresetEnv({
+      stage: 0,
+      browsers: 'last 2 versions',
+    }),
+  ],
 };

@@ -5,12 +5,10 @@ import {
   useControlledState,
 } from '@/hooks/useControlledState';
 import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAsString';
-import { type LabelValueMeta } from '@/interfaces';
+import { type IressSelectMenuProps } from '../SelectMenu/SelectMenu.types';
 
-export interface RichSelectStateHookReturn<
-  T extends LabelValueMeta = LabelValueMeta,
-  TMultiple extends boolean = false,
-> extends ControlledStateHook<T, TMultiple> {
+export interface RichSelectStateHookReturn
+  extends ControlledStateHook<IressSelectMenuProps['selected']> {
   getLabelsArray: () => string[];
   getLabelsString: (separator?: string) => string;
   getValuesArray: () => string[];
@@ -25,12 +23,9 @@ export interface RichSelectStateHookReturn<
  * - getValuesString: Returns a string of the values of the selected items, separated by commas. Used for submitting form data.
  *
  */
-export const useRichSelectState = <
-  T extends LabelValueMeta = LabelValueMeta,
-  TMultiple extends boolean = false,
->(
-  props: ControlledStateProps<T, TMultiple>,
-): RichSelectStateHookReturn<T, TMultiple> => {
+export const useRichSelectState = (
+  props: ControlledStateProps<IressSelectMenuProps['selected']>,
+): RichSelectStateHookReturn => {
   const state = useControlledState(props);
 
   return {

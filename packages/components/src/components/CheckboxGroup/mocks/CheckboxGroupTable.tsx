@@ -1,5 +1,5 @@
 import {
-  type FormControlValue,
+  FormControlValue,
   IressButton,
   IressCheckbox,
   IressForm,
@@ -32,7 +32,7 @@ export const CheckboxGroupTable = () => (
       'let-them-eat-cake': ['lemon-drizzle', 'victoria-sponge'],
     }}
   >
-    <IressStack gap="md">
+    <IressStack gutter="md">
       <SelectedValues />
       <IressFormFieldset
         label="Let them eat cake"
@@ -40,7 +40,7 @@ export const CheckboxGroupTable = () => (
         hiddenLabel
         rules={{ required: 'Please select a cake' }}
         render={(field) => (
-          <IressCheckboxGroup {...field} layout="stack">
+          <IressCheckboxGroup {...field} layout="full">
             <IressTable
               caption="Available options"
               columns={[

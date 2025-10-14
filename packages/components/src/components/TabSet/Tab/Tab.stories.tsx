@@ -1,13 +1,12 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressTab, type IressTabProps, IressTabSet } from '..';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressTab, IressTabSet } from '..';
 
-type Story = StoryObj<IressTabProps<undefined>>;
+type Story = StoryObj<typeof IressTab>;
 
 export default {
   title: 'Components/TabSet/Tab',
   component: IressTab,
-  tags: ['updated'],
-} as Meta<IressTabProps<undefined>>;
+} as Meta<typeof IressTab>;
 
 export const Inactive: Story = {
   args: {

@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressCheckboxGroup } from '.';
 import {
   disableArgTypes,
@@ -15,7 +15,6 @@ export default {
   argTypes: {
     ...disableArgTypes(['children']),
   },
-  tags: ['updated'],
 } as Meta<typeof IressCheckboxGroup>;
 
 export const Table: Story = {

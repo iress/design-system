@@ -1,14 +1,7 @@
-import { type PropsWithChildren } from 'react';
 import { IressIcon } from '../../Icon';
-import { table } from '../Table.styles';
-import { type ColumnSort } from '@tanstack/react-table';
-
-export interface TableSortButtonProps extends PropsWithChildren {
-  label?: string;
-  noWrap?: boolean;
-  sort?: ColumnSort;
-  toggleSorting: () => void;
-}
+import { type TableSortButtonProps } from '../Table.types';
+import styles from '../Table.module.scss';
+import classNames from 'classnames';
 
 export const TableSortButton = ({
   children,
@@ -18,18 +11,19 @@ export const TableSortButton = ({
   toggleSorting,
 }: TableSortButtonProps) => {
   const icon = sort?.desc ? 'sort-down' : 'sort-up';
-  const classes = table({ sortButtonNoWrap: noWrap });
 
   return (
     <button
       type="button"
-      className={classes.sortHeader}
+      className={classNames(styles.sortButton, {
+        [styles.sortButtonNoWrap]: noWrap,
+      })}
       onClick={toggleSorting}
     >
       {children}
       <IressIcon
         name={sort ? icon : 'sort'}
-        className={classes.sortIcon}
+        className={styles.sortIcon}
         screenreaderText={label}
       />
     </button>

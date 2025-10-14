@@ -1,0 +1,58 @@
+@use '../mixins';
+@use '../vars';
+
+.iress-u-inline {
+  --gutter-xs: var(--iress-inline-xs-gutter, var(--iress-a-horizontal-spacing-xs, var(--iress-g-spacing-xs)));
+  --gutter-sm: var(--iress-inline-sm-gutter, var(--iress-a-horizontal-spacing-sm, var(--iress-g-spacing-sm)));
+  --gutter-md: var(--iress-inline-md-gutter, var(--iress-a-horizontal-spacing-md, var(--iress-g-spacing-md)));
+  --gutter-lg: var(--iress-inline-lg-gutter, var(--iress-a-horizontal-spacing-lg, var(--iress-g-spacing-lg)));
+  --gutter-xl: var(--iress-inline-xl-gutter, var(--iress-a-horizontal-spacing-xl, var(--iress-g-spacing-xl)));
+  --child-display: var(--iress-inline-child-display, inline-block);
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.iress-u-inline.iress--no-wrap {
+  flex-wrap: nowrap;
+}
+
+.iress-u-inline > .iress-button {
+  --iress-margin-right: 0;
+}
+
+/* Alignment */
+@each $hName, $hValue in vars.$horizontalAlignments {
+  .iress-u-inline.iress--h-align--#{$hName} {
+    justify-content: $hValue;
+  }
+}
+
+@each $vName, $vValue in vars.$verticalAlignments {
+  .iress-u-inline.iress--v-align--#{$vName} {
+    align-items: $vValue;
+  }
+}
+
+/* Gutters */
+@each $gutter in vars.$gutters {
+  .iress-u-inline.iress--gutter--#{$gutter} {
+    gap: var(--gutter-#{$gutter});
+  }
+
+  .iress-u-inline.iress--gutter--#{$gutter} > .iress-hide > * {
+    display: var(--child-display);
+  }
+}
+
+/* Responsive Gutters */
+@each $bpName, $bpValue in vars.$breakpoints {
+  @if $bpName == 'xs' {
+    @include mixins.responsiveInlineUtilityGutters($bpName);
+  } @else {
+    @media only screen and (#{$bpValue}) {
+      @include mixins.responsiveInlineUtilityGutters($bpName);
+    }
+  }
+}

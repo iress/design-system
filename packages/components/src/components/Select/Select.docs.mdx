@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -81,13 +81,13 @@ Widths can also be set as a percentage, allowing the input to take up a proporti
 
 <ComponentExample story={ComponentStories.Sizing} stories={ComponentStories} />
 
-### Read only
+### Readonly
 
-Unlike the standard HTML `select` element, the `IressSelect` component can be set to `readOnly`. In this case, an `IressReadonly` component will render the selected label text, while the selected value is rendered in a hidden HTML `input` element for form submission.
+Unlike the standard HTML `select` element, the `IressSelect` component can be set to `readonly`. In this case, an `IressReadonly` component will render the selected label text, while the selected value is rendered in a hidden HTML `input` element for form submission.
 
 If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](?path=/docs/components-readonly--docs).
 
 <ComponentExample
-  story={ComponentStories.ReadOnly}
+  story={ComponentStories.Readonly}
   stories={ComponentStories}
 />

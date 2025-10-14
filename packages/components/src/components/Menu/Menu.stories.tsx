@@ -1,11 +1,11 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressMenu, IressMenuItem, type IressMenuProps } from '.';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressMenu, IressMenuItem, IressMenuProps, MENU_LAYOUTS } from '.';
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
 import { MENU_CHILDREN_OPTIONS } from './mocks/menuChildrenOptions';
 import { IressInline } from '../Inline';
-import { useArgs } from 'storybook/preview-api';
+import { useArgs } from '@storybook/preview-api';
 import { MenuRoleDescription } from './mocks/MenuRoleDescription';
 import { IressToggle } from '../Toggle';
 
@@ -14,7 +14,6 @@ type Story = StoryObj<typeof IressMenu>;
 export default {
   title: 'Components/Menu',
   component: IressMenu,
-  tags: ['updated'],
   argTypes: {
     ...disableArgTypes(['children']),
     children: {
@@ -37,7 +36,6 @@ export const Basic: Story = {
 export const Complex: Story = {
   args: {
     children: 'complex',
-    maxWidth: 'input.25perc',
   },
 };
 
@@ -79,19 +77,13 @@ export const Layout: Story = {
     ...disableArgTypes(['children', 'layout']),
   },
   render: (args) => (
-    <IressStack gap="lg">
-      <IressText>
-        <h3>Stack (default)</h3>
-        <IressMenu {...args} layout="stack" />
-      </IressText>
-      <IressText>
-        <h3>Inline</h3>
-        <IressMenu {...args} layout="inline" />
-      </IressText>
-      <IressText>
-        <h3>Inline Equal Width</h3>
-        <IressMenu {...args} layout="inline-equal-width" />
-      </IressText>
+    <IressStack gutter="lg">
+      {MENU_LAYOUTS.map((layout) => (
+        <IressText key={layout}>
+          <h3>{layout}</h3>
+          <IressMenu {...args} layout={layout} />
+        </IressText>
+      ))}
     </IressStack>
   ),
 };
@@ -104,14 +96,14 @@ export const NoWrap: Story = {
     ...disableArgTypes(['children', 'noWrap']),
   },
   render: (args) => (
-    <IressInline>
-      <IressMenu {...args} maxWidth="input.12">
+    <div style={{ maxWidth: '300px', display: 'flex' }}>
+      <IressMenu {...args}>
         <IressMenuItem>Menu item with some text that wraps</IressMenuItem>
       </IressMenu>
-      <IressMenu {...args} maxWidth="input.12" noWrap>
+      <IressMenu {...args} noWrap>
         <IressMenuItem>Non wrapping menu item with some text</IressMenuItem>
       </IressMenu>
-    </IressInline>
+    </div>
   ),
 };
 
@@ -138,7 +130,7 @@ export const ListRole: Story = {
       const [{ multiSelect }, updateArgs] = useArgs<IressMenuProps>();
 
       return (
-        <IressInline gap="md" verticalAlign="stretch">
+        <IressInline gutter="md" verticalAlign="stretch">
           <div style={{ minWidth: 200 }}>
             <Story />
           </div>
@@ -148,11 +140,9 @@ export const ListRole: Story = {
           >
             {options.args.role === 'listbox' && (
               <IressToggle
-                mb="md"
+                className="iress-mb--md"
                 checked={multiSelect}
-                onChange={() =>
-                  updateArgs({ multiSelect: !multiSelect as never })
-                }
+                onChange={() => updateArgs({ multiSelect: !multiSelect })}
               >
                 Multi-select
               </IressToggle>
@@ -179,5 +169,13 @@ export const ListboxRole: Story = {
     children: 'selectable',
     role: 'listbox',
     'aria-label': 'Selectable listbox',
+  },
+};
+
+export const NavRole: Story = {
+  ...ListRole,
+  args: {
+    ...ListRole.args,
+    role: 'nav',
   },
 };

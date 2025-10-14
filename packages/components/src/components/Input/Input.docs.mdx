@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -32,7 +32,11 @@ For more information about each type, please see the [MDN documentation](https:/
 
 <ComponentExample story={ComponentStories.Types} stories={ComponentStories} />
 
-<IressAlert heading="Hidden inputs" status="info" mb="lg">
+<IressAlert
+  heading="Hidden inputs"
+  status={IressAlert.Status.Info}
+  className="iress-mb--lg"
+>
   If you need to use a hidden input in a form, you can use a native Input
   element with its `type` set to `hidden`. Remember to set the `name` attribute
   so it can be included in form submissions.
@@ -86,16 +90,18 @@ Content (typically icons) can be added to slots (`append` and `prepend`) within 
 - **Prepend**: appears before the input
 - **Append**: appears after the input
 
+By setting the watermark prop to true the add ons will render in a different style, which is set in the theme.
+
 <ComponentExample story={ComponentStories.Slots} stories={ComponentStories} />
 
-### Read only
+### Readonly
 
 The `readOnly` prop can be set to prevent the user from changing the value of the input. This will change the input to a custom read-only style and the user will not be able to interact with the input.
 
 If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](?path=/docs/components-readonly--docs).
 
 <ComponentExample
-  story={ComponentStories.ReadOnly}
+  story={ComponentStories.Readonly}
   stories={ComponentStories}
 />
 

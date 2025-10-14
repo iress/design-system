@@ -1,0 +1,25 @@
+.root {
+    position: relative;
+}
+
+.critical {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: .2s linear opacity;
+
+    .showCritical > & {
+        position: static;
+        opacity: 1;
+    }
+}
+
+.skeleton {
+    opacity: 1;
+    transition: .2s linear opacity;
+
+    .hideTemplate > & {
+        opacity: 0;
+    }
+}

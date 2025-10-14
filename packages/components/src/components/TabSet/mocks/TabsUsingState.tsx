@@ -3,7 +3,7 @@ import {
   IressStack,
   IressTab,
   IressTabSet,
-  type IressTabSetProps,
+  IressTabSetProps,
 } from '@/main';
 import { useState } from 'react';
 
@@ -11,7 +11,7 @@ export const TabsUsingState = (args: IressTabSetProps) => {
   const [selected, setSelected] = useState<number>();
 
   return (
-    <IressStack gap="md">
+    <IressStack gutter={IressStack.Gutter.Md}>
       <IressButton onClick={() => setSelected(selected === 2 ? 0 : 2)}>
         {selected === 2 ? `Back to first tab` : `Change to last tab`}
       </IressButton>

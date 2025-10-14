@@ -1,0 +1,5 @@
+:global(.iress-u-button.iress--mode--tertiary).closeButton {
+  --iress-border-width: 0;
+  --iress-text-color: var(--iress-g-muted-text-color, var(--iress-default-text-color--light));
+  --iress-padding-x: var(--iress-g-spacing-md);
+}

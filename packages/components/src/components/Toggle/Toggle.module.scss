@@ -1,0 +1,83 @@
+@use 'Toggle.vars.module';
+
+.toggleBase {
+  color: var(--iress-text-color);
+  display: inline-block;
+}
+
+.toggleButtonContainer {
+  position: relative;
+  width: var(--iress-width);
+  height: var(--iress-height);
+  line-height: 0;
+
+  .toggleButton {
+    height: 100%;
+    width: 100%;
+
+    &[class*='iress--fluid'] {
+      justify-content: flex-start;
+    }
+
+    &::after {
+      content: '';
+      width: var(--iress-thumb-width);
+      height: var(--iress-thumb-height);
+      border-radius: var(--iress-border-radius);
+      border: var(--iress-thumb-border-width) solid var(--iress-thumb-border-color);
+      background-color: var(--iress-thumb-background-color);
+      z-index: 1;
+      position: absolute;
+      inset-block-start: 0;
+      transition: var(--iress-transition);
+      inset-inline-start: 0;
+      box-sizing: border-box;
+      top: auto;
+      bottom: auto;
+    }
+
+    &.buttonChecked::after {
+      inset-inline-start: calc(100% - var(--iress-height));
+    }
+  }
+}
+
+.checkboxMark {
+  inset-inline-start: -1px;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.label {
+  display: inline-block;
+  margin-inline-end: 0.5rem;
+  color: var(--iress-label-text-color);
+  font-family: var(--iress-label-font-family);
+  font-size: var(--iress-label-font-size);
+  font-weight: var(--iress-label-font-weight);
+}
+
+.layout__inline,
+.layout__inline-reverse {
+  display: inline-flex;
+  align-items: center;
+}
+
+.layout__inline-reverse {
+  flex-direction: row-reverse;
+}
+
+.layout__inline-reverse .label {
+  margin-inline: 0.5rem 0;
+}
+
+.layout__inline-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.layout__stack .label {
+  display: block;
+  margin-block-end: 0.5rem;
+}

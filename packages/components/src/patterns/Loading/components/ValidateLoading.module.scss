@@ -1,0 +1,36 @@
+.root {
+    position: relative;
+
+    &.loading > :not(.message) {
+        opacity: 0.5;
+        cursor: not-allowed;
+        filter: grayscale(0.25);
+    }
+}
+
+:global(.iress-u-button).loading {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(0.25);
+}
+
+.message {
+    position: absolute;
+    padding: var(--iress-spacing-200, var(--iress-g-spacing-xs, .5rem));
+    background: var(--iress-elevation-background-default, var(--iress-g-page-background-color, #fff));
+    top: 100%;
+    left: 0;
+    width: max-content;
+
+    .top & {
+        top: auto;
+        bottom: 100%;
+    }
+
+    .right & {
+        position: static;
+        display: inline-flex;
+        overflow: hidden;
+        max-height: 1.75em;
+    }
+}

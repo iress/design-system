@@ -4,6 +4,7 @@ import {
   waitFor,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
 import {
   IressButton,
   IressModal,
@@ -32,7 +33,7 @@ const App = () => {
       <IressSlideout id="test-slideout" role="complementary">
         Some slideout content
       </IressSlideout>
-      <IressButton onClick={() => success({ content: 'This is a toast!' })}>
+      <IressButton onClick={() => success({ children: 'This is a toast!' })}>
         Show toast
       </IressButton>
     </>

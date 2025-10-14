@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -82,14 +82,14 @@ The example below uses CSS grid to give us evenly spaced / sized checkboxes, whi
   stories={ComponentStories}
 />
 
-### Read only
+### Readonly
 
-The `readOnly` prop changes how the checkbox group is rendered. It will only render the children that are checked (alongside a hidden input that contains the `value` if it was set), otherwise it not be rendered.
+The `readonly` prop changes how the checkbox group is rendered. It will only render the children that are checked (alongside a hidden input that contains the `value` if it was set), otherwise it not be rendered.
 
-It is understandable that this may not be the desired behavior for all use cases. If you need a checkbox group that is not editable, but still visible, simply do not set the `readOnly` prop and set the `value` prop instead.
+It is understandable that this may not be the desired behavior for all use cases. If you need a checkbox group that is not editable, but still visible, simply do not set the `readonly` prop and set the `value` prop instead.
 
 <ComponentExample
-  story={ComponentStories.ReadOnly}
+  story={ComponentStories.Readonly}
   stories={ComponentStories}
 />
 

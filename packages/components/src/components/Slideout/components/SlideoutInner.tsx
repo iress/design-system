@@ -1,18 +1,8 @@
+import classNames from 'classnames';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { IressCloseButton } from '../../Button';
-import { slideout } from '../Slideout.styles';
-import { splitCssProps, styled } from '@/styled-system/jsx';
-import { IressText } from '@/components/Text';
-import { type IressStyledProps } from '@/types';
-import { type ReactNode } from 'react';
-
-export interface SlideoutInnerProps extends IressStyledProps {
-  closeText?: string;
-  floatingRef?: (node: HTMLElement | null) => void;
-  footer?: ReactNode;
-  heading?: ReactNode;
-  onOpenChange: (show: boolean) => void;
-}
+import { type SlideoutInnerProps } from '../Slideout.types';
+import styles from '../Slideout.module.scss';
 
 export const SlideoutInner = ({
   children,
@@ -22,67 +12,30 @@ export const SlideoutInner = ({
   footer,
   heading,
   onOpenChange,
-  className,
+  padding,
   ...restProps
-}: SlideoutInnerProps) => {
-  const classes = slideout();
-
-  const [styleProps, nonStyleProps] = splitCssProps(restProps);
-
-  const {
-    p = 'md',
-    pt,
-    pl,
-    pr,
-    pb,
-    px,
-    py,
-    ...restStyleProps
-  } = styleProps as IressStyledProps;
-
-  return (
-    <styled.div
-      ref={floatingRef}
-      data-testid={dataTestid}
-      className={className}
-      {...nonStyleProps}
-      {...restStyleProps}
+}: SlideoutInnerProps) => (
+  <div ref={floatingRef} {...restProps} data-testid={dataTestid}>
+    <IressCloseButton
+      onClick={() => onOpenChange(false)}
+      screenreaderText={closeText}
+      className={styles.closeButton}
+      data-testid={propagateTestid(dataTestid, 'close-button__button')}
+    />
+    <div
+      className={classNames(styles.content, `iress-p--${padding}`)}
+      data-testid={propagateTestid(dataTestid, 'content')}
     >
-      <IressCloseButton
-        onClick={() => onOpenChange(false)}
-        screenreaderText={closeText}
-        className={classes.closeButton}
-        data-testid={propagateTestid(dataTestid, 'close-button__button')}
-      />
-      <IressText
-        className={classes.content}
-        p={p}
-        px={px}
-        py={py}
-        pt={pt}
-        pl={pl}
-        pr={pr}
-        pb={pb}
-        data-testid={propagateTestid(dataTestid, 'content')}
+      {heading}
+      {children}
+    </div>
+    {footer && (
+      <div
+        className={classNames(styles.footer, `iress-p--${padding}`)}
+        data-testid={propagateTestid(dataTestid, 'footer')}
       >
-        {heading}
-        {children}
-      </IressText>
-      {footer && (
-        <styled.div
-          className={classes.footer}
-          p={p}
-          px={px}
-          py={py}
-          pt={pt}
-          pl={pl}
-          pr={pr}
-          pb={pb}
-          data-testid={propagateTestid(dataTestid, 'footer')}
-        >
-          {footer}
-        </styled.div>
-      )}
-    </styled.div>
-  );
-};
+        {footer}
+      </div>
+    )}
+  </div>
+);

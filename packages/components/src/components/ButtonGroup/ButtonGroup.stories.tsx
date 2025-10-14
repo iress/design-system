@@ -1,5 +1,5 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressButtonGroup, type IressButtonGroupProps } from '.';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressButtonGroup } from '.';
 import { IressButton } from '../Button/Button';
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressTooltip } from '../Tooltip';
@@ -8,8 +8,7 @@ import { IressToasterProvider, useToaster } from '../Toaster';
 import { IressText } from '../Text';
 import { IressDivider } from '../Divider';
 
-type Story = StoryObj<IressButtonGroupProps<string>>;
-type MultipleStory = StoryObj<IressButtonGroupProps<string, true>>;
+type Story = StoryObj<typeof IressButtonGroup>;
 
 export default {
   title: 'Components/ButtonGroup',
@@ -17,7 +16,6 @@ export default {
   argTypes: {
     ...disableArgTypes(['children']),
   },
-  tags: ['updated'],
 } as Meta<typeof IressButtonGroup>;
 
 export const ButtonChildren: Story = {
@@ -53,7 +51,7 @@ export const RichButtons: Story = {
           <span className="iress-sr-only">Right</span>
         </IressButton>
       </IressTooltip>,
-      <IressDivider key="divider" vertical mx="xs" />,
+      <IressDivider key="divider" vertical gutter="sm" />,
       <IressTooltip key="justify" tooltipText="Justify">
         <IressButton value="justify">
           <IressIcon name="align-justify" />
@@ -65,9 +63,9 @@ export const RichButtons: Story = {
   },
 };
 
-export const MultiSelect: MultipleStory = {
+export const MultiSelect: Story = {
   args: {
-    ...(ButtonChildren as MultipleStory).args,
+    ...ButtonChildren.args,
     multiple: true,
     label: 'Multiple options can be selected',
   },
@@ -81,7 +79,7 @@ export const SelectedSingle: Story = {
   },
 };
 
-export const SelectedMultiple: MultipleStory = {
+export const SelectedMultiple: Story = {
   args: {
     ...MultiSelect.args,
     defaultSelected: ['Option 2', 'Option 4'],
@@ -102,7 +100,9 @@ export const OnChange: Story = {
         {...args}
         onChange={(selected) => {
           success({
-            content: `Selected: ${selected ? String(selected) : 'none'}`,
+            children: `Selected: ${
+              selected.selected ? String(selected.selected) : 'none'
+            }`,
           });
         }}
       />

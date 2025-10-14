@@ -1,5 +1,5 @@
 import {
-  type InputRef,
+  InputRef,
   IressAlert,
   IressButton,
   IressInline,
@@ -10,11 +10,7 @@ import {
   IressTable,
 } from '@/main';
 import { useState } from 'react';
-import {
-  Controller,
-  type UseFormRegisterReturn,
-  useForm,
-} from 'react-hook-form';
+import { Controller, UseFormRegisterReturn, useForm } from 'react-hook-form';
 
 const registerInnerElement = (register: UseFormRegisterReturn) => {
   return {
@@ -35,13 +31,13 @@ export const ReactHookFormsInput = () => {
   return (
     // eslint-disable-next-line sonarjs/void-use -- This is a mock form submission
     <form onSubmit={void handleSubmit(setData)}>
-      <IressStack gap="md">
+      <IressStack gutter="md">
         <IressAlert status="info">
           Although you can use <code>IressInput</code> directly with React Hook
           Forms, we recommend using <code>IressFormField</code> within{' '}
           <code>IressForm</code> for a more integrated experience.
         </IressAlert>
-        <IressInline gap="md" verticalAlign="middle">
+        <IressInline gutter="md" verticalAlign="middle">
           <IressLabel htmlFor="Controller">
             Input using <code>{`{ Controller } from 'react-hook-forms'`}</code>
           </IressLabel>
@@ -58,7 +54,7 @@ export const ReactHookFormsInput = () => {
             )}
           />
         </IressInline>
-        <IressInline gap="md" verticalAlign="middle">
+        <IressInline gutter="md" verticalAlign="middle">
           <IressLabel htmlFor="register">
             Input using <code>{`{ register } = useForm()`}</code>
           </IressLabel>

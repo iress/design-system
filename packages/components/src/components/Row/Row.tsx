@@ -1,48 +1,50 @@
-import { row } from './Row.styles';
+import classNames from 'classnames';
 import {
-  type HorizontalAligns,
-  type IressStyledProps,
-  type ResponsiveProp,
-  type VerticalAligns,
-} from '@/types';
-import { type ReactNode, type FC } from 'react';
-import { styled } from '@/styled-system/jsx';
-import { type PositiveSpacingToken } from '@theme-preset/tokens/spacing';
-import { cx } from '@/styled-system/css';
-import { GlobalCSSClass } from '@/enums';
+  type IressRowProps,
+  RowCssClass,
+  type RowWithEnums,
+} from './Row.types';
+import { getResponsiveLayoutModifiers } from '@helpers/responsive/getResponsiveLayoutModifiers';
+import { GutterSize, HorizontalAlign, VerticalAlign } from '@/main';
 
-export interface IressRowProps extends IressStyledProps {
-  /**
-   * Any content you would like to be contained. Best used with `IressCol`.
-   */
-  children?: ReactNode;
+export const IressRow: RowWithEnums = ({
+  children,
+  className,
+  gutter,
+  horizontalAlign = 'left',
+  useColGap,
+  verticalAlign = 'top',
+  ...restProps
+}: IressRowProps) => {
+  return (
+    <div
+      className={classNames(
+        className,
+        getResponsiveLayoutModifiers(
+          RowCssClass.Gutter,
+          gutter,
+          GutterSize.None,
+        ),
+        {
+          [RowCssClass.Base]: true,
+          [`${RowCssClass.HorizontalAlign}--${horizontalAlign}`]:
+            !!horizontalAlign,
+          [`${RowCssClass.VerticalAlign}--${verticalAlign}`]: !!verticalAlign,
+          [RowCssClass.UseColGap]: !!useColGap,
+        },
+      )}
+      {...restProps}
+    >
+      {children}
+    </div>
+  );
+};
 
-  /**
-   * Sets the gap between the children `<IressCol />` components.
-   */
-  gutter?: ResponsiveProp<PositiveSpacingToken>;
+/** @deprecated IressRow.Gutter enum is now deprecated and will be removed in a future version. Please use the value directly instead. **/
+IressRow.Gutter = GutterSize;
 
-  /**
-   * Horizontal alignment, follows flexbox justify-content
-   * @default left
-   */
-  horizontalAlign?: HorizontalAligns;
+/** @deprecated IressRow.HorizontalAlign enum is now deprecated and will be removed in a future version. Please use the value directly instead. **/
+IressRow.HorizontalAlign = HorizontalAlign;
 
-  /**
-   * Sets the size of the top and bottom gap between direct children when they begin to wrap.
-   * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
-   */
-  rowGap?: ResponsiveProp<PositiveSpacingToken>;
-
-  /**
-   * Vertical alignment, follows flexbox align-items
-   * @default top
-   */
-  verticalAlign?: VerticalAligns;
-}
-
-const Component = styled('div', row) as FC<IressRowProps>;
-
-export const IressRow = ({ className, ...restProps }: IressRowProps) => (
-  <Component {...restProps} className={cx(className, GlobalCSSClass.Row)} />
-);
+/** @deprecated IressRow.VerticalAlign enum is now deprecated and will be removed in a future version. Please use the value directly instead. **/
+IressRow.VerticalAlign = VerticalAlign;

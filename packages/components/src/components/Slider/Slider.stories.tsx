@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressSlider } from '.';
 import { IressStack } from '../Stack';
 import { CurrentBreakpoint } from '@iress-storybook/components';
@@ -10,7 +10,6 @@ type Story = StoryObj<typeof IressSlider>;
 export default {
   title: 'Components/Slider',
   component: IressSlider,
-  tags: ['updated'],
 } as Meta<typeof IressSlider>;
 
 export const Default: Story = {};
@@ -116,21 +115,21 @@ export const HiddenLabels: Story = {
     step: 20,
     tickLabels: [
       { value: 0, label: 'Zero' },
-      { value: 20, srOnly: { base: true, xl: false } },
-      { value: 40, srOnly: { base: true, xl: false } },
-      { value: 60, srOnly: { base: true, xl: false } },
-      { value: 80, srOnly: { base: true, xl: false } },
+      { value: 20, hiddenOn: { xs: true, xl: false } },
+      { value: 40, hiddenOn: { xs: true, xl: false } },
+      { value: 60, hiddenOn: { xs: true, xl: false } },
+      { value: 80, hiddenOn: { xs: true, xl: false } },
       { value: 100 },
-      { value: 120, srOnly: { base: true, xl: false } },
-      { value: 140, srOnly: { base: true, xl: false } },
-      { value: 160, srOnly: { base: true, xl: false } },
-      { value: 180, srOnly: { base: true, xl: false } },
+      { value: 120, hiddenOn: { xs: true, xl: false } },
+      { value: 140, hiddenOn: { xs: true, xl: false } },
+      { value: 160, hiddenOn: { xs: true, xl: false } },
+      { value: 180, hiddenOn: { xs: true, xl: false } },
       { value: 200, label: 'All' },
     ],
   },
   render: (args) => (
-    <IressStack gap="md">
-      <IressPanel bg="alt">
+    <IressStack gutter="md">
+      <IressPanel>
         <IressText>
           <CurrentBreakpoint />
         </IressText>
@@ -140,13 +139,13 @@ export const HiddenLabels: Story = {
   ),
 };
 
-export const ReadOnly: Story = {
+export const Readonly: Story = {
   args: {
     min: 0,
     max: 200,
     step: 20,
     value: 0,
-    readOnly: true,
+    readonly: true,
     tickLabels: [
       { value: 0, label: 'Zero' },
       { value: 200, label: 'All' },

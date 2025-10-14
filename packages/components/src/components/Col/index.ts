@@ -1,2 +1,2 @@
-export * from './Col.styles';
+export * from './Col.types';
 export * from './Col';

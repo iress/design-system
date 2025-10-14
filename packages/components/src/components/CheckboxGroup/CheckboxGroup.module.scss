@@ -1,0 +1,63 @@
+/** Checkbox group
+ * --------------------------------------------------
+ * @prop --iress-inline-spacing-x: Spacing between checkboxes in inline mode
+ * @prop --iress-inline-margin-bottom: Spacing below checkboxes in inline mode
+ */
+
+.checkboxGroup {
+  --iress-inline-spacing-x: var(--iress-checkbox-group-inline-spacing, var(--iress-g-spacing-md));
+  --iress-inline-margin-bottom: var(--iress-checkbox-margin-bottom, var(--iress-g-spacing-sm));
+  --iress-readonly-display: list-item;
+  --iress-readonly-padding-inline-start: var(--iress-inline-spacing-x);
+  --iress-inline-readonly-separator: ', ';
+}
+
+.full {
+  display: block;
+}
+
+.block,
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: var(--iress-margin-bottom);
+
+  .ids-checkbox,
+  .ids-input--readonly {
+    flex-basis: 100%;
+  }
+}
+
+.block {
+  .ids-checkbox--label {
+    display: flex;
+    flex-basis: 100%;
+  }
+
+  .ids-checkbox--label-span,
+  .ids-input--readonly {
+    flex-basis: 100%;
+  }
+}
+
+.inline {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  gap: var(--iress-inline-margin-bottom) var(--iress-inline-spacing-x);
+}
+
+.readonly {
+  padding-inline-start: var(--iress-readonly-padding-inline-start);
+
+  &.block .ids-input--readonly,
+  &.stack .ids-input--readonly {
+    display: var(--iress-readonly-display);
+  }
+
+  &.inline {
+    .ids-input--readonly:not(:last-child) .ids-input-base--readonly::after {
+      content: var(--iress-inline-readonly-separator);
+    }
+  }
+}

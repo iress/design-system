@@ -1,14 +1,14 @@
-import { type IressMenuProps } from '@/components/Menu';
-import { IressPanel, type IressPanelProps } from '../../Panel';
+import { MenuRoles } from '@/main';
+import { IressPanel, IressPanelProps } from '../../Panel';
 
 export const MenuInPopoverRoleDescription = ({
   children,
   role,
   ...restProps
-}: IressPanelProps & { role: IressMenuProps['role'] }) => {
+}: IressPanelProps & { role: MenuRoles }) => {
   if (role === 'listbox') {
     return (
-      <IressPanel {...restProps}>
+      <IressPanel className="iress-u-text" {...restProps}>
         {children}
         <h3>Listbox menu behaviour</h3>
         <ul>
@@ -39,9 +39,9 @@ export const MenuInPopoverRoleDescription = ({
     );
   }
 
-  if (role === 'list') {
+  if (role === 'nav' || role === 'list') {
     return (
-      <IressPanel {...restProps}>
+      <IressPanel className="iress-u-text" {...restProps}>
         {children}
         <h3>Navigation/list menu behaviour</h3>
         <ul>
@@ -65,7 +65,7 @@ export const MenuInPopoverRoleDescription = ({
 
   if (role === 'menu') {
     return (
-      <IressPanel {...restProps}>
+      <IressPanel className="iress-u-text" {...restProps}>
         {children}
         <h3>Application menu behaviour</h3>
         <ul>

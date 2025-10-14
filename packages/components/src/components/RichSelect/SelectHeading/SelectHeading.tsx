@@ -1,58 +1,36 @@
-import { cx } from '@/styled-system/css';
-import { richSelect } from '@/components/RichSelect/RichSelect.styles';
+import { type IressSelectHeadingProps } from './SelectHeading.types';
 import {
-  forwardRef,
-  useImperativeHandle,
-  useRef,
-  type ReactNode,
-  type UIEvent,
-} from 'react';
-import { IressMenuHeading, type IressMenuTextProps } from '../../Menu';
-import { GlobalCSSClass } from '@/enums';
-import { IressButton, type IressButtonProps } from '@/components/Button';
-import { usePopoverItem } from '@/components/Popover';
-import { IressInline } from '@/components/Inline';
+  ButtonCssClass,
+  type ButtonRef,
+  IressButton,
+  type IressButtonProps,
+  IressInline,
+  IressMenuText,
+  type PopoverVirtualNode,
+  usePopoverItem,
+} from '@/main';
+import classNames from 'classnames';
+import styles from '@/components/RichSelect/RichSelect.module.scss';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 
-export interface IressSelectHeadingProps extends IressMenuTextProps {
-  /**
-   * The content to be rendered; can be a string or a ReactNode (e.g. IressIcon).
-   */
-  children: ReactNode;
-
-  /**
-   * Adds a clear all button to the heading.
-   */
-  clearAll?: string | boolean;
-
-  /**
-   * Emitted when the user clicks the clear button, or triggers it using a keyboard.
-   */
-  onClearAll?: (e: UIEvent<HTMLButtonElement>) => void;
-}
-
-const classes = richSelect();
+type TheRef = ButtonRef | null;
 
 const ClearButton = forwardRef(
-  (
-    props: IressButtonProps,
-    ref: React.ForwardedRef<HTMLButtonElement | null>,
-  ) => {
-    const elementRef = useRef<HTMLButtonElement | null>(null);
+  (props: IressButtonProps, ref: React.ForwardedRef<ButtonRef>) => {
+    const elementRef = useRef<TheRef>(null);
     const { isActiveInPopover, ...popoverItemProps } = usePopoverItem('', {
-      onKeyDown: props.onKeyDown,
+      onKeyDown: props.onKeyDown as PopoverVirtualNode['onKeyDown'],
     });
 
-    useImperativeHandle(ref, () => elementRef.current!);
+    useImperativeHandle<TheRef, TheRef>(ref, () => elementRef.current);
 
     return (
       <IressButton
         {...props}
         {...popoverItemProps}
-        className={cx(
-          classes.dropdownClear,
-          GlobalCSSClass.RichSelectClearButton,
-        )}
-        active={isActiveInPopover}
+        className={classNames(styles.dropdownClear, {
+          [ButtonCssClass.Active]: isActiveInPopover,
+        })}
         mode="tertiary"
         ref={(element) => {
           elementRef.current = element;
@@ -68,16 +46,13 @@ export const IressSelectHeading = ({
   className,
   clearAll,
   onClearAll,
+  role = 'option',
   ...restProps
 }: IressSelectHeadingProps) => (
-  <IressMenuHeading
+  <IressMenuText
     {...restProps}
-    className={cx(
-      classes.dropdownSelectedHeading,
-      className,
-      GlobalCSSClass.RichSelectHeading,
-    )}
-    role={undefined}
+    className={classNames(styles.dropdownSelectedHeading, className)}
+    role={role}
   >
     <IressInline horizontalAlign="between" verticalAlign="middle">
       {children}
@@ -95,5 +70,5 @@ export const IressSelectHeading = ({
         </ClearButton>
       )}
     </IressInline>
-  </IressMenuHeading>
+  </IressMenuText>
 );

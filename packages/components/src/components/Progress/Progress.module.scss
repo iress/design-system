@@ -1,0 +1,23 @@
+.progress {
+  --iress-inactive-background-color: var(--iress-progress-inactive-background-color, var(--iress-g-inactive-color, var(--iress-default-inactive-color)));
+  --iress-active-background-color: var(--iress-progress-active-background-color, var(--iress-a-active-background-color, var(--iress-g-primary-color, var(--iress-default-primary-color))));
+  --iress-height: var(--iress-progress-height, calc(0.5 * var(--iress-g-spacing-rem)));
+  --iress-transition-type: var(--iress-progress-animation-type, var(--iress-g-animation-type, var(--iress-default-animation-type)));
+  --iress-transition-duration: var(--iress-progress-animation-duration, var(--iress-g-animation-duration, var(--iress-default-animation-duration)));
+  --iress-border-radius: var(--iress-progress-border-radius, var(--iress-g-small-border-radius, var(--iress-default-border-radius)));
+  --iress-divider-background-color: var(--iress-background-color, var(--iress-g-background-color, var(--iress-default-background-color)));
+  --iress-divider-width: var(--iress-progress-divider-width, 0);
+
+  background-color: var(--iress-inactive-background-color);
+  border-radius: var(--iress-border-radius);
+}
+
+.indicator {
+  background-color: var(--iress-active-background-color);
+  height: var(--iress-height);
+  transition-timing-function: var(--iress-transition-type);
+  transition-duration: var(--iress-transition-duration);
+  transition-property: width;
+  border-radius: var(--iress-border-radius);
+  border-inline-end: var(--iress-divider-width) solid var(--iress-divider-background-color);
+}

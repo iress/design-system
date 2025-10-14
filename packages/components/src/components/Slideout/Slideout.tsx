@@ -1,18 +1,25 @@
-import { cx } from '@/styled-system/css';
+import classNames from 'classnames';
+import {
+  type IressSlideoutProps,
+  type SlideoutInnerProps,
+  SlideoutMode,
+  SlideoutPosition,
+  SlideoutSize,
+  type SlideoutWithEnums,
+} from './Slideout.types';
 import { querySelectorDeep } from 'query-selector-shadow-dom';
 import {
   cloneElement,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
-  type ReactElement,
-  type ReactNode,
-  type MutableRefObject,
-  useCallback,
   type TransitionEvent,
 } from 'react';
 import {
+  FloatingFocusManager,
+  FloatingOverlay,
   FloatingPortal,
   type OpenChangeReason,
   useDismiss,
@@ -21,117 +28,20 @@ import {
   useRole,
   useTransitionStatus,
 } from '@floating-ui/react';
+import { timeStringToNumber } from '@helpers/transition/timeStringToNumber';
+import { GlobalCSSClass, PaddingSize } from '@/enums';
 import { idsLogger } from '@helpers/utility/idsLogger';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
-import {
-  SlideoutInner,
-  type SlideoutInnerProps,
-} from './components/SlideoutInner';
-import { slideout } from './Slideout.styles';
+import { SlideoutInner } from './components/SlideoutInner';
+
+import styles from './Slideout.module.scss';
+import pushElementStyles from './SlideoutPushElement.module.scss';
 import { useIdIfNeeded } from '../../hooks';
 import { IressText } from '../Text';
-import { type FloatingUIContainer, type IressStyledProps } from '@/types';
-import { usePushElement } from './hooks/usePushElement';
-import { splitCssProps } from '@/styled-system/jsx';
-import { GlobalCSSClass } from '@/enums';
-import { timeStringToNumber } from '@/helpers/transition/timeStringToNumber';
-import { useProviderSlideout } from './hooks/useProviderSlideout';
+import { useIDSProvidedSlideout } from './hooks/useIDSProvidedSlideout';
 
-export interface IressSlideoutProps extends IressStyledProps {
-  /**
-   * Content to be displayed within the slideout.
-   */
-  children?: ReactNode;
-
-  /**
-   * Screenreader text for close button.
-   * @default 'Close'
-   */
-  closeText?: string;
-
-  /**
-   * The container element to render the slideout into.
-   * By default, the slideout will render at the end of the document body.
-   */
-  container?: FloatingUIContainer;
-
-  /**
-   * When set to `true` the slideout will be visible.
-   * Use for uncontrolled slideouts.
-   */
-  defaultShow?: boolean;
-
-  /**
-   * The element that needs to be pushed relative to the slideout. This can be a string selector to match an existing element in the DOM, a html element, or a React reference.
-   * Will be ignored if `mode` is not set to `push` or if element does not exist.
-   */
-  eleToPush?: string | HTMLElement | MutableRefObject<HTMLElement | null>;
-
-  /**
-   * Panel to place slideout controls.
-   */
-  footer?: ReactNode;
-
-  /**
-   * Sets the heading for the slideout.
-   * If passed an element, it will render the element with an id, to ensure its connection to the slideout.
-   */
-  heading?: ReactElement | string;
-
-  /**
-   * Unique ID for the slideout. Use if you would like to open this slideout from anywhere in your app using the `useSlideout` hook.
-   */
-  id?: string;
-
-  /**
-   * Sets how the Slideout interacts with the content of the page.
-   * `overlay` overlays the page content, obscuring the content below.
-   * `push` will push the element (specified by `eleToPush`) across the page. `push` will revert back to `overlay` if `eleToPush` is not specified or if the screen size < 1200px.
-   * @default 'overlay'
-   */
-  mode?: 'overlay' | 'push';
-
-  /**
-   * Emitted when the slideout has opened or closed internally.
-   * Use for controlled slideouts.
-   */
-  onShowChange?: (show: boolean, reason?: OpenChangeReason) => void;
-
-  /**
-   * Emitted when the slideout has mounted, unmounted, opened or closed. Open and close occur before animation begins.
-   */
-  onStatus?: (status: 'unmounted' | 'initial' | 'open' | 'close') => void;
-
-  /**
-   * Emitted when the slideout has opened.
-   */
-  onEntered?: () => void;
-
-  /**
-   * Emitted when the slideout has closed.
-   */
-  onExited?: () => void;
-
-  /**
-   * Position of the slideout relative to the page. `left` or `right`.
-   * @default 'right'
-   */
-  position?: 'right' | 'left';
-
-  /**
-   * When set to `true` the slideout will be visible.
-   * Use for controlled slideouts.
-   */
-  show?: boolean;
-
-  /**
-   * Accepts a single `SlideoutSize`. Slideouts will display at 100% for mobile screens (<576px).
-   * @default 'sm'
-   */
-  size?: 'sm' | 'md';
-}
-
-export const IressSlideout = ({
+export const IressSlideout: SlideoutWithEnums = ({
+  backdrop,
   children,
   className,
   closeText = 'Close',
@@ -147,6 +57,7 @@ export const IressSlideout = ({
   onShowChange,
   onStatus,
   onTransitionEnd,
+  padding = 'md',
   position = 'right',
   show,
   size = 'sm',
@@ -157,11 +68,10 @@ export const IressSlideout = ({
     useState<boolean>(defaultShow);
   const durationRef = useRef<number>(240);
   const pushElement = useRef<HTMLElement | null | undefined>(null);
-  const provider = useProviderSlideout(restProps.id);
+  const provider = useIDSProvidedSlideout(restProps.id);
   const id = useIdIfNeeded({ id: restProps.id });
   const headingId = `${id}--heading`;
 
-  // Don't change to "??" as it will cause bugs with the provider
   // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const open = provider.opened || show || uncontrolledShow;
 
@@ -170,7 +80,7 @@ export const IressSlideout = ({
     _event?: Event,
     reason?: OpenChangeReason,
   ) => {
-    provider?.show?.(open);
+    provider.show(open);
     setUncontrolledShow(open);
     onShowChange?.(open, reason);
   };
@@ -181,19 +91,14 @@ export const IressSlideout = ({
   });
   const dismiss = useDismiss(floatingContext, {
     enabled: true,
-    outsidePress: false,
+    outsidePress: backdrop === true,
   });
-  const role = useRole(floatingContext);
+  const role = useRole(floatingContext, {
+    enabled: backdrop === true,
+  });
   const interactions = useInteractions([dismiss, role]);
   const { isMounted, status } = useTransitionStatus(floatingContext, {
     duration: durationRef.current,
-  });
-
-  const currentStyles = slideout({
-    position,
-    size,
-    status: status,
-    mode,
   });
 
   useEffect(() => {
@@ -209,17 +114,16 @@ export const IressSlideout = ({
   }, [status, onStatus]);
 
   useEffect(() => {
-    const determineElementToPush = (eleToPushValue: typeof eleToPush) => {
-      if (typeof eleToPushValue === 'string')
-        return querySelectorDeep(eleToPushValue);
-      if (eleToPushValue instanceof Element) return eleToPushValue;
-      return eleToPushValue?.current;
-    };
-
     if (mode === 'overlay') {
       pushElement.current = null;
     } else {
-      pushElement.current = determineElementToPush(eleToPush);
+      let element: HTMLElement | null | undefined;
+
+      if (typeof eleToPush === 'string') element = querySelectorDeep(eleToPush);
+      else if (eleToPush instanceof Element) element = eleToPush;
+      else element = eleToPush?.current;
+
+      pushElement.current = element;
     }
 
     return () => {
@@ -228,34 +132,60 @@ export const IressSlideout = ({
   }, [eleToPush, mode]);
 
   useEffect(() => {
-    if (status === 'initial' && floatingContext.refs.floating?.current) {
-      durationRef.current =
-        timeStringToNumber(
-          window
-            .getComputedStyle(floatingContext.refs.floating.current, null)
-            ?.getPropertyValue('--iress-transition-duration') || '.3s',
-        ) * 1.2;
+    if (status === 'initial') {
+      pushElement?.current?.classList.add(
+        pushElementStyles.slideoutPushElement,
+        pushElementStyles[position],
+        pushElementStyles[`size--${size}`],
+      );
+
+      if (floatingContext.refs.floating?.current) {
+        durationRef.current =
+          timeStringToNumber(
+            window
+              .getComputedStyle(floatingContext.refs.floating.current, null)
+              ?.getPropertyValue('--iress-transition-duration') || '.3s',
+          ) * 1.2;
+      }
     }
-  }, [floatingContext.refs.floating, status]);
+  }, [floatingContext.refs.floating, position, size, status]);
 
   useEffect(() => {
     if (status === 'open') {
       floatingContext.refs.floating?.current?.focus();
+      pushElement?.current?.classList.add(pushElementStyles.open);
     }
-  }, [floatingContext.refs.floating, status]);
+  }, [floatingContext.refs.floating, onEntered, status]);
 
-  const pushElementHookConfig = useMemo(
-    () => ({
-      element: pushElement.current ?? null,
-      isActive: mode === 'push',
-      position,
-      size,
-      status,
-    }),
-    [pushElement, mode, position, size, status],
-  );
+  useEffect(() => {
+    if (status === 'close') {
+      pushElement?.current?.classList.remove(pushElementStyles.open);
+    }
+  }, [onExited, status]);
 
-  usePushElement(pushElementHookConfig);
+  useEffect(() => {
+    if (
+      status === 'unmounted' &&
+      !pushElement?.current?.classList.contains(pushElementStyles.open)
+    ) {
+      pushElement?.current?.classList.remove(
+        pushElementStyles.slideoutPushElement,
+        pushElementStyles[position],
+        pushElementStyles[`size--${size}`],
+      );
+    }
+  }, [position, size, status]);
+
+  useEffect(() => {
+    if (status === 'open' && pushElement?.current) {
+      pushElement.current.classList.remove(
+        pushElementStyles['size--sm'],
+        pushElementStyles['size--md'],
+        pushElementStyles['size--lg'],
+      );
+      pushElement.current.classList.add(pushElementStyles[`size--${size}`]);
+    }
+  }, [size, status, pushElement]);
 
   const handleTransitionEnd = useCallback(
     (e: TransitionEvent<HTMLDivElement>) => {
@@ -302,19 +232,20 @@ export const IressSlideout = ({
 
   if (!isMounted) return null;
 
-  const slideoutClass = cx(
-    currentStyles.root,
-    className,
-    GlobalCSSClass.Slideout,
-    status === 'open' && GlobalCSSClass.SlideoutOpen,
-  );
-
-  const [styleProps, nonStyleProps] = splitCssProps(restProps);
-
   const slideoutInnerProps: SlideoutInnerProps = {
     'aria-labelledby': heading ? headingId : undefined,
     children,
-    className: slideoutClass,
+    className: classNames(
+      styles.slideout,
+      styles[status],
+      styles[position],
+      styles[`size--${size}`],
+      GlobalCSSClass.IgnoreStack,
+      {
+        [styles.push]: mode === 'push' && pushElement.current,
+        [`${className}`]: className && !backdrop,
+      },
+    ),
     closeText,
     'data-testid': dataTestid,
     footer,
@@ -322,13 +253,43 @@ export const IressSlideout = ({
     heading,
     id,
     onOpenChange,
-    ...(styleProps as IressStyledProps),
-    ...interactions.getFloatingProps(nonStyleProps),
+    padding,
+    ...interactions.getFloatingProps(restProps),
     onTransitionEnd: handleTransitionEnd,
   };
 
+  if (backdrop) {
+    const overlayStyles: Record<string, unknown> = {
+      position: 'var(--iress-position, fixed)',
+      ...style,
+    };
+
+    return (
+      <FloatingPortal root={container ?? provider?.container}>
+        <FloatingOverlay
+          className={classNames(
+            className,
+            styles.backdrop,
+            styles[status],
+            GlobalCSSClass.IgnoreStack,
+          )}
+          data-testid={propagateTestid(dataTestid, 'backdrop')}
+          lockScroll
+          style={overlayStyles}
+        >
+          <FloatingFocusManager
+            context={floatingContext}
+            initialFocus={floatingContext.refs.floating}
+          >
+            <SlideoutInner {...slideoutInnerProps} data-testid={dataTestid} />
+          </FloatingFocusManager>
+        </FloatingOverlay>
+      </FloatingPortal>
+    );
+  }
+
   return (
-    <FloatingPortal root={container}>
+    <FloatingPortal root={container ?? provider?.container}>
       <SlideoutInner
         {...slideoutInnerProps}
         style={style}
@@ -337,3 +298,15 @@ export const IressSlideout = ({
     </FloatingPortal>
   );
 };
+
+/** @deprecated IressSlideout.Mode will be removed in future versions of IDS. Please use the value directly. */
+IressSlideout.Mode = SlideoutMode;
+
+/** @deprecated IressSlideout.Padding will be removed in future versions of IDS. Please use the value directly. */
+IressSlideout.Padding = PaddingSize;
+
+/** @deprecated IressSlideout.Position will be removed in future versions of IDS. Please use the value directly. */
+IressSlideout.Position = SlideoutPosition;
+
+/** @deprecated IressSlideout.Size will be removed in future versions of IDS. Please use the value directly. */
+IressSlideout.Size = SlideoutSize;

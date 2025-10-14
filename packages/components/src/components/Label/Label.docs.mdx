@@ -1,8 +1,9 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
 } from '@iress-storybook/components';
+import { IressInline } from '../../main';
 import * as ComponentStories from './Label.stories';
 
 <Meta of={ComponentStories} />
@@ -30,6 +31,29 @@ To indicate that an input is required, you may use the `required` prop to distin
   story={ComponentStories.Required}
   stories={ComponentStories}
 />
+
+### Optional
+
+Alternatively, if the majority of your form inputs are required, you may wish to distinguish only the optional inputs. For this, use the `optional` prop.
+
+The `optional` prop also accepts a string, in which case it will replace the default "(optional)" label, useful when you need to support translation.
+
+**Note:** that the `optional` and `required` props are mutually exclusive, with `required` taking precedence.
+
+<IressInline
+  gutter={IressInline.Gutter.Md}
+  horizontalAlign={IressInline.HorizontalAlign.Around}
+>
+  <ComponentExample
+    story={ComponentStories.Optional}
+    stories={ComponentStories}
+  />
+
+  <ComponentExample
+    story={ComponentStories.OptionalText}
+    stories={ComponentStories}
+  />
+</IressInline>
 
 ### Hidden label
 

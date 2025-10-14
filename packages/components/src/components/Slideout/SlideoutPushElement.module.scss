@@ -1,0 +1,35 @@
+@use '../../styles/vars';
+
+.slideoutPushElement {
+  --iress-transition-duration: var(--iress-slideout-transition-duration, var(--iress-g-animation-duration, var(--iress-default-animation-duration)));
+  --iress-transition-type: var(--iress-slideout-transition-timing-function, var(--iress-g-animation-type, var(--iress-default-animation-type)));
+  --iress-transition: var(--iress-slideout-transition, all var(--iress-transition-duration) var(--iress-transition-type));
+
+  @media only screen and (min-width: 1200px) {
+    @media (prefers-reduced-motion: no-preference) {
+      transition: var(--iress-transition);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: all 0.01ms ease-in-out calc(var(--iress-transition-duration) / 2) !important;
+    }
+
+    &.right {
+      margin-inline-end: inherit;
+    }
+
+    &.left {
+      margin-inline-start: inherit;
+    }
+
+    @each $size in vars.$slideoutSizes {
+      &.open.right.size--#{$size} {
+        margin-inline-end: var(--iress-slideout-#{$size}-width, var(--iress-default-width--#{$size}));
+      }
+
+      &.open.left.size--#{$size} {
+        margin-inline-start: var(--iress-slideout-#{$size}-width, var(--iress-default-width--#{$size}));
+      }
+    }
+  }
+}

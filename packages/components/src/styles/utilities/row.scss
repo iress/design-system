@@ -1,0 +1,66 @@
+@use '../mixins';
+@use '../vars';
+
+.iress-u-row {
+  --iress-gutter: 0;
+  --iress-neg-gutter: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  margin-inline: calc(var(--iress-neg-gutter) / 2);
+  row-gap: var(--iress-gutter);
+
+  &:last-child .iress-u-col {
+    margin-block-end: 0;
+  }
+
+  &.iress--use-col-gap {
+    column-gap: var(--iress-gutter);
+  }
+}
+
+.iress-u-row * {
+  box-sizing: border-box;
+}
+
+/* Gutters */
+@each $gutter in vars.$gutters {
+  .iress--gutter--#{$gutter}.iress-u-row {
+    --iress-gutter: var(--iress-row-#{$gutter}-gutter, var(--iress-a-horizontal-spacing-#{$gutter}, var(--iress-g-spacing-#{$gutter})));
+    --iress-neg-gutter: calc(var(--iress-gutter) * -1);
+
+    &.iress--use-col-gap {
+      --iress-neg-gutter: 0;
+    }
+  }
+}
+
+/* Responsive Gutters */
+@each $bpName, $bpValue in vars.$breakpoints {
+  @if $bpName == 'xs' {
+    @include mixins.responsiveRowUtilityGutters($bpName);
+  } @else {
+    @media only screen and (#{$bpValue}) {
+      @include mixins.responsiveRowUtilityGutters($bpName);
+    }
+  }
+}
+
+/* Alignment */
+@each $hName, $hValue in vars.$horizontalAlignments {
+  .iress-u-row.iress--h-align--#{$hName} {
+    justify-content: $hValue;
+  }
+}
+
+@each $vName, $vValue in vars.$verticalAlignments {
+  .iress-u-row.iress--v-align--#{$vName} {
+    align-items: $vValue;
+  }
+}
+
+.iress-u-row.iress--stretch > .iress-u-col {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}

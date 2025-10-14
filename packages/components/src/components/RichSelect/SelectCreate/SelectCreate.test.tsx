@@ -2,15 +2,15 @@ import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { IressSelectCreate } from './SelectCreate';
 
+import menuStyles from '../../Menu/Menu.module.scss';
 import userEvent from '@testing-library/user-event';
-import { menu } from '@/components/Menu';
 
 describe('IressSelectCreate', () => {
   it('renders the component with the correct defaults', () => {
     render(<IressSelectCreate className="test-class" />);
 
-    const menuElement = screen.getByRole('menu');
-    expect(menuElement).toHaveClass('test-class', menu({ fluid: true }).root!);
+    const menu = screen.getByRole('menu');
+    expect(menu).toHaveClass('test-class', menuStyles.fluid);
 
     const menuItem = screen.getByRole('menuitem', { name: 'Add New option' });
     expect(menuItem).toBeInTheDocument();

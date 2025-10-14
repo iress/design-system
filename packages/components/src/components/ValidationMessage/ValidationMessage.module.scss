@@ -1,0 +1,51 @@
+.validationMessage {
+  --iress-danger-text-color: var(--iress-validation-message-danger-text-color, var(--iress-a-danger-text-color, var(--iress-g-danger-color, var(--iress-default-danger-color))));
+  --iress-warning-text-color: var(--iress-validation-message-warning-text-color, var(--iress-a-warning-text-color, var(--iress-g-warning-color, var(--iress-default-warning-color))));
+  --iress-success-text-color: var(--iress-validation-message-success-text-color, var(--iress-a-success-text-color, var(--iress-g-success-color, var(--iress-default-success-color))));
+  --iress-info-text-color: var(--iress-validation-message-info-text-color, var(--iress-a-info-text-color, var(--iress-g-info-color, var(--iress-default-info-color))));
+  --iress-prefix-font-weight: var(--iress-validation-message-prefix-font-weight, bold);
+  --iress-focus-box-shadow-size: var(--iress-g-focus-width, var(--iress-default-focus-size));
+  --iress-focus-box-shadow: 0 0 0 var(--iress-focus-box-shadow-size) var(--iress-focus-color);
+
+  display: block;
+}
+
+a.validationMessage {
+  --iress-link-text-color: var(--iress-scoped-text-color);
+  --iress-link-hover-text-color: var(--iress-link-text-color);
+
+  &:focus {
+    outline: 2px solid transparent;
+    box-shadow: var(--iress-focus-box-shadow);
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.prefix {
+  font-weight: var(--iress-prefix-font-weight);
+}
+
+.prefix,
+.message {
+  display: inline;
+}
+
+.danger:global(.iress-u-text.iress--danger) {
+  --iress-scoped-text-color: var(--iress-danger-text-color);
+}
+
+.warning:global(.iress-u-text.iress--warning) {
+  --iress-scoped-text-color: var(--iress-warning-text-color);
+}
+
+.success:global(.iress-u-text.iress--success) {
+  --iress-scoped-text-color: var(--iress-success-text-color);
+}
+
+.info:global(.iress-u-text.iress--info) {
+  --iress-scoped-text-color: var(--iress-info-text-color);
+}

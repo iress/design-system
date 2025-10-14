@@ -1,28 +1,22 @@
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { IressSelectBody } from './SelectBody';
-import { selectBody } from './SelectBody.styles';
+
+import styles from './SelectBody.module.scss';
 
 describe('IressSelectBody', () => {
   it('renders the component with the correct defaults', () => {
-    const classes = selectBody();
-
     render(
-      <IressSelectBody className="test-class" data-testid="select-body">
+      <IressSelectBody className="test-class" role="main">
         Contents
       </IressSelectBody>,
     );
 
-    const body = screen.getByTestId('select-body');
-    expect(body).toHaveClass('test-class');
-    if (classes.selectBody) {
-      expect(body).toHaveClass(classes.selectBody);
-    }
+    const body = screen.getByRole('main');
+    expect(body).toHaveClass('test-class', styles.selectBody);
 
     const contents = screen.getByText('Contents');
-    if (classes.children) {
-      expect(contents).toHaveClass(classes.children);
-    }
+    expect(contents).toHaveClass(styles.children);
   });
 
   describe('props', () => {

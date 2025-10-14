@@ -1,9 +1,7 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import {
-  IressSelectHeading,
-  type IressSelectHeadingProps,
-} from './SelectHeading';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressSelectHeading } from './SelectHeading';
 import { addToStorybookCategory } from '@iress-storybook/helpers';
+import { IressSelectHeadingProps } from './SelectHeading.types';
 
 type Story = StoryObj<typeof IressSelectHeading>;
 
@@ -17,7 +15,11 @@ export default {
       'prepend',
     ]),
     ...addToStorybookCategory<IressSelectHeadingProps>('Text props', [
+      'align',
+      'element',
+      'mode',
       'noGutter',
+      'variant',
     ]),
   },
 } as Meta<typeof IressSelectHeading>;

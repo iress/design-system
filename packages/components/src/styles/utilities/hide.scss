@@ -1,0 +1,137 @@
+/* Hidden content */
+.iress-hidden {
+  display: none !important;
+}
+
+.iress-sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+  border: 0;
+}
+
+/* Responsive display helpers */
+@media only screen and (max-width: 767px) {
+  .iress-hidden--mobile {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .iress-hidden--xs {
+    display: none !important;
+  }
+
+  .iress-sr-only--xs {
+    display: inline-block !important;
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+    border: 0;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 767px) {
+  .iress-hidden--sm {
+    display: none !important;
+  }
+
+  .iress-sr-only--sm {
+    display: inline-block !important;
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+    border: 0;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .iress-hidden--md {
+    display: none !important;
+  }
+
+  .iress-sr-only--md {
+    display: inline-block !important;
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+    border: 0;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1199px) {
+  .iress-hidden--lg {
+    display: none !important;
+  }
+
+  .iress-sr-only--lg {
+    display: inline-block !important;
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+    border: 0;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1499px) {
+  .iress-hidden--xl {
+    display: none !important;
+  }
+
+  .iress-sr-only--xl {
+    display: inline-block !important;
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+    border: 0;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .iress-hidden--xxl {
+    display: none !important;
+  }
+
+  .iress-sr-only--xxl {
+    display: inline-block !important;
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+    border: 0;
+  }
+}

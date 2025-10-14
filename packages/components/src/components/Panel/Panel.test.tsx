@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressPanel, IressPanelProps } from '.';
+import { IressPanel, IressPanelProps, PanelCssClass } from '.';
 import { GlobalCSSClass } from '@/enums';
 
 const TEST_ID = 'test-component';
@@ -22,29 +22,32 @@ describe('IressPanel', () => {
 
       const component = getByTestId(TEST_ID);
       expect(component).toHaveClass('test-class');
-      expect(component).not.toHaveClass('h_[100%]');
-      expect(component).not.toHaveClass('bdr_radius.000');
-      expect(component).toHaveClass('p_md');
-      expect(component).toHaveClass(GlobalCSSClass.Panel);
+      expect(component).toHaveClass(PanelCssClass.Base);
+      expect(component).not.toHaveClass(PanelCssClass.Stretch);
+      expect(component).toHaveClass(`${GlobalCSSClass.TextAlignBase}--inherit`);
+      expect(component).toHaveClass(`${PanelCssClass.Background}--default`);
+      expect(component).not.toHaveClass(PanelCssClass.NoBorderRadius);
+      expect(component).toHaveClass(`${GlobalCSSClass.Padding}--md`);
     });
 
     it('renders the correct classes with custom props', () => {
       const { getByTestId } = renderComponent({
         className: 'test-class',
-        bg: 'alt',
+        background: 'alt',
         noBorderRadius: true,
-        p: 'lg',
+        padding: 'lg',
         stretch: true,
         textAlign: 'center',
       });
 
       const component = getByTestId(TEST_ID);
       expect(component).toHaveClass('test-class');
-      expect(component).toHaveClass('stretch_true');
-      expect(component).toHaveClass('ta_center');
-      expect(component).toHaveClass('bg_alt');
-      expect(component).toHaveClass('bdr_radius.000');
-      expect(component).toHaveClass('p_lg');
+      expect(component).toHaveClass(PanelCssClass.Base);
+      expect(component).toHaveClass(PanelCssClass.Stretch);
+      expect(component).toHaveClass(`${GlobalCSSClass.TextAlignBase}--center`);
+      expect(component).toHaveClass(`${PanelCssClass.Background}--alt`);
+      expect(component).toHaveClass(PanelCssClass.NoBorderRadius);
+      expect(component).toHaveClass(`${GlobalCSSClass.Padding}--lg`);
     });
   });
 

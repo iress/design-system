@@ -1,0 +1,46 @@
+@use 'Popover.vars.module';
+
+.popover {
+  --focus-spacer: var(--iress-g-focus-width, var(--iress-default-focus-size));
+
+  display: inline-block;
+
+  &:has(:global(.iress--fluid)) {
+    display: block;
+  }
+}
+
+.hasInputActivator {
+  display: block;
+
+  .content {
+    min-width: calc(12 * var(--iress-g-spacing-rem));
+  }
+}
+
+.activator {
+  display: block;
+}
+
+.content {
+  background-color: var(--iress-background-color);
+  border: var(--iress-border-width) solid var(--iress-border-color);
+  border-radius: var(--iress-popper-border-radius);
+  max-width: var(--iress-max-width);
+  max-height: var(--iress-max-height);
+  width: var(--iress-width);
+  box-shadow: var(--iress-box-shadow-size) var(---iress-box-shadow-color);
+  z-index: 1020;
+  display: block;
+  overflow-y: auto;
+  color: var(--iress-text-color);
+
+  &:focus {
+    outline: none;
+  }
+
+  &[hidden],
+  &:empty {
+    display: none;
+  }
+}

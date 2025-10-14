@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
-import { button, IressCloseButton } from '..';
+import { IressCloseButton } from '..';
+import styles from './CloseButton.module.scss';
 import { axe } from 'jest-axe';
-import { GlobalCSSClass } from '@/enums';
 
 describe('IressCloseButton', () => {
   it('should render the component with the correct text and classes', () => {
@@ -10,10 +10,7 @@ describe('IressCloseButton', () => {
     );
 
     const component = getByTestId('test');
-    expect(component).toHaveClass(
-      `test-class ${button({ mode: 'tertiary' }).root}`,
-      GlobalCSSClass.CloseButton,
-    );
+    expect(component).toHaveClass(`test-class ${styles.closeButton}`);
   });
 
   it('should render the correct screen reader text on the icon', () => {

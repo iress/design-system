@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressTable } from '.';
 import { IressBadge } from '../Badge';
 import { IressButton } from '../Button';
@@ -15,7 +15,8 @@ import { TableSorting } from './mocks/TableSorting';
 import TableSortingSource from './mocks/TableSorting.tsx?raw';
 import { TableSortingFn } from './mocks/TableSortingFn';
 import TableSortingFnSource from './mocks/TableSortingFn.tsx?raw';
-import { type Row } from '@tanstack/react-table';
+import { Row } from '@tanstack/react-table';
+import { CSSProperties } from 'react';
 
 type Story = StoryObj<typeof IressTable>;
 
@@ -30,7 +31,6 @@ export default {
       sortProps: false,
     }),
   },
-  tags: ['updated'],
 } as Meta<typeof IressTable>;
 
 export const AutomaticColumns: Story = {
@@ -127,24 +127,24 @@ export const Alignment: Story = {
       {
         key: 'investment_name',
         label: 'Investment (left)',
-        textAlign: 'left',
+        align: 'left',
       },
       {
         key: 'cost',
         label: 'Cost (center)',
-        textAlign: 'center',
+        align: 'center',
         format: 'currency',
       },
       {
         key: 'investmentDate',
         label: 'Date (center)',
-        textAlign: 'center',
+        align: 'center',
         format: 'date',
       },
       {
         key: 'totalPercentage',
         label: 'Share (right)',
-        textAlign: 'right',
+        align: 'right',
         format: 'percent',
       },
     ],
@@ -183,21 +183,6 @@ export const HighlightOnHover: Story = {
   args: {
     ...AutomaticColumns.args,
     hover: true,
-  },
-};
-
-export const Alternate: Story = {
-  args: {
-    ...AutomaticColumns.args,
-    alternate: true,
-  },
-};
-
-export const RemoveRowBorders: Story = {
-  args: {
-    ...AutomaticColumns.args,
-    alternate: true,
-    removeRowBorders: true,
   },
 };
 
@@ -264,7 +249,7 @@ export const EmptyState: Story = {
       {
         key: 'cost',
         label: 'Cost',
-        textAlign: 'right',
+        align: 'right',
         format: 'currency',
       },
     ],
@@ -313,10 +298,16 @@ export const RowProps: Story = {
   args: {
     ...AutomaticColumns.args,
     rowProps: (row: Row<{ cost?: number }>) => ({
-      bg:
-        row.original.cost && row.original.cost > 30000
-          ? 'colour.neutral.10'
-          : 'colour.system.success.surface',
+      style: {
+        '--iress-row-even-background-color':
+          row.original.cost && row.original.cost > 30000
+            ? 'white'
+            : 'lightblue',
+        '--iress-row-odd-background-color':
+          row.original.cost && row.original.cost > 30000
+            ? 'white'
+            : 'lightblue',
+      } as CSSProperties,
     }),
   },
   parameters: {

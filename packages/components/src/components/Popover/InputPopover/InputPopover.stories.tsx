@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressInputPopover } from './InputPopover';
@@ -8,7 +8,11 @@ type Story = StoryObj<typeof IressInputPopover>;
 
 const childrenOptions = {
   none: null,
-  basic: <IressPanel>A little more information about this area.</IressPanel>,
+  basic: (
+    <IressPanel className="iress-u-text">
+      A little more information about this area.
+    </IressPanel>
+  ),
   menu: (
     <IressMenu aria-label="Selectable listbox">
       <IressMenuItem value={0}>Item 1</IressMenuItem>

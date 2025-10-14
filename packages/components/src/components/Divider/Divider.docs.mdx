@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -28,8 +28,6 @@ Use the `vertical` prop to change the divider from horizontal to vertical.
 
 ### Gutter
 
-You can customise the gutter by using the `my` prop. If the divider is vertical, use the `mx` prop instead.
-
-By default, dividers do not have a gutter, allowing them to adapt to `<IressStack>` and `<IressInline>` layouts.
+You can customise the gutter by using the `gutter` prop. By default, the divider uses the theme's default spacing as the gutter.
 
 <ComponentExample story={ComponentStories.Gutter} stories={ComponentStories} />

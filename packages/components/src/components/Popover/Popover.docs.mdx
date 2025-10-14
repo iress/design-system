@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -60,13 +60,17 @@ The popover panel's position will change dynamically based on the amount of spac
 
 Occasionally, you may have more information to display than the width set by the theme can comfortably show.
 
+This is where the `--iress-width` CSS token come in, it will allow you to set the width for the popover panel. For better results, its recommended to use it with the `--iress-max-width` CSS token, to allow your popovers to be responsive.
+
+**Note:** The `width` prop has been deprecated in favour of the CSS tokens.
+
 <ComponentExample story={ComponentStories.Width} stories={ComponentStories} />
 
 ### Overflow
 
 Popovers can contain a wide variety of different content, including components that use popovers themselves (like Combobox). This can cause issues with overflowing content, so by default we allow popovers to grow in height based on their content.
 
-If you need to fix the height of a popover, you can set a maximum height using the `maxHeight` and `overflowY` css on your popover's `contentStyle` prop.
+If you need to fix the height of a popover, you can set a maximum height using the `--iress-max-height` theme token on your popover. You'll also need to change the overflow behaviour by setting the `--iress-overflow-y` theme token:
 
 <ComponentExample
   story={ComponentStories.Overflow}

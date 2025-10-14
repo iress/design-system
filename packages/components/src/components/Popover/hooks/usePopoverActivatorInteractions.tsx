@@ -1,24 +1,30 @@
-import { type KeyboardEvent, type FocusEvent, useCallback } from 'react';
-import { type IressUnstyledProps } from '@/types';
-import { type PopoverHookReturn } from './usePopover';
+import {
+  type HTMLAttributes,
+  type KeyboardEvent,
+  type FocusEvent,
+  useCallback,
+} from 'react';
+import { type PopoverContextValue } from '../Popover.types';
+import { type IressHTMLAttributes } from '@/main';
 
 /**
  * This adds additional props to the activator to handle keyboard interactions with a virtually focused item.
  *
- * @param {PopoverHookReturn} popover the popover context
+ * @param {PopoverContextValue} popover the popover context
  * @param {HTMLAttributes<HTMLElement>} referenceProps the props of the activator, allowing them to be drilled down to the virtual reference
  *
  * @returns {IressHTMLAttributes} the props to be passed to the floating content
  */
 export const usePopoverActivatorInteractions = <
-  E extends keyof HTMLElementTagNameMap = 'div',
+  TElement extends HTMLElement = HTMLElement,
+  TProps extends HTMLAttributes<TElement> = IressHTMLAttributes<TElement>,
 >(
-  popover?: PopoverHookReturn,
-  referenceProps?: Omit<IressUnstyledProps<E>, 'value'>,
+  popover?: PopoverContextValue,
+  referenceProps?: TProps,
 ) => {
   // This will call the onBlur method of the currently virtual focused node.
   const handleBlur = useCallback(
-    (e: FocusEvent<never>) => {
+    (e: FocusEvent<TElement>) => {
       referenceProps?.onBlur?.(e);
     },
     [referenceProps],
@@ -27,14 +33,14 @@ export const usePopoverActivatorInteractions = <
   // This will call appropriate methods of the currently virtual focused node.
   // It will also close the popover if the user presses the arrow key on the first item and open it if they press the arrow down key on the activator.
   const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLElementTagNameMap[E]>) => {
+    (e: KeyboardEvent<TElement>) => {
       if (popover?.show) {
         handleKeyDownWhenShown(e, popover);
       } else if (popover) {
         handleKeyDownWhenHidden(e, popover);
       }
 
-      referenceProps?.onKeyDown?.(e as KeyboardEvent<never>);
+      referenceProps?.onKeyDown?.(e);
     },
     [referenceProps, popover],
   );
@@ -47,10 +53,10 @@ export const usePopoverActivatorInteractions = <
 
 const handleKeyDownWhenShown = (
   e: KeyboardEvent<HTMLElement>,
-  popover?: PopoverHookReturn,
+  popover?: PopoverContextValue,
 ) => {
   const popoverIsVirtual = popover?.getVirtualFocus !== undefined;
-  popover?.getVirtualFocus?.()?.onKeyDown?.(e);
+  popover?.getVirtualFocus?.()?.onKeyDown?.(e, popover);
 
   if (e.key === 'Tab') {
     popover?.getVirtualFocus?.()?.onBlur?.(e);
@@ -92,7 +98,7 @@ const handleKeyDownWhenShown = (
 
 const handleKeyDownWhenHidden = (
   e: KeyboardEvent<HTMLElement>,
-  popover?: PopoverHookReturn,
+  popover?: PopoverContextValue,
 ) => {
   if (e.key === 'ArrowDown') {
     popover?.setShowWithReason(true, e.nativeEvent, 'focus');

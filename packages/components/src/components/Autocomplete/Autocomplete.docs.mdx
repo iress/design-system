@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -116,7 +116,7 @@ The `autoSelect` prop will automatically select the highlighted option when the 
 
 Autocomplete extends `IressInput`, hence it has the same properties as `IressInput`.
 
-It does have some defaults to help with user experience. `append` automatically has a search icon, and `clearable` is set to true by default.
+It does have some defaults to help with user experience. `append` automatically has a search icon, and `clearable` and `watermark` are set to true by default.
 
 <ComponentExample
   story={ComponentStories.InputProps}
@@ -180,14 +180,14 @@ The result limits will also affect the number of initial options displayed, if t
   stories={ComponentStories}
 />
 
-### Read only
+### Readonly
 
-The `readOnly` prop can be set to `true` to prevent the user from changing the value of the autocomplete. This will change the input to a custom read-only style and the user will not be able to interact with the input.
+The `readonly` prop can be set to `true` to prevent the user from changing the value of the autocomplete. This will change the input to a custom read-only style and the user will not be able to interact with the input.
 
 If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](?path=/docs/components-readonly--docs).
 
 <ComponentExample
-  story={ComponentStories.ReadOnly}
+  story={ComponentStories.Readonly}
   stories={ComponentStories}
 />
 

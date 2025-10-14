@@ -1,12 +1,12 @@
-import { type StoryObj, type Meta } from '@storybook/react-vite';
+import { StoryObj, Meta } from '@storybook/react';
 import { IressFieldGroup } from './FieldGroup';
 import {
   IressButton,
   IressField,
-  type IressFieldProps,
+  IressFieldProps,
   IressIcon,
   IressInput,
-  type IressInputProps,
+  IressInputProps,
   IressPanel,
   IressPopover,
   IressReadonly,
@@ -15,14 +15,13 @@ import {
 } from '@/main';
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
-import { type ComponentProps } from 'react';
 
 interface FieldAndInputProps {
   field: IressFieldProps;
   input: IressInputProps;
 }
 
-type IressFieldGroupPropsAndCustomArgs = ComponentProps<
+type IressFieldGroupPropsAndCustomArgs = React.ComponentProps<
   typeof IressFieldGroup
 > & {
   inputs: FieldAndInputProps[];
@@ -85,7 +84,6 @@ export default {
     },
   },
   component: IressFieldGroup,
-  tags: ['updated'],
 } as Meta<typeof IressFieldGroup>;
 
 export const Default: Story = {
@@ -150,7 +148,7 @@ export const InlineSink: Story = {
           <IressInput id="lastName" required />
         </IressField>
 
-        <IressButton type="submit">Submit</IressButton>
+        <IressButton type={IressButton.Type.Submit}>Submit</IressButton>
 
         <IressPopover
           activator={
@@ -191,7 +189,7 @@ export const InlineAndReadonly: Story = {
           <IressReadonly id="lastName" value="Skywalker" />
         </IressField>
 
-        <IressButton type="submit">Submit</IressButton>
+        <IressButton type={IressButton.Type.Submit}>Submit</IressButton>
 
         <IressPopover
           activator={

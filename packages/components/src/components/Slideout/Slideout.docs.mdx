@@ -1,4 +1,4 @@
-import { Meta, Markdown } from '@storybook/addon-docs/blocks';
+import { Meta, Markdown } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -6,7 +6,6 @@ import {
 import * as ComponentStories from './Slideout.stories';
 import * as ProviderStories from './SlideoutProvider.stories';
 import { SlideoutTestDiff } from './mocks/SlideoutTestDiff';
-import { IressButton } from '../../main';
 
 <Meta of={ComponentStories} />
 
@@ -70,21 +69,28 @@ Slideouts can appear from the left or the right of the screen. The default is ri
   stories={ComponentStories}
 />
 
+### Backdrop
+
+Slideouts can be used with or without a backdrop. Using a backdrop places more emphasis on the slideout, but prevents users from accessing content on the rest of the page. If your users need to interact with page content (for example to copy information), don't use a backdrop.
+
+The slideout backdrop works in the same way as the modal backdrop; clicking on the backdrop will close the slideout.
+
+<ComponentExample
+  story={ComponentStories.Backdrop}
+  stories={ComponentStories}
+/>
+
 ### Size
 
-The width of your slideout can be set using the `size` prop. By default it is `sm`, but it can be made larger by setting `size` to `md`.
+The width of your slideout can be set using the `size` prop. By default it is `sm`, but it can be made larger by setting `size` to `md` or `lg`.
 
 <ComponentExample story={ComponentStories.Size} stories={ComponentStories} />
 
 ### Padding
 
-Slideout padding now is a global styling prop.
+Slideout padding follows the panel padding convention. It can be set to either `none`, `sm`, `md` or `lg`, and defaults to `md` if not set.
 
-<p>
-  <IressButton href="/?path=/docs/styling-props-spacing--docs#padding">
-    Learn more
-  </IressButton>
-</p>
+<ComponentExample story={ComponentStories.Padding} stories={ComponentStories} />
 
 ### Footer
 
@@ -94,9 +100,9 @@ The `footer` prop is used to set content that should appear underneath the main 
 
 ### Absolute position slideouts
 
-By default, slideout is set to `position: fixed` which means it will appear from the edge of the browser window. By setting the `position: 'absolute'` in custom inline style, the slideout can appear from the edge of its closest relative positioned container. You will also need to set the `container` prop to the a reference of the relatively positioned container, so it can appear in the correct place in the DOM.
+By default, slideout is set to `position: fixed` which means it will appear from the edge of the browser window. By setting the `--iress-position` css variable to `absolute` the slideout can appear from the edge of its closest relative positioned container. You will also need to set the `container` prop to the a reference of the relatively positioned container, so it can appear in the correct place in the DOM.
 
-If you're using an absolutely positioned slideout you may also want to change the vertical and horizontal positioning. By default this will be the top left or top right of the container, but you can use inline style `style={{top: '30px', height: 'calc(100% - 30px)'}}` to adjust that if you need to.
+If you're using an absolutely positioned slideout you may also want to change the vertical and horizontal positioning. By default this will be the top left or top right of the container, but you can use `--iress-offset-top` and `--iress-initial-offset` to adjust that if you need to.
 
 <ComponentExample
   story={ComponentStories.AbsolutePosition}

@@ -1,5 +1,5 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { type FC } from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+import { FC } from 'react';
 import { StartUpLoading } from './StartUpLoading';
 import { IressText } from '@/main';
 
@@ -18,13 +18,9 @@ export const StartUp: Story = {
   args: {
     pattern: 'start-up',
     messageList: {
-      0: (
-        <IressText color="colour.neutral.70">
-          Switching applications...
-        </IressText>
-      ),
+      0: <IressText mode="muted">Switching applications...</IressText>,
       4500: (
-        <IressText color="colour.neutral.70">
+        <IressText mode="muted">
           This is taking longer than expected...
         </IressText>
       ),

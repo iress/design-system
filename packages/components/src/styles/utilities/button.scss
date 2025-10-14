@@ -1,0 +1,519 @@
+@use '../mixins';
+@use '../vars';
+
+/**
+*---------------------------------------------------
+* Button variables
+*---------------------------------------------------
+**/
+
+.iress-u-button {
+  --iress-font-family: var(--iress-button-font-family, var(--iress-a-form-font-family, var(--iress-g-font-family)));
+  --iress-font-size: var(--iress-button-font-size);
+  --iress-font-weight: var(--iress-button-font-weight, var(--iress-g-font-weight, normal));
+  --iress-line-height: var(--iress-button-line-height, var(--iress-a-form-line-height, var(--iress-g-line-height, 1.5)));
+  --iress-text-align: center;
+  --iress-padding-x: var(--iress-button-padding-x, var(--iress-g-spacing-sm));
+  --iress-padding-y: var(--iress-button-padding-y, calc(var(--iress-g-spacing-xs) / 2));
+  --iress-border-width: var(--iress-button-border-width, var(--iress-a-button-border-width, var(--iress-g-border-width, var(--iress-default-border-width))));
+  --iress-border-radius: var(--iress-button-border-radius, var(--iress-a-button-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius))));
+  --iress-transition-hover-duration: var(--iress-button-transition-hover-duration, var(--iress-g-transition-hover-duration, var(--iress-default-hover-transition-duration)));
+  --iress-transition-hover-type: var(--iress-button-transition-hover-type, var(--iress-g-transition-hover-type, var(--iress-default-hover-transition-type)));
+  --iress-focus-background-color: var(--iress-hover-background-color);
+  --iress-focus-background-image: var(--iress-hover-background-image);
+  --iress-focus-border-color: var(--iress-focus-color);
+  --iress-focus-box-shadow-size: var(--iress-g-focus-width, var(--iress-default-focus-size));
+  --iress-focus-box-shadow: 0 0 0 var(--iress-focus-box-shadow-size) var(--iress-focus-color);
+  --iress-inset-focus-box-shadow: inset 0 0 0 var(--iress-focus-box-shadow-size) var(--iress-focus-color);
+  --iress-focus-text-color: var(--iress-hover-text-color);
+  --iress-min-height: var(--iress-input-min-height, var(--iress-default-min-height));
+  --iress-slot-margin-x: var(--iress-button-slot-margin-x, var(--iress-g-spacing-sm));
+  --iress-active-animation: var(--iress-button-animation-active, 0.1s ease-out iress-button-fill);
+
+  /** Button mode variables
+  *---------------------------------------------------
+  */
+
+  /* Primary */
+  &.iress--mode--primary {
+    --iress-background-color: var(--iress-button-primary-background-color, var(--iress-g-primary-color, var(--iress-default-primary-color)));
+    --iress-background-image: var(--iress-button-primary-background-image, none);
+    --iress-text-color: var(--iress-button-primary-text-color, var(--iress-g-primary-contrast-color, var(--iress-default-text-color--alt)));
+    --iress-border-color: var(--iress-button-primary-border-color, var(--iress-background-color));
+    --iress-box-shadow-size: var(--iress-button-primary-box-shadow-size, 0 0);
+    --iress-box-shadow-color: var(--iress-button-primary-box-shadow-color, transparent);
+    --iress-box-shadow: var(--iress-box-shadow-size) var(--iress-box-shadow-color);
+    --iress-text-decoration: var(--iress-button-primary-text-decoration, none);
+
+    /* Primary Hover */
+    --iress-hover-background-color: var(
+      --iress-button-primary-hover-background-color,
+      var(--iress-g-primary-hover-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)))
+    );
+    --iress-hover-background-image: var(--iress-button-primary-hover-background-image, none);
+    --iress-hover-text-color: var(--iress-button-primary-hover-text-color, var(--iress-g-primary-contrast-color, var(--iress-g-hover-text-color, var(--iress-default-text-color--hover))));
+    --iress-hover-border-color: var(--iress-button-primary-hover-border-color, var(--iress-hover-background-color));
+    --iress-hover-box-shadow-size: var(--iress-button-primary-hover-box-shadow-size, 0 0);
+    --iress-hover-box-shadow-color: var(--iress-button-primary-hover-box-shadow-color, transparent);
+    --iress-hover-box-shadow: var(--iress-hover-box-shadow-size) var(--iress-hover-box-shadow-color);
+    --iress-hover-text-decoration: var(--iress-button-primary-hover-text-decoration, none);
+
+    /* Primary Active */
+    --iress-active-background-color: var(--iress-button-primary-active-background-color, var(--iress-background-color));
+    --iress-active-background-image: var(--iress-button-primary-active-background-image, linear-gradient(to right, var(--iress-active-background-color), var(--iress-active-background-color) 100%));
+    --iress-active-text-color: var(--iress-button-primary-active-text-color, var(--iress-text-color));
+    --iress-active-border-color: var(--iress-button-primary-active-border-color, var(--iress-active-background-color));
+    --iress-active-box-shadow-size: var(--iress-button-primary-active-box-shadow-size, 0 0);
+    --iress-active-box-shadow-color: var(--iress-button-primary-active-box-shadow-color, transparent);
+    --iress-active-box-shadow: var(--iress-active-box-shadow-size) var(--iress-active-box-shadow-color);
+    --iress-active-text-decoration: var(--iress-button-primary-active-text-decoration, none);
+  }
+
+  /* Secondary */
+  &.iress--mode--secondary {
+    --iress-background-color: var(--iress-button-secondary-background-color, var(--iress-g-background-color, transparent));
+    --iress-background-image: var(--iress-button-secondary-background-image, none);
+    --iress-text-color: var(--iress-button-secondary-text-color, var(--iress-g-primary-color, var(--iress-default-primary-color)));
+    --iress-border-color: var(--iress-button-secondary-border-color, var(--iress-g-primary-color, var(--iress-default-primary-color)));
+    --iress-box-shadow-size: var(--iress-button-secondary-box-shadow-size, 0 0);
+    --iress-box-shadow-color: var(--iress-button-secondary-box-shadow-color, transparent);
+    --iress-box-shadow: var(--iress-box-shadow-size) var(--iress-box-shadow-color);
+    --iress-text-decoration: var(--iress-button-secondary-text-decoration, none);
+
+    /* Secondary Hover */
+    --iress-hover-background-color: var(--iress-button-secondary-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)));
+    --iress-hover-background-image: var(--iress-button-secondary-hover-background-image, none);
+    --iress-hover-text-color: var(--iress-button-secondary-hover-text-color, var(--iress-g-hover-text-color, var(--iress-default-text-color--hover)));
+    --iress-hover-border-color: var(--iress-button-secondary-hover-border-color, var(--iress-border-color));
+    --iress-hover-box-shadow-size: var(--iress-button-secondary-hover-box-shadow-size, 0 0);
+    --iress-hover-box-shadow-color: var(--iress-button-secondary-hover-box-shadow-color, transparent);
+    --iress-hover-box-shadow: var(--iress-hover-box-shadow-size) var(--iress-hover-box-shadow-color);
+    --iress-hover-text-decoration: var(--iress-button-secondary-hover-text-decoration, none);
+
+    /* Secondary Active */
+    --iress-active-background-color: var(--iress-button-secondary-active-background-color, var(--iress-background-color));
+    --iress-active-background-image: var(--iress-button-secondary-active-background-image, linear-gradient(to right, var(--iress-active-background-color), var(--iress-active-background-color) 100%));
+    --iress-active-text-color: var(--iress-button-secondary-active-text-color, var(--iress-text-color));
+    --iress-active-border-color: var(--iress-button-secondary-active-border-color, var(--iress-active-background-color));
+    --iress-active-box-shadow-size: var(--iress-button-secondary-active-box-shadow-size, 0 0);
+    --iress-active-box-shadow-color: var(--iress-button-secondary-active-box-shadow-color, transparent);
+    --iress-active-box-shadow: var(--iress-active-box-shadow-size) var(--iress-active-box-shadow-color);
+    --iress-active-text-decoration: var(--iress-button-secondary-active-text-decoration, none);
+  }
+
+  /* Tertiary */
+  &.iress--mode--tertiary {
+    --iress-background-color: var(--iress-button-tertiary-background-color, transparent);
+    --iress-background-image: var(--iress-button-tertiary-background-image, none);
+    --iress-text-color: var(--iress-button-tertiary-text-color, var(--iress-g-link-text-color, var(--iress-default-link-color)));
+    --iress-border-color: var(--iress-button-tertiary-border-color, var(--iress-background-color));
+    --iress-box-shadow-size: var(--iress-button-tertiary-box-shadow-size, 0 0);
+    --iress-box-shadow-color: var(--iress-button-tertiary-box-shadow-color, transparent);
+    --iress-box-shadow: var(--iress-box-shadow-size) var(--iress-box-shadow-color);
+    --iress-text-decoration: var(--iress-button-tertiary-text-decoration, none);
+
+    /* Tertiary Hover */
+    --iress-hover-background-color: var(--iress-button-tertiary-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)));
+    --iress-hover-background-image: var(--iress-button-tertiary-hover-background-image, none);
+    --iress-hover-text-color: var(--iress-button-tertiary-hover-text-color, var(--iress-g-hover-text-color, var(--iress-default-text-color--hover)));
+    --iress-hover-border-color: var(--iress-button-tertiary-hover-border-color, var(--iress-hover-background-color));
+    --iress-hover-box-shadow-size: var(--iress-button-tertiary-hover-box-shadow-size, 0 0);
+    --iress-hover-box-shadow-color: var(--iress-button-tertiary-hover-box-shadow-color, transparent);
+    --iress-hover-box-shadow: var(--iress-hover-box-shadow-size) var(--iress-hover-box-shadow-color);
+    --iress-hover-text-decoration: var(--iress-button-tertiary-hover-text-decoration, none);
+
+    /* Tertiary Active */
+    --iress-active-background-color: var(--iress-button-tertiary-active-background-color, var(--iress-background-color));
+    --iress-active-background-image: var(--iress-button-tertiary-active-background-image, none);
+    --iress-active-text-color: var(--iress-button-tertiary-active-text-color, var(--iress-text-color));
+    --iress-active-border-color: var(--iress-button-tertiary-active-border-color, var(--iress-active-background-color));
+    --iress-active-box-shadow-size: var(--iress-button-tertiary-active-box-shadow-size, 0 0);
+    --iress-active-box-shadow-color: var(--iress-button-tertiary-active-box-shadow-color, transparent);
+    --iress-active-box-shadow: var(--iress-active-box-shadow-size) var(--iress-active-box-shadow-color);
+    --iress-active-text-decoration: var(--iress-button-tertiary-active-text-decoration, none);
+  }
+
+  /* Link */
+  &.iress--mode--link {
+    --iress-background-color: var(--iress-button-link-background-color, transparent);
+    --iress-background-image: var(--iress-button-link-background-image, none);
+    --iress-text-color: var(--iress-button-link-text-color, var(--iress-g-link-text-color, var(--iress-default-link-color)));
+    --iress-border-color: var(--iress-button-link-border-color, transparent);
+    --iress-box-shadow-size: var(--iress-button-link-box-shadow-size, 0 0);
+    --iress-box-shadow-color: var(--iress-button-link-box-shadow-color, transparent);
+    --iress-box-shadow: var(--iress-box-shadow-size) var(--iress-box-shadow-color);
+    --iress-text-decoration: var(--iress-button-link-text-decoration, underline);
+
+    /* Link Hover */
+    --iress-hover-background-color: var(--iress-button-link-hover-background-color, transparent);
+    --iress-hover-background-image: var(--iress-button-link-hover-background-image, none);
+    --iress-hover-text-color: var(--iress-button-link-hover-text-color, var(--iress-a-link-hover-text-color, var(--iress-text-color)));
+    --iress-hover-border-color: var(--iress-button-link-hover-border-color, transparent);
+    --iress-hover-box-shadow-size: var(--iress-button-link-hover-box-shadow-size, 0 0);
+    --iress-hover-box-shadow-color: var(--iress-button-link-hover-box-shadow-color, transparent);
+    --iress-hover-box-shadow: var(--iress-hover-box-shadow-size) var(--iress-hover-box-shadow-color);
+    --iress-hover-text-decoration: var(--iress-button-link-hover-text-decoration, none);
+
+    /* Link Active */
+    --iress-active-background-color: var(--iress-button-link-active-background-color, transparent);
+    --iress-active-background-image: var(--iress-button-link-active-background-image, none);
+    --iress-active-text-color: var(--iress-button-link-active-text-color, var(--iress-a-link-active-text-color, var(--iress-text-color)));
+    --iress-active-border-color: var(--iress-button-link-active-border-color, transparent);
+    --iress-active-box-shadow-size: var(--iress-button-link-active-box-shadow-size, 0 0);
+    --iress-active-box-shadow-color: var(--iress-button-link-active-box-shadow-color, transparent);
+    --iress-active-box-shadow: var(--iress-active-box-shadow-size) var(--iress-active-box-shadow-color);
+    --iress-active-text-decoration: var(--iress-button-link-active-text-decoration, none);
+  }
+
+  &.iress--mode--danger {
+    --iress-background-color: var(--iress-button-danger-background-color, transparent);
+    --iress-background-image: var(--iress-button-danger-background-image, none);
+    --iress-text-color: var(--iress-button-danger-text-color, var(--iress-a-danger-text-color, var(--iress-g-danger-color, var(--iress-default-danger-color))));
+    --iress-border-color: var(--iress-button-danger-border-color, var(--iress-a-danger-border-color, var(--iress-g-danger-color, var(--iress-default-danger-color))));
+    --iress-box-shadow-size: var(--iress-button-danger-box-shadow-size, 0 0);
+    --iress-box-shadow-color: var(--iress-button-danger-box-shadow-color, transparent);
+    --iress-box-shadow: var(--iress-box-shadow-size) var(--iress-box-shadow-color);
+    --iress-text-decoration: var(--iress-button-danger-text-decoration, none);
+
+    /* Danger Hover */
+    --iress-hover-background-color: var(
+      --iress-button-danger-hover-background-color,
+      var(--iress-a-danger-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)))
+    );
+    --iress-hover-background-image: var(--iress-button-danger-hover-background-image, none);
+    --iress-hover-text-color: var(--iress-button-danger-hover-text-color, var(--iress-a-danger-hover-text-color, var(--iress-g-hover-text-color, var(--iress-default-text-color--hover))));
+    --iress-hover-border-color: var(--iress-button-danger-hover-border-color, var(--iress-border-color));
+    --iress-hover-box-shadow-size: var(--iress-button-danger-hover-box-shadow-size, 0 0);
+    --iress-hover-box-shadow-color: var(--iress-button-danger-hover-box-shadow-color, transparent);
+    --iress-hover-box-shadow: var(--iress-hover-box-shadow-size) var(--iress-hover-box-shadow-color);
+    --iress-hover-text-decoration: var(--iress-button-danger-hover-text-decoration, none);
+
+    /* Danger Active */
+    --iress-active-background-color: var(--iress-button-danger-active-background-color, var(--iress-background-color));
+    --iress-active-background-image: var(--iress-button-danger-active-background-image, linear-gradient(to right, var(--iress-active-background-color), var(--iress-active-background-color) 100%));
+    --iress-active-text-color: var(--iress-button-danger-active-text-color, var(--iress-text-color));
+    --iress-active-border-color: var(--iress-button-danger-active-border-color, var(--iress-border-color));
+    --iress-active-box-shadow-size: var(--iress-button-danger-active-box-shadow-size, 0 0);
+    --iress-active-box-shadow-color: var(--iress-button-danger-active-box-shadow-color, transparent);
+    --iress-active-box-shadow: var(--iress-active-box-shadow-size) var(--iress-active-box-shadow-color);
+    --iress-active-text-decoration: var(--iress-button-danger-active-text-decoration, none);
+  }
+
+  /* Info */
+  &.iress--mode--info {
+    --iress-background-color: var(--iress-button-info-background-color, transparent);
+    --iress-background-image: var(--iress-button-info-background-image, none);
+    --iress-text-color: var(--iress-button-info-text-color, var(--iress-a-info-text-color, var(--iress-g-info-color, var(--iress-default-info-color))));
+    --iress-border-color: var(--iress-button-info-border-color, var(--iress-a-info-border-color, var(--iress-g-info-color, var(--iress-default-info-color))));
+    --iress-box-shadow-size: var(--iress-button-info-box-shadow-size, 0 0);
+    --iress-box-shadow-color: var(--iress-button-info-box-shadow-color, transparent);
+    --iress-box-shadow: var(--iress-box-shadow-size) var(--iress-box-shadow-color);
+    --iress-text-decoration: var(--iress-button-info-text-decoration, none);
+
+    /* Info Hover */
+    --iress-hover-background-color: var(
+      --iress-button-info-hover-background-color,
+      var(--iress-a-info-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)))
+    );
+    --iress-hover-background-image: var(--iress-button-info-hover-background-image, none);
+    --iress-hover-text-color: var(--iress-button-info-hover-text-color, var(--iress-a-info-hover-text-color, var(--iress-g-hover-text-color, var(--iress-default-text-color--hover))));
+    --iress-hover-border-color: var(--iress-button-info-hover-border-color, var(--iress-border-color));
+    --iress-hover-box-shadow-size: var(--iress-button-info-hover-box-shadow-size, 0 0);
+    --iress-hover-box-shadow-color: var(--iress-button-info-hover-box-shadow-color, transparent);
+    --iress-hover-box-shadow: var(--iress-hover-box-shadow-size) var(--iress-hover-box-shadow-color);
+    --iress-hover-text-decoration: var(--iress-button-info-hover-text-decoration, none);
+
+    /* Info Active */
+    --iress-active-background-color: var(--iress-button-info-active-background-color, var(--iress-background-color));
+    --iress-active-background-image: var(--iress-button-info-active-background-image, linear-gradient(to right, var(--iress-active-background-color), var(--iress-active-background-color) 100%));
+    --iress-active-text-color: var(--iress-button-info-active-text-color, var(--iress-text-color));
+    --iress-active-border-color: var(--iress-button-info-active-border-color, var(--iress-border-color));
+    --iress-active-box-shadow-size: var(--iress-button-info-active-box-shadow-size, 0 0);
+    --iress-active-box-shadow-color: var(--iress-button-info-active-box-shadow-color, transparent);
+    --iress-active-box-shadow: var(--iress-active-box-shadow-size) var(--iress-active-box-shadow-color);
+    --iress-active-text-decoration: var(--iress-button-info-active-text-decoration, none);
+  }
+
+  /* Success */
+  &.iress--mode--success {
+    --iress-background-color: var(--iress-button-success-background-color, transparent);
+    --iress-background-image: var(--iress-button-success-background-image, none);
+    --iress-text-color: var(--iress-button-success-text-color, var(--iress-a-success-text-color, var(--iress-g-success-color, var(--iress-default-success-color))));
+    --iress-border-color: var(--iress-button-success-border-color, var(--iress-a-success-border-color, var(--iress-g-success-color, var(--iress-default-success-color))));
+    --iress-box-shadow-size: var(--iress-button-success-box-shadow-size, 0 0);
+    --iress-box-shadow-color: var(--iress-button-success-box-shadow-color, transparent);
+    --iress-box-shadow: var(--iress-box-shadow-size) var(--iress-box-shadow-color);
+    --iress-text-decoration: var(--iress-button-success-text-decoration, none);
+
+    /* Success Hover */
+    --iress-hover-background-color: var(
+      --iress-button-success-hover-background-color,
+      var(--iress-a-success-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)))
+    );
+    --iress-hover-background-image: var(--iress-button-success-hover-background-image, none);
+    --iress-hover-text-color: var(--iress-button-success-hover-text-color, var(--iress-a-success-hover-text-color, var(--iress-g-hover-text-color, var(--iress-default-text-color--hover))));
+    --iress-hover-border-color: var(--iress-button-success-hover-border-color, var(--iress-border-color));
+    --iress-hover-box-shadow-size: var(--iress-button-success-hover-box-shadow-size, 0 0);
+    --iress-hover-box-shadow-color: var(--iress-button-success-hover-box-shadow-color, transparent);
+    --iress-hover-box-shadow: var(--iress-hover-box-shadow-size) var(--iress-hover-box-shadow-color);
+    --iress-hover-text-decoration: var(--iress-button-success-hover-text-decoration, none);
+
+    /* Success Active */
+    --iress-active-background-color: var(--iress-button-success-active-background-color, var(--iress-background-color));
+    --iress-active-background-image: var(--iress-button-success-active-background-image, linear-gradient(to right, var(--iress-active-background-color), var(--iress-active-background-color) 100%));
+    --iress-active-text-color: var(--iress-button-success-active-text-color, var(--iress-text-color));
+    --iress-active-border-color: var(--iress-button-success-active-border-color, var(--iress-border-color));
+    --iress-active-box-shadow-size: var(--iress-button-success-active-box-shadow-size, 0 0);
+    --iress-active-box-shadow-color: var(--iress-button-success-active-box-shadow-color, transparent);
+    --iress-active-box-shadow: var(--iress-active-box-shadow-size) var(--iress-active-box-shadow-color);
+    --iress-active-text-decoration: var(--iress-button-success-active-text-decoration, none);
+  }
+
+  /* Warning */
+  &.iress--mode--warning {
+    --iress-background-color: var(--iress-button-warning-background-color, transparent);
+    --iress-background-image: var(--iress-button-warning-background-image, none);
+    --iress-text-color: var(--iress-button-warning-text-color, var(--iress-a-warning-text-color, var(--iress-g-warning-color, var(--iress-default-warning-color))));
+    --iress-border-color: var(--iress-button-warning-border-color, var(--iress-a-warning-border-color, var(--iress-g-warning-color, var(--iress-default-warning-color))));
+    --iress-box-shadow-size: var(--iress-button-warning-box-shadow-size, 0 0);
+    --iress-box-shadow-color: var(--iress-button-warning-box-shadow-color, transparent);
+    --iress-box-shadow: var(--iress-box-shadow-size) var(--iress-box-shadow-color);
+    --iress-text-decoration: var(--iress-button-warning-text-decoration, none);
+
+    /* Warning Hover */
+    --iress-hover-background-color: var(
+      --iress-button-warning-hover-background-color,
+      var(--iress-a-warning-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)))
+    );
+    --iress-hover-background-image: var(--iress-button-warning-hover-background-image, none);
+    --iress-hover-text-color: var(--iress-button-warning-hover-text-color, var(--iress-a-warning-hover-text-color, var(--iress-g-hover-text-color, var(--iress-default-text-color--hover))));
+    --iress-hover-border-color: var(--iress-button-warning-hover-border-color, var(--iress-border-color));
+    --iress-hover-box-shadow-size: var(--iress-button-warning-hover-box-shadow-size, 0 0);
+    --iress-hover-box-shadow-color: var(--iress-button-warning-hover-box-shadow-color, transparent);
+    --iress-hover-box-shadow: var(--iress-hover-box-shadow-size) var(--iress-hover-box-shadow-color);
+    --iress-hover-text-decoration: var(--iress-button-warning-hover-text-decoration, none);
+
+    /* Warning Active */
+    --iress-active-background-color: var(--iress-button-warning-active-background-color, var(--iress-background-color));
+    --iress-active-background-image: var(--iress-button-warning-active-background-image, linear-gradient(to right, var(--iress-active-background-color), var(--iress-active-background-color) 100%));
+    --iress-active-text-color: var(--iress-button-warning-active-text-color, var(--iress-text-color));
+    --iress-active-border-color: var(--iress-button-warning-active-border-color, var(--iress-border-color));
+    --iress-active-box-shadow-size: var(--iress-button-warning-active-box-shadow-size, 0 0);
+    --iress-active-box-shadow-color: var(--iress-button-warning-active-box-shadow-color, transparent);
+    --iress-active-box-shadow: var(--iress-active-box-shadow-size) var(--iress-active-box-shadow-color);
+    --iress-active-text-decoration: var(--iress-button-warning-active-text-decoration, none);
+  }
+
+  /* Negative */
+  &.iress--mode--negative {
+    --iress-background-color: var(--iress-button-negative-background-color, var(--iress-a-negative-background-color, var(--iress-g-negative-color, var(--iress-default-negative-color))));
+    --iress-background-image: var(--iress-button-negative-background-image, none);
+    --iress-text-color: var(--iress-button-negative-text-color, var(--iress-g-negative-contrast-color, var(--iress-default-text-color--alt)));
+    --iress-border-color: var(--iress-button-negative-border-color, var(--iress-a-negative-border-color, var(--iress-g-negative-color, var(--iress-default-negative-color))));
+    --iress-box-shadow-size: var(--iress-button-negative-box-shadow-size, 0 0);
+    --iress-box-shadow-color: var(--iress-button-negative-box-shadow-color, transparent);
+    --iress-box-shadow: var(--iress-box-shadow-size) var(--iress-box-shadow-color);
+    --iress-text-decoration: var(--iress-button-negative-text-decoration, none);
+
+    /* Negative Hover */
+    --iress-hover-background-color: var(
+      --iress-button-negative-hover-background-color,
+      var(--iress-a-negative-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-negative-hover-color)))
+    );
+    --iress-hover-background-image: var(--iress-button-negative-hover-background-image, none);
+    --iress-hover-text-color: var(--iress-button-negative-hover-text-color, var(--iress-a-negative-hover-text-color, var(--iress-g-hover-text-color, var(--iress-default-text-color--alt))));
+    --iress-hover-border-color: var(--iress-button-negative-hover-border-color, var(--iress-hover-background-color));
+    --iress-hover-box-shadow-size: var(--iress-button-negative-hover-box-shadow-size, 0 0);
+    --iress-hover-box-shadow-color: var(--iress-button-negative-hover-box-shadow-color, transparent);
+    --iress-hover-box-shadow: var(--iress-hover-box-shadow-size) var(--iress-hover-box-shadow-color);
+    --iress-hover-text-decoration: var(--iress-button-negative-hover-text-decoration, none);
+
+    /* Negative Active */
+    --iress-active-background-color: var(--iress-button-negative-active-background-color, var(--iress-background-color));
+    --iress-active-background-image: var(--iress-button-negative-active-background-image, linear-gradient(to right, var(--iress-active-background-color), var(--iress-active-background-color) 100%));
+    --iress-active-text-color: var(--iress-button-negative-active-text-color, var(--iress-text-color));
+    --iress-active-border-color: var(--iress-button-negative-active-border-color, var(--iress-active-background-color));
+    --iress-active-box-shadow-size: var(--iress-button-negative-active-box-shadow-size, 0 0);
+    --iress-active-box-shadow-color: var(--iress-button-negative-active-box-shadow-color, transparent);
+    --iress-active-box-shadow: var(--iress-active-box-shadow-size) var(--iress-active-box-shadow-color);
+    --iress-active-text-decoration: var(--iress-button-negative-active-text-decoration, none);
+  }
+
+  /* Positive */
+  &.iress--mode--positive {
+    --iress-background-color: var(--iress-button-positive-background-color, var(--iress-a-positive-background-color, var(--iress-g-positive-color, var(--iress-default-positive-color))));
+    --iress-background-image: var(--iress-button-positive-background-image, none);
+    --iress-text-color: var(--iress-button-positive-text-color, var(--iress-g-positive-contrast-color, var(--iress-default-text-color--alt)));
+    --iress-border-color: var(--iress-button-positive-border-color, var(--iress-a-positive-border-color, var(--iress-g-positive-color, var(--iress-default-positive-color))));
+    --iress-box-shadow-size: var(--iress-button-positive-box-shadow-size, 0 0);
+    --iress-box-shadow-color: var(--iress-button-positive-box-shadow-color, transparent);
+    --iress-box-shadow: var(--iress-box-shadow-size) var(--iress-box-shadow-color);
+    --iress-text-decoration: var(--iress-button-positive-text-decoration, none);
+
+    /* Positive Hover */
+    --iress-hover-background-color: var(
+      --iress-button-positive-hover-background-color,
+      var(--iress-a-positive-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-positive-hover-color)))
+    );
+    --iress-hover-background-image: var(--iress-button-positive-hover-background-image, none);
+    --iress-hover-text-color: var(--iress-button-positive-hover-text-color, var(--iress-a-positive-hover-text-color, var(--iress-g-hover-text-color, var(--iress-default-text-color--alt))));
+    --iress-hover-border-color: var(--iress-button-positive-hover-border-color, var(--iress-hover-background-color));
+    --iress-hover-box-shadow-size: var(--iress-button-positive-hover-box-shadow-size, 0 0);
+    --iress-hover-box-shadow-color: var(--iress-button-positive-hover-box-shadow-color, transparent);
+    --iress-hover-box-shadow: var(--iress-hover-box-shadow-size) var(--iress-hover-box-shadow-color);
+    --iress-hover-text-decoration: var(--iress-button-positive-hover-text-decoration, none);
+
+    /* Positive Active */
+    --iress-active-background-color: var(--iress-button-positive-active-background-color, var(--iress-background-color));
+    --iress-active-background-image: var(--iress-button-positive-active-background-image, linear-gradient(to right, var(--iress-active-background-color), var(--iress-active-background-color) 100%));
+    --iress-active-text-color: var(--iress-button-positive-active-text-color, var(--iress-text-color));
+    --iress-active-border-color: var(--iress-button-positive-active-border-color, var(--iress-active-background-color));
+    --iress-active-box-shadow-size: var(--iress-button-positive-active-box-shadow-size, 0 0);
+    --iress-active-box-shadow-color: var(--iress-button-positive-active-box-shadow-color, transparent);
+    --iress-active-box-shadow: var(--iress-active-box-shadow-size) var(--iress-active-box-shadow-color);
+    --iress-active-text-decoration: var(--iress-button-positive-active-text-decoration, none);
+  }
+}
+
+/**
+*---------------------------------------------------
+* Button styling
+*---------------------------------------------------
+**/
+
+/* stylelint-disable-next-line no-duplicate-selectors -- This splits it up so its easier to see the difference between variables and styles */
+.iress-u-button {
+  @include mixins.defaultFontStyles();
+
+  line-height: var(--iress-line-height);
+  background-color: var(--iress-background-color);
+  background-image: var(--iress-background-image);
+  text-align: var(--iress-text-align);
+  color: var(--iress-text-color);
+  border-radius: var(--iress-border-radius);
+  border-width: var(--iress-border-width);
+  border-style: solid;
+  border-color: var(--iress-border-color);
+  column-gap: var(--iress-slot-margin-x);
+
+  /* Add extra padding if border radius is > 0 */
+  padding-block: calc(var(--iress-padding-y) + (0.125 * var(--iress-border-radius)));
+  padding-inline: calc(var(--iress-padding-x) + (0.125 * var(--iress-border-radius)));
+
+  /* Safari adds margin which affects toggle styling, so we need to set it explicitly to zero */
+  margin-block: 0;
+  transition-timing-function: var(--iress-transition-hover-type);
+  transition-duration: var(--iress-transition-hover-duration);
+  text-decoration: var(--iress-text-decoration);
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--iress-min-height);
+  width: auto;
+  max-width: 100%;
+  user-select: none;
+  vertical-align: top; /* the better option for most scenarios */
+  vertical-align: middle; /* the best for those that support it */
+  pointer-events: auto;
+  font-kerning: none;
+  cursor: pointer;
+  background-position: center;
+  animation-fill-mode: forwards;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  /* stylelint-disable */
+  transition-property:
+    color,
+    background-color,
+    border-color,
+    transform,
+    -webkit-transform;
+  /* stylelint-enable */
+  white-space: var(--iress-white-space, normal);
+
+  &,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* stylelint-disable-next-line no-duplicate-selectors -- This splits it up so its easier to see the difference between variables and styles */
+  &.iress--mode--link {
+    padding-inline: 0;
+
+    [class*='ids-icon'],
+    [class*='ids-icon']::before {
+      text-decoration: none;
+      display: inline-block;
+    }
+  }
+
+  &.iress--no-wrap {
+    --iress-white-space: nowrap;
+
+    max-width: initial;
+  }
+
+  &.iress--loading {
+    cursor: default;
+  }
+
+  .pseudo-hover-all &:not(.iress--loading),
+  &.pseudo-hover-all:not(.iress--loading),
+  &.iress--active {
+    @include mixins.hoverStyles();
+  }
+
+  @media (hover: hover) {
+    &:not(.iress--loading):hover {
+      @include mixins.hoverStyles();
+    }
+  }
+
+  &:focus:focus-visible,
+  .pseudo-focus-all.pseudo-focus-visible &,
+  &.pseudo-focus-all.pseudo-focus-visible {
+    background-color: var(--iress-focus-background-color);
+    background-image: var(--iress-focus-background-image);
+    border-color: var(--iress-focus-border-color);
+    box-shadow: var(--iress-focus-box-shadow);
+    color: var(--iress-focus-text-color);
+    outline: none;
+    text-decoration: var(--iress-hover-text-decoration);
+  }
+
+  &[class*='iress--fluid'] {
+    display: flex;
+    width: 100%;
+    margin-inline-end: 0;
+    align-items: center;
+    justify-content: center;
+
+    > * {
+      display: flex;
+    }
+  }
+
+  @each $bpName, $bpValue in vars.$buttonFluidBreakpoints {
+    @media only screen and (#{$bpValue}) {
+      &.iress--fluid--#{$bpName} {
+        display: inline-flex;
+        width: auto;
+      }
+    }
+  }
+}
+
+.iress-u-button__prepend {
+  display: contents;
+}
+
+@keyframes iress-button-fill {
+  0% {
+    background-size: 0 0;
+  }
+
+  100% {
+    background-size: 100% 100%;
+  }
+}

@@ -1,16 +1,13 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressMenuItem } from './MenuItem';
 import { IressMenu } from '../Menu';
 import { IressBadge, IressIcon } from '@/main';
-import { RoutingLinkMenu } from './mocks/RoutingLinkMenu';
-import RoutingLinkMenuSource from './mocks/RoutingLinkMenu.tsx?raw';
 
 type Story = StoryObj<typeof IressMenuItem>;
 
 export default {
   title: 'Components/Menu/MenuItem',
   component: IressMenuItem,
-  tags: ['updated'],
 } as Meta<typeof IressMenuItem>;
 
 export const Unselected: Story = {
@@ -60,7 +57,7 @@ export const PrependAndAppend: Story = {
   args: {
     ...Unselected.args,
     prepend: <IressIcon name="home" />,
-    append: <IressBadge mode="success">New</IressBadge>,
+    append: <IressBadge mode={IressBadge.Mode.Success}>New</IressBadge>,
   },
 };
 
@@ -72,16 +69,4 @@ export const MultiSelect: Story = {
       <IressMenuItem {...args} />
     </IressMenu>
   ),
-};
-
-export const Element: Story = {
-  render: (args) => <RoutingLinkMenu {...args} />,
-  parameters: {
-    docs: {
-      source: {
-        code: RoutingLinkMenuSource,
-        language: 'tsx',
-      },
-    },
-  },
 };

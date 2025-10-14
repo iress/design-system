@@ -1,10 +1,9 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressTooltip, IressTooltipProps, tooltip } from '.';
+import { IressTooltip, IressTooltipProps } from '.';
 import { IressButton } from '../Button';
+import styles from './Tooltip.module.scss';
 import { idsLogger } from '@/helpers/utility/idsLogger';
-import { GlobalCSSClass } from '@/enums';
-import { ReactNode } from 'react';
 
 const TEST_ID = 'test-component';
 const TEST_TEXT = 'Test text';
@@ -12,7 +11,7 @@ const TEST_DIV_CHILD = <div>Div child</div>;
 
 const renderComponent = (
   props: Omit<IressTooltipProps, 'children'> = { tooltipText: TEST_TEXT },
-  child: ReactNode = <IressButton>Button child</IressButton>,
+  child: React.ReactNode = <IressButton>Button child</IressButton>,
 ) => {
   return render(
     <IressTooltip {...props} data-testid={TEST_ID}>
@@ -25,10 +24,7 @@ describe('IressTooltip', () => {
   describe('default props', () => {
     it('renders the correct classes', () => {
       const screen = renderComponent();
-      expect(screen.getByTestId(TEST_ID)).toHaveClass(
-        tooltip().root!,
-        GlobalCSSClass.Tooltip,
-      );
+      expect(screen.getByTestId(TEST_ID)).toHaveClass(styles.tooltip);
     });
   });
 

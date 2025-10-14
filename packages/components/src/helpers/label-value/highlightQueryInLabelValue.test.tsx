@@ -1,5 +1,6 @@
 import { highlightQueryInLabelValue } from './highlightQueryInLabelValue';
 import { render, screen } from '@testing-library/react';
+import React from 'react';
 
 describe('highlightQueryInLabelValue', () => {
   it('returns same label if query not found', () => {
@@ -29,147 +30,8 @@ describe('highlightQueryInLabelValue', () => {
     expect(screen.getByText('Found').tagName).toBe('B');
   });
 
-  describe('meta highlighting', () => {
-    it('returns same meta if query not found in meta', () => {
-      const formatted = highlightQueryInLabelValue(
-        {
-          label: 'Label',
-          value: 'Value',
-          meta: 'Description text',
-        },
-        'Not found',
-      );
-
-      expect(typeof formatted.formattedMeta).toBe('string');
-      expect(formatted.formattedMeta).toEqual('Description text');
-    });
-
-    it('returns formatted meta if query found in meta', () => {
-      const formatted = highlightQueryInLabelValue(
-        {
-          label: 'Label',
-          value: 'Value',
-          meta: 'Found in description',
-        },
-        'Found',
-      );
-
-      render(formatted.formattedMeta);
-
-      expect(screen.getByText('Found').tagName).toBe('B');
-    });
-
-    it('returns original meta when meta is not a string (ReactNode)', () => {
-      const reactNodeMeta = <span>React Element</span>;
-      const formatted = highlightQueryInLabelValue(
-        {
-          label: 'Label',
-          value: 'Value',
-          meta: reactNodeMeta,
-        },
-        'React',
-      );
-
-      expect(formatted.formattedMeta).toBe(reactNodeMeta);
-    });
-
-    it('highlights both label and meta when query is found in both', () => {
-      const formatted = highlightQueryInLabelValue(
-        {
-          label: 'Test label',
-          value: 'Value',
-          meta: 'Test meta',
-        },
-        'Test',
-      );
-
-      // Test label highlighting
-      render(<div data-testid="label">{formatted.formattedLabel}</div>);
-      const labelHighlight = screen.getByTestId('label').querySelector('b');
-      expect(labelHighlight).toHaveTextContent('Test');
-
-      // Test meta highlighting
-      render(<div data-testid="meta">{formatted.formattedMeta}</div>);
-      const metaHighlight = screen.getByTestId('meta').querySelector('b');
-      expect(metaHighlight).toHaveTextContent('Test');
-    });
-
-    it('preserves other properties from original LabelValueMeta', () => {
-      const originalItem = {
-        label: 'Label',
-        value: 'Value',
-        meta: 'Meta text',
-        append: <span>Append</span>,
-        prepend: <span>Prepend</span>,
-        testId: 'test-id',
-      };
-
-      const formatted = highlightQueryInLabelValue(originalItem, 'Label');
-
-      expect(formatted).toMatchObject({
-        label: 'Label',
-        value: 'Value',
-        meta: 'Meta text',
-        append: originalItem.append,
-        prepend: originalItem.prepend,
-        testId: 'test-id',
-      });
-
-      // Check that formatted properties are added
-      expect(formatted).toHaveProperty('formattedLabel');
-      expect(formatted).toHaveProperty('formattedMeta');
-    });
-  });
-
-  describe('custom tag element', () => {
-    it('uses custom tag for highlighting label', () => {
-      const formatted = highlightQueryInLabelValue(
-        {
-          label: 'Marked text',
-          value: 'Value',
-        },
-        'Marked',
-        'mark',
-      );
-
-      render(formatted.formattedLabel);
-
-      expect(screen.getByText('Marked').tagName).toBe('MARK');
-    });
-
-    it('uses custom tag for highlighting meta', () => {
-      const formatted = highlightQueryInLabelValue(
-        {
-          label: 'Label',
-          value: 'Value',
-          meta: 'Marked meta',
-        },
-        'Marked',
-        'mark',
-      );
-
-      render(formatted.formattedMeta);
-
-      expect(screen.getByText('Marked').tagName).toBe('MARK');
-    });
-  });
-
-  describe('edge cases', () => {
-    it('handles empty query string', () => {
-      const formatted = highlightQueryInLabelValue(
-        {
-          label: 'Label',
-          value: 'Value',
-          meta: 'Meta',
-        },
-        '',
-      );
-
-      expect(formatted.formattedLabel).toBe('Label');
-      expect(formatted.formattedMeta).toBe('Meta');
-    });
-
-    it('handles missing meta property', () => {
+  describe('formattedMeta', () => {
+    it('returns undefined formattedMeta when meta is not provided', () => {
       const formatted = highlightQueryInLabelValue(
         {
           label: 'Label',
@@ -181,30 +43,107 @@ describe('highlightQueryInLabelValue', () => {
       expect(formatted.formattedMeta).toBeUndefined();
     });
 
-    it('handles null meta property', () => {
+    it('returns undefined formattedMeta when meta is not a string', () => {
       const formatted = highlightQueryInLabelValue(
         {
           label: 'Label',
           value: 'Value',
-          meta: null,
+          meta: <span>JSX Element</span>,
         },
         'Label',
       );
 
-      expect(formatted.formattedMeta).toBe(null);
+      expect(formatted.formattedMeta).toBeUndefined();
     });
 
-    it('handles undefined meta property', () => {
+    it('returns same string formattedMeta if query not found in meta', () => {
       const formatted = highlightQueryInLabelValue(
         {
           label: 'Label',
           value: 'Value',
-          meta: undefined,
+          meta: 'Metadata text',
         },
-        'Label',
+        'Not found',
       );
 
-      expect(formatted.formattedMeta).toBe(undefined);
+      expect(typeof formatted.formattedMeta).toBe('string');
+      expect(formatted.formattedMeta).toEqual('Metadata text');
+    });
+
+    it('returns formatted meta if query found in string meta', () => {
+      const formatted = highlightQueryInLabelValue(
+        {
+          label: 'Label',
+          value: 'Value',
+          meta: 'Found in metadata',
+        },
+        'Found',
+      );
+
+      render(<div>{formatted.formattedMeta}</div>);
+
+      expect(screen.getByText('Found').tagName).toBe('B');
+      // Check that the container contains the expected text content
+      const container = screen.getByText('Found').parentElement;
+      expect(container).toHaveTextContent('Found in metadata');
+    });
+
+    it('highlights query in both label and meta when found in both', () => {
+      const formatted = highlightQueryInLabelValue(
+        {
+          label: 'Test label',
+          value: 'Value',
+          meta: 'Test metadata',
+        },
+        'Test',
+      );
+
+      // Render both to test
+      render(
+        <div>
+          <div data-testid="label">{formatted.formattedLabel}</div>
+          <div data-testid="meta">{formatted.formattedMeta}</div>
+        </div>,
+      );
+
+      const labelContainer = screen.getByTestId('label');
+      const metaContainer = screen.getByTestId('meta');
+
+      // Both should have highlighted "Test" in bold
+      expect(labelContainer.querySelector('b')?.textContent).toBe('Test');
+      expect(metaContainer.querySelector('b')?.textContent).toBe('Test');
+    });
+
+    it('uses custom Tag when provided for meta highlighting', () => {
+      const formatted = highlightQueryInLabelValue(
+        {
+          label: 'Label',
+          value: 'Value',
+          meta: 'Custom tag test',
+        },
+        'Custom',
+        'mark',
+      );
+
+      render(<div>{formatted.formattedMeta}</div>);
+
+      expect(screen.getByText('Custom').tagName).toBe('MARK');
+    });
+
+    it('preserves original meta when formattedMeta is generated', () => {
+      const original = {
+        label: 'Label',
+        value: 'Value',
+        meta: 'Original meta',
+      };
+
+      const formatted = highlightQueryInLabelValue(original, 'Original');
+
+      // Original should be preserved
+      expect(formatted.meta).toBe('Original meta');
+      // And formatted version should exist
+      expect(formatted.formattedMeta).toBeDefined();
+      expect(formatted.formattedMeta).not.toBe('Original meta');
     });
   });
 });

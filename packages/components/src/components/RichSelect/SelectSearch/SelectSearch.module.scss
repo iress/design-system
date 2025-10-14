@@ -1,0 +1,14 @@
+.selectSearch {
+  --iress-border-width: 0;
+}
+
+.content:has(.ids-selectBody) {
+  overflow: hidden;
+  display: flex;
+
+  .ids-selectBody {
+    --iress-max-height: none;
+
+    flex: 1;
+  }
+}

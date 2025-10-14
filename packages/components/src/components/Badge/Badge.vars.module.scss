@@ -1,0 +1,62 @@
+.base {
+  --iress-font-family: var(--iress-badge-font-family, var(--iress-g-font-family));
+  --iress-font-weight: var(--iress-badge-font-weight, var(--iress-g-font-weight, normal));
+  --iress-font-size: var(--iress-badge-font-size, var(--iress-g-font-size-xxxs, var(--iress-default-font-size-xxxs)));
+  --iress-size: var(--iress-badge-size, calc(1.5 * var(--iress-g-font-size-rem)));
+  --iress-border-radius: var(--iress-badge-border-radius, var(--iress-g-small-border-radius, var(--iress-default-border-radius)));
+  --iress-border-width: var(--iress-badge-border-width, var(--iress-g-border-width, var(--iress-default-border-width)));
+  --iress-padding-x: var(--iress-badge-padding-x, calc(0.3 * var(--iress-g-spacing-rem)));
+  --iress-padding-y: var(--iress-badge-padding-y, calc(0.3 * var(--iress-g-spacing-rem)));
+
+  &.pill {
+    --iress-border-radius: calc(var(--iress-size) / 2);
+  }
+}
+
+.success {
+  --iress-background-color: var(--iress-badge-success-background-color, var(--iress-a-success-background-color, var(--iress-g-success-color, var(--iress-default-success-color))));
+  --iress-border-color: var(--iress-badge-success-border-color, var(--iress-a-success-border-color, var(--iress-g-success-color, var(--iress-default-success-color))));
+  --iress-text-color: var(--iress-badge-success-text-color, var(--iress-g-success-contrast-color, var(--iress-default-text-color--alt)));
+}
+
+.warning {
+  --iress-background-color: var(--iress-badge-warning-background-color, var(--iress-a-warning-background-color, var(--iress-g-warning-color, var(--iress-default-warning-color))));
+  --iress-border-color: var(--iress-badge-warning-border-color, var(--iress-a-warning-border-color, var(--iress-g-warning-color, var(--iress-default-warning-color))));
+  --iress-text-color: var(--iress-badge-warning-text-color, var(--iress-g-warning-contrast-color, var(--iress-default-text-color--alt)));
+}
+
+.danger {
+  --iress-background-color: var(--iress-badge-danger-background-color, var(--iress-a-danger-background-color, var(--iress-g-danger-color, var(--iress-default-danger-color))));
+  --iress-border-color: var(--iress-badge-danger-border-color, var(--iress-a-danger-border-color, var(--iress-g-danger-color, var(--iress-default-danger-color))));
+  --iress-text-color: var(--iress-badge-danger-text-color, var(--iress-g-danger-contrast-color, var(--iress-default-text-color--alt)));
+}
+
+.info {
+  --iress-background-color: var(--iress-badge-info-background-color, var(--iress-a-info-background-color, var(--iress-g-info-color, var(--iress-default-info-color))));
+  --iress-border-color: var(--iress-badge-info-border-color, var(--iress-a-info-border-color, var(--iress-g-info-color, var(--iress-default-info-color))));
+  --iress-text-color: var(--iress-badge-info-text-color, var(--iress-g-info-contrast-color, var(--iress-default-text-color--alt)));
+}
+
+.positive {
+  --iress-background-color: var(--iress-badge-positive-background-color, var(--iress-a-positive-background-color, var(--iress-g-positive-color, var(--iress-default-positive-color))));
+  --iress-border-color: var(--iress-badge-positive-border-color, var(--iress-a-positive-border-color, var(--iress-g-positive-color, var(--iress-default-positive-color))));
+  --iress-text-color: var(--iress-badge-positive-text-color, var(--iress-g-positive-contrast-color, var(--iress-default-text-color--alt)));
+}
+
+.negative {
+  --iress-background-color: var(--iress-badge-negative-background-color, var(--iress-a-negative-background-color, var(--iress-g-negative-color, var(--iress-default-negative-color))));
+  --iress-border-color: var(--iress-badge-negative-border-color, var(--iress-a-negative-border-color, var(--iress-g-negative-color, var(--iress-default-negative-color))));
+  --iress-text-color: var(--iress-badge-negative-text-color, var(--iress-g-negative-contrast-color, var(--iress-default-text-color--alt)));
+}
+
+.background-default {
+  --iress-background-color: var(--iress-badge-background-color-default, var(--iress-g-background-color, var(--iress-default-background-color)));
+  --iress-border-color: var(--iress-badge-border-color-default, var(--iress-background-color));
+  --iress-text-color: var(--iress-badge-text-color-default, var(--iress-g-text-color, var(--iress-default-text-color)));
+}
+
+.background-alt {
+  --iress-background-color: var(--iress-badge-background-color-alt, var(--iress-g-background-color-alt, var(--iress-default-background-color-alt)));
+  --iress-border-color: var(--iress-badge-border-color-default, var(--iress-background-color));
+  --iress-text-color: var(--iress-badge-text-color-default, var(--iress-g-text-color, var(--iress-default-text-color)));
+}

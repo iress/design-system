@@ -2,89 +2,23 @@ import {
   IressMenu,
   IressMenuHeading,
   IressMenuText,
-  type IressMenuItemProps,
-  type IressMenuProps,
+  type MenuSelected,
 } from '../../Menu';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { toArray } from '@helpers/formatting/toArray';
 import { getFormControlValueAsStringIfDefined } from '@helpers/form/getFormControlValueAsStringIfDefined';
 import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAsString';
-import { useCallback, useMemo, type ReactNode } from 'react';
+import { useCallback, useMemo } from 'react';
 import { getValueFromLabelValues } from '@helpers/label-value/getValueFromLabelValues';
-import { IressSelectMenuItem } from './SelectMenuItem';
-import { type ControlledValue, useIdIfNeeded } from '@/hooks';
+import { type FormControlValue, type LabelValueMeta } from '@/main';
 import {
-  type FormattedLabelValueMeta,
-  type LabelValueMeta,
-} from '@/interfaces';
-import { selectMenu } from './SelectMenu.styles';
-import { GlobalCSSClass } from '@/enums';
-import { cx } from '@/styled-system/css';
-import { type FormControlValue } from '@/types';
+  type IressSelectMenuItemProps,
+  type IressSelectMenuProps,
+} from './SelectMenu.types';
+import { IressSelectMenuItem } from './SelectMenuItem';
+import { useIdIfNeeded } from '@/hooks';
 
-export interface IressSelectMenuProps<TMultiple extends boolean = false>
-  extends Omit<
-    IressMenuProps<FormControlValue, TMultiple>,
-    'children' | 'onChange' | 'selected' | 'type'
-  > {
-  /**
-   * Heading slot. Often used for a title or description.
-   * If a string, will automatically provide an id for aria-labelledby.
-   */
-  heading?: ReactNode;
-
-  /**
-   * Hide selected items from menu.
-   * Useful for autocomplete scenarios.
-   */
-  hideSelectedItems?: boolean;
-
-  /**
-   * Items to be displayed in the menu, array of FormattedLabelValueMeta.
-   */
-  items?: FormattedLabelValueMeta[];
-
-  /**
-   * Maximum number of results displayed on mobile screen sizes (< 768).
-   */
-  limitMobile?: number;
-
-  /**
-   * Maximum number of results displayed on larger screen sizes (>= 768).
-   */
-  limitDesktop?: number;
-
-  /**
-   * No results text to display when no items are found.
-   */
-  noResults?: ReactNode;
-
-  /**
-   * Emitted when the value changes when item is selected from the menu
-   */
-  onChange?: (selected?: ControlledValue<LabelValueMeta, TMultiple>) => void;
-
-  /**
-   * Selected items.
-   */
-  selected?: ControlledValue<LabelValueMeta, TMultiple>;
-
-  /**
-   * Set whether to display selected items first in the menu.
-   */
-  selectedFirst?: boolean;
-}
-
-export interface IressSelectMenuItemProps
-  extends Omit<IressMenuItemProps<'button'>, 'value'>,
-    FormattedLabelValueMeta {
-  /**
-   * Set whether this item is hidden on mobile
-   */
-  hiddenOnMobile?: boolean;
-}
-
-export const IressSelectMenu = <TMultiple extends boolean = false>({
+export const IressSelectMenu = ({
   heading,
   hideSelectedItems,
   items = [],
@@ -93,17 +27,16 @@ export const IressSelectMenu = <TMultiple extends boolean = false>({
   multiSelect,
   noResults,
   onChange,
-  role = 'listbox',
   selected,
   selectedFirst,
   ...restProps
-}: IressSelectMenuProps<TMultiple>) => {
+}: IressSelectMenuProps) => {
   const id = useIdIfNeeded({ id: restProps.id });
   const labelId = `${id}--label`;
   const menuSelected = useMemo(
     () => getValueFromLabelValues(selected, multiSelect),
     [multiSelect, selected],
-  ) as ControlledValue<FormControlValue, TMultiple>;
+  );
 
   const menuItems = useMemo(() => {
     let itemsToShow = selectedFirst
@@ -133,39 +66,27 @@ export const IressSelectMenu = <TMultiple extends boolean = false>({
   const showNoResults = menuItems.length === 0;
 
   const handleMenuChange = useCallback(
-    (newValue?: ControlledValue<FormControlValue, TMultiple> | null) => {
+    (newValue?: MenuSelected | null) => {
       const labelValueMeta = getLabelValueMetaFromMenuSelected(
         items,
         selected,
-        newValue ?? undefined,
+        newValue,
       );
-      onChange?.(
-        (multiSelect ? labelValueMeta : labelValueMeta[0]) as ControlledValue<
-          LabelValueMeta,
-          TMultiple
-        >,
-      );
+      onChange?.(multiSelect ? labelValueMeta : labelValueMeta[0]);
     },
     [items, multiSelect, onChange, selected],
   );
 
-  const classes = selectMenu();
-
   return (
-    <IressMenu<FormControlValue, TMultiple>
+    <IressMenu
       {...restProps}
       aria-labelledby={
         typeof heading === 'string' ? labelId : restProps['aria-labelledby']
       }
       multiSelect={multiSelect}
       onChange={handleMenuChange}
-      role={role}
+      role="listbox"
       selected={menuSelected}
-      className={cx(
-        classes.root,
-        GlobalCSSClass.RichSelectMenu,
-        restProps.className,
-      )}
     >
       {typeof heading === 'string' ? (
         <IressMenuHeading id={labelId}>{heading}</IressMenuHeading>
@@ -191,10 +112,10 @@ export const IressSelectMenu = <TMultiple extends boolean = false>({
   );
 };
 
-const orderSelectedFirst = <TMultiple extends boolean = false>(
+const orderSelectedFirst = (
   items: LabelValueMeta[],
-  selected?: IressSelectMenuProps<TMultiple>['selected'],
-  menuSelected?: ControlledValue<FormControlValue, TMultiple>,
+  selected?: IressSelectMenuProps['selected'],
+  menuSelected?: MenuSelected,
 ) => {
   const selectedArray = toArray(selected);
   const menuSelectedArray = toArray(menuSelected);
@@ -223,10 +144,10 @@ const addLimitsToItems = (
     .slice(0, limitDesktop ?? items.length);
 };
 
-const getLabelValueMetaFromMenuSelected = <TMultiple extends boolean = false>(
+const getLabelValueMetaFromMenuSelected = (
   items: LabelValueMeta[],
-  value?: IressSelectMenuProps<TMultiple>['selected'],
-  newValues?: ControlledValue<FormControlValue, TMultiple>,
+  value?: IressSelectMenuProps['selected'],
+  newValues?: MenuSelected,
 ) => {
   const selected = toArray(value);
 

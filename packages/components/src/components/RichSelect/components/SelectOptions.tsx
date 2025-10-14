@@ -2,61 +2,61 @@ import { getValueAsEvent } from '@helpers/form/getValueAsEvent';
 import {
   type IressRichSelectProps,
   type SelectOptionsRenderProps,
-} from '../RichSelect';
+} from '../RichSelect.types';
 import {
   type UIEventHandler,
   useCallback,
   useEffect,
   useId,
+  useMemo,
   useRef,
 } from 'react';
-import { IressSelectSearch } from '../SelectSearch/SelectSearch';
-import { toArray } from '@helpers/formatting/toArray';
 import {
+  type ButtonRef,
+  type FormattedLabelValueMeta,
+  type InputRef,
+  IressAlert,
+  type IressButtonProps,
+  IressMenuDivider,
+  IressSelectHeading,
   IressSelectMenu,
   type IressSelectMenuProps,
-} from '../SelectMenu/SelectMenu';
-import { IressAlert } from '@/components/Alert';
-import {
-  type FormattedLabelValueMeta,
-  type LabelValueMeta,
-} from '@/interfaces';
-import { type InputRef } from '@/components/Input';
-import { IressSelectSearchInput } from '../SelectSearchInput/SelectSearchInput';
-import { IressSelectHeading } from '../SelectHeading/SelectHeading';
-import { IressMenuDivider } from '@/components/Menu';
-import { type IressButtonProps } from '@/components/Button';
-import { type ControlledValue } from '@/hooks';
+  IressSelectSearchInput,
+} from '@/main';
+import { IressSelectSearch } from '../SelectSearch/SelectSearch';
+import styles from '@/components/RichSelect/RichSelect.module.scss';
+import { toArray } from '@helpers/formatting/toArray';
 
-interface SelectOptionsProps<TMultiple extends boolean = false>
+interface SelectOptionsProps
   extends Pick<
-      IressRichSelectProps<TMultiple>,
+      IressRichSelectProps,
       | 'autoHighlight'
       | 'minSearchLength'
       | 'multiSelect'
       | 'onChange'
       | 'options'
       | 'renderOptions'
+      | 'renderOptionsFooter'
       | 'value'
       | 'initialOptions'
     >,
-    Omit<SelectOptionsRenderProps<TMultiple>, 'close'> {
+    Omit<SelectOptionsRenderProps, 'close'> {
   setShow: (show: boolean) => void;
   shouldShowInstructions?: boolean;
   shouldShowNoResults?: boolean;
 }
 
-const SelectAsyncResults = <TMultiple extends boolean = false>({
-  minSearchLength,
+const SelectAsyncResults = ({
+  minSearchLength = 1,
   multiSelect,
   onChange,
   query,
   results,
+  value,
   shouldShowInstructions,
   shouldShowNoResults,
-  value,
 }: Pick<
-  SelectOptionsProps<TMultiple>,
+  SelectOptionsProps,
   | 'minSearchLength'
   | 'multiSelect'
   | 'query'
@@ -65,7 +65,7 @@ const SelectAsyncResults = <TMultiple extends boolean = false>({
   | 'shouldShowInstructions'
   | 'shouldShowNoResults'
 > &
-  Pick<IressSelectMenuProps<TMultiple>, 'onChange'>) => {
+  Pick<IressSelectMenuProps, 'onChange'>) => {
   // Use proper state indicators from useAutocompleteSearch hook
   const getNoResultsMessage = () => {
     if (!query) {
@@ -113,7 +113,7 @@ const SelectAsyncError = ({ error }: Pick<SelectOptionsProps, 'error'>) => {
   );
 };
 
-const SelectAsyncOptions = <TMultiple extends boolean = false>({
+const SelectAsyncOptions = ({
   autoHighlight,
   error,
   loading,
@@ -129,7 +129,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
   shouldShowInstructions,
   shouldShowNoResults,
 }: Pick<
-  SelectOptionsProps<TMultiple>,
+  SelectOptionsProps,
   | 'autoHighlight'
   | 'error'
   | 'loading'
@@ -143,8 +143,8 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
   | 'shouldShowInstructions'
   | 'shouldShowNoResults'
 > &
-  Pick<IressSelectMenuProps<TMultiple>, 'onChange'> & {
-    onClear?: UIEventHandler<HTMLButtonElement>;
+  Pick<IressSelectMenuProps, 'onChange'> & {
+    onClear?: UIEventHandler<ButtonRef>;
   }) => {
   const selectedArray = toArray(value).map(
     (selectedItem: FormattedLabelValueMeta) => {
@@ -183,6 +183,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
         />
       }
       autoHighlight={autoHighlight}
+      contentClassName={styles.searchResults}
       focusStartIndex={autoHighlight ? calculatedFocusIndex : undefined}
     >
       {hasSelected && (
@@ -205,7 +206,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
           selected={value}
         />
       )}
-      {hasResultsAndSelected && <IressMenuDivider />}
+      {hasResultsAndSelected && <IressMenuDivider gutter="none" />}
       {hasResults && (
         <SelectAsyncResults
           minSearchLength={minSearchLength}
@@ -223,7 +224,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
   );
 };
 
-export const SelectOptions = <TMultiple extends boolean = false>({
+export const SelectOptions = ({
   autoHighlight,
   debouncedQuery,
   error,
@@ -235,15 +236,16 @@ export const SelectOptions = <TMultiple extends boolean = false>({
   options,
   query,
   renderOptions,
+  renderOptionsFooter,
   results,
   setQuery,
   setShow,
   setValue,
   show,
+  value,
   shouldShowInstructions,
   shouldShowNoResults,
-  value,
-}: SelectOptionsProps<TMultiple>) => {
+}: SelectOptionsProps) => {
   const isAsync = typeof options === 'function';
   const initialOptions = initialOptionsProp ?? (isAsync ? [] : options);
   const menuItems = results.length ? results : initialOptions;
@@ -253,7 +255,7 @@ export const SelectOptions = <TMultiple extends boolean = false>({
    * We do not use the value in the menu, as it conflicts with the active popover value and may un-toggle it, which we do not want.
    */
   const handleMenuChange = useCallback<
-    Exclude<IressSelectMenuProps<TMultiple>['onChange'], undefined>
+    Exclude<IressSelectMenuProps['onChange'], undefined>
   >(
     (item) => {
       setValue(item);
@@ -274,18 +276,14 @@ export const SelectOptions = <TMultiple extends boolean = false>({
   >(
     (e) => {
       e.stopPropagation();
-      const newValue = [] as LabelValueMeta[] as ControlledValue<
-        LabelValueMeta,
-        TMultiple
-      >;
-      setValue(newValue);
-      onChange?.(getValueAsEvent([]), newValue);
+      setValue([]);
+      onChange?.(getValueAsEvent([]), []);
     },
     [setValue, onChange],
   );
 
-  if (renderOptions) {
-    return renderOptions({
+  const renderProps = useMemo(
+    () => ({
       close: () => setShow(false),
       debouncedQuery,
       error,
@@ -296,37 +294,59 @@ export const SelectOptions = <TMultiple extends boolean = false>({
       setQuery,
       show,
       value,
-    });
+    }),
+    [
+      debouncedQuery,
+      error,
+      loading,
+      menuItems,
+      query,
+      setQuery,
+      setShow,
+      setValue,
+      show,
+      value,
+    ],
+  );
+
+  if (renderOptions) {
+    return renderOptions(renderProps);
   }
 
   if (isAsync) {
     return (
-      <SelectAsyncOptions
-        autoHighlight={autoHighlight}
-        error={error}
-        loading={loading}
-        minSearchLength={minSearchLength}
-        multiSelect={multiSelect}
-        onChange={handleMenuChange}
-        onClear={handleClear}
-        query={query}
-        results={results}
-        setQuery={setQuery}
-        show={show}
-        value={value}
-        shouldShowInstructions={shouldShowInstructions}
-        shouldShowNoResults={shouldShowNoResults}
-      />
+      <>
+        <SelectAsyncOptions
+          autoHighlight={autoHighlight}
+          error={error}
+          loading={loading}
+          minSearchLength={minSearchLength}
+          multiSelect={multiSelect}
+          onChange={handleMenuChange}
+          onClear={handleClear}
+          query={query}
+          results={results}
+          setQuery={setQuery}
+          show={show}
+          value={value}
+          shouldShowInstructions={shouldShowInstructions}
+          shouldShowNoResults={shouldShowNoResults}
+        />
+        {renderOptionsFooter?.(renderProps)}
+      </>
     );
   }
 
   return (
-    <IressSelectMenu
-      items={menuItems}
-      multiSelect={multiSelect}
-      onChange={handleMenuChange}
-      selected={value}
-      selectedFirst
-    />
+    <>
+      <IressSelectMenu
+        items={menuItems}
+        multiSelect={multiSelect}
+        onChange={handleMenuChange}
+        selected={value}
+        selectedFirst
+      />
+      {renderOptionsFooter?.(renderProps)}
+    </>
   );
 };

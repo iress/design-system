@@ -11,18 +11,18 @@ export const MultipleExpander = () => {
   return (
     <div>
       <IressExpander
-        activator="Top"
+        activator="top"
         open={openActivator === 'top'}
-        onChange={(open) => handleChange('top', open)}
+        onChange={({ open }) => handleChange('top', open)}
       >
-        Expander content for the top activator goes here.
+        <h1>Top</h1>
       </IressExpander>
       <IressExpander
-        activator="Bottom"
+        activator="bottom"
         open={openActivator === 'bottom'}
-        onChange={(open) => handleChange('bottom', open)}
+        onChange={({ open }) => handleChange('bottom', open)}
       >
-        Expander content for the bottom activator goes here.
+        <h2>Bottom</h2>
       </IressExpander>
     </div>
   );

@@ -1,18 +1,5 @@
-import { type IressTestProps } from '@/interfaces';
-import { type PropsWithChildren } from 'react';
-import { type Cell } from '@tanstack/react-table';
-import { useTableColumnStyles } from '../hooks/useTableColumnStyles';
-
-export interface TableBodyCellProps<TRow extends object = never>
-  extends PropsWithChildren,
-    IressTestProps {
-  additionalHeaders?: string;
-  cellApi: Pick<Cell<TRow, unknown>, 'column' | 'row' | 'id'>;
-  hiddenHeader?: boolean;
-  index: number;
-  scope?: 'row' | 'col';
-  tableId: string;
-}
+import { type TableBodyCellProps } from '../Table.types';
+import { useIDSTableColumnStyles } from '../hooks/useIDSTableColumnStyles';
 
 export const TableBodyCell = <TRow extends object = never>({
   additionalHeaders,
@@ -24,7 +11,7 @@ export const TableBodyCell = <TRow extends object = never>({
   tableId,
   ...restProps
 }: TableBodyCellProps<TRow>) => {
-  const columnStyles = useTableColumnStyles({
+  const columnStyles = useIDSTableColumnStyles({
     columnKey: cellApi.column.id,
   });
   const isHeader = index === 0 && scope === 'row';

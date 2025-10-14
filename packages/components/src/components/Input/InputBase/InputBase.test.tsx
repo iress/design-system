@@ -1,5 +1,8 @@
 import { act, fireEvent, render } from '@testing-library/react';
-import { InputBase, type InputRef } from './InputBase';
+
+import { idsLogger } from '@helpers/utility/idsLogger';
+import { InputBase } from './InputBase';
+import { InputRef } from './InputBase.types';
 import { createRef } from 'react';
 
 describe('InputBase', () => {
@@ -24,14 +27,19 @@ describe('InputBase', () => {
   });
 
   it('should access the original element via the ref', () => {
-    const inputRef = createRef<InputRef<undefined>>();
+    const inputRef = createRef<InputRef>();
     const { getByRole } = render(<InputBase ref={inputRef} />);
     const inputElement = getByRole('textbox') as HTMLInputElement;
     expect(inputElement).toBe(inputRef.current?.input);
   });
 
-  it('should render a textarea when rows is defined', () => {
+  it('should render a textarea when rows is greater than 0', () => {
     const { container } = render(<InputBase rows={5} />);
     expect(container.querySelector('textarea')).toBeInTheDocument();
+  });
+
+  it('should log a warning when unsupported props are provided for a textarea', () => {
+    render(<InputBase rows={5} type="number" min={1} max={10} step={1} />);
+    expect(idsLogger).toHaveBeenCalledTimes(3);
   });
 });

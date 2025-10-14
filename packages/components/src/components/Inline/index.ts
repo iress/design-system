@@ -1,2 +1,2 @@
-export * from './Inline.styles';
+export * from './Inline.types';
 export * from './Inline';

@@ -1,15 +1,15 @@
 import { IressExpander } from '../../Expander';
-import { IressPanel, type IressPanelProps } from '../../Panel';
-import { type IressMenuProps } from '../Menu';
+import { IressPanel, IressPanelProps } from '../../Panel';
+import { MenuRoles } from '../Menu.types';
 
 export const MenuRoleDescription = ({
   children,
   role,
   ...restProps
-}: IressPanelProps & { role: IressMenuProps['role'] }) => {
+}: IressPanelProps & { role: MenuRoles }) => {
   if (role === 'listbox') {
     return (
-      <IressPanel {...restProps}>
+      <IressPanel className="iress-u-text" {...restProps}>
         {children}
         <p>
           The <code>listbox</code> menu is used for lists from which a user may
@@ -30,10 +30,13 @@ export const MenuRoleDescription = ({
           recommend that you use Menu&apos;s <code>selected</code> prop instead.
         </p>
         <p>
-          <strong>Note:</strong> This is the menu type used to power Filter
-          components.
+          <strong>Note:</strong> This is the menu type used to power Filter and
+          Combobox components.
         </p>
-        <IressExpander activator="Keyboard interaction" mode="link">
+        <IressExpander
+          activator="Keyboard interaction"
+          mode={IressExpander.Mode.Heading}
+        >
           <ul>
             <li>
               Menu items can be navigated using the arrow keys, depending on the
@@ -65,9 +68,54 @@ export const MenuRoleDescription = ({
     );
   }
 
+  if (role === 'nav') {
+    return (
+      <IressPanel className="iress-u-text" {...restProps}>
+        {children}
+        <p>
+          The <code>nav</code> type acts as a styling hook to be able to style
+          the selected menu item differently to default menus. This will be most
+          often used as a child of the <code>Navbar</code> component.
+        </p>
+
+        <p>
+          The nav menu exposes the following theme tokens in order to customise
+          the styling:
+        </p>
+
+        <ul>
+          <li>
+            <code>--iress-menu-item-nav-selected-background-color</code>
+          </li>
+          <li>
+            <code>--iress-menu-item-nav-selected-text-color</code>
+          </li>
+          <li>
+            <code>--iress-menu-item-nav-text-align</code>
+          </li>
+          <li>
+            <code>--iress-menu-item-nav-border-radius</code>
+          </li>
+        </ul>
+
+        <IressExpander
+          activator="Keyboard interaction"
+          mode={IressExpander.Mode.Heading}
+        >
+          <ul>
+            <li>Menu items cannot be navigated using the arrow keys</li>
+            <li>
+              Menu items are navigated using the <code>tab</code> key
+            </li>
+          </ul>
+        </IressExpander>
+      </IressPanel>
+    );
+  }
+
   if (role === 'menu') {
     return (
-      <IressPanel {...restProps}>
+      <IressPanel className="iress-u-text" {...restProps}>
         {children}
         <p>
           The application menu is used when the items in the menu has an action
@@ -75,7 +123,10 @@ export const MenuRoleDescription = ({
           the <code>role</code> prop to <code>menu</code>.
         </p>
 
-        <IressExpander activator="Keyboard interaction" mode="link">
+        <IressExpander
+          activator="Keyboard interaction"
+          mode={IressExpander.Mode.Heading}
+        >
           <ul>
             <li>
               In stack layout, pressing the <code>up</code> arrow key on the
@@ -105,7 +156,7 @@ export const MenuRoleDescription = ({
 
   if (role === 'list') {
     return (
-      <IressPanel {...restProps}>
+      <IressPanel className="iress-u-text" {...restProps}>
         {children}
         <p>
           The list menu is used to describe that the items are related to the
@@ -114,7 +165,10 @@ export const MenuRoleDescription = ({
           <code>list</code>.
         </p>
 
-        <IressExpander activator="Keyboard interaction" mode="link">
+        <IressExpander
+          activator="Keyboard interaction"
+          mode={IressExpander.Mode.Heading}
+        >
           <ul>
             <li>Menu items cannot be navigated using the arrow keys</li>
             <li>

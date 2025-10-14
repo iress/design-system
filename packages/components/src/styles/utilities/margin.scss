@@ -1,0 +1,71 @@
+@use '../vars';
+
+@mixin responsiveMargin($bpName) {
+  @each $spacingSize in vars.$spacingSizes {
+    $horizontal: if($spacingSize == 'none', 0, var(--iress-a-horizontal-spacing-#{$spacingSize}, var(--iress-g-spacing-#{$spacingSize})));
+    $horizontalNegative: if($spacingSize == 'none', 0, calc(var(--iress-a-horizontal-spacing-#{$spacingSize}, var(--iress-g-spacing-#{$spacingSize})) * -1));
+    $vertical: if($spacingSize == 'none', 0, var(--iress-a-vertical-spacing-#{$spacingSize}, var(--iress-g-spacing-#{$spacingSize})));
+    $verticalNegative: if($spacingSize == 'none', 0, calc(var(--iress-a-vertical-spacing-#{$spacingSize}, var(--iress-g-spacing-#{$spacingSize})) * -1));
+    $bpModifier: if($bpName == '', '', '-#{$bpName}');
+
+    .iress-m#{$bpModifier}--#{$spacingSize},
+    .iress-mt#{$bpModifier}--#{$spacingSize},
+    .iress-my#{$bpModifier}--#{$spacingSize} {
+      margin-block-start: $vertical !important;
+    }
+
+    .iress-m#{$bpModifier}--#{$spacingSize},
+    .iress-mb#{$bpModifier}--#{$spacingSize},
+    .iress-my#{$bpModifier}--#{$spacingSize} {
+      margin-block-end: $vertical !important;
+    }
+
+    .iress-m#{$bpModifier}--#{$spacingSize},
+    .iress-ml#{$bpModifier}--#{$spacingSize},
+    .iress-mx#{$bpModifier}--#{$spacingSize} {
+      margin-inline-start: $horizontal !important;
+    }
+
+    .iress-m#{$bpModifier}--#{$spacingSize},
+    .iress-mr#{$bpModifier}--#{$spacingSize},
+    .iress-mx#{$bpModifier}--#{$spacingSize} {
+      margin-inline-end: $horizontal !important;
+    }
+
+    .iress-m#{$bpModifier}--n-#{$spacingSize},
+    .iress-mt#{$bpModifier}--n-#{$spacingSize},
+    .iress-my#{$bpModifier}--n-#{$spacingSize} {
+      margin-block-start: $verticalNegative !important;
+    }
+
+    .iress-m#{$bpModifier}--n-#{$spacingSize},
+    .iress-mb#{$bpModifier}--n-#{$spacingSize},
+    .iress-my#{$bpModifier}--n-#{$spacingSize} {
+      margin-block-end: $verticalNegative !important;
+    }
+
+    .iress-m#{$bpModifier}--n-#{$spacingSize},
+    .iress-ml#{$bpModifier}--n-#{$spacingSize},
+    .iress-mx#{$bpModifier}--n-#{$spacingSize} {
+      margin-inline-start: $horizontalNegative !important;
+    }
+
+    .iress-m#{$bpModifier}--n-#{$spacingSize},
+    .iress-mr#{$bpModifier}--n-#{$spacingSize},
+    .iress-mx#{$bpModifier}--n-#{$spacingSize} {
+      margin-inline-end: $horizontalNegative !important;
+    }
+  }
+}
+
+@include responsiveMargin('');
+
+@each $bpName, $bpValue in vars.$breakpoints {
+  @if $bpName == 'xs' {
+    @include responsiveMargin($bpName);
+  } @else {
+    @media only screen and (#{$bpValue}) {
+      @include responsiveMargin($bpName);
+    }
+  }
+}

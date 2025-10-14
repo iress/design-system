@@ -1,11 +1,5 @@
-import {
-  createElement,
-  type ElementType,
-  Fragment,
-  useRef,
-  useState,
-} from 'react';
-import { createRoot, type Root } from 'react-dom/client';
+import { createElement, ElementType, Fragment, useRef, useState } from 'react';
+import { createRoot, Root } from 'react-dom/client';
 import IDS_CSS from '@iress-oss/ids-components/dist/style.css?raw';
 import {
   IressButton,
@@ -280,7 +274,7 @@ const MicrofrontendApp = () => {
         slideout.
       </p>
       <IressForm>
-        <IressStack gap="md">
+        <IressStack gutter="md">
           <IressFormField
             hint="Type to copy an existing character's name"
             label="Asynchronous options"
@@ -338,10 +332,13 @@ const GrandparentApp = () => {
   const container = useRef<HTMLDivElement | null>(null);
 
   return (
-    <IressSlideoutProvider container={container}>
+    <IressSlideoutProvider
+      container={container}
+      injectPushStyles="#grandparent-app"
+    >
       <div ref={container} />
       <IressPanel className="iress-m--lg">
-        <IressInline gap="sm" verticalAlign="middle">
+        <IressInline gutter="sm" verticalAlign="middle">
           <IressButton onClick={() => setShow(!show)}>
             Toggle Slideout
           </IressButton>

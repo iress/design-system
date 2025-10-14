@@ -1,2 +1,1 @@
-export * from './Progress';
-export * from './Progress.styles';
+export { IressProgress } from './Progress';

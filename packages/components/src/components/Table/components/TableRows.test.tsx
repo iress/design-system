@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
+import { IressTableProvider } from '../TableProvider';
 import { TableRows } from './TableRows';
 import { TableHeader } from './TableHeader';
 import { Row } from '@tanstack/react-table';
-import { TableProvider } from '../TableProvider';
 
 describe('TableRows', () => {
   it('renders nothing if not in an iress table', () => {
@@ -19,11 +19,11 @@ describe('TableRows', () => {
 
   it('renders nothing if no rows', () => {
     const screen = render(
-      <TableProvider columns={[{ key: 'test', sort: true }]} rows={[]}>
+      <IressTableProvider columns={[{ key: 'test', sort: true }]} rows={[]}>
         <table>
           <TableRows tableId="id" />
         </table>
-      </TableProvider>,
+      </IressTableProvider>,
     );
 
     const body = screen.queryByRole('rowgroup');
@@ -32,13 +32,13 @@ describe('TableRows', () => {
 
   it('renders if there are rows', () => {
     const screen = render(
-      <TableProvider rows={[{ hello: 'world' }]}>
+      <IressTableProvider rows={[{ hello: 'world' }]}>
         <table>
           <tbody>
             <TableRows tableId="id" />
           </tbody>
         </table>
-      </TableProvider>,
+      </IressTableProvider>,
     );
 
     const body = screen.getByRole('rowgroup');
@@ -54,13 +54,13 @@ describe('TableRows', () => {
 
   it('renders if there are rows and the col is scope', () => {
     const screen = render(
-      <TableProvider rows={[{ hello: 'world' }]}>
+      <IressTableProvider rows={[{ hello: 'world' }]}>
         <table>
           <tbody>
             <TableRows tableId="id" scope="col" />
           </tbody>
         </table>
-      </TableProvider>,
+      </IressTableProvider>,
     );
 
     const body = screen.getByRole('rowgroup');
@@ -76,7 +76,7 @@ describe('TableRows', () => {
 
   it('renders with rowProps if set to an object map', () => {
     const screen = render(
-      <TableProvider rows={[{ hello: 'world' }]}>
+      <IressTableProvider rows={[{ hello: 'world' }]}>
         <table>
           <tbody>
             <TableRows
@@ -87,7 +87,7 @@ describe('TableRows', () => {
             />
           </tbody>
         </table>
-      </TableProvider>,
+      </IressTableProvider>,
     );
 
     const row = screen.getByRole('row', { name: 'world' });
@@ -96,7 +96,7 @@ describe('TableRows', () => {
 
   it('renders with rowProps if set to a function', () => {
     const screen = render(
-      <TableProvider rows={[{ hello: 'world' }, { hello: 'otherWorld' }]}>
+      <IressTableProvider rows={[{ hello: 'world' }, { hello: 'otherWorld' }]}>
         <table>
           <tbody>
             <TableRows
@@ -110,7 +110,7 @@ describe('TableRows', () => {
             />
           </tbody>
         </table>
-      </TableProvider>,
+      </IressTableProvider>,
     );
 
     const row = screen.getByRole('row', { name: 'world' });
@@ -123,7 +123,7 @@ describe('TableRows', () => {
   describe('accessibility', () => {
     it('should not have basic accessibility issues', async () => {
       const screen = render(
-        <TableProvider rows={[{ hello: 'world' }]}>
+        <IressTableProvider rows={[{ hello: 'world' }]}>
           <table>
             <thead>
               <TableHeader tableId="id" />
@@ -132,7 +132,7 @@ describe('TableRows', () => {
               <TableRows tableId="id" />
             </tbody>
           </table>
-        </TableProvider>,
+        </IressTableProvider>,
       );
       const results = await axe(screen.container);
       expect(results).toHaveNoViolations();

@@ -21,4 +21,4 @@ The component library is part of the Iress Design System (IDS) monorepo. Please 
 
 ## Support
 
-For support, please reach out to us at our Slack channel.
+For support, please reach out to us at our Slack channel or contact the Design System team.

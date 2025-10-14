@@ -1,16 +1,15 @@
+import { type AutocompleteInstructionsProps } from '../Autocomplete.types';
 import { IressPanel } from '../../Panel';
-
-export interface AutocompleteInstructionsProps {
-  /**
-   * The minimum number of characters required to search.
-   */
-  minSearchLength: number;
-}
 
 export const AutocompleteInstructions = ({
   minSearchLength,
+  styles,
 }: AutocompleteInstructionsProps) => {
   const instructionText = `Type at least ${minSearchLength} character${minSearchLength === 1 ? '' : 's'} to search`;
 
-  return <IressPanel>{instructionText}</IressPanel>;
+  return (
+    <IressPanel className={styles?.instructions ?? ''}>
+      {instructionText}
+    </IressPanel>
+  );
 };

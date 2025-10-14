@@ -1,6 +1,5 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressMenuText } from './MenuText';
-import { IressMenu } from '../Menu';
 
 type Story = StoryObj<typeof IressMenuText>;
 
@@ -13,9 +12,4 @@ export const Text: Story = {
   args: {
     children: 'Menu text',
   },
-  render: (args) => (
-    <IressMenu>
-      <IressMenuText {...args} />
-    </IressMenu>
-  ),
 };

@@ -1,2 +1,2 @@
+export * from './Toggle.types';
 export * from './Toggle';
-export * from './Toggle.styles';

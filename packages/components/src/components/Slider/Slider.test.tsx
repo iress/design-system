@@ -1,8 +1,8 @@
 import { RenderResult, fireEvent, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressSlider, IressSliderProps, slider as sliderStyles } from '.';
+import { IressSlider, IressSliderProps } from '.';
+import styles from './Slider.module.scss';
 import { IressLabel } from '../Label';
-import { css } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 
 const TEST_ID = 'test-component';
@@ -21,21 +21,20 @@ describe('IressSlider', () => {
     });
 
     const wrapper = screen.getByTestId(TEST_ID);
-    expect(wrapper).toHaveClass(
-      'test-class',
-      sliderStyles().root!,
-      GlobalCSSClass.Slider,
-    );
+    expect(wrapper).toHaveClass('test-class', styles.slider);
+
+    // TODO: Remove once we have Chromatic
     expect(wrapper).toHaveStyle({
-      '--iress-thumb-value-offset': 'calc(0% + ((1.75rem / 2) - 0px))',
+      '--iress-thumb-value-offset':
+        'calc(0% + ((var(--iress-thumb-width) / 2) - 0px))',
     });
 
     const slider = screen.getByRole('slider');
-    expect(slider).toHaveClass(sliderStyles().control!);
+    expect(slider).toHaveClass(styles.control);
     expect(slider).toHaveValue('0');
 
     const status = screen.getByRole('status');
-    expect(status).toHaveClass(sliderStyles().thumbValue!);
+    expect(status).toHaveClass(styles.thumbValue);
     expect(status).toHaveTextContent('0');
   });
 
@@ -61,9 +60,10 @@ describe('IressSlider', () => {
         const slider = screen.getByRole('slider');
         expect(slider).toHaveValue('2');
 
+        // TODO: Remove once we have Chromatic
         expect(screen.getByTestId(TEST_ID)).toHaveStyle({
           '--iress-thumb-value-offset':
-            'calc(20% + ((1.75rem / 2) - 5.699999999999999px))',
+            'calc(20% + ((var(--iress-thumb-width) / 2) - 5.699999999999999px))',
         });
       });
     });
@@ -88,11 +88,11 @@ describe('IressSlider', () => {
         expect(status).toHaveTextContent('Value is: Zero');
       });
 
-      it('uses the readOnly flag if found', () => {
+      it('uses the readonly flag if found', () => {
         const screen = renderComponent({
-          formatValue: (value, tick, readOnly) =>
-            readOnly ? `I am readonly` : <>Value is: ${tick?.label ?? value}</>,
-          readOnly: true,
+          formatValue: (value, tick, readonly) =>
+            readonly ? `I am readonly` : <>Value is: ${tick?.label ?? value}</>,
+          readonly: true,
           tickLabels: [{ value: 0, label: 'Zero' }],
         });
 
@@ -154,11 +154,11 @@ describe('IressSlider', () => {
       });
     });
 
-    describe('readOnly', () => {
-      it('renders a readOnly version', () => {
+    describe('readonly', () => {
+      it('renders a readonly version', () => {
         const screen = renderComponent({
           name: 'test',
-          readOnly: true,
+          readonly: true,
         });
 
         expect(screen.queryByRole('slider')).not.toBeInTheDocument();
@@ -168,19 +168,19 @@ describe('IressSlider', () => {
         expect(hiddenInput).toHaveValue('0');
       });
 
-      it('renders a readOnly version with a value', () => {
+      it('renders a readonly version with a value', () => {
         const screen = renderComponent({
-          readOnly: true,
+          readonly: true,
           value: 2,
         });
 
         expect(screen.getByText('2')).toBeInTheDocument();
       });
 
-      it('renders a readOnly version with a value, and uses the tick labels if provided', () => {
+      it('renders a readonly version with a value, and uses the tick labels if provided', () => {
         const screen = renderComponent({
           name: 'name',
-          readOnly: true,
+          readonly: true,
           value: 0,
           tickLabels: [
             { value: 0, label: 'Zero' },
@@ -222,6 +222,7 @@ describe('IressSlider', () => {
         const options = screen.getAllByTestId(`${TEST_ID}__datalist__option`);
         expect(options).toHaveLength(4);
 
+        // TODO: Remove once we have Chromatic
         options.forEach((option, index) => {
           expect(option.parentElement).toHaveStyle({
             '--iress-tick-label-width':
@@ -238,14 +239,17 @@ describe('IressSlider', () => {
         const options = screen.getAllByTestId(`${TEST_ID}__datalist__option`);
         expect(options).toHaveLength(3);
 
+        // TODO: Remove once we have Chromatic
         expect(screen.getByText('2').parentElement).toHaveStyle({
           '--iress-tick-label-width': '20%',
         });
 
+        // TODO: Remove once we have Chromatic
         expect(screen.getByText('3').parentElement).toHaveStyle({
           '--iress-tick-label-width': '10%',
         });
 
+        // TODO: Remove once we have Chromatic
         expect(screen.getByText('4').parentElement).toHaveStyle({
           '--iress-tick-label-width': '10%',
         });
@@ -262,10 +266,12 @@ describe('IressSlider', () => {
         const options = screen.getAllByTestId(`${TEST_ID}__datalist__option`);
         expect(options).toHaveLength(2);
 
+        // TODO: Remove once we have Chromatic
         expect(screen.getByText('One').parentElement).toHaveStyle({
           '--iress-tick-label-width': '10%',
         });
 
+        // TODO: Remove once we have Chromatic
         expect(screen.getByText('Final').parentElement).toHaveStyle({
           '--iress-tick-label-width': '90%',
         });
@@ -275,13 +281,15 @@ describe('IressSlider', () => {
         const screen = renderComponent({
           tickLabels: [
             { label: 'Zero', value: 0 },
-            { label: 'Five', value: 5, srOnly: { xs: true, lg: false } },
+            { label: 'Five', value: 5, hiddenOn: { xs: true, lg: false } },
             { label: 'Final', value: 10 },
           ],
         });
 
         expect(screen.getByText('Five')).toHaveClass(
-          css({ srOnly: { xs: true, lg: false } }),
+          `${GlobalCSSClass.SROnly}--xs`,
+          `${GlobalCSSClass.SROnly}--sm`,
+          `${GlobalCSSClass.SROnly}--md`,
         );
       });
     });
@@ -295,9 +303,10 @@ describe('IressSlider', () => {
         const slider = screen.getByRole('slider');
         expect(slider).toHaveValue('2');
 
+        // TODO: Remove once we have Chromatic
         expect(screen.getByTestId(TEST_ID)).toHaveStyle({
           '--iress-thumb-value-offset':
-            'calc(20% + ((1.75rem / 2) - 5.699999999999999px))',
+            'calc(20% + ((var(--iress-thumb-width) / 2) - 5.699999999999999px))',
         });
       });
     });

@@ -1,18 +1,6 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressInline, IressInlineProps } from '.';
-import { GlobalCSSClass } from '@/enums';
-
-const classNames = {
-  gapDefault: 'gap_spacing.000',
-  gapMd: 'gap_spacing.400',
-  wrapDefault: 'flex-wrap_wrap',
-  wrapNoWrap: 'flex-wrap_nowrap',
-  horizontalAlignDefault: 'jc_flex-start',
-  horizontalAlignRight: 'jc_flex-end',
-  verticalAlignDefault: 'ai_flex-start',
-  verticalAlignCenter: 'ai_center',
-};
+import { IressInline, IressInlineProps, InlineCssClass } from '.';
 
 const renderComponent = (args: IressInlineProps) => {
   return render(
@@ -29,23 +17,19 @@ describe('IressInline', () => {
     test('default classes should be applied', () => {
       const { getByTestId } = renderComponent({});
       const component = getByTestId('test-component');
-      expect(component).toHaveClass(classNames.wrapDefault);
-      expect(component).toHaveClass(classNames.horizontalAlignDefault);
-      expect(component).toHaveClass(classNames.verticalAlignDefault);
-      expect(component).toHaveClass(classNames.gapDefault);
-      expect(component).toHaveClass(GlobalCSSClass.Inline);
+      expect(component).toHaveClass(InlineCssClass.Base);
+      expect(component).toHaveClass(`${InlineCssClass.Gutter}--none`);
     });
 
-    test('gap should apply the correct class when set', () => {
+    test('gutter should apply the correct class when set', () => {
       const screen = renderComponent({
-        gap: 'spacing.400',
+        gutter: 'md',
       });
 
       const container = screen.getByTestId('test-component');
 
-      expect(container).not.toHaveClass('iress-u-inline');
-      expect(container).not.toHaveClass('iress--gutter--md');
-      expect(container).toHaveClass(classNames.gapMd);
+      expect(container).toHaveClass('iress-u-inline');
+      expect(container).toHaveClass('iress--gutter--md');
     });
 
     test('horizontalAlign should apply the correct class when set', () => {
@@ -55,8 +39,8 @@ describe('IressInline', () => {
 
       const container = screen.getByTestId('test-component');
 
-      expect(container).not.toHaveClass('iress-u-inline');
-      expect(container).toHaveClass(classNames.horizontalAlignRight);
+      expect(container).toHaveClass('iress-u-inline');
+      expect(container).toHaveClass(`${InlineCssClass.HorizontalAlign}--right`);
     });
 
     test('noWrap should apply the correct class when set', () => {
@@ -66,8 +50,8 @@ describe('IressInline', () => {
 
       const container = screen.getByTestId('test-component');
 
-      expect(container).not.toHaveClass('iress-u-inline');
-      expect(container).toHaveClass(classNames.wrapNoWrap);
+      expect(container).toHaveClass('iress-u-inline');
+      expect(container).toHaveClass(InlineCssClass.NoWrap);
     });
 
     test('verticalAlign should apply the correct class when set', () => {
@@ -77,8 +61,8 @@ describe('IressInline', () => {
 
       const container = screen.getByTestId('test-component');
 
-      expect(container).not.toHaveClass('iress-u-inline');
-      expect(container).toHaveClass(classNames.verticalAlignCenter);
+      expect(container).toHaveClass('iress-u-inline');
+      expect(container).toHaveClass(`${InlineCssClass.VerticalAlign}--middle`);
     });
   });
 

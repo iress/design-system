@@ -1,11 +1,10 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressRadioGroup } from '.';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressRadioGroup, RADIO_GROUP_LAYOUTS } from '.';
 import { IressRadio } from '../Radio';
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressText } from '../Text';
 import styles from '@iress-storybook/styles.module.scss';
 import { IressField } from '../Field';
-import { IressStack } from '../Stack';
 import {
   getFinancialReviewChildren,
   getFinancialReviewManyChildren,
@@ -20,7 +19,6 @@ export default {
   argTypes: {
     ...disableArgTypes(['children', 'onChange']),
   },
-  tags: ['updated'],
 } as Meta<typeof IressRadioGroup>;
 
 export const RadioChildren: Story = {
@@ -70,28 +68,14 @@ export const Layout: Story = {
     ...disableArgTypes(['layout']),
   },
   render: (args) => (
-    <IressStack gap="md">
-      <IressText>
-        <h3>block (default)</h3>
-        <IressRadioGroup {...args} layout="block" />
-      </IressText>
-      <IressText>
-        <h3>inline</h3>
-        <IressRadioGroup {...args} layout="inline" />
-      </IressText>
-      <IressText>
-        <h3>inlineEqualWidth</h3>
-        <IressRadioGroup {...args} layout="inlineEqualWidth" />
-      </IressText>
-      <IressText>
-        <h3>inlineFlex</h3>
-        <IressRadioGroup {...args} layout="inlineFlex" />
-      </IressText>
-      <IressText>
-        <h3>stack</h3>
-        <IressRadioGroup {...args} layout="stack" />
-      </IressText>
-    </IressStack>
+    <IressText className="iress-u-stack iress--gutter--lg">
+      {RADIO_GROUP_LAYOUTS.map((layout) => (
+        <div key={layout}>
+          <h3>{layout}</h3>
+          <IressRadioGroup {...args} layout={layout} />
+        </div>
+      ))}
+    </IressText>
   ),
 };
 
@@ -126,14 +110,22 @@ export const CustomRadioGroupLayout: Story = {
       label="I'd like to discuss the following in my financial review:"
       hint="Select one option"
     >
-      <IressRadioGroup {...args}>
+      <IressRadioGroup
+        {...args}
+        style={
+          {
+            '--iress-margin-bottom': 0,
+            '--iress-inline-spacing-x': 0,
+          } as never
+        }
+      >
         <div
           className={styles.resizable}
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
             gridAutoRows: '1fr',
-            gridGap: '0.75rem',
+            gridGap: 'var(--iress-g-spacing-sm, 0.75rem)',
             width: '100%',
             padding: '0.5rem',
           }}
@@ -145,11 +137,11 @@ export const CustomRadioGroupLayout: Story = {
   ),
 };
 
-export const ReadOnly: Story = {
+export const Readonly: Story = {
   ...RadioSelection,
   args: {
     ...RadioSelection.args,
-    readOnly: true,
+    readonly: true,
   },
 };
 

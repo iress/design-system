@@ -1,0 +1,7 @@
+/** Form
+ * --------------------------------------------------
+ */
+.alert:focus {
+  outline: none;
+  box-shadow: 0 0 0 var(--iress-g-focus-width, var(--iress-default-focus-size)) var(--iress-focus-color);
+}

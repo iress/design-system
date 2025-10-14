@@ -1,0 +1,15 @@
+.position {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.message {
+    padding-inline: var(--iress-spacing-400, var(--iress-g-spacing-md, 1rem));
+    padding-block: var(--iress-spacing-300, var(--iress-g-spacing-xs, 0.75rem));
+    background: var(--iress-colour-neutral-20, var(--iress-g-default-background, #F9F9F9));
+    color: var(--iress-colour-neutral-70, var(--iress-g-muted-text-color, #6D7278));
+    border: var(--iress-colour-neutral-30, var(--iress-g-border-color, #D7D8DA)) solid 1px;
+    border-top-width: 0;
+}

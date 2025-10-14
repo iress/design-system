@@ -1,78 +1,24 @@
-import { useContext, useEffect, useRef } from 'react';
+import {
+  type IressToasterProps,
+  TOAST_POSITION_ANIMATION_MATRIX,
+  TOASTER_ARIA_ATTRIBUTES,
+} from './Toaster.types';
+import classNames from 'classnames';
+import styles from './Toaster.module.scss';
+import { GlobalCSSClass } from '@/enums';
 import { IressStack } from '../Stack';
 import { FloatingPortal } from '@floating-ui/react';
-import { type FloatingUIContainer, type IressStyledProps } from '@/types';
-import { toaster as toasterStyles } from './Toaster.styles';
-import { cx } from '@/styled-system/css';
-import {
-  ToastAnimated,
-  type ToastAnimatedProps,
-} from './components/Toast/ToastAnimated';
-import { styled } from '@/styled-system/jsx';
-import { GlobalCSSClass } from '@/enums';
-import { ToasterContext } from './hooks/useToaster';
+import { IressToastAnimated } from './Toast/ToastAnimated';
+import { useContext, useEffect, useRef } from 'react';
+import { ToasterContext } from './ToasterProvider';
 
-export interface ToasterItem
-  extends Omit<ToastAnimatedProps, 'children' | 'animation'> {
-  /**
-   * A unique identifier for the toast.
-   */
-  id: string;
-}
-
-export interface ToasterProps extends Omit<IressStyledProps, 'children'> {
-  /**
-   * The container element to render the toaster into.
-   * By default, the toaster will render at the end of the document body.
-   */
-  container?: FloatingUIContainer;
-
-  /**
-   * The position on the screen where the toast will appear.
-   * @default bottom-end
-   */
-  position?:
-    | 'bottom-center'
-    | 'bottom-end'
-    | 'bottom-start'
-    | 'top-center'
-    | 'top-end'
-    | 'top-start';
-
-  /**
-   * The toasts that will be displayed in the toaster.
-   */
-  toasts?: ToasterItem[];
-}
-
-const toastAnimationBasedOnToasterPosition: Record<
-  Exclude<ToasterProps['position'], undefined>,
-  Exclude<ToastAnimatedProps['animation'], undefined>
-> = {
-  'bottom-end': 'end-x',
-  'bottom-start': 'start-x',
-  'bottom-center': 'end-y',
-  'top-end': 'end-x',
-  'top-start': 'start-x',
-  'top-center': 'start-y',
-};
-
-const toasterAriaAttributes: IressStyledProps = {
-  role: 'alert',
-  'aria-relevant': 'additions',
-  'aria-live': 'assertive',
-};
-
-export const Toaster = ({
-  className,
+export const IressToaster = ({
   container,
   position = 'bottom-end',
   toasts = [],
-  ...restProps
-}: ToasterProps) => {
-  const context = useContext(ToasterContext);
+}: IressToasterProps) => {
+  const toaster = useContext(ToasterContext);
   const fallbackContainer = useRef<HTMLDivElement | null>(null);
-  const classes = toasterStyles({ position });
 
   useEffect(() => {
     if (!container) {
@@ -82,34 +28,40 @@ export const Toaster = ({
     const domContainer =
       container instanceof HTMLElement ? container : container.current;
 
-    Object.entries(toasterAriaAttributes).forEach(([key, value]) => {
+    Object.entries(TOASTER_ARIA_ATTRIBUTES).forEach(([key, value]) => {
       domContainer?.setAttribute(key, String(value));
     });
   }, [container]);
 
   if (!toasts.length)
     return container ? null : (
-      <styled.div ref={fallbackContainer} {...toasterAriaAttributes} />
+      <div ref={fallbackContainer} {...TOASTER_ARIA_ATTRIBUTES} />
     );
 
   return (
     <>
       {!container && (
-        <styled.div ref={fallbackContainer} {...toasterAriaAttributes} />
+        <div ref={fallbackContainer} {...TOASTER_ARIA_ATTRIBUTES} />
       )}
       <FloatingPortal root={container ?? fallbackContainer}>
         <IressStack
-          className={cx(classes.root, className, GlobalCSSClass.Toaster)}
-          gap="md"
-          {...restProps}
+          className={classNames(
+            GlobalCSSClass.IgnoreStack,
+            styles.toaster,
+            styles[`toaster__${position}`],
+          )}
+          gutter="md"
         >
           {toasts.map((toast) => (
-            <ToastAnimated
+            <IressToastAnimated
               {...toast}
-              animation={toastAnimationBasedOnToasterPosition[position]}
+              animation={TOAST_POSITION_ANIMATION_MATRIX[position]}
               key={toast.id}
-              onClose={(e) => context?.remove(toast.id, e)}
-              onTimeout={() => context?.remove(toast.id)}
+              onClose={(e) => {
+                toaster?.close(toast.id, e);
+              }}
+              onTimeout={() => toaster?.close(toast.id)}
+              timeout={toast.timeout}
             />
           ))}
         </IressStack>

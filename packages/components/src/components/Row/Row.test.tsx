@@ -1,7 +1,6 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressRow } from '.';
-import { GlobalCSSClass } from '@/enums';
+import { IressRow, RowCssClass } from '.';
 
 const TEST_ID = 'test-component';
 
@@ -16,28 +15,33 @@ describe('IressRow', () => {
     const element = getByTestId(TEST_ID);
 
     expect(element).toHaveClass(
-      'jc_flex-start',
-      'ai_flex-start',
+      RowCssClass.Base,
+      `${RowCssClass.HorizontalAlign}--${IressRow.HorizontalAlign.Left}`,
+      `${RowCssClass.VerticalAlign}--${IressRow.VerticalAlign.Top}`,
+      `${RowCssClass.Gutter}--${IressRow.Gutter.None}`,
       'test-class',
-      GlobalCSSClass.Row,
     );
 
-    expect(element).not.toHaveClass('cg_spacing.000');
+    expect(element).not.toHaveClass(RowCssClass.UseColGap);
 
     expect(getByTestId('children')).toBeInTheDocument();
   });
 
   describe('props', () => {
     describe('gutter', () => {
-      it(`adds the gap for all breakpoints of string passed`, () => {
+      it(`adds the gutter for all breakpoints of string passed`, () => {
         const { getByTestId } = render(
-          <IressRow data-testid={TEST_ID} gutter="spacing.400" />,
+          <IressRow data-testid={TEST_ID} gutter={IressRow.Gutter.Md} />,
         );
 
         const element = getByTestId(TEST_ID);
 
-        expect(element).toHaveClass('gutter_spacing.400');
-        expect(element).not.toHaveClass('gutter_spacing.000');
+        expect(element).toHaveClass(
+          `${RowCssClass.Gutter}--${IressRow.Gutter.Md}`,
+        );
+        expect(element).not.toHaveClass(
+          `${RowCssClass.Gutter}--${IressRow.Gutter.None}`,
+        );
       });
 
       it(`adds the correct responsive gutter classes from object - two options`, () => {
@@ -45,15 +49,15 @@ describe('IressRow', () => {
           <IressRow
             data-testid={TEST_ID}
             gutter={{
-              xs: 'spacing.000',
-              md: 'spacing.400',
+              xs: IressRow.Gutter.None,
+              md: IressRow.Gutter.Md,
             }}
           />,
         );
 
         expect(getByTestId(TEST_ID)).toHaveClass(
-          'xs:gutter_spacing.000',
-          'md:gutter_spacing.400',
+          `${RowCssClass.Gutter}-xs--${IressRow.Gutter.None}`,
+          `${RowCssClass.Gutter}-md--${IressRow.Gutter.Md}`,
         );
       });
 
@@ -62,17 +66,17 @@ describe('IressRow', () => {
           <IressRow
             data-testid={TEST_ID}
             gutter={{
-              sm: 'spacing.1200',
-              lg: 'spacing.200',
-              xxl: 'spacing.200',
+              sm: IressRow.Gutter.Xl,
+              lg: IressRow.Gutter.Sm,
+              xxl: IressRow.Gutter.Sm,
             }}
           />,
         );
 
         expect(getByTestId(TEST_ID)).toHaveClass(
-          'sm:gutter_spacing.1200',
-          'lg:gutter_spacing.200',
-          'xxl:gutter_spacing.200',
+          `${RowCssClass.Gutter}-sm--${IressRow.Gutter.Xl}`,
+          `${RowCssClass.Gutter}-lg--${IressRow.Gutter.Sm}`,
+          `${RowCssClass.Gutter}-xxl--${IressRow.Gutter.Sm}`,
         );
       });
     });
@@ -80,20 +84,40 @@ describe('IressRow', () => {
     describe('horizontalAlign', () => {
       it('adds the correct classes', () => {
         const { getByTestId } = render(
-          <IressRow data-testid={TEST_ID} horizontalAlign="between" />,
+          <IressRow
+            data-testid={TEST_ID}
+            horizontalAlign={IressRow.HorizontalAlign.Between}
+          />,
         );
 
-        expect(getByTestId(TEST_ID)).toHaveClass('jc_space-between');
+        expect(getByTestId(TEST_ID)).toHaveClass(
+          `${RowCssClass.HorizontalAlign}--${IressRow.HorizontalAlign.Between}`,
+        );
+      });
+    });
+
+    describe('useColGap', () => {
+      it('adds the correct classes', () => {
+        const { getByTestId } = render(
+          <IressRow data-testid={TEST_ID} useColGap />,
+        );
+
+        expect(getByTestId(TEST_ID)).toHaveClass(RowCssClass.UseColGap);
       });
     });
 
     describe('verticalAlign', () => {
       it('adds the correct classes', () => {
         const { getByTestId } = render(
-          <IressRow data-testid={TEST_ID} verticalAlign="bottom" />,
+          <IressRow
+            data-testid={TEST_ID}
+            verticalAlign={IressRow.VerticalAlign.Bottom}
+          />,
         );
 
-        expect(getByTestId(TEST_ID)).toHaveClass('ai_flex-end');
+        expect(getByTestId(TEST_ID)).toHaveClass(
+          `${RowCssClass.VerticalAlign}--${IressRow.VerticalAlign.Bottom}`,
+        );
       });
     });
   });

@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { IressCheckbox } from '.';
 import { IressCheckboxMark } from '../CheckboxMark';
@@ -13,7 +13,6 @@ export default {
   title: 'Components/Checkbox',
   component: IressCheckbox,
   subcomponents: { IressCheckboxMark },
-  tags: ['updated'],
 } as Meta<typeof IressCheckbox>;
 
 export const Default: Story = {
@@ -54,7 +53,7 @@ export const Indeterminate: Story = {
 export const HiddenControl: Story = {
   args: {
     hiddenControl: true,
-    children: <IressPanel bg="transparent">Hidden checkbox</IressPanel>,
+    children: <IressPanel background="transparent">Hidden checkbox</IressPanel>,
   },
   argTypes: {
     ...disableArgTypes(['children']),
@@ -107,11 +106,11 @@ export const WithTableData: Story = {
   },
 };
 
-export const ReadOnly: Story = {
+export const Readonly: Story = {
   args: {
     children: 'I agree to the terms and conditions',
     readOnly: true,
-    value: 'readOnly',
+    value: 'readonly',
   },
   argTypes: {
     ...disableArgTypes(['checked', 'readOnly']),

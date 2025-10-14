@@ -35,15 +35,7 @@ describe('useResponsiveProps', () => {
       expect(hook.result.current.value).toBe(undefined);
     });
 
-    it('returns the object if not a responsive object', () => {
-      const value = {
-        blah: 'yeah',
-      };
-      const hook = renderHook(() => useResponsiveProps(value));
-      expect(hook.result.current.value).toBe(value);
-    });
-
-    it('returns undefined if not matching breakpoint', () => {
+    it('returns undefined if not breakpoint', () => {
       const hook = renderHook(() =>
         useResponsiveProps({
           xxl: 'matches',
@@ -59,19 +51,6 @@ describe('useResponsiveProps', () => {
         }),
       );
       expect(hook.result.current.value).toBe('matches');
-    });
-
-    it('returns the base value if not matching any of the breakpoints', () => {
-      const hook = renderHook(() =>
-        useResponsiveProps(
-          {
-            base: 'test',
-            xs: 'matches',
-          },
-          false,
-        ),
-      );
-      expect(hook.result.current.value).toBe('test');
     });
   });
 

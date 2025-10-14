@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { IressPopover } from './Popover';
 import { IressButton } from '../Button';
@@ -25,8 +25,12 @@ type Story = StoryObj<typeof IressPopover>;
 
 const childrenOptions = {
   none: null,
-  hello: <IressPanel>Hello!</IressPanel>,
-  basic: <IressPanel>A little more information about this area.</IressPanel>,
+  hello: <IressPanel className="iress-u-text">Hello!</IressPanel>,
+  basic: (
+    <IressPanel className="iress-u-text">
+      A little more information about this area.
+    </IressPanel>
+  ),
   details: (
     <IressPanel>
       <IressRow>
@@ -124,8 +128,8 @@ export const Align: Story = {
   },
   render: (args) => (
     <div style={{ padding: '80px 150px' }}>
-      <IressStack gap="md">
-        <IressInline horizontalAlign="center" gap="sm">
+      <IressStack gutter="md">
+        <IressInline horizontalAlign="center" gutter="sm">
           <IressPopover
             {...args}
             activator={
@@ -150,7 +154,7 @@ export const Align: Story = {
           />
         </IressInline>
         <IressInline horizontalAlign="between">
-          <IressStack gap="sm">
+          <IressStack gutter="sm">
             <IressInline horizontalAlign="left">
               <IressPopover
                 {...args}
@@ -173,7 +177,7 @@ export const Align: Story = {
               />
             </IressInline>
           </IressStack>
-          <IressStack gap="sm">
+          <IressStack gutter="sm">
             <IressInline horizontalAlign="right">
               <IressPopover
                 {...args}
@@ -197,7 +201,7 @@ export const Align: Story = {
             </IressInline>
           </IressStack>
         </IressInline>
-        <IressInline horizontalAlign="center" gap="sm">
+        <IressInline horizontalAlign="center" gutter="sm">
           <IressPopover
             {...args}
             activator={<IressButton>bottom-start</IressButton>}
@@ -229,7 +233,10 @@ export const Width: Story = {
     ...disableArgTypes(['show', 'width']),
   },
   render: (args) => (
-    <IressPopover {...args} contentStyle={{ style: { maxWidth: '30rem' } }} />
+    <IressPopover
+      {...args}
+      style={{ '--iress-max-width': '30rem', '--iress-width': '100%' } as never}
+    />
   ),
 };
 
@@ -241,7 +248,7 @@ export const Overflow: Story = {
     container: document.body,
   },
   render: (args) => (
-    <IressInline gap="md">
+    <IressInline gutter="md">
       <IressPopover
         {...args}
         activator={<IressButton>Normal popover</IressButton>}
@@ -249,7 +256,12 @@ export const Overflow: Story = {
       <IressPopover
         {...args}
         activator={<IressButton>Fixed height popover</IressButton>}
-        contentStyle={{ style: { maxHeight: '200px', overflowY: 'auto' } }}
+        style={
+          {
+            '--iress-max-height': '200px',
+            '--iress-overflow-y': 'auto',
+          } as never
+        }
       />
     </IressInline>
   ),
@@ -261,7 +273,7 @@ export const Inline: Story = {
     displayMode: 'inline',
   },
   render: (args) => (
-    <IressStack gap="md">
+    <IressStack gutter={IressStack.Gutter.Md}>
       <IressPopover {...args} />
       <IressText>This content will be pushed down</IressText>
     </IressStack>

@@ -1,0 +1,63 @@
+@use '../../styles/mixins';
+@use './Field.vars.module';
+
+/** Field
+ * --------------------------------------------------
+ * @prop --iress-background-color: Background colour of the field
+ * @prop --iress-focus-background-color: Background colour of the field when focused
+ * @prop --iress-border-left-width: Left border of field
+ * @prop --iress-border-color: Border colour of field
+ * @prop --iress-focus-border-color: Border colour of field when focused
+ * @prop --iress-text-color: Colour of the text
+ * @prop --iress-font-size: Font size of field
+ * @prop --iress-font-weight: Font weight of field
+ * @prop --iress-line-height: Line-height of field
+ * @prop --iress-hint-text-color: Colour of the hint text
+ * @prop --iress-hint-font-weight: Font weight of the hint text
+ * @prop --iress-margin-x: Horizontal margin for the field
+ * @prop --iress-multi-elements-label-text-color: Colour of the multi element label
+ * @prop --iress-transition: Transition animation of the field
+ * @prop --iress-max-width: Max width of the field
+ * @prop --iress-input-spacing-y: Spacing between multiple stacked inputs
+ * @prop --iress-input-spacing-x: Spacing between multiple inline inputs
+ * @prop --iress-required-text-color: Text color of the required symbol in field
+ * 
+ * Inherited tokens
+ * --------------------------------------------------
+ * @prop --iress-row-spacing: [Table] used for fields within tables
+*/
+
+.field {
+  @include mixins.defaultFontStyles();
+  --iress-label-ele-text-color: var(--iress-text-color);
+
+  line-height: var(--iress-line-height);
+  margin-inline: var(--iress-margin-x) var(--iress-margin-x);
+  background-color: var(--iress-background-color);
+  transition: var(--iress-transition);
+  max-width: var(--iress-max-width);
+  color: var(--iress-text-color);
+  display: block;
+
+  &:focus-within {
+    background-color: var(--iress-focus-background-color);
+    border-color: var(--iress-focus-border-color);
+  }
+}
+
+.hint {
+  color: var(--iress-hint-text-color);
+  font-weight: var(--iress-hint-font-weight);
+  display: block;
+}
+
+.invalid {
+  padding-inline-start: var(--iress-field-spacing-left);
+  border-inline-start: var(--iress-border-left-width) solid var(--iress-border-color);
+}
+
+.errorSummary {
+  --iress-list-margin-bottom: 0;
+
+  margin-bottom: 0;
+}

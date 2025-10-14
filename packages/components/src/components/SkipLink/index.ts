@@ -1,2 +1,2 @@
+export * from './SkipLink.types';
 export * from './SkipLink';
-export * from './SkipLink.styles';

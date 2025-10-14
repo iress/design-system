@@ -1,12 +1,11 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressDivider, type IressDividerProps } from '.';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressDivider, IressDividerProps } from '.';
 import { IressInline } from '../Inline';
 import { IressText } from '../Text';
 import { IressStack } from '../Stack/Stack';
 import { disableArgTypes } from '@iress-storybook/helpers';
+import { GUTTER_SIZES } from '@/constants';
 import { IressPanel } from '../Panel';
-
-const GUTTER_SIZES = ['none', 'xs', 'sm', 'md', 'lg', 'xl'];
 
 type Story = StoryObj<typeof IressDivider>;
 
@@ -19,7 +18,6 @@ const getChildren = (args: IressDividerProps) => [
 export default {
   title: 'Components/Divider',
   component: IressDivider,
-  tags: ['updated'],
 } as Meta<typeof IressDivider>;
 
 export const Horizontal: Story = {};
@@ -31,34 +29,29 @@ export const Vertical: Story = {
   render: (args) => {
     if (args.vertical) {
       return (
-        <IressInline gap="spacing.400" verticalAlign="middle">
+        <IressInline gutter="md" verticalAlign="middle">
           {getChildren(args)}
         </IressInline>
       );
     }
 
-    return <IressStack gap="spacing.400">{getChildren(args)}</IressStack>;
+    return <IressStack gutter="md">{getChildren(args)}</IressStack>;
   },
 };
 
 export const Gutter: Story = {
   argTypes: {
-    ...disableArgTypes(['gap']),
+    ...disableArgTypes(['gutter']),
   },
   render: (args) => {
     if (args.vertical) {
       return (
-        <IressStack gap="spacing.100">
-          {GUTTER_SIZES.map((mx) => (
-            <IressPanel key={mx}>
-              <IressText element="h2">
-                <code>mx="{mx}"</code>
-              </IressText>
+        <IressStack gutter="md">
+          {GUTTER_SIZES.map((gutter) => (
+            <IressPanel key={gutter}>
+              <IressText element="h2">{gutter}</IressText>
               <IressInline verticalAlign="middle">
-                {getChildren({
-                  ...args,
-                  mx,
-                } as IressDividerProps)}
+                {getChildren({ ...args, gutter })}
               </IressInline>
             </IressPanel>
           ))}
@@ -67,13 +60,11 @@ export const Gutter: Story = {
     }
 
     return (
-      <IressInline gap="spacing.400">
-        {GUTTER_SIZES.map((my) => (
-          <IressPanel key={my}>
-            <IressText element="h2">
-              <code>my="{my}"</code>
-            </IressText>
-            {getChildren({ ...args, my } as IressDividerProps)}
+      <IressInline gutter="md">
+        {GUTTER_SIZES.map((gutter) => (
+          <IressPanel key={gutter}>
+            <IressText element="h2">{gutter}</IressText>
+            {getChildren({ ...args, gutter })}
           </IressPanel>
         ))}
       </IressInline>

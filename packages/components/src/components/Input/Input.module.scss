@@ -1,0 +1,106 @@
+@use './Input.vars.module';
+
+.input {
+  display: block;
+  line-height: 1;
+  position: relative;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+}
+
+.wrapper,
+.addon {
+  display: flex;
+  align-items: stretch;
+  border-radius: var(--iress-border-radius);
+  background-color: var(--iress-background-color);
+  min-height: calc(var(--iress-min-height) - (2 * var(--iress-border-width)));
+}
+
+.wrapper {
+  margin: 0;
+  flex-grow: 1;
+  border: var(--iress-border-width) solid var(--iress-border-color);
+
+  &:focus-within {
+    border-color: var(--iress-focus-border-color);
+    box-shadow: var(--iress-focus-box-shadow);
+  }
+
+  &:has([class*='iress-width']) {
+    max-width: fit-content;
+  }
+}
+
+.inlineWrapper {
+  display: inline-flex;
+}
+
+.internal {
+  align-items: center;
+  display: flex;
+}
+
+.addon,
+.internal,
+.input .addon,
+.input .internal {
+  > * {
+    padding: 0 calc(0.75 * var(--iress-g-font-size-rem));
+  }
+
+  &:empty {
+    display: none;
+  }
+}
+
+.addon {
+  color: var(--iress-text-color);
+  line-height: 1;
+  font-weight: 300;
+  display: inline-flex;
+  align-items: center;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.prepend {
+  border-inline-end: var(--iress-addon-border-width) solid var(--iress-border-color);
+}
+
+.append {
+  border-inline-start: var(--iress-addon-border-width) solid var(--iress-border-color);
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.watermark {
+  .addon {
+    color: var(--iress-watermark-text-color);
+  }
+
+  .addon + .formControl {
+    padding-inline-start: 0;
+  }
+
+  .formControl + .addon {
+    border-inline-start: none;
+  }
+
+  .addon:not(:first-child) {
+    border-inline-start: none;
+  }
+
+  .addon:not(:last-child),
+  .formControl:not(:last-child) {
+    border-inline-end: none;
+  }
+}

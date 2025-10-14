@@ -5,7 +5,10 @@ import {
   type VirtualElement,
   useListNavigation,
 } from '@floating-ui/react';
-import { type IressPopoverProps } from '../Popover';
+import {
+  type PopoverNavigationHookReturn,
+  type PopoverTypes,
+} from '../Popover.types';
 
 /**
  * This is a wrapper around the useListNavigation hook from Floating UI, which is used to manage the keyboard navigation of popover items.
@@ -14,20 +17,21 @@ import { type IressPopoverProps } from '../Popover';
  * See: https://floating-ui.com/docs/useListNavigation
  *
  * @param {FloatingContext<RT>} context the popover context
- * @param {IressPopoverProps['type']} type the type of popover, whether it is a menu, listbox, etc.
+ * @param {PopoverTypes} type the type of popover, whether it is a menu, listbox, etc.
  * @param {Partial<UseListNavigationProps>} props props that are passed to the useListNavigation hook
  * @param {(activeIndex: number | null) => void} onNavigate called when the useListNavigation onNavigate is called
  * @param {number} startIndex Which index to start the focus on when the popover is opened. The index must exist in the list of items, otherwise it will not work.
+ * @returns {PopoverNavigationHookReturn} activeIndex setters, and the list and listProps passed to other Floating UI hooks
  */
 export const usePopoverNavigation = <
   RT extends VirtualElement = HTMLButtonElement,
 >(
   context: FloatingContext<RT>,
-  type?: IressPopoverProps['type'],
+  type?: PopoverTypes,
   props?: Partial<UseListNavigationProps>,
   onNavigate?: (activeIndex: number | null) => void,
   startIndex = 0,
-) => {
+): PopoverNavigationHookReturn => {
   const usesArrowKeyNav = useMemo(
     () => !!(type && ['menu', 'listbox'].includes(type)),
     [type],

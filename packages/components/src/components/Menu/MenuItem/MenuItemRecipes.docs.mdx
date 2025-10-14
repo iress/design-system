@@ -1,0 +1,39 @@
+import { Meta } from '@storybook/blocks';
+import { ComponentExample } from '@iress-storybook/components';
+import { IressAlert } from '../../../main';
+import * as MenuItemRecipes from './MenuItemRecipes.stories';
+
+<Meta of={MenuItemRecipes} />
+
+# Recipes
+
+<IressAlert
+  status={IressAlert.Status.Info}
+  heading="Experimental"
+  className="iress-mb--md"
+>
+  This API is experimental. It may change in the future based on usage. The team
+  is testing if these use cases exist and see if its worth maintaining this API.
+  If you have any questions, concerns or feedback, please reach out to the
+  design system team.
+</IressAlert>
+
+## Menu item hooks
+
+Beneath the surface, `IressMenuItem`, `IressMenuDivider` and `IressMenuHeading` component uses a few hooks to add styling and attributes that support accessibility, particularly when used within menus and popovers.
+
+1. `useMenuItemAria` - Used to create aria attributes for the menu item, dependending on the state of the menu item and its parent menu.
+2. `useMenuItemButtonProps` - Used to create props for the menu item button, based on the state of the menu item and its parent menu. This hook outputs the custom props of `IressButton`.
+3. `useMenuItemRole` - Used to establish the role prop of the menu item, based on its parent menu.
+4. `useMenuItemSelection` - Used to manage the selection state of the menu item by updating the parent menu.
+5. `useMenuItemComposite` - Used to ensure return node can be navigated to via keyboard.
+
+### Use cases
+
+1. You are using a third-party routing library with its own `Link` component and want to use it as a button.
+
+<ComponentExample
+  story={MenuItemRecipes.CustomRoutingLink}
+  stories={MenuItemRecipes}
+  source={{ type: 'code' }}
+/>

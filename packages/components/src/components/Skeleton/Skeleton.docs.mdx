@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -35,7 +35,7 @@ The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
 `rect` mode allows you to use `IressSkeleton` in place of block elements, a good example would be in place of images.
 
-`rect` accepts both `width` and `height` props for sizing. It will default to 100% width and 100px height.
+`rect` accepts both `width` and `height` props for sizing. It will default to 100% and a theme defined fallback height (`--iress-skeleton-bone-fallback-height`).
 
 <ComponentExample story={ComponentStories.Rect} stories={ComponentStories} />
 
@@ -43,7 +43,7 @@ The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
 `circle` mode allows you to use `IressSkeleton` in place of circular elements, a good example would be for profile images.
 
-`circle` accepts both `width` and `height` props for sizing. It will default to 100% width and 100px height.
+`circle` accepts both `width` and `height` props for sizing. It will default to 100% and a theme defined fallback height (`--iress-skeleton-bone-fallback-height`).
 
 <ComponentExample story={ComponentStories.Circle} stories={ComponentStories} />
 

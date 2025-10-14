@@ -6,6 +6,7 @@ import {
   MOCK_LABEL_VALUE_META,
   mockAsyncSearchLabelValues,
 } from '@/mocks/generateLabelValues';
+import styles from './Autocomplete.module.scss';
 
 const TEST_ID = 'test-component';
 
@@ -21,7 +22,7 @@ const renderAutocomplete = (props: IressAutocompleteProps = {}) => {
 };
 
 describe('IressAutocomplete', () => {
-  it('should render the component with the correct text', async () => {
+  it('should render the component with the correct text and classes', async () => {
     renderAutocomplete({
       className: 'test-class',
     });
@@ -39,6 +40,7 @@ describe('IressAutocomplete', () => {
 
     const popoverContent = screen.getByTestId('test-component__content');
     expect(popoverContent).toBeInTheDocument();
+    expect(popoverContent).toHaveClass(styles.popoverContent);
     expect(popoverContent).not.toBeVisible();
 
     await userEvent.type(input, 'opt');
@@ -48,6 +50,7 @@ describe('IressAutocomplete', () => {
     const listboxTestId = screen.getByTestId('test-component__menu');
 
     expect(listbox).toStrictEqual(listboxTestId);
+    expect(listbox).toHaveClass(styles.optionList);
     expect(options).toHaveLength(MOCK_LABEL_VALUE_META.length);
 
     await userEvent.type(input, '{backspace}{backspace}{backspace}');
@@ -142,20 +145,7 @@ describe('IressAutocomplete', () => {
 
         const notFound = await screen.findByText('Unavailable');
 
-        expect(notFound).toBeInTheDocument();
-      });
-
-      it('should render React nodes when provided', async () => {
-        renderAutocomplete({
-          noResultsText: <p>No results found</p>,
-        });
-
-        const input = screen.getByRole('combobox');
-        await userEvent.type(input, 'nonexistent');
-
-        const notFound = await screen.findByText('No results found');
-
-        expect(notFound).toBeInTheDocument();
+        expect(notFound).toBeVisible();
       });
     });
 
@@ -296,7 +286,7 @@ describe('IressAutocomplete', () => {
       });
     });
 
-    describe('readOnly', () => {
+    describe('readonly', () => {
       it('renders a hidden input with the correct value', () => {
         const { container } = renderAutocomplete({
           defaultValue: MOCK_LABEL_VALUE_META[0].label,

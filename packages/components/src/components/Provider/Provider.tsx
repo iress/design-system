@@ -10,10 +10,9 @@ import {
   type IressSlideoutProviderProps,
 } from '../Slideout';
 import { createPortal } from 'react-dom';
-import { defaultFonts } from '@iress-oss/ids-tokens';
 
 export interface IressProviderProps
-  extends IressSlideoutProviderProps,
+  extends Pick<IressSlideoutProviderProps, 'injectPushStyles'>,
     Pick<IressToasterProviderProps, 'position'> {
   /**
    * The contents of your application, and/or the components which will be calling slideouts, modals and toasts.
@@ -27,11 +26,6 @@ export interface IressProviderProps
   container?: FloatingUIContainer;
 
   /**
-   * If you don't want to load the default Iress font from the CDN, set this to true.
-   */
-  noDefaultFont?: boolean;
-
-  /**
    * If you don't want to load the Iress Icon CSS from the CDN, set this to true.
    */
   noIcons?: boolean;
@@ -40,25 +34,21 @@ export interface IressProviderProps
 export const IressProvider = ({
   children,
   container,
-  noDefaultFont,
+  injectPushStyles,
   noIcons,
   position,
   ...restProps
 }: IressProviderProps) => (
   <IressModalProvider container={container}>
     <IressToasterProvider container={container} position={position}>
-      <IressSlideoutProvider container={container} {...restProps}>
+      <IressSlideoutProvider
+        container={container}
+        injectPushStyles={injectPushStyles}
+        {...restProps}
+      >
         {children}
       </IressSlideoutProvider>
     </IressToasterProvider>
-    {!noDefaultFont &&
-      createPortal(
-        defaultFonts.map((font) => (
-          <link key={font} rel="stylesheet" href={font} />
-        )),
-        document.head,
-        'design-system-font',
-      )}
     {!noIcons &&
       createPortal(
         <link

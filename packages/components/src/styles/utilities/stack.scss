@@ -1,0 +1,104 @@
+@use '../vars';
+
+/** Stack */
+@mixin responsiveStackGutters($bpName) {
+  .iress-u-stack.iress--gutter-#{$bpName}--none > *:not(.iress-row):not(.iress-u-row) {
+    margin-block-start: 0 !important;
+  }
+
+  .iress-u-stack.iress--gutter-#{$bpName}--none > .iress-row,
+  .iress-u-stack.iress--gutter-#{$bpName}--none > .iress-u-row {
+    padding-block-start: 0 !important;
+  }
+
+  @each $gutter in vars.$gutters {
+    .iress-u-stack.iress--gutter-#{$bpName}--#{$gutter} > *:not(.iress-row):not(.iress-u-row),
+    .iress-u-stack.iress--gutter-#{$bpName}--#{$gutter} > ul > li,
+    .iress-u-stack.iress--gutter-#{$bpName}--#{$gutter} > ol > li,
+    .iress-u-stack.iress--gutter-#{$bpName}--#{$gutter} > .iress-hide > *:not(.iress-u-stack--ignore),
+    .iress-u-stack.iress--gutter-#{$bpName}--#{$gutter} > .iress-hide > [data-wrapper-children] > *:not(.iress-u-stack--ignore) {
+      margin-block-start: var(--gutter-#{$gutter}) !important;
+    }
+
+    .iress-u-stack.iress--gutter-#{$bpName}--#{$gutter} > .iress-row,
+    .iress-u-stack.iress--gutter-#{$bpName}--#{$gutter} > .iress-u-row {
+      padding-block-start: var(--gutter-#{$gutter}) !important;
+    }
+
+    .iress-u-stack.iress--gutter-#{$bpName}--#{$gutter} > *:not(.iress-row):not(.iress-u-row):first-child,
+    .iress-u-stack.iress--gutter-#{$bpName}--#{$gutter} > ul > li:first-child,
+    .iress-u-stack.iress--gutter-#{$bpName}--#{$gutter} > ol > li:first-child,
+    .iress-u-stack.iress--gutter-#{$bpName}--#{$gutter} > .iress-hide:first-child > *:not(.iress-u-stack--ignore),
+    .iress-u-stack.iress--gutter-#{$bpName}--#{$gutter} > .iress-hide:first-child > [data-wrapper-children] > *:not(.iress-u-stack--ignore) {
+      margin-block-start: 0 !important;
+    }
+
+    .iress-u-stack.iress--gutter-#{$bpName}--#{$gutter} > .iress-row:first-child,
+    .iress-u-stack.iress--gutter-#{$bpName}--#{$gutter} > .iress-u-row:first-child {
+      padding-block-start: 0 !important;
+    }
+  }
+}
+
+.iress-u-stack {
+  --gutter-xs: var(--iress-u-stack-xs-gutter, var(--iress-a-vertical-spacing-xs, var(--iress-g-spacing-xs)));
+  --gutter-sm: var(--iress-u-stack-sm-gutter, var(--iress-a-vertical-spacing-sm, var(--iress-g-spacing-sm)));
+  --gutter-md: var(--iress-u-stack-md-gutter, var(--iress-a-vertical-spacing-md, var(--iress-g-spacing-md)));
+  --gutter-lg: var(--iress-u-stack-lg-gutter, var(--iress-a-vertical-spacing-lg, var(--iress-g-spacing-lg)));
+  --gutter-xl: var(--iress-u-stack-xl-gutter, var(--iress-a-vertical-spacing-xl, var(--iress-g-spacing-xl)));
+
+  display: block;
+}
+
+.iress-u-stack > * {
+  margin-block-end: 0;
+}
+
+.iress-u-stack > *:not(.iress-row),
+.iress-u-stack > *:not(.iress-u-row) {
+  margin-block-start: 0 !important;
+}
+
+.iress-u-stack > .iress-row,
+.iress-u-stack > .iress-u-row {
+  padding-block-start: 0 !important;
+}
+
+@each $gutter in vars.$gutters {
+  .iress-u-stack.iress--gutter--#{$gutter} > *:not(.iress-row):not(.iress-u-row):not(.iress-u-stack--ignore),
+  .iress-u-stack.iress--gutter--#{$gutter} > ul > li,
+  .iress-u-stack.iress--gutter--#{$gutter} > ol > li,
+  .iress-u-stack.iress--gutter--#{$gutter} > .iress-hide > *:not(.iress-u-stack--ignore),
+  .iress-u-stack.iress--gutter--#{$gutter} > .iress-hide > [data-wrapper-children] > *:not(.iress-u-stack--ignore) {
+    margin-block-start: var(--gutter-#{$gutter}) !important;
+  }
+
+  .iress-u-stack.iress--gutter--#{$gutter} > .iress-row,
+  .iress-u-stack.iress--gutter--#{$gutter} > .iress-u-row {
+    padding-block-start: var(--gutter-#{$gutter}) !important;
+  }
+
+  .iress-u-stack.iress--gutter--#{$gutter} > *:not(.iress-row):not(.iress-u-row):first-child,
+  .iress-u-stack.iress--gutter--#{$gutter} > ul > li:first-child,
+  .iress-u-stack.iress--gutter--#{$gutter} > ol > li:first-child,
+  .iress-u-stack.iress--gutter--#{$gutter} > .iress-hide:first-child > *:not(.iress-u-stack--ignore),
+  .iress-u-stack.iress--gutter--#{$gutter} > .iress-hide:first-child > [data-wrapper-children] > *:not(.iress-u-stack--ignore) {
+    margin-block-start: 0 !important;
+  }
+
+  .iress-u-stack.iress--gutter--#{$gutter} > .iress-row:first-child,
+  .iress-u-stack.iress--gutter--#{$gutter} > .iress-u-row:first-child {
+    padding-block-start: 0 !important;
+  }
+}
+
+/* Responsive Gutters */
+@each $bpName, $bpValue in vars.$breakpoints {
+  @if $bpName == 'xs' {
+    @include responsiveStackGutters($bpName);
+  } @else {
+    @media only screen and (#{$bpValue}) {
+      @include responsiveStackGutters($bpName);
+    }
+  }
+}

@@ -1,0 +1,54 @@
+@use 'Badge.vars.module';
+@use '../../styles/mixins';
+
+.base {
+  @include mixins.defaultFontStyles();
+
+  height: var(--iress-size);
+  display: inline-block;
+  overflow: visible;
+
+  &.badge {
+    font-size: var(--iress-font-size);
+    background-color: var(--iress-background-color);
+    border-radius: var(--iress-border-radius);
+    border: var(--iress-border-width) solid var(--iress-border-color);
+    color: var(--iress-text-color);
+    padding-block: var(--iress-padding-y) var(--iress-padding-y);
+    padding-inline: var(--iress-padding-x) var(--iress-padding-x);
+    height: var(--iress-size);
+    min-width: var(--iress-size);
+    box-sizing: border-box;
+    display: inline-block;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+
+    .ids-icon {
+      line-height: 1;
+    }
+  }
+}
+
+.host {
+  --iress-translate-x: 50%;
+  --iress-translate-y: -50%;
+
+  position: relative;
+  height: auto;
+
+  .badge {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    z-index: 10;
+    transform: translate(calc(var(--iress-dir-is-ltr, 1) * var(--iress-translate-x)), var(--iress-translate-y));
+    transform-origin: 100% 0;
+  }
+
+  // TODO: as part of WAF-110 is complete check if this is necessary
+  :global(.iress-u-button) {
+    --iress-margin-right: 0;
+  }
+}

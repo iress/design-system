@@ -1,0 +1,110 @@
+.selectTags:global(.iress-u-text) {
+  --iress-addon-spacing: 0;
+  --iress-addon-border-width: var(--iress-select-beta-tags-addon-border-width, var(--iress-a-form-border-width, var(--iress-g-border-width, var(--iress-default-border-width))));
+  --iress-addon-color: var(--iress-select-beta-tags-addon-color, var(--iress-g-form-border-color, var(--iress-default-form-border-color)));
+  --iress-addon-margin-inline-end: var(--iress-g-spacing-xs, 0);
+  --iress-addon-hover-background-color: var(--iress-select-beta-tags-expand-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)));
+  --iress-addon-hover-text-color: var(--iress-select-beta-tags-expand-hover-text-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)));
+
+  --iress-background-color: var(--iress-select-beta-tags-background-color, var(--iress-a-form-background-color, var(--iress-g-background-color, var(--iress-default-background-color))));
+
+  --iress-border-width: var(--iress-select-beta-tags-border-width, var(--iress-a-form-border-width, var(--iress-g-border-width, var(--iress-default-border-width))));
+  --iress-border-color: var(--iress-select-beta-tags-border-color, var(--iress-g-form-border-color, var(--iress-default-form-border-color)));
+  --iress-border-radius: var(--iress-select-beta-tags-border-radius, var(--iress-a-form-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius))));
+
+  --iress-font-family: var(--iress-select-beta-tags-font-family, var(--iress-a-form-font-family, var(--iress-g-font-family)));
+  --iress-font-size: var(--iress-select-beta-tags-font-size);
+  --iress-font-weight: var(--iress-select-beta-tags-font-weight, var(--iress-g-font-weight, normal));
+
+  --iress-min-height: var(--iress-select-beta-tags-min-height, var(--iress-default-min-height));
+
+  --iress-padding-x: var(--iress-select-beta-tags-padding-x, var(--iress-g-spacing-sm));
+  --iress-padding-y: var(--iress-select-beta-tags-padding-y, var(--iress-g-spacing-xs));
+
+  --iress-placeholder-padding-y: var(--iress-tag-border-width, 1px);
+  --iress-placeholder-text-color: var(--iress-select-beta-tags-placeholder-text-color, var(--iress-default-text-color--placeholder));
+
+  --iress-text-color: var(--iress-select-beta-tags-text-color, var(--iress-g-text-color));
+  --iress-text-align: inherit;
+
+  --iress-transition-hover-duration: var(--iress-select-beta-tags-transition-hover-duration, 0.3s);
+  --iress-transition-hover-type: var(--iress-select-beta-tags-transition-hover-type, all);
+  --iress-transition-hover: all var(--iress-select-beta-tags-hover-duration) var(--iress-transition-hover-type);
+
+  display: flex;
+  width: 100%;
+  padding-block: var(--iress-padding-y);
+  padding-inline: var(--iress-padding-x);
+  min-height: var(--iress-min-height);
+
+  &:hover {
+    background-color: var(--iress-background-color);
+    border-color: var(--iress-border-color);
+    color: var(--iress-text-color);
+  }
+
+  :global(.iress--popover-active) > & {
+    background-color: var(--iress-focus-background-color);
+    background-image: var(--iress-focus-background-image);
+    border-color: var(--iress-focus-border-color);
+    box-shadow: var(--iress-focus-box-shadow);
+    color: var(--iress-focus-text-color);
+    outline: none;
+    text-decoration: var(--iress-hover-text-decoration);
+  }
+}
+
+.placeholder {
+  color: var(--iress-placeholder-text-color);
+  padding-block: var(--iress-placeholder-padding-y);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.prepend,
+.append {
+  --iress-text-color: var(--iress-addon-color);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--iress-addon-spacing);
+}
+
+.append {
+  margin-inline-start: auto;
+
+  :global(.iress-u-button):not(.ids-menuItem, .ids-clear-button--clear) {
+    --iress-background-color: transparent;
+    --iress-border-width: 0px;
+    --iress-min-height: 0px;
+    --iress-padding-x: var(--iress-g-spacing-xs);
+    --iress-text-color: var(--iress-addon-color);
+
+    vertical-align: middle;
+
+    @media (hover: hover) {
+      &:hover {
+        --iress-hover-background-color: var(--iress-addon-hover-background-color);
+        --iress-hover-text-color: var(--iress-addon-hover-text-color);
+      }
+    }
+  }
+}
+
+.tag {
+  display: inline-flex;
+}
+
+.selectTags:has(.tag) {
+  cursor: inherit;
+
+  .append {
+    cursor: pointer;
+  }
+}
+
+.tagsList {
+  overflow: hidden;
+  height: 100%;
+}

@@ -1,10 +1,10 @@
 import { RenderResult, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { vi } from 'vitest';
-import { IressTab, IressTabProps, IressTabSet } from '..';
-import { tab } from './Tab.styles';
-import { GlobalCSSClass } from '@/enums';
+import { IressTab, IressTabProps } from '..';
+import styles from './Tab.module.scss';
 import userEvent from '@testing-library/user-event';
+import { IressTabSet } from '../TabSet';
 
 const TEST_ID = 'test-component';
 const LABEL = 'label';
@@ -28,7 +28,7 @@ describe('IressTab', () => {
     const button = screen.getByRole('button', { name: LABEL });
 
     expect(button).toBeInTheDocument();
-    expect(button).toHaveClass(`test-class ${tab()}`, GlobalCSSClass.Tab);
+    expect(button).toHaveClass(`test-class ${styles.tab}`);
     expect(button).toHaveAttribute('type', 'button');
   });
 
@@ -49,7 +49,7 @@ describe('IressTab', () => {
         });
 
         const button = screen.getByRole('button');
-        expect(button).toHaveClass(tab({ active: true }));
+        expect(button).toHaveClass(styles.active);
       });
     });
   });

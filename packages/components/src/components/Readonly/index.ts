@@ -1,2 +1,2 @@
 export * from './Readonly';
-export * from './Readonly.styles';
+export * from './Readonly.types';

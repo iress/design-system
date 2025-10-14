@@ -1,54 +1,22 @@
+import classNames from 'classnames';
+import styles from '../Label.module.scss';
 import { GlobalCSSClass } from '@/enums';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
-import { type ReactNode, useState, useMemo, type FC } from 'react';
-import { type IressStyledProps } from '@/types';
-import { styled } from '@/styled-system/jsx';
-import { label } from '../Label.styles';
-import { cx } from '@/styled-system/css';
+import { type LabelBaseProps } from './LabelBase.types';
+import { useState } from 'react';
 
-export type LabelBaseProps<E extends 'label' | 'strong' | 'legend' = 'label'> =
-  IressStyledProps<E> & {
-    /**
-     * Content to be appended to the label.
-     * This is not affected by the `hiddenLabel` prop.
-     */
-    append?: ReactNode;
-
-    /**
-     * Content to be displayed in the label.
-     * This can also include error messages to make sure it makes sense in this context.
-     */
-    children: ReactNode;
-
-    /**
-     * The base tag of the label.
-     * @default label
-     */
-    element?: E;
-
-    /**
-     * Visually hides the label text, but still available to screen readers.
-     */
-    hiddenLabel?: boolean;
-
-    /**
-     * When set to true, the 'required asterisk (*)' is displayed next to the label text.
-     */
-    required?: boolean;
-  };
-
-export const LabelBase = <E extends 'label' | 'strong' | 'legend' = 'label'>({
+export const LabelBase = ({
   append,
+  as: BaseTag = 'label',
   children,
   className,
   'data-testid': dataTestId,
-  element,
   hiddenLabel = false,
+  optional,
   required,
   ...restProps
-}: LabelBaseProps<E>) => {
+}: LabelBaseProps) => {
   const [name, setName] = useState<string | undefined>();
-  const classes = label({ hasAppend: !!append, hiddenLabel });
 
   // Update the name state when the text content of the label changes
   // This allows other components to access the label text without the noise of the required/optional text and appended content
@@ -60,37 +28,48 @@ export const LabelBase = <E extends 'label' | 'strong' | 'legend' = 'label'>({
     }
   };
 
-  const Tag = useMemo(
-    () => styled(element ?? 'label') as FC<typeof restProps>,
-    [element],
-  );
-
   return (
-    <Tag
-      className={cx(className, GlobalCSSClass.FormLabel, classes.root)}
-      data-testid={dataTestId}
+    <BaseTag
+      className={classNames(className, GlobalCSSClass.FormLabel, {
+        [styles.label]: true,
+        [styles.hidden]: hiddenLabel,
+        [styles.hasAppend]: append,
+      })}
       {...restProps}
       data-name={name}
+      data-testid={dataTestId}
     >
       {required && (
         <>
           {!hiddenLabel && (
-            <span className={classes.required} aria-hidden>
+            <span className={classNames(styles.required)} aria-hidden="true">
               *
             </span>
           )}
-          <styled.span srOnly>Required</styled.span>
+          <span className={GlobalCSSClass.SROnly}>Required </span>
         </>
       )}
-      <styled.span
-        className={classes.text}
+      <span
+        className={
+          classNames({
+            [GlobalCSSClass.SROnly]: hiddenLabel === true,
+          }) || undefined
+        }
         data-testid={propagateTestid(dataTestId, 'text')}
         ref={updateName}
-        srOnly={hiddenLabel}
       >
         {children}
-      </styled.span>
+      </span>
+      {!required && optional && (
+        <span
+          className={classNames(styles.optional, {
+            [GlobalCSSClass.SROnly]: hiddenLabel === true,
+          })}
+        >
+          {typeof optional === 'string' ? optional : '(optional)'}
+        </span>
+      )}
       {append}
-    </Tag>
+    </BaseTag>
   );
 };

@@ -1,17 +1,8 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressAlert, alert as alertStyles } from '.';
-import { GlobalCSSClass } from '@/enums';
-import { SYSTEM_VALIDATION_STATUSES } from '@/constants';
-import { SystemValidationStatuses } from '@/types';
-import { IressIconProps } from '../Icon';
-
-const ALERT_ICONS: Record<SystemValidationStatuses, IressIconProps['name']> = {
-  danger: 'ban',
-  info: 'info-square',
-  success: 'check',
-  warning: 'exclamation-triangle',
-};
+import { ALERT_ICONS, IressAlert } from '.';
+import styles from './Alert.module.scss';
+import { SYSTEM_VALIDATION_STATUSES } from '@/main';
 
 describe('IressAlert', () => {
   describe('Default rendering', () => {
@@ -24,10 +15,7 @@ describe('IressAlert', () => {
 
       getByText('Content');
       const component = getByTestId('test-component');
-      expect(component).toHaveClass(
-        alertStyles({ status: 'info' }).alert!,
-        GlobalCSSClass.Alert,
-      );
+      expect(component).toHaveClass(`test-class ${styles.alert}`);
     });
 
     it('renders an info alert by default', () => {
@@ -36,20 +24,17 @@ describe('IressAlert', () => {
       );
 
       const component = getByTestId('test-component');
-      expect(component).toHaveClass(
-        'bd-c_colour.system.info.fill bg-c_colour.system.info.surface',
-      );
+      expect(component).toHaveClass(styles.info);
     });
 
     it('renders no heading and no footer by default', () => {
-      const screen = render(<IressAlert data-testid="test-component" />);
+      const { getByTestId } = render(
+        <IressAlert data-testid="test-component" />,
+      );
 
-      expect(
-        screen.queryByTestId('test-component__heading'),
-      ).not.toBeInTheDocument();
-      expect(
-        screen.queryByTestId('test-component__footer'),
-      ).not.toBeInTheDocument();
+      const component = getByTestId('test-component');
+      expect(component.querySelector(`.${styles.heading}`)).toBe(null);
+      expect(component.querySelector(`.${styles.footer}`)).toBe(null);
     });
 
     it('renders with the correct data-testids', () => {
@@ -69,56 +54,17 @@ describe('IressAlert', () => {
   });
 
   describe('footer', () => {
-    describe('footer', () => {
-      it('should not render footer when footer prop is undefined', () => {
-        const screen = render(
-          <IressAlert data-testid="test-component">Content</IressAlert>,
-        );
-        expect(
-          screen.queryByTestId('test-component__footer'),
-        ).not.toBeInTheDocument();
-      });
+    it('should render the footer content when the footer prop is set', () => {
+      const { getByTestId } = render(
+        <IressAlert
+          data-testid="test-component"
+          footer={<span data-testid="footer">Footer content</span>}
+        />,
+      );
 
-      it('renders footer content with correct classes', () => {
-        const screen = render(
-          <IressAlert
-            data-testid="test-component"
-            footer={
-              <div data-testid="footer">
-                <button>Action</button>
-              </div>
-            }
-          />,
-        );
-
-        const { getByTestId, getByRole } = screen;
-        const component = getByTestId('test-component');
-        expect(component).toHaveClass(
-          'bd-c_colour.system.info.fill bg-c_colour.system.info.surface',
-        );
-
-        const footer = getByTestId('footer');
-        expect(footer).toBeInTheDocument();
-
-        const button = getByRole('button');
-        expect(button).toBeInTheDocument();
-        expect(button).toHaveTextContent('Action');
-      });
-
-      it('supports multiple footer elements', () => {
-        const { getByRole } = render(
-          <IressAlert
-            footer={
-              <>
-                <button>Action 1</button>
-                <button>Action 2</button>
-              </>
-            }
-          />,
-        );
-        expect(getByRole('button', { name: 'Action 1' })).toBeInTheDocument();
-        expect(getByRole('button', { name: 'Action 2' })).toBeInTheDocument();
-      });
+      const component = getByTestId('test-component');
+      expect(component.querySelector(`.${styles.footer}`)).toBeInTheDocument();
+      getByTestId('footer');
     });
   });
 
@@ -148,9 +94,7 @@ describe('IressAlert', () => {
         );
 
         const component = getByTestId('test-component');
-        expect(component).toHaveClass(
-          `bd-c_colour.system.${status}.fill bg-c_colour.system.${status}.surface`,
-        );
+        expect(component).toHaveClass(styles[status]);
         const icon = getByRole('img');
         expect(icon).toHaveAttribute('aria-label', `${status}: `);
         expect(icon).toHaveClass(`fa-${ALERT_ICONS[status]}`);

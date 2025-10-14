@@ -5,66 +5,27 @@ import { getValueAsEvent } from '@helpers/form/getValueAsEvent';
 import {
   type IressRichSelectProps,
   type SelectLabelRenderProps,
-} from '../RichSelect';
-import { type ControlledValue } from '@/hooks';
-import { type LabelValueMeta } from '@/interfaces';
-import { type ReactNode } from 'react';
-import { type IressInputProps } from '@/components/Input';
+} from '../RichSelect.types';
+import { IressButton } from '@/components/Button';
+import { IressIcon } from '@/components/Icon';
+import { IressHide } from '@/components/Hide';
 
-export interface IressSelectActivatorProps {
-  /**
-   * Append content.
-   * @default <IressIcon name="chevron-down" size="xs" />
-   */
-  append?: ReactNode;
-
-  /**
-   * Placeholder, shown when there is nothing selected.
-   */
-  placeholder?: ReactNode;
-
-  /**
-   * Prepend content.
-   */
-  prepend?: ReactNode;
-
-  /**
-   * Selected items.
-   */
-  selected?: LabelValueMeta | LabelValueMeta[];
-
-  /**
-   * Text displayed next to label when two or more options are selected.
-   * @default {{numOptions}} selected
-   */
-  selectedOptionsText?: string;
-
-  /**
-   * The width of the select.
-   */
-  width?: IressInputProps['width'];
-}
-
-interface SelectActivatorProps<TMultiple extends boolean = false>
+interface SelectActivatorProps
   extends Pick<
-      IressRichSelectProps<TMultiple>,
+      IressRichSelectProps,
       | 'id'
       | 'multiSelect'
       | 'onChange'
       | 'placeholder'
       | 'renderLabel'
       | 'value'
-      | 'append'
-      | 'prepend'
-      | 'selectedOptionsText'
     >,
-    Omit<SelectLabelRenderProps<TMultiple>, 'close'> {
+    Omit<SelectLabelRenderProps, 'close'> {
   async?: boolean;
   setShow: (show: boolean) => void;
 }
 
-export const SelectActivator = <TMultiple extends boolean = false>({
-  append,
+export const SelectActivator = ({
   async,
   id,
   error,
@@ -72,14 +33,12 @@ export const SelectActivator = <TMultiple extends boolean = false>({
   multiSelect,
   onChange,
   placeholder,
-  prepend,
   renderLabel,
-  selectedOptionsText,
   setShow,
   setValue,
   show,
   value,
-}: SelectActivatorProps<TMultiple>) => {
+}: SelectActivatorProps) => {
   if (renderLabel) {
     return renderLabel({
       close: () => setShow(false),
@@ -94,42 +53,45 @@ export const SelectActivator = <TMultiple extends boolean = false>({
   if (multiSelect) {
     return (
       <IressSelectTags
-        append={append}
+        append={
+          <IressButton mode="tertiary" role={async ? undefined : 'combobox'}>
+            <IressIcon name="chevron-down" size="xs" />
+            <IressHide visuallyHidden hiddenOn={{ xs: true }}>
+              Selected:{' '}
+              {toArray(value).length
+                ? toArray(value)
+                    .map((item) => item.label)
+                    .join(', ')
+                : 'None'}
+            </IressHide>
+          </IressButton>
+        }
         id={id}
         onDelete={(item) => {
           if (!item) return;
           const newValue = toArray(value).filter(
             (valueItem) => valueItem.label !== item.label,
-          ) as ControlledValue<LabelValueMeta, TMultiple>;
+          );
           setValue(newValue);
           onChange?.(getValueAsEvent(newValue), newValue);
         }}
         onDeleteAll={() => {
-          const newValue = [] as LabelValueMeta[] as ControlledValue<
-            LabelValueMeta,
-            TMultiple
-          >;
-          setValue(newValue);
-          onChange?.(getValueAsEvent([]), newValue);
+          setValue([]);
+          onChange?.(getValueAsEvent([]), []);
         }}
         onToggleActions={() => setShow(false)}
         placeholder={placeholder}
-        prepend={prepend}
         selected={value}
-        selectedOptionsText={selectedOptionsText}
       />
     );
   }
 
   return (
     <IressSelectLabel
-      append={append}
       id={id}
       placeholder={placeholder}
-      prepend={prepend}
       role={async ? undefined : 'combobox'}
       selected={value}
-      selectedOptionsText={selectedOptionsText}
     />
   );
 };

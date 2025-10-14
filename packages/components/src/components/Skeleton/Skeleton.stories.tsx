@@ -1,5 +1,5 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressSkeleton, type IressSkeletonProps } from '.';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressSkeleton, SKELETON_MODES } from '.';
 import {
   disableArgTypes,
   withTransformedRawSource,
@@ -14,15 +14,10 @@ import { SkeletonText } from './mocks/SkeletonText';
 import SkeletonTextSource from './mocks/SkeletonText.tsx?raw';
 
 type Story = StoryObj<typeof IressSkeleton>;
-type TextStory = StoryObj<IressSkeletonProps<'text'>>;
-type RectStory = StoryObj<IressSkeletonProps<'rect'>>;
-type CircleStory = StoryObj<IressSkeletonProps<'circle'>>;
-const SKELETON_MODES = ['rect', 'circle', 'text'] as const;
 
 export default {
   title: 'Components/Skeleton',
   component: IressSkeleton,
-  tags: ['updated'],
 } as Meta<typeof IressSkeleton>;
 
 export const Default: Story = {};
@@ -32,15 +27,15 @@ export const Mode: Story = {
     ...disableArgTypes(['mode', 'width', 'height']),
   },
   render: (args) => (
-    <IressStack gap="md">
-      <IressSkeleton {...(args as IressSkeletonProps<'text'>)} mode="text" />
+    <IressStack gutter="md">
+      <IressSkeleton {...args} mode="text" />
       <IressSkeleton {...args} mode="rect" height="100px" />
       <IressSkeleton mode="circle" height="100px" width="100px" />
     </IressStack>
   ),
 };
 
-export const Text: TextStory = {
+export const Text: Story = {
   args: {
     mode: 'text',
   },
@@ -53,7 +48,7 @@ export const Text: TextStory = {
   },
 };
 
-export const Rect: RectStory = {
+export const Rect: Story = {
   args: {
     mode: 'rect',
     width: '250',
@@ -65,7 +60,7 @@ export const Rect: RectStory = {
   },
 };
 
-export const Circle: CircleStory = {
+export const Circle: Story = {
   args: {
     mode: 'circle',
     width: '150',
@@ -86,7 +81,7 @@ export const Size: Story = {
     ...disableArgTypes(['mode']),
   },
   render: (args) => (
-    <IressInline gap="md">
+    <IressInline gutter="md">
       {SKELETON_MODES.map((mode) => (
         <IressSkeleton key={mode} {...args} mode={mode} />
       ))}

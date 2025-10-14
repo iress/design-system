@@ -1,9 +1,8 @@
 import { fireEvent, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { IressTag } from '.';
+import styles from './Tag.module.scss';
 import userEvent from '@testing-library/user-event';
-import { tag } from './Tag.styles';
-import { GlobalCSSClass } from '@/enums';
 
 describe('IressTag', () => {
   it('should render the component with the correct text, classes and testids', () => {
@@ -12,10 +11,7 @@ describe('IressTag', () => {
     );
 
     const component = getByTestId('test-component');
-    expect(component).toHaveClass(
-      `test-class ${tag().root}`,
-      GlobalCSSClass.Tag,
-    );
+    expect(component).toHaveClass(`test-class ${styles.tag}`);
 
     expect(
       getByTestId('test-component__delete-button__button'),

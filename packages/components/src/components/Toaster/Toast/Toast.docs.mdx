@@ -1,0 +1,57 @@
+import { Meta } from '@storybook/blocks';
+
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import * as ToastStories from './Toast.stories';
+import { IressAlert } from '../../../main';
+
+<Meta of={ToastStories} />
+
+# Toast
+
+<ComponentOverview
+  description="Toast are a compact way to provide users with important information, usually within a toaster."
+  info={
+    <IressAlert>
+      This documentation is for the standalone <code>IressToast</code>{' '}
+      component, and has been exposed for complex use cases where you are unable
+      to use the <code>useToaster</code> hook. For most use cases, please use
+      the hook and provider documented at{' '}
+      <a href="/docs/components-toaster--docs">Toaster documentation</a>.
+    </IressAlert>
+  }
+  story={ToastStories.Default}
+  stories={ToastStories}
+/>
+
+## Examples
+
+### Status
+
+The toast offers three status that set a distinctive colour and icon. They can be set using the `status` prop. Their different use cases are described here.
+
+<ComponentExample story={ToastStories.Status} stories={ToastStories} />
+
+### Heading
+
+Use the `heading` prop to add a header to the toast. The header can be any component you like, but it is designed to support a simple heading element. If provided a string, it will display a `<h2 />` element with the string as its content.
+
+**Note:** `headingText` and `headingLevel` props have been replaced with the `heading` render prop to give you more control over the `heading` element and its content. To use the previous behaviour, you can pass a string which will automatically create a `h2` element, or pass a `h*` element with the text as a child.
+
+<ComponentExample story={ToastStories.Heading} stories={ToastStories} />
+
+### Footer
+
+The `footer` prop allows for content to be placed below the header and body of the alert. This can be useful for displaying call to actions.
+
+<ComponentExample story={ToastStories.Footer} stories={ToastStories} />
+
+### Dismiss Button
+
+Dismiss Button is on the top right corner and it's showing/hiding based on `dismissible` prop.
+
+**Note:** When it's `true`, `onClose` event is going to be available.
+
+<ComponentExample story={ToastStories.Dismissible} stories={ToastStories} />

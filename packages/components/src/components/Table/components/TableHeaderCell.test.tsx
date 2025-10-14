@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { TableHeaderCell } from './TableHeaderCell';
 import { axe } from 'jest-axe';
-import { TableProvider } from '../TableProvider';
+import { IressTableProvider } from '../TableProvider';
 
 const columnApi = {
   id: 'test',
@@ -37,7 +37,7 @@ describe('TableHeaderCell', () => {
 
   it('renders a sort button if column supports it', () => {
     const screen = render(
-      <TableProvider columns={[{ key: 'test', sort: true }]} rows={[]}>
+      <IressTableProvider columns={{ test: { sort: true } }} rows={[]}>
         <table>
           <thead>
             <tr>
@@ -47,7 +47,7 @@ describe('TableHeaderCell', () => {
             </tr>
           </thead>
         </table>
-      </TableProvider>,
+      </IressTableProvider>,
     );
 
     const heading = screen.getByRole('columnheader', {

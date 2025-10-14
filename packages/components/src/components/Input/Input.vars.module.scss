@@ -1,0 +1,35 @@
+/** Input variables
+ * --------------------------------------------------
+ */
+
+.input {
+  --iress-font-family: var(--iress-input-font-family, var(--iress-a-form-font-family, var(--iress-g-font-family)));
+  --iress-font-size: var(--iress-input-font-size, var(--iress-g-font-size-rem, var(--iress-default-font-size--touch)));
+  --iress-font-weight: var(--iress-input-font-weight, var(--iress-g-font-weight, normal));
+  --iress-background-color: var(--iress-input-background-color, var(--iress-a-form-background-color, var(--iress-g-background-color, var(--iress-default-background-color))));
+  --iress-border-width: var(--iress-input-border-width, var(--iress-a-form-border-width, var(--iress-g-border-width, var(--iress-default-border-width))));
+  --iress-addon-border-width: var(--iress-input-addon-border-width, var(--iress-input-border-width, var(--iress-a-form-border-width, var(--iress-g-border-width, var(--iress-default-border-width)))));
+  --iress-border-color: var(--iress-input-border-color, var(--iress-g-form-border-color, var(--iress-default-form-border-color)));
+  --iress-border-radius: var(--iress-input-border-radius, var(--iress-a-form-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius))));
+  --iress-text-color: var(--iress-input-text-color, var(--iress-g-text-color));
+  --iress-focus-border-color: var(--iress-input-focus-border-color, var(--iress-focus-color));
+  --iress-focus-box-shadow: 0 0 0 var(--iress-g-focus-width, var(--iress-default-focus-size)) var(--iress-focus-color);
+  --iress-focus-background-color: var(--iress-input-focus-background-color, var(--iress-background-color));
+  --iress-focus-text-color: var(--iress-input-focus-text-color, var(--iress-text-color));
+  --iress-watermark-text-color: var(--iress-input-watermark-text-color, var(--iress-text-color));
+  --iress-placeholder-text-color: var(--iress-input-placeholder-text-color, var(--iress-default-text-color--placeholder));
+  --iress-padding-x: var(--iress-input-padding-x, var(--iress-g-spacing-sm));
+  --iress-padding-y: var(--iress-input-padding-y, var(--iress-g-spacing-sm));
+  --iress-transition-hover-duration: var(--iress-input-transition-hover-duration, 0s);
+  --iress-transition-hover-type: var(--iress-input-transition-hover-type, none);
+  --iress-transition-hover: all var(--iress-transition-hover-duration) var(--iress-transition-hover-type);
+  --iress-label-padding-bottom: var(--iress-input-label-padding-bottom, 0);
+  --iress-min-height: var(--iress-input-min-height, var(--iress-default-min-height));
+  --iress-padding-inline-start: calc(var(--iress-padding-x, 0px) / 3);
+  --iress-calendar-icon-filter: var(--iress-input-calendar-icon-filter);
+}
+
+.readonly:not(.ids-field-group--join > .ids-field-group--fields > .ids-field > *) {
+  --iress-border-color: var(--iress-input-readonly-border-color, transparent);
+  --iress-background-color: var(--iress-input-readonly-background-color, transparent);
+}

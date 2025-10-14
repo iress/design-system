@@ -1,15 +1,15 @@
 import {
-  type FormattedLabelValueMeta,
+  FormattedLabelValueMeta,
   IressMenuDivider,
   IressRichSelect,
-  type IressRichSelectProps,
+  IressRichSelectProps,
   IressSelectMenu,
   IressSelectSearch,
   IressSelectSearchInput,
-  type LabelValueMeta,
+  LabelValueMeta,
 } from '@/main';
 
-const CustomOptions: IressRichSelectProps<true>['renderOptions'] = ({
+const CustomOptions: IressRichSelectProps['renderOptions'] = ({
   loading,
   query,
   results,
@@ -53,7 +53,7 @@ const CustomOptions: IressRichSelectProps<true>['renderOptions'] = ({
           selected={value}
         />
       )}
-      {hasResultsAndSelected && <IressMenuDivider my="xs" />}
+      {hasResultsAndSelected && <IressMenuDivider gutter="xs" />}
       {hasResults && (
         <IressSelectMenu
           heading={query ? 'Search results' : 'All options'}

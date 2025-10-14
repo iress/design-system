@@ -1,0 +1,62 @@
+@use '../../styles/mixins';
+
+.skipLink {
+  --iress-text-color: var(--iress-skip-link-text-color, var(--iress-button-link-text-color, var(--iress-g-link-text-color, var(--iress-default-link-color))));
+  --iress-background-color: var(--iress-skip-link-background-color, var(--iress-g-background-color, var(--iress-default-background-color)));
+  --iress-border-color: var(--iress-skip-link-border-color, transparent);
+  --iress-border-radius: var(--iress-skip-link-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius)));
+  --iress-border-width: var(--iress-skip-link-border-width, var(--iress-g-border-width, 0));
+  --iress-padding-x: var(--iress-skip-link-padding-x, var(--iress-g-spacing-sm));
+  --iress-padding-y: var(--iress-skip-link-padding-y, var(--iress-g-spacing-sm));
+  --iress-hover-background-color: var(--iress-skip-link-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)));
+  --iress-hover-border-color: var(--iress-skip-link-hover-border-color, var(--iress-border-color));
+  --iress-hover-text-color: var(--iress-skip-link-hover-text-color, var(--iress-g-hover-text-color, var(--iress-default-text-color--hover)));
+  --iress-active-background-color: var(--iress-skip-link-active-background-color, var(--iress-background-color));
+  --iress-active-border-color: var(--iress-skip-link-active-border-color, var(--iress-border-color));
+  --iress-active-text-color: var(--iress-skip-link-active-text-color, var(--iress-text-color));
+  --iress-focus-color: var(--iress-navbar-focus-color, var(--iress-g-focus-color, var(--iress-default-focus-color)));
+  --iress-focus-width: var(--iress-g-focus-width, var(--iress-default-focus-width));
+  --iress-focus-box-shadow: 0 0 0 var(--iress-focus-width) var(--iress-focus-color);
+
+  --iress-transform: translateX(-50%) translateY(-100%);
+  --iress-transform-focus: translateX(-50%) translateY(50%);
+
+  @include mixins.defaultFontVariables('skip-link');
+  @include mixins.defaultFontStyles();
+
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: var(--iress-transform);
+  z-index: 100;
+  display: inline-block;
+  padding: var(--iress-padding-x) var(--iress-padding-y);
+  border: var(--iress-border-width) solid var(--iress-border-color);
+  border-radius: var(--iress-border-radius);
+  color: var(--iress-text-color);
+  background-color: var(--iress-background-color);
+
+  &:hover {
+    border-color: var(--iress-hover-border-color);
+    color: var(--iress-hover-text-color);
+    background: var(--iress-hover-background-color);
+  }
+
+  &:active {
+    border-color: var(--iress-active-border-color);
+    color: var(--iress-active-text-color);
+    background: var(--iress-active-background-color);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: var(--iress-focus-box-shadow);
+    border-color: var(--iress-focus-color);
+  }
+
+  &:focus,
+  &:focus-within {
+    transition: transform 0.3s ease-out;
+    transform: translateX(-50%) translateY(50%);
+  }
+}

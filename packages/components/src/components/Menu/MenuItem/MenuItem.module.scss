@@ -1,0 +1,150 @@
+@use 'MenuItem.vars.module';
+
+/** Menu item
+ * --------------------------------------------------
+ * @prop --iress-font-family: Font familiy of menu-item
+ * @prop --iress-font-size: Font familiy of menu-item
+ * @prop --iress-font-weight: Font weight of menu-item
+ * @prop --iress-text-align: Text alignment of the menu-item (Use justify-content values (eg flex-start))
+ * @prop --iress-text-color: Text color of menu-item
+ * @prop --iress-hover-text-color: Text color of menu-item in hover state
+ * @prop --iress-active-text-color: Text color of menu-item in active state
+ * @prop --iress-background-color: Background colour of the menu-item
+ * @prop --iress-hover-background-color: Background colour of the menu-item in hover state
+ * @prop --iress-active-background-color: Background colour of the menu-item in active state
+ * @prop --iress-padding-x: Vertical padding of menu-item
+ * @prop --iress-padding-y: Horizontal padding of menu-item
+ * @prop --iress-heading-font-family: Font familiy of menu-item
+ * @prop --iress-heading-font-size: Font familiy of menu-item
+ * @prop --iress-heading-font-weight: Font weight of menu-item
+ * @prop --iress-heading-background-color: Background color of menu-item heading
+ * @prop --iress-heading-text-color: Text color of menu-item heading
+ * @prop --iress-heading-text-align: Text align of menu-item heading
+ * @prop --iress-heading-padding-top: Top padding of menu-item heading
+ * @prop --iress-heading-padding-bottom: Bottom padding of menu-item heading
+ * @prop --iress-heading-padding-x: Horizontal padding of menu-item heading
+ * @prop --iress-divider-border-width: Border width of the divider
+ * @prop --iress-divider-border-color: Border colour of the divider
+ * @prop --iress-checkbox-spacing: Space between checkbox and menu-item text
+ * @prop --iress-transition-hover-type: Transition type for menu item
+ * @prop --iress-transition-hover-duration: Transition duration for menu item
+ */
+
+.button {
+  &:focus {
+    z-index: 1;
+  }
+}
+
+.text {
+  background-color: var(--iress-heading-background-color);
+  padding: var(--iress-heading-padding-top) var(--iress-heading-padding-x) var(--iress-text-padding-bottom);
+  white-space: nowrap;
+
+  &:has(.textAppend, .textPrepend) {
+    display: flex;
+    align-items: center;
+    column-gap: var(--iress-button-slot-margin-x, var(--iress-default-spacing-sm));
+  }
+}
+
+.heading {
+  padding-bottom: var(--iress-heading-padding-bottom);
+}
+
+.selected {
+  position: relative;
+
+  &::before {
+    content: '';
+    width: var(--iress-default-border-width--lg);
+    position: absolute;
+    z-index: 2; /* to ensure that the border sits on top of focussed buttons */
+    inset-inline-start: var(--iress-g-focus-width, var(--iress-default-focus-size));
+    inset-block: var(--iress-g-focus-width, var(--iress-default-focus-size));
+    background-color: var(--iress-mark-color);
+    transition: all var(--iress-transition-hover-duration) var(--iress-transition-hover-type);
+  }
+
+  &.menu--inline:not(.multiSelect)::before,
+  &.menu--inline-equal-width:not(.multiSelect)::before {
+    width: auto;
+    left: var(--focus-width, 0);
+    right: var(--focus-width, 0);
+    height: var(--iress-default-border-width--lg);
+    inset-block-start: auto;
+  }
+}
+
+.menu--stack:global(.iress-u-button) {
+  display: flex;
+}
+
+.menu--inline,
+.menu--inline-equal-width {
+  display: inline-flex;
+}
+
+.menu--inline-equal-width {
+  flex: 1;
+
+  .contents {
+    flex: 1;
+  }
+}
+
+.append {
+  margin-inline-start: auto;
+}
+
+.checkboxMark {
+  flex: 0 0 auto;
+}
+
+.contents {
+  width: 100%;
+}
+
+.multiSelect {
+  .ids-checkbox-label {
+    display: inline-flex;
+    position: relative;
+    min-width: var(--iress-size);
+    height: var(--iress-size);
+    margin-inline-end: var(--iress-checkbox-spacing);
+  }
+
+  &::before {
+    content: none;
+  }
+}
+
+.divider,
+:global(.iress-u-button).divider {
+  border-block-end: var(--iress-divider-border-width) solid var(--iress-divider-border-color);
+}
+
+.noWrap {
+  overflow: hidden;
+}
+
+.listItem {
+  display: contents;
+}
+
+@media (hover: hover) {
+  .menuItem:hover .checkboxMark {
+    --iress-background-color: var(
+      --iress-checkbox-hover-background-color,
+      var(--iress-a-form-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)))
+    );
+  }
+
+  .selected:hover .checkboxMark {
+    --iress-background-color: var(
+      --iress-checkbox-checked-hover-background-color,
+      var(--iress-a-active-hover-background-color, var(--iress-g-primary-hover-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color))))
+    );
+    --iress-mark-color: var(--iress-checkbox-mark-hover-color, var(--iress-a-active-contrast-color, var(--iress-g-primary-contrast-color, var(--iress-default-active-color))));
+  }
+}

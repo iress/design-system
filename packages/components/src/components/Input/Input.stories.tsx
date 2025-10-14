@@ -1,25 +1,23 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { disableArgTypes, withJsxTransformer } from '@iress-storybook/helpers';
 import { capitalizeFirstLetter } from '@helpers/formatting/capitalizeFirstLetter';
 import { IressIcon } from '../Icon';
+import { IressInputProps } from './Input.types';
 import {
   IressButton,
   IressInput,
   IressStack,
   IressToasterProvider,
   useToaster,
-  type IressInputProps,
 } from '../../main';
 import { IressField } from '../Field';
 import { FORM_ELEMENT_WIDTHS } from '@/constants';
 
 type Story = StoryObj<IressInputProps>;
-type TextareaStory = StoryObj<IressInputProps<string, number>>;
 
 export default {
   title: 'Components/Input',
   component: IressInput,
-  tags: ['updated'],
 } as Meta<typeof IressInput>;
 
 export const Default: Story = {
@@ -35,7 +33,7 @@ export const Types: Story = {
     ...disableArgTypes(['type']),
   },
   render: ({ placeholder, ...args }) => (
-    <IressStack gap="md">
+    <IressStack gutter="md">
       {/* Copied from: HTMLInputTypeAttribute */}
       {[
         'text',
@@ -78,7 +76,7 @@ export const InputModes: Story = {
     ...disableArgTypes(['inputMode']),
   },
   render: ({ placeholder, ...args }) => (
-    <IressStack gap="md">
+    <IressStack gutter="md">
       {inputModes.map((inputMode) => (
         <IressInput
           {...args}
@@ -109,7 +107,7 @@ export const FileType: Story = {
           {...args}
           onChange={(e) =>
             success({
-              content: `File uploaded: ${
+              children: `File uploaded: ${
                 (e.target as HTMLInputElement).files?.[0].name
               }`,
             })
@@ -140,7 +138,7 @@ export const Sizing: Story = {
     ...disableArgTypes(['width']),
   },
   render: ({ placeholder, ...args }) => (
-    <IressStack gap="md">
+    <IressStack gutter="md">
       {FORM_ELEMENT_WIDTHS.map((width) => (
         <IressInput
           {...args}
@@ -153,16 +151,18 @@ export const Sizing: Story = {
   ),
 };
 
-export const TextAreas: TextareaStory = {
+export const TextAreas: Story = {
   args: {
     rows: 5,
   },
 };
 
 export const Slots: Story = {
-  argTypes: {},
+  argTypes: {
+    ...disableArgTypes(['watermark']),
+  },
   render: ({ placeholder, prepend, append, ...args }) => (
-    <IressStack gap="md">
+    <IressStack gutter="md">
       <IressInput
         {...args}
         prepend={prepend ?? <IressIcon name="search" />}
@@ -178,22 +178,26 @@ export const Slots: Story = {
       <IressInput
         {...args}
         prepend={prepend ?? <IressIcon name="search" />}
-        placeholder={placeholder ?? 'Prepend slot'}
+        placeholder={placeholder ?? 'Watermark prepend slot'}
+        watermark
       />
 
       <IressInput
         {...args}
         append={append ?? <IressIcon name="search" />}
-        placeholder={placeholder ?? 'Append slot'}
+        placeholder={placeholder ?? 'Watermark append slot'}
+        watermark
       />
     </IressStack>
   ),
 };
 
 export const ButtonSlots: Story = {
-  argTypes: {},
+  argTypes: {
+    ...disableArgTypes(['watermark']),
+  },
   render: ({ placeholder, append, ...args }) => (
-    <IressStack gap="md">
+    <IressStack gutter="md">
       <IressInput
         {...args}
         append={append ?? <IressIcon name="search" />}
@@ -204,7 +208,7 @@ export const ButtonSlots: Story = {
         {...args}
         append={
           append ?? (
-            <IressButton mode="tertiary">
+            <IressButton mode={IressButton.Mode.Tertiary}>
               <IressIcon name="search" />
             </IressButton>
           )
@@ -215,7 +219,7 @@ export const ButtonSlots: Story = {
   ),
 };
 
-export const ReadOnly: Story = {
+export const Readonly: Story = {
   ...Default,
   args: {
     ...Default.args,

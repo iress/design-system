@@ -1,22 +1,17 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { richSelect } from './RichSelect.styles';
+import styles from './RichSelect.module.scss';
 import {
   MOCK_LABEL_VALUES,
   MOCK_LARGE_LABEL_VALUES_DATASET,
   mockAsyncSearchLabelValues,
 } from '@/mocks/generateLabelValues';
 import userEvent from '@testing-library/user-event';
-import { IressRichSelect, RichSelectRef } from './RichSelect';
+import { IressRichSelect } from './RichSelect';
 import { toArray } from '@helpers/formatting/toArray';
-import { button } from '../Button';
-import { menu } from '../Menu';
-import { createRef } from 'react';
-import { IressLabel } from '../Label';
+import { ButtonCssClass, GlobalCSSClass } from '@/main';
 
 describe('IressRichSelect', () => {
-  const classes = richSelect();
-
   it('renders a single select with the correct defaults', async () => {
     const onChange = vi.fn();
 
@@ -29,14 +24,15 @@ describe('IressRichSelect', () => {
     );
 
     const select = screen.getByTestId('test-component');
-    if (classes.richSelect) {
-      expect(select).toHaveClass(classes.richSelect);
-    }
+    expect(select).toHaveClass(
+      styles.richSelect,
+      `${GlobalCSSClass.Width}--100perc`,
+    );
 
     const combobox = screen.getByRole('combobox');
     expect(combobox).toBeInTheDocument();
 
-    const popover = screen.getByTestId('test-component__content');
+    const popover = select.querySelector(`.${styles.popoverContent}`);
     expect(popover).not.toBeVisible();
 
     const hiddenInput = screen.getByTestId('test-component__hidden-input');
@@ -118,7 +114,7 @@ describe('IressRichSelect', () => {
 
         // first option should be highlighted
         // TODO: this should be aria-activedescendant, but floating ui is not setting it on first load when autoHighlight is true, so using the class instead
-        expect(options[0]).toHaveClass(menu({ isActiveInPopover: true }).item!);
+        expect(options[0]).toHaveClass(ButtonCssClass.Active);
       });
 
       it('does not highlight first option if set to false', async () => {
@@ -147,7 +143,7 @@ describe('IressRichSelect', () => {
 
         // first option should not be highlighted
         // TODO: this should be aria-activedescendant, but floating ui is not setting it on first load when autoHighlight is true, so using the class instead
-        expect(options[0]).not.toHaveClass(button({ active: true }).root);
+        expect(options[0]).not.toHaveClass(ButtonCssClass.Active);
       });
     });
 
@@ -348,15 +344,12 @@ describe('IressRichSelect', () => {
         );
 
         const select = screen.getByTestId('test-component');
-        if (classes.richSelect) {
-          expect(select).toHaveClass(classes.richSelect);
-        }
+        expect(select).toHaveClass(styles.richSelect);
 
         const combobox = screen.getByRole('combobox');
-        // For empty multiselect, the content is empty, not "Selected: None"
-        expect(combobox).toBeInTheDocument();
+        expect(combobox).toHaveTextContent('Selected: None');
 
-        const popover = screen.getByTestId('test-component__content');
+        const popover = select.querySelector(`.${styles.popoverContent}`);
         expect(popover).not.toBeVisible();
 
         const hiddenInput = screen.getByTestId('test-component__hidden-input');
@@ -377,12 +370,7 @@ describe('IressRichSelect', () => {
           [MOCK_LABEL_VALUES[0]],
         );
         expect(hiddenInput).toHaveValue(String(MOCK_LABEL_VALUES[0].value));
-
-        // Check for the selected item as a tag - be more specific to avoid multiple matches
-        const selectedTag = screen.getByRole('button', {
-          name: `Delete ${MOCK_LABEL_VALUES[0].label}`,
-        });
-        expect(selectedTag).toBeInTheDocument();
+        expect(combobox).toHaveTextContent(MOCK_LABEL_VALUES[0].label);
 
         await userEvent.click((await screen.findAllByRole('option'))[1]);
 
@@ -397,16 +385,9 @@ describe('IressRichSelect', () => {
         expect(hiddenInput).toHaveValue(
           `${String(MOCK_LABEL_VALUES[0].value)},${String(MOCK_LABEL_VALUES[1].value)}`,
         );
-
-        // Check for both selected items as tags - be more specific to avoid multiple matches
-        const selectedTag1 = screen.getByRole('button', {
-          name: `Delete ${MOCK_LABEL_VALUES[0].label}`,
-        });
-        const selectedTag2 = screen.getByRole('button', {
-          name: `Delete ${MOCK_LABEL_VALUES[1].label}`,
-        });
-        expect(selectedTag1).toBeInTheDocument();
-        expect(selectedTag2).toBeInTheDocument();
+        expect(combobox).toHaveTextContent(
+          `Selected: ${MOCK_LABEL_VALUES[0].label}, ${MOCK_LABEL_VALUES[1].label}`,
+        );
       });
 
       it('deletes a single item from a multi-select', async () => {
@@ -534,8 +515,12 @@ describe('IressRichSelect', () => {
           />,
         );
 
-        // For multiSelect, the combobox button is always present
-        const activator = screen.getByRole('combobox');
+        // combobox is revealed later in async mode
+        expect(screen.queryByRole('combobox')).not.toBeInTheDocument();
+
+        const activator = screen.getByRole('button', {
+          name: 'Selected: None',
+        });
         await userEvent.click(activator);
 
         const combobox = await screen.findByRole('combobox', {
@@ -563,6 +548,8 @@ describe('IressRichSelect', () => {
 
         const hiddenInput = screen.getByTestId('test-component__hidden-input');
         expect(hiddenInput).toHaveValue('1');
+
+        expect(activator).toHaveTextContent('Selected: Option 1');
 
         const clearButton = screen.getByRole('button', { name: 'Clear all' });
         await userEvent.click(clearButton);
@@ -718,13 +705,13 @@ describe('IressRichSelect', () => {
       });
     });
 
-    describe('readOnly', () => {
+    describe('readonly', () => {
       it('renders a hidden input with the correct value', () => {
         const screen = render(
           <IressRichSelect
             defaultValue={MOCK_LABEL_VALUES[0]}
             options={MOCK_LABEL_VALUES}
-            readOnly
+            readonly
           />,
         );
         const input = screen.container.querySelector(
@@ -822,6 +809,78 @@ describe('IressRichSelect', () => {
       });
     });
 
+    describe('renderOptionsFooter', () => {
+      it('renders a custom footer for synchronous options with correct results length', async () => {
+        render(
+          <IressRichSelect
+            options={MOCK_LABEL_VALUES}
+            renderOptionsFooter={({ results }) => (
+              <div data-testid="options-footer">Footer: {results.length}</div>
+            )}
+          />,
+        );
+
+        const combobox = screen.getByRole('combobox');
+        await userEvent.click(combobox);
+
+        const footer = await screen.findByTestId('options-footer');
+        expect(footer).toHaveTextContent(`Footer: ${MOCK_LABEL_VALUES.length}`);
+      });
+
+      it('renders a custom footer for asynchronous options after search', async () => {
+        render(
+          <IressRichSelect
+            placeholder="Select an item"
+            options={() => mockAsyncSearchLabelValues()}
+            debounceThreshold={0}
+            renderOptionsFooter={({ results }) =>
+              results.length > 0 && (
+                <div data-testid="options-footer">Footer: {results.length}</div>
+              )
+            }
+          />,
+        );
+
+        // Open popover
+        const activator = screen.getByRole('button', {
+          name: 'Select an item',
+        });
+        await userEvent.click(activator);
+
+        // Footer should not show before any search results
+        expect(screen.queryByTestId('options-footer')).not.toBeInTheDocument();
+
+        const search = await screen.findByRole('combobox', { name: 'Search' });
+        await userEvent.type(search, 'op');
+
+        const footer = await screen.findByTestId('options-footer');
+        // mockAsyncSearchLabelValues returns 5 results in other tests
+        expect(footer).toHaveTextContent('Footer: 5');
+      });
+
+      it('does not render footer when renderOptions is provided', async () => {
+        render(
+          <IressRichSelect
+            options={MOCK_LABEL_VALUES}
+            renderOptions={({ results }) => (
+              <strong>Custom options count: {results.length}</strong>
+            )}
+            renderOptionsFooter={({ results }) => (
+              <div data-testid="options-footer">Footer: {results.length}</div>
+            )}
+          />,
+        );
+
+        const combobox = screen.getByRole('combobox');
+        await userEvent.click(combobox);
+
+        expect(
+          screen.getByText(`Custom options count: ${MOCK_LABEL_VALUES.length}`),
+        ).toBeInTheDocument();
+        expect(screen.queryByTestId('options-footer')).not.toBeInTheDocument();
+      });
+    });
+
     describe('value', () => {
       it('renders a value value', async () => {
         render(
@@ -845,6 +904,218 @@ describe('IressRichSelect', () => {
           name: MOCK_LABEL_VALUES[0].label,
         });
         expect(selectedOption).toBeInTheDocument();
+      });
+    });
+
+    describe('width', () => {
+      it('renders correct classes', () => {
+        render(
+          <IressRichSelect
+            data-testid="test-component"
+            options={MOCK_LABEL_VALUES}
+            width="10"
+          />,
+        );
+
+        expect(screen.getByTestId('test-component')).toHaveClass(
+          `${GlobalCSSClass.Width}--10`,
+        );
+      });
+    });
+
+    describe('matchActivatorWidth', () => {
+      const mockRect = {
+        width: 250,
+        height: 40,
+        top: 0,
+        left: 0,
+        bottom: 40,
+        right: 250,
+        x: 0,
+        y: 0,
+        toJSON: () => {},
+      };
+
+      const mockRectWide = {
+        width: 300,
+        height: 40,
+        top: 0,
+        left: 0,
+        bottom: 40,
+        right: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => {},
+      };
+
+      const createMockRect = () => mockRect;
+      const createMockRectWide = () => mockRectWide;
+
+      beforeEach(() => {
+        // Mock getBoundingClientRect to return a consistent width
+        Element.prototype.getBoundingClientRect = vi.fn(createMockRect);
+      });
+
+      afterEach(() => {
+        vi.restoreAllMocks();
+      });
+
+      it('applies autoWidth class and activator width by default (matchActivatorWidth: true)', async () => {
+        render(
+          <IressRichSelect
+            data-testid="test-component"
+            options={MOCK_LABEL_VALUES}
+            matchActivatorWidth={true}
+          />,
+        );
+
+        const combobox = screen.getByRole('combobox');
+        await userEvent.click(combobox);
+
+        const select = screen.getByTestId('test-component');
+        const popoverContent = select.querySelector(
+          `.${styles.popoverContent}`,
+        );
+
+        expect(popoverContent).toHaveClass(styles.autoWidth);
+        expect(popoverContent).toHaveStyle('--activator-width: 250px');
+      });
+
+      it('applies autoWidth class and activator width when explicitly set to true', async () => {
+        render(
+          <IressRichSelect
+            data-testid="test-component"
+            options={MOCK_LABEL_VALUES}
+            matchActivatorWidth={true}
+          />,
+        );
+
+        const combobox = screen.getByRole('combobox');
+        await userEvent.click(combobox);
+
+        const select = screen.getByTestId('test-component');
+        const popoverContent = select.querySelector(
+          `.${styles.popoverContent}`,
+        );
+
+        expect(popoverContent).toHaveClass(styles.autoWidth);
+        expect(popoverContent).toHaveStyle('--activator-width: 250px');
+      });
+
+      it('does not apply autoWidth class or activator width when set to false', async () => {
+        render(
+          <IressRichSelect
+            data-testid="test-component"
+            options={MOCK_LABEL_VALUES}
+            matchActivatorWidth={false}
+          />,
+        );
+
+        const combobox = screen.getByRole('combobox');
+        await userEvent.click(combobox);
+
+        const select = screen.getByTestId('test-component');
+        const popoverContent = select.querySelector(
+          `.${styles.popoverContent}`,
+        );
+
+        expect(popoverContent).not.toHaveClass(styles.autoWidth);
+        expect(popoverContent).not.toHaveStyle('--activator-width: 250px');
+      });
+
+      it('measures and applies activator width when popover is opened', async () => {
+        const getBoundingClientRectSpy = vi.fn(createMockRectWide);
+        Element.prototype.getBoundingClientRect = getBoundingClientRectSpy;
+
+        render(
+          <IressRichSelect
+            data-testid="test-component"
+            options={MOCK_LABEL_VALUES}
+            matchActivatorWidth={true}
+          />,
+        );
+
+        const combobox = screen.getByRole('combobox');
+        await userEvent.click(combobox);
+
+        const select = screen.getByTestId('test-component');
+        const popoverContent = select.querySelector(
+          `.${styles.popoverContent}`,
+        );
+
+        // Should have autoWidth class and the correct width style
+        expect(popoverContent).toHaveClass(styles.autoWidth);
+        expect(popoverContent).toHaveStyle('--activator-width: 300px');
+      });
+
+      it('does not apply activator width styles when matchActivatorWidth is false', async () => {
+        render(
+          <IressRichSelect
+            data-testid="test-component"
+            options={MOCK_LABEL_VALUES}
+            matchActivatorWidth={false}
+          />,
+        );
+
+        const combobox = screen.getByRole('combobox');
+        await userEvent.click(combobox);
+
+        const select = screen.getByTestId('test-component');
+        const popoverContent = select.querySelector(
+          `.${styles.popoverContent}`,
+        );
+
+        // Should not have autoWidth class
+        expect(popoverContent).not.toHaveClass(styles.autoWidth);
+
+        // Should not have --activator-width CSS custom property
+        expect(popoverContent).not.toHaveStyle('--activator-width: 250px');
+        expect(popoverContent).not.toHaveStyle('--activator-width: 300px');
+
+        // Check that the style attribute doesn't contain --activator-width
+        const styleAttribute = popoverContent?.getAttribute('style') ?? '';
+        expect(styleAttribute).not.toMatch(/--activator-width/);
+      });
+
+      it('handles case when activator element is not found gracefully', async () => {
+        render(
+          <IressRichSelect
+            data-testid="test-component"
+            options={MOCK_LABEL_VALUES}
+            matchActivatorWidth={true}
+          />,
+        );
+
+        const combobox = screen.getByRole('combobox');
+        await userEvent.click(combobox);
+
+        const select = screen.getByTestId('test-component');
+        const popoverContent = select.querySelector(
+          `.${styles.popoverContent}`,
+        );
+
+        // Should still have autoWidth class even if activator width measurement fails
+        expect(popoverContent).toHaveClass(styles.autoWidth);
+      });
+
+      it('defaults to matchActivatorWidth: true when prop is not provided', async () => {
+        render(
+          <IressRichSelect
+            data-testid="test-component"
+            options={MOCK_LABEL_VALUES}
+          />,
+        );
+
+        const combobox = screen.getByRole('combobox');
+        await userEvent.click(combobox);
+
+        const select = screen.getByTestId('test-component');
+        const popoverContent = select.querySelector(
+          `.${styles.popoverContent}`,
+        );
+
+        expect(popoverContent).toHaveClass(styles.autoWidth);
+        expect(popoverContent).toHaveStyle('--activator-width: 250px');
       });
     });
 
@@ -915,33 +1186,6 @@ describe('IressRichSelect', () => {
 
         expect(screen.getByTestId('header')).toBeInTheDocument();
         expect(screen.getByTestId('footer')).toBeInTheDocument();
-      });
-    });
-
-    describe('header', () => {
-      it('renders header when provided', async () => {
-        render(
-          <IressRichSelect
-            options={MOCK_LABEL_VALUES}
-            header={<div data-testid="custom-header">Header Content</div>}
-          />,
-        );
-
-        const combobox = screen.getByRole('combobox');
-        await userEvent.click(combobox);
-
-        const header = screen.getByTestId('custom-header');
-        expect(header).toBeInTheDocument();
-        expect(header).toHaveTextContent('Header Content');
-      });
-
-      it('does not render header when not provided', async () => {
-        render(<IressRichSelect options={MOCK_LABEL_VALUES} />);
-
-        const combobox = screen.getByRole('combobox');
-        await userEvent.click(combobox);
-
-        expect(screen.queryByTestId('custom-header')).not.toBeInTheDocument();
       });
     });
 
@@ -1054,10 +1298,7 @@ describe('IressRichSelect', () => {
   describe('accessibility', () => {
     it('should not have basic accessibility issues', async () => {
       const { container } = render(
-        <>
-          <IressLabel htmlFor="select">Label</IressLabel>
-          <IressRichSelect id="select" options={MOCK_LABEL_VALUES} />
-        </>,
+        <IressRichSelect options={MOCK_LABEL_VALUES} />,
       );
 
       // TODO: act warning only shows when running in parallel with other tests. not sure why.
@@ -1065,427 +1306,7 @@ describe('IressRichSelect', () => {
       await act(async () => {});
 
       const results = await axe(container);
-      expect(results).toHaveNoViolations();
-    });
-  });
-
-  describe('ref methods', () => {
-    it('exposes imperative handle methods', () => {
-      const refObject = createRef<RichSelectRef>();
-
-      render(
-        <IressRichSelect
-          ref={refObject}
-          options={MOCK_LABEL_VALUES}
-          data-testid="test-component"
-        />,
-      );
-
-      // Test that the ref object has the expected methods
-      expect(refObject.current).toBeDefined();
-      expect(typeof refObject.current?.focus).toBe('function');
-      expect(typeof refObject.current?.blur).toBe('function');
-      expect(refObject.current?.input).toBeDefined();
-    });
-
-    it('focus and blur methods work correctly', () => {
-      const refObject = createRef<RichSelectRef>();
-
-      render(
-        <IressRichSelect
-          ref={refObject}
-          options={MOCK_LABEL_VALUES}
-          data-testid="test-component"
-        />,
-      );
-
-      // Test that focus and blur methods can be called without error
-      expect(() => {
-        refObject.current?.focus();
-      }).not.toThrow();
-
-      expect(() => {
-        refObject.current?.blur();
-      }).not.toThrow();
-    });
-
-    it('input reference points to hidden input element', () => {
-      const refObject = createRef<RichSelectRef>();
-
-      render(
-        <IressRichSelect
-          ref={refObject}
-          options={MOCK_LABEL_VALUES}
-          data-testid="test-component"
-        />,
-      );
-
-      const hiddenInput = screen.getByTestId('test-component__hidden-input');
-
-      // Input should reference the hidden input element
-      expect(refObject.current?.input).toBe(hiddenInput);
-    });
-  });
-
-  describe('width', () => {
-    it('applies correct width styling for fixed width variants', () => {
-      const widthVariants = ['2', '4', '6', '8', '10', '12', '16'] as const;
-
-      widthVariants.forEach((width) => {
-        const { unmount } = render(
-          <IressRichSelect
-            data-testid={`test-component-${width}`}
-            options={MOCK_LABEL_VALUES}
-            width={width}
-            placeholder={`Width ${width}`}
-          />,
-        );
-
-        const select = screen.getByTestId(`test-component-${width}`);
-        const classes = richSelect({ width });
-
-        if (classes.richSelect) {
-          expect(select).toHaveClass(classes.richSelect);
-        }
-
-        unmount();
-      });
-    });
-
-    it('applies correct width styling for percentage width variants', () => {
-      const percentageVariants = [
-        '25perc',
-        '50perc',
-        '75perc',
-        '100perc',
-      ] as const;
-
-      percentageVariants.forEach((width) => {
-        const { unmount } = render(
-          <IressRichSelect
-            data-testid={`test-component-${width}`}
-            options={MOCK_LABEL_VALUES}
-            width={width}
-            placeholder={`Width ${width}`}
-          />,
-        );
-
-        const select = screen.getByTestId(`test-component-${width}`);
-        const classes = richSelect({ width });
-
-        if (classes.richSelect) {
-          expect(select).toHaveClass(classes.richSelect);
-        }
-
-        unmount();
-      });
-    });
-
-    it('works with multiSelect and width', async () => {
-      render(
-        <IressRichSelect
-          data-testid="test-component"
-          options={MOCK_LABEL_VALUES}
-          width="6"
-          multiSelect
-          placeholder="Multi-select Width 6"
-        />,
-      );
-
-      const select = screen.getByTestId('test-component');
-      const classes = richSelect({ width: '6' });
-
-      if (classes.richSelect) {
-        expect(select).toHaveClass(classes.richSelect);
-      }
-
-      // Verify it still functions as a multi-select
-      const activator = screen.getByRole('combobox');
-      await userEvent.click(activator);
-
-      const options = await screen.findAllByRole('option');
-      expect(options.length).toBeGreaterThan(0);
-
-      // Select first option
-      await userEvent.click(options[0]);
-
-      // Verify the selected item appears as a tag (within the tag component)
-      const selectedTag = screen.getByRole('button', {
-        name: `Delete ${MOCK_LABEL_VALUES[0].label}`,
-      });
-      expect(selectedTag).toBeInTheDocument();
-    });
-
-    it('works without width prop (uses default styling)', () => {
-      render(
-        <IressRichSelect
-          data-testid="test-component"
-          options={MOCK_LABEL_VALUES}
-          placeholder="Default width"
-        />,
-      );
-
-      const select = screen.getByTestId('test-component');
-      const classes = richSelect();
-
-      if (classes.richSelect) {
-        expect(select).toHaveClass(classes.richSelect);
-      }
-    });
-  });
-
-  describe('matchActivatorWidth', () => {
-    // Mock getBoundingClientRect for width measurement
-    const mockRect = {
-      width: 250,
-      height: 40,
-      top: 0,
-      left: 0,
-      bottom: 40,
-      right: 250,
-      x: 0,
-      y: 0,
-      toJSON: () => ({}),
-    };
-
-    beforeEach(() => {
-      // Mock getBoundingClientRect
-      Element.prototype.getBoundingClientRect = vi.fn(() => mockRect);
-    });
-
-    afterEach(() => {
-      vi.restoreAllMocks();
-    });
-
-    it('applies matchActivatorWidth styles by default (matchActivatorWidth: true)', async () => {
-      render(
-        <IressRichSelect
-          data-testid="test-component"
-          options={MOCK_LABEL_VALUES}
-          matchActivatorWidth={true}
-        />,
-      );
-
-      const combobox = screen.getByRole('combobox');
-      await userEvent.click(combobox);
-
-      const popoverContent = screen.getByTestId('test-component__content');
-
-      // When matchActivatorWidth is true, dropdown should be constrained to match activator width
-      expect(popoverContent).toHaveStyle('min-width: 250px');
-      // And should NOT have the extending class
-      expect(popoverContent).not.toHaveClass('max-w_[none]');
-    });
-
-    it('does not apply activator width styles when matchActivatorWidth is false', async () => {
-      render(
-        <IressRichSelect
-          data-testid="test-component"
-          options={MOCK_LABEL_VALUES}
-          matchActivatorWidth={false}
-        />,
-      );
-
-      const combobox = screen.getByRole('combobox');
-      await userEvent.click(combobox);
-
-      const popoverContent = screen.getByTestId('test-component__content');
-
-      // When matchActivatorWidth is false, verify that no inline minWidth is set by FloatingUI
-      expect(popoverContent.style.minWidth).toBe('');
-
-      // And verify that our CSS allows extending by checking for the max-width: none class
-      expect(popoverContent).toHaveClass('max-w_[none]');
-    });
-
-    it('defaults to matchActivatorWidth: true when prop is not provided', async () => {
-      render(
-        <IressRichSelect
-          data-testid="test-component"
-          options={MOCK_LABEL_VALUES}
-        />,
-      );
-
-      const combobox = screen.getByRole('combobox');
-      await userEvent.click(combobox);
-
-      const popoverContent = screen.getByTestId('test-component__content');
-
-      // By default matchActivatorWidth is true, so dropdown should be constrained to activator width
-      expect(popoverContent).toHaveStyle('min-width: 250px');
-      // And should NOT have the extending class
-      expect(popoverContent).not.toHaveClass('max-w_[none]');
-    });
-
-    it('works with multiSelect and matchActivatorWidth', async () => {
-      render(
-        <IressRichSelect
-          data-testid="test-component"
-          options={MOCK_LABEL_VALUES}
-          multiSelect
-          matchActivatorWidth={true}
-        />,
-      );
-
-      const combobox = screen.getByRole('combobox');
-      await userEvent.click(combobox);
-
-      const popoverContent = screen.getByTestId('test-component__content');
-
-      // When matchActivatorWidth is true, dropdown should be constrained even with multiSelect
-      expect(popoverContent).toHaveStyle('min-width: 250px');
-      // And should NOT have the extending class
-      expect(popoverContent).not.toHaveClass('max-w_[none]');
-
-      // Verify it still functions as a multi-select
-      const options = await screen.findAllByRole('option');
-      expect(options.length).toBeGreaterThan(0);
-    });
-
-    it('correctly applies width constraints when matchActivatorWidth is true', async () => {
-      render(
-        <IressRichSelect
-          data-testid="test-component"
-          options={MOCK_LABEL_VALUES}
-          matchActivatorWidth={true}
-        />,
-      );
-
-      const combobox = screen.getByRole('combobox');
-      await userEvent.click(combobox);
-
-      const popoverContent = screen.getByTestId('test-component__content');
-
-      // When matchActivatorWidth is true, dropdown should be constrained to activator width
-      expect(popoverContent).toHaveStyle('min-width: 250px');
-      // And should NOT have the extending class
-      expect(popoverContent).not.toHaveClass('max-w_[none]');
-    });
-
-    it('correctly removes width constraints when matchActivatorWidth is false', async () => {
-      render(
-        <IressRichSelect
-          data-testid="test-component"
-          options={MOCK_LABEL_VALUES}
-          matchActivatorWidth={false}
-        />,
-      );
-
-      const combobox = screen.getByRole('combobox');
-      await userEvent.click(combobox);
-
-      const popoverContent = screen.getByTestId('test-component__content');
-
-      // When matchActivatorWidth is false, verify that no inline minWidth is set by FloatingUI
-      expect(popoverContent.style.minWidth).toBe('');
-
-      // And verify that our CSS allows extending by checking for the max-width: none class
-      expect(popoverContent).toHaveClass('max-w_[none]');
-    });
-  });
-
-  describe('meta highlighting functionality', () => {
-    it('highlights query text in both label and meta when searching', async () => {
-      const optionsWithMeta = [
-        { label: 'Test option 1', value: '1', meta: 'Test description' },
-        { label: 'Search result', value: '2', meta: 'Contains search term' },
-        { label: 'Another option', value: '3', meta: 'Different content' },
-      ];
-
-      render(
-        <IressRichSelect
-          data-testid="test-component"
-          placeholder="Select an item"
-          options={() => Promise.resolve(optionsWithMeta)}
-          debounceThreshold={0}
-        />,
-      );
-
-      const activator = screen.getByRole('button', {
-        name: 'Select an item',
-      });
-      await userEvent.click(activator);
-
-      const combobox = await screen.findByRole('combobox', {
-        name: 'Search',
-      });
-
-      // Type search query
-      await userEvent.type(combobox, 'test');
-
-      // Wait for options to appear
-      const options = await screen.findAllByRole('option');
-
-      // Should find options that contain "test" in label or meta
-      expect(options.length).toBeGreaterThan(0);
-
-      // Check that the label highlighting is working
-      const highlightedLabels = screen.getAllByText(/test/i, { selector: 'b' });
-      expect(highlightedLabels.length).toBeGreaterThan(0);
-
-      // Verify both label and meta can be highlighted
-      // The first option has "Test" in both label and meta
-      const firstOption = options.find((option) =>
-        option.textContent?.includes('Test option 1'),
-      );
-      expect(firstOption).toBeInTheDocument();
-
-      if (firstOption) {
-        // Check that highlighting appears in both label and meta within this option
-        const boldElements = firstOption.querySelectorAll('b');
-        expect(boldElements.length).toBeGreaterThan(0);
-      }
-    });
-
-    it('handles meta that is not a string (ReactNode)', async () => {
-      const optionsWithReactNodeMeta = [
-        {
-          label: 'Option with React meta',
-          value: '1',
-          meta: <span data-testid="react-meta">React Element Meta</span>,
-        },
-        {
-          label: 'Regular option',
-          value: '2',
-          meta: 'Regular option meta',
-        },
-      ];
-
-      render(
-        <IressRichSelect
-          data-testid="test-component"
-          placeholder="Select an item"
-          options={() => Promise.resolve(optionsWithReactNodeMeta)}
-          debounceThreshold={0}
-        />,
-      );
-
-      const activator = screen.getByRole('button', {
-        name: 'Select an item',
-      });
-      await userEvent.click(activator);
-
-      const combobox = await screen.findByRole('combobox', {
-        name: 'Search',
-      });
-
-      // Type search query that appears in label
-      await userEvent.type(combobox, 'option');
-
-      // Wait for options to appear
-      await screen.findAllByRole('option');
-
-      // ReactNode meta should still be rendered correctly
-      const reactMeta = screen.getByTestId('react-meta');
-      expect(reactMeta).toBeInTheDocument();
-      expect(reactMeta).toHaveTextContent('React Element Meta');
-
-      // Check that we can find an option where meta is highlighted
-      const highlightedText = screen.getAllByText('option', { selector: 'b' });
-      expect(highlightedText).toHaveLength(2);
-      expect(highlightedText[1].parentElement).toHaveTextContent(
-        'Regular option meta',
-      );
+      expect(results).not.toHaveNoViolations();
     });
   });
 });

@@ -1,8 +1,8 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import {
-  type IressSlideoutProps,
+  IressSlideoutProps,
   IressSlideoutProvider,
-  type IressSlideoutProviderProps,
+  IressSlideoutProviderProps,
 } from '.';
 import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { App as AppWithSlideoutProvider } from './mocks/AppWithSlideoutProvider';
@@ -32,7 +32,6 @@ export default {
       disable: true,
     },
   },
-  tags: ['updated'],
 } as Meta<typeof IressSlideoutProvider>;
 
 export const Provider: Story = {

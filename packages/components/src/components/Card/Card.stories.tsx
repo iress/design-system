@@ -1,8 +1,9 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressCard, type IressCardProps } from './Card';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressCard } from './Card';
+import { IressCardProps } from './Card.types';
+
 import { IressRow } from '../Row';
 import { IressCol } from '../Col';
-import { IressStack } from '../Stack';
 import { PADDING_SIZES } from '@/main';
 
 type Story = StoryObj<IressCardProps>;
@@ -15,7 +16,6 @@ export default {
       disable: true,
     },
   },
-  tags: ['updated'],
 } as Meta<typeof IressCard>;
 
 export const Default: Story = {
@@ -36,13 +36,13 @@ export const Padding: Story = {
     ...Default.args,
   },
   render: ({ ...args }) => (
-    <IressStack gap="md">
+    <div className="iress-u-stack iress--gutter--md">
       {PADDING_SIZES.map((padding) => (
-        <IressCard {...args} p={padding} key={padding}>
+        <IressCard {...args} padding={padding} key={padding}>
           I&rsquo;m a card with {padding} padding
         </IressCard>
       ))}
-    </IressStack>
+    </div>
   ),
 };
 
@@ -51,7 +51,10 @@ export const Stretch: Story = {
     ...Default.args,
   },
   render: ({ ...args }) => (
-    <IressRow gutter="md" verticalAlign="stretch">
+    <IressRow
+      gutter={IressRow.Gutter.Md}
+      verticalAlign={IressRow.VerticalAlign.Stretch}
+    >
       <IressCol>
         <IressCard {...args} stretch>
           I&rsquo;m a stretched card

@@ -1,0 +1,72 @@
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-in--active {
+  opacity: 1;
+}
+
+.slide-in {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.slide-in--active {
+  transform: none;
+}
+
+.fade-next {
+  animation: 0.3s ease-in-out forwards fade-next-animation;
+}
+
+@keyframes fade-next-animation {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-next-width {
+  animation: 0.6s linear forwards fade-next-width-animation;
+  overflow: hidden;
+}
+
+@keyframes fade-next-width-animation {
+  from {
+    opacity: 0;
+    width: 0;
+  }
+
+  to {
+    opacity: 1;
+    width: max-content;
+  }
+}
+
+.slide-next {
+  animation: 0.5s ease-in-out forwards slide-next-animation;
+}
+
+@keyframes slide-next-animation {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.error,
+:global(.iress-u-panel).error {
+  --iress-background-color: var(
+    --iress-alert-danger-background-color,
+    var(--iress-a-layout-background-color, var(--iress-g-background-color-alt, var(--iress-g-background-color, var(--iress-default-background-color-alt))))
+  );
+}

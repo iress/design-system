@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { IressProgress } from '.';
 import { disableArgTypes } from '@iress-storybook/helpers';
@@ -9,7 +9,6 @@ type Story = StoryObj<typeof IressProgress>;
 export default {
   title: 'Components/Progress',
   component: IressProgress,
-  tags: ['updated'],
 } as Meta<typeof IressProgress>;
 
 export const Default: Story = {
@@ -21,11 +20,12 @@ export const Default: Story = {
 };
 
 export const ProgressExamples: Story = {
+  ...Default,
   argTypes: {
     ...disableArgTypes(['min', 'max', 'value', 'sectionTitle']),
   },
   render: (args) => (
-    <IressStack gap="md">
+    <IressStack gutter="md">
       <IressProgress {...args} min={0} max={50} value={0} />
       <IressProgress {...args} min={10} max={30} value={20} />
       <IressProgress

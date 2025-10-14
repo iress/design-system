@@ -125,11 +125,11 @@ const options = async (query: string) => {
   }));
 };
 
-export const OptionsLongText = () => {
+export const SelectOptionLongText = () => {
   const [matchActivatorWidth, setMatchActivatorWidth] = useState(true);
 
   return (
-    <IressStack gap="md">
+    <IressStack gutter="md">
       <IressField
         label={`matchActivatorWidth: ${matchActivatorWidth ? 'True' : 'False'}`}
       >

@@ -1,11 +1,10 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { IressButtonGroup, IressButtonGroupProps } from '.';
+import styles from './ButtonGroup.module.scss';
 import { IressButton } from '../Button/Button';
-import userEvent from '@testing-library/user-event';
-import { buttonGroup } from './ButtonGroup.styles';
-import { FormControlValue } from '@/types';
 import { GlobalCSSClass } from '@/enums';
+import userEvent from '@testing-library/user-event';
 
 const TEST_ID = 'test-component';
 const TEST_CHILDREN = [
@@ -19,11 +18,8 @@ const TEST_CHILDREN = [
 ];
 const TEST_LABEL = 'Button group';
 
-function renderComponent<
-  T = FormControlValue,
-  TMultiple extends boolean = false,
->(
-  props: Partial<IressButtonGroupProps<T, TMultiple>> = {},
+function renderComponent(
+  props: Partial<IressButtonGroupProps> = {},
   renderFn: typeof render = render,
 ) {
   return renderFn(
@@ -42,16 +38,12 @@ describe('IressButtonGroup', () => {
     const screen = renderComponent({
       className: 'test-class',
     });
-    const classes = buttonGroup();
 
     const container = screen.getByTestId(TEST_ID);
-    expect(container).toHaveClass(
-      `test-class ${classes.root}`,
-      GlobalCSSClass.ButtonGroup,
-    );
+    expect(container).toHaveClass(`test-class ${styles.buttonGroup}`);
 
     const group = screen.getByRole('group', { name: TEST_LABEL });
-    expect(group).toHaveClass(classes.values!);
+    expect(group).toHaveClass(styles.values);
 
     const buttons = screen.getAllByRole('button');
     expect(buttons.length).toBe(TEST_CHILDREN.length);
@@ -70,10 +62,16 @@ describe('IressButtonGroup', () => {
   });
 
   it('renders with the correct data-testids', () => {
-    const screen = renderComponent();
+    const screen = renderComponent({
+      children: '',
+      options: ['Test 1'],
+    });
 
     expect(screen.getByTestId(TEST_ID)).toBeInTheDocument();
     expect(screen.getByTestId(`${TEST_ID}__label`)).toBeInTheDocument();
+    expect(
+      screen.getByTestId(`${TEST_ID}__button__button`),
+    ).toBeInTheDocument();
   });
 
   describe('props', () => {
@@ -84,7 +82,7 @@ describe('IressButtonGroup', () => {
         });
 
         const label = screen.getByText('Test label');
-        expect(label).toHaveClass(buttonGroup().label!);
+        expect(label).toHaveClass(styles.label);
 
         const group = screen.getByRole('group', { name: 'Test label' });
         expect(group).toBeInTheDocument();
@@ -136,7 +134,7 @@ describe('IressButtonGroup', () => {
         });
 
         const label = screen.getByText(TEST_LABEL);
-        expect(label).toHaveClass(buttonGroup({ hiddenLabel: true }).label!);
+        expect(label).toHaveClass(GlobalCSSClass.SROnly);
       });
     });
 
@@ -168,13 +166,13 @@ describe('IressButtonGroup', () => {
         const option2 = screen.getByRole('button', { name: 'Option 2' });
 
         await userEvent.click(option1);
-        expect(onChange).toHaveBeenCalledWith('Option 1');
+        expect(onChange).toHaveBeenCalledWith({ selected: 'Option 1' });
 
         await userEvent.click(option2);
-        expect(onChange).toHaveBeenCalledWith(2);
+        expect(onChange).toHaveBeenCalledWith({ selected: 2 });
 
         await userEvent.click(option2);
-        expect(onChange).toHaveBeenCalledWith(undefined);
+        expect(onChange).toHaveBeenCalledWith({ selected: undefined });
       });
 
       it('is called with array in a multiple button group', async () => {
@@ -188,13 +186,31 @@ describe('IressButtonGroup', () => {
         const option2 = screen.getByRole('button', { name: 'Option 2' });
 
         await userEvent.click(option1);
-        expect(onChange).toHaveBeenCalledWith(['Option 1']);
+        expect(onChange).toHaveBeenCalledWith({ selected: ['Option 1'] });
 
         await userEvent.click(option2);
-        expect(onChange).toHaveBeenCalledWith(['Option 1', 2]);
+        expect(onChange).toHaveBeenCalledWith({ selected: ['Option 1', 2] });
 
         await userEvent.click(option2);
-        expect(onChange).toHaveBeenCalledWith(['Option 1']);
+        expect(onChange).toHaveBeenCalledWith({ selected: ['Option 1'] });
+      });
+    });
+
+    describe('options', () => {
+      it('renders options as buttons', async () => {
+        const onChange = vi.fn();
+        const screen = renderComponent({
+          children: null,
+          onChange,
+          options: ['Test 1'],
+        });
+
+        const button = screen.getByRole('button', { name: 'Test 1' });
+        expect(button).toBeInTheDocument();
+
+        await userEvent.click(button);
+        expect(button).toHaveAttribute('aria-pressed', 'true');
+        expect(onChange).toHaveBeenCalledWith({ selected: 'Test 1' });
       });
     });
 

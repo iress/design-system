@@ -2,7 +2,6 @@ import {
   render,
   renderHook,
   waitForElementToBeRemoved,
-  within,
 } from '@testing-library/react';
 
 import { useSlideout } from './useSlideout';
@@ -16,9 +15,9 @@ describe('useSlideout', () => {
     // Hide expected throwed error.
     vi.spyOn(console, 'error').mockImplementation(() => {});
 
-    expect(() => {
-      renderHook(() => useSlideout());
-    }).toThrow(
+    const { result } = renderHook(() => useSlideout());
+
+    expect(() => result.current.showSlideout('id')).toThrow(
       'IressSlideout: showSlideout must be used within a IressSlideoutProvider',
     );
   });
@@ -38,25 +37,14 @@ describe('useSlideout', () => {
 
   it('closes a slideout with its id', async () => {
     const screen = render(
-      <AppWithSlideoutProvider id={ID} role="complementary" />,
-    );
-
-    expect(screen.queryByRole('complementary')).not.toBeInTheDocument();
-
-    await userEvent.click(
-      screen.getByRole('button', { name: 'Show slideout using provider' }),
+      <AppWithSlideoutProvider id={ID} role="complementary" defaultShow />,
     );
 
     const complementary = await screen.findByRole('complementary');
     expect(complementary).toBeInTheDocument();
 
-    const internalCloseButton = within(complementary).getByRole('button', {
-      name: 'Close',
-    });
-    await userEvent.click(internalCloseButton);
+    await userEvent.click(screen.getByRole('button', { name: 'Close' }));
 
     await waitForElementToBeRemoved(complementary);
-
-    expect(screen.queryByRole('complementary')).not.toBeInTheDocument();
   });
 });

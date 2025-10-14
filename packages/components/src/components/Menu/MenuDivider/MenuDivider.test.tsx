@@ -1,23 +1,19 @@
 import { render } from '@testing-library/react';
-import {
-  IressMenu,
-  IressMenuDivider,
-  IressMenuDividerProps,
-  IressMenuProps,
-} from '..';
+import { IressMenu, IressMenuDivider } from '..';
+import { IressMenuProps } from '../Menu.types';
 import { axe } from 'jest-axe';
-import { GlobalCSSClass } from '@/enums';
+import { IressHTMLAttributes } from '@/interfaces';
 
 const TEST_ID = 'test-component';
 const MENU_TEST_ID = 'test-menu';
 
-function renderComponent(props?: IressMenuDividerProps) {
+function renderComponent(props?: IressHTMLAttributes<HTMLHRElement>) {
   return render(<IressMenuDivider {...props} data-testid={TEST_ID} />);
 }
 
 function renderInsideMenu(
   props?: IressMenuProps,
-  itemProps?: IressMenuDividerProps,
+  itemProps?: IressHTMLAttributes<HTMLHRElement>,
   wrapperTag = 'div',
 ) {
   const Wrapper = wrapperTag as keyof JSX.IntrinsicElements;
@@ -36,7 +32,6 @@ describe('IressMenuDivider', () => {
     const screen = renderComponent();
     const separator = screen.getByRole('presentation');
     expect(separator).toBeInTheDocument();
-    expect(separator).toHaveClass(GlobalCSSClass.MenuDivider);
   });
 
   describe('inside menu', () => {

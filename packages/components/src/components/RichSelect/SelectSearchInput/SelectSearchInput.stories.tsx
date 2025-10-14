@@ -1,9 +1,7 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import {
-  IressSelectSearchInput,
-  type IressSelectSearchInputProps,
-} from './SelectSearchInput';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressSelectSearchInput } from './SelectSearchInput';
 import { addToStorybookCategory } from '@iress-storybook/helpers';
+import { IressSelectSearchInputProps } from './SelectSearchInput.types';
 
 type Story = StoryObj<typeof IressSelectSearchInput>;
 

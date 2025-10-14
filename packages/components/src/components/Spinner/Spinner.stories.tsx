@@ -1,24 +1,38 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressSpinner } from '.';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressSpinner, IressSpinnerProps } from '.';
 import { IressInline } from '../Inline';
 import { IressText } from '../Text';
-import { addToStorybookCategory } from '@iress-storybook/helpers';
 
 type Story = StoryObj<typeof IressSpinner>;
+
+const addToIconCategory = (
+  props: (keyof IressSpinnerProps)[],
+): Record<string, { table: { category: string } }> => {
+  return props.reduce(
+    (acc, prop) => {
+      acc[prop] = { table: { category: 'Icon' } };
+      return acc;
+    },
+    {} as Record<string, { table: { category: string } }>,
+  );
+};
 
 export default {
   title: 'Components/Spinner',
   component: IressSpinner,
   argTypes: {
-    ...addToStorybookCategory('Icon props', [
+    ...addToIconCategory([
       'fixedWidth',
       'flip',
+      'name',
+      'mode',
+      'name',
       'rotate',
       'set',
+      'size',
       'spin',
     ]),
   },
-  tags: ['updated'],
 } as Meta<typeof IressSpinner>;
 
 export const Standalone: Story = {
@@ -29,9 +43,9 @@ export const Standalone: Story = {
 
 export const Message: Story = {
   render: (args) => (
-    <IressInline gap="sm" verticalAlign="middle">
+    <IressInline gutter="sm" verticalAlign="middle">
       <IressSpinner {...args} />
-      <IressText color="colour.neutral.70">Making magic happen...</IressText>
+      <IressText mode="muted">Making magic happen...</IressText>
     </IressInline>
   ),
 };

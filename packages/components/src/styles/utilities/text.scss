@@ -1,0 +1,340 @@
+@use '../mixins';
+
+.iress-u-text {
+  @include mixins.addTextVars();
+  @include mixins.defaultFontStyles();
+
+  color: var(--iress-text-color);
+  line-height: var(--iress-line-height);
+  display: block;
+
+  ul:not([class]) {
+    list-style: disc;
+  }
+
+  ol:not([class]) {
+    list-style: decimal;
+  }
+}
+
+.iress--primary.iress-u-text {
+  --iress-scoped-text-color: var(--iress-primary-text-color);
+}
+
+.iress--success.iress-u-text {
+  --iress-scoped-text-color: var(--iress-success-text-color);
+}
+
+.iress--warning.iress-u-text {
+  --iress-scoped-text-color: var(--iress-warning-text-color);
+}
+
+.iress--danger.iress-u-text {
+  --iress-scoped-text-color: var(--iress-error-text-color);
+}
+
+.iress--info.iress-u-text {
+  --iress-scoped-text-color: var(--iress-info-text-color);
+}
+
+.iress--negative.iress-u-text {
+  --iress-scoped-text-color: var(--iress-negative-text-color);
+}
+
+.iress--positive.iress-u-text {
+  --iress-scoped-text-color: var(--iress-positive-text-color);
+}
+
+.iress--body.iress-u-text {
+  --iress-scoped-text-color: var(--iress-g-text-color);
+}
+
+.iress--muted.iress-u-text {
+  --iress-scoped-text-color: var(--iress-muted-text-color);
+  --iress-heading-text-color: var(--iress-muted-text-color);
+}
+
+p.iress-u-text,
+.iress-u-text p,
+.iress--body.iress-u-text {
+  @include mixins.defaultFontStyles();
+
+  color: var(--iress-text-color);
+  line-height: var(--iress-line-height);
+  margin-block: 0 var(--iress-paragraph-margin-bottom);
+}
+
+ol.iress-u-text,
+.iress-u-text ol,
+ul.iress-u-text,
+.iress-u-text ul {
+  margin-block: 0 var(--iress-list-margin-bottom);
+  padding-inline-start: var(--iress-list-padding-x);
+
+  li:last-child,
+  ul,
+  ol {
+    margin-block-end: 0;
+  }
+}
+
+h1.iress-u-text,
+.iress-u-text h1,
+.iress--h1.iress-u-text {
+  font-size: var(--iress-heading-1-font-size);
+  font-weight: var(--iress-heading-1-font-weight);
+}
+
+h2.iress-u-text,
+.iress-u-text h2,
+.iress--h2.iress-u-text {
+  font-size: var(--iress-heading-2-font-size);
+}
+
+h3.iress-u-text,
+.iress-u-text h3,
+.iress--h3.iress-u-text {
+  font-size: var(--iress-heading-3-font-size);
+}
+
+h4.iress-u-text,
+.iress-u-text h4,
+.iress--h4.iress-u-text {
+  font-size: var(--iress-heading-4-font-size);
+}
+
+h5.iress-u-text,
+.iress-u-text h5,
+.iress--h5.iress-u-text {
+  font-size: var(--iress-heading-5-font-size);
+}
+
+h6.iress-u-text,
+.iress-u-text h6,
+.iress--h6.iress-u-text {
+  font-size: var(--iress-heading-6-font-size);
+}
+
+h1.iress-u-text,
+.iress--h1.iress-u-text,
+.iress-u-text h1,
+h2.iress-u-text,
+.iress--h2.iress-u-text,
+.iress-u-text h2,
+h3.iress-u-text,
+.iress--h3.iress-u-text,
+.iress-u-text h3,
+h4.iress-u-text,
+.iress--h4.iress-u-text,
+.iress-u-text h4,
+h5.iress-u-text,
+.iress--h5.iress-u-text,
+.iress-u-text h5,
+h6.iress-u-text,
+.iress--h6.iress-u-text,
+.iress-u-text h6 {
+  @include mixins.addHeadingStyles();
+
+  [class*='ids-icon'] {
+    line-height: inherit;
+  }
+
+  > [class*='ids-icon']:first-child {
+    margin-inline-end: var(--iress-heading-icon-spacing);
+  }
+
+  > [class*='ids-icon']:last-child {
+    margin-inline-start: var(--iress-heading-icon-spacing);
+  }
+}
+
+code.iress-u-text,
+.iress--code.iress-u-text,
+.iress-u-text code {
+  display: inline-block;
+  font-family: var(--iress-code-font-family);
+  font-size: inherit;
+  color: var(--iress-code-text-color);
+  background-color: var(--iress-code-background-color);
+  border: var(--iress-code-border-width);
+  border-color: var(--iress-code-border-color);
+  line-height: var(--iress-code-line-height);
+  padding: 1px;
+}
+
+span.iress-u-text,
+.iress--span.iress-u-text,
+.iress-u-text span:not([class]) {
+  display: inline;
+}
+
+blockquote.iress-u-text,
+.iress--blockquote.iress-u-text,
+.iress-u-text blockquote {
+  position: relative;
+  padding-inline-start: var(--iress-blockquote-padding-left);
+  margin-inline-start: 0;
+  font-style: italic;
+  margin-block-start: 0;
+}
+
+blockquote.iress-u-text::after,
+.iress--blockquote.iress-u-text::after,
+.iress-u-text blockquote::after {
+  width: var(--iress-blockquote-border-width);
+  background-color: var(--iress-blockquote-border-color);
+  content: '';
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  position: absolute;
+  height: 100%;
+}
+
+caption.iress-u-text,
+.iress--caption.iress-u-text,
+.iress-u-text caption,
+cite.iress-u-text,
+.iress--cite.iress-u-text,
+.iress-u-text cite {
+  font-weight: var(--iress-caption-font-weight);
+  font-size: var(--iress-caption-font-size);
+  color: var(--iress-caption-text-color);
+
+  &:not(table *) {
+    display: block;
+    text-align: inherit;
+  }
+}
+
+small.iress-u-text,
+.iress--small.iress-u-text,
+.iress-u-text small {
+  font-size: var(--iress-small-font-size);
+}
+
+b.iress-u-text,
+strong.iress-u-text,
+.iress--bold.iress-u-text,
+.iress-u-text .iress-bold {
+  font-weight: var(--iress-strong-font-weight);
+}
+
+.iress--italic.iress-u-text,
+.iress-u-text .iress-italic {
+  font-style: italic;
+}
+
+.iress--display.iress-u-text b,
+.iress--display.iress-u-text strong,
+.iress--display1.iress-u-text b,
+.iress--display1.iress-u-text strong,
+.iress--display2.iress-u-text b,
+.iress--display2.iress-u-text strong,
+.iress--display3.iress-u-text b,
+.iress--display3.iress-u-text strong,
+.iress--display4.iress-u-text b,
+.iress--display4.iress-u-text strong,
+.iress--lead.iress-u-text b,
+.iress--lead.iress-u-text strong,
+.iress--caption.iress-u-text b,
+.iress--caption.iress-u-text strong,
+.iress--cite.iress-u-text b,
+.iress--cite.iress-u-text strong {
+  font-weight: var(--iress-g-font-weight, bold);
+}
+
+hr.iress-u-text,
+.iress--hr.iress-u-text,
+.iress-u-text hr {
+  border: 0;
+  @include mixins.addDivider(false);
+
+  margin-block: var(--iress-divider-margin-bottom) var(--iress-divider-margin-top);
+}
+
+a.iress-u-text,
+.iress-u-text a:not(.iress-u-button, .iress-u-card) {
+  color: var(--iress-link-text-color);
+  text-decoration: var(--iress-g-link-text-decoration, underline);
+  transition: all var(--iress-transition-duration) var(--iress-transition-type);
+}
+
+@media (hover: hover) {
+  a.iress-u-text:hover,
+  .iress-u-text a:not(.iress-u-button, .iress-u-card):hover {
+    color: var(--iress-link-hover-text-color);
+    text-decoration: var(--iress-text-link-hover-text-decoration, none);
+  }
+}
+
+a.iress-u-text:focus,
+.iress-u-text a:not(.iress-u-button, .iress-u-card):focus {
+  box-shadow: var(--iress-focus-box-shadow);
+  color: var(--iress-link-hover-text-color);
+  outline: none;
+  text-decoration: var(--iress-text-link-hover-text-decoration, none);
+}
+
+a.iress-u-text:focus:not(:focus-visible),
+.iress-u-text a:not(.iress-u-button, .iress-u-card):focus:not(:focus-visible) {
+  box-shadow: none;
+}
+
+a.iress-u-text:active,
+.iress-u-text a:not(.iress-u-button, .iress-u-card):active {
+  color: var(--iress-link-active-text-color);
+  text-decoration: var(--iress-text-link-hover-text-decoration, none);
+}
+
+.iress--display1.iress-u-text,
+.iress--display2.iress-u-text,
+.iress--display3.iress-u-text,
+.iress--display4.iress-u-text,
+.iress--display.iress-u-text {
+  font-family: var(--iress-display-font-family);
+  font-weight: var(--iress-display-font-weight);
+  line-height: var(--iress-display-line-height);
+  color: var(--iress-display-text-color);
+  margin-block: var(--iress-display-margin-top) var(--iress-display-margin-bottom);
+  font-style: normal;
+
+  [class*='ids-icon'] {
+    line-height: inherit;
+  }
+
+  > [class*='ids-icon']:first-child {
+    margin-inline-end: var(--iress-heading-icon-spacing);
+  }
+
+  > [class*='ids-icon']:last-child {
+    margin-inline-start: var(--iress-heading-icon-spacing);
+  }
+}
+
+.iress--display1.iress-u-text {
+  font-size: var(--iress-display-1-font-size);
+}
+
+.iress--display2.iress-u-text {
+  font-size: var(--iress-display-2-font-size);
+}
+
+.iress--display3.iress-u-text {
+  font-size: var(--iress-display-3-font-size);
+}
+
+.iress--display4.iress-u-text {
+  font-size: var(--iress-display-4-font-size);
+}
+
+.iress--lead.iress-u-text {
+  font-weight: var(--iress-lead-font-weight);
+  font-size: var(--iress-lead-font-size);
+  color: var(--iress-lead-text-color);
+}
+
+.iress--no-gutter.iress-u-text,
+.iress-u-text .iress--no-gutter,
+.iress--no-gutter.iress-u-text > *:last-child {
+  margin-block-end: 0;
+}

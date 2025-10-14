@@ -13,7 +13,7 @@ export const useShowIndicator = (
   showDelay = 500,
   hideDelay = 200,
 ) => {
-  const [showIndicator, setShowIndicator] = useState(showDelay === 0);
+  const [showIndicator, setShowIndicator] = useState(false);
 
   useEffect(() => {
     if (isLoaded !== true) {

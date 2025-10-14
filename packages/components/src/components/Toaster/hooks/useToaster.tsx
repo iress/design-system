@@ -1,95 +1,35 @@
-import { createContext, useCallback, useContext, useMemo } from 'react';
-import {
-  getToaster,
-  type NewToast,
-  type ToasterRegister,
-} from '../helpers/toasterRegister';
+import { useContext, useEffect, useMemo } from 'react';
+import { type NewToast } from '../Toast/Toast.types';
+import { ToasterContext } from '../ToasterProvider';
+import { type ToasterPositions } from '../Toaster.types';
 
-interface ToasterHookReturn {
-  /**
-   * Show a toast when an error occurs.
-   * @param toast The toast object containing the `content`, `heading`, and other optional properties. Can also be a string if you want to simply display a message.
-   * @return A string representing the ID of the created toast.
-   */
-  error: (toast: NewToast | string) => string;
-
-  /**
-   * Show a toast on a successful operation.
-   * @param toast The toast object containing the `content`, `heading`, and other optional properties. Can also be a string if you want to simply display a message.
-   * @return A string representing the ID of the created toast.
-   */
-  success: (toast: NewToast | string) => string;
-
-  /**
-   * Show a toast to inform the user of an event or action.
-   * @param toast The toast object containing the `content`, `heading`, and other optional properties. Can also be a string if you want to simply display a message.
-   * @return A string representing the ID of the created toast.
-   */
-  info: (toast: NewToast | string) => string;
-
-  /**
-   * Close a toast by its ID.
-   * @param toastId The ID of the toast to close.
-   */
-  close: ToasterRegister['close'];
-}
-
-export const ToasterContext = createContext<ToasterRegister | undefined>(
-  undefined,
-);
-
-const transformToNewToast = (toast: NewToast | string) => {
-  if (typeof toast !== 'string') return toast;
-  return { content: toast };
-};
-
-/**
- * This hook provides allows you to show and close toasts in your application.
- * @param id Optional ID of the `IressToasterProvider` to use. If not provided, the closest `IressToasterProvider` will be used.
- */
-export const useToaster = (id?: string): ToasterHookReturn => {
+export const useToaster = (position?: ToasterPositions) => {
   const context = useContext(ToasterContext);
 
   if (context === undefined) {
     throw new Error('useToaster must be used within a IressToasterProvider');
   }
 
-  const show = useCallback<ToasterRegister['show']>(
-    (status, toast) => {
-      const toaster = id ? getToaster(id) : context;
+  const { show, setOptions, options: globalOptions, animateOut } = context;
 
-      if (!toaster && id) {
-        throw new Error(`Toaster with id "${id}" not found.`);
-      }
-
-      return toaster?.show(status, toast) ?? '';
-    },
-    [context, id],
-  );
-
-  const close = useCallback<ToasterRegister['close']>(
-    (toastId) => {
-      const toaster = id ? getToaster(id) : context;
-
-      if (!toaster && id) {
-        throw new Error(`Toaster with id "${id}" not found.`);
-      }
-
-      toaster?.close(toastId);
-    },
-    [context, id],
-  );
+  useEffect(() => {
+    if (position) {
+      setOptions({
+        ...globalOptions,
+        position: position ?? globalOptions.position,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- Only need to update it if it's a option.
+  }, [position]);
 
   return useMemo(
     () => ({
-      success: (toast: NewToast | string) =>
-        show('success', transformToNewToast(toast)),
-      error: (toast: NewToast | string) =>
-        show('error', transformToNewToast(toast)),
-      info: (toast: NewToast | string) =>
-        show('info', transformToNewToast(toast)),
-      close,
+      success: (toast: NewToast) => show({ ...toast, status: 'success' }),
+      error: (toast: NewToast) => show({ ...toast, status: 'error' }),
+      info: (toast: NewToast) => show({ ...toast, status: 'info' }),
+      close: animateOut,
+      options: globalOptions,
     }),
-    [close, show],
+    [animateOut, globalOptions, show],
   );
 };

@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressAutocomplete } from '.';
 import {
   disableArgTypes,
@@ -62,10 +62,6 @@ export const Options: Story = {
 };
 
 export const AsyncOptions: Story = {
-  args: {
-    placeholder:
-      'Search star wars characters, or type "error" to see the error text',
-  },
   argTypes: {
     ...disableArgTypes(['options']),
   },
@@ -129,7 +125,7 @@ export const InputProps: Story = {
         align="bottom-end"
         container={document.body}
       >
-        <IressPanel>Some settings in here</IressPanel>
+        <IressPanel className="iress-u-text">Some settings in here</IressPanel>
       </IressPopover>
     ),
     prepend: <IressIcon name="search" />,
@@ -141,7 +137,9 @@ export const NoResultsText: Story = {
   args: {
     ...Options.args,
     placeholder: 'Type "no" to see the no results text',
-    noResultsText: <IressPanel>No results found</IressPanel>,
+    noResultsText: (
+      <IressPanel className="iress-u-text">No results found</IressPanel>
+    ),
   },
 };
 
@@ -176,8 +174,8 @@ export const ResultLimits: Story = {
     limitMobile: 3,
   },
   render: (args) => (
-    <IressStack gap="md">
-      <IressPanel>
+    <IressStack gutter="md">
+      <IressPanel className="iress-u-text">
         <CurrentBreakpoint />
       </IressPanel>
       <IressAutocomplete {...args} />
@@ -185,7 +183,7 @@ export const ResultLimits: Story = {
   ),
 };
 
-export const ReadOnly: Story = {
+export const Readonly: Story = {
   ...Uncontrolled,
   args: {
     ...Uncontrolled.args,

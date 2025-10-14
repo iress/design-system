@@ -1,17 +1,18 @@
+import { type PopoverContextValue } from '../Popover.types';
 import { tabbable } from 'tabbable';
+import styles from '../Popover.module.scss';
 import { FOCUSABLE_QUERY_SELECTOR } from '@/constants';
 import { focusableElements } from '@helpers/dom/focusableElements';
 import { type KeyboardEvent } from 'react';
-import { type PopoverHookReturn } from '../hooks/usePopover';
 import { waitUntilTrue } from './waitUntilTrue';
 
 /**
  * This helper function is used to handle the tab key press event when the popover is open, as Floating UI sometimes does not focus on the next element when the user tabs from the popover contents.
- * @param popover {PopoverHookReturn} The popover context value, usually retrieved from the usePopover hook.
+ * @param popover {PopoverContextValue} The popover context value, usually retrieved from the usePopover hook.
  * @param e {KeyboardEvent} The keyboard event object that triggered the tab key press.
  */
 export const handlePopoverTabKey = async (
-  popover: PopoverHookReturn,
+  popover: PopoverContextValue,
   e: KeyboardEvent,
 ) => {
   if (e.key !== 'Tab') {
@@ -41,7 +42,7 @@ export const handlePopoverTabKey = async (
     popover.setShowWithReason(false);
     const elements = tabbable(document.documentElement).filter(
       (element) =>
-        !popover.api.elements.floating?.contains(element) &&
+        !element.closest(`.${styles.content}`) &&
         !element.hasAttribute('data-floating-ui-focus-guard'),
     );
     const currentIndex = elements.indexOf(focusableReference);

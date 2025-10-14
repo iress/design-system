@@ -1,17 +1,16 @@
-import { type StoryObj, type Meta } from '@storybook/react-vite';
+import { StoryObj, Meta } from '@storybook/react';
 import { disableArgTypes } from '@iress-storybook/helpers';
 
-import { IressToggle } from '.';
+import { IressToggle, TOGGLE_LAYOUTS } from '.';
+import { IressRow } from '../Row';
+import { IressCol } from '../Col';
 import { IressPanel } from '../Panel';
-import { IressText } from '../Text';
-import { IressStack } from '../Stack';
 
 type Story = StoryObj<typeof IressToggle>;
 
 export default {
   title: 'Components/Toggle',
   component: IressToggle,
-  tags: ['updated'],
 } as Meta<typeof IressToggle>;
 
 export const Default: Story = {
@@ -43,39 +42,16 @@ export const Layout: Story = {
   },
   argTypes: disableArgTypes(['label', 'checked', 'hiddenLabel', 'layout']),
   render: (args) => (
-    <IressStack gap="lg">
-      <IressText>
-        <h3>inline</h3>
-        <IressPanel bg="alt">
-          <IressToggle {...args} layout="inline">
-            Toggle
-          </IressToggle>
-        </IressPanel>
-      </IressText>
-      <IressText>
-        <h3>inline-between</h3>
-        <IressPanel bg="alt">
-          <IressToggle {...args} layout="inline-between" checked>
-            Toggle
-          </IressToggle>
-        </IressPanel>
-      </IressText>
-      <IressText>
-        <h3>inline-reverse</h3>
-        <IressPanel bg="alt">
-          <IressToggle {...args} layout="inline-reverse">
-            Toggle
-          </IressToggle>
-        </IressPanel>
-      </IressText>
-      <IressText>
-        <h3>stack</h3>
-        <IressPanel bg="alt">
-          <IressToggle {...args} layout="stack" checked>
-            Toggle
-          </IressToggle>
-        </IressPanel>
-      </IressText>
-    </IressStack>
+    <IressRow gutter="lg">
+      {TOGGLE_LAYOUTS.map((layout, index) => (
+        <IressCol span="12" key={layout}>
+          <IressPanel background={IressPanel.Background.Alt}>
+            <IressToggle {...args} layout={layout} checked={Boolean(index % 2)}>
+              Toggle
+            </IressToggle>
+          </IressPanel>
+        </IressCol>
+      ))}
+    </IressRow>
   ),
 };

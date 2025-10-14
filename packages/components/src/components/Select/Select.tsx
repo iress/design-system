@@ -1,15 +1,15 @@
+import * as React from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
+import classNames from 'classnames';
 import {
-  type ChangeEvent,
-  type ForwardedRef,
-  forwardRef,
-  type ReactElement,
-  type ReactNode,
-  useCallback,
-  useImperativeHandle,
-  useRef,
-} from 'react';
+  type IressSelectProps,
+  type SelectRef,
+  type SelectWithEnums,
+} from './Select.types';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
+import { FormElementWidth, GlobalCSSClass } from '@/enums';
 import { useIdIfNeeded } from '../../hooks';
+import styles from './Select.module.scss';
 import {
   mapNodesToSelectOptions,
   findValueFromStringInSelectOptions,
@@ -18,143 +18,68 @@ import { useControlledState } from '@/hooks/useControlledState';
 import { getValueAsEvent } from '@helpers/form/getValueAsEvent';
 import { SelectReadonly } from './components/SelectReadonly';
 import { SelectControl } from './components/SelectControl';
-import { type FormControlValue, type IressStyledProps } from '@/types';
-import { type IressInputProps } from '../Input';
-import { select } from './Select.styles';
-import { input } from '../Input/Input.styles';
-import { css, cx } from '@/styled-system/css';
-import { GlobalCSSClass } from '@/enums';
-import { splitCssProps } from '@/styled-system/jsx';
-import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
+import { useNoDefaultValueInForms } from '../Form/hooks/useNoDefaultValueInForms';
 
-type SelectElement<TReadonly extends boolean | undefined = undefined> =
-  TReadonly extends true ? 'div' : 'select';
-
-export type IressSelectProps<
-  T extends FormControlValue = FormControlValue,
-  TReadonly extends boolean | undefined = undefined,
-> = Omit<
-  IressStyledProps<SelectElement<TReadonly>>,
-  'defaultValue' | 'value' | 'onChange' | 'width'
-> & {
-  /**
-   * The `option` and `optgroup` elements to render within the select.
-   */
-  children?: ReactNode | string;
-
-  /**
-   * Value of selected option for uncontrolled select.
-   */
-  defaultValue?: T;
-
-  /**
-   * Identifier for select.
-   */
-  name?: string;
-
-  /**
-   * Handles the onChange event of the select input.
-   * If you pass in a non-string value, you can access it using the second parameter of the function.
-   */
-  onChange?: (e: ChangeEvent<HTMLSelectElement>, value?: T) => void;
-
-  /**
-   * If `true`, the user cannot modify the value.
-   */
-  readOnly?: TReadonly;
-
-  /**
-   * Mark the select as a required field.
-   */
-  required?: boolean;
-
-  /**
-   * Value of selected option for controlled select.
-   */
-  value?: T;
-
-  /**
-   * Adds an `option` as the first element with the placeholder text and no value.
-   */
-  placeholder?: string;
-
-  /**
-   * The width of the select.
-   */
-  width?: IressInputProps['width'];
-};
-
-const Select = <
-  T extends FormControlValue = FormControlValue,
-  TReadonly extends boolean | undefined = undefined,
->(
+const Select = (
   {
     children,
     className,
     'data-testid': dataTestid,
-    defaultValue,
     onChange,
-    readOnly,
-    style,
+    readonly,
     value: valueProp,
+    defaultValue,
     width,
+    style,
     ...restProps
-  }: IressSelectProps<T, TReadonly>,
-  ref: ForwardedRef<HTMLElementTagNameMap[SelectElement<TReadonly>]>,
+  }: IressSelectProps,
+  ref: React.Ref<SelectRef>,
 ) => {
   useNoDefaultValueInForms({
     component: 'IressSelect',
     defaultValue,
   });
 
-  const id = useIdIfNeeded(restProps as IressStyledProps);
-  const elementRef = useRef<
-    HTMLElementTagNameMap[SelectElement<TReadonly>] | null
-  >(null);
-  const { value, setValue } = useControlledState<T, false>({
+  const id = useIdIfNeeded(restProps);
+  const elementRef: React.MutableRefObject<SelectRef> = useRef<SelectRef>(null);
+  const { value, setValue } = useControlledState({
     component: 'IressSelect',
     defaultValue,
     value: valueProp,
   });
-  const rawStyles = select.raw({ width });
 
-  const [styleProps, nonStyleProps] = splitCssProps(restProps);
-
-  const getNodeValue = useCallback(
+  const getNodeValue = React.useCallback(
     (value: string) => {
-      return findValueFromStringInSelectOptions<T>(
+      return findValueFromStringInSelectOptions(
         value,
-        mapNodesToSelectOptions(children as never),
+        mapNodesToSelectOptions(children as React.JSX.Element[]),
       );
     },
     [children],
   );
 
-  const setElementRef = useCallback((element: HTMLElement | null) => {
-    elementRef.current =
-      element as HTMLElementTagNameMap[SelectElement<TReadonly>];
-  }, []);
-
-  useImperativeHandle(ref, () => elementRef.current!);
+  useImperativeHandle(ref, () => elementRef.current);
 
   return (
     <div
       data-testid={dataTestid}
-      className={cx(
+      className={classNames(
         className,
-        css(input.raw({ readOnly }).wrapper, rawStyles.wrapper, styleProps),
+        styles.select,
         GlobalCSSClass.FormElement,
-        GlobalCSSClass.Select,
+        {
+          [GlobalCSSClass.IgnoreStack]: !!width,
+          [`${GlobalCSSClass.Width}--${width}`]: !!width,
+        },
       )}
-      style={readOnly ? undefined : style}
+      style={readonly ? undefined : style}
     >
-      {readOnly ? (
+      {readonly ? (
         <SelectReadonly
-          {...(nonStyleProps as IressSelectProps<T, true>)}
           data-testid={propagateTestid(dataTestid, 'select')}
           id={id}
           name={restProps.name}
-          ref={setElementRef}
+          ref={(element) => (elementRef.current = element)}
           style={style}
           value={value}
           width={width}
@@ -163,18 +88,16 @@ const Select = <
         </SelectReadonly>
       ) : (
         <SelectControl
-          {...(nonStyleProps as IressSelectProps<T, undefined>)}
+          {...restProps}
           data-testid={propagateTestid(dataTestid, 'select')}
           id={id}
-          onChange={(
-            event: ChangeEvent<HTMLElementTagNameMap[SelectElement<undefined>]>,
-          ) => {
+          onChange={(event) => {
             const nodeValue = getNodeValue(event.currentTarget.value);
             setValue(nodeValue);
             onChange?.(event, nodeValue);
           }}
           ref={(element) => {
-            setElementRef(element);
+            elementRef.current = element;
 
             if (!value && element?.value) {
               const nodeValue = getNodeValue(element.value);
@@ -183,7 +106,6 @@ const Select = <
             }
           }}
           value={value}
-          width={width}
         >
           {children}
         </SelectControl>
@@ -192,11 +114,7 @@ const Select = <
   );
 };
 
-export const IressSelect = forwardRef(Select) as <
-  T extends FormControlValue = FormControlValue,
-  TReadonly extends boolean | undefined = undefined,
->(
-  props: IressSelectProps<T, TReadonly> & {
-    ref?: ForwardedRef<HTMLElementTagNameMap[SelectElement<TReadonly>]>;
-  },
-) => ReactElement;
+export const IressSelect = forwardRef(Select) as SelectWithEnums;
+
+/** @deprecated IressSelect.Width will be removed in future versions of IDS. Please use the value directly. */
+IressSelect.Width = FormElementWidth;

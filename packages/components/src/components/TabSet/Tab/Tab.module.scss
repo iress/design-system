@@ -1,0 +1,117 @@
+@use './Tab.vars.module';
+@use '../../../styles/mixins';
+
+/** Tab
+* --------------------------------------------------
+* @prop --iress-background-color: Default background colour
+* @prop --iress-border-color: Default border colour
+* @prop --iress-border-bottom-width: Width of bottom border; allows for "Material" styling
+* @prop --iress-border-bottom-color: Colour of bottom border
+* @prop --iress-border-radius: Radius for the top left and top right corners (bottom border radii are set to 0).
+* @prop --iress-text-color: Text colour
+* @prop --iress-padding-x: Horizontal padding
+* @prop --iress-padding-y: Vertical padding
+* @prop --iress-background-color-hover: Background colour on hover
+* @prop --iress-border-color-hover: Border colour on hover (won't affect bottom border)
+* @prop --iress-hover-text-color: Text colour on hover
+* @prop --iress-focus-box-shadow: Focus box shadow
+* @prop --iress-active-background-color: Background colour when active
+* @prop --iress-active-border-color: Border colour when active (won't affect bottom border)
+* @prop --iress-active-border-bottom-color: Colour bottom border when active
+* @prop --iress-active-text-color: Text colour when active
+* @prop --iress-active-hover-background-color: Background colour on hover when active
+* @prop --iress-active-hover-border-color: Border colour on hover when active (won't affect bottom border)
+* @prop --iress-active-hover-text-color: Text colour on hover when active
+* @prop --iress-active-font-weight: Font weight of active tab button
+* @prop --iress-font-size: The font size to use
+* @prop --iress-font-family: The font family
+* @prop --iress-font-weight: The weight of the font to use
+* @prop --iress-transition-hover-type: Transition type for tab button hover
+* @prop --iress-transition-hover-duration: Transition duration for tab button hover
+ */
+
+.tab {
+  @include mixins.defaultFontStyles();
+
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--iress-height);
+  width: auto;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background-color: var(--iress-background-color);
+  background-image: none;
+  border: var(--iress-border-width) solid var(--iress-border-color);
+  border-block-end: var(--iress-border-bottom-width) solid var(--iress-border-bottom-color);
+  border-radius: var(--iress-border-radius) var(--iress-border-radius) 0 0;
+  color: var(--iress-text-color);
+  padding-block: var(--iress-padding-y);
+  padding-inline: var(--iress-padding-x);
+  transition: all var(--iress-transition-hover-duration) var(--iress-transition-hover-type);
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
+  &:focus {
+    box-shadow: var(--iress-focus-box-shadow);
+    outline: none;
+    position: relative;
+
+    &:not(:focus-visible) {
+      box-shadow: none;
+    }
+  }
+}
+
+/* Hover */
+@mixin hoverStyles() {
+  background-color: var(--iress-hover-background-color);
+  border-color: var(--iress-hover-border-color);
+  border-block-end-color: var(--iress-hover-border-bottom-color);
+  color: var(--iress-hover-text-color);
+}
+
+@media (hover: hover) {
+  .tab:hover {
+    @include hoverStyles();
+  }
+}
+
+:global(.pseudo-hover-all) .tab {
+  @include hoverStyles();
+}
+
+/* Active */
+.active {
+  background-color: var(--iress-active-background-color);
+  border-color: var(--iress-active-border-color);
+  border-block-end-color: var(--iress-active-border-bottom-color);
+  color: var(--iress-active-text-color);
+  font-weight: var(--iress-active-font-weight);
+}
+
+/* Active hover */
+@mixin activeHoverStyles() {
+  background-color: var(--iress-active-hover-background-color);
+  border-color: var(--iress-active-hover-border-color);
+  border-block-end-color: var(--iress-active-hover-border-bottom-color);
+  color: var(--iress-active-hover-text-color);
+}
+
+@media (hover: hover) {
+  .active:hover {
+    @include activeHoverStyles();
+  }
+}
+
+:global(.pseudo-active) .active {
+  @include activeHoverStyles();
+}
+
+@media (prefers-contrast: more) {
+  .active,
+  .tab:focus {
+    outline: inset 4px transparent;
+  }
+}

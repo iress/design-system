@@ -1,10 +1,6 @@
-import {
-  type Meta,
-  type ReactRenderer,
-  type StoryObj,
-} from '@storybook/react-vite';
-import { type ArgsStoryFn } from 'storybook/internal/types';
-import { IressSlideout, type IressSlideoutProps } from '.';
+import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import { ArgsStoryFn } from '@storybook/types';
+import { IressSlideout, IressSlideoutProps } from '.';
 import { IressButton } from '../Button';
 import { useSlideout } from './hooks/useSlideout';
 import {
@@ -23,16 +19,17 @@ import { SlideoutPositions } from './mocks/SlideoutPositions';
 import SlideoutPositionsSource from './mocks/SlideoutPositions.tsx?raw';
 import { SlideoutSizes } from './mocks/SlideoutSizes';
 import SlideoutSizesSource from './mocks/SlideoutSizes.tsx?raw';
+import { SlideoutPaddings } from './mocks/SlideoutPaddings';
+import SlideoutPaddingsSource from './mocks/SlideoutPaddings.tsx?raw';
 import { AbsolutePositionSlideout } from './mocks/AbsolutePositionSlideout';
 import AbsolutePositionSlideoutSource from './mocks/AbsolutePositionSlideout.tsx?raw';
-import { CurrentBreakpoint } from '@iress-storybook/components';
 import { SlideoutMicrofrontend } from './mocks/SlideoutMicrofrontend';
 import SlideoutMicrofrontendSource from './mocks/SlideoutMicrofrontend.tsx?raw';
 
 const SLIDEOUT_ID = 'storybook-slideout';
 
 const renderWithButtonFn = (
-  buttonTitle = 'Toggle slideout',
+  buttonTitle = 'Show slideout',
 ): ArgsStoryFn<ReactRenderer, IressSlideoutProps> => {
   return (args) => {
     const { showSlideout } = useSlideout();
@@ -42,7 +39,7 @@ const renderWithButtonFn = (
         <IressButton onClick={() => showSlideout(SLIDEOUT_ID)}>
           {buttonTitle}
         </IressButton>
-        <IressSlideout {...args} />
+        <IressSlideout {...args} show={false} />
       </>
     );
   };
@@ -53,7 +50,6 @@ type Story = StoryObj<typeof IressSlideout>;
 export default {
   title: 'Components/Slideout',
   component: IressSlideout,
-  tags: ['updated'],
 } as Meta<typeof IressSlideout>;
 
 export const Default: Story = {
@@ -79,10 +75,12 @@ export const Default: Story = {
         <Story />
       </IressSlideoutProvider>`,
       `const { showSlideout } = useSlideout();
-      const SLIDEOUT_ID = '${SLIDEOUT_ID}';
-      return (
-        <Story />
-      );`,
+
+const SLIDEOUT_ID = '${SLIDEOUT_ID}';
+
+return (
+  <Story />
+);`,
     ),
   },
 };
@@ -96,7 +94,7 @@ export const DefaultShow: Story = {
     eleToPush: '#default-show-page',
   },
   render: (args) => (
-    <IressPanel bg="alt" id="default-show-page">
+    <IressPanel background="page" id="default-show-page">
       <IressPanel>
         <IressText>Content on the page</IressText>
       </IressPanel>
@@ -131,50 +129,44 @@ export const Modes: Story = {
     const { showSlideout } = useSlideout();
 
     return (
-      <IressPanel bg="alt">
-        <IressInline gap="md">
-          <IressButton onClick={() => showSlideout('overlay')}>
-            Overlay slideout
-          </IressButton>
-          <IressSlideout {...args} id="overlay" mode="overlay">
-            <h2>Overlay</h2>
-            For most situations <code>overlay</code> will be what you need,
-            which is why this is the default behaviour. You do not need to
-            specify the mode if you want your slideout to sit on top of the
-            page.
-          </IressSlideout>
+      <IressInline gutter="md">
+        <IressButton onClick={() => showSlideout('overlay')}>
+          Overlay slideout
+        </IressButton>
+        <IressSlideout {...args} id="overlay" mode="overlay">
+          <h2>Overlay</h2>
+          For most situations <code>overlay</code> will be what you need, which
+          is why this is the default behaviour. You do not need to specify the
+          mode if you want your slideout to sit on top of the page.
+        </IressSlideout>
 
-          <IressButton onClick={() => showSlideout('push')}>
-            Push slideout
-          </IressButton>
-          <IressSlideout
-            {...args}
-            id="push"
-            mode="push"
-            eleToPush="#storybook-docs, html"
-          >
-            <IressText>
-              <h2>Push</h2>
-              <p>
-                If you have a data-heavy screen where you need all of the data
-                to be visible when the slideout is open, use <code>push</code>.
-                To allow push to work you will need to supply the ID of the
-                element that needs to be pushed via the <code>eleToPush</code>{' '}
-                prop. If the ID is not supplied, or the element cannot be found,
-                the slideout will revert to <code>overlay</code> behaviour.
-              </p>
-              <p>
-                Be aware though that push will only work on larger screens
-                (&gt;1200px); on smaller screens the slideout will overlay the
-                content.
-              </p>
-              <IressPanel bg="alt">
-                <CurrentBreakpoint />
-              </IressPanel>
-            </IressText>
-          </IressSlideout>
-        </IressInline>
-      </IressPanel>
+        <IressButton onClick={() => showSlideout('push')}>
+          Push slideout
+        </IressButton>
+        <IressSlideout
+          {...args}
+          id="push"
+          mode="push"
+          eleToPush="#storybook-docs"
+        >
+          <IressText>
+            <h2>Push</h2>
+            <p>
+              If you have a data-heavy screen where you need all of the data to
+              be visible when the slideout is open, use <code>push</code>. To
+              allow push to work you will need to supply the ID of the element
+              that needs to be pushed via the <code>eleToPush</code> prop. If
+              the ID is not supplied, or the element cannot be found, the
+              slideout will revert to <code>overlay</code> behaviour.
+            </p>
+            <p>
+              Be aware though that push will only work on larger screens
+              (&gt;1200px); on smaller screens the slideout will overlay the
+              content.
+            </p>
+          </IressText>
+        </IressSlideout>
+      </IressInline>
     );
   },
 };
@@ -190,6 +182,15 @@ export const Position: Story = {
   },
 };
 
+export const Backdrop: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    backdrop: true,
+  },
+  render: renderWithButtonFn('Show slideout with backdrop'),
+};
+
 export const Size: Story = {
   ...Default,
   args: {
@@ -201,6 +202,20 @@ export const Size: Story = {
   render: (args) => <SlideoutSizes {...args} />,
   parameters: {
     ...withCustomSource(SlideoutSizesSource),
+  },
+};
+
+export const Padding: Story = {
+  ...Default,
+  args: {
+    footer: '',
+  },
+  argTypes: {
+    ...disableArgTypes(['children', 'show', 'padding', 'id']),
+  },
+  render: (args) => <SlideoutPaddings {...args} />,
+  parameters: {
+    ...withCustomSource(SlideoutPaddingsSource),
   },
 };
 

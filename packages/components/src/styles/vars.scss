@@ -1,0 +1,75 @@
+$breakpoints: (
+  'xs': '',
+  'sm': 'min-width: 576px',
+  'md': 'min-width: 768px',
+  'lg': 'min-width: 1024px',
+  'xl': 'min-width: 1200px',
+  'xxl': 'min-width: 1500px',
+);
+
+$buttonFluidBreakpoints: (
+  'xs': 'min-width: 576px',
+  'sm': 'min-width: 768px',
+  'md': 'min-width: 1024px',
+  'lg': 'min-width: 1200px',
+  'xl': 'min-width: 1500px',
+);
+
+$navbarBreakpoints: (
+  'breakpoint--xs': 'max-width: 575px',
+  'breakpoint--sm': 'max-width: 767px',
+  'breakpoint--md': 'max-width: 1023px',
+  'breakpoint--lg': 'max-width: 1199px',
+  'breakpoint--xl': 'max-width: 1499px',
+  'breakpoint--xxl': 'max-width: 2000px',
+);
+
+$gutters: xs, sm, md, lg, xl;
+
+$horizontalAlignments: (
+  'around': space-around,
+  'between': space-between,
+  'center': center,
+  'evenly': space-evenly,
+  'left': flex-start,
+  'right': flex-end,
+);
+
+$verticalAlignments: (
+  'middle': center,
+  'bottom': flex-end,
+  'stretch': stretch,
+  'top': flex-start,
+);
+
+/* stylelint-disable-next-line scss/dollar-variable-colon-space-after */
+$inlineGutterSizes:
+  'xs' 'xxs' '',
+  'sm' 'xs' '--2x',
+  'md' 'sm' '--3x',
+  'lg' 'md' '--4x',
+  'xl' 'lg' '--5x';
+
+$panelPaddingSizes: sm, md, lg;
+
+$widths: (
+  '2': calc((3 * var(--iress-padding-inline-start, 0px)) + calc(2.5 * var(--iress-g-spacing-rem))),
+  '4': calc((3 * var(--iress-padding-inline-start, 0px)) + calc(4.5 * var(--iress-g-spacing-rem))),
+  '6': calc((3 * var(--iress-padding-inline-start, 0px)) + calc(6.5 * var(--iress-g-spacing-rem))),
+  '8': calc((3 * var(--iress-padding-inline-start, 0px)) + calc(8.5 * var(--iress-g-spacing-rem))),
+  '10': calc((3 * var(--iress-padding-inline-start, 0px)) + calc(10.5 * var(--iress-g-spacing-rem))),
+  '12': calc((3 * var(--iress-padding-inline-start, 0px)) + calc(12.5 * var(--iress-g-spacing-rem))),
+  '16': calc((3 * var(--iress-padding-inline-start, 0px)) + calc(16.5 * var(--iress-g-spacing-rem))),
+  '25perc': 25%,
+  '50perc': 50%,
+  '75perc': 75%,
+  '100perc': 100%,
+);
+
+$spacingSizes: none, xs, sm, md, lg, xl;
+
+$cardPaddingSizes: none, sm, md, lg;
+
+$modalSizes: sm, md, lg;
+
+$slideoutSizes: sm, md, lg;

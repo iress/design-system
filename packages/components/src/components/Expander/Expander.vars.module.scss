@@ -1,0 +1,73 @@
+/** Expander variables
+ * --------------------------------------------------
+ */
+
+.link,
+.heading {
+  --iress-activator-display: inline-block;
+  --iress-activator-padding-inline-start: 0;
+  --iress-activator-padding-block-start: 0;
+  --iress-activator-padding-block-end: 0;
+  --iress-activator-padding-inline-end: var(--iress-a-horizontal-spacing-lg, var(--iress-g-spacing-lg));
+  --iress-activator-background-color: transparent;
+  --iress-activator-width: auto;
+  --iress-activator-chevron-spacing: var(--iress-a-horizontal-spacing-sm, var(--iress-g-spacing-sm));
+  --iress-margin-block-end: 0;
+}
+
+.link {
+  --iress-activator-padding-inline-end: calc(var(--iress-g-spacing-md) * 1.25);
+  --iress-activator-chevron-border-width: 1px;
+  --iress-activator-chevron-size: 0.3;
+  --iress-activator-text-color: var(--iress-text-link-text-color, var(--iress-g-link-text-color, var(--iress-default-link-color)));
+  --iress-activator-text-decoration: var(--iress-g-link-text-decoration, underline);
+
+  .activator:hover {
+    --iress-activator-text-color: var(--iress-text-link-hover-text-color, var(--iress-a-link-hover-text-color, var(--iress-g-link-text-color, var(--iress-default-link-color))));
+    --iress-activator-text-decoration: var(--iress-text-link-hover-text-decoration, none);
+  }
+
+  .activator:active {
+    --iress-activator-text-color: var(--iress-text-link-active-text-color, var(--iress-a-link-active-text-color, var(--iress-g-link-text-color, var(--iress-default-link-color))));
+  }
+}
+
+.heading,
+.section {
+  --iress-activator-chevron-border-width: 2px;
+  --iress-activator-chevron-size: 0.5;
+  --iress-activator-text-color: var(--iress-text-heading-text-color, var(--iress-a-heading-text-color, var(--iress-g-primary-color, var(--iress-default-primary-color))));
+}
+
+.section {
+  --iress-activator-display: block;
+  --iress-activator-width: 100%;
+  --iress-activator-background-color: var(--iress-expander-activator-background-color, var(--iress-g-background-color-alt, var(--iress-default-background-color-alt)));
+  --iress-activator-text-color: var(--iress-expander-activator-text-color, var(--iress-a-heading-text-color, var(--iress-g-primary-color, var(--iress-default-primary-color))));
+  --iress-activator-padding-inline-start: var(--iress-expander-activator-padding-left, var(--iress-a-horizontal-spacing-md, var(--iress-g-spacing-md)));
+  --iress-activator-padding-block-start: var(--iress-expander-activator-padding-top, var(--iress-a-vertical-spacing-xs, var(--iress-g-spacing-xs)));
+  --iress-activator-padding-block-end: var(--iress-expander-activator-padding-bottom, var(--iress-a-vertical-spacing-xs, var(--iress-g-spacing-xs)));
+  --iress-activator-padding-inline-end: var(--iress-expander-activator-padding-right, var(--iress-a-horizontal-spacing-xl, var(--iress-g-spacing-xl)));
+  --iress-activator-chevron-spacing: var(--iress-expander-activator-chevron-spacing-x, var(--iress-a-horizontal-spacing-md, var(--iress-g-spacing-md)));
+  --iress-activator-border-width: var(--iress-expander-activator-border-width, 0);
+  --iress-activator-border-color: var(--iress-expander-activator-border-color, var(--iress-g-border-color, var(--iress-default-border-color)));
+
+  --iress-margin-block-end: var(--iress-expander-margin-bottom, var(--iress-a-vertical-spacing-xs, var(--iress-g-spacing-xs)));
+  --iress-container-vertical-padding: var(--iress-expander-container-padding-y, var(--iress-a-vertical-spacing-sm, var(--iress-g-spacing-sm)));
+
+  .activator:hover {
+    --iress-activator-background-color: var(--iress-expander-activator-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)));
+    --iress-activator-text-color: var(--iress-expander-activator-hover-text-color, var(--iress-a-heading-text-color, var(--iress-g-primary-color, var(--iress-default-primary-color))));
+  }
+}
+
+.expander {
+  --iress-container-padding-y: var(--iress-expander-container-padding-y, var(--iress-a-vertical-spacing-sm, var(--iress-g-spacing-sm)));
+  --iress-container-padding-x: var(--iress-activator-padding-inline-start);
+  --iress-transition-type: var(--iress-expander-animation-type, var(--iress-g-animation-type, var(--iress-default-animation-type)));
+  --iress-transition-duration: var(--iress-expander-animation-duration, var(--iress-g-animation-duration, var(--iress-default-animation-duration)));
+  --iress-focus-box-shadow-size: var(--iress-g-focus-width, var(--iress-default-focus-size));
+  --iress-focus-box-shadow: 0 0 0 var(--iress-focus-box-shadow-size) var(--iress-focus-color);
+  --iress-activator-border-width: 0;
+  --iress-activator-border-color: transparent;
+}

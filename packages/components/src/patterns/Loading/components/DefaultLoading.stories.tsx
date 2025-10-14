@@ -1,6 +1,6 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { DefaultLoading } from './DefaultLoading';
-import { type FC } from 'react';
+import { FC } from 'react';
 
 // This is a pattern for IressLoading, hence we change the name
 (DefaultLoading as FC).displayName = 'IressLoading';

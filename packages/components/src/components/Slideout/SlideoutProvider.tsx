@@ -1,23 +1,35 @@
-import { type PropsWithChildren, useCallback, useMemo, useState } from 'react';
-import { type FloatingUIContainer } from '@/types';
-import { SlideoutContext } from './hooks/useSlideout';
+import {
+  createContext,
+  useCallback,
+  useInsertionEffect,
+  useMemo,
+  useState,
+} from 'react';
+import {
+  type IressSlideoutContextValue,
+  type IressSlideoutProviderProps,
+} from './Slideout.types';
 
-export interface IressSlideoutProviderProps extends PropsWithChildren {
-  /**
-   * The container element to render the slideout into.
-   * By default, the slideout will render at the end of the document body.
-   */
-  container?: FloatingUIContainer;
-}
+// TODO: These are duplicated from the SCSS module. We probably need to find a better way to do this.
+import pushStyles from './SlideoutPushElement.css?raw';
+import { CSS_IDS_VERSION } from '@/constants';
+import { querySelectorDeep } from 'query-selector-shadow-dom';
+
+export const IressSlideoutContext = createContext<
+  IressSlideoutContextValue | undefined
+>(undefined);
+
+let stylesInjected = false;
 
 export const IressSlideoutProvider = ({
   children,
   container,
+  injectPushStyles,
 }: IressSlideoutProviderProps) => {
   const [opened, setOpened] = useState<string[]>([]);
 
   const open = useCallback((id: string) => {
-    setOpened([id]);
+    setOpened((prev) => (prev.includes(id) ? [...prev] : [...prev, id]));
   }, []);
 
   const close = useCallback((id: string) => {
@@ -27,22 +39,11 @@ export const IressSlideoutProvider = ({
   }, []);
 
   const showSlideout = useCallback(
-    (id: string, flag?: boolean) => {
-      if (flag !== undefined) {
-        if (flag) {
-          return open(id);
-        }
-        close(id);
-        return;
-      }
-
-      if (opened.includes(id)) {
-        close(id);
-      } else {
-        open(id);
-      }
+    (id: string, flag = true) => {
+      if (flag) return open(id);
+      close(id);
     },
-    [close, open, opened],
+    [close, open],
   );
 
   const updatedValue = useMemo(
@@ -54,9 +55,23 @@ export const IressSlideoutProvider = ({
     [container, opened, showSlideout],
   );
 
+  useInsertionEffect(() => {
+    if (!stylesInjected && injectPushStyles) {
+      const style = document.createElement('style');
+      style.innerHTML = pushStyles.replace(/\\:version\\:/g, CSS_IDS_VERSION);
+      style.setAttribute('data-push-element-styles', 'true');
+      const target =
+        typeof injectPushStyles === 'string'
+          ? querySelectorDeep(injectPushStyles)
+          : document.head;
+      (target ?? document.head).appendChild(style);
+      stylesInjected = true;
+    }
+  }, [injectPushStyles]);
+
   return (
-    <SlideoutContext.Provider value={updatedValue}>
+    <IressSlideoutContext.Provider value={updatedValue}>
       {children}
-    </SlideoutContext.Provider>
+    </IressSlideoutContext.Provider>
   );
 };

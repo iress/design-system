@@ -57,7 +57,7 @@ export const LoadingGraph = () => {
       loaded={!renderLoading}
       update={updating}
     >
-      <IressStack gap="md" style={{ display: 'inline-block' }}>
+      <IressStack gutter="md" style={{ display: 'inline-block' }}>
         <div>
           <Graph />
         </div>

@@ -1,9 +1,9 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
 } from '@iress-storybook/components';
-import { IressAlert, IressButton } from '../../main';
+import { IressAlert } from '../../main';
 import * as ComponentStories from './Icon.stories';
 
 <Meta of={ComponentStories} />
@@ -21,7 +21,7 @@ If you are planning to include the `<IressIcon />` component in your application
 
 The easiest way to import the Font Awesome CSS is to use the `combined.css` file and add it to the `<head />` if your application. This file includes both the [Pro Light](https://fontawesome.com/v5/search?o=r&s=light) and [Brand](https://fontawesome.com/v5/search?o=r&f=brands) icon sets.
 
-<IressAlert status="info" heading="Microfrontends" mb="md">
+<IressAlert status="info" heading="Microfrontends" className="iress-mb--md">
   If you are using a Microfrontend, you need to include the Font Awesome CSS in
   the parent application as well as the Microfrontend. This is because
   `@font-face` declarations are not supported inside the Shadow DOM.
@@ -57,19 +57,15 @@ If you use an icon to convey meaning, for example using an icon as the only cont
 
 ### Size
 
-The `size` prop has been removed. It will now inherit the size of the parent component.
+The `size` prop can be used to control sizing of the icon.
 
-For larger icons, it is recommended to use `IressImage` with stylised illustrations.
+<ComponentExample story={ComponentStories.Size} stories={ComponentStories} />
 
 ### Mode
 
-Mode has been removed. Please use the `color` prop instead.
+The `mode` prop can be used to set the colour of the icon to these predefined mode colours: Body, Muted, Primary, Info, Success, Warning, Danger, Positive and Negative.
 
-<p>
-  <IressButton href="/?path=/docs/styling-props-colour--docs#color">
-    Learn more
-  </IressButton>
-</p>
+<ComponentExample story={ComponentStories.Mode} stories={ComponentStories} />
 
 ### Flip
 
@@ -102,7 +98,7 @@ Because of the wide variety of Font Awesome icons, not every icon is the same si
 
 ### External link
 
-Icons now inherit the size of the parent component. This means you can use them inside buttons, links and other components without needing to set a size.
+Version 4 of IDS included some bespoke styles to make an "external link" icon in an `IressText` component look nice. We've removed these in V5 as we found they were having unintended side effects. If you still wish to style your external link icons, you can use either some custom CSS (like below) or simply make the icon size `xs`:
 
 <ComponentExample
   story={ComponentStories.ExternalLink}

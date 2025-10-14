@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -130,7 +130,7 @@ All `IressFilter`s accept meta as an attribute in the option array.
 
 You can customise some settings of the query input by setting the `inputProps`.
 
-It does have some defaults to help with user experience. `prepend` automatically has a search icon, and `clearable` is set to true by default.
+It does have some defaults to help with user experience. `prepend` automatically has a search icon, and `clearable` and `watermark` are set to true by default.
 
 <ComponentExample
   story={ComponentStories.InputProps}
@@ -172,7 +172,7 @@ If you would like to show a message when there are no results, you can use the `
 
 Under the hood, filter uses `IressPopover` to display the filter options. You can customise this with `popoverProps`. It accepts `align`, `className`, `container` and `displayMode`.
 
-There are two additional props that filter accepts to customise the popover: `header` and `footer`. You can place additional content above or below the results using these props.
+There are two additional props that filter accepts to customise the popover: `append` and `prepend`. You can place additional content above or below the results using these props.
 
 <ComponentExample
   story={ComponentStories.PopoverProps}

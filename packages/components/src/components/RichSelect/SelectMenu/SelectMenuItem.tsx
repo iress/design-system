@@ -1,8 +1,7 @@
+import classNames from 'classnames';
 import { GlobalCSSClass } from '@/enums';
-import { type IressSelectMenuItemProps } from './SelectMenu';
+import { type IressSelectMenuItemProps } from './SelectMenu.types';
 import { IressMenuDivider, IressMenuItem } from '@/components/Menu';
-import { cx } from '@/styled-system/css';
-import { IressText } from '@/components/Text';
 
 export const IressSelectMenuItem = ({
   className,
@@ -25,20 +24,21 @@ export const IressSelectMenuItem = ({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   id,
-  // Only the explicitly listed properties are passed through; any extended LabelValueMeta properties are excluded by explicit filtering
+  // Extended LabelValueMeta properties are automatically ignored
 }: IressSelectMenuItemProps) => {
   if (divider) {
     return <IressMenuDivider />;
   }
 
-  const displayMeta = formattedMeta ?? meta;
+  const displayMeta = formattedMeta !== undefined ? formattedMeta : meta;
 
   return (
     <IressMenuItem
       append={append}
       canToggle={canToggle}
-      className={cx(className, GlobalCSSClass.RichSelectMenuItem)}
-      srOnly={hiddenOnMobile ? true : undefined}
+      className={classNames(className, {
+        [GlobalCSSClass.HiddenMobile]: hiddenOnMobile,
+      })}
       onClick={onClick}
       onKeyDown={onKeyDown}
       prepend={prepend}
@@ -53,9 +53,7 @@ export const IressSelectMenuItem = ({
     >
       {formattedLabel ?? label}
       {displayMeta && (
-        <IressText textStyle="typography.body.sm" color="colour.neutral.70">
-          {displayMeta}
-        </IressText>
+        <span className="iress-display--block">{displayMeta}</span>
       )}
     </IressMenuItem>
   );

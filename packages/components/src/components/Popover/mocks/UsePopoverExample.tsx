@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { IressButton, IressPopover, usePopoverItem } from '@/main';
+import {
+  ButtonCssClass,
+  IressButton,
+  IressPopover,
+  usePopoverItem,
+} from '@/main';
 
 const CountButton = () => {
   const [count, setCount] = useState(0);
@@ -11,10 +16,12 @@ const CountButton = () => {
     },
   });
 
+  const className = isActiveInPopover ? ButtonCssClass.Active : '';
+
   return (
     <IressButton
       {...popoverItemProps}
-      active={isActiveInPopover}
+      className={className}
       mode="tertiary"
       fluid
     >

@@ -1,5 +1,6 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressCard, type IressCardProps } from './Card';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressCard } from './Card';
+import { IressCardProps } from './Card.types';
 import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { CardAllSlots } from './mocks/CardAllSlots';
 import CardAllSlotsSource from './mocks/CardAllSlots.tsx?raw';
@@ -19,7 +20,6 @@ export default {
       disable: true,
     },
   },
-  tags: ['updated'],
 } as Meta<typeof IressCard>;
 
 export const Prepend: Story = {
@@ -66,7 +66,6 @@ export const Footer: Story = {
 export const AllSlots: Story = {
   args: {
     ...supportedCardSlots,
-    stretch: true,
   },
   argTypes: {
     ...disableArgTypes(SUPPORTED_CARD_SLOTS),

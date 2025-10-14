@@ -1,58 +1,29 @@
-import { forwardRef, type ReactElement, type Ref } from 'react';
+import classNames from 'classnames';
+import styles from '../Select.module.scss';
+import { forwardRef } from 'react';
 import { GlobalCSSClass } from '@/enums';
 import { getFormControlValueAsStringIfDefined } from '@helpers/form/getFormControlValueAsStringIfDefined';
-import { select } from '../Select.styles';
-import { css, cx } from '@/styled-system/css';
-import { type FormControlValue, type IressUnstyledProps } from '@/types';
-import { input, type IressInputProps } from '@/components/Input';
+import { type SelectControlProps } from '../Select.types';
 
-export interface SelectControlProps<T = FormControlValue>
-  extends Omit<
-    IressUnstyledProps<'select'>,
-    'defaultValue' | 'value' | 'width'
-  > {
-  /**
-   * Value of selected option for uncontrolled select.
-   */
-  defaultValue?: T;
-
-  /**
-   * Adds an `option` as the first element with the placeholder text and no value.
-   */
-  placeholder?: string;
-
-  /**
-   * Value of the select.
-   */
-  value?: T;
-
-  /**
-   * The width of the select.
-   */
-  width?: IressInputProps['width'];
-}
-
-const Component = <T = FormControlValue,>(
-  {
-    children,
-    className,
-    defaultValue,
-    placeholder,
-    value,
-    width,
-    ...restProps
-  }: SelectControlProps<T>,
-  ref: Ref<HTMLSelectElement>,
-) => {
-  const styles = select({ width });
-  const rawStyles = select.raw({ width });
-
-  return (
-    <div className={cx(styles.control, GlobalCSSClass.FormElementInner)}>
+export const SelectControl = forwardRef(
+  (
+    {
+      children,
+      className,
+      defaultValue,
+      placeholder,
+      value,
+      ...restProps
+    }: SelectControlProps,
+    ref: React.Ref<HTMLSelectElement>,
+  ) => (
+    <div
+      className={classNames(styles.wrapper, GlobalCSSClass.FormElementInner)}
+    >
       <select
         {...restProps}
-        className={cx(
-          css(rawStyles.element, input.raw().formControl),
+        className={classNames(
+          styles.element,
           className,
           GlobalCSSClass.FormElementInner,
         )}
@@ -64,9 +35,7 @@ const Component = <T = FormControlValue,>(
         {children}
       </select>
     </div>
-  );
-};
+  ),
+);
 
-export const SelectControl = forwardRef(Component) as <T = FormControlValue>(
-  props: SelectControlProps<T> & { ref?: Ref<HTMLSelectElement> },
-) => ReactElement;
+SelectControl.displayName = 'SelectControl';

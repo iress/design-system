@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { IressInline } from '.';
 import { IressPlaceholder } from '../Placeholder';
@@ -8,8 +8,7 @@ import { IressStack } from '../Stack';
 import { CurrentBreakpoint } from '@iress-storybook/components';
 import { IressText } from '../Text';
 import { IressContainer } from '../Container';
-import { HORIZONTAL_ALIGNS, VERTICAL_ALIGNS } from '@/constants';
-import { SPACING_TOKENS } from '@theme-preset/tokens/spacing';
+import { GUTTER_SIZES, HORIZONTAL_ALIGNS, VERTICAL_ALIGNS } from '@/constants';
 
 type Story = StoryObj<typeof IressInline>;
 
@@ -78,55 +77,54 @@ export default {
       mapping: childrenOptions,
     },
   },
-  tags: ['updated'],
 } as Meta<typeof IressInline>;
 
 export const Default: Story = {
   args: {
     children: 'uneven',
-    gap: 'spacing.400',
+    gutter: 'md',
   },
 };
 
-export const Gap: Story = {
+export const Gutter: Story = {
   ...Default,
   args: {
     children: 'even',
   },
   argTypes: {
     ...Default.argTypes,
-    ...disableArgTypes(['gap']),
+    ...disableArgTypes(['gutter']),
   },
   render: (args) => (
-    <IressStack gap="spacing.1200">
-      {SPACING_TOKENS.map((spacing) => (
-        <IressText key={spacing}>
-          <h2>{spacing}</h2>
-          <IressInline {...args} gap={spacing} />
+    <IressStack gutter="xl">
+      {GUTTER_SIZES.map((gutter) => (
+        <IressText key={gutter}>
+          <h2>{gutter}</h2>
+          <IressInline {...args} gutter={gutter} />
         </IressText>
       ))}
     </IressStack>
   ),
 };
 
-export const ResponsiveGap: Story = {
+export const ResponsiveGutter: Story = {
   ...Default,
   args: {
     children: 'even',
-    gap: {
-      xs: 'spacing.100',
-      sm: 'spacing.200',
-      md: 'spacing.400',
+    gutter: {
+      xs: 'xs',
+      sm: 'sm',
+      md: 'md',
     },
   },
   render: (args) => (
-    <IressStack gap="spacing.400">
+    <IressStack gutter="md">
       <IressPanel>
         <p>
           Current breakpoint: <CurrentBreakpoint />.
         </p>
         <p>
-          <code>gap=&#123;{JSON.stringify(args.gap)}&#125;</code>
+          <code>gutter=&#123;{JSON.stringify(args.gutter)}&#125;</code>
         </p>
       </IressPanel>
       <IressInline {...args} />
@@ -138,7 +136,7 @@ export const HorizontalAlign: Story = {
   ...Default,
   args: {
     children: 'even',
-    gap: 'spacing.200',
+    gutter: 'sm',
   },
   argTypes: {
     ...Default.argTypes,
@@ -146,7 +144,7 @@ export const HorizontalAlign: Story = {
   },
   render: (args) => (
     <IressContainer>
-      <IressStack gap="spacing.1200">
+      <IressStack gutter="xl">
         {HORIZONTAL_ALIGNS.map((horizontalAlign) => (
           <IressText key={horizontalAlign}>
             <h2>{horizontalAlign}</h2>
@@ -162,7 +160,7 @@ export const VerticalAlign: Story = {
   ...Default,
   args: {
     children: 'uneven',
-    gap: 'spacing.200',
+    gutter: 'sm',
     horizontalAlign: 'center',
   },
   argTypes: {
@@ -171,9 +169,9 @@ export const VerticalAlign: Story = {
   },
   render: (args) => (
     <IressContainer>
-      <IressStack gap="spacing.1200">
+      <IressStack gutter="xl">
         {VERTICAL_ALIGNS.map((verticalAlign) => (
-          <IressText key={verticalAlign} textAlign="center">
+          <IressText key={verticalAlign} align="center">
             <h2>{verticalAlign}</h2>
             <IressInline {...args} verticalAlign={verticalAlign} />
           </IressText>
@@ -187,7 +185,7 @@ export const NoWrap: Story = {
   ...Default,
   args: {
     children: 'story',
-    gap: 'spacing.1200',
+    gutter: 'lg',
     noWrap: true,
   },
 };

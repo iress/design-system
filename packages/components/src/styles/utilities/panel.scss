@@ -1,0 +1,91 @@
+@use '../mixins';
+
+/* Variables */
+/* Backgrounds */
+.iress-u-panel.iress--background--alt {
+  --iress-background-color: var(--iress-panel-background-color-alt, var(--iress-g-background-color-alt, var(--iress-default-background-color-alt)));
+  --iress-background-image: var(--iress-panel-background-image-alt, none);
+  --iress-border-color: var(--iress-panel-border-color-alt, var(--iress-background-color));
+  --iress-text-color: var(--iress-panel-text-color-alt, var(--iress-g-text-color));
+
+  --iress-alert-background-color: var(--iress-panel-background-color, var(--iress-g-background-color, var(--iress-default-background-color)));
+}
+
+.iress-u-panel.iress--background--page {
+  --iress-background-color: var(--iress-g-page-background-color, var(--iress-default-background-color));
+  --iress-background-image: none;
+  --iress-border-color: var(--iress-panel-page-border-color, var(--iress-background-color));
+  --iress-text-color: var(--iress-g-text-color);
+  --iress-alert-background-color: var(--iress-panel-background-color-alt, var(--iress-g-background-color-alt, var(--iress-default-background-color-alt)));
+}
+
+.iress-u-panel.iress--background--transparent {
+  --iress-background-color: transparent;
+  --iress-background-image: none;
+  --iress-border-color: transparent;
+  --iress-text-color: var(--iress-g-text-color);
+}
+
+/* Stretch */
+.iress-u-panel.iress--stretch {
+  --iress-height: 100%;
+}
+
+/* ignore theme border radius */
+.iress-u-panel.iress--no-border-radius {
+  --iress-border-radius: 0 !important;
+}
+
+/* ignore theme border radius */
+.iress-u-panel.iress--no-gutter > *:last-child {
+  margin-block-end: 0;
+}
+
+.iress-u-panel,
+.iress-u-panel *,
+.iress-u-panel *::before,
+.iress-u-panel *::after {
+  box-sizing: border-box;
+}
+
+.iress-u-panel {
+  @include mixins.defaultFontVariables('panel');
+  --iress-line-height: var(--iress-panel-line-height, var(--iress-g-line-height, 1.5));
+  --iress-border-top-width: var(--iress-panel-border-top-width, var(--iress-panel-border-width, var(--iress-g-border-width, 0)));
+  --iress-border-bottom-width: var(--iress-panel-border-bottom-width, var(--iress-panel-border-width, var(--iress-g-border-width, 0)));
+  --iress-border-left-width: var(--iress-panel-border-left-width, var(--iress-panel-border-width, var(--iress-g-border-width, 0)));
+  --iress-border-right-width: var(--iress-panel-border-right-width, var(--iress-panel-border-width, var(--iress-g-border-width, 0)));
+  --iress-border-style: var(--iress-panel-border-style, solid);
+  --iress-height: auto;
+  --iress-max-width: 100%;
+  --iress-border-radius: var(--iress-panel-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius)));
+  --iress-background-color: var(--iress-panel-background-color, var(--iress-g-background-color, var(--iress-default-background-color)));
+  --iress-background-image: var(--iress-panel-background-image, none);
+  --iress-border-color: var(--iress-panel-border-color, var(--iress-background-color));
+  --iress-text-color: var(--iress-panel-text-color, var(--iress-g-text-color));
+  --iress-padding-x: var(--iress-panel-md-padding-x, var(--iress-a-horizontal-spacing-md, var(--iress-g-spacing-md)));
+  --iress-padding-y: var(--iress-panel-md-padding-y, var(--iress-a-vertical-spacing-md, var(--iress-g-spacing-md)));
+  --iress-alert-background-color: var(--iress-panel-background-color-alt, var(--iress-g-background-color-alt, var(--iress-default-background-color-alt)));
+
+  @include mixins.defaultFontStyles();
+
+  line-height: var(--iress-line-height);
+  background-color: var(--iress-background-color);
+  background-image: var(--iress-background-image);
+  background-size: cover;
+  background-position: center;
+  color: var(--iress-text-color);
+  border-block-start-width: var(--iress-border-top-width);
+  border-block-end-width: var(--iress-border-bottom-width);
+  border-inline-start-width: var(--iress-border-left-width);
+  border-inline-end-width: var(--iress-border-right-width);
+  border-color: var(--iress-border-color);
+  padding-block: var(--iress-padding-y) var(--iress-padding-y);
+  padding-inline: var(--iress-padding-x) var(--iress-padding-x);
+  height: var(--iress-height);
+  max-width: var(--iress-max-width);
+  border-style: solid;
+  position: relative;
+  outline: none;
+  border-radius: var(--iress-border-radius);
+}

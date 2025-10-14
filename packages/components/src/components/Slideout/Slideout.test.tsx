@@ -7,70 +7,33 @@ import {
   waitForElementToBeRemoved,
 } from '@testing-library/react';
 import { axe } from 'jest-axe';
+import styles from './Slideout.module.scss';
+import pushElementStyles from './SlideoutPushElement.module.scss';
 import userEvent from '@testing-library/user-event';
 import { App as AppWithSlideoutProvider } from './mocks/AppWithSlideoutProvider';
 import { idsLogger } from '@helpers/utility/idsLogger';
 import {
-  GlobalCSSClass,
   IressButton,
   IressSlideout,
   IressSlideoutProps,
   IressSlideoutProvider,
   IressSlideoutProviderProps,
-  SlideoutContext,
-  SlideoutContextValue,
-  slideout as slideoutStyles,
 } from '@/main';
 import { useState } from 'react';
-import { token } from '@/styled-system/tokens';
 
 const TEST_ID = 'test-component';
 const TEST_ROLE = 'complementary';
 
-// Mocking the breakpoint hook to return xl so push element styles are applied
-vi.mock('../../hooks/useBreakpoint', () => ({
-  useBreakpoint: vi.fn(() => ({
-    breakpoint: 'xl',
-  })),
-}));
-
 function renderComponent(
-  props: Partial<IressSlideoutProps> = {},
-  options?: {
-    enableAnimations?: boolean;
-    renderFn?: typeof render;
-  },
+  { children, ...restProps }: Partial<IressSlideoutProps> = {},
+  renderFn: typeof render = render,
 ): RenderResult {
-  const { children, ...restProps } = props;
-  const { enableAnimations: withAnimations = false, renderFn = render } =
-    options ?? {};
-
-  // Toggle animations based on the option
-  if (withAnimations) {
-    enableAnimations();
-  } else {
-    disableAnimations();
-  }
-  const idToUse = Object.prototype.hasOwnProperty.call(props, 'id')
-    ? props.id
-    : TEST_ID;
-
-  const roleToUse = Object.prototype.hasOwnProperty.call(props, 'role')
-    ? props.role
-    : TEST_ROLE;
-  const dataTestIdToUse = Object.prototype.hasOwnProperty.call(
-    props,
-    'data-testid',
-  )
-    ? props['data-testid']
-    : TEST_ID;
-
   return renderFn(
     <IressSlideout
       {...restProps}
-      id={idToUse}
-      role={roleToUse}
-      data-testid={dataTestIdToUse}
+      id={restProps?.id ?? TEST_ID}
+      role={restProps?.role ?? TEST_ROLE}
+      data-testid={TEST_ID}
     >
       {children}
     </IressSlideout>,
@@ -82,13 +45,10 @@ function renderComponentInProvider(
   providerProps?: IressSlideoutProviderProps,
   renderFn: typeof render = render,
 ): RenderResult {
-  const { container, ...otherProviderProps } = providerProps ?? {};
-
   return renderFn(
-    <IressSlideoutProvider {...otherProviderProps}>
+    <IressSlideoutProvider {...providerProps}>
       <IressSlideout
         {...restProps}
-        container={container}
         id={restProps?.id ?? TEST_ID}
         role={restProps?.role ?? TEST_ROLE}
         data-testid={TEST_ID}
@@ -98,85 +58,6 @@ function renderComponentInProvider(
     </IressSlideoutProvider>,
   );
 }
-
-let originalGetComputedStyle: typeof window.getComputedStyle;
-let animationStyleTag: HTMLStyleElement | null = null;
-
-function disableAnimations() {
-  if (!originalGetComputedStyle) {
-    originalGetComputedStyle = window.getComputedStyle;
-  }
-
-  window.getComputedStyle = (element) => {
-    const computedStyle = originalGetComputedStyle(element);
-    return {
-      ...computedStyle,
-      transitionDuration: '0s',
-      getPropertyValue: (prop) => {
-        if (prop === 'transition-duration') return '0s';
-        return computedStyle.getPropertyValue(prop);
-      },
-    } as CSSStyleDeclaration;
-  };
-
-  if (!animationStyleTag) {
-    animationStyleTag = document.createElement('style');
-    animationStyleTag.innerHTML = `
-      * {
-        transition-duration: 0s !important;
-        animation-duration: 0s !important;
-      }
-    `;
-    document.head.appendChild(animationStyleTag);
-  }
-}
-
-function enableAnimations() {
-  if (originalGetComputedStyle) {
-    window.getComputedStyle = originalGetComputedStyle;
-  }
-
-  if (animationStyleTag) {
-    document.head.removeChild(animationStyleTag);
-    animationStyleTag = null;
-  }
-}
-
-let capturedContext: SlideoutContextValue | undefined;
-const TestProviderApp = ({
-  slideoutProps,
-  providerProps,
-}: {
-  slideoutProps?: Partial<IressSlideoutProps>;
-  providerProps?: IressSlideoutProviderProps;
-}) => {
-  return (
-    <IressSlideoutProvider {...providerProps}>
-      <SlideoutContext.Consumer>
-        {(contextValue) => {
-          capturedContext = contextValue;
-          return null;
-        }}
-      </SlideoutContext.Consumer>
-      <IressSlideout
-        id={TEST_ID}
-        role={TEST_ROLE}
-        data-testid={TEST_ID}
-        {...slideoutProps}
-      >
-        {slideoutProps?.children ?? 'Provider controlled content'}
-      </IressSlideout>
-    </IressSlideoutProvider>
-  );
-};
-
-beforeEach(() => {
-  disableAnimations();
-});
-
-afterAll(() => {
-  disableAnimations();
-});
 
 describe('IressSlideout', () => {
   it('renders the component with the correct text and classes (hidden)', () => {
@@ -204,12 +85,15 @@ describe('IressSlideout', () => {
     expect(content).toBeInTheDocument();
     expect(closeButton).toBeInTheDocument();
 
-    expect(slideout).toHaveClass(
-      slideoutStyles({ status: 'open' }).root!,
-      GlobalCSSClass.Slideout,
-    );
-    expect(content).toHaveClass(slideoutStyles({}).content!);
-    expect(closeButton).toHaveClass(slideoutStyles({}).closeButton!);
+    expect(slideout).toHaveClass(styles.slideout);
+    expect(slideout).toHaveClass(styles.open);
+    expect(slideout).toHaveClass(styles.right);
+    expect(slideout).toHaveClass(styles['size--sm']);
+
+    expect(content).toHaveClass(styles.content);
+    expect(content).toHaveClass('iress-p--md');
+
+    expect(closeButton).toHaveClass(styles.closeButton);
   });
 
   it('renders the component with the correct data-testids', async () => {
@@ -232,148 +116,71 @@ describe('IressSlideout', () => {
     it('closes when the user clicks the close button (uncontrolled)', async () => {
       const screen = renderComponent({
         defaultShow: true,
-        id: undefined,
-      });
-
-      const slideoutElement = await screen.findByRole(TEST_ROLE);
-      expect(slideoutElement).toBeInTheDocument();
-
-      const closeButton = await screen.findByRole('button', { name: 'Close' });
-      await userEvent.click(closeButton);
-
-      await waitForElementToBeRemoved(() => screen.queryByRole(TEST_ROLE));
-
-      expect(screen.queryByRole(TEST_ROLE)).not.toBeInTheDocument();
-    });
-
-    it('closes when the user clicks the close button (controlled)', async () => {
-      let showFlag = true;
-      const onShowChangeMock = vi.fn((newShow: boolean) => {
-        showFlag = newShow;
-      });
-
-      const screen = renderComponent({
-        show: showFlag,
-        onShowChange: onShowChangeMock,
-      });
-
-      const slideoutElement = await screen.findByRole(TEST_ROLE);
-      expect(slideoutElement).toBeInTheDocument();
-
-      const closeButton = await screen.findByRole('button', { name: 'Close' });
-      await userEvent.click(closeButton);
-
-      expect(onShowChangeMock).toHaveBeenCalledWith(false, undefined);
-      expect(showFlag).toBe(false);
-
-      screen.rerender(
-        <IressSlideout
-          show={showFlag}
-          onShowChange={onShowChangeMock}
-          id={TEST_ID}
-          role={TEST_ROLE}
-          data-testid={TEST_ID}
-        ></IressSlideout>,
-      );
-
-      await waitForElementToBeRemoved(() => screen.queryByRole(TEST_ROLE));
-
-      expect(screen.queryByRole(TEST_ROLE)).not.toBeInTheDocument();
-    });
-
-    it('closes when the user clicks the close button (provider)', async () => {
-      const screen = render(<TestProviderApp />);
-
-      expect(screen.queryByRole(TEST_ROLE)).not.toBeInTheDocument();
-
-      act(() => {
-        capturedContext?.showSlideout(TEST_ID, true);
       });
 
       const slideout = await screen.findByRole(TEST_ROLE);
-      expect(slideout).toBeInTheDocument();
-      expect(
-        screen.getByText('Provider controlled content'),
-      ).toBeInTheDocument();
+      const closeButton = await screen.findByRole('button');
 
-      const closeButton = await screen.findByRole('button', { name: 'Close' });
       await userEvent.click(closeButton);
 
-      await waitForElementToBeRemoved(() => screen.queryByRole(TEST_ROLE));
+      await waitForElementToBeRemoved(slideout);
 
-      expect(screen.queryByRole(TEST_ROLE)).not.toBeInTheDocument();
+      expect(slideout).not.toBeInTheDocument();
+    });
+
+    it('closes when the user clicks the close button (controlled)', async () => {
+      let show = true;
+
+      const screen = renderComponent({
+        show,
+        onShowChange: (newShow) => (show = newShow),
+      });
+
+      const slideout = await screen.findByRole(TEST_ROLE);
+      const closeButton = await screen.findByRole('button');
+
+      await userEvent.click(closeButton);
+      expect(show).toBe(false);
+
+      renderComponent(
+        {
+          show,
+        },
+        screen.rerender as never,
+      );
+
+      await waitForElementToBeRemoved(slideout);
+    });
+
+    it('closes when the user clicks the close button (provider)', async () => {
+      const screen = renderComponentInProvider({
+        defaultShow: true,
+      });
+
+      const slideout = await screen.findByRole(TEST_ROLE);
+      const closeButton = await screen.findByRole('button');
+
+      await userEvent.click(closeButton);
+
+      await waitForElementToBeRemoved(slideout);
+
+      expect(slideout).not.toBeInTheDocument();
     });
 
     it('closes when using the escape key', async () => {
       const screen = renderComponent({
         defaultShow: true,
-        id: undefined,
       });
 
       const slideout = await screen.findByRole(TEST_ROLE);
-      expect(slideout).toBeInTheDocument();
-
-      act(() => {
-        slideout.focus();
-      });
 
       await waitFor(() => expect(slideout).toHaveFocus());
 
       await userEvent.keyboard('{Escape}');
 
-      await waitForElementToBeRemoved(() => screen.queryByRole(TEST_ROLE));
+      await waitForElementToBeRemoved(slideout);
 
-      expect(screen.queryByRole(TEST_ROLE)).not.toBeInTheDocument();
-    });
-
-    it('does not close when clicking on a component outside the slideout', async () => {
-      const screen = render(
-        <>
-          <IressButton>Button outside slideout</IressButton>
-          <IressSlideout defaultShow role={TEST_ROLE} data-testid={TEST_ID}>
-            Content inside slideout
-          </IressSlideout>
-        </>,
-      );
-
-      const outsideButton = screen.getByRole('button', {
-        name: 'Button outside slideout',
-      });
-      const slideout = await screen.findByRole(TEST_ROLE);
-
-      await waitFor(() => expect(slideout).toHaveFocus());
-
-      await userEvent.click(outsideButton);
-
-      await waitFor(() => expect(outsideButton).toHaveFocus());
-      expect(slideout).not.toHaveFocus();
-      expect(slideout).not.toHaveFocus();
-
-      expect(slideout).toBeInTheDocument();
-    });
-
-    it('does not close when clicking on a component outside the slideout', async () => {
-      const screen = render(
-        <>
-          <IressButton>Button outside slideout</IressButton>
-          <IressSlideout defaultShow role={TEST_ROLE} data-testid={TEST_ID}>
-            Content inside slideout
-          </IressSlideout>
-        </>,
-      );
-
-      const button = screen.getByRole('button', {
-        name: 'Button outside slideout',
-      });
-      const slideout = await screen.findByRole(TEST_ROLE);
-
-      await waitFor(() => expect(slideout).toHaveFocus());
-
-      await userEvent.click(button);
-
-      await waitFor(() => expect(slideout).not.toHaveFocus());
-
-      expect(slideout).toBeInTheDocument();
+      expect(slideout).not.toBeInTheDocument();
     });
 
     it('does not close when clicking on a component outside the slideout', async () => {
@@ -402,6 +209,52 @@ describe('IressSlideout', () => {
   });
 
   describe('props', () => {
+    describe('backdrop', () => {
+      it('renders a backdrop and changes the role to a dialog by default', async () => {
+        const screen = render(
+          <IressSlideout backdrop defaultShow data-testid={TEST_ID} />,
+        );
+
+        const slideout = await screen.findByRole('dialog');
+        const backdrop = await screen.findByTestId(`${TEST_ID}__backdrop`);
+
+        expect(slideout).toBeInTheDocument();
+        expect(backdrop).toBeInTheDocument();
+      });
+
+      it('closes the slideout when the backdrop is clicked', async () => {
+        const screen = renderComponent({
+          backdrop: true,
+          defaultShow: true,
+        });
+
+        const slideout = await screen.findByRole(TEST_ROLE);
+
+        await userEvent.click(screen.getByTestId(`${TEST_ID}__backdrop`));
+
+        await waitForElementToBeRemoved(slideout);
+
+        expect(slideout).not.toBeInTheDocument();
+      });
+
+      it('renders the className and style on the backdrop', async () => {
+        const screen = renderComponent({
+          className: 'test-class',
+          style: { color: 'red' },
+          backdrop: true,
+          defaultShow: true,
+        });
+
+        const backdrop = await screen.findByTestId(`${TEST_ID}__backdrop`);
+        const slideout = await screen.findByRole(TEST_ROLE);
+
+        expect(backdrop).toHaveClass('test-class');
+        expect(slideout).not.toHaveClass('test-class');
+
+        expect(backdrop).toHaveStyle({ color: 'rgb(255, 0, 0)' });
+      });
+    });
+
     describe('closeText', () => {
       it('replaces default close button text', async () => {
         const screen = renderComponent({
@@ -463,8 +316,8 @@ describe('IressSlideout', () => {
         });
 
         // Wait for the slideout to be mounted and open
-        const slideout = await screen.findByRole(TEST_ROLE);
-        await waitFor(() => expect(slideout).toHaveFocus());
+        await screen.findByRole(TEST_ROLE);
+        await waitFor(() => expect(screen.getByRole(TEST_ROLE)).toHaveFocus());
 
         // Verify that onStatus was called with the expected status values
         expect(onStatus).toHaveBeenCalledWith('initial');
@@ -475,7 +328,7 @@ describe('IressSlideout', () => {
         await userEvent.click(closeButton);
 
         // Wait for the slideout to be removed
-        await waitForElementToBeRemoved(slideout);
+        await waitForElementToBeRemoved(screen.getByRole(TEST_ROLE));
 
         // Verify that onStatus was called with 'close' and 'unmounted' status
         expect(onStatus).toHaveBeenCalledWith('close');
@@ -484,31 +337,38 @@ describe('IressSlideout', () => {
 
       it('is called with status changes when slideout is controlled', async () => {
         const onStatus = vi.fn();
+        let show = true;
 
         const screen = renderComponent({
-          show: true,
+          show,
           onStatus,
+          onShowChange: (newShow) => (show = newShow),
         });
 
         // Wait for the slideout to be mounted and open
-        const slideout = await screen.findByRole(TEST_ROLE);
-        await waitFor(() => expect(slideout).toHaveFocus());
+        await screen.findByRole(TEST_ROLE);
+        await waitFor(() => expect(screen.getByRole(TEST_ROLE)).toHaveFocus());
 
         // Verify initial status calls
         expect(onStatus).toHaveBeenCalledWith('initial');
         expect(onStatus).toHaveBeenCalledWith('open');
 
+        // Close the slideout
+        const closeButton = await screen.findByRole('button');
+        await userEvent.click(closeButton);
+
         // Re-render with show = false
         renderComponent(
           {
-            show: false,
+            show,
             onStatus,
+            onShowChange: (newShow) => (show = newShow),
           },
-          { renderFn: screen.rerender as never },
+          screen.rerender as never,
         );
 
         // Wait for the slideout to be removed
-        await waitForElementToBeRemoved(slideout);
+        await waitForElementToBeRemoved(screen.getByRole(TEST_ROLE));
 
         // Verify that onStatus was called with 'close' and 'unmounted' status
         expect(onStatus).toHaveBeenCalledWith('close');
@@ -534,21 +394,19 @@ describe('IressSlideout', () => {
         const closeButton = await screen.findByRole('button');
 
         expect(pushElement).toBeInTheDocument();
-        expect(pushElement).toHaveClass(GlobalCSSClass.SlideoutPushElement);
+        expect(pushElement).toHaveClass(
+          pushElementStyles.slideoutPushElement,
+          pushElementStyles.right,
+          pushElementStyles['size--sm'],
+        );
 
-        await waitFor(() => {
-          expect(pushElement.style.getPropertyValue('margin-inline-end')).toBe(
-            'var(--sizes-overlay\\.sm, 375px)',
-          );
-        });
+        await waitFor(() =>
+          expect(pushElement).toHaveClass(pushElementStyles.open),
+        );
 
         await userEvent.click(closeButton);
 
-        await waitFor(() =>
-          expect(
-            pushElement.style.getPropertyValue('margin-inline-end'),
-          ).not.toBe(token.var('sizes.overlay.sm')),
-        );
+        expect(pushElement).not.toHaveClass(pushElementStyles.open);
       });
 
       it('pushes the element by HTMLElement', async () => {
@@ -562,7 +420,11 @@ describe('IressSlideout', () => {
 
         await screen.findByTestId(TEST_ID);
 
-        expect(eleToPush).toHaveClass(GlobalCSSClass.SlideoutPushElement);
+        expect(eleToPush).toHaveClass(
+          pushElementStyles.slideoutPushElement,
+          pushElementStyles.right,
+          pushElementStyles['size--sm'],
+        );
       });
 
       it('pushes the element by ref', async () => {
@@ -577,12 +439,13 @@ describe('IressSlideout', () => {
         await screen.findByTestId(TEST_ID);
 
         expect(eleToPush.current).toHaveClass(
-          GlobalCSSClass.SlideoutPushElement,
+          pushElementStyles.slideoutPushElement,
+          pushElementStyles.right,
+          pushElementStyles['size--sm'],
         );
       });
 
-      // TODO: Fix WAF-863 with this new hook, so that the push element remains open when closing a slideout and opening another one
-      it.skip('does not remove push element when opening a slideout after closing another one', async () => {
+      it('does not remove push element when opening a slideout after closing another one', async () => {
         const eleToPush = { current: document.createElement('div') };
 
         const SlideoutTransitions = () => {
@@ -632,7 +495,7 @@ describe('IressSlideout', () => {
         await waitFor(() => expect(slideout1).toHaveFocus());
 
         // Element should be pushed
-        expect(eleToPush.current).toHaveClass(GlobalCSSClass.SlideoutOpen);
+        expect(eleToPush.current).toHaveClass(pushElementStyles.open);
 
         // Click the button to close slideout 1 and open slideout 2
         const button = screen.getByRole('button', {
@@ -649,7 +512,7 @@ describe('IressSlideout', () => {
         expect(slideout2).toHaveFocus();
 
         // Element should still be pushed
-        expect(eleToPush.current).toHaveClass(GlobalCSSClass.SlideoutOpen);
+        expect(eleToPush.current).toHaveClass(pushElementStyles.open);
       });
     });
 
@@ -661,7 +524,7 @@ describe('IressSlideout', () => {
         });
 
         const footer = await screen.findByText('Footer');
-        expect(footer).toHaveClass(slideoutStyles({}).footer!);
+        expect(footer).toHaveClass(styles.footer);
       });
     });
 
@@ -699,9 +562,7 @@ describe('IressSlideout', () => {
         });
 
         const slideout = await screen.findByRole(TEST_ROLE);
-        expect(slideout).not.toHaveClass(
-          slideoutStyles({ mode: 'push' }).root!,
-        );
+        expect(slideout).not.toHaveClass(styles.push);
       });
 
       it('does not allow push without an eleToPush', async () => {
@@ -711,10 +572,7 @@ describe('IressSlideout', () => {
         });
 
         const slideout = await screen.findByRole(TEST_ROLE);
-        await waitFor(() => expect(slideout).toHaveFocus());
-        expect(slideout).toHaveClass(
-          slideoutStyles({ mode: 'overlay', status: 'open' }).root!,
-        );
+        expect(slideout).not.toHaveClass(styles.push);
       });
 
       it('adds push class when eleToPush is available', async () => {
@@ -727,13 +585,7 @@ describe('IressSlideout', () => {
         });
 
         const slideout = await screen.findByRole(TEST_ROLE);
-
-        // Need to wait for transition to finish
-        await waitFor(() => {
-          expect(slideout).toHaveClass(
-            slideoutStyles({ mode: 'push', status: 'open' }).root!,
-          );
-        });
+        expect(slideout).toHaveClass(styles.push);
       });
     });
 
@@ -781,21 +633,39 @@ describe('IressSlideout', () => {
         const screen = renderComponent({
           defaultShow: true,
           onExited,
-          id: undefined,
         });
 
-        const slideout = await screen.findByRole(TEST_ROLE);
-        expect(slideout).toBeInTheDocument();
-
-        const closeButton = await screen.findByRole('button', {
-          name: 'Close',
-        });
+        const closeButton = await screen.findByRole('button');
         await userEvent.click(closeButton);
 
         // Fire transition end event to simulate CSS transition completion
+        const slideout = screen.getByRole(TEST_ROLE);
         fireEvent.transitionEnd(slideout, {
           propertyName: 'right',
         });
+
+        await waitFor(() => expect(onExited).toBeCalledTimes(1));
+      });
+
+      it('is called when the slideout is closed via backdrop click', async () => {
+        const onExited = vi.fn();
+
+        const screen = renderComponent({
+          backdrop: true,
+          defaultShow: true,
+          onExited,
+        });
+
+        const backdrop = await screen.findByTestId(`${TEST_ID}__backdrop`);
+        await userEvent.click(backdrop);
+
+        // Fire transition end event to simulate CSS transition completion
+        const slideout = screen.getByRole(TEST_ROLE);
+        fireEvent.transitionEnd(slideout, {
+          propertyName: 'right',
+        });
+
+        await waitForElementToBeRemoved(slideout);
 
         await waitFor(() => expect(onExited).toHaveBeenCalledOnce());
       });
@@ -806,25 +676,18 @@ describe('IressSlideout', () => {
         const screen = renderComponent({
           defaultShow: true,
           onExited,
-          id: undefined,
         });
 
-        const slideout = await screen.findByRole(TEST_ROLE);
-        expect(slideout).toBeInTheDocument();
-
-        act(() => {
-          slideout.focus();
-        });
-        await waitFor(() => expect(slideout).toHaveFocus());
-
+        await screen.findByRole(TEST_ROLE);
         await userEvent.keyboard('{Escape}');
 
         // Fire transition end event to simulate CSS transition completion
+        const slideout = screen.getByRole(TEST_ROLE);
         fireEvent.transitionEnd(slideout, {
           propertyName: 'right',
         });
 
-        await waitFor(() => expect(onExited).toHaveBeenCalledOnce());
+        await waitFor(() => expect(onExited).toBeCalledTimes(1));
       });
     });
 
@@ -833,15 +696,15 @@ describe('IressSlideout', () => {
         const screen = renderComponent({
           children: 'Content',
           defaultShow: true,
-          p: 'none',
+          padding: 'none',
           footer: 'Footer',
         });
 
         const content = await screen.findByText('Content');
         const footer = await screen.findByText('Footer');
 
-        expect(content).toHaveClass(slideoutStyles({}).content!);
-        expect(footer).toHaveClass(slideoutStyles({}).footer!);
+        expect(content).toHaveClass('iress-p--none');
+        expect(footer).toHaveClass('iress-p--none');
       });
     });
 
@@ -853,12 +716,7 @@ describe('IressSlideout', () => {
         });
 
         const slideout = await screen.findByRole(TEST_ROLE);
-
-        await waitFor(() => {
-          expect(slideout).toHaveClass(
-            slideoutStyles({ position: 'left', status: 'open' }).root!,
-          );
-        });
+        expect(slideout).toHaveClass(styles.left);
       });
     });
 
@@ -877,24 +735,18 @@ describe('IressSlideout', () => {
       it('changes the size of the slideout if provided', async () => {
         const screen = renderComponent({
           show: true,
-          size: 'md',
+          size: 'lg',
         });
 
         const slideout = await screen.findByRole(TEST_ROLE);
-
-        // Need to wait for transition to finish
-        await waitFor(() => {
-          expect(slideout).toHaveClass(
-            slideoutStyles({ size: 'md', status: 'open' }).root!,
-          );
-        });
+        expect(slideout).toHaveClass(styles['size--lg']);
       });
 
       it('updates push element size classes when size prop changes while slideout is open', async () => {
         const eleToPush = document.createElement('div');
 
         const SizeChangeTest = () => {
-          const [size, setSize] = useState<IressSlideoutProps['size']>('md');
+          const [size, setSize] = useState<'sm' | 'md' | 'lg'>('md');
 
           return (
             <>
@@ -922,13 +774,9 @@ describe('IressSlideout', () => {
         // Wait for the slideout to be fully open and push element classes to be applied
         await waitFor(() => {
           expect(eleToPush).toHaveClass(
-            GlobalCSSClass.SlideoutPushElement,
-            GlobalCSSClass.SlideoutOpen,
-          );
-
-          // Checks if the element is sized correctly
-          expect(eleToPush.style.getPropertyValue('margin-inline-end')).toBe(
-            'var(--sizes-overlay\\.md, 640px)',
+            pushElementStyles.slideoutPushElement,
+            pushElementStyles['size--md'],
+            pushElementStyles.open,
           );
         });
 
@@ -941,14 +789,11 @@ describe('IressSlideout', () => {
         // Verify that the push element classes are updated
         await waitFor(() => {
           expect(eleToPush).toHaveClass(
-            GlobalCSSClass.SlideoutPushElement,
-            GlobalCSSClass.SlideoutOpen,
+            pushElementStyles.slideoutPushElement,
+            pushElementStyles['size--sm'],
+            pushElementStyles.open,
           );
-
-          // Checks if the element is sized correctly
-          expect(
-            eleToPush.style.getPropertyValue('margin-inline-end'),
-          ).not.toBe('var(--sizes-overlay\\.md, 640px)');
+          expect(eleToPush).not.toHaveClass(pushElementStyles['size--md']);
         });
       });
     });
@@ -967,7 +812,7 @@ describe('IressSlideout', () => {
 
       screen.rerender(<AppWithSlideoutProvider id={TEST_ID} show />);
 
-      await waitFor(() => expect(idsLogger).toHaveBeenCalledTimes(1));
+      await waitFor(() => expect(idsLogger).toBeCalledTimes(1));
     });
   });
 

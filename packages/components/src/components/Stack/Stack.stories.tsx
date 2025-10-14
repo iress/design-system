@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { IressPlaceholder } from '../Placeholder';
 import { IressPanel } from '../Panel';
@@ -7,8 +7,7 @@ import { IressStack } from '.';
 import { CurrentBreakpoint } from '@iress-storybook/components';
 import { IressText } from '../Text';
 import { IressButton } from '../Button';
-import { IressInline } from '../Inline';
-import { SPACING_TOKENS } from '@theme-preset/tokens/spacing';
+import { GUTTER_SIZES } from '@/constants';
 
 type Story = StoryObj<typeof IressStack>;
 
@@ -21,23 +20,36 @@ const childrenOptions = {
     <IressPlaceholder key="5-even" height="50" />,
   ],
   inlineChildren: [
-    <IressPanel key="block-1" bg="alt">
+    <IressPanel key="inline-1" background="alt">
       Panel 1 (block)
     </IressPanel>,
-    <span key="block-2">I am a block span with the same margin</span>,
-    <IressPanel key="block-3" bg="alt">
+    <span key="inline-2">I am a (inline) span so will get no margin</span>,
+    <IressPanel key="inline-3" background="alt">
       Panel 2 (block)
     </IressPanel>,
-    <IressInline key="block-4">
-      <IressButton key="inline-1">Button 1</IressButton>
-      <IressButton key="inline-2">Button 2</IressButton>
-      <IressButton key="inline-3">Button 3</IressButton>
-    </IressInline>,
-    <IressPanel key="block-5" bg="alt">
+    <IressButton key="inline-4">Button 1</IressButton>,
+    <IressButton key="inline-5">Button 2</IressButton>,
+    <IressButton key="inline-6">Button 3</IressButton>,
+    <IressPanel key="inline-7" background="alt">
       Panel 3 (block)
     </IressPanel>,
   ],
-  list: [<li>List item 1</li>, <li>List item 2</li>, <li>List item 3</li>],
+  list: (
+    <ul className="iress-u-text">
+      <li>List item 1</li>
+      <li>List item 2</li>
+      <li>List item 3</li>
+    </ul>
+  ),
+  wrappedList: (
+    <IressText>
+      <ul>
+        <li>List item 1</li>
+        <li>List item 2</li>
+        <li>List item 3</li>
+      </ul>
+    </IressText>
+  ),
 };
 
 export default {
@@ -52,55 +64,54 @@ export default {
       mapping: childrenOptions,
     },
   },
-  tags: ['updated'],
 } as Meta<typeof IressStack>;
 
 export const Default: Story = {
   args: {
     children: 'even',
-    gap: 'spacing.100',
+    gutter: 'md',
   },
 };
 
-export const Gap: Story = {
+export const Gutter: Story = {
   ...Default,
   args: {
     children: 'even',
   },
   argTypes: {
     ...Default.argTypes,
-    ...disableArgTypes(['gap']),
+    ...disableArgTypes(['gutter']),
   },
   render: (args) => (
-    <IressStack gap="spacing.400">
-      {SPACING_TOKENS.map((spacing) => (
-        <IressText key={spacing}>
-          <h2>{spacing}</h2>
-          <IressStack {...args} gap={spacing} />
+    <IressStack gutter="xl">
+      {GUTTER_SIZES.map((gutter) => (
+        <IressText key={gutter}>
+          <h2>{gutter}</h2>
+          <IressStack {...args} gutter={gutter} />
         </IressText>
       ))}
     </IressStack>
   ),
 };
 
-export const ResponsiveGap: Story = {
+export const ResponsiveGutter: Story = {
   ...Default,
   args: {
     children: 'even',
-    gap: {
-      xs: 'spacing.100',
-      sm: 'spacing.200',
-      md: 'spacing.400',
+    gutter: {
+      xs: 'xs',
+      sm: 'sm',
+      md: 'md',
     },
   },
   render: (args) => (
-    <IressStack gap="spacing.400">
+    <IressStack gutter="md">
       <IressPanel>
         <p>
           Current breakpoint: <CurrentBreakpoint />.
         </p>
         <p>
-          <code>gap=&#123;{JSON.stringify(args.gap)}&#125;</code>
+          <code>gutter=&#123;{JSON.stringify(args.gutter)}&#125;</code>
         </p>
       </IressPanel>
       <IressStack {...args} />
@@ -111,14 +122,20 @@ export const ResponsiveGap: Story = {
 export const InlineChildren: Story = {
   args: {
     children: 'inlineChildren',
-    gap: 'spacing.400',
+    gutter: 'md',
   },
 };
 
 export const Lists: Story = {
   args: {
     children: 'list',
-    gap: 'spacing.700',
-    element: 'ul',
+    gutter: 'md',
+  },
+};
+
+export const WrappedList: Story = {
+  args: {
+    children: 'wrappedList',
+    gutter: 'md',
   },
 };

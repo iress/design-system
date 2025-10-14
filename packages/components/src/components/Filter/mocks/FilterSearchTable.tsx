@@ -2,14 +2,22 @@ import {
   IressInline,
   IressStack,
   IressTable,
-  type LabelValueMeta,
+  LabelValueMeta,
   IressFilter,
-  type IressFilterProps,
+  IressFilterProps,
   IressButton,
   IressDivider,
 } from '@/main';
 import { useMemo, useState } from 'react';
 import { searchStarWarsCharacters } from '@/mocks/starWars';
+
+const toArray = <T,>(item?: T | T[]): T[] => {
+  if (Array.isArray(item)) {
+    return item;
+  }
+
+  return item !== undefined ? [item] : [];
+};
 
 const USERS = [
   {
@@ -63,11 +71,11 @@ const getUniqueValues = (key: string): LabelValueMeta[] => {
   }));
 };
 
-export const FilterSearchTable = (args: IressFilterProps<false>) => {
-  const [name, setName] = useState<LabelValueMeta | undefined>();
-  const [status, setStatus] = useState<LabelValueMeta | undefined>();
-  const [location, setLocation] = useState<LabelValueMeta | undefined>();
-  const [gender, setGender] = useState<LabelValueMeta | undefined>(undefined);
+export const FilterSearchTable = (args: IressFilterProps) => {
+  const [name, setName] = useState<LabelValueMeta[]>([]);
+  const [status, setStatus] = useState<LabelValueMeta[]>([]);
+  const [location, setLocation] = useState<LabelValueMeta[]>([]);
+  const [gender, setGender] = useState<LabelValueMeta[]>([]);
 
   const columns = [
     { key: 'user', label: 'User' },
@@ -78,8 +86,11 @@ export const FilterSearchTable = (args: IressFilterProps<false>) => {
   ];
 
   const rows = useMemo(() => {
-    const match = (filterItem?: LabelValueMeta, detail?: string): boolean =>
-      (filterItem?.value ?? filterItem?.label) === detail;
+    const match = (filter: LabelValueMeta[], detail: string): boolean =>
+      filter.length === 0 ||
+      filter.some(
+        (filterItem) => (filterItem.value ?? filterItem.label) === detail,
+      );
 
     return USERS.filter(
       (user) =>
@@ -91,48 +102,48 @@ export const FilterSearchTable = (args: IressFilterProps<false>) => {
   }, [name, status, location, gender]);
 
   const handleReset = () => {
-    setName(undefined);
-    setStatus(undefined);
-    setLocation(undefined);
-    setGender(undefined);
+    setName([]);
+    setStatus([]);
+    setLocation([]);
+    setGender([]);
   };
 
   return (
-    <IressStack gap="md">
-      <IressInline gap="md">
+    <IressStack gutter={IressStack.Gutter.Md}>
+      <IressInline gutter={IressInline.Gutter.Md}>
         <IressFilter
           {...args}
           label="Name"
           options={searchStarWarsCharacters}
           value={name}
-          onChange={setName}
-          onReset={() => setName(undefined)}
+          onChange={(value) => setName(toArray(value))}
+          onReset={() => setName([])}
         />
         <IressFilter
           {...args}
           label="Status"
           options={getUniqueValues('status')}
           value={status}
-          onChange={setStatus}
-          onReset={() => setStatus(undefined)}
+          onChange={(value) => setStatus(toArray(value))}
+          onReset={() => setStatus([])}
         />
         <IressFilter
           {...args}
           label="Location"
           options={getUniqueValues('location')}
           value={location}
-          onChange={setLocation}
-          onReset={() => setLocation(undefined)}
+          onChange={(value) => setLocation(toArray(value))}
+          onReset={() => setLocation([])}
         />
         <IressFilter
           {...args}
           label="Gender"
           options={getUniqueValues('gender')}
           value={gender}
-          onChange={setGender}
-          onReset={() => setGender(undefined)}
+          onChange={(value) => setGender(toArray(value))}
+          onReset={() => setGender([])}
         />
-        <IressButton onClick={handleReset} mode="tertiary">
+        <IressButton onClick={handleReset} mode={IressButton.Mode.Tertiary}>
           Reset filters
         </IressButton>
       </IressInline>

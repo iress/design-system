@@ -3,7 +3,7 @@ import {
   IressIcon,
   IressTable,
   IressTableBody,
-  type TableColumn,
+  TableColumn,
 } from '@/main';
 
 interface Liability {
@@ -107,7 +107,7 @@ const columns: TableColumn<Liability>[] = [
     key: 'interestRate',
     label: 'Interest rate p.a.',
     format: 'percent',
-    textAlign: 'right',
+    align: 'right',
     sort: true,
   },
   {
@@ -128,7 +128,7 @@ export const TableGroupedRows = () => (
       scope="col"
       open
     >
-      <IressButton prepend={<IressIcon name="plus-circle" />}>
+      <IressButton mode="tertiary" prepend={<IressIcon name="plus-circle" />}>
         Add current liability
       </IressButton>
     </IressTableBody>
@@ -138,7 +138,7 @@ export const TableGroupedRows = () => (
       caption="Long term liabilities"
       scope="col"
     >
-      <IressButton prepend={<IressIcon name="plus-circle" />}>
+      <IressButton mode="tertiary" prepend={<IressIcon name="plus-circle" />}>
         Add long term liability
       </IressButton>
     </IressTableBody>
@@ -148,7 +148,7 @@ export const TableGroupedRows = () => (
       caption="Contingent liabilities"
       scope="col"
     >
-      <IressButton prepend={<IressIcon name="plus-circle" />}>
+      <IressButton mode="tertiary" prepend={<IressIcon name="plus-circle" />}>
         Add contingent liability
       </IressButton>
     </IressTableBody>

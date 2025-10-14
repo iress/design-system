@@ -1,8 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { IressText } from '.';
-import { text } from './Text.styles';
 import { GlobalCSSClass } from '@/enums';
+
+const modes = Object.values(IressText.Mode);
+const variants = Object.values(IressText.Variant);
+const aligns = Object.values(IressText.Align);
 
 describe('IressText', () => {
   describe('props', () => {
@@ -15,13 +18,41 @@ describe('IressText', () => {
 
       const element = screen.getByTestId('test-id');
 
-      expect(element).toHaveClass(text(), 'test-class', GlobalCSSClass.Text);
+      expect(element).toHaveClass('iress-u-text');
+      expect(element).toHaveClass('test-class');
+      expect(element).not.toHaveClass('iress--no-gutter');
       expect(element).toBeInstanceOf(HTMLDivElement);
+    });
+
+    it.each(modes)('should render with mode %s', (mode) => {
+      const { container } = render(
+        <IressText mode={mode}>Test text</IressText>,
+      );
+
+      expect(container.firstChild).toHaveClass(`iress--${mode}`);
+    });
+
+    it.each(variants)('should render with variant %s', (variant) => {
+      const { container } = render(
+        <IressText variant={variant}>Test text</IressText>,
+      );
+
+      expect(container.firstChild).toHaveClass(`iress--${variant}`);
+    });
+
+    it.each(aligns)('should render with align %s', (align) => {
+      const { container } = render(
+        <IressText align={align}>Test text</IressText>,
+      );
+
+      expect(container.firstChild).toHaveClass(
+        `${GlobalCSSClass.TextAlignBase}--${align}`,
+      );
     });
 
     it('should render with the correct element', () => {
       const { container } = render(
-        <IressText element="span">Test text</IressText>,
+        <IressText element={IressText.Element.Span}>Test text</IressText>,
       );
 
       expect(container.firstChild).toBeInstanceOf(HTMLSpanElement);

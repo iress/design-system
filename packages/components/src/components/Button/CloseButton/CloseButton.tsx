@@ -1,31 +1,24 @@
-import { IressButton, type IressButtonProps } from '../Button';
+import classNames from 'classnames';
+import { type IressCloseButtonProps } from './CloseButton.types';
+import styles from './CloseButton.module.scss';
+import { IressButton } from '../Button';
 import { IressIcon } from '../../Icon';
-import { forwardRef, type Ref } from 'react';
-import { cx } from '@/styled-system/css';
-import { GlobalCSSClass } from '@/enums';
-
-export interface IressCloseButtonProps
-  extends Omit<IressButtonProps, 'children' | 'mode'> {
-  /**
-   * Description for screen readers.
-   * @default Close button
-   **/
-  screenreaderText?: string;
-}
+import React, { forwardRef } from 'react';
+import { type ButtonRef } from '..';
 
 export const IressCloseButton = forwardRef(
   (
     {
-      className,
       screenreaderText = 'Close button',
+      className,
       ...restProps
     }: IressCloseButtonProps,
-    ref: Ref<HTMLButtonElement>,
+    ref: React.Ref<ButtonRef>,
   ) => (
     <IressButton
-      {...restProps}
-      className={cx(className, GlobalCSSClass.CloseButton)}
+      className={classNames(className, styles.closeButton)}
       mode="tertiary"
+      {...restProps}
       ref={ref}
     >
       <IressIcon name="times" screenreaderText={screenreaderText} />

@@ -1,10 +1,10 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressSelectBody } from './SelectBody';
 import { IressSelectCreate } from '../SelectCreate/SelectCreate';
 import {
   IressMenuDivider,
   IressPanel,
-  type IressSelectBodyProps,
+  IressSelectBodyProps,
   IressSelectMenu,
 } from '@/main';
 import { MOCK_LARGE_LABEL_VALUES_DATASET } from '../../../mocks/generateLabelValues';
@@ -25,8 +25,12 @@ export default {
       removeArgTypes(['style']),
       disableArgTypes(['children', 'footer', 'header']),
       addToStorybookCategory<IressSelectBodyProps>('Text props', [
+        'align',
         'children',
+        'element',
+        'mode',
         'noGutter',
+        'variant',
       ]),
     ),
   },
@@ -34,17 +38,11 @@ export default {
 
 export const Body: Story = {
   args: {
-    children: (
-      <IressSelectMenu
-        aria-label="Available options"
-        fluid
-        items={MOCK_LARGE_LABEL_VALUES_DATASET}
-      />
-    ),
+    children: <IressSelectMenu fluid items={MOCK_LARGE_LABEL_VALUES_DATASET} />,
     header: (
       <>
         <IressSelectCreate heading="Add custom option" />
-        <IressMenuDivider />
+        <IressMenuDivider gutter="none" />
       </>
     ),
     footer: <IressPanel>This will always be fixed to the bottom</IressPanel>,

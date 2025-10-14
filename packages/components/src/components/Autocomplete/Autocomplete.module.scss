@@ -1,0 +1,11 @@
+.popoverContent {
+  &:has(.optionList:empty) {
+    display: none;
+  }
+}
+
+.optionList {
+  &:empty {
+    display: none;
+  }
+}

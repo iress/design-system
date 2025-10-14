@@ -15,5 +15,5 @@ export const highlightQueryInLabelValue = (
   formattedMeta:
     typeof labelValueMeta.meta === 'string'
       ? highlightQueryInLabel(labelValueMeta.meta, query, Tag)
-      : labelValueMeta.meta,
+      : undefined,
 });

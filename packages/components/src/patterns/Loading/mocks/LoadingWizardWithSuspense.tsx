@@ -93,7 +93,7 @@ const Chart = () => {
         <IressForm<ChartProps>
           onSubmit={(projectionData) => setMoney(projectionData.money)}
         >
-          <IressStack gap="md">
+          <IressStack gutter="md">
             <h3>Update projection</h3>
             <IressFormField
               name="money"

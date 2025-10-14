@@ -1,0 +1,83 @@
+@use './ButtonGroup.vars.module';
+
+/** ButtonGroup
+ * --------------------------------------------------
+ * @prop --iress-padding: Space around and between the buttons
+ * @prop --iress-border-radius: Border radius of button container
+ * @prop --iress-border: Border of the button container
+ * @prop --iress-padding: Space around the buttons
+ * @prop --iress-label-margin-bottom: Space between the label and the button container
+ * @prop --iress-item-border-width: Border width of buttons
+ * @prop --iress-item-border-radius: Border radius of buttons
+ * @prop --iress-item-padding-x: Horizontal padding of buttons
+ * @prop --iress-item-padding-y: Vertical padding of buttons
+ * @prop --iress-item-min-height: Minimum height of buttons
+ * @prop --iress-item-margin-right: Spacing between the buttons
+ * @prop --iress-item-inactive-background-color: Background colour for inactive button
+ * @prop --iress-item-inactive-hover-background-color: Background colour for inactive button in hover state
+ * @prop --iress-item-inactive-border-color: Border colour for inactive button
+ * @prop --iress-item-inactive-text-color: Text colour for inactive button
+ * @prop --iress-item-inactive-hover-text-color: Text colour for inactive button in hover state
+ * @prop --iress-item-active-background-color: Background colour for active button
+ * @prop --iress-item-active-hover-background-color: Background colour for active button in hover state
+ * @prop --iress-item-active-active-background-color: Background colour for active button in active state
+ * @prop --iress-item-active-border-color: Border colour for active button
+ * @prop --iress-item-active-text-color: Text colour for active button
+ * @prop --iress-item-active-hover-text-color: Text colour for active button in hover state
+ * @prop --iress-item-active-active-text-color: Text colour for active button in active state
+ */
+
+.buttonGroup {
+  display: block;
+}
+
+.values {
+  background-color: var(--iress-background-color);
+  border-radius: var(--iress-border-radius);
+  border: var(--iress-border);
+  padding: var(--iress-padding);
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--iress-item-margin-right);
+}
+
+.label {
+  margin-block-end: var(--iress-label-margin-bottom);
+  color: var(--iress-label-text-color);
+  font-family: var(--iress-label-font-family);
+  font-size: var(--iress-label-font-size);
+  font-weight: var(--iress-label-font-weight);
+}
+
+:global(.iress-u-button).item {
+  --iress-border-width: var(--iress-item-border-width);
+  --iress-border-radius: var(--iress-item-border-radius);
+  --iress-padding-x: var(--iress-item-padding-x);
+  --iress-padding-y: var(--iress-item-padding-y);
+  --iress-min-height: var(--iress-item-min-height);
+  --iress-background-color: var(--iress-item-inactive-background-color);
+  --iress-hover-background-color: var(--iress-item-inactive-hover-background-color);
+  --iress-active-background-color: var(--iress-item-inactive-active-background-color);
+  --iress-border-color: var(--iress-item-inactive-border-color);
+  --iress-text-color: var(--iress-item-inactive-text-color);
+  --iress-hover-text-color: var(--iress-item-inactive-hover-text-color);
+  --iress-active-text-color: var(--iress-item-inactive-active-text-color);
+  --iress-margin-right: 0;
+
+  &.active {
+    --iress-background-color: var(--iress-item-active-background-color);
+    --iress-hover-background-color: var(--iress-item-active-hover-background-color);
+    --iress-active-background-color: var(--iress-item-active-active-background-color);
+    --iress-focus-background-color: var(--iress-item-active-hover-background-color);
+    --iress-text-color: var(--iress-item-active-text-color);
+    --iress-hover-text-color: var(--iress-item-active-hover-text-color);
+    --iress-active-text-color: var(--iress-item-active-active-text-color);
+    --iress-focus-text-color: var(--iress-item-active-hover-text-color);
+    --iress-border-color: var(--iress-item-active-border-color);
+  }
+
+  &:focus {
+    /* Create new stacking layer to ensure focus outline sits on top of siblings */
+    position: relative;
+  }
+}

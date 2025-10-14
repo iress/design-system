@@ -1,5 +1,5 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { type IressInputProps, IressInputCurrency } from '../../main';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressInputProps, IressInputCurrency } from '../../main';
 import { withCustomSource } from '@iress-storybook/helpers';
 import { ValidValueOnChage as ValidValueOnChageExample } from './mocks/ValidValueOnChage';
 import ValidValueOnChageSource from './mocks/ValidValueOnChage.tsx?raw';
@@ -11,7 +11,6 @@ type Story = StoryObj<IressInputProps>;
 export default {
   title: 'Components/InputCurrency/Recipes',
   component: IressInputCurrency,
-  tags: ['updated'],
 } as Meta<typeof IressInputCurrency>;
 
 export const CurrencyInTable: Story = {

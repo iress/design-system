@@ -1,4 +1,4 @@
-import { type IressProgressProps } from '@/components/Progress';
+import { type IressProgressProps } from '@/components/Progress/Progress.types';
 import { useEffect, useMemo, useState } from 'react';
 
 /**
@@ -13,7 +13,7 @@ import { useEffect, useMemo, useState } from 'react';
 export const useEstimatedProgressValue = (
   estimatedFinishTime: number,
   isLoaded = false,
-  progress?: IressProgressProps<undefined>['value'],
+  progress?: IressProgressProps['value'],
   latestMessageTimecode = 0,
 ) => {
   const [progressValue, setProgressValue] = useState(progress ?? 0);

@@ -1,14 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
-import { IressToggle, toggle } from '.';
 
-const layouts = [
-  'inline',
-  'inline-between',
-  'inline-reverse',
-  'stack',
-] as const;
+import { GlobalCSSClass } from '@/enums';
+import { IressToggle, TOGGLE_LAYOUTS } from '.';
+import styles from './Toggle.module.scss';
 
 describe('IressToggle', () => {
   it('renders with all data-testids', () => {
@@ -32,7 +28,7 @@ describe('IressToggle', () => {
     render(<IressToggle hiddenLabel>{labelText}</IressToggle>);
     const label = screen.getByText(labelText);
     expect(label).toBeInTheDocument();
-    expect(label).toHaveClass(toggle({ hiddenLabel: true }).label!);
+    expect(label).toHaveClass(GlobalCSSClass.SROnly);
   });
 
   it('renders label for everyone when hiddenLabel is false', () => {
@@ -40,10 +36,10 @@ describe('IressToggle', () => {
     render(<IressToggle>{labelText}</IressToggle>);
     const label = screen.getByText(labelText);
     expect(label).toBeInTheDocument();
-    expect(label).not.toHaveClass(toggle({ hiddenLabel: true }).label!);
+    expect(label).not.toHaveClass(GlobalCSSClass.SROnly);
   });
 
-  it.each(layouts)('renders with %s layout', (layout) => {
+  it.each(TOGGLE_LAYOUTS)('renders with %s layout', (layout) => {
     render(
       <IressToggle data-testid="test-id" layout={layout}>
         Test text
@@ -51,7 +47,8 @@ describe('IressToggle', () => {
     );
 
     const element = screen.getByTestId('test-id');
-    expect(element).toHaveClass(toggle({ layout }).toggleBase!);
+
+    expect(element).toHaveClass(styles[`layout__${layout}`]);
     expect(element).toBeInstanceOf(HTMLDivElement);
   });
 
@@ -62,13 +59,9 @@ describe('IressToggle', () => {
 
       const toggleButton = screen.getByRole('switch');
       if (isChecked) {
-        expect(toggleButton).toHaveClass(
-          toggle({ checked: true }).toggleButton!,
-        );
+        expect(toggleButton).toHaveClass(styles.buttonChecked);
       } else {
-        expect(toggleButton).not.toHaveClass(
-          toggle({ checked: true }).toggleButton!,
-        );
+        expect(toggleButton).not.toHaveClass(styles.buttonChecked);
       }
     },
   );
@@ -106,17 +99,15 @@ describe('accessibility', () => {
 describe('interactions & events', () => {
   it('checked when it is clicked', async () => {
     render(<IressToggle>Toggle</IressToggle>);
-    const toggleElement = screen.getByRole('switch');
+    const toggle = screen.getByRole('switch');
 
     // Toggle is not checked as default.
-    expect(toggleElement).not.toHaveClass(
-      toggle({ checked: true }).toggleButton!,
-    );
+    expect(toggle).not.toHaveClass(styles.buttonChecked);
 
-    await userEvent.click(toggleElement);
+    await userEvent.click(toggle);
 
     // Toggle is checked after the click.
-    expect(toggleElement).toHaveClass(toggle({ checked: true }).toggleButton!);
-    expect(toggleElement.getAttribute('aria-checked')).toBe('true');
+    expect(toggle).toHaveClass(styles.buttonChecked);
+    expect(toggle.getAttribute('aria-checked')).toBe('true');
   });
 });

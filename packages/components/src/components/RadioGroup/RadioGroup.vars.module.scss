@@ -1,0 +1,8 @@
+/** Radio group variables
+ * --------------------------------------------------
+ */
+
+.radioGroup {
+  --iress-inline-spacing-x: var(--iress-radio-group-inline-spacing, var(--iress-g-spacing-md));
+  --iress-margin-bottom: var(--iress-radio-margin-bottom, var(--iress-g-spacing-sm));
+}

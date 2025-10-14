@@ -1,4 +1,4 @@
-import { IressBadge, IressTable, type IressTableProps } from '@/main';
+import { IressBadge, IressTable, IressTableProps } from '@/main';
 
 type Props = Partial<IressTableProps<object, never>>;
 

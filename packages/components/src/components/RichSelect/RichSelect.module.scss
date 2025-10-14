@@ -1,0 +1,55 @@
+.richSelect {
+  --iress-display: block;
+  --iress-padding-inline-start: var(--iress-select-beta-label-padding-x, var(--iress-g-spacing-sm));
+
+  display: var(--iress-display);
+
+  &:has(.ids-selectTags) {
+    --iress-padding-inline-start: var(--iress-select-beta-tags-padding-x, var(--iress-g-spacing-sm));
+  }
+}
+
+.popoverContent {
+  --iress-max-height: var(--iress-select-beta-dropdown-max-height, calc(30 * var(--iress-g-rem)));
+  --iress-overflow-y: auto;
+
+  min-width: fit-content;
+  z-index: 1030;
+
+  &:has(.ids-selectSearchInput):not(:has(.ids-select-search--content)) {
+    overflow: hidden;
+  }
+
+  &:not([hidden]):has(.ids-select-body) {
+    display: flex;
+
+    .ids-select-body {
+      flex: 1;
+    }
+  }
+
+  &.autoWidth {
+    min-width: var(--activator-width, fit-content);
+
+    .ids-selectSearchInput {
+      width: 100%;
+    }
+  }
+}
+
+.dropdownSelectedHeading {
+  width: 100%;
+}
+
+.dropdownClear:global(.iress-u-button) {
+  --iress-padding-x: var(--iress-select-beta-label-padding-x, var(--iress-g-spacing-sm));
+  --iress-padding-y: 0;
+  --iress-min-height: 0;
+  --ires-line-height: 1;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}

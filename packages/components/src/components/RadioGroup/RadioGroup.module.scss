@@ -1,0 +1,53 @@
+@use './RadioGroup.vars.module';
+
+/** Radio group
+ * --------------------------------------------------
+ * @prop --iress-inline-spacing-x: Spacing to the right of each inline radio element
+ * @prop --iress-inline-margin-bottom: Spacing to the bottom of each inline radio element (for when they wrap)
+ */
+
+.stack {
+  display: inline-flex;
+  flex-flow: column wrap;
+  row-gap: var(--iress-margin-bottom);
+
+  .ids-radio {
+    flex-basis: 0;
+  }
+}
+
+.block {
+  display: flex;
+  flex-flow: column wrap;
+  row-gap: var(--iress-margin-bottom);
+
+  .ids-radio--label {
+    flex-basis: 100%;
+  }
+}
+
+.inline {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  gap: var(--iress-margin-bottom) var(--iress-inline-spacing-x);
+
+  .ids-radio--label {
+    flex-basis: auto;
+    flex-grow: 0;
+  }
+}
+
+.inlineFlex {
+  display: inline-flex;
+  gap: var(--iress-margin-bottom) var(--iress-inline-spacing-x);
+}
+
+.inlineEqualWidth {
+  display: flex;
+  width: 100%;
+
+  .ids-radio {
+    flex: 1 1 auto;
+  }
+}

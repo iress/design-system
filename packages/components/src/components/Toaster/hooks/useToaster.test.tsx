@@ -1,47 +1,36 @@
 import {
   render,
   renderHook,
+  waitFor,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
 import { PropsWithChildren } from 'react';
 
 import { App as AppWithToasterProvider } from '../mocks/AppWithToasterProvider';
 import userEvent from '@testing-library/user-event';
-import { IressToasterProvider } from '../ToasterProvider';
-import { useToaster } from './useToaster';
-import { ToastProps } from '../components/Toast/Toast';
-import { IressButton } from '@/components/Button';
+import {
+  IressButton,
+  IressToastProps,
+  IressToasterProvider,
+  useToaster,
+} from '@/main';
 import { CloseToastViaProvider } from '../mocks/CloseToastViaProvider';
+
+const TestWrapper = ({ children }: PropsWithChildren) => (
+  <IressToasterProvider>{children}</IressToasterProvider>
+);
 
 const TestTopWrapper = ({ children }: PropsWithChildren) => (
   <IressToasterProvider position="top-center">{children}</IressToasterProvider>
 );
 
-const WithTrigger = ({ status, ...toast }: ToastProps) => {
+const WithTrigger = ({ status, ...toast }: IressToastProps) => {
   const toaster = useToaster();
 
   return (
     <IressButton onClick={() => toaster[status](toast)}>
       Show toast using provider
     </IressButton>
-  );
-};
-
-const WithStringToasts = () => {
-  const toaster = useToaster();
-
-  return (
-    <div>
-      <IressButton onClick={() => toaster.success('Simple success message')}>
-        Show string success
-      </IressButton>
-      <IressButton onClick={() => toaster.error('Simple error message')}>
-        Show string error
-      </IressButton>
-      <IressButton onClick={() => toaster.info('Simple info message')}>
-        Show string info
-      </IressButton>
-    </div>
   );
 };
 
@@ -55,11 +44,35 @@ describe('useToaster hook', () => {
     }).toThrow('useToaster must be used within a IressToasterProvider');
   });
 
+  it('should render with the default position "bottom-end"', async () => {
+    const { result } = renderHook(() => useToaster(), {
+      wrapper: TestWrapper,
+    });
+
+    result.current.success({ content: 'content' });
+
+    await waitFor(() => {
+      expect(result.current.options.position).toBe('bottom-end');
+    });
+  });
+
+  it('should render with the position "top-start"', async () => {
+    const { result } = renderHook(() => useToaster('top-start'), {
+      wrapper: TestWrapper,
+    });
+
+    result.current.error({ content: 'content' });
+
+    await waitFor(() => {
+      expect(result.current.options.position).toBe('top-start');
+    });
+  });
+
   it('opens and closes a toast', async () => {
     const screen = render(
       <AppWithToasterProvider
         toast={{
-          content: 'Test toast',
+          children: 'Test toast',
           status: 'error',
           dismissible: true,
         }}
@@ -107,7 +120,7 @@ describe('useToaster hook', () => {
     expect(secondRound[1]).toBe(firstRound[0]);
   });
 
-  it('closes a toast programatically', async () => {
+  it('closes a test programatically', async () => {
     const screen = render(<CloseToastViaProvider />);
 
     await userEvent.click(
@@ -126,40 +139,5 @@ describe('useToaster hook', () => {
 
     await waitForElementToBeRemoved(toast);
     expect(toast).not.toBeInTheDocument();
-  });
-
-  describe('string toast messages', () => {
-    it('handles string messages for success toasts', async () => {
-      const screen = render(<WithStringToasts />, { wrapper: TestTopWrapper });
-
-      await userEvent.click(
-        screen.getByRole('button', { name: 'Show string success' }),
-      );
-
-      const toast = await screen.findByText('Simple success message');
-      expect(toast).toBeInTheDocument();
-    });
-
-    it('handles string messages for error toasts', async () => {
-      const screen = render(<WithStringToasts />, { wrapper: TestTopWrapper });
-
-      await userEvent.click(
-        screen.getByRole('button', { name: 'Show string error' }),
-      );
-
-      const toast = await screen.findByText('Simple error message');
-      expect(toast).toBeInTheDocument();
-    });
-
-    it('handles string messages for info toasts', async () => {
-      const screen = render(<WithStringToasts />, { wrapper: TestTopWrapper });
-
-      await userEvent.click(
-        screen.getByRole('button', { name: 'Show string info' }),
-      );
-
-      const toast = await screen.findByText('Simple info message');
-      expect(toast).toBeInTheDocument();
-    });
   });
 });

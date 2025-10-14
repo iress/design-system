@@ -6,15 +6,18 @@ import {
   waitFor,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {
+  IressPopover,
+  IressPopoverProps,
+  PopoverCssClass,
+  PopoverRef,
+} from '.';
+import styles from './Popover.module.scss';
 import { IressButton } from '../Button';
 import { axe } from 'jest-axe';
 import { createRef } from 'react';
+import { idsLogger } from '@helpers/utility/idsLogger';
 import { IressMenu, IressMenuItem } from '../Menu';
-import { IressPopover, IressPopoverProps } from './Popover';
-import { PopoverRef } from './hooks/usePopoverImperativeHandle';
-import { popover } from './Popover.styles';
-import { css } from '@/styled-system/css';
-import { GlobalCSSClass } from '@/enums';
 
 const TEST_ID = 'test-component';
 const TEST_ACTIVATOR = 'Activator';
@@ -39,24 +42,19 @@ function renderComponent(
 describe('IressPopover', () => {
   it('renders the component with the correct attributes and classes (hidden)', () => {
     renderComponent({ className: 'test-class' });
-    const classes = popover();
 
-    const popoverElement = screen.getByTestId(TEST_ID);
-    expect(popoverElement).toHaveClass(
-      classes.root!,
-      'test-class',
-      GlobalCSSClass.Popover,
-    );
+    const popover = screen.getByTestId(TEST_ID);
+    expect(popover).toHaveClass(styles.popover, 'test-class');
 
     const activator = screen.getByRole('button');
     expect(activator).toBeInTheDocument();
     expect(activator).toHaveAttribute('aria-expanded', 'false');
     expect(activator).toHaveAttribute('aria-haspopup', 'dialog');
-    expect(activator.closest(`.${classes.activator}`)).not.toBeNull();
+    expect(activator.closest(`.${styles.activator}`)).not.toBeNull();
 
     const content = screen.getByText(TEST_ID);
     expect(content).not.toBeVisible();
-    expect(content).toHaveClass(classes.content!);
+    expect(content).toHaveClass(styles.content);
   });
 
   it('renders the component with the correct attributes and classes (shown)', async () => {
@@ -223,6 +221,7 @@ describe('IressPopover', () => {
         await userEvent.click(activator);
 
         expect(activator).toHaveAttribute('aria-expanded', 'true');
+        expect(activator.parentElement).toHaveClass(PopoverCssClass.Active);
       });
     });
 
@@ -280,18 +279,13 @@ describe('IressPopover', () => {
     describe('container', () => {
       it('changes where the popover is rendered', async () => {
         const container = document.createElement('div');
-        const classes = popover();
-        const contentSelector = classes.content
-          ?.replace(/\./g, '\\.')
-          .replace(/ /g, '.');
-
         renderComponent({
           defaultShow: true,
           container,
         });
 
         await waitFor(() => expect(container.children).toHaveLength(1));
-        expect(container.querySelector(`.${contentSelector}`)).not.toBeNull();
+        expect(container.querySelector(`.${styles.content}`)).not.toBeNull();
       });
     });
 
@@ -307,23 +301,18 @@ describe('IressPopover', () => {
       });
     });
 
-    describe('contentStyle', () => {
-      it('adds styling props to content element', () => {
+    describe('disabledAutoToggle', () => {
+      it('does not toggle the popover', async () => {
         renderComponent({
-          children: 'Content',
-          contentStyle: {
-            className: 'test-class',
-            color: 'colour.neutral.70',
-            style: { backgroundColor: 'red' },
-          },
+          disabledAutoToggle: true,
         });
 
-        const content = screen.getByText('Content');
-        expect(content).toHaveClass(
-          'test-class',
-          css({ color: 'colour.neutral.70' }),
-        );
-        expect(content).toHaveStyle({ 'background-color': 'rgb(255, 0, 0)' });
+        const activator = screen.getByRole('button');
+        expect(activator).toHaveAttribute('aria-expanded', 'false');
+
+        await userEvent.click(activator);
+
+        expect(activator).toHaveAttribute('aria-expanded', 'false');
       });
     });
 
@@ -355,9 +344,7 @@ describe('IressPopover', () => {
         });
 
         const content = screen.getByText(TEST_ID);
-        expect(content).toHaveClass(
-          popover({ matchActivatorWidth: true }).content!,
-        );
+        expect(content).toHaveStyle({ maxWidth: 'none' });
       });
     });
 
@@ -473,6 +460,19 @@ describe('IressPopover', () => {
         );
 
         expect(content).not.toBeVisible();
+      });
+    });
+
+    describe('width', () => {
+      it('changes the width of the popover content', () => {
+        renderComponent({
+          width: '20rem',
+        });
+
+        const content = screen.getByText(TEST_ID);
+        expect(content).toHaveStyle({ maxWidth: '20rem', width: '100%' });
+
+        expect(idsLogger).toBeCalledTimes(1);
       });
     });
 

@@ -1,0 +1,66 @@
+.skeleton {
+  --iress-fallback-height: var(--iress-skeleton-bone-fallback-height, var(--iress-default-min-height));
+  --iress-bone-background-color: var(--iress-skeleton-bone-background-color, var(--iress-default-skeleton-background-color));
+  --iress-bone-highlight-color: var(--iress-skeleton-bone-highlight-color, var(--iress-default-background-color-alt));
+  --iress-bone-fallback-background-image: linear-gradient(
+    110deg,
+    var(--iress-bone-background-color) 63%,
+    var(--iress-bone-highlight-color) 74%,
+    var(--iress-bone-highlight-color) 78%,
+    var(--iress-bone-background-color) 84%,
+    var(--iress-bone-background-color) 100%
+  );
+  --iress-bone-background-image: var(--iress-skeleton-bone-background-image, var(--iress-bone-fallback-background-image));
+  --iress-bone-border-radius: var(--iress-skeleton-bone-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius)));
+  --iress-bone-transition-speed: var(--iress-skeleton-bone-transition-speed, 2s);
+
+  width: 100%;
+  background-color: var(--iress-bone-background-color);
+  background-size: 200% 100%;
+  background-position: 0 center;
+  background-image: linear-gradient(
+    110deg,
+    var(--iress-bone-background-color) 63%,
+    var(--iress-bone-highlight-color) 74%,
+    var(--iress-bone-highlight-color) 78%,
+    var(--iress-bone-background-color) 84%,
+    var(--iress-bone-background-color) 100%
+  );
+  animation: var(--iress-bone-transition-speed) ease-in-out iress-skeleton-loading infinite;
+  border-radius: var(--iress-bone-border-radius);
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+
+  &.rect,
+  &.circle {
+    height: var(--iress-fallback-height);
+  }
+
+  &.circle {
+    border-radius: 50%;
+  }
+
+  &.text * {
+    background-color: transparent;
+  }
+}
+
+@keyframes iress-skeleton-loading {
+  0% {
+    background-position-x: 0;
+  }
+
+  40%,
+  100% {
+    background-position-x: -200%;
+  }
+}
+
+/* Windows High Contrast Mode */
+@media (prefers-contrast: more) {
+  .skeleton {
+    outline: 1px solid transparent;
+  }
+}

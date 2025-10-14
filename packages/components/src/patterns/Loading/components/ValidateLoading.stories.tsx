@@ -1,7 +1,6 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { type FC } from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+import { FC } from 'react';
 import { ValidateLoading } from './ValidateLoading';
-import { IressButton, IressInline } from '@/main';
 
 // This is a pattern for IressLoading, hence we change the name
 (ValidateLoading as FC).displayName = 'IressLoading';
@@ -19,10 +18,4 @@ export const Validate: Story = {
     pattern: 'validate',
     loading: true,
   },
-  render: (args) => (
-    <IressInline gap="sm">
-      <ValidateLoading {...args} />
-      <IressButton mode="tertiary">Cancel</IressButton>
-    </IressInline>
-  ),
 };

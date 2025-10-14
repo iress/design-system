@@ -3,14 +3,14 @@ import { axe } from 'jest-axe';
 import {
   IressRadioGroup,
   IressRadioGroupProps,
-  radioGroup as radioGroupStyles,
+  shouldFireRadioGroupBlur,
 } from '.';
 import { getFinancialReviewChildren } from './mocks/radioGroupChildren';
+import styles from './RadioGroup.module.scss';
+import radioStyles from '../Radio/Radio.module.scss';
 import userEvent from '@testing-library/user-event';
 import { IressField, IressFieldProps } from '../Field';
 import { idsLogger } from '@helpers/utility/idsLogger';
-import { radio as radioStyles } from '../Radio/Radio.styles';
-import { GlobalCSSClass } from '@/enums';
 
 const TEST_ID = 'test-component';
 const CHILDREN_TEST_ID = 'test-children';
@@ -58,8 +58,9 @@ describe('IressRadioGroup', () => {
     const component = screen.getByTestId(TEST_ID);
     expect(component).toHaveAttribute('role', 'radiogroup');
     expect(component).toHaveClass(
-      radioGroupStyles({ layout: 'stack' }),
-      GlobalCSSClass.RadioGroup,
+      'test-class',
+      styles.radioGroup,
+      styles.stack,
     );
 
     screen.getAllByRole('radio').forEach((input) => {
@@ -76,19 +77,7 @@ describe('IressRadioGroup', () => {
         });
 
         screen.getAllByTestId(CHILDREN_TEST_ID).forEach((radio) => {
-          const input = radio.querySelector('input');
-          const label = input?.nextElementSibling;
-
-          expect(input).toHaveClass(
-            radioStyles({ hiddenControl: true }).input!,
-          );
-          expect(label).toHaveClass(
-            radioStyles({ hiddenControl: true }).label!,
-          );
-          const svg = radio.querySelector('svg');
-          expect(svg).toHaveClass(
-            radioStyles({ hiddenControl: true }).checkboxMark!,
-          );
+          expect(radio).toHaveClass(radioStyles.hiddenControl);
         });
       });
     });
@@ -100,9 +89,7 @@ describe('IressRadioGroup', () => {
         });
 
         const radioGroup = screen.getByTestId(TEST_ID);
-        expect(radioGroup).toHaveClass(
-          radioGroupStyles({ layout: 'inlineEqualWidth' }),
-        );
+        expect(radioGroup).toHaveClass(styles.inlineEqualWidth);
       });
     });
 
@@ -122,6 +109,90 @@ describe('IressRadioGroup', () => {
           expect.objectContaining({ target: input }),
           'home',
         );
+      });
+    });
+
+    describe('onBlur', () => {
+      it('does not call onBlur when clicking within the radio group', async () => {
+        const onBlur = vi.fn();
+        const screen = renderRadioGroup({
+          onBlur,
+        });
+
+        const firstRadio = screen.getByRole('radio', {
+          name: 'Buying my first home',
+        });
+        const secondRadio = screen.getByRole('radio', {
+          name: 'Saving for a holiday',
+        });
+
+        // Click on first radio - should not trigger onBlur
+        await userEvent.click(firstRadio);
+        expect(onBlur).not.toHaveBeenCalled();
+
+        // Click on second radio - should not trigger onBlur
+        await userEvent.click(secondRadio);
+        expect(onBlur).not.toHaveBeenCalled();
+      });
+
+      it('calls onBlur when focus moves to an element outside the radio group', async () => {
+        const onBlur = vi.fn();
+        const screen = render(
+          <div>
+            <IressRadioGroup onBlur={onBlur} data-testid={TEST_ID}>
+              {getFinancialReviewChildren(undefined, CHILDREN_TEST_ID)}
+            </IressRadioGroup>
+            <button>Outside button</button>
+          </div>,
+        );
+
+        const firstRadio = screen.getByRole('radio', {
+          name: 'Buying my first home',
+        });
+        const outsideButton = screen.getByRole('button', {
+          name: 'Outside button',
+        });
+
+        // Focus first radio
+        await userEvent.click(firstRadio);
+        expect(onBlur).not.toHaveBeenCalled();
+
+        // Focus outside element - should trigger onBlur
+        await userEvent.click(outsideButton);
+        expect(onBlur).toHaveBeenCalledTimes(1);
+      });
+
+      it('handles the tab + click scenario correctly', async () => {
+        const onBlur = vi.fn();
+        const screen = render(
+          <div>
+            <button>Before button</button>
+            <IressRadioGroup onBlur={onBlur} data-testid={TEST_ID}>
+              {getFinancialReviewChildren(undefined, CHILDREN_TEST_ID)}
+            </IressRadioGroup>
+            <button>After button</button>
+          </div>,
+        );
+
+        const beforeButton = screen.getByRole('button', {
+          name: 'Before button',
+        });
+        const firstRadio = screen.getByRole('radio', {
+          name: 'Buying my first home',
+        });
+        const radioGroup = screen.getByRole('radiogroup');
+
+        // Start with focus on before button
+        await userEvent.click(beforeButton);
+
+        // Tab to radio group (simulating keyboard navigation)
+        radioGroup.focus();
+
+        // Now click on a radio (simulating the bug scenario)
+        await userEvent.click(firstRadio);
+
+        // onBlur should NOT be called because we're clicking within the RadioGroup
+        expect(onBlur).not.toHaveBeenCalled();
       });
     });
 
@@ -168,18 +239,18 @@ describe('IressRadioGroup', () => {
           value: 'home',
         });
 
-        await waitFor(() => expect(idsLogger).toHaveBeenCalledTimes(1));
+        await waitFor(() => expect(idsLogger).toBeCalledTimes(1));
       });
     });
 
-    describe('readOnly', () => {
+    describe('readonly', () => {
       it('renders a hidden input with the correct value, if checked', () => {
         const screen = renderRadioGroup({
           defaultValue: 'home',
-          readOnly: true,
+          readonly: true,
         });
 
-        // No radio is rendered in readOnly mode
+        // No radio is rendered in readonly mode
         const radio = screen.queryByRole('radio');
         expect(radio).not.toBeInTheDocument();
 
@@ -193,10 +264,10 @@ describe('IressRadioGroup', () => {
 
       it('renders nothing, if nothing checked', () => {
         const screen = renderRadioGroup({
-          readOnly: true,
+          readonly: true,
         });
 
-        // No radio is rendered in readOnly mode if none were selected
+        // No radio is rendered in readonly mode if none were selected
         const radioGroup = screen.getByRole('radiogroup');
         expect(radioGroup.innerHTML).toBe('');
       });
@@ -237,17 +308,49 @@ describe('IressRadioGroup', () => {
         touch: true,
       });
 
-      screen.getAllByTestId(CHILDREN_TEST_ID).forEach((radio) => {
-        const input = radio.querySelector('input');
-        const label = input?.nextElementSibling;
-
-        expect(input).toHaveClass(radioStyles({ touch: true }).input!);
-        expect(label).toHaveClass(radioStyles({ touch: true }).label!);
-
-        const svg = label?.querySelector('svg');
-        expect(svg).toBeInTheDocument();
-        expect(svg).toHaveClass(radioStyles({ touch: true }).radioMark!);
+      screen.getAllByRole('radio').forEach((input) => {
+        expect(input).toHaveClass(radioStyles.input);
       });
+    });
+  });
+
+  describe('shouldFireRadioGroupBlur', () => {
+    // Helper to create a mock HTMLElement with minimal API for contains
+    function createElementWithChildren(
+      children: HTMLElement[] = [],
+    ): HTMLElement {
+      const el = document.createElement('div');
+      children.forEach((c) => el.appendChild(c));
+      return el;
+    }
+
+    it('returns false when new focus target is inside radio group', () => {
+      const child = document.createElement('button');
+      const group = createElementWithChildren([child]);
+      expect(shouldFireRadioGroupBlur(group, child, child)).toBe(false);
+    });
+
+    it('returns true when focus moves outside the group', () => {
+      const child = document.createElement('button');
+      const outside = document.createElement('button');
+      const group = createElementWithChildren([child]);
+      expect(shouldFireRadioGroupBlur(group, outside, child)).toBe(true);
+    });
+
+    it('returns true when relatedTarget is null and event target is the group element', () => {
+      const group = createElementWithChildren();
+      expect(shouldFireRadioGroupBlur(group, null, group)).toBe(true);
+    });
+
+    it('returns false when relatedTarget is null and event target is NOT the group element', () => {
+      const group = createElementWithChildren();
+      const other = document.createElement('div');
+      expect(shouldFireRadioGroupBlur(group, null, other)).toBe(false);
+    });
+
+    it('returns true when group element is null (defensive fallback)', () => {
+      const outside = document.createElement('div');
+      expect(shouldFireRadioGroupBlur(null, outside, outside)).toBe(true);
     });
   });
 });

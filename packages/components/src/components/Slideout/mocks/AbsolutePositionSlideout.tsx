@@ -3,23 +3,23 @@ import {
   IressButton,
   IressText,
   IressSlideout,
-  type IressSlideoutProps,
+  IressSlideoutProps,
 } from '@/main';
 import { useRef, useState } from 'react';
-import { cssVars } from '@iress-oss/ids-tokens';
 
 export const AbsolutePositionSlideout = (args: IressSlideoutProps) => {
   const [show, setShow] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   return (
-    <IressStack gap="md">
+    <IressStack gutter="md">
       <IressButton onClick={() => setShow(true)}>Show slideout</IressButton>
       <div
         ref={containerRef}
         style={{
           height: '300px',
-          border: `1px solid ${cssVars.colour.neutral[30]}`,
+          border:
+            '1px solid var(--iress-g-border-color, var(--iress-default-border-color))',
           padding: '1rem',
           overflow: 'hidden',
           position: 'relative',
@@ -40,7 +40,7 @@ export const AbsolutePositionSlideout = (args: IressSlideoutProps) => {
           onShowChange={setShow}
           style={
             {
-              position: 'absolute',
+              '--iress-position': 'absolute',
             } as never
           }
         />

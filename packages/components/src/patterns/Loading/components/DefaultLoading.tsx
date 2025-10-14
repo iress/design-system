@@ -1,13 +1,13 @@
 import { type ReactNode, useEffect, useState } from 'react';
 import { IressSpinner } from '@/components/Spinner';
 import { IressInline } from '@/components/Inline';
+import { type IressHTMLAttributes } from '@/interfaces';
 import { IressText } from '@/components/Text';
-import { loading } from '../Loading.styles';
-import { type IressStyledProps } from '@/types';
-import { styled } from '@/styled-system/jsx';
-import { cx } from '@/styled-system/css';
+import classNames from 'classnames';
+import styles from './DefaultLoading.module.scss';
+import loadingStyles from '../Loading.module.scss';
 
-export interface DefaultLoadingProps extends IressStyledProps {
+export interface DefaultLoadingProps extends IressHTMLAttributes {
   /**
    * Message to display when the loading time is longer than expected.
    * @default 'This is taking longer than expected...'
@@ -37,7 +37,7 @@ export interface DefaultLoadingProps extends IressStyledProps {
 
 export const DefaultLoading = ({
   children = (
-    <IressInline gap="sm" verticalAlign="middle">
+    <IressInline gutter="sm" verticalAlign="middle">
       <IressSpinner /> This is taking longer than expected...
     </IressInline>
   ),
@@ -48,11 +48,6 @@ export const DefaultLoading = ({
 }: DefaultLoadingProps) => {
   const [show, setShow] = useState(false);
 
-  const styles = loading({
-    pattern: 'default',
-    showIndicator: show,
-  });
-
   useEffect(() => {
     const showTimeout = setTimeout(() => setShow(true), timeout);
 
@@ -62,10 +57,24 @@ export const DefaultLoading = ({
   }, [timeout]);
 
   return (
-    <styled.div {...restProps} className={cx(styles.root, className)}>
-      <IressText className={styles.message}>
+    <div
+      {...restProps}
+      className={classNames(
+        styles.position,
+        className,
+        loadingStyles['fade-in'],
+        {
+          [loadingStyles['fade-in--active']]: show,
+        },
+      )}
+    >
+      <IressText
+        className={classNames(styles.message, loadingStyles['slide-in'], {
+          [loadingStyles['slide-in--active']]: show,
+        })}
+      >
         {show ? children : screenReaderText}
       </IressText>
-    </styled.div>
+    </div>
   );
 };

@@ -1,2 +1,2 @@
+export * from './Panel.types';
 export * from './Panel';
-export * from './Panel.styles';

@@ -1,97 +1,75 @@
-import { type ControlledValue, useIdIfNeeded } from '../../hooks';
+import classNames from 'classnames';
+import { type IressButtonGroupProps } from './ButtonGroup.types';
+import styles from './ButtonGroup.module.scss';
+import { useIdIfNeeded } from '../../hooks';
+import { IressButtonGroupProvider } from './ButtonGroupProvider';
+import React, { useMemo } from 'react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
-import { buttonGroup } from './ButtonGroup.styles';
-import { cx } from '@/styled-system/css';
-import { type FormControlValue, type IressStyledProps } from '@/types';
-import { type ReactNode } from 'react';
-import { styled } from '@/styled-system/jsx';
-import { ButtonGroupProvider } from './ButtonGroupProvider';
+import { toArray } from '@helpers/formatting/toArray';
+import { IressButton } from '../Button/Button';
 import { GlobalCSSClass } from '@/enums';
 
-export interface IressButtonGroupProps<
-  T = FormControlValue,
-  TMultiple extends boolean = false,
-> extends Omit<IressStyledProps, 'onChange'> {
-  /**
-   * Content of the button group, usually multiple `IressButton`.
-   */
-  children?: ReactNode;
-
-  /**
-   * Initially selected value, use for uncontrolled components.
-   */
-  defaultSelected?: ControlledValue<T, TMultiple>;
-
-  /**
-   * Hides the label if set; label will still be read out by screen readers.
-   */
-  hiddenLabel?: boolean;
-
-  /**
-   * Sets the label text for the button group.
-   * If passed an element, it will render the element with an id, to ensure its connection to the button group.
-   */
-  label: ReactNode;
-
-  /**
-   * Allows multiple buttons to be selected.
-   */
-  multiple?: TMultiple;
-
-  /**
-   * Called when a user activates one of its children buttons.
-   */
-  onChange?: (newValue?: ControlledValue<T, TMultiple>) => void;
-
-  /**
-   * Selected value, use for controlled components.
-   */
-  selected?: ControlledValue<T, TMultiple>;
-}
-
-export const IressButtonGroup = <
-  T = FormControlValue,
-  TMultiple extends boolean = false,
->({
+export const IressButtonGroup = ({
   children,
   className,
   'data-testid': dataTestId,
   defaultSelected,
   hiddenLabel,
-  label,
+  label: labelProp,
   multiple,
   onChange,
+  options,
   selected,
   ...restProps
-}: IressButtonGroupProps<T, TMultiple>) => {
+}: IressButtonGroupProps) => {
   const id = useIdIfNeeded({ id: restProps.id });
   const labelId = `${id}--label`;
-  const classes = buttonGroup({ hiddenLabel });
+
+  const label = useMemo(() => {
+    if (typeof labelProp === 'string')
+      return (
+        <div
+          id={labelId}
+          className={classNames(styles.label, {
+            [GlobalCSSClass.SROnly]: hiddenLabel,
+          })}
+          data-testid={propagateTestid(dataTestId, 'label')}
+        >
+          {labelProp}
+        </div>
+      );
+
+    return React.cloneElement(labelProp, {
+      id: labelId,
+    });
+  }, [dataTestId, hiddenLabel, labelId, labelProp]);
 
   return (
-    <ButtonGroupProvider
+    <IressButtonGroupProvider
       defaultSelected={defaultSelected}
       multiple={multiple}
       onChange={onChange}
       selected={selected}
     >
-      <styled.div
-        className={cx(className, classes.root, GlobalCSSClass.ButtonGroup)}
+      <div
+        className={classNames(className, styles.buttonGroup)}
         id={id}
         data-testid={dataTestId}
         {...restProps}
       >
-        <div
-          className={classes.label}
-          data-testid={propagateTestid(dataTestId, 'label')}
-          id={labelId}
-        >
-          {label}
-        </div>
-        <div role="group" aria-labelledby={labelId} className={classes.values}>
+        {label}
+        <div role="group" aria-labelledby={labelId} className={styles.values}>
           {children}
+          {toArray<string>(options).map((option) => (
+            <IressButton
+              key={option}
+              data-testid={propagateTestid(dataTestId, 'button__button')}
+            >
+              {option}
+            </IressButton>
+          ))}
         </div>
-      </styled.div>
-    </ButtonGroupProvider>
+      </div>
+    </IressButtonGroupProvider>
   );
 };

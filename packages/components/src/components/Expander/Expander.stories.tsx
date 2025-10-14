@@ -1,23 +1,39 @@
-import { IressExpander } from '.';
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { EXPANDER_MODES, IressExpander } from '.';
+
+import { Meta, StoryObj } from '@storybook/react';
+import { IressCol } from '../Col';
+import { IressRow } from '../Row';
 import { IressText } from '../Text';
 import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { MultipleExpander } from './mocks/MultipleExpander';
 import MultipleExpanderSource from './mocks/MultipleExpander.tsx?raw';
-import { IressStack } from '../Stack';
 
 export default {
   title: 'Components/Expander',
   component: IressExpander,
-  tags: ['updated'],
 } as Meta<typeof IressExpander>;
 
 export const Default: StoryObj<typeof IressExpander> = {
   args: {
     activator: 'Expander activator',
-    children: 'Expander content will go here',
+    children:
+      'Expander content will go here (it is unformatted by default, use IressText to format the text)',
   },
 };
+
+const activator = (
+  <div>
+    <IressText element="h3">Expander activator</IressText>
+  </div>
+);
+
+const content = (
+  <IressText>
+    Okay, so 9:00 you are strolling through the parking lot, you see us
+    struggling in the car, you walk up, you open the door and you say, your
+    line, George.
+  </IressText>
+);
 
 export const Mode: StoryObj<typeof IressExpander> = {
   args: {
@@ -27,16 +43,22 @@ export const Mode: StoryObj<typeof IressExpander> = {
     ...disableArgTypes(['mode', 'activator', 'children']),
   },
   render: (args) => (
-    <IressStack gap="lg">
-      <IressStack gap="xs">
-        <IressText element="h2">Section (default)</IressText>
-        <IressExpander {...args} mode="section" />
-      </IressStack>
-      <IressStack gap="xs">
-        <IressText element="h2">Link</IressText>
-        <IressExpander {...args} mode="link" />
-      </IressStack>
-    </IressStack>
+    <div className="iress-u-stack iress--gutter--md">
+      {EXPANDER_MODES.map((mode) => (
+        <div key={mode}>
+          <IressText element="h2">{mode} mode</IressText>
+          <div className="iress-u-inline iress--gutter--md" key={mode}>
+            <IressExpander {...args} mode={mode} activator={activator}>
+              <IressRow gutter="md" verticalAlign="stretch">
+                <IressCol span={{ sm: 6 }} data-testid="security-infra">
+                  {content}
+                </IressCol>
+              </IressRow>
+            </IressExpander>
+          </div>
+        </div>
+      ))}
+    </div>
   ),
 };
 
@@ -44,6 +66,7 @@ export const Open: StoryObj<typeof IressExpander> = {
   args: {
     ...Default.args,
     open: true,
+    mode: 'heading',
   },
 };
 

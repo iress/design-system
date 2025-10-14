@@ -1,0 +1,37 @@
+.root {
+    position: relative;
+
+    &.loaded {
+        width: fit-content;
+    }
+}
+
+.message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-inline: var(--iress-spacing-200, var(--iress-g-spacing-sm, 0.5rem));
+    padding-block: var(--iress-spacing-100, var(--iress-g-spacing-xs, 0.25rem));
+    border-radius: var(--iress-radius-025, var(--iress-g-border-radius, 0.25rem));
+    background: var(--iress-colour-neutral-20, var(--iress-g-default-background, #F9F9F9));
+    color: var(--iress-colour-neutral-70, var(--iress-g-muted-text-color, #6D7278));
+    border: var(--iress-colour-neutral-30, var(--iress-g-border-color, #D7D8DA)) solid 1px;
+    width: fit-content;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0.75;
+    background-color: var(--iress-colour-neutral-10, var(--iress-g-page-background, #FFF));
+    transition: opacity 0.3s ease-in-out;
+}
+
+.overlayStrong {
+    opacity: 0.9;
+}
+
+.spinner {
+    display: inline-block !important;
+}

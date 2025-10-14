@@ -1,7 +1,7 @@
 import {
   IressButton,
   IressToasterProvider,
-  type IressToasterProviderProps,
+  IressToasterProviderProps,
   useToaster,
 } from '@/main';
 
@@ -12,7 +12,7 @@ const ToastWithTrigger = () => {
     <IressButton
       onClick={() =>
         toaster.success({
-          content: 'This is a really quick toast',
+          children: 'This is a really quick toast',
           timeout: 1000,
         })
       }

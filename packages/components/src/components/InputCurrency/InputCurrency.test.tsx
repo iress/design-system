@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import userEvent from '@testing-library/user-event';
 import { IressInputCurrency } from './InputCurrency';
-import { GlobalCSSClass } from '@/enums';
+import styles from '../Input/Input.module.scss';
 
 describe('IressInputCurrency', () => {
   const defaultProps = {
@@ -18,9 +18,6 @@ describe('IressInputCurrency', () => {
       await userEvent.tab();
       expect(input).toBeInTheDocument();
       expect(input).toHaveValue('12,345.00');
-      expect(input.closest(`.${GlobalCSSClass.Input}`)).toHaveClass(
-        GlobalCSSClass.InputCurrency,
-      );
     });
 
     it('should handle numbers with decimal places', async () => {
@@ -58,13 +55,13 @@ describe('IressInputCurrency', () => {
         <IressInputCurrency {...defaultProps} alignRight value="12345.67" />,
       );
       const input = screen.getByRole('textbox');
-      expect(input).toHaveClass('ta_right');
+      expect(input).toHaveClass(styles.alignRight);
     });
 
     it('should not apply alignRight class by default', () => {
       render(<IressInputCurrency {...defaultProps} value="12345.67" />);
       const input = screen.getByRole('textbox');
-      expect(input).not.toHaveClass('ta_right');
+      expect(input).not.toHaveClass(styles.alignRight);
     });
   });
 

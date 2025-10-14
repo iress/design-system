@@ -1,13 +1,13 @@
 import { renderHook } from '@testing-library/react';
+import { PopoverContextValue, PopoverVirtualNode } from '../Popover.types';
 import { MutableRefObject, PropsWithChildren } from 'react';
-import { PopoverVirtualNode, usePopoverItem } from './usePopoverItem';
+import { usePopoverItem } from './usePopoverItem';
 import { TestPopoverProvider } from '../mocks/TestPopoverProvider';
-import { PopoverHookReturn } from './usePopover';
 
 function renderHookInPopover(
   typeAheadLabel?: string,
   virtualNode: PopoverVirtualNode | null = null,
-  context: Partial<PopoverHookReturn> = {},
+  context: Partial<PopoverContextValue> = {},
 ) {
   return renderHook(() => usePopoverItem(typeAheadLabel, virtualNode), {
     wrapper: ({ children }: PropsWithChildren) => (
@@ -23,7 +23,7 @@ describe('usePopoverItem', () => {
 
     expect(props).toEqual({
       id: expect.any(String) as string,
-      isActiveInPopover: false,
+      isActiveInPopover: undefined,
       ref: expect.any(Function) as MutableRefObject<HTMLElement>,
       tabIndex: undefined,
     });
@@ -36,7 +36,7 @@ describe('usePopoverItem', () => {
 
       expect(props).toEqual({
         id: expect.any(String) as string,
-        isActiveInPopover: false,
+        isActiveInPopover: undefined,
         ref: expect.any(Function) as MutableRefObject<HTMLElement>,
         tabIndex: -1,
       });

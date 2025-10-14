@@ -4,6 +4,7 @@ export const CurrencyInTable = () => {
   return (
     <IressTable
       caption="My investments"
+      style={{ '--iress-cell-vertical-align': 'middle' } as React.CSSProperties}
       columns={[
         {
           key: 'investmentName',

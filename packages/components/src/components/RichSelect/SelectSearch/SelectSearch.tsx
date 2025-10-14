@@ -1,46 +1,33 @@
-import { cx } from '@/styled-system/css';
-import { selectSearch } from './SelectSearch.styles';
-import { handlePopoverTabKey } from '@/components/Popover/helpers/handlePopoverTabKey';
-import { useContext } from 'react';
-import { PopoverContext } from '@/components/Popover/hooks/usePopover';
-import { GlobalCSSClass } from '@/enums';
-import {
-  IressInputPopover,
-  type IressInputPopoverProps,
-} from '@/components/Popover';
+import { IressInputPopover } from '@/main';
+import { type IressSelectSearchProps } from './SelectSearch.types';
+import classNames from 'classnames';
 
-export type IressSelectSearchProps = Omit<
-  IressInputPopoverProps,
-  'disabledAutoToggle' | 'displayMode' | 'show' | 'width'
->;
+import styles from './SelectSearch.module.scss';
+import bodyStyles from '../SelectBody/SelectBody.module.scss';
+import { usePopover } from '@/components/Popover/hooks/usePopover';
+import { handlePopoverTabKey } from '@/components/Popover/helpers/handlePopoverTabKey';
 
 export const IressSelectSearch = ({
   className,
   contentClassName,
-  contentStyle,
   onKeyDown,
   ...restProps
 }: IressSelectSearchProps) => {
-  const parentPopover = useContext(PopoverContext);
-  const searchClasses = selectSearch();
+  const parentPopover = usePopover();
 
   return (
     <IressInputPopover
       {...restProps}
-      className={cx(
-        searchClasses.root,
+      className={classNames(
+        styles.selectSearch,
+        bodyStyles.selectBody,
         className,
-        GlobalCSSClass.RichSelectSearch,
       )}
-      contentStyle={{
-        ...contentStyle,
-        className: cx(
-          searchClasses.content,
-          contentClassName,
-          GlobalCSSClass.RichSelectSearchContent,
-          contentStyle?.className,
-        ),
-      }}
+      contentClassName={classNames(
+        styles.content,
+        bodyStyles.children,
+        contentClassName,
+      )}
       displayMode="inline"
       onKeyDown={(e) => {
         onKeyDown?.(e);

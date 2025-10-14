@@ -1,0 +1,70 @@
+@use './InputBase.vars.module';
+
+.formControl {
+  border-width: 0;
+  border-radius: var(--iress-border-radius);
+  padding: var(--iress-padding-y) var(--iress-padding-x);
+  background-color: var(--iress-background-color);
+  font-size: var(--iress-font-size);
+  font-family: var(--iress-font-family);
+  font-weight: var(--iress-font-weight);
+  color: var(--iress-text-color);
+  transition: var(--iress-transition-hover);
+  height: calc(var(--iress-min-height) - (2 * var(--iress-border-width)));
+  flex: 1 1 auto;
+  max-width: 100%;
+  min-width: var(--iress-g-font-size-rem);
+
+  &:focus {
+    color: var(--iress-focus-text-color);
+    outline: none;
+  }
+
+  &::placeholder {
+    color: var(--iress-placeholder-text-color);
+  }
+
+  &:not([class*='iress-width']) {
+    width: 100%;
+  }
+}
+
+.formControl[type='search']::-webkit-search-decoration,
+.formControl[type='search']::-webkit-search-cancel-button,
+.formControl[type='search']::-webkit-search-results-button,
+.formControl[type='search']::-webkit-search-results-decoration {
+  appearance: none;
+}
+
+:not(output):-moz-ui-invalid {
+  box-shadow: none;
+}
+
+.formControl::-webkit-calendar-picker-indicator {
+  filter: var(--iress-calendar-icon-filter);
+}
+
+.textarea {
+  line-height: 1.5;
+  height: auto;
+
+  .addon {
+    align-items: flex-start;
+
+    > * {
+      padding-block-start: calc(0.75 * var(--iress-g-font-size-rem));
+    }
+  }
+}
+
+.readonly {
+  display: flex;
+  align-items: center;
+  height: auto;
+  min-height: calc(var(--iress-min-height) - (2 * var(--iress-border-width)));
+  line-height: inherit;
+}
+
+.readonlyAlignRight {
+  justify-content: flex-end;
+}

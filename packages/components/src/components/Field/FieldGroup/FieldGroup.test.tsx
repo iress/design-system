@@ -1,8 +1,9 @@
 import { render } from '@testing-library/react';
+import styles from './FieldGroup.module.scss';
 import { axe } from 'jest-axe';
-import { IressFieldGroup, IressFieldGroupProps } from './FieldGroup';
-import { GlobalCSSClass, IressField, IressInput } from '@/main';
-import { fieldGroup } from './FieldGroup.styles';
+import { IressFieldGroupProps } from './FieldGroup.types';
+import { IressFieldGroup } from './FieldGroup';
+import { IressField, IressInput } from '@/main';
 
 const TEST_ID = 'test-component';
 const TEST_LABEL = 'Label text';
@@ -36,14 +37,10 @@ describe('IressFieldGroup', () => {
     });
 
     const field = screen.getByRole('group', { name: TEST_LABEL });
-    expect(field).toHaveClass(
-      fieldGroup().root!,
-      'hash-brown',
-      GlobalCSSClass.FieldGroup,
-    );
+    expect(field).toHaveClass(styles.fieldGroup, 'hash-brown');
 
     const legend = screen.getByText(TEST_LABEL);
-    expect(legend.closest('legend')).toHaveClass(fieldGroup().legend!);
+    expect(legend.closest('legend')).toHaveClass(styles.legend);
 
     expect(screen.queryByTestId(`${TEST_ID}__hint`)).not.toBeInTheDocument();
     expect(screen.queryByTestId(`${TEST_ID}__error`)).not.toBeInTheDocument();
@@ -99,7 +96,7 @@ describe('IressFieldGroup', () => {
         });
 
         const field = screen.getByRole('group');
-        expect(field).toHaveClass(fieldGroup({ inline: true }).root!);
+        expect(field).toHaveClass(styles.inline);
       });
     });
 
@@ -110,7 +107,18 @@ describe('IressFieldGroup', () => {
         });
 
         const field = screen.getByRole('group');
-        expect(field).toHaveClass(fieldGroup({ join: true }).root!);
+        expect(field).toHaveClass(styles.join);
+      });
+    });
+
+    describe('optional', () => {
+      it('renders the field as optional', () => {
+        const screen = renderComponent({
+          optional: true,
+        });
+
+        const optional = screen.getByText('(optional)');
+        expect(optional).toBeInTheDocument();
       });
     });
 

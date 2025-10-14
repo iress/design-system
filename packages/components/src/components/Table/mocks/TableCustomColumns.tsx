@@ -2,7 +2,7 @@ import {
   IressBadge,
   IressTable,
   IressTableFormattedValue,
-  type IressTableProps,
+  IressTableProps,
 } from '@/main';
 
 type Props = Partial<IressTableProps<object, never>>;
@@ -56,7 +56,7 @@ export const TableCustomColumns = (args: Props) => (
       {
         key: 'cost',
         label: 'Cost',
-        textAlign: 'right',
+        align: 'right',
         format: renderColumn,
       },
     ]}

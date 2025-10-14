@@ -1,0 +1,105 @@
+@use 'Expander.vars.module';
+
+/** Expander
+ * --------------------------------------------------
+ *  --iress-margin-block-end: Margin at the bottom of an expander
+ *  --iress-transition-type: Transition type of expander
+ *  --iress-transition-duration: Transition duration of expander
+ *  --iress-activator-padding-inline-start: Inline start padding of activator button
+ *  --iress-activator-padding-inline-end: Inline end padding of activator button
+ *  --iress-activator-padding-block-start: Block start padding of activator button
+ *  --iress-activator-padding-block-end: Block start padding of activator button
+ *  --iress-activator-padding-block-end: Block start padding of activator button
+ *  --iress-activator-background-color: Background color of activator button
+ *  --iress-activator-chevron-border-width: Border width of activator button chevron
+ *  --iress-activator-chevron-size: Size of activator button chevron
+ *  --iress-activator-chevron-spacing: Space from the end of activator button for chevron
+ *  --iress-activator-text-color: Text color of activator button
+ *  --iress-activator-text-decoration: Text decoration of activator button
+ *  --iress-activator-display: Display setting of activator button
+ *  --iress-activator-width: Width of activator button
+ *  --iress-activator-border-width: Border width of activator button
+ *  --iress-activator-border-color: Border color of activator button
+ *  --iress-container-padding-x: Horizontal padding for the container
+ *  --iress-container-padding-y: Vertical padding for the container
+ */
+
+.expander {
+  display: block;
+  margin-block-end: var(--iress-margin-block-end);
+
+  .activator {
+    display: var(--iress-activator-display);
+    padding-inline: var(--iress-activator-padding-inline-start) var(--iress-activator-padding-inline-end);
+    padding-block: var(--iress-activator-padding-block-start) var(--iress-activator-padding-block-end);
+    background-color: var(--iress-activator-background-color);
+    color: var(--iress-activator-text-color);
+    width: var(--iress-activator-width);
+    font-size: var(--iress-g-font-size-rem);
+    text-align: start;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    border-style: solid;
+    border-width: var(--iress-activator-border-width);
+    border-color: var(--iress-activator-border-color);
+
+    &::after {
+      width: calc(var(--iress-activator-chevron-size) * var(--iress-g-spacing-rem));
+      height: calc(var(--iress-activator-chevron-size) * var(--iress-g-spacing-rem));
+      inset-block-end: calc(50% - calc(calc(var(--iress-activator-chevron-size) / 4) * var(--iress-g-spacing-rem)));
+      inset-inline-end: var(--iress-activator-chevron-spacing);
+      content: '';
+      position: absolute;
+      border: var(--iress-activator-chevron-border-width) solid var(--iress-activator-text-color);
+      border-block-start: none;
+      border-inline-end: none;
+      transform: rotate(calc(var(--iress-dir-is-ltr, 1) * -45deg));
+      pointer-events: none;
+      transition: all var(--iress-transition-type) var(--iress-transition-duration);
+    }
+
+    &[aria-expanded='true'] {
+      &::after {
+        transform: rotate(calc(var(--iress-dir-is-ltr, 1) * -225deg));
+        inset-block-end: calc(50% - calc(calc(var(--iress-activator-chevron-size) / 1.333) * var(--iress-g-spacing-rem)));
+      }
+    }
+
+    * {
+      --iress-text-color: var(--iress-activator-text-color);
+      --iress-heading-margin-bottom: 0;
+
+      text-decoration: var(--iress-activator-text-decoration);
+    }
+
+    &:focus {
+      outline: 2px solid transparent;
+      box-shadow: var(--iress-focus-box-shadow);
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  .container {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--iress-transition-duration) var(--iress-transition-type);
+  }
+}
+
+.open.container {
+  grid-template-rows: 1fr;
+}
+
+.containerInner {
+  overflow: hidden;
+}
+
+.content {
+  padding-inline: var(--iress-container-padding-x);
+  padding-block: var(--iress-container-padding-y);
+}

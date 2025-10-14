@@ -1,52 +1,46 @@
+import classNames from 'classnames';
 import {
-  type HorizontalAligns,
-  type VerticalAligns,
-  type IressStyledProps,
-  type ResponsiveProp,
-} from '@/types';
-import { inline } from './Inline.styles';
-import { styled } from '@/styled-system/jsx';
-import { type FC, type ReactNode } from 'react';
-import { type PositiveSpacingToken } from '@theme-preset/tokens/spacing';
-import { GlobalCSSClass } from '@/enums';
-import { cx } from '@/styled-system/css';
+  type IressInlineProps,
+  InlineCssClass,
+  type InlineWithEnums,
+} from './Inline.types';
+import { getResponsiveLayoutModifiers } from '@helpers/responsive/getResponsiveLayoutModifiers';
+import { GutterSize, HorizontalAlign, VerticalAlign } from '@/main';
 
-export interface IressInlineProps extends IressStyledProps {
-  /**
-   * Content to be displayed inline.
-   */
-  children?: ReactNode;
+export const IressInline: InlineWithEnums = ({
+  children,
+  className,
+  gutter = 'none',
+  horizontalAlign = 'left',
+  noWrap = false,
+  verticalAlign = 'top',
+  ...restProps
+}: IressInlineProps) => {
+  const classMap = {
+    [`${InlineCssClass.HorizontalAlign}--${horizontalAlign}`]: true,
+    [InlineCssClass.NoWrap]: noWrap,
+    [`${InlineCssClass.VerticalAlign}--${verticalAlign}`]: true,
+  };
 
-  /**
-   * Sets the gap between direct children.
-   * @see https://developer.mozilla.org/docs/Web/CSS/gap
-   */
-  gap?: ResponsiveProp<PositiveSpacingToken>;
+  const cssClasses = classNames(
+    className,
+    InlineCssClass.Base,
+    getResponsiveLayoutModifiers(InlineCssClass.Gutter, gutter, 'none'),
+    classMap,
+  );
 
-  /**
-   * Sets the horizontal alignment of the inline content.
-   */
-  horizontalAlign?: HorizontalAligns;
+  return (
+    <div className={cssClasses} {...restProps}>
+      {children}
+    </div>
+  );
+};
 
-  /**
-   * Wraps content when stretches beyond container.
-   */
-  noWrap?: boolean;
+/** @deprecated IressInline.Gutter is now deprecated and will be removed in a future version. Please use the GutterSizes type instead. */
+IressInline.Gutter = GutterSize;
 
-  /**
-   * Sets the size of the top and bottom gap between direct children when they begin to wrap.
-   * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
-   */
-  rowGap?: ResponsiveProp<PositiveSpacingToken>;
+/** @deprecated IressInline.HorizontalAlign is now deprecated and will be removed in a future version. Please use the HorizontalAligns type instead. */
+IressInline.HorizontalAlign = HorizontalAlign;
 
-  /**
-   * Sets the vertical alignment of the inline content.
-   */
-  verticalAlign?: VerticalAligns;
-}
-
-const Component = styled('div', inline) as FC<IressInlineProps>;
-
-export const IressInline = ({ className, ...restProps }: IressInlineProps) => (
-  <Component {...restProps} className={cx(className, GlobalCSSClass.Inline)} />
-);
+/** @deprecated IressInline.VerticalAlign is now deprecated and will be removed in a future version. Please use the VerticalAligns type instead. */
+IressInline.VerticalAlign = VerticalAlign;

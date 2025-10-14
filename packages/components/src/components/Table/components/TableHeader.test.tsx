@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
+import { IressTableProvider } from '../TableProvider';
 import { TableHeader } from './TableHeader';
-import { TableProvider } from '../TableProvider';
 
 describe('TableHeader', () => {
   it('renders nothing if not in an iress table', () => {
@@ -17,11 +17,11 @@ describe('TableHeader', () => {
 
   it('renders nothing if no columns found', () => {
     const screen = render(
-      <TableProvider rows={[]}>
+      <IressTableProvider rows={[]}>
         <table>
           <TableHeader tableId="id" />
         </table>
-      </TableProvider>,
+      </IressTableProvider>,
     );
 
     const header = screen.queryByRole('rowgroup');
@@ -30,13 +30,13 @@ describe('TableHeader', () => {
 
   it('renders if there are columns', () => {
     const screen = render(
-      <TableProvider rows={[{ hello: 'world' }]}>
+      <IressTableProvider rows={[{ hello: 'world' }]}>
         <table>
           <thead>
             <TableHeader tableId="id" />
           </thead>
         </table>
-      </TableProvider>,
+      </IressTableProvider>,
     );
 
     const header = screen.getByRole('rowgroup');
@@ -50,13 +50,13 @@ describe('TableHeader', () => {
   describe('accessibility', () => {
     it('should not have basic accessibility issues', async () => {
       const screen = render(
-        <TableProvider rows={[{ hello: 'world' }]}>
+        <IressTableProvider rows={[{ hello: 'world' }]}>
           <table>
             <thead>
               <TableHeader tableId="id" />
             </thead>
           </table>
-        </TableProvider>,
+        </IressTableProvider>,
       );
       const results = await axe(screen.container);
       expect(results).toHaveNoViolations();

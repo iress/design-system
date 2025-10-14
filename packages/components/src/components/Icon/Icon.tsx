@@ -1,82 +1,78 @@
-import { type IressStyledProps } from '@/types';
-import { styled } from '@/styled-system/jsx';
-import { cx } from '@/styled-system/css';
-import { icon } from './Icon.styles';
-import { GlobalCSSClass } from '@/enums';
-import { type IconName } from '@fortawesome/fontawesome-common-types';
+import { forwardRef } from 'react';
+import classNames from 'classnames';
+import {
+  type IressIconProps,
+  IconSet,
+  IconSpin,
+  IconRotate,
+  IconFlip,
+  IconSize,
+  type IconWithEnums,
+} from './Icon.types';
+import styles from './Icon.module.scss';
+import { TextMode } from '../../main';
 
-export interface IressIconProps extends IressStyledProps<'span'> {
-  /**
-   * The name of the icon
-   */
-  name: IconName;
-
-  /**
-   * Adds screen reader text if the icon needs to be visible to screen reader users
-   */
-  screenreaderText?: string;
-
-  /**
-   * The icon set to be used:
-   * - `fal`: Font Awesome Light
-   * - `fab`: Font Awesome Brand
-   * @default 'fal'
-   */
-  set?: 'fal' | 'fab';
-
-  /**
-   * Amount of degrees to rotate the icon.
-   */
-  rotate?: 90 | 180 | 270;
-
-  /**
-   * Adds fixed width class for Font Awesome icons - fa-fw
-   */
-  fixedWidth?: boolean;
-
-  /**
-   * Flip the icon horizontally, vertically or both axes.
-   */
-  flip?: 'horizontal' | 'vertical' | 'both';
-
-  /**
-   * Accepts a numeric value for speed for one rotation.
-   */
-  spin?: 'half' | 1 | 2 | 3;
-}
-
-export const IressIcon = ({
-  className,
-  fixedWidth,
-  flip,
-  name,
-  rotate,
-  screenreaderText,
-  set = 'fal',
-  spin,
-  ...restProps
-}: IressIconProps) => {
-  const prefix = 'fa-';
-  const classes = icon({
-    flip,
+const Icon = (
+  {
+    name,
+    screenreaderText,
+    set = 'fal',
     rotate,
+    fixedWidth,
+    flip,
+    size,
     spin,
-  });
+    mode,
+    className,
+    ...restProps
+  }: IressIconProps,
+  ref: React.Ref<HTMLSpanElement>,
+) => {
+  const prefix = 'fa-';
+
+  const classMap = {
+    [styles.icon]: true,
+    [prefix + name]: true,
+    [set]: !!set,
+    [`${prefix}fw`]: !!fixedWidth,
+    [prefix + size]: size !== undefined,
+    [styles[`mode-${mode}`]]: mode !== undefined,
+    [styles[`flip-${flip}`]]: flip !== undefined,
+    [styles[`rotate-${rotate}`]]: rotate !== undefined,
+    [styles[`spin-${spin}`]]: spin !== undefined,
+  };
+  const cssClasses = classNames(className, classMap);
+
+  const a11yAttributes: Record<string, string> =
+    screenreaderText === undefined || screenreaderText === ''
+      ? { 'aria-hidden': 'true' }
+      : { 'aria-label': screenreaderText };
 
   return (
-    <styled.span
+    <span
+      ref={ref}
       role="img"
-      className={cx(
-        classes,
-        GlobalCSSClass.Icon,
-        set,
-        `${prefix}${name}`,
-        fixedWidth && 'fa-fw',
-        className,
-      )}
-      aria-hidden={!screenreaderText && 'true'}
-      aria-label={screenreaderText}
+      className={cssClasses}
+      {...a11yAttributes}
       {...restProps}
     />
   );
 };
+
+export const IressIcon = forwardRef<HTMLElement, IressIconProps>(
+  Icon,
+) as IconWithEnums;
+
+IressIcon.displayName = 'IressIcon';
+/** @deprecated IressIcon.Spin is now deprecated and will be removed in a future version. Please use the value directly instead. */
+IressIcon.Spin = IconSpin;
+/** @deprecated IressIcon.Size is now deprecated and will be removed in a future version. Please use the value directly instead. */
+IressIcon.Size = IconSize;
+/** @deprecated IressIcon.Flip is now deprecated and will be removed in a future version. Please use the value directly instead. */
+IressIcon.Flip = IconFlip;
+/** @deprecated IressIcon.Rotate is now deprecated and will be removed in a future version. Please use the value directly instead. */
+IressIcon.Rotate = IconRotate;
+/** @deprecated IressIcon.Set is now deprecated and will be removed in a future version. Please use the value directly instead. */
+IressIcon.Set = IconSet;
+/** @deprecated IressIcon.Mode is now deprecated and will be removed in a future version. Please use the value directly instead. */
+IressIcon.Mode = TextMode;

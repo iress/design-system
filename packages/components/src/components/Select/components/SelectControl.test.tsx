@@ -1,8 +1,9 @@
 import { RenderResult, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
+import styles from '../Select.module.scss';
 import { GlobalCSSClass } from '@/enums';
-import { SelectControl, SelectControlProps } from './SelectControl';
-import { select } from '../Select.styles';
+import { SelectControlProps } from '../Select.types';
+import { SelectControl } from './SelectControl';
 
 const TEST_ID = 'test-component';
 
@@ -22,11 +23,11 @@ describe('SelectControl', () => {
       className: 'test-class',
     });
 
-    const combobox = screen.getByRole('combobox');
+    const select = screen.getByRole('combobox');
 
-    expect(combobox).toHaveClass('test-class', select().element!);
-    expect(combobox.parentElement).toHaveClass(
-      select().control!,
+    expect(select).toHaveClass('test-class', styles.element);
+    expect(select.parentElement).toHaveClass(
+      styles.wrapper,
       GlobalCSSClass.FormElementInner,
     );
   });

@@ -2,7 +2,7 @@ import {
   IressButton,
   IressPanel,
   IressPopover,
-  type IressPopoverProps,
+  IressPopoverProps,
 } from '@/main';
 import { useState } from 'react';
 

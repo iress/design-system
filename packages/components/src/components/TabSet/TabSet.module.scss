@@ -1,0 +1,86 @@
+@use '../../styles/mixins';
+
+/** Tabs
+ * --------------------------------------------------
+ * @prop --iress-border-radius: Radius for the top left and top right corners (bottom border radii are set to 0).
+ * @prop --iress-border-end-radius: Radius for the bottom left and bottom right corners (bottom border radii are set to 0).
+ * @prop --iress-background-colour: Background colour of the container
+ * @prop --iress-badge-host-margin-inline-end: Margin when a tab button contains a badge
+ */
+
+.tabSet {
+  @include mixins.defaultFontVariables('tab-container');
+  @include mixins.defaultFontStyles();
+
+  --iress-border-radius: var(--iress-tab-container-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius)));
+  --iress-border-end-radius: var(--iress-tab-container-border-end-radius, var(--iress-tab-container-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius))));
+  --iress-background-colour: var(--iress-tab-container-background-color, transparent);
+  --iress-badge-host-margin-inline-end: calc(var(--iress-tab-button-padding-x, var(--iress-g-spacing-sm)) * 2);
+
+  border-radius: var(--iress-border-radius);
+  border-bottom-left-radius: var(--iress-border-end-radius);
+  border-bottom-right-radius: var(--iress-border-end-radius);
+  background-color: var(--iress-background-colour);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+
+  .layout--top-left > & {
+    justify-content: flex-start;
+  }
+
+  .layout--top-center > & {
+    justify-content: center;
+  }
+
+  .layout--top-right > & {
+    justify-content: flex-end;
+  }
+
+  :not(:has(.panel)) > & {
+    border-block-end: var(--iress-tab-panel-border-top-width, var(--iress-tab-panel-border-width, 1px)) solid
+      var(--iress-tab-panel-border-top-color, var(--iress-g-border-color, var(--iress-default-border-color)));
+  }
+
+  > :has(.ids-badge) {
+    margin-inline-end: var(--iress-badge-host-margin-inline-end);
+  }
+}
+
+.listItem {
+  :not(:has(.panel)) > .list & {
+    margin-block-end: calc(var(--iress-tab-panel-border-top-width, var(--iress-tab-panel-border-width, 1px)) * -1);
+  }
+}
+
+.panel {
+  --iress-background-color: var(--iress-tab-panel-background-color, transparent);
+  --iress-border-width: var(--iress-tab-panel-border-width, 1px);
+  --iress-border-top-width: var(--iress-tab-panel-border-top-width, var(--iress-border-width));
+  --iress-border-color: var(--iress-tab-panel-border-color, transparent);
+  --iress-border-top-color: var(--iress-tab-panel-border-top-color, var(--iress-g-border-color, var(--iress-default-border-color)));
+  --iress-border-radius: var(--iress-tab-panel-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius)));
+  --iress-padding-x: var(--iress-tab-panel-padding-x, 0);
+  --iress-padding-block-start: var(--iress-tab-panel-padding-y, var(--iress-a-vertical-spacing-md, var(--iress-g-spacing-md)));
+  --iress-padding-block-end: var(--iress-tab-panel-padding-y, 0);
+
+  border: var(--iress-border-width) solid var(--iress-border-color);
+  border-radius: 0;
+  border-end-end-radius: var(--iress-border-radius);
+  border-end-start-radius: var(--iress-border-radius);
+  border-block-start: var(--iress-border-top-width) solid var(--iress-border-top-color);
+  padding: var(--iress-padding-block-start) var(--iress-padding-x) var(--iress-padding-block-end);
+  margin-block-start: calc(var(--iress-border-top-width) * -1);
+  background-color: var(--iress-background-color);
+
+  &:focus {
+    outline: none;
+    box-shadow: var(--iress-focus-box-shadow);
+
+    &:not(:focus-visible) {
+      box-shadow: none;
+    }
+  }
+}

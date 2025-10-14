@@ -1,5 +1,5 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressFilter, type IressFilterProps } from '.';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressFilter } from '.';
 import { FilterSearchTable } from './mocks/FilterSearchTable';
 import FilterSearchTableSource from './mocks/FilterSearchTable.tsx?raw';
 import {
@@ -16,12 +16,10 @@ import { IressButton } from '../Button';
 import { IressBadge } from '../Badge';
 
 type Story = StoryObj<typeof IressFilter>;
-type SingleFilterStory = StoryObj<IressFilterProps<false>>;
 
 export default {
   title: 'Components/Filter',
   component: IressFilter,
-  tags: ['updated'],
 } as Meta<typeof IressFilter>;
 
 export const Default: Story = {
@@ -46,9 +44,9 @@ export const Label: Story = {
   },
 };
 
-export const SearchTable: SingleFilterStory = {
+export const SearchTable: Story = {
   args: {
-    ...(Default as SingleFilterStory).args,
+    ...Default.args,
     visibleResetButton: true,
   },
   argTypes: {
@@ -128,10 +126,10 @@ export const ComplexOptions: Story = {
         value: 'opt1',
         label: 'John Smith',
         meta: [
-          <IressText key="opt1-type" color="colour.neutral.70" element="small">
+          <IressText key="opt1-type" mode="muted" element="small">
             Individual
           </IressText>,
-          <IressText key="opt1-email" color="colour.neutral.70" element="small">
+          <IressText key="opt1-email" mode="muted" element="small">
             test@iress.com
           </IressText>,
         ],
@@ -140,7 +138,7 @@ export const ComplexOptions: Story = {
         value: 'opt2',
         label: 'Tom Wilson',
         meta: [
-          <IressText key="opt2-type" color="colour.neutral.70" element="small">
+          <IressText key="opt2-type" mode="muted" element="small">
             Individual
           </IressText>,
         ],
@@ -149,7 +147,7 @@ export const ComplexOptions: Story = {
         value: 'opt3',
         label: 'Alice Kay',
         meta: [
-          <IressText key="opt3-type" color="colour.neutral.70" element="small">
+          <IressText key="opt3-type" mode="muted" element="small">
             Individual
           </IressText>,
         ],
@@ -159,10 +157,10 @@ export const ComplexOptions: Story = {
         value: 'opt4',
         label: 'John Smith',
         meta: [
-          <IressText key="opt4-type" color="colour.neutral.70" element="small">
+          <IressText key="opt4-type" mode="muted" element="small">
             Business
           </IressText>,
-          <IressText key="opt4-phone" color="colour.neutral.70" element="small">
+          <IressText key="opt4-phone" mode="muted" element="small">
             0432325675
           </IressText>,
         ],
@@ -171,11 +169,7 @@ export const ComplexOptions: Story = {
         value: 'opt5',
         label: 'Eelin Team',
         meta: [
-          <IressText
-            key="opt5-contact"
-            color="colour.neutral.70"
-            element="small"
-          >
+          <IressText key="opt5-contact" mode="muted" element="small">
             test2@iress.com, 0432325675
           </IressText>,
         ],
@@ -184,11 +178,7 @@ export const ComplexOptions: Story = {
         value: 'opt6',
         label: 'Eelin Team',
         meta: [
-          <IressText
-            key="opt6-contact"
-            color="colour.neutral.70"
-            element="small"
-          >
+          <IressText key="opt6-contact" mode="muted" element="small">
             test3@iress.com, 0439873244
           </IressText>,
         ],
@@ -228,7 +218,9 @@ export const NoResultsText: Story = {
       placeholder: 'Type "no" to see the no results text',
     },
     searchable: true,
-    searchNoResultsText: <IressPanel>No results found</IressPanel>,
+    searchNoResultsText: (
+      <IressPanel className="iress-u-text">No results found</IressPanel>
+    ),
   },
 };
 
@@ -237,7 +229,7 @@ export const PopoverProps: Story = {
     ...Options.args,
     popoverProps: {
       ...Options.args?.popoverProps,
-      footer: (
+      append: (
         <IressPanel>
           <IressButton>Add an option</IressButton>
         </IressPanel>

@@ -2,14 +2,14 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
-import { IressFilter, IressFilterProps } from './Filter';
+import styles from './Filter.module.scss';
+import { IressFilter } from './Filter';
+import { IressFilterProps } from './Filter.types';
 
 const TEST_ID = 'test-component';
 const TEST_LABEL = 'Label';
 
-const renderFilter = <TMultiple extends boolean = false>(
-  props: Partial<IressFilterProps<TMultiple>> = {},
-) => {
+const renderFilter = (props: Partial<IressFilterProps> = {}) => {
   return render(
     <IressFilter
       {...props}
@@ -54,6 +54,7 @@ describe('IressFilter', () => {
 
     expect(listbox).toStrictEqual(listboxTestId);
     expect(listbox).toBeVisible();
+    expect(listbox).toHaveClass(styles.optionList);
     expect(options).toHaveLength(MOCK_LABEL_VALUE_META.length);
 
     await userEvent.click(activator);
@@ -100,11 +101,11 @@ describe('IressFilter', () => {
 
         await userEvent.click((await screen.findAllByRole('option'))[0]);
 
-        expect(onChange).toHaveBeenCalledWith([MOCK_LABEL_VALUE_META[0]]);
+        expect(onChange).toBeCalledWith([MOCK_LABEL_VALUE_META[0]]);
 
         await userEvent.click((await screen.findAllByRole('option'))[1]);
 
-        expect(onChange).toHaveBeenCalledWith([
+        expect(onChange).toBeCalledWith([
           MOCK_LABEL_VALUE_META[0],
           MOCK_LABEL_VALUE_META[1],
         ]);
@@ -185,8 +186,8 @@ describe('IressFilter', () => {
       it('renders the prepend and append nodes', async () => {
         renderFilter({
           popoverProps: {
-            footer: <span>There</span>,
-            header: <span>Hello</span>,
+            append: <span>There</span>,
+            prepend: <span>Hello</span>,
           },
         });
 
@@ -211,44 +212,6 @@ describe('IressFilter', () => {
 
         const searchbox = await screen.findByRole('searchbox');
         expect(searchbox).toBeInTheDocument();
-      });
-    });
-
-    describe('searchNoResultsText', () => {
-      it('should render the provided content when no results are found', async () => {
-        renderFilter({
-          options: () => Promise.resolve([]),
-          searchNoResultsText: 'No results',
-          searchable: true,
-        });
-
-        const activator = screen.getByRole('button', { name: TEST_LABEL });
-        await userEvent.click(activator);
-
-        const searchbox = await screen.findByRole('searchbox');
-        await userEvent.type(searchbox, 'nonexistent');
-
-        await waitFor(() => {
-          expect(screen.getByText('No results')).toBeInTheDocument();
-        });
-      });
-
-      it('should render React nodes when provided', async () => {
-        renderFilter({
-          options: () => Promise.resolve([]),
-          searchNoResultsText: <p>No results</p>,
-          searchable: true,
-        });
-
-        const activator = screen.getByRole('button', { name: TEST_LABEL });
-        await userEvent.click(activator);
-
-        const searchbox = await screen.findByRole('searchbox');
-        await userEvent.type(searchbox, 'nonexistent');
-
-        await waitFor(() => {
-          expect(screen.getByText('No results')).toBeInTheDocument();
-        });
       });
     });
   });

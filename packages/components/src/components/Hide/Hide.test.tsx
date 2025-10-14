@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 
-import { normaliseHideValues } from './helpers/normaliseHideValues';
+import { normaliseHideValues } from './helpers/composeHideClasses';
 import { IressHide } from './Hide';
+import { HideCssClass } from './Hide.types';
 
 const hiddenOnTestCases = [
   { xs: true },
@@ -47,78 +48,77 @@ describe('IressHide', () => {
   });
   describe('props', () => {
     describe('hiddenOn', () => {
-      hideClassTests(false);
+      hideClassTests(HideCssClass.TotallyHidden);
     });
 
     describe('visibilityHidden', () => {
-      hideClassTests(true);
+      hideClassTests(HideCssClass.VisuallyHidden);
     });
   });
 });
 
 const hideClassTestStatements = (
   testCase: Record<string, boolean | undefined>,
-  srOnly = false,
+  baseClass: HideCssClass,
 ) => {
   render(
     <IressHide
       data-testid="test-component"
       className="test-class"
       hiddenOn={testCase}
-      visuallyHidden={srOnly}
+      visuallyHidden={baseClass === HideCssClass.VisuallyHidden}
     >
       Content to hide
     </IressHide>,
   );
   const component = screen.getByTestId('test-component');
   const vals = normaliseHideValues(testCase);
-  const baseClass = srOnly ? 'sr' : 'hide';
-  expect(component.classList.contains(`xs:${baseClass}_true`)).toEqual(
+  expect(component.classList.contains(`${baseClass}--xs`)).toEqual(
     vals.xs === true,
   );
-  expect(component.classList.contains(`sm:${baseClass}_true`)).toEqual(
+  expect(component.classList.contains(`${baseClass}--sm`)).toEqual(
     vals.sm === true,
   );
-  expect(component.classList.contains(`md:${baseClass}_true`)).toEqual(
+  expect(component.classList.contains(`${baseClass}--md`)).toEqual(
     vals.md === true,
   );
-  expect(component.classList.contains(`lg:${baseClass}_true`)).toEqual(
+  expect(component.classList.contains(`${baseClass}--lg`)).toEqual(
     vals.lg === true,
   );
-  expect(component.classList.contains(`xl:${baseClass}_true`)).toEqual(
+  expect(component.classList.contains(`${baseClass}--xl`)).toEqual(
     vals.xl === true,
   );
-  expect(component.classList.contains(`xxl:${baseClass}_true`)).toEqual(
+  expect(component.classList.contains(`${baseClass}--xxl`)).toEqual(
     vals.xxl === true,
   );
 };
 
-const hideClassTests = (srOnly = false) => {
+const hideClassTests = (baseClass: HideCssClass) => {
   it('renders the correct classes - xs', () => {
-    hideClassTestStatements(hiddenOnTestCases[0], srOnly);
+    hideClassTestStatements(hiddenOnTestCases[0], baseClass);
   });
   it('renders the correct classes - sm', () => {
-    hideClassTestStatements(hiddenOnTestCases[1], srOnly);
+    hideClassTestStatements(hiddenOnTestCases[1], baseClass);
   });
   it('renders the correct classes - md', () => {
-    hideClassTestStatements(hiddenOnTestCases[2], srOnly);
+    hideClassTestStatements(hiddenOnTestCases[2], baseClass);
   });
   it('renders the correct classes - lg', () => {
-    hideClassTestStatements(hiddenOnTestCases[3], srOnly);
+    hideClassTestStatements(hiddenOnTestCases[3], baseClass);
   });
   it('renders the correct classes - xl', () => {
-    hideClassTestStatements(hiddenOnTestCases[4], srOnly);
+    hideClassTestStatements(hiddenOnTestCases[4], baseClass);
   });
   it('renders the correct classes - xxl', () => {
-    hideClassTestStatements(hiddenOnTestCases[8], srOnly);
+    hideClassTestStatements(hiddenOnTestCases[8], baseClass);
   });
   it('renders the correct classes - hidden on xs and sm only', () => {
-    hideClassTestStatements(hiddenOnTestCases[5], srOnly);
+    hideClassTestStatements(hiddenOnTestCases[5], baseClass);
   });
   it('renders the correct classes - hidden on sm and md only', () => {
-    hideClassTestStatements(hiddenOnTestCases[6], srOnly);
+    hideClassTestStatements(hiddenOnTestCases[6], baseClass);
   });
   it('renders the correct classes - hidden on xs and sm, shown on md and lg, hidden on xl', () => {
-    hideClassTestStatements(hiddenOnTestCases[7], srOnly);
+    hideClassTestStatements(hiddenOnTestCases[7], baseClass);
   });
 };

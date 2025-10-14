@@ -1,57 +1,6 @@
 import { useIdIfNeeded } from '@/hooks';
-
-import { type MouseEvent, type ReactNode } from 'react';
-import {
-  IressMenu,
-  IressMenuHeading,
-  IressMenuItem,
-  type IressMenuItemProps,
-  type IressMenuProps,
-} from '../../Menu';
-import { IressIcon } from '@/components/Icon';
-
-export interface IressSelectCreateProps
-  extends Omit<
-      IressMenuProps,
-      | 'changeOnBlur'
-      | 'children'
-      | 'defaultSelected'
-      | 'multiSelect'
-      | 'onChange'
-      | 'role'
-      | 'selected'
-      | 'type'
-    >,
-    Pick<IressMenuItemProps, 'loading'> {
-  /**
-   * If set to true, menu will fill the width of its container.
-   * @default true
-   */
-  fluid?: boolean;
-
-  /**
-   * Heading slot. Often used for a title or description.
-   * If a string, will automatically provide an id for aria-labelledby.
-   */
-  heading?: ReactNode;
-
-  /**
-   * Label that will be displayed on the add button.
-   * @default 'New option'
-   */
-  label?: ReactNode;
-
-  /**
-   * Emitted when the user clicks the add button.
-   */
-  onCreate?: (e: MouseEvent<HTMLButtonElement>) => void;
-
-  /**
-   * Prepends an element to the add button.
-   * @default <IressIcon name="plus" screenreaderText="Add" />
-   */
-  prepend?: ReactNode;
-}
+import { type IressSelectCreateProps } from './SelectCreate.types';
+import { IressIcon, IressMenu, IressMenuHeading, IressMenuItem } from '@/main';
 
 export const IressSelectCreate = ({
   fluid = true,

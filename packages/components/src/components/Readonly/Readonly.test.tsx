@@ -1,15 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressReadonlyProps } from './Readonly';
+import styles from '../Input/Input.module.scss';
+import baseStyles from '../Input/InputBase/InputBase.module.scss';
+import { IressReadonlyProps } from './Readonly.types';
 import { IressReadonly } from './Readonly';
-import { GlobalCSSClass } from '@/enums';
-import { readonly } from './Readonly.styles';
+import { GlobalCSSClass } from '@/main';
 
 const renderReadonly = (props: IressReadonlyProps = {}) => {
   return render(<IressReadonly {...props} />);
 };
 
-describe('IressReadonly', () => {
+describe('ReadonlyInput', () => {
   it('should render the component with the correct classes', () => {
     renderReadonly({
       className: 'test-class',
@@ -19,15 +20,11 @@ describe('IressReadonly', () => {
 
     const wrapper = screen.getByTestId('test-component');
     expect(wrapper).toBeInTheDocument();
-    expect(wrapper).toHaveClass(
-      'test-class',
-      readonly().root!,
-      GlobalCSSClass.Readonly,
-    );
+    expect(wrapper).toHaveClass('test-class', styles.input);
 
     const input = screen.getByText('Value');
     expect(input).toBeInTheDocument();
-    expect(input).toHaveClass(readonly().formControl!);
+    expect(input).toHaveClass(baseStyles.formControl, styles.readonlyControl);
   });
 
   describe('props', () => {
@@ -38,7 +35,7 @@ describe('IressReadonly', () => {
         });
 
         const append = screen.getByText('Hello there');
-        expect(append).toHaveClass(readonly().addon!);
+        expect(append).toHaveClass(styles.addon, styles.append);
       });
     });
 
@@ -81,7 +78,7 @@ describe('IressReadonly', () => {
         });
 
         const prepend = screen.getByText('Hello there');
-        expect(prepend).toHaveClass(readonly().addon!);
+        expect(prepend).toHaveClass(styles.addon, styles.prepend);
       });
     });
 
@@ -90,14 +87,10 @@ describe('IressReadonly', () => {
         renderReadonly({
           width: '10',
           value: 'Value',
-          'data-testid': 'test-input',
         });
 
-        const wrapper = screen.getByTestId('test-input');
         const input = screen.getByText('Value');
-
-        expect(wrapper).toHaveClass(readonly({ width: '10' }).root!);
-        expect(input).toHaveClass(readonly({ width: '10' }).formControl!);
+        expect(input).toHaveClass(`${GlobalCSSClass.Width}--10`);
       });
 
       it('adds the width class to the wrapper when its a percentage', () => {
@@ -108,7 +101,7 @@ describe('IressReadonly', () => {
         });
 
         const wrapper = screen.getByTestId('test-input');
-        expect(wrapper).toHaveClass(readonly({ width: '25perc' }).root!);
+        expect(wrapper).toHaveClass(`${GlobalCSSClass.Width}--25perc`);
       });
     });
   });
@@ -116,6 +109,7 @@ describe('IressReadonly', () => {
   describe('accessibility', () => {
     it('should not have basic accessibility issues', async () => {
       const { container } = renderReadonly();
+
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });

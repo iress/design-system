@@ -1,4 +1,4 @@
-import { type StoryObj, type Meta } from '@storybook/react-vite';
+import { StoryObj, Meta } from '@storybook/react';
 import { disableArgTypes } from '@iress-storybook/helpers';
 
 import { IressTooltip } from '.';
@@ -14,7 +14,6 @@ export default {
   argTypes: {
     ...disableArgTypes(['children', 'open']),
   },
-  tags: ['updated'],
 } as Meta<typeof IressTooltip>;
 
 export const Default: Story = {
@@ -28,7 +27,7 @@ export const Default: Story = {
 export const TooltipText: Story = {
   render: (args) => (
     <div style={{ paddingTop: '30px' }}>
-      <IressInline gap="md">
+      <IressInline gutter="md">
         <IressTooltip
           {...args}
           tooltipText="Single line Hello! This is a really long tooltip to try and see if it goes behind the scrollbar"
@@ -49,8 +48,8 @@ export const TooltipText: Story = {
 export const Align: Story = {
   render: (args) => (
     <div style={{ padding: '80px 150px' }}>
-      <IressStack gap="md">
-        <IressInline horizontalAlign="center" gap="sm">
+      <IressStack gutter="md">
+        <IressInline horizontalAlign="center" gutter="sm">
           <IressTooltip {...args} align="top-start">
             <IressButton>Top Start</IressButton>
           </IressTooltip>
@@ -62,7 +61,7 @@ export const Align: Story = {
           </IressTooltip>
         </IressInline>
         <IressInline horizontalAlign="between">
-          <IressStack gap="sm">
+          <IressStack gutter="sm">
             <IressInline horizontalAlign="left">
               <IressTooltip {...args} align="left-start">
                 <IressButton>Left Start</IressButton>
@@ -79,7 +78,7 @@ export const Align: Story = {
               </IressTooltip>
             </IressInline>
           </IressStack>
-          <IressStack gap="sm">
+          <IressStack gutter="sm">
             <IressInline horizontalAlign="right">
               <IressTooltip {...args} align="right-start">
                 <IressButton>Right Start</IressButton>
@@ -97,7 +96,7 @@ export const Align: Story = {
             </IressInline>
           </IressStack>
         </IressInline>
-        <IressInline horizontalAlign="center" gap="sm">
+        <IressInline horizontalAlign="center" gutter="sm">
           <IressTooltip {...args} align="bottom-start">
             <IressButton>Bottom Start</IressButton>
           </IressTooltip>
@@ -122,7 +121,7 @@ export const Align: Story = {
 export const Delay: Story = {
   render: (args) => (
     <div style={{ paddingTop: '30px' }}>
-      <IressInline horizontalAlign="center" gap="sm">
+      <IressInline horizontalAlign="center" gutter="sm">
         <IressTooltip {...args} delay={0}>
           <IressButton>0ms (no delay)</IressButton>
         </IressTooltip>

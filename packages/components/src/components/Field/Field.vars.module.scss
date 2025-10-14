@@ -1,0 +1,70 @@
+/** Field variables */
+
+.field,
+.fieldGroup {
+  --iress-font-family: var(--iress-label-font-family, var(--iress-a-form-font-family, var(--iress-g-font-family)));
+  --iress-font-size: var(--iress-label-font-size);
+  --iress-font-weight: var(--iress-label-font-weight, bold);
+  --iress-line-height: var(--iress-field-line-height, var(--iress-a-form-line-height, var(--iress-g-line-height, 1.5)));
+
+  --iress-text-color: var(--iress-label-text-color, var(--iress-a-label-text-color, var(--iress-g-text-color)));
+  --iress-background-color: var(--iress-field-background-color, transparent);
+
+  --iress-border-left-width: var(--iress-field-border-left-width, 2px);
+
+  --iress-transition: var(--iress-field-transition, none);
+
+  --iress-max-width: 100%;
+
+  --iress-margin-x: var(--iress-field-margin-x, 0);
+  --iress-label-margin-bottom: var(--iress-input-label-padding-bottom, var(--iress-g-spacing-xs));
+  --iress-input-spacing-y: var(--iress-a-vertical-spacing-sm, var(--iress-g-spacing-sm));
+  --iress-input-spacing-x: var(--iress-a-horizontal-spacing-sm, var(--iress-g-spacing-sm));
+
+  --iress-focus-border-color: var(--iress-field-focus-border-color, var(--iress-border-color));
+  --iress-focus-background-color: var(--iress-field-focus-background-color, var(--iress-background-color));
+  --iress-hint-text-color: var(--iress-field-hint-text-color, var(--iress-g-muted-text-color, var(--iress-default-text-color--light)));
+  --iress-hint-font-weight: var(--iress-field-hint-font-weight, var(--iress-a-muted-font-weight, var(--iress-g-font-weight, lighter)));
+
+  --iress-multi-elements-label-text-color: var(--iress-field-multi-elements-label-text-color, var(--iress-g-muted-text-color, var(--iress-default-text-color--light)));
+
+  --iress-required-text-color: var(--iress-label-required-text-color, var(--iress-a-danger-text-color, var(--iress-g-danger-color, var(--iress-default-danger-color))));
+
+  --iress-optional-font-weight: var(--iress-label-optional-font-weight, var(--iress-a-muted-font-weight, var(--iress-g-font-weight)));
+  --iress-optional-text-color: var(--iress-label-optional-text-color, var(--iress-g-muted-text-color, var(--iress-default-text-color--light)));
+  --iress-optional-font-size: var(--iress-label-meta-font-size, var(--iress-g-font-size-xxxs, var(--iress-default-font-size-xxxs)));
+}
+
+.invalid {
+  --iress-field-spacing-left: var(--iress-g-spacing-sm);
+  --iress-border-color: var(--iress-field-element-invalid-border-color, var(--iress-a-danger-border-color, var(--iress-g-danger-color, var(--iress-default-danger-color))));
+  --iress-focus-border-color: var(--iress-field-element-invalid-focus-border-color, var(--iress-border-color));
+
+  :global(.iress-form-element) :not(.invalid :global(.iress-form-element) :global(.iress-form-element)),
+  :global(.iress-form-element__inner) :not(.invalid :global(.iress-form-element) :global(.iress-form-element)) {
+    --iress-border-color: var(--iress-field-element-invalid-border-color, var(--iress-a-danger-border-color, var(--iress-g-danger-color, var(--iress-default-danger-color))));
+  }
+
+  .ids-combobox {
+    --iress-taglist-input-border-color: var(
+      --iress-input-invalid-border-color,
+      var(--iress-field-element-invalid-border-color, var(--iress-a-danger-border-color, var(--iress-g-danger-color, var(--iress-default-danger-color))))
+    );
+  }
+
+  .ids-validationMessage {
+    --iress-font-weight: var(--iress-label-font-weight, bold);
+  }
+}
+
+.label {
+  --iress-text-color: var(--iress-label-ele-text-color);
+}
+
+.hiddenLabel:not(.fieldGroup) {
+  --iress-input-spacing-y: 0;
+}
+
+.field:has(.ids-input--readonly) .label {
+  --iress-margin-bottom: 0;
+}

@@ -17,13 +17,13 @@ export const supportedCardSlots = {
       alt="A man in an Iress branded t-shirt smiles at the camera while two female colleagues have a discussion in the foreground"
     />
   ),
-  heading: <h2>Welcome to Iress!</h2>,
+  heading: <h3>Welcome to Iress!</h3>,
   topRight: (
     <IressPopover
       align="bottom-end"
       activator={
-        <IressButton mode="tertiary" textStyle="typography.body.lg">
-          <IressIcon name="ellipsis-v" />
+        <IressButton>
+          <IressIcon name="ellipsis-v" size="lg" />
         </IressButton>
       }
     >
@@ -32,17 +32,21 @@ export const supportedCardSlots = {
   ),
   children: (
     <IressText>
-      Find out all the onboarding material you need{' '}
+      Find out all the onboarding material you need <br />
       <a href="https://iress.com">with this easy guide</a>.
     </IressText>
   ),
   footer: (
-    <IressInline gap="sm" horizontalAlign="between">
-      <IressInline gap="sm">
-        <IressBadge pill>#new-starter</IressBadge>
-        <IressBadge pill>#first-day</IressBadge>
+    <IressInline gutter="sm" horizontalAlign="between">
+      <IressInline gutter="sm">
+        <IressBadge pill mode="background-default">
+          #new-starter
+        </IressBadge>
+        <IressBadge pill mode="background-default">
+          #first-day
+        </IressBadge>
       </IressInline>
-      <IressBadge mode="success">NEW</IressBadge>
+      <IressBadge mode="positive">NEW</IressBadge>
     </IressInline>
   ),
 };

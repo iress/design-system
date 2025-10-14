@@ -1,0 +1,115 @@
+@use '../../styles/vars';
+@use '../../styles/mixins';
+
+@mixin fullPageModal {
+  --iress-width: 100%;
+  --iress-margin-x: 0;
+  --iress-margin-y: 0;
+  --iress-height: 100vh;
+  --iress-border-radius: 0;
+}
+
+.modal {
+  @include mixins.defaultFontVariables('modal');
+  --iress-visibility: hidden;
+  --iress-transition-duration: var(--iress-modal-animation-duration, var(--iress-g-animation-duration, var(--iress-default-animation-duration)));
+  --iress-transition-type: var(--iress-modal-animation-type, var(--iress-g-animation-type, var(--iress-default-animation-type)));
+  --iress-transition: all var(--iress-transition-duration) var(--iress-transition-type);
+  --iress-height: auto;
+  --iress-background-color: var(--iress-modal-background-color, var(--iress-a-layout-background-color, var(--iress-g-background-color, var(--iress-default-background-color))));
+  --iress-border-width: var(--iress-modal-border-width, var(--iress-g-border-width, var(--iress-default-border-width)));
+  --iress-border-color: var(--iress-modal-border-color, var(--iress-g-border-color, var(--iress-default-border-color)));
+  --iress-footer-border-color: var(--iress-modal-footer-border-color, var(--iress-g-border-color, var(--iress-default-border-color)));
+  --iress-border-radius: var(--iress-modal-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius)));
+  --iress-border: var(--iress-border-width) solid var(--iress-border-color);
+  --iress-margin-y: var(--iress-modal-margin-y, var(--iress-a-vertical-spacing-lg, var(--iress-g-spacing-lg))); /* Needs to include units if set to zero as it's used in a calc function */
+  --iress-margin-x: var(--iress-modal-margin-x, var(--iress-a-horizontal-spacing-lg, var(--iress-g-spacing-lg))); /* Needs to include units if set to zero as it's used in a calc function */
+  --iress-box-shadow: var(--iress-modal-box-shadow-size, var(--iress-default-box-shadow-size--lg))
+    var(--iress-modal-box-shadow-color, var(--iress-g-box-shadow-color, var(--iress-default-box-shadow-color)));
+  --iress-box-shadow-focus: 0 0 0 var(--iress-g-focus-width, var(--iress-default-focus-size)) var(--iress-focus-color);
+  --iress-width: var(--iress-modal-md-width, var(--iress-default-width--md));
+
+  --iress-close-button-offset-top: var(--iress-modal-close-button-offset-top, var(--iress-g-focus-width, var(--iress-default-focus-size)));
+  --iress-close-button-offset-right: var(--iress-modal-close-button-offset-right, var(--iress-g-focus-width, var(--iress-default-focus-size)));
+}
+
+.backdrop {
+  --iress-background-color: var(--iress-backdrop-background-color, var(--iress-default-backdrop-background-color));
+  --iress-transition-duration: var(--iress-backdrop-transition-duration, var(--iress-g-animation-duration, var(--iress-default-animation-duration)));
+  --iress-transition-type: var(--iress-backdrop-transition-type, var(--iress-g-animation-type, var(--iress-default-animation-type)));
+  --iress-transition: all var(--iress-transition-duration) var(--iress-transition-type);
+}
+
+@each $size in vars.$modalSizes {
+  @if $size != 'md' {
+    .size--#{$size} .modal {
+      --iress-width: var(--iress-modal-#{$size}-width, var(--iress-default-width--#{$size}));
+    }
+  }
+}
+
+.backdrop.size--fullpage {
+  --iress-background-color: transparent;
+}
+
+.size--fullpage > .modal {
+  @include fullPageModal();
+}
+
+@each $bpName, $bpValue in vars.$breakpoints {
+  @if $bpName == 'xs' {
+    .size-#{$bpName}--fullpage {
+      &.backdrop {
+        --iress-background-color: transparent;
+      }
+
+      > .modal {
+        @include fullPageModal();
+      }
+    }
+
+    @each $size in vars.$modalSizes {
+      .size-#{$bpName}--#{$size} {
+        > .modal {
+          --iress-width: var(--iress-modal-#{$size}-width, var(--iress-default-width--#{$size}));
+          --iress-margin-y: var(--iress-modal-margin-y, var(--iress-a-vertical-spacing-lg, var(--iress-g-spacing-lg)));
+          --iress-margin-x: var(--iress-modal-margin-x, var(--iress-a-horizontal-spacing-lg, var(--iress-g-spacing-lg)));
+          --iress-height: auto;
+          --iress-border-radius: var(--iress-modal-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius)));
+        }
+      }
+    }
+  } @else {
+    @media only screen and (#{$bpValue}) {
+      .size-#{$bpName}--fullpage {
+        &.backdrop {
+          --iress-background-color: transparent;
+        }
+
+        > .modal {
+          @include fullPageModal();
+        }
+      }
+
+      @each $size in vars.$modalSizes {
+        .size-#{$bpName}--#{$size} {
+          &.backdrop {
+            --iress-background-color: var(--iress-backdrop-background-color, var(--iress-default-backdrop-background-color));
+          }
+
+          > .modal {
+            --iress-width: var(--iress-modal-#{$size}-width, var(--iress-default-width--#{$size}));
+            --iress-margin-y: var(--iress-modal-margin-y, var(--iress-a-vertical-spacing-lg, var(--iress-g-spacing-lg)));
+            --iress-margin-x: var(--iress-modal-margin-x, var(--iress-a-horizontal-spacing-lg, var(--iress-g-spacing-lg)));
+            --iress-height: auto;
+            --iress-border-radius: var(--iress-modal-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius)));
+          }
+        }
+      }
+    }
+  }
+}
+
+.static {
+  --iress-position: var(--iress-static-position, static);
+}

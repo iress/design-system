@@ -1,3 +1,4 @@
+import { SelectOption } from '../Select.types';
 import {
   mapNodesToSelectOptions,
   findValueFromStringInSelectOptions,
@@ -102,7 +103,7 @@ describe('mapNodesToSelectOptions', () => {
 });
 
 describe('findValueFromStringInSelectOptions', () => {
-  const items = [
+  const items: SelectOption[] = [
     {
       label: 'Option 1',
       value: '1',
@@ -113,7 +114,7 @@ describe('findValueFromStringInSelectOptions', () => {
     },
   ];
 
-  const groupedItems = [
+  const groupedItems: SelectOption[] = [
     {
       label: 'Group',
       children: [
@@ -134,26 +135,20 @@ describe('findValueFromStringInSelectOptions', () => {
   });
 
   it('returns undefined if not found in flat items', () => {
-    expect(
-      findValueFromStringInSelectOptions<number | string>('4', items),
-    ).toBe(undefined);
+    expect(findValueFromStringInSelectOptions('4', items)).toBe(undefined);
   });
 
   it('returns undefined if not found in grouped items', () => {
-    expect(
-      findValueFromStringInSelectOptions<number | string>('4', groupedItems),
-    ).toBe(undefined);
+    expect(findValueFromStringInSelectOptions('4', groupedItems)).toBe(
+      undefined,
+    );
   });
 
   it('returns value if found in flat items', () => {
-    expect(
-      findValueFromStringInSelectOptions<number | string>('2', items),
-    ).toBe(2);
+    expect(findValueFromStringInSelectOptions('2', items)).toBe(2);
   });
 
   it('returns value if found in grouped items', () => {
-    expect(
-      findValueFromStringInSelectOptions<number | string>('2', groupedItems),
-    ).toBe(2);
+    expect(findValueFromStringInSelectOptions('2', groupedItems)).toBe(2);
   });
 });

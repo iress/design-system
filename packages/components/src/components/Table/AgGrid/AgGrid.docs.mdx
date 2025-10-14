@@ -1,0 +1,98 @@
+import { Meta } from '@storybook/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import { IressAlert } from '../../../main';
+import * as ComponentStories from './AgGrid.stories';
+import { devDependencies } from '../../../../package.json';
+
+<Meta of={ComponentStories} />
+
+# AG Grid
+
+<ComponentOverview
+  description="AG Grid is the preferred solution for complex tables."
+  story={ComponentStories.Simple}
+  stories={ComponentStories}
+/>
+
+## Props (API)
+
+AG Grid is a third-party library and has its own API. To use AG Grid, you will need to refer to the [AG Grid documentation](https://www.ag-grid.com/react-data-grid).
+
+## Usage
+
+The `@iress/ids-themes` package provides an Iress theme for AG Grid. This theme is intended to be used on top of the Alpine theme. It works by mapping the AG grid CSS variables to the IDS design tokens, hence it should work with all IDS/Styler themes.
+
+### Installation
+
+1. Ensure you have [AG grid installed](https://www.ag-grid.com/react-data-grid/getting-started/) in your project.
+2. Add the `@iress/ids-themes` package to your project with `yarn add @iress/ids-themes`.
+3. Import the `IressAgGridContainer` component from the package and wrap your AG Grid component with it.
+
+```tsx
+import { IressAgGridContainer } from '@iress/ids-themes';
+
+<IressAgGridContainer>
+  <AgGridReact />
+</IressAgGridContainer>;
+```
+
+**Note:** It is important that you ensure the ag-theme-iress-lite CSS class is imported _after_ ag-theme-alpine. If you do not copy the order correctly, you will see some styling issues.
+
+### Version
+
+The version of AG Grid that the theme is supporting is: <code>ag-grid-react@{devDependencies['ag-grid-react']}</code>
+
+## Examples
+
+### Simple
+
+This is a simple example, based on the [Quick Start](https://www.ag-grid.com/react-data-grid/getting-started/) example from the AG Grid documentation.
+
+<ComponentExample story={ComponentStories.Simple} stories={ComponentStories} />
+
+### Complex
+
+This is a complex example showcasing some of the more advanced features of AG Grid.
+
+<ComponentExample story={ComponentStories.Complex} stories={ComponentStories} />
+
+### Compact
+
+This is a complex example showcasing some of the more advanced features of AG Grid using the `compact` variant.
+
+<ComponentExample story={ComponentStories.Compact} stories={ComponentStories} />
+
+## Utility classes
+
+Because AG Grid is a third-party piece of software, we have to rely on utility classes to enforce styling of cell content. You can use the following utility classes.
+
+| Class                  | Applied to                                 | Effect                                                            |
+| ---------------------- | ------------------------------------------ | ----------------------------------------------------------------- |
+| iress--positive        | Cell content                               | Adds buy / positive styling to match the IressText buy variant    |
+| iress--negative        | Cell content                               | Adds sell / negative styling to match the IressText sell variant  |
+| iress--zero            | Cell content                               | Reduces the visual weight of cells that have a value of zero      |
+| iress-cell--divider    | Column (via cellClass and headerCellClass) | Creates a vertical divide between this column and the next column |
+| iress-cell--ellipsis   | Column (via cellClass)                     | Shows an ellipsis instead of wrapping text content                |
+
+## Common issues
+
+### Wrong row heights
+
+If you are seeing grid rows not automatically adjusting to their content, you may have to set `autoHeight=true` on the column definition that will define the height (usually the one with the most content, or the first column).
+
+```tsx
+<AgGridReact columnDefs={[{ field: 'name', autoHeight: true }]} />
+```
+
+<IressAlert
+  status="warning"
+  heading="Performance concerns"
+  className="iress-mb--md"
+>
+  As <code>autoHeight</code> adds additional render calculations to the AG grid,
+  you may notice reduced performance, particularly in larger tables. If this
+  happens, you should set the `getRowHeight` property on AG Grid to a fixed row height.
+</IressAlert>

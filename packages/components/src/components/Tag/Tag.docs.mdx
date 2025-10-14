@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -27,15 +27,6 @@ The text a screen reader will announce defaults to "Delete" but can be changed u
 
 <ComponentExample
   story={ComponentStories.DeletingTags}
-  stories={ComponentStories}
-/>
-
-### Custom button
-
-You can completely override the delete button by passing a custom component to the `deleteButton` prop.
-
-<ComponentExample
-  story={ComponentStories.CustomButton}
   stories={ComponentStories}
 />
 

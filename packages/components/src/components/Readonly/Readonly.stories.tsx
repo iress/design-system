@@ -1,6 +1,7 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { disableArgTypes } from '@iress-storybook/helpers';
-import { IressReadonly, type IressReadonlyProps } from './Readonly';
+import { IressReadonlyProps } from './Readonly.types';
+import { IressReadonly } from './Readonly';
 import { IressInline } from '../Inline';
 import { IressIcon } from '../Icon';
 import { IressText } from '../Text';
@@ -13,7 +14,6 @@ export default {
   argTypes: {
     ...disableArgTypes(['children']),
   },
-  tags: ['updated'],
 } as Meta<typeof IressReadonly>;
 
 export const Default: Story = {
@@ -29,7 +29,7 @@ export const RichContent: Story = {
   args: {
     ...Default.args,
     children: (
-      <IressInline verticalAlign="middle" gap="sm">
+      <IressInline verticalAlign="middle" gutter="sm">
         <IressIcon name="flag" /> Australia
       </IressInline>
     ),
@@ -41,12 +41,12 @@ export const InlineStyle: Story = {
   args: {
     ...Default.args,
     children: (
-      <IressInline verticalAlign="middle" gap="sm">
+      <IressInline verticalAlign="middle" gutter="sm">
         <IressIcon name="flag" /> Australia
       </IressInline>
     ),
-    prepend: <IressText color="colour.neutral.70">Prepend</IressText>,
-    append: <IressText color="colour.neutral.70">Append</IressText>,
+    prepend: <IressText mode="muted">Prepend</IressText>,
+    append: <IressText mode="muted">Append</IressText>,
     inline: true,
   },
 };

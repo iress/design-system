@@ -1,9 +1,10 @@
 import { RenderResult, act, render, screen } from '@testing-library/react';
-import { IressInputPopover, IressInputPopoverProps } from './InputPopover';
-import { GlobalCSSClass, IressInput, IressMenu, IressMenuItem } from '@/main';
+import { IressInputPopover } from './InputPopover';
+import { IressInput, IressMenu, IressMenuItem } from '@/main';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
-import { popover } from '../Popover.styles';
+import { IressInputPopoverProps } from './InputPopover.types';
+import styles from '../Popover.module.scss';
 
 const TEST_ID = 'test-component';
 
@@ -25,17 +26,12 @@ function renderComponent(
 describe('IressInputPopover', () => {
   it('renders the component with the correct attributes and classes (hidden)', () => {
     renderComponent({ className: 'test-class' });
-    const classes = popover({
-      hasInputActivator: true,
-      matchActivatorWidth: true,
-    });
-    const activatorSelector = `.${String(classes.activator ?? '').replace(' ', '.')}`;
 
-    const popoverElement = screen.getByTestId(TEST_ID);
-    expect(popoverElement).toHaveClass(
-      classes.root!,
+    const popover = screen.getByTestId(TEST_ID);
+    expect(popover).toHaveClass(
+      styles.popover,
+      styles.hasInputActivator,
       'test-class',
-      GlobalCSSClass.InputPopover,
     );
 
     const combobox = screen.getByRole('combobox');
@@ -44,11 +40,11 @@ describe('IressInputPopover', () => {
     expect(combobox).toHaveAttribute('aria-expanded', 'false');
     expect(combobox).toHaveAttribute('aria-haspopup', 'listbox');
     expect(combobox).toHaveAttribute('role', 'combobox');
-    expect(combobox.closest(activatorSelector)).not.toBeNull();
+    expect(combobox.closest(`.${styles.activator}`)).not.toBeNull();
 
     const content = screen.getByText(TEST_ID);
     expect(content).not.toBeVisible();
-    expect(content).toHaveClass(classes.content!);
+    expect(content).toHaveClass(styles.content);
   });
 
   it('renders the component with the correct attributes and classes (shown)', async () => {
@@ -154,6 +150,21 @@ describe('IressInputPopover', () => {
         await userEvent.type(activator, 'Test');
 
         expect(activator).toHaveAttribute('aria-expanded', 'true');
+      });
+    });
+
+    describe('disabledAutoToggle', () => {
+      it('does not toggle the popover', async () => {
+        renderComponent({
+          disabledAutoToggle: true,
+        });
+
+        const activator = screen.getByRole('combobox');
+        expect(activator).toHaveAttribute('aria-expanded', 'false');
+
+        await userEvent.type(activator, 'Content');
+
+        expect(activator).toHaveAttribute('aria-expanded', 'false');
       });
     });
 

@@ -1,21 +1,28 @@
 import { act, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { Toaster, ToasterItem } from './Toaster';
-import { GlobalCSSClass } from '@/enums';
 
-interface MockToasterItem extends Omit<ToasterItem, 'content'> {
-  content: string;
-}
+import { IressToaster } from './Toaster';
+import { IressToasterProps, ToastItem } from './Toaster.types';
+import { IressToasterProvider } from './ToasterProvider';
+import styles from './Toaster.module.scss';
 
-const mockToasts: MockToasterItem[] = [
+const renderComponent = (props?: Partial<IressToasterProps>) => {
+  return render(
+    <IressToasterProvider>
+      <IressToaster {...props} />
+    </IressToasterProvider>,
+  );
+};
+
+const mockToasts = [
   { id: '1', status: 'error', content: 'Sample Toast 1' },
   { id: '2', status: 'info', content: 'Sample Toast 2' },
   { id: '3', status: 'success', content: 'Sample Toast 3' },
 ];
 
-describe('Toaster', () => {
+describe('IressToaster', () => {
   it('renders with defaults', () => {
-    const screen = render(<Toaster />);
+    const screen = render(<IressToasterProvider />);
 
     const toaster = screen.getByRole('alert');
     expect(toaster).toBeInTheDocument();
@@ -26,16 +33,12 @@ describe('Toaster', () => {
 
   it('renders toasts', () => {
     const { container } = render(
-      <Toaster toasts={mockToasts} className="test-class" />,
+      <IressToasterProvider>
+        <IressToaster toasts={mockToasts as ToastItem[]} />
+      </IressToasterProvider>,
     );
 
-    const toasterElement = container.querySelector('[role="alert"]');
-    expect(toasterElement).not.toBeNull();
-
-    const toasterHolder = toasterElement?.querySelector(
-      `.${GlobalCSSClass.Toaster}`,
-    );
-    expect(toasterHolder).toHaveClass('test-class');
+    expect(container.querySelector(`.${styles.toaster}`)).not.toBeNull();
 
     mockToasts.forEach((toast) => {
       const toastElement = screen.getByLabelText(`${toast.status}:`);
@@ -53,7 +56,14 @@ describe('Toaster', () => {
       it('changes where the toaster is rendered', () => {
         const container = document.createElement('div');
 
-        render(<Toaster toasts={mockToasts} container={container} />);
+        render(
+          <IressToasterProvider>
+            <IressToaster
+              toasts={mockToasts as ToastItem[]}
+              container={container}
+            />
+          </IressToasterProvider>,
+        );
 
         expect(container).toHaveAttribute('role', 'alert');
         expect(container.innerHTML).toContain('Sample Toast 1');
@@ -62,16 +72,14 @@ describe('Toaster', () => {
   });
 
   it('should have no accessibility violations', async () => {
-    const { container } = render(
-      <Toaster
-        toasts={[{ id: '1', content: 'Sample Toast', status: 'info' }]}
-      />,
-    );
+    const screen = renderComponent({
+      toasts: [{ id: '1', content: 'Sample Toast' }] as ToastItem[],
+    });
 
     await screen.findByText('Sample Toast');
 
     await act(async () => {
-      const results = await axe(container);
+      const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
     });
   });

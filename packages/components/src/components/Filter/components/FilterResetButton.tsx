@@ -1,29 +1,26 @@
-import { IressButton, type IressButtonProps } from '@/components/Button';
-import { filter } from '../Filter.styles';
+import { type ButtonRef, IressButton, type IressButtonProps } from '@/main';
+import styles from '../Filter.module.scss';
 import { usePopoverItem } from '@/components/Popover/hooks/usePopoverItem';
-import {
-  type ForwardedRef,
-  forwardRef,
-  useImperativeHandle,
-  useRef,
-} from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
+import classNames from 'classnames';
+
+type TheRef = ButtonRef | null;
 
 export const FilterResetButton = forwardRef(
-  (props: IressButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
-    const elementRef = useRef<HTMLButtonElement | null>(null);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  (props: IressButtonProps, ref: React.ForwardedRef<ButtonRef>) => {
+    const elementRef = useRef<TheRef>(null);
     const { isActiveInPopover, ...popoverItemProps } = usePopoverItem();
 
-    const classes = filter();
-
-    useImperativeHandle(ref, () => elementRef.current!);
+    useImperativeHandle<TheRef, TheRef>(ref, () => elementRef.current);
 
     return (
       <IressButton
         {...props}
         {...popoverItemProps}
-        className={classes.reset}
-        mode="tertiary"
+        className={classNames(styles.reset, {
+          [styles.isActiveInPopover]: isActiveInPopover,
+        })}
+        mode={IressButton.Mode.Link}
         ref={(element) => {
           elementRef.current = element;
           popoverItemProps?.ref?.(elementRef.current);

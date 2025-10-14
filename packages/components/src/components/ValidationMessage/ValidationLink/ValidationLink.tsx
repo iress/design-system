@@ -1,38 +1,31 @@
-import {
-  IressValidationMessage,
-  type IressValidationMessageProps,
-} from '../ValidationMessage';
-import { type ReactNode } from 'react';
-import { cx } from '@/styled-system/css';
-import { GlobalCSSClass } from '@/enums';
+import { isValidFormInputElement } from '@helpers/form/isValidFormInputElement';
+import { ValidationBase } from '../ValidationBase/ValidationBase';
+import { type IressValidationLinkProps } from './ValidationLink.types';
 
-/**
- * @deprecated Use `IressValidationMessageProps<string>` instead.
- */
-export interface IressValidationLinkProps
-  extends IressValidationMessageProps<string> {
-  /**
-   * Validation content (what went wrong, what went right).
-   */
-  children?: ReactNode;
-
-  /**
-   * ID of element the message is describing. If nothing is supplied a link will not render.
-   */
-  linkToTarget: string;
-}
-
-/**
- * @deprecated Use `IressValidationMessage` instead.
- */
 export const IressValidationLink = ({
-  className,
   linkToTarget,
   ...props
 }: IressValidationLinkProps) => (
-  <IressValidationMessage<string>
+  <ValidationBase
     {...props}
-    className={cx(className, GlobalCSSClass.ValidationLink)}
-    linkToTarget={linkToTarget}
+    as="a"
+    href={`#${linkToTarget}`}
+    onClick={(e) => {
+      const target = document.getElementById(linkToTarget);
+
+      if (!target) {
+        return;
+      }
+
+      e.preventDefault();
+
+      if (isValidFormInputElement(target)) {
+        target.focus();
+      } else {
+        target.setAttribute('tabIndex', '-1');
+        target.focus();
+        target.removeAttribute('tabIndex');
+      }
+    }}
   />
 );

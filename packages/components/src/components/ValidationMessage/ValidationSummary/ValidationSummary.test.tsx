@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { capitalizeFirstLetter } from '@helpers/formatting/capitalizeFirstLetter';
+import styles from './ValidationSummary.module.scss';
+import messageStyles from '../ValidationMessage.module.scss';
 import { IressValidationSummary } from './ValidationSummary';
-import { GlobalCSSClass, SYSTEM_VALIDATION_STATUSES } from '@/main';
-import { css } from '@/styled-system/css';
+import { SYSTEM_VALIDATION_STATUSES } from '@/main';
 
 describe('IressValidationSummary', () => {
   describe('basic', () => {
@@ -21,15 +22,11 @@ describe('IressValidationSummary', () => {
       );
 
       const component = getByTestId('test-component');
+      const message = getByTestId('test-message');
 
-      getByTestId('test-message');
       getByText('Test error message');
-
-      expect(component).toHaveClass(
-        'test-class',
-        css({ listStyle: 'none', m: 'spacing.000', p: 'spacing.000' }),
-        GlobalCSSClass.ValidationSummary,
-      );
+      expect(component).toHaveClass('test-class', styles.validationSummary);
+      expect(message).toHaveClass(messageStyles.validationMessage);
     });
   });
 
@@ -51,12 +48,11 @@ describe('IressValidationSummary', () => {
             />,
           );
 
-          getByTestId('test-message');
+          const component = getByTestId('test-message');
           const statusMessage =
             status === 'danger' ? 'Error' : capitalizeFirstLetter(status);
-
-          const prefix = getByText(`${statusMessage}:`);
-          expect(prefix).toBeInTheDocument();
+          getByText(`${statusMessage}:`);
+          expect(component).toHaveClass(messageStyles[status.toLowerCase()]);
         });
       });
     });
@@ -94,7 +90,9 @@ describe('IressValidationSummary', () => {
             ]}
           />,
         );
-        const prefix = container.querySelectorAll(`.${css({ srOnly: true })}`);
+        const prefix = container.querySelectorAll(
+          `.${messageStyles['prefix--hidden']}`,
+        );
         expect(prefix).toHaveLength(0);
       });
     });
@@ -200,11 +198,11 @@ describe('IressValidationSummary', () => {
               />,
             );
 
-            getByTestId('test-message');
+            const component = getByTestId('test-message');
             const statusMessage =
               status === 'danger' ? 'Error' : capitalizeFirstLetter(status);
-            const message = getByText(`${statusMessage}:`);
-            expect(message).toBeInTheDocument();
+            getByText(`${statusMessage}:`);
+            expect(component).toHaveClass(messageStyles[status.toLowerCase()]);
           });
         });
       });
@@ -224,7 +222,7 @@ describe('IressValidationSummary', () => {
             />,
           );
           const prefix = container.querySelectorAll(
-            `.${css({ srOnly: true })}`,
+            `.${messageStyles['prefix--hidden']}`,
           );
           expect(prefix).toHaveLength(0);
         });

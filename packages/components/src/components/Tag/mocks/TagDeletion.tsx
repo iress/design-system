@@ -1,10 +1,10 @@
 import {
   IressButton,
-  type IressButtonProps,
+  IressButtonProps,
   IressIcon,
   IressInline,
   IressTag,
-  type IressTagProps,
+  IressTagProps,
 } from '@/main';
 import { useState } from 'react';
 
@@ -22,7 +22,7 @@ export const TagDeletion = (args: IressTagProps) => {
   };
 
   return (
-    <IressInline gap="sm" verticalAlign="middle">
+    <IressInline gutter="sm" verticalAlign="middle">
       {tags.map((tag) => (
         <IressTag
           {...args}

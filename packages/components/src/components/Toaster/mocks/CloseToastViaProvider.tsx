@@ -2,7 +2,7 @@ import {
   IressButton,
   IressInline,
   IressToasterProvider,
-  type IressToasterProviderProps,
+  IressToasterProviderProps,
   useToaster,
 } from '@/main';
 import { useState } from 'react';
@@ -12,12 +12,12 @@ const ToastWithTrigger = () => {
   const [lastToastId, setLastToastId] = useState<string | null>(null);
 
   return (
-    <IressInline gap="sm">
+    <IressInline gutter="sm">
       <IressButton
         onClick={() => {
           const toastId = toaster.error({
             heading: 'Error',
-            content:
+            children:
               'Connection failure. Longer text description should wrap and look like this. Try to limit to 3 lines or less.',
             onClose: () => {
               setLastToastId(null);

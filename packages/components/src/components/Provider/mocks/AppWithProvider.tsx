@@ -18,12 +18,11 @@ const Page = () => {
 
   return (
     <IressPanel
-      bg="alt"
       style={{
         height: '300px',
       }}
     >
-      <IressInline gap="md">
+      <IressInline gutter="md">
         <IressButton onClick={() => showModal('test-modal')}>
           Show modal
         </IressButton>
@@ -37,7 +36,7 @@ const Page = () => {
           <IressText>Some slideout content</IressText>
         </IressSlideout>
         <IressButton
-          onClick={() => toaster.success({ content: 'A toast message' })}
+          onClick={() => toaster.success({ children: 'A toast message' })}
         >
           Show toast
         </IressButton>

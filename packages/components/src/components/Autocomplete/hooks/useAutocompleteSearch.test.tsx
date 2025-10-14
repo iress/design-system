@@ -1,9 +1,7 @@
-import { act, render, renderHook, waitFor } from '@testing-library/react';
-import {
-  useAutocompleteSearch,
-  type AutocompleteSearchHookProps,
-} from './useAutocompleteSearch';
+import { render, renderHook, waitFor } from '@testing-library/react';
+import { useAutocompleteSearch } from './useAutocompleteSearch';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
+import { AutocompleteSearchHookProps } from '../Autocomplete.types';
 import { LabelValueMeta } from '@/interfaces';
 
 const DEFAULT_PROPS = {
@@ -689,36 +687,30 @@ describe('useAutocompleteSearch', () => {
       });
 
       // Query below threshold - should NEVER show loading
-      act(() => {
-        hook.rerender({
-          ...DEFAULT_PROPS,
-          options: mockSearch,
-          query: 'ab', // 2 characters, below threshold of 3
-          debounceThreshold: 0,
-          minSearchLength: 3,
-        });
+      hook.rerender({
+        ...DEFAULT_PROPS,
+        options: mockSearch,
+        query: 'ab', // 2 characters, below threshold of 3
+        debounceThreshold: 0,
+        minSearchLength: 3,
       });
 
       // Should never become loading
       expect(hook.result.current.loading).toBe(false);
 
       // Wait a bit to ensure no loading state appears
-      await act(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 100));
-      });
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       expect(hook.result.current.loading).toBe(false);
       expect(mockSearch).not.toHaveBeenCalled();
 
       // Now use query that meets threshold
-      act(() => {
-        hook.rerender({
-          ...DEFAULT_PROPS,
-          options: mockSearch,
-          query: 'abc', // 3 characters, meets threshold
-          debounceThreshold: 0,
-          minSearchLength: 3,
-        });
+      hook.rerender({
+        ...DEFAULT_PROPS,
+        options: mockSearch,
+        query: 'abc', // 3 characters, meets threshold
+        debounceThreshold: 0,
+        minSearchLength: 3,
       });
 
       // NOW it should show loading
@@ -1024,7 +1016,7 @@ describe('useAutocompleteSearch', () => {
       });
 
       // User opens autocomplete - should see initial options
-      expect(hook.result.current.results).toEqual(initialOptions);
+      expect(hook.result.current.displayResults).toEqual(initialOptions);
 
       // User types 1 character (not enough to search) - should still see initial options
       hook.rerender({
@@ -1033,7 +1025,7 @@ describe('useAutocompleteSearch', () => {
         minSearchLength: 2,
         initialOptions,
       });
-      expect(hook.result.current.results).toEqual(initialOptions);
+      expect(hook.result.current.displayResults).toEqual(initialOptions);
     });
   });
 
@@ -1046,7 +1038,7 @@ describe('useAutocompleteSearch', () => {
       });
 
       // When autocomplete opens, should display initial options and wait for user input
-      expect(hook.result.current.results).toEqual(initialOptions);
+      expect(hook.result.current.displayResults).toEqual(initialOptions);
       expect(hook.result.current.shouldShowInstructions).toBe(true); // Waiting for input
       expect(hook.result.current.shouldShowNoResults).toBe(false); // No search performed yet
       expect(hook.result.current.loading).toBe(false);
@@ -1064,7 +1056,7 @@ describe('useAutocompleteSearch', () => {
       expect(hook.result.current.shouldShowInstructions).toBe(true);
       expect(hook.result.current.shouldShowNoResults).toBe(false);
       expect(hook.result.current.loading).toBe(false);
-      expect(hook.result.current.results).toEqual([]);
+      expect(hook.result.current.displayResults).toEqual([]);
 
       // User types 2 characters (still insufficient)
       hook.rerender({ ...DEFAULT_PROPS, query: 'ab', minSearchLength: 3 });
@@ -1106,7 +1098,7 @@ describe('useAutocompleteSearch', () => {
 
       // Should display search results after loading completes
       await waitFor(() => expect(hook.result.current.loading).toBe(false));
-      expect(hook.result.current.results).toEqual(
+      expect(hook.result.current.displayResults).toEqual(
         expect.arrayContaining([
           expect.objectContaining({ label: 'Test Result' }),
         ]),
@@ -1148,7 +1140,7 @@ describe('useAutocompleteSearch', () => {
       await waitFor(() => expect(hook.result.current.loading).toBe(false));
       expect(hook.result.current.shouldShowNoResults).toBe(true);
       expect(hook.result.current.shouldShowInstructions).toBe(false);
-      expect(hook.result.current.results).toEqual([]);
+      expect(hook.result.current.displayResults).toEqual([]);
     });
 
     it('Deleting search text and typing new query transitions smoothly without flashing', async () => {
@@ -1185,7 +1177,7 @@ describe('useAutocompleteSearch', () => {
       firstPromise.resolve(firstResults);
 
       await waitFor(() => expect(hook.result.current.loading).toBe(false));
-      expect(hook.result.current.results).toEqual(
+      expect(hook.result.current.displayResults).toEqual(
         expect.arrayContaining([expect.objectContaining({ label: 'Apple' })]),
       );
 
@@ -1203,7 +1195,7 @@ describe('useAutocompleteSearch', () => {
       expect(hook.result.current.shouldShowInstructions).toBe(true);
       expect(hook.result.current.shouldShowNoResults).toBe(false);
       expect(hook.result.current.loading).toBe(false);
-      expect(hook.result.current.results).toEqual([]); // Cleared to show instructions
+      expect(hook.result.current.displayResults).toEqual([]); // Cleared to show instructions
 
       // User types new search query "ba" - should transition smoothly to loading then new results
       hook.rerender({
@@ -1224,7 +1216,7 @@ describe('useAutocompleteSearch', () => {
       secondPromise.resolve(secondResults);
 
       await waitFor(() => expect(hook.result.current.loading).toBe(false));
-      expect(hook.result.current.results).toEqual(
+      expect(hook.result.current.displayResults).toEqual(
         expect.arrayContaining([expect.objectContaining({ label: 'Banana' })]),
       );
       expect(hook.result.current.shouldShowNoResults).toBe(false);
@@ -1272,7 +1264,7 @@ describe('useAutocompleteSearch', () => {
 
       // Should display final results without any visual flashing
       await waitFor(() => expect(hook.result.current.loading).toBe(false));
-      expect(hook.result.current.results).toEqual(
+      expect(hook.result.current.displayResults).toEqual(
         expect.arrayContaining([
           expect.objectContaining({ label: 'Result for test' }),
         ]),
@@ -1292,7 +1284,7 @@ describe('useAutocompleteSearch', () => {
       });
 
       // Initially displays initial options and shows instructions
-      expect(hook.result.current.results).toEqual(initialOptions);
+      expect(hook.result.current.displayResults).toEqual(initialOptions);
       expect(hook.result.current.shouldShowInstructions).toBe(true);
 
       // User types insufficient characters - should continue showing initial options
@@ -1304,7 +1296,7 @@ describe('useAutocompleteSearch', () => {
         minSearchLength: 2,
       });
 
-      expect(hook.result.current.results).toEqual(initialOptions);
+      expect(hook.result.current.displayResults).toEqual(initialOptions);
       expect(hook.result.current.shouldShowInstructions).toBe(true);
 
       // User types sufficient characters - should search and display search results instead
@@ -1326,7 +1318,7 @@ describe('useAutocompleteSearch', () => {
       searchPromise.resolve(searchResults);
 
       await waitFor(() => expect(hook.result.current.loading).toBe(false));
-      expect(hook.result.current.results).toEqual(
+      expect(hook.result.current.displayResults).toEqual(
         expect.arrayContaining([
           expect.objectContaining({ label: 'Search Result' }),
         ]),

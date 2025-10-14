@@ -1,10 +1,8 @@
 import { render } from '@testing-library/react';
-import { IressCheckbox, checkbox as checkboxStyles } from '.';
+import { IressCheckbox } from '.';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
-import { GlobalCSSClass } from '@/enums';
-
-const TEST_ID = 'test-component';
+import styles from './Checkbox.module.scss';
 
 describe('IressCheckbox', () => {
   describe('basic', () => {
@@ -29,7 +27,6 @@ describe('IressCheckbox', () => {
       );
 
       expect(screen.getByTestId('input')).toBeInTheDocument();
-      expect(screen.getByTestId('input')).toHaveClass(GlobalCSSClass.Checkbox);
     });
   });
 
@@ -75,7 +72,7 @@ describe('IressCheckbox', () => {
       });
     });
 
-    describe('readOnly', () => {
+    describe('readonly', () => {
       it('renders a hidden input with the correct value, if checked', () => {
         const screen = render(
           <IressCheckbox value="checkbox" defaultChecked readOnly>
@@ -83,7 +80,7 @@ describe('IressCheckbox', () => {
           </IressCheckbox>,
         );
 
-        // No checkbox is rendered in readOnly mode
+        // No checkbox is rendered in readonly mode
         const checkbox = screen.queryByRole('checkbox');
         expect(checkbox).not.toBeInTheDocument();
 
@@ -102,7 +99,7 @@ describe('IressCheckbox', () => {
           </IressCheckbox>,
         );
 
-        // No checkbox is rendered in readOnly mode
+        // No checkbox is rendered in readonly mode
         const checkbox = screen.queryByRole('checkbox');
         expect(checkbox).not.toBeInTheDocument();
 
@@ -171,9 +168,8 @@ describe('IressCheckbox', () => {
       );
       const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
-      const screenReaderText = screen.getByText('Test');
-      expect(screenReaderText).toHaveClass(
-        checkboxStyles({ hiddenLabel: true }).labelSpan!,
+      expect(screen.container.querySelector('div')?.classList.value).toContain(
+        'hiddenLabel',
       );
     });
   });
@@ -186,46 +182,7 @@ describe('IressCheckbox', () => {
         </IressCheckbox>,
       );
       const checkbox = screen.getByRole('checkbox');
-      expect(checkbox).toHaveClass(checkboxStyles({ touch: true }).input!);
-    });
-  });
-
-  describe('hiddenControl', () => {
-    it('before checked: should hide checkbox mark visually when hiddenControl prop is true', () => {
-      const screen = render(
-        <IressCheckbox
-          value="Test value"
-          name="test-name"
-          hiddenControl
-          data-testid={TEST_ID}
-        >
-          Test
-        </IressCheckbox>,
-      );
-      const checkboxMark = screen.queryByTestId(`${TEST_ID}__checkboxMark`);
-      expect(checkboxMark).toHaveClass(
-        checkboxStyles({ hiddenControl: true, checked: false }).mark!,
-      );
-    });
-
-    it('after checked: should show checkbox mark and colored border when hiddenControl prop is true', async () => {
-      const screen = render(
-        <IressCheckbox value="Test value" name="test-name" hiddenControl>
-          Test
-        </IressCheckbox>,
-      );
-
-      const checkbox = screen.getByRole('checkbox');
-      expect(checkbox).toBeInTheDocument();
-
-      await userEvent.click(checkbox);
-      expect(checkbox).toHaveClass(
-        checkboxStyles({ hiddenControl: true }).input!,
-      );
-      const label = screen.getByText('Test').closest('label');
-      expect(label).toHaveClass(
-        checkboxStyles({ hiddenControl: true, checked: true }).label!,
-      );
+      expect(checkbox).toHaveClass(styles.input);
     });
   });
 });

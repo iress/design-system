@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
+import { IressTableProvider } from '../TableProvider';
 import { TableBodyCell } from './TableBodyCell';
 import { TableHeader } from './TableHeader';
-import { TableProvider } from '../TableProvider';
 
 const cellApi = {
   id: 'test',
@@ -116,11 +116,9 @@ describe('TableBodyCell', () => {
   describe('accessibility', () => {
     it('should not have basic accessibility issues', async () => {
       const screen = render(
-        <TableProvider columns={[{ key: 'column', label: 'Column' }]} rows={[]}>
+        <IressTableProvider columns={{ column: { label: 'Column' } }} rows={[]}>
           <table>
-            <thead>
-              <TableHeader tableId="id" />
-            </thead>
+            <TableHeader tableId="id" />
             <tbody>
               <tr>
                 <TableBodyCell cellApi={cellApi} index={0} tableId="id">
@@ -136,7 +134,7 @@ describe('TableBodyCell', () => {
               </tr>
             </tbody>
           </table>
-        </TableProvider>,
+        </IressTableProvider>,
       );
       const results = await axe(screen.container);
       expect(results).toHaveNoViolations();

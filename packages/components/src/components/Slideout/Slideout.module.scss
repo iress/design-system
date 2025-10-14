@@ -1,0 +1,133 @@
+@use 'Slideout.vars.module';
+@use '../../styles/mixins';
+@use '../../styles/vars';
+
+/** Slideout
+ * --------------------------------------------------
+
+ * @prop --iress-transition: Sets the sliding speed / behaviour
+ * @prop --iress-width: Slideout width
+ * @prop --iress-box-shadow: Slideout box shadow
+ * @prop --iress-box-shadow-focus: Slideout focus box shadow
+ * @prop --iress-border: Sets internal border
+ * @prop --iress-border-radius: Sets internal border radius
+ * @prop --iress-position: Sets position of slideout (fixed or absolute)
+ * @prop --iress-background-color: Sets the background color of the slideout
+ * @prop --iress-footer-border-color: Sets the border color of the slideout footer
+ * @prop --iress-initial-pos: The initial CSS position of the slideout (determined by the width)
+ * @prop --iress-initial-offset: Allows you to offset the start /end position of the slideout
+ * @prop --iress-close-button-offset-right: Sets close button right offset, used by overlay-panel
+ * @prop --iress-close-button-offset-top: Sets close button top offset, used by overlay-panel
+ */
+
+.slideout {
+  @include mixins.defaultFontStyles();
+
+  position: var(--iress-position);
+  inset-block-start: var(--iress-offset-top, 0px);
+  height: calc(100% - var(--iress-offset-top, 0px));
+  width: var(--iress-width);
+  max-width: 100%;
+  overflow-y: auto;
+  transition: var(--iress-transition);
+  box-shadow: var(--iress-box-shadow);
+  background-color: var(--iress-background-color);
+  z-index: 1039;
+  display: flex;
+  flex-direction: column;
+
+  &.unmounted {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.backdrop {
+  transition: var(--iress-transition);
+  z-index: 1039;
+
+  &.initial,
+  &.close {
+    background-color: rgb(0 0 0 / 0%);
+  }
+
+  &.open {
+    background-color: var(--iress-background-color);
+  }
+
+  &.unmounted {
+    display: none;
+  }
+}
+
+.right {
+  inset-inline-end: calc(var(--iress-initial-offset, 0px) + var(--iress-initial-pos));
+  border-start-start-radius: var(--iress-border-radius);
+  border-end-start-radius: var(--iress-border-radius);
+  border-start-end-radius: 0px;
+  border-end-end-radius: 0px;
+
+  &.open {
+    inset-inline-end: var(--iress-initial-offset, 0);
+  }
+}
+
+.left {
+  inset-inline-start: var(--iress-initial-pos);
+  border-start-start-radius: 0px;
+  border-end-start-radius: 0px;
+  border-start-end-radius: var(--iress-border-radius);
+  border-end-end-radius: var(--iress-border-radius);
+
+  &.open {
+    inset-inline-start: var(--iress-initial-offset, 0);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  inset-inline-end: var(--iress-close-button-offset-right);
+  inset-block-start: var(--iress-close-button-offset-top);
+}
+
+.content {
+  overflow: auto;
+  flex: 1 1 auto;
+}
+
+.footer {
+  border-block-start: 1px solid var(--iress-footer-border-color);
+  border-inline-start: 0;
+  border-inline-end: 0;
+  border-block-end: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slideout {
+    opacity: 0;
+  }
+
+  .right {
+    transition:
+      opacity var(--iress-transition-duration) ease-in-out,
+      visibility var(--iress-transition-duration) ease-in-out,
+      inset-inline-end var(--iress-transition-duration) ease-in-out var(--iress-transition-duration);
+  }
+
+  .left {
+    transition:
+      opacity var(--iress-transition-duration) ease-in-out,
+      visibility var(--iress-transition-duration) ease-in-out,
+      inset-inline-start var(--iress-transition-duration) ease-in-out var(--iress-transition-duration);
+  }
+
+  .open {
+    opacity: 1;
+    transition:
+      opacity var(--iress-transition-duration) ease-in-out,
+      visibility var(--iress-transition-duration) ease-in-out;
+  }
+}

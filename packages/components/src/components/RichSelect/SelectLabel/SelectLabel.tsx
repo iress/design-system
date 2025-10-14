@@ -1,21 +1,16 @@
+import classNames from 'classnames';
+import { type IressSelectLabelProps } from './SelectLabel.types';
 import { useMemo } from 'react';
 import { toArray } from '@helpers/formatting/toArray';
 import { composeLabelValueDescriptor } from '@helpers/label-value/composeLabelValueDescriptor';
-import { selectLabel } from './SelectLabel.styles';
+import styles from './SelectLabel.module.scss';
+import { IressIcon } from '@/components/Icon';
 import { IressText } from '@/components/Text';
+import { ButtonCssClass } from '@/components/Button';
 import { GlobalCSSClass } from '@/enums';
-import { type IressHTMLAttributes } from '@/interfaces';
-import { type IressSelectActivatorProps } from '../components/SelectActivator';
-import { cx } from '@/styled-system/css';
-
-export type IressSelectLabelProps = Omit<
-  IressHTMLAttributes<HTMLButtonElement>,
-  'children'
-> &
-  IressSelectActivatorProps;
 
 export const IressSelectLabel = ({
-  append,
+  append = <IressIcon name="chevron-down" size="xs" />,
   className,
   placeholder,
   prepend,
@@ -24,8 +19,6 @@ export const IressSelectLabel = ({
   ...restProps
 }: IressSelectLabelProps) => {
   const selectedArray = toArray(selected);
-  const shouldShowDefaultChevron = !append;
-  const classes = selectLabel({ showDefaultChevron: shouldShowDefaultChevron });
 
   const label = useMemo(() => {
     if (!selectedArray.length) return placeholder;
@@ -37,24 +30,26 @@ export const IressSelectLabel = ({
     <button
       {...restProps}
       type="button"
-      className={cx(
+      className={classNames(
         className,
-        classes.selectLabel,
+        styles.selectLabel,
+        ButtonCssClass.Base,
         GlobalCSSClass.FormElementInner,
-        GlobalCSSClass.RichSelectLabel,
       )}
     >
-      {prepend && <span className={classes.prepend}>{prepend}</span>}
+      {prepend && (
+        <span className={classNames(ButtonCssClass.Prepend, styles.prepend)}>
+          {prepend}
+        </span>
+      )}
       <IressText
-        className={cx(
-          classes.contents,
-          !selectedArray.length && classes.placeholder,
-        )}
-        element="span"
+        className={classNames(styles.contents, {
+          [styles.placeholder]: !selectedArray.length,
+        })}
       >
         {label}
       </IressText>
-      <span className={classes.append}>{append}</span>
+      {append && <span className={styles.append}>{append}</span>}
     </button>
   );
 };

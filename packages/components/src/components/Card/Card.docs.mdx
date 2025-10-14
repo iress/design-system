@@ -1,4 +1,4 @@
-import { Meta, Markdown } from '@storybook/addon-docs/blocks';
+import { Meta, Markdown } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -129,7 +129,10 @@ To simplify the process of making the whole card clickable, you can use the `Ire
 
 **Note:** These components replace the `button`, `clickable` and `href` props. You no longer need `button` and `clickable`, as these are automatically inferred. To mimic the `href` prop, simply change the component you are using to `IressLinkCard`.
 
-<IressInline gap="md" horizontalAlign="around">
+<IressInline
+  gutter={IressInline.Gutter.Md}
+  horizontalAlign={IressInline.HorizontalAlign.Around}
+>
   <ComponentExample
     story={CardClickableStories.ButtonCard}
     stories={CardClickableStories}

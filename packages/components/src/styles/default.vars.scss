@@ -1,0 +1,115 @@
+/* Default variables - used as fallbacks when no theme is applied. Only add a default variable if it ensures
+ consistency; simple fallback values like "transparent" can be set directly in the cascade so don't need to
+ be a variable. */
+
+:root,
+:host(.iress-shadow-root) {
+  /* Typography */
+  --iress-default-text-color: hsl(0deg 0% 20%);
+  --iress-default-text-color--light: hsl(0deg 0% 44%); /* 4.5:1 vs bg--alt */
+  --iress-default-text-color--placeholder: hsl(0deg 0% 66%);
+  --iress-default-text-color--alt: hsl(0deg 0% 100%);
+  --iress-default-text-color--hover: hsl(0deg 0% 20%);
+  --iress-default-link-color: hsl(206deg 100% 35%);
+
+  --iress-default-font-size--touch: 1rem;
+  --iress-default-font-size--standard: 0.875rem;
+  --iress-default-font-size--compact: 0.75rem;
+
+  --iress-default-font-size: var(--iress-default-font-size--touch);
+
+  /* Font sizes */
+  --iress-default-font-size-xxxs: calc(0.875 * var(--iress-g-font-size-rem));
+  --iress-default-font-size-xxs: var(--iress-g-font-size-rem);
+  --iress-default-font-size-xs: calc(1.125 * var(--iress-g-font-size-rem));
+  --iress-default-font-size-sm: calc(1.25 * var(--iress-g-font-size-rem));
+  --iress-default-font-size-md: calc(1.375 * var(--iress-g-font-size-rem));
+  --iress-default-font-size-lg: calc(1.5 * var(--iress-g-font-size-rem));
+  --iress-default-font-size-xl: calc(1.75 * var(--iress-g-font-size-rem));
+  --iress-default-font-size-xxl: calc(2 * var(--iress-g-font-size-rem));
+  --iress-default-font-size-xxxl: calc(2.5 * var(--iress-g-font-size-rem));
+  --iress-default-font-size-xxxxl: calc(3.5 * var(--iress-g-font-size-rem));
+
+  /* Borders */
+  --iress-default-border-color: hsl(0deg 0% 88%);
+  --iress-default-form-border-color: hsl(0deg 0% 55%); /* 3:1 vs bg--alt */
+  --iress-default-border-radius: 0px; /* This gets used in calcs, so needs units */
+  --iress-default-border-width: 1px;
+  --iress-default-border-width--lg: 4px;
+
+  /* Backgrounds */
+  --iress-default-background-color: hsl(0deg 0% 100%);
+  --iress-default-background-color-alt: hsl(0deg 0% 97%);
+  --iress-default-hover-background-color: hsl(0deg 0% 92%);
+  --iress-default-backdrop-background-color: hsl(0deg 0% 0% / 50%);
+  --iress-default-inactive-color: hsl(0deg 0% 53%);
+  --iress-default-inactive-contrast-color: hsl(0deg 0% 100%);
+  --iress-default-skeleton-background-color: hsl(0deg 0% 85% / 30%);
+
+  /* Buy / sell */
+  --iress-default-positive-color: hsl(86deg 53% 33%);
+  --iress-default-positive-hover-color: hsl(86deg 53% 43%);
+  --iress-default-negative-color: hsl(350deg 80% 40%);
+  --iress-default-negative-hover-color: hsl(350deg 80% 50%);
+
+  /* Active state */
+  --iress-default-active-color: hsl(0deg 0% 46%);
+
+  /* Opacity */
+  --iress-default-opacity--backdrop: 0.6;
+
+  /* System colours - all have at least 4.5:1 against alt bg  */
+  --iress-default-primary-color: hsl(0deg 0% 0%);
+  --iress-default-primary-hover-color: hsl(0deg 0% 22%);
+  --iress-default-primary-contrast-color: hsl(0deg 0% 100%);
+  --iress-default-success-color: hsl(120deg 70% 25%);
+  --iress-default-success-hover-color: hsl(120deg 70% 35%);
+  --iress-default-danger-color: hsl(360deg 100% 35%);
+  --iress-default-danger-hover-color: hsl(360deg 100% 45%);
+  --iress-default-warning-color: hsl(15deg 100% 41%);
+  --iress-default-warning-hover-color: hsl(15deg 100% 51%);
+  --iress-default-info-color: hsl(206deg 100% 35%);
+  --iress-default-info-hover-color: hsl(206deg 100% 45%);
+
+  /* Focus indicator */
+  --iress-default-focus-size: 2px;
+  --iress-default-focus-color: hsl(206deg 60% 54%);
+
+  /* Spacing */
+  --iress-default-spacing-xs: calc(0.25 * var(--iress-g-spacing-rem));
+  --iress-default-spacing-sm: calc(0.5 * var(--iress-g-spacing-rem));
+  --iress-default-spacing-md: var(--iress-g-spacing-rem);
+  --iress-default-spacing-lg: calc(1.755 * var(--iress-g-spacing-rem));
+  --iress-default-spacing-xl: calc(3 * var(--iress-g-spacing-rem));
+  --iress-default-min-height: calc(2.5 * var(--iress-g-font-size-rem));
+
+  /* Default Box Shadow */
+  --iress-default-box-shadow-size--sm: 0 var(--iress-default-spacing-sm) var(--iress-default-spacing-sm) 0;
+  --iress-default-box-shadow-size--md: 0 var(--iress-default-spacing-md) var(--iress-default-spacing-md) 0;
+  --iress-default-box-shadow-size--lg: 0 0 var(--iress-default-spacing-lg);
+  --iress-default-box-shadow-color: hsl(0deg 0% 0% / 50%);
+
+  /* Transitions and animations */
+  --iress-default-hover-transition-duration: 0.2s;
+  --iress-default-hover-transition-type: ease-in-out;
+  --iress-default-animation-duration: 0.3s;
+  --iress-default-animation-type: ease-out;
+
+  /* Breakpoint Widths */
+  --iress-default-width--sm: 375px;
+  --iress-default-width--md: 768px;
+  --iress-default-width--lg: 1200px;
+}
+
+/* View Mode Overrides */
+.iress-view-mode-touch {
+  --iress-default-min-height: calc(2.5 * var(--iress-g-font-size-rem));
+}
+
+.iress-view-mode-standard {
+  --iress-default-min-height: calc(2.5 * var(--iress-g-font-size-rem));
+}
+
+.iress-view-mode-compact {
+  --iress-default-min-height: calc(2 * var(--iress-g-font-size-rem));
+}

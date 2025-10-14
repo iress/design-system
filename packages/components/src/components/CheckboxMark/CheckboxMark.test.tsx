@@ -1,7 +1,10 @@
 import { render } from '@testing-library/react';
-import { checkboxMark, IressCheckboxMark, IressCheckboxMarkProps } from '.';
+import {
+  IressCheckboxMark,
+  IressCheckboxMarkProps,
+  IressCheckboxStyles as styles,
+} from '.';
 import { axe } from 'jest-axe';
-import { GlobalCSSClass } from '@/enums';
 
 const TEST_ID = 'test-component';
 
@@ -17,8 +20,8 @@ describe('IressCheckboxMark', () => {
       });
 
       const component = getByTestId(TEST_ID);
-      expect(component).toHaveClass('test-class', GlobalCSSClass.CheckboxMark);
-      expect(component).toHaveClass(checkboxMark({}).root!);
+      expect(component).toHaveClass('test-class');
+      expect(component).toHaveClass(styles.checkboxMark);
     });
   });
 
@@ -29,7 +32,7 @@ describe('IressCheckboxMark', () => {
       });
 
       const component = getByTestId(TEST_ID);
-      expect(component).toHaveClass(checkboxMark({ checked: true }).root!);
+      expect(component).toHaveClass(styles.checked);
     });
   });
 
@@ -40,9 +43,7 @@ describe('IressCheckboxMark', () => {
       });
 
       const component = getByTestId(TEST_ID);
-      expect(component).toHaveClass(
-        checkboxMark({ indeterminate: true }).root!,
-      );
+      expect(component).toHaveClass(styles.indeterminate);
     });
 
     it('renders the correct classes if indeterminate and checked are true', () => {
@@ -52,9 +53,7 @@ describe('IressCheckboxMark', () => {
       });
 
       const component = getByTestId(TEST_ID);
-      expect(component).toHaveClass(
-        checkboxMark({ checked: true, indeterminate: true }).root!,
-      );
+      expect(component).toHaveClass(styles.indeterminate);
     });
   });
 

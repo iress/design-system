@@ -1,0 +1,152 @@
+@use '../../../styles/mixins';
+@use '../Field.vars.module';
+
+/** FieldGroup
+ * --------------------------------------------------
+ * @prop --iress-background-color: Background colour of the field
+ * @prop --iress-focus-background-color: Background colour of the field when focused
+ * @prop --iress-border-left-width: Left border of field
+ * @prop --iress-border-color: Border colour of field
+ * @prop --iress-focus-border-color: Border colour of field when focused
+ * @prop --iress-text-color: Colour of the text
+ * @prop --iress-font-size: Font size of field
+ * @prop --iress-font-weight: Font weight of field
+ * @prop --iress-line-height: Line-height of field
+ * @prop --iress-hint-text-color: Colour of the hint text
+ * @prop --iress-hint-font-weight: Font weight of the hint text
+ * @prop --iress-margin-x: Horizontal margin for the field
+ * @prop --iress-multi-elements-label-text-color: Colour of the multi element label
+ * @prop --iress-transition: Transition animation of the field
+ * @prop --iress-max-width: Max width of the field
+ * @prop --iress-input-spacing-y: Spacing between multiple stacked inputs
+ * @prop --iress-input-spacing-x: Spacing between multiple inline inputs
+ * @prop --iress-required-text-color: Text color of the required symbol in field
+ * 
+ * Inherited tokens
+ * --------------------------------------------------
+ * @prop --iress-row-spacing: [Table] used for fields within tables
+*/
+
+.fieldGroup {
+  @include mixins.defaultFontStyles();
+  --iress-label-ele-text-color: var(--iress-text-color);
+
+  line-height: var(--iress-line-height);
+  background-color: var(--iress-background-color);
+  transition: var(--iress-transition);
+  max-width: var(--iress-max-width);
+  color: var(--iress-text-color);
+  border: none;
+  margin: 0;
+  padding: 0;
+
+  &:focus-within {
+    background-color: var(--iress-focus-background-color);
+    border-color: var(--iress-focus-border-color);
+  }
+
+  label:global(.iress-form-label):not(.ids-label--hidden) {
+    color: var(--iress-multi-elements-label-text-color);
+    margin-block-end: calc(var(--iress-margin-bottom) / 2);
+  }
+}
+
+.legend {
+  padding-inline: 0; /* Hack to legend to sit in the right place */
+  color: var(--iress-text-color);
+  font-size: var(--iress-font-size);
+  font-weight: var(--iress-font-weight);
+  margin-block-end: var(--iress-label-margin-bottom);
+  float: left;
+
+  & + * {
+    clear: left;
+  }
+}
+
+.hint {
+  color: var(--iress-hint-text-color);
+  font-weight: var(--iress-hint-font-weight);
+  display: block;
+}
+
+.invalid {
+  padding-inline-start: var(--iress-field-spacing-left);
+  border-inline-start: var(--iress-border-left-width) solid var(--iress-border-color);
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--iress-input-spacing-y);
+
+  .inline &,
+  .join & {
+    flex-direction: row;
+    align-items: flex-end;
+    column-gap: var(--iress-input-spacing-x);
+
+    .ids-field {
+      display: block;
+      flex-grow: 1;
+
+      &:has([class*='iress-width']) {
+        flex-grow: 0;
+      }
+
+      &:has([class*='iress-width--25perc']) {
+        flex-basis: 25%;
+
+        [class*='iress-width--25perc'] {
+          width: 100%;
+        }
+      }
+
+      &:has([class*='iress-width--50perc']) {
+        flex-basis: 50%;
+
+        [class*='iress-width--50perc'] {
+          width: 100%;
+        }
+      }
+
+      &:has([class*='iress-width--75perc']) {
+        flex-basis: 75%;
+
+        [class*='iress-width--75perc'] {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .join & {
+    column-gap: 0;
+
+    > :global(.iress-form-element:not(:first-child)),
+    > :global(.iress-form-element:not(:first-child) .iress-form-element__inner),
+    .ids-field:not(:first-child) :global(.iress-form-element),
+    .ids-field:not(:first-child) :global(.iress-form-element__inner) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    > :global(.iress-form-element:not(:last-child)),
+    > :global(.iress-form-element:not(:last-child) .iress-form-element__inner),
+    .ids-field:not(:last-child) :global(.iress-form-element),
+    .ids-field:not(:last-child) :global(.iress-form-element__inner) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right-width: 0;
+
+      &.ids-input--readonly :global(.iress-form-element__inner) {
+        border-left-width: 0;
+      }
+    }
+
+    .ids-field--invalid:not(:first-child) {
+      padding-left: 0;
+      border-inline-start: none;
+    }
+  }
+}

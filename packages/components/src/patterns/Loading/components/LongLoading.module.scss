@@ -1,0 +1,102 @@
+.root {
+  width: var(--iress-progress-width, 350px);
+  place-self: center center;
+}
+
+.panel {
+  padding: 2em;
+}
+
+.dots {
+  display: inline-block;
+  width: 0.7em;
+  aspect-ratio: 6;
+  background: radial-gradient(circle closest-side, currentcolor 90%, transparent) 0 / calc(100% / 3) 100% space;
+  clip-path: inset(0 100% 0 0);
+  animation: dots-animated 1s steps(4) infinite;
+  animation-delay: 500ms;
+}
+
+.checkList {
+  margin-left: 0.25em;
+  list-style-position: outside;
+  padding-left: 0;
+}
+
+.checkListItem {
+  position: relative;
+  transition:
+    opacity 0.3s ease-in-out,
+    filter 0.3s linear;
+  transition-delay: 1.2s;
+  padding-left: 0.25em;
+}
+
+.checkListItem__done {
+  opacity: 0.5;
+  filter: grayscale(1);
+}
+
+.checked {
+  width: 0.85em;
+  height: 0.85em;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 100%;
+  margin: 0.31em 0.2em;
+  stroke-width: 2;
+  stroke: var(--iress-g-success-contrast-color, var(--iress-default-success-contrast-color, white));
+  stroke-miterlimit: 10;
+  box-shadow: inset 0px 0px 0px var(--iress-g-success-color, var(--iress-default-success-color, currentColor));
+  animation:
+    checked-fill 0.4s ease-in-out 0.4s forwards,
+    checked-scale 0.3s ease-in-out 0.9s both;
+}
+
+.checked__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: var(--iress-g-success-color, var(--iress-default-success-color, currentColor));
+  fill: none;
+  animation: checked-stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checked__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: checked-stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes checked-stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes checked-scale {
+  0%,
+  100% {
+    transform: none;
+  }
+
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes checked-fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px var(--iress-g-success-color, var(--iress-default-success-color, currentColor));
+  }
+}
+
+@keyframes dots-animated {
+  to {
+    clip-path: inset(0 -34% 0 0);
+  }
+}

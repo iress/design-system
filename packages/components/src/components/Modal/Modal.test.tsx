@@ -7,17 +7,15 @@ import {
   waitForElementToBeRemoved,
 } from '@testing-library/react';
 import { axe } from 'jest-axe';
+import styles from './Modal.module.scss';
 import userEvent from '@testing-library/user-event';
 import { idsLogger } from '@helpers/utility/idsLogger';
 import { App as AppWithModalProvider } from './mocks/AppWithModalProvider';
 import {
-  GlobalCSSClass,
   IressModal,
   IressModalProps,
   IressModalProvider,
   IressModalProviderProps,
-  modal,
-  text,
   IressToasterProvider,
   useModal,
   useToaster,
@@ -76,27 +74,24 @@ describe('IressModal', () => {
 
     const dialog = await screen.findByRole('dialog');
     const backdrop = await screen.findByTestId(`${TEST_ID}__backdrop`);
-    await screen.findByText('Test text');
+    const content = await screen.findByText('Test text');
     const closeButton = await screen.findByRole('button', {
       name: 'Close button',
     });
 
     expect(dialog).toBeInTheDocument();
     expect(backdrop).toBeInTheDocument();
+    expect(content).toBeInTheDocument();
     expect(closeButton).toBeInTheDocument();
 
-    const styles = modal({ status: 'open' });
+    expect(dialog).toHaveClass(styles.modal);
 
-    expect(dialog).toHaveClass(
-      styles.modal ?? '',
-      text(),
-      GlobalCSSClass.Modal,
-    );
-    expect(backdrop).toHaveClass(
-      styles.backdrop ?? '',
-      GlobalCSSClass.ModalBackdrop,
-    );
-    expect(closeButton).toHaveClass(styles.closeButton ?? '');
+    expect(backdrop).toHaveClass(styles['size--md']);
+
+    expect(content).toHaveClass(styles.content);
+    expect(content).toHaveClass('iress-p--md');
+
+    expect(closeButton).toHaveClass(styles.closeButton);
   });
 
   it('renders the component with the correct data-testids', async () => {
@@ -236,7 +231,7 @@ describe('IressModal', () => {
                   toaster.error({
                     timeout: 0,
                     heading: 'Error',
-                    content:
+                    children:
                       'maybe network error happened... and showing error',
                   })
                 }
@@ -358,12 +353,7 @@ describe('IressModal', () => {
         });
 
         const dialog = await screen.findByRole('dialog');
-        await waitFor(() =>
-          expect(dialog).toHaveClass(
-            modal({ fixedFooter: true, status: 'open' }).modal ?? '',
-            text(),
-          ),
-        );
+        expect(dialog).toHaveClass(styles.fixedFooter);
       });
     });
 
@@ -375,7 +365,7 @@ describe('IressModal', () => {
         });
 
         const footer = await screen.findByText('Footer');
-        expect(footer).toHaveClass(modal({}).footer ?? '');
+        expect(footer).toHaveClass(styles.footer);
       });
     });
 
@@ -481,7 +471,7 @@ describe('IressModal', () => {
           propertyName: 'opacity',
         });
 
-        await waitFor(() => expect(onExited).toHaveBeenCalledTimes(1));
+        await waitFor(() => expect(onExited).toBeCalledTimes(1));
       });
 
       it('is called when the modal is closed via backdrop click', async () => {
@@ -501,7 +491,7 @@ describe('IressModal', () => {
           propertyName: 'opacity',
         });
 
-        await waitFor(() => expect(onExited).toHaveBeenCalledTimes(1));
+        await waitFor(() => expect(onExited).toBeCalledTimes(1));
       });
 
       it('is called when the modal is closed via escape key', async () => {
@@ -521,7 +511,7 @@ describe('IressModal', () => {
           propertyName: 'opacity',
         });
 
-        await waitFor(() => expect(onExited).toHaveBeenCalledTimes(1));
+        await waitFor(() => expect(onExited).toBeCalledTimes(1));
       });
     });
 
@@ -604,15 +594,15 @@ describe('IressModal', () => {
         const screen = renderComponent({
           children: 'Content',
           defaultShow: true,
-          p: 'none',
+          padding: 'none',
           footer: 'Footer',
         });
 
         const content = await screen.findByText('Content');
         const footer = await screen.findByText('Footer');
 
-        expect(content).toHaveClass('p_none');
-        expect(footer).toHaveClass('p_none');
+        expect(content).toHaveClass('iress-p--none');
+        expect(footer).toHaveClass('iress-p--none');
       });
     });
 
@@ -627,25 +617,41 @@ describe('IressModal', () => {
       });
     });
 
-    describe('width', () => {
+    describe('size', () => {
       it('changes the size of the modal if provided (single size)', async () => {
         const screen = renderComponent({
           show: true,
-          width: 'overlay.sm',
+          size: 'sm',
         });
 
-        const dialog = await screen.findByRole('dialog');
-        expect(dialog).toHaveClass('w_overlay.sm');
+        const backdrop = await screen.findByTestId(`${TEST_ID}__backdrop`);
+        expect(backdrop).toHaveClass(styles['size--sm']);
       });
 
       it('changes the size of the modal if provided (responsive size)', async () => {
         const screen = renderComponent({
           show: true,
-          width: { xs: 'overlay.lg', lg: 'overlay.sm' },
+          size: { xs: 'lg', lg: 'sm' },
         });
 
-        const dialog = await screen.findByRole('dialog');
-        expect(dialog).toHaveClass('xs:w_overlay.lg', 'lg:w_overlay.sm');
+        const backdrop = await screen.findByTestId(`${TEST_ID}__backdrop`);
+        expect(backdrop).toHaveClass(
+          styles['size-xs--lg'],
+          styles['size-lg--sm'],
+        );
+      });
+
+      it('makes xs breakpoint fullpage by default (responsive size)', async () => {
+        const screen = renderComponent({
+          show: true,
+          size: { lg: 'sm' },
+        });
+
+        const backdrop = await screen.findByTestId(`${TEST_ID}__backdrop`);
+        expect(backdrop).toHaveClass(
+          styles['size-xs--fullpage'],
+          styles['size-lg--sm'],
+        );
       });
     });
 
@@ -660,7 +666,7 @@ describe('IressModal', () => {
         const dialog = await screen.findByRole('dialog');
 
         // Static modals should have the static class
-        expect(backdrop).toHaveClass(modal({ static: true }).backdrop!);
+        expect(backdrop).toHaveClass(styles.static);
 
         // Static modals should not lock scroll (this is handled by FloatingOverlay)
         // The lockScroll prop is set to false when static is true
@@ -715,7 +721,7 @@ describe('IressModal', () => {
 
       screen.rerender(<AppWithModalProvider id={TEST_ID} show />);
 
-      await waitFor(() => expect(idsLogger).toHaveBeenCalledTimes(1));
+      await waitFor(() => expect(idsLogger).toBeCalledTimes(1));
     });
   });
 

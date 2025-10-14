@@ -1,59 +1,38 @@
-import {
-  type ElementType,
-  forwardRef,
-  type ReactElement,
-  type ReactNode,
-  type Ref,
-} from 'react';
-import { type ButtonRef, IressButton, type IressButtonProps } from '../Button';
-import { cx } from '@/styled-system/css';
-import { skipLink } from './SkipLink.styles';
-import { GlobalCSSClass } from '@/enums';
+import { forwardRef } from 'react';
+import classNames from 'classnames';
+import { type IressSkipLinkProps } from './SkipLink.types';
+import styles from './SkipLink.module.scss';
+import { idsLogger } from '@helpers/utility/idsLogger';
 
-const skipLinkClass = skipLink();
+export const IressSkipLink = forwardRef(
+  (
+    {
+      targetId,
+      href,
+      children = 'Skip to content',
+      className,
+      ...restProps
+    }: IressSkipLinkProps,
+    ref: React.Ref<HTMLAnchorElement>,
+  ) => {
+    if (!targetId && !href) {
+      idsLogger(
+        'SkipLink: You must define other a targetId or href prop to display a skip link.',
+      );
+      return null;
+    }
 
-export type IressSkipLinkProps<
-  C extends ElementType | undefined = undefined,
-  THref extends string | undefined = undefined,
-> = IressButtonProps<C, THref> & {
-  /**
-   * Description of where the skip link jumps to.
-   * @default 'Skip to content'
-   */
-  children?: ReactNode;
-
-  /**
-   * Contains a URL or a URL fragment that the skip link points to.
-   * If this property is set, an anchor tag will be rendered.
-   */
-  href?: THref;
-};
-
-const SkipLink = <
-  C extends ElementType | undefined = undefined,
-  THref extends string | undefined = undefined,
->(
-  {
-    children = 'Skip to content',
-    className,
-    ...restProps
-  }: IressSkipLinkProps<C, THref>,
-  ref: Ref<ButtonRef<C, THref>>,
-) => (
-  <IressButton
-    {...(restProps as IressButtonProps<C, THref>)}
-    className={cx(className, skipLinkClass, GlobalCSSClass.SkipLink)}
-    ref={ref}
-  >
-    {children}
-  </IressButton>
+    return (
+      <a
+        {...restProps}
+        className={classNames(className, styles.skipLink)}
+        href={targetId ? `#${targetId}` : href}
+        ref={ref}
+      >
+        {children}
+      </a>
+    );
+  },
 );
 
-export const IressSkipLink = forwardRef(SkipLink) as <
-  C extends ElementType | undefined = undefined,
-  THref extends string | undefined = undefined,
->(
-  props: IressSkipLinkProps<C, THref> & {
-    ref?: ButtonRef<C, THref>;
-  },
-) => ReactElement;
+IressSkipLink.displayName = 'IressSkipLink';

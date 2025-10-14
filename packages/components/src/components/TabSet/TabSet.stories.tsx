@@ -1,5 +1,5 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressTab, IressTabSet } from '.';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressTab, IressTabSet, TAB_SET_LAYOUTS } from '.';
 import { IressStack } from '../Stack';
 import {
   IressBadge,
@@ -25,14 +25,14 @@ export default {
   argTypes: {
     ...disableArgTypes(['children']),
   },
-  tags: ['updated'],
 } as Meta<typeof IressTabSet>;
 
 export const TabNavigation: Story = {
   args: {
     children: [
-      <IressTab key="iress" label="Iress" href="https://iress.com" />,
-      <IressTab key="google" label="Google" href="https://google.com" />,
+      <IressTab key="address" label="Address" />,
+      <IressTab key="employment" label="Employment" />,
+      <IressTab key="history" label="History" />,
     ],
   },
 };
@@ -57,7 +57,7 @@ export const DefaultSelected: Story = {
   ...Panels,
   args: {
     ...TabNavigation.args,
-    defaultSelected: 1,
+    defaultSelected: 2,
   },
 };
 
@@ -80,26 +80,20 @@ export const Layout: Story = {
     ...disableArgTypes(['layout']),
   },
   render: (args) => (
-    <IressStack gap="md">
-      <IressPanel>
-        <IressText element="h2">top-left</IressText>
-        <IressTabSet {...args} layout="top-left" />
-      </IressPanel>
-      <IressPanel>
-        <IressText element="h2">top-center</IressText>
-        <IressTabSet {...args} layout="top-center" />
-      </IressPanel>
-      <IressPanel>
-        <IressText element="h2">top-right</IressText>
-        <IressTabSet {...args} layout="top-right" />
-      </IressPanel>
+    <IressStack gutter="md">
+      {TAB_SET_LAYOUTS.map((layout) => (
+        <IressPanel key={layout}>
+          <IressText element={IressText.Element.H2}>{layout}</IressText>
+          <IressTabSet {...args} layout={layout} />
+        </IressPanel>
+      ))}
     </IressStack>
   ),
 };
 
 export const LazyLoading: Story = {
   args: {
-    defaultSelected: 2,
+    defaultSelected: 'medical',
   },
   render: (args) => <TabsLazyLoading {...args} />,
   parameters: {
@@ -125,7 +119,7 @@ export const TabsWithBadges: Story = {
       <IressTab
         key="employment"
         label={
-          <IressInline gap="sm">
+          <IressInline gutter="sm">
             <IressIcon name="user" /> Employment
           </IressInline>
         }

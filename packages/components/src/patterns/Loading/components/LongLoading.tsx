@@ -1,17 +1,19 @@
 import { IressStack } from '@/components/Stack';
+import { type IressProgressProps } from '@/components/Progress/Progress.types';
 import { type ReactNode, useId, useMemo } from 'react';
+import classNames from 'classnames';
+import styles from './LongLoading.module.scss';
+import loadingStyles from '../Loading.module.scss';
+import { type IressHTMLAttributes } from '@/interfaces';
 import { IressText } from '@/components/Text';
 import { IressPanel } from '@/components/Panel';
-import { IressProgress, type IressProgressProps } from '@/components/Progress';
+import { IressProgress } from '@/components/Progress';
+import { GlobalCSSClass } from '@/enums';
 import { propagateTestid } from '@/helpers/utility/propagateTestid';
 import { useShowIndicator } from '../hooks/useShowIndicator';
 import { useEstimatedProgressValue } from '../hooks/useEstimatedProgressValue';
-import { type IressStyledProps } from '@/types';
-import { styled } from '@/styled-system/jsx';
-import { cx } from '@/styled-system/css';
-import { loading, loadingList } from '../Loading.styles';
 
-export interface LongLoadingProps extends IressStyledProps {
+export interface LongLoadingProps extends IressHTMLAttributes {
   /**
    * The children are displayed while loading. This will be displayed above the progress bar and checklist.
    */
@@ -58,7 +60,10 @@ export interface LongLoadingProps extends IressStyledProps {
    * This is useful if you want to use a different progress component or if you want to add additional props to the progress bar.
    */
   renderProgress?: (
-    props: Pick<IressProgressProps, 'max' | 'sectionTitle' | 'value'>,
+    props: Pick<
+      IressProgressProps,
+      'className' | 'min' | 'max' | 'sectionTitle' | 'value'
+    >,
   ) => ReactNode;
 
   /**
@@ -79,62 +84,30 @@ export interface LongLoadingProps extends IressStyledProps {
   };
 }
 
-interface ListItemProps {
-  message: ReactNode;
-  current: boolean;
-  finished: boolean;
-}
-
-const ListItem = ({ message, current, finished }: ListItemProps) => {
+const Checked = () => {
   const titleId = useId();
-  const styles = loadingList({ finished });
 
   return (
-    <li className={styles.item}>
-      <svg
-        className={styles.svg}
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 52 52"
-        aria-hidden="true"
-      >
-        <circle
-          className={styles.marker}
-          cx="26"
-          cy="26"
-          r="10"
-          fill="currentColor"
-          stroke="none"
-        />
-      </svg>
-      {finished && (
-        <svg
-          className={styles.svg}
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 52 52"
-          aria-labelledby={titleId}
-        >
-          <title id={titleId}>Finished: </title>
-          <circle
-            className={styles.circle}
-            cx="26"
-            cy="26"
-            r="25"
-            fill="none"
-          />
-          <path
-            className={styles.tick}
-            fill="none"
-            d="M14.1 27.2l7.1 7.2 16.7-16.8"
-          />
-        </svg>
-      )}
-      {message}
-      {current && (
-        <span className={styles.dots}>
-          <IressText srOnly>...</IressText>
-        </span>
-      )}
-    </li>
+    <svg
+      className={styles.checked}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 52 52"
+      aria-labelledby={titleId}
+    >
+      <title id={titleId}>Finished: </title>
+      <circle
+        className={styles.checked__circle}
+        cx="26"
+        cy="26"
+        r="25"
+        fill="none"
+      />
+      <path
+        className={styles.checked__check}
+        fill="none"
+        d="M14.1 27.2l7.1 7.2 16.7-16.8"
+      />
+    </svg>
   );
 };
 
@@ -146,9 +119,7 @@ export const LongLoading = ({
   loaded,
   messageList = {},
   progress,
-  renderProgress = (props) => (
-    <IressProgress {...props} color="colour.primary.fill" />
-  ),
+  renderProgress = (props) => <IressProgress {...props} />,
   timeout,
   ...restProps
 }: LongLoadingProps) => {
@@ -165,13 +136,6 @@ export const LongLoading = ({
     progress,
     latestMessageTimecode,
   );
-  const styles = loading({
-    pattern: 'long',
-    showIndicator,
-    loaded,
-    error: !!error,
-  });
-  const listStyles = loadingList();
 
   const currentMessageTimecode = useMemo(() => {
     const timecodes = Object.keys(messageList);
@@ -193,29 +157,51 @@ export const LongLoading = ({
   }, [messageList, currentMessageTimecode, progressValue]);
 
   return (
-    <styled.div {...restProps} className={cx(styles.root, className)}>
+    <div
+      className={classNames(styles.root, className, loadingStyles['fade-in'], {
+        [loadingStyles['fade-in--active']]: showIndicator,
+      })}
+      {...restProps}
+    >
       <IressPanel
         data-testid={propagateTestid(restProps['data-testid'], 'panel')}
-        bg="transparent"
+        className={classNames(styles.panel, {
+          [loadingStyles.error]: !!error,
+        })}
       >
         {error ?? (
-          <IressStack gap="md">
+          <IressStack gutter="md">
             {children}
             {renderProgress({
+              className: styles.progress,
+              min: 0,
               max: estimatedFinishTime,
               value: Math.min(progressValue, estimatedFinishTime),
               sectionTitle: `${(Math.min(progressValue, estimatedFinishTime) / estimatedFinishTime) * 100}% loaded`,
             })}
-            <IressText textStyle="typography.body.lg" noGutter>
-              <ul className={listStyles.root}>
-                {checkListItems.map(({ timecode, ...checkListItem }) => (
-                  <ListItem key={timecode} {...checkListItem} />
+            <IressText variant="lead" noGutter>
+              <ul className={styles.checkList}>
+                {checkListItems.map((checkListItem) => (
+                  <li
+                    key={checkListItem.timecode}
+                    className={classNames(styles.checkListItem, {
+                      [styles.checkListItem__done]: checkListItem.finished,
+                    })}
+                  >
+                    {checkListItem.finished && <Checked />}
+                    {checkListItem.message}
+                    {checkListItem.current && (
+                      <span className={styles.dots}>
+                        <span className={GlobalCSSClass.SROnly}>...</span>
+                      </span>
+                    )}
+                  </li>
                 ))}
               </ul>
             </IressText>
           </IressStack>
         )}
       </IressPanel>
-    </styled.div>
+    </div>
   );
 };

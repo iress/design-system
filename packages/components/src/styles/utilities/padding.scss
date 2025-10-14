@@ -1,0 +1,45 @@
+@use '../vars';
+
+@mixin responsivePadding($bpName) {
+  @each $spacingSize in vars.$spacingSizes {
+    $horizontal: if($spacingSize == 'none', 0, var(--iress-a-horizontal-spacing-#{$spacingSize}, var(--iress-g-spacing-#{$spacingSize})));
+    $vertical: if($spacingSize == 'none', 0, var(--iress-a-vertical-spacing-#{$spacingSize}, var(--iress-g-spacing-#{$spacingSize})));
+    $bpModifier: if($bpName == '', '', '-#{$bpName}');
+
+    .iress-p#{$bpModifier}--#{$spacingSize},
+    .iress-pt#{$bpModifier}--#{$spacingSize},
+    .iress-py#{$bpModifier}--#{$spacingSize} {
+      padding-block-start: $vertical;
+    }
+
+    .iress-p#{$bpModifier}--#{$spacingSize},
+    .iress-pb#{$bpModifier}--#{$spacingSize},
+    .iress-py#{$bpModifier}--#{$spacingSize} {
+      padding-block-end: $vertical;
+    }
+
+    .iress-p#{$bpModifier}--#{$spacingSize},
+    .iress-pl#{$bpModifier}--#{$spacingSize},
+    .iress-px#{$bpModifier}--#{$spacingSize} {
+      padding-inline-start: $horizontal;
+    }
+
+    .iress-p#{$bpModifier}--#{$spacingSize},
+    .iress-pr#{$bpModifier}--#{$spacingSize},
+    .iress-px#{$bpModifier}--#{$spacingSize} {
+      padding-inline-end: $horizontal;
+    }
+  }
+}
+
+@include responsivePadding('');
+
+@each $bpName, $bpValue in vars.$breakpoints {
+  @if $bpName == 'xs' {
+    @include responsivePadding($bpName);
+  } @else {
+    @media only screen and (#{$bpValue}) {
+      @include responsivePadding($bpName);
+    }
+  }
+}

@@ -1,6 +1,8 @@
+export * from './Table.types';
 export * from './Table';
-export * from './Table.styles';
 
-export * from './TableBody/TableBody';
+export * from './TableFormattedValue/TableFormattedValue.types';
 export * from './TableFormattedValue/TableFormattedValue';
-export type { TableColumn } from './helpers/composeTableColumnDefs';
+
+export * from './TableBody/TableBody.types';
+export * from './TableBody/TableBody';

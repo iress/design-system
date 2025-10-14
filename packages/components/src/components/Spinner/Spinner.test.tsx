@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { IressSpinner } from '.';
+import styles from './Spinner.module.scss';
+import iconStyles from '../Icon/Icon.module.scss';
 import { axe } from 'jest-axe';
-import { icon } from '../Icon/Icon.styles';
-import { GlobalCSSClass } from '@/enums';
 
 describe('IressSpinner', () => {
   it('renders the correct defaults', () => {
@@ -19,10 +19,9 @@ describe('IressSpinner', () => {
     const spinner = screen.getByRole('img', { name: 'spinner' });
     expect(spinner).toHaveClass(
       'test-class',
-      'bx-s_border-box', // spinner styles
-      'fa-spinner-third', // icon name
-      icon({ spin: 'half' }), // icon styles
-      GlobalCSSClass.Spinner,
+      styles.spinner,
+      'fa-spinner-third',
+      iconStyles['spin-half'],
     );
   });
 

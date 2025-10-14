@@ -1,27 +1,27 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import {
   IressButton,
   IressCol,
+  IressContainer,
   IressMenu,
-  type IressMenuProps,
   IressPopover,
   IressRow,
-  IressStack,
   IressToggle,
+  MENU_ROLES,
 } from '@/main';
 import { MENU_CHILDREN_OPTIONS } from '../Menu/mocks/menuChildrenOptions';
 import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { MenuInPopoverRoleDescription } from './mocks/MenuInPopoverRoleDescription';
-import { type ComponentProps, type ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { UsePopoverExample } from './mocks/UsePopoverExample';
 import UsePopoverExampleSource from './mocks/UsePopoverExample.tsx?raw';
 
-type IressPopoverPropsAndCustomArgs = ComponentProps<typeof IressPopover> & {
+type IressPopoverPropsAndCustomArgs = React.ComponentProps<
+  typeof IressPopover
+> & {
   menuChildren: ReactNode;
 };
 type Story = StoryObj<IressPopoverPropsAndCustomArgs>;
-
-const MENU_ROLES: IressMenuProps['role'][] = ['listbox', 'menu', 'list'];
 
 export default {
   title: 'Components/Popover/Recipes',
@@ -49,10 +49,14 @@ export const WithMenu: Story = {
     const [multiSelect, setMultiSelect] = useState(false);
 
     return (
-      <IressStack gap="md" maxWidth="container.lg" px="lg" mx="auto">
+      <IressContainer className="iress-u-stack iress--gutter--md">
         {MENU_ROLES.map((role) => (
-          <IressRow gutter="lg" key={role} verticalAlign="middle">
-            <IressCol span={2}>
+          <IressRow
+            gutter={IressRow.Gutter.Lg}
+            key={role}
+            verticalAlign={IressRow.VerticalAlign.Middle}
+          >
+            <IressCol span={IressCol.Span.Two}>
               <IressPopover
                 {...args}
                 activator={<IressButton fluid>role={role}</IressButton>}
@@ -72,7 +76,7 @@ export const WithMenu: Story = {
               <MenuInPopoverRoleDescription role={role}>
                 {role === 'listbox' && (
                   <IressToggle
-                    mb="md"
+                    className="iress-mb--md"
                     checked={multiSelect}
                     onChange={() => setMultiSelect(!multiSelect)}
                   >
@@ -83,7 +87,7 @@ export const WithMenu: Story = {
             </IressCol>
           </IressRow>
         ))}
-      </IressStack>
+      </IressContainer>
     );
   },
 };

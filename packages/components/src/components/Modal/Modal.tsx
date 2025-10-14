@@ -1,14 +1,17 @@
+import classNames from 'classnames';
+import { type IressModalProps, type ModalWithEnums } from './Modal.types';
+import styles from './Modal.module.scss';
 import {
   cloneElement,
-  type ReactElement,
-  type ReactNode,
+  type TransitionEvent,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
-  type TransitionEvent,
 } from 'react';
+import { GlobalCSSClass, ModalSize, PaddingSize } from '@/enums';
+import { getResponsiveLayoutModifiers } from '@helpers/responsive/getResponsiveLayoutModifiers';
 import { IressCloseButton } from '../Button';
 import {
   FloatingFocusManager,
@@ -24,102 +27,11 @@ import { timeStringToNumber } from '@helpers/transition/timeStringToNumber';
 import { idsLogger } from '@helpers/utility/idsLogger';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { useIdIfNeeded } from '../../hooks';
-import { IressText, text } from '../Text';
-import { useProviderModal } from './hooks/useProviderModal';
-import { type FloatingUIContainer, type IressStyledProps } from '@/types';
-import { modal } from './Modal.styles';
-import { cx } from '@/styled-system/css';
-import { splitCssProps, styled } from '@/styled-system/jsx';
-import { GlobalCSSClass } from '@/enums';
+import { IressText } from '../Text';
+import { useIDSProvidedModal } from './hooks/useIDSProvidedModal';
+import toasterStyles from '../Toaster/Toaster.module.scss';
 
-export interface IressModalProps extends IressStyledProps {
-  /**
-   * Text to be displayed inside the modal.
-   */
-  children?: ReactNode;
-
-  /**
-   * Screenreader text for close button.
-   * @default Close
-   */
-  closeText?: string;
-
-  /**
-   * The container element to render the modal into.
-   * By default, the modal will render at the end of the document body.
-   */
-  container?: FloatingUIContainer;
-
-  /**
-   * When set to `true` the modal will be visible by default. Use for uncontrolled modals.
-   */
-  defaultShow?: boolean;
-
-  /**
-   * When set to `true`, users cannot exit the modal by clicking the backdrop or using the escape key.
-   */
-  disableBackdropClick?: boolean;
-
-  /**
-   * When set to `true` the modal's footer will always be visible and fixed to the bottom of the modal.
-   */
-  fixedFooter?: boolean;
-
-  /**
-   * Panel to place modal controls.
-   */
-  footer?: ReactNode;
-
-  /**
-   * Sets the heading for the modal.
-   * If passed an element, it will render the element with an id, to ensure its connection to the modal.
-   */
-  heading?: ReactElement | string;
-
-  /**
-   * Unique ID for the modal. Use if you would like to open this modal from anywhere in your app using the `useModal` hook.
-   */
-  id?: string;
-
-  /**
-   * When set to `true`, no close button will be rendered. You must add your own closing mechanism to ensure accessibility.
-   */
-  noCloseButton?: boolean;
-
-  /**
-   * Emitted when the modal has opened or closed internally. Use for controlled modals.
-   */
-  onShowChange?: (show: boolean) => void;
-
-  /**
-   * Emitted when the modal has mounted, unmounted, opened or closed. Open and close occur before animation begins.
-   */
-  onStatus?: (status: 'unmounted' | 'initial' | 'open' | 'close') => void;
-
-  /**
-   * Emitted when the modal has opened.
-   */
-  onEntered?: () => void;
-
-  /**
-   * Emitted when the modal has closed.
-   */
-  onExited?: () => void;
-
-  /**
-   * When set to `true` the modal will be visible. Use for controlled modals.
-   */
-  show?: boolean;
-
-  /**
-   * When set to `true`, the modal will act like a static element when open.
-   * This means it will not lock scroll or focus within the modal.
-   * Note: This is used internally to display modals in Styler. It is not recommended to use this prop in your own applications.
-   */
-  static?: boolean;
-}
-
-export const IressModal = ({
+export const IressModal: ModalWithEnums = ({
   children,
   className,
   closeText,
@@ -136,7 +48,9 @@ export const IressModal = ({
   onShowChange,
   onStatus,
   onTransitionEnd,
+  padding = 'md',
   show,
+  size = 'md',
   static: isStatic,
   style,
   ...restProps
@@ -144,7 +58,7 @@ export const IressModal = ({
   const [uncontrolledShow, setUncontrolledShow] =
     useState<boolean>(defaultShow);
   const durationRef = useRef<number>(240);
-  const provider = useProviderModal(restProps.id);
+  const provider = useIDSProvidedModal(restProps.id);
   const id = useIdIfNeeded({ id: restProps.id });
   const headingId = `${id}--heading`;
 
@@ -165,7 +79,7 @@ export const IressModal = ({
     enabled: !disableBackdropClick,
     outsidePress: (e) => {
       const target = e.target as HTMLElement;
-      return !target.closest(`.${GlobalCSSClass.Toaster}`);
+      return !target.closest(`.${toasterStyles.toaster}`);
     },
     outsidePressEvent: 'mousedown',
   });
@@ -176,14 +90,6 @@ export const IressModal = ({
       close: durationRef.current,
     },
   });
-
-  const styles = modal({
-    fixedFooter,
-    static: isStatic,
-    status,
-  });
-  const [styleProps, nonStyleProps] = splitCssProps(restProps);
-  const { p = 'lg', width = 'overlay.md', ...restStyleProps } = styleProps;
 
   useEffect(() => {
     if (provider.opened && show) {
@@ -201,17 +107,28 @@ export const IressModal = ({
     if (status === 'initial' && floatingContext.refs.floating?.current) {
       durationRef.current =
         timeStringToNumber(
-          window.getComputedStyle(floatingContext.refs.floating.current, null)
-            ?.transitionDuration || '.3s',
+          window
+            .getComputedStyle(floatingContext.refs.floating.current, null)
+            ?.getPropertyValue('--iress-transition-duration') || '.3s',
         ) * 1.2;
     }
-  }, [floatingContext.refs.floating, status]);
+  }, [status, floatingContext.refs.floating]);
+
+  const sizeClasses = getResponsiveLayoutModifiers(
+    'size',
+    size,
+    'fullpage',
+  ).map((sizeClass) => styles[sizeClass]);
+  const paddingClass = `iress-p--${padding}`;
+
+  const classes = classNames(styles.modal, styles[status], {
+    [styles.fixedFooter]: fixedFooter,
+  });
 
   const heading = useMemo(() => {
     if (typeof headingProp === 'string')
       return (
         <IressText
-          className={styles.header}
           id={headingId}
           element="h2"
           data-testid={propagateTestid(dataTestid, 'heading')}
@@ -225,7 +142,7 @@ export const IressModal = ({
           id: headingId,
         })
       : null;
-  }, [dataTestid, headingId, headingProp, styles.header]);
+  }, [dataTestid, headingId, headingProp]);
 
   const handleTransitionEnd = useCallback(
     (e: TransitionEvent<HTMLDivElement>) => {
@@ -240,10 +157,7 @@ export const IressModal = ({
 
       if (status === 'open') {
         onEntered?.();
-
-        if (!isStatic) {
-          floatingContext.refs.floating?.current?.focus();
-        }
+        floatingContext.refs.floating?.current?.focus();
       } else if (status === 'close') {
         onExited?.();
       }
@@ -254,74 +168,82 @@ export const IressModal = ({
       onEntered,
       floatingContext.refs.floating,
       onExited,
-      isStatic,
     ],
   );
 
   if (!isMounted) return null;
 
-  const innerModal = (
-    <FloatingOverlay
-      className={cx(className, styles.backdrop, GlobalCSSClass.ModalBackdrop)}
-      data-testid={propagateTestid(dataTestid, 'backdrop')}
-      lockScroll={!isStatic}
-      style={style}
-    >
-      <FloatingFocusManager
-        context={floatingContext}
-        initialFocus={floatingContext.refs.floating}
-        disabled={isStatic}
-      >
-        <styled.div
-          ref={(ref) => floatingContext.refs.setFloating(ref)}
-          className={cx(styles.modal, text(), GlobalCSSClass.Modal)}
-          id={id}
-          data-testid={dataTestid}
-          aria-labelledby={heading ? headingId : undefined}
-          {...interactions.getFloatingProps(nonStyleProps)}
-          {...restStyleProps}
-          w={width}
-          onTransitionEnd={handleTransitionEnd}
-        >
-          {!noCloseButton && (
-            <IressCloseButton
-              onClick={() => onOpenChange(false)}
-              screenreaderText={closeText}
-              className={styles.closeButton}
-              data-testid={propagateTestid(dataTestid, 'close-button__button')}
-            />
-          )}
-          <styled.div
-            className={styles.content}
-            data-testid={propagateTestid(dataTestid, 'content')}
-            p={p}
-          >
-            {heading}
-            {children}
-          </styled.div>
-          {footer && (
-            <styled.div
-              className={styles.footer}
-              data-testid={propagateTestid(dataTestid, 'footer')}
-              p={p}
-            >
-              {footer}
-            </styled.div>
-          )}
-        </styled.div>
-      </FloatingFocusManager>
-    </FloatingOverlay>
-  );
-
-  const portalRoot = container ?? provider?.container;
-
-  if (isStatic && !portalRoot) {
-    return innerModal;
-  }
+  const overlayStyles: Record<string, unknown> = {
+    position: 'var(--iress-position, fixed)',
+    ...style,
+  };
 
   return (
     <FloatingPortal root={container ?? provider?.container}>
-      {innerModal}
+      <FloatingOverlay
+        className={classNames(
+          className,
+          styles.backdrop,
+          styles[status],
+          sizeClasses,
+          GlobalCSSClass.IgnoreStack,
+          {
+            [styles.static]: isStatic,
+          },
+        )}
+        data-testid={propagateTestid(dataTestid, 'backdrop')}
+        lockScroll={!isStatic}
+        style={overlayStyles}
+      >
+        <FloatingFocusManager
+          context={floatingContext}
+          initialFocus={floatingContext.refs.floating}
+          disabled={isStatic}
+        >
+          <div
+            ref={(ref) => floatingContext.refs.setFloating(ref)}
+            className={classes}
+            id={id}
+            data-testid={dataTestid}
+            aria-labelledby={heading ? headingId : undefined}
+            {...interactions.getFloatingProps(restProps)}
+            onTransitionEnd={handleTransitionEnd}
+          >
+            {!noCloseButton && (
+              <IressCloseButton
+                onClick={() => onOpenChange(false)}
+                screenreaderText={closeText}
+                className={styles.closeButton}
+                data-testid={propagateTestid(
+                  dataTestid,
+                  'close-button__button',
+                )}
+              />
+            )}
+            <div
+              className={classNames(styles.content, paddingClass)}
+              data-testid={propagateTestid(dataTestid, 'content')}
+            >
+              {heading}
+              {children}
+            </div>
+            {footer && (
+              <div
+                className={classNames(styles.footer, paddingClass)}
+                data-testid={propagateTestid(dataTestid, 'footer')}
+              >
+                {footer}
+              </div>
+            )}
+          </div>
+        </FloatingFocusManager>
+      </FloatingOverlay>
     </FloatingPortal>
   );
 };
+
+/** @deprecated IressModal.Size enum is now deprecated and will be removed in a future version. Please use the value directly instead. **/
+IressModal.Size = ModalSize;
+
+/** @deprecated IressModal.Padding enum is now deprecated and will be removed in a future version. Please use the value directly instead. **/
+IressModal.Padding = PaddingSize;

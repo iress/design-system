@@ -1,3 +1,4 @@
+export * from './ButtonGroup.types';
 export * from './ButtonGroup';
-export * from './ButtonGroup.styles';
-export * from './hooks/useButtonGroupItem';
+
+export * from './hooks/useIDSButtonGroupItem';

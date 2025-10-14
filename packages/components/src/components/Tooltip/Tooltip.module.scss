@@ -1,0 +1,24 @@
+@use '../../styles/mixins';
+@use './Tooltip.vars.module';
+
+.tooltip {
+  display: inline-block;
+  position: relative;
+
+  .content {
+    @include mixins.defaultFontStyles();
+
+    z-index: 1000;
+    width: max-content;
+    max-width: 20em;
+    color: var(--iress-text-color);
+    background: var(--iress-background-color);
+    padding-block: var(--iress-padding-y);
+    padding-inline: var(--iress-padding-x);
+    border-width: var(--iress-border-width);
+    border-color: var(--iress-border-color);
+    border-radius: var(--iress-border-radius);
+    border-style: solid;
+    box-shadow: var(--iress-box-shadow-size) var(--iress-box-shadow-color);
+  }
+}

@@ -1,12 +1,12 @@
 import { type PropsWithChildren } from 'react';
 import { FloatingList } from '@floating-ui/react';
-import { type PopoverHookReturn } from '../hooks/usePopover';
+import { type PopoverContextValue } from '../Popover.types';
 
 export const NestedPopoverActivator = ({
   children,
   parentPopover,
 }: PropsWithChildren & {
-  parentPopover?: PopoverHookReturn;
+  parentPopover?: PopoverContextValue;
 }) => {
   if (!parentPopover) {
     return children;

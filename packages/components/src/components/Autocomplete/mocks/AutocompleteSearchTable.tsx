@@ -37,7 +37,7 @@ export const AutocompleteSearchTable = () => {
   }, [debouncedQuery]);
 
   return (
-    <IressStack gap="md">
+    <IressStack gutter="md">
       <IressInput
         value={query}
         onChange={(e) => setQuery(e.target.value)}

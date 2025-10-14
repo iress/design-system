@@ -1,16 +1,14 @@
 import { render, waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
+import styles from './Menu.module.scss';
 import {
   IressMenu,
   IressMenuItem,
   IressMenuDivider,
   IressMenuHeading,
   IressMenuProps,
-  menu,
 } from '.';
-import { FormControlValue } from '@/types';
-import { GlobalCSSClass } from '@/enums';
 
 const TEST_ID = 'test-component';
 const TEST_CHILDREN = [
@@ -27,10 +25,10 @@ const TEST_CHILDREN = [
   </IressMenuItem>,
 ];
 
-function renderComponent<
-  T = FormControlValue,
-  TMultiple extends boolean = false,
->(props: IressMenuProps<T, TMultiple> = {}, renderFn: typeof render = render) {
+function renderComponent(
+  props: IressMenuProps = {},
+  renderFn: typeof render = render,
+) {
   return renderFn(
     <IressMenu {...props} data-testid={TEST_ID}>
       {props?.children ?? TEST_CHILDREN}
@@ -54,13 +52,9 @@ describe('IressMenu', () => {
       className: 'test-class',
     });
 
-    const menuElement = screen.getByRole('list');
-    expect(menuElement).toBeInTheDocument();
-    expect(menuElement).toHaveClass(
-      menu().root!,
-      'test-class',
-      GlobalCSSClass.Menu,
-    );
+    const menu = screen.getByRole('list');
+    expect(menu).toBeInTheDocument();
+    expect(menu).toHaveClass(styles.menu, styles.stack, 'test-class');
   });
 
   describe('interactions', () => {
@@ -204,7 +198,7 @@ describe('IressMenu', () => {
       it('selects the item in multi-select mode', async () => {
         const onChange = vi.fn();
         renderComponent({
-          role: 'listbox',
+          ...commonProps,
           onChange,
           multiSelect: true,
         });
@@ -296,6 +290,11 @@ describe('IressMenu', () => {
           <IressMenu multiSelect aria-label="Multiselect example">
             {TEST_CHILDREN}
           </IressMenu>
+          <nav>
+            <IressMenu aria-label="Nav example" role="nav">
+              {TEST_CHILDREN}
+            </IressMenu>
+          </nav>
         </>,
       );
 

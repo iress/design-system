@@ -1,9 +1,9 @@
 import { IressButton, IressLoading, IressStack, IressText } from '@/main';
-import { type ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 const API = {
   getContent: async () =>
-    new Promise<ReactNode>((_resolve, reject) => {
+    new Promise<ReactNode>((resolve, reject) => {
       // Simulate a slow network request.
       setTimeout(() => {
         reject(
@@ -26,21 +26,14 @@ export const LoadingLongWithError = () => {
         setLoaded(true);
       } catch (e) {
         setError(
-          <IressStack gap="sm">
-            <IressText
-              element="h2"
-              textStyle="typography.heading.3"
-              textAlign="center"
-              color="colour.system.danger.text"
-            >
+          <IressStack gutter="md">
+            <IressText element="h2" variant="h3" align="center" mode="danger">
               Error
             </IressText>
-            <IressText textAlign="center" noGutter>
+            <IressText align="center" noGutter>
               <p>{String(e).replace('Error: ', '')}</p>
               <p>
-                <IressButton mode="primary" status="danger">
-                  Try again
-                </IressButton>
+                <IressButton>Try again</IressButton>
               </p>
             </IressText>
           </IressStack>,
@@ -62,11 +55,7 @@ export const LoadingLongWithError = () => {
       error={error}
       loaded={loaded}
     >
-      <IressText
-        element="h2"
-        textStyle="typography.heading.3"
-        textAlign="center"
-      >
+      <IressText element="h2" variant="h3" align="center">
         Submitting your file
       </IressText>
     </IressLoading>

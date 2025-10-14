@@ -1,0 +1,59 @@
+@use 'Menu.vars.module';
+@use '../../styles/mixins';
+
+/** Menu
+ * --------------------------------------------------
+ * @prop --iress-divider-border-width: The size of the dividers (when using hr)
+ * @prop --iress-divider-border-color: The colour of the dividers (when using hr)
+ */
+
+.menu {
+  max-width: 100%;
+  overflow: hidden;
+
+  :global(.iress-u-text) & > hr,
+  > hr {
+    border: 0;
+    margin: 0;
+    @include mixins.addDivider(true);
+  }
+}
+
+.stack,
+.inline {
+  display: inline-flex;
+  flex-wrap: wrap;
+
+  &.fluid {
+    display: flex;
+  }
+}
+
+.stack {
+  flex-direction: column;
+}
+
+.inline-equal-width {
+  display: flex;
+
+  > * {
+    flex: 1;
+    text-align: center;
+  }
+
+  :global(.iress-u-text) & > hr,
+  > hr {
+    flex: 0 0 var(--iress-divider-border-width);
+  }
+}
+
+.inline,
+.inline-equal-width {
+  .ids-menu-item--divider:global(.iress-u-button),
+  .ids-menu-item--divider:global(.iress-u-text),
+  :global(.iress-u-text) & > hr,
+  > hr {
+    border-block-end: none;
+    border-inline-end: var(--iress-divider-border-width) solid var(--iress-divider-border-color);
+  }
+}

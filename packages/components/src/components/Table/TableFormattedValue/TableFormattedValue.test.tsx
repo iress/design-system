@@ -34,7 +34,7 @@ describe('IressTableFormattedValue', () => {
       const screen = render(
         <IressTableFormattedValue format="currency" value="test" />,
       );
-      expect(screen.getByText('test')).toBeInTheDocument();
+      expect(screen.getByText('$test')).toBeInTheDocument();
     });
 
     it('formats a number string', () => {
@@ -56,8 +56,8 @@ describe('IressTableFormattedValue', () => {
         <IressTableFormattedValue
           format="currency"
           value={123123.42344}
+          currencyCode=""
           currencyFormatOptions={{
-            locale: 'en-GB',
             currencyCode: 'GBP',
             formatOptions: { currencyDisplay: 'narrowSymbol' },
           }}
@@ -238,6 +238,17 @@ describe('IressTableFormattedValue', () => {
         />,
       );
       expect(screen.getByText('10 seconds ago')).toBeInTheDocument();
+    });
+
+    it('handles undefined values gracefully', () => {
+      const undefinedValue = undefined as unknown;
+      const screen = render(
+        <IressTableFormattedValue
+          format="relativeTime"
+          value={undefinedValue}
+        />,
+      );
+      expect(screen.container.textContent).toBe('');
     });
   });
 

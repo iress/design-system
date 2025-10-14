@@ -1,206 +1,152 @@
+import classNames from 'classnames';
 import {
-  type ChangeEvent,
-  type Context,
-  createContext,
+  type IressRadioGroupProps,
+  type RadioGroupWithEnums,
+  RadioGroupLayout,
+  type RadioGroupContextValue,
+  type RadioGroupRef,
+} from './RadioGroup.types';
+import styles from './RadioGroup.module.scss';
+import {
   type FocusEventHandler,
-  type ForwardedRef,
   forwardRef,
-  type ReactElement,
-  type Ref,
   useImperativeHandle,
   useMemo,
   useRef,
 } from 'react';
 import { useControlledState } from '@/hooks/useControlledState';
+import { RadioGroupContext } from './RadioGroupContext';
+import { useNoDefaultValueInForms } from '../Form/hooks/useNoDefaultValueInForms';
 
-import { type ReactNode } from 'react';
-import { type ReactHookFormCompatibleRef } from '@/interfaces';
-import { type FormControlValue, type IressStyledProps } from '@/types';
-import { radioGroup } from './RadioGroup.styles';
-import { cx } from '@/styled-system/css';
-import { styled } from '@/styled-system/jsx';
-import { GlobalCSSClass } from '@/enums';
-import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
+/**
+ * Determines whether the RadioGroup's onBlur handler should fire.
+ * Returns false if focus stays inside the group, true otherwise.
+ */
+export function shouldFireRadioGroupBlur(
+  radioGroupElement: HTMLElement | null,
+  newFocusTarget: Node | null,
+  eventTarget: EventTarget | null,
+): boolean {
+  // Focus stays inside the group
+  if (
+    radioGroupElement &&
+    newFocusTarget &&
+    radioGroupElement.contains(newFocusTarget)
+  ) {
+    return false;
+  }
 
-export interface IressRadioGroupProps<T = FormControlValue>
-  extends Omit<IressStyledProps, 'onChange' | 'defaultValue'> {
-  /**
-   * Content of the radio group, usually multiple `IressRadio` components.
-   */
-  children?: ReactNode;
+  // Focus moves to browser UI - only fire if blur originated from the group container
+  if (!newFocusTarget) {
+    return eventTarget === radioGroupElement;
+  }
 
-  /**
-   * Hides the radio control to allow the creation of custom radio buttons.
-   */
-  hiddenRadio?: boolean;
-
-  /**
-   * Sets which of the block / inline layout options apply.
-   * @default 'stack'
-   */
-  layout?: 'stack' | 'block' | 'inline' | 'inlineFlex' | 'inlineEqualWidth';
-
-  /**
-   * Name to be applied to all radios in the group.
-   */
-  name?: string;
-
-  /**
-   * Called when a user selects one of its children radio buttons.
-   * If you pass in a non-string value, you can access it using the second parameter of the function.
-   */
-  onChange?: (e: ChangeEvent<HTMLInputElement>, value?: T) => void;
-
-  /**
-   * When true, marks the field as required
-   */
-  required?: boolean;
-
-  /**
-   * Initial value of radio group when in uncontrolled mode.
-   */
-  defaultValue?: T;
-
-  /**
-   * Renders a readOnly radio group.
-   */
-  readOnly?: boolean;
-
-  /**
-   * Value of radio group when in controlled mode.
-   */
-  value?: T;
-
-  /**
-   * Add the button-like border and padding to radio when `touch` is true.
-   */
-  touch?: boolean;
+  // Focus moves outside
+  return true;
 }
 
-export type RadioGroupContextValue<T = FormControlValue> = Pick<
-  IressRadioGroupProps<T>,
-  | 'name'
-  | 'value'
-  | 'hiddenRadio'
-  | 'required'
-  | 'onChange'
-  | 'readOnly'
-  | 'touch'
->;
-
-export interface RadioGroupRef
-  extends ReactHookFormCompatibleRef<HTMLDivElement> {
-  reset: () => void;
-}
-
-function createRadioGroupContext<T = FormControlValue>() {
-  return createContext<RadioGroupContextValue<T> | undefined>(undefined);
-}
-
-// eslint-disable-next-line react-refresh/only-export-components -- keeping it here for context
-export function getRadioGroupContext<T = FormControlValue>() {
-  return RadioGroupContext as unknown as Context<
-    RadioGroupContextValue<T> | undefined
-  >;
-}
-
-export const RadioGroupContext = createRadioGroupContext();
-
-const RadioGroup = <T = FormControlValue,>(
-  {
-    children,
-    className,
-    hiddenRadio,
-    layout = 'stack',
-    name,
-    onBlur,
-    onChange,
-    onFocus,
-    required,
-    role = 'radiogroup',
-    defaultValue,
-    readOnly,
-    value: valueProp,
-    touch,
-    ...restProps
-  }: IressRadioGroupProps<T>,
-  ref: ForwardedRef<RadioGroupRef>,
-) => {
-  useNoDefaultValueInForms({
-    component: 'IressRadioGroup',
-    defaultValue,
-  });
-
-  const divRef = useRef<HTMLDivElement>(null);
-  const currentElement = divRef.current;
-
-  const { value, setValue } = useControlledState({
-    component: 'IressRadioGroup',
-    defaultValue,
-    value: valueProp,
-  });
-
-  const context: RadioGroupContextValue<T> = useMemo(
-    () => ({
-      name,
-      value,
+export const IressRadioGroup: RadioGroupWithEnums = forwardRef<
+  RadioGroupRef,
+  IressRadioGroupProps
+>(
+  (
+    {
+      children,
+      className,
       hiddenRadio,
+      layout = 'stack',
+      name,
+      onChange,
+      onFocus,
+      onBlur,
       required,
-      readOnly,
+      role = 'radiogroup',
+      defaultValue,
+      readonly,
+      value: valueProp,
       touch,
-      onChange: (e, newValue) => {
-        setValue(newValue);
-        onChange?.(e, newValue);
-      },
-    }),
-    [name, value, hiddenRadio, required, readOnly, setValue, onChange, touch],
-  );
+      ...restProps
+    }: IressRadioGroupProps,
+    ref,
+  ) => {
+    useNoDefaultValueInForms({
+      component: 'IressRadioGroup',
+      defaultValue,
+    });
 
-  useImperativeHandle(ref, () => ({
-    // React hook form requires the focus, blur, input
-    focus: () => currentElement?.querySelector('input')?.focus(),
-    blur: () => currentElement?.querySelector('input')?.blur(),
-    input: currentElement,
-    reset: () => setValue(undefined),
-  }));
+    const divRef = useRef<HTMLDivElement>(null);
+    const currentElement = divRef.current;
 
-  const handleFocus: FocusEventHandler<HTMLDivElement> = (e) => {
-    onFocus?.(e);
+    const { value, setValue } = useControlledState({
+      component: 'IressRadioGroup',
+      defaultValue,
+      value: valueProp,
+    });
 
-    if (e.target === divRef.current) {
-      divRef.current.querySelector('input')?.focus();
-    }
-  };
+    const context: RadioGroupContextValue = useMemo(
+      () => ({
+        name,
+        value,
+        hiddenRadio,
+        required,
+        readonly,
+        touch,
+        onChange: (e, newValue) => {
+          setValue(newValue);
+          onChange?.(e, newValue);
+        },
+      }),
+      [name, value, hiddenRadio, required, readonly, setValue, onChange, touch],
+    );
 
-  const handleBlur: FocusEventHandler<HTMLDivElement> = (e) => {
-    // Only trigger onBlur if the focus is leaving the group
-    // and not just moving between radios within the group.
-    if (e.relatedTarget && !divRef.current?.contains(e.relatedTarget as Node)) {
-      onBlur?.(e);
-    }
-  };
+    useImperativeHandle(ref, () => ({
+      // React hook form requires the focus, blur, input
+      focus: () => currentElement?.focus(),
+      blur: () => currentElement?.blur(),
+      input: currentElement,
+      reset: () => setValue(undefined),
+    }));
 
-  const { Provider } = getRadioGroupContext<T>();
-  return (
-    <Provider value={context}>
-      <styled.div
-        {...restProps}
-        ref={divRef}
-        role={role}
-        className={cx(
-          className,
-          radioGroup({ layout, hiddenRadio }),
-          GlobalCSSClass.RadioGroup,
-        )}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-      >
-        {children}
-      </styled.div>
-    </Provider>
-  );
-};
+    const handleFocus: FocusEventHandler<HTMLDivElement> = (e) => {
+      onFocus?.(e);
+      if (e.target === divRef.current) {
+        divRef.current.querySelector('input')?.focus();
+      }
+    };
 
-export const IressRadioGroup = forwardRef(RadioGroup) as <T = FormControlValue>(
-  props: IressRadioGroupProps<T> & { ref?: Ref<RadioGroupRef> },
-) => ReactElement;
+    // Uses pure helper for focus transition decision (testable in isolation)
+    const handleBlur: FocusEventHandler<HTMLDivElement> = (e) => {
+      if (
+        shouldFireRadioGroupBlur(
+          divRef.current,
+          e.relatedTarget as Node | null,
+          e.target,
+        )
+      ) {
+        onBlur?.(e);
+      }
+    };
+
+    return (
+      <RadioGroupContext.Provider value={context}>
+        <div
+          {...restProps}
+          ref={divRef}
+          role={role}
+          className={classNames(className, styles.radioGroup, {
+            [styles[layout]]: !!layout,
+          })}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        >
+          {children}
+        </div>
+      </RadioGroupContext.Provider>
+    );
+  },
+) as RadioGroupWithEnums;
+
+IressRadioGroup.displayName = 'IressRadioGroup';
+
+/** @deprecated IressRadioGroup.Layout will be removed in future versions of IDS. Please use the value directly. */
+IressRadioGroup.Layout = RadioGroupLayout;

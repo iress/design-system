@@ -1,0 +1,13 @@
+.selectBody,
+.selectBody:global(.iress-u-text) {
+  --iress-max-height: var(--iress-select-beta-dropdown-max-height, calc(30 * var(--iress-g-rem, 16px)));
+
+  display: flex;
+  flex-direction: column;
+  max-height: var(--iress-max-height);
+}
+
+.children {
+  flex: 1;
+  overflow: auto;
+}

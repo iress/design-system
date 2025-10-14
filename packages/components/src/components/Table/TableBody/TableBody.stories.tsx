@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressTableBody } from '..';
 import { TableGroupedRows } from '../mocks/TableGroupedRows';
 import GroupedRowsSource from '../mocks/TableGroupedRows.tsx?raw';
@@ -9,7 +9,6 @@ type Story = StoryObj<typeof IressTableBody>;
 export default {
   title: 'Components/Table/Body',
   component: IressTableBody,
-  tags: ['updated'],
 } as Meta<typeof IressTableBody>;
 
 export const Body: Story = {

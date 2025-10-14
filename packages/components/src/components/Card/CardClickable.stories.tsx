@@ -1,12 +1,12 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressCard } from './Card';
 import {
-  IressCard,
-  type IressButtonCardProps,
-  type IressCardProps,
-  type IressLinkCardProps,
-  IressButtonCard,
-  IressLinkCard,
-} from './Card';
+  IressButtonCardProps,
+  IressCardProps,
+  IressLinkCardProps,
+} from './Card.types';
+import { IressButtonCard } from './components/ButtonCard';
+import { IressLinkCard } from './components/LinkCard';
 import { withJsxTransformer } from '@iress-storybook/helpers';
 
 type Story = StoryObj<IressCardProps>;
@@ -21,7 +21,6 @@ export default {
       disable: true,
     },
   },
-  tags: ['updated'],
 } as Meta<typeof IressCard>;
 
 export const HeadingOnly: Story = {

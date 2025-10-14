@@ -1,50 +1,60 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import { IressMenuProps } from '../Menu.types';
 import { axe } from 'jest-axe';
 import { IressMenuItem } from './MenuItem';
+import { IressMenuItemProps } from './MenuItem.types';
 import { IressMenu } from '../Menu';
-import { GlobalCSSClass } from '@/enums';
 
-describe('IressMenuItem', () => {
-  it('renders as button by default', () => {
-    render(<IressMenuItem>Test</IressMenuItem>);
+const TEST_ID = 'test-component';
+const MENU_TEST_ID = 'test-menu';
+
+function renderComponent(props?: IressMenuItemProps) {
+  return render(<IressMenuItem {...props} data-testid={TEST_ID} />);
+}
+
+function renderInsideMenu(
+  props?: IressMenuProps,
+  itemProps?: IressMenuItemProps,
+  wrapperTag = 'div',
+) {
+  const Wrapper = wrapperTag as keyof JSX.IntrinsicElements;
+
+  return render(
+    <Wrapper>
+      <IressMenu {...props} data-testid={MENU_TEST_ID}>
+        <IressMenuItem {...itemProps} data-testid={TEST_ID} />
+      </IressMenu>
+    </Wrapper>,
+  );
+}
+
+describe('IressMenuButton', () => {
+  it('renders as button', () => {
+    const screen = renderComponent({
+      children: 'Test',
+    });
     const button = screen.getByRole('button', { name: 'Test' });
     expect(button).toBeInTheDocument();
-    expect(button).toHaveClass(GlobalCSSClass.MenuItem);
-  });
-
-  it('renders as a if provided href', () => {
-    render(<IressMenuItem href="#">Test</IressMenuItem>);
-    const anchor = screen.getByRole('link', { name: 'Test' });
-    expect(anchor).toBeInTheDocument();
   });
 
   describe('inside menu', () => {
     it('renders inside a listitem element inside default menu', () => {
-      render(
-        <IressMenu>
-          <IressMenuItem>Test</IressMenuItem>
-        </IressMenu>,
-      );
+      const screen = renderInsideMenu({}, { children: 'Test' });
       const button = screen.getByRole('button', { name: 'Test' });
       expect(button).toBeInTheDocument();
       expect(button.parentElement).toHaveAttribute('role', 'listitem');
     });
 
     it('renders as a menuitem inside a menu with role=menu', () => {
-      render(
-        <IressMenu role="menu">
-          <IressMenuItem>Test</IressMenuItem>
-        </IressMenu>,
-      );
+      const screen = renderInsideMenu({ role: 'menu' }, { children: 'Test' });
       const button = screen.getByRole('menuitem', { name: 'Test' });
       expect(button).toBeInTheDocument();
     });
 
     it('renders as a option inside a menu with role=listbox', () => {
-      render(
-        <IressMenu role="listbox">
-          <IressMenuItem>Test</IressMenuItem>
-        </IressMenu>,
+      const screen = renderInsideMenu(
+        { role: 'listbox' },
+        { children: 'Test' },
       );
       const button = screen.getByRole('option', { name: 'Test' });
       expect(button).toBeInTheDocument();
@@ -53,48 +63,38 @@ describe('IressMenuItem', () => {
 
   describe('accessibility', () => {
     it('should not have basic accessibility issues', async () => {
-      const { container } = render(<IressMenuItem>Test</IressMenuItem>);
-      const results = await axe(container);
+      const screen = renderComponent({ children: 'Test' });
+      const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
     });
 
     it('should not have basic accessibility issues in menu with role=list', async () => {
-      const { container } = render(
-        <IressMenu role="list">
-          <IressMenuItem>Test</IressMenuItem>
-        </IressMenu>,
-      );
-      const results = await axe(container);
+      const screen = renderInsideMenu({ role: 'list' }, { children: 'Test' });
+      const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
     });
 
     it('should not have basic accessibility issues in menu with role=menu', async () => {
-      const { container } = render(
-        <IressMenu role="menu">
-          <IressMenuItem>Test</IressMenuItem>
-        </IressMenu>,
-      );
-      const results = await axe(container);
+      const screen = renderInsideMenu({ role: 'menu' }, { children: 'Test' });
+      const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
     });
 
     it('should not have basic accessibility issues in menu with role=listbox', async () => {
-      const { container } = render(
-        <IressMenu role="listbox" aria-label="Test menu">
-          <IressMenuItem>Test</IressMenuItem>
-        </IressMenu>,
+      const screen = renderInsideMenu(
+        { 'aria-label': 'Test', role: 'listbox' },
+        { children: 'Test' },
       );
-      const results = await axe(container);
+      const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
     });
 
     it('should not have basic accessibility issues in menu with role=listbox and selected', async () => {
-      const { container } = render(
-        <IressMenu role="listbox" aria-label="Test menu" selected="test">
-          <IressMenuItem value="test">Test</IressMenuItem>
-        </IressMenu>,
+      const screen = renderInsideMenu(
+        { 'aria-label': 'Test', role: 'listbox', selected: 'test' },
+        { children: 'Test', value: 'test' },
       );
-      const results = await axe(container);
+      const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
     });
   });

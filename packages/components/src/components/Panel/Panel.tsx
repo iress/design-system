@@ -1,27 +1,51 @@
-import { panel } from './Panel.styles';
-import { type IressStyledProps } from '@/types';
-import { type FC, type ReactNode } from 'react';
-import { styled } from '@/styled-system/jsx';
-import { IressText } from '../Text/Text';
-import { cx } from '@/styled-system/css';
-import { GlobalCSSClass } from '@/enums';
+import classNames from 'classnames';
+import {
+  type IressPanelProps,
+  PanelBackground,
+  PanelCssClass,
+  type PanelWithEnums,
+} from './Panel.types';
+import { PaddingSize, TextAlign, GlobalCSSClass } from '@/enums';
+import { getResponsivePaddingClasses } from '@helpers/responsive/getResponsivePaddingClasses';
 
-export interface IressPanelProps extends IressStyledProps {
-  /**
-   * Content to be grouped using a panel.
-   */
-  children?: ReactNode;
+export const IressPanel: PanelWithEnums = ({
+  children,
+  background = 'default',
+  noBorderRadius,
+  noGutter,
+  padding = 'md',
+  stretch,
+  textAlign = 'inherit',
+  className,
+  ...restProps
+}: IressPanelProps) => {
+  const classMap = {
+    [PanelCssClass.Stretch]: stretch,
+    [PanelCssClass.NoBorderRadius]: noBorderRadius,
+    [PanelCssClass.NoGutter]: noGutter,
+  };
 
-  /**
-   * Setting to true will ignore the border radius set in the theme and set it to zero.
-   *
-   * @deprecated Use `borderRadius="none"` instead.
-   */
-  noBorderRadius?: boolean;
-}
+  const cssClasses = classNames(
+    className,
+    PanelCssClass.Base,
+    `${GlobalCSSClass.TextAlignBase}--${textAlign}`,
+    `${PanelCssClass.Background}--${background}`,
+    getResponsivePaddingClasses(padding),
+    classMap,
+  );
 
-const Component = styled(IressText, panel) as FC<IressPanelProps>;
+  return (
+    <div className={cssClasses} {...restProps}>
+      {children}
+    </div>
+  );
+};
 
-export const IressPanel = ({ className, ...restProps }: IressPanelProps) => (
-  <Component {...restProps} className={cx(className, GlobalCSSClass.Panel)} />
-);
+/** @deprecated IressPanel.Background is now deprecated and will be removed in a future version. Please use the PanelBackgrounds type instead. */
+IressPanel.Background = PanelBackground;
+
+/** @deprecated IressPanel.Padding is now deprecated and will be removed in a future version. Please use the PaddingSizes type instead. */
+IressPanel.Padding = PaddingSize;
+
+/** @deprecated IressPanel.TextAlign is now deprecated and will be removed in a future version. Please use the TextAligns type instead. */
+IressPanel.TextAlign = TextAlign;

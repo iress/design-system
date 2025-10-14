@@ -1,0 +1,364 @@
+@use './Navbar.vars.module';
+@use '../../styles/vars';
+
+/** Navbar
+ * --------------------------------------------------
+ * @prop  --iress-text-color: Text color
+ * @prop  --iress-nav-background-color: Background color
+ * @prop  --iress-border-bottom-color: Bottom border color
+ * @prop  --iress-box-shadow: Box shadow
+ * @prop  --iress-nav-link-text-color: Nav link text color
+ * @prop  --iress-nav-link-background-color: Nav link background color
+ * @prop  --iress-nav-link-selected-mark-color: Underline color on selected nav link
+ * @prop  --iress-nav-link-hover-text-color: Nav link text color in hover state
+ * @prop  --iress-nav-link-hover-background-color: Nav link background color in hover state
+ * @prop  --iress-nav-link-hover-selected-mark-color: Underline color on selected nav link in hover state
+ * @prop  --iress-nav-link-active-text-color: Nav link text colour in active state
+ * @prop  --iress-nav-link-active-background-color: Nav link background colour in active state
+ * @prop  --iress-nav-link-active-selected-mark-color: Underline color on selected nav link in active state
+ */
+
+.navbar {
+  /* Create a reference to --iress-text-color as set on the navbar ele
+       so we can refer to it in sub components */
+  --iress-root-text-color: var(--iress-text-color);
+
+  color: var(--iress-text-color);
+  display: flex;
+  align-items: stretch;
+  background-color: var(--iress-nav-background-color);
+  background-image: var(--iress-nav-background-image);
+  border-block-end: var(--iress-border-bottom-width) solid var(--iress-border-bottom-color);
+  box-shadow: var(--iress-box-shadow-size) var(--iress-box-shadow-color);
+  min-height: calc(var(--iress-logo-max-height) + (2 * var(--iress-logo-spacing-y)));
+
+  header {
+    display: contents;
+  }
+
+  nav {
+    display: flex;
+    align-items: stretch;
+  }
+
+  /* Icons should inherit color and height from navbar */
+  .ids-icon:not(.ids-field *, .ids-field-group *) {
+    --iress-text-color: var(--iress-root-text-color);
+  }
+
+  /* Add vertical spacing to logos */
+  svg,
+  img,
+  .logoImage,
+  .panel svg,
+  .panel img,
+  .panel .logoImage {
+    max-height: var(--iress-logo-max-height);
+    margin-block: var(--iress-logo-spacing-y);
+    align-self: center;
+  }
+
+  /* Force svg logo to appear */
+  .logoSlot svg {
+    height: var(--iress-logo-max-height);
+  }
+
+  /* Stretch interactive items to full height */
+  .ids-menu--inline .ids-menuItem,
+  .ids-menu--inline,
+  .ids-badge--host,
+  :global(.iress-u-button):not(.ids-field-group *),
+  :global(.iress-u-button &.iress--mode--primary):not(.ids-field-group *),
+  :global(.iress-u-button &.iress--mode--secondary):not(.ids-field-group *),
+  :global(.iress-u-button &.iress--mode--tertiary):not(.ids-field-group *),
+  :global(.iress-u-button &.iress--mode--link):not(.ids-field-group *),
+  .ids-popover:not(.ids-field-group *, .ids-combobox *),
+  .ids-popover:not(.ids-field-group *) .ids-popover--activator :global(.iress-u-button) {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    min-height: calc(var(--iress-logo-max-height) + (2 * var(--iress-logo-spacing-y)));
+  }
+
+  /* Centrally align text */
+  :global(.iress-u-text):not(.ids-popover--content *) {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    --iress-heading-text-color: initial;
+    --iress-display-text-color: initial;
+    --iress-display-line-height: initial;
+    --iress-link-text-color: initial;
+    --iress-link-hover-text-color: initial;
+    --iress-text-color: initial;
+  }
+
+  h1:global(.iress-u-text),
+  :global(.iress--h1):global(.iress-u-text),
+  :global(.iress-u-text) h1,
+  h2:global(.iress-u-text),
+  :global(.iress--h2):global(.iress-u-text),
+  :global(.iress-u-text) h2,
+  h3:global(.iress-u-text),
+  :global(.iress--h3):global(.iress-u-text),
+  :global(.iress-u-text) h3,
+  h4:global(.iress-u-text),
+  :global(.iress--h4):global(.iress-u-text),
+  :global(.iress-u-text) h4,
+  h5:global(.iress-u-text),
+  :global(.iress--h5):global(.iress-u-text),
+  :global(.iress-u-text) h5,
+  h6:global(.iress-u-text),
+  :global(.iress--h6):global(.iress-u-text),
+  :global(.iress-u-text) h6 {
+    margin-bottom: 0;
+  }
+
+  /* Reset styles for slotted IDS components */
+  .ids-menu--inline {
+    display: contents;
+  }
+
+  nav .ids-menu--inline .ids-menuItem,
+  .ids-menu--inline .ids-menuItem {
+    --iress-nav-mark-color: var(--iress-nav-link-selected-mark-color);
+    --iress-button-text-color: var(--iress-nav-link-text-color);
+    --iress-button-hover-background-color: var(--iress-nav-link-hover-background-color);
+    --iress-button-hover-text-color: var(--iress-nav-link-hover-text-color);
+    --iress-button-active-background-color: var(--iress-nav-link-active-background-color);
+    --iress-button-active-text-color: var(--iress-nav-link-active-text-color);
+    --iress-menu-item-nav-selected-background-color: var(--iress-nav-link-selected-background-color);
+    --iress-menu-item-nav-selected-text-color: var(--iress-nav-link-selected-text-color);
+
+    &:hover {
+      --iress-nav-mark-color: var(--iress-nav-link-hover-selected-mark-color);
+    }
+
+    &:active {
+      --iress-nav-mark-color: var(--iress-nav-link-active-selected-mark-color);
+    }
+
+    :global(.iress-u-button) {
+      --iress-background-color: var(--iress-nav-link-background-color);
+      --iress-focus-box-shadow: 0 0 0 var(--iress-focus-box-shadow-size) var(--iress-focus-color);
+
+      overflow: visible;
+    }
+  }
+
+  .ids-field,
+  .ids-field .ids-label,
+  .ids-label {
+    --iress-text-color: initial;
+  }
+
+  .ids-field-group,
+  .ids-field:not(.ids-field-group *) {
+    --iress-input-border-color: var(--iress-form-ele-border-color);
+    --iress-button-secondary-text-color: var(--iress-form-ele-text-color);
+
+    padding-block: var(--iress-logo-spacing-y);
+  }
+
+  .ids-select {
+    color: var(--iress-form-ele-text-color);
+  }
+
+  .ids-input,
+  .ids-select,
+  .ids-combobox {
+    --iress-background-color: var(--iress-form-ele-background-color);
+    --iress-border-color: var(--iress-form-ele-border-color);
+    --iress-text-color: var(--iress-form-ele-text-color);
+  }
+
+  .ids-combobox {
+    --iress-taglist-input-border-color: var(--iress-form-ele-border-color);
+
+    .ids-tagListInput {
+      --iress-background-color: var(--iress-form-ele-background-color);
+    }
+  }
+
+  .ids-input--wrapper,
+  .ids-tagListInput {
+    --iress-border-color: var(--iress-form-ele-border-color);
+    --iress-text-color: var(--iress-form-ele-text-color);
+
+    color: inherit;
+  }
+
+  .ids-badge--host {
+    --iress-text-color: var(--iress-root-text-color);
+    --iress-translate-y: 10%;
+  }
+
+  :global(.iress-u-button):not(.ids-field-group *, .ids-popover *, .ids-menuItem),
+  :global(.iress-u-button.iress--mode--link):not(.ids-field-group *) {
+    --iress-text-color: var(--iress-root-text-color);
+  }
+
+  .ids-popover--activator :global(.iress-u-button):not(.ids-field-group *) {
+    --iress-text-color: var(--iress-root-text-color);
+  }
+
+  :global(.iress-u-button.iress--mode--primary):not(.ids-field-group *),
+  :global(.iress-u-button.iress--mode--secondary):not(.ids-field-group *),
+  :global(.iress-u-button.iress--mode--tertiary):not(.ids-field-group *) {
+    --iress-hover-background-color: var(--iress-nav-link-hover-background-color);
+  }
+
+  :global(.iress-u-button.iress--mode--primary):not(.ids-field-group *),
+  :global(.iress-u-button.iress--mode--secondary):not(.ids-field-group *, .ids-menuItem),
+  :global(.iress-u-button.iress--mode--tertiary):not(.ids-field-group *),
+  :global(.iress-u-button.iress--mode--link):not(.ids-field-group *) {
+    --iress-background-color: transparent;
+    --iress-hover-text-color: var(--iress-nav-link-hover-text-color);
+    --iress-active-background-color: var(--iress-nav-link-active-background-color);
+    --iress-active-text-color: var(--iress-nav-link-active-text-color);
+    --iress-border-width: 0;
+    --iress-border-radius: 0px;
+  }
+
+  :global(.iress-u-button &.iress--mode--link):not(.ids-field-group *) {
+    --iress-hover-text-color: initial;
+    --iress-active-text-color: initial;
+  }
+
+  .ids-panel--background-transparent,
+  :global(.iress-u-panel).iress—background--transparent {
+    --iress-text-color: initial;
+  }
+
+  :global(.iress-u-inline) {
+    --child-display: inline-flex;
+  }
+}
+
+.navbar .panel {
+  display: flex;
+  align-items: stretch;
+  color: inherit;
+  border: none;
+  column-gap: var(--iress-spacing-x);
+  padding-inline: var(--iress-nav-padding-x);
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex-grow: 1;
+  align-items: stretch;
+  column-gap: var(--iress-spacing-x);
+}
+
+.content > :global(.iress-u-inline) {
+  flex-grow: 1;
+}
+
+.contentBetween {
+  *:first-child {
+    margin-inline-start: 0;
+  }
+
+  *:last-child,
+  :global(.iress-hidden):last-child > * {
+    margin-inline-start: auto;
+  }
+}
+
+.contentEnd {
+  > *:first-child {
+    margin-inline-start: auto;
+  }
+}
+
+.logoSlot {
+  display: contents;
+}
+
+.toggleButton {
+  height: 100%;
+  --iress-background-color: transparent;
+  --iress-text-color: var(--iress-nav-link-text-color);
+  --iress-border-radius: 0px;
+}
+
+.logoIcon {
+  color: inherit;
+}
+
+.panel .slot.logoLink {
+  padding-block: var(--iress-logo-spacing-y);
+  color: inherit !important;
+
+  svg,
+  img,
+  .logoImage {
+    margin: 0;
+  }
+
+  &:focus {
+    outline: none;
+    background-color: var(--iress-hover-background-color);
+    box-shadow: var(--iress-focus-box-shadow);
+  }
+
+  &:focus:not(:focus-visible) {
+    box-shadow: none;
+  }
+
+  &.logoImage {
+    margin-inline-end: 0;
+  }
+}
+
+.navbar.fixed {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 20;
+}
+
+@mixin absoluteNav {
+  .navHide {
+    --gutter-md: 0;
+
+    position: absolute;
+    display: block;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    padding: var(--iress-padding-x) var(--iress-padding-y);
+    background-color: var(--iress-nav-background-color);
+    border-block-start: var(--iress-responsive-nav-container-border-width) solid var(--iress-responsive-nav-container-border-color);
+
+    nav {
+      display: block;
+    }
+
+    .ids-menu--inline {
+      display: block;
+
+      .ids-menuItem {
+        display: block;
+
+        &.ids-menuItem--selected::before {
+          width: var(--iress-default-border-width--lg);
+          inset-block-start: 0px;
+          inset-inline-start: 0px;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+@each $bpName, $bpValue in vars.$navbarBreakpoints {
+  .navbar.#{$bpName} {
+    @media only screen and (#{$bpValue}) {
+      @include absoluteNav();
+    }
+  }
+}

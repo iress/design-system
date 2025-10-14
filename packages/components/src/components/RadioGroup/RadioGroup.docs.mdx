@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentExample,
   ComponentOverview,
@@ -50,7 +50,7 @@ The layout prop controls how the radio group is displayed and can have three bas
 - **inlineFlex:** Radio buttons are laid out horizontally. The container is only as wide as its contents.
 - **inlineEqualWidth:** Radio buttons are laid out horizontally. Labels take up an equal amount of space in the container.
 
-<IressAlert status="info" heading="Note:">
+<IressAlert status={IressAlert.Status.Info} heading="Note:">
   If using any of the inline* props within a `Field` component, the `Field` also
   needs the inline prop to be set for the inline layouts to take effect.
 </IressAlert>
@@ -79,14 +79,14 @@ The example below uses CSS grid to give us evenly spaced / sized radio buttons, 
   stories={ComponentStories}
 />
 
-### Read only
+### Readonly
 
-The `readOnly` prop changes how the radio group is rendered. It will only render if the children radio that is checked (alongside a hidden input that contains the `value` if it was set), otherwise it will not be rendered.
+The `readonly` prop changes how the radio group is rendered. It will only render if the children radio that is checked (alongside a hidden input that contains the `value` if it was set), otherwise it will not be rendered.
 
-It is understandable that this may not be the desired behavior for all use cases. If you need a radio group that is not editable, but still visible, simply do not set the `readOnly` prop and set the `value` prop instead.
+It is understandable that this may not be the desired behavior for all use cases. If you need a radio group that is not editable, but still visible, simply do not set the `readonly` prop and set the `value` prop instead.
 
 <ComponentExample
-  story={ComponentStories.ReadOnly}
+  story={ComponentStories.Readonly}
   stories={ComponentStories}
 />
 

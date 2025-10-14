@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -24,22 +24,12 @@ import * as ComponentStories from './InputCurrency.stories';
 
 ## Examples
 
-### Different Locale and CurrencyCode
+### Different Currency Code
 
-Display the GBP with `locale="en-GB"` and `currencyCode="GBP"` props (must pass both together)
-
-<ComponentExample story={ComponentStories.GBP} stories={ComponentStories} />
-
-Display the JPY with `locale="ja-JPY"` and `currencyCode="JPY"` props (must pass both together)
-
-<ComponentExample story={ComponentStories.JPY} stories={ComponentStories} />
-
-### With Symbol
-
-Display the currency symbol with `withSymbol` props
+Display GBP currency using the `currencyCode="GBP"` prop.
 
 <ComponentExample
-  story={ComponentStories.WithSymbol}
+  story={ComponentStories.CurrencyCode}
   stories={ComponentStories}
 />
 

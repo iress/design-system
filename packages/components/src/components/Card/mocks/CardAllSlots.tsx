@@ -1,18 +1,14 @@
 import {
+  IressContainer,
   IressInline,
   IressToggle,
   IressRow,
   IressCol,
-  type IressCardProps,
-  IressDivider,
-  IressCard,
-  IressStack,
+  IressCardProps,
 } from '@/main';
 import { useState } from 'react';
-import {
-  SUPPORTED_CARD_SLOTS,
-  type SupportedCardSlots,
-} from './supportedCardSlots';
+import { IressCard } from '../Card';
+import { SUPPORTED_CARD_SLOTS, SupportedCardSlots } from './supportedCardSlots';
 
 export const CardAllSlots = (args: IressCardProps) => {
   const [show, setShow] = useState({
@@ -31,8 +27,8 @@ export const CardAllSlots = (args: IressCardProps) => {
   );
 
   return (
-    <IressStack maxWidth="container.lg" gap="md" mx="auto">
-      <IressInline gap="md">
+    <IressContainer>
+      <IressInline gutter="md">
         {SUPPORTED_CARD_SLOTS.map((slot) => (
           <IressToggle
             key={slot}
@@ -45,7 +41,7 @@ export const CardAllSlots = (args: IressCardProps) => {
           </IressToggle>
         ))}
       </IressInline>
-      <IressDivider />
+      <hr />
       <IressRow gutter="md">
         <IressCol>
           <IressCard {...filteredArgs} />
@@ -57,6 +53,6 @@ export const CardAllSlots = (args: IressCardProps) => {
           <IressCard {...filteredArgs} />
         </IressCol>
       </IressRow>
-    </IressStack>
+    </IressContainer>
   );
 };

@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 
 import {
   ComponentOverview,
@@ -17,11 +17,13 @@ import * as ToasterStories from './Toaster.stories';
   stories={ToasterStories}
 />
 
-## Usage
+## Controlling toasts
 
-To use the toaster, wrap your `<App/>` or the component that you want to use the toasts within with `<IressToasterProvider />`. This provides the context for the `useToaster` hook, which is used to trigger toasts in your application.
+### Using the `IressToasterProvider`
 
-You can use the `success`, `info` and `error` methods from the hook to trigger toasts in your application.
+The recommended way to create toasts is by using the `<IressToasterProvider />` alongside the `useToaster` hook. By using the `success`, `info` and `error` methods from the hook, you can trigger toasts in your application.
+
+To use, wrap your `<App/>` or the component that you want to use the `useToaster` hook with `<IressToasterProvider />`.
 
 <ComponentExample story={ToasterStories.Provider} stories={ToasterStories} />
 
@@ -49,13 +51,13 @@ Timeouts must be set in milliseconds; as an example, if you want a timeout of fi
 
 ### Position
 
-By default, the `IressToasterProvider`'s `position` is set to `bottom-end`, but there may be occasions when you need toasts to appear in a different part of the screen. This can be controlled with the `position` prop on the `IressToasterProvider` component, or as the first argument to `useToaster`. There are 6 positions to choose from.
+By default, the `IressToaster`'s `position` is set to `bottom-end`, but there may be occasions when you need toasts to appear in a different part of the screen. This can be controlled with the `position` prop on the `IressToasterProvider` component, or as the first argument to `useToaster`. There are 6 positions to choose from.
 
-**Note:** The toast position should be consistent based on context, so users can find them easily.
+**Note:** The toast position should be consistent across your app. For this reason, the position is set on the `IressToastProvider` or the `useToaster` hook, and not on the individual toasts.
 
 <ComponentExample story={ToasterStories.Position} stories={ToasterStories} />
 
-## Migrating from version 4 and below
+## Migrating to version 5
 
 ### Adding the provider
 

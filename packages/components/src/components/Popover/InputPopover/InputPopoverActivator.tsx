@@ -1,31 +1,24 @@
+import styles from '../Popover.module.scss';
+import { usePopover } from '../hooks/usePopover';
 import {
   type ChangeEvent,
   type FocusEvent,
   type MouseEvent,
   cloneElement,
   useCallback,
-  useContext,
 } from 'react';
+import { type InputPopoverActivatorProps } from './InputPopover.types';
+import { type InputBaseProps, type IressInputProps } from '@/main';
 import { hasFocus } from '../helpers/hasFocus';
 import { usePopoverActivatorInteractions } from '../hooks/usePopoverActivatorInteractions';
-import { type PopoverActivatorProps } from '../components/PopoverActivator';
-import { PopoverContext } from '../hooks/usePopover';
-import { type InputBaseProps, type IressInputProps } from '@/components/Input';
-
-export interface InputPopoverActivatorProps extends PopoverActivatorProps {
-  /**
-   * Min length of input activator before popover is shown, if input activator has minLength
-   * prop it will use that as a fallback. Defaults to 1 if not provided and not found in activator.
-   */
-  minLength?: number;
-}
 
 export const InputPopoverActivator = ({
   children,
+  disabledAutoToggle,
   minLength,
   ...restProps
 }: InputPopoverActivatorProps) => {
-  const popover = useContext(PopoverContext);
+  const popover = usePopover();
 
   const childrenProps = children?.props as IressInputProps;
   const inputMinLength = minLength ?? childrenProps.minLength ?? 1;
@@ -35,17 +28,19 @@ export const InputPopoverActivator = ({
     (e: ChangeEvent<HTMLInputElement>) => {
       const value = e.currentTarget.value;
 
-      const hasValue = value.length >= inputMinLength;
+      if (!disabledAutoToggle) {
+        const hasValue = value.length >= inputMinLength;
 
-      if (hasValue && popover?.show === false) {
-        popover.setShowWithReason(true, e.nativeEvent, pressEvent);
-      } else if (!hasValue && popover?.show) {
-        popover.setShowWithReason(false, e.nativeEvent, pressEvent);
+        if (hasValue && popover?.show === false) {
+          popover.setShowWithReason(true, e.nativeEvent, pressEvent);
+        } else if (!hasValue && popover?.show) {
+          popover.setShowWithReason(false, e.nativeEvent, pressEvent);
+        }
       }
 
       childrenProps.onChange?.(e, value);
     },
-    [childrenProps, inputMinLength, popover],
+    [childrenProps, disabledAutoToggle, inputMinLength, popover],
   );
 
   const handleClick = useCallback(
@@ -54,6 +49,7 @@ export const InputPopoverActivator = ({
       childrenProps.onClick?.(e);
 
       if (
+        !disabledAutoToggle &&
         popover?.show === false &&
         hasFocus(e.currentTarget) &&
         value.length >= inputMinLength
@@ -61,12 +57,14 @@ export const InputPopoverActivator = ({
         popover.setShowWithReason(true, e.nativeEvent, pressEvent);
       }
     },
-    [childrenProps, inputMinLength, popover],
+    [childrenProps, disabledAutoToggle, inputMinLength, popover],
   );
 
   const handleFocus = useCallback(
     (e: FocusEvent<HTMLInputElement>) => {
       childrenProps.onFocus?.(e);
+
+      if (disabledAutoToggle) return;
 
       if (
         (!inputMinLength || e.currentTarget.value.length >= inputMinLength) &&
@@ -75,7 +73,7 @@ export const InputPopoverActivator = ({
         popover.setShowWithReason(true, e.nativeEvent, 'focus');
       }
     },
-    [childrenProps, inputMinLength, popover],
+    [childrenProps, disabledAutoToggle, inputMinLength, popover],
   );
 
   const activatorInteractions = usePopoverActivatorInteractions(
@@ -84,7 +82,11 @@ export const InputPopoverActivator = ({
   );
 
   return (
-    <div {...restProps} ref={popover?.api.refs.setReference}>
+    <div
+      {...restProps}
+      className={styles.activator}
+      ref={popover?.api.refs.setReference}
+    >
       {children &&
         popover &&
         cloneElement(

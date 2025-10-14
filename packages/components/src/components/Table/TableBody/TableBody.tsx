@@ -1,52 +1,20 @@
 import { propagateTestid } from '@/helpers/utility/propagateTestid';
+import classNames from 'classnames';
 import { TableEmpty } from '../components/TableEmpty';
 import { TableHeader } from '../components/TableHeader';
+import { IressTableProvider } from '../TableProvider';
+import styles from '../Table.module.scss';
 import { useIdIfNeeded } from '@/hooks';
-import { useEffect, useState, type ReactNode, useContext } from 'react';
+import { hasColumns } from '../helpers/hasColumns';
+import { useTable } from '../hooks/useTable';
+import { useEffect, useState } from 'react';
+import { type IressTableBodyProps } from './TableBody.types';
 import { TableRows } from '../components/TableRows';
 import {
   type AriaRelationshipProps,
   useAriaRelationship,
 } from '@/hooks/useAriaRelationship';
-import { table } from '../Table.styles';
-import { type IressTableProps } from '../Table';
-import { TableContext, TableProvider } from '../TableProvider';
-import { styled } from '@/styled-system/jsx';
-
-export interface IressTableBodyProps<TRow extends object = never, TVal = never>
-  extends Omit<
-    IressTableProps<TRow, TVal, 'tbody'>,
-    'alternate' | 'compact' | 'hover' | 'removeRowBorders'
-  > {
-  /**
-   * Caption that describes the data in the inner table, required for accessibility.
-   * Used to open/close the inner table.
-   *
-   * **Note:** Do not include interactive elements inside the caption.
-   */
-  caption: ReactNode;
-
-  /**
-   * When set to true, the table caption will be visually hidden.
-   * If set, the inner table will always be open.
-   */
-  hiddenCaption?: boolean;
-
-  /**
-   * Is called when table is opened.
-   */
-  onOpened?: () => void;
-
-  /**
-   * Is called when table is closed.
-   */
-  onClosed?: () => void;
-
-  /**
-   * When true, all rows will be visible, otherwise they are hidden.
-   */
-  open?: boolean;
-}
+import { GlobalCSSClass } from '@/enums';
 
 interface TableBodyHeaderProps
   extends Pick<IressTableBodyProps, 'caption' | 'hiddenCaption'>,
@@ -64,29 +32,28 @@ const TableBodyHeader = ({
   setController,
   tableId,
 }: TableBodyHeaderProps) => {
-  const tableContext = useContext(TableContext);
-  const numberOfColumns = tableContext?.api.getVisibleFlatColumns().length;
+  const table = useTable();
+  const numberOfColumns = table?.api.getVisibleFlatColumns().length;
 
   if (!numberOfColumns) return null;
 
-  const classes = table({ tableBodyOpen: open });
-
   return (
     <tr>
-      <styled.th
+      <th
         aria-expanded={hiddenCaption ? undefined : open}
         colSpan={numberOfColumns}
-        className={classes.rowGroupHeader}
+        className={classNames(styles.rowGroupHeader, {
+          [GlobalCSSClass.SROnly]: hiddenCaption,
+        })}
         id={`${tableId}--caption`}
         onClick={onChange}
         scope="rowgroup"
-        srOnly={hiddenCaption}
         ref={setController}
       >
-        <button className={classes.activator} type="button">
+        <button className={styles.activator} type="button">
           {caption}
         </button>
-      </styled.th>
+      </th>
     </tr>
   );
 };
@@ -99,7 +66,7 @@ const TableBodyChildren = ({
   Pick<AriaRelationshipProps, 'setControlViaRef'> & {
     tableId: string;
   }) => {
-  const table = useContext(TableContext);
+  const table = useTable();
   const numberOfColumns = table?.api.getVisibleFlatColumns().length;
 
   if (!children) return null;
@@ -117,6 +84,7 @@ export const IressTableBody = <TRow extends object = never, TVal = never>({
   caption,
   children,
   columns,
+  className,
   'data-testid': dataTestId,
   empty,
   hiddenCaption,
@@ -133,7 +101,8 @@ export const IressTableBody = <TRow extends object = never, TVal = never>({
   const { setController, setControlViaRef } =
     useAriaRelationship<HTMLTableCellElement>('aria-controls');
   const id = useIdIfNeeded({ id: restProps.id });
-  const showTable = children ?? (empty && columns?.length) ?? !!rows?.length;
+  const showTable =
+    children ?? (empty && hasColumns(columns)) ?? !!rows?.length;
 
   useEffect((): void => {
     setIsOpen(open);
@@ -156,8 +125,14 @@ export const IressTableBody = <TRow extends object = never, TVal = never>({
   const showRows = isOpen || hiddenCaption;
 
   return (
-    <TableProvider columns={columns} rows={rows}>
-      <styled.tbody aria-labelledby={`${id}--caption`} {...restProps}>
+    <IressTableProvider columns={columns} rows={rows}>
+      <tbody
+        aria-labelledby={`${id}--caption`}
+        {...restProps}
+        className={classNames(className, {
+          [styles.hiddenHeader]: hiddenHeader,
+        })}
+      >
         <TableBodyHeader
           setController={setController}
           caption={caption}
@@ -171,6 +146,7 @@ export const IressTableBody = <TRow extends object = never, TVal = never>({
             {!hiddenHeader && (
               <TableHeader
                 additionalHeaders={`${id}--caption`}
+                className={styles.rowGroupColumnHeaders}
                 setControlViaRef={setControlViaRef}
                 tableId={id}
                 testId={propagateTestid(dataTestId, 'thead')}
@@ -191,7 +167,7 @@ export const IressTableBody = <TRow extends object = never, TVal = never>({
             </TableBodyChildren>
           </>
         )}
-      </styled.tbody>
-    </TableProvider>
+      </tbody>
+    </IressTableProvider>
   );
 };

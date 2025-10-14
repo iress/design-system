@@ -1,11 +1,12 @@
-import { type PropsWithChildren, useMemo, useRef } from 'react';
+import { PropsWithChildren, useMemo, useRef } from 'react';
+import { PopoverContextValue } from '../Popover.types';
 import { vitest } from 'vitest';
+import { PopoverContext } from '../PopoverProvider';
 import {
-  type FloatingContext,
+  FloatingContext,
   FloatingList,
-  type ReferenceType,
+  ReferenceType,
 } from '@floating-ui/react';
-import { PopoverContext, type PopoverHookReturn } from '../hooks/usePopover';
 
 export const MOCK_FLOATING_UI_CONTEXT: FloatingContext<ReferenceType> = {
   x: 0,
@@ -51,7 +52,7 @@ export const MOCK_FLOATING_UI_CONTEXT: FloatingContext<ReferenceType> = {
   middlewareData: {},
 };
 
-export const MOCK_FLOATING_UI_INTERACTIONS: PopoverHookReturn['interactions'] =
+export const MOCK_FLOATING_UI_INTERACTIONS: PopoverContextValue['interactions'] =
   {
     getReferenceProps: vitest.fn(),
     getFloatingProps: vitest.fn(() => ({
@@ -62,39 +63,36 @@ export const MOCK_FLOATING_UI_INTERACTIONS: PopoverHookReturn['interactions'] =
   };
 
 export const getMockPopoverContext = (
-  contextProps: Partial<PopoverHookReturn> = {},
-) =>
-  ({
-    ...contextProps,
-    activeIndex: contextProps.activeIndex ?? 0,
-    api: contextProps.api ?? {
-      ...MOCK_FLOATING_UI_CONTEXT,
-      context: MOCK_FLOATING_UI_CONTEXT,
-    },
-    getAriaControls: contextProps.getAriaControls ?? (() => []),
-    getFocusableActivator:
-      contextProps.getFocusableActivator ?? (() => new HTMLElement()),
-    hasInnerRole: contextProps.hasInnerRole ?? (() => false),
-    isActiveActivator: contextProps.isActiveActivator ?? (() => false),
-    isControlled: contextProps.isControlled ?? false,
-    isVirtualFocus: contextProps.isVirtualFocus ?? false,
-    interactions: contextProps.interactions ?? MOCK_FLOATING_UI_INTERACTIONS,
-    list: contextProps.list ?? {
-      current: [],
-    },
-    resetActiveIndex: contextProps.resetActiveIndex ?? vitest.fn(),
-    setActiveIndex: contextProps.setActiveIndex ?? vitest.fn(),
-    setHasInnerRole: contextProps.setHasInnerRole ?? vitest.fn(),
-    setShowWithReason: contextProps.setShowWithReason ?? vitest.fn(),
-    setShow: contextProps.setShow ?? vitest.fn(),
-    show: contextProps.show ?? false,
-    toggleAriaControls: contextProps.toggleAriaControls ?? vitest.fn(),
-  }) satisfies PopoverHookReturn;
+  contextProps: Partial<PopoverContextValue> = {},
+) => ({
+  ...contextProps,
+  activeIndex: contextProps.activeIndex ?? 0,
+  api: contextProps.api ?? {
+    ...MOCK_FLOATING_UI_CONTEXT,
+    context: MOCK_FLOATING_UI_CONTEXT,
+  },
+  getAriaControls: contextProps.getAriaControls ?? (() => []),
+  getFocusableActivator:
+    contextProps.getFocusableActivator ?? (() => new HTMLElement()),
+  hasInnerRole: contextProps.hasInnerRole ?? (() => false),
+  isControlled: contextProps.isControlled ?? false,
+  interactions: contextProps.interactions ?? MOCK_FLOATING_UI_INTERACTIONS,
+  list: contextProps.list ?? {
+    current: [],
+  },
+  resetActiveIndex: contextProps.resetActiveIndex ?? vitest.fn(),
+  setActiveIndex: contextProps.setActiveIndex ?? vitest.fn(),
+  setHasInnerRole: contextProps.setHasInnerRole ?? vitest.fn(),
+  setShowWithReason: contextProps.setShowWithReason ?? vitest.fn(),
+  setShow: contextProps.setShow ?? vitest.fn(),
+  show: contextProps.show ?? false,
+  toggleAriaControls: contextProps.toggleAriaControls ?? vitest.fn(),
+});
 
 export const TestPopoverProvider = ({
   children,
   ...contextProps
-}: Partial<PopoverHookReturn> & PropsWithChildren) => {
+}: Partial<PopoverContextValue> & PropsWithChildren) => {
   const list = useRef<(HTMLElement | null)[]>([]);
 
   const context = useMemo(

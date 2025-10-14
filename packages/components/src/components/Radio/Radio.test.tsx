@@ -1,8 +1,8 @@
 import { render, RenderResult } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressRadio, IressRadioProps, radio as radioStyles } from '.';
+import { IressRadio, IressRadioProps } from '.';
+import styles from './Radio.module.scss';
 import userEvent from '@testing-library/user-event';
-import { GlobalCSSClass } from '@/enums';
 
 const TEST_ID = 'test-component';
 
@@ -35,19 +35,12 @@ describe('IressRadio', () => {
     });
 
     const component = screen.getByTestId(TEST_ID);
-    expect(component).toHaveClass(
-      'test-class',
-      radioStyles().root!,
-      GlobalCSSClass.Radio,
-    );
+    expect(component).toHaveClass(`test-class ${styles.radio}`);
 
     const input = screen.getByRole('radio', { name: 'Test text' });
     expect(input).toBeInTheDocument();
     expect(input).not.toBeChecked();
-    expect(input).toHaveAttribute(
-      'class',
-      expect.stringContaining('pos_absolute'),
-    );
+    expect(input).toHaveClass(styles.input);
   });
 
   describe('props', () => {
@@ -73,46 +66,16 @@ describe('IressRadio', () => {
     });
 
     describe('hiddenControl', () => {
-      it('before checked: hides the radio mark and the checkbox mark (visually), yet still accessible', () => {
+      it('hides the radio mark, yet still accessible', () => {
         const screen = renderRadio({
           required: true,
-          hiddenControl: true,
         });
 
         const input = screen.getByRole('radio', { name: TEST_ID });
         expect(input).toBeInTheDocument();
 
-        const radioMark = screen.queryByTestId(`${TEST_ID}__radioMark`);
-        expect(radioMark).not.toBeInTheDocument();
-        const checkboxMark = screen.queryByTestId(`${TEST_ID}__checkboxMark`);
-        expect(checkboxMark).toBeInTheDocument();
-        expect(checkboxMark).toHaveClass(
-          radioStyles({ hiddenControl: true, checked: false }).checkboxMark!,
-        );
-      });
-
-      it('after checked: hides the radio mark, shows the checkbox mark and colored border, yet still accessible', async () => {
-        const screen = renderRadio({
-          required: true,
-          hiddenControl: true,
-        });
-
-        const input = screen.getByRole('radio', { name: TEST_ID });
-        expect(input).toBeInTheDocument();
-
-        await userEvent.click(input);
-
-        const radioMark = screen.queryByTestId(`${TEST_ID}__radioMark`);
-        expect(radioMark).not.toBeInTheDocument();
-        const checkboxMark = screen.queryByTestId(`${TEST_ID}__checkboxMark`);
-        expect(checkboxMark).toBeInTheDocument();
-        expect(checkboxMark).toHaveClass(
-          radioStyles({ hiddenControl: true, checked: true }).checkboxMark!,
-        );
-        const label = screen.getByText(TEST_ID).closest('label');
-        expect(label).toHaveClass(
-          radioStyles({ hiddenControl: true, checked: true }).label!,
-        );
+        const mark = screen.queryByTestId(`${TEST_ID}-mark`);
+        expect(mark).not.toBeInTheDocument();
       });
     });
 
@@ -145,7 +108,7 @@ describe('IressRadio', () => {
       });
     });
 
-    describe('readOnly', () => {
+    describe('readonly', () => {
       it('renders a hidden input with the correct value, if checked', () => {
         const screen = render(
           <IressRadio value="radio" defaultChecked readOnly>
@@ -153,7 +116,7 @@ describe('IressRadio', () => {
           </IressRadio>,
         );
 
-        // No radio is rendered in readOnly mode
+        // No radio is rendered in readonly mode
         const radio = screen.queryByRole('radio');
         expect(radio).not.toBeInTheDocument();
 
@@ -172,7 +135,7 @@ describe('IressRadio', () => {
           </IressRadio>,
         );
 
-        // No radio is rendered in readOnly mode
+        // No radio is rendered in readonly mode
         const radio = screen.queryByRole('radio');
         expect(radio).not.toBeInTheDocument();
 
@@ -229,10 +192,7 @@ describe('IressRadio', () => {
       });
 
       const component = screen.getByTestId(TEST_ID);
-      expect(component).toHaveClass('group');
-
-      const label = component.querySelector('label');
-      expect(label).toHaveClass(radioStyles({ touch: true }).label!);
+      expect(component).toHaveClass(styles.touch);
     });
   });
 });

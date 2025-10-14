@@ -1,19 +1,20 @@
 import {
   IressButton,
   IressInline,
+  IressToastProps,
+  IressToasterProps,
   IressToasterProvider,
-  type IressToasterProviderProps,
-  type ToastStatus,
+  TOAST_STATUS,
   useToaster,
 } from '@/main';
 
-const ToastWithTrigger = ({ status }: { status: ToastStatus }) => {
+const ToastWithTrigger = ({ status }: Pick<IressToastProps, 'status'>) => {
   const toaster = useToaster();
 
   return (
     <IressButton
       onClick={() =>
-        toaster[status]({ content: `Hello, I am a ${status} toast` })
+        toaster[status]({ children: `Hello, I am a ${status} toast` })
       }
     >
       {status}
@@ -21,12 +22,12 @@ const ToastWithTrigger = ({ status }: { status: ToastStatus }) => {
   );
 };
 
-export const ToastStatuses = (args: IressToasterProviderProps) => (
+export const ToastStatuses = (args: IressToasterProps) => (
   <IressToasterProvider {...args}>
-    <IressInline gap="sm">
-      <ToastWithTrigger {...args} status="error" />
-      <ToastWithTrigger {...args} status="info" />
-      <ToastWithTrigger {...args} status="success" />
+    <IressInline gutter="sm">
+      {TOAST_STATUS.map((status) => (
+        <ToastWithTrigger {...args} status={status} />
+      ))}
     </IressInline>
   </IressToasterProvider>
 );

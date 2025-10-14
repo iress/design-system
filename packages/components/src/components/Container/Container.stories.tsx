@@ -1,8 +1,8 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressContainer } from '.';
 import { IressPanel } from '../Panel';
 import { CurrentBreakpoint } from '@iress-storybook/components';
-import { themeControlNames, withThemeArgTypes } from '@theme-preset/storybook';
+import { disableArgTypes } from '@iress-storybook/helpers';
 
 type Story = StoryObj<typeof IressContainer>;
 
@@ -10,30 +10,8 @@ export default {
   title: 'Components/Container',
   component: IressContainer,
   argTypes: {
-    ...withThemeArgTypes({
-      children: {
-        description: 'The content of the container.',
-        control: { disable: true, type: undefined },
-        table: {
-          type: {
-            summary: 'ReactNode',
-          },
-        },
-      },
-    }),
+    ...disableArgTypes(['children']),
   },
-  parameters: {
-    controls: { include: ['children', 'fluid', ...themeControlNames] },
-    layout: 'fullscreen',
-  },
-  tags: ['updated'],
-  decorators: [
-    (Story) => (
-      <IressPanel bg="alt" borderRadius="radius.000" stretch>
-        <Story />
-      </IressPanel>
-    ),
-  ],
 } as Meta<typeof IressContainer>;
 
 export const Container: Story = {

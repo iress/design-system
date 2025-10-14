@@ -3,15 +3,15 @@ import {
   IressButton,
   IressPlaceholder,
   IressSkeleton,
-  type IressSkeletonProps,
+  IressSkeletonProps,
   IressStack,
 } from '@/main';
 
-export const SkeletonCircle = (args: IressSkeletonProps<'circle'>) => {
+export const SkeletonCircle = (args: IressSkeletonProps) => {
   const [loading, setLoading] = useState(true);
 
   return (
-    <IressStack gap="md">
+    <IressStack gutter={IressStack.Gutter.Md}>
       <IressButton onClick={() => setLoading(!loading)}>
         Toggle load
       </IressButton>

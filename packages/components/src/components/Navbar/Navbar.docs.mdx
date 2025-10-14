@@ -1,0 +1,134 @@
+import { Meta } from '@storybook/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import { IressAlert } from '../../main';
+import * as ComponentStories from './Navbar.stories';
+
+<Meta of={ComponentStories} />
+
+# Navbar
+
+<ComponentOverview
+  description={
+    <>
+      The <code>IressNavbar</code> component defines your application’s global
+      header. It usually contains your company logo, global navigation links,
+      and an application heading.
+    </>
+  }
+  story={ComponentStories.Default}
+  stories={ComponentStories}
+/>
+
+## Examples
+
+The `IressNavbar` component is designed to be flexible. You can set up simple navbars by using the slots and props to generate and organise your content.
+
+If you need a complex layout that isn't covered by the slots and props, you can create custom navbars by supplying your own structure.
+
+### Logos
+
+Navbars usually contain a company logo. You can add this directly to your `IressNavbar` as an `<img>` or `<svg>` element, or via the `logoSrc` prop. Simply set the value to the URL of the image you wish to use, and the `IressNavbar` component will render the image for you.
+
+All images should have alt text to provide context for screen reader users. If using the `logoSrc` prop, you should also set the `logoAltText` prop to ensure that your logo is accurately described.
+
+<ComponentExample story={ComponentStories.Logos} stories={ComponentStories} />
+
+### Fixed positioning
+
+Navbars can be fixed to the top of your viewport to ensure that content is always available to users; simply set the `fixed` prop to true. If the prop isn't set (or if it's set to false), the navbar will scroll off-screen when the user scrolls.
+
+<IressAlert status={IressAlert.Status.Info} className="iress-mb--lg">
+  If you use the fixed prop, you&apos;ll need to add padding to the top of your
+  content container as the `IressNavbar` will be treated as having zero height
+  when the DOM layout is calculated. If you don&apos;t add padding, content can
+  be hidden behind the `IressNavbar` even when the user scrolls to the top of
+  the page.
+</IressAlert>
+
+### Alignment
+
+The `IressNavbar` allows you to set up some simple layouts via the horizontal alignment prop. You can set this to `start`, `end` or `between`.
+
+`start` aligns the `children` slot and the `nav` slot content to the start of the `IressNavbar` (to the left for left-to-right languages).
+
+`end` aligns the `children` slot and the `nav` slot content to the end of the `IressNavbar` (to the right for left-to-right languages).
+
+`between` splits the `children` and `nav` slots; the `children` slot content will be at the start of the `IressNavbar`, whereas the `nav` slot content will be at end of the `IressNavbar`. If no `children` slot content is provided, the `nav` slot content will still appear at the end of the `IressNavbar`.
+
+Vertical alignment is always set to middle, to ensure that content aligns correctly.
+
+<ComponentExample story={ComponentStories.Align} stories={ComponentStories} />
+
+### Logo slot
+
+The `logo` slot, as the name suggests, is designed for logos. Use this is you want to supply your own image element or SVG. Content in the Logo slot will always appear at the start of your Navbar (to the left for left-to-right languages).
+
+<ComponentExample story={ComponentStories.Logos} stories={ComponentStories} />
+
+### Children and nav slots
+
+The default `children` slot is used for generic content like headings. You'll also pass in `children` content if you create a custom navbar.
+
+<ComponentExample
+  story={ComponentStories.Children}
+  stories={ComponentStories}
+/>
+
+The `nav` slot is for navigation content like links, and is designed to be used with the Menu component. Content in the `nav` slot will be rendered inside a `nav` element. Nav elements should be labelled to help screen reader users understand which navigation content they're interacting with. We add a default label of "primary navigation" to the `nav` element inside the `nav` slot, but you can override that with the `navLabel` prop.
+
+<ComponentExample story={ComponentStories.NavMenu} stories={ComponentStories} />
+
+<ComponentExample
+  story={ComponentStories.NavMenuAndChildren}
+  stories={ComponentStories}
+/>
+
+### Simple responsive Navbars
+
+You can use the `breakpoint` prop to create simple responsive navbars. When set, content in the `nav` slot will be hidden below that breakpoint. Instead, the `IressNavbar` will render a toggle button that can be used to show / hide the Nav slot content.
+
+If you need more control over your navbar's responsive behaviour, you can create a custom navbar.
+
+<ComponentExample
+  story={ComponentStories.Responsive}
+  stories={ComponentStories}
+/>
+
+### Navbar with icons
+
+Using icons in `IressButton`s and `IressMenuItem`s can add visual interest to your navbar, as well as saving space. However, if the icon is the only content (ie there's no visible text description), the meaning of the icon may not be clear to users.
+
+To help users, you can add an `IressTooltip` around the `IressMenuItem`. This will enable users to hover or focus on the element to find out what it does.
+
+For more information about using tooltips, see the [Tooltip Documentation](?path=/docs/components-tooltip--docs).
+
+<ComponentExample story={ComponentStories.Icons} stories={ComponentStories} />
+
+### Fixed navbar focus handling
+
+WCAG 2.2 includes a new AA criterion designed to prevent focusable content from being hidden by other on-screen content like fixed navbars ([More details](https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html)).
+
+When `handledFocus` is set and navbar is `fixed`, navbar ensures any elements that recieve focus are not hidden by the navbar. It does this by scrolling the window enough for the focussed element to be in the visible viewport.
+
+#### Skip links
+
+Navbars often contain the same content across multiple pages. To make life easier for keyboard and screen reader users, it's considered good practice to use an `IressSkipLink` component alongside your navbar.
+
+Skip links allow keyboard users to skip the navbar entirely and access the main content on the page. This means they don't have to tab through every nav link or button every time they navigate to a new screen.
+
+You can find out more about skiplinks in the [SkipLink Documentation](?path=/docs/components-skiplink--docs).
+
+The `IressSkipLink` should appear before your navbar to ensure it's the first content that users interact with:
+
+```tsx
+<body>
+  <IressSkipLink targetId="main-content" />
+  <IressNavbar>...</IressNavbar>
+  <main id="main-content" tabIndex={-1}>
+    ...
+  </main>
+</body>
+```

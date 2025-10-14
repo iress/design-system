@@ -1,0 +1,41 @@
+import { Meta } from '@storybook/blocks';
+import * as ButtonRecipesStories from './ButtonRecipes.stories';
+
+<Meta of={ButtonRecipesStories} />
+
+# Recipes
+
+## Using with React Router
+
+To use the `IressButton` component with React Router, you can use the `useHref` hook to get the `href` prop to pass to the `IressButton` component.
+
+Learn more about the `useHref` hook in the [React Router documentation](https://reactrouter.com/docs/en/v6/api#usehref).
+
+```tsx
+import { IressButton } from '@iress/components';
+import { useHref } from 'react-router-dom';
+
+const ReactRouterButton = () => {
+  const href = useHref('/path/to/page');
+  return <IressButton href={href}>Go to page</IressButton>;
+};
+```
+
+## Using with Next.js
+
+To use the `IressButton` component with Next.js, you can use the `legacyBehavior` and `passHref` props to pass the `href` prop to the `IressButton` component.
+
+Learn more about the `Link` component in the [Next.js documentation](https://nextjs.org/docs/pages/api-reference/components/link#nesting-a-functional-component).
+
+```tsx
+import { IressButton } from '@iress/components';
+import Link from 'next/link';
+
+const NextButton = () => {
+  return (
+    <Link href="/path/to/page" legacyBehavior passHref>
+      <IressButton>Go to page</IressButton>
+    </Link>
+  );
+};
+```

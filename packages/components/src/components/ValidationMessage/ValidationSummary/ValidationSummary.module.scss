@@ -1,0 +1,10 @@
+.validationSummary {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+// Add more specificity to padding-inline-start to override default iress-text padding-inline-start
+:global(.iress-u-text) .validationSummary {
+  padding-inline-start: 0;
+}

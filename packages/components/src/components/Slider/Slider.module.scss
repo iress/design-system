@@ -1,0 +1,149 @@
+@use './Slider.vars.module';
+@use '../../styles/mixins';
+
+/** Slider
+ * --------------------------------------------------
+ * @prop --iress-background-color: Slider track background
+ * @prop --iress-border-radius: Slider track border radius
+ * @prop --iress-focus-shadow: Slider shadow when in focus
+ * @prop --iress-font-family: Font family of slider ticks and value
+ * @prop --iress-font-size: Font size of slider ticks and value
+ * @prop --iress-font-weight: Font weight of slider ticks and value
+ * @prop --iress-text-color: Color of slider tick text and value
+ * @prop --iress-thumb-background-color: Slider thumb background color
+ * @prop --iress-thumb-border-color: Slider thumb border color
+ * @prop --iress-thumb-border-radius: Slider thumb border radius
+ * @prop --iress-thumb-border-width: Slider thumb border width
+ * @prop --iress-thumb-height: Slider thumb size - height
+ * @prop --iress-thumb-offset: Slider thumb value offset, relative to thumb
+ * @prop --iress-thumb-width: Slider thumb size - width
+ * @prop --iress-track-height: Height of the slider track
+ * @prop --iress-tick-padding: Padding of slider ticks
+ * @prop --iress-tick-color: Slider tick color
+ * @prop --iress-tick-height: Slider tick height
+ * @prop --iress-tick-position-x: Slider tick relative position (horizontal axis)
+ * @prop --iress-tick-position-y: Slider tick relative position (vertical axis)
+ * @prop --iress-tick-width: Slider tick width
+ */
+
+@mixin thumbStyle {
+  aspect-ratio: 1;
+  width: var(--iress-thumb-width);
+  height: var(--iress-thumb-height);
+  cursor: pointer;
+  border-color: var(--iress-thumb-border-color);
+  border-radius: var(--iress-thumb-border-radius);
+  border-style: solid;
+  border-width: var(--iress-thumb-border-width);
+  background-color: var(--iress-thumb-background-color);
+  position: relative;
+  z-index: 1;
+}
+
+.slider {
+  color: var(--iress-text-color);
+  position: relative;
+}
+
+.control {
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: var(--iress-border-radius);
+  height: var(--iress-thumb-height);
+  margin: 0;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus:not(:focus-visible) {
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    box-shadow: var(--iress-box-shadow);
+  }
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    margin-block-start: var(--iress-thumb-offset);
+    @include thumbStyle;
+  }
+
+  &::-moz-range-thumb {
+    appearance: none;
+    border: none;
+    border-radius: 0;
+    @include thumbStyle;
+  }
+
+  &::-webkit-slider-runnable-track {
+    background: var(--iress-background-color);
+    height: var(--iress-track-height);
+    border-radius: var(--iress-border-radius);
+  }
+
+  &::-moz-range-track {
+    background: var(--iress-background-color);
+    height: var(--iress-track-height);
+    border-radius: var(--iress-border-radius);
+  }
+}
+
+.tickMarkList {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-inline: var(--iress-tick-padding);
+  line-height: 1;
+
+  option {
+    min-height: 0;
+    padding: 0;
+  }
+}
+
+.tickMark {
+  @include mixins.defaultFontStyles();
+
+  flex: 0 0 0;
+  margin-inline-start: var(--iress-tick-label-width);
+  width: 0;
+  padding: 0;
+
+  &.selected::before {
+    background-color: var(--iress-thumb-background-color);
+  }
+}
+
+.tickMarkLabel {
+  display: inline-block;
+  position: relative;
+  transform: translate(-50%, 0);
+  text-align: center;
+  white-space: nowrap;
+
+  &::before {
+    height: var(--iress-tick-height);
+    width: var(--iress-tick-width);
+    background-color: var(--iress-tick-color);
+    border-radius: var(--iress-track-height);
+    content: '';
+    position: absolute;
+    top: var(--iress-tick-position-y);
+    left: var(--iress-tick-position-x);
+    transform: translate(-50%, 0);
+  }
+}
+
+.thumbValue {
+  @include mixins.defaultFontStyles();
+
+  display: inline-block;
+  margin-inline-start: var(--iress-thumb-value-offset, 0);
+  text-align: center;
+  white-space: nowrap;
+  min-width: var(--iress-thumb-width);
+  transform: translate(-50%, 0);
+}

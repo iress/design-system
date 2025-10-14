@@ -1,7 +1,7 @@
 import {
   IressButton,
   IressToasterProvider,
-  type IressToasterProviderProps,
+  IressToasterProviderProps,
   useToaster,
 } from '@/main';
 
@@ -13,7 +13,7 @@ const ToastWithTrigger = () => {
       onClick={() =>
         toaster.error({
           heading: 'Error',
-          content:
+          children:
             'Connection failure. Longer text description should wrap and look like this. Try to limit to 3 lines or less.',
         })
       }

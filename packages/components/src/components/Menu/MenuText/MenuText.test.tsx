@@ -1,15 +1,9 @@
 import { render } from '@testing-library/react';
-import {
-  IressMenu,
-  IressMenuHeading,
-  IressMenuProps,
-  IressMenuText,
-  IressMenuTextProps,
-  menu,
-} from '..';
+import { IressMenu, IressMenuText, IressMenuTextProps } from '..';
+import { IressMenuProps } from '../Menu.types';
 import { axe } from 'jest-axe';
-import { GlobalCSSClass } from '@/enums';
-import { css } from '@/styled-system/css';
+
+import styles from '../MenuItem/MenuItem.module.scss';
 
 const TEST_ID = 'test-component';
 const MENU_TEST_ID = 'test-menu';
@@ -39,15 +33,14 @@ describe('IressMenuText', () => {
     const screen = renderText({
       children: 'Test',
     });
-    const classes = menu();
 
     const wrapper = screen.getByTestId(TEST_ID);
     expect(wrapper).toBeInTheDocument();
-    expect(wrapper).toHaveClass(classes.text!, GlobalCSSClass.MenuText);
+    expect(wrapper).toHaveClass(styles.menuItem, styles.text, 'iress-u-text');
 
     const text = screen.getByText('Test');
     expect(text).toBeInTheDocument();
-    expect(text).toHaveClass(classes.contents!);
+    expect(text).toHaveClass(styles.contents);
   });
 
   describe('props', () => {
@@ -59,7 +52,7 @@ describe('IressMenuText', () => {
 
         const append = screen.getByText('Append');
         expect(append).toBeInTheDocument();
-        expect(append).toHaveClass(menu({ hasAppendOrPrepend: true }).append!);
+        expect(append).toHaveClass(styles.textAppend);
       });
     });
 
@@ -70,7 +63,7 @@ describe('IressMenuText', () => {
         });
 
         const wrapper = screen.getByTestId(TEST_ID);
-        expect(wrapper.nextElementSibling?.tagName).toBe('HR');
+        expect(wrapper).toHaveClass(styles.divider);
       });
     });
 
@@ -82,9 +75,7 @@ describe('IressMenuText', () => {
 
         const prepend = screen.getByText('Prepend');
         expect(prepend).toBeInTheDocument();
-
-        const wrapper = screen.getByTestId(TEST_ID);
-        expect(wrapper).toHaveClass(menu({ hasAppendOrPrepend: true }).text!);
+        expect(prepend).toHaveClass(styles.textPrepend);
       });
     });
 
@@ -102,6 +93,14 @@ describe('IressMenuText', () => {
   });
 
   describe('inside menu', () => {
+    it('adds layout class from menu', () => {
+      const screen = renderTextInsideMenu({
+        layout: 'stack',
+      });
+      const wrapper = screen.getByTestId(TEST_ID);
+      expect(wrapper).toHaveClass(styles['menu--stack']);
+    });
+
     it('overrides the role when used in a menu', () => {
       const screen = renderTextInsideMenu({}, { role: 'button' });
       const wrapper = screen.getByTestId(TEST_ID);
@@ -160,15 +159,5 @@ describe('IressMenuText', () => {
       const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
     });
-  });
-});
-
-describe('IressMenuHeading', () => {
-  it('renders defaults', () => {
-    const screen = render(<IressMenuHeading>Test</IressMenuHeading>);
-
-    const heading = screen.getByRole('heading', { name: 'Test', level: 2 });
-    expect(heading).toHaveClass(css({ textStyle: 'typography.heading.4' }));
-    expect(heading.closest(`.${GlobalCSSClass.MenuHeading}`)).not.toBeNull();
   });
 });

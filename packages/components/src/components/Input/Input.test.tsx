@@ -1,15 +1,12 @@
 import { render, waitFor } from '@testing-library/react';
 import { IressInput } from './Input';
-import { input } from './Input.styles';
 import userEvent from '@testing-library/user-event';
-import { GlobalCSSClass } from '@/enums';
+import { GlobalCSSClass } from '@/main';
 
 describe('IressInput', () => {
   it('should render without crashing', () => {
     const { getByRole } = render(<IressInput />);
-    const input = getByRole('textbox');
-    expect(input).toBeInTheDocument();
-    expect(input.closest(`.${GlobalCSSClass.Input}`)).not.toBeNull();
+    expect(getByRole('textbox')).toBeInTheDocument();
   });
 
   it('renders with the correct data-testids (single row input)', () => {
@@ -82,12 +79,9 @@ describe('IressInput', () => {
   describe('width', () => {
     it('adds the width class to the input when its not a percentage, so its not affected by prepend/append', () => {
       const screen = render(<IressInput width="10" data-testid="test-input" />);
-      const wrapper = screen.getByTestId('test-input');
-      const inputElement = screen.getByRole('textbox');
 
-      const styles = input({ width: '10' });
-      expect(wrapper).toHaveClass(styles.wrapper ?? '');
-      expect(inputElement).toHaveClass(styles.formControl ?? '');
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveClass(`${GlobalCSSClass.Width}--10`);
     });
 
     it('adds the width class to the wrapper when its a percentage', () => {
@@ -96,8 +90,7 @@ describe('IressInput', () => {
       );
 
       const wrapper = screen.getByTestId('test-input');
-      const styles = input({ width: '25perc' });
-      expect(wrapper).toHaveClass(styles.wrapper ?? '');
+      expect(wrapper).toHaveClass(`${GlobalCSSClass.Width}--25perc`);
     });
   });
 
@@ -139,14 +132,17 @@ describe('IressInput', () => {
 
       await userEvent.tab();
       expect(input).toHaveFocus();
-      expect(input).toHaveSelection('hello');
+      // When tabbed to, the entire text should be selected
+      expect(input.selectionStart).toBe(0);
+      expect(input.selectionEnd).toBe(input.value.length);
 
       await userEvent.tab();
       expect(input).not.toHaveFocus();
 
       await userEvent.click(input);
       expect(input).toHaveFocus();
-      expect(input).not.toHaveSelection('hello');
+      // When clicked, the text should not be fully selected (cursor position)
+      expect(input.selectionStart).toBe(input.selectionEnd);
     });
   });
 });

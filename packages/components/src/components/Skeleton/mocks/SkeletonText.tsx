@@ -2,24 +2,26 @@ import { useState } from 'react';
 import {
   IressButton,
   IressSkeleton,
-  type IressSkeletonProps,
+  IressSkeletonProps,
   IressStack,
   IressText,
+  TEXT_VARIANTS,
 } from '@/main';
-import { TEXT_STYLES } from '@theme-preset/tokens/textStyles';
 
 export const SkeletonText = (args: IressSkeletonProps) => {
   const [loading, setLoading] = useState(true);
 
   return (
-    <IressStack gap="md">
+    <IressStack gutter={IressStack.Gutter.Md}>
       <IressButton onClick={() => setLoading(!loading)}>
         Toggle load
       </IressButton>
-      <IressStack gap="md">
-        {TEXT_STYLES.map((textStyle) => [
-          loading && <IressSkeleton {...args} textStyle={textStyle} />,
-          !loading && <IressText textStyle={textStyle}>{textStyle}</IressText>,
+      <IressStack gutter={IressStack.Gutter.Xs}>
+        {TEXT_VARIANTS.map((textVariant) => [
+          loading && <IressSkeleton {...args} textVariant={textVariant} />,
+          !loading && (
+            <IressText variant={textVariant}>{textVariant}</IressText>
+          ),
         ])}
       </IressStack>
     </IressStack>

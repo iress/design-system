@@ -1,26 +1,12 @@
-import { useContext } from 'react';
-import { MenuContext } from '../Menu';
-import { IressDivider, type IressDividerProps } from '@/components/Divider';
-import { cx } from '@/styled-system/css';
-import { GlobalCSSClass } from '@/enums';
+import { IressDivider, type IressDividerProps } from '@/main';
+import { useMenu } from '../hooks/useMenu';
 
-export type IressMenuDividerProps = Omit<
-  IressDividerProps,
-  'vertical' | 'role'
->;
-
-export const IressMenuDivider = ({
-  className,
-  ...restProps
-}: IressMenuDividerProps) => {
-  const menu = useContext(MenuContext);
-
+export const IressMenuDivider = (props: IressDividerProps) => {
+  const menu = useMenu();
   return (
     <IressDivider
-      {...restProps}
-      className={cx(className, GlobalCSSClass.MenuDivider)}
+      {...props}
       role={menu?.role === 'menu' ? undefined : 'presentation'}
-      vertical={menu?.layout && menu.layout !== 'stack'}
     />
   );
 };

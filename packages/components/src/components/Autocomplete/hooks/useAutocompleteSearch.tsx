@@ -1,92 +1,12 @@
 import { useDebounce } from 'use-debounce';
+import {
+  type AutocompleteSearchHookProps,
+  type AutocompleteSearchHookReturn,
+} from '../Autocomplete.types';
 import { useEffect, useRef, useState, useCallback } from 'react';
+import { type FormattedLabelValueMeta, type LabelValueMeta } from '@/main';
 import { searchLabelValues } from '@helpers/label-value/searchLabelValues';
 import { highlightQueryInLabelValue } from '@helpers/label-value/highlightQueryInLabelValue';
-import {
-  type FormattedLabelValueMeta,
-  type LabelValueMeta,
-} from '@/interfaces';
-
-export interface AutocompleteSearchHookProps {
-  /**
-   * Time in milliseconds to wait for before performing result search. Only applies to searchable options (function).
-   * @default 500
-   */
-  debounceThreshold?: number;
-
-  /**
-   * Initial options data set, shown when the input is empty.
-   */
-  initialOptions?: LabelValueMeta[];
-
-  /**
-   * Minimum number of characters required before triggering async search. Only applies to searchable options (function).
-   * Below this threshold, no search will be triggered and no loading state will be shown.
-   * @default 1
-   */
-  minSearchLength?: number;
-
-  /**
-   * Options data set, shown when the input is not empty.
-   */
-  options?: LabelValueMeta[] | ((query: string) => Promise<LabelValueMeta[]>);
-
-  /**
-   * The query value to filter items by and create search results.
-   */
-  query?: string;
-}
-
-export interface AutocompleteSearchHookReturn {
-  /**
-   * Clear the error state.
-   */
-  clearError: () => void;
-
-  /**
-   * The debounced query value.
-   */
-  debouncedQuery: string;
-
-  /**
-   * Whether an error occurred during the search.
-   * If a string, it is the error reason provided in the promise rejection.
-   */
-  error: boolean | string;
-
-  /**
-   * Whether the search is loading.
-   */
-  loading: boolean;
-
-  /**
-   * The results of the search.
-   */
-  results: FormattedLabelValueMeta[];
-
-  /**
-   * Whether to show "Type at least X characters to search" instruction.
-   * True when the query length is below the minimum search length.
-   */
-  shouldShowInstructions: boolean;
-
-  /**
-   * Whether to show nothing (clean, minimal) during debounce waiting period.
-   * True when user has typed enough characters but search hasn't started yet.
-   */
-  shouldShowDebounceWaiting: boolean;
-
-  /**
-   * Whether to show "No results found" message.
-   * True only after a legitimate search has been performed and returned empty results.
-   */
-  shouldShowNoResults: boolean;
-
-  /**
-   * Stop the search.
-   */
-  stopSearch: () => void;
-}
 
 const DEFAULT_DEBOUNCE_THRESHOLD = 500;
 const DEFAULT_MIN_SEARCH_LENGTH = 1;
@@ -271,6 +191,18 @@ export const useAutocompleteSearch = ({
     searchOperations.handleSync(options, debouncedQuery, minSearchLength);
   }, [debouncedQuery, options, minSearchLength, searchOperations]);
 
+  const getDisplayResults = (): FormattedLabelValueMeta[] => {
+    if (debouncedQuery.length < minSearchLength) {
+      return initialOptions ?? [];
+    }
+
+    if (searchState.hasSearched) {
+      return searchState.results;
+    }
+
+    return initialOptions ?? [];
+  };
+
   return {
     clearError: searchState.clearError,
     debouncedQuery,
@@ -287,6 +219,8 @@ export const useAutocompleteSearch = ({
       !searchState.loading &&
       searchState.results.length === 0 &&
       debouncedQuery.length >= minSearchLength,
+    displayResults: getDisplayResults(),
+    // Backward compatibility
     results: debouncedQuery ? searchState.results : (initialOptions ?? []),
 
     stopSearch: searchState.reset,

@@ -1,15 +1,23 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressIcon, type IressIconProps } from './Icon';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressIcon } from './Icon';
+import {
+  ICON_FLIPS,
+  ICON_ROTATES,
+  ICON_SIZES,
+  ICON_SPINS,
+  IressIconProps,
+} from './Icon.types';
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressText } from '../Text';
+import styles from '@iress-storybook/styles.module.scss';
 import { IressInline } from '../Inline';
+import { TEXT_MODES } from '@/main';
 
 type Story = StoryObj<IressIconProps>;
 
 export default {
   title: 'Components/Icon',
   component: IressIcon,
-  tags: ['updated'],
 } as Meta<typeof IressIcon>;
 
 export const Default: Story = {
@@ -25,36 +33,65 @@ export const ScreenReaderText: Story = {
   },
 };
 
+export const Size: Story = {
+  args: {
+    ...Default.args,
+  },
+  argTypes: {
+    ...disableArgTypes(['size']),
+  },
+  render: (args) => (
+    <IressInline gutter="md" verticalAlign="bottom">
+      {ICON_SIZES.map((size) => (
+        <div key={size}>
+          <IressIcon {...args} size={size} />
+          <IressText align="center">{size}</IressText>
+        </div>
+      ))}
+    </IressInline>
+  ),
+};
+
+export const Mode: Story = {
+  args: {
+    ...Default.args,
+    size: '5x',
+  },
+  argTypes: {
+    ...disableArgTypes(['mode']),
+  },
+  render: (args) => (
+    <IressInline gutter="md">
+      {TEXT_MODES.map((mode) => (
+        <div key={mode}>
+          <IressIcon {...args} mode={mode} />
+          <IressText align="center">{mode}</IressText>
+        </div>
+      ))}
+    </IressInline>
+  ),
+};
+
 export const Flip: Story = {
   args: {
     ...Default.args,
-    textStyle: 'typography.heading.1',
+    size: '5x',
   },
   argTypes: {
     ...disableArgTypes(['flip']),
   },
   render: (args) => (
-    <IressInline gap="md">
-      <IressText textAlign="center">
+    <IressInline gutter="md">
+      <div>
         <IressIcon {...args} />
-        <br />
-        (default)
-      </IressText>
-      <IressText textAlign="center">
-        <IressIcon {...args} flip="horizontal" />
-        <br />
-        horizontal
-      </IressText>
-      <IressText textAlign="center">
-        <IressIcon {...args} flip="vertical" />
-        <br />
-        vertical
-      </IressText>
-      <IressText textAlign="center">
-        <IressIcon {...args} flip="both" />
-        <br />
-        both
-      </IressText>
+        <IressText align="center">original</IressText>
+      </div>
+      {ICON_FLIPS.map((flip) => (
+        <div key={flip}>
+          <IressIcon {...args} flip={flip} />
+          <IressText align="center">{flip}</IressText>
+        </div>
+      ))}
     </IressInline>
   ),
 };
@@ -62,40 +99,29 @@ export const Flip: Story = {
 export const Rotate: Story = {
   args: {
     ...Default.args,
-    textStyle: 'typography.heading.1',
+    size: '5x',
   },
   argTypes: {
     ...disableArgTypes(['rotate']),
   },
   render: (args) => (
-    <IressInline gap="md">
-      <IressText textAlign="center">
+    <IressInline gutter="md">
+      <div>
         <IressIcon {...args} />
-        <br />
-        (default)
-      </IressText>
-      <IressText textAlign="center">
-        <IressIcon {...args} rotate={90} />
-        <br />
-        90
-      </IressText>
-      <IressText textAlign="center">
-        <IressIcon {...args} rotate={180} />
-        <br />
-        180
-      </IressText>
-      <IressText textAlign="center">
-        <IressIcon {...args} rotate={270} />
-        <br />
-        270
-      </IressText>
+        <IressText align="center">original</IressText>
+      </div>
+      {ICON_ROTATES.map((rotate) => (
+        <div key={rotate}>
+          <IressIcon {...args} rotate={rotate} />
+          <IressText align="center">{rotate}</IressText>
+        </div>
+      ))}
     </IressInline>
   ),
 };
 
 export const Spin: Story = {
   args: {
-    ...Default.args,
     name: 'spinner',
     screenreaderText: 'Loading...',
   },
@@ -103,65 +129,81 @@ export const Spin: Story = {
     ...disableArgTypes(['spin']),
   },
   render: (args) => (
-    <IressInline gap="md">
-      <IressText>
-        <IressIcon {...args} spin="half" /> half
-      </IressText>
-      <IressText>
-        <IressIcon {...args} spin={1} /> 1
-      </IressText>
-      <IressText>
-        <IressIcon {...args} spin={2} /> 2
-      </IressText>
-      <IressText>
-        <IressIcon {...args} spin={3} /> 3
-      </IressText>
+    <IressInline gutter="md">
+      {ICON_SPINS.map((spin) => (
+        <IressText key={spin}>
+          <IressIcon {...args} spin={spin} /> {spin}
+        </IressText>
+      ))}
     </IressInline>
   ),
 };
 
 export const FixedWidth: Story = {
   args: {
-    ...Default.args,
-    bg: 'colour.neutral.30',
-    textStyle: 'typography.heading.1',
+    size: '3x',
   },
   argTypes: {
     ...disableArgTypes(['name', 'fixedWidth']),
   },
   render: (args) => (
-    <IressInline gap="md">
+    <IressInline gutter="md">
       <div>
-        <IressText element="h2" textStyle="typography.heading.5">
+        <IressText element="h2" variant="h5">
           Default width
         </IressText>
-        <IressIcon {...args} name="space-shuttle" />
+        <IressIcon
+          {...args}
+          name="space-shuttle"
+          className={styles.altBackground}
+        />
         <br />
-        <IressIcon {...args} name="wine-glass-alt" />
+        <IressIcon
+          {...args}
+          name="wine-glass-alt"
+          className={styles.altBackground}
+        />
       </div>
       <div>
-        <IressText element="h2" textStyle="typography.heading.5">
+        <IressText element="h2" variant="h5">
           Fixed width
         </IressText>
-        <IressIcon {...args} name="space-shuttle" fixedWidth />
+        <IressIcon
+          {...args}
+          name="space-shuttle"
+          fixedWidth
+          className={styles.altBackground}
+        />
         <br />
-        <IressIcon {...args} name="wine-glass-alt" fixedWidth />
+        <IressIcon
+          {...args}
+          name="wine-glass-alt"
+          fixedWidth
+          className={styles.altBackground}
+        />
       </div>
     </IressInline>
   ),
 };
 
 export const ExternalLink: Story = {
-  args: {
-    ...Default.args,
-    name: 'external-link',
-    pl: 'spacing.150',
-  },
   render: (args) => (
     <IressText>
       <a href="https://www.iress.com/" target="_blank" rel="noreferrer">
-        Go to this link
-        <IressIcon {...args} />
+        Go to this link:
+        <IressIcon
+          {...args}
+          name={args.name ?? 'external-link'}
+          size="xs"
+          style={
+            {
+              position: 'relative',
+              'inset-block-start': '-0.25em',
+              'margin-inline-start':
+                'var(--iress-g-spacing-xs, var(--iress-default-spacing-xs))',
+            } as never
+          }
+        />
       </a>
     </IressText>
   ),

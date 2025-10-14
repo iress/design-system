@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressTable, IressTableFormattedValue } from '..';
 import { disableArgTypes } from '@iress-storybook/helpers';
 
@@ -7,7 +7,6 @@ type Story = StoryObj<typeof IressTableFormattedValue<object, string>>;
 export default {
   title: 'Components/Table/FormattedValue',
   component: IressTableFormattedValue,
-  tags: ['updated'],
 } as Meta<typeof IressTableFormattedValue>;
 
 export const FormattedValue: Story = {

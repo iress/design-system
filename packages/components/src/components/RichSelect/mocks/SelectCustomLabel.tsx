@@ -1,10 +1,10 @@
 import {
   IressRichSelect,
-  type IressRichSelectProps,
+  IressRichSelectProps,
   IressSelectLabel,
 } from '@/main';
 
-const CustomLabel: IressRichSelectProps<true>['renderLabel'] = ({ value }) => (
+const CustomLabel: IressRichSelectProps['renderLabel'] = ({ value }) => (
   <IressSelectLabel role="combobox" selected={value} />
 );
 

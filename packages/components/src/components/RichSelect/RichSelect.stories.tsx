@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressRichSelect } from './RichSelect';
 import {
   generateLabelValueMeta,
@@ -8,6 +8,8 @@ import { SelectAsync } from './mocks/SelectAsync';
 import SelectAsyncSource from './mocks/SelectAsync.tsx?raw';
 import { SelectAsyncMinLength } from './mocks/SelectAsyncMinLength';
 import SelectAsyncMinLengthSource from './mocks/SelectAsyncMinLength.tsx?raw';
+import { SelectOptionLongText } from './mocks/SelectOptionLongText';
+import SelectOptionLongTextSource from './mocks/SelectOptionLongText.tsx?raw';
 import { SelectCustomLabel } from './mocks/SelectCustomLabel';
 import SelectCustomLabelSource from './mocks/SelectCustomLabel.tsx?raw';
 import { SelectCustomOptions } from './mocks/SelectCustomOptions';
@@ -16,8 +18,6 @@ import { SelectInitialOptions } from './mocks/SelectInitialOptions';
 import SelectInitialOptionsSource from './mocks/SelectInitialOptions.tsx?raw';
 import { SelectNewOption } from './mocks/SelectNewOption';
 import SelectNewOptionSource from './mocks/SelectNewOption.tsx?raw';
-import { OptionsLongText } from './mocks/SelectOptionLongText';
-import SelectOptionLongTextSource from './mocks/SelectOptionLongText.tsx?raw';
 import {
   disableArgTypes,
   addToStorybookCategory,
@@ -25,15 +25,17 @@ import {
   mergeStorybookConfig,
 } from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
-import { FORM_ELEMENT_WIDTHS } from '@/constants';
 import {
-  type IressRichSelectProps,
+  FORM_ELEMENT_WIDTHS,
+  IressRichSelectProps,
   IressDivider,
   IressButton,
   IressText,
   IressInline,
   IressMenuText,
 } from '@/main';
+import { SelectOptionsFooter } from './mocks/SelectOptionsFooter';
+import SelectOptionsFooterSource from './mocks/SelectOptionsFooter.tsx?raw';
 
 type Story = StoryObj<typeof IressRichSelect>;
 
@@ -60,7 +62,7 @@ export default {
       ]),
     ),
   },
-  tags: ['updated'],
+  tags: ['beta:IressCombobox and IressMultiCombobox'],
 } as Meta<typeof IressRichSelect>;
 
 export const SingleSelect: Story = {
@@ -90,6 +92,13 @@ export const AsyncOptionsMinSearchLength: Story = {
   },
 };
 
+export const LongTextOptions: Story = {
+  render: (args) => <SelectOptionLongText {...args} />,
+  parameters: {
+    ...withCustomSource(SelectOptionLongTextSource),
+  },
+};
+
 export const InitialOptions: Story = {
   render: (args) => <SelectInitialOptions {...args} />,
   parameters: {
@@ -105,15 +114,10 @@ export const Sizing: Story = {
     ...disableArgTypes(['placeholder', 'width']),
   },
   render: (args) => (
-    <IressStack gap="md">
+    <IressStack gutter="md">
       {FORM_ELEMENT_WIDTHS.map((width) => (
         <div key={width}>
-          <IressRichSelect
-            {...args}
-            placeholder={width}
-            width={width}
-            aria-label={`Select option (width: ${width})`}
-          />
+          <IressRichSelect {...args} placeholder={width} width={width} />
         </div>
       ))}
     </IressStack>
@@ -158,7 +162,7 @@ export const HeaderFooter: Story = {
       <>
         <IressDivider style={{ marginBottom: 0 }} />
         <IressMenuText>
-          <IressInline gap="sm">
+          <IressInline gutter="sm">
             <IressButton>Button 1</IressButton>
             <IressButton>Button 2</IressButton>
           </IressInline>
@@ -168,10 +172,17 @@ export const HeaderFooter: Story = {
   },
 };
 
+export const OptionsFooter: Story = {
+  render: (args) => <SelectOptionsFooter {...args} />,
+  parameters: {
+    ...withCustomSource(SelectOptionsFooterSource),
+  },
+};
+
 export const Readonly: Story = {
   args: {
     ...MultiSelect.args,
-    readOnly: true,
+    readonly: true,
     value: MOCK_LABEL_VALUE_META,
   },
 };
@@ -181,12 +192,5 @@ export const LotsOfOptions: Story = {
     ...SingleSelect.args,
     options: async () => Promise.resolve(generateLabelValueMeta(200)),
     autoHighlight: false,
-  },
-};
-
-export const LongTextOptions: Story = {
-  render: (args) => <OptionsLongText {...args} />,
-  parameters: {
-    ...withCustomSource(SelectOptionLongTextSource),
   },
 };

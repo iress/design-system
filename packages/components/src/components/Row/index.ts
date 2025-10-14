@@ -1,2 +1,2 @@
-export * from './Row.styles';
+export * from './Row.types';
 export * from './Row';

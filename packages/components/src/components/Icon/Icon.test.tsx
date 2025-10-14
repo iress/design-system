@@ -1,66 +1,116 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { IressIcon } from '.';
-import { icon } from './Icon.styles';
-import { GlobalCSSClass } from '@/enums';
+import styles from './Icon.module.scss';
+
+const TEST_ID = 'test-component';
+
+// eslint-disable-next-line
+const renderComponent = (props?: any) => {
+  return render(<IressIcon data-testid={TEST_ID} {...props} />);
+};
 
 describe('IressIcon', () => {
-  it('renders the correct defaults', () => {
-    render(<IressIcon name="home" className="test-class" />);
+  it('should render the correct css classes', () => {
+    const { getByTestId } = renderComponent({
+      name: 'home',
+      className: 'test-class',
+    });
+    const component = getByTestId(TEST_ID);
 
-    const component = screen.getByRole('img', { hidden: true });
-    expect(component).toHaveClass(
-      `test-class fa-home fal ${icon()}`,
-      GlobalCSSClass.Icon,
-    );
+    expect(component).toHaveClass(`test-class fa-home fal ${styles.icon}`);
+  });
+
+  it('should render the correct a11y attributes', () => {
+    const { getByTestId } = renderComponent({ name: 'home' });
+    const component = getByTestId(TEST_ID);
+
+    expect(component).toHaveAttribute('role', 'img');
+    expect(component).toHaveAttribute('aria-hidden');
   });
 
   describe('props', () => {
     describe('screenreaderText', () => {
-      it('renders the correct a11y attributes', () => {
-        render(<IressIcon name="home" screenreaderText="Home screen" />);
+      it('should render the correct a11y attributes', () => {
+        const { getByTestId } = renderComponent({
+          name: 'home',
+          screenreaderText: 'Home screen',
+        });
+        const component = getByTestId(TEST_ID);
 
-        const component = screen.getByRole('img', { name: 'Home screen' });
-        expect(component).toBeInTheDocument();
+        expect(component).not.toHaveAttribute('aria-hidden');
+        expect(component).toHaveAttribute('aria-label', 'Home screen');
       });
     });
 
     describe('fixedWidth', () => {
-      it('renders the correct css class', () => {
-        render(<IressIcon name="home" fixedWidth />);
-        const component = screen.getByRole('img', { hidden: true });
+      it('should render the correct css class', () => {
+        const { getByTestId } = renderComponent({
+          name: 'home',
+          fixedWidth: true,
+        });
+        const component = getByTestId(TEST_ID);
+
         expect(component).toHaveClass('fa-fw');
       });
     });
 
     describe('set', () => {
-      it('renders the correct css class', () => {
-        render(<IressIcon name="home" set="fab" />);
-        const component = screen.getByRole('img', { hidden: true });
+      it('should render the correct css class', () => {
+        const { getByTestId } = renderComponent({
+          name: 'home',
+          set: IressIcon.Set.FABrand,
+        });
+        const component = getByTestId(TEST_ID);
+
         expect(component).toHaveClass('fab');
       });
     });
 
     describe('flip', () => {
-      it('renders the correct css class', () => {
-        render(<IressIcon name="home" flip="both" />);
-        const component = screen.getByRole('img', { hidden: true });
-        expect(component).toHaveClass(icon({ flip: 'both' }));
+      it('should render the correct css class', () => {
+        const { getByTestId } = renderComponent({
+          name: 'home',
+          flip: IressIcon.Flip.Both,
+        });
+        const component = getByTestId(TEST_ID);
+
+        expect(component).toHaveClass(styles['flip-both']);
       });
     });
 
     describe('rotate', () => {
-      it('renders the correct css class', () => {
-        render(<IressIcon name="home" rotate={90} />);
-        const component = screen.getByRole('img', { hidden: true });
-        expect(component).toHaveClass(icon({ rotate: 90 }));
+      it('should render the correct css class', () => {
+        const { getByTestId } = renderComponent({
+          name: 'home',
+          rotate: IressIcon.Rotate.Deg90,
+        });
+        const component = getByTestId(TEST_ID);
+
+        expect(component).toHaveClass(styles['rotate-90']);
       });
     });
 
     describe('spin', () => {
       it('should render the correct css class', () => {
-        render(<IressIcon name="home" spin="half" />);
-        const component = screen.getByRole('img', { hidden: true });
-        expect(component).toHaveClass(icon({ spin: 'half' }));
+        const { getByTestId } = renderComponent({
+          name: 'home',
+          spin: IressIcon.Spin.SpinHalf,
+        });
+        const component = getByTestId(TEST_ID);
+
+        expect(component).toHaveClass(styles['spin-half']);
+      });
+    });
+
+    describe('mode', () => {
+      it('should render the correct css class', () => {
+        const { getByTestId } = renderComponent({
+          name: 'home',
+          mode: IressIcon.Mode.Muted,
+        });
+        const component = getByTestId(TEST_ID);
+
+        expect(component).toHaveClass(styles['mode-muted']);
       });
     });
   });

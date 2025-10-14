@@ -1,0 +1,33 @@
+@use '../mixins';
+
+.iress-u-container {
+  @include mixins.defaultFontVariables('container');
+  @include mixins.defaultFontStyles();
+
+  --iress-padding-x: var(--iress-container-padding-x, var(--iress-a-horizontal-spacing-md, var(--iress-g-spacing-md)));
+
+  padding-inline: var(--iress-padding-x) var(--iress-padding-x);
+  max-width: var(--iress-max-width);
+  display: block;
+  margin-inline: auto;
+
+  @media only screen and (min-width: 576px) {
+    --iress-max-width: var(--iress-container-sm-max-width, 520px);
+  }
+
+  @media only screen and (min-width: 768px) {
+    --iress-max-width: var(--iress-container-md-max-width, 740px);
+  }
+
+  @media only screen and (min-width: 1024px) {
+    --iress-max-width: var(--iress-container-lg-max-width, 960px);
+  }
+
+  @media only screen and (min-width: 1200px) {
+    --iress-max-width: var(--iress-container-xl-max-width, 1160px);
+  }
+}
+
+.iress-u-container.iress--fluid {
+  --iress-max-width: 100%;
+}

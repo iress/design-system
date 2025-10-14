@@ -47,6 +47,10 @@ export const formatRelativeTime = (
   useShortDateAfter: Intl.RelativeTimeFormatUnit | null = 'week',
 ): string => {
   const date = getDateObj(dateVal);
+
+  // Return empty string for invalid dates, consistent with other formatters
+  if (!date?.getDate()) return '';
+
   const timeMs = date.getTime();
 
   // Get the amount of seconds between the given date and now

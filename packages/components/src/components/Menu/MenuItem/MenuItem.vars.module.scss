@@ -1,0 +1,125 @@
+/** Menu item variables
+ * --------------------------------------------------
+ */
+
+.menuItem:global(.iress-u-button.iress--mode--secondary),
+.text:global(.iress-u-text) {
+  --iress-button-font-family: var(--iress-menu-item-font-family, var(--iress-g-font-family));
+  --iress-button-font-size: var(--iress-menu-item-font-size);
+  --iress-button-font-weight: var(--iress-menu-item-font-weight, var(--iress-g-font-weight, normal));
+  --iress-button-min-height: var(--iress-menu-item-min-height, var(--iress-default-min-height));
+  --iress-background-color: var(--iress-menu-item-background-color, transparent);
+  --iress-button-hover-background-color: var(
+    --iress-menu-item-hover-background-color,
+    var(--iress-a-layout-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)))
+  );
+  --iress-button-active-background-color: var(--iress-menu-item-active-background-color, var(--iress-background-color));
+  --iress-item-text-align: var(--iress-menu-item-text-align, flex-start);
+  --iress-button-text-color: var(--iress-menu-item-text-color, var(--iress-g-text-color));
+  --iress-button-hover-text-color: var(--iress-menu-item-hover-text-color, var(--iress-a-layout-hover-text-color, var(--iress-g-hover-text-color, var(--iress-default-text-color--hover))));
+  --iress-button-active-text-color: var(--iress-menu-item-active-text-color, var(--iress-text-color));
+  --iress-item-border-radius: var(--iress-menu-item-border-radius, 0px);
+  --iress-button-padding-x: var(--iress-menu-item-padding-x, var(--iress-g-spacing-md));
+  --iress-button-padding-y: var(--iress-menu-item-padding-y, var(--iress-g-spacing-sm));
+
+  /* Heading */
+  --iress-heading-background-color: var(--iress-menu-item-header-background-color, transparent);
+  --iress-heading-font-family: var(--iress-menu-item-header-font-family, var(--iress-a-heading-font-family, var(--iress-g-font-family)));
+  --iress-heading-font-size: var(--iress-menu-item-header-font-size, inherit);
+  --iress-heading-1-font-size: var(--iress-heading-font-size);
+  --iress-heading-2-font-size: var(--iress-heading-font-size);
+  --iress-heading-3-font-size: var(--iress-heading-font-size);
+  --iress-heading-4-font-size: var(--iress-heading-font-size);
+  --iress-heading-5-font-size: var(--iress-heading-font-size);
+  --iress-heading-6-font-size: var(--iress-heading-font-size);
+  --iress-heading-font-weight: var(--iress-menu-item-header-font-weight, var(--iress-g-heading-font-weight, bold));
+  --iress-heading-text-color: var(--iress-menu-item-header-text-color, var(--iress-a-heading-text-color, var(--iress-g-primary-color)));
+  --iress-heading-text-align: var(--iress-menu-item-header-text-align, start);
+  --iress-heading-padding-x: var(--iress-menu-item-padding-x, var(--iress-g-spacing-md));
+  --iress-heading-padding-top: var(--iress-menu-item-padding-y, var(--iress-g-spacing-sm));
+  --iress-heading-padding-bottom: var(--iress-menu-item-padding-y, var(--iress-g-spacing-xs));
+  --iress-heading-margin-bottom: 0;
+  --iress-heading-line-height: var(--iress-button-line-height, var(--iress-a-form-line-height, var(--iress-g-line-height, 1.5)));
+
+  /* Text */
+  --iress-text-padding-bottom: var(--iress-menu-item-padding-y, var(--iress-g-spacing-sm));
+
+  /* Divider */
+  --iress-divider-border-width: var(--iress-menu-item-divider-border-width, 1px);
+  --iress-divider-border-color: var(--iress-menu-item-divider-border-color, var(--iress-g-border-color, var(--iress-default-border-color)));
+
+  /* Checkbox */
+  --iress-checkbox-spacing: var(--iress-g-spacing-sm);
+  --iress-mark-color: var(--iress-menu-item-active-border-color, var(--iress-a-active-border-color, var(--iress-g-primary-color, var(--iress-default-active-color))));
+
+  /* Transitions */
+  --iress-transition-hover-duration: var(--iress-menu-item-transition-hover-duration, var(--iress-g-transition-hover-duration, var(--iress-default-transition--hover)));
+  --iress-transition-hover-type: var(--iress-menu-item-transition-hover-type, var(--iress-g-transition-hover-type, var(--iress-default-transition-type)));
+
+  /* Nav Type */
+  --iress-nav-button-selected-background-color: var(
+    --iress-menu-item-nav-selected-background-color,
+    var(--iress-a-active-background-color, var(--iress-g-primary-color, var(--iress-default-primary-color)))
+  );
+  --iress-nav-button-text-align: var(--iress-menu-item-nav-text-align, var(--iress-text-align));
+  --iress-nav-button-selected-text-color: var(
+    --iress-menu-item-nav-selected-text-color,
+    var(--iress-a-active-contrast-color, var(--iress-g-primary-contrast-color, var(--iress-default-primary-contrast-color)))
+  );
+  --iress-nav-item-border-radius: var(--iress-menu-item-nav-border-radius, var(--iress-item-border-radius));
+
+  --focus-width: var(--iress-g-focus-width, var(--iress-default-focus-size));
+
+  &:not(:global(.iress--no-wrap)) {
+    --iress-white-space: pre-line;
+  }
+}
+
+.menuItem:global(.iress-u-button.iress--mode--secondary) {
+  --iress-font-family: var(--iress-button-font-family);
+  --iress-font-size: var(--iress-button-font-size);
+  --iress-font-weight: var(--iress-button-font-weight);
+  --iress-background-color: transparent;
+  --iress-hover-background-color: var(--iress-button-hover-background-color);
+  --iress-active-background-color: var(--iress-button-active-background-color);
+  --iress-text-color: var(--iress-button-text-color);
+  --iress-hover-text-color: var(--iress-button-hover-text-color);
+  --iress-active-text-color: var(--iress-button-active-text-color);
+  --iress-border-width: 0;
+  --iress-border-color: transparent;
+  --iress-border-radius: var(--iress-item-border-radius);
+  --iress-hover-border-color: transparent;
+  --iress-active-border-color: transparent;
+  --iress-text-align: var(--iress-item-text-align);
+  --iress-min-height: var(--iress-button-min-height);
+  --iress-padding-x: var(--iress-button-padding-x);
+  --iress-padding-y: var(--iress-button-padding-y);
+  --iress-margin-right: 0;
+  --iress-focus-box-shadow: inset 0 0 0 var(--iress-focus-box-shadow-size) var(--iress-focus-color);
+}
+
+.menu--nav {
+  --iress-text-align: var(--iress-nav-button-text-align);
+
+  &.selected:not(.multiSelect) {
+    --iress-background-color: var(--iress-nav-button-selected-background-color);
+    --iress-text-color: var(--iress-nav-button-selected-text-color);
+    --iress-mark-color: var(--iress-nav-mark-color);
+  }
+}
+
+.menu--inline,
+.menu--inline-equal-width {
+  --iress-header-padding-top: var(--iress-button-padding-y);
+  --iress-header-padding-bottom: var(--iress-button-padding-y);
+
+  &.text:global(.iress-u-text) {
+    --iress-heading-line-height: var(--iress-button-line-height, var(--iress-a-form-line-height, var(--iress-g-line-height, 1.5)));
+  }
+}
+
+.menu--inline-equal-width {
+  &.text:global(.iress-u-text) {
+    --iress-header-text-align: center;
+  }
+}

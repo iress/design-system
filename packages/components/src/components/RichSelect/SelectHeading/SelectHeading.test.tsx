@@ -1,24 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { IressSelectHeading } from './SelectHeading';
-import { richSelect } from '@/components/RichSelect/RichSelect.styles';
+import styles from '@/components/RichSelect/RichSelect.module.scss';
 import userEvent from '@testing-library/user-event';
-import { GlobalCSSClass } from '@/enums';
 
 describe('IressSelectHeading', () => {
   it('renders the component with the correct defaults', () => {
-    const classes = richSelect();
-
     render(
       <IressSelectHeading className="test-class">Hello</IressSelectHeading>,
     );
 
-    const heading = screen.getByRole('heading');
-    const container = heading.closest(`.${GlobalCSSClass.RichSelectHeading}`);
-    expect(container).toHaveClass('test-class');
-    if (classes.dropdownSelectedHeading) {
-      expect(container).toHaveClass(classes.dropdownSelectedHeading);
-    }
+    const heading = screen.getByRole('option');
+    expect(heading).toHaveClass('test-class', styles.dropdownSelectedHeading);
   });
 
   describe('props', () => {
@@ -82,7 +75,9 @@ describe('IressSelectHeading', () => {
   describe('accessibility', () => {
     it('should not have basic accessibility issues', async () => {
       const { container } = render(
-        <IressSelectHeading>Hello</IressSelectHeading>,
+        <div role="listbox" aria-label="For a11y only">
+          <IressSelectHeading>Hello</IressSelectHeading>
+        </div>,
       );
       const results = await axe(container);
       expect(results).toHaveNoViolations();

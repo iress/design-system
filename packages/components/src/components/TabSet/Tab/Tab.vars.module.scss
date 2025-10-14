@@ -1,0 +1,44 @@
+.tab {
+  --iress-background-color: var(--iress-tab-button-background-color, transparent);
+  --iress-border-bottom-color: var(--iress-tab-button-border-bottom-color, transparent);
+  --iress-border-bottom-width: var(--iress-tab-button-border-bottom-width, 2px);
+  --iress-border-color: var(--iress-tab-button-border-color, transparent);
+  --iress-border-width: var(--iress-tab-button-border-width, 0px);
+  --iress-border-radius: var(--iress-tab-button-border-radius, 0px);
+  --iress-text-color: var(--iress-tab-button-text-color, var(--iress-g-link-text-color, var(--iress-default-text-color)));
+  --iress-padding-x: var(--iress-tab-button-padding-x, var(--iress-g-spacing-sm));
+  --iress-padding-y: var(--iress-tab-button-padding-y, var(--iress-g-spacing-sm));
+  --iress-height: var(--iress-input-min-height, var(--iress-default-min-height));
+  --iress-font-size: var(--iress-tab-button-font-size, var(--iress-button-font-size));
+  --iress-font-family: var(--iress-tab-button-font-family, var(--iress-button-font-family, var(--iress-a-form-font-family, var(--iress-g-font-family))));
+  --iress-font-weight: var(--iress-tab-button-font-weight, var(--iress-g-font-weight, normal));
+  --iress-transition-duration: var(--iress-tab-button-transition-hover-duration, var(--iress-g-transition-hover-duration, var(--iress-default-hover-transition-duration)));
+  --iress-transition-type: var(--iress-tab-button-transition-hover-type, var(--iress-g-transition-hover-type, var(--iress-default-hover-transition-type-type)));
+
+  /* Hover */
+  --iress-hover-background-color: var(--iress-tab-button-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)));
+  --iress-hover-border-bottom-color: var(--iress-tab-button-hover-border-bottom-color, var(--iress-border-bottom-color));
+  --iress-hover-border-color: var(--iress-tab-button-hover-border-color, var(--iress-border-color));
+  --iress-hover-text-color: var(--iress-tab-button-hover-text-color, var(--iress-g-hover-text-color, var(--iress-default-text-color--hover)));
+
+  /* Active */
+  --iress-active-background-color: var(--iress-tab-button-active-background-color, var(--iress-background-color));
+  --iress-active-border-bottom-color: var(--iress-tab-button-active-border-bottom-color, var(--iress-a-active-border-color, var(--iress-g-primary-color, var(--iress-default-primary-color))));
+
+  --iress-active-border-color: var(--iress-tab-button-active-border-color, var(--iress-border-color));
+
+  --iress-active-text-color: var(--iress-tab-button-active-text-color, var(--iress-text-color));
+  --iress-active-font-weight: var(--iress-tab-button-active-font-weight, var(--iress-font-weight));
+
+  /* Active Hover */
+  --iress-active-hover-background-color: var(--iress-tab-button-active-hover-background-color, var(--iress-hover-background-color));
+  --iress-active-hover-border-bottom-color: var(
+    --iress-tab-button-active-hover-border-bottom-color,
+    var(--iress-a-active-hover-border-color, var(--iress-g-primary-hover-color, var(--iress-active-border-bottom-color)))
+  );
+  --iress-active-hover-border-color: var(--iress-tab-button-active-hover-border-color, var(--iress-a-active-hover-border-color, var(--iress-g-primary-hover-color, var(--iress-active-border-color))));
+  --iress-active-hover-text-color: var(--iress-tab-button-active-hover-text-color, var(--iress-hover-text-color));
+
+  /* Focus */
+  --iress-focus-box-shadow: 0 0 0 var(--iress-g-focus-width, var(--iress-default-focus-size)) var(--iress-focus-color);
+}

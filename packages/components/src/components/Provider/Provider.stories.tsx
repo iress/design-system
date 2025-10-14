@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressProvider } from './Provider';
 import { AppWithProvider } from './mocks/AppWithProvider';

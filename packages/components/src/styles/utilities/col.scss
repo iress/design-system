@@ -1,0 +1,76 @@
+/* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
+@use 'sass:math';
+@use '../vars';
+
+.iress-u-col {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  flex-basis: 0;
+  flex-grow: 1;
+
+  /* need to set this here (instead of in row) to ensure the padding
+       is applied when wrapped in an IressHide */
+  padding-inline: calc(var(--iress-gutter) / 2);
+}
+
+@each $bpName, $bpValue in vars.$breakpoints {
+  @if $bpName == 'xs' {
+    @for $i from 1 through 12 {
+      $span: math.div($i, 12);
+
+      .iress-u-col.iress--span--auto {
+        flex-basis: 0;
+        flex-grow: 1;
+      }
+      .iress-u-col.iress--span--#{$i},
+      .iress-u-col.iress--span-#{$bpName}--#{$i} {
+        flex: 0 0 $span * 100%;
+        max-width: $span * 100%;
+      }
+      .iress-u-col.iress--offset--#{$i},
+      .iress-u-col.iress--offset-#{$bpName}--#{$i} {
+        margin-inline-start: $span * 100%;
+      }
+    }
+  } @else {
+    @media only screen and (#{$bpValue}) {
+      @for $i from 1 through 12 {
+        $span: math.div($i, 12);
+        .iress-u-col.iress--span-#{$bpName}--auto {
+          flex-basis: 0;
+          flex-grow: 1;
+        }
+        .iress-u-col.iress--span-#{$bpName}--#{$i} {
+          flex: 0 0 $span * 100%;
+          max-width: $span * 100%;
+        }
+        .iress-u-col.iress--offset-#{$bpName}--#{$i} {
+          margin-inline-start: $span * 100%;
+        }
+      }
+    }
+  }
+}
+/* stylelint-enable */
+
+.iress-u-col.iress--align-self--start {
+  align-self: flex-start;
+}
+
+.iress-u-col.iress--align-self--center {
+  align-self: center;
+}
+
+.iress-u-col.iress--align-self--end {
+  align-self: flex-end;
+}
+
+.iress-u-col.iress--align-self--stretch {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}

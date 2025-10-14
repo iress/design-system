@@ -1,25 +1,21 @@
 import {
   IressButton,
+  IressToastProps,
+  IressToasterProps,
   IressToasterProvider,
-  type IressToasterProviderProps,
-  type NewToast,
-  type ToastStatus,
   useToaster,
 } from '@/main';
 
 export const App = ({
   toast: toastProps,
   ...toasterProps
-}: IressToasterProviderProps & { toast: NewToast }) => (
+}: IressToasterProps & { toast: IressToastProps }) => (
   <IressToasterProvider {...toasterProps}>
     <ToastWithTrigger {...toastProps} />
   </IressToasterProvider>
 );
 
-const ToastWithTrigger = ({
-  status = 'success',
-  ...toastProps
-}: NewToast & { status?: ToastStatus }) => {
+const ToastWithTrigger = ({ status, ...toastProps }: IressToastProps) => {
   const toaster = useToaster();
 
   return (

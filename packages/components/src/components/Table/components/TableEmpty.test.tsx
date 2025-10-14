@@ -1,7 +1,8 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { TableEmpty } from './TableEmpty';
-import { TableProvider } from '../TableProvider';
+import { IressTableProvider } from '../TableProvider';
+import styles from '../Table.module.scss';
 
 describe('TableEmpty', () => {
   it('renders nothing if not used in table', () => {
@@ -17,7 +18,7 @@ describe('TableEmpty', () => {
 
   it('renders nothing if there are rows in table', () => {
     const screen = render(
-      <TableProvider
+      <IressTableProvider
         columns={[{ key: 'test', sort: true }]}
         rows={[{ hello: 'world' }]}
       >
@@ -25,7 +26,7 @@ describe('TableEmpty', () => {
           <TableEmpty>Empty table</TableEmpty>
         </table>
         ,
-      </TableProvider>,
+      </IressTableProvider>,
     );
 
     const empty = screen.queryByText('Empty table');
@@ -34,12 +35,12 @@ describe('TableEmpty', () => {
 
   it('renders nothing if there are no rows in table and columns are not set', () => {
     const screen = render(
-      <TableProvider rows={[]}>
+      <IressTableProvider rows={[]}>
         <table>
           <TableEmpty>Empty table</TableEmpty>
         </table>
         ,
-      </TableProvider>,
+      </IressTableProvider>,
     );
 
     const empty = screen.queryByText('Empty table');
@@ -48,21 +49,19 @@ describe('TableEmpty', () => {
 
   it('renders if there are no rows in table and columns are set', () => {
     const screen = render(
-      <TableProvider
+      <IressTableProvider
         columns={[{ key: 'test', sort: true }, { key: 'test2' }]}
         rows={[]}
       >
         <table>
-          <tbody>
-            <TableEmpty>Empty table</TableEmpty>
-          </tbody>
+          <TableEmpty>Empty table</TableEmpty>
         </table>
         ,
-      </TableProvider>,
+      </IressTableProvider>,
     );
 
     const empty = screen.getByText('Empty table');
-    expect(empty).toBeInTheDocument();
+    expect(empty).toHaveClass(styles.empty);
     expect(empty).toHaveAttribute('colspan', '2');
   });
 

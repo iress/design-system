@@ -1,0 +1,222 @@
+/* Scoped styles - used by components package and by AG Grid theme, so should only contain scoped styles that won't
+affect the host app (i.e. class selectors, or element selectors that only set CSS variables). Styles that affect the
+host app should be added to unscoped.css. */
+
+/* Root variables */
+html,
+:host(.iress-shadow-root) {
+  --iress-dir-is-ltr: 1;
+  --iress-g-spacing-rem: 16px;
+  --iress-g-font-size-rem: 1rem;
+  --iress-g-spacing-ratio-xs: 0.25;
+  --iress-g-spacing-ratio-sm: 0.5;
+  --iress-g-spacing-ratio-md: 1;
+  --iress-g-spacing-ratio-lg: 1.75;
+  --iress-g-spacing-ratio-xl: 3;
+
+  --iress-g-spacing-xs: calc(var(--iress-g-spacing-ratio-xs) * var(--iress-g-spacing-rem));
+  --iress-g-spacing-sm: calc(var(--iress-g-spacing-ratio-sm) * var(--iress-g-spacing-rem));
+  --iress-g-spacing-md: calc(var(--iress-g-spacing-ratio-md) * var(--iress-g-spacing-rem));
+  --iress-g-spacing-lg: calc(var(--iress-g-spacing-ratio-lg) * var(--iress-g-spacing-rem));
+  --iress-g-spacing-xl: calc(var(--iress-g-spacing-ratio-xl) * var(--iress-g-spacing-rem));
+
+  --iress-focus-color: var(--iress-g-focus-color, var(--iress-default-focus-color));
+}
+
+:host(.iress-shadow-root) {
+  --iress-dir-is-ltr: 1;
+  --iress-focus-color: var(--iress-g-focus-color, var(--iress-default-focus-color));
+
+  /* This needs to be set to inherit from html, unless there is a parent view mode set */
+  font-size: var(--iress-g-font-size-rem, var(--iress-default-font-size--touch));
+  color: var(--iress-g-text-color, inherit);
+}
+
+html[dir='rtl'] {
+  --iress-dir-is-ltr: -1;
+}
+
+:host(.iress-shadow-root) .shadow-dom-hydration:not(.hydrated) {
+  visibility: hidden;
+}
+
+:host-context(html[dir='rtl']) {
+  --iress-dir-is-ltr: -1;
+}
+
+/* View modes */
+.iress-view-mode-touch,
+:host-context(.iress-view-mode-touch) :host(.iress-shadow-root),
+:host(.iress-shadow-root) .iress-view-mode-touch,
+:host(.iress-shadow-root.iress-view-mode-touch) {
+  --iress-g-font-size-rem: 16px;
+  --iress-g-spacing-rem: 16px;
+  --iress-g-spacing-ratio-xs: 0.25;
+  --iress-g-spacing-ratio-sm: 0.5;
+  --iress-g-spacing-ratio-md: 1;
+  --iress-g-spacing-ratio-lg: 1.75;
+  --iress-g-spacing-ratio-xl: 3;
+
+  font-size: var(--iress-g-font-size-rem, var(--iress-default-font-size--touch));
+}
+
+.iress-view-mode-standard,
+:host-context(.iress-view-mode-standard) :host(.iress-shadow-root),
+:host(.iress-shadow-root) .iress-view-mode-standard,
+:host(.iress-shadow-root.iress-view-mode-standard) {
+  --iress-g-font-size-rem: 14px;
+  --iress-g-spacing-rem: 14px;
+  --iress-g-spacing-ratio-xs: 0.25;
+  --iress-g-spacing-ratio-sm: 0.5;
+  --iress-g-spacing-ratio-md: 1;
+  --iress-g-spacing-ratio-lg: 1.75;
+  --iress-g-spacing-ratio-xl: 3;
+
+  font-size: var(--iress-g-font-size-rem, var(--iress-default-font-size--standard));
+}
+
+.iress-view-mode-compact,
+:host-context(.iress-view-mode-compact) :host(.iress-shadow-root),
+:host(.iress-shadow-root) .iress-view-mode-compact,
+:host(.iress-shadow-root.iress-view-mode-compact) {
+  --iress-g-font-size-rem: 12px;
+  --iress-g-spacing-rem: 12px;
+  --iress-g-spacing-ratio-xs: 0.1875;
+  --iress-g-spacing-ratio-sm: 0.25;
+  --iress-g-spacing-ratio-md: 0.75;
+  --iress-g-spacing-ratio-lg: 1;
+  --iress-g-spacing-ratio-xl: 2;
+
+  font-size: var(--iress-g-font-size-rem, var(--iress-default-font-size--compact));
+}
+
+/* Scale rem font sizes for nested view modes */
+/* Touch parent */
+.iress-view-mode-touch .iress-view-mode-touch {
+  --iress-g-font-size-rem: 16px;
+  --iress-g-spacing-rem: 16px;
+  --iress-g-spacing-ratio-xs: 0.25;
+  --iress-g-spacing-ratio-sm: 0.5;
+  --iress-g-spacing-ratio-md: 1;
+  --iress-g-spacing-ratio-lg: 1.75;
+  --iress-g-spacing-ratio-xl: 3;
+}
+
+.iress-view-mode-touch .iress-view-mode-standard {
+  --iress-g-font-size-rem: 14px;
+  --iress-g-spacing-rem: 14px;
+  --iress-g-spacing-ratio-xs: 0.25;
+  --iress-g-spacing-ratio-sm: 0.5;
+  --iress-g-spacing-ratio-md: 1;
+  --iress-g-spacing-ratio-lg: 1.75;
+  --iress-g-spacing-ratio-xl: 3;
+}
+
+.iress-view-mode-touch .iress-view-mode-compact {
+  --iress-g-font-size-rem: 12px;
+  --iress-g-spacing-rem: 12px;
+  --iress-g-spacing-ratio-xs: 0.1875;
+  --iress-g-spacing-ratio-sm: 0.25;
+  --iress-g-spacing-ratio-md: 0.75;
+  --iress-g-spacing-ratio-lg: 1;
+  --iress-g-spacing-ratio-xl: 2;
+}
+
+/* Standard parent */
+.iress-view-mode-standard .iress-view-mode-touch {
+  --iress-g-font-size-rem: 16px;
+  --iress-g-spacing-rem: 16px;
+  --iress-g-spacing-ratio-xs: 0.25;
+  --iress-g-spacing-ratio-sm: 0.5;
+  --iress-g-spacing-ratio-md: 1;
+  --iress-g-spacing-ratio-lg: 1.75;
+  --iress-g-spacing-ratio-xl: 3;
+}
+
+.iress-view-mode-standard .iress-view-mode-standard {
+  --iress-g-font-size-rem: 14px;
+  --iress-g-spacing-rem: 14px;
+  --iress-g-spacing-ratio-xs: 0.25;
+  --iress-g-spacing-ratio-sm: 0.5;
+  --iress-g-spacing-ratio-md: 1;
+  --iress-g-spacing-ratio-lg: 1.75;
+  --iress-g-spacing-ratio-xl: 3;
+}
+
+.iress-view-mode-standard .iress-view-mode-compact {
+  --iress-g-font-size-rem: 12px;
+  --iress-g-spacing-rem: 12px;
+  --iress-g-spacing-ratio-xs: 0.1875;
+  --iress-g-spacing-ratio-sm: 0.25;
+  --iress-g-spacing-ratio-md: 0.75;
+  --iress-g-spacing-ratio-lg: 1;
+  --iress-g-spacing-ratio-xl: 2;
+}
+
+/* Compact parent */
+.iress-view-mode-compact .iress-view-mode-touch {
+  --iress-g-font-size-rem: 16px;
+  --iress-g-spacing-rem: 16px;
+  --iress-g-spacing-ratio-xs: 0.25;
+  --iress-g-spacing-ratio-sm: 0.5;
+  --iress-g-spacing-ratio-md: 1;
+  --iress-g-spacing-ratio-lg: 1.75;
+  --iress-g-spacing-ratio-xl: 3;
+}
+
+.iress-view-mode-compact .iress-view-mode-standard {
+  --iress-g-font-size-rem: 14px;
+  --iress-g-spacing-rem: 14px;
+  --iress-g-spacing-ratio-xs: 0.25;
+  --iress-g-spacing-ratio-sm: 0.5;
+  --iress-g-spacing-ratio-md: 1;
+  --iress-g-spacing-ratio-lg: 1.75;
+  --iress-g-spacing-ratio-xl: 3;
+}
+
+.iress-view-mode-compact .iress-view-mode-compact {
+  --iress-g-font-size-rem: 12px;
+  --iress-g-spacing-rem: 12px;
+  --iress-g-spacing-ratio-xs: 0.1875;
+  --iress-g-spacing-ratio-sm: 0.25;
+  --iress-g-spacing-ratio-md: 0.75;
+  --iress-g-spacing-ratio-lg: 1;
+  --iress-g-spacing-ratio-xl: 2;
+}
+
+.iress-view-mode-touch .iress-view-mode-touch,
+.iress-view-mode-touch .iress-view-mode-standard,
+.iress-view-mode-touch .iress-view-mode-compact,
+.iress-view-mode-standard .iress-view-mode-touch,
+.iress-view-mode-standard .iress-view-mode-standard,
+.iress-view-mode-standard .iress-view-mode-compact,
+.iress-view-mode-compact .iress-view-mode-touch,
+.iress-view-mode-compact .iress-view-mode-standard,
+.iress-view-mode-compact .iress-view-mode-compact {
+  /* Need to redeclare these variables so they pick up the updated font size rem */
+  --iress-g-font-size-xxxxl: calc(var(--iress-g-font-size-rem) * 3.5);
+  --iress-g-font-size-xxxl: calc(var(--iress-g-font-size-rem) * 2.5);
+  --iress-g-font-size-xxl: calc(var(--iress-g-font-size-rem) * 2);
+  --iress-g-font-size-xl: calc(var(--iress-g-font-size-rem) * 1.75);
+  --iress-g-font-size-lg: calc(var(--iress-g-font-size-rem) * 1.5);
+  --iress-g-font-size-md: calc(var(--iress-g-font-size-rem) * 1.375);
+  --iress-g-font-size-sm: calc(var(--iress-g-font-size-rem) * 1.25);
+  --iress-g-font-size-xs: calc(var(--iress-g-font-size-rem) * 1.125);
+  --iress-g-font-size-xxs: var(--iress-g-font-size-rem);
+  --iress-g-font-size-xxxs: calc(var(--iress-g-font-size-rem) * 0.875);
+  --iress-g-spacing-xs: calc(var(--iress-g-spacing-ratio-xs) * var(--iress-g-spacing-rem));
+  --iress-g-spacing-sm: calc(var(--iress-g-spacing-ratio-sm) * var(--iress-g-spacing-rem));
+  --iress-g-spacing-md: calc(var(--iress-g-spacing-ratio-md) * var(--iress-g-spacing-rem));
+  --iress-g-spacing-lg: calc(var(--iress-g-spacing-ratio-lg) * var(--iress-g-spacing-rem));
+  --iress-g-spacing-xl: calc(var(--iress-g-spacing-ratio-xl) * var(--iress-g-spacing-rem));
+  --iress-a-vertical-spacing-xl: var(--iress-g-spacing-xl);
+  --iress-a-vertical-spacing-lg: var(--iress-g-spacing-lg);
+  --iress-a-vertical-spacing-md: var(--iress-g-spacing-md);
+  --iress-a-vertical-spacing-sm: var(--iress-g-spacing-sm);
+  --iress-a-vertical-spacing-xs: var(--iress-g-spacing-xs);
+  --iress-a-horizontal-spacing-xl: var(--iress-g-spacing-xl);
+  --iress-a-horizontal-spacing-lg: var(--iress-g-spacing-lg);
+  --iress-a-horizontal-spacing-md: var(--iress-g-spacing-md);
+  --iress-a-horizontal-spacing-sm: var(--iress-g-spacing-sm);
+  --iress-a-horizontal-spacing-xs: var(--iress-g-spacing-xs);
+}

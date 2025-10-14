@@ -1,0 +1,98 @@
+@use './Checkbox.vars.module';
+@use '../../styles/mixins';
+
+/** Checkbox
+ * --------------------------------------------------
+ * @prop --iress-text-color: Text color of the checkbox label
+ * @prop --iress-spacing-right: The amount of space to right of the checkbox mark between label text
+ * @prop --iress-margin-bottom: The amount of margin at the bottom of the checkbox
+ * @prop --iress-padding-y: Vertical padding for the checkbox label
+ * @prop --iress-padding-x: Horizontal padding for the checkbox label
+ * @prop --iress-border-color: The color of the checkbox border
+ * @prop --iress-background-color: The background color of the checkbox when not checked
+ * @prop --iress mark-color: Color of the check in the checkbox
+ * @prop --iress-border-radius: Border radius of the checkbox
+ * @prop --iress-label-box-shadow: Box shadow of checkbox label
+ * @prop --iress-label-border-width: Border width of checkbox label
+ * @prop --iress-label-border-background-color: Background color of checkbox label
+ * @prop --iress-label-border-radius: Border radius of the checkbox label
+ * @prop --iress-transition-hover-duration: Checkbox hover transition duration
+ * @prop --iress-transition-hover-type: Checkbox hover transition type
+ */
+
+.checkbox {
+  display: flex;
+  position: relative;
+  margin-block-end: var(--iress-margin-bottom);
+  transition: all var(--iress-transition-hover-duration) var(--iress-transition-hover-type);
+}
+
+.label {
+  @include mixins.defaultFontStyles();
+
+  padding-block: var(--iress-padding-y) var(--iress-padding-y);
+  padding-inline: var(--iress-padding-x) var(--iress-padding-x);
+  box-shadow: var(--iress-label-box-shadow);
+  border: var(--iress-label-border-width) solid var(--iress-label-border-color);
+  border-radius: var(--iress-label-border-radius);
+  background-color: var(--iress-label-background-color);
+  position: relative;
+  line-height: var(--iress-line-height);
+  min-height: var(--iress-size);
+  margin: 0;
+  display: inline-flex;
+  color: var(--iress-text-color);
+}
+
+.mark {
+  margin-inline-end: calc(var(--iress-spacing-right) * 2);
+  flex-shrink: 0;
+}
+
+.hiddenLabel {
+  display: inline-block;
+
+  .mark {
+    margin-inline-end: 0;
+  }
+}
+
+.hiddenControl {
+  margin-inline-end: var(--iress-inline-spacing-x);
+  margin-block-start: var(--iress-inline-margin-bottom);
+  flex-basis: auto;
+  flex-grow: 0;
+
+  .label {
+    padding: 0;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .labelSpan {
+    display: block;
+  }
+
+  .input:checked + .label {
+    border: none;
+    padding: var(--iress-label-border-width);
+
+    &::after {
+      --iress-border-width: var(--iress-label-border-width);
+      --iress-border-color: var(--iress-label-border-color);
+      --iress-border-radius: var(--iress-label-border-radius);
+
+      @include mixins.selectedBorder();
+    }
+  }
+}
+
+.touch .label {
+  border: var(--iress-label-border-width) solid var(--iress-label-border-color);
+  border-radius: var(--iress-label-border-radius);
+  padding: var(--iress-padding-x);
+}
+
+.touch .input:checked + .label {
+  border-color: var(--iress-mark-color);
+}

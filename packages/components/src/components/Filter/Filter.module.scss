@@ -1,0 +1,60 @@
+.filter {
+  /* Utils */
+  --iress-utils-border-width: var(--iress-filter-utils-border-width, var(--iress-g-border-width, var(--iress-default-border-width)));
+  --iress-utils-border-color: var(--iress-filter-utils-border-color, var(--iress-g-border-color, var(--iress-default-border-color)));
+
+  /* Chevron */
+  --iress-chevron-color: var(--iress-filter-chevron-color, currentColor);
+  --iress-chevron-size: calc(0.5 * var(--iress-g-spacing-rem));
+  --iress-chevron-margin-block-start: calc(-0.275 * var(--iress-g-spacing-rem));
+  --iress-chevron-margin-inline-end: calc(0.25 * var(--iress-g-spacing-rem));
+}
+
+.chevron {
+  width: var(--iress-chevron-size);
+  height: var(--iress-chevron-size);
+  margin-inline-end: var(--iress-chevron-margin-inline-end);
+  margin-block-start: var(--iress-chevron-margin-block-start);
+  border: 1px solid var(--iress-chevron-color);
+  border-block-start: none;
+  border-inline-end: none;
+  transform: rotate(calc(var(--iress-dir-is-ltr, 1) * -45deg));
+  pointer-events: none;
+}
+
+.searchInput + .optionList,
+.noResults {
+  border-block-start: var(--iress-utils-border-width) solid var(--iress-utils-border-color);
+}
+
+.utilsWithReset:not(.utilsSearchable) {
+  --iress-padding-y: var(--iress-g-spacing-sm);
+}
+
+.optionList {
+  &:empty {
+    display: none;
+  }
+}
+
+.optionContent {
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.optionMeta {
+  display: block;
+}
+
+.optionMetaText {
+  --iress-font-weight: var(--iress-option-meta-font-weight);
+  --iress-text-color: var(--iress-option-meta-text-color);
+}
+
+.reset {
+  --iress-min-height: auto;
+
+  &:not(:only-child) {
+    --iress-padding-y: 0;
+  }
+}

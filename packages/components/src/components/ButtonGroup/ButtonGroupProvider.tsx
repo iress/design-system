@@ -1,84 +1,45 @@
-import {
-  type Context,
-  createContext,
-  type PropsWithChildren,
-  useMemo,
-} from 'react';
+import { createContext, useMemo } from 'react';
 import { toArray } from '@helpers/formatting/toArray';
 import {
-  type ControlledValue,
-  useControlledState,
-} from '../../hooks/useControlledState';
-import { type FormControlValue } from '@/types';
+  type ButtonGroupContextValue,
+  type IressButtonGroupProviderProps,
+} from './ButtonGroup.types';
+import { useControlledState } from '../../hooks/useControlledState';
 
-export interface ButtonGroupProviderProps<
-  T = FormControlValue,
-  TMultiple extends boolean = false,
-> extends PropsWithChildren {
-  defaultSelected?: ControlledValue<T, TMultiple>;
-  multiple?: boolean;
-  onChange?: (newSelected?: ControlledValue<T, TMultiple>) => void;
-  selected?: ControlledValue<T, TMultiple>;
-}
+export const ButtonGroupContext = createContext<
+  ButtonGroupContextValue | undefined
+>(undefined);
 
-interface ButtonGroupContextValue<
-  T = FormControlValue,
-  TMultiple extends boolean = false,
-> {
-  isActive: (value?: T) => boolean;
-  selected?: ControlledValue<T, TMultiple>;
-  toggle?: (value?: T, flag?: boolean) => void;
-}
-
-function createButtonGroupContext<
-  T = FormControlValue,
-  TMultiple extends boolean = false,
->() {
-  return createContext<ButtonGroupContextValue<T, TMultiple> | undefined>(
-    undefined,
-  );
-}
-
-// eslint-disable-next-line react-refresh/only-export-components -- keeping it here for context
-export function getButtonGroupContext<
-  T = FormControlValue,
-  TMultiple extends boolean = false,
->() {
-  return ButtonGroupContext as unknown as Context<
-    ButtonGroupContextValue<T, TMultiple>
-  >;
-}
-
-export const ButtonGroupContext = createButtonGroupContext();
-
-export const ButtonGroupProvider = <
-  T = FormControlValue,
-  TMultiple extends boolean = false,
->({
+export const IressButtonGroupProvider = ({
   children,
   defaultSelected,
-  multiple = false,
+  multiple,
   onChange,
   selected: selectedProp,
-}: ButtonGroupProviderProps<T, TMultiple>) => {
+}: IressButtonGroupProviderProps) => {
   const { value: selected, toggleValue: toggle } = useControlledState({
     component: 'IressButtonGroup',
     defaultValue: defaultSelected,
-    multiple: multiple as TMultiple,
-    onChange,
+    multiple,
+    onChange: (newValue) => {
+      onChange?.({ selected: newValue });
+    },
     propName: 'selected',
     value: selectedProp,
   });
 
-  const context = useMemo(
+  const context: ButtonGroupContextValue = useMemo(
     () => ({
-      isActive: (item?: T) => !!(item && toArray<T>(selected).includes(item)),
+      isActive: (item) => !!(item && toArray(selected).includes(item)),
       toggle,
-      selected,
+      selected: toArray(selected),
     }),
     [toggle, selected],
   );
 
-  const { Provider } = getButtonGroupContext<T, TMultiple>();
-  return <Provider value={context}>{children}</Provider>;
+  return (
+    <ButtonGroupContext.Provider value={context}>
+      {children}
+    </ButtonGroupContext.Provider>
+  );
 };

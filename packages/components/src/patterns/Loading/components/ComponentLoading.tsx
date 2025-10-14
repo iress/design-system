@@ -1,16 +1,18 @@
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { IressSkeleton } from '@/components/Skeleton';
 import { IressSpinner } from '@/components/Spinner';
-import { type IressStyledProps } from '@/types';
-import { styled } from '@/styled-system/jsx';
-import { loading } from '../Loading.styles';
-import { cx } from '@/styled-system/css';
+import { IressHide } from '@/components/Hide';
+import styles from './ComponentLoading.module.scss';
+import loadingStyles from '../Loading.module.scss';
+import classNames from 'classnames';
+import { type IressHTMLAttributes } from '@/interfaces';
+import { IressText } from '@/components/Text';
 
 const templates = {
   chart: <IressSkeleton mode="rect" height="250px" />,
 };
 
-export interface ComponentLoadingProps extends IressStyledProps {
+export interface ComponentLoadingProps extends IressHTMLAttributes {
   /**
    * The chart that is being loaded for the first time or being refreshed/updated.
    */
@@ -79,13 +81,6 @@ export const ComponentLoading = ({
   const [showSkeleton, setShowSkeleton] = useState(false);
   const [showUpdate, setShowUpdate] = useState(false);
 
-  const styles = loading({
-    pattern: 'component',
-    loaded,
-    showIndicator: showSkeleton,
-    showMessage: showUpdate,
-  });
-
   const skeleton = useMemo(() => {
     if (typeof template === 'string' && template in templates) {
       return templates[template as keyof typeof templates];
@@ -136,23 +131,48 @@ export const ComponentLoading = ({
 
   if (loaded !== true) {
     return (
-      <styled.div {...restProps} className={cx(styles.root, className)}>
+      <div
+        className={classNames(
+          styles.root,
+          className,
+          loadingStyles['fade-in'],
+          {
+            [loadingStyles['fade-in--active']]: showSkeleton,
+          },
+        )}
+        {...restProps}
+      >
         {skeleton}
-        <styled.div srOnly>{screenReaderText}</styled.div>
-      </styled.div>
+        <IressHide hiddenOn={{ xs: true }} visuallyHidden>
+          {screenReaderText}
+        </IressHide>
+      </div>
     );
   }
 
   return (
-    <styled.div className={cx(styles.root, className)} {...restProps}>
+    <div
+      className={classNames(styles.root, styles.loaded, className)}
+      {...restProps}
+    >
       {children}
-      {update && <div className={styles.overlay} />}
       {update && (
-        <styled.div className={styles.message}>
-          <IressSpinner />{' '}
-          {typeof update === 'boolean' ? 'Updating...' : update}
-        </styled.div>
+        <div
+          className={classNames(styles.overlay, {
+            [styles.overlayStrong]: showUpdate,
+          })}
+        />
       )}
-    </styled.div>
+      {update && (
+        <IressText
+          className={classNames(styles.message, loadingStyles['fade-in'], {
+            [loadingStyles['fade-in--active']]: showUpdate,
+          })}
+        >
+          <IressSpinner className={styles.spinner} />{' '}
+          {typeof update === 'boolean' ? 'Updating...' : update}
+        </IressText>
+      )}
+    </div>
   );
 };

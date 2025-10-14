@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressPlaceholder } from '.';
 
 type Story = StoryObj<typeof IressPlaceholder>;
@@ -6,7 +6,6 @@ type Story = StoryObj<typeof IressPlaceholder>;
 export default {
   title: 'Components/Placeholder',
   component: IressPlaceholder,
-  tags: ['updated'],
 } as Meta<typeof IressPlaceholder>;
 
 export const Placeholder: Story = {

@@ -1,4 +1,4 @@
-import { type StoryObj, type Meta } from '@storybook/react-vite';
+import { StoryObj, Meta } from '@storybook/react';
 
 import { IressLabel } from './Label';
 import { disableArgTypes } from '@iress-storybook/helpers';
@@ -10,7 +10,6 @@ type Story = StoryObj<typeof IressLabel>;
 export default {
   title: 'Components/Label',
   component: IressLabel,
-  tags: ['updated'],
 } as Meta<typeof IressLabel>;
 
 export const Default: Story = {
@@ -26,6 +25,20 @@ export const Required: Story = {
   },
 };
 
+export const Optional: Story = {
+  args: {
+    children: 'This is a label for an optional input',
+    optional: true,
+  },
+};
+
+export const OptionalText: Story = {
+  args: {
+    ...Optional.args,
+    optional: '(选修的)',
+  },
+};
+
 export const HiddenLabel: Story = {
   args: {
     hiddenLabel: true,
@@ -37,7 +50,7 @@ export const RichContent: Story = {
   args: {
     hiddenLabel: false,
     children: (
-      <IressInline gap="md" verticalAlign="middle">
+      <IressInline gutter="md" verticalAlign="middle">
         <IressIcon name="home" />
         Home settings
         <IressIcon name="cog" />

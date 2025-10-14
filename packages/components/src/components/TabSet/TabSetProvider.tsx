@@ -1,162 +1,90 @@
 import {
   createContext,
-  type MutableRefObject,
-  type PropsWithChildren,
   useCallback,
   useEffect,
   useMemo,
   useState,
 } from 'react';
+import {
+  type TabSetContextValue,
+  type TabSetProviderProps,
+  type TabSetItem,
+  type TabSetRegisterItem,
+} from './TabSet.types';
 import { type FormControlValue } from '@/types';
-import { useControlledState } from '@/hooks';
+import { idsLogger } from '@helpers/utility/idsLogger';
 
-export interface TabSetContextValue {
-  activate: (node?: HTMLElement | null) => void;
-  active?: HTMLElement;
-  hover?: HTMLElement;
-  isActive: (node?: HTMLElement | null) => boolean;
-  panel: HTMLDivElement | null;
-  register: (node: HTMLElement, value?: FormControlValue) => void;
-  setHover: (node?: HTMLElement) => void;
-  unregister: (node: HTMLElement) => void;
-}
-
-export interface TabSetProviderProps extends PropsWithChildren {
-  defaultSelected?: FormControlValue;
-  hoverIndicator?: MutableRefObject<HTMLElement | null>;
-  onChange?: (event: TabSetChangedEventDetail) => void;
-  panel: HTMLDivElement | null;
-  selected?: FormControlValue;
-}
-
-export interface TabSetChangedEventDetail {
-  /**
-   * The index of the tab that was selected.
-   */
-  index: number;
-
-  /**
-   * The value of the tab that was selected.
-   * If the tab does not have a value, this will be the same as `index`.
-   */
-  value?: FormControlValue;
-}
-
-// eslint-disable-next-line react-refresh/only-export-components -- Keeps the context in the same place as the provider
-export const TabSetContext = createContext<TabSetContextValue | undefined>(
+export const TabSetItemsContext = createContext<TabSetContextValue | undefined>(
   undefined,
 );
 
 export const TabSetProvider = ({
   children,
-  defaultSelected,
   onChange,
+  defaultSelected,
   panel,
   selected: selectedProp,
 }: TabSetProviderProps) => {
-  const [hover, setHover] = useState<HTMLElement | undefined>();
-  const [nodes, setNodes] = useState(() => new Set<HTMLElement>());
-  const [values, setValues] = useState(
-    () => new Map<number, FormControlValue>(),
-  );
-  const { value: selected, setValue: setSelected } = useControlledState({
-    component: 'IressTabSet',
-    defaultValue: defaultSelected,
-    propName: 'selected',
-    value: selectedProp,
-  });
+  const [items, setItems] = useState<TabSetItem[]>([]);
+  const [uncontrolledSelected, setUncontrolledSelected] = useState<
+    FormControlValue | undefined
+  >(defaultSelected);
 
-  const active = useMemo(
-    () =>
-      [...nodes].find(
-        (_node, index) =>
-          (values.has(index) && values.get(index) === selected) ||
-          index === selected,
-      ),
-    [nodes, selected, values],
+  const selected = selectedProp ?? uncontrolledSelected;
+  const active = items.find(
+    (item, index) => item.value === selected || index === selected,
   );
 
-  const register = useCallback(
-    (node: HTMLElement, value?: FormControlValue) => {
-      setNodes((prevSet) => {
-        let newSet = new Set(prevSet);
+  useEffect(() => {
+    if (selectedProp !== undefined && defaultSelected !== undefined) {
+      idsLogger(
+        'IressTabSet: Please use either the defaultSelected prop for uncontrolled components, or the selected prop for controlled components, rather than both. If you use both, the selected tab may become unpredictable.',
+        'warn',
+      );
+    }
+  }, [selectedProp, defaultSelected]);
 
-        if (!prevSet.has(node)) {
-          newSet = new Set(prevSet).add(node);
-        }
+  const register = useCallback((tab: TabSetRegisterItem) => {
+    setItems((currentItems) => {
+      if (
+        currentItems.some(
+          (item) => item.id === tab.id || item.value === tab.value,
+        )
+      ) {
+        return currentItems;
+      }
 
-        const nodeIndex = [...newSet].indexOf(node);
+      const index = currentItems.length;
 
-        if (value !== undefined) {
-          setValues((prevValues) => {
-            const newValues = new Map(prevValues);
-            newValues.set(nodeIndex, value);
-            return newValues;
-          });
-        }
-
-        return newSet;
-      });
-    },
-    [],
-  );
-
-  const unregister = useCallback((node: HTMLElement) => {
-    setNodes((prevSet) => {
-      const newSet = new Set(prevSet);
-      const nodeIndex = [...newSet].indexOf(node);
-      newSet.delete(node);
-
-      setValues((prevValues) => {
-        if (!prevValues.has(nodeIndex)) return prevValues;
-        const newValues = new Map(prevValues);
-        newValues.delete(nodeIndex);
-        return newValues;
+      setUncontrolledSelected((currentSelected) => {
+        if (currentSelected !== undefined) return currentSelected;
+        return tab.value ?? index;
       });
 
-      return newSet;
+      return [...currentItems, { ...tab, index, value: tab.value ?? index }];
     });
   }, []);
 
-  useEffect(() => {
-    if (selected === undefined && !!nodes.size) {
-      setSelected(values.get(0) ?? 0);
-    }
-  }, [nodes, selected, setSelected, values]);
-
   const context: TabSetContextValue = useMemo(
     () => ({
+      items,
       active,
-      activate(node) {
-        if (!node) return;
-        const index = [...nodes].indexOf(node);
-        const value = values.get(index);
+      panel,
+      register,
+      indexOf: (id, value) =>
+        items.findIndex((item) => item.id === id || item.value === value),
+      isActive: (id, value) => active?.id === id || active?.value === value,
+      activate(index: number, value?: FormControlValue) {
         onChange?.({ index, value });
-        setSelected(value ?? index);
+        setUncontrolledSelected(value ?? index);
       },
-      isActive: (node) => (node ? active === node : false),
-      hover,
-      panel,
-      register,
-      setHover: (node?: HTMLElement) => {
-        setHover(node);
-      },
-      unregister,
     }),
-    [
-      active,
-      hover,
-      panel,
-      register,
-      unregister,
-      nodes,
-      values,
-      onChange,
-      setSelected,
-    ],
+    [items, active, panel, register, onChange],
   );
 
   return (
-    <TabSetContext.Provider value={context}>{children}</TabSetContext.Provider>
+    <TabSetItemsContext.Provider value={context}>
+      {children}
+    </TabSetItemsContext.Provider>
   );
 };

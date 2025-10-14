@@ -1,77 +1,15 @@
-import { type SliderCustomCSSProperties } from '../Slider';
-import { slider } from '../Slider.styles';
-import { cx } from '@/styled-system/css';
-import { type ReactNode } from 'react';
+import {
+  type SliderCustomCSSProperties,
+  type SliderTickLabelValue,
+  type SliderTickLabelValueWithClassName,
+  type SliderTicksProps,
+} from '../Slider.types';
+import styles from '../Slider.module.scss';
+import classNames from 'classnames';
+import { useMemo } from 'react';
+import { GlobalCSSClass } from '@/enums';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
-import { type IressStyledProps, type IressUnstyledProps } from '@/types';
-import { type IressTestProps } from '@/interfaces';
-import { styled } from '@/styled-system/jsx';
-
-export interface SliderTicksProps extends IressUnstyledProps<'datalist'> {
-  /**
-   * Set the maximum value for the slider.
-   * @default 10
-   */
-  max?: number;
-
-  /**
-   * Sets minimum value for the slider.
-   * @default 0
-   */
-  min?: number;
-
-  /**
-   * List of labels to be displayed.
-   */
-  tickLabels?: SliderTickLabelValue[];
-}
-
-export interface SliderTickMarkProps extends IressTestProps {
-  /**
-   * List of all tick labels for the slider.
-   * Used to calculate the relative width of each tick mark.
-   */
-  allTickLabels: SliderTickLabelValue[];
-
-  /**
-   * The index of the tick label in the list.
-   */
-  index: number;
-
-  /**
-   * The maximum value of the slider.
-   */
-  max: number;
-
-  /**
-   * The minimum value of the slider.
-   */
-  min: number;
-
-  /**
-   * The tick label to be displayed.
-   */
-  tickLabel: SliderTickLabelValue;
-}
-
-export interface SliderTickLabelValue
-  extends Omit<IressStyledProps, 'children'> {
-  /**
-   * The label of the tick mark. If not provided, the value will be displayed.
-   */
-  label?: ReactNode;
-
-  /**
-   * The value of the tick mark. Will be used as the value of the form control.
-   */
-  value: number;
-}
-
-/**
- * Represents a tick label for the slider.
- * It can either be a number or an object containing a value, optional label as well as optional styling.
- */
-export type SliderTickLabel = number | SliderTickLabelValue;
+import { BREAKPOINTS } from '@/constants';
 
 const getRelativeWidthOfTick = (
   value: number,
@@ -86,39 +24,23 @@ const getRelativeWidthOfTick = (
   return `${relativeSlice}%`;
 };
 
-const TickMark = ({
-  allTickLabels,
-  'data-testid': dataTestId,
-  index,
-  max,
-  min,
-  tickLabel,
-}: SliderTickMarkProps) => {
-  const classes = slider();
-  const { className, label, value, ...tickLabelProps } = tickLabel;
-
-  const tickWidth = getRelativeWidthOfTick(
-    value,
-    index,
-    allTickLabels,
-    max,
-    min,
-  );
-
-  const styles: SliderCustomCSSProperties = {
-    '--iress-tick-label-width': tickWidth,
-  };
-
-  return (
-    <div key={value} className={cx(classes.tickMark)} style={styles}>
-      <option value={value} data-testid={dataTestId} />
-      <styled.div
-        {...tickLabelProps}
-        className={cx(classes.tickMarkLabel, className)}
-      >
-        {label ?? `${value}`}
-      </styled.div>
-    </div>
+const addHideClassesForTick = (
+  tickLabel: SliderTickLabelValue,
+): SliderTickLabelValueWithClassName => {
+  return BREAKPOINTS.reduce(
+    (tickWithClasses, breakpoint, index) => ({
+      ...tickWithClasses,
+      className: {
+        ...tickWithClasses.className,
+        [`${GlobalCSSClass.SROnly}--${breakpoint}`]: !!(
+          tickWithClasses.hiddenOn?.[breakpoint] ??
+          tickWithClasses.className?.[
+            `${GlobalCSSClass.SROnly}--${BREAKPOINTS[index - 1]}`
+          ]
+        ),
+      },
+    }),
+    { ...tickLabel, className: {} as Record<string, boolean> },
   );
 };
 
@@ -128,20 +50,45 @@ export const SliderTicks = ({
   tickLabels = [],
   ...restProps
 }: SliderTicksProps) => {
-  const classes = slider();
+  const tickLabelsWithClasses: SliderTickLabelValueWithClassName[] = useMemo(
+    () =>
+      tickLabels.map((tickLabel) => {
+        if (!tickLabel.hiddenOn) return tickLabel;
+        return addHideClassesForTick(tickLabel);
+      }),
+    [tickLabels],
+  );
 
   return (
-    <datalist className={classes.tickMarkList} {...restProps}>
-      {tickLabels.map((tickLabel, index) => (
-        <TickMark
+    <datalist className={styles.tickMarkList} {...restProps}>
+      {tickLabelsWithClasses.map((tickLabel, index) => (
+        <div
           key={tickLabel.value}
-          allTickLabels={tickLabels}
-          data-testid={propagateTestid(restProps['data-testid'], 'option')}
-          index={index}
-          max={max}
-          min={min}
-          tickLabel={tickLabel}
-        />
+          className={classNames(styles.tickMark, {
+            [styles.isMax]: max === tickLabel.value,
+          })}
+          style={
+            {
+              '--iress-tick-label-width': getRelativeWidthOfTick(
+                tickLabel.value,
+                index,
+                tickLabels,
+                max,
+                min,
+              ),
+            } as SliderCustomCSSProperties
+          }
+        >
+          <option
+            value={tickLabel.value}
+            data-testid={propagateTestid(restProps['data-testid'], 'option')}
+          />
+          <div
+            className={classNames(styles.tickMarkLabel, tickLabel.className)}
+          >
+            {tickLabel.label ?? `${tickLabel.value}`}
+          </div>
+        </div>
       ))}
     </datalist>
   );

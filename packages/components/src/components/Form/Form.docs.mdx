@@ -1,0 +1,610 @@
+import { Meta } from '@storybook/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+  ComponentApiExpander,
+} from '@iress-storybook/components';
+import { dependencies } from '../../../package.json';
+import * as ComponentStories from './Form.stories.tsx';
+import * as FormRulesStories from './FormRules.stories.tsx';
+import * as FormFieldStories from './FormField/FormField.stories.tsx';
+import * as HookFormStories from './HookForm/HookForm.stories.tsx';
+import {
+  StateManagementV4ToV5,
+  ValidationV4ToV5,
+} from './mocks/Version4to5Forms.tsx';
+
+<Meta of={ComponentStories} />
+
+# Form
+
+<ComponentOverview
+  description={
+    <>
+      Use the <code>IressForm</code> component when you want to request,
+      validate and process data from the user.
+    </>
+  }
+  propsDetails={
+    <p>
+      Below are the custom props you can access when using{' '}
+      <code>IressForm</code>, which includes the props for the{' '}
+      <a
+        href="https://react-hook-form.com/docs/useform"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <code>useForm</code> hook from React Hook Forms
+      </a>
+      . In addition to these, you have access to the original props of the
+      underlying{' '}
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <code>form</code> element
+      </a>
+      .
+    </p>
+  }
+  story={ComponentStories.Simple}
+  stories={ComponentStories}
+/>
+
+## Key concepts
+
+As of version 5, `IressForm` is built on top of [React Hook Forms](https://react-hook-form.com/). This provides you the power of React Hook Forms with the convenience of IDS form components. However, there are some key differences to be aware of as it may affect how you build your forms.
+
+### State management
+
+`IressForm` manages the state of the form, including the form data and validation. This is done using the `useForm` hook from React Hook Forms. This hook provides a way to manage the form state, and provides methods to interact with the form. This was done to simplify the form components, make them more predictable (as the form becomes the single source of truth for all form related data) and improve performance by reducing re-renders (very important for large forms).
+
+Due to this change, there are a few things you should consider during development:
+
+- Avoid using the `useState` hook to manage form state. Instead, use the `IressForm.useForm` hook or the `ref` of the `IressForm` component to interact with the form state. The initial value of the form can be set using the `defaultValues` prop, but from then on you should be using either the hook or ref to interact with the form state.
+- Avoid using `onChange` handlers on form fields to react to form values. Instead, use the `IressForm.useWatch` hook to watch the value of a field and conditionally render fields based on the value of another field.
+
+See below an example comparing a version 4 and version 5 `IressForm` when managing form state.
+
+<StateManagementV4ToV5 />
+
+### Validation
+
+Validation is now done declaratively using the `rules` prop on the `IressFormField` component. This is based on the [rules available in React Hook Forms](https://www.react-hook-form.com/api/useform/register/#options). This change was made to allow for more complex validation rules to be implemented.
+
+Due to this change, there are a few things you should consider during development:
+
+- If you want validation messages to be shown on form controls, you need to use the `IressFormField` component to wrap around the form control and set the `rules` prop. This will allow the form to manage the validation state of the field.
+- Although you can still use props such as `maxLength` on `IressInput`, these no longer propagate to the form validation. You need to use the `rules` prop to set these validation rules as well, and rely on `maxLength` for the input to stop the user from entering more characters than allowed (a user experience improvement that we definitely recommend).
+- You can no longer override default error messages for the whole form. To override the default messages, you must specify them in the `rules` prop per `IressFormField`.
+
+See below an example comparing a version 4 and version 5 `IressForm` when adding validation rules.
+
+<ValidationV4ToV5 />
+
+### Syncing state
+
+For most scenarios, you should use the `onSubmit` event to sync the form data with other state management systems (eg. server, browser storage or state management libraries such as Redux). This event is emitted when the form passes validation, and contains a map of the field names and the data entered by the user.
+
+For more complex scenarios, you may need to sync a field value before the form is submitted. In this case, you can use the `IressForm.useWatch` hook to watch the value of a field and sync it with your state.
+
+Consider the following for your development:
+
+- Only use other state management systems to fill out the form at the initial render using `defaultValues`. After that, use the `onSubmit` event to sync the form data with your state.
+- If you need to set form with data coming from an external system, use the `ref` of the form to `reset` the form values.
+
+```tsx
+const ref = useRef<FormRef | null>(null);
+const api = useApi();
+
+const handleSubmit = async (data) => {
+  // Sync the form data with your state
+  const details = await api.updateUser(data);
+
+  // Update the form with the new data
+  ref.current?.reset(details);
+};
+
+return (
+  <IressForm onSubmit={handleSubmit} ref={ref}>
+    ...
+  </IressForm>
+);
+```
+
+## Usage
+
+### Fields
+
+Use the `IressFormField` component to create form fields. This component is a layout component that wraps around form controls such as `IressInput`. It provides a consistent layout for form fields, and hooks into the `IressForm` component to provide validation and error handling.
+
+It has three required props:
+
+- `name`: The name of the field, which will be used to identify the field in the form data.
+- `label`: The label for the field.
+- `render`: A render prop that renders the form control. It is passed an object containing the props to be spread onto the form control to allow it to be controlled by the form.
+
+```tsx
+<IressFormField
+  name="email"
+  label="Email"
+  render={(controlledProps) => <IressInput {...controlledProps} type="email" />}
+/>
+```
+
+#### Supported form controls
+
+Here are some examples of how to use `IressFormField` with different form controls. If you are using a form control that has multiple inputs inside (for example, `IressCheckboxGroup`), you can use `IressFormFieldset`, which changes the HTML structure to use a `fieldset` and `legend` element to group the inputs.
+
+<ComponentExample story={ComponentStories.Fields} stories={ComponentStories} />
+
+<ComponentApiExpander
+  heading="IressFormField props"
+  headingId="form-field-props"
+  headingLevel={4}
+  readOnly
+  story={FormFieldStories.Default}
+/>
+
+### Rules
+
+Use the `rules` prop on the `IressFormField` component to add validation rules. These are based on the [rules available in React Hook Forms](https://www.react-hook-form.com/api/useform/register/#options). The following rules are supported.
+
+**Note:** In version 5, you can no longer override default error messages for the whole form. To override the default messages, you must specify them in the `rules` prop per `IressFormField`.
+
+#### `required`
+
+A boolean which, if `true`, indicates that the input must have a value before the form can be submitted. You can assign a string to return a custom error message.
+
+<ComponentExample
+  api={{
+    heading: 'Adjust',
+    headingId: 'adjust-required',
+    include: ['element', 'field', 'rules', 'customRules'],
+  }}
+  story={FormRulesStories.Required}
+  stories={FormRulesStories}
+/>
+
+#### `maxLength`
+
+The maximum character length of the value to accept for this input.
+
+**Notes**
+
+- For `IressInput`, you should also set the `maxLength` to stop the user from entering more characters than allowed.
+- Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
+
+<ComponentExample
+  api={{
+    heading: 'Adjust',
+    headingId: 'adjust-max-length',
+    include: ['element', 'field', 'rules', 'customRules'],
+  }}
+  story={FormRulesStories.MaxLength}
+  stories={FormRulesStories}
+/>
+
+#### `minLength`
+
+The minimum character length of the value to accept for this input.
+
+**Notes**
+
+- For `IressInput`, you should also set the `minLength` to stop the user from entering more characters than allowed.
+- Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
+
+<ComponentExample
+  api={{
+    heading: 'Adjust',
+    headingId: 'adjust-min-length',
+    include: ['element', 'field', 'rules', 'customRules'],
+  }}
+  story={FormRulesStories.MinLength}
+  stories={FormRulesStories}
+/>
+
+#### `max`
+
+The maximum number to accept for this input.
+
+**Notes**
+
+- Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
+
+<ComponentExample
+  api={{
+    heading: 'Adjust',
+    headingId: 'adjust-max',
+    include: ['element', 'field', 'rules', 'customRules'],
+  }}
+  story={FormRulesStories.Max}
+  stories={FormRulesStories}
+/>
+
+#### `min`
+
+The minimum number to accept for this input.
+
+**Notes**
+
+- Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
+
+<ComponentExample
+  api={{
+    heading: 'Adjust',
+    headingId: 'adjust-min',
+    include: ['element', 'field', 'rules', 'customRules'],
+  }}
+  story={FormRulesStories.Min}
+  stories={FormRulesStories}
+/>
+
+#### `pattern`
+
+The accepted regex pattern for the input.
+
+**Notes**
+
+- Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
+
+<ComponentExample
+  api={{
+    heading: 'Adjust',
+    headingId: 'adjust-pattern',
+    include: ['element', 'field', 'rules', 'customRules'],
+  }}
+  story={FormRulesStories.Pattern}
+  stories={FormRulesStories}
+/>
+
+#### `minDate`
+
+The minimum date to accept for this input.
+
+**Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
+
+<ComponentExample story={FormRulesStories.MinDate} stories={FormRulesStories} />
+
+#### `maxDate`
+
+The maximum date to accept for this input.
+
+**Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
+
+<ComponentExample story={FormRulesStories.MaxDate} stories={FormRulesStories} />
+
+#### `email`
+
+Ensures the input is a valid email address.
+
+**Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
+
+<ComponentExample story={FormRulesStories.Email} stories={FormRulesStories} />
+
+#### `validate`
+
+You can pass a callback function as the argument to validate, or you can pass an object of callback functions to validate against all of them. This function will be executed on its own without depending on other validation rules included.
+
+**Notes**
+
+- for `object` or `array` input data, it's recommended to use the validate function for validation as the other rules mostly apply to `string`, `string[]`, `number` and `boolean` data types.
+
+<ComponentExample
+  story={FormRulesStories.Validate}
+  stories={FormRulesStories}
+/>
+
+### Handling submission
+
+When the form passes validation (if not disabled), the `onSubmit` event is emitted. Its event details contain a map of the field names and the data entered by the user.
+
+<ComponentExample
+  story={ComponentStories.HandlingSubmission}
+  stories={ComponentStories}
+/>
+
+### Read only
+
+You can pass the `readOnly` prop to remove the asterisk symbol (\*) even when the field is `required`, and that field will be exempted from validation.
+
+<ComponentExample
+  story={ComponentStories.ExcludeReadOnlyValidation}
+  stories={ComponentStories}
+/>
+
+## Behaviour
+
+- Initial form validation is done when the user first submits the form. This allows them to focus on entering data without being overwhelmed by validation errors.
+- If there are validation errors on submission, they will be shown at the form level as a summary, as well as per field. Only the first failing error will be displayed per field.
+- After the first submission, fields are validated on change, to provide users instant feedback as they are now at the validation phase.
+
+**Note:** The default user experience regarding validation is different to previous versions of IDS. This change was done to align IDS with the typical user experience found in other applications. If you would like to change the behaviour to be more consistent with the original IDS, set the `mode` prop of the form to `onBlur`.
+
+## Examples
+
+### Validation summary
+
+If errors are present, they are displayed in a summary at the top of the page. This can be customised using the `errorSummaryHeading` prop.
+
+<ComponentExample
+  story={ComponentStories.ValidationSummary}
+  stories={ComponentStories}
+/>
+
+### Hidden validation summary
+
+Use the `hiddenErrorSummary` prop to hide the summary altogether, and only show the errors on the fields. This is only recommended for short forms, for long forms it is recommended to keep the error summary shown for best accessibility.
+
+<ComponentExample
+  story={ComponentStories.HiddenErrorSummary}
+  stories={ComponentStories}
+/>
+
+### Custom error handling
+
+The `onError` prop allows you to listen to any field errors. It takes two arguments. The first is a map of the field name and an object containing the first error message and type. The second is a ref to the original element that caused the error (the ref of the underlying input).
+
+One use case for this prop is to create your own error summary.
+
+<ComponentExample
+  story={ComponentStories.CustomErrorHandling}
+  stories={ComponentStories}
+/>
+
+### Pre-fill the form
+
+You can set the `defaultValues` prop to pre-fill the form values.
+
+<ComponentExample
+  story={ComponentStories.DefaultValues}
+  stories={ComponentStories}
+/>
+
+### `values`
+
+If you would like more control over each value of the form, you should use the `values` prop. This will make the form controlled, meaning it will rely completely on the `values` state to render the value of each field. You will need to use the `onSubmit` prop to sync the form value with your state.
+
+Use cases where you may need the `values` prop:
+
+- Syncing with a server once the values have been processed
+- Syncing the value with browser storage
+
+**Note:** `values` takes precedence over `defaultValues`. To ensure your form state is predictable, it is best to only use one prop to manage form values.
+
+<ComponentExample story={ComponentStories.Values} stories={ComponentStories} />
+
+### Disable validation
+
+Disabling validation is not possible with the `IressForm` component. In cases where you do need to disable validation, please consider the following:
+
+1. Use a non-submitting button to save a draft (eg. `<IressButton type="button">Save as draft</IressButton>`). Then you can use the `ref` of the form to get the form data.
+2. Use a native `form` element, and customise the error handling.
+
+Here we have an example showcasing option one.
+
+<ComponentExample
+  story={ComponentStories.DisableValidation}
+  stories={ComponentStories}
+/>
+
+### Resetting the form
+
+You can reset the form using the `ref` of the form. You must provide a `defaultValues` prop that contains all the fields in the form to ensure it resets properly.
+
+**Note:** `<button type="reset" />` does not work with `IressForm`. You need to add an `onClick` prop to the button and use the `ref.reset` method to reset the form.
+
+<ComponentExample
+  story={ComponentStories.ResetForm}
+  stories={ComponentStories}
+/>
+
+### Custom form field components
+
+You can integrate custom components within `IressFormField` to create enhanced form experiences.
+
+This demo showcases how to embed a custom `TranscriptTextBox` component into `IressFormField` while leveraging its built-in validation rules, error handling, and state management without additional implementation.
+
+**Reminder:** When building custom form components, avoid managing error message state internally. This helps maintain the IressForm as the single source of truth and ensures consistent, predictable UI behavior.
+
+Key features demonstrated:
+
+- **Universal Integration Pattern**: Shows how any custom component can be embedded in IressFormField
+- **Built-in Validation**: Leverages IressFormField's validation rules with custom validation logic
+- **Multiple Error Messages**: Displays simultaneous validation errors (e.g., wrong file type AND too large)
+- **Drag & Drop**: Files can be dragged and dropped directly onto the textarea
+- **File Upload Button**: Traditional file selection via button click
+- **Visual Feedback**: UI changes during drag operations with border and background updates
+- **Form State Management**: Automatically integrates with form context using controlled props
+- **File Management**: Display uploaded files with remove functionality using `IressPanel`
+
+<ComponentExample
+  story={ComponentStories.CustomFormFieldComponents}
+  stories={ComponentStories}
+/>
+
+### Forms in expanders (lazy loading)
+
+If you are using forms in expanders, or in other scenarios when the loading of the form may be delayed, it is recommended to only load the form when it is required. This will improve performance of your application, and make it more predictable. It may also fix act warnings in tests if you are seeing some appearing due to conditionally loaded `IressForm` elements.
+
+<ComponentExample
+  story={ComponentStories.FormsInExpanders}
+  stories={ComponentStories}
+/>
+
+### Conditional fields (useWatch)
+
+When you have fields that are conditionally shown, you can use the `IressForm.useWatch` hook to watch the value of another field and conditionally render the field.
+
+**Notes:**
+
+- You can use the `api.watch` method on the `IressForm`'s ref to watch the value of a field, but it is recommended to use the hook for better performance by isolating re-rendering at the component level.
+
+<ComponentExample
+  story={ComponentStories.UseWatch}
+  stories={ComponentStories}
+/>
+
+## `IressHookForm`
+
+`IressHookForm` is the underlying component that `IressForm` is built upon. It has a single required prop, `form`, which expects the return value of the `useForm` hook from React Hook Forms.
+
+It has been exposed to consumers to allow you to have complete control of your React Hook Forms instance whilst still taking advantage of the IDS form components.
+
+Some use cases:
+
+1. You may need to use the `useForm` hook in a parent component to share the form state with multiple child components.
+2. You would like to use the return value of the `useForm` hook without having to use a ref to access the `react-hook-form` api.
+
+<ComponentExample
+  api={{
+    heading: 'Props',
+    headingId: 'hook-form-api',
+  }}
+  story={HookFormStories.HookForm}
+  stories={HookFormStories}
+/>
+
+## Migration to version 5
+
+The previous form components contained a lot of logic to translate the HTML5 validation API to a format that matched the design system’s guidelines. This allowed users to use the default props of input such as `pattern` and `required`, and be assured that the `IressField` would display errors accordingly.
+
+Although this worked for simple forms, it did not work for forms which had complex business requirements. This was due to the logic inside the form components being hard to override. Additionally, it was seemingly impossible to implement the business requirements using the HTML5 validation API, which itself is very restricted.
+
+In version 5 we have decided to provide two alternative methods of using form components to better accommodate our consumer’s needs.
+
+The validation logic has been stripped from all of the existing form components. They are now closer to their native implementation, with a few customisations to match the IDS guidelines. IressField has transformed into a layout component to allow you to lay out form fields consistent with IDS guidelines, using your own validation tools.
+
+Automated validation is now solely contained in `IressForm` and `IressFormField`, using [React Hook Form](https://react-hook-form.com/docs/useform) under the hood to simplify maintenance.
+
+## Testing
+
+Unfortunately due to the asynchronous nature of React Hook Form validation, `IressForm` still needs to be tested using `screen.findBy` queries (at least in the first query after render). If `findBy` is not used, you will start to see the dreaded `act warnings`. For more information on testing IressForm, please refer to the (React Hook Form testing documentation)[https://react-hook-form.com/advanced-usage#TestingForm]
+
+Here is an example of testing a form submission.
+
+```tsx
+render(
+  <IressForm>
+    <IressFormField
+      label="Email"
+      name="email"
+      rules={{ required: true }}
+      render={(controlledProps) => (
+        <IressInput {...controlledProps} type="email" />
+      )}
+    />
+    <IressButton type="submit">Submit</IressButton>
+  </IressForm>,
+);
+
+// May be needed sometimes to get over the act warning
+await screen.getByRole('form');
+
+const emailInput = screen.getByRole('textbox');
+const submitButton = screen.getByRole('button', { name: 'Submit' });
+
+await userEvent.click(submitButton);
+
+// Errors are asynchronous, so we need to wait for them to appear
+const summaryError = await screen.findByText(
+  'There was a problem submitting this form',
+);
+expect(summaryError).toBeInTheDocument();
+```
+
+## Caveat
+
+### Using `IressSelect` with non-string values in `IressFormField`
+
+When using form controls that support non-string values (like `IressSelect` with number values), you might encounter type conflicts with React Hook Form's default event handling. By default, React Hook Form expects string values from form controls.
+
+**Problem:**
+
+```tsx
+<IressFormField
+  name="dependents"
+  label="Dependents"
+  render={(controlledProps) => (
+    <IressSelect {...controlledProps}>
+      <option key="0" value={0}>
+        0
+      </option>
+      <option key="1" value={1}>
+        1
+      </option>
+      <option key="2" value={2}>
+        2
+      </option>
+    </IressSelect>
+  )}
+/>
+```
+
+In this case, React Hook Form will try to convert the value to string, which might cause type issues.
+
+**Solution:**
+Override the `onChange` handler to pass the actual value as a second parameter:
+
+```tsx
+<IressFormField
+  name="dependents"
+  label="Dependents"
+  render={(controlledProps) => (
+    <IressSelect
+      {...controlledProps}
+      onChange={(_e, value) => controlledProps.onChange(value)}
+    >
+      <option key="0" value={0}>
+        0
+      </option>
+      <option key="1" value={1}>
+        1
+      </option>
+      <option key="2" value={2}>
+        2
+      </option>
+    </IressSelect>
+  )}
+/>
+```
+
+This ensures the original value type is preserved when passed to React Hook Form.
+You can find out more about the code example in the [Switch Edit Readonly Form Documentation](?path=/docs/components-form-recipes--docs#switching-between-readonly-and-edit-modes).
+
+### Properly resetting fields
+
+When resetting fields that accept non-string values (like `IressRichSelect`), you should reset them to `null` or `undefined` instead of an empty string. This is because the underlying component is strictly typed and expects a specific value type.
+
+**Problem:**
+
+```tsx
+const { resetField } = IressForm.useFormContext();
+
+resetField('rich-select', {
+  label: '',
+  value: '',
+});
+```
+
+In this case, it will look like it cleared the field, but actually it has not. This is obvious with a `placeholder` set, as it will not show the placeholder.
+
+**Solution:**
+Override the `onChange` handler to pass the actual value as a second parameter:
+
+```tsx
+const { resetField } = IressForm.useFormContext();
+
+resetField('rich-select', null); // or undefined
+```
+
+This will properly reset the field to null and clear the field value.
+
+### Conflicting versions of React Hook Forms
+
+If you are using React Hook Forms in your application, please ensure it is the same version IDS uses, otherwise there will be conflicts.
+
+The version we are using in IDS is:
+
+<pre>yarn add react-hook-form@{dependencies['react-hook-form']}</pre>

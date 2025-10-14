@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -26,17 +26,14 @@ The `mode` prop controls the visual appearance and priority of the button.
 - **Primary:** Use for the main call to action. Limit to one per view.
 - **Secondary:** Use for secondary calls to action.
 - **Tertiary:** Use when you need extra affordance between your secondary actions.
+- **Link:** Use when you need a button to appear like a link.
+- **Danger:** Use for added affordance on destructive actions, such as deleting data.
+- **Positive:** Use for buy/purchase actions.
+- **Negative:** Use for sell actions.
+
+**Note:** Avoid setting `mode` to `link` when the only child of the button is an icon, as icons inside link buttons do not have an underline, and will have no visual indication that they are clickable.
 
 <ComponentExample story={ComponentStories.Mode} stories={ComponentStories} />
-
-### Status
-
-The `status` prop allows you to apply a visual status to the button.
-
-- **Success:** Usually used to indicate an action that should be perceived as positive, such as "Confirm" or "Buy".
-- **Danger:** Use for destructive actions, such as "Delete" or "Remove". Also used for actions that are perceived as negative, such as "Cancel" or "Sell".
-
-<ComponentExample story={ComponentStories.Status} stories={ComponentStories} />
 
 ### Types
 
@@ -64,6 +61,8 @@ A good example of this is the Next and Previous links in a wizard layout. These 
 
 You can also use the link specific props `target` and `rel`.
 
+If you need to use custom routing, take a look at the custom route slot documentation below.
+
 <ComponentExample
   story={ComponentStories.ButtonsAsLinks}
   stories={ComponentStories}
@@ -72,9 +71,9 @@ You can also use the link specific props `target` and `rel`.
 ### Delete confirmation
 
 <IressAlert
-  status="warning"
+  status={IressAlert.Status.Warning}
   heading="Make sure that the user understands the consequences of clicking the button"
-  mb="md"
+  className="iress-mb--md"
 >
   You may want to add a confirmation step to prevent accidental data loss if the
   action is irreversible.
@@ -131,18 +130,14 @@ This allows you to add your own aria attributes, or data attributes for analytic
 
 ### Download button
 
-When a `href` is provided, the `download` prop can be used to indicate that the link should download a file instead of navigating to it. This is useful for links to files such as PDFs or images.
+Whilst `IressButton` does not have a `download` property, it can be configured quite easily.
+
+Please see the example below. The use of an icon is optional.
 
 <ComponentExample
   story={ComponentStories.DownloadButton}
   stories={ComponentStories}
 />
-
-### Element
-
-You can use the `element` prop to render a custom component as the button. This is useful for rendering a component from a third-party library, such as `react-router-dom`.
-
-<ComponentExample story={ComponentStories.Element} stories={ComponentStories} />
 
 ## `IressCloseButton`
 

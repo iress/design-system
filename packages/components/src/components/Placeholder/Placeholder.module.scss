@@ -1,0 +1,30 @@
+.placeholder {
+  font-family: var(--iress-g-font-family, inherit);
+  background: hsl(0deg 0% 20% / 8%);
+  border: 2px solid var(--iress-g-border-color, var(--iress-default-border-color));
+  border-radius: var(--iress-g-border-radius, var(--iress-default-border-radius));
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+  box-sizing: border-box;
+
+  > svg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+  }
+
+  > svg > line {
+    stroke-width: 2px;
+    stroke: var(--iress-g-border-color, var(--iress-default-border-color));
+    stroke-opacity: 0.25;
+  }
+}
+
+.transparent {
+  background: transparent;
+}

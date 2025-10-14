@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressSelectTags } from './SelectTags';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
 

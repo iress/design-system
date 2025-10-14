@@ -1,48 +1,18 @@
-import { type ForwardedRef, forwardRef, useContext } from 'react';
+import { forwardRef } from 'react';
+import classNames from 'classnames';
 
 import { GlobalCSSClass } from '@/enums';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 
+import styles from '../Popover.module.scss';
+import { type IressInputPopoverProps } from './InputPopover.types';
+import { type PopoverRef } from '../Popover.types';
+import { InputPopoverProvider } from './InputPopoverProvider';
 import { PopoverContent } from '../components/PopoverContent';
-import {
-  InputPopoverActivator,
-  type InputPopoverActivatorProps,
-} from './InputPopoverActivator';
-import { type IressPopoverProps } from '../Popover';
-import {
-  type PopoverRef,
-  usePopoverImperativeHandle,
-} from '../hooks/usePopoverImperativeHandle';
-import { styled } from '@/styled-system/jsx';
-import { PopoverContext, usePopover } from '../hooks/usePopover';
-import { cx } from '@/styled-system/css';
-import { popover } from '../Popover.styles';
+import { InputPopoverActivator } from './InputPopoverActivator';
+import { composePopoverWidth } from '../helpers/composePopoverWidth';
 import { NestedPopoverActivator } from '../components/NestedPopoverActivator';
-
-export interface IressInputPopoverProps
-  extends Omit<
-      IressPopoverProps,
-      'fluid' | 'matchActivatorWidth' | 'virtualFocus'
-    >,
-    Omit<InputPopoverActivatorProps, 'children'> {
-  /**
-   * Content for an activator element, usually an `IressInput`.
-   */
-  activator: InputPopoverActivatorProps['children'];
-
-  /**
-   * If true, the first supported is automatically highlighted.
-   * @default true
-   */
-  autoHighlight?: boolean;
-
-  /**
-   * Describes the type of content contained in the popover.
-   * If `listbox`, it will add the combobox role to the popover activator.
-   * @default listbox
-   */
-  type?: IressPopoverProps['type'];
-}
+import { usePopover } from '../hooks/usePopover';
 
 const InputPopover = (
   {
@@ -53,8 +23,8 @@ const InputPopover = (
     className,
     container,
     contentClassName,
-    contentStyle,
     defaultShow,
+    disabledAutoToggle,
     displayMode = 'overlay',
     focusStartIndex,
     minLength,
@@ -63,68 +33,55 @@ const InputPopover = (
     onNavigate,
     show,
     type = 'listbox',
+    width,
     ...restProps
   }: IressInputPopoverProps,
-  ref: ForwardedRef<PopoverRef>,
-) => {
-  const matchActivatorWidth = displayMode === 'overlay';
-  const classes = popover({ hasInputActivator: true, matchActivatorWidth });
-  const context = usePopover({
-    align,
-    autoHighlight,
-    defaultShow,
-    focusStartIndex,
-    hasInputActivator: true,
-    matchActivatorWidth,
-    onActivated,
-    onDeactivated,
-    onNavigate,
-    show,
-    type,
-    virtualFocus: true,
-  });
-
-  usePopoverImperativeHandle(ref, context);
-
-  return (
-    <PopoverContext.Provider value={context}>
-      <styled.div
-        {...restProps}
-        className={cx(
-          className,
-          GlobalCSSClass.FormElement,
-          classes.root,
-          GlobalCSSClass.Popover,
-          GlobalCSSClass.InputPopover,
-        )}
-      >
-        <NestedPopoverActivator parentPopover={useContext(PopoverContext)}>
-          <InputPopoverActivator
-            className={classes.activator}
-            data-testid={propagateTestid(restProps['data-testid'], 'activator')}
-            minLength={minLength}
-          >
-            {activator}
-          </InputPopoverActivator>
-        </NestedPopoverActivator>
-        <PopoverContent
-          className={cx(
-            contentClassName,
-            contentStyle?.className,
-            classes.content,
-            GlobalCSSClass.PopoverContent,
-          )}
-          container={container}
-          data-testid={propagateTestid(restProps['data-testid'], 'content')}
-          displayMode={displayMode}
-          virtualFocus
-          {...contentStyle}
+  ref: React.ForwardedRef<PopoverRef>,
+) => (
+  <InputPopoverProvider
+    align={align}
+    autoHighlight={autoHighlight}
+    defaultShow={defaultShow}
+    disabledAutoToggle={disabledAutoToggle}
+    matchActivatorWidth={displayMode === 'overlay'}
+    onActivated={onActivated}
+    onDeactivated={onDeactivated}
+    onNavigate={onNavigate}
+    ref={ref}
+    type={type}
+    show={show}
+    focusStartIndex={focusStartIndex}
+  >
+    <div
+      {...restProps}
+      className={classNames(
+        className,
+        GlobalCSSClass.FormElement,
+        styles.popover,
+        styles.hasInputActivator,
+      )}
+    >
+      <NestedPopoverActivator parentPopover={usePopover()}>
+        <InputPopoverActivator
+          data-testid={propagateTestid(restProps['data-testid'], 'activator')}
+          disabledAutoToggle={disabledAutoToggle}
+          minLength={minLength}
         >
-          {children}
-        </PopoverContent>
-      </styled.div>
-    </PopoverContext.Provider>
-  );
-};
+          {activator}
+        </InputPopoverActivator>
+      </NestedPopoverActivator>
+      <PopoverContent
+        className={classNames(styles.inputActivatorPortal, contentClassName)}
+        container={container}
+        data-testid={propagateTestid(restProps['data-testid'], 'content')}
+        displayMode={displayMode}
+        style={composePopoverWidth(width)}
+        virtualFocus
+      >
+        {children}
+      </PopoverContent>
+    </div>
+  </InputPopoverProvider>
+);
 
 export const IressInputPopover = forwardRef(InputPopover);

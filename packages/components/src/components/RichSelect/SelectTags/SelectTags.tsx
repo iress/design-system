@@ -1,78 +1,34 @@
-import { propagateTestid } from '@helpers/utility/propagateTestid';
-import { toArray } from '@helpers/formatting/toArray';
-import { composeLabelValueDescriptor } from '@helpers/label-value/composeLabelValueDescriptor';
-import { getFormControlValueAsStringIfDefined } from '@helpers/form/getFormControlValueAsStringIfDefined';
+import classNames from 'classnames';
 import {
-  useCallback,
-  useEffect,
-  useState,
-  useMemo,
-  useContext,
-  type ReactNode,
-} from 'react';
-import { focusableElements } from '@/helpers/dom/focusableElements';
-import {
-  PopoverContext,
-  type PopoverHookReturn,
-} from '@/components/Popover/hooks/usePopover';
-import { IressText, type IressTextProps } from '@/components/Text';
-import { type IressSelectActivatorProps } from '../components/SelectActivator';
-import { cx } from '@/styled-system/css';
-import { selectTags } from './SelectTags.styles';
-import { type LabelValueMeta } from '@/interfaces';
-import { IressTag, type IressTagProps } from '@/components/Tag';
-import {
+  ButtonCssClass,
+  type ButtonRef,
+  GlobalCSSClass,
+  IressButton,
+  IressIcon,
+  IressInline,
   IressMenu,
   IressMenuItem,
   type IressMenuItemProps,
-} from '@/components/Menu';
-import { IressPopover } from '@/components/Popover';
-import { IressButton } from '@/components/Button';
-import { IressIcon } from '@/components/Icon';
-import { GlobalCSSClass } from '@/enums';
-import { IressInline } from '@/components/Inline';
-
-export interface IressSelectTagsProps
-  extends Omit<IressSelectActivatorProps, 'width'>,
-    Omit<IressTextProps, 'element' | 'width'> {
-  /**
-   * Append content.
-   */
-  append?: ReactNode;
-
-  /**
-   * The id of the select element.
-   */
-  id?: string;
-
-  /**
-   * Emitted when a tag is deleted.
-   */
-  onDelete?: (
-    item?: LabelValueMeta,
-    e?: React.SyntheticEvent<HTMLButtonElement>,
-  ) => void;
-
-  /**
-   * Emitted when the combined tag delete button is clicked.
-   */
-  onDeleteAll?: (e: React.SyntheticEvent<HTMLButtonElement>) => void;
-
-  /**
-   * Emitted when actions are toggled.
-   */
-  onToggleActions?: (open?: boolean) => void;
-
-  /**
-   * Limit of tags to display before shortening to `selectedOptionsText`
-   * @default 5
-   */
-  limit?: number;
-}
+  IressPopover,
+  IressTag,
+  type IressTagProps,
+  IressText,
+  type LabelValueMeta,
+  type PopoverContextValue,
+} from '@/main';
+import { propagateTestid } from '@helpers/utility/propagateTestid';
+import { toArray } from '@helpers/formatting/toArray';
+import { composeLabelValueDescriptor } from '@helpers/label-value/composeLabelValueDescriptor';
+import { type IressSelectTagsProps } from './SelectTags.types';
+import { getFormControlValueAsStringIfDefined } from '@helpers/form/getFormControlValueAsStringIfDefined';
+import { useCallback, useEffect, useState, useMemo } from 'react';
+import styles from './SelectTags.module.scss';
+import { usePopover } from '@/components/Popover/hooks/usePopover';
+import { focusableElements } from '@/helpers/dom/focusableElements';
 
 const adjustFocusOnTagDelete = (
-  popover?: PopoverHookReturn,
-  e?: React.SyntheticEvent<HTMLButtonElement | HTMLDivElement>,
+  popover?: PopoverContextValue,
+  e?: React.SyntheticEvent<ButtonRef | HTMLDivElement>,
 ) => {
   if (!popover?.api.elements.reference || !e) {
     return;
@@ -126,11 +82,10 @@ const Tags = ({
   selectedArray: LabelValueMeta[];
 }) => {
   const [expanded, setExpanded] = useState(false);
-  const popover = useContext(PopoverContext);
-  const classes = selectTags();
+  const popover = usePopover();
 
   const onTagDelete: IressTagProps['onDelete'] = useCallback(
-    (label: string, e: React.SyntheticEvent<HTMLButtonElement>) => {
+    (label: string, e: React.SyntheticEvent<ButtonRef>) => {
       onDelete?.(
         selectedArray.find((item) => item.label === label),
         e,
@@ -143,7 +98,7 @@ const Tags = ({
   );
 
   const onTagDeleteAll: IressMenuItemProps['onClick'] = useCallback(
-    (e: React.SyntheticEvent<HTMLButtonElement>) => {
+    (e: React.SyntheticEvent<ButtonRef>) => {
       onDeleteAll?.(e);
       popover?.getFocusableActivator()?.focus();
     },
@@ -159,7 +114,7 @@ const Tags = ({
   if (expanded || !limit || selectedArray.length <= limit)
     return selectedArray.map((item) => (
       <IressTag
-        className={classes.tag}
+        className={styles.tag}
         data-testid={propagateTestid(dataTestId, 'tag')}
         deleteButtonText={`Delete ${item.label}`}
         key={getFormControlValueAsStringIfDefined(item.value) ?? item.label}
@@ -171,7 +126,7 @@ const Tags = ({
 
   return (
     <IressTag
-      className={classes.tag}
+      className={styles.tag}
       data-testid={propagateTestid(dataTestId, 'tag')}
       deleteButton={
         <IressPopover
@@ -205,10 +160,13 @@ const Tags = ({
 };
 
 export const IressSelectTags = ({
-  append = '',
+  append = (
+    <IressButton mode="tertiary" role="combobox" aria-label="Select">
+      <IressIcon name="chevron-down" size="xs" />
+    </IressButton>
+  ),
   className,
   'data-testid': dataTestId,
-  id,
   limit = 5,
   onDelete,
   onDeleteAll,
@@ -222,27 +180,23 @@ export const IressSelectTags = ({
   const selectedArray = useMemo(() => toArray(selected), [selected]);
   const showPlaceholder = !selectedArray.length && placeholder;
   const hasSelected = !!selectedArray.length;
-  const shouldShowDefaultChevron = append == null || append === '' || !append;
-  const classes = selectTags({ showDefaultChevron: shouldShowDefaultChevron });
 
   return (
-    <IressText<'div'>
+    <IressText
       {...restProps}
-      id={id}
-      tabIndex={0}
-      className={cx(
+      className={classNames(
         className,
-        classes.root,
+        styles.selectTags,
+        ButtonCssClass.Base,
         GlobalCSSClass.FormElementInner,
-        GlobalCSSClass.RichSelectTags,
       )}
     >
-      {prepend && <span className={classes.prepend}>{prepend}</span>}
+      {prepend && <span className={styles.prepend}>{prepend}</span>}
       {showPlaceholder && (
-        <IressText className={classes.placeholder}>{placeholder}</IressText>
+        <span className={classNames(styles.placeholder)}>{placeholder}</span>
       )}
       {hasSelected && (
-        <IressInline gap="sm" className={classes.tagsList}>
+        <IressInline gutter="sm" className={styles.tagsList}>
           <Tags
             data-testid={dataTestId}
             limit={limit}
@@ -254,13 +208,7 @@ export const IressSelectTags = ({
           />
         </IressInline>
       )}
-      <button
-        className={classes.append}
-        role="combobox"
-        aria-label="Select options"
-      >
-        {append}
-      </button>
+      {append && <span className={styles.append}>{append}</span>}
     </IressText>
   );
 };

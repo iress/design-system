@@ -12,7 +12,7 @@ export default defineConfig({
     reporters: ['verbose'],
     coverage: {
       provider: 'v8',
-      reporter: ['lcov', 'html'],
+      reporter: ['text', 'lcov', 'html'],
       exclude: [
         'src/**/*.stories.*',
         'src/**/*.test.*',
@@ -35,7 +35,7 @@ export default defineConfig({
       html: './coverage/index.html',
     },
     // Retry flaky tests
-    retry: 2,
+    retry: 1,
   },
   resolve: {
     alias: [
@@ -54,10 +54,5 @@ export default defineConfig({
         replacement: resolve(__dirname, 'theme-preset'),
       },
     ],
-  },
-  css: {
-    postcss: {
-      plugins: [],
-    },
   },
 });

@@ -1,4 +1,5 @@
+export * from './Button.types';
 export * from './Button';
-export { button } from '@/styled-system/recipes/button';
 
+export * from './CloseButton/CloseButton.types';
 export * from './CloseButton/CloseButton';

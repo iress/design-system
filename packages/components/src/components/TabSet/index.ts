@@ -1,7 +1,7 @@
-export * from './TabSet';
-export * from './TabSet.styles';
-
+export * from './Tab/Tab.types';
 export * from './Tab/Tab';
-export * from './Tab/Tab.styles';
 
-export type { TabSetChangedEventDetail } from './TabSetProvider';
+export * from './TabSet.types';
+export * from './TabSet';
+
+export * from './helpers/mapTabs';

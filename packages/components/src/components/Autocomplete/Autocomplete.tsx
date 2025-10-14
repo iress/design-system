@@ -1,106 +1,22 @@
-import { cx } from '@/styled-system/css';
-import { autoComplete as autoCompleteStyles } from './Autocomplete.styles';
+import classNames from 'classnames';
+import { type IressAutocompleteProps } from './Autocomplete.types';
+import styles from './Autocomplete.module.scss';
 import { IressInputPopover, type IressInputPopoverProps } from '../Popover';
-import {
-  IressInput,
-  type InputBaseElement,
-  type IressInputProps,
-} from '../Input';
+import { IressInput, type IressInputProps } from '../Input';
 import { useControlledState } from '@/hooks/useControlledState';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { toArray } from '@helpers/formatting/toArray';
 import { getValueAsEvent } from '@helpers/form/getValueAsEvent';
 import { getFormControlValueAsStringIfDefined } from '@helpers/form/getFormControlValueAsStringIfDefined';
-import {
-  type AutocompleteSearchHookProps,
-  useAutocompleteSearch,
-} from './hooks/useAutocompleteSearch';
+import { useAutocompleteSearch } from './hooks/useAutocompleteSearch';
 import { IressIcon } from '../Icon/Icon';
-import {
-  forwardRef,
-  type ReactNode,
-  type SyntheticEvent,
-  useEffect,
-  useState,
-} from 'react';
-import { type InputRef } from '../Input/InputBase/InputBase';
+import { forwardRef, useEffect, useState } from 'react';
+import { type InputRef } from '../Input/InputBase/InputBase.types';
+import { AutocompleteNoResults } from './components/AutocompleteNoResults';
 import { AutocompleteInstructions } from './components/AutocompleteInstructions';
 import { IressSelectMenu, type IressSelectMenuProps } from '../RichSelect';
 import { IressReadonly } from '../Readonly';
 import { IressAlert } from '../Alert';
-import { type LabelValueMeta } from '@/interfaces';
-import { GlobalCSSClass } from '@/enums';
-import { type FormControlValue } from '@/types';
-
-export interface IressAutocompleteProps<T extends FormControlValue = string>
-  extends Omit<IressInputProps<T>, 'children' | 'onChange'>,
-    Omit<AutocompleteSearchHookProps, 'query'>,
-    Pick<IressSelectMenuProps, 'limitMobile' | 'limitDesktop'> {
-  /**
-   * Always shown on focus, even if the user has not interacted with the input.
-   */
-  alwaysShowOnFocus?: boolean;
-
-  /**
-   * Append content.
-   * @default <IressIcon name="search" />
-   */
-  append?: ReactNode;
-
-  /**
-   * If true, the selected option becomes the value of the input when the autocomplete loses focus.
-   * @default true
-   */
-  autoSelect?: boolean;
-
-  /**
-   * If `true`, then user can clear the value of the input.
-   * @default true
-   */
-  clearable?: boolean;
-
-  /**
-   * Text to be displayed when the options function errors out. It is not used when the options are provided as an array.
-   * @default <IressAlert status="danger">An unknown error occurred. Please contact support if the error persists.</IressAlert>
-   */
-  errorText?: ReactNode;
-
-  /**
-   * Text to be displayed when no results are found.
-   */
-  noResultsText?: ReactNode;
-
-  /**
-   * Emitted when the user changes the input.
-   * The second and third arguments are only available when the options were selected from the `options` prop.
-   */
-  onChange?: (
-    e?: SyntheticEvent<InputBaseElement>,
-    value?: T,
-    option?: LabelValueMeta,
-  ) => void;
-
-  /**
-   * Customise the IressInputPopover props for your needs.
-   */
-  popoverProps?: AutocompletePopoverProps;
-}
-
-export interface AutocompletePopoverProps
-  extends Pick<
-    IressInputPopoverProps,
-    | 'autoHighlight'
-    | 'align'
-    | 'className'
-    | 'container'
-    | 'contentClassName'
-    | 'contentStyle'
-    | 'displayMode'
-    | 'style'
-  > {
-  append?: ReactNode;
-  prepend?: ReactNode;
-}
 
 export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
   (
@@ -115,7 +31,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
       debounceThreshold,
       defaultValue,
       errorText = (
-        <IressAlert status="danger" mb="none">
+        <IressAlert status="danger">
           An unknown error occurred. Please contact support if the error
           persists.
         </IressAlert>
@@ -137,6 +53,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
       } = {},
       readOnly,
       value: valueProp,
+      watermark = true,
       ...restProps
     },
     ref,
@@ -231,10 +148,6 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
         }
       };
 
-    const classes = autoCompleteStyles({
-      isEmpty: results.length === 0,
-    });
-
     return (
       <IressInputPopover
         {...popoverProps}
@@ -250,21 +163,20 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
             onClear={handleInputClear}
             onFocus={handleInputFocus}
             value={value}
+            watermark={watermark}
             ref={ref}
           />
         }
         autoHighlight={autoHighlight}
-        className={cx(
+        className={classNames(
           className,
           popoverProps.className,
-          classes.root,
-          GlobalCSSClass.Autocomplete,
+          styles.autocomplete,
         )}
-        contentClassName={cx(
+        contentClassName={classNames(
           popoverProps.contentClassName,
-          classes.popoverContent,
+          styles.popoverContent,
         )}
-        contentStyle={popoverProps.contentStyle}
         data-testid={dataTestId}
         minLength={0}
         onActivated={() => (valueChanged || alwaysShowOnFocus) && setShow(true)}
@@ -277,7 +189,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
             {popoverPrepend}
             <IressSelectMenu
               changeOnBlur={autoSelect}
-              className={cx(classes.optionList)}
+              className={styles.optionList}
               data-testid={propagateTestid(dataTestId, 'menu')}
               items={results}
               limitDesktop={limitDesktop}
@@ -290,9 +202,17 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
         )}
         {error && errorText}
         {shouldShowInstructions && !error && (
-          <AutocompleteInstructions minSearchLength={minSearchLength ?? 1} />
+          <AutocompleteInstructions
+            minSearchLength={minSearchLength ?? 1}
+            styles={styles}
+          />
         )}
-        {shouldShowNoResults && !error && noResultsText}
+        {shouldShowNoResults && !error && (
+          <AutocompleteNoResults
+            noResultsText={noResultsText}
+            styles={styles}
+          />
+        )}
       </IressInputPopover>
     );
   },

@@ -1,0 +1,46 @@
+@use './Toaster.vars';
+
+.toaster {
+  display: block;
+  position: fixed;
+  width: 500px;
+  max-width: 100%;
+  z-index: 1041;
+  padding: var(--iress-padding);
+
+  &:empty {
+    display: none;
+  }
+}
+
+.toaster__bottom-end {
+  inset-block-end: 0;
+  inset-inline-end: 0;
+}
+
+.toaster__bottom-start {
+  inset-block-end: 0;
+  inset-inline-start: 0;
+}
+
+.toaster__bottom-center {
+  inset-block-end: 0;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+}
+
+.toaster__top-end {
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+.toaster__top-start {
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+.toaster__top-center {
+  inset-block-start: 0;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+}

@@ -14,13 +14,8 @@ import {
   type TEXT_VARIANTS,
   type VERTICAL_ALIGNS,
 } from '@/constants';
-import {
-  type IressCSSProps,
-  type IressTestProps,
-  type VariablePaddingSize,
-} from './interfaces';
+import { type VariablePaddingSize } from './interfaces';
 import { type PaddingSize } from './enums';
-import { type SpacingToken } from '@/styled-system/tokens';
 
 export type Breakpoints = (typeof BREAKPOINTS)[number];
 
@@ -43,36 +38,13 @@ export type HeadingLevels = (typeof HEADING_LEVELS)[number];
 
 export type HorizontalAligns = (typeof HORIZONTAL_ALIGNS)[number];
 
-/**
- * Components created internally that are not exposed to consumers use this interface.
- * In some cases a public component may use this interface if it has no reason to be styled.
- */
-export type IressUnstyledProps<
-  T extends keyof React.JSX.IntrinsicElements = 'div',
-> = Omit<
-  React.JSX.IntrinsicElements[T],
-  keyof IressCSSProps | 'translate' | 'height' | 'ref'
-> &
-  IressTestProps;
-
-/**
- * Components that are exposed for consumers normally use this interface, allowing them to be customised in a type-safe way.
- */
-export type IressStyledProps<
-  T extends keyof React.JSX.IntrinsicElements = 'div',
-> = IressUnstyledProps<T> & IressCSSProps;
-
 export type LoggerLevelsUnion = (typeof LOGGER_LEVELS)[number];
 
-export type MixedPaddingSize =
-  | VariablePaddingSize
-  | PaddingSize
-  | PaddingSizes
-  | SpacingToken;
+export type MixedPaddingSize = VariablePaddingSize | PaddingSize | PaddingSizes;
 
 export type PaddingSizes = (typeof PADDING_SIZES)[number];
 
-export type ResponsiveProp<T> = T | Partial<Record<Breakpoints | 'base', T>>;
+export type ResponsiveProps<T> = Partial<Record<Breakpoints, T>>;
 
 export type SystemValidationStatuses =
   (typeof SYSTEM_VALIDATION_STATUSES)[number];

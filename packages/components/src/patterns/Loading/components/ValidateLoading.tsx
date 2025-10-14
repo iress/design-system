@@ -1,11 +1,12 @@
 import { IressButton, type IressButtonProps } from '@/components/Button';
+import classNames from 'classnames';
 import { type ReactNode, useEffect, useState } from 'react';
-import { loading } from '../Loading.styles';
-import { type IressStyledProps } from '@/types';
-import { styled } from '@/styled-system/jsx';
-import { cx } from '@/styled-system/css';
+import { IressText } from '@/components/Text';
+import styles from './ValidateLoading.module.scss';
+import loadingStyles from '../Loading.module.scss';
+import { type IressHTMLAttributes } from '@/interfaces';
 
-export interface ValidateLoadingProps extends IressStyledProps {
+export interface ValidateLoadingProps extends IressHTMLAttributes {
   /**
    * When true, button is in loading state. If provided a string, will be used as the loading text for screen readers.
    */
@@ -36,7 +37,9 @@ export interface ValidateLoadingProps extends IressStyledProps {
    * This is a render prop that allows you to override the default button rendering.
    * This is useful if you want to use a different button component or if you want to add additional props to the button.
    */
-  renderButton?: (props: Pick<IressButtonProps, 'loading'>) => ReactNode;
+  renderButton?: (
+    props: Pick<IressButtonProps, 'className' | 'loading'>,
+  ) => ReactNode;
 
   /**
    * The time in milliseconds before the loading message is displayed.
@@ -48,7 +51,7 @@ export interface ValidateLoadingProps extends IressStyledProps {
 export const ValidateLoading = ({
   children,
   className,
-  loading: loadingProp = false,
+  loading = false,
   message = 'This is taking longer than expected...',
   // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Pattern is not used
   pattern = 'validate',
@@ -61,13 +64,10 @@ export const ValidateLoading = ({
   timeout = 2500,
   ...restProps
 }: ValidateLoadingProps) => {
-  const [showMessage, setShowMessage] = useState(
-    timeout === 0 && !!loadingProp,
-  );
-  const styles = loading({ pattern: 'validate', position, showMessage });
+  const [showMessage, setShowMessage] = useState(timeout === 0 && loading);
 
   useEffect(() => {
-    if (!loadingProp) {
+    if (!loading) {
       setShowMessage(false);
       return;
     }
@@ -77,15 +77,28 @@ export const ValidateLoading = ({
     }, timeout);
 
     return () => clearTimeout(timer);
-  }, [loadingProp, timeout]);
+  }, [loading, timeout]);
 
-  if (!showMessage) return renderButton({ loading: loadingProp });
+  if (!showMessage) return renderButton({ loading, className: styles.loading });
 
   return (
-    <styled.div {...restProps} className={cx(styles.root, className)}>
-      {renderButton({ loading: loadingProp })}
+    <div
+      className={classNames(styles.root, className, {
+        [styles.loading]: loading,
+        [styles[position]]: !!position,
+      })}
+      {...restProps}
+    >
+      {renderButton({ loading })}
       {children}
-      <div className={styles.message}>{message}</div>
-    </styled.div>
+      <IressText
+        className={classNames(styles.message, loadingStyles['fade-next'], {
+          [loadingStyles['fade-next-width']]: position === 'right',
+        })}
+        mode="muted"
+      >
+        {message}
+      </IressText>
+    </div>
   );
 };

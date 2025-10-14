@@ -9,6 +9,7 @@ const DEFAULT_PROPS: Parameters<typeof useFilterFlags>[0] = {
   shouldShowInstructions: false,
   shouldShowDebounceWaiting: false,
   shouldShowNoResults: false,
+  displayResults: [],
 };
 
 describe('useFilterFlags', () => {

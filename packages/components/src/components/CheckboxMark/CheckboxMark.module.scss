@@ -1,0 +1,32 @@
+.checkboxMark {
+  display: inline-flex;
+  position: relative;
+  width: var(--iress-size);
+  height: var(--iress-size);
+  border: var(--iress-border-width) solid var(--iress-border-color);
+  border-radius: var(--iress-border-radius);
+  background-color: var(--iress-background-color);
+  transition: all var(--iress-transition-duration) var(--iress-transition-hover-type);
+  box-shadow: var(--iress-mark-box-shadow);
+  color: var(--iress-mark-color);
+}
+
+.indeterminateMark,
+.checkedMark {
+  stroke: currentcolor;
+  fill: transparent;
+  stroke-width: 22;
+  display: none;
+}
+
+.checked:not(.indeterminate) {
+  .checkedMark {
+    display: revert;
+  }
+}
+
+.indeterminate {
+  .indeterminateMark {
+    display: revert;
+  }
+}

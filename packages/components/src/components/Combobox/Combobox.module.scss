@@ -1,0 +1,28 @@
+@use '../Input/Input.vars.module';
+
+.combobox {
+  --iress-label-padding-bottom: var(--iress-input-label-padding-bottom, 0);
+  --iress-transition-duration: var(--iress-g-animation-duration, var(--iress-default-animation-duration));
+  --iress-transition-type: var(--iress-g-animation-type, var(--iress-default-animation-type));
+  --iress-transition: all var(--iress-transition-duration) var(--iress-transition-type);
+  --iress-text-color: var(--iress-input-text-color, var(--iress-g-text-color));
+
+  display: block;
+
+  .ids-menuItem {
+    --iress-menu-item-min-height: auto;
+  }
+}
+
+.popoverContent {
+  --iress-popover-menu-max-height: var(--iress-combobox-popover-max-height, calc(15.25 * var(--iress-g-rem)));
+  --iress-max-height: var(--iress-popover-menu-max-height);
+
+  overflow-y: auto;
+}
+
+.optionList {
+  &:empty {
+    display: none;
+  }
+}

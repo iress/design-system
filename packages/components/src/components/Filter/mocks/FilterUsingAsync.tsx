@@ -1,4 +1,4 @@
-import { IressFilter, type IressFilterProps } from '@/main';
+import { IressFilter, IressFilterProps } from '@/main';
 
 interface StarWarsCharacter {
   name: string;
@@ -9,9 +9,7 @@ interface StarWarsCharacterApi {
   results: StarWarsCharacter[];
 }
 
-export const FilterUsingAsync = <TMultiple extends boolean = false>(
-  args: IressFilterProps<TMultiple>,
-) => (
+export const FilterUsingAsync = (args: IressFilterProps) => (
   <IressFilter
     {...args}
     options={async (query: string) => {

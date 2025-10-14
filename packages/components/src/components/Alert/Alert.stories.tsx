@@ -1,37 +1,35 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
 import {
   IressAlert,
-  type IressAlertProps,
-  IressStack,
+  IressAlertProps,
+  IressButton,
   IressText,
-  type SystemValidationStatuses,
+  SystemValidationStatus,
 } from '@/main';
 
 type CustomArgs = Partial<IressAlertProps> & {
-  messages: Record<SystemValidationStatuses, string>;
+  messages: Record<SystemValidationStatus, string>;
 };
 type Story = StoryObj<CustomArgs>;
 
 export default {
   title: 'Components/Alert',
   component: IressAlert,
-  tags: ['updated'],
 } as Meta<typeof IressAlert>;
-
-const statuses = ['danger', 'info', 'success', 'warning'] as const;
 
 export const Default: Story = {
   args: {
     children: 'This is a simple info alert',
-    status: 'info',
+    status: IressAlert.Status.Info,
     heading: '',
     footer: '',
   },
 };
 
+const statuses = Object.values(IressAlert.Status);
 export const Status: Story = {
   args: {
     ...Default.args,
@@ -56,13 +54,13 @@ export const Status: Story = {
     },
   },
   render: ({ messages, ...args }) => (
-    <IressStack gap="md">
+    <div className="iress-u-stack iress--gutter--md">
       {statuses.map((status) => (
         <IressAlert {...args} status={status} key={status}>
           {messages[status]}
         </IressAlert>
       ))}
-    </IressStack>
+    </div>
   ),
 };
 
@@ -77,45 +75,6 @@ export const Footer: Story = {
   args: {
     heading: 'Alert heading',
     children: <IressText>Here is the warning</IressText>,
-    actions: [
-      {
-        children: 'Action',
-        onClick: () => 'Take me somewhere please',
-      },
-    ],
-  },
-};
-
-export const Icon: Story = {
-  args: {
-    heading: 'Some information',
-    icon: false,
-    children: 'This is an alert without an icon',
-  },
-};
-
-export const Variant: Story = {
-  args: {
-    heading: 'Did you know?',
-    children: 'You can use the alert component in different ways.',
-    icon: false,
-    variant: 'sidebar',
-  },
-  render: (args) => (
-    <IressStack gap="md">
-      <IressAlert {...args} variant="sidebar" />
-      <IressAlert {...args} variant="site-wide" />
-    </IressStack>
-  ),
-};
-
-export const Dismissable: Story = {
-  args: {
-    ...Default.args,
-    onDismiss: () => {
-      console.log(
-        'Some logic to dismiss the alert, probably saving its dismissed state in local storage or in a database',
-      );
-    },
+    footer: <IressButton>Close</IressButton>,
   },
 };

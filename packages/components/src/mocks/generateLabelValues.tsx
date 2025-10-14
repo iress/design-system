@@ -1,5 +1,5 @@
 import { IressText } from '@/main';
-import { type LabelValue, type LabelValueMeta } from '../interfaces';
+import { LabelValue, LabelValueMeta } from '../interfaces';
 
 export const MOCK_LABEL_VALUES_LENGTH = 5;
 export const MOCK_LABELS = generateLabels();
@@ -40,11 +40,7 @@ export function generateLabelValueMeta(
     if (withMeta) {
       item.meta = [
         'Some',
-        <IressText
-          key={`${number}-active`}
-          color="colour.system.success.text"
-          textStyle="typography.body.sm"
-        >
+        <IressText key={`${number}-active`} mode={IressText.Mode.Success}>
           Active
         </IressText>,
       ];

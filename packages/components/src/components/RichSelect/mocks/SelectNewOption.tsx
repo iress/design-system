@@ -1,9 +1,9 @@
 import {
-  type FormattedLabelValueMeta,
-  type InputRef,
+  FormattedLabelValueMeta,
+  InputRef,
   IressMenuDivider,
   IressRichSelect,
-  type IressRichSelectProps,
+  IressRichSelectProps,
   IressSelectBody,
   IressSelectCreate,
   IressSelectHeading,
@@ -27,7 +27,7 @@ const OPTIONS = [
   { label: 'Option 5', value: 'option-5' },
 ];
 
-const WithNewOption: IressRichSelectProps<true>['renderOptions'] = ({
+const WithNewOption: IressRichSelectProps['renderOptions'] = ({
   loading,
   debouncedQuery,
   query,
@@ -110,7 +110,7 @@ const WithNewOption: IressRichSelectProps<true>['renderOptions'] = ({
             selected={value}
           />
         )}
-        {hasResultsAndSelected && <IressMenuDivider my="xs" />}
+        {hasResultsAndSelected && <IressMenuDivider gutter="xs" />}
         {hasResults && (
           <IressSelectMenu
             heading="Search results"
@@ -122,7 +122,7 @@ const WithNewOption: IressRichSelectProps<true>['renderOptions'] = ({
             hideSelectedItems
           />
         )}
-        {hasFrequentlyAndOther && <IressMenuDivider my="xs" />}
+        {hasFrequentlyAndOther && <IressMenuDivider gutter="xs" />}
         {showFrequentlySelected && (
           <IressSelectMenu
             heading="Frequently selected"

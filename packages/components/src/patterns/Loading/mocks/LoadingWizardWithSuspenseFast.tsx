@@ -23,7 +23,7 @@ interface ChartProps {
 const API = {
   getHomePage: async () => {
     await new Promise((resolve) => {
-      setTimeout(resolve, 300);
+      setTimeout(resolve, 500);
     });
 
     return 1;
@@ -92,7 +92,7 @@ const Chart = () => {
         <IressForm<ChartProps>
           onSubmit={(projectionData) => setMoney(projectionData.money)}
         >
-          <IressStack gap="md">
+          <IressStack gutter="md">
             <h3>Update projection</h3>
             <IressFormField
               name="money"

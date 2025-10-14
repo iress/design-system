@@ -3,6 +3,7 @@ import {
   IressInline,
   IressSlideout,
   IressSlideoutProvider,
+  SLIDEOUT_SIZES,
   useSlideout,
 } from '@/main';
 
@@ -10,15 +11,15 @@ const Slideouts = () => {
   const { showSlideout } = useSlideout();
 
   return (
-    <IressInline gap="spacing.400">
-      <IressButton onClick={() => showSlideout('sm')}>sm</IressButton>
-      <IressSlideout id="sm" size="sm">
-        Small slideout
-      </IressSlideout>
-      <IressButton onClick={() => showSlideout('md')}>md</IressButton>
-      <IressSlideout id="md" size="md">
-        Medium slideout
-      </IressSlideout>
+    <IressInline gutter="md">
+      {SLIDEOUT_SIZES.map((size) => (
+        <>
+          <IressButton onClick={() => showSlideout(size)}>{size}</IressButton>
+          <IressSlideout id={size} size={size}>
+            {size} slideout
+          </IressSlideout>
+        </>
+      ))}
     </IressInline>
   );
 };

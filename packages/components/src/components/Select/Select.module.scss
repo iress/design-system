@@ -1,0 +1,80 @@
+@use '../../styles/vars';
+
+.select {
+  --iress-font-family: var(--iress-select-font-family, var(--iress-a-form-font-family, var(--iress-g-font-family)));
+  --iress-font-size: var(--iress-select-font-size, var(--iress-g-font-size-rem, var(--iress-default-font-size--touch)));
+  --iress-font-weight: var(--iress-select-font-weight, var(--iress-g-font-weight, normal));
+  --iress-border-width: var(--iress-select-border-width, var(--iress-a-form-border-width, var(--iress-g-border-width, var(--iress-default-border-width))));
+  --iress-border-color: var(--iress-select-border-color, var(--iress-g-form-border-color, var(--iress-default-form-border-color)));
+  --iress-background-color: var(--iress-select-background-color, var(--iress-a-form-background-color, var(--iress-g-background-color, var(--iress-default-background-color))));
+  --iress-border-radius: var(--iress-select-border-radius, var(--iress-a-form-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius))));
+  --iress-text-color: var(--iress-select-text-color, var(--iress-g-text-color));
+  --iress-height: var(--iress-input-min-height, var(--iress-default-min-height));
+  --iress-padding-inline-start: var(--iress-select-padding-x, var(--iress-g-spacing-sm));
+  --iress-padding-inline-end: calc((2 * var(--iress-padding-inline-start)) + calc(0.75 * var(--iress-g-spacing-rem)));
+  --iress-inset-block-end: calc(((var(--iress-height) - calc(0.25 * var(--iress-g-spacing-rem))) / 2));
+  --iress-inset-inline-end: calc(var(--iress-padding-inline-start) + calc(0.25 * var(--iress-g-spacing-rem)));
+  --iress-margin-block-end: var(--iress-select-margin-bottom, var(--iress-g-spacing-sm));
+  --iress-option-text-color: var(--iress-select-option-text-color, var(--iress-select-text-color, var(--iress-g-text-color)));
+  --iress-chevron-color: var(--iress-select-chevron-color, var(--iress-border-color));
+
+  --iress-focus-text-color: var(--iress-select-focus-text-color);
+  --iress-focus-background-color: var(--iress-select-focus-background-color, var(--iress-background-color));
+  --iress-focus-border-color: var(--iress-select-focus-border-color, var(--iress-focus-color));
+  --iress-focus-box-shadow: 0 0 0 var(--iress-g-focus-width, var(--iress-default-focus-size)) var(--iress-focus-color);
+
+  display: block;
+  position: relative;
+  line-height: 1;
+}
+
+.wrapper {
+  position: relative;
+
+  &::after {
+    width: calc(0.5 * var(--iress-g-spacing-rem));
+    height: calc(0.5 * var(--iress-g-spacing-rem));
+    inset-block-end: var(--iress-inset-block-end);
+    inset-inline-end: var(--iress-inset-inline-end);
+    content: '';
+    position: absolute;
+    border: 1px solid var(--iress-chevron-color);
+    border-block-start: none;
+    border-inline-end: none;
+    transform: rotate(calc(var(--iress-dir-is-ltr, 1) * -45deg));
+    pointer-events: none;
+  }
+}
+
+.element {
+  font-family: var(--iress-font-family);
+  font-size: var(--iress-font-size);
+  font-weight: var(--iress-font-weight);
+  display: block;
+  width: 100%;
+  height: var(--iress-height);
+  padding-inline: var(--iress-padding-inline-start) var(--iress-padding-inline-end);
+  padding-block: 0;
+  border: var(--iress-border-width) solid var(--iress-border-color);
+  border-radius: var(--iress-border-radius);
+  background-color: var(--iress-background-color);
+  color: var(--iress-text-color);
+  appearance: none;
+
+  option,
+  optgroup {
+    color: var(--iress-option-text-color);
+  }
+}
+
+.element:focus {
+  border-color: var(--iress-focus-border-color);
+  box-shadow: var(--iress-focus-box-shadow);
+  background-color: var(--iress-focus-background-color);
+  color: var(--iress-focus-text-color);
+  outline: none;
+}
+
+.label {
+  --iress-label-margin-bottom: var(--iress-margin-block-end);
+}

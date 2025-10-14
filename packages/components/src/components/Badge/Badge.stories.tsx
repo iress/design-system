@@ -1,25 +1,22 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { disableArgTypes } from '@iress-storybook/helpers';
-import { SYSTEM_VALIDATION_STATUSES } from '@/constants';
-import { IressBadge, IressButton, IressInline, IressTab } from '@/main';
+import { IressBadge } from './Badge';
+import { IressInline } from '../Inline';
+import { BADGE_MODES } from './Badge.types';
+import { IressButton } from '../Button';
+import { IressTab } from '../TabSet';
 
 type Story = StoryObj<typeof IressBadge>;
-const BADGE_MODES = [
-  'primary',
-  ...SYSTEM_VALIDATION_STATUSES,
-  'neutral',
-] as const;
 
 export default {
   title: 'Components/Badge',
   component: IressBadge,
-  tags: ['updated'],
 } as Meta<typeof IressBadge>;
 
 export const Default: Story = {
   args: {
     children: 'badge',
-    mode: 'neutral',
+    mode: 'background-default',
   },
 };
 
@@ -29,7 +26,7 @@ export const Mode: Story = {
     ...disableArgTypes(['mode']),
   },
   render: (args) => (
-    <IressInline gap="sm">
+    <IressInline gutter="sm">
       {BADGE_MODES.map((mode) => (
         <IressBadge {...args} key={mode} mode={mode}>
           {mode}
@@ -43,10 +40,20 @@ export const Pill: Story = {
   ...Default,
   args: {
     ...Default.args,
-    children: '99+',
-    mode: 'primary',
     pill: true,
   },
+  argTypes: {
+    ...disableArgTypes(['mode']),
+  },
+  render: (args) => (
+    <IressInline gutter="sm">
+      {BADGE_MODES.map((mode) => (
+        <IressBadge {...args} key={mode} mode={mode}>
+          {mode}
+        </IressBadge>
+      ))}
+    </IressInline>
+  ),
 };
 
 export const Host: Story = {
@@ -60,10 +67,11 @@ export const Host: Story = {
     ...disableArgTypes(['host']),
   },
   render: (args) => (
-    <IressInline gap="lg">
+    <IressInline gutter="lg">
       <IressBadge {...args} host={<IressButton>Host button</IressButton>}>
         3
       </IressBadge>
+
       <IressBadge {...args} host={<IressTab label="Host tab" active />}>
         99+
       </IressBadge>

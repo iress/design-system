@@ -1,0 +1,89 @@
+.icon {
+  color: var(--iress-text-color, initial);
+}
+
+.flip-horizontal {
+  transform: scaleX(-1);
+}
+
+.flip-vertical {
+  transform: scaleY(-1);
+}
+
+.flip-both {
+  transform: scale(-1);
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.rotate-270 {
+  transform: rotate(270deg);
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
+.spin-half {
+  animation: iress-icon-rotation 0.5s infinite linear;
+}
+
+.spin-1 {
+  animation: iress-icon-rotation 1s infinite linear;
+}
+
+.spin-2 {
+  animation: iress-icon-rotation 2s infinite linear;
+}
+
+.spin-3 {
+  animation: iress-icon-rotation 3s infinite linear;
+}
+
+@keyframes iress-icon-rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.mode-body {
+  --iress-text-color: var(--iress-icon-body-text-color, var(--iress-g-text-color));
+}
+
+.mode-muted {
+  --iress-text-color: var(--iress-icon-muted-text-color, var(--iress-g-muted-text-color, var(--iress-default-text-color--light)));
+}
+
+.mode-primary {
+  --iress-text-color: var(--iress-icon-primary-text-color, var(--iress-g-primary-color, var(--iress-default-primary-color)));
+}
+
+.mode-info {
+  --iress-text-color: var(--iress-icon-info-text-color, var(--iress-a-info-text-color, var(--iress-g-info-color, var(--iress-default-info-color))));
+}
+
+.mode-success {
+  --iress-text-color: var(--iress-icon-success-text-color, var(--iress-a-success-text-color, var(--iress-g-success-color, var(--iress-default-success-color))));
+}
+
+.mode-warning {
+  --iress-text-color: var(--iress-icon-warning-text-color, var(--iress-a-warning-text-color, var(--iress-g-warning-color, var(--iress-default-warning-color))));
+}
+
+.mode-danger {
+  --iress-text-color: var(--iress-icon-danger-text-color, var(--iress-a-danger-text-color, var(--iress-g-danger-color, var(--iress-default-danger-color))));
+}
+
+.mode-positive {
+  --iress-text-color: var(--iress-icon-positive-text-color, var(--iress-a-positive-text-color, var(--iress-g-positive-color, var(--iress-default-positive-color))));
+}
+
+.mode-negative {
+  --iress-text-color: var(--iress-icon-negative-text-color, var(--iress-a-negative-text-color, var(--iress-g-negative-color, var(--iress-default-negative-color))));
+}

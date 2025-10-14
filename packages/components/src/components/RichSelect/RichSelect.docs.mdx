@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -106,6 +106,18 @@ If you are using asynchronous options, you can provide an initial set of options
 
 <ComponentExample story={ComponentStories.InitialOptions} />
 
+### Long text content in select options
+
+When working with options that contain long text content, you can control how the dropdown width behaves using the `matchActivatorWidth` prop.
+
+By default (`matchActivatorWidth={true}`), the dropdown width matches the width of the select input, which constrains long text content and may cause truncation. This is ideal for consistent layouts where you want the dropdown to align with the input size.
+
+Setting `matchActivatorWidth={false}` allows the dropdown to expand to accommodate the content width, which is useful when displaying long option labels or when content readability is more important than layout consistency.
+
+This example demonstrates both single-select and multi-select behavior with long text content, allowing you to toggle between the two width behaviors to see the difference.
+
+<ComponentExample story={ComponentStories.LongTextOptions} />
+
 ### Sizing
 
 Rich selects can be resized to suit a specific number of characters. This sets an expectation of what data is to be presented; for example using the `16` width for a credit card number.
@@ -146,25 +158,19 @@ Use the `header` `footer` prop to add a header/footer to the select panel. They 
 
 <ComponentExample story={ComponentStories.HeaderFooter} />
 
+### Reactive footer
+
+You can also make the footer reactive to the search results by using the `renderOptionsFooter` prop. It expects a function that returns a ReactNode.
+
+<ComponentExample story={ComponentStories.OptionsFooter} />
+
 ### Readonly
 
-The `readOnly` prop can be set to `true` to prevent the user from changing the value of the select. This will change the select to a custom read-only style, and will display multiple values seperated with a comma.
+The `readonly` prop can be set to `true` to prevent the user from changing the value of the select. This will change the select to a custom read-only style, and will display multiple values seperated with a comma.
 
 If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](?path=/docs/components-readonly--docs).
 
 <ComponentExample story={ComponentStories.Readonly} />
-
-### Long text content in select options
-
-When working with options that contain long text content, you can control how the dropdown width behaves using the `matchActivatorWidth` prop.
-
-By default (`matchActivatorWidth={true}`), the dropdown width matches the width of the select input, which constrains long text content and may cause truncation. This is ideal for consistent layouts where you want the dropdown to align with the input size.
-
-Setting `matchActivatorWidth={false}` allows the dropdown to expand to accommodate the content width, which is useful when displaying long option labels or when content readability is more important than layout consistency.
-
-This example demonstrates both single-select and multi-select behavior with long text content, allowing you to toggle between the two width behaviors to see the difference.
-
-<ComponentExample story={ComponentStories.LongTextOptions} />
 
 ## Sub-components
 
@@ -226,7 +232,7 @@ A button designed to display a text representation of the selected items. It sup
 
 It is used to render the activator of the `IressRichSelect` in single select mode when no `renderLabel` prop is provided.
 
-<IressRow gap="md">
+<IressRow gutter="md">
   <IressCol>
     <ComponentExample story={LabelStories.NoneSelected} />
   </IressCol>
@@ -251,7 +257,7 @@ A menu component designed to transform an array of `LabelValueMeta[]` into a lis
 
 It is used to render the available options of the `IressRichSelect` in single select mode when no `renderOptions` prop is provided.
 
-<IressRow gap="md">
+<IressRow gutter="md">
   <IressCol>
     <ComponentExample story={MenuStories.Results} />
   </IressCol>
@@ -311,7 +317,7 @@ A component designed to display multiple selected items as tags, as well as prov
 
 It is used to render the activator of the `IressRichSelect` if `multiSelect` has been set and no `renderLabel` prop is provided.
 
-<IressRow gap="md">
+<IressRow gutter="md">
   <IressCol>
     <ComponentExample story={TagsStories.NoneSelected} />
   </IressCol>

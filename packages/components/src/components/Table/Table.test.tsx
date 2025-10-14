@@ -1,8 +1,11 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressTable, IressTableProps, table } from '.';
-import userEvent from '@testing-library/user-event';
+import { IressTable, IressTableProps } from '.';
+import styles from './Table.module.scss';
 import { GlobalCSSClass } from '@/enums';
+import userEvent from '@testing-library/user-event';
+import { createRef } from 'react';
+import { TableRef } from './Table.types';
 
 const TEST_ID = 'test-component';
 const TEST_CAPTION = 'caption';
@@ -32,11 +35,7 @@ describe('IressTable', () => {
     });
 
     const component = screen.getByRole('table', { name: TEST_CAPTION });
-    expect(component).toHaveClass(
-      'test-class',
-      table().table,
-      GlobalCSSClass.Table,
-    );
+    expect(component).toHaveClass('test-class', styles.table);
 
     // should have tbody and thead
     expect(screen.getAllByRole('rowgroup')).toHaveLength(2);
@@ -84,17 +83,6 @@ describe('IressTable', () => {
   });
 
   describe('props', () => {
-    describe('alternate', () => {
-      it('renders the table with alternate rows', () => {
-        const screen = renderComponent({
-          alternate: true,
-        });
-
-        const component = screen.getByRole('table', { name: TEST_CAPTION });
-        expect(component).toHaveClass(table({ alternate: true }).table);
-      });
-    });
-
     describe('children', () => {
       it('can display a static table', () => {
         const screen = renderComponent({
@@ -169,8 +157,8 @@ describe('IressTable', () => {
           compact: true,
         });
 
-        const component = screen.getByRole('table', { name: TEST_CAPTION });
-        expect(component).toHaveClass(table({ compact: true }).table);
+        const wrapper = screen.getByTestId(TEST_ID);
+        expect(wrapper).toHaveClass(styles.compact);
       });
     });
 
@@ -194,7 +182,7 @@ describe('IressTable', () => {
         });
 
         const caption = screen.getByText(TEST_CAPTION);
-        expect(caption).toHaveClass(table({ hiddenCaption: true }).caption);
+        expect(caption).toHaveClass(GlobalCSSClass.SROnly);
 
         const component = screen.getByRole('table', { name: TEST_CAPTION });
         expect(component).toBeInTheDocument();
@@ -221,20 +209,7 @@ describe('IressTable', () => {
           hover: true,
         });
 
-        expect(screen.getByRole('table')).toHaveClass(
-          table({ hover: true }).table,
-        );
-      });
-    });
-
-    describe('removeRowBorders', () => {
-      it('renders the table without row borders', () => {
-        const screen = renderComponent({
-          removeRowBorders: true,
-        });
-
-        const component = screen.getByRole('table', { name: TEST_CAPTION });
-        expect(component).toHaveClass(table({ removeRowBorders: true }).table);
+        expect(screen.getByRole('table')).toHaveClass(styles.hover);
       });
     });
   });
@@ -244,6 +219,137 @@ describe('IressTable', () => {
       const screen = renderComponent();
       const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
+    });
+  });
+
+  describe('useTable hook', () => {
+    it('should expose useTable hook as a static property', () => {
+      expect(IressTable.useTable).toBeDefined();
+      expect(typeof IressTable.useTable).toBe('function');
+    });
+
+    it('should provide table context via useTable hook', () => {
+      let tableContext: ReturnType<typeof IressTable.useTable> | null = null;
+
+      function TableConsumer() {
+        tableContext = IressTable.useTable();
+        return null;
+      }
+
+      renderComponent({
+        children: <TableConsumer />,
+      });
+
+      expect(tableContext).toBeDefined();
+      expect(tableContext!.api).toBeDefined();
+      expect(tableContext!.getColumnByKey).toBeDefined();
+      expect(typeof tableContext!.getColumnByKey).toBe('function');
+    });
+
+    it('should provide access to table API through useTable hook', () => {
+      let tableApi: ReturnType<typeof IressTable.useTable>['api'] | null = null;
+
+      function TableConsumer() {
+        const { api } = IressTable.useTable();
+        tableApi = api;
+        return null;
+      }
+
+      renderComponent({
+        children: <TableConsumer />,
+      });
+
+      expect(tableApi).toBeDefined();
+      expect(tableApi!.getRowModel).toBeDefined();
+      expect(tableApi!.getHeaderGroups).toBeDefined();
+      expect(typeof tableApi!.getRowModel).toBe('function');
+      expect(typeof tableApi!.getHeaderGroups).toBe('function');
+    });
+
+    it('should allow getting column by key through context', () => {
+      let foundColumn: unknown = null;
+
+      function TableConsumer() {
+        const context = IressTable.useTable<{ key: string; value: string }>();
+        foundColumn = context.getColumnByKey('key');
+        return null;
+      }
+
+      renderComponent({
+        columns: [
+          { key: 'key', label: 'Key Column' },
+          { key: 'value', label: 'Value Column' },
+        ],
+        children: <TableConsumer />,
+      });
+
+      expect(foundColumn).toBeDefined();
+      expect(foundColumn).toMatchObject({ label: 'Key Column' });
+    });
+
+    it('should return undefined for nonexistent column keys', () => {
+      let foundColumn: unknown = null;
+
+      function TableConsumer() {
+        const context = IressTable.useTable();
+        foundColumn = context.getColumnByKey('nonexistent');
+        return null;
+      }
+
+      renderComponent({
+        children: <TableConsumer />,
+      });
+
+      expect(foundColumn).toBeUndefined();
+    });
+  });
+
+  describe('ref forwarding', () => {
+    it('should forward ref to expose table API', () => {
+      const tableRef = createRef<TableRef<{ key: string; value: string }>>();
+
+      const TestComponent = () => (
+        <IressTable
+          ref={tableRef}
+          caption={TEST_CAPTION}
+          rows={TEST_ROWS}
+          data-testid={TEST_ID}
+        />
+      );
+
+      render(<TestComponent />);
+
+      expect(tableRef.current).toBeDefined();
+      expect(tableRef.current?.api).toBeDefined();
+      expect(typeof tableRef.current?.api.getRowModel).toBe('function');
+      expect(typeof tableRef.current?.api.getHeaderGroups).toBe('function');
+    });
+
+    it('should provide same API instance through ref and context', () => {
+      let contextApi: ReturnType<typeof IressTable.useTable>['api'] | null =
+        null;
+      const tableRef = createRef<TableRef<{ key: string; value: string }>>();
+
+      function TableConsumer() {
+        const { api } = IressTable.useTable();
+        contextApi = api;
+        return null;
+      }
+
+      const TestComponent = () => (
+        <IressTable
+          ref={tableRef}
+          caption={TEST_CAPTION}
+          rows={TEST_ROWS}
+          data-testid={TEST_ID}
+        >
+          <TableConsumer />
+        </IressTable>
+      );
+
+      render(<TestComponent />);
+
+      expect(tableRef.current?.api).toBe(contextApi);
     });
   });
 });

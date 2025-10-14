@@ -1,0 +1,25 @@
+@use '../../styles/mixins';
+
+.slider {
+  @include mixins.defaultFontVariables('slider');
+  --iress-background-color: var(--iress-slider-background-color, var(--iress-g-inactive-color, var(--iress-default-inactive-color)));
+  --iress-border-radius: var(--iress-slider-border-radius, var(--iress-track-height));
+  --iress-box-shadow: 0 0 0 var(--iress-g-focus-width, var(--iress-default-focus-size)) var(--iress-focus-color);
+  --iress-font-size: var(--iress-slider-font-size, var(--iress-g-font-size-xxxs, var(--iress-default-font-size-xxxs)));
+  --iress-text-color: var(--iress-slider-text-color);
+  --iress-thumb-background-color: var(--iress-slider-thumb-background-color, var(--iress-a-active-background-color, var(--iress-g-primary-color, var(--iress-default-primary-color))));
+  --iress-thumb-border-color: var(--iress-slider-thumb-border-color, var(--iress-a-active-border-color, var(--iress-g-primary-color, var(--iress-default-primary-color))));
+  --iress-thumb-border-radius: var(--iress-slider-thumb-border-radius, calc(var(--iress-thumb-height) / 2));
+  --iress-thumb-border-width: var(--iress-slider-thumb-border-width, var(--iress-g-border-width, var(--iress-default-border-width)));
+  --iress-thumb-height: var(--iress-slider-thumb-height, 1.75rem);
+  --iress-thumb-width: var(--iress-slider-thumb-width, 1.75rem);
+  --iress-thumb-offset: var(--iress-slider-thumb-offset, calc((var(--iress-track-height) / 2) - (var(--iress-thumb-height) / 2)));
+  --iress-tick-padding: var(--iress-slider-tick-padding, calc(var(--iress-thumb-width) / 2));
+  --iress-track-height: var(--iress-slider-track-height, 0.75rem);
+
+  --iress-tick-color: var(--iress-slider-tick-color, var(--iress-g-inactive-contrast-color, var(--iress-default-inactive-contrast-color)));
+  --iress-tick-height: var(--iress-slider-tick-height, 4px);
+  --iress-tick-position-x: var(--iress-slider-tick-position-x, 50%);
+  --iress-tick-position-y: var(--iress-slider-tick-position-y, calc(-1.25rem - var(--iress-tick-height, 4px) / 2));
+  --iress-tick-width: var(--iress-slider-tick-width, 4px);
+}

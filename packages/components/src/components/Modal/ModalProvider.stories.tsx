@@ -1,8 +1,8 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import {
-  type IressModalProps,
+  IressModalProps,
   IressModalProvider,
-  type IressModalProviderProps,
+  IressModalProviderProps,
 } from '.';
 import { App as AppWithModalProvider } from './mocks/AppWithModalProvider';
 import AppWithModalProviderSource from './mocks/AppWithModalProvider.tsx?raw';
@@ -32,7 +32,6 @@ export default {
       disable: true,
     },
   },
-  tags: ['updated'],
 } as Meta<typeof IressModalProvider>;
 
 export const Provider: Story = {

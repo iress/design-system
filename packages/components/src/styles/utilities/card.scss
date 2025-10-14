@@ -1,0 +1,310 @@
+@use '../mixins';
+@use '../vars';
+
+/**
+*---------------------------------------------------
+* Button variables
+*---------------------------------------------------
+**/
+
+.iress-u-card {
+  @include mixins.defaultFontVariables('card');
+  --iress-padding-unit-none: 0;
+  @each $size in vars.$cardPaddingSizes {
+    @if $size != none {
+      --iress-padding-unit-#{$size}: var(--iress-card-#{$size}-padding, var(--iress-g-spacing-#{$size}));
+    }
+  }
+  --iress-padding-unit-half: calc(var(--iress-padding-unit) / 2);
+  --iress-padding-unit: var(--iress-padding-unit-md);
+
+  --iress-background-color: var(--iress-card-background-color, var(--iress-a-layout-background-color, var(--iress-g-background-color, var(--iress-default-background-color))));
+  --iress-border-radius: var(--iress-card-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius)));
+  --iress-border-color: var(--iress-card-border-color, transparent);
+  --iress-border-width: var(--iress-card-border-width, var(--iress-g-border-width, var(--iress-default-border-width)));
+  --iress-border: var(--iress-border-width) solid var(--iress-border-color);
+  --iress-box-shadow-color: var(--iress-card-box-shadow-color, var(--iress-g-box-shadow-color, var(--iress-default-box-shadow-color)));
+  --iress-box-shadow: var(--iress-card-box-shadow-size, 0 0) var(--iress-box-shadow-color);
+  --iress-text-color: var(--iress-card-text-color);
+  --iress-text-align: start;
+  --iress-line-height: var(--iress-card-line-height, var(--iress-g-line-height, 1.5));
+
+  --iress-clickable-background-color: var(
+    --iress-card-clickable-background-color,
+    var(--iress-card-background-color, var(--iress-a-layout-background-color, var(--iress-g-background-color, var(--iress-default-background-color))))
+  );
+  --iress-clickable-text-color: var(--iress-card-clickable-text-color, var(--iress-text-color));
+  --iress-clickable-box-shadow: var(--iress-card-clickable-box-shadow-size, var(--iress-card-box-shadow-size, 0 0)) var(--iress-box-shadow-color);
+  --iress-clickable-hover-box-shadow: var(--iress-card-clickable-hover-box-shadow-size, 0 0) var(--iress-box-shadow-color);
+  --iress-clickable-hover-background-color: var(
+    --iress-card-clickable-hover-background-color,
+    var(--iress-card-background-color, var(--iress-a-layout-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color))))
+  );
+  --iress-clickable-hover-text-color: var(--iress-card-clickable-hover-text-color, var(--iress-a-layout-hover-text-color, var(--iress-g-hover-text-color, var(--iress-default-text-color--hover))));
+  --iress-clickable-border-color: var(--iress-card-clickable-border-color, var(--iress-border-color));
+
+  --iress-transition-duration: var(--iress-card-transition-hover-duration, var(--iress-g-transition-hover-duration, 0.2s));
+  --iress-transition-type: var(--iress-card-transition-hover-type, var(--iress-g-transition-hover-type, ease-in-out));
+  --iress-transition: all var(--iress-transition-duration) var(--iress-transition-type);
+
+  --iress-focus-width: var(--iress-g-focus-width, var(--iress-default-focus-size));
+  --iress-focus-indicator: 0 0 0 var(--iress-focus-width) var(--iress-focus-color);
+
+  --iress-top-right-button-border-radius: var(--iress-border-radius);
+  --iress-top-right-padding: var(--iress-padding-unit) var(--iress-padding-unit) var(--iress-padding-unit-half) var(--iress-padding-unit-half);
+  --iress-top-right-border-color: var(--iress-card-top-right-border-color, transparent);
+  --iress-top-right-hover-border-color: var(--iress-card-top-right-hover-border-color, transparent);
+
+  --iress-heading-padding: var(--iress-padding-unit);
+  --iress-heading-font-weight: var(--iress-card-heading-font-weight, var(--iress-g-heading-font-weight, normal));
+  --iress-heading-font-size: var(--iress-card-heading-font-size, calc(1.125 * var(--iress-g-font-size-rem)));
+  --iress-heading-font-family: var(--iress-card-heading-font-family, var(--iress-a-heading-font-family, var(--iress-g-font-family, inherit)));
+  --iress-heading-text-color: var(--iress-card-heading-text-color, var(--iress-a-heading-text-color, var(--iress-g-primary-color, var(--iress-default-primary-color))));
+  --iress-heading-margin-block: 0;
+
+  --iress-heading-link-color: var(--iress-card-heading-link-color, var(--iress-g-link-text-color, var(--iress-default-link-color)));
+  --iress-heading-link-decoration: var(--iress-card-heading-link-decoration, var(--iress-g-link-text-decoration, underline));
+  --iress-heading-link-hover-color: var(--iress-card-heading-link-hover-color, var(--iress-a-link-hover-text-color, var(--iress-heading-link-color)));
+  --iress-heading-link-hover-decoration: var(--iress-card-heading-link-hover-decoration, var(--iress-text-link-hover-text-decoration, none));
+
+  --iress-body-padding: var(--iress-padding-unit);
+
+  --iress-footer-padding: var(--iress-padding-unit);
+  --iress-footer-border-width: var(--iress-card-footer-border-width, 1px);
+  --iress-footer-border-color: var(--iress-card-footer-border-color, var(--iress-g-border-color, var(--iress-default-border-color)));
+  --iress-footer-border: var(--iress-footer-border-width) solid var(--iress-footer-border-color);
+
+  --iress-supplemental-padding: 0;
+
+  --iress-prepend-icon-color: var(--iress-card-prepend-icon-color);
+  --iress-prepend-icon-font-size-default: var(--iress-card-prepend-icon-default-font-size);
+
+  @each $size in vars.$cardPaddingSizes {
+    &.iress--padding--#{$size} {
+      --iress-padding-unit: var(--iress-padding-unit-#{$size});
+    }
+  }
+
+  &.iress--clickable,
+  .iress--clickable > & {
+    --iress-box-shadow: var(--iress-clickable-box-shadow);
+    --iress-background-color: var(--iress-clickable-background-color);
+    --iress-color: var(--iress-clickable-color);
+    --iress-focus-width: calc(var(--iress-g-focus-width, var(--iress-default-focus-size)) + var(--iress-border-width));
+
+    &:hover,
+    &.iress--active,
+    .pseudo-hover-all &,
+    &.pseudo-hover-all {
+      --iress-box-shadow: var(--iress-clickable-hover-box-shadow);
+      --iress-background-color: var(--iress-clickable-hover-background-color);
+      --iress-color: var(--iress-clickable-hover-text-color);
+    }
+
+    &:focus,
+    .pseudo-focus.pseudo-focus-visible &,
+    &.pseudo-focus.pseudo-focus-visible {
+      box-shadow: var(--iress-focus-indicator);
+      outline: none;
+    }
+  }
+
+  &.iress--selected {
+    --iress-border-color: var(--iress-card-selected-border-color, var(--iress-a-active-border-color, var(--iress-g-primary-color, var(--iress-default-form-border-color))));
+    --iress-border: var(--iress-border-width) solid var(--iress-border-color);
+  }
+}
+
+/**
+*---------------------------------------------------
+* Card styling
+*---------------------------------------------------
+**/
+
+/* stylelint-disable-next-line no-duplicate-selectors -- This splits it up so its easier to see the difference between variables and styles */
+.iress-u-card {
+  @include mixins.defaultFontStyles();
+
+  border-radius: var(--iress-border-radius);
+  border: var(--iress-border);
+  position: relative;
+  line-height: var(--iress-line-height);
+  min-height: var(--iress-min-height);
+  background-color: var(--iress-background-color);
+  color: var(--iress-text-color);
+  transition: var(--iress-transition);
+  box-shadow: var(--iress-box-shadow);
+  text-align: var(--iress-text-align);
+  padding: var(--iress-padding-unit);
+  width: fit-content;
+
+  > :last-child,
+  [class*='iress-u-card__'] > :last-child {
+    margin-block-end: 0;
+  }
+
+  /* stylelint-disable-next-line no-duplicate-selectors -- This splits it up so its easier to see the difference between variables and styles */
+  &.iress--clickable,
+  .iress--clickable > & {
+    cursor: pointer;
+  }
+
+  /* stylelint-disable-next-line no-duplicate-selectors -- This splits it up so its easier to see the difference between variables and styles */
+  &.iress--selected {
+    border-width: 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-color: var(--iress-border-color);
+      border-style: solid;
+      border-width: calc(var(--iress-border-width) + 2px);
+      border-radius: var(--iress-border-radius);
+      pointer-events: none;
+    }
+  }
+}
+
+.iress-u-card.iress--stretch {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+
+a.iress-u-card {
+  text-decoration: none;
+  display: block;
+}
+
+/**
+*---------------------------------------------------
+* Card layout
+*---------------------------------------------------
+**/
+
+.iress-u-card:has(.iress-u-card__prepend, .iress-u-card__top-right, .iress-u-card__body, .iress-u-card__footer) {
+  display: grid;
+  grid-auto-columns: minmax(0, min-content) auto min-content;
+  grid-auto-rows: auto min-content;
+  grid-template-areas:
+    'prepend body topRight'
+    'footer footer footer';
+  padding: 0;
+
+  &:has(.iress-u-card__heading) {
+    grid-auto-columns: minmax(0, min-content) auto min-content;
+    grid-auto-rows: min-content auto min-content;
+    grid-template-areas:
+      'prepend heading topRight'
+      'prepend body body'
+      'footer footer footer';
+  }
+
+  &:has(.iress-u-card__media) {
+    grid-auto-columns: minmax(0, min-content) auto;
+    grid-auto-rows: min-content auto min-content;
+    grid-template-areas:
+      'prepend media'
+      'prepend body'
+      'footer footer';
+    position: relative;
+
+    .iress-u-card__top-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  &:has(.iress-u-card__heading):has(.iress-u-card__media) {
+    grid-auto-columns: minmax(0, min-content) auto;
+    grid-auto-rows: min-content min-content auto min-content;
+    grid-template-areas:
+      'prepend media'
+      'prepend heading'
+      'prepend body'
+      'footer footer';
+  }
+}
+
+.iress-u-card__prepend {
+  grid-area: prepend;
+  padding: var(--iress-padding-unit);
+}
+
+.iress-u-card__heading {
+  grid-area: heading;
+  padding: var(--iress-heading-padding);
+
+  .iress-u-card:has(.iress-u-card__prepend) & {
+    padding-inline-start: 0;
+  }
+
+  .iress-u-card:has(.iress-u-card__body) & {
+    padding-block-end: var(--iress-padding-unit-half);
+  }
+
+  &,
+  h2:not(.iress-u-text),
+  h3:not(.iress-u-text),
+  h4:not(.iress-u-text),
+  h5:not(.iress-u-text),
+  h6:not(.iress-u-text) {
+    font-weight: var(--iress-heading-font-weight);
+    font-size: var(--iress-heading-font-size);
+    font-family: var(--iress-heading-font-family);
+    color: var(--iress-heading-text-color);
+    margin-block: var(--iress-heading-margin-block);
+
+    a {
+      color: var(--iress-heading-link-color);
+      text-decoration: var(--iress-heading-link-decoration);
+
+      &:hover {
+        color: var(--iress-heading-link-hover-color);
+        text-decoration: var(--iress-heading-link-hover-decoration);
+      }
+    }
+  }
+}
+
+.iress-u-card__top-right {
+  grid-area: topRight;
+}
+
+.iress-u-card__media {
+  grid-area: media;
+  padding: var(--iress-supplemental-padding);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    border-radius: var(--iress-border-radius) var(--iress-border-radius) 0 0;
+  }
+
+  .iress-u-card:has(.iress-u-card__prepend) & img {
+    border-top-left-radius: 0;
+  }
+}
+
+.iress-u-card__body {
+  grid-area: body;
+  padding: var(--iress-body-padding);
+
+  .iress-u-card:has(.iress-u-card__prepend) & {
+    padding-inline-start: 0;
+  }
+
+  .iress-u-card:has(.iress-u-card__heading) & {
+    padding-block-start: 0;
+  }
+}
+
+.iress-u-card__footer {
+  grid-area: footer;
+  padding: var(--iress-footer-padding);
+  border-block-start: var(--iress-footer-border);
+}

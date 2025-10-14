@@ -1,34 +1,17 @@
-import { cx, css } from '@/styled-system/css';
-import { divider } from './Divider.styles';
-import { type IressStyledProps } from '@/types';
-import { splitCssProps } from '@/styled-system/jsx';
-import { GlobalCSSClass } from '@/enums';
-
-export interface IressDividerProps extends IressStyledProps<'hr'> {
-  /**
-   * Change to a vertical divider.
-   */
-  vertical?: boolean;
-}
+import classNames from 'classnames';
+import { type IressDividerProps, DividerCssClass } from './Divider.types';
 
 export const IressDivider = ({
   className,
+  gutter,
   vertical,
   ...restProps
-}: IressDividerProps) => {
-  const [styleProps, nonStyleProps] = splitCssProps(restProps);
-
-  return (
-    <hr
-      className={cx(
-        className,
-        css({
-          ...divider.raw({ vertical: !!vertical }),
-          ...styleProps,
-        }),
-        GlobalCSSClass.Divider,
-      )}
-      {...nonStyleProps}
-    />
-  );
-};
+}: IressDividerProps) => (
+  <hr
+    className={classNames(className, DividerCssClass.Base, {
+      [`${DividerCssClass.Gutter}--${gutter}`]: gutter,
+      [DividerCssClass.Vertical]: vertical,
+    })}
+    {...restProps}
+  />
+);

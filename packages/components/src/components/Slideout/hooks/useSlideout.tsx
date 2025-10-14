@@ -1,28 +1,18 @@
-import { type FloatingUIContainer } from '@/types';
-import { createContext, useContext, useMemo } from 'react';
-
-export interface SlideoutContextValue {
-  container?: FloatingUIContainer;
-  opened: string[];
-  showSlideout: (id: string, flag?: boolean) => void;
-}
-
-export const SlideoutContext = createContext<SlideoutContextValue | undefined>(
-  undefined,
-);
+import { useContext, useMemo } from 'react';
+import { IressSlideoutContext } from '../SlideoutProvider';
 
 export const useSlideout = () => {
-  const context = useContext(SlideoutContext);
-
-  if (!context) {
-    throw new Error(
-      'IressSlideout: showSlideout must be used within a IressSlideoutProvider',
-    );
-  }
+  const context = useContext(IressSlideoutContext);
 
   return useMemo(
     () => ({
       showSlideout: (id: string, flag = true) => {
+        if (context === undefined) {
+          throw new Error(
+            'IressSlideout: showSlideout must be used within a IressSlideoutProvider',
+          );
+        }
+
         context.showSlideout(id, flag);
       },
     }),

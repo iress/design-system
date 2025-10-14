@@ -1,0 +1,319 @@
+import { Meta } from '@storybook/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+  ComponentStatus,
+} from '@iress-storybook/components';
+import * as ComponentStories from './Combobox.stories';
+import * as MultiComboboxStories from './MultiCombobox/MultiCombobox.stories';
+
+<Meta of={ComponentStories} />
+
+# Combobox
+
+<ComponentOverview
+  description="Comboboxes provide select and multi-select functionality with the benefit of live filtering."
+  story={ComponentStories.Default}
+  stories={ComponentStories}
+/>
+
+## Usage
+
+`IressCombobox` is an alternative to `IressSelect` when you have a large number of options and want to provide a search functionality to help the user find the option they are looking for.
+
+It extends `IressAutocomplete`, however it restricts the input to the options provided. This means that the user can only select from the options provided. If you do not need this restriction, please use `IressAutocomplete`.
+
+### Uncontrolled
+
+The `defaultValue` prop can be used to set the initial value of the combobox. The value will be managed by the component.
+
+**Note:** The `defaultValue` prop is not checked against the options provided, allowing it to work with asynchronous options.
+
+<ComponentExample
+  story={ComponentStories.Uncontrolled}
+  stories={ComponentStories}
+/>
+
+### Controlled
+
+The `value` prop can be used to completely control the state of the component. Use the `onChange` and `onClear` props to sync your state with the component.
+
+**Note:** The `value` prop is not checked against the options provided, allowing it to work with asynchronous options.
+
+<ComponentExample
+  story={ComponentStories.Controlled}
+  stories={ComponentStories}
+/>
+
+### Providing options
+
+#### `options`
+
+The `options` prop is required for the combobox. You can provide an array of `LabelValueMeta[]` objects to the `options` prop. Filtering is done based on the `label` property.
+
+<ComponentExample story={ComponentStories.Options} stories={ComponentStories} />
+
+#### Asynchronous `options`
+
+If you would like to render suggestions from the server, you can pass a function to the `options` prop. It accepts a string parameter and returns a promise that resolves to an array of `LabelValueMeta[]` objects. No filtering is done for asynchronous options, you must filter the options yourself using the query.
+
+<ComponentExample
+  story={ComponentStories.AsyncOptions}
+  stories={ComponentStories}
+/>
+
+#### `initialOptions`
+
+If you want to provide initial options to the user, you can use the `initialOptions` prop. This is useful when you want to provide a list of options to the user before they start typing (eg. recommended search terms).
+
+**Note:** Once an option is selected from `initialOptions`, the input will be updated, meaning that the user can no longer see the initial options. If you want to keep the initial options visible, you should make sure they are part of the `options` prop as well.
+
+<ComponentExample
+  story={ComponentStories.InitialOptions}
+  stories={ComponentStories}
+/>
+
+## Behaviour
+
+- If `initialOptions` are provided the options will be displayed in a popover immediately on focus. The popover will close when the input loses focus.
+- If `initialOptions` are not provided, the popover will be displayed as long as there is a single character in the input. The popover will close when the input is empty.
+- The options will be filtered based on the input value.
+  - If `autoSelect` is true, the first option filtered will become the value of the combobox, unless the backspace key is pressed.
+- Tapping on an option with the mouse will change the input value to the `label` of the selected option. The entire `LabelValueMeta` of the selected option will be returned in the `onChange` callback.
+- When the user presses the arrow keys while the input is focussed, options will be selected, but focus remains on the input.
+  - If `autoSelect` is true, the option will become the value of the combobox.
+  - If `autoSelect` is true, the text not matching the input will be selected.
+- When the user presses the enter key while a option is highlighted, the option will be selected and the popover will close.
+- When the user presses the down key while the popover is closed, it will open the popover.
+- When the user pressed the up key while the first option is highlighted, it will close the popover.
+- When the user tabs away while the popover is open, the popover will close.
+  - If `autoSelect` is true and there is a highlighted option, it will become the value of the combobox.
+
+## Accessibility
+
+The autocomplete component follows the [WAI combobox pattern: List with inline autocomplete and automatic selection](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#:~:text=List%20autocomplete%20with%20automatic,has%20a%20selected%20state). An example of this pattern outside of IDS can be seen at [WAI-ARIA combobox example](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-both/).
+
+There is a key difference:
+
+- For better usability, virtual focus is used to highlight the suggestions inside the popover. This means focus remains on the input, but the suggestions are highlighted as if they are in focus, allowing the user to type and navigate the suggestions with the arrow keys.
+- To denote the highlighted suggestion to screen readers, the `aria-activedescendant` attribute is used.
+
+## Examples
+
+### Remove `autoSelect`
+
+The `autoSelect` prop will automatically select the highlighted option. This is set to true by default, but can be switched off, in which case the user must interact with the popover to select an option.
+
+<ComponentExample
+  story={ComponentStories.RemoveAutoSelect}
+  stories={ComponentStories}
+/>
+
+### Input props
+
+Autocomplete extends `IressInput`, hence it has the same properties as `IressInput`.
+
+It does have some defaults to help with user experience. `append` automatically has a search icon, and `clearable` and `watermark` are set to true by default.
+
+<ComponentExample
+  story={ComponentStories.InputProps}
+  stories={ComponentStories}
+/>
+
+### No results
+
+If you would like to show a message when there are no results, you can use the `noResultsText` prop. It accepts any React node.
+
+<ComponentExample
+  story={ComponentStories.NoResultsText}
+  stories={ComponentStories}
+/>
+
+### Popover props
+
+Under the hood, autocomplete uses `IressInputPopover` to display the suggestions. It accepts `autoHighlight`, `align`, `className` and `displayMode`.
+
+There are two additional props that autocomplete accepts to customise the popover: `append` and `prepend`. You can place additional content above or below the results using these props.
+
+<ComponentExample
+  story={ComponentStories.PopoverProps}
+  stories={ComponentStories}
+/>
+
+### Debounce threshold
+
+The `debounceThreshold` prop can be used to set the time in milliseconds to wait before making a request to the `options` function. This is useful when you want to prevent making too many requests to the server.
+
+By default there is a debounce of `500`ms, but it can be removed by setting it to `0`.
+
+**Note:** Removing the debounce and keeping `autoSelect` true may cause some weird highlighting issues if the user types quickly.
+
+<ComponentExample
+  story={ComponentStories.DebounceThreshold}
+  stories={ComponentStories}
+/>
+
+### Result limits
+
+You can limit the maximum amount of search results displayed in the suggestions by setting the `limitDesktop` prop. This defaults to 12.
+
+On smaller screens (< 768px), the number of options is further reduced by using the `limitMobile` prop, which defaults to 6.
+
+`limitMobile` works by filtering the search results that have been filtered by `limitDesktop`, so must be a smaller value. For example:
+
+```tsx
+// 12 results on large screens, 6 on small screens (default values)
+<IressCombobox options={...} />
+
+// 4 results on large screens, 3 on small screens
+<IressCombobox limitDesktop={4} limitMobile={3} options={...} />
+
+// 4 results on all screens (resultLimitMobile > resultLimitDesktop so has no effect)
+<IressCombobox limitDesktop={4} limitMobile={5} options={...} />
+```
+
+The result limits will also affect the number of initial options displayed, if the `initialOptions` prop is set.
+
+<ComponentExample
+  story={ComponentStories.ResultLimits}
+  stories={ComponentStories}
+/>
+
+### Readonly
+
+The `readOnly` prop can be set to prevent the user from changing the value of the autocomplete. This will change the input to a custom read-only style and the user will not be able to interact with the input.
+
+If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](?path=/docs/components-readonly--docs).
+
+<ComponentExample
+  story={ComponentStories.Readonly}
+  stories={ComponentStories}
+/>
+
+## `IressMultiCombobox`
+
+`IressMultiCombobox` is a multi-select version of `IressCombobox`. It allows the user to select multiple options from a list. The selected items will be displayed as tags, as well as within the popover.
+
+<ComponentStatus stories={MultiComboboxStories} className="iress-mb--lg" />
+
+<ComponentExample
+  api={{
+    heading: 'Props',
+    headingId: 'multicombobox-api',
+  }}
+  story={MultiComboboxStories.Options}
+  stories={MultiComboboxStories}
+/>
+
+### Tag limit
+
+When combobox is in multi-select mode and the number of selected options exceeds the `multiOptionTagLimit` (`4` by default), the view will switch from a collection of tags to a single aggregate tag with a count of the number of selected options.
+
+The text displayed in the single tag can be modified using the `selectedOptionsTagText` prop (it is set to `options selected` by default).
+
+<ComponentExample
+  story={MultiComboboxStories.TagLimit}
+  stories={MultiComboboxStories}
+/>
+
+### Readonly
+
+The `readOnly` prop can be set to prevent the user from changing the value of the multi-combobox. This will change the input to a custom read-only style and the user will not be able to interact with the input. Multiple values are seperated by a comma.
+
+If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](?path=/docs/components-readonly--docs).
+
+<ComponentExample
+  story={MultiComboboxStories.Readonly}
+  stories={MultiComboboxStories}
+/>
+
+## Testing
+
+To help you effectively test the combobox component, we have provided a few tips based on the behaviour of the component and our own experience.
+
+**Note:** These are suggestions and not requirements. You should test the component in a way that best suits your use case.
+
+### Partial query matching
+
+The suggestions are filtered based on the input value. If the input value only matches a part of the option, the input value is highlighted by a `<b />` tag in each option. You will need to account for this in your tests, either using an exact string match with a space to denote the highlighted value, or using a regex to match the string.
+
+If you are using `meta`, `prepend` or `append` props in `LabelValueMeta`, you should also consider this in your search query for the option.
+
+```tsx
+render(
+  <IressCombobox
+    options={[
+      { label: 'Luke Skywalker', value: 'Luke Skywalker', meta: 'male' },
+    ]}
+  />,
+);
+
+const autocomplete = screen.getByRole('combobox');
+await user.type(autocomplete, 'lu');
+
+// Exact string match with a space to denote the highlighted value
+const option = await screen.findByRole('option', {
+  name: 'Lu ke Skywalker male',
+});
+expect(option).toBeInTheDocument();
+
+// Using a regex to match the string
+const option = await screen.findByRole('option', { name: /Skywalker/ });
+expect(option).toBeInTheDocument();
+```
+
+### Query for minimal characters
+
+If you are testing if a specific option appears in the autocomplete that returns asynchronous `options`, it is recommended to use the shortest possible query to return the desired result. The longer the query, the longer it will take to see the results.
+
+```tsx
+render(<IressCombobox options={searchStarWarsCharacters} />);
+const autocomplete = screen.getByRole('combobox');
+
+// DO: Use the shortest query to return the desired result
+await user.type(autocomplete, 'lu');
+const option = await screen.findAllByRole('option');
+
+// DON'T: Use a long query to return the desired result
+await user.type(autocomplete, 'luke skywalker');
+const option = await screen.findAllByRole('option');
+```
+
+### Use mocking when testing APIs
+
+When testing the autocomplete component with asynchronous `options`, you should mock the API call to return a known set of results, rather than rely on a public prototyping API (eg. https://swapi.py4e.com/). This will allow you to test the component in isolation without relying on the API to return the expected results, as well as reduce chance of flakiness due to timeouts in your tests.
+
+We recommend using [Mock Service Worker](https://mswjs.io/) to mock the API calls in your tests.
+
+```tsx
+// src/mocks/handlers.ts
+import { http, HttpResponse } from 'msw';
+
+export const handlers = [
+  // Intercept "GET https://swapi.py4e.com/api/people" requests...
+  http.get('https://swapi.py4e.com/api/people', () => {
+    // ...and respond to them using this JSON response.
+    return HttpResponse.json([
+      { name: 'Luke Skywalker', gender: 'male' },
+      { name: 'Leia Skywalker', gender: 'female' },
+    ]);
+  }),
+];
+
+// src/mocks/node.js
+import { setupServer } from 'msw/node';
+import { handlers } from './handlers';
+
+export const server = setupServer(...handlers);
+
+// src/CustomAutocomplete.test.tsx
+import { server } from './mocks/node';
+
+server.listen();
+
+render(<IressCombobox options={searchStarWarsCharacters} />);
+const autocomplete = screen.getByRole('combobox');
+
+await user.type(autocomplete, 'lu');
+const option = await screen.findAllByRole('option');
+```

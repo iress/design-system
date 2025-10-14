@@ -1,10 +1,8 @@
-import { IressFilter, type IressFilterProps } from '@/main';
+import { IressFilter, IressFilterProps } from '@/main';
 import { useState } from 'react';
 
-export const FilterUsingState = <TMultiple extends boolean = false>(
-  args: IressFilterProps<TMultiple>,
-) => {
-  const [value, setValue] = useState<IressFilterProps<TMultiple>['value']>();
+export const FilterUsingState = (args: IressFilterProps) => {
+  const [value, setValue] = useState<IressFilterProps['value']>();
 
   return (
     <IressFilter

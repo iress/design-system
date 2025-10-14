@@ -1,19 +1,13 @@
-import {
-  type ReactElement,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react';
-import { focusableElements } from '@helpers/dom/focusableElements';
-import { usePopoverActivatorInteractions } from '../hooks/usePopoverActivatorInteractions';
-import { PopoverContext } from '../hooks/usePopover';
-import { type IressUnstyledProps } from '@/types';
-import { type IressButtonProps } from '@/components/Button';
+import { type IressButtonProps } from '@/main';
+import styles from '../Popover.module.scss';
+import { type PopoverActivatorProps, PopoverCssClass } from '../Popover.types';
 
-export interface PopoverActivatorProps extends IressUnstyledProps {
-  children?: ReactElement;
-}
+import { usePopover } from '../hooks/usePopover';
+import { useEffect, useMemo, useRef } from 'react';
+import { focusableElements } from '@helpers/dom/focusableElements';
+import { safeClosest } from '@helpers/dom/domUtils';
+import { usePopoverActivatorInteractions } from '../hooks/usePopoverActivatorInteractions';
+import classNames from 'classnames';
 
 const a11yAttributes = [
   'aria-controls',
@@ -51,11 +45,11 @@ export const PopoverActivator = ({
   children,
   ...restProps
 }: PopoverActivatorProps) => {
-  const popover = useContext(PopoverContext);
+  const popover = usePopover();
   const a11yElement = useRef<HTMLElement | null>(null);
 
-  const childrenProps = children?.props as IressButtonProps<undefined>;
-  const activatorInteractions = usePopoverActivatorInteractions<'button'>(
+  const childrenProps = children?.props as IressButtonProps;
+  const activatorInteractions = usePopoverActivatorInteractions(
     popover,
     childrenProps,
   );
@@ -93,6 +87,9 @@ export const PopoverActivator = ({
   return (
     <div
       {...restProps}
+      className={classNames(styles.activator, {
+        [PopoverCssClass.Active]: popover?.show,
+      })}
       {...popover?.interactions.getReferenceProps({
         ...activatorInteractions,
         'aria-controls': ariaControls,
@@ -112,27 +109,25 @@ export const PopoverActivator = ({
           transferPropsToA11yElement(element, a11y);
         },
         onBlur: (e) => {
-          const floatingElement = popover?.api.refs.floating.current;
-          const relatedTarget = e.relatedTarget as HTMLElement;
-
           // Fixes the issue where the popover triggers a blur event when the focus moves from the activator to inside the popover
           if (
-            relatedTarget instanceof Element &&
-            floatingElement?.contains(relatedTarget)
+            e.relatedTarget instanceof Element &&
+            safeClosest(e.relatedTarget, `.${styles.content}`)
           ) {
             e.preventDefault();
             e.stopPropagation();
           }
         },
         onFocus: (e) => {
-          const floatingElement = popover?.api.refs.floating.current;
-          const relatedTarget = e.relatedTarget as HTMLElement;
+          if (popover?.disabledAutoToggle) {
+            return;
+          }
 
           // Fixes the issue where the popover does not close when focus returns to the activator from inside the popover
           if (
-            relatedTarget instanceof Element &&
-            (relatedTarget.hasAttribute('data-floating-ui-focus-guard') ||
-              floatingElement?.contains(relatedTarget)) &&
+            e.relatedTarget instanceof Element &&
+            (e.relatedTarget.hasAttribute('data-floating-ui-focus-guard') ||
+              safeClosest(e.relatedTarget, `.${styles.content}`)) &&
             popover.show
           ) {
             // Does not work with queueMicrotask or without timeout (it needs to happen after Floating UI does its thing)

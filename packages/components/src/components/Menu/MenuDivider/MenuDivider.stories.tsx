@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressMenuDivider } from '@/main';
 
 type Story = StoryObj<typeof IressMenuDivider>;

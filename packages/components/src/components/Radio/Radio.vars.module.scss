@@ -1,0 +1,96 @@
+/** Radio variables
+ * --------------------------------------------------
+ */
+
+.radio {
+  --iress-font-family: var(--iress-radio-font-family, var(--iress-a-form-font-family, var(--iress-g-font-family)));
+  --iress-font-size: var(--iress-radio-font-size);
+  --iress-font-weight: var(--iress-radio-font-weight, var(--iress-g-font-weight, normal));
+  --iress-mark-border-width: 1px;
+  --iress-size: var(--iress-radio-size, calc(1.5 * var(--iress-g-font-size-rem)));
+  --iress-text-color: var(--iress-radio-text-color, var(--iress-a-label-text-color, var(--iress-g-text-color)));
+  --iress-line-height: var(--iress-radio-line-height, var(--iress-a-form-line-height, var(--iress-g-line-height, var(--iress-size))));
+  --iress-spacing-right: var(--iress-radio-spacing-right, calc(0.25 * var(--iress-g-font-size-rem)));
+  --iress-border-color: var(--iress-radio-border-color, var(--iress-g-form-border-color, var(--iress-default-form-border-color)));
+  --iress-label-border-color: var(--iress-radio-label-border-color, transparent);
+  --iress-label-border-radius: var(--iress-radio-label-border-radius, var(--iress-a-form-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius))));
+  --iress-mark-color: transparent;
+  --iress-mark-background-color: var(--iress-radio-background-color, var(--iress-a-form-background-color, var(--iress-g-background-color, var(--iress-default-background-color))));
+  --iress-transition-hover-duration: var(--iress-radio-transition-hover-duration, var(--iress-g-transition-hover-duration, var(--iress-default-hover-transition-duration)));
+  --iress-transition-hover-type: var(--iress-radio-transition-hover-type, var(--iress-g-transition-hover-type, var(--iress-default-hover-transition-type)));
+  --iress-padding-x: var(--iress-radio-padding-x, 0);
+  --iress-padding-y: var(--iress-radio-padding-y, 0);
+
+  --iress-label-background-color: var(--iress-checkbox-label-background-color, transparent);
+  --iress-label-border-width: var(--iress-radio-label-border-width, 0);
+
+  &:focus-within,
+  :global(.psuedo-focus) &,
+  &:global(.focus) {
+    --iress-mark-box-shadow: 0 0 0 var(--iress-g-focus-width, var(--iress-default-focus-size)) var(--iress-focus-color);
+    --iress-border-color: var(--iress-focus-color);
+  }
+}
+
+.input:checked + .label {
+  --iress-mark-color: var(--iress-radio-checked-inner-background-color, var(--iress-a-active-background-color, var(--iress-g-primary-color, var(--iress-default-active-color))));
+  --iress-border-color: var(
+    --iress-radio-checked-border-color,
+    var(--iress-a-active-border-color, var(--iress-g-primary-color, var(--iress-radio-border-color, var(--iress-g-form-border-color, var(--iress-default-form-border-color)))))
+  );
+}
+
+.touch {
+  --iress-label-border-width: var(--iress-radio-hidden-control-label-border-width, var(--iress-a-form-border-width, var(--iress-g-border-width, var(--iress-default-border-width))));
+  --iress-label-border-color: var(--iress-radio-border-color, var(--iress-g-form-border-color, var(--iress-default-form-border-color)));
+  --iress-label-border-radius: var(--iress-radio-hidden-control-label-border-radius, var(--iress-a-form-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius))));
+  --iress-padding-x: var(--iress-button-padding-x, var(--iress-g-spacing-md));
+}
+
+@media (hover: hover) {
+  .label:hover {
+    --iress-mark-color: var(--iress-radio-hover-inner-background-color, var(--iress-a-form-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color))));
+  }
+
+  .input:checked + .label:hover {
+    --iress-mark-color: var(
+      --iress-radio-checked-hover-inner-background-color,
+      var(--iress-a-active-hover-background-color, var(--iress-g-primary-hover-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color))))
+    );
+  }
+}
+
+/* Hidden control styles */
+.hiddenControl {
+  --iress-label-border-width: var(--iress-radio-hidden-control-label-border-width, var(--iress-a-form-border-width, var(--iress-g-border-width, var(--iress-default-border-width))));
+  --iress-label-border-color: var(--iress-radio-hidden-control-label-border-color, var(--iress-g-form-border-color, var(--iress-default-form-border-color)));
+  --iress-label-background-color: var(
+    --iress-radio-hidden-control-label-background-color,
+    var(--iress-a-form-background-color, var(--iress-g-background-color, var(--iress-default-background-color)))
+  );
+  --iress-label-border-radius: var(--iress-radio-hidden-control-label-border-radius, var(--iress-a-form-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius))));
+  --iress-inline-spacing-x: var(--iress-radio-group-inline-spacing, var(--iress-g-spacing-md));
+  --iress-margin-bottom: var(--iress-radio-margin-bottom, var(--iress-g-spacing-sm));
+
+  &:focus-within {
+    --iress-label-box-shadow: 0 0 0 var(--iress-g-focus-width, var(--iress-default-focus-size)) var(--iress-focus-color);
+
+    .label {
+      --iress-label-border-color: var(--iress-focus-color);
+    }
+  }
+
+  .input:checked + .label {
+    --iress-label-border-color: var(--iress-radio-checked-border-color, var(--iress-a-active-border-color, var(--iress-g-primary-color, var(--iress-default-active-color))));
+  }
+
+  @media (hover: hover) {
+    .label:hover {
+      --iress-label-background-color: var(
+        --iress-radio-hidden-control-label-hover-background-color,
+        var(--iress-a-form-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)))
+      );
+      --iress-text-color: var(--iress-radio-hidden-control-label-hover-text-color, var(--iress-a-form-hover-text-color, var(--iress-g-hover-text-color, var(--iress-default-text-color--hover))));
+    }
+  }
+}

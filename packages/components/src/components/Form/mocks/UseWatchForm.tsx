@@ -1,0 +1,84 @@
+import {
+  IressButton,
+  IressCheckbox,
+  IressCheckboxGroup,
+  IressDivider,
+  IressForm,
+  IressFormField,
+  IressFormProps,
+  IressInput,
+  IressStack,
+  IressText,
+} from '@/main';
+
+interface FieldValues {
+  show?: string[];
+  name?: string;
+  email?: string;
+}
+
+/**
+ * Conditional fields need to be rendered in a sub-component, to allow it to use the `useWatch`
+ * hook to watch the value of the field dictating the display of conditional fields.
+ */
+const FormSectionWithConditionalFields = () => {
+  const show = IressForm.useWatch<FieldValues>({ name: 'show' });
+
+  return (
+    <IressStack gutter="md">
+      <IressText>
+        This is a conditional field example using "useWatch".
+      </IressText>
+      <IressFormField
+        name="show"
+        label="Select fields to show"
+        rules={{
+          required: 'Please select at least one field to show',
+        }}
+        render={(controlledProps) => (
+          <IressCheckboxGroup {...controlledProps} layout="inline">
+            <IressCheckbox value="name">Name</IressCheckbox>
+            <IressCheckbox value="email">Email</IressCheckbox>
+          </IressCheckboxGroup>
+        )}
+      />
+      {show?.includes('name') && (
+        <IressFormField
+          name="name"
+          label="Name"
+          rules={{
+            required: 'Name is required',
+          }}
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+        />
+      )}
+      {show?.includes('email') && (
+        <IressFormField
+          name="email"
+          label="Email"
+          rules={{
+            required: 'Email is required',
+            pattern: {
+              value:
+                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+              message: 'Please enter a valid email address',
+            },
+          }}
+          render={(controlledProps) => (
+            <IressInput {...controlledProps} type="email" />
+          )}
+        />
+      )}
+    </IressStack>
+  );
+};
+
+export const UseWatchForm = (args: IressFormProps<FieldValues>) => (
+  <IressForm {...args}>
+    <FormSectionWithConditionalFields />
+    <IressDivider />
+    <IressButton type="submit" mode="primary">
+      Submit
+    </IressButton>
+  </IressForm>
+);

@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressSelectSearch } from './SelectSearch';
 import { IressSelectCreate } from '../SelectCreate/SelectCreate';
 import {
@@ -7,7 +7,7 @@ import {
   IressSelectBody,
   IressSelectMenu,
   IressSelectSearchInput,
-  type IressSelectSearchProps,
+  IressSelectSearchProps,
 } from '@/main';
 import { MOCK_LARGE_LABEL_VALUES_DATASET } from '../../../mocks/generateLabelValues';
 import {
@@ -46,19 +46,14 @@ export default {
 
 export const Search: Story = {
   args: {
-    activator: (
-      <IressSelectSearchInput
-        aria-label="Search and select items"
-        placeholder="Search and select"
-      />
-    ),
+    activator: <IressSelectSearchInput placeholder="Search and select" />,
     autoHighlight: false,
     children: (
       <IressSelectBody
         header={
           <>
             <IressSelectCreate heading="Add custom option" />
-            <IressMenuDivider />
+            <IressMenuDivider gutter="none" />
           </>
         }
         footer={
@@ -68,9 +63,9 @@ export const Search: Story = {
         <IressSelectMenu fluid items={MOCK_LARGE_LABEL_VALUES_DATASET} />
       </IressSelectBody>
     ),
-    layerStyle: 'elevation.raised',
     style: {
       maxHeight: 400,
+      border: '1px solid var(--iress-g-border-color)',
     },
   },
 };

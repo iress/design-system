@@ -1,2 +1,2 @@
-export * from './Badge';
-export * from './Badge.styles';
+export { IressBadge } from './Badge';
+export * from './Badge.types';

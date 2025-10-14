@@ -1,9 +1,9 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
 } from '@iress-storybook/components';
-import { IressRow, IressCol, IressTable } from '../../main';
+import { IressRow, IressCol } from '../../main';
 import * as ComponentStories from './Stack.stories';
 
 <Meta of={ComponentStories} />
@@ -23,62 +23,30 @@ import * as ComponentStories from './Stack.stories';
 
 ## Examples
 
-### Gap
+### Gutter
 
-Vertical spacing is applied to the direct children of the `IressStack` component. The amount of spacing is controlled by the gap prop which accepts from `spacing.000` to `spacing.1200`.
+Vertical spacing is applied to the direct children of the `IressStack` component. The amount of spacing is controlled by the gutter prop which accepts `none`, `xs`, `sm`, `md`, `lg` or `xl`.
 
-#### What happened to `gutter`?
+<ComponentExample story={ComponentStories.Gutter} stories={ComponentStories} />
 
-The previous `gutter` prop has been replaced by `gap`, which uses the latest set of spacing tokens. In terms of how it is used to space items inside the `IressStack` component, it is now directly mapped to the [CSS gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/gap), which may change how your application is spaced. For most cases, there should be no change.
+### Responsive gutter
 
-Here is the mapping of previous `gutter` scale and current `gap` value:
-
-<IressTable
-  rows={[
-    {
-      deprecated_gutter_scale: 'none',
-      new_gap_value: 'spacing.000',
-    },
-    {
-      deprecated_gutter_scale: 'xs',
-      new_gap_value: 'spacing.100',
-    },
-    {
-      deprecated_gutter_scale: 'sm',
-      new_gap_value: 'spacing.200',
-    },
-    {
-      deprecated_gutter_scale: 'md',
-      new_gap_value: 'spacing.400',
-    },
-    {
-      deprecated_gutter_scale: 'lg',
-      new_gap_value: 'spacing.700',
-    },
-    {
-      deprecated_gutter_scale: 'xl',
-      new_gap_value: 'spacing.1200',
-    },
-  ]}
-  scope="col"
-/>
-
-<ComponentExample story={ComponentStories.Gap} stories={ComponentStories} />
-
-### Responsive gap
-
-The `gap` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
+The `gutter` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
 
 <ComponentExample
-  story={ComponentStories.ResponsiveGap}
+  story={ComponentStories.ResponsiveGutter}
   stories={ComponentStories}
 />
 
 ### Inline children
 
-The stack component will treat the direct children as a block element. If you want to wrap some items to display them inline, wrap them with `IressInline`.
+The stack component respects the `display` type of it's direct children.
 
-In the example below: `IressButton` are inline because of wrapped by `IressInline`.
+In the example below:
+
+- `span` will recieve no margin (as it is inline)
+- `IressButton`s recieve the margin but remain inline-block
+- `IressPanel`s recieve the margin as they are block elements.
 
 <ComponentExample
   story={ComponentStories.InlineChildren}
@@ -87,12 +55,20 @@ In the example below: `IressButton` are inline because of wrapped by `IressInlin
 
 ### Lists
 
-`IressStack` can also apply gap between the list items by using the new `element` (e.g. `ul`) prop.
+`IressStack` can't be used directly with list items as this would break the list semantics; list items need to be direct children of the list. Instead, you can wrap the list element, and the correct margin will be applied to the list items.
 
-<IressRow gap="md">
+This only works if the list is a direct child of the `IressStack` component. If you want to add margin to the list instead of the list items, you'll need to wrap the list in a `<div>`, as shown in the second example below.
+
+<IressRow gutter="md">
   <IressCol>
     <ComponentExample
       story={ComponentStories.Lists}
+      stories={ComponentStories}
+    />
+  </IressCol>
+  <IressCol>
+    <ComponentExample
+      story={ComponentStories.WrappedList}
       stories={ComponentStories}
     />
   </IressCol>

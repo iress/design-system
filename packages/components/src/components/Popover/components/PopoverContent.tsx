@@ -1,3 +1,7 @@
+import classNames from 'classnames';
+import styles from '../Popover.module.scss';
+import { type PopoverContentProps } from '../Popover.types';
+import { usePopover } from '../hooks/usePopover';
 import {
   FloatingFocusManager,
   FloatingList,
@@ -8,78 +12,16 @@ import {
   useFloatingParentNodeId,
 } from '@floating-ui/react';
 import { composePopoverFloatingProps } from '../helpers/composeFloatingProps';
-import {
-  type DisplayModes,
-  type FloatingUIContainer,
-  type IressStyledProps,
-} from '@/types';
-import { useContext, useEffect } from 'react';
-import { styled } from '@/styled-system/jsx';
-import { PopoverContext } from '../hooks/usePopover';
-
-export interface PopoverContentProps extends IressStyledProps {
-  container?: FloatingUIContainer;
-  displayMode?: DisplayModes;
-  virtualFocus?: boolean;
-}
 
 const PopoverContentInner = ({
   children,
+  className,
   displayMode,
-  id,
   style,
   virtualFocus,
   ...restProps
-}: Omit<PopoverContentProps, 'container'>) => {
-  const popover = useContext(PopoverContext);
-
-  // Fix accessibility issue with floating-ui focus guards
-  // See: https://github.com/floating-ui/floating-ui/issues/2823
-  useEffect(() => {
-    if (popover?.show) {
-      const fixFocusGuards = () => {
-        const focusGuards = document.querySelectorAll(
-          '[data-floating-ui-focus-guard][aria-hidden="true"]',
-        );
-        focusGuards.forEach((guard) => {
-          if (guard instanceof HTMLElement && guard.tabIndex !== -1) {
-            guard.tabIndex = -1;
-          }
-        });
-      };
-
-      const handleAddedNode = (node: Node) => {
-        if (
-          node instanceof HTMLElement &&
-          node.hasAttribute('data-floating-ui-focus-guard') &&
-          node.getAttribute('aria-hidden') === 'true' &&
-          node.tabIndex !== -1
-        ) {
-          node.tabIndex = -1;
-        }
-      };
-
-      // Fix focus guards immediately
-      const timeoutId = setTimeout(fixFocusGuards, 0);
-
-      // Also observe for dynamically added focus guards
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          mutation.addedNodes.forEach(handleAddedNode);
-        });
-      });
-
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-      });
-
-      return () => {
-        clearTimeout(timeoutId);
-        observer.disconnect();
-      };
-    }
-  }, [popover?.show]);
+}: PopoverContentProps) => {
+  const popover = usePopover();
 
   if (!popover) return null;
 
@@ -87,7 +29,6 @@ const PopoverContentInner = ({
     popover,
     displayMode,
     style,
-    id,
   );
 
   return (
@@ -99,20 +40,22 @@ const PopoverContentInner = ({
         disabled={!popover?.show}
         returnFocus={!virtualFocus}
       >
-        <styled.div
+        <div
           {...restProps}
+          className={classNames(className, styles.content)}
           hidden={!popover?.show}
           ref={popover?.api.refs.setFloating}
           {...floatingProps}
         >
           {children}
-        </styled.div>
+        </div>
       </FloatingFocusManager>
     </FloatingList>
   );
 };
 
 const PopoverContentContainer = ({
+  className,
   container,
   ...restProps
 }: PopoverContentProps) => {
@@ -122,7 +65,10 @@ const PopoverContentContainer = ({
     return (
       <FloatingNode id={nodeId}>
         <FloatingPortal root={container} preserveTabOrder>
-          <PopoverContentInner {...restProps} />
+          <PopoverContentInner
+            {...restProps}
+            className={classNames(className, styles.portal)}
+          />
         </FloatingPortal>
       </FloatingNode>
     );
@@ -130,7 +76,7 @@ const PopoverContentContainer = ({
 
   return (
     <FloatingNode id={nodeId}>
-      <PopoverContentInner {...restProps} />
+      <PopoverContentInner {...restProps} className={className} />
     </FloatingNode>
   );
 };

@@ -1,17 +1,8 @@
 import { act, render, screen } from '@testing-library/react';
 
 import { ComponentLoading } from './ComponentLoading';
-import { loading } from '../Loading.styles';
 
-const hiddenStyles = loading({ pattern: 'component' });
-const shownStyles = loading({
-  pattern: 'component',
-  showIndicator: true,
-});
-const shownMessageStyles = loading({
-  pattern: 'component',
-  showMessage: true,
-});
+import loadingStyles from '../Loading.module.scss';
 
 describe('IressLoading pattern="component"', () => {
   it('renders the correct defaults', async () => {
@@ -29,12 +20,12 @@ describe('IressLoading pattern="component"', () => {
 
     // Loading should be delayed by default
     const loader = screen.getByTestId('loader');
-    expect(loader).toHaveClass(hiddenStyles.root!);
-    expect(loader).not.toHaveClass(shownStyles.root!);
+    expect(loader).toHaveClass(loadingStyles['fade-in']);
+    expect(loader).not.toHaveClass(loadingStyles['fade-in--active']);
 
     // By default there is a delay of 0ms before the skeleton is shown
     await act(() => vi.advanceTimersByTime(0));
-    expect(loader).toHaveClass(shownStyles.root!);
+    expect(loader).toHaveClass(loadingStyles['fade-in--active']);
 
     rerender(
       <ComponentLoading pattern="component" loaded>
@@ -63,12 +54,12 @@ describe('IressLoading pattern="component"', () => {
     expect(update).toBeInTheDocument();
 
     // Message should be delayed by default
-    expect(update).toHaveClass(hiddenStyles.message!);
-    expect(update).not.toHaveClass(shownMessageStyles.message!);
+    expect(update).toHaveClass(loadingStyles['fade-in']);
+    expect(update).not.toHaveClass(loadingStyles['fade-in--active']);
 
     // By default there is a delay of 1000ms before the update message is shown
     await act(() => vi.advanceTimersByTime(1001));
-    expect(update).toHaveClass(shownMessageStyles.message!);
+    expect(update).toHaveClass(loadingStyles['fade-in--active']);
 
     vi.useRealTimers();
   });

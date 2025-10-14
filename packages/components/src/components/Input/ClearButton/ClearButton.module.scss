@@ -1,0 +1,23 @@
+@use '../Input.vars.module';
+
+.clear {
+  line-height: 1.5;
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: calc(1.5 * var(--iress-g-font-size-rem));
+  color: inherit;
+  display: inline-flex;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    box-shadow: var(--iress-focus-box-shadow);
+    position: relative;
+  }
+}
+
+:global(.iress-view-mode-compact) .clear {
+  line-height: 1.2; /* reduce for compact view mode */
+}

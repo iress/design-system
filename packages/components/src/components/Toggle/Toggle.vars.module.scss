@@ -1,0 +1,79 @@
+/** Toggle variables
+ * --------------------------------------------------
+ */
+
+.toggleBase {
+  --iress-label-font-family: var(--iress-toggle-label-font-family, var(--iress-a-form-font-family, var(--iress-g-font-family)));
+  --iress-label-font-size: var(--iress-toggle-label-font-size, var(--iress-g-font-size));
+  --iress-label-font-weight: var(--iress-toggle-label-font-weight, var(--iress-g-label-font-weight, bold));
+  --iress-label-text-color: var(--iress-toggle-label-text-color, var(--iress-a-label-text-color, var(--iress-g-text-color)));
+  --iress-height: var(--iress-toggle-height, 1.5rem);
+  --iress-width: calc(var(--iress-height) * 2);
+  --iress-thumb-height: var(--iress-toggle-thumb-height, var(--iress-height));
+  --iress-thumb-width: var(--iress-thumb-height);
+  --iress-thumb-border-width: var(--iress-toggle-thumb-border-width, 2px);
+  --iress-transition-hover-duration: var(--iress-toggle-transition-hover-duration, var(--iress-g-animation-duration, var(--iress-default-animation-duration)));
+  --iress-transition-hover-type: var(--iress-toggle-transition-hover-type, var(--iress-g-animation-type, var(--iress-default-animation-type)));
+  --iress-transition: all var(--iress-transition-duration) var(--iress-transition-type);
+
+  .checkboxMark {
+    --iress-mark-color: var(--iress-check-mark-color);
+    --iress-background-color: transparent;
+    --iress-border-width: 0;
+    --iress-size: var(--iress-check-mark-size);
+  }
+
+  .toggleButton {
+    --iress-active-animation: none;
+    --iress-border-radius: var(--iress-toggle-border-radius, calc(var(--iress-height) / 2));
+    --iress-border-width: var(--iress-toggle-border-width, 2px);
+    --iress-min-height: auto;
+    --iress-padding-x: 0px;
+    --iress-padding-y: 0;
+    --iress-text-align: left;
+
+    /* Need to redeclare these here to override the button transition */
+    --iress-transition-hover-duration: var(--iress-toggle-transition-duration, var(--iress-g-animation-duration, var(--iress-default-animation-duration)));
+    --iress-transition-hover-type: var(--iress-toggle-transition-timing-function, var(--iress-g-animation-type, var(--iress-default-animation-type)));
+    --iress-transition: all var(--iress-transition-hover-duration) var(--iress-transition-hover-type);
+
+    /* Inactive state styles */
+    --iress-background-color: var(--iress-toggle-inactive-background-color, var(--iress-g-inactive-color, var(--iress-default-inactive-color)));
+    --iress-border-color: var(--iress-toggle-inactive-border-color, var(--iress-g-inactive-color, var(--iress-default-inactive-color)));
+    --iress-thumb-background-color: var(--iress-toggle-inactive-thumb-background-color, var(--iress-g-inactive-contrast-color, var(--iress-default-inactive-contrast-color)));
+    --iress-thumb-border-color: var(--iress-toggle-inactive-thumb-border-color, var(--iress-g-inactive-color, var(--iress-default-inactive-color)));
+
+    /* Inactive state hover / focus styles */
+    --iress-hover-background-color: var(--iress-toggle-inactive-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)));
+    --iress-hover-border-color: var(--iress-toggle-inactive-hover-border-color, var(--iress-border-color));
+    --iress-active-background-color: var(--iress-toggle-inactive-background-color, var(--iress-g-inactive-color, var(--iress-default-inactive-color)));
+    --iress-active-border-color: var(--iress-toggle-inactive-border-color, var(--iress-g-inactive-color, var(--iress-default-inactive-color)));
+    --iress-focus-border-color: var(--iress-hover-border-color);
+    --iress-check-mark-size: calc(var(--iress-height) - (2 * var(--iress-border-width)));
+  }
+
+  .buttonChecked {
+    /* Active state styles */
+    --iress-background-color: var(--iress-toggle-active-background-color, var(--iress-a-active-background-color, var(--iress-g-primary-color, var(--iress-default-primary-color))));
+    --iress-border-color: var(--iress-toggle-active-border-color, var(--iress-a-active-border-color, var(--iress-g-primary-color, var(--iress-default-primary-color))));
+    --iress-thumb-background-color: var(--iress-toggle-active-thumb-background-color, var(--iress-g-primary-contrast-color, var(--iress-default-primary-contrast-color)));
+    --iress-thumb-border-color: var(--iress-toggle-active-thumb-border-color, var(--iress-a-active-border-color, var(--iress-g-primary-color, var(--iress-default-primary-color))));
+    --iress-check-mark-color: var(--iress-toggle-active-mark-color, var(--iress-a-active-contrast-color, var(--iress-g-primary-contrast-color, var(--iress-default-primary-contrast-color))));
+
+    /* Active state focus / hover styles */
+    --iress-hover-background-color: var(
+      --iress-toggle-active-hover-background-color,
+      var(--iress-a-active-hover-background-color, var(--iress-g-primary-hover-color, var(--iress-g-hover-background-color, var(--iress-default-hover-color))))
+    );
+    --iress-hover-border-color: var(
+      --iress-toggle-active-hover-border-color,
+      var(--iress-a-active-hover-border-color, var(--iress-g-primary-hover-color, var(--iress-g-hover-background-color, var(--iress-default-hover-color))))
+    );
+    --iress-active-background-color: var(--iress-toggle-active-background-color, var(--iress-a-active-background-color, var(--iress-g-primary-color, var(--iress-default-primary-color))));
+    --iress-active-border-color: var(--iress-toggle-active-border-color, var(--iress-a-active-border-color, var(--iress-g-primary-color, var(--iress-default-primary-color))));
+
+    &:hover {
+      --iress-check-mark-color: var(--iress-a-active-contrast-color, var(--iress-g-primary-contrast-color, var(--iress-g-hover-text-color, var(--iress-default-text-color--hover))));
+    }
+  }
+}

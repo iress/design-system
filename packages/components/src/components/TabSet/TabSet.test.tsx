@@ -1,10 +1,9 @@
 import { RenderResult, render, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { IressTab, IressTabSet, IressTabSetProps } from '.';
+import styles from './TabSet.module.scss';
 import userEvent from '@testing-library/user-event';
 import { idsLogger } from '@helpers/utility/idsLogger';
-import { tabSet } from './TabSet.styles';
-import { GlobalCSSClass } from '@/enums';
 
 const TEST_ID = 'test-component';
 
@@ -70,8 +69,8 @@ describe('IressTabs', () => {
     expect(container).toBeInTheDocument();
     expect(container).toHaveClass(
       'test-class',
-      tabSet().root!,
-      GlobalCSSClass.TabSet,
+      styles.tabSet,
+      styles['layout--top-left'],
     );
   });
 
@@ -157,7 +156,7 @@ describe('IressTabs', () => {
         });
 
         const container = screen.getByTestId(TEST_ID);
-        expect(container).toHaveClass(tabSet({ layout: 'top-center' }).root!);
+        expect(container).toHaveClass(styles[`layout--top-center`]);
       });
     });
 
@@ -171,7 +170,7 @@ describe('IressTabs', () => {
         const tabs = screen.getAllByRole('tab');
         await userEvent.click(tabs[1]);
 
-        expect(onChange).toHaveBeenCalledWith({ index: 1, value: undefined });
+        expect(onChange).toBeCalledWith({ index: 1, value: undefined });
       });
 
       it('emits the new index and value when the user changes tab, and tab has value', async () => {
@@ -184,7 +183,7 @@ describe('IressTabs', () => {
         const tabs = screen.getAllByRole('tab');
         await userEvent.click(tabs[1]);
 
-        expect(onChange).toHaveBeenCalledWith({ index: 1, value: 'tab-2' });
+        expect(onChange).toBeCalledWith({ index: 1, value: 'tab-2' });
       });
     });
 
@@ -257,6 +256,41 @@ describe('IressTabs', () => {
     });
   });
 
+  describe('panels rendering behaviour', () => {
+    it('renders all panels (inactive ones hidden) and toggles visibility on tab change', async () => {
+      const screen = renderComponentWithPanels({ defaultSelected: 0 });
+
+      // All panels exist in DOM (including hidden ones)
+      const allPanels = screen.getAllByRole('tabpanel', { hidden: true });
+      expect(allPanels).toHaveLength(TEST_PANELS.length);
+
+      // Only the first should be visible initially
+      const visibleInitially = allPanels.filter(
+        (panel) => !panel.hasAttribute('hidden'),
+      );
+      expect(visibleInitially).toHaveLength(1);
+      expect(visibleInitially[0]).toHaveTextContent('Tab panel 1');
+
+      // Switch to second tab
+      const tabs = screen.getAllByRole('tab');
+      await userEvent.click(tabs[1]);
+
+      const allPanelsAfter = screen.getAllByRole('tabpanel', { hidden: true });
+      const visibleAfter = allPanelsAfter.filter(
+        (panel) => !panel.hasAttribute('hidden'),
+      );
+      expect(visibleAfter).toHaveLength(1);
+      expect(visibleAfter[0]).toHaveTextContent('Tab panel 2');
+
+      // Previously active panel should now be hidden
+      const previouslyActive = allPanelsAfter.find((p) =>
+        p.textContent?.includes('Tab panel 1'),
+      );
+      expect(previouslyActive).toBeDefined();
+      expect(previouslyActive).not.toBeVisible();
+    });
+  });
+
   describe('warnings', () => {
     it('logs a warning when both the selected and defaultSelected props are used', async () => {
       renderComponent({
@@ -264,7 +298,7 @@ describe('IressTabs', () => {
         selected: 1,
       });
 
-      await waitFor(() => expect(idsLogger).toHaveBeenCalledTimes(1));
+      await waitFor(() => expect(idsLogger).toBeCalledTimes(1));
     });
   });
 

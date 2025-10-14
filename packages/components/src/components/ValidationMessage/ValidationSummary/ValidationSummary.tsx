@@ -1,49 +1,46 @@
-import {
-  type IressCustomiseSlot,
-  type ValidationMessageObj,
-} from '@/interfaces';
+import { type IressValidationSummaryProps } from './ValidationSummary.types';
+import { type ValidationMessageObj } from '@/interfaces';
+import styles from './ValidationSummary.module.scss';
+import classNames from 'classnames';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { IressValidationMessage } from '../ValidationMessage';
 import { useIdIfNeeded } from '@/hooks';
-import { type IressStyledProps, type SystemValidationStatuses } from '@/types';
-import { type ReactNode } from 'react';
-import { styled } from '@/styled-system/jsx';
-import { cx } from '@/styled-system/css';
-import { GlobalCSSClass } from '@/enums';
+import { IressValidationLink } from '../ValidationLink/ValidationLink';
+import { type IressValidationLinkProps } from '../ValidationLink/ValidationLink.types';
 
-export interface IressValidationSummaryProps
-  extends Omit<IressStyledProps<'ul'>, 'prefix'> {
-  /**
-   * ValidationMessage Array containing the `id` of the field and the validation message
-   **/
-  messages: ValidationMessageObj[];
+const ValidationSummaryItem = ({
+  children,
+  'data-testid': dataTestId,
+  linkToTarget,
+  prefix,
+  status,
+  visiblePrefix,
+}: Partial<IressValidationLinkProps>) => {
+  if (linkToTarget) {
+    return (
+      <IressValidationLink
+        linkToTarget={linkToTarget}
+        status={status}
+        prefix={prefix}
+        visiblePrefix={visiblePrefix}
+        data-testid={dataTestId}
+      >
+        {children}
+      </IressValidationLink>
+    );
+  }
 
-  /**
-   * Add additional styles to each item in the list.
-   */
-  itemStyle?: IressCustomiseSlot;
-
-  /**
-   * Renders validation messages as links pointing at the field it relates to, specified as a string
-   * Only works when used with the `messages` prop.
-   */
-  linkToTarget?: string;
-
-  /**
-   * Prefix to all validation messages. Will be `status` prop if nothing is provided.
-   */
-  prefix?: ReactNode;
-
-  /**
-   * Status for all child ValidationMessage components
-   */
-  status?: SystemValidationStatuses;
-
-  /**
-   * If set to true, the prefix will be visually displayed (default is only available to screen readers)
-   */
-  visiblePrefix?: boolean;
-}
+  return (
+    <IressValidationMessage
+      status={status}
+      prefix={prefix}
+      visiblePrefix={visiblePrefix}
+      data-testid={dataTestId}
+    >
+      {children}
+    </IressValidationMessage>
+  );
+};
 
 export const IressValidationSummary = ({
   messages = [],
@@ -51,57 +48,35 @@ export const IressValidationSummary = ({
   prefix,
   visiblePrefix,
   status = 'danger',
-  'data-testid': dataTestId,
-  children,
-  itemStyle,
   className,
+  'data-testid': dataTestId,
   ...restProps
 }: IressValidationSummaryProps) => {
   const id = useIdIfNeeded({ id: restProps.id });
 
-  if (!messages.length && !children) {
+  if (!messages.length) {
     return null;
   }
 
   return (
-    <styled.ul
-      data-testid={dataTestId}
-      listStyle="none"
-      m="spacing.000"
-      p="spacing.000"
+    <ul
       {...restProps}
-      className={cx(className, GlobalCSSClass.ValidationSummary)}
+      className={classNames(className, styles.validationSummary)}
+      data-testid={dataTestId}
     >
       {messages.map((msg: ValidationMessageObj) => (
-        <styled.li
-          m="spacing.000"
-          key={`${id}-${msg.linkToTarget}-${msg.message}`}
-        >
-          <IressValidationMessage
+        <li key={`${id}-${msg.linkToTarget}-${msg.message}`}>
+          <ValidationSummaryItem
             linkToTarget={msg.linkToTarget ?? linkToTarget}
             status={msg.status ?? status}
             prefix={msg.prefix ?? prefix}
             visiblePrefix={msg.visiblePrefix ?? visiblePrefix}
             data-testid={msg.dataTestId ?? propagateTestid(dataTestId, 'error')}
-            {...itemStyle}
           >
             {msg.message}
-          </IressValidationMessage>
-        </styled.li>
+          </ValidationSummaryItem>
+        </li>
       ))}
-      {children && (
-        <styled.li m="spacing.000">
-          <IressValidationMessage
-            status={status}
-            prefix={prefix}
-            visiblePrefix={visiblePrefix}
-            data-testid={propagateTestid(dataTestId, 'error')}
-            {...itemStyle}
-          >
-            {children}
-          </IressValidationMessage>
-        </styled.li>
-      )}
-    </styled.ul>
+    </ul>
   );
 };

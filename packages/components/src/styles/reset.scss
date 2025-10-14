@@ -1,0 +1,19 @@
+/* Reset styles */
+body {
+  padding: 0;
+  margin: 0;
+}
+
+*[class*='ids-'],
+*[class*='ids-']::before,
+*[class*='ids-']::after {
+  box-sizing: border-box;
+}
+
+*[class*='ids-'] blockquote,
+*[class*='ids-'] p,
+*[class*='ids-'] dl,
+*[class*='ids-'] ol,
+*[class*='ids-'] ul {
+  margin-block-start: 0;
+}

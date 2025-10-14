@@ -1,8 +1,8 @@
 import { RenderResult, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressSelectMenuItemProps } from './SelectMenu';
+import { GlobalCSSClass } from '@/enums';
+import { IressSelectMenuItemProps } from './SelectMenu.types';
 import { IressSelectMenuItem } from './SelectMenuItem';
-import { css } from '@/styled-system/css';
 
 const TEST_ID = 'test-component';
 const TEST_LABEL = 'Option 1';
@@ -43,7 +43,7 @@ describe('IressSelectMenuItem', () => {
         });
 
         const listItem = screen.getByRole('button');
-        expect(listItem).toHaveClass(css({ srOnly: true }));
+        expect(listItem).toHaveClass(GlobalCSSClass.HiddenMobile);
       });
     });
 
@@ -56,26 +56,10 @@ describe('IressSelectMenuItem', () => {
         const meta = screen.getByText('Metadata');
         expect(meta).toBeInTheDocument();
       });
-
-      it('does not render meta when not provided', () => {
-        const screen = renderComponent({
-          label: 'Just a label',
-        });
-
-        // Should only have the label text, no meta text
-        const button = screen.getByRole('button');
-        expect(button).toHaveTextContent('Just a label');
-
-        // Verify no meta styling classes are applied
-        const textElements = button.querySelectorAll(
-          '[class*="typography.body.sm"]',
-        );
-        expect(textElements).toHaveLength(0);
-      });
     });
 
     describe('formattedMeta', () => {
-      it('prioritizes formattedMeta over meta when both are provided', () => {
+      it('renders formatted metadata when provided', () => {
         const screen = renderComponent({
           meta: 'Original meta',
           formattedMeta: (
@@ -83,122 +67,56 @@ describe('IressSelectMenuItem', () => {
           ),
         });
 
-        // Should show formatted meta, not original
         const formattedMeta = screen.getByTestId('formatted-meta');
         expect(formattedMeta).toBeInTheDocument();
         expect(formattedMeta).toHaveTextContent('Formatted meta');
 
-        // Original meta should not be present
+        // Original meta should not be rendered when formattedMeta is provided
         expect(screen.queryByText('Original meta')).not.toBeInTheDocument();
       });
 
       it('falls back to meta when formattedMeta is not provided', () => {
         const screen = renderComponent({
-          meta: 'Fallback meta',
+          meta: 'Original meta',
         });
 
-        const meta = screen.getByText('Fallback meta');
+        const meta = screen.getByText('Original meta');
         expect(meta).toBeInTheDocument();
       });
 
-      it('does not render meta section when both meta and formattedMeta are undefined', () => {
+      it('renders nothing when both meta and formattedMeta are not provided', () => {
+        const screen = renderComponent({});
+
+        const listItem = screen.getByRole('button');
+        expect(listItem).toHaveTextContent(TEST_LABEL);
+        expect(
+          listItem.querySelector('.iress-display--block'),
+        ).not.toBeInTheDocument();
+      });
+
+      it('renders nothing when formattedMeta is explicitly null/undefined', () => {
         const screen = renderComponent({
-          label: 'Just a label',
-          meta: undefined,
+          meta: 'Original meta',
           formattedMeta: undefined,
         });
 
-        const button = screen.getByRole('button');
-        expect(button).toHaveTextContent('Just a label');
-
-        // Verify no meta styling classes are applied
-        const textElements = button.querySelectorAll(
-          '[class*="typography.body.sm"]',
-        );
-        expect(textElements).toHaveLength(0);
-      });
-    });
-
-    describe('formattedLabel', () => {
-      it('prioritizes formattedLabel over label when both are provided', () => {
-        const screen = renderComponent({
-          label: 'Original label',
-          formattedLabel: (
-            <span data-testid="formatted-label">Formatted label</span>
-          ),
-        });
-
-        // Should show formatted label, not original
-        const formattedLabel = screen.getByTestId('formatted-label');
-        expect(formattedLabel).toBeInTheDocument();
-        expect(formattedLabel).toHaveTextContent('Formatted label');
-
-        // Original label should not be present as text (it's still the prop value but not rendered)
-        expect(screen.queryByText('Original label')).not.toBeInTheDocument();
+        const listItem = screen.getByRole('button');
+        expect(listItem).toHaveTextContent(TEST_LABEL);
+        // When formattedMeta is undefined, it should fall back to meta
+        expect(screen.getByText('Original meta')).toBeInTheDocument();
       });
 
-      it('falls back to label when formattedLabel is not provided', () => {
+      it('renders nothing when formattedMeta is explicitly set to null', () => {
         const screen = renderComponent({
-          label: 'Fallback label',
+          meta: 'Original meta',
+          formattedMeta: null,
         });
 
-        const label = screen.getByText('Fallback label');
-        expect(label).toBeInTheDocument();
-      });
-
-      it('renders formattedLabel with highlighted text', () => {
-        const highlightedLabel = (
-          <>
-            <b>Found</b> items
-          </>
-        );
-
-        const screen = renderComponent({
-          label: 'Found items',
-          formattedLabel: highlightedLabel,
-        });
-
-        const boldText = screen.getByText('Found');
-        expect(boldText.tagName).toBe('B');
-
-        // Check that the full text is present
-        const button = screen.getByRole('button');
-        expect(button).toHaveTextContent('Found items');
-      });
-    });
-
-    describe('combined formatted content', () => {
-      it('renders both formattedLabel and formattedMeta with highlighting', () => {
-        const highlightedLabel = (
-          <>
-            <b>Search</b> result
-          </>
-        );
-        const highlightedMeta = (
-          <>
-            Contains <b>search</b> term
-          </>
-        );
-
-        const screen = renderComponent({
-          label: 'Search result',
-          formattedLabel: highlightedLabel,
-          meta: 'Contains search term',
-          formattedMeta: highlightedMeta,
-        });
-
-        // Check label highlighting
-        const labelBold = screen.getByText('Search');
-        expect(labelBold.tagName).toBe('B');
-
-        // Check meta highlighting
-        const metaBold = screen.getByText('search');
-        expect(metaBold.tagName).toBe('B');
-
-        // Check full content
-        const button = screen.getByRole('button');
-        expect(button).toHaveTextContent('Search result');
-        expect(button).toHaveTextContent('Contains search term');
+        const listItem = screen.getByRole('button');
+        expect(listItem).toHaveTextContent(TEST_LABEL);
+        expect(
+          listItem.querySelector('.iress-display--block'),
+        ).not.toBeInTheDocument();
       });
     });
   });

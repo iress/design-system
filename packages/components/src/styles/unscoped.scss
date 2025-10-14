@@ -1,0 +1,10 @@
+/* Unscoped styles - these will affect the host application's styling */
+
+html {
+  font-size: var(--iress-g-font-size-rem, var(--iress-default-font-size--touch));
+}
+
+body {
+  background-color: var(--iress-g-page-background-color, initial);
+  color: var(--iress-g-text-color, initial);
+}

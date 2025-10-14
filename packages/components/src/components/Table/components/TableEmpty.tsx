@@ -1,8 +1,9 @@
-import { type PropsWithChildren, useContext } from 'react';
-import { TableContext } from '../TableProvider';
+import { type PropsWithChildren } from 'react';
+import styles from '../Table.module.scss';
+import { useTable } from '../hooks/useTable';
 
 export const TableEmpty = ({ children }: PropsWithChildren) => {
-  const table = useContext(TableContext);
+  const table = useTable();
   const rows = table?.api.getSortedRowModel().rows;
 
   if (rows?.length || !children) return null;
@@ -12,7 +13,9 @@ export const TableEmpty = ({ children }: PropsWithChildren) => {
 
   return (
     <tr>
-      <td colSpan={numberOfColumns}>{children}</td>
+      <td className={styles.empty} colSpan={numberOfColumns}>
+        {children}
+      </td>
     </tr>
   );
 };

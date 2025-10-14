@@ -1,13 +1,8 @@
 import { act, render, screen } from '@testing-library/react';
 
 import { PageLoading } from './PageLoading';
-import { loading } from '../Loading.styles';
 
-const hiddenStyles = loading({ pattern: 'page' });
-const shownStyles = loading({
-  pattern: 'page',
-  showIndicator: true,
-});
+import loadingStyles from '../Loading.module.scss';
 
 describe('IressLoading pattern="page"', () => {
   it('renders the correct defaults', async () => {
@@ -22,12 +17,12 @@ describe('IressLoading pattern="page"', () => {
 
     // Loading should be delayed by default
     const loader = screen.getByTestId('loader');
-    expect(loader).toHaveClass(hiddenStyles.root!);
-    expect(loader).not.toHaveClass(shownStyles.root!);
+    expect(loader).toHaveClass(loadingStyles['fade-in']);
+    expect(loader).not.toHaveClass(loadingStyles['fade-in--active']);
 
     // Be default there is a delay of 500ms before the skeleton is shown
     await act(() => vi.advanceTimersByTime(500));
-    expect(loader).toHaveClass(shownStyles.root!);
+    expect(loader).toHaveClass(loadingStyles['fade-in--active']);
 
     rerender(<PageLoading pattern="page" critical="Critical content" />);
 
@@ -37,7 +32,7 @@ describe('IressLoading pattern="page"', () => {
     rerender(<PageLoading pattern="page" loaded />);
 
     // When loaded, begin to hide the skeleton
-    expect(loader).not.toHaveClass(shownStyles.root!);
+    expect(loader).not.toHaveClass(loadingStyles['fade-in--active']);
 
     vi.useRealTimers();
   });

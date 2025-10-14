@@ -1,11 +1,11 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
 } from '@iress-storybook/components';
 import * as ComponentStories from './MenuItem.stories';
+import * as MenuHeadingStories from '../MenuHeading/MenuHeading.stories';
 import * as MenuDividerStories from '../MenuDivider/MenuDivider.stories';
-import * as MenuHeadingStories from '../MenuText/MenuHeading.stories';
 import * as MenuTextStories from '../MenuText/MenuText.stories';
 
 <Meta of={ComponentStories} />
@@ -64,12 +64,6 @@ Inside a `IressMenu` with a `role` of `listbox` and the `multiSelect` prop set t
   stories={ComponentStories}
 />
 
-### Element
-
-You can use the `element` prop to render a custom component inside the menu item. This is useful for rendering a component from a third-party library, such as `react-router-dom`.
-
-<ComponentExample story={ComponentStories.Element} stories={ComponentStories} />
-
 ### Divider
 
 When `divider` is set to true, the menu item will render with a bottom border.
@@ -85,7 +79,7 @@ However, it is recommended to use the `IressMenuDivider` component instead.
 
 ### Heading
 
-You can use the `IressMenuHeading` to render headings within a menu. This adds styling so the appropriate padding is applied.
+You can use the `IressMenuHeading` to render a heading within a menu. By default it renders as a `h2`, but you can change it by setting the `level` prop.
 
 <ComponentExample
   story={MenuHeadingStories.Heading}
@@ -94,6 +88,6 @@ You can use the `IressMenuHeading` to render headings within a menu. This adds s
 
 ### Text
 
-You can use the `IressMenuText` to render other text within a menu. This adds styling so the appropriate padding is applied.
+You can use the `IressMenuText` to render text within a menu. This adds styling so the appropriate padding is applied.
 
 <ComponentExample story={MenuTextStories.Text} stories={MenuTextStories} />

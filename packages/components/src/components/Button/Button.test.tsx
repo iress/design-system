@@ -1,24 +1,43 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { IressButton, button as buttonStyles } from '.';
+import { fireEvent, render } from '@testing-library/react';
+import {
+  IressButton,
+  ButtonMode,
+  ButtonType,
+  IressButtonProps,
+  ButtonCssClass,
+} from '.';
 import { IressIcon } from '../Icon';
 import { axe } from 'jest-axe';
-import { GlobalCSSClass } from '@/enums';
+
+const renderButton = (props: IressButtonProps) => {
+  const { getByTestId } = render(
+    <IressButton data-testid="test" {...props}>
+      Button
+    </IressButton>,
+  );
+  return getByTestId('test');
+};
 
 describe('IressButton', () => {
   describe('Default rendering', () => {
     it('renders with the correct classes', () => {
-      render(<IressButton className="test-class">Button</IressButton>);
-      const button = screen.getByText('Button');
+      const button = renderButton({ className: 'test-class' });
+
+      expect(button).toHaveClass(`test-class ${ButtonCssClass.Base}`);
+    });
+
+    it('renders a secondary button', () => {
+      const button = renderButton({});
+
       expect(button).toHaveClass(
-        `test-class ${buttonStyles().root}`,
-        GlobalCSSClass.Button,
+        `${ButtonCssClass.Mode}--${ButtonMode.Secondary}`,
       );
     });
 
     it('renders an HTML button of type button', () => {
-      render(<IressButton>Button</IressButton>);
+      const button = renderButton({});
 
-      const button = screen.getByRole('button');
+      expect(button.tagName).toBe('BUTTON');
       expect(button).toHaveAttribute('type', 'button');
     });
 
@@ -31,43 +50,46 @@ describe('IressButton', () => {
     });
   });
 
-  describe('props', () => {
-    describe('mode', () => {
-      it('renders a button with a different mode', () => {
-        render(<IressButton mode="primary">Button</IressButton>);
-        const button = screen.getByRole('button');
-        expect(button).toHaveClass(buttonStyles({ mode: 'primary' }).root);
+  describe('Props', () => {
+    describe('Mode', () => {
+      const modeArr = Object.values(ButtonMode).map((mode) => [mode, mode]);
+      it.each(modeArr)('renders a %s button when mode is %s', (mode) => {
+        const button = renderButton({ mode: mode });
+
+        expect(button).toHaveClass(`${ButtonCssClass.Mode}--${mode}`);
       });
     });
 
-    describe('type', () => {
-      it('renders a button of type submit', () => {
-        render(<IressButton type="submit">Button</IressButton>);
-        const button = screen.getByRole('button');
-        expect(button).toHaveAttribute('type', 'submit');
-      });
+    describe('Type', () => {
+      const typeArr = Object.values(ButtonType).map((type) => [type, type]);
+      it.each(typeArr)(
+        'renders a button of type %s when type is %s',
+        (type) => {
+          const button = renderButton({ type: type });
+
+          expect(button).toHaveAttribute('type', type);
+        },
+      );
     });
 
     describe('Append & prepend', () => {
       it('renders prepend content before button content', () => {
-        render(<IressButton prepend="Before">Button</IressButton>);
-        const button = screen.getByRole('button');
+        const button = renderButton({ prepend: <span>Before</span> });
+
         expect(button.textContent).toBe('BeforeButton');
       });
 
       it('renders append content after button content', () => {
-        render(<IressButton append="After">Button</IressButton>);
-        const button = screen.getByRole('button');
+        const button = renderButton({ append: <span>After</span> });
+
         expect(button.textContent).toBe('ButtonAfter');
       });
 
       it('renders append and prepend content when both are set', () => {
-        render(
-          <IressButton append="After" prepend="Before">
-            Button
-          </IressButton>,
-        );
-        const button = screen.getByRole('button');
+        const button = renderButton({
+          append: <span>After</span>,
+          prepend: <span>Before</span>,
+        });
 
         expect(button.textContent).toBe('BeforeButtonAfter');
       });
@@ -75,67 +97,61 @@ describe('IressButton', () => {
 
     describe('Loading', () => {
       it(`doesn't render the loading spinner when loading isn't set`, () => {
-        render(<IressButton>Button</IressButton>);
-        const button = screen.getByRole('button');
+        const button = renderButton({});
         const spinner = button.querySelector('.fal');
 
         expect(spinner).toBeNull();
       });
 
       it(`doesn't render the loading spinner when loading is false`, () => {
-        render(<IressButton loading={false}>Button</IressButton>);
-        const button = screen.getByRole('button');
+        const button = renderButton({ loading: false });
         const spinner = button.querySelector('.fal');
 
         expect(spinner).toBeNull();
       });
 
       it('renders loading spinner when loading is true', () => {
-        render(<IressButton loading>Button</IressButton>);
-        const button = screen.getByRole('button');
+        const button = renderButton({ loading: true });
         const spinner = button.querySelector('.fal');
 
         expect(spinner).toBeVisible();
       });
 
       it('hides the prepend content when loading is true', () => {
-        render(
-          <IressButton prepend="Before" loading>
-            Button
-          </IressButton>,
-        );
-        const button = screen.getByRole('button');
-        expect(button.textContent).toBe('Button');
-        expect(button.textContent).not.toBe('BeforeButton');
+        const button = renderButton({
+          prepend: <span>Before</span>,
+          loading: true,
+        });
+        const prependWrapper = button.querySelector(':first-child');
+
+        expect(prependWrapper).toHaveClass('iress-hidden');
       });
 
       it('renders the correct aria-label on the spinner when loading is a string', () => {
-        render(<IressButton loading="This is loading">Button</IressButton>);
-        const button = screen.getByRole('button');
+        const button = renderButton({
+          loading: 'This is loading',
+        });
         const spinner = button.querySelector('.fal');
 
         expect(spinner).toHaveAttribute('aria-label', 'This is loading');
       });
 
       it('renders the correct aria-describedby attribute on the button', () => {
-        render(<IressButton loading>Button</IressButton>);
-        const button = screen.getByRole('button');
+        const button = renderButton({ loading: true });
         const spinnerId = button.querySelector('.fal')?.id;
 
         expect(button).toHaveAttribute('aria-describedby', spinnerId);
       });
 
       it(`doesn't render the aria-describedby attribute on the button when not loading`, () => {
-        render(<IressButton>Button</IressButton>);
-        const button = screen.getByRole('button');
+        const button = renderButton({});
 
         expect(button).not.toHaveAttribute('aria-describedby');
       });
 
       it(`allows button click events when not loading`, () => {
         const clickSpy = vi.fn();
-        render(<IressButton onClick={clickSpy}>Button</IressButton>);
-        const button = screen.getByRole('button');
+        const button = renderButton({ onClick: clickSpy });
 
         fireEvent.click(button);
         expect(clickSpy).toHaveBeenCalled();
@@ -143,12 +159,10 @@ describe('IressButton', () => {
 
       it(`prevents button click events when loading`, () => {
         const clickSpy = vi.fn();
-        render(
-          <IressButton onClick={clickSpy} loading>
-            Button
-          </IressButton>,
-        );
-        const button = screen.getByRole('button');
+        const button = renderButton({
+          loading: true,
+          onClick: clickSpy,
+        });
 
         fireEvent.click(button);
         expect(clickSpy).not.toHaveBeenCalled();
@@ -157,8 +171,7 @@ describe('IressButton', () => {
 
     describe('href', () => {
       it('renders a link when the href prop is set', () => {
-        render(<IressButton href="https://google.co.uk">Button</IressButton>);
-        const link = screen.getByRole('link');
+        const link = renderButton({ href: 'https://google.co.uk' });
 
         expect(link.tagName).toBe('A');
         expect(link).toHaveAttribute('href', 'https://google.co.uk');
@@ -167,49 +180,55 @@ describe('IressButton', () => {
 
     describe('rel', () => {
       it('renders the rel attribute when the rel prop is set on a link', () => {
-        render(
-          <IressButton href="https://google.co.uk" rel="noopener">
-            Button
-          </IressButton>,
-        );
-        const link = screen.getByRole('link');
+        const link = renderButton({
+          href: 'https://google.co.uk',
+          rel: 'noopener',
+        });
 
         expect(link).toHaveAttribute('rel', 'noopener');
+      });
+
+      it(`doesn't render the rel attribute when the rel prop is set on a button`, () => {
+        const link = renderButton({ rel: 'noopener' });
+
+        expect(link).not.toHaveAttribute('rel', 'noopener');
       });
     });
 
     describe('target', () => {
       it('renders the target attribute when the target prop is set on a link', () => {
-        render(
-          <IressButton href="https://google.co.uk" target="_blank">
-            Button
-          </IressButton>,
-        );
-        const link = screen.getByRole('link');
+        const link = renderButton({
+          href: 'https://google.co.uk',
+          target: '_blank',
+        });
 
         expect(link).toHaveAttribute('target', '_blank');
+      });
+
+      it(`doesn't render the target attribute when the rel prop is set on a button`, () => {
+        const link = renderButton({ target: '_blank' });
+
+        expect(link).not.toHaveAttribute('target', '_blank');
       });
     });
 
     describe('noWrap', () => {
-      const noWrapButtonClassName = buttonStyles({ noWrap: true }).root;
-
       it(`doesn't add the noWrap class by default`, () => {
-        render(<IressButton>Button</IressButton>);
-        const button = screen.getByRole('button');
-        expect(button).not.toHaveClass(noWrapButtonClassName);
+        const button = renderButton({});
+
+        expect(button).not.toHaveClass(ButtonCssClass.NoWrap);
       });
 
       it(`adds the noWrap class if noWrap is true`, () => {
-        render(<IressButton noWrap>Button</IressButton>);
-        const button = screen.getByRole('button');
-        expect(button).toHaveClass(noWrapButtonClassName);
+        const button = renderButton({ noWrap: true });
+
+        expect(button).toHaveClass(ButtonCssClass.NoWrap);
       });
 
       it(`doesn't add the noWrap class if noWrap is false`, () => {
-        render(<IressButton noWrap={false}>Button</IressButton>);
-        const button = screen.getByRole('button');
-        expect(button).not.toHaveClass(noWrapButtonClassName);
+        const button = renderButton({ noWrap: false });
+
+        expect(button).not.toHaveClass(ButtonCssClass.NoWrap);
       });
     });
   });

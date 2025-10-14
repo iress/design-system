@@ -1,0 +1,23 @@
+[class*='iress--text-align--'] {
+  text-align: var(--iress-text-align);
+}
+
+.iress--text-align--inherit {
+  --iress-text-align: inherit;
+}
+
+.iress--text-align--left {
+  --iress-text-align: start;
+}
+
+.iress--text-align--center {
+  --iress-text-align: center;
+}
+
+.iress--text-align--right {
+  --iress-text-align: end;
+}
+
+.iress--text-align--justify {
+  --iress-text-align: justify;
+}

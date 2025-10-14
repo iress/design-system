@@ -1,12 +1,11 @@
 /// <reference types="vitest" />
+import { generateScopedName } from './src/helpers/utility/generateScopedName'; // vite only accepts relative paths
 import react from '@vitejs/plugin-react';
 import { glob } from 'glob';
 import { fileURLToPath } from 'node:url';
 import { extname, relative, resolve } from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 // TODO: Monitor and fix "Sourcemap for "/virtual:/@storybook/builder-vite/setup-addons.js" points to missing source files"
 // https://github.com/storybookjs/storybook/issues/28567
@@ -14,7 +13,6 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    tsconfigPaths(),
     react(),
     dts({
       exclude: [
@@ -23,21 +21,6 @@ export default defineConfig({
         'src/**/mocks/**/*',
         'src/**/*.stories.*',
         'src/**/*.docs.*',
-        'src/styled-system/**/*',
-      ],
-      tsconfigPath: './tsconfig.base.json',
-    }),
-    // TODO: The styled-system types are declaration files, so they refuse to be copied via tsconfig.json
-    // Instead we are using a plugin to copy them to the dist folder
-    // In future, possibly do this instead: https://panda-css.com/docs/guides/component-library#use-panda-as-external-package
-    viteStaticCopy({
-      structured: true,
-      silent: true,
-      targets: [
-        {
-          src: 'src/styled-system/**/*.d.ts',
-          dest: '',
-        },
       ],
     }),
   ],
@@ -60,10 +43,7 @@ export default defineConfig({
               'src/**/mock-data/**',
               'src/**/examples/**',
               'src/**/mocks/**',
-              'src/**/meta/**',
               'src/vite-env.d.ts',
-              'src/styled-system/**/*',
-              'theme-preset/**/*',
             ],
             cwd: __dirname,
           })
@@ -81,5 +61,33 @@ export default defineConfig({
         entryFileNames: '[name].js',
       },
     },
+  },
+  css: {
+    modules: {
+      generateScopedName,
+    },
+    preprocessorOptions: {
+      scss: {
+        silenceDeprecations: ['legacy-js-api'],
+      },
+    },
+  },
+  resolve: {
+    alias: [
+      { find: '@', replacement: resolve(__dirname, 'src') },
+      {
+        find: '@components',
+        replacement: resolve(__dirname, 'src/components'),
+      },
+      {
+        find: '@iress-storybook',
+        replacement: resolve(__dirname, '../../apps/storybook/src'),
+      },
+      { find: '@helpers', replacement: resolve(__dirname, 'src/helpers') },
+      {
+        find: '@theme-preset',
+        replacement: resolve(__dirname, 'theme-preset'),
+      },
+    ],
   },
 });

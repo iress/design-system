@@ -1,21 +1,24 @@
 import { RenderResult, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { generateLabelValueMeta } from '@/mocks/generateLabelValues';
-import { IressSelectMenuProps, IressSelectMenu } from './SelectMenu';
+import { IressSelectMenuProps } from './SelectMenu.types';
+import { IressSelectMenu } from './SelectMenu';
 import { GlobalCSSClass } from '@/main';
-import { css } from '@/styled-system/css';
 
-export function filterMobileOnlyOptions(options: HTMLElement[]) {
+import menuItemStyles from '../../Menu/MenuItem/MenuItem.module.scss';
+
+export function filterMobileOnlyOptions(
+  options: HTMLElement[],
+  className = menuItemStyles.menuItem,
+) {
   return options.filter((option: HTMLElement) => {
-    const closest = option?.closest(`.${GlobalCSSClass.RichSelectMenuItem}`);
+    const closest = option?.closest(`.${className}`);
 
-    if (!closest) return false;
-
-    const srOnlyClass = css({ srOnly: true });
+    if (!option?.classList.contains(className) || !closest) return false;
 
     return (
-      closest?.classList.contains(srOnlyClass) ||
-      option?.classList.contains(srOnlyClass)
+      closest?.classList.contains(GlobalCSSClass.HiddenMobile) ||
+      option?.classList.contains(GlobalCSSClass.HiddenMobile)
     );
   });
 }

@@ -1,15 +1,17 @@
 import { IressStack } from '@/components/Stack';
+import { type IressProgressProps } from '@/components/Progress/Progress.types';
 import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
-import { IressProgress, type IressProgressProps } from '@/components/Progress';
+import { IressProgress } from '@/components/Progress';
+import classNames from 'classnames';
+import styles from './StartUpLoading.module.scss';
+import loadingStyles from '../Loading.module.scss';
 import { IressText, type IressTextProps } from '@/components/Text';
+import { type IressHTMLAttributes } from '@/interfaces';
 import { propagateTestid } from '@/helpers/utility/propagateTestid';
 import { useShowIndicator } from '../hooks/useShowIndicator';
 import { useEstimatedProgressValue } from '../hooks/useEstimatedProgressValue';
-import { type IressStyledProps } from '@/types';
-import { loading } from '../Loading.styles';
-import { css, cx } from '@/styled-system/css';
 
-export interface StartUpLoadingProps extends Omit<IressStyledProps, 'color'> {
+export interface StartUpLoadingProps extends IressHTMLAttributes {
   /**
    * Message to display when the loading time is longer than expected.
    * @default 'One moment please...'
@@ -45,7 +47,7 @@ export interface StartUpLoadingProps extends Omit<IressStyledProps, 'color'> {
   /**
    * If provided, will use this to set the `value` of the progress bar. If not provided, will use the `estimatedFinishTime` to calculate the progress.
    */
-  progress?: IressProgressProps<number | undefined>['value'];
+  progress?: IressProgressProps['value'];
 
   /**
    * This is a render prop that allows you to override the default progress rendering.
@@ -53,8 +55,8 @@ export interface StartUpLoadingProps extends Omit<IressStyledProps, 'color'> {
    */
   renderProgress?: (
     props: Pick<
-      IressProgressProps<number | undefined>,
-      'min' | 'max' | 'sectionTitle' | 'value'
+      IressProgressProps,
+      'className' | 'min' | 'max' | 'sectionTitle' | 'value'
     >,
   ) => ReactNode;
 
@@ -63,12 +65,6 @@ export interface StartUpLoadingProps extends Omit<IressStyledProps, 'color'> {
    * @default 'Loading...'
    */
   screenReaderText?: ReactNode;
-
-  /**
-   * Set the start from timer, useful when stringing multiple loading patterns across different pages (eg. logging via a third-party authentication provider)
-   * @default 0
-   */
-  startFrom?: number;
 
   /**
    * Set the timeouts for showing the progress bar and message.
@@ -99,7 +95,7 @@ interface MessageProps
       StartUpLoadingProps,
       'children' | 'messageList' | 'screenReaderText'
     >,
-    IressTextProps<'div'> {
+    IressTextProps {
   progressValue: number;
   show: boolean;
 }
@@ -124,22 +120,24 @@ const Message = ({
     if (!messageRef.current) {
       return;
     }
-    messageRef.current.classList.remove(
-      css({ animationStyle: 'loading-slide-next' }),
-    );
+    messageRef.current.classList.remove(loadingStyles['slide-next']);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions -- Trigger reflow and animation
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions -- Trigger reflow
     messageRef.current.offsetHeight;
 
-    messageRef.current.classList.add(
-      css({ animationStyle: 'loading-slide-next' }),
-    );
+    messageRef.current.classList.add(loadingStyles['slide-next']);
   }, [messageTimecode]);
 
   const staticMessage = show ? children : screenReaderText;
 
   return (
-    <IressText textAlign="center" {...restProps}>
+    <IressText
+      align="center"
+      className={classNames(styles.message, loadingStyles['fade-in'], {
+        [loadingStyles['fade-in--active']]: show,
+      })}
+      {...restProps}
+    >
       <div ref={messageRef}>
         {messageTimecode
           ? messageList?.[Number(messageTimecode)]
@@ -151,9 +149,7 @@ const Message = ({
 
 export const StartUpLoading = ({
   className,
-  children = (
-    <IressText color="colour.neutral.70">One moment please...</IressText>
-  ),
+  children = <IressText mode="muted">One moment please...</IressText>,
   'data-testid': dataTestId,
   estimatedFinishTime = 3000,
   loaded,
@@ -161,7 +157,6 @@ export const StartUpLoading = ({
   progress,
   renderProgress = (props) => <IressProgress {...props} />,
   screenReaderText = 'Loading...',
-  startFrom,
   timeout,
   ...restProps
 }: StartUpLoadingProps) => {
@@ -179,12 +174,6 @@ export const StartUpLoading = ({
     progress,
     latestMessageTimecode,
   );
-  const styles = loading({
-    pattern: 'start-up',
-    instant: timeout?.progress === 0,
-    showIndicator,
-    showMessage,
-  });
 
   useEffect(() => {
     const showTimeout = setTimeout(
@@ -199,19 +188,21 @@ export const StartUpLoading = ({
 
   return (
     <div
-      {...restProps}
-      className={cx(styles.root, className)}
       data-testid={dataTestId}
+      className={classNames(styles.root, className, loadingStyles['fade-in'], {
+        [loadingStyles['fade-in--active']]: showIndicator,
+      })}
+      {...restProps}
     >
-      <IressStack gap="md" {...restProps}>
+      <IressStack gutter="md" {...restProps}>
         {renderProgress({
-          min: startFrom,
+          className: styles.progress,
+          min: 0,
           max: estimatedFinishTime,
           value: Math.min(progressValue, estimatedFinishTime),
           sectionTitle: `${(Math.min(progressValue, estimatedFinishTime) / estimatedFinishTime) * 100}% loaded`,
         })}
         <Message
-          className={styles.message}
           data-testid={propagateTestid(dataTestId, 'message')}
           messageList={messageList}
           progressValue={progressValue}

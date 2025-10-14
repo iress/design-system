@@ -1,7 +1,6 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressCol } from '.';
-import { GlobalCSSClass } from '@/enums';
+import { ColCssClass, IressCol } from '.';
 
 const TEST_ID = 'test-component';
 
@@ -15,7 +14,11 @@ describe('IressCol', () => {
 
     const element = getByTestId(TEST_ID);
 
-    expect(element).toHaveClass('span_auto', 'test-class', GlobalCSSClass.Col);
+    expect(element).toHaveClass(
+      ColCssClass.Base,
+      `${ColCssClass.Span}--${IressCol.Span.Auto}`,
+      'test-class',
+    );
 
     expect(getByTestId('children')).toBeInTheDocument();
   });
@@ -24,22 +27,29 @@ describe('IressCol', () => {
     describe('alignSelf', () => {
       it('adds the correct classes', () => {
         const { getByTestId } = render(
-          <IressCol data-testid={TEST_ID} alignSelf="stretch" />,
+          <IressCol
+            data-testid={TEST_ID}
+            alignSelf={IressCol.AlignSelf.Stretch}
+          />,
         );
 
-        expect(getByTestId(TEST_ID)).toHaveClass('as_stretch');
+        expect(getByTestId(TEST_ID)).toHaveClass(
+          `${ColCssClass.AlignSelf}--${IressCol.AlignSelf.Stretch}`,
+        );
       });
     });
 
     describe('offset', () => {
       it(`adds the offset for all breakpoints of string passed`, () => {
         const { getByTestId } = render(
-          <IressCol data-testid={TEST_ID} offset={2} />,
+          <IressCol data-testid={TEST_ID} offset={IressCol.Offset.Two} />,
         );
 
         const element = getByTestId(TEST_ID);
 
-        expect(element).toHaveClass('offset_2');
+        expect(element).toHaveClass(
+          `${ColCssClass.Offset}--${IressCol.Offset.Two}`,
+        );
       });
 
       it(`adds the correct responsive offset classes from object - two options`, () => {
@@ -47,13 +57,16 @@ describe('IressCol', () => {
           <IressCol
             data-testid={TEST_ID}
             offset={{
-              xs: 10,
-              md: 6,
+              xs: IressCol.Offset.Ten,
+              md: IressCol.Offset.Six,
             }}
           />,
         );
 
-        expect(getByTestId(TEST_ID)).toHaveClass('xs:offset_10', 'md:offset_6');
+        expect(getByTestId(TEST_ID)).toHaveClass(
+          `${ColCssClass.Offset}-xs--${IressCol.Offset.Ten}`,
+          `${ColCssClass.Offset}-md--${IressCol.Offset.Six}`,
+        );
       });
 
       it(`adds the correct responsive offset classes from object - three options`, () => {
@@ -61,17 +74,17 @@ describe('IressCol', () => {
           <IressCol
             data-testid={TEST_ID}
             offset={{
-              sm: 11,
-              lg: 3,
-              xxl: 5,
+              sm: IressCol.Offset.Eleven,
+              lg: IressCol.Offset.Three,
+              xxl: IressCol.Offset.Five,
             }}
           />,
         );
 
         expect(getByTestId(TEST_ID)).toHaveClass(
-          'sm:offset_11',
-          'lg:offset_3',
-          'xxl:offset_5',
+          `${ColCssClass.Offset}-sm--${IressCol.Offset.Eleven}`,
+          `${ColCssClass.Offset}-lg--${IressCol.Offset.Three}`,
+          `${ColCssClass.Offset}-xxl--${IressCol.Offset.Five}`,
         );
       });
     });
@@ -79,13 +92,17 @@ describe('IressCol', () => {
     describe('span', () => {
       it(`adds the span for all breakpoints of string passed`, () => {
         const { getByTestId } = render(
-          <IressCol data-testid={TEST_ID} span={2} />,
+          <IressCol data-testid={TEST_ID} span={IressCol.Span.Two} />,
         );
 
         const element = getByTestId(TEST_ID);
 
-        expect(element).toHaveClass('span_2');
-        expect(element).not.toHaveClass('span_auto');
+        expect(element).toHaveClass(
+          `${ColCssClass.Span}--${IressCol.Span.Two}`,
+        );
+        expect(element).not.toHaveClass(
+          `${ColCssClass.Span}--${IressCol.Span.Auto}`,
+        );
       });
 
       it(`adds the correct responsive span classes from object - two options`, () => {
@@ -93,13 +110,16 @@ describe('IressCol', () => {
           <IressCol
             data-testid={TEST_ID}
             span={{
-              xs: 10,
-              md: 6,
+              xs: IressCol.Span.Ten,
+              md: IressCol.Span.Six,
             }}
           />,
         );
 
-        expect(getByTestId(TEST_ID)).toHaveClass('xs:span_10', 'md:span_6');
+        expect(getByTestId(TEST_ID)).toHaveClass(
+          `${ColCssClass.Span}-xs--${IressCol.Span.Ten}`,
+          `${ColCssClass.Span}-md--${IressCol.Span.Six}`,
+        );
       });
 
       it(`adds the correct responsive span classes from object - three options with fallback`, () => {
@@ -107,17 +127,18 @@ describe('IressCol', () => {
           <IressCol
             data-testid={TEST_ID}
             span={{
-              sm: 2,
-              lg: 3,
-              xxl: 5,
+              sm: IressCol.Span.Two,
+              lg: IressCol.Span.Three,
+              xxl: IressCol.Span.Five,
             }}
           />,
         );
 
         expect(getByTestId(TEST_ID)).toHaveClass(
-          'sm:span_2',
-          'lg:span_3',
-          'xxl:span_5',
+          `${ColCssClass.Span}-xs--${IressCol.Span.Twelve}`,
+          `${ColCssClass.Span}-sm--${IressCol.Span.Two}`,
+          `${ColCssClass.Span}-lg--${IressCol.Span.Three}`,
+          `${ColCssClass.Span}-xxl--${IressCol.Span.Five}`,
         );
       });
     });

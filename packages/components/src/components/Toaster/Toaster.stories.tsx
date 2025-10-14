@@ -1,8 +1,6 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import {
-  IressToasterProvider,
-  type IressToasterProviderProps,
-} from './ToasterProvider';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressToasterProvider } from './ToasterProvider';
+import { IressToasterProviderProps } from './Toaster.types';
 import { IressStack } from '../Stack';
 import {
   disableArgTypes,
@@ -32,7 +30,6 @@ export default {
   argTypes: {
     ...disableArgTypes(['container']),
   },
-  tags: ['updated'],
 } as Meta<typeof IressToasterProvider>;
 
 export const Provider: Story = {
@@ -43,7 +40,7 @@ export const Provider: Story = {
     ...removeArgTypes(['toast']),
   },
   render: (args) => (
-    <IressStack gap="md">
+    <IressStack gutter="md">
       <IressAlert status="info">
         <code>IressToasterProvider</code> does not change the position on each
         render, it can only be done on the initial render.

@@ -1,8 +1,6 @@
 import { axe } from 'jest-axe';
 import { IressProgress } from './Progress';
 import { render, screen } from '@testing-library/react';
-import { progress } from './Progress.styles';
-import { GlobalCSSClass } from '@/enums';
 
 describe('IressProgress', () => {
   describe('props', () => {
@@ -11,20 +9,19 @@ describe('IressProgress', () => {
 
       const progressBar = screen.getByRole('progressbar');
 
-      expect(progressBar).toHaveClass(progress(), GlobalCSSClass.Progress);
-      expect(progressBar).toHaveAttribute('max', '100');
-      expect(progressBar).not.toHaveAttribute('min');
-      expect(progressBar).toHaveAttribute('value', '0');
+      expect(progressBar).toHaveAttribute('aria-valuemax', '100');
+      expect(progressBar).toHaveAttribute('aria-valuemin', '0');
+      expect(progressBar).toHaveAttribute('aria-valuenow', '0');
     });
 
     it('renders with custom min, max, and value', () => {
       render(<IressProgress min={0} max={100} value={50} />);
 
-      const progressBar = screen.getByRole('meter');
+      const progressBar = screen.getByRole('progressbar');
 
-      expect(progressBar).toHaveAttribute('max', '100');
-      expect(progressBar).toHaveAttribute('min', '0');
-      expect(progressBar).toHaveAttribute('value', '50');
+      expect(progressBar).toHaveAttribute('aria-valuemax', '100');
+      expect(progressBar).toHaveAttribute('aria-valuemin', '0');
+      expect(progressBar).toHaveAttribute('aria-valuenow', '50');
     });
   });
 
@@ -32,8 +29,9 @@ describe('IressProgress', () => {
     it('resets value to min if less than min', () => {
       render(<IressProgress min={0} value={-12} />);
 
-      const progressBar = screen.getByRole('meter');
-      expect(progressBar).toHaveAttribute('min', '0');
+      const progressBar = screen.getByRole('progressbar');
+
+      expect(progressBar).toHaveAttribute('aria-valuemin', '0');
     });
 
     it('resets value to max if greater than max', () => {
@@ -41,7 +39,7 @@ describe('IressProgress', () => {
 
       const progressBar = screen.getByRole('progressbar');
 
-      expect(progressBar).toHaveAttribute('max', '100');
+      expect(progressBar).toHaveAttribute('aria-valuemax', '100');
     });
   });
 
@@ -51,6 +49,21 @@ describe('IressProgress', () => {
     const progressBar = screen.getByRole('progressbar');
 
     expect(progressBar).toHaveAccessibleName('Step 0 of 100');
+  });
+
+  it('renders with the correct data-testids', () => {
+    render(
+      <IressProgress
+        sectionTitle="Step {{current}} of {{max}}"
+        data-testid="test-progress"
+      />,
+    );
+
+    expect(screen.getByTestId('test-progress')).toBeInTheDocument();
+
+    expect(
+      screen.getByTestId('test-progress__progressbar'),
+    ).toBeInTheDocument();
   });
 
   it('should not have basic accessibility issues', async () => {

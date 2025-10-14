@@ -1,4 +1,4 @@
-import { type LabelValue } from '@/interfaces';
+import { LabelValue } from '@/interfaces';
 
 export const MOCK_RADIO_OPTIONS_LENGTH = 3;
 export const MOCK_RADIO_OPTIONS = generateRadioOptions();

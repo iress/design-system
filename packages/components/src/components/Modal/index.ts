@@ -1,6 +1,5 @@
-export * from './Modal.styles';
+export * from './Modal.types';
 export * from './Modal';
+export * from './ModalProvider';
 
-export { IressModalProvider } from './ModalProvider';
-export type { IressModalProviderProps } from './ModalProvider';
 export * from './hooks/useModal';

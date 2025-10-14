@@ -1,4 +1,4 @@
-import { Meta, Markdown } from '@storybook/addon-docs/blocks';
+import { Meta, Markdown } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -81,7 +81,11 @@ The `fixedFooter` prop can be used to set the footer to be fixed to the bottom o
 
 **Note:** Also works without footer content.
 
-<IressAlert status="warning" heading="Using with popovers and tooltips" mb="md">
+<IressAlert
+  status={IressAlert.Status.Warning}
+  heading="Using with popovers and tooltips"
+  className="iress-mb--md"
+>
   The fixed footer variant of IressModal prevents content from overflowing the
   modal. This can cause layout issues when using with components that use
   popovers (for example IressCombobox), especially when these components sit at
@@ -97,9 +101,7 @@ The `fixedFooter` prop can be used to set the footer to be fixed to the bottom o
 
 ### Size
 
-The `size` prop can be set to `sm`, `md` or `lg`. It defaults to `md`.
-
-Below is a guide on when to use which size.
+The `size` prop can be set to `sm`, `md`, `lg` or `fullpage`. It defaults to `md`.
 
 <ComponentExample story={ComponentStories.Size} stories={ComponentStories} />
 
@@ -129,6 +131,12 @@ You can override this behaviour by specifying a value for `xs` in your size obje
   story={ComponentStories.ResponsiveSize}
   stories={ComponentStories}
 />
+
+### Padding
+
+The `padding` prop can be set to either `none`, `sm`, `md` or `lg`. It defaults to `md`.
+
+<ComponentExample story={ComponentStories.Padding} stories={ComponentStories} />
 
 ### Disable closing
 

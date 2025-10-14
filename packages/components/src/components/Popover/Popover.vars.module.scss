@@ -1,0 +1,23 @@
+/** Popover variables
+ * --------------------------------------------------
+ */
+
+.popover,
+.portal {
+  --iress-background-color: var(--iress-popover-background-color, var(--iress-a-layout-background-color, var(--iress-g-background-color, var(--iress-default-background-color))));
+  --iress-border-width: var(--iress-popover-border-width, var(--iress-g-border-width, var(--iress-default-border-width)));
+  --iress-border-color: var(--iress-popover-border-color, var(--iress-g-border-color, var(--iress-default-border-color)));
+  --iress-max-height: var(--iress-popover-max-height);
+  --iress-max-width: var(--iress-popover-max-width, calc(18 * var(--iress-g-spacing-rem)));
+  --iress-width: initial;
+  --iress-overflow-y: var(--iress-popover-overflow-y);
+  --iress-popper-border-radius: var(--iress-popover-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius)));
+  --iress-box-shadow-size: var(--iress-popover-box-shadow-size, 0 0);
+  --iress-box-shadow-color: var(--iress-popover-box-shadow-color, transparent);
+  --iress-text-color: var(--iress-g-text-color, var(--iress-default-text-color));
+}
+
+.hasInputActivator,
+.inputActivatorPortal {
+  --iress-max-width: auto;
+}

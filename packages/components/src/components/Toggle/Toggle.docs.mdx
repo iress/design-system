@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -22,7 +22,11 @@ Toggles are typically on / off switches, similar to a household light switch. Th
 
 The `IressToggle` component should only be used for actions that happen immediately, for example switching a device's WiFi connection on or off.
 
-<IressAlert status="warning" heading="Don't use Toggles in forms" mb="xl">
+<IressAlert
+  status={IressAlert.Status.Warning}
+  heading="Don't use Toggles in forms"
+  className="iress-mb--md"
+>
   Toggles shouldn’t be used as part of a form as they don’t have the correct
   semantics, and won’t submit a value when the form data is submitted. If you
   need a toggleable component in a form, use a checkbox or radio group instead.

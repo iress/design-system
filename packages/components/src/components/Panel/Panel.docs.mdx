@@ -1,10 +1,9 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
 } from '@iress-storybook/components';
 import * as ComponentStories from './Panel.stories';
-import { IressButton } from '../../main';
 
 <Meta of={ComponentStories} />
 
@@ -20,21 +19,47 @@ import { IressButton } from '../../main';
 
 ### Background
 
-By default, panels use the `colour.neutral.10` token. For most applications, this is the preferred background as panels are usually placed on a `colour.neutral.20` background.
+The `background` prop allows you to vary the styling of the panel component. It has four variants.
 
-However, there are times when a panel needs to be placed on a different background. In these cases, you can use [the `bg` prop](/docs/styling-props-colour--docs#bg) to set the background to a different colour.
-
-<ComponentExample story={ComponentStories.bg} stories={ComponentStories} />
+<ComponentExample
+  story={ComponentStories.Background}
+  stories={ComponentStories}
+/>
 
 ### Padding
 
-Panel padding now is a global styling prop.
+Panel padding can be set using the `padding` prop. It can be set to `none`, `sm`, `md` or `lg`. Its default value is `md`.
 
-<p>
-  <IressButton href="/?path=/docs/styling-props-spacing--docs#padding">
-    Learn more
-  </IressButton>
-</p>
+<ComponentExample story={ComponentStories.Padding} stories={ComponentStories} />
+
+### Responsive padding
+
+The `padding` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
+
+<ComponentExample
+  story={ComponentStories.ResponsivePadding}
+  stories={ComponentStories}
+/>
+
+### Variable padding
+
+If you need finer control of a panel's padding, for example, you need different padding sizes on different axes, you can pass a `VariablePadding` object to the `padding` prop.
+
+A VariablePadding object can consist of any of the following keys:
+
+- `x`: horizontal
+- `y`: vertical
+- `t`: top
+- `r`: right
+- `b`: bottom
+- `l`: left
+
+Variable padding can also be passed as part of a responsive object.
+
+<ComponentExample
+  story={ComponentStories.VariablePadding}
+  stories={ComponentStories}
+/>
 
 ### Text align
 
@@ -53,9 +78,9 @@ Panel can be set to fill its available container height by setting the `stretch`
 
 <ComponentExample story={ComponentStories.Stretch} stories={ComponentStories} />
 
-### Removing border radius
+### `noBorderRadius`
 
-Panels can inherit the theme's border radius which may result in an undesirable look to those components that use panels internally such as slideouts. To remove rounding from all panels set the prop `borderRadius="none"` to ensure panels have a zero border radius.
+Panels can inherit the theme's border radius which may result in an undesirable look to those components that use panels internally such as slideouts. To remove rounding from all panels set the prop `noBorderRadius` to ensure all panels have a zero border radius.
 
 <ComponentExample
   story={ComponentStories.NoBorderRadius}

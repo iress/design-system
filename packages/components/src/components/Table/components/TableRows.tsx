@@ -1,23 +1,8 @@
-import { flexRender, type Row } from '@tanstack/react-table';
+import { type TableRowsProps } from '../Table.types';
+import { flexRender } from '@tanstack/react-table';
 import { TableBodyCell } from './TableBodyCell';
+import { useTable } from '../hooks/useTable';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
-import { type IressStyledProps } from '@/types';
-import { type AriaRelationshipProps } from '@/hooks/useAriaRelationship';
-import { useContext } from 'react';
-import { getTableContext } from '../TableProvider';
-import { styled } from '@/styled-system/jsx';
-
-export interface TableRowsProps<TRow extends object = never>
-  extends Partial<Pick<AriaRelationshipProps, 'setControlViaRef'>> {
-  additionalHeaders?: string;
-  hiddenHeader?: boolean;
-  scope?: 'row' | 'col';
-  rowProps?:
-    | IressStyledProps<'tr'>
-    | ((row: Row<TRow>) => IressStyledProps<'tr'>);
-  tableId: string;
-  testId?: string;
-}
 
 export const TableRows = <TRow extends object = never>({
   additionalHeaders,
@@ -28,13 +13,13 @@ export const TableRows = <TRow extends object = never>({
   tableId,
   testId,
 }: TableRowsProps<TRow>) => {
-  const table = useContext(getTableContext<TRow>());
+  const table = useTable<TRow>();
   const rows = table?.api.getSortedRowModel().rows;
 
   if (!rows?.length) return null;
 
   return rows.map((row) => (
-    <styled.tr
+    <tr
       key={row.id}
       data-testid={testId?.replace('tbody', 'row')}
       id={`${tableId}--rows--${row.id}`}
@@ -61,6 +46,6 @@ export const TableRows = <TRow extends object = never>({
           {flexRender(cell.column.columnDef.cell, cell.getContext())}
         </TableBodyCell>
       ))}
-    </styled.tr>
+    </tr>
   ));
 };

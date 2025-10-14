@@ -4,51 +4,56 @@ import {
   IressPanel,
   IressStack,
   IressText,
+  IressToasterProps,
   IressToasterProvider,
-  type IressToasterProviderProps,
-  type NewToast,
+  IressToasterProviderProps,
+  IressToastProps,
   useToaster,
 } from '@/main';
+import { useState } from 'react';
 
-const DEFAULT_TOAST: NewToast = {
-  content: 'Message sent successfully',
+const DEFAULT_TOAST: IressToastProps = {
+  children: 'Message sent successfully',
   heading: 'Success',
   status: 'success',
 };
 
 const Toaster = () => {
-  const topStart = useToaster('top-start');
-  const topCenter = useToaster('top-center');
-  const topEnd = useToaster('top-end');
-  const bottomStart = useToaster('bottom-start');
-  const bottomCenter = useToaster('bottom-center');
-  const bottomEnd = useToaster('bottom-end');
+  const [position, setPosition] =
+    useState<IressToasterProps['position']>('bottom-end');
+  const { status, ...toast } = DEFAULT_TOAST;
+  const toaster = useToaster(position);
+
+  const changePosition = (position: IressToasterProps['position']) => {
+    setPosition(position);
+    queueMicrotask(() => toaster[status](toast));
+  };
 
   return (
     <div style={{ padding: '80px 150px' }}>
-      <IressStack gap="md">
-        <IressInline horizontalAlign="between" gap="sm">
-          <IressButton onClick={() => topStart.success(DEFAULT_TOAST)}>
+      <IressStack gutter="md">
+        <IressInline horizontalAlign="between" gutter="sm">
+          <IressButton onClick={() => changePosition('top-start')}>
             top-start
           </IressButton>
-          <IressButton onClick={() => topCenter.success(DEFAULT_TOAST)}>
+          <IressButton onClick={() => changePosition('top-center')}>
             top-center
           </IressButton>
-          <IressButton onClick={() => topEnd.success(DEFAULT_TOAST)}>
+          <IressButton onClick={() => changePosition('top-end')}>
             top-end
           </IressButton>
         </IressInline>
-        <IressPanel bg="transparent" p="lg">
-          <IressText textAlign="center">Toaster positions</IressText>
+        <IressPanel background="transparent" padding="lg">
+          <IressText align="center">Toaster positions</IressText>
         </IressPanel>
         <IressInline horizontalAlign="between">
-          <IressButton onClick={() => bottomStart.success(DEFAULT_TOAST)}>
+          <IressButton onClick={() => changePosition('bottom-start')}>
             bottom-start
           </IressButton>
-          <IressButton onClick={() => bottomCenter.success(DEFAULT_TOAST)}>
+          <IressButton onClick={() => changePosition('bottom-center')}>
             bottom-center
           </IressButton>
-          <IressButton onClick={() => bottomEnd.success(DEFAULT_TOAST)}>
+          <IressButton onClick={() => changePosition('bottom-end')}>
             bottom-end
           </IressButton>
         </IressInline>
@@ -58,17 +63,7 @@ const Toaster = () => {
 };
 
 export const ToasterPositionExamples = (args: IressToasterProviderProps) => (
-  <IressToasterProvider {...args} id="bottom-end" position="bottom-end">
-    <IressToasterProvider {...args} id="bottom-center" position="bottom-center">
-      <IressToasterProvider {...args} id="bottom-start" position="bottom-start">
-        <IressToasterProvider {...args} id="top-start" position="top-start">
-          <IressToasterProvider {...args} id="top-center" position="top-center">
-            <IressToasterProvider {...args} id="top-end" position="top-end">
-              <Toaster />
-            </IressToasterProvider>
-          </IressToasterProvider>
-        </IressToasterProvider>
-      </IressToasterProvider>
-    </IressToasterProvider>
+  <IressToasterProvider {...args}>
+    <Toaster />
   </IressToasterProvider>
 );

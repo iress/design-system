@@ -1,7 +1,8 @@
 import { act, render, screen } from '@testing-library/react';
 
 import { ValidateLoading } from './ValidateLoading';
-import { loading } from '../Loading.styles';
+
+import loadingStyles from '../Loading.module.scss';
 
 describe('IressLoading pattern="validate"', () => {
   it('renders the correct defaults', async () => {
@@ -20,12 +21,7 @@ describe('IressLoading pattern="validate"', () => {
     const text = screen.getByText('This is taking longer than expected...');
 
     expect(text).toBeInTheDocument();
-    expect(text).toHaveClass(
-      loading({
-        pattern: 'validate',
-        showMessage: true,
-      }).message!,
-    );
+    expect(text).toHaveClass(loadingStyles['fade-next']);
 
     vi.useRealTimers();
   });

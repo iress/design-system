@@ -1,9 +1,10 @@
 import { render, screen } from '@testing-library/react';
 
 import { axe } from 'jest-axe';
-import { IressTableBody, IressTableBodyProps } from './TableBody';
+import { IressTableBody } from './TableBody';
+import { IressTableBodyProps } from './TableBody.types';
 import userEvent from '@testing-library/user-event';
-import { css } from '@/styled-system/css';
+import { GlobalCSSClass } from '@/enums';
 
 const TEST_ID = 'test-component';
 const TEST_CAPTION = 'caption';
@@ -97,7 +98,7 @@ describe('TableBody', () => {
         });
 
         const header = screen.getByRole('rowheader', { name: TEST_CAPTION });
-        expect(header).toHaveClass(css({ srOnly: true }));
+        expect(header).toHaveClass(GlobalCSSClass.SROnly);
         expect(header).not.toHaveAttribute('aria-expanded');
       });
 

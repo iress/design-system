@@ -1,50 +1,32 @@
 import {
-  type Context,
-  createContext,
-  type PropsWithChildren,
+  type ForwardedRef,
+  forwardRef,
+  type ReactElement,
+  type Ref,
+  useImperativeHandle,
   useMemo,
 } from 'react';
 import {
+  type IressTableProviderProps,
+  type TableContextValue,
+  type TableRef,
+} from './Table.types';
+import { composeIDSTableColumnDefs } from './helpers/composeIDSTableColumnDefs';
+import {
   getCoreRowModel,
   getSortedRowModel,
-  type Table,
   useReactTable,
 } from '@tanstack/react-table';
-import { composeTableInitialSorting } from './helpers/composeTableInitialSorting';
-import {
-  composeTableColumnDefs,
-  type TableColumn,
-} from './helpers/composeTableColumnDefs';
+import { composeIDSTableInitialSorting } from './helpers/composeIDSTableInitialSorting';
+import { getTableContext } from './TableContext';
+import { findColumnByKey } from './helpers/findColumnByKey';
 
-export interface TableProviderProps<TRow extends object, TVal = unknown>
-  extends PropsWithChildren {
-  columns?: TableColumn<TRow, TVal>[];
-  rows: TRow[];
-}
-
-export interface TableContextValue<TRow extends object, TVal = unknown> {
-  api: Table<TRow>;
-  getColumnByKey: (key: string) => TableColumn<TRow, TVal> | undefined;
-}
-
-function createTableContext<TRow extends object, TVal = unknown>() {
-  return createContext<TableContextValue<TRow, TVal> | undefined>(undefined);
-}
-
-// eslint-disable-next-line react-refresh/only-export-components -- Its easier to keep this function here for context
-export function getTableContext<TRow extends object, TVal = unknown>() {
-  return TableContext as unknown as Context<TableContextValue<TRow, TVal>>;
-}
-
-export const TableContext = createTableContext();
-
-export const TableProvider = <TRow extends object, TVal = unknown>({
-  children,
-  columns,
-  rows,
-}: TableProviderProps<TRow, TVal>) => {
+const TableProvider = <TRow extends object, TVal = unknown>(
+  { children, columns, rows }: IressTableProviderProps<TRow, TVal>,
+  ref: ForwardedRef<TableRef<TRow>>,
+) => {
   const columnDefinitions = useMemo(() => {
-    return composeTableColumnDefs(rows, columns);
+    return composeIDSTableColumnDefs(rows, columns);
   }, [columns, rows]);
 
   const api = useReactTable({
@@ -53,19 +35,34 @@ export const TableProvider = <TRow extends object, TVal = unknown>({
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     initialState: {
-      sorting: composeTableInitialSorting(columns),
+      sorting: composeIDSTableInitialSorting(columns),
     },
   });
 
   const context: TableContextValue<TRow, TVal> = useMemo(
     () => ({
       api,
-      getColumnByKey: (key) => columns?.find((column) => column.key === key),
+      getColumnByKey: (key) => findColumnByKey(key, columns),
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps -- only update when columns and rows change
     [rows, columns, api.getState().sorting],
   );
 
+  useImperativeHandle(
+    ref,
+    () => ({
+      api,
+    }),
+    [api],
+  );
+
   const { Provider } = getTableContext<TRow, TVal>();
   return <Provider value={context}>{children}</Provider>;
 };
+
+export const IressTableProvider = forwardRef(TableProvider) as <
+  TRow extends object = never,
+  TVal = never,
+>(
+  props: IressTableProviderProps<TRow, TVal> & { ref?: Ref<TableRef<TRow>> },
+) => ReactElement;

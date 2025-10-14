@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 import { TableSortButton } from './TableSortButton';
+import styles from '../Table.module.scss';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
-import { table } from '../Table.styles';
 
 describe('TableSortButton', () => {
   it('renders a sort button with defaults', async () => {
@@ -12,7 +12,7 @@ describe('TableSortButton', () => {
 
     const button = screen.getByRole('button', { name: 'sortable' });
     expect(button).toBeInTheDocument();
-    expect(button).toHaveClass(table({ sortButtonNoWrap: true }).sortHeader);
+    expect(button).toHaveClass(styles.sortButton, styles.sortButtonNoWrap);
 
     await userEvent.click(button);
     expect(toggleSorting).toHaveBeenCalled();
@@ -44,7 +44,7 @@ describe('TableSortButton', () => {
         );
 
         const button = screen.getByRole('button', { name: 'test' });
-        expect(button).not.toHaveClass('white-space_nowrap');
+        expect(button).not.toHaveClass(styles.sortButtonNoWrap);
       });
     });
 

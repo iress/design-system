@@ -1,0 +1,50 @@
+.selectSearchInput.ids-input {
+  --iress-addon-spacing: 0 var(--iress-g-spacing-sm);
+  --iress-addon-border-width: var(--iress-select-beta-search-addon-border-width, var(--iress-a-form-border-width, var(--iress-g-border-width, var(--iress-default-border-width))));
+
+  --iress-background-color: var(--iress-select-beta-search-background-color, transparent);
+
+  --iress-border-width: 0;
+  --iress-border-color: var(--iress-select-beta-search-border-color, var(--iress-g-form-border-color, var(--iress-default-form-border-color)));
+  --iress-border-radius: 0;
+  --iress-border-width-start: var(--iress-select-beta-search-border-width, var(--iress-a-form-border-width, var(--iress-g-border-width, var(--iress-default-border-width))));
+  --iress-border-width-end: var(--iress-select-beta-search-border-width, var(--iress-a-form-border-width, var(--iress-g-border-width, var(--iress-default-border-width))));
+
+  --iress-padding-x: var(--iress-select-beta-search-padding-x, var(--iress-g-spacing-sm));
+  --iress-padding-y: var(--iress-select-beta-search-padding-y, calc(var(--iress-g-spacing-sm, 0.25rem) * 1.5));
+
+  --iress-placeholder-text-color: var(--iress-select-beta-search-placeholder-text-color, var(--iress-default-text-color--placeholder));
+
+  --iress-text-color: var(--iress-select-beta-search-text-color, var(--iress-g-text-color));
+
+  // Ensure the search input always takes full width of its container
+  width: 100%;
+
+  &:first-child .ids-input--wrapper {
+    border-bottom-width: var(--iress-border-width-start);
+  }
+
+  &:last-child .ids-input--wrapper {
+    border-bottom-width: var(--iress-border-width-end);
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  .ids-input--addon > * {
+    padding: var(--iress-addon-spacing);
+  }
+
+  .ids-input--prepend + .ids-input-base--form-control {
+    padding-inline-start: 0;
+  }
+
+  .ids-input--internal {
+    overflow: hidden;
+  }
+
+  .ids-input--wrapper:focus-within {
+    box-shadow: inset 0 calc(var(--iress-g-focus-width, var(--iress-default-focus-size)) * -1) var(--iress-focus-color);
+  }
+}

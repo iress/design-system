@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -76,6 +76,17 @@ Fields marked as `required` will have an asterisk prepended to the label.
   stories={ComponentStories}
 />
 
+### Optional
+
+Fields marked as `optional` will have optional text appended to the label. This is used in cases where the majority of the fields are required, and you only want to highlight the optional fields and not overwhelm the user.
+
+You can set `optional` to a string to customise the optional text.
+
+<ComponentExample
+  story={ComponentStories.Optional}
+  stories={ComponentStories}
+/>
+
 ### Readonly data
 
 Fields can be used to display read-only data. This is useful when you want to display data that the user can't change, but you still want to display it in a form-like layout.
@@ -84,74 +95,6 @@ You can also pass `readOnly` prop to remove the asterisk symbol (\*) even when t
 
 <ComponentExample
   story={ComponentStories.ReadonlyData}
-  stories={ComponentStories}
-/>
-
-### Supplementary
-
-The `supplementary` prop can be used to display additional information about the field.
-
-This is used to display some metadata based on the value of the field in context. Examples include:
-
-- A trading share field that displays the current price of the share.
-- A commission percentage field that displays the expected commission based on the value of multiple fields.
-
-#### Notes
-
-- The `supplementary` prop is not a replacement for the `hint` prop. The `hint` prop should be used to provide additional information about the field itself, while the `supplementary` prop should be used to display additional information about the value of the field.
-- The `supplementary` prop will only be displayed if the field is not in an error state. If the field is in an error state, the `error` and `errorMessages` prop will be displayed instead.
-
-<ComponentExample
-  story={ComponentStories.Supplementary}
-  stories={ComponentStories}
-/>
-
-### Horizontal layout
-
-Fields can be displayed with a horizontal layout where the label and input are on the same line, which can save vertical space in forms. Use the `horizontal` prop to enable this layout.
-In horizontal mode, hint text is displayed as a tooltip when hovering over the info icon, rather than being shown below the label as in the default vertical layout.
-
-#### Avoid using horizontal mode for majority of cases
-
-Vertical layout is preferred, it is more accessible in more scenarios by ensuring a consistent layout on different devices and keep the label closer to the input ensuring its relationship and making forms easier to scan. There are studies showing [vertical layouts can be faster to fill out](https://content-and-marketing.com/blog/10-mobile-form-design-best-practices-2024).
-Here are a few cases where you may use a horizontal layout:
-
-- On dashboards where space is limited, it may be necessary to display fields in a horizontal layout to make use of the space and give prominence to dashboard visuals.
-- Collaborative visual tools that require real-time editing and previews, such as Styler, Miro, Figma, where fields are less prominent to give prominence to the intended output.
-
-<ComponentExample
-  story={ComponentStories.Horizontal}
-  stories={ComponentStories}
-/>
-
-#### Horizontal with error
-
-Error messages in horizontal layout are displayed below both the label and input field, spanning the full width.
-
-<ComponentExample
-  story={ComponentStories.HorizontalWithError}
-  stories={ComponentStories}
-/>
-
-#### Horizontal label width
-
-In horizontal layout, you can control the width of the label using the `labelWidth` prop. This accepts CSS width values like pixels, percentages, or `auto`.
-
-<ComponentExample
-  story={ComponentStories.HorizontalLabelWidthExamples}
-  stories={ComponentStories}
-/>
-
-### Remove error margin
-
-By default, fields reserve space for error messages to maintain consistent spacing. Use the `removeErrorMargin` prop to remove this reserved space, creating tighter field spacing when stacking multiple fields.
-
-This is particularly useful in dense forms or when you want to minimize vertical space usage.
-
-**Note:** When `removeErrorMargin` is enabled, subsequent fields will be pushed down when error or supplementary messages appear, as no space is reserved for these messages. You can use the `IressStack` component to control field gaps and spacing as needed.
-
-<ComponentExample
-  story={ComponentStories.RemoveErrorMargin}
   stories={ComponentStories}
 />
 

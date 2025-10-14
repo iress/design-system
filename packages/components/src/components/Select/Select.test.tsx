@@ -1,18 +1,15 @@
-import { render } from '@testing-library/react';
+import { RenderResult, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
-import { IressSelect, IressSelectProps, IressSelectOption, select } from '.';
-import { IressLabel } from '../Label';
-import { FormControlValue } from '@/types';
+import { IressSelect, IressSelectProps, IressSelectOption } from '.';
+import styles from './Select.module.scss';
 import { GlobalCSSClass } from '@/enums';
+import { IressLabel } from '../Label';
 
 const TEST_ID = 'test-component';
 const NAME = 'test-component';
 
-const renderComponent = <
-  T extends FormControlValue = FormControlValue,
-  TReadonly extends boolean | undefined = undefined,
->(
+function renderComponent(
   {
     children = [
       <option value="1" key="1">
@@ -28,19 +25,15 @@ const renderComponent = <
     'data-testid': dataTestId = TEST_ID,
     name = NAME,
     ...props
-  }: IressSelectProps<T, TReadonly>,
+  }: Omit<IressSelectProps, 'name'> & { name?: string } = {},
   renderFn: typeof render = render,
-) => {
+): RenderResult {
   return renderFn(
-    <IressSelect
-      {...(props as IressSelectProps<T, TReadonly>)}
-      name={name}
-      data-testid={dataTestId}
-    >
+    <IressSelect {...props} name={name} data-testid={dataTestId}>
       {children}
     </IressSelect>,
   );
-};
+}
 
 describe('IressSelect', () => {
   it('should render the component with the correct classes and roles', () => {
@@ -50,11 +43,11 @@ describe('IressSelect', () => {
     });
 
     const wrapper = screen.getByTestId(TEST_ID);
-    expect(wrapper).toHaveClass('test-class', GlobalCSSClass.Select);
+    expect(wrapper).toHaveClass('test-class');
     expect(wrapper).toHaveStyle({ color: 'rgb(255, 0, 0)' });
 
     const component = screen.getByTestId(`${TEST_ID}__select`);
-    expect(component).toHaveClass(select().element!);
+    expect(component).toHaveClass(styles.element);
     expect(component).toHaveAttribute('name');
 
     expect(screen.getAllByRole('option')).toHaveLength(3);
@@ -94,7 +87,7 @@ describe('IressSelect', () => {
 
         await userEvent.selectOptions(screen.getByRole('combobox'), '2');
 
-        expect(onChange).toHaveBeenCalledTimes(1);
+        expect(onChange).toBeCalledTimes(1);
       });
 
       it('fires onChange event twice when there is no placeholder (to sync value)', async () => {
@@ -104,8 +97,8 @@ describe('IressSelect', () => {
           onChange,
         });
 
-        expect(onChange).toHaveBeenCalledTimes(1);
-        expect(onChange).toHaveBeenCalledWith(
+        expect(onChange).toBeCalledTimes(1);
+        expect(onChange).toBeCalledWith(
           expect.objectContaining({
             target: expect.objectContaining({
               value: '1',
@@ -116,7 +109,7 @@ describe('IressSelect', () => {
 
         await userEvent.selectOptions(screen.getByRole('combobox'), '2');
 
-        expect(onChange).toHaveBeenCalledTimes(2);
+        expect(onChange).toBeCalledTimes(2);
       });
     });
 
@@ -130,7 +123,7 @@ describe('IressSelect', () => {
 
         await userEvent.click(screen.getByRole('combobox'));
 
-        expect(onFocus).toHaveBeenCalledTimes(1);
+        expect(onFocus).toBeCalledTimes(1);
       });
     });
 
@@ -145,7 +138,7 @@ describe('IressSelect', () => {
         await userEvent.click(screen.getByRole('combobox'));
         await userEvent.tab();
 
-        expect(onBlur).toHaveBeenCalledTimes(1);
+        expect(onBlur).toBeCalledTimes(1);
       });
     });
 
@@ -164,7 +157,7 @@ describe('IressSelect', () => {
     describe('readonly', () => {
       it('renders no options', () => {
         const screen = renderComponent({
-          readOnly: true,
+          readonly: true,
         });
 
         expect(screen.queryAllByRole('option')).toHaveLength(0);
@@ -172,7 +165,7 @@ describe('IressSelect', () => {
 
       it('renders the selected value into an input', () => {
         const screen = renderComponent({
-          readOnly: true,
+          readonly: true,
           defaultValue: 2,
         });
 
@@ -197,10 +190,12 @@ describe('IressSelect', () => {
     describe('width', () => {
       it('renders correct classes', () => {
         const screen = renderComponent({
-          width: '75perc',
+          width: IressSelect.Width.SeventyFivePercent,
         });
 
-        expect(screen.getByTestId(TEST_ID)).toHaveClass(`w_input.75perc`);
+        expect(screen.getByTestId(TEST_ID)).toHaveClass(
+          `${GlobalCSSClass.Width}--75perc`,
+        );
       });
     });
   });
@@ -329,7 +324,7 @@ describe('IressSelect', () => {
       const screen = render(
         <>
           <IressLabel htmlFor="select">Label</IressLabel>
-          <IressSelect name="select" id="select" readOnly />
+          <IressSelect name="select" id="select" readonly />
         </>,
       );
       const results = await axe(screen.container);

@@ -1,9 +1,5 @@
 import { useCallback, useRef } from 'react';
-
-export interface PopoverAriaHookReturn {
-  getAriaControls: () => string[];
-  toggleAriaControls: (id: string, addOrRemove?: boolean) => void;
-}
+import { type PopoverAriaHookReturn } from '../Popover.types';
 
 /**
  * This is a hook that manages the aria controls for the popover, allowing the popover activator to control multiple items.

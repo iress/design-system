@@ -1,3 +1,4 @@
 export * from './Input';
-export * from './Input.styles';
-export type * from './InputBase/InputBase';
+export * from './Input.types';
+
+export * from './InputBase/InputBase.types';

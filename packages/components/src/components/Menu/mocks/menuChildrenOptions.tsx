@@ -1,5 +1,6 @@
-import { IressIcon, IressBadge, IressText, IressMenuHeading } from '@/main';
+import { IressIcon, IressBadge, IressText } from '@/main';
 import { IressMenuDivider } from '../MenuDivider/MenuDivider';
+import { IressMenuHeading } from '../MenuHeading/MenuHeading';
 import { IressMenuItem } from '../MenuItem/MenuItem';
 
 export const MENU_CHILDREN_OPTIONS = {
@@ -33,7 +34,7 @@ export const MENU_CHILDREN_OPTIONS = {
     </IressMenuItem>,
     <IressMenuHeading
       key="2"
-      element="h3"
+      level="h3"
       append={<IressIcon name="smile" fixedWidth />}
       prepend={<IressIcon name="smile" fixedWidth />}
     >
@@ -96,24 +97,24 @@ export const MENU_CHILDREN_OPTIONS = {
     </IressMenuItem>,
   ],
   headings: [
-    <IressMenuHeading key="1" element="h4">
+    <IressMenuHeading key="1" level="h4">
       Menu heading (h4)
     </IressMenuHeading>,
     <IressMenuItem key="2">Menu item 1</IressMenuItem>,
-    <IressMenuHeading key="3" element="h5">
+    <IressMenuHeading key="3" level="h5">
       Menu heading (h5)
     </IressMenuHeading>,
     <IressMenuItem key="4">Menu item 2</IressMenuItem>,
   ],
   dividers: [
-    <IressMenuHeading key="1" element="h4" divider>
+    <IressMenuHeading key="1" level="h4" divider>
       Menu heading (h4)
     </IressMenuHeading>,
     <IressMenuItem key="1-1">Menu item 1</IressMenuItem>,
     <IressMenuItem key="1-2" divider>
       Menu item 2
     </IressMenuItem>,
-    <IressMenuHeading key="2" element="h5">
+    <IressMenuHeading key="2" level="h5">
       Menu heading (h5)
     </IressMenuHeading>,
     <IressMenuItem key="2-1" selected>
@@ -124,7 +125,7 @@ export const MENU_CHILDREN_OPTIONS = {
     <IressMenuItem key="2-4">Menu item 5</IressMenuItem>,
   ],
   slots: [
-    <IressMenuHeading element="h4" prepend={<IressIcon name="cog" />} key={0}>
+    <IressMenuHeading prepend={<IressIcon name="cog" />} key={0}>
       Prepend slot
     </IressMenuHeading>,
     <IressMenuItem
@@ -142,7 +143,7 @@ export const MENU_CHILDREN_OPTIONS = {
     >
       Save file as
     </IressMenuItem>,
-    <IressMenuHeading element="h3" append={<IressIcon name="link" />} key={3}>
+    <IressMenuHeading level="h3" append={<IressIcon name="link" />} key={3}>
       Append slot
     </IressMenuHeading>,
     <IressMenuItem
@@ -154,7 +155,7 @@ export const MENU_CHILDREN_OPTIONS = {
     </IressMenuItem>,
     <IressMenuItem
       href="https://google.com"
-      append={<IressBadge mode="warning">8+</IressBadge>}
+      append={<IressBadge mode={IressBadge.Mode.Warning}>8+</IressBadge>}
       key={5}
     >
       Visit Google
@@ -163,25 +164,25 @@ export const MENU_CHILDREN_OPTIONS = {
   extraInformation: [
     <IressMenuItem key={0}>
       <IressText>New task</IressText>
-      <IressText element="small" color="colour.neutral.70">
+      <IressText element={IressText.Element.Small} mode={IressText.Mode.Muted}>
         Modified on: 01/01/2020 00:00am
       </IressText>
     </IressMenuItem>,
     <IressMenuItem key={1}>
       <IressText>Send prospect welcome pack</IressText>
-      <IressText element="small" color="colour.neutral.70">
+      <IressText element={IressText.Element.Small} mode={IressText.Mode.Muted}>
         Modified on: 01/01/2020 01:30am
       </IressText>
     </IressMenuItem>,
     <IressMenuItem key={2}>
       <IressText>Book in Discovery meeting</IressText>
-      <IressText element="small" color="colour.neutral.70">
+      <IressText element={IressText.Element.Small} mode={IressText.Mode.Muted}>
         Modified on: 01/01/2020 11:59am
       </IressText>
     </IressMenuItem>,
     <IressMenuItem key={3}>
       <IressText>Prospect proceeding</IressText>
-      <IressText element="small" color="colour.neutral.70">
+      <IressText element={IressText.Element.Small} mode={IressText.Mode.Muted}>
         Modified on: 01/01/2020 04:00pm
       </IressText>
     </IressMenuItem>,

@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -31,29 +31,8 @@ An alert can be displayed with a heading. This is controlled by the `heading` pr
 
 <ComponentExample story={AlertStories.Heading} stories={AlertStories} />
 
-### Actions
+### Footer
 
-The `actions` prop allows you to display call to action buttons within the alert. This is useful for providing users with options to take action based on the alert message.
+The `footer` prop allows for content to be placed below the header and body of the alert. This can be useful for displaying call to actions.
 
 <ComponentExample story={AlertStories.Footer} stories={AlertStories} />
-
-### Icon
-
-The `icon` prop allows you to customise the icon displayed in the alert. It accepts a string for the icon name, or can be set to `false` to remove the icon entirely.
-
-<ComponentExample story={AlertStories.Icon} stories={AlertStories} />
-
-### Variants
-
-The alert can be displayed in different variants to suit different use cases. The `variant` prop allows you to set the variant of the alert. The available variants are:
-
-- `sidebar`: The alert is displayed in the sidebar of the page, typically used for informational messages on longer forms.
-- `site-wide`: The alert is displayed in the site-wide banner, typically used for important messages that need to be seen by all users.
-
-<ComponentExample story={AlertStories.Variant} stories={AlertStories} />
-
-### Dimissable
-
-The alert can be made dismissable by setting the `onDismiss` prop. This will display a close button in the top right corner of the alert, allowing users to dismiss it.
-
-<ComponentExample story={AlertStories.Dismissable} stories={AlertStories} />

@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
@@ -24,10 +24,7 @@ For Accessibility guidelines refer to
 
 ### Mode
 
-Expander has a `mode` prop which can be used to change how the expander is displayed. There are two modes `section` (default) and `link`.
-
-- `section` mode is used to expand larger sections of rich content, such as a table or a detailed transcript.
-- `link` mode is used to expand a small section of content, usually used to provide additional context (eg. "Learn more" or "See more details").
+Expander has a `mode` prop which can be used to change how the expander is displayed. There are 3 modes `section` (default), `heading` and `link`.
 
 <ComponentExample story={Stories.Mode} stories={Stories} />
 
@@ -39,6 +36,6 @@ The `open` prop can be used to control the open state of the expander as can be 
 
 ### Multiple expanders (accordion)
 
-You can use multiple expanders to create an accordion, where all expander closes when another is opened.
+You can use multiple expanders to create an accordion, where al expander closes when another is opened.
 
 <ComponentExample story={Stories.Multiple} stories={Stories} />

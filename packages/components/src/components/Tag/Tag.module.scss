@@ -1,0 +1,50 @@
+.tag:global(.iress-u-text) {
+  --iress-background-color: var(--iress-tag-background-color, transparent);
+  --iress-border-color: var(--iress-tag-border-color, var(--iress-g-border-color, var(--iress-default-border-color)));
+  --iress-border-radius: var(--iress-tag-border-radius, var(--iress-g-small-border-radius, var(--iress-default-border-radius)));
+  --iress-border-width: var(--iress-tag-border-width, 1px);
+  --iress-font-size: var(--iress-tag-font-size);
+  --iress-font-weight: var(--iress-tag-font-weight, normal);
+  --iress-padding-x: var(--iress-tag-padding, var(--iress-g-spacing-xs));
+  --iress-padding-y: var(--iress-tag-padding, var(--iress-g-spacing-xs));
+  --iress-text-color: var(--iress-tag-text-color);
+
+  align-items: center;
+  background-color: var(--iress-background-color);
+  border-color: var(--iress-border-color);
+  border-radius: var(--iress-border-radius);
+  border-style: solid;
+  border-width: var(--iress-border-width);
+  color: var(--iress-text-color);
+  display: inline-flex;
+
+  .content {
+    font-size: var(--iress-font-size);
+    font-weight: var(--iress-font-weight);
+    line-height: 1;
+    padding-inline: var(--iress-padding-x);
+    padding-block: var(--iress-padding-y);
+  }
+
+  :global(.iress-u-button):not(.ids-menuItem),
+  .ids-closeButton {
+    --iress-background-color: var(--iress-tag-delete-button-background-color, var(--iress-background-color));
+    --iress-border-radius: 0px;
+    --iress-border-width: 0px;
+    --iress-min-height: 0px;
+    --iress-padding-x: var(--iress-tag-delete-button-padding-x, var(--iress-tag-padding, var(--iress-g-spacing-xs)));
+    --iress-padding-y: var(--iress-tag-delete-button-padding-y, var(--iress-tag-padding, var(--iress-g-spacing-xs)));
+    --iress-text-color: var(--iress-tag-delete-button-text-color);
+
+    @media (hover: hover) {
+      &:hover {
+        --iress-hover-background-color: var(--iress-tag-delete-button-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)));
+        --iress-hover-text-color: var(--iress-tag-delete-button-hover-text-color, var(--iress-g-hover-text-color, var(--iress-delete-button-text-color)));
+      }
+    }
+  }
+
+  .ids-popover--activator {
+    display: flex;
+  }
+}

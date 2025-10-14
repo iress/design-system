@@ -1,5 +1,5 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressInput, type IressInputProps } from '../../main';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressInput, IressInputProps } from '../../main';
 import { ReactHookFormsInput } from './mocks/ReactHookFormsInput';
 import ReactHookFormsInputSource from './mocks/ReactHookFormsInput.tsx?raw';
 import { InputPercentage } from './mocks/InputPercentage';
@@ -21,7 +21,6 @@ export default {
       scopes: ['react-hook-form'],
     },
   },
-  tags: ['updated'],
 } as Meta<typeof IressInput>;
 
 export const ReactHookForms: Story = {

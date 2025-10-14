@@ -1,0 +1,112 @@
+@use '../../styles/mixins';
+
+:global(.iress-u-text).alert {
+  --iress-margin-bottom: var(--iress-alert-margin-bottom, var(--iress-a-vertical-spacing-md, var(--iress-g-spacing-md)));
+  --iress-heading-font-family: var(--iress-alert-heading-font-family, var(--iress-a-heading-font-family, var(--iress-g-font-family, inherit)));
+  --iress-heading-font-weight: var(--iress-alert-heading-font-weight, var(--iress-g-heading-font-weight, normal));
+  --iress-heading-font-size: var(--iress-alert-heading-font-size, var(--iress-g-font-size-rem));
+  --iress-heading-margin-bottom: var(--iress-alert-heading-margin-bottom, var(--iress-a-vertical-spacing-xs, var(--iress-g-spacing-xs)));
+  --iress-heading-margin-right: var(--iress-alert-heading-margin-right, var(--iress-a-horizontal-spacing-xs, var(--iress-g-spacing-xs)));
+  --iress-heading-color: var(--iress-heading-icon-text-color);
+  --iress-border-radius: var(--iress-alert-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius)));
+  --iress-border-left-width: var(--iress-alert-border-left-width, var(--iress-default-border-width--lg));
+  --iress-border-right-width: var(--iress-alert-border-right-width, 0);
+  --iress-border-top-width: var(--iress-alert-border-top-width, 0);
+  --iress-border-bottom-width: var(--iress-alert-border-bottom-width, 0);
+  --iress-padding-y: var(--iress-alert-padding-y, var(--iress-a-vertical-spacing-sm, var(--iress-g-spacing-sm)));
+  --iress-padding-x: var(--iress-g-spacing-md);
+
+  @include mixins.defaultFontStyles();
+
+  background-color: var(--iress-background-color);
+  border-radius: var(--iress-border-radius);
+  color: var(--iress-text-color);
+  border-inline-start-width: var(--iress-border-left-width);
+  border-block-start-width: var(--iress-border-top-width);
+  border-inline-end-width: var(--iress-border-right-width);
+  border-block-end-width: var(--iress-border-bottom-width);
+  border-color: var(--iress-border-color);
+  border-style: solid;
+  padding: var(--iress-padding-y) var(--iress-padding-x);
+  height: auto;
+}
+
+.icon {
+  --iress-text-color: var(--iress-heading-icon-text-color);
+
+  line-height: 1.125;
+}
+
+.heading {
+  display: contents;
+
+  &:empty {
+    display: none;
+  }
+
+  h2:not(.iress-u-text),
+  h3:not(.iress-u-text),
+  h4:not(.iress-u-text),
+  h5:not(.iress-u-text),
+  h6:not(.iress-u-text) {
+    display: inline-block;
+    font-weight: var(--iress-heading-font-weight);
+    font-size: var(--iress-heading-font-size);
+    font-family: var(--iress-heading-font-family);
+    color: var(--iress-heading-color);
+    margin-block: 0 var(--iress-heading-margin-bottom);
+    margin-inline-end: var(--iress-heading-margin-right);
+  }
+}
+
+.wrapper {
+  line-height: var(--iress-g-line-height, 1.5);
+
+  > :last-child {
+    margin-block-end: 0;
+  }
+}
+
+.footer {
+  padding-block-start: var(--iress-padding-y);
+}
+
+.danger {
+  --iress-background-color: var(
+    --iress-alert-danger-background-color,
+    var(--iress-alert-background-color, var(--iress-a-layout-background-color, var(--iress-g-background-color-alt, var(--iress-g-background-color, var(--iress-default-background-color-alt)))))
+  );
+  --iress-border-color: var(--iress-alert-danger-border-color, var(--iress-a-danger-border-color, var(--iress-g-danger-color, var(--iress-default-danger-color))));
+  --iress-heading-icon-text-color: var(--iress-alert-danger-heading-text-color, var(--iress-a-danger-text-color, var(--iress-g-danger-color, var(--iress-default-danger-color))));
+  --iress-text-color: var(--iress-alert-danger-text-color, var(--iress-alert-text-color));
+}
+
+.info {
+  --iress-background-color: var(
+    --iress-alert-info-background-color,
+    var(--iress-alert-background-color, var(--iress-a-layout-background-color, var(--iress-g-background-color-alt, var(--iress-g-background-color, var(--iress-default-background-color-alt)))))
+  );
+  --iress-border-color: var(--iress-alert-info-border-color, var(--iress-a-info-border-color, var(--iress-g-info-color, var(--iress-default-info-color))));
+  --iress-heading-icon-text-color: var(--iress-alert-info-heading-text-color, var(--iress-a-info-text-color, var(--iress-g-info-color, var(--iress-default-info-color))));
+  --iress-text-color: var(--iress-alert-info-text-color, var(--iress-alert-text-color));
+}
+
+.success {
+  --iress-background-color: var(
+    --iress-alert-success-background-color,
+    var(--iress-alert-background-color, var(--iress-a-layout-background-color, var(--iress-g-background-color-alt, var(--iress-g-background-color, var(--iress-default-background-color-alt)))))
+  );
+  --iress-border-color: var(--iress-alert-success-border-color, var(--iress-a-success-border-color, var(--iress-g-success-color, var(--iress-default-success-color))));
+  --iress-heading-icon-text-color: var(--iress-alert-success-heading-text-color, var(--iress-a-success-text-color, var(--iress-g-success-color, var(--iress-default-success-color))));
+  --iress-text-color: var(--iress-alert-success-text-color, var(--iress-alert-text-color));
+}
+
+.warning {
+  --iress-background-color: var(
+    --iress-alert-warning-background-color,
+    var(--iress-alert-background-color, var(--iress-a-layout-background-color, var(--iress-g-background-color, var(--iress-default-background-color-alt))))
+  );
+  --iress-border-color: var(--iress-alert-warning-border-color, var(--iress-a-warning-border-color, var(--iress-g-warning-color, var(--iress-default-warning-color))));
+  --iress-heading-icon-text-color: var(--iress-alert-warning-heading-text-color, var(--iress-a-warning-text-color, var(--iress-g-warning-color, var(--iress-default-warning-color))));
+  --iress-text-color: var(--iress-alert-warning-text-color, var(--iress-alert-text-color));
+}

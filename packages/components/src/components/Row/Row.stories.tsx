@@ -1,4 +1,4 @@
-import { type StoryObj, type Meta } from '@storybook/react-vite';
+import { StoryObj, Meta } from '@storybook/react';
 
 import { CurrentBreakpoint } from '@iress-storybook/components';
 import { disableArgTypes } from '@iress-storybook/helpers';
@@ -11,70 +11,59 @@ import { IressText } from '../Text';
 import { IressCol } from '../Col';
 import { IressDivider } from '../Divider';
 import {
+  GUTTER_SIZES,
   HORIZONTAL_ALIGNS,
   IressPanel,
-  IressStack,
   VERTICAL_ALIGNS,
 } from '@/main';
-import { SPACING_TOKENS } from '@theme-preset/tokens/spacing';
 
 type Story = StoryObj<typeof IressRow>;
 
 export default {
   title: 'Components/Row',
   component: IressRow,
-  tags: ['updated'],
 } as Meta<typeof IressRow>;
 
 const ROW_CHILDREN_OPTIONS = {
   none: null,
   twoBasicPlaceholders: [
-    <IressCol key="1">
-      <IressPlaceholder>
-        <IressText noGutter textAlign="center" p="md">
-          Child 1<br />
-        </IressText>
-      </IressPlaceholder>
-    </IressCol>,
-    <IressCol key="2">
-      <IressPlaceholder>
-        <IressText noGutter textAlign="center" p="md">
-          Child 2
-        </IressText>
-      </IressPlaceholder>
-    </IressCol>,
+    <IressPlaceholder key="1">
+      <IressText noGutter align="center" className="iress-p--md">
+        Child 1<br />
+      </IressText>
+    </IressPlaceholder>,
+    <IressPlaceholder key="2">
+      <IressText noGutter align="center" className="iress-p--md">
+        Child 2
+      </IressText>
+    </IressPlaceholder>,
   ],
 
   threeDifferentSizedPlaceholders: [
-    <IressCol key="1">
-      <IressPlaceholder>
-        <IressText noGutter textAlign="center" p="md">
-          Child 1<br />
-          <small>Slightly taller</small>
-        </IressText>
-      </IressPlaceholder>
-    </IressCol>,
-    <IressCol key="2">
-      <IressPlaceholder>
-        <IressText noGutter textAlign="center" p="md">
-          Child 2
-        </IressText>
-      </IressPlaceholder>
-    </IressCol>,
-    <IressCol key="3">
-      <IressPlaceholder>
-        <IressText noGutter textAlign="center" p="md">
-          Child 3
-        </IressText>
-      </IressPlaceholder>
-    </IressCol>,
+    <IressPlaceholder key="1">
+      <IressText noGutter align="center" className="iress-p--md">
+        Child 1<br />
+        <small>Slightly taller</small>
+      </IressText>
+    </IressPlaceholder>,
+    <IressPlaceholder key="2">
+      <IressText noGutter align="center" className="iress-p--md">
+        Child 2
+      </IressText>
+    </IressPlaceholder>,
+    <IressPlaceholder key="3">
+      <IressText noGutter align="center" className="iress-p--md">
+        Child 3
+      </IressText>
+    </IressPlaceholder>,
   ],
 };
 export const Default: Story = {
   args: {
     children: ROW_CHILDREN_OPTIONS.threeDifferentSizedPlaceholders,
-    gutter: 'spacing.700',
+    gutter: 'lg',
     horizontalAlign: 'left',
+    useColGap: true,
     verticalAlign: 'top',
   },
   argTypes: {
@@ -95,7 +84,7 @@ export const Gutter: Story = {
       <>
         <IressCol span={6}>
           <IressPlaceholder>
-            <IressText noGutter textAlign="center" className="iress-p--md">
+            <IressText noGutter align="center" className="iress-p--md">
               1 of 4<br />
               <small>Slightly taller</small>
             </IressText>
@@ -123,17 +112,19 @@ export const Gutter: Story = {
     ...disableArgTypes(['children', 'gutter', 'useColGap']),
   },
   render: (args) => (
-    <IressStack maxWidth="container.xl" gap="xl">
-      {SPACING_TOKENS.map((spacing, index) => {
+    <IressContainer className="iress-u-stack iress--gutter--md">
+      {GUTTER_SIZES.map((gutter) => {
+        if (gutter === 'none') return <IressRow {...args} key={gutter} />;
+
         return (
-          <IressText key={spacing}>
-            {index > 0 && <IressDivider mb="xl" />}
-            <h2>Gutter: {spacing}</h2>
-            <IressRow {...args} gutter={spacing} />
-          </IressText>
+          <>
+            <IressDivider />
+            <IressText element="h2">Gutter: {gutter}</IressText>
+            <IressRow {...args} gutter={gutter} key={gutter} />
+          </>
         );
       })}
-    </IressStack>
+    </IressContainer>
   ),
 };
 
@@ -143,7 +134,7 @@ export const ResponsiveGutter: Story = {
       <>
         <IressCol span={6}>
           <IressPlaceholder>
-            <IressText noGutter textAlign="center" className="iress-p--md">
+            <IressText noGutter align="center" className="iress-p--md">
               1 of 4<br />
               <small>Slightly taller</small>
             </IressText>
@@ -167,25 +158,23 @@ export const ResponsiveGutter: Story = {
       </>
     ),
     gutter: {
-      xs: 'spacing.100',
-      sm: 'spacing.200',
-      md: 'spacing.400',
-      lg: 'spacing.700',
-      xl: 'spacing.1200',
-      xxl: 'spacing.100',
+      xs: 'xs',
+      sm: 'sm',
+      md: 'md',
+      lg: 'lg',
+      xl: 'xl',
+      xxl: 'xs',
     },
   },
   argTypes: {
     ...disableArgTypes(['children', 'useColGap']),
   },
   render: (args) => (
-    <IressContainer>
-      <IressStack gap="md">
-        <IressPanel bg="alt">
-          Current breakpoint: <CurrentBreakpoint />
-        </IressPanel>
-        <IressRow {...args} />
-      </IressStack>
+    <IressContainer className="iress-u-stack iress--gutter--md">
+      <IressPanel background="alt">
+        Current breakpoint: <CurrentBreakpoint />
+      </IressPanel>
+      <IressRow {...args} />
     </IressContainer>
   ),
 };
@@ -216,20 +205,20 @@ export const HorizontalAlignment: Story = {
     ...disableArgTypes(['children', 'horizontalAlign']),
   },
   render: (args) => (
-    <IressContainer>
-      <IressStack gap="md">
-        {HORIZONTAL_ALIGNS.map((horizontalAlign, index) => (
-          <IressText key={horizontalAlign}>
-            {index !== 0 && <IressDivider mb="md" />}
-            <h2>Horizontal align: {horizontalAlign}</h2>
-            <IressRow
-              {...args}
-              horizontalAlign={horizontalAlign}
-              key={horizontalAlign}
-            />
+    <IressContainer className="iress-u-stack iress--gutter--md">
+      {HORIZONTAL_ALIGNS.map((horizontalAlign, index) => (
+        <>
+          {index !== 0 && <IressDivider />}
+          <IressText element="h2">
+            Horizontal align: {horizontalAlign}
           </IressText>
-        ))}
-      </IressStack>
+          <IressRow
+            {...args}
+            horizontalAlign={horizontalAlign}
+            key={horizontalAlign}
+          />
+        </>
+      ))}
     </IressContainer>
   ),
 };
@@ -260,19 +249,17 @@ export const VerticalAlignment: Story = {
     ...disableArgTypes(['children', 'verticalAlign']),
   },
   render: (args) => (
-    <IressContainer>
-      <IressStack gap="md">
-        {VERTICAL_ALIGNS.map((verticalAlign) => (
-          <div key={verticalAlign}>
-            <IressText element="h2">Vertical align: {verticalAlign}</IressText>
-            <IressRow
-              className={styles.setHeight}
-              {...args}
-              verticalAlign={verticalAlign}
-            />
-          </div>
-        ))}
-      </IressStack>
+    <IressContainer className="iress-u-stack iress--gutter--lg">
+      {VERTICAL_ALIGNS.map((verticalAlign) => (
+        <div key={verticalAlign}>
+          <IressText element="h2">Vertical align: {verticalAlign}</IressText>
+          <IressRow
+            className={styles.setHeight}
+            {...args}
+            verticalAlign={verticalAlign}
+          />
+        </div>
+      ))}
     </IressContainer>
   ),
 };

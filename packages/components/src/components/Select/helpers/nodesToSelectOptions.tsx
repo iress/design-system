@@ -3,25 +3,19 @@ import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAs
 import { type FormControlValue } from '@/types';
 import {
   type IressSelectOptionProps,
-  IressSelectOption,
-} from '../SelectOption/SelectOption';
-import { type ReactElement } from 'react';
-
-interface SelectOption<T = FormControlValue> {
-  children?: SelectOption<T>[];
-  label: string;
-  value?: T;
-}
+  type SelectOption,
+} from '../Select.types';
+import { IressSelectOption } from '..';
 
 type NodeProps = IressSelectOptionProps & {
   label: string;
 };
 type NodeType = typeof IressSelectOption | 'optgroup' | 'option';
-type Node = ReactElement<NodeProps, NodeType>;
+type Node = React.ReactElement<NodeProps, NodeType>;
 
-export const mapNodesToSelectOptions = <T = FormControlValue,>(
+export const mapNodesToSelectOptions = (
   nodes: Node[] | Node,
-): SelectOption<T>[] => {
+): SelectOption[] => {
   return toArray(nodes).reduce(
     (
       accumulator,
@@ -33,12 +27,12 @@ export const mapNodesToSelectOptions = <T = FormControlValue,>(
           ...accumulator,
           {
             label: node.props.label,
-            children: mapNodesToSelectOptions<T>(node.props.children as Node),
+            children: mapNodesToSelectOptions(node.props.children as Node),
           },
         ];
         // If the node is an option, use the props as the SelectOption[], and rename children to label
       } else if ([IressSelectOption, 'option'].includes(node.type)) {
-        const option = { ...node.props } as SelectOption<T>;
+        const option = { ...node.props } as SelectOption;
         delete option.children;
 
         // eslint-disable-next-line @typescript-eslint/no-base-to-string -- The filtered components only accept a string for children, so its OK here
@@ -56,22 +50,20 @@ export const mapNodesToSelectOptions = <T = FormControlValue,>(
       } else if (node.props?.children || Array.isArray(node)) {
         accumulator = [
           ...accumulator,
-          ...mapNodesToSelectOptions<T>(
-            (node.props?.children as Node[]) ?? node,
-          ),
+          ...mapNodesToSelectOptions((node.props?.children as Node[]) ?? node),
         ];
       }
 
       return accumulator;
     },
-    [] as SelectOption<T>[],
+    [] as SelectOption[],
   );
 };
 
-export const findValueFromStringInSelectOptions = <T = FormControlValue,>(
+export const findValueFromStringInSelectOptions = (
   value: string,
-  options: SelectOption<T>[] = [],
-): T | undefined => {
+  options: SelectOption[] = [],
+): FormControlValue | undefined => {
   return options.reduce(
     (found, option) => {
       if (found) return found;
@@ -84,6 +76,6 @@ export const findValueFromStringInSelectOptions = <T = FormControlValue,>(
         ? option.value
         : found;
     },
-    undefined as T | undefined,
+    undefined as FormControlValue | undefined,
   );
 };

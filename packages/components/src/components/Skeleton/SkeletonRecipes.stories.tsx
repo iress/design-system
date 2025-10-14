@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressSkeleton } from './Skeleton';
 import { SkeletonCard } from './mocks/SkeletonCard';
 import SkeletonCardSource from './mocks/SkeletonCard.tsx?raw';
@@ -8,7 +8,6 @@ type Story = StoryObj<typeof IressSkeleton>;
 export default {
   title: 'Components/Skeleton/Recipes',
   component: IressSkeleton,
-  tags: ['updated'],
 } as Meta<typeof IressSkeleton>;
 
 export const Card: Story = {

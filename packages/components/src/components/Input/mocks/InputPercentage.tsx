@@ -1,7 +1,7 @@
-import { IressInput } from '@/main';
+import { IressInput } from '@iress-oss/ids-components';
 
 export const InputPercentage = () => (
-  <IressInput<string | number>
+  <IressInput<number | string>
     defaultValue="0.5"
     formatter={(value = '') => {
       if (value === '') return '';

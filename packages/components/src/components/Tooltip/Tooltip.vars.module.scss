@@ -1,0 +1,15 @@
+.tooltip {
+  --iress-text-color: var(--iress-tooltip-text-color, var(--iress-g-background-color, var(--iress-default-background-color)));
+  --iress-background-color: var(--iress-tooltip-background-color, var(--iress-g-text-color, var(--iress-default-text-color)));
+  --iress-font-family: var(--iress-tooltip-font-family, var(--iress-g-font-family));
+  --iress-font-weight: var(--iress-tooltip-font-weight, var(--iress-g-font-weight, normal));
+  --iress-font-size: var(--iress-tooltip-font-size, var(--iress-g-font-size-xxxs, var(--iress-default-font-size-xxxs)));
+  --iress-border-radius: var(--iress-tooltip-border-radius, var(--iress-g-small-border-radius, var(--iress-default-border-radius)));
+  --iress-border-width: var(--iress-tooltip-border-width, var(--iress-default-border-width));
+  --iress-border-color: var(--iress-tooltip-border-color, var(--iress-background-color));
+  --iress-padding-x: var(--iress-tooltip-padding-x, var(--iress-g-spacing-sm, var(--iress-default-spacing-sm)));
+  --iress-padding-y: var(--iress-tooltip-padding-y, var(--iress-g-spacing-sm, var(--iress-default-spacing-sm)));
+  --iress-box-shadow-size: var(--iress-tooltip-box-shadow-size, var(--iress-default-box-shadow-size--sm));
+
+  --iress-box-shadow-color: var(--iress-tooltip-box-shadow-color, var(--iress-g-box-shadow-color, var(--iress-default-box-shadow-color)));
+}

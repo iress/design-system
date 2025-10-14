@@ -1,0 +1,13 @@
+.menu {
+  --iress-divider-border-width: var(--iress-menu-item-divider-border-width, 1px);
+  --iress-divider-border-color: var(--iress-menu-item-divider-border-color, var(--iress-g-border-color, var(--iress-default-border-color)));
+}
+
+.inline,
+.inline-equal-width {
+  :global(.iress-u-text) & > hr,
+  > hr {
+    --iress-divider-margin-top: 0;
+    --iress-divider-margin-bottom: 0;
+  }
+}

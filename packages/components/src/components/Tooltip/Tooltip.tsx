@@ -1,5 +1,5 @@
-import { Fragment, useEffect, useState, type ReactNode } from 'react';
-import { cx } from '@/styled-system/css';
+import { Fragment, useEffect, useState } from 'react';
+import classNames from 'classnames';
 import {
   autoPlacement,
   flip,
@@ -12,46 +12,15 @@ import {
   useInteractions,
   useRole,
 } from '@floating-ui/react';
+import { type IressTooltipProps, type TooltipWithEnums } from './Tooltip.types';
+import { FloatingUIAlign } from '@/enums';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { toArray } from '@helpers/formatting/toArray';
+import styles from './Tooltip.module.scss';
 import { idsLogger } from '@/helpers/utility/idsLogger';
 import { focusableElements } from '@/helpers/dom/focusableElements';
-import { tooltip } from './Tooltip.styles';
-import { type FloatingUIAligns, type IressStyledProps } from '@/types';
-import { styled } from '@/styled-system/jsx';
-import { GlobalCSSClass } from '@/enums';
 
-export interface IressTooltipProps extends IressStyledProps {
-  /**
-   * Sets the alignment of the popover relative to the activator element.
-   * @default top
-   */
-  align?: FloatingUIAligns;
-
-  /**
-   * The element to add a tooltip to.
-   */
-  children: ReactNode;
-
-  /**
-   * Sets the tooltip display delay in milliseconds.
-   * @default 500
-   */
-  delay?: number;
-
-  /**
-   * Only used for internal testing.
-   * @default false
-   */
-  open?: boolean;
-
-  /**
-   * Sets the tooltip text. Can accept a string or an array of strings - if given an array, will output each string on a new line.
-   */
-  tooltipText: string | string[];
-}
-
-export const IressTooltip = ({
+export const IressTooltip: TooltipWithEnums = ({
   children,
   className,
   align = 'top',
@@ -61,7 +30,10 @@ export const IressTooltip = ({
   'data-testid': testid,
   ...restProps
 }: IressTooltipProps) => {
-  const classes = tooltip();
+  const classMap = {
+    [styles.tooltip]: true,
+  };
+  const cssClasses = classNames(className, classMap);
   const isAuto = align === 'auto';
 
   const [isOpen, setIsOpen] = useState(open);
@@ -102,13 +74,9 @@ export const IressTooltip = ({
   }, [children, refs.reference]);
 
   return (
-    <styled.div
-      className={cx(classes.root, className, GlobalCSSClass.Tooltip)}
-      {...restProps}
-      data-testid={testid}
-    >
+    <div className={cssClasses} {...restProps} data-testid={testid}>
       <div
-        className={classes.activator}
+        className={styles.activator}
         data-testid={propagateTestid(testid, 'activator')}
         ref={refs.setReference}
         {...getReferenceProps()}
@@ -117,7 +85,7 @@ export const IressTooltip = ({
       </div>
       {isOpen && (
         <div
-          className={classes.content}
+          className={styles.content}
           style={floatingStyles}
           data-testid={propagateTestid(testid, 'tooltip-text')}
           ref={refs.setFloating}
@@ -131,6 +99,9 @@ export const IressTooltip = ({
           ))}
         </div>
       )}
-    </styled.div>
+    </div>
   );
 };
+
+/** @deprecated IressTooltip.Align is now deprecated and will be removed in a future version. Please use the value directly. */
+IressTooltip.Align = FloatingUIAlign;

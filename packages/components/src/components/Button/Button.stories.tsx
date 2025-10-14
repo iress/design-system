@@ -1,31 +1,28 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressButton, type IressButtonProps } from './Button';
-import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
+import { Meta, StoryObj } from '@storybook/react';
+import { IressButton } from './Button';
+import { disableArgTypes } from '@iress-storybook/helpers';
+import { capitalizeFirstLetter } from '@helpers/formatting/capitalizeFirstLetter';
 import { IressText } from '../Text';
 import { CurrentBreakpoint } from '@iress-storybook/components';
 import { IressIcon } from '../Icon';
 import { IressBadge } from '../Badge';
-import { IressInline } from '../Inline';
-import { IressStack } from '../Stack';
-import { RoutingButton } from './mocks/RoutingButton';
-import RoutingButtonSource from './mocks/RoutingButton.tsx?raw';
+import { BUTTON_MODES, BUTTON_TYPES } from './Button.types';
+import { BREAKPOINTS } from '@/constants';
 
-type ButtonStory = StoryObj<IressButtonProps>;
-type AnchorStory = StoryObj<IressButtonProps<undefined, string>>;
+type Story = StoryObj<typeof IressButton>;
 
 export default {
   title: 'Components/Button',
   component: IressButton,
-  tags: ['updated'],
 } as Meta<typeof IressButton>;
 
-export const Default: ButtonStory = {
+export const Default: Story = {
   args: {
     children: 'Button',
   },
 };
 
-export const Mode: ButtonStory = {
+export const Mode: Story = {
   args: {
     children: '',
   },
@@ -33,56 +30,20 @@ export const Mode: ButtonStory = {
     ...disableArgTypes(['mode']),
   },
   render: ({ children, ...args }) => (
-    <IressInline gap="md">
-      <IressButton mode="primary" {...args}>
-        {children === '' ? 'Primary button' : children}
-      </IressButton>
-      <IressButton mode="secondary" {...args}>
-        {children === '' ? 'Secondary button' : children}
-      </IressButton>
-      <IressButton mode="tertiary" {...args}>
-        {children === '' ? 'Tertiary button' : children}
-      </IressButton>
-    </IressInline>
+    <div
+      className="iress-u-inline iress--gutter--md"
+      style={{ rowGap: 'var(--iress-g-spacing-md' }}
+    >
+      {BUTTON_MODES.map((mode) => (
+        <IressButton mode={mode} {...args} key={mode}>
+          {children === '' ? `${capitalizeFirstLetter(mode)} button` : children}
+        </IressButton>
+      ))}
+    </div>
   ),
 };
 
-export const Status: ButtonStory = {
-  args: {
-    children: '',
-  },
-  argTypes: {
-    ...disableArgTypes(['mode', 'status']),
-  },
-  render: ({ children, ...args }) => (
-    <IressStack gap="md">
-      <IressInline gap="md">
-        <IressButton mode="primary" status="success" {...args}>
-          {children === '' ? 'Primary button' : children}
-        </IressButton>
-        <IressButton mode="secondary" status="success" {...args}>
-          {children === '' ? 'Secondary button' : children}
-        </IressButton>
-        <IressButton mode="tertiary" status="success" {...args}>
-          {children === '' ? 'Tertiary button' : children}
-        </IressButton>
-      </IressInline>
-      <IressInline gap="md">
-        <IressButton mode="primary" status="danger" {...args}>
-          {children === '' ? 'Primary button' : children}
-        </IressButton>
-        <IressButton mode="secondary" status="danger" {...args}>
-          {children === '' ? 'Secondary button' : children}
-        </IressButton>
-        <IressButton mode="tertiary" status="danger" {...args}>
-          {children === '' ? 'Tertiary button' : children}
-        </IressButton>
-      </IressInline>
-    </IressStack>
-  ),
-};
-
-export const Types: ButtonStory = {
+export const Types: Story = {
   args: {
     children: '',
   },
@@ -90,44 +51,30 @@ export const Types: ButtonStory = {
     ...disableArgTypes(['type']),
   },
   render: ({ children, ...args }) => (
-    <IressInline gap="md">
-      <IressButton type="button" {...args}>
-        {children === '' ? 'button' : children}
-      </IressButton>
-      <IressButton type="submit" {...args}>
-        {children === '' ? 'submit' : children}
-      </IressButton>
-      <IressButton type="reset" {...args}>
-        {children === '' ? 'reset' : children}
-      </IressButton>
-    </IressInline>
+    <div className="iress-u-inline iress--gutter--md">
+      {BUTTON_TYPES.map((type) => (
+        <IressButton type={type} {...args} key={type}>
+          {children === '' ? `${capitalizeFirstLetter(type)} button` : children}
+        </IressButton>
+      ))}
+    </div>
   ),
 };
 
-export const Loading: ButtonStory = {
+export const Loading: Story = {
   args: {
     loading: true,
     children: 'Button text',
   },
-  argTypes: {
-    ...disableArgTypes(['mode']),
-  },
   render: ({ children, ...args }) => (
-    <IressInline gap="md">
-      <IressButton {...args} mode="primary">
-        {children}
-      </IressButton>
-      <IressButton {...args} mode="secondary">
-        {children}
-      </IressButton>
-      <IressButton {...args} mode="tertiary">
-        {children}
-      </IressButton>
-    </IressInline>
+    <div className="iress-u-inline iress--gutter--md">
+      <IressButton {...args}>{children}</IressButton>
+      <IressButton {...args} />
+    </div>
   ),
 };
 
-export const ButtonsAsLinks: AnchorStory = {
+export const ButtonsAsLinks: Story = {
   args: {
     children: 'This is a link (anchor tag)',
     href: 'https://www.iress.com/',
@@ -139,15 +86,16 @@ export const ButtonsAsLinks: AnchorStory = {
   },
 };
 
-export const DeleteConfirmation: ButtonStory = {
+export const DeleteConfirmation: Story = {
   args: {
-    status: 'danger',
+    mode: 'danger',
     children: 'Delete button with confirm',
     onClick: () => confirm('TODO: Change this to a modal'),
   },
 };
 
-export const Fluid: ButtonStory = {
+const fluids = [true, ...BREAKPOINTS];
+export const Fluid: Story = {
   args: {
     children: '',
   },
@@ -155,22 +103,24 @@ export const Fluid: ButtonStory = {
     ...disableArgTypes(['fluid']),
   },
   render: ({ children, ...args }) => (
-    <IressInline gap="md">
+    <div
+      className="iress-u-inline iress--gutter--md"
+      style={{ rowGap: 'var(--iress-g-spacing-md' }}
+    >
       <IressText element="p">
         Please resize your screen to see how the fluid value changes. Current
         breakpoint: <CurrentBreakpoint renderLabel="and-above" />.
       </IressText>
-      <IressButton fluid {...args}>
-        {children === '' ? 'Always fluid' : children}
-      </IressButton>
-      <IressButton fluid="md" {...args}>
-        {children === '' ? 'Fluid on xs and sm' : children}
-      </IressButton>
-    </IressInline>
+      {fluids.map((fluid) => (
+        <IressButton fluid={fluid} {...args} key={String(fluid)}>
+          {children === '' ? `Fluid: ${String(fluid)}` : children}
+        </IressButton>
+      ))}
+    </div>
   ),
 };
 
-export const WrappingText: ButtonStory = {
+export const WrappingText: Story = {
   args: {
     children: '',
   },
@@ -178,7 +128,7 @@ export const WrappingText: ButtonStory = {
     ...disableArgTypes(['children', 'noWrap']),
   },
   render: (args) => (
-    <IressText style={{ width: 250 }}>
+    <div style={{ width: 250 }}>
       <p>
         <IressButton {...args}>
           Button with lots of text content that will wrap (default behaviour)
@@ -196,11 +146,11 @@ export const WrappingText: ButtonStory = {
           Button with lots of text content with the noWrap prop set to true
         </IressButton>
       </p>
-    </IressText>
+    </div>
   ),
 };
 
-export const Slots: ButtonStory = {
+export const Slots: Story = {
   args: {
     children: '',
   },
@@ -208,8 +158,8 @@ export const Slots: ButtonStory = {
     ...disableArgTypes(['children', 'prepend']),
   },
   render: (args) => (
-    <IressStack gap="md">
-      <IressInline gap="md">
+    <>
+      <p className="iress-u-inline iress--gutter--md">
         <IressButton {...args} prepend={<IressIcon name="home" />}>
           Prepend icon
         </IressButton>
@@ -220,9 +170,9 @@ export const Slots: ButtonStory = {
         >
           Prepend badge
         </IressButton>
-      </IressInline>
+      </p>
 
-      <IressInline gap="md">
+      <p className="iress-u-inline iress--gutter--md">
         <IressButton {...args} append={<IressIcon name="home" />}>
           Append icon
         </IressButton>
@@ -233,25 +183,25 @@ export const Slots: ButtonStory = {
         >
           Append badge
         </IressButton>
-      </IressInline>
+      </p>
 
-      <IressInline gap="md">
+      <p className="iress-u-inline iress--gutter--md">
         <IressButton {...args}>
           <IressIcon name="home" />
         </IressButton>
-      </IressInline>
-    </IressStack>
+      </p>
+    </>
   ),
 };
 
-export const Attrs: ButtonStory = {
+export const Attrs: Story = {
   args: {
     children: 'Button text',
   },
   render: (args) => <IressButton {...args} data-analytics-id="test" />,
 };
 
-export const DownloadButton: AnchorStory = {
+export const DownloadButton: Story = {
   args: {
     href: 'assets/iress-logo.png',
     children: 'Download logo',
@@ -261,20 +211,14 @@ export const DownloadButton: AnchorStory = {
   ),
 };
 
-export const ExternalLink: AnchorStory = {
+export const ExternalLink: Story = {
   args: {
     href: '//iress.com',
     children: 'Open in new window',
     target: '_blank',
+    mode: 'link',
   },
   render: (args) => (
     <IressButton {...args} append={<IressIcon name="external-link" />} />
   ),
-};
-
-export const Element: ButtonStory = {
-  render: () => <RoutingButton />,
-  parameters: {
-    ...withCustomSource(RoutingButtonSource),
-  },
 };

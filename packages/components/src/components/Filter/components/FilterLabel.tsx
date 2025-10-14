@@ -1,17 +1,12 @@
 import { composeLabelValueDescriptor } from '@helpers/label-value/composeLabelValueDescriptor';
-import { type IressFilterProps } from '../Filter';
+import { type IressFilterProps } from '../Filter.types';
 import { toArray } from '@helpers/formatting/toArray';
 
-export type FilterLabelProps<TMultiple extends boolean = false> = Pick<
-  IressFilterProps<TMultiple>,
-  'label' | 'selectedOptionsText' | 'value'
->;
-
-export const FilterLabel = <TMultiple extends boolean = false>({
+export const FilterLabel = ({
   label,
   selectedOptionsText,
   value,
-}: FilterLabelProps<TMultiple>) => {
+}: Pick<IressFilterProps, 'label' | 'selectedOptionsText' | 'value'>) => {
   if (!toArray(value).length) {
     return label;
   }

@@ -1,12 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { IressExpander } from '.';
+import styles from './Expander.module.scss';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { useState } from 'react';
 import { IressButton } from '../Button';
-import { expander } from './Expander.styles';
-import { css } from '@/styled-system/css';
-import { GlobalCSSClass } from '@/enums';
 
 const DynamicContentExample = () => {
   const [content, setContent] = useState('The content will change on reload.');
@@ -44,7 +42,9 @@ const MultipleExpander = () => {
         open={openExpander === 'test-component-one'}
         data-testid="test-component-one"
         activator={'Activator content one'}
-        onChange={(open) => handleExpanderChange('test-component-one', open)}
+        onChange={({ open }) =>
+          handleExpanderChange('test-component-one', open)
+        }
       >
         One
       </IressExpander>
@@ -52,7 +52,9 @@ const MultipleExpander = () => {
         open={openExpander === 'test-component-two'}
         data-testid="test-component-two"
         activator={'Activator content two'}
-        onChange={(open) => handleExpanderChange('test-component-two', open)}
+        onChange={({ open }) =>
+          handleExpanderChange('test-component-two', open)
+        }
       >
         Two
       </IressExpander>
@@ -86,13 +88,8 @@ describe('IressExpander', () => {
       const cssClass = 'test-class';
       const component = screen.getByTestId('test-component');
       expect(component).toHaveClass(
-        cssClass,
-        expander().root!,
-        GlobalCSSClass.Expander,
+        `${cssClass}  ${styles.expander} ${styles.section}`,
       );
-
-      const activator = screen.getByTestId('test-component__activator');
-      expect(activator).toHaveClass(expander().activator!);
     });
 
     it('renders a button of type "button"', () => {
@@ -129,31 +126,23 @@ describe('IressExpander', () => {
   });
 
   describe('props', () => {
-    describe('activatorStyle', () => {
-      it('adds additional classes and style to the activator', () => {
+    describe('mode', () => {
+      it('renders the correct class for heading mode', () => {
         render(
           <IressExpander
-            activator="Activator"
-            activatorStyle={{
-              className: 'test-activator-class',
-              color: 'colour.neutral.10',
-              style: { color: 'red' },
-            }}
+            data-testid="test-component"
+            className="test-class"
+            id={'test-id'}
+            activator={'Activator content'}
+            mode="heading"
           >
             Test content
           </IressExpander>,
         );
-
-        const activator = screen.getByRole('button', { name: 'Activator' });
-        expect(activator).toHaveClass(
-          'test-activator-class',
-          css({ color: 'colour.neutral.10' }),
-        );
-        expect(activator).toHaveStyle({ color: 'rgb(255, 0, 0)' });
+        const component = screen.getByTestId('test-component');
+        expect(component).toHaveClass(styles.heading);
       });
-    });
 
-    describe('mode', () => {
       it('renders the correct class for link mode', () => {
         render(
           <IressExpander
@@ -167,10 +156,7 @@ describe('IressExpander', () => {
           </IressExpander>,
         );
         const component = screen.getByTestId('test-component');
-        expect(component).toHaveClass(expander({ mode: 'link' }).root!);
-
-        const activator = screen.getByTestId('test-component__activator');
-        expect(activator).toHaveClass(expander({ mode: 'link' }).activator!);
+        expect(component).toHaveClass(styles.link);
       });
     });
 
@@ -192,11 +178,11 @@ describe('IressExpander', () => {
 
         await userEvent.click(activator);
 
-        expect(onChange).toHaveBeenCalledWith(true);
+        expect(onChange).toHaveBeenCalledWith({ open: true });
 
         await userEvent.click(activator);
 
-        expect(onChange).toHaveBeenCalledWith(false);
+        expect(onChange).toHaveBeenCalledWith({ open: false });
       });
     });
 
@@ -252,13 +238,16 @@ describe('IressExpander', () => {
         </IressExpander>,
       );
       const activatorElement = screen.getByTestId('test-component__activator');
+      const component = screen.getByTestId('test-component');
 
       await userEvent.click(activatorElement); // open expander
 
+      expect(component).toHaveClass(styles.open);
       expect(activatorElement.getAttribute('aria-expanded')).toBe('true');
 
       await userEvent.click(activatorElement); // close expander
 
+      expect(component).not.toHaveClass(styles.open);
       expect(activatorElement.getAttribute('aria-expanded')).toBe('false');
     });
 
@@ -272,13 +261,19 @@ describe('IressExpander', () => {
         name: 'Activator content two',
       });
 
+      const componentOne = screen.getByTestId('test-component-one');
+      const componentTwo = screen.getByTestId('test-component-two');
+
       await userEvent.click(activatorOne);
 
+      expect(componentOne).toHaveClass(styles.open);
       expect(activatorOne.getAttribute('aria-expanded')).toBe('true');
 
       await userEvent.click(activatorTwo);
 
+      expect(componentOne).not.toHaveClass(styles.open);
       expect(activatorOne.getAttribute('aria-expanded')).toBe('false');
+      expect(componentTwo).toHaveClass(styles.open);
       expect(activatorTwo.getAttribute('aria-expanded')).toBe('true');
     });
   });

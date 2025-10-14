@@ -1,7 +1,9 @@
 import { useId } from 'react';
-import { type IressUnstyledProps } from '@/types';
+import { type IressHTMLAttributes } from '../interfaces';
 
-export const useIdIfNeeded = <T extends IressUnstyledProps>(
+export const useIdIfNeeded = <
+  T extends React.HTMLAttributes<HTMLElement> = IressHTMLAttributes,
+>(
   { id: propId }: T = {} as T,
   prefix = '',
 ) => {

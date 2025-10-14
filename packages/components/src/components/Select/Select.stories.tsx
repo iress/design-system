@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IressSelect, IressSelectOption } from '.';
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
@@ -12,7 +12,6 @@ export default {
   argTypes: {
     ...disableArgTypes(['children']),
   },
-  tags: ['updated'],
 } as Meta<typeof IressSelect>;
 
 export const Options: Story = {
@@ -124,7 +123,7 @@ export const Sizing: Story = {
     ...disableArgTypes(['placeholder', 'width']),
   },
   render: (args) => (
-    <IressStack gap="md">
+    <IressStack gutter="md">
       {FORM_ELEMENT_WIDTHS.map((width) => (
         <div key={width}>
           <IressSelect {...args} placeholder={width} width={width} />
@@ -134,10 +133,10 @@ export const Sizing: Story = {
   ),
 };
 
-export const ReadOnly: Story = {
+export const Readonly: Story = {
   args: {
     ...Options.args,
     value: '2',
-    readOnly: true,
+    readonly: true,
   },
 };

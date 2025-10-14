@@ -1,5 +1,5 @@
 import { IressCheckbox } from '../../Checkbox';
-import { IressIcon, type IressIconProps } from '../../Icon';
+import { IressIcon } from '../../Icon';
 import { IressPanel } from '../../Panel';
 import { IressStack } from '../../Stack';
 import { IressText } from '../../Text';
@@ -7,7 +7,7 @@ import { IressText } from '../../Text';
 interface CustomCheckboxProps {
   value: string;
   label: string;
-  icon: IressIconProps['name'];
+  icon: string;
 }
 
 const renderCheckbox = (
@@ -15,10 +15,14 @@ const renderCheckbox = (
   testId?: string,
 ) => (
   <IressCheckbox value={value} key={value} data-testid={testId}>
-    <IressPanel textAlign="center" bg="transparent" p="lg">
-      <IressStack gap="md">
-        <IressIcon name={icon} textStyle="typography.heading.1" />
-        <IressText textStyle="typography.heading.4" noGutter>
+    <IressPanel
+      textAlign={IressPanel.TextAlign.Center}
+      background={IressPanel.Background.Transparent}
+      padding={IressPanel.Padding.Lg}
+    >
+      <IressStack gutter={IressStack.Gutter.Md}>
+        <IressIcon name={icon} size={IressIcon.Size.ThreeTimes} />
+        <IressText variant={IressText.Variant.Heading4} noGutter>
           {label}
         </IressText>
       </IressStack>
@@ -27,7 +31,7 @@ const renderCheckbox = (
 );
 
 export function getFinancialReviewCheckboxes(
-  items: CustomCheckboxProps[] = [
+  items = [
     { value: 'home', label: 'Buying my first home', icon: 'house' },
     { value: 'holiday', label: 'Saving for a holiday', icon: 'mountain' },
     { value: 'debt', label: 'Reducing my debt', icon: 'credit-card' },

@@ -1,0 +1,43 @@
+/** Navbar variables
+ * --------------------------------------------------
+ */
+.navbar {
+  --iress-border-bottom-color: var(--iress-navbar-border-bottom-color, var(--iress-g-primary-color, var(--iress-default-primary-color)));
+  --iress-border-bottom-width: var(--iress-navbar-border-bottom-width, 0);
+  --iress-box-shadow-color: var(--iress-navbar-box-shadow-color, transparent);
+  --iress-box-shadow-size: var(--iress-navbar-box-shadow-size, 0);
+  --iress-focus-color: var(--iress-navbar-focus-color, var(--iress-g-focus-color, var(--iress-default-focus-color)));
+  --iress-focus-box-shadow: 0 0 0 var(--iress-g-focus-width, var(--iress-default-focus-size)) var(--iress-focus-color);
+  --iress-form-ele-background-color: var(--iress-navbar-form-ele-background-color, transparent);
+  --iress-form-ele-border-color: var(--iress-navbar-form-ele-border-color, var(--iress-g-primary-contrast-color, var(--iress-default-primary-contrast-color)));
+  --iress-form-ele-text-color: var(--iress-navbar-form-ele-text-color, var(--iress-g-primary-contrast-color, var(--iress-default-primary-contrast-color)));
+  --iress-logo-max-height: var(--iress-navbar-logo-max-height, var(--iress-default-min-height));
+  --iress-logo-spacing-y: var(--iress-navbar-spacing-y, var(--iress-g-spacing-sm));
+  --iress-nav-background-color: var(--iress-navbar-background-color, var(--iress-g-primary-color, var(--iress-default-primary-color)));
+  --iress-nav-background-image: var(--iress-navbar-background-image, none);
+  --iress-nav-link-active-background-color: var(--iress-navbar-nav-link-active-background-color, transparent);
+  --iress-nav-link-active-selected-mark-color: var(--iress-navbar-nav-link-active-selected-mark-color, transparent);
+  --iress-nav-link-active-text-color: var(--iress-navbar-nav-link-active-text-color, var(--iress-g-primary-contrast-color, var(--iress-default-primary-contrast-color)));
+  --iress-nav-link-background-color: var(--iress-navbar-nav-link-background-color, transparent);
+  --iress-nav-link-hover-background-color: var(
+    --iress-navbar-nav-link-hover-background-color,
+    var(--iress-g-primary-hover-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)))
+  );
+  --iress-nav-link-hover-selected-mark-color: var(--iress-navbar-nav-link-hover-selected-mark-color, transparent);
+  --iress-nav-link-hover-text-color: var(--iress-navbar-nav-link-hover-text-color, var(--iress-g-primary-contrast-color, var(--iress-default-text-color--hover)));
+  --iress-nav-link-selected-background-color: var(
+    --iress-navbar-nav-link-selected-background-color,
+    var(--iress-a-active-background-color, var(--iress-g-primary-color, var(--iress-default-active-color)))
+  );
+  --iress-nav-link-selected-mark-color: var(--iress-navbar-nav-link-selected-mark-color, transparent);
+  --iress-nav-link-selected-text-color: var(
+    --iress-navbar-nav-link-selected-text-color,
+    var(--iress-a-active-contrast-color, var(--iress-g-primary-contrast-color, var(--iress-default-text-color--alt)))
+  );
+  --iress-nav-link-text-color: var(--iress-navbar-nav-link-text-color, var(--iress-g-primary-contrast-color, var(--iress-default-primary-contrast-color)));
+  --iress-nav-padding-x: var(--iress-navbar-padding-x, var(--iress-a-horizontal-spacing-md, var(--iress-g-spacing-md)));
+  --iress-spacing-x: var(--iress-navbar-spacing-x, var(--iress-g-spacing-md));
+  --iress-responsive-nav-container-border-color: var(--iress-navbar-responsive-nav-container-border-color, var(--iress-g-border-color, var(--iress-default-border-color)));
+  --iress-responsive-nav-container-border-width: var(--iress-navbar-responsive-nav-container-border-width, var(--iress-g-border-width, var(--iress-default-border-width)));
+  --iress-text-color: var(--iress-navbar-text-color, var(--iress-g-primary-contrast-color, var(--iress-default-primary-contrast-color)));
+}

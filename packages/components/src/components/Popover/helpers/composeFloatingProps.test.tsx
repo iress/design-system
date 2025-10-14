@@ -4,19 +4,18 @@ import {
   MOCK_FLOATING_UI_CONTEXT,
   TestPopoverProvider,
 } from '../mocks/TestPopoverProvider';
+import { usePopover } from '../hooks/usePopover';
 import { DisplayModes } from '@/main';
-import { CSSProperties, useContext } from 'react';
-import { PopoverContext } from '../hooks/usePopover';
 
 const TEST_ID = 'component-using-hook';
 
 interface HookProps {
   displayMode?: DisplayModes;
-  style?: CSSProperties;
+  style?: React.CSSProperties;
 }
 
 const ComponentWithFloatingProps = ({ displayMode, style }: HookProps) => {
-  const popover = useContext(PopoverContext);
+  const popover = usePopover();
 
   if (!popover) return null;
 
@@ -127,45 +126,6 @@ describe('composeFloatingProps', () => {
       expect(element).not.toHaveAttribute('aria-orientation');
       expect(element).toHaveAttribute('role', 'dialog');
     });
-  });
-
-  it('sets id from floating context for aria-controls accessibility', () => {
-    render(
-      <TestPopoverProvider>
-        <ComponentWithFloatingProps />
-      </TestPopoverProvider>,
-    );
-
-    const element = screen.getByTestId(TEST_ID);
-    expect(element).toHaveAttribute('id', MOCK_FLOATING_UI_CONTEXT.floatingId);
-  });
-
-  it('allows custom id to override floating context id', () => {
-    const CustomComponentWithId = () => {
-      const popover = useContext(PopoverContext);
-      if (!popover) return null;
-
-      return (
-        <div
-          data-testid={TEST_ID}
-          {...composePopoverFloatingProps(
-            popover,
-            undefined,
-            undefined,
-            'custom-id',
-          )}
-        />
-      );
-    };
-
-    render(
-      <TestPopoverProvider>
-        <CustomComponentWithId />
-      </TestPopoverProvider>,
-    );
-
-    const element = screen.getByTestId(TEST_ID);
-    expect(element).toHaveAttribute('id', 'custom-id');
   });
 
   // onFocus and onKeyDown are tested in Popover.test.tsx, as they are based on interactions.

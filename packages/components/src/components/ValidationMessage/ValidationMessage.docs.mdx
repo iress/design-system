@@ -1,9 +1,10 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import {
   ComponentOverview,
   ComponentExample,
 } from '@iress-storybook/components';
 import * as ComponentStories from './ValidationMessage.stories';
+import * as ValidationLinkStories from './ValidationLink/ValidationLink.stories';
 import * as ValidationSummaryStories from './ValidationSummary/ValidationSummary.stories';
 
 <Meta of={ComponentStories} />
@@ -38,11 +39,17 @@ It is hidden by default, but can be shown by setting the `visiblePrefix` prop to
 
 <ComponentExample story={ComponentStories.Prefix} />
 
-### Link to target
+## `IressValidationLink`
 
-You can use the `linkToTarget` prop to link the message to a specific target in the DOM. This is useful to take the user to a specific part of the form when they click on the message.
+The `IressValidationLink` component can be used to provide a link to the input that has the error. It has a `linkToTarget` prop that should match the `id` of the input.
 
-<ComponentExample story={ComponentStories.LinkToTarget} />
+<ComponentExample
+  api={{
+    heading: 'Props',
+    headingId: 'link-api',
+  }}
+  story={ValidationLinkStories.ValidationLink}
+/>
 
 ## `IressValidationSummary`
 

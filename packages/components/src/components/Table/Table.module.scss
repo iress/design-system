@@ -1,0 +1,311 @@
+@use './Table.vars.module';
+@use '../../styles/mixins';
+
+/** Table
+ * --------------------------------------------------
+ * @prop --iress-background-color: background color of table
+ * @prop --iress-text-color: Color of table text
+ * @prop --iress-font-family: Font family of table text
+ * @prop --iress-font-size: Font size of table text
+ * @prop --iress-font-weight: Font weight of table text
+ * @prop --iress-border-color: Border color of table
+ * @prop --iress-border-style: Border style of table
+ * @prop --iress-border-width: Border width of table
+ * @prop --iress-border-radius: Border radius of table
+ * @prop --iress-header-background-color: Background color of table header
+ * @prop --iress-header-text-color: Color of table header text
+ * @prop --iress-header-font-size: Font size of table header text
+ * @prop --iress-header-font-weight: Font weight of table header text
+ * @prop --iress-header-icon-spacing: Spacing between sort icon and header text
+ * @prop --iress-header-column-border-color: Border color of table header column
+ * @prop --iress-header-column-border-style: Border style of table header column
+ * @prop --iress-header-column-border-width: Border width of table header column
+ * @prop --iress-header-row-border-color: Border color of table header row
+ * @prop --iress-header-row-border-style: Border style of table header row
+ * @prop --iress-header-row-border-width: Border width of table header row
+ * @prop --iress-column-border-color: Border color of table column
+ * @prop --iress-column-border-style: Border style of table column
+ * @prop --iress-column-border-width: Border width of table column
+ * @prop --iress-column-spacing: Horizontal padding for table columns
+ * @prop --iress-label-column-font-weight: Font weight of tbody th (table headers)
+ * @prop --iress-row-border-color: Border color of table row
+ * @prop --iress-row-border-style: Border style of table row
+ * @prop --iress-row-border-width: Border width of table row
+ * @prop --iress-row-border-radius: Border radius of table row
+ * @prop --iress-row-background-color--odd: Background color of odd table rows
+ * @prop --iress-row-color--odd: Text color of odd table rows
+ * @prop --iress-row-background-color--even: Background color of even table rows
+ * @prop --iress-row-color--even: Text color of even table rows
+ * @prop --iress-row-background-color--hover: Background color of table row when hovered over
+ * @prop --iress-row-color--hover: Text color of table row when hovered over
+ * @prop --iress-row-spacing: Vertical padding for table columns
+ * @prop --iress-row-spacing--compact: Vertical padding for table columns in compact view mode
+ * @prop --iress-caption-text-align: Text alignment for caption
+ * @prop --iress-caption-font-weight: Font weight for caption
+ * @prop --iress-caption-font-size: Font size for caption
+ * @prop --iress-caption-color: Color of caption text
+ * @prop --iress-caption-spacing: Vertical spacing between caption and table
+ */
+
+.table {
+  @include mixins.defaultFontStyles();
+
+  background-color: var(--iress-background-color);
+  color: var(--iress-color);
+  border-color: var(--iress-border-color);
+  border-style: var(--iress-border-style);
+  border-width: var(--iress-border-width);
+  border-radius: var(--iress-border-radius);
+  border-spacing: 0;
+  min-width: var(--iress-min-width);
+  border-collapse: collapse;
+  margin: 0;
+
+  caption {
+    text-align: var(--iress-caption-align);
+    font-weight: var(--iress-caption-font-weight);
+    font-size: var(--iress-caption-font-size);
+    color: var(--iress-caption-text-color);
+    padding-block-end: var(--iress-caption-spacing);
+  }
+
+  th {
+    background-color: var(--iress-header-background-color);
+    color: var(--iress-header-text-color);
+    font-family: var(--iress-header-font-family);
+    font-weight: var(--iress-header-font-weight);
+    border-block-end: var(--iress-header-row-border-width) var(--iress-header-row-border-style) var(--iress-header-row-border-color);
+    border-inline-start: var(--iress-header-column-border-width) var(--iress-header-column-border-style) var(--iress-header-column-border-color);
+    border-inline-end: var(--iress-header-column-border-width) var(--iress-header-column-border-style) var(--iress-header-column-border-color);
+    vertical-align: bottom;
+    text-align: start;
+
+    &.rowGroupHeader {
+      padding: 0;
+      background-color: transparent;
+    }
+  }
+
+  tbody th {
+    font-weight: var(--iress-label-column-font-weight);
+  }
+
+  th,
+  td {
+    padding-inline: var(--iress-column-spacing);
+    padding-block: var(--iress-row-spacing);
+
+    &:first-child {
+      border-start-start-radius: var(--iress-row-border-radius);
+      border-end-start-radius: var(--iress-row-border-radius);
+    }
+
+    &:last-child {
+      border-start-end-radius: var(--iress-row-border-radius);
+      border-end-end-radius: var(--iress-row-border-radius);
+    }
+  }
+
+  tbody tr:not(.rowGroupColumnHeaders) th:not(.rowGroupHeader),
+  td {
+    border-inline-start: var(--iress-column-border-width) var(--iress-column-border-style) var(--iress-column-border-color);
+    border-inline-end: var(--iress-column-border-width) var(--iress-column-border-style) var(--iress-column-border-color);
+    border-block-start: none;
+    border-block-end: var(--iress-row-border-width) var(--iress-row-border-style) var(--iress-row-border-color);
+    vertical-align: var(--iress-cell-vertical-align, top);
+    background-color: var(--iress-row-odd-background-color);
+    color: var(--iress-row-odd-text-color);
+  }
+
+  tbody tr:nth-child(even) > th:not(.rowGroupHeader),
+  tbody tr:nth-child(even) > td {
+    background-color: var(--iress-row-even-background-color);
+    color: var(--iress-row-even-text-color);
+  }
+
+  .divider,
+  tbody .divider {
+    border-inline-end-width: var(--iress-column-divider-width);
+  }
+
+  /* Alignment */
+  .cell--number:not(.cell--center, .cell--left),
+  .cell--currency:not(.cell--center, .cell--left) {
+    text-align: end;
+  }
+
+  .cell--left {
+    text-align: start;
+  }
+
+  .cell--right {
+    text-align: end;
+
+    .ids-input--formControl {
+      text-align: end;
+    }
+  }
+
+  .cell--center {
+    text-align: center;
+  }
+
+  .ids-field {
+    flex-grow: 1;
+  }
+
+  .ids-checkbox {
+    --iress-margin-bottom: 0;
+
+    .ids-checkbox--label {
+      --iress-padding-x: 0;
+      --iress-padding-y: 0;
+      --iress-label-border-width: 0;
+      --iress-label-background-color: transparent;
+      --iress-label-box-shadow: none;
+    }
+
+    .ids-checkbox--input:focus + .ids-checkbox--label {
+      --iress-label-box-shadow: none;
+
+      .ids-checkbox--mark {
+        --iress-mark-box-shadow: 0 0 0 var(--iress-g-focus-width, var(--iress-default-focus-size)) var(--iress-focus-color);
+      }
+    }
+  }
+
+  // TODO: Do we still need this after field refactor?
+  .ids-label--hidden + .ids-field--input-container {
+    --iress-negative-margin: calc(var(--iress-input-padding-y, var(--iress-g-spacing-sm)) + var(--iress-input-border-width, 1px));
+
+    margin-block-start: calc(min(var(--iress-row-spacing), var(--iress-negative-margin)) * -1);
+  }
+
+  .iress-view-mode-compact & .ids-field,
+  &.iress-view-mode-compact .ids-field {
+    --iress-padding-y: 1px;
+    --iress-input-min-height: calc(1.5 * var(--iress-g-spacing-rem));
+
+    padding-block-start: revert;
+    padding-block-end: revert;
+
+    // TODO: Do we still need this after field refactor?
+    .ids-label--hidden + .ids-field--input-container {
+      margin-block-start: calc(var(--iress-input-border-width, 1px) * -1);
+    }
+  }
+}
+
+@mixin tableRowHoverStyles() {
+  background-color: var(--iress-row-hover-background-color);
+  color: var(--iress-row-hover-text-color);
+}
+
+@media (hover: hover) {
+  .hover tbody tr:hover th,
+  .hover tbody tr:hover td,
+  .hover tbody tr:hover:not(.rowGroupColumnHeaders) th:not(.rowGroupHeader) {
+    @include tableRowHoverStyles();
+  }
+}
+
+:global(.pseudo-hover-all) .table tbody tr:first-of-type th,
+:global(.pseudo-hover-all) .table tbody tr:first-of-type td,
+:global(.pseudo-hover-all).table tbody tr:first-of-type th,
+:global(.pseudo-hover-all).table tbody tr:first-of-type td {
+  @include tableRowHoverStyles();
+}
+
+.wrapper {
+  display: block;
+  overflow: auto;
+  line-height: var(--iress-line-height);
+}
+
+.sortButton {
+  all: unset;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.sortButtonNoWrap {
+  white-space: nowrap;
+}
+
+.sortIcon {
+  margin-inline-start: var(--iress-header-icon-spacing);
+}
+
+.hiddenHeader thead {
+  display: none;
+}
+
+.activator {
+  display: var(--iress-activator-display);
+  padding: var(--iress-activator-padding);
+  background-color: var(--iress-activator-background-color);
+  color: var(--iress-activator-text-color);
+  font-family: var(--iress-activator-font-family);
+  font-size: var(--iress-activator-font-size);
+  font-weight: var(--iress-activator-font-weight);
+  text-align: start;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  border-style: solid;
+  border-width: var(--iress-activator-border-width);
+  border-color: var(--iress-activator-border-color);
+  margin-block: var(--iress-g-spacing-xs);
+  width: 100%;
+
+  &::after {
+    width: calc(var(--iress-activator-chevron-size) * var(--iress-g-spacing-rem));
+    height: calc(var(--iress-activator-chevron-size) * var(--iress-g-spacing-rem));
+    inset-block-end: calc(50% - calc(calc(var(--iress-activator-chevron-size) / 4) * var(--iress-g-spacing-rem)));
+    inset-inline-end: var(--iress-activator-chevron-spacing);
+    border: var(--iress-activator-chevron-border-width) solid var(--iress-activator-text-color);
+    border-block-start: none;
+    border-inline-end: none;
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    transition: all var(--iress-transition-type) var(--iress-transition-duration);
+    transform: rotate(calc(var(--iress-dir-is-ltr, 1) * -45deg));
+  }
+
+  [aria-expanded='true'] &::after {
+    inset-block-end: calc(50% - calc(calc(var(--iress-activator-chevron-size) / 1.333) * var(--iress-g-spacing-rem)));
+    transform: rotate(calc(var(--iress-dir-is-ltr, 1) * -225deg));
+  }
+
+  * {
+    --iress-text-color: var(--iress-activator-text-color);
+    --iress-heading-margin-bottom: 0;
+
+    text-decoration: var(--iress-activator-text-decoration);
+  }
+
+  &:focus,
+  &:global(.pseudo-focus-all),
+  :global(.pseudo-focus-all) & {
+    outline: 2px solid transparent;
+    box-shadow: var(--iress-activator-focus-box-shadow);
+    border-radius: var(--iress-activator-focus-border-radius);
+  }
+
+  &:focus:not(:focus-visible),
+  &:global(.pseudo-focus-all:not(.pseudo-focus-visible-all)),
+  :global(.pseudo-focus-all:not(.pseudo-focus-visible-all)) & {
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:hover,
+  &.pseudo-hover {
+    text-decoration: var(--iress-activator-hover-text-decoration);
+    text-underline-offset: 0.1em;
+  }
+}

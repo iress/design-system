@@ -7,7 +7,7 @@ import {
   IressInput,
 } from '@/main';
 import { useState } from 'react';
-import { type FieldValues } from 'react-hook-form';
+import { FieldValues } from 'react-hook-form';
 import { IressTabSet } from '../TabSet';
 
 interface FormInsideTabProps {
@@ -17,7 +17,7 @@ interface FormInsideTabProps {
 
 const FormInsideTab = ({ loading, onSubmit }: FormInsideTabProps) => (
   <IressForm onSubmit={onSubmit}>
-    <IressStack gap="md">
+    <IressStack gutter="md">
       <IressFormField
         name="conversation"
         label="Conversation"
@@ -37,7 +37,7 @@ export const TabsWithPassedState = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   return (
-    <IressStack gap="md">
+    <IressStack gutter="md">
       <IressTabSet>
         <IressTab label="Tab 1">
           <FormInsideTab

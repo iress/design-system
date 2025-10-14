@@ -1,0 +1,111 @@
+@use 'Radio.vars.module';
+@use '../../styles/mixins';
+
+/** Radio
+ * --------------------------------------------------
+ * @prop --iress-font-family: Font family of the radio
+ * @prop --iress-font-size: Font size of the radio
+ * @prop --iress-size: Size of the radio mark
+ * @prop --iress-font-weight: Font weight of the radio
+ * @prop --iress-mark-border-width: Border width of the radio mark
+ * @prop --iress-mark-background-color: Background color of the radio mark
+ * @prop --iress-mark-box-shadow: Box shadow of the radio mark
+ * @prop --iress-text-color: Text colour of the radio
+ * @prop --iress-line-height: Line height of the radio
+ * @prop --iress-spacing-right: Spacing between the radio mark and the label text
+ * @prop --iress-margin-bottom: The amount of margin at the bottom of the radio
+ * @prop --iress-border-color: The colour of the radio border
+ * @prop --iress-padding-x: Horizontal padding on radio
+ * @prop --iress-padding-y: Vertical padding on radio
+ * @prop --iress-label-border-width: Border width of radio label
+ * @prop --iress-label-background-color: Background color of the radio label
+ * @prop --iress-label-box-shadow: Box shadow of the radio label
+ * @prop --iress-label-background-color: Background color of the radio label
+ * @prop --iress-label-border-radius: Border radius of the radio label
+ * @prop --iress-transition-hover-duration: Radio hover transition duration
+ * @prop --iress-transition-hover-type: Radio hover transition type
+ */
+
+.radio {
+  display: flex;
+  position: relative;
+  padding: 0;
+  transition: all var(--iress-transition-hover-duration) var(--iress-transition-hover-type);
+}
+
+.input {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.label {
+  @include mixins.defaultFontStyles();
+
+  padding-block: var(--iress-padding-y);
+  padding-inline: var(--iress-padding-x);
+  border: var(--iress-label-border-width) solid var(--iress-label-border-color);
+  border-radius: var(--iress-label-border-radius);
+  background-color: var(--iress-label-background-color);
+  position: relative;
+  box-shadow: var(--iress-label-box-shadow);
+  line-height: var(--iress-line-height);
+  min-height: var(--iress-size);
+  margin: 0;
+  display: inline-flex;
+  color: var(--iress-text-color);
+
+  .hiddenControl & {
+    display: block;
+  }
+}
+
+.mark {
+  position: relative;
+  border: var(--iress-mark-border-width) solid var(--iress-border-color);
+  background-color: var(--iress-mark-background-color);
+  display: inline-flex;
+  width: var(--iress-size);
+  height: var(--iress-size);
+  border-radius: 50%;
+  margin-inline-end: var(--iress-spacing-right);
+  box-shadow: var(--iress-mark-box-shadow);
+  flex-shrink: 0;
+  color: var(--iress-mark-color);
+
+  circle {
+    fill: currentcolor;
+    display: none;
+
+    .input:checked + .label & {
+      display: revert;
+    }
+  }
+}
+
+.hiddenControl .input:checked + label {
+  border: none;
+  padding: var(--iress-label-border-width);
+
+  &::after {
+    --iress-border-width: var(--iress-label-border-width);
+    --iress-border-color: var(--iress-label-border-color);
+
+    @include mixins.selectedBorder();
+  }
+}
+
+.touch .input + .label {
+  border: var(--iress-label-border-width) solid var(--iress-label-border-color);
+  border-radius: var(--iress-label-border-radius);
+  padding: var(--iress-padding-x);
+}
+
+.touch .input:checked + .label {
+  border-color: var(--iress-mark-color);
+}

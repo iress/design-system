@@ -1,0 +1,91 @@
+@use '../../styles/mixins';
+
+.table {
+  @include mixins.defaultFontVariables('table');
+  --iress-min-width: 100%;
+  --iress-background-color: var(--iress-table-background-color, transparent);
+  --iress-text-color: var(--iress-table-text-color);
+  --iress-line-height: var(--iress-table-line-height, 1.5);
+  --iress-border-color: var(--iress-table-border-color, var(--iress-g-border-color, var(--iress-default-border-color)));
+  --iress-border-style: var(--iress-table-border-style, solid);
+  --iress-border-width: var(--iress-table-border-width, 0);
+  --iress-border-radius: var(--iress-table-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius)));
+
+  --iress-caption-spacing: var(--iress-table-caption-spacing, var(--iress-g-spacing-xs));
+  --iress-caption-align: var(--iress-table-caption-text-align, center);
+  --iress-caption-font-size: var(--iress-table-caption-font-size, var(--iress-text-caption-font-size));
+  --iress-caption-font-weight: var(--iress-table-caption-font-weight, var(--iress-a-muted-font-weight, var(--iress-g-font-weight, normal)));
+  --iress-caption-text-color: var(--iress-table-caption-text-color, var(--iress-text-caption-text-color, var(--iress-g-muted-text-color, var(--iress-default-text-color--light))));
+
+  --iress-header-background-color: var(--iress-table-header-background-color, transparent);
+  --iress-header-text-color: var(--iress-table-header-text-color);
+  --iress-header-font-size: var(--iress-table-header-font-size);
+  --iress-header-font-weight: var(--iress-table-header-font-weight, var(--iress-g-heading-font-weight, bold));
+  --iress-header-icon-spacing: var(--iress-table-header-icon-spacing, var(--iress-g-spacing-xs));
+  --iress-header-column-border-color: var(--iress-table-header-column-border-color, var(--iress-column-border-color));
+  --iress-header-column-border-style: var(--iress-table-header-column-border-style, var(--iress-column-border-style));
+  --iress-header-column-border-width: var(--iress-table-header-column-border-width, var(--iress-column-border-width));
+  --iress-header-row-border-color: var(--iress-table-header-row-border-color, var(--iress-row-border-color));
+  --iress-header-row-border-style: var(--iress-table-header-row-border-style, var(--iress-row-border-style));
+  --iress-header-row-border-width: var(--iress-table-header-row-border-width, var(--iress-row-border-width));
+  --iress-header-row-border-radius: var(--iress-table-header-row-border-radius, var(--iress-row-border-radius));
+
+  --iress-column-border-color: var(--iress-table-column-border-color, var(--iress-border-color));
+  --iress-column-border-style: var(--iress-table-column-border-style, solid);
+  --iress-column-border-width: var(--iress-table-column-border-width, 0);
+  --iress-column-divider-width: var(--iress-table-column-divider-width, var(--iress-table-column-border-width, 1px));
+  --iress-column-spacing: var(--iress-table-column-spacing, var(--iress-g-spacing-xs));
+  --iress-label-column-font-weight: var(--iress-table-label-column-font-weight, bold);
+
+  --iress-row-border-color: var(--iress-table-row-border-color, var(--iress-border-color));
+  --iress-row-border-style: var(--iress-table-row-border-style, solid);
+  --iress-row-border-width: var(--iress-table-row-border-width, 1px);
+  --iress-row-border-radius: var(--iress-table-row-border-radius, var(--iress-default-border-radius));
+  --iress-row-even-background-color: var(--iress-table-row-even-background-color, transparent);
+  --iress-row-even-text-color: var(--iress-table-row-even-text-color);
+  --iress-row-odd-background-color: var(--iress-table-row-odd-background-color, transparent);
+  --iress-row-odd-text-color: var(--iress-table-row-odd-text-color);
+  --iress-row-hover-background-color: var(
+    --iress-table-row-hover-background-color,
+    var(--iress-a-layout-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)))
+  );
+  --iress-row-hover-text-color: var(--iress-table-row-hover-text-color, var(--iress-a-layout-hover-text-color, var(--iress-g-hover-text-color, var(--iress-default-text-color--hover))));
+  --iress-row-spacing: var(--iress-table-row-spacing, var(--iress-g-spacing-md));
+
+  --iress-row-selected-background-color: var(--iress-table-row-selected-background-color, var(--iress-a-active-background-color, var(--iress-g-primary-color, var(--iress-default-primary-color))));
+  --iress-row-selected-text-color: var(--iress-table-row-selected-text-color, var(--iress-a-active-contrast-color, var(--iress-g-primary-contrast-color, var(--iress-default-primary-contrast-color))));
+
+  --iress-activator-display: block;
+  --iress-activator-background-color: var(--iress-table-activator-background-color, transparent);
+  --iress-activator-font-family: var(--iress-table-activator-font-family, var(--iress-g-font-family));
+  --iress-activator-font-size: var(--iress-table-activator-font-size, var(--iress-g-font-size-lg, var(--iress-default-font-size-lg)));
+  --iress-activator-font-weight: var(--iress-table-activator-font-weight, var(--iress-a-display-font-weight, var(--iress-g-font-weight, lighter)));
+  --iress-activator-text-color: var(--iress-table-activator-text-color, var(--iress-a-heading-text-color, var(--iress-g-primary-color, var(--iress-default-primary-color))));
+  --iress-activator-padding: var(--iress-table-activator-padding, var(--iress-a-vertical-spacing-md, var(--iress-g-spacing-md)) var(--iress-a-horizontal-spacing-md, var(--iress-g-spacing-md)));
+  --iress-activator-chevron-spacing: var(--iress-table-activator-chevron-spacing-x, var(--iress-a-horizontal-spacing-md, var(--iress-g-spacing-md)));
+  --iress-activator-border-width: var(--iress-table-activator-border-width, 0);
+  --iress-activator-border-color: var(--iress-table-activator-border-color, var(--iress-g-border-color, var(--iress-default-border-color)));
+
+  --iress-activator-chevron-border-width: 1px;
+  --iress-activator-chevron-size: 0.75;
+
+  --iress-activator-focus-color: var(--iress-g-focus-color, var(--iress-default-focus-color));
+  --iress-activator-focus-box-shadow-size: var(--iress-g-focus-width, var(--iress-default-focus-size));
+  --iress-activator-focus-box-shadow: inset 0 0 0 var(--iress-activator-focus-box-shadow-size, 1px) var(--iress-activator-focus-color);
+  --iress-activator-focus-border-radius: var(--iress-g-spacing-xs);
+
+  --iress-activator-hover-text-decoration: var(--iress-table-activator-hover-text-decoration, solid underline currentColor 1px);
+}
+
+.compact > .table {
+  --iress-font-size: var(--iress-table-compact-font-size, var(--iress-g-font-size-xxxs, var(--iress-default-font-size--compact)));
+}
+
+:global(.iress-view-mode-compact) .table,
+:global(.iress-view-mode-compact).table,
+.compact > .table {
+  --iress-row-even-background-color: var(--iress-table-row-compact-even-background-color, var(--iress-table-row-even-background-color, transparent));
+  --iress-row-even-text-color: var(--iress-table-row-compact-even-text-color, var(--iress-table-row-even-text-color, inherit));
+  --iress-row-spacing: var(--iress-table-row-spacing, var(--iress-g-spacing-xs));
+  --iress-row-border-width: var(--iress-table-row-compact-border-width, var(--iress-table-row-border-width, 1px));
+}

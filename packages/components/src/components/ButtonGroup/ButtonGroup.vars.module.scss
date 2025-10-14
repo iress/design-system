@@ -1,0 +1,54 @@
+/** Button group variables
+ * --------------------------------------------------
+ */
+
+.buttonGroup {
+  --iress-item-border-radius: var(--iress-button-group-button-border-radius, var(--iress-a-button-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius))));
+
+  --iress-padding: var(--iress-button-group-padding, var(--iress-g-spacing-sm));
+  --iress-background-color: var(--iress-button-group-background-color, var(--iress-g-background-color, var(--iress-default-background-color)));
+  --iress-border-color: var(--iress-button-group-border-color, var(--iress-g-border-color, var(--iress-default-border-color)));
+  --iress-border-width: var(--iress-button-group-border-width, var(--iress-g-border-width, var(--iress-default-border-width)));
+  --iress-border: var(--iress-border-width) solid var(--iress-border-color);
+  --iress-border-radius: var(--iress-button-group-border-radius, calc(var(--iress-item-border-radius) * 1.5));
+
+  --iress-label-font-family: var(--iress-button-group-label-font-family, var(--iress-a-form-font-family, var(--iress-g-font-family)));
+  --iress-label-font-size: var(--iress-button-group-label-font-size, var(--iress-g-font-size));
+  --iress-label-font-weight: var(--iress-button-group-label-font-weight, var(--iress-g-label-font-weight, bold));
+  --iress-label-text-color: var(--iress-button-group-label-text-color, var(--iress-a-label-text-color, var(--iress-g-text-color)));
+  --iress-label-margin-bottom: var(--iress-button-group-label-margin-bottom, var(--iress-g-spacing-sm));
+
+  --iress-item-border-width: var(--iress-button-group-button-border-width, 0px);
+  --iress-item-padding-x: var(--iress-button-group-button-padding-x, var(--iress-g-spacing-lg));
+  --iress-item-padding-y: var(--iress-button-group-button-padding-y, var(--iress-g-spacing-xs));
+  --iress-item-min-height: var(--iress-button-group-button-min-height, 2rem);
+  --iress-item-margin-right: var(--iress-button-group-button-margin-right, var(--iress-g-spacing-sm));
+
+  --iress-item-inactive-background-color: var(--iress-button-group-button-inactive-background-color, transparent);
+  --iress-item-inactive-hover-background-color: var(--iress-button-group-button-inactive-hover-background-color, var(--iress-g-hover-background-color, var(--iress-default-hover-background-color)));
+  --iress-item-inactive-active-background-color: var(--iress-button-group-button-inactive-active-background-color, var(--iress-item-inactive-background-color));
+  --iress-item-inactive-text-color: var(--iress-button-group-button-inactive-text-color, var(--iress-g-text-color, var(--iress-default-text-color)));
+  --iress-item-inactive-hover-text-color: var(--iress-button-group-button-inactive-hover-text-color, var(--iress-g-hover-text-color, var(--iress-default-text-color)));
+  --iress-item-inactive-active-text-color: var(--iress-button-group-button-inactive-active-text-color, var(--iress-item-inactive-text-color));
+  --iress-item-inactive-border-color: var(--iress-button-group-button-inactive-border-color, var(--iress-g-border-color, var(--iress-default-border-color)));
+
+  --iress-item-active-background-color: var(
+    --iress-button-group-button-active-background-color,
+    var(--iress-a-active-background-color, var(--iress-g-primary-color, var(--iress-default-active-color)))
+  );
+  --iress-item-active-hover-background-color: var(
+    --iress-button-group-button-active-hover-background-color,
+    var(--iress-a-active-hover-background-color, var(--iress-g-primary-hover-color, var(--iress-default-primary-hover-color)))
+  );
+  --iress-item-active-active-background-color: var(--iress-button-group-button-active-active-background-color, var(--iress-item-active-background-color));
+  --iress-item-active-text-color: var(
+    --iress-button-group-button-active-text-color,
+    var(--iress-a-active-contrast-color, var(--iress-g-primary-contrast-color, var(--iress-default-primary-contrast-color)))
+  );
+  --iress-item-active-hover-text-color: var(
+    --iress-button-group-button-active-hover-text-color,
+    var(--iress-a-active-contrast-color, var(--iress-g-primary-contrast-color, var(--iress-default-primary-contrast-color)))
+  );
+  --iress-item-active-active-text-color: var(--iress-button-group-button-active-active-text-color, var(--iress-item-active-text-color));
+  --iress-item-active-border-color: var(--iress-button-group-button-active-border-color, var(--iress-a-active-border-color, var(--iress-g-primary-color, var(--iress-default-primary-color))));
+}

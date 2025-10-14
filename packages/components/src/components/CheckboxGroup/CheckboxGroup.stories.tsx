@@ -1,5 +1,5 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressCheckboxGroup } from '.';
+import { Meta, StoryObj } from '@storybook/react';
+import { CHECKBOX_GROUP_LAYOUTS, IressCheckboxGroup } from '.';
 import {
   disableArgTypes,
   withTransformedRawSource,
@@ -23,7 +23,6 @@ export default {
   argTypes: {
     ...disableArgTypes(['children']),
   },
-  tags: ['updated'],
 } as Meta<typeof IressCheckboxGroup>;
 
 export const CheckboxChildren: Story = {
@@ -104,13 +103,13 @@ export const Layout: Story = {
     ...disableArgTypes(['layout']),
   },
   render: (args) => (
-    <IressText>
-      <h3>block</h3>
-      <IressCheckboxGroup {...args} layout="block" />
-      <h3>inline</h3>
-      <IressCheckboxGroup {...args} layout="inline" />
-      <h3>stack</h3>
-      <IressCheckboxGroup {...args} layout="stack" />
+    <IressText className="iress-u-stack iress--gutter--lg">
+      {CHECKBOX_GROUP_LAYOUTS.map((layout) => (
+        <div key={layout}>
+          <h3>{layout}</h3>
+          <IressCheckboxGroup {...args} layout={layout} />
+        </div>
+      ))}
     </IressText>
   ),
 };
@@ -146,14 +145,22 @@ export const CustomCheckboxGroupLayout: Story = {
       label="I'd like to discuss the following with my financial adviser:"
       hint="Select all that apply"
     >
-      <IressCheckboxGroup {...args}>
+      <IressCheckboxGroup
+        {...args}
+        style={
+          {
+            '--iress-margin-bottom': 0,
+            '--iress-inline-spacing-x': 0,
+          } as never
+        }
+      >
         <div
           className={styles.resizable}
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
             gridAutoRows: '1fr',
-            gridGap: '16px',
+            gridGap: 'var(--iress-g-spacing-sm, 0.75rem)',
             width: '100%',
             padding: '0.5rem',
           }}
@@ -165,11 +172,11 @@ export const CustomCheckboxGroupLayout: Story = {
   ),
 };
 
-export const ReadOnly: Story = {
+export const Readonly: Story = {
   ...DefaultChecked,
   args: {
     ...DefaultChecked.args,
-    readOnly: true,
+    readonly: true,
   },
 };
 

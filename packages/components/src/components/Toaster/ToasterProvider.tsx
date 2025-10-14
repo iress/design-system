@@ -1,97 +1,98 @@
 import {
-  type PropsWithChildren,
+  createContext,
   useCallback,
-  useEffect,
   useMemo,
   useState,
   type MouseEvent,
 } from 'react';
-import { Toaster, type ToasterItem, type ToasterProps } from './Toaster';
+import { IressToaster } from './Toaster';
 import {
-  registerToaster,
-  type ToasterRegister,
-  unregisterToaster,
-} from './helpers/toasterRegister';
-import { ToasterContext } from './hooks/useToaster';
+  type IressToasterOptions,
+  type IressToasterProps,
+  type IressToasterProviderProps,
+} from './Toaster.types';
+import { type IressToastProps } from './Toast/Toast.types';
+import { type ButtonRef } from '../Button';
 
-export interface IressToasterProviderProps
-  extends Omit<ToasterProps, 'toasts'>,
-    PropsWithChildren {
-  /**
-   * A unique identifier for the toaster provider.
-   * This is useful if you have multiple toaster providers in your application based on context.
-   */
-  id?: string;
+interface ToasterContextValue {
+  animateOut: (id: string) => void;
+  show: (toast: IressToastProps) => string;
+  close: (id: string, e?: MouseEvent<ButtonRef>) => void;
+  options: IressToasterOptions;
+  setOptions: (options: IressToasterOptions) => void;
 }
+
+export const ToasterContext = createContext<ToasterContextValue | undefined>(
+  undefined,
+);
 
 export const IressToasterProvider = ({
   children,
-  id,
-  position,
-  ...restProps
+  ...defaultOptions
 }: IressToasterProviderProps) => {
-  const [toasts, setToasts] = useState<ToasterItem[]>([]);
+  const [toasts, setToasts] = useState<IressToasterProps['toasts']>([]);
+  const [options, setOptions] = useState<IressToasterOptions>({
+    position: 'bottom-end',
+    ...defaultOptions,
+  });
 
-  const remove = useCallback(
-    (id: string, e?: MouseEvent<HTMLButtonElement>) => {
-      setToasts((prevToasts) => {
-        const toast = prevToasts?.find((toast) => toast.id === id);
-        toast?.onClose?.(e);
+  const removeToast = (id: string, e?: MouseEvent<ButtonRef>) =>
+    setToasts((prevToasts) => {
+      const toast = prevToasts?.find((toast) => toast.id === id);
+      toast?.onClose?.(e);
 
-        return prevToasts?.filter((toast) => toast.id !== id);
-      });
-    },
-    [],
-  );
+      return prevToasts?.filter((toast) => toast.id !== id);
+    });
 
-  const show: ToasterRegister['show'] = useCallback(
-    (status, toast) => {
-      const toastId = toast.id ?? `${new Date().getTime()}`;
-      const isTop = position?.includes('top');
+  const show: ToasterContextValue['show'] = useCallback(
+    (toast) => {
+      const toastId = `${new Date().getTime()}`;
+      const isTop = options.position?.includes('top');
 
       // Add Toast
       setToasts((prevToasts = []) => [
         ...(isTop ? [] : prevToasts),
-        { ...toast, id: toastId, status },
+        { ...toast, id: toastId },
         ...(isTop ? prevToasts : []),
       ]);
 
       return toastId;
     },
-    [position],
+    [options.position],
   );
 
-  const close: ToasterRegister['close'] = useCallback((closedId: string) => {
-    setToasts((prevToasts) =>
-      prevToasts?.map((toast) =>
-        toast.id === closedId ? { ...toast, timeout: 100 } : toast,
-      ),
-    );
-  }, []);
+  const close: ToasterContextValue['close'] = useCallback(
+    (closedId, e) => removeToast(closedId, e),
+    [],
+  );
+
+  const animateOut: ToasterContextValue['animateOut'] = useCallback(
+    (closedId: string) => {
+      setToasts((prevToasts) =>
+        prevToasts?.map((toast) =>
+          toast.id === closedId ? { ...toast, timeout: 100 } : toast,
+        ),
+      );
+    },
+    [],
+  );
 
   // The position in options is configurable param in the hook.
   const updatedValue = useMemo(
     () => ({
-      close,
-      remove,
+      animateOut,
       show,
+      close,
+      options,
+      setOptions,
     }),
-    [close, remove, show],
+    [animateOut, close, options, show],
   );
-
-  useEffect(() => {
-    if (!id) {
-      return;
-    }
-
-    registerToaster(id, updatedValue);
-    return () => unregisterToaster(id);
-  }, [id, updatedValue]);
 
   return (
     <ToasterContext.Provider value={updatedValue}>
       {children}
-      <Toaster id={id} position={position} {...restProps} toasts={toasts} />
+      <IressToaster toasts={toasts} {...options} />
     </ToasterContext.Provider>
   );
 };

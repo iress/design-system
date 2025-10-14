@@ -1,21 +1,8 @@
-import { useTableColumnStyles } from '../hooks/useTableColumnStyles';
-import { useTableColumnSort } from '../hooks/useTableColumnSort';
+import { type TableHeaderCellProps } from '../Table.types';
+import { useIDSTableColumnStyles } from '../hooks/useIDSTableColumnStyles';
+import { useIDSTableColumnSort } from '../hooks/useIDSTableColumnSort';
 import { TableSortButton } from './TableSortButton';
-import { type PropsWithChildren, useContext } from 'react';
-import { type IressTestProps } from '@/interfaces';
-import { type Column } from '@tanstack/react-table';
-import { TableContext } from '../TableProvider';
-
-export interface TableHeaderCellProps
-  extends PropsWithChildren,
-    IressTestProps {
-  additionalHeaders?: string;
-  columnApi: Pick<
-    Column<object, unknown>,
-    'getCanSort' | 'toggleSorting' | 'id'
-  >;
-  tableId: string;
-}
+import { useTable } from '../hooks/useTable';
 
 export const TableHeaderCell = ({
   additionalHeaders,
@@ -24,14 +11,12 @@ export const TableHeaderCell = ({
   tableId,
   ...restProps
 }: TableHeaderCellProps) => {
-  const columnSort = useTableColumnSort({
+  const columnSort = useIDSTableColumnSort({
     columnApi,
     columnKey: columnApi.id,
   });
-  const columnStyles = useTableColumnStyles({ columnKey: columnApi.id });
-  const columnNoWrap = useContext(TableContext)?.getColumnByKey(
-    columnApi.id,
-  )?.noWrap;
+  const columnStyles = useIDSTableColumnStyles({ columnKey: columnApi.id });
+  const columnNoWrap = useTable()?.getColumnByKey(columnApi.id)?.noWrap;
 
   return (
     <th

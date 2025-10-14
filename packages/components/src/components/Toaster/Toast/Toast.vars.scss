@@ -1,0 +1,104 @@
+@use '../../../styles/mixins';
+
+.toast {
+  @include mixins.defaultFontVariables('toast');
+
+  --iress-transition-duration: var(--iress-toast-animation-duration, var(--iress-g-animation-duration, var(--iress-default-animation-duration)));
+  --iress-transition-type: var(--iress-toast-animation-type, var(--iress-g-animation-type, var(--iress-default-animation-type)));
+  --iress-transition: all var(--iress-transition-duration) var(--iress-transition-type);
+  --iress-transition-reduced-motion: opacity var(--iress-transition-duration) ease-in-out;
+  --iress-margin-bottom: var(--iress-toast-margin-bottom, var(--iress-a-vertical-spacing-md, var(--iress-g-spacing-md)));
+  --iress-border-radius: var(--iress-toast-border-radius, var(--iress-g-border-radius, var(--iress-default-border-radius)));
+  --iress-text-color: var(--iress-toast-text-color);
+  --iress-padding-right: var(--iress-toast-padding-right, var(--iress-g-spacing-lg));
+  --iress-z-index: 1;
+
+  --iress-heading-font-weight: var(--iress-toast-heading-font-weight, var(--iress-g-heading-font-weight, normal));
+  --iress-heading-font-size: var(--iress-toast-heading-font-size, var(--iress-font-size));
+  --iress-heading-font-family: var(--iress-toast-heading-font-family, var(--iress-a-heading-font-family, var(--iress-g-font-family, inherit)));
+  --iress-heading-color: var(--iress-toast-heading-color, var(--iress-toast-text-color));
+  --iress-heading-margin-bottom: var(--iress-toast-heading-margin-bottom, var(--iress-g-spacing-xs));
+  --iress-heading-margin-right: var(--iress-g-spacing-xs);
+}
+
+.start-x,
+.end-x {
+  --iress-position-x: calc(-100% - var(--iress-padding, 0));
+
+  &.open {
+    --iress-position-x: 0;
+  }
+}
+
+.start-y,
+.end-y {
+  --iress-translate-y: 100%;
+
+  &.open {
+    --iress-translate-y: 0;
+  }
+}
+
+.fade,
+.start-y,
+.end-y {
+  --iress-opacity: 0;
+
+  &.open {
+    --iress-opacity: 1;
+  }
+}
+
+.panel {
+  --iress-padding-y: var(--iress-toast-padding-y, var(--iress-a-vertical-spacing-md, var(--iress-g-spacing-md)));
+  --iress-padding-x: var(--iress-toast-padding-x, var(--iress-a-horizontal-spacing-md, var(--iress-g-spacing-md)));
+  --iress-border-top-width: var(--iress-toast-border-top-width, var(--iress-g-border-width, var(--iress-default-border-width)));
+  --iress-border-bottom-width: var(--iress-toast-border-bottom-width, var(--iress-g-border-width, var(--iress-default-border-width)));
+  --iress-border-left-width: var(--iress-toast-border-left-width, var(--iress-g-border-width, var(--default-border-width--lg)));
+  --iress-border-right-width: var(--iress-toast-border-right-width, var(--iress-g-border-width, var(--iress-default-border-width)));
+  --iress-box-shadow-size: var(--iress-toast-box-shadow-size, var(--iress-default-box-shadow-size--sm));
+  --iress-box-shadow-color: var(--iress-toast-box-shadow-color, var(--iress-g-box-shadow-color, var(--iress-default-box-shadow-color)));
+  --iress-box-shadow: var(--iress-box-shadow-size) var(--iress-box-shadow-color);
+}
+
+.toast--error {
+  --iress-heading-color: var(--iress-toast-error-heading-color, var(--iress-toast-heading-color, var(--iress-default-danger-color)));
+
+  .panel {
+    --iress-background-color: var(
+      --iress-toast-error-background-color,
+      var(--iress-toast-background-color, var(--iress-a-layout-background-color, var(--iress-g-background-color, var(--iress-default-background-color))))
+    );
+    --iress-text-color: var(--iress-toast-error-text-color, var(--iress-toast-text-color));
+    --iress-border-color: var(--iress-toast-error-border-color, var(--iress-a-danger-border-color, var(--iress-g-danger-color, var(--iress-default-danger-color))));
+    --iress-heading-icon-text-color: var(--iress-toast-error-heading-text-color, var(--iress-a-danger-text-color, var(--iress-g-danger-color, var(--iress-default-danger-color))));
+  }
+}
+
+.toast--success {
+  --iress-heading-color: var(--iress-toast-success-heading-color, var(--iress-toast-heading-color, var(--iress-default-success-color)));
+
+  .panel {
+    --iress-background-color: var(
+      --iress-toast-success-background-color,
+      var(--iress-toast-background-color, var(--iress-a-layout-background-color, var(--iress-g-background-color, var(--iress-default-background-color))))
+    );
+    --iress-text-color: var(--iress-toast-success-text-color, var(--iress-toast-text-color));
+    --iress-border-color: var(--iress-toast-success-border-color, var(--iress-a-success-border-color, var(--iress-g-success-color, var(--iress-default-success-color))));
+    --iress-heading-icon-text-color: var(--iress-toast-success-heading-text-color, var(--iress-a-success-text-color, var(--iress-g-success-color, var(--iress-default-success-color))));
+  }
+}
+
+.toast--info {
+  --iress-heading-color: var(--iress-toast-info-heading-color, var(--iress-toast-heading-color, var(--iress-default-info-color)));
+
+  .panel {
+    --iress-background-color: var(
+      --iress-toast-info-background-color,
+      var(--iress-toast-background-color, var(--iress-a-layout-background-color, var(--iress-g-background-color, var(--iress-default-background-color))))
+    );
+    --iress-text-color: var(--iress-toast-info-text-color, var(--iress-toast-text-color));
+    --iress-border-color: var(--iress-toast-info-border-color, var(--iress-a-info-border-color, var(--iress-g-info-color, var(--iress-default-info-color))));
+    --iress-heading-icon-text-color: var(--iress-toast-info-heading-text-color, var(--iress-a-info-text-color, var(--iress-g-info-color, var(--iress-default-info-color))));
+  }
+}

@@ -1,0 +1,20 @@
+.checkboxMark {
+  --iress-size: var(--iress-checkbox-size, calc(1.5 * var(--iress-g-font-size-rem)));
+  --iress-border-color: var(--iress-checkbox-border-color, var(--iress-g-form-border-color, var(--iress-default-form-border-color)));
+  --iress-border-width: var(--iress-checkbox-mark-border-width, 1px);
+  --iress-background-color: var(--iress-checkbox-background-color, var(--iress-a-form-background-color, var(--iress-g-background-color, var(--iress-default-background-color))));
+  --iress-mark-color: var(--iress-checkbox-mark-color, var(--iress-a-active-contrast-color, var(--iress-g-primary-contrast-color, var(--iress-default-text-color--alt))));
+  --iress-border-radius: var(--iress-checkbox-border-radius, var(--iress-g-small-border-radius, var(--iress-default-border-radius)));
+  --iress-transition-duration: var(--iress-checkbox-transition-hover-duration, var(--iress-g-transition-hover-duration, var(--iress-default-hover-transition-duration)));
+  --iress-transition-hover-type: var(--iress-checkbox-transition-hover-type, var(--iress-g-transition-hover-type, var(--iress-default-hover-transition-type)));
+}
+
+.checked,
+.indeterminate {
+  --iress-border-color: var(--iress-checkbox-checked-border-color, var(--iress-a-active-border-color, var(--iress-g-primary-color, var(--iress-checkbox-border-color))));
+  --iress-background-color: var(--iress-checkbox-checked-background-color, var(--iress-a-active-background-color, var(--iress-g-primary-color, var(--iress-default-active-color))));
+}
+
+:global(.iress-view-mode-compact) .checkboxMark {
+  --iress-size: var(--iress-checkbox-size, calc(1.25 * var(--iress-g-font-size-rem)));
+}
