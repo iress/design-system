@@ -17,12 +17,18 @@
     "eslint-plugin-file-progress": "^3.0.2",
     "eslint-plugin-mdx": "^3.6.2",
     "eslint-plugin-prettier": "5.5.4",
+    "eslint-plugin-react-hooks": "^6.0.0",
+    "eslint-plugin-react-refresh": "^0.4.22",
+    "eslint-plugin-sonarjs": "^3.0.5",
     "husky": "9.1.7",
     "lint-staged": "16.2.1",
     "pinst": "3.0.0",
     "prettier": "3.6.2"
   },
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "yarn workspaces foreach -Apt run test",
+    "test:coverage": "yarn workspaces foreach -Apt run test:coverage",
+    "typecheck": "yarn workspaces foreach -Apt run typecheck"
   }
 }

@@ -1,0 +1,19 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ComponentOverview } from '@iress-storybook/components';
+import * as ComponentStories from './Placeholder.stories';
+
+<Meta of={ComponentStories} />
+
+# Placeholder
+
+<ComponentOverview
+  description="A placeholder is a UI element that allows you to reserve space for content that has not been created yet, usually used for prototyping."
+  story={ComponentStories.Placeholder}
+  stories={ComponentStories}
+/>
+
+## Usage
+
+The `IressPlaceholder` component is a **last resort** component, as it provides very little context to the product team and/or user about what content will be placed in the placeholder.
+
+It is recommended to use placeholders that emulate the content that will be placed in the placeholder, such as images or text that is similar to the final content. This will help the product team and/or user understand what to expect in the final product.

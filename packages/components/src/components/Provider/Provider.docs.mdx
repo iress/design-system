@@ -1,0 +1,33 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ComponentOverview } from '@iress-storybook/components';
+import * as ComponentStories from './Provider.stories';
+
+<Meta of={ComponentStories} />
+
+# Provider
+
+<ComponentOverview
+  description="Provider is a component that sets up the Iress Design System for your application. It ensures that the design system is correctly configured and ready to use."
+  story={ComponentStories.Provider}
+  stories={ComponentStories}
+/>
+
+## Usage
+
+The design system provider automates some set-up tasks for you, including:
+
+- Adding the icon fonts and CSS variables to the document head
+- Consistent container handling for providers, if you need the modals, slideouts and toasts rendered in a specific area (common with micro frontends)
+
+In most cases, you should wrap the entire application with the `IressProvider` component. This will ensure that the design system is set up correctly and consistently across the application.
+
+```tsx
+import { IressProvider } from '@iress-oss/ids-components';
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <IressProvider>
+    <IressTheme />
+    <App />
+  </IressProvider>,
+);
+```

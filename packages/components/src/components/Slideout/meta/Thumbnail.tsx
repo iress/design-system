@@ -1,0 +1,93 @@
+import { image } from '@/components/Image';
+import { cssVars } from '@iress-oss/ids-tokens';
+
+const Thumbnail = () => (
+  <svg
+    viewBox="0 0 751 467"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={image()}
+  >
+    <g clipPath="url(#clip0_1016_2822)">
+      <rect
+        width="751"
+        height="467"
+        style={{ fill: cssVars.colour.neutral[20] }}
+      />
+      <g filter="url(#filter0_d_1016_2822)">
+        <rect
+          x="438"
+          width="313"
+          height="467"
+          style={{ fill: cssVars.colour.neutral[10] }}
+        />
+        <rect
+          x="438.25"
+          y="0.25"
+          width="312.5"
+          height="466.5"
+          stroke="#091E42"
+          strokeOpacity="0.15"
+          strokeWidth="0.5"
+        />
+      </g>
+      <rect
+        x="466"
+        y="31"
+        width="169"
+        height="27"
+        rx="13.5"
+        style={{ fill: cssVars.colour.neutral[50] }}
+      />
+      <path
+        d="M724.526 42.0272C723.738 42.8071 723.735 44.0788 724.519 44.8625L732.785 53.1289C732.99 53.3342 733.016 53.6593 732.862 53.9468C732.817 54.0302 732.752 54.1 732.685 54.1669L731.167 55.6847C731.1 55.7516 731.03 55.8169 730.947 55.8617C730.659 56.0159 730.334 55.9904 730.129 55.7852L728.488 54.1445L721.934 47.5257C721.154 46.7381 719.882 46.735 719.098 47.5188L710.832 55.7852C710.627 55.9904 710.302 56.0159 710.014 55.8617C709.931 55.8169 709.861 55.7516 709.794 55.6847L708.276 54.1669C708.209 54.1 708.144 54.0302 708.099 53.9468C707.945 53.6593 707.971 53.3342 708.176 53.1289L716.443 44.8614C717.227 44.0781 717.224 42.8073 716.438 42.0272L708.176 33.832C707.971 33.6268 707.945 33.3017 708.099 33.0142C708.144 32.9308 708.209 32.8609 708.276 32.794L709.794 31.2763C709.861 31.2094 709.931 31.144 710.014 31.0993C710.302 30.945 710.627 30.9705 710.832 31.1758L719.1 39.4433C719.883 40.2266 721.154 40.224 721.934 39.4376L730.129 31.1758C730.334 30.9705 730.659 30.945 730.947 31.0993C731.03 31.144 731.1 31.2094 731.167 31.2763L732.685 32.794C732.752 32.8609 732.817 32.9308 732.862 33.0142C733.016 33.3017 732.99 33.6268 732.785 33.832L731.145 35.4727L724.526 42.0272Z"
+        style={{ fill: cssVars.colour.primary.text }}
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_d_1016_2822"
+        x="420"
+        y="-8"
+        width="349"
+        height="503"
+        filterUnits="userSpaceOnUse"
+        colorInterpolationFilters="sRGB"
+      >
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dy="10" />
+        <feGaussianBlur stdDeviation="9" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0.0352941 0 0 0 0 0.117647 0 0 0 0 0.258824 0 0 0 0.15 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_1016_2822"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow_1016_2822"
+          result="shape"
+        />
+      </filter>
+      <clipPath id="clip0_1016_2822">
+        <rect
+          width="751"
+          height="467"
+          style={{ fill: cssVars.colour.neutral[10] }}
+        />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
+export default Thumbnail;

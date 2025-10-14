@@ -1,13 +1,14 @@
-import typescriptEslintParser from '@typescript-eslint/parser';
-import typescriptEslintPlugin from '@typescript-eslint/eslint-plugin';
-import prettierPlugin from 'eslint-plugin-prettier';
+import {
+  baseIgnores,
+  baseJavaScriptConfig,
+  createTypeScriptConfig,
+  createSonarConfig,
+} from './shared/eslint-base.config.js';
 
 export default [
   {
     ignores: [
-      '**/dist/**',
-      '**/coverage/**',
-      '**/node_modules/**',
+      ...baseIgnores,
       '**/storybook-static/**',
       'apps/**', // Let project configs handle their own linting
       'packages/**', // Let project configs handle their own linting
@@ -17,7 +18,8 @@ export default [
     ],
   },
   {
-    // Root-level configuration files
+    // Root-level configuration files - override base config for specific files
+    ...baseJavaScriptConfig,
     files: [
       '*.js',
       '*.mjs',
@@ -26,28 +28,19 @@ export default [
       'shared/**/*.js',
       'scripts/**/*.js',
     ],
-    plugins: {
-      prettier: prettierPlugin,
-    },
-    rules: {
-      ...prettierPlugin.configs.recommended.rules,
-    },
   },
   {
-    // TypeScript config files at root
-    files: ['*.ts'],
+    // TypeScript config files at root - use factory but without project references
+    ...createTypeScriptConfig(import.meta.dirname, []),
+    files: ['*.ts', 'shared/**/*.ts'],
     languageOptions: {
-      parser: typescriptEslintParser,
+      ...createTypeScriptConfig(import.meta.dirname, []).languageOptions,
       parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
+        ...createTypeScriptConfig(import.meta.dirname, []).languageOptions
+          .parserOptions,
+        project: false, // Root level TS files don't need project references
       },
     },
-    plugins: {
-      '@typescript-eslint': typescriptEslintPlugin,
-    },
-    rules: {
-      ...typescriptEslintPlugin.configs.recommended.rules,
-    },
   },
+  await createSonarConfig(),
 ];

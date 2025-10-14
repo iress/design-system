@@ -1,0 +1,53 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ComponentOverview } from '@iress-storybook/components';
+import * as ComponentStories from './Progress.stories';
+
+<Meta of={ComponentStories} />
+
+# Progress
+
+<ComponentOverview
+  description="A progress component is used to indicate to a user the completion of a set of tasks or a process."
+  story={ComponentStories.Default}
+  stories={ComponentStories}
+/>
+
+## Usage
+
+Progress shows how far through a task or operation you are in a graphical way. The simplest way to use it to set the `value` to specify how much of the task the user has completed, relative to the `max` value (which defaults to 100).
+
+### Calculation to convert value in to width
+
+The following calculation is used to derive the width percentage:
+
+```
+Math.round(
+    ((this.value - this.min) / (this.max - this.min)) * 100,
+)
+```
+
+This caters for those scenarios where the `min` or `max` values change.
+
+### Boundary limits
+
+There is a danger that the value can exceed the boundaries set in the `min` and `max` values, and cause the percentage width of the bar to overflow the indicator. To prevent this the following rules are applied:
+
+- If the `value` is less than the `min` prop, it is reset to the `min` prop;
+- If the `value` is more than the `max` prop, it is reset to the `max` prop;
+
+### Section Title
+
+The `section-title` prop is used by assistive technologies and allows you to tailor the message announced when the progress component is selected. This could be to add extra context about where the user is in a process or section with a multi-part form.
+
+### Use of tokens
+
+The message supports the use of two tokens within the announcement, which are replaced when the component is rendered. They are:
+
+- `{{current}}` - replaced with the `value`;
+- `{{max}}` - replaced with the maximum limit;
+
+For example, if the component has been implemented with a max of 10, a value of 6 has been set, and the default section title, the screen reader will announce:
+
+```
+Step 6 of 10
+```

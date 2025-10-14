@@ -1,0 +1,100 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import * as ComponentStories from './CheckboxGroup.stories';
+
+<Meta of={ComponentStories} />
+
+# Checkbox Group
+
+<ComponentOverview
+  description="Checkbox groups allow users to make more than one choice in a set of related options."
+  story={ComponentStories.CheckboxChildren}
+  stories={ComponentStories}
+/>
+
+## Examples
+
+### Checkbox children
+
+Individual checkboxes can be passed directly into `IressCheckboxGroup`.
+
+**Note:** The `mapCheckboxGroupOptions` helper function, originally used to map options to `IressCheckbox` components, is now deprecated. Instead, you can use `array.map` to map the options to `IressCheckbox` components.
+
+<ComponentExample
+  story={ComponentStories.CheckboxChildren}
+  stories={ComponentStories}
+/>
+
+### Default checked
+
+The default checked state of the checkbox children should always be set using the `defaultValue` prop (not directly on the checkbox component).
+
+The `defaultValue` prop can contain an array of strings, numbers or booleans.
+
+<ComponentExample
+  story={ComponentStories.DefaultChecked}
+  stories={ComponentStories}
+/>
+
+### Changing the checked state
+
+The `value` prop can be updated if you need to change the checked state without interacting with the checkboxes.
+
+For example, if you want to clear down the selected options:
+
+<ComponentExample
+  story={ComponentStories.Controlled}
+  stories={ComponentStories}
+/>
+
+### Layout
+
+The `layout` prop controls how the checkbox group is displayed and can have three basic layouts:
+
+- **Stack (Default):** Checkboxes are laid out vertically. Labels are only as wide as their text.
+- **Block:** Same as Stack, but labels take up the full width of the container.
+- **Inline:** Checkboxes are laid out horizontally. Labels are only as wide as their text.
+
+<ComponentExample story={ComponentStories.Layout} stories={ComponentStories} />
+
+### Hidden checkboxes
+
+You can use the `hiddenCheckbox` prop to create custom checkboxes. When enabled, the actual checkbox will be visually hidden, allowing you to create more interesting controls. The checked state will be shown by the label's border, which is thicker when the checkbox is checked.
+
+When `hiddenCheckbox` is enabled, the label will have no padding. Padding can be added by using an `IressPanel`.
+
+<ComponentExample
+  story={ComponentStories.HiddenCheckboxes}
+  stories={ComponentStories}
+/>
+
+### Laying out custom checkboxes
+
+The checkbox group's `layout` prop gives you some default options to help control the layout of your controls. But sometimes you need more granular control, which you can achieve with a bit of custom CSS.
+
+The example below uses CSS grid to give us evenly spaced / sized checkboxes, which will wrap on to new lines as the screen size reduces. The grid wrapper element is a div that wraps around the `<IressCheckbox>` elements, as shown by the dashed border. Use the grab handle in the bottom right-hand corner of the grid wrapper to see how the controls change size to respond to the container's width.
+
+<ComponentExample
+  story={ComponentStories.CustomCheckboxGroupLayout}
+  stories={ComponentStories}
+/>
+
+### Read only
+
+The `readOnly` prop changes how the checkbox group is rendered. It will only render the children that are checked (alongside a hidden input that contains the `value` if it was set), otherwise it not be rendered.
+
+It is understandable that this may not be the desired behavior for all use cases. If you need a checkbox group that is not editable, but still visible, simply do not set the `readOnly` prop and set the `value` prop instead.
+
+<ComponentExample
+  story={ComponentStories.ReadOnly}
+  stories={ComponentStories}
+/>
+
+### Touch
+
+The `touch` prop adds the button-like border and padding to checkbox.
+
+<ComponentExample story={ComponentStories.Touch} stories={ComponentStories} />

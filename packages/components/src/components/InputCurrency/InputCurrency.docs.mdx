@@ -1,0 +1,71 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import * as ComponentStories from './InputCurrency.stories';
+
+<Meta of={ComponentStories} />
+
+# InputCurrency
+
+<ComponentOverview
+  description={
+    <>
+      InputCurrency allows a user to input and interact with currency number. It
+      works just like <code>IressInput</code>, with new props{' '}
+      <code>locale</code> and <code>currencyCode</code>. This component meets{' '}
+      <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO-4217</a> standard
+    </>
+  }
+  story={ComponentStories.InputCurrency}
+  stories={ComponentStories}
+/>
+
+## Examples
+
+### Different Locale and CurrencyCode
+
+Display the GBP with `locale="en-GB"` and `currencyCode="GBP"` props (must pass both together)
+
+<ComponentExample story={ComponentStories.GBP} stories={ComponentStories} />
+
+Display the JPY with `locale="ja-JPY"` and `currencyCode="JPY"` props (must pass both together)
+
+<ComponentExample story={ComponentStories.JPY} stories={ComponentStories} />
+
+### With Symbol
+
+Display the currency symbol with `withSymbol` props
+
+<ComponentExample
+  story={ComponentStories.WithSymbol}
+  stories={ComponentStories}
+/>
+
+### More Format Options
+
+Pass more format options with `formatOptions` props. More format options in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat">here</a>
+
+<ComponentExample
+  story={ComponentStories.FormatOptions}
+  stories={ComponentStories}
+/>
+
+### Read Only
+
+The `readOnly` prop can be set to prevent the user from changing the value of the input. This will change the input to a custom read-only style and the user will not be able to interact with the input. If you want to make the number align to right, please pass `alignRight` together.
+
+<ComponentExample
+  story={ComponentStories.ReadOnly}
+  stories={ComponentStories}
+/>
+
+### Align Right
+
+Set the input content align to right with `alignRight` prop, which is more friendly for number input.
+
+<ComponentExample
+  story={ComponentStories.AlignRight}
+  stories={ComponentStories}
+/>

@@ -1,0 +1,95 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import * as ComponentStories from './Row.stories';
+import { IressTable } from '../../main';
+
+<Meta of={ComponentStories} />
+
+# Row
+
+<ComponentOverview
+  description={
+    <>
+      Used in conjunction with the <code>IressCol</code> component to lay out
+      page content.
+    </>
+  }
+  story={ComponentStories.Default}
+  stories={ComponentStories}
+/>
+
+## Usage
+
+`IressRow` supports visual hierarchy by allowing you to add multiple columns in your layout, allowing the user to see more content on the screen at the same time.
+
+It works best alongside the `IressContainer` and `IressCol` components.
+
+### Gutter
+
+The spacing between columns is controlled by the `gutter` prop. To change the spacing between multiple columns once the row wraps, you can use the `rowGrap` prop.
+
+Note: The `gutter` prop only works with `IressCol` components. If you are using other components, please use the `gap` prop instead.
+
+<IressTable
+  rows={[
+    {
+      deprecated_gutter_scale: 'none',
+      new_gap_value: 'spacing.000',
+    },
+    {
+      deprecated_gutter_scale: 'xs',
+      new_gap_value: 'spacing.100',
+    },
+    {
+      deprecated_gutter_scale: 'sm',
+      new_gap_value: 'spacing.200',
+    },
+    {
+      deprecated_gutter_scale: 'md',
+      new_gap_value: 'spacing.400',
+    },
+    {
+      deprecated_gutter_scale: 'lg',
+      new_gap_value: 'spacing.700',
+    },
+    {
+      deprecated_gutter_scale: 'xl',
+      new_gap_value: 'spacing.1200',
+    },
+  ]}
+  scope="col"
+/>
+
+<ComponentExample story={ComponentStories.Gutter} stories={ComponentStories} />
+
+### Responsive Gutter
+
+The `gutter` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
+
+<ComponentExample
+  story={ComponentStories.ResponsiveGutter}
+  stories={ComponentStories}
+/>
+
+### Alignment
+
+### Horizontal alignment
+
+`IressRow` can be set to align horizontally using the `horizontalAlign` prop.
+
+<ComponentExample
+  story={ComponentStories.HorizontalAlignment}
+  stories={ComponentStories}
+/>
+
+### Vertical alignment
+
+`IressRow` can be set to align vertically using the `verticalAlign` prop.
+
+<ComponentExample
+  story={ComponentStories.VerticalAlignment}
+  stories={ComponentStories}
+/>

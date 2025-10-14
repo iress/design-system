@@ -1,0 +1,16 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ComponentExample } from '@iress-storybook/components';
+import * as SkeletonRecipesStories from './SkeletonRecipes.stories';
+
+<Meta of={SkeletonRecipesStories} />
+
+# Recipes
+
+## `IressCard`
+
+A common use case of the skeleton component is within a card component. Below are some examples of how you might use `IressSkeleton` within `IressCard`.
+
+<ComponentExample
+  story={SkeletonRecipesStories.Card}
+  stories={SkeletonRecipesStories}
+/>

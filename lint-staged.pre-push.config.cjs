@@ -5,6 +5,67 @@ const {
   createWorkspaceAwareLintCommand,
 } = require('./shared/lint-staged-base.config.cjs');
 
+/**
+ * Adds workspace-specific typecheck and test:coverage commands for affected workspaces
+ * @param {string[]} files - Array of file paths
+ * @param {string[]} commands - Array to append commands to
+ * @param {boolean} excludeTestFiles - Whether to exclude test files from analysis
+ */
+const addWorkspaceCommands = (files, commands, excludeTestFiles = true) => {
+  const { patterns, regexes } = getWorkspaceConfig();
+  const workspaceFiles = {};
+
+  // Filter test files if requested
+  const filesToProcess = excludeTestFiles
+    ? files.filter(
+        (file) => !file.includes('.test.') && !file.includes('.spec.'),
+      )
+    : files;
+
+  // Group files by workspace
+  filesToProcess.forEach((file) => {
+    const matchedRegex = regexes.find((regex) => regex.test(file));
+    if (matchedRegex) {
+      const workspaceName = file.match(matchedRegex)[1];
+      if (!workspaceFiles[workspaceName]) {
+        workspaceFiles[workspaceName] = [];
+      }
+      workspaceFiles[workspaceName].push(file);
+    }
+  });
+
+  // For each affected workspace, check if it has test and typecheck scripts and run them
+  Object.keys(workspaceFiles).forEach((workspaceName) => {
+    for (const pattern of patterns) {
+      const workspaceDir = pattern.replace('*', workspaceName);
+      const packageJsonPath = path.join(workspaceDir, 'package.json');
+
+      try {
+        if (fs.existsSync(packageJsonPath)) {
+          const packageJson = JSON.parse(
+            fs.readFileSync(packageJsonPath, 'utf8'),
+          );
+
+          // Check if the workspace has a typecheck script
+          if (packageJson.scripts?.typecheck && packageJson.name) {
+            commands.push(`yarn workspace ${packageJson.name} run typecheck`);
+          }
+
+          // Check if the workspace has a test script
+          if (packageJson.scripts?.['test:coverage'] && packageJson.name) {
+            commands.push(
+              `yarn workspace ${packageJson.name} run test:coverage`,
+            );
+          }
+          break;
+        }
+      } catch {
+        continue;
+      }
+    }
+  });
+};
+
 module.exports = {
   // PRE-PUSH: Comprehensive - lint, format, and test changed files
   // Ensures all changes are thoroughly validated before pushing
@@ -19,45 +80,7 @@ module.exports = {
     ];
 
     // Add targeted testing for files in workspaces that have test scripts
-    const { patterns, regexes } = getWorkspaceConfig();
-    const workspaceFiles = {};
-
-    // Group files by workspace, excluding test files themselves
-    const testableFiles = files.filter(
-      (file) => !file.includes('.test.') && !file.includes('.spec.'),
-    );
-
-    testableFiles.forEach((file) => {
-      const matchedRegex = regexes.find((regex) => regex.test(file));
-      if (matchedRegex) {
-        const workspaceName = file.match(matchedRegex)[1];
-        (workspaceFiles[workspaceName] ??= []).push(file);
-      }
-    });
-
-    // For each affected workspace, check if it has test scripts and run them
-    Object.keys(workspaceFiles).forEach((workspaceName) => {
-      for (const pattern of patterns) {
-        const workspaceDir = pattern.replace('*', workspaceName);
-        const packageJsonPath = path.join(workspaceDir, 'package.json');
-
-        try {
-          if (fs.existsSync(packageJsonPath)) {
-            const packageJson = JSON.parse(
-              fs.readFileSync(packageJsonPath, 'utf8'),
-            );
-
-            // Check if the workspace has a test script
-            if (packageJson.scripts?.test && packageJson.name) {
-              commands.push(`yarn workspace ${packageJson.name} run test`);
-            }
-            break;
-          }
-        } catch {
-          continue;
-        }
-      }
-    });
+    addWorkspaceCommands(files, commands, true);
 
     return commands;
   },
@@ -73,38 +96,7 @@ module.exports = {
     ];
 
     // Run tests for any workspace that contains changed MDX files and has test scripts
-    const { patterns, regexes } = getWorkspaceConfig();
-    const workspaceFiles = {};
-
-    files.forEach((file) => {
-      const matchedRegex = regexes.find((regex) => regex.test(file));
-      if (matchedRegex) {
-        const workspaceName = file.match(matchedRegex)[1];
-        (workspaceFiles[workspaceName] ??= []).push(file);
-      }
-    });
-
-    Object.keys(workspaceFiles).forEach((workspaceName) => {
-      for (const pattern of patterns) {
-        const workspaceDir = pattern.replace('*', workspaceName);
-        const packageJsonPath = path.join(workspaceDir, 'package.json');
-
-        try {
-          if (fs.existsSync(packageJsonPath)) {
-            const packageJson = JSON.parse(
-              fs.readFileSync(packageJsonPath, 'utf8'),
-            );
-
-            if (packageJson.scripts?.test && packageJson.name) {
-              commands.push(`yarn workspace ${packageJson.name} run test`);
-            }
-            break;
-          }
-        } catch {
-          continue;
-        }
-      }
-    });
+    addWorkspaceCommands(files, commands, false);
 
     return commands;
   },

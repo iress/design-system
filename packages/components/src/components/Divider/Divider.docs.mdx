@@ -1,0 +1,35 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import * as ComponentStories from './Divider.stories';
+
+<Meta of={ComponentStories} />
+
+# Divider
+
+<ComponentOverview
+  description="A divider is a UI element that separates content in lists and layouts."
+  story={ComponentStories.Horizontal}
+  stories={ComponentStories}
+/>
+
+## Examples
+
+### Vertical divider
+
+Use the `vertical` prop to change the divider from horizontal to vertical.
+
+<ComponentExample
+  story={ComponentStories.Vertical}
+  stories={ComponentStories}
+/>
+
+### Gutter
+
+You can customise the gutter by using the `my` prop. If the divider is vertical, use the `mx` prop instead.
+
+By default, dividers do not have a gutter, allowing them to adapt to `<IressStack>` and `<IressInline>` layouts.
+
+<ComponentExample story={ComponentStories.Gutter} stories={ComponentStories} />

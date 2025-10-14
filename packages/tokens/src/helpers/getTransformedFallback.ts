@@ -41,7 +41,7 @@ export const getTransformedFallback = <T, TSchema extends object>(
 ) => {
   const fallback = token.$value;
 
-  if (fallback === undefined) {
+  if (fallback == undefined) {
     return undefined;
   }
 

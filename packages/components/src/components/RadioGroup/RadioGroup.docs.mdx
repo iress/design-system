@@ -1,0 +1,97 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-storybook/components';
+import { IressAlert } from '../../main';
+import * as ComponentStories from './RadioGroup.stories';
+
+<Meta of={ComponentStories} />
+
+# RadioGroup
+
+<ComponentOverview
+  description="A radio group is a group of radio buttons that allows the user to select one option from multiple options, where all options are visible."
+  story={ComponentStories.RadioChildren}
+  stories={ComponentStories}
+/>
+
+## Examples
+
+### Radio children
+
+Individual radio buttons can be passed directly into `IressRadioGroup`.
+
+**Note:** The `mapRadioGroupOptions` helper function, originally used to map options to `IressRadio` components, is now deprecated. Instead, you can use `array.map` to map the options to `IressRadio` components.
+
+<ComponentExample
+  story={ComponentStories.RadioChildren}
+  stories={ComponentStories}
+/>
+
+### Radio selection
+
+The default checked state of the radio children should always be set using the `value` prop. Sometimes you may wish to use the `IressRadioGroup` as an "uncontrolled" component - for example, because you are using a third party form library that requires it. In this case, simply use `defaultValue` instead of `value`.
+
+**Note:** The `value` prop on the `IressRadioGroup` component will always override the `checked` state of the `IressRadio` children.
+
+<ComponentExample
+  story={ComponentStories.RadioSelection}
+  stories={ComponentStories}
+/>
+
+### Layout
+
+The layout prop controls how the radio group is displayed and can have three basic layouts:
+
+- **stack (Default):** Radio buttons are laid out vertically. Labels are only as wide as their text.
+- **block:** Same as Stack, but labels take up the full width of the container.
+- **inline:** Radio buttons are laid out horizontally. Labels are only as wide as their text.
+- **inlineFlex:** Radio buttons are laid out horizontally. The container is only as wide as its contents.
+- **inlineEqualWidth:** Radio buttons are laid out horizontally. Labels take up an equal amount of space in the container.
+
+<IressAlert status="info" heading="Note:">
+  If using any of the inline* props within a `Field` component, the `Field` also
+  needs the inline prop to be set for the inline layouts to take effect.
+</IressAlert>
+
+<ComponentExample story={ComponentStories.Layout} stories={ComponentStories} />
+
+### Hidden radio buttons
+
+You can use the `hiddenRadio` prop to create custom radio buttons. When enabled, the actual radio button will be visually hidden, allowing you to create more interesting controls. The checked state will be shown by the label's border, which is thicker when the radio button is checked.
+
+When `hiddenRadio` is enabled, the label will have no padding. Padding can be added by using a Panel or utility classes.
+
+<ComponentExample
+  story={ComponentStories.HiddenRadioButtons}
+  stories={ComponentStories}
+/>
+
+### Laying out custom radio buttons
+
+The radio group's `layout` prop gives you some default options to help control the layout of your controls. But sometimes you need more granular control, which you can achieve with a bit of custom CSS.
+
+The example below uses CSS grid to give us evenly spaced / sized radio buttons, which will wrap on to new lines as the screen size reduces. The grid wrapper element is a div that wraps around the `<IressRadio />` elements, as shown by the dashed border. Use the grab handle in the bottom right-hand corner of the grid wrapper to see how the controls change size to respond to the container's width.
+
+<ComponentExample
+  story={ComponentStories.CustomRadioGroupLayout}
+  stories={ComponentStories}
+/>
+
+### Read only
+
+The `readOnly` prop changes how the radio group is rendered. It will only render if the children radio that is checked (alongside a hidden input that contains the `value` if it was set), otherwise it will not be rendered.
+
+It is understandable that this may not be the desired behavior for all use cases. If you need a radio group that is not editable, but still visible, simply do not set the `readOnly` prop and set the `value` prop instead.
+
+<ComponentExample
+  story={ComponentStories.ReadOnly}
+  stories={ComponentStories}
+/>
+
+### Touch
+
+The `touch` prop adds the button-like border and padding to radio.
+
+<ComponentExample story={ComponentStories.Touch} stories={ComponentStories} />

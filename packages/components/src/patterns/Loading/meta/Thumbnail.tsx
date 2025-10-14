@@ -1,0 +1,344 @@
+import { image } from '@/components/Image';
+import { cssVars } from '@iress-oss/ids-tokens';
+
+const Thumbnail = () => (
+  <svg
+    viewBox="0 0 751 467"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={image()}
+  >
+    {/* Background */}
+    <rect
+      width="751"
+      height="467"
+      style={{ fill: cssVars.colour.neutral[20] }}
+    />
+    <rect
+      x="103"
+      y="60"
+      width="546"
+      height="336"
+      rx="12"
+      style={{ fill: cssVars.colour.neutral[10] }}
+    />
+
+    {/* Loading State 1 - Progress Bar */}
+    <g id="loading-state-1">
+      <animate
+        attributeName="opacity"
+        values="0;1;1;0;0;0;0"
+        dur="6s"
+        repeatCount="indefinite"
+        keyTimes="0;0.083;0.417;0.5;0.583;0.917;1"
+      />
+      <rect
+        x="264"
+        y="244"
+        width="224"
+        height="11"
+        rx="5.5"
+        style={{ fill: cssVars.colour.neutral[50] }}
+      />
+      <rect
+        x="263"
+        y="204"
+        width="226"
+        height="24"
+        rx="12"
+        style={{ fill: cssVars.colour.neutral[50] }}
+      />
+      <rect
+        x="263"
+        y="204"
+        width="134"
+        height="24"
+        rx="12"
+        style={{ fill: cssVars.colour.primary.text }}
+      >
+        <animate
+          attributeName="width"
+          values="134;226;226;226;134;134;134"
+          dur="6s"
+          repeatCount="indefinite"
+          keyTimes="0;0.25;0.417;0.5;0.583;0.917;1"
+        />
+      </rect>
+    </g>
+
+    {/* Loading State 2 - Cards */}
+    <g id="loading-state-2">
+      <animate
+        attributeName="opacity"
+        values="0;0;0;0;1;1;0"
+        dur="6s"
+        repeatCount="indefinite"
+        keyTimes="0;0.083;0.417;0.5;0.583;0.917;1"
+      />
+
+      {/* Card 1 */}
+      <g filter="url(#filter0_d_1018_3259)">
+        <rect
+          x="161"
+          y="193"
+          width="119"
+          height="118"
+          rx="16"
+          style={{ fill: cssVars.colour.neutral[10] }}
+        />
+        <rect
+          x="161.25"
+          y="193.25"
+          width="118.5"
+          height="117.5"
+          rx="15.75"
+          stroke="#091E42"
+          strokeOpacity="0.15"
+          strokeWidth="0.5"
+        />
+      </g>
+      <path
+        d="M161 209C161 200.163 168.163 193 177 193H264C272.837 193 280 200.163 280 209V269H161V209Z"
+        fill="url(#paint0_linear_1018_3259)"
+      />
+      <rect
+        x="173"
+        y="279"
+        width="82"
+        height="15"
+        rx="7.5"
+        style={{ fill: cssVars.colour.neutral[50] }}
+      />
+
+      {/* Card 2 */}
+      <g filter="url(#filter1_d_1018_3259)">
+        <rect
+          x="316"
+          y="193"
+          width="119"
+          height="118"
+          rx="16"
+          style={{ fill: cssVars.colour.neutral[10] }}
+        />
+        <rect
+          x="316.25"
+          y="193.25"
+          width="118.5"
+          height="117.5"
+          rx="15.75"
+          stroke="#091E42"
+          strokeOpacity="0.15"
+          strokeWidth="0.5"
+        />
+      </g>
+      <path
+        d="M316 209C316 200.163 323.163 193 332 193H419C427.837 193 435 200.163 435 209V269H316V209Z"
+        fill="url(#paint1_linear_1018_3259)"
+      />
+      <rect
+        x="328"
+        y="279"
+        width="82"
+        height="15"
+        rx="7.5"
+        style={{ fill: cssVars.colour.neutral[50] }}
+      />
+
+      {/* Card 3 */}
+      <g filter="url(#filter2_d_1018_3259)">
+        <rect
+          x="471"
+          y="193"
+          width="119"
+          height="118"
+          rx="16"
+          style={{ fill: cssVars.colour.neutral[10] }}
+        />
+        <rect
+          x="471.25"
+          y="193.25"
+          width="118.5"
+          height="117.5"
+          rx="15.75"
+          stroke="#091E42"
+          strokeOpacity="0.15"
+          strokeWidth="0.5"
+        />
+      </g>
+      <path
+        d="M471 209C471 200.163 478.163 193 487 193H574C582.837 193 590 200.163 590 209V269H471V209Z"
+        fill="url(#paint2_linear_1018_3259)"
+      />
+      <rect
+        x="483"
+        y="279"
+        width="82"
+        height="15"
+        rx="7.5"
+        style={{ fill: cssVars.colour.neutral[50] }}
+      />
+
+      {/* Headers */}
+      <rect
+        x="161"
+        y="138"
+        width="247"
+        height="19"
+        rx="9.5"
+        style={{ fill: cssVars.colour.neutral[50] }}
+      />
+      <rect
+        x="528"
+        y="138"
+        width="62"
+        height="19"
+        rx="9.5"
+        style={{ fill: cssVars.colour.neutral[50] }}
+      />
+    </g>
+
+    {/* Definitions for filters and gradients */}
+    <defs>
+      <filter
+        id="filter0_d_1018_3259"
+        x="156"
+        y="191"
+        width="129"
+        height="128"
+        filterUnits="userSpaceOnUse"
+        colorInterpolationFilters="sRGB"
+      >
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dy="3" />
+        <feGaussianBlur stdDeviation="2.5" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0.0352941 0 0 0 0 0.117647 0 0 0 0 0.258824 0 0 0 0.2 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_1018_3259"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow_1018_3259"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter1_d_1018_3259"
+        x="311"
+        y="191"
+        width="129"
+        height="128"
+        filterUnits="userSpaceOnUse"
+        colorInterpolationFilters="sRGB"
+      >
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dy="3" />
+        <feGaussianBlur stdDeviation="2.5" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0.0352941 0 0 0 0 0.117647 0 0 0 0 0.258824 0 0 0 0.2 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_1018_3259"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow_1018_3259"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter2_d_1018_3259"
+        x="466"
+        y="191"
+        width="129"
+        height="128"
+        filterUnits="userSpaceOnUse"
+        colorInterpolationFilters="sRGB"
+      >
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dy="3" />
+        <feGaussianBlur stdDeviation="2.5" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0.0352941 0 0 0 0 0.117647 0 0 0 0 0.258824 0 0 0 0.2 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_1018_3259"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow_1018_3259"
+          result="shape"
+        />
+      </filter>
+      <linearGradient
+        id="paint0_linear_1018_3259"
+        x1="280"
+        y1="193"
+        x2="150.277"
+        y2="223.719"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor={cssVars.colour.neutral[30]} />
+        <stop offset="0.5" stopColor={cssVars.colour.neutral[20]} />
+        <stop offset="1" stopColor={cssVars.colour.neutral[30]} />
+      </linearGradient>
+      <linearGradient
+        id="paint1_linear_1018_3259"
+        x1="435"
+        y1="193"
+        x2="305.277"
+        y2="223.719"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor={cssVars.colour.neutral[30]} />
+        <stop offset="0.5" stopColor={cssVars.colour.neutral[20]} />
+        <stop offset="1" stopColor={cssVars.colour.neutral[30]} />
+      </linearGradient>
+      <linearGradient
+        id="paint2_linear_1018_3259"
+        x1="590"
+        y1="193"
+        x2="460.277"
+        y2="223.719"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor={cssVars.colour.neutral[30]} />
+        <stop offset="0.5" stopColor={cssVars.colour.neutral[20]} />
+        <stop offset="1" stopColor={cssVars.colour.neutral[30]} />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
+export default Thumbnail;

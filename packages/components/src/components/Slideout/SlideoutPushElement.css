@@ -1,0 +1,51 @@
+.ids-slideout-push-element-\:version\: {
+  --iress-transition-duration: var(--iress-slideout-transition-duration, var(--iress-g-animation-duration, var(--iress-default-animation-duration, 0.3s)));
+  --iress-transition-type: var(--iress-slideout-transition-timing-function, var(--iress-g-animation-type, var(--iress-default-animation-type, ease-out)));
+  --iress-transition: var(--iress-slideout-transition, all var(--iress-transition-duration) var(--iress-transition-type));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ids-slideout-push-element-\:version\: {
+    transition: var(--iress-transition);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ids-slideout-push-element-\:version\: {
+    transition: all 0.01ms ease-in-out calc(var(--iress-transition-duration) / 2) !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .ids-slideout-push-element--right-\:version\: {
+    margin-inline-end: inherit;
+  }
+
+  .ids-slideout-push-element--left-\:version\: {
+    margin-inline-start: inherit;
+  }
+
+  .ids-slideout-push-element--open-\:version\:.ids-slideout-push-element--right-\:version\:.ids-slideout-push-element--size--sm-\:version\: {
+    margin-inline-end: var(--iress-slideout-sm-width, var(--iress-default-width--sm, 375px));
+  }
+
+  .ids-slideout-push-element--open-\:version\:.ids-slideout-push-element--left-\:version\:.ids-slideout-push-element--size--sm-\:version\: {
+    margin-inline-start: var(--iress-slideout-sm-width, var(--iress-default-width--sm, 375px));
+  }
+
+  .ids-slideout-push-element--open-\:version\:.ids-slideout-push-element--right-\:version\:.ids-slideout-push-element--size--md-\:version\: {
+    margin-inline-end: var(--iress-slideout-md-width, var(--iress-default-width--md, 768px));
+  }
+
+  .ids-slideout-push-element--open-\:version\:.ids-slideout-push-element--left-\:version\:.ids-slideout-push-element--size--md-\:version\: {
+    margin-inline-start: var(--iress-slideout-md-width, var(--iress-default-width--md, 768px));
+  }
+
+  .ids-slideout-push-element--open-\:version\:.ids-slideout-push-element--right-\:version\:.ids-slideout-push-element--size--lg-\:version\: {
+    margin-inline-end: var(--iress-slideout-lg-width, var(--iress-default-width--md, 1200px));
+  }
+
+  .ids-slideout-push-element--open-\:version\:.ids-slideout-push-element--left-\:version\:.ids-slideout-push-element--size--lg-\:version\: {
+    margin-inline-start: var(--iress-slideout-lg-width, var(--iress-default-width--md, 1200px));
+  }
+}

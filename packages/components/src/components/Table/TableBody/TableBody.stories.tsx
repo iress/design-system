@@ -1,0 +1,20 @@
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressTableBody } from '..';
+import { TableGroupedRows } from '../mocks/TableGroupedRows';
+import GroupedRowsSource from '../mocks/TableGroupedRows.tsx?raw';
+import { withCustomSource } from '@iress-storybook/helpers';
+
+type Story = StoryObj<typeof IressTableBody>;
+
+export default {
+  title: 'Components/Table/Body',
+  component: IressTableBody,
+  tags: ['updated'],
+} as Meta<typeof IressTableBody>;
+
+export const Body: Story = {
+  render: (args) => <TableGroupedRows {...args} />,
+  parameters: {
+    ...withCustomSource(GroupedRowsSource),
+  },
+};

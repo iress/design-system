@@ -1,0 +1,182 @@
+import { Meta, Markdown } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import * as ComponentStories from './Modal.stories';
+import * as ProviderStories from './ModalProvider.stories';
+import { IressAlert } from '../../main';
+import { ModalTestDiff } from './mocks/ModalTestDiff';
+
+<Meta of={ComponentStories} />
+
+# Modal
+
+<ComponentOverview
+  description="Modals gather information, complete a subtask, or provide additional information without losing the context of an underlying page."
+  readMore={(<Markdown>{`
+## Use a modal when
+- Providing supplemental tasks required by the underlying page
+- Providing non-essential information related to the underlying page
+- Content require full attention
+
+## Avoid using a modal when
+
+- Conveying brief messages about background processes or status changes. Instead use IressAlert or IressToast.
+- The modal content can be incorporated into the page without complicating the page's intent
+  `}</Markdown>)}
+  story={ComponentStories.Default}
+  stories={ComponentStories}
+  />
+
+## Controlling the modal
+
+### Using the `show` property
+
+You can use state to control the modal by setting the `show` property to `true` or `false`. To sync your state with the modal, you can use the `onShowChange` prop, which is normally passed the set function from `useState`.
+
+<ComponentExample
+  story={ComponentStories.ShowWithState}
+  stories={ComponentStories}
+/>
+
+### Using the `IressModalProvider`
+
+You can use the `IressModalProvider` to open and close modals from anywhere in your application, as long as the modal has a unique `id`. In this case you would use the `useModal` hook to open and close the modal.
+
+To use, wrap your `<App/>` or the component that you want to use the `useModal` hook with `<IressModalProvider />`.
+
+<ComponentExample
+  api={{
+    details:
+      'These are some settings you can use to customise the provider, such as setting where the modals are rendered in the DOM.',
+    heading: 'Props',
+    headingId: 'provider-api',
+  }}
+  story={ProviderStories.Provider}
+  stories={ProviderStories}
+/>
+
+## Behaviour
+
+- No other interaction on the main page can be accessed while a modal is active. A backdrop covers the content beneath so that the content beneath cannot be interacted with.
+- Clicking on the the backdrop closes the modal and returns the focus to the triggering element.
+- When the modal is active the body is set to overflow: hidden to stop any scrolling of the underlying page. Scrolling should then only be possible on the modal wrapper.
+- By default there are 3 ways to dismiss the modal; click X in the header; press ESC on a keyboard; click anywhere on the backdrop. It is also recommended that consumers add a Cancel or Close button to the modal's footer slot if required.
+
+## Examples
+
+### Footer slot
+
+Content to appear underneath the main content. Usually used for extra controls like buttons etc.
+
+<ComponentExample
+  story={ComponentStories.FooterSlot}
+  stories={ComponentStories}
+/>
+
+### Fixed footer
+
+The `fixedFooter` prop can be used to set the footer to be fixed to the bottom of the modal. This is often useful when there is a lot of content in the main area that you would like to scroll underneath the footer content.
+
+**Note:** Also works without footer content.
+
+<IressAlert status="warning" heading="Using with popovers and tooltips" mb="md">
+  The fixed footer variant of IressModal prevents content from overflowing the
+  modal. This can cause layout issues when using with components that use
+  popovers (for example IressCombobox), especially when these components sit at
+  the end of the modal&apos;s content. If you encounter these issues, try using
+  a modal without a fixed footer. Normal modals allow content to overflow, which
+  should fix the issue.
+</IressAlert>
+
+<ComponentExample
+  story={ComponentStories.FixedFooter}
+  stories={ComponentStories}
+/>
+
+### Size
+
+The `size` prop can be set to `sm`, `md` or `lg`. It defaults to `md`.
+
+Below is a guide on when to use which size.
+
+<ComponentExample story={ComponentStories.Size} stories={ComponentStories} />
+
+### Responsive size
+
+The `size` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
+
+If you set a responsive `size`, the modal becomes full width on screens smaller than the value you specified. For example, if you want to create a large modal on medium screens and above:
+
+```tsx
+  <IressModal size={{ md: IressModal.Size.Lg }}>
+```
+
+The modal will be full width on extra-small and small screens, and large width on medium, large and extra-large screens. This is the same as setting:
+
+```tsx
+  <IressModal size={{ xs: IressModal.Size.Fullpage, md: IressModal.Size.Lg }}>
+```
+
+You can override this behaviour by specifying a value for `xs` in your size object:
+
+```tsx
+  <IressModal size={{ xs: IressModal.Size.Sm, md: IressModal.Size.Lg }}>
+```
+
+<ComponentExample
+  story={ComponentStories.ResponsiveSize}
+  stories={ComponentStories}
+/>
+
+### Disable closing
+
+For instances where you require the user's full attention and you want to ensure they continue the current task before closing the modal, you can disable the backdrop and escape key using `disableBackdropClick` and/or hide the close button using `noCloseButton`.
+
+**Note:** As these options remove the default handling of the closing the modal, please ensure you provide a clear way for the user to close the modal.
+
+<ComponentExample
+  story={ComponentStories.DisableClosing}
+  stories={ComponentStories}
+/>
+
+## Migrating to version 5
+
+### Adding the provider
+
+For your components to work as previously, you will need to set up the `IressModalProvider` at the root of your application. This will allow you to use the `useModal` hook to open and close modals from anywhere in your application using the ID of the modal.
+
+```tsx
+const App = () => <IressModalProvider>Rest of app here</IressModalProvider>;
+```
+
+### Testing
+
+In version 5, modals are rendered conditionally, meaning they will not be available in the DOM until they are shown. This means that you will need to update your tests to account for this, as you cannot interact with its contents until it is shown, unlike in version 4.
+
+See below for an example in version 4 and version 5.
+
+<ModalTestDiff />
+
+### Speed up tests
+
+You can speed up tests by wrapping your tests in a provider that overrides the theme tokens for animations.
+
+```tsx
+const themeOverrides: Record<string, string> = {
+  '--iress-backdrop-transition-duration': '0s',
+};
+
+export const TestAppProvider = ({ children }: PropsWithChildren) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <IressModalProvider container={containerRef}>
+      <div style={themeOverrides} ref={containerRef}>
+        {children}
+      </div>
+    </IressModalProvider>
+  );
+};
+```

@@ -1,0 +1,49 @@
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import {
+  type IressSlideoutProps,
+  IressSlideoutProvider,
+  type IressSlideoutProviderProps,
+} from '.';
+import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
+import { App as AppWithSlideoutProvider } from './mocks/AppWithSlideoutProvider';
+import AppWithSlideoutProviderSource from './mocks/AppWithSlideoutProvider.tsx?raw';
+import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
+
+type CustomArgs = Partial<IressSlideoutProviderProps> & {
+  slideout: Partial<IressSlideoutProps>;
+};
+type Story = StoryObj<CustomArgs>;
+
+export default {
+  title: 'Components/Slideout/Provider',
+  component: IressSlideoutProvider,
+  argTypes: {
+    ...disableArgTypes(['children', 'container']),
+    slideout: {
+      control: 'object',
+      description: 'Settings for slideout to be opened by provider',
+      table: {
+        category: STORYBOOK_ONLY_CATEGORY,
+      },
+    },
+  },
+  parameters: {
+    actions: {
+      disable: true,
+    },
+  },
+  tags: ['updated'],
+} as Meta<typeof IressSlideoutProvider>;
+
+export const Provider: Story = {
+  args: {
+    slideout: {
+      children:
+        'This slideout was opened via IressSlideoutProvider and the useSlideout hook.',
+    },
+  },
+  render: (args) => <AppWithSlideoutProvider {...args.slideout} />,
+  parameters: {
+    ...withCustomSource(AppWithSlideoutProviderSource),
+  },
+};

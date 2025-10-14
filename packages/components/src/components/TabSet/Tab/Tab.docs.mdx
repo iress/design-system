@@ -1,0 +1,38 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import * as ComponentStories from './Tab.stories';
+
+<Meta of={ComponentStories} />
+
+# Tab
+
+<ComponentOverview
+  description="A tab is an interactive element that controls the display of other content, usually a panel"
+  story={ComponentStories.Inactive}
+  stories={ComponentStories}
+/>
+
+## Examples
+
+### Active
+
+The tab can be set to active using the `active` prop.
+
+**Note:** If you are using `IressTabSet`, you should use the `selected` prop on the `IressTabSet` to set the active state of its `<IressTab />` children, as the `active` prop will be ignored.
+
+<ComponentExample story={ComponentStories.Active} stories={ComponentStories} />
+
+### Value
+
+A tab can have a unique value set to it, used to determine its active state in a `IressTabSet` component. The value is not visible to end users.
+
+<ComponentExample story={ComponentStories.Value} stories={ComponentStories} />
+
+### Panel
+
+A tab can set its `children` when used inside an `IressTabSet` component, and it will render as its panel. If the tab is not used inside an `IressTabSet` component, `children` will not render.
+
+<ComponentExample story={ComponentStories.Panel} stories={ComponentStories} />

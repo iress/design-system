@@ -38,6 +38,24 @@ export async function createMdxConfig() {
   };
 }
 
+export async function createSonarConfig() {
+  const sonarjsPlugin = await import('eslint-plugin-sonarjs');
+
+  return {
+    files: ['**/*.{js,jsx,ts,tsx,mjs,cjs}'],
+    plugins: {
+      sonarjs: sonarjsPlugin.default,
+    },
+    rules: {
+      ...sonarjsPlugin.default.configs['recommended-legacy'].rules,
+      // Common overrides for design system context
+      'sonarjs/deprecation': 'off',
+      'sonarjs/function-return-type': 'off',
+      'sonarjs/todo-tag': 'off',
+    },
+  };
+}
+
 // Base configuration that all projects can extend
 export const baseIgnores = [
   '**/dist/**',
@@ -92,11 +110,28 @@ export const baseTypeScriptConfig = {
   },
 };
 
+// Factory function to create TypeScript config with project-specific settings
+export const createTypeScriptConfig = (
+  tsconfigRootDir,
+  projectPaths = ['./tsconfig.json'],
+) => ({
+  ...baseTypeScriptConfig,
+  languageOptions: {
+    ...baseTypeScriptConfig.languageOptions,
+    parserOptions: {
+      ...baseTypeScriptConfig.languageOptions.parserOptions,
+      tsconfigRootDir,
+      project: projectPaths,
+    },
+  },
+});
+
 export const baseStoriesConfig = {
   files: ['**/*.stories.tsx'],
   rules: {
     'react/no-array-index-key': 'off', // Stories have mock data that do not have unique IDs
     'react-hooks/rules-of-hooks': 'off', // Stories use hooks in a way that is not a component
+    'sonarjs/rules-of-hooks': 'off', // SonarJS equivalent rule
   },
 };
 
@@ -107,5 +142,10 @@ export const baseTestConfig = {
     '@typescript-eslint/require-await': 'off',
     '@typescript-eslint/unbound-method': 'off',
     '@typescript-eslint/consistent-type-imports': 'off',
+    // SonarJS overrides for tests
+    'sonarjs/no-duplicate-string': 'off',
+    'sonarjs/no-nested-functions': 'off',
+    'sonarjs/cognitive-complexity': 'off',
+    'sonarjs/assertions-in-tests': 'off', // Does not seem to count .not assertions
   },
 };

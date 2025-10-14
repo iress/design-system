@@ -1,0 +1,23 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ComponentOverview } from '@iress-storybook/components';
+import * as ComponentStories from './SkipLink.stories';
+
+<Meta of={ComponentStories} />
+
+# SkipLink
+
+<ComponentOverview
+  canvasProps={{
+    story: {
+      inline: false,
+      height: '200px',
+    },
+  }}
+  description="The skip link component allows keyboard users to quickly bypass the top-level navigation links and jump to the main content on a page."
+  story={ComponentStories.SkipLink}
+  stories={ComponentStories}
+/>
+
+## Behaviour
+
+- The skip link component is visually hidden until it is tabbed to.

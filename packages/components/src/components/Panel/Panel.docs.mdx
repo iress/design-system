@@ -1,0 +1,63 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-storybook/components';
+import * as ComponentStories from './Panel.stories';
+import { IressButton } from '../../main';
+
+<Meta of={ComponentStories} />
+
+# Panel
+
+<ComponentOverview
+  description="A panel is used to group related content."
+  story={ComponentStories.Default}
+  stories={ComponentStories}
+/>
+
+## Examples
+
+### Background
+
+By default, panels use the `colour.neutral.10` token. For most applications, this is the preferred background as panels are usually placed on a `colour.neutral.20` background.
+
+However, there are times when a panel needs to be placed on a different background. In these cases, you can use [the `bg` prop](/docs/styling-props-colour--docs#bg) to set the background to a different colour.
+
+<ComponentExample story={ComponentStories.bg} stories={ComponentStories} />
+
+### Padding
+
+Panel padding now is a global styling prop.
+
+<p>
+  <IressButton href="/?path=/docs/styling-props-spacing--docs#padding">
+    Learn more
+  </IressButton>
+</p>
+
+### Text align
+
+Text alignment can be set to `inherit`, `left`, `center`, `right` or `justify`.
+
+It's default value is `inherit`.
+
+<ComponentExample
+  story={ComponentStories.TextAlign}
+  stories={ComponentStories}
+/>
+
+### Stretch
+
+Panel can be set to fill its available container height by setting the `stretch` prop.
+
+<ComponentExample story={ComponentStories.Stretch} stories={ComponentStories} />
+
+### Removing border radius
+
+Panels can inherit the theme's border radius which may result in an undesirable look to those components that use panels internally such as slideouts. To remove rounding from all panels set the prop `borderRadius="none"` to ensure panels have a zero border radius.
+
+<ComponentExample
+  story={ComponentStories.NoBorderRadius}
+  stories={ComponentStories}
+/>
