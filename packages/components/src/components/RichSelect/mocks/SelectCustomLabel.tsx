@@ -1,6 +1,6 @@
 import {
   IressRichSelect,
-  IressRichSelectProps,
+  type IressRichSelectProps,
   IressSelectLabel,
 } from '@/main';
 

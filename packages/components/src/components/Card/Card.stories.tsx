@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { IressCard, IressCardProps } from './Card';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressCard, type IressCardProps } from './Card';
 import { IressRow } from '../Row';
 import { IressCol } from '../Col';
 import { IressStack } from '../Stack';

@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { IressFilter, IressFilterProps } from '.';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressFilter, type IressFilterProps } from '.';
 import { FilterSearchTable } from './mocks/FilterSearchTable';
 import FilterSearchTableSource from './mocks/FilterSearchTable.tsx?raw';
 import {

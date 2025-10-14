@@ -1,5 +1,5 @@
 import { toArray } from '@helpers/formatting/toArray';
-import { LabelValueMeta } from '@/interfaces';
+import { type LabelValueMeta } from '@/interfaces';
 
 /**
  * Converts the selected options into a human-readable string.

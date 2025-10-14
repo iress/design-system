@@ -1,12 +1,12 @@
 import { IressStack } from '@/components/Stack';
-import { ReactNode, useId, useMemo } from 'react';
+import { type ReactNode, useId, useMemo } from 'react';
 import { IressText } from '@/components/Text';
 import { IressPanel } from '@/components/Panel';
-import { IressProgress, IressProgressProps } from '@/components/Progress';
+import { IressProgress, type IressProgressProps } from '@/components/Progress';
 import { propagateTestid } from '@/helpers/utility/propagateTestid';
 import { useShowIndicator } from '../hooks/useShowIndicator';
 import { useEstimatedProgressValue } from '../hooks/useEstimatedProgressValue';
-import { IressStyledProps } from '@/types';
+import { type IressStyledProps } from '@/types';
 import { styled } from '@/styled-system/jsx';
 import { cx } from '@/styled-system/css';
 import { loading, loadingList } from '../Loading.styles';
@@ -180,7 +180,7 @@ export const LongLoading = ({
     );
     return loaded
       ? ''
-      : timecodes[firstUnfinished] ?? timecodes[timecodes.length - 1];
+      : (timecodes[firstUnfinished] ?? timecodes[timecodes.length - 1]);
   }, [messageList, loaded, progressValue]);
 
   const checkListItems = useMemo(() => {

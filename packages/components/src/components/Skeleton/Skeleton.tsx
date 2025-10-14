@@ -2,8 +2,8 @@ import { toCSSLengthValue } from '@helpers/formatting/toCSSLengthValue';
 import { IressText } from '../Text';
 import { skeleton } from './Skeleton.styles';
 import { cx } from '@/styled-system/css';
-import { IressStyledProps } from '@/types';
-import { IressCSSProps } from '@/interfaces';
+import { type IressStyledProps } from '@/types';
+import { type IressCSSProps } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 
 type SkeletonMode = 'rect' | 'circle' | 'text';

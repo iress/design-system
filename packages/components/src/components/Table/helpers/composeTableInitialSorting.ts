@@ -1,5 +1,5 @@
-import { ColumnSort } from '@tanstack/react-table';
-import { TableColumn } from './composeTableColumnDefs';
+import { type ColumnSort } from '@tanstack/react-table';
+import { type TableColumn } from './composeTableColumnDefs';
 
 export const composeTableInitialSorting = <TRow extends object, TVal = unknown>(
   columns?: TableColumn<TRow, TVal>[],

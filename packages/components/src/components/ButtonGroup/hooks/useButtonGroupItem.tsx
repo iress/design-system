@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { ButtonGroupContext } from '../ButtonGroupProvider';
-import { FormControlValue } from '@/types';
+import { type FormControlValue } from '@/types';
 
 export interface ButtonGroupItemProps {
   /**

@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { IressSelectMenu, IressSelectMenuProps } from './SelectMenu';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressSelectMenu, type IressSelectMenuProps } from './SelectMenu';
 import { MOCK_LABEL_VALUES } from '../../../mocks/generateLabelValues';
 import { addToStorybookCategory } from '@iress-storybook/helpers';
 

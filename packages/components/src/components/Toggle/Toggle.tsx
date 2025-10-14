@@ -1,15 +1,15 @@
 import {
-  MouseEventHandler,
-  MouseEvent,
+  type MouseEventHandler,
+  type MouseEvent,
   useEffect,
   useId,
   useState,
-  ReactNode,
+  type ReactNode,
   useRef,
 } from 'react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { IressCheckboxMark } from '../CheckboxMark';
-import { IressStyledProps, IressUnstyledProps } from '@/types';
+import { type IressStyledProps, type IressUnstyledProps } from '@/types';
 import { toggle } from './Toggle.styles';
 import { css, cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';

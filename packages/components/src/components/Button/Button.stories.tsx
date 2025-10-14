@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { IressButton, IressButtonProps } from './Button';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressButton, type IressButtonProps } from './Button';
 import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { IressText } from '../Text';
 import { CurrentBreakpoint } from '@iress-storybook/components';

@@ -3,7 +3,7 @@ import {
   IressCheckboxGroup,
   IressForm,
   IressFormField,
-  IressFormProps,
+  type IressFormProps,
   IressInput,
   IressText,
 } from '@/main';

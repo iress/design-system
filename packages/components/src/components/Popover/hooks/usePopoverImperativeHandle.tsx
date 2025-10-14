@@ -1,5 +1,5 @@
-import { ForwardedRef, useImperativeHandle } from 'react';
-import { PopoverHookReturn } from './usePopover';
+import { type ForwardedRef, useImperativeHandle } from 'react';
+import { type PopoverHookReturn } from './usePopover';
 
 export interface PopoverRef
   extends Pick<PopoverHookReturn, 'setShow' | 'show' | 'toggleAriaControls'> {

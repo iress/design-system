@@ -1,6 +1,6 @@
 import {
   forwardRef,
-  ReactNode,
+  type ReactNode,
   useEffect,
   useImperativeHandle,
   useRef,
@@ -9,7 +9,7 @@ import {
 import { createPortal } from 'react-dom';
 import idsCss from '../../styled-system/styles.css?raw';
 import { defaultFonts } from '@iress-oss/ids-tokens';
-import { IressUnstyledProps } from '@/types';
+import { type IressUnstyledProps } from '@/types';
 import { IressProvider } from '@/components/Provider';
 
 export interface IressShadowProps extends IressUnstyledProps {

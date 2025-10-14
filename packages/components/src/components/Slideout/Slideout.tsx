@@ -6,15 +6,15 @@ import {
   useMemo,
   useRef,
   useState,
-  ReactElement,
-  ReactNode,
-  MutableRefObject,
+  type ReactElement,
+  type ReactNode,
+  type MutableRefObject,
   useCallback,
-  TransitionEvent,
+  type TransitionEvent,
 } from 'react';
 import {
   FloatingPortal,
-  OpenChangeReason,
+  type OpenChangeReason,
   useDismiss,
   useFloating,
   useInteractions,
@@ -23,11 +23,14 @@ import {
 } from '@floating-ui/react';
 import { idsLogger } from '@helpers/utility/idsLogger';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
-import { SlideoutInner, SlideoutInnerProps } from './components/SlideoutInner';
+import {
+  SlideoutInner,
+  type SlideoutInnerProps,
+} from './components/SlideoutInner';
 import { slideout } from './Slideout.styles';
 import { useIdIfNeeded } from '../../hooks';
 import { IressText } from '../Text';
-import { FloatingUIContainer, IressStyledProps } from '@/types';
+import { type FloatingUIContainer, type IressStyledProps } from '@/types';
 import { usePushElement } from './hooks/usePushElement';
 import { splitCssProps } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSkeleton } from './Skeleton';
 import { SkeletonCard } from './mocks/SkeletonCard';
 import SkeletonCardSource from './mocks/SkeletonCard.tsx?raw';

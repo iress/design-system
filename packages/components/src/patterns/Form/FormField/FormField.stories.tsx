@@ -1,8 +1,8 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import {
   IressForm,
   IressFormField,
-  IressFormFieldProps,
+  type IressFormFieldProps,
   IressInput,
 } from '@/main';
 import {

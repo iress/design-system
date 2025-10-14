@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ModalContext } from '../ModalProvider';
+import { ModalContext } from './useModal';
 
 /**
  * This hook is used to control the modal state through the provider, used for uncontrolled modals.

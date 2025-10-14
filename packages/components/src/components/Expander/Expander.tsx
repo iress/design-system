@@ -1,10 +1,10 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { useIdIfNeeded } from '@/hooks';
 import { expander } from './Expander.styles';
 import { cx } from '@/styled-system/css';
-import { IressText, IressTextProps } from '../Text';
-import { IressCustomiseSlot } from '@/interfaces';
+import { IressText, type IressTextProps } from '../Text';
+import { type IressCustomiseSlot } from '@/interfaces';
 import { styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 

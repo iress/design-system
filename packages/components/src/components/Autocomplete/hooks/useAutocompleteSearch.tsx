@@ -2,7 +2,10 @@ import { useDebounce } from 'use-debounce';
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { searchLabelValues } from '@helpers/label-value/searchLabelValues';
 import { highlightQueryInLabelValue } from '@helpers/label-value/highlightQueryInLabelValue';
-import { FormattedLabelValueMeta, LabelValueMeta } from '@/interfaces';
+import {
+  type FormattedLabelValueMeta,
+  type LabelValueMeta,
+} from '@/interfaces';
 
 export interface AutocompleteSearchHookProps {
   /**
@@ -284,7 +287,7 @@ export const useAutocompleteSearch = ({
       !searchState.loading &&
       searchState.results.length === 0 &&
       debouncedQuery.length >= minSearchLength,
-    results: debouncedQuery ? searchState.results : initialOptions ?? [],
+    results: debouncedQuery ? searchState.results : (initialOptions ?? []),
 
     stopSearch: searchState.reset,
   };

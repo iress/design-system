@@ -1,8 +1,8 @@
-import { ReactNode, MouseEvent, MouseEventHandler } from 'react';
-import { SystemValidationStatuses } from '@/types';
+import { type ReactNode, type MouseEvent, type MouseEventHandler } from 'react';
+import { type SystemValidationStatuses } from '@/types';
 import { capitalizeFirstLetter } from '@/helpers/formatting/capitalizeFirstLetter';
 import { cx } from '@/styled-system/css';
-import { IressText, IressTextProps } from '../Text';
+import { IressText, type IressTextProps } from '../Text';
 import { styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 import { isValidFormInputElement } from '@/helpers/form/isValidFormInputElement';

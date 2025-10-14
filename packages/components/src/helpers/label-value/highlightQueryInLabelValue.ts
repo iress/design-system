@@ -1,5 +1,8 @@
-import { ElementType } from 'react';
-import { FormattedLabelValueMeta, LabelValueMeta } from '@/interfaces';
+import { type ElementType } from 'react';
+import {
+  type FormattedLabelValueMeta,
+  type LabelValueMeta,
+} from '@/interfaces';
 import { highlightQueryInLabel } from '@helpers/label-value/highlightQueryInLabel';
 
 export const highlightQueryInLabelValue = (

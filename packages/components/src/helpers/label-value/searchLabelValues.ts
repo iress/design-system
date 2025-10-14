@@ -1,4 +1,4 @@
-import { FormattedLabelValueMeta, LabelValue } from '@/interfaces';
+import { type FormattedLabelValueMeta, type LabelValue } from '@/interfaces';
 import fuzzysort from 'fuzzysort';
 import { highlightQueryInLabelValue } from '@helpers/label-value/highlightQueryInLabelValue';
 

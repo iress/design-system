@@ -1,12 +1,12 @@
 import { propagateTestid } from '@helpers/utility/propagateTestid';
-import { IressFieldProps } from '../Field';
+import { type IressFieldProps } from '../Field';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { FieldFooter } from '../components/FieldFooter';
 import { fieldGroup } from './FieldGroup.styles';
 import { css, cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 import { LabelBase } from '@/components/Label/LabelBase/LabelBase';
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 export interface IressFieldGroupProps
   extends IressFieldProps<'fieldset', 'legend'> {

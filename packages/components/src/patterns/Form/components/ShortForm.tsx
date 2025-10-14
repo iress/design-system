@@ -1,18 +1,18 @@
-import { FieldValues, useForm, UseFormProps } from 'react-hook-form';
+import { type FieldValues, useForm, type UseFormProps } from 'react-hook-form';
 import {
-  ForwardedRef,
+  type ForwardedRef,
   forwardRef,
-  ReactElement,
-  ReactNode,
-  Ref,
+  type ReactElement,
+  type ReactNode,
+  type Ref,
   useMemo,
 } from 'react';
 import { form } from '../Form.styles';
 import {
-  FormPatternProps,
-  FormRef,
+  type FormPatternProps,
+  type FormRef,
   IressHookForm,
-  IressHookFormProps,
+  type IressHookFormProps,
 } from '../HookForm/HookForm';
 import { cx } from '@/styled-system/css';
 import { IressText } from '@/components/Text';

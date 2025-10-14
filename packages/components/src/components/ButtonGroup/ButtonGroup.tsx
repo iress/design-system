@@ -1,9 +1,9 @@
-import { ControlledValue, useIdIfNeeded } from '../../hooks';
+import { type ControlledValue, useIdIfNeeded } from '../../hooks';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { buttonGroup } from './ButtonGroup.styles';
 import { cx } from '@/styled-system/css';
-import { FormControlValue, IressStyledProps } from '@/types';
-import { ReactNode } from 'react';
+import { type FormControlValue, type IressStyledProps } from '@/types';
+import { type ReactNode } from 'react';
 import { styled } from '@/styled-system/jsx';
 import { ButtonGroupProvider } from './ButtonGroupProvider';
 import { GlobalCSSClass } from '@/enums';

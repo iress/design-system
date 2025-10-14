@@ -1,5 +1,5 @@
 import { colour, cssVars } from '@iress-oss/ids-tokens';
-import { ColorToken } from '@/styled-system/tokens';
+import { type ColorToken } from '@/styled-system/tokens';
 
 export const colors = {
   'colour.primary.fill': {

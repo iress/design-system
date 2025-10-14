@@ -1,17 +1,21 @@
-import typescriptEslintParser from '@typescript-eslint/parser';
-import typescriptEslintPlugin from '@typescript-eslint/eslint-plugin';
-import reactHooksPlugin from 'eslint-plugin-react-hooks';
-import sonarjsPlugin from 'eslint-plugin-sonarjs';
-import prettierPlugin from 'eslint-plugin-prettier';
-import fileProgressPlugin from 'eslint-plugin-file-progress';
-import * as mdxPlugin from 'eslint-plugin-mdx';
+import {
+  baseIgnores,
+  baseJavaScriptConfig,
+  createTypeScriptConfig,
+  baseStoriesConfig,
+  baseTestConfig,
+  createReactConfig,
+  createSonarConfig,
+  createMdxConfig,
+} from '../../shared/eslint-base.config.js';
 
 export default [
   {
     ignores: [
-      '**/dist/**',
-      '**/coverage/**',
-      '**/storybook-static/**',
+      ...baseIgnores,
+      '**/*.stories.tsx', // TODO: Ignoring stories for now, we will do this as part of Storybook migration
+      '**/mocks/**/*', // TODO: Ignoring stories for now, we will do this as part of Storybook migration
+      '**/storybook-static/**', // Components-specific ignore
       '**/*.d.ts',
       '**/theme-preset.ts',
       '**/themes/*.ts',
@@ -19,68 +23,17 @@ export default [
       '!.storybook',
     ],
   },
+  baseJavaScriptConfig,
+  createTypeScriptConfig(import.meta.dirname, ['./tsconfig.json']),
+  await createReactConfig(),
+  await createSonarConfig(),
+  baseStoriesConfig,
+  baseTestConfig,
   {
-    files: ['**/*.{js,jsx,ts,tsx,mjs,cjs}'],
-    plugins: {
-      'react-hooks': reactHooksPlugin,
-      sonarjs: sonarjsPlugin,
-      prettier: prettierPlugin,
-    },
+    ...(await createMdxConfig()),
     rules: {
-      ...reactHooksPlugin.configs.recommended.rules,
-      ...sonarjsPlugin.configs['recommended-legacy'].rules,
-      ...prettierPlugin.configs.recommended.rules,
-    },
-  },
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    languageOptions: {
-      parser: typescriptEslintParser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        tsconfigRootDir: import.meta.dirname,
-        project: ['./tsconfig.json'],
-      },
-    },
-    plugins: {
-      '@typescript-eslint': typescriptEslintPlugin,
-      'file-progress': fileProgressPlugin,
-    },
-    rules: {
-      ...typescriptEslintPlugin.configs['recommended-type-checked'].rules,
-      ...typescriptEslintPlugin.configs['stylistic-type-checked'].rules,
-      'file-progress/activate': 'warn',
-      'sonarjs/deprecation': 'off',
-      'sonarjs/function-return-type': 'off',
-      'sonarjs/todo-tag': 'off',
-    },
-  },
-  {
-    files: ['**/*.stories.tsx'],
-    rules: {
-      'react/no-array-index-key': 'off',
-      'react-hooks/rules-of-hooks': 'off',
-      'sonarjs/rules-of-hooks': 'off',
-    },
-  },
-  {
-    files: ['**/*.test.ts', '**/*.test.tsx'],
-    rules: {
-      'sonarjs/no-duplicate-string': 'off',
-      'sonarjs/no-nested-functions': 'off',
-      'sonarjs/cognitive-complexity': 'off',
-      // Does not seem to count .not assertions
-      'sonarjs/assertions-in-tests': 'off',
-      '@typescript-eslint/no-empty-function': 'off',
-    },
-  },
-  {
-    ...mdxPlugin.flat,
-    files: ['**/*.mdx'],
-    rules: {
-      ...mdxPlugin.flat.rules,
-      'sonarjs/todo-tag': 'off',
+      ...(await createMdxConfig()).rules,
+      'sonarjs/todo-tag': 'off', // MDX-specific SonarJS override
     },
   },
 ];

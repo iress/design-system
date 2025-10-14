@@ -1,4 +1,4 @@
-import { IressProgressProps } from '@/components/Progress';
+import { type IressProgressProps } from '@/components/Progress';
 import { useEffect, useMemo, useState } from 'react';
 
 /**

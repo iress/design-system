@@ -1,30 +1,30 @@
 import {
   forwardRef,
-  ReactElement,
+  type ReactElement,
   useImperativeHandle,
   useMemo,
   useRef,
   useState,
-  ReactNode,
-  ForwardedRef,
+  type ReactNode,
+  type ForwardedRef,
 } from 'react';
 import { cx } from '@/styled-system/css';
 import { filter } from './Filter.styles';
 
 import { propagateTestid } from '@helpers/utility/propagateTestid';
-import { IressPopover, IressPopoverProps } from '../Popover';
+import { IressPopover, type IressPopoverProps } from '../Popover';
 import { IressButton } from '../Button';
 import {
   IressSelectMenu,
-  IressSelectMenuProps,
+  type IressSelectMenuProps,
   useRichSelectState,
 } from '../RichSelect';
 import {
   useAutocompleteSearch,
-  AutocompleteSearchHookProps,
-  AutocompleteSearchHookReturn,
+  type AutocompleteSearchHookProps,
+  type AutocompleteSearchHookReturn,
 } from '../Autocomplete';
-import { IressInputProps } from '../Input';
+import { type IressInputProps } from '../Input';
 import { IressPanel } from '../Panel';
 import { useFilterFlags } from './hooks/useFilterFlags';
 import { useIdIfNeeded } from '@/hooks';
@@ -33,8 +33,8 @@ import { IressDivider } from '../Divider';
 import { FilterResetButton } from './components/FilterResetButton';
 import { FilterLabel } from './components/FilterLabel';
 import { IressIcon } from '../Icon';
-import { ControlledValue } from '@/hooks/useControlledState';
-import { IressHTMLAttributes, LabelValueMeta } from '@/interfaces';
+import { type ControlledValue } from '@/hooks/useControlledState';
+import { type IressHTMLAttributes, type LabelValueMeta } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import { FilterResultsDescriptor } from './components/FilterResultsDescriptor';
 

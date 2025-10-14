@@ -1,5 +1,5 @@
 import { IressMenu, IressMenuItem } from '@/main';
-import { HTMLAttributes } from 'react';
+import { type HTMLAttributes } from 'react';
 
 /**
  * This could be the `Link` component from `react-router-dom` or any other routing library.

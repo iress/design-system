@@ -1,12 +1,12 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { IressCol, IressColProps } from '.';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressCol, type IressColProps } from '.';
 import {
   disableArgTypes,
   removeArgTypes,
   withJsxTransformer,
 } from '@iress-storybook/helpers';
 import { IressPlaceholder } from '../Placeholder';
-import { IressRow, IressRowProps } from '../Row';
+import { IressRow, type IressRowProps } from '../Row';
 import { IressStack } from '../Stack';
 import { IressPanel } from '../Panel';
 import { CurrentBreakpoint } from '@iress-storybook/components';

@@ -1,8 +1,17 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { ALERT_ICONS, IressAlert, alert as alertStyles } from '.';
+import { IressAlert, alert as alertStyles } from '.';
 import { GlobalCSSClass } from '@/enums';
 import { SYSTEM_VALIDATION_STATUSES } from '@/constants';
+import { SystemValidationStatuses } from '@/types';
+import { IressIconProps } from '../Icon';
+
+const ALERT_ICONS: Record<SystemValidationStatuses, IressIconProps['name']> = {
+  danger: 'ban',
+  info: 'info-square',
+  success: 'check',
+  warning: 'exclamation-triangle',
+};
 
 describe('IressAlert', () => {
   describe('Default rendering', () => {

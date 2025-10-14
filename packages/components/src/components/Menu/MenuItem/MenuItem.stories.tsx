@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressMenuItem } from './MenuItem';
 import { IressMenu } from '../Menu';
 import { IressBadge, IressIcon } from '@/main';

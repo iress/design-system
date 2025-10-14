@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTab, IressTabSet } from '.';
 import { IressStack } from '../Stack';
 import {

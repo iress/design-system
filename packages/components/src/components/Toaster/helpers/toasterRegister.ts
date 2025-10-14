@@ -1,5 +1,5 @@
-import { MouseEvent } from 'react';
-import { ToasterItem } from '../Toaster';
+import { type MouseEvent } from 'react';
+import { type ToasterItem } from '../Toaster';
 
 export interface NewToast extends Partial<ToasterItem> {
   /**

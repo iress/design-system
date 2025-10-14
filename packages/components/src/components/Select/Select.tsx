@@ -1,9 +1,9 @@
 import {
-  ChangeEvent,
-  ForwardedRef,
+  type ChangeEvent,
+  type ForwardedRef,
   forwardRef,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
   useCallback,
   useImperativeHandle,
   useRef,
@@ -18,8 +18,8 @@ import { useControlledState } from '@/hooks/useControlledState';
 import { getValueAsEvent } from '@helpers/form/getValueAsEvent';
 import { SelectReadonly } from './components/SelectReadonly';
 import { SelectControl } from './components/SelectControl';
-import { FormControlValue, IressStyledProps } from '@/types';
-import { IressInputProps } from '../Input';
+import { type FormControlValue, type IressStyledProps } from '@/types';
+import { type IressInputProps } from '../Input';
 import { select } from './Select.styles';
 import { input } from '../Input/Input.styles';
 import { css, cx } from '@/styled-system/css';

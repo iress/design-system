@@ -15,8 +15,8 @@ import {
   useToaster,
 } from '@/main';
 import { useState } from 'react';
-import { FieldValues } from 'react-hook-form';
-import { FormControlValue } from '@/main';
+import { type FieldValues } from 'react-hook-form';
+import { type FormControlValue } from '@/main';
 
 const Form = () => {
   const dependentOptions = [

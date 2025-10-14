@@ -1,29 +1,35 @@
-import { ForwardedRef, forwardRef, ReactNode, useContext, useRef } from 'react';
+import {
+  type ForwardedRef,
+  forwardRef,
+  type ReactNode,
+  useContext,
+  useRef,
+} from 'react';
 import { GlobalCSSClass } from '@/enums';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import {
   PopoverActivator,
-  PopoverActivatorProps,
+  type PopoverActivatorProps,
 } from './components/PopoverActivator';
 import { PopoverContent } from './components/PopoverContent';
 import {
-  DisplayModes,
-  FloatingUIAligns,
-  FloatingUIContainer,
-  IressStyledProps,
+  type DisplayModes,
+  type FloatingUIAligns,
+  type FloatingUIContainer,
+  type IressStyledProps,
 } from '@/types';
-import { OpenChangeReason } from '@floating-ui/react';
+import { type OpenChangeReason } from '@floating-ui/react';
 import { styled } from '@/styled-system/jsx';
 import { cx } from '@/styled-system/css';
 import {
-  PopoverRef,
+  type PopoverRef,
   usePopoverImperativeHandle,
 } from './hooks/usePopoverImperativeHandle';
 import { popover } from './Popover.styles';
-import { IressCustomiseSlot } from '@/interfaces';
+import { type IressCustomiseSlot } from '@/interfaces';
 import {
   PopoverContext,
-  PopoverHookReturn,
+  type PopoverHookReturn,
   usePopover,
 } from './hooks/usePopover';
 import { NestedPopoverActivator } from './components/NestedPopoverActivator';

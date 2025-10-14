@@ -1,4 +1,4 @@
-import { DateValue, formatShortDate, getDateObj } from './formatDate';
+import { type DateValue, formatShortDate, getDateObj } from './formatDate';
 
 export const formatISODateTime = (dateVal: DateValue): string => {
   const date = getDateObj(dateVal);

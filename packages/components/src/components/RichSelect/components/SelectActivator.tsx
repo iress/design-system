@@ -2,11 +2,14 @@ import { toArray } from '@helpers/formatting/toArray';
 import { IressSelectLabel } from '../SelectLabel/SelectLabel';
 import { IressSelectTags } from '../SelectTags/SelectTags';
 import { getValueAsEvent } from '@helpers/form/getValueAsEvent';
-import { IressRichSelectProps, SelectLabelRenderProps } from '../RichSelect';
-import { ControlledValue } from '@/hooks';
-import { LabelValueMeta } from '@/interfaces';
-import { ReactNode } from 'react';
-import { IressInputProps } from '@/components/Input';
+import {
+  type IressRichSelectProps,
+  type SelectLabelRenderProps,
+} from '../RichSelect';
+import { type ControlledValue } from '@/hooks';
+import { type LabelValueMeta } from '@/interfaces';
+import { type ReactNode } from 'react';
+import { type IressInputProps } from '@/components/Input';
 
 export interface IressSelectActivatorProps {
   /**

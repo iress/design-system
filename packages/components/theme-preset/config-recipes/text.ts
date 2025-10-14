@@ -1,4 +1,4 @@
-import { defineRecipe, SystemStyleObject } from '@pandacss/dev';
+import { defineRecipe, type SystemStyleObject } from '@pandacss/dev';
 
 const inlineStyles = {
   '& code': {

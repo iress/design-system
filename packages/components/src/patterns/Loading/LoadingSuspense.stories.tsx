@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressLoadingSuspense } from './LoadingSuspense';
 import { withCustomSource } from '@iress-storybook/helpers';
 import { LoadingSuspenseWizard } from './mocks/LoadingWizardWithSuspense';

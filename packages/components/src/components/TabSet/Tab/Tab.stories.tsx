@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { IressTab, IressTabProps, IressTabSet } from '..';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressTab, type IressTabProps, IressTabSet } from '..';
 
 type Story = StoryObj<IressTabProps<undefined>>;
 

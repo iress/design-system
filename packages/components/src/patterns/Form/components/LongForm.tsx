@@ -1,22 +1,22 @@
-import { FieldValues, useForm, UseFormProps } from 'react-hook-form';
+import { type FieldValues, useForm, type UseFormProps } from 'react-hook-form';
 import {
-  ForwardedRef,
+  type ForwardedRef,
   forwardRef,
-  ReactElement,
-  ReactNode,
-  Ref,
+  type ReactElement,
+  type ReactNode,
+  type Ref,
   useMemo,
 } from 'react';
 import { IressText } from '@/components/Text';
 import { form } from '../Form.styles';
 import { cx } from '@/styled-system/css';
 import {
-  FormPatternProps,
-  FormRef,
+  type FormPatternProps,
+  type FormRef,
   IressHookForm,
-  IressHookFormProps,
+  type IressHookFormProps,
 } from '../HookForm/HookForm';
-import { IressPanel, IressPanelProps } from '@/components/Panel';
+import { IressPanel, type IressPanelProps } from '@/components/Panel';
 import { IressInline } from '@/components/Inline';
 
 export interface LongFormProps<T extends FieldValues, TContext = object>

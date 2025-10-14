@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SlideoutContext } from '../SlideoutProvider';
+import { SlideoutContext } from './useSlideout';
 
 /**
  * This hook is used to control the slideout state through the provider, used for uncontrolled slideouts.

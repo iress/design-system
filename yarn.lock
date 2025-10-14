@@ -1315,7 +1315,7 @@ __metadata:
     "@vitest/ui": "npm:3.2.4"
     concurrently: "npm:^9.2.1"
     eslint: "npm:9.35.0"
-    eslint-plugin-file-progress: "npm:3.0.2"
+    eslint-plugin-file-progress: "npm:^3.0.2"
     eslint-plugin-mdx: "npm:3.6.2"
     eslint-plugin-prettier: "npm:5.5.4"
     eslint-plugin-react-hooks: "npm:^6.0.0"
@@ -1336,8 +1336,10 @@ __metadata:
     typescript: "npm:5.8.2"
     use-debounce: "npm:10.0.6"
     vite: "npm:7.1.5"
+    vite-bundle-visualizer: "npm:^1.2.1"
     vite-plugin-dts: "npm:4.5.4"
     vite-plugin-static-copy: "npm:3.1.2"
+    vite-tsconfig-paths: "npm:^5.1.4"
     vitest: "npm:3.2.4"
   languageName: unknown
   linkType: soft
@@ -1353,7 +1355,7 @@ __metadata:
     chalk: "npm:5.6.2"
     colorjs.io: "npm:0.5.2"
     eslint: "npm:9.35.0"
-    eslint-plugin-file-progress: "npm:3.0.2"
+    eslint-plugin-file-progress: "npm:^3.0.2"
     eslint-plugin-mdx: "npm:3.6.2"
     eslint-plugin-prettier: "npm:5.5.4"
     jest-axe: "npm:10.0.0"
@@ -1395,6 +1397,7 @@ __metadata:
     eslint-plugin-prettier: "npm:5.5.4"
     eslint-plugin-react-hooks: "npm:^6.0.0"
     eslint-plugin-react-refresh: "npm:^0.4.22"
+    eslint-plugin-sonarjs: "npm:^3.0.5"
     husky: "npm:9.1.7"
     lint-staged: "npm:16.2.1"
     pinst: "npm:3.0.0"
@@ -4549,7 +4552,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-file-progress@npm:3.0.2, eslint-plugin-file-progress@npm:^3.0.2":
+"eslint-plugin-file-progress@npm:^3.0.2":
   version: 3.0.2
   resolution: "eslint-plugin-file-progress@npm:3.0.2"
   dependencies:
@@ -9967,7 +9970,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-bundle-visualizer@npm:1.2.1":
+"vite-bundle-visualizer@npm:1.2.1, vite-bundle-visualizer@npm:^1.2.1":
   version: 1.2.1
   resolution: "vite-bundle-visualizer@npm:1.2.1"
   dependencies:
@@ -10034,7 +10037,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-tsconfig-paths@npm:5.1.4":
+"vite-tsconfig-paths@npm:5.1.4, vite-tsconfig-paths@npm:^5.1.4":
   version: 5.1.4
   resolution: "vite-tsconfig-paths@npm:5.1.4"
   dependencies:

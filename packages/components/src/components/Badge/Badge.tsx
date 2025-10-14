@@ -1,8 +1,8 @@
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { css, cx } from '@/styled-system/css';
 import { badge as badgeStyles } from './Badge.styles';
-import { ReactElement, ReactNode } from 'react';
-import { IressStyledProps, SystemValidationStatuses } from '@/types';
+import { type ReactElement, type ReactNode } from 'react';
+import { type IressStyledProps, type SystemValidationStatuses } from '@/types';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTableBody } from '..';
 import { TableGroupedRows } from '../mocks/TableGroupedRows';
 import GroupedRowsSource from '../mocks/TableGroupedRows.tsx?raw';

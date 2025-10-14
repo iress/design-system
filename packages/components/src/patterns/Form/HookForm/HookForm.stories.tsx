@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 
 import { IressHookForm } from './HookForm';
 import { HookFormExample } from '../mocks/HookFormExample';

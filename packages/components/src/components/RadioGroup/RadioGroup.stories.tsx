@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressRadioGroup } from '.';
 import { IressRadio } from '../Radio';
 import { disableArgTypes } from '@iress-storybook/helpers';

@@ -1,13 +1,13 @@
 import {
   createContext,
-  MutableRefObject,
-  PropsWithChildren,
+  type MutableRefObject,
+  type PropsWithChildren,
   useCallback,
   useEffect,
   useMemo,
   useState,
 } from 'react';
-import { FormControlValue } from '@/types';
+import { type FormControlValue } from '@/types';
 import { useControlledState } from '@/hooks';
 
 export interface TabSetContextValue {
@@ -42,6 +42,7 @@ export interface TabSetChangedEventDetail {
   value?: FormControlValue;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- Keeps the context in the same place as the provider
 export const TabSetContext = createContext<TabSetContextValue | undefined>(
   undefined,
 );

@@ -1,8 +1,8 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import {
-  IressModalProps,
+  type IressModalProps,
   IressModalProvider,
-  IressModalProviderProps,
+  type IressModalProviderProps,
 } from '.';
 import { App as AppWithModalProvider } from './mocks/AppWithModalProvider';
 import AppWithModalProviderSource from './mocks/AppWithModalProvider.tsx?raw';

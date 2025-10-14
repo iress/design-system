@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { IressIcon, IressIconProps } from './Icon';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressIcon, type IressIconProps } from './Icon';
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressText } from '../Text';
 import { IressInline } from '../Inline';

@@ -1,6 +1,6 @@
 import {
   IressTable,
-  IressFormProps,
+  type IressFormProps,
   IressForm,
   IressModal,
   IressFormField,

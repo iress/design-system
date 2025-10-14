@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressLoading } from '.';
 import { LoadingWizard } from './mocks/LoadingWizard';
 import LoadingWizardSource from './mocks/LoadingWizard.tsx?raw';

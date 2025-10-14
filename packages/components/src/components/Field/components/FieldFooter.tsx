@@ -1,10 +1,10 @@
 import { getUniqueItemsByKey } from '../helpers/getUniqueItemsByKey';
-import { ReactNode, useEffect, useMemo, useRef } from 'react';
-import { ValidationMessageObj } from '@/interfaces';
-import { IressStyledProps } from '@/types';
+import { type ReactNode, useEffect, useMemo, useRef } from 'react';
+import { type ValidationMessageObj } from '@/interfaces';
+import { type IressStyledProps } from '@/types';
 import { styled } from '@/styled-system/jsx';
 import { IressValidationSummary } from '@/components/ValidationMessage';
-import { IressIcon, IressIconProps } from '@/components/Icon';
+import { IressIcon, type IressIconProps } from '@/components/Icon';
 import { field } from '../Field.styles';
 import { css, cx } from '@/styled-system/css';
 import { IressText } from '@/components/Text';

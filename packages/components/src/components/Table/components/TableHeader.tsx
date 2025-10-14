@@ -1,7 +1,7 @@
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { flexRender } from '@tanstack/react-table';
 import { TableHeaderCell } from './TableHeaderCell';
-import { AriaRelationshipProps } from '@/hooks/useAriaRelationship';
+import { type AriaRelationshipProps } from '@/hooks/useAriaRelationship';
 import { useContext } from 'react';
 import { TableContext } from '../TableProvider';
 

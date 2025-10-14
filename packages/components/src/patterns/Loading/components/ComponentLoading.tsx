@@ -1,7 +1,7 @@
-import { ReactNode, useEffect, useMemo, useState } from 'react';
+import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { IressSkeleton } from '@/components/Skeleton';
 import { IressSpinner } from '@/components/Spinner';
-import { IressStyledProps } from '@/types';
+import { type IressStyledProps } from '@/types';
 import { styled } from '@/styled-system/jsx';
 import { loading } from '../Loading.styles';
 import { cx } from '@/styled-system/css';

@@ -1,6 +1,6 @@
 import { useListItem } from '@floating-ui/react';
 import {
-  KeyboardEventHandler,
+  type KeyboardEventHandler,
   useContext,
   useEffect,
   useId,

@@ -2,8 +2,8 @@ import { cx } from '@/styled-system/css';
 import { selectBody } from './SelectBody.styles';
 import { GlobalCSSClass } from '@/enums';
 
-import { ReactNode } from 'react';
-import { IressText, IressTextProps } from '@/components/Text';
+import { type ReactNode } from 'react';
+import { IressText, type IressTextProps } from '@/components/Text';
 
 export interface IressSelectBodyProps extends Omit<IressTextProps, 'element'> {
   /**

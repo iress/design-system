@@ -1,4 +1,4 @@
-import { IressButton, IressSlideout, IressSlideoutProps } from '@/main';
+import { IressButton, IressSlideout, type IressSlideoutProps } from '@/main';
 import { useState } from 'react';
 
 export const SlideoutUsingState = (args: IressSlideoutProps) => {

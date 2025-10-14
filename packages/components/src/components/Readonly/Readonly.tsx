@@ -1,11 +1,17 @@
-import { forwardRef, ReactElement, ReactNode, Ref, RefAttributes } from 'react';
+import {
+  forwardRef,
+  type ReactElement,
+  type ReactNode,
+  type Ref,
+  type RefAttributes,
+} from 'react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 
 import { getFormControlValueAsStringIfDefined } from '@/helpers/form/getFormControlValueAsStringIfDefined';
-import { IressInputProps } from '@/components/Input';
+import { type IressInputProps } from '@/components/Input';
 import { readonly } from './Readonly.styles';
 import { css, cx } from '@/styled-system/css';
-import { FormControlValue } from '@/types';
+import { type FormControlValue } from '@/types';
 import { IressSpinner } from '../Spinner';
 import { GlobalCSSClass } from '@/enums';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';

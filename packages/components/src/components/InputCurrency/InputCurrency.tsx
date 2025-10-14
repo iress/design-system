@@ -1,12 +1,12 @@
 import { IressInput } from '@/components/Input';
 import { IressText } from '@/components/Text';
 import { type InputRef } from '@/components/Input/InputBase/InputBase';
-import { forwardRef, ReactElement, RefAttributes } from 'react';
+import { forwardRef, type ReactElement, type RefAttributes } from 'react';
 import { formatCurrency } from '@/helpers/formatting/formatCurrency';
 import { type IressInputProps } from '@/components/Input/Input';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
-import { FormControlValue } from '@/types';
+import { type FormControlValue } from '@/types';
 
 export interface IressInputCurrencyProps<
   T extends FormControlValue = string | number,

@@ -1,5 +1,5 @@
 import { defineAnimationStyles } from '@pandacss/dev';
-import { keyframes } from './keyframes';
+import { type keyframes } from './keyframes';
 
 type AnimationName = keyof typeof keyframes;
 

@@ -1,7 +1,12 @@
-import { IressButton, IressButtonProps } from '@/components/Button';
+import { IressButton, type IressButtonProps } from '@/components/Button';
 import { filter } from '../Filter.styles';
 import { usePopoverItem } from '@/components/Popover/hooks/usePopoverItem';
-import { ForwardedRef, forwardRef, useImperativeHandle, useRef } from 'react';
+import {
+  type ForwardedRef,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 
 export const FilterResetButton = forwardRef(
   (props: IressButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {

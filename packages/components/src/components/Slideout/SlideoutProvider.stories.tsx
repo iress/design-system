@@ -1,8 +1,8 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import {
-  IressSlideoutProps,
+  type IressSlideoutProps,
   IressSlideoutProvider,
-  IressSlideoutProviderProps,
+  type IressSlideoutProviderProps,
 } from '.';
 import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { App as AppWithSlideoutProvider } from './mocks/AppWithSlideoutProvider';

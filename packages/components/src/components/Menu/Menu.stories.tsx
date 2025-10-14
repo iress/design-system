@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { IressMenu, IressMenuItem, IressMenuProps } from '.';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressMenu, IressMenuItem, type IressMenuProps } from '.';
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';

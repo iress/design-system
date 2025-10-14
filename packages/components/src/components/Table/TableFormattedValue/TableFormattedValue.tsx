@@ -1,14 +1,14 @@
 import { formatPercentage } from '@helpers/formatting/formatPercentage';
 import { formatDate, formatShortDate } from '@helpers/formatting/formatDate';
 import {
-  CurrencyFormatterProps,
+  type CurrencyFormatterProps,
   formatCurrency,
 } from '@helpers/formatting/formatCurrency';
 import {
   formatISODateTime,
   formatRelativeTime,
 } from '@/helpers/formatting/formatDateTime';
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 export interface IressTableFormattedValueProps<
   TRow extends object,
@@ -38,17 +38,15 @@ export interface IressTableFormattedValueProps<
   value: TVal;
 }
 
-export const TABLE_CELL_FORMATS = [
-  'string',
-  'number',
-  'date',
-  'shortDate',
-  'isoDateTime',
-  'relativeTime',
-  'currency',
-  'percent',
-] as const;
-export type TableCellFormats = (typeof TABLE_CELL_FORMATS)[number];
+export type TableCellFormats =
+  | 'string'
+  | 'number'
+  | 'date'
+  | 'shortDate'
+  | 'isoDateTime'
+  | 'relativeTime'
+  | 'currency'
+  | 'percent';
 
 export const IressTableFormattedValue = <TRow extends object, TVal = unknown>({
   currencyFormatOptions,

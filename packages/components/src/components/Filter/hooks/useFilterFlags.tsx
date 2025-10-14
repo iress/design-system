@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { IressFilterProps } from '../Filter';
-import { AutocompleteSearchHookReturn } from '@/components/Autocomplete';
+import { type IressFilterProps } from '../Filter';
+import { type AutocompleteSearchHookReturn } from '@/components/Autocomplete';
 
 export const useFilterFlags = ({
   debouncedQuery,

@@ -1,7 +1,12 @@
-import { useRef, FocusEvent, ReactNode, SyntheticEvent } from 'react';
+import {
+  useRef,
+  type FocusEvent,
+  type ReactNode,
+  type SyntheticEvent,
+} from 'react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { IressCloseButton } from '../Button';
-import { IressText, IressTextProps } from '../Text';
+import { IressText, type IressTextProps } from '../Text';
 import { tag } from './Tag.styles';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';

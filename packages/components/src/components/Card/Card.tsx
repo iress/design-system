@@ -4,12 +4,12 @@ import { css, cx } from '@/styled-system/css';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import {
   useMemo,
-  ReactNode,
-  ElementType,
-  ComponentPropsWithoutRef,
+  type ReactNode,
+  type ElementType,
+  type ComponentPropsWithoutRef,
 } from 'react';
 import { GlobalCSSClass } from '@/enums';
-import { IressCSSProps, IressTestProps } from '@/interfaces';
+import { type IressCSSProps, type IressTestProps } from '@/interfaces';
 
 export interface InternalCardProps<E extends ElementType = 'div'>
   extends IressCSSProps,

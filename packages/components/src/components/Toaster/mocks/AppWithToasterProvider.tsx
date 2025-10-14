@@ -1,9 +1,9 @@
 import {
   IressButton,
   IressToasterProvider,
-  IressToasterProviderProps,
-  NewToast,
-  ToastStatus,
+  type IressToasterProviderProps,
+  type NewToast,
+  type ToastStatus,
   useToaster,
 } from '@/main';
 

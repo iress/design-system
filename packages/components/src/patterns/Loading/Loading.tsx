@@ -1,22 +1,22 @@
 import {
   StartUpLoading,
-  StartUpLoadingProps,
+  type StartUpLoadingProps,
 } from './components/StartUpLoading';
 import {
   DefaultLoading,
-  DefaultLoadingProps,
+  type DefaultLoadingProps,
 } from './components/DefaultLoading';
 import {
   ValidateLoading,
-  ValidateLoadingProps,
+  type ValidateLoadingProps,
 } from './components/ValidateLoading';
 import { useShouldRenderLoading } from './hooks/useShouldRenderLoading';
 import {
   ComponentLoading,
-  ComponentLoadingProps,
+  type ComponentLoadingProps,
 } from './components/ComponentLoading';
-import { PageLoading, PageLoadingProps } from './components/PageLoading';
-import { LongLoading, LongLoadingProps } from './components/LongLoading';
+import { PageLoading, type PageLoadingProps } from './components/PageLoading';
+import { LongLoading, type LongLoadingProps } from './components/LongLoading';
 
 export type IressLoadingProps =
   | StartUpLoadingProps

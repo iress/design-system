@@ -1,6 +1,6 @@
 import { toCSSLengthValue } from '@helpers/formatting/toCSSLengthValue';
-import { IressStyledProps } from '@/types';
-import { ReactNode } from 'react';
+import { type IressStyledProps } from '@/types';
+import { type ReactNode } from 'react';
 import { cx } from '@/styled-system/css';
 import { placeholder } from './Placeholder.styles';
 import { IressText } from '../Text';

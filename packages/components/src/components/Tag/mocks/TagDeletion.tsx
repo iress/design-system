@@ -1,10 +1,10 @@
 import {
   IressButton,
-  IressButtonProps,
+  type IressButtonProps,
   IressIcon,
   IressInline,
   IressTag,
-  IressTagProps,
+  type IressTagProps,
 } from '@/main';
 import { useState } from 'react';
 

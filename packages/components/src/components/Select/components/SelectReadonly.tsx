@@ -1,8 +1,14 @@
-import { forwardRef, ReactElement, ReactNode, Ref, useMemo } from 'react';
+import {
+  forwardRef,
+  type ReactElement,
+  type ReactNode,
+  type Ref,
+  useMemo,
+} from 'react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { mapNodesToSelectOptions } from '../helpers/nodesToSelectOptions';
-import { FormControlValue } from '@/types';
-import { IressReadonly, IressReadonlyProps } from '@/components/Readonly';
+import { type FormControlValue } from '@/types';
+import { IressReadonly, type IressReadonlyProps } from '@/components/Readonly';
 
 export interface SelectReadonlyProps<
   T extends FormControlValue = FormControlValue,

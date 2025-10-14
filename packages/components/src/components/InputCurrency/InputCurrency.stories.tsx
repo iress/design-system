@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressInputCurrency } from './InputCurrency';
 
 type Story = StoryObj<typeof IressInputCurrency>;

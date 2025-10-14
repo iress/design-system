@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressRichSelect } from './RichSelect';
 import {
   generateLabelValueMeta,
@@ -27,7 +27,7 @@ import {
 import { IressStack } from '../Stack';
 import { FORM_ELEMENT_WIDTHS } from '@/constants';
 import {
-  IressRichSelectProps,
+  type IressRichSelectProps,
   IressDivider,
   IressButton,
   IressText,

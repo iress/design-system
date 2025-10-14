@@ -1,5 +1,5 @@
-import { IressCSSProps, ResponsiveSizing } from '@/interfaces';
-import { PaddingSizes } from '@/types';
+import { type IressCSSProps, type ResponsiveSizing } from '@/interfaces';
+import { type PaddingSizes } from '@/types';
 
 const size = {
   none: 'spacing.000',

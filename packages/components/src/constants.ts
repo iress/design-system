@@ -1,5 +1,5 @@
 import { version as IDS_VERSION } from '../package.json';
-import { BreakpointDetail } from './interfaces';
+import { type BreakpointDetail } from './interfaces';
 
 /**
  * Breakpoints are the points at which the layout of a page will change in response to the size of the viewport.

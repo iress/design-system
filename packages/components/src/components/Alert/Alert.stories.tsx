@@ -1,13 +1,13 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
 import {
   IressAlert,
-  IressAlertProps,
+  type IressAlertProps,
   IressStack,
   IressText,
-  SystemValidationStatuses,
+  type SystemValidationStatuses,
 } from '@/main';
 
 type CustomArgs = Partial<IressAlertProps> & {

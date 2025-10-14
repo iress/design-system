@@ -12,7 +12,7 @@ import {
   IressCloseButton,
   IressHookForm,
 } from '@/main';
-import { Control, UseFormGetValues } from 'react-hook-form';
+import { type Control, type UseFormGetValues } from 'react-hook-form';
 
 interface Client {
   name: string | undefined;

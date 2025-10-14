@@ -1,6 +1,6 @@
-import { CompositionStyles, defineTextStyles } from '@pandacss/dev';
+import { type CompositionStyles, defineTextStyles } from '@pandacss/dev';
 import { typography, cssVars } from '@iress-oss/ids-tokens';
-import { UtilityValues } from '@/styled-system/types/prop-type';
+import { type UtilityValues } from '@/styled-system/types/prop-type';
 
 export const textCompositions: CompositionStyles['textStyles'] = {
   'typography.heading.1': {

@@ -3,8 +3,8 @@ import { IressCloseButton } from '../../Button';
 import { slideout } from '../Slideout.styles';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { IressText } from '@/components/Text';
-import { IressStyledProps } from '@/types';
-import { ReactNode } from 'react';
+import { type IressStyledProps } from '@/types';
+import { type ReactNode } from 'react';
 
 export interface SlideoutInnerProps extends IressStyledProps {
   closeText?: string;

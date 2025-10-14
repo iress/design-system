@@ -1,18 +1,18 @@
 import {
-  createContext,
-  PropsWithChildren,
+  type PropsWithChildren,
   useCallback,
   useEffect,
   useMemo,
   useState,
-  MouseEvent,
+  type MouseEvent,
 } from 'react';
-import { Toaster, ToasterItem, ToasterProps } from './Toaster';
+import { Toaster, type ToasterItem, type ToasterProps } from './Toaster';
 import {
   registerToaster,
-  ToasterRegister,
+  type ToasterRegister,
   unregisterToaster,
 } from './helpers/toasterRegister';
+import { ToasterContext } from './hooks/useToaster';
 
 export interface IressToasterProviderProps
   extends Omit<ToasterProps, 'toasts'>,
@@ -23,10 +23,6 @@ export interface IressToasterProviderProps
    */
   id?: string;
 }
-
-export const ToasterContext = createContext<ToasterRegister | undefined>(
-  undefined,
-);
 
 export const IressToasterProvider = ({
   children,

@@ -1,9 +1,9 @@
-import { useMemo, ReactNode } from 'react';
+import { useMemo, type ReactNode } from 'react';
 import { composeLabelValueDescriptor } from '@helpers/label-value/composeLabelValueDescriptor';
 
-import { IressHTMLAttributes, LabelValueMeta } from '@/interfaces';
-import { AutocompleteSearchHookReturn } from '../../Autocomplete';
-import { IressPopoverProps } from '../../Popover';
+import { type IressHTMLAttributes, type LabelValueMeta } from '@/interfaces';
+import { type AutocompleteSearchHookReturn } from '../../Autocomplete';
+import { type IressPopoverProps } from '../../Popover';
 import { css } from '@/styled-system/css';
 
 export interface FilterResultsDescriptorProps

@@ -2,16 +2,15 @@ import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { IressCloseButton } from '../../../Button';
 import { IressInline } from '../../../Inline';
 import { IressText } from '../../../Text';
-import { forwardRef, ReactNode, MouseEvent } from 'react';
+import { forwardRef, type ReactNode, type MouseEvent } from 'react';
 import { cx } from '@/styled-system/css';
 import { toast as toastStyles } from './Toast.styles';
-import { IressStyledProps } from '@/types';
+import { type IressStyledProps } from '@/types';
 import { styled } from '@/styled-system/jsx';
-import { IressIcon, IressIconProps } from '@/components/Icon';
+import { IressIcon, type IressIconProps } from '@/components/Icon';
 import { GlobalCSSClass } from '@/enums';
 
-export const TOAST_STATUS = ['success', 'error', 'info'] as const;
-export type ToastStatus = (typeof TOAST_STATUS)[number];
+export type ToastStatus = 'success' | 'error' | 'info';
 
 export interface ToastProps extends Omit<IressStyledProps, 'content'> {
   /**

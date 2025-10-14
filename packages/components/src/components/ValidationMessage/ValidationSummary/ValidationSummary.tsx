@@ -1,9 +1,12 @@
-import { IressCustomiseSlot, ValidationMessageObj } from '@/interfaces';
+import {
+  type IressCustomiseSlot,
+  type ValidationMessageObj,
+} from '@/interfaces';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { IressValidationMessage } from '../ValidationMessage';
 import { useIdIfNeeded } from '@/hooks';
-import { IressStyledProps, SystemValidationStatuses } from '@/types';
-import { ReactNode } from 'react';
+import { type IressStyledProps, type SystemValidationStatuses } from '@/types';
+import { type ReactNode } from 'react';
 import { styled } from '@/styled-system/jsx';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';

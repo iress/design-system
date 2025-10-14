@@ -1,6 +1,6 @@
-import { IressTestProps } from '@/interfaces';
-import { PropsWithChildren } from 'react';
-import { Cell } from '@tanstack/react-table';
+import { type IressTestProps } from '@/interfaces';
+import { type PropsWithChildren } from 'react';
+import { type Cell } from '@tanstack/react-table';
 import { useTableColumnStyles } from '../hooks/useTableColumnStyles';
 
 export interface TableBodyCellProps<TRow extends object = never>

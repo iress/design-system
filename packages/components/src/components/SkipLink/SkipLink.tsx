@@ -1,5 +1,11 @@
-import { ElementType, forwardRef, ReactElement, ReactNode, Ref } from 'react';
-import { ButtonRef, IressButton, IressButtonProps } from '../Button';
+import {
+  type ElementType,
+  forwardRef,
+  type ReactElement,
+  type ReactNode,
+  type Ref,
+} from 'react';
+import { type ButtonRef, IressButton, type IressButtonProps } from '../Button';
 import { cx } from '@/styled-system/css';
 import { skipLink } from './SkipLink.styles';
 import { GlobalCSSClass } from '@/enums';

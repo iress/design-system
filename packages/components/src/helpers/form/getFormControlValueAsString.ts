@@ -1,4 +1,4 @@
-import { FormControlValue } from '@/types';
+import { type FormControlValue } from '@/types';
 
 export const getFormControlValueAsString = <T = FormControlValue>(
   value?: T,

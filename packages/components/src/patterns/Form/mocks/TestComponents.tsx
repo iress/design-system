@@ -1,11 +1,11 @@
-import { FieldValues } from 'react-hook-form';
+import { type FieldValues } from 'react-hook-form';
 import { useRef } from 'react';
 import { IressStack } from '@/components/Stack';
 import { IressFormField } from '../FormField/FormField';
 import { IressInput } from '@/components/Input';
 import { IressButton } from '@/components/Button';
 import { IressSelect } from '@/components/Select';
-import { FormRef, IressForm, IressFormProps } from '@/main';
+import { type FormRef, IressForm, type IressFormProps } from '@/main';
 
 export const ComplexForm = (props: IressFormProps<FieldValues>) => (
   <IressForm {...props}>

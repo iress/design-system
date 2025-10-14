@@ -1,21 +1,21 @@
 import {
-  ChangeEvent,
-  Context,
+  type ChangeEvent,
+  type Context,
   createContext,
-  FocusEventHandler,
-  ForwardedRef,
+  type FocusEventHandler,
+  type ForwardedRef,
   forwardRef,
-  ReactElement,
-  Ref,
+  type ReactElement,
+  type Ref,
   useImperativeHandle,
   useMemo,
   useRef,
 } from 'react';
 import { useControlledState } from '@/hooks/useControlledState';
 
-import { ReactNode } from 'react';
-import { ReactHookFormCompatibleRef } from '@/interfaces';
-import { FormControlValue, IressStyledProps } from '@/types';
+import { type ReactNode } from 'react';
+import { type ReactHookFormCompatibleRef } from '@/interfaces';
+import { type FormControlValue, type IressStyledProps } from '@/types';
 import { radioGroup } from './RadioGroup.styles';
 import { cx } from '@/styled-system/css';
 import { styled } from '@/styled-system/jsx';
@@ -97,7 +97,7 @@ function createRadioGroupContext<T = FormControlValue>() {
   return createContext<RadioGroupContextValue<T> | undefined>(undefined);
 }
 
-// TODO: Is there a way to do this without casting?
+// eslint-disable-next-line react-refresh/only-export-components -- keeping it here for context
 export function getRadioGroupContext<T = FormControlValue>() {
   return RadioGroupContext as unknown as Context<
     RadioGroupContextValue<T> | undefined

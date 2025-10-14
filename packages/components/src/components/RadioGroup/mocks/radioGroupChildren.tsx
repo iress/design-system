@@ -1,4 +1,4 @@
-import { IressIcon, IressIconProps } from '../../Icon';
+import { IressIcon, type IressIconProps } from '../../Icon';
 import { IressPanel } from '../../Panel';
 import { IressRadio } from '../../Radio';
 import { IressStack } from '../../Stack';

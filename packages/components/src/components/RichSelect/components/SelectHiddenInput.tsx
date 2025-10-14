@@ -1,8 +1,8 @@
 import { propagateTestid } from '@helpers/utility/propagateTestid';
-import { IressRichSelectProps } from '../RichSelect';
-import { ControlledValue } from '../../../hooks/useControlledState';
-import { LabelValueMeta } from '../../../interfaces';
-import { ForwardedRef, forwardRef, ReactElement } from 'react';
+import { type IressRichSelectProps } from '../RichSelect';
+import { type ControlledValue } from '../../../hooks/useControlledState';
+import { type LabelValueMeta } from '../../../interfaces';
+import { type ForwardedRef, forwardRef, type ReactElement } from 'react';
 
 export interface SelectHiddenInputRenderProps<
   TMultiple extends boolean = false,

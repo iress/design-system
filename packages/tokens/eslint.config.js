@@ -1,9 +1,10 @@
 import {
   baseIgnores,
   baseJavaScriptConfig,
-  baseTypeScriptConfig,
+  createTypeScriptConfig,
   baseStoriesConfig,
   baseTestConfig,
+  createSonarConfig,
   createMdxConfig,
 } from '../../shared/eslint-base.config.js';
 
@@ -14,40 +15,15 @@ export default [
       '**/src/generated/**', // Tokens-specific ignore
     ],
   },
-  {
-    ...baseJavaScriptConfig,
-  },
-  {
-    ...baseTypeScriptConfig,
-    languageOptions: {
-      ...baseTypeScriptConfig.languageOptions,
-      parserOptions: {
-        ...baseTypeScriptConfig.languageOptions.parserOptions,
-        tsconfigRootDir: import.meta.dirname,
-        project: [
-          './tsconfig.json',
-          './tsconfig.app.json',
-          './tsconfig.base.json',
-          './tsconfig.node.json',
-        ],
-      },
-    },
-  },
-  {
-    ...baseStoriesConfig,
-  },
-  {
-    ...baseTestConfig,
-    languageOptions: {
-      ...baseTestConfig.languageOptions,
-      parser: (await import('@typescript-eslint/parser')).default,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        tsconfigRootDir: import.meta.dirname,
-        project: './tsconfig.node.json',
-      },
-    },
-  },
+  baseJavaScriptConfig,
+  createTypeScriptConfig(import.meta.dirname, [
+    './tsconfig.json',
+    './tsconfig.app.json',
+    './tsconfig.base.json',
+    './tsconfig.node.json',
+  ]),
+  await createSonarConfig(),
+  baseStoriesConfig,
+  baseTestConfig,
   await createMdxConfig(),
 ];

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Breakpoints, ResponsiveProp } from '@/types';
+import { type Breakpoints, type ResponsiveProp } from '@/types';
 import { useBreakpoint } from './useBreakpoint';
 import { BREAKPOINTS } from '@/constants';
 

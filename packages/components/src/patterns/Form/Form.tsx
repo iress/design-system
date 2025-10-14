@@ -1,14 +1,14 @@
-import { ForwardedRef, forwardRef, Ref } from 'react';
+import { type ForwardedRef, forwardRef, type Ref } from 'react';
 import {
-  FieldValues,
+  type FieldValues,
   useFieldArray,
   useForm,
   useFormContext,
   useWatch,
 } from 'react-hook-form';
-import { FormRef, HookFormExports } from './HookForm/HookForm';
-import { LongForm, LongFormProps } from './components/LongForm';
-import { ShortForm, ShortFormProps } from './components/ShortForm';
+import { type FormRef, type HookFormExports } from './HookForm/HookForm';
+import { LongForm, type LongFormProps } from './components/LongForm';
+import { ShortForm, type ShortFormProps } from './components/ShortForm';
 
 export type IressFormProps<T extends FieldValues, TContext = object> =
   | LongFormProps<T, TContext>

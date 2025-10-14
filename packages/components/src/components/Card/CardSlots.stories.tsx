@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { IressCard, IressCardProps } from './Card';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressCard, type IressCardProps } from './Card';
 import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { CardAllSlots } from './mocks/CardAllSlots';
 import CardAllSlotsSource from './mocks/CardAllSlots.tsx?raw';

@@ -6,6 +6,7 @@ import { extname, relative, resolve } from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 // TODO: Monitor and fix "Sourcemap for "/virtual:/@storybook/builder-vite/setup-addons.js" points to missing source files"
 // https://github.com/storybookjs/storybook/issues/28567
@@ -13,6 +14,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    tsconfigPaths(),
     react(),
     dts({
       exclude: [
@@ -78,19 +80,5 @@ export default defineConfig({
         entryFileNames: '[name].js',
       },
     },
-  },
-  resolve: {
-    alias: [
-      { find: '@', replacement: resolve(__dirname, 'src') },
-      {
-        find: '@components',
-        replacement: resolve(__dirname, 'src/components'),
-      },
-      { find: '@helpers', replacement: resolve(__dirname, 'src/helpers') },
-      {
-        find: '@theme-preset',
-        replacement: resolve(__dirname, 'theme-preset'),
-      },
-    ],
   },
 });

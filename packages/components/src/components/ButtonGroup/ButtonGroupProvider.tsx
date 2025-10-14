@@ -1,10 +1,15 @@
-import { Context, createContext, PropsWithChildren, useMemo } from 'react';
+import {
+  type Context,
+  createContext,
+  type PropsWithChildren,
+  useMemo,
+} from 'react';
 import { toArray } from '@helpers/formatting/toArray';
 import {
-  ControlledValue,
+  type ControlledValue,
   useControlledState,
 } from '../../hooks/useControlledState';
-import { FormControlValue } from '@/types';
+import { type FormControlValue } from '@/types';
 
 export interface ButtonGroupProviderProps<
   T = FormControlValue,
@@ -34,7 +39,7 @@ function createButtonGroupContext<
   );
 }
 
-// TODO: Is there a way to do this without casting?
+// eslint-disable-next-line react-refresh/only-export-components -- keeping it here for context
 export function getButtonGroupContext<
   T = FormControlValue,
   TMultiple extends boolean = false,

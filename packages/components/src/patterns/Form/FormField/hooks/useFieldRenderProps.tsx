@@ -1,6 +1,6 @@
-import { ReactHookFormCompatibleRef } from '@/interfaces';
-import { MutableRefObject, useCallback, useMemo, useState } from 'react';
-import { ControllerRenderProps, FieldValues } from 'react-hook-form';
+import { type ReactHookFormCompatibleRef } from '@/interfaces';
+import { type MutableRefObject, useCallback, useMemo, useState } from 'react';
+import { type ControllerRenderProps, type FieldValues } from 'react-hook-form';
 
 /**
  * This hook is used to create render props for a field in a form.

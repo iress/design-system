@@ -1,6 +1,6 @@
 import { tableCell } from '../Table.styles';
-import { CSSProperties, useContext } from 'react';
-import { Column } from '@tanstack/react-table';
+import { type CSSProperties, useContext } from 'react';
+import { type Column } from '@tanstack/react-table';
 import { TableContext } from '../TableProvider';
 import { css } from '@/styled-system/css';
 import { splitCssProps } from '@/styled-system/jsx';

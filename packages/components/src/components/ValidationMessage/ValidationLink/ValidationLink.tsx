@@ -1,8 +1,8 @@
 import {
   IressValidationMessage,
-  IressValidationMessageProps,
+  type IressValidationMessageProps,
 } from '../ValidationMessage';
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 

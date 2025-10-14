@@ -11,10 +11,10 @@
  * console.log(getVariablePaddingValue(padding, 'xl', 't')); // it returns "t" value under "xl" breakpoint: "sm"
  */
 
-import { MixedPaddingSize, PaddingSizes } from '@/types';
-import { VariablePaddingSize, ResponsiveSizing } from '@/interfaces';
-import { SpacingToken } from '@/styled-system/tokens';
-import { PaddingSize } from '@/enums';
+import { type MixedPaddingSize, type PaddingSizes } from '@/types';
+import { type VariablePaddingSize, type ResponsiveSizing } from '@/interfaces';
+import { type SpacingToken } from '@/styled-system/tokens';
+import { type PaddingSize } from '@/enums';
 
 export type PanelPadding =
   | PaddingSize

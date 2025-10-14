@@ -3,21 +3,21 @@ import { slider } from './Slider.styles';
 import {
   forwardRef,
   useCallback,
-  ReactNode,
-  ChangeEvent,
-  CSSProperties,
-  Ref,
+  type ReactNode,
+  type ChangeEvent,
+  type CSSProperties,
+  type Ref,
 } from 'react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import {
-  SliderTickLabel,
-  SliderTickLabelValue,
+  type SliderTickLabel,
+  type SliderTickLabelValue,
   SliderTicks,
 } from './components/SliderTicks';
 import { useIdIfNeeded } from '../../hooks';
 import { useControlledState } from '@/hooks/useControlledState';
 import { IressReadonly } from '../Readonly';
-import { IressStyledProps, IressUnstyledProps } from '@/types';
+import { type IressStyledProps, type IressUnstyledProps } from '@/types';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
@@ -145,14 +145,14 @@ const Slider = (
   const ticks =
     typeof tickLabelsProp === 'boolean'
       ? createTicksFromMinMaxAndStep(min, max, step)
-      : tickLabelsProp ?? [];
+      : (tickLabelsProp ?? []);
   const ticksWithLabels = ticks.map((tick) =>
     typeof tick === 'number' ? { value: tick } : tick,
   );
 
   const { value, setValue } = useControlledState<number>({
     component: 'IressSlider',
-    defaultValue: valueProp ? undefined : defaultValue ?? min,
+    defaultValue: valueProp ? undefined : (defaultValue ?? min),
     value: valueProp,
   });
 
@@ -160,7 +160,7 @@ const Slider = (
     const valueTick = ticksWithLabels?.find((tick) => tick.value === value);
     return formatValue
       ? formatValue(value ?? 0, valueTick, readOnly)
-      : valueTick?.label ?? value;
+      : (valueTick?.label ?? value);
   }, [ticksWithLabels, formatValue, value, readOnly]);
 
   const getThumbValueOffset = useCallback(() => {

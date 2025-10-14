@@ -1,5 +1,5 @@
-import { CSSProperties, useEffect, useRef } from 'react';
-import { IressSlideoutProps } from '../Slideout';
+import { type CSSProperties, useEffect, useRef } from 'react';
+import { type IressSlideoutProps } from '../Slideout';
 import { GlobalCSSClass } from '@/enums';
 import { token } from '@/styled-system/tokens';
 import { useBreakpoint } from '@/hooks';

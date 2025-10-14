@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { IressButtonGroup, IressButtonGroupProps } from '.';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressButtonGroup, type IressButtonGroupProps } from '.';
 import { IressButton } from '../Button/Button';
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressTooltip } from '../Tooltip';

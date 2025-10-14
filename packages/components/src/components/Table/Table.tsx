@@ -3,13 +3,13 @@ import { TableEmpty } from './components/TableEmpty';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { TableHeader } from './components/TableHeader';
 import { TableProvider } from './TableProvider';
-import { TableRows, TableRowsProps } from './components/TableRows';
-import { ReactNode } from 'react';
+import { TableRows, type TableRowsProps } from './components/TableRows';
+import { type ReactNode } from 'react';
 import { table } from './Table.styles';
 import { cx } from '@/styled-system/css';
 import { styled } from '@/styled-system/jsx';
-import { TableColumn } from './helpers/composeTableColumnDefs';
-import { IressStyledProps } from '@/types';
+import { type TableColumn } from './helpers/composeTableColumnDefs';
+import { type IressStyledProps } from '@/types';
 import { GlobalCSSClass } from '@/enums';
 
 export type IressTableProps<

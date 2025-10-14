@@ -1,5 +1,5 @@
 import { toArray } from '@helpers/formatting/toArray';
-import { LabelValue } from '@/interfaces';
+import { type LabelValue } from '@/interfaces';
 
 export const getValueFromLabelValues = <T extends LabelValue = LabelValue>(
   items?: T[] | T,

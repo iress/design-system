@@ -1,17 +1,17 @@
 import {
-  ChangeEvent,
-  ChangeEventHandler,
+  type ChangeEvent,
+  type ChangeEventHandler,
   forwardRef,
   useImperativeHandle,
   useMemo,
   useRef,
   useState,
-  MouseEvent,
-  FocusEvent,
-  RefAttributes,
-  ReactElement,
-  ReactNode,
-  ForwardedRef,
+  type MouseEvent,
+  type FocusEvent,
+  type RefAttributes,
+  type ReactElement,
+  type ReactNode,
+  type ForwardedRef,
 } from 'react';
 import { GlobalCSSClass } from '@/enums';
 import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAsString';
@@ -24,7 +24,7 @@ import {
 import { IressSpinner } from '../Spinner';
 import { useControlledState } from '@/hooks/useControlledState';
 import { IressReadonly } from '../Readonly';
-import { FormControlValue, FormElementWidths } from '@/types';
+import { type FormControlValue, type FormElementWidths } from '@/types';
 import { cx } from '@/styled-system/css';
 import { input } from './Input.styles';
 import { splitCssProps, styled } from '@/styled-system/jsx';

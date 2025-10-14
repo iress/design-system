@@ -1,5 +1,5 @@
-import { Column } from '@tanstack/react-table';
-import { TableSortButtonProps } from '../components/TableSortButton';
+import { type Column } from '@tanstack/react-table';
+import { type TableSortButtonProps } from '../components/TableSortButton';
 import { useContext } from 'react';
 import { TableContext } from '../TableProvider';
 

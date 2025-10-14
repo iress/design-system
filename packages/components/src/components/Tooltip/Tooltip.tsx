@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, ReactNode } from 'react';
+import { Fragment, useEffect, useState, type ReactNode } from 'react';
 import { cx } from '@/styled-system/css';
 import {
   autoPlacement,
@@ -17,7 +17,7 @@ import { toArray } from '@helpers/formatting/toArray';
 import { idsLogger } from '@/helpers/utility/idsLogger';
 import { focusableElements } from '@/helpers/dom/focusableElements';
 import { tooltip } from './Tooltip.styles';
-import { FloatingUIAligns, IressStyledProps } from '@/types';
+import { type FloatingUIAligns, type IressStyledProps } from '@/types';
 import { styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 

@@ -1,8 +1,8 @@
-import { flexRender, Row } from '@tanstack/react-table';
+import { flexRender, type Row } from '@tanstack/react-table';
 import { TableBodyCell } from './TableBodyCell';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
-import { IressStyledProps } from '@/types';
-import { AriaRelationshipProps } from '@/hooks/useAriaRelationship';
+import { type IressStyledProps } from '@/types';
+import { type AriaRelationshipProps } from '@/hooks/useAriaRelationship';
 import { useContext } from 'react';
 import { getTableContext } from '../TableProvider';
 import { styled } from '@/styled-system/jsx';

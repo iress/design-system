@@ -1,9 +1,9 @@
 import { useTableColumnStyles } from '../hooks/useTableColumnStyles';
 import { useTableColumnSort } from '../hooks/useTableColumnSort';
 import { TableSortButton } from './TableSortButton';
-import { PropsWithChildren, useContext } from 'react';
-import { IressTestProps } from '@/interfaces';
-import { Column } from '@tanstack/react-table';
+import { type PropsWithChildren, useContext } from 'react';
+import { type IressTestProps } from '@/interfaces';
+import { type Column } from '@tanstack/react-table';
 import { TableContext } from '../TableProvider';
 
 export interface TableHeaderCellProps

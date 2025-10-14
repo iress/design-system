@@ -1,4 +1,4 @@
-import { ExtendableOptions } from '@pandacss/types';
+import { type ExtendableOptions } from '@pandacss/types';
 import { colors } from './tokens/colors';
 import { elevationCompositions } from './tokens/layerStyles';
 import { radii } from './tokens/radii';

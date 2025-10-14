@@ -1,8 +1,8 @@
 import { styled } from '@/styled-system/jsx';
 import { col } from './Col.styles';
-import { FC, ReactNode } from 'react';
-import { IressStyledProps, ResponsiveProp } from '@/types';
-import { UtilityValues } from '@/styled-system/types/prop-type';
+import { type FC, type ReactNode } from 'react';
+import { type IressStyledProps, type ResponsiveProp } from '@/types';
+import { type UtilityValues } from '@/styled-system/types/prop-type';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 

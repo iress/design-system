@@ -2,7 +2,7 @@ import {
   IressBadge,
   IressTable,
   IressTableFormattedValue,
-  IressTableProps,
+  type IressTableProps,
 } from '@/main';
 
 type Props = Partial<IressTableProps<object, never>>;

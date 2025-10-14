@@ -1,5 +1,5 @@
 import { IressText } from '@/main';
-import { LabelValue, LabelValueMeta } from '../interfaces';
+import { type LabelValue, type LabelValueMeta } from '../interfaces';
 
 export const MOCK_LABEL_VALUES_LENGTH = 5;
 export const MOCK_LABELS = generateLabels();

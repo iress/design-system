@@ -5,38 +5,42 @@ import {
   useRef,
   useState,
   useCallback,
-  ForwardedRef,
-  ReactElement,
-  ChangeEvent,
-  ReactNode,
+  type ForwardedRef,
+  type ReactElement,
+  type ChangeEvent,
+  type ReactNode,
 } from 'react';
 import { cx } from '@/styled-system/css';
 import { richSelect } from './RichSelect.styles';
 import { useRichSelectState } from '../RichSelect';
 import {
   useAutocompleteSearch,
-  AutocompleteSearchHookProps,
+  type AutocompleteSearchHookProps,
 } from '../Autocomplete';
 import {
   SelectActivator,
-  IressSelectActivatorProps,
+  type IressSelectActivatorProps,
 } from './components/SelectActivator';
 import { SelectOptions } from './components/SelectOptions';
 import {
   SelectHiddenInput,
-  SelectHiddenInputRenderProps,
+  type SelectHiddenInputRenderProps,
 } from './components/SelectHiddenInput';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
 import { GlobalCSSClass } from '@/enums';
-import { IressInputProps } from '../Input';
-import { ControlledValue } from '@/hooks';
+import { type IressInputProps } from '../Input';
+import { type ControlledValue } from '@/hooks';
 import {
-  FormattedLabelValueMeta,
-  LabelValueMeta,
-  ReactHookFormCompatibleRef,
+  type FormattedLabelValueMeta,
+  type LabelValueMeta,
+  type ReactHookFormCompatibleRef,
 } from '@/interfaces';
-import { FloatingUIAligns } from '@/types';
-import { IressPopover, IressPopoverProps, PopoverRef } from '../Popover';
+import { type FloatingUIAligns } from '@/types';
+import {
+  IressPopover,
+  type IressPopoverProps,
+  type PopoverRef,
+} from '../Popover';
 import { IressReadonly } from '../Readonly';
 
 export interface IressRichSelectProps<TMultiple extends boolean = false>

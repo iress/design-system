@@ -1,28 +1,32 @@
 import {
   forwardRef,
-  Ref,
+  type Ref,
   useContext,
-  ReactNode,
-  MouseEventHandler,
-  KeyboardEventHandler,
-  MouseEvent,
-  KeyboardEvent,
+  type ReactNode,
+  type MouseEventHandler,
+  type KeyboardEventHandler,
+  type MouseEvent,
+  type KeyboardEvent,
   useMemo,
-  HTMLAttributes,
-  ReactElement,
+  type HTMLAttributes,
+  type ReactElement,
   useCallback,
-  FocusEventHandler,
-  FocusEvent,
+  type FocusEventHandler,
+  type FocusEvent,
   cloneElement,
   useRef,
   useImperativeHandle,
-  ElementType,
-  ComponentPropsWithoutRef,
+  type ElementType,
+  type ComponentPropsWithoutRef,
 } from 'react';
 import { useMenuItemRole } from './hooks/useMenuItemRole';
-import { ButtonElement, ButtonInstance, ButtonRef } from '../../Button';
+import {
+  type ButtonElement,
+  type ButtonInstance,
+  type ButtonRef,
+} from '../../Button';
 import { idsLogger } from '@helpers/utility/idsLogger';
-import { FormControlValue } from '@/types';
+import { type FormControlValue } from '@/types';
 import { MenuContext } from '../Menu';
 import { IressCheckboxMark } from '@/components/CheckboxMark';
 import { propagateTestid } from '@/helpers/utility/propagateTestid';
@@ -30,13 +34,13 @@ import { css, cx } from '@/styled-system/css';
 import { splitCssProps } from '@/styled-system/jsx';
 import { menu as menuStyles } from '../Menu.styles';
 import {
-  PopoverItemHookReturn,
-  PopoverVirtualNode,
+  type PopoverItemHookReturn,
+  type PopoverVirtualNode,
   usePopoverItem,
 } from '@/components/Popover';
 import { CompositeItem } from '@floating-ui/react';
 import { IressMenuDivider } from '../MenuDivider/MenuDivider';
-import { IressCSSProps, IressTestProps } from '@/interfaces';
+import { type IressCSSProps, type IressTestProps } from '@/interfaces';
 import { PopoverContext } from '@/components/Popover/hooks/usePopover';
 import { GlobalCSSClass } from '@/enums';
 import { spreadUnlessUndefined } from '@/helpers/utility/spreadUnlessUndefined';

@@ -1,32 +1,36 @@
 import { cx } from '@/styled-system/css';
 import { autoComplete as autoCompleteStyles } from './Autocomplete.styles';
-import { IressInputPopover, IressInputPopoverProps } from '../Popover';
-import { IressInput, InputBaseElement, IressInputProps } from '../Input';
+import { IressInputPopover, type IressInputPopoverProps } from '../Popover';
+import {
+  IressInput,
+  type InputBaseElement,
+  type IressInputProps,
+} from '../Input';
 import { useControlledState } from '@/hooks/useControlledState';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { toArray } from '@helpers/formatting/toArray';
 import { getValueAsEvent } from '@helpers/form/getValueAsEvent';
 import { getFormControlValueAsStringIfDefined } from '@helpers/form/getFormControlValueAsStringIfDefined';
 import {
-  AutocompleteSearchHookProps,
+  type AutocompleteSearchHookProps,
   useAutocompleteSearch,
 } from './hooks/useAutocompleteSearch';
 import { IressIcon } from '../Icon/Icon';
 import {
   forwardRef,
-  ReactNode,
-  SyntheticEvent,
+  type ReactNode,
+  type SyntheticEvent,
   useEffect,
   useState,
 } from 'react';
 import { type InputRef } from '../Input/InputBase/InputBase';
 import { AutocompleteInstructions } from './components/AutocompleteInstructions';
-import { IressSelectMenu, IressSelectMenuProps } from '../RichSelect';
+import { IressSelectMenu, type IressSelectMenuProps } from '../RichSelect';
 import { IressReadonly } from '../Readonly';
 import { IressAlert } from '../Alert';
-import { LabelValueMeta } from '@/interfaces';
+import { type LabelValueMeta } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
-import { FormControlValue } from '@/types';
+import { type FormControlValue } from '@/types';
 
 export interface IressAutocompleteProps<T extends FormControlValue = string>
   extends Omit<IressInputProps<T>, 'children' | 'onChange'>,

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { FormContext } from '../FormContext';
-import { FormControlValue } from '@/types';
+import { type FormControlValue } from '@/types';
 
 interface NoDefaultValueInFormsHookProps<T = FormControlValue> {
   component: string;

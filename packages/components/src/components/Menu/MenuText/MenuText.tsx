@@ -1,7 +1,11 @@
 import { useMenuItemRole } from '../MenuItem/hooks/useMenuItemRole';
-import { ReactNode, useContext } from 'react';
+import { type ReactNode, useContext } from 'react';
 import { MenuContext } from '../Menu';
-import { IressText, IressTextProps, TextElements } from '@/components/Text';
+import {
+  IressText,
+  type IressTextProps,
+  type TextElements,
+} from '@/components/Text';
 import { menu as menuStyles } from '../Menu.styles';
 import { css, cx } from '@/styled-system/css';
 import { IressMenuDivider } from '../MenuDivider/MenuDivider';

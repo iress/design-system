@@ -1,20 +1,32 @@
 import { getValueAsEvent } from '@helpers/form/getValueAsEvent';
-import { IressRichSelectProps, SelectOptionsRenderProps } from '../RichSelect';
-import { UIEventHandler, useCallback, useEffect, useId, useRef } from 'react';
+import {
+  type IressRichSelectProps,
+  type SelectOptionsRenderProps,
+} from '../RichSelect';
+import {
+  type UIEventHandler,
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+} from 'react';
 import { IressSelectSearch } from '../SelectSearch/SelectSearch';
 import { toArray } from '@helpers/formatting/toArray';
 import {
   IressSelectMenu,
-  IressSelectMenuProps,
+  type IressSelectMenuProps,
 } from '../SelectMenu/SelectMenu';
 import { IressAlert } from '@/components/Alert';
-import { FormattedLabelValueMeta, LabelValueMeta } from '@/interfaces';
-import { InputRef } from '@/components/Input';
+import {
+  type FormattedLabelValueMeta,
+  type LabelValueMeta,
+} from '@/interfaces';
+import { type InputRef } from '@/components/Input';
 import { IressSelectSearchInput } from '../SelectSearchInput/SelectSearchInput';
 import { IressSelectHeading } from '../SelectHeading/SelectHeading';
 import { IressMenuDivider } from '@/components/Menu';
-import { IressButtonProps } from '@/components/Button';
-import { ControlledValue } from '@/hooks';
+import { type IressButtonProps } from '@/components/Button';
+import { type ControlledValue } from '@/hooks';
 
 interface SelectOptionsProps<TMultiple extends boolean = false>
   extends Pick<

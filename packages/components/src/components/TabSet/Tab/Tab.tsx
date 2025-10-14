@@ -1,24 +1,24 @@
 import {
   forwardRef,
-  ForwardRefExoticComponent,
-  ReactNode,
-  Ref,
-  RefAttributes,
+  type ForwardRefExoticComponent,
+  type ReactNode,
+  type Ref,
+  type RefAttributes,
   useCallback,
   useImperativeHandle,
   useLayoutEffect,
   useMemo,
   useRef,
-  MouseEvent,
-  ReactElement,
+  type MouseEvent,
+  type ReactElement,
   useContext,
 } from 'react';
 import { useIdIfNeeded } from '@/hooks';
 import { createPortal } from 'react-dom';
 import {
-  FormControlValue,
-  IressStyledProps,
-  IressUnstyledProps,
+  type FormControlValue,
+  type IressStyledProps,
+  type IressUnstyledProps,
 } from '@/types';
 import { styled } from '@/styled-system/jsx';
 import { tab } from './Tab.styles';
@@ -26,7 +26,7 @@ import { cx } from '@/styled-system/css';
 import { CompositeItem } from '@floating-ui/react';
 import { focusableElements } from '@/helpers/dom/focusableElements';
 import { GlobalCSSClass } from '@/enums';
-import { ButtonElement } from '@/components/Button';
+import { type ButtonElement } from '@/components/Button';
 import { idsLogger } from '@/helpers/utility/idsLogger';
 import { TabSetContext } from '../TabSetProvider';
 

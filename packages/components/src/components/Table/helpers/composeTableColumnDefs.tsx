@@ -1,15 +1,15 @@
 import {
   createColumnHelper,
-  SortDirection,
-  SortingFnOption,
+  type SortDirection,
+  type SortingFnOption,
 } from '@tanstack/react-table';
 import {
   IressTableFormattedValue,
-  TableCellFormats,
+  type TableCellFormats,
 } from '../TableFormattedValue/TableFormattedValue';
 import { formatObjectKey } from '@helpers/formatting/formatObjectKey';
-import { IressCSSProps } from '@/interfaces';
-import { ReactNode } from 'react';
+import { type IressCSSProps } from '@/interfaces';
+import { type ReactNode } from 'react';
 
 export interface TableColumn<TRow extends object, TVal = never>
   extends Pick<

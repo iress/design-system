@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useMemo, useState } from 'react';
+import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { IressStack } from '@/components/Stack';
 import { IressSkeleton } from '@/components/Skeleton';
 import { IressContainer } from '@/components/Container';
@@ -7,7 +7,7 @@ import { IressCol } from '@/components/Col';
 import { IressInline } from '@/components/Inline';
 import { IressDivider } from '@/components/Divider';
 import { IressCard } from '@/components/Card';
-import { IressStyledProps } from '@/types';
+import { type IressStyledProps } from '@/types';
 import { styled } from '@/styled-system/jsx';
 import { loading } from '../Loading.styles';
 import { cx } from '@/styled-system/css';

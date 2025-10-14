@@ -2,7 +2,7 @@ import {
   IressAlert,
   IressButton,
   IressFormField,
-  IressFormProps,
+  type IressFormProps,
   IressInline,
   IressInput,
   IressText,
@@ -12,7 +12,7 @@ import {
   withRenderSnippet,
 } from './supportedFormFields';
 import { addToStorybookCategory } from '@iress-storybook/helpers';
-import { FieldValues } from 'react-hook-form';
+import { type FieldValues } from 'react-hook-form';
 
 const alertOptions = {
   none: undefined,

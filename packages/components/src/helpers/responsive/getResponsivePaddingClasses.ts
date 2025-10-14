@@ -1,4 +1,4 @@
-import { ResponsiveSizing, VariablePaddingSize } from '@/interfaces';
+import { type ResponsiveSizing, type VariablePaddingSize } from '@/interfaces';
 
 export const getResponsivePaddingClasses = <T = string>(
   padding: ResponsiveSizing<T> | T,

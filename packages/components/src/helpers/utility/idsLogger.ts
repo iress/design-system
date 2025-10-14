@@ -1,5 +1,5 @@
-import { LoggerLevels } from '@/enums';
-import { LoggerLevelsUnion } from '@/types';
+import { type LoggerLevels } from '@/enums';
+import { type LoggerLevelsUnion } from '@/types';
 
 export const idsLogger = (
   msg: string,

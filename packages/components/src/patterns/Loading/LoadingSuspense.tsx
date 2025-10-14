@@ -1,5 +1,5 @@
 import {
-  ReactNode,
+  type ReactNode,
   Suspense,
   useEffect,
   useMemo,
@@ -11,12 +11,12 @@ import {
   uncacheSuspenseResource,
   useSuspenseResource,
 } from './hooks/useSuspenseResource';
-import { StartUpLoadingProps } from './components/StartUpLoading';
-import { ValidateLoadingProps } from './components/ValidateLoading';
-import { PageLoadingProps } from './components/PageLoading';
-import { ComponentLoadingProps } from './components/ComponentLoading';
-import { LongLoadingProps } from './components/LongLoading';
-import { DefaultLoadingProps } from './components/DefaultLoading';
+import { type StartUpLoadingProps } from './components/StartUpLoading';
+import { type ValidateLoadingProps } from './components/ValidateLoading';
+import { type PageLoadingProps } from './components/PageLoading';
+import { type ComponentLoadingProps } from './components/ComponentLoading';
+import { type LongLoadingProps } from './components/LongLoading';
+import { type DefaultLoadingProps } from './components/DefaultLoading';
 
 export type IressLoadingSuspenseProps = (
   | Omit<StartUpLoadingProps, 'loaded'>

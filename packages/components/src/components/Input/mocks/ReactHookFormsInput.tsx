@@ -1,5 +1,5 @@
 import {
-  InputRef,
+  type InputRef,
   IressAlert,
   IressButton,
   IressInline,
@@ -10,7 +10,11 @@ import {
   IressTable,
 } from '@/main';
 import { useState } from 'react';
-import { Controller, UseFormRegisterReturn, useForm } from 'react-hook-form';
+import {
+  Controller,
+  type UseFormRegisterReturn,
+  useForm,
+} from 'react-hook-form';
 
 const registerInnerElement = (register: UseFormRegisterReturn) => {
   return {

@@ -2,7 +2,7 @@ import { GlobalCSSClass } from '@/enums';
 import { image } from './Image.styles';
 import { cx } from '@/styled-system/css';
 import { styled } from '@/styled-system/jsx';
-import { IressStyledProps } from '@/types';
+import { type IressStyledProps } from '@/types';
 
 export interface IressImageProps
   extends Omit<IressStyledProps<'img'>, 'maxWidth' | 'alt' | 'src'> {

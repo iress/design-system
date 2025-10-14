@@ -1,27 +1,27 @@
 import { Composite } from '@floating-ui/react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import {
-  TabSetChangedEventDetail,
+  type TabSetChangedEventDetail,
   TabSetContext,
   TabSetProvider,
 } from './TabSetProvider';
 import {
-  CSSProperties,
-  ReactNode,
+  type CSSProperties,
+  type ReactNode,
   useContext,
   useEffect,
   useState,
 } from 'react';
 import {
-  FormControlValue,
-  IressStyledProps,
-  IressUnstyledProps,
+  type FormControlValue,
+  type IressStyledProps,
+  type IressUnstyledProps,
 } from '@/types';
 import { styled } from '@/styled-system/jsx';
 import { tabSet } from './TabSet.styles';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
-import { IressCustomiseSlot } from '@/interfaces';
+import { type IressCustomiseSlot } from '@/interfaces';
 
 export interface IressTabSetProps extends Omit<IressStyledProps, 'onChange'> {
   /**

@@ -1,5 +1,5 @@
 import { styled } from '@/styled-system/jsx';
-import { FormControlValue, IressStyledProps } from '@/types';
+import { type FormControlValue, type IressStyledProps } from '@/types';
 import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAsString';
 
 export interface IressSelectOptionProps

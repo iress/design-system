@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { IressSkeleton, IressSkeletonProps } from '.';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressSkeleton, type IressSkeletonProps } from '.';
 import {
   disableArgTypes,
   withTransformedRawSource,

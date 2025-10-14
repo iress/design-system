@@ -1,10 +1,10 @@
-import { SliderCustomCSSProperties } from '../Slider';
+import { type SliderCustomCSSProperties } from '../Slider';
 import { slider } from '../Slider.styles';
 import { cx } from '@/styled-system/css';
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
-import { IressStyledProps, IressUnstyledProps } from '@/types';
-import { IressTestProps } from '@/interfaces';
+import { type IressStyledProps, type IressUnstyledProps } from '@/types';
+import { type IressTestProps } from '@/interfaces';
 import { styled } from '@/styled-system/jsx';
 
 export interface SliderTicksProps extends IressUnstyledProps<'datalist'> {

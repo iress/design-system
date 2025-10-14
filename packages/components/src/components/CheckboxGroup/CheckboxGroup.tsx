@@ -1,21 +1,21 @@
 import {
-  FocusEventHandler,
+  type FocusEventHandler,
   forwardRef,
   useImperativeHandle,
   useRef,
   useMemo,
-  ReactNode,
+  type ReactNode,
   createContext,
-  ForwardedRef,
-  ReactElement,
+  type ForwardedRef,
+  type ReactElement,
 } from 'react';
 import { toArray } from '@helpers/formatting/toArray';
-import { FormControlValue, IressStyledProps } from '@/types';
+import { type FormControlValue, type IressStyledProps } from '@/types';
 import { useControlledState } from '@/hooks/useControlledState';
 import { checkboxGroup } from './CheckboxGroup.styles';
 import { cx } from '@/styled-system/css';
-import { IressCheckboxProps } from '../Checkbox/Checkbox';
-import { ReactHookFormCompatibleRef } from '@/interfaces';
+import { type IressCheckboxProps } from '../Checkbox/Checkbox';
+import { type ReactHookFormCompatibleRef } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
 
@@ -86,7 +86,7 @@ function createCheckboxGroupContext<T = FormControlValue>() {
   return createContext<CheckboxGroupContextValue<T> | undefined>(undefined);
 }
 
-// TODO: Is there a way to do this without casting?
+// eslint-disable-next-line react-refresh/only-export-components -- keeping it here for context
 export function getCheckboxGroupContext<T = FormControlValue>() {
   return CheckboxGroupContext as unknown as React.Context<
     CheckboxGroupContextValue<T>

@@ -1,9 +1,15 @@
-import { ReactElement, useContext, useEffect, useMemo, useRef } from 'react';
+import {
+  type ReactElement,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import { focusableElements } from '@helpers/dom/focusableElements';
 import { usePopoverActivatorInteractions } from '../hooks/usePopoverActivatorInteractions';
 import { PopoverContext } from '../hooks/usePopover';
-import { IressUnstyledProps } from '@/types';
-import { IressButtonProps } from '@/components/Button';
+import { type IressUnstyledProps } from '@/types';
+import { type IressButtonProps } from '@/components/Button';
 
 export interface PopoverActivatorProps extends IressUnstyledProps {
   children?: ReactElement;

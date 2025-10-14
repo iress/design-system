@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { idsLogger } from '@helpers/utility/idsLogger';
 import { toArray } from '@helpers/formatting/toArray';
-import { FormControlValue } from '../types';
+import { type FormControlValue } from '../types';
 import { capitalizeFirstLetter } from '@helpers/formatting/capitalizeFirstLetter';
 
 export interface ControlledStateProps<

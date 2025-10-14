@@ -1,5 +1,5 @@
-import { IressMenuProps } from '@/components/Menu';
-import { IressPanel, IressPanelProps } from '../../Panel';
+import { type IressMenuProps } from '@/components/Menu';
+import { IressPanel, type IressPanelProps } from '../../Panel';
 
 export const MenuInPopoverRoleDescription = ({
   children,

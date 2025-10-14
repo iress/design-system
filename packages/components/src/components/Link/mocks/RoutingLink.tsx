@@ -1,5 +1,5 @@
 import { IressLink } from '@/main';
-import { HTMLAttributes, forwardRef } from 'react';
+import { type HTMLAttributes, forwardRef } from 'react';
 
 /**
  * This could be the `Link` component from `react-router-dom` or any other routing library.

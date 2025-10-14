@@ -10,7 +10,7 @@ import {
   IressField,
   IressFilter,
   IressInline,
-  LabelValueMeta,
+  type LabelValueMeta,
   IressSkeleton,
 } from '@/main';
 import { useState, useMemo, Suspense } from 'react';

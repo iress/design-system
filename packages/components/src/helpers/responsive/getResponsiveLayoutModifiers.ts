@@ -1,4 +1,4 @@
-import { ResponsiveSizing } from '@/interfaces';
+import { type ResponsiveSizing } from '@/interfaces';
 
 export const getResponsiveLayoutModifiers = <T = string>(
   modifier: string,

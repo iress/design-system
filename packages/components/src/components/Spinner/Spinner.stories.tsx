@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSpinner } from '.';
 import { IressInline } from '../Inline';
 import { IressText } from '../Text';

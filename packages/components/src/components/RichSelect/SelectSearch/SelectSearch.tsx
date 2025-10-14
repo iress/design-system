@@ -6,7 +6,7 @@ import { PopoverContext } from '@/components/Popover/hooks/usePopover';
 import { GlobalCSSClass } from '@/enums';
 import {
   IressInputPopover,
-  IressInputPopoverProps,
+  type IressInputPopoverProps,
 } from '@/components/Popover';
 
 export type IressSelectSearchProps = Omit<

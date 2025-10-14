@@ -1,9 +1,14 @@
 import { filter } from '../Filter.styles';
 import { usePopoverItem } from '@/components/Popover/hooks/usePopoverItem';
-import { ForwardedRef, forwardRef, useImperativeHandle, useRef } from 'react';
+import {
+  type ForwardedRef,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 import { cx } from '@/styled-system/css';
 import { type InputRef } from '@/components/Input/InputBase/InputBase';
-import { IressInput, IressInputProps } from '@/components/Input';
+import { IressInput, type IressInputProps } from '@/components/Input';
 
 export const FilterSearch = forwardRef(
   (props: IressInputProps, ref: ForwardedRef<InputRef>) => {

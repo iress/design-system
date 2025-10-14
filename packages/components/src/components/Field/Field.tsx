@@ -1,10 +1,10 @@
-import { isValidElement, ReactNode } from 'react';
+import { isValidElement, type ReactNode } from 'react';
 import { IressLabel } from '../Label';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { toArray } from '@helpers/formatting/toArray';
-import { LabelBaseProps } from '../Label/LabelBase/LabelBase';
-import { IressStyledProps } from '@/types';
-import { ValidationMessageObj } from '@/interfaces';
+import { type LabelBaseProps } from '../Label/LabelBase/LabelBase';
+import { type IressStyledProps } from '@/types';
+import { type ValidationMessageObj } from '@/interfaces';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { field } from './Field.styles';
 import { css, cx } from '@/styled-system/css';

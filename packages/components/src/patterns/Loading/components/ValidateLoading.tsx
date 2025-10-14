@@ -1,7 +1,7 @@
-import { IressButton, IressButtonProps } from '@/components/Button';
-import { ReactNode, useEffect, useState } from 'react';
+import { IressButton, type IressButtonProps } from '@/components/Button';
+import { type ReactNode, useEffect, useState } from 'react';
 import { loading } from '../Loading.styles';
-import { IressStyledProps } from '@/types';
+import { type IressStyledProps } from '@/types';
 import { styled } from '@/styled-system/jsx';
 import { cx } from '@/styled-system/css';
 

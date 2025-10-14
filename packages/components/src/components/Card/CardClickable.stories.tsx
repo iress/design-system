@@ -1,9 +1,9 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import {
   IressCard,
-  IressButtonCardProps,
-  IressCardProps,
-  IressLinkCardProps,
+  type IressButtonCardProps,
+  type IressCardProps,
+  type IressLinkCardProps,
   IressButtonCard,
   IressLinkCard,
 } from './Card';

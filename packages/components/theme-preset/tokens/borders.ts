@@ -1,5 +1,5 @@
 import { cssVars } from '@iress-oss/ids-tokens';
-import { Tokens } from '@pandacss/dev';
+import { type Tokens } from '@pandacss/dev';
 
 export const borders = {
   alert: {

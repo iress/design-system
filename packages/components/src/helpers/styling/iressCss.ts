@@ -1,8 +1,8 @@
-import { IressCSSProps } from '@/interfaces';
+import { type IressCSSProps } from '@/interfaces';
 import { css } from '@/styled-system/css';
 import { styled } from '@/styled-system/jsx';
-import { SystemStyleObject } from '@/styled-system/types';
-import { ComponentProps, ElementType, FC } from 'react';
+import { type SystemStyleObject } from '@/styled-system/types';
+import { type ComponentProps, type ElementType, type FC } from 'react';
 
 /**
  * This creates a combination of utility classes you can use to style native HTML elements using IDS.

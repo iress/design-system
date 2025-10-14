@@ -1,8 +1,8 @@
 import { tabbable } from 'tabbable';
 import { FOCUSABLE_QUERY_SELECTOR } from '@/constants';
 import { focusableElements } from '@helpers/dom/focusableElements';
-import { KeyboardEvent } from 'react';
-import { PopoverHookReturn } from '../hooks/usePopover';
+import { type KeyboardEvent } from 'react';
+import { type PopoverHookReturn } from '../hooks/usePopover';
 import { waitUntilTrue } from './waitUntilTrue';
 
 /**

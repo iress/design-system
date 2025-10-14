@@ -1,9 +1,9 @@
 import {
-  FormattedLabelValueMeta,
-  InputRef,
+  type FormattedLabelValueMeta,
+  type InputRef,
   IressMenuDivider,
   IressRichSelect,
-  IressRichSelectProps,
+  type IressRichSelectProps,
   IressSelectBody,
   IressSelectCreate,
   IressSelectHeading,

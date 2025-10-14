@@ -1,12 +1,12 @@
-import { StoryObj, Meta } from '@storybook/react-vite';
+import { type StoryObj, type Meta } from '@storybook/react-vite';
 import { IressFieldGroup } from './FieldGroup';
 import {
   IressButton,
   IressField,
-  IressFieldProps,
+  type IressFieldProps,
   IressIcon,
   IressInput,
-  IressInputProps,
+  type IressInputProps,
   IressPanel,
   IressPopover,
   IressReadonly,
@@ -15,7 +15,7 @@ import {
 } from '@/main';
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
-import { ComponentProps } from 'react';
+import { type ComponentProps } from 'react';
 
 interface FieldAndInputProps {
   field: IressFieldProps;

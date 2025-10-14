@@ -1,5 +1,5 @@
 import { composeLabelValueDescriptor } from '@helpers/label-value/composeLabelValueDescriptor';
-import { IressFilterProps } from '../Filter';
+import { type IressFilterProps } from '../Filter';
 import { toArray } from '@helpers/formatting/toArray';
 
 export type FilterLabelProps<TMultiple extends boolean = false> = Pick<

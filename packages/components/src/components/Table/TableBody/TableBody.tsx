@@ -2,14 +2,14 @@ import { propagateTestid } from '@/helpers/utility/propagateTestid';
 import { TableEmpty } from '../components/TableEmpty';
 import { TableHeader } from '../components/TableHeader';
 import { useIdIfNeeded } from '@/hooks';
-import { useEffect, useState, ReactNode, useContext } from 'react';
+import { useEffect, useState, type ReactNode, useContext } from 'react';
 import { TableRows } from '../components/TableRows';
 import {
-  AriaRelationshipProps,
+  type AriaRelationshipProps,
   useAriaRelationship,
 } from '@/hooks/useAriaRelationship';
 import { table } from '../Table.styles';
-import { IressTableProps } from '../Table';
+import { type IressTableProps } from '../Table';
 import { TableContext, TableProvider } from '../TableProvider';
 import { styled } from '@/styled-system/jsx';
 

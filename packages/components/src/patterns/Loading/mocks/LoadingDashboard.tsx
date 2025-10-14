@@ -10,7 +10,7 @@ import {
   IressStack,
   IressText,
 } from '@/main';
-import { ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 
 const API = {
   criticalContent: async () =>

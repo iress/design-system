@@ -1,6 +1,6 @@
 import { css, cx } from '@/styled-system/css';
 import { checkboxMark } from './CheckboxMark.styles';
-import { IressStyledProps } from '@/types';
+import { type IressStyledProps } from '@/types';
 import { splitCssProps } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 

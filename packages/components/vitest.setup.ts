@@ -17,6 +17,7 @@ afterEach(() => {
 });
 
 vi.mock('@helpers/utility/idsLogger', async (importOriginal) => ({
+  // eslint-disable-next-line @typescript-eslint/consistent-type-imports -- for testing only
   ...(await importOriginal<typeof import('@helpers/utility/idsLogger')>()),
   idsLogger: idsLoggerMock,
 }));

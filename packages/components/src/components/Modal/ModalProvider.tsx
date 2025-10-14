@@ -1,29 +1,6 @@
-import {
-  createContext,
-  PropsWithChildren,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react';
-import { FloatingUIContainer } from '@/types';
-
-export interface ModalContextValue {
-  /**
-   * An array of modal IDs that are currently open.
-   */
-  opened: string[];
-
-  /**
-   * The container element to render the modal into.
-   * By default, the modal will render at the end of the document body.
-   */
-  container?: FloatingUIContainer;
-
-  /**
-   * Show or hide a modal by ID.
-   */
-  showModal: (id: string, flag?: boolean) => void;
-}
+import { type PropsWithChildren, useCallback, useMemo, useState } from 'react';
+import { type FloatingUIContainer } from '@/types';
+import { ModalContext } from './hooks/useModal';
 
 export interface IressModalProviderProps extends PropsWithChildren {
   /**
@@ -32,10 +9,6 @@ export interface IressModalProviderProps extends PropsWithChildren {
    */
   container?: FloatingUIContainer;
 }
-
-export const ModalContext = createContext<ModalContextValue | undefined>(
-  undefined,
-);
 
 export const IressModalProvider = ({
   children,

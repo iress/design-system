@@ -1,7 +1,7 @@
 import { styled } from '@/styled-system/jsx';
 import { container } from './Container.styles';
-import { IressStyledProps } from '@/types';
-import { FC, ReactNode } from 'react';
+import { type IressStyledProps } from '@/types';
+import { type FC, type ReactNode } from 'react';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 

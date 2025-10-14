@@ -1,13 +1,13 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressValidationMessage } from './ValidationMessage';
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
 import {
   IressDivider,
   IressInput,
-  IressValidationMessageProps,
+  type IressValidationMessageProps,
   SYSTEM_VALIDATION_STATUSES,
-  SystemValidationStatuses,
+  type SystemValidationStatuses,
 } from '@/main';
 import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
 

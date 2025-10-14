@@ -1,6 +1,6 @@
 import {
-  ChangeEvent,
-  ForwardedRef,
+  type ChangeEvent,
+  type ForwardedRef,
   forwardRef,
   useCallback,
   useContext,
@@ -8,20 +8,20 @@ import {
   useImperativeHandle,
   useRef,
   useState,
-  FocusEvent,
-  ReactNode,
-  ReactElement,
+  type FocusEvent,
+  type ReactNode,
+  type ReactElement,
 } from 'react';
 import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAsString';
 import { IressCheckboxMark } from '../CheckboxMark';
 import { useControlledState } from '@/hooks/useControlledState';
 import { IressReadonly } from '../Readonly';
-import { FormControlValue, IressStyledProps } from '@/types';
+import { type FormControlValue, type IressStyledProps } from '@/types';
 import { checkbox as checkboxStyles } from './Checkbox.styles';
 import { css, cx } from '@/styled-system/css';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { getCheckboxGroupContext } from '../CheckboxGroup';
-import { ReactHookFormCompatibleRef } from '@/interfaces';
+import { type ReactHookFormCompatibleRef } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { IressText } from '../Text';

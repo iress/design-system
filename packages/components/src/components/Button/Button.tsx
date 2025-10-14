@@ -1,12 +1,12 @@
 import {
-  ComponentPropsWithRef,
-  ComponentPropsWithoutRef,
-  ElementType,
-  MouseEvent,
-  MouseEventHandler,
-  ReactElement,
-  ReactNode,
-  Ref,
+  type ComponentPropsWithRef,
+  type ComponentPropsWithoutRef,
+  type ElementType,
+  type MouseEvent,
+  type MouseEventHandler,
+  type ReactElement,
+  type ReactNode,
+  type Ref,
   forwardRef,
   useCallback,
   useContext,
@@ -17,13 +17,13 @@ import {
 } from 'react';
 import { IressSpinner } from '../Spinner';
 import { GlobalCSSClass } from '@/enums';
-import { Breakpoints } from '@/types';
-import { ButtonGroupItemProps, useButtonGroupItem } from '../ButtonGroup';
+import { type Breakpoints } from '@/types';
+import { type ButtonGroupItemProps, useButtonGroupItem } from '../ButtonGroup';
 import { splitCssProps } from '@/styled-system/jsx';
 import { css, cx } from '@/styled-system/css';
 import { button } from '@/styled-system/recipes';
 import { PopoverContext } from '../Popover/hooks/usePopover';
-import { IressCSSProps, IressTestProps } from '@/interfaces';
+import { type IressCSSProps, type IressTestProps } from '@/interfaces';
 
 export type ButtonElement<
   C extends ElementType | undefined = undefined,

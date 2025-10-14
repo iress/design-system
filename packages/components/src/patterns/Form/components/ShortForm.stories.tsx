@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { FC } from 'react';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { type FC } from 'react';
 import { formArgs, formArgTypes } from '../mocks/storybookFormHelpers';
 import { ShortForm } from './ShortForm';
 import { IressButton, IressText } from '@/main';

@@ -1,13 +1,13 @@
 import { row } from './Row.styles';
 import {
-  HorizontalAligns,
-  IressStyledProps,
-  ResponsiveProp,
-  VerticalAligns,
+  type HorizontalAligns,
+  type IressStyledProps,
+  type ResponsiveProp,
+  type VerticalAligns,
 } from '@/types';
-import { ReactNode, FC } from 'react';
+import { type ReactNode, type FC } from 'react';
 import { styled } from '@/styled-system/jsx';
-import { PositiveSpacingToken } from '@theme-preset/tokens/spacing';
+import { type PositiveSpacingToken } from '@theme-preset/tokens/spacing';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 

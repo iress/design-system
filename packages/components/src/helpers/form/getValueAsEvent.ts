@@ -1,4 +1,4 @@
-import { FormControlValue } from '@/types';
+import { type FormControlValue } from '@/types';
 
 /**
  * This method wraps up a value in an event object, allowing it to work in React Hook Forms change handlers.

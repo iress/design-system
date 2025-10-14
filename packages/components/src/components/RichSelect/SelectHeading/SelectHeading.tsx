@@ -4,12 +4,12 @@ import {
   forwardRef,
   useImperativeHandle,
   useRef,
-  ReactNode,
-  UIEvent,
+  type ReactNode,
+  type UIEvent,
 } from 'react';
-import { IressMenuHeading, IressMenuTextProps } from '../../Menu';
+import { IressMenuHeading, type IressMenuTextProps } from '../../Menu';
 import { GlobalCSSClass } from '@/enums';
-import { IressButton, IressButtonProps } from '@/components/Button';
+import { IressButton, type IressButtonProps } from '@/components/Button';
 import { usePopoverItem } from '@/components/Popover';
 import { IressInline } from '@/components/Inline';
 

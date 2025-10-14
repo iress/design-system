@@ -2,7 +2,7 @@ import {
   IressButton,
   IressInline,
   IressToasterProvider,
-  IressToasterProviderProps,
+  type IressToasterProviderProps,
   useToaster,
 } from '@/main';
 import { useState } from 'react';

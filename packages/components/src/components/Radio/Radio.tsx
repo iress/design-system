@@ -1,17 +1,17 @@
 import {
   forwardRef,
   useContext,
-  ReactNode,
-  ForwardedRef,
-  Ref,
-  ReactElement,
-  ChangeEvent,
+  type ReactNode,
+  type ForwardedRef,
+  type Ref,
+  type ReactElement,
+  type ChangeEvent,
 } from 'react';
 import { useIdIfNeeded } from '../../hooks';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { IressReadonly } from '../Readonly';
 import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAsString';
-import { FormControlValue, IressStyledProps } from '@/types';
+import { type FormControlValue, type IressStyledProps } from '@/types';
 import { css, cx } from '@/styled-system/css';
 import { radio } from './Radio.styles';
 import { GlobalCSSClass } from '@/enums';

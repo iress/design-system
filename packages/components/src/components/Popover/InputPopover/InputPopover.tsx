@@ -1,4 +1,4 @@
-import { ForwardedRef, forwardRef, useContext } from 'react';
+import { type ForwardedRef, forwardRef, useContext } from 'react';
 
 import { GlobalCSSClass } from '@/enums';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
@@ -6,11 +6,11 @@ import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { PopoverContent } from '../components/PopoverContent';
 import {
   InputPopoverActivator,
-  InputPopoverActivatorProps,
+  type InputPopoverActivatorProps,
 } from './InputPopoverActivator';
-import { IressPopoverProps } from '../Popover';
+import { type IressPopoverProps } from '../Popover';
 import {
-  PopoverRef,
+  type PopoverRef,
   usePopoverImperativeHandle,
 } from '../hooks/usePopoverImperativeHandle';
 import { styled } from '@/styled-system/jsx';

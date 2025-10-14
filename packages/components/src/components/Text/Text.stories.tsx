@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { IressText, IressTextProps, TEXT_ELEMENTS, text } from '.';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressText, type IressTextProps, text } from '.';
 import { IressStack } from '../Stack';
 import { IressIcon } from '../Icon';
 import { disableArgTypes } from '@iress-storybook/helpers';
@@ -11,6 +11,27 @@ type Story = StoryObj<typeof IressText>;
 type HeadingStory = StoryObj<
   IressTextProps<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'>
 >;
+
+const TEXT_ELEMENTS = [
+  'p',
+  'div',
+  'span',
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'code',
+  'small',
+  'cite',
+  'caption',
+  'strong',
+  'em',
+  'a',
+  'blockquote',
+  'pre',
+];
 
 export default {
   title: 'Components/Text',

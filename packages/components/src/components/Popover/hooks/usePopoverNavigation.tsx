@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
-  FloatingContext,
-  UseListNavigationProps,
-  VirtualElement,
+  type FloatingContext,
+  type UseListNavigationProps,
+  type VirtualElement,
   useListNavigation,
 } from '@floating-ui/react';
-import { IressPopoverProps } from '../Popover';
+import { type IressPopoverProps } from '../Popover';
 
 /**
  * This is a wrapper around the useListNavigation hook from Floating UI, which is used to manage the keyboard navigation of popover items.

@@ -1,16 +1,16 @@
-import { IressIcon, IressIconProps } from '../Icon';
-import { IressText, IressTextProps } from '../Text';
+import { IressIcon, type IressIconProps } from '../Icon';
+import { IressText, type IressTextProps } from '../Text';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { alert } from './Alert.styles';
 import { cx } from '@/styled-system/css';
-import { ReactNode, useMemo } from 'react';
-import { SystemValidationStatuses } from '@/types';
+import { type ReactNode, useMemo } from 'react';
+import { type SystemValidationStatuses } from '@/types';
 import { GlobalCSSClass } from '@/enums';
 import {
   IressButton,
-  IressButtonProps,
+  type IressButtonProps,
   IressCloseButton,
-  IressCloseButtonProps,
+  type IressCloseButtonProps,
 } from '../Button';
 import { IressInline } from '../Inline';
 import { useControlledState } from '@/hooks';
@@ -76,10 +76,7 @@ export interface IressAlertProps extends Omit<IressTextProps, 'element'> {
   variant?: 'sidebar' | 'site-wide';
 }
 
-export const ALERT_ICONS: Record<
-  SystemValidationStatuses,
-  IressIconProps['name']
-> = {
+const ALERT_ICONS: Record<SystemValidationStatuses, IressIconProps['name']> = {
   danger: 'ban',
   info: 'info-square',
   success: 'check',

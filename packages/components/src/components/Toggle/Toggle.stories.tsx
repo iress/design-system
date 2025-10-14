@@ -1,4 +1,4 @@
-import { StoryObj, Meta } from '@storybook/react-vite';
+import { type StoryObj, type Meta } from '@storybook/react-vite';
 import { disableArgTypes } from '@iress-storybook/helpers';
 
 import { IressToggle } from '.';

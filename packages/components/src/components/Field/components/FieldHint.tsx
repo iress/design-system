@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { IressIcon } from '../../Icon';
 import { IressTooltip } from '../../Tooltip';
 import { propagateTestid } from '@helpers/utility/propagateTestid';

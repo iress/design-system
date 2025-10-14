@@ -1,12 +1,12 @@
 import { useIdIfNeeded } from '@/hooks';
 
-import { MouseEvent, ReactNode } from 'react';
+import { type MouseEvent, type ReactNode } from 'react';
 import {
   IressMenu,
   IressMenuHeading,
   IressMenuItem,
-  IressMenuItemProps,
-  IressMenuProps,
+  type IressMenuItemProps,
+  type IressMenuProps,
 } from '../../Menu';
 import { IressIcon } from '@/components/Icon';
 

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTable } from '.';
 import { IressBadge } from '../Badge';
 import { IressButton } from '../Button';
@@ -15,7 +15,7 @@ import { TableSorting } from './mocks/TableSorting';
 import TableSortingSource from './mocks/TableSorting.tsx?raw';
 import { TableSortingFn } from './mocks/TableSortingFn';
 import TableSortingFnSource from './mocks/TableSortingFn.tsx?raw';
-import { Row } from '@tanstack/react-table';
+import { type Row } from '@tanstack/react-table';
 
 type Story = StoryObj<typeof IressTable>;
 

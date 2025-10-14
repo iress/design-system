@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { FieldValues } from 'react-hook-form';
+import { type FieldValues } from 'react-hook-form';
 
 export interface FormContextValue {
   /**

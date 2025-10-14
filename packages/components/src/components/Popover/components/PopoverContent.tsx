@@ -8,7 +8,11 @@ import {
   useFloatingParentNodeId,
 } from '@floating-ui/react';
 import { composePopoverFloatingProps } from '../helpers/composeFloatingProps';
-import { DisplayModes, FloatingUIContainer, IressStyledProps } from '@/types';
+import {
+  type DisplayModes,
+  type FloatingUIContainer,
+  type IressStyledProps,
+} from '@/types';
 import { useContext, useEffect } from 'react';
 import { styled } from '@/styled-system/jsx';
 import { PopoverContext } from '../hooks/usePopover';

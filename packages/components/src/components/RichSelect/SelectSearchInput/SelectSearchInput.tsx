@@ -1,8 +1,17 @@
-import { ForwardedRef, forwardRef, useImperativeHandle, useRef } from 'react';
+import {
+  type ForwardedRef,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 import { cx } from '@/styled-system/css';
 import { selectSearchInput } from './SelectSearchInput.styles';
 import { IressIcon } from '@/components/Icon';
-import { InputRef, IressInput, IressInputProps } from '@/components/Input';
+import {
+  type InputRef,
+  IressInput,
+  type IressInputProps,
+} from '@/components/Input';
 import { usePopoverItem } from '@/components/Popover/hooks/usePopoverItem';
 import { GlobalCSSClass } from '@/enums';
 

@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { FC } from 'react';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { type FC } from 'react';
 import { withCustomSource } from '@iress-storybook/helpers';
 import { PageLoading } from './PageLoading';
 import { LoadingDashboard } from '../mocks/LoadingDashboard';

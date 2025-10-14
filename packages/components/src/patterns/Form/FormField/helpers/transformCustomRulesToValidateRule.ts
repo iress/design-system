@@ -1,7 +1,7 @@
 import {
-  FieldPath,
-  FieldValues,
-  UseControllerProps,
+  type FieldPath,
+  type FieldValues,
+  type UseControllerProps,
   type Validate,
   type PathValue,
 } from 'react-hook-form';

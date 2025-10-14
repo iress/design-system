@@ -4,8 +4,8 @@ import { composeLabelValueDescriptor } from '@helpers/label-value/composeLabelVa
 import { selectLabel } from './SelectLabel.styles';
 import { IressText } from '@/components/Text';
 import { GlobalCSSClass } from '@/enums';
-import { IressHTMLAttributes } from '@/interfaces';
-import { IressSelectActivatorProps } from '../components/SelectActivator';
+import { type IressHTMLAttributes } from '@/interfaces';
+import { type IressSelectActivatorProps } from '../components/SelectActivator';
 import { cx } from '@/styled-system/css';
 
 export type IressSelectLabelProps = Omit<

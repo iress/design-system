@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { IressIcon } from '../Icon';
 import { IressInline } from '../Inline';

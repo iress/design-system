@@ -3,7 +3,7 @@ import { getTransitionDuration } from '@helpers/transition/getTransitionDuration
 import { useFloating, useTransitionStatus } from '@floating-ui/react';
 import { toast as toastStyles } from './Toast.styles';
 import { cx } from '@/styled-system/css';
-import { Toast, ToastProps } from './Toast';
+import { Toast, type ToastProps } from './Toast';
 
 export interface ToastAnimatedProps extends ToastProps {
   /**

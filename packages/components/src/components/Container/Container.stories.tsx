@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressContainer } from '.';
 import { IressPanel } from '../Panel';
 import { CurrentBreakpoint } from '@iress-storybook/components';

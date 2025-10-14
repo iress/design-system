@@ -1,6 +1,6 @@
 import {
   IressTable,
-  IressFormProps,
+  type IressFormProps,
   IressForm,
   IressModal,
   IressStack,
@@ -10,7 +10,7 @@ import {
   IressText,
 } from '@/main';
 import { useState } from 'react';
-import { FieldErrors } from 'react-hook-form';
+import { type FieldErrors } from 'react-hook-form';
 
 interface FieldValues {
   name?: string;

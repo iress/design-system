@@ -1,7 +1,7 @@
 import { GlobalCSSClass } from '@/enums';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
-import { ReactNode, useState, useMemo, FC } from 'react';
-import { IressStyledProps } from '@/types';
+import { type ReactNode, useState, useMemo, type FC } from 'react';
+import { type IressStyledProps } from '@/types';
 import { styled } from '@/styled-system/jsx';
 import { label } from '../Label.styles';
 import { cx } from '@/styled-system/css';

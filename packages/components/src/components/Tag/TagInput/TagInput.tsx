@@ -1,13 +1,19 @@
-import { forwardRef, Ref, SyntheticEvent, useCallback, useState } from 'react';
 import {
-  InputBaseElement,
-  InputRef,
+  forwardRef,
+  type Ref,
+  type SyntheticEvent,
+  useCallback,
+  useState,
+} from 'react';
+import {
+  type InputBaseElement,
+  type InputRef,
   IressInput,
-  IressInputProps,
+  type IressInputProps,
 } from '@/components/Input';
 import { useControlledState } from '@/hooks/useControlledState';
 import { getValueAsEvent } from '@/helpers/form/getValueAsEvent';
-import { IressTag, IressTagProps } from '../Tag';
+import { IressTag, type IressTagProps } from '../Tag';
 import { propagateTestid } from '@/helpers/utility/propagateTestid';
 import { IressInline } from '@/components/Inline';
 import { tagInput } from './TagInput.styles';

@@ -1,6 +1,6 @@
-import { IressButton, IressButtonProps } from '../Button';
+import { IressButton, type IressButtonProps } from '../Button';
 import { IressIcon } from '../../Icon';
-import { forwardRef, Ref } from 'react';
+import { forwardRef, type Ref } from 'react';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 

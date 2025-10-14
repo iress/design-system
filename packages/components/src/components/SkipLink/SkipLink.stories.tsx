@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSkipLink } from '.';
 import { IressContainer } from '../Container';
 import { withJsxTransformer } from '@iress-storybook/helpers';

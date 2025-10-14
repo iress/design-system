@@ -1,5 +1,5 @@
 import { IressCheckbox } from '../../Checkbox';
-import { IressIcon, IressIconProps } from '../../Icon';
+import { IressIcon, type IressIconProps } from '../../Icon';
 import { IressPanel } from '../../Panel';
 import { IressStack } from '../../Stack';
 import { IressText } from '../../Text';

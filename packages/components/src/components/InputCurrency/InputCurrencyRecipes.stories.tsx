@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { IressInputProps, IressInputCurrency } from '../../main';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { type IressInputProps, IressInputCurrency } from '../../main';
 import { withCustomSource } from '@iress-storybook/helpers';
 import { ValidValueOnChage as ValidValueOnChageExample } from './mocks/ValidValueOnChage';
 import ValidValueOnChageSource from './mocks/ValidValueOnChage.tsx?raw';

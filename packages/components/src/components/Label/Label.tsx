@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { LabelBase, LabelBaseProps } from './LabelBase/LabelBase';
+import { type ReactNode } from 'react';
+import { LabelBase, type LabelBaseProps } from './LabelBase/LabelBase';
 
 type LabelElement<THtmlFor extends string | undefined = undefined> =
   THtmlFor extends string ? 'label' : 'strong';

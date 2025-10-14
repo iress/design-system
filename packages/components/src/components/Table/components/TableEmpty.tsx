@@ -1,4 +1,4 @@
-import { PropsWithChildren, useContext } from 'react';
+import { type PropsWithChildren, useContext } from 'react';
 import { TableContext } from '../TableProvider';
 
 export const TableEmpty = ({ children }: PropsWithChildren) => {

@@ -1,11 +1,6 @@
-import {
-  createContext,
-  PropsWithChildren,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react';
-import { FloatingUIContainer } from '@/types';
+import { type PropsWithChildren, useCallback, useMemo, useState } from 'react';
+import { type FloatingUIContainer } from '@/types';
+import { SlideoutContext } from './hooks/useSlideout';
 
 export interface IressSlideoutProviderProps extends PropsWithChildren {
   /**
@@ -14,16 +9,6 @@ export interface IressSlideoutProviderProps extends PropsWithChildren {
    */
   container?: FloatingUIContainer;
 }
-
-export interface SlideoutContextValue {
-  container?: FloatingUIContainer;
-  opened: string[];
-  showSlideout: (id: string, flag?: boolean) => void;
-}
-
-export const SlideoutContext = createContext<SlideoutContextValue | undefined>(
-  undefined,
-);
 
 export const IressSlideoutProvider = ({
   children,

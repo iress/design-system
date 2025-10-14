@@ -1,5 +1,15 @@
-import { useContext, useMemo } from 'react';
-import { SlideoutContext } from '../SlideoutProvider';
+import { type FloatingUIContainer } from '@/types';
+import { createContext, useContext, useMemo } from 'react';
+
+export interface SlideoutContextValue {
+  container?: FloatingUIContainer;
+  opened: string[];
+  showSlideout: (id: string, flag?: boolean) => void;
+}
+
+export const SlideoutContext = createContext<SlideoutContextValue | undefined>(
+  undefined,
+);
 
 export const useSlideout = () => {
   const context = useContext(SlideoutContext);

@@ -1,5 +1,5 @@
 import { GlobalCSSClass } from '@/enums';
-import { IressSelectMenuItemProps } from './SelectMenu';
+import { type IressSelectMenuItemProps } from './SelectMenu';
 import { IressMenuDivider, IressMenuItem } from '@/components/Menu';
 import { cx } from '@/styled-system/css';
 import { IressText } from '@/components/Text';

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressForm } from './Form';
 import { WithReadonlyDataForm } from './mocks/WithReadonlyDataForm';
 import WithReadonlyDataFormSource from './mocks/WithReadonlyDataForm.tsx?raw';

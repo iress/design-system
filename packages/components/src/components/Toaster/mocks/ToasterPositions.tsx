@@ -5,8 +5,8 @@ import {
   IressStack,
   IressText,
   IressToasterProvider,
-  IressToasterProviderProps,
-  NewToast,
+  type IressToasterProviderProps,
+  type NewToast,
   useToaster,
 } from '@/main';
 

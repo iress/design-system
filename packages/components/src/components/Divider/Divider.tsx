@@ -1,6 +1,6 @@
 import { cx, css } from '@/styled-system/css';
 import { divider } from './Divider.styles';
-import { IressStyledProps } from '@/types';
+import { type IressStyledProps } from '@/types';
 import { splitCssProps } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 

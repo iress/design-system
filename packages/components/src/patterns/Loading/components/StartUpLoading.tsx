@@ -1,11 +1,11 @@
 import { IressStack } from '@/components/Stack';
-import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
-import { IressProgress, IressProgressProps } from '@/components/Progress';
-import { IressText, IressTextProps } from '@/components/Text';
+import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+import { IressProgress, type IressProgressProps } from '@/components/Progress';
+import { IressText, type IressTextProps } from '@/components/Text';
 import { propagateTestid } from '@/helpers/utility/propagateTestid';
 import { useShowIndicator } from '../hooks/useShowIndicator';
 import { useEstimatedProgressValue } from '../hooks/useEstimatedProgressValue';
-import { IressStyledProps } from '@/types';
+import { type IressStyledProps } from '@/types';
 import { loading } from '../Loading.styles';
 import { css, cx } from '@/styled-system/css';
 

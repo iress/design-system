@@ -1,9 +1,9 @@
 import {
-  FormControlValue,
+  type FormControlValue,
   IressButton,
   IressCheckbox,
   IressCheckboxGroup,
-  IressCheckboxGroupProps,
+  type IressCheckboxGroupProps,
   IressStack,
 } from '@/main';
 import { useState } from 'react';

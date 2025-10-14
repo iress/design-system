@@ -31,7 +31,6 @@ describe('useSuspenseResource', () => {
     // Wait for the promise to resolve
     vi.advanceTimersByTime(1500);
 
-    // eslint-disable-next-line @typescript-eslint/require-await -- Act complains otherwise, and act is async
     await act(async () => hook.rerender());
 
     expect(hook.result.current).toBe('Resource Loaded');
@@ -70,7 +69,6 @@ describe('useSuspenseResource', () => {
     // Wait for the promise to error
     vi.advanceTimersByTime(1500);
 
-    // eslint-disable-next-line @typescript-eslint/require-await -- Act complains otherwise, and act is async
     await act(async () => hook.rerender({ isError: true }));
 
     vi.useRealTimers();

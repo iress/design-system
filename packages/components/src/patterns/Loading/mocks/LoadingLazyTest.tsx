@@ -1,1 +1,2 @@
-export default () => <div>Lazy Component</div>;
+const LoadingLazyTest = () => <div>Lazy Component</div>;
+export default LoadingLazyTest;

@@ -1,6 +1,6 @@
 import { IressExpander } from '../../Expander';
-import { IressPanel, IressPanelProps } from '../../Panel';
-import { IressMenuProps } from '../Menu';
+import { IressPanel, type IressPanelProps } from '../../Panel';
+import { type IressMenuProps } from '../Menu';
 
 export const MenuRoleDescription = ({
   children,

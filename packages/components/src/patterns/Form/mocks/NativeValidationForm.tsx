@@ -3,7 +3,7 @@ import {
   IressButton,
   IressField,
   IressAlert,
-  InputBaseElement,
+  type InputBaseElement,
 } from '@/main';
 import { useState } from 'react';
 

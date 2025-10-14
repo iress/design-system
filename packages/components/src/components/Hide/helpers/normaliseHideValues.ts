@@ -1,5 +1,5 @@
 import { BREAKPOINTS } from '@/constants';
-import { ResponsiveSizing } from '@/interfaces';
+import { type ResponsiveSizing } from '@/interfaces';
 
 export const normaliseHideValues = (values: ResponsiveSizing<boolean> = {}) => {
   return BREAKPOINTS.reduce<Record<string, boolean>>(

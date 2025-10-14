@@ -1,12 +1,12 @@
-import { CSSProperties, useEffect, useState } from 'react';
+import { type CSSProperties, useEffect, useState } from 'react';
 import { stringReplacer } from '@helpers/formatting/stringReplacer';
 import { css, cx } from '@/styled-system/css';
 import { progress } from './Progress.styles';
-import { IressStyledProps } from '@/types';
+import { type IressStyledProps } from '@/types';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 import { token } from '@/styled-system/tokens';
-import { UtilityValues } from '@/styled-system/types/prop-type';
+import { type UtilityValues } from '@/styled-system/types/prop-type';
 
 type ProgressElement<TMin extends number | undefined = undefined> =
   TMin extends number ? 'meter' : 'progress';

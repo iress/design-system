@@ -1,7 +1,7 @@
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import { IressIcon } from '../../Icon';
 import { table } from '../Table.styles';
-import { ColumnSort } from '@tanstack/react-table';
+import { type ColumnSort } from '@tanstack/react-table';
 
 export interface TableSortButtonProps extends PropsWithChildren {
   label?: string;

@@ -1,8 +1,14 @@
-import { FloatingUIContainer } from '@/types';
-import { ReactNode } from 'react';
+import { type FloatingUIContainer } from '@/types';
+import { type ReactNode } from 'react';
 import { IressModalProvider } from '../Modal';
-import { IressToasterProvider, IressToasterProviderProps } from '../Toaster';
-import { IressSlideoutProvider, IressSlideoutProviderProps } from '../Slideout';
+import {
+  IressToasterProvider,
+  type IressToasterProviderProps,
+} from '../Toaster';
+import {
+  IressSlideoutProvider,
+  type IressSlideoutProviderProps,
+} from '../Slideout';
 import { createPortal } from 'react-dom';
 import { defaultFonts } from '@iress-oss/ids-tokens';
 

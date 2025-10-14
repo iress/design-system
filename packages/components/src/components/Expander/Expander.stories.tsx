@@ -1,5 +1,5 @@
 import { IressExpander } from '.';
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressText } from '../Text';
 import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { MultipleExpander } from './mocks/MultipleExpander';

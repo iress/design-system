@@ -1,9 +1,8 @@
-import { useCallback, useContext, useMemo } from 'react';
-import { ToasterContext } from '../ToasterProvider';
+import { createContext, useCallback, useContext, useMemo } from 'react';
 import {
   getToaster,
-  NewToast,
-  ToasterRegister,
+  type NewToast,
+  type ToasterRegister,
 } from '../helpers/toasterRegister';
 
 interface ToasterHookReturn {
@@ -34,6 +33,10 @@ interface ToasterHookReturn {
    */
   close: ToasterRegister['close'];
 }
+
+export const ToasterContext = createContext<ToasterRegister | undefined>(
+  undefined,
+);
 
 const transformToNewToast = (toast: NewToast | string) => {
   if (typeof toast !== 'string') return toast;

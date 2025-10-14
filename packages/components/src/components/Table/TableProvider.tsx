@@ -1,14 +1,19 @@
-import { Context, createContext, PropsWithChildren, useMemo } from 'react';
+import {
+  type Context,
+  createContext,
+  type PropsWithChildren,
+  useMemo,
+} from 'react';
 import {
   getCoreRowModel,
   getSortedRowModel,
-  Table,
+  type Table,
   useReactTable,
 } from '@tanstack/react-table';
 import { composeTableInitialSorting } from './helpers/composeTableInitialSorting';
 import {
   composeTableColumnDefs,
-  TableColumn,
+  type TableColumn,
 } from './helpers/composeTableColumnDefs';
 
 export interface TableProviderProps<TRow extends object, TVal = unknown>
@@ -26,7 +31,7 @@ function createTableContext<TRow extends object, TVal = unknown>() {
   return createContext<TableContextValue<TRow, TVal> | undefined>(undefined);
 }
 
-// TODO: Is there a way to do this without casting?
+// eslint-disable-next-line react-refresh/only-export-components -- Its easier to keep this function here for context
 export function getTableContext<TRow extends object, TVal = unknown>() {
   return TableContext as unknown as Context<TableContextValue<TRow, TVal>>;
 }

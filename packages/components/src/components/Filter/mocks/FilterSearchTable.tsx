@@ -2,9 +2,9 @@ import {
   IressInline,
   IressStack,
   IressTable,
-  LabelValueMeta,
+  type LabelValueMeta,
   IressFilter,
-  IressFilterProps,
+  type IressFilterProps,
   IressButton,
   IressDivider,
 } from '@/main';

@@ -1,6 +1,10 @@
-import { Meta, ReactRenderer, StoryObj } from '@storybook/react-vite';
-import { ArgsStoryFn } from 'storybook/internal/types';
-import { IressSlideout, IressSlideoutProps } from '.';
+import {
+  type Meta,
+  type ReactRenderer,
+  type StoryObj,
+} from '@storybook/react-vite';
+import { type ArgsStoryFn } from 'storybook/internal/types';
+import { IressSlideout, type IressSlideoutProps } from '.';
 import { IressButton } from '../Button';
 import { useSlideout } from './hooks/useSlideout';
 import {

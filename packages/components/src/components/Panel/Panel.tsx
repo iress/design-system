@@ -1,6 +1,6 @@
 import { panel } from './Panel.styles';
-import { IressStyledProps } from '@/types';
-import { FC, ReactNode } from 'react';
+import { type IressStyledProps } from '@/types';
+import { type FC, type ReactNode } from 'react';
 import { styled } from '@/styled-system/jsx';
 import { IressText } from '../Text/Text';
 import { cx } from '@/styled-system/css';

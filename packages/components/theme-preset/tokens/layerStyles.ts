@@ -1,4 +1,4 @@
-import { CompositionStyles, defineLayerStyles } from '@pandacss/dev';
+import { type CompositionStyles, defineLayerStyles } from '@pandacss/dev';
 import { elevation, cssVars } from '@iress-oss/ids-tokens';
 
 export const elevationCompositions = {

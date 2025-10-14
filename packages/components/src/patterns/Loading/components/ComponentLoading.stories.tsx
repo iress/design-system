@@ -1,9 +1,9 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { ComponentLoading } from './ComponentLoading';
 import { LoadingGraph } from '../mocks/LoadingGraph';
 import LoadingGraphSource from '../mocks/LoadingGraph.tsx?raw';
 import { withCustomSource } from '@iress-storybook/helpers';
-import { FC } from 'react';
+import { type FC } from 'react';
 
 // This is a pattern for IressLoading, hence we change the name
 (ComponentLoading as FC).displayName = 'IressLoading';

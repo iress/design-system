@@ -1,20 +1,20 @@
 import {
-  Context,
+  type Context,
   createContext,
-  HTMLAttributes,
-  ReactNode,
+  type HTMLAttributes,
+  type ReactNode,
   useCallback,
   useContext,
   useEffect,
   useMemo,
 } from 'react';
 import {
-  ControlledValue,
+  type ControlledValue,
   useControlledState,
   useIdIfNeeded,
 } from '../../hooks';
 import { Composite } from '@floating-ui/react';
-import { FormControlValue, IressStyledProps } from '@/types';
+import { type FormControlValue, type IressStyledProps } from '@/types';
 import { styled } from '@/styled-system/jsx';
 import { toArray } from '@/helpers/formatting/toArray';
 import { menu } from './Menu.styles';

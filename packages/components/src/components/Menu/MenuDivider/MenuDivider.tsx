@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { MenuContext } from '../Menu';
-import { IressDivider, IressDividerProps } from '@/components/Divider';
+import { IressDivider, type IressDividerProps } from '@/components/Divider';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 

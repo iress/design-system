@@ -2,22 +2,25 @@ import {
   IressMenu,
   IressMenuHeading,
   IressMenuText,
-  IressMenuItemProps,
-  IressMenuProps,
+  type IressMenuItemProps,
+  type IressMenuProps,
 } from '../../Menu';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { toArray } from '@helpers/formatting/toArray';
 import { getFormControlValueAsStringIfDefined } from '@helpers/form/getFormControlValueAsStringIfDefined';
 import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAsString';
-import { useCallback, useMemo, ReactNode } from 'react';
+import { useCallback, useMemo, type ReactNode } from 'react';
 import { getValueFromLabelValues } from '@helpers/label-value/getValueFromLabelValues';
 import { IressSelectMenuItem } from './SelectMenuItem';
-import { ControlledValue, useIdIfNeeded } from '@/hooks';
-import { FormattedLabelValueMeta, LabelValueMeta } from '@/interfaces';
+import { type ControlledValue, useIdIfNeeded } from '@/hooks';
+import {
+  type FormattedLabelValueMeta,
+  type LabelValueMeta,
+} from '@/interfaces';
 import { selectMenu } from './SelectMenu.styles';
 import { GlobalCSSClass } from '@/enums';
 import { cx } from '@/styled-system/css';
-import { FormControlValue } from '@/types';
+import { type FormControlValue } from '@/types';
 
 export interface IressSelectMenuProps<TMultiple extends boolean = false>
   extends Omit<

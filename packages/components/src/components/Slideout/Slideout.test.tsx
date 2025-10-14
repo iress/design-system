@@ -17,9 +17,10 @@ import {
   IressSlideoutProps,
   IressSlideoutProvider,
   IressSlideoutProviderProps,
+  SlideoutContext,
+  SlideoutContextValue,
   slideout as slideoutStyles,
 } from '@/main';
-import { SlideoutContext, SlideoutContextValue } from './SlideoutProvider';
 import { useState } from 'react';
 import { token } from '@/styled-system/tokens';
 

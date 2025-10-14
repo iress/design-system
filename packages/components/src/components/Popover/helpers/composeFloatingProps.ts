@@ -1,8 +1,8 @@
 import { getActiveElement } from '@helpers/dom/getActiveElement';
-import { KeyboardEvent, CSSProperties } from 'react';
+import { type KeyboardEvent, type CSSProperties } from 'react';
 import { handlePopoverTabKey } from './handlePopoverTabKey';
-import { DisplayModes, IressUnstyledProps } from '@/types';
-import { PopoverHookReturn } from '../hooks/usePopover';
+import { type DisplayModes, type IressUnstyledProps } from '@/types';
+import { type PopoverHookReturn } from '../hooks/usePopover';
 
 /**
  * This adds additional props to the Floating UI floatingProps to better suit the requirements of IressPopover.

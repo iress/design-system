@@ -1,6 +1,6 @@
-import { KeyboardEvent, FocusEvent, useCallback } from 'react';
-import { IressUnstyledProps } from '@/types';
-import { PopoverHookReturn } from './usePopover';
+import { type KeyboardEvent, type FocusEvent, useCallback } from 'react';
+import { type IressUnstyledProps } from '@/types';
+import { type PopoverHookReturn } from './usePopover';
 
 /**
  * This adds additional props to the activator to handle keyboard interactions with a virtually focused item.

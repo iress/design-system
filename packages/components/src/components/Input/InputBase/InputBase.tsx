@@ -1,13 +1,13 @@
 import {
   forwardRef,
-  ReactElement,
-  Ref,
+  type ReactElement,
+  type Ref,
   useImperativeHandle,
   useRef,
 } from 'react';
-import { IressStyledProps } from '@/types';
+import { type IressStyledProps } from '@/types';
 import { styled } from '@/styled-system/jsx';
-import { ReactHookFormCompatibleRef } from '@/interfaces';
+import { type ReactHookFormCompatibleRef } from '@/interfaces';
 
 type InputElement<TRows extends number | undefined = undefined> =
   TRows extends number ? 'textarea' : 'input';

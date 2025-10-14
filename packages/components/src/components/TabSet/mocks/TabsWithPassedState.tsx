@@ -7,7 +7,7 @@ import {
   IressInput,
 } from '@/main';
 import { useState } from 'react';
-import { FieldValues } from 'react-hook-form';
+import { type FieldValues } from 'react-hook-form';
 import { IressTabSet } from '../TabSet';
 
 interface FormInsideTabProps {

@@ -1,26 +1,26 @@
 import {
-  BREAKPOINTS,
-  DISPLAY_MODES,
-  FLOATING_UI_ALIGNS,
-  FORM_ELEMENT_WIDTHS,
-  GUTTER_SIZES,
-  HEADING_LEVELS,
-  HORIZONTAL_ALIGNS,
-  LOGGER_LEVELS,
-  PADDING_SIZES,
-  SYSTEM_VALIDATION_STATUSES,
-  TEXT_ALIGNS,
-  TEXT_MODES,
-  TEXT_VARIANTS,
-  VERTICAL_ALIGNS,
+  type BREAKPOINTS,
+  type DISPLAY_MODES,
+  type FLOATING_UI_ALIGNS,
+  type FORM_ELEMENT_WIDTHS,
+  type GUTTER_SIZES,
+  type HEADING_LEVELS,
+  type HORIZONTAL_ALIGNS,
+  type LOGGER_LEVELS,
+  type PADDING_SIZES,
+  type SYSTEM_VALIDATION_STATUSES,
+  type TEXT_ALIGNS,
+  type TEXT_MODES,
+  type TEXT_VARIANTS,
+  type VERTICAL_ALIGNS,
 } from '@/constants';
 import {
-  IressCSSProps,
-  IressTestProps,
-  VariablePaddingSize,
+  type IressCSSProps,
+  type IressTestProps,
+  type VariablePaddingSize,
 } from './interfaces';
-import { PaddingSize } from './enums';
-import { SpacingToken } from '@/styled-system/tokens';
+import { type PaddingSize } from './enums';
+import { type SpacingToken } from '@/styled-system/tokens';
 
 export type Breakpoints = (typeof BREAKPOINTS)[number];
 

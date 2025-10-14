@@ -1,11 +1,11 @@
 import { toArray } from '@helpers/formatting/toArray';
 import {
-  ControlledStateHook,
-  ControlledStateProps,
+  type ControlledStateHook,
+  type ControlledStateProps,
   useControlledState,
 } from '@/hooks/useControlledState';
 import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAsString';
-import { LabelValueMeta } from '@/interfaces';
+import { type LabelValueMeta } from '@/interfaces';
 
 export interface RichSelectStateHookReturn<
   T extends LabelValueMeta = LabelValueMeta,

@@ -1,27 +1,27 @@
 import {
-  MouseEvent,
-  ReactElement,
-  ReactNode,
-  Ref,
+  type MouseEvent,
+  type ReactElement,
+  type ReactNode,
+  type Ref,
   forwardRef,
   useId,
   useMemo,
-  ElementType,
-  ComponentPropsWithoutRef,
+  type ElementType,
+  type ComponentPropsWithoutRef,
   useCallback,
-  MouseEventHandler,
+  type MouseEventHandler,
 } from 'react';
 import { IressSpinner } from '../Spinner';
 import { splitCssProps } from '@/styled-system/jsx';
 import { css, cx } from '@/styled-system/css';
 import { link } from './Link.styles';
 import {
-  ButtonElement,
-  ButtonInstance,
-  ButtonRef,
-  ButtonRenderProps,
+  type ButtonElement,
+  type ButtonInstance,
+  type ButtonRef,
+  type ButtonRenderProps,
 } from '../Button';
-import { IressCSSProps, IressTestProps } from '@/interfaces';
+import { type IressCSSProps, type IressTestProps } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 
 export type IressLinkProps<

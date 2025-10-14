@@ -1,7 +1,7 @@
-import { StoryObj, Meta } from '@storybook/react-vite';
+import { type StoryObj, type Meta } from '@storybook/react-vite';
 
 import { disableArgTypes, withJsxTransformer } from '@iress-storybook/helpers';
-import { IressInput, IressInputProps } from '../Input';
+import { IressInput, type IressInputProps } from '../Input';
 import { IressField } from './Field';
 import { IressIcon } from '../Icon';
 import { IressButton } from '../Button';
@@ -12,7 +12,7 @@ import { IressStack } from '../Stack';
 import { IressInline } from '../Inline';
 import { IressRow } from '../Row';
 import { IressCol } from '../Col';
-import { ComponentProps, useState } from 'react';
+import { type ComponentProps, useState } from 'react';
 import { IressToggle } from '../Toggle';
 
 type IressFieldPropsAndCustomArgs = ComponentProps<typeof IressField> & {

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   IressButton,
   IressSkeleton,
-  IressSkeletonProps,
+  type IressSkeletonProps,
   IressStack,
   IressText,
 } from '@/main';

@@ -1,6 +1,6 @@
 import { BREAKPOINT_DETAILS, BREAKPOINTS } from '@/constants';
-import { BreakpointDetail } from '@/interfaces';
-import { Breakpoints } from '@/types';
+import { type BreakpointDetail } from '@/interfaces';
+import { type Breakpoints } from '@/types';
 import { useCallback, useLayoutEffect, useState } from 'react';
 
 interface BreakpointResult {

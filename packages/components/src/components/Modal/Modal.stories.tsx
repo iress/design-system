@@ -1,6 +1,10 @@
-import { Meta, ReactRenderer, StoryObj } from '@storybook/react-vite';
-import { ArgsStoryFn } from 'storybook/internal/types';
-import { IressModal, IressModalProps, IressModalProvider } from '.';
+import {
+  type Meta,
+  type ReactRenderer,
+  type StoryObj,
+} from '@storybook/react-vite';
+import { type ArgsStoryFn } from 'storybook/internal/types';
+import { IressModal, type IressModalProps, IressModalProvider } from '.';
 import { IressButton } from '../Button';
 import { useModal } from './hooks/useModal';
 import {

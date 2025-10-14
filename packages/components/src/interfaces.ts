@@ -1,14 +1,14 @@
-import { ReactNode } from 'react';
-import { SystemValidationStatus, PaddingSize } from './enums';
+import { type ReactNode } from 'react';
+import { type SystemValidationStatus, type PaddingSize } from './enums';
 import {
-  FormControlValue,
-  PaddingSizes,
-  ResponsiveProp,
-  SystemValidationStatuses,
+  type FormControlValue,
+  type PaddingSizes,
+  type ResponsiveProp,
+  type SystemValidationStatuses,
 } from './types';
-import { SpacingToken } from '@/styled-system/tokens';
-import { UtilityValues } from './styled-system/types/prop-type';
-import { PositiveSpacingToken } from '@theme-preset/tokens/spacing';
+import { type SpacingToken } from '@/styled-system/tokens';
+import { type UtilityValues } from './styled-system/types/prop-type';
+import { type PositiveSpacingToken } from '@theme-preset/tokens/spacing';
 
 /**
  * This interface is used to ensure that the ref returned by a component is compatible with React Hook Form.

@@ -1,9 +1,9 @@
-import { IressStyledProps } from '@/types';
+import { type IressStyledProps } from '@/types';
 import { styled } from '@/styled-system/jsx';
 import { cx } from '@/styled-system/css';
 import { icon } from './Icon.styles';
 import { GlobalCSSClass } from '@/enums';
-import { IconName } from '@fortawesome/fontawesome-common-types';
+import { type IconName } from '@fortawesome/fontawesome-common-types';
 
 export interface IressIconProps extends IressStyledProps<'span'> {
   /**

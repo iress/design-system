@@ -1,8 +1,8 @@
 import { normaliseHideValues } from './helpers/normaliseHideValues';
-import { ResponsiveSizing } from '@/interfaces';
-import { FC, ReactNode } from 'react';
+import { type ResponsiveSizing } from '@/interfaces';
+import { type FC, type ReactNode } from 'react';
 import { styled } from '@/styled-system/jsx';
-import { IressStyledProps } from '@/types';
+import { type IressStyledProps } from '@/types';
 
 const Div = styled('div') as FC<IressStyledProps>;
 

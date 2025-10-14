@@ -1,35 +1,35 @@
 import {
   createContext,
-  MutableRefObject,
+  type MutableRefObject,
   useCallback,
   useMemo,
   useRef,
 } from 'react';
 import {
-  ControlledStateProps,
+  type ControlledStateProps,
   useControlledState,
 } from '@/hooks/useControlledState';
 import {
   autoPlacement,
   autoUpdate,
   flip,
-  Middleware,
+  type Middleware,
   offset,
-  OpenChangeReason,
+  type OpenChangeReason,
   shift,
   size,
   useClick,
   useDismiss,
   useFloating,
-  UseFloatingReturn,
+  type UseFloatingReturn,
   useInteractions,
   useRole,
 } from '@floating-ui/react';
 import { usePopoverNavigation } from './usePopoverNavigation';
-import { FloatingUIAligns } from '@/types';
-import { PopoverVirtualNode } from './usePopoverItem';
+import { type FloatingUIAligns } from '@/types';
+import { type PopoverVirtualNode } from './usePopoverItem';
 import { focusableElements } from '@/helpers/dom/focusableElements';
-import { PopoverAriaHookReturn, usePopoverAria } from './usePopoverAria';
+import { type PopoverAriaHookReturn, usePopoverAria } from './usePopoverAria';
 import { closestCrossShadow } from '@/helpers/dom/closestCrossShadow';
 import { GlobalCSSClass } from '@/enums';
 

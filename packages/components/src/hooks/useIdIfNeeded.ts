@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import { IressUnstyledProps } from '@/types';
+import { type IressUnstyledProps } from '@/types';
 
 export const useIdIfNeeded = <T extends IressUnstyledProps>(
   { id: propId }: T = {} as T,

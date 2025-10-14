@@ -8,23 +8,23 @@ import {
   useState,
   useMemo,
   useContext,
-  ReactNode,
+  type ReactNode,
 } from 'react';
 import { focusableElements } from '@/helpers/dom/focusableElements';
 import {
   PopoverContext,
-  PopoverHookReturn,
+  type PopoverHookReturn,
 } from '@/components/Popover/hooks/usePopover';
-import { IressText, IressTextProps } from '@/components/Text';
-import { IressSelectActivatorProps } from '../components/SelectActivator';
+import { IressText, type IressTextProps } from '@/components/Text';
+import { type IressSelectActivatorProps } from '../components/SelectActivator';
 import { cx } from '@/styled-system/css';
 import { selectTags } from './SelectTags.styles';
-import { LabelValueMeta } from '@/interfaces';
-import { IressTag, IressTagProps } from '@/components/Tag';
+import { type LabelValueMeta } from '@/interfaces';
+import { IressTag, type IressTagProps } from '@/components/Tag';
 import {
   IressMenu,
   IressMenuItem,
-  IressMenuItemProps,
+  type IressMenuItemProps,
 } from '@/components/Menu';
 import { IressPopover } from '@/components/Popover';
 import { IressButton } from '@/components/Button';

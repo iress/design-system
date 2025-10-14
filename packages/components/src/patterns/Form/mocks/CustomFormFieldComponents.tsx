@@ -8,7 +8,7 @@ import {
   IressText,
   IressPanel,
   IressInline,
-  IressInputProps,
+  type IressInputProps,
 } from '@/main';
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';

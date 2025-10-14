@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { IressDivider, IressDividerProps } from '.';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressDivider, type IressDividerProps } from '.';
 import { IressInline } from '../Inline';
 import { IressText } from '../Text';
 import { IressStack } from '../Stack/Stack';

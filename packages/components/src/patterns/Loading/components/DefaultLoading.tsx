@@ -1,9 +1,9 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { IressSpinner } from '@/components/Spinner';
 import { IressInline } from '@/components/Inline';
 import { IressText } from '@/components/Text';
 import { loading } from '../Loading.styles';
-import { IressStyledProps } from '@/types';
+import { type IressStyledProps } from '@/types';
 import { styled } from '@/styled-system/jsx';
 import { cx } from '@/styled-system/css';
 

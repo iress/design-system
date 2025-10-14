@@ -1,10 +1,10 @@
-import { forwardRef, ReactElement, Ref } from 'react';
+import { forwardRef, type ReactElement, type Ref } from 'react';
 import { GlobalCSSClass } from '@/enums';
 import { getFormControlValueAsStringIfDefined } from '@helpers/form/getFormControlValueAsStringIfDefined';
 import { select } from '../Select.styles';
 import { css, cx } from '@/styled-system/css';
-import { FormControlValue, IressUnstyledProps } from '@/types';
-import { input, IressInputProps } from '@/components/Input';
+import { type FormControlValue, type IressUnstyledProps } from '@/types';
+import { input, type IressInputProps } from '@/components/Input';
 
 export interface SelectControlProps<T = FormControlValue>
   extends Omit<

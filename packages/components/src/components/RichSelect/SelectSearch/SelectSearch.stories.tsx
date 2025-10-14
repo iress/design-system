@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSelectSearch } from './SelectSearch';
 import { IressSelectCreate } from '../SelectCreate/SelectCreate';
 import {
@@ -7,7 +7,7 @@ import {
   IressSelectBody,
   IressSelectMenu,
   IressSelectSearchInput,
-  IressSelectSearchProps,
+  type IressSelectSearchProps,
 } from '@/main';
 import { MOCK_LARGE_LABEL_VALUES_DATASET } from '../../../mocks/generateLabelValues';
 import {

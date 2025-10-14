@@ -1,16 +1,16 @@
 import {
-  ChangeEvent,
-  FocusEvent,
-  MouseEvent,
+  type ChangeEvent,
+  type FocusEvent,
+  type MouseEvent,
   cloneElement,
   useCallback,
   useContext,
 } from 'react';
 import { hasFocus } from '../helpers/hasFocus';
 import { usePopoverActivatorInteractions } from '../hooks/usePopoverActivatorInteractions';
-import { PopoverActivatorProps } from '../components/PopoverActivator';
+import { type PopoverActivatorProps } from '../components/PopoverActivator';
 import { PopoverContext } from '../hooks/usePopover';
-import { InputBaseProps, IressInputProps } from '@/components/Input';
+import { type InputBaseProps, type IressInputProps } from '@/components/Input';
 
 export interface InputPopoverActivatorProps extends PopoverActivatorProps {
   /**

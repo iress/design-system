@@ -1,11 +1,11 @@
 import { toArray } from '@helpers/formatting/toArray';
 import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAsString';
-import { FormControlValue } from '@/types';
+import { type FormControlValue } from '@/types';
 import {
-  IressSelectOptionProps,
+  type IressSelectOptionProps,
   IressSelectOption,
 } from '../SelectOption/SelectOption';
-import { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
 interface SelectOption<T = FormControlValue> {
   children?: SelectOption<T>[];

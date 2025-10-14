@@ -1,13 +1,13 @@
 import {
   cloneElement,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
-  TransitionEvent,
+  type TransitionEvent,
 } from 'react';
 import { IressCloseButton } from '../Button';
 import {
@@ -26,7 +26,7 @@ import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { useIdIfNeeded } from '../../hooks';
 import { IressText, text } from '../Text';
 import { useProviderModal } from './hooks/useProviderModal';
-import { FloatingUIContainer, IressStyledProps } from '@/types';
+import { type FloatingUIContainer, type IressStyledProps } from '@/types';
 import { modal } from './Modal.styles';
 import { cx } from '@/styled-system/css';
 import { splitCssProps, styled } from '@/styled-system/jsx';
