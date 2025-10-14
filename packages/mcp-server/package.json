@@ -1,0 +1,58 @@
+{
+  "name": "@iress-oss/ids-mcp-server",
+  "version": "6.0.0-alpha.0",
+  "description": "Model Context Protocol (MCP) server for Iress Design System (IDS) component library - provides AI assistants with contextual information about IDS components, design tokens, and usage patterns",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "ids": "dist/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "iress",
+    "design-system",
+    "component-library",
+    "ui",
+    "react",
+    "ai-assistant"
+  ],
+  "author": "Iress",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf coverage dist",
+    "collect": "tsx scripts/collect.ts",
+    "dev": "tsx src/index.ts",
+    "generate": "tsx scripts/generate.ts",
+    "guidelines": "tsx scripts/guidelines.ts",
+    "lint": "npx eslint . --max-warnings 0",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "files": [
+    "dist",
+    "generated/docs",
+    "README.md",
+    "LICENSE.txt"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.17.5",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/minimist": "1.2.5",
+    "@types/node": "24.3.1",
+    "@types/turndown": "5.0.5",
+    "@vitest/coverage-v8": "3.2.4",
+    "minimist": "1.2.8",
+    "playwright": "1.55.0",
+    "rimraf": "6.0.1",
+    "tsx": "4.20.5",
+    "turndown": "7.2.1",
+    "turndown-plugin-gfm": "1.0.2",
+    "typescript": "5.8.2",
+    "vitest": "3.2.4"
+  }
+}
