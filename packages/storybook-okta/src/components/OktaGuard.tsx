@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useAddonState, type API } from 'storybook/internal/manager-api';
-import { type AddonConfig } from '../types';
 import { getOkta } from '../helpers/oktaRegister';
 import { type AuthStateEventHandler } from '@okta/okta-auth-js';
 import { ADDON_ID } from '../constants';
@@ -115,7 +114,7 @@ export const OktaGuard = ({ api }: OktaGuardProps) => {
     return () => {
       authClient?.authStateManager.unsubscribe(authenticate);
     };
-  }, [api, authClient, config?.unprotected, setState]);
+  }, [api, authClient, config, setState]);
 
   useEffect(() => {
     // Listen for browser back/forward navigation
@@ -151,7 +150,7 @@ export const OktaGuard = ({ api }: OktaGuardProps) => {
     };
   }, [handle]);
 
-  if (!state.isAuthenticated) {
+  if (config && !state.isAuthenticated) {
     return <LoginSplash>{state.error ?? 'Logging in...'}</LoginSplash>;
   }
 

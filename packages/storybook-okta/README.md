@@ -20,8 +20,10 @@ const config: StorybookConfig = {
   addons: {
     name: '@iress-oss/ids-storybook-okta',
     options: {
-      issuer: 'https://{yourOktaDomain}/oauth2/default',
-      clientId: '{yourClientId}',
+      IDS_OKTA: {
+        issuer: 'https://{yourOktaDomain}/oauth2/default',
+        clientId: '{yourClientId}',
+      },
     },
   },
 };

@@ -1,10 +1,10 @@
-import React, { type PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import { styled } from 'storybook/theming';
 
 const CenteredDiv = styled.div(({ theme }) => {
   return {
     position: 'fixed',
-    background: 'white',
+    background: theme.background?.app ?? 'white',
     top: 0,
     left: 0,
     right: 0,

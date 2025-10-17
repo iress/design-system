@@ -6,12 +6,14 @@ const config = defineMain({
   addons: [
     {
       name: './local-preset.cjs',
-      options: {
-        IDS_OKTA: {
-          issuer: 'https://iress.oktapreview.com/oauth2/default',
-          clientId: '0oa1qwfgpgc1JdkWF0h8',
-        },
-      },
+      options: process.env.AUTH
+        ? {
+            IDS_OKTA: {
+              issuer: 'https://iress.oktapreview.com/oauth2/default',
+              clientId: '0oa1qwfgpgc1JdkWF0h8',
+            },
+          }
+        : undefined,
     },
   ],
   core: {

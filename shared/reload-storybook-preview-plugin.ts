@@ -14,8 +14,10 @@ const plugin: PluginOption = {
     chokidar.add('./dist/preview.js');
     chokidar.on('change', (path: string) => {
       if (path.includes('/src/') || path.includes('/.storybook/')) {
-        console.log('📄 Addon dist file changed:', path);
-        setTimeout(() => server.restart(), 1000);
+        setTimeout(() => {
+          console.log('📄 Addon dist file changed:', path);
+          server.restart();
+        }, 2000);
       }
     });
   },
