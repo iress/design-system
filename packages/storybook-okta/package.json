@@ -1,14 +1,13 @@
 {
   "name": "@iress-oss/ids-storybook-okta",
-  "version": "0.0.1",
-  "type": "module",
-  "description": "Storybook addon for Okta authentication",
-  "author": "Iress",
-  "license": "Apache-2.0",
+  "version": "0.0.0",
+  "description": "Protect your Storybook instance(s) using OKTA",
   "keywords": [
-    "storybook-addons", "storybook-addons",
-    "authentication"
+    "storybook-addons"
   ],
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "Iress",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -20,6 +19,7 @@
       "import": "./dist/preview.js",
       "require": "./dist/preview.cjs"
     },
+    "./preset": "./dist/preset.cjs",
     "./manager": "./dist/manager.js",
     "./package.json": "./package.json"
   },
@@ -31,16 +31,15 @@
   ],
   "scripts": {
     "build": "tsup",
-    "build:watch": "npm run build -- --watch",
+    "dev": "concurrently \"yarn watch\" \"yarn serve\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "run-p build:watch \"storybook --quiet\"",
-    "prerelease": "zx scripts/prepublish-checks.js",
-    "release": "npm run build && auto shipit",
-    "eject-ts": "zx scripts/eject-typescript.js",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "serve": "yarn storybook:serve-addon packages/storybook-okta",
+    "watch": "yarn build --watch"
   },
   "dependencies": {
+    "@okta/okta-auth-js": "^7.14.0",
     "@storybook/icons": "^1.4.0"
   },
   "devDependencies": {
@@ -50,21 +49,19 @@
     "@types/react": "^18.2.65",
     "@types/react-dom": "^18.2.21",
     "@vitejs/plugin-react": "^4.2.1",
-    "auto": "^11.1.1",
-    "boxen": "^7.1.1",
-    "npm-run-all2": "^6.2.3",
+    "chokidar": "^4.0.3",
+    "concurrently": "^9.2.1",
     "prettier": "^3.3.3",
-    "prompts": "^2.4.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^9.1.0",
-    "ts-dedent": "^2.2.0",
     "tsup": "^8.2.4",
     "typescript": "^5.8.2",
-    "vite": "^5.3.5",
-    "zx": "^8.4.1"
+    "vite": "^7.1.7"
   },
   "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "storybook": "^9.0.0"
   },
   "bundler": {
@@ -75,13 +72,17 @@
       "src/manager.tsx"
     ],
     "previewEntries": [
-      "src/preview.ts"
+      "src/preview.tsx"
+    ],
+    "nodeEntries": [
+      "src/preset.ts"
     ]
   },
   "storybook": {
     "displayName": "OKTA Authentication",
     "supportedFrameworks": [
       "react"
-    ]
+    ],
+    "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
   }
 }

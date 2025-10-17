@@ -8,6 +8,7 @@ import {
 } from 'storybook/internal/builder-manager';
 import { globalPackages as globalManagerPackages } from 'storybook/internal/manager/globals';
 import { globalPackages as globalPreviewPackages } from 'storybook/internal/preview/globals';
+import { peerDependencies } from './package.json';
 
 type BundlerConfig = {
   bundler?: {
@@ -66,7 +67,11 @@ export default defineConfig(async (options) => {
       format: ['esm', 'cjs'],
       platform: 'neutral',
       target: NODE_TARGET,
-      external: [...globalManagerPackages, ...globalPreviewPackages],
+      external: [
+        ...globalManagerPackages,
+        ...globalPreviewPackages,
+        ...Object.keys(peerDependencies),
+      ],
     });
   }
 
@@ -80,7 +85,7 @@ export default defineConfig(async (options) => {
       format: ['esm'],
       platform: 'browser',
       target: BROWSER_TARGETS,
-      external: globalManagerPackages,
+      external: [...globalManagerPackages, ...Object.keys(peerDependencies)],
     });
   }
 
@@ -97,7 +102,7 @@ export default defineConfig(async (options) => {
       format: ['esm', 'cjs'],
       platform: 'browser',
       target: BROWSER_TARGETS,
-      external: globalPreviewPackages,
+      external: [...globalPreviewPackages, ...Object.keys(peerDependencies)],
     });
   }
 

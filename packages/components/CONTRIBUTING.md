@@ -14,7 +14,7 @@ Only current employees of Iress with access to this repository may contribute.
 
 ### How to Contribute
 
-Please refer to the [README.md](./README.md) file in the root of this repository for detailed instructions on:
+Please refer to the [README.md](../../README.md) file in the root of this repository for detailed instructions on:
 
 - Setting up your development environment
 - Coding conventions and architectural guidelines

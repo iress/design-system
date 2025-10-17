@@ -1,6 +1,6 @@
-# OKTA Authentication for Storybook
+# Storybook Addon OKTA Authentication
 
-This package provides authentication for Storybook using OKTA.
+Protect your Storybook instance(s) using OKTA
 
 ## Installation
 
@@ -10,15 +10,21 @@ yarn add @iress-oss/ids-storybook-okta
 
 ## Usage
 
-To use the OKTA authentication in your Storybook, you need to configure it in your `.storybook/manager.ts` file.
-
-### .storybook/manager.ts
+In your Storybook `main.ts` configuration file, add the addon and your OKTA configuration:
 
 ```ts
-addons.setConfig({
-  IDS_OKTA: {
-    issuer: 'https://{yourOktaDomain}/oauth2/default',
-    clientId: '{yourClientId}',
+// .storybook/main.ts
+import type { StorybookConfig } from '@storybook/react-vite';
+
+const config: StorybookConfig = {
+  addons: {
+    name: '@iress-oss/ids-storybook-okta',
+    options: {
+      issuer: 'https://{yourOktaDomain}/oauth2/default',
+      clientId: '{yourClientId}',
+    },
   },
-});
+};
+
+export default config;
 ```
