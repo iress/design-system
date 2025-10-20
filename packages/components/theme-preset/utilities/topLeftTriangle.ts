@@ -1,6 +1,6 @@
 import { defineUtility } from '@pandacss/dev';
-import { spacing } from '@theme-preset/tokens/spacing';
-import { colors } from '@theme-preset/tokens/colors';
+import { spacing } from '../tokens/spacing';
+import { colors } from '../tokens/colors';
 import { cssVars } from '@iress-oss/ids-tokens';
 
 export const topLeftTriangle = defineUtility({

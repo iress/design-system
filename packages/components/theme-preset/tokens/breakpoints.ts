@@ -1,4 +1,4 @@
-import { BREAKPOINT_DETAILS } from '@/constants';
+import { BREAKPOINT_DETAILS } from '../../src/constants';
 
 // Panda uses a mobile-first breakpoint system and leverages min-width media queries @media(min-width) when you write responsive styles.
 export const breakpoints = {

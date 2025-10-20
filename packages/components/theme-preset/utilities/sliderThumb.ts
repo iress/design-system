@@ -1,6 +1,6 @@
 import { defineUtility } from '@pandacss/dev';
-import { colors } from '@theme-preset/tokens/colors';
-import { sliderSizes } from '@theme-preset/tokens/sizes';
+import { colors } from '../tokens/colors';
+import { sliderSizes } from '../tokens/sizes';
 
 export const sliderThumb = defineUtility({
   className: 'sliderThumb',

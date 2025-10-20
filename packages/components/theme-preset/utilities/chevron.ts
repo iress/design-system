@@ -1,7 +1,7 @@
 import { defineUtility } from '@pandacss/dev';
-import { borders } from '@theme-preset/tokens/borders';
-import { sizes } from '@theme-preset/tokens/sizes';
-import { spacing } from '@theme-preset/tokens/spacing';
+import { borders } from '../tokens/borders';
+import { sizes } from '../tokens/sizes';
+import { spacing } from '../tokens/spacing';
 
 export const selectChevron = defineUtility({
   className: 'selectChevron',

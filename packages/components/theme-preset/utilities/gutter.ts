@@ -1,5 +1,5 @@
 import { defineUtility } from '@pandacss/dev';
-import { spacing, SPACING_TOKENS } from '@theme-preset/tokens/spacing';
+import { spacing, SPACING_TOKENS } from '../tokens/spacing';
 
 export const gutter = defineUtility({
   className: 'gutter',

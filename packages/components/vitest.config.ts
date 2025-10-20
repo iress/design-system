@@ -44,10 +44,6 @@ export default defineConfig({
         find: '@components',
         replacement: resolve(__dirname, 'src/components'),
       },
-      {
-        find: '@iress-storybook',
-        replacement: resolve(__dirname, '../../apps/storybook/src'),
-      },
       { find: '@helpers', replacement: resolve(__dirname, 'src/helpers') },
       {
         find: '@theme-preset',

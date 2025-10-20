@@ -1,5 +1,5 @@
 // https://panda-css.com/docs/theming/tokens#sizes
-import { BREAKPOINT_DETAILS } from '@/constants';
+import { BREAKPOINT_DETAILS } from '../../src/constants';
 import { cssVars } from '@iress-oss/ids-tokens';
 
 export const containerSizes = {
