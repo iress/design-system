@@ -1406,6 +1406,34 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@iress-oss/ids-storybook-version-badge@workspace:packages/storybook-version-badge":
+  version: 0.0.0-use.local
+  resolution: "@iress-oss/ids-storybook-version-badge@workspace:packages/storybook-version-badge"
+  dependencies:
+    "@storybook/addon-docs": "npm:^9.1.0"
+    "@storybook/react-vite": "npm:^9.1.0"
+    "@types/node": "npm:^22"
+    "@types/react": "npm:^18.2.65"
+    "@types/react-dom": "npm:^18.2.21"
+    "@vitejs/plugin-react": "npm:^4.2.1"
+    "@vitest/coverage-v8": "npm:3.2.4"
+    chokidar: "npm:^4.0.3"
+    concurrently: "npm:^9.2.1"
+    prettier: "npm:^3.3.3"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
+    storybook: "npm:^9.1.0"
+    tsup: "npm:^8.2.4"
+    typescript: "npm:^5.8.2"
+    vite: "npm:^7.1.7"
+    vitest: "npm:3.2.4"
+  peerDependencies:
+    react: ^18.0.0
+    react-dom: ^18.0.0
+    storybook: ^9.0.0
+  languageName: unknown
+  linkType: soft
+
 "@iress-oss/ids-tokens@npm:6.0.0-alpha.0, @iress-oss/ids-tokens@workspace:packages/tokens":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-tokens@workspace:packages/tokens"
