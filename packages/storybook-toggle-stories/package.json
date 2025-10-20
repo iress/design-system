@@ -1,5 +1,5 @@
 {
-  "name": "@iress-oss/ids-storybook-version-badge",
+  "name": "@iress-oss/ids-storybook-toggle-stories",
   "version": "0.0.0",
   "description": "A Storybook addon that displays the current version of your design system in the Storybook toolbar.",
   "keywords": [
@@ -26,12 +26,16 @@
   "scripts": {
     "build": "tsup",
     "dev": "concurrently \"yarn watch\" \"yarn serve\"",
+    "dev:disabled": "DISABLE_ADDON=true yarn dev",
     "test": "vitest --config vitest.config.ts --watch",
     "test:coverage": "vitest run --config vitest.config.ts --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "serve": "yarn storybook:serve-addon packages/storybook-version-badge",
+    "serve": "yarn storybook:serve-addon packages/storybook-toggle-stories",
     "watch": "yarn build --watch"
+  },
+  "dependencies": {
+    "@storybook/icons": "^1.4.0"
   },
   "devDependencies": {
     "@storybook/addon-docs": "^9.1.0",

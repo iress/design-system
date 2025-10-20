@@ -17,8 +17,10 @@ const setupLocalPreset = ({
   return preset;
 };
 
-const autoReloadManagerHead = (port = 7000) => {
+const autoReloadManagerHead = (port = 7000, additional = '') => {
   return (head) => `${head}
+
+${additional}
 
 <script>
 (function () {
