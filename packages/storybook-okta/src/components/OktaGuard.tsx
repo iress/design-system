@@ -4,7 +4,7 @@ import { getOkta } from '../helpers/oktaRegister';
 import { type AuthStateEventHandler } from '@okta/okta-auth-js';
 import { ADDON_ID } from '../constants';
 import { LoginSplash } from './LoginSplash';
-import { useAddonConfigForManager } from 'src/hooks/useAddonConfig';
+import { useAddonConfigForManager } from '../hooks/useAddonConfig';
 
 interface OktaGuardProps {
   api: API;

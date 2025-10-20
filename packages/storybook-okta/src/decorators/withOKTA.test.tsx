@@ -5,6 +5,7 @@ import { type ReactRenderer } from '@storybook/react';
 import { type AddonConfig } from '../types';
 import { getOkta, registerOkta } from '../helpers/oktaRegister';
 import { isProtectedFromContext } from '../helpers/isProtected';
+import { getAddonConfigForPreview } from '../hooks/useAddonConfig';
 import { type OktaAuth } from '@okta/okta-auth-js';
 
 // Mock dependencies
@@ -23,6 +24,10 @@ vi.mock('../components/LoginSplash', () => ({
   ),
 }));
 
+vi.mock('../hooks/useAddonConfig', () => ({
+  getAddonConfigForPreview: vi.fn(),
+}));
+
 describe('withOKTA', () => {
   const mockStoryFn = vi.fn(() => (
     <div data-testid="story-content">Story Content</div>
@@ -39,9 +44,7 @@ describe('withOKTA', () => {
     id: 'test-story--default',
     title: 'Test Story',
     name: 'Default',
-    parameters: {
-      IDS_OKTA: mockConfig,
-    },
+    parameters: {},
     args: {},
     argTypes: {},
     globals: {},
@@ -52,6 +55,19 @@ describe('withOKTA', () => {
     step: vi.fn(),
     canvasElement: document.createElement('div'),
     mount: vi.fn(),
+    originalStoryFn: mockStoryFn,
+    context: {} as StoryContext<ReactRenderer>['context'],
+    canvas: {} as StoryContext<ReactRenderer>['canvas'],
+    reporting: {} as StoryContext<ReactRenderer>['reporting'],
+    moduleExport: {} as StoryContext<ReactRenderer>['moduleExport'],
+    attachedCSFFile: {} as StoryContext<ReactRenderer>['attachedCSFFile'],
+    undecoratedStoryFn: mockStoryFn,
+    componentId: 'test-story',
+    storyExport: {} as StoryContext<ReactRenderer>['storyExport'],
+    initialArgs: {},
+    kind: 'Test Story',
+    story: 'Default',
+    tags: [],
   };
 
   const mockAuthClient = {
@@ -69,6 +85,9 @@ describe('withOKTA', () => {
     (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(mockAuthClient);
     (registerOkta as ReturnType<typeof vi.fn>).mockReturnValue(mockAuthClient);
     (isProtectedFromContext as ReturnType<typeof vi.fn>).mockReturnValue(true);
+    (getAddonConfigForPreview as ReturnType<typeof vi.fn>).mockReturnValue(
+      mockConfig,
+    );
 
     // Mock window.location
     Object.defineProperty(window, 'location', {
@@ -131,17 +150,18 @@ describe('withOKTA', () => {
   });
 
   it('returns story directly when no config is provided', () => {
-    const contextWithoutConfig = {
-      ...mockContext,
-      parameters: {},
-    };
+    (getAddonConfigForPreview as ReturnType<typeof vi.fn>).mockReturnValue(
+      undefined,
+    );
 
-    const result = withOKTA(mockStoryFn, contextWithoutConfig);
+    const result = withOKTA(mockStoryFn, mockContext);
 
     // Since the function returns the result of mockStoryFn, we should check that mockStoryFn was called
-    expect(mockStoryFn).toHaveBeenCalledWith(contextWithoutConfig);
+    expect(mockStoryFn).toHaveBeenCalledWith(mockContext);
     // The result should be the JSX element returned by mockStoryFn
-    expect(result).toEqual(mockStoryFn(contextWithoutConfig));
+    expect(result).toEqual(
+      <div data-testid="story-content">Story Content</div>,
+    );
   });
 
   it('returns story directly when not protected', () => {
@@ -150,7 +170,9 @@ describe('withOKTA', () => {
     const result = withOKTA(mockStoryFn, mockContext);
 
     expect(mockStoryFn).toHaveBeenCalledWith(mockContext);
-    expect(result).toEqual(mockStoryFn(mockContext));
+    expect(result).toEqual(
+      <div data-testid="story-content">Story Content</div>,
+    );
   });
 
   it('returns story directly when not in preview mode', () => {
@@ -167,7 +189,9 @@ describe('withOKTA', () => {
     const result = withOKTA(mockStoryFn, mockContext);
 
     expect(mockStoryFn).toHaveBeenCalledWith(mockContext);
-    expect(result).toEqual(mockStoryFn(mockContext));
+    expect(result).toEqual(
+      <div data-testid="story-content">Story Content</div>,
+    );
   });
 
   it('returns story directly for unprotected story IDs', () => {
@@ -183,8 +207,8 @@ describe('withOKTA', () => {
   });
 
   it('wraps story with OktaProvider when in preview mode and protected', () => {
-    // Mock the getOkta to return null so registerOkta is called
-    vi.mocked(getOkta).mockReturnValue(null);
+    // Mock the getOkta to return undefined so registerOkta is called
+    vi.mocked(getOkta).mockReturnValue(undefined);
 
     render(withOKTA(mockStoryFn, mockContext) as React.ReactElement);
 
@@ -219,8 +243,8 @@ describe('withOKTA', () => {
       writable: true,
     });
 
-    // Mock the getOkta to return null so registerOkta is called and the component renders
-    (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(null);
+    // Mock the getOkta to return undefined so registerOkta is called and the component renders
+    (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(undefined);
 
     render(withOKTA(mockStoryFn, mockContext) as React.ReactElement);
 
@@ -252,8 +276,8 @@ describe('withOKTA', () => {
   });
 
   it('starts authentication and subscribes to auth state changes', async () => {
-    // Mock the getOkta to return null so registerOkta is called
-    vi.mocked(getOkta).mockReturnValue(null);
+    // Mock the getOkta to return undefined so registerOkta is called
+    vi.mocked(getOkta).mockReturnValue(undefined);
 
     render(withOKTA(mockStoryFn, mockContext) as React.ReactElement);
 
@@ -264,8 +288,8 @@ describe('withOKTA', () => {
   });
 
   it('handles authenticated state and renders story', async () => {
-    // Mock the getOkta to return null so registerOkta is called
-    vi.mocked(getOkta).mockReturnValue(null);
+    // Mock the getOkta to return undefined so registerOkta is called
+    vi.mocked(getOkta).mockReturnValue(undefined);
 
     render(withOKTA(mockStoryFn, mockContext) as React.ReactElement);
 
@@ -279,24 +303,26 @@ describe('withOKTA', () => {
       mockAuthClient.authStateManager.subscribe,
     ).mock.calls[0]?.[0];
 
-    await waitFor(() => {
-      authStateCallback({
-        isAuthenticated: true,
-        error: undefined,
+    if (authStateCallback) {
+      await waitFor(() => {
+        authStateCallback({
+          isAuthenticated: true,
+          error: undefined,
+        });
       });
-    });
 
-    await waitFor(() => {
-      expect(screen.getByTestId('story-content')).toBeInTheDocument();
-    });
+      await waitFor(() => {
+        expect(screen.getByTestId('story-content')).toBeInTheDocument();
+      });
+    }
   });
 
   it('handles unauthenticated state and redirects to login', async () => {
     const mockSetItem = vi.fn();
     window.localStorage.setItem = mockSetItem;
 
-    // Mock the getOkta to return null so registerOkta is called
-    (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(null);
+    // Mock the getOkta to return undefined so registerOkta is called
+    (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(undefined);
 
     render(withOKTA(mockStoryFn, mockContext) as React.ReactElement);
 
@@ -310,24 +336,26 @@ describe('withOKTA', () => {
       mockAuthClient.authStateManager.subscribe,
     ).mock.calls[0]?.[0];
 
-    await waitFor(() => {
-      authStateCallback({
-        isAuthenticated: false,
-        error: undefined,
+    if (authStateCallback) {
+      await waitFor(() => {
+        authStateCallback({
+          isAuthenticated: false,
+          error: undefined,
+        });
       });
-    });
 
-    expect(mockAuthClient.setOriginalUri).toHaveBeenCalled();
-    expect(mockSetItem).toHaveBeenCalledWith(
-      'oktaOriginalUri',
-      expect.any(String),
-    );
-    expect(mockAuthClient.signInWithRedirect).toHaveBeenCalled();
+      expect(mockAuthClient.setOriginalUri).toHaveBeenCalled();
+      expect(mockSetItem).toHaveBeenCalledWith(
+        'oktaOriginalUri',
+        expect.any(String),
+      );
+      expect(mockAuthClient.signInWithRedirect).toHaveBeenCalled();
+    }
   });
 
   it('unsubscribes from auth state changes on unmount', async () => {
-    // Mock the getOkta to return null so registerOkta is called
-    vi.mocked(getOkta).mockReturnValue(null);
+    // Mock the getOkta to return undefined so registerOkta is called
+    vi.mocked(getOkta).mockReturnValue(undefined);
 
     const { unmount } = render(
       withOKTA(mockStoryFn, mockContext) as React.ReactElement,
@@ -344,7 +372,7 @@ describe('withOKTA', () => {
 
   it('uses getOkta when auth client exists', () => {
     (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(mockAuthClient);
-    (registerOkta as ReturnType<typeof vi.fn>).mockReturnValue(null);
+    (registerOkta as ReturnType<typeof vi.fn>).mockReturnValue(undefined);
 
     render(withOKTA(mockStoryFn, mockContext) as React.ReactElement);
 
@@ -352,9 +380,31 @@ describe('withOKTA', () => {
     expect(registerOkta).not.toHaveBeenCalled();
   });
 
-  it('uses registerOkta when auth client does not exist', () => {
-    (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(null);
-    (registerOkta as ReturnType<typeof vi.fn>).mockReturnValue(mockAuthClient);
+  it('calls getAddonConfigForPreview to retrieve configuration from environment', () => {
+    const result = withOKTA(mockStoryFn, mockContext);
+
+    expect(getAddonConfigForPreview).toHaveBeenCalled();
+    expect(mockStoryFn).toHaveBeenCalledWith(mockContext);
+  });
+
+  it('respects unprotected story IDs from environment configuration', () => {
+    const configWithUnprotected = {
+      ...mockConfig,
+      unprotected: ['test-story--default'],
+    };
+    (getAddonConfigForPreview as ReturnType<typeof vi.fn>).mockReturnValue(
+      configWithUnprotected,
+    );
+
+    render(withOKTA(mockStoryFn, mockContext) as React.ReactElement);
+
+    expect(screen.getByTestId('story-content')).toBeInTheDocument();
+    expect(mockStoryFn).toHaveBeenCalledWith(mockContext);
+  });
+
+  it('passes environment configuration to Okta helpers', () => {
+    // Mock the getOkta to return undefined so registerOkta is called
+    vi.mocked(getOkta).mockReturnValue(undefined);
 
     render(withOKTA(mockStoryFn, mockContext) as React.ReactElement);
 

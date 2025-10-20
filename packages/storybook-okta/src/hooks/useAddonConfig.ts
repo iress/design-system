@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { ADDON_OPTIONS } from 'src/constants';
-import { registerOkta } from 'src/helpers/oktaRegister';
-import type { AddonConfig } from 'src/types';
+import { ADDON_OPTIONS } from '../constants';
+import { registerOkta } from '../helpers/oktaRegister';
+import type { AddonConfig } from '../types';
 import { addons } from 'storybook/internal/manager-api';
 
 export const useAddonConfigForManager = () => {

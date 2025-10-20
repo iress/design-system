@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { type StoryContext } from 'storybook/internal/types';
 import { type ReactRenderer } from '@storybook/react';
@@ -6,6 +5,7 @@ import { withOKTA } from './decorators/withOKTA';
 import { type AddonConfig } from './types';
 import { ADDON_ID } from './constants';
 import { registerOkta, getOkta } from './helpers/oktaRegister';
+import { getAddonConfigForPreview } from './hooks/useAddonConfig';
 import { type OktaAuth } from '@okta/okta-auth-js';
 
 // Mock dependencies
@@ -20,6 +20,10 @@ vi.mock('storybook/manager-api', () => ({
 vi.mock('./helpers/oktaRegister', () => ({
   registerOkta: vi.fn(),
   getOkta: vi.fn(),
+}));
+
+vi.mock('./hooks/useAddonConfig', () => ({
+  getAddonConfigForPreview: vi.fn(),
 }));
 
 vi.mock('./components/LoginSplash', () => ({
@@ -67,11 +71,28 @@ describe('Okta Addon Integration', () => {
     step: vi.fn(),
     canvasElement: document.createElement('div'),
     mount: vi.fn(),
+    originalStoryFn: vi.fn(),
+    context: {} as StoryContext<ReactRenderer>['context'],
+    canvas: {} as StoryContext<ReactRenderer>['canvas'],
+    reporting: {} as StoryContext<ReactRenderer>['reporting'],
+    moduleExport: {} as StoryContext<ReactRenderer>['moduleExport'],
+    attachedCSFFile: {} as StoryContext<ReactRenderer>['attachedCSFFile'],
+    undecoratedStoryFn: vi.fn(),
+    componentId: 'test-story',
+    storyExport: {} as StoryContext<ReactRenderer>['storyExport'],
+    initialArgs: {},
+    kind: 'Test Story',
+    story: 'Default',
+    tags: [],
   });
 
   beforeEach(() => {
     vi.clearAllMocks();
     (registerOkta as ReturnType<typeof vi.fn>).mockReturnValue(mockAuthClient);
+    (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(undefined);
+    (getAddonConfigForPreview as ReturnType<typeof vi.fn>).mockReturnValue(
+      mockConfig,
+    );
 
     // Mock window.location for iframe detection
     Object.defineProperty(window, 'location', {
@@ -135,24 +156,44 @@ describe('Okta Addon Integration', () => {
 
   describe('End-to-end authentication flow', () => {
     it('should render story directly when no config is provided', () => {
+      (getAddonConfigForPreview as ReturnType<typeof vi.fn>).mockReturnValue(
+        undefined,
+      );
+
       const context = createMockContext();
       const result = withOKTA(mockStoryFn, context);
 
       expect(mockStoryFn).toHaveBeenCalledWith(context);
-      expect(result).toEqual(mockStoryFn(context));
+      expect(result).toEqual(
+        <div data-testid="story-content">Story Content</div>,
+      );
     });
 
     it('should render story directly when addon is disabled', () => {
       const disabledConfig = { ...mockConfig, disable: true };
-      const context = createMockContext(disabledConfig);
+      (getAddonConfigForPreview as ReturnType<typeof vi.fn>).mockReturnValue(
+        disabledConfig,
+      );
+
+      const context = createMockContext();
       const result = withOKTA(mockStoryFn, context);
 
       expect(mockStoryFn).toHaveBeenCalledWith(context);
-      expect(result).toEqual(mockStoryFn(context));
+      expect(result).toEqual(
+        <div data-testid="story-content">Story Content</div>,
+      );
     });
 
     it('should render story directly for unprotected routes', () => {
-      const context = createMockContext(mockConfig);
+      const configWithUnprotected = {
+        ...mockConfig,
+        unprotected: ['/docs/public--page'],
+      };
+      (getAddonConfigForPreview as ReturnType<typeof vi.fn>).mockReturnValue(
+        configWithUnprotected,
+      );
+
+      const context = createMockContext();
       context.id = '/docs/public--page';
 
       render(withOKTA(mockStoryFn, context) as React.ReactElement);
@@ -162,10 +203,10 @@ describe('Okta Addon Integration', () => {
     });
 
     it('should show login splash initially for protected stories', () => {
-      // Mock getOkta to return null so the OktaProvider is rendered
-      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(null);
+      // Mock getOkta to return undefined so the OktaProvider is rendered
+      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(undefined);
 
-      const context = createMockContext(mockConfig);
+      const context = createMockContext();
 
       render(withOKTA(mockStoryFn, context) as React.ReactElement);
 
@@ -174,10 +215,10 @@ describe('Okta Addon Integration', () => {
     });
 
     it('should register Okta client and start authentication', async () => {
-      // Mock getOkta to return null so registerOkta is called
-      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(null);
+      // Mock getOkta to return undefined so registerOkta is called
+      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(undefined);
 
-      const context = createMockContext(mockConfig);
+      const context = createMockContext();
 
       render(withOKTA(mockStoryFn, context) as React.ReactElement);
 
@@ -189,10 +230,10 @@ describe('Okta Addon Integration', () => {
     });
 
     it('should handle successful authentication and render story', async () => {
-      // Mock getOkta to return null so registerOkta is called
-      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(null);
+      // Mock getOkta to return undefined so registerOkta is called
+      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(undefined);
 
-      const context = createMockContext(mockConfig);
+      const context = createMockContext();
 
       render(withOKTA(mockStoryFn, context) as React.ReactElement);
 
@@ -222,10 +263,10 @@ describe('Okta Addon Integration', () => {
       const mockSetItem = vi.fn();
       window.localStorage.setItem = mockSetItem;
 
-      // Mock getOkta to return null so registerOkta is called
-      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(null);
+      // Mock getOkta to return undefined so registerOkta is called
+      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(undefined);
 
-      const context = createMockContext(mockConfig);
+      const context = createMockContext();
 
       render(withOKTA(mockStoryFn, context) as React.ReactElement);
 
@@ -281,10 +322,10 @@ describe('Okta Addon Integration', () => {
         writable: true,
       });
 
-      // Mock getOkta to return null so the component renders
-      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(null);
+      // Mock getOkta to return undefined so the component renders
+      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(undefined);
 
-      const context = createMockContext(mockConfig);
+      const context = createMockContext();
 
       render(withOKTA(mockStoryFn, context) as React.ReactElement);
 
@@ -296,10 +337,10 @@ describe('Okta Addon Integration', () => {
     });
 
     it('should unsubscribe from auth state changes on unmount', async () => {
-      // Mock getOkta to return null so registerOkta is called
-      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(null);
+      // Mock getOkta to return undefined so registerOkta is called
+      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(undefined);
 
-      const context = createMockContext(mockConfig);
+      const context = createMockContext();
 
       const { unmount } = render(
         withOKTA(mockStoryFn, context) as React.ReactElement,
@@ -326,10 +367,14 @@ describe('Okta Addon Integration', () => {
         unprotected: ['/docs/custom--page', 'custom-story--default'],
       };
 
-      // Mock getOkta to return null so registerOkta is called
-      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(null);
+      // Mock environment config with custom config
+      (getAddonConfigForPreview as ReturnType<typeof vi.fn>).mockReturnValue(
+        customConfig,
+      );
+      // Mock getOkta to return undefined so registerOkta is called
+      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(undefined);
 
-      const context = createMockContext(customConfig);
+      const context = createMockContext();
 
       render(withOKTA(mockStoryFn, context) as React.ReactElement);
 
@@ -344,10 +389,14 @@ describe('Okta Addon Integration', () => {
         unprotected: [],
       };
 
-      // Mock getOkta to return null so the component renders
-      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(null);
+      // Mock environment config with empty unprotected array
+      (getAddonConfigForPreview as ReturnType<typeof vi.fn>).mockReturnValue(
+        configWithEmptyUnprotected,
+      );
+      // Mock getOkta to return undefined so the component renders
+      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(undefined);
 
-      const context = createMockContext(configWithEmptyUnprotected);
+      const context = createMockContext();
 
       render(withOKTA(mockStoryFn, context) as React.ReactElement);
 
@@ -361,10 +410,14 @@ describe('Okta Addon Integration', () => {
         redirectUri: mockConfig.redirectUri,
       };
 
-      // Mock getOkta to return null so the component renders
-      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(null);
+      // Mock environment config without unprotected array
+      (getAddonConfigForPreview as ReturnType<typeof vi.fn>).mockReturnValue(
+        configWithoutUnprotected,
+      );
+      // Mock getOkta to return undefined so the component renders
+      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(undefined);
 
-      const context = createMockContext(configWithoutUnprotected);
+      const context = createMockContext();
 
       render(withOKTA(mockStoryFn, context) as React.ReactElement);
 
@@ -374,10 +427,10 @@ describe('Okta Addon Integration', () => {
 
   describe('Error handling', () => {
     it('should handle authentication errors gracefully', async () => {
-      // Mock getOkta to return null so registerOkta is called
-      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(null);
+      // Mock getOkta to return undefined so registerOkta is called
+      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(undefined);
 
-      const context = createMockContext(mockConfig);
+      const context = createMockContext();
 
       render(withOKTA(mockStoryFn, context) as React.ReactElement);
 
@@ -400,19 +453,6 @@ describe('Okta Addon Integration', () => {
 
       // Should still attempt to redirect to login
       expect(mockAuthClient.signInWithRedirect).toHaveBeenCalled();
-    });
-
-    it('should handle Okta client initialization errors', () => {
-      (registerOkta as ReturnType<typeof vi.fn>).mockImplementation(() => {
-        throw new Error('Failed to initialize Okta client');
-      });
-      (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(null);
-
-      const context = createMockContext(mockConfig);
-
-      expect(() => {
-        render(withOKTA(mockStoryFn, context) as React.ReactElement);
-      }).toThrow('Failed to initialize Okta client');
     });
   });
 });

@@ -9,7 +9,7 @@ import { type AddonConfig } from '../types';
 import { getOkta, registerOkta } from '../helpers/oktaRegister';
 import { LoginSplash } from '../components/LoginSplash';
 import { type AuthStateEventHandler } from '@okta/okta-auth-js';
-import { getAddonConfigForPreview } from 'src/hooks/useAddonConfig';
+import { getAddonConfigForPreview } from '../hooks/useAddonConfig';
 
 interface OktaProviderProps {
   children: React.ReactNode;

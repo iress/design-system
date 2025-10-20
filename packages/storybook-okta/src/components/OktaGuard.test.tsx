@@ -3,11 +3,17 @@ import { type API, useAddonState } from 'storybook/internal/manager-api';
 import { OktaGuard } from './OktaGuard';
 import { type AddonConfig } from '../types';
 import { getOkta } from '../helpers/oktaRegister';
+import { useAddonConfigForManager } from '../hooks/useAddonConfig';
 import { type OktaAuth } from '@okta/okta-auth-js';
 
 // Mock the oktaRegister helper
 vi.mock('../helpers/oktaRegister', () => ({
   getOkta: vi.fn(),
+}));
+
+// Mock the useAddonConfigForManager hook
+vi.mock('../hooks/useAddonConfig', () => ({
+  useAddonConfigForManager: vi.fn(),
 }));
 
 // Mock the LoginSplash component
@@ -19,12 +25,25 @@ vi.mock('./LoginSplash', () => ({
 
 // Mock the useAddonState hook
 const mockSetState = vi.fn();
+const mockChannel = {
+  on: vi.fn(),
+  off: vi.fn(),
+  emit: vi.fn(),
+};
 
 vi.mock('storybook/internal/manager-api', () => ({
   useAddonState: vi.fn(() => [
     { isAuthenticated: false, error: undefined },
     mockSetState,
   ]),
+  addons: {
+    getChannel: vi.fn(() => mockChannel),
+  },
+}));
+
+// Mock the config hook
+vi.mock('../../hooks/useAddonConfigForManager', () => ({
+  useAddonConfigForManager: vi.fn(),
 }));
 
 // Mock Storybook theming to avoid matchMedia issues
@@ -69,6 +88,10 @@ describe('OktaGuard', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+
+    // Mock useAddonConfigForManager to return the config
+    vi.mocked(useAddonConfigForManager).mockReturnValue(mockConfig);
+
     vi.mocked(getOkta).mockReturnValue(mockAuthClient);
 
     // Set up the useAddonState mock to return our mockSetState
@@ -84,6 +107,8 @@ describe('OktaGuard', () => {
       path: '/story/test--default',
       storyId: 'test--default',
       url: '/story/test--default',
+      queryParams: {},
+      hash: '',
     });
 
     // Mock localStorage
@@ -136,7 +161,7 @@ describe('OktaGuard', () => {
   });
 
   it('renders LoginSplash when not authenticated', () => {
-    render(<OktaGuard api={mockApi} config={mockConfig} />);
+    render(<OktaGuard api={mockApi} />);
 
     expect(screen.getByTestId('login-splash')).toBeInTheDocument();
     expect(screen.getByText('Logging in...')).toBeInTheDocument();
@@ -150,7 +175,7 @@ describe('OktaGuard', () => {
       mockSetState,
     ]);
 
-    render(<OktaGuard api={mockApi} config={mockConfig} />);
+    render(<OktaGuard api={mockApi} />);
 
     expect(screen.getByTestId('login-splash')).toBeInTheDocument();
     expect(screen.getByText('Authentication failed')).toBeInTheDocument();
@@ -164,9 +189,7 @@ describe('OktaGuard', () => {
       mockSetState,
     ]);
 
-    const { container } = render(
-      <OktaGuard api={mockApi} config={mockConfig} />,
-    );
+    const { container } = render(<OktaGuard api={mockApi} />);
 
     expect(container.firstChild).toBeNull();
   });
@@ -176,9 +199,11 @@ describe('OktaGuard', () => {
       path: '/docs/test--page',
       storyId: 'test--default',
       url: '/docs/test--page',
+      queryParams: {},
+      hash: '',
     });
 
-    render(<OktaGuard api={mockApi} config={mockConfig} />);
+    render(<OktaGuard api={mockApi} />);
 
     await waitFor(() => {
       expect(mockSetState).toHaveBeenCalledWith({
@@ -194,13 +219,20 @@ describe('OktaGuard', () => {
       unprotected: ['test--default'],
     };
 
+    // Mock the config hook to return config with unprotected story IDs for this test
+    vi.mocked(useAddonConfigForManager).mockReturnValue(
+      configWithUnprotectedStoryId,
+    );
+
     vi.mocked(mockApi.getUrlState).mockReturnValue({
       path: '/story/test--default',
       storyId: 'test--default',
       url: '/story/test--default',
+      queryParams: {},
+      hash: '',
     });
 
-    render(<OktaGuard api={mockApi} config={configWithUnprotectedStoryId} />);
+    render(<OktaGuard api={mockApi} />);
 
     await waitFor(() => {
       expect(mockSetState).toHaveBeenCalledWith({
@@ -213,7 +245,8 @@ describe('OktaGuard', () => {
   it('handles login redirect callback', async () => {
     vi.mocked(mockAuthClient.token.isLoginRedirect).mockReturnValue(true);
     vi.mocked(mockAuthClient.token.parseFromUrl).mockResolvedValue({
-      tokens: { accessToken: 'test-token' },
+      tokens: { accessToken: 'test-token' as any },
+      state: 'test-state',
     });
 
     const mockGetItem = vi
@@ -224,16 +257,20 @@ describe('OktaGuard', () => {
     window.localStorage.removeItem = mockRemoveItem;
 
     // Mock window.location.href setter
-    delete (window as unknown as { location: unknown }).location;
-    window.location = { href: '' } as Location;
+    Object.defineProperty(window, 'location', {
+      value: { href: '' },
+      writable: true,
+    });
 
     vi.mocked(mockApi.getUrlState).mockReturnValue({
       path: '/callback',
-      storyId: null,
+      storyId: undefined,
       url: '/callback',
+      queryParams: {},
+      hash: '',
     });
 
-    render(<OktaGuard api={mockApi} config={mockConfig} />);
+    render(<OktaGuard api={mockApi} />);
 
     await waitFor(() => {
       expect(vi.mocked(mockAuthClient.token.parseFromUrl)).toHaveBeenCalled();
@@ -260,11 +297,13 @@ describe('OktaGuard', () => {
 
     vi.mocked(mockApi.getUrlState).mockReturnValue({
       path: '/callback',
-      storyId: null,
+      storyId: undefined,
       url: '/callback',
+      queryParams: {},
+      hash: '',
     });
 
-    render(<OktaGuard api={mockApi} config={mockConfig} />);
+    render(<OktaGuard api={mockApi} />);
 
     await waitFor(() => {
       expect(vi.mocked(mockApi.addNotification)).toHaveBeenCalledWith({
@@ -277,7 +316,7 @@ describe('OktaGuard', () => {
   });
 
   it('subscribes to auth state changes and starts authentication', async () => {
-    render(<OktaGuard api={mockApi} config={mockConfig} />);
+    render(<OktaGuard api={mockApi} />);
 
     await waitFor(() => {
       expect(mockAuthClient.authStateManager.subscribe).toHaveBeenCalled();
@@ -289,7 +328,7 @@ describe('OktaGuard', () => {
     const mockSetItem = vi.fn();
     window.localStorage.setItem = mockSetItem;
 
-    render(<OktaGuard api={mockApi} config={mockConfig} />);
+    render(<OktaGuard api={mockApi} />);
 
     // Simulate the auth state callback being called with unauthenticated state
     const authStateCallback = vi.mocked(
@@ -297,7 +336,7 @@ describe('OktaGuard', () => {
     ).mock.calls[0]?.[0];
 
     await waitFor(() => {
-      authStateCallback({
+      authStateCallback?.({
         isAuthenticated: false,
         error: undefined,
       });
@@ -314,7 +353,7 @@ describe('OktaGuard', () => {
   });
 
   it('handles authenticated state', async () => {
-    render(<OktaGuard api={mockApi} config={mockConfig} />);
+    render(<OktaGuard api={mockApi} />);
 
     // Simulate the auth state callback being called with authenticated state
     const authStateCallback = vi.mocked(
@@ -322,7 +361,7 @@ describe('OktaGuard', () => {
     ).mock.calls[0]?.[0];
 
     await waitFor(() => {
-      authStateCallback({
+      authStateCallback?.({
         isAuthenticated: true,
         error: undefined,
       });
@@ -335,7 +374,7 @@ describe('OktaGuard', () => {
   });
 
   it('handles auth state with error', async () => {
-    render(<OktaGuard api={mockApi} config={mockConfig} />);
+    render(<OktaGuard api={mockApi} />);
 
     // Simulate the auth state callback being called with error
     const authStateCallback = vi.mocked(
@@ -343,7 +382,7 @@ describe('OktaGuard', () => {
     ).mock.calls[0]?.[0];
 
     await waitFor(() => {
-      authStateCallback({
+      authStateCallback?.({
         isAuthenticated: false,
         error: new Error('Auth error'),
       });
@@ -361,12 +400,14 @@ describe('OktaGuard', () => {
       path: '/story/protected--page',
       storyId: 'protected--page',
       url: '/story/protected--page',
+      queryParams: {},
+      hash: '',
     });
 
     // Ensure isLoginRedirect returns false so we go through the normal auth flow
     vi.mocked(mockAuthClient.token.isLoginRedirect).mockReturnValue(false);
 
-    const { unmount } = render(<OktaGuard api={mockApi} config={mockConfig} />);
+    const { unmount } = render(<OktaGuard api={mockApi} />);
 
     // Wait for the component to set up the subscription
     await waitFor(() => {
@@ -383,15 +424,15 @@ describe('OktaGuard', () => {
   });
 
   it('handles navigation changes', async () => {
-    const { rerender } = render(
-      <OktaGuard api={mockApi} config={mockConfig} />,
-    );
+    const { rerender } = render(<OktaGuard api={mockApi} />);
 
     // Change the URL state
     vi.mocked(mockApi.getUrlState).mockReturnValue({
       path: '/story/another--story',
       storyId: 'another--story',
       url: '/story/another--story',
+      queryParams: {},
+      hash: '',
     });
 
     // Trigger a navigation change by calling pushState
@@ -399,7 +440,7 @@ describe('OktaGuard', () => {
     window.dispatchEvent(pushStateEvent);
 
     // Re-render to trigger the effect
-    rerender(<OktaGuard api={mockApi} config={mockConfig} />);
+    rerender(<OktaGuard api={mockApi} />);
 
     await waitFor(() => {
       expect(mockAuthClient.start).toHaveBeenCalled();

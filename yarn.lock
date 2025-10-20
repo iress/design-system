@@ -1388,6 +1388,7 @@ __metadata:
     "@types/react": "npm:^18.2.65"
     "@types/react-dom": "npm:^18.2.21"
     "@vitejs/plugin-react": "npm:^4.2.1"
+    "@vitest/coverage-v8": "npm:3.2.4"
     chokidar: "npm:^4.0.3"
     concurrently: "npm:^9.2.1"
     prettier: "npm:^3.3.3"
@@ -1397,6 +1398,7 @@ __metadata:
     tsup: "npm:^8.2.4"
     typescript: "npm:^5.8.2"
     vite: "npm:^7.1.7"
+    vitest: "npm:3.2.4"
   peerDependencies:
     react: ^18.0.0
     react-dom: ^18.0.0

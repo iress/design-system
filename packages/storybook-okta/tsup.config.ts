@@ -102,7 +102,13 @@ export default defineConfig(async (options) => {
       format: ['esm', 'cjs'],
       platform: 'browser',
       target: BROWSER_TARGETS,
-      external: [...globalPreviewPackages, ...Object.keys(peerDependencies)],
+      external: [
+        ...globalManagerPackages,
+        ...globalPreviewPackages,
+        '@storybook/react',
+        '@storybook/react-vite',
+        ...Object.keys(peerDependencies),
+      ],
     });
   }
 
