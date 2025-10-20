@@ -1,7 +1,7 @@
 {
   "name": "@iress-oss/ids-storybook-toggle-stories",
   "version": "0.0.0",
-  "description": "A Storybook addon that displays the current version of your design system in the Storybook toolbar.",
+  "description": "A Storybook addon that adds a toolbar button to toggle between different story variants.",
   "keywords": [
     "storybook-addons"
   ],
@@ -70,7 +70,7 @@
     ]
   },
   "storybook": {
-    "displayName": "Storybook Version Badge",
+    "displayName": "Storybook Toggle Stories",
     "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
   }
 }
