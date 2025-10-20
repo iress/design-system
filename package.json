@@ -36,12 +36,12 @@
     "zx": "^8.8.4"
   },
   "scripts": {
-    "build": "yarn workspaces foreach -Apt run build",
+    "build": "yarn workspaces foreach -Apti run build",
     "prepublish": "tsx ./scripts/storybook-addon-prepublish.ts",
     "prepare": "husky",
     "storybook:serve-addon": "tsx ./scripts/storybook-addon-server.ts",
-    "test": "yarn workspaces foreach -Apt run test",
-    "test:coverage": "yarn workspaces foreach -Apt run test:coverage",
-    "typecheck": "yarn workspaces foreach -Apt run typecheck"
+    "test": "yarn workspaces foreach -Apti run test",
+    "test:coverage": "yarn workspaces foreach -Apti run test:coverage",
+    "typecheck": "yarn workspaces foreach -Apti run typecheck"
   }
 }
