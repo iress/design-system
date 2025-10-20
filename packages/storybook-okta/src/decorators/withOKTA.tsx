@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import type {
   PartialStoryFn as StoryFunction,
   StoryContext,
@@ -12,7 +12,7 @@ import { type AuthStateEventHandler } from '@okta/okta-auth-js';
 import { getAddonConfigForPreview } from '../hooks/useAddonConfig';
 
 interface OktaProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
   config: AddonConfig;
 }
 
