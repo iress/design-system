@@ -5,7 +5,7 @@ Protect your Storybook instance(s) using OKTA
 ## Installation
 
 ```sh
-yarn add @iress-oss/ids-storybook-okta
+yarn add --dev @iress-oss/ids-storybook-okta
 ```
 
 ## Usage

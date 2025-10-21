@@ -22,3 +22,4 @@ coverage
 dist
 generated
 packages/components/src/styled-system
+storybook-static

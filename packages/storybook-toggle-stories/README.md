@@ -5,7 +5,7 @@ This Storybook addon provides a toolbar button to toggle the visibility of stori
 ## Installation
 
 ```sh
-yarn add @iress-oss/ids-storybook-toggle-stories
+yarn add --dev @iress-oss/ids-storybook-toggle-stories
 ```
 
 ## Usage

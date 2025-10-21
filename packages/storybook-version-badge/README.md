@@ -5,7 +5,7 @@ This Storybook addon displays the current version of your design system in the S
 ## Installation
 
 ```sh
-yarn add @iress-oss/ids-storybook-version-badge
+yarn add --dev @iress-oss/ids-storybook-version-badge
 ```
 
 ## Usage

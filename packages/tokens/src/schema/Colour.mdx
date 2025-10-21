@@ -1,0 +1,62 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import { IressStack } from '@iress-oss/ids-components';
+import * as ComponentStories from './Colour.stories';
+import colour from './colour';
+
+<Meta of={ComponentStories} />
+
+# Colour
+
+Colour is an integral aspect of conveying clear concise data. Our colours are optimized across two backgrounds, meeting or exceeding [WCAG 2.1 Level AA Accessibility Guidelines](https://www.w3.org/TR/WCAG21/#contrast-minimum).
+
+The default theme is designed to meet WCAG contrast guidelines. We can't guarantee this when consumer branding is applied, so colour combinations should be checked to ensure conformance.
+
+## Primary
+
+<Story of={ComponentStories.Primary} />
+
+---
+
+## Neutral
+
+<Story of={ComponentStories.Neutral} />
+
+---
+
+## Accent
+
+<Story of={ComponentStories.Accent} />
+
+---
+
+## System colours
+
+<p>{colour.system.$description}</p>
+
+### Success (Positive)
+
+<Story of={ComponentStories.Success} />
+
+---
+
+### Danger (Negative)
+
+<Story of={ComponentStories.Danger} />
+
+---
+
+### Warning
+
+<Story of={ComponentStories.Warning} />
+
+---
+
+### Information
+
+<Story of={ComponentStories.Info} />
+
+---
+
+### Backdrop
+
+<Story of={ComponentStories.Backdrop} />

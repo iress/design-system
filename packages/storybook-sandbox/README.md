@@ -5,7 +5,7 @@ This Storybook addon provides a sandbox environment for testing and experimentin
 ## Installation
 
 ```sh
-yarn add @iress-oss/ids-storybook-sandbox
+yarn add --dev @iress-oss/ids-storybook-sandbox
 ```
 
 ## Usage

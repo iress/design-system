@@ -19,8 +19,10 @@ export default defineConfig({
     }),
     react(),
     dts({
+      include: 'src/**/*',
       exclude: [
         'docs/**/*',
+        'node_modules/**/*',
         'src/**/*.test.*',
         'src/**/mocks/**/*',
         'src/**/*.stories.*',
