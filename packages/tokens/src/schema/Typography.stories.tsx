@@ -187,7 +187,7 @@ export const Headings: Story = {
           );
 
           return (
-            <IressRow gutter="xl">
+            <IressRow gutter="xl" key={tokenName}>
               <IressCol span={{ lg: 8 }}>
                 <IressText textStyle={tokenName as never} mb="sm">
                   {name}
@@ -245,7 +245,7 @@ export const Body: Story = {
     children: (
       <IressStack gap="xl">
         {body.map(({ name, token, tokenName }) => (
-          <IressRow gutter="xl">
+          <IressRow gutter="xl" key={tokenName}>
             <IressCol span={{ lg: 4 }}>
               <IressText textStyle={tokenName as never} mb="sm">
                 The <strong>quick</strong> brown fox jumps over the{' '}
@@ -263,7 +263,7 @@ export const Body: Story = {
               );
 
               return (
-                <IressCol pt="sm">
+                <IressCol pt="sm" key={variant}>
                   <IressStack gap="sm">
                     <IressInline gap="sm">
                       <strong>Font</strong>

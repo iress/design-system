@@ -14,6 +14,7 @@ const config: StorybookConfig = {
       },
     },
     '@iress-oss/ids-storybook-version-badge',
+    './local-preset.cjs',
   ],
   core: {
     disableTelemetry: true,
