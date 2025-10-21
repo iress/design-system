@@ -88,8 +88,8 @@ const CssSpark = ({
   return (
     <>
       {trimmed && (
-        <IressTooltip tooltipText={prop ?? ''}>
-          {prop?.split(',')[0]}
+        <IressTooltip tooltipText={prop ?? ''} align="bottom">
+          <button>{prop?.split(',')[0]}</button>
         </IressTooltip>
       )}
       {!trimmed && prop}
