@@ -1,0 +1,20 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import * as ComponentStories from './040-Zindex.stories';
+
+<Meta of={ComponentStories} />
+
+# Z-index (stacking)
+
+The z-index determines the stacking order of elements. Elements with a higher z-index always sit in front of elements with a lower z-index. Each index has been mapped to the appropriate elevation(s).
+
+## Reference
+
+<Story of={ComponentStories.Reference} />
+
+---
+
+## For developers
+
+If you are using the IDS components, the z-indexes have already been mapped out to their respective components based on the usage above. They are hardcoded into the components, so you don't need to worry about them.
+
+The mapping is exported as `Z_INDEX` from the `@iress-oss/ids-components` package, in case you need to reference it in your own code.

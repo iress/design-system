@@ -1,0 +1,80 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import { CanvasWithApi } from '@docs/components/CanvasWithApi';
+import { IressText } from '../../src/main';
+import * as ComponentStories from './070-Spacing.stories';
+
+<Meta title="Styling props/Spacing" />
+
+# Spacing
+
+<IressText textStyle="typography.body.lg" mb="md">
+  These are all styling props related to changing the spacing of a component.
+</IressText>
+
+## Padding
+
+There are seven props you can use to customise the padding of any component. It accepts the entire spacing token spectrum.
+
+- `p`: Change the padding on all axes
+- `px`: Change the padding on the left and right of a component
+- `py`: Change the padding on the top and bottom of a component
+- `pl`: Change the padding on the left of a component
+- `pr`: Change the padding on the right of a component
+- `pt`: Change the padding on the top of a component
+- `pb`: Change the padding on the bottom of a component
+
+<CanvasWithApi of={ComponentStories.padding} />
+
+<CanvasWithApi of={ComponentStories.button} />
+
+<CanvasWithApi of={ComponentStories.variablePadding} />
+
+### Responsive padding
+
+All padding props are responsive and can be changed according to different screen sizes.
+
+<CanvasWithApi of={ComponentStories.responsivePadding} />
+
+<CanvasWithApi of={ComponentStories.responsiveVariablePadding} />
+
+### Migrating from version 5
+
+Responsive padding worked differently in version 5. The `p` prop no longer accepts a nested object of axes to change the padding, you must change every prop based on the breakpoint.
+
+<Story of={ComponentStories.MigratingPadding} />
+
+## Margin
+
+There are seven props you can use to customise the margin of any component. It accepts the entire spacing token spectrum, `auto` and negative values of the spacing token spectrum.
+
+- `m`: Change the margin on all axes
+- `mx`: Change the margin on the left and right of a component
+- `my`: Change the margin on the top and bottom of a component
+- `ml`: Change the margin on the left of a component
+- `mr`: Change the margin on the right of a component
+- `mt`: Change the margin on the top of a component
+- `mb`: Change the margin on the bottom of a component
+
+<CanvasWithApi of={ComponentStories.margin} />
+
+<CanvasWithApi of={ComponentStories.variableMargin} />
+
+### Responsive margin
+
+All margin props are responsive and can be changed according to different screen sizes.
+
+<CanvasWithApi of={ComponentStories.responsiveMargin} />
+
+<CanvasWithApi of={ComponentStories.responsiveVariableMargin} />
+
+### Negative margin
+
+Negative margin is supported in the same way as positive margin. You can use the same props to set negative margin.
+
+<CanvasWithApi of={ComponentStories.negativeMargin} />
+
+## `noGutter`
+
+The `noGutter` prop removes the bottom margin of the last direct child of a component. This is useful when you have nested content inside a component with padding, such as `IressPanel` or `IressCard`, to remove unnecessary spacing in your layout.
+
+<CanvasWithApi of={ComponentStories.noGutter} />

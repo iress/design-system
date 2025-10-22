@@ -1,0 +1,246 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import { IressButton } from '@/main';
+import * as ComponentStories from './v5.stories';
+
+<Meta of={ComponentStories} />
+
+# Migration from v4 to v5
+
+This is a step-by-step guide for upgrading your application from IDS v4 to v5.
+
+## Updating your dependencies
+
+### Upgrade IDS and themes
+
+Update your dependencies in your `package.json` file to the following:
+
+```json
+"dependencies": {
+  "@iress-oss/ids-components": "^5.0.0",
+  "@iress/themes": "^5.0.0"
+}
+```
+
+or run:
+
+```
+yarn add @iress-oss/ids-components@^5.0.0 @iress/themes@^5.0.0
+```
+
+### Upgrade React
+
+The minimum required version of React is 17. If you are using an older version of React, you will need to update it.
+
+## Updating imports
+
+### Changing components
+
+Update your imports to the new package name:
+
+<Story of={ComponentStories.ComponentsImport} />
+
+You can run both packages together, so you can migrate components one by one.
+
+<Story of={ComponentStories.MigrateComponentsOneByOne} />
+
+### Importing component styles
+
+IDS v5 no longer injects CSS into the DOM. You will need to import the stylesheet directly into your application.
+
+```ts
+import '@iress-oss/ids-components/dist/style.css';
+```
+
+## Update Jest configuration
+
+If you are using Jest, you will need to update your Jest configuration to add the new IDS package to your `transformIgnorePatterns`.
+
+**Note:** If you are using version 4 and version 5 in parallel, you will need to keep the old IDS packages in your `transformIgnorePatterns` until you have completely migrated over your components.
+
+```json
+"transformIgnorePatterns": [
+  "/node_modules/(?!@iress-oss/ids-components)"
+]
+```
+
+If you are mocking CSS files for your tests, you'll also need to make sure the new stylesheet is matched by your `moduleNameMapper`:
+
+<Story of={ComponentStories.JestModuleNameMapper} />
+
+## Handling breaking changes
+
+### Components
+
+Since the move to React, the majority of the components have been simplified to improve developer experience. We have listed the changes in this google doc by component, so you can attend to each component separately.
+
+<p>
+  <IressButton
+    href="https://docs.google.com/document/d/1H3-zFDftCHDjwaFkwFxVo1uziPsOj8qJn7p3NFG3aUg/edit"
+    mb="xl"
+    target="_blank"
+  >
+    Google doc
+  </IressButton>
+</p>
+
+### Testing
+
+Components are no longer loaded asynchronously, so you can test them as you would any other React component. The testing utilities have been removed from the package, so you will need to update your tests to use [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) or another testing library.
+
+Below is an example of a changed test using React Testing Library.
+
+<Story of={ComponentStories.TestDiff} />
+
+#### Component specific testing
+
+Some components have additional testing requirements. The changed testing requirements will be listed on each component's docs page.
+
+These include:
+
+- [Form](/docs/components-form--docs#testing)
+- [Modal](/docs/components-modal--docs#testing)
+- [Slideout](/docs/components-slideout--docs#testing)
+
+### Styling
+
+The original CSS framework used for IDS was based on the Stencil library. It was lightly scoped (no shadow DOM) using CSS classes like: `sc-iress-radio-h sc-iress-radio-s`.
+
+These classes have been removed from version 5. If you are targeting components using these classes, it will be good for you review if you should adapt the CSS in a different way (ie. using design tokens/CSS variables instead, which should work no matter the class name, or adding custom classes to the IDS components). If targeting elements is still required, the new classes will be formatted as: `.ids-radio-${ids-version}`, and nested elements will use a modified BEM naming convention: `.ids-radio--label-${ids-version}`. The version number will be exposed; you can import it via Javascript, SASS and CSS module values to make future upgrades easier.
+
+#### Option 1: Use design tokens and custom classes
+
+This is the recommended approach. You can use design tokens and custom classes to style the components.
+
+```css
+.custom-radio {
+  --iress-text-color: red;
+  align-self: center;
+}
+```
+
+```tsx
+<IressRadio className="custom-radio" />
+```
+
+#### Option 2: Target the new classes
+
+This option is **not recommended** and should be used as a last resort, as the class names can change in future, in which case your stylesheet will no longer have any effect. It is recommended to use design tokens or custom classes instead.
+
+```scss
+@use '@iress-oss/ids-components/dist/constants/index.scss' as *;
+
+.ids-radio-#{$ids-version} {
+  align-self: center;
+}
+
+.ids-radio--label-#{$ids-version} {
+  color: red;
+}
+```
+
+### Theme tokens
+
+There are a few token changes that have changed (though this has been relatively minor). The version 5 themes have been updated to use the new design tokens, however if you are using version 4 in parallel with version 5, you may notice that the version 4 styles can no longer find the removed/changed tokens.
+
+To fix this issue, please backfill the tokens in your application until you have finished your migration.
+
+```scss
+/* TODO: Will be removed once we have moved to IDS version 5 */
+/* Change to the name(s) of the themes you want to back fill. */
+.iress-theme-light {
+  --iress-alert-error-text-color: var(--iress-alert-danger-text-color);
+  --iress-alert-error-background-color: var(
+    --iress-alert-danger-background-color
+  );
+  --iress-alert-error-border-color: var(--iress-alert-danger-border-color);
+  --iress-alert-error-heading-icon-text-color: var(
+    --iress-alert-danger-heading-icon-text-color
+  );
+
+  --iress-button-margin-right: var(--iress-g-spacing-xs);
+
+  --iress-combobox-option-meta-font-weight: var(
+    --iress-a-muted-font-weight,
+    var(--iress-g-font-weight, normal)
+  );
+  --iress-combobox-option-meta-text-color: var(
+    --iress-g-muted-text-color,
+    var(--iress-default-text-color--light)
+  );
+
+  --iress-filter-option-meta-font-weight: var(
+    --iress-a-muted-font-weight,
+    var(--iress-g-font-weight, normal)
+  );
+  --iress-filter-option-meta-text-color: var(
+    --iress-g-muted-text-color,
+    var(--iress-default-text-color--light)
+  );
+
+  --iress-form-field-margin-bottom: var(
+    --iress-a-vertical-spacing-lg,
+    var(--iress-g-spacing-lg)
+  );
+
+  --iress-table-cell-buy-text-color: var(
+    --iress-table-cell-positive-text-color
+  );
+  --iress-table-cell-sell-text-color: var(
+    --iress-table-cell-negative-text-color
+  );
+  --iress-table-cell-selected-buy-text-color: var(
+    --iress-table-cell-selected-positive-text-color
+  );
+  --iress-table-cell-selected-sell-text-color: var(
+    --iress-table-cell-selected-negative-text-color
+  );
+
+  --iress-validation-message-error-text-color: var(
+    --iress-validation-message-danger-text-color
+  );
+}
+```
+
+## AG grid theme
+
+As of version 5, we only support the lite AG grid theme, which is used in conjunction with the default alpine theme. In version 5, its imports have changed slightly.
+
+Run the following command to install the AG grid lite theme:
+
+```
+yarn add @iress/ag-grid-theme@^5.0.0
+```
+
+Then you can import the AG Grid theme CSS, import the relevant IDS theme, and hook up the styles by setting a class of ag-theme-alpine ag-theme-iress-lite on your grid wrapper.
+
+<Story of={ComponentStories.AgGridTheme} />
+
+## Removing version 4
+
+Version 5 and version 4 can be run in parallel, but it is recommended to remove version 4 to avoid any conflicts once you have completely migrated over your components.
+
+Run the following to remove version 4 and its related packages:
+
+```
+yarn remove @iress/components @iress/components-react @iress/components-react-custom-elements @iress/ids-react-test-utils
+```
+
+### Remove `global.css`
+
+The `global.css` file has been removed, it is now recommended to include the Roboto font directly using Google Fonts.
+
+<Story of={ComponentStories.RemoveGlobalCss} />
+
+### Remove from Jest configuration
+
+If you are using Jest, you will need to update your Jest configuration to remove the old IDS packages from your `transformIgnorePatterns`.
+
+<Story of={ComponentStories.RemoveFromJestTransforms} />
+
+You can also remove the `mockLazyLoadedComponents` function from your Jest setup.
+
+<Story of={ComponentStories.RemoveFromJestSetup} />
+
+You should also be able to remove the style mocks from your Jest configuration's `moduleNameMapper`, unless you are using CSS-in-JS, as IDS no longer injects CSS into the DOM.
+
+<Story of={ComponentStories.RemoveFromJestModuleMapper} />

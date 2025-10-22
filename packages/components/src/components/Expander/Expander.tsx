@@ -2,10 +2,10 @@ import { type ReactNode, useEffect, useState } from 'react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { useIdIfNeeded } from '@/hooks';
 import { expander } from './Expander.styles';
-import { cx } from '@/styled-system/css';
+import { css, cx } from '@/styled-system/css';
 import { IressText, type IressTextProps } from '../Text';
 import { type IressCustomiseSlot } from '@/interfaces';
-import { styled } from '@/styled-system/jsx';
+import { splitCssProps, styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 
 export interface IressExpanderProps
@@ -44,7 +44,7 @@ export interface IressExpanderProps
 
 export const IressExpander = ({
   activator,
-  activatorStyle,
+  activatorStyle = {},
   children,
   className,
   'data-testid': testid,
@@ -58,6 +58,7 @@ export const IressExpander = ({
   const [isOpen, setIsOpen] = useState(open);
   const id = useIdIfNeeded({ id: idProp });
   const classes = expander({ mode, open: isOpen });
+  const classesRaw = expander.raw({ mode, open: isOpen });
 
   useEffect((): void => {
     setIsOpen(open);
@@ -68,6 +69,8 @@ export const IressExpander = ({
     onChange?.(!isOpen);
   };
 
+  const [styleProps, noneStyleProps] = splitCssProps(activatorStyle);
+
   return (
     <IressText
       className={cx(className, classes.root, GlobalCSSClass.Expander)}
@@ -76,10 +79,13 @@ export const IressExpander = ({
       id={id}
     >
       <styled.button
-        {...activatorStyle}
+        {...noneStyleProps}
         aria-expanded={isOpen}
         aria-controls={`${id}__container`}
-        className={cx(activatorStyle?.className, classes.activator)}
+        className={cx(
+          activatorStyle?.className,
+          css(classesRaw.activator, styleProps),
+        )}
         data-testid={
           activatorStyle?.['data-testid'] ??
           propagateTestid(testid, 'activator')

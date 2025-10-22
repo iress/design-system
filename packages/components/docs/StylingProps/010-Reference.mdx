@@ -1,0 +1,75 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import { IressText } from '@/main';
+import * as ComponentStories from './010-Reference.stories';
+
+<Meta of={ComponentStories} />
+
+# Styling props
+
+<IressText textStyle="typography.body.lg" element="p">
+  This page lists all the custom styling properties available in our components,
+  which design tokens they are mapped to and which CSS properties they affect.
+</IressText>
+
+Styling properties are the recommended way of customising components for your needs, as they ensure your styles are compatible when any theme is applied to your application. If you need further customisation, you can use regular CSS and reference the tokens directly.
+
+These replace the utility classes and internal component tokens provided by previous versions of the design system.
+
+## Reference
+
+<Story of={ComponentStories.Reference} />
+
+## Responsive
+
+Props marked responsive can accept either a single value that affects all breakpoints, or a responsive object map that sets a different value based on breakpoint.
+
+```tsx
+<IressPanel p="xs" /> // applies extra small padding to all breakpoints
+<IressPanel p={{ base: 'lg', md: 'sm' }} /> // applies large padding by default, and changes to small padding once on medium sized screens.
+```
+
+## `iressCss`
+
+In some cases you may need to apply styling props to a non-IDS component. You can do this by using the `iressCss` prop, which accepts an object of styling props and returns a string of class names that can be applied to any element.
+
+This will also work without JSX, allowing you to apply styling props to any element in your application.
+
+```tsx
+<div className={iressCss({ p: 'xs', bg: 'colour.primary.surface' })}>
+  This div has extra small padding and a primary background colour.
+</div>
+```
+
+## `iressStyled`
+
+If you need your own component or a third-party component to accept styling props, you can use the `iressStyled` function to create a styled component that accepts styling props. This is similar to how you would use `styled-components` or `emotion`.
+
+```tsx
+const MyComponent = iressStyled('div', {
+  p: 'xs',
+  bg: 'colour.primary.surface',
+});
+
+<MyComponent>
+  This div has extra small padding and a primary background colour.
+</MyComponent>;
+```
+
+## Migrating from version 5
+
+### Utility classes
+
+If you have been using the utility classes from previous versions of IDS (eg. `iress-p--xs`), you will need to replace them with the new styling props. The utility classes are no longer supported in version 6.
+
+<Story of={ComponentStories.MigratingFromUtilities} />
+
+### Internal component tokens
+
+If you have been using the internal component tokens (eg. `--iress-background-color`), you will need to replace them with the new styling props. The internal component tokens are no longer supported in version 6.
+
+#### Note
+
+- Not every single internal component token has a direct mapping to a styling prop. For example, things like border width are no longer customisable. This helps ensure a consistent and accessible experience for all applications no matter the theme that is applied to them.
+- Styling props only allow token values, not custom values (eg. `colour.system.status.danger` is allowed but not `red`). This is to ensure that the styling props are theme agnostic and can be used with any theme. If you need to use a custom value, you can use custom CSS or inline styles.
+
+<Story of={ComponentStories.MigratingFromInternalTokens} />

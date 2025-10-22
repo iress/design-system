@@ -1,0 +1,41 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Frequently asked questions" />
+
+# Frequently asked questions
+
+Some of the most frequently asked questions related to IDS are answered here.
+
+---
+
+## How long will version 4 be supported?
+
+We will continue to support version 4.x until the end of 2024. This means there will be security patches and critical bug fixes, but no new enhancements will be added to version 4.
+
+## Does this mean we need to upgrade now?
+
+No, you do not need to upgrade now. However, we recommend that you start planning your migration to version 5 and use it for new projects. Support for version 4 will continue until the end of 2024.
+
+## What support will there be to help us upgrade?
+
+If you are moving from version 4 to version 5, a [migration guide](?path=/docs/resources-migration-guides-from-v4-to-v5--docs) is available. This guide will help you understand the changes between the two versions, how to migrate your code, and how to use them side by side while you are migrating.
+
+If you plan to migrate soon, we would like to partner with you. Please reach out to the design system team via Iress channels.
+
+## What will happen if we do not upgrade by the end of 2024?
+
+After the end of 2024, we will no longer provide support for version 4. This means that we will not provide any security patches or critical bug fixes, which may leave the rest of your application vulnerable to security threats. There are several ways to handle this:
+
+- Upgrade to version 5 before the end of 2024.
+- Create a PR to fix the issue in version 4 and submit it to IDS for review.
+- Update nested dependencies to the secure version using `yarn audit` and `resolutions` in your `package.json`.
+
+## Will the documentation for version 4 still be available?
+
+Yes, we will host the documentation for version 4 indefinitely. The documentation will be available on the [Versions page](?path=/docs/versions--docs).
+
+## Can I contribute to version 4?
+
+Yes! We will continue to accept pull requests for version 4, but only until the end of 2024. To do so, please use `4.x` as the base branch for your pull request.
+
+After this time, we will only accept pull requests regarding critical security patches or critical bug fixes.

@@ -1,0 +1,58 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Principles" />
+
+# Core Design Principles
+
+## Consistency
+
+- Maintain brand consistency across all applications and experiences
+- Use standardised component naming conventions (all components start with `Iress` prefix)
+- Leverage shared design tokens for spacing, colours, typography, and interactive states
+- Ensure consistent behaviour patterns across similar components
+
+## Accessibility First
+
+- Meet or exceed WCAG 2.1 Level AA Accessibility Guidelines
+- Provide proper colour contrast ratios (minimum 4.5:1 for AA, 7:1 for AAA)
+- Implement comprehensive keyboard navigation support
+- Include screen reader compatibility with appropriate ARIA attributes
+- Support focus management and skip navigation patterns
+- Document accessibility considerations and requirements
+
+## Clarity and Usability
+
+- Prioritise clear visual hierarchy through typography scales and spacing systems
+- Use progressive disclosure to manage complexity
+- Provide immediate feedback for user actions (loading states, validation, etc.)
+- Design for touch-friendly interfaces with adequate target sizes
+
+## Developer Experience
+
+- Maintain clean component APIs with predictable prop patterns
+- Provide comprehensive documentation with usage examples
+- Include common patterns and anti-patterns
+- Support both controlled and uncontrolled component patterns
+- Enable efficient testing strategies with semantic roles and accessible queries
+- Maintain up-to-date prop documentation and type definitions
+
+## Quality assurance
+
+- Test components across supported browsers and devices
+- Validate accessibility compliance with automated and manual testing
+- Ensure proper keyboard navigation functionality
+- Test with assistive technologies (screen readers, voice control)
+
+### Code Standards
+
+- Follow consistent naming conventions for CSS classes and component props
+- Use semantic HTML elements where appropriate
+- Implement proper TypeScript typing for better developer experience
+- Maintain clean separation between presentation and logic
+
+### Performance Considerations
+
+- Optimise component rendering and re-rendering
+- Implement appropriate code splitting strategies
+- Use efficient animation and transition patterns
+- Consider bundle size impact of component dependencies

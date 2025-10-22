@@ -11,6 +11,7 @@ export const container = cva({
     paddingBlock: undefined,
     paddingInline: 'spacing.400',
     marginInline: 'auto',
+    width: '[100%]',
   },
   variants: {
     /**

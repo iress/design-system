@@ -70,6 +70,8 @@ export default defineConfig(async (options) => {
       external: [
         ...globalManagerPackages,
         ...globalPreviewPackages,
+        '@storybook/react',
+        '@storybook/react-vite',
         ...Object.keys(peerDependencies),
       ],
     });

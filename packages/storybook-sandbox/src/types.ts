@@ -23,6 +23,12 @@ export interface AddonConfig extends AddonState {
   disable?: boolean;
 
   /**
+   * Transformers are used to modify the code before it is displayed in the editor.
+   * By default, it will use the EDITOR_TRANSFORMERS constant defined in the addon.
+   */
+  editorTransformers?: SandboxTransformerMap;
+
+  /**
    * The story ID of the sandbox.
    * If set, it will add a button to open the sandbox in the Storybook UI where applicable.
    * This is usually in the format: `/story/sandbox--sandbox`.

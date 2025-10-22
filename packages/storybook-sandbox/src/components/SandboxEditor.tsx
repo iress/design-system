@@ -172,9 +172,10 @@ button.sandbox-open-editor {
 export const SandboxEditor = ({ active = true, api }: SandboxEditorProps) => {
   const stateFromUrl = getStateFromUrl();
   const config = useParameter<AddonConfig>(ADDON_ID, stateFromUrl);
+  const editorTransformers = config.editorTransformers ?? EDITOR_TRANSFORMERS;
   const [state, setState] = useAddonState<AddonState>(ADDON_ID, {
     ...stateFromUrl,
-    code: transformCode(config.code, EDITOR_TRANSFORMERS),
+    code: transformCode(config.code, editorTransformers),
   });
   const [theme, setTheme] = useState(themes.github);
 
@@ -213,11 +214,11 @@ export const SandboxEditor = ({ active = true, api }: SandboxEditorProps) => {
       if (code) {
         updateState({
           ...state,
-          code: transformCode(code, EDITOR_TRANSFORMERS),
+          code: transformCode(code, editorTransformers),
         });
       }
     },
-    [state, stateFromUrl.code, updateState],
+    [state, stateFromUrl.code, updateState, editorTransformers],
   );
 
   // Update the theme based on the dark mode event
@@ -253,7 +254,7 @@ export const SandboxEditor = ({ active = true, api }: SandboxEditorProps) => {
                     ...template.state,
                     code: transformCode(
                       template.state.code,
-                      EDITOR_TRANSFORMERS,
+                      editorTransformers,
                     ),
                   });
                   api.addNotification({

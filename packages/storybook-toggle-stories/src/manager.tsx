@@ -8,7 +8,7 @@ import { ToggleStories } from './components/ToggleStories';
 addons.register(ADDON_ID, (api) => {
   const addonConfig = addons.getConfig()[ADDON_ID] as AddonConfig;
 
-  if (addonConfig.disable?.()) {
+  if (addonConfig?.disable?.()) {
     return;
   }
 
@@ -27,7 +27,7 @@ addons.register(ADDON_ID, (api) => {
       filters: {
         ...addonsConfig.sidebar?.filters,
         [ADDON_ID]: (item): boolean => {
-          if (addonConfig.disable?.()) {
+          if (addonConfig?.disable?.()) {
             return true;
           }
 
