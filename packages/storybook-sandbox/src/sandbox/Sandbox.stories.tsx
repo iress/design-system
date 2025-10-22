@@ -11,7 +11,7 @@ export default {
   tags: ['IDS_ToggleStories:always-visible', 'vrt:false'],
   args: {
     defaultState: {
-      code: TEMPLATES[0].state.code,
+      code: TEMPLATES[0]?.state.code,
     },
     loading: () => <Loader>Opening Sandbox...</Loader>,
     scope: {
@@ -37,7 +37,7 @@ export default {
       disable: true,
     },
     IDS_Sandbox: {
-      code: TEMPLATES[0].state.code,
+      code: TEMPLATES[0]?.state.code,
       disable: false,
       scopes: ['react-hook-form'],
       templates: TEMPLATES,

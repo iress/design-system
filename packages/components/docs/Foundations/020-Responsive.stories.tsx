@@ -18,11 +18,11 @@ import { lazy, Suspense } from 'react';
 
 type Story = StoryObj<typeof IressTable>;
 
-const BreakpointXs = lazy(() => import('../components/BreakpointXs'));
-const BreakpointSm = lazy(() => import('../components/BreakpointSm'));
-const BreakpointMd = lazy(() => import('../components/BreakpointMd'));
-const BreakpointLg = lazy(() => import('../components/BreakpointLg'));
-const BreakpointXl = lazy(() => import('../components/BreakpointXl'));
+const BreakpointXs = lazy(() => import('@docs/components/BreakpointXs'));
+const BreakpointSm = lazy(() => import('@docs/components/BreakpointSm'));
+const BreakpointMd = lazy(() => import('@docs/components/BreakpointMd'));
+const BreakpointLg = lazy(() => import('@docs/components/BreakpointLg'));
+const BreakpointXl = lazy(() => import('@docs/components/BreakpointXl'));
 
 export default {
   title: 'Foundations/Responsive layout',

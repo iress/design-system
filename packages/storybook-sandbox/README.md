@@ -26,3 +26,16 @@ export default config;
 ## Configuration
 
 The sandbox is not shown by default. You must create a story that uses the sandbox editor. This allows you to place the sandbox wherever you like in your Storybook.
+
+```sh
+sandbox/
+ ├── Sandbox.stories.tsx
+ └── scopes/ #  Scope files that provide imports for the sandbox environment
+    ├── design-system.ts
+    └── react-hook-form.ts
+ └── templates/ # Template files that provide boilerplate code for the sandbox environment
+    ├── index.ts
+    └── simple/
+        ├── icon.ts
+        └── snippet.tsx
+```

@@ -1,7 +1,6 @@
 import { cx } from '@/styled-system/css';
 import { querySelectorDeep } from 'query-selector-shadow-dom';
 import {
-  cloneElement,
   useEffect,
   useMemo,
   useRef,
@@ -293,11 +292,7 @@ export const IressSlideout = ({
         </IressText>
       );
 
-    return headingProp
-      ? cloneElement(headingProp, {
-          id: headingId,
-        })
-      : null;
+    return headingProp;
   }, [dataTestid, headingId, headingProp]);
 
   if (!isMounted) return null;

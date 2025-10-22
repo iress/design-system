@@ -1,5 +1,4 @@
 import {
-  cloneElement,
   type ReactElement,
   type ReactNode,
   useCallback,
@@ -220,11 +219,7 @@ export const IressModal = ({
         </IressText>
       );
 
-    return headingProp
-      ? cloneElement(headingProp, {
-          id: headingId,
-        })
-      : null;
+    return headingProp;
   }, [dataTestid, headingId, headingProp, styles.header]);
 
   const handleTransitionEnd = useCallback(

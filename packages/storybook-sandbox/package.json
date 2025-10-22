@@ -33,6 +33,7 @@
     "dev": "concurrently \"yarn watch\" \"yarn serve\"",
     "test": "vitest --config vitest.config.ts --watch",
     "test:coverage": "vitest run --config vitest.config.ts --coverage",
+    "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "serve": "yarn storybook:serve-addon packages/storybook-sandbox",
