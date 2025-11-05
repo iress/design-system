@@ -3,7 +3,10 @@ import { vi, type Mock } from 'vitest';
 import type { ComponentProps } from 'react';
 import type { Canvas } from '@storybook/addon-docs/blocks';
 import type { StorybookParameters } from 'storybook/internal/types';
-import { useSandboxCanvasProps, type UseSandboxCanvasProps } from './useSandboxCanvasProps';
+import {
+  useSandboxCanvasProps,
+  type UseSandboxCanvasProps,
+} from './useSandboxCanvasProps';
 import { COMMON_TRANSFORMERS } from '../constants';
 import * as helpers from '../helpers';
 import * as useSandboxDocParametersModule from './useSandboxDocParameters';
@@ -20,7 +23,8 @@ vi.mock('./useSandboxDocParameters', () => ({
 
 const mockGetSandboxActionItems = helpers.getSandboxActionItems as Mock;
 const mockTransformCode = helpers.transformCode as Mock;
-const mockUseSandboxDocParameters = useSandboxDocParametersModule.useSandboxDocParameters as Mock;
+const mockUseSandboxDocParameters =
+  useSandboxDocParametersModule.useSandboxDocParameters as Mock;
 
 type CanvasProps = ComponentProps<typeof Canvas>;
 
@@ -41,12 +45,16 @@ describe('useSandboxCanvasProps', () => {
     },
   ];
 
-  const mockTransformFn = vi.fn().mockImplementation((code: string) => `transformed: ${code}`);
+  const mockTransformFn = vi
+    .fn()
+    .mockImplementation((code: string) => `transformed: ${code}`);
 
   beforeEach(() => {
     vi.clearAllMocks();
     mockGetSandboxActionItems.mockReturnValue(mockActionItems);
-    mockTransformCode.mockImplementation((code: string) => `transformed: ${code}`);
+    mockTransformCode.mockImplementation(
+      (code: string) => `transformed: ${code}`,
+    );
     // Simple mock that doesn't cause re-renders
     mockUseSandboxDocParameters.mockImplementation(() => {
       // Do nothing - just a no-op mock
@@ -103,7 +111,7 @@ describe('useSandboxCanvasProps', () => {
       // Trigger transform to see what transformers are used
       const mockCode = 'test code';
       const mockContext = { parameters: {} };
-      
+
       await act(async () => {
         await result.current.source?.transform?.(mockCode, mockContext);
       });
@@ -248,14 +256,19 @@ describe('useSandboxCanvasProps', () => {
       const testCode = 'original code';
       const mockContext = { parameters: {} };
 
-      const transformedResult = await result.current.source?.transform?.(testCode, mockContext);
+      const transformedResult = await result.current.source?.transform?.(
+        testCode,
+        mockContext,
+      );
 
       expect(mockTransformFn).toHaveBeenCalledWith(testCode, mockContext);
       expect(transformedResult).toBe('transformed: transformed: original code');
     });
 
     it('should handle context transform function', async () => {
-      const contextTransformFn = vi.fn().mockImplementation((code: string) => `context: ${code}`);
+      const contextTransformFn = vi
+        .fn()
+        .mockImplementation((code: string) => `context: ${code}`);
       const mockContext = {
         parameters: {
           docs: {
@@ -280,7 +293,10 @@ describe('useSandboxCanvasProps', () => {
       const testCode = 'original code';
       const mockContext = { parameters: {} };
 
-      const transformedResult = await result.current.source?.transform?.(testCode, mockContext);
+      const transformedResult = await result.current.source?.transform?.(
+        testCode,
+        mockContext,
+      );
 
       expect(mockTransformCode).toHaveBeenCalledWith(testCode, {});
       expect(transformedResult).toBe('transformed: original code');
@@ -289,9 +305,7 @@ describe('useSandboxCanvasProps', () => {
 
   describe('additionalActions handling', () => {
     it('should merge additionalActions with sandbox action items', () => {
-      const existingActions = [
-        { title: 'Existing Action', onClick: vi.fn() },
-      ];
+      const existingActions = [{ title: 'Existing Action', onClick: vi.fn() }];
 
       const props: UseSandboxCanvasProps = {
         additionalActions: existingActions,
@@ -320,7 +334,7 @@ describe('useSandboxCanvasProps', () => {
         expect.objectContaining({
           current: null,
         }),
-        undefined // Since we're using a no-op mock for useSandboxDocParameters
+        undefined, // Since we're using a no-op mock for useSandboxDocParameters
       );
     });
   });
@@ -329,7 +343,9 @@ describe('useSandboxCanvasProps', () => {
     it('should call useSandboxDocParameters with setState function', () => {
       renderHook(() => useSandboxCanvasProps({}));
 
-      expect(mockUseSandboxDocParameters).toHaveBeenCalledWith(expect.any(Function));
+      expect(mockUseSandboxDocParameters).toHaveBeenCalledWith(
+        expect.any(Function),
+      );
     });
 
     it('should call getSandboxActionItems during render', () => {
@@ -363,12 +379,12 @@ describe('useSandboxCanvasProps', () => {
     });
 
     it('should handle changing additionalTransformers', () => {
-      let transformers: Record<string, (code: string) => string> | undefined = { 
-        test1: (code: string) => code 
+      let transformers: Record<string, (code: string) => string> | undefined = {
+        test1: (code: string) => code,
       };
 
-      const { result, rerender } = renderHook(() => 
-        useSandboxCanvasProps({ additionalTransformers: transformers })
+      const { result, rerender } = renderHook(() =>
+        useSandboxCanvasProps({ additionalTransformers: transformers }),
       );
 
       expect(result.current.source?.transform).toBeDefined();
@@ -413,7 +429,10 @@ describe('useSandboxCanvasProps', () => {
       const { result } = renderHook(() => useSandboxCanvasProps(props));
 
       await act(async () => {
-        const transformResult = await result.current.source?.transform?.('test', {});
+        const transformResult = await result.current.source?.transform?.(
+          'test',
+          {},
+        );
         expect(transformResult).toBe('transformed: test');
       });
     });
@@ -425,7 +444,7 @@ describe('useSandboxCanvasProps', () => {
         expect.objectContaining({
           current: null,
         }),
-        undefined
+        undefined,
       );
     });
   });
