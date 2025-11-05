@@ -1,6 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressCol, IressRow, IressText, IressPanel } from '@/main';
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 interface DocsExampleProps {
   children: ReactNode;
