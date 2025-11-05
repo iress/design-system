@@ -1,6 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { TEMPLATES } from './templates';
-import type { SandboxPreviewProps } from '../';
+import type { AddonConfig, SandboxPreviewProps } from '../';
 import { Loader } from 'storybook/internal/components';
 
 const SandboxStub = () => <></>;
@@ -33,15 +33,12 @@ export default {
       disable: true,
       disableSnapshot: true,
     },
-    IDS_CanvasSource: {
-      disable: true,
-    },
     IDS_Sandbox: {
-      code: TEMPLATES[0]?.state.code,
+      code: TEMPLATES[0]?.state.code ?? '',
       disable: false,
       scopes: ['react-hook-form'],
       templates: TEMPLATES,
-    },
+    } satisfies AddonConfig,
     layout: 'fullscreen',
     options: {
       selectedPanel: 'IDS_Sandbox',

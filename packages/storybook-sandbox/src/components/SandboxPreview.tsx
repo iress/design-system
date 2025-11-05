@@ -7,19 +7,28 @@ import {
 } from '../types';
 import { PREVIEW_TRANSFORMERS, SANDBOX_UPDATE_EVENT } from '../constants';
 import { transformCode } from '../helpers';
-import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  type FC,
+  type JSX,
+  type LazyExoticComponent,
+  type PropsWithChildren,
+  type ReactNode,
+} from 'react';
 
 export interface SandboxPreviewProps {
   defaultState?: AddonState;
-  ErrorWrapper?:
-    | React.FC<React.PropsWithChildren>
-    | keyof JSX.IntrinsicElements;
-  loading?: (state: AddonState, styles?: boolean) => React.ReactNode;
+  ErrorWrapper?: FC<PropsWithChildren> | keyof JSX.IntrinsicElements;
+  loading?: (state: AddonState, styles?: boolean) => ReactNode;
   scope?: {
     default: Promise<SandboxScope>;
     [namespace: string]: Promise<SandboxScope>;
   };
-  styles?: Record<string, React.LazyExoticComponent<SandboxStyle>>;
+  styles?: Record<string, LazyExoticComponent<SandboxStyle>>;
 }
 
 const SandboxPreviewStyles = ({

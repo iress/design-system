@@ -39,3 +39,47 @@ sandbox/
         ├── icon.ts
         └── snippet.tsx
 ```
+
+Afterwards, you can create a story that uses the sandbox. Below is one that makes use of lazy loading scopes and templates.
+
+```tsx
+// sandbox/Sandbox.stories.tsx
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { TEMPLATES } from './templates';
+import type {
+  SandboxPreviewProps,
+  AddonConfig,
+} from '@iress-oss/ids-storybook-sandbox';
+import { Loader } from 'storybook/internal/components';
+
+const SandboxStub = () => <></>;
+const SCOPES = {
+  default: import('./scopes/design-system'),
+  'react-hook-form': import('./scopes/react-hook-form'),
+};
+
+export default {
+  title: 'Sandbox',
+  component: SandboxStub,
+  args: {
+    defaultState: {
+      code: TEMPLATES[0]?.state.code,
+    },
+    loading: () => <Loader>Opening Sandbox...</Loader>,
+    scope: SCOPES,
+  },
+  parameters: {
+    IDS_Sandbox: {
+      code: TEMPLATES[0]?.state.code ?? '',
+      disable: false,
+      scopes: Object.keys(SCOPES),
+      templates: TEMPLATES,
+    } satisfies AddonConfig,
+    layout: 'fullscreen',
+  },
+} as Meta<SandboxPreviewProps>;
+
+export const Sandbox: StoryObj<SandboxPreviewProps> = {};
+```
+
+And that should be it!

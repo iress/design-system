@@ -26,7 +26,7 @@ describe('oktaRegister', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     // Make the mock constructor return the same instance every time
-    vi.mocked(OktaAuth).mockImplementation(() => mockOktaAuthInstance);
+    vi.mocked(OktaAuth).mockImplementation(() => mockOktaAuthInstance as never);
   });
 
   afterEach(() => {
@@ -94,7 +94,7 @@ describe('oktaRegister', () => {
         },
       };
 
-      (OktaAuth as ReturnType<typeof vi.fn>)
+      (OktaAuth as unknown as ReturnType<typeof vi.fn>)
         .mockReturnValueOnce(mockOktaAuthInstance)
         .mockReturnValueOnce(mockOktaAuthInstance2);
 
@@ -121,7 +121,7 @@ describe('oktaRegister', () => {
         },
       };
 
-      (OktaAuth as ReturnType<typeof vi.fn>)
+      (OktaAuth as unknown as ReturnType<typeof vi.fn>)
         .mockReturnValueOnce(mockOktaAuthInstance)
         .mockReturnValueOnce(mockOktaAuthInstance2);
 
@@ -250,7 +250,7 @@ describe('oktaRegister', () => {
         },
       };
 
-      (OktaAuth as ReturnType<typeof vi.fn>)
+      (OktaAuth as unknown as ReturnType<typeof vi.fn>)
         .mockReturnValueOnce(mockOktaAuthInstance)
         .mockReturnValueOnce(mockOktaAuthInstance2);
 

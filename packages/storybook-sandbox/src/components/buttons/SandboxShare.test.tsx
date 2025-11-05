@@ -27,17 +27,35 @@ vi.mock('storybook/internal/components', async (importOriginal) => ({
   },
   TooltipLinkList: (props: ComponentProps<typeof TooltipLinkList>) => {
     tooltipLinkListProps(props);
-    return props.links.map(
-      (link: {
-        id: string;
-        title: string;
-        onClick?: (e: MouseEvent<HTMLButtonElement>, item: unknown) => void;
-      }) => (
-        <button key={link.id} onClick={(e) => link.onClick?.(e, link)}>
-          {link.title}
+    return props.links.map((link) => {
+      if (Array.isArray(link)) {
+        return link.map((sublink) => (
+          <button
+            key={sublink.id}
+            onClick={(e) => {
+              if ('onClick' in sublink) {
+                sublink.onClick?.(e, sublink);
+              }
+            }}
+          >
+            {'title' in sublink && sublink.title}
+          </button>
+        ));
+      }
+
+      return (
+        <button
+          key={link.id}
+          onClick={(e) => {
+            if ('onClick' in link) {
+              link.onClick?.(e, link);
+            }
+          }}
+        >
+          {'title' in link && link.title}
         </button>
-      ),
-    );
+      );
+    });
   },
 }));
 

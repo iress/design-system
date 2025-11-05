@@ -63,14 +63,14 @@ describe('getSandboxActionItems', () => {
 
   beforeEach(() => {
     delete (window as Partial<Window>).location;
-    window.location = new URL(
+    (window.location as Location) = new URL(
       'http://localhost',
     ) as unknown as Window['location'];
     window.location.assign = navigate;
   });
 
   afterAll(() => {
-    window.location = originalLocation;
+    (window.location as Location) = originalLocation;
     navigate.mockRestore();
   });
 
@@ -92,7 +92,7 @@ describe('getSandboxActionItems', () => {
       value: document.createElement('button'),
     });
 
-    actionItems[0].onClick({
+    actionItems[0]?.onClick({
       nativeEvent: event,
     } as React.MouseEvent<HTMLButtonElement>);
 

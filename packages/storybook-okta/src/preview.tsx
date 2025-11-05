@@ -6,4 +6,6 @@ import { ADDON_ID, ADDON_OPTIONS } from './constants';
 const channel = addons.getChannel();
 channel.emit(ADDON_OPTIONS, process.env[ADDON_ID]);
 
-export const decorators: Addon_DecoratorFunction<JSX.Element>[] = [withOKTA];
+export const decorators: Addon_DecoratorFunction<React.JSX.Element>[] = [
+  withOKTA,
+];

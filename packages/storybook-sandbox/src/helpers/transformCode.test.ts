@@ -108,9 +108,7 @@ export const App = () => {
 const App = () => {
   const [count, setCount] = React.useState<number>(0);
   const props = {
-    container: {
-      '_constructor-name_': 'HTMLBodyElement'
-    }
+    container: document.body
   };
 
   const handleClick = () => {
@@ -118,7 +116,7 @@ const App = () => {
   };
 
   return (
-    <IressPanel bg="alt" p="lg" container={[object HTMLBodyElement]}>
+    <IressPanel bg="alt" p="lg" container={document.body}>
       <Header />
       <IressText element="h2">Features</IressText>
       <IressStack gap="lg">
