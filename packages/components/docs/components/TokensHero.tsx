@@ -8,7 +8,7 @@ const TokensHero = () => (
     xmlns="http://www.w3.org/2000/svg"
     className={image()}
   >
-    <g clip-path="url(#clip0_1003_2120)">
+    <g clipPath="url(#clip0_1003_2120)">
       <rect
         width="751"
         height="462"

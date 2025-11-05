@@ -24,9 +24,9 @@ const Thumbnail = () => (
     <path
       d="M351 234.704L367.529 251L401 218"
       style={{ stroke: cssVars.colour.primary.onFill }}
-      stroke-width="10"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );

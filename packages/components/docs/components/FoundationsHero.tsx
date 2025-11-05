@@ -8,7 +8,7 @@ const FoundationsHero = () => (
     xmlns="http://www.w3.org/2000/svg"
     className={image()}
   >
-    <g clip-path="url(#clip0_1002_1927)">
+    <g clipPath="url(#clip0_1002_1927)">
       <rect
         width="751"
         height="605"

@@ -29,8 +29,8 @@ const Thumbnail = () => (
         height="236.5"
         rx="24.75"
         stroke="#091E42"
-        stroke-opacity="0.15"
-        stroke-width="0.5"
+        strokeOpacity="0.15"
+        strokeWidth="0.5"
       />
     </g>
     <rect
@@ -53,9 +53,9 @@ const Thumbnail = () => (
         width="276"
         height="247"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"

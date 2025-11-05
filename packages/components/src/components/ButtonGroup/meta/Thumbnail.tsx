@@ -8,7 +8,7 @@ const Thumbnail = () => (
     xmlns="http://www.w3.org/2000/svg"
     className={image()}
   >
-    <g clip-path="url(#clip0_1008_2321)">
+    <g clipPath="url(#clip0_1008_2321)">
       <rect
         width="751"
         height="467"
@@ -27,7 +27,7 @@ const Thumbnail = () => (
         rx="24"
         style={{ fill: cssVars.colour.neutral[30] }}
         stroke="#D7D8DA"
-        stroke-width="2"
+        strokeWidth="2"
       />
       <rect
         x="232"

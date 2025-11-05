@@ -40,11 +40,9 @@ const config: StorybookConfig = {
   framework: '@storybook/react-vite',
   stories: [
     '../docs/**/*.@(stories.ts|stories.tsx|mdx)',
-    // '../src/**/*.@(stories.ts|stories.tsx|mdx)',
+    '../src/**/*.@(stories.ts|stories.tsx|mdx)',
   ],
   viteFinal(config) {
-    // Also add manual aliases as fallback
-
     if (tsConfigBase.compilerOptions?.paths) {
       config.resolve = config.resolve ?? {};
       config.resolve.alias = {

@@ -8,7 +8,7 @@ const Version6Hero = () => (
     xmlns="http://www.w3.org/2000/svg"
     className={image()}
   >
-    <g clip-path="url(#clip0_1002_1926)">
+    <g clipPath="url(#clip0_1002_1926)">
       <rect
         width="751"
         height="605"

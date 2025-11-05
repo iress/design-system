@@ -24,7 +24,8 @@
     "test": "vitest --config vitest.config.ts --watch",
     "test:coverage": "vitest run --config vitest.config.ts --coverage",
     "test:ui": "vitest --config vitest.config.ts --ui",
-    "typecheck": "tsc --noEmit -p tsconfig.lib.json"
+    "typecheck": "tsc --noEmit -p tsconfig.lib.json",
+    "typecheck:node": "tsc --noEmit -p tsconfig.node.json"
   },
   "devDependencies": {
     "@iress-oss/ids-storybook-sandbox": "^0.0.0",
@@ -63,6 +64,7 @@
     "react-diff-viewer": "^3.1.1",
     "react-dom": "^19.1.1",
     "react-dropzone": "14.3.8",
+    "react-element-to-jsx-string": "^17.0.1",
     "rimraf": "^6.0.1",
     "storybook": "^9.1.10",
     "typescript": "5.8.2",
@@ -77,6 +79,7 @@
     "@floating-ui/react": "0.26.28",
     "@fortawesome/fontawesome-common-types": "0.2.36",
     "@tanstack/react-table": "8.21.3",
+    "@types/mdx": "^2.0.13",
     "fuzzysort": "3.1.0",
     "query-selector-shadow-dom": "1.0.1",
     "react-hook-form": "7.55.0",

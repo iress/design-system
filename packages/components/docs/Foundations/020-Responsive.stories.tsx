@@ -8,6 +8,7 @@ import {
   IressContainer,
   IressDivider,
   IressInline,
+  IressPanel,
   IressPlaceholder,
   IressRow,
   IressStack,
@@ -15,6 +16,7 @@ import {
   IressText,
 } from '@/main';
 import { lazy, Suspense } from 'react';
+import { CurrentBreakpoint } from '@docs/components/CurrentBreakpoint';
 
 type Story = StoryObj<typeof IressTable>;
 
@@ -92,6 +94,9 @@ export const Xs: Story = {
           grids with more than 4 columns maximum on extra small screens. For
           developers, this means the minimum span on mobile devices is 3.
         </p>
+        <IressPanel bg="alt">
+          <CurrentBreakpoint renderLabel="viewing" />
+        </IressPanel>
       </IressText>
       <IressContainer
         style={{ maxWidth: `${BREAKPOINT_DETAILS.xs.viewportWidth}px` }}
@@ -168,6 +173,9 @@ export const Sm: Story = {
           grids with more than 4 columns maximum on small screens. For
           developers, this means the minimum span on mobile devices is 3.
         </p>
+        <IressPanel bg="alt">
+          <CurrentBreakpoint renderLabel="viewing" />
+        </IressPanel>
       </IressText>
       <IressContainer
         style={{ maxWidth: `${BREAKPOINT_DETAILS.sm.viewportWidth}px` }}
@@ -244,6 +252,9 @@ export const Md: Story = {
           grids with more than 6 columns maximum on medium screens. For
           developers, this means the minimum span on medium screems is 2.
         </p>
+        <IressPanel bg="alt">
+          <CurrentBreakpoint renderLabel="viewing" />
+        </IressPanel>
       </IressText>
       <IressContainer
         style={{ maxWidth: `${BREAKPOINT_DETAILS.md.viewportWidth}px` }}
@@ -334,6 +345,9 @@ export const Lg: Story = {
           From large screens onwards, all 12 columns of the grid can be used.
           For developers, this means the minimum span on large screens is 1.
         </p>
+        <IressPanel bg="alt">
+          <CurrentBreakpoint renderLabel="viewing" />
+        </IressPanel>
       </IressText>
       <IressContainer
         style={{ maxWidth: `${BREAKPOINT_DETAILS.lg.viewportWidth}px` }}
@@ -464,6 +478,9 @@ export const Xl: Story = {
           out by using the <code>fluid</code> prop. It is recommended to keep
           the max width in most scenarios to ensure optimal readability.
         </p>
+        <IressPanel bg="alt">
+          <CurrentBreakpoint renderLabel="viewing" />
+        </IressPanel>
       </IressText>
       <IressContainer>
         <IressRow gutter="md">
@@ -592,6 +609,9 @@ export const Xxl: Story = {
           out by using the <code>fluid</code> prop. It is recommended to keep
           the max width in most scenarios to ensure optimal readability.
         </p>
+        <IressPanel bg="alt">
+          <CurrentBreakpoint renderLabel="viewing" />
+        </IressPanel>
       </IressText>
       <IressContainer>
         <IressRow gutter="md">
