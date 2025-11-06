@@ -5,10 +5,12 @@ import { extname, relative, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { glob } from 'glob';
 import treeShakeable from 'rollup-plugin-tree-shakeable';
+import react from '@vitejs/plugin-react';
 import { peerDependencies } from './package.json';
 
 export default defineConfig({
   plugins: [
+    react(),
     tsconfigPaths(),
     dts({
       include: ['src'],

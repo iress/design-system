@@ -1,10 +1,10 @@
 // TODO: Fix the linting errors in this file.
 import {
   type Breakpoints,
-  useBreakpoint,
   type BreakpointDetail,
 } from '@iress-oss/ids-components';
-import { type JSX } from 'react';
+import { use, type JSX } from 'react';
+import { IressStorybookContext } from './IressStorybookContext';
 
 export interface CurrentBreakpointProps {
   /**
@@ -61,6 +61,7 @@ export const CurrentBreakpoint = ({
   as: Tag = 'span',
   renderLabel,
 }: CurrentBreakpointProps) => {
+  const { useBreakpoint } = use(IressStorybookContext);
   const { breakpoint, detail } = useBreakpoint() as {
     breakpoint: Breakpoints;
     detail: BreakpointDetail;

@@ -1,29 +1,16 @@
-import { type SortType } from '@storybook/addon-docs/blocks';
-import { type StoryObj } from '@storybook/react';
-import { type ReactNode, useEffect, useRef, useState } from 'react';
-import { IressExpander } from '@iress-oss/ids-components';
+import { use, useEffect, useRef, useState } from 'react';
 import { ComponentApi, type ComponentApiProps } from './ComponentApi';
-import {
-  ComponentApiHeading,
-  type ComponentApiHeadingProps,
-} from './ComponentApiHeading';
+import { ComponentApiHeading } from './ComponentApiHeading';
 import { useIsActiveHeading } from '../hooks/useIsActiveHeading';
-
-export interface ComponentApiExpanderProps extends ComponentApiProps {
-  className?: string;
-  details?: ReactNode;
-  exclude?: string[];
-  heading?: ComponentApiHeadingProps['children'];
-  sort?: SortType;
-  story: StoryObj;
-}
+import { IressStorybookContext } from './IressStorybookContext';
 
 export const ComponentApiExpander = ({
   heading,
   headingId,
   headingLevel = 2,
   ...restProps
-}: ComponentApiExpanderProps) => {
+}: ComponentApiProps) => {
+  const { IressExpander, IressText } = use(IressStorybookContext);
   const headingElement = useRef<HTMLDivElement | null>(null);
   const activeProps = useIsActiveHeading(headingElement);
   const [show, setShow] = useState(false);
@@ -48,7 +35,9 @@ export const ComponentApiExpander = ({
       onChange={(open) => setShow(!!open)}
       open={show}
     >
-      <ComponentApi {...restProps} heading="" />
+      <IressText pr="xs">
+        <ComponentApi {...restProps} heading="" />
+      </IressText>
     </IressExpander>
   );
 };

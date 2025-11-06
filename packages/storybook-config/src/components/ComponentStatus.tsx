@@ -1,18 +1,22 @@
-import {
-  IressDivider,
-  IressInline,
-  type IressInlineProps,
-  IressStack,
-  IressText,
-} from '@iress-oss/ids-components';
+import { type IressInlineProps } from '@iress-oss/ids-components';
+import { use } from 'react';
 import { Badge } from 'storybook/internal/components';
 import { type StoryModule } from '~/types';
+import { IressStorybookContext } from './IressStorybookContext';
+import { type StoryObj } from '@storybook/react-vite';
 
 interface ComponentStatusProps extends IressInlineProps {
   /**
    * The stories module for the component
+   * Either `stories` or `story` must be provided.
    */
-  stories: StoryModule;
+  story?: StoryObj;
+
+  /**
+   * The stories module for the component.
+   * Either `stories` or `story` must be provided.
+   */
+  stories?: StoryModule;
 }
 
 interface TagProps {
@@ -20,6 +24,7 @@ interface TagProps {
 }
 
 const BetaTag = ({ tag }: TagProps) => {
+  const { IressStack, IressText } = use(IressStorybookContext);
   const [, oldComponent] = tag.split(':');
 
   return (
@@ -51,6 +56,7 @@ const BetaTag = ({ tag }: TagProps) => {
 };
 
 const CautionTag = ({ tag }: TagProps) => {
+  const { IressStack, IressText } = use(IressStorybookContext);
   const [, newComponent] = tag.split(':');
 
   return (
@@ -69,26 +75,38 @@ const CautionTag = ({ tag }: TagProps) => {
   );
 };
 
-const UpdatedTag = () => (
-  <>
-    <div>
-      <Badge status="neutral">Updated</Badge>
-    </div>
-    <IressStack>
-      <IressText element="strong">Recently updated</IressText>
-      <IressText color="colour.neutral.70">
-        This component has been recently updated with new props. The props have
-        been marked as beta. Please tell us if there are any issues.
-      </IressText>
-    </IressStack>
-  </>
-);
+const UpdatedTag = () => {
+  const { IressStack, IressText } = use(IressStorybookContext);
+
+  return (
+    <>
+      <div>
+        <Badge status="neutral">Updated</Badge>
+      </div>
+      <IressStack>
+        <IressText element="strong">Recently updated</IressText>
+        <IressText color="colour.neutral.70">
+          This component has been recently updated with new props. The props
+          have been marked as beta. Please tell us if there are any issues.
+        </IressText>
+      </IressStack>
+    </>
+  );
+};
 
 export const ComponentStatus = ({
+  story: storyProp,
   stories,
   ...restProps
 }: ComponentStatusProps) => {
-  const storyTags = stories.default.tags ?? [];
+  const { IressDivider, IressInline } = use(IressStorybookContext);
+
+  if (!storyProp && !stories) {
+    throw new Error('ComponentStatus requires either a story or stories prop');
+  }
+
+  const story = storyProp ?? stories?.default;
+  const storyTags = story!.tags ?? [];
   const betaTag = storyTags.find((tag) => tag.startsWith('beta:'));
   const cautionTag = storyTags.find((tag) => tag.startsWith('caution:'));
   const updatedTag = storyTags.find((tag) => tag === 'updated');

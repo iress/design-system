@@ -1,5 +1,11 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
-import { type ForwardedRef, forwardRef, type PropsWithChildren } from 'react';
+import {
+  type ForwardedRef,
+  forwardRef,
+  type PropsWithChildren,
+  use,
+} from 'react';
+import { IressStorybookContext } from './IressStorybookContext';
 
 export interface ComponentApiHeadingProps extends PropsWithChildren {
   /**
@@ -22,6 +28,8 @@ export const ComponentApiHeading = forwardRef(
     }: ComponentApiHeadingProps,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
+    const { IressText } = use(IressStorybookContext);
+
     const markdownSettings = headingId
       ? { slugify: () => headingId }
       : undefined;
@@ -29,20 +37,24 @@ export const ComponentApiHeading = forwardRef(
     if (headingProp && typeof headingProp === 'string') {
       return (
         <div ref={ref}>
-          <Markdown
-            options={markdownSettings}
-          >{`${'#'.repeat(headingLevel)} ${headingProp}`}</Markdown>
+          <IressText mb="-sm">
+            <Markdown
+              options={markdownSettings}
+            >{`${'#'.repeat(headingLevel)} ${headingProp}`}</Markdown>
+          </IressText>
         </div>
       );
     }
 
     return (
       <div ref={ref}>
-        {headingProp ?? (
-          <Markdown
-            options={markdownSettings}
-          >{`${'#'.repeat(headingLevel)} Props`}</Markdown>
-        )}
+        <IressText mb="-sm">
+          {headingProp ?? (
+            <Markdown
+              options={markdownSettings}
+            >{`${'#'.repeat(headingLevel)} Props`}</Markdown>
+          )}
+        </IressText>
       </div>
     );
   },

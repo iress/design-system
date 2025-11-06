@@ -1,15 +1,11 @@
-import {
-  IressExpander,
-  IressStack,
-  IressText,
-} from '@iress-oss/ids-components';
-import { type ReactNode } from 'react';
+import { use, type ReactNode } from 'react';
 import { type StoryObj } from '@storybook/react';
 import { type ComponentApiProps } from './ComponentApi';
 import { ComponentCanvas, type ComponentCanvasProps } from './ComponentCanvas';
 import { type StoryModule } from '~/types';
 import { ComponentApiExpander } from './ComponentApiExpander';
 import { ComponentStatus } from './ComponentStatus';
+import { IressStorybookContext } from './IressStorybookContext';
 
 export interface ComponentOverviewProps {
   /**
@@ -62,43 +58,51 @@ export const ComponentOverview = ({
   readMore,
   story,
   stories,
-}: ComponentOverviewProps) => (
-  <>
-    <IressStack gap="spacing.400">
-      {description && (
-        <>
-          <h2 id="overview" className="iress-sr-only">
-            Overview
-          </h2>
-          <IressText textStyle="typography.body.lg">{description}</IressText>
-        </>
-      )}
+}: ComponentOverviewProps) => {
+  const { IressStack, IressText, IressExpander, IressPanel } = use(
+    IressStorybookContext,
+  );
 
-      {info}
+  return (
+    <>
+      <IressStack gap="spacing.400">
+        {description && (
+          <>
+            <IressText element="h2" id="overview" srOnly>
+              Overview
+            </IressText>
+            <IressText textStyle="typography.body.lg">{description}</IressText>
+          </>
+        )}
 
-      <ComponentStatus stories={stories} />
+        {info}
 
-      {readMore && (
-        <IressExpander
-          activator="Read more"
-          mode="link"
-          mt={description ? 'md' : undefined}
-        >
-          {readMore}
-        </IressExpander>
-      )}
-    </IressStack>
+        <ComponentStatus stories={stories} />
 
-    <ComponentCanvas {...canvasProps} of={story} meta={stories} />
+        {readMore && (
+          <IressExpander
+            activator="Read more"
+            mode="link"
+            mt={description ? 'md' : undefined}
+          >
+            {readMore}
+          </IressExpander>
+        )}
+      </IressStack>
 
-    <ComponentApiExpander
-      {...apiProps}
-      details={
-        propsDetails && (
-          <IressText color="colour.neutral.70">{propsDetails}</IressText>
-        )
-      }
-      story={story}
-    />
-  </>
-);
+      <IressPanel bg="transparent" mt="-lg" mb="-xl" mx="-md">
+        <ComponentCanvas {...canvasProps} of={story} meta={stories} />
+      </IressPanel>
+
+      <ComponentApiExpander
+        {...apiProps}
+        details={
+          propsDetails && (
+            <IressText color="colour.neutral.70">{propsDetails}</IressText>
+          )
+        }
+        story={story}
+      />
+    </>
+  );
+};

@@ -3,9 +3,10 @@ export * from './components/ComponentApi';
 export * from './components/ComponentApiExpander';
 export * from './components/ComponentExample';
 export * from './components/ComponentOverview';
+export * from './components/ComponentStatus';
 export * from './components/CurrentBreakpoint';
 export * from './components/DiffViewer';
-export * from './components/IressStorybook';
+export * from './components/HideSidebar';
 export * from './components/Redirect';
 
 // Stories/MDX helpers

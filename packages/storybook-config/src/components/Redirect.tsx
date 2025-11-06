@@ -1,5 +1,5 @@
-import { IressPanel } from '@iress-oss/ids-components';
-import { useEffect } from 'react';
+import { use, useEffect } from 'react';
+import { IressStorybookContext } from './IressStorybookContext';
 
 interface RedirectProps {
   /**
@@ -14,6 +14,12 @@ interface RedirectProps {
 }
 
 export const Redirect = ({ title, to }: RedirectProps) => {
+  if (!to) {
+    throw new Error('Redirect component requires a "to" prop');
+  }
+
+  const { IressPanel } = use(IressStorybookContext);
+
   useEffect(() => {
     const redirect = window.top ?? window;
     redirect.location.href = to;

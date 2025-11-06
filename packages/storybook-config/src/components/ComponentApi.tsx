@@ -1,8 +1,4 @@
-import {
-  ArgTypes,
-  Controls,
-  type SortType,
-} from '@storybook/addon-docs/blocks';
+import { ArgTypes, Controls } from '@storybook/addon-docs/blocks';
 import { type StoryObj } from '@storybook/react';
 import { type ComponentProps, type ReactNode } from 'react';
 import {
@@ -14,10 +10,8 @@ export interface ComponentApiProps
   extends Omit<ComponentProps<typeof Controls>, 'children'>,
     Omit<ComponentApiHeadingProps, 'children'> {
   details?: ReactNode;
-  exclude?: string[];
   heading?: ComponentApiHeadingProps['children'];
   readOnly?: boolean;
-  sort?: SortType;
   story: StoryObj;
 }
 
@@ -42,6 +36,12 @@ export const ComponentApi = ({
 
   const Table = readOnly ? ArgTypes : Controls;
 
+  let excludedArgs = exclude ?? [];
+
+  if (Array.isArray(excludedArgs)) {
+    excludedArgs = [...excludedArgs, 'data-testid', 'data-value'];
+  }
+
   return (
     <div
       ref={(element) => {
@@ -54,12 +54,7 @@ export const ComponentApi = ({
         {heading}
       </ComponentApiHeading>
       {details}
-      <Table
-        of={story}
-        exclude={['data-testid', 'data-value', ...(exclude ?? [])]}
-        sort={sort}
-        {...restProps}
-      />
+      <Table of={story} exclude={excludedArgs} sort={sort} {...restProps} />
     </div>
   );
 };

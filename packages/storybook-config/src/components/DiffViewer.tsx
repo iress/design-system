@@ -1,11 +1,6 @@
-import {
-  IressPanel,
-  IressStack,
-  IressTab,
-  IressTabSet,
-} from '@iress-oss/ids-components';
-import { useState } from 'react';
+import { use, useState } from 'react';
 import ReactDiffViewer, { type ReactDiffViewerProps } from 'react-diff-viewer';
+import { IressStorybookContext } from './IressStorybookContext';
 
 type DiffViewerMode = 'diff' | 'old' | 'new';
 
@@ -23,6 +18,9 @@ export const DiffViewer = ({
   splitView = false,
   ...restProps
 }: DiffViewerProps) => {
+  const { IressPanel, IressStack, IressTab, IressTabSet } = use(
+    IressStorybookContext,
+  );
   const [mode, setMode] = useState<DiffViewerMode>('diff');
 
   return (

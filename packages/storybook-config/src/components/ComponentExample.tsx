@@ -1,9 +1,10 @@
 import { type StoryObj } from '@storybook/react';
-import { IressText } from '@iress-oss/ids-components';
 import { ComponentCanvas, type ComponentCanvasProps } from './ComponentCanvas';
 import { type ComponentApiProps } from './ComponentApi';
 import { type StoryModule } from '~/types';
 import { ComponentApiExpander } from './ComponentApiExpander';
+import { use } from 'react';
+import { IressStorybookContext } from './IressStorybookContext';
 
 export interface ComponentExampleProps
   extends Omit<ComponentCanvasProps, 'of' | 'story'> {
@@ -24,6 +25,7 @@ export const ComponentExample = ({
   stories,
   ...restProps
 }: ComponentExampleProps) => {
+  const { IressText, IressPanel } = use(IressStorybookContext);
   const apiProps: ComponentExampleProps['api'] =
     typeof api === 'string'
       ? {
@@ -33,12 +35,14 @@ export const ComponentExample = ({
 
   return (
     <>
-      <ComponentCanvas
-        {...restProps}
-        of={story}
-        meta={stories}
-        story={storyProps}
-      />
+      <IressPanel bg="transparent" mt="-lg" mb="-xl" mx="-md">
+        <ComponentCanvas
+          {...restProps}
+          of={story}
+          meta={stories}
+          story={storyProps}
+        />
+      </IressPanel>
       {apiProps && (
         <ComponentApiExpander
           {...API_DEFAULTS}
