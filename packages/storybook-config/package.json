@@ -15,7 +15,7 @@
     "dev": "yarn storybook",
     "clean": "rimraf dist coverage storybook-static",
     "lint": "eslint . --ext=.js,.jsx,.ts,.tsx,.mjs,.cjs,.mdx --max-warnings=0",
-    "storybook": "storybook dev -p 6007",
+    "storybook": "storybook dev -p 6006",
     "test": "vitest --config vitest.config.ts --watch",
     "test:coverage": "vitest run --config vitest.config.ts --coverage",
     "typecheck": "tsc --noEmit -p tsconfig.json",
