@@ -5,6 +5,7 @@ import { IressStorybookContext } from './IressStorybookContext';
 import {
   type StoryAnnotations,
   type ModuleExports,
+  type ModuleExport,
 } from 'storybook/internal/types';
 
 interface ComponentStatusProps extends IressInlineProps {
@@ -12,7 +13,7 @@ interface ComponentStatusProps extends IressInlineProps {
    * The stories module for the component
    * Either `of` or `meta` must be provided.
    */
-  of?: StoryAnnotations;
+  of?: ModuleExport;
 
   /**
    * The stories module for the component.

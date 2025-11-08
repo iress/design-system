@@ -8,14 +8,13 @@ import * as ComponentStories from './mocks/StoryStub.stories';
 
 This allows us to preview and test the component examples, as the stories file doesn't work for it.
 
-<ComponentExample meta={ComponentStories} of={ComponentStories.IsStub} />
+<ComponentExample of={ComponentStories.IsStub} />
 
 ## Stories
 
 ### API
 
 <ComponentExample
-  meta={ComponentStories}
   of={ComponentStories.IsStub}
   api={{
     heading: 'API Example',
@@ -26,9 +25,12 @@ This allows us to preview and test the component examples, as the stories file d
 ### Story props
 
 <ComponentExample
-  meta={ComponentStories}
   of={ComponentStories.IsStub}
   story={{
     height: '100px',
   }}
 />
+
+### No API
+
+<ComponentExample of={ComponentStories.IsStub} api={false} />

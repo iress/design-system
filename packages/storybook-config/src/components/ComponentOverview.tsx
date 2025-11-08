@@ -7,6 +7,7 @@ import { IressStorybookContext } from './IressStorybookContext';
 import {
   type StoryAnnotations,
   type ModuleExports,
+  type ModuleExport,
 } from 'storybook/internal/types';
 
 export interface ComponentOverviewProps {
@@ -43,7 +44,7 @@ export interface ComponentOverviewProps {
   /**
    * The story to show the Canvas and Props for
    */
-  of: StoryAnnotations;
+  of: ModuleExport;
 
   /**
    * The stories module for the component
@@ -83,7 +84,7 @@ export const ComponentOverview = ({
 
         {info}
 
-        <ComponentStatus of={of} meta={meta} />
+        <ComponentStatus of={of as StoryAnnotations} meta={meta} />
 
         {readMore && (
           <IressExpander
@@ -97,7 +98,11 @@ export const ComponentOverview = ({
       </IressStack>
 
       <IressPanel bg="transparent" mt="-lg" mb="-xl" mx="-md">
-        <ComponentCanvas {...canvasProps} of={of} meta={meta} />
+        <ComponentCanvas
+          {...canvasProps}
+          of={of as StoryAnnotations}
+          meta={meta}
+        />
       </IressPanel>
 
       <ComponentApiExpander
@@ -107,7 +112,7 @@ export const ComponentOverview = ({
             <IressText color="colour.neutral.70">{propsDetails}</IressText>
           )
         }
-        of={of}
+        of={of as StoryAnnotations}
       />
     </>
   );

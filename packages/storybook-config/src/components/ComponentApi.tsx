@@ -4,7 +4,10 @@ import {
   ComponentApiHeading,
   type ComponentApiHeadingProps,
 } from './ComponentApiHeading';
-import { type StoryAnnotations } from 'storybook/internal/types';
+import {
+  type StoryAnnotations,
+  type ModuleExport,
+} from 'storybook/internal/types';
 
 export interface ComponentApiProps
   extends Omit<ComponentProps<typeof Controls>, 'children'>,
@@ -27,7 +30,7 @@ export interface ComponentApiProps
   /**
    * The story to extract the component API from.
    */
-  of: StoryAnnotations;
+  of: ModuleExport;
 }
 
 /**
@@ -73,7 +76,12 @@ export const ComponentApi = ({
         {heading}
       </ComponentApiHeading>
       {details}
-      <Table of={of} exclude={excludedArgs} sort={sort} {...restProps} />
+      <Table
+        of={of as StoryAnnotations}
+        exclude={excludedArgs}
+        sort={sort}
+        {...restProps}
+      />
     </div>
   );
 };
