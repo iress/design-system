@@ -1,7 +1,7 @@
 // TODO: Probably better done with end-to-end tests
 import { render, screen } from '@testing-library/react';
 import { ComponentStatus } from './ComponentStatus';
-import { type StoryModule } from '../types';
+import { ModuleExports } from 'storybook/internal/types';
 
 // We mock the @storybook/addon-docs/blocks package to avoid rendering the actual DocsContainer component,
 // Which relies on Storybook's context and would throw an error in a test environment (and is a pain to mock).
@@ -12,7 +12,7 @@ vi.mock('storybook/internal/components', async (importOriginal) => ({
 
 describe('ComponentStatus', () => {
   it('renders nothing if no applicable tags', () => {
-    const storiesMock: StoryModule = {
+    const storiesMock: ModuleExports = {
       default: {
         tags: ['tag'],
       },
@@ -25,7 +25,7 @@ describe('ComponentStatus', () => {
   });
 
   it('renders caution tag', () => {
-    const storiesMock: StoryModule = {
+    const storiesMock: ModuleExports = {
       default: {
         tags: ['caution:SomeComponent'],
       },
@@ -39,7 +39,7 @@ describe('ComponentStatus', () => {
   });
 
   it('renders beta tag', () => {
-    const storiesMock: StoryModule = {
+    const storiesMock: ModuleExports = {
       default: {
         tags: ['beta:SomeComponent'],
       },
@@ -53,7 +53,7 @@ describe('ComponentStatus', () => {
   });
 
   it('renders updated tag', () => {
-    const storiesMock: StoryModule = {
+    const storiesMock: ModuleExports = {
       default: {
         tags: ['updated'],
       },

@@ -1,11 +1,13 @@
 import { use, type ReactNode } from 'react';
-import { type StoryObj } from '@storybook/react';
 import { type ComponentApiProps } from './ComponentApi';
 import { ComponentCanvas, type ComponentCanvasProps } from './ComponentCanvas';
-import { type StoryModule } from '~/types';
 import { ComponentApiExpander } from './ComponentApiExpander';
 import { ComponentStatus } from './ComponentStatus';
 import { IressStorybookContext } from './IressStorybookContext';
+import {
+  type StoryAnnotations,
+  type ModuleExports,
+} from 'storybook/internal/types';
 
 export interface ComponentOverviewProps {
   /**
@@ -41,14 +43,18 @@ export interface ComponentOverviewProps {
   /**
    * The story to show the Canvas and Props for
    */
-  story: StoryObj;
+  of: StoryAnnotations;
 
   /**
    * The stories module for the component
    */
-  stories: StoryModule;
+  meta: ModuleExports;
 }
 
+/**
+ * Component to display a component overview in Storybook, including description, status, canvas, and API sections.
+ * Usually used for the first section of a component's documentation page.
+ */
 export const ComponentOverview = ({
   apiProps,
   canvasProps,
@@ -56,8 +62,8 @@ export const ComponentOverview = ({
   info,
   propsDetails,
   readMore,
-  story,
-  stories,
+  of,
+  meta,
 }: ComponentOverviewProps) => {
   const { IressStack, IressText, IressExpander, IressPanel } = use(
     IressStorybookContext,
@@ -77,7 +83,7 @@ export const ComponentOverview = ({
 
         {info}
 
-        <ComponentStatus stories={stories} />
+        <ComponentStatus of={of} meta={meta} />
 
         {readMore && (
           <IressExpander
@@ -91,7 +97,7 @@ export const ComponentOverview = ({
       </IressStack>
 
       <IressPanel bg="transparent" mt="-lg" mb="-xl" mx="-md">
-        <ComponentCanvas {...canvasProps} of={story} meta={stories} />
+        <ComponentCanvas {...canvasProps} of={of} meta={meta} />
       </IressPanel>
 
       <ComponentApiExpander
@@ -101,7 +107,7 @@ export const ComponentOverview = ({
             <IressText color="colour.neutral.70">{propsDetails}</IressText>
           )
         }
-        story={story}
+        of={of}
       />
     </>
   );

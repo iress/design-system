@@ -5,9 +5,15 @@ import { IressStorybookContext } from './IressStorybookContext';
 type DiffViewerMode = 'diff' | 'old' | 'new';
 
 export interface DiffViewerProps extends ReactDiffViewerProps {
+  /**
+   * Whether to allow changing between diff, old, and new modes, usually used for more complex diffs.
+   */
   allowModeChange?: boolean;
 }
 
+/**
+ * A component to allow viewing differences between two pieces of code (`oldValue` and `newValue`)
+ */
 export const DiffViewer = ({
   allowModeChange,
   disableWordDiff = true,

@@ -28,8 +28,7 @@
   },
   "files": [
     "dist",
-    "public",
-    "scripts/postinstall.js"
+    "public"
   ],
   "sideEffects": [
     "**/*.css"
@@ -45,8 +44,7 @@
     "test": "vitest --config vitest.config.ts --watch",
     "test:coverage": "vitest run --config vitest.config.ts --coverage",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "watch": "vite build --watch",
-    "postinstall": "node ./scripts/postinstall.js"
+    "watch": "vite build --watch"
   },
   "dependencies": {
     "@iress-oss/ids-components": "^6.0.0-alpha.0",

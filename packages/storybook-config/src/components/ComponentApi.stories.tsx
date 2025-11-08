@@ -43,6 +43,6 @@ export const Heading: Story = {
 
 export const Story: Story = {
   args: {
-    story: StoryStub.IsStub,
+    of: StoryStub.IsStub,
   },
 };

@@ -24,6 +24,10 @@ interface ManagerProps {
   version?: string;
 }
 
+/**
+ * Function to set up the Storybook manager configuration.
+ * Used to centralise the configuration for all Storybook instances in multiple repositories.
+ */
 export const setUpManager = ({
   title = 'Iress Design System',
   logo = './assets/ids-logo-wealth.png',

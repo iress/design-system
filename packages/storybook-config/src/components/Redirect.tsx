@@ -13,6 +13,9 @@ interface RedirectProps {
   to: string;
 }
 
+/**
+ * Component to redirect the user to a different URL within Storybook.
+ */
 export const Redirect = ({ title, to }: RedirectProps) => {
   if (!to) {
     throw new Error('Redirect component requires a "to" prop');

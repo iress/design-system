@@ -1,9 +1,11 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import {
+  type ComponentProps,
   type ForwardedRef,
   forwardRef,
   type PropsWithChildren,
   use,
+  useMemo,
 } from 'react';
 import { IressStorybookContext } from './IressStorybookContext';
 
@@ -30,31 +32,57 @@ export const ComponentApiHeading = forwardRef(
   ) => {
     const { IressText } = use(IressStorybookContext);
 
-    const markdownSettings = headingId
-      ? { slugify: () => headingId }
-      : undefined;
+    const markdownSettings = useMemo(() => {
+      const options: ComponentProps<typeof Markdown>['options'] = {
+        overrides: {
+          h2: (props) => (
+            <IressText
+              element="h2"
+              textStyle="typography.heading.4"
+              {...props}
+            />
+          ),
+          h3: (props) => (
+            <IressText
+              element="h3"
+              textStyle="typography.heading.4"
+              {...props}
+            />
+          ),
+          h4: (props) => (
+            <IressText
+              element="h4"
+              textStyle="typography.heading.4"
+              {...props}
+            />
+          ),
+        },
+      };
+
+      if (headingId) {
+        options.slugify = () => headingId;
+      }
+
+      return options;
+    }, [headingId, IressText]);
 
     if (headingProp && typeof headingProp === 'string') {
       return (
         <div ref={ref}>
-          <IressText mb="-sm">
-            <Markdown
-              options={markdownSettings}
-            >{`${'#'.repeat(headingLevel)} ${headingProp}`}</Markdown>
-          </IressText>
+          <Markdown
+            options={markdownSettings}
+          >{`${'#'.repeat(headingLevel)} ${headingProp}`}</Markdown>
         </div>
       );
     }
 
     return (
       <div ref={ref}>
-        <IressText mb="-sm">
-          {headingProp ?? (
-            <Markdown
-              options={markdownSettings}
-            >{`${'#'.repeat(headingLevel)} Props`}</Markdown>
-          )}
-        </IressText>
+        {headingProp ?? (
+          <Markdown
+            options={markdownSettings}
+          >{`${'#'.repeat(headingLevel)} Props`}</Markdown>
+        )}
       </div>
     );
   },

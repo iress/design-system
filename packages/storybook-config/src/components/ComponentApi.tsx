@@ -1,20 +1,39 @@
 import { ArgTypes, Controls } from '@storybook/addon-docs/blocks';
-import { type StoryObj } from '@storybook/react';
 import { type ComponentProps, type ReactNode } from 'react';
 import {
   ComponentApiHeading,
   type ComponentApiHeadingProps,
 } from './ComponentApiHeading';
+import { type StoryAnnotations } from 'storybook/internal/types';
 
 export interface ComponentApiProps
   extends Omit<ComponentProps<typeof Controls>, 'children'>,
     Omit<ComponentApiHeadingProps, 'children'> {
+  /**
+   * Additional details to display above the API table.
+   */
   details?: ReactNode;
+
+  /**
+   * Heading for the API section.
+   */
   heading?: ComponentApiHeadingProps['children'];
+
+  /**
+   * Whether the API table is read-only.
+   */
   readOnly?: boolean;
-  story: StoryObj;
+
+  /**
+   * The story to extract the component API from.
+   */
+  of: StoryAnnotations;
 }
 
+/**
+ * Component to display the API of a component, including controls or arg types.
+ * It is a wrapper around Storybook's Controls and ArgTypes components with added functionality.
+ */
 export const ComponentApi = ({
   details,
   exclude,
@@ -23,7 +42,7 @@ export const ComponentApi = ({
   headingLevel = 2,
   readOnly,
   sort = 'alpha',
-  story,
+  of,
   ...restProps
 }: ComponentApiProps) => {
   const closeCategories = (element: HTMLDivElement) => {
@@ -54,7 +73,7 @@ export const ComponentApi = ({
         {heading}
       </ComponentApiHeading>
       {details}
-      <Table of={story} exclude={excludedArgs} sort={sort} {...restProps} />
+      <Table of={of} exclude={excludedArgs} sort={sort} {...restProps} />
     </div>
   );
 };

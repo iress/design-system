@@ -20,6 +20,7 @@ export interface CurrentBreakpointProps {
     | 'max-width'
     | 'container'
     | 'and-above'
+    | 'viewing'
     | 'container-fluid';
 }
 
@@ -57,6 +58,9 @@ const ContainerBreakpointLabel = ({
   </>
 );
 
+/**
+ * Component to display the current responsive breakpoint in Storybook.
+ */
 export const CurrentBreakpoint = ({
   as: Tag = 'span',
   renderLabel,
@@ -90,6 +94,13 @@ export const CurrentBreakpoint = ({
         <>
           <strong>{String(breakpoint)}</strong> ({detail.minScreenWidth} and
           above)
+        </>
+      )}
+      {renderLabel === 'viewing' && (
+        <>
+          You are currently viewing the <strong>{breakpoint}</strong> breakpoint
+          ({detail.screenWidthRange}). Resize your screen to view different
+          breakpoints.
         </>
       )}
       {!renderLabel && (

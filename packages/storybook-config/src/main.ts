@@ -1,9 +1,14 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 import remarkGfm from 'remark-gfm';
 
-import { resolve } from 'path';
+import { dirname, resolve } from 'path';
 import { mergeConfig } from 'vite';
 import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+
+// Get the directory name for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 interface MainConfig extends Pick<Partial<StorybookConfig>, 'stories'> {
   /**
@@ -21,6 +26,10 @@ interface MainConfig extends Pick<Partial<StorybookConfig>, 'stories'> {
   tsConfigWithAlias?: string;
 }
 
+/**
+ * Function to get the main Storybook configuration.
+ * Used to centralise the configuration for all Storybook instances in multiple repositories.
+ */
 export const getMainConfig = ({
   absolutePath,
   stories,
@@ -56,7 +65,7 @@ export const getMainConfig = ({
 
   framework: '@storybook/react-vite',
 
-  staticDirs: ['../public'],
+  staticDirs: [resolve(__dirname, '../public')],
 
   stories: stories ?? [
     '../docs/**/*.@(stories.ts|stories.tsx|mdx)',

@@ -12,7 +12,7 @@ const meta: Meta<typeof ComponentStatus> = {
   component: ComponentStatus,
   tags: ['autodocs'],
   parameters: {
-    ...disableArgTypes(['stories', 'story']),
+    ...disableArgTypes(['meta', 'of']),
     relativeCsfPaths: ['mocks/StoryStub.stories'],
     ...withCustomSource('<ComponentStatus stories={StoryStub} />'),
   },
@@ -22,24 +22,24 @@ export default meta;
 
 export const Updated: Story = {
   args: {
-    stories: StoryStub as never,
+    meta: StoryStub,
   },
 };
 
 export const Beta: Story = {
   args: {
-    story: StoryStub.Beta,
+    of: StoryStub.Beta,
   },
 };
 
 export const BetaReplace: Story = {
   args: {
-    story: StoryStub.BetaReplace,
+    of: StoryStub.BetaReplace,
   },
 };
 
 export const Caution: Story = {
   args: {
-    story: StoryStub.Caution,
+    of: StoryStub.Caution,
   },
 };

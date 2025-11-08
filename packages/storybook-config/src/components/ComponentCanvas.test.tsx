@@ -1,11 +1,11 @@
 // TODO: Probably better done with end-to-end tests
 import { render } from '@testing-library/react';
 import { ComponentCanvas, type ComponentCanvasProps } from './ComponentCanvas';
-import { type StoryModule } from '../types';
 import { type ComponentProps } from 'react';
 import type { Canvas, SourceProps } from '@storybook/addon-docs/blocks';
 import { addons } from 'storybook/preview-api';
 import { FORCE_REMOUNT } from 'storybook/internal/core-events';
+import { ModuleExports } from 'storybook/internal/types';
 
 // We mock the @storybook/addon-docs/blocks package to avoid rendering the actual DocsContainer component,
 // Which relies on Storybook's context and would throw an error in a test environment (and is a pain to mock).
@@ -26,7 +26,7 @@ vi.mock('@storybook/addon-docs/blocks', async (importOriginal) => ({
   Controls: () => <div>Controls rendered</div>,
 }));
 
-const storiesMock: StoryModule = {
+const storiesMock: ModuleExports = {
   default: {},
   __namedExportsOrder: [],
 };

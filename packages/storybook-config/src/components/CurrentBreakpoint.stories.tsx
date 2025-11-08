@@ -45,6 +45,12 @@ export const MaxWidth: Story = {
   },
 };
 
+export const Viewing: Story = {
+  args: {
+    renderLabel: 'viewing',
+  },
+};
+
 export const RenderCustomLabel: Story = {
   args: {
     renderLabel: ({ breakpoint }) => {

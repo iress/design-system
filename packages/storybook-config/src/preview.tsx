@@ -8,11 +8,15 @@ import { IressProvider } from '@iress-oss/ids-components';
 export interface PreviewProps {
   /**
    * Additional props to pass to the IressStorybook docs container.
-   * Used by the components package to declare the component mapping.
+   * Used by the components package to declare the component mapping so that we can view components in-development without needing to publish first.
    */
   docsProps?: Pick<IressStorybookProps, 'componentMapping' | 'noStyles'>;
 }
 
+/**
+ * Function to get the Storybook preview configuration.
+ * Used to centralise the configuration for all Storybook instances in multiple repositories.
+ */
 export const getPreview = ({ docsProps }: PreviewProps): Preview => {
   const Provider = docsProps?.componentMapping?.IressProvider ?? IressProvider;
 

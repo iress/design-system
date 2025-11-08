@@ -1,22 +1,24 @@
 import { type IressInlineProps } from '@iress-oss/ids-components';
 import { use } from 'react';
 import { Badge } from 'storybook/internal/components';
-import { type StoryModule } from '~/types';
 import { IressStorybookContext } from './IressStorybookContext';
-import { type StoryObj } from '@storybook/react-vite';
+import {
+  type StoryAnnotations,
+  type ModuleExports,
+} from 'storybook/internal/types';
 
 interface ComponentStatusProps extends IressInlineProps {
   /**
    * The stories module for the component
-   * Either `stories` or `story` must be provided.
+   * Either `of` or `meta` must be provided.
    */
-  story?: StoryObj;
+  of?: StoryAnnotations;
 
   /**
    * The stories module for the component.
-   * Either `stories` or `story` must be provided.
+   * Either `of` or `meta` must be provided.
    */
-  stories?: StoryModule;
+  meta?: ModuleExports;
 }
 
 interface TagProps {
@@ -94,19 +96,23 @@ const UpdatedTag = () => {
   );
 };
 
+/**
+ * Component to display the status of a component in Storybook, such as beta, caution, or updated.
+ * It extracts status information from the story's tags and displays appropriate badges and messages.
+ */
 export const ComponentStatus = ({
-  story: storyProp,
-  stories,
+  of: ofProp,
+  meta,
   ...restProps
 }: ComponentStatusProps) => {
   const { IressDivider, IressInline } = use(IressStorybookContext);
 
-  if (!storyProp && !stories) {
+  if (!ofProp && !meta) {
     throw new Error('ComponentStatus requires either a story or stories prop');
   }
 
-  const story = storyProp ?? stories?.default;
-  const storyTags = story!.tags ?? [];
+  const of = (ofProp ?? meta?.default) as StoryAnnotations;
+  const storyTags = of.tags ?? [];
   const betaTag = storyTags.find((tag) => tag.startsWith('beta:'));
   const cautionTag = storyTags.find((tag) => tag.startsWith('caution:'));
   const updatedTag = storyTags.find((tag) => tag === 'updated');

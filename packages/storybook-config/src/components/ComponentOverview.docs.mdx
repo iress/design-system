@@ -10,23 +10,23 @@ import * as ComponentStories from './mocks/StoryStub.stories';
 
 This allows us to preview and test the component overviews, as the stories file doesn't work for it.
 
-<ComponentOverview stories={ComponentStories} story={ComponentStories.IsStub} />
+<ComponentOverview meta={ComponentStories} of={ComponentStories.IsStub} />
 
 ## Stories
 
 ### Description
 
 <ComponentOverview
-  stories={ComponentStories}
-  story={ComponentStories.IsStub}
+  meta={ComponentStories}
+  of={ComponentStories.IsStub}
   description="This is an example of a description."
 />
 
 ### API props
 
 <ComponentOverview
-  stories={ComponentStories}
-  story={ComponentStories.IsStub}
+  meta={ComponentStories}
+  of={ComponentStories.IsStub}
   apiProps={{
     heading: 'API Overview',
   }}
@@ -35,8 +35,8 @@ This allows us to preview and test the component overviews, as the stories file 
 ### Canvas props
 
 <ComponentOverview
-  stories={ComponentStories}
-  story={ComponentStories.IsStub}
+  meta={ComponentStories}
+  of={ComponentStories.IsStub}
   canvasProps={{
     refresh: true,
   }}
@@ -45,8 +45,8 @@ This allows us to preview and test the component overviews, as the stories file 
 ### Info
 
 <ComponentOverview
-  stories={ComponentStories}
-  story={ComponentStories.IsStub}
+  meta={ComponentStories}
+  of={ComponentStories.IsStub}
   info={
     <span>
       <strong>Note:</strong> This is some additional info about the component.
@@ -57,7 +57,7 @@ This allows us to preview and test the component overviews, as the stories file 
 ### Read more
 
 <ComponentOverview
-  stories={ComponentStories}
-  story={ComponentStories.IsStub}
+  meta={ComponentStories}
+  of={ComponentStories.IsStub}
   readMore={<p>Some additional description can be found here.</p>}
 />

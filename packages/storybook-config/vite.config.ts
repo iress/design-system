@@ -52,6 +52,7 @@ export default defineConfig({
         ...Object.keys(peerDependencies || {}),
         'path',
         'fs',
+        'url',
         '@storybook/react',
         '@storybook/addon-docs/blocks',
         'storybook/internal/components',
