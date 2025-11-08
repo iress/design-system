@@ -17,8 +17,3 @@ export * from './helpers/removeArgTypes';
 export * from './helpers/stringifyStorybookArgs';
 export * from './helpers/withJsxTransformer';
 export * from './helpers/withTransformedSource';
-
-// Configuration helpers
-export * from './main';
-export * from './manager';
-export * from './preview';

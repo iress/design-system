@@ -4,9 +4,35 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./preview": {
+      "types": "./dist/preview.d.ts",
+      "import": "./dist/preview.js",
+      "require": "./dist/preview.cjs"
+    },
+    "./main": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/main.js",
+      "require": "./dist/main.cjs"
+    },
+    "./manager": {
+      "types": "./dist/manager.d.ts",
+      "import": "./dist/manager.js",
+      "require": "./dist/manager.cjs"
+    }
+  },
   "files": [
     "dist",
-    "public"
+    "public",
+    "scripts/postinstall.js"
+  ],
+  "sideEffects": [
+    "**/*.css"
   ],
   "scripts": {
     "analyse": "yarn vite-bundle-visualizer",
@@ -19,7 +45,8 @@
     "test": "vitest --config vitest.config.ts --watch",
     "test:coverage": "vitest run --config vitest.config.ts --coverage",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "watch": "vite build --watch"
+    "watch": "vite build --watch",
+    "postinstall": "node ./scripts/postinstall.js"
   },
   "dependencies": {
     "@iress-oss/ids-components": "^6.0.0-alpha.0",
@@ -44,6 +71,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/react": "^19.1.1",
     "@types/react-dom": "^19",
+    "@types/react-is": "^19",
     "@typescript-eslint/eslint-plugin": "^8.44.1",
     "@typescript-eslint/parser": "^8.44.1",
     "@vitejs/plugin-react": "^5.0.4",
@@ -60,6 +88,7 @@
     "prettier": "^3.6.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-is": "^19.2.0",
     "rimraf": "^6.0.1",
     "rollup-plugin-tree-shakeable": "^2.0.0",
     "storybook": "^9.0.0",
@@ -68,6 +97,7 @@
     "vite": "^7.1.7",
     "vite-bundle-visualizer": "^1.2.1",
     "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-lib-inject-css": "^2.2.2",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"
   },
@@ -84,6 +114,7 @@
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19",
     "storybook": "^9.0.0",
-    "storybook-addon-tag-badges": "^2.0.2"
+    "storybook-addon-tag-badges": "^2.0.2",
+    "vite": "^7.1.7"
   }
 }

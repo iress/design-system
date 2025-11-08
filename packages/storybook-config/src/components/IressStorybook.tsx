@@ -6,13 +6,15 @@ import {
 import { addons } from 'storybook/preview-api';
 import { DOCS_RENDERED } from 'storybook/internal/core-events';
 import { MDXProvider } from '@mdx-js/react';
-import { useEffect, type ReactNode } from 'react';
+import { lazy, Suspense, type ReactNode } from 'react';
 import {
   COMPONENT_MAPPING_DEFAULT,
   type IressStorybookComponentMapping,
   IressStorybookContext,
 } from './IressStorybookContext';
 import { cssVars } from '@iress-oss/ids-tokens';
+
+const IDSStyles = lazy(() => import('./IDSStyles'));
 
 export interface IressStorybookProps extends DocsContainerProps {
   /**
@@ -197,21 +199,16 @@ export const IressStorybook = ({
   noStyles,
   ...props
 }: IressStorybookProps) => {
-  useEffect(() => {
-    const loadCss = async () => {
-      await import('@iress-oss/ids-components/dist/style.css');
-    };
-
-    if (!noStyles) {
-      void loadCss();
-    }
-  }, [noStyles]);
-
   const { IressProvider, IressText } = componentMapping;
 
   return (
     <IressStorybookContext value={componentMapping}>
       <IressStorybookStyles />
+      {!noStyles && (
+        <Suspense>
+          <IDSStyles />
+        </Suspense>
+      )}
       <Unstyled>
         <IressProvider>
           <IressText>

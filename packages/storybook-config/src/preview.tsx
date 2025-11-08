@@ -5,31 +5,25 @@ import {
 } from './components/IressStorybook';
 import { IressProvider } from '@iress-oss/ids-components';
 
-interface PreviewProps {
+export interface PreviewProps {
   /**
    * Additional props to pass to the IressStorybook docs container.
    * Used by the components package to declare the component mapping.
    */
   docsProps?: Pick<IressStorybookProps, 'componentMapping' | 'noStyles'>;
-
-  /**
-   * If true, the IressProvider will not be added around stories.
-   * Usually only used for the component library so they can add their own provider that changes at development time.
-   */
-  noProvider?: boolean;
 }
 
-export const getPreview = ({ docsProps, noProvider = false }: PreviewProps) =>
-  ({
-    decorators: noProvider
-      ? []
-      : [
-          (Story) => (
-            <IressProvider>
-              <Story />
-            </IressProvider>
-          ),
-        ],
+export const getPreview = ({ docsProps }: PreviewProps): Preview => {
+  const Provider = docsProps?.componentMapping?.IressProvider ?? IressProvider;
+
+  return {
+    decorators: [
+      (Story) => (
+        <Provider>
+          <Story />
+        </Provider>
+      ),
+    ],
     parameters: {
       controls: {
         expanded: true,
@@ -62,4 +56,5 @@ export const getPreview = ({ docsProps, noProvider = false }: PreviewProps) =>
         },
       },
     },
-  }) satisfies Preview;
+  };
+};

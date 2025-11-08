@@ -1,12 +1,11 @@
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import dts from 'vite-plugin-dts';
-import { extname, relative, resolve } from 'path';
-import { fileURLToPath } from 'url';
-import { glob } from 'glob';
+import { resolve } from 'path';
 import treeShakeable from 'rollup-plugin-tree-shakeable';
 import react from '@vitejs/plugin-react';
 import { peerDependencies } from './package.json';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
 export default defineConfig({
   plugins: [
@@ -21,45 +20,51 @@ export default defineConfig({
         'src/**/*.stories.*',
         'src/**/*.docs.*',
         'plugins/**/*',
-        'src/*.tsx',
         '*.ts',
       ],
       tsconfigPath: './tsconfig.base.json',
     }),
     treeShakeable(),
+    libInjectCss(),
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
-      formats: ['es'],
+      entry: {
+        index: resolve(__dirname, 'src/index.ts'),
+        main: resolve(__dirname, 'src/main.ts'),
+        preview: resolve(__dirname, 'src/preview.tsx'),
+        manager: resolve(__dirname, 'src/manager.ts'),
+      },
     },
     rollupOptions: {
-      input: Object.fromEntries(
-        // https://rollupjs.org/configuration-options/#input
-        glob
-          .sync('src/**/!(*.test|*.stories).{ts,tsx}', {
-            ignore: [
-              'src/**/mock-data/**',
-              'src/**/examples/**',
-              'src/**/mocks/**',
-              'src/*.tsx',
-              'src/vite-env.d.ts',
-            ],
-          })
-          .map((file) => [
-            // 1. The name of the entry point
-            // src/nested/foo.js becomes nested/foo
-            relative('src', file.slice(0, file.length - extname(file).length)),
-            // 2. The absolute path to the entry file
-            // src/nested/foo.ts becomes /project/src/nested/foo.ts
-            fileURLToPath(new URL(file, import.meta.url)),
-          ]),
-      ),
-      output: {
-        assetFileNames: '[name][extname]',
-        entryFileNames: '[name].js',
-      },
-      external: Object.keys(peerDependencies),
+      preserveEntrySignatures: 'strict',
+      output: [
+        {
+          format: 'es',
+          entryFileNames: '[name].js',
+        },
+        {
+          format: 'cjs',
+          entryFileNames: '[name].cjs',
+        },
+      ],
+      external: [
+        ...Object.keys(peerDependencies || {}),
+        'path',
+        'fs',
+        '@storybook/react',
+        '@storybook/addon-docs/blocks',
+        'storybook/internal/components',
+        'storybook/preview-api',
+        'storybook/internal/preview-api',
+        'storybook/internal/core-events',
+        'storybook/manager-api',
+        'storybook/internal/core-events',
+        'storybook/theming',
+        '@mdx-js/react',
+        'react-jsx-runtime',
+        'react-element-to-jsx-string',
+      ],
     },
   },
 });

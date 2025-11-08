@@ -9,7 +9,6 @@
   },
   "include": [
     "docs",
-    "plugins",
     "**/*.ts",
     "**/*.tsx",
     ".storybook/**/*.ts",

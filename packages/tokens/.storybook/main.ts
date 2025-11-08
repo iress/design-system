@@ -1,29 +1,12 @@
-import type { StorybookConfig } from '@storybook/react-vite';
-import remarkGfm from 'remark-gfm';
+import { getMainConfig } from '@iress-oss/ids-storybook-config/main';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const config: StorybookConfig = {
-  addons: [
-    {
-      name: '@storybook/addon-docs',
-      options: {
-        mdxPluginOptions: {
-          mdxCompileOptions: {
-            remarkPlugins: [remarkGfm],
-          },
-        },
-      },
-    },
-    '@iress-oss/ids-storybook-version-badge',
-    './local-preset.cjs',
-  ],
-  core: {
-    disableTelemetry: true,
-  },
-  framework: '@storybook/react-vite',
-  stories: [
-    '../docs/**/*.@(stories.ts|stories.tsx|mdx)',
-    '../src/**/*.@(stories.ts|stories.tsx|mdx)',
-  ],
-};
+const config = getMainConfig({
+  absolutePath: dirname(dirname(fileURLToPath(import.meta.url))),
+  tsConfigWithAlias: 'tsconfig.base.json',
+});
+
+config.addons?.push('./local-preset.cjs');
 
 export default config;
