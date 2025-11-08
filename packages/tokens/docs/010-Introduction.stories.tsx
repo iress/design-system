@@ -228,6 +228,7 @@ const TokenTable = () => {
   const [showDeprecated, setShowDeprecated] = useState(false);
 
   const { debouncedQuery, loading, results } = useAutocompleteSearch({
+    debounceThreshold: 0,
     initialOptions: metadata,
     options: metadata,
     query,
