@@ -1,7 +1,7 @@
 // TODO: Probably better done with end-to-end tests
 import { render, screen } from '@testing-library/react';
 import { ComponentExample } from './ComponentExample';
-import { ModuleExports } from 'storybook/internal/types';
+import { ModuleExports, StoryAnnotations } from 'storybook/internal/types';
 
 // We mock the @storybook/addon-docs/blocks package to avoid rendering the actual DocsContainer component,
 // Which relies on Storybook's context and would throw an error in a test environment (and is a pain to mock).
@@ -18,6 +18,35 @@ vi.mock('@storybook/addon-docs/blocks', async (importOriginal) => ({
   Controls: () => <div>Controls rendered</div>,
 }));
 
+// Mock the ComponentCanvas to avoid hook issues
+vi.mock('./ComponentCanvas', () => ({
+  ComponentCanvas: () => <div>Canvas rendered</div>,
+}));
+
+// Mock ComponentApiExpander to avoid import issues
+vi.mock('./ComponentApiExpander', () => ({
+  ComponentApiExpander: ({
+    heading = 'Props',
+    headingLevel = 4,
+    details,
+    ...props
+  }: {
+    heading?: string;
+    headingLevel?: number;
+    details?: React.ReactNode;
+  }) => (
+    <div role="region" aria-labelledby={`heading-${heading}`} {...props}>
+      <button role="button" aria-expanded="false">
+        {heading}
+      </button>
+      <h4 id={`heading-${heading}`} role="heading" aria-level={headingLevel}>
+        {heading}
+      </h4>
+      {details && <div>{details}</div>}
+    </div>
+  ),
+}));
+
 const storiesMock: ModuleExports = {
   default: {},
   __namedExportsOrder: [],
@@ -26,7 +55,10 @@ const storiesMock: ModuleExports = {
 describe('ComponentExample', () => {
   it('renders canvas only by default', () => {
     render(
-      <ComponentExample story={storiesMock.default} stories={storiesMock} />,
+      <ComponentExample
+        of={storiesMock.default as StoryAnnotations}
+        meta={storiesMock}
+      />,
     );
 
     expect(screen.getByText('Canvas rendered')).toBeInTheDocument();
@@ -36,8 +68,8 @@ describe('ComponentExample', () => {
   it('renders expander if api is provided', () => {
     render(
       <ComponentExample
-        story={storiesMock.default}
-        stories={storiesMock}
+        of={storiesMock.default as StoryAnnotations}
+        meta={storiesMock}
         api="API"
       />,
     );
@@ -55,8 +87,8 @@ describe('ComponentExample', () => {
   it('renders custom api', () => {
     render(
       <ComponentExample
-        story={storiesMock.default}
-        stories={storiesMock}
+        of={storiesMock.default as StoryAnnotations}
+        meta={storiesMock}
         api={{
           heading: 'Custom API',
           headingLevel: 2,

@@ -28,7 +28,7 @@ vi.mock('@storybook/addon-docs/blocks', async (importOriginal) => ({
 
 describe('ComponentApi', () => {
   it('renders controls table, and closes categories after render', () => {
-    render(<ComponentApi story={{}} />);
+    render(<ComponentApi of={{}} />);
 
     expect(controlsProps).toHaveBeenCalledWith({
       exclude: ['data-testid', 'data-value'],

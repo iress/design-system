@@ -1,7 +1,7 @@
 // TODO: Probably better done with end-to-end tests
 import { render, screen } from '@testing-library/react';
 import { ComponentOverview } from './ComponentOverview';
-import { ModuleExports } from 'storybook/internal/types';
+import { ModuleExports, StoryAnnotations } from 'storybook/internal/types';
 
 // We mock the @storybook/addon-docs/blocks package to avoid rendering the actual DocsContainer component,
 // Which relies on Storybook's context and would throw an error in a test environment (and is a pain to mock).
@@ -18,6 +18,23 @@ vi.mock('@storybook/addon-docs/blocks', async (importOriginal) => ({
   Controls: () => <div>Controls rendered</div>,
 }));
 
+// Mock the ComponentCanvas to avoid hook issues
+vi.mock('./ComponentCanvas', () => ({
+  ComponentCanvas: () => <div>Canvas rendered</div>,
+}));
+
+// Mock ComponentApiExpander to avoid import issues
+vi.mock('./ComponentApiExpander', () => ({
+  ComponentApiExpander: () => (
+    <div>
+      <button role="button" aria-expanded="false">
+        Props
+      </button>
+      <div>Controls rendered</div>
+    </div>
+  ),
+}));
+
 const storiesMock: ModuleExports = {
   default: {},
   __namedExportsOrder: [],
@@ -26,7 +43,10 @@ const storiesMock: ModuleExports = {
 describe('ComponentOverview', () => {
   it('renders canvas, controls and expander by default', () => {
     render(
-      <ComponentOverview story={storiesMock.default} stories={storiesMock} />,
+      <ComponentOverview
+        of={storiesMock.default as StoryAnnotations}
+        meta={storiesMock}
+      />,
     );
 
     expect(screen.getByText('Canvas rendered')).toBeInTheDocument();
@@ -40,8 +60,8 @@ describe('ComponentOverview', () => {
     render(
       <ComponentOverview
         description="Hello world"
-        story={storiesMock.default}
-        stories={storiesMock}
+        of={storiesMock.default as StoryAnnotations}
+        meta={storiesMock}
       />,
     );
 
@@ -56,8 +76,8 @@ describe('ComponentOverview', () => {
     render(
       <ComponentOverview
         readMore="Hello world"
-        story={storiesMock.default}
-        stories={storiesMock}
+        of={storiesMock.default as StoryAnnotations}
+        meta={storiesMock}
       />,
     );
 
