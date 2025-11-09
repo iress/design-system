@@ -1,8 +1,8 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSelect, IressSelectOption } from '.';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
 import { FORM_ELEMENT_WIDTHS } from '@/constants';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSelect>;
 

@@ -109,9 +109,11 @@ export const setUpManager = ({
 
           return {
             text: 'Beta',
-            bgColor: cssVars.colour.system.success.surface,
-            fgColor: cssVars.colour.system.success.text,
-            borderColor: cssVars.colour.system.success.fill,
+            style: {
+              background: cssVars.colour.system.success.surface,
+              color: cssVars.colour.system.success.text,
+              borderColor: cssVars.colour.system.success.fill,
+            },
             tooltip: {
               title,
               desc,
@@ -134,8 +136,8 @@ export const setUpManager = ({
           return {
             text: 'Caution',
             style: {
-              bgColor: cssVars.colour.system.warning.surface,
-              fgColor: cssVars.colour.system.warning.text,
+              background: cssVars.colour.system.warning.surface,
+              color: cssVars.colour.system.warning.text,
               borderColor: cssVars.colour.system.warning.fill,
             },
             tooltip: {
@@ -157,8 +159,8 @@ export const setUpManager = ({
         badge: {
           text: 'Updated',
           style: {
-            bgColor: cssVars.colour.neutral[20],
-            fgColor: cssVars.colour.neutral[80],
+            background: cssVars.colour.neutral[20],
+            color: cssVars.colour.neutral[80],
             borderColor: cssVars.colour.neutral[30],
           },
           tooltip: {

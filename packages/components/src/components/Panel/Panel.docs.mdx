@@ -1,10 +1,10 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
 import * as ComponentStories from './Panel.stories';
 import { IressButton } from '../../main';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -12,8 +12,8 @@ import { IressButton } from '../../main';
 
 <ComponentOverview
   description="A panel is used to group related content."
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -24,7 +24,7 @@ By default, panels use the `colour.neutral.10` token. For most applications, thi
 
 However, there are times when a panel needs to be placed on a different background. In these cases, you can use [the `bg` prop](/docs/styling-props-colour--docs#bg) to set the background to a different colour.
 
-<ComponentExample story={ComponentStories.bg} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.bg} />
 
 ### Padding
 
@@ -42,22 +42,16 @@ Text alignment can be set to `inherit`, `left`, `center`, `right` or `justify`.
 
 It's default value is `inherit`.
 
-<ComponentExample
-  story={ComponentStories.TextAlign}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.TextAlign} />
 
 ### Stretch
 
 Panel can be set to fill its available container height by setting the `stretch` prop.
 
-<ComponentExample story={ComponentStories.Stretch} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Stretch} />
 
 ### Removing border radius
 
 Panels can inherit the theme's border radius which may result in an undesirable look to those components that use panels internally such as slideouts. To remove rounding from all panels set the prop `borderRadius="none"` to ensure panels have a zero border radius.
 
-<ComponentExample
-  story={ComponentStories.NoBorderRadius}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.NoBorderRadius} />

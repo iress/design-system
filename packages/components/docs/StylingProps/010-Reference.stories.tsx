@@ -1,8 +1,8 @@
 import { IressLink } from '@/components/Link';
 import { type IressCSSProps } from '@/interfaces';
 import { IressBadge, IressInline, IressTable } from '@/main';
-import { DiffViewer } from '@docs/components/DiffViewer';
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { DiffViewer } from '@iress-oss/ids-storybook-config';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 
 interface StylingPropsReference {
   jsxProp: keyof IressCSSProps;

@@ -137,6 +137,7 @@ const colour = {
       $type: Type.Color,
       $value: '#FFFFFF',
       $extensions: {
+        'iress.aliases': ['page'],
         'iress.contrast.AA': [
           'colour.neutral.80',
           'colour.neutral.70',
@@ -151,6 +152,7 @@ const colour = {
       $type: Type.Color,
       $value: '#F9F9F9',
       $extensions: {
+        'iress.aliases': ['alt'],
         'iress.contrast.AA': ['colour.neutral.80', 'colour.neutral.70'],
         'styler.panel': 'colour.neutral',
       },
@@ -198,6 +200,7 @@ const colour = {
       $type: Type.Color,
       $value: '#6D7278',
       $extensions: {
+        'iress.aliases': ['muted'],
         'iress.contrast.AA': ['colour.neutral.10', 'colour.neutral.20'],
         'styler.panel': 'colour.neutral',
       },
@@ -208,6 +211,7 @@ const colour = {
       $type: Type.Color,
       $value: '#393F46',
       $extensions: {
+        'iress.aliases': ['text'],
         'iress.contrast.AA': ['colour.neutral.10', 'colour.neutral.20'],
         'styler.panel': 'colour.neutral',
       },

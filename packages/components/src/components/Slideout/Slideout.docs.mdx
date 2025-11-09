@@ -1,12 +1,11 @@
 import { Meta, Markdown } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
 import * as ComponentStories from './Slideout.stories';
 import * as ProviderStories from './SlideoutProvider.stories';
-import { SlideoutTestDiff } from './mocks/SlideoutTestDiff';
 import { IressButton } from '../../main';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -21,8 +20,8 @@ import { IressButton } from '../../main';
 - Providing non-essential information related to the underlying page
   `}</Markdown>
   }
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Controlling the slideout
@@ -31,10 +30,7 @@ import { IressButton } from '../../main';
 
 You can use state to control the slideout by setting the `show` property to `true` or `false`. To sync your state with the slideout, you can use the `onShowChange` prop, which is normally passed the set function from `useState`.
 
-<ComponentExample
-  story={ComponentStories.ShowWithState}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ShowWithState} />
 
 ### Using the `IressSlideoutProvider`
 
@@ -49,8 +45,7 @@ To use, wrap your `<App/>` or the component that you want to use the `useSlideou
     heading: 'Props',
     headingId: 'provider-api',
   }}
-  story={ProviderStories.Provider}
-  stories={ProviderStories}
+  of={ProviderStories.Provider}
 />
 
 ## Examples
@@ -59,22 +54,19 @@ To use, wrap your `<App/>` or the component that you want to use the `useSlideou
 
 Slideouts can be used in two modes - `overlay` and `push`. In `overlay` mode the slideout sits on top of the content, useful if space is at a premium. In `push` mode the slideout will push the page container to make it smaller; this means you can see all of the page content when the page is available. Overlay is the default.
 
-<ComponentExample story={ComponentStories.Modes} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Modes} />
 
 ### Position
 
 Slideouts can appear from the left or the right of the screen. The default is right, but you can use the `position` prop to set it to slide in from the left.
 
-<ComponentExample
-  story={ComponentStories.Position}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Position} />
 
 ### Size
 
 The width of your slideout can be set using the `size` prop. By default it is `sm`, but it can be made larger by setting `size` to `md`.
 
-<ComponentExample story={ComponentStories.Size} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Size} />
 
 ### Padding
 
@@ -90,7 +82,7 @@ Slideout padding now is a global styling prop.
 
 The `footer` prop is used to set content that should appear underneath the main content. Usually used for extra controls like buttons etc.
 
-<ComponentExample story={ComponentStories.Footer} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Footer} />
 
 ### Absolute position slideouts
 
@@ -98,10 +90,7 @@ By default, slideout is set to `position: fixed` which means it will appear from
 
 If you're using an absolutely positioned slideout you may also want to change the vertical and horizontal positioning. By default this will be the top left or top right of the container, but you can use inline style `style={{top: '30px', height: 'calc(100% - 30px)'}}` to adjust that if you need to.
 
-<ComponentExample
-  story={ComponentStories.AbsolutePosition}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.AbsolutePosition} />
 
 ## Migrating to version 5
 
@@ -121,7 +110,7 @@ In version 5, slideouts are rendered conditionally, meaning they will not be ava
 
 See below for an example in version 4 and version 5.
 
-<SlideoutTestDiff />
+<ComponentExample of={ComponentStories.V5TestDiff} />
 
 ### Speed up tests
 

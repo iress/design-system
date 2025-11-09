@@ -20,7 +20,7 @@ function renderInsideMenu(
   itemProps?: IressMenuDividerProps,
   wrapperTag = 'div',
 ) {
-  const Wrapper = wrapperTag as keyof JSX.IntrinsicElements;
+  const Wrapper = wrapperTag as keyof React.JSX.IntrinsicElements;
 
   return render(
     <Wrapper>

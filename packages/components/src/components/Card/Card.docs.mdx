@@ -1,12 +1,9 @@
 import { Meta, Markdown } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
 import { IressInline } from '../../main';
 import * as CardStories from './Card.stories';
 import * as CardClickableStories from './CardClickable.stories';
 import * as CardSlotsStories from './CardSlots.stories';
+import { ComponentOverview } from '@iress-oss/ids-storybook-config';
 
 <Meta of={CardStories} />
 
@@ -19,8 +16,8 @@ A single card will typically include a few different types of media, such as an 
 
 Cards can be configured in a variety of ways. You can use the render props (slots) if you want to create a structured layout, or you can create a custom card with your own markup if you need more flexibility.
 `}</Markdown>)}
-story={CardStories.Default}
-stories={CardStories}
+of={CardStories.Default}
+meta={CardStories}
 />
 
 ## Examples
@@ -29,25 +26,25 @@ stories={CardStories}
 
 All slots and props for card are optional. You can create a simple card by adding some content to the default slot.
 
-<ComponentExample story={CardStories.Simple} stories={CardStories} />
+<ComponentExample of={CardStories.Simple} />
 
 ### Padding
 
 Padding can be controlled using the `padding` prop. It can be set to `none`, `sm`, `md` or `lg`. It defaults to `md`.
 
-<ComponentExample story={CardStories.Padding} stories={CardStories} />
+<ComponentExample of={CardStories.Padding} />
 
 ### Stretch
 
 The `stretch` prop can be used to stretch the card to fill its container.
 
-<ComponentExample story={CardStories.Stretch} stories={CardStories} />
+<ComponentExample of={CardStories.Stretch} />
 
 ### Selected
 
 Setting the `selected` prop highlights the card, usually to allow selection in a list.
 
-<ComponentExample story={CardStories.Selected} stories={CardStories} />
+<ComponentExample of={CardStories.Selected} />
 
 ## Render props (slots)
 
@@ -59,13 +56,13 @@ However, please be diligent as the component you use may not fit withing the con
 
 Use the `prepend` prop to add content to the left side of the card.
 
-<ComponentExample story={CardSlotsStories.Prepend} stories={CardStories} />
+<ComponentExample of={CardSlotsStories.Prepend} />
 
 ### Top Right
 
 Use the `topRight` prop to add content to the top right of the card. This is useful for adding a badge, icon, or an actions menu.
 
-<ComponentExample story={CardSlotsStories.TopRight} stories={CardStories} />
+<ComponentExample of={CardSlotsStories.TopRight} />
 
 ### Heading
 
@@ -73,31 +70,31 @@ Use the `heading` prop to add a header to the card. The header can be any compon
 
 **Note:** `headingText` and `headingLevel` props have been replaced with the `heading` render prop to give you more control over the heading element and its content. To use the previous behaviour, you can pass a string which will automatically create a `h2` element, or pass a `h*` element with the text as a child.
 
-<ComponentExample story={CardSlotsStories.Heading} stories={CardStories} />
+<ComponentExample of={CardSlotsStories.Heading} />
 
 ### Media
 
 Use the `media` prop to add media to the card. The media can be any component you like, but it is designed to support an image or video.
 
-<ComponentExample story={CardSlotsStories.Media} stories={CardStories} />
+<ComponentExample of={CardSlotsStories.Media} />
 
 ### Content
 
 Use the `content` prop to add content to the card. The content can be any component you like, but it is designed to support simple text based elements.
 
-<ComponentExample story={CardSlotsStories.Content} stories={CardStories} />
+<ComponentExample of={CardSlotsStories.Content} />
 
 ### Footer
 
 Use the `footer` prop to add a footer to the card. The footer can be any component you like, but it is designed to support buttons.
 
-<ComponentExample story={CardSlotsStories.Footer} stories={CardStories} />
+<ComponentExample of={CardSlotsStories.Footer} />
 
 ### All slots
 
 You can use all the slots together to create a custom card layout.
 
-<ComponentExample story={CardSlotsStories.AllSlots} stories={CardStories} />
+<ComponentExample of={CardSlotsStories.AllSlots} />
 
 ## Clickable cards
 
@@ -107,10 +104,7 @@ Note: The `clickable` prop has been deprecated in favour of using component vari
 
 Since the `heading` prop now renders the component you give it, you have full control over the content of the `heading`. This means you can add pass it a heading with a link.
 
-<ComponentExample
-  story={CardClickableStories.HeadingOnly}
-  stories={CardClickableStories}
-/>
+<ComponentExample of={CardClickableStories.HeadingOnly} />
 
 ### Whole card
 
@@ -118,10 +112,7 @@ The whole card can be made clickable by passing an `onClick` prop. All the appro
 
 It's recommended to add `role="button"` and `tabindex="0"` to the card to make it clear to screen readers that the card is clickable.
 
-<ComponentExample
-  story={CardClickableStories.WholeCard}
-  stories={CardClickableStories}
-/>
+<ComponentExample of={CardClickableStories.WholeCard} />
 
 ### Links and Buttons
 
@@ -130,12 +121,6 @@ To simplify the process of making the whole card clickable, you can use the `Ire
 **Note:** These components replace the `button`, `clickable` and `href` props. You no longer need `button` and `clickable`, as these are automatically inferred. To mimic the `href` prop, simply change the component you are using to `IressLinkCard`.
 
 <IressInline gap="md" horizontalAlign="around">
-  <ComponentExample
-    story={CardClickableStories.ButtonCard}
-    stories={CardClickableStories}
-  />
-  <ComponentExample
-    story={CardClickableStories.LinkCard}
-    stories={CardClickableStories}
-  />
+  <ComponentExample of={CardClickableStories.ButtonCard} />
+  <ComponentExample of={CardClickableStories.LinkCard} />
 </IressInline>

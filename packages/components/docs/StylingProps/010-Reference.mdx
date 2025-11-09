@@ -1,6 +1,7 @@
-import { Meta, Story } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import { IressText } from '@/main';
 import * as ComponentStories from './010-Reference.stories';
+import { ComponentExample } from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -17,7 +18,7 @@ These replace the utility classes and internal component tokens provided by prev
 
 ## Reference
 
-<Story of={ComponentStories.Reference} />
+<ComponentExample of={ComponentStories.Reference} />
 
 ## Responsive
 
@@ -61,7 +62,7 @@ const MyComponent = iressStyled('div', {
 
 If you have been using the utility classes from previous versions of IDS (eg. `iress-p--xs`), you will need to replace them with the new styling props. The utility classes are no longer supported in version 6.
 
-<Story of={ComponentStories.MigratingFromUtilities} />
+<ComponentExample of={ComponentStories.MigratingFromUtilities} />
 
 ### Internal component tokens
 
@@ -72,4 +73,4 @@ If you have been using the internal component tokens (eg. `--iress-background-co
 - Not every single internal component token has a direct mapping to a styling prop. For example, things like border width are no longer customisable. This helps ensure a consistent and accessible experience for all applications no matter the theme that is applied to them.
 - Styling props only allow token values, not custom values (eg. `colour.system.status.danger` is allowed but not `red`). This is to ensure that the styling props are theme agnostic and can be used with any theme. If you need to use a custom value, you can use custom CSS or inline styles.
 
-<Story of={ComponentStories.MigratingFromInternalTokens} />
+<ComponentExample of={ComponentStories.MigratingFromInternalTokens} />

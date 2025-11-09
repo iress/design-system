@@ -1,9 +1,9 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
 import * as ComponentStories from './Radio.stories';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -17,8 +17,8 @@ import * as ComponentStories from './Radio.stories';
       <code>IressRadioGroup</code>.
     </>
   }
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -29,16 +29,13 @@ You can set the radio to `checked` by default. This is useful when you want to p
 
 **Note:** If you are using an `IressRadioGroup`, you should use the `value` prop on the `IressRadioGroup` to set the checked state of its `<IressRadio />` children, as the `checked` prop will be ignored.
 
-<ComponentExample story={ComponentStories.Checked} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Checked} />
 
 ### Hidden control
 
 You can hide the radio button and use a custom UI to display the content. Even though the radio button is hidden, it still acts like a radio.
 
-<ComponentExample
-  story={ComponentStories.HiddenControl}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.HiddenControl} />
 
 ### Read only
 
@@ -46,13 +43,10 @@ The `readOnly` prop changes how the radio is rendered. It will only render if th
 
 It is understandable that this may not be the desired behavior for all use cases. If you need a radio that is not editable, but still visible, simply do not set the `readOnly` prop and set the `checked` prop instead.
 
-<ComponentExample
-  story={ComponentStories.ReadOnly}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ReadOnly} />
 
 ### Touch
 
 The `touch` prop adds the button-like border and padding to radio.
 
-<ComponentExample story={ComponentStories.Touch} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Touch} />

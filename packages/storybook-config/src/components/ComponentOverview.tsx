@@ -14,7 +14,7 @@ export interface ComponentOverviewProps {
   /**
    * Props for the API section
    */
-  apiProps?: Omit<ComponentApiProps, 'details' | 'story'>;
+  apiProps?: Omit<ComponentApiProps, 'details' | 'of'>;
 
   /**
    * Props for the Canvas section

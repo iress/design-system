@@ -1,4 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ComponentExample } from '@iress-oss/ids-storybook-config';
 import { IressPanel } from '@/main';
 import * as ComponentStories from './020-Responsive.stories';
 
@@ -16,32 +17,32 @@ The Iress Design System (IDS) is built with responsive design principles in mind
 - Consider content priority and progressive disclosure on smaller screens
 
 <IressPanel px="none">
-  <Canvas of={ComponentStories.Breakpoints} />
+  <ComponentExample of={ComponentStories.Breakpoints} />
 </IressPanel>
 
 ### Extra-small screens (`xs`)
 
-<Canvas of={ComponentStories.Xs} />
+<ComponentExample of={ComponentStories.Xs} />
 
 ### Small screens (`sm`)
 
-<Canvas of={ComponentStories.Sm} />
+<ComponentExample of={ComponentStories.Sm} />
 
 ### Medium screens (`md`)
 
-<Canvas of={ComponentStories.Md} />
+<ComponentExample of={ComponentStories.Md} />
 
 ### Large screens (`lg`)
 
-<Canvas of={ComponentStories.Lg} />
+<ComponentExample of={ComponentStories.Lg} />
 
 ### Extra-large screens (`xl`)
 
-<Canvas of={ComponentStories.Xl} />
+<ComponentExample of={ComponentStories.Xl} />
 
 ### Extremely large screens (`xxl`)
 
-<Canvas of={ComponentStories.Xxl} />
+<ComponentExample of={ComponentStories.Xxl} />
 
 ---
 
@@ -99,7 +100,7 @@ Another hook is `useResponsiveProps`, which allows you to define responsive prop
 
 **Note:** It is best to use media queries for responsive styling. Most props that require responsive values already support breakpoints which map to CSS values. Only use the `useResponsiveProps` hook when there is no other way to achieve the desired responsive behavior.
 
-<Canvas of={ComponentStories.ResponsiveProps} />
+<ComponentExample of={ComponentStories.ResponsiveProps} />
 
 ### Constant
 

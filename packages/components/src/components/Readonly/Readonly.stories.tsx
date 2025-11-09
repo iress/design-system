@@ -1,9 +1,9 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressReadonly, type IressReadonlyProps } from './Readonly';
 import { IressInline } from '../Inline';
 import { IressIcon } from '../Icon';
 import { IressText } from '../Text';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressReadonlyProps>;
 

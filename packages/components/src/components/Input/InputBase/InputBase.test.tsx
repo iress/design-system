@@ -13,7 +13,13 @@ describe('InputBase', () => {
 
   it('should focus the input element when focus method is called', () => {
     let inputRef: InputRef | null = null;
-    const { getByRole } = render(<InputBase ref={(ref) => (inputRef = ref)} />);
+    const { getByRole } = render(
+      <InputBase
+        ref={(ref) => {
+          inputRef = ref;
+        }}
+      />,
+    );
     const inputElement = getByRole('textbox') as HTMLInputElement;
 
     act(() => {

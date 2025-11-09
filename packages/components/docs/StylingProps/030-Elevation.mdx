@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import { CanvasWithApi } from '@docs/components/CanvasWithApi';
 import { IressText } from '@/main';
 import * as ComponentStories from './030-Elevation.stories';
+import { ComponentExample } from '@iress-oss/ids-storybook-config';
 
 <Meta title="Styling props/Elevation" />
 
@@ -20,7 +20,7 @@ The `layerStyle` prop allows you to draw attention to certain parts of the scree
 - `elevation.floating`: Floating is the highest elevation available. It is reserved for a UI that sits over another UI, such as modals, dialogs, dropdown menus, floating toolbars, and floating single-action buttons.
 - `elevation.overflow`: Overflow is a shadow indicating content has scrolled outside a view. It can be used for vertical or horizontal scroll. An example of overflow shadows is the horizontal scroll in tables on a Confluence page.
 
-<CanvasWithApi of={ComponentStories.layerStyle} />
+<ComponentExample of={ComponentStories.layerStyle} />
 
 ## `focusable`
 
@@ -28,4 +28,4 @@ The `focusable` prop allows you to set the focus state of a component. This is u
 
 It can be set to `true` to enable focus styles when the element is focused using keyboard navigation, or `within` to show focus styles when an element within is focused.
 
-<CanvasWithApi of={ComponentStories.focusable} />
+<ComponentExample of={ComponentStories.focusable} />

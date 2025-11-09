@@ -47,8 +47,7 @@
     "watch": "vite build --watch"
   },
   "dependencies": {
-    "@iress-oss/ids-components": "^6.0.0-alpha.0",
-    "@iress-oss/ids-tokens": "^6.0.0-alpha.0",
+    "@iress-oss/ids-tokens": "^6.0.0-alpha.1",
     "react-diff-viewer": "^3.1.1",
     "react-element-to-jsx-string": "^17.0.1",
     "remark-gfm": "^4.0.1"
@@ -101,6 +100,7 @@
   },
   "peerDependencies": {
     "@chromatic-com/storybook": "^4.1.1",
+    "@iress-oss/ids-components": "^6.0.0-alpha.1",
     "@iress-oss/ids-storybook-okta": "^0.0.0",
     "@iress-oss/ids-storybook-sandbox": "^0.0.0",
     "@iress-oss/ids-storybook-toggle-stories": "^0.0.0",

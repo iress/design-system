@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as ComponentStories from './FormRecipes.stories';
-import { ComponentExample } from '@iress-storybook/components';
 import { IressAlert } from '../../main';
+import { ComponentExample } from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -15,10 +15,7 @@ Please take note of the following when displaying read only data.
 
 - It is best to keep readonly data in a separate section of the form, to further avoid confusion with editable fields.
 
-<ComponentExample
-  story={ComponentStories.WithReadonlyData}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.WithReadonlyData} />
 
 ## Switching between readonly and edit modes
 
@@ -29,10 +26,7 @@ Please take note of the following when switching between modes:
 - Switching is done on a per-section basis, not on a per-field basis.
 - When the user saves the data, it should switch back to read-only mode to avoid any confusion about whether the changes have been saved.
 
-<ComponentExample
-  story={ComponentStories.SwitchEditReadonly}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.SwitchEditReadonly} />
 
 ## Alternative form validation
 
@@ -42,10 +36,7 @@ However, if you have more complex requirements and you find `IressForm` too opin
 
 Here is an example showcasing a form using the native form constraints API to achieve validation using IDS components. There are other libraries such as: [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi) or [Zod](https://zod.dev/)) which can improve scalability, with the downside being you will have to maintain all validation yourself.
 
-<ComponentExample
-  story={ComponentStories.NativeValidation}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.NativeValidation} />
 
 ## Nested forms
 
@@ -59,28 +50,19 @@ To achieve a similar effect, you can use multiple `IressForm` components, and tr
 
 The example here showcases triggering validation using the `form` attribute of `IressButton` and the `requestSubmit` method on the form element.
 
-<ComponentExample
-  story={ComponentStories.NestedForms}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.NestedForms} />
 
 ## Form Groups
 
 Powered by [React Hook Form](https://react-hook-form.com/docs/usefieldarray)'s `useFieldArray`, this example allows you add/edit/delete multiple children sections within ONE form (not nested form).
 
-<ComponentExample
-  story={ComponentStories.FormGroups}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.FormGroups} />
 
 ## Forms in expanders (lazy loading)
 
 If you are using forms in expanders, or in other scenarios when the loading of the form may be delayed, it is recommended to only load the form when it is required. This will improve performance of your application, and make it more predictable. It may also fix act warnings in tests if you are seeing some appearing due to conditionally loaded `IressForm` elements.
 
-<ComponentExample
-  story={ComponentStories.FormsInExpanders}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.FormsInExpanders} />
 
 ## Conditional fields (useWatch)
 
@@ -90,10 +72,7 @@ When you have fields that are conditionally shown, you can use the `IressForm.us
 
 - You can use the `api.watch` method on the `IressForm`'s ref to watch the value of a field, but it is recommended to use the hook for better performance by isolating re-rendering at the component level.
 
-<ComponentExample
-  story={ComponentStories.UseWatch}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.UseWatch} />
 
 ## Hidden inputs
 
@@ -106,10 +85,7 @@ You can use hidden inputs to store data that you do not want to display to the u
   handler.
 </IressAlert>
 
-<ComponentExample
-  story={ComponentStories.HiddenInputs}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.HiddenInputs} />
 
 ## Validation depend on other fields
 
@@ -117,10 +93,7 @@ This example shows how to validate one field based on another field's value.
 
 The budget amount input validates against the selected budget range using the custom `validateBudgetInput` rules.
 
-<ComponentExample
-  story={ComponentStories.ValidationDependOnOtherFields}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ValidationDependOnOtherFields} />
 
 ## Custom form field components
 
@@ -141,7 +114,4 @@ Key features demonstrated:
 - **Form State Management**: Automatically integrates with form context using controlled props
 - **File Management**: Display uploaded files with remove functionality using `IressPanel`
 
-<ComponentExample
-  story={ComponentStories.CustomFormFieldComponents}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.CustomFormFieldComponents} />

@@ -1,9 +1,9 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
 import * as ComponentStories from './TabSet.stories';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -11,8 +11,8 @@ import * as ComponentStories from './TabSet.stories';
 
 <ComponentOverview
   description="Tabs are used to display modular pieces of related data that do not need to be compared or accessed simultaneously."
-  story={ComponentStories.Panels}
-  stories={ComponentStories}
+  of={ComponentStories.Panels}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -23,16 +23,13 @@ The `IressTabSet` is a wrapper for `IressTab` components to make a up a set of t
 
 You can use the `IressTabSet` component to create tab navigation to control an area of the page, or even navigate between different pages.
 
-<ComponentExample
-  story={ComponentStories.TabNavigation}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.TabNavigation} />
 
 ### With `children` prop
 
 Using the `children` prop will automatically inject the content as a tab panel when active, along with appropriate attributes for accessibility, ensuring the tab and its associated panel can be navigated by screenreaders.
 
-<ComponentExample story={ComponentStories.Panels} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Panels} />
 
 ## Examples
 
@@ -40,34 +37,25 @@ Using the `children` prop will automatically inject the content as a tab panel w
 
 If you would like to set a tab by default, use the `defaultSelected` prop.
 
-<ComponentExample
-  story={ComponentStories.DefaultSelected}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.DefaultSelected} />
 
 ### Controlled
 
 You can use state to control the active tab by setting the `selected` property to which tab you would like to select. This should be the `value` of the tab you would like to select, or if you do not use the `value` prop, it's index.
 
-<ComponentExample
-  story={ComponentStories.Controlled}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Controlled} />
 
 ### Layout
 
 `IressTabSet` controls the layout of the tab buttons. These will always appear at the top of the tab container, and can be aligned to the left (default), centrally or to the right via the `layout` prop.
 
-<ComponentExample story={ComponentStories.Layout} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Layout} />
 
 ### Lazy Loading
 
 Tabs can be lazy loaded via state, allowing you to add/remove tabs as needed.
 
-<ComponentExample
-  story={ComponentStories.LazyLoading}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.LazyLoading} />
 
 ### Badges and icons
 
@@ -82,7 +70,4 @@ Notes:
 
 - For best accessibility, the `IressTab` component will find the first focusable element inside the custom label to add the tab role.
 
-<ComponentExample
-  story={ComponentStories.TabsWithBadges}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.TabsWithBadges} />

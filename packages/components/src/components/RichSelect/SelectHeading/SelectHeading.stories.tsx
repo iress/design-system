@@ -3,7 +3,7 @@ import {
   IressSelectHeading,
   type IressSelectHeadingProps,
 } from './SelectHeading';
-import { addToStorybookCategory } from '@iress-storybook/helpers';
+import { addToStorybookCategory } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSelectHeading>;
 

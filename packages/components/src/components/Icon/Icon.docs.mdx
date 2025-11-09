@@ -1,10 +1,10 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
-import { IressAlert, IressButton } from '../../main';
+import { IressAlert, IressButton } from '@/main';
 import * as ComponentStories from './Icon.stories';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -12,9 +12,10 @@ import * as ComponentStories from './Icon.stories';
 
 <ComponentOverview
   description="Icons enhance experiences by visually communicating meaning, actions, status, and feedback."
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
+
 ## Installation
 
 If you are planning to include the `<IressIcon />` component in your application, you need to include the Font Awesome CSS.
@@ -50,10 +51,7 @@ If you use an icon to improve the visual appeal of content, for example by repla
 
 If you use an icon to convey meaning, for example using an icon as the only content inside a button, you do need to supply a value for the `screenreaderText`; if you don't the button meaning will be completely lost for screen reader users.
 
-<ComponentExample
-  story={ComponentStories.ScreenReaderText}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ScreenReaderText} />
 
 ### Size
 
@@ -75,28 +73,25 @@ Mode has been removed. Please use the `color` prop instead.
 
 The `flip` prop can be set to horizontal, vertical or both.
 
-<ComponentExample story={ComponentStories.Flip} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Flip} />
 
 ### Rotate
 
 The `rotate` prop can be set to 90, 180 or 270 degrees.
 
-<ComponentExample story={ComponentStories.Rotate} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Rotate} />
 
 ### Spin
 
 The `spin` prop can be set to half (fastest), 1, 2 or 3 (slowest) to control the speed of the icon spin animation, useful for loading spinners.
 
-<ComponentExample story={ComponentStories.Spin} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Spin} />
 
 ### Fixed Width
 
 Because of the wide variety of Font Awesome icons, not every icon is the same size. This can cause alignment issued when the icons stack vertically, so you can use the `fixedWidth` prop to ensure each icon is the same width. Very useful when using icons in menus.
 
-<ComponentExample
-  story={ComponentStories.FixedWidth}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.FixedWidth} />
 
 ## Examples
 
@@ -104,7 +99,4 @@ Because of the wide variety of Font Awesome icons, not every icon is the same si
 
 Icons now inherit the size of the parent component. This means you can use them inside buttons, links and other components without needing to set a size.
 
-<ComponentExample
-  story={ComponentStories.ExternalLink}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ExternalLink} />

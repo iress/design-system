@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressText } from '@/main';
 
 type Story = StoryObj<typeof IressText>;

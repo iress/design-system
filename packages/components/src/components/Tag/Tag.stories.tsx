@@ -2,11 +2,11 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTag } from '.';
 import { TagDeletion } from './mocks/TagDeletion';
 import TagDeletionSource from './mocks/TagDeletion.tsx?raw';
-import { withCustomSource } from '@iress-storybook/helpers';
 import { IressPopover } from '../Popover';
 import { IressButton } from '../Button';
 import { IressIcon } from '../Icon';
 import { IressPanel } from '../Panel';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<typeof IressTag>;
 

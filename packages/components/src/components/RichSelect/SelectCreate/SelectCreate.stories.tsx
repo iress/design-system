@@ -1,6 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSelectCreate, type IressSelectCreateProps } from './SelectCreate';
-import { addToStorybookCategory } from '@iress-storybook/helpers';
+import { addToStorybookCategory } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSelectCreate>;
 

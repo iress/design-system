@@ -61,6 +61,7 @@ export default defineConfig({
         glob
           .sync(['src/**/!(*.test|*.stories).{ts,tsx}'], {
             ignore: [
+              'docs/**/*',
               'src/**/mock-data/**',
               'src/**/examples/**',
               'src/**/mocks/**',

@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import { CanvasWithApi } from '@docs/components/CanvasWithApi';
 import { IressText } from '@/main';
 import * as ComponentStories from './060-Sizing.stories';
+import { ComponentExample } from '@iress-oss/ids-storybook-config';
 
 <Meta title="Styling props/Sizing" />
 
@@ -38,7 +38,7 @@ For variable data entry, you can use percentage widths. These are usually used i
 - `input.75perc`: 75% width of parent container
 - `input.100perc`: 100% width of parent container
 
-<CanvasWithApi of={ComponentStories.inputWidths} />
+<ComponentExample of={ComponentStories.inputWidths} />
 
 ## Container widths
 
@@ -53,13 +53,13 @@ In some cases however, you may want to restrain the width even further (for exam
 - `container.xl`: 1160px
 - `container.xxl`: 1160px
 
-<CanvasWithApi of={ComponentStories.containerWidths} />
+<ComponentExample of={ComponentStories.containerWidths} />
 
 ## Stretch
 
 The `stretch` prop used to stretch a component to fill the available space. It is used in components such as `IressPanel` to ensure each column in a layout takes up the same amount of space.
 
-<CanvasWithApi of={ComponentStories.stretch} />
+<ComponentExample of={ComponentStories.stretch} />
 
 ## Overlay widths
 

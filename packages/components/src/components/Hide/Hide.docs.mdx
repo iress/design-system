@@ -1,11 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
-import { HideBreakpointTable } from './mocks/HideBreakpointTable';
-import { HideUtilityBreakpointTable } from './mocks/HideUtilityBreakpointTable';
 import * as ComponentStories from './Hide.stories';
+import { ComponentOverview } from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -18,8 +13,8 @@ import * as ComponentStories from './Hide.stories';
       create adaptive designs that work for all screen sizes.
     </>
   }
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -30,7 +25,7 @@ The `hiddenOn` prop accepts a `ResponsiveSizing<boolean>` object, which is an ob
 
 It determines which screen sizes the component's children will be hidden on. It's set up as an object containing the following IDS breakpoints:
 
-<HideBreakpointTable />
+<ComponentExample of={ComponentStories.BreakpointTable} />
 
 ## Behaviour
 
@@ -74,6 +69,6 @@ To make it easier for developers to hide content, we've exposed the classes we u
 
 This means you can use them without having to use the Hide component. Unlike the Hide component, the utility classes only apply to a single breakpoint:
 
-<HideUtilityBreakpointTable />
+<ComponentExample of={ComponentStories.UtilityBreakpointTable} />
 
 If you use `iress-hidden` or `iress-sr-only` without the breakpoint suffix, it will apply to all screen sizes.

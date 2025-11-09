@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressCol, IressContainer, IressPanel, IressRow } from '@/main';
-import { stringifyStorybookArgs } from '@docs/helpers/stringifyStorybookArgs';
+import { stringifyStorybookArgs } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressPanel>;
 

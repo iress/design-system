@@ -3,7 +3,8 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressHookForm } from './HookForm';
 import { HookFormExample } from '../mocks/HookFormExample';
 import HookFormExampleSource from '../mocks/HookFormExample.tsx?raw';
-import { removeArgTypes, withCustomSource } from '@iress-storybook/helpers';
+import { removeArgTypes } from '@iress-oss/ids-storybook-config';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<typeof IressHookForm>;
 

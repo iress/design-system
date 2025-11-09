@@ -1,5 +1,5 @@
 import { type FloatingUIContainer } from '@/types';
-import { type ReactNode } from 'react';
+import { useMemo, type ReactNode } from 'react';
 import { IressModalProvider } from '../Modal';
 import {
   IressToasterProvider,
@@ -44,29 +44,53 @@ export const IressProvider = ({
   noIcons,
   position,
   ...restProps
-}: IressProviderProps) => (
-  <IressModalProvider container={container}>
-    <IressToasterProvider container={container} position={position}>
-      <IressSlideoutProvider container={container} {...restProps}>
-        {children}
-      </IressSlideoutProvider>
-    </IressToasterProvider>
-    {!noDefaultFont &&
-      createPortal(
-        defaultFonts.map((font) => (
-          <link key={font} rel="stylesheet" href={font} />
-        )),
-        document.head,
-        'design-system-font',
-      )}
-    {!noIcons &&
-      createPortal(
-        <link
-          rel="stylesheet"
-          href="https://cdn.iress.com/icons/5.15.4/css/combined.min.css"
-        />,
-        document.head,
-        'design-system-icons',
-      )}
-  </IressModalProvider>
-);
+}: IressProviderProps) => {
+  const includeDefaultFont = useMemo(() => {
+    if (!noDefaultFont) {
+      return true;
+    }
+
+    return !document.head.querySelector('link[data-iress-design-system-font]');
+  }, [noDefaultFont]);
+
+  const includeIcons = useMemo(() => {
+    if (!noIcons) {
+      return true;
+    }
+
+    return !document.head.querySelector('link[data-iress-design-system-icons]');
+  }, [noIcons]);
+
+  return (
+    <IressModalProvider container={container}>
+      <IressToasterProvider container={container} position={position}>
+        <IressSlideoutProvider container={container} {...restProps}>
+          {children}
+        </IressSlideoutProvider>
+      </IressToasterProvider>
+      {includeDefaultFont &&
+        createPortal(
+          defaultFonts.map((font) => (
+            <link
+              key={font}
+              rel="stylesheet"
+              href={font}
+              data-iress-design-system-font
+            />
+          )),
+          document.head,
+          'design-system-font',
+        )}
+      {includeIcons &&
+        createPortal(
+          <link
+            rel="stylesheet"
+            href="https://cdn.iress.com/icons/5.15.4/css/combined.min.css"
+            data-iress-design-system-icons
+          />,
+          document.head,
+          'design-system-icons',
+        )}
+    </IressModalProvider>
+  );
+};

@@ -1,14 +1,17 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressButton, type IressButtonProps } from './Button';
-import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
+import {
+  disableArgTypes,
+  CurrentBreakpoint,
+} from '@iress-oss/ids-storybook-config';
 import { IressText } from '../Text';
-import { CurrentBreakpoint } from '@iress-storybook/components';
 import { IressIcon } from '../Icon';
 import { IressBadge } from '../Badge';
 import { IressInline } from '../Inline';
 import { IressStack } from '../Stack';
 import { RoutingButton } from './mocks/RoutingButton';
 import RoutingButtonSource from './mocks/RoutingButton.tsx?raw';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type ButtonStory = StoryObj<IressButtonProps>;
 type AnchorStory = StoryObj<IressButtonProps<undefined, string>>;

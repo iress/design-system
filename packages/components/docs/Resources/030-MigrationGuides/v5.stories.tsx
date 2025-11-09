@@ -1,4 +1,4 @@
-import { DiffViewer } from '@docs/components/DiffViewer';
+import { DiffViewer } from '@iress-oss/ids-storybook-config';
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 
 type Story = StoryObj<typeof DiffViewer>;

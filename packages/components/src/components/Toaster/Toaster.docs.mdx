@@ -1,11 +1,10 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
-
 import * as ToasterStories from './Toaster.stories';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ToasterStories} />
 
@@ -13,8 +12,8 @@ import * as ToasterStories from './Toaster.stories';
 
 <ComponentOverview
   description="Toaster provide users with important, time-sensitive information."
-  story={ToasterStories.Provider}
-  stories={ToasterStories}
+  of={ToasterStories.Provider}
+  meta={ToasterStories}
 />
 
 ## Usage
@@ -23,13 +22,13 @@ To use the toaster, wrap your `<App/>` or the component that you want to use the
 
 You can use the `success`, `info` and `error` methods from the hook to trigger toasts in your application.
 
-<ComponentExample story={ToasterStories.Provider} stories={ToasterStories} />
+<ComponentExample of={ToasterStories.Provider} />
 
 ### Closing toasts via the provider
 
 If you want to dismiss a toast programmatically, you can use the `close` method from the `useToaster` hook. This method takes a toast ID as an argument, which is returned when you create a toast using the `useToaster` hook.
 
-<ComponentExample story={ToasterStories.Close} stories={ToasterStories} />
+<ComponentExample of={ToasterStories.Close} />
 
 ## Examples
 
@@ -37,7 +36,7 @@ If you want to dismiss a toast programmatically, you can use the `close` method 
 
 The toast offers three status that set a distinctive colour and icon. They can be set using the `status` prop. Their different use cases are described here.
 
-<ComponentExample story={ToasterStories.Statuses} stories={ToasterStories} />
+<ComponentExample of={ToasterStories.Statuses} />
 
 ### Timeout
 
@@ -45,7 +44,7 @@ By default, toasts will time out after six seconds, after which they will animat
 
 Timeouts must be set in milliseconds; as an example, if you want a timeout of five seconds, set the timeout to 5000.
 
-<ComponentExample story={ToasterStories.Timeout} stories={ToasterStories} />
+<ComponentExample of={ToasterStories.Timeout} />
 
 ### Position
 
@@ -53,7 +52,7 @@ By default, the `IressToasterProvider`'s `position` is set to `bottom-end`, but 
 
 **Note:** The toast position should be consistent based on context, so users can find them easily.
 
-<ComponentExample story={ToasterStories.Position} stories={ToasterStories} />
+<ComponentExample of={ToasterStories.Position} />
 
 ## Migrating from version 4 and below
 

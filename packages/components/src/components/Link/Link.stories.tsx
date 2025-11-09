@@ -1,11 +1,12 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { IressIcon } from '../Icon';
 import { IressInline } from '../Inline';
 import { IressLink } from './Link';
 import { IressPanel } from '../Panel';
 import { RoutingLink } from './mocks/RoutingLink';
 import RoutingLinkSource from './mocks/RoutingLink.tsx?raw';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<typeof IressLink>;
 

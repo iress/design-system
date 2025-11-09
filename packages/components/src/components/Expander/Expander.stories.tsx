@@ -1,10 +1,11 @@
 import { IressExpander } from '.';
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressText } from '../Text';
-import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { MultipleExpander } from './mocks/MultipleExpander';
 import MultipleExpanderSource from './mocks/MultipleExpander.tsx?raw';
 import { IressStack } from '../Stack';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 export default {
   title: 'Components/Expander',

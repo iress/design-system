@@ -6,8 +6,10 @@ import {
 } from '.';
 import { App as AppWithModalProvider } from './mocks/AppWithModalProvider';
 import AppWithModalProviderSource from './mocks/AppWithModalProvider.tsx?raw';
-import { disableArgTypes } from '@iress-storybook/helpers';
-import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
+import {
+  disableArgTypes,
+  STORYBOOK_ONLY_CATEGORY,
+} from '@iress-oss/ids-storybook-config';
 
 type CustomArgs = Partial<IressModalProviderProps> & {
   modal: Partial<IressModalProps>;

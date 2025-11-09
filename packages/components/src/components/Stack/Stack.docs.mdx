@@ -1,10 +1,9 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
-import { IressRow, IressCol, IressTable } from '../../main';
 import * as ComponentStories from './Stack.stories';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -17,8 +16,8 @@ import * as ComponentStories from './Stack.stories';
       with consistent present values.
     </>
   }
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -31,48 +30,13 @@ Vertical spacing is applied to the direct children of the `IressStack` component
 
 The previous `gutter` prop has been replaced by `gap`, which uses the latest set of spacing tokens. In terms of how it is used to space items inside the `IressStack` component, it is now directly mapped to the [CSS gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/gap), which may change how your application is spaced. For most cases, there should be no change.
 
-Here is the mapping of previous `gutter` scale and current `gap` value:
-
-<IressTable
-  rows={[
-    {
-      deprecated_gutter_scale: 'none',
-      new_gap_value: 'spacing.000',
-    },
-    {
-      deprecated_gutter_scale: 'xs',
-      new_gap_value: 'spacing.100',
-    },
-    {
-      deprecated_gutter_scale: 'sm',
-      new_gap_value: 'spacing.200',
-    },
-    {
-      deprecated_gutter_scale: 'md',
-      new_gap_value: 'spacing.400',
-    },
-    {
-      deprecated_gutter_scale: 'lg',
-      new_gap_value: 'spacing.700',
-    },
-    {
-      deprecated_gutter_scale: 'xl',
-      new_gap_value: 'spacing.1200',
-    },
-  ]}
-  scope="col"
-/>
-
-<ComponentExample story={ComponentStories.Gap} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Gap} />
 
 ### Responsive gap
 
 The `gap` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
 
-<ComponentExample
-  story={ComponentStories.ResponsiveGap}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ResponsiveGap} />
 
 ### Inline children
 
@@ -80,20 +44,10 @@ The stack component will treat the direct children as a block element. If you wa
 
 In the example below: `IressButton` are inline because of wrapped by `IressInline`.
 
-<ComponentExample
-  story={ComponentStories.InlineChildren}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.InlineChildren} />
 
 ### Lists
 
 `IressStack` can also apply gap between the list items by using the new `element` (e.g. `ul`) prop.
 
-<IressRow gap="md">
-  <IressCol>
-    <ComponentExample
-      story={ComponentStories.Lists}
-      stories={ComponentStories}
-    />
-  </IressCol>
-</IressRow>
+<ComponentExample of={ComponentStories.Lists} />

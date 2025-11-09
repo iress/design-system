@@ -1,10 +1,10 @@
-import { type ComponentProps } from 'react';
 import { type API } from 'storybook/internal/manager-api';
 import { ToggleStories } from './ToggleStories';
 import { render, screen } from '@testing-library/react';
-import type { IconButton } from 'storybook/internal/components';
 import { ADDON_ID } from '../constants';
 import userEvent from '@testing-library/user-event';
+import type { ComponentProps } from 'react';
+import type { IconButton } from 'storybook/internal/components';
 
 // Mocking the Storybook API
 const api = {

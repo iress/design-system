@@ -1,8 +1,8 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressInputPopover } from './InputPopover';
 import { IressInput, IressMenu, IressMenuItem, IressPanel } from '@/main';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressInputPopover>;
 

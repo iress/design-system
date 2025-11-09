@@ -2,11 +2,11 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressButton, IressText } from '@/main';
 import { type ToastStatus, Toast } from './Toast';
 import { capitalizeFirstLetter } from '@helpers/formatting/capitalizeFirstLetter';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '../../../Stack/Stack';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof Toast>;
-const TOAST_STATUS = ['success', 'error', 'info'];
+const TOAST_STATUS: ToastStatus[] = ['success', 'error', 'info'];
 const actionOptions = {
   none: null,
   TryAgain: (

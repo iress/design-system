@@ -16,7 +16,7 @@ import {
   IressText,
 } from '@/main';
 import { lazy, Suspense } from 'react';
-import { CurrentBreakpoint } from '@docs/components/CurrentBreakpoint';
+import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressTable>;
 

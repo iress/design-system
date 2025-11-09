@@ -1,9 +1,9 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
 import * as ComponentStories from './Menu.stories';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -26,8 +26,8 @@ import * as ComponentStories from './Menu.stories';
       .
     </p>
   }
-  story={ComponentStories.Basic}
-  stories={ComponentStories}
+  of={ComponentStories.Basic}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -41,7 +41,7 @@ import * as ComponentStories from './Menu.stories';
 - `IressMenuItem` is used to display an interactive item. If provided a `href` prop will render the item as a link, otherwise it will render as a button.
 - `IressMenuText` can be used to display other non-interactive text. It supports all of the props of `IressText`.
 
-<ComponentExample story={ComponentStories.Basic} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Basic} />
 
 ### Complex
 
@@ -49,7 +49,7 @@ import * as ComponentStories from './Menu.stories';
 
 Note: Instead of using the `divider` prop on `IressMenuItem`, you can use `IressMenuDivider` to separate items. This gives you more control over where the divider sits.
 
-<ComponentExample story={ComponentStories.Complex} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Complex} />
 
 ## Examples
 
@@ -59,19 +59,13 @@ When the `href` prop is set on `IressMenuItem`, it will render as a link.
 
 When rendering a set of links for navigation purposes (as a secondary nav in this example) make sure you wrap the `IressMenu` in a nav element and set the menu's `role` prop to list.
 
-<ComponentExample
-  story={ComponentStories.SecondaryNavigation}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.SecondaryNavigation} />
 
 ### Headings
 
 Using the `IressMenuHeading` component, you can create headings within the menu. Simply set the `element` or `textStyle` prop to your desired heading level.
 
-<ComponentExample
-  story={ComponentStories.Headings}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Headings} />
 
 ### Dividers
 
@@ -79,16 +73,13 @@ When the `divider` prop is set, the `IressMenuItem`, `IressMenuHeading` and `Ire
 
 In situations where a bottom border will not work, you can also use `IressMenuDivider` inside the menu to separate items.
 
-<ComponentExample
-  story={ComponentStories.Dividers}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Dividers} />
 
 ### Fluid menus
 
 By setting the `fluid` prop on the menu component, the menu will stretch to the width of its containing element.
 
-<ComponentExample story={ComponentStories.Fluid} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Fluid} />
 
 ### Layout
 
@@ -98,22 +89,19 @@ The `layout` prop comes with three options:
 - `inline` - menu items will be inline
 - `inline-equal-width` - menu items will be inline and have equal width
 
-<ComponentExample story={ComponentStories.Layout} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Layout} />
 
 ### Text wrapping
 
 By default, menu item text will wrap on to the next line when it exceeds the menu width. Using the `noWrap` prop, you set the menu item text to not wrap.
 
-<ComponentExample story={ComponentStories.NoWrap} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.NoWrap} />
 
 ### Slot props
 
 `IressMenuItem`, `IressMenuHeading` and `IressMenuText` provide `prepend` and `append` props to position content either before or after its content.
 
-<ComponentExample
-  story={ComponentStories.SlotProps}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.SlotProps} />
 
 ### Roles
 
@@ -131,19 +119,13 @@ There are four roles supported:
 
 The default role for the menu component is `list`. It is most often used for navigation and its items can be navigated (using the keyboard) with the `tab` key.
 
-<ComponentExample
-  story={ComponentStories.ListRole}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ListRole} />
 
 #### Menu
 
 The `menu` role is used when the items in the menu has an action that performs a task in the application. The items can be navigated (using the keyboard) with the `arrow` keys, depending on the layout.
 
-<ComponentExample
-  story={ComponentStories.MenuRole}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.MenuRole} />
 
 #### Listbox
 
@@ -153,7 +135,4 @@ A value is supplied to `IressMenuButton` (like you would with an option element 
 
 Set the `multiSelect` prop to true for a multi-selectable listbox.
 
-<ComponentExample
-  story={ComponentStories.ListboxRole}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ListboxRole} />

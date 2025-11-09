@@ -1,6 +1,5 @@
 import { type StoryObj, type Meta } from '@storybook/react-vite';
-import { disableArgTypes } from '@iress-storybook/helpers';
-
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 import { IressTooltip } from '.';
 import { IressButton } from '../Button';
 import { IressStack } from '../Stack';

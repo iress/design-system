@@ -1,9 +1,9 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
 import * as ComponentStories from './Skeleton.stories';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -11,8 +11,8 @@ import * as ComponentStories from './Skeleton.stories';
 
 <ComponentOverview
   description="Skeletons can increase perceived performance for users. As opposed to spinners, skeletons make it feel as though things are happening/loading immediately, then the information is incrementally displayed on the screen."
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -21,7 +21,7 @@ import * as ComponentStories from './Skeleton.stories';
 
 The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
-<ComponentExample story={ComponentStories.Mode} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Mode} />
 
 ### Text
 
@@ -29,7 +29,7 @@ The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
 `text` also accepts the width prop but does not use the `height` prop like other modes. The height is achieved through font size and line height.
 
-<ComponentExample story={ComponentStories.Text} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Text} />
 
 ### Rect
 
@@ -37,7 +37,7 @@ The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
 `rect` accepts both `width` and `height` props for sizing. It will default to 100% width and 100px height.
 
-<ComponentExample story={ComponentStories.Rect} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Rect} />
 
 ### Circle
 
@@ -45,7 +45,7 @@ The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
 `circle` accepts both `width` and `height` props for sizing. It will default to 100% width and 100px height.
 
-<ComponentExample story={ComponentStories.Circle} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Circle} />
 
 ### Size
 
@@ -55,4 +55,4 @@ These props accept any unit of dimension, but if no unit is provided it will def
 
 **Note:** `height` will be ignored for text mode as this is calculated using the `IressText` component.
 
-<ComponentExample story={ComponentStories.Size} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Size} />

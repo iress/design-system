@@ -18,6 +18,9 @@
     "lib": ["es2023", "dom", "dom.iterable"],
     "baseUrl": ".",
     "rootDir": "./src",
+    "paths": {
+      "react": ["./node_modules/@types/react", "./node_modules/react"]
+    },
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
   "include": ["src/**/*"],

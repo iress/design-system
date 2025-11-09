@@ -1,9 +1,9 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
 import * as ComponentStories from './Checkbox.stories';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -17,8 +17,8 @@ import * as ComponentStories from './Checkbox.stories';
       <code>IressCheckboxGroup</code>
     </>
   }
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -29,25 +29,19 @@ For single checkboxes in controlled mode the `checked` prop sets the checked sta
 
 When used as part of an `IressCheckboxGroup`, the `checked` prop will be ignored. Instead, the `value` prop on the `IressCheckboxGroup` will determine the checked state of each checkbox. See the [checkbox group documentation](?path=/docs/components-checkboxgroup--docs) for more details.
 
-<ComponentExample story={ComponentStories.Checked} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Checked} />
 
 ### Default Checked
 
 For single checkboxes in uncontrolled mode the `defaultChecked` prop sets the default checked state.
 
-<ComponentExample
-  story={ComponentStories.DefaultChecked}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.DefaultChecked} />
 
 ### Indeterminate
 
 The `indeterminate` prop sets the checkbox appearance to an indeterminate dash until it is clicked. It has no impact on the checkbox behavior beyond this purely visual indicator.
 
-<ComponentExample
-  story={ComponentStories.Indeterminate}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Indeterminate} />
 
 ### Hidden Label
 
@@ -57,10 +51,7 @@ When using a checkbox without a visible label, you must supply a label and apply
 
 It is also important to not hide the table headers.
 
-<ComponentExample
-  story={ComponentStories.WithTableData}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.WithTableData} />
 
 ### Read only
 
@@ -68,13 +59,10 @@ The `readOnly` prop changes how the checkbox is rendered. It will only render if
 
 It is understandable that this may not be the desired behavior for all use cases. If you need a checkbox that is not editable, but still visible, simply do not set the `readOnly` prop and set the `checked` prop instead.
 
-<ComponentExample
-  story={ComponentStories.ReadOnly}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ReadOnly} />
 
 ### Touch
 
 The `touch` prop adds the button-like border and padding to checkbox.
 
-<ComponentExample story={ComponentStories.Touch} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Touch} />

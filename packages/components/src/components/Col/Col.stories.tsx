@@ -1,19 +1,18 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressCol, type IressColProps } from '.';
-import {
-  disableArgTypes,
-  removeArgTypes,
-  withJsxTransformer,
-} from '@iress-storybook/helpers';
 import { IressPlaceholder } from '../Placeholder';
 import { IressRow, type IressRowProps } from '../Row';
 import { IressStack } from '../Stack';
 import { IressPanel } from '../Panel';
-import { CurrentBreakpoint } from '@iress-storybook/components';
 import { IressText } from '../Text';
-import styles from '@iress-storybook/styles.module.scss';
 import { IressContainer } from '../Container';
-import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
+import {
+  CurrentBreakpoint,
+  disableArgTypes,
+  removeArgTypes,
+  STORYBOOK_ONLY_CATEGORY,
+  withJsxTransformer,
+} from '@iress-oss/ids-storybook-config';
 
 type ColWithCustomArgs = React.ComponentProps<typeof IressCol> & {
   numberOfColumns?: number;
@@ -340,7 +339,11 @@ export const AlignSelf: Story = {
   },
   render: ({ row, ...column }) => (
     <IressContainer>
-      <IressRow {...row} className={styles.setHeight}>
+      <IressRow
+        {...row}
+        layerStyle="elevation.raised"
+        style={{ height: '10rem' }}
+      >
         <IressCol {...column} alignSelf="start">
           <IressPlaceholder>Start</IressPlaceholder>
         </IressCol>

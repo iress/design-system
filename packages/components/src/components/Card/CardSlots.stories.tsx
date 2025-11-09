@@ -1,6 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressCard, type IressCardProps } from './Card';
-import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { CardAllSlots } from './mocks/CardAllSlots';
 import CardAllSlotsSource from './mocks/CardAllSlots.tsx?raw';
 import {
@@ -8,6 +7,8 @@ import {
   supportedCardSlots,
 } from './mocks/supportedCardSlots';
 import supportedCardSlotsSource from './mocks/supportedCardSlots.tsx?raw';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<IressCardProps>;
 

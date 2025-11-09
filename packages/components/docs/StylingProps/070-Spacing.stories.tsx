@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressButton, IressPanel } from '@/main';
-import { DiffViewer } from '@docs/components/DiffViewer';
+import { DiffViewer } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressPanel>;
 

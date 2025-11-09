@@ -2,13 +2,15 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 
 import { IressPlaceholder } from '../Placeholder';
 import { IressPanel } from '../Panel';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '.';
-import { CurrentBreakpoint } from '@iress-storybook/components';
 import { IressText } from '../Text';
 import { IressButton } from '../Button';
 import { IressInline } from '../Inline';
 import { SPACING_TOKENS } from '@theme-preset/tokens/spacing';
+import {
+  CurrentBreakpoint,
+  disableArgTypes,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressStack>;
 

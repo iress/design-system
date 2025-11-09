@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-tokens",
-  "version": "6.0.0-alpha.0",
+  "version": "6.0.0-alpha.1",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,11 +23,11 @@
     "storybook": "storybook dev -p 6007",
     "test": "vitest --config vitest.config.ts --watch",
     "test:coverage": "vitest run --config vitest.config.ts --coverage",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.lib.json",
     "watch": "vite build --watch"
   },
   "devDependencies": {
-    "@iress-oss/ids-components": "^6.0.0-alpha.0",
+    "@iress-oss/ids-components": "^6.0.0-alpha.1",
     "@iress-oss/ids-storybook-config": "^0.0.0",
     "@iress-oss/ids-storybook-version-badge": "^0.0.0",
     "@storybook/addon-docs": "^9.1.10",
