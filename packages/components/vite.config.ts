@@ -1,15 +1,57 @@
 /// <reference types="vitest" />
 import react from '@vitejs/plugin-react';
 import { glob } from 'glob';
+import path from 'node:path';
+import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { extname, relative, resolve } from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import type { Plugin } from 'vite';
 
 // TODO: Monitor and fix "Sourcemap for "/virtual:/@storybook/builder-vite/setup-addons.js" points to missing source files"
 // https://github.com/storybookjs/storybook/issues/28567
+
+/**
+ * TODO: For some reason Panda CSS @layer declarations are being stripped out during the build process.
+ * This plugin preserves the initial @layer declaration by reading it from the source file
+ * and prepending it to the built CSS files.
+ */
+function preservePandaLayerDeclaration() {
+  let layerDeclaration = '';
+
+  return {
+    name: 'preserve-panda-layer',
+    apply: 'build',
+    buildStart() {
+      // read the original CSS once
+      const originalFile = path.resolve(
+        __dirname,
+        './src/styled-system/styles.css',
+      );
+      const content = fs.readFileSync(originalFile, 'utf-8');
+      const match = /^@layer\s{1,10}[^;\n]{1,200};/m.exec(content);
+      layerDeclaration = match ? match[0] : '';
+    },
+    writeBundle({ dir = './dist' }, bundle) {
+      for (const fileName of Object.keys(bundle)) {
+        if (fileName.endsWith('.css')) {
+          const asset = bundle[fileName];
+          if ('source' in asset) {
+            asset.source = `${layerDeclaration} ${String(asset.source)}`;
+            fs.writeFileSync(
+              `${dir}/${fileName}`,
+              String(asset.source),
+              'utf-8',
+            );
+          }
+        }
+      }
+    },
+  } satisfies Plugin;
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -36,7 +78,6 @@ export default defineConfig({
     // In future, possibly do this instead: https://panda-css.com/docs/guides/component-library#use-panda-as-external-package
     viteStaticCopy({
       structured: true,
-      silent: true,
       targets: [
         {
           src: 'src/styled-system/**/*.d.ts',
@@ -44,10 +85,12 @@ export default defineConfig({
         },
       ],
     }),
+    preservePandaLayerDeclaration(),
   ],
   build: {
     emptyOutDir: true,
     copyPublicDir: true,
+    cssMinify: 'lightningcss',
     lib: {
       entry: resolve(__dirname, 'src/main.ts'),
       formats: ['es'],
@@ -85,6 +128,15 @@ export default defineConfig({
         assetFileNames: '[name][extname]',
         entryFileNames: '[name].js',
       },
+    },
+  },
+  css: {
+    transformer: 'lightningcss',
+    lightningcss: {
+      drafts: {
+        customMedia: true,
+      },
+      cssModules: false,
     },
   },
 });
