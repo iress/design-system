@@ -6,6 +6,7 @@ import {
   IressInline,
   type IressInlineProps,
   IressPanel,
+  type IressPanelProps,
   IressProvider,
   type IressProviderProps,
   IressStack,
@@ -24,7 +25,7 @@ export interface IressStorybookComponentMapping {
   IressDivider: ComponentType<IressDividerProps>;
   IressExpander: ComponentType<IressExpanderProps>;
   IressInline: ComponentType<IressInlineProps>;
-  IressPanel: ComponentType<IressInlineProps>;
+  IressPanel: ComponentType<IressPanelProps>;
   IressProvider: ComponentType<IressProviderProps>;
   IressStack: ComponentType<IressStackProps>;
   IressTab: ComponentType<IressTabProps>;
