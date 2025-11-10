@@ -52,15 +52,28 @@ const api = {
 
 // We mock the storybook/internal/components package to avoid rendering the actual components,
 // as we are not testing the components themselves (and there's some magic going on with their Styled Components)
-vi.mock('storybook/internal/components', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('storybook/internal/components')>()),
-  Button: (props: ComponentProps<typeof Button>) => (
-    <button onClick={props.onClick}>{props.children}</button>
-  ),
-  IconButton: () => <button>IconButton rendered</button>,
-  WithTooltip: () => <div>WithTooltip rendered</div>,
-  TooltipLinkList: () => <div>TooltipLinkList rendered</div>,
-}));
+vi.mock('storybook/internal/components', async (importOriginal) => {
+  const { forwardRef } = await import('react');
+  return {
+    ...(await importOriginal<typeof import('storybook/internal/components')>()),
+    Button: (props: ComponentProps<typeof Button>) => (
+      <button onClick={props.onClick}>{props.children}</button>
+    ),
+    IconButton: () => <button>IconButton rendered</button>,
+    WithTooltip: () => <div>WithTooltip rendered</div>,
+    TooltipLinkList: () => <div>TooltipLinkList rendered</div>,
+    AddonPanel: forwardRef<HTMLDivElement, any>((props, ref) => {
+      if (props.active === false) {
+        return null;
+      }
+      return (
+        <div ref={ref} {...props}>
+          {props.children}
+        </div>
+      );
+    }),
+  };
+});
 
 // We mock the storybook/manager-api package,
 // Which relies on Storybook's context and would throw an error in a test environment (and is a pain to mock).

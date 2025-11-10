@@ -46,16 +46,16 @@ export const IressProvider = ({
   ...restProps
 }: IressProviderProps) => {
   const includeDefaultFont = useMemo(() => {
-    if (!noDefaultFont) {
-      return true;
+    if (noDefaultFont) {
+      return false;
     }
 
     return !document.head.querySelector('link[data-iress-design-system-font]');
   }, [noDefaultFont]);
 
   const includeIcons = useMemo(() => {
-    if (!noIcons) {
-      return true;
+    if (noIcons) {
+      return false;
     }
 
     return !document.head.querySelector('link[data-iress-design-system-icons]');
