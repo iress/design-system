@@ -36,7 +36,6 @@
   "scripts": {
     "analyse": "yarn vite-bundle-visualizer",
     "build": "vite build",
-    "build-storybook": "storybook build",
     "dev": "yarn storybook",
     "clean": "rimraf dist coverage storybook-static",
     "lint": "eslint . --ext=.js,.jsx,.ts,.tsx,.mjs,.cjs,.mdx --max-warnings=0",
