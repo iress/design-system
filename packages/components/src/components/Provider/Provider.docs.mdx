@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import { ComponentOverview } from '@iress-storybook/components';
 import * as ComponentStories from './Provider.stories';
+import { ComponentOverview } from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -8,8 +8,8 @@ import * as ComponentStories from './Provider.stories';
 
 <ComponentOverview
   description="Provider is a component that sets up the Iress Design System for your application. It ensures that the design system is correctly configured and ready to use."
-  story={ComponentStories.Provider}
-  stories={ComponentStories}
+  of={ComponentStories.Provider}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -26,7 +26,6 @@ import { IressProvider } from '@iress-oss/ids-components';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <IressProvider>
-    <IressTheme />
     <App />
   </IressProvider>,
 );

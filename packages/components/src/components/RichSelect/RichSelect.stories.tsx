@@ -18,12 +18,6 @@ import { SelectNewOption } from './mocks/SelectNewOption';
 import SelectNewOptionSource from './mocks/SelectNewOption.tsx?raw';
 import { OptionsLongText } from './mocks/SelectOptionLongText';
 import SelectOptionLongTextSource from './mocks/SelectOptionLongText.tsx?raw';
-import {
-  disableArgTypes,
-  addToStorybookCategory,
-  withCustomSource,
-  mergeStorybookConfig,
-} from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
 import { FORM_ELEMENT_WIDTHS } from '@/constants';
 import {
@@ -34,6 +28,12 @@ import {
   IressInline,
   IressMenuText,
 } from '@/main';
+import {
+  addToStorybookCategory,
+  disableArgTypes,
+  mergeStorybookConfig,
+} from '@iress-oss/ids-storybook-config';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<typeof IressRichSelect>;
 

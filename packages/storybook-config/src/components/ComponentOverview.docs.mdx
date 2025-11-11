@@ -1,0 +1,63 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ComponentOverview } from './ComponentOverview';
+import { HideSidebar } from './HideSidebar';
+import * as ComponentStories from './mocks/StoryStub.stories';
+
+<Meta title="Components/Overview" />
+<HideSidebar />
+
+# Example
+
+This allows us to preview and test the component overviews, as the stories file doesn't work for it.
+
+<ComponentOverview meta={ComponentStories} of={ComponentStories.IsStub} />
+
+## Stories
+
+### Description
+
+<ComponentOverview
+  meta={ComponentStories}
+  of={ComponentStories.IsStub}
+  description="This is an example of a description."
+/>
+
+### API props
+
+<ComponentOverview
+  meta={ComponentStories}
+  of={ComponentStories.IsStub}
+  apiProps={{
+    heading: 'API Overview',
+  }}
+/>
+
+### Canvas props
+
+<ComponentOverview
+  meta={ComponentStories}
+  of={ComponentStories.IsStub}
+  canvasProps={{
+    refresh: true,
+  }}
+/>
+
+### Info
+
+<ComponentOverview
+  meta={ComponentStories}
+  of={ComponentStories.IsStub}
+  info={
+    <span>
+      <strong>Note:</strong> This is some additional info about the component.
+    </span>
+  }
+/>
+
+### Read more
+
+<ComponentOverview
+  meta={ComponentStories}
+  of={ComponentStories.IsStub}
+  readMore={<p>Some additional description can be found here.</p>}
+/>

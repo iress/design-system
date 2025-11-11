@@ -1,11 +1,14 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressHide } from '.';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
-import { CurrentBreakpoint } from '@iress-storybook/components';
 import { IressPanel } from '../Panel';
 import { IressDivider } from '../Divider';
+import {
+  CurrentBreakpoint,
+  disableArgTypes,
+} from '@iress-oss/ids-storybook-config';
+import { BREAKPOINT_DETAILS, BREAKPOINTS, IressTable } from '@/main';
 
 type Story = StoryObj<typeof IressHide>;
 
@@ -75,4 +78,33 @@ export const VisuallyHidden: Story = {
     ...HiddenOn.args,
     visuallyHidden: true,
   },
+};
+
+export const BreakpointTable: Story = {
+  render: () => (
+    <IressTable
+      caption="Hide breakpoints"
+      rows={BREAKPOINTS.map((breakpoint) => ({
+        breakpoint: <code>{breakpoint}</code>,
+        screenWidths: (
+          <span>
+            Above {BREAKPOINT_DETAILS[breakpoint].minScreenWidth} (inclusive)
+          </span>
+        ),
+      }))}
+    />
+  ),
+};
+
+export const UtilityBreakpointTable: Story = {
+  render: () => (
+    <IressTable
+      caption="Hide breakpoints"
+      rows={BREAKPOINTS.map((breakpoint) => ({
+        totallyHidden: <code>iress-hidden--{breakpoint}</code>,
+        visuallyHidden: <code>iress-sr-only--{breakpoint}</code>,
+        screenWidths: BREAKPOINT_DETAILS[breakpoint].screenWidthRange,
+      }))}
+    />
+  ),
 };

@@ -1,6 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressValidationMessage } from './ValidationMessage';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
 import {
   IressDivider,
@@ -9,7 +8,10 @@ import {
   SYSTEM_VALIDATION_STATUSES,
   type SystemValidationStatuses,
 } from '@/main';
-import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
+import {
+  disableArgTypes,
+  STORYBOOK_ONLY_CATEGORY,
+} from '@iress-oss/ids-storybook-config';
 
 interface CustomArgs {
   messages: Record<SystemValidationStatuses, string>;

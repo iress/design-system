@@ -1,12 +1,12 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
 import * as ComponentStories from './MenuItem.stories';
 import * as MenuDividerStories from '../MenuDivider/MenuDivider.stories';
 import * as MenuHeadingStories from '../MenuText/MenuHeading.stories';
 import * as MenuTextStories from '../MenuText/MenuText.stories';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -14,8 +14,8 @@ import * as MenuTextStories from '../MenuText/MenuText.stories';
 
 <ComponentOverview
   description="Menu items are headings, buttons and dividers used inside an `IressMenu`"
-  story={ComponentStories.Unselected}
-  stories={ComponentStories}
+  of={ComponentStories.Unselected}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -26,74 +26,56 @@ The `IressMenuItem` can be set to selected using the `selected` prop.
 
 **Note:** If you are using `IressMenu` with a `role` of `listbox`, you should use the `defaultSelected` or `selected` prop on the `IressMenu` to set the selected state of its `<IressMenuItem />` children, as the `selected` prop will be ignored.
 
-<ComponentExample
-  story={ComponentStories.Selected}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Selected} />
 
 ### Value
 
 A menu item can have a unique value set to it, used to determine its selected state in a `IressMenu` component with a `role` of `listbox`. The value is not visible to end users.
 
-<ComponentExample story={ComponentStories.Value} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Value} />
 
 ### `canToggle`
 
 When `canToggle` is set to true, the menu item can be toggled between selected and unselected states. This only works in a `IressMenu` component with a `role` of `listbox`.
 
-<ComponentExample
-  story={ComponentStories.CanToggle}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.CanToggle} />
 
 ### Prepend and append
 
 You can prepend and append content to a menu item using the `prepend` and `append` props.
 
-<ComponentExample
-  story={ComponentStories.PrependAndAppend}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.PrependAndAppend} />
 
 ### Multi-select menus
 
 Inside a `IressMenu` with a `role` of `listbox` and the `multiSelect` prop set to true, the menu item will display with a checkbox.
 
-<ComponentExample
-  story={ComponentStories.MultiSelect}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.MultiSelect} />
 
 ### Element
 
 You can use the `element` prop to render a custom component inside the menu item. This is useful for rendering a component from a third-party library, such as `react-router-dom`.
 
-<ComponentExample story={ComponentStories.Element} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Element} />
 
 ### Divider
 
 When `divider` is set to true, the menu item will render with a bottom border.
 
-<ComponentExample story={ComponentStories.Divider} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Divider} />
 
 However, it is recommended to use the `IressMenuDivider` component instead.
 
-<ComponentExample
-  story={MenuDividerStories.Divider}
-  stories={MenuDividerStories}
-/>
+<ComponentExample of={MenuDividerStories.Divider} />
 
 ### Heading
 
 You can use the `IressMenuHeading` to render headings within a menu. This adds styling so the appropriate padding is applied.
 
-<ComponentExample
-  story={MenuHeadingStories.Heading}
-  stories={MenuHeadingStories}
-/>
+<ComponentExample of={MenuHeadingStories.Heading} />
 
 ### Text
 
 You can use the `IressMenuText` to render other text within a menu. This adds styling so the appropriate padding is applied.
 
-<ComponentExample story={MenuTextStories.Text} stories={MenuTextStories} />
+<ComponentExample of={MenuTextStories.Text} />

@@ -1,10 +1,10 @@
 import { type StoryObj, type Meta } from '@storybook/react-vite';
-import { disableArgTypes } from '@iress-storybook/helpers';
 
 import { IressToggle } from '.';
 import { IressPanel } from '../Panel';
 import { IressText } from '../Text';
 import { IressStack } from '../Stack';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressToggle>;
 

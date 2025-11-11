@@ -13,12 +13,9 @@ export default [
   {
     ignores: [
       ...baseIgnores,
-      '**/*.stories.tsx', // TODO: Ignoring stories for now, we will do this as part of Storybook migration
-      '**/mocks/**/*', // TODO: Ignoring stories for now, we will do this as part of Storybook migration
-      '**/storybook-static/**', // Components-specific ignore
+      '**/storybook-static/**',
       '**/*.d.ts',
       '**/theme-preset.ts',
-      '**/themes/*.ts',
       '**/styled-system/**',
       '!.storybook',
     ],

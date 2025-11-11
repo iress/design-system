@@ -32,7 +32,7 @@ export default [
   {
     // TypeScript config files at root - use factory but without project references
     ...createTypeScriptConfig(import.meta.dirname, []),
-    files: ['*.ts', 'shared/**/*.ts'],
+    files: ['*.ts', 'shared/**/*.ts', 'scripts/**/*.ts'],
     languageOptions: {
       ...createTypeScriptConfig(import.meta.dirname, []).languageOptions,
       parserOptions: {

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { type PropsWithChildren, useMemo, useRef } from 'react';
 import { vitest } from 'vitest';
 import {

@@ -40,16 +40,10 @@
     "paths": {
       "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
+      "@docs/*": ["docs/*"],
       "@helpers/*": ["src/helpers/*"],
       "@theme-preset/*": ["theme-preset/*"]
     },
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
-  },
-  "exclude": [
-    "coverage/**/*",
-    "build/**/*",
-    "dist/**/*",
-    "src/styled-system/**/*",
-    "**/*.stories.tsx"
-  ]
+  }
 }

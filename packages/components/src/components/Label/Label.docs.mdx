@@ -1,9 +1,9 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
 import * as ComponentStories from './Label.stories';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -16,8 +16,8 @@ import * as ComponentStories from './Label.stories';
       inputs and <code>IressField</code> is too restrictive.
     </>
   }
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -26,28 +26,19 @@ import * as ComponentStories from './Label.stories';
 
 To indicate that an input is required, you may use the `required` prop to distinguish the label with an asterix.
 
-<ComponentExample
-  story={ComponentStories.Required}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Required} />
 
 ### Hidden label
 
 Sometimes you may wish to have an input with no visible label, but to still wrap the input in a label for accessibility. In this case, set `hiddenLabel` to `true`.
 
-<ComponentExample
-  story={ComponentStories.HiddenLabel}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.HiddenLabel} />
 
 ### Rich content
 
 You can render custom content into the label.
 
-<ComponentExample
-  story={ComponentStories.RichContent}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.RichContent} />
 
 ## Accessibility
 

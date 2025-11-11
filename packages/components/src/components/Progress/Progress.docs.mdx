@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import { ComponentOverview } from '@iress-storybook/components';
 import * as ComponentStories from './Progress.stories';
+import { ComponentOverview } from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -8,8 +8,8 @@ import * as ComponentStories from './Progress.stories';
 
 <ComponentOverview
   description="A progress component is used to indicate to a user the completion of a set of tasks or a process."
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Usage

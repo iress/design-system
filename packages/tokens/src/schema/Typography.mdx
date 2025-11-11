@@ -1,0 +1,31 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import * as ComponentStories from './Typography.stories';
+import typography from './typography';
+
+<Meta of={ComponentStories} />
+
+# Typography
+
+<p>{typography.$description}</p>
+
+<Story of={ComponentStories.Base} />
+
+---
+
+## Headings
+
+<p>{typography.heading.$description}</p>
+
+<Story of={ComponentStories.Headings} />
+
+---
+
+## Body
+
+<p>{typography.body.$description}</p>
+
+<Story of={ComponentStories.Body} />
+
+---
+
+<Story of={ComponentStories.Code} />

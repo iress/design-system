@@ -1,10 +1,10 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
 import * as ComponentStories from './Inline.stories';
 import { IressTable } from '../../main';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -17,8 +17,8 @@ import { IressTable } from '../../main';
       spacing around them, wrapping onto multiple lines when necessary.
     </>
   }
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -33,48 +33,15 @@ The amount of spacing is controlled by the `gap` prop and can be set from `spaci
 
 The previous `gutter` prop has been replaced by `gap`, which uses the latest set of spacing tokens.
 
-Here is the mapping of previous `gutter` scale and current `gap` value:
+The existing `gutter` values are still supported, as they are now aliases for the spacing tokens.
 
-<IressTable
-  rows={[
-    {
-      deprecated_gutter_scale: 'none',
-      new_gap_value: 'spacing.000',
-    },
-    {
-      deprecated_gutter_scale: 'xs',
-      new_gap_value: 'spacing.100',
-    },
-    {
-      deprecated_gutter_scale: 'sm',
-      new_gap_value: 'spacing.200',
-    },
-    {
-      deprecated_gutter_scale: 'md',
-      new_gap_value: 'spacing.400',
-    },
-    {
-      deprecated_gutter_scale: 'lg',
-      new_gap_value: 'spacing.700',
-    },
-    {
-      deprecated_gutter_scale: 'xl',
-      new_gap_value: 'spacing.1200',
-    },
-  ]}
-  scope="col"
-/>
-
-<ComponentExample story={ComponentStories.Gap} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Gap} />
 
 ### Responsive gap
 
 The `gap` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
 
-<ComponentExample
-  story={ComponentStories.ResponsiveGap}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ResponsiveGap} />
 
 ### Horizontal align
 
@@ -87,10 +54,7 @@ Horizontal alignment of the children is controlled by the `horizontalAlign` prop
 - `left` - children are aligned left, similar to `text-align: left`.
 - `right` - children are aligned right, similar to `text-align: right`.
 
-<ComponentExample
-  story={ComponentStories.HorizontalAlign}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.HorizontalAlign} />
 
 ### Vertical align
 
@@ -101,13 +65,10 @@ Vertical alignment of the children is controlled by the `verticalAlign` prop. It
 - `stretch` - each direct child stretches to the full height of the inline container.
 - `top` - children are aligned to the top of the container.
 
-<ComponentExample
-  story={ComponentStories.VerticalAlign}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.VerticalAlign} />
 
 ### No wrap
 
 The `IressInline` component automatically wraps children. There may be some scenarios where you do not require children to be wrapped. For this you can use the `noWrap` prop.
 
-<ComponentExample story={ComponentStories.NoWrap} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.NoWrap} />

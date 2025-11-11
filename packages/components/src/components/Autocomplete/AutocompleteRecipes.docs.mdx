@@ -1,5 +1,8 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import { ComponentExample, ComponentApi } from '@iress-storybook/components';
+import {
+  ComponentExample,
+  ComponentApi,
+} from '@iress-oss/ids-storybook-config';
 import { IressAlert } from '../../main';
 import * as AutocompleteRecipes from './AutocompleteRecipes.stories';
 
@@ -25,12 +28,6 @@ It has been exposed in case you need it in your application to provide custom se
 1. You want to provide filtering in a certain area of the application (eg. a table).
 
 <ComponentExample
-  story={AutocompleteRecipes.Table}
-  stories={AutocompleteRecipes}
-/>
-
-<ComponentApi
-  story={AutocompleteRecipes.Table}
-  heading="Parameters"
-  headingLevel={3}
+  of={AutocompleteRecipes.Table}
+  api="Parameters for useAutocompleteSearch"
 />

@@ -1,10 +1,10 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
 import * as ComponentStories from './Toggle.stories';
 import { IressAlert } from '../../main';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -12,8 +12,8 @@ import { IressAlert } from '../../main';
 
 <ComponentOverview
   description="Toggles allow users to turn things on or off. When toggled, the associated change happens straight away."
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -32,19 +32,19 @@ The `IressToggle` component should only be used for actions that happen immediat
 
 Toggles should always have a label, which is set via its `children`.
 
-<ComponentExample story={ComponentStories.Default} />
+<ComponentExample of={ComponentStories.Default} />
 
 ### Hidden labels
 
 Labels can be hidden via the `hiddenLabel` prop; this will hide the label from view, but it'll still be available to screen reader users.
 
-<ComponentExample story={ComponentStories.HiddenLabel} />
+<ComponentExample of={ComponentStories.HiddenLabel} />
 
 ### Checked
 
 The on / off state of the toggle can be controlled by setting the `checked` prop.
 
-<ComponentExample story={ComponentStories.Checked} />
+<ComponentExample of={ComponentStories.Checked} />
 
 ### Layout
 
@@ -54,4 +54,4 @@ The `layout` prop allows you to control the position of the label in relation to
 - `inline-reverse` renders the label after the control instead of before the control
 - `stack` positions the label above the control
 
-<ComponentExample story={ComponentStories.Layout} />
+<ComponentExample of={ComponentStories.Layout} />

@@ -2,7 +2,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as AlertStories from './Alert.stories';
 
 <Meta of={AlertStories} />
@@ -11,8 +11,8 @@ import * as AlertStories from './Alert.stories';
 
 <ComponentOverview
   description="An alert displays a short, important message in a way that attracts the user's attention without interrupting the user's task."
-  story={AlertStories.Default}
-  stories={AlertStories}
+  of={AlertStories.Default}
+  meta={AlertStories}
 />
 
 ## Examples
@@ -21,7 +21,7 @@ import * as AlertStories from './Alert.stories';
 
 The alert offers four statuses that set a distinctive colour and icon. They can be set using the `status` prop. Their different use cases are described here.
 
-<ComponentExample story={AlertStories.Status} stories={AlertStories} />
+<ComponentExample of={AlertStories.Status} />
 
 ### Heading
 
@@ -29,19 +29,19 @@ An alert can be displayed with a heading. This is controlled by the `heading` pr
 
 **Note**: The `heading` prop replaces the `headingText` and `headingLevel` props from previous versions of IDS. These prop are now deprecated and will be removed in a future version.
 
-<ComponentExample story={AlertStories.Heading} stories={AlertStories} />
+<ComponentExample of={AlertStories.Heading} />
 
 ### Actions
 
 The `actions` prop allows you to display call to action buttons within the alert. This is useful for providing users with options to take action based on the alert message.
 
-<ComponentExample story={AlertStories.Footer} stories={AlertStories} />
+<ComponentExample of={AlertStories.Footer} />
 
 ### Icon
 
 The `icon` prop allows you to customise the icon displayed in the alert. It accepts a string for the icon name, or can be set to `false` to remove the icon entirely.
 
-<ComponentExample story={AlertStories.Icon} stories={AlertStories} />
+<ComponentExample of={AlertStories.Icon} />
 
 ### Variants
 
@@ -50,10 +50,10 @@ The alert can be displayed in different variants to suit different use cases. Th
 - `sidebar`: The alert is displayed in the sidebar of the page, typically used for informational messages on longer forms.
 - `site-wide`: The alert is displayed in the site-wide banner, typically used for important messages that need to be seen by all users.
 
-<ComponentExample story={AlertStories.Variant} stories={AlertStories} />
+<ComponentExample of={AlertStories.Variant} />
 
 ### Dimissable
 
 The alert can be made dismissable by setting the `onDismiss` prop. This will display a close button in the top right corner of the alert, allowing users to dismiss it.
 
-<ComponentExample story={AlertStories.Dismissable} stories={AlertStories} />
+<ComponentExample of={AlertStories.Dismissable} />

@@ -150,9 +150,21 @@ export const colors = {
     description: 'Transparent colour, used to create a transparent background.',
     value: 'rgba(0, 0, 0, 0)',
   },
+  page: {
+    description: 'Page colour, used for backgrounds.',
+    value: cssVars.colour.neutral['10'],
+  },
   alt: {
     description: 'Alternative colour, used for alternative backgrounds.',
     value: cssVars.colour.neutral['20'],
+  },
+  muted: {
+    description: 'Muted colour, used for less prominent text.',
+    value: cssVars.colour.neutral['70'],
+  },
+  text: {
+    description: 'Text colour, used for primary text content.',
+    value: cssVars.colour.neutral['80'],
   },
 };
 

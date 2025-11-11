@@ -24,7 +24,7 @@ export const BREAKPOINT_DETAILS = {
     screenWidthRange: '576px - 767px',
     minScreenWidth: '576px',
     maxScreenWidth: '767px',
-    containerMaxWidth: '520px',
+    containerMaxWidth: '100%',
     viewportWidth: 767,
   },
   /**
@@ -35,7 +35,7 @@ export const BREAKPOINT_DETAILS = {
     screenWidthRange: '768px - 1023px',
     minScreenWidth: '768px',
     maxScreenWidth: '1023px',
-    containerMaxWidth: '740px',
+    containerMaxWidth: '100%',
     viewportWidth: 962,
   },
 
@@ -47,7 +47,7 @@ export const BREAKPOINT_DETAILS = {
     screenWidthRange: '1024px - 1199px',
     minScreenWidth: '1024px',
     maxScreenWidth: '1199px',
-    containerMaxWidth: '960px',
+    containerMaxWidth: '100%',
     viewportWidth: 1180,
   },
 
@@ -59,7 +59,7 @@ export const BREAKPOINT_DETAILS = {
     screenWidthRange: '1200px - 1499px',
     minScreenWidth: '1200px',
     maxScreenWidth: '1499px',
-    containerMaxWidth: '1160px',
+    containerMaxWidth: '1280px',
     viewportWidth: 1366,
   },
 
@@ -70,7 +70,7 @@ export const BREAKPOINT_DETAILS = {
     mediaQuery: '(min-width: 1500px)',
     screenWidthRange: '1500px and above',
     minScreenWidth: '1500px',
-    containerMaxWidth: '1160px',
+    containerMaxWidth: '1280px',
     viewportWidth: 1920,
   },
 } satisfies Record<string, BreakpointDetail>;

@@ -1,0 +1,17 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ComponentCanvas } from './ComponentCanvas';
+import * as ComponentStories from './mocks/StoryStub.stories';
+
+<Meta title="Components/Canvas" />
+
+# Canvas
+
+This allows us to preview and test the component canvas, as the stories file doesn't work for it.
+
+<ComponentCanvas of={ComponentStories.IsStub} />
+
+## Stories
+
+### Refresh
+
+<ComponentCanvas of={ComponentStories.IsStub} refresh />

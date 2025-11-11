@@ -1,11 +1,11 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
 import * as ComponentStories from './Table.stories';
 import * as TableBodyStories from './TableBody/TableBody.stories';
 import * as TableFormattedValueStories from './TableFormattedValue/TableFormattedValue.stories';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -13,8 +13,8 @@ import * as TableFormattedValueStories from './TableFormattedValue/TableFormatte
 
 <ComponentOverview
   description="Data driven component for displaying tabular data."
-  story={ComponentStories.AutomaticColumns}
-  stories={ComponentStories}
+  of={ComponentStories.AutomaticColumns}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -26,10 +26,7 @@ To get started, the `IressTable` component only requires the `caption` and `rows
 - `caption` a string describing what the table is displaying (required for accessibility, it can be visually hidden by setting the `hiddenCaption` prop).
 - `rows` are an array of objects, each object represents a row in the table. The table will use the key of the first object to determine the columns, automatically made human readable if the key is camel case, snake case or kebab case.
 
-<ComponentExample
-  story={ComponentStories.AutomaticColumns}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.AutomaticColumns} />
 
 ### Custom columns
 
@@ -37,10 +34,7 @@ For more control over the columns, the `columns` prop can be used to define the 
 
 Each array item represents a key in the objects in your `rows` prop. If one of the keys in your `rows` prop is not defined in the `columns` prop, it will not be displayed in the table.
 
-<ComponentExample
-  story={ComponentStories.CustomColumns}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.CustomColumns} />
 
 ### Column API
 
@@ -119,7 +113,7 @@ The table component provides some basic formatting. This is controlled by the `f
 
 To completely customise it, you can also send in a function that returns a ReactNode. It has two parameters, the original value and the row it is connected to.
 
-<ComponentExample story={ComponentStories.Formats} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Formats} />
 
 ### Sorting
 
@@ -127,7 +121,7 @@ Sorting can be enabled on a column by setting the `sort` property of the `TableC
 
 The sort button has some visually hidden text for screenreaders to signify that the column is sortable. If you need to change this (ie. for translation purposes), it can be done with the `sortableText` column option which defaults to: sortable.
 
-<ComponentExample story={ComponentStories.Sorting} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Sorting} />
 
 ### Custom sorting logic
 
@@ -138,10 +132,7 @@ If you need to customise the sorting logic, you can use the `sortFn` property of
 - A `string` referencing a built-in sort function: `alphanumeric`, `alphanumericCaseSensitive`, `text`, `textCaseSensitive`, `datetime` and `basic`. To understand how they work, visit the [Tanstack Table documentation](https://tanstack.com/table/v8/docs/api/features/sorting/#sorting-functions).
 - A custom sort function that takes two arguments: `a` and `b`, which are the two rows being compared. It should return `-1`, `0` or `1` depending on the comparison.
 
-<ComponentExample
-  story={ComponentStories.CustomSortingLogic}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.CustomSortingLogic} />
 
 ### Width
 
@@ -149,7 +140,7 @@ The width of a column is controlled by the `width` property on the `TableColumn`
 
 When the table exceeds the width of the container, a horizontal scrollbar is triggered. This makes it possible to view larger tables on mobile devices.
 
-<ComponentExample story={ComponentStories.Width} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Width} />
 
 ### Alignment
 
@@ -157,10 +148,7 @@ Columns can be aligned using the `align` property on the `TableColumn` object. C
 
 Currency and number formats are automatically right aligned to make the values easier to compare, but this can be overriden by setting the `align` property.
 
-<ComponentExample
-  story={ComponentStories.Alignment}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Alignment} />
 
 ### Dividers
 
@@ -168,34 +156,25 @@ As a general rule we don't add vertical column borders to our tables. Sometimes 
 
 To add a vertical divider you can set the `divider` prop in the `TableColumn` to true. This will add a vertical border to the end of the column.
 
-<ComponentExample
-  story={ComponentStories.Dividers}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Dividers} />
 
 ### Highlight on hover
 
 This can be enabled by setting the `hover` prop. This will bring attention to the row the user is hovering over, allowing users to focus on the relationship between the columns of a specific row.
 
-<ComponentExample
-  story={ComponentStories.HighlightOnHover}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.HighlightOnHover} />
 
 ### Scope
 
 `scope` defaults to row, which means the first cell in the row will be a `<th>`. When it is set to col the first cell in the row will be a `<td>`.
 
-<ComponentExample story={ComponentStories.Scope} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Scope} />
 
 ### Hidden header
 
 For very simple tabular data, you have the option to hide the table header with the `hiddenHeader` prop. When this is set to true, the table header will not be rendered.
 
-<ComponentExample
-  story={ComponentStories.HiddenHeader}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.HiddenHeader} />
 
 ### Rich rows (JSX)
 
@@ -203,10 +182,7 @@ The `rows` prop allows you to use `ReactNodes` as the value of a cell. This can 
 
 **Note:** If you are using the `sort` property, the sorting may not work properly with rich content. If this happens, either remove the `sort` property or use the `format` prop on the column to set a custom formatter.
 
-<ComponentExample
-  story={ComponentStories.RichRows}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.RichRows} />
 
 ### Empty state
 
@@ -214,10 +190,7 @@ You can provide the table with some content to display when there is no row data
 
 This is reliant on `columns` prop to provide the information for the table header. If `columns` is not provided and there is no row data the table will not render.
 
-<ComponentExample
-  story={ComponentStories.EmptyState}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.EmptyState} />
 
 ### Static table
 
@@ -227,22 +200,19 @@ It accepts any of the table sub-elements. To ensure best display, please make us
 
 **Note:** Only the `caption`, `hiddenCaption`, `hiddenHeader` and `hover` props are supported when using `children` to render a table.
 
-<ComponentExample story={ComponentStories.Static} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Static} />
 
 ### Row props
 
 You can customise the rows by passing in a `rowProps` object or function. It accepts a map of table row props that can be passed to a `tr` element, or a function that accepts the row data currently being rendered, and returns a map of table props.
 
-<ComponentExample
-  story={ComponentStories.RowProps}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.RowProps} />
 
 ### Compact
 
 The `compact` prop can be used to reduce the padding around the table cells and reduce the font size. This can be useful when you have a lot of data to display and allow users to see as many columns as possible.
 
-<ComponentExample story={ComponentStories.Compact} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Compact} />
 
 ## `IressTableBody`
 
@@ -253,8 +223,8 @@ In some cases you may have a table with multiple groups of rows inside it, howev
     heading: 'Props',
     headingId: 'table-body-api',
   }}
-  story={TableBodyStories.Body}
-  stories={TableBodyStories}
+  of={TableBodyStories.Body}
+  meta={TableBodyStories}
 />
 
 ## `IressTableFormattedValue`
@@ -268,6 +238,6 @@ It has been exposed so you can use it in your own components to format values in
     heading: 'Props',
     headingId: 'table-formatted-value-api',
   }}
-  story={TableFormattedValueStories.FormattedValue}
-  stories={TableFormattedValueStories}
+  of={TableFormattedValueStories.FormattedValue}
+  meta={TableFormattedValueStories}
 />

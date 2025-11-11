@@ -4,5 +4,6 @@
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo"
   },
-  "include": ["src", "theme-preset"]
+  "include": ["docs", "src", "theme-preset"],
+  "exclude": ["**/node_modules", "src/styled-system"]
 }

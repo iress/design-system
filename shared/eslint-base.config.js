@@ -63,6 +63,7 @@ export const baseIgnores = [
   '**/node_modules/**',
   '**/mockServiceWorker.js',
   '**/prettier.config.mjs',
+  '**/storybook-static/**',
 ];
 
 export const baseJavaScriptConfig = {

@@ -1,9 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSkeleton, type IressSkeletonProps } from '.';
-import {
-  disableArgTypes,
-  withTransformedRawSource,
-} from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
 import { IressInline } from '@/main';
 import { SkeletonRect } from './mocks/SkeletonRect';
@@ -12,6 +8,10 @@ import { SkeletonCircle } from './mocks/SkeletonCircle';
 import SkeletonCircleSource from './mocks/SkeletonCircle.tsx?raw';
 import { SkeletonText } from './mocks/SkeletonText';
 import SkeletonTextSource from './mocks/SkeletonText.tsx?raw';
+import {
+  disableArgTypes,
+  withTransformedRawSource,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSkeleton>;
 type TextStory = StoryObj<IressSkeletonProps<'text'>>;

@@ -1,11 +1,11 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
-import { IressButton } from '../../main';
+import { IressButton } from '@/main';
 import * as ComponentStories from './Field.stories';
 import * as FieldGroupStories from './FieldGroup/FieldGroup.stories';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -13,8 +13,8 @@ import * as FieldGroupStories from './FieldGroup/FieldGroup.stories';
 
 <ComponentOverview
   description="The field component is used to place label, hint and error information around form controls."
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -23,13 +23,13 @@ import * as FieldGroupStories from './FieldGroup/FieldGroup.stories';
 
 The `label` prop is required to describe the field.
 
-<ComponentExample story={ComponentStories.Label} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Label} />
 
 ### Hint
 
 Extra information on the field can be provided using the `hint` prop. It can accept any React node, so you can add your own custom mark up (eg. external links) to the hint text.
 
-<ComponentExample story={ComponentStories.Hint} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Hint} />
 
 ### Error message
 
@@ -37,10 +37,7 @@ To display error messages associated with the field, you can use the `errorMessa
 
 **Note:** `IressField` requires validation to be handled by the consumer. If you want out-of-the-box validation, use [`IressFormField` alongside `IressForm` instead](/docs/components-form--docs#fields).
 
-<ComponentExample
-  story={ComponentStories.ErrorMessage}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ErrorMessage} />
 
 ### Custom error
 
@@ -48,33 +45,21 @@ For more control over the formatting of the error, you can use the `error` prop.
 
 **Note:** `IressField` requires validation to be handled by the consumer. If you want out-of-the-box validation, use [`IressFormField` alongside `IressForm` instead](/docs/components-form--docs#fields).
 
-<ComponentExample
-  story={ComponentStories.CustomError}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.CustomError} />
 
 ### Hidden label
 
 There may be certain situations where you might want to (accessibly) hide the field label (in a search field for instance). This can be done by setting the `hiddenLabel` prop.
 
-<ComponentExample
-  story={ComponentStories.HiddenLabel}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.HiddenLabel} />
 
-<ComponentExample
-  story={ComponentStories.HiddenLabelWithError}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.HiddenLabelWithError} />
 
 ### Required
 
 Fields marked as `required` will have an asterisk prepended to the label.
 
-<ComponentExample
-  story={ComponentStories.Required}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Required} />
 
 ### Readonly data
 
@@ -82,10 +67,7 @@ Fields can be used to display read-only data. This is useful when you want to di
 
 You can also pass `readOnly` prop to remove the asterisk symbol (\*) even when the field is `required`.
 
-<ComponentExample
-  story={ComponentStories.ReadonlyData}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ReadonlyData} />
 
 ### Supplementary
 
@@ -101,10 +83,7 @@ This is used to display some metadata based on the value of the field in context
 - The `supplementary` prop is not a replacement for the `hint` prop. The `hint` prop should be used to provide additional information about the field itself, while the `supplementary` prop should be used to display additional information about the value of the field.
 - The `supplementary` prop will only be displayed if the field is not in an error state. If the field is in an error state, the `error` and `errorMessages` prop will be displayed instead.
 
-<ComponentExample
-  story={ComponentStories.Supplementary}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Supplementary} />
 
 ### Horizontal layout
 
@@ -119,28 +98,19 @@ Here are a few cases where you may use a horizontal layout:
 - On dashboards where space is limited, it may be necessary to display fields in a horizontal layout to make use of the space and give prominence to dashboard visuals.
 - Collaborative visual tools that require real-time editing and previews, such as Styler, Miro, Figma, where fields are less prominent to give prominence to the intended output.
 
-<ComponentExample
-  story={ComponentStories.Horizontal}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Horizontal} />
 
 #### Horizontal with error
 
 Error messages in horizontal layout are displayed below both the label and input field, spanning the full width.
 
-<ComponentExample
-  story={ComponentStories.HorizontalWithError}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.HorizontalWithError} />
 
 #### Horizontal label width
 
 In horizontal layout, you can control the width of the label using the `labelWidth` prop. This accepts CSS width values like pixels, percentages, or `auto`.
 
-<ComponentExample
-  story={ComponentStories.HorizontalLabelWidthExamples}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.HorizontalLabelWidthExamples} />
 
 ### Remove error margin
 
@@ -150,10 +120,7 @@ This is particularly useful in dense forms or when you want to minimize vertical
 
 **Note:** When `removeErrorMargin` is enabled, subsequent fields will be pushed down when error or supplementary messages appear, as no space is reserved for these messages. You can use the `IressStack` component to control field gaps and spacing as needed.
 
-<ComponentExample
-  story={ComponentStories.RemoveErrorMargin}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.RemoveErrorMargin} />
 
 ## `IressFieldGroup`
 
@@ -166,23 +133,16 @@ Under the hood it uses a `fieldset` and `legend` element to group the fields tog
     heading: 'Props',
     headingId: 'field-group-api',
   }}
-  story={FieldGroupStories.Default}
-  stories={FieldGroupStories}
+  of={FieldGroupStories.Default}
 />
 
 ### Inline
 
 Multiple fields can be displayed inline using the `inline` prop. On smaller screens, inline elements will wrap on to a new line if there's not enough space for everything on one line.
 
-<ComponentExample
-  story={FieldGroupStories.Inline}
-  stories={FieldGroupStories}
-/>
+<ComponentExample of={FieldGroupStories.Inline} />
 
-<ComponentExample
-  story={FieldGroupStories.InlineSink}
-  stories={FieldGroupStories}
-/>
+<ComponentExample of={FieldGroupStories.InlineSink} />
 
 ### Join
 
@@ -190,12 +150,9 @@ Elements can also be joined together using the `join` prop. Joined elements won'
 
 **Note:** The `join` prop works out of the box with IDS components. To enable your custom components to work with the `join` prop, you need to ensure the direct child of `IressFieldGroup` has the class `GlobalCSSClass.FormElement`. If the direct child is not the element with the border, add the class `GlobalCSSClass.FormElementInner` to the element with the border.
 
-<ComponentExample story={FieldGroupStories.Join} stories={FieldGroupStories} />
+<ComponentExample of={FieldGroupStories.Join} />
 
-<ComponentExample
-  story={FieldGroupStories.JoinSink}
-  stories={FieldGroupStories}
-/>
+<ComponentExample of={FieldGroupStories.JoinSink} />
 
 ## `IressForm` integration
 

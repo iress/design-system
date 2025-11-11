@@ -1,0 +1,26 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { IressText } from '@/main';
+import * as ComponentStories from './040-Radius.stories';
+import { ComponentExample } from '@iress-oss/ids-storybook-config';
+
+<Meta title="Styling props/Radius" />
+
+# Radius
+
+<IressText textStyle="typography.body.lg" mb="md">
+  These are all styling props related to changing the radius of a component
+  affects the visual softness and perceived friendliness of the interface,
+  influencing the overall user experience.
+</IressText>
+
+## `borderRadius`
+
+The `borderRadius` prop allows you to change the border radius of any component. It should be used sparingly, and often used when creating custom components that are not part of the design system, however you still want to retain the look and feel of the rest of the system.
+
+<ComponentExample of={ComponentStories.borderRadius} api />
+
+### Removing border radius
+
+In some cases you may need to remove the border-radius to achieve design requirements. This can be done using `radius.000` or `none`.
+
+<ComponentExample of={ComponentStories.noBorderRadius} api />

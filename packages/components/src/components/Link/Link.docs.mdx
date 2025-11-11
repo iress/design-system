@@ -1,9 +1,9 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
 import * as ComponentStories from './Link.stories';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -11,8 +11,8 @@ import * as ComponentStories from './Link.stories';
 
 <ComponentOverview
   description="A link is used to navigate to another page or location."
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -36,7 +36,7 @@ The loading state can be activated by setting the `loading` prop to `true` and p
 
 When the loading state is activated, any click events on the link are disabled.
 
-<ComponentExample story={ComponentStories.Loading} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Loading} />
 
 ### Slot props
 
@@ -45,10 +45,10 @@ Use the slots to correctly position icons or badges inside buttons.
 - **Prepend** - Places the element before the text
 - **Append** - Places the element after the text
 
-<ComponentExample story={ComponentStories.Slots} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Slots} />
 
 ### Element
 
 You can use the `element` prop to render a custom component as the link. This is useful for rendering a component from a third-party library, such as `react-router-dom`.
 
-<ComponentExample story={ComponentStories.Element} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Element} />

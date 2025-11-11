@@ -1,10 +1,11 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressAutocomplete } from '.';
 import {
+  CurrentBreakpoint,
   disableArgTypes,
   withJsxTransformer,
   withTransformedRawSource,
-} from '@iress-storybook/helpers';
+} from '@iress-oss/ids-storybook-config';
 import { AutocompleteUsingState } from './mocks/AutocompleteUsingState';
 import AutocompleteUsingStateSource from './mocks/AutocompleteUsingState.tsx?raw';
 import { AutocompleteUsingAsync } from './mocks/AutocompleteUsingAsync';
@@ -13,7 +14,6 @@ import { IressIcon } from '../Icon';
 import { IressPopover } from '../Popover';
 import { IressButton } from '../Button';
 import { IressPanel } from '../Panel';
-import { CurrentBreakpoint } from '@iress-storybook/components';
 import { IressStack } from '../Stack';
 
 type Story = StoryObj<typeof IressAutocomplete>;

@@ -1,0 +1,29 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { IressText } from '@/main';
+import * as ComponentStories from './020-Colour.stories';
+import { ComponentExample } from '@iress-oss/ids-storybook-config';
+
+<Meta of={ComponentStories} />
+
+# Colour
+
+<IressText textStyle="typography.body.lg" mb="md">
+  These are all styling props related to changing the foreground and background
+  colours of a component.
+</IressText>
+
+## `bg`
+
+The `bg` prop allows you to change the background of any component to the value of a colour token. It should be used sparingly, and usually alongside the `color` prop to ensure accessibility.
+
+Below is an example of a component using `bg` and `color` to create a featured panel that changes colour depending on the theme.
+
+<ComponentExample of={ComponentStories.bg} />
+
+## `color`
+
+The `color` prop allows you to change the foreground of any component to the value of a colour token. It should be used sparingly, and usually alongside the `bg` prop to ensure accessibility.
+
+Below is an example of using the `color` prop to highlight text throughout a component.
+
+<ComponentExample of={ComponentStories.color} />

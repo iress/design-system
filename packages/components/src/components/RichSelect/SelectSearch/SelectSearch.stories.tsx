@@ -15,7 +15,7 @@ import {
   disableArgTypes,
   mergeStorybookConfig,
   removeArgTypes,
-} from '@iress-storybook/helpers';
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSelectSearch>;
 

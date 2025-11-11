@@ -6,10 +6,10 @@ import {
   IressInput,
 } from '@/main';
 import {
-  addToStorybookCategory,
   disableArgTypes,
   mergeStorybookConfig,
-} from '@iress-storybook/helpers';
+  addToStorybookCategory,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressFormField>;
 

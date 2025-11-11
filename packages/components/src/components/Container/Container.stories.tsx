@@ -1,29 +1,16 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressContainer } from '.';
 import { IressPanel } from '../Panel';
-import { CurrentBreakpoint } from '@iress-storybook/components';
-import { themeControlNames, withThemeArgTypes } from '@theme-preset/storybook';
+import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
+import { IressTable } from '../Table';
+import { BREAKPOINT_DETAILS, BREAKPOINTS } from '@/constants';
 
 type Story = StoryObj<typeof IressContainer>;
 
 export default {
   title: 'Components/Container',
   component: IressContainer,
-  argTypes: {
-    ...withThemeArgTypes({
-      children: {
-        description: 'The content of the container.',
-        control: { disable: true, type: undefined },
-        table: {
-          type: {
-            summary: 'ReactNode',
-          },
-        },
-      },
-    }),
-  },
   parameters: {
-    controls: { include: ['children', 'fluid', ...themeControlNames] },
     layout: 'fullscreen',
   },
   tags: ['updated'],
@@ -69,4 +56,17 @@ export const Fluid: Story = {
   args: {
     fluid: true,
   },
+};
+
+export const BreakpointTable: Story = {
+  render: () => (
+    <IressTable
+      caption="Container breakpoints"
+      rows={BREAKPOINTS.map((breakpoint) => ({
+        breakpoint,
+        screenWidths: BREAKPOINT_DETAILS[breakpoint].screenWidthRange,
+        maxWidth: BREAKPOINT_DETAILS[breakpoint].containerMaxWidth,
+      }))}
+    />
+  ),
 };

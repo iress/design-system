@@ -1,9 +1,5 @@
 import { type StoryObj, type Meta } from '@storybook/react-vite';
 
-import { CurrentBreakpoint } from '@iress-storybook/components';
-import { disableArgTypes } from '@iress-storybook/helpers';
-import styles from '@iress-storybook/styles.module.scss';
-
 import { IressRow } from '.';
 import { IressContainer } from '../Container';
 import { IressPlaceholder } from '../Placeholder';
@@ -17,6 +13,10 @@ import {
   VERTICAL_ALIGNS,
 } from '@/main';
 import { SPACING_TOKENS } from '@theme-preset/tokens/spacing';
+import {
+  CurrentBreakpoint,
+  disableArgTypes,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressRow>;
 
@@ -266,7 +266,8 @@ export const VerticalAlignment: Story = {
           <div key={verticalAlign}>
             <IressText element="h2">Vertical align: {verticalAlign}</IressText>
             <IressRow
-              className={styles.setHeight}
+              style={{ height: '10rem' }}
+              layerStyle="elevation.raised"
               {...args}
               verticalAlign={verticalAlign}
             />

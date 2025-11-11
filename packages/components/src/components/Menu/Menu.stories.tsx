@@ -1,6 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressMenu, IressMenuItem, type IressMenuProps } from '.';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
 import { MENU_CHILDREN_OPTIONS } from './mocks/menuChildrenOptions';
@@ -8,6 +7,7 @@ import { IressInline } from '../Inline';
 import { useArgs } from 'storybook/preview-api';
 import { MenuRoleDescription } from './mocks/MenuRoleDescription';
 import { IressToggle } from '../Toggle';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressMenu>;
 

@@ -2,7 +2,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './Badge.stories';
 
 <Meta of={ComponentStories} />
@@ -11,8 +11,8 @@ import * as ComponentStories from './Badge.stories';
 
 <ComponentOverview
   description="Badges are used to highlight an item's status for quick recognition"
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -21,13 +21,13 @@ import * as ComponentStories from './Badge.stories';
 
 The `mode` prop controls the colour scheme of the badge. There are a range of options, including system and brand colours.
 
-<ComponentExample story={ComponentStories.Mode} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Mode} />
 
 ### Pill
 
 Setting the `pill` prop will render the badge with rounded corners. Often used for displaying numbers.
 
-<ComponentExample story={ComponentStories.Pill} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Pill} />
 
 ### Host
 
@@ -35,4 +35,4 @@ You can attach a badge to the top right of any component by passing the componen
 
 **Note:** This is for very simple use cases (eg. with a button or tab). For more complex use cases (eg. with a panel), it will be better if you position the badge yourself using CSS.
 
-<ComponentExample story={ComponentStories.Host} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Host} />

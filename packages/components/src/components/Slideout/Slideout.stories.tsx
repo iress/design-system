@@ -7,12 +7,6 @@ import { type ArgsStoryFn } from 'storybook/internal/types';
 import { IressSlideout, type IressSlideoutProps } from '.';
 import { IressButton } from '../Button';
 import { useSlideout } from './hooks/useSlideout';
-import {
-  disableArgTypes,
-  withCustomSource,
-  withTransformedProviderSource,
-  withTransformedRawSource,
-} from '@iress-storybook/helpers';
 import { IressSlideoutProvider } from './SlideoutProvider';
 import { SlideoutUsingState } from './mocks/SlideoutUsingState';
 import SlideoutUsingStateSource from './mocks/SlideoutUsingState.tsx?raw';
@@ -25,9 +19,16 @@ import { SlideoutSizes } from './mocks/SlideoutSizes';
 import SlideoutSizesSource from './mocks/SlideoutSizes.tsx?raw';
 import { AbsolutePositionSlideout } from './mocks/AbsolutePositionSlideout';
 import AbsolutePositionSlideoutSource from './mocks/AbsolutePositionSlideout.tsx?raw';
-import { CurrentBreakpoint } from '@iress-storybook/components';
 import { SlideoutMicrofrontend } from './mocks/SlideoutMicrofrontend';
 import SlideoutMicrofrontendSource from './mocks/SlideoutMicrofrontend.tsx?raw';
+import {
+  CurrentBreakpoint,
+  DiffViewer,
+  disableArgTypes,
+  withTransformedProviderSource,
+  withTransformedRawSource,
+} from '@iress-oss/ids-storybook-config';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 const SLIDEOUT_ID = 'storybook-slideout';
 
@@ -243,4 +244,52 @@ export const Microfrontend: Story = {
     ...withCustomSource(SlideoutMicrofrontendSource),
     layout: 'fullscreen',
   },
+};
+
+export const V5TestDiff: Story = {
+  render: () => (
+    <DiffViewer
+      allowModeChange
+      oldValue={`import { render, waitFor, screen } from '@testing-library/react';
+import { idsFireEvent, componentLoad } from '@iress/ids-react-test-utils';
+  
+test('opening and closing a slideout', async () => {
+  await componentLoad([
+    'slideout-trigger',
+    'slideout',
+  ]);
+
+  const trigger = screen.getByTestId('slideout-trigger');
+  const slideout = screen.getByTestId('slideout');
+
+  // In version 4, you can already interact with the slideout here as its in the DOM at this stage.
+
+  // activate slideout
+  idsFireEvent.click(trigger);
+  await waitFor(() => expect(slideout).toBeVisible());
+
+  // close slideout
+  const closeButton = screen.getByTestId('slideout__close-button');
+  idsFireEvent.click(closeButton);
+  await waitFor(() => expect(slideout).not.toBeVisible());
+});`}
+      newValue={`import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
+
+test('opening and closing a slideout', async () => {
+  const trigger = screen.getByRole('button', { name: /open slideout/i });
+
+  // activate slideout
+  await userEvent.click(trigger);
+  const slideout = await screen.findByRole('complementary'); // this assumes the slideout has the role="complementary"
+
+  // In version 5, you can only interact with the slideout once it has been loaded here.
+
+  // close slideout
+  const closeButton = screen.getByRole('button', { name: /close/i });
+  await userEvent.click(closeButton);
+  await waitForElementToBeRemoved(slideout);
+});`}
+    />
+  ),
 };

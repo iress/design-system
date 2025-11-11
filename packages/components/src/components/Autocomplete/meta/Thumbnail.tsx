@@ -8,7 +8,7 @@ const Thumbnail = () => (
     xmlns="http://www.w3.org/2000/svg"
     className={image()}
   >
-    <g clip-path="url(#clip0_1006_2249)">
+    <g clipPath="url(#clip0_1006_2249)">
       <rect
         width="751"
         height="467"
@@ -39,7 +39,7 @@ const Thumbnail = () => (
           height="106"
           rx="11"
           style={{ stroke: cssVars.colour.neutral[70] }}
-          stroke-width="2"
+          strokeWidth="2"
         />
       </g>
       <g filter="url(#filter1_d_1006_2249)">
@@ -58,8 +58,8 @@ const Thumbnail = () => (
           height="229.5"
           rx="24.75"
           stroke="#091E42"
-          stroke-opacity="0.15"
-          stroke-width="0.5"
+          strokeOpacity="0.15"
+          strokeWidth="0.5"
         />
       </g>
       <path
@@ -95,9 +95,9 @@ const Thumbnail = () => (
         width="664"
         height="112"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"
@@ -130,9 +130,9 @@ const Thumbnail = () => (
         width="696"
         height="266"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"

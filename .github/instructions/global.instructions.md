@@ -33,7 +33,7 @@ yarn test:components Button.test.tsx
 yarn test:mcp-server MyHandler.test.ts
 
 # Direct workspace commands (recommended)
-yarn workspace @iress-oss/ids-components run test Button.test.tsx
+yarn workspace @iress-oss/ids-components run test:coverage Button.test.tsx
 ```
 
 ### Important for AI Assistants
@@ -49,12 +49,8 @@ yarn workspace @iress-oss/ids-components run test Button.test.tsx
 ## Development modes
 
 ```bash
-# Watch mode (now defaults to components)
-yarn test:watch # Same as yarn test:watch:components
-yarn workspace @iress-oss/ids-components run test Button.test.tsx --watch
-
-# UI mode for debugging
-yarn workspace @iress-oss/ids-components run test Button.test.tsx --ui
+yarn test:coverage         # Run tests with coverage reporting
+yarn workspace @iress-oss/ids-components run test:coverage Button.test.tsx --watch
 
 # Verbose output
 yarn vitest run --reporter=verbose

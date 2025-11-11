@@ -2,7 +2,6 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressForm } from './Form';
 import { WithReadonlyDataForm } from './mocks/WithReadonlyDataForm';
 import WithReadonlyDataFormSource from './mocks/WithReadonlyDataForm.tsx?raw';
-import { withCustomSource } from '@iress-storybook/helpers';
 import { SwitchEditReadonlyForm } from './mocks/SwitchEditReadonlyForm';
 import SwitchEditReadonlyFormSource from './mocks/SwitchEditReadonlyForm.tsx?raw';
 import { NativeValidationForm } from './mocks/NativeValidationForm';
@@ -26,6 +25,7 @@ import ValidationDependOnOtherFieldsSource from './mocks/ValidationDependOnOther
 import { ValidationDependOnOtherFields as ValidationDependOnOtherFieldsExample } from './mocks/ValidationDependOnOtherFields';
 import { CustomFormFieldComponents as CustomFormFieldComponentsExample } from './mocks/CustomFormFieldComponents';
 import CustomFormFieldComponentsSource from './mocks/CustomFormFieldComponents.tsx?raw';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<typeof IressForm>;
 

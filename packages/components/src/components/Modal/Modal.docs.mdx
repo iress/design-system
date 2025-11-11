@@ -1,12 +1,11 @@
 import { Meta, Markdown } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
 import * as ComponentStories from './Modal.stories';
 import * as ProviderStories from './ModalProvider.stories';
 import { IressAlert } from '../../main';
-import { ModalTestDiff } from './mocks/ModalTestDiff';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -25,8 +24,8 @@ import { ModalTestDiff } from './mocks/ModalTestDiff';
 - Conveying brief messages about background processes or status changes. Instead use IressAlert or IressToast.
 - The modal content can be incorporated into the page without complicating the page's intent
   `}</Markdown>)}
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
   />
 
 ## Controlling the modal
@@ -35,10 +34,7 @@ import { ModalTestDiff } from './mocks/ModalTestDiff';
 
 You can use state to control the modal by setting the `show` property to `true` or `false`. To sync your state with the modal, you can use the `onShowChange` prop, which is normally passed the set function from `useState`.
 
-<ComponentExample
-  story={ComponentStories.ShowWithState}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ShowWithState} />
 
 ### Using the `IressModalProvider`
 
@@ -53,8 +49,7 @@ To use, wrap your `<App/>` or the component that you want to use the `useModal` 
     heading: 'Props',
     headingId: 'provider-api',
   }}
-  story={ProviderStories.Provider}
-  stories={ProviderStories}
+  of={ProviderStories.Provider}
 />
 
 ## Behaviour
@@ -70,10 +65,7 @@ To use, wrap your `<App/>` or the component that you want to use the `useModal` 
 
 Content to appear underneath the main content. Usually used for extra controls like buttons etc.
 
-<ComponentExample
-  story={ComponentStories.FooterSlot}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.FooterSlot} />
 
 ### Fixed footer
 
@@ -90,10 +82,7 @@ The `fixedFooter` prop can be used to set the footer to be fixed to the bottom o
   should fix the issue.
 </IressAlert>
 
-<ComponentExample
-  story={ComponentStories.FixedFooter}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.FixedFooter} />
 
 ### Size
 
@@ -101,7 +90,7 @@ The `size` prop can be set to `sm`, `md` or `lg`. It defaults to `md`.
 
 Below is a guide on when to use which size.
 
-<ComponentExample story={ComponentStories.Size} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Size} />
 
 ### Responsive size
 
@@ -125,10 +114,7 @@ You can override this behaviour by specifying a value for `xs` in your size obje
   <IressModal size={{ xs: IressModal.Size.Sm, md: IressModal.Size.Lg }}>
 ```
 
-<ComponentExample
-  story={ComponentStories.ResponsiveSize}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ResponsiveSize} />
 
 ### Disable closing
 
@@ -136,10 +122,7 @@ For instances where you require the user's full attention and you want to ensure
 
 **Note:** As these options remove the default handling of the closing the modal, please ensure you provide a clear way for the user to close the modal.
 
-<ComponentExample
-  story={ComponentStories.DisableClosing}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.DisableClosing} />
 
 ## Migrating to version 5
 
@@ -157,26 +140,4 @@ In version 5, modals are rendered conditionally, meaning they will not be availa
 
 See below for an example in version 4 and version 5.
 
-<ModalTestDiff />
-
-### Speed up tests
-
-You can speed up tests by wrapping your tests in a provider that overrides the theme tokens for animations.
-
-```tsx
-const themeOverrides: Record<string, string> = {
-  '--iress-backdrop-transition-duration': '0s',
-};
-
-export const TestAppProvider = ({ children }: PropsWithChildren) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  return (
-    <IressModalProvider container={containerRef}>
-      <div style={themeOverrides} ref={containerRef}>
-        {children}
-      </div>
-    </IressModalProvider>
-  );
-};
-```
+<ComponentExample of={ComponentStories.V5ModalDiff} />

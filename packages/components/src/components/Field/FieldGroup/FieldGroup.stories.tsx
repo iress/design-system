@@ -13,9 +13,11 @@ import {
   IressRichSelect,
   IressSelect,
 } from '@/main';
-import { disableArgTypes } from '@iress-storybook/helpers';
-import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
 import { type ComponentProps } from 'react';
+import {
+  disableArgTypes,
+  STORYBOOK_ONLY_CATEGORY,
+} from '@iress-oss/ids-storybook-config';
 
 interface FieldAndInputProps {
   field: IressFieldProps;

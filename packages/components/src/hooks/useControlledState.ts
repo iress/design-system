@@ -87,7 +87,9 @@ export const useControlledState = <
   propName = 'value',
   value,
 }: ControlledStateProps<T, TMultiple>): ControlledStateHook<T, TMultiple> => {
-  const previousValue = useRef<ControlledValue<T, TMultiple> | undefined>();
+  const previousValue = useRef<ControlledValue<T, TMultiple> | undefined>(
+    undefined,
+  );
   const isControlled = useMemo(() => value !== undefined, [value]);
   const [uncontrolled, setUncontrolled] = useState<
     ControlledValue<T, TMultiple> | undefined

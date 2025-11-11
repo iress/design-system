@@ -1,5 +1,4 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { disableArgTypes, withJsxTransformer } from '@iress-storybook/helpers';
 import { capitalizeFirstLetter } from '@helpers/formatting/capitalizeFirstLetter';
 import { IressIcon } from '../Icon';
 import {
@@ -12,6 +11,10 @@ import {
 } from '../../main';
 import { IressField } from '../Field';
 import { FORM_ELEMENT_WIDTHS } from '@/constants';
+import {
+  disableArgTypes,
+  withJsxTransformer,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressInputProps>;
 type TextareaStory = StoryObj<IressInputProps<string, number>>;

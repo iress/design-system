@@ -3,13 +3,15 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressInline } from '.';
 import { IressPlaceholder } from '../Placeholder';
 import { IressPanel } from '../Panel';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
-import { CurrentBreakpoint } from '@iress-storybook/components';
 import { IressText } from '../Text';
 import { IressContainer } from '../Container';
 import { HORIZONTAL_ALIGNS, VERTICAL_ALIGNS } from '@/constants';
 import { SPACING_TOKENS } from '@theme-preset/tokens/spacing';
+import {
+  CurrentBreakpoint,
+  disableArgTypes,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressInline>;
 

@@ -3,11 +3,6 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressPopover } from './Popover';
 import { IressButton } from '../Button';
 import { IressPanel } from '../Panel';
-import {
-  disableArgTypes,
-  withCustomSource,
-  withTransformedRawSource,
-} from '@iress-storybook/helpers';
 import { PopoverUsingState } from './mocks/PopoverUsingState';
 import PopoverUsingStateSource from './mocks/PopoverUsingState.tsx?raw';
 import { IressStack } from '../Stack';
@@ -20,6 +15,11 @@ import { MENU_CHILDREN_OPTIONS } from '../Menu/mocks/menuChildrenOptions';
 import { IressMenu } from '../Menu';
 import { PopoverParentContainer } from './mocks/PopoverParentContainer';
 import PopoverParentContainerSource from './mocks/PopoverParentContainer.tsx?raw';
+import {
+  disableArgTypes,
+  withTransformedRawSource,
+} from '@iress-oss/ids-storybook-config';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<typeof IressPopover>;
 

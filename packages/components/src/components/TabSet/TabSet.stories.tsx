@@ -8,14 +8,14 @@ import {
   IressPanel,
   IressText,
 } from '../../main';
-import {
-  disableArgTypes,
-  withTransformedRawSource,
-} from '@iress-storybook/helpers';
 import { TabsUsingState } from './mocks/TabsUsingState';
 import TabsUsingStateSource from './mocks/TabsUsingState.tsx?raw';
 import { TabsLazyLoading } from './mocks/TabsLazyLoading';
 import TabsLazyLoadingSource from './mocks/TabsLazyLoading.tsx?raw';
+import {
+  disableArgTypes,
+  withTransformedRawSource,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressTabSet>;
 

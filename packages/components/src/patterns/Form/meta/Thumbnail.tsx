@@ -53,7 +53,7 @@ const Thumbnail = () => (
         height="39"
         rx="7"
         style={{ stroke: cssVars.colour.neutral[70] }}
-        stroke-width="2"
+        strokeWidth="2"
       />
     </g>
     <rect
@@ -88,7 +88,7 @@ const Thumbnail = () => (
         height="39"
         rx="7"
         style={{ stroke: cssVars.colour.neutral[70] }}
-        stroke-width="2"
+        strokeWidth="2"
       />
     </g>
     <rect
@@ -115,9 +115,9 @@ const Thumbnail = () => (
         width="508"
         height="45"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"
@@ -150,9 +150,9 @@ const Thumbnail = () => (
         width="508"
         height="45"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"

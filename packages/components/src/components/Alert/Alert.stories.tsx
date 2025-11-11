@@ -1,7 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 
-import { disableArgTypes } from '@iress-storybook/helpers';
-import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
 import {
   IressAlert,
   type IressAlertProps,
@@ -9,6 +7,10 @@ import {
   IressText,
   type SystemValidationStatuses,
 } from '@/main';
+import {
+  disableArgTypes,
+  STORYBOOK_ONLY_CATEGORY,
+} from '@iress-oss/ids-storybook-config';
 
 type CustomArgs = Partial<IressAlertProps> & {
   messages: Record<SystemValidationStatuses, string>;

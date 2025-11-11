@@ -1,0 +1,48 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import { IressText, IressButton, IressPanel } from '@iress-oss/ids-components';
+import { DiffViewer } from '@iress-oss/ids-storybook-config';
+import * as ComponentStories from './010-Introduction.stories';
+
+<Meta of={ComponentStories} />
+
+# Tokens
+
+<IressText textStyle="typography.body.lg">
+  Design tokens are an integral part of the design system. They help us create
+  consistency across components by sharing common design decisions and simplify
+  our theming ecosystem.
+</IressText>
+
+## What are tokens?
+
+Tokens are a set of variables that define the design properties of a component. They are used to define the visual properties of a component, such as colours, typography, spacing, and more.
+
+## Token list
+
+The table below shows all the new and old tokens in the design system. Use the filters to narrow down the list of tokens.
+
+<Story of={ComponentStories.Reference} />
+
+---
+
+## For developers
+
+If you are using the IDS components, the tokens have already been mapped out to their respective components. You can use the tokens in the component props to change the visual properties of the component.
+
+<IressButton href="/?path=/docs/styling-props-reference--docs">
+  Learn more about styling props
+</IressButton>
+
+```jsx
+import { IressText } from '@iress-oss/ids-components';
+
+<IressText color="colour.primary.text">I am branded text</IressText>;
+```
+
+If you are not using the IDS components, you can use the tokens directly by using the `cssVars` object from `@iress-oss/ids-tokens`.
+
+```jsx
+import { cssVars } from '@iress-oss/ids-tokens';
+
+<div style={{ color: cssVars.colour.primary.text }}>I am branded text</div>;
+```

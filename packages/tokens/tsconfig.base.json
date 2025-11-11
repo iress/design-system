@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    // Add "target" and update "ESNext" to support older browsers.
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
@@ -9,16 +8,11 @@
     "useDefineForClassFields": true,
     "incremental": true,
     "jsx": "react-jsx",
-
-    /* Linting */
     "strict": true,
-
-    /* Bundler mode */
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-
     "paths": {
       "~/*": ["./src/*"]
     }

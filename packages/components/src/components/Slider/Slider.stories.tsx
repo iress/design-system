@@ -1,9 +1,9 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSlider } from '.';
 import { IressStack } from '../Stack';
-import { CurrentBreakpoint } from '@iress-storybook/components';
 import { IressPanel } from '../Panel';
 import { IressText } from '../Text';
+import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSlider>;
 

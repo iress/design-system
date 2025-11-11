@@ -1,0 +1,123 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ComponentExample } from '@iress-oss/ids-storybook-config';
+import { IressPanel } from '@/main';
+import * as ComponentStories from './020-Responsive.stories';
+
+<Meta of={ComponentStories} />
+
+# Responsive layout
+
+The Iress Design System (IDS) is built with responsive design principles in mind. This means that our components are designed to adapt to different screen sizes and orientations, ensuring a consistent user experience across devices.
+
+## Breakpoints
+
+- Implement mobile-first responsive design
+- Use consistent breakpoint values across all components
+- Provide appropriate component variants for different screen sizes
+- Consider content priority and progressive disclosure on smaller screens
+
+<IressPanel px="none">
+  <ComponentExample of={ComponentStories.Breakpoints} />
+</IressPanel>
+
+### Extra-small screens (`xs`)
+
+<ComponentExample of={ComponentStories.Xs} />
+
+### Small screens (`sm`)
+
+<ComponentExample of={ComponentStories.Sm} />
+
+### Medium screens (`md`)
+
+<ComponentExample of={ComponentStories.Md} />
+
+### Large screens (`lg`)
+
+<ComponentExample of={ComponentStories.Lg} />
+
+### Extra-large screens (`xl`)
+
+<ComponentExample of={ComponentStories.Xl} />
+
+### Extremely large screens (`xxl`)
+
+<ComponentExample of={ComponentStories.Xxl} />
+
+---
+
+## For designers
+
+When designing for responsive layouts, consider how your designs will adapt to different screen sizes. Use the breakpoints defined in the design system to guide your layout decisions and ensure that your designs are flexible and adaptable.
+
+### Tips
+
+1. Use the example viewport sizes provided in the breakpoints table to show your designs at different screen widths.
+2. Prioritise content based on screen size, ensuring that the most important information is easily accessible on smaller devices.
+3. Reduce option counts on mobile devices where appropriate
+4. Implement responsive navigation patterns
+5. Adjust spacing and sizing for different contexts
+6. Maintain usability across all supported devices
+
+---
+
+## For developers
+
+If you are using the IDS components, the breakpoints have already been mapped out to their respective props. You can use props such as `gap` to change the visual properties of the component at certain breakpoints.
+
+```jsx
+import { IressStack } from '@iress-oss/ids-components';
+
+<IressStack gap={{ xs: 'spacing.100', md: 'spacing.200' }} />;
+```
+
+### Hooks
+
+#### `useBreakpoint`
+
+We also provide a `useBreakpoint` hook that allows you to access the current breakpoint in your components. This can be useful for conditionally rendering components based on the current screen size.
+
+**Note:** It is best to use media queries for responsive styling. Most props that require responsive values already support breakpoints which map to CSS values. Only use the `useBreakpoint` hook when there is no other way to achieve the desired responsive behavior.
+
+```jsx
+import { useBreakpoint } from '@iress-oss/ids-components';
+
+const MyComponent = () => {
+  const { breakpoint } = useBreakpoint();
+
+  return (
+    <div>
+      {breakpoint === 'xs' && <p>This is extra small screen</p>}
+      {breakpoint === 'md' && <p>This is medium screen</p>}
+    </div>
+  );
+};
+```
+
+#### `useResponsiveProps`
+
+Another hook is `useResponsiveProps`, which allows you to define responsive properties that change based on the current breakpoint. This is particularly useful for completely changing components at various screen sizes.
+
+**Note:** It is best to use media queries for responsive styling. Most props that require responsive values already support breakpoints which map to CSS values. Only use the `useResponsiveProps` hook when there is no other way to achieve the desired responsive behavior.
+
+<ComponentExample of={ComponentStories.ResponsiveProps} />
+
+### Constant
+
+You can also use the breakpoints directly in your CSS or styled components. The breakpoints are defined in the `@iress-oss/ids-components` package.
+
+```jsx
+import { BREAKPOINT_DETAILS } from '@iress-oss/ids-components';
+
+const css = `
+  @media (${BREAKPOINT_DETAILS.md.mediaQuery}}) {
+    .my-class {
+      padding: 20px;
+    }
+  }
+`;
+
+<style>{css}</style>;
+```
+
+The base grid size is exported as `GRID_SIZE` from the `@iress-oss/ids-components` package, in case you need to reference it in your own code.

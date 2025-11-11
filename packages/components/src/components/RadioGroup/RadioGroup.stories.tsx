@@ -1,15 +1,14 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressRadioGroup } from '.';
 import { IressRadio } from '../Radio';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressText } from '../Text';
-import styles from '@iress-storybook/styles.module.scss';
 import { IressField } from '../Field';
 import { IressStack } from '../Stack';
 import {
   getFinancialReviewChildren,
   getFinancialReviewManyChildren,
 } from './mocks/radioGroupChildren';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressRadioGroup>;
 
@@ -52,16 +51,16 @@ export const RadioSelection: Story = {
 export const Layout: Story = {
   args: {
     children: [
-      <IressRadio value="google" key="google" className={styles.addBorder}>
+      <IressRadio value="google" key="google" layerStyle="elevation.raised">
         Google
       </IressRadio>,
-      <IressRadio value="newspaper" key="google" className={styles.addBorder}>
+      <IressRadio value="newspaper" key="google" layerStyle="elevation.raised">
         Newspaper
       </IressRadio>,
-      <IressRadio value="friend" key="google" className={styles.addBorder}>
+      <IressRadio value="friend" key="google" layerStyle="elevation.raised">
         Friend
       </IressRadio>,
-      <IressRadio value="other" key="google" className={styles.addBorder}>
+      <IressRadio value="other" key="google" layerStyle="elevation.raised">
         Other
       </IressRadio>,
     ],
@@ -128,7 +127,6 @@ export const CustomRadioGroupLayout: Story = {
     >
       <IressRadioGroup {...args}>
         <div
-          className={styles.resizable}
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
@@ -136,6 +134,9 @@ export const CustomRadioGroupLayout: Story = {
             gridGap: '0.75rem',
             width: '100%',
             padding: '0.5rem',
+            border: '1px dashed hsl(43deg 100% 45%)',
+            resize: 'horizontal',
+            overflow: 'auto',
           }}
         >
           {children}

@@ -1,19 +1,18 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressCheckboxGroup } from '.';
-import {
-  disableArgTypes,
-  withTransformedRawSource,
-} from '@iress-storybook/helpers';
 import { CheckboxGroupUsingState } from './mocks/CheckboxGroupUsingState';
 import CheckboxGroupUsingStateSource from './mocks/CheckboxGroupUsingState.tsx?raw';
 import { IressText } from '../Text';
-import styles from '@iress-storybook/styles.module.scss';
 import { IressField } from '../Field';
 import {
   getFinancialReviewCheckboxes,
   getFinancialReviewManyCheckboxes,
 } from './mocks/checkboxGroupChildren';
 import { IressCheckbox } from '../Checkbox/Checkbox';
+import {
+  disableArgTypes,
+  withTransformedRawSource,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressCheckboxGroup>;
 
@@ -70,32 +69,20 @@ export const Controlled: Story = {
 export const Layout: Story = {
   args: {
     children: [
-      <IressCheckbox
-        value="google"
-        key="google"
-        className={styles.addBorderToLabel}
-      >
+      <IressCheckbox value="google" key="google" layerStyle="elevation.raised">
         Google
       </IressCheckbox>,
       <IressCheckbox
         value="newspaper"
         key="newspaper"
-        className={styles.addBorderToLabel}
+        layerStyle="elevation.raised"
       >
         Newspaper
       </IressCheckbox>,
-      <IressCheckbox
-        value="friend"
-        key="friend"
-        className={styles.addBorderToLabel}
-      >
+      <IressCheckbox value="friend" key="friend" layerStyle="elevation.raised">
         Friend
       </IressCheckbox>,
-      <IressCheckbox
-        value="other"
-        key="other"
-        className={styles.addBorderToLabel}
-      >
+      <IressCheckbox value="other" key="other" layerStyle="elevation.raised">
         Other
       </IressCheckbox>,
     ],
@@ -148,7 +135,6 @@ export const CustomCheckboxGroupLayout: Story = {
     >
       <IressCheckboxGroup {...args}>
         <div
-          className={styles.resizable}
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
@@ -156,6 +142,9 @@ export const CustomCheckboxGroupLayout: Story = {
             gridGap: '16px',
             width: '100%',
             padding: '0.5rem',
+            border: '1px dashed hsl(43deg 100% 45%)',
+            resize: 'horizontal',
+            overflow: 'auto',
           }}
         >
           {children}

@@ -7,7 +7,7 @@ import {
   IressButtonCard,
   IressLinkCard,
 } from './Card';
-import { withJsxTransformer } from '@iress-storybook/helpers';
+import { withJsxTransformer } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressCardProps>;
 type ButtonStory = StoryObj<IressButtonCardProps>;

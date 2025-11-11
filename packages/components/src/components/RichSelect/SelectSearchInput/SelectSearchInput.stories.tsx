@@ -3,7 +3,7 @@ import {
   IressSelectSearchInput,
   type IressSelectSearchInputProps,
 } from './SelectSearchInput';
-import { addToStorybookCategory } from '@iress-storybook/helpers';
+import { addToStorybookCategory } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSelectSearchInput>;
 

@@ -2,7 +2,6 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressPanel } from './Panel';
 import { IressPlaceholder } from '../Placeholder';
 import { IressText } from '../Text';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
 import {
   IressCol,
@@ -11,6 +10,7 @@ import {
   IressRow,
   TEXT_ALIGNS,
 } from '@/main';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type PanelCustomArgs = React.ComponentProps<typeof IressPanel>;
 type Story = StoryObj<PanelCustomArgs>;

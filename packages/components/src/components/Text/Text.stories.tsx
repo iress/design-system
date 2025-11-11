@@ -1,18 +1,17 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressText, type IressTextProps, text } from '.';
+import { IressText, type IressTextProps, text, type TextElements } from '.';
 import { IressStack } from '../Stack';
 import { IressIcon } from '../Icon';
-import { disableArgTypes } from '@iress-storybook/helpers';
-import { themeControlNames, withThemeArgTypes } from '@theme-preset/storybook';
-import { COLOR_TOKENS } from '@theme-preset/tokens/colors';
 import { TEXT_STYLES } from '@theme-preset/tokens/textStyles';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { COLOR_TOKENS } from '@theme-preset/tokens/colors';
 
 type Story = StoryObj<typeof IressText>;
 type HeadingStory = StoryObj<
   IressTextProps<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'>
 >;
 
-const TEXT_ELEMENTS = [
+const TEXT_ELEMENTS: TextElements[] = [
   'p',
   'div',
   'span',
@@ -36,22 +35,8 @@ const TEXT_ELEMENTS = [
 export default {
   title: 'Components/Text',
   component: IressText,
-  argTypes: {
-    ...withThemeArgTypes({
-      children: {
-        description:
-          'The content to be styled based on the design system typography tokens.',
-        control: { disable: true, type: undefined },
-        table: {
-          type: {
-            summary: 'ReactNode',
-          },
-        },
-      },
-    }),
-  },
   parameters: {
-    controls: { include: ['children', text.variantKeys, ...themeControlNames] },
+    controls: { include: ['children', text.variantKeys] },
   },
   tags: ['updated'],
 } as Meta<typeof IressText>;

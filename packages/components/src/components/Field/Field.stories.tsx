@@ -1,11 +1,9 @@
 import { type StoryObj, type Meta } from '@storybook/react-vite';
 
-import { disableArgTypes, withJsxTransformer } from '@iress-storybook/helpers';
 import { IressInput, type IressInputProps } from '../Input';
 import { IressField } from './Field';
 import { IressIcon } from '../Icon';
 import { IressButton } from '../Button';
-import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
 import { IressReadonly } from '../Readonly';
 import { IressText } from '../Text';
 import { IressStack } from '../Stack';
@@ -14,6 +12,11 @@ import { IressRow } from '../Row';
 import { IressCol } from '../Col';
 import { type ComponentProps, useState } from 'react';
 import { IressToggle } from '../Toggle';
+import {
+  disableArgTypes,
+  STORYBOOK_ONLY_CATEGORY,
+  withJsxTransformer,
+} from '@iress-oss/ids-storybook-config';
 
 type IressFieldPropsAndCustomArgs = ComponentProps<typeof IressField> & {
   input: Omit<IressInputProps, 'onChange'>;

@@ -1,18 +1,14 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-  ComponentApiExpander,
-} from '@iress-storybook/components';
 import { dependencies } from '../../../package.json';
 import * as ComponentStories from './Form.stories.tsx';
 import * as FormRulesStories from './FormRules.stories.tsx';
 import * as FormFieldStories from './FormField/FormField.stories.tsx';
 import * as HookFormStories from './HookForm/HookForm.stories.tsx';
 import {
-  StateManagementV4ToV5,
-  ValidationV4ToV5,
-} from './mocks/Version4to5Forms.tsx';
+  ComponentApiExpander,
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -54,8 +50,8 @@ import {
       .
     </p>
   }
-  story={ComponentStories.Simple}
-  stories={ComponentStories}
+  of={ComponentStories.Simple}
+  meta={ComponentStories}
 />
 
 ## Key concepts
@@ -73,7 +69,7 @@ Due to this change, there are a few things you should consider during developmen
 
 See below an example comparing a version 4 and version 5 `IressForm` when managing form state.
 
-<StateManagementV4ToV5 />
+<ComponentExample of={ComponentStories.StateManagementV4ToV5} />
 
 ### Validation
 
@@ -87,7 +83,7 @@ Due to this change, there are a few things you should consider during developmen
 
 See below an example comparing a version 4 and version 5 `IressForm` when adding validation rules.
 
-<ValidationV4ToV5 />
+<ComponentExample of={ComponentStories.ValidationV4ToV5} />
 
 ### Syncing state
 
@@ -157,20 +153,17 @@ It has three required props:
 Here are some examples of how to use `IressFormField` with different form controls. If you are using a form control that has multiple inputs inside (for example, `IressCheckboxGroup`), you can use `IressFormFieldset`, which changes the HTML structure to use a `fieldset` and `legend` element to group the inputs.
 
 <ComponentExample
-  story={ComponentStories.Fields}
-  stories={ComponentStories}
-  storyProps={{
+  of={ComponentStories.Fields}
+  story={{
     inline: false,
     height: '600px',
   }}
-/>
-
-<ComponentApiExpander
-  heading="IressFormField props"
-  headingId="form-field-props"
-  headingLevel={4}
-  readOnly
-  story={FormFieldStories.Default}
+  api={{
+    heading: 'IressFormField props',
+    headingId: 'form-field-props',
+    headingLevel: 4,
+    readOnly: true,
+  }}
 />
 
 ### Rules
@@ -189,9 +182,9 @@ A boolean which, if `true`, indicates that the input must have a value before th
     headingId: 'adjust-required',
     include: ['element', 'field', 'rules', 'customRules'],
   }}
-  story={FormRulesStories.Required}
-  stories={FormRulesStories}
-  storyProps={{
+  of={FormRulesStories.Required}
+  meta={FormRulesStories}
+  story={{
     inline: false,
     height: '300px',
   }}
@@ -212,9 +205,9 @@ The maximum character length of the value to accept for this input.
     headingId: 'adjust-max-length',
     include: ['element', 'field', 'rules', 'customRules'],
   }}
-  story={FormRulesStories.MaxLength}
-  stories={FormRulesStories}
-  storyProps={{
+  of={FormRulesStories.MaxLength}
+  meta={FormRulesStories}
+  story={{
     inline: false,
     height: '300px',
   }}
@@ -235,9 +228,9 @@ The minimum character length of the value to accept for this input.
     headingId: 'adjust-min-length',
     include: ['element', 'field', 'rules', 'customRules'],
   }}
-  story={FormRulesStories.MinLength}
-  stories={FormRulesStories}
-  storyProps={{
+  of={FormRulesStories.MinLength}
+  meta={FormRulesStories}
+  story={{
     inline: false,
     height: '300px',
   }}
@@ -257,9 +250,9 @@ The maximum number to accept for this input.
     headingId: 'adjust-max',
     include: ['element', 'field', 'rules', 'customRules'],
   }}
-  story={FormRulesStories.Max}
-  stories={FormRulesStories}
-  storyProps={{
+  of={FormRulesStories.Max}
+  meta={FormRulesStories}
+  story={{
     inline: false,
     height: '300px',
   }}
@@ -279,9 +272,9 @@ The minimum number to accept for this input.
     headingId: 'adjust-min',
     include: ['element', 'field', 'rules', 'customRules'],
   }}
-  story={FormRulesStories.Min}
-  stories={FormRulesStories}
-  storyProps={{
+  of={FormRulesStories.Min}
+  meta={FormRulesStories}
+  story={{
     inline: false,
     height: '300px',
   }}
@@ -301,9 +294,9 @@ The accepted regex pattern for the input.
     headingId: 'adjust-pattern',
     include: ['element', 'field', 'rules', 'customRules'],
   }}
-  story={FormRulesStories.Pattern}
-  stories={FormRulesStories}
-  storyProps={{
+  of={FormRulesStories.Pattern}
+  meta={FormRulesStories}
+  story={{
     inline: false,
     height: '300px',
   }}
@@ -316,9 +309,9 @@ The minimum date to accept for this input.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 <ComponentExample
-  story={FormRulesStories.MinDate}
-  stories={FormRulesStories}
-  storyProps={{
+  of={FormRulesStories.MinDate}
+  meta={FormRulesStories}
+  story={{
     inline: false,
     height: '300px',
   }}
@@ -331,9 +324,9 @@ The maximum date to accept for this input.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 <ComponentExample
-  story={FormRulesStories.MaxDate}
-  stories={FormRulesStories}
-  storyProps={{
+  of={FormRulesStories.MaxDate}
+  meta={FormRulesStories}
+  story={{
     inline: false,
     height: '300px',
   }}
@@ -346,9 +339,9 @@ Ensures the input is a valid email address.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 <ComponentExample
-  story={FormRulesStories.Email}
-  stories={FormRulesStories}
-  storyProps={{
+  of={FormRulesStories.Email}
+  meta={FormRulesStories}
+  story={{
     inline: false,
     height: '300px',
   }}
@@ -363,9 +356,9 @@ You can pass a callback function as the argument to validate, or you can pass an
 - for `object` or `array` input data, it's recommended to use the validate function for validation as the other rules mostly apply to `string`, `string[]`, `number` and `boolean` data types.
 
 <ComponentExample
-  story={FormRulesStories.Validate}
-  stories={FormRulesStories}
-  storyProps={{
+  of={FormRulesStories.Validate}
+  meta={FormRulesStories}
+  story={{
     inline: false,
     height: '400px',
   }}
@@ -376,9 +369,8 @@ You can pass a callback function as the argument to validate, or you can pass an
 When the form passes validation (if not disabled), the `onSubmit` event is emitted. Its event details contain a map of the field names and the data entered by the user.
 
 <ComponentExample
-  story={ComponentStories.HandlingSubmission}
-  stories={ComponentStories}
-  storyProps={{
+  of={ComponentStories.HandlingSubmission}
+  story={{
     inline: false,
     height: '300px',
   }}
@@ -399,9 +391,8 @@ When the form passes validation (if not disabled), the `onSubmit` event is emitt
 You can set the `defaultValues` prop to pre-fill the form values.
 
 <ComponentExample
-  story={ComponentStories.DefaultValues}
-  stories={ComponentStories}
-  storyProps={{
+  of={ComponentStories.DefaultValues}
+  story={{
     inline: false,
     height: '300px',
   }}
@@ -414,9 +405,8 @@ The `onError` prop allows you to listen to any field errors. It takes two argume
 One use case for this prop is to create your own visible error summary at the top of the form, or to log errors to an external service.
 
 <ComponentExample
-  story={ComponentStories.CustomErrorHandling}
-  stories={ComponentStories}
-  storyProps={{
+  of={ComponentStories.CustomErrorHandling}
+  story={{
     inline: false,
     height: '400px',
   }}
@@ -434,9 +424,8 @@ Use cases where you may need the `values` prop:
 **Note:** `values` takes precedence over `defaultValues`. To ensure your form state is predictable, it is best to only use one prop to manage form values.
 
 <ComponentExample
-  story={ComponentStories.Values}
-  stories={ComponentStories}
-  storyProps={{
+  of={ComponentStories.Values}
+  story={{
     inline: false,
     height: '400px',
   }}
@@ -452,9 +441,8 @@ Disabling validation is not possible with the `IressForm` component. In cases wh
 Here we have an example showcasing option one.
 
 <ComponentExample
-  story={ComponentStories.DisableValidation}
-  stories={ComponentStories}
-  storyProps={{
+  of={ComponentStories.DisableValidation}
+  story={{
     inline: false,
     height: '400px',
   }}
@@ -467,9 +455,8 @@ You can reset the form using the `ref` of the form. You must provide a `defaultV
 **Note:** `<button type="reset" />` does not work with `IressForm`. You need to add an `onClick` prop to the button and use the `ref.reset` method to reset the form.
 
 <ComponentExample
-  story={ComponentStories.ResetForm}
-  stories={ComponentStories}
-  storyProps={{
+  of={ComponentStories.ResetForm}
+  story={{
     inline: false,
     height: '400px',
   }}
@@ -480,9 +467,8 @@ You can reset the form using the `ref` of the form. You must provide a `defaultV
 You can pass the `readOnly` prop to remove the asterisk symbol (\*) even when the field is `required`, and that field will be exempted from validation.
 
 <ComponentExample
-  story={ComponentStories.ExcludeReadOnlyValidation}
-  stories={ComponentStories}
-  storyProps={{
+  of={ComponentStories.ExcludeReadOnlyValidation}
+  story={{
     inline: false,
     height: '400px',
   }}
@@ -504,9 +490,9 @@ Some use cases:
     heading: 'Props',
     headingId: 'hook-form-api',
   }}
-  story={HookFormStories.HookForm}
-  stories={HookFormStories}
-  storyProps={{
+  of={HookFormStories.HookForm}
+  meta={HookFormStories}
+  story={{
     inline: false,
     height: '500px',
   }}
@@ -517,9 +503,9 @@ Some use cases:
 `IressFormValidationSummary` is the error summary component that is added to the top of the form for screen readers to announce validation errors. It is automatically added to the form when there are validation errors, but you can also use it independently to create your own error summary, usually used if you want a visible error summary at the top of the form.
 
 <ComponentExample
-  story={ComponentStories.ValidationSummary}
-  stories={ComponentStories}
-  storyProps={{
+  of={ComponentStories.ValidationSummary}
+  meta={ComponentStories}
+  story={{
     inline: false,
     height: '600px',
   }}

@@ -1,0 +1,35 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Accessibility" />
+
+# Accessibility
+
+Accessibility is everyone's responsibility. It ensures that all users, regardless of their abilities or disabilities, can access and interact with our components effectively. This document outlines the key practices for building accessible components we follow within IDS.
+
+Please note: The default behaviour of our components is to be accessible, but it is the responsibility of the product to ensure that they are used correctly in accessibile context, or any modifications made to them do not compromise accessibility.
+
+## Interaction Patterns
+
+### Keyboard Navigation
+
+- Support standard keyboard shortcuts (Tab, Arrow keys, Enter, Space, Escape)
+- Implement proper focus order and visual focus indicators
+- Provide keyboard alternatives for mouse-only interactions
+- Follow established ARIA patterns for complex widgets
+
+### Touch Interactions
+
+- Provide adequate touch target sizes (minimum 44px)
+- Implement touch-friendly spacing between interactive elements
+- Support gesture-based interactions where appropriate
+- Ensure consistent behaviour across device types
+
+### Loading and Feedback
+
+- Use appropriate loading patterns based on context:
+  - **Page**: Full page loading states
+  - **Component**: Local loading within sections
+  - **Button**: Inline loading for form submissions
+  - **Validate**: Server-side validation feedback
+- Provide clear success and error feedback
+- Use progressive enhancement for better perceived performance

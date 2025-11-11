@@ -4,10 +4,13 @@ import {
   IressSlideoutProvider,
   type IressSlideoutProviderProps,
 } from '.';
-import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { App as AppWithSlideoutProvider } from './mocks/AppWithSlideoutProvider';
 import AppWithSlideoutProviderSource from './mocks/AppWithSlideoutProvider.tsx?raw';
-import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
+import {
+  disableArgTypes,
+  STORYBOOK_ONLY_CATEGORY,
+} from '@iress-oss/ids-storybook-config';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type CustomArgs = Partial<IressSlideoutProviderProps> & {
   slideout: Partial<IressSlideoutProps>;

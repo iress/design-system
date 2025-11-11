@@ -1,10 +1,10 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import {
-  ComponentOverview,
-  ComponentExample,
-} from '@iress-storybook/components';
 import { IressRow, IressCol, IressAlert } from '@/main';
 import * as Stories from './Shadow.stories';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={Stories} />
 
@@ -12,8 +12,8 @@ import * as Stories from './Shadow.stories';
 
 <ComponentOverview
   description="The shadow pattern allows you to wrap your content in the shadow DOM, allowing you to isolate your styles from the rest of the application. This is useful when you want to create a component that has its own styles, without affecting the rest of the application (such as microfrontends)."
-  story={Stories.Shadow}
-  stories={Stories}
+  of={Stories.Shadow}
+  meta={Stories}
 />
 
 ## Usage
@@ -28,4 +28,4 @@ It has similar props to the `IressProvider`, however it will apply the styles to
 
 **Note:** The `IressShadow` component does not create a custom element, it simply creates a shadow root on a `div` element.
 
-<ComponentExample story={Stories.Shadow} />
+<ComponentExample of={Stories.Shadow} />

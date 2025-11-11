@@ -11,7 +11,7 @@ export const expander = sva({
       alignItems: 'center',
       justifyContent: 'space-between',
       width: 'auto',
-      backgroundColor: 'transparent',
+      bg: 'transparent',
       cursor: 'pointer',
       tableChevron: true,
       position: 'relative',

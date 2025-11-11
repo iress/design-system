@@ -1,8 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressForm } from './Form';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { cloneElement } from 'react';
-import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
 import {
   IressButton,
   type IressFieldProps,
@@ -16,6 +14,10 @@ import {
 } from './mocks/supportedFormFields';
 import { type FieldValues } from 'react-hook-form';
 import { type ShortFormProps } from './components/ShortForm';
+import {
+  disableArgTypes,
+  STORYBOOK_ONLY_CATEGORY,
+} from '@iress-oss/ids-storybook-config';
 
 type FormPropsAndCustomArgs = ShortFormProps<FieldValues> & {
   element: SupportedControls;

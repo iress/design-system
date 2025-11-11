@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import { ComponentExample } from '@iress-storybook/components';
 import * as PopoverRecipes from './PopoverRecipes.stories';
+import { ComponentExample } from '@iress-oss/ids-storybook-config';
 
 <Meta of={PopoverRecipes} />
 
@@ -13,7 +13,7 @@ When an `IressMenu` is used inside `IressPopover`, it adds some additional funct
 - `IressPopover` will automatically close the popover when a menu item is clicked.
 - `IressMenu` will automatically focus the first menu item when the popover is opened.
 
-<ComponentExample story={PopoverRecipes.WithMenu} stories={PopoverRecipes} />
+<ComponentExample of={PopoverRecipes.WithMenu} />
 
 ## Focusable children
 
@@ -29,7 +29,4 @@ The `usePopoverItem` hook returns an object with the following properties:
 - `isActiveInPopover`: A boolean that indicates if the item is currently focused in the popover. This can be used to style the item differently when it is focused.
 - `...popoverItemProps`: The rest of the props that you should spread on the focusable element to make it focusable.
 
-<ComponentExample
-  story={PopoverRecipes.FocusableChildren}
-  stories={PopoverRecipes}
-/>
+<ComponentExample of={PopoverRecipes.FocusableChildren} />

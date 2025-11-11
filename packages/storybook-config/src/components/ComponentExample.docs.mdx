@@ -1,0 +1,36 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ComponentExample } from './ComponentExample';
+import * as ComponentStories from './mocks/StoryStub.stories';
+
+<Meta title="Components/Example" />
+
+# Example
+
+This allows us to preview and test the component examples, as the stories file doesn't work for it.
+
+<ComponentExample of={ComponentStories.IsStub} />
+
+## Stories
+
+### API
+
+<ComponentExample
+  of={ComponentStories.IsStub}
+  api={{
+    heading: 'API Example',
+    description: 'This is an example of an API description.',
+  }}
+/>
+
+### Story props
+
+<ComponentExample
+  of={ComponentStories.IsStub}
+  story={{
+    height: '100px',
+  }}
+/>
+
+### No API
+
+<ComponentExample of={ComponentStories.IsStub} api={false} />

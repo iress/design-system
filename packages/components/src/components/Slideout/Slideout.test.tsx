@@ -677,18 +677,6 @@ describe('IressSlideout', () => {
         });
         expect(dialog).toBeInTheDocument();
       });
-
-      it('renders an element directly, with the id', async () => {
-        const screen = renderComponent({
-          defaultShow: true,
-          heading: <h3>Heading label</h3>,
-        });
-
-        const dialog = await screen.findByRole(TEST_ROLE, {
-          name: 'Heading label',
-        });
-        expect(dialog).toBeInTheDocument();
-      });
     });
 
     describe('mode', () => {
