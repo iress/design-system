@@ -4,6 +4,7 @@ import { Loader } from 'storybook/internal/components';
 import {
   type SandboxPreviewProps,
   type AddonConfig,
+  PANEL_ID,
 } from '@iress-oss/ids-storybook-sandbox';
 
 const SandboxStub = () => <></>;
@@ -45,7 +46,7 @@ export default {
     } satisfies AddonConfig,
     layout: 'fullscreen',
     options: {
-      selectedPanel: 'IDS_Sandbox',
+      selectedPanel: PANEL_ID,
     },
     toolbar: {
       copy: {

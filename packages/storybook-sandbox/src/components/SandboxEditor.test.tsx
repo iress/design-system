@@ -101,9 +101,18 @@ const navigate = vi.fn();
 const history = vi.fn();
 
 beforeEach(() => {
+  const url = new URL('http://localhost');
   Object.defineProperty(window, 'location', {
     value: {
-      ...new URL('http://localhost'),
+      href: url.href,
+      origin: url.origin,
+      protocol: url.protocol,
+      host: url.host,
+      hostname: url.hostname,
+      port: url.port,
+      pathname: url.pathname,
+      search: url.search,
+      hash: url.hash,
       assign: navigate,
     },
     writable: true,
@@ -143,12 +152,15 @@ describe('SandboxEditor', () => {
   });
 
   it('renders code from url', async () => {
-    window.location.href = getUrlWithState(
+    const newUrl = getUrlWithState(
       {
         code: 'export default () => <IressText>Hello world from URL</IressText>;',
       },
       window.location,
     );
+    const url = new URL(newUrl);
+    window.location.href = url.href;
+    window.location.search = url.search;
 
     render(<SandboxEditor api={api} />);
 
