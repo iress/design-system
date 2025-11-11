@@ -53,6 +53,7 @@
   },
   "scripts": {
     "build": "yarn workspaces foreach -Apti run build",
+    "check-coverage": "tsx ./scripts/check-coverage.ts",
     "dev": "concurrently \"wait-on tcp:6006 && wait-on tcp:6007 && yarn storybook\" \"yarn packages/components dev:no-open\" \"yarn packages/tokens dev:no-open\"",
     "prepublish": "tsx ./scripts/storybook-addon-prepublish.ts",
     "prepare": "husky",

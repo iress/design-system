@@ -12,14 +12,18 @@ export default defineConfig({
     reporters: ['verbose'],
     coverage: {
       provider: 'v8',
-      reporter: ['lcov', 'html'],
+      reporter: ['text', 'lcov', 'html', 'json', 'json-summary'],
+      include: ['src/**/*'],
       exclude: [
         'src/**/*.stories.*',
         'src/**/*.test.*',
         'src/**/mocks/**/*',
         'src/**/examples/**/*',
+        'src/styled-system/**/*',
         'src/main.ts',
         'src/vite-env.d.ts',
+        '**/meta/**/*',
+        '**/sandbox/**/*',
       ],
     },
     // Performance optimizations

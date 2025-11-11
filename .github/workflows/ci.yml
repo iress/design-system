@@ -49,7 +49,7 @@ jobs:
     needs: setup
     strategy:
       matrix:
-        check: [lint, typecheck, test]
+        check: [lint, typecheck]
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js
@@ -104,6 +104,34 @@ jobs:
           path: |
             packages/*/dist/
           retention-days: 7
+
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Restore Yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            node_modules
+          key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        if: needs.setup.outputs.yarn-cache-hit != 'true'
+        run: yarn install --immutable
+      - name: Run tests with coverage
+        run: yarn test:coverage
+      - name: Check coverage threshold
+        run: yarn check-coverage --all
 
   storybook:
     name: Build Storybook

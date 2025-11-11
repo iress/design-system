@@ -39,22 +39,22 @@ const IressStorybookStyles = () => (
   <style>{`
     .sbdocs.sbdocs-wrapper {
       /* This fixes issue where the docs pages background overrides the theme background */
-      background-color: var(${cssVars.colour.neutral['10']});
+      background-color: ${cssVars.colour.neutral['10']};
 
       /* Styles the args table to use the text colour from the theme */
       .docblock-argstable-head th {
-        color: var(${cssVars.colour.neutral['80']});
+        color: ${cssVars.colour.neutral['80']};
       }
 
       /* Styles the empty args table to use the muted text colour from the theme */
       .docblock-emptyblock {
-        color: var(${cssVars.colour.neutral['70']});
+        color: ${cssVars.colour.neutral['70']};
       }
 
       /* Styles the table of contents */
       .toc-wrapper > .toc-list {
         padding-inline-start: 0;
-        border-left-color: var(${cssVars.colour.neutral['30']});
+        border-left-color: ${cssVars.colour.neutral['30']};
       }
 
       .toc-list-item::before {
@@ -77,10 +77,10 @@ const IressStorybookStyles = () => (
 
       .toc-list-item > a {
         text-decoration: none;
+      }
 
-        &:hover {
-          text-decoration: underline;
-        }
+      .toc-list-item > a:hover {
+        text-decoration: underline;
       }
 
       /** Style the heading anchors */
