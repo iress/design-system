@@ -9,6 +9,7 @@ import type { IconButton } from 'storybook/internal/components';
 // Mocking the Storybook API
 const api = {
   experimental_setFilter: vi.fn(),
+  getRefs: vi.fn().mockReturnValue({}),
 } as unknown as API;
 
 // We mock the storybook/internal/components package to avoid rendering the actual components,
@@ -31,6 +32,7 @@ describe('ToggleStories', () => {
     setItemSpy.mockClear();
     removeItemSpy.mockClear();
     iconButtonProps.mockClear();
+    vi.clearAllMocks();
   });
 
   it('renders defaults', () => {

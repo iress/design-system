@@ -217,11 +217,28 @@ describe('withOKTA', () => {
   });
 
   it('cleans up URL parameters on mount', () => {
-    const mockReplaceState = vi.fn();
+    const mockPostMessage = vi.fn();
 
-    // Set window.parent to window itself for isPreview check
+    // Create a mock parent that also equals window for the isPreview check
+    const mockParent = {
+      postMessage: mockPostMessage,
+    };
+
+    // Set window.parent to the mock parent for isPreview check
+    Object.defineProperty(window, 'parent', {
+      value: mockParent,
+      writable: true,
+    });
+
+    // Mock window itself to be the same as parent to satisfy isPreview condition
     Object.defineProperty(window, 'parent', {
       value: window,
+      writable: true,
+    });
+
+    // Override postMessage on window.parent
+    Object.defineProperty(window.parent, 'postMessage', {
+      value: mockPostMessage,
       writable: true,
     });
 
@@ -235,24 +252,12 @@ describe('withOKTA', () => {
       writable: true,
     });
 
-    // Mock window.history.replaceState
-    Object.defineProperty(window, 'history', {
-      value: {
-        replaceState: mockReplaceState,
-      },
-      writable: true,
-    });
-
     // Mock the getOkta to return undefined so registerOkta is called and the component renders
     (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(undefined);
 
     render(withOKTA(mockStoryFn, mockContext) as React.ReactElement);
 
-    expect(mockReplaceState).toHaveBeenCalledWith(
-      {},
-      '',
-      'http://localhost:6006/?path=%2Fstory%2Ftest-story--default',
-    );
+    expect(mockPostMessage).toHaveBeenCalledWith('CLEAR_OKTA_PARAMS', '*');
   });
 
   it('does not clean URL parameters when code is not undefined', () => {

@@ -22,7 +22,11 @@ export const SandboxOpenInSandbox = ({
   let openCodeUrl: string;
 
   try {
-    openCodeUrl = getOpenCodeUrl(code, api.getCurrentStoryData()?.parameters);
+    openCodeUrl = getOpenCodeUrl(
+      code,
+      window.location,
+      api.getCurrentStoryData()?.parameters,
+    );
   } catch {
     openCodeUrl = '';
   }

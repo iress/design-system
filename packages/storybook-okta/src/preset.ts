@@ -29,7 +29,7 @@ export const managerHead = (head: string) => {
   `;
 };
 
-export const viteFinal = async (
+export const viteFinal = (
   config: UserConfig,
   options: Options & { [ADDON_ID]: AddonConfig },
 ) => {

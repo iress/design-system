@@ -186,7 +186,11 @@ export const SandboxEditor = ({ active = true, api }: SandboxEditorProps) => {
       if (isSandboxStory(api)) {
         setState(newState);
         api.getChannel()?.emit(SANDBOX_UPDATE_EVENT, newState);
-        history.replaceState(null, '', getUrlWithState(newState));
+        history.replaceState(
+          null,
+          '',
+          getUrlWithState(newState, window.location),
+        );
         api.setQueryParams({ [ADDON_ID]: getEncodedState(newState) });
       } else {
         removeAddonFromUrl(window.location, api);

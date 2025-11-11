@@ -1,13 +1,24 @@
 import '@testing-library/jest-dom/vitest';
 import userEvent from '@testing-library/user-event';
 import { cleanup } from '@testing-library/react';
-import { forwardRef } from 'react';
+import { type ComponentProps, type CSSProperties, forwardRef } from 'react';
+import { type StorybookTheme } from 'storybook/internal/theming';
+
+type DeepPartial<T> = T extends object
+  ? {
+      [P in keyof T]?: DeepPartial<T[P]>;
+    }
+  : T;
+
+interface StylesProps {
+  theme: DeepPartial<StorybookTheme>;
+}
 
 // Mock Storybook theming to avoid theme context issues in tests
 vi.mock('storybook/theming', () => ({
   styled: {
-    div: (styles: any) => {
-      return forwardRef<HTMLDivElement, any>((props, ref) => {
+    div: (styles: CSSProperties | ((props: StylesProps) => CSSProperties)) => {
+      return forwardRef<HTMLDivElement, ComponentProps<'div'>>((props, ref) => {
         const computedStyles =
           typeof styles === 'function'
             ? styles({

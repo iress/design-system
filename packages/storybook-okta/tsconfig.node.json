@@ -5,7 +5,8 @@
     "allowSyntheticDefaultImports": true,
     "types": ["vitest/globals", "node"],
     "resolveJsonModule": true,
+    "strictNullChecks": true,
     "jsx": "react-jsx"
   },
-  "include": ["*.ts", "*.tsx", "../../shared/*.ts"]
+  "include": ["*.ts", "*.tsx", "../../shared/*.ts", ".storybook/*.ts"]
 }

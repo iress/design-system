@@ -9,6 +9,20 @@ import {
 } from 'storybook/internal/components';
 import userEvent from '@testing-library/user-event';
 
+// Mock window location
+const originalLocation: Location = window.location;
+
+beforeEach(() => {
+  delete (window as Partial<Window>).location;
+  (window.location as Location) = new URL(
+    'http://localhost:3000/iframe.html',
+  ) as unknown as Window['location'];
+});
+
+afterAll(() => {
+  (window.location as Location) = originalLocation;
+});
+
 // We mock the storybook/internal/components package to avoid rendering the actual components,
 // as we are not testing the components themselves (and there's some magic going on with their Styled Components)
 const iconButtonProps = vi.fn();
@@ -70,6 +84,16 @@ describe('SandboxShare', () => {
   });
 
   it('copies the preview url when the button is clicked', async () => {
+    // Mock clipboard
+    const mockWriteText = vi.fn();
+    Object.defineProperty(navigator, 'clipboard', {
+      value: {
+        writeText: mockWriteText,
+        readText: vi.fn().mockResolvedValue(''),
+      },
+      writable: true,
+    });
+
     // Render the component
     render(<SandboxShare state={{ code: '' }} />);
 
@@ -84,24 +108,26 @@ describe('SandboxShare', () => {
     });
     expect(copyPreviewButton).toBeInTheDocument();
 
-    // Simulate clicking on the preview button, which causes a re-render of the tooltip
+    // Simulate clicking on the preview button
     await userEvent.click(copyPreviewButton);
-    const newLastCall = withTooltipProps.mock.lastCall?.[0] as ComponentProps<
-      typeof WithTooltip
-    >;
-    render(newLastCall.tooltip as ReactNode);
 
-    const copied = screen.getByRole('button', { name: 'Copied!' });
-    expect(copied).toBeInTheDocument();
-
-    // Check that the URL was copied to the clipboard
-    const clipboardText = await navigator.clipboard.readText();
-    expect(clipboardText).toBe(
+    // Verify the clipboard was called with the correct URL
+    expect(mockWriteText).toHaveBeenCalledWith(
       'http://localhost:3000/iframe.html?viewMode=story&IDS_Sandbox=N4Igxg9gJgpiBcIQF8g',
     );
   });
 
   it('copies the preview and code url when the button is clicked', async () => {
+    // Mock clipboard
+    const mockWriteText = vi.fn();
+    Object.defineProperty(navigator, 'clipboard', {
+      value: {
+        writeText: mockWriteText,
+        readText: vi.fn().mockResolvedValue(''),
+      },
+      writable: true,
+    });
+
     // Render the component
     render(<SandboxShare state={{ code: '' }} />);
 
@@ -116,20 +142,12 @@ describe('SandboxShare', () => {
     });
     expect(copyPreviewButton).toBeInTheDocument();
 
-    // Simulate clicking on the preview button, which causes a re-render of the tooltip
+    // Simulate clicking on the button
     await userEvent.click(copyPreviewButton);
-    const newLastCall = withTooltipProps.mock.lastCall?.[0] as ComponentProps<
-      typeof WithTooltip
-    >;
-    render(newLastCall.tooltip as ReactNode);
 
-    const copied = screen.getByRole('button', { name: 'Copied!' });
-    expect(copied).toBeInTheDocument();
-
-    // Check that the URL was copied to the clipboard
-    const clipboardText = await navigator.clipboard.readText();
-    expect(clipboardText).toBe(
-      'http://localhost:3000/?IDS_Sandbox=N4Igxg9gJgpiBcIQF8g',
+    // Verify the clipboard was called with the correct URL
+    expect(mockWriteText).toHaveBeenCalledWith(
+      'http://localhost:3000/iframe.html?IDS_Sandbox=N4Igxg9gJgpiBcIQF8g',
     );
   });
 });

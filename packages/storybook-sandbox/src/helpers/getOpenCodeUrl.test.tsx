@@ -30,7 +30,7 @@ describe('getOpenCodeUrl', () => {
     'export default () => (\n  <IressText>Hello world</IressText>\n);';
 
   it('provides a url that can be opened in sandbox and previewed in sandbox', () => {
-    const url = getOpenCodeUrl(snippet, {
+    const url = getOpenCodeUrl(snippet, window.location, {
       [ADDON_ID]: {
         openInStoryId: 'path/to/sandbox',
         scopes: ['react-hook-forms'],
@@ -75,6 +75,16 @@ describe('getSandboxActionItems', () => {
   });
 
   it('returns an array with action items that can be used in a Storybook ActionBar', () => {
+    const mockPostMessage = vi.fn();
+
+    // Mock window.parent.postMessage
+    Object.defineProperty(window, 'parent', {
+      value: {
+        postMessage: mockPostMessage,
+      },
+      writable: true,
+    });
+
     const actionItems = getSandboxActionItems(snippet, parameters);
 
     expect(actionItems).toStrictEqual([
@@ -96,7 +106,13 @@ describe('getSandboxActionItems', () => {
       nativeEvent: event,
     } as React.MouseEvent<HTMLButtonElement>);
 
-    expect(window.location.href).toBe(getOpenCodeUrl(snippet, parameters));
+    expect(mockPostMessage).toHaveBeenCalledWith(
+      {
+        type: 'OPEN_IN_SANDBOX',
+        generateUrl: expect.any(Function),
+      },
+      '*',
+    );
   });
 
   it('returns empty array if no sandbox story has been set', () => {

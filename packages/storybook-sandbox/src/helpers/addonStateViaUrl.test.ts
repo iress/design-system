@@ -60,7 +60,7 @@ describe('getUrlWithState', () => {
 
   it('returns the url with customisations, if setParams is around', () => {
     expect(
-      getUrlWithState(unencodedState, (url) => {
+      getUrlWithState(unencodedState, window.location, (url) => {
         url.searchParams.set('custom', 'value');
       }),
     ).toEqual(`http://localhost/?custom=value&${ADDON_ID}=${encodedState}`);
@@ -75,21 +75,30 @@ describe('removeAddonFromUrl', () => {
   const urlWithState = `http://localhost/?custom=value&${ADDON_ID}=${getEncodedState(unencodedState)}`;
 
   it('removes the url with state from history', () => {
+    const mockPostMessage = vi.fn();
+
+    // Mock window.parent.postMessage
+    Object.defineProperty(window, 'parent', {
+      value: {
+        postMessage: mockPostMessage,
+      },
+      writable: true,
+    });
+
     window.location.href = urlWithState;
 
     removeAddonFromUrl();
 
-    expect(history).toHaveBeenCalledWith(
-      {},
-      '',
-      'http://localhost/?custom=value',
+    expect(mockPostMessage).toHaveBeenCalledWith(
+      { type: 'REMOVE_ADDON_STATE', url: 'http://localhost/?custom=value' },
+      '*',
     );
   });
 
   it('removes the url with state from Storybook API', () => {
     const setQueryParams = vi.fn();
 
-    removeAddonFromUrl({
+    removeAddonFromUrl(window.location, {
       setQueryParams,
     } as unknown as API);
 

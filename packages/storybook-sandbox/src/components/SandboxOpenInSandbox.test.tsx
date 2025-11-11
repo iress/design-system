@@ -4,10 +4,24 @@ import { ADDON_ID, ADDON_TITLE_SHORT } from '../constants';
 import { SandboxOpenInSandbox } from './SandboxOpenInSandbox';
 import { getOpenCodeUrl } from '../helpers';
 
+// Mock window location
+const originalLocation: Location = window.location;
+
+beforeEach(() => {
+  delete (window as Partial<Window>).location;
+  (window.location as Location) = new URL(
+    'http://localhost',
+  ) as unknown as Window['location'];
+});
+
+afterAll(() => {
+  (window.location as Location) = originalLocation;
+});
+
 // Mocking the Storybook API
 const parameters = {
   [ADDON_ID]: {
-    disable: true,
+    disable: false,
     openInStoryId: 'sandbox',
   },
 };
@@ -30,7 +44,11 @@ describe('SandboxOpenInSandbox', () => {
     expect(link).toHaveClass('sandbox-open-in-sandbox');
     expect(link).toHaveAttribute(
       'href',
-      getOpenCodeUrl('<IressText>Hello world</IressText>', parameters),
+      getOpenCodeUrl(
+        '<IressText>Hello world</IressText>',
+        window.location,
+        parameters,
+      ),
     );
   });
 

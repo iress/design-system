@@ -135,9 +135,12 @@ describe('SandboxEditor', () => {
   });
 
   it('renders code from url', async () => {
-    window.location.href = getUrlWithState({
-      code: 'export default () => <IressText>Hello world from URL</IressText>;',
-    });
+    window.location.href = getUrlWithState(
+      {
+        code: 'export default () => <IressText>Hello world from URL</IressText>;',
+      },
+      window.location,
+    );
 
     render(<SandboxEditor api={api} />);
 

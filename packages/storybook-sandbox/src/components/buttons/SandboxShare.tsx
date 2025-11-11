@@ -17,7 +17,9 @@ const copyToClipboard = async (
   onShare?: () => void,
   setParams?: (url: URL) => void,
 ) => {
-  await navigator.clipboard.writeText(getUrlWithState(state, setParams));
+  await navigator.clipboard.writeText(
+    getUrlWithState(state, window.location, setParams),
+  );
   setCopied(true);
   timeout = setTimeout(() => setCopied(false), 2000);
   onShare?.();

@@ -75,11 +75,11 @@ describe('Okta Addon Integration', () => {
     context: {} as StoryContext<ReactRenderer>['context'],
     canvas: {} as StoryContext<ReactRenderer>['canvas'],
     reporting: {} as StoryContext<ReactRenderer>['reporting'],
-    moduleExport: {} as StoryContext<ReactRenderer>['moduleExport'],
-    attachedCSFFile: {} as StoryContext<ReactRenderer>['attachedCSFFile'],
+    moduleExport: {} as never,
+    attachedCSFFile: {} as never,
     undecoratedStoryFn: vi.fn(),
     componentId: 'test-story',
-    storyExport: {} as StoryContext<ReactRenderer>['storyExport'],
+    storyExport: {} as never,
     initialArgs: {},
     kind: 'Test Story',
     story: 'Default',
@@ -296,7 +296,7 @@ describe('Okta Addon Integration', () => {
     });
 
     it('should clean up URL parameters on mount', () => {
-      const mockReplaceState = vi.fn();
+      const mockPostMessage = vi.fn();
 
       // Set window.parent to window itself for isPreview check
       Object.defineProperty(window, 'parent', {
@@ -304,20 +304,18 @@ describe('Okta Addon Integration', () => {
         writable: true,
       });
 
-      // Mock window.location with href for isPreview check and toString for URL cleanup
+      // Override postMessage on window.parent
+      Object.defineProperty(window.parent, 'postMessage', {
+        value: mockPostMessage,
+        writable: true,
+      });
+
+      // Mock window.location.href for isPreview check
       Object.defineProperty(window, 'location', {
         value: {
           href: 'http://localhost:6006/iframe.html?id=test-story--default',
           toString: () =>
             'http://localhost:6006/?path=/story/test-story--default&code=undefined&state=test',
-        },
-        writable: true,
-      });
-
-      // Mock window.history.replaceState
-      Object.defineProperty(window, 'history', {
-        value: {
-          replaceState: mockReplaceState,
         },
         writable: true,
       });
@@ -329,11 +327,7 @@ describe('Okta Addon Integration', () => {
 
       render(withOKTA(mockStoryFn, context) as React.ReactElement);
 
-      expect(mockReplaceState).toHaveBeenCalledWith(
-        {},
-        '',
-        'http://localhost:6006/?path=%2Fstory%2Ftest-story--default',
-      );
+      expect(mockPostMessage).toHaveBeenCalledWith('CLEAR_OKTA_PARAMS', '*');
     });
 
     it('should unsubscribe from auth state changes on unmount', async () => {

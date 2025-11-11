@@ -1,5 +1,5 @@
 import { type FloatingUIContainer } from '@/types';
-import { useMemo, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { IressModalProvider } from '../Modal';
 import {
   IressToasterProvider,
@@ -45,22 +45,6 @@ export const IressProvider = ({
   position,
   ...restProps
 }: IressProviderProps) => {
-  const includeDefaultFont = useMemo(() => {
-    if (noDefaultFont) {
-      return false;
-    }
-
-    return !document.head.querySelector('link[data-iress-design-system-font]');
-  }, [noDefaultFont]);
-
-  const includeIcons = useMemo(() => {
-    if (noIcons) {
-      return false;
-    }
-
-    return !document.head.querySelector('link[data-iress-design-system-icons]');
-  }, [noIcons]);
-
   return (
     <IressModalProvider container={container}>
       <IressToasterProvider container={container} position={position}>
@@ -68,7 +52,7 @@ export const IressProvider = ({
           {children}
         </IressSlideoutProvider>
       </IressToasterProvider>
-      {includeDefaultFont &&
+      {!noDefaultFont &&
         createPortal(
           defaultFonts.map((font) => (
             <link
@@ -81,7 +65,7 @@ export const IressProvider = ({
           document.head,
           'design-system-font',
         )}
-      {includeIcons &&
+      {!noIcons &&
         createPortal(
           <link
             rel="stylesheet"
