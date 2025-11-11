@@ -46,6 +46,7 @@ export interface AddonConfig extends AddonState {
 export interface SandboxTemplate {
   /**
    * The description of the template.
+   * @todo This does not work as a ReactNode if you are using React 19. Should work in Storybook 10. Please pass a string to add a description.
    */
   description?: ReactNode;
 
@@ -56,8 +57,9 @@ export interface SandboxTemplate {
 
   /**
    * The thumbnail to display for the template.
+   * @todo This does not work if you are using React 19. Should work in Storybook 10.
    */
-  thumbnail: ReactNode;
+  thumbnail?: ReactNode;
 
   /**
    * The title of the template.

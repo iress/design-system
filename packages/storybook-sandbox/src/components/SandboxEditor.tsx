@@ -39,9 +39,9 @@ interface StoryPreparedEvent {
 const SandboxManagerStyle = () => (
   <style>{`
 .sandbox-editor,
-.sandbox-editor > div,
-.sandbox-editor > div > div,
-.sandbox-editor > div > div > div {
+.sandbox-editor > div:not(:hidden),
+.sandbox-editor > div:not(:hidden) > div,
+.sandbox-editor > div:not(:hidden) > div > div {
   height: 100%;
   margin: 0;
 }

@@ -14,16 +14,21 @@ const navigate = vi.fn();
 const history = vi.fn();
 
 beforeEach(() => {
-  delete (window as Partial<Window>).location;
-  window.location = new URL(
-    'http://localhost',
-  ) as unknown as Window['location'];
-  window.location.assign = navigate;
+  Object.defineProperty(window, 'location', {
+    value: {
+      ...new URL('http://localhost'),
+      assign: navigate,
+    },
+    writable: true,
+  });
   window.history.replaceState = history;
 });
 
 afterAll(() => {
-  window.location = originalLocation;
+  Object.defineProperty(window, 'location', {
+    value: originalLocation,
+    writable: true,
+  });
   navigate.mockRestore();
   history.mockRestore();
 });

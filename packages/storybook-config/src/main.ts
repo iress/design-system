@@ -49,9 +49,9 @@ export const getMainConfig = ({
 }: MainConfig): StorybookConfig => {
   const config: StorybookConfig = {
     addons: [
+      '@iress-oss/ids-storybook-sandbox',
       '@iress-oss/ids-storybook-okta',
       '@storybook/addon-links',
-      '@iress-oss/ids-storybook-sandbox',
       '@storybook/addon-a11y',
       '@vueless/storybook-dark-mode',
       '@chromatic-com/storybook',

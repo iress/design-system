@@ -13,14 +13,17 @@ import userEvent from '@testing-library/user-event';
 const originalLocation: Location = window.location;
 
 beforeEach(() => {
-  delete (window as Partial<Window>).location;
-  window.location = new URL(
-    'http://localhost:3000/iframe.html',
-  ) as unknown as Window['location'];
+  Object.defineProperty(window, 'location', {
+    value: new URL('http://localhost:3000/iframe.html'),
+    writable: true,
+  });
 });
 
 afterAll(() => {
-  window.location = originalLocation;
+  Object.defineProperty(window, 'location', {
+    value: originalLocation,
+    writable: true,
+  });
 });
 
 // We mock the storybook/internal/components package to avoid rendering the actual components,

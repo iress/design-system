@@ -8,14 +8,17 @@ import { getOpenCodeUrl } from '../helpers';
 const originalLocation: Location = window.location;
 
 beforeEach(() => {
-  delete (window as Partial<Window>).location;
-  window.location = new URL(
-    'http://localhost',
-  ) as unknown as Window['location'];
+  Object.defineProperty(window, 'location', {
+    value: new URL('http://localhost'),
+    writable: true,
+  });
 });
 
 afterAll(() => {
-  window.location = originalLocation;
+  Object.defineProperty(window, 'location', {
+    value: originalLocation,
+    writable: true,
+  });
 });
 
 // Mocking the Storybook API
