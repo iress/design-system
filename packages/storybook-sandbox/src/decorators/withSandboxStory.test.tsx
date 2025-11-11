@@ -37,13 +37,13 @@ const originalLocation: Location = window.location;
 
 beforeEach(() => {
   delete (window as Partial<Window>).location;
-  (window.location as Location) = new URL(
+  window.location = new URL(
     'http://localhost',
   ) as unknown as Window['location'];
 });
 
 afterAll(() => {
-  (window.location as Location) = originalLocation;
+  window.location = originalLocation;
 });
 
 // TODO: Not sure why, but its failing in the CI. Passes locally though.

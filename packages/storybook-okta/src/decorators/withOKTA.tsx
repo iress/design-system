@@ -16,12 +16,12 @@ interface OktaProviderProps {
   config: AddonConfig;
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 const OktaProvider = ({ children, config }: OktaProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const authClient = getOkta(config) ?? registerOkta(config);
 
   useEffect(() => {
+    // eslint-disable-next-line sonarjs/post-message
     window.parent.postMessage('CLEAR_OKTA_PARAMS', '*');
   }, []);
 

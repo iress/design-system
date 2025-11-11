@@ -245,9 +245,11 @@ describe('OktaGuard', () => {
   it('handles login redirect callback', async () => {
     vi.mocked(mockAuthClient.token.isLoginRedirect).mockReturnValue(true);
     vi.mocked(mockAuthClient.token.parseFromUrl).mockResolvedValue({
-      tokens: { accessToken: 'test-token' as any },
+      tokens: { accessToken: 'test-token' },
       state: 'test-state',
-    });
+    } as unknown as Awaited<
+      ReturnType<typeof mockAuthClient.token.parseFromUrl>
+    >);
 
     const mockGetItem = vi
       .fn()

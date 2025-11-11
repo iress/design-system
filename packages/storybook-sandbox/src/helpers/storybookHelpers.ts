@@ -13,7 +13,7 @@ export const withCustomSource = (
   code: string,
   language = 'tsx',
   editorTransformers = EDITOR_TRANSFORMERS,
-): Record<string, any> => ({
+): Record<string, unknown> => ({
   docs: {
     source: {
       code: transformCode(code, editorTransformers),

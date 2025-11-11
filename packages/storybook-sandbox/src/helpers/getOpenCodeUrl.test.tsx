@@ -63,14 +63,14 @@ describe('getSandboxActionItems', () => {
 
   beforeEach(() => {
     delete (window as Partial<Window>).location;
-    (window.location as Location) = new URL(
+    window.location = new URL(
       'http://localhost',
     ) as unknown as Window['location'];
     window.location.assign = navigate;
   });
 
   afterAll(() => {
-    (window.location as Location) = originalLocation;
+    window.location = originalLocation;
     navigate.mockRestore();
   });
 
@@ -109,7 +109,7 @@ describe('getSandboxActionItems', () => {
     expect(mockPostMessage).toHaveBeenCalledWith(
       {
         type: 'OPEN_IN_SANDBOX',
-        generateUrl: expect.any(Function),
+        generateUrl: expect.any(Function) as unknown,
       },
       '*',
     );

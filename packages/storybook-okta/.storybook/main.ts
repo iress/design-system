@@ -1,5 +1,5 @@
 import { defineMain } from '@storybook/react-vite/node';
-import { autoReloadManagerHead } from '../../../shared/storybook-addon-dev.cjs';
+import { autoReloadManagerHead } from '../../../shared/storybook-addon-dev';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env' });

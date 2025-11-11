@@ -3,9 +3,8 @@ import { BookIcon } from '@storybook/icons';
 import { ADDON_ID } from '../constants';
 import { type API } from 'storybook/manager-api';
 import { isSidebarItemVisible } from '../helpers/isSidebarItemVisible';
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { AddonConfig } from '../types';
-import { FORCE_REMOUNT } from 'storybook/internal/core-events';
 
 interface ToggleStoriesProps extends AddonConfig {
   active?: boolean;

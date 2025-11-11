@@ -25,7 +25,7 @@ export const VersionBadge = ({
       }
     };
 
-    fetchEnvironment();
+    void fetchEnvironment();
   }, [environment]);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export const VersionBadge = ({
       }
     };
 
-    fetchVersion();
+    void fetchVersion();
   }, [version]);
 
   if (!badgeVersion) {

@@ -71,12 +71,19 @@ export const withSandboxStory = (
   useEffect(() => {
     // 1️⃣ Listen for messages from parent
     const handleMessage = (event: MessageEvent) => {
-      if (event.data?.type === 'CHECK_LOCATION') {
-        setParent(event.data.location);
+      const data = event.data as {
+        type?: string;
+        location?: SandboxParentLocation;
+      };
+      if (data?.type === 'CHECK_LOCATION') {
+        setParent(data.location);
       }
     };
 
-    window.parent.postMessage('REQUEST_PARENT_LOCATION', '*');
+    window.parent.postMessage(
+      'REQUEST_PARENT_LOCATION',
+      window.location.origin,
+    );
     window.addEventListener('message', handleMessage);
 
     return () => {

@@ -1,5 +1,5 @@
 // TODO: Probably needs end-to-end testing
-import { type ComponentProps, type ReactNode, type MouseEvent } from 'react';
+import { type ComponentProps, type ReactNode } from 'react';
 import { SandboxShare } from './SandboxShare';
 import { render, screen } from '@testing-library/react';
 import {
@@ -14,13 +14,13 @@ const originalLocation: Location = window.location;
 
 beforeEach(() => {
   delete (window as Partial<Window>).location;
-  (window.location as Location) = new URL(
+  window.location = new URL(
     'http://localhost:3000/iframe.html',
   ) as unknown as Window['location'];
 });
 
 afterAll(() => {
-  (window.location as Location) = originalLocation;
+  window.location = originalLocation;
 });
 
 // We mock the storybook/internal/components package to avoid rendering the actual components,
@@ -34,7 +34,7 @@ vi.mock('storybook/internal/components', async (importOriginal) => ({
     iconButtonProps(props);
     return <button onClick={props.onClick}>{props.children}</button>;
   },
-  // eslint-disable-next-line sonarjs/function-return-type -- returns a ReactNode
+
   WithTooltip: (props: ComponentProps<typeof WithTooltip>) => {
     withTooltipProps(props);
     return props.children;

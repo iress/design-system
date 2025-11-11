@@ -35,6 +35,7 @@ export const removeAddonFromUrl = (
   const url = new URL(location.href);
   url.searchParams.delete(ADDON_ID);
 
+  // eslint-disable-next-line sonarjs/post-message
   window.parent.postMessage(
     { type: 'REMOVE_ADDON_STATE', url: transformUrlForHistory(url) },
     '*',

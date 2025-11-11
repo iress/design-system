@@ -23,7 +23,7 @@ const api = {
   getChannel: () => ({
     on: channelOn,
     off: vi.fn(),
-    emit: (...args: never[]) => {
+    emit: (...args: [string, ...unknown[]]) => {
       const event = args[0];
 
       channelEmit(...args);
@@ -62,7 +62,10 @@ vi.mock('storybook/internal/components', async (importOriginal) => {
     IconButton: () => <button>IconButton rendered</button>,
     WithTooltip: () => <div>WithTooltip rendered</div>,
     TooltipLinkList: () => <div>TooltipLinkList rendered</div>,
-    AddonPanel: forwardRef<HTMLDivElement, any>((props, ref) => {
+    AddonPanel: forwardRef<
+      HTMLDivElement,
+      { active?: boolean; children?: React.ReactNode }
+    >((props, ref) => {
       if (props.active === false) {
         return null;
       }
@@ -99,7 +102,7 @@ const history = vi.fn();
 
 beforeEach(() => {
   delete (window as Partial<Window>).location;
-  (window.location as Location) = new URL(
+  window.location = new URL(
     'http://localhost',
   ) as unknown as Window['location'];
   window.location.assign = navigate;
@@ -107,7 +110,7 @@ beforeEach(() => {
 });
 
 afterAll(() => {
-  (window.location as Location) = originalLocation;
+  window.location = originalLocation;
   navigate.mockRestore();
   history.mockRestore();
 });

@@ -15,7 +15,7 @@ const history = vi.fn();
 
 beforeEach(() => {
   delete (window as Partial<Window>).location;
-  (window.location as Location) = new URL(
+  window.location = new URL(
     'http://localhost',
   ) as unknown as Window['location'];
   window.location.assign = navigate;
@@ -23,7 +23,7 @@ beforeEach(() => {
 });
 
 afterAll(() => {
-  (window.location as Location) = originalLocation;
+  window.location = originalLocation;
   navigate.mockRestore();
   history.mockRestore();
 });

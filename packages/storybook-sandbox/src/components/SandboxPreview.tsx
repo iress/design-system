@@ -54,7 +54,6 @@ export const SandboxPreview = ({
   loading,
   scope,
   styles,
-  // eslint-disable-next-line sonarjs/function-return-type -- It returns a ReactNode
 }: SandboxPreviewProps) => {
   const [state, setState] = useState<AddonState>(defaultState);
   const [unwrappedScope, setUnwrappedScope] = useState<SandboxScope>();
@@ -130,9 +129,9 @@ export const SandboxPreview = ({
         noInline
         transformCode={(code) => transformCode(code, PREVIEW_TRANSFORMERS)}
       >
-        <div className="sandbox-preview__error" role="alert">
+        <ErrorWrapper className="sandbox-preview__error" role="alert">
           <LiveError />
-        </div>
+        </ErrorWrapper>
         <LivePreview className="sandbox-preview" />
       </LiveProvider>
     </Suspense>

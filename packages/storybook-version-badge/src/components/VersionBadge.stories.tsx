@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { VersionBadge } from './VersionBadge';
-import { ThemeProvider, type Typography } from 'storybook/internal/theming';
+import { ThemeProvider } from 'storybook/internal/theming';
 
 type Story = StoryObj<typeof VersionBadge>;
 

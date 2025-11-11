@@ -8,7 +8,7 @@ export const isSandboxStory = (api: API) => {
 };
 
 export const isSandboxStoryFromParameters = (
-  parameters?: Record<string, any>,
+  parameters?: Record<string, unknown>,
 ) => {
   return !(parameters?.[ADDON_ID] as AddonConfig)?.disable;
 };

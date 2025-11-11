@@ -7,6 +7,7 @@ import {
 import { ADDON_OPTIONS } from '../constants';
 import { registerOkta } from '../helpers/oktaRegister';
 import type { AddonConfig } from '../types';
+import { type OktaAuth } from '@okta/okta-auth-js';
 
 // Mock dependencies
 vi.mock('storybook/internal/manager-api', () => ({
@@ -40,7 +41,7 @@ describe('useAddonConfig', () => {
     eventNames: vi.fn(),
     getMaxListeners: vi.fn(),
     setMaxListeners: vi.fn(),
-  } as any;
+  };
 
   const mockAddonConfig: AddonConfig = {
     issuer: 'https://test.okta.com',
@@ -52,8 +53,10 @@ describe('useAddonConfig', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(addons.getChannel).mockReturnValue(mockChannel);
-    vi.mocked(registerOkta).mockReturnValue(undefined as any);
+    vi.mocked(addons.getChannel).mockReturnValue(
+      mockChannel as unknown as ReturnType<typeof addons.getChannel>,
+    );
+    vi.mocked(registerOkta).mockReturnValue(undefined as unknown as OktaAuth);
   });
 
   describe('useAddonConfigForManager', () => {
@@ -67,7 +70,7 @@ describe('useAddonConfig', () => {
 
       vi.spyOn(process, 'env', 'get').mockReturnValue({
         IDS_OKTA: previewConfig,
-      } as any);
+      } as unknown);
 
       const { result } = renderHook(() => useAddonConfigForManager());
 
@@ -75,7 +78,7 @@ describe('useAddonConfig', () => {
     });
 
     it('initializes with undefined when no preview config available', () => {
-      vi.spyOn(process, 'env', 'get').mockReturnValue({} as any);
+      vi.spyOn(process, 'env', 'get').mockReturnValue({} as unknown);
 
       const { result } = renderHook(() => useAddonConfigForManager());
 
@@ -94,7 +97,7 @@ describe('useAddonConfig', () => {
     it('updates state when channel receives new options', () => {
       let channelCallback: (options: AddonConfig) => void = () => {};
 
-      mockChannel.on.mockImplementation((event: string, callback: any) => {
+      mockChannel.on.mockImplementation((event: string, callback: unknown) => {
         if (event === ADDON_OPTIONS) {
           channelCallback = callback;
         }
@@ -103,7 +106,7 @@ describe('useAddonConfig', () => {
       const { result } = renderHook(() => useAddonConfigForManager());
 
       // Initially undefined (assuming no env config)
-      vi.spyOn(process, 'env', 'get').mockReturnValue({} as any);
+      vi.spyOn(process, 'env', 'get').mockReturnValue({} as unknown);
 
       act(() => {
         channelCallback(mockAddonConfig);
@@ -115,7 +118,7 @@ describe('useAddonConfig', () => {
     it('calls registerOkta when options are received', () => {
       let channelCallback: (options: AddonConfig) => void = () => {};
 
-      mockChannel.on.mockImplementation((event: string, callback: any) => {
+      mockChannel.on.mockImplementation((event: string, callback: unknown) => {
         if (event === ADDON_OPTIONS) {
           channelCallback = callback;
         }
@@ -135,7 +138,7 @@ describe('useAddonConfig', () => {
         options: AddonConfig | undefined,
       ) => void = () => {};
 
-      mockChannel.on.mockImplementation((event: string, callback: any) => {
+      mockChannel.on.mockImplementation((event: string, callback: unknown) => {
         if (event === ADDON_OPTIONS) {
           channelCallback = callback;
         }
@@ -150,7 +153,7 @@ describe('useAddonConfig', () => {
       expect(registerOkta).not.toHaveBeenCalled();
 
       act(() => {
-        channelCallback(null as any);
+        channelCallback(null as unknown);
       });
 
       expect(registerOkta).not.toHaveBeenCalled();
@@ -159,7 +162,7 @@ describe('useAddonConfig', () => {
     it('handles multiple option updates correctly', () => {
       let channelCallback: (options: AddonConfig) => void = () => {};
 
-      mockChannel.on.mockImplementation((event: string, callback: any) => {
+      mockChannel.on.mockImplementation((event: string, callback: unknown) => {
         if (event === ADDON_OPTIONS) {
           channelCallback = callback;
         }
@@ -189,7 +192,7 @@ describe('useAddonConfig', () => {
     it('handles config with disable flag', () => {
       let channelCallback: (options: AddonConfig) => void = () => {};
 
-      mockChannel.on.mockImplementation((event: string, callback: any) => {
+      mockChannel.on.mockImplementation((event: string, callback: unknown) => {
         if (event === ADDON_OPTIONS) {
           channelCallback = callback;
         }
@@ -210,7 +213,7 @@ describe('useAddonConfig', () => {
     it('handles config with unprotected routes', () => {
       let channelCallback: (options: AddonConfig) => void = () => {};
 
-      mockChannel.on.mockImplementation((event: string, callback: any) => {
+      mockChannel.on.mockImplementation((event: string, callback: unknown) => {
         if (event === ADDON_OPTIONS) {
           channelCallback = callback;
         }
@@ -234,7 +237,7 @@ describe('useAddonConfig', () => {
     it('preserves all OktaAuthOptions properties', () => {
       let channelCallback: (options: AddonConfig) => void = () => {};
 
-      mockChannel.on.mockImplementation((event: string, callback: any) => {
+      mockChannel.on.mockImplementation((event: string, callback: unknown) => {
         if (event === ADDON_OPTIONS) {
           channelCallback = callback;
         }
@@ -281,7 +284,7 @@ describe('useAddonConfig', () => {
 
       vi.spyOn(process, 'env', 'get').mockReturnValue({
         IDS_OKTA: envConfig,
-      } as any);
+      } as unknown);
 
       const result = getAddonConfigForPreview();
 
@@ -289,7 +292,7 @@ describe('useAddonConfig', () => {
     });
 
     it('returns undefined when IDS_OKTA is not set', () => {
-      vi.spyOn(process, 'env', 'get').mockReturnValue({} as any);
+      vi.spyOn(process, 'env', 'get').mockReturnValue({} as unknown);
 
       const result = getAddonConfigForPreview();
 
@@ -326,7 +329,7 @@ describe('useAddonConfig', () => {
 
       vi.spyOn(process, 'env', 'get').mockReturnValue({
         IDS_OKTA: complexConfig,
-      } as any);
+      } as unknown);
 
       const result = getAddonConfigForPreview();
 
@@ -344,7 +347,7 @@ describe('useAddonConfig', () => {
 
       vi.spyOn(process, 'env', 'get').mockReturnValue({
         IDS_OKTA: previewConfig,
-      } as any);
+      } as unknown);
 
       const { result } = renderHook(() => useAddonConfigForManager());
 
@@ -360,11 +363,11 @@ describe('useAddonConfig', () => {
 
       vi.spyOn(process, 'env', 'get').mockReturnValue({
         IDS_OKTA: previewConfig,
-      } as any);
+      } as unknown);
 
       let channelCallback: (options: AddonConfig) => void = () => {};
 
-      mockChannel.on.mockImplementation((event: string, callback: any) => {
+      mockChannel.on.mockImplementation((event: string, callback: unknown) => {
         if (event === ADDON_OPTIONS) {
           channelCallback = callback;
         }

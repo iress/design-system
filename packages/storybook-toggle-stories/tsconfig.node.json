@@ -4,7 +4,8 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "allowSyntheticDefaultImports": true,
     "types": ["vitest/globals", "node"],
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "strict": true
   },
-  "include": ["*.ts", "../../shared/*.ts"]
+  "include": ["*.ts", "../../shared/*.ts", ".storybook/*.ts"]
 }

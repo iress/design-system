@@ -58,11 +58,12 @@ export const getSandboxActionItems = (
       className: 'sandbox-open-in-sandbox',
       onClick: () => {
         const code = typeof source === 'string' ? source : source.current;
+        // eslint-disable-next-line sonarjs/post-message
         window.parent.postMessage(
           {
             type: 'OPEN_IN_SANDBOX',
             generateUrl: (location: SandboxParentLocation) =>
-              getOpenCodeUrl(code || '', location, parameters),
+              getOpenCodeUrl(code ?? '', location, parameters),
           },
           '*',
         );

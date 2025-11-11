@@ -44,7 +44,10 @@ export const useSandboxCanvasProps = ({
   withToolbar = true,
   ...restProps
 }: UseSandboxCanvasProps): CanvasProps => {
-  const docsConfig = of?.parameters?.docs as ParametersConfig['docs'];
+  const storyOf = of as
+    | { parameters?: Record<string, ParametersConfig['docs']> }
+    | undefined;
+  const docsConfig = storyOf?.parameters?.docs;
   const [docParameters, setDocParameters] = useState<
     StorybookParameters | undefined
   >();

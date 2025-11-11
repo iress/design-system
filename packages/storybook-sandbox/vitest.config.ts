@@ -17,7 +17,7 @@ export default defineConfig({
     },
     environment: 'jsdom',
     globals: true,
-    setupFiles: ['./vitest.setup.tsx'],
+    setupFiles: ['./vitest.setup.ts'],
     testTimeout: 50000,
     reporters: ['verbose'],
     // Optimize for Yarn workspace

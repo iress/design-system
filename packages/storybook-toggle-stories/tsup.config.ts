@@ -10,14 +10,14 @@ import { globalPackages as globalManagerPackages } from 'storybook/internal/mana
 import { globalPackages as globalPreviewPackages } from 'storybook/internal/preview/globals';
 import { peerDependencies } from './package.json';
 
-type BundlerConfig = {
+interface BundlerConfig {
   bundler?: {
     exportEntries?: string[];
     nodeEntries?: string[];
     managerEntries?: string[];
     previewEntries?: string[];
   };
-};
+}
 
 export default defineConfig(async (options) => {
   // reading the three types of entries from package.json, which has the following structure:

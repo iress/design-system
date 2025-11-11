@@ -59,11 +59,11 @@ describe('withOKTA', () => {
     context: {} as StoryContext<ReactRenderer>['context'],
     canvas: {} as StoryContext<ReactRenderer>['canvas'],
     reporting: {} as StoryContext<ReactRenderer>['reporting'],
-    moduleExport: {} as StoryContext<ReactRenderer>['moduleExport'],
-    attachedCSFFile: {} as StoryContext<ReactRenderer>['attachedCSFFile'],
+    moduleExport: {} as never,
+    attachedCSFFile: {} as never,
     undecoratedStoryFn: mockStoryFn,
     componentId: 'test-story',
-    storyExport: {} as StoryContext<ReactRenderer>['storyExport'],
+    storyExport: {} as never,
     initialArgs: {},
     kind: 'Test Story',
     story: 'Default',
@@ -386,7 +386,7 @@ describe('withOKTA', () => {
   });
 
   it('calls getAddonConfigForPreview to retrieve configuration from environment', () => {
-    const result = withOKTA(mockStoryFn, mockContext);
+    withOKTA(mockStoryFn, mockContext);
 
     expect(getAddonConfigForPreview).toHaveBeenCalled();
     expect(mockStoryFn).toHaveBeenCalledWith(mockContext);

@@ -1,8 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
 import { vi, type Mock } from 'vitest';
-import type { ComponentProps } from 'react';
-import type { Canvas } from '@storybook/addon-docs/blocks';
-import type { StorybookParameters } from 'storybook/internal/types';
 import {
   useSandboxCanvasProps,
   type UseSandboxCanvasProps,
@@ -26,17 +23,7 @@ const mockTransformCode = helpers.transformCode as Mock;
 const mockUseSandboxDocParameters =
   useSandboxDocParametersModule.useSandboxDocParameters as Mock;
 
-type CanvasProps = ComponentProps<typeof Canvas>;
-
 describe('useSandboxCanvasProps', () => {
-  const mockDocParameters: StorybookParameters = {
-    'storybook/docs': {
-      source: {
-        code: 'const App = () => <div>Hello</div>;',
-      },
-    },
-  } as any;
-
   const mockActionItems = [
     {
       title: 'Sandbox',
@@ -78,11 +65,11 @@ describe('useSandboxCanvasProps', () => {
       const { result } = renderHook(() => useSandboxCanvasProps({}));
 
       expect(result.current).toMatchObject({
-        additionalActions: expect.any(Array),
+        additionalActions: expect.any(Array) as unknown,
         of: undefined,
         source: expect.objectContaining({
-          transform: expect.any(Function),
-        }),
+          transform: expect.any(Function) as unknown,
+        }) as unknown,
         withToolbar: true,
       });
     });
@@ -99,7 +86,7 @@ describe('useSandboxCanvasProps', () => {
       expect(result.current).toMatchObject({
         withToolbar: false,
         className: 'test-class',
-        of: props.of,
+        of: props.of as unknown,
       });
     });
   });
@@ -180,7 +167,7 @@ describe('useSandboxCanvasProps', () => {
 
       expect(mockTransformCode).toHaveBeenCalledWith(codeFromDocs, {
         ...COMMON_TRANSFORMERS,
-        test: expect.any(Function),
+        test: expect.any(Function) as unknown,
       });
       expect(result.current.source?.code).toBe('transformed: ' + codeFromDocs);
     });
@@ -232,7 +219,7 @@ describe('useSandboxCanvasProps', () => {
 
       expect(result.current.source).toMatchObject({
         code: 'transformed: ' + docsCode,
-        transform: expect.any(Function),
+        transform: expect.any(Function) as unknown,
         language: 'tsx',
       });
     });
@@ -344,7 +331,7 @@ describe('useSandboxCanvasProps', () => {
       renderHook(() => useSandboxCanvasProps({}));
 
       expect(mockUseSandboxDocParameters).toHaveBeenCalledWith(
-        expect.any(Function),
+        expect.any(Function) as unknown,
       );
     });
 
@@ -411,7 +398,7 @@ describe('useSandboxCanvasProps', () => {
 
     it('should handle missing parameters in of', () => {
       const props: UseSandboxCanvasProps = {
-        of: {} as any,
+        of: {} as unknown,
       };
 
       const { result } = renderHook(() => useSandboxCanvasProps(props));

@@ -91,7 +91,10 @@ describe('SandboxTemplates', () => {
     expect(items[1]).toHaveTextContent('Template 2');
 
     // Select the first template
-    const firstSelect = items[0]?.querySelector('button')!;
+    const firstItem = items[0];
+    if (!firstItem) throw new Error('No template items found');
+    const firstSelect = firstItem.querySelector('button');
+    if (!firstSelect) throw new Error('No button found in template item');
     await userEvent.click(firstSelect);
 
     // The dialog should be closed
