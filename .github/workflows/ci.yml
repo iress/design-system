@@ -106,7 +106,7 @@ jobs:
           retention-days: 7
 
   test:
-    name: Run tests
+    name: Test
     runs-on: ubuntu-latest
     needs: setup
     steps:
