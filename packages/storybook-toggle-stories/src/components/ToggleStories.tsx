@@ -3,8 +3,9 @@ import { BookIcon } from '@storybook/icons';
 import { ADDON_ID } from '../constants';
 import { type API } from 'storybook/manager-api';
 import { isSidebarItemVisible } from '../helpers/isSidebarItemVisible';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { AddonConfig } from '../types';
+import { FORCE_REMOUNT } from 'storybook/internal/core-events';
 
 interface ToggleStoriesProps extends AddonConfig {
   active?: boolean;
@@ -36,10 +37,6 @@ export const ToggleStories = ({
 
         const toggledVisible = !visible;
 
-        void api.experimental_setFilter(ADDON_ID, (item) =>
-          isSidebarItemVisible(item, toggledVisible),
-        );
-
         if (toggledVisible) {
           window.localStorage.setItem(ADDON_ID, 'true');
         } else {
@@ -47,6 +44,17 @@ export const ToggleStories = ({
         }
 
         setVisible(toggledVisible);
+
+        // TODO: In Storybook Composition, toggling the filter does not work as expected
+        // because refs are treated differently. For now, we force a remount of Storybook
+        // when toggling the visibility of stories if refs are present.
+        if (api.getRefs() && Object.keys(api.getRefs()).length > 0) {
+          window.location.reload();
+        } else {
+          void api.experimental_setFilter(ADDON_ID, (item) =>
+            isSidebarItemVisible(item, toggledVisible),
+          );
+        }
       }}
     >
       <BookIcon />

@@ -4,33 +4,41 @@ import {
 } from 'lz-string';
 import { type API } from 'storybook/manager-api';
 import { ADDON_ID } from '../constants';
-import { type AddonState } from '../types';
+import { type AddonState, type SandboxParentLocation } from '../types';
 
-export const getStateFromUrl = (): AddonState => {
-  const searchParams = new URLSearchParams(
-    window.parent.location.search.toString(),
-  );
+export const getStateFromUrl = (
+  location: SandboxParentLocation = window.location,
+): AddonState => {
+  if (!location) return { code: '' };
+  const searchParams = new URLSearchParams(location.search);
   const stateParam = searchParams.get(ADDON_ID) ?? '';
   return getDecodedState(stateParam);
 };
 
 export const getUrlWithState = (
   state: AddonState,
+  location: SandboxParentLocation = window.location,
   setParams?: (url: URL) => void,
 ) => {
-  const url = new URL(window.parent.location.toString());
+  const url = new URL(location.href);
   setParams?.(url);
   url.searchParams.set(ADDON_ID, getEncodedState(state));
   return transformUrlForHistory(url);
 };
 
-export const removeAddonFromUrl = (api?: API) => {
+export const removeAddonFromUrl = (
+  location: SandboxParentLocation = window.location,
+  api?: API,
+) => {
   api?.setQueryParams({ [ADDON_ID]: '' });
 
-  const url = new URL(window.parent.location.toString());
+  const url = new URL(location.href);
   url.searchParams.delete(ADDON_ID);
 
-  window.parent.history.replaceState({}, '', transformUrlForHistory(url));
+  window.parent.postMessage(
+    { type: 'REMOVE_ADDON_STATE', url: transformUrlForHistory(url) },
+    '*',
+  );
 };
 
 export const getEncodedState = (state: AddonState) =>

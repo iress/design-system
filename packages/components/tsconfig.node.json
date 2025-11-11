@@ -6,5 +6,5 @@
     "allowSyntheticDefaultImports": true,
     "types": ["vitest/globals", "node", "mdx"]
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", ".storybook/**/*"]
 }

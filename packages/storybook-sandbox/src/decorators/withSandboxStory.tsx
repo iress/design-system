@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import type {
   PartialStoryFn as StoryFunction,
   StoryContext,
@@ -12,7 +12,7 @@ import {
 import { ADDON_TITLE_SHORT, ADDON_ICON, ADDON_ID } from '../constants';
 import { type ReactRenderer } from '@storybook/react';
 import { type SandboxPreviewProps } from '../components/SandboxPreview';
-import { type AddonConfig } from '../types';
+import { type AddonConfig, type SandboxParentLocation } from '../types';
 
 const SandboxPreview = lazy(() => import('../components/SandboxPreview'));
 
@@ -66,13 +66,42 @@ export const withSandboxStory = (
   context: StoryContext<ReactRenderer>,
 ) => {
   const isSandboxStory = isSandboxStoryFromContext(context);
+  const [parent, setParent] = useState<SandboxParentLocation | undefined>();
+
+  useEffect(() => {
+    // 1️⃣ Listen for messages from parent
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data?.type === 'CHECK_LOCATION') {
+        setParent(event.data.location);
+      }
+    };
+
+    window.parent.postMessage('REQUEST_PARENT_LOCATION', '*');
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, []);
+
+  const isPreview = useMemo(() => {
+    return parent?.href.includes('iframe.html') ?? false;
+  }, [parent]);
+
+  const state = useMemo(() => getStateFromUrl(parent), [parent]);
+
+  const editUrl = useMemo(() => {
+    return getUrlWithState(state, parent, (url) => {
+      url.pathname = '/';
+      url.searchParams.set('path', `/${context.viewMode}/${context.id}`);
+      url.searchParams.delete('viewMode');
+    });
+  }, [parent]);
 
   if (!isSandboxStory) {
     return StoryFn(context);
   }
 
-  const isPreview = window.parent?.location.href.includes('iframe.html');
-  const state = getStateFromUrl();
   const contextArgs = context.args as SandboxPreviewProps;
   const parameters = context.parameters[ADDON_ID] as AddonConfig;
   const props: SandboxPreviewProps = {
@@ -88,12 +117,6 @@ export const withSandboxStory = (
   };
 
   if (isPreview) {
-    const editUrl = getUrlWithState(state, (url) => {
-      url.pathname = '/';
-      url.searchParams.set('path', `/${context.viewMode}/${context.id}`);
-      url.searchParams.delete('viewMode');
-    });
-
     return (
       <Suspense fallback={props.loading?.(state) ?? 'Loading...'}>
         <SandboxPreviewStyle />

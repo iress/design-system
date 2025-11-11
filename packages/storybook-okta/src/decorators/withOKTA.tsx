@@ -22,16 +22,7 @@ const OktaProvider = ({ children, config }: OktaProviderProps) => {
   const authClient = getOkta(config) ?? registerOkta(config);
 
   useEffect(() => {
-    const url = new URL(window.parent.location.toString());
-
-    if (url.searchParams.get('code') === 'undefined') {
-      url.searchParams.delete('code');
-      url.searchParams.delete('state');
-      url.searchParams.delete('session_state');
-      url.searchParams.delete('error');
-      url.searchParams.delete('error_description');
-      window.parent.history.replaceState({}, '', url.toString());
-    }
+    window.parent.postMessage('CLEAR_OKTA_PARAMS', '*');
   }, []);
 
   useEffect(() => {

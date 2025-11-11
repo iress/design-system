@@ -4,7 +4,7 @@ import { ADDON_ID } from '../constants';
 import { type ActionItem } from 'storybook/internal/components';
 import React from 'react';
 import { SandboxLabel } from '../components/SandboxLabel';
-import { type AddonConfig } from '../types';
+import { type AddonConfig, type SandboxParentLocation } from '../types';
 
 export const addExportsToStorybookGeneratedSnippets = (code: string) => {
   if (code.includes('export default') || code.includes('export const')) {
@@ -18,6 +18,7 @@ export const addExportsToStorybookGeneratedSnippets = (code: string) => {
 
 export const getOpenCodeUrl = (
   code: string,
+  location: SandboxParentLocation = window.location,
   parameters?: StorybookParameters,
 ) => {
   const addonConfig = parameters?.[ADDON_ID] as AddonConfig;
@@ -34,6 +35,7 @@ export const getOpenCodeUrl = (
       code: addExportsToStorybookGeneratedSnippets(code),
       scopes: addonConfig?.scopes,
     },
+    location,
     (url) => {
       url.searchParams.set('path', openInStoryId);
     },
@@ -56,8 +58,14 @@ export const getSandboxActionItems = (
       className: 'sandbox-open-in-sandbox',
       onClick: () => {
         const code = typeof source === 'string' ? source : source.current;
-        const navigateWindow = window.parent ?? window;
-        navigateWindow.location.href = getOpenCodeUrl(code ?? '', parameters);
+        window.parent.postMessage(
+          {
+            type: 'OPEN_IN_SANDBOX',
+            generateUrl: (location: SandboxParentLocation) =>
+              getOpenCodeUrl(code || '', location, parameters),
+          },
+          '*',
+        );
       },
     },
   ];

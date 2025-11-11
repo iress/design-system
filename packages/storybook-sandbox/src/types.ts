@@ -69,3 +69,8 @@ export type SandboxScope = Record<string, unknown>;
 export type SandboxStyle = () => ReactNode;
 export type SandboxTransformer = (code: string) => string;
 export type SandboxTransformerMap = Record<string, SandboxTransformer>;
+
+export interface SandboxParentLocation {
+  href: string;
+  search: string;
+}

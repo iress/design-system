@@ -20,6 +20,7 @@
       "require": "./dist/preview.cjs"
     },
     "./manager": "./dist/manager.js",
+    "./preset": "./dist/preset.cjs",
     "./package.json": "./package.json"
   },
   "files": [
@@ -89,6 +90,9 @@
     ],
     "previewEntries": [
       "src/preview.tsx"
+    ],
+    "nodeEntries": [
+      "src/preset.ts"
     ]
   },
   "storybook": {

@@ -17,6 +17,7 @@
     "build": "yarn cssVars && vite build",
     "build-storybook": "storybook build",
     "dev": "yarn storybook",
+    "dev:no-open": "yarn storybook --no-open",
     "clean": "rimraf build dist coverage src/generated storybook-static",
     "cssVars": "tsx plugins/generateCssVars.ts",
     "lint": "eslint . --ext=.js,.jsx,.ts,.tsx,.mjs,.cjs,.mdx --max-warnings=0",
@@ -29,6 +30,8 @@
   "devDependencies": {
     "@iress-oss/ids-components": "^6.0.0-alpha.1",
     "@iress-oss/ids-storybook-config": "^0.0.0",
+    "@iress-oss/ids-storybook-sandbox": "^0.0.0",
+    "@iress-oss/ids-storybook-toggle-stories": "^0.0.0",
     "@iress-oss/ids-storybook-version-badge": "^0.0.0",
     "@storybook/addon-docs": "^9.1.10",
     "@storybook/react-vite": "^9.1.10",

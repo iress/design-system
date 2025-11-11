@@ -189,7 +189,7 @@ export const SandboxEditor = ({ active = true, api }: SandboxEditorProps) => {
         history.replaceState(null, '', getUrlWithState(newState));
         api.setQueryParams({ [ADDON_ID]: getEncodedState(newState) });
       } else {
-        removeAddonFromUrl(api);
+        removeAddonFromUrl(window.location, api);
       }
     },
     [api, setState],
