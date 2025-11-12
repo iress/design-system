@@ -1,5 +1,6 @@
 import OktaAuth from '@okta/okta-auth-js';
 import { type AddonConfig } from '../types';
+import { validateOktaConfig } from '../validation';
 
 const oktas = new Map<string, OktaAuth>();
 
@@ -8,8 +9,9 @@ const getKey = (okta: AddonConfig) => {
 };
 
 export const registerOkta = (okta: AddonConfig) => {
-  oktas.set(getKey(okta), new OktaAuth(okta));
-  return getOkta(okta)!;
+  const validatedConfig = validateOktaConfig(okta);
+  oktas.set(getKey(validatedConfig), new OktaAuth(validatedConfig));
+  return getOkta(validatedConfig)!;
 };
 
 export const unregisterOkta = (okta: AddonConfig) => {

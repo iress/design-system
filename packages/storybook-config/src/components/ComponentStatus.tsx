@@ -48,8 +48,8 @@ const BetaTag = ({ tag }: TagProps) => {
           <>
             <IressText element="strong">New component</IressText>
             <IressText color="colour.neutral.70">
-              This component is new, please provide feedback to the IDS team if
-              you encounter any issues.
+              This component is new, please provide feedback to the Frontend
+              Enablement team if you encounter any issues.
             </IressText>
           </>
         )}

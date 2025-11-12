@@ -105,7 +105,7 @@ export const setUpManager = ({
           const title = oldComponent ? `Replaces ${oldComponent}` : 'Beta';
           const desc = oldComponent
             ? `This component is in beta and will replace ${oldComponent} in the next major version.`
-            : 'This component is new, please provide feedback to the IDS team if you encounter any issues.';
+            : 'This component is new, please provide feedback to the Frontend Enablement team if you encounter any issues.';
 
           return {
             text: 'Beta',

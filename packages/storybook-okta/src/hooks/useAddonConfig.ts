@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { ADDON_OPTIONS } from '../constants';
 import { registerOkta } from '../helpers/oktaRegister';
 import type { AddonConfig } from '../types';
+import { validateOktaConfig } from '../validation';
 import { addons } from 'storybook/internal/manager-api';
 
 export const useAddonConfigForManager = () => {
@@ -13,36 +14,47 @@ export const useAddonConfigForManager = () => {
     const channel = addons.getChannel();
 
     const handleOptions = (options: AddonConfig | string | undefined) => {
-      const config =
-        typeof options === 'string'
-          ? (JSON.parse(options) as AddonConfig)
-          : options;
+      try {
+        const config =
+          typeof options === 'string'
+            ? (JSON.parse(options) as AddonConfig)
+            : options;
 
-      setAddonConfig(config);
-
-      if (config) {
-        registerOkta(config);
+        if (config) {
+          const validatedConfig = validateOktaConfig(config);
+          setAddonConfig(validatedConfig);
+          registerOkta(validatedConfig);
+        }
+      } catch (error) {
+        console.error('Invalid Okta configuration:', error);
       }
     };
 
     channel.on(ADDON_OPTIONS, handleOptions);
 
-    // Cleanup function to remove listener on unmount
     return () => {
       channel.off(ADDON_OPTIONS, handleOptions);
     };
-  }, []); // Empty dependency array - only set up once
+  }, []);
 
   return addonConfig;
 };
 
 export const getAddonConfigForPreview = () => {
-  const fromEnv = process.env.IDS_OKTA as unknown as
-    | AddonConfig
-    | string
-    | undefined;
+  try {
+    const fromEnv = process.env.IDS_OKTA as unknown as
+      | AddonConfig
+      | string
+      | undefined;
 
-  return typeof fromEnv === 'string'
-    ? (JSON.parse(fromEnv) as AddonConfig)
-    : fromEnv;
+    const config =
+      typeof fromEnv === 'string'
+        ? (JSON.parse(fromEnv) as AddonConfig)
+        : fromEnv;
+
+    return config ? validateOktaConfig(config) : undefined;
+  } catch (error) {
+    console.error('Invalid Okta configuration from environment:', error);
+    return undefined;
+  }
 };
