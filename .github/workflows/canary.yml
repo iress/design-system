@@ -1,4 +1,5 @@
 name: Canary
+run-name: ${{ inputs.package || 'all packages' }} by @${{ github.actor }}
 
 on:
   workflow_dispatch:
