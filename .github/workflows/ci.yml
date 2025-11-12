@@ -17,7 +17,7 @@ env:
 jobs:
   setup:
     name: Setup and Cache
-    runs-on: ubuntu-latest
+    runs-on: wealth-actions-runners
     outputs:
       yarn-cache-hit: ${{ steps.yarn-cache.outputs.cache-hit }}
     steps:
@@ -45,7 +45,7 @@ jobs:
 
   validate:
     name: Validate Code Quality
-    runs-on: ubuntu-latest
+    runs-on: wealth-actions-runners
     needs: setup
     strategy:
       matrix:
@@ -74,7 +74,7 @@ jobs:
 
   build:
     name: Build Packages
-    runs-on: ubuntu-latest
+    runs-on: wealth-actions-runners
     needs: setup
     steps:
       - uses: actions/checkout@v4
@@ -107,7 +107,7 @@ jobs:
 
   test:
     name: Test
-    runs-on: ubuntu-latest
+    runs-on: wealth-actions-runners
     needs: setup
     steps:
       - uses: actions/checkout@v4
@@ -135,7 +135,7 @@ jobs:
 
   storybook:
     name: Build Storybook
-    runs-on: ubuntu-latest
+    runs-on: wealth-actions-runners
     needs: [setup, build]
     steps:
       - uses: actions/checkout@v4
