@@ -50,7 +50,7 @@
     "eslint-plugin-react-hooks": "^6.0.0",
     "eslint-plugin-react-refresh": "^0.4.22",
     "eslint-plugin-sonarjs": "^3.0.5",
-    "glob": "10.3.10",
+    "glob": "11.0.3",
     "jest-axe": "10.0.0",
     "jsdom": "26.1.0",
     "lightningcss": "^1.30.2",
