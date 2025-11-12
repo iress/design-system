@@ -8,7 +8,7 @@ export default defineConfig({
     reporters: ['verbose'],
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'lcov', 'html'],
+      reporter: ['text', 'lcov', 'html', 'json', 'json-summary'],
       exclude: [
         'node_modules/',
         'dist/',

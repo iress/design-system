@@ -5,7 +5,8 @@
     "allowSyntheticDefaultImports": true,
     "types": ["vitest/globals", "node"],
     "resolveJsonModule": true,
-    "strict": true
+    "strict": true,
+    "strictNullChecks": true
   },
   "include": ["*.ts", "../../shared/*.ts", ".storybook/*.ts"]
 }

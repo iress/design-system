@@ -9,7 +9,7 @@ import {
 
 export default [
   {
-    ignores: [...baseIgnores],
+    ignores: [...baseIgnores, '.storybook/main.ts'],
   },
   baseJavaScriptConfig,
   createTypeScriptConfig(import.meta.dirname, [

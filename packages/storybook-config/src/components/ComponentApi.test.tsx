@@ -5,19 +5,28 @@ import { type ControlProps } from '@storybook/addon-docs/blocks';
 
 // We mock the @storybook/addon-docs/blocks package to avoid rendering the actual Controls component,
 // Which relies on Storybook's context and would throw an error in a test environment (and is a pain to mock).
-const controlsProps = vi.fn();
-const categoryClick = vi.fn();
+
+const controlsProps = vi.fn() as unknown;
+
+const categoryClick = vi.fn() as unknown;
+
 vi.mock('@storybook/addon-docs/blocks', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('@storybook/addon-docs/blocks')>()),
+  ...(await (
+    importOriginal as () => Promise<
+      typeof import('@storybook/addon-docs/blocks')
+    >
+  )()),
   Controls: (props: ControlProps<never>) => {
-    controlsProps(props);
+    (controlsProps as (props: ControlProps<never>) => void)(props);
 
     return (
       <table>
         <thead>
           <tr title="Toggle category">
             <th>
-              <button onClick={categoryClick}>Toggle category</button>
+              <button onClick={categoryClick as () => void}>
+                Toggle category
+              </button>
             </th>
           </tr>
         </thead>

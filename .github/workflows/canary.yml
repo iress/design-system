@@ -1,0 +1,96 @@
+name: Canary Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to release (leave empty for all)'
+        required: false
+        type: choice
+        options:
+          - ''
+          - '@iress-oss/ids-components'
+          - '@iress-oss/ids-mcp-server'
+          - '@iress-oss/ids-storybook-config'
+          - '@iress-oss/ids-storybook-okta'
+          - '@iress-oss/ids-storybook-sandbox'
+          - '@iress-oss/ids-storybook-toggle-stories'
+          - '@iress-oss/ids-storybook-version-badge'
+          - '@iress-oss/ids-tokens'
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  NODE_VERSION: '22'
+  YARN_VERSION: '4.10.3'
+
+jobs:
+  canary-release:
+    name: Canary Release
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'iress-oss'
+    environment: npm-publishing
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check CI Status
+        run: |
+          echo "Checking CI workflow status for branch: ${{ github.ref_name }}"
+
+          # Get the latest CI run for this branch
+          CI_STATUS=$(gh run list \
+            --workflow=ci.yml \
+            --branch=${{ github.ref_name }} \
+            --json conclusion \
+            --limit 1 \
+            --jq '.[0].conclusion')
+
+          echo "Latest CI status: $CI_STATUS"
+
+          if [ "$CI_STATUS" != "success" ]; then
+            echo "❌ CI workflow has not passed on this branch. Cannot publish canary release."
+            echo "Please ensure CI passes before publishing a canary release."
+            exit 1
+          fi
+
+          echo "✅ CI workflow passed. Proceeding with canary release."
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Version packages
+        run: |
+          # Generate canary version with timestamp
+          TIMESTAMP=$(date +%Y%m%d%H%M%S)
+          SHORT_SHA=${GITHUB_SHA:0:7}
+          CANARY_VERSION="0.0.0-canary-${TIMESTAMP}-${SHORT_SHA}"
+
+          if [ "${{ github.event.inputs.package }}" != "" ]; then
+            yarn workspace ${{ github.event.inputs.package }} version $CANARY_VERSION --no-git-tag-version
+          else
+            yarn workspaces foreach --no-private version $CANARY_VERSION --no-git-tag-version
+          fi
+
+      - name: Publish to NPM
+        run: |
+          if [ "${{ github.event.inputs.package }}" != "" ]; then
+            yarn workspace ${{ github.event.inputs.package }} npm publish --tag canary --access public --provenance
+          else
+            yarn workspaces foreach --no-private npm publish --tag canary --access public --provenance
+          fi

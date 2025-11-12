@@ -14,16 +14,30 @@ const navigate = vi.fn();
 const history = vi.fn();
 
 beforeEach(() => {
-  delete (window as Partial<Window>).location;
-  window.location = new URL(
-    'http://localhost',
-  ) as unknown as Window['location'];
-  window.location.assign = navigate;
+  const url = new URL('http://localhost');
+  Object.defineProperty(window, 'location', {
+    value: {
+      href: url.href,
+      origin: url.origin,
+      protocol: url.protocol,
+      host: url.host,
+      hostname: url.hostname,
+      port: url.port,
+      pathname: url.pathname,
+      search: url.search,
+      hash: url.hash,
+      assign: navigate,
+    },
+    writable: true,
+  });
   window.history.replaceState = history;
 });
 
 afterAll(() => {
-  window.location = originalLocation;
+  Object.defineProperty(window, 'location', {
+    value: originalLocation,
+    writable: true,
+  });
   navigate.mockRestore();
   history.mockRestore();
 });

@@ -27,8 +27,8 @@
     "generate": "tsx scripts/generate.ts",
     "guidelines": "tsx scripts/guidelines.ts",
     "lint": "npx eslint . --max-warnings 0",
-    "test": "vitest run --coverage",
-    "test:watch": "vitest --watch",
+    "test": "vitest --watch",
+    "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit"
   },
   "files": [

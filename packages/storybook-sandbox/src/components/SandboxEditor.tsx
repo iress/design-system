@@ -38,12 +38,17 @@ interface StoryPreparedEvent {
 // TODO: Not sure why, but CSS file is not working inside the addon
 const SandboxManagerStyle = () => (
   <style>{`
-.sandbox-editor,
-.sandbox-editor > div,
-.sandbox-editor > div > div,
-.sandbox-editor > div > div > div {
+.sandbox-editor:not(:has(> div[hidden])),
+.sandbox-editor > div:not([hidden]),
+.sandbox-editor > div:not([hidden]) > div,
+.sandbox-editor > div:not([hidden]) > div > div {
   height: 100%;
   margin: 0;
+}
+
+[role="tablist"]:has(#tabbutton-ids-sandbox) #tabbutton-storybook-interactions-panel,
+[role="tablist"]:has(#tabbutton-ids-sandbox) #tabbutton-storybook-docs-panel {
+    display: none;
 }
 
 .sandbox-editor__panel {

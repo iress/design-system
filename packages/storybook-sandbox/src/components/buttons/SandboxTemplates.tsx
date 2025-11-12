@@ -26,6 +26,8 @@ export const SandboxTemplates = ({
     return null;
   }
 
+  console.log(templates);
+
   return (
     <>
       <SandboxButton
@@ -52,7 +54,7 @@ export const SandboxTemplates = ({
             <li key={template.title}>
               {template.thumbnail}
               <h3>{template.title}</h3>
-              {template.description}
+              <div style={{ marginBlock: '0.5em' }}>{template.description}</div>
               <Button variant="outline" onClick={() => handleClick(template)}>
                 Select
               </Button>

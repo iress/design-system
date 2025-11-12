@@ -4,14 +4,19 @@ import { ComponentApiExpander } from './ComponentApiExpander';
 
 // We mock the @storybook/addon-docs/blocks package to avoid rendering the actual Controls component,
 // Which relies on Storybook's context and would throw an error in a test environment (and is a pain to mock).
+
 vi.mock('@storybook/addon-docs/blocks', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('@storybook/addon-docs/blocks')>()),
+  ...(await (
+    importOriginal as () => Promise<
+      typeof import('@storybook/addon-docs/blocks')
+    >
+  )()),
   Controls: () => <div>Controls rendered</div>,
 }));
 
 describe('ComponentApiExpander', () => {
   it('renders expander with the correct defaults', () => {
-    render(<ComponentApiExpander story={{}} />);
+    render(<ComponentApiExpander of={{}} />);
 
     // Props is the default heading, and should be closed by default
     const expander = screen.getByRole('button', { name: 'Props' });
@@ -24,7 +29,7 @@ describe('ComponentApiExpander', () => {
   });
 
   it('opens the expander automatically when the hash is changed', async () => {
-    render(<ComponentApiExpander story={{}} />);
+    render(<ComponentApiExpander of={{}} />);
 
     const expander = screen.getByRole('button', {
       name: 'Props',

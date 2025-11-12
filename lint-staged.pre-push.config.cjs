@@ -6,7 +6,18 @@ const {
 } = require('./shared/lint-staged-base.config.cjs');
 
 /**
- * Adds workspace-specific typecheck and test:coverage commands for affected workspaces
+ * Creates a command to check coverage for specific files using the standalone script
+ * @param {string} workspaceDir - Workspace directory path
+ * @param {string[]} changedFiles - Array of changed file paths in the workspace
+ * @returns {string} Command to verify coverage threshold
+ */
+const createCoverageCheckCommand = (workspaceDir, changedFiles) => {
+  const filesArg = changedFiles.map((f) => path.basename(f)).join(',');
+  return `yarn check-coverage --workspace ${workspaceDir} --files "${filesArg}"`;
+};
+
+/**
+ * Adds workspace-specific typecheck, test:coverage, and coverage check commands for affected workspaces
  * @param {string[]} files - Array of file paths
  * @param {string[]} commands - Array to append commands to
  * @param {boolean} excludeTestFiles - Whether to exclude test files from analysis
@@ -51,10 +62,16 @@ const addWorkspaceCommands = (files, commands, excludeTestFiles = true) => {
             commands.push(`yarn workspace ${packageJson.name} run typecheck`);
           }
 
-          // Check if the workspace has a test script
+          // Check if the workspace has a test:coverage script
           if (packageJson.scripts?.['test:coverage'] && packageJson.name) {
             commands.push(
               `yarn workspace ${packageJson.name} run test:coverage`,
+            );
+
+            // Add coverage check for the changed files in this workspace
+            const workspaceChangedFiles = workspaceFiles[workspaceName];
+            commands.push(
+              createCoverageCheckCommand(workspaceDir, workspaceChangedFiles),
             );
           }
           break;
@@ -80,6 +97,7 @@ module.exports = {
     ];
 
     // Add targeted testing for files in workspaces that have test scripts
+    // This will also check coverage threshold for changed files
     addWorkspaceCommands(files, commands, true);
 
     return commands;

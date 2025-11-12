@@ -1,0 +1,170 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main, 5.x]
+  push:
+    branches: [main, 5.x]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '22'
+  YARN_VERSION: '4.10.3'
+  INSTALL_CACHE_PATHS: |
+    .yarn/cache
+    .yarn/unplugged
+    node_modules
+    packages/*/node_modules
+  BUILD_CACHE_PATHS: |
+    packages/*/dist
+    packages/components/src/styled-system
+    packages/tokens/src/generated
+
+jobs:
+  setup:
+    name: Setup
+    runs-on:
+      group: wealth-actions-runners
+    outputs:
+      yarn-cache-install-hit: ${{ steps.yarn-cache.outputs.cache-hit }}
+      yarn-cache-build-hit: ${{ steps.yarn-cache-build.outputs.cache-hit }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Cache Yarn dependencies
+        id: yarn-cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.INSTALL_CACHE_PATHS }}
+          key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            yarn-${{ runner.os }}-
+      - name: Cache Yarn build
+        id: yarn-cache-build
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.BUILD_CACHE_PATHS }}
+          key: yarn-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            yarn-${{ runner.os }}-
+      - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+      - name: Build dependencies
+        if: steps.yarn-cache-build.outputs.cache-hit != 'true'
+        run: yarn build
+
+  validate:
+    name: Validate
+    runs-on:
+      group: wealth-actions-runners
+    needs: setup
+    strategy:
+      matrix:
+        check: [lint, typecheck, test:ci]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Restore Yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.INSTALL_CACHE_PATHS }}
+          key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Restore build outputs
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.BUILD_CACHE_PATHS }}
+          key: yarn-${{ runner.os }}-${{ github.run_id }}
+      - name: Install the correct dependencies
+        run: yarn install --immutable
+      - name: Run ${{ matrix.check }}
+        run: yarn ${{ matrix.check }}
+
+  build:
+    name: Build
+    runs-on:
+      group: wealth-actions-runners
+    needs: setup
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Restore Yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.INSTALL_CACHE_PATHS }}
+          key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Restore build outputs
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.BUILD_CACHE_PATHS }}
+          key: yarn-${{ runner.os }}-${{ github.run_id }}
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: |
+            packages/*/dist/
+          retention-days: 7
+
+  storybook:
+    name: Storybook
+    runs-on:
+      group: wealth-actions-runners
+    needs: setup
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Restore Yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.INSTALL_CACHE_PATHS }}
+          key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Restore build outputs
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.BUILD_CACHE_PATHS }}
+          key: yarn-${{ runner.os }}-${{ github.run_id }}
+      - name: Install the correct dependencies
+        run: yarn install --immutable
+      - name: Build Storybook
+        run: yarn build-storybook
+      - name: Upload Storybook build
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-static
+          path: |
+            packages/*/storybook-static/
+            storybook-static/
+          retention-days: 7
+
+  validated:
+    name: Validated
+    runs-on:
+      group: wealth-actions-runners
+    needs: validate
+    steps:
+      - name: All validate jobs passed ✅
+        run: echo "✅ All lint, typecheck, and test jobs passed."

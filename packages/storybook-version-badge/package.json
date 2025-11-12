@@ -31,7 +31,6 @@
     "test:coverage": "vitest run --config vitest.config.ts --coverage",
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
     "serve": "yarn storybook:serve-addon packages/storybook-version-badge",
     "watch": "yarn build --watch"
   },

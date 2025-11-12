@@ -13,6 +13,7 @@ export default [
       'apps/**', // Let project configs handle their own linting
       'packages/**', // Let project configs handle their own linting
       'output/**',
+      'scripts/**',
       'ci/**',
       'src/generated/**', // Ignore generated files
     ],

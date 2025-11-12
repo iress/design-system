@@ -5,6 +5,7 @@ import { ModuleExports, StoryAnnotations } from 'storybook/internal/types';
 
 // We mock the @storybook/addon-docs/blocks package to avoid rendering the actual DocsContainer component,
 // Which relies on Storybook's context and would throw an error in a test environment (and is a pain to mock).
+
 vi.mock('@storybook/addon-docs/blocks', async (importOriginal) => ({
   ...(await importOriginal<typeof import('@storybook/addon-docs/blocks')>()),
   useOf: () => ({
@@ -19,11 +20,13 @@ vi.mock('@storybook/addon-docs/blocks', async (importOriginal) => ({
 }));
 
 // Mock the ComponentCanvas to avoid hook issues
+
 vi.mock('./ComponentCanvas', () => ({
   ComponentCanvas: () => <div>Canvas rendered</div>,
 }));
 
 // Mock ComponentApiExpander to avoid import issues
+
 vi.mock('./ComponentApiExpander', () => ({
   ComponentApiExpander: () => (
     <div>

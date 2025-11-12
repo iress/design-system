@@ -12,10 +12,16 @@ export const useAddonConfigForManager = () => {
   useEffect(() => {
     const channel = addons.getChannel();
 
-    const handleOptions = (options: AddonConfig | undefined) => {
-      setAddonConfig(options);
-      if (options) {
-        registerOkta(options);
+    const handleOptions = (options: AddonConfig | string | undefined) => {
+      const config =
+        typeof options === 'string'
+          ? (JSON.parse(options) as AddonConfig)
+          : options;
+
+      setAddonConfig(config);
+
+      if (config) {
+        registerOkta(config);
       }
     };
 
@@ -31,5 +37,12 @@ export const useAddonConfigForManager = () => {
 };
 
 export const getAddonConfigForPreview = () => {
-  return process.env.IDS_OKTA as unknown as AddonConfig | undefined;
+  const fromEnv = process.env.IDS_OKTA as unknown as
+    | AddonConfig
+    | string
+    | undefined;
+
+  return typeof fromEnv === 'string'
+    ? (JSON.parse(fromEnv) as AddonConfig)
+    : fromEnv;
 };

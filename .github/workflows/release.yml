@@ -1,0 +1,239 @@
+name: Production Release
+
+on:
+  workflow_run:
+    workflows: ['CI']
+    types: [completed]
+    branches:
+      - main
+      - 5.x
+
+permissions:
+  id-token: write
+  contents: write
+
+env:
+  NODE_VERSION: '22'
+  YARN_VERSION: '4.10.3'
+
+jobs:
+  release:
+    name: Production Release
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'iress-oss'
+    environment: npm-publishing
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check CI Success
+        if: github.event.workflow_run.conclusion != 'success'
+        run: |
+          echo "❌ CI workflow did not succeed. Skipping release."
+          exit 1
+
+      - name: Detect version changes
+        id: version-check
+        run: |
+          echo "Checking for version changes in public packages..."
+
+          # Get the list of changed files in the commit
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+
+          # Check if any package.json files changed
+          CHANGED_PACKAGES=$(echo "$CHANGED_FILES" | grep -E 'packages/.*/package\.json$' || true)
+
+          if [ -z "$CHANGED_PACKAGES" ]; then
+            echo "No package.json files changed"
+            echo "has_version_changes=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "Changed package.json files:"
+          echo "$CHANGED_PACKAGES"
+
+          # Check if version field changed and collect package names
+          PACKAGES_TO_PUBLISH=""
+
+          for PKG_FILE in $CHANGED_PACKAGES; do
+            # Check if the version field changed
+            VERSION_DIFF=$(git diff HEAD~1 HEAD -- "$PKG_FILE" | grep -E '^\+.*"version":|^\-.*"version":' || true)
+            
+            if [ -n "$VERSION_DIFF" ]; then
+              echo "Version changed in $PKG_FILE"
+              echo "$VERSION_DIFF"
+              
+              # Extract package name from package.json
+              PACKAGE_NAME=$(jq -r '.name' "$PKG_FILE")
+              
+              # Check if package is private
+              IS_PRIVATE=$(jq -r '.private // false' "$PKG_FILE")
+              
+              if [ "$IS_PRIVATE" != "true" ]; then
+                echo "  → Package: $PACKAGE_NAME (public)"
+                PACKAGES_TO_PUBLISH="$PACKAGES_TO_PUBLISH $PACKAGE_NAME"
+              else
+                echo "  → Package: $PACKAGE_NAME (private, skipping)"
+              fi
+            fi
+          done
+
+          if [ -n "$PACKAGES_TO_PUBLISH" ]; then
+            # Trim leading/trailing whitespace
+            PACKAGES_TO_PUBLISH=$(echo "$PACKAGES_TO_PUBLISH" | xargs)
+            echo "✅ Packages to publish: $PACKAGES_TO_PUBLISH"
+            echo "has_version_changes=true" >> $GITHUB_OUTPUT
+            echo "packages_to_publish=$PACKAGES_TO_PUBLISH" >> $GITHUB_OUTPUT
+          else
+            echo "ℹ️ No public packages with version changes detected. Skipping release."
+            echo "has_version_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup Node.js
+        if: steps.version-check.outputs.has_version_changes == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Enable Corepack
+        if: steps.version-check.outputs.has_version_changes == 'true'
+        run: corepack enable
+
+      - name: Install dependencies
+        if: steps.version-check.outputs.has_version_changes == 'true'
+        run: yarn install --immutable
+
+      - name: Build packages
+        if: steps.version-check.outputs.has_version_changes == 'true'
+        run: yarn build
+
+      - name: Publish to NPM
+        if: steps.version-check.outputs.has_version_changes == 'true'
+        id: publish
+        run: |
+          PACKAGES="${{ steps.version-check.outputs.packages_to_publish }}"
+
+          echo "Publishing packages: $PACKAGES"
+
+          # Store package info for GitHub releases
+          RELEASE_INFO=""
+
+          for PACKAGE in $PACKAGES; do
+            echo "Publishing $PACKAGE..."
+            
+            # Get package.json path
+            PKG_PATH=$(yarn workspaces list --json | jq -r "select(.name == \"$PACKAGE\") | .location")
+            PKG_FILE="$PKG_PATH/package.json"
+            
+            # Extract version from package.json
+            VERSION=$(jq -r '.version' "$PKG_FILE")
+            echo "  Version: $VERSION"
+            
+            # Determine npm tag based on version
+            if [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+-([a-zA-Z]+) ]]; then
+              # Has prerelease identifier (e.g., alpha, beta, rc)
+              NPM_TAG="${BASH_REMATCH[1]}"
+              IS_PRERELEASE="true"
+              echo "  NPM Tag: $NPM_TAG (prerelease)"
+            else
+              # Stable version
+              NPM_TAG="latest"
+              IS_PRERELEASE="false"
+              echo "  NPM Tag: $NPM_TAG (stable)"
+            fi
+            
+            # Publish with determined tag
+            yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public --provenance
+            echo "  ✅ Published $PACKAGE@$VERSION with tag '$NPM_TAG'"
+            
+            # Store info for GitHub releases (package,version,prerelease)
+            RELEASE_INFO="${RELEASE_INFO}${PACKAGE}|${VERSION}|${IS_PRERELEASE};"
+          done
+
+          echo "✅ All packages published successfully"
+
+          # Output release info
+          echo "release_info=$RELEASE_INFO" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Releases
+        if: steps.version-check.outputs.has_version_changes == 'true'
+        run: |
+          RELEASE_INFO="${{ steps.publish.outputs.release_info }}"
+
+          echo "Creating GitHub releases and tags..."
+
+          # Split by semicolon to get each package entry
+          IFS=';' read -ra RELEASES <<< "$RELEASE_INFO"
+
+          for RELEASE_ENTRY in "${RELEASES[@]}"; do
+            if [ -z "$RELEASE_ENTRY" ]; then
+              continue
+            fi
+            
+            # Split by pipe to get package, version, and prerelease flag
+            IFS='|' read -r PACKAGE VERSION IS_PRERELEASE <<< "$RELEASE_ENTRY"
+            
+            # Create tag name (e.g., @iress-oss/ids-components@1.2.3)
+            TAG_NAME="${PACKAGE}@${VERSION}"
+            
+            echo "Creating release for $TAG_NAME..."
+            
+            # Determine prerelease flag
+            if [ "$IS_PRERELEASE" = "true" ]; then
+              PRERELEASE_FLAG="--prerelease"
+              RELEASE_TYPE="Pre-release"
+            else
+              PRERELEASE_FLAG=""
+              RELEASE_TYPE="Release"
+            fi
+            
+            # Find previous tag for this package
+            PREV_TAG=$(git tag -l "${PACKAGE}@*" --sort=-version:refname | head -n 1 || echo "")
+            
+            # Create temporary file for notes with custom header
+            NOTES_FILE=$(mktemp)
+            {
+              echo "**$RELEASE_TYPE** of \`$PACKAGE\` version \`$VERSION\`"
+              echo ""
+              echo "## Installation"
+              echo ""
+              echo "\`\`\`bash"
+              echo "npm install ${PACKAGE}@${VERSION}"
+              echo "\`\`\`"
+              echo ""
+              echo "📦 [View on npm](https://www.npmjs.com/package/${PACKAGE}/v/${VERSION})"
+              echo ""
+              echo "---"
+            } > "$NOTES_FILE"
+            
+            # Create GitHub release with auto-generated notes
+            # The --generate-notes flag uses GitHub's AI-powered release notes generation
+            # which analyzes PRs, categorizes changes, and lists contributors
+            if [ -n "$PREV_TAG" ]; then
+              echo "  Generating AI-powered release notes from $PREV_TAG to HEAD..."
+              gh release create "$TAG_NAME" \
+                --title "$PACKAGE $VERSION" \
+                --notes-file "$NOTES_FILE" \
+                --generate-notes \
+                --notes-start-tag "$PREV_TAG" \
+                $PRERELEASE_FLAG \
+                --target ${{ github.sha }}
+            else
+              echo "  First release - generating notes..."
+              gh release create "$TAG_NAME" \
+                --title "$PACKAGE $VERSION" \
+                --notes-file "$NOTES_FILE" \
+                --generate-notes \
+                $PRERELEASE_FLAG \
+                --target ${{ github.sha }}
+            fi
+            
+            echo "  ✅ Created release and tag: $TAG_NAME"
+            
+            # Clean up temp file
+            rm -f "$NOTES_FILE"
+          done
+
+          echo "✅ All GitHub releases created successfully"

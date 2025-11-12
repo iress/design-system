@@ -1,5 +1,6 @@
 import { defineMain } from '@storybook/react-vite/node';
-import { autoReloadManagerHead } from '../../../shared/storybook-addon-dev';
+// @ts-expect-error This is only for dev purposes, and Storybook main cannot work with the ts for now
+import { autoReloadManagerHead } from '../../../shared/storybook-addon-dev.cjs';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env' });

@@ -36,7 +36,6 @@
   "scripts": {
     "analyse": "yarn vite-bundle-visualizer",
     "build": "vite build",
-    "build-storybook": "storybook build",
     "dev": "yarn storybook",
     "clean": "rimraf dist coverage storybook-static",
     "lint": "eslint . --ext=.js,.jsx,.ts,.tsx,.mjs,.cjs,.mdx --max-warnings=0",
@@ -80,6 +79,7 @@
     "eslint-plugin-file-progress": "^3.0.2",
     "eslint-plugin-mdx": "^3.6.2",
     "eslint-plugin-prettier": "^5.5.4",
+    "happy-dom": "^20.0.8",
     "jsdom": "^26.1.0",
     "json5": "^2.2.3",
     "prettier": "^3.6.2",

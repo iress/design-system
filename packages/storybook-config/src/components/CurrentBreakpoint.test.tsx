@@ -14,6 +14,7 @@ const breakpointDetail: BreakpointDetail = {
 
 vi.mock('@iress-oss/ids-components', async () => {
   const original = await vi.importActual('@iress-oss/ids-components');
+
   return {
     ...original,
     useBreakpoint: () => ({
