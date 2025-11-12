@@ -50,8 +50,7 @@ jobs:
             --workflow=ci.yml \
             --branch=${{ github.ref_name }} \
             --json conclusion \
-            --limit 1 \
-            --jq '.[0].conclusion'
+            --limit 1
 
           # Get the latest CI run for this branch
           CI_STATUS=$(gh run list \
