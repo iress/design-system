@@ -73,7 +73,7 @@
     "tsup": "^8.2.4",
     "typescript": "^5.8.2",
     "vite": "^7.1.7",
-    "vitest": "3.2.4"
+    "vitest": "4.0.8"
   },
   "peerDependencies": {
     "@storybook/addon-docs": "^9.0.0",
