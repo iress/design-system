@@ -142,7 +142,7 @@ jobs:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: build-output
           path: |
@@ -177,7 +177,7 @@ jobs:
       - name: Build Storybook
         run: yarn build-storybook
       - name: Upload Storybook build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: storybook-static
           path: |
