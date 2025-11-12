@@ -1621,12 +1621,12 @@ __metadata:
     react-dropzone: "npm:14.3.8"
     react-hook-form: "npm:7.55.0"
     rimraf: "npm:^6.0.1"
-    typescript: "npm:5.8.2"
+    typescript: "npm:5.9.3"
     use-debounce: "npm:10.0.6"
     vite: "npm:^7.1.7"
     vite-bundle-visualizer: "npm:^1.2.1"
     vite-plugin-dts: "npm:4.5.4"
-    vite-plugin-static-copy: "npm:3.1.2"
+    vite-plugin-static-copy: "npm:3.1.4"
     vite-tsconfig-paths: "npm:^5.1.4"
     vitest: "npm:3.2.4"
   languageName: unknown
@@ -1644,10 +1644,10 @@ __metadata:
     minimist: "npm:1.2.8"
     playwright: "npm:1.55.0"
     rimraf: "npm:6.0.1"
-    tsx: "npm:4.20.5"
+    tsx: "npm:4.20.6"
     turndown: "npm:7.2.1"
     turndown-plugin-gfm: "npm:1.0.2"
-    typescript: "npm:5.8.2"
+    typescript: "npm:5.9.3"
     vitest: "npm:3.2.4"
     zod: "npm:3.25.76"
   bin:
@@ -1701,7 +1701,7 @@ __metadata:
     rollup-plugin-tree-shakeable: "npm:^2.0.0"
     storybook: "npm:^9.0.0"
     storybook-addon-tag-badges: "npm:^2.0.2"
-    typescript: "npm:^5.8.2"
+    typescript: "npm:^5.9.3"
     vite: "npm:^7.1.7"
     vite-bundle-visualizer: "npm:^1.2.1"
     vite-plugin-dts: "npm:^4.5.4"
@@ -1756,7 +1756,7 @@ __metadata:
     react-dom: "npm:^18.3.1"
     storybook: "npm:^9.1.0"
     tsup: "npm:^8.2.4"
-    typescript: "npm:^5.8.2"
+    typescript: "npm:^5.9.3"
     vite: "npm:^7.1.7"
     vitest: "npm:3.2.4"
   peerDependencies:
@@ -1798,7 +1798,7 @@ __metadata:
     react-live: "npm:^4.1.8"
     storybook: "npm:^9.1.0"
     tsup: "npm:^8.2.4"
-    typescript: "npm:^5.8.2"
+    typescript: "npm:^5.9.3"
     vite: "npm:^7.1.7"
     vitest: "npm:3.2.4"
   peerDependencies:
@@ -1838,7 +1838,7 @@ __metadata:
     react-dom: "npm:^18.3.1"
     storybook: "npm:^9.1.0"
     tsup: "npm:^8.2.4"
-    typescript: "npm:^5.8.2"
+    typescript: "npm:^5.9.3"
     vite: "npm:^7.1.7"
     vitest: "npm:3.2.4"
   peerDependencies:
@@ -1872,7 +1872,7 @@ __metadata:
     react-dom: "npm:^18.3.1"
     storybook: "npm:^9.1.0"
     tsup: "npm:^8.2.4"
-    typescript: "npm:^5.8.2"
+    typescript: "npm:^5.9.3"
     vite: "npm:^7.1.7"
     vitest: "npm:3.2.4"
   peerDependencies:
@@ -1908,8 +1908,8 @@ __metadata:
     rimraf: "npm:^6.0.1"
     rollup-plugin-tree-shakeable: "npm:^2.0.0"
     style-dictionary: "npm:^5.0.4"
-    tsx: "npm:^4.20.5"
-    typescript: "npm:^5.8.2"
+    tsx: "npm:^4.20.6"
+    typescript: "npm:^5.9.3"
     vite: "npm:^7.1.7"
     vite-bundle-visualizer: "npm:^1.2.1"
     vite-plugin-dts: "npm:^4.5.4"
@@ -6933,7 +6933,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:^11.3.0, fs-extra@npm:~11.3.0":
+"fs-extra@npm:~11.3.0":
   version: 11.3.2
   resolution: "fs-extra@npm:11.3.2"
   dependencies:
@@ -12679,23 +12679,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsx@npm:4.20.5":
-  version: 4.20.5
-  resolution: "tsx@npm:4.20.5"
-  dependencies:
-    esbuild: "npm:~0.25.0"
-    fsevents: "npm:~2.3.3"
-    get-tsconfig: "npm:^4.7.5"
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  bin:
-    tsx: dist/cli.mjs
-  checksum: 10c0/70f9bf746be69281312a369c712902dbf9bcbdd9db9184a4859eb4859c36ef0c5a6d79b935c1ec429158ee73fd6584089400ae8790345dae34c5b0222bdb94f3
-  languageName: node
-  linkType: hard
-
-"tsx@npm:^4.20.5, tsx@npm:^4.20.6":
+"tsx@npm:4.20.6, tsx@npm:^4.20.6":
   version: 4.20.6
   resolution: "tsx@npm:4.20.6"
   dependencies:
@@ -12788,7 +12772,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:>=5, typescript@npm:^5.8.2, typescript@npm:^5.9.3":
+"typescript@npm:5.9.3, typescript@npm:>=5, typescript@npm:^5.9.3":
   version: 5.9.3
   resolution: "typescript@npm:5.9.3"
   bin:
@@ -12818,7 +12802,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A>=5#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.8.2#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.9.3#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A>=5#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.9.3#optional!builtin<compat/typescript>":
   version: 5.9.3
   resolution: "typescript@patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"
   bin:
@@ -13252,18 +13236,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-static-copy@npm:3.1.2":
-  version: 3.1.2
-  resolution: "vite-plugin-static-copy@npm:3.1.2"
+"vite-plugin-static-copy@npm:3.1.4":
+  version: 3.1.4
+  resolution: "vite-plugin-static-copy@npm:3.1.4"
   dependencies:
     chokidar: "npm:^3.6.0"
-    fs-extra: "npm:^11.3.0"
     p-map: "npm:^7.0.3"
     picocolors: "npm:^1.1.1"
-    tinyglobby: "npm:^0.2.14"
+    tinyglobby: "npm:^0.2.15"
   peerDependencies:
     vite: ^5.0.0 || ^6.0.0 || ^7.0.0
-  checksum: 10c0/1a65f4c9d291cc27483a5b225b1ac5610edc3aa2f13fa3a76a77327874c83bbee52e1011ee0bf5b0168b9b7b974213d49fe800e44af398cfbcb6607814b45c5b
+  checksum: 10c0/e733eb123db9ebefbd9c6e5a589f2bfdf71c047ce87190f45575806d893cf19547043ed4a95f30df49d2ac57cb1ba59b3692c559e91181c2321ba363da6c27d3
   languageName: node
   linkType: hard
 
