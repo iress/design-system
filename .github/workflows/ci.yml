@@ -159,3 +159,12 @@ jobs:
             packages/*/storybook-static/
             storybook-static/
           retention-days: 7
+
+  validated:
+    name: Validated
+    runs-on:
+      group: wealth-actions-runners
+    needs: validate
+    steps:
+      - name: All validate jobs passed ✅
+        run: echo "✅ All lint, typecheck, and test jobs passed."
