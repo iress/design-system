@@ -63,6 +63,7 @@
     "lint": "yarn monorepo run lint",
     "test": "yarn monorepo run test",
     "test:coverage": "yarn monorepo run test:coverage",
+    "test:ci": "yarn test:coverage && yarn check-coverage --all",
     "typecheck": "yarn monorepo run typecheck",
     "monorepo": "yarn workspaces foreach -Ai --topological-dev --exclude=@iress/design-system-monorepo"
   }

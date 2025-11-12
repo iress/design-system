@@ -63,13 +63,13 @@ jobs:
         run: yarn build
 
   validate:
-    name: Code Quality
+    name: Validate
     runs-on:
       group: wealth-actions-runners
     needs: setup
     strategy:
       matrix:
-        check: [lint, typecheck]
+        check: [lint, typecheck, test:ci]
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js
@@ -123,36 +123,6 @@ jobs:
           path: |
             packages/*/dist/
           retention-days: 7
-
-  test:
-    name: Test
-    runs-on:
-      group: wealth-actions-runners
-    needs: setup
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Enable Corepack
-        run: corepack enable
-      - name: Restore Yarn dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.INSTALL_CACHE_PATHS }}
-          key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-      - name: Restore build outputs
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.BUILD_CACHE_PATHS }}
-          key: yarn-${{ runner.os }}-${{ github.run_id }}
-      - name: Install the correct dependencies
-        run: yarn install --immutable
-      - name: Run tests with coverage
-        run: yarn test:coverage
-      - name: Check coverage threshold
-        run: yarn check-coverage --all
 
   storybook:
     name: Storybook
