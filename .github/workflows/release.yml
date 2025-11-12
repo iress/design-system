@@ -1,4 +1,4 @@
-name: Production Release
+name: Release
 
 on:
   workflow_run:
@@ -17,10 +17,10 @@ env:
   YARN_VERSION: '4.10.3'
 
 jobs:
-  release:
-    name: Production Release
-    runs-on: ubuntu-latest
-    if: github.repository_owner == 'iress-oss'
+  packages:
+    name: Packages
+    runs-on:
+      group: wealth-actions-runners
     environment: npm-publishing
     steps:
       - uses: actions/checkout@v4
