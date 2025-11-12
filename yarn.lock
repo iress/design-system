@@ -1623,7 +1623,7 @@ __metadata:
     rimraf: "npm:^6.0.1"
     typescript: "npm:5.8.2"
     use-debounce: "npm:10.0.6"
-    vite: "npm:^7.1.7"
+    vite: "npm:^7.1.11"
     vite-bundle-visualizer: "npm:^1.2.1"
     vite-plugin-dts: "npm:4.5.4"
     vite-plugin-static-copy: "npm:3.1.2"
@@ -1702,7 +1702,7 @@ __metadata:
     storybook: "npm:^9.0.0"
     storybook-addon-tag-badges: "npm:^2.0.2"
     typescript: "npm:^5.8.2"
-    vite: "npm:^7.1.7"
+    vite: "npm:^7.1.11"
     vite-bundle-visualizer: "npm:^1.2.1"
     vite-plugin-dts: "npm:^4.5.4"
     vite-plugin-lib-inject-css: "npm:^2.2.2"
@@ -1723,7 +1723,7 @@ __metadata:
     react-dom: ^18 || ^19
     storybook: ^9.0.0
     storybook-addon-tag-badges: ^2.0.2
-    vite: ^7.1.7
+    vite: ^7.1.11
   languageName: unknown
   linkType: soft
 
@@ -1757,7 +1757,7 @@ __metadata:
     storybook: "npm:^9.1.0"
     tsup: "npm:^8.2.4"
     typescript: "npm:^5.8.2"
-    vite: "npm:^7.1.7"
+    vite: "npm:^7.1.11"
     vitest: "npm:3.2.4"
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
@@ -1799,7 +1799,7 @@ __metadata:
     storybook: "npm:^9.1.0"
     tsup: "npm:^8.2.4"
     typescript: "npm:^5.8.2"
-    vite: "npm:^7.1.7"
+    vite: "npm:^7.1.11"
     vitest: "npm:3.2.4"
   peerDependencies:
     "@storybook/addon-docs": ^9.0.0
@@ -1839,7 +1839,7 @@ __metadata:
     storybook: "npm:^9.1.0"
     tsup: "npm:^8.2.4"
     typescript: "npm:^5.8.2"
-    vite: "npm:^7.1.7"
+    vite: "npm:^7.1.11"
     vitest: "npm:3.2.4"
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
@@ -1873,7 +1873,7 @@ __metadata:
     storybook: "npm:^9.1.0"
     tsup: "npm:^8.2.4"
     typescript: "npm:^5.8.2"
-    vite: "npm:^7.1.7"
+    vite: "npm:^7.1.11"
     vitest: "npm:3.2.4"
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
@@ -1910,7 +1910,7 @@ __metadata:
     style-dictionary: "npm:^5.0.4"
     tsx: "npm:^4.20.5"
     typescript: "npm:^5.8.2"
-    vite: "npm:^7.1.7"
+    vite: "npm:^7.1.11"
     vite-bundle-visualizer: "npm:^1.2.1"
     vite-plugin-dts: "npm:^4.5.4"
     vite-tsconfig-paths: "npm:^5.1.4"
@@ -1965,7 +1965,7 @@ __metadata:
     ts-dedent: "npm:^2.2.0"
     tsx: "npm:^4.20.6"
     typescript: "npm:^5.9.3"
-    vite: "npm:^7.1.7"
+    vite: "npm:^7.1.11"
     wait-on: "npm:^9.0.1"
     ws: "npm:^8.18.3"
     zx: "npm:^8.8.4"
@@ -13255,7 +13255,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.0.0 || ^6.0.0 || ^7.0.0-0, vite@npm:^7.1.7":
+"vite@npm:^5.0.0 || ^6.0.0 || ^7.0.0-0":
   version: 7.1.7
   resolution: "vite@npm:7.1.7"
   dependencies:
@@ -13307,6 +13307,61 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 10c0/3f6bd61a65aaa81368f4dda804f0e23b103664724218ccb5a0b1a0c7e284df498107b57ced951dc40ae4c5d472435bc8fb5c836414e729ee7e102809eaf6ff80
+  languageName: node
+  linkType: hard
+
+"vite@npm:^7.1.11":
+  version: 7.1.12
+  resolution: "vite@npm:7.1.12"
+  dependencies:
+    esbuild: "npm:^0.25.0"
+    fdir: "npm:^6.5.0"
+    fsevents: "npm:~2.3.3"
+    picomatch: "npm:^4.0.3"
+    postcss: "npm:^8.5.6"
+    rollup: "npm:^4.43.0"
+    tinyglobby: "npm:^0.2.15"
+  peerDependencies:
+    "@types/node": ^20.19.0 || >=22.12.0
+    jiti: ">=1.21.0"
+    less: ^4.0.0
+    lightningcss: ^1.21.0
+    sass: ^1.70.0
+    sass-embedded: ^1.70.0
+    stylus: ">=0.54.8"
+    sugarss: ^5.0.0
+    terser: ^5.16.0
+    tsx: ^4.8.1
+    yaml: ^2.4.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    jiti:
+      optional: true
+    less:
+      optional: true
+    lightningcss:
+      optional: true
+    sass:
+      optional: true
+    sass-embedded:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    terser:
+      optional: true
+    tsx:
+      optional: true
+    yaml:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: 10c0/cef4d4b4a84e663e09b858964af36e916892ac8540068df42a05ced637ceeae5e9ef71c72d54f3cfc1f3c254af16634230e221b6e2327c2a66d794bb49203262
   languageName: node
   linkType: hard
 
