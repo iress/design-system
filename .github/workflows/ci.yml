@@ -109,7 +109,7 @@ jobs:
                 fi
                 
                 echo "⚠️ Tests failed on attempt $ATTEMPT. Retrying in 30 seconds..."
-                sleep 30
+                sleep 5
                 ATTEMPT=$((ATTEMPT + 1))
               fi
             done
