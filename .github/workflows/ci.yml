@@ -13,6 +13,13 @@ concurrency:
 env:
   NODE_VERSION: '22'
   YARN_VERSION: '4.10.3'
+  CACHE_PATHS: |
+    .yarn/cache
+    .yarn/unplugged
+    node_modules
+    packages/*/dist
+    packages/components/src/styled-system
+    packages/tokens/src/generated
 
 jobs:
   setup:
@@ -33,12 +40,7 @@ jobs:
         id: yarn-cache
         uses: actions/cache@v4
         with:
-          path: |
-            .yarn/cache
-            .yarn/unplugged
-            node_modules
-            packages/*/dist
-            packages/components/src/styled-system
+          path: ${{ env.CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             yarn-${{ runner.os }}-
@@ -68,12 +70,7 @@ jobs:
       - name: Restore Yarn dependencies
         uses: actions/cache@v4
         with:
-          path: |
-            .yarn/cache
-            .yarn/unplugged
-            node_modules
-            packages/*/dist
-            packages/components/src/styled-system
+          path: ${{ env.CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
         if: needs.setup.outputs.yarn-cache-hit != 'true'
@@ -97,12 +94,7 @@ jobs:
       - name: Restore Yarn dependencies
         uses: actions/cache@v4
         with:
-          path: |
-            .yarn/cache
-            .yarn/unplugged
-            node_modules
-            packages/*/dist
-            packages/components/src/styled-system
+          path: ${{ env.CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
         if: needs.setup.outputs.yarn-cache-hit != 'true'
@@ -134,12 +126,7 @@ jobs:
       - name: Restore Yarn dependencies
         uses: actions/cache@v4
         with:
-          path: |
-            .yarn/cache
-            .yarn/unplugged
-            node_modules
-            packages/*/dist
-            packages/components/src/styled-system
+          path: ${{ env.CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
         if: needs.setup.outputs.yarn-cache-hit != 'true'
@@ -165,12 +152,7 @@ jobs:
       - name: Restore Yarn dependencies
         uses: actions/cache@v4
         with:
-          path: |
-            .yarn/cache
-            .yarn/unplugged
-            node_modules
-            packages/*/dist
-            packages/components/src/styled-system
+          path: ${{ env.CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Download build artifacts
         uses: actions/download-artifact@v4
