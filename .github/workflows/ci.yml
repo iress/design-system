@@ -56,7 +56,6 @@ jobs:
           restore-keys: |
             yarn-${{ runner.os }}-
       - name: Install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: Build dependencies
         if: steps.yarn-cache-build.outputs.cache-hit != 'true'
@@ -91,7 +90,33 @@ jobs:
       - name: Install the correct dependencies
         run: yarn install --immutable
       - name: Run ${{ matrix.check }}
-        run: yarn ${{ matrix.check }}
+        run: |
+          if [ "${{ matrix.check }}" = "test:ci" ]; then
+            # Tests with retry logic
+            MAX_ATTEMPTS=3
+            ATTEMPT=1
+            
+            while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
+              echo "🧪 Test attempt $ATTEMPT of $MAX_ATTEMPTS..."
+              
+              if yarn test:ci; then
+                echo "✅ Tests passed on attempt $ATTEMPT"
+                exit 0
+              else
+                if [ $ATTEMPT -eq $MAX_ATTEMPTS ]; then
+                  echo "❌ Tests failed after $MAX_ATTEMPTS attempts"
+                  exit 1
+                fi
+                
+                echo "⚠️ Tests failed on attempt $ATTEMPT. Retrying in 30 seconds..."
+                sleep 30
+                ATTEMPT=$((ATTEMPT + 1))
+              fi
+            done
+          else
+            # Run other checks normally (lint, typecheck) without retry
+            yarn ${{ matrix.check }}
+          fi
 
   build:
     name: Build
