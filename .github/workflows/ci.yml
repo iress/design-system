@@ -13,12 +13,13 @@ concurrency:
 env:
   NODE_VERSION: '22'
   YARN_VERSION: '4.10.3'
-  CACHE_PATHS: |
+  INSTALL_CACHE_PATHS: |
     .yarn/cache
     .yarn/unplugged
     node_modules
-    packages/*/dist
     packages/*/node_modules
+  BUILD_CACHE_PATHS: |
+    packages/*/dist
     packages/components/src/styled-system
     packages/tokens/src/generated
 
@@ -28,7 +29,8 @@ jobs:
     runs-on:
       group: wealth-actions-runners
     outputs:
-      yarn-cache-hit: ${{ steps.yarn-cache.outputs.cache-hit }}
+      yarn-cache-install-hit: ${{ steps.yarn-cache.outputs.cache-hit }}
+      yarn-cache-build-hit: ${{ steps.yarn-cache-build.outputs.cache-hit }}
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js
@@ -41,15 +43,23 @@ jobs:
         id: yarn-cache
         uses: actions/cache@v4
         with:
-          path: ${{ env.CACHE_PATHS }}
+          path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            yarn-${{ runner.os }}-
+      - name: Cache Yarn build
+        id: yarn-cache-build
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.BUILD_CACHE_PATHS }}
+          key: yarn-${{ runner.os }}-${{ github.run_id }}
           restore-keys: |
             yarn-${{ runner.os }}-
       - name: Install dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: Build dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        if: steps.yarn-cache-build.outputs.cache-hit != 'true'
         run: yarn build
 
   validate:
@@ -71,11 +81,19 @@ jobs:
       - name: Restore Yarn dependencies
         uses: actions/cache@v4
         with:
-          path: ${{ env.CACHE_PATHS }}
+          path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
-        if: needs.setup.outputs.yarn-cache-hit != 'true'
+        if: needs.setup.outputs.yarn-cache-install-hit != 'true'
         run: yarn install --immutable
+      - name: Restore build outputs
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.BUILD_CACHE_PATHS }}
+          key: yarn-build-${{ github.run_id }}
+      - name: Build dependencies
+        if: needs.setup.outputs.yarn-cache-build-hit != 'true'
+        run: yarn build
       - name: Run ${{ matrix.check }}
         run: yarn ${{ matrix.check }}
 
@@ -95,13 +113,18 @@ jobs:
       - name: Restore Yarn dependencies
         uses: actions/cache@v4
         with:
-          path: ${{ env.CACHE_PATHS }}
+          path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
-        if: needs.setup.outputs.yarn-cache-hit != 'true'
+        if: needs.setup.outputs.yarn-cache-install-hit != 'true'
         run: yarn install --immutable
+      - name: Restore build outputs
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.BUILD_CACHE_PATHS }}
+          key: yarn-build-${{ github.run_id }}
       - name: Build all packages
-        if: needs.setup.outputs.yarn-cache-hit != 'true'
+        if: needs.setup.outputs.yarn-cache-build-hit != 'true'
         run: yarn build
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -127,11 +150,19 @@ jobs:
       - name: Restore Yarn dependencies
         uses: actions/cache@v4
         with:
-          path: ${{ env.CACHE_PATHS }}
+          path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
-        if: needs.setup.outputs.yarn-cache-hit != 'true'
+        if: needs.setup.outputs.yarn-cache-install-hit != 'true'
         run: yarn install --immutable
+      - name: Restore build outputs
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.BUILD_CACHE_PATHS }}
+          key: yarn-build-${{ github.run_id }}
+      - name: Build dependencies
+        if: needs.setup.outputs.yarn-cache-build-hit != 'true'
+        run: yarn build
       - name: Run tests with coverage
         run: yarn test:coverage
       - name: Check coverage threshold
@@ -153,7 +184,7 @@ jobs:
       - name: Restore Yarn dependencies
         uses: actions/cache@v4
         with:
-          path: ${{ env.CACHE_PATHS }}
+          path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Download build artifacts
         uses: actions/download-artifact@v4
@@ -168,4 +199,4 @@ jobs:
           path: |
             packages/*/storybook-static/
             storybook-static/
-          retention-days: 30
+          retention-days: 7
