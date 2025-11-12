@@ -5,7 +5,7 @@ import { ModuleExports, StoryAnnotations } from 'storybook/internal/types';
 
 // We mock the @storybook/addon-docs/blocks package to avoid rendering the actual DocsContainer component,
 // Which relies on Storybook's context and would throw an error in a test environment (and is a pain to mock).
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+
 vi.mock('@storybook/addon-docs/blocks', async (importOriginal) => ({
   ...(await (
     importOriginal as () => Promise<
@@ -24,13 +24,13 @@ vi.mock('@storybook/addon-docs/blocks', async (importOriginal) => ({
 }));
 
 // Mock the ComponentCanvas to avoid hook issues
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+
 vi.mock('./ComponentCanvas', () => ({
   ComponentCanvas: () => <div>Canvas rendered</div>,
 }));
 
 // Mock ComponentApiExpander to avoid import issues
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+
 vi.mock('./ComponentApiExpander', () => ({
   ComponentApiExpander: ({
     heading = 'Props',

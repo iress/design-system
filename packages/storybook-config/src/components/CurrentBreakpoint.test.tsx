@@ -12,11 +12,9 @@ const breakpointDetail: BreakpointDetail = {
   viewportWidth: 1366,
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
 vi.mock('@iress-oss/ids-components', async () => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
   const original = await vi.importActual('@iress-oss/ids-components');
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+
   return {
     ...original,
     useBreakpoint: () => ({

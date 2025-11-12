@@ -5,11 +5,11 @@ import { type ControlProps } from '@storybook/addon-docs/blocks';
 
 // We mock the @storybook/addon-docs/blocks package to avoid rendering the actual Controls component,
 // Which relies on Storybook's context and would throw an error in a test environment (and is a pain to mock).
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+
 const controlsProps = vi.fn() as unknown;
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+
 const categoryClick = vi.fn() as unknown;
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+
 vi.mock('@storybook/addon-docs/blocks', async (importOriginal) => ({
   ...(await (
     importOriginal as () => Promise<

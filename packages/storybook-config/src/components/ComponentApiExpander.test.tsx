@@ -4,7 +4,7 @@ import { ComponentApiExpander } from './ComponentApiExpander';
 
 // We mock the @storybook/addon-docs/blocks package to avoid rendering the actual Controls component,
 // Which relies on Storybook's context and would throw an error in a test environment (and is a pain to mock).
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+
 vi.mock('@storybook/addon-docs/blocks', async (importOriginal) => ({
   ...(await (
     importOriginal as () => Promise<
