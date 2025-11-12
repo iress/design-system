@@ -83,17 +83,13 @@ jobs:
         with:
           path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-      - name: Install dependencies
-        if: needs.setup.outputs.yarn-cache-install-hit != 'true'
-        run: yarn install --immutable
       - name: Restore build outputs
         uses: actions/cache@v4
         with:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
-      - name: Build dependencies
-        if: needs.setup.outputs.yarn-cache-build-hit != 'true'
-        run: yarn build
+      - name: Install the correct dependencies
+        run: yarn install --immutable
       - name: Run ${{ matrix.check }}
         run: yarn ${{ matrix.check }}
 
@@ -115,17 +111,11 @@ jobs:
         with:
           path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-      - name: Install dependencies
-        if: needs.setup.outputs.yarn-cache-install-hit != 'true'
-        run: yarn install --immutable
       - name: Restore build outputs
         uses: actions/cache@v4
         with:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
-      - name: Build all packages
-        if: needs.setup.outputs.yarn-cache-build-hit != 'true'
-        run: yarn build
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -152,17 +142,13 @@ jobs:
         with:
           path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-      - name: Install dependencies
-        if: needs.setup.outputs.yarn-cache-install-hit != 'true'
-        run: yarn install --immutable
       - name: Restore build outputs
         uses: actions/cache@v4
         with:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
-      - name: Build dependencies
-        if: needs.setup.outputs.yarn-cache-build-hit != 'true'
-        run: yarn build
+      - name: Install the correct dependencies
+        run: yarn install --immutable
       - name: Run tests with coverage
         run: yarn test:coverage
       - name: Check coverage threshold
@@ -191,6 +177,8 @@ jobs:
         with:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
+      - name: Install the correct dependencies
+        run: yarn install --immutable
       - name: Build Storybook
         run: yarn build-storybook
       - name: Upload Storybook build
