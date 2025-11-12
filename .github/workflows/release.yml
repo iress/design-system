@@ -37,46 +37,54 @@ jobs:
       - name: Detect version changes
         id: version-check
         run: |
-          echo "Checking for version changes in public packages..."
+          echo "Checking for packages that need publishing..."
 
-          # Get the list of changed files in the commit
-          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+          # Get all package.json files in the packages directory
+          PACKAGE_FILES=$(find packages -name 'package.json' -type f)
 
-          # Check if any package.json files changed
-          CHANGED_PACKAGES=$(echo "$CHANGED_FILES" | grep -E 'packages/.*/package\.json$' || true)
-
-          if [ -z "$CHANGED_PACKAGES" ]; then
-            echo "No package.json files changed"
-            echo "has_version_changes=false" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
-          echo "Changed package.json files:"
-          echo "$CHANGED_PACKAGES"
-
-          # Check if version field changed and collect package names
           PACKAGES_TO_PUBLISH=""
 
-          for PKG_FILE in $CHANGED_PACKAGES; do
-            # Check if the version field changed
-            VERSION_DIFF=$(git diff HEAD~1 HEAD -- "$PKG_FILE" | grep -E '^\+.*"version":|^\-.*"version":' || true)
+          for PKG_FILE in $PACKAGE_FILES; do
+            # Extract package name and version
+            PACKAGE_NAME=$(jq -r '.name' "$PKG_FILE")
+            LOCAL_VERSION=$(jq -r '.version' "$PKG_FILE")
+            IS_PRIVATE=$(jq -r '.private // false' "$PKG_FILE")
             
-            if [ -n "$VERSION_DIFF" ]; then
-              echo "Version changed in $PKG_FILE"
-              echo "$VERSION_DIFF"
+            # Skip private packages
+            if [ "$IS_PRIVATE" = "true" ]; then
+              echo "Skipping private package: $PACKAGE_NAME"
+              continue
+            fi
+            
+            echo "Checking $PACKAGE_NAME (local: v$LOCAL_VERSION)..."
+            
+            # Check npm registry for the latest published version
+            REGISTRY_VERSION=$(npm view "$PACKAGE_NAME" version 2>/dev/null || echo "not-published")
+            
+            if [ "$REGISTRY_VERSION" = "not-published" ]; then
+              echo "  → Not yet published to npm registry"
+              echo "  → Will publish v$LOCAL_VERSION"
+              PACKAGES_TO_PUBLISH="$PACKAGES_TO_PUBLISH $PACKAGE_NAME"
+            elif [ "$LOCAL_VERSION" != "$REGISTRY_VERSION" ]; then
+              echo "  → Registry version: v$REGISTRY_VERSION"
+              echo "  → Local version: v$LOCAL_VERSION"
               
-              # Extract package name from package.json
-              PACKAGE_NAME=$(jq -r '.name' "$PKG_FILE")
+              # Use Node.js to compare semver versions
+              SHOULD_PUBLISH=$(node -e "
+                const semver = require('semver');
+                const local = '$LOCAL_VERSION';
+                const registry = '$REGISTRY_VERSION';
+                console.log(semver.gt(local, registry) ? 'yes' : 'no');
+              ")
               
-              # Check if package is private
-              IS_PRIVATE=$(jq -r '.private // false' "$PKG_FILE")
-              
-              if [ "$IS_PRIVATE" != "true" ]; then
-                echo "  → Package: $PACKAGE_NAME (public)"
+              if [ "$SHOULD_PUBLISH" = "yes" ]; then
+                echo "  → Local version is newer, will publish"
                 PACKAGES_TO_PUBLISH="$PACKAGES_TO_PUBLISH $PACKAGE_NAME"
               else
-                echo "  → Package: $PACKAGE_NAME (private, skipping)"
+                echo "  → Local version is not newer than registry, skipping"
               fi
+            else
+              echo "  → Already published at v$LOCAL_VERSION, skipping"
             fi
           done
 
@@ -87,7 +95,7 @@ jobs:
             echo "has_version_changes=true" >> $GITHUB_OUTPUT
             echo "packages_to_publish=$PACKAGES_TO_PUBLISH" >> $GITHUB_OUTPUT
           else
-            echo "ℹ️ No public packages with version changes detected. Skipping release."
+            echo "ℹ️ No packages need publishing. All versions match npm registry."
             echo "has_version_changes=false" >> $GITHUB_OUTPUT
           fi
 
@@ -160,6 +168,8 @@ jobs:
 
       - name: Create GitHub Releases
         if: steps.version-check.outputs.has_version_changes == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           RELEASE_INFO="${{ steps.publish.outputs.release_info }}"
 

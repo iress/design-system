@@ -39,6 +39,8 @@ jobs:
           fetch-depth: 0
 
       - name: Check CI Status
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           echo "Checking CI workflow status for branch: ${{ github.ref_name }}"
 
