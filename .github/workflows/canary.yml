@@ -87,9 +87,9 @@ jobs:
           CANARY_VERSION="0.0.0-canary-${TIMESTAMP}-${SHORT_SHA}"
 
           if [ "${{ github.event.inputs.package }}" != "" ]; then
-            yarn workspace ${{ github.event.inputs.package }} version $CANARY_VERSION --no-git-tag-version
+            yarn workspace ${{ github.event.inputs.package }} version $CANARY_VERSION
           else
-            yarn workspaces foreach --no-private version $CANARY_VERSION --no-git-tag-version
+            yarn workspaces foreach -A --no-private version $CANARY_VERSION
           fi
 
       - name: Publish to NPM
@@ -97,5 +97,5 @@ jobs:
           if [ "${{ github.event.inputs.package }}" != "" ]; then
             yarn workspace ${{ github.event.inputs.package }} npm publish --tag canary --access public --provenance
           else
-            yarn workspaces foreach --no-private npm publish --tag canary --access public --provenance
+            yarn workspaces foreach -A --no-private npm publish --tag canary --access public --provenance
           fi
