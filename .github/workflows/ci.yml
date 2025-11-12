@@ -172,7 +172,7 @@ jobs:
     name: Storybook
     runs-on:
       group: wealth-actions-runners
-    needs: [setup, build]
+    needs: setup
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js
@@ -186,10 +186,11 @@ jobs:
         with:
           path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
+      - name: Restore build outputs
+        uses: actions/cache@v4
         with:
-          name: build-output
+          path: ${{ env.BUILD_CACHE_PATHS }}
+          key: yarn-build-${{ github.run_id }}
       - name: Build Storybook
         run: yarn build-storybook
       - name: Upload Storybook build
