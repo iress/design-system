@@ -18,12 +18,13 @@ env:
     .yarn/unplugged
     node_modules
     packages/*/dist
+    packages/*/node_modules
     packages/components/src/styled-system
     packages/tokens/src/generated
 
 jobs:
   setup:
-    name: Setup and Cache
+    name: Setup
     runs-on:
       group: wealth-actions-runners
     outputs:
@@ -52,7 +53,7 @@ jobs:
         run: yarn build
 
   validate:
-    name: Validate Code Quality
+    name: Code Quality
     runs-on:
       group: wealth-actions-runners
     needs: setup
@@ -79,7 +80,7 @@ jobs:
         run: yarn ${{ matrix.check }}
 
   build:
-    name: Build Packages
+    name: Build
     runs-on:
       group: wealth-actions-runners
     needs: setup
@@ -137,7 +138,7 @@ jobs:
         run: yarn check-coverage --all
 
   storybook:
-    name: Build Storybook
+    name: Storybook
     runs-on:
       group: wealth-actions-runners
     needs: [setup, build]
