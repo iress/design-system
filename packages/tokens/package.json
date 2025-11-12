@@ -40,7 +40,7 @@
     "eslint-plugin-file-progress": "^3.0.2",
     "eslint-plugin-mdx": "^3.6.2",
     "eslint-plugin-prettier": "^5.5.4",
-    "jsdom": "^26.1.0",
+    "jsdom": "^27.2.0",
     "json5": "^2.2.3",
     "prettier": "^3.6.2",
     "radash": "^12.1.1",
