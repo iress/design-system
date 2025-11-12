@@ -29,6 +29,7 @@ env:
 jobs:
   packages:
     name: Packages
+    if: github.repository_owner == 'iress'
     runs-on:
       group: wealth-actions-runners
     environment: npm-publishing
