@@ -52,17 +52,18 @@
     "zx": "^8.8.4"
   },
   "scripts": {
-    "build": "yarn workspaces foreach -Apti run build",
+    "build": "yarn monorepo run build",
     "check-coverage": "tsx ./scripts/check-coverage.ts",
     "dev": "concurrently \"wait-on tcp:6006 && wait-on tcp:6007 && yarn storybook\" \"yarn packages/components dev:no-open\" \"yarn packages/tokens dev:no-open\"",
     "prepublish": "tsx ./scripts/storybook-addon-prepublish.ts",
     "prepare": "husky",
-    "build-storybook": "yarn workspaces foreach -Apti run build-storybook && storybook build",
+    "build-storybook": "yarn monorepo run build-storybook && storybook build",
     "storybook": "storybook dev -p 6005",
     "storybook:serve-addon": "tsx ./scripts/storybook-addon-server.ts",
-    "lint": "yarn workspaces foreach -Apti run lint",
-    "test": "yarn workspaces foreach -Apti run test",
-    "test:coverage": "yarn workspaces foreach -Apti run test:coverage",
-    "typecheck": "yarn workspaces foreach -Apti run typecheck"
+    "lint": "yarn monorepo run lint",
+    "test": "yarn monorepo run test",
+    "test:coverage": "yarn monorepo run test:coverage",
+    "typecheck": "yarn monorepo run typecheck",
+    "monorepo": "yarn workspaces foreach -Ai --topological-dev --exclude=@iress/design-system-monorepo"
   }
 }
