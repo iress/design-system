@@ -164,17 +164,6 @@ jobs:
             echo "has_version_changes=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Setup Node.js
-        if: steps.version-check.outputs.has_version_changes == 'true'
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Enable Corepack
-        if: steps.version-check.outputs.has_version_changes == 'true'
-        run: corepack enable
-
       - name: Install dependencies
         if: steps.version-check.outputs.has_version_changes == 'true'
         run: yarn install --immutable
