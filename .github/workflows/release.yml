@@ -34,27 +34,97 @@ jobs:
           echo "❌ CI workflow did not succeed. Skipping release."
           exit 1
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Detect version changes
         id: version-check
         run: |
           echo "Checking for packages that need publishing..."
 
-          # Get all package.json files in the packages directory
-          PACKAGE_FILES=$(find packages -name 'package.json' -type f)
+          # Function to compare semantic versions without external dependencies
+          compare_versions() {
+            local v1=$1
+            local v2=$2
+            
+            # Remove 'v' prefix if present
+            v1=${v1#v}
+            v2=${v2#v}
+            
+            # Split version and prerelease
+            IFS='-' read -r v1_core v1_pre <<< "$v1"
+            IFS='-' read -r v2_core v2_pre <<< "$v2"
+            
+            # Split core version into parts
+            IFS='.' read -r v1_major v1_minor v1_patch <<< "$v1_core"
+            IFS='.' read -r v2_major v2_minor v2_patch <<< "$v2_core"
+            
+            # Compare major version
+            if [ "$v1_major" -gt "$v2_major" ]; then
+              echo "greater"
+              return
+            elif [ "$v1_major" -lt "$v2_major" ]; then
+              echo "less"
+              return
+            fi
+            
+            # Compare minor version
+            if [ "$v1_minor" -gt "$v2_minor" ]; then
+              echo "greater"
+              return
+            elif [ "$v1_minor" -lt "$v2_minor" ]; then
+              echo "less"
+              return
+            fi
+            
+            # Compare patch version
+            if [ "$v1_patch" -gt "$v2_patch" ]; then
+              echo "greater"
+              return
+            elif [ "$v1_patch" -lt "$v2_patch" ]; then
+              echo "less"
+              return
+            fi
+            
+            # If we're here, core versions are equal
+            # Now compare prerelease versions
+            if [ -z "$v1_pre" ] && [ -z "$v2_pre" ]; then
+              echo "equal"
+            elif [ -z "$v1_pre" ]; then
+              # v1 is stable, v2 is prerelease - stable > prerelease
+              echo "greater"
+            elif [ -z "$v2_pre" ]; then
+              # v1 is prerelease, v2 is stable - prerelease < stable
+              echo "less"
+            else
+              # Both have prerelease - lexicographic comparison
+              if [[ "$v1_pre" > "$v2_pre" ]]; then
+                echo "greater"
+              elif [[ "$v1_pre" < "$v2_pre" ]]; then
+                echo "less"
+              else
+                echo "equal"
+              fi
+            fi
+          }
 
+          # Get all non-private workspaces using yarn
           PACKAGES_TO_PUBLISH=""
 
-          for PKG_FILE in $PACKAGE_FILES; do
-            # Extract package name and version
-            PACKAGE_NAME=$(jq -r '.name' "$PKG_FILE")
-            LOCAL_VERSION=$(jq -r '.version' "$PKG_FILE")
-            IS_PRIVATE=$(jq -r '.private // false' "$PKG_FILE")
+          while IFS= read -r workspace; do
+            # Extract package name and location
+            PACKAGE_NAME=$(echo "$workspace" | jq -r '.name')
+            PKG_LOCATION=$(echo "$workspace" | jq -r '.location')
+            PKG_FILE="$PKG_LOCATION/package.json"
             
-            # Skip private packages
-            if [ "$IS_PRIVATE" = "true" ]; then
-              echo "Skipping private package: $PACKAGE_NAME"
-              continue
-            fi
+            # Extract version from package.json
+            LOCAL_VERSION=$(jq -r '.version' "$PKG_FILE")
             
             echo "Checking $PACKAGE_NAME (local: v$LOCAL_VERSION)..."
             
@@ -69,15 +139,10 @@ jobs:
               echo "  → Registry version: v$REGISTRY_VERSION"
               echo "  → Local version: v$LOCAL_VERSION"
               
-              # Use Node.js to compare semver versions
-              SHOULD_PUBLISH=$(node -e "
-                const semver = require('semver');
-                const local = '$LOCAL_VERSION';
-                const registry = '$REGISTRY_VERSION';
-                console.log(semver.gt(local, registry) ? 'yes' : 'no');
-              ")
+              # Compare versions using bash function
+              COMPARISON=$(compare_versions "$LOCAL_VERSION" "$REGISTRY_VERSION")
               
-              if [ "$SHOULD_PUBLISH" = "yes" ]; then
+              if [ "$COMPARISON" = "greater" ]; then
                 echo "  → Local version is newer, will publish"
                 PACKAGES_TO_PUBLISH="$PACKAGES_TO_PUBLISH $PACKAGE_NAME"
               else
@@ -86,7 +151,7 @@ jobs:
             else
               echo "  → Already published at v$LOCAL_VERSION, skipping"
             fi
-          done
+          done < <(yarn workspaces list --no-private --json)
 
           if [ -n "$PACKAGES_TO_PUBLISH" ]; then
             # Trim leading/trailing whitespace
