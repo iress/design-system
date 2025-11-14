@@ -162,9 +162,9 @@ jobs:
           - package: components
             token: CHROMATIC_COMPONENTS_PROJECT_TOKEN
             dir: packages/components
-          - package: tokens
-            token: CHROMATIC_TOKENS_PROJECT_TOKEN
-            dir: packages/tokens
+          # - package: tokens
+          #   token: CHROMATIC_TOKENS_PROJECT_TOKEN
+          #   dir: packages/tokens
     steps:
       - uses: actions/checkout@v5
         with:
