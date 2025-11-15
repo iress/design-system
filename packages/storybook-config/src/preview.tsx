@@ -4,6 +4,9 @@ import {
   type IressStorybookProps,
 } from './components/IressStorybook';
 import { IressProvider } from '@iress-oss/ids-components';
+import { lazy, Suspense } from 'react';
+
+const IDSStyles = lazy(() => import('./components/IDSStyles'));
 
 export interface PreviewProps {
   /**
@@ -24,6 +27,11 @@ export const getPreview = ({ docsProps }: PreviewProps): Preview => {
     decorators: [
       (Story) => (
         <Provider>
+          {!docsProps?.noStyles && (
+            <Suspense>
+              <IDSStyles />
+            </Suspense>
+          )}
           <Story />
         </Provider>
       ),

@@ -137,6 +137,7 @@ export const Base: Story = {
                 textOverflow: 'ellipsis',
                 overflow: 'hidden',
                 lineHeight: cssVars.typography.body.md._regular.lineHeight,
+                font: cssVars.typography.heading[1],
               }}
             >
               <CssSpark
@@ -181,6 +182,7 @@ export const Headings: Story = {
     children: (
       <IressStack gap="xl">
         {headings.map(({ name, token, tokenName }) => {
+          const cssVar = get<string>(cssVars, tokenName);
           const headingCssVars = get<Record<string, string>>(
             cssVars,
             tokenName.replace(/\.(?=[^.]*$)/, '._'),
@@ -189,7 +191,11 @@ export const Headings: Story = {
           return (
             <IressRow gutter="xl" key={tokenName}>
               <IressCol span={{ lg: 8 }}>
-                <IressText textStyle={tokenName as never} mb="sm">
+                <IressText
+                  textStyle={tokenName as never}
+                  mb="sm"
+                  style={{ font: cssVar }}
+                >
                   {name}
                 </IressText>
                 <IressText element="strong">{name}</IressText>
@@ -247,9 +253,30 @@ export const Body: Story = {
         {body.map(({ name, token, tokenName }) => (
           <IressRow gutter="xl" key={tokenName}>
             <IressCol span={{ lg: 4 }}>
-              <IressText textStyle={tokenName as never} mb="sm">
-                The <strong>quick</strong> brown fox jumps over the{' '}
-                <em>lazy</em> dog.
+              <IressText
+                textStyle={tokenName as never}
+                mb="sm"
+                style={{
+                  font: get<string>(cssVars, `${tokenName}.regular`),
+                }}
+              >
+                The{' '}
+                <strong
+                  style={{
+                    font: get<string>(cssVars, `${tokenName}.strong`),
+                  }}
+                >
+                  quick
+                </strong>{' '}
+                brown fox jumps over the{' '}
+                <em
+                  style={{
+                    font: get<string>(cssVars, `${tokenName}.em`),
+                  }}
+                >
+                  lazy
+                </em>{' '}
+                dog.
               </IressText>
               <IressText element="strong">{name}</IressText>
               <Markdown>{token.$description}</Markdown>
@@ -257,14 +284,21 @@ export const Body: Story = {
             {bodyVariants.map((variant) => {
               const variantName =
                 variant === 'Emphasis' ? 'em' : variant.toLowerCase();
+              const variantCssVar = get<string>(
+                cssVars,
+                `${tokenName}.${variantName}`,
+              );
               const variantCssVars = get<Record<string, string>>(
                 cssVars,
                 `${tokenName}._${variantName}`,
               );
 
               return (
-                <IressCol pt="sm" key={variant}>
+                <IressCol key={variant}>
                   <IressStack gap="sm">
+                    <IressText style={{ font: variantCssVar }}>
+                      {variant}
+                    </IressText>
                     <IressInline gap="sm">
                       <strong>Font</strong>
                       <CssSpark
@@ -314,7 +348,13 @@ export const Code: Story = {
     children: (
       <IressRow gutter="xl">
         <IressCol span={{ lg: 4 }}>
-          <IressText textStyle="typography.code" mb="sm">
+          <IressText
+            textStyle="typography.code"
+            mb="sm"
+            style={{
+              font: cssVars.typography.code,
+            }}
+          >
             Code goes here
           </IressText>
           <IressText element="strong">Code</IressText>
