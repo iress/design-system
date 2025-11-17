@@ -2,7 +2,7 @@ import type { StorybookConfig } from '@storybook/react-vite';
 import remarkGfm from 'remark-gfm';
 
 import { dirname, resolve } from 'path';
-import { loadEnv, mergeConfig, type UserConfig } from 'vite';
+import { loadEnv, mergeConfig, type Plugin, type UserConfig } from 'vite';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 
@@ -19,6 +19,16 @@ interface MainConfig extends Pick<Partial<StorybookConfig>, 'stories'> {
    * absolutePath: dirname(dirname(fileURLToPath(import.meta.url)));
    */
   absolutePath: string;
+
+  /**
+   * An array of plugin names to remove from the default configuration.
+   *
+   * We remove some plugins that are known to cause issues with Storybook
+   * - tree-shakeable: Causes issues with Storybook's module resolution when built (the issue around .addMethod does not exist).
+   *
+   * @default ['tree-shakeable']
+   */
+  removeVitePluginNames?: string[];
 
   /**
    * Proxy configuration for children, only works in development mode.
@@ -44,6 +54,7 @@ interface MainConfig extends Pick<Partial<StorybookConfig>, 'stories'> {
 export const getMainConfig = ({
   absolutePath,
   proxyChildren,
+  removeVitePluginNames = ['tree-shakeable'],
   stories,
   tsConfigWithAlias,
 }: MainConfig): StorybookConfig => {
@@ -95,6 +106,12 @@ export const getMainConfig = ({
           exclude: ['./node_modules/.cache/storybook'],
         },
       };
+
+      // filter out plugins by name
+      config.plugins = config.plugins?.filter((plugin) => {
+        const pluginName = (plugin as Plugin).name;
+        return !removeVitePluginNames.includes(pluginName);
+      });
 
       if (tsConfigWithAlias) {
         const tsConfigContent = readFileSync(
