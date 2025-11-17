@@ -4,24 +4,23 @@ This document describes the CI/CD workflows for the Iress Design System.
 
 ## Overview
 
-The project uses three main GitHub Actions workflows:
+The project uses two main GitHub Actions workflows:
 
 1. **CI** - Continuous Integration for validation
-2. **Release** - Automated releases to npm
-3. **Canary** - Manual pre-release testing
+2. **Release** - Automated releases and manual canary releases to npm
 
 ## Workflow Relationships
 
 ```mermaid
 graph TD
     A[Code Push to main/5.x] --> B[CI Workflow]
-    B -->|Success| C[Release Workflow]
-    C -->|Detects Version Changes| D[Publish to npm]
+    B -->|Success| C[Release Workflow - Stable]
+    C -->|Detects Version Changes| D[Release to npm]
     D --> E[Create GitHub Releases]
 
-    F[Manual Trigger] --> G[Canary Workflow]
+    F[Manual Trigger] --> G[Release Workflow - Canary]
     G -->|Checks CI Status| H{CI Passed?}
-    H -->|Yes| I[Build & Publish Canary]
+    H -->|Yes| I[Build & Release Canary]
     H -->|No| J[Workflow Fails]
 
     style B fill:#4CAF50
@@ -106,29 +105,86 @@ Runs three validation checks in parallel:
 
 **Triggers:**
 
-- Automatically runs after CI workflow completes successfully on `main` or `5.x` branches
+- **Automatic (Stable Releases):** Runs after CI workflow completes successfully on `main` or `5.x` branches
+- **Manual (Canary Releases):** Triggered via workflow dispatch from any branch
 
-**Purpose:** Publishes new package versions to npm when version changes are detected.
+**Purpose:** Releases new package versions to npm. Supports both stable releases (when version changes are detected) and canary releases (for pre-release testing).
 
-### Release Workflow Process
+### Release Workflow Overview
+
+```mermaid
+graph TD
+    A[Workflow Triggered] --> B{Release Type?}
+    B -->|Automatic from CI| C[Stable Release Path]
+    B -->|Manual Dispatch| D[Canary Release Path]
+
+    C --> C1[Check CI Success]
+    C1 --> C2[Detect Version Changes]
+    C2 --> C3{Version Changed?}
+    C3 -->|Yes| C4[Publish to npm]
+    C3 -->|No| C5[Skip - No Changes]
+    C4 --> C6[Create GitHub Releases]
+
+    D --> D1[Check CI Status]
+    D1 --> D2{CI Passed?}
+    D2 -->|Yes| D3[Generate Canary Version]
+    D2 -->|No| D4[Fail Workflow]
+    D3 --> D5[Publish with 'canary' tag]
+
+    style C fill:#2196F3
+    style D fill:#FF9800
+    style C4 fill:#4CAF50
+    style D5 fill:#4CAF50
+```
+
+### Release Type Detection
+
+The workflow automatically determines the release type based on how it was triggered:
+
+- **Stable Release:** Triggered by the CI workflow via `workflow_run`
+- **Canary Release:** Triggered manually via `workflow_dispatch`
+
+### Stable Release Process
 
 ```mermaid
 sequenceDiagram
     participant CI as CI Workflow
-    participant R as Release Workflow
+    participant P as Publish Workflow
     participant NPM as npm Registry
     participant GH as GitHub Releases
 
-    CI->>R: Trigger on success
-    R->>R: Check CI Status
-    R->>R: Detect Version Changes
+    CI->>P: Trigger on success
+    P->>P: Determine Release Type (stable)
+    P->>P: Check CI Status
+    P->>P: Detect Version Changes
     alt Version Changed
-        R->>R: Install & Build
-        R->>NPM: Publish Package(s)
-        R->>GH: Create Release & Tag
+        P->>P: Install & Build
+        P->>NPM: Publish Package(s)
+        P->>GH: Create Release & Tag
         Note over GH: Auto-generated release notes
     else No Changes
-        R->>R: Skip (no changes)
+        P->>P: Skip (no changes)
+    end
+```
+
+### Canary Release Process
+
+```mermaid
+sequenceDiagram
+    participant User as Developer
+    participant R as Release Workflow
+    participant CI as CI Status Check
+    participant NPM as npm Registry
+
+    User->>R: Manual Trigger (workflow_dispatch)
+    R->>R: Determine Release Type (canary)
+    R->>CI: Check CI Status on Branch
+    alt CI Passed
+        R->>R: Generate Canary Version
+        R->>R: Install & Build
+        R->>NPM: Publish with 'canary' tag
+    else CI Failed
+        R->>R: Fail Workflow
     end
 ```
 
@@ -136,64 +192,75 @@ sequenceDiagram
 
 #### Packages Job
 
-1. **Check CI Success:** Verifies the triggering CI workflow succeeded
-2. **Detect Version Changes:**
-   - Compares local `package.json` versions with npm registry
-   - Uses semantic version comparison
-   - Identifies which packages need publishing
-3. **Install & Build:** Only if version changes detected
-4. **Publish to npm:**
-   - Determines npm tag based on version:
-     - Prerelease versions (e.g., `1.0.0-alpha.1`) → `alpha` tag
-     - Stable versions (e.g., `1.0.0`) → `latest` tag
-   - Publishes with npm provenance for security
-5. **Create GitHub Releases:**
-   - **Creates git tag** (e.g., `@iress-oss/ids-components@1.2.3`) automatically via `gh release create`
-   - Tag points to the commit SHA that triggered the workflow
-   - Generates AI-powered release notes from commits and PRs
-   - Links to npm package page
-   - Both the git tag and GitHub release are created in a single operation
+The workflow has a single job that handles both stable and canary releases:
 
-### Version Detection Logic
+##### 1. Determine Release Type
 
-The workflow compares versions using semantic versioning rules:
+- Checks the event that triggered the workflow
+- Sets release type to `stable` (for CI-triggered runs) or `canary` (for manual triggers)
 
-- Major.Minor.Patch comparison
-- Prerelease identifiers (alpha < beta < rc < stable)
-- Only publishes if local version > registry version
+##### 2. Check CI Status
 
-## 3. Canary Workflow
+**For Stable Releases:**
 
-**File:** `.github/workflows/canary.yml`
+- Verifies the triggering CI workflow succeeded
+- Fails if CI workflow did not complete successfully
 
-**Triggers:**
+**For Canary Releases:**
 
-- Manual dispatch via GitHub Actions UI: https://github.com/iress/design-system/actions/workflows/canary.yml
+- Uses GitHub CLI to check the latest CI run on the current branch
+- Ensures CI has passed before allowing canary publication
+- Prevents publishing broken canary versions
 
-**Purpose:** Creates pre-release canary versions for testing without affecting stable releases.
+##### 3. Setup & Install
 
-### Canary Workflow Process
+- Standard Node.js and Yarn setup
+- Installs dependencies
+- Builds all packages
 
-```mermaid
-graph TD
-    A[Manual Trigger] --> B{Select Package}
-    B -->|Specific Package| C[Check CI Status]
-    B -->|All Packages| C
-    C -->|CI Passed| D[Generate Canary Version]
-    C -->|CI Failed| E[Fail Workflow]
-    D --> F[Build Packages]
-    F --> G[Publish to npm with 'canary' tag]
+##### 4. Version Packages (Canary Only)
 
-    style A fill:#FF9800
-    style C fill:#2196F3
-    style D fill:#9C27B0
-    style G fill:#4CAF50
-    style E fill:#F44336
-```
+- Generates timestamped canary version: `0.0.0-canary.{timestamp}-{git-sha}`
+- Example: `0.0.0-canary-20231211175530-a1b2c3d`
+- Includes short git SHA for traceability
+- Updates `package.json` without creating git tags
+- Can target a specific package or all packages based on workflow input
 
-### Parameters
+##### 5. Detect Version Changes (Stable Only)
 
-The workflow accepts one input parameter:
+- Compares local `package.json` versions with npm registry
+- Uses semantic version comparison
+- Identifies which packages need publishing
+- Sets output variables for subsequent steps
+
+##### 6. Publish to npm
+
+**For Canary Releases:**
+
+- Publishes with `canary` npm tag
+- Can be installed with `npm install @iress-oss/ids-components@canary`
+- Respects the package selection from workflow input
+
+**For Stable Releases:**
+
+- Only runs if version changes were detected
+- Determines npm tag based on version:
+  - Prerelease versions (e.g., `1.0.0-alpha.1`) → `alpha` tag
+  - Stable versions (e.g., `1.0.0`) → `latest` tag
+- Publishes with npm provenance for security
+
+##### 7. Create GitHub Releases (Stable Only)
+
+- Only runs if stable version changes were detected
+- **Creates git tag** (e.g., `@iress-oss/ids-components@1.2.3`) automatically via `gh release create`
+- Tag points to the commit SHA that triggered the workflow
+- Generates AI-powered release notes from commits and PRs
+- Links to npm package page
+- Both the git tag and GitHub release are created in a single operation
+
+### Manual Canary Release Parameters
+
+The workflow accepts one input parameter when triggered manually:
 
 - **package:** (optional) Select a specific package to release, or leave empty to release all packages
 
@@ -213,28 +280,18 @@ Available packages:
 Canary versions follow this format:
 
 ```
-0.0.0-canary-{timestamp}-{git-sha}
+0.0.0-canary.{timestamp}-{git-sha}
 ```
 
-Example: `0.0.0-canary-20231211175530-a1b2c3d`
+Example: `0.0.0-canary.20231211175530-a1b2c3d`
 
-### Jobs
+### Version Detection Logic (Stable Releases)
 
-#### Packages Job
+The workflow compares versions using semantic versioning rules:
 
-1. **Check CI Status:**
-   - Uses GitHub CLI to check latest CI run on current branch
-   - Fails if CI hasn't passed
-   - Prevents publishing broken canary versions
-2. **Setup & Install:** Standard Node.js and Yarn setup
-3. **Build Packages:** Builds all packages
-4. **Version Packages:**
-   - Generates timestamped canary version
-   - Includes short git SHA for traceability
-   - Updates `package.json` without creating git tags
-5. **Publish to npm:**
-   - Publishes with `canary` npm tag
-   - Can be installed with `npm install @iress-oss/ids-components@canary`
+- Major.Minor.Patch comparison
+- Prerelease identifiers (alpha < beta < rc < stable)
+- Only publishes if local version > registry version
 
 ### When to Use Canary Releases
 
@@ -254,13 +311,15 @@ Example: `0.0.0-canary-20231211175530-a1b2c3d`
    - **Minor:** New features (backward compatible)
    - **Patch:** Bug fixes
 4. **Use canary releases** for testing before official releases
+5. **Trigger canary releases manually** via GitHub Actions UI when needed
 
 ### For Release Management
 
-1. **Check the Release workflow** after merging to main/5.x
+1. **Check the Publish workflow** after merging to main/5.x
 2. **Review auto-generated release notes** in GitHub Releases
 3. **Monitor npm publish status** for any failures
 4. **Version bumps should be committed** to trigger releases
+5. **Use canary releases** for pre-release testing and validation
 
 ## Troubleshooting
 
@@ -270,7 +329,7 @@ Example: `0.0.0-canary-20231211175530-a1b2c3d`
 - Review the error logs in GitHub Actions
 - Run the same command locally: `yarn lint`, `yarn typecheck`, or `yarn test`
 
-### Release Workflow Doesn't Trigger
+### Publish Workflow Doesn't Trigger (Stable Release)
 
 - Ensure CI workflow completed successfully
 - Verify you're on the `main` or `5.x` branch
@@ -281,8 +340,9 @@ Example: `0.0.0-canary-20231211175530-a1b2c3d`
 - Verify CI has passed on your branch
 - Check npm authentication credentials in GitHub environment
 - Ensure package versions follow the canary format
+- Confirm you have the correct permissions to trigger workflow_dispatch
 
-### Version Not Detected by Release Workflow
+### Version Not Detected by Publish Workflow
 
 - Ensure the version in `package.json` is higher than the npm registry version
 - Check that the package is not marked as `private: true`
@@ -308,23 +368,28 @@ All workflows use these environment variables:
   - `contents: read` - Read repository contents
   - `actions: read` - Read workflow status
 
-- **Release Workflow:**
+- **Publish Workflow:**
   - `id-token: write` - OIDC token for npm provenance
   - `contents: write` - Create tags and releases
-
-- **Canary Workflow:**
-  - `id-token: write` - OIDC token for npm provenance
-  - `contents: read` - Read repository contents
   - `actions: read` - Check CI workflow status
 
 ## Custom Run Names
 
-The workflows use custom `run-name` fields to make workflow runs easier to identify in the GitHub Actions UI:
+The workflow uses custom `run-name` fields to make workflow runs easier to identify in the GitHub Actions UI:
 
 - **Canary:** Shows selected package and triggering user
-  - Example: "Canary release for @iress-oss/ids-components by @username"
-- **Release:** Shows the commit message that triggered the release
+  - Example: "@iress-oss/ids-components (canary) by @username"
+  - Example: "all packages (canary) by @username"
+- **Stable:** Shows the commit message that triggered the release
   - Example: "feat: add new button component"
+
+## Workflow Trigger URL
+
+To manually trigger a canary release, visit:
+
+- https://github.com/iress/design-system/actions/workflows/release.yml
+
+Click "Run workflow", select your branch, optionally choose a specific package, and click "Run workflow" again.
 
 ## Additional Resources
 
@@ -332,3 +397,4 @@ The workflows use custom `run-name` fields to make workflow runs easier to ident
 - [Semantic Versioning](https://semver.org/)
 - [npm Publishing Documentation](https://docs.npmjs.com/cli/v10/commands/npm-publish)
 - [Yarn Workspaces](https://yarnpkg.com/features/workspaces)
+- [npm Provenance](https://docs.npmjs.com/generating-provenance-statements)
