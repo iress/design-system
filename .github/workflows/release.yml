@@ -37,7 +37,7 @@ env:
 jobs:
   packages:
     name: Packages
-    if: github.repository_owner == 'iress'
+    if: github.repository_owner == 'iress' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success')
     runs-on:
       group: wealth-actions-runners
     environment: npm-publishing
@@ -56,15 +56,6 @@ jobs:
             echo "type=stable" >> $GITHUB_OUTPUT
             echo "📦 Stable release triggered from CI on branch: ${{ github.ref_name }}"
           fi
-
-      - name: Check CI Status (Stable)
-        if: steps.release-type.outputs.type == 'stable'
-        run: |
-          if [ "${{ github.event.workflow_run.conclusion }}" != "success" ]; then
-            echo "❌ CI workflow did not succeed. Skipping release."
-            exit 1
-          fi
-          echo "✅ CI workflow passed. Proceeding with stable release."
 
       - name: Check CI Status (Canary)
         if: steps.release-type.outputs.type == 'canary'
