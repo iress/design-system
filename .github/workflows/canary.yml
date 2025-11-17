@@ -92,9 +92,13 @@ jobs:
             yarn workspaces foreach -A --no-private version $CANARY_VERSION
           fi
 
+      - name: Configure npm authentication for OIDC
+        run: |
+          echo 'npmRegistries:' >> .yarnrc.yml
+          echo '  "https://registry.npmjs.org":' >> .yarnrc.yml
+          echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
+
       - name: Publish to NPM
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           if [ "${{ github.event.inputs.package }}" != "" ]; then
             yarn workspace ${{ github.event.inputs.package }} npm publish --tag canary --access public --provenance
