@@ -1,7 +1,23 @@
-name: Release
-run-name: '${{ github.event.workflow_run.head_commit.message }}'
+name: Publish
+run-name: ${{ github.event_name == 'workflow_dispatch' && format('{0} (canary) by @{1}', inputs.package || 'all packages', github.actor) || github.event.workflow_run.head_commit.message }}
 
 on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to release (leave empty for all)'
+        required: false
+        type: choice
+        options:
+          - ''
+          - '@iress-oss/ids-components'
+          - '@iress-oss/ids-mcp-server'
+          - '@iress-oss/ids-storybook-config'
+          - '@iress-oss/ids-storybook-okta'
+          - '@iress-oss/ids-storybook-sandbox'
+          - '@iress-oss/ids-storybook-toggle-stories'
+          - '@iress-oss/ids-storybook-version-badge'
+          - '@iress-oss/ids-tokens'
   workflow_run:
     workflows: ['CI']
     types: [completed]
@@ -12,6 +28,7 @@ on:
 permissions:
   id-token: write
   contents: write
+  actions: read
 
 env:
   NODE_VERSION: '22'
@@ -29,11 +46,39 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check CI Success
-        if: github.event.workflow_run.conclusion != 'success'
+      - name: Determine Release Type
+        id: release-type
         run: |
-          echo "❌ CI workflow did not succeed. Skipping release."
-          exit 1
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "type=canary" >> $GITHUB_OUTPUT
+            echo "🎯 Canary release triggered manually from branch: ${{ github.ref_name }}"
+          else
+            echo "type=stable" >> $GITHUB_OUTPUT
+            echo "📦 Stable release triggered from CI on branch: ${{ github.ref_name }}"
+          fi
+
+      - name: Check CI Status (Stable)
+        if: steps.release-type.outputs.type == 'stable'
+        run: |
+          if [ "${{ github.event.workflow_run.conclusion }}" != "success" ]; then
+            echo "❌ CI workflow did not succeed. Skipping release."
+            exit 1
+          fi
+          echo "✅ CI workflow passed. Proceeding with stable release."
+
+      - name: Check CI Status (Canary)
+        if: steps.release-type.outputs.type == 'canary'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "Checking CI workflow status for branch: ${{ github.ref_name }}"
+          CI_STATUS=$(gh run list --workflow=ci.yml --branch=${{ github.ref_name }} --json conclusion --limit 1 --jq '.[0].conclusion')
+          echo "Latest CI status: $CI_STATUS"
+          if [ "$CI_STATUS" != "success" ]; then
+            echo "❌ CI workflow has not passed on this branch. Cannot publish canary release."
+            exit 1
+          fi
+          echo "✅ CI workflow passed. Proceeding with canary release."
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -44,262 +89,80 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Detect version changes
-        id: version-check
-        run: |
-          echo "Checking for packages that need publishing..."
-
-          # Function to compare semantic versions without external dependencies
-          compare_versions() {
-            local v1=$1
-            local v2=$2
-            
-            # Remove 'v' prefix if present
-            v1=${v1#v}
-            v2=${v2#v}
-            
-            # Split version and prerelease
-            IFS='-' read -r v1_core v1_pre <<< "$v1"
-            IFS='-' read -r v2_core v2_pre <<< "$v2"
-            
-            # Split core version into parts
-            IFS='.' read -r v1_major v1_minor v1_patch <<< "$v1_core"
-            IFS='.' read -r v2_major v2_minor v2_patch <<< "$v2_core"
-            
-            # Compare major version
-            if [ "$v1_major" -gt "$v2_major" ]; then
-              echo "greater"
-              return
-            elif [ "$v1_major" -lt "$v2_major" ]; then
-              echo "less"
-              return
-            fi
-            
-            # Compare minor version
-            if [ "$v1_minor" -gt "$v2_minor" ]; then
-              echo "greater"
-              return
-            elif [ "$v1_minor" -lt "$v2_minor" ]; then
-              echo "less"
-              return
-            fi
-            
-            # Compare patch version
-            if [ "$v1_patch" -gt "$v2_patch" ]; then
-              echo "greater"
-              return
-            elif [ "$v1_patch" -lt "$v2_patch" ]; then
-              echo "less"
-              return
-            fi
-            
-            # If we're here, core versions are equal
-            # Now compare prerelease versions
-            if [ -z "$v1_pre" ] && [ -z "$v2_pre" ]; then
-              echo "equal"
-            elif [ -z "$v1_pre" ]; then
-              # v1 is stable, v2 is prerelease - stable > prerelease
-              echo "greater"
-            elif [ -z "$v2_pre" ]; then
-              # v1 is prerelease, v2 is stable - prerelease < stable
-              echo "less"
-            else
-              # Both have prerelease - lexicographic comparison
-              if [[ "$v1_pre" > "$v2_pre" ]]; then
-                echo "greater"
-              elif [[ "$v1_pre" < "$v2_pre" ]]; then
-                echo "less"
-              else
-                echo "equal"
-              fi
-            fi
-          }
-
-          # Get all non-private workspaces using yarn
-          PACKAGES_TO_PUBLISH=""
-
-          while IFS= read -r workspace; do
-            # Extract package name and location
-            PACKAGE_NAME=$(echo "$workspace" | jq -r '.name')
-            PKG_LOCATION=$(echo "$workspace" | jq -r '.location')
-            PKG_FILE="$PKG_LOCATION/package.json"
-            
-            # Extract version from package.json
-            LOCAL_VERSION=$(jq -r '.version' "$PKG_FILE")
-            
-            echo "Checking $PACKAGE_NAME (local: v$LOCAL_VERSION)..."
-            
-            # Check npm registry for the latest published version
-            REGISTRY_VERSION=$(npm view "$PACKAGE_NAME" version 2>/dev/null || echo "not-published")
-            
-            if [ "$REGISTRY_VERSION" = "not-published" ]; then
-              echo "  → Not yet published to npm registry"
-              echo "  → Will publish v$LOCAL_VERSION"
-              PACKAGES_TO_PUBLISH="$PACKAGES_TO_PUBLISH $PACKAGE_NAME"
-            elif [ "$LOCAL_VERSION" != "$REGISTRY_VERSION" ]; then
-              echo "  → Registry version: v$REGISTRY_VERSION"
-              echo "  → Local version: v$LOCAL_VERSION"
-              
-              # Compare versions using bash function
-              COMPARISON=$(compare_versions "$LOCAL_VERSION" "$REGISTRY_VERSION")
-              
-              if [ "$COMPARISON" = "greater" ]; then
-                echo "  → Local version is newer, will publish"
-                PACKAGES_TO_PUBLISH="$PACKAGES_TO_PUBLISH $PACKAGE_NAME"
-              else
-                echo "  → Local version is not newer than registry, skipping"
-              fi
-            else
-              echo "  → Already published at v$LOCAL_VERSION, skipping"
-            fi
-          done < <(yarn workspaces list --no-private --json)
-
-          if [ -n "$PACKAGES_TO_PUBLISH" ]; then
-            # Trim leading/trailing whitespace
-            PACKAGES_TO_PUBLISH=$(echo "$PACKAGES_TO_PUBLISH" | xargs)
-            echo "✅ Packages to publish: $PACKAGES_TO_PUBLISH"
-            echo "has_version_changes=true" >> $GITHUB_OUTPUT
-            echo "packages_to_publish=$PACKAGES_TO_PUBLISH" >> $GITHUB_OUTPUT
-          else
-            echo "ℹ️ No packages need publishing. All versions match npm registry."
-            echo "has_version_changes=false" >> $GITHUB_OUTPUT
-          fi
-
       - name: Install dependencies
-        if: steps.version-check.outputs.has_version_changes == 'true'
         run: yarn install --immutable
 
       - name: Build packages
-        if: steps.version-check.outputs.has_version_changes == 'true'
         run: yarn build
 
-      - name: Publish to NPM
-        if: steps.version-check.outputs.has_version_changes == 'true'
+      - name: Version Packages (Canary)
+        if: steps.release-type.outputs.type == 'canary'
+        run: |
+          TIMESTAMP=$(date +%Y%m%d%H%M%S)
+          SHORT_SHA=${GITHUB_SHA:0:7}
+          CANARY_VERSION="0.0.0-canary.${TIMESTAMP}-${SHORT_SHA}"
+          echo "📌 Canary version: $CANARY_VERSION"
+          if [ "${{ github.event.inputs.package }}" != "" ]; then
+            yarn workspace ${{ github.event.inputs.package }} version $CANARY_VERSION
+          else
+            yarn workspaces foreach -A --no-private version $CANARY_VERSION
+          fi
+
+      - name: Configure npm authentication for OIDC
+        run: |
+          echo 'npmRegistries:' >> .yarnrc.yml
+          echo '  "https://registry.npmjs.org":' >> .yarnrc.yml
+          echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
+
+      - name: Detect Version Changes (Stable)
+        if: steps.release-type.outputs.type == 'stable'
+        id: version-check
+        run: |
+          chmod +x .github/scripts/publish-packages.sh
+          .github/scripts/publish-packages.sh stable
+
+      - name: Publish to NPM (Canary)
+        if: steps.release-type.outputs.type == 'canary'
+        run: |
+          if [ "${{ github.event.inputs.package }}" != "" ]; then
+            yarn workspace ${{ github.event.inputs.package }} npm publish --tag canary --access public --provenance
+          else
+            yarn workspaces foreach -A --no-private npm publish --tag canary --access public --provenance
+          fi
+
+      - name: Publish to NPM (Stable)
+        if: steps.release-type.outputs.type == 'stable' && steps.version-check.outputs.has_version_changes == 'true'
         id: publish
         run: |
           PACKAGES="${{ steps.version-check.outputs.packages_to_publish }}"
-
           echo "Publishing packages: $PACKAGES"
-
-          # Store package info for GitHub releases
           RELEASE_INFO=""
-
           for PACKAGE in $PACKAGES; do
             echo "Publishing $PACKAGE..."
-            
-            # Get package.json path
             PKG_PATH=$(yarn workspaces list --json | jq -r "select(.name == \"$PACKAGE\") | .location")
             PKG_FILE="$PKG_PATH/package.json"
-            
-            # Extract version from package.json
             VERSION=$(jq -r '.version' "$PKG_FILE")
             echo "  Version: $VERSION"
-            
-            # Determine npm tag based on version
             if [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+-([a-zA-Z]+) ]]; then
-              # Has prerelease identifier (e.g., alpha, beta, rc)
               NPM_TAG="${BASH_REMATCH[1]}"
               IS_PRERELEASE="true"
               echo "  NPM Tag: $NPM_TAG (prerelease)"
             else
-              # Stable version
               NPM_TAG="latest"
               IS_PRERELEASE="false"
               echo "  NPM Tag: $NPM_TAG (stable)"
             fi
-            
-            # Publish with determined tag
             yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public --provenance
             echo "  ✅ Published $PACKAGE@$VERSION with tag '$NPM_TAG'"
-            
-            # Store info for GitHub releases (package,version,prerelease)
             RELEASE_INFO="${RELEASE_INFO}${PACKAGE}|${VERSION}|${IS_PRERELEASE};"
           done
-
           echo "✅ All packages published successfully"
-
-          # Output release info
           echo "release_info=$RELEASE_INFO" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Releases
-        if: steps.version-check.outputs.has_version_changes == 'true'
+        if: steps.release-type.outputs.type == 'stable' && steps.version-check.outputs.has_version_changes == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          RELEASE_INFO="${{ steps.publish.outputs.release_info }}"
-
-          echo "Creating GitHub releases and tags..."
-
-          # Split by semicolon to get each package entry
-          IFS=';' read -ra RELEASES <<< "$RELEASE_INFO"
-
-          for RELEASE_ENTRY in "${RELEASES[@]}"; do
-            if [ -z "$RELEASE_ENTRY" ]; then
-              continue
-            fi
-            
-            # Split by pipe to get package, version, and prerelease flag
-            IFS='|' read -r PACKAGE VERSION IS_PRERELEASE <<< "$RELEASE_ENTRY"
-            
-            # Create tag name (e.g., @iress-oss/ids-components@1.2.3)
-            TAG_NAME="${PACKAGE}@${VERSION}"
-            
-            echo "Creating release for $TAG_NAME..."
-            
-            # Determine prerelease flag
-            if [ "$IS_PRERELEASE" = "true" ]; then
-              PRERELEASE_FLAG="--prerelease"
-              RELEASE_TYPE="Pre-release"
-            else
-              PRERELEASE_FLAG=""
-              RELEASE_TYPE="Release"
-            fi
-            
-            # Find previous tag for this package
-            PREV_TAG=$(git tag -l "${PACKAGE}@*" --sort=-version:refname | head -n 1 || echo "")
-            
-            # Create temporary file for notes with custom header
-            NOTES_FILE=$(mktemp)
-            {
-              echo "**$RELEASE_TYPE** of \`$PACKAGE\` version \`$VERSION\`"
-              echo ""
-              echo "## Installation"
-              echo ""
-              echo "\`\`\`bash"
-              echo "npm install ${PACKAGE}@${VERSION}"
-              echo "\`\`\`"
-              echo ""
-              echo "📦 [View on npm](https://www.npmjs.com/package/${PACKAGE}/v/${VERSION})"
-              echo ""
-              echo "---"
-            } > "$NOTES_FILE"
-            
-            # Create GitHub release with auto-generated notes
-            # The --generate-notes flag uses GitHub's AI-powered release notes generation
-            # which analyzes PRs, categorizes changes, and lists contributors
-            if [ -n "$PREV_TAG" ]; then
-              echo "  Generating AI-powered release notes from $PREV_TAG to HEAD..."
-              gh release create "$TAG_NAME" \
-                --title "$PACKAGE $VERSION" \
-                --notes-file "$NOTES_FILE" \
-                --generate-notes \
-                --notes-start-tag "$PREV_TAG" \
-                $PRERELEASE_FLAG \
-                --target ${{ github.sha }}
-            else
-              echo "  First release - generating notes..."
-              gh release create "$TAG_NAME" \
-                --title "$PACKAGE $VERSION" \
-                --notes-file "$NOTES_FILE" \
-                --generate-notes \
-                $PRERELEASE_FLAG \
-                --target ${{ github.sha }}
-            fi
-            
-            echo "  ✅ Created release and tag: $TAG_NAME"
-            
-            # Clean up temp file
-            rm -f "$NOTES_FILE"
-          done
-
-          echo "✅ All GitHub releases created successfully"
+          chmod +x .github/scripts/create-releases.sh
+          .github/scripts/create-releases.sh "${{ steps.publish.outputs.release_info }}"
