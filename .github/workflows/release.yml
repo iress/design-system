@@ -1,4 +1,4 @@
-name: Publish
+name: Release
 run-name: ${{ github.event_name == 'workflow_dispatch' && format('{0} (canary) by @{1}', inputs.package || 'all packages', github.actor) || github.event.workflow_run.head_commit.message }}
 
 on:
