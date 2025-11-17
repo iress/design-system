@@ -27,13 +27,10 @@ export const getPreview = ({ docsProps }: PreviewProps): Preview => {
     decorators: [
       (Story) => (
         <Provider>
-          {!docsProps?.noStyles && (
-            <Suspense>
-              <IDSStyles />
-              <Story />
-            </Suspense>
-          )}
-          {docsProps?.noStyles && <Story />}
+          <Suspense>
+            {!docsProps?.noStyles && <IDSStyles />}
+            <Story />
+          </Suspense>
         </Provider>
       ),
     ],
