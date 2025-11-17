@@ -18,17 +18,19 @@ import radius from './radius';
 import { TokenTag } from '../../docs/components/TokenTag';
 import { type IressDesignToken } from '../interfaces';
 import { type ReactNode, useState } from 'react';
+import { get } from 'radash';
+import cssVars from '~/generated/css-vars';
 
 const StyledDiv = iressStyled('div');
 
-const VisualSpark = ({ value }: { value: string }) => {
+const VisualSpark = ({ cssVar }: { cssVar: string }) => {
   const [size, setSize] = useState<string | null>(null);
 
   return (
     <IressInline gap="xs">
       <StyledDiv
         bg="colour.primary.fill"
-        style={{ width: '20px', height: '20px', borderTopRightRadius: value }}
+        style={{ width: '20px', height: '20px', borderTopRightRadius: cssVar }}
         ref={(el) => {
           if (el) {
             const borderTopRightRadius =
@@ -83,11 +85,13 @@ export const Radius: Story = {
       .filter(([key]) => !key.startsWith('$') && key !== 'system')
       .map(([key, value]) => {
         const token = value as IressDesignToken;
+        const cssVar = get<string>(cssVars, `radius.${key}`);
+
         return {
           name: `radius.${key}`,
           description: token.$description,
           value: token.$value,
-          visual: <VisualSpark value={token.$value} />,
+          visual: <VisualSpark cssVar={cssVar} />,
           alias: token.$extensions?.['iress.aliases'],
         };
       }),
@@ -105,6 +109,7 @@ export const System: Story = {
             width="input.6"
             aria-hidden="true"
             mb="sm"
+            style={{ borderRadius: cssVars.radius.system.badge }}
           />
           <IressText>
             <h3>Badge</h3>
@@ -118,7 +123,12 @@ export const System: Story = {
       <IressDivider />
       <IressRow gutter="md" verticalAlign="bottom">
         <IressCol span={{ md: 8 }}>
-          <IressButton width="input.8" aria-hidden="true" mb="sm" />
+          <IressButton
+            width="input.8"
+            aria-hidden="true"
+            mb="sm"
+            style={{ borderRadius: cssVars.radius.system.badge }}
+          />
           <IressText>
             <h3>Button</h3>
             <p>{radius.system.button.$description}</p>
@@ -131,7 +141,12 @@ export const System: Story = {
       <IressDivider />
       <IressRow gutter="md" verticalAlign="bottom">
         <IressCol span={{ md: 8 }}>
-          <IressInput width="12" aria-hidden="true" mb="sm" />
+          <IressInput
+            width="12"
+            aria-hidden="true"
+            mb="sm"
+            style={{ borderRadius: cssVars.radius.system.form }}
+          />
           <IressText>
             <h3>Form</h3>
             <p>{radius.system.form.$description}</p>
@@ -146,7 +161,10 @@ export const System: Story = {
         <IressCol span={{ md: 8 }}>
           <IressPanel
             width="input.16"
-            style={{ height: '100px' }}
+            style={{
+              height: '100px',
+              borderRadius: cssVars.radius.system.layout,
+            }}
             mb="sm"
             aria-hidden="true"
             bg="colour.primary.surface"

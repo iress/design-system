@@ -14,8 +14,16 @@ import {
 import colour from './colour';
 import Color from 'colorjs.io';
 import { type IressDesignToken } from '../interfaces';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  type CSSProperties,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { TokenTag } from '../../docs/components/TokenTag';
+import cssVars from '~/generated/css-vars';
+import { get } from 'radash';
 
 type Story = StoryObj<typeof IressStack>;
 
@@ -68,7 +76,7 @@ const AllowedForeground = ({
 
   return (
     <IressInline horizontalAlign="between">
-      <IressText color={foreground}>
+      <IressText style={{ color: get(cssVars, foreground as string) }}>
         <span
           ref={(element) => {
             container.current = element;
@@ -79,7 +87,7 @@ const AllowedForeground = ({
         </span>
       </IressText>
       {contrastRatio && (
-        <IressText color={foreground}>
+        <IressText style={{ color: get(cssVars, foreground as string) }}>
           {contrastRatio} <ContrastRating ratio={Number(contrastRatio)} />
         </IressText>
       )}
@@ -107,6 +115,10 @@ const ColourSwatch = ({
     setBackgroundColor(new Color(computedStyle.backgroundColor));
   }, [container, bg]);
 
+  const colourStyle: CSSProperties = {
+    color: get(cssVars, color as string),
+  };
+
   return (
     <div
       ref={(element) => {
@@ -118,15 +130,29 @@ const ColourSwatch = ({
         {...panelProps}
         bg={bg}
         color={color}
+        style={{
+          ...colourStyle,
+          background: get(cssVars, bg),
+        }}
         layerStyle="elevation.raised"
       >
         <IressRow gutter="spacing.700">
           <IressCol span={6}>
-            <IressText noGutter color={color}>
-              <IressText color={color} element="h3" mb="none">
+            <IressText noGutter color={color} style={colourStyle}>
+              <IressText
+                color={color}
+                style={colourStyle}
+                element="h3"
+                mb="none"
+              >
                 {title}
               </IressText>
-              <IressText color={color} element="p" mb="spacing.100">
+              <IressText
+                color={color}
+                style={colourStyle}
+                element="p"
+                mb="spacing.100"
+              >
                 <TokenTag>{bg}</TokenTag>{' '}
                 {backgroundColor?.toString({ format: 'hex' }).toUpperCase()}
               </IressText>
@@ -135,7 +161,10 @@ const ColourSwatch = ({
           </IressCol>
           {!!allowedForegrounds.length && backgroundColor && (
             <IressCol>
-              <IressText color={color}>
+              <IressText
+                color={color}
+                style={{ color: get(cssVars, color as string) }}
+              >
                 <h4>Allowed foregrounds</h4>
                 <IressStack gap="spacing.100" noGutter>
                   <ul>

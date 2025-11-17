@@ -6,6 +6,7 @@ import {
 } from '@iress-oss/ids-components';
 import elevation from '../schema/elevation';
 import { TokenTag } from '../../docs/components/TokenTag';
+import cssVars from '~/generated/css-vars';
 
 type Story = StoryObj<IressPanelProps>;
 
@@ -20,7 +21,15 @@ export default {
 export const Elevation: Story = {
   args: {
     children: [
-      <IressPanel key="elevation.raised" layerStyle="elevation.raised" stretch>
+      <IressPanel
+        key="elevation.raised"
+        layerStyle="elevation.raised"
+        stretch
+        style={{
+          border: cssVars.elevation.raised.border,
+          boxShadow: cssVars.elevation.raised.shadow,
+        }}
+      >
         <h2>Raised</h2>
         <p>{elevation.raised.$description}</p>
         <p>
@@ -30,6 +39,10 @@ export const Elevation: Story = {
       <IressPanel
         key="elevation.floating"
         layerStyle="elevation.floating"
+        style={{
+          border: cssVars.elevation.floating.border,
+          boxShadow: cssVars.elevation.floating.shadow,
+        }}
         stretch
       >
         <h2>Floating</h2>
@@ -41,6 +54,10 @@ export const Elevation: Story = {
       <IressPanel
         key="elevation.overflow"
         layerStyle="elevation.overflow"
+        style={{
+          border: cssVars.elevation.overflow.border,
+          boxShadow: cssVars.elevation.overflow.shadow,
+        }}
         stretch
       >
         <h2>Overflow</h2>
@@ -49,7 +66,14 @@ export const Elevation: Story = {
           <TokenTag>elevation.overflow</TokenTag>
         </p>
       </IressPanel>,
-      <IressPanel key="elevation.focus" layerStyle="elevation.focus" stretch>
+      <IressPanel
+        key="elevation.focus"
+        layerStyle="elevation.focus"
+        stretch
+        style={{
+          boxShadow: cssVars.elevation.focus.shadow,
+        }}
+      >
         <h2>Focus</h2>
         <p>{elevation.focus.$description}</p>
         <p>
@@ -61,6 +85,10 @@ export const Elevation: Story = {
         layerStyle="elevation.focusCompact"
         stretch
         borderRadius="none"
+        style={{
+          boxShadow: cssVars.elevation.focusCompact.shadow,
+          borderColor: cssVars.elevation.focusCompact.borderColor,
+        }}
       >
         <h2>Focus Compact</h2>
         <p>{elevation.focusCompact.$description}</p>
