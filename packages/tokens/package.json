@@ -15,7 +15,7 @@
   "scripts": {
     "analyse": "yarn vite-bundle-visualizer",
     "build": "yarn cssVars && vite build",
-    "build-storybook": "storybook build",
+    "build-storybook": "storybook build --stats-json",
     "dev": "concurrently \"yarn watch:cssVars\" \"yarn storybook\"",
     "dev:no-open": "concurrently \"yarn watch:cssVars\" \"yarn storybook --no-open\"",
     "clean": "rimraf build dist coverage src/generated storybook-static",

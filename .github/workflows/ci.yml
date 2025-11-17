@@ -169,6 +169,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
@@ -193,6 +194,7 @@ jobs:
           projectToken: ${{ secrets[matrix.token] }}
           workingDir: ${{ matrix.dir }}
           buildScriptName: build-storybook
+          onlyChanged: true
           autoAcceptChanges: '{main,5.x}'
           exitZeroOnChanges: true
           exitOnceUploaded: true

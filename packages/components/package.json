@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "build": "yarn panda:prepare && vite build",
-    "build-storybook": "storybook build",
+    "build-storybook": "storybook build --stats-json",
     "clean": "rimraf dist coverage src/styled-system",
     "dev": "concurrently \"yarn panda:watch\" \"yarn storybook\"",
     "dev:no-open": "concurrently \"yarn panda:watch\" \"yarn storybook --no-open\"",
