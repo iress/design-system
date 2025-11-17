@@ -66,16 +66,14 @@ jobs:
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
+        id: registry
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://registry.npmjs.org'
+          always-auth: true
 
       - name: Enable Corepack
         run: corepack enable
-
-      # Request OIDC token → NPM returns a publish token
-      - id: npm_auth
-        uses: npm/cli@v10/commands/ci/oidc-auth
 
       - run: yarn npm whoami
         env:
