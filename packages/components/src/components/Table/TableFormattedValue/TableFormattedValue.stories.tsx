@@ -10,6 +10,9 @@ export default {
   tags: ['updated'],
 } as Meta<typeof IressTableFormattedValue>;
 
+const fourDaysAgo = new Date();
+fourDaysAgo.setDate(fourDaysAgo.getDate() - 4);
+
 export const FormattedValue: Story = {
   args: {
     value: '100',
@@ -60,7 +63,7 @@ export const FormattedValue: Story = {
           mode: 'relativeTime',
           example: (
             <IressTableFormattedValue
-              value={new Date('2025-11-14')}
+              value={fourDaysAgo}
               format="relativeTime"
             />
           ),
