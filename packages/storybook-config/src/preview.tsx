@@ -30,9 +30,10 @@ export const getPreview = ({ docsProps }: PreviewProps): Preview => {
           {!docsProps?.noStyles && (
             <Suspense>
               <IDSStyles />
+              <Story />
             </Suspense>
           )}
-          <Story />
+          {docsProps?.noStyles && <Story />}
         </Provider>
       ),
     ],

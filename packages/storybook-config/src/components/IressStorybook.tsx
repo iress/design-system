@@ -204,11 +204,6 @@ export const IressStorybook = ({
   return (
     <IressStorybookContext value={componentMapping}>
       <IressStorybookStyles />
-      {!noStyles && (
-        <Suspense>
-          <IDSStyles />
-        </Suspense>
-      )}
       <Unstyled>
         <IressProvider>
           <IressText>
@@ -223,7 +218,19 @@ export const IressStorybook = ({
                 a: 'a',
               }}
             >
-              <DocsContainer context={props.context}>{children}</DocsContainer>
+              {!noStyles && (
+                <Suspense>
+                  <IDSStyles />
+                  <DocsContainer context={props.context}>
+                    {children}
+                  </DocsContainer>
+                </Suspense>
+              )}
+              {noStyles && (
+                <DocsContainer context={props.context}>
+                  {children}
+                </DocsContainer>
+              )}
             </MDXProvider>
           </IressText>
         </IressProvider>
