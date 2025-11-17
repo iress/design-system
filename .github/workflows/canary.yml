@@ -40,74 +40,62 @@ jobs:
         with:
           fetch-depth: 0
 
-      # - name: Check CI Status
-      #   env:
-      #     GH_TOKEN: ${{ github.token }}
-      #   run: |
-      #     echo "Checking CI workflow status for branch: ${{ github.ref_name }}"
+      - name: Check CI Status
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "Checking CI workflow status for branch: ${{ github.ref_name }}"
 
-      #     # Get the latest CI run for this branch
-      #     CI_STATUS=$(gh run list \
-      #       --workflow=ci.yml \
-      #       --branch=${{ github.ref_name }} \
-      #       --json conclusion \
-      #       --limit 1 \
-      #       --jq '.[0].conclusion')
+          # Get the latest CI run for this branch
+          CI_STATUS=$(gh run list \
+            --workflow=ci.yml \
+            --branch=${{ github.ref_name }} \
+            --json conclusion \
+            --limit 1 \
+            --jq '.[0].conclusion')
 
-      #     echo "Latest CI status: $CI_STATUS"
+          echo "Latest CI status: $CI_STATUS"
 
-      #     if [ "$CI_STATUS" != "success" ]; then
-      #       echo "❌ CI workflow has not passed on this branch. Cannot publish canary release."
-      #       echo "Please ensure CI passes before publishing a canary release."
-      #       exit 1
-      #     fi
+          if [ "$CI_STATUS" != "success" ]; then
+            echo "❌ CI workflow has not passed on this branch. Cannot publish canary release."
+            echo "Please ensure CI passes before publishing a canary release."
+            exit 1
+          fi
 
-      #     echo "✅ CI workflow passed. Proceeding with canary release."
+          echo "✅ CI workflow passed. Proceeding with canary release."
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
-        id: registry
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://registry.npmjs.org'
-          always-auth: true
 
       - name: Enable Corepack
         run: corepack enable
 
-      - run: yarn npm whoami
-        env:
-          NODE_AUTH_TOKEN: ${{ steps.registry.outputs.token }}
+      - name: Install dependencies
+        run: yarn install --immutable
 
-      # - name: Install dependencies
-      #   run: yarn install --immutable
+      - name: Build packages
+        run: yarn build
 
-      # - name: Build packages
-      #   run: yarn build
+      - name: Version packages
+        run: |
+          # Generate canary version with timestamp
+          TIMESTAMP=$(date +%Y%m%d%H%M%S)
+          SHORT_SHA=${GITHUB_SHA:0:7}
+          CANARY_VERSION="0.0.0-canary-${TIMESTAMP}-${SHORT_SHA}"
 
-      # - name: Version packages
-      #   run: |
-      #     # Generate canary version with timestamp
-      #     TIMESTAMP=$(date +%Y%m%d%H%M%S)
-      #     SHORT_SHA=${GITHUB_SHA:0:7}
-      #     CANARY_VERSION="0.0.0-canary-${TIMESTAMP}-${SHORT_SHA}"
+          if [ "${{ github.event.inputs.package }}" != "" ]; then
+            yarn workspace ${{ github.event.inputs.package }} version $CANARY_VERSION
+          else
+            yarn workspaces foreach -A --no-private version $CANARY_VERSION
+          fi
 
-      #     if [ "${{ github.event.inputs.package }}" != "" ]; then
-      #       yarn workspace ${{ github.event.inputs.package }} version $CANARY_VERSION
-      #     else
-      #       yarn workspaces foreach -A --no-private version $CANARY_VERSION
-      #     fi
-
-      # - name: Configure npm authentication for OIDC
-      #   run: |
-      #     echo 'npmRegistries:' >> .yarnrc.yml
-      #     echo '  "https://registry.npmjs.org":' >> .yarnrc.yml
-      #     echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
-
-      # - name: Publish to NPM
-      #   run: |
-      #     if [ "${{ github.event.inputs.package }}" != "" ]; then
-      #       yarn workspace ${{ github.event.inputs.package }} npm publish --tag canary --access public --provenance
-      #     else
-      #       yarn workspaces foreach -A --no-private npm publish --tag canary --access public --provenance
-      #     fi
+      - name: Publish to NPM
+        run: |
+          if [ "${{ github.event.inputs.package }}" != "" ]; then
+            yarn workspace ${{ github.event.inputs.package }} npm publish --tag canary --access public --provenance
+          else
+            yarn workspaces foreach -A --no-private npm publish --tag canary --access public --provenance
+          fi
