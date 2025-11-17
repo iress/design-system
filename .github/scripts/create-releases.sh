@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e
 
+# Verify required environment variables
+if [ -z "$GITHUB_SHA" ]; then
+  echo "❌ Error: GITHUB_SHA is empty. This script is meant to be run inside a GitHub Action."
+  exit 1
+fi
+
 RELEASE_INFO=$1
 
 echo "Creating GitHub releases and tags..."

@@ -100,7 +100,7 @@ jobs:
         run: |
           TIMESTAMP=$(date +%Y%m%d%H%M%S)
           SHORT_SHA=${GITHUB_SHA:0:7}
-          CANARY_VERSION="0.0.0-canary.${TIMESTAMP}-${SHORT_SHA}"
+          CANARY_VERSION="0.0.0-canary-${TIMESTAMP}-${SHORT_SHA}"
           echo "📌 Canary version: $CANARY_VERSION"
           if [ "${{ github.event.inputs.package }}" != "" ]; then
             yarn workspace ${{ github.event.inputs.package }} version $CANARY_VERSION
