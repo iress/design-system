@@ -57,7 +57,7 @@
     "dev": "concurrently \"wait-on tcp:6006 && wait-on tcp:6007 && yarn storybook\" \"yarn packages/components dev:no-open\" \"yarn packages/tokens dev:no-open\"",
     "prepublish": "tsx ./scripts/storybook-addon-prepublish.ts",
     "prepare": "husky",
-    "build-storybook": "yarn monorepo run build-storybook && storybook build",
+    "build-storybook": "storybook build",
     "storybook": "storybook dev -p 6005",
     "storybook:serve-addon": "tsx ./scripts/storybook-addon-server.ts",
     "lint": "yarn monorepo run lint",
