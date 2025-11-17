@@ -159,6 +159,9 @@ jobs:
     strategy:
       matrix:
         include:
+          - package: root
+            token: CHROMATIC_ROOT_PROJECT_TOKEN
+            dir: .
           - package: components
             token: CHROMATIC_COMPONENTS_PROJECT_TOKEN
             dir: packages/components
