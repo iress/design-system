@@ -93,6 +93,8 @@ jobs:
           fi
 
       - name: Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           if [ "${{ github.event.inputs.package }}" != "" ]; then
             yarn workspace ${{ github.event.inputs.package }} npm publish --tag canary --access public --provenance

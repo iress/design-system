@@ -32,26 +32,35 @@ export const FormattedValue: Story = {
         {
           mode: 'date',
           example: (
-            <IressTableFormattedValue value={new Date()} format="date" />
+            <IressTableFormattedValue
+              value={new Date('2025-11-14')}
+              format="date"
+            />
           ),
         },
         {
           mode: 'shortDate',
           example: (
-            <IressTableFormattedValue value={new Date()} format="shortDate" />
+            <IressTableFormattedValue
+              value={new Date('2025-11-14')}
+              format="shortDate"
+            />
           ),
         },
         {
           mode: 'isoDateTime',
           example: (
-            <IressTableFormattedValue value={new Date()} format="isoDateTime" />
+            <IressTableFormattedValue
+              value={new Date('2025-11-14')}
+              format="isoDateTime"
+            />
           ),
         },
         {
           mode: 'relativeTime',
           example: (
             <IressTableFormattedValue
-              value={new Date()}
+              value={new Date('2025-11-14')}
               format="relativeTime"
             />
           ),
