@@ -1,0 +1,66 @@
+name: Publish New Packages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish-new:
+    name: Publish packages not on npm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install and build dependencies
+        run: |
+          corepack enable
+          yarn install
+          yarn build
+
+      - name: Configure npm auth
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "${NPM_TOKEN}" ]; then echo "NPM_TOKEN not set"; exit 1; fi
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+
+      - name: Publish unpublished packages (shell)
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${NPM_TOKEN:-}" ]; then
+            echo "NPM_TOKEN not set"; exit 1
+          fi
+          echo "Scanning packages/..."
+          for pkg in packages/*; do
+            if [ -f "$pkg/package.json" ]; then
+              name=$(jq -r '.name // empty' "$pkg/package.json")
+              private=$(jq -r '.private // false' "$pkg/package.json")
+              version=$(jq -r '.version // unknown' "$pkg/package.json")
+              if [ -z "$name" ]; then
+                echo "Skipping $pkg (no name)"
+                continue
+              fi
+              if [ "$private" = "true" ]; then
+                echo "Skipping private package $name"
+                continue
+              fi
+              if npm view "$name" version > /dev/null 2>&1; then
+                echo "Package $name already on npm; skipping"
+                continue
+              fi
+              echo "Publishing $name@$version from $pkg"
+              (cd "$pkg" && npm publish --access public)
+            fi
+          done
