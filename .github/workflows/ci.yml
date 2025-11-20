@@ -238,7 +238,8 @@ jobs:
     if: |
       github.repository_owner == 'iress' && (
         (github.event_name == 'workflow_dispatch' && inputs.publish_canary == true) ||
-        (github.event_name == 'pull_request' && contains(github.event.head_commit.message, '[canary'))
+        (github.event_name == 'pull_request' && (contains(github.event.pull_request.title, '[canary') || contains(github.event.pull_request.body, '[canary'))) ||
+        (github.event_name == 'push' && !contains(fromJSON('["refs/heads/main", "refs/heads/5.x"]'), github.ref) && contains(github.event.head_commit.message, '[canary'))
       )
     runs-on: ubuntu-latest
     needs: [validated, build]
@@ -277,17 +278,24 @@ jobs:
 
       - name: Extract Package from Commit Message
         id: extract-package
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' || github.event_name == 'push'
         run: |
-          COMMIT_MSG="${{ github.event.head_commit.message }}"
-          echo "Commit message: $COMMIT_MSG"
+          # Get message based on event type
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            # Check PR title first, then PR body
+            COMMIT_MSG="${{ github.event.pull_request.title }} ${{ github.event.pull_request.body }}"
+            echo "Checking PR title and body for [canary] tag"
+          else
+            COMMIT_MSG="${{ github.event.head_commit.message }}"
+            echo "Commit message: $COMMIT_MSG"
+          fi
 
           # Extract package name from [canary:package-name] pattern
           if echo "$COMMIT_MSG" | grep -q '\[canary:'; then
             PACKAGE=$(echo "$COMMIT_MSG" | grep -oP '\[canary:\K[^\]]+' || echo "")
             if [ -n "$PACKAGE" ]; then
               echo "package=$PACKAGE" >> $GITHUB_OUTPUT
-              echo "📦 Extracted package from commit: $PACKAGE"
+              echo "📦 Extracted package: $PACKAGE"
             else
               echo "package=" >> $GITHUB_OUTPUT
               echo "📦 No package specified, will publish all packages"
