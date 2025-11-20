@@ -88,11 +88,11 @@ jobs:
 
   validate:
     name: Validate
-    runs-on: ${{ matrix.check == 'lint:mermaid' && 'ubuntu-24.04' || 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
     needs: setup
     strategy:
       matrix:
-        check: [lint, typecheck, test:ci, lint:mermaid]
+        check: [lint, typecheck, test:ci]
     steps:
       - uses: actions/checkout@v5
       - name: Setup Node.js
@@ -113,29 +113,7 @@ jobs:
           key: yarn-${{ runner.os }}-${{ github.run_id }}
       - name: Install the correct dependencies
         run: yarn install --immutable
-      - name: Install Chromium dependencies for Mermaid linting
-        if: matrix.check == 'lint:mermaid'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            chromium-browser \
-            libnss3 \
-            libatk-bridge2.0-0 \
-            libx11-xcb1 \
-            libxcomposite1 \
-            libxcursor1 \
-            libxdamage1 \
-            libxrandr2 \
-            libgbm1 \
-            libpango-1.0-0 \
-            libcairo2 \
-            libasound2t64 \
-            libatspi2.0-0 \
-            libxshmfence1
       - name: Run ${{ matrix.check }}
-        env:
-          PUPPETEER_EXECUTABLE_PATH: ${{ matrix.check == 'lint:mermaid' && '/usr/bin/chromium-browser' || '' }}
-          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: ${{ matrix.check == 'lint:mermaid' && 'true' || '' }}
         run: |
           if [ "${{ matrix.check }}" = "test:ci" ]; then
             # Tests with retry logic
@@ -163,6 +141,36 @@ jobs:
             # Run other checks normally (lint, typecheck) without retry
             yarn ${{ matrix.check }}
           fi
+
+  lint-mermaid:
+    name: Lint Mermaid Diagrams
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/puppeteer/puppeteer:latest
+      options: --user root
+    needs: setup
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Restore Yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.INSTALL_CACHE_PATHS }}
+          key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Restore build outputs
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.BUILD_CACHE_PATHS }}
+          key: yarn-${{ runner.os }}-${{ github.run_id }}
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Run Mermaid linting
+        run: yarn lint:mermaid
 
   build:
     name: Build
@@ -246,10 +254,10 @@ jobs:
   validated:
     name: Validated
     runs-on: ubuntu-latest
-    needs: validate
+    needs: [validate, lint-mermaid]
     steps:
       - name: All validate jobs passed ✅
-        run: echo "✅ All lint, typecheck, and test jobs passed."
+        run: echo "✅ All lint, typecheck, test, and mermaid validation jobs passed."
 
   stable-release:
     name: Stable Release
