@@ -1,5 +1,5 @@
 name: CI
-run-name: ${{ github.event.workflow_run.head_commit.message }}
+run-name: ${{ github.event.head_commit.message || github.ref_name }}
 
 on:
   pull_request:
