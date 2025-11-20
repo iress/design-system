@@ -114,17 +114,17 @@ jobs:
           key: yarn-${{ runner.os }}-${{ github.run_id }}
       - name: Install the correct dependencies
         run: yarn install --immutable
-      - name: Cache Chromium
+      - name: Cache apt packages
         if: matrix.check == 'lint:mermaid'
         uses: actions/cache@v4
-        id: chromium-cache
+        id: apt-cache
         with:
-          path: |
-            /usr/bin/chromium-browser
-            /usr/lib/chromium-browser
-          key: chromium-${{ runner.os }}-ubuntu-24.04
+          path: /var/cache/apt/archives
+          key: apt-chromium-${{ runner.os }}-ubuntu-24.04-${{ hashFiles('.github/workflows/ci-cd.yml') }}
+          restore-keys: |
+            apt-chromium-${{ runner.os }}-ubuntu-24.04-
       - name: Install Chromium for Mermaid linting
-        if: matrix.check == 'lint:mermaid' && steps.chromium-cache.outputs.cache-hit != 'true'
+        if: matrix.check == 'lint:mermaid'
         run: |
           sudo apt-get update
           sudo apt-get install -y chromium-browser
