@@ -166,17 +166,16 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Find Chrome executable
+        id: find-chrome
         run: |
-          echo "Looking for Chrome executable..."
-          which google-chrome-stable || echo "google-chrome-stable not found"
-          which chromium || echo "chromium not found"
-          which chrome || echo "chrome not found"
-          ls -la /usr/bin/ | grep -i chrome || echo "No chrome in /usr/bin"
-          node -e "console.log('Puppeteer executable:', process.env.PUPPETEER_EXECUTABLE_PATH || require('puppeteer').executablePath())" || echo "Could not find via Puppeteer"
+          CHROME_PATH=$(node -e "console.log(require('puppeteer').executablePath())")
+          echo "Chrome found at: $CHROME_PATH"
+          echo "chrome_path=$CHROME_PATH" >> $GITHUB_OUTPUT
+          ls -la "$CHROME_PATH" || echo "Chrome file not accessible"
       - name: Run Mermaid linting
         env:
-          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
-          PUPPETEER_ARGS: --no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage
+          PUPPETEER_EXECUTABLE_PATH: ${{ steps.find-chrome.outputs.chrome_path }}
+          PUPPETEER_ARGS: --no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage --disable-gpu
         run: yarn lint:mermaid
 
   build:
