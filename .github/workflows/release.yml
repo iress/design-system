@@ -1,23 +1,7 @@
 name: Release
-run-name: ${{ github.event_name == 'workflow_dispatch' && format('{0} (canary) by @{1}', inputs.package || 'all packages', github.actor) || github.event.workflow_run.head_commit.message }}
+run-name: ${{ github.event.workflow_run.head_commit.message }}
 
 on:
-  workflow_dispatch:
-    inputs:
-      package:
-        description: 'Package to release (leave empty for all)'
-        required: false
-        type: choice
-        options:
-          - ''
-          - '@iress-oss/ids-components'
-          - '@iress-oss/ids-mcp-server'
-          - '@iress-oss/ids-storybook-config'
-          - '@iress-oss/ids-storybook-okta'
-          - '@iress-oss/ids-storybook-sandbox'
-          - '@iress-oss/ids-storybook-toggle-stories'
-          - '@iress-oss/ids-storybook-version-badge'
-          - '@iress-oss/ids-tokens'
   workflow_run:
     workflows: ['CI']
     types: [completed]
@@ -37,56 +21,13 @@ env:
 jobs:
   packages:
     name: Packages
-    if: github.repository_owner == 'iress' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success')
+    if: github.repository_owner == 'iress' && github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     environment: npm-publishing
     steps:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-
-      - name: Determine Release Type
-        id: release-type
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "type=canary" >> $GITHUB_OUTPUT
-            echo "🎯 Canary release triggered manually from branch: ${{ github.ref_name }}"
-          else
-            echo "type=stable" >> $GITHUB_OUTPUT
-            echo "📦 Stable release triggered from CI on branch: ${{ github.ref_name }}"
-          fi
-
-      # - name: Check CI Status (Canary)
-      #   if: steps.release-type.outputs.type == 'canary'
-      #   uses: actions/github-script@v7
-      #   with:
-      #     script: |
-      #       const branch = context.ref.replace('refs/heads/', '');
-      #       console.log(`Checking CI workflow status for branch: ${branch}`);
-
-      #       const { data: runs } = await github.rest.actions.listWorkflowRuns({
-      #         owner: context.repo.owner,
-      #         repo: context.repo.repo,
-      #         workflow_id: 'ci.yml',
-      #         branch: branch,
-      #         per_page: 1,
-      #         status: 'completed'
-      #       });
-
-      #       if (runs.workflow_runs.length === 0) {
-      #         core.setFailed('❌ No CI workflow runs found on this branch. Cannot publish canary release.');
-      #         return;
-      #       }
-
-      #       const latestRun = runs.workflow_runs[0];
-      #       console.log(`Latest CI status: ${latestRun.conclusion}`);
-
-      #       if (latestRun.conclusion !== 'success') {
-      #         core.setFailed('❌ CI workflow has not passed on this branch. Cannot publish canary release.');
-      #         return;
-      #       }
-
-      #       console.log('✅ CI workflow passed. Proceeding with canary release.');
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -103,19 +44,6 @@ jobs:
       - name: Build packages
         run: yarn build
 
-      - name: Version Packages (Canary)
-        if: steps.release-type.outputs.type == 'canary'
-        run: |
-          TIMESTAMP=$(date +%Y%m%d%H%M%S)
-          SHORT_SHA=${GITHUB_SHA:0:7}
-          CANARY_VERSION="0.0.0-canary-${TIMESTAMP}-${SHORT_SHA}"
-          echo "📌 Canary version: $CANARY_VERSION"
-          if [ "${{ github.event.inputs.package }}" != "" ]; then
-            yarn workspace ${{ github.event.inputs.package }} version $CANARY_VERSION
-          else
-            yarn workspaces foreach -A --no-private version $CANARY_VERSION
-          fi
-
       - name: Configure npm authentication for OIDC
         run: |
           echo 'npmRegistries:' >> .yarnrc.yml
@@ -123,23 +51,13 @@ jobs:
           echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
 
       - name: Detect Version Changes (Stable)
-        if: steps.release-type.outputs.type == 'stable'
         id: version-check
         run: |
           chmod +x .github/scripts/publish-packages.sh
           .github/scripts/publish-packages.sh stable
 
-      - name: Publish to NPM (Canary)
-        if: steps.release-type.outputs.type == 'canary'
-        run: |
-          if [ "${{ github.event.inputs.package }}" != "" ]; then
-            yarn workspace ${{ github.event.inputs.package }} npm publish --tag canary --access public --provenance
-          else
-            yarn workspaces foreach -A --no-private npm publish --tag canary --access public --provenance
-          fi
-
       - name: Publish to NPM (Stable)
-        if: steps.release-type.outputs.type == 'stable' && steps.version-check.outputs.has_version_changes == 'true'
+        if: steps.version-check.outputs.has_version_changes == 'true'
         id: publish
         run: |
           PACKAGES="${{ steps.version-check.outputs.packages_to_publish }}"
@@ -168,7 +86,7 @@ jobs:
           echo "release_info=$RELEASE_INFO" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Releases
-        if: steps.release-type.outputs.type == 'stable' && steps.version-check.outputs.has_version_changes == 'true'
+        if: steps.version-check.outputs.has_version_changes == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
