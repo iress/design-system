@@ -103,8 +103,13 @@ module.exports = {
     return commands;
   },
 
-  // Configuration and documentation files - format only
-  '**/*.{json,yaml,yml,md}': (files) => [`prettier --write ${files.join(' ')}`],
+  // Configuration and documentation files - format and validate Mermaid diagrams
+  '**/*.{json,yaml,yml}': (files) => [`prettier --write ${files.join(' ')}`],
+
+  '**/*.md': (files) => [
+    `prettier --write ${files.join(' ')}`,
+    `tsx ./scripts/lint-mermaid.ts ${files.join(' ')}`,
+  ],
 
   // MDX files (Storybook stories) - comprehensive checks
   '**/*.mdx': (files) => {
