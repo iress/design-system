@@ -45,9 +45,9 @@ jobs:
           echo "Scanning packages/..."
           for pkg in packages/*; do
             if [ -f "$pkg/package.json" ]; then
-              name=$(jq -r '.name // empty' "$pkg/package.json")
+              name=$(jq -r '.name // ""' "$pkg/package.json")
               private=$(jq -r '.private // false' "$pkg/package.json")
-              version=$(jq -r '.version // unknown' "$pkg/package.json")
+              version=$(jq -r '.version // "unknown"' "$pkg/package.json")
               if [ -z "$name" ]; then
                 echo "Skipping $pkg (no name)"
                 continue
