@@ -118,6 +118,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
+            chromium-browser \
             libnss3 \
             libatk-bridge2.0-0 \
             libx11-xcb1 \
@@ -132,6 +133,9 @@ jobs:
             libatspi2.0-0 \
             libxshmfence1
       - name: Run ${{ matrix.check }}
+        env:
+          PUPPETEER_EXECUTABLE_PATH: ${{ matrix.check == 'lint:mermaid' && '/usr/bin/chromium-browser' || '' }}
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: ${{ matrix.check == 'lint:mermaid' && 'true' || '' }}
         run: |
           if [ "${{ matrix.check }}" = "test:ci" ]; then
             # Tests with retry logic
