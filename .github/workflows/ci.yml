@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       publish_canary:
-        description: 'Publish canary release after CI passes'
+        description: 'Publish canary release'
         required: false
         type: boolean
         default: false
