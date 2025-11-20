@@ -38,8 +38,7 @@ jobs:
   packages:
     name: Packages
     if: github.repository_owner == 'iress' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success')
-    runs-on:
-      group: wealth-actions-runners
+    runs-on: ubuntu-latest
     environment: npm-publishing
     steps:
       - uses: actions/checkout@v5

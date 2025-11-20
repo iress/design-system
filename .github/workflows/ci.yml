@@ -28,8 +28,7 @@ env:
 jobs:
   setup:
     name: Setup
-    runs-on:
-      group: wealth-actions-runners
+    runs-on: ubuntu-latest
     outputs:
       yarn-cache-install-hit: ${{ steps.yarn-cache.outputs.cache-hit }}
       yarn-cache-build-hit: ${{ steps.yarn-cache-build.outputs.cache-hit }}
@@ -65,8 +64,7 @@ jobs:
 
   validate:
     name: Validate
-    runs-on:
-      group: wealth-actions-runners
+    runs-on: ubuntu-latest
     needs: setup
     strategy:
       matrix:
@@ -122,8 +120,7 @@ jobs:
 
   build:
     name: Build
-    runs-on:
-      group: wealth-actions-runners
+    runs-on: ubuntu-latest
     needs: setup
     steps:
       - uses: actions/checkout@v5
@@ -153,8 +150,7 @@ jobs:
 
   chromatic:
     name: Chromatic (${{ matrix.package }})
-    runs-on:
-      group: wealth-actions-runners
+    runs-on: ubuntu-latest
     needs: setup
     strategy:
       matrix:
@@ -204,8 +200,7 @@ jobs:
 
   validated:
     name: Validated
-    runs-on:
-      group: wealth-actions-runners
+    runs-on: ubuntu-latest
     needs: validate
     steps:
       - name: All validate jobs passed ✅
