@@ -37,7 +37,7 @@ graph TD
 
 ## CI Workflow (Unified CI/CD)
 
-**File:** `.github/workflows/ci.yml`
+**File:** `.github/workflows/ci-cd.yml`
 
 **Triggers:**
 
@@ -99,6 +99,7 @@ graph LR
 Runs three validation checks in parallel:
 
 - **Lint:** ESLint checks for code quality
+- **Lint:mermaid:** Mermaid diagram syntax validation (requires Chromium)
 - **Typecheck:** TypeScript type checking
 - **Test:** Unit and integration tests with retry logic (up to 3 attempts)
 
@@ -485,7 +486,7 @@ The workflow uses custom `run-name` to make runs easier to identify in the GitHu
 
 To manually trigger the CI workflow (for canary releases):
 
-**URL:** https://github.com/iress/design-system/actions/workflows/ci.yml
+**URL:** https://github.com/iress/design-system/actions/workflows/ci-cd.yml
 
 **Steps:**
 

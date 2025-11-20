@@ -54,9 +54,7 @@ jobs:
   setup:
     name: Setup
     runs-on: ubuntu-latest
-    outputs:
-      yarn-cache-install-hit: ${{ steps.yarn-cache.outputs.cache-hit }}
-      yarn-cache-build-hit: ${{ steps.yarn-cache-build.outputs.cache-hit }}
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
       - name: Setup Node.js
@@ -71,18 +69,14 @@ jobs:
         with:
           path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            yarn-${{ runner.os }}-
       - name: Cache Yarn build
         id: yarn-cache-build
         uses: actions/cache@v4
         with:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
-          restore-keys: |
-            yarn-${{ runner.os }}-
-      - name: Install dependencies
-        run: yarn install --immutable
+      - name: Install dependencies if needed
+        run: yarn install --immutable --immutable-cache
       - name: Build dependencies
         if: steps.yarn-cache-build.outputs.cache-hit != 'true'
         run: yarn build
@@ -91,7 +85,9 @@ jobs:
     name: Validate
     runs-on: ${{ matrix.check == 'lint:mermaid' && 'ubuntu-24.04' || 'ubuntu-latest' }}
     needs: setup
+    timeout-minutes: 20
     strategy:
+      fail-fast: false
       matrix:
         check: [lint, typecheck, test:ci, lint:mermaid]
     steps:
@@ -103,17 +99,19 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
       - name: Restore Yarn dependencies
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          fail-on-cache-miss: true
       - name: Restore build outputs
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
-      - name: Install the correct dependencies
-        run: yarn install --immutable
+          fail-on-cache-miss: true
+      - name: Install dependencies if needed
+        run: yarn install --immutable --immutable-cache
       - name: Install Chromium for Mermaid linting
         if: matrix.check == 'lint:mermaid'
         run: |
@@ -125,7 +123,7 @@ jobs:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
         run: |
           if [ "${{ matrix.check }}" = "test:ci" ]; then
-            # Tests with retry logic
+            # Tests with retry logic for flaky tests
             MAX_ATTEMPTS=3
             ATTEMPT=1
             
@@ -136,18 +134,19 @@ jobs:
                 echo "✅ Tests passed on attempt $ATTEMPT"
                 exit 0
               else
+                EXIT_CODE=$?
                 if [ $ATTEMPT -eq $MAX_ATTEMPTS ]; then
-                  echo "❌ Tests failed after $MAX_ATTEMPTS attempts"
-                  exit 1
+                  echo "❌ Tests failed after $MAX_ATTEMPTS attempts (exit code: $EXIT_CODE)"
+                  exit $EXIT_CODE
                 fi
                 
-                echo "⚠️ Tests failed on attempt $ATTEMPT. Retrying in 30 seconds..."
+                echo "⚠️ Tests failed on attempt $ATTEMPT (exit code: $EXIT_CODE). Retrying in 5 seconds..."
                 sleep 5
                 ATTEMPT=$((ATTEMPT + 1))
               fi
             done
           else
-            # Run other checks normally (lint, typecheck) without retry
+            # Run other checks normally (lint, typecheck, lint:mermaid) without retry
             yarn ${{ matrix.check }}
           fi
 
@@ -155,6 +154,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     needs: setup
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
       - name: Setup Node.js
@@ -164,15 +164,17 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
       - name: Restore Yarn dependencies
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          fail-on-cache-miss: true
       - name: Restore build outputs
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
+          fail-on-cache-miss: true
       - name: Upload build artifacts
         uses: actions/upload-artifact@v5
         with:
@@ -180,12 +182,15 @@ jobs:
           path: |
             packages/*/dist/
           retention-days: 7
+          if-no-files-found: warn
 
   chromatic:
     name: Chromatic (${{ matrix.package }})
     runs-on: ubuntu-latest
     needs: setup
+    timeout-minutes: 20
     strategy:
+      fail-fast: false
       matrix:
         include:
           - package: root
@@ -208,17 +213,19 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
       - name: Restore Yarn dependencies
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          fail-on-cache-miss: true
       - name: Restore build outputs
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
-      - name: Install the correct dependencies
-        run: yarn install --immutable
+          fail-on-cache-miss: true
+      - name: Install dependencies if needed
+        run: yarn install --immutable --immutable-cache
       - name: Publish to Chromatic
         uses: chromaui/action@latest
         with:
@@ -233,16 +240,18 @@ jobs:
   validated:
     name: Validated
     runs-on: ubuntu-latest
-    needs: validate
+    needs: [validate, chromatic]
+    timeout-minutes: 5
     steps:
-      - name: All validate jobs passed ✅
-        run: echo "✅ All lint, typecheck, and test jobs passed."
+      - name: All validation jobs passed ✅
+        run: echo "✅ All lint, typecheck, test, and Chromatic jobs passed."
 
   stable-release:
     name: Stable Release
     if: github.repository_owner == 'iress' && github.event_name == 'push' && contains(fromJSON('["refs/heads/main", "refs/heads/5.x"]'), github.ref)
     runs-on: ubuntu-latest
     needs: [validated, build]
+    timeout-minutes: 15
     environment: npm-publishing
     permissions:
       id-token: write
@@ -262,19 +271,21 @@ jobs:
         run: corepack enable
 
       - name: Restore Yarn dependencies
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          fail-on-cache-miss: true
 
       - name: Restore build outputs
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
+          fail-on-cache-miss: true
 
-      - name: Install dependencies
-        run: yarn install --immutable
+      - name: Install dependencies if needed
+        run: yarn install --immutable --immutable-cache
 
       - name: Configure npm authentication for OIDC
         run: |
@@ -332,6 +343,7 @@ jobs:
     if: github.repository_owner == 'iress' && (github.event_name == 'workflow_dispatch' && inputs.publish_canary == true || github.event_name == 'push' && contains(github.event.head_commit.message, '[canary'))
     runs-on: ubuntu-latest
     needs: [validated, build]
+    timeout-minutes: 15
     environment: npm-publishing
     permissions:
       id-token: write
@@ -351,19 +363,21 @@ jobs:
         run: corepack enable
 
       - name: Restore Yarn dependencies
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          fail-on-cache-miss: true
 
       - name: Restore build outputs
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
+          fail-on-cache-miss: true
 
-      - name: Install dependencies
-        run: yarn install --immutable
+      - name: Install dependencies if needed
+        run: yarn install --immutable --immutable-cache
 
       - name: Extract Package from Commit Message
         id: extract-package
@@ -372,32 +386,17 @@ jobs:
           COMMIT_MSG="${{ github.event.head_commit.message }}"
           echo "Commit message: $COMMIT_MSG"
 
-          # Check if [canary] tag exists
-          if echo "$COMMIT_MSG" | grep -q '\[canary'; then
-            echo "has_canary=true" >> $GITHUB_OUTPUT
-            
-            # Extract package name from [canary:package-name] pattern
-            if echo "$COMMIT_MSG" | grep -q '\[canary:'; then
-              PACKAGE=$(echo "$COMMIT_MSG" | grep -oP '\[canary:\K[^\]]+' || echo "")
-              if [ -n "$PACKAGE" ]; then
-                echo "package=$PACKAGE" >> $GITHUB_OUTPUT
-                echo "📦 Extracted package: $PACKAGE"
-              else
-                echo "package=" >> $GITHUB_OUTPUT
-                echo "📦 No package specified, will publish all packages"
-              fi
-            else
-              echo "package=" >> $GITHUB_OUTPUT
-              echo "📦 [canary] without package specified, will publish all packages"
-            fi
+          # Extract package name from [canary:package-name] pattern, if present
+          if [[ "$COMMIT_MSG" =~ \[canary:([^\]]+)\] ]]; then
+            PACKAGE="${BASH_REMATCH[1]}"
+            echo "package=$PACKAGE" >> $GITHUB_OUTPUT
+            echo "📦 Extracted package: $PACKAGE"
           else
-            echo "has_canary=false" >> $GITHUB_OUTPUT
             echo "package=" >> $GITHUB_OUTPUT
-            echo "⏭️ No [canary] tag found, skipping canary release"
+            echo "📦 No specific package in [canary:package] format, will publish all packages"
           fi
 
       - name: Version Packages (Canary)
-        if: github.event_name == 'workflow_dispatch' || steps.extract-package.outputs.has_canary == 'true'
         run: |
           TIMESTAMP=$(date +%Y%m%d%H%M%S)
           SHORT_SHA=${GITHUB_SHA:0:7}
@@ -421,14 +420,12 @@ jobs:
           fi
 
       - name: Configure npm authentication for OIDC
-        if: github.event_name == 'workflow_dispatch' || steps.extract-package.outputs.has_canary == 'true'
         run: |
           echo 'npmRegistries:' >> .yarnrc.yml
           echo '  "https://registry.npmjs.org":' >> .yarnrc.yml
           echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
 
       - name: Publish to NPM (Canary)
-        if: github.event_name == 'workflow_dispatch' || steps.extract-package.outputs.has_canary == 'true'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
