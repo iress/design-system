@@ -277,9 +277,9 @@ jobs:
         run: |
           # Get message based on event type
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            # Get the latest commit message from the PR
-            COMMIT_MSG=$(git log -1 --pretty=%B)
-            echo "Latest commit message from PR: $COMMIT_MSG"
+            # Get the actual HEAD commit message from the PR (not the merge commit)
+            COMMIT_MSG=$(git log --format=%B -n 1 ${{ github.event.pull_request.head.sha }})
+            echo "Latest commit message from PR HEAD: $COMMIT_MSG"
           else
             COMMIT_MSG="${{ github.event.head_commit.message }}"
             echo "Commit message: $COMMIT_MSG"
