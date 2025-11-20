@@ -7,9 +7,45 @@
 echo "📦 Pre-push: Checking yarn lockfile..."
 yarn install --immutable
 
-# Run comprehensive lint-staged with tests on staged files
-echo "🔍 Pre-push: Running comprehensive lint, format, and tests on staged files..."
-yarn lint-staged --config lint-staged.pre-push.config.cjs
+# Find the base branch (try common names in order)
+BASE_BRANCH=""
+for branch in origin/main origin/5.x main 5.x; do
+  if git rev-parse --verify "$branch" >/dev/null 2>&1; then
+    BASE_BRANCH="$branch"
+    break
+  fi
+done
+
+if [ -z "$BASE_BRANCH" ]; then
+  echo "⚠️  Warning: Could not determine base branch, defaulting to origin/main"
+  BASE_BRANCH="origin/main"
+fi
+
+echo "🔍 Pre-push: Detected base branch: $BASE_BRANCH"
+
+# Get merge base (where this branch diverged)
+MERGE_BASE=$(git merge-base HEAD "$BASE_BRANCH")
+
+# Get all changed files since branching (Added, Copied, Modified, Renamed)
+CHANGED_FILES=$(git diff --name-only --diff-filter=ACMR "$MERGE_BASE")
+
+if [ -z "$CHANGED_FILES" ]; then
+  echo "✅ No files changed since branching from $BASE_BRANCH"
+else
+  echo "📝 Files changed since branching:"
+  echo "$CHANGED_FILES" | head -n 10
+  FILE_COUNT=$(echo "$CHANGED_FILES" | wc -l | tr -d ' ')
+  if [ "$FILE_COUNT" -gt 10 ]; then
+    echo "... and $((FILE_COUNT - 10)) more files"
+  fi
+  
+  # Stage the changed files temporarily for lint-staged to process
+  echo "$CHANGED_FILES" | xargs git add --intent-to-add 2>/dev/null || true
+  
+  # Run comprehensive lint-staged with tests on all changed files
+  echo "🔍 Pre-push: Running comprehensive lint, format, and tests on changed files..."
+  yarn lint-staged --config lint-staged.pre-push.config.cjs --diff="$MERGE_BASE"
+fi
 
 # Check there are no commits with secrets before pushing
 ggshield secret scan pre-push "$@"

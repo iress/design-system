@@ -22,7 +22,7 @@ graph TD
     E --> F[Create GitHub Releases]
 
     C -->|Feature Branch| G{Canary Trigger?}
-    G -->|[canary] in commit OR manual trigger| H[Canary Release Job]
+    G -->|"[canary] in commit OR manual trigger"| H[Canary Release Job]
     H --> I[Publish to npm with 'canary' tag]
 
     G -->|No trigger| J[End - No Release]
