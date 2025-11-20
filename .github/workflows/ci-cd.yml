@@ -111,7 +111,7 @@ jobs:
           key: yarn-${{ runner.os }}-${{ github.run_id }}
           fail-on-cache-miss: true
       - name: Install dependencies if needed
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Install Chromium for Mermaid linting
         if: matrix.check == 'lint:mermaid'
         run: |
@@ -225,7 +225,7 @@ jobs:
           key: yarn-${{ runner.os }}-${{ github.run_id }}
           fail-on-cache-miss: true
       - name: Install dependencies if needed
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Publish to Chromatic
         uses: chromaui/action@latest
         with:
@@ -285,7 +285,7 @@ jobs:
           fail-on-cache-miss: true
 
       - name: Install dependencies if needed
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
 
       - name: Configure npm authentication for OIDC
         run: |
@@ -377,7 +377,7 @@ jobs:
           fail-on-cache-miss: true
 
       - name: Install dependencies if needed
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
 
       - name: Extract Package from Commit Message
         id: extract-package
