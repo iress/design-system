@@ -73,5 +73,9 @@
     "style-dictionary": {
       "optional": true
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iress/design-system"
   }
 }
