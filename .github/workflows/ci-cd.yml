@@ -93,7 +93,7 @@ jobs:
     needs: setup
     strategy:
       matrix:
-        check: [lint, typecheck, test:ci]
+        check: [lint, typecheck, test:ci, lint:mermaid]
     steps:
       - uses: actions/checkout@v5
       - name: Setup Node.js

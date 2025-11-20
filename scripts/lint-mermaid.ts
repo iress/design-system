@@ -167,6 +167,7 @@ function lintMermaidDiagrams(filePatterns: string[]): number {
     } else {
       globSync(pattern, {
         ignore: ['**/node_modules/**', '**/storybook-static/**'],
+        dot: true, // Include files and folders starting with .
       }).forEach((file) => files.add(file));
     }
   });
