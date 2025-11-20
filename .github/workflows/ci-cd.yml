@@ -116,8 +116,8 @@ jobs:
       - name: Install Chromium for Mermaid linting
         if: matrix.check == 'lint:mermaid'
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq chromium-browser > /dev/null
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser
       - name: Run ${{ matrix.check }}
         env:
           PUPPETEER_EXECUTABLE_PATH: '/usr/bin/chromium-browser'
