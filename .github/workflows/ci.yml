@@ -238,7 +238,7 @@ jobs:
     if: |
       github.repository_owner == 'iress' && (
         (github.event_name == 'workflow_dispatch' && inputs.publish_canary == true) ||
-        (github.event_name == 'push' && contains(github.event.head_commit.message, '[canary'))
+        (github.event_name == 'pull_request' && contains(github.event.head_commit.message, '[canary'))
       )
     runs-on: ubuntu-latest
     needs: [validated, build]
@@ -277,7 +277,7 @@ jobs:
 
       - name: Extract Package from Commit Message
         id: extract-package
-        if: github.event_name == 'push'
+        if: github.event_name == 'pull_request'
         run: |
           COMMIT_MSG="${{ github.event.head_commit.message }}"
           echo "Commit message: $COMMIT_MSG"
