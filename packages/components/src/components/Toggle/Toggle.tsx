@@ -3,7 +3,6 @@ import {
   type MouseEvent,
   useEffect,
   useId,
-  useState,
   type ReactNode,
   useRef,
 } from 'react';
@@ -14,10 +13,13 @@ import { toggle } from './Toggle.styles';
 import { css, cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 import { styled } from '@/styled-system/jsx';
+import { useControlledState } from '@/hooks';
 
 export interface IressToggleProps extends Omit<IressStyledProps, 'onChange'> {
   /**
-   * Sets the checked state of the Toggle.
+   * If true, the toggle on.
+   * Please use this when are rendering the toggle in controlled mode,
+   * meaning it will not change unless you explicitly set the value using `onChange` and `checked`.
    */
   checked?: boolean;
 
@@ -25,6 +27,13 @@ export interface IressToggleProps extends Omit<IressStyledProps, 'onChange'> {
    * Provides the label for the Toggle.
    */
   children: ReactNode;
+
+  /**
+   * If true, the toggle will be initially rendered as off.
+   * Please use this when are rendering the toggle in uncontrolled mode,
+   * meaning the value will change automatically when the user interacts with the toggle.
+   */
+  defaultChecked?: boolean;
 
   /**
    * Hides the label if true (label will still be read out by screen readers).
@@ -67,8 +76,9 @@ const ToggleLabel = ({
 };
 
 export const IressToggle = ({
-  checked: checkedProp = false,
+  checked: checkedProp,
   hiddenLabel,
+  defaultChecked,
   children,
   layout = 'inline',
   className,
@@ -76,7 +86,6 @@ export const IressToggle = ({
   'data-testid': testid,
   ...restProps
 }: IressToggleProps) => {
-  const [checked, setChecked] = useState(checkedProp);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const ariaId = useId();
   const toggleId = `toggleLabel--${ariaId}`;
@@ -86,14 +95,18 @@ export const IressToggle = ({
     'data-testid': testid,
   };
 
-  const handleButtonClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    setChecked(!checked);
-    onChange?.(!checked, e);
-  };
+  const { value: isChecked, setValue: setChecked } =
+    useControlledState<boolean>({
+      component: 'IressToggle',
+      propName: 'checked',
+      defaultValue: defaultChecked,
+      value: checkedProp,
+    });
 
-  useEffect(() => {
-    setChecked(checkedProp);
-  }, [checkedProp, onChange]);
+  const handleButtonClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+    setChecked(!isChecked);
+    onChange?.(!isChecked, e);
+  };
 
   useEffect(() => {
     if (!buttonRef.current) {
@@ -110,9 +123,9 @@ export const IressToggle = ({
     buttonRef.current.classList.add(
       css({ _before: { animationStyle: 'toggle-active' } }),
     );
-  }, [checked]);
+  }, [isChecked]);
 
-  const classes = toggle({ layout, checked });
+  const classes = toggle({ layout, checked: !!isChecked });
 
   return (
     <styled.div
@@ -128,7 +141,7 @@ export const IressToggle = ({
           className={cx(classes.toggleButton)}
           role="switch"
           type="button"
-          aria-checked={checked}
+          aria-checked={!!isChecked}
           onClick={handleButtonClick}
           aria-labelledby={toggleId}
           data-testid={propagateTestid(testid, 'button__button')}
@@ -137,7 +150,7 @@ export const IressToggle = ({
           <IressCheckboxMark
             className={classes.checkboxMark}
             bg="transparent"
-            checked={checked}
+            checked={!!isChecked}
             size="sm"
           />
         </button>

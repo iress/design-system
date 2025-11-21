@@ -12,6 +12,6 @@ export const getTransitionDuration = (
       window
         .getComputedStyle(element, null)
         ?.getPropertyValue('transition-duration') || '.3s',
-    ) * multiplier
+    ) * multiplier || fallback
   );
 };

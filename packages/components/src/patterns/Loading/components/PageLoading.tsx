@@ -134,13 +134,14 @@ export const PageLoading = ({
   ...restProps
 }: PageLoadingProps) => {
   const [show, setShow] = useState(false);
-  const [hideTemplate, setHideTemplate] = useState(false);
+  const showIndicator = loaded !== true && show;
   const [showCritical, setShowCritical] = useState(false);
+  const hideTemplate = !!critical;
   const styles = loading({
     error: !!error,
     pattern: 'page',
     showCritical,
-    showIndicator: show && !hideTemplate,
+    showIndicator: showIndicator && !hideTemplate,
   });
 
   const skeleton = useMemo(() => {
@@ -161,17 +162,10 @@ export const PageLoading = ({
   }, [timeout]);
 
   useEffect(() => {
-    if (loaded === true) {
-      setShow(false);
-    }
-  }, [loaded]);
-
-  useEffect(() => {
     if (!critical) {
       return;
     }
 
-    setHideTemplate(true);
     const showTimeout = setTimeout(() => setShowCritical(true), 200);
 
     return () => {

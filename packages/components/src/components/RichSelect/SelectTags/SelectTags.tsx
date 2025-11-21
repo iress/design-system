@@ -4,7 +4,6 @@ import { composeLabelValueDescriptor } from '@helpers/label-value/composeLabelVa
 import { getFormControlValueAsStringIfDefined } from '@helpers/form/getFormControlValueAsStringIfDefined';
 import {
   useCallback,
-  useEffect,
   useState,
   useMemo,
   useContext,
@@ -149,12 +148,6 @@ const Tags = ({
     },
     [onDeleteAll, popover],
   );
-
-  useEffect(() => {
-    if (!selectedArray.length) {
-      setExpanded(false);
-    }
-  }, [selectedArray]);
 
   if (expanded || !limit || selectedArray.length <= limit)
     return selectedArray.map((item) => (

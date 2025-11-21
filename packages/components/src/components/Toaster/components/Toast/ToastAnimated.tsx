@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getTransitionDuration } from '@helpers/transition/getTransitionDuration';
 import { useFloating, useTransitionStatus } from '@floating-ui/react';
 import { toast as toastStyles } from './Toast.styles';
@@ -34,14 +34,19 @@ export const ToastAnimated = ({
   ...restProps
 }: ToastAnimatedProps) => {
   const [open, setOpen] = useState<boolean>(true);
-  const durationRef = useRef<number>(240);
+  let duration = 240;
 
   const { context: floatingContext } = useFloating({
     open,
     onOpenChange: setOpen,
   });
+
+  if (floatingContext.refs.floating.current) {
+    duration = getTransitionDuration(floatingContext.refs.floating.current);
+  }
+
   const { isMounted, status } = useTransitionStatus(floatingContext, {
-    duration: durationRef.current,
+    duration,
   });
 
   useEffect(() => {
@@ -49,16 +54,11 @@ export const ToastAnimated = ({
 
     setTimeout(() => {
       setOpen(false);
-      setTimeout(() => onTimeout?.(), durationRef.current);
+      setTimeout(() => onTimeout?.(), duration);
     }, timeout);
-  }, [onTimeout, timeout]);
+  }, [duration, onTimeout, timeout]);
 
   useEffect(() => {
-    if (status === 'initial')
-      durationRef.current = getTransitionDuration(
-        floatingContext.refs.floating.current,
-      );
-
     if (status === 'open') {
       floatingContext.refs.floating.current?.focus();
     }
@@ -80,7 +80,7 @@ export const ToastAnimated = ({
       data-state={mappedStatus}
       onClose={(e) => {
         setOpen(false);
-        setTimeout(() => onClose?.(e), durationRef.current);
+        setTimeout(() => onClose?.(e), duration);
       }}
       ref={(ref) => floatingContext.refs.setFloating(ref)}
     />

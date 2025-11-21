@@ -54,7 +54,7 @@ describe('useShouldRenderLoading', () => {
     vi.useRealTimers();
   });
 
-  it('aboids the delay if isLoaded is true within the time limit from when startFrom started', async () => {
+  it('avoids the delay if isLoaded is true within the time limit from when startFrom started', async () => {
     vi.useFakeTimers();
 
     const hook = renderHook(
@@ -71,6 +71,7 @@ describe('useShouldRenderLoading', () => {
     });
 
     // Should be false straight away since we are within the avoidDelayTimeout of 250ms
+    await act(() => vi.advanceTimersByTime(1));
     expect(hook.result.current).toBe(false);
 
     vi.useRealTimers();
