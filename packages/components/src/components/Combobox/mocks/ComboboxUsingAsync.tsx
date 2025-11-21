@@ -1,4 +1,4 @@
-import { IressCombobox, IressComboboxProps } from '@/main';
+import { IressCombobox, type IressComboboxProps } from '@/main';
 
 interface StarWarsCharacter {
   name: string;

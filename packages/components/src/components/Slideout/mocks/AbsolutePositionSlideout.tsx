@@ -3,7 +3,7 @@ import {
   IressButton,
   IressText,
   IressSlideout,
-  IressSlideoutProps,
+  type IressSlideoutProps,
 } from '@/main';
 import { useRef, useState } from 'react';
 

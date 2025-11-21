@@ -51,7 +51,6 @@ describe('useComboboxInlineCompletion', () => {
     await waitFor(() => {
       // expect 'option 1' to be selected in 'Option 1' after the query input was updated
 
-      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(queryRef.current.input.setSelectionRange).toHaveBeenCalledWith(
         1,
         8,

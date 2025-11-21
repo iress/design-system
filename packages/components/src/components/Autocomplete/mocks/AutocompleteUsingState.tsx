@@ -1,4 +1,4 @@
-import { IressAutocomplete, IressAutocompleteProps } from '@/main';
+import { IressAutocomplete, type IressAutocompleteProps } from '@/main';
 import { useState } from 'react';
 
 export const AutocompleteUsingState = (args: IressAutocompleteProps) => {

@@ -1,11 +1,11 @@
-import { PropsWithChildren, useMemo, useRef } from 'react';
-import { PopoverContextValue } from '../Popover.types';
+import { type PropsWithChildren, useMemo, useRef } from 'react';
+import { type PopoverContextValue } from '../Popover.types';
 import { vitest } from 'vitest';
 import { PopoverContext } from '../PopoverProvider';
 import {
-  FloatingContext,
+  type FloatingContext,
   FloatingList,
-  ReferenceType,
+  type ReferenceType,
 } from '@floating-ui/react';
 
 export const MOCK_FLOATING_UI_CONTEXT: FloatingContext<ReferenceType> = {

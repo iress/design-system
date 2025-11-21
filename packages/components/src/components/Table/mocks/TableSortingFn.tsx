@@ -1,8 +1,8 @@
 import {
   IressTable,
   IressTableFormattedValue,
-  IressTableProps,
-  TableColumn,
+  type IressTableProps,
+  type TableColumn,
 } from '@/main';
 
 type Props = Partial<IressTableProps<Row, never>>;

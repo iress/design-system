@@ -1,4 +1,8 @@
-import { IressCombobox, IressComboboxProps, LabelValueMeta } from '@/main';
+import {
+  IressCombobox,
+  type IressComboboxProps,
+  type LabelValueMeta,
+} from '@/main';
 import { useState } from 'react';
 
 export const ComboboxUsingState = (args: IressComboboxProps) => {

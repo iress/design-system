@@ -4,10 +4,10 @@ import {
   IressPanel,
   IressStack,
   IressText,
-  IressToasterProps,
+  type IressToasterProps,
   IressToasterProvider,
-  IressToasterProviderProps,
-  IressToastProps,
+  type IressToasterProviderProps,
+  type IressToastProps,
   useToaster,
 } from '@/main';
 import { useState } from 'react';

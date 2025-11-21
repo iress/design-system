@@ -15,8 +15,8 @@ import {
 import {
   useForm,
   useFieldArray,
-  Control,
-  UseFormGetValues,
+  type Control,
+  type UseFormGetValues,
 } from 'react-hook-form';
 
 interface Client {

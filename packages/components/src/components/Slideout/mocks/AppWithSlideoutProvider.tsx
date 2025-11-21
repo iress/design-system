@@ -1,7 +1,7 @@
 import {
   IressButton,
   IressSlideout,
-  IressSlideoutProps,
+  type IressSlideoutProps,
   IressSlideoutProvider,
   useSlideout,
 } from '@/main';

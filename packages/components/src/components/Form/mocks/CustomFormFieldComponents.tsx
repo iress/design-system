@@ -1,7 +1,7 @@
 import {
   IressButton,
   IressForm,
-  IressFormProps,
+  type IressFormProps,
   IressInput,
   IressFormField,
   IressStack,

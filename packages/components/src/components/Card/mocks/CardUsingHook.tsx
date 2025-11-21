@@ -2,7 +2,7 @@ import {
   CardSlotClass,
   composeIDSCard,
   composeIDSCardSlots,
-  IressCardProps,
+  type IressCardProps,
   IressStack,
   IressText,
 } from '@/main';

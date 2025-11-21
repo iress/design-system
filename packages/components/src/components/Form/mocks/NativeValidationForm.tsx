@@ -7,7 +7,7 @@ import {
   IressAlert,
 } from '@/main';
 import { useState } from 'react';
-import { InputBaseElement } from '@/components/Input/InputBase/InputBase.types';
+import { type InputBaseElement } from '@/components/Input/InputBase/InputBase.types';
 
 export const NativeValidationForm = () => {
   const [formData, setFormData] = useState({

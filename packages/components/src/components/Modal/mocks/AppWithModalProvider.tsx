@@ -1,7 +1,7 @@
 import {
   IressButton,
   IressModal,
-  IressModalProps,
+  type IressModalProps,
   IressModalProvider,
   useModal,
 } from '@/main';

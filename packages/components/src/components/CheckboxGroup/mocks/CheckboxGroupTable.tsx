@@ -1,5 +1,5 @@
 import {
-  FormControlValue,
+  type FormControlValue,
   IressButton,
   IressCheckbox,
   IressForm,

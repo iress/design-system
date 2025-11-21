@@ -1,5 +1,5 @@
 import {
-  IressFormProps,
+  type IressFormProps,
   IressForm,
   IressModal,
   IressDivider,

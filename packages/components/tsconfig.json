@@ -44,7 +44,8 @@
     "theme-preset",
     "vitest.setup.ts",
     "vite.config.ts",
-    "vitest.config.ts"
+    "vitest.config.ts",
+    ".storybook"
   ],
   "exclude": ["node_modules", "dist", "**/*.stories.tsx"]
 }

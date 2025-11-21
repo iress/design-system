@@ -13,14 +13,14 @@ import {
   IressMenu,
   IressMenuItem,
   IressNavbar,
-  IressNavbarProps,
+  type IressNavbarProps,
   IressPanel,
   IressPopover,
   IressSelect,
   IressStack,
   IressText,
 } from '@/main';
-import { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
 const logoSrc = 'assets/ids-logo.png';
 

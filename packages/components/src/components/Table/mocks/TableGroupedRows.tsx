@@ -3,7 +3,7 @@ import {
   IressIcon,
   IressTable,
   IressTableBody,
-  TableColumn,
+  type TableColumn,
 } from '@/main';
 
 interface Liability {
