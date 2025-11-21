@@ -67,6 +67,6 @@ jobs:
                 continue
               fi
               echo "Publishing $name@$version from $pkg"
-              (cd "$pkg" && npm publish --access public --registry https://registry.npmjs.org/)
+              (cd "$pkg" && npm publish --tag latest --access public --registry https://registry.npmjs.org/)
             fi
           done
