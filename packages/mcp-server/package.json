@@ -44,7 +44,7 @@
   "devDependencies": {
     "@types/minimist": "1.2.5",
     "@types/node": "24.3.1",
-    "@types/turndown": "5.0.5",
+    "@types/turndown": "5.0.6",
     "@vitest/coverage-v8": "3.2.4",
     "minimist": "1.2.8",
     "playwright": "1.56.1",
