@@ -40,7 +40,7 @@
     "lint-staged": "16.2.6",
     "pinst": "3.0.0",
     "prettier": "3.6.2",
-    "puppeteer": "^24.29.0",
+    "puppeteer": "^24.29.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "storybook": "^9.0.0",
