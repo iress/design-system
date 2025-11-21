@@ -1696,7 +1696,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^8.46.3"
     "@vitejs/plugin-react": "npm:^5.0.4"
     "@vitest/coverage-v8": "npm:^3.2.4"
-    "@vueless/storybook-dark-mode": "npm:^9.0.0"
+    "@vueless/storybook-dark-mode": "npm:^10.0.2"
     chalk: "npm:^5.6.2"
     colorjs.io: "npm:^0.5.2"
     eslint: "npm:^9.39.1"
@@ -1734,7 +1734,7 @@ __metadata:
     "@storybook/addon-a11y": ^9.0.0
     "@storybook/addon-docs": ^9.0.0
     "@storybook/react-vite": ^9.1.10
-    "@vueless/storybook-dark-mode": ^9.0.0
+    "@vueless/storybook-dark-mode": ^10.0.2
     react: ^18 || ^19
     react-dom: ^18 || ^19
     storybook: ^9.0.0
@@ -1800,7 +1800,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^8.46.3"
     "@vitejs/plugin-react": "npm:^4.2.1"
     "@vitest/coverage-v8": "npm:3.2.4"
-    "@vueless/storybook-dark-mode": "npm:^9.0.9"
+    "@vueless/storybook-dark-mode": "npm:^10.0.2"
     chokidar: "npm:^4.0.3"
     concurrently: "npm:^9.2.1"
     eslint: "npm:^9.39.1"
@@ -1963,7 +1963,7 @@ __metadata:
     "@types/ws": "npm:^8.18.1"
     "@typescript-eslint/eslint-plugin": "npm:8.46.3"
     "@typescript-eslint/parser": "npm:8.46.3"
-    "@vueless/storybook-dark-mode": "npm:^9.0.0"
+    "@vueless/storybook-dark-mode": "npm:^10.0.2"
     boxen: "npm:^8.0.1"
     chalk: "npm:^5.6.2"
     concurrently: "npm:^9.2.1"
@@ -4697,15 +4697,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vueless/storybook-dark-mode@npm:^9.0.0, @vueless/storybook-dark-mode@npm:^9.0.9":
-  version: 9.0.9
-  resolution: "@vueless/storybook-dark-mode@npm:9.0.9"
+"@vueless/storybook-dark-mode@npm:^10.0.2":
+  version: 10.0.3
+  resolution: "@vueless/storybook-dark-mode@npm:10.0.3"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
-    "@storybook/icons": "npm:^1.4.0"
-    fast-deep-equal: "npm:^3.1.3"
-    memoizerific: "npm:^1.11.3"
-  checksum: 10c0/d675d96efb07b7402273402592b6b22ab5dca9226e6527209e922c747dccccd49d4a84cad5b7e082940a2c0a3e8bd2246a0e0294755943c7d6857b2d10caa334
+    lodash-es: "npm:^4.17.21"
+  peerDependencies:
+    storybook: ^10.0.0
+  checksum: 10c0/abcf203a70e0fc6e6fe7b928d4fa1fdd5fa2af0f8882ffe16aa0fd280979d9a23e02ea694dabd9c3edecc9286997a01ae4cf9d3f9fb4b7f2b37d6a42b8e09e44
   languageName: node
   linkType: hard
 
@@ -9831,13 +9831,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"map-or-similar@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "map-or-similar@npm:1.5.0"
-  checksum: 10c0/33c6ccfdc272992e33e4e99a69541a3e7faed9de3ac5bc732feb2500a9ee71d3f9d098980a70b7746e7eeb7f859ff7dfb8aa9b5ecc4e34170a32ab78cfb18def
-  languageName: node
-  linkType: hard
-
 "markdown-table@npm:^3.0.0":
   version: 3.0.4
   resolution: "markdown-table@npm:3.0.4"
@@ -10101,15 +10094,6 @@ __metadata:
   version: 5.2.1
   resolution: "memoize-one@npm:5.2.1"
   checksum: 10c0/fd22dbe9a978a2b4f30d6a491fc02fb90792432ad0dab840dc96c1734d2bd7c9cdeb6a26130ec60507eb43230559523615873168bcbe8fafab221c30b11d54c1
-  languageName: node
-  linkType: hard
-
-"memoizerific@npm:^1.11.3":
-  version: 1.11.3
-  resolution: "memoizerific@npm:1.11.3"
-  dependencies:
-    map-or-similar: "npm:^1.5.0"
-  checksum: 10c0/661bf69b7afbfad57f0208f0c63324f4c96087b480708115b78ee3f0237d86c7f91347f6db31528740b2776c2e34c709bcb034e1e910edee2270c9603a0a469e
   languageName: node
   linkType: hard
 
