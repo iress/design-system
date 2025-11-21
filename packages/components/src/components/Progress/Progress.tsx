@@ -1,4 +1,4 @@
-import { type CSSProperties, useEffect, useState } from 'react';
+import { type CSSProperties } from 'react';
 import { stringReplacer } from '@helpers/formatting/stringReplacer';
 import { css, cx } from '@/styled-system/css';
 import { progress } from './Progress.styles';
@@ -66,7 +66,6 @@ export const IressProgress = <TMin extends number | undefined = undefined>({
   value = 0,
   ...restProps
 }: IressProgressProps<TMin>) => {
-  const [uncontrolledValue, setUncontrolledValue] = useState(value);
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
   const className = cx(
     classNameProp,
@@ -74,18 +73,13 @@ export const IressProgress = <TMin extends number | undefined = undefined>({
     GlobalCSSClass.Progress,
   );
 
+  const clampedValue = Math.min(Math.max(value, min ?? 0), max);
+
   const normalisedSectionTitle = (): string =>
     stringReplacer(sectionTitle, [
-      { name: '{{current}}', value: String(uncontrolledValue) },
+      { name: '{{current}}', value: String(clampedValue) },
       { name: '{{max}}', value: max.toString() },
     ]);
-
-  useEffect(() => {
-    const clampedMin = Math.max(value, min ?? 0);
-    const clampedMax = Math.min(clampedMin, max);
-
-    setUncontrolledValue(clampedMax);
-  }, [value, min, max]);
 
   const style: ProgressCustomCSSProperties = {
     '--iress-border-radius': borderRadius
@@ -101,7 +95,7 @@ export const IressProgress = <TMin extends number | undefined = undefined>({
         className={className}
         max={max}
         min={min}
-        value={uncontrolledValue}
+        value={clampedValue}
         {...(nonStyleProps as IressProgressProps<number>)}
         style={style}
       />
@@ -113,7 +107,7 @@ export const IressProgress = <TMin extends number | undefined = undefined>({
       aria-label={normalisedSectionTitle()}
       className={className}
       max={max}
-      value={uncontrolledValue}
+      value={clampedValue}
       {...(nonStyleProps as IressProgressProps<undefined>)}
       style={style}
     />

@@ -3,7 +3,6 @@ import {
   type ChangeEventHandler,
   forwardRef,
   useImperativeHandle,
-  useMemo,
   useRef,
   useState,
   type MouseEvent,
@@ -12,6 +11,7 @@ import {
   type ReactElement,
   type ReactNode,
   type ForwardedRef,
+  type HTMLInputTypeAttribute,
 } from 'react';
 import { GlobalCSSClass } from '@/enums';
 import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAsString';
@@ -145,25 +145,13 @@ const Input = <
   const [focused, setFocused] = useState(false);
   const [styleProps, nonStyleProps] = splitCssProps(inputProps);
 
-  const displayValue = useMemo(() => {
-    if (formatter && !focused) {
-      return formatter(value);
-    }
+  const displayValue = formatter && !focused ? formatter(value) : validValue;
+  let displayType: { type?: HTMLInputTypeAttribute } | undefined =
+    formatter && !focused ? { type: 'text' } : { type };
 
-    return validValue;
-  }, [formatter, value, validValue, focused]);
-
-  const displayType = useMemo(() => {
-    if (rows !== undefined) {
-      return undefined;
-    }
-
-    if (formatter && !focused) {
-      return { type: 'text' };
-    }
-
-    return { type };
-  }, [formatter, focused, type, rows]);
+  if (rows !== undefined) {
+    displayType = undefined;
+  }
 
   useImperativeHandle<InputRef<TRows>, InputRef<TRows>>(
     ref,

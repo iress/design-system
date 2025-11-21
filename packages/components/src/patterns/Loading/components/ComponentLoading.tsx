@@ -82,8 +82,8 @@ export const ComponentLoading = ({
   const styles = loading({
     pattern: 'component',
     loaded,
-    showIndicator: showSkeleton,
-    showMessage: showUpdate,
+    showIndicator: showSkeleton && !loaded,
+    showMessage: showUpdate && !!update,
   });
 
   const skeleton = useMemo(() => {
@@ -93,12 +93,6 @@ export const ComponentLoading = ({
 
     return template;
   }, [template]);
-
-  useEffect(() => {
-    if (loaded === true) {
-      setShowSkeleton(false);
-    }
-  }, [loaded]);
 
   useEffect(() => {
     const showTimeout = setTimeout(
@@ -116,8 +110,6 @@ export const ComponentLoading = ({
       return;
     }
 
-    setShowUpdate(false);
-
     const showTimeout = setTimeout(
       () => setShowUpdate(true),
       timeout?.update ?? 1000,
@@ -127,12 +119,6 @@ export const ComponentLoading = ({
       clearTimeout(showTimeout);
     };
   }, [timeout?.update, update]);
-
-  useEffect(() => {
-    if (!update && showUpdate) {
-      setShowUpdate(false);
-    }
-  }, [update, showUpdate]);
 
   if (loaded !== true) {
     return (

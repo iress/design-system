@@ -20,6 +20,7 @@ import { IressCheckboxMark } from '@/components/CheckboxMark';
 import { getRadioGroupContext } from '../RadioGroup';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { IressText } from '../Text';
+import { type IressCSSProps } from '@/interfaces';
 
 export interface IressRadioProps<T = FormControlValue>
   extends Omit<IressStyledProps<'input'>, 'defaultValue' | 'value'> {
@@ -71,6 +72,18 @@ export interface IressRadioProps<T = FormControlValue>
    */
   touch?: boolean;
 }
+
+const RadioMark = (props: IressCSSProps) => (
+  <styled.svg
+    version="1.1"
+    viewBox="0 0 200 200"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+    className={GlobalCSSClass.FormElement}
+  >
+    <circle cx="100" cy="100" r="70" />
+  </styled.svg>
+);
 
 const Radio = <T = FormControlValue,>(
   {
@@ -129,18 +142,6 @@ const Radio = <T = FormControlValue,>(
     checked: isChecked,
   });
 
-  const RadioMark = () => (
-    <styled.svg
-      version="1.1"
-      viewBox="0 0 200 200"
-      xmlns="http://www.w3.org/2000/svg"
-      {...styles.radioMark}
-      className={GlobalCSSClass.FormElement}
-    >
-      <circle cx="100" cy="100" r="70" />
-    </styled.svg>
-  );
-
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
 
   return (
@@ -174,7 +175,10 @@ const Radio = <T = FormControlValue,>(
       />
       <styled.label htmlFor={id} {...styles.label}>
         {!isHidden && (
-          <RadioMark data-testid={propagateTestid(dataTestId, 'radioMark')} />
+          <RadioMark
+            {...(styles.radioMark as IressCSSProps)}
+            data-testid={propagateTestid(dataTestId, 'radioMark')}
+          />
         )}
         {isHidden && (
           <IressCheckboxMark

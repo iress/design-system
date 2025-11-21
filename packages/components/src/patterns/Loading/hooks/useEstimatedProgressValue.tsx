@@ -33,11 +33,6 @@ export const useEstimatedProgressValue = (
   ]);
 
   useEffect(() => {
-    if (!isTrackingProgress && progressValue < estimatedFinishTime) {
-      setProgressValue(estimatedFinishTime);
-      return;
-    }
-
     const startTime = performance.now();
 
     const animate = () => {
@@ -63,6 +58,10 @@ export const useEstimatedProgressValue = (
 
   if (progress !== undefined) {
     return isLoaded ? estimatedFinishTime : progress;
+  }
+
+  if (!isTrackingProgress && progressValue < estimatedFinishTime) {
+    return estimatedFinishTime;
   }
 
   return progressValue;
