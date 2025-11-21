@@ -51,11 +51,11 @@ describe('TableHeaderCell', () => {
     );
 
     const heading = screen.getByRole('columnheader', {
-      name: 'Heading sortable',
+      name: 'Headingsortable',
     });
     expect(heading).toHaveAttribute('id', 'id__test');
 
-    const sortButton = screen.getByRole('button', { name: 'Heading sortable' });
+    const sortButton = screen.getByRole('button', { name: 'Headingsortable' });
     expect(sortButton).toBeInTheDocument();
   });
 

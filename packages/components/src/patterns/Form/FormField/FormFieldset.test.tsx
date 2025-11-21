@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-
 import { IressFormFieldset } from './FormFieldset';
 import {
   IressButton,
@@ -80,13 +79,14 @@ describe('IressFormFieldset', () => {
               <IressCheckbox value="1">Option 1</IressCheckbox>
             </IressCheckboxGroup>
           )}
+          data-testid="group"
           rules={{ required: 'This field is required' }}
         />
         <IressButton type="submit">Submit</IressButton>
       </IressForm>,
     );
 
-    const group = await screen.findByRole('group', { name: 'Required Label' });
+    const group = await screen.findByRole('group', { name: 'RequiredLabel' });
     expect(group).toBeInTheDocument();
 
     const submit = screen.getByRole('button', { name: 'Submit' });
