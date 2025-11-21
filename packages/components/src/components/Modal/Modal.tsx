@@ -1,10 +1,8 @@
 import {
   type ReactElement,
   type ReactNode,
-  useCallback,
   useEffect,
   useMemo,
-  useRef,
   useState,
   type TransitionEvent,
 } from 'react';
@@ -19,7 +17,6 @@ import {
   useRole,
   useTransitionStatus,
 } from '@floating-ui/react';
-import { timeStringToNumber } from '@helpers/transition/timeStringToNumber';
 import { idsLogger } from '@helpers/utility/idsLogger';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { useIdIfNeeded } from '../../hooks';
@@ -30,6 +27,7 @@ import { modal } from './Modal.styles';
 import { cx } from '@/styled-system/css';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
+import { getTransitionDuration } from '@/helpers/transition/getTransitionDuration';
 
 export interface IressModalProps extends IressStyledProps {
   /**
@@ -142,7 +140,7 @@ export const IressModal = ({
 }: IressModalProps) => {
   const [uncontrolledShow, setUncontrolledShow] =
     useState<boolean>(defaultShow);
-  const durationRef = useRef<number>(240);
+  let duration = 240;
   const provider = useProviderModal(restProps.id);
   const id = useIdIfNeeded({ id: restProps.id });
   const headingId = `${id}--heading`;
@@ -170,9 +168,18 @@ export const IressModal = ({
   });
   const role = useRole(floatingContext);
   const interactions = useInteractions([dismiss, role]);
+
+  if (floatingContext.refs.floating.current) {
+    duration = getTransitionDuration(
+      floatingContext.refs.floating.current,
+      1.2,
+      240,
+    );
+  }
+
   const { isMounted, status } = useTransitionStatus(floatingContext, {
     duration: {
-      close: durationRef.current,
+      close: duration,
     },
   });
 
@@ -196,16 +203,6 @@ export const IressModal = ({
     onStatus?.(status);
   }, [status, onStatus]);
 
-  useEffect(() => {
-    if (status === 'initial' && floatingContext.refs.floating?.current) {
-      durationRef.current =
-        timeStringToNumber(
-          window.getComputedStyle(floatingContext.refs.floating.current, null)
-            ?.transitionDuration || '.3s',
-        ) * 1.2;
-    }
-  }, [floatingContext.refs.floating, status]);
-
   const heading = useMemo(() => {
     if (typeof headingProp === 'string')
       return (
@@ -222,36 +219,26 @@ export const IressModal = ({
     return headingProp;
   }, [dataTestid, headingId, headingProp, styles.header]);
 
-  const handleTransitionEnd = useCallback(
-    (e: TransitionEvent<HTMLDivElement>) => {
-      onTransitionEnd?.(e);
+  const handleTransitionEnd = (e: TransitionEvent<HTMLDivElement>) => {
+    onTransitionEnd?.(e);
 
-      // TODO: Tests are not filling in the property name, so we need to check for an empty one instead
-      const isFade = e.propertyName === 'opacity' || !e.propertyName;
+    // TODO: Tests are not filling in the property name, so we need to check for an empty one instead
+    const isFade = e.propertyName === 'opacity' || !e.propertyName;
 
-      if (!isFade || e.target !== e.currentTarget) {
-        return;
+    if (!isFade || e.target !== e.currentTarget) {
+      return;
+    }
+
+    if (status === 'open') {
+      onEntered?.();
+
+      if (!isStatic) {
+        floatingContext.refs.floating?.current?.focus();
       }
-
-      if (status === 'open') {
-        onEntered?.();
-
-        if (!isStatic) {
-          floatingContext.refs.floating?.current?.focus();
-        }
-      } else if (status === 'close') {
-        onExited?.();
-      }
-    },
-    [
-      onTransitionEnd,
-      status,
-      onEntered,
-      floatingContext.refs.floating,
-      onExited,
-      isStatic,
-    ],
-  );
+    } else if (status === 'close') {
+      onExited?.();
+    }
+  };
 
   if (!isMounted) return null;
 

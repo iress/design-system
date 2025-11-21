@@ -190,6 +190,7 @@ const Button = <
 
   const styles = button({
     active:
+      // eslint-disable-next-line react-hooks/refs -- ref needed for forwarding
       active ?? popover?.isActiveActivator(elementRef.current as HTMLElement),
     fluid: fluid === true ? 'true' : fluid,
     inButtonGroup: !!buttonGroupItem,

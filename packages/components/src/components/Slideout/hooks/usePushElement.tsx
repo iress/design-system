@@ -54,6 +54,7 @@ export function usePushElement({
     ).matches;
 
     element.classList.add(GlobalCSSClass.SlideoutPushElement);
+    // eslint-disable-next-line react-hooks/immutability -- we are intentionally modifying style here
     element.style.transition = motionReduce ? 'none' : 'all 0.3s ease-out';
 
     return () => {
@@ -88,6 +89,7 @@ export function usePushElement({
       element.classList.add(GlobalCSSClass.SlideoutOpen);
 
       if (allowedBreakpoints.includes(breakpoint)) {
+        // eslint-disable-next-line react-hooks/immutability -- we are intentionally modifying style here
         element.style[marginProperty] = token
           .var(sizeToken)
           .replace(')', `, ${token(sizeToken)})`);

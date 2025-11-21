@@ -10,6 +10,7 @@ import {
   type ReactNode,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import {
@@ -64,24 +65,31 @@ export interface IressTabSetProps extends Omit<IressStyledProps, 'onChange'> {
 }
 
 const HoverIndicator = (props: IressUnstyledProps) => {
-  const [style, setStyle] = useState<CSSProperties>({});
+  const previousStyle = useRef<CSSProperties>({});
   const tabSet = useContext(TabSetContext);
+
+  let style: CSSProperties;
+
+  if (tabSet?.hover) {
+    const { offsetLeft, scrollWidth } = tabSet.hover;
+    style = {
+      opacity: 1,
+      left: `${offsetLeft}px`,
+      width: `${scrollWidth}px`,
+    };
+  } else {
+    style = {
+      // eslint-disable-next-line react-hooks/refs -- we want to persist the previous style
+      ...previousStyle.current,
+      opacity: 0,
+    };
+  }
 
   useEffect(() => {
     if (tabSet?.hover) {
-      const { offsetLeft, scrollWidth } = tabSet.hover;
-      setStyle({
-        opacity: 1,
-        left: `${offsetLeft}px`,
-        width: `${scrollWidth}px`,
-      });
-    } else {
-      setStyle((prevStyle) => ({
-        ...prevStyle,
-        opacity: 0,
-      }));
+      previousStyle.current = style;
     }
-  }, [tabSet?.hover]);
+  }, [tabSet?.hover, style]);
 
   return <div {...props} style={style} />;
 };
