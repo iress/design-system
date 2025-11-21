@@ -34,7 +34,6 @@ jobs:
           if [ -z "${NPM_TOKEN}" ]; then echo "NPM_TOKEN not set"; exit 1; fi
           echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
           npm whoami
-          npm org ls @iress-oss
 
       - name: Publish unpublished packages (shell)
         env:
