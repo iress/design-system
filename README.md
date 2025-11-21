@@ -48,6 +48,10 @@ yarn set version berry
 # Install dependencies
 yarn
 
+# Prepare your development environment
+# This will install husky git hooks and build all packages
+yarn prepare
+
 # Start Storybook for development
 yarn dev
 ```
