@@ -10,7 +10,7 @@ describe('IressSelectCreate', () => {
     render(<IressSelectCreate className="test-class" />);
 
     const menuElement = screen.getByRole('menu');
-    expect(menuElement).toHaveClass('test-class', menu({ fluid: true }).root);
+    expect(menuElement).toHaveClass('test-class', menu({ fluid: true }).root!);
 
     const menuItem = screen.getByRole('menuitem', { name: 'AddNew option' });
     expect(menuItem).toBeInTheDocument();
