@@ -39,13 +39,17 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           set -euo pipefail
+          set -x
           if [ -z "${NPM_TOKEN:-}" ]; then
             echo "NPM_TOKEN not set"; exit 1
           fi
           echo "Scanning packages/..."
           for pkg in packages/*; do
             if [ -f "$pkg/package.json" ]; then
-              name=$(jq -r '.name // ""' "$pkg/package.json")
+              # read package.json safely; on jq errors print file for debugging
+              if ! name=$(jq -r '.name // ""' "$pkg/package.json" 2>/tmp/jq_err); then
+                echo "jq failed parsing $pkg/package.json; contents:"; cat "$pkg/package.json"; echo "jq stderr:"; cat /tmp/jq_err; exit 1
+              fi
               private=$(jq -r '.private // false' "$pkg/package.json")
               version=$(jq -r '.version // "unknown"' "$pkg/package.json")
               if [ -z "$name" ]; then
