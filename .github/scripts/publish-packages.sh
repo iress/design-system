@@ -51,14 +51,21 @@ if [ "$RELEASE_TYPE" = "stable" ]; then
     PKG_FILE="$PKG_LOCATION/package.json"
     LOCAL_VERSION=$(jq -r '.version' "$PKG_FILE")
     
-    echo "Checking $PACKAGE_NAME (local: v$LOCAL_VERSION)..."
-    REGISTRY_VERSION=$(npm view "$PACKAGE_NAME" version 2>/dev/null || echo "not-published")
+    # Determine the dist-tag based on version (same logic as ci-cd.yml)
+    if [[ "$LOCAL_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+-([a-zA-Z]+) ]]; then
+      NPM_TAG="${BASH_REMATCH[1]}"
+    else
+      NPM_TAG="latest"
+    fi
+    
+    echo "Checking $PACKAGE_NAME (local: v$LOCAL_VERSION, dist-tag: $NPM_TAG)..."
+    REGISTRY_VERSION=$(npm view "$PACKAGE_NAME@$NPM_TAG" version 2>/dev/null || echo "not-published")
     
     if [ "$REGISTRY_VERSION" = "not-published" ]; then
-      echo "  → Not yet published, will publish v$LOCAL_VERSION"
+      echo "  → Not yet published on $NPM_TAG tag, will publish v$LOCAL_VERSION"
       PACKAGES_TO_PUBLISH="$PACKAGES_TO_PUBLISH $PACKAGE_NAME"
     elif [ "$LOCAL_VERSION" != "$REGISTRY_VERSION" ]; then
-      echo "  → Registry: v$REGISTRY_VERSION, Local: v$LOCAL_VERSION"
+      echo "  → Registry ($NPM_TAG): v$REGISTRY_VERSION, Local: v$LOCAL_VERSION"
       COMPARISON=$(compare_versions "$LOCAL_VERSION" "$REGISTRY_VERSION")
       if [ "$COMPARISON" = "greater" ]; then
         echo "  → Local version is newer, will publish"
@@ -67,7 +74,7 @@ if [ "$RELEASE_TYPE" = "stable" ]; then
         echo "  → Local version is not newer, skipping"
       fi
     else
-      echo "  → Already published at v$LOCAL_VERSION, skipping"
+      echo "  → Already published at v$LOCAL_VERSION on $NPM_TAG tag, skipping"
     fi
   done < <(yarn workspaces list --no-private --json)
   
