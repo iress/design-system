@@ -2,7 +2,7 @@ import { IressToggle, type IressToggleProps } from '@/main';
 import { useState } from 'react';
 
 export const ControlledToggle = (props: IressToggleProps) => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
 
   return (
     <IressToggle

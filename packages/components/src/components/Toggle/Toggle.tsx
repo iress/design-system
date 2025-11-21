@@ -125,7 +125,7 @@ export const IressToggle = ({
     );
   }, [isChecked]);
 
-  const classes = toggle({ layout, checked: isChecked });
+  const classes = toggle({ layout, checked: !!isChecked });
 
   return (
     <styled.div
@@ -150,7 +150,7 @@ export const IressToggle = ({
           <IressCheckboxMark
             className={classes.checkboxMark}
             bg="transparent"
-            checked={isChecked}
+            checked={!!isChecked}
             size="sm"
           />
         </button>
