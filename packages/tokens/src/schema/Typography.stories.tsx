@@ -251,7 +251,7 @@ export const Body: Story = {
     children: (
       <IressStack gap="xl">
         {body.map(({ name, token, tokenName }) => (
-          <IressRow gutter="xl" key={tokenName}>
+          <IressRow gutter="xl" key={tokenName} verticalAlign="bottom">
             <IressCol span={{ lg: 4 }}>
               <IressText
                 textStyle={tokenName as never}
@@ -280,6 +280,7 @@ export const Body: Story = {
               </IressText>
               <IressText element="strong">{name}</IressText>
               <Markdown>{token.$description}</Markdown>
+              <TokenTag>{tokenName}</TokenTag>
             </IressCol>
             {bodyVariants.map((variant) => {
               const variantName =
