@@ -93,6 +93,7 @@ export const PopoverActivator = ({
   return (
     <div
       {...restProps}
+      // eslint-disable-next-line react-hooks/refs -- false positive: https://github.com/floating-ui/floating-ui/discussions/3405
       {...popover?.interactions.getReferenceProps({
         ...activatorInteractions,
         'aria-controls': ariaControls,

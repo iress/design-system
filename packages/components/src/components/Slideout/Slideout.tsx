@@ -33,8 +33,8 @@ import { type FloatingUIContainer, type IressStyledProps } from '@/types';
 import { usePushElement } from './hooks/usePushElement';
 import { splitCssProps } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
-import { timeStringToNumber } from '@/helpers/transition/timeStringToNumber';
 import { useProviderSlideout } from './hooks/useProviderSlideout';
+import { getTransitionDuration } from '@/helpers/transition/getTransitionDuration';
 
 export interface IressSlideoutProps extends IressStyledProps {
   /**
@@ -154,7 +154,7 @@ export const IressSlideout = ({
 }: IressSlideoutProps) => {
   const [uncontrolledShow, setUncontrolledShow] =
     useState<boolean>(defaultShow);
-  const durationRef = useRef<number>(240);
+  let duration = 240;
   const pushElement = useRef<HTMLElement | null | undefined>(null);
   const provider = useProviderSlideout(restProps.id);
   const id = useIdIfNeeded({ id: restProps.id });
@@ -184,8 +184,17 @@ export const IressSlideout = ({
   });
   const role = useRole(floatingContext);
   const interactions = useInteractions([dismiss, role]);
+
+  if (floatingContext.refs.floating.current) {
+    duration = getTransitionDuration(
+      floatingContext.refs.floating.current,
+      1.2,
+      240,
+    );
+  }
+
   const { isMounted, status } = useTransitionStatus(floatingContext, {
-    duration: durationRef.current,
+    duration,
   });
 
   const currentStyles = slideout({
@@ -227,17 +236,6 @@ export const IressSlideout = ({
   }, [eleToPush, mode]);
 
   useEffect(() => {
-    if (status === 'initial' && floatingContext.refs.floating?.current) {
-      durationRef.current =
-        timeStringToNumber(
-          window
-            .getComputedStyle(floatingContext.refs.floating.current, null)
-            ?.getPropertyValue('--iress-transition-duration') || '.3s',
-        ) * 1.2;
-    }
-  }, [floatingContext.refs.floating, status]);
-
-  useEffect(() => {
     if (status === 'open') {
       floatingContext.refs.floating?.current?.focus();
     }
@@ -245,6 +243,7 @@ export const IressSlideout = ({
 
   const pushElementHookConfig = useMemo(
     () => ({
+      // eslint-disable-next-line react-hooks/refs -- we want to forward the ref
       element: pushElement.current ?? null,
       isActive: mode === 'push',
       position,
