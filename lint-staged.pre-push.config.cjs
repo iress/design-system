@@ -65,7 +65,7 @@ const addWorkspaceCommands = (files, commands, excludeTestFiles = true) => {
           // Check if the workspace has a test:coverage script
           if (packageJson.scripts?.['test:coverage'] && packageJson.name) {
             commands.push(
-              `yarn workspace ${packageJson.name} run test:coverage`,
+              `yarn workspace ${packageJson.name} run test:coverage --changed ${filesToProcess.join(' ')}`,
             );
 
             // Add coverage check for the changed files in this workspace

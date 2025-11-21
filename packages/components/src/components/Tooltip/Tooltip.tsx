@@ -120,6 +120,7 @@ export const IressTooltip = ({
           className={classes.content}
           style={floatingStyles}
           data-testid={propagateTestid(testid, 'tooltip-text')}
+          // eslint-disable-next-line react-hooks/refs -- false positive: https://github.com/floating-ui/floating-ui/discussions/3405
           ref={refs.setFloating}
           {...getFloatingProps()}
         >
