@@ -32,7 +32,9 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           if [ -z "${NPM_TOKEN}" ]; then echo "NPM_TOKEN not set"; exit 1; fi
-          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+          npm whoami
+          npm org ls @iress-oss
 
       - name: Publish unpublished packages (shell)
         env:
@@ -65,6 +67,6 @@ jobs:
                 continue
               fi
               echo "Publishing $name@$version from $pkg"
-              (cd "$pkg" && npm publish --access public)
+              (cd "$pkg" && npm publish --access public --registry https://registry.npmjs.org/)
             fi
           done
