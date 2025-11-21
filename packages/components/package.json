@@ -79,5 +79,9 @@
     "query-selector-shadow-dom": "1.0.1",
     "react-hook-form": "7.55.0",
     "use-debounce": "10.0.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iress/design-system"
   }
 }
