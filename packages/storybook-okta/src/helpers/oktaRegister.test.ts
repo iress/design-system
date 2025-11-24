@@ -26,7 +26,9 @@ describe('oktaRegister', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     // Make the mock constructor return the same instance every time
-    vi.mocked(OktaAuth).mockImplementation(() => mockOktaAuthInstance as never);
+    vi.mocked(OktaAuth).mockImplementation(function (this: unknown) {
+      return mockOktaAuthInstance as never;
+    });
   });
 
   afterEach(() => {
@@ -95,8 +97,12 @@ describe('oktaRegister', () => {
       };
 
       (OktaAuth as unknown as ReturnType<typeof vi.fn>)
-        .mockReturnValueOnce(mockOktaAuthInstance)
-        .mockReturnValueOnce(mockOktaAuthInstance2);
+        .mockImplementationOnce(function (this: unknown) {
+          return mockOktaAuthInstance as never;
+        })
+        .mockImplementationOnce(function (this: unknown) {
+          return mockOktaAuthInstance2 as never;
+        });
 
       const config1 = { ...mockConfig, clientId: 'client-1' };
       const config2 = { ...mockConfig, clientId: 'client-2' };
@@ -122,8 +128,12 @@ describe('oktaRegister', () => {
       };
 
       (OktaAuth as unknown as ReturnType<typeof vi.fn>)
-        .mockReturnValueOnce(mockOktaAuthInstance)
-        .mockReturnValueOnce(mockOktaAuthInstance2);
+        .mockImplementationOnce(function (this: unknown) {
+          return mockOktaAuthInstance as never;
+        })
+        .mockImplementationOnce(function (this: unknown) {
+          return mockOktaAuthInstance2 as never;
+        });
 
       const config1 = { ...mockConfig, issuer: 'https://test1.okta.com' };
       const config2 = { ...mockConfig, issuer: 'https://test2.okta.com' };
@@ -251,8 +261,12 @@ describe('oktaRegister', () => {
       };
 
       (OktaAuth as unknown as ReturnType<typeof vi.fn>)
-        .mockReturnValueOnce(mockOktaAuthInstance)
-        .mockReturnValueOnce(mockOktaAuthInstance2);
+        .mockImplementationOnce(function (this: unknown) {
+          return mockOktaAuthInstance as never;
+        })
+        .mockImplementationOnce(function (this: unknown) {
+          return mockOktaAuthInstance2 as never;
+        });
 
       const config1 = { ...mockConfig, clientId: 'client-1' };
       const config2 = { ...mockConfig, clientId: 'client-2' };

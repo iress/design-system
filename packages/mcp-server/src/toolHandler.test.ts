@@ -1,7 +1,7 @@
 /**
  * Tests for toolHandler.ts
  */
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
 import { handleToolCall } from './toolHandler.js';
 import { type ToolResponse } from './types.js';
 import {
@@ -40,19 +40,16 @@ vi.mock('./iressHandlers.js', () => ({
 }));
 
 // Type the mocked functions
-const mockedHandleFindComponent = vi.mocked(handleFindComponent);
-const mockedHandleGetComponentProps = vi.mocked(handleGetComponentProps);
-const mockedHandleListComponents = vi.mocked(handleListComponents);
-const mockedHandleGetUsageExamples = vi.mocked(handleGetUsageExamples);
-const mockedHandleSearchIdsDocs = vi.mocked(handleSearchIdsDocs);
-const mockedHandleGetDesignTokens = vi.mocked(handleGetDesignTokens);
-const mockedHandleGetDesignGuidelines = vi.mocked(handleGetDesignGuidelines);
-const mockedHandleGetIressComponentInfo = vi.mocked(
-  handleGetIressComponentInfo,
-);
-const mockedHandleAnalyzeComponentMentions = vi.mocked(
-  handleAnalyzeComponentMentions,
-);
+const mockedHandleFindComponent = handleFindComponent as Mock;
+const mockedHandleGetComponentProps = handleGetComponentProps as Mock;
+const mockedHandleListComponents = handleListComponents as Mock;
+const mockedHandleGetUsageExamples = handleGetUsageExamples as Mock;
+const mockedHandleSearchIdsDocs = handleSearchIdsDocs as Mock;
+const mockedHandleGetDesignTokens = handleGetDesignTokens as Mock;
+const mockedHandleGetDesignGuidelines = handleGetDesignGuidelines as Mock;
+const mockedHandleGetIressComponentInfo = handleGetIressComponentInfo as Mock;
+const mockedHandleAnalyzeComponentMentions =
+  handleAnalyzeComponentMentions as Mock;
 
 describe('handleToolCall', () => {
   beforeEach(() => {
