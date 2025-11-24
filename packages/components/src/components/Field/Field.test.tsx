@@ -110,7 +110,7 @@ describe('IressField', () => {
         });
 
         const input = screen.getByRole('textbox', {
-          name: `Required ${TEST_LABEL}`,
+          name: `Required${TEST_LABEL}`,
         });
         expect(input).toBeInTheDocument();
       });
@@ -210,10 +210,9 @@ describe('IressField', () => {
       });
 
       const fieldElement = screen.getByTestId(TEST_ID);
+      console.log(fieldElement.getAttribute('style'));
 
-      expect(fieldElement).not.toHaveStyle({
-        gridTemplateColumns: expect.any(String),
-      });
+      expect(fieldElement).not.toHaveAttribute('style');
     });
 
     it('does not apply custom label width when not in horizontal mode', () => {

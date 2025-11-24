@@ -154,6 +154,7 @@ const TestProviderApp = ({
     <IressSlideoutProvider {...providerProps}>
       <SlideoutContext.Consumer>
         {(contextValue) => {
+          // eslint-disable-next-line react-hooks/globals -- this is a test
           capturedContext = contextValue;
           return null;
         }}

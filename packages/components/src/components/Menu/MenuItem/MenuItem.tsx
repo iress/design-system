@@ -422,6 +422,7 @@ const MenuItem = <
     const buttonProps = Component === 'button' ? { type: 'button' } : {};
     return (
       <Component
+        // eslint-disable-next-line react-hooks/refs -- we are forwarding the ref
         {...spreadUnlessUndefined(renderProps, nonStyleProps as object)}
         {...buttonProps}
       />

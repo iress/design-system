@@ -34,19 +34,24 @@ export const useShouldRenderLoading = (
     }
 
     // Some loading patterns have a start up animation, so we can avoid the delay during that animation time.
-    if (
-      !startShowing.current ||
-      performance.now() - startShowing.current < avoidDelayTimeout
-    ) {
-      setRenderLoading(false);
-      return;
-    }
 
-    const timeout = setTimeout(() => {
+    const isBeforeDelayTimeout = setTimeout(() => {
+      if (
+        !startShowing.current ||
+        performance.now() - startShowing.current < avoidDelayTimeout
+      ) {
+        setRenderLoading(false);
+      }
+    }, 0);
+
+    const delayTimeout = setTimeout(() => {
       setRenderLoading(false);
     }, delay);
 
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(isBeforeDelayTimeout);
+      clearTimeout(delayTimeout);
+    };
   }, [isLoaded, delay, avoidDelayTimeout]);
 
   return isLoaded !== true || renderLoading;
