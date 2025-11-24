@@ -1,4 +1,4 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { IressAutocomplete, IressAutocompleteProps } from '.';
 import userEvent from '@testing-library/user-event';
@@ -323,7 +323,7 @@ describe('IressAutocomplete', () => {
 
       const options = await screen.findAllByRole('option');
 
-      expect(options).toHaveLength(1);
+      await waitFor(() => expect(options).toHaveLength(1));
       expect(options[0]).toHaveTextContent(MOCK_LABEL_VALUE_META[0].label);
     });
   });

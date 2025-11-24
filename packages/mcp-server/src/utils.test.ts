@@ -1,7 +1,15 @@
 /**
  * Tests for utility functions
  */
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import {
+  describe,
+  it,
+  expect,
+  vi,
+  beforeEach,
+  afterEach,
+  type Mock,
+} from 'vitest';
 import * as fs from 'fs';
 import type { ComponentMapping } from './types.js';
 import {
@@ -18,7 +26,11 @@ vi.mock('./config.js', () => ({
   DOCS_DIR: '/mock/docs/dir',
 }));
 
-const mockedFs = vi.mocked(fs);
+const mockedFs = {
+  existsSync: fs.existsSync as Mock,
+  readdirSync: fs.readdirSync as Mock,
+  readFileSync: fs.readFileSync as Mock,
+};
 
 // Test helper functions and types
 const createComponentMapping = (

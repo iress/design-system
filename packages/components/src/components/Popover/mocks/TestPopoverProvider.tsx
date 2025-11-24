@@ -64,7 +64,7 @@ export const MOCK_FLOATING_UI_INTERACTIONS: PopoverHookReturn['interactions'] =
 
 export const getMockPopoverContext = (
   contextProps: Partial<PopoverHookReturn> = {},
-) =>
+): PopoverHookReturn =>
   ({
     ...contextProps,
     activeIndex: contextProps.activeIndex ?? 0,

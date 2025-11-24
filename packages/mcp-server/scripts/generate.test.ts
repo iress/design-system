@@ -7,7 +7,9 @@ import fs from 'fs';
 // Mock external dependencies before importing
 vi.mock('fs');
 vi.mock('path');
-vi.mock('turndown');
+vi.mock('turndown', () => ({
+  default: vi.fn(),
+}));
 vi.mock('turndown-plugin-gfm');
 vi.mock('playwright');
 vi.mock('chromium');
@@ -48,6 +50,10 @@ import { gfm } from 'turndown-plugin-gfm';
 import { Browser, chromium, Page } from 'playwright';
 import config from './config.js';
 import path from 'path';
+import type { Mock } from 'vitest';
+
+// Cast mocked TurndownService as Mock
+const MockedTurndownService = TurndownService as unknown as Mock;
 
 describe('generate.ts', () => {
   describe('checkDocItemsFileExists', () => {
@@ -186,12 +192,14 @@ describe('generate.ts', () => {
         use: mockUse,
       } as unknown as TurndownService;
 
-      // Make the constructor return our mock instance
-      vi.mocked(TurndownService).mockReturnValue(mockTurndownInstance);
+      // Make the constructor return our mock instance (using function for constructor)
+      MockedTurndownService.mockImplementation(function (this: unknown) {
+        return mockTurndownInstance;
+      });
 
       const result = setupTurndownService();
 
-      expect(TurndownService).toHaveBeenCalled();
+      expect(MockedTurndownService).toHaveBeenCalled();
       expect(mockUse).toHaveBeenCalledWith(gfm);
       expect(result).toBe(mockTurndownInstance);
     });
@@ -828,7 +836,9 @@ describe('generate.ts', () => {
         use: vi.fn(),
         turndown: vi.fn().mockReturnValue('# Test content'),
       };
-      vi.mocked(TurndownService).mockReturnValue(mockTurndownInstance as never);
+      MockedTurndownService.mockImplementation(function (this: unknown) {
+        return mockTurndownInstance as never;
+      });
 
       const result = await generateDocumentation({ force: true });
 
@@ -884,7 +894,9 @@ describe('generate.ts', () => {
         use: vi.fn(),
         turndown: vi.fn().mockReturnValue('# Test content'),
       };
-      vi.mocked(TurndownService).mockReturnValue(mockTurndownInstance as never);
+      MockedTurndownService.mockImplementation(function (this: unknown) {
+        return mockTurndownInstance as never;
+      });
 
       await generateDocumentation({ force: false });
 
@@ -915,9 +927,9 @@ describe('generate.ts', () => {
         use: vi.fn(),
         turndown: vi.fn().mockReturnValue('# Test content'),
       };
-      vi.mocked(TurndownService).mockReturnValue(
-        mockTurndownInstance as unknown as TurndownService,
-      );
+      MockedTurndownService.mockImplementation(function (this: unknown) {
+        return mockTurndownInstance as unknown as TurndownService;
+      });
 
       const result = await generateDocumentation({ force: false });
 
@@ -952,7 +964,9 @@ describe('generate.ts', () => {
         use: vi.fn(),
         turndown: vi.fn().mockReturnValue('# Test content'),
       };
-      vi.mocked(TurndownService).mockReturnValue(mockTurndownInstance as never);
+      MockedTurndownService.mockImplementation(function (this: unknown) {
+        return mockTurndownInstance as never;
+      });
 
       const result = await generateDocumentation({ force: false });
 
@@ -1069,7 +1083,9 @@ describe('generate.ts', () => {
         use: vi.fn(),
         turndown: vi.fn().mockReturnValue('# Test content'),
       };
-      vi.mocked(TurndownService).mockReturnValue(mockTurndownInstance as never);
+      MockedTurndownService.mockImplementation(function (this: unknown) {
+        return mockTurndownInstance as never;
+      });
 
       const result = await generateDocumentation({ force: false });
 
@@ -1165,7 +1181,9 @@ describe('generate.ts', () => {
         use: vi.fn(),
         turndown: vi.fn().mockReturnValue('# Test content'),
       };
-      vi.mocked(TurndownService).mockReturnValue(mockTurndownInstance as never);
+      MockedTurndownService.mockImplementation(function (this: unknown) {
+        return mockTurndownInstance as never;
+      });
 
       await generateDocumentation({ force: false }, customConfig);
 

@@ -6,6 +6,7 @@ export default defineConfig({
     passWithNoTests: true,
     environment: 'node',
     reporters: ['verbose'],
+    include: ['scripts/**/*.test.ts', 'src/**/*.test.ts'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'lcov', 'html', 'json', 'json-summary'],
