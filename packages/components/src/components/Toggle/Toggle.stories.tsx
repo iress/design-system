@@ -4,7 +4,12 @@ import { IressToggle } from '.';
 import { IressPanel } from '../Panel';
 import { IressText } from '../Text';
 import { IressStack } from '../Stack';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import {
+  disableArgTypes,
+  withTransformedRawSource,
+} from '@iress-oss/ids-storybook-config';
+import { ControlledToggle } from './mocks/ControlledToggle';
+import ControlledToggleSource from './mocks/ControlledToggle.tsx?raw';
 
 type Story = StoryObj<typeof IressToggle>;
 
@@ -17,7 +22,7 @@ export default {
 export const Default: Story = {
   args: {
     children: 'Toggle',
-    checked: false,
+    defaultChecked: false,
     hiddenLabel: false,
     layout: 'inline',
   },
@@ -34,6 +39,15 @@ export const Checked: Story = {
   args: {
     ...Default.args,
     checked: true,
+  },
+  argTypes: disableArgTypes(['checked', 'onChange']),
+  render: (args) => <ControlledToggle {...args} />,
+  parameters: {
+    ...withTransformedRawSource(
+      ControlledToggleSource,
+      'IressToasterProviderProps',
+      ['container'],
+    ),
   },
 };
 

@@ -184,6 +184,7 @@ const useSearchOperations = (
     ) => {
       if (shouldSkipQuery(query)) return;
 
+      // eslint-disable-next-line react-hooks/immutability -- this is intentional, as we are tracking the latest request ID for improved UX
       const requestId = ++requestIdCounter.current;
       updateQueryTracking(query);
 

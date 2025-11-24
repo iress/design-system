@@ -41,6 +41,7 @@ export const usePopoverNavigation = <
 
   useEffect(() => {
     if (context.open) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- This state is intentionally synced to context.open only on open/close.
       setActiveIndex(focusOnInitialRender ? startIndex : null);
     } else {
       setActiveIndex(null);

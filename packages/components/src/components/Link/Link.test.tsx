@@ -41,7 +41,7 @@ describe('IressLink', () => {
           </IressLink>,
         );
 
-        const button = screen.getByRole('button', { name: 'Before Link' });
+        const button = screen.getByRole('button', { name: 'BeforeLink' });
         expect(button).toBeInTheDocument();
       });
 
@@ -52,7 +52,7 @@ describe('IressLink', () => {
           </IressLink>,
         );
 
-        const button = screen.getByRole('button', { name: 'Link After' });
+        const button = screen.getByRole('button', { name: 'LinkAfter' });
         expect(button).toBeInTheDocument();
       });
 
@@ -64,7 +64,7 @@ describe('IressLink', () => {
         );
 
         const button = screen.getByRole('button', {
-          name: 'Before Link After',
+          name: 'BeforeLinkAfter',
         });
         expect(button).toBeInTheDocument();
       });
