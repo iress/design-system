@@ -42,7 +42,7 @@
     "eslint-plugin-file-progress": "^3.0.2",
     "eslint-plugin-mdx": "^3.6.2",
     "eslint-plugin-prettier": "^5.5.4",
-    "jsdom": "^26.1.0",
+    "jsdom": "^27.1.0",
     "json5": "^2.2.3",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
