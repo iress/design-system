@@ -11,7 +11,7 @@ runs:
       run: |
         yarn dev:mcp &
         # Wait for Storybook to be ready
-        timeout 300 bash -c 'until curl -f http://localhost:6005 > /dev/null 2>&1; do sleep 5; done' || (echo "Storybook failed to start" && exit 1)
+        timeout 300 bash -c 'until curl -f http://localhost:6005 > /dev/null 2>&1; do sleep 5; done' || (echo "Storybook failed to start within 300 seconds. Check Storybook logs for errors." && exit 1)
       shell: bash
     - name: Run MCP Server Scripts
       run: |

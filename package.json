@@ -58,7 +58,7 @@
     "check-coverage": "tsx ./scripts/check-coverage.ts",
     "dev": "concurrently \"wait-on tcp:6006 && wait-on tcp:6007 && yarn storybook\" \"yarn packages/components dev:no-open\" \"yarn packages/tokens dev:no-open\"",
     "dev:mcp": "concurrently \"wait-on tcp:6006 && wait-on tcp:6007 && STORYBOOK_MCP=true yarn storybook --no-open\" \"yarn packages/components dev:no-open\" \"yarn packages/tokens dev:no-open\"",
-    "dev:kill": "kill $(lsof -ti tcp:6005) || true && kill $(lsof -ti tcp:6006) || true && kill $(lsof -ti tcp:6007) || true",
+    "dev:kill": "kill $(lsof -ti tcp:6005) || true; kill $(lsof -ti tcp:6006) || true; kill $(lsof -ti tcp:6007) || true",
     "prepublish": "tsx ./scripts/storybook-addon-prepublish.ts",
     "prepare": "husky && yarn build",
     "build-storybook": "storybook build",
