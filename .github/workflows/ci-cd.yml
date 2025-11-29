@@ -46,6 +46,7 @@ env:
     .yarn/unplugged
     node_modules
     packages/*/node_modules
+    ~/.cache/ms-playwright
   BUILD_CACHE_PATHS: |
     packages/*/dist
     packages/components/src/styled-system
@@ -80,6 +81,7 @@ jobs:
         run: |
           yarn install --immutable
           yarn packages/mcp-server playwright install
+          yarn packages/mcp-server playwright install-deps
       - name: Build dependencies
         if: steps.yarn-cache-build.outputs.cache-hit != 'true'
         run: yarn build

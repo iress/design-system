@@ -3,6 +3,10 @@ description: 'Starts Storybook, runs MCP scripts, stops Storybook'
 runs:
   using: 'composite'
   steps:
+    - name: Install dependencies if needed
+      run: |
+        yarn packages/mcp-server playwright install
+        yarn packages/mcp-server playwright install-deps
     - name: Start Storybook
       run: |
         yarn dev:mcp &
