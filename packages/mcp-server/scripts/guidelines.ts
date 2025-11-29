@@ -22,7 +22,10 @@ export function readDocItems(docItemsFile: string): DocItem[] {
 
 export function filterGuidelinesItems(docItems: DocItem[]): DocItem[] {
   return docItems.filter(
-    (item) => item.status === 'completed' && item.id.startsWith('foundations-'),
+    (item) =>
+      item.status === 'completed' &&
+      (item.id.startsWith('components_foundations-') ||
+        item.id.startsWith('foundations-')),
   );
 }
 
