@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-storybook-toggle-stories",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A Storybook addon that adds a toolbar button to toggle between different story variants.",
   "keywords": [
     "storybook-addons"
