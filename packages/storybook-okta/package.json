@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-storybook-okta",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Protect your Storybook instance(s) using OKTA",
   "keywords": [
     "storybook-addons"

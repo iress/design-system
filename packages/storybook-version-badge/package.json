@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-storybook-version-badge",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A Storybook addon that displays the current version of your design system in the Storybook toolbar.",
   "keywords": [
     "storybook-addons"
