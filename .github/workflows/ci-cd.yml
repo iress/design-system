@@ -176,6 +176,27 @@ jobs:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
           fail-on-cache-miss: true
+      - name: Start Storybook
+        run: |
+          yarn workspace @iress-oss/ids-components run storybook --no-open &
+          STORYBOOK_PID=$!
+          echo "STORYBOOK_PID=$STORYBOOK_PID" >> $GITHUB_ENV
+          # Wait for Storybook to be ready
+          timeout 300 bash -c 'until curl -f http://localhost:6006 > /dev/null 2>&1; do sleep 5; done' || (echo "Storybook failed to start" && exit 1)
+      - name: Run MCP Server Scripts
+        run: |
+          echo "Running MCP server collect script..."
+          yarn workspace @iress-oss/ids-mcp-server run collect
+          echo "Running MCP server generate script..."
+          yarn workspace @iress-oss/ids-mcp-server run generate
+          echo "Running MCP server guidelines script..."
+          yarn workspace @iress-oss/ids-mcp-server run guidelines
+      - name: Stop Storybook
+        run: |
+          if [ ! -z "$STORYBOOK_PID" ]; then
+            kill $STORYBOOK_PID || true
+          fi
+        if: always()
       - name: Upload build artifacts
         uses: actions/upload-artifact@v5
         with:
