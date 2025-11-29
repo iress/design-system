@@ -94,9 +94,12 @@ export async function collectDocItems(
         const ref = await link.evaluate((el) =>
           el.parentElement?.getAttribute('data-ref-id'),
         );
-        const refId = ref && refs?.[ref]
-          ? (id.startsWith(`${ref}_`) ? id.slice(ref.length + 1) : id)
-          : id;
+        const refId =
+          ref && refs?.[ref]
+            ? id.startsWith(`${ref}_`)
+              ? id.slice(ref.length + 1)
+              : id
+            : id;
         const iframeUrl = new URL(
           `iframe.html?viewMode=docs&id=${refId}`,
           ref && refs?.[ref] ? refs[ref].url : config.storybookBaseUrl,
