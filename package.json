@@ -13,7 +13,7 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.1",
     "@iress-oss/ids-components": "^6.0.0-alpha.1",
-    "@iress-oss/ids-storybook-config": "^0.0.0",
+    "@iress-oss/ids-storybook-config": "^0.0.1",
     "@iress-oss/ids-storybook-okta": "^0.0.0",
     "@iress-oss/ids-storybook-sandbox": "^0.0.0",
     "@iress-oss/ids-storybook-toggle-stories": "^0.0.0",
@@ -57,6 +57,8 @@
     "build": "yarn monorepo run build",
     "check-coverage": "tsx ./scripts/check-coverage.ts",
     "dev": "concurrently \"wait-on tcp:6006 && wait-on tcp:6007 && yarn storybook\" \"yarn packages/components dev:no-open\" \"yarn packages/tokens dev:no-open\"",
+    "dev:mcp": "concurrently \"wait-on tcp:6006 && wait-on tcp:6007 && STORYBOOK_MCP=true yarn storybook --no-open\" \"yarn packages/components dev:no-open\" \"yarn packages/tokens dev:no-open\"",
+    "dev:kill": "kill $(lsof -ti tcp:6005) || true && kill $(lsof -ti tcp:6006) || true && kill $(lsof -ti tcp:6007) || true",
     "prepublish": "tsx ./scripts/storybook-addon-prepublish.ts",
     "prepare": "husky && yarn build",
     "build-storybook": "storybook build",

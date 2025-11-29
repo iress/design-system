@@ -22,6 +22,12 @@ export interface Dependencies {
   console: typeof console;
 }
 
+interface StorybookRef {
+  title: string;
+  url: string;
+  id: string;
+}
+
 export function createFolder(
   folderPath: string,
   deps: Dependencies = { fs, chromium, console },
@@ -39,7 +45,7 @@ export async function collectDocItems(
 
   deps.console.log(`Opening Storybook at ${config.storybookBaseUrl}`);
   await page.goto(`${config.storybookBaseUrl}/?path=/docs/introduction--docs`, {
-    waitUntil: 'networkidle',
+    waitUntil: 'domcontentloaded',
     timeout: config.browserTimeout,
   });
 
@@ -55,6 +61,15 @@ export async function collectDocItems(
 
   // Allow time for the sidebar to re-render
   await page.waitForTimeout(500);
+
+  // Get refs for storybook composition
+  const refs: Record<string, StorybookRef> | undefined = await page.evaluate(
+    () =>
+      (
+        window as Window &
+          typeof globalThis & { REFS: Record<string, StorybookRef> }
+      ).REFS,
+  );
 
   // Extract documentation
   const links = await page.$$('a[href^="/?path="]');
@@ -76,14 +91,19 @@ export async function collectDocItems(
 
       if (id) {
         deps.console.log(`✓ Processing link: ${href}, id: "${id}"`);
+        const ref = await link.evaluate((el) =>
+          el.parentElement?.getAttribute('data-ref-id'),
+        );
+        const refId = ref && refs?.[ref] ? id.replace(`${ref}_`, '') : id;
         const iframeUrl = new URL(
-          `iframe.html?viewMode=docs&id=${id}`,
-          config.storybookBaseUrl,
+          `iframe.html?viewMode=docs&id=${refId}`,
+          ref && refs?.[ref] ? refs[ref].url : config.storybookBaseUrl,
         ).toString();
+        const category = ref && refs?.[ref] ? `${refs[ref]?.title} / ` : '';
 
         const item: DocItem = {
           id,
-          title: title.split('\n')[0].trim(), // Use the first line as title
+          title: `${category}${title.split('\n')[0].trim()}`, // Use the first line as title
           url: iframeUrl,
           link: url.toString(),
           status: 'pending',
