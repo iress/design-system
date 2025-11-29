@@ -7,6 +7,7 @@ runs:
       run: |
         yarn packages/mcp-server playwright install
         yarn packages/mcp-server playwright install-deps
+      shell: bash
     - name: Start Storybook
       run: |
         yarn dev:mcp &
