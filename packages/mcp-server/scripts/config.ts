@@ -12,6 +12,6 @@ export default {
   folder,
   guidelinesFile: `${folder}/docs/guidelines.md`,
   selectorTimeout: 10000,
-  storybookBaseUrl: getEnvVar('STORYBOOK_BASE_URL', 'http://localhost:6006'),
+  storybookBaseUrl: getEnvVar('STORYBOOK_BASE_URL', 'http://localhost:6005'),
   storybookContentSelector: '#storybook-docs',
 };

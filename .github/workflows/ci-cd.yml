@@ -1,5 +1,5 @@
 name: CI/CD
-run-name: ${{ github.event.head_commit.message || github.event.pull_request.title || github.ref_name }}
+run-name: ${{ github.event_name == 'workflow_dispatch' && format('[canary] {0} by {1}', github.event.inputs.package || 'All packages', github.actor) || github.event.head_commit.message || github.ref_name }}
 
 on:
   push:
@@ -46,6 +46,7 @@ env:
     .yarn/unplugged
     node_modules
     packages/*/node_modules
+    ~/.cache/ms-playwright
   BUILD_CACHE_PATHS: |
     packages/*/dist
     packages/components/src/styled-system
@@ -190,6 +191,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup
     timeout-minutes: 20
+    if: github.actor != 'dependabot[bot]'
     permissions:
       contents: read
       actions: read
@@ -255,7 +257,7 @@ jobs:
     if: github.repository_owner == 'iress' && github.event_name == 'push' && contains(fromJSON('["refs/heads/main", "refs/heads/5.x"]'), github.ref)
     runs-on: ubuntu-latest
     needs: [validated, build]
-    timeout-minutes: 15
+    timeout-minutes: 120
     environment: npm-publishing
     permissions:
       id-token: write
@@ -303,6 +305,10 @@ jobs:
           chmod +x .github/scripts/publish-packages.sh
           .github/scripts/publish-packages.sh stable
 
+      - name: Generate MCP Documentation
+        uses: ./.github/actions/generate-mcp-docs
+        if: steps.version-check.outputs.has_version_changes == 'true' && contains(steps.version-check.outputs.packages_to_publish, '@iress-oss/ids-mcp-server')
+
       - name: Publish to NPM (Stable)
         if: steps.version-check.outputs.has_version_changes == 'true'
         id: publish
@@ -348,7 +354,7 @@ jobs:
     if: github.repository_owner == 'iress' && !contains(fromJSON('["refs/heads/main", "refs/heads/5.x"]'), github.ref) && (github.event_name == 'workflow_dispatch' && inputs.publish_canary == true || github.event_name == 'push' && contains(github.event.head_commit.message, '[canary'))
     runs-on: ubuntu-latest
     needs: [validated, build]
-    timeout-minutes: 15
+    timeout-minutes: 120
     environment: npm-publishing
     permissions:
       id-token: write
@@ -423,6 +429,10 @@ jobs:
             echo "📦 Versioning all packages"
             yarn workspaces foreach -A --no-private version $CANARY_VERSION
           fi
+
+      - name: Generate MCP Documentation
+        uses: ./.github/actions/generate-mcp-docs
+        if: (github.event_name == 'workflow_dispatch' && (github.event.inputs.package == '@iress-oss/ids-mcp-server' || steps.extract-package.outputs.package == '')) || (github.event_name == 'push' && (steps.extract-package.outputs.package == '@iress-oss/ids-mcp-server' || steps.extract-package.outputs.package == ''))
 
       - name: Configure npm authentication for OIDC
         run: |

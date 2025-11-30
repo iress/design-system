@@ -69,6 +69,7 @@ describe('collect.ts', () => {
       goto: vi.fn(),
       waitForSelector: vi.fn(),
       waitForTimeout: vi.fn(),
+      evaluate: vi.fn().mockResolvedValue(undefined),
       keyboard: {
         press: vi.fn(),
       },
@@ -128,18 +129,21 @@ describe('collect.ts', () => {
             .fn()
             .mockResolvedValue('/?path=/docs/button--default'),
           innerText: vi.fn().mockResolvedValue('Button\nDefault'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
         {
           getAttribute: vi
             .fn()
             .mockResolvedValue('/?path=/docs/input--primary'),
           innerText: vi.fn().mockResolvedValue('Input Primary'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
         {
           getAttribute: vi
             .fn()
             .mockResolvedValue('/?path=/story/modal--default'),
           innerText: vi.fn().mockResolvedValue('Modal Default'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
       ] as unknown as ElementHandle[];
 
@@ -155,7 +159,7 @@ describe('collect.ts', () => {
       expect(mockPage.goto).toHaveBeenCalledWith(
         'http://localhost:6006/?path=/docs/introduction--docs',
         {
-          waitUntil: 'networkidle',
+          waitUntil: 'domcontentloaded',
           timeout: 30000,
         },
       );
@@ -217,10 +221,12 @@ describe('collect.ts', () => {
         {
           getAttribute: vi.fn().mockResolvedValue('/?path=/docs/'),
           innerText: vi.fn().mockResolvedValue('Empty ID Link'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
         {
           getAttribute: vi.fn().mockResolvedValue('/?path=/docs/valid--story'),
           innerText: vi.fn().mockResolvedValue('Valid Story'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
       ] as unknown as ElementHandle[];
 
@@ -241,10 +247,12 @@ describe('collect.ts', () => {
         {
           getAttribute: vi.fn().mockResolvedValue(null),
           innerText: vi.fn().mockResolvedValue('Null Href Link'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
         {
           getAttribute: vi.fn().mockResolvedValue('/?path=/docs/valid--story'),
           innerText: vi.fn().mockResolvedValue('Valid Story'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
       ] as unknown as ElementHandle[];
 
@@ -263,6 +271,7 @@ describe('collect.ts', () => {
             .fn()
             .mockResolvedValue('/?path=/docs/button--default'),
           innerText: vi.fn().mockResolvedValue('Button\nDefault\nExtra Line'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
       ] as unknown as ElementHandle[];
 
@@ -281,16 +290,19 @@ describe('collect.ts', () => {
             .fn()
             .mockResolvedValue('/?path=/docs/button--default'),
           innerText: vi.fn().mockResolvedValue('Button Default'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
         {
           getAttribute: vi
             .fn()
             .mockResolvedValue('/?path=/story/input--primary'),
           innerText: vi.fn().mockResolvedValue('Input Primary'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
         {
           getAttribute: vi.fn().mockResolvedValue('/other/path'),
           innerText: vi.fn().mockResolvedValue('Other Path'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
       ] as unknown as ElementHandle[];
 
@@ -396,6 +408,7 @@ describe('collect.ts', () => {
             .fn()
             .mockResolvedValue('/?path=/docs/button--default'),
           innerText: vi.fn().mockResolvedValue('Button Default'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
       ] as unknown as ElementHandle[];
 
@@ -543,24 +556,29 @@ describe('collect.ts', () => {
             .fn()
             .mockResolvedValue('/?path=/docs/button--default'),
           innerText: vi.fn().mockResolvedValue('Button Default'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
         {
           getAttribute: vi.fn().mockResolvedValue('/?path=/docs/'),
           innerText: vi.fn().mockResolvedValue('Empty ID'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
         {
           getAttribute: vi.fn().mockResolvedValue(null),
           innerText: vi.fn().mockResolvedValue('Null Href'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
         {
           getAttribute: vi
             .fn()
             .mockResolvedValue('/?path=/story/input--primary'),
           innerText: vi.fn().mockResolvedValue('Story Link'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
         {
           getAttribute: vi.fn().mockResolvedValue('/?path=/docs/card--basic'),
           innerText: vi.fn().mockResolvedValue('Card\nBasic\nVariant'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
       ] as unknown as ElementHandle[];
 
@@ -598,18 +616,21 @@ describe('collect.ts', () => {
             .fn()
             .mockResolvedValue('/?path=/docs/components-button--primary'),
           innerText: vi.fn().mockResolvedValue('Button Primary'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
         {
           getAttribute: vi
             .fn()
             .mockResolvedValue('/?path=/docs/components-input--default'),
           innerText: vi.fn().mockResolvedValue('Input\nDefault'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
         {
           getAttribute: vi
             .fn()
             .mockResolvedValue('/?path=/docs/layout-grid--basic'),
           innerText: vi.fn().mockResolvedValue('Grid Basic'),
+          evaluate: vi.fn().mockResolvedValue(null),
         },
       ] as unknown as ElementHandle[];
 

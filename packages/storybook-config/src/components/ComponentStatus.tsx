@@ -112,8 +112,9 @@ export const ComponentStatus = ({
     throw new Error('ComponentStatus requires either a story or stories prop');
   }
 
-  const of = (ofProp ?? meta?.default) as StoryAnnotations;
-  const storyTags = of.tags ?? [];
+  const ofTags = (ofProp as StoryAnnotations)?.tags ?? [];
+  const metaTags = (meta?.default as StoryAnnotations)?.tags ?? [];
+  const storyTags = [...metaTags, ...ofTags];
   const betaTag = storyTags.find((tag) => tag.startsWith('beta:'));
   const cautionTag = storyTags.find((tag) => tag.startsWith('caution:'));
   const updatedTag = storyTags.find((tag) => tag === 'updated');
