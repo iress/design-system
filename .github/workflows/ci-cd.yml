@@ -461,9 +461,9 @@ jobs:
 
           if [ -n "$TARGET_PACKAGE" ]; then
             echo "📦 Publishing package: $TARGET_PACKAGE"
-            yarn workspace "$TARGET_PACKAGE" npm publish --tag canary --access public
+            yarn workspace "$TARGET_PACKAGE" npm publish --tag canary --access public --provenance
           else
             echo "📦 Publishing all packages"
-            yarn workspaces foreach -A --no-private npm publish --tag canary --access public
+            yarn workspaces foreach -A --no-private npm publish --tag canary --access public --provenance
           fi
           echo "✅ Canary release published successfully!"
