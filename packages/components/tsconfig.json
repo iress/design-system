@@ -1,51 +1,11 @@
 {
-  "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "useDefineForClassFields": true,
-
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "target": "ES2020",
-    "jsx": "react-jsx",
-
-    /* TS Optimisation */
-    "incremental": true,
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo",
-
-    /* Linting */
-    "strictNullChecks": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-
-    /* Bundler mode */
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "declaration": true,
-    "noEmit": true,
-    "allowImportingTsExtensions": true,
-
-    /* Path */
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@iress-storybook/*": ["../../apps/storybook/src/*"],
-      "@helpers/*": ["src/helpers/*"],
-      "@theme-preset/*": ["theme-preset/*"]
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
     },
-    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"],
-    "skipDefaultLibCheck": true
-  },
-  "include": [
-    "docs",
-    "src",
-    "theme-preset",
-    "vitest.setup.ts",
-    "vite.config.ts",
-    "vitest.config.ts",
-    ".storybook"
-  ],
-  "exclude": ["node_modules", "dist", "**/*.stories.tsx"]
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

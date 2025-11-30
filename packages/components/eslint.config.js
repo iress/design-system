@@ -21,7 +21,12 @@ export default [
     ],
   },
   baseJavaScriptConfig,
-  createTypeScriptConfig(import.meta.dirname),
+  createTypeScriptConfig(import.meta.dirname, [
+    './tsconfig.json',
+    './tsconfig.base.json',
+    './tsconfig.lib.json',
+    './tsconfig.node.json',
+  ]),
   await createReactConfig(),
   await createSonarConfig(),
   baseStoriesConfig,
