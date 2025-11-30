@@ -1,11 +1,9 @@
 version: 2
 updates:
   # Root workspace dependencies
-  - package-ecosystem: 'npm'
+  - &npm-base
+    package-ecosystem: 'npm'
     directory: '/'
-    branches:
-      - main
-      - 5.x
     schedule:
       interval: 'weekly'
     cooldown:
@@ -43,12 +41,13 @@ updates:
           - 'react'
           - 'react-dom'
 
+  - <<: *npm-base
+    target-branch: '5.x'
+
   # GitHub Actions workflows
-  - package-ecosystem: 'github-actions'
+  - &gha-base
+    package-ecosystem: 'github-actions'
     directory: '/'
-    branches:
-      - main
-      - 5.x
     schedule:
       interval: 'weekly'
     open-pull-requests-limit: 5
@@ -59,3 +58,6 @@ updates:
       - 'github-actions'
     commit-message:
       prefix: 'chore(ci)'
+
+  - <<: *gha-base
+    target-branch: '5.x'
