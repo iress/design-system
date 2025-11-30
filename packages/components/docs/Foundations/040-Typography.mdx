@@ -1,0 +1,55 @@
+import { Meta } from '@storybook/blocks';
+import { ComponentExample } from '@iress-storybook/components';
+import * as ComponentStories from './040-Typography.stories';
+
+<Meta of={ComponentStories} />
+
+# Typography
+
+Typography is set up as part of the theming. Typography is controlled by the `IressText` component and the `iress-u-text` utility class. They implement consistent line heights and font weights.
+
+Typography styles are designed to be encapsulated. If you want text to pick up the Iress styling, you'll need to wrap it in an `IressText` component.
+
+## Body
+
+This is the default text variant, and is designed to be clear and easy to read.
+
+<ComponentExample story={ComponentStories.Body} stories={ComponentStories} />
+
+## Headings
+
+Headings form the structure of a web page. They're designed to stand out visually, drawing a user's eye to distinct sections of the document. They can be set in a variety of sizes based on systematic font sizing with native heading scales (H1-H6).
+
+<ComponentExample
+  story={ComponentStories.Headings}
+  stories={ComponentStories}
+/>
+
+## Display
+
+Display text is used to draw attention to specific pieces of content, like introductory text on a landing page. It has larger font sizes than the heading variants, and a lighter font weight.
+
+<ComponentExample story={ComponentStories.Display} stories={ComponentStories} />
+
+## Lead
+
+Lead text is used to introduce users to a new section, and often gives a brief summary of a section. It has a larger font size than body text, but a lighter font weight so that it doesn't clash with headings.
+
+<ComponentExample story={ComponentStories.Lead} stories={ComponentStories} />
+
+## Caption
+
+The caption variant is used for small text that provides additional information about a table or image. It has a smaller font size than body text, and a lighter font weight.
+
+<ComponentExample story={ComponentStories.Caption} stories={ComponentStories} />
+
+## Other variants
+
+IDS also includes bold, italic and small text variants.
+
+- Bold text should be used to **draw attention** to part of a sentence, or to provide a visual label for readonly text.
+- Italic text should be used to add _emphasis_ to content, or to add stress to part of a sentence.
+- Small text is used for side comments or for text that's secondary to the main content.
+- Muted text is used to de-emphasise content, such as when displaying informative text that is not critical to the user experience.
+
+<ComponentExample story={ComponentStories.Other} stories={ComponentStories} />

@@ -1,13 +1,13 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { IressMenu, IressMenuItem, IressMenuProps, MENU_LAYOUTS } from '.';
-import { disableArgTypes } from '@iress-storybook/helpers';
+import { type Meta, type StoryObj } from '@storybook/react';
+import { IressMenu, IressMenuItem, type IressMenuProps, MENU_LAYOUTS } from '.';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
 import { MENU_CHILDREN_OPTIONS } from './mocks/menuChildrenOptions';
 import { IressInline } from '../Inline';
-import { useArgs } from '@storybook/preview-api';
 import { MenuRoleDescription } from './mocks/MenuRoleDescription';
 import { IressToggle } from '../Toggle';
+import { useArgs } from 'storybook/internal/preview-api';
 
 type Story = StoryObj<typeof IressMenu>;
 

@@ -1,0 +1,74 @@
+import { Meta } from '@storybook/blocks';
+import { DocsExample } from '@iress-storybook/components';
+
+<Meta title="Get Started/Using Storybook" />
+
+# Using Storybook
+
+The IDS team uses Storybook to develop and document our components. Storybook is a development environment for UI components. It allows you to browse a component library, view the different states of each component, and interactively develop and test components. It is most likely what you are looking at right now.
+
+Here we have just highlighted a few of our top tips on how you can use Storybook more efficiently. We have separated it by different stages of the product delivery cycle, but you can use these tips at any stage.
+
+---
+
+<DocsExample video="https://drive.google.com/file/d/14EXtfmDlEjy-6Qm0c8c4qqU5KbfEaQnh/preview">
+  ## First-time users
+
+When you first come to the IDS Storybook, you may notice the pages look un-styled. This is the default theme of IDS. You can change the theme to the theme you normally use in your product by clicking the `brush` icon in the top left, right above this page.
+
+You can also change to use the dark theme of Storybook itself by clicking the `moon` icon in the top left, right above this page.
+
+These settings are saved so the next time you come back to Storybook, it will remember your preferences.
+
+</DocsExample>
+
+<DocsExample video="https://drive.google.com/file/d/1csZepApw9WOEpF50mXmgoNgnW_YRENxP/preview">
+  ## Scoping work
+
+If you are scoping work, you can use Storybook to see what components are available to you. You can also see how they are used and what states they can be in. This can help you to understand what is possible and what is not.
+
+{/* TODO: Remove (coming soon) once Guidelines has been migrated over */}
+Every IDS component has a `Docs` page and a `Guidelines` (coming soon) page. The `Docs` page will show you how to use the component and what props it accepts, helping you understand what is available, and how each property behaves to allow you to understand the final user experience of your feature.
+
+The `Guidelines` page will show you how to use the component in a way that is consistent with other Iress applications. It covers things like accessibility, usability, and design principles, as well as which scenario to use which component and common pitfalls.
+
+</DocsExample>
+
+<DocsExample video="https://drive.google.com/file/d/1zBhhxFYTmgzq-d6UFHJ3qAOAJ1mOLnxB/preview">
+  ## Design
+
+When designing a new feature, you can use Storybook to see how your designs will look and behave in a real application.
+
+`Docs` and `Guidelines` (coming soon) pages will help you understand how to use the components and what is possible, and help you align to any design decisions made previously.
+
+`Examples` are a good way to see how variations of a component look and behave. You can see how a component looks in different states, and how it behaves with different props. If there is a variation that is not shown in the `Examples`, you can use the `Controls` tab to change the props of the component to see how it behaves with different values. You can also toggle how each component looks at different breakpoints (screen sizes/devices), how they look to users with certain eyesight conditions, and how they look in different states.
+
+Storybook is a starting point for your designs. It is the language developers will be using as they convert your designs into live user experiences. However, not everything is covered here. It is good to discuss your designs with developers to understand what is possible and what is not.
+
+</DocsExample>
+
+<DocsExample video="https://drive.google.com/file/d/1Y4337tvAfScvm01ycxLRuKoAwzdchCIo/preview">
+  ## Development
+
+During development, you can refer to Storybook for code examples and understand the API available to you.
+
+If you are using Typescript, majority of the API is available in your IDE. However, Storybook provides more than just the API. It provides examples of how to use and combine the properties, as well as which components were designed to work with each other.
+
+`Docs` covers the API of the component, and also discusses `Examples` in detail. Code examples are shown here as well.
+
+`Examples` in the sidebar actually allow you to toggle the props in the `Controls` tab to see how combinations look and behave. The `Actions` tab will show you what events are being emitted by the component, and the `Accessibility` tab will show you whether the combination of props is accessible or not in this component. You can also toggle how each component looks at different breakpoints (screen sizes/devices), how they look to users with certain eyesight conditions, and how they look in different states.
+
+IDS is a starting point for your application development. It provides the foundations to make your application look and behave in a consistent way to other Iress products. However, not everything is covered here. It is good to discuss with designers and other developers to understand any constraints or guidelines that are not covered by IDS.
+
+</DocsExample>
+
+---
+
+## Common issues
+
+<DocsExample video="https://drive.google.com/file/d/1eGuWGmCg0Utdp0bh_WEDvMuY_EWbDl2e/preview">
+  ### I can't find the `Controls`, `Actions` or `Accessibility` tab
+
+These tabs are only shown in the `Examples` area of the component. Some tabs are not applicable to some components. If you click on an example and still cannot see it, you may need to toggle the orientation of the addon. You can do this by tapping the `d` key twice, or using the settings as shown in the video.
+
+</DocsExample>

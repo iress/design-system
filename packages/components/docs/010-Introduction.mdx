@@ -1,0 +1,69 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { version } from '../package.json';
+import {
+  IressBadge,
+  IressButton,
+  IressRow,
+  IressCol,
+  IressCard,
+  IressPanel,
+} from '@/main';
+
+<Meta title="Introduction" />
+
+# Iress Design System
+
+<IressBadge mode="info">{version}</IressBadge>
+
+---
+
+The Iress Design System (IDS) serves as a shared visual language, working code, design tools and resources, human interface guidelines, and a community of contributors. It supports designers and developers building digital products for both B2B (Financial Advisors, Paraplanners) and B2B2C (client customers) segments.
+
+## What's new?
+
+<IressPanel>
+<IressRow gutter="md">
+  <IressCol>
+    <IressCard
+      heading="Patterns"
+      footer={
+        <IressButton href="/?path=/docs/patterns-loading--docs" mode="tertiary">
+          Learn more
+        </IressButton>
+      }
+    >
+      <p>
+        IDS has released our first pattern, `IressLoading`, allowing you to
+        display loading feedback to users consistently across different
+        applications no matter the scenario.
+      </p>
+      <p>It is available as of `5.10.0`.</p>
+    </IressCard>
+  </IressCol>
+  <IressCol>
+    <IressCard
+      heading="Theme components"
+      footer={
+        <IressButton href="/?path=/docs/themes-introduction--docs" mode="tertiary">
+          Learn more
+        </IressButton>
+      }
+    >
+      <p>
+        You can now use `IressTheme` from the `@iress/ids-themes` package to
+        quickly add a theme to your application. No more messing around with CDN
+        urls, now you just need the name of the theme and you are good to go.
+      </p>
+    </IressCard>
+  </IressCol>
+</IressRow>
+
+</IressPanel>
+
+## Ready to dive in?
+
+Start shipping faster with IDS.
+
+<IressButton href="/?path=/docs/get-started-develop--docs">
+  Get started
+</IressButton>

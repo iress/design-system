@@ -1,0 +1,77 @@
+import { Meta } from '@storybook/blocks';
+import { IressAlert } from '../../src/main';
+
+<Meta title="Get Started/Develop" />
+
+# Develop
+
+Set up your environment to use the latest version of the Iress Design System (IDS). You can use this library to build React applications that align to IDS, and ensure a consistent and modern look and feel across all Iress products.
+
+## Requirements
+
+- [React 17 or later](https://reactjs.org/)
+- Access to Iress Artifactory
+
+## Set up the component library
+
+1. Install using the command line:
+   ```sh
+   yarn add @iress-oss/ids-components
+   ```
+2. Import the styles:
+   ```tsx
+   import '@iress-oss/ids-components/dist/style.css';
+   ```
+3. Import the components. The provider is optional, but recommended for most applications. It sets up the design system and provides a consistent container for components like modals, slideouts, and toasts.
+   ```tsx
+   import { IressProvider, IressButton } from '@iress-oss/ids-components';
+   ```
+4. Use the components:
+
+   ```tsx
+   const App = () => (
+     <IressButton onClick={() => success({ children: 'Toast triggered' })}>
+       Trigger toast
+     </IressButton>
+   );
+
+   ReactDOM.createRoot(document.getElementById('root')!).render(
+     <IressProvider>
+       <App />
+     </IressProvider>,
+   );
+   ```
+
+---
+
+## Set up the theme
+
+The component library comes with the white label theme by default. You can add a theme by importing the theme file and including it in your application.
+
+<IressAlert status="info" heading="Microfrontends" className="iress-mb--md">
+  If you are building a React App that is intended to be used as a
+  microfrontend, please skip this step. Microfrontends should inherit the parent
+  application's theme, and not define a theme itself, as it may conflict with other
+  microfrontends in the same parent application.
+
+</IressAlert>
+
+1. Install using the command line:
+   ```sh
+   yarn add @iress/ids-themes
+   ```
+2. Import the component:
+   ```tsx
+   import { IressTheme } from '@iress-oss/ids-components';
+   ```
+3. Add the component to your application:
+   ```tsx
+   ReactDOM.createRoot(document.getElementById('root')!).render(
+     <IressProvider>
+       <IressTheme />
+       <App />
+     </IressProvider>,
+   );
+   ```
+
+For alternative ways to import the theme, see the [Themes documentation](/docs/themes-introduction--docs).

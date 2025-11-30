@@ -1,0 +1,42 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Foundations/Consistency" />
+
+# Using components consistently
+
+## Buttons
+
+- **Primary**: Limit to one per view for main call-to-action
+- **Secondary**: Use for secondary actions
+- **Tertiary**: Extra affordance between secondary actions
+- **Link**: Button styled as link (avoid with icon-only content)
+- **Danger**: Destructive actions requiring extra confirmation
+- **Positive/Negative**: Financial transactions (buy/sell)
+
+## Forms
+
+- Always use `IressField` wrapper for proper label, hint, and error placement
+- Provide clear validation feedback with appropriate error messages
+- Use consistent input sizing based on expected content length
+- Implement proper form state management and accessibility
+
+## Navigation
+
+- Use semantic HTML5 navigation elements
+- Provide skip links for keyboard users
+- Implement proper ARIA labelling for navigation sections
+- Ensure consistent navigation patterns across applications
+
+## Data Display
+
+- Use semantic table structures with proper headers
+- Provide clear visual hierarchy in data presentations
+- Implement consistent sorting and filtering patterns
+- Use appropriate loading states for data-heavy components
+
+## Modals and Overlays
+
+- Reserve modals for critical tasks requiring full attention
+- Provide multiple dismissal methods (backdrop, escape key, close button)
+- Implement proper focus management and restoration
+- Use slideouts for supplementary tasks where underlying content needs visibility
