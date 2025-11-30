@@ -411,7 +411,6 @@ jobs:
         run: |
           TIMESTAMP=$(date +%Y%m%d%H%M%S)
           SHORT_SHA=${GITHUB_SHA:0:7}
-          CANARY_VERSION="0.0.0-canary-${TIMESTAMP}-${SHORT_SHA}"
 
           # Determine which package to version
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -420,14 +419,23 @@ jobs:
             TARGET_PACKAGE="${{ steps.extract-package.outputs.package }}"
           fi
 
-          echo "📌 Canary version: $CANARY_VERSION for branch: ${{ github.ref_name }}"
-
           if [ -n "$TARGET_PACKAGE" ]; then
             echo "📦 Versioning package: $TARGET_PACKAGE"
+            PKG_PATH=$(yarn workspaces list --json | jq -r "select(.name == \"$TARGET_PACKAGE\") | .location")
+            CURRENT_VERSION=$(jq -r '.version' "$PKG_PATH/package.json")
+            CANARY_VERSION="${CURRENT_VERSION}-canary-${TIMESTAMP}-${SHORT_SHA}"
+            echo "📌 Canary version: $CANARY_VERSION for package $TARGET_PACKAGE"
             yarn workspace "$TARGET_PACKAGE" version $CANARY_VERSION
           else
             echo "📦 Versioning all packages"
-            yarn workspaces foreach -A --no-private version $CANARY_VERSION
+            PACKAGES=$(yarn workspaces list --json | jq -r 'select(.private != true) | .name')
+            for PACKAGE in $PACKAGES; do
+              PKG_PATH=$(yarn workspaces list --json | jq -r "select(.name == \"$PACKAGE\") | .location")
+              CURRENT_VERSION=$(jq -r '.version' "$PKG_PATH/package.json")
+              CANARY_VERSION="${CURRENT_VERSION}-canary-${TIMESTAMP}-${SHORT_SHA}"
+              echo "📌 Versioning $PACKAGE to $CANARY_VERSION"
+              yarn workspace "$PACKAGE" version $CANARY_VERSION
+            done
           fi
 
       - name: Generate MCP Documentation
