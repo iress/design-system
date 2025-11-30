@@ -1,6 +1,9 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as ComponentStories from './Hide.stories';
-import { ComponentOverview } from '@iress-oss/ids-storybook-config';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -49,19 +52,13 @@ If you want to hide content only on certain screen sizes, you'll need to specify
 
 Here are a few variations of the `hiddenOn` prop in action.
 
-<ComponentExample
-  story={ComponentStories.HiddenOn}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.HiddenOn} />
 
 ### Visually hidden
 
 This `visuallyHidden` prop is used if you don't want content to be visible on screen, but you do want it to be available to screen reader users.
 
-<ComponentExample
-  story={ComponentStories.VisuallyHidden}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.VisuallyHidden} />
 
 ## Utility classes
 
