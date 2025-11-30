@@ -59,10 +59,10 @@
     "prettier": "3.5.3",
     "prettier-plugin-sh": "0.17.4",
     "rimraf": "2.7.1",
-    "tsx": "4.20.3",
+    "tsx": "4.20.6",
     "turndown": "7.2.0",
     "turndown-plugin-gfm": "1.0.2",
-    "typescript": "5.8.2",
+    "typescript": "5.9.3",
     "vitest": "3.2.4"
   }
 }
