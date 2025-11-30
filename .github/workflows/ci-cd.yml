@@ -432,7 +432,7 @@ jobs:
 
       - name: Generate MCP Documentation
         uses: ./.github/actions/generate-mcp-docs
-        if: (github.event_name == 'workflow_dispatch' && (github.event.inputs.package == '@iress-oss/ids-mcp-server' || steps.extract-package.outputs.package == '')) || (github.event_name == 'push' && (steps.extract-package.outputs.package == '@iress-oss/ids-mcp-server' || steps.extract-package.outputs.package == ''))
+        if: (github.event_name == 'workflow_dispatch' && (github.event.inputs.package == '@iress-oss/ids-mcp-server' || github.event.inputs.package == '')) || (github.event_name == 'push' && (steps.extract-package.outputs.package == '@iress-oss/ids-mcp-server' || steps.extract-package.outputs.package == ''))
 
       - name: Configure npm authentication for OIDC
         run: |
