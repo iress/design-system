@@ -3,6 +3,9 @@ updates:
   # Root workspace dependencies
   - package-ecosystem: 'npm'
     directory: '/'
+    branches:
+      - main
+      - 5.x
     schedule:
       interval: 'weekly'
     cooldown:
@@ -43,6 +46,9 @@ updates:
   # GitHub Actions workflows
   - package-ecosystem: 'github-actions'
     directory: '/'
+    branches:
+      - main
+      - 5.x
     schedule:
       interval: 'weekly'
     open-pull-requests-limit: 5
