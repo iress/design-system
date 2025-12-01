@@ -44,6 +44,14 @@ export const setUpManager = ({
       brandImage: logo,
       brandTarget: '_self',
     }),
+    IDS_ToggleStories: {
+      disable: () => {
+        return (
+          process.env.STORYBOOK_VRT === 'true' ||
+          process.env.STORYBOOK_MCP === 'true'
+        );
+      },
+    },
     IDS_VersionBadge: {
       environment: () => {
         if (window.location.host.includes('localhost')) {

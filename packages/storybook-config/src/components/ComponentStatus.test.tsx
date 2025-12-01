@@ -1,7 +1,7 @@
 // TODO: Probably better done with end-to-end tests
 import { render, screen } from '@testing-library/react';
 import { ComponentStatus } from './ComponentStatus';
-import { ModuleExports } from 'storybook/internal/types';
+import { ModuleExports, StoryAnnotations } from 'storybook/internal/types';
 import { vi, describe, it, expect } from 'vitest';
 import React from 'react';
 
@@ -96,5 +96,23 @@ describe('ComponentStatus', () => {
     render(<ComponentStatus meta={storiesMock} />);
 
     expect(screen.getByText('Updated')).toBeInTheDocument();
+  });
+
+  it('combines tags from meta and of, if both provided', () => {
+    const storiesMock: ModuleExports = {
+      default: {
+        tags: ['updated'],
+      },
+      __namedExportsOrder: [],
+    };
+
+    const ofMock: StoryAnnotations = {
+      tags: ['beta:SomeComponent'],
+    };
+
+    render(<ComponentStatus of={ofMock} meta={storiesMock} />);
+
+    expect(screen.getByText('Updated')).toBeInTheDocument();
+    expect(screen.getByText('Beta')).toBeInTheDocument();
   });
 });
