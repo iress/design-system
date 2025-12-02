@@ -48,7 +48,7 @@ vi.mock('../../hooks/useAddonConfigForManager', () => ({
 }));
 
 // Mock Storybook theming to avoid matchMedia issues
-vi.mock('storybook/internal/theming', () => ({
+vi.mock('storybook/theming', () => ({
   themes: {
     light: {},
     dark: {},

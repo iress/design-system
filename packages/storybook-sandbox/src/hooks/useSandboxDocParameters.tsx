@@ -1,4 +1,3 @@
-import React from 'react';
 import { useCallback, useEffect } from 'react';
 import type {
   Parameters as StorybookParameters,

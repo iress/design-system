@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/vitest';
-import userEvent from '@testing-library/user-event';
+import { userEvent } from '@testing-library/user-event';
 import { cleanup } from '@testing-library/react';
 
 beforeEach(() => {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { act, renderHook } from '@testing-library/react';
 import { useSandboxDocParameters } from './useSandboxDocParameters';
 import { addons } from 'storybook/preview-api';
