@@ -3,7 +3,7 @@ import { ADDON_OPTIONS } from '../constants';
 import { registerOkta } from '../helpers/oktaRegister';
 import type { AddonConfig } from '../types';
 import { validateOktaConfig } from '../validation';
-import { addons } from 'storybook/internal/manager-api';
+import { addons } from 'storybook/manager-api';
 
 export const useAddonConfigForManager = () => {
   const [addonConfig, setAddonConfig] = useState<AddonConfig | undefined>(

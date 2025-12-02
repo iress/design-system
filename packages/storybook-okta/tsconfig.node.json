@@ -6,7 +6,9 @@
     "types": ["vitest/globals", "node"],
     "resolveJsonModule": true,
     "strict": true,
-    "jsx": "react-jsx"
+    "jsx": "react",
+    "module": "nodenext",
+    "moduleResolution": "nodenext"
   },
   "include": ["*.ts", "*.tsx", "../../shared/*.ts", ".storybook/*.ts"]
 }

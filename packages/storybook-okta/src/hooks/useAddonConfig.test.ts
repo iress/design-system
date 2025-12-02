@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { addons } from 'storybook/internal/manager-api';
+import { addons } from 'storybook/manager-api';
 import {
   useAddonConfigForManager,
   getAddonConfigForPreview,
@@ -10,7 +10,7 @@ import type { AddonConfig } from '../types';
 import { type OktaAuth } from '@okta/okta-auth-js';
 
 // Mock dependencies
-vi.mock('storybook/internal/manager-api', () => ({
+vi.mock('storybook/manager-api', () => ({
   addons: {
     getChannel: vi.fn(),
   },

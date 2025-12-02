@@ -1,5 +1,6 @@
+import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import { type API, useAddonState } from 'storybook/internal/manager-api';
+import { type API, useAddonState } from 'storybook/manager-api';
 import { OktaGuard } from './OktaGuard';
 import { type AddonConfig } from '../types';
 import { getOkta } from '../helpers/oktaRegister';
@@ -31,7 +32,7 @@ const mockChannel = {
   emit: vi.fn(),
 };
 
-vi.mock('storybook/internal/manager-api', () => ({
+vi.mock('storybook/manager-api', () => ({
   useAddonState: vi.fn(() => [
     { isAuthenticated: false, error: undefined },
     mockSetState,
@@ -169,7 +170,7 @@ describe('OktaGuard', () => {
 
   it('renders LoginSplash with error message when there is an error', async () => {
     // Import and override the mock for this specific test
-    const { useAddonState } = await import('storybook/internal/manager-api');
+    const { useAddonState } = await import('storybook/manager-api');
     vi.mocked(useAddonState).mockReturnValue([
       { isAuthenticated: false, error: 'Authentication failed' },
       mockSetState,
@@ -183,7 +184,7 @@ describe('OktaGuard', () => {
 
   it('renders nothing when authenticated', async () => {
     // Import and override the mock for this specific test
-    const { useAddonState } = await import('storybook/internal/manager-api');
+    const { useAddonState } = await import('storybook/manager-api');
     vi.mocked(useAddonState).mockReturnValue([
       { isAuthenticated: true, error: undefined },
       mockSetState,
