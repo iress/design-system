@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-storybook-sandbox",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A Storybook addon that provides a sandbox environment for testing and experimenting with components.",
   "keywords": [
     "storybook-addons"
