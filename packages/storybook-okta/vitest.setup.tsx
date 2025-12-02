@@ -1,8 +1,9 @@
+import React from 'react';
 import '@testing-library/jest-dom/vitest';
-import userEvent from '@testing-library/user-event';
+import { userEvent } from '@testing-library/user-event';
 import { cleanup } from '@testing-library/react';
 import { type ComponentProps, type CSSProperties, forwardRef } from 'react';
-import { type StorybookTheme } from 'storybook/internal/theming';
+import { type StorybookTheme } from 'storybook/theming';
 
 type DeepPartial<T> = T extends object
   ? {

@@ -1,10 +1,11 @@
-import { IconButton } from 'storybook/internal/components';
+import React from 'react';
 import { BookIcon } from '@storybook/icons';
 import { ADDON_ID } from '../constants';
 import { type API } from 'storybook/manager-api';
 import { isSidebarItemVisible } from '../helpers/isSidebarItemVisible';
 import { useState } from 'react';
 import type { AddonConfig } from '../types';
+import { IconButton } from 'storybook/internal/components';
 
 interface ToggleStoriesProps extends AddonConfig {
   active?: boolean;

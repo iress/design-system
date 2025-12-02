@@ -1,3 +1,4 @@
+import React from 'react';
 import { SandboxButton } from '../SandboxButton';
 import { Button } from 'storybook/internal/components';
 import { type SandboxTemplate } from '../../types';
@@ -25,8 +26,6 @@ export const SandboxTemplates = ({
   if (!templates?.length) {
     return null;
   }
-
-  console.log(templates);
 
   return (
     <>

@@ -1,3 +1,4 @@
+import React from 'react';
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import type {
   PartialStoryFn as StoryFunction,

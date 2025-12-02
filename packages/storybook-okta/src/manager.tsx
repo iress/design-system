@@ -1,3 +1,4 @@
+import React from 'react';
 import { addons } from 'storybook/manager-api';
 import { Addon_TypesEnum } from 'storybook/internal/types';
 import { ADDON_ID, ADDON_TITLE } from './constants';

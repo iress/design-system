@@ -1,7 +1,8 @@
+import React from 'react';
 import { type ComponentProps } from 'react';
 import { render, screen } from '@testing-library/react';
 import { SandboxOpenEditor } from './SandboxOpenEditor';
-import { type API } from 'storybook/internal/manager-api';
+import { type API } from 'storybook/manager-api';
 import { type API_Layout } from 'storybook/internal/types';
 import { type IconButton } from 'storybook/internal/components';
 import userEvent from '@testing-library/user-event';

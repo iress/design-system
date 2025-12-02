@@ -20,7 +20,7 @@ updates:
         patterns:
           - '@storybook/*'
           - '@chromatic-com/*'
-          - 'storybook*'
+          - '*storybook*'
       eslint:
         patterns:
           - 'eslint*'
@@ -61,7 +61,7 @@ updates:
         patterns:
           - '@storybook/*'
           - '@chromatic-com/*'
-          - 'storybook*'
+          - '*storybook*'
       eslint:
         patterns:
           - 'eslint*'

@@ -1,3 +1,4 @@
+import React from 'react';
 import type { SandboxTemplate } from '../../types';
 import iconSandboxSimple from './simple/icon-sandbox-simple';
 import simpleSnippet from './simple/snippet.tsx?raw';

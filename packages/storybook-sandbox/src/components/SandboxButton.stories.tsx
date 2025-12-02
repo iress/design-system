@@ -1,6 +1,7 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SandboxButton } from './SandboxButton';
-import { ThemeProvider } from 'storybook/internal/theming';
+import { ThemeProvider } from 'storybook/theming';
 import { fn } from 'storybook/test';
 import { createSandboxIconFontPortal } from '../helpers';
 

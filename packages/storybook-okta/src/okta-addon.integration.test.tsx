@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { type StoryContext } from 'storybook/internal/types';
 import { type ReactRenderer } from '@storybook/react';

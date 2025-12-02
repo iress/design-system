@@ -1,4 +1,5 @@
 // TODO: Probably needs end-to-end testing
+import React from 'react';
 import { type ComponentProps, type ReactNode } from 'react';
 import { SandboxShare } from './SandboxShare';
 import { render, screen } from '@testing-library/react';

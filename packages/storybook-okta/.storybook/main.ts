@@ -1,6 +1,6 @@
 import { defineMain } from '@storybook/react-vite/node';
 // @ts-expect-error This is only for dev purposes, and Storybook main cannot work with the ts for now
-import { autoReloadManagerHead } from '../../../shared/storybook-addon-dev.cjs';
+import { autoReloadManagerHead } from '../../../shared/storybook-addon-dev';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env' });
@@ -9,7 +9,7 @@ const config = defineMain({
   stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     {
-      name: './local-preset.cjs',
+      name: import.meta.resolve('./local-preset.ts'),
       options: process.env.AUTH
         ? {
             IDS_OKTA: {

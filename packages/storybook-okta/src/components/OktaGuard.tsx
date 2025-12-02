@@ -1,5 +1,6 @@
+import React from 'react';
 import { useCallback, useEffect, useRef } from 'react';
-import { useAddonState, type API } from 'storybook/internal/manager-api';
+import { useAddonState, type API } from 'storybook/manager-api';
 import { getOkta } from '../helpers/oktaRegister';
 import { type AuthStateEventHandler } from '@okta/okta-auth-js';
 import { ADDON_ID } from '../constants';

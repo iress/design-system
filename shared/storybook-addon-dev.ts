@@ -1,5 +1,5 @@
 export const autoReloadManagerHead = (port = 7000, additional = '') => {
-  return (head) => `${head}
+  return (head?: string) => `${head ?? ''}
 
 ${additional}
 

@@ -1,7 +1,8 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ToggleStories } from './ToggleStories';
-import { ThemeProvider } from 'storybook/internal/theming';
 import { fn } from 'storybook/test';
+import { ThemeProvider } from 'storybook/theming';
 
 type Story = StoryObj<typeof ToggleStories>;
 

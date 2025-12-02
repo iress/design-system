@@ -1,3 +1,4 @@
+import React from 'react';
 import { type ReactNode, useState } from 'react';
 import { IconButton, WithTooltip } from 'storybook/internal/components';
 

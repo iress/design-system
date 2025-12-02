@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { SandboxLabel } from './SandboxLabel';
 import { ADDON_TITLE_SHORT } from '../constants';

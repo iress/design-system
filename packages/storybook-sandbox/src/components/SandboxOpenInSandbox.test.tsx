@@ -1,5 +1,6 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { type API } from 'storybook/internal/manager-api';
+import { type API } from 'storybook/manager-api';
 import { ADDON_ID, ADDON_TITLE_SHORT } from '../constants';
 import { SandboxOpenInSandbox } from './SandboxOpenInSandbox';
 import { getOpenCodeUrl } from '../helpers';

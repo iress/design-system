@@ -1,5 +1,5 @@
 import { addons } from 'storybook/manager-api';
-import { version } from '../package.json';
+import packageJson from '../package.json' with { type: 'json' };
 
 addons.setConfig({
   IDS_VersionBadge: {
@@ -22,6 +22,6 @@ addons.setConfig({
 
       return '';
     },
-    version,
+    version: packageJson.version,
   },
 });

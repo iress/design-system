@@ -1,3 +1,4 @@
+import React from 'react';
 import { Suspense } from 'react';
 import { addons } from 'storybook/manager-api';
 import { Addon_TypesEnum } from 'storybook/internal/types';

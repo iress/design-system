@@ -1,3 +1,4 @@
+import React from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { AddonPanel } from 'storybook/internal/components';
 import { type API, useAddonState, useParameter } from 'storybook/manager-api';

@@ -1,3 +1,4 @@
+import React from 'react';
 import { type ComponentProps, type ReactNode } from 'react';
 import { SandboxButton } from './SandboxButton';
 import { render, screen } from '@testing-library/react';

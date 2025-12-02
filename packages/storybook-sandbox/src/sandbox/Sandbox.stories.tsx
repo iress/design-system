@@ -1,3 +1,4 @@
+import React from 'react';
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { TEMPLATES } from './templates';
 import type { AddonConfig, SandboxPreviewProps } from '../';
