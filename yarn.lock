@@ -1910,10 +1910,10 @@ __metadata:
   resolution: "@iress-oss/ids-storybook-config@workspace:packages/storybook-config"
   dependencies:
     "@chromatic-com/storybook": "npm:^4.1.1"
-    "@iress-oss/ids-storybook-okta": "npm:^0.0.0"
-    "@iress-oss/ids-storybook-sandbox": "npm:^0.0.0"
-    "@iress-oss/ids-storybook-toggle-stories": "npm:^0.0.0"
-    "@iress-oss/ids-storybook-version-badge": "npm:^0.0.0"
+    "@iress-oss/ids-storybook-okta": "npm:^0.0.1"
+    "@iress-oss/ids-storybook-sandbox": "npm:^0.0.1"
+    "@iress-oss/ids-storybook-toggle-stories": "npm:^0.0.1"
+    "@iress-oss/ids-storybook-version-badge": "npm:^0.0.1"
     "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.1"
     "@storybook/addon-a11y": "npm:^9.0.0"
     "@storybook/addon-docs": "npm:^9.0.0"
@@ -1977,21 +1977,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@iress-oss/ids-storybook-okta@npm:^0.0.0":
-  version: 0.0.0
-  resolution: "@iress-oss/ids-storybook-okta@npm:0.0.0"
-  dependencies:
-    "@okta/okta-auth-js": "npm:^7.14.0"
-    "@storybook/icons": "npm:^1.4.0"
-  peerDependencies:
-    react: ^18.0.0 || ^19.0.0
-    react-dom: ^18.0.0 || ^19.0.0
-    storybook: ^9.0.0
-  checksum: 10c0/730e85e64e59e3ec817ac546ff4f9538b73772aa7bf75b9d0216c83dd89cc4998bccc4f236ca199a33719d3d05d66bdfcf35638419fc628c173e81476cf33a5c
-  languageName: node
-  linkType: hard
-
-"@iress-oss/ids-storybook-okta@workspace:packages/storybook-okta":
+"@iress-oss/ids-storybook-okta@npm:^0.0.1, @iress-oss/ids-storybook-okta@workspace:packages/storybook-okta":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-storybook-okta@workspace:packages/storybook-okta"
   dependencies:
@@ -2030,26 +2016,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@iress-oss/ids-storybook-sandbox@npm:^0.0.0":
-  version: 0.0.0
-  resolution: "@iress-oss/ids-storybook-sandbox@npm:0.0.0"
-  dependencies:
-    "@storybook/icons": "npm:^1.4.0"
-    react-live: "npm:^4.1.8"
-  peerDependencies:
-    "@storybook/addon-docs": ^9.0.0
-    "@vueless/storybook-dark-mode": ^9.0.0
-    react: ^18.0.0 || ^19.0.0
-    react-dom: ^18.0.0 || ^19.0.0
-    storybook: ^9.0.0
-  peerDependenciesMeta:
-    "@storybook/addon-docs":
-      optional: true
-  checksum: 10c0/adeaa441b5710f42aa0be8c07f52094320a4576f66e5106f60ebdbcd46c5c43defd44d9eb7eae7c4a6df24ebd48c58e4f1086a5611ea085e3b59583f88a47a15
-  languageName: node
-  linkType: hard
-
-"@iress-oss/ids-storybook-sandbox@workspace:packages/storybook-sandbox":
+"@iress-oss/ids-storybook-sandbox@npm:^0.0.1, @iress-oss/ids-storybook-sandbox@workspace:packages/storybook-sandbox":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-storybook-sandbox@workspace:packages/storybook-sandbox"
   dependencies:
@@ -2096,20 +2063,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@iress-oss/ids-storybook-toggle-stories@npm:^0.0.0":
-  version: 0.0.0
-  resolution: "@iress-oss/ids-storybook-toggle-stories@npm:0.0.0"
-  dependencies:
-    "@storybook/icons": "npm:^1.4.0"
-  peerDependencies:
-    react: ^18.0.0 || ^19.0.0
-    react-dom: ^18.0.0 || ^19.0.0
-    storybook: ^9.0.0
-  checksum: 10c0/9bd57aaddc4b37261a72828cd099803c991e49fa8b106efb2d62b130e004c553f2962e9c0242d42a7d02afda4d4d874efc8e8de38ac965a52ca313b4c3b5205c
-  languageName: node
-  linkType: hard
-
-"@iress-oss/ids-storybook-toggle-stories@workspace:packages/storybook-toggle-stories":
+"@iress-oss/ids-storybook-toggle-stories@npm:^0.0.1, @iress-oss/ids-storybook-toggle-stories@workspace:packages/storybook-toggle-stories":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-storybook-toggle-stories@workspace:packages/storybook-toggle-stories"
   dependencies:
@@ -2144,18 +2098,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@iress-oss/ids-storybook-version-badge@npm:^0.0.0":
-  version: 0.0.0
-  resolution: "@iress-oss/ids-storybook-version-badge@npm:0.0.0"
-  peerDependencies:
-    react: ^18.0.0 || ^19.0.0
-    react-dom: ^18.0.0 || ^19.0.0
-    storybook: ^9.0.0
-  checksum: 10c0/303647ff2001735338b34885302a5fad69ca862e4d1ea8db4e6bb32f74ef6f1ad197eee3d2ec5fb59a51bf99e14cf69be45d4a258d86b4b33fdc8f5efd55e9c7
-  languageName: node
-  linkType: hard
-
-"@iress-oss/ids-storybook-version-badge@workspace:packages/storybook-version-badge":
+"@iress-oss/ids-storybook-version-badge@npm:^0.0.1, @iress-oss/ids-storybook-version-badge@workspace:packages/storybook-version-badge":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-storybook-version-badge@workspace:packages/storybook-version-badge"
   dependencies:
@@ -2243,10 +2186,10 @@ __metadata:
     "@chromatic-com/storybook": "npm:^4.1.1"
     "@iress-oss/ids-components": "npm:^6.0.0-alpha.1"
     "@iress-oss/ids-storybook-config": "npm:^0.0.1"
-    "@iress-oss/ids-storybook-okta": "npm:^0.0.0"
-    "@iress-oss/ids-storybook-sandbox": "npm:^0.0.0"
-    "@iress-oss/ids-storybook-toggle-stories": "npm:^0.0.0"
-    "@iress-oss/ids-storybook-version-badge": "npm:^0.0.0"
+    "@iress-oss/ids-storybook-okta": "npm:^0.0.1"
+    "@iress-oss/ids-storybook-sandbox": "npm:^0.0.1"
+    "@iress-oss/ids-storybook-toggle-stories": "npm:^0.0.1"
+    "@iress-oss/ids-storybook-version-badge": "npm:^0.0.1"
     "@mermaid-js/mermaid-cli": "npm:^11.12.0"
     "@storybook/addon-a11y": "npm:^9.0.0"
     "@storybook/addon-docs": "npm:^9.0.0"
