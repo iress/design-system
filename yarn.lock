@@ -2043,8 +2043,8 @@ __metadata:
     "@storybook/icons": "npm:2.0.1"
     "@storybook/react-vite": "npm:10.0.8"
     "@types/node": "npm:^24.10.0"
-    "@types/react": "npm:^18.3.1"
-    "@types/react-dom": "npm:^18.3.1"
+    "@types/react": "npm:^19.2.0"
+    "@types/react-dom": "npm:^19.2.0"
     "@typescript-eslint/eslint-plugin": "npm:^8.46.3"
     "@typescript-eslint/parser": "npm:^8.46.3"
     "@vitejs/plugin-react": "npm:^4.2.1"
@@ -2056,16 +2056,17 @@ __metadata:
     eslint-plugin-mdx: "npm:^3.6.2"
     eslint-plugin-prettier: "npm:^5.5.4"
     prettier: "npm:^3.3.3"
-    react: "npm:^18.3.1"
-    react-dom: "npm:^18.3.1"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    rimraf: "npm:6.1.0"
     storybook: "npm:10.0.8"
     tsup: "npm:^8.5.1"
     typescript: "npm:^5.9.3"
     vite: "npm:7.2.2"
     vitest: "npm:4.0.9"
   peerDependencies:
-    react: ^18.0.0 || ^19.0.0
-    react-dom: ^18.0.0 || ^19.0.0
+    react: ^18 || ^19
+    react-dom: ^18 || ^19
     storybook: ^10
   languageName: unknown
   linkType: soft
@@ -2077,8 +2078,8 @@ __metadata:
     "@storybook/addon-docs": "npm:10.0.8"
     "@storybook/react-vite": "npm:10.0.8"
     "@types/node": "npm:^24.10.0"
-    "@types/react": "npm:^18.3.1"
-    "@types/react-dom": "npm:^18.3.1"
+    "@types/react": "npm:^19.2.0"
+    "@types/react-dom": "npm:^19.2.0"
     "@typescript-eslint/eslint-plugin": "npm:^8.46.3"
     "@typescript-eslint/parser": "npm:^8.46.3"
     "@vitejs/plugin-react": "npm:^4.2.1"
@@ -2090,8 +2091,9 @@ __metadata:
     eslint-plugin-mdx: "npm:^3.6.2"
     eslint-plugin-prettier: "npm:^5.5.4"
     prettier: "npm:^3.3.3"
-    react: "npm:^18.3.1"
-    react-dom: "npm:^18.3.1"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    rimraf: "npm:6.1.0"
     storybook: "npm:10.0.8"
     tsup: "npm:^8.5.1"
     typescript: "npm:^5.9.3"

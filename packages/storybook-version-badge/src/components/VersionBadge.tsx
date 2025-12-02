@@ -1,3 +1,4 @@
+import React from 'react';
 import { Badge } from 'storybook/internal/components';
 import type { AddonConfig } from '../types';
 import { useEffect, useState } from 'react';

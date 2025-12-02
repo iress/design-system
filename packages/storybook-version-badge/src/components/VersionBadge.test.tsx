@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { VersionBadge } from './VersionBadge';
-import { ThemeProvider } from 'storybook/internal/theming';
+import { ThemeProvider } from 'storybook/theming';
 
 // Test wrapper with ThemeProvider - similar to VersionBadge.stories.tsx
 const renderWithTheme = (ui: React.ReactElement) => {

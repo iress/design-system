@@ -27,13 +27,9 @@ if (!pkg.storybook) {
 
 async function start() {
   proc?.kill();
-  proc = spawn(
-    'yarn',
-    [location, 'storybook', 'dev', '-p', '6006', '--no-open'],
-    {
-      stdio: 'inherit',
-    },
-  );
+  proc = spawn('yarn', [location, 'storybook', '-p', '6006', '--no-open'], {
+    stdio: 'inherit',
+  });
 
   await waitForLocalhost();
 

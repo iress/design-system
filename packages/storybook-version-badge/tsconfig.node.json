@@ -6,7 +6,9 @@
     "types": ["vitest/globals", "node"],
     "resolveJsonModule": true,
     "strict": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext"
   },
   "include": ["*.ts", "../../shared/*.ts", ".storybook/*.ts"]
 }
