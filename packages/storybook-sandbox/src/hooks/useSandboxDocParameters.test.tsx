@@ -1,8 +1,9 @@
+import React from 'react';
 import { act, renderHook } from '@testing-library/react';
 import { useSandboxDocParameters } from './useSandboxDocParameters';
 import { addons } from 'storybook/preview-api';
 import { SANDBOX_DOCS_RENDERED } from '../constants';
-import { type ChannelListener } from 'storybook/internal/manager-api';
+import { type ChannelListener } from 'storybook/manager-api';
 
 // Mocking the Storybook Addons Channel
 const channelOn = vi.fn();

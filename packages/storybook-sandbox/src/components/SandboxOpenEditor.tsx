@@ -1,3 +1,4 @@
+import React from 'react';
 import { IconButton } from 'storybook/internal/components';
 import { MarkupIcon } from '@storybook/icons';
 import { PANEL_ID, TOOLBAR_ID } from '../constants';

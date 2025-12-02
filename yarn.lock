@@ -2018,6 +2018,7 @@ __metadata:
     react-dom: "npm:^18.3.1"
     react-hook-form: "npm:^7.64.0"
     react-live: "npm:^4.1.8"
+    rimraf: "npm:6.1.0"
     storybook: "npm:10.0.8"
     tsup: "npm:^8.5.1"
     typescript: "npm:^5.9.3"

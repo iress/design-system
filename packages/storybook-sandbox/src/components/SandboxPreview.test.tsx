@@ -1,3 +1,4 @@
+import React from 'react';
 import { lazy } from 'react';
 import { act, render, screen } from '@testing-library/react';
 import SandboxPreview from './SandboxPreview';

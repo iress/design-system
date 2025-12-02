@@ -1,3 +1,4 @@
+import React from 'react';
 import { ADDON_ICON, ADDON_TITLE_SHORT } from '../constants';
 import { createSandboxIconFontPortal } from '../helpers';
 

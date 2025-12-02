@@ -1,6 +1,7 @@
 // TODO: Probably needs end-to-end testing
+import React from 'react';
 import { act, type ComponentProps } from 'react';
-import { type API, type ChannelListener } from 'storybook/internal/manager-api';
+import { type API, type ChannelListener } from 'storybook/manager-api';
 import { SandboxEditor } from './SandboxEditor';
 import { render, screen, waitFor } from '@testing-library/react';
 import { ADDON_ID, SANDBOX_UPDATE_EVENT } from '../constants';

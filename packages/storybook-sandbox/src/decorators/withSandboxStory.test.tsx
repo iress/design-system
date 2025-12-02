@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { withSandboxStory } from './withSandboxStory';
 import { type StoryContext } from '@storybook/react';

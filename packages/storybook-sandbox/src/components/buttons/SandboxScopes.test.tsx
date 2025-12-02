@@ -1,4 +1,5 @@
 // TODO: Probably needs end-to-end testing
+import React from 'react';
 import { type ComponentProps } from 'react';
 import { render, screen } from '@testing-library/react';
 import { type Button, type IconButton } from 'storybook/internal/components';

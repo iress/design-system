@@ -30,7 +30,8 @@
     "*.d.ts"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "yarn clean && tsup",
+    "clean": "rimraf dist",
     "dev": "concurrently \"yarn watch\" \"yarn serve\"",
     "lint": "eslint . --ext=.js,.jsx,.ts,.tsx,.mjs,.cjs,.mdx --max-warnings=0",
     "test": "vitest --config vitest.config.ts --watch",
@@ -38,7 +39,7 @@
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
     "serve": "yarn storybook:serve-addon packages/storybook-sandbox",
-    "watch": "yarn build --watch"
+    "watch": "tsup --watch"
   },
   "dependencies": {
     "@storybook/icons": "2.0.1",
@@ -69,6 +70,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.64.0",
+    "rimraf": "6.1.0",
     "storybook": "10.0.8",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
@@ -88,14 +90,13 @@
     }
   },
   "bundler": {
-    "exportEntries": [
+    "managerEntries": [
+      "src/manager.tsx",
       "src/index.ts"
     ],
-    "managerEntries": [
-      "src/manager.tsx"
-    ],
     "previewEntries": [
-      "src/preview.tsx"
+      "src/preview.tsx",
+      "src/index.ts"
     ],
     "nodeEntries": [
       "src/preset.ts"

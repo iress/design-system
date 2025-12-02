@@ -1,3 +1,4 @@
+import React from 'react';
 import { LiveProvider, LivePreview, LiveError } from 'react-live';
 import { addons } from 'storybook/preview-api';
 import {
