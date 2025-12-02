@@ -21,16 +21,6 @@ interface MainConfig extends Pick<Partial<StorybookConfig>, 'stories'> {
   absolutePath: string;
 
   /**
-   * An array of plugin names to remove from the default configuration.
-   *
-   * We remove some plugins that are known to cause issues with Storybook
-   * - tree-shakeable: Causes issues with Storybook's module resolution when built (the issue around .addMethod does not exist).
-   *
-   * @default ['tree-shakeable']
-   */
-  removeVitePluginNames?: string[];
-
-  /**
    * Proxy configuration for children, only works in development mode.
    * The key is the path to proxy under, and the value is the URL to proxy to.
    * For example, to proxy /components/ to http://localhost:6006, use:
@@ -39,6 +29,16 @@ interface MainConfig extends Pick<Partial<StorybookConfig>, 'stories'> {
    * }
    */
   proxyChildren?: Record<string, string>;
+
+  /**
+   * An array of plugin names to remove from the default configuration.
+   *
+   * We remove some plugins that are known to cause issues with Storybook
+   * - tree-shakeable: Causes issues with Storybook's module resolution when built (the issue around .addMethod does not exist).
+   *
+   * @default ['tree-shakeable']
+   */
+  removeVitePluginNames?: string[];
 
   /**
    * The path to the tsconfig file to use for alias resolution.
@@ -102,7 +102,7 @@ export const getMainConfig = ({
         base: process.env.BASE_PATH ?? config.base,
 
         optimizeDeps: {
-          include: ['react-live'],
+          include: ['react-live', 'tiny-emitter'],
           exclude: ['./node_modules/.cache/storybook'],
         },
       };
