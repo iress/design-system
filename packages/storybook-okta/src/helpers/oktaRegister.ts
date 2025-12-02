@@ -1,6 +1,8 @@
 import OktaAuth from '@okta/okta-auth-js';
-import { type AddonConfig } from '../types';
+import type { AddonConfig } from '../types';
 import { validateOktaConfig } from '../validation';
+
+console.log('OKTA REGISTER LOADED');
 
 const oktas = new Map<string, OktaAuth>();
 

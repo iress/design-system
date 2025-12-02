@@ -4,12 +4,11 @@ import type {
   PartialStoryFn as StoryFunction,
   StoryContext,
 } from 'storybook/internal/types';
-import { type ReactRenderer } from '@storybook/react';
+import type { ReactRenderer } from '@storybook/react';
 import { isProtectedFromContext } from '../helpers/isProtected';
-import { type AddonConfig } from '../types';
-import { getOkta, registerOkta } from '../helpers/oktaRegister';
+import type { AddonConfig } from '../types';
 import { LoginSplash } from '../components/LoginSplash';
-import { type AuthStateEventHandler } from '@okta/okta-auth-js';
+import type { AuthStateEventHandler, OktaAuth } from '@okta/okta-auth-js';
 import { getAddonConfigForPreview } from '../hooks/useAddonConfig';
 
 interface OktaProviderProps {
@@ -19,7 +18,7 @@ interface OktaProviderProps {
 
 const OktaProvider = ({ children, config }: OktaProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const authClient = getOkta(config) ?? registerOkta(config);
+  const [authClient, setAuthClient] = useState<OktaAuth | null>(null);
 
   useEffect(() => {
     // eslint-disable-next-line sonarjs/post-message
@@ -27,6 +26,18 @@ const OktaProvider = ({ children, config }: OktaProviderProps) => {
   }, []);
 
   useEffect(() => {
+    const initializeAuth = async () => {
+      const { getOkta, registerOkta } = await import('../helpers/oktaRegister');
+      const client = getOkta(config) ?? registerOkta(config);
+      setAuthClient(client);
+    };
+
+    void initializeAuth();
+  }, [config]);
+
+  useEffect(() => {
+    if (!authClient) return;
+
     const authenticate: AuthStateEventHandler = (authState) => {
       setIsAuthenticated(!!authState.isAuthenticated);
       const originalUri =
@@ -52,7 +63,7 @@ const OktaProvider = ({ children, config }: OktaProviderProps) => {
     };
   }, [authClient]);
 
-  if (!isAuthenticated) {
+  if (!authClient || !isAuthenticated) {
     return <LoginSplash />;
   }
 

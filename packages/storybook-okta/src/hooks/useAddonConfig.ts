@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { ADDON_OPTIONS } from '../constants';
-import { registerOkta } from '../helpers/oktaRegister';
 import type { AddonConfig } from '../types';
 import { validateOktaConfig } from '../validation';
 import { addons } from 'storybook/manager-api';
@@ -14,20 +13,27 @@ export const useAddonConfigForManager = () => {
     const channel = addons.getChannel();
 
     const handleOptions = (options: AddonConfig | string | undefined) => {
-      try {
-        const config =
-          typeof options === 'string'
-            ? (JSON.parse(options) as AddonConfig)
-            : options;
+      const doHandle = async () => {
+        try {
+          const config =
+            typeof options === 'string'
+              ? (JSON.parse(options) as AddonConfig)
+              : options;
 
-        if (config) {
-          const validatedConfig = validateOktaConfig(config);
-          setAddonConfig(validatedConfig);
-          registerOkta(validatedConfig);
+          if (config) {
+            const validatedConfig = validateOktaConfig(config);
+            setAddonConfig(validatedConfig);
+
+            // Lazy load registerOkta
+            const { registerOkta } = await import('../helpers/oktaRegister');
+            registerOkta(validatedConfig);
+          }
+        } catch (error) {
+          console.error('Invalid Okta configuration:', error);
         }
-      } catch (error) {
-        console.error('Invalid Okta configuration:', error);
-      }
+      };
+
+      void doHandle();
     };
 
     channel.on(ADDON_OPTIONS, handleOptions);

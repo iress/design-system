@@ -1,13 +1,13 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { withOKTA } from './withOKTA';
-import { type StoryContext } from 'storybook/internal/types';
-import { type ReactRenderer } from '@storybook/react';
-import { type AddonConfig } from '../types';
+import type { StoryContext } from 'storybook/internal/types';
+import type { ReactRenderer } from '@storybook/react';
+import type { AddonConfig } from '../types';
 import { getOkta, registerOkta } from '../helpers/oktaRegister';
 import { isProtectedFromContext } from '../helpers/isProtected';
 import { getAddonConfigForPreview } from '../hooks/useAddonConfig';
-import { type OktaAuth } from '@okta/okta-auth-js';
+import type { OktaAuth } from '@okta/okta-auth-js';
 
 // Mock dependencies
 vi.mock('../helpers/oktaRegister', () => ({

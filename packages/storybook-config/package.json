@@ -7,23 +7,19 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.js"
     },
     "./preview": {
       "types": "./dist/preview.d.ts",
-      "import": "./dist/preview.js",
-      "require": "./dist/preview.cjs"
+      "import": "./dist/preview.js"
     },
     "./main": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/main.js",
-      "require": "./dist/main.cjs"
+      "import": "./dist/main.js"
     },
     "./manager": {
       "types": "./dist/manager.d.ts",
-      "import": "./dist/manager.js",
-      "require": "./dist/manager.cjs"
+      "import": "./dist/manager.js"
     }
   },
   "files": [

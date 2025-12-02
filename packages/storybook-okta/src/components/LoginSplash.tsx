@@ -1,5 +1,5 @@
 import React from 'react';
-import { type PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import { styled } from 'storybook/theming';
 
 const CenteredDiv = styled.div(({ theme }) => {

@@ -1,8 +1,7 @@
 import React from 'react';
 import { useCallback, useEffect, useRef } from 'react';
 import { useAddonState, type API } from 'storybook/manager-api';
-import { getOkta } from '../helpers/oktaRegister';
-import { type AuthStateEventHandler } from '@okta/okta-auth-js';
+import type { AuthStateEventHandler } from '@okta/okta-auth-js';
 import { ADDON_ID } from '../constants';
 import { LoginSplash } from './LoginSplash';
 import { useAddonConfigForManager } from '../hooks/useAddonConfig';
@@ -23,99 +22,111 @@ export const OktaGuard = ({ api }: OktaGuardProps) => {
   });
   const lastPage = useRef<string | null>(null);
   const config = useAddonConfigForManager();
-  const authClient = config ? getOkta(config) : undefined;
 
   const handle = useCallback(() => {
-    if (!config || !authClient) {
-      return;
-    }
+    let authClientCleanup: (() => void) | undefined;
 
-    const urlState = api.getUrlState();
-    const path = urlState.path;
-    const unprotected = config?.unprotected ?? [];
+    const doHandle = async () => {
+      if (!config) {
+        return;
+      }
 
-    if (lastPage.current === path) {
-      return; // No navigation detected
-    }
+      // Lazy load getOkta and get the auth client
+      const { getOkta } = await import('../helpers/oktaRegister');
+      const authClient = getOkta(config);
 
-    lastPage.current = path;
+      if (!authClient) {
+        return;
+      }
 
-    if (
-      unprotected.includes(path) ||
-      (urlState.storyId && unprotected.includes(urlState.storyId))
-    ) {
-      // If the path is unprotected, we can skip authentication
-      setState({
-        isAuthenticated: true,
-        error: undefined,
-      });
-      return;
-    }
+      const urlState = api.getUrlState();
+      const path = urlState.path;
+      const unprotected = config?.unprotected ?? [];
 
-    if (authClient?.token.isLoginRedirect() && path !== '/') {
-      const handleLoginCallback = async () => {
-        try {
-          // Parse the tokens from the URL
-          const { tokens } = await authClient.token.parseFromUrl();
-          // Set the tokens in the token manager
-          authClient.tokenManager.setTokens(tokens);
+      if (lastPage.current === path) {
+        return; // No navigation detected
+      }
 
-          api.setQueryParams({
-            code: undefined,
-            state: undefined,
-            session_state: undefined,
-            error: undefined,
-            error_description: undefined,
-          });
+      lastPage.current = path;
 
-          const originalUri = localStorage.getItem('oktaOriginalUri');
+      if (
+        unprotected.includes(path) ||
+        (urlState.storyId && unprotected.includes(urlState.storyId))
+      ) {
+        // If the path is unprotected, we can skip authentication
+        setState({
+          isAuthenticated: true,
+          error: undefined,
+        });
+        return;
+      }
 
-          if (originalUri) {
-            localStorage.removeItem('oktaOriginalUri');
-            // Redirect to the original URI after successful login
-            window.location.href = originalUri;
+      if (authClient?.token.isLoginRedirect() && path !== '/') {
+        const handleLoginCallback = async () => {
+          try {
+            // Parse the tokens from the URL
+            const { tokens } = await authClient.token.parseFromUrl();
+            // Set the tokens in the token manager
+            authClient.tokenManager.setTokens(tokens);
+
+            api.setQueryParams({
+              code: undefined,
+              state: undefined,
+              session_state: undefined,
+              error: undefined,
+              error_description: undefined,
+            });
+
+            const originalUri = localStorage.getItem('oktaOriginalUri');
+
+            if (originalUri) {
+              localStorage.removeItem('oktaOriginalUri');
+              // Redirect to the original URI after successful login
+              window.location.href = originalUri;
+            }
+          } catch (error) {
+            api.addNotification({
+              id: 'okta-login-error',
+              content: {
+                headline: String(error as Error),
+              },
+            });
           }
-        } catch (error) {
-          api.addNotification({
-            id: 'okta-login-error',
-            content: {
-              headline: String(error as Error),
-            },
-          });
+        };
+        void handleLoginCallback();
+        return;
+      }
+
+      const authenticate: AuthStateEventHandler = (authState) => {
+        setState({
+          isAuthenticated: !!authState.isAuthenticated,
+          error: authState.error ? String(authState.error) : undefined,
+        });
+
+        if (!authState.isAuthenticated) {
+          const originalUri =
+            `${window.location.pathname}${window.location.search}` ||
+            api.getUrlState().url;
+          localStorage.setItem('oktaOriginalUri', originalUri);
+          authClient?.setOriginalUri(originalUri);
+          void authClient?.signInWithRedirect();
         }
       };
-      void handleLoginCallback();
-      return;
-    }
 
-    const authenticate: AuthStateEventHandler = (authState) => {
-      setState({
-        isAuthenticated: !!authState.isAuthenticated,
-        error: authState.error ? String(authState.error) : undefined,
-      });
-
-      if (!authState.isAuthenticated) {
-        const originalUri =
-          `${window.location.pathname}${window.location.search}` ||
-          api.getUrlState().url;
-        localStorage.setItem('oktaOriginalUri', originalUri);
-        authClient?.setOriginalUri(originalUri);
-        void authClient?.signInWithRedirect();
-      }
-    };
-
-    authClient?.authStateManager.subscribe(authenticate);
-
-    const startAuthentication = async () => {
+      authClient?.authStateManager.subscribe(authenticate);
       await authClient?.start();
+
+      authClientCleanup = () => {
+        authClient?.authStateManager.unsubscribe(authenticate);
+      };
     };
 
-    void startAuthentication();
+    void doHandle();
 
     return () => {
-      authClient?.authStateManager.unsubscribe(authenticate);
+      authClientCleanup?.();
     };
-  }, [api, authClient, config, setState]);
+  }, [api, config, setState]);
 
   useEffect(() => {
     // Listen for browser back/forward navigation

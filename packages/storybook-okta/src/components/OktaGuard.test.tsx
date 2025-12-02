@@ -2,10 +2,10 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { type API, useAddonState } from 'storybook/manager-api';
 import { OktaGuard } from './OktaGuard';
-import { type AddonConfig } from '../types';
+import type { AddonConfig } from '../types';
 import { getOkta } from '../helpers/oktaRegister';
 import { useAddonConfigForManager } from '../hooks/useAddonConfig';
-import { type OktaAuth } from '@okta/okta-auth-js';
+import type { OktaAuth } from '@okta/okta-auth-js';
 
 // Mock the oktaRegister helper
 vi.mock('../helpers/oktaRegister', () => ({

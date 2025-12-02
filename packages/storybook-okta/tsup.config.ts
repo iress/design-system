@@ -53,6 +53,7 @@ export default defineConfig(async () => {
       '@storybook/icons',
       '@storybook/addon-docs/blocks',
       '@storybook/react-vite',
+      'vite',
       ...Object.keys(packageJson.peerDependencies),
     ],
   };
