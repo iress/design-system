@@ -11,7 +11,7 @@ export const managerHead = (head: string) => {
         event.source.postMessage({ type: 'CHECK_LOCATION', location: {
           href: window.location.href,
           search: window.location.search.toString(),
-        } }, event.origin);
+        } }, '*');
       }
 
       function removeAddonState(event) {
