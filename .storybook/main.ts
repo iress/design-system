@@ -24,8 +24,6 @@ const config = getMainConfig({
   absolutePath: dirname(dirname(fileURLToPath(import.meta.url))),
 });
 
-config.addons?.push('./local-preset.cjs');
-
 const isProduction = process.env.NODE_ENV === 'production';
 const branch = getCurrentBranch();
 

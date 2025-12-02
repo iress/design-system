@@ -102,12 +102,10 @@ export const getMainConfig = ({
         base: process.env.BASE_PATH ?? config.base,
 
         optimizeDeps: {
-          include: ['react-live', 'tiny-emitter'],
           exclude: ['./node_modules/.cache/storybook'],
         },
       };
 
-      // filter out plugins by name
       config.plugins = config.plugins?.filter((plugin) => {
         const pluginName = (plugin as Plugin).name;
         return !removeVitePluginNames.includes(pluginName);

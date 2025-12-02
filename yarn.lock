@@ -1944,7 +1944,7 @@ __metadata:
     react: ^18 || ^19
     react-dom: ^18 || ^19
     storybook: ^10
-    storybook-addon-tag-badges: ^3.0.2
+    storybook-addon-tag-badges: ^3
     vite: ^7
   languageName: unknown
   linkType: soft

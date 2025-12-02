@@ -1,7 +1,7 @@
 import { addons } from 'storybook/manager-api';
 import { create } from 'storybook/theming';
 import { cssVars } from '@iress-oss/ids-tokens';
-import { type TagBadgeParameters } from 'storybook-addon-tag-badges';
+import { type TagBadgeParameters } from 'storybook-addon-tag-badges/manager-helpers';
 
 type TagSuffixFn = (tag: string) => string;
 
@@ -36,7 +36,6 @@ export const setUpManager = ({
   const config = addons.getConfig();
 
   addons.setConfig({
-    ...config,
     theme: create({
       base: 'light',
       brandTitle: title,
@@ -129,11 +128,14 @@ export const setUpManager = ({
           };
         },
         display: {
+          mdx: ['story', 'component'],
           sidebar: [
-            { skipInherited: false, type: 'component' },
-            { skipInherited: false, type: 'docs' },
+            { type: 'story', skipInherited: true },
+            { type: 'docs', skipInherited: true },
+            { type: 'component', skipInherited: false },
+            { type: 'group', skipInherited: false },
           ],
-          toolbar: true,
+          toolbar: ['docs', 'story'],
         },
       },
       {
@@ -155,11 +157,14 @@ export const setUpManager = ({
           };
         },
         display: {
+          mdx: ['story', 'component'],
           sidebar: [
-            { skipInherited: false, type: 'component' },
-            { skipInherited: false, type: 'docs' },
+            { type: 'story', skipInherited: true },
+            { type: 'docs', skipInherited: true },
+            { type: 'component', skipInherited: false },
+            { type: 'group', skipInherited: false },
           ],
-          toolbar: true,
+          toolbar: ['docs', 'story'],
         },
       },
       {
@@ -177,12 +182,14 @@ export const setUpManager = ({
           },
         },
         display: {
+          mdx: ['story', 'component'],
           sidebar: [
-            { skipInherited: false, type: 'component' },
-            { skipInherited: false, type: 'group' },
-            { skipInherited: false, type: 'docs' },
+            { type: 'story', skipInherited: true },
+            { type: 'docs', skipInherited: true },
+            { type: 'component', skipInherited: false },
+            { type: 'group', skipInherited: false },
           ],
-          toolbar: true,
+          toolbar: ['docs', 'story'],
         },
       },
     ] satisfies TagBadgeParameters,

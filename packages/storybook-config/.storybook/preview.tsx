@@ -9,7 +9,7 @@ import {
   type PreviewWeb,
 } from 'storybook/internal/preview-api';
 import type Channel from 'storybook/internal/channels';
-import { convert, ThemeProvider, themes } from 'storybook/internal/theming';
+import { convert, ThemeProvider, themes } from 'storybook/theming';
 import { IressStorybook } from '../src/components/IressStorybook';
 import { HideSidebar } from '../src/components/HideSidebar';
 
@@ -79,7 +79,7 @@ const storybookConfigPreview = getPreview({});
 const preview: Preview = {
   ...storybookConfigPreview,
   decorators: [
-    ...storybookConfigPreview.decorators,
+    ...(storybookConfigPreview.decorators as never[]),
 
     // This decorator provides the DocsContext to the story if it was loaded by the loader above.
     (Story, { loaded: { docsContext } }) =>

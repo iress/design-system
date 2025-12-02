@@ -10,7 +10,7 @@ type Story = StoryObj<typeof ComponentStatus>;
 const meta: Meta<typeof ComponentStatus> = {
   title: 'Components/Status',
   component: ComponentStatus,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'updated'],
   parameters: {
     ...disableArgTypes(['meta', 'of']),
     relativeCsfPaths: ['mocks/StoryStub.stories'],
