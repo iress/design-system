@@ -81,10 +81,8 @@ export const withSandboxStory = (
       }
     };
 
-    window.parent.postMessage(
-      'REQUEST_PARENT_LOCATION',
-      window.location.origin,
-    );
+    // eslint-disable-next-line sonarjs/post-message
+    window.parent.postMessage('REQUEST_PARENT_LOCATION', '*');
     window.addEventListener('message', handleMessage);
 
     return () => {
