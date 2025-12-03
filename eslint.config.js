@@ -13,6 +13,7 @@ export default [
       'apps/**', // Let project configs handle their own linting
       'packages/**', // Let project configs handle their own linting
       'output/**',
+      'scripts/**',
       'ci/**',
       'src/generated/**', // Ignore generated files
     ],
@@ -32,7 +33,7 @@ export default [
   {
     // TypeScript config files at root - use factory but without project references
     ...createTypeScriptConfig(import.meta.dirname, []),
-    files: ['*.ts', 'shared/**/*.ts'],
+    files: ['*.ts', 'shared/**/*.ts', 'scripts/**/*.ts'],
     languageOptions: {
       ...createTypeScriptConfig(import.meta.dirname, []).languageOptions,
       parserOptions: {
