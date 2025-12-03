@@ -1,8 +1,8 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { disableArgTypes } from '@iress-storybook/helpers';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressProvider } from './Provider';
 import { AppWithProvider } from './mocks/AppWithProvider';
 import AppWithProviderSource from './mocks/AppWithProvider.tsx?raw';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressProvider>;
 

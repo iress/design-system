@@ -1,9 +1,9 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressButton, IressText, IressToast } from '../../../main';
-import { TOAST_STATUS, ToastStatus } from './Toast.types';
+import { TOAST_STATUS, type ToastStatus } from './Toast.types';
 import { capitalizeFirstLetter } from '@helpers/formatting/capitalizeFirstLetter';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '../../Stack/Stack';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressToast>;
 

@@ -1,10 +1,10 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressSelectBody } from './SelectBody';
 import { IressSelectCreate } from '../SelectCreate/SelectCreate';
 import {
   IressMenuDivider,
   IressPanel,
-  IressSelectBodyProps,
+  type IressSelectBodyProps,
   IressSelectMenu,
 } from '@/main';
 import { MOCK_LARGE_LABEL_VALUES_DATASET } from '../../../mocks/generateLabelValues';
@@ -13,7 +13,7 @@ import {
   disableArgTypes,
   mergeStorybookConfig,
   removeArgTypes,
-} from '@iress-storybook/helpers';
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSelectBody>;
 

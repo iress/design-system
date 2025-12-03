@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressSelectCreate } from './SelectCreate';
-import { addToStorybookCategory } from '@iress-storybook/helpers';
-import { IressSelectCreateProps } from './SelectCreate.types';
+import { type IressSelectCreateProps } from './SelectCreate.types';
+import { addToStorybookCategory } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSelectCreate>;
 

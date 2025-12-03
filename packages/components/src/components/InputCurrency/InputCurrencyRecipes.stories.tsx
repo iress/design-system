@@ -1,10 +1,10 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { IressInputProps, IressInputCurrency } from '../../main';
-import { withCustomSource } from '@iress-storybook/helpers';
+import { type Meta, type StoryObj } from '@storybook/react';
+import { type IressInputProps, IressInputCurrency } from '../../main';
 import { ValidValueOnChage as ValidValueOnChageExample } from './mocks/ValidValueOnChage';
 import ValidValueOnChageSource from './mocks/ValidValueOnChage.tsx?raw';
 import { CurrencyInTable as CurrencyInTableExample } from './mocks/CurrencyInTable';
 import CurrencyInTableSource from './mocks/CurrencyInTable.tsx?raw';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<IressInputProps>;
 

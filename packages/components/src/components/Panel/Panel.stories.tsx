@@ -1,16 +1,19 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressPanel } from './Panel';
 import { IressPlaceholder } from '../Placeholder';
 import { IressText } from '../Text';
-import { disableArgTypes, withJsxTransformer } from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
 import {
   IressInline,
-  IressPanelProps,
+  type IressPanelProps,
   PADDING_SIZES,
   TEXT_ALIGNS,
 } from '@/main';
-import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
+import {
+  CurrentBreakpoint,
+  disableArgTypes,
+  withJsxTransformer,
+} from '@iress-oss/ids-storybook-config';
 import { PANEL_BACKGROUNDS } from './Panel.types';
 
 type PanelCustomArgs = React.ComponentProps<typeof IressPanel> & {

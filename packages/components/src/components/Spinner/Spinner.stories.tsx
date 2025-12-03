@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { IressSpinner, IressSpinnerProps } from '.';
+import { type Meta, type StoryObj } from '@storybook/react';
+import { IressSpinner, type IressSpinnerProps } from '.';
 import { IressInline } from '../Inline';
 import { IressText } from '../Text';
 

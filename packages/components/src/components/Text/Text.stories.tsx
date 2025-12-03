@@ -1,9 +1,9 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressText } from '.';
 import { IressStack } from '../Stack';
 import { IressIcon } from '../Icon';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { TEXT_ALIGNS, TEXT_ELEMENTS, TEXT_MODES, TEXT_VARIANTS } from '@/main';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressText>;
 

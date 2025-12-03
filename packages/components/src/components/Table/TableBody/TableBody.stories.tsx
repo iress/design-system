@@ -1,8 +1,8 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressTableBody } from '..';
 import { TableGroupedRows } from '../mocks/TableGroupedRows';
 import GroupedRowsSource from '../mocks/TableGroupedRows.tsx?raw';
-import { withCustomSource } from '@iress-storybook/helpers';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<typeof IressTableBody>;
 

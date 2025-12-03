@@ -1,12 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressTable } from '.';
 import { IressBadge } from '../Badge';
 import { IressButton } from '../Button';
-import {
-  disableArgTypes,
-  withJsxTransformer,
-  withTransformedRawSource,
-} from '@iress-storybook/helpers';
 import { TableCustomColumns } from './mocks/TableCustomColumns';
 import TableCustomColumnsSource from './mocks/TableCustomColumns.tsx?raw';
 import { TableFormats } from './mocks/TableFormats';
@@ -15,8 +10,13 @@ import { TableSorting } from './mocks/TableSorting';
 import TableSortingSource from './mocks/TableSorting.tsx?raw';
 import { TableSortingFn } from './mocks/TableSortingFn';
 import TableSortingFnSource from './mocks/TableSortingFn.tsx?raw';
-import { Row } from '@tanstack/react-table';
-import { CSSProperties } from 'react';
+import { type Row } from '@tanstack/react-table';
+import { type CSSProperties } from 'react';
+import {
+  disableArgTypes,
+  withJsxTransformer,
+  withTransformedRawSource,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressTable>;
 

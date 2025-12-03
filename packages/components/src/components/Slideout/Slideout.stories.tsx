@@ -1,14 +1,7 @@
-import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
-import { ArgsStoryFn } from '@storybook/types';
-import { IressSlideout, IressSlideoutProps } from '.';
+import { type Meta, type ReactRenderer, type StoryObj } from '@storybook/react';
+import { IressSlideout, type IressSlideoutProps } from '.';
 import { IressButton } from '../Button';
 import { useSlideout } from './hooks/useSlideout';
-import {
-  disableArgTypes,
-  withCustomSource,
-  withTransformedProviderSource,
-  withTransformedRawSource,
-} from '@iress-storybook/helpers';
 import { IressSlideoutProvider } from './SlideoutProvider';
 import { SlideoutUsingState } from './mocks/SlideoutUsingState';
 import SlideoutUsingStateSource from './mocks/SlideoutUsingState.tsx?raw';
@@ -25,6 +18,13 @@ import { AbsolutePositionSlideout } from './mocks/AbsolutePositionSlideout';
 import AbsolutePositionSlideoutSource from './mocks/AbsolutePositionSlideout.tsx?raw';
 import { SlideoutMicrofrontend } from './mocks/SlideoutMicrofrontend';
 import SlideoutMicrofrontendSource from './mocks/SlideoutMicrofrontend.tsx?raw';
+import {
+  disableArgTypes,
+  withTransformedProviderSource,
+  withTransformedRawSource,
+} from '@iress-oss/ids-storybook-config';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
+import { type ArgsStoryFn } from 'storybook/internal/types';
 
 const SLIDEOUT_ID = 'storybook-slideout';
 

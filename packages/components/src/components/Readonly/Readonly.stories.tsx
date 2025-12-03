@@ -1,10 +1,10 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { disableArgTypes } from '@iress-storybook/helpers';
-import { IressReadonlyProps } from './Readonly.types';
+import { type Meta, type StoryObj } from '@storybook/react';
+import { type IressReadonlyProps } from './Readonly.types';
 import { IressReadonly } from './Readonly';
 import { IressInline } from '../Inline';
 import { IressIcon } from '../Icon';
 import { IressText } from '../Text';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressReadonlyProps>;
 

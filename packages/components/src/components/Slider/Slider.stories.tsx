@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressSlider } from '.';
 import { IressStack } from '../Stack';
 import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
