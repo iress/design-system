@@ -8,6 +8,33 @@ import { useAddonConfigForManager } from '../hooks/useAddonConfig';
 import type { OktaAuth } from '@okta/okta-auth-js';
 
 // Mock the oktaRegister helper
+vi.mock('@okta/okta-auth-js', () => {
+  // Create a constructor function
+  function MockOktaAuth() {
+    return {
+      token: {
+        isLoginRedirect: vi.fn(),
+        parseFromUrl: vi.fn().mockResolvedValue({ tokens: {} }),
+      },
+      tokenManager: {
+        setTokens: vi.fn(),
+      },
+      authStateManager: {
+        subscribe: vi.fn(),
+        unsubscribe: vi.fn(),
+      },
+      start: vi.fn().mockResolvedValue(undefined),
+      setOriginalUri: vi.fn(),
+      signInWithRedirect: vi.fn().mockResolvedValue(undefined),
+    };
+  }
+
+  return {
+    OktaAuth: MockOktaAuth,
+    default: MockOktaAuth,
+  };
+});
+
 vi.mock('../helpers/oktaRegister', () => ({
   getOkta: vi.fn(),
 }));
@@ -73,7 +100,7 @@ describe('OktaGuard', () => {
   const mockAuthClient = {
     token: {
       isLoginRedirect: vi.fn(),
-      parseFromUrl: vi.fn(),
+      parseFromUrl: vi.fn().mockResolvedValue({ tokens: {} }),
     },
     tokenManager: {
       setTokens: vi.fn(),
@@ -82,9 +109,9 @@ describe('OktaGuard', () => {
       subscribe: vi.fn(),
       unsubscribe: vi.fn(),
     },
-    start: vi.fn(),
+    start: vi.fn().mockResolvedValue(undefined),
     setOriginalUri: vi.fn(),
-    signInWithRedirect: vi.fn(),
+    signInWithRedirect: vi.fn().mockResolvedValue(undefined),
   } as unknown as OktaAuth;
 
   beforeEach(() => {

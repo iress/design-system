@@ -10,6 +10,26 @@ import { getAddonConfigForPreview } from '../hooks/useAddonConfig';
 import type { OktaAuth } from '@okta/okta-auth-js';
 
 // Mock dependencies
+vi.mock('@okta/okta-auth-js', () => {
+  // Create a constructor function
+  function MockOktaAuth() {
+    return {
+      authStateManager: {
+        subscribe: vi.fn(),
+        unsubscribe: vi.fn(),
+      },
+      start: vi.fn().mockResolvedValue(undefined),
+      setOriginalUri: vi.fn(),
+      signInWithRedirect: vi.fn().mockResolvedValue(undefined),
+    };
+  }
+
+  return {
+    OktaAuth: MockOktaAuth,
+    default: MockOktaAuth,
+  };
+});
+
 vi.mock('../helpers/oktaRegister', () => ({
   getOkta: vi.fn(),
   registerOkta: vi.fn(),
@@ -76,9 +96,9 @@ describe('withOKTA', () => {
       subscribe: vi.fn(),
       unsubscribe: vi.fn(),
     },
-    start: vi.fn(),
+    start: vi.fn().mockResolvedValue(undefined),
     setOriginalUri: vi.fn(),
-    signInWithRedirect: vi.fn(),
+    signInWithRedirect: vi.fn().mockResolvedValue(undefined),
   } as unknown as OktaAuth;
 
   beforeEach(() => {

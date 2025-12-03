@@ -10,6 +10,26 @@ import type { AddonConfig } from '../types';
 import { type OktaAuth } from '@okta/okta-auth-js';
 
 // Mock dependencies
+vi.mock('@okta/okta-auth-js', () => {
+  // Create a constructor function
+  function MockOktaAuth() {
+    return {
+      authStateManager: {
+        subscribe: vi.fn(),
+        unsubscribe: vi.fn(),
+      },
+      start: vi.fn().mockResolvedValue(undefined),
+      setOriginalUri: vi.fn(),
+      signInWithRedirect: vi.fn().mockResolvedValue(undefined),
+    };
+  }
+
+  return {
+    OktaAuth: MockOktaAuth,
+    default: MockOktaAuth,
+  };
+});
+
 vi.mock('storybook/manager-api', () => ({
   addons: {
     getChannel: vi.fn(),
