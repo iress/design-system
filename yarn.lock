@@ -1620,7 +1620,7 @@ __metadata:
     eslint-plugin-sonarjs: "npm:3.0.2"
     minimist: "npm:^1.2.8"
     playwright: "npm:1.53.1"
-    prettier: "npm:3.5.3"
+    prettier: "npm:3.6.2"
     prettier-plugin-sh: "npm:0.18.0"
     rimraf: "npm:2.7.1"
     tsx: "npm:4.20.3"
@@ -11501,16 +11501,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:3.5.3":
-  version: 3.5.3
-  resolution: "prettier@npm:3.5.3"
-  bin:
-    prettier: bin/prettier.cjs
-  checksum: 10c0/3880cb90b9dc0635819ab52ff571518c35bd7f15a6e80a2054c05dbc8a3aa6e74f135519e91197de63705bcb38388ded7e7230e2178432a1468005406238b877
-  languageName: node
-  linkType: hard
-
-"prettier@npm:^3.6.2":
+"prettier@npm:3.6.2, prettier@npm:^3.6.2":
   version: 3.6.2
   resolution: "prettier@npm:3.6.2"
   bin:
