@@ -1,17 +1,7 @@
-import { Meta } from '@storybook/addon-docs/blocks';
-import { ColourSwatch } from '@iress-oss/ids-storybook-config';
-import { IressStack } from '../../src/main';
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import * as ComponentStories from './030-Colour.stories';
 
-export const allowedForegrounds = [
-  '--iress-g-text-color',
-  '--iress-g-muted-text-color',
-  '--iress-g-info-color',
-  '--iress-g-success-color',
-  '--iress-g-warning-color',
-  '--iress-g-danger-color',
-];
-
-<Meta title="Foundations/Colours" />
+<Meta of={ComponentStories} />
 
 # Colours
 
@@ -21,104 +11,12 @@ The Iress themes are designed to meet WCAG contrast guidelines (2.1 AA). We can'
 
 ## Backgrounds
 
-<IressStack gutter="md">
-  <ColourSwatch
-    title="Default Background"
-    description="Used for the default panel background."
-    background="--iress-g-background-color"
-    allowedForegrounds={allowedForegrounds}
-  />
-
-<ColourSwatch
-  title="Page Background"
-  description="The background colour of the page."
-  background="--iress-g-page-background-color"
-  allowedForegrounds={allowedForegrounds}
-/>
-
-<ColourSwatch
-  title="Alt Background"
-  description="Used for the alt panel background."
-  background="--iress-g-background-color-alt"
-  allowedForegrounds={allowedForegrounds}
-/>
-
-  <ColourSwatch
-    title="Hover Background"
-    description="Used for the hover and active state of elements such as tables, button groups, expanders, checkboxes and more."
-    background="--iress-g-hover-background-color"
-    allowedForegrounds={allowedForegrounds}
-  />
-</IressStack>
+<Story of={ComponentStories.Backgrounds} />
 
 ## Primary
 
-<IressStack gutter="md">
-  <ColourSwatch
-    title="Primary"
-    description="Used for the background colour of primary buttons, and to highlight other interactive/featured elements."
-    background="--iress-g-primary-color"
-    foreground="--iress-g-primary-contrast-color"
-    allowedForegrounds={['--iress-g-primary-contrast-color']}
-  />
-
-<ColourSwatch
-  title="Primary Hover"
-  description="Used for the hover state of primary buttons."
-  background="--iress-g-primary-hover-color"
-  foreground="--iress-g-primary-contrast-color"
-  allowedForegrounds={['--iress-g-primary-contrast-color']}
-/>
-</IressStack>
+<Story of={ComponentStories.Primary} />
 
 ## System
 
-<IressStack gutter="md">
-  <ColourSwatch
-    title="Info"
-    description="Used to indicate an element that provides information, usually an element without an action. Used in alerts and badges."
-    background="--iress-g-info-color"
-    foreground="--iress-g-info-contrast-color"
-    allowedForegrounds={['--iress-g-info-contrast-color']}
-  />
-
-<ColourSwatch
-  title="Danger"
-  description="Used to indicate an error that requires the user's attention and action. Used in alerts and badges."
-  background="--iress-g-danger-color"
-  foreground="--iress-g-danger-contrast-color"
-  allowedForegrounds={['--iress-g-danger-contrast-color']}
-/>
-
-<ColourSwatch
-  title="Warning"
-  description="Used to indicate an action/information that may have consequences. Used in alerts and badges."
-  background="--iress-g-warning-color"
-  foreground="--iress-g-warning-contrast-color"
-  allowedForegrounds={['--iress-g-warning-contrast-color']}
-/>
-
-<ColourSwatch
-  title="Success"
-  description="Used to indicate a successful action. Used in alerts and badges."
-  background="--iress-g-success-color"
-  foreground="--iress-g-success-contrast-color"
-  allowedForegrounds={['--iress-g-success-contrast-color']}
-/>
-
-<ColourSwatch
-  title="Negative"
-  description="Used to indicate an element that is below a threshold or limit. Usually used for trading to indicate a loss."
-  background="--iress-g-negative-color"
-  foreground="--iress-g-negative-contrast-color"
-  allowedForegrounds={['--iress-g-negative-contrast-color']}
-/>
-
-<ColourSwatch
-  title="Positive"
-  description="Used to indicate an element that is above a threshold or limit. Usually used for trading to indicate a gain."
-  background="--iress-g-positive-color"
-  foreground="--iress-g-positive-contrast-color"
-  allowedForegrounds={['--iress-g-positive-contrast-color']}
-/>
-</IressStack>
+<Story of={ComponentStories.System} />
