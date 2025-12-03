@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './Readonly.stories';
 
 <Meta of={ComponentStories} />
@@ -11,8 +11,8 @@ import * as ComponentStories from './Readonly.stories';
 
 <ComponentOverview
   description="Readonly displays a value that cannot be edited by the user. It renders a hidden input field to ensure the value is submitted with the form."
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -21,16 +21,10 @@ import * as ComponentStories from './Readonly.stories';
 
 You can pass in stylised content that represents the value by using the `children` prop. If no `children` is provided, it will display the `value` directly.
 
-<ComponentExample
-  story={ComponentStories.RichContent}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.RichContent} meta={ComponentStories} />
 
 ### Inline
 
 You can make the prepend/append element closer to the input content using the `inline` prop.
 
-<ComponentExample
-  story={ComponentStories.InlineStyle}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.InlineStyle} meta={ComponentStories} />

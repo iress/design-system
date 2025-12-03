@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import { IressAlert } from '../../main';
 import * as ComponentStories from './Icon.stories';
 
@@ -12,8 +12,8 @@ import * as ComponentStories from './Icon.stories';
 
 <ComponentOverview
   description="Icons enhance experiences by visually communicating meaning, actions, status, and feedback."
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 ## Installation
 
@@ -51,48 +51,45 @@ If you use an icon to improve the visual appeal of content, for example by repla
 If you use an icon to convey meaning, for example using an icon as the only content inside a button, you do need to supply a value for the `screenreaderText`; if you don't the button meaning will be completely lost for screen reader users.
 
 <ComponentExample
-  story={ComponentStories.ScreenReaderText}
-  stories={ComponentStories}
+  of={ComponentStories.ScreenReaderText}
+  meta={ComponentStories}
 />
 
 ### Size
 
 The `size` prop can be used to control sizing of the icon.
 
-<ComponentExample story={ComponentStories.Size} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Size} meta={ComponentStories} />
 
 ### Mode
 
 The `mode` prop can be used to set the colour of the icon to these predefined mode colours: Body, Muted, Primary, Info, Success, Warning, Danger, Positive and Negative.
 
-<ComponentExample story={ComponentStories.Mode} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Mode} meta={ComponentStories} />
 
 ### Flip
 
 The `flip` prop can be set to horizontal, vertical or both.
 
-<ComponentExample story={ComponentStories.Flip} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Flip} meta={ComponentStories} />
 
 ### Rotate
 
 The `rotate` prop can be set to 90, 180 or 270 degrees.
 
-<ComponentExample story={ComponentStories.Rotate} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Rotate} meta={ComponentStories} />
 
 ### Spin
 
 The `spin` prop can be set to half (fastest), 1, 2 or 3 (slowest) to control the speed of the icon spin animation, useful for loading spinners.
 
-<ComponentExample story={ComponentStories.Spin} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Spin} meta={ComponentStories} />
 
 ### Fixed Width
 
 Because of the wide variety of Font Awesome icons, not every icon is the same size. This can cause alignment issued when the icons stack vertically, so you can use the `fixedWidth` prop to ensure each icon is the same width. Very useful when using icons in menus.
 
-<ComponentExample
-  story={ComponentStories.FixedWidth}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.FixedWidth} meta={ComponentStories} />
 
 ## Examples
 
@@ -100,7 +97,4 @@ Because of the wide variety of Font Awesome icons, not every icon is the same si
 
 Version 4 of IDS included some bespoke styles to make an "external link" icon in an `IressText` component look nice. We've removed these in V5 as we found they were having unintended side effects. If you still wish to style your external link icons, you can use either some custom CSS (like below) or simply make the icon size `xs`:
 
-<ComponentExample
-  story={ComponentStories.ExternalLink}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ExternalLink} meta={ComponentStories} />

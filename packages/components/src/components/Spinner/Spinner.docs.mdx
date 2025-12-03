@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './Spinner.stories';
 
 <Meta of={ComponentStories} />
@@ -11,8 +11,8 @@ import * as ComponentStories from './Spinner.stories';
 
 <ComponentOverview
   description="Spinners notify the user that a task is being processed. They indicate that the app is busy, and should be used when the user has to wait for more than a few seconds."
-  story={ComponentStories.Standalone}
-  stories={ComponentStories}
+  of={ComponentStories.Standalone}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -21,13 +21,10 @@ import * as ComponentStories from './Spinner.stories';
 
 When using the spinner on its own, you can define the `screenreaderText` prop to provide context to screen readers.
 
-<ComponentExample
-  story={ComponentStories.Standalone}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Standalone} meta={ComponentStories} />
 
 ### Message
 
 You can display a message alongside the spinner. In this case, you do not need to define the `screenreaderText` prop, as you have a visible message to the user telling them what is happening.
 
-<ComponentExample story={ComponentStories.Message} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Message} meta={ComponentStories} />

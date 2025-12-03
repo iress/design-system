@@ -13,7 +13,7 @@ import {
 import { ModalUsingState } from './mocks/ModalUsingState';
 import ModalUsingStateSource from './mocks/ModalUsingState.tsx?raw';
 import { IressStack, IressText } from '../../main';
-import { CurrentBreakpoint } from '@iress-storybook/components';
+import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
 import { ModalSizes } from './mocks/ModalSizes';
 import ModalSizesSource from './mocks/ModalSizes.tsx?raw';
 import { ModalPaddings } from './mocks/ModalPaddings';

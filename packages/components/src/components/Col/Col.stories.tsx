@@ -9,7 +9,7 @@ import { IressPlaceholder } from '../Placeholder';
 import { IressRow, IressRowProps } from '../Row';
 import { IressStack } from '../Stack';
 import { IressPanel } from '../Panel';
-import { CurrentBreakpoint } from '@iress-storybook/components';
+import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
 import { IressText } from '../Text';
 import styles from '@iress-storybook/styles.module.scss';
 import { IressContainer } from '../Container';

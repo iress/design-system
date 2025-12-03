@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './Panel.stories';
 
 <Meta of={ComponentStories} />
@@ -11,8 +11,8 @@ import * as ComponentStories from './Panel.stories';
 
 <ComponentOverview
   description="A panel is used to group related content."
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -21,24 +21,21 @@ import * as ComponentStories from './Panel.stories';
 
 The `background` prop allows you to vary the styling of the panel component. It has four variants.
 
-<ComponentExample
-  story={ComponentStories.Background}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Background} meta={ComponentStories} />
 
 ### Padding
 
 Panel padding can be set using the `padding` prop. It can be set to `none`, `sm`, `md` or `lg`. Its default value is `md`.
 
-<ComponentExample story={ComponentStories.Padding} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Padding} meta={ComponentStories} />
 
 ### Responsive padding
 
 The `padding` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
 
 <ComponentExample
-  story={ComponentStories.ResponsivePadding}
-  stories={ComponentStories}
+  of={ComponentStories.ResponsivePadding}
+  meta={ComponentStories}
 />
 
 ### Variable padding
@@ -57,8 +54,8 @@ A VariablePadding object can consist of any of the following keys:
 Variable padding can also be passed as part of a responsive object.
 
 <ComponentExample
-  story={ComponentStories.VariablePadding}
-  stories={ComponentStories}
+  of={ComponentStories.VariablePadding}
+  meta={ComponentStories}
 />
 
 ### Text align
@@ -67,22 +64,19 @@ Text alignment can be set to `inherit`, `left`, `center`, `right` or `justify`.
 
 It's default value is `inherit`.
 
-<ComponentExample
-  story={ComponentStories.TextAlign}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.TextAlign} meta={ComponentStories} />
 
 ### Stretch
 
 Panel can be set to fill its available container height by setting the `stretch` prop.
 
-<ComponentExample story={ComponentStories.Stretch} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Stretch} meta={ComponentStories} />
 
 ### `noBorderRadius`
 
 Panels can inherit the theme's border radius which may result in an undesirable look to those components that use panels internally such as slideouts. To remove rounding from all panels set the prop `noBorderRadius` to ensure all panels have a zero border radius.
 
 <ComponentExample
-  story={ComponentStories.NoBorderRadius}
-  stories={ComponentStories}
+  of={ComponentStories.NoBorderRadius}
+  meta={ComponentStories}
 />

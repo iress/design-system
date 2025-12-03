@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import { IressInline } from '../../main';
 import * as ComponentStories from './Label.stories';
 
@@ -17,8 +17,8 @@ import * as ComponentStories from './Label.stories';
       inputs and <code>IressField</code> is too restrictive.
     </>
   }
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -27,10 +27,7 @@ import * as ComponentStories from './Label.stories';
 
 To indicate that an input is required, you may use the `required` prop to distinguish the label with an asterix.
 
-<ComponentExample
-  story={ComponentStories.Required}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Required} meta={ComponentStories} />
 
 ### Optional
 
@@ -45,13 +42,13 @@ The `optional` prop also accepts a string, in which case it will replace the def
   horizontalAlign={IressInline.HorizontalAlign.Around}
 >
   <ComponentExample
-    story={ComponentStories.Optional}
-    stories={ComponentStories}
+    of={ComponentStories.Optional}
+    meta={ComponentStories}
   />
 
   <ComponentExample
-    story={ComponentStories.OptionalText}
-    stories={ComponentStories}
+    of={ComponentStories.OptionalText}
+    meta={ComponentStories}
   />
 </IressInline>
 
@@ -59,19 +56,13 @@ The `optional` prop also accepts a string, in which case it will replace the def
 
 Sometimes you may wish to have an input with no visible label, but to still wrap the input in a label for accessibility. In this case, set `hiddenLabel` to `true`.
 
-<ComponentExample
-  story={ComponentStories.HiddenLabel}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.HiddenLabel} meta={ComponentStories} />
 
 ### Rich content
 
 You can render custom content into the label.
 
-<ComponentExample
-  story={ComponentStories.RichContent}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.RichContent} meta={ComponentStories} />
 
 ## Accessibility
 

@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './Autocomplete.stories';
 
 <Meta of={ComponentStories} />
@@ -11,8 +11,8 @@ import * as ComponentStories from './Autocomplete.stories';
 
 <ComponentOverview
   description="Autocomplete allow for users to fill in their input by providing suggestions as they type."
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -25,19 +25,13 @@ There is no validation done between the suggestions and the input value. They ar
 
 The `defaultValue` prop can be used to set the initial value of the input. The value will be managed by the component.
 
-<ComponentExample
-  story={ComponentStories.Uncontrolled}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Uncontrolled} meta={ComponentStories} />
 
 ### Controlled
 
 The `value` prop can be used to completely control the state of the component. Use the `onChange` and `onClear` props to sync your state with the component.
 
-<ComponentExample
-  story={ComponentStories.Controlled}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Controlled} meta={ComponentStories} />
 
 ### Providing suggestions
 
@@ -47,16 +41,13 @@ To use the suggestion functionality, you can provide an array of `LabelValueMeta
 
 **Note:** If `value` is provided on a suggestion item, it will be used (casted to a string) instead of the `label` key. This is useful when you want to display a different value to the user than what is used for filtering.
 
-<ComponentExample story={ComponentStories.Options} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Options} meta={ComponentStories} />
 
 #### Asynchronous `options`
 
 If you would like to render suggestions from the server, you can pass a function to the `options` prop. It accepts a string parameter and returns a promise that resolves to an array of `LabelValueMeta[]` objects.
 
-<ComponentExample
-  story={ComponentStories.AsyncOptions}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.AsyncOptions} meta={ComponentStories} />
 
 #### Minimum search length for async options
 
@@ -65,8 +56,8 @@ When using asynchronous options, you can set a minimum number of characters requ
 By default, async searches are triggered after 1 character. Setting a higher value (e.g., 3) means no search request will be made and no loading spinner will appear until the user types at least that many characters.
 
 <ComponentExample
-  story={ComponentStories.AsyncOptionsMinSearchLength}
-  stories={ComponentStories}
+  of={ComponentStories.AsyncOptionsMinSearchLength}
+  meta={ComponentStories}
 />
 
 #### `initialOptions`
@@ -74,8 +65,8 @@ By default, async searches are triggered after 1 character. Setting a higher val
 If you want to provide initial options to the user, you can use the `initialOptions` prop. This is useful when you want to provide a list of options to the user before they start typing (eg. recommended search terms).
 
 <ComponentExample
-  story={ComponentStories.InitialOptions}
-  stories={ComponentStories}
+  of={ComponentStories.InitialOptions}
+  meta={ComponentStories}
 />
 
 ## Behaviour
@@ -108,8 +99,8 @@ There is a key difference:
 The `autoSelect` prop will automatically select the highlighted option when the user blurs the autocomplete. This is set to true by default, but can be switched off.
 
 <ComponentExample
-  story={ComponentStories.RemoveAutoSelect}
-  stories={ComponentStories}
+  of={ComponentStories.RemoveAutoSelect}
+  meta={ComponentStories}
 />
 
 ### Input props
@@ -118,19 +109,13 @@ Autocomplete extends `IressInput`, hence it has the same properties as `IressInp
 
 It does have some defaults to help with user experience. `append` automatically has a search icon, and `clearable` and `watermark` are set to true by default.
 
-<ComponentExample
-  story={ComponentStories.InputProps}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.InputProps} meta={ComponentStories} />
 
 ### No results
 
 If you would like to show a message when there are no results, you can use the `noResultsText` prop. It accepts any React node.
 
-<ComponentExample
-  story={ComponentStories.NoResultsText}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.NoResultsText} meta={ComponentStories} />
 
 ### Popover props
 
@@ -138,10 +123,7 @@ Under the hood, autocomplete uses `IressInputPopover` to display the suggestions
 
 There are two additional props that autocomplete accepts to customise the popover: `append` and `prepend`. You can place additional content above or below the results using these props.
 
-<ComponentExample
-  story={ComponentStories.PopoverProps}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.PopoverProps} meta={ComponentStories} />
 
 ### Debounce threshold
 
@@ -150,8 +132,8 @@ The `debounceThreshold` prop can be used to set the time in milliseconds to wait
 By default there is a debounce, but it can be removed by setting it to `0`.
 
 <ComponentExample
-  story={ComponentStories.DebounceThreshold}
-  stories={ComponentStories}
+  of={ComponentStories.DebounceThreshold}
+  meta={ComponentStories}
 />
 
 ### Result limits
@@ -175,10 +157,7 @@ On smaller screens (< 768px), the number of options is further reduced by using 
 
 The result limits will also affect the number of initial options displayed, if the `initialOptions` prop is set.
 
-<ComponentExample
-  story={ComponentStories.ResultLimits}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ResultLimits} meta={ComponentStories} />
 
 ### Readonly
 
@@ -186,10 +165,7 @@ The `readonly` prop can be set to `true` to prevent the user from changing the v
 
 If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](?path=/docs/components-readonly--docs).
 
-<ComponentExample
-  story={ComponentStories.Readonly}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Readonly} meta={ComponentStories} />
 
 ## Testing
 

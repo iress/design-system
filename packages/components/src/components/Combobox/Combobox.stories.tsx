@@ -11,7 +11,7 @@ import { ComboboxUsingAsync } from './mocks/ComboboxUsingAsync';
 import ComboboxUsingAsyncSource from './mocks/ComboboxUsingAsync.tsx?raw';
 import { IressStack } from '../Stack';
 import { IressPanel } from '../Panel';
-import { CurrentBreakpoint } from '@iress-storybook/components';
+import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
 import { IressButton } from '../Button';
 import { IressIcon } from '../Icon';
 import { IressPopover } from '../Popover';

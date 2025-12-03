@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import { ContainerBreakpointTable } from './mocks/ContainerBreakpointTable';
 import * as ComponentStories from './Container.stories';
 
@@ -17,8 +17,8 @@ import * as ComponentStories from './Container.stories';
       pad your site’s contents.
     </>
   }
-  story={ComponentStories.Container}
-  stories={ComponentStories}
+  of={ComponentStories.Container}
+  meta={ComponentStories}
 />
 
 ## Behaviour
@@ -33,4 +33,4 @@ The `IressContainer` snaps to fixed max widths at different breakpoints. Those m
 
 If you want the `IressContainer` to fill its containing element, you can set the `fluid` prop. Resize the example below to see how the IressContainer is 100% for all screen sizes.
 
-<ComponentExample story={ComponentStories.Fluid} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Fluid} meta={ComponentStories} />

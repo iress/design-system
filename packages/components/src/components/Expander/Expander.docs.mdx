@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as Stories from './Expander.stories';
 
 <Meta of={Stories} />
@@ -11,8 +11,8 @@ import * as Stories from './Expander.stories';
 
 <ComponentOverview
   description="Expanders are commonly used to reveal more information or details about an element or content on a page."
-  story={Stories.Default}
-  stories={Stories}
+  of={Stories.Default}
+  meta={Stories}
 />
 
 ## Accessibility
@@ -26,16 +26,16 @@ For Accessibility guidelines refer to
 
 Expander has a `mode` prop which can be used to change how the expander is displayed. There are 3 modes `section` (default), `heading` and `link`.
 
-<ComponentExample story={Stories.Mode} stories={Stories} />
+<ComponentExample of={Stories.Mode} meta={Stories} />
 
 ### Open
 
 The `open` prop can be used to control the open state of the expander as can be seen below.
 
-<ComponentExample story={Stories.Open} stories={Stories} />
+<ComponentExample of={Stories.Open} meta={Stories} />
 
 ### Multiple expanders (accordion)
 
 You can use multiple expanders to create an accordion, where al expander closes when another is opened.
 
-<ComponentExample story={Stories.Multiple} stories={Stories} />
+<ComponentExample of={Stories.Multiple} meta={Stories} />

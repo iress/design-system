@@ -1,6 +1,6 @@
 import { StoryObj, Meta } from '@storybook/react';
 
-import { CurrentBreakpoint } from '@iress-storybook/components';
+import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
 import { disableArgTypes } from '@iress-storybook/helpers';
 import styles from '@iress-storybook/styles.module.scss';
 

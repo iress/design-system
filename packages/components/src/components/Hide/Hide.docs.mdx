@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import { HideBreakpointTable } from './mocks/HideBreakpointTable';
 import { HideUtilityBreakpointTable } from './mocks/HideUtilityBreakpointTable';
 import * as ComponentStories from './Hide.stories';
@@ -18,8 +18,8 @@ import * as ComponentStories from './Hide.stories';
       create adaptive designs that work for all screen sizes.
     </>
   }
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -54,18 +54,15 @@ If you want to hide content only on certain screen sizes, you'll need to specify
 
 Here are a few variations of the `hiddenOn` prop in action.
 
-<ComponentExample
-  story={ComponentStories.HiddenOn}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.HiddenOn} meta={ComponentStories} />
 
 ### Visually hidden
 
 This `visuallyHidden` prop is used if you don't want content to be visible on screen, but you do want it to be available to screen reader users.
 
 <ComponentExample
-  story={ComponentStories.VisuallyHidden}
-  stories={ComponentStories}
+  of={ComponentStories.VisuallyHidden}
+  meta={ComponentStories}
 />
 
 ## Utility classes

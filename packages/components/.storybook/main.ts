@@ -8,6 +8,4 @@ const config = getMainConfig({
   tsConfigWithAlias: 'tsconfig.base.json',
 });
 
-config.addons?.push('./local-preset.cjs');
-
 export default config;

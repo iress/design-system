@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './Col.stories';
 
 <Meta of={ComponentStories} />
@@ -16,8 +16,8 @@ import * as ComponentStories from './Col.stories';
       page content
     </>
   }
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -26,10 +26,7 @@ import * as ComponentStories from './Col.stories';
 
 When no column widths are specified the `IressCol` component will render equal width columns.
 
-<ComponentExample
-  story={ComponentStories.AutoSized}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.AutoSized} meta={ComponentStories} />
 
 ### Span
 
@@ -37,7 +34,7 @@ The `span` prop controls the number of grid columns the component should span.
 
 If no `span` is provided it will default to `auto` which will make the column either fill the remaining space in the row (when used with a col number) or size evenly when used with other columns set to auto sizing.
 
-<ComponentExample story={ComponentStories.Span} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Span} meta={ComponentStories} />
 
 ### Responsive span
 
@@ -46,15 +43,15 @@ The `span` prop can take an object that takes five key/value pairs that correlat
 **Note:** If a `span` prop is provided an object but no value is given for `xs` it will default to `12`. This means that columns will be full width on screen sizes below the sizes you've specified.
 
 <ComponentExample
-  story={ComponentStories.ResponsiveSpan}
-  stories={ComponentStories}
+  of={ComponentStories.ResponsiveSpan}
+  meta={ComponentStories}
 />
 
 ### Offset
 
 The `offset` prop controls the amount of grid columns to offset.
 
-<ComponentExample story={ComponentStories.Offset} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Offset} meta={ComponentStories} />
 
 ### Responsive offset
 
@@ -63,15 +60,12 @@ When a `ResponsiveSizing` object is passed into the `offset` prop, the offset wi
 For example, if you specify an offset for `md`, it will apply to `lg`, `xl` and `xxl` as well. If you want to change the offset at a specific breakpoint, you can pass in an object with the breakpoint as the key and the offset as the value.
 
 <ComponentExample
-  story={ComponentStories.ResponsiveOffset}
-  stories={ComponentStories}
+  of={ComponentStories.ResponsiveOffset}
+  meta={ComponentStories}
 />
 
 ### Align self
 
 The `alignSelf` prop controls the vertical alignment of the column (use if column alignment needs to differ from other columns in the row).
 
-<ComponentExample
-  story={ComponentStories.AlignSelf}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.AlignSelf} meta={ComponentStories} />

@@ -1,9 +1,9 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
   ComponentApiExpander,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import { IressRow, IressCol } from '../../main';
 import * as ComponentStories from './RichSelect.stories';
 import * as BodyStories from './SelectBody/SelectBody.stories';
@@ -43,8 +43,8 @@ import subComponentMapping from './assets/ids-rich-select--sub-component-mapping
       <code>onBlur</code>, etc) .
     </p>
   }
-  story={ComponentStories.SingleSelect}
-  stories={ComponentStories}
+  of={ComponentStories.SingleSelect}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -74,13 +74,13 @@ There are two key differences:
 
 The `options` prop is required for `IressRichSelect`. You can provide an array of `LabelValueMeta[]` objects to the `options` prop.
 
-<ComponentExample story={ComponentStories.SingleSelect} />
+<ComponentExample of={ComponentStories.SingleSelect} />
 
 ### Multi-select
 
 Adding the `multiSelect` prop will allow the user to select multiple options.
 
-<ComponentExample story={ComponentStories.MultiSelect} />
+<ComponentExample of={ComponentStories.MultiSelect} />
 
 ### Asynchronous options
 
@@ -90,7 +90,7 @@ The user experience slightly changes as well. Instead of displaying the options 
 
 No filtering is done for asynchronous options, you must filter the options yourself using the query. However, the results are automatically highlighted based on the query when rendered in the UI.
 
-<ComponentExample story={ComponentStories.AsyncOptions} />
+<ComponentExample of={ComponentStories.AsyncOptions} />
 
 ### Minimum search length for async options
 
@@ -98,13 +98,13 @@ When using asynchronous options, you can set a minimum number of characters requ
 
 By default, async searches are triggered after 1 character. Setting a higher value (e.g., 3) means no search request will be made and no loading spinner will appear until the user types at least that many characters.
 
-<ComponentExample story={ComponentStories.AsyncOptionsMinSearchLength} />
+<ComponentExample of={ComponentStories.AsyncOptionsMinSearchLength} />
 
 ### Initial options
 
 If you are using asynchronous options, you can provide an initial set of options to display before the user has interacted with the select using the `initialOptions` prop.
 
-<ComponentExample story={ComponentStories.InitialOptions} />
+<ComponentExample of={ComponentStories.InitialOptions} />
 
 ### Long text content in select options
 
@@ -116,7 +116,7 @@ Setting `matchActivatorWidth={false}` allows the dropdown to expand to accommoda
 
 This example demonstrates both single-select and multi-select behavior with long text content, allowing you to toggle between the two width behaviors to see the difference.
 
-<ComponentExample story={ComponentStories.LongTextOptions} />
+<ComponentExample of={ComponentStories.LongTextOptions} />
 
 ### Sizing
 
@@ -124,7 +124,7 @@ Rich selects can be resized to suit a specific number of characters. This sets a
 
 Widths can also be set as a percentage, allowing the select to take up a proportion of the width of its container.
 
-<ComponentExample story={ComponentStories.Sizing} />
+<ComponentExample of={ComponentStories.Sizing} />
 
 ### Custom label
 
@@ -136,7 +136,7 @@ As per the example here, you can use this prop to render `IressSelectLabel` as a
 
 **Note:** As the label is expected to activate the dropdown, it is best to provide a button or other interactive element as the label. If the interactive element is nested, it should have the `role="combobox"` to indicate the intention that it will be activating the dropdown (as is the case of `IressSelectTags` which has multiple Buttons, but adds the combobox role to the chevron).
 
-<ComponentExample story={ComponentStories.CustomLabel} />
+<ComponentExample of={ComponentStories.CustomLabel} />
 
 ### Custom options
 
@@ -144,25 +144,25 @@ In some cases, you may need to customise the options that are displayed. You can
 
 It passes `SelectOptionRenderProps` as an argument, which contains the options and some other useful properties for customising the options.
 
-<ComponentExample story={ComponentStories.CustomOptions} />
+<ComponentExample of={ComponentStories.CustomOptions} />
 
 ### Create new option
 
 You can use the `renderOptions` prop to add additional functionality to the options list. This is useful for allowing users to create new options.
 
-<ComponentExample story={ComponentStories.CreateNewOption} />
+<ComponentExample of={ComponentStories.CreateNewOption} />
 
 ### Header and Footer
 
 Use the `header` `footer` prop to add a header/footer to the select panel. They can be any component you like, but you need to manage the styling on your own. If you want to keep the padding align with option items, try to wrap inside `<IressMenuText>` (it's essentially a div container, see the example below):
 
-<ComponentExample story={ComponentStories.HeaderFooter} />
+<ComponentExample of={ComponentStories.HeaderFooter} />
 
 ### Reactive footer
 
 You can also make the footer reactive to the search results by using the `renderOptionsFooter` prop. It expects a function that returns a ReactNode.
 
-<ComponentExample story={ComponentStories.OptionsFooter} />
+<ComponentExample of={ComponentStories.OptionsFooter} />
 
 ### Readonly
 
@@ -170,7 +170,7 @@ The `readonly` prop can be set to `true` to prevent the user from changing the v
 
 If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](?path=/docs/components-readonly--docs).
 
-<ComponentExample story={ComponentStories.Readonly} />
+<ComponentExample of={ComponentStories.Readonly} />
 
 ## Sub-components
 
@@ -199,7 +199,7 @@ A container for the options list. It accepts `header` and `footer` props, allowi
     heading: 'Props',
     headingId: 'select-body-props',
   }}
-  story={BodyStories.Body}
+  of={BodyStories.Body}
 />
 
 ### IressSelectCreate
@@ -211,7 +211,7 @@ A button designed to create an option if the desired option is not in the list. 
     heading: 'Props',
     headingId: 'select-create-props',
   }}
-  story={CreateStories.Create}
+  of={CreateStories.Create}
 />
 
 ### IressSelectHeading
@@ -223,7 +223,7 @@ A heading designed to allow clearing of a list. To show the clear all button, yo
     heading: 'Props',
     headingId: 'select-heading-props',
   }}
-  story={HeadingStories.Heading}
+  of={HeadingStories.Heading}
 />
 
 ### IressSelectLabel
@@ -234,13 +234,13 @@ It is used to render the activator of the `IressRichSelect` in single select mod
 
 <IressRow gutter="md">
   <IressCol>
-    <ComponentExample story={LabelStories.NoneSelected} />
+    <ComponentExample of={LabelStories.NoneSelected} />
   </IressCol>
   <IressCol>
-    <ComponentExample story={LabelStories.OneSelected} />
+    <ComponentExample of={LabelStories.OneSelected} />
   </IressCol>
   <IressCol>
-    <ComponentExample story={LabelStories.MultipleSelected} />
+    <ComponentExample of={LabelStories.MultipleSelected} />
   </IressCol>
 </IressRow>
 
@@ -248,7 +248,7 @@ It is used to render the activator of the `IressRichSelect` in single select mod
   className="iress-mt--n-lg"
   headingId="select-label-props"
   headingLevel={4}
-  story={LabelStories.NoneSelected}
+  of={LabelStories.NoneSelected}
 />
 
 ### IressSelectMenu
@@ -259,10 +259,10 @@ It is used to render the available options of the `IressRichSelect` in single se
 
 <IressRow gutter="md">
   <IressCol>
-    <ComponentExample story={MenuStories.Results} />
+    <ComponentExample of={MenuStories.Results} />
   </IressCol>
   <IressCol>
-    <ComponentExample story={MenuStories.NoResults} />
+    <ComponentExample of={MenuStories.NoResults} />
   </IressCol>
 </IressRow>
 
@@ -270,7 +270,7 @@ It is used to render the available options of the `IressRichSelect` in single se
   className="iress-mt--n-lg"
   headingId="select-menu-props"
   headingLevel={4}
-  story={MenuStories.Results}
+  of={MenuStories.Results}
 />
 
 ### IressSelectSearch
@@ -294,7 +294,7 @@ It is used to filter the available options of the `IressRichSelect` when an asyn
       </>
     ),
   }}
-  story={SearchStories.Search}
+  of={SearchStories.Search}
 />
 
 ### IressSelectSearchInput
@@ -308,7 +308,7 @@ It is used to filter the available options of the `IressRichSelect` when an asyn
     heading: 'Props',
     headingId: 'select-search-input-props',
   }}
-  story={SearchInputStories.SearchInput}
+  of={SearchInputStories.SearchInput}
 />
 
 ### IressSelectTags
@@ -319,10 +319,10 @@ It is used to render the activator of the `IressRichSelect` if `multiSelect` has
 
 <IressRow gutter="md">
   <IressCol>
-    <ComponentExample story={TagsStories.NoneSelected} />
+    <ComponentExample of={TagsStories.NoneSelected} />
   </IressCol>
   <IressCol>
-    <ComponentExample story={TagsStories.Selected} />
+    <ComponentExample of={TagsStories.Selected} />
   </IressCol>
 </IressRow>
 
@@ -330,14 +330,14 @@ It is used to render the activator of the `IressRichSelect` if `multiSelect` has
   className="iress-mt--n-lg"
   headingId="select-tags-props"
   headingLevel={4}
-  story={TagsStories.NoneSelected}
+  of={TagsStories.NoneSelected}
 />
 
 #### Maximum tag limit
 
 By default, the maximum number of tags that can be displayed is 5. If more than 5 tags are selected, the label will display the number of selected items. This can be changed using the `limit` prop.
 
-<ComponentExample story={TagsStories.LimitReached} />
+<ComponentExample of={TagsStories.LimitReached} />
 
 ## Testing
 

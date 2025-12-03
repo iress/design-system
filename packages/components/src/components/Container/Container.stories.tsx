@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { IressContainer } from '.';
 import { IressPanel } from '../Panel';
-import { CurrentBreakpoint } from '@iress-storybook/components';
+import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
 import { disableArgTypes } from '@iress-storybook/helpers';
 
 type Story = StoryObj<typeof IressContainer>;

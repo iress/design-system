@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './Select.stories';
 
 <Meta of={ComponentStories} />
@@ -11,8 +11,8 @@ import * as ComponentStories from './Select.stories';
 
 <ComponentOverview
   description="Selects allow users to interact with data and select from a predetermined list of options."
-  story={ComponentStories.Options}
-  stories={ComponentStories}
+  of={ComponentStories.Options}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -33,16 +33,13 @@ Individual options can be passed directly into `IressSelect` using the native `o
 
 **Note:** The `mapSelectOptions` helper function, originally used to map options to `<option>` elements, is now deprecated. Instead, you can use `array.map` to map the options to `<option>` elements.
 
-<ComponentExample story={ComponentStories.Options} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Options} meta={ComponentStories} />
 
 ### Option groups
 
 Just like the native `<select />` element, `IressSelect` supports option groups.
 
-<ComponentExample
-  story={ComponentStories.OptionGroups}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.OptionGroups} meta={ComponentStories} />
 
 ### Non-string values
 
@@ -51,26 +48,23 @@ If you would like to introduce options with non-string values, you can use the `
 **Note:** Since the `onChange` event of a select relies on strings, it will try to find a string representation of the value. If you are using non-string values, you will need to ensure the `toString` conversion is unique per option.
 
 <ComponentExample
-  story={ComponentStories.NonStringValues}
-  stories={ComponentStories}
+  of={ComponentStories.NonStringValues}
+  meta={ComponentStories}
 />
 
 ### Placeholder
 
 A default placeholder option can be set using the `placeholder` prop.
 
-<ComponentExample
-  story={ComponentStories.Placeholder}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Placeholder} meta={ComponentStories} />
 
 ### Selected option
 
 An option can be selected by using either the `defaultValue` prop for uncontrolled components, or the `value` prop for controlled components.
 
 <ComponentExample
-  story={ComponentStories.SelectedOption}
-  stories={ComponentStories}
+  of={ComponentStories.SelectedOption}
+  meta={ComponentStories}
 />
 
 ### Sizing
@@ -79,7 +73,7 @@ Selects can be resized to suit a specific number of characters. This sets an exp
 
 Widths can also be set as a percentage, allowing the input to take up a proportion of the width of its container.
 
-<ComponentExample story={ComponentStories.Sizing} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Sizing} meta={ComponentStories} />
 
 ### Readonly
 
@@ -87,7 +81,4 @@ Unlike the standard HTML `select` element, the `IressSelect` component can be se
 
 If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](?path=/docs/components-readonly--docs).
 
-<ComponentExample
-  story={ComponentStories.Readonly}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Readonly} meta={ComponentStories} />

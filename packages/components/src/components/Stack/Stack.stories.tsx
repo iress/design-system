@@ -4,7 +4,7 @@ import { IressPlaceholder } from '../Placeholder';
 import { IressPanel } from '../Panel';
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '.';
-import { CurrentBreakpoint } from '@iress-storybook/components';
+import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
 import { IressText } from '../Text';
 import { IressButton } from '../Button';
 import { GUTTER_SIZES } from '@/constants';

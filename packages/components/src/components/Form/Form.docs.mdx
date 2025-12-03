@@ -1,9 +1,9 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
   ComponentApiExpander,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import { dependencies } from '../../../package.json';
 import * as ComponentStories from './Form.stories.tsx';
 import * as FormRulesStories from './FormRules.stories.tsx';
@@ -48,8 +48,8 @@ import {
       .
     </p>
   }
-  story={ComponentStories.Simple}
-  stories={ComponentStories}
+  of={ComponentStories.Simple}
+  meta={ComponentStories}
 />
 
 ## Key concepts
@@ -137,14 +137,14 @@ It has three required props:
 
 Here are some examples of how to use `IressFormField` with different form controls. If you are using a form control that has multiple inputs inside (for example, `IressCheckboxGroup`), you can use `IressFormFieldset`, which changes the HTML structure to use a `fieldset` and `legend` element to group the inputs.
 
-<ComponentExample story={ComponentStories.Fields} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Fields} meta={ComponentStories} />
 
 <ComponentApiExpander
   heading="IressFormField props"
   headingId="form-field-props"
   headingLevel={4}
   readOnly
-  story={FormFieldStories.Default}
+  of={FormFieldStories.Default}
 />
 
 ### Rules
@@ -163,8 +163,8 @@ A boolean which, if `true`, indicates that the input must have a value before th
     headingId: 'adjust-required',
     include: ['element', 'field', 'rules', 'customRules'],
   }}
-  story={FormRulesStories.Required}
-  stories={FormRulesStories}
+  of={FormRulesStories.Required}
+  meta={FormRulesStories}
 />
 
 #### `maxLength`
@@ -182,8 +182,8 @@ The maximum character length of the value to accept for this input.
     headingId: 'adjust-max-length',
     include: ['element', 'field', 'rules', 'customRules'],
   }}
-  story={FormRulesStories.MaxLength}
-  stories={FormRulesStories}
+  of={FormRulesStories.MaxLength}
+  meta={FormRulesStories}
 />
 
 #### `minLength`
@@ -201,8 +201,8 @@ The minimum character length of the value to accept for this input.
     headingId: 'adjust-min-length',
     include: ['element', 'field', 'rules', 'customRules'],
   }}
-  story={FormRulesStories.MinLength}
-  stories={FormRulesStories}
+  of={FormRulesStories.MinLength}
+  meta={FormRulesStories}
 />
 
 #### `max`
@@ -219,8 +219,8 @@ The maximum number to accept for this input.
     headingId: 'adjust-max',
     include: ['element', 'field', 'rules', 'customRules'],
   }}
-  story={FormRulesStories.Max}
-  stories={FormRulesStories}
+  of={FormRulesStories.Max}
+  meta={FormRulesStories}
 />
 
 #### `min`
@@ -237,8 +237,8 @@ The minimum number to accept for this input.
     headingId: 'adjust-min',
     include: ['element', 'field', 'rules', 'customRules'],
   }}
-  story={FormRulesStories.Min}
-  stories={FormRulesStories}
+  of={FormRulesStories.Min}
+  meta={FormRulesStories}
 />
 
 #### `pattern`
@@ -255,8 +255,8 @@ The accepted regex pattern for the input.
     headingId: 'adjust-pattern',
     include: ['element', 'field', 'rules', 'customRules'],
   }}
-  story={FormRulesStories.Pattern}
-  stories={FormRulesStories}
+  of={FormRulesStories.Pattern}
+  meta={FormRulesStories}
 />
 
 #### `minDate`
@@ -265,7 +265,7 @@ The minimum date to accept for this input.
 
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
-<ComponentExample story={FormRulesStories.MinDate} stories={FormRulesStories} />
+<ComponentExample of={FormRulesStories.MinDate} meta={FormRulesStories} />
 
 #### `maxDate`
 
@@ -273,7 +273,7 @@ The maximum date to accept for this input.
 
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
-<ComponentExample story={FormRulesStories.MaxDate} stories={FormRulesStories} />
+<ComponentExample of={FormRulesStories.MaxDate} meta={FormRulesStories} />
 
 #### `email`
 
@@ -281,7 +281,7 @@ Ensures the input is a valid email address.
 
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
-<ComponentExample story={FormRulesStories.Email} stories={FormRulesStories} />
+<ComponentExample of={FormRulesStories.Email} meta={FormRulesStories} />
 
 #### `validate`
 
@@ -291,18 +291,15 @@ You can pass a callback function as the argument to validate, or you can pass an
 
 - for `object` or `array` input data, it's recommended to use the validate function for validation as the other rules mostly apply to `string`, `string[]`, `number` and `boolean` data types.
 
-<ComponentExample
-  story={FormRulesStories.Validate}
-  stories={FormRulesStories}
-/>
+<ComponentExample of={FormRulesStories.Validate} meta={FormRulesStories} />
 
 ### Handling submission
 
 When the form passes validation (if not disabled), the `onSubmit` event is emitted. Its event details contain a map of the field names and the data entered by the user.
 
 <ComponentExample
-  story={ComponentStories.HandlingSubmission}
-  stories={ComponentStories}
+  of={ComponentStories.HandlingSubmission}
+  meta={ComponentStories}
 />
 
 ### Read only
@@ -310,8 +307,8 @@ When the form passes validation (if not disabled), the `onSubmit` event is emitt
 You can pass the `readOnly` prop to remove the asterisk symbol (\*) even when the field is `required`, and that field will be exempted from validation.
 
 <ComponentExample
-  story={ComponentStories.ExcludeReadOnlyValidation}
-  stories={ComponentStories}
+  of={ComponentStories.ExcludeReadOnlyValidation}
+  meta={ComponentStories}
 />
 
 ## Behaviour
@@ -329,8 +326,8 @@ You can pass the `readOnly` prop to remove the asterisk symbol (\*) even when th
 If errors are present, they are displayed in a summary at the top of the page. This can be customised using the `errorSummaryHeading` prop.
 
 <ComponentExample
-  story={ComponentStories.ValidationSummary}
-  stories={ComponentStories}
+  of={ComponentStories.ValidationSummary}
+  meta={ComponentStories}
 />
 
 ### Hidden validation summary
@@ -338,8 +335,8 @@ If errors are present, they are displayed in a summary at the top of the page. T
 Use the `hiddenErrorSummary` prop to hide the summary altogether, and only show the errors on the fields. This is only recommended for short forms, for long forms it is recommended to keep the error summary shown for best accessibility.
 
 <ComponentExample
-  story={ComponentStories.HiddenErrorSummary}
-  stories={ComponentStories}
+  of={ComponentStories.HiddenErrorSummary}
+  meta={ComponentStories}
 />
 
 ### Custom error handling
@@ -349,18 +346,15 @@ The `onError` prop allows you to listen to any field errors. It takes two argume
 One use case for this prop is to create your own error summary.
 
 <ComponentExample
-  story={ComponentStories.CustomErrorHandling}
-  stories={ComponentStories}
+  of={ComponentStories.CustomErrorHandling}
+  meta={ComponentStories}
 />
 
 ### Pre-fill the form
 
 You can set the `defaultValues` prop to pre-fill the form values.
 
-<ComponentExample
-  story={ComponentStories.DefaultValues}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.DefaultValues} meta={ComponentStories} />
 
 ### `values`
 
@@ -373,7 +367,7 @@ Use cases where you may need the `values` prop:
 
 **Note:** `values` takes precedence over `defaultValues`. To ensure your form state is predictable, it is best to only use one prop to manage form values.
 
-<ComponentExample story={ComponentStories.Values} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Values} meta={ComponentStories} />
 
 ### Disable validation
 
@@ -385,8 +379,8 @@ Disabling validation is not possible with the `IressForm` component. In cases wh
 Here we have an example showcasing option one.
 
 <ComponentExample
-  story={ComponentStories.DisableValidation}
-  stories={ComponentStories}
+  of={ComponentStories.DisableValidation}
+  meta={ComponentStories}
 />
 
 ### Resetting the form
@@ -395,10 +389,7 @@ You can reset the form using the `ref` of the form. You must provide a `defaultV
 
 **Note:** `<button type="reset" />` does not work with `IressForm`. You need to add an `onClick` prop to the button and use the `ref.reset` method to reset the form.
 
-<ComponentExample
-  story={ComponentStories.ResetForm}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ResetForm} meta={ComponentStories} />
 
 ### Custom form field components
 
@@ -420,8 +411,8 @@ Key features demonstrated:
 - **File Management**: Display uploaded files with remove functionality using `IressPanel`
 
 <ComponentExample
-  story={ComponentStories.CustomFormFieldComponents}
-  stories={ComponentStories}
+  of={ComponentStories.CustomFormFieldComponents}
+  meta={ComponentStories}
 />
 
 ### Forms in expanders (lazy loading)
@@ -429,8 +420,8 @@ Key features demonstrated:
 If you are using forms in expanders, or in other scenarios when the loading of the form may be delayed, it is recommended to only load the form when it is required. This will improve performance of your application, and make it more predictable. It may also fix act warnings in tests if you are seeing some appearing due to conditionally loaded `IressForm` elements.
 
 <ComponentExample
-  story={ComponentStories.FormsInExpanders}
-  stories={ComponentStories}
+  of={ComponentStories.FormsInExpanders}
+  meta={ComponentStories}
 />
 
 ### Conditional fields (useWatch)
@@ -441,10 +432,7 @@ When you have fields that are conditionally shown, you can use the `IressForm.us
 
 - You can use the `api.watch` method on the `IressForm`'s ref to watch the value of a field, but it is recommended to use the hook for better performance by isolating re-rendering at the component level.
 
-<ComponentExample
-  story={ComponentStories.UseWatch}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.UseWatch} meta={ComponentStories} />
 
 ## `IressHookForm`
 
@@ -462,8 +450,8 @@ Some use cases:
     heading: 'Props',
     headingId: 'hook-form-api',
   }}
-  story={HookFormStories.HookForm}
-  stories={HookFormStories}
+  of={HookFormStories.HookForm}
+  meta={HookFormStories}
 />
 
 ## Migration to version 5

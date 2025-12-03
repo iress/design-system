@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import { IressAlert } from '../../main';
 import * as ComponentStories from './Navbar.stories';
 
@@ -18,8 +18,8 @@ import * as ComponentStories from './Navbar.stories';
       and an application heading.
     </>
   }
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -34,7 +34,7 @@ Navbars usually contain a company logo. You can add this directly to your `Iress
 
 All images should have alt text to provide context for screen reader users. If using the `logoSrc` prop, you should also set the `logoAltText` prop to ensure that your logo is accurately described.
 
-<ComponentExample story={ComponentStories.Logos} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Logos} meta={ComponentStories} />
 
 ### Fixed positioning
 
@@ -60,30 +60,27 @@ The `IressNavbar` allows you to set up some simple layouts via the horizontal al
 
 Vertical alignment is always set to middle, to ensure that content aligns correctly.
 
-<ComponentExample story={ComponentStories.Align} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Align} meta={ComponentStories} />
 
 ### Logo slot
 
 The `logo` slot, as the name suggests, is designed for logos. Use this is you want to supply your own image element or SVG. Content in the Logo slot will always appear at the start of your Navbar (to the left for left-to-right languages).
 
-<ComponentExample story={ComponentStories.Logos} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Logos} meta={ComponentStories} />
 
 ### Children and nav slots
 
 The default `children` slot is used for generic content like headings. You'll also pass in `children` content if you create a custom navbar.
 
-<ComponentExample
-  story={ComponentStories.Children}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Children} meta={ComponentStories} />
 
 The `nav` slot is for navigation content like links, and is designed to be used with the Menu component. Content in the `nav` slot will be rendered inside a `nav` element. Nav elements should be labelled to help screen reader users understand which navigation content they're interacting with. We add a default label of "primary navigation" to the `nav` element inside the `nav` slot, but you can override that with the `navLabel` prop.
 
-<ComponentExample story={ComponentStories.NavMenu} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.NavMenu} meta={ComponentStories} />
 
 <ComponentExample
-  story={ComponentStories.NavMenuAndChildren}
-  stories={ComponentStories}
+  of={ComponentStories.NavMenuAndChildren}
+  meta={ComponentStories}
 />
 
 ### Simple responsive Navbars
@@ -92,10 +89,7 @@ You can use the `breakpoint` prop to create simple responsive navbars. When set,
 
 If you need more control over your navbar's responsive behaviour, you can create a custom navbar.
 
-<ComponentExample
-  story={ComponentStories.Responsive}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Responsive} meta={ComponentStories} />
 
 ### Navbar with icons
 
@@ -105,7 +99,7 @@ To help users, you can add an `IressTooltip` around the `IressMenuItem`. This wi
 
 For more information about using tooltips, see the [Tooltip Documentation](?path=/docs/components-tooltip--docs).
 
-<ComponentExample story={ComponentStories.Icons} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Icons} meta={ComponentStories} />
 
 ### Fixed navbar focus handling
 

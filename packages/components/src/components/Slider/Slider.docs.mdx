@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './Slider.stories';
 
 <Meta of={ComponentStories} />
@@ -11,8 +11,8 @@ import * as ComponentStories from './Slider.stories';
 
 <ComponentOverview
   description="Sliders provide a visual indication of adjustable content, where the user can select a value from a range usually represented on a horizontal track."
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -21,10 +21,7 @@ import * as ComponentStories from './Slider.stories';
 
 You can set the initial value of the slider using the `defaultValue` prop. If you would like to use a controlled slider, use the `value` prop and sync it with your state using `onChange`.
 
-<ComponentExample
-  story={ComponentStories.DefaultValue}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.DefaultValue} meta={ComponentStories} />
 
 ### Min, max and step
 
@@ -34,10 +31,7 @@ For instance, if you set `min` to 10 and `max` to 100 the user is able to select
 
 By setting the `step` property to 10, for example, the user will only be able to select numbers in increments of ten i.e. 10, 20, 30, 40, 50, 60, 70, 80, 90, 100; as shown in the below example.
 
-<ComponentExample
-  story={ComponentStories.MinMaxAndStep}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.MinMaxAndStep} meta={ComponentStories} />
 
 ### Ticks and labels
 
@@ -50,8 +44,8 @@ If you provide an array of `TickLabel` objects, the value tooltip (the one that 
 The `tickLabels` prop can also be set to true, in which case they will automatically be inferred from `min`, `max` and `step`.
 
 <ComponentExample
-  story={ComponentStories.TicksAndLabels}
-  stories={ComponentStories}
+  of={ComponentStories.TicksAndLabels}
+  meta={ComponentStories}
 />
 
 ### Flexible ticks and labels
@@ -61,8 +55,8 @@ As of version 5, `min`, `max` and `step` is no longer automatically inferred fro
 You can also use the `formatValue` prop to provide a formatted node to replace the value tooltip.
 
 <ComponentExample
-  story={ComponentStories.FlexibleTicksAndLabels}
-  stories={ComponentStories}
+  of={ComponentStories.FlexibleTicksAndLabels}
+  meta={ComponentStories}
 />
 
 ### Hidden labels
@@ -79,10 +73,7 @@ When a label is set to hide on a certain breakpoint, it will be hidden on the sc
 - The labels will always be available to screen readers to ensure best accessibility, as screen readers are not confined by screen space.
 - The `ticksAndLabels` prop will still be used to match the `value` of the slider, even if its been set to be hidden on the user's screen.
 
-<ComponentExample
-  story={ComponentStories.HiddenLabels}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.HiddenLabels} meta={ComponentStories} />
 
 ### Readonly
 
@@ -90,7 +81,4 @@ Sliders can be set to read only by using the `readonly` property. When set to re
 
 If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](?path=/docs/components-readonly--docs).
 
-<ComponentExample
-  story={ComponentStories.Readonly}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Readonly} meta={ComponentStories} />

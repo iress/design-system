@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import { IressRow, IressCol, IressAlert } from '@/main';
 import * as Stories from './Loading.stories';
 import * as SuspenseStories from './LoadingSuspense.stories';
@@ -30,8 +30,8 @@ import loadingTimeMatrix from './assets/ux-collective-loading-time-matrix.webp';
     },
   }}
   description="The loading pattern is used to indicate that content is being loaded or processed consistently across Iress products. It can be used in various scenarios, such as loading entire applications, pages, components or server-side validation."
-  story={Stories.Wizard}
-  stories={Stories}
+  of={Stories.Wizard}
+  meta={Stories}
 />
 
 ## Usage
@@ -123,8 +123,8 @@ The skeleton representing the component should be as simple as possible, it does
   canvasProps={{
     refresh: true,
   }}
-  story={ComponentStories.Component}
-  stories={ComponentStories}
+  of={ComponentStories.Component}
+  meta={ComponentStories}
 />
 
 ### `default`
@@ -146,8 +146,8 @@ This pattern is used when the user is navigating between different pages or sect
   canvasProps={{
     refresh: true,
   }}
-  story={DefaultStories.Default}
-  stories={DefaultStories}
+  of={DefaultStories.Default}
+  meta={DefaultStories}
 />
 
 ### `long`
@@ -180,8 +180,8 @@ Once the `loaded` prop is set to true, the progress bar will always be set to 10
   canvasProps={{
     refresh: true,
   }}
-  story={LongStories.Long}
-  stories={LongStories}
+  of={LongStories.Long}
+  meta={LongStories}
 />
 
 ### `page`
@@ -215,8 +215,8 @@ In some cases it may be useful to show critical content while the rest of the pa
   canvasProps={{
     refresh: true,
   }}
-  story={PageStories.Page}
-  stories={PageStories}
+  of={PageStories.Page}
+  meta={PageStories}
 />
 
 ### `start-up`
@@ -255,8 +255,8 @@ To compensate for this, you can pass multiple messages to the pattern using the 
       height: '600px',
     },
   }}
-  story={StartUpStories.StartUp}
-  stories={StartUpStories}
+  of={StartUpStories.StartUp}
+  meta={StartUpStories}
 />
 
 ### `validate`
@@ -284,8 +284,8 @@ Forms come in all shapes and sizes, and the `IressLoading` component is designed
   canvasProps={{
     refresh: true,
   }}
-  story={ValidateStories.Validate}
-  stories={ValidateStories}
+  of={ValidateStories.Validate}
+  meta={ValidateStories}
 />
 
 ## Suspense
@@ -305,23 +305,23 @@ The wizard example can be translated to use `IressLoadingSuspense` as follows (i
   <IressCol span={6}>
     <ComponentExample
       refresh
-      story={SuspenseStories.Suspense}
+      of={SuspenseStories.Suspense}
       storyProps={{
         inline: false,
         height: '600px',
       }}
-      stories={SuspenseStories}
+      meta={SuspenseStories}
     />
   </IressCol>
   <IressCol span={6}>
     <ComponentExample
       refresh
-      story={SuspenseStories.FastSuspense}
+      of={SuspenseStories.FastSuspense}
       storyProps={{
         inline: false,
         height: '600px',
       }}
-      stories={SuspenseStories}
+      meta={SuspenseStories}
     />
   </IressCol>
 </IressRow>
@@ -386,23 +386,23 @@ Here you can see how a wizard can use the `IressLoading` component at different 
   <IressCol span={6}>
     <ComponentExample
       refresh
-      story={Stories.Wizard}
+      of={Stories.Wizard}
       storyProps={{
         inline: false,
         height: '600px',
       }}
-      stories={Stories}
+      meta={Stories}
     />
   </IressCol>
   <IressCol span={6}>
     <ComponentExample
       refresh
-      story={Stories.FastWizard}
+      of={Stories.FastWizard}
       storyProps={{
         inline: false,
         height: '600px',
       }}
-      stories={Stories}
+      meta={Stories}
     />
   </IressCol>
 </IressRow>

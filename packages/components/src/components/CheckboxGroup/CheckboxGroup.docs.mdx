@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './CheckboxGroup.stories';
 
 <Meta of={ComponentStories} />
@@ -11,8 +11,8 @@ import * as ComponentStories from './CheckboxGroup.stories';
 
 <ComponentOverview
   description="Checkbox groups allow users to make more than one choice in a set of related options."
-  story={ComponentStories.CheckboxChildren}
-  stories={ComponentStories}
+  of={ComponentStories.CheckboxChildren}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -24,8 +24,8 @@ Individual checkboxes can be passed directly into `IressCheckboxGroup`.
 **Note:** The `mapCheckboxGroupOptions` helper function, originally used to map options to `IressCheckbox` components, is now deprecated. Instead, you can use `array.map` to map the options to `IressCheckbox` components.
 
 <ComponentExample
-  story={ComponentStories.CheckboxChildren}
-  stories={ComponentStories}
+  of={ComponentStories.CheckboxChildren}
+  meta={ComponentStories}
 />
 
 ### Default checked
@@ -35,8 +35,8 @@ The default checked state of the checkbox children should always be set using th
 The `defaultValue` prop can contain an array of strings, numbers or booleans.
 
 <ComponentExample
-  story={ComponentStories.DefaultChecked}
-  stories={ComponentStories}
+  of={ComponentStories.DefaultChecked}
+  meta={ComponentStories}
 />
 
 ### Changing the checked state
@@ -45,10 +45,7 @@ The `value` prop can be updated if you need to change the checked state without 
 
 For example, if you want to clear down the selected options:
 
-<ComponentExample
-  story={ComponentStories.Controlled}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Controlled} meta={ComponentStories} />
 
 ### Layout
 
@@ -58,7 +55,7 @@ The `layout` prop controls how the checkbox group is displayed and can have thre
 - **Block:** Same as Stack, but labels take up the full width of the container.
 - **Inline:** Checkboxes are laid out horizontally. Labels are only as wide as their text.
 
-<ComponentExample story={ComponentStories.Layout} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Layout} meta={ComponentStories} />
 
 ### Hidden checkboxes
 
@@ -67,8 +64,8 @@ You can use the `hiddenCheckbox` prop to create custom checkboxes. When enabled,
 When `hiddenCheckbox` is enabled, the label will have no padding. Padding can be added by using an `IressPanel`.
 
 <ComponentExample
-  story={ComponentStories.HiddenCheckboxes}
-  stories={ComponentStories}
+  of={ComponentStories.HiddenCheckboxes}
+  meta={ComponentStories}
 />
 
 ### Laying out custom checkboxes
@@ -78,8 +75,8 @@ The checkbox group's `layout` prop gives you some default options to help contro
 The example below uses CSS grid to give us evenly spaced / sized checkboxes, which will wrap on to new lines as the screen size reduces. The grid wrapper element is a div that wraps around the `<IressCheckbox>` elements, as shown by the dashed border. Use the grab handle in the bottom right-hand corner of the grid wrapper to see how the controls change size to respond to the container's width.
 
 <ComponentExample
-  story={ComponentStories.CustomCheckboxGroupLayout}
-  stories={ComponentStories}
+  of={ComponentStories.CustomCheckboxGroupLayout}
+  meta={ComponentStories}
 />
 
 ### Readonly
@@ -88,13 +85,10 @@ The `readonly` prop changes how the checkbox group is rendered. It will only ren
 
 It is understandable that this may not be the desired behavior for all use cases. If you need a checkbox group that is not editable, but still visible, simply do not set the `readonly` prop and set the `value` prop instead.
 
-<ComponentExample
-  story={ComponentStories.Readonly}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Readonly} meta={ComponentStories} />
 
 ### Touch
 
 The `touch` prop adds the button-like border and padding to checkbox.
 
-<ComponentExample story={ComponentStories.Touch} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Touch} meta={ComponentStories} />

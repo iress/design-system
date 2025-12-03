@@ -13,7 +13,7 @@ import { IressIcon } from '../Icon';
 import { IressPopover } from '../Popover';
 import { IressButton } from '../Button';
 import { IressPanel } from '../Panel';
-import { CurrentBreakpoint } from '@iress-storybook/components';
+import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
 import { IressStack } from '../Stack';
 
 type Story = StoryObj<typeof IressAutocomplete>;

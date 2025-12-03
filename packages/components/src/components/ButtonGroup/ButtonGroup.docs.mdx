@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './ButtonGroup.stories';
 
 <Meta of={ComponentStories} />
@@ -11,8 +11,8 @@ import * as ComponentStories from './ButtonGroup.stories';
 
 <ComponentOverview
   description="A description that describes the purpose of this component"
-  story={ComponentStories.ButtonChildren}
-  stories={ComponentStories}
+  of={ComponentStories.ButtonChildren}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -29,8 +29,8 @@ You can use the `onChange` prop to watch when a button is clicked.
 - The `mode` prop on `IressButton` is not supported when used inside an `IressButtonGroup`.
 
 <ComponentExample
-  story={ComponentStories.ButtonChildren}
-  stories={ComponentStories}
+  of={ComponentStories.ButtonChildren}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -41,19 +41,13 @@ By passing the buttons as children you have more control over the display of the
 
 **Note:** In this case, please set the `value` prop on the `IressButton` component to ensure the correct value is used when the button is clicked.
 
-<ComponentExample
-  story={ComponentStories.RichButtons}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.RichButtons} meta={ComponentStories} />
 
 ### Multi-select
 
 By default, only one button in the group can be selected at a time. By setting the `multiple` prop, multiple buttons can be selected.
 
-<ComponentExample
-  story={ComponentStories.MultiSelect}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.MultiSelect} meta={ComponentStories} />
 
 ### Pre-selecting buttons
 
@@ -64,12 +58,12 @@ If the button group is in its default single select mode, these props expects a 
 In multi-select mode, these props expects an array of matching strings.
 
 <ComponentExample
-  story={ComponentStories.SelectedSingle}
-  stories={ComponentStories}
+  of={ComponentStories.SelectedSingle}
+  meta={ComponentStories}
 />
 <ComponentExample
-  story={ComponentStories.SelectedMultiple}
-  stories={ComponentStories}
+  of={ComponentStories.SelectedMultiple}
+  meta={ComponentStories}
 />
 
 ### `onChange` event
@@ -77,8 +71,8 @@ In multi-select mode, these props expects an array of matching strings.
 The Button Group emits an event when any of the selected buttons change. The event detail (`ButtonGroupChange`) consist of a string or an array of strings (depending on if it's in single or multi select mode) that represents the selected button(s).
 
 <ComponentExample
-  story={ComponentStories.OnChange}
-  stories={ComponentStories}
+  of={ComponentStories.OnChange}
+  meta={ComponentStories}
   source={{ type: 'code' }}
 />
 
@@ -86,17 +80,14 @@ The Button Group emits an event when any of the selected buttons change. The eve
 
 If you would like to visually hide the label, you can use the `hiddenLabel` prop.
 
-<ComponentExample
-  story={ComponentStories.HiddenLabel}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.HiddenLabel} meta={ComponentStories} />
 
 ### Headings as labels
 
 For semantic reasons, you may need the label to be rendered as a heading. In this case, you can pass the element directly to the `label` prop. The component will automatically add the `id` required to connect the button group to its label.
 
 <ComponentExample
-  story={ComponentStories.HeadingLabel}
-  stories={ComponentStories}
+  of={ComponentStories.HeadingLabel}
+  meta={ComponentStories}
   source={{ type: 'code' }}
 />

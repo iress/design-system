@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './Divider.stories';
 
 <Meta of={ComponentStories} />
@@ -11,8 +11,8 @@ import * as ComponentStories from './Divider.stories';
 
 <ComponentOverview
   description="A divider is a UI element that separates content in lists and layouts."
-  story={ComponentStories.Horizontal}
-  stories={ComponentStories}
+  of={ComponentStories.Horizontal}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -21,13 +21,10 @@ import * as ComponentStories from './Divider.stories';
 
 Use the `vertical` prop to change the divider from horizontal to vertical.
 
-<ComponentExample
-  story={ComponentStories.Vertical}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Vertical} meta={ComponentStories} />
 
 ### Gutter
 
 You can customise the gutter by using the `gutter` prop. By default, the divider uses the theme's default spacing as the gutter.
 
-<ComponentExample story={ComponentStories.Gutter} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Gutter} meta={ComponentStories} />

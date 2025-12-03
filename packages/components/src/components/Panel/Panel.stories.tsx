@@ -10,7 +10,7 @@ import {
   PADDING_SIZES,
   TEXT_ALIGNS,
 } from '@/main';
-import { CurrentBreakpoint } from '@iress-storybook/components';
+import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
 import { PANEL_BACKGROUNDS } from './Panel.types';
 
 type PanelCustomArgs = React.ComponentProps<typeof IressPanel> & {

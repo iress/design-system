@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import { IressAlert } from '../../main';
 import * as ComponentStories from './Button.stories';
 import * as CloseButtonStories from './CloseButton/CloseButton.stories';
@@ -13,8 +13,8 @@ import * as CloseButtonStories from './CloseButton/CloseButton.stories';
 
 <ComponentOverview
   description="A button is a clickable item used to perform an action."
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -33,7 +33,7 @@ The `mode` prop controls the visual appearance and priority of the button.
 
 **Note:** Avoid setting `mode` to `link` when the only child of the button is an icon, as icons inside link buttons do not have an underline, and will have no visual indication that they are clickable.
 
-<ComponentExample story={ComponentStories.Mode} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Mode} meta={ComponentStories} />
 
 ### Types
 
@@ -41,7 +41,7 @@ The `type` property controls the behaviour of the button. It defaults to `button
 
 **Please note:** this differs from a standard HTML button element, where the `type` defaults to submit.
 
-<ComponentExample story={ComponentStories.Types} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Types} meta={ComponentStories} />
 
 ### Loading
 
@@ -51,7 +51,7 @@ The loading state can be activated by setting the `loading` prop to `true` and p
 
 When the loading state is activated, any click events on the button are disabled.
 
-<ComponentExample story={ComponentStories.Loading} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Loading} meta={ComponentStories} />
 
 ### Buttons as links
 
@@ -64,8 +64,8 @@ You can also use the link specific props `target` and `rel`.
 If you need to use custom routing, take a look at the custom route slot documentation below.
 
 <ComponentExample
-  story={ComponentStories.ButtonsAsLinks}
-  stories={ComponentStories}
+  of={ComponentStories.ButtonsAsLinks}
+  meta={ComponentStories}
 />
 
 ### Delete confirmation
@@ -84,8 +84,8 @@ The confirmation step should be a modal with a simple message, as with the examp
 If you're using a heading, ensure that it has an appropriate heading level to match the document structure. You should use a danger variant of the `IressText` element, with the element prop set to the appropriate heading level.
 
 <ComponentExample
-  story={ComponentStories.DeleteConfirmation}
-  stories={ComponentStories}
+  of={ComponentStories.DeleteConfirmation}
+  meta={ComponentStories}
 />
 
 ### Fluid
@@ -94,7 +94,7 @@ If the `fluid` prop is set to true, the button will expand to be 100% of the wid
 
 The `fluid` prop can also be set to a breakpoint size, which means the button will be fluid up until its breakpoint is passed.
 
-<ComponentExample story={ComponentStories.Fluid} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Fluid} meta={ComponentStories} />
 
 ### Wrapping text
 
@@ -102,10 +102,7 @@ Button text will wrap on to a new line if there's not enough space for the text 
 
 If your button contains a lot of text, the text may wrap on to more than one line. You can manage this on a case by case basis by setting a minimum width on your button via CSS if you need to.
 
-<ComponentExample
-  story={ComponentStories.WrappingText}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.WrappingText} meta={ComponentStories} />
 
 ### Slot props
 
@@ -116,7 +113,7 @@ Use the slots to correctly position icons or badges inside buttons.
 
 The iconOnly slot from previous versions of IDS has been deprecated. Please use the default slot instead.
 
-<ComponentExample story={ComponentStories.Slots} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Slots} meta={ComponentStories} />
 
 ### Other attributes
 
@@ -126,7 +123,7 @@ This allows you to add your own aria attributes, or data attributes for analytic
 
 **Note:** The `attrs` prop has been deprecated, and will be removed in a future version. Please pass the attributes directly to the component instead.
 
-<ComponentExample story={ComponentStories.Attrs} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Attrs} meta={ComponentStories} />
 
 ### Download button
 
@@ -135,8 +132,8 @@ Whilst `IressButton` does not have a `download` property, it can be configured q
 Please see the example below. The use of an icon is optional.
 
 <ComponentExample
-  story={ComponentStories.DownloadButton}
-  stories={ComponentStories}
+  of={ComponentStories.DownloadButton}
+  meta={ComponentStories}
 />
 
 ## `IressCloseButton`
@@ -150,6 +147,6 @@ It has one additional prop, `screenReaderText`, which is used to provide a scree
     heading: 'Props',
     headingId: 'close-button-api',
   }}
-  story={CloseButtonStories.CloseButton}
-  stories={CloseButtonStories}
+  of={CloseButtonStories.CloseButton}
+  meta={CloseButtonStories}
 />
