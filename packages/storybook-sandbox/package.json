@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-storybook-sandbox",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A Storybook addon that provides a sandbox environment for testing and experimenting with components.",
   "keywords": [
     "storybook-addons"
@@ -11,16 +11,17 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.js"
     },
     "./preview": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/preview.js",
-      "require": "./dist/preview.cjs"
+      "types": "./dist/preview.d.ts",
+      "import": "./dist/preview.js"
     },
     "./manager": "./dist/manager.js",
-    "./preset": "./dist/preset.cjs",
+    "./preset": {
+      "types": "./dist/preset.d.ts",
+      "import": "./dist/preset.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [

@@ -1,15 +1,35 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { withOKTA } from './withOKTA';
-import { type StoryContext } from 'storybook/internal/types';
-import { type ReactRenderer } from '@storybook/react';
-import { type AddonConfig } from '../types';
+import type { StoryContext } from 'storybook/internal/types';
+import type { ReactRenderer } from '@storybook/react';
+import type { AddonConfig } from '../types';
 import { getOkta, registerOkta } from '../helpers/oktaRegister';
 import { isProtectedFromContext } from '../helpers/isProtected';
 import { getAddonConfigForPreview } from '../hooks/useAddonConfig';
-import { type OktaAuth } from '@okta/okta-auth-js';
+import type { OktaAuth } from '@okta/okta-auth-js';
 
 // Mock dependencies
+vi.mock('@okta/okta-auth-js', () => {
+  // Create a constructor function
+  function MockOktaAuth() {
+    return {
+      authStateManager: {
+        subscribe: vi.fn(),
+        unsubscribe: vi.fn(),
+      },
+      start: vi.fn().mockResolvedValue(undefined),
+      setOriginalUri: vi.fn(),
+      signInWithRedirect: vi.fn().mockResolvedValue(undefined),
+    };
+  }
+
+  return {
+    OktaAuth: MockOktaAuth,
+    default: MockOktaAuth,
+  };
+});
+
 vi.mock('../helpers/oktaRegister', () => ({
   getOkta: vi.fn(),
   registerOkta: vi.fn(),
@@ -76,9 +96,9 @@ describe('withOKTA', () => {
       subscribe: vi.fn(),
       unsubscribe: vi.fn(),
     },
-    start: vi.fn(),
+    start: vi.fn().mockResolvedValue(undefined),
     setOriginalUri: vi.fn(),
-    signInWithRedirect: vi.fn(),
+    signInWithRedirect: vi.fn().mockResolvedValue(undefined),
   } as unknown as OktaAuth;
 
   beforeEach(() => {
@@ -376,13 +396,15 @@ describe('withOKTA', () => {
     expect(mockAuthClient.authStateManager.unsubscribe).toHaveBeenCalled();
   });
 
-  it('uses getOkta when auth client exists', () => {
+  it('uses getOkta when auth client exists', async () => {
     (getOkta as ReturnType<typeof vi.fn>).mockReturnValue(mockAuthClient);
     (registerOkta as ReturnType<typeof vi.fn>).mockReturnValue(undefined);
 
     render(withOKTA(mockStoryFn, mockContext) as React.ReactElement);
 
-    expect(getOkta).toHaveBeenCalledWith(mockConfig);
+    await waitFor(() => {
+      expect(getOkta).toHaveBeenCalledWith(mockConfig);
+    });
     expect(registerOkta).not.toHaveBeenCalled();
   });
 
@@ -408,13 +430,15 @@ describe('withOKTA', () => {
     expect(mockStoryFn).toHaveBeenCalledWith(mockContext);
   });
 
-  it('passes environment configuration to Okta helpers', () => {
+  it('passes environment configuration to Okta helpers', async () => {
     // Mock the getOkta to return undefined so registerOkta is called
     vi.mocked(getOkta).mockReturnValue(undefined);
 
     render(withOKTA(mockStoryFn, mockContext) as React.ReactElement);
 
-    expect(getOkta).toHaveBeenCalledWith(mockConfig);
+    await waitFor(() => {
+      expect(getOkta).toHaveBeenCalledWith(mockConfig);
+    });
     expect(registerOkta).toHaveBeenCalledWith(mockConfig);
   });
 });

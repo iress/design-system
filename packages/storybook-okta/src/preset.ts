@@ -1,5 +1,5 @@
 import type { Options } from 'storybook/internal/types';
-import type { UserConfig } from 'vite';
+import { mergeConfig, type UserConfig } from 'vite';
 import { ADDON_ID } from './constants';
 import type { AddonConfig } from './types';
 
@@ -35,11 +35,13 @@ export const viteFinal = (
 ) => {
   const addonConfig = options[ADDON_ID];
 
-  return {
-    ...config,
+  return mergeConfig(config, {
     define: {
       ...config.define,
       [`process.env.${ADDON_ID}`]: JSON.stringify(addonConfig),
     },
-  };
+    optimizeDeps: {
+      include: ['tiny-emitter', 'p-cancelable', 'cross-fetch'],
+    },
+  });
 };

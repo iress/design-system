@@ -1,4 +1,4 @@
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, act, waitFor } from '@testing-library/react';
 import { addons } from 'storybook/manager-api';
 import {
   useAddonConfigForManager,
@@ -10,6 +10,26 @@ import type { AddonConfig } from '../types';
 import { type OktaAuth } from '@okta/okta-auth-js';
 
 // Mock dependencies
+vi.mock('@okta/okta-auth-js', () => {
+  // Create a constructor function
+  function MockOktaAuth() {
+    return {
+      authStateManager: {
+        subscribe: vi.fn(),
+        unsubscribe: vi.fn(),
+      },
+      start: vi.fn().mockResolvedValue(undefined),
+      setOriginalUri: vi.fn(),
+      signInWithRedirect: vi.fn().mockResolvedValue(undefined),
+    };
+  }
+
+  return {
+    OktaAuth: MockOktaAuth,
+    default: MockOktaAuth,
+  };
+});
+
 vi.mock('storybook/manager-api', () => ({
   addons: {
     getChannel: vi.fn(),
@@ -117,7 +137,7 @@ describe('useAddonConfig', () => {
       expect(result.current).toEqual(mockAddonConfig);
     });
 
-    it('calls registerOkta when options are received', () => {
+    it('calls registerOkta when options are received', async () => {
       let channelCallback: (options: AddonConfig) => void = () => {};
 
       mockChannel.on.mockImplementation(
@@ -134,7 +154,9 @@ describe('useAddonConfig', () => {
         channelCallback(mockAddonConfig);
       });
 
-      expect(registerOkta).toHaveBeenCalledWith(mockAddonConfig);
+      await waitFor(() => {
+        expect(registerOkta).toHaveBeenCalledWith(mockAddonConfig);
+      });
     });
 
     it('does not call registerOkta when options are null/undefined', () => {
@@ -168,7 +190,7 @@ describe('useAddonConfig', () => {
       expect(registerOkta).not.toHaveBeenCalled();
     });
 
-    it('handles multiple option updates correctly', () => {
+    it('handles multiple option updates correctly', async () => {
       let channelCallback: (options: AddonConfig) => void = () => {};
 
       mockChannel.on.mockImplementation(
@@ -189,18 +211,22 @@ describe('useAddonConfig', () => {
       });
 
       expect(result.current).toEqual(firstConfig);
-      expect(registerOkta).toHaveBeenCalledWith(firstConfig);
+      await waitFor(() => {
+        expect(registerOkta).toHaveBeenCalledWith(firstConfig);
+      });
 
       act(() => {
         channelCallback(secondConfig);
       });
 
       expect(result.current).toEqual(secondConfig);
-      expect(registerOkta).toHaveBeenCalledWith(secondConfig);
-      expect(registerOkta).toHaveBeenCalledTimes(2);
+      await waitFor(() => {
+        expect(registerOkta).toHaveBeenCalledWith(secondConfig);
+        expect(registerOkta).toHaveBeenCalledTimes(2);
+      });
     });
 
-    it('handles config with disable flag', () => {
+    it('handles config with disable flag', async () => {
       let channelCallback: (options: AddonConfig) => void = () => {};
 
       mockChannel.on.mockImplementation(
@@ -220,10 +246,12 @@ describe('useAddonConfig', () => {
       });
 
       expect(result.current).toEqual(disabledConfig);
-      expect(registerOkta).toHaveBeenCalledWith(disabledConfig);
+      await waitFor(() => {
+        expect(registerOkta).toHaveBeenCalledWith(disabledConfig);
+      });
     });
 
-    it('handles config with unprotected routes', () => {
+    it('handles config with unprotected routes', async () => {
       let channelCallback: (options: AddonConfig) => void = () => {};
 
       mockChannel.on.mockImplementation(
@@ -246,10 +274,12 @@ describe('useAddonConfig', () => {
       });
 
       expect(result.current).toEqual(configWithUnprotected);
-      expect(registerOkta).toHaveBeenCalledWith(configWithUnprotected);
+      await waitFor(() => {
+        expect(registerOkta).toHaveBeenCalledWith(configWithUnprotected);
+      });
     });
 
-    it('preserves all OktaAuthOptions properties', () => {
+    it('preserves all OktaAuthOptions properties', async () => {
       let channelCallback: (options: AddonConfig) => void = () => {};
 
       mockChannel.on.mockImplementation(
@@ -280,7 +310,9 @@ describe('useAddonConfig', () => {
       });
 
       expect(result.current).toEqual(fullConfig);
-      expect(registerOkta).toHaveBeenCalledWith(fullConfig);
+      await waitFor(() => {
+        expect(registerOkta).toHaveBeenCalledWith(fullConfig);
+      });
     });
   });
 
@@ -371,7 +403,7 @@ describe('useAddonConfig', () => {
       expect(result.current).toEqual(previewConfig);
     });
 
-    it('channel updates override preview config', () => {
+    it('channel updates override preview config', async () => {
       const previewConfig: AddonConfig = {
         issuer: 'https://preview.okta.com',
         clientId: 'preview-client',
@@ -403,7 +435,9 @@ describe('useAddonConfig', () => {
       });
 
       expect(result.current).toEqual(mockAddonConfig);
-      expect(registerOkta).toHaveBeenCalledWith(mockAddonConfig);
+      await waitFor(() => {
+        expect(registerOkta).toHaveBeenCalledWith(mockAddonConfig);
+      });
     });
   });
 });

@@ -1,3 +1,5 @@
+import { mergeConfig, type InlineConfig } from 'vite';
+
 export const managerHead = (head: string) => {
   return `
     ${head}
@@ -41,3 +43,15 @@ export const managerHead = (head: string) => {
 };
 
 export const previewHead = managerHead;
+
+export const viteFinal = (config: InlineConfig) =>
+  mergeConfig(config, {
+    optimizeDeps: {
+      include: [
+        '@jridgewell/resolve-uri',
+        '@jridgewell/trace-mapping',
+        'ts-interface-checker',
+        'lines-and-columns',
+      ],
+    },
+  });

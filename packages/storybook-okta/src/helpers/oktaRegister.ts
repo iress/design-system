@@ -1,5 +1,5 @@
 import OktaAuth from '@okta/okta-auth-js';
-import { type AddonConfig } from '../types';
+import type { AddonConfig } from '../types';
 import { validateOktaConfig } from '../validation';
 
 const oktas = new Map<string, OktaAuth>();

@@ -1,4 +1,4 @@
-import { type AddonConfig } from './types';
+import type { AddonConfig } from './types';
 
 const DANGEROUS_PROTOCOLS = ['java' + 'script:', 'data:', 'vbscript:'];
 

@@ -1,4 +1,4 @@
-import { type OktaAuthOptions } from '@okta/okta-auth-js';
+import type { OktaAuthOptions } from '@okta/okta-auth-js';
 
 export interface AddonConfig extends OktaAuthOptions {
   /**

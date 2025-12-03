@@ -2,12 +2,39 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { type API, useAddonState } from 'storybook/manager-api';
 import { OktaGuard } from './OktaGuard';
-import { type AddonConfig } from '../types';
+import type { AddonConfig } from '../types';
 import { getOkta } from '../helpers/oktaRegister';
 import { useAddonConfigForManager } from '../hooks/useAddonConfig';
-import { type OktaAuth } from '@okta/okta-auth-js';
+import type { OktaAuth } from '@okta/okta-auth-js';
 
 // Mock the oktaRegister helper
+vi.mock('@okta/okta-auth-js', () => {
+  // Create a constructor function
+  function MockOktaAuth() {
+    return {
+      token: {
+        isLoginRedirect: vi.fn(),
+        parseFromUrl: vi.fn().mockResolvedValue({ tokens: {} }),
+      },
+      tokenManager: {
+        setTokens: vi.fn(),
+      },
+      authStateManager: {
+        subscribe: vi.fn(),
+        unsubscribe: vi.fn(),
+      },
+      start: vi.fn().mockResolvedValue(undefined),
+      setOriginalUri: vi.fn(),
+      signInWithRedirect: vi.fn().mockResolvedValue(undefined),
+    };
+  }
+
+  return {
+    OktaAuth: MockOktaAuth,
+    default: MockOktaAuth,
+  };
+});
+
 vi.mock('../helpers/oktaRegister', () => ({
   getOkta: vi.fn(),
 }));
@@ -73,7 +100,7 @@ describe('OktaGuard', () => {
   const mockAuthClient = {
     token: {
       isLoginRedirect: vi.fn(),
-      parseFromUrl: vi.fn(),
+      parseFromUrl: vi.fn().mockResolvedValue({ tokens: {} }),
     },
     tokenManager: {
       setTokens: vi.fn(),
@@ -82,9 +109,9 @@ describe('OktaGuard', () => {
       subscribe: vi.fn(),
       unsubscribe: vi.fn(),
     },
-    start: vi.fn(),
+    start: vi.fn().mockResolvedValue(undefined),
     setOriginalUri: vi.fn(),
-    signInWithRedirect: vi.fn(),
+    signInWithRedirect: vi.fn().mockResolvedValue(undefined),
   } as unknown as OktaAuth;
 
   beforeEach(() => {
@@ -333,22 +360,28 @@ describe('OktaGuard', () => {
 
     render(<OktaGuard api={mockApi} />);
 
-    // Simulate the auth state callback being called with unauthenticated state
+    // Wait for the auth client to be initialized and auth state manager to be set up
+    await waitFor(() => {
+      expect(mockAuthClient.authStateManager.subscribe).toHaveBeenCalled();
+    });
+
+    // Get the auth state callback after it's been registered
     const authStateCallback = vi.mocked(
       mockAuthClient.authStateManager.subscribe,
     ).mock.calls[0]?.[0];
 
-    await waitFor(() => {
-      authStateCallback?.({
-        isAuthenticated: false,
-        error: undefined,
-      });
+    // Simulate the auth state callback being called with unauthenticated state
+    authStateCallback?.({
+      isAuthenticated: false,
+      error: undefined,
     });
 
-    expect(mockSetItem).toHaveBeenCalledWith(
-      'oktaOriginalUri',
-      '/story/test--default',
-    );
+    await waitFor(() => {
+      expect(mockSetItem).toHaveBeenCalledWith(
+        'oktaOriginalUri',
+        '/story/test--default',
+      );
+    });
     expect(mockAuthClient.setOriginalUri).toHaveBeenCalledWith(
       '/story/test--default',
     );
@@ -358,42 +391,54 @@ describe('OktaGuard', () => {
   it('handles authenticated state', async () => {
     render(<OktaGuard api={mockApi} />);
 
-    // Simulate the auth state callback being called with authenticated state
+    // Wait for the auth client to be initialized and auth state manager to be set up
+    await waitFor(() => {
+      expect(mockAuthClient.authStateManager.subscribe).toHaveBeenCalled();
+    });
+
+    // Get the auth state callback after it's been registered
     const authStateCallback = vi.mocked(
       mockAuthClient.authStateManager.subscribe,
     ).mock.calls[0]?.[0];
 
+    // Simulate the auth state callback being called with authenticated state
+    authStateCallback?.({
+      isAuthenticated: true,
+      error: undefined,
+    });
+
     await waitFor(() => {
-      authStateCallback?.({
+      expect(mockSetState).toHaveBeenCalledWith({
         isAuthenticated: true,
         error: undefined,
       });
-    });
-
-    expect(mockSetState).toHaveBeenCalledWith({
-      isAuthenticated: true,
-      error: undefined,
     });
   });
 
   it('handles auth state with error', async () => {
     render(<OktaGuard api={mockApi} />);
 
-    // Simulate the auth state callback being called with error
+    // Wait for the auth client to be initialized and auth state manager to be set up
+    await waitFor(() => {
+      expect(mockAuthClient.authStateManager.subscribe).toHaveBeenCalled();
+    });
+
+    // Get the auth state callback after it's been registered
     const authStateCallback = vi.mocked(
       mockAuthClient.authStateManager.subscribe,
     ).mock.calls[0]?.[0];
 
-    await waitFor(() => {
-      authStateCallback?.({
-        isAuthenticated: false,
-        error: new Error('Auth error'),
-      });
+    // Simulate the auth state callback being called with error
+    authStateCallback?.({
+      isAuthenticated: false,
+      error: new Error('Auth error'),
     });
 
-    expect(mockSetState).toHaveBeenCalledWith({
-      isAuthenticated: false,
-      error: 'Error: Auth error',
+    await waitFor(() => {
+      expect(mockSetState).toHaveBeenCalledWith({
+        isAuthenticated: false,
+        error: 'Error: Auth error',
+      });
     });
   });
 
