@@ -46,18 +46,20 @@ vi.mock('fs', () => ({
   },
 }));
 
-// Mock path - we need to create mock functions that will be referenced
-const mockJoin = vi.fn();
-const mockDirname = vi.fn();
+// Mock path with factory that creates fresh functions
+vi.mock('path', () => {
+  const joinFn = vi.fn();
+  const dirnameFn = vi.fn();
 
-vi.mock('path', () => ({
-  default: {
-    join: mockJoin,
-    dirname: mockDirname,
-  },
-  join: mockJoin,
-  dirname: mockDirname,
-}));
+  return {
+    default: {
+      join: joinFn,
+      dirname: dirnameFn,
+    },
+    join: joinFn,
+    dirname: dirnameFn,
+  };
+});
 
 describe('guidelines.ts', () => {
   let mockFs: {
@@ -76,6 +78,7 @@ describe('guidelines.ts', () => {
 
     // Get mocked modules
     const fs = await import('fs');
+    const path = await import('path');
 
     mockFs = {
       existsSync: fs.default.existsSync as Mock,
@@ -85,8 +88,8 @@ describe('guidelines.ts', () => {
     };
 
     mockPath = {
-      join: mockJoin,
-      dirname: mockDirname,
+      join: path.default.join as Mock,
+      dirname: path.default.dirname as Mock,
     };
 
     // Mock console
