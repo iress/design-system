@@ -3,7 +3,11 @@ import { getPreview } from '@iress-oss/ids-storybook-config/preview';
 import type { Preview } from '@storybook/react-vite';
 import '../src/styles/global.scss';
 import './preview.scss';
-import { type IressPanelProps } from '@/main';
+import {
+  type IressDividerProps,
+  type IressInlineProps,
+  type IressPanelProps,
+} from '@/main';
 
 interface NewPanelProps extends IressPanelProps {
   bg?: IressPanelProps['background'];
@@ -16,7 +20,7 @@ const NewPanel = ({ bg, layerStyle, mt, mb, ...props }: NewPanelProps) => {
   const classNames: string[] = [];
 
   if (mt == '-lg') {
-    classNames.push('iress-mt--n-lg');
+    classNames.push('iress-mt--n-md');
   }
 
   if (mb == '-spacing.900') {
@@ -36,10 +40,33 @@ const NewPanel = ({ bg, layerStyle, mt, mb, ...props }: NewPanelProps) => {
   );
 };
 
+interface NewInlineProps extends IressInlineProps {
+  gap?: string;
+}
+
+const NewInline = ({ gap, ...props }: NewInlineProps) => {
+  return (
+    <componentMapping.IressInline
+      {...props}
+      gutter={(gap as never) ?? props.gutter}
+    />
+  );
+};
+
+const NewDivider = (props: IressDividerProps) => {
+  return (
+    <div>
+      <componentMapping.IressDivider {...props} className="iress-my--md" />
+    </div>
+  );
+};
+
 const basePreview = getPreview({
   docsProps: {
     componentMapping: {
       ...componentMapping,
+      IressDivider: NewDivider,
+      IressInline: NewInline,
       IressPanel: NewPanel,
     } as never,
     noStyles: true,
