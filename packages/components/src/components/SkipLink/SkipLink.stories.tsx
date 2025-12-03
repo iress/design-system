@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { IressSkipLink } from '.';
 import { IressContainer } from '../Container';
-import styles from '@iress-storybook/styles.module.scss';
+import styles from '~storybook/styles.module.scss';
 import { CSSProperties } from 'react';
 import { withJsxTransformer } from '@iress-storybook/helpers';
 

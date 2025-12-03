@@ -1,13 +1,15 @@
-import { StoryObj, Meta } from '@storybook/react';
+import { type StoryObj, type Meta } from '@storybook/react';
 
-import { disableArgTypes } from '@iress-storybook/helpers';
-import { IressInput, IressInputProps } from '../Input';
+import { IressInput, type IressInputProps } from '../Input';
 import { IressValidationMessage } from '../ValidationMessage';
 import { IressField } from './Field';
 import { IressIcon } from '../Icon';
 import { IressButton } from '../Button';
-import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
 import { IressReadonly } from '../Readonly';
+import {
+  disableArgTypes,
+  STORYBOOK_ONLY_CATEGORY,
+} from '@iress-oss/ids-storybook-config';
 
 type IressFieldPropsAndCustomArgs = React.ComponentProps<typeof IressField> & {
   input: Omit<IressInputProps, 'onChange'>;

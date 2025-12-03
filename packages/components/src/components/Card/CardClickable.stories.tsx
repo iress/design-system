@@ -1,13 +1,13 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressCard } from './Card';
 import {
-  IressButtonCardProps,
-  IressCardProps,
-  IressLinkCardProps,
+  type IressButtonCardProps,
+  type IressCardProps,
+  type IressLinkCardProps,
 } from './Card.types';
 import { IressButtonCard } from './components/ButtonCard';
 import { IressLinkCard } from './components/LinkCard';
-import { withJsxTransformer } from '@iress-storybook/helpers';
+import { withJsxTransformer } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressCardProps>;
 type ButtonStory = StoryObj<IressButtonCardProps>;

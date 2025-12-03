@@ -1,10 +1,10 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { disableArgTypes } from '@iress-storybook/helpers';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressBadge } from './Badge';
 import { IressInline } from '../Inline';
 import { BADGE_MODES } from './Badge.types';
 import { IressButton } from '../Button';
 import { IressTab } from '../TabSet';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressBadge>;
 

@@ -1,20 +1,22 @@
-import { StoryObj, Meta } from '@storybook/react';
+import { type StoryObj, type Meta } from '@storybook/react';
 import { IressFieldGroup } from './FieldGroup';
 import {
   IressButton,
   IressField,
-  IressFieldProps,
+  type IressFieldProps,
   IressIcon,
   IressInput,
-  IressInputProps,
+  type IressInputProps,
   IressPanel,
   IressPopover,
   IressReadonly,
   IressRichSelect,
   IressSelect,
 } from '@/main';
-import { disableArgTypes } from '@iress-storybook/helpers';
-import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
+import {
+  disableArgTypes,
+  STORYBOOK_ONLY_CATEGORY,
+} from '@iress-oss/ids-storybook-config';
 
 interface FieldAndInputProps {
   field: IressFieldProps;

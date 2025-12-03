@@ -1,10 +1,10 @@
-import { StoryObj, Meta } from '@storybook/react';
+import { type StoryObj, type Meta } from '@storybook/react';
 import { IressMultiCombobox } from './MultiCombobox';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { MultiComboboxUsingState } from './mocks/MultiComboboxUsingState';
 import MultiComboboxUsingStateSource from './mocks/MultiComboboxUsingState.tsx?raw';
 import { MultiComboboxUsingAsync } from './mocks/MultiComboboxUsingAsync';
 import MultiComboboxUsingAsyncSource from './mocks/MultiComboboxUsingAsync.tsx?raw';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressMultiCombobox>;
 

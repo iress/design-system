@@ -1,12 +1,12 @@
-import { Args, Meta, StoryObj } from '@storybook/react';
-import { IressCardProps } from './Card.types';
+import { type Args, type Meta, type StoryObj } from '@storybook/react';
+import { type IressCardProps } from './Card.types';
 import { IressCard } from './Card';
 import { CardUsingHook } from './mocks/CardUsingHook';
 import CardUsingHookSource from './mocks/CardUsingHook.tsx?raw';
 import {
   stringifyStorybookArgs,
   withTransformedSource,
-} from '@iress-storybook/helpers';
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressCardProps>;
 

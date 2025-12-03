@@ -1,15 +1,15 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import {
   IressForm,
   IressFormField,
-  IressFormFieldProps,
+  type IressFormFieldProps,
   IressInput,
 } from '@/main';
 import {
   addToStorybookCategory,
   disableArgTypes,
   mergeStorybookConfig,
-} from '@iress-storybook/helpers';
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressFormField>;
 

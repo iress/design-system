@@ -85,8 +85,8 @@ export default defineConfig({
       },
       { find: '@helpers', replacement: resolve(__dirname, 'src/helpers') },
       {
-        find: '@theme-preset',
-        replacement: resolve(__dirname, 'theme-preset'),
+        find: '~storybook',
+        replacement: resolve(__dirname, '.storybook'),
       },
     ],
   },

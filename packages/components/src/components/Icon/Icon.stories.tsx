@@ -9,7 +9,7 @@ import {
 } from './Icon.types';
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressText } from '../Text';
-import styles from '@iress-storybook/styles.module.scss';
+import styles from '~storybook/styles.module.scss';
 import { IressInline } from '../Inline';
 import { TEXT_MODES } from '@/main';
 

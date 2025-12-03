@@ -1,12 +1,12 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressButtonGroup } from '.';
 import { IressButton } from '../Button/Button';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressTooltip } from '../Tooltip';
 import { IressIcon } from '../Icon';
 import { IressToasterProvider, useToaster } from '../Toaster';
 import { IressText } from '../Text';
 import { IressDivider } from '../Divider';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressButtonGroup>;
 

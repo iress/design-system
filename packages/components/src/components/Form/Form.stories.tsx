@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { IressForm } from './Form';
 import { IressInput } from '../Input';
@@ -9,12 +9,6 @@ import { FormSubmission } from './mocks/FormSubmission';
 import FormSubmissionSource from './mocks/FormSubmission.tsx?raw';
 import { CustomErrorHandlingForm } from './mocks/CustomErrorHandlingForm';
 import CustomErrorHandlingFormSource from './mocks/CustomErrorHandlingForm.tsx?raw';
-import {
-  disableArgTypes,
-  withCustomSource,
-  withTransformedRawSource,
-  removeArgTypes,
-} from '@iress-storybook/helpers';
 import { IressText } from '../Text';
 import { ControlledForm } from './mocks/ControlledForm';
 import ControlledFormSource from './mocks/ControlledForm.tsx?raw';
@@ -36,6 +30,12 @@ import {
 import { addToReactHookFormsCategory } from './mocks/addToReactHookFormsCategory';
 import { UseWatchForm } from './mocks/UseWatchForm';
 import UseWatchFormSource from './mocks/UseWatchForm.tsx?raw';
+import {
+  disableArgTypes,
+  removeArgTypes,
+  withTransformedRawSource,
+} from '@iress-oss/ids-storybook-config';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<typeof IressForm>;
 

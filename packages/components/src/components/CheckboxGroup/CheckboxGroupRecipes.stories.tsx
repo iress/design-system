@@ -1,11 +1,11 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressCheckboxGroup } from '.';
+import { CheckboxGroupTable } from './mocks/CheckboxGroupTable';
+import CheckboxGroupTableSource from './mocks/CheckboxGroupTable.tsx?raw';
 import {
   disableArgTypes,
   withTransformedRawSource,
-} from '@iress-storybook/helpers';
-import { CheckboxGroupTable } from './mocks/CheckboxGroupTable';
-import CheckboxGroupTableSource from './mocks/CheckboxGroupTable.tsx?raw';
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressCheckboxGroup>;
 

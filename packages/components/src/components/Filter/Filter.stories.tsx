@@ -1,11 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressFilter } from '.';
 import { FilterSearchTable } from './mocks/FilterSearchTable';
 import FilterSearchTableSource from './mocks/FilterSearchTable.tsx?raw';
-import {
-  disableArgTypes,
-  withTransformedRawSource,
-} from '@iress-storybook/helpers';
 import { FilterUsingState } from './mocks/FilterUsingState';
 import FilterUsingStateSource from './mocks/FilterUsingState.tsx?raw';
 import { FilterUsingAsync } from './mocks/FilterUsingAsync';
@@ -14,6 +10,10 @@ import { IressText } from '../Text';
 import { IressPanel } from '../Panel';
 import { IressButton } from '../Button';
 import { IressBadge } from '../Badge';
+import {
+  disableArgTypes,
+  withTransformedRawSource,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressFilter>;
 

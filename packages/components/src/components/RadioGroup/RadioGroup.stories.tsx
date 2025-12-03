@@ -3,7 +3,7 @@ import { IressRadioGroup, RADIO_GROUP_LAYOUTS } from '.';
 import { IressRadio } from '../Radio';
 import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressText } from '../Text';
-import styles from '@iress-storybook/styles.module.scss';
+import styles from '~storybook/styles.module.scss';
 import { IressField } from '../Field';
 import {
   getFinancialReviewChildren,

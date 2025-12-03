@@ -1,7 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressCard } from './Card';
-import { IressCardProps } from './Card.types';
-import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
+import { type IressCardProps } from './Card.types';
 import { CardAllSlots } from './mocks/CardAllSlots';
 import CardAllSlotsSource from './mocks/CardAllSlots.tsx?raw';
 import {
@@ -9,6 +8,8 @@ import {
   supportedCardSlots,
 } from './mocks/supportedCardSlots';
 import supportedCardSlotsSource from './mocks/supportedCardSlots.tsx?raw';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<IressCardProps>;
 

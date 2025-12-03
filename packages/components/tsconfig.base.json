@@ -41,7 +41,8 @@
       "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@docs/*": ["docs/*"],
-      "@helpers/*": ["src/helpers/*"]
+      "@helpers/*": ["src/helpers/*"],
+      "~storybook/*": [".storybook/*"]
     },
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
   }

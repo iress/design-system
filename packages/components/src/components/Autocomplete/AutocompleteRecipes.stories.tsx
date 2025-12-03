@@ -1,8 +1,9 @@
-import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { AutocompleteSearchTable } from './mocks/AutocompleteSearchTable';
-import { Meta, StoryObj } from '@storybook/react';
-import { AutocompleteSearchHookProps } from './Autocomplete.types';
+import { type Meta, type StoryObj } from '@storybook/react';
+import { type AutocompleteSearchHookProps } from './Autocomplete.types';
 import AutocompleteSearchTableSource from './mocks/AutocompleteSearchTable.tsx?raw';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<AutocompleteSearchHookProps>;
 
