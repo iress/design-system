@@ -1,11 +1,14 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { IressCheckbox } from '.';
 import { IressCheckboxMark } from '../CheckboxMark';
-import { disableArgTypes, withJsxTransformer } from '@iress-storybook/helpers';
 import { IressPanel } from '../Panel';
 import { IressTable } from '../Table';
 import { IressStack } from '../Stack';
+import {
+  disableArgTypes,
+  withJsxTransformer,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressCheckbox>;
 

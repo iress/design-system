@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { IressButtonProps } from './Button.types';
+import { type Meta, type StoryObj } from '@storybook/react';
+import { type IressButtonProps } from './Button.types';
 import { IressButton } from './Button';
 
 type Story = StoryObj<IressButtonProps>;

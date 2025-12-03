@@ -1,12 +1,13 @@
 import { EXPANDER_MODES, IressExpander } from '.';
 
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressCol } from '../Col';
 import { IressRow } from '../Row';
 import { IressText } from '../Text';
-import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { MultipleExpander } from './mocks/MultipleExpander';
 import MultipleExpanderSource from './mocks/MultipleExpander.tsx?raw';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 export default {
   title: 'Components/Expander',

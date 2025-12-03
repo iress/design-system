@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './Text.stories';
 
 <Meta of={ComponentStories} />
@@ -16,8 +16,8 @@ import * as ComponentStories from './Text.stories';
       either on one element, or a block on HTML elements.
     </>
   }
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -28,7 +28,7 @@ With the `element` prop you can select which HTML element you would like the tex
 
 It renders as a `div` by default, but can also be set to any standard typography element.
 
-<ComponentExample story={ComponentStories.Element} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Element} meta={ComponentStories} />
 
 ### The `variant` prop
 
@@ -36,19 +36,19 @@ The `variant` prop allows you alter the default styling of the element that it s
 
 For example, in order to maintain the semantic structure of headings, you may need to style a `h2` element like a `h4`. Or you may want to style your heading using one of our display text formats.
 
-<ComponentExample story={ComponentStories.Variant} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Variant} meta={ComponentStories} />
 
 ### The `mode` prop
 
 The `mode` prop can be used to set the colour of the text to these predefined mode colours: Body, Muted, Primary, Info, Success, Warning, Danger, Positive and Negative.
 
-<ComponentExample story={ComponentStories.Mode} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Mode} meta={ComponentStories} />
 
 ### The `align` prop
 
 The `align` prop can be used to set the text's alignment.
 
-<ComponentExample story={ComponentStories.Align} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Align} meta={ComponentStories} />
 
 ## Behaviour
 
@@ -59,8 +59,8 @@ Icons can be added to a heading by simply including the icon as a direct child o
 The icon inherits the font size from the heading, so there is no need to set a size on the icon. If the icon is the first or last child of the heading, it will have some inline spacing added to save you from having to use the `IressInline` component.
 
 <ComponentExample
-  story={ComponentStories.HeadingsWithIcons}
-  stories={ComponentStories}
+  of={ComponentStories.HeadingsWithIcons}
+  meta={ComponentStories}
 />
 
 ### Block of typographic content
@@ -68,6 +68,6 @@ The icon inherits the font size from the heading, so there is no need to set a s
 If you just need to style a block of typography content, you can just wrap the entire block of HTML with the text component.
 
 <ComponentExample
-  story={ComponentStories.TypographicBlock}
-  stories={ComponentStories}
+  of={ComponentStories.TypographicBlock}
+  meta={ComponentStories}
 />

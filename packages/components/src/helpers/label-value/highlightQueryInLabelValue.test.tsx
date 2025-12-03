@@ -1,6 +1,5 @@
 import { highlightQueryInLabelValue } from './highlightQueryInLabelValue';
 import { render, screen } from '@testing-library/react';
-import React from 'react';
 
 describe('highlightQueryInLabelValue', () => {
   it('returns same label if query not found', () => {

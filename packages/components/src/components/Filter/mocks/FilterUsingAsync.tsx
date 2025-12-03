@@ -1,4 +1,4 @@
-import { IressFilter, IressFilterProps } from '@/main';
+import { IressFilter, type IressFilterProps } from '@/main';
 
 interface StarWarsCharacter {
   name: string;

@@ -1,11 +1,11 @@
 import { renderHook } from '@testing-library/react';
 import { useIDSTableColumnStyles } from './useIDSTableColumnStyles';
 import {
-  IressTableProviderProps,
-  TableColumn,
-  TableColumnHookProps,
+  type IressTableProviderProps,
+  type TableColumn,
+  type TableColumnHookProps,
 } from '../Table.types';
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import { IressTableProvider } from '../TableProvider';
 import styles from '../Table.module.scss';
 

@@ -1,9 +1,9 @@
 import { renderHook, act } from '@testing-library/react';
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import { useIDSButtonGroupItem } from './useIDSButtonGroupItem';
 import {
-  ButtonGroupItemProps,
-  IressButtonGroupProviderProps,
+  type ButtonGroupItemProps,
+  type IressButtonGroupProviderProps,
 } from '../ButtonGroup.types';
 import { IressButtonGroupProvider } from '../ButtonGroupProvider';
 import styles from '../ButtonGroup.module.scss';

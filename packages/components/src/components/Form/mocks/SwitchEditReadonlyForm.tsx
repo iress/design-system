@@ -15,8 +15,8 @@ import {
   IressText,
 } from '@/main';
 import { useState } from 'react';
-import { FieldValues } from 'react-hook-form';
-import { FormControlValue } from '@/main';
+import { type FieldValues } from 'react-hook-form';
+import { type FormControlValue } from '@/main';
 
 export const SwitchEditReadonlyForm = () => {
   const dependentOptions = [
@@ -97,7 +97,7 @@ export const SwitchEditReadonlyForm = () => {
                       {...controlledProps}
                       readonly={!editable}
                       onChange={(
-                        e: React.ChangeEvent<HTMLSelectElement>,
+                        _e: React.ChangeEvent<HTMLSelectElement>,
                         value?: FormControlValue,
                       ) => controlledProps.onChange(value)}
                     >

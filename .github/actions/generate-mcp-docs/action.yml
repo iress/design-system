@@ -1,0 +1,29 @@
+name: 'Generate MCP Documentation'
+description: 'Starts Storybook, runs MCP scripts, stops Storybook'
+runs:
+  using: 'composite'
+  steps:
+    - name: Install dependencies if needed
+      run: |
+        yarn packages/mcp-server playwright install
+        yarn packages/mcp-server playwright install-deps
+      shell: bash
+    - name: Start Storybook
+      run: |
+        yarn dev:mcp &
+        # Wait for Storybook to be ready
+        timeout 300 bash -c 'until curl -f http://localhost:6005 > /dev/null 2>&1; do sleep 5; done' || (echo "Storybook failed to start within 300 seconds. Check Storybook logs for errors." && exit 1)
+      shell: bash
+    - name: Run MCP Server Scripts
+      run: |
+        echo "Running MCP server collect script..."
+        yarn packages/mcp-server collect
+        echo "Running MCP server generate script..."
+        yarn packages/mcp-server generate
+        echo "Running MCP server guidelines script..."
+        yarn packages/mcp-server guidelines
+      shell: bash
+    - name: Stop Storybook
+      run: yarn dev:kill
+      shell: bash
+      if: always()

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import {
   IressButton,
   IressCol,
@@ -10,11 +10,12 @@ import {
   MENU_ROLES,
 } from '@/main';
 import { MENU_CHILDREN_OPTIONS } from '../Menu/mocks/menuChildrenOptions';
-import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { MenuInPopoverRoleDescription } from './mocks/MenuInPopoverRoleDescription';
-import { ReactNode, useState } from 'react';
+import { type ReactNode, useState } from 'react';
 import { UsePopoverExample } from './mocks/UsePopoverExample';
 import UsePopoverExampleSource from './mocks/UsePopoverExample.tsx?raw';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type IressPopoverPropsAndCustomArgs = React.ComponentProps<
   typeof IressPopover

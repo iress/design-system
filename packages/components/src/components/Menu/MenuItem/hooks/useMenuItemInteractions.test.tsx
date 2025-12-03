@@ -1,15 +1,15 @@
 import { render, renderHook } from '@testing-library/react';
 import { MenuProvider } from '../../MenuProvider';
-import { MenuProviderProps } from '../../Menu.types';
-import { PropsWithChildren } from 'react';
+import { type MenuProviderProps } from '../../Menu.types';
+import { type PropsWithChildren } from 'react';
 import { useMenuItemInteractions } from './useMenuItemInteractions';
 import userEvent from '@testing-library/user-event';
 import {
-  MenuItemInteractionsHookProps,
-  MenuItemInteractionsHookReturn,
+  type MenuItemInteractionsHookProps,
+  type MenuItemInteractionsHookReturn,
 } from '../MenuItem.types';
 import classNames from 'classnames';
-import { IressPopover, IressPopoverProps } from '@/main';
+import { IressPopover, type IressPopoverProps } from '@/main';
 
 function renderHookSolo(props: Partial<MenuItemInteractionsHookProps> = {}) {
   return renderHook(() => useMenuItemInteractions(props));

@@ -1,5 +1,5 @@
-import { Meta } from '@storybook/blocks';
-import { ComponentExample } from '@iress-storybook/components';
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ComponentExample } from '@iress-oss/ids-storybook-config';
 import { IressAlert } from '../../../main';
 import * as MenuItemRecipes from './MenuItemRecipes.stories';
 
@@ -33,7 +33,7 @@ Beneath the surface, `IressMenuItem`, `IressMenuDivider` and `IressMenuHeading` 
 1. You are using a third-party routing library with its own `Link` component and want to use it as a button.
 
 <ComponentExample
-  story={MenuItemRecipes.CustomRoutingLink}
-  stories={MenuItemRecipes}
+  of={MenuItemRecipes.CustomRoutingLink}
+  meta={MenuItemRecipes}
   source={{ type: 'code' }}
 />

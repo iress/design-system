@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { ComboboxResultsDescriptor } from './ComboboxResultsDescriptor';
-import { ComboboxResultsDescriptorProps, GlobalCSSClass } from '@/main';
+import { type ComboboxResultsDescriptorProps, GlobalCSSClass } from '@/main';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
 
 const renderComboboxResultsDescriptor = (

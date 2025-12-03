@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { IressToast } from './Toast';
-import { IressToastProps } from './Toast.types';
+import { type IressToastProps } from './Toast.types';
 import { IressText } from '../../Text';
 import { IressButton } from '../../Button';
 

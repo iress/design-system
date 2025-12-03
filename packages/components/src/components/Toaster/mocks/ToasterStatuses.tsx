@@ -1,8 +1,8 @@
 import {
   IressButton,
   IressInline,
-  IressToastProps,
-  IressToasterProps,
+  type IressToastProps,
+  type IressToasterProps,
   IressToasterProvider,
   TOAST_STATUS,
   useToaster,

@@ -1,14 +1,14 @@
 import {
-  ButtonRef,
-  IressAnchorHTMLAttributes,
-  IressMenuItemProps,
+  type ButtonRef,
+  type IressAnchorHTMLAttributes,
+  type IressMenuItemProps,
   useMenuItemAria,
   useMenuItemButtonProps,
   useMenuItemComposite,
   useMenuItemInteractions,
   useMenuItemRole,
 } from '@/main';
-import { Ref, forwardRef } from 'react';
+import { type Ref, forwardRef } from 'react';
 
 const RoutingLink = (
   { children, ...restProps }: IressAnchorHTMLAttributes,

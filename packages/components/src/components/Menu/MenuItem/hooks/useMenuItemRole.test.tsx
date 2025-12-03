@@ -1,9 +1,9 @@
 import { renderHook } from '@testing-library/react';
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import { useMenuItemRole } from './useMenuItemRole';
-import { MenuProviderProps } from '../../Menu.types';
+import { type MenuProviderProps } from '../../Menu.types';
 import { MenuProvider } from '../../MenuProvider';
-import { IressPopover, IressPopoverProps } from '@/main';
+import { IressPopover, type IressPopoverProps } from '@/main';
 
 function renderHookInMenu(wrapperProps: Partial<MenuProviderProps> = {}) {
   return renderHook(() => useMenuItemRole(), {

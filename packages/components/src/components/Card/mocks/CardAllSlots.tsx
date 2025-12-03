@@ -4,11 +4,14 @@ import {
   IressToggle,
   IressRow,
   IressCol,
-  IressCardProps,
+  type IressCardProps,
 } from '@/main';
 import { useState } from 'react';
 import { IressCard } from '../Card';
-import { SUPPORTED_CARD_SLOTS, SupportedCardSlots } from './supportedCardSlots';
+import {
+  SUPPORTED_CARD_SLOTS,
+  type SupportedCardSlots,
+} from './supportedCardSlots';
 
 export const CardAllSlots = (args: IressCardProps) => {
   const [show, setShow] = useState({

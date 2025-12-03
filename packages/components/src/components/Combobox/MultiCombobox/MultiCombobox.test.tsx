@@ -1,6 +1,6 @@
 import { act, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressMultiCombobox, IressMultiComboboxProps } from '..';
+import { IressMultiCombobox, type IressMultiComboboxProps } from '..';
 import userEvent from '@testing-library/user-event';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
 import styles from '../Combobox.module.scss';

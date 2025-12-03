@@ -1,6 +1,6 @@
-import { RenderResult, render } from '@testing-library/react';
+import { type RenderResult, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { CardCssClass, CardSlotClass, IressCard, IressCardProps } from '.';
+import { CardCssClass, CardSlotClass, IressCard, type IressCardProps } from '.';
 import userEvent from '@testing-library/user-event';
 
 const TEST_ID = 'test-component';

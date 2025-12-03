@@ -1,0 +1,34 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import * as ComponentStories from './020-UsingStorybook.stories';
+
+<Meta of={ComponentStories} />
+
+# Using Storybook
+
+The Frontend Enablement team uses Storybook to develop and document our components. Storybook is a development environment for UI components. It allows you to browse a component library, view the different states of each component, and interactively develop and test components. It is most likely what you are looking at right now.
+
+Here we have just highlighted a few of our top tips on how you can use Storybook more efficiently. We have separated it by different stages of the product delivery cycle, but you can use these tips at any stage.
+
+---
+
+## First-time users
+
+<Story of={ComponentStories.FirstTimeUsers} />
+
+## Scoping work
+
+<Story of={ComponentStories.ScopingWork} />
+
+## Design
+
+<Story of={ComponentStories.Design} />
+
+## Development
+
+<Story of={ComponentStories.Development} />
+
+## Common issues
+
+### I can't find the `Controls`, `Actions` or `Accessibility` tab
+
+<Story of={ComponentStories.CantFindControlsTab} />

@@ -1,8 +1,8 @@
-import { RenderResult, render } from '@testing-library/react';
+import { type RenderResult, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import styles from '../Select.module.scss';
 import { GlobalCSSClass } from '@/enums';
-import { SelectControlProps } from '../Select.types';
+import { type SelectControlProps } from '../Select.types';
 import { SelectControl } from './SelectControl';
 
 const TEST_ID = 'test-component';

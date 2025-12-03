@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { DefaultLoading } from './DefaultLoading';
-import { FC } from 'react';
+import { type FC } from 'react';
 
 // This is a pattern for IressLoading, hence we change the name
 (DefaultLoading as FC).displayName = 'IressLoading';

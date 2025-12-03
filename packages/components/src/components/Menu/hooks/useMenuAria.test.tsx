@@ -1,8 +1,8 @@
 import { renderHook, screen } from '@testing-library/react';
-import { MenuAriaHookProps } from '../Menu.types';
+import { type MenuAriaHookProps } from '../Menu.types';
 import { useMenuAria } from './useMenuAria';
-import { IressPopover, IressPopoverProps } from '@/main';
-import { PropsWithChildren } from 'react';
+import { IressPopover, type IressPopoverProps } from '@/main';
+import { type PropsWithChildren } from 'react';
 import userEvent from '@testing-library/user-event';
 
 function renderHookInPopover(

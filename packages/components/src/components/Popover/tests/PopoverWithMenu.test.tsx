@@ -2,13 +2,13 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { IressButton } from '../../Button';
 import {
-  IressMenuProps,
+  type IressMenuProps,
   IressMenu,
   IressMenuItem,
   IressMenuDivider,
 } from '../../Menu';
 import { IressPopover } from '../Popover';
-import { PopoverTypes } from '../Popover.types';
+import { type PopoverTypes } from '../Popover.types';
 
 const TEST_ID = 'test-component';
 const ACTIVATOR_TEST_ID = 'test-component__button';

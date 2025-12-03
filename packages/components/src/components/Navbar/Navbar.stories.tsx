@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressNavbar } from '.';
 import { IressText } from '../Text';
 import { IressMenu, IressMenuItem } from '../Menu';

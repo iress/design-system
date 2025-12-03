@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import { axe } from 'jest-axe';
 import { IressTableBody } from './TableBody';
-import { IressTableBodyProps } from './TableBody.types';
+import { type IressTableBodyProps } from './TableBody.types';
 import userEvent from '@testing-library/user-event';
 import { GlobalCSSClass } from '@/enums';
 

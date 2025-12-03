@@ -1,12 +1,12 @@
 import {
-  FormattedLabelValueMeta,
+  type FormattedLabelValueMeta,
   IressMenuDivider,
   IressRichSelect,
-  IressRichSelectProps,
+  type IressRichSelectProps,
   IressSelectMenu,
   IressSelectSearch,
   IressSelectSearchInput,
-  LabelValueMeta,
+  type LabelValueMeta,
 } from '@/main';
 
 const CustomOptions: IressRichSelectProps['renderOptions'] = ({

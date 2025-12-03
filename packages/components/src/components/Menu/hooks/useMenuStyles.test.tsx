@@ -1,9 +1,9 @@
 import { renderHook } from '@testing-library/react';
 import { useMenuStyles } from './useMenuStyles';
 import styles from '../Menu.module.scss';
-import { MenuStylesHookProps } from '../Menu.types';
-import { IressPopover, IressPopoverProps } from '@/main';
-import { PropsWithChildren } from 'react';
+import { type MenuStylesHookProps } from '../Menu.types';
+import { IressPopover, type IressPopoverProps } from '@/main';
+import { type PropsWithChildren } from 'react';
 
 function renderHookInPopover(
   props: MenuStylesHookProps,

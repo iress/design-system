@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressTooltip, IressTooltipProps } from '.';
+import { IressTooltip, type IressTooltipProps } from '.';
 import { IressButton } from '../Button';
 import styles from './Tooltip.module.scss';
 import { idsLogger } from '@/helpers/utility/idsLogger';

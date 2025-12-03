@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressRichSelect } from './RichSelect';
 import {
   generateLabelValueMeta,
@@ -18,16 +18,10 @@ import { SelectInitialOptions } from './mocks/SelectInitialOptions';
 import SelectInitialOptionsSource from './mocks/SelectInitialOptions.tsx?raw';
 import { SelectNewOption } from './mocks/SelectNewOption';
 import SelectNewOptionSource from './mocks/SelectNewOption.tsx?raw';
-import {
-  disableArgTypes,
-  addToStorybookCategory,
-  withCustomSource,
-  mergeStorybookConfig,
-} from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
 import {
   FORM_ELEMENT_WIDTHS,
-  IressRichSelectProps,
+  type IressRichSelectProps,
   IressDivider,
   IressButton,
   IressText,
@@ -36,6 +30,12 @@ import {
 } from '@/main';
 import { SelectOptionsFooter } from './mocks/SelectOptionsFooter';
 import SelectOptionsFooterSource from './mocks/SelectOptionsFooter.tsx?raw';
+import {
+  addToStorybookCategory,
+  disableArgTypes,
+  mergeStorybookConfig,
+} from '@iress-oss/ids-storybook-config';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<typeof IressRichSelect>;
 

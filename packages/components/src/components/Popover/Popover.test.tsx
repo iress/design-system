@@ -1,5 +1,5 @@
 import {
-  RenderResult,
+  type RenderResult,
   act,
   render,
   screen,
@@ -8,9 +8,9 @@ import {
 import userEvent from '@testing-library/user-event';
 import {
   IressPopover,
-  IressPopoverProps,
+  type IressPopoverProps,
   PopoverCssClass,
-  PopoverRef,
+  type PopoverRef,
 } from '.';
 import styles from './Popover.module.scss';
 import { IressButton } from '../Button';

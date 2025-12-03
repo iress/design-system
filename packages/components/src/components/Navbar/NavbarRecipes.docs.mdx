@@ -1,5 +1,5 @@
-import { Meta } from '@storybook/blocks';
-import { ComponentExample } from '@iress-storybook/components';
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ComponentExample } from '@iress-oss/ids-storybook-config';
 import { IressAlert } from '../../main';
 import * as ComponentStories from './NavbarRecipes.stories';
 
@@ -20,8 +20,8 @@ Secondly, you'll need to make sure your content is accessible; for example using
 This example uses existing IDS components to create a custom responsive navbar. On smaller screens the main `nav` in the `IressNavbar` is hidden, and a menu button is shown. The menu button triggers a slideout that contains the nav links.
 
 <ComponentExample
-  story={ComponentStories.CustomResponsiveNavbar}
-  stories={ComponentStories}
+  of={ComponentStories.CustomResponsiveNavbar}
+  meta={ComponentStories}
 />
 
 ### Custom navbar with other IDS components
@@ -31,8 +31,8 @@ Not all navbars contain navigation links; often they contain global actions or f
 Because there are no navigation links, we don't need to add a nav element in this example.
 
 <ComponentExample
-  story={ComponentStories.CustomConsumingNavbar}
-  stories={ComponentStories}
+  of={ComponentStories.CustomConsumingNavbar}
+  meta={ComponentStories}
 />
 
 ## Secondary navigation
@@ -48,8 +48,8 @@ If your site has secondary navigation, you can use the Menu component. Here are 
 You can use an `IressPanel` component to render the secondary navigation directly below your navbar. Use an `IressMenu` component for the links, and make sure you wrap it in a `nav` element. You'll need to add an `aria-label` to the `nav` element to make sure its purpose is clear to screen reader users.
 
 <ComponentExample
-  story={ComponentStories.NavbarWithSecondaryNavigation}
-  stories={ComponentStories}
+  of={ComponentStories.NavbarWithSecondaryNavigation}
+  meta={ComponentStories}
 />
 
 ### Icon strips
@@ -58,16 +58,13 @@ You can change your secondary navigation to an icon strip by passing in icons to
 
 The example below has some custom CSS to fix the menu to the side of its container. This includes setting `--iress-initial-offset` on the slideout element to ensure the slideout is correctly positioned next to the icon strip.
 
-<ComponentExample
-  story={ComponentStories.IconStrip}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.IconStrip} meta={ComponentStories} />
 
 ### Fixed navigation
 
 A common pattern for small screens is to fix navigation links at the bottom of the screen. This can be done by applying some custom CSS to your secondary navigation.
 
 <ComponentExample
-  story={ComponentStories.FixedNavigation}
-  stories={ComponentStories}
+  of={ComponentStories.FixedNavigation}
+  meta={ComponentStories}
 />

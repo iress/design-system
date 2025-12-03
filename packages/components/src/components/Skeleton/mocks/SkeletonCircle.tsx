@@ -3,7 +3,7 @@ import {
   IressButton,
   IressPlaceholder,
   IressSkeleton,
-  IressSkeletonProps,
+  type IressSkeletonProps,
   IressStack,
 } from '@/main';
 

@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './Filter.stories';
 
 <Meta of={ComponentStories} />
@@ -11,8 +11,8 @@ import * as ComponentStories from './Filter.stories';
 
 <ComponentOverview
   description="A filter allows you to pick one or more options from a list (that may be searchable) and is triggered by an activator button."
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -23,10 +23,7 @@ This component is not designed to be used within forms and should be used to pro
 
 Here is an example using multiple `IressFilter`s to filter an `IressTable`.
 
-<ComponentExample
-  story={ComponentStories.SearchTable}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.SearchTable} meta={ComponentStories} />
 
 ### Label
 
@@ -34,7 +31,7 @@ The `label` prop is required for the filter to be displayed. It is used to descr
 
 When the filter has selected options, it will append the label of the first option, or the number of selected options if `multiSelect` is true and there is more than one item selected.
 
-<ComponentExample story={ComponentStories.Label} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Label} meta={ComponentStories} />
 
 ### Uncontrolled
 
@@ -42,10 +39,7 @@ The `defaultValue` prop can be used to set the initial value of the combobox. Th
 
 **Note:** The `defaultValue` prop is not checked against the options provided, allowing it to work with asynchronous options.
 
-<ComponentExample
-  story={ComponentStories.Uncontrolled}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Uncontrolled} meta={ComponentStories} />
 
 ### Controlled
 
@@ -53,19 +47,13 @@ The `value` prop can be used to completely control the state of the component. U
 
 **Note:** The `value` prop is not checked against the options provided, allowing it to work with asynchronous options.
 
-<ComponentExample
-  story={ComponentStories.Controlled}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Controlled} meta={ComponentStories} />
 
 ### Multiple selection
 
 Using the `multiSelect` prop, the `IressFilter` will allow the user to make multiple selections.
 
-<ComponentExample
-  story={ComponentStories.MultiSelect}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.MultiSelect} meta={ComponentStories} />
 
 ### Providing options
 
@@ -73,7 +61,7 @@ Using the `multiSelect` prop, the `IressFilter` will allow the user to make mult
 
 The `options` prop is required for the combobox. You can provide an array of `LabelValueMeta[]` objects to the `options` prop. Filtering is done based on the `label` property.
 
-<ComponentExample story={ComponentStories.Options} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Options} meta={ComponentStories} />
 
 #### Asynchronous `options`
 
@@ -81,10 +69,7 @@ If you would like to render suggestions from the server, you can pass a function
 
 **Note:** Asynchronous `options` will automatically set the `searchable` prop to true.
 
-<ComponentExample
-  story={ComponentStories.AsyncOptions}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.AsyncOptions} meta={ComponentStories} />
 
 #### `initialOptions`
 
@@ -93,8 +78,8 @@ If you want to provide initial options to the user, you can use the `initialOpti
 **Note:** `initialOptions` only works if `searchable` is true.
 
 <ComponentExample
-  story={ComponentStories.InitialOptions}
-  stories={ComponentStories}
+  of={ComponentStories.InitialOptions}
+  meta={ComponentStories}
 />
 
 ### Complex Options
@@ -108,8 +93,8 @@ The options prop also accepts further properties for each option. This is useful
 All `IressFilter`s accept meta as an attribute in the option array.
 
 <ComponentExample
-  story={ComponentStories.ComplexOptions}
-  stories={ComponentStories}
+  of={ComponentStories.ComplexOptions}
+  meta={ComponentStories}
 />
 
 ## Behaviour
@@ -132,10 +117,7 @@ You can customise some settings of the query input by setting the `inputProps`.
 
 It does have some defaults to help with user experience. `prepend` automatically has a search icon, and `clearable` and `watermark` are set to true by default.
 
-<ComponentExample
-  story={ComponentStories.InputProps}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.InputProps} meta={ComponentStories} />
 
 ### Searchable
 
@@ -143,10 +125,7 @@ When an `IressFilter` has 10 or more options, it is recommended that you enable 
 
 **Note:** When using asynchronous options, the `searchable` prop is automatically set to true.
 
-<ComponentExample
-  story={ComponentStories.Searchable}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Searchable} meta={ComponentStories} />
 
 ### Reset filters
 
@@ -154,19 +133,13 @@ Adding the `visibleResetButton` prop adds a way for the user a way to easily res
 
 Below are examples of both single selects and multi selects with `visibleResetButton` enabled.
 
-<ComponentExample
-  story={ComponentStories.ResetFilters}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ResetFilters} meta={ComponentStories} />
 
 ### No results
 
 If you would like to show a message when there are no results, you can use the `searchNoResultsText` prop. It accepts any React node.
 
-<ComponentExample
-  story={ComponentStories.NoResultsText}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.NoResultsText} meta={ComponentStories} />
 
 ### Popover props
 
@@ -174,16 +147,13 @@ Under the hood, filter uses `IressPopover` to display the filter options. You ca
 
 There are two additional props that filter accepts to customise the popover: `append` and `prepend`. You can place additional content above or below the results using these props.
 
-<ComponentExample
-  story={ComponentStories.PopoverProps}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.PopoverProps} meta={ComponentStories} />
 
 ### Selected options text
 
 In `multiSelect` mode, the selections options are displayed using the `selectedOptionsText` prop. You can customise this text to suit your needs. It will replace `{{numOptions}}` with the number of selected options.
 
 <ComponentExample
-  story={ComponentStories.SelectedOptionsText}
-  stories={ComponentStories}
+  of={ComponentStories.SelectedOptionsText}
+  meta={ComponentStories}
 />

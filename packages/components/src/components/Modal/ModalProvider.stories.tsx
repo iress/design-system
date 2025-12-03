@@ -1,13 +1,15 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import {
-  IressModalProps,
+  type IressModalProps,
   IressModalProvider,
-  IressModalProviderProps,
+  type IressModalProviderProps,
 } from '.';
 import { App as AppWithModalProvider } from './mocks/AppWithModalProvider';
 import AppWithModalProviderSource from './mocks/AppWithModalProvider.tsx?raw';
-import { disableArgTypes } from '@iress-storybook/helpers';
-import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
+import {
+  disableArgTypes,
+  STORYBOOK_ONLY_CATEGORY,
+} from '@iress-oss/ids-storybook-config';
 
 type CustomArgs = Partial<IressModalProviderProps> & {
   modal: Partial<IressModalProps>;

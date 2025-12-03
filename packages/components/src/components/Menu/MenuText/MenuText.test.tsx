@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
-import { IressMenu, IressMenuText, IressMenuTextProps } from '..';
-import { IressMenuProps } from '../Menu.types';
+import { IressMenu, IressMenuText, type IressMenuTextProps } from '..';
+import { type IressMenuProps } from '../Menu.types';
 import { axe } from 'jest-axe';
 
 import styles from '../MenuItem/MenuItem.module.scss';

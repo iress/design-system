@@ -1,5 +1,5 @@
-import { Meta } from '@storybook/blocks';
-import { ComponentExample } from '@iress-storybook/components';
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ComponentExample } from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './InputCurrencyRecipes.stories';
 
 <Meta of={ComponentStories} />
@@ -13,8 +13,8 @@ This example shows how to use currency in the table, by using the `format` prop 
 Additionally, when all rows have the same currency, it is recommended to add the currency code on the column `label` and remove the `currencyCode` on all rows.
 
 <ComponentExample
-  story={ComponentStories.CurrencyInTable}
-  stories={ComponentStories}
+  of={ComponentStories.CurrencyInTable}
+  meta={ComponentStories}
 />
 
 ## OnChange with valid value
@@ -22,6 +22,6 @@ Additionally, when all rows have the same currency, it is recommended to add the
 Only able to input valid value when use `IressInputCurrency`. In this example, only number and 2 decimal places are allowed.
 
 <ComponentExample
-  story={ComponentStories.ValidValueOnChage}
-  stories={ComponentStories}
+  of={ComponentStories.ValidValueOnChage}
+  meta={ComponentStories}
 />

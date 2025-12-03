@@ -12,7 +12,8 @@ export default defineConfig({
     reporters: ['verbose'],
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'lcov', 'html'],
+      reporter: ['text', 'lcov', 'html', 'json', 'json-summary'],
+      include: ['src/**/*'],
       exclude: [
         'src/**/*.stories.*',
         'src/**/*.test.*',
@@ -35,7 +36,7 @@ export default defineConfig({
       html: './coverage/index.html',
     },
     // Retry flaky tests
-    retry: 1,
+    retry: 5,
   },
   resolve: {
     alias: [

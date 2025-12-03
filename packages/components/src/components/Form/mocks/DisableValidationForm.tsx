@@ -1,10 +1,10 @@
 import {
-  FormRef,
+  type FormRef,
   IressButton,
   IressDivider,
   IressForm,
   IressFormField,
-  IressFormProps,
+  type IressFormProps,
   IressInput,
   IressStack,
   IressToasterProvider,

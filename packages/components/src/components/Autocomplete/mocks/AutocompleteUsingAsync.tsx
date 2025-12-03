@@ -1,4 +1,4 @@
-import { IressAutocomplete, IressAutocompleteProps } from '@/main';
+import { IressAutocomplete, type IressAutocompleteProps } from '@/main';
 
 interface StarWarsCharacter {
   name: string;

@@ -1,13 +1,15 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressValidationMessage } from './ValidationMessage';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
 import {
-  IressValidationMessageProps,
+  type IressValidationMessageProps,
   SYSTEM_VALIDATION_STATUSES,
-  SystemValidationStatuses,
+  type SystemValidationStatuses,
 } from '@/main';
-import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
+import {
+  disableArgTypes,
+  STORYBOOK_ONLY_CATEGORY,
+} from '@iress-oss/ids-storybook-config';
 
 type CustomArgs = Partial<IressValidationMessageProps> & {
   messages: Record<SystemValidationStatuses, string>;

@@ -1,6 +1,6 @@
 import { render, waitFor } from '@testing-library/react';
 import styles from './Toast.module.scss';
-import { IressToastAnimatedProps } from './Toast.types';
+import { type IressToastAnimatedProps } from './Toast.types';
 import userEvent from '@testing-library/user-event';
 import { IressToastAnimated } from './ToastAnimated';
 

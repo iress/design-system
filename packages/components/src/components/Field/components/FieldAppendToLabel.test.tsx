@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { FieldAppendToLabelProps } from '../Field.types';
+import { type FieldAppendToLabelProps } from '../Field.types';
 import { FieldAppendToLabel } from './FieldAppendToLabel';
 import styles from '../Field.module.scss';
 import { GlobalCSSClass } from '@/main';

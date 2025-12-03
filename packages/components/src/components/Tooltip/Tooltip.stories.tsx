@@ -1,10 +1,10 @@
-import { StoryObj, Meta } from '@storybook/react';
-import { disableArgTypes } from '@iress-storybook/helpers';
+import { type StoryObj, type Meta } from '@storybook/react';
 
 import { IressTooltip } from '.';
 import { IressButton } from '../Button';
 import { IressStack } from '../Stack';
 import { IressInline } from '../Inline';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressTooltip>;
 

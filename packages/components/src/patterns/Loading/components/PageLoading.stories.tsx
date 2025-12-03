@@ -1,9 +1,9 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { FC } from 'react';
-import { withCustomSource } from '@iress-storybook/helpers';
+import { type Meta, type StoryObj } from '@storybook/react';
+import { type FC } from 'react';
 import { PageLoading } from './PageLoading';
 import { LoadingDashboard } from '../mocks/LoadingDashboard';
 import LoadingDashboardSource from '../mocks/LoadingDashboard.tsx?raw';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 // This is a pattern for IressLoading, hence we change the name
 (PageLoading as FC).displayName = 'IressLoading';

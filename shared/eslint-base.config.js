@@ -18,10 +18,7 @@ export async function createReactConfig() {
     },
     rules: {
       ...reactHooksPlugin.default.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'react-refresh/only-export-components': 'off', // Improved in v6
     },
   };
 }
@@ -63,6 +60,7 @@ export const baseIgnores = [
   '**/node_modules/**',
   '**/mockServiceWorker.js',
   '**/prettier.config.mjs',
+  '**/storybook-static/**',
 ];
 
 export const baseJavaScriptConfig = {
@@ -102,10 +100,14 @@ export const baseTypeScriptConfig = {
     '@typescript-eslint/no-explicit-any': 'error',
     // Allow underscored `_value`
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-    // Prefer `import {type Foo} from 'Foo';`
+    // Prefer `import {type Foo} from 'Foo';` but allow import() type annotations
     '@typescript-eslint/consistent-type-imports': [
       'warn',
-      { prefer: 'type-imports', fixStyle: 'inline-type-imports' },
+      {
+        prefer: 'type-imports',
+        fixStyle: 'inline-type-imports',
+        disallowTypeAnnotations: false,
+      },
     ],
   },
 };
@@ -141,11 +143,10 @@ export const baseTestConfig = {
     '@typescript-eslint/no-empty-function': 'off', // Tests can have empty functions
     '@typescript-eslint/require-await': 'off',
     '@typescript-eslint/unbound-method': 'off',
-    '@typescript-eslint/consistent-type-imports': 'off',
     // SonarJS overrides for tests
     'sonarjs/no-duplicate-string': 'off',
     'sonarjs/no-nested-functions': 'off',
     'sonarjs/cognitive-complexity': 'off',
-    'sonarjs/assertions-in-tests': 'off', // Does not seem to count .not assertions
+    'sonarjs/assertions-in-tests': 'off', // Does not seem to count .not annotations
   },
 };

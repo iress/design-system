@@ -1,9 +1,11 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressButton } from './Button';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { capitalizeFirstLetter } from '@helpers/formatting/capitalizeFirstLetter';
 import { IressText } from '../Text';
-import { CurrentBreakpoint } from '@iress-storybook/components';
+import {
+  CurrentBreakpoint,
+  disableArgTypes,
+} from '@iress-oss/ids-storybook-config';
 import { IressIcon } from '../Icon';
 import { IressBadge } from '../Badge';
 import { BUTTON_MODES, BUTTON_TYPES } from './Button.types';

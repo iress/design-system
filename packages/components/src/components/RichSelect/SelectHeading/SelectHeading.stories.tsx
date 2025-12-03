@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressSelectHeading } from './SelectHeading';
-import { addToStorybookCategory } from '@iress-storybook/helpers';
-import { IressSelectHeadingProps } from './SelectHeading.types';
+import { type IressSelectHeadingProps } from './SelectHeading.types';
+import { addToStorybookCategory } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSelectHeading>;
 

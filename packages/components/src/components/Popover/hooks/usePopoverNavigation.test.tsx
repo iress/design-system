@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react';
 import { usePopoverNavigation } from './usePopoverNavigation';
 import { MOCK_FLOATING_UI_CONTEXT } from '../mocks/TestPopoverProvider';
 import { useListNavigation } from '@floating-ui/react';
-import { PopoverNavigationHookReturn } from '../Popover.types';
+import { type PopoverNavigationHookReturn } from '../Popover.types';
 
 vi.mock('@floating-ui/react', async (importOriginal) => ({
   ...(await importOriginal<typeof import('@floating-ui/react')>()),

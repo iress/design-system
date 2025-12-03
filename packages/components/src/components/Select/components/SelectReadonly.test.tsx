@@ -1,6 +1,6 @@
-import { RenderResult, render } from '@testing-library/react';
+import { type RenderResult, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { SelectReadonlyProps } from '../Select.types';
+import { type SelectReadonlyProps } from '../Select.types';
 import { SelectReadonly } from './SelectReadonly';
 
 const TEST_ID = 'test-component';

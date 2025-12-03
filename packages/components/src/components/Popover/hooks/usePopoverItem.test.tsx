@@ -1,6 +1,9 @@
 import { renderHook } from '@testing-library/react';
-import { PopoverContextValue, PopoverVirtualNode } from '../Popover.types';
-import { MutableRefObject, PropsWithChildren } from 'react';
+import {
+  type PopoverContextValue,
+  type PopoverVirtualNode,
+} from '../Popover.types';
+import { type MutableRefObject, type PropsWithChildren } from 'react';
 import { usePopoverItem } from './usePopoverItem';
 import { TestPopoverProvider } from '../mocks/TestPopoverProvider';
 

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { mapMenuItems } from './mapMenuItems';
-import { MenuItem } from '../MenuItem/MenuItem.types';
+import { type MenuItem } from '../MenuItem/MenuItem.types';
 import { IressMenu } from '../Menu';
 
 describe('mapMenuItems', () => {

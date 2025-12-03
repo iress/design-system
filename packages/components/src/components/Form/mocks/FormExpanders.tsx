@@ -2,7 +2,7 @@ import {
   IressExpander,
   IressForm,
   IressFormField,
-  IressFormProps,
+  type IressFormProps,
   IressInput,
   IressStack,
 } from '@/main';

@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import { IressRow, IressCol } from '../../main';
 import * as ComponentStories from './Stack.stories';
 
@@ -17,8 +17,8 @@ import * as ComponentStories from './Stack.stories';
       with consistent present values.
     </>
   }
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -27,15 +27,15 @@ import * as ComponentStories from './Stack.stories';
 
 Vertical spacing is applied to the direct children of the `IressStack` component. The amount of spacing is controlled by the gutter prop which accepts `none`, `xs`, `sm`, `md`, `lg` or `xl`.
 
-<ComponentExample story={ComponentStories.Gutter} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Gutter} meta={ComponentStories} />
 
 ### Responsive gutter
 
 The `gutter` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
 
 <ComponentExample
-  story={ComponentStories.ResponsiveGutter}
-  stories={ComponentStories}
+  of={ComponentStories.ResponsiveGutter}
+  meta={ComponentStories}
 />
 
 ### Inline children
@@ -49,8 +49,8 @@ In the example below:
 - `IressPanel`s recieve the margin as they are block elements.
 
 <ComponentExample
-  story={ComponentStories.InlineChildren}
-  stories={ComponentStories}
+  of={ComponentStories.InlineChildren}
+  meta={ComponentStories}
 />
 
 ### Lists
@@ -61,15 +61,12 @@ This only works if the list is a direct child of the `IressStack` component. If 
 
 <IressRow gutter="md">
   <IressCol>
-    <ComponentExample
-      story={ComponentStories.Lists}
-      stories={ComponentStories}
-    />
+    <ComponentExample of={ComponentStories.Lists} meta={ComponentStories} />
   </IressCol>
   <IressCol>
     <ComponentExample
-      story={ComponentStories.WrappedList}
-      stories={ComponentStories}
+      of={ComponentStories.WrappedList}
+      meta={ComponentStories}
     />
   </IressCol>
 </IressRow>

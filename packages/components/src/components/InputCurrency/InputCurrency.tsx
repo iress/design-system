@@ -2,7 +2,7 @@ import { IressInput } from '@/components/Input';
 import { type IressInputCurrencyProps } from './InputCurrency.types';
 import { IressText } from '@/components/Text';
 import { type InputRef } from '@/components/Input/InputBase/InputBase.types';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { formatCurrency } from '@/helpers/formatting/formatCurrency';
 
 export const IressInputCurrency = forwardRef<InputRef, IressInputCurrencyProps>(

@@ -1,7 +1,7 @@
-import { RenderResult, render } from '@testing-library/react';
+import { type RenderResult, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
-import { IressSelect, IressSelectProps, IressSelectOption } from '.';
+import { IressSelect, type IressSelectProps, IressSelectOption } from '.';
 import styles from './Select.module.scss';
 import { GlobalCSSClass } from '@/enums';
 import { IressLabel } from '../Label';

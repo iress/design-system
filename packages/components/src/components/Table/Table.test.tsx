@@ -1,11 +1,11 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressTable, IressTableProps } from '.';
+import { IressTable, type IressTableProps } from '.';
 import styles from './Table.module.scss';
 import { GlobalCSSClass } from '@/enums';
 import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
-import { TableRef } from './Table.types';
+import { type TableRef } from './Table.types';
 
 const TEST_ID = 'test-component';
 const TEST_CAPTION = 'caption';

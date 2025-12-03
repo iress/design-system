@@ -1,11 +1,13 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { IressInline } from '.';
 import { IressPlaceholder } from '../Placeholder';
 import { IressPanel } from '../Panel';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
-import { CurrentBreakpoint } from '@iress-storybook/components';
+import {
+  CurrentBreakpoint,
+  disableArgTypes,
+} from '@iress-oss/ids-storybook-config';
 import { IressText } from '../Text';
 import { IressContainer } from '../Container';
 import { GUTTER_SIZES, HORIZONTAL_ALIGNS, VERTICAL_ALIGNS } from '@/constants';

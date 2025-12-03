@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressInline, IressInlineProps, InlineCssClass } from '.';
+import { IressInline, type IressInlineProps, InlineCssClass } from '.';
 
 const renderComponent = (args: IressInlineProps) => {
   return render(

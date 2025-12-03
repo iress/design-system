@@ -1,9 +1,9 @@
 import { IressButton, IressLoading, IressStack, IressText } from '@/main';
-import { ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 
 const API = {
   getContent: async () =>
-    new Promise<ReactNode>((resolve, reject) => {
+    new Promise<ReactNode>((_resolve, reject) => {
       // Simulate a slow network request.
       setTimeout(() => {
         reject(

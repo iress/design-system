@@ -1,5 +1,5 @@
-import { Meta } from '@storybook/blocks';
-import { ComponentOverview } from '@iress-storybook/components';
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ComponentOverview } from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './Placeholder.stories';
 
 <Meta of={ComponentStories} />
@@ -8,6 +8,6 @@ import * as ComponentStories from './Placeholder.stories';
 
 <ComponentOverview
   description="A placeholder is a UI element that allows you to reserve space for content that has not been created yet, usually used for prototyping."
-  story={ComponentStories.Placeholder}
-  stories={ComponentStories}
+  of={ComponentStories.Placeholder}
+  meta={ComponentStories}
 />

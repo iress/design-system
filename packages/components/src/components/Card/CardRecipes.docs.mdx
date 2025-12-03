@@ -1,5 +1,5 @@
-import { Meta } from '@storybook/blocks';
-import { ComponentExample } from '@iress-storybook/components';
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ComponentExample } from '@iress-oss/ids-storybook-config';
 import { IressAlert } from '../../main';
 import * as CardRecipesStories from './CardRecipes.stories';
 
@@ -29,6 +29,6 @@ They accept a subset of `IressCardProps`. They also accept an optional second ar
 3. You need to add some additional styling to the internals of the card, such as a custom footer or a custom image.
 
 <ComponentExample
-  story={CardRecipesStories.ComposeIDSCard}
-  stories={CardRecipesStories}
+  of={CardRecipesStories.ComposeIDSCard}
+  meta={CardRecipesStories}
 />

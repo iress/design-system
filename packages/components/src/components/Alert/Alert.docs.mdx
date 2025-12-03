@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as AlertStories from './Alert.stories';
 
 <Meta of={AlertStories} />
@@ -11,8 +11,8 @@ import * as AlertStories from './Alert.stories';
 
 <ComponentOverview
   description="An alert displays a short, important message in a way that attracts the user's attention without interrupting the user's task."
-  story={AlertStories.Default}
-  stories={AlertStories}
+  of={AlertStories.Default}
+  meta={AlertStories}
 />
 
 ## Examples
@@ -21,7 +21,7 @@ import * as AlertStories from './Alert.stories';
 
 The alert offers four statuses that set a distinctive colour and icon. They can be set using the `status` prop. Their different use cases are described here.
 
-<ComponentExample story={AlertStories.Status} stories={AlertStories} />
+<ComponentExample of={AlertStories.Status} meta={AlertStories} />
 
 ### Heading
 
@@ -29,10 +29,10 @@ An alert can be displayed with a heading. This is controlled by the `heading` pr
 
 **Note**: The `heading` prop replaces the `headingText` and `headingLevel` props from previous versions of IDS. These prop are now deprecated and will be removed in a future version.
 
-<ComponentExample story={AlertStories.Heading} stories={AlertStories} />
+<ComponentExample of={AlertStories.Heading} meta={AlertStories} />
 
 ### Footer
 
 The `footer` prop allows for content to be placed below the header and body of the alert. This can be useful for displaying call to actions.
 
-<ComponentExample story={AlertStories.Footer} stories={AlertStories} />
+<ComponentExample of={AlertStories.Footer} meta={AlertStories} />

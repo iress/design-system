@@ -1,0 +1,185 @@
+@use '@iress-oss/ids-components/dist/constants/index' as constants;
+
+/* Helper class to demo navbar */
+// TODO: Move to src/styles.module.scss as this is not theme related styling
+.mobile-mockup-wrapper {
+  border: 1px solid
+    var(--iress-g-border-color, var(--iress-default-border-color));
+  border-radius: 0.5rem;
+  min-height: 500px;
+  width: 320px;
+  position: relative;
+  overflow: hidden;
+}
+
+.iress-u-text .sbdocs.sbdocs-wrapper,
+.iress-u-text .sbdocs.sbdocs-preview {
+  /* This fixes issue where the docs pages background overrides the theme background */
+  background-color: transparent;
+
+  /* Styles the args table to use the text colour from the theme */
+  .docblock-argstable-head th {
+    color: var(--iress-g-text-color, initial);
+  }
+
+  /* Styles the empty args table to use the muted text colour from the theme */
+  .docblock-emptyblock {
+    color: var(--iress-g-muted-text-color);
+  }
+
+  /* Styles the table of contents */
+  .toc-wrapper .toc-list .toc-list {
+    margin-left: -22px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+
+    > .toc-list-item {
+      padding-left: 11px;
+    }
+  }
+
+  .toc-list-item > a {
+    color: var(--iress-g-text-color, initial);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  /* Links should inherit the theme's font family */
+  .sbdocs-a {
+    font-family: inherit;
+  }
+}
+
+/* Add border to the code previews, so they look nice on any theme */
+.sbdocs.sbdocs-preview {
+  border: 1px solid var(--iress-g-border-color);
+}
+
+.sbdocs.sbdocs-content {
+  /** Style tables inside MDX files **/
+  table:not(
+    .sbdocs-preview *,
+    .sbdocs-diff-viewer *,
+    [class*='-diff-container']
+  ) {
+    border: var(--iress-table-border-width, 0)
+      var(--iress-table-border-style, solid) var(--iress-g-border-color);
+    margin-block-end: var(--iress-g-spacing-xl);
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-bottom-width: 1.5px;
+    min-width: 100%;
+
+    td:not([class*='-diff-']),
+    th {
+      padding-block: var(--iress-table-row-spacing, var(--iress-g-spacing-md));
+      padding-inline: var(
+        --iress-table-column-spacing,
+        var(--iress-g-spacing-xs)
+      );
+    }
+
+    th {
+      text-align: start;
+    }
+
+    thead tr {
+      border-block-end: var(
+          --iress-table-header-row-border-width,
+          var(--iress-table-row-border-width, 1px)
+        )
+        var(
+          --iress-table-header-row-border-color,
+          var(--iress-table-row-border-color, var(--iress-g-border-color))
+        )
+        var(
+          --iress-table-header-row-border-style,
+          var(--iress-table-row-border-style, solid)
+        );
+      border-inline-start: var(
+          --iress-table-header-column-border-width,
+          var(--iress-table-column-border-width, 0)
+        )
+        var(
+          --iress-table-header-column-border-color,
+          var(--iress-table-column-border-color, var(--iress-g-border-color))
+        )
+        var(
+          --iress-table-header-column-border-style,
+          var(--iress-table-column-border-style, solid)
+        );
+      border-inline-end: var(
+          --iress-table-header-column-border-width,
+          var(--iress-table-column-border-width, 0)
+        )
+        var(
+          --iress-table-header-column-border-color,
+          var(--iress-table-column-border-color, var(--iress-g-border-color))
+        )
+        var(
+          --iress-table-header-column-border-style,
+          var(--iress-table-column-border-style, solid)
+        );
+      background-color: var(--iress-table-header-background-color, transparent);
+      color: var(--iress-table-header-text-color);
+      font-size: var(--iress-table-header-font-size);
+      font-weight: var(
+        --iress-table-header-font-weight,
+        var(--iress-g-heading-font-weight, bold)
+      );
+    }
+
+    tbody tr {
+      border-color: var(
+        --iress-table-row-border-color,
+        var(--iress-g-border-color)
+      );
+      border-style: var(--iress-table-row-border-style, solid);
+      border-width: var(--iress-table-row-border-width, 1px);
+
+      &:nth-child(odd) {
+        background-color: var(
+          --iress-table-row-odd-background-color,
+          transparent
+        );
+        color: var(--iress-table-row-odd-text-color);
+      }
+
+      &:nth-child(even) {
+        background-color: var(
+          --iress-table-row-even-background-color,
+          transparent
+        );
+        color: var(--iress-table-even-odd-text-color);
+      }
+    }
+  }
+
+  /** Style buttons inside MDX files, so they don't look weird after prettier **/
+  .iress-u-button p {
+    display: inline;
+    margin: 0;
+  }
+}
+
+/* Style skip links inside MDX files */
+.docs-story {
+  .ids-skip-link-#{constants.$ids-version} {
+    position: fixed;
+    left: 50%;
+    margin-top: -30px;
+  }
+}
+
+/* Style headings inside MDX files to improve vertical rhythm */
+.sbdocs.sbdocs-content h1[id],
+.sbdocs.sbdocs-content h2[id],
+.sbdocs.sbdocs-content h3[id],
+.sbdocs.sbdocs-content h4[id],
+.sbdocs.sbdocs-content h5[id],
+.sbdocs.sbdocs-content h6[id] {
+  margin-block-start: calc(2 * var(--iress-heading-margin-bottom));
+}

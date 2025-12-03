@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressCard } from './Card';
-import { IressCardProps } from './Card.types';
+import { type IressCardProps } from './Card.types';
 
 import { IressRow } from '../Row';
 import { IressCol } from '../Col';

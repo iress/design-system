@@ -1,5 +1,5 @@
 import {
-  RenderResult,
+  type RenderResult,
   act,
   fireEvent,
   render,
@@ -13,9 +13,9 @@ import { idsLogger } from '@helpers/utility/idsLogger';
 import { App as AppWithModalProvider } from './mocks/AppWithModalProvider';
 import {
   IressModal,
-  IressModalProps,
+  type IressModalProps,
   IressModalProvider,
-  IressModalProviderProps,
+  type IressModalProviderProps,
   IressToasterProvider,
   useModal,
   useToaster,

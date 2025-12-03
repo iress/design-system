@@ -1,7 +1,7 @@
-import { RenderResult, render } from '@testing-library/react';
+import { type RenderResult, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { generateLabelValueMeta } from '@/mocks/generateLabelValues';
-import { IressSelectMenuProps } from './SelectMenu.types';
+import { type IressSelectMenuProps } from './SelectMenu.types';
 import { IressSelectMenu } from './SelectMenu';
 import { GlobalCSSClass } from '@/main';
 

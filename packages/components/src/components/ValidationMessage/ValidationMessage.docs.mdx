@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './ValidationMessage.stories';
 import * as ValidationLinkStories from './ValidationLink/ValidationLink.stories';
 import * as ValidationSummaryStories from './ValidationSummary/ValidationSummary.stories';
@@ -19,8 +19,8 @@ import * as ValidationSummaryStories from './ValidationSummary/ValidationSummary
       <code>IressValidationSummary</code> component.
     </>
   }
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -29,7 +29,7 @@ import * as ValidationSummaryStories from './ValidationSummary/ValidationSummary
 
 Validation status is controled by the status prop. It defaults to `error`.
 
-<ComponentExample story={ComponentStories.Status} />
+<ComponentExample of={ComponentStories.Status} />
 
 ### Prefix
 
@@ -37,7 +37,7 @@ You can add a prefix to the message. If not provided, it uses the `status` prop 
 
 It is hidden by default, but can be shown by setting the `visiblePrefix` prop to `true`.
 
-<ComponentExample story={ComponentStories.Prefix} />
+<ComponentExample of={ComponentStories.Prefix} />
 
 ## `IressValidationLink`
 
@@ -48,7 +48,7 @@ The `IressValidationLink` component can be used to provide a link to the input t
     heading: 'Props',
     headingId: 'link-api',
   }}
-  story={ValidationLinkStories.ValidationLink}
+  of={ValidationLinkStories.ValidationLink}
 />
 
 ## `IressValidationSummary`
@@ -60,5 +60,5 @@ Messages can be passed programmatically as a `ValidationMessageObj[]` using the 
     heading: 'Props',
     headingId: 'summary-api',
   }}
-  story={ValidationSummaryStories.ValidationSummary}
+  of={ValidationSummaryStories.ValidationSummary}
 />

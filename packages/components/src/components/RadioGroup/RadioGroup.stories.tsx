@@ -1,14 +1,14 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressRadioGroup, RADIO_GROUP_LAYOUTS } from '.';
 import { IressRadio } from '../Radio';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressText } from '../Text';
-import styles from '@iress-storybook/styles.module.scss';
+import styles from '~storybook/styles.module.scss';
 import { IressField } from '../Field';
 import {
   getFinancialReviewChildren,
   getFinancialReviewManyChildren,
 } from './mocks/radioGroupChildren';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressRadioGroup>;
 

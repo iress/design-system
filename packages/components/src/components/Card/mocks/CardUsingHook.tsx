@@ -2,11 +2,11 @@ import {
   CardSlotClass,
   composeIDSCard,
   composeIDSCardSlots,
-  IressCardProps,
+  type IressCardProps,
   IressStack,
   IressText,
 } from '@/main';
-import styles from '@iress-storybook/styles.module.scss';
+import styles from '~storybook/styles.module.scss';
 
 export const CardUsingHook = (args: IressCardProps) => {
   const cardProps = composeIDSCard(args);

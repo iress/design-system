@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './Popover.stories';
 import * as InputPopoverStories from './InputPopover/InputPopover.stories';
 
@@ -12,8 +12,8 @@ import * as InputPopoverStories from './InputPopover/InputPopover.stories';
 
 <ComponentOverview
   description="A popover is panel that is toggled on/off by an activator button or text input. The panel is positioned relative to its activator element."
-  story={ComponentStories.Activator}
-  stories={ComponentStories}
+  of={ComponentStories.Activator}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -24,19 +24,13 @@ For the popover to render, the `activator` property is required. It is the eleme
 
 Anything added as the children of the `IressPopover` component will be displayed in the popover panel.
 
-<ComponentExample
-  story={ComponentStories.Activator}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Activator} meta={ComponentStories} />
 
 ### The `show` property
 
 You can use state to control the popover by setting the `show` property to `true` or `false`. To sync your state with the popover, you can use the `onActivated` and `onDeactivated` prop.
 
-<ComponentExample
-  story={ComponentStories.ShowWithState}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.ShowWithState} meta={ComponentStories} />
 
 ## Behaviour
 
@@ -54,7 +48,7 @@ The popover panel can be aligned in one of 12 positions relative to the activato
 
 The popover panel's position will change dynamically based on the amount of space available in it's container window, so that it doesn't overflow.
 
-<ComponentExample story={ComponentStories.Align} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Align} meta={ComponentStories} />
 
 ### Width
 
@@ -64,7 +58,7 @@ This is where the `--iress-width` CSS token come in, it will allow you to set th
 
 **Note:** The `width` prop has been deprecated in favour of the CSS tokens.
 
-<ComponentExample story={ComponentStories.Width} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Width} meta={ComponentStories} />
 
 ### Overflow
 
@@ -72,10 +66,7 @@ Popovers can contain a wide variety of different content, including components t
 
 If you need to fix the height of a popover, you can set a maximum height using the `--iress-max-height` theme token on your popover. You'll also need to change the overflow behaviour by setting the `--iress-overflow-y` theme token:
 
-<ComponentExample
-  story={ComponentStories.Overflow}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Overflow} meta={ComponentStories} />
 
 ### Container
 
@@ -86,8 +77,8 @@ By default, the popover will be rendered where its parent is rendered. If you ne
 This will be the case when you are rendering into its parent container, which is not yet rendered when the popover is mounted. The example below shows how to use state instead of a reference to change where the popover is rendered.
 
 <ComponentExample
-  story={ComponentStories.ParentContainer}
-  stories={ComponentStories}
+  of={ComponentStories.ParentContainer}
+  meta={ComponentStories}
 />
 
 ## `IressInputPopover`
@@ -110,6 +101,6 @@ Input popovers work slightly different to normal popovers, where the focus insid
     heading: 'Props',
     headingId: 'input-popover-api',
   }}
-  story={InputPopoverStories.Activator}
-  stories={ComponentStories}
+  of={InputPopoverStories.Activator}
+  meta={ComponentStories}
 />

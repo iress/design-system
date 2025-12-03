@@ -1,5 +1,5 @@
 import {
-  RenderResult,
+  type RenderResult,
   act,
   fireEvent,
   render,
@@ -15,9 +15,9 @@ import { idsLogger } from '@helpers/utility/idsLogger';
 import {
   IressButton,
   IressSlideout,
-  IressSlideoutProps,
+  type IressSlideoutProps,
   IressSlideoutProvider,
-  IressSlideoutProviderProps,
+  type IressSlideoutProviderProps,
 } from '@/main';
 import { useState } from 'react';
 

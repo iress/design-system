@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import styles from './Field.module.scss';
-import { IressField, IressFieldProps, IressInput } from '@/main';
+import { IressField, type IressFieldProps, IressInput } from '@/main';
 import { axe } from 'jest-axe';
 
 const TEST_ID = 'test-component';

@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
-import { PropsWithChildren } from 'react';
-import { MenuItemAriaHookProps } from '../MenuItem.types';
-import { MenuProviderProps } from '../../Menu.types';
+import { type PropsWithChildren } from 'react';
+import { type MenuItemAriaHookProps } from '../MenuItem.types';
+import { type MenuProviderProps } from '../../Menu.types';
 import { useMenuItemAria } from './useMenuItemAria';
 import { MenuProvider } from '../../MenuProvider';
 import { idsLogger } from '@helpers/utility/idsLogger';

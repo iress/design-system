@@ -1,7 +1,7 @@
 import {
-  IressMultiComboboxProps,
+  type IressMultiComboboxProps,
   IressMultiCombobox,
-  LabelValueMeta,
+  type LabelValueMeta,
 } from '@/main';
 import { useState } from 'react';
 

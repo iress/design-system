@@ -1,10 +1,10 @@
 import { act, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressCombobox, IressComboboxProps } from '.';
+import { IressCombobox, type IressComboboxProps } from '.';
 import userEvent from '@testing-library/user-event';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
 import styles from './Combobox.module.scss';
-import { FormattedLabelValueMeta } from '@/main';
+import { type FormattedLabelValueMeta } from '@/main';
 
 const TEST_ID = 'test-component';
 

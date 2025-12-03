@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressNavbar } from '.';
 import { IressText } from '../Text';
 import { IressMenu, IressMenuItem } from '../Menu';
@@ -13,11 +13,12 @@ import { IressField } from '../Field';
 import { IressInput } from '../Input';
 import { IressPopover } from '../Popover';
 import { IressPanel } from '../Panel';
-import { disableArgTypes, withCustomSource } from '@iress-storybook/helpers';
 import { ResponsiveNavbar } from './mocks/ResponsiveNavbar';
 import ResponsiveNavbarSource from './mocks/ResponsiveNavbar.tsx?raw';
 import { NavbarIconStrip } from './mocks/NavbarIconStrip';
 import NavbarIconStripSource from './mocks/NavbarIconStrip.tsx?raw';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<typeof IressNavbar>;
 

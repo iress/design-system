@@ -9,12 +9,9 @@ export default defineConfig({
     reporters: ['verbose'],
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'lcov', 'html'],
+      reporter: ['text', 'lcov', 'html', 'json', 'json-summary'],
+      include: ['src/**/*', 'scripts/**/*'],
       exclude: [
-        'node_modules/',
-        'dist/',
-        'coverage/',
-        'generated/',
         '**/*.config.*',
         '**/*.test.*',
         '**/*.d.ts',

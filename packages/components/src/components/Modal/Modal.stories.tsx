@@ -1,23 +1,23 @@
-import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
-import { ArgsStoryFn } from '@storybook/types';
-import { IressModal, IressModalProps, IressModalProvider } from '.';
+import { type Meta, type ReactRenderer, type StoryObj } from '@storybook/react';
+import { IressModal, type IressModalProps, IressModalProvider } from '.';
 import { IressButton } from '../Button';
 import { useModal } from './hooks/useModal';
-import {
-  disableArgTypes,
-  withCustomSource,
-  withJsxTransformer,
-  withTransformedProviderSource,
-  withTransformedRawSource,
-} from '@iress-storybook/helpers';
 import { ModalUsingState } from './mocks/ModalUsingState';
 import ModalUsingStateSource from './mocks/ModalUsingState.tsx?raw';
 import { IressStack, IressText } from '../../main';
-import { CurrentBreakpoint } from '@iress-storybook/components';
+import {
+  CurrentBreakpoint,
+  disableArgTypes,
+  withJsxTransformer,
+  withTransformedProviderSource,
+  withTransformedRawSource,
+} from '@iress-oss/ids-storybook-config';
 import { ModalSizes } from './mocks/ModalSizes';
 import ModalSizesSource from './mocks/ModalSizes.tsx?raw';
 import { ModalPaddings } from './mocks/ModalPaddings';
 import ModalPaddingsSource from './mocks/ModalPaddings.tsx?raw';
+import { type ArgsStoryFn } from 'storybook/internal/types';
+import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 const MODAL_ID = 'storybook-modal';
 

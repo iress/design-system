@@ -1,4 +1,4 @@
-import { IressButton, IressModal, IressModalProps } from '@/main';
+import { IressButton, IressModal, type IressModalProps } from '@/main';
 import { useState } from 'react';
 
 export const ModalUsingState = (args: IressModalProps) => {

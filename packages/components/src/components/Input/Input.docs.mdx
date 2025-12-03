@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import { IressAlert } from '../../main';
 import * as ComponentStories from './Input.stories';
 
@@ -18,8 +18,8 @@ import * as ComponentStories from './Input.stories';
       correct placement of elements like label, error & hint text.
     </>
   }
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -30,7 +30,7 @@ The input component's `type` can be set to one of the following value: `text` (d
 
 For more information about each type, please see the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types).
 
-<ComponentExample story={ComponentStories.Types} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Types} meta={ComponentStories} />
 
 <IressAlert
   heading="Hidden inputs"
@@ -48,10 +48,7 @@ The `inputmode` attribute provides a hint to browsers for devices with onscreen 
 
 For more information about each mode (and their expected user experience), please see the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode).
 
-<ComponentExample
-  story={ComponentStories.InputModes}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.InputModes} meta={ComponentStories} />
 
 ### Clearable
 
@@ -59,10 +56,7 @@ By setting the `clearable` prop to `true` a clear button will appear when the us
 
 Clearing will set the focus on the input and trigger the `onClear` handler. Use this handler to clear the input value if your input is controlled.
 
-<ComponentExample
-  story={ComponentStories.Clearable}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Clearable} meta={ComponentStories} />
 
 ### Sizing
 
@@ -72,16 +66,13 @@ The width in this case refers to the actual input and ensures that it is wide en
 
 Widths can also be set as a percentage, allowing the input to take up a proportion of the width of its container. In this case, the width of the actual input decreases if you add appended or prepended content.
 
-<ComponentExample story={ComponentStories.Sizing} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Sizing} meta={ComponentStories} />
 
 ### Textareas
 
 You can also use `IressInput` to render a `textarea` instead of an `input`. Simply set the rows prop to the number of lines of text you'd like to display. This will set the height of the `textarea`; if a user enters more lines of text than the number of rows, a scrollbar will be displayed.
 
-<ComponentExample
-  story={ComponentStories.TextAreas}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.TextAreas} meta={ComponentStories} />
 
 ### Slot props
 
@@ -92,7 +83,7 @@ Content (typically icons) can be added to slots (`append` and `prepend`) within 
 
 By setting the watermark prop to true the add ons will render in a different style, which is set in the theme.
 
-<ComponentExample story={ComponentStories.Slots} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Slots} meta={ComponentStories} />
 
 ### Readonly
 
@@ -100,10 +91,7 @@ The `readOnly` prop can be set to prevent the user from changing the value of th
 
 If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](?path=/docs/components-readonly--docs).
 
-<ComponentExample
-  story={ComponentStories.Readonly}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Readonly} meta={ComponentStories} />
 
 ### Formatter
 
@@ -118,10 +106,7 @@ This prop powers the `IressInputCurrency` component to allow friendly and consis
 
 The example below changes the value entered to uppercase when the input is not focused.
 
-<ComponentExample
-  story={ComponentStories.Formatter}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.Formatter} meta={ComponentStories} />
 
 ### `onChange` and `onInput`
 

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressSelectLabel } from './SelectLabel';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
 

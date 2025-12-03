@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import {
   IressCheckboxMark,
-  IressCheckboxMarkProps,
+  type IressCheckboxMarkProps,
   IressCheckboxStyles as styles,
 } from '.';
 import { axe } from 'jest-axe';

@@ -1,6 +1,6 @@
-import { render, RenderResult } from '@testing-library/react';
+import { render, type RenderResult } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressRadio, IressRadioProps } from '.';
+import { IressRadio, type IressRadioProps } from '.';
 import styles from './Radio.module.scss';
 import userEvent from '@testing-library/user-event';
 

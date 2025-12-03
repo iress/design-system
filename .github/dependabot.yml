@@ -1,0 +1,111 @@
+version: 2
+updates:
+  # Root workspace dependencies - main branch
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    cooldown:
+      default-days: 14
+    open-pull-requests-limit: 10
+    reviewers:
+      - 'iress/frontend-enablement'
+    labels:
+      - 'dependencies'
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
+    groups:
+      storybook:
+        patterns:
+          - '@storybook/*'
+          - '@chromatic-com/*'
+          - '*storybook*'
+      eslint:
+        patterns:
+          - 'eslint*'
+          - '@typescript-eslint/*'
+      testing:
+        patterns:
+          - 'vitest*'
+          - '@vitest/*'
+      build-tools:
+        patterns:
+          - 'vite*'
+          - 'typescript'
+          - 'tsx'
+          - 'tsup'
+      react:
+        patterns:
+          - 'react'
+          - 'react-dom'
+
+  # Root workspace dependencies - 5.x branch
+  - package-ecosystem: 'npm'
+    directory: '/'
+    target-branch: '5.x'
+    schedule:
+      interval: 'weekly'
+    cooldown:
+      default-days: 14
+    open-pull-requests-limit: 10
+    reviewers:
+      - 'iress/frontend-enablement'
+    labels:
+      - 'dependencies'
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
+    groups:
+      storybook:
+        patterns:
+          - '@storybook/*'
+          - '@chromatic-com/*'
+          - '*storybook*'
+      eslint:
+        patterns:
+          - 'eslint*'
+          - '@typescript-eslint/*'
+      testing:
+        patterns:
+          - 'vitest*'
+          - '@vitest/*'
+      build-tools:
+        patterns:
+          - 'vite*'
+          - 'typescript'
+          - 'tsx'
+          - 'tsup'
+      react:
+        patterns:
+          - 'react'
+          - 'react-dom'
+
+  # GitHub Actions workflows - main branch
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    open-pull-requests-limit: 5
+    reviewers:
+      - 'iress/frontend-enablement'
+    labels:
+      - 'dependencies'
+      - 'github-actions'
+    commit-message:
+      prefix: 'chore(ci)'
+
+  # GitHub Actions workflows - 5.x branch
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    target-branch: '5.x'
+    schedule:
+      interval: 'weekly'
+    open-pull-requests-limit: 5
+    reviewers:
+      - 'iress/frontend-enablement'
+    labels:
+      - 'dependencies'
+      - 'github-actions'
+    commit-message:
+      prefix: 'chore(ci)'

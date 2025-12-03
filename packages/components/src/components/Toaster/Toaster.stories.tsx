@@ -1,12 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressToasterProvider } from './ToasterProvider';
-import { IressToasterProviderProps } from './Toaster.types';
+import { type IressToasterProviderProps } from './Toaster.types';
 import { IressStack } from '../Stack';
-import {
-  disableArgTypes,
-  removeArgTypes,
-  withTransformedRawSource,
-} from '@iress-storybook/helpers';
 import { IressAlert } from '../Alert';
 import { ToastStatuses } from './mocks/ToasterStatuses';
 import ToastStatusesSource from './mocks/ToasterStatuses.tsx?raw';
@@ -18,6 +13,11 @@ import { ToasterTimeout } from './mocks/ToasterTimeout';
 import ToasterTimeoutSource from './mocks/ToasterTimeout.tsx?raw';
 import { CloseToastViaProvider } from './mocks/CloseToastViaProvider';
 import CloseToastViaProviderSource from './mocks/CloseToastViaProvider.tsx?raw';
+import {
+  disableArgTypes,
+  removeArgTypes,
+  withTransformedRawSource,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressToasterProviderProps>;
 

@@ -2,7 +2,7 @@ import { act, fireEvent, render } from '@testing-library/react';
 
 import { idsLogger } from '@helpers/utility/idsLogger';
 import { InputBase } from './InputBase';
-import { InputRef } from './InputBase.types';
+import { type InputRef } from './InputBase.types';
 import { createRef } from 'react';
 
 describe('InputBase', () => {

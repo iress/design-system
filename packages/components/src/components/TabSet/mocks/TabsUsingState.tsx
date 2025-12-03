@@ -3,7 +3,7 @@ import {
   IressStack,
   IressTab,
   IressTabSet,
-  IressTabSetProps,
+  type IressTabSetProps,
 } from '@/main';
 import { useState } from 'react';
 

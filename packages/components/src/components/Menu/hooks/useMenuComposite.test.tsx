@@ -1,9 +1,9 @@
 import { renderHook } from '@testing-library/react';
-import { MenuProviderProps, MenuRoles } from '../Menu.types';
+import { type MenuProviderProps, type MenuRoles } from '../Menu.types';
 import { useMenuComposite } from './useMenuComposite';
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import { MenuProvider } from '../MenuProvider';
-import { IressPopover, IressPopoverProps } from '@/main';
+import { IressPopover, type IressPopoverProps } from '@/main';
 
 function renderInMenu(
   role?: MenuRoles,

@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './Tooltip.stories';
 
 <Meta of={ComponentStories} />
@@ -11,8 +11,8 @@ import * as ComponentStories from './Tooltip.stories';
 
 <ComponentOverview
   description="A component that shows concise, informative text about an element when focussed upon, hovered over or on a long touch."
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Usage
@@ -23,7 +23,7 @@ This content can only be plain text; there is no parsing of any markup or stylin
 
 Text content will wrap on to a new line if it exceeds the tooltip's maximum width. You can also manually format your content into multiple lines by passing an array of strings into the `tooltipText` prop.
 
-<ComponentExample story={ComponentStories.TooltipText} />
+<ComponentExample of={ComponentStories.TooltipText} />
 
 ## Behaviour
 
@@ -61,13 +61,13 @@ The tooltip can be aligned in one of 12 positions relative to the activator elem
 
 The tooltip's position will change dynamically based on the amount of space available in its container window, so that it doesn't overflow the edge. For example, if the tooltip is about to scroll off the top of the screen, it will change its position to bottom. Likewise with left and right scrolling.
 
-<ComponentExample story={ComponentStories.Align} />
+<ComponentExample of={ComponentStories.Align} />
 
 ### Delay
 
 The `delay` prop requires a number that is the number of milliseconds that pass after the activator has received a `mouseEnter` event and the display of the tooltip.
 
-<ComponentExample story={ComponentStories.Delay} />
+<ComponentExample of={ComponentStories.Delay} />
 
 ### The title attribute
 

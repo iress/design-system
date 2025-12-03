@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressPanel, IressPanelProps, PanelCssClass } from '.';
+import { IressPanel, type IressPanelProps, PanelCssClass } from '.';
 import { GlobalCSSClass } from '@/enums';
 
 const TEST_ID = 'test-component';

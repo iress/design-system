@@ -1,17 +1,17 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressCombobox } from '.';
-import {
-  disableArgTypes,
-  withJsxTransformer,
-  withTransformedRawSource,
-} from '@iress-storybook/helpers';
 import { ComboboxUsingState } from './mocks/ComboboxUsingState';
 import ComboboxUsingStateSource from './mocks/ComboboxUsingState.tsx?raw';
 import { ComboboxUsingAsync } from './mocks/ComboboxUsingAsync';
 import ComboboxUsingAsyncSource from './mocks/ComboboxUsingAsync.tsx?raw';
 import { IressStack } from '../Stack';
 import { IressPanel } from '../Panel';
-import { CurrentBreakpoint } from '@iress-storybook/components';
+import {
+  CurrentBreakpoint,
+  disableArgTypes,
+  withJsxTransformer,
+  withTransformedRawSource,
+} from '@iress-oss/ids-storybook-config';
 import { IressButton } from '../Button';
 import { IressIcon } from '../Icon';
 import { IressPopover } from '../Popover';

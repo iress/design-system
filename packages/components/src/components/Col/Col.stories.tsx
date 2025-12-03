@@ -1,19 +1,19 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { IressCol, IressColProps } from '.';
-import {
-  disableArgTypes,
-  removeArgTypes,
-  withJsxTransformer,
-} from '@iress-storybook/helpers';
+import { type Meta, type StoryObj } from '@storybook/react';
+import { IressCol, type IressColProps } from '.';
 import { IressPlaceholder } from '../Placeholder';
-import { IressRow, IressRowProps } from '../Row';
+import { IressRow, type IressRowProps } from '../Row';
 import { IressStack } from '../Stack';
 import { IressPanel } from '../Panel';
-import { CurrentBreakpoint } from '@iress-storybook/components';
+import {
+  CurrentBreakpoint,
+  disableArgTypes,
+  removeArgTypes,
+  STORYBOOK_ONLY_CATEGORY,
+  withJsxTransformer,
+} from '@iress-oss/ids-storybook-config';
 import { IressText } from '../Text';
-import styles from '@iress-storybook/styles.module.scss';
+import styles from '~storybook/styles.module.scss';
 import { IressContainer } from '../Container';
-import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
 
 type ColWithCustomArgs = React.ComponentProps<typeof IressCol> & {
   numberOfColumns?: number;

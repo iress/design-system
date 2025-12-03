@@ -1,9 +1,9 @@
-import { RenderResult, act, render, screen } from '@testing-library/react';
+import { type RenderResult, act, render, screen } from '@testing-library/react';
 import { IressInputPopover } from './InputPopover';
 import { IressInput, IressMenu, IressMenuItem } from '@/main';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
-import { IressInputPopoverProps } from './InputPopover.types';
+import { type IressInputPopoverProps } from './InputPopover.types';
 import styles from '../Popover.module.scss';
 
 const TEST_ID = 'test-component';

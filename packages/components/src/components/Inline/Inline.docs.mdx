@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
-} from '@iress-storybook/components';
+} from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './Inline.stories';
 
 <Meta of={ComponentStories} />
@@ -16,8 +16,8 @@ import * as ComponentStories from './Inline.stories';
       spacing around them, wrapping onto multiple lines when necessary.
     </>
   }
-  story={ComponentStories.Default}
-  stories={ComponentStories}
+  of={ComponentStories.Default}
+  meta={ComponentStories}
 />
 
 ## Examples
@@ -28,15 +28,15 @@ Inline spacing is applied to the direct children of the `IressInline` component.
 
 The amount of spacing is controlled by the `gutter` prop and can be set to: `none`, `xs`, `sm`, `md`, `lg` or `xl`.
 
-<ComponentExample story={ComponentStories.Gutter} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.Gutter} meta={ComponentStories} />
 
 ### Responsive gutter
 
 The `gutter` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
 
 <ComponentExample
-  story={ComponentStories.ResponsiveGutter}
-  stories={ComponentStories}
+  of={ComponentStories.ResponsiveGutter}
+  meta={ComponentStories}
 />
 
 ### Horizontal align
@@ -51,8 +51,8 @@ Horizontal alignment of the children is controlled by the `horizontalAlign` prop
 - `right` - children are aligned right, similar to `text-align: right`.
 
 <ComponentExample
-  story={ComponentStories.HorizontalAlign}
-  stories={ComponentStories}
+  of={ComponentStories.HorizontalAlign}
+  meta={ComponentStories}
 />
 
 ### Vertical align
@@ -64,13 +64,10 @@ Vertical alignment of the children is controlled by the `verticalAlign` prop. It
 - `stretch` - each direct child stretches to the full height of the inline container.
 - `top` - children are aligned to the top of the container.
 
-<ComponentExample
-  story={ComponentStories.VerticalAlign}
-  stories={ComponentStories}
-/>
+<ComponentExample of={ComponentStories.VerticalAlign} meta={ComponentStories} />
 
 ### No wrap
 
 The `IressInline` component automatically wraps children. There may be some scenarios where you do not require children to be wrapped. For this you can use the `noWrap` prop.
 
-<ComponentExample story={ComponentStories.NoWrap} stories={ComponentStories} />
+<ComponentExample of={ComponentStories.NoWrap} meta={ComponentStories} />

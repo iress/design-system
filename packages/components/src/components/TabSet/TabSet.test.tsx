@@ -1,6 +1,6 @@
-import { RenderResult, render, waitFor } from '@testing-library/react';
+import { type RenderResult, render, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressTab, IressTabSet, IressTabSetProps } from '.';
+import { IressTab, IressTabSet, type IressTabSetProps } from '.';
 import styles from './TabSet.module.scss';
 import userEvent from '@testing-library/user-event';
 import { idsLogger } from '@helpers/utility/idsLogger';

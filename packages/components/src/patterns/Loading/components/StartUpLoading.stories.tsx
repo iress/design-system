@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { FC } from 'react';
+import { type Meta, type StoryObj } from '@storybook/react';
+import { type FC } from 'react';
 import { StartUpLoading } from './StartUpLoading';
 import { IressText } from '@/main';
 

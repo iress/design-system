@@ -1,9 +1,9 @@
-import { StoryObj, Meta } from '@storybook/react';
+import { type StoryObj, type Meta } from '@storybook/react';
 
 import { IressLabel } from './Label';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressIcon } from '../Icon';
 import { IressInline } from '../Inline';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressLabel>;
 

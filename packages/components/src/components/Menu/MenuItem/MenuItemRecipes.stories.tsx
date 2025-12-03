@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressMenu } from '../Menu';
 import { toArray } from '@helpers/formatting/toArray';
 import { RoutingLinkMenuItem } from './mocks/RoutingLinkMenuItem';

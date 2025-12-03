@@ -74,6 +74,7 @@ const createWorkspaceAwareLintCommand = (files) => {
 
     if (matchedRegex) {
       const workspaceName = file.match(matchedRegex)[1];
+      // eslint-disable-next-line sonarjs/no-nested-assignment
       (workspaceFiles[workspaceName] ??= []).push(file);
     } else {
       rootFiles.push(file);

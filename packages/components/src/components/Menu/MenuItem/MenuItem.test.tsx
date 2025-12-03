@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
-import { IressMenuProps } from '../Menu.types';
+import { type IressMenuProps } from '../Menu.types';
 import { axe } from 'jest-axe';
 import { IressMenuItem } from './MenuItem';
-import { IressMenuItemProps } from './MenuItem.types';
+import { type IressMenuItemProps } from './MenuItem.types';
 import { IressMenu } from '../Menu';
 
 const TEST_ID = 'test-component';

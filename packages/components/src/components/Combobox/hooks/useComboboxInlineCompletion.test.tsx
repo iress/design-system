@@ -1,6 +1,6 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
-import { ComboboxInlineCompletionHookProps } from '../Combobox.types';
+import { type ComboboxInlineCompletionHookProps } from '../Combobox.types';
 import { useComboboxInlineCompletion } from './useComboboxInlineCompletion';
 
 const renderComboboxInlineCompletionHook = (
@@ -51,7 +51,6 @@ describe('useComboboxInlineCompletion', () => {
     await waitFor(() => {
       // expect 'option 1' to be selected in 'Option 1' after the query input was updated
 
-      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(queryRef.current.input.setSelectionRange).toHaveBeenCalledWith(
         1,
         8,

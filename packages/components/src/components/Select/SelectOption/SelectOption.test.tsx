@@ -1,6 +1,6 @@
-import { RenderResult, render } from '@testing-library/react';
+import { type RenderResult, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressSelectOptionProps } from '..';
+import { type IressSelectOptionProps } from '..';
 import { IressSelectOption } from './SelectOption';
 
 const TEST_ID = 'test-component';

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressPlaceholder, IressPlaceholderProps } from '.';
+import { IressPlaceholder, type IressPlaceholderProps } from '.';
 import styles from './Placeholder.module.scss';
 
 const TEST_ID = 'test-component';

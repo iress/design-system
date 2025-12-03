@@ -1,7 +1,12 @@
-import { RenderResult, render, screen, within } from '@testing-library/react';
+import {
+  type RenderResult,
+  render,
+  screen,
+  within,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
-import { FieldValues } from 'react-hook-form';
+import { type FieldValues } from 'react-hook-form';
 
 import { IressButton } from '../Button';
 import { IressText } from '../Text';
@@ -9,7 +14,7 @@ import {
   FormFieldErrorMessages,
   IressForm,
   IressFormField,
-  IressFormProps,
+  type IressFormProps,
   // IressFormContext,
 } from '.';
 import styles from './Form.module.scss';

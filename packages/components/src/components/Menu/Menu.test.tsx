@@ -7,7 +7,7 @@ import {
   IressMenuItem,
   IressMenuDivider,
   IressMenuHeading,
-  IressMenuProps,
+  type IressMenuProps,
 } from '.';
 
 const TEST_ID = 'test-component';

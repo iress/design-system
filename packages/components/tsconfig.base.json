@@ -1,0 +1,49 @@
+{
+  "compilerOptions": {
+    // Basic Options
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "esnext",
+    "target": "esnext",
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+
+    // Module Resolution Options
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    // Linting Options
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+
+    // Interop Options
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+
+    // JavaScript Support
+    "allowJs": true,
+    "checkJs": true,
+
+    // Advanced Options
+    "incremental": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.react.tsbuildinfo",
+
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "declaration": true,
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@docs/*": ["docs/*"],
+      "@helpers/*": ["src/helpers/*"],
+      "~storybook/*": [".storybook/*"]
+    },
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
+  }
+}

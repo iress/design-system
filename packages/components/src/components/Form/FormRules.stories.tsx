@@ -1,18 +1,20 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressForm } from './Form';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressStack } from '../Stack';
 import { IressButton } from '../Button';
-import { IressFieldProps } from '../Field';
+import { type IressFieldProps } from '../Field';
 import React, { cloneElement } from 'react';
-import { STORYBOOK_ONLY_CATEGORY } from '@iress-storybook/constants';
-import { IressFormFieldProps } from '@/main';
+import { type IressFormFieldProps } from '@/main';
 import {
   SUPPORTED_CONTROLS,
   SUPPORTED_FORM_FIELDS,
-  SupportedControls,
+  type SupportedControls,
   withRenderSnippet,
 } from './mocks/supportedFormFields';
+import {
+  disableArgTypes,
+  STORYBOOK_ONLY_CATEGORY,
+} from '@iress-oss/ids-storybook-config';
 
 type FormPropsAndCustomArgs = React.ComponentProps<typeof IressForm> & {
   element: SupportedControls;

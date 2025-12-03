@@ -1,5 +1,11 @@
-import { createElement, ElementType, Fragment, useRef, useState } from 'react';
-import { createRoot, Root } from 'react-dom/client';
+import {
+  createElement,
+  type ElementType,
+  Fragment,
+  useRef,
+  useState,
+} from 'react';
+import { createRoot, type Root } from 'react-dom/client';
 import IDS_CSS from '@iress-oss/ids-components/dist/style.css?raw';
 import {
   IressButton,

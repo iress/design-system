@@ -5,7 +5,7 @@ import {
   IressDivider,
   IressForm,
   IressFormField,
-  IressFormProps,
+  type IressFormProps,
   IressInput,
   IressStack,
   IressText,

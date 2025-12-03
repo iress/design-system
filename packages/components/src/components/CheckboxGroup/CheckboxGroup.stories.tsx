@@ -1,19 +1,19 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { CHECKBOX_GROUP_LAYOUTS, IressCheckboxGroup } from '.';
-import {
-  disableArgTypes,
-  withTransformedRawSource,
-} from '@iress-storybook/helpers';
 import { CheckboxGroupUsingState } from './mocks/CheckboxGroupUsingState';
 import CheckboxGroupUsingStateSource from './mocks/CheckboxGroupUsingState.tsx?raw';
 import { IressText } from '../Text';
-import styles from '@iress-storybook/styles.module.scss';
+import styles from '~storybook/styles.module.scss';
 import { IressField } from '../Field';
 import {
   getFinancialReviewCheckboxes,
   getFinancialReviewManyCheckboxes,
 } from './mocks/checkboxGroupChildren';
 import { IressCheckbox } from '../Checkbox/Checkbox';
+import {
+  disableArgTypes,
+  withTransformedRawSource,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressCheckboxGroup>;
 

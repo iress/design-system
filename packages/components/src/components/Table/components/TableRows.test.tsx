@@ -3,7 +3,7 @@ import { axe } from 'jest-axe';
 import { IressTableProvider } from '../TableProvider';
 import { TableRows } from './TableRows';
 import { TableHeader } from './TableHeader';
-import { Row } from '@tanstack/react-table';
+import { type Row } from '@tanstack/react-table';
 
 describe('TableRows', () => {
   it('renders nothing if not in an iress table', () => {

@@ -1,17 +1,17 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressIcon } from './Icon';
 import {
   ICON_FLIPS,
   ICON_ROTATES,
   ICON_SIZES,
   ICON_SPINS,
-  IressIconProps,
+  type IressIconProps,
 } from './Icon.types';
-import { disableArgTypes } from '@iress-storybook/helpers';
 import { IressText } from '../Text';
-import styles from '@iress-storybook/styles.module.scss';
+import styles from '~storybook/styles.module.scss';
 import { IressInline } from '../Inline';
 import { TEXT_MODES } from '@/main';
+import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressIconProps>;
 

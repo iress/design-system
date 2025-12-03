@@ -13,7 +13,7 @@ import {
   IressText,
 } from '@/main';
 import { useState } from 'react';
-import { FieldValues } from 'react-hook-form';
+import { type FieldValues } from 'react-hook-form';
 
 export const WithReadonlyDataForm = () => {
   const [values, setValues] = useState<FieldValues>({

@@ -1,5 +1,5 @@
-import { MenuRoles } from '@/main';
-import { IressPanel, IressPanelProps } from '../../Panel';
+import { type MenuRoles } from '@/main';
+import { IressPanel, type IressPanelProps } from '../../Panel';
 
 export const MenuInPopoverRoleDescription = ({
   children,

@@ -1,4 +1,4 @@
-import { IressFilter, IressFilterProps } from '@/main';
+import { IressFilter, type IressFilterProps } from '@/main';
 import { useState } from 'react';
 
 export const FilterUsingState = (args: IressFilterProps) => {

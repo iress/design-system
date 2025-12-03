@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import { useResponsiveProps } from './useResponsiveProps';
-import { Breakpoints } from '@/types';
+import { type Breakpoints } from '@/types';
 import { BREAKPOINT_DETAILS } from '@/constants';
 
 const MATCHING_BREAKPOINT: Breakpoints = 'xl';
