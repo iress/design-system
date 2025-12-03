@@ -42,7 +42,7 @@
     "@types/react-dom": "^19.2.0",
     "@typescript-eslint/eslint-plugin": "^8.47.0",
     "@typescript-eslint/parser": "^8.47.0",
-    "@vitejs/plugin-react": "^4.2.1",
+    "@vitejs/plugin-react": "^5.1.1",
     "@vitest/coverage-v8": "4.0.10",
     "chokidar": "^4.0.3",
     "concurrently": "^9.2.1",
