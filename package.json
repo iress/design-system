@@ -25,6 +25,7 @@
     "@typescript-eslint/eslint-plugin": "^8.44.1",
     "@typescript-eslint/parser": "^8.44.1",
     "@vueless/storybook-dark-mode": "^9.0.9",
+    "concurrently": "^9.2.1",
     "eslint": "^9.36.0",
     "eslint-plugin-file-progress": "^3.0.2",
     "eslint-plugin-mdx": "^3.6.2",
@@ -42,12 +43,18 @@
     "storybook-addon-tag-badges": "^3.0.2",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
-    "vite": "^7.1.11"
+    "vite": "^7.1.11",
+    "wait-on": "^9.0.3"
   },
   "scripts": {
     "check-coverage": "tsx ./scripts/check-coverage.ts",
+    "dev": "concurrently \"wait-on tcp:6006 && yarn storybook\" \"yarn packages/components dev:no-open\"",
+    "dev:mcp": "concurrently \"wait-on tcp:6006 && wait-on tcp:6007 && STORYBOOK_MCP=true yarn storybook --no-open\" \"yarn packages/components dev:no-open\"",
+    "dev:kill": "kill $(lsof -ti tcp:6005) || true; kill $(lsof -ti tcp:6006) || true;",
     "prepare": "husky && yarn build",
     "build": "yarn monorepo run build",
+    "build-storybook": "storybook build",
+    "storybook": "storybook dev -p 6005",
     "lint": "yarn monorepo run lint",
     "test": "yarn monorepo run test",
     "test:coverage": "yarn monorepo run test:coverage",

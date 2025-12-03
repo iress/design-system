@@ -7,6 +7,7 @@ const config = getMainConfig({
   tsConfigWithAlias: 'tsconfig.base.json',
 });
 
+// TODO: Remove exclusion of addons when Okta and Sandbox are updated
 config.addons = (config.addons ?? []).filter((addon) => {
   if (typeof addon === 'string') {
     return ['okta', 'sandbox'].every((excluded) => !addon.includes(excluded));
