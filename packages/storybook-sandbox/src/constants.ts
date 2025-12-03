@@ -1,4 +1,4 @@
-import { type SandboxTransformerMap } from './types';
+import type { SandboxTransformerMap } from './types';
 
 export const ADDON_TITLE = 'Sandbox editor';
 export const ADDON_TITLE_SHORT = 'Sandbox';

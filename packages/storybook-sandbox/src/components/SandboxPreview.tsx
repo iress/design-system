@@ -1,11 +1,7 @@
 import React from 'react';
 import { LiveProvider, LivePreview, LiveError } from 'react-live';
 import { addons } from 'storybook/preview-api';
-import {
-  type AddonState,
-  type SandboxScope,
-  type SandboxStyle,
-} from '../types';
+import type { AddonState, SandboxScope, SandboxStyle } from '../types';
 import { PREVIEW_TRANSFORMERS, SANDBOX_UPDATE_EVENT } from '../constants';
 import { transformCode } from '../helpers';
 import {

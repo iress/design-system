@@ -1,6 +1,6 @@
 import React from 'react';
 import { getOpenCodeUrl } from '../helpers';
-import { type API } from 'storybook/manager-api';
+import type { API } from 'storybook/manager-api';
 import { SandboxLabel } from './SandboxLabel';
 
 interface SandboxOpenInSandboxProps

@@ -11,9 +11,9 @@ import {
   isSandboxStoryFromContext,
 } from '../helpers';
 import { ADDON_TITLE_SHORT, ADDON_ICON, ADDON_ID } from '../constants';
-import { type ReactRenderer } from '@storybook/react';
-import { type SandboxPreviewProps } from '../components/SandboxPreview';
-import { type AddonConfig, type SandboxParentLocation } from '../types';
+import type { ReactRenderer } from '@storybook/react';
+import type { SandboxPreviewProps } from '../components/SandboxPreview';
+import type { AddonConfig, SandboxParentLocation } from '../types';
 
 const SandboxPreview = lazy(() => import('../components/SandboxPreview'));
 

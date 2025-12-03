@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { SandboxButton } from '../SandboxButton';
 import { TooltipLinkList } from 'storybook/internal/components';
 import { getUrlWithState } from '../../helpers';
-import { type AddonState } from '../../types';
+import type { AddonState } from '../../types';
 
 let timeout: NodeJS.Timeout;
 

@@ -1,10 +1,10 @@
 import type { Parameters as StorybookParameters } from 'storybook/internal/types';
 import { getUrlWithState } from './addonStateViaUrl';
 import { ADDON_ID } from '../constants';
-import { type ActionItem } from 'storybook/internal/components';
+import type { ActionItem } from 'storybook/internal/components';
 import React from 'react';
 import { SandboxLabel } from '../components/SandboxLabel';
-import { type AddonConfig, type SandboxParentLocation } from '../types';
+import type { AddonConfig, SandboxParentLocation } from '../types';
 
 export const addExportsToStorybookGeneratedSnippets = (code: string) => {
   if (code.includes('export default') || code.includes('export const')) {

@@ -10,7 +10,7 @@ import {
 import { LiveEditor, LiveProvider } from 'react-live';
 import { themes } from 'prism-react-renderer';
 import { DARK_MODE_EVENT_NAME } from '@vueless/storybook-dark-mode';
-import { type AddonConfig, type AddonState } from '../types';
+import type { AddonConfig, AddonState } from '../types';
 import {
   createSandboxIconFontPortal,
   isSandboxStory,
@@ -23,7 +23,7 @@ import {
 } from '../helpers';
 import { STORY_PREPARED } from 'storybook/internal/core-events';
 import { SandboxShare } from './buttons/SandboxShare';
-import { type Parameters } from '@storybook/react';
+import type { Parameters } from '@storybook/react';
 import { SandboxTemplates } from './buttons/SandboxTemplates';
 import { SandboxScopes } from './buttons/SandboxScopes';
 

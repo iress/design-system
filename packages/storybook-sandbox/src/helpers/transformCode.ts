@@ -1,4 +1,4 @@
-import { type SandboxTransformerMap } from '../types';
+import type { SandboxTransformerMap } from '../types';
 
 export const transformCode = (
   code: string,

@@ -2,9 +2,9 @@ import {
   compressToEncodedURIComponent,
   decompressFromEncodedURIComponent,
 } from 'lz-string';
-import { type API } from 'storybook/manager-api';
+import type { API } from 'storybook/manager-api';
 import { ADDON_ID } from '../constants';
-import { type AddonState, type SandboxParentLocation } from '../types';
+import type { AddonState, SandboxParentLocation } from '../types';
 
 export const getStateFromUrl = (
   location: SandboxParentLocation = window.location,

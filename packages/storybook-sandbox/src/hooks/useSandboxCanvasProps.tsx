@@ -6,7 +6,7 @@ import {
   type ComponentProps,
 } from 'react';
 import type { SandboxTransformerMap } from '../types';
-import { type Canvas, type SourceProps } from '@storybook/addon-docs/blocks';
+import type { Canvas, SourceProps } from '@storybook/addon-docs/blocks';
 import type { StorybookParameters } from 'storybook/internal/types';
 import { COMMON_TRANSFORMERS } from '../constants';
 import { getSandboxActionItems, transformCode } from '../helpers';

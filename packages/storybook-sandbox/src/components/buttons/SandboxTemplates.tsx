@@ -1,7 +1,7 @@
 import React from 'react';
 import { SandboxButton } from '../SandboxButton';
 import { Button } from 'storybook/internal/components';
-import { type SandboxTemplate } from '../../types';
+import type { SandboxTemplate } from '../../types';
 import { useCallback, useRef } from 'react';
 
 interface SandboxTemplatesProps {

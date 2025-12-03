@@ -1,5 +1,4 @@
 import React from 'react';
-import { Suspense } from 'react';
 import { addons } from 'storybook/manager-api';
 import { Addon_TypesEnum } from 'storybook/internal/types';
 import {
@@ -20,11 +19,7 @@ addons.register(ADDON_ID, (api) => {
     title: ADDON_TITLE,
     paramKey: PANEL_ID,
     match: () => isSandboxStory(api),
-    render: ({ active }) => (
-      <Suspense fallback="Loading editor...">
-        <SandboxEditor active={active} api={api} />
-      </Suspense>
-    ),
+    render: ({ active }) => <SandboxEditor active={active} api={api} />,
   });
 
   addons.add(TOOLBAR_ID, {
