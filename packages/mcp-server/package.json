@@ -30,7 +30,9 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "clean": "rm -rf dist",
-    "generate": "tsx scripts/generate.ts"
+    "collect": "tsx scripts/collect.ts",
+    "generate": "tsx scripts/generate.ts",
+    "guidelines": "tsx scripts/guidelines.ts"
   },
   "files": [
     "dist",
@@ -43,6 +45,7 @@
     "zod": "3.25.67"
   },
   "devDependencies": {
+    "@types/minimist": "^1",
     "@types/node": "22.15.30",
     "@types/turndown": "5.0.5",
     "@typescript-eslint/eslint-plugin": "8.38.0",
@@ -55,6 +58,7 @@
     "eslint-plugin-file-progress": "1.5.0",
     "eslint-plugin-prettier": "5.5.3",
     "eslint-plugin-sonarjs": "3.0.2",
+    "minimist": "^1.2.8",
     "playwright": "1.53.1",
     "prettier": "3.5.3",
     "prettier-plugin-sh": "0.17.4",

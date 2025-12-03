@@ -51,7 +51,7 @@
   "scripts": {
     "check-coverage": "tsx ./scripts/check-coverage.ts",
     "dev": "concurrently \"wait-on tcp:6006 && yarn storybook\" \"yarn packages/components dev:no-open\"",
-    "dev:mcp": "concurrently \"wait-on tcp:6006 && wait-on tcp:6007 && STORYBOOK_MCP=true yarn storybook --no-open\" \"yarn packages/components dev:no-open\"",
+    "dev:mcp": "concurrently \"wait-on tcp:6006 && STORYBOOK_MCP=true yarn storybook --no-open\" \"yarn packages/components dev:no-open\"",
     "dev:kill": "kill $(lsof -ti tcp:6005) || true; kill $(lsof -ti tcp:6006) || true;",
     "prepare": "husky && yarn build",
     "build": "yarn monorepo run build",

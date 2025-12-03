@@ -6,7 +6,7 @@ import {
   handleGetIressComponentInfo,
   handleAnalyzeComponentMentions,
 } from './iressHandlers.js';
-import { ToolResponse } from './types.js';
+import { type ToolResponse } from './types.js';
 import * as utils from './utils.js';
 
 // Mock the utils module
