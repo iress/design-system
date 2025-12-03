@@ -1,6 +1,9 @@
 import { composeIDSTableColumnDefs } from './composeIDSTableColumnDefs';
-import { AccessorFnColumnDef, CellContext } from '@tanstack/react-table';
-import { ReactNode } from 'react';
+import {
+  type AccessorFnColumnDef,
+  type CellContext,
+} from '@tanstack/react-table';
+import { type ReactNode } from 'react';
 import { render } from '@testing-library/react';
 
 type AccessorFn = AccessorFnColumnDef<never, never>['accessorFn'];

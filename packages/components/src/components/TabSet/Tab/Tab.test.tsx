@@ -1,7 +1,7 @@
-import { RenderResult, render } from '@testing-library/react';
+import { type RenderResult, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { vi } from 'vitest';
-import { IressTab, IressTabProps } from '..';
+import { IressTab, type IressTabProps } from '..';
 import styles from './Tab.module.scss';
 import userEvent from '@testing-library/user-event';
 import { IressTabSet } from '../TabSet';

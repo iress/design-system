@@ -1,15 +1,15 @@
-import { RenderResult, render, waitFor } from '@testing-library/react';
+import { type RenderResult, render, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import {
   IressRadioGroup,
-  IressRadioGroupProps,
+  type IressRadioGroupProps,
   shouldFireRadioGroupBlur,
 } from '.';
 import { getFinancialReviewChildren } from './mocks/radioGroupChildren';
 import styles from './RadioGroup.module.scss';
 import radioStyles from '../Radio/Radio.module.scss';
 import userEvent from '@testing-library/user-event';
-import { IressField, IressFieldProps } from '../Field';
+import { IressField, type IressFieldProps } from '../Field';
 import { idsLogger } from '@helpers/utility/idsLogger';
 
 const TEST_ID = 'test-component';

@@ -1,10 +1,10 @@
 import { render, renderHook } from '@testing-library/react';
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import styles from '../MenuItem.module.scss';
 import checkboxMarkStyles from '../../../CheckboxMark/CheckboxMark.module.scss';
-import { MenuItemButtonHookProps } from '../MenuItem.types';
+import { type MenuItemButtonHookProps } from '../MenuItem.types';
 import { useMenuItemButtonProps } from './useMenuItemButtonProps';
-import { MenuProviderProps } from '../../Menu.types';
+import { type MenuProviderProps } from '../../Menu.types';
 import { MenuProvider } from '../../MenuProvider';
 
 const TEST_ID = 'test';

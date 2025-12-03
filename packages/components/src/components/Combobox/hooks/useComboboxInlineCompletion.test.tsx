@@ -1,6 +1,6 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
-import { ComboboxInlineCompletionHookProps } from '../Combobox.types';
+import { type ComboboxInlineCompletionHookProps } from '../Combobox.types';
 import { useComboboxInlineCompletion } from './useComboboxInlineCompletion';
 
 const renderComboboxInlineCompletionHook = (

@@ -3,7 +3,7 @@ import {
   IressButton,
   ButtonMode,
   ButtonType,
-  IressButtonProps,
+  type IressButtonProps,
   ButtonCssClass,
 } from '.';
 import { IressIcon } from '../Icon';

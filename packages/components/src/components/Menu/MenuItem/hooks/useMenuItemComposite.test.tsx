@@ -1,11 +1,11 @@
 import { render, renderHook } from '@testing-library/react';
 import { MenuProvider } from '../../MenuProvider';
-import { MenuProviderProps } from '../../Menu.types';
-import { PropsWithChildren, ReactElement } from 'react';
+import { type MenuProviderProps } from '../../Menu.types';
+import { type PropsWithChildren, type ReactElement } from 'react';
 import { useMenuItemComposite } from './useMenuItemComposite';
 import styles from '../MenuItem.module.scss';
 import { CompositeItem } from '@floating-ui/react';
-import { IressPopover, IressPopoverProps } from '@/components/Popover';
+import { IressPopover, type IressPopoverProps } from '@/components/Popover';
 
 function renderHookInMenu(
   node?: ReactElement,

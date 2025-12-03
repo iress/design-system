@@ -1,4 +1,4 @@
-import { SelectOption } from '../Select.types';
+import { type SelectOption } from '../Select.types';
 import {
   mapNodesToSelectOptions,
   findValueFromStringInSelectOptions,

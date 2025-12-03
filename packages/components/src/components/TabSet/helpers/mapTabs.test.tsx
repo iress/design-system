@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { Tab } from '../TabSet.types';
+import { type Tab } from '../TabSet.types';
 import { mapTabs } from './mapTabs';
 import { IressTabSet } from '../TabSet';
 

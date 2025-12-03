@@ -1,8 +1,8 @@
 import { render, renderHook, waitFor } from '@testing-library/react';
 import { useAutocompleteSearch } from './useAutocompleteSearch';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
-import { AutocompleteSearchHookProps } from '../Autocomplete.types';
-import { LabelValueMeta } from '@/interfaces';
+import { type AutocompleteSearchHookProps } from '../Autocomplete.types';
+import { type LabelValueMeta } from '@/interfaces';
 
 const DEFAULT_PROPS = {
   debounceThreshold: 0,

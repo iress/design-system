@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressSkeleton, IressSkeletonProps } from '.';
+import { IressSkeleton, type IressSkeletonProps } from '.';
 import styles from './Skeleton.module.scss';
 
 const TEST_ID = 'test-component';

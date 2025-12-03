@@ -1,6 +1,6 @@
 import { act, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressAutocomplete, IressAutocompleteProps } from '.';
+import { IressAutocomplete, type IressAutocompleteProps } from '.';
 import userEvent from '@testing-library/user-event';
 import {
   MOCK_LABEL_VALUE_META,

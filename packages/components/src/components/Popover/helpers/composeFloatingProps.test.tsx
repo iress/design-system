@@ -5,7 +5,7 @@ import {
   TestPopoverProvider,
 } from '../mocks/TestPopoverProvider';
 import { usePopover } from '../hooks/usePopover';
-import { DisplayModes } from '@/main';
+import { type DisplayModes } from '@/main';
 
 const TEST_ID = 'component-using-hook';
 

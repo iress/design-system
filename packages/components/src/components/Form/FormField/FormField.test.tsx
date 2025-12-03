@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
 import { IressFormField } from './FormField';
-import { FormRef, IressButton, IressForm, IressInput } from '@/main';
+import { type FormRef, IressButton, IressForm, IressInput } from '@/main';
 import userEvent from '@testing-library/user-event';
 import { useForm } from 'react-hook-form';
 import React from 'react';

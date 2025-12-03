@@ -4,13 +4,13 @@ import {
   waitFor,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 
 import { App as AppWithToasterProvider } from '../mocks/AppWithToasterProvider';
 import userEvent from '@testing-library/user-event';
 import {
   IressButton,
-  IressToastProps,
+  type IressToastProps,
   IressToasterProvider,
   useToaster,
 } from '@/main';

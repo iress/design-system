@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { SelectOption } from '../Select.types';
+import { type SelectOption } from '../Select.types';
 import { mapSelectOptions } from './mapSelectOptions';
 import { idsLogger } from '@helpers/utility/idsLogger';
 

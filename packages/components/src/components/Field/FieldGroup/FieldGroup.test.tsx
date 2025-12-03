@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import styles from './FieldGroup.module.scss';
 import { axe } from 'jest-axe';
-import { IressFieldGroupProps } from './FieldGroup.types';
+import { type IressFieldGroupProps } from './FieldGroup.types';
 import { IressFieldGroup } from './FieldGroup';
 import { IressField, IressInput } from '@/main';
 

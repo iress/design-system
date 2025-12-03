@@ -1,6 +1,6 @@
-import { RenderResult, fireEvent, render } from '@testing-library/react';
+import { type RenderResult, fireEvent, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressSlider, IressSliderProps } from '.';
+import { IressSlider, type IressSliderProps } from '.';
 import styles from './Slider.module.scss';
 import { IressLabel } from '../Label';
 import { GlobalCSSClass } from '@/enums';

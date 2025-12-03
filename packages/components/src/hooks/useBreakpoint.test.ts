@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import { useBreakpoint } from './useBreakpoint';
-import { Breakpoints } from '@/types';
+import { type Breakpoints } from '@/types';
 import { BREAKPOINT_DETAILS } from '@/constants';
 
 const mockWindowResize = (breakpoint: Breakpoints) => {

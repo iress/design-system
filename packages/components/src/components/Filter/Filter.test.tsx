@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
 import styles from './Filter.module.scss';
 import { IressFilter } from './Filter';
-import { IressFilterProps } from './Filter.types';
+import { type IressFilterProps } from './Filter.types';
 
 const TEST_ID = 'test-component';
 const TEST_LABEL = 'Label';

@@ -1,6 +1,9 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
-import { ControlledStateProps, useControlledState } from './useControlledState';
-import { FormControlValue } from '../types';
+import {
+  type ControlledStateProps,
+  useControlledState,
+} from './useControlledState';
+import { type FormControlValue } from '../types';
 import { idsLogger } from '@helpers/utility/idsLogger';
 
 describe('useControlledState', () => {

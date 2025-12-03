@@ -3,7 +3,7 @@ import { axe } from 'jest-axe';
 import styles from './TagListInput.module.scss';
 import userEvent from '@testing-library/user-event';
 import { TagListInput } from './TagListInput';
-import { TagListInputProps } from './TagListInput.types';
+import { type TagListInputProps } from './TagListInput.types';
 
 const TEST_ID = 'test-component';
 

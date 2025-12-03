@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressStack, IressStackProps, StackCssClass } from '.';
+import { IressStack, type IressStackProps, StackCssClass } from '.';
 
 const renderComponent = (args: IressStackProps) => {
   return render(

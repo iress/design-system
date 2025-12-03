@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { IressMenuHeading, IressMenuHeadingProps } from '..';
+import { IressMenuHeading, type IressMenuHeadingProps } from '..';
 import { axe } from 'jest-axe';
 
 import styles from '../MenuItem/MenuItem.module.scss';

@@ -131,7 +131,7 @@ const TranscriptTextBox = ({
   };
 
   const handleTextChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    _e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     textContent: string,
   ) => {
     onChange(createTranscriptData(textContent, 'text'));

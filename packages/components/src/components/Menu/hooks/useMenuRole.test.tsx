@@ -1,8 +1,8 @@
 import { renderHook } from '@testing-library/react';
 import { useMenuRole } from './useMenuRole';
-import { MenuRoles } from '../Menu.types';
-import { IressPopover, IressPopoverProps } from '@/main';
-import { PropsWithChildren } from 'react';
+import { type MenuRoles } from '../Menu.types';
+import { IressPopover, type IressPopoverProps } from '@/main';
+import { type PropsWithChildren } from 'react';
 
 function renderHookInPopover(
   multiSelect?: boolean,

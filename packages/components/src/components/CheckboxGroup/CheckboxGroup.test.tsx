@@ -1,10 +1,10 @@
-import { RenderResult, render } from '@testing-library/react';
+import { type RenderResult, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressCheckboxGroup, IressCheckboxGroupProps } from '.';
+import { IressCheckboxGroup, type IressCheckboxGroupProps } from '.';
 import styles from './CheckboxGroup.module.scss';
 import checkboxStyles from '../Checkbox/Checkbox.module.scss';
 import { getFinancialReviewCheckboxes } from './mocks/checkboxGroupChildren';
-import { IressFieldGroup, IressFieldGroupProps } from '../Field';
+import { IressFieldGroup, type IressFieldGroupProps } from '../Field';
 import { GlobalCSSClass } from '@/enums';
 import userEvent from '@testing-library/user-event';
 import { IressCheckbox } from '../Checkbox/Checkbox';

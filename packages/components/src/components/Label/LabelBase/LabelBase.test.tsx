@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { LabelBase } from './LabelBase';
 import styles from '../Label.module.scss';
-import { LabelBaseProps } from './LabelBase.types';
+import { type LabelBaseProps } from './LabelBase.types';
 import { GlobalCSSClass } from '@/main';
 
 const TEST_ID = 'test-component';

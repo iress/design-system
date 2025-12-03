@@ -97,7 +97,7 @@ export const SwitchEditReadonlyForm = () => {
                       {...controlledProps}
                       readonly={!editable}
                       onChange={(
-                        e: React.ChangeEvent<HTMLSelectElement>,
+                        _e: React.ChangeEvent<HTMLSelectElement>,
                         value?: FormControlValue,
                       ) => controlledProps.onChange(value)}
                     >

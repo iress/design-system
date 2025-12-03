@@ -2,7 +2,7 @@ import { act, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
 import { IressToaster } from './Toaster';
-import { IressToasterProps, ToastItem } from './Toaster.types';
+import { type IressToasterProps, type ToastItem } from './Toaster.types';
 import { IressToasterProvider } from './ToasterProvider';
 import styles from './Toaster.module.scss';
 

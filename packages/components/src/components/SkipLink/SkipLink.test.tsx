@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressSkipLink, IressSkipLinkProps } from '.';
+import { IressSkipLink, type IressSkipLinkProps } from '.';
 import { idsLogger } from '@helpers/utility/idsLogger';
 
 const TEST_ID = 'test-component';

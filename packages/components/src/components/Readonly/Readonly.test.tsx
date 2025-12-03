@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import styles from '../Input/Input.module.scss';
 import baseStyles from '../Input/InputBase/InputBase.module.scss';
-import { IressReadonlyProps } from './Readonly.types';
+import { type IressReadonlyProps } from './Readonly.types';
 import { IressReadonly } from './Readonly';
 import { GlobalCSSClass } from '@/main';
 

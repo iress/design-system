@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { IressButtonGroup, IressButtonGroupProps } from '.';
+import { IressButtonGroup, type IressButtonGroupProps } from '.';
 import styles from './ButtonGroup.module.scss';
 import { IressButton } from '../Button/Button';
 import { GlobalCSSClass } from '@/enums';

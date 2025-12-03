@@ -1,10 +1,10 @@
 import { renderHook } from '@testing-library/react';
 import {
-  IressTableProviderProps,
-  TableColumn,
-  TableColumnHookProps,
+  type IressTableProviderProps,
+  type TableColumn,
+  type TableColumnHookProps,
 } from '../Table.types';
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import { IressTableProvider } from '../TableProvider';
 import { useIDSTableColumnSort } from './useIDSTableColumnSort';
 

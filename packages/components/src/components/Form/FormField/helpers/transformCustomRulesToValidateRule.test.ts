@@ -1,9 +1,9 @@
 import { transformCustomRulesToValidateRule } from './transformCustomRulesToValidateRule';
 import {
-  FieldName,
-  FieldPathValue,
-  FieldValues,
-  Validate,
+  type FieldName,
+  type FieldPathValue,
+  type FieldValues,
+  type Validate,
 } from 'react-hook-form';
 
 type RulesValidateObject = Record<

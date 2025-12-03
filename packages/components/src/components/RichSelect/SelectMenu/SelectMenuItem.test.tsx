@@ -1,7 +1,7 @@
-import { RenderResult, render } from '@testing-library/react';
+import { type RenderResult, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { GlobalCSSClass } from '@/enums';
-import { IressSelectMenuItemProps } from './SelectMenu.types';
+import { type IressSelectMenuItemProps } from './SelectMenu.types';
 import { IressSelectMenuItem } from './SelectMenuItem';
 
 const TEST_ID = 'test-component';
