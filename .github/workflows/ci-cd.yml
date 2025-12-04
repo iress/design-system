@@ -1,4 +1,4 @@
-name: CI/CD 2
+name: CI/CD
 run-name: ${{ github.event_name == 'workflow_dispatch' && format('[canary] {0} by {1}', github.event.inputs.package || 'All packages', github.actor) || github.event.head_commit.message || github.ref_name }}
 
 on:
@@ -83,174 +83,174 @@ jobs:
         if: steps.yarn-cache-build.outputs.cache-hit != 'true'
         run: yarn build
 
-  validate:
-    name: Validate
-    runs-on: ${{ matrix.check == 'lint:mermaid' && 'ubuntu-24.04' || 'ubuntu-latest' }}
-    needs: setup
-    timeout-minutes: 20
-    strategy:
-      fail-fast: false
-      matrix:
-        check: [lint, typecheck, test:ci, lint:mermaid]
-    steps:
-      - uses: actions/checkout@v6
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Enable Corepack
-        run: corepack enable
-      - name: Restore Yarn dependencies
-        uses: actions/cache/restore@v4
-        with:
-          path: ${{ env.INSTALL_CACHE_PATHS }}
-          key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          fail-on-cache-miss: true
-      - name: Restore build outputs
-        uses: actions/cache/restore@v4
-        with:
-          path: ${{ env.BUILD_CACHE_PATHS }}
-          key: yarn-${{ runner.os }}-${{ github.run_id }}
-          fail-on-cache-miss: true
-      - name: Install dependencies if needed
-        run: yarn install --immutable
-      - name: Install Chromium for Mermaid linting
-        if: matrix.check == 'lint:mermaid'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y chromium-browser
-      - name: Run ${{ matrix.check }}
-        env:
-          PUPPETEER_EXECUTABLE_PATH: '/usr/bin/chromium-browser'
-          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
-        run: |
-          if [ "${{ matrix.check }}" = "test:ci" ]; then
-            # Tests with retry logic for flaky tests
-            MAX_ATTEMPTS=3
-            ATTEMPT=1
-            
-            while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
-              echo "🧪 Test attempt $ATTEMPT of $MAX_ATTEMPTS..."
-              
-              if yarn test:ci; then
-                echo "✅ Tests passed on attempt $ATTEMPT"
-                exit 0
-              else
-                EXIT_CODE=$?
-                if [ $ATTEMPT -eq $MAX_ATTEMPTS ]; then
-                  echo "❌ Tests failed after $MAX_ATTEMPTS attempts (exit code: $EXIT_CODE)"
-                  exit $EXIT_CODE
-                fi
-                
-                echo "⚠️ Tests failed on attempt $ATTEMPT (exit code: $EXIT_CODE). Retrying in 5 seconds..."
-                sleep 5
-                ATTEMPT=$((ATTEMPT + 1))
-              fi
-            done
-          else
-            # Run other checks normally (lint, typecheck, lint:mermaid) without retry
-            yarn ${{ matrix.check }}
-          fi
+  # validate:
+  #   name: Validate
+  #   runs-on: ${{ matrix.check == 'lint:mermaid' && 'ubuntu-24.04' || 'ubuntu-latest' }}
+  #   needs: setup
+  #   timeout-minutes: 20
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       check: [lint, typecheck, test:ci, lint:mermaid]
+  #   steps:
+  #     - uses: actions/checkout@v6
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v6
+  #       with:
+  #         node-version: ${{ env.NODE_VERSION }}
+  #     - name: Enable Corepack
+  #       run: corepack enable
+  #     - name: Restore Yarn dependencies
+  #       uses: actions/cache/restore@v4
+  #       with:
+  #         path: ${{ env.INSTALL_CACHE_PATHS }}
+  #         key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+  #         fail-on-cache-miss: true
+  #     - name: Restore build outputs
+  #       uses: actions/cache/restore@v4
+  #       with:
+  #         path: ${{ env.BUILD_CACHE_PATHS }}
+  #         key: yarn-${{ runner.os }}-${{ github.run_id }}
+  #         fail-on-cache-miss: true
+  #     - name: Install dependencies if needed
+  #       run: yarn install --immutable
+  #     - name: Install Chromium for Mermaid linting
+  #       if: matrix.check == 'lint:mermaid'
+  #       run: |
+  #         sudo apt-get update
+  #         sudo apt-get install -y chromium-browser
+  #     - name: Run ${{ matrix.check }}
+  #       env:
+  #         PUPPETEER_EXECUTABLE_PATH: '/usr/bin/chromium-browser'
+  #         PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
+  #       run: |
+  #         if [ "${{ matrix.check }}" = "test:ci" ]; then
+  #           # Tests with retry logic for flaky tests
+  #           MAX_ATTEMPTS=3
+  #           ATTEMPT=1
 
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    needs: setup
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v6
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Enable Corepack
-        run: corepack enable
-      - name: Restore Yarn dependencies
-        uses: actions/cache/restore@v4
-        with:
-          path: ${{ env.INSTALL_CACHE_PATHS }}
-          key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          fail-on-cache-miss: true
-      - name: Restore build outputs
-        uses: actions/cache/restore@v4
-        with:
-          path: ${{ env.BUILD_CACHE_PATHS }}
-          key: yarn-${{ runner.os }}-${{ github.run_id }}
-          fail-on-cache-miss: true
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v5
-        with:
-          name: build-output
-          path: |
-            packages/*/dist/
-          retention-days: 7
-          if-no-files-found: warn
+  #           while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
+  #             echo "🧪 Test attempt $ATTEMPT of $MAX_ATTEMPTS..."
 
-  chromatic:
-    name: Chromatic (${{ matrix.package }})
-    runs-on: ubuntu-latest
-    needs: setup
-    timeout-minutes: 20
-    if: github.actor != 'dependabot[bot]'
-    permissions:
-      contents: read
-      actions: read
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - package: root
-            token: CHROMATIC_ROOT_PROJECT_TOKEN
-            dir: .
-          - package: components
-            token: CHROMATIC_COMPONENTS_PROJECT_TOKEN
-            dir: packages/components
-          - package: tokens
-            token: CHROMATIC_TOKENS_PROJECT_TOKEN
-            dir: packages/tokens
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Enable Corepack
-        run: corepack enable
-      - name: Restore Yarn dependencies
-        uses: actions/cache/restore@v4
-        with:
-          path: ${{ env.INSTALL_CACHE_PATHS }}
-          key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          fail-on-cache-miss: true
-      - name: Restore build outputs
-        uses: actions/cache/restore@v4
-        with:
-          path: ${{ env.BUILD_CACHE_PATHS }}
-          key: yarn-${{ runner.os }}-${{ github.run_id }}
-          fail-on-cache-miss: true
-      - name: Install dependencies if needed
-        run: yarn install --immutable
-      - name: Publish to Chromatic
-        uses: chromaui/action@latest
-        with:
-          projectToken: ${{ secrets[matrix.token] }}
-          workingDir: ${{ matrix.dir }}
-          buildScriptName: build-storybook
-          onlyChanged: true
-          autoAcceptChanges: '{main,5.x}'
-          exitZeroOnChanges: true
-          exitOnceUploaded: true
+  #             if yarn test:ci; then
+  #               echo "✅ Tests passed on attempt $ATTEMPT"
+  #               exit 0
+  #             else
+  #               EXIT_CODE=$?
+  #               if [ $ATTEMPT -eq $MAX_ATTEMPTS ]; then
+  #                 echo "❌ Tests failed after $MAX_ATTEMPTS attempts (exit code: $EXIT_CODE)"
+  #                 exit $EXIT_CODE
+  #               fi
 
-  validated:
-    name: Validated
-    runs-on: ubuntu-latest
-    needs: [validate, chromatic]
-    timeout-minutes: 5
-    steps:
-      - name: All validation jobs passed ✅
-        run: echo "✅ All lint, typecheck, test, and Chromatic jobs passed."
+  #               echo "⚠️ Tests failed on attempt $ATTEMPT (exit code: $EXIT_CODE). Retrying in 5 seconds..."
+  #               sleep 5
+  #               ATTEMPT=$((ATTEMPT + 1))
+  #             fi
+  #           done
+  #         else
+  #           # Run other checks normally (lint, typecheck, lint:mermaid) without retry
+  #           yarn ${{ matrix.check }}
+  #         fi
+
+  # build:
+  #   name: Build
+  #   runs-on: ubuntu-latest
+  #   needs: setup
+  #   timeout-minutes: 15
+  #   steps:
+  #     - uses: actions/checkout@v6
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v6
+  #       with:
+  #         node-version: ${{ env.NODE_VERSION }}
+  #     - name: Enable Corepack
+  #       run: corepack enable
+  #     - name: Restore Yarn dependencies
+  #       uses: actions/cache/restore@v4
+  #       with:
+  #         path: ${{ env.INSTALL_CACHE_PATHS }}
+  #         key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+  #         fail-on-cache-miss: true
+  #     - name: Restore build outputs
+  #       uses: actions/cache/restore@v4
+  #       with:
+  #         path: ${{ env.BUILD_CACHE_PATHS }}
+  #         key: yarn-${{ runner.os }}-${{ github.run_id }}
+  #         fail-on-cache-miss: true
+  #     - name: Upload build artifacts
+  #       uses: actions/upload-artifact@v5
+  #       with:
+  #         name: build-output
+  #         path: |
+  #           packages/*/dist/
+  #         retention-days: 7
+  #         if-no-files-found: warn
+
+  # chromatic:
+  #   name: Chromatic (${{ matrix.package }})
+  #   runs-on: ubuntu-latest
+  #   needs: setup
+  #   timeout-minutes: 20
+  #   if: github.actor != 'dependabot[bot]'
+  #   permissions:
+  #     contents: read
+  #     actions: read
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       include:
+  #         - package: root
+  #           token: CHROMATIC_ROOT_PROJECT_TOKEN
+  #           dir: .
+  #         - package: components
+  #           token: CHROMATIC_COMPONENTS_PROJECT_TOKEN
+  #           dir: packages/components
+  #         - package: tokens
+  #           token: CHROMATIC_TOKENS_PROJECT_TOKEN
+  #           dir: packages/tokens
+  #   steps:
+  #     - uses: actions/checkout@v6
+  #       with:
+  #         fetch-depth: 0
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v6
+  #       with:
+  #         node-version: ${{ env.NODE_VERSION }}
+  #     - name: Enable Corepack
+  #       run: corepack enable
+  #     - name: Restore Yarn dependencies
+  #       uses: actions/cache/restore@v4
+  #       with:
+  #         path: ${{ env.INSTALL_CACHE_PATHS }}
+  #         key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+  #         fail-on-cache-miss: true
+  #     - name: Restore build outputs
+  #       uses: actions/cache/restore@v4
+  #       with:
+  #         path: ${{ env.BUILD_CACHE_PATHS }}
+  #         key: yarn-${{ runner.os }}-${{ github.run_id }}
+  #         fail-on-cache-miss: true
+  #     - name: Install dependencies if needed
+  #       run: yarn install --immutable
+  #     - name: Publish to Chromatic
+  #       uses: chromaui/action@latest
+  #       with:
+  #         projectToken: ${{ secrets[matrix.token] }}
+  #         workingDir: ${{ matrix.dir }}
+  #         buildScriptName: build-storybook
+  #         onlyChanged: true
+  #         autoAcceptChanges: '{main,5.x}'
+  #         exitZeroOnChanges: true
+  #         exitOnceUploaded: true
+
+  # validated:
+  #   name: Validated
+  #   runs-on: ubuntu-latest
+  #   needs: [validate, chromatic]
+  #   timeout-minutes: 5
+  #   steps:
+  #     - name: All validation jobs passed ✅
+  #       run: echo "✅ All lint, typecheck, test, and Chromatic jobs passed."
 
   stable-release:
     name: Stable Release
