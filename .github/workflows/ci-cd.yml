@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI/CD 2
 run-name: ${{ github.event_name == 'workflow_dispatch' && format('[canary] {0} by {1}', github.event.inputs.package || 'All packages', github.actor) || github.event.head_commit.message || github.ref_name }}
 
 on:
