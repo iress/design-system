@@ -347,7 +347,7 @@ jobs:
               IS_PRERELEASE="false"
               echo "  NPM Tag: $NPM_TAG (stable)"
             fi
-            yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public --provenance
+            (cd "$PKG_PATH" && npm publish --tag "$NPM_TAG" --access public --provenance)
             echo "  ✅ Published $PACKAGE@$VERSION with tag '$NPM_TAG'"
             RELEASE_INFO="${RELEASE_INFO}${PACKAGE}|${VERSION}|${IS_PRERELEASE};"
           done
@@ -494,12 +494,20 @@ jobs:
               echo "=== MCP Server files before targeted publish ==="
               find packages/mcp-server/generated -type f | head -10 || echo "No generated files found"
             fi
-            yarn workspace "$TARGET_PACKAGE" npm publish --tag canary --access public --provenance
+            PKG_PATH=$(yarn workspaces list --json | jq -r "select(.name == \"$TARGET_PACKAGE\") | .location")
+            echo "Publishing from directory: $PKG_PATH"
+            (cd "$PKG_PATH" && npm publish --tag canary --access public --provenance)
           else
             echo "📦 Publishing all packages"
             # Check MCP server files before publishing all
             echo "=== MCP Server files before foreach publish ==="
             find packages/mcp-server/generated -type f | head -10 || echo "No generated files found"
-            yarn workspaces foreach -A --no-private npm publish --tag canary --access public --provenance
+            # Publish each package individually using npm directly
+            PACKAGES=$(yarn workspaces list --json | jq -r 'select(.private != true) | .name')
+            for PACKAGE in $PACKAGES; do
+              PKG_PATH=$(yarn workspaces list --json | jq -r "select(.name == \"$PACKAGE\") | .location")
+              echo "Publishing $PACKAGE from directory: $PKG_PATH"
+              (cd "$PKG_PATH" && npm publish --tag canary --access public --provenance)
+            done
           fi
           echo "✅ Canary release published successfully!"
