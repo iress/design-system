@@ -12,7 +12,7 @@ describe('IressSelectCreate', () => {
     const menu = screen.getByRole('menu');
     expect(menu).toHaveClass('test-class', menuStyles.fluid);
 
-    const menuItem = screen.getByRole('menuitem', { name: 'Add New option' });
+    const menuItem = screen.getByRole('menuitem', { name: 'AddNew option' });
     expect(menuItem).toBeInTheDocument();
 
     const prepend = screen.getByRole('img', { name: 'Add' });
@@ -53,7 +53,7 @@ describe('IressSelectCreate', () => {
         rerender(<IressSelectCreate label="WX" />);
 
         expect(
-          screen.getByRole('menuitem', { name: 'Add WX' }),
+          screen.getByRole('menuitem', { name: 'AddWX' }),
         ).toBeInTheDocument();
       });
     });
@@ -65,7 +65,7 @@ describe('IressSelectCreate', () => {
         render(<IressSelectCreate onCreate={onCreate} />);
 
         await userEvent.click(
-          screen.getByRole('menuitem', { name: 'Add New option' }),
+          screen.getByRole('menuitem', { name: 'AddNew option' }),
         );
 
         expect(onCreate).toHaveBeenCalledOnce();
