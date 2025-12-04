@@ -1696,9 +1696,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iress-oss/ids-storybook-okta@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@iress-oss/ids-storybook-okta@npm:0.1.0"
+"@iress-oss/ids-storybook-okta@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@iress-oss/ids-storybook-okta@npm:0.1.1"
   dependencies:
     "@okta/okta-auth-js": "npm:^7.14.0"
     "@storybook/icons": "npm:2.0.1"
@@ -1706,7 +1706,7 @@ __metadata:
     react: ^18.0.0 || ^19.0.0
     react-dom: ^18.0.0 || ^19.0.0
     storybook: ^10
-  checksum: 10c0/773768f7955144795494889dcde5d104a4db4fe081fca68bdef7ab7f247b8d2b02f274d8b75b8a75b9d1a33bc13dd5e5f844cfe42e05015511d90e88eb57d8fe
+  checksum: 10c0/942b10bf7501f377257b44cda0d37807bc20c170454a0117c7281fb209e7e87820c1167e5f30ee304ad4fb64c56664f40670f9deb3ef8d1f58e0eb2349a0fad6
   languageName: node
   linkType: hard
 
@@ -1775,7 +1775,7 @@ __metadata:
     "@chromatic-com/storybook": "npm:^4.1.3"
     "@iress-oss/ids-components": "npm:^6.0.0-alpha.0"
     "@iress-oss/ids-storybook-config": "npm:^0.1.0"
-    "@iress-oss/ids-storybook-okta": "npm:^0.1.0"
+    "@iress-oss/ids-storybook-okta": "npm:^0.1.1"
     "@iress-oss/ids-storybook-sandbox": "npm:^0.1.0"
     "@iress-oss/ids-storybook-toggle-stories": "npm:^0.1.0"
     "@iress-oss/ids-storybook-version-badge": "npm:^0.1.0"
