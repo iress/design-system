@@ -33,7 +33,7 @@
   },
   "files": [
     "dist",
-    "generated/docs",
+    "generated/docs/**/*",
     "README.md",
     "LICENSE.txt"
   ],
