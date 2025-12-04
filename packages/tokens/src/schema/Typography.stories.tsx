@@ -63,7 +63,7 @@ const body = [
   },
 ];
 
-const bodyVariants = ['Regular', 'Strong', 'Emphasis'];
+const bodyVariants = ['Regular', 'Medium', 'Strong', 'Emphasis'];
 
 export default {
   title: 'Typography',
