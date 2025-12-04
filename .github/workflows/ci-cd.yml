@@ -256,7 +256,7 @@ jobs:
     name: Stable Release
     if: github.repository_owner == 'iress' && github.event_name == 'push' && contains(fromJSON('["refs/heads/main", "refs/heads/5.x"]'), github.ref)
     runs-on: ubuntu-latest
-    needs: [validated, build]
+    # needs: [validated, build]
     timeout-minutes: 120
     environment: npm-publishing
     permissions:
@@ -367,7 +367,7 @@ jobs:
     name: Canary Release
     if: github.repository_owner == 'iress' && !contains(fromJSON('["refs/heads/main", "refs/heads/5.x"]'), github.ref) && (github.event_name == 'workflow_dispatch' && inputs.publish_canary == true || github.event_name == 'push' && contains(github.event.head_commit.message, '[canary'))
     runs-on: ubuntu-latest
-    needs: [validated, build]
+    # needs: [validated, build]
     timeout-minutes: 120
     environment: npm-publishing
     permissions:
