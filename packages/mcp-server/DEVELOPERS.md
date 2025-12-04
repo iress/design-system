@@ -13,9 +13,9 @@ Terminal 2:
 ```bash
 yarn install
 yarn playwright install chromium # Install Chromium for Playwright tests
-yarn generate list               # Generate a list of all pages in Storybook
-yarn generate fetch-all          # Generate all pages in Storybook from the list
-yarn generate guidelines         # Merge foundations into guidelines for easier context
+yarn collect                     # Generate a list of all pages in Storybook
+yarn generate                    # Generate all pages in Storybook from the list
+yarn guidelines                  # Merge foundations into guidelines for easier context
 yarn build                       # Build the server
 ```
 
