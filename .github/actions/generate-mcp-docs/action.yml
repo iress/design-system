@@ -20,8 +20,6 @@ runs:
         yarn packages/mcp-server collect
         echo "Running MCP server generate script..."
         yarn packages/mcp-server generate
-        echo "Running MCP server guidelines script..."
-        yarn packages/mcp-server guidelines
       shell: bash
     - name: Stop Storybook
       run: yarn dev:kill
