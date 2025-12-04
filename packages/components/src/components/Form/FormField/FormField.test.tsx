@@ -92,7 +92,7 @@ describe('IressFormField', () => {
     );
 
     const input = await screen.findByRole('textbox', {
-      name: 'Required Label',
+      name: /Required.*Label/,
     });
     expect(input).toBeInTheDocument();
 

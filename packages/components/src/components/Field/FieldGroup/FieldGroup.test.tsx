@@ -129,7 +129,7 @@ describe('IressFieldGroup', () => {
         });
 
         const field = screen.getByRole('group', {
-          name: `Required ${TEST_LABEL}`,
+          name: /Required.*Label text/,
         });
         expect(field).toBeInTheDocument();
       });

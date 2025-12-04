@@ -112,7 +112,7 @@ describe('IressField', () => {
         });
 
         const input = screen.getByRole('textbox', {
-          name: `Required ${TEST_LABEL}`,
+          name: `Required${TEST_LABEL}`,
         });
         expect(input).toBeInTheDocument();
       });

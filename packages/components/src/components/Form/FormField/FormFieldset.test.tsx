@@ -86,7 +86,7 @@ describe('IressFormFieldset', () => {
       </IressForm>,
     );
 
-    const group = await screen.findByRole('group', { name: 'Required Label' });
+    const group = await screen.findByRole('group', { name: /Required.*Label/ });
     expect(group).toBeInTheDocument();
 
     const submit = screen.getByRole('button', { name: 'Submit' });

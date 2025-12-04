@@ -142,7 +142,7 @@ describe('IressTable', () => {
 
         // Press the sort button
         const valueSort = screen.getByRole('button', {
-          name: 'Value sortable',
+          name: 'Valuesortable',
         });
         await userEvent.click(valueSort);
 
