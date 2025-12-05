@@ -60,7 +60,6 @@ export const getMainConfig = ({
 }: MainConfig): StorybookConfig => {
   const config: StorybookConfig = {
     addons: [
-      '@iress-oss/ids-storybook-sandbox',
       '@iress-oss/ids-storybook-okta',
       '@storybook/addon-links',
       '@storybook/addon-a11y',

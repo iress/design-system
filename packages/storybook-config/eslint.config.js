@@ -10,7 +10,7 @@ import {
 
 export default [
   {
-    ignores: [...baseIgnores],
+    ignores: [...baseIgnores, '**/ComponentCanvas.template.tsx'],
   },
   baseJavaScriptConfig,
   createTypeScriptConfig(import.meta.dirname, [

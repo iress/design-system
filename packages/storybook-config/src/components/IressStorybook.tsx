@@ -11,12 +11,15 @@ import {
   COMPONENT_MAPPING_DEFAULT,
   type IressStorybookComponentMapping,
   IressStorybookContext,
+  type IressStorybookContextProps,
 } from './IressStorybookContext';
 import { cssVars } from '@iress-oss/ids-tokens';
 
 const IDSStyles = lazy(() => import('./IDSStyles'));
 
-export interface IressStorybookProps extends DocsContainerProps {
+export interface IressStorybookProps
+  extends DocsContainerProps,
+    Pick<IressStorybookContextProps, 'codeSandbox'> {
   /**
    * The children to render within the Storybook Docs Container
    */
@@ -195,6 +198,16 @@ addons.getChannel().on(DOCS_RENDERED, () => {
 
 export const IressStorybook = ({
   children,
+  codeSandbox = {
+    additionalTransformers: {
+      replaceAliasWithPackageName: (code: string) =>
+        code.replace(/@\/main/gi, '@iress-oss/ids-components'),
+    },
+    dependencies: {
+      '@iress-oss/ids-components': 'alpha',
+    },
+    storyPackageName: '@iress-oss/ids-components',
+  },
   componentMapping = COMPONENT_MAPPING_DEFAULT,
   noStyles,
   ...props
@@ -202,7 +215,7 @@ export const IressStorybook = ({
   const { IressProvider, IressText } = componentMapping;
 
   return (
-    <IressStorybookContext value={componentMapping}>
+    <IressStorybookContext value={{ codeSandbox, ...componentMapping }}>
       <IressStorybookStyles />
       <Unstyled>
         <IressProvider>

@@ -48,5 +48,88 @@ export const COMPONENT_MAPPING_DEFAULT: IressStorybookComponentMapping = {
   useBreakpoint: useBreakpoint,
 };
 
-export const IressStorybookContext =
-  createContext<IressStorybookComponentMapping>(COMPONENT_MAPPING_DEFAULT);
+export interface IressStorybookContextProps
+  extends IressStorybookComponentMapping {
+  /**
+   * Additional settings to add to the CodeSandbox link.
+   *
+   * @example
+   * ```ts
+   * {
+   *   dependencies: {
+   *     'some-package': '1.0.0',
+   *   },
+   *   html: '<div id="root"></div>',
+   * }
+   */
+  codeSandbox?: {
+    /**
+     * Additional code transformers to apply before sending the code to the sandbox.
+     *
+     * @example
+     * ```ts
+     * {
+     *   replaceAliasWithPackageName: (code) =>
+     *     code.replace(/@\/main/gi, '@iress-oss/ids-components'),
+     * }
+     * ```
+     */
+    additionalTransformers?: Record<string, (code: string) => string>;
+
+    /**
+     * The package name of the story being rendered.
+     * This is used to automatically add the package as a dependency in the sandbox.
+     *
+     * @example @iress-oss/ids-components
+     */
+    storyPackageName?: string;
+
+    /**
+     * Additional dependencies to add to the CodeSandbox package.json.
+     *
+     * @example
+     * ```ts
+     * {
+     *   'some-package': '1.0.0',
+     * }
+     * ```
+     */
+    dependencies?: Record<string, string>;
+
+    /**
+     * Additional HTML content to include in the CodeSandbox.
+     *
+     * @example
+     * ```html
+     * '<div id="root"></div>'
+     * `
+     */
+    html?: string;
+
+    /**
+     * A custom template to use to display story code in the sandbox,
+     * - <Story /> will be replaced with the story code.
+     * - Imports will always be added to the top of the file.
+     * - This will only be used if you do not override the story's code directly.
+     * - You can completely override this template at the story level.
+     *
+     * @example
+     * ```tsx
+     * import React from 'react';
+     * import ReactDOM from 'react-dom';
+     *
+     * ReactDOM.render(
+     *   <React.StrictMode>
+     *     <Story />
+     *   </React.StrictMode>,
+     *   document.getElementById('root')
+     * );
+     * `
+     */
+    template?: string;
+  };
+}
+
+export const IressStorybookContext = createContext<IressStorybookContextProps>(
+  COMPONENT_MAPPING_DEFAULT,
+);
