@@ -6,8 +6,8 @@ import {
   type PaddingSizes,
   type ResponsiveProp,
   type SystemValidationStatuses,
+  type SpacingToken,
 } from './types';
-import { type SpacingToken } from '@/styled-system/tokens';
 import { type UtilityValues } from './styled-system/types/prop-type';
 
 /**
@@ -261,7 +261,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin
    */
-  m?: ResponsiveProp<UtilityValues['margin']>;
+  m?: ResponsiveProp<SpacingToken>;
 
   /**
    * The **`my`** property is short for `margin-block`. It defines the logical block start and end margins of an element, which maps to physical margins depending on the element's writing mode, directionality, and text orientation.
@@ -274,7 +274,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-block
    */
-  my?: ResponsiveProp<UtilityValues['marginBlock']>;
+  my?: ResponsiveProp<SpacingToken>;
 
   /**
    * The **`mx`** property is short for `margin-inline`. It is a shorthand property that defines both the logical inline start and end margins of an element, which maps to physical margins depending on the element's writing mode, directionality, and text orientation.
@@ -287,7 +287,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline
    */
-  mx?: ResponsiveProp<UtilityValues['marginInline']>;
+  mx?: ResponsiveProp<SpacingToken>;
 
   /**
    * The **`mb`** property is short for `margin-bottom` and sets the margin area on the bottom side of an element. A positive value places it farther from its neighbors, while a negative value places it closer.
@@ -300,7 +300,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
    */
-  mb?: ResponsiveProp<UtilityValues['marginBottom']>;
+  mb?: ResponsiveProp<SpacingToken>;
 
   /**
    * The **`ml`** property is short for `margin-left` and sets the margin area on the left side of an element. A positive value places it farther from its neighbors, while a negative value places it closer.
@@ -313,7 +313,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-left
    */
-  ml?: ResponsiveProp<UtilityValues['marginLeft']>;
+  ml?: ResponsiveProp<SpacingToken>;
 
   /**
    * The **`mr`** property is short for `margin-right` and sets the margin area on the right side of an element. A positive value places it farther from its neighbors, while a negative value places it closer.
@@ -326,7 +326,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-right
    */
-  mr?: ResponsiveProp<UtilityValues['marginRight']>;
+  mr?: ResponsiveProp<SpacingToken>;
 
   /**
    * The **`mt`** property is short for `margin-top` and sets the margin area on the top side of an element. A positive value places it farther from its neighbors, while a negative value places it closer.
@@ -339,7 +339,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
    */
-  mt?: ResponsiveProp<UtilityValues['marginTop']>;
+  mt?: ResponsiveProp<SpacingToken>;
 
   /**
    * The **`noGutter`** property is used to remove the bottom margin from the last child of a component.

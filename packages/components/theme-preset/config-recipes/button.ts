@@ -44,7 +44,7 @@ export const buttonRecipe = defineSlotRecipe({
       py: 'button.block',
       textAlign: 'center',
       textDecoration: 'none',
-      textStyle: 'typography.body.md',
+      textStyle: 'typography.body.md.medium',
       transition: 'all',
       transformStyle: 'preserve-3d',
       userSelect: 'none',

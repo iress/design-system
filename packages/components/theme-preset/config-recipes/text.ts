@@ -1,3 +1,4 @@
+import { cssVars } from '@iress-oss/ids-tokens';
 import { defineRecipe, type SystemStyleObject } from '@pandacss/dev';
 
 const inlineStyles = {
@@ -24,6 +25,7 @@ const inlineStyles = {
   },
   '& a:not([class])': {
     color: 'colour.primary.text',
+    fontWeight: cssVars.typography.body.md._medium.fontWeight,
     textDecoration: 'underline',
     _hover: {
       textDecoration: 'none',

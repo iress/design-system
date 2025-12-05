@@ -29,7 +29,7 @@ export const link = sva({
       fontKerning: 'none',
       gap: 'spacing.1',
       pointerEvents: 'auto',
-      textStyle: 'typography.body.md',
+      textStyle: 'typography.body.md.medium',
       whiteSpace: 'normal',
       width: 'auto',
       color: 'colour.primary.text',
