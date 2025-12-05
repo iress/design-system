@@ -15,12 +15,12 @@ export const alert = sva({
     alert: {
       display: 'flex',
       flexWrap: 'nowrap',
-      gap: 'spacing.200',
+      gap: 'spacing.2',
       boxSizing: 'border-box',
-      marginBottom: 'spacing.400',
+      marginBottom: 'spacing.4',
       borderRadius: 'radius.system.form',
-      paddingBlock: 'spacing.200',
-      paddingInline: 'spacing.300',
+      paddingBlock: 'spacing.2',
+      paddingInline: 'spacing.3',
       textStyle: 'typography.body.md',
       border: 'alert',
       height: 'auto',
@@ -35,25 +35,25 @@ export const alert = sva({
     },
     heading: {
       display: 'inline-block',
-      marginRight: 'spacing.100',
+      marginRight: 'spacing.1',
       _empty: {
         display: 'none',
       },
       _directNestedHeadings: {
-        marginBlock: 'spacing.000',
+        marginBlock: 'spacing.0',
         textStyle: 'typography.body.md.strong',
       },
     },
     children: {
-      marginBlock: 'spacing.000',
-      '& > p': { marginBlock: 'spacing.000' },
+      marginBlock: 'spacing.0',
+      '& > p': { marginBlock: 'spacing.0' },
     },
     footer: {
-      paddingBlockStart: 'spacing.100',
+      paddingBlockStart: 'spacing.1',
     },
     action: {
       minHeight: '[0]',
-      py: 'spacing.100',
+      py: 'spacing.1',
       _before: {
         bg: 'transparent',
         border: 'divider',
@@ -72,9 +72,9 @@ export const alert = sva({
     },
     dismiss: {
       marginLeft: 'auto',
-      marginTop: '-spacing.200',
-      marginRight: '-spacing.300',
-      marginBottom: '-spacing.200',
+      marginTop: '-spacing.2',
+      marginRight: '-spacing.3',
+      marginBottom: '-spacing.2',
     },
   },
   variants: {
@@ -187,7 +187,7 @@ export const alert = sva({
           borderBottomLeftRadius: 'radius.000',
           borderWidth: '[0]',
           borderLeftWidth: '[2.5px]',
-          paddingBlock: 'spacing.400',
+          paddingBlock: 'spacing.4',
         },
       },
       'site-wide': {

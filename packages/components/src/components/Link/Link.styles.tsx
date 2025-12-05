@@ -27,7 +27,7 @@ export const link = sva({
       cursor: 'pointer',
       display: 'inline-flex',
       fontKerning: 'none',
-      gap: 'spacing.100',
+      gap: 'spacing.1',
       pointerEvents: 'auto',
       textStyle: 'typography.body.md',
       whiteSpace: 'normal',

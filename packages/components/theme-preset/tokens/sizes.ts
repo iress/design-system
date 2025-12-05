@@ -107,7 +107,7 @@ export const heights = {
   },
   'progress.height': {
     description: 'Height of the progress bar',
-    value: cssVars.spacing[200],
+    value: cssVars.spacing['2'],
   },
 };
 

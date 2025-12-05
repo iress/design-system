@@ -7,7 +7,7 @@ export const radioGroup = cva({
       stack: {
         display: 'inline-flex',
         flexFlow: 'column wrap',
-        rowGap: 'spacing.200',
+        rowGap: 'spacing.2',
         '& > *': {
           flexBasis: '[0]',
         },
@@ -15,7 +15,7 @@ export const radioGroup = cva({
       block: {
         display: 'flex',
         flexFlow: 'column wrap',
-        rowGap: 'spacing.200',
+        rowGap: 'spacing.2',
         '& label': {
           flexBasis: '[100%]',
         },
@@ -24,7 +24,7 @@ export const radioGroup = cva({
         display: 'flex',
         flexFlow: 'row wrap',
         width: '[100%]',
-        gap: 'spacing.200',
+        gap: 'spacing.2',
         '& label': {
           flexBasis: '[auto]',
           flexGrow: '[0]',
@@ -32,7 +32,7 @@ export const radioGroup = cva({
       },
       inlineFlex: {
         display: 'inline-flex',
-        gap: 'spacing.200',
+        gap: 'spacing.2',
       },
       inlineEqualWidth: {
         display: 'flex',

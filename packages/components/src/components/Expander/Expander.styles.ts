@@ -44,7 +44,7 @@ export const expander = sva({
       overflow: 'hidden',
     },
     content: {
-      py: 'spacing.200',
+      py: 'spacing.2',
     },
   },
   variants: {
@@ -56,12 +56,12 @@ export const expander = sva({
           alignItems: 'flex-end',
           width: '[100%]',
           textStyle: 'typography.heading.4',
-          py: 'spacing.300',
+          py: 'spacing.3',
           borderBottom: 'divider',
           transition: '[all 0.2s ease-in-out]',
 
           _after: {
-            mr: 'spacing.200',
+            mr: 'spacing.2',
           },
 
           _hover: {

@@ -3,8 +3,8 @@ import { defineRecipe, type SystemStyleObject } from '@pandacss/dev';
 const inlineStyles = {
   '& code': {
     textStyle: 'typography.code',
-    paddingBlock: 'spacing.000',
-    paddingInline: 'spacing.100',
+    paddingBlock: 'spacing.0',
+    paddingInline: 'spacing.1',
     background: 'colour.neutral.20',
     color: 'colour.neutral.80',
     borderWidth: '0.5px',
@@ -51,16 +51,16 @@ const blockStyles = {
     textStyle: 'typography.body.md.strong',
   },
   _nestedHeadings: {
-    marginBlockStart: 'spacing.400',
-    marginBlockEnd: 'spacing.200',
+    marginBlockStart: 'spacing.4',
+    marginBlockEnd: 'spacing.2',
     '&:first-child': {
-      marginBlockStart: 'spacing.000',
+      marginBlockStart: 'spacing.0',
     },
     '&:has(+ p)': {
-      marginBlockEnd: 'spacing.100',
+      marginBlockEnd: 'spacing.1',
     },
     '& + p': {
-      marginBlockStart: 'spacing.100',
+      marginBlockStart: 'spacing.1',
     },
     '& *': {
       fontSize: 'inherit',
@@ -70,15 +70,15 @@ const blockStyles = {
     },
   },
   '& p': {
-    marginBlock: 'spacing.400',
+    marginBlock: 'spacing.4',
     _siblingHeadings: {
-      marginBlockStart: 'spacing.800',
+      marginBlockStart: 'spacing.8',
     },
     '&:first-child': {
-      marginBlockStart: 'spacing.000',
+      marginBlockStart: 'spacing.0',
     },
     '&:last-child': {
-      marginBlockEnd: 'spacing.000',
+      marginBlockEnd: 'spacing.0',
     },
   },
   '& blockquote': {
@@ -86,7 +86,7 @@ const blockStyles = {
     marginBlockStart: '[0px]',
     marginInlineStart: '[0px]',
     position: 'relative',
-    paddingInlineStart: 'spacing.700',
+    paddingInlineStart: 'spacing.7',
     _after: {
       content: `''`,
       backgroundColor: 'colour.neutral.30',
@@ -101,28 +101,28 @@ const blockStyles = {
   '& hr': {
     border: 0,
     borderBlockStart: 'divider',
-    marginBlock: 'spacing.600',
+    marginBlock: 'spacing.6',
   },
   '& ul': {
     listStyleType: 'disc',
-    marginBlockEnd: 'spacing.400',
-    paddingInlineStart: 'spacing.400',
+    marginBlockEnd: 'spacing.4',
+    paddingInlineStart: 'spacing.4',
     '& > li': {
-      marginBlockEnd: 'spacing.100',
+      marginBlockEnd: 'spacing.1',
     },
     _siblingHeadings: {
-      marginBlockStart: 'spacing.800',
+      marginBlockStart: 'spacing.8',
     },
   },
   '& ol': {
     listStyleType: 'decimal',
-    marginBlockEnd: 'spacing.400',
-    paddingInlineStart: 'spacing.600',
+    marginBlockEnd: 'spacing.4',
+    paddingInlineStart: 'spacing.6',
     '& > li': {
-      marginBlockEnd: 'spacing.100',
+      marginBlockEnd: 'spacing.1',
     },
     _siblingHeadings: {
-      marginBlockStart: 'spacing.800',
+      marginBlockStart: 'spacing.8',
     },
   },
   '& table:not([class])': {
@@ -133,19 +133,19 @@ const blockStyles = {
     mb: 'xl',
 
     '& th, & td': {
-      paddingInline: 'spacing.100',
-      paddingBlock: 'spacing.400',
+      paddingInline: 'spacing.1',
+      paddingBlock: 'spacing.4',
       border: 'table',
       borderLeftWidth: '0px',
       borderRightWidth: '0px',
     },
 
     '& th:first-child, & td:first-child': {
-      paddingInlineStart: 'spacing.000',
+      paddingInlineStart: 'spacing.0',
     },
 
     '& th:last-child, & td:last-child': {
-      paddingInlineEnd: 'spacing.000',
+      paddingInlineEnd: 'spacing.0',
     },
 
     '& th': {
@@ -170,8 +170,8 @@ const blockStyles = {
   '& pre:not(:has(.docblock-source:only-child), [class], .sbdocs-diff-viewer *)':
     {
       textStyle: 'typography.code',
-      paddingBlock: 'spacing.200',
-      paddingInline: 'spacing.200',
+      paddingBlock: 'spacing.2',
+      paddingInline: 'spacing.2',
       background: 'colour.neutral.20',
       color: 'colour.neutral.80',
       borderWidth: '0.5px',
@@ -195,7 +195,7 @@ export const textRecipe = defineRecipe({
      */
     element: {
       p: {
-        marginBlockEnd: 'spacing.200',
+        marginBlockEnd: 'spacing.2',
       },
       div: blockStyles,
       span: {},

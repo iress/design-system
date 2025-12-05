@@ -31,13 +31,13 @@ export const Vertical: Story = {
   render: (args) => {
     if (args.vertical) {
       return (
-        <IressInline gap="spacing.400" verticalAlign="middle">
+        <IressInline gap="spacing.4" verticalAlign="middle">
           {getChildren(args)}
         </IressInline>
       );
     }
 
-    return <IressStack gap="spacing.400">{getChildren(args)}</IressStack>;
+    return <IressStack gap="spacing.4">{getChildren(args)}</IressStack>;
   },
 };
 
@@ -48,7 +48,7 @@ export const Gutter: Story = {
   render: (args) => {
     if (args.vertical) {
       return (
-        <IressStack gap="spacing.100">
+        <IressStack gap="spacing.1">
           {GUTTER_SIZES.map((mx) => (
             <IressPanel key={mx}>
               <IressText element="h2">
@@ -67,7 +67,7 @@ export const Gutter: Story = {
     }
 
     return (
-      <IressInline gap="spacing.400">
+      <IressInline gap="spacing.4">
         {GUTTER_SIZES.map((my) => (
           <IressPanel key={my}>
             <IressText element="h2">

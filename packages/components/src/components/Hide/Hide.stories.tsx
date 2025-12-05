@@ -37,7 +37,7 @@ export const HiddenOn: Story = {
     const description = args.visuallyHidden ? 'visually ' : 'totally ';
 
     return (
-      <IressStack gap="spacing.100">
+      <IressStack gap="spacing.1">
         <IressPanel>
           <CurrentBreakpoint />
         </IressPanel>

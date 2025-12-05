@@ -22,7 +22,7 @@ describe('IressRow', () => {
       GlobalCSSClass.Row,
     );
 
-    expect(element).not.toHaveClass('cg_spacing.000');
+    expect(element).not.toHaveClass('cg_spacing.0');
 
     expect(getByTestId('children')).toBeInTheDocument();
   });
@@ -31,13 +31,13 @@ describe('IressRow', () => {
     describe('gutter', () => {
       it(`adds the gap for all breakpoints of string passed`, () => {
         const { getByTestId } = render(
-          <IressRow data-testid={TEST_ID} gutter="spacing.400" />,
+          <IressRow data-testid={TEST_ID} gutter="spacing.4" />,
         );
 
         const element = getByTestId(TEST_ID);
 
-        expect(element).toHaveClass('gutter_spacing.400');
-        expect(element).not.toHaveClass('gutter_spacing.000');
+        expect(element).toHaveClass('gutter_spacing.4');
+        expect(element).not.toHaveClass('gutter_spacing.0');
       });
 
       it(`adds the correct responsive gutter classes from object - two options`, () => {
@@ -45,15 +45,15 @@ describe('IressRow', () => {
           <IressRow
             data-testid={TEST_ID}
             gutter={{
-              xs: 'spacing.000',
-              md: 'spacing.400',
+              xs: 'spacing.0',
+              md: 'spacing.4',
             }}
           />,
         );
 
         expect(getByTestId(TEST_ID)).toHaveClass(
-          'xs:gutter_spacing.000',
-          'md:gutter_spacing.400',
+          'xs:gutter_spacing.0',
+          'md:gutter_spacing.4',
         );
       });
 
@@ -62,17 +62,17 @@ describe('IressRow', () => {
           <IressRow
             data-testid={TEST_ID}
             gutter={{
-              sm: 'spacing.1200',
-              lg: 'spacing.200',
-              xxl: 'spacing.200',
+              sm: 'spacing.10',
+              lg: 'spacing.2',
+              xxl: 'spacing.2',
             }}
           />,
         );
 
         expect(getByTestId(TEST_ID)).toHaveClass(
-          'sm:gutter_spacing.1200',
-          'lg:gutter_spacing.200',
-          'xxl:gutter_spacing.200',
+          'sm:gutter_spacing.10',
+          'lg:gutter_spacing.2',
+          'xxl:gutter_spacing.2',
         );
       });
     });

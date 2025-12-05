@@ -1,5 +1,6 @@
 import { row } from './Row.styles';
 import {
+  type PositiveSpacingToken,
   type HorizontalAligns,
   type IressStyledProps,
   type ResponsiveProp,
@@ -7,7 +8,6 @@ import {
 } from '@/types';
 import { type ReactNode, type FC } from 'react';
 import { styled } from '@/styled-system/jsx';
-import { type PositiveSpacingToken } from '@theme-preset/tokens/spacing';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 

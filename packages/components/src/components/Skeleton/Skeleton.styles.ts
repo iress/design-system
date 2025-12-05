@@ -26,7 +26,7 @@ export const skeleton = cva({
       },
       text: {
         width: '[100%]',
-        height: '[spacing.600]',
+        height: '[spacing.6]',
       },
     },
   },

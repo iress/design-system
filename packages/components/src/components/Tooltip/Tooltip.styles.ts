@@ -12,7 +12,7 @@ export const tooltip = sva({
       zIndex: '600',
       width: '[max-content]',
       maxWidth: '[20em]',
-      padding: 'spacing.200',
+      padding: 'spacing.2',
       borderRadius: 'radius.system.form',
       borderStyle: 'solid',
       layerStyle: 'elevation.floating',

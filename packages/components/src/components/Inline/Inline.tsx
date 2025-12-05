@@ -3,11 +3,11 @@ import {
   type VerticalAligns,
   type IressStyledProps,
   type ResponsiveProp,
+  type PositiveSpacingToken,
 } from '@/types';
 import { inline } from './Inline.styles';
 import { styled } from '@/styled-system/jsx';
 import { type FC, type ReactNode } from 'react';
-import { type PositiveSpacingToken } from '@theme-preset/tokens/spacing';
 import { GlobalCSSClass } from '@/enums';
 import { cx } from '@/styled-system/css';
 

@@ -51,7 +51,7 @@ export const Default: Story = {
 
 export const Element: Story = {
   render: (args) => (
-    <IressStack gap="spacing.100">
+    <IressStack gap="spacing.1">
       {TEXT_ELEMENTS.map((element) => (
         <IressText {...args} key={element} element={element}>
           This is a {element} element.
@@ -167,7 +167,7 @@ export const HeadingsWithIcons: HeadingStory = {
 
 export const TypographicBlock: Story = {
   render: (args) => (
-    <IressText {...args} maxWidth="container.md" mx="auto" px="spacing.200">
+    <IressText {...args} maxWidth="container.md" mx="auto" px="spacing.2">
       <h2>History</h2>
       <h3>Founding and Early Years (1993 - 2000)</h3>
       <p>

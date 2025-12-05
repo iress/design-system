@@ -446,7 +446,7 @@ const MenuItem = <
       ) : (
         node
       )}
-      {divider && <IressMenuDivider mt="spacing.100" />}
+      {divider && <IressMenuDivider mt="spacing.1" />}
     </>
   );
 };

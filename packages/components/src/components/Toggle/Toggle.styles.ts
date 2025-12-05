@@ -12,7 +12,7 @@ export const toggle = sva({
   base: {
     toggleBase: {
       display: 'inline-flex',
-      gap: 'spacing.050',
+      gap: 'spacing.1',
       color: 'colour.primary.fill',
     },
     toggleButtonContainer: {
@@ -39,7 +39,7 @@ export const toggle = sva({
       position: 'relative',
       justifyContent: 'flex-start',
       alignItems: 'center',
-      padding: 'spacing.000',
+      padding: 'spacing.0',
       cursor: 'pointer',
       border: '[none]',
       backgroundColor: 'transparent',
@@ -52,10 +52,10 @@ export const toggle = sva({
       },
       _before: {
         content: '""',
-        top: 'spacing.000',
-        left: 'spacing.000',
-        right: 'spacing.000',
-        bottom: 'spacing.000',
+        top: 'spacing.0',
+        left: 'spacing.0',
+        right: 'spacing.0',
+        bottom: 'spacing.0',
         position: 'absolute',
         borderRadius: '[{sizes.toggle.thumb}]',
         pointerEvents: 'none',
@@ -83,14 +83,14 @@ export const toggle = sva({
     },
     checkboxMark: {
       opacity: 0,
-      marginInlineStart: 'spacing.050',
+      marginInlineStart: 'spacing.1',
       '&&:hover': {
         bg: 'transparent',
       },
     },
     label: {
       display: 'inline-block',
-      marginInlineEnd: 'spacing.100',
+      marginInlineEnd: 'spacing.1',
       color: 'colour.neutral.80',
       textStyle: 'typography.body.md.strong',
       lineHeight: '1.5rem',
@@ -111,8 +111,8 @@ export const toggle = sva({
           flexDirection: 'row-reverse',
         },
         label: {
-          marginInlineStart: 'spacing.100',
-          marginInlineEnd: 'spacing.000',
+          marginInlineStart: 'spacing.1',
+          marginInlineEnd: 'spacing.0',
         },
       },
       'inline-between': {
@@ -131,7 +131,7 @@ export const toggle = sva({
         },
         label: {
           display: 'block',
-          marginBlockEnd: 'spacing.100',
+          marginBlockEnd: 'spacing.1',
         },
       },
     },
@@ -142,7 +142,7 @@ export const toggle = sva({
           display: 'inline-block',
         },
         checkboxMark: {
-          marginInlineEnd: 'spacing.100',
+          marginInlineEnd: 'spacing.1',
         },
       },
     },

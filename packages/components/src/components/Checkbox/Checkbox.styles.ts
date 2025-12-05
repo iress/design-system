@@ -25,14 +25,14 @@ export const checkbox = sva({
     label: {
       position: 'relative',
       lineHeight: '1.5',
-      margin: 'spacing.000',
+      margin: 'spacing.0',
       display: 'inline-flex',
       cursor: 'pointer',
     },
     labelSpan: {},
     mark: {
       color: '[currentColor]',
-      marginInlineEnd: 'spacing.200',
+      marginInlineEnd: 'spacing.2',
       flexShrink: 0,
       _groupFocusWithin: {
         layerStyle: 'elevation.focus',
@@ -46,7 +46,7 @@ export const checkbox = sva({
           display: 'inline-block',
         },
         mark: {
-          marginInlineEnd: 'spacing.000',
+          marginInlineEnd: 'spacing.0',
         },
         labelSpan: {
           srOnly: true,
@@ -57,7 +57,7 @@ export const checkbox = sva({
       true: {
         label: {
           position: 'relative',
-          padding: 'spacing.000',
+          padding: 'spacing.0',
           width: '[100%]',
           cursor: 'pointer',
           borderRadius: 'radius.system.form',
@@ -86,7 +86,7 @@ export const checkbox = sva({
           borderStyle: 'solid',
           borderWidth: '1px',
           borderRadius: 'radius.system.form',
-          padding: 'spacing.300',
+          padding: 'spacing.3',
         },
       },
     },

@@ -10,7 +10,7 @@ const Slideouts = () => {
   const { showSlideout } = useSlideout();
 
   return (
-    <IressInline gap="spacing.400">
+    <IressInline gap="spacing.4">
       <IressButton onClick={() => showSlideout('sm')}>sm</IressButton>
       <IressSlideout id="sm" size="sm">
         Small slideout

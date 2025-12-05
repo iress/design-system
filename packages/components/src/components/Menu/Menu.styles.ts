@@ -82,8 +82,8 @@ export const menu = sva({
     insidePopover: {
       true: {
         root: {
-          my: 'spacing.200',
-          px: 'spacing.200',
+          my: 'spacing.2',
+          px: 'spacing.2',
         },
       },
     },
@@ -101,13 +101,13 @@ export const menu = sva({
           display: 'inline-flex',
           flexWrap: 'wrap',
           flexDirection: 'column',
-          rowGap: 'spacing.100',
+          rowGap: 'spacing.1',
         },
       },
       inline: {
         root: {
           display: 'inline-flex',
-          columnGap: 'spacing.100',
+          columnGap: 'spacing.1',
           flexWrap: 'wrap',
         },
         item: {
@@ -120,7 +120,7 @@ export const menu = sva({
         root: {
           display: 'flex',
           flexDirection: 'row',
-          columnGap: 'spacing.100',
+          columnGap: 'spacing.1',
 
           '& > :not(hr)': {
             flex: '1',
@@ -179,9 +179,9 @@ export const menu = sva({
           _after: {
             content: '""',
             position: 'absolute',
-            top: 'spacing.000',
-            left: 'spacing.000',
-            bottom: 'spacing.000',
+            top: 'spacing.0',
+            left: 'spacing.0',
+            bottom: 'spacing.0',
             width: '[{radii.radius.025}]',
             bg: 'colour.primary.fill',
             borderRadius: 'radius.system.badge',
@@ -198,9 +198,9 @@ export const menu = sva({
           _after: {
             content: '""',
             position: 'absolute',
-            left: 'spacing.000',
-            right: 'spacing.000',
-            bottom: 'spacing.000',
+            left: 'spacing.0',
+            right: 'spacing.0',
+            bottom: 'spacing.0',
             height: '[{radii.radius.025}]',
             bg: 'colour.primary.fill',
             borderRadius: 'radius.system.badge',

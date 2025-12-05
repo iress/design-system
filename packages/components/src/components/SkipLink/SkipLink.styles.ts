@@ -7,7 +7,7 @@ export const skipLink = cva({
     left: '[50%]',
     zIndex: '100',
     transform: '[translateX(-50%) translateY(-125%)]',
-    marginTop: 'spacing.200',
+    marginTop: 'spacing.2',
 
     _focus: {
       transform: '[translateX(-50%) translateY(0)]',

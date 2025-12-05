@@ -64,7 +64,7 @@ export const Default: Story = {
     children: <IressPlaceholder>Column</IressPlaceholder>,
     numberOfColumns: 2,
     row: {
-      gutter: 'spacing.400',
+      gutter: 'spacing.4',
     },
   },
   render: ({ numberOfColumns, row, ...args }) => {
@@ -88,7 +88,7 @@ export const AutoSized: Story = {
     ...removeArgTypes(['numberOfColumns']),
   },
   render: ({ row, ...column }) => (
-    <IressStack gap="spacing.400">
+    <IressStack gap="spacing.4">
       <IressRow {...row}>
         <IressCol {...column}>
           <IressPlaceholder>1 of 2</IressPlaceholder>
@@ -118,7 +118,7 @@ export const Span: Story = {
     ...removeArgTypes(['numberOfColumns', 'span']),
   },
   render: ({ row, ...column }) => (
-    <IressStack gap="spacing.400">
+    <IressStack gap="spacing.4">
       <IressRow {...row}>
         <IressCol {...column} span="12">
           <IressPlaceholder>12</IressPlaceholder>
@@ -200,7 +200,7 @@ export const ResponsiveSpan: Story = {
     columns: columnsArgType,
   },
   render: ({ row, columns = [], ...columnProps }) => (
-    <IressStack gap="spacing.400">
+    <IressStack gap="spacing.4">
       <IressPanel>
         Current breakpoint: <CurrentBreakpoint />.
       </IressPanel>
@@ -232,7 +232,7 @@ export const Offset: Story = {
     ...removeArgTypes(['numberOfColumns', 'offset']),
   },
   render: ({ row, ...column }) => (
-    <IressStack gap="spacing.400">
+    <IressStack gap="spacing.4">
       <IressRow {...row}>
         <IressCol {...column} offset="1">
           <IressPlaceholder>1</IressPlaceholder>
@@ -310,7 +310,7 @@ export const ResponsiveOffset: Story = {
     columns: columnsArgType,
   },
   render: ({ row, columns = [], ...columnProps }) => (
-    <IressStack gap="spacing.400">
+    <IressStack gap="spacing.4">
       <IressPanel>
         Current breakpoint: <CurrentBreakpoint />.
       </IressPanel>

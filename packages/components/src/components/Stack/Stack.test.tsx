@@ -24,46 +24,46 @@ describe('IressStack', () => {
     });
 
     it('should render with the default classes when gutter is provided', () => {
-      const { getByTestId } = renderComponent({ gap: 'spacing.400' });
+      const { getByTestId } = renderComponent({ gap: 'spacing.4' });
       const component = getByTestId('test-component');
       expect(component).not.toHaveClass('iress-u-stack');
       expect(component).not.toHaveClass('iress--gutter--md');
-      expect(component).toHaveClass('gap_spacing.400');
+      expect(component).toHaveClass('gap_spacing.4');
     });
 
     describe('gutter', () => {
       it('should use the same value for all breakpoints', () => {
         const screen = renderComponent({
-          gap: 'spacing.400',
+          gap: 'spacing.4',
         });
 
         const container = screen.getByTestId('test-component');
 
         expect(container).not.toHaveClass('iress-u-stack');
         expect(container).not.toHaveClass(/iress--gutter/);
-        expect(container).toHaveClass('gap_spacing.400');
+        expect(container).toHaveClass('gap_spacing.4');
       });
     });
 
     describe('gap', () => {
       it('should use the same value for all breakpoints', () => {
         const screen = renderComponent({
-          gap: 'spacing.400',
+          gap: 'spacing.4',
         });
 
         const container = screen.getByTestId('test-component');
 
         expect(container).not.toHaveClass('iress-u-stack');
         expect(container).not.toHaveClass(/iress--gutter/);
-        expect(container).toHaveClass('gap_spacing.400');
+        expect(container).toHaveClass('gap_spacing.4');
       });
 
       it('should handle different values for different breakpoints', () => {
         const screen = renderComponent({
           gap: {
-            base: 'spacing.200',
-            md: 'spacing.400',
-            lg: 'spacing.800',
+            base: 'spacing.2',
+            md: 'spacing.4',
+            lg: 'spacing.8',
           },
         });
 
@@ -77,22 +77,22 @@ describe('IressStack', () => {
 
       it('should not interfere with other stack properties', () => {
         const screen = renderComponent({
-          gap: 'spacing.400',
+          gap: 'spacing.4',
         });
 
         const container = screen.getByTestId('test-component');
-        expect(container).toHaveClass('gap_spacing.400');
+        expect(container).toHaveClass('gap_spacing.4');
         expect(container).not.toHaveClass('iress-u-stack');
         expect(container).not.toHaveClass('iress--gutter--md');
       });
 
       it('should handle zero spacing', () => {
         const screen = renderComponent({
-          gap: 'spacing.000',
+          gap: 'spacing.0',
         });
 
         const container = screen.getByTestId('test-component');
-        expect(container).toHaveClass('gap_spacing.000');
+        expect(container).toHaveClass('gap_spacing.0');
         expect(container).not.toHaveClass('iress-u-stack');
         expect(container).not.toHaveClass(/iress--gutter/);
       });

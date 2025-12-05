@@ -24,11 +24,11 @@ export const modal = sva({
     },
     closeButton: {
       position: 'absolute',
-      top: 'spacing.200',
-      right: 'spacing.200',
+      top: 'spacing.2',
+      right: 'spacing.2',
     },
     header: {
-      mb: 'spacing.400',
+      mb: 'spacing.4',
     },
     footer: {
       borderBlockStart: 'divider',
@@ -36,16 +36,16 @@ export const modal = sva({
     modal: {
       position: 'relative',
       borderRadius: 'radius.system.layout',
-      padding: 'spacing.000',
+      padding: 'spacing.0',
       width: 'overlay.md',
-      maxWidth: '[calc(100vw - ({spacing.spacing.700}))]',
+      maxWidth: '[calc(100vw - ({spacing.spacing.7}))]',
       minHeight: 'auto',
       layerStyle: 'elevation.floating',
       background: 'colour.neutral.10',
       outline: '[0]',
       opacity: 0,
       transition: '[all 0.3s ease-in-out]',
-      marginBlock: 'spacing.700',
+      marginBlock: 'spacing.7',
       '@media (min-height: 600px)': {
         marginBlock: '[100px]',
       },
@@ -61,7 +61,7 @@ export const modal = sva({
         modal: {
           display: 'flex',
           flexDirection: 'column',
-          maxHeight: '[calc(100vh - ({spacing.spacing.700} * 2))]',
+          maxHeight: '[calc(100vh - ({spacing.spacing.7} * 2))]',
           '@media (min-height: 600px)': {
             maxHeight: '[calc(100vh - (100px * 2))]',
           },
@@ -71,7 +71,7 @@ export const modal = sva({
           flex: '[1]',
           overflowX: 'hidden',
           overflowY: 'auto',
-          maxHeight: '[calc(100vh - ({spacing.spacing.700} * 2))]',
+          maxHeight: '[calc(100vh - ({spacing.spacing.7} * 2))]',
           '@media (min-height: 600px)': {
             maxHeight: '[calc(100vh - (100px * 2))]',
           },

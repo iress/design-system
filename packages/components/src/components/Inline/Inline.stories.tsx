@@ -86,7 +86,7 @@ export default {
 export const Default: Story = {
   args: {
     children: 'uneven',
-    gap: 'spacing.400',
+    gap: 'spacing.4',
   },
 };
 
@@ -100,11 +100,11 @@ export const Gap: Story = {
     ...disableArgTypes(['gap']),
   },
   render: (args) => (
-    <IressStack gap="spacing.1200">
+    <IressStack gap="spacing.10">
       {SPACING_TOKENS.map((spacing) => (
         <IressText key={spacing}>
           <h2>{spacing}</h2>
-          <IressInline {...args} gap={spacing} />
+          <IressInline {...args} gap={spacing as never} />
         </IressText>
       ))}
     </IressStack>
@@ -116,13 +116,13 @@ export const ResponsiveGap: Story = {
   args: {
     children: 'even',
     gap: {
-      xs: 'spacing.100',
-      sm: 'spacing.200',
-      md: 'spacing.400',
+      xs: 'spacing.1',
+      sm: 'spacing.2',
+      md: 'spacing.4',
     },
   },
   render: (args) => (
-    <IressStack gap="spacing.400">
+    <IressStack gap="spacing.4">
       <IressPanel>
         <p>
           Current breakpoint: <CurrentBreakpoint />.
@@ -140,7 +140,7 @@ export const HorizontalAlign: Story = {
   ...Default,
   args: {
     children: 'even',
-    gap: 'spacing.200',
+    gap: 'spacing.2',
   },
   argTypes: {
     ...Default.argTypes,
@@ -148,7 +148,7 @@ export const HorizontalAlign: Story = {
   },
   render: (args) => (
     <IressContainer>
-      <IressStack gap="spacing.1200">
+      <IressStack gap="spacing.10">
         {HORIZONTAL_ALIGNS.map((horizontalAlign) => (
           <IressText key={horizontalAlign}>
             <h2>{horizontalAlign}</h2>
@@ -164,7 +164,7 @@ export const VerticalAlign: Story = {
   ...Default,
   args: {
     children: 'uneven',
-    gap: 'spacing.200',
+    gap: 'spacing.2',
     horizontalAlign: 'center',
   },
   argTypes: {
@@ -173,7 +173,7 @@ export const VerticalAlign: Story = {
   },
   render: (args) => (
     <IressContainer>
-      <IressStack gap="spacing.1200">
+      <IressStack gap="spacing.10">
         {VERTICAL_ALIGNS.map((verticalAlign) => (
           <IressText key={verticalAlign} textAlign="center">
             <h2>{verticalAlign}</h2>
@@ -189,7 +189,7 @@ export const NoWrap: Story = {
   ...Default,
   args: {
     children: 'story',
-    gap: 'spacing.1200',
+    gap: 'spacing.10',
     noWrap: true,
   },
 };

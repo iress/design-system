@@ -11,8 +11,8 @@ export const label = sva({
       display: 'inline-block',
       position: 'relative',
       textStyle: 'typography.body.sm.strong',
-      top: '-spacing.100',
-      mr: 'spacing.100',
+      top: '-spacing.1',
+      mr: 'spacing.1',
     },
     text: {
       textStyle: 'typography.body.md.strong',
@@ -24,7 +24,7 @@ export const label = sva({
       hiddenLabel: true,
       css: {
         root: {
-          mb: 'spacing.000',
+          mb: 'spacing.0',
         },
       },
     },

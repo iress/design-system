@@ -27,25 +27,25 @@ export const toast = sva({
     panel: {
       borderWidth: '1px',
       borderRadius: 'radius.system.form',
-      padding: 'spacing.400',
+      padding: 'spacing.4',
       textStyle: 'typography.body.md.regular',
     },
     wrapper: {
       lineHeight: '1.5',
-      paddingRight: 'spacing.600',
+      paddingRight: 'spacing.6',
     },
     icon: {
       lineHeight: 'normal',
     },
     heading: {
       display: 'inline-block',
-      marginBottom: 'spacing.100',
-      marginRight: 'spacing.100',
+      marginBottom: 'spacing.1',
+      marginRight: 'spacing.1',
       '&:empty': {
         display: 'none',
       },
       '& > h2, & > h3, & > h4, & > h5, & > h6': {
-        marginBlock: 'spacing.000',
+        marginBlock: 'spacing.0',
         textStyle: 'typography.body.md.strong',
       },
     },
@@ -53,12 +53,12 @@ export const toast = sva({
       noGutter: true,
     },
     footer: {
-      paddingBlockStart: 'spacing.200',
+      paddingBlockStart: 'spacing.2',
     },
     closeButton: {
       position: 'absolute',
-      top: 'spacing.050',
-      right: 'spacing.050',
+      top: 'spacing.1',
+      right: 'spacing.1',
     },
   },
   variants: {
@@ -98,24 +98,24 @@ export const toast = sva({
       'start-x': {
         root: {
           insetInlineStart: '[-100%]',
-          ms: 'spacing.400',
+          ms: 'spacing.4',
         },
       },
       'end-x': {
         root: {
           insetInlineEnd: '[-100%]',
-          me: 'spacing.400',
+          me: 'spacing.4',
         },
       },
       'start-y': {
         root: {
-          mt: 'spacing.400',
+          mt: 'spacing.4',
           transform: '[translateY(-100%)]',
         },
       },
       'end-y': {
         root: {
-          mb: 'spacing.400',
+          mb: 'spacing.4',
           transform: '[translateY(100%)]',
         },
       },
