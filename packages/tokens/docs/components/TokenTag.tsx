@@ -5,7 +5,7 @@ export const TokenTag = (props: IressBadgeProps) => (
   <IressBadge
     pill
     mode="info"
-    px="spacing.250"
+    px="spacing.3"
     bg="colour.neutral.80"
     color="colour.neutral.10"
     style={{
