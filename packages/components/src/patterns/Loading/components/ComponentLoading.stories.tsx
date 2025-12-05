@@ -3,7 +3,7 @@ import { ComponentLoading } from './ComponentLoading';
 import { LoadingGraph } from '../mocks/LoadingGraph';
 import LoadingGraphSource from '../mocks/LoadingGraph.tsx?raw';
 import { type FC } from 'react';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
+import { withCustomSource } from '@iress-oss/ids-storybook-config';
 
 // This is a pattern for IressLoading, hence we change the name
 (ComponentLoading as FC).displayName = 'IressLoading';

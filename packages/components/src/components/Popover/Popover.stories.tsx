@@ -17,9 +17,9 @@ import { PopoverParentContainer } from './mocks/PopoverParentContainer';
 import PopoverParentContainerSource from './mocks/PopoverParentContainer.tsx?raw';
 import {
   disableArgTypes,
+  withCustomSource,
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<typeof IressPopover>;
 

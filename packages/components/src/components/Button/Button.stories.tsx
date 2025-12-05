@@ -3,6 +3,7 @@ import { IressButton, type IressButtonProps } from './Button';
 import {
   disableArgTypes,
   CurrentBreakpoint,
+  withCustomSource,
 } from '@iress-oss/ids-storybook-config';
 import { IressText } from '../Text';
 import { IressIcon } from '../Icon';
@@ -11,7 +12,6 @@ import { IressInline } from '../Inline';
 import { IressStack } from '../Stack';
 import { RoutingButton } from './mocks/RoutingButton';
 import RoutingButtonSource from './mocks/RoutingButton.tsx?raw';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type ButtonStory = StoryObj<IressButtonProps>;
 type AnchorStory = StoryObj<IressButtonProps<undefined, string>>;

@@ -25,7 +25,7 @@ import ValidationDependOnOtherFieldsSource from './mocks/ValidationDependOnOther
 import { ValidationDependOnOtherFields as ValidationDependOnOtherFieldsExample } from './mocks/ValidationDependOnOtherFields';
 import { CustomFormFieldComponents as CustomFormFieldComponentsExample } from './mocks/CustomFormFieldComponents';
 import CustomFormFieldComponentsSource from './mocks/CustomFormFieldComponents.tsx?raw';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
+import { withCustomSource } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressForm>;
 

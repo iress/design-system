@@ -2039,54 +2039,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@iress-oss/ids-storybook-sandbox@workspace:packages/storybook-sandbox":
-  version: 0.0.0-use.local
-  resolution: "@iress-oss/ids-storybook-sandbox@workspace:packages/storybook-sandbox"
-  dependencies:
-    "@storybook/addon-docs": "npm:10.0.8"
-    "@storybook/icons": "npm:2.0.1"
-    "@storybook/react-vite": "npm:10.0.8"
-    "@testing-library/dom": "npm:^10.4.1"
-    "@testing-library/jest-dom": "npm:^6.9.1"
-    "@testing-library/react": "npm:^16.3.0"
-    "@testing-library/user-event": "npm:^14.6.1"
-    "@types/node": "npm:^24.10.1"
-    "@types/react": "npm:^19.2.0"
-    "@types/react-dom": "npm:^19.2.0"
-    "@typescript-eslint/eslint-plugin": "npm:^8.47.0"
-    "@typescript-eslint/parser": "npm:^8.47.0"
-    "@vitejs/plugin-react": "npm:^5.1.1"
-    "@vitest/coverage-v8": "npm:4.0.10"
-    "@vueless/storybook-dark-mode": "npm:10.0.2"
-    chokidar: "npm:^4.0.3"
-    concurrently: "npm:^9.2.1"
-    eslint: "npm:^9.39.1"
-    eslint-plugin-file-progress: "npm:^3.0.2"
-    eslint-plugin-mdx: "npm:^3.6.2"
-    eslint-plugin-prettier: "npm:^5.5.4"
-    prettier: "npm:^3.3.3"
-    react: "npm:^18.3.1"
-    react-dom: "npm:^18.3.1"
-    react-hook-form: "npm:^7.64.0"
-    react-live: "npm:^4.1.8"
-    rimraf: "npm:6.1.0"
-    storybook: "npm:10.0.8"
-    tsup: "npm:^8.5.1"
-    typescript: "npm:^5.9.3"
-    vite: "npm:7.2.2"
-    vitest: "npm:4.0.10"
-  peerDependencies:
-    "@storybook/addon-docs": ^10
-    "@vueless/storybook-dark-mode": ^10
-    react: ^18 || ^19
-    react-dom: ^18 || ^19
-    storybook: ^10
-  peerDependenciesMeta:
-    "@storybook/addon-docs":
-      optional: true
-  languageName: unknown
-  linkType: soft
-
 "@iress-oss/ids-storybook-toggle-stories@npm:^0.1.0, @iress-oss/ids-storybook-toggle-stories@workspace:packages/storybook-toggle-stories":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-storybook-toggle-stories@workspace:packages/storybook-toggle-stories"
@@ -4260,13 +4212,6 @@ __metadata:
   version: 4.0.2
   resolution: "@types/parse-json@npm:4.0.2"
   checksum: 10c0/b1b863ac34a2c2172fbe0807a1ec4d5cb684e48d422d15ec95980b81475fac4fdb3768a8b13eef39130203a7c04340fc167bae057c7ebcafd7dec9fe6c36aeb1
-  languageName: node
-  linkType: hard
-
-"@types/prismjs@npm:^1.26.0":
-  version: 1.26.5
-  resolution: "@types/prismjs@npm:1.26.5"
-  checksum: 10c0/5619cb449e0d8df098c8759d6f47bf8fdd510abf5dbdfa999e55c6a2545efbd1e209cc85a33d8d9f4ff2898089a1a6d9a70737c9baffaae635c46852c40d384a
   languageName: node
   linkType: hard
 
@@ -11102,7 +11047,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
+"loose-envify@npm:^1.4.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
   dependencies:
@@ -14001,18 +13946,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prism-react-renderer@npm:^2.4.0":
-  version: 2.4.1
-  resolution: "prism-react-renderer@npm:2.4.1"
-  dependencies:
-    "@types/prismjs": "npm:^1.26.0"
-    clsx: "npm:^2.0.0"
-  peerDependencies:
-    react: ">=16.0.0"
-  checksum: 10c0/ebbe8feb975224344bbdd046b3a937d121592dbe4b8f22ba0be31f5af37b9a8219f441138ef6cab1c5b96f2aa6b529015200959f7e5e85b60ca69c81d35edcd4
-  languageName: node
-  linkType: hard
-
 "proc-log@npm:^4.0.0, proc-log@npm:^4.2.0":
   version: 4.2.0
   resolution: "proc-log@npm:4.2.0"
@@ -14398,18 +14331,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^18.3.1":
-  version: 18.3.1
-  resolution: "react-dom@npm:18.3.1"
-  dependencies:
-    loose-envify: "npm:^1.1.0"
-    scheduler: "npm:^0.23.2"
-  peerDependencies:
-    react: ^18.3.1
-  checksum: 10c0/a752496c1941f958f2e8ac56239172296fcddce1365ce45222d04a1947e0cc5547df3e8447f855a81d6d39f008d7c32eab43db3712077f09e3f67c4874973e85
-  languageName: node
-  linkType: hard
-
 "react-dropzone@npm:14.3.8":
   version: 14.3.8
   resolution: "react-dropzone@npm:14.3.8"
@@ -14446,15 +14367,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.64.0":
-  version: 7.64.0
-  resolution: "react-hook-form@npm:7.64.0"
-  peerDependencies:
-    react: ^16.8.0 || ^17 || ^18 || ^19
-  checksum: 10c0/d21e7c06cb5dfe8f82724350096d6d85fd1a84b2ae1a9d1fb8c084212ea9f7a7483bd9b90b5a5ab4a4ccd744c96c840718df68d6ecf31beedf4e9a33fc9a94c4
-  languageName: node
-  linkType: hard
-
 "react-is@npm:^16.13.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -14483,20 +14395,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-live@npm:^4.1.8":
-  version: 4.1.8
-  resolution: "react-live@npm:4.1.8"
-  dependencies:
-    prism-react-renderer: "npm:^2.4.0"
-    sucrase: "npm:^3.35.0"
-    use-editable: "npm:^2.3.3"
-  peerDependencies:
-    react: ">=18.0.0"
-    react-dom: ">=18.0.0"
-  checksum: 10c0/fa96ca176bc9074e4892d6a079b94488ba74e95907ea187678afb17e4a23cc7760c3774ef17f4429d2ba562f1fda852a822e18a161ef386676371c56a7585970
-  languageName: node
-  linkType: hard
-
 "react-refresh@npm:^0.18.0":
   version: 0.18.0
   resolution: "react-refresh@npm:0.18.0"
@@ -14508,15 +14406,6 @@ __metadata:
   version: 19.2.0
   resolution: "react@npm:19.2.0"
   checksum: 10c0/1b6d64eacb9324725bfe1e7860cb7a6b8a34bc89a482920765ebff5c10578eb487e6b46b2f0df263bd27a25edbdae2c45e5ea5d81ae61404301c1a7192c38330
-  languageName: node
-  linkType: hard
-
-"react@npm:^18.3.1":
-  version: 18.3.1
-  resolution: "react@npm:18.3.1"
-  dependencies:
-    loose-envify: "npm:^1.1.0"
-  checksum: 10c0/283e8c5efcf37802c9d1ce767f302dd569dd97a70d9bb8c7be79a789b9902451e0d16334b05d73299b20f048cbc3c7d288bbbde10b701fa194e2089c237dbea3
   languageName: node
   linkType: hard
 
@@ -15126,15 +15015,6 @@ __metadata:
   dependencies:
     xmlchars: "npm:^2.2.0"
   checksum: 10c0/3847b839f060ef3476eb8623d099aa502ad658f5c40fd60c105ebce86d244389b0d76fcae30f4d0c728d7705ceb2f7e9b34bb54717b6a7dbedaf5dad2d9a4b74
-  languageName: node
-  linkType: hard
-
-"scheduler@npm:^0.23.2":
-  version: 0.23.2
-  resolution: "scheduler@npm:0.23.2"
-  dependencies:
-    loose-envify: "npm:^1.1.0"
-  checksum: 10c0/26383305e249651d4c58e6705d5f8425f153211aef95f15161c151f7b8de885f24751b377e4a0b3dd42cce09aad3f87a61dab7636859c0d89b7daf1a1e2a5c78
   languageName: node
   linkType: hard
 
@@ -16988,15 +16868,6 @@ __metadata:
   peerDependencies:
     react: "*"
   checksum: 10c0/f0745de48fc344e6f90ea24384f3c79bf0733d06649827241135847abd67ee8db32f523d490c3276bce9f5a6867194ab1c0187bf6b84cabe1dd679037f4a527e
-  languageName: node
-  linkType: hard
-
-"use-editable@npm:^2.3.3":
-  version: 2.3.3
-  resolution: "use-editable@npm:2.3.3"
-  peerDependencies:
-    react: ">= 16.8.0"
-  checksum: 10c0/6e8ae63ed0b9ad9a79d1f88992c6a594da0ad3dd1c67da7c12b73722b2a41f787c611dbe9e640f9cee5738168028219ca3c7b4cf739f096cee8069e82968a7b9
   languageName: node
   linkType: hard
 

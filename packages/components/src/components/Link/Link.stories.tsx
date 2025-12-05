@@ -5,8 +5,10 @@ import { IressLink } from './Link';
 import { IressPanel } from '../Panel';
 import { RoutingLink } from './mocks/RoutingLink';
 import RoutingLinkSource from './mocks/RoutingLink.tsx?raw';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
+import {
+  disableArgTypes,
+  withCustomSource,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressLink>;
 

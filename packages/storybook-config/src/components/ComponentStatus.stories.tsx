@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as StoryStub from './mocks/StoryStub.stories';
 import { disableArgTypes } from '../helpers/disableArgTypes';
 import { ComponentStatus } from './ComponentStatus';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
+import { withCustomSource } from '~/helpers/withCustomSource';
 
 type Story = StoryObj<typeof ComponentStatus>;
 

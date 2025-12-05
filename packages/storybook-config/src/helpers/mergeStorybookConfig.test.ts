@@ -1,8 +1,8 @@
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 import { addToStorybookCategory } from './addToStorybookCategory';
 import { disableArgTypes } from './disableArgTypes';
 import { mergeStorybookConfig } from './mergeStorybookConfig';
 import { removeArgTypes } from './removeArgTypes';
+import { withCustomSource } from './withCustomSource';
 
 describe('mergeStorybookConfig', () => {
   it('combines multiple objects into a single object', () => {
