@@ -5,7 +5,7 @@ import { radii } from './tokens/radii';
 import { textCompositions } from './tokens/textStyles';
 import { spanCompositions } from './utilities/span';
 import { offsetCompositions } from './utilities/offset';
-import { SPACING_TOKENS } from './tokens/spacing';
+import { MARGIN_TOKENS, SPACING_TOKENS } from './tokens/spacing';
 
 /**
  * Allowed CSS properties for all components.
@@ -25,23 +25,23 @@ const allowedCssProps = {
   maxWidth: ['*'],
 
   // We can't use margin shorthand because it won't generate the correct CSS
-  margin: ['*'],
-  marginBlock: ['*'],
-  marginInline: ['*'],
-  marginTop: ['*'],
-  marginBottom: ['*'],
-  marginLeft: ['*'],
-  marginRight: ['*'],
+  margin: MARGIN_TOKENS,
+  marginBlock: MARGIN_TOKENS,
+  marginInline: MARGIN_TOKENS,
+  marginTop: MARGIN_TOKENS,
+  marginBottom: MARGIN_TOKENS,
+  marginLeft: MARGIN_TOKENS,
+  marginRight: MARGIN_TOKENS,
 
   // We can't use padding shorthand because it won't generate the correct CSS
-  padding: ['*'],
-  paddingBlock: ['*'],
-  paddingInline: ['*'],
-  paddingTop: ['*'],
-  paddingBottom: ['*'],
-  paddingLeft: ['*'],
-  paddingRight: ['*'],
-  rowGap: ['*'],
+  padding: SPACING_TOKENS,
+  paddingBlock: SPACING_TOKENS,
+  paddingInline: SPACING_TOKENS,
+  paddingTop: SPACING_TOKENS,
+  paddingBottom: SPACING_TOKENS,
+  paddingLeft: SPACING_TOKENS,
+  paddingRight: SPACING_TOKENS,
+  rowGap: SPACING_TOKENS,
   srOnly: ['true', 'false'],
   textAlign: ['center', 'left', 'right', 'justify', 'inherit'],
   textStyle: Object.keys(textCompositions),

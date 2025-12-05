@@ -31,8 +31,8 @@ export const loading = sva({
           left: '[50%]',
           transform: 'translate(-50%, -50%)',
           width: '[fit-content]',
-          px: 'spacing.200',
-          py: 'spacing.100',
+          px: 'spacing.2',
+          py: 'spacing.1',
           textStyle: 'typography.body.sm',
           bg: 'colour.neutral.20',
           color: 'colour.neutral.70',
@@ -62,8 +62,8 @@ export const loading = sva({
           zIndex: '600',
         },
         message: {
-          px: 'spacing.400',
-          py: 'spacing.200',
+          px: 'spacing.4',
+          py: 'spacing.2',
           bg: 'colour.neutral.20',
           color: 'colour.neutral.70',
           border: 'divider',
@@ -83,7 +83,7 @@ export const loading = sva({
           width: 'overlay.sm',
         },
         message: {
-          p: 'spacing.1200',
+          p: 'spacing.10',
         },
       },
       page: {
@@ -96,8 +96,8 @@ export const loading = sva({
           opacity: 0,
           transition: '[opacity 0.2s linear]',
           position: 'absolute',
-          top: 'spacing.000',
-          left: 'spacing.000',
+          top: 'spacing.0',
+          left: 'spacing.0',
         },
         message: {
           opacity: 1,
@@ -133,10 +133,10 @@ export const loading = sva({
         },
         message: {
           position: 'absolute',
-          left: 'spacing.000',
+          left: 'spacing.0',
           width: '[max-content]',
           color: 'colour.neutral.70',
-          padding: 'spacing.200',
+          padding: 'spacing.2',
           bg: 'colour.neutral.10',
           textStyle: 'typography.body.md',
           animationStyle: 'loading-fade-next',
@@ -315,14 +315,14 @@ export const loadingList = sva({
   slots: ['root', 'item', 'dots', 'svg', 'circle', 'tick', 'marker'],
   base: {
     root: {
-      pl: 'spacing.600',
+      pl: 'spacing.6',
       listStyle: 'none',
     },
     item: {
       position: 'relative',
       transition: 'all',
       transitionDelay: '1.2s',
-      pl: 'spacing.100',
+      pl: 'spacing.1',
     },
     dots: {
       display: 'inline-block',
@@ -339,9 +339,9 @@ export const loadingList = sva({
       borderRadius: '[50%]',
       display: 'block',
       position: 'absolute',
-      top: 'spacing.100',
+      top: 'spacing.1',
       right: '[100%]',
-      mr: 'spacing.050',
+      mr: 'spacing.1',
     },
     marker: {
       fill: 'colour.neutral.80',

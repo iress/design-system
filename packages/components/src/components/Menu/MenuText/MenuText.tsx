@@ -91,7 +91,7 @@ export const IressMenuText = <E extends TextElements = 'div'>({
         </IressText>
         {append && <div className={css(classes.append)}>{append}</div>}
       </div>
-      {divider && <IressMenuDivider mt="spacing.100" />}
+      {divider && <IressMenuDivider mt="spacing.1" />}
     </>
   );
 };

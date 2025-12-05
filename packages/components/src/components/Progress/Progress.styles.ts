@@ -15,14 +15,14 @@ export const progress = cva({
     _progressBar: {
       bg: 'transparent',
       height: 'progress.height',
-      margin: 'spacing.000',
+      margin: 'spacing.0',
     },
 
     _progressValue: {
       appearance: 'none',
       bg: '[currentColor]',
       borderRadius: 'var(--iress-border-radius)',
-      margin: 'spacing.000',
+      margin: 'spacing.0',
       transition: 'all',
     },
 
@@ -30,7 +30,7 @@ export const progress = cva({
       appearance: 'none',
       bg: '[currentColor]',
       borderRadius: 'var(--iress-border-radius)',
-      margin: 'spacing.000',
+      margin: 'spacing.0',
       transition: 'all',
     },
   },

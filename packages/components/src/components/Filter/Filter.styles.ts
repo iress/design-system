@@ -17,7 +17,7 @@ export const filter = sva({
     root: {},
     chevron: {
       selectChevron: true,
-      marginInlineStart: 'spacing.200',
+      marginInlineStart: 'spacing.2',
 
       _rtl: {
         selectChevronRtl: true,
@@ -27,11 +27,11 @@ export const filter = sva({
       minWidth: '[270px]',
       position: 'relative',
       '&:not(:last-child)': {
-        marginBottom: 'spacing.400',
+        marginBottom: 'spacing.4',
       },
       '& .ids-spinner': {
         position: 'absolute',
-        right: 'spacing.500',
+        right: 'spacing.5',
       },
     },
     optionList: {

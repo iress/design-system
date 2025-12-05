@@ -198,7 +198,7 @@ export const Supplementary: Story = {
     const [error, setError] = useState<string | undefined>();
 
     return (
-      <IressStack gap="spacing.500">
+      <IressStack gap="spacing.5">
         <IressToggle
           onChange={(checked) =>
             setError(checked ? 'This field is required' : undefined)
@@ -273,7 +273,7 @@ export const HorizontalLabelWidthExamples: Story = {
     label: 'Label Width',
   },
   render: ({ input, ...args }) => (
-    <IressStack gap="spacing.500">
+    <IressStack gap="spacing.5">
       <IressField {...args} labelWidth="100px" label="labelWidth: 100px">
         <IressInput {...input} placeholder="Label width: 100px" />
       </IressField>
@@ -337,8 +337,8 @@ export const RemoveErrorMargin: Story = {
     };
 
     return (
-      <IressStack gap="spacing.500">
-        <IressInline gap="spacing.400">
+      <IressStack gap="spacing.5">
+        <IressInline gap="spacing.4">
           <IressToggle
             onChange={(checked) => setRemoveErrorMargin(checked)}
             checked={removeErrorMargin}
@@ -354,14 +354,14 @@ export const RemoveErrorMargin: Story = {
           </IressToggle>
         </IressInline>
 
-        <IressRow gutter="spacing.600">
+        <IressRow gutter="spacing.6">
           {/* Vertical Layout Column */}
           <IressCol span="6">
-            <IressStack gap="spacing.200">
+            <IressStack gap="spacing.2">
               <IressText element="h3" textStyle="typography.body.lg.strong">
                 Vertical Label Layout
               </IressText>
-              <IressStack gap="spacing.000">
+              <IressStack gap="spacing.0">
                 <IressField {...args} {...fieldProps} label="First Name">
                   <IressInput {...input} placeholder="Enter first name" />
                 </IressField>
@@ -385,11 +385,11 @@ export const RemoveErrorMargin: Story = {
 
           {/* Horizontal Layout Column */}
           <IressCol span="6">
-            <IressStack gap="spacing.200">
+            <IressStack gap="spacing.2">
               <IressText element="h3" textStyle="typography.body.lg.strong">
                 Horizontal Label Layout
               </IressText>
-              <IressStack gap="spacing.000">
+              <IressStack gap="spacing.0">
                 <IressField
                   {...args}
                   {...fieldProps}

@@ -67,14 +67,14 @@ export const IressValidationSummary = ({
     <styled.ul
       data-testid={dataTestId}
       listStyle="none"
-      m="spacing.000"
-      p="spacing.000"
+      m="spacing.0"
+      p="spacing.0"
       {...restProps}
       className={cx(className, GlobalCSSClass.ValidationSummary)}
     >
       {messages.map((msg: ValidationMessageObj) => (
         <styled.li
-          m="spacing.000"
+          m="spacing.0"
           key={`${id}-${msg.linkToTarget}-${msg.message}`}
         >
           <IressValidationMessage
@@ -90,7 +90,7 @@ export const IressValidationSummary = ({
         </styled.li>
       ))}
       {children && (
-        <styled.li m="spacing.000">
+        <styled.li m="spacing.0">
           <IressValidationMessage
             status={status}
             prefix={prefix}

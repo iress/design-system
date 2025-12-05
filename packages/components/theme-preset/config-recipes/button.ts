@@ -8,7 +8,7 @@ const fluidStyles: SystemStyleObject = {
   alignSelf: 'stretch',
   display: 'flex',
   justifyContent: 'center',
-  marginInlineEnd: 'spacing.000',
+  marginInlineEnd: 'spacing.0',
   width: '[100%]',
 };
 
@@ -33,18 +33,18 @@ export const buttonRecipe = defineSlotRecipe({
       cursor: 'pointer',
       display: 'inline-flex',
       fontKerning: 'none',
-      gap: 'spacing.200',
+      gap: 'spacing.2',
       justifyContent: 'center',
       maxWidth: '[100%]',
       minWidth: 'input.height',
       minHeight: 'input.height',
-      my: 'spacing.000',
+      my: 'spacing.0',
       pointerEvents: 'auto',
       px: 'button.inline',
       py: 'button.block',
       textAlign: 'center',
       textDecoration: 'none',
-      textStyle: 'typography.body.md',
+      textStyle: 'typography.body.md.medium',
       transition: 'all',
       transformStyle: 'preserve-3d',
       userSelect: 'none',
@@ -107,7 +107,7 @@ export const buttonRecipe = defineSlotRecipe({
           alignSelf: 'stretch',
           display: 'flex',
           justifyContent: 'center',
-          marginInlineEnd: 'spacing.000',
+          marginInlineEnd: 'spacing.0',
           width: '[100%]',
         },
       },
@@ -145,7 +145,7 @@ export const buttonRecipe = defineSlotRecipe({
     inButtonGroup: {
       true: {
         root: {
-          py: 'spacing.000',
+          py: 'spacing.0',
 
           _before: {
             transition: 'none',

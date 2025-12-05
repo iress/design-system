@@ -4,8 +4,8 @@ import { IressInline, IressInlineProps } from '.';
 import { GlobalCSSClass } from '@/enums';
 
 const classNames = {
-  gapDefault: 'gap_spacing.000',
-  gapMd: 'gap_spacing.400',
+  gapDefault: 'gap_spacing.0',
+  gapMd: 'gap_spacing.4',
   wrapDefault: 'flex-wrap_wrap',
   wrapNoWrap: 'flex-wrap_nowrap',
   horizontalAlignDefault: 'jc_flex-start',
@@ -38,7 +38,7 @@ describe('IressInline', () => {
 
     test('gap should apply the correct class when set', () => {
       const screen = renderComponent({
-        gap: 'spacing.400',
+        gap: 'spacing.4',
       });
 
       const container = screen.getByTestId('test-component');

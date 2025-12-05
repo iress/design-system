@@ -21,14 +21,14 @@ export const tableRecipe = defineSlotRecipe({
       bg: 'colour.neutral.10',
       color: 'colour.neutral.80',
       borderRadius: 'radius.system.layout',
-      borderSpacing: 'spacing.000',
+      borderSpacing: 'spacing.0',
       minWidth: '[100%]',
       borderCollapse: 'collapse',
-      margin: 'spacing.000',
+      margin: 'spacing.0',
 
       '& th, & td': {
-        paddingBlock: 'spacing.350',
-        paddingInline: 'spacing.350',
+        paddingBlock: 'spacing.4',
+        paddingInline: 'spacing.4',
         border: 'table',
         borderLeftWidth: '0px',
         borderRightWidth: '0px',
@@ -56,7 +56,7 @@ export const tableRecipe = defineSlotRecipe({
     caption: {
       textAlign: 'center',
       textStyle: 'typography.heading.4',
-      paddingBlockEnd: 'spacing.200',
+      paddingBlockEnd: 'spacing.2',
     },
     sortHeader: {
       all: 'unset',
@@ -67,7 +67,7 @@ export const tableRecipe = defineSlotRecipe({
     },
     sortIcon: {
       color: 'colour.neutral.70',
-      marginInlineStart: 'spacing.200',
+      marginInlineStart: 'spacing.2',
     },
     activator: {
       display: 'flex',
@@ -116,7 +116,7 @@ export const tableRecipe = defineSlotRecipe({
         table: {
           textStyle: 'typography.body.sm',
           '& th, & td': {
-            paddingBlock: 'spacing.100',
+            paddingBlock: 'spacing.1',
           },
           '& th': {
             textStyle: 'typography.body.sm.strong',

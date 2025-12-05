@@ -5,7 +5,7 @@ export const gutter = defineUtility({
   className: 'gutter',
   values: SPACING_TOKENS,
   transform: (value: keyof typeof spacing) => {
-    if (!value) {
+    if (!value || !(value in spacing)) {
       return {};
     }
 

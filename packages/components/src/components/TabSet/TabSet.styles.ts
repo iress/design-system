@@ -20,7 +20,7 @@ export const tabSet = sva({
       borderBottom: 'divider',
 
       '& > :has(.ids-badge)': {
-        mr: 'spacing.350',
+        mr: 'spacing.4',
       },
     },
     listHolder: {
@@ -44,8 +44,8 @@ export const tabSet = sva({
     },
     hoverIndicator: {
       position: 'absolute',
-      top: 'spacing.150',
-      bottom: 'spacing.150',
+      top: 'spacing.2',
+      bottom: 'spacing.2',
       left: '[0]',
       bg: 'colour.primary.surfaceHover',
       transition: 'all',

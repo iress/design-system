@@ -20,8 +20,8 @@ export const badge = sva({
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: 'radius.system.badge',
-      paddingBlock: 'spacing.100',
-      paddingInline: 'spacing.100',
+      paddingBlock: 'spacing.1',
+      paddingInline: 'spacing.1',
       '& > span': {
         lineHeight: 1,
         display: 'inline-block',
@@ -37,8 +37,8 @@ export const badge = sva({
       true: {
         badge: {
           position: 'absolute',
-          insetBlockStart: 'spacing.000',
-          insetInlineEnd: 'spacing.000',
+          insetBlockStart: 'spacing.0',
+          insetInlineEnd: 'spacing.0',
           zIndex: '100',
           transformOrigin: '100% 0',
           borderRadius: 'radius.100',

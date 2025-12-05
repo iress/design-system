@@ -20,7 +20,7 @@ export const slider = sva({
       cursor: 'pointer',
       borderRadius: 'radius.100',
       height: 'slider.thumb',
-      margin: 'spacing.000',
+      margin: 'spacing.0',
       width: '[100%]',
       _focus: {
         outline: '[none]',
@@ -61,7 +61,7 @@ export const slider = sva({
       lineHeight: 1,
       '& option': {
         minHeight: '[0]',
-        padding: 'spacing.000',
+        padding: 'spacing.0',
       },
     },
     tickMark: {
@@ -69,7 +69,7 @@ export const slider = sva({
       flex: '[0 0 0]',
       marginInlineStart: 'var(--iress-tick-label-width)',
       width: '[0]',
-      padding: 'spacing.000',
+      padding: 'spacing.0',
       _selected: {
         _before: {
           backgroundColor: 'colour.primary.fill',

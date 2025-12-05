@@ -269,7 +269,7 @@ const TokenTable = () => {
   }, [debouncedQuery, loading, filteredResults.length]);
 
   return (
-    <IressStack gap="spacing.400">
+    <IressStack gap="spacing.4">
       <IressInput
         clearable
         value={query}

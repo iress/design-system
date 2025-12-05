@@ -21,8 +21,8 @@ export const richSelect = sva({
       width: '[100%]',
     },
     dropdownClear: {
-      paddingX: 'spacing.200',
-      paddingY: 'spacing.100',
+      paddingX: 'spacing.2',
+      paddingY: 'spacing.1',
       minHeight: '[0px]',
       boxShadow: '[none]',
     },
@@ -37,43 +37,43 @@ export const richSelect = sva({
       '2': {
         richSelect: {
           width:
-            '[calc({spacing.spacing.200} + calc({sizes.chevron.select} * 2) + {sizes.input.2})]',
+            '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.2})]',
         },
       },
       '4': {
         richSelect: {
           width:
-            '[calc({spacing.spacing.200} + calc({sizes.chevron.select} * 2) + {sizes.input.4})]',
+            '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.4})]',
         },
       },
       '6': {
         richSelect: {
           width:
-            '[calc({spacing.spacing.200} + calc({sizes.chevron.select} * 2) + {sizes.input.6})]',
+            '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.6})]',
         },
       },
       '8': {
         richSelect: {
           width:
-            '[calc({spacing.spacing.200} + calc({sizes.chevron.select} * 2) + {sizes.input.8})]',
+            '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.8})]',
         },
       },
       '10': {
         richSelect: {
           width:
-            '[calc({spacing.spacing.200} + calc({sizes.chevron.select} * 2) + {sizes.input.10})]',
+            '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.10})]',
         },
       },
       '12': {
         richSelect: {
           width:
-            '[calc({spacing.spacing.200} + calc({sizes.chevron.select} * 2) + {sizes.input.12})]',
+            '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.12})]',
         },
       },
       '16': {
         richSelect: {
           width:
-            '[calc({spacing.spacing.200} + calc({sizes.chevron.select} * 2) + {sizes.input.16})]',
+            '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.16})]',
         },
       },
       '25perc': {

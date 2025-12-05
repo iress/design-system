@@ -5,7 +5,7 @@ export const divider = cva({
     display: 'block',
     color: 'colour.neutral.30',
     borderColor: '[currentColor]',
-    m: 'spacing.000',
+    m: 'spacing.0',
   },
   variants: {
     vertical: {

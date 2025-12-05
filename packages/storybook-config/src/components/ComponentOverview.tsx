@@ -72,7 +72,7 @@ export const ComponentOverview = ({
 
   return (
     <>
-      <IressStack gap="spacing.400">
+      <IressStack gap="spacing.4">
         {description && (
           <>
             <IressText element="h2" id="overview" srOnly>

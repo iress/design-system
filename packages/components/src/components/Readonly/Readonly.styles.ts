@@ -27,16 +27,16 @@ export const readonly = sva({
         display: 'none',
       },
       '& > *': {
-        px: 'spacing.250',
+        px: 'spacing.3',
       },
       _first: {
         '& > *': {
-          pl: 'spacing.000',
+          pl: 'spacing.0',
         },
       },
       _last: {
         '& > *': {
-          pr: 'spacing.000',
+          pr: 'spacing.0',
         },
       },
     },
@@ -44,7 +44,7 @@ export const readonly = sva({
       display: 'flex',
       alignItems: 'center',
       '& > *': {
-        padding: '[0 {spacing.spacing.250}]',
+        padding: '[0 {spacing.spacing.3}]',
       },
       _empty: {
         display: 'none',

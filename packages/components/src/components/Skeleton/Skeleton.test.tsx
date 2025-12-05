@@ -7,7 +7,7 @@ import { GlobalCSSClass } from '@/enums';
 const styles = {
   rect: 'w_[100%] h_[100px]',
   circle: 'bdr_[50%] w_[100px] h_[100px]',
-  text: 'w_[100%] h_[spacing.600]',
+  text: 'w_[100%] h_[spacing.6]',
 };
 const TEST_ID = 'test-component';
 const modes = ['rect', 'circle', 'text'] as const;
@@ -20,7 +20,7 @@ describe('IressSkeleton', () => {
       const skeleton = screen.getByTestId(TEST_ID);
 
       expect(skeleton).toHaveClass(
-        'bg-c_colour.neutral.30 bdr_radius.025 motionReduce:anim_none moreContrast:ring_[1px_solid_transparent] layerStyle_skeleton animationStyle_skeleton-loading w_[100%] h_[spacing.600]',
+        'bg-c_colour.neutral.30 bdr_radius.025 motionReduce:anim_none moreContrast:ring_[1px_solid_transparent] layerStyle_skeleton animationStyle_skeleton-loading w_[100%] h_[spacing.6]',
         GlobalCSSClass.Skeleton,
       );
     });

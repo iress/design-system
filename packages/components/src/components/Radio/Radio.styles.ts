@@ -14,7 +14,7 @@ export const radio = sva({
       color: 'colour.primary.fill',
       display: 'flex',
       position: 'relative',
-      padding: 'spacing.000',
+      padding: 'spacing.0',
       transition: '[all 0.2s ease-out]',
 
       '&:has(svg:hover)': {
@@ -27,14 +27,14 @@ export const radio = sva({
       height: '[1px]',
       margin: '[-1px]',
       overflow: 'hidden',
-      padding: 'spacing.000',
+      padding: 'spacing.0',
       position: 'absolute',
       width: '[1px]',
     },
     label: {
       display: 'inline-flex',
       alignItems: 'center',
-      padding: 'spacing.000',
+      padding: 'spacing.0',
       border: '[0px solid transparent]',
       borderRadius: 'radius.system.form',
       backgroundColor: '[transparent]',
@@ -56,7 +56,7 @@ export const radio = sva({
       width: '[calc(1.3 * 1rem)]',
       height: '[calc(1.3 * 1rem)]',
       borderRadius: '[100%]',
-      marginInlineEnd: 'spacing.150',
+      marginInlineEnd: 'spacing.2',
       flexShrink: 0,
       color: '[currentColor]',
       '& circle': {
@@ -97,7 +97,7 @@ export const radio = sva({
           borderStyle: 'solid',
           borderColor: 'colour.neutral.40',
           borderRadius: 'radius.050',
-          padding: 'spacing.400',
+          padding: 'spacing.4',
         },
       },
     },

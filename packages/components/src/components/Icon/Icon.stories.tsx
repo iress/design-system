@@ -155,7 +155,7 @@ export const ExternalLink: Story = {
   args: {
     ...Default.args,
     name: 'external-link',
-    pl: 'spacing.150',
+    pl: 'spacing.2',
   },
   render: (args) => (
     <IressText>

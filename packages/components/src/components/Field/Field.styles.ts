@@ -22,18 +22,18 @@ export const field = sva({
     },
     hint: {
       color: 'colour.neutral.70',
-      mb: 'spacing.100',
+      mb: 'spacing.1',
       textStyle: 'typography.body.sm',
     },
     footer: {
       textStyle: 'typography.body.sm.regular',
-      mt: 'spacing.100',
+      mt: 'spacing.1',
     },
     supplementary: {
       fontSize: 'inherit',
     },
     label: {
-      mb: 'spacing.100',
+      mb: 'spacing.1',
     },
     labelContainer: {},
     fieldContainer: {},
@@ -46,7 +46,7 @@ export const field = sva({
           gridTemplateColumns: 'auto 1fr',
           gridTemplateRows: 'auto auto',
           gridTemplateAreas: '"label field" ". footer"',
-          columnGap: 'spacing.200',
+          columnGap: 'spacing.2',
           alignItems: 'center',
         },
         labelContainer: {
@@ -58,7 +58,7 @@ export const field = sva({
         },
         footer: {
           gridArea: 'footer',
-          mt: 'spacing.100',
+          mt: 'spacing.1',
         },
         label: {
           mb: 'none',
@@ -77,7 +77,7 @@ export const field = sva({
     hasHint: {
       true: {
         label: {
-          mb: 'spacing.000',
+          mb: 'spacing.0',
         },
       },
     },
@@ -119,10 +119,10 @@ export const field = sva({
         },
         footer: {
           position: 'absolute',
-          left: 'spacing.000',
-          right: 'spacing.000',
+          left: 'spacing.0',
+          right: 'spacing.0',
           top: '[100%]',
-          mt: 'spacing.100',
+          mt: 'spacing.1',
         },
       },
     },

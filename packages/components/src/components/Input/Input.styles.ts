@@ -28,7 +28,7 @@ export const input = sva({
       alignItems: 'center',
       py: 'none',
       '&:not(:empty)': {
-        px: 'spacing.250',
+        px: 'spacing.3',
       },
       _empty: {
         display: 'none',
@@ -41,7 +41,7 @@ export const input = sva({
       display: 'flex',
       alignItems: 'center',
       '& > *': {
-        padding: '[0 {spacing.spacing.250}]',
+        padding: '[0 {spacing.spacing.3}]',
       },
       _empty: {
         display: 'none',
@@ -50,7 +50,7 @@ export const input = sva({
     formControl: {
       borderWidth: 0,
       borderRadius: 'radius.system.form',
-      padding: 'spacing.200',
+      padding: 'spacing.2',
       backgroundColor: 'colour.neutral.10',
       textStyle: 'typography.body.md',
       color: 'colour.neutral.80',
@@ -71,10 +71,10 @@ export const input = sva({
         backgroundColor: 'colour.primary.surface',
         color: 'colour.primary.text',
         borderRadius: 'radius.system.form',
-        py: 'spacing.150',
-        px: 'spacing.200',
-        m: '-spacing.100',
-        mr: 'spacing.200',
+        py: 'spacing.2',
+        px: 'spacing.2',
+        m: '-spacing.1',
+        mr: 'spacing.2',
         cursor: 'pointer',
         _hover: {
           backgroundColor: 'colour.primary.surfaceHover',

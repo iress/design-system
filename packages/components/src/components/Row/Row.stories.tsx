@@ -73,7 +73,7 @@ const ROW_CHILDREN_OPTIONS = {
 export const Default: Story = {
   args: {
     children: ROW_CHILDREN_OPTIONS.threeDifferentSizedPlaceholders,
-    gutter: 'spacing.700',
+    gutter: 'spacing.7',
     horizontalAlign: 'left',
     verticalAlign: 'top',
   },
@@ -129,7 +129,7 @@ export const Gutter: Story = {
           <IressText key={spacing}>
             {index > 0 && <IressDivider mb="xl" />}
             <h2>Gutter: {spacing}</h2>
-            <IressRow {...args} gutter={spacing} />
+            <IressRow {...args} gutter={spacing as never} />
           </IressText>
         );
       })}
@@ -167,12 +167,12 @@ export const ResponsiveGutter: Story = {
       </>
     ),
     gutter: {
-      xs: 'spacing.100',
-      sm: 'spacing.200',
-      md: 'spacing.400',
-      lg: 'spacing.700',
-      xl: 'spacing.1200',
-      xxl: 'spacing.100',
+      xs: 'spacing.1',
+      sm: 'spacing.2',
+      md: 'spacing.4',
+      lg: 'spacing.7',
+      xl: 'spacing.10',
+      xxl: 'spacing.1',
     },
   },
   argTypes: {

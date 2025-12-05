@@ -9,7 +9,7 @@ export const toaster = sva({
       width: '[500px]',
       maxWidth: '[100%]',
       zIndex: '500',
-      padding: 'spacing.700',
+      padding: 'spacing.7',
       boxSizing: 'border-box',
       '&:empty': {
         display: 'none',
