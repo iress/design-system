@@ -106,4 +106,5 @@ export const SPACING_TOKENS = Object.keys({
 export const MARGIN_TOKENS = [
   ...SPACING_TOKENS,
   ...SPACING_TOKENS.map((token) => `-${token}`),
+  'auto',
 ];
