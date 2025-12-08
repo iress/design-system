@@ -1,1 +1,2 @@
-packages/storybook-config/src/components/ComponentCanvas.template.tsx
+**/*.template.tsx
+**/*.template

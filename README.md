@@ -8,6 +8,8 @@ The IDS monorepo contains the React component library and supporting packages fo
 - `@iress-oss/ids-mcp-server` - Model Context Protocol (MCP) server providing AI assistants with contextual information about IDS components
 - `@iress-oss/ids-storybook-config` - Shared Storybook configuration for IDS packages
 - `@iress-oss/ids-storybook-okta` - Storybook addon for integrating Okta authentication into Storybook
+- `@iress-oss/ids-storybook-sandbox` - Storybook addon for opening code examples in CodeSandbox
+- `@iress-oss/ids-storybook-toggle-stories` - Storybook addon for toggling the visibility of stories in Storybook
 - `@iress-oss/ids-storybook-version-badge` - Storybook addon for displaying version badges in Storybook
 - `@iress-oss/ids-tokens` - Design tokens for the Iress Design System
 
