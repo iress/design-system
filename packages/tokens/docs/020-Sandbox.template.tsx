@@ -6,7 +6,7 @@ const App = () => {
   return (
     <div
       style={{
-        padding: cssVars.spacing[100],
+        padding: cssVars.spacing['1'],
         color: cssVars.colour.primary.text,
       }}
     >
