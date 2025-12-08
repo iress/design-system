@@ -1,6 +1,7 @@
-import { type ReactHookFormCompatibleRef } from '@/interfaces';
-import { type MutableRefObject, useCallback, useMemo, useState } from 'react';
-import { type ControllerRenderProps, type FieldValues } from 'react-hook-form';
+import type { ReactHookFormCompatibleRef } from '@/interfaces';
+import { type RefObject, useCallback, useMemo, useState } from 'react';
+import type { ControllerRenderProps, FieldValues } from 'react-hook-form';
+import type { FormFieldRenderProps } from '../FormField';
 
 /**
  * This hook is used to create render props for a field in a form.
@@ -10,7 +11,7 @@ import { type ControllerRenderProps, type FieldValues } from 'react-hook-form';
  */
 export const useFieldRenderProps = <T extends FieldValues>(
   field: ControllerRenderProps<T>,
-  fieldRef: MutableRefObject<ReactHookFormCompatibleRef | null>,
+  fieldRef: RefObject<ReactHookFormCompatibleRef | null>,
 ) => {
   const [extraString, setExtraString] = useState<string>('null');
 
@@ -70,7 +71,7 @@ export const useFieldRenderProps = <T extends FieldValues>(
     return newField as ControllerRenderProps<T>;
   }, [field, extraString]);
 
-  return useMemo(
+  return useMemo<Omit<FormFieldRenderProps<T>, 'id'>>(
     () => ({
       ...renderField,
       onChange: handleChange,
