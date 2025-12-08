@@ -15,7 +15,7 @@ import { HiddenInputsForm } from './mocks/HiddenInputsForm';
 import HiddenInputsFormSource from './mocks/HiddenInputsForm.tsx?raw';
 import ValidationDependOnOtherFieldsSource from './mocks/ValidationDependOnOtherFields.tsx?raw';
 import { ValidationDependOnOtherFields as ValidationDependOnOtherFieldsExample } from './mocks/ValidationDependOnOtherFields';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
+import { withCustomSource } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressForm>;
 

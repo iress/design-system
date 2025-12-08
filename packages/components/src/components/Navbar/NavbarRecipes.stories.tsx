@@ -17,8 +17,10 @@ import { ResponsiveNavbar } from './mocks/ResponsiveNavbar';
 import ResponsiveNavbarSource from './mocks/ResponsiveNavbar.tsx?raw';
 import { NavbarIconStrip } from './mocks/NavbarIconStrip';
 import NavbarIconStripSource from './mocks/NavbarIconStrip.tsx?raw';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
+import {
+  disableArgTypes,
+  withCustomSource,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressNavbar>;
 

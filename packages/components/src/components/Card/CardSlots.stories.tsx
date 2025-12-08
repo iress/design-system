@@ -8,8 +8,10 @@ import {
   supportedCardSlots,
 } from './mocks/supportedCardSlots';
 import supportedCardSlotsSource from './mocks/supportedCardSlots.tsx?raw';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
+import {
+  disableArgTypes,
+  withCustomSource,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressCardProps>;
 

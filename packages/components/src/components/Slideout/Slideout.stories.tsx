@@ -20,10 +20,10 @@ import { SlideoutMicrofrontend } from './mocks/SlideoutMicrofrontend';
 import SlideoutMicrofrontendSource from './mocks/SlideoutMicrofrontend.tsx?raw';
 import {
   disableArgTypes,
+  withCustomSource,
   withTransformedProviderSource,
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 import { type ArgsStoryFn } from 'storybook/internal/types';
 
 const SLIDEOUT_ID = 'storybook-slideout';

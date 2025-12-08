@@ -4,7 +4,7 @@ import { ValidValueOnChage as ValidValueOnChageExample } from './mocks/ValidValu
 import ValidValueOnChageSource from './mocks/ValidValueOnChage.tsx?raw';
 import { CurrencyInTable as CurrencyInTableExample } from './mocks/CurrencyInTable';
 import CurrencyInTableSource from './mocks/CurrencyInTable.tsx?raw';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
+import { withCustomSource } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressInputProps>;
 
