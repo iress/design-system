@@ -1,12 +1,14 @@
 import { type ReactNode, useContext, useEffect, useMemo, useRef } from 'react';
 import {
   type Control,
+  type ControllerFieldState,
   type ControllerRenderProps,
   type FieldPath,
   type FieldPathValue,
   type FieldValues,
   useController,
   type UseControllerProps,
+  type UseFormStateReturn,
 } from 'react-hook-form';
 import {
   type FormFieldErrorType,
@@ -48,7 +50,10 @@ export interface IressFormFieldProps<
    * To ensure the field is correctly registered with the form, the control must be passed as props to the rendered component.
    * (eg. `render={field => <IressInput {...field} />}`)
    */
-  render: (field: FormFieldRenderProps<T>) => ReactNode;
+  render: (
+    field: FormFieldRenderProps<T>,
+    state: FormFieldRenderState<T>,
+  ) => ReactNode;
 
   /**
    * Validation rules, including: required, min, max, minLength, maxLength, pattern, validate
@@ -77,6 +82,21 @@ export interface FormFieldRenderProps<T extends FieldValues>
    * ID of the field. It is automatically generated based on the name of the field and its parent form.
    */
   id: string;
+}
+
+/**
+ * Props for the `IressFormField` `render` prop, second argument.
+ */
+export interface FormFieldRenderState<T extends FieldValues> {
+  /**
+   * State of the field.
+   */
+  fieldState?: ControllerFieldState;
+
+  /**
+   * State of the form.
+   */
+  formState?: UseFormStateReturn<T>;
 }
 
 /**
@@ -109,7 +129,7 @@ export const IressFormField = <T extends FieldValues>({
       : undefined;
   }, [readOnly, withCustomRules]);
 
-  const { field, fieldState } = useController<T>({
+  const { field, formState, fieldState } = useController<T>({
     control,
     defaultValue,
     name,
@@ -149,10 +169,16 @@ export const IressFormField = <T extends FieldValues>({
       htmlFor={`${form.id}__${name}`}
       {...fieldProps}
     >
-      {render({
-        ...renderField,
-        id: `${form.id}__${name}`,
-      })}
+      {render(
+        {
+          ...renderField,
+          id: `${form.id}__${name}`,
+        },
+        {
+          formState,
+          fieldState,
+        },
+      )}
     </IressField>
   );
 };
