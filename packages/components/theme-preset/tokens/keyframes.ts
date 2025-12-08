@@ -1,8 +1,13 @@
+import { cssVars } from '@iress-oss/ids-tokens';
 import { defineKeyframes } from '@pandacss/dev';
 
 export const keyframes = defineKeyframes({
   fieldFooter: {
-    '0%': { display: 'none', opacity: 0, transform: 'translateY(-100%)' },
+    '0%': {
+      display: 'none',
+      opacity: 0,
+      transform: `translateY(calc(${cssVars.spacing[2]} * -1))`,
+    },
     '100%': { display: 'block', opacity: 1, transform: 'translateY(0)' },
   },
   iconRotation: {

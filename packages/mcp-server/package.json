@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-mcp-server",
-  "version": "6.0.0-alpha.2",
+  "version": "6.0.0-alpha.3",
   "description": "Model Context Protocol (MCP) server for Iress Design System (IDS) component library - provides AI assistants with contextual information about IDS components, design tokens, and usage patterns",
   "type": "module",
   "main": "./dist/index.js",
