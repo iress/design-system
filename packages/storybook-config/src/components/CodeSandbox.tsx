@@ -35,8 +35,9 @@ export const CodeSandbox = ({
     <IressPanel bg="colour.neutral.20" textAlign="center" p="xl" m="xl">
       <h2>{title}</h2>
       <p>
-        If you are not redirected automatically,{' '}
-        <a href={url}>follow the link</a>.
+        <a href={url} target="_blank" rel="noopener noreferrer">
+          Click here to open CodeSandbox
+        </a>.
       </p>
     </IressPanel>
   );
