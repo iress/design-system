@@ -37,7 +37,8 @@ export const CodeSandbox = ({
       <p>
         <a href={url} target="_blank" rel="noopener noreferrer">
           Click here to open CodeSandbox
-        </a>.
+        </a>
+        .
       </p>
     </IressPanel>
   );
