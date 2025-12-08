@@ -1,6 +1,6 @@
-# Just another Storybook Sandbox addon
+# Storybook Sandbox Addon
 
-This Storybook addon provides a sandbox environment for testing and experimenting with components in isolation using React Live.
+This Storybook addon provides the ability to open the current story in CodeSandbox.
 
 ## Installation
 
@@ -10,7 +10,7 @@ yarn add --dev @iress-oss/ids-storybook-sandbox
 
 ## Usage
 
-In your Storybook `main.ts` configuration file, add the addon.
+In your Storybook `main.ts` configuration file, add the addon:
 
 ```ts
 // .storybook/main.ts
@@ -25,61 +25,41 @@ export default config;
 
 ## Configuration
 
-The sandbox is not shown by default. You must create a story that uses the sandbox editor. This allows you to place the sandbox wherever you like in your Storybook.
+The addon works out of the box, but you can customise its behavior using parameters in your stories or your main Storybook configuration.
 
-```sh
-sandbox/
- ├── Sandbox.stories.tsx
- └── scopes/ #  Scope files that provide imports for the sandbox environment
-    ├── design-system.ts
-    └── react-hook-form.ts
- └── templates/ # Template files that provide boilerplate code for the sandbox environment
-    ├── index.ts
-    └── simple/
-        ├── icon.ts
-        └── snippet.tsx
-```
+```ts
+import type { AddonConfig } from '@iress-oss/ids-storybook-sandbox';
 
-Afterwards, you can create a story that uses the sandbox. Below is one that makes use of lazy loading scopes and templates.
-
-```tsx
-// sandbox/Sandbox.stories.tsx
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { TEMPLATES } from './templates';
-import type {
-  SandboxPreviewProps,
-  AddonConfig,
-} from '@iress-oss/ids-storybook-sandbox';
-import { Loader } from 'storybook/internal/components';
-
-const SandboxStub = () => <></>;
-const SCOPES = {
-  default: import('./scopes/design-system'),
-  'react-hook-form': import('./scopes/react-hook-form'),
-};
-
-export default {
-  title: 'Sandbox',
-  component: SandboxStub,
+export const Library = {
   args: {
-    defaultState: {
-      code: TEMPLATES[0]?.state.code,
-    },
-    loading: () => <Loader>Opening Sandbox...</Loader>,
-    scope: SCOPES,
+    children: 'This will use the IDS library template and HTML',
   },
   parameters: {
     IDS_Sandbox: {
-      code: TEMPLATES[0]?.state.code ?? '',
-      disable: false,
-      scopes: Object.keys(SCOPES),
-      templates: TEMPLATES,
+      dependencies: {
+        '@iress-oss/ids-components': 'alpha',
+      },
+      html: '<div id="root"></div>',
+      template: `
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { IressProvider } from '@iress-oss/ids-components';
+import '@iress-oss/ids-components/dist/style.css';
+
+const App = () => {
+  return (
+<Story />
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <IressProvider>
+      <App />
+    </IressProvider>
+  </React.StrictMode>,
+);`,
     } satisfies AddonConfig,
-    layout: 'fullscreen',
   },
-} as Meta<SandboxPreviewProps>;
-
-export const Sandbox: StoryObj<SandboxPreviewProps> = {};
+};
 ```
-
-And that should be it!

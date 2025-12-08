@@ -1,5 +1,4 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 import { ResponsiveTableColumns } from './mocks/ResponsiveTableColumns';
 import ResponsiveTableColumnsSource from './mocks/ResponsiveTableColumns.tsx?raw';
 import {
@@ -16,7 +15,10 @@ import {
   IressText,
 } from '@/main';
 import { lazy, Suspense } from 'react';
-import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
+import {
+  CurrentBreakpoint,
+  withCustomSource,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressTable>;
 

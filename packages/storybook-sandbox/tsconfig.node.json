@@ -5,10 +5,9 @@
     "allowSyntheticDefaultImports": true,
     "types": ["vitest/globals", "node"],
     "resolveJsonModule": true,
-    "jsx": "react",
     "strict": true,
     "module": "nodenext",
     "moduleResolution": "nodenext"
   },
-  "include": ["*.ts", "*.tsx", "../../shared/*.ts", ".storybook/*.ts"]
+  "include": ["*.ts", "../../shared/*.ts", ".storybook/*.ts"]
 }

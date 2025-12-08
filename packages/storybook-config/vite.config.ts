@@ -21,6 +21,7 @@ export default defineConfig({
         'src/**/*.docs.*',
         'plugins/**/*',
         '*.ts',
+        '**/*.template.tsx',
       ],
       tsconfigPath: './tsconfig.base.json',
     }),

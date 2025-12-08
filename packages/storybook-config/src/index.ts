@@ -1,4 +1,5 @@
 // Components
+export * from './components/CodeSandbox';
 export * from './components/ComponentApi';
 export * from './components/ComponentApiExpander';
 export * from './components/ComponentExample';
@@ -15,6 +16,7 @@ export * from './helpers/disableArgTypes';
 export * from './helpers/mergeStorybookConfig';
 export * from './helpers/removeArgTypes';
 export * from './helpers/stringifyStorybookArgs';
+export * from './helpers/withCustomSource';
 export * from './helpers/withJsxTransformer';
 export * from './helpers/withTransformedSource';
 

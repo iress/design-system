@@ -14,8 +14,10 @@ import { MenuInPopoverRoleDescription } from './mocks/MenuInPopoverRoleDescripti
 import { type ComponentProps, type ReactNode, useState } from 'react';
 import { UsePopoverExample } from './mocks/UsePopoverExample';
 import UsePopoverExampleSource from './mocks/UsePopoverExample.tsx?raw';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
+import {
+  disableArgTypes,
+  withCustomSource,
+} from '@iress-oss/ids-storybook-config';
 
 type IressPopoverPropsAndCustomArgs = ComponentProps<typeof IressPopover> & {
   menuChildren: ReactNode;

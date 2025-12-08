@@ -1,15 +1,6 @@
-import type React from 'react';
-
 import type { Addon_DecoratorFunction } from 'storybook/internal/types';
-import { withSandboxStory } from './decorators/withSandboxStory';
-import { ADDON_ID } from './constants';
+import { withPreviewSnippet } from './decorators/withPreviewSnippet';
 
 export const decorators: Addon_DecoratorFunction<React.JSX.Element>[] = [
-  withSandboxStory,
+  withPreviewSnippet,
 ];
-
-export const parameters = {
-  [ADDON_ID]: {
-    disable: true,
-  },
-};

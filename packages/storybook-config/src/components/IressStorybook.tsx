@@ -202,7 +202,11 @@ export const IressStorybook = ({
   const { IressProvider, IressText } = componentMapping;
 
   return (
-    <IressStorybookContext value={componentMapping}>
+    <IressStorybookContext
+      value={{
+        ...componentMapping,
+      }}
+    >
       <IressStorybookStyles />
       <Unstyled>
         <IressProvider>

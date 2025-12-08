@@ -20,7 +20,7 @@
     "rootDir": "./src",
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["src/**/*", "vite-env.d.ts"],
+  "include": ["src/**/*"],
   "references": [
     {
       "path": "./tsconfig.node.json"

@@ -25,10 +25,10 @@ import {
   CurrentBreakpoint,
   DiffViewer,
   disableArgTypes,
+  withCustomSource,
   withTransformedProviderSource,
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 const SLIDEOUT_ID = 'storybook-slideout';
 

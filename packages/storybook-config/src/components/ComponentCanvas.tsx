@@ -1,10 +1,10 @@
 import { Canvas, useOf } from '@storybook/addon-docs/blocks';
-import {
-  type UseSandboxCanvasProps,
-  useSandboxCanvasProps,
-} from '@iress-oss/ids-storybook-sandbox';
 import { addons } from 'storybook/internal/preview-api';
 import { FORCE_REMOUNT } from 'storybook/internal/core-events';
+import {
+  useSandboxCanvasProps,
+  type UseSandboxCanvasProps,
+} from '@iress-oss/ids-storybook-sandbox';
 
 export interface ComponentCanvasProps
   extends Omit<UseSandboxCanvasProps, 'additionalTransformers'> {
@@ -24,13 +24,8 @@ export const ComponentCanvas = ({
   ...restProps
 }: ComponentCanvasProps) => {
   const context = useOf<'story'>(restProps.of);
-  const { additionalActions = [], ...canvasProps } = useSandboxCanvasProps({
-    ...restProps,
-    additionalTransformers: {
-      replaceAliasWithPackageName: (code) =>
-        code.replace(/@\/main/gi, '@iress-oss/ids-components'),
-    },
-  });
+  const { additionalActions = [], ...canvasProps } =
+    useSandboxCanvasProps(restProps);
 
   if (refresh) {
     additionalActions.push({

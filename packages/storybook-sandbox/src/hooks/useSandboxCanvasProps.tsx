@@ -1,35 +1,29 @@
-import {
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-  type ComponentProps,
-} from 'react';
-import type { SandboxTransformerMap } from '../types';
-import { type Canvas, type SourceProps } from '@storybook/addon-docs/blocks';
-import type { StorybookParameters } from 'storybook/internal/types';
-import { COMMON_TRANSFORMERS } from '../constants';
-import { getSandboxActionItems, transformCode } from '../helpers';
+import React, { useState } from 'react';
+import { useCallback, useRef, type ComponentProps } from 'react';
+import type { Canvas, SourceProps } from '@storybook/addon-docs/blocks';
+import { ADDON_ID } from '../constants';
+import type {
+  AddonConfig,
+  ParametersConfig,
+  SandboxTransformers,
+} from '../types';
+import { transformCodeWithParameters } from '../helpers/transformCode';
+import type { IFiles } from 'codesandbox-import-utils/lib/api/define';
+import OpenInCodeSandboxCustomTemplate from '../components/OpenInCodeSandboxCustom.template?raw';
+import OpenInCodeSandboxHTML from '../components/OpenInCodeSandbox.html?raw';
+import { getSandboxUrl } from '../helpers/getSandboxUrl';
+import { SandboxIcon } from '../components/SandboxIcon';
 import { useSandboxDocParameters } from './useSandboxDocParameters';
+
+type CanvasProps = ComponentProps<typeof Canvas>;
 
 export interface UseSandboxCanvasProps extends CanvasProps {
   /**
    * Additional transformers to apply to the code before rendering in the source code.
    * @example `{ replaceAliasWithPackageName: (code?: string) => code?.replace(/@\/main/gi, '@iress-oss/ids-components') }`
    */
-  additionalTransformers?: SandboxTransformerMap;
+  additionalTransformers?: SandboxTransformers;
 }
-
-interface ParametersConfig {
-  docs?: {
-    source?: {
-      code?: string;
-      transform?: SourceProps['transform'];
-    };
-  };
-}
-
-type CanvasProps = ComponentProps<typeof Canvas>;
 
 /**
  * This allows you to enable a link to the sandbox using the code from a Storybook Canvas.
@@ -44,74 +38,112 @@ export const useSandboxCanvasProps = ({
   withToolbar = true,
   ...restProps
 }: UseSandboxCanvasProps): CanvasProps => {
-  const storyOf = of as
-    | { parameters?: Record<string, ParametersConfig['docs']> }
-    | undefined;
-  const docsConfig = storyOf?.parameters?.docs;
-  const [docParameters, setDocParameters] = useState<
-    StorybookParameters | undefined
-  >();
+  const storyOf = of as { parameters?: ParametersConfig } | undefined;
+  const [parameters, setParameters] = useState<ParametersConfig | undefined>(
+    storyOf?.parameters,
+  );
+  const docsConfig = parameters?.docs;
+
+  // These refs are used to persist values in the additional actions - on click handler
+  const addonConfig = useRef<AddonConfig | null>(parameters?.[ADDON_ID]);
   const renderedCode = useRef<string | null>(
     sourceProp?.code ?? docsConfig?.source?.code ?? null,
   );
 
-  const transformers = useMemo(() => {
-    if (additionalTransformers) {
-      return {
-        ...COMMON_TRANSFORMERS,
-        ...additionalTransformers,
-      };
-    }
-
-    return {};
-  }, [additionalTransformers]);
-
-  const source = docsConfig?.source?.code
-    ? {
-        ...sourceProp,
-        code: additionalTransformers
-          ? transformCode(docsConfig.source.code, transformers)
-          : docsConfig.source.code,
-      }
-    : sourceProp;
-
   useSandboxDocParameters((parameters) => {
-    setDocParameters(parameters);
+    setParameters(parameters);
+    addonConfig.current = parameters?.[ADDON_ID] as AddonConfig;
   });
 
+  const getTsxFiles = useCallback(() => {
+    // If no custom source code, use the main template
+    if (!docsConfig?.source?.code) {
+      return {
+        'index.tsx': {
+          content: renderedCode.current ?? '',
+          isBinary: false,
+        },
+      } as IFiles;
+    }
+
+    // If custom source code exists, use the custom template
+    return {
+      'index.tsx': {
+        content: OpenInCodeSandboxCustomTemplate,
+        isBinary: false,
+      },
+      'component.tsx': {
+        content: renderedCode.current ?? '',
+        isBinary: false,
+      },
+    };
+  }, [docsConfig]);
+
+  // Transform handler
   const handleTransform = useCallback<
     Exclude<SourceProps['transform'], undefined>
   >(
-    async (code, context) => {
-      // Check if there is a transform function in the source prop or in the docs config
+    async (code, transformContext) => {
       const transformFn =
-        source?.transform ??
-        (context?.parameters as ParametersConfig)?.docs?.source?.transform;
-
-      const transformed = transformCode(
-        (await transformFn?.(code, context)) ?? code,
-        transformers,
+        sourceProp?.transform ?? docsConfig?.source?.transform;
+      const transformed = transformCodeWithParameters(
+        (await transformFn?.(code, transformContext)) ?? code,
+        addonConfig.current ?? undefined,
+        docsConfig,
+        additionalTransformers,
       );
 
       renderedCode.current = transformed;
-
       return transformed;
     },
-    [source?.transform, transformers],
+    [sourceProp?.transform, additionalTransformers, docsConfig, addonConfig],
   );
-
-  const customActions: UseSandboxCanvasProps['additionalActions'] = [];
 
   return {
     ...restProps,
     additionalActions: [
       ...additionalActions,
-      ...customActions,
-      ...getSandboxActionItems(renderedCode, docParameters),
+      {
+        title: (
+          <>
+            <SandboxIcon />
+            Open in CodeSandbox
+          </>
+        ),
+        onClick: () => {
+          window.open(
+            getSandboxUrl({
+              files: {
+                ...getTsxFiles(),
+                'index.html': {
+                  content: addonConfig.current?.html ?? OpenInCodeSandboxHTML,
+                  isBinary: false,
+                },
+                'package.json': {
+                  content: JSON.stringify(
+                    {
+                      dependencies: {
+                        react: 'latest',
+                        'react-dom': 'latest',
+                        ...addonConfig.current?.dependencies,
+                      },
+                    },
+                    null,
+                    2,
+                  ),
+                  isBinary: false,
+                },
+                ...addonConfig.current?.files,
+              },
+            }),
+            '_blank',
+          );
+        },
+      },
     ],
     of,
     source: {
-      ...source,
+      ...sourceProp,
       transform: handleTransform,
     },
     withToolbar,

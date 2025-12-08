@@ -4,7 +4,7 @@ import { LoadingSuspenseWizard } from './mocks/LoadingWizardWithSuspense';
 import LoadingSuspenseWizardSource from './mocks/LoadingWizardWithSuspense.tsx?raw';
 import { LoadingSuspenseWizardFast } from './mocks/LoadingWizardWithSuspenseFast';
 import LoadingSuspenseWizardFastSource from './mocks/LoadingWizardWithSuspenseFast.tsx?raw';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
+import { withCustomSource } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressLoadingSuspense>;
 

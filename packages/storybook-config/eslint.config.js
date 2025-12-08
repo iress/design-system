@@ -10,7 +10,7 @@ import {
 
 export default [
   {
-    ignores: [...baseIgnores],
+    ignores: [...baseIgnores, '**/*.template.tsx'],
   },
   baseJavaScriptConfig,
   createTypeScriptConfig(import.meta.dirname, [

@@ -49,13 +49,15 @@ export default defineConfig(async () => {
     external: [
       'react',
       'react-dom',
-      '@storybook/react',
       '@storybook/icons',
-      '@storybook/addon-docs/blocks',
-      '@storybook/react-vite',
-      'vite',
       ...Object.keys(packageJson.peerDependencies),
     ],
+    loader: {
+      '.html': 'text',
+      '.template': 'text',
+      '.html?raw': 'text',
+      '.template?raw': 'text',
+    },
   };
 
   const configs: Options[] = [];
@@ -100,7 +102,6 @@ export default defineConfig(async () => {
       entry: nodeEntries,
       platform: 'node',
       target: NODE_TARGET,
-      dts: true,
     });
   }
 

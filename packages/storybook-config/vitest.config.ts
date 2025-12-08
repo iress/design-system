@@ -1,7 +1,9 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vitest/config';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
+  plugins: [tsconfigPaths()],
   test: {
     globals: true,
     environment: 'jsdom',
@@ -19,7 +21,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'lcov', 'html', 'json', 'json-summary'],
-      include: ['plugins/**/*', 'src/**/*'],
+      include: ['plugins/**/*.{ts,tsx}', 'src/**/*.{ts,tsx}'],
       exclude: [
         'src/*.ts',
         'src/*.tsx',
@@ -29,6 +31,8 @@ export default defineConfig({
         'src/**/constants.ts',
         'src/**/*.stories.*',
         'src/**/*.test.*',
+        'src/**/*.docs.mdx',
+        'src/**/*.html',
       ],
     },
   },

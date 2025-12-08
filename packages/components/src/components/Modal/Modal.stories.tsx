@@ -16,11 +16,11 @@ import {
   CurrentBreakpoint,
   DiffViewer,
   disableArgTypes,
+  withCustomSource,
   withJsxTransformer,
   withTransformedProviderSource,
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 const MODAL_ID = 'storybook-modal';
 

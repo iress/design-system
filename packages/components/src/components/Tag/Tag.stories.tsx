@@ -6,7 +6,7 @@ import { IressPopover } from '../Popover';
 import { IressButton } from '../Button';
 import { IressIcon } from '../Icon';
 import { IressPanel } from '../Panel';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
+import { withCustomSource } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressTag>;
 

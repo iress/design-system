@@ -1,78 +1,102 @@
-import type { ReactNode } from 'react';
+import type { IFiles } from 'codesandbox-import-utils/lib/api/define';
 
-export interface AddonState {
-  /**
-   * The code to display in the sandbox. It will be displayed in the editor and preview.
-   */
-  code: string;
+import type { SourceProps } from '@storybook/addon-docs/blocks';
+import type { ADDON_ID } from './constants';
 
-  /**
-   * The scopes to use in the sandbox.
-   * Scopes are used to allow the code to access global variables and modules.
-   * The default scope is `default`, it is always available.
-   */
-  scopes?: string[];
-}
-
-export interface AddonConfig extends AddonState {
-  /**
-   * Whether the sandbox editor is disabled.
-   * If set to true, it will disable the sandbox editor panel for this story.
-   * @default true
-   */
-  disable?: boolean;
-
-  /**
-   * Transformers are used to modify the code before it is displayed in the editor.
-   * By default, it will use the EDITOR_TRANSFORMERS constant defined in the addon.
-   */
-  editorTransformers?: SandboxTransformerMap;
-
-  /**
-   * The story ID of the sandbox.
-   * If set, it will add a button to open the sandbox in the Storybook UI where applicable.
-   * This is usually in the format: `/story/sandbox--sandbox`.
-   */
-  openInStoryId?: string;
-
-  /**
-   * The templates to display in the sandbox.
-   * Templates are used to provide predefined states for the sandbox.
-   * When a template is selected, the state will be applied to the sandbox.
-   */
-  templates?: SandboxTemplate[];
-}
-
-export interface SandboxTemplate {
-  /**
-   * The description of the template.
-   * @todo This does not work as a ReactNode if you are using React 19. Should work in Storybook 10. Please pass a string to add a description.
-   */
-  description?: ReactNode;
-
-  /**
-   * When the template is selected, the state will be applied to the sandbox.
-   */
-  state: AddonState;
-
-  /**
-   * The thumbnail to display for the template.
-   * @todo This does not work if you are using React 19. Should work in Storybook 10.
-   */
-  thumbnail?: ReactNode;
-
-  /**
-   * The title of the template.
-   */
-  title: string;
-}
-
-export type SandboxScope = Record<string, unknown>;
-export type SandboxStyle = () => ReactNode;
 export type SandboxTransformer = (code: string) => string;
-export type SandboxTransformerMap = Record<string, SandboxTransformer>;
 
-export interface SandboxParentLocation {
-  href: string;
-  search: string;
+export type SandboxTransformers = Record<string, SandboxTransformer>;
+
+export interface AddonConfig {
+  /**
+   * Additional code transformers to apply before sending the code to the sandbox.
+   *
+   * @example
+   * ```ts
+   * {
+   *   replaceAliasWithPackageName: (code) =>
+   *     code.replace(/@\/main/gi, '@iress-oss/ids-components'),
+   * }
+   * ```
+   */
+  additionalTransformers?: Record<string, (code: string) => string>;
+
+  /**
+   * Additional files to include in the CodeSandbox.
+   *
+   * For example:
+   * ```ts
+   * {
+   *   'package.json': {
+   *     content: '{ dependencies: { react: "latest", "react-dom": "latest" } }',
+   *     isBinary: false,
+   *   },
+   * }
+   * ```
+   */
+  files?: IFiles;
+
+  /**
+   * The package name of the story being rendered.
+   * This is used to automatically add the package as a dependency in the sandbox.
+   *
+   * @example @iress-oss/ids-components
+   */
+  storyPackageName?: string;
+
+  /**
+   * Additional dependencies to add to the CodeSandbox package.json.
+   *
+   * @example
+   * ```ts
+   * {
+   *   'some-package': '1.0.0',
+   * }
+   * ```
+   */
+  dependencies?: Record<string, string>;
+
+  /**
+   * Additional HTML content to include in the CodeSandbox.
+   *
+   * @example
+   * ```html
+   * '<div id="root"></div>'
+   * `
+   */
+  html?: string;
+
+  /**
+   * A custom template to use to display story code in the sandbox,
+   * - <Story /> will be replaced with the story code.
+   * - Imports will always be added to the top of the file.
+   * - This will only be used if you do not override the story's code directly.
+   * - You can completely override this template at the story level.
+   *
+   * @example
+   * ```tsx
+   * import React from 'react';
+   * import ReactDOM from 'react-dom';
+   *
+   * ReactDOM.render(
+   *   <React.StrictMode>
+   *     <Story />
+   *   </React.StrictMode>,
+   *   document.getElementById('root')
+   * );
+   * `
+   */
+  template?: string;
+}
+
+export interface DocsConfig {
+  source?: {
+    code?: string;
+    transform?: SourceProps['transform'];
+  };
+}
+
+export interface ParametersConfig {
+  docs?: DocsConfig;
+  [ADDON_ID]?: AddonConfig;
 }

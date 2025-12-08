@@ -49,4 +49,6 @@ export const COMPONENT_MAPPING_DEFAULT: IressStorybookComponentMapping = {
 };
 
 export const IressStorybookContext =
-  createContext<IressStorybookComponentMapping>(COMPONENT_MAPPING_DEFAULT);
+  createContext<IressStorybookComponentMapping>({
+    ...COMPONENT_MAPPING_DEFAULT,
+  });
