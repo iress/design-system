@@ -34,8 +34,8 @@ import {
   addToStorybookCategory,
   disableArgTypes,
   mergeStorybookConfig,
+  withCustomSource,
 } from '@iress-oss/ids-storybook-config';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<typeof IressRichSelect>;
 

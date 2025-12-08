@@ -8,6 +8,7 @@ import { IressStack, IressText } from '../../main';
 import {
   CurrentBreakpoint,
   disableArgTypes,
+  withCustomSource,
   withJsxTransformer,
   withTransformedProviderSource,
   withTransformedRawSource,
@@ -17,7 +18,6 @@ import ModalSizesSource from './mocks/ModalSizes.tsx?raw';
 import { ModalPaddings } from './mocks/ModalPaddings';
 import ModalPaddingsSource from './mocks/ModalPaddings.tsx?raw';
 import { type ArgsStoryFn } from 'storybook/internal/types';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 const MODAL_ID = 'storybook-modal';
 

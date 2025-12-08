@@ -6,8 +6,10 @@ import { IressRow } from '../Row';
 import { IressText } from '../Text';
 import { MultipleExpander } from './mocks/MultipleExpander';
 import MultipleExpanderSource from './mocks/MultipleExpander.tsx?raw';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
+import {
+  disableArgTypes,
+  withCustomSource,
+} from '@iress-oss/ids-storybook-config';
 
 export default {
   title: 'Components/Expander',

@@ -33,9 +33,9 @@ import UseWatchFormSource from './mocks/UseWatchForm.tsx?raw';
 import {
   disableArgTypes,
   removeArgTypes,
+  withCustomSource,
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
 
 type Story = StoryObj<typeof IressForm>;
 

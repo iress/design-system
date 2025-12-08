@@ -4,7 +4,7 @@ import { LoadingWizard } from './mocks/LoadingWizard';
 import LoadingWizardSource from './mocks/LoadingWizard.tsx?raw';
 import { LoadingWizardFast } from './mocks/LoadingWizardFast';
 import LoadingWizardFastSource from './mocks/LoadingWizardFast.tsx?raw';
-import { withCustomSource } from '@iress-oss/ids-storybook-sandbox';
+import { withCustomSource } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressLoading>;
 
