@@ -37,10 +37,6 @@ const NewPanel = ({
     classNames.push('iress-mb--n-lg');
   }
 
-  if (mt == '-lg') {
-    classNames.push('iress-mt--n-md');
-  }
-
   if (p) {
     classNames.push(`iress-p--${p}`);
   }
