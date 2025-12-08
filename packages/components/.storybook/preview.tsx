@@ -8,6 +8,11 @@ const basePreview = getPreview({
     componentMapping: componentMapping as never,
     noStyles: true,
   },
+  sandboxConfig: {
+    dependencies: {
+      '@iress-oss/ids-components': 'alpha',
+    },
+  },
 });
 
 const preview: Preview = {

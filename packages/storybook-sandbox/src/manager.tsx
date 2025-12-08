@@ -14,6 +14,13 @@ addons.register(ADDON_ID, (api) => {
   addons.add(TOOLBAR_ID, {
     title: ADDON_TITLE,
     type: Addon_TypesEnum.TOOLEXTRA,
+    match: ({ viewMode }) => {
+      if (!viewMode) {
+        return false;
+      }
+
+      return /^(story)$/.test(viewMode);
+    },
     render: ({ active }) => <OpenInCodeSandbox active={active} api={api} />,
   });
 
