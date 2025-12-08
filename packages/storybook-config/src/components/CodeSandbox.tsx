@@ -30,12 +30,7 @@ export const CodeSandbox = ({ files, title }: CodeSandboxProps) => {
   }, [url]);
 
   return (
-    <IressPanel
-      bg="colour.neutral.20"
-      textAlign="center"
-      p="spacing.1200"
-      m="spacing.1200"
-    >
+    <IressPanel bg="colour.neutral.20" textAlign="center" p="xl" m="xl">
       <h2>{title ?? 'Redirecting...'}</h2>
       <p>
         If you are not redirected automatically,{' '}
