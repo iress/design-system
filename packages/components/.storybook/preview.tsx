@@ -12,11 +12,21 @@ import {
 interface NewPanelProps extends IressPanelProps {
   bg?: IressPanelProps['background'];
   layerStyle?: string;
+  p?: string;
+  m?: string;
   mt?: string;
   mb?: string;
 }
 
-const NewPanel = ({ bg, layerStyle, mt, mb, ...props }: NewPanelProps) => {
+const NewPanel = ({
+  bg,
+  layerStyle,
+  mt,
+  mb,
+  p,
+  m,
+  ...props
+}: NewPanelProps) => {
   const classNames: string[] = [];
 
   if (mt == '-lg') {
@@ -25,6 +35,18 @@ const NewPanel = ({ bg, layerStyle, mt, mb, ...props }: NewPanelProps) => {
 
   if (mb == '-spacing.900') {
     classNames.push('iress-mb--n-lg');
+  }
+
+  if (mt == '-lg') {
+    classNames.push('iress-mt--n-md');
+  }
+
+  if (p) {
+    classNames.push(`iress-p--${p}`);
+  }
+
+  if (m) {
+    classNames.push(`iress-m--${m}`);
   }
 
   const newBg = layerStyle === 'elevation.raised' ? 'default' : bg;
@@ -70,6 +92,11 @@ const basePreview = getPreview({
       IressPanel: NewPanel,
     } as never,
     noStyles: true,
+  },
+  sandboxConfig: {
+    dependencies: {
+      '@iress-oss/ids-components': 'latest',
+    },
   },
 });
 
