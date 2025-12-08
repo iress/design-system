@@ -24,7 +24,7 @@ export const select = sva({
       display: 'block',
       width: '[100%]',
       height: '[calc({sizes.input.height} - 2px)]',
-      paddingInline: 'spacing.200',
+      paddingInline: 'spacing.2',
       appearance: 'none',
       border: '[0]',
       background: '[transparent]',
@@ -43,7 +43,7 @@ export const select = sva({
       '2': {
         wrapper: {
           width:
-            '[calc({spacing.spacing.200} + calc({sizes.chevron.select} * 2) + {sizes.input.2})]',
+            '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.2})]',
         },
         element: {
           width: 'auto',
@@ -52,7 +52,7 @@ export const select = sva({
       '4': {
         wrapper: {
           width:
-            '[calc({spacing.spacing.200} + calc({sizes.chevron.select} * 2) + {sizes.input.4})]',
+            '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.4})]',
         },
         element: {
           width: 'auto',
@@ -61,7 +61,7 @@ export const select = sva({
       '6': {
         wrapper: {
           width:
-            '[calc({spacing.spacing.200} + calc({sizes.chevron.select} * 2) + {sizes.input.6})]',
+            '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.6})]',
         },
         element: {
           width: 'auto',
@@ -70,7 +70,7 @@ export const select = sva({
       '8': {
         wrapper: {
           width:
-            '[calc({spacing.spacing.200} + calc({sizes.chevron.select} * 2) + {sizes.input.8})]',
+            '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.8})]',
         },
         element: {
           width: 'auto',
@@ -79,7 +79,7 @@ export const select = sva({
       '10': {
         wrapper: {
           width:
-            '[calc({spacing.spacing.200} + calc({sizes.chevron.select} * 2) + {sizes.input.10})]',
+            '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.10})]',
         },
         element: {
           width: 'auto',
@@ -88,13 +88,13 @@ export const select = sva({
       '12': {
         wrapper: {
           width:
-            '[calc({spacing.spacing.200} + calc({sizes.chevron.select} * 2) + {sizes.input.12})]',
+            '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.12})]',
         },
       },
       '16': {
         wrapper: {
           width:
-            '[calc({spacing.spacing.200} + calc({sizes.chevron.select} * 2) + {sizes.input.16})]',
+            '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.16})]',
         },
         element: {
           width: 'auto',

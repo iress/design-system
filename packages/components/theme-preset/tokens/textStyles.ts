@@ -54,6 +54,12 @@ export const textCompositions: CompositionStyles['textStyles'] = {
       font: cssVars.typography.body.sm.regular,
     },
   },
+  'typography.body.sm.medium': {
+    description: typography.body.sm.medium.$description,
+    value: {
+      font: cssVars.typography.body.sm.medium,
+    },
+  },
   'typography.body.sm.strong': {
     description: typography.body.sm.strong.$description,
     value: {
@@ -87,6 +93,12 @@ export const textCompositions: CompositionStyles['textStyles'] = {
       },
     },
   },
+  'typography.body.md.medium': {
+    description: typography.body.md.medium.$description,
+    value: {
+      font: cssVars.typography.body.md.medium,
+    },
+  },
   'typography.body.md.strong': {
     description: typography.body.md.strong.$description,
     value: {
@@ -118,6 +130,12 @@ export const textCompositions: CompositionStyles['textStyles'] = {
     description: typography.body.lg.regular.$description,
     value: {
       font: cssVars.typography.body.lg.regular,
+    },
+  },
+  'typography.body.lg.medium': {
+    description: typography.body.lg.medium.$description,
+    value: {
+      font: cssVars.typography.body.lg.medium,
     },
   },
   'typography.body.lg.strong': {

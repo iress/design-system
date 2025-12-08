@@ -4,14 +4,14 @@ export const checkboxGroup = cva({
   base: {
     display: 'flex',
     flexWrap: 'wrap',
-    rowGap: 'spacing.200',
+    rowGap: 'spacing.2',
   },
   variants: {
     layout: {
       block: {
         display: 'flex',
         flexWrap: 'wrap',
-        rowGap: 'spacing.200',
+        rowGap: 'spacing.2',
         '& label': {
           display: 'flex',
           flexBasis: '[100%]',
@@ -26,7 +26,7 @@ export const checkboxGroup = cva({
       stack: {
         display: 'flex',
         flexWrap: 'wrap',
-        rowGap: 'spacing.200',
+        rowGap: 'spacing.2',
         '& > *': {
           flexBasis: '[100%]',
         },
@@ -35,8 +35,8 @@ export const checkboxGroup = cva({
         display: 'flex',
         flexFlow: 'row wrap',
         width: '[100%]',
-        rowGap: 'spacing.200',
-        columnGap: 'spacing.400',
+        rowGap: 'spacing.2',
+        columnGap: 'spacing.4',
       },
     },
     readOnly: {
@@ -48,7 +48,7 @@ export const checkboxGroup = cva({
       readOnly: true,
       layout: 'stack',
       css: {
-        paddingInlineStart: 'spacing.400',
+        paddingInlineStart: 'spacing.4',
         '& > *': {
           display: 'list-item',
         },
@@ -58,7 +58,7 @@ export const checkboxGroup = cva({
       readOnly: true,
       layout: 'block',
       css: {
-        paddingInlineStart: 'spacing.400',
+        paddingInlineStart: 'spacing.4',
         '& > *': {
           display: 'list-item',
         },
@@ -68,13 +68,13 @@ export const checkboxGroup = cva({
       readOnly: true,
       layout: 'inline',
       css: {
-        paddingInlineStart: 'spacing.400',
+        paddingInlineStart: 'spacing.4',
         '& > *': {
           display: 'list-item',
-          marginInlineEnd: 'spacing.600',
+          marginInlineEnd: 'spacing.6',
         },
         '& > *:last-child': {
-          marginInlineEnd: 'spacing.000',
+          marginInlineEnd: 'spacing.0',
         },
       },
     },

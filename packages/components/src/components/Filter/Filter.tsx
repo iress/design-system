@@ -292,7 +292,7 @@ const Filter = <TMultiple extends boolean = false>(
         {popoverPrepend}
         {flags.showHeader && (
           <>
-            <IressPanel bg="transparent" p="spacing.200">
+            <IressPanel bg="transparent" p="spacing.2">
               {isSearchable && (
                 <FilterSearch
                   {...inputProps}

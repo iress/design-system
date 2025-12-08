@@ -1,12 +1,12 @@
 import { useMemo, type FC, type ReactNode } from 'react';
 import {
+  type PositiveSpacingToken,
   type HorizontalAligns,
   type IressStyledProps,
   type ResponsiveProp,
 } from '@/types';
 import { stack } from './Stack.styles';
 import { styled } from '@/styled-system/jsx';
-import { type PositiveSpacingToken } from '@theme-preset/tokens/spacing';
 import { GlobalCSSClass } from '@/enums';
 import { cx } from '@/styled-system/css';
 

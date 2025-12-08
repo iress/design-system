@@ -158,7 +158,7 @@ export const IressAlert = ({
             data-testid={propagateTestid(restProps['data-testid'], 'footer')}
           >
             {hasActions && (
-              <IressInline gap="sm" pb="spacing.050">
+              <IressInline gap="sm" pb="spacing.1">
                 {actions?.map((action, index) => (
                   <IressButton
                     {...action}

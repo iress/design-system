@@ -9,7 +9,7 @@ export const tag = sva({
       border: 'divider',
       borderRadius: 'radius.system.badge',
       display: 'inline-flex',
-      gap: 'spacing.100',
+      gap: 'spacing.1',
       px: 'xs',
       transition: 'colors',
     },
@@ -22,9 +22,9 @@ export const tag = sva({
         fontSize: 'inherit',
         minWidth: '[0]',
         minHeight: '[0]',
-        py: 'spacing.000',
-        px: 'spacing.000',
-        mx: 'spacing.050',
+        py: 'spacing.0',
+        px: 'spacing.0',
+        mx: 'spacing.1',
 
         _after: {
           display: 'none',

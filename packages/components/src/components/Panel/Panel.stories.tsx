@@ -34,7 +34,7 @@ const childrenOptions = {
     </p>,
   ],
   story: (
-    <IressInline noWrap gap="spacing.400">
+    <IressInline noWrap gap="spacing.4">
       <IressPlaceholder
         width="100px"
         height="100px"
@@ -93,7 +93,7 @@ export const bg: Story = {
   },
   render: (args) => (
     <IressContainer>
-      <IressRow gutter="spacing.400">
+      <IressRow gutter="spacing.4">
         <IressCol>
           <IressPanel {...args}>
             <IressText element="h2">(default)</IressText>

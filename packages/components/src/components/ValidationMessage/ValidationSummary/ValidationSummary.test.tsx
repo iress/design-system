@@ -27,7 +27,7 @@ describe('IressValidationSummary', () => {
 
       expect(component).toHaveClass(
         'test-class',
-        css({ listStyle: 'none', m: 'spacing.000', p: 'spacing.000' }),
+        css({ listStyle: 'none', m: 'spacing.0', p: 'spacing.0' }),
         GlobalCSSClass.ValidationSummary,
       );
     });

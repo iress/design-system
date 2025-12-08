@@ -136,7 +136,7 @@ const ColourSwatch = ({
         }}
         layerStyle="elevation.raised"
       >
-        <IressRow gutter="spacing.700">
+        <IressRow gutter="spacing.7">
           <IressCol span={6}>
             <IressText noGutter color={color} style={colourStyle}>
               <IressText
@@ -151,7 +151,7 @@ const ColourSwatch = ({
                 color={color}
                 style={colourStyle}
                 element="p"
-                mb="spacing.100"
+                mb="spacing.1"
               >
                 <TokenTag>{bg}</TokenTag>{' '}
                 {backgroundColor?.toString({ format: 'hex' }).toUpperCase()}
@@ -166,7 +166,7 @@ const ColourSwatch = ({
                 style={{ color: get(cssVars, color as string) }}
               >
                 <h4>Allowed foregrounds</h4>
-                <IressStack gap="spacing.100" noGutter>
+                <IressStack gap="spacing.1" noGutter>
                   <ul>
                     {allowedForegrounds.map((allowedForeground: ColorToken) => (
                       <li key={allowedForeground}>

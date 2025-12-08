@@ -73,7 +73,7 @@ export const FieldHintIcon = ({ hint }: { hint: ReactNode }) => (
     <IressIcon
       name="info-circle"
       screenreaderText="More information"
-      ml="spacing.100"
+      ml="spacing.1"
     />
   </IressTooltip>
 );

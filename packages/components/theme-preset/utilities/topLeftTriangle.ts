@@ -17,8 +17,8 @@ export const topLeftTriangle = defineUtility({
       '&:before': {
         content: `''` as never,
         position: 'absolute',
-        top: spacing['spacing.000'].value,
-        left: spacing['spacing.000'].value,
+        top: spacing['spacing.0'].value,
+        left: spacing['spacing.0'].value,
         width: `calc(${cssVars.typography.base.size} * 2)`,
         height: `calc(${cssVars.typography.base.size} * 2)`,
         backgroundColor: 'currentColor',

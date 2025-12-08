@@ -6,7 +6,7 @@ export const slideout = sva({
     root: {
       textStyle: 'typography.body.md',
       position: 'fixed',
-      insetBlockStart: 'spacing.000',
+      insetBlockStart: 'spacing.0',
       height: '[100%]',
       maxWidth: '[100%]',
       overflowY: 'auto',
@@ -32,15 +32,15 @@ export const slideout = sva({
     },
     closeButton: {
       position: 'absolute',
-      insetInlineEnd: 'spacing.050',
-      insetBlockStart: 'spacing.050',
+      insetInlineEnd: 'spacing.1',
+      insetBlockStart: 'spacing.1',
     },
   },
   variants: {
     position: {
       right: {
         root: {
-          insetInlineEnd: 'spacing.000',
+          insetInlineEnd: 'spacing.0',
           borderStartStartRadius: 'radius.050',
           borderEndStartRadius: 'radius.050',
           borderStartEndRadius: 'radius.000',
@@ -53,7 +53,7 @@ export const slideout = sva({
       },
       left: {
         root: {
-          insetInlineStart: 'spacing.000',
+          insetInlineStart: 'spacing.0',
           borderStartStartRadius: 'radius.000',
           borderEndStartRadius: 'radius.000',
           borderStartEndRadius: 'radius.050',
@@ -146,7 +146,7 @@ export const slideout = sva({
       position: 'right',
       css: {
         root: {
-          insetInlineEnd: 'spacing.000',
+          insetInlineEnd: 'spacing.0',
         },
       },
     },
@@ -155,7 +155,7 @@ export const slideout = sva({
       position: 'left',
       css: {
         root: {
-          insetInlineStart: 'spacing.000',
+          insetInlineStart: 'spacing.0',
         },
       },
     },

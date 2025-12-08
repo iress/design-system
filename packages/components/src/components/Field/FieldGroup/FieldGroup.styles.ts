@@ -9,16 +9,16 @@ export const fieldGroup = sva({
       mb: 'field.footer',
       position: 'relative',
       border: '[none]',
-      margin: 'spacing.000',
-      padding: 'spacing.000',
+      margin: 'spacing.0',
+      padding: 'spacing.0',
     },
     hint: {
       color: 'colour.neutral.70',
       textStyle: 'typography.body.sm',
     },
     legend: {
-      mb: 'spacing.100',
-      px: 'spacing.000',
+      mb: 'spacing.1',
+      px: 'spacing.0',
       float: 'start',
 
       ['& + *']: {
@@ -30,7 +30,7 @@ export const fieldGroup = sva({
       flexDirection: 'column',
       _nestedFormLabels: {
         color: 'colour.neutral.70',
-        mb: 'spacing.050',
+        mb: 'spacing.1',
       },
     },
   },

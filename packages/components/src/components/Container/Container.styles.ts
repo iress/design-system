@@ -9,7 +9,7 @@ export const container = cva({
   base: {
     borderRadius: 'radius.system.layout',
     paddingBlock: undefined,
-    paddingInline: 'spacing.400',
+    paddingInline: 'spacing.4',
     marginInline: 'auto',
     width: '[100%]',
   },

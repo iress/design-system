@@ -2,12 +2,12 @@ import { type IressCSSProps, type ResponsiveSizing } from '@/interfaces';
 import { type PaddingSizes } from '@/types';
 
 const size = {
-  none: 'spacing.000',
-  xs: 'spacing.100',
-  sm: 'spacing.200',
-  md: 'spacing.400',
-  lg: 'spacing.700',
-  xl: 'spacing.1200',
+  none: 'spacing.0',
+  xs: 'spacing.1',
+  sm: 'spacing.2',
+  md: 'spacing.4',
+  lg: 'spacing.7',
+  xl: 'spacing.10',
 } as const;
 
 export const mapGutterToGap = (
@@ -25,5 +25,5 @@ export const mapGutterToGap = (
     }
     return gapMapping;
   }
-  return 'spacing.000';
+  return 'spacing.0';
 };

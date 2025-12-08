@@ -29,16 +29,19 @@ interface TypographySchema extends IressDesignTokenGroup {
   body: IressDesignTokenGroup & {
     sm: IressDesignTokenGroup & {
       regular: IressDesignToken<CompositeValue['typography']>;
+      medium: IressDesignToken<CompositeValue['typography']>;
       strong: IressDesignToken<CompositeValue['typography']>;
       em: IressDesignToken<CompositeValue['typography']>;
     };
     md: IressDesignTokenGroup & {
       regular: IressDesignToken<CompositeValue['typography']>;
+      medium: IressDesignToken<CompositeValue['typography']>;
       strong: IressDesignToken<CompositeValue['typography']>;
       em: IressDesignToken<CompositeValue['typography']>;
     };
     lg: IressDesignTokenGroup & {
       regular: IressDesignToken<CompositeValue['typography']>;
+      medium: IressDesignToken<CompositeValue['typography']>;
       strong: IressDesignToken<CompositeValue['typography']>;
       em: IressDesignToken<CompositeValue['typography']>;
     };
@@ -165,7 +168,7 @@ const typography = {
   },
   body: {
     $description:
-      'Body text are used for all text content in the product, such as paragraphs, lists, and tables.',
+      'Body text are used for all text content in the product, such as paragraphs, lists, and tables. They come in four different weights, strong is used to label fields and highlight text in a paragraph to make important text easier to scan, emphasis is used to display text that is referencing a legal term or other taxnomies, and medium text is used to indicate text is interactive, such as a button or a link.',
     sm: {
       $description:
         'Used for small components such as badges and field hints, as well as compact variations of tables and lists.',
@@ -177,6 +180,21 @@ const typography = {
           fontFamily: `{typography.base.bodyFont || ${bodyFont}}`,
           fontSize: `calc({typography.base.size || ${baseSize}} * (12 / 14))`,
           fontWeight: 400,
+          lineHeight: 1.5,
+        },
+        $extensions: {
+          'styler.panel': 'typography.body.sm',
+          'styler.watchToken': 'typography.base.bodyFont',
+        },
+      },
+      medium: {
+        $description:
+          'Medium text is used to indicate text is interactive, such as a button or a link.',
+        $type: Type.Typography,
+        $value: {
+          fontFamily: `{typography.base.bodyFont || ${bodyFont}}`,
+          fontSize: `calc({typography.base.size || ${baseSize}} * (12 / 14))`,
+          fontWeight: 500,
           lineHeight: 1.5,
         },
         $extensions: {
@@ -221,12 +239,27 @@ const typography = {
         'The most commonly used body text size, used for most text content in the product.',
       regular: {
         $description:
-          'The default medium text, most commonly used to display text across all products.',
+          'The default text, most commonly used to display text across all products.',
         $type: Type.Typography,
         $value: {
           fontFamily: `{typography.base.bodyFont || ${bodyFont}}`,
           fontSize: `{typography.base.size || ${baseSize}}`,
           fontWeight: 400,
+          lineHeight: 1.5,
+        },
+        $extensions: {
+          'styler.panel': 'typography.body.md',
+          'styler.watchToken': 'typography.base.bodyFont',
+        },
+      },
+      medium: {
+        $description:
+          'Medium text is used to indicate text is interactive, such as a button or a link.',
+        $type: Type.Typography,
+        $value: {
+          fontFamily: `{typography.base.bodyFont || ${bodyFont}}`,
+          fontSize: `{typography.base.size || ${baseSize}}`,
+          fontWeight: 500,
           lineHeight: 1.5,
         },
         $extensions: {
@@ -277,6 +310,21 @@ const typography = {
           fontFamily: `{typography.base.bodyFont || ${bodyFont}}`,
           fontSize: `calc({typography.base.size || ${baseSize}} * (18 / 14))`,
           fontWeight: 400,
+          lineHeight: 1.5,
+        },
+        $extensions: {
+          'styler.panel': 'typography.body.lg',
+          'styler.watchToken': 'typography.base.bodyFont',
+        },
+      },
+      medium: {
+        $description:
+          'Medium text is used to indicate text is interactive, such as a button or a link.',
+        $type: Type.Typography,
+        $value: {
+          fontFamily: `{typography.base.bodyFont || ${bodyFont}}`,
+          fontSize: `calc({typography.base.size || ${baseSize}} * (18 / 14))`,
+          fontWeight: 500,
           lineHeight: 1.5,
         },
         $extensions: {

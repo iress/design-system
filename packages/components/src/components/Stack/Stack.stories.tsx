@@ -60,7 +60,7 @@ export default {
 export const Default: Story = {
   args: {
     children: 'even',
-    gap: 'spacing.100',
+    gap: 'spacing.1',
   },
 };
 
@@ -74,11 +74,11 @@ export const Gap: Story = {
     ...disableArgTypes(['gap']),
   },
   render: (args) => (
-    <IressStack gap="spacing.400">
+    <IressStack gap="spacing.4">
       {SPACING_TOKENS.map((spacing) => (
         <IressText key={spacing}>
           <h2>{spacing}</h2>
-          <IressStack {...args} gap={spacing} />
+          <IressStack {...args} gap={spacing as never} />
         </IressText>
       ))}
     </IressStack>
@@ -90,13 +90,13 @@ export const ResponsiveGap: Story = {
   args: {
     children: 'even',
     gap: {
-      xs: 'spacing.100',
-      sm: 'spacing.200',
-      md: 'spacing.400',
+      xs: 'spacing.1',
+      sm: 'spacing.2',
+      md: 'spacing.4',
     },
   },
   render: (args) => (
-    <IressStack gap="spacing.400">
+    <IressStack gap="spacing.4">
       <IressPanel>
         <p>
           Current breakpoint: <CurrentBreakpoint />.
@@ -113,14 +113,14 @@ export const ResponsiveGap: Story = {
 export const InlineChildren: Story = {
   args: {
     children: 'inlineChildren',
-    gap: 'spacing.400',
+    gap: 'spacing.4',
   },
 };
 
 export const Lists: Story = {
   args: {
     children: 'list',
-    gap: 'spacing.700',
+    gap: 'spacing.7',
     element: 'ul',
   },
 };

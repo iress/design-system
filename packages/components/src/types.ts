@@ -20,7 +20,22 @@ import {
   type VariablePaddingSize,
 } from './interfaces';
 import { type PaddingSize } from './enums';
-import { type SpacingToken } from '@/styled-system/tokens';
+import { type SpacingToken as PureSpacingToken } from '@/styled-system/tokens';
+
+export type PositiveSpacingToken = Exclude<
+  PureSpacingToken,
+  `-${string}` | `button.${string}` | `field.${string}` | `slider.${string}`
+>;
+
+export type SpacingToken = Exclude<
+  PureSpacingToken,
+  | `button.${string}`
+  | `field.${string}`
+  | `slider.${string}`
+  | `-button.${string}`
+  | `-field.${string}`
+  | `-slider.${string}`
+>;
 
 export type Breakpoints = (typeof BREAKPOINTS)[number];
 

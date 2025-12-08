@@ -18,7 +18,7 @@ export const borderRadius: Story = {
   render: ({ borderRadius }) => (
     <IressInput
       borderRadius={borderRadius}
-      p="spacing.400"
+      p="spacing.4"
       textStyle="typography.body.lg"
       placeholder="Search everything"
     />

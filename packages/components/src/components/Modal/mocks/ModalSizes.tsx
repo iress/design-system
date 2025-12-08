@@ -309,7 +309,7 @@ const LargeModal = () => {
 };
 
 export const ModalSizes = () => (
-  <IressRow gutter="spacing.700" verticalAlign="stretch">
+  <IressRow gutter="spacing.7" verticalAlign="stretch">
     <IressCol>
       <SmallModal />
     </IressCol>

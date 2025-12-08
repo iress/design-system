@@ -20,7 +20,7 @@ const DocsExample = ({
   videoTitle = 'Watch video',
 }: DocsExampleProps) => (
   <IressPanel p="none" mb="lg">
-    <IressRow gutter="spacing.700">
+    <IressRow gutter="spacing.7">
       <IressCol>{children}</IressCol>
       {video && (
         <IressCol>

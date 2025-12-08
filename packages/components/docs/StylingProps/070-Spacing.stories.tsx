@@ -60,9 +60,9 @@ export const variablePadding: Story = {
     bg: 'alt',
     children: 'A panel that has different padding on each side.',
     pb: 'xl',
-    pt: 'spacing.050',
+    pt: 'spacing.1',
     pl: 'md',
-    pr: 'spacing.600',
+    pr: 'spacing.6',
   },
 };
 
@@ -111,9 +111,9 @@ export const variableMargin: Story = {
     bg: 'alt',
     children: 'A panel that has different margin on each side.',
     mb: 'xl',
-    mt: 'spacing.050',
+    mt: 'spacing.1',
     ml: 'md',
-    mr: 'spacing.600',
+    mr: 'spacing.6',
   },
 };
 

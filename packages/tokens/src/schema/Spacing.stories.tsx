@@ -60,7 +60,7 @@ export const Spacing: Story = {
         label: 'Token Name',
         format: (value: string) => <TokenTag>{value}</TokenTag>,
         width: '120px',
-        sort: 'asc',
+        sort: true,
       },
       {
         key: 'alias',

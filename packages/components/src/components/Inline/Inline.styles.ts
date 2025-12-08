@@ -9,7 +9,7 @@ export const inline = cva({
   base: {
     display: 'flex',
     flexDirection: 'row',
-    gap: 'spacing.000',
+    gap: 'spacing.0',
   },
   variants: {
     horizontalAlign: {
