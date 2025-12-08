@@ -62,7 +62,9 @@ describe('CodeSandbox', () => {
 
     renderWithProvider(<CodeSandbox files={mockFiles} />);
 
-    const link = screen.getByRole('link', { name: 'follow the link' });
+    const link = screen.getByRole('link', {
+      name: 'Click here to open CodeSandbox',
+    });
     expect(link).toHaveAttribute(
       'href',
       expect.stringContaining(
