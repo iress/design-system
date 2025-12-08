@@ -1,0 +1,92 @@
+{
+  "name": "@iress-oss/ids-storybook-sandbox",
+  "version": "0.2.0",
+  "description": "A Storybook addon that adds integration with Code Sandbox to your Storybook stories.",
+  "keywords": [
+    "storybook-addons"
+  ],
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "Iress",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./manager": "./dist/manager.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "*.js",
+    "*.d.ts"
+  ],
+  "scripts": {
+    "build": "yarn clean && tsup",
+    "clean": "rimraf dist",
+    "dev": "concurrently \"yarn watch\" \"yarn serve\"",
+    "dev:disabled": "DISABLE_ADDON=true yarn dev",
+    "lint": "eslint . --ext=.js,.jsx,.ts,.tsx,.mjs,.cjs,.mdx --max-warnings=0",
+    "test": "vitest --config vitest.config.ts --watch",
+    "test:coverage": "vitest run --config vitest.config.ts --coverage",
+    "typecheck": "tsc --noEmit",
+    "storybook": "storybook dev -p 6006",
+    "serve": "yarn storybook:serve-addon packages/storybook-sandbox",
+    "watch": "tsup --watch"
+  },
+  "dependencies": {
+    "@storybook/icons": "2.0.1",
+    "codesandbox": "2.2.3"
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "10.0.8",
+    "@storybook/react-vite": "10.0.8",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.47.0",
+    "@typescript-eslint/parser": "^8.47.0",
+    "@vitejs/plugin-react": "^5.1.1",
+    "@vitest/coverage-v8": "4.0.10",
+    "chokidar": "^4.0.3",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-file-progress": "^3.0.2",
+    "eslint-plugin-mdx": "^3.6.2",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.3.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "rimraf": "6.1.0",
+    "storybook": "10.0.8",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vite": "7.2.2",
+    "vitest": "4.0.10"
+  },
+  "peerDependencies": {
+    "@storybook/addon-docs": "^10",
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19",
+    "storybook": "^10"
+  },
+  "bundler": {
+    "managerEntries": [
+      "src/manager.tsx",
+      "src/index.ts"
+    ],
+    "previewEntries": [
+      "src/preview.tsx",
+      "src/index.ts"
+    ]
+  },
+  "storybook": {
+    "displayName": "Storybook Sandbox",
+    "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iress/design-system"
+  }
+}

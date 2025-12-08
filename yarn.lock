@@ -1964,6 +1964,7 @@ __metadata:
     jsdom: "npm:^27.2.0"
     json5: "npm:^2.2.3"
     prettier: "npm:^3.6.2"
+    radash: "npm:12.1.1"
     react: "npm:^19.2.0"
     react-diff-viewer: "npm:^3.1.1"
     react-dom: "npm:^19.2.0"
@@ -2035,6 +2036,44 @@ __metadata:
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
     react-dom: ^18.0.0 || ^19.0.0
+    storybook: ^10
+  languageName: unknown
+  linkType: soft
+
+"@iress-oss/ids-storybook-sandbox@workspace:packages/storybook-sandbox":
+  version: 0.0.0-use.local
+  resolution: "@iress-oss/ids-storybook-sandbox@workspace:packages/storybook-sandbox"
+  dependencies:
+    "@storybook/addon-docs": "npm:10.0.8"
+    "@storybook/icons": "npm:2.0.1"
+    "@storybook/react-vite": "npm:10.0.8"
+    "@types/node": "npm:^24.10.1"
+    "@types/react": "npm:^19.2.0"
+    "@types/react-dom": "npm:^19.2.0"
+    "@typescript-eslint/eslint-plugin": "npm:^8.47.0"
+    "@typescript-eslint/parser": "npm:^8.47.0"
+    "@vitejs/plugin-react": "npm:^5.1.1"
+    "@vitest/coverage-v8": "npm:4.0.10"
+    chokidar: "npm:^4.0.3"
+    codesandbox: "npm:2.2.3"
+    concurrently: "npm:^9.2.1"
+    eslint: "npm:^9.39.1"
+    eslint-plugin-file-progress: "npm:^3.0.2"
+    eslint-plugin-mdx: "npm:^3.6.2"
+    eslint-plugin-prettier: "npm:^5.5.4"
+    prettier: "npm:^3.3.3"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    rimraf: "npm:6.1.0"
+    storybook: "npm:10.0.8"
+    tsup: "npm:^8.5.1"
+    typescript: "npm:^5.9.3"
+    vite: "npm:7.2.2"
+    vitest: "npm:4.0.10"
+  peerDependencies:
+    "@storybook/addon-docs": ^10
+    react: ^18 || ^19
+    react-dom: ^18 || ^19
     storybook: ^10
   languageName: unknown
   linkType: soft
@@ -14229,7 +14268,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"radash@npm:^12.1.0, radash@npm:^12.1.1":
+"radash@npm:12.1.1, radash@npm:^12.1.0, radash@npm:^12.1.1":
   version: 12.1.1
   resolution: "radash@npm:12.1.1"
   checksum: 10c0/f8cbe85c0a8a444f1d2892c82875e00333e58a7b8afdbf3d8d04574d0532d895484bae20650c197c87dd91abfbd1e0af1c819cd12e6dc306633acec30222af7e

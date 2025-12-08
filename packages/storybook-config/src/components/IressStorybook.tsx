@@ -8,12 +8,14 @@ import { DOCS_RENDERED } from 'storybook/internal/core-events';
 import { MDXProvider } from '@mdx-js/react';
 import { lazy, Suspense, type ReactNode } from 'react';
 import {
+  CODE_SANDBOX_DEFAULT,
   COMPONENT_MAPPING_DEFAULT,
   type IressStorybookComponentMapping,
   IressStorybookContext,
   type IressStorybookContextProps,
 } from './IressStorybookContext';
 import { cssVars } from '@iress-oss/ids-tokens';
+import { assign } from 'radash';
 
 const IDSStyles = lazy(() => import('./IDSStyles'));
 
@@ -198,16 +200,7 @@ addons.getChannel().on(DOCS_RENDERED, () => {
 
 export const IressStorybook = ({
   children,
-  codeSandbox = {
-    additionalTransformers: {
-      replaceAliasWithPackageName: (code: string) =>
-        code.replace(/@\/main/gi, '@iress-oss/ids-components'),
-    },
-    dependencies: {
-      '@iress-oss/ids-components': 'alpha',
-    },
-    storyPackageName: '@iress-oss/ids-components',
-  },
+  codeSandbox = CODE_SANDBOX_DEFAULT.codeSandbox,
   componentMapping = COMPONENT_MAPPING_DEFAULT,
   noStyles,
   ...props
@@ -215,7 +208,15 @@ export const IressStorybook = ({
   const { IressProvider, IressText } = componentMapping;
 
   return (
-    <IressStorybookContext value={{ codeSandbox, ...componentMapping }}>
+    <IressStorybookContext
+      value={{
+        codeSandbox: assign(
+          CODE_SANDBOX_DEFAULT.codeSandbox,
+          codeSandbox as never,
+        ),
+        ...componentMapping,
+      }}
+    >
       <IressStorybookStyles />
       <Unstyled>
         <IressProvider>

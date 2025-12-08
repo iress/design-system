@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "allowSyntheticDefaultImports": true,
+    "types": ["vitest/globals", "node"],
+    "resolveJsonModule": true,
+    "strict": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext"
+  },
+  "include": ["*.ts", "../../shared/*.ts", ".storybook/*.ts"]
+}

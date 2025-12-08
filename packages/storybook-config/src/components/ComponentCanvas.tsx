@@ -3,6 +3,7 @@ import { addons } from 'storybook/internal/preview-api';
 import { FORCE_REMOUNT } from 'storybook/internal/core-events';
 import {
   type ComponentProps,
+  type RefObject,
   useCallback,
   useContext,
   useMemo,
@@ -15,6 +16,7 @@ import {
 import { type GetSandboxProps, getSandboxUrl } from '~/helpers/getSandboxUrl';
 import ComponentCanvasHTML from './ComponentCanvas.html?raw';
 import ComponentCanvasTemplate from './ComponentCanvas.template.tsx?raw';
+import { assign } from 'radash';
 
 const COMMON_TRANSFORMERS: Record<string, (code: string) => string> = {
   removeWhiteSpaces: (oldCode: string) => oldCode.trim(),
@@ -263,7 +265,7 @@ function injectImports(
  * Create CodeSandbox action with proper file structure
  */
 function createCodeSandboxAction(
-  renderedCode: React.MutableRefObject<string | null>,
+  renderedCode: RefObject<string | null>,
   mergedCodeSandbox: {
     html?: string;
     dependencies?: Record<string, string>;
@@ -355,11 +357,16 @@ export const ComponentCanvas = ({
     restProps?.source?.code ?? docsConfig?.source?.code ?? null,
   );
 
+  type MergedCodeSandbox = Exclude<
+    Exclude<ParametersConfig['parameters'], undefined>['codeSandbox'],
+    undefined
+  >;
+
   // Merge configurations
-  const mergedCodeSandbox = {
-    ...codeSandbox,
-    ...contextWithParams?.parameters?.codeSandbox,
-  };
+  const mergedCodeSandbox = assign<MergedCodeSandbox>(
+    codeSandbox as MergedCodeSandbox,
+    contextWithParams?.parameters?.codeSandbox ?? ({} as MergedCodeSandbox),
+  );
 
   // Memoized transformers
   const transformers = useMemo(() => {

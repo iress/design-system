@@ -130,6 +130,20 @@ export interface IressStorybookContextProps
   };
 }
 
-export const IressStorybookContext = createContext<IressStorybookContextProps>(
-  COMPONENT_MAPPING_DEFAULT,
-);
+export const CODE_SANDBOX_DEFAULT = {
+  codeSandbox: {
+    additionalTransformers: {
+      replaceAliasWithPackageName: (code: string) =>
+        code.replace(/@\/main/gi, '@iress-oss/ids-components'),
+    },
+    dependencies: {
+      '@iress-oss/ids-components': 'latest',
+    },
+    storyPackageName: '@iress-oss/ids-components',
+  },
+};
+
+export const IressStorybookContext = createContext<IressStorybookContextProps>({
+  ...CODE_SANDBOX_DEFAULT,
+  ...COMPONENT_MAPPING_DEFAULT,
+});
