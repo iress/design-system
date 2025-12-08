@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { VSCodeIcon } from '@storybook/icons';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ADDON_ID, PREVIEW_SNIPPET } from '../constants';
 import { useParameter, type API } from 'storybook/manager-api';
 import { IconButton } from 'storybook/internal/components';
@@ -8,6 +7,9 @@ import type { AddonConfig, DocsConfig } from '../types';
 import { transformCodeWithParameters } from '../helpers/transformCode';
 import OpenInCodeSandboxHTML from './OpenInCodeSandbox.html?raw';
 import OpenInCodeSandboxTemplate from './OpenInCodeSandbox.template?raw';
+import OpenInCodeSandboxCustomTemplate from './OpenInCodeSandboxCustom.template?raw';
+import type { IFiles } from 'codesandbox-import-utils/lib/api/define';
+import { SandboxIcon } from './SandboxIcon';
 
 interface OpenInCodeSandboxProps {
   active?: boolean;
@@ -24,6 +26,30 @@ export const OpenInCodeSandbox = ({
     html: OpenInCodeSandboxHTML,
     template: OpenInCodeSandboxTemplate,
   });
+
+  const tsxFiles = useMemo<IFiles>(() => {
+    // If no custom source code, use the main template
+    if (!docsConfig?.source?.code) {
+      return {
+        'index.tsx': {
+          content: source ?? '',
+          isBinary: false,
+        },
+      } as IFiles;
+    }
+
+    // If custom source code exists, use the custom template
+    return {
+      'index.tsx': {
+        content: OpenInCodeSandboxCustomTemplate,
+        isBinary: false,
+      },
+      'component.tsx': {
+        content: source,
+        isBinary: false,
+      },
+    };
+  }, [docsConfig, source]);
 
   const handlePreviewSnippet = useCallback(
     (newSource: string) => {
@@ -51,10 +77,7 @@ export const OpenInCodeSandbox = ({
         window.open(
           getSandboxUrl({
             files: {
-              'index.tsx': {
-                content: source ?? '',
-                isBinary: false,
-              },
+              ...tsxFiles,
               'index.html': {
                 content: addonConfig?.html ?? OpenInCodeSandboxHTML,
                 isBinary: false,
@@ -80,7 +103,7 @@ export const OpenInCodeSandbox = ({
         );
       }}
     >
-      <VSCodeIcon />
+      <SandboxIcon />
     </IconButton>
   );
 };

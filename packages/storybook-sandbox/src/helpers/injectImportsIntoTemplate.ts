@@ -11,7 +11,9 @@ function getCustomComponents(code: string): string[] {
   let match: RegExpExecArray | null;
 
   while ((match = regex.exec(code)) !== null) {
-    components.add(match[1]);
+    if (match[1]) {
+      components.add(match[1]);
+    }
   }
 
   return Array.from(components);
@@ -92,7 +94,9 @@ function getLocalComponents(code: string): string[] {
   let match: RegExpExecArray | null;
 
   while ((match = regex.exec(code)) !== null) {
-    locals.add(match[1]);
+    if (match[1]) {
+      locals.add(match[1]);
+    }
   }
 
   return Array.from(locals);

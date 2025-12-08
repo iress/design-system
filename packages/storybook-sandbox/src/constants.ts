@@ -1,4 +1,5 @@
 export const ADDON_TITLE = 'Sandbox';
+export const ADDON_ICON = 'draw';
 export const ADDON_ID = 'IDS_Sandbox';
 export const TOOLBAR_ID = 'IDS_Sandbox';
 

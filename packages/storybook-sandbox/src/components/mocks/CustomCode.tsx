@@ -8,3 +8,5 @@ export const CustomCode = () => {
     </div>
   );
 };
+
+export default CustomCode;

@@ -14,10 +14,12 @@ export const transformCodeWithParameters = (
   code: string,
   addonConfig?: AddonConfig,
   docsConfig?: DocsConfig,
+  additionalTransformers?: SandboxTransformers,
 ) => {
   const transformers = {
     ...COMMON_TRANSFORMERS,
     ...addonConfig?.additionalTransformers,
+    ...additionalTransformers,
   };
 
   let transformed = transformCode(code, transformers);

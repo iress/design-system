@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { SNIPPET_RENDERED } from 'storybook/internal/docs-tools';
 import { PREVIEW_SNIPPET } from '../constants';
 import type { Renderer, StoryContext } from 'storybook/internal/types';
