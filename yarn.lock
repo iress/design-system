@@ -1658,7 +1658,7 @@ __metadata:
     prettier-plugin-sh: "npm:0.18.0"
     rimraf: "npm:2.7.1"
     tsx: "npm:4.20.6"
-    turndown: "npm:7.2.0"
+    turndown: "npm:7.2.2"
     turndown-plugin-gfm: "npm:1.0.2"
     typescript: "npm:5.9.3"
     vitest: "npm:3.2.4"
@@ -13627,12 +13627,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turndown@npm:7.2.0":
-  version: 7.2.0
-  resolution: "turndown@npm:7.2.0"
+"turndown@npm:7.2.2":
+  version: 7.2.2
+  resolution: "turndown@npm:7.2.2"
   dependencies:
     "@mixmark-io/domino": "npm:^2.2.0"
-  checksum: 10c0/6abcdcdf9d35cd79d7a8100a7de1d2226b921d5bd99e73ac14a7ead39c059978f519378913375efb04c68bcfc40f7ffe2dee0ce9ae4d54dc1235b12856a78d4e
+  checksum: 10c0/ee09f7bd67c468505aad6c3a26b11269ca49ffce07eaa9c212926d068f242b11b4e955b31a58289f26674ff29f91209b29454907551dcaec7da712e524cc78c2
   languageName: node
   linkType: hard
 
