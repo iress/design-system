@@ -40,8 +40,8 @@
     "@types/react": "^19.1.1",
     "@types/react-dom": "^19.1.1",
     "@vitejs/plugin-react": "^5.1.1",
-    "@vitest/coverage-v8": "4.0.10",
-    "@vitest/ui": "4.0.10",
+    "@vitest/coverage-v8": "4.0.13",
+    "@vitest/ui": "4.0.13",
     "concurrently": "^9.2.1",
     "eslint": "9.39.1",
     "eslint-plugin-file-progress": "^3.0.2",
@@ -68,7 +68,7 @@
     "vite-plugin-dts": "4.5.4",
     "vite-plugin-static-copy": "3.1.4",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "4.0.10"
+    "vitest": "4.0.13"
   },
   "dependencies": {
     "@floating-ui/react": "0.27.16",
