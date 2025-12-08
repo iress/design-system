@@ -13,7 +13,6 @@ export * from './components/Redirect';
 // Stories/MDX helpers
 export * from './helpers/addToStorybookCategory';
 export * from './helpers/disableArgTypes';
-export * from './helpers/getSandboxUrl';
 export * from './helpers/mergeStorybookConfig';
 export * from './helpers/removeArgTypes';
 export * from './helpers/stringifyStorybookArgs';

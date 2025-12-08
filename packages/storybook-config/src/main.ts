@@ -65,6 +65,7 @@ export const getMainConfig = ({
       '@storybook/addon-a11y',
       '@vueless/storybook-dark-mode',
       '@chromatic-com/storybook',
+      '@iress-oss/ids-storybook-sandbox',
       '@iress-oss/ids-storybook-toggle-stories',
       '@iress-oss/ids-storybook-version-badge',
       // 'storybook-addon-tag-badges', TODO: Does not work in Storybook 10, as it does not work in composition mode

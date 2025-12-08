@@ -1,14 +1,19 @@
-import React from 'react';
-import { useCallback, useMemo, useRef, type ComponentProps } from 'react';
+import React, { useState } from 'react';
+import { useCallback, useRef, type ComponentProps } from 'react';
 import type { Canvas, SourceProps } from '@storybook/addon-docs/blocks';
 import { ADDON_ID } from '../constants';
-import type { ParametersConfig, SandboxTransformers } from '../types';
+import type {
+  AddonConfig,
+  ParametersConfig,
+  SandboxTransformers,
+} from '../types';
 import { transformCodeWithParameters } from '../helpers/transformCode';
 import type { IFiles } from 'codesandbox-import-utils/lib/api/define';
 import OpenInCodeSandboxCustomTemplate from '../components/OpenInCodeSandboxCustom.template?raw';
 import OpenInCodeSandboxHTML from '../components/OpenInCodeSandbox.html?raw';
 import { getSandboxUrl } from '../helpers/getSandboxUrl';
 import { SandboxIcon } from '../components/SandboxIcon';
+import { useSandboxDocParameters } from './useSandboxDocParameters';
 
 type CanvasProps = ComponentProps<typeof Canvas>;
 
@@ -34,13 +39,23 @@ export const useSandboxCanvasProps = ({
   ...restProps
 }: UseSandboxCanvasProps): CanvasProps => {
   const storyOf = of as { parameters?: ParametersConfig } | undefined;
-  const docsConfig = storyOf?.parameters?.docs;
-  const addonConfig = storyOf?.parameters?.[ADDON_ID];
+  const [parameters, setParameters] = useState<ParametersConfig | undefined>(
+    storyOf?.parameters,
+  );
+  const docsConfig = parameters?.docs;
+
+  // These refs are used to persist values in the additional actions - on click handler
+  const addonConfig = useRef<AddonConfig | null>(parameters?.[ADDON_ID]);
   const renderedCode = useRef<string | null>(
     sourceProp?.code ?? docsConfig?.source?.code ?? null,
   );
 
-  const tsxFiles = useMemo<IFiles>(() => {
+  useSandboxDocParameters((parameters) => {
+    setParameters(parameters);
+    addonConfig.current = parameters?.[ADDON_ID] as AddonConfig;
+  });
+
+  const getTsxFiles = useCallback(() => {
     // If no custom source code, use the main template
     if (!docsConfig?.source?.code) {
       return {
@@ -73,7 +88,7 @@ export const useSandboxCanvasProps = ({
         sourceProp?.transform ?? docsConfig?.source?.transform;
       const transformed = transformCodeWithParameters(
         (await transformFn?.(code, transformContext)) ?? code,
-        addonConfig,
+        addonConfig.current ?? undefined,
         docsConfig,
         additionalTransformers,
       );
@@ -99,9 +114,9 @@ export const useSandboxCanvasProps = ({
           window.open(
             getSandboxUrl({
               files: {
-                ...tsxFiles,
+                ...getTsxFiles(),
                 'index.html': {
-                  content: addonConfig?.html ?? OpenInCodeSandboxHTML,
+                  content: addonConfig.current?.html ?? OpenInCodeSandboxHTML,
                   isBinary: false,
                 },
                 'package.json': {
@@ -110,7 +125,7 @@ export const useSandboxCanvasProps = ({
                       dependencies: {
                         react: 'latest',
                         'react-dom': 'latest',
-                        ...addonConfig?.dependencies,
+                        ...addonConfig.current?.dependencies,
                       },
                     },
                     null,
@@ -118,7 +133,7 @@ export const useSandboxCanvasProps = ({
                   ),
                   isBinary: false,
                 },
-                ...addonConfig?.files,
+                ...addonConfig.current?.files,
               },
             }),
             '_blank',

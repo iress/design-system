@@ -44,12 +44,6 @@ export default defineConfig({
     reporters: ['verbose'],
     // Optimize for Yarn workspace
     pool: 'threads',
-    poolOptions: {
-      threads: {
-        singleThread: false,
-        useAtomics: true,
-      },
-    },
     // Optimize test discovery and execution
     watch: false, // Disable watch mode for CI
     silent: process.env.CI === 'true',

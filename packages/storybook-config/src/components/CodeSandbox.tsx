@@ -1,6 +1,9 @@
 import { use, useEffect } from 'react';
 import { IressStorybookContext } from './IressStorybookContext';
-import { type GetSandboxProps, getSandboxUrl } from '../helpers/getSandboxUrl';
+import {
+  getSandboxUrl,
+  type GetSandboxProps,
+} from '@iress-oss/ids-storybook-sandbox';
 
 export interface CodeSandboxProps extends GetSandboxProps {
   /**

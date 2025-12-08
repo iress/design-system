@@ -8,20 +8,15 @@ import { DOCS_RENDERED } from 'storybook/internal/core-events';
 import { MDXProvider } from '@mdx-js/react';
 import { lazy, Suspense, type ReactNode } from 'react';
 import {
-  CODE_SANDBOX_DEFAULT,
   COMPONENT_MAPPING_DEFAULT,
   type IressStorybookComponentMapping,
   IressStorybookContext,
-  type IressStorybookContextProps,
 } from './IressStorybookContext';
 import { cssVars } from '@iress-oss/ids-tokens';
-import { assign } from 'radash';
 
 const IDSStyles = lazy(() => import('./IDSStyles'));
 
-export interface IressStorybookProps
-  extends DocsContainerProps,
-    Pick<IressStorybookContextProps, 'codeSandbox'> {
+export interface IressStorybookProps extends DocsContainerProps {
   /**
    * The children to render within the Storybook Docs Container
    */
@@ -200,7 +195,6 @@ addons.getChannel().on(DOCS_RENDERED, () => {
 
 export const IressStorybook = ({
   children,
-  codeSandbox = CODE_SANDBOX_DEFAULT.codeSandbox,
   componentMapping = COMPONENT_MAPPING_DEFAULT,
   noStyles,
   ...props
@@ -210,10 +204,6 @@ export const IressStorybook = ({
   return (
     <IressStorybookContext
       value={{
-        codeSandbox: assign(
-          CODE_SANDBOX_DEFAULT.codeSandbox,
-          codeSandbox as never,
-        ),
         ...componentMapping,
       }}
     >

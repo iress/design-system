@@ -5,6 +5,9 @@ import {
 } from './components/IressStorybook';
 import { IressProvider } from '@iress-oss/ids-components';
 import { lazy, Suspense } from 'react';
+import { type AddonConfig } from '@iress-oss/ids-storybook-sandbox';
+import sandboxHtml from './sandbox.html?raw';
+import sandboxTemplate from './sandbox.template.tsx?raw';
 
 const IDSStyles = lazy(() => import('./components/IDSStyles'));
 
@@ -14,13 +17,21 @@ export interface PreviewProps {
    * Used by the components package to declare the component mapping so that we can view components in-development without needing to publish first.
    */
   docsProps?: Pick<IressStorybookProps, 'componentMapping' | 'noStyles'>;
+
+  /**
+   * Configuration for the Storybook Sandbox addon.
+   */
+  sandboxConfig?: AddonConfig;
 }
 
 /**
  * Function to get the Storybook preview configuration.
  * Used to centralise the configuration for all Storybook instances in multiple repositories.
  */
-export const getPreview = ({ docsProps }: PreviewProps): Preview => {
+export const getPreview = ({
+  docsProps,
+  sandboxConfig,
+}: PreviewProps): Preview => {
   const Provider = docsProps?.componentMapping?.IressProvider ?? IressProvider;
 
   return {
@@ -65,6 +76,19 @@ export const getPreview = ({ docsProps }: PreviewProps): Preview => {
           },
         },
       },
+      IDS_Sandbox: {
+        additionalTransformers: {
+          replaceAliasWithPackageName: (code) =>
+            code.replace(/@\/main/gi, '@iress-oss/ids-components'),
+        },
+        dependencies: {
+          '@iress-oss/ids-components': 'latest',
+        },
+        html: sandboxHtml,
+        storyPackageName: '@iress-oss/ids-components',
+        template: sandboxTemplate,
+        ...sandboxConfig,
+      } satisfies AddonConfig,
     },
   };
 };

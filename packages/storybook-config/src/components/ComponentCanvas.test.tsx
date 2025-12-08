@@ -1,12 +1,14 @@
+// TODO: Probably better done with end-to-end tests
 import { render } from '@testing-library/react';
-import { ComponentCanvas, ComponentCanvasProps } from './ComponentCanvas';
+import { ComponentCanvas } from './ComponentCanvas';
 import { type ComponentProps } from 'react';
 import type { Canvas } from '@storybook/addon-docs/blocks';
 import { ModuleExports, StoryAnnotations } from 'storybook/internal/types';
-import { vi, describe, it, expect, beforeEach } from 'vitest';
-import { IressStorybookContext } from './IressStorybookContext';
+import { vi, describe, it, expect } from 'vitest';
+import { UseSandboxCanvasProps } from '@iress-oss/ids-storybook-sandbox';
 
-// Mock dependencies
+// We mock the @storybook/addon-docs/blocks package to avoid rendering the actual DocsContainer component,
+// Which relies on Storybook's context and would throw an error in a test environment (and is a pain to mock).
 const canvasProps = vi.fn();
 vi.mock('@storybook/addon-docs/blocks', async (importOriginal) => ({
   ...(await importOriginal<typeof import('@storybook/addon-docs/blocks')>()),
@@ -21,6 +23,22 @@ vi.mock('@storybook/addon-docs/blocks', async (importOriginal) => ({
     canvasProps(props);
     return <div>Canvas rendered</div>;
   },
+  Controls: () => <div>Controls rendered</div>,
+}));
+
+// Mock the storybook-sandbox hook that's causing the hook call issues
+vi.mock('@iress-oss/ids-storybook-sandbox', () => ({
+  useSandboxCanvasProps: vi.fn(
+    (props) =>
+      ({
+        additionalActions: [],
+        ...props,
+        source: {
+          transform: vi.fn().mockResolvedValue('transformed code'),
+        },
+        withToolbar: true,
+      }) as UseSandboxCanvasProps,
+  ),
 }));
 
 const storiesMock: ModuleExports = {
@@ -29,11 +47,26 @@ const storiesMock: ModuleExports = {
 };
 
 describe('ComponentCanvas', () => {
-  beforeEach(() => {
-    canvasProps.mockClear();
+  it('renders @storybook/addon-docs/blocks/Canvas with appropriate defaults', () => {
+    render(
+      <ComponentCanvas
+        of={storiesMock.default as StoryAnnotations}
+        meta={storiesMock}
+      />,
+    );
+
+    expect(canvasProps).toHaveBeenCalledWith(
+      expect.objectContaining({
+        additionalActions: [],
+        withToolbar: true,
+        source: expect.objectContaining({
+          transform: expect.any(Function) as never,
+        }) as UseSandboxCanvasProps['source'],
+      }),
+    );
   });
 
-  it('renders Canvas component with default props', () => {
+  it('renders Canvas component', () => {
     const { container } = render(
       <ComponentCanvas
         of={storiesMock.default as StoryAnnotations}
@@ -42,137 +75,5 @@ describe('ComponentCanvas', () => {
     );
 
     expect(container).toHaveTextContent('Canvas rendered');
-    expect(canvasProps).toHaveBeenCalledWith(
-      expect.objectContaining({
-        additionalActions: expect.arrayContaining([
-          expect.objectContaining({ title: 'Open in CodeSandbox' }),
-        ]) as never,
-      }),
-    );
-  });
-
-  it('adds refresh action when refresh prop is true', () => {
-    render(
-      <ComponentCanvas
-        of={storiesMock.default as StoryAnnotations}
-        meta={storiesMock}
-        refresh
-      />,
-    );
-
-    expect(canvasProps).toHaveBeenCalledWith(
-      expect.objectContaining({
-        additionalActions: expect.arrayContaining([
-          expect.objectContaining({ title: 'Refresh' }),
-        ]) as never,
-      }),
-    );
-  });
-
-  it('handles code transformation correctly', async () => {
-    render(
-      <ComponentCanvas
-        of={storiesMock.default as StoryAnnotations}
-        meta={storiesMock}
-      />,
-    );
-
-    const props = canvasProps.mock.calls[0][0] as ComponentCanvasProps;
-    const transform = props.source?.transform;
-
-    // Test basic transformation (whitespace removal)
-    const code = '  const x = 1;  ';
-    const result = await transform?.(code, {});
-    expect(result).toContain('const x = 1;');
-    expect(result).not.toContain('  const x = 1;  ');
-  });
-
-  it('injects imports when storyPackageName is provided in context', async () => {
-    const contextValue = {
-      codeSandbox: {
-        storyPackageName: '@test/package',
-      },
-    };
-
-    render(
-      <IressStorybookContext.Provider value={contextValue as never}>
-        <ComponentCanvas
-          of={storiesMock.default as StoryAnnotations}
-          meta={storiesMock}
-        />
-      </IressStorybookContext.Provider>,
-    );
-
-    const props = canvasProps.mock.calls[0][0] as ComponentCanvasProps;
-    const transform = props.source?.transform;
-
-    // Test import injection
-    const code = '<TestComponent />';
-    const result = await transform?.(code, {});
-
-    expect(result).toContain("import { TestComponent } from '@test/package';");
-    expect(result).toContain('<TestComponent />');
-  });
-
-  it('does not duplicate existing imports', async () => {
-    const contextValue = {
-      codeSandbox: {
-        storyPackageName: '@test/package',
-      },
-    };
-
-    render(
-      <IressStorybookContext.Provider value={contextValue as never}>
-        <ComponentCanvas
-          of={storiesMock.default as StoryAnnotations}
-          meta={storiesMock}
-        />
-      </IressStorybookContext.Provider>,
-    );
-
-    const props = canvasProps.mock.calls[0][0] as ComponentCanvasProps;
-    const transform = props.source?.transform;
-
-    const code = `
-      import { TestComponent } from '@test/package';
-      <TestComponent />
-    `;
-    const result = await transform?.(code, {});
-
-    // Should not add another import
-    const matches = result?.match(
-      /import \{ TestComponent \} from '@test\/package'/g,
-    );
-    expect(matches?.length).toBe(1);
-  });
-
-  it('merges with existing imports from same library', async () => {
-    const contextValue = {
-      codeSandbox: {
-        storyPackageName: '@test/package',
-      },
-    };
-
-    render(
-      <IressStorybookContext.Provider value={contextValue as never}>
-        <ComponentCanvas
-          of={storiesMock.default as StoryAnnotations}
-          meta={storiesMock}
-        />
-      </IressStorybookContext.Provider>,
-    );
-
-    const props = canvasProps.mock.calls[0][0] as ComponentCanvasProps;
-    const transform = props.source?.transform;
-
-    const code = `
-      import { OtherComponent } from '@test/package';
-      <TestComponent />
-    `;
-    const result = await transform?.(code, {});
-
-    expect(result).toContain(
-      "import { OtherComponent, TestComponent } from '@test/package'",
-    );
   });
 });

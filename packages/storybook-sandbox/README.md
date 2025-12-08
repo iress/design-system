@@ -1,23 +1,23 @@
-# Storybook Toggle Stories Addon
+# Storybook Sandbox Addon
 
-This Storybook addon provides a toolbar button to toggle the visibility of stories in Storybook. It can be used to reduce clutter when non-developers or stakeholders are reviewing component documentation.
+This Storybook addon provides the ability to open the current story in CodeSandbox.
 
 ## Installation
 
 ```sh
-yarn add --dev @iress-oss/ids-storybook-toggle-stories
+yarn add --dev @iress-oss/ids-storybook-sandbox
 ```
 
 ## Usage
 
-In your Storybook `main.ts` configuration file, add the addon and your OKTA configuration:
+In your Storybook `main.ts` configuration file, add the addon:
 
 ```ts
 // .storybook/main.ts
 import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
-  addons: ['@iress-oss/ids-storybook-toggle-stories'],
+  addons: ['@iress-oss/ids-storybook-sandbox'],
 };
 
 export default config;
@@ -25,16 +25,41 @@ export default config;
 
 ## Configuration
 
-The addon works out of the box, but you can disable it based on an environment variable by providing options in your Storybook `.storybook/manager.ts` file:
+The addon works out of the box, but you can customise its behavior using parameters in your stories or your main Storybook configuration.
 
 ```ts
-import { addons } from 'storybook/manager-api';
+import type { AddonConfig } from '@iress-oss/ids-storybook-sandbox';
 
-addons.setConfig({
-  IDS_ToggleStories: {
-    disable: () => {
-      return process.env.DISABLE_ADDON === 'true';
-    },
+export const Library = {
+  args: {
+    children: 'This will use the IDS library template and HTML',
   },
-});
+  parameters: {
+    IDS_Sandbox: {
+      dependencies: {
+        '@iress-oss/ids-components': 'alpha',
+      },
+      html: '<div id="root"></div>',
+      template: `
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { IressProvider } from '@iress-oss/ids-components';
+import '@iress-oss/ids-components/dist/style.css';
+
+const App = () => {
+  return (
+<Story />
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <IressProvider>
+      <App />
+    </IressProvider>
+  </React.StrictMode>,
+);`,
+    } satisfies AddonConfig,
+  },
+};
 ```

@@ -54,7 +54,7 @@ describe('PreviewSnippet', () => {
       },
     };
 
-    render(<PreviewSnippet context={context} />);
+    render(<PreviewSnippet context={context as never} />);
 
     expect(mockChannel.emit).toHaveBeenCalledWith(
       PREVIEW_SNIPPET,
@@ -87,7 +87,7 @@ describe('PreviewSnippet', () => {
       parameters: {},
     };
 
-    render(<PreviewSnippet context={context} />);
+    render(<PreviewSnippet context={context as never} />);
 
     // Get the callback function that was registered
     const callback = mockChannel.on.mock.calls[0]?.[1] as
@@ -114,7 +114,7 @@ describe('PreviewSnippet', () => {
       },
     };
 
-    render(<PreviewSnippet context={context} />);
+    render(<PreviewSnippet context={context as never} />);
 
     // Clear the emit call from custom code
     mockChannel.emit.mockClear();
@@ -145,7 +145,7 @@ describe('PreviewSnippet', () => {
       },
     };
 
-    render(<PreviewSnippet context={context} />);
+    render(<PreviewSnippet context={context as never} />);
 
     // Get the callback function that was registered
     const callback = mockChannel.on.mock.calls[0]?.[1] as
@@ -214,7 +214,7 @@ describe('PreviewSnippet', () => {
       },
     };
 
-    rerender(<PreviewSnippet context={newContext} />);
+    rerender(<PreviewSnippet context={newContext as never} />);
 
     expect(mockChannel.emit).toHaveBeenCalledWith(
       PREVIEW_SNIPPET,

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { CodeSandbox } from './CodeSandbox';
-import ComponentUsingIDSSource from './mocks/ComponentUsingIDS.tsx?raw';
-import ReactHTMLSource from './mocks/ReactHTML.html?raw';
+import sandboxHtml from '../sandbox.html?raw';
+import sandboxTemplate from '../sandbox.template.tsx?raw';
 
 type Story = StoryObj<typeof CodeSandbox>;
 
@@ -17,11 +17,16 @@ export const IDS: Story = {
   args: {
     files: {
       'index.tsx': {
-        content: ComponentUsingIDSSource,
+        content: sandboxTemplate
+          .replace('<Story />', '<IressPanel>Hello, CodeSandbox!</IressPanel>')
+          .replace(
+            "import { IressProvider } from '@iress-oss/ids-components';",
+            "import { IressProvider, IressPanel } from '@iress-oss/ids-components';",
+          ),
         isBinary: false,
       },
       'index.html': {
-        content: ReactHTMLSource,
+        content: sandboxHtml,
         isBinary: false,
       },
       'package.json': {
