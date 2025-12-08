@@ -3,29 +3,14 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { IressProvider } from '@iress-oss/ids-components';
 import { CodeSandbox } from './CodeSandbox';
 
-// Mock window.location.href
-const mockLocationHref = vi.fn();
+// Mock window.open
+const mockWindowOpen = vi.fn();
 
 describe('CodeSandbox', () => {
   beforeEach(() => {
-    // Mock window.top and window.location
-    Object.defineProperty(window, 'top', {
-      value: {
-        location: {
-          set href(url: string) {
-            mockLocationHref(url);
-          },
-        },
-      },
-      writable: true,
-    });
-
-    Object.defineProperty(window, 'location', {
-      value: {
-        set href(url: string) {
-          mockLocationHref(url);
-        },
-      },
+    // Mock window.open
+    Object.defineProperty(window, 'open', {
+      value: mockWindowOpen,
       writable: true,
     });
   });
@@ -52,7 +37,7 @@ describe('CodeSandbox', () => {
     renderWithProvider(<CodeSandbox files={mockFiles} />);
 
     expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
-      'Redirecting...',
+      'Redirecting to CodeSandbox...',
     );
   });
 
@@ -77,7 +62,9 @@ describe('CodeSandbox', () => {
 
     renderWithProvider(<CodeSandbox files={mockFiles} />);
 
-    const link = screen.getByRole('link', { name: 'follow the link' });
+    const link = screen.getByRole('link', {
+      name: 'Click here to open CodeSandbox',
+    });
     expect(link).toHaveAttribute(
       'href',
       expect.stringContaining(
@@ -93,29 +80,26 @@ describe('CodeSandbox', () => {
 
     renderWithProvider(<CodeSandbox files={mockFiles} />);
 
-    expect(mockLocationHref).toHaveBeenCalledWith(
+    expect(mockWindowOpen).toHaveBeenCalledWith(
       expect.stringContaining(
         'https://codesandbox.io/api/v1/sandboxes/define?parameters=',
       ),
+      '_blank',
     );
   });
 
-  it('falls back to window.location when window.top is not available', () => {
-    Object.defineProperty(window, 'top', {
-      value: null,
-      writable: true,
-    });
-
+  it('opens CodeSandbox in new tab', () => {
     const mockFiles = {
       'index.js': { content: 'console.log("test")', isBinary: false },
     };
 
     renderWithProvider(<CodeSandbox files={mockFiles} />);
 
-    expect(mockLocationHref).toHaveBeenCalledWith(
+    expect(mockWindowOpen).toHaveBeenCalledWith(
       expect.stringContaining(
         'https://codesandbox.io/api/v1/sandboxes/define?parameters=',
       ),
+      '_blank',
     );
   });
 });

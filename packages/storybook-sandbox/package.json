@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-storybook-sandbox",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A Storybook addon that adds integration with Code Sandbox to your Storybook stories.",
   "keywords": [
     "storybook-addons"
@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@storybook/icons": "2.0.1",
-    "codesandbox": "2.2.3"
+    "codesandbox-import-utils": "2.2.3"
   },
   "devDependencies": {
     "@storybook/addon-docs": "10.0.8",

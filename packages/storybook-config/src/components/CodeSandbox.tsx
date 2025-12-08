@@ -15,7 +15,10 @@ export interface CodeSandboxProps extends GetSandboxProps {
 /**
  * Component to redirect the user to a CodeSandbox URL within Storybook.
  */
-export const CodeSandbox = ({ files, title }: CodeSandboxProps) => {
+export const CodeSandbox = ({
+  files,
+  title = 'Redirecting to CodeSandbox...',
+}: CodeSandboxProps) => {
   if (!files) {
     throw new Error('CodeSandbox component requires a "files" prop');
   }
@@ -25,16 +28,17 @@ export const CodeSandbox = ({ files, title }: CodeSandboxProps) => {
 
   useEffect(() => {
     if (!url) return;
-    const redirect = window.top ?? window;
-    redirect.location.href = url;
+    window.open(url, '_blank');
   }, [url]);
 
   return (
     <IressPanel bg="colour.neutral.20" textAlign="center" p="xl" m="xl">
-      <h2>{title ?? 'Redirecting...'}</h2>
+      <h2>{title}</h2>
       <p>
-        If you are not redirected automatically,{' '}
-        <a href={url}>follow the link</a>.
+        <a href={url} target="_blank" rel="noopener noreferrer">
+          Click here to open CodeSandbox
+        </a>
+        .
       </p>
     </IressPanel>
   );
