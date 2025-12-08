@@ -1902,7 +1902,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^8.47.0"
     "@vitejs/plugin-react": "npm:^5.1.1"
     "@vitest/coverage-v8": "npm:4.0.10"
-    "@vueless/storybook-dark-mode": "npm:10.0.2"
+    "@vueless/storybook-dark-mode": "npm:10.0.3"
     chalk: "npm:^5.6.2"
     colorjs.io: "npm:^0.5.2"
     eslint: "npm:^9.39.1"
@@ -2164,7 +2164,7 @@ __metadata:
     "@types/ws": "npm:^8.18.1"
     "@typescript-eslint/eslint-plugin": "npm:^8.47.0"
     "@typescript-eslint/parser": "npm:^8.47.0"
-    "@vueless/storybook-dark-mode": "npm:10.0.2"
+    "@vueless/storybook-dark-mode": "npm:10.0.3"
     boxen: "npm:^8.0.1"
     chalk: "npm:^5.6.2"
     concurrently: "npm:^9.2.1"
@@ -4761,15 +4761,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vueless/storybook-dark-mode@npm:10.0.2":
-  version: 10.0.2
-  resolution: "@vueless/storybook-dark-mode@npm:10.0.2"
+"@vueless/storybook-dark-mode@npm:10.0.3":
+  version: 10.0.3
+  resolution: "@vueless/storybook-dark-mode@npm:10.0.3"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
     lodash-es: "npm:^4.17.21"
   peerDependencies:
     storybook: ^10.0.0
-  checksum: 10c0/3846e87c3903f2d5caeb5a893cb36671ca32d7ba6539dcb479bbe25a04ac06b7cad638e8a5c5de15f61bbbed9d042a2920b1b9616b14877724b1a3f0ed8fde17
+  checksum: 10c0/abcf203a70e0fc6e6fe7b928d4fa1fdd5fa2af0f8882ffe16aa0fd280979d9a23e02ea694dabd9c3edecc9286997a01ae4cf9d3f9fb4b7f2b37d6a42b8e09e44
   languageName: node
   linkType: hard
 
