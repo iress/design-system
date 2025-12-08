@@ -28,9 +28,9 @@ const FormSectionWithConditionalFields = () => {
         Conditional fields using <code>useWatch</code>
       </h2>
       <p>
-        This example demonstrates how to use the{' '}
-        <code>IressForm.useWatch()</code> hook to watch the value of a field and
-        conditionally render other fields based on that value.
+        This example demonstrates how to use the <code>useWatch()</code> hook to
+        watch the value of a field and conditionally render other fields based
+        on that value.
       </p>
       <IressFormField
         name="show"

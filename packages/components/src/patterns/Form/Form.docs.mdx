@@ -72,8 +72,8 @@ yarn add @iress-oss/ids-components react-hook-form
 
 Due to this change, there are a few things you should consider during development:
 
-- Avoid using the `useState` hook to manage form state. Instead, use the `IressForm.useForm` hook or the `ref` of the `IressForm` component to interact with the form state. The initial value of the form can be set using the `defaultValues` prop, but from then on you should be using either the hook or ref to interact with the form state.
-- Avoid using `onChange` handlers on form fields to react to form values. Instead, use the `IressForm.useWatch` hook to watch the value of a field and conditionally render fields based on the value of another field.
+- Avoid using the `useState` hook to manage form state. Instead, use the `useFormContext()` hook from `react-hook-form` or the `ref` of the `IressForm` component to interact with the form state. The initial value of the form can be set using the `defaultValues` prop, but from then on you should be using either the hook or ref to interact with the form state.
+- Avoid using `onChange` handlers on form fields to react to form values. Instead, use the `useWatch` hook from `react-hook-form` to watch the value of a field and conditionally render fields based on the value of another field.
 
 See below an example comparing a version 4 and version 5 `IressForm` when managing form state.
 
@@ -97,7 +97,7 @@ See below an example comparing a version 4 and version 5 `IressForm` when adding
 
 For most scenarios, you should use the `onSubmit` event to sync the form data with other state management systems (eg. server, browser storage or state management libraries such as Redux). This event is emitted when the form passes validation, and contains a map of the field names and the data entered by the user.
 
-For more complex scenarios, you may need to sync a field value before the form is submitted. In this case, you can use the `IressForm.useWatch` hook to watch the value of a field and sync it with your state.
+For more complex scenarios, you may need to sync a field value before the form is submitted. In this case, you can use the `useWatch` hook to watch the value of a field and sync it with your state.
 
 Consider the following for your development:
 
@@ -633,7 +633,7 @@ When resetting fields that accept non-string values (like `IressRichSelect`), yo
 **Problem:**
 
 ```tsx
-const { resetField } = IressForm.useFormContext();
+const { resetField } = useFormContext();
 
 resetField('rich-select', {
   label: '',
@@ -647,7 +647,7 @@ In this case, it will look like it cleared the field, but actually it has not. T
 Override the `onChange` handler to pass the actual value as a second parameter:
 
 ```tsx
-const { resetField } = IressForm.useFormContext();
+const { resetField } = useFormContext();
 
 resetField('rich-select', null); // or undefined
 ```

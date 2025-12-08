@@ -223,11 +223,12 @@ export const App = () => {
   );
 };`}
       newValue={`import { IressForm, IressFormField, IressInput, IressCheckboxGroup, IressCheckbox } from '@iress-oss/ids-components';
+import { useWatch } from 'react-hook-form';
 
 const ConditionalFields = () => {
   // Instead of creating our own state, we can now use the form state via the useWatch hook, 
   // meaning we still have a single source of truth
-  const show = IressForm.useWatch({ name: 'show'});
+  const show = useWatch({ name: 'show'});
 
   return (
     <>

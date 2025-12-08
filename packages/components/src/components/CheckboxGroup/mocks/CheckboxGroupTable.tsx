@@ -10,13 +10,14 @@ import {
 } from '@/main';
 import { IressCheckboxGroup } from '../CheckboxGroup';
 import { toArray } from '../../../helpers/formatting/toArray';
+import { useWatch } from 'react-hook-form';
 
 interface FieldValues {
   'let-them-eat-cake'?: FormControlValue[];
 }
 
 const SelectedValues = () => {
-  const value = IressForm.useWatch<FieldValues>({ name: 'let-them-eat-cake' });
+  const value = useWatch<FieldValues>({ name: 'let-them-eat-cake' });
   const valueString = toArray(value).join(', ');
 
   return (
