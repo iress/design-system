@@ -54,9 +54,17 @@ import {
   meta={ComponentStories}
 />
 
+## Installation
+
+As of version 6, `react-hook-form` has been moved to a peer dependency. You will need to install it alongside `@iress-oss/ids-components` in order to use the `IressForm` or `IressHookForm` component.
+
+```bash
+yarn add @iress-oss/ids-components react-hook-form
+```
+
 ## Key concepts
 
-As of version 5, `IressForm` is built on top of [React Hook Forms](https://react-hook-form.com/). This provides you the power of React Hook Forms with the convenience of IDS form components. However, there are some key differences to be aware of as it may affect how you build your forms.
+`IressForm` is built on top of [React Hook Forms](https://react-hook-form.com/). This provides you the power of React Hook Forms with the convenience of IDS form components. However, there are some key differences to be aware of as it may affect how you build your forms.
 
 ### State management
 
@@ -645,11 +653,3 @@ resetField('rich-select', null); // or undefined
 ```
 
 This will properly reset the field to null and clear the field value.
-
-### Conflicting versions of React Hook Forms
-
-If you are using React Hook Forms in your application, please ensure it is the same version IDS uses, otherwise there will be conflicts.
-
-The version we are using in IDS is:
-
-<pre>yarn add react-hook-form@{dependencies['react-hook-form']}</pre>

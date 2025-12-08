@@ -1,15 +1,14 @@
 import {
   IressButton,
-  IressForm,
   IressFormField,
   IressHookForm,
   IressInput,
   IressStack,
 } from '@/main';
+import { useForm } from 'react-hook-form';
 
 export const HiddenInputsForm = () => {
-  const form = IressForm.useForm();
-
+  const form = useForm();
   const { register } = form;
 
   // This is a hidden input field that the user cannot see or interact with.

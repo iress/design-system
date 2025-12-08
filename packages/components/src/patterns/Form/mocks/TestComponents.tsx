@@ -1,4 +1,4 @@
-import { type FieldValues } from 'react-hook-form';
+import { useFormContext, useWatch, type FieldValues } from 'react-hook-form';
 import { useRef } from 'react';
 import { IressStack } from '@/components/Stack';
 import { IressFormField } from '../FormField/FormField';
@@ -67,8 +67,8 @@ export const ComplexFormWithRef = (props: IressFormProps<FieldValues>) => {
 };
 
 const SlaveField = () => {
-  const { control } = IressForm.useFormContext<{ master: string }>();
-  const masterValue = IressForm.useWatch({ control, name: 'master' });
+  const { control } = useFormContext<{ master: string }>();
+  const masterValue = useWatch({ control, name: 'master' });
 
   if (masterValue !== 'show') {
     return null;

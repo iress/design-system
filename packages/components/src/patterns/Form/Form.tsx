@@ -1,12 +1,6 @@
 import { type ForwardedRef, forwardRef, type Ref } from 'react';
-import {
-  type FieldValues,
-  useFieldArray,
-  useForm,
-  useFormContext,
-  useWatch,
-} from 'react-hook-form';
-import { type FormRef, type HookFormExports } from './HookForm/HookForm';
+import type { FieldValues } from 'react-hook-form';
+import type { FormRef } from './HookForm/HookForm';
 import { LongForm, type LongFormProps } from './components/LongForm';
 import { ShortForm, type ShortFormProps } from './components/ShortForm';
 
@@ -29,14 +23,8 @@ const Form = <T extends FieldValues, TContext = object>(
   );
 };
 
-const ForwardedForm = forwardRef(Form) as <T extends FieldValues>(
+Form.displayName = 'IressForm';
+
+export const IressForm = forwardRef(Form) as <T extends FieldValues>(
   props: IressFormProps<T> & { ref?: Ref<FormRef<T>> },
 ) => React.ReactElement;
-
-export const IressForm = ForwardedForm as typeof ForwardedForm &
-  HookFormExports;
-
-IressForm.useFieldArray = useFieldArray;
-IressForm.useForm = useForm;
-IressForm.useFormContext = useFormContext;
-IressForm.useWatch = useWatch;

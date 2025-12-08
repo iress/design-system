@@ -11,14 +11,19 @@ import {
   IressSelect,
   IressText,
 } from '@/main';
-import { FieldValues } from 'react-hook-form';
+import {
+  FieldValues,
+  useForm,
+  useFormContext,
+  useWatch,
+} from 'react-hook-form';
 import { FormFieldErrorMessages } from '../FormField/helpers/getErrorTypeMessage';
 import { useRef } from 'react';
 
 describe('IressHookForm', () => {
   it('renders the component with the correct classes, roles and test ids', async () => {
     const Form = () => {
-      const form = IressHookForm.useForm();
+      const form = useForm();
 
       return (
         <IressHookForm
@@ -63,7 +68,7 @@ describe('IressHookForm', () => {
   describe('alert', () => {
     it('renders the content in the alert slot', async () => {
       const FormWithCustomAlert = () => {
-        const form = IressHookForm.useForm();
+        const form = useForm();
 
         return (
           <IressHookForm
@@ -88,7 +93,7 @@ describe('IressHookForm', () => {
 
     it('focuses on the alert when the form is submitted and there are errors', async () => {
       const FormWithAlertFocus = () => {
-        const form = IressHookForm.useForm({
+        const form = useForm({
           shouldFocusError: false,
         });
 
@@ -121,7 +126,7 @@ describe('IressHookForm', () => {
 
     it('updates the form errors only on submit if updateErrorSummaryOnSubmit is true', async () => {
       const FormErrorSummaryOnSubmit = () => {
-        const form = IressHookForm.useForm({
+        const form = useForm({
           shouldFocusError: false,
         });
 
@@ -180,7 +185,7 @@ describe('IressHookForm', () => {
     it('calls onValidChange when the form is valid', async () => {
       const onValidChange = vi.fn();
       const OnValidChangeForm = () => {
-        const form = IressHookForm.useForm({ mode: 'onChange' });
+        const form = useForm({ mode: 'onChange' });
 
         return (
           <IressHookForm form={form} onValidChange={onValidChange}>
@@ -221,8 +226,8 @@ describe('IressHookForm', () => {
 
     it('hide the input field if the select value is hide', async () => {
       const SlaveField = () => {
-        const { control } = IressHookForm.useFormContext<{ master: string }>();
-        const masterValue = IressHookForm.useWatch({ control, name: 'master' });
+        const { control } = useFormContext<{ master: string }>();
+        const masterValue = useWatch({ control, name: 'master' });
 
         if (masterValue !== 'show') {
           return null;
@@ -238,7 +243,7 @@ describe('IressHookForm', () => {
       };
 
       const ConditionalFieldForm = () => {
-        const form = IressHookForm.useForm({
+        const form = useForm({
           defaultValues: { master: 'show' },
         });
 
@@ -274,7 +279,7 @@ describe('IressHookForm', () => {
 
     it('shows validation errors at the header and in the input labels when the form is submitted before required fields are filled', async () => {
       const FormWithCustomErrors = () => {
-        const form = IressHookForm.useForm({ mode: 'onChange' });
+        const form = useForm({ mode: 'onChange' });
 
         return (
           <IressHookForm form={form}>
@@ -328,7 +333,7 @@ describe('IressHookForm', () => {
 
     it('shows default validation messages when the form is submitted before required fields are filled', async () => {
       const FormWithDefaultErrors = () => {
-        const form = IressHookForm.useForm();
+        const form = useForm();
 
         return (
           <IressHookForm form={form}>
@@ -362,7 +367,7 @@ describe('IressHookForm', () => {
 
     it('uses a string min value in the form validation summary', async () => {
       const FormWithMinValueErrors = () => {
-        const form = IressHookForm.useForm();
+        const form = useForm();
 
         return (
           <IressHookForm form={form}>
@@ -404,7 +409,7 @@ describe('IressHookForm', () => {
 
       const ComplexFormWithRef = () => {
         const formRef = useRef<FormRef<FieldValues>>(null);
-        const form = IressHookForm.useForm({
+        const form = useForm({
           defaultValues: { email: defaultValue } as FieldValues,
         });
 
@@ -460,7 +465,7 @@ describe('IressHookForm', () => {
   describe('accessibility', () => {
     it('should not have basic accessibility issues', async () => {
       const AccessibleForm = () => {
-        const form = IressHookForm.useForm();
+        const form = useForm();
 
         return (
           <IressHookForm
@@ -487,24 +492,6 @@ describe('IressHookForm', () => {
       const { container } = render(<AccessibleForm />);
       const results = await axe(container);
       expect(results).toHaveNoViolations();
-    });
-  });
-
-  describe('IressHookForm exports', () => {
-    it('should export useFieldArray', () => {
-      expect(IressHookForm.useFieldArray).toBeDefined();
-    });
-
-    it('should export useForm', () => {
-      expect(IressHookForm.useForm).toBeDefined();
-    });
-
-    it('should export useFormContext', () => {
-      expect(IressHookForm.useFormContext).toBeDefined();
-    });
-
-    it('should export useWatch', () => {
-      expect(IressHookForm.useWatch).toBeDefined();
     });
   });
 });

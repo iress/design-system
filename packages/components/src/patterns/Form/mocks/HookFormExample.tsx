@@ -10,6 +10,7 @@ import {
   IressPanel,
   IressText,
 } from '@/main';
+import { useForm } from 'react-hook-form';
 
 interface FieldValues {
   firstName: string;
@@ -23,7 +24,7 @@ export const HookFormExample = () => {
   const initialInsuredAtPolicyLevel = false;
   const initialSumInsured = 5000;
 
-  const form = IressHookForm.useForm<FieldValues>();
+  const form = useForm<FieldValues>();
   const { watch, control } = form;
 
   const firstName = watch('firstName');

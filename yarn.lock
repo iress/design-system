@@ -1799,7 +1799,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iress-oss/ids-components@npm:^6.0.0-alpha.3, @iress-oss/ids-components@workspace:packages/components":
+"@iress-oss/ids-components@npm:^6.0.0-alpha.4, @iress-oss/ids-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-components@workspace:packages/components"
   dependencies:
@@ -1851,6 +1851,17 @@ __metadata:
     vite-plugin-static-copy: "npm:3.1.4"
     vite-tsconfig-paths: "npm:^5.1.4"
     vitest: "npm:4.0.10"
+  peerDependencies:
+    react: ^17 || ^18 || ^19
+    react-dom: ^17 || ^18 || ^19
+    react-hook-form: ^7
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+    react-hook-form:
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -2151,7 +2162,7 @@ __metadata:
   resolution: "@iress/design-system-monorepo@workspace:."
   dependencies:
     "@chromatic-com/storybook": "npm:^4.1.3"
-    "@iress-oss/ids-components": "npm:^6.0.0-alpha.3"
+    "@iress-oss/ids-components": "npm:^6.0.0-alpha.4"
     "@iress-oss/ids-storybook-config": "npm:^0.2.1"
     "@iress-oss/ids-storybook-okta": "npm:^0.1.1"
     "@iress-oss/ids-storybook-sandbox": "npm:^0.2.1"
