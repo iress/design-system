@@ -11,7 +11,11 @@ export default defineConfig({
   include: ['./src/**/*.{js,jsx,ts,tsx}'],
 
   // Files to exclude
-  exclude: [],
+  exclude: [
+    './src/styled-system/**/*',
+    './node_modules/**/*',
+    './src/**/mocks/**/*',
+  ],
 
   presets: [themePreset],
 

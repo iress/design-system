@@ -8,10 +8,10 @@ import {
   IressButton,
   IressText,
   IressDivider,
-  IressForm,
   IressHookForm,
 } from '@/main';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 interface FormData {
   primaryField: string;
@@ -51,7 +51,7 @@ const validateBudgetInput = (
 export const ValidationDependOnOtherFields = () => {
   const [submitted, setSubmitted] = useState<FormData | undefined>(undefined);
 
-  const form = IressForm.useForm<FormData>({
+  const form = useForm<FormData>({
     defaultValues: {
       primaryField: '',
       dependentField: '',

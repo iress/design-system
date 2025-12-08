@@ -13,6 +13,7 @@ import {
 } from './supportedFormFields';
 import { type FieldValues } from 'react-hook-form';
 import { addToStorybookCategory } from '@iress-oss/ids-storybook-config';
+import type { AddonConfig } from '@iress-oss/ids-storybook-sandbox';
 
 const alertOptions = {
   none: undefined,
@@ -162,5 +163,11 @@ export const formArgTypes = {
 export const formParameters = {
   parameters: {
     ...withRenderSnippet(),
+    IDS_Sandbox: {
+      dependencies: {
+        '@iress-oss/ids-components': 'alpha',
+        'react-hook-form': 'latest',
+      },
+    } as AddonConfig,
   },
 };

@@ -12,7 +12,12 @@ import {
   IressCloseButton,
   IressHookForm,
 } from '@/main';
-import { type Control, type UseFormGetValues } from 'react-hook-form';
+import {
+  useFieldArray,
+  useForm,
+  type Control,
+  type UseFormGetValues,
+} from 'react-hook-form';
 
 interface Client {
   name: string | undefined;
@@ -146,14 +151,14 @@ const DependantSection: React.FC<DependantProps> = ({
 };
 
 export const FormGroups = () => {
-  const form = IressHookForm.useForm<FormValues>({
+  const form = useForm<FormValues>({
     defaultValues: defaultValues,
     mode: 'onBlur',
   });
 
   const { control, getValues } = form;
 
-  const { fields, append, update, remove } = IressHookForm.useFieldArray({
+  const { fields, append, update, remove } = useFieldArray({
     name: 'dependants',
     control,
   });

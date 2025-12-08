@@ -7,6 +7,7 @@ import {
   IressInput,
   IressText,
 } from '@/main';
+import { useWatch } from 'react-hook-form';
 
 interface FieldValues {
   show?: string[];
@@ -19,7 +20,7 @@ interface FieldValues {
  * hook to watch the value of the field dictating the display of conditional fields.
  */
 const FormSectionWithConditionalFields = () => {
-  const show = IressForm.useWatch<FieldValues>({ name: 'show' });
+  const show = useWatch<FieldValues>({ name: 'show' });
 
   return (
     <IressText>
@@ -27,9 +28,9 @@ const FormSectionWithConditionalFields = () => {
         Conditional fields using <code>useWatch</code>
       </h2>
       <p>
-        This example demonstrates how to use the{' '}
-        <code>IressForm.useWatch()</code> hook to watch the value of a field and
-        conditionally render other fields based on that value.
+        This example demonstrates how to use the <code>useWatch()</code> hook to
+        watch the value of a field and conditionally render other fields based
+        on that value.
       </p>
       <IressFormField
         name="show"

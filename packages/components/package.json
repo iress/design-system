@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-components",
-  "version": "6.0.0-alpha.3",
+  "version": "6.0.0-alpha.4",
   "description": "Iress React Component Library",
   "license": "Apache-2.0",
   "type": "module",
@@ -60,6 +60,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.1.1",
     "react-dropzone": "14.3.8",
+    "react-hook-form": "7.55.0",
     "rimraf": "^6.1.2",
     "storybook": "10.0.8",
     "typescript": "5.9.3",
@@ -77,8 +78,23 @@
     "@types/mdx": "^2.0.13",
     "fuzzysort": "3.1.0",
     "query-selector-shadow-dom": "1.0.1",
-    "react-hook-form": "7.55.0",
     "use-debounce": "10.0.6"
+  },
+  "peerDependencies": {
+    "react": "^17 || ^18 || ^19",
+    "react-dom": "^17 || ^18 || ^19",
+    "react-hook-form": "^7"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    },
+    "react-hook-form": {
+      "optional": true
+    }
   },
   "repository": {
     "type": "git",

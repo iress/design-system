@@ -17,12 +17,8 @@ import {
   type FieldValues,
   FormProvider,
   type SubmitErrorHandler,
-  useFieldArray,
-  useForm,
-  useFormContext,
   type UseFormProps,
   type UseFormReturn,
-  useWatch,
 } from 'react-hook-form';
 import { useIdIfNeeded } from '../../../hooks';
 import { IressFormValidationSummary } from '../FormValidationSummary/FormValidationSummary';
@@ -202,40 +198,6 @@ export interface FormPatternProps<T extends FieldValues, TContext = object>
   values?: UseFormProps<T, TContext>['values'];
 }
 
-/**
- * This interface allows us to expose the methods from `react-hook-form` that are used in `IressHookForm`.
- * This is used by consumers with more complex forms that need to access the form methods directly, and ensure it is using the same version of `react-hook-form` as `IressHookForm` and `IressForm`.
- */
-export interface HookFormExports {
-  /**
-   * Allows you to perform operations with a list of dynamic inputs that need to be appended, updated, removed etc.
-   * This is useful when you have a form with a list of items that can be added or removed dynamically, such as a list of addresses or phone numbers.
-   * @see https://react-hook-form.com/docs/usefieldarray
-   */
-  useFieldArray: typeof useFieldArray;
-
-  /**
-   * Allows you to use the methods from `react-hook-form` in a nested component of `IressForm`.
-   * This is useful when you want more control over the form, such as submitting it programmatically or resetting it, without having to set a ref.
-   * @see https://react-hook-form.com/docs/useform
-   */
-  useForm: typeof useForm;
-
-  /**
-   * Allows you to use the form context from `react-hook-form` in a nested component of `IressForm`.
-   * This is useful when you need to access the form context in a component that is not a direct child of `IressForm`.
-   * @see https://react-hook-form.com/docs/useformcontext
-   */
-  useFormContext: typeof useFormContext;
-
-  /**
-   * Allows you watch changes to other form fields in an IressForm.
-   * This is useful when you need to conditionally render fields based on the value of another field.
-   * @see https://react-hook-form.com/docs/usewatch
-   */
-  useWatch: typeof useWatch;
-}
-
 const HookForm = <T extends FieldValues, TContext = object>(
   {
     alert,
@@ -391,7 +353,9 @@ const HookForm = <T extends FieldValues, TContext = object>(
   );
 };
 
-const ForwardedHookForm = forwardRef(HookForm) as <
+HookForm.displayName = 'IressHookForm';
+
+export const IressHookForm = forwardRef(HookForm) as <
   T extends FieldValues,
   TContext = object,
 >(
@@ -399,11 +363,3 @@ const ForwardedHookForm = forwardRef(HookForm) as <
     ref?: Ref<FormRef<T>>;
   },
 ) => ReactElement;
-
-export const IressHookForm = ForwardedHookForm as typeof ForwardedHookForm &
-  HookFormExports;
-
-IressHookForm.useFieldArray = useFieldArray;
-IressHookForm.useForm = useForm;
-IressHookForm.useFormContext = useFormContext;
-IressHookForm.useWatch = useWatch;
