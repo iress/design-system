@@ -99,7 +99,13 @@ export default defineConfig({
       cssFileName: 'style',
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react-dom/client', 'react/jsx-runtime'],
+      external: [
+        'react',
+        'react-dom',
+        'react-dom/client',
+        'react/jsx-runtime',
+        'react-hook-form',
+      ],
       input: Object.fromEntries(
         // https://rollupjs.org/configuration-options/#input
         glob
