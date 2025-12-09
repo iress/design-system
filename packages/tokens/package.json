@@ -1,12 +1,13 @@
 {
   "name": "@iress-oss/ids-tokens",
-  "version": "6.0.0-alpha.2",
+  "version": "6.0.0-alpha.3",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
-    "./mapTokensToCssVariables": "./dist/helpers/mapTokensToCssVariables.js"
+    "./mapTokensToCssVariables": "./dist/helpers/mapTokensToCssVariables.js",
+    "./convertReferencesToVariables": "./dist/helpers/convertReferencesToVariables.js"
   },
   "files": [
     "build",
@@ -77,5 +78,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/iress/design-system"
-  }
+  },
+  "stableVersion": "6.0.0-alpha.2"
 }

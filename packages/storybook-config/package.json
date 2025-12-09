@@ -42,7 +42,7 @@
     "watch": "vite build --watch"
   },
   "dependencies": {
-    "@iress-oss/ids-tokens": "^6.0.0-alpha.2",
+    "@iress-oss/ids-tokens": "^6.0.0-alpha.3",
     "radash": "12.1.1",
     "react-diff-viewer": "^3.1.1",
     "react-element-to-jsx-string": "^17.0.1",
