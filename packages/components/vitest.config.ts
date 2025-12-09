@@ -15,6 +15,7 @@ export default defineConfig({
       reporter: ['text', 'lcov', 'html', 'json', 'json-summary'],
       include: ['src/**/*'],
       exclude: [
+        'src/**/*.mdx',
         'src/**/*.stories.*',
         'src/**/*.test.*',
         'src/**/mocks/**/*',
@@ -25,12 +26,6 @@ export default defineConfig({
     },
     // Performance optimizations
     pool: 'threads',
-    poolOptions: {
-      threads: {
-        singleThread: false,
-        useAtomics: true,
-      },
-    },
     // Better error reporting
     outputFile: {
       html: './coverage/index.html',
