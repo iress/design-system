@@ -229,7 +229,7 @@ export interface SelectOptionsRenderProps<TMultiple extends boolean = false>
   debouncedQuery: string;
 
   /**
-   * When the menu selection changes, this will set the value and close the menu.
+   * Clears the current selection in the menu.
    */
   handleClear: IressButtonProps['onClick'] & IressButtonProps['onKeyDown'];
 
