@@ -40,7 +40,10 @@ interface SelectOptionsProps<TMultiple extends boolean = false>
       | 'value'
       | 'initialOptions'
     >,
-    Omit<SelectOptionsRenderProps<TMultiple>, 'close'> {
+    Omit<
+      SelectOptionsRenderProps<TMultiple>,
+      'close' | 'handleClear' | 'handleMenuChange'
+    > {
   setShow: (show: boolean) => void;
   shouldShowInstructions?: boolean;
   shouldShowNoResults?: boolean;
@@ -289,6 +292,8 @@ export const SelectOptions = <TMultiple extends boolean = false>({
       close: () => setShow(false),
       debouncedQuery,
       error,
+      handleClear,
+      handleMenuChange,
       loading,
       query,
       results: menuItems,
@@ -326,7 +331,6 @@ export const SelectOptions = <TMultiple extends boolean = false>({
       multiSelect={multiSelect}
       onChange={handleMenuChange}
       selected={value}
-      selectedFirst
     />
   );
 };

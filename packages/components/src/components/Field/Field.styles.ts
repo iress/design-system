@@ -36,7 +36,11 @@ export const field = sva({
       mb: 'spacing.1',
     },
     labelContainer: {},
-    fieldContainer: {},
+    fieldContainer: {
+      '& .ids-popover__content': {
+        zIndex: '100',
+      },
+    },
   },
   variants: {
     horizontal: {

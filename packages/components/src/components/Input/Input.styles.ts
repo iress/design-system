@@ -50,7 +50,8 @@ export const input = sva({
     formControl: {
       borderWidth: 0,
       borderRadius: 'radius.system.form',
-      padding: 'spacing.2',
+      paddingInline: 'spacing.2',
+      paddingBlock: 'spacing.1',
       backgroundColor: 'colour.neutral.10',
       textStyle: 'typography.body.md',
       color: 'colour.neutral.80',
