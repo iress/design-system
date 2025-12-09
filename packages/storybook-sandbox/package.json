@@ -77,8 +77,7 @@
   },
   "bundler": {
     "managerEntries": [
-      "src/manager.tsx",
-      "src/index.ts"
+      "src/manager.tsx"
     ],
     "previewEntries": [
       "src/preview.tsx",

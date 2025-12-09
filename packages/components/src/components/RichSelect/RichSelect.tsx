@@ -12,7 +12,7 @@ import {
 } from 'react';
 import { cx } from '@/styled-system/css';
 import { richSelect } from './RichSelect.styles';
-import { useRichSelectState } from '../RichSelect';
+import { type IressSelectMenuProps, useRichSelectState } from '../RichSelect';
 import {
   useAutocompleteSearch,
   type AutocompleteSearchHookProps,
@@ -42,6 +42,7 @@ import {
   type PopoverRef,
 } from '../Popover';
 import { IressReadonly } from '../Readonly';
+import type { IressButtonProps } from '../Button';
 
 export interface IressRichSelectProps<TMultiple extends boolean = false>
   extends Omit<AutocompleteSearchHookProps, 'query'>,
@@ -226,6 +227,16 @@ export interface SelectOptionsRenderProps<TMultiple extends boolean = false>
    * The query value that was used to filter the items (may be different from query).
    */
   debouncedQuery: string;
+
+  /**
+   * Clears the current selection in the menu.
+   */
+  handleClear: IressButtonProps['onClick'] & IressButtonProps['onKeyDown'];
+
+  /**
+   * When the menu selection changes, this will set the value and close the menu.
+   */
+  handleMenuChange: IressSelectMenuProps<TMultiple>['onChange'];
 
   /**
    * The query value to filter items by and create search results.

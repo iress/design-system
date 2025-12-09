@@ -88,7 +88,7 @@ export const spacing = {
   'field.footer': {
     description:
       'Spacing below the field to account for the height of the footer content',
-    value: `calc(${cssVars.typography.base.size} * 2.35)`,
+    value: `calc(${cssVars.typography.base.size} * 2)`,
   },
 
   'slider.tick': {

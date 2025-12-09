@@ -76,6 +76,13 @@ export const MultiSelect: Story = {
   },
 };
 
+export const Placeholder: Story = {
+  args: {
+    placeholder: 'Select an option',
+    options: MOCK_LABEL_VALUE_META,
+  },
+};
+
 export const AsyncOptions: Story = {
   render: (args) => <SelectAsync {...args} />,
   parameters: {
