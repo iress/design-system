@@ -101,7 +101,7 @@ The `width` prop can take an object that takes five key/value pairs that correla
 If you set a responsive `width`, the modal becomes full width on screens smaller than the value you specified. For example, if you want to create a large modal on medium screens and above:
 
 ```tsx
-  <IressModal size={{ md: IressModal.Size.Lg }}>
+  <IressModal size="lg" width={{ md: 'overlay.lg' }}>
 ```
 
 The modal will be full width on extra-small and small screens, and large width on medium, large and extra-large screens. This is the same as setting:
