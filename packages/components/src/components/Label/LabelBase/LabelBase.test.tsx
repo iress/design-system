@@ -2,6 +2,7 @@ import { render } from '@testing-library/react';
 import { LabelBase } from './LabelBase';
 import { label as labelStyles } from '../Label.styles';
 import { css } from '@/styled-system/css';
+import { GlobalCSSClass } from '@/enums';
 
 const TEST_ID = 'test-component';
 const TEST_LABEL = 'Label text';
@@ -15,7 +16,12 @@ describe('LabelBase', () => {
     );
 
     const label = screen.getByTestId(TEST_ID);
-    expect(label).toHaveClass(labelStyles().root!, 'hash-brown');
+    expect(label).toHaveClass(
+      labelStyles().root!,
+      'hash-brown',
+      GlobalCSSClass.Label,
+      GlobalCSSClass.FormLabel,
+    );
     expect(label.tagName).toBe('LABEL');
     expect(label).toHaveTextContent(TEST_LABEL);
   });

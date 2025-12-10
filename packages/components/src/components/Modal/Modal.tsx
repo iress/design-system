@@ -109,6 +109,14 @@ export interface IressModalProps extends IressStyledProps {
   show?: boolean;
 
   /**
+   * Size of the modal
+   * - `sm`: Small modals communicate the outcome of an irreversible action. They should be concise and straightforward, containing a single action and, in some cases, a single input field.
+   * - `md`: Medium modals provide optional supporting information to help users understand the context of a word or screen. They may contain a single action and, in some cases, a larger input such as a textarea.
+   * - `lg`: Large modals are used for more complex tasks that require multiple steps or a lot of information as well as media such as video and PDF documents. They can contain multiple actions, inputs, and supporting information.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
    * When set to `true`, the modal will act like a static element when open.
    * This means it will not lock scroll or focus within the modal.
    * Note: This is used internally to display modals in Styler. It is not recommended to use this prop in your own applications.
@@ -134,6 +142,7 @@ export const IressModal = ({
   onStatus,
   onTransitionEnd,
   show,
+  size = 'md',
   static: isStatic,
   style,
   ...restProps
@@ -185,11 +194,12 @@ export const IressModal = ({
 
   const styles = modal({
     fixedFooter,
+    size,
     static: isStatic,
     status,
   });
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
-  const { p = 'lg', width = 'overlay.md', ...restStyleProps } = styleProps;
+  const { p = 'lg', ...restStyleProps } = styleProps;
 
   useEffect(() => {
     if (provider.opened && show) {
@@ -262,7 +272,6 @@ export const IressModal = ({
           aria-labelledby={heading ? headingId : undefined}
           {...interactions.getFloatingProps(nonStyleProps)}
           {...restStyleProps}
-          w={width}
           onTransitionEnd={handleTransitionEnd}
         >
           {!noCloseButton && (

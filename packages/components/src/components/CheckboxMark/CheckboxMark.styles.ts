@@ -6,9 +6,9 @@ export const checkboxMark = sva({
     root: {
       display: 'inline-flex',
       position: 'relative',
-      width: `[calc(1.5 * {sizes.typography.base})]`,
-      minWidth: `[calc(1.5 * {sizes.typography.base})]`,
-      height: `[calc(1.5 * {sizes.typography.base})]`,
+      width: `[1.4em]`,
+      minWidth: `[1.4em]`,
+      height: `[1.4em]`,
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'colour.neutral.70',

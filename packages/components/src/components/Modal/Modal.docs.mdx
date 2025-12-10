@@ -94,9 +94,11 @@ Below is a guide on when to use which size.
 
 ### Responsive size
 
-The `size` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
+The `size` prop no longer accepts responsive values directly, instead you must use the `width` styling prop to set responsive sizes.
 
-If you set a responsive `size`, the modal becomes full width on screens smaller than the value you specified. For example, if you want to create a large modal on medium screens and above:
+The `width` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
+
+If you set a responsive `width`, the modal becomes full width on screens smaller than the value you specified. For example, if you want to create a large modal on medium screens and above:
 
 ```tsx
   <IressModal size={{ md: IressModal.Size.Lg }}>

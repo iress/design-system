@@ -18,6 +18,7 @@ export const checkbox = sva({
       color: 'colour.primary.fill',
       display: 'flex',
       position: 'relative',
+      textStyle: 'typography.body.md',
     },
     input: {
       srOnly: true,
@@ -29,7 +30,9 @@ export const checkbox = sva({
       display: 'inline-flex',
       cursor: 'pointer',
     },
-    labelSpan: {},
+    labelSpan: {
+      font: 'inherit',
+    },
     mark: {
       color: '[currentColor]',
       marginInlineEnd: 'spacing.2',

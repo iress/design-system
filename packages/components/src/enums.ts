@@ -31,6 +31,7 @@ export enum GlobalCSSClass {
   Input = 'ids-input',
   InputCurrency = 'ids-input--currency',
   InputPopover = 'ids-popover--input',
+  Label = 'ids-label',
   Link = 'ids-link',
   Menu = 'ids-menu',
   MenuHeading = 'ids-text--menu-heading',
@@ -80,7 +81,7 @@ export enum GlobalCSSClass {
   Tooltip = 'ids-tooltip',
   ValidationLink = 'ids-validation-message--link',
   ValidationMessage = 'ids-validation-message',
-  ValidationSummary = 'ids-validation-sumary',
+  ValidationSummary = 'ids-validation-summary',
 }
 
 /** @deprecated Breakpoint enum is now deprecated and will be removed in a future version. Please use the Breakpoints type instead. **/
