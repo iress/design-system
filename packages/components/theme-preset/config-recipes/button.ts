@@ -150,12 +150,6 @@ export const buttonRecipe = defineSlotRecipe({
           _before: {
             transition: 'none',
           },
-
-          _after: {
-            transform: 'translateZ(-1px) scale(1)',
-            transformOrigin: 'center',
-            borderRadius: 'radius.system.button',
-          },
         },
       },
     },
@@ -473,15 +467,6 @@ export const buttonRecipe = defineSlotRecipe({
       css: {
         root: {
           bg: 'colour.primary.surface',
-        },
-      },
-    },
-    {
-      mode: 'primary',
-      inButtonGroup: true,
-      css: {
-        root: {
-          boxShadow: 'none',
         },
       },
     },

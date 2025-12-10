@@ -23,13 +23,11 @@ export const selectLabel = sva({
       transition: 'common',
       _focusWithin: {
         backgroundColor: 'colour.neutral.10',
-        borderColor: 'colour.primary.fill',
         layerStyle: 'elevation.focus',
         outline: '[none]',
       },
       _active: {
         backgroundColor: 'colour.neutral.10',
-        borderColor: 'colour.primary.fill',
         layerStyle: 'elevation.focus',
         outline: '[none]',
       },

@@ -22,7 +22,7 @@ interface ElevationSchema extends IressDesignTokenGroup {
     shadow: IressDesignToken<
       [CompositeValue['shadow'], CompositeValue['shadow']]
     >;
-    border?: IressDesignToken<CompositeValue['border']>;
+    borderColor: IressDesignToken<string>;
   };
   focusCompact: IressDesignTokenGroup & {
     shadow: IressDesignToken<CompositeValue['shadow']>;
@@ -165,9 +165,18 @@ const elevation = {
         'styler.panel': 'elevation.focus',
       },
     },
+    borderColor: {
+      $description: 'Border color for focus elevations',
+      $type: Type.Color,
+      $value: '#0066FF',
+      $extensions: {
+        'styler.panel': 'elevation.focus',
+      },
+    },
     $extensions: {
       'styler.preview.elevation': {
         shadow: 'elevation.focus.shadow',
+        borderColor: 'elevation.focus.borderColor',
       },
     },
   },

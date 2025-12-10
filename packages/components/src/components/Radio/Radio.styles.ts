@@ -5,6 +5,7 @@ export const radio = sva({
     'root',
     'input',
     'label',
+    'labelContent',
     'radioMark',
     'checkedRadioMark',
     'checkboxMark',
@@ -16,6 +17,7 @@ export const radio = sva({
       position: 'relative',
       padding: 'spacing.0',
       transition: '[all 0.2s ease-out]',
+      textStyle: 'typography.body.md',
 
       '&:has(svg:hover)': {
         color: 'colour.primary.fillHover',
@@ -43,6 +45,9 @@ export const radio = sva({
       margin: '[0px]',
       cursor: 'pointer',
     },
+    labelContent: {
+      font: 'inherit',
+    },
     radioMark: {
       boxSizing: 'border-box',
       position: 'relative',
@@ -53,8 +58,8 @@ export const radio = sva({
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      width: '[calc(1.3 * 1rem)]',
-      height: '[calc(1.3 * 1rem)]',
+      width: '[1.4em]',
+      height: '[1.4em]',
       borderRadius: '[100%]',
       marginInlineEnd: 'spacing.2',
       flexShrink: 0,

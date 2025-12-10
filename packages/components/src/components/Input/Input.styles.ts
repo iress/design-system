@@ -13,7 +13,6 @@ export const input = sva({
       flexGrow: '1',
       border: 'input',
       '&:has(input:focus, textarea:focus)': {
-        borderColor: 'colour.primary.fill',
         layerStyle: 'elevation.focus',
       },
     },

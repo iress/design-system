@@ -67,7 +67,12 @@ export const LabelBase = <E extends 'label' | 'strong' | 'legend' = 'label'>({
 
   return (
     <Tag
-      className={cx(className, GlobalCSSClass.FormLabel, classes.root)}
+      className={cx(
+        className,
+        GlobalCSSClass.FormLabel,
+        GlobalCSSClass.Label,
+        classes.root,
+      )}
       data-testid={dataTestId}
       {...restProps}
       data-name={name}

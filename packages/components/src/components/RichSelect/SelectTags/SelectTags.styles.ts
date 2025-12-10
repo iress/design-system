@@ -28,14 +28,12 @@ export const selectTags = sva({
 
       '&:focus': {
         backgroundColor: 'colour.neutral.10',
-        borderColor: 'colour.primary.fill',
         layerStyle: 'elevation.focus',
         outline: '[none]',
       },
 
       '&:focus-within': {
         backgroundColor: 'colour.neutral.10',
-        borderColor: 'colour.primary.fill',
         layerStyle: 'elevation.focus',
         outline: '[none]',
       },

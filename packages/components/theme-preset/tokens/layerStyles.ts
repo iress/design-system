@@ -27,6 +27,7 @@ export const elevationCompositions = {
     description: elevation.focus.$description,
     value: {
       boxShadow: cssVars.elevation.focus.shadow,
+      borderColor: `${cssVars.elevation.focus.borderColor} !important`,
     },
   },
   'elevation.focusCompact': {

@@ -72,6 +72,7 @@ export const Elevation: Story = {
         stretch
         style={{
           boxShadow: cssVars.elevation.focus.shadow,
+          borderColor: cssVars.elevation.focus.borderColor,
         }}
       >
         <h2>Focus</h2>

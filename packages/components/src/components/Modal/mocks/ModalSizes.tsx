@@ -40,7 +40,7 @@ const SmallModal = () => {
       </IressCard>
 
       <IressModal
-        width="overlay.sm"
+        size="sm"
         heading="Terms of service update"
         footer={
           <IressButton mode="primary" onClick={() => setShow(false)}>
@@ -83,7 +83,7 @@ const MediumModal = () => {
       </IressCard>
 
       <IressModal
-        width="overlay.md"
+        size="md"
         heading="History of Iress"
         footer={<IressButton onClick={() => setShow(false)}>Close</IressButton>}
         fixedFooter
@@ -227,7 +227,7 @@ const LargeModal = () => {
       </IressCard>
 
       <IressModal
-        width="overlay.lg"
+        size="lg"
         heading="Upload from CSV"
         footer={
           <LargeModalActions
