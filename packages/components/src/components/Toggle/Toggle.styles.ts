@@ -14,6 +14,7 @@ export const toggle = sva({
       display: 'inline-flex',
       gap: 'spacing.1',
       color: 'colour.primary.fill',
+      textStyle: 'typography.body.md.strong',
     },
     toggleButtonContainer: {
       position: 'relative',
@@ -83,7 +84,8 @@ export const toggle = sva({
     },
     checkboxMark: {
       opacity: 0,
-      marginInlineStart: 'spacing.1',
+      marginInlineStart: '[calc({spacing.spacing.1} * 0.5)]',
+      textStyle: 'typography.body.md',
       '&&:hover': {
         bg: 'transparent',
       },
@@ -92,7 +94,6 @@ export const toggle = sva({
       display: 'inline-block',
       marginInlineEnd: 'spacing.1',
       color: 'colour.neutral.80',
-      textStyle: 'typography.body.md.strong',
       lineHeight: '1.5rem',
     },
   },

@@ -187,7 +187,9 @@ const Radio = <T = FormControlValue,>(
             data-testid={propagateTestid(dataTestId, 'checkboxMark')}
           />
         )}
-        <IressText element="span">{children}</IressText>
+        <IressText element="span" className={css(styles.labelContent)}>
+          {children}
+        </IressText>
       </styled.label>
     </div>
   );
