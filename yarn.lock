@@ -1888,7 +1888,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@iress-oss/ids-storybook-config@npm:^0.2.6, @iress-oss/ids-storybook-config@workspace:packages/storybook-config":
+"@iress-oss/ids-storybook-config@npm:^0.2.7, @iress-oss/ids-storybook-config@workspace:packages/storybook-config":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-storybook-config@workspace:packages/storybook-config"
   dependencies:
@@ -2163,7 +2163,7 @@ __metadata:
   dependencies:
     "@chromatic-com/storybook": "npm:^4.1.3"
     "@iress-oss/ids-components": "npm:^6.0.0-alpha.7"
-    "@iress-oss/ids-storybook-config": "npm:^0.2.6"
+    "@iress-oss/ids-storybook-config": "npm:^0.2.7"
     "@iress-oss/ids-storybook-okta": "npm:^0.1.2"
     "@iress-oss/ids-storybook-sandbox": "npm:^0.2.1"
     "@iress-oss/ids-storybook-toggle-stories": "npm:^0.1.0"

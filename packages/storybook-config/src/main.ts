@@ -207,7 +207,7 @@ export const getMainConfig = ({
         const frames = document.querySelectorAll('iframe');
         frames.forEach((f) => {
           try {
-            f.contentWindow?.postMessage({ type: 'LOAD_THEME', data }, '*');
+            f.contentWindow?.postMessage({ type: 'LOAD_THEME', ...data }, '*');
           } catch (err) {
             console.debug('[Storybook Host] Skipped frame broadcast:', err);
           }
@@ -233,29 +233,39 @@ export const getMainConfig = ({
 
         const { name, href, css } = event.data;
 
+        let existingHref = document.getElementById('storybook-config-theme-href');
+        let existingCss = document.getElementById('storybook-config-theme-css');
+        const existingTheme = document.documentElement.getAttribute('data-theme');
+
+        if (existingTheme) {
+          document.documentElement.classList.remove(existingTheme);
+        }
+
+        if (!name) {
+          existingHref?.remove();
+          existingCss?.remove();
+          return;
+        }
+
         if (href) {
-          const link = document.createElement('link');
-          link.rel = 'stylesheet';
-          link.href = href;
-          document.head.appendChild(link);
+          if (!existingHref) {
+            existingHref = document.createElement('link');
+            existingHref.rel = 'stylesheet';
+            existingHref.id = 'storybook-config-theme-href';
+            document.head.appendChild(existingHref);
+          }
+
+          existingHref.href = href;
         }
 
         if (css) {
-          const existing = document.head.querySelector('#storybook-config-theme);
-
-          if (!existing) {
-            const style = document.createElement('style');
-            style.id = 'storybook-config-theme';
-            document.head.appendChild(style);
+          if (!existingCss) {
+            existingCss = document.createElement('style');
+            existingCss.id = 'storybook-config-theme-css';
+            document.head.appendChild(existingCss);
           }
 
-          style.innerHTML = css;
-        }
-
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-
-        if (currentTheme) {
-          document.documentElement.classList.remove(currentTheme);
+          existingCss.innerHTML = css;
         }
 
         document.documentElement.setAttribute('data-theme', name);
