@@ -193,6 +193,35 @@ export const getMainConfig = ({
   window.addEventListener('load', broadcastHash);
 </script>`,
       `<script>
+      function passTheme(event) {
+        if (!event.data || event.data.name !== 'PASS_THEME') {
+          return;
+        }
+
+        const frames = document.querySelectorAll('iframe');
+        frames.forEach((f) => {
+          try {
+            f.contentWindow?.postMessage({ type: 'LOAD_THEME', event.data }, '*');
+          } catch (err) {
+            console.debug('[Storybook Host] Skipped frame broadcast:', err);
+          }
+        });
+      }
+
+      window.addEventListener('message', passTheme);
+    </script>`,
+      env.BASE_PATH ? `<base href="${env.BASE_PATH}">` : false,
+    ]
+      .filter(Boolean)
+      .join('\n');
+  };
+
+  config.previewHead = (head) => {
+    const env = loadEnv('', process.cwd(), 'BASE_PATH');
+
+    return [
+      head,
+      `<script>
       function loadTheme(event) {
         if (!event.data || event.data.name !== 'LOAD_THEME') {
           return;
@@ -233,14 +262,6 @@ export const getMainConfig = ({
     </script>`,
       env.BASE_PATH ? `<base href="${env.BASE_PATH}">` : false,
     ]
-      .filter(Boolean)
-      .join('\n');
-  };
-
-  config.previewHead = (head) => {
-    const env = loadEnv('', process.cwd(), 'BASE_PATH');
-
-    return [head, env.BASE_PATH ? `<base href="${env.BASE_PATH}">` : false]
       .filter(Boolean)
       .join('\n');
   };
