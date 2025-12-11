@@ -192,6 +192,31 @@ export const getMainConfig = ({
   window.addEventListener('hashchange', broadcastHash);
   window.addEventListener('load', broadcastHash);
 </script>`,
+      `<script>
+      function loadTheme(event) {
+        if (!event.data || event.data.name !== 'LOAD_THEME') {
+          return;
+        }
+
+        const { name, href } = event.data;
+
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = href;
+        document.head.appendChild(link);
+
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+
+        if (currentTheme) {
+          document.documentElement.classList.remove(currentTheme);
+        }
+
+        document.documentElement.setAttribute('data-theme', name);
+        document.documentElement.classList.add(name);
+      }
+
+      window.addEventListener('message', loadTheme);
+    </script>`,
       env.BASE_PATH ? `<base href="${env.BASE_PATH}">` : false,
     ]
       .filter(Boolean)
