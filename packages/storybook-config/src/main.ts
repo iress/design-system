@@ -192,6 +192,45 @@ export const getMainConfig = ({
   window.addEventListener('hashchange', broadcastHash);
   window.addEventListener('load', broadcastHash);
 </script>`,
+      `<script>
+      function loadTheme(event) {
+        if (!event.data || event.data.name !== 'LOAD_THEME') {
+          return;
+        }
+
+        const { name, href, css } = event.data;
+
+        if (href) {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = href;
+          document.head.appendChild(link);
+        }
+
+        if (css) {
+          const existing = document.head.querySelector('#storybook-config-theme);
+
+          if (!existing) {
+            const style = document.createElement('style');
+            style.id = 'storybook-config-theme';
+            document.head.appendChild(style);
+          }
+
+          style.innerHTML = css;
+        }
+
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+
+        if (currentTheme) {
+          document.documentElement.classList.remove(currentTheme);
+        }
+
+        document.documentElement.setAttribute('data-theme', name);
+        document.documentElement.classList.add(name);
+      }
+
+      window.addEventListener('message', loadTheme);
+    </script>`,
       env.BASE_PATH ? `<base href="${env.BASE_PATH}">` : false,
     ]
       .filter(Boolean)

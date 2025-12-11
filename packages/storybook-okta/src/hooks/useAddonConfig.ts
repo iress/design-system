@@ -48,7 +48,7 @@ export const useAddonConfigForManager = () => {
 
 export const getAddonConfigForPreview = () => {
   try {
-    const fromEnv = process.env.IDS_OKTA as unknown as
+    const fromEnv = process?.env?.IDS_OKTA as unknown as
       | AddonConfig
       | string
       | undefined;
