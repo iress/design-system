@@ -21,7 +21,7 @@ interface ManagerProps {
   /**
    * The version to show in the version badge.
    */
-  version?: string;
+  version?: string | ((ref?: string) => Promise<string> | string);
 }
 
 /**

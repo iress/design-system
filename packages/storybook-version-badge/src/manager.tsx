@@ -5,7 +5,7 @@ import { ADDON_ID, ADDON_TITLE } from './constants';
 import { VersionBadge } from './components/VersionBadge';
 import { type AddonConfig } from './types';
 
-addons.register(ADDON_ID, () => {
+addons.register(ADDON_ID, (api) => {
   const addonConfig = addons.getConfig()[ADDON_ID] as AddonConfig;
 
   if (!addonConfig) {
@@ -15,6 +15,6 @@ addons.register(ADDON_ID, () => {
   addons.add(ADDON_ID, {
     type: Addon_TypesEnum.TOOLEXTRA,
     title: ADDON_TITLE,
-    render: () => <VersionBadge {...addonConfig} />,
+    render: () => <VersionBadge {...addonConfig} api={api} />,
   });
 });
