@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-storybook-config",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -42,7 +42,7 @@
     "watch": "vite build --watch"
   },
   "dependencies": {
-    "@iress-oss/ids-tokens": "^6.0.0-alpha.4",
+    "@iress-oss/ids-tokens": "^6.0.0-alpha.5",
     "radash": "12.1.1",
     "react-diff-viewer": "^3.1.1",
     "react-element-to-jsx-string": "^17.0.1",
