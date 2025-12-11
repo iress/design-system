@@ -193,22 +193,26 @@ export const getMainConfig = ({
   window.addEventListener('load', broadcastHash);
 </script>`,
       `<script>
-      function passTheme(event) {
-        if (!event.data || event.data.name !== 'PASS_THEME') {
+      window.addEventListener('message', function passTheme(event) {
+        if (!event.data) {
+          return;
+        }
+
+        const { type, ...data } = event.data;
+
+        if (type !== 'PASS_THEME') {
           return;
         }
 
         const frames = document.querySelectorAll('iframe');
         frames.forEach((f) => {
           try {
-            f.contentWindow?.postMessage({ type: 'LOAD_THEME', event.data }, '*');
+            f.contentWindow?.postMessage({ type: 'LOAD_THEME', data }, '*');
           } catch (err) {
             console.debug('[Storybook Host] Skipped frame broadcast:', err);
           }
         });
-      }
-
-      window.addEventListener('message', passTheme);
+      });
     </script>`,
       env.BASE_PATH ? `<base href="${env.BASE_PATH}">` : false,
     ]
@@ -222,8 +226,8 @@ export const getMainConfig = ({
     return [
       head,
       `<script>
-      function loadTheme(event) {
-        if (!event.data || event.data.name !== 'LOAD_THEME') {
+      window.addEventListener('message', function loadTheme(event) {
+        if (!event.data || event.data.type !== 'LOAD_THEME') {
           return;
         }
 
@@ -256,9 +260,7 @@ export const getMainConfig = ({
 
         document.documentElement.setAttribute('data-theme', name);
         document.documentElement.classList.add(name);
-      }
-
-      window.addEventListener('message', loadTheme);
+      });
     </script>`,
       env.BASE_PATH ? `<base href="${env.BASE_PATH}">` : false,
     ]
