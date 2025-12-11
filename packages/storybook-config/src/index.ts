@@ -22,3 +22,10 @@ export * from './helpers/withTransformedSource';
 
 // Constants
 export * from './constants';
+
+// Types
+export type {
+  BroadcastHashEvent,
+  PassThemeEvent,
+  LoadThemeEvent,
+} from './types';
