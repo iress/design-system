@@ -45,6 +45,13 @@ interface MainConfig extends Pick<Partial<StorybookConfig>, 'stories'> {
    * If not provided, no alias resolution will be performed.
    */
   tsConfigWithAlias?: string;
+
+  /**
+   * Optional function to further modify the Vite configuration.
+   * @param config - The current Vite configuration.
+   * @returns The modified Vite configuration.
+   */
+  viteFinal?: (config: UserConfig) => UserConfig;
 }
 
 /**
@@ -57,6 +64,7 @@ export const getMainConfig = ({
   removeVitePluginNames = ['tree-shakeable'],
   stories,
   tsConfigWithAlias,
+  viteFinal,
 }: MainConfig): StorybookConfig => {
   const config: StorybookConfig = {
     addons: [
@@ -97,7 +105,7 @@ export const getMainConfig = ({
     ],
 
     viteFinal(config) {
-      const modifiedConfig: UserConfig = {
+      let modifiedConfig: UserConfig = {
         // This allows us to change the path of Storybook
         base: process.env.BASE_PATH ?? config.base,
 
@@ -152,6 +160,10 @@ export const getMainConfig = ({
             },
           };
         });
+      }
+
+      if (viteFinal) {
+        modifiedConfig = viteFinal(modifiedConfig);
       }
 
       // Merge custom configuration into the default config
