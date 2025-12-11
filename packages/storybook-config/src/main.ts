@@ -198,12 +198,26 @@ export const getMainConfig = ({
           return;
         }
 
-        const { name, href } = event.data;
+        const { name, href, css } = event.data;
 
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = href;
-        document.head.appendChild(link);
+        if (href) {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = href;
+          document.head.appendChild(link);
+        }
+
+        if (css) {
+          const existing = document.head.querySelector('#storybook-config-theme);
+
+          if (!existing) {
+            const style = document.createElement('style');
+            style.id = 'storybook-config-theme';
+            document.head.appendChild(style);
+          }
+
+          style.innerHTML = css;
+        }
 
         const currentTheme = document.documentElement.getAttribute('data-theme');
 
