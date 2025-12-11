@@ -82,7 +82,10 @@ export const PassAndLoadTheme: Story = {
                 {
                   type: 'PASS_THEME',
                   name: 'red-text',
-                  css: '.red-text { --iress-colour-neutral-80: red; }',
+                  css: '.red-text { --iress-colour-neutral-80: red; --iress-typography-base-body-font: "Work Sans", sans-serif; }',
+                  fonts: [
+                    'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap',
+                  ],
                 },
                 '*',
               );

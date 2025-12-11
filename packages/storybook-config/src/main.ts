@@ -231,7 +231,7 @@ export const getMainConfig = ({
           return;
         }
 
-        const { name, href, css } = event.data;
+        const { name, href, css, fonts = [] } = event.data;
 
         let existingHref = document.getElementById('storybook-config-theme-href');
         let existingCss = document.getElementById('storybook-config-theme-css');
@@ -267,6 +267,19 @@ export const getMainConfig = ({
 
           existingCss.innerHTML = css;
         }
+
+        fonts?.forEach((font) => {
+          const existingFont = document.querySelector(\`link[href="\${font}"]\`);
+
+          if (existingFont) {
+            return;
+          }
+            
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = font;
+          document.head.appendChild(link);
+        });
 
         document.documentElement.setAttribute('data-theme', name);
         document.documentElement.classList.add(name);
