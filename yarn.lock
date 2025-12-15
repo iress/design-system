@@ -1965,7 +1965,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-storybook-okta@workspace:packages/storybook-okta"
   dependencies:
-    "@okta/okta-auth-js": "npm:^7.14.0"
+    "@okta/okta-auth-js": "npm:^7.14.1"
     "@storybook/addon-docs": "npm:10.0.8"
     "@storybook/icons": "npm:2.0.1"
     "@storybook/react-vite": "npm:10.0.8"
@@ -2706,9 +2706,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@okta/okta-auth-js@npm:^7.14.0":
-  version: 7.14.0
-  resolution: "@okta/okta-auth-js@npm:7.14.0"
+"@okta/okta-auth-js@npm:^7.14.1":
+  version: 7.14.1
+  resolution: "@okta/okta-auth-js@npm:7.14.1"
   dependencies:
     "@babel/runtime": "npm:^7.27.0"
     "@peculiar/webcrypto": "npm:^1.4.0"
@@ -2725,7 +2725,7 @@ __metadata:
     tiny-emitter: "npm:1.1.0"
     webcrypto-shim: "npm:^0.1.5"
     xhr2: "npm:0.1.3"
-  checksum: 10c0/bda3e63565953b9c2796b880151dfeb99f625c255609bcc342d8dcb43fc531094ee29e4a2c9fa1c67c433294df767be9b8e3969128698ab05343b3842085b440
+  checksum: 10c0/1aa9f9315d6231faa6addda778500c32ccb4767861cbb4c82911b6929498e5a9882e009fa5a3b38742a2b4c0941212579f9162017803e571298101867c8075c2
   languageName: node
   linkType: hard
 
