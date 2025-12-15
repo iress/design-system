@@ -50,7 +50,7 @@
     "eslint-plugin-file-progress": "^3.0.2",
     "eslint-plugin-mdx": "^3.6.2",
     "eslint-plugin-prettier": "^5.5.4",
-    "prettier": "^3.3.3",
+    "prettier": "^3.7.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "rimraf": "6.1.2",
