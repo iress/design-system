@@ -41,7 +41,7 @@
     "@types/react": "18.3.23",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "^5.0.2",
-    "@vitest/coverage-v8": "^4.0.13",
+    "@vitest/coverage-v8": "^4.0.14",
     "@vitest/ui": "^4.0.13",
     "colorjs.io": "^0.5.2",
     "eslint": "^9.36.0",
@@ -71,7 +71,7 @@
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-static-copy": "^3.1.2",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^4.0.13"
+    "vitest": "^4.0.14"
   },
   "dependencies": {
     "@floating-ui/react": "0.27.16",
