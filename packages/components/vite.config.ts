@@ -15,6 +15,7 @@ export default defineConfig({
   plugins: [
     react(),
     dts({
+      include: 'src/**/*',
       exclude: [
         'docs/**/*',
         'src/**/*.test.*',
@@ -22,6 +23,7 @@ export default defineConfig({
         'src/**/*.stories.*',
         'src/**/*.docs.*',
       ],
+      tsconfigPath: './tsconfig.base.json',
     }),
   ],
   build: {
