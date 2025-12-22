@@ -1786,7 +1786,7 @@ __metadata:
     eslint-plugin-react-refresh: "npm:^0.4.22"
     eslint-plugin-sonarjs: "npm:^3.0.5"
     fuzzysort: "npm:3.1.0"
-    glob: "npm:^11.0.3"
+    glob: "npm:^13.0.0"
     jest-axe: "npm:^10.0.0"
     jsdom: "npm:^27.2.0"
     postcss: "npm:^8.5.6"
@@ -8292,22 +8292,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^11.0.3":
-  version: 11.0.3
-  resolution: "glob@npm:11.0.3"
-  dependencies:
-    foreground-child: "npm:^3.3.1"
-    jackspeak: "npm:^4.1.1"
-    minimatch: "npm:^10.0.3"
-    minipass: "npm:^7.1.2"
-    package-json-from-dist: "npm:^1.0.0"
-    path-scurry: "npm:^2.0.0"
-  bin:
-    glob: dist/esm/bin.mjs
-  checksum: 10c0/7d24457549ec2903920dfa3d8e76850e7c02aa709122f0164b240c712f5455c0b457e6f2a1eee39344c6148e39895be8094ae8cfef7ccc3296ed30bce250c661
-  languageName: node
-  linkType: hard
-
 "glob@npm:^11.1.0":
   version: 11.1.0
   resolution: "glob@npm:11.1.0"
@@ -10636,7 +10620,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:10.0.3, minimatch@npm:^10.0.3":
+"minimatch@npm:10.0.3":
   version: 10.0.3
   resolution: "minimatch@npm:10.0.3"
   dependencies:
