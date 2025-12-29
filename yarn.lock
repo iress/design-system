@@ -2032,11 +2032,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@iress-oss/ids-storybook-config@npm:^0.2.0":
-  version: 0.2.1
-  resolution: "@iress-oss/ids-storybook-config@npm:0.2.1"
+"@iress-oss/ids-storybook-config@npm:^0.2.10":
+  version: 0.2.10
+  resolution: "@iress-oss/ids-storybook-config@npm:0.2.10"
   dependencies:
-    "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.2"
+    "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.5"
     radash: "npm:12.1.1"
     react-diff-viewer: "npm:^3.1.1"
     react-element-to-jsx-string: "npm:^17.0.1"
@@ -2057,13 +2057,13 @@ __metadata:
     storybook: ^10
     storybook-addon-tag-badges: ^3
     vite: ^7
-  checksum: 10c0/106cadc139498336689d3c8623d4f800f8ad503370d5498c8ec17b4a7932644989ba6920d29b4e9913afde8f798c2fdc4280c146f4bd28117f732552d9ad9817
+  checksum: 10c0/179e98f9acdbcaa53d55558723275e9a0d387693471102035fe154f58da2db02159a229196c4ddee5a6af73f476c6c8fcd59ca03554e8fea31d52f1bdc16823b
   languageName: node
   linkType: hard
 
-"@iress-oss/ids-storybook-okta@npm:^0.1.0":
-  version: 0.1.1
-  resolution: "@iress-oss/ids-storybook-okta@npm:0.1.1"
+"@iress-oss/ids-storybook-okta@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "@iress-oss/ids-storybook-okta@npm:0.1.2"
   dependencies:
     "@okta/okta-auth-js": "npm:^7.14.0"
     "@storybook/icons": "npm:2.0.1"
@@ -2071,7 +2071,7 @@ __metadata:
     react: ^18.0.0 || ^19.0.0
     react-dom: ^18.0.0 || ^19.0.0
     storybook: ^10
-  checksum: 10c0/942b10bf7501f377257b44cda0d37807bc20c170454a0117c7281fb209e7e87820c1167e5f30ee304ad4fb64c56664f40670f9deb3ef8d1f58e0eb2349a0fad6
+  checksum: 10c0/da2c36c0a7ca6a6c5e68026776cbd5fb22025d707857815436ecfb0f4570e2a5fad4e77f08b535bbc2368d6a89adb87ca5caa605a18020ab5c5c700923864383
   languageName: node
   linkType: hard
 
@@ -2103,20 +2103,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iress-oss/ids-storybook-version-badge@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@iress-oss/ids-storybook-version-badge@npm:0.1.0"
+"@iress-oss/ids-storybook-version-badge@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@iress-oss/ids-storybook-version-badge@npm:0.1.1"
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
     react-dom: ^18.0.0 || ^19.0.0
     storybook: ^10
-  checksum: 10c0/2ef8de5314b465e3daee07e4dc42baa90a8ed1d89b1c142938d6831c38a4369f278c4515260b0832241a566231a0c748bdb3ef1ce57d7d64be4c28fdd5640655
+  checksum: 10c0/5afd04ff90cc0ba12da30e6c60535a8217893de356a40a9c7e5acad3a6d6b5ab45ecb88c844d800933adbd08017092e6c02e4a2cd1e0a55055f588f81e5680f3
   languageName: node
   linkType: hard
 
-"@iress-oss/ids-tokens@npm:^6.0.0-alpha.2":
-  version: 6.0.0-alpha.2
-  resolution: "@iress-oss/ids-tokens@npm:6.0.0-alpha.2"
+"@iress-oss/ids-tokens@npm:^6.0.0-alpha.5":
+  version: 6.0.0-alpha.5
+  resolution: "@iress-oss/ids-tokens@npm:6.0.0-alpha.5"
   peerDependencies:
     radash: ^12.1.0
     style-dictionary: ^5.0.0
@@ -2125,7 +2125,7 @@ __metadata:
       optional: true
     style-dictionary:
       optional: true
-  checksum: 10c0/ced3b18978e7b8d2aa8e5d48948ca7e3c7fc3c1574189e996d951ca395cfed3b3f87eda624ebbcec0704c60d74a38b5950344c6707b83e96c46d5697a43235d7
+  checksum: 10c0/b645871533fa10362602716846f0ccf90b8be9844888a19def27f607eea7acc828c34835b3f68f31f482124ef67add0d7f7781e3c833a21cff12aa446fe82534
   languageName: node
   linkType: hard
 
@@ -2135,15 +2135,15 @@ __metadata:
   dependencies:
     "@chromatic-com/storybook": "npm:^4.1.3"
     "@iress-oss/ids-components": "npm:^6.0.0-alpha.4"
-    "@iress-oss/ids-storybook-config": "npm:^0.2.0"
-    "@iress-oss/ids-storybook-okta": "npm:^0.1.0"
+    "@iress-oss/ids-storybook-config": "npm:^0.2.10"
+    "@iress-oss/ids-storybook-okta": "npm:^0.1.2"
     "@iress-oss/ids-storybook-sandbox": "npm:^0.2.0"
     "@iress-oss/ids-storybook-toggle-stories": "npm:^0.1.0"
-    "@iress-oss/ids-storybook-version-badge": "npm:^0.1.0"
+    "@iress-oss/ids-storybook-version-badge": "npm:^0.1.1"
     "@mermaid-js/mermaid-cli": "npm:^11.12.0"
     "@storybook/addon-a11y": "npm:^10.1.2"
     "@storybook/addon-docs": "npm:^10.1.2"
-    "@storybook/addon-links": "npm:10.1.4"
+    "@storybook/addon-links": "npm:10.1.8"
     "@storybook/react-vite": "npm:^10.1.2"
     "@typescript-eslint/eslint-plugin": "npm:^8.44.1"
     "@typescript-eslint/parser": "npm:^8.44.1"
@@ -2164,7 +2164,7 @@ __metadata:
     react: "npm:^19.2.0"
     react-dom: "npm:^19.2.0"
     storybook: "npm:^10.1.2"
-    storybook-addon-tag-badges: "npm:^3.0.2"
+    storybook-addon-tag-badges: "npm:^3.0.4"
     tsx: "npm:^4.21.0"
     typescript: "npm:^5.9.3"
     vite: "npm:^7.2.7"
@@ -3227,18 +3227,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-links@npm:10.1.4":
-  version: 10.1.4
-  resolution: "@storybook/addon-links@npm:10.1.4"
+"@storybook/addon-links@npm:10.1.8":
+  version: 10.1.8
+  resolution: "@storybook/addon-links@npm:10.1.8"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    storybook: ^10.1.4
+    storybook: ^10.1.8
   peerDependenciesMeta:
     react:
       optional: true
-  checksum: 10c0/a980766a12b23405b1b6e1343a8397d00939572bbfcb6b326301fa4d01090cced9f3b0e50e91663ef65922ad8214a22c4922e89da2e4eed5c971e0f44885448a
+  checksum: 10c0/385ffdcbd8c537cb71dbe8a66923d8ef07f895ffdc07ebb0fb082ab07bcfd4887734b0450ca60b644900049471838d916ed6d7f31075d8486571176033167bc8
   languageName: node
   linkType: hard
 
@@ -13721,12 +13721,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-addon-tag-badges@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "storybook-addon-tag-badges@npm:3.0.2"
+"storybook-addon-tag-badges@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "storybook-addon-tag-badges@npm:3.0.4"
   peerDependencies:
     storybook: ^10.0.0
-  checksum: 10c0/a9bbe612c5f106b8a2df5314a31aa2d696c3065b40775a0fa5407ebb0d97690eebda109c773785236ae7d4676708ae8998143e1017955734f8fa81c2a78f8693
+  checksum: 10c0/567def0d746a743e622d0cf21c44b1d537769c93c99d32f46920494898312fd11e88b8c0de1dbb98c1a7925d034fb36507d8cdc63429e898e908c2ea848eaf35
   languageName: node
   linkType: hard
 
