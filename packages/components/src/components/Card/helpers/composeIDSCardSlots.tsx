@@ -30,7 +30,7 @@ export function composeIDSCardSlots(
     [footer, 'footer', 'Footer'],
   ];
 
-  const hasSlots = slots.some(([slot, name]) => name !== 'body' && slot);
+  const hasSlots = slots.some(([slot, name]) => name !== 'body' && !!slot);
 
   if (!hasSlots) return children;
 
