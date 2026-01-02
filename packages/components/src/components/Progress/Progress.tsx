@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { type IressProgressProps } from './Progress.types';
 import styles from './Progress.module.scss';
 
@@ -15,23 +14,16 @@ const Progress = ({
   'data-testid': dataTestId,
   ...restProps
 }: IressProgressProps) => {
-  const [uncontrolledValue, setUncontrolledValue] = useState(value);
+  const clampedValue = Math.min(Math.max(value, min ?? 0), max);
 
   const percentage = Math.round(((value - min) / (max - min)) * 100).toString();
   const width = `${percentage}%`;
 
   const normalisedSectionTitle = (): string =>
     stringReplacer(sectionTitle, [
-      { name: '{{current}}', value: uncontrolledValue.toString() },
+      { name: '{{current}}', value: String(clampedValue) },
       { name: '{{max}}', value: max.toString() },
     ]);
-
-  useEffect(() => {
-    const clampedMin = Math.max(value, min);
-    const clampedMax = Math.min(clampedMin, max);
-
-    setUncontrolledValue(clampedMax);
-  }, [value, min, max]);
 
   // TODO: Consider replacing this with native progress bar: <progress />
   // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress
@@ -45,7 +37,7 @@ const Progress = ({
         aria-valuetext={normalisedSectionTitle()}
         aria-valuemax={max}
         aria-valuemin={min}
-        aria-valuenow={uncontrolledValue}
+        aria-valuenow={clampedValue}
         aria-label={normalisedSectionTitle()}
         className={styles.indicator}
         role="progressbar"

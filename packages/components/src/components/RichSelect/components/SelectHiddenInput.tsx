@@ -23,6 +23,7 @@ export const SelectHiddenInput = forwardRef(
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     if (renderHiddenInput)
+      // eslint-disable-next-line react-hooks/refs -- Safe: ref is forwarded, not accessed during render
       return renderHiddenInput({
         getValuesString,
         value,

@@ -66,44 +66,12 @@ const AllowedForeground = ({
     if (!container.current) return;
 
     const computedStyle = getComputedStyle(container.current);
-    const colorValue = computedStyle.color || 'white';
-
-    try {
-      // Try to parse the color, but handle cases where CSS system colors can't be parsed
-      const foregroundColor = new Color(colorValue);
-      setContrastRatio(
-        backgroundColor.contrastWCAG21(foregroundColor).toFixed(1),
-      );
-    } catch (error) {
-      // Fallback for CSS system colors or unparseable values
-      // In test environments, we might get system colors like 'CanvasText'
-      console.warn(`Could not parse color "${colorValue}":`, error);
-
-      // For test environments where we get CSS system colors,
-      // assume maximum contrast (white text on dark background or vice versa)
-      if (colorValue === 'CanvasText' || colorValue.includes('Canvas')) {
-        setContrastRatio('21.0');
-        return;
-      }
-
-      const fallbackColor = 'white';
-      try {
-        const foregroundColor = new Color(fallbackColor);
-        setContrastRatio(
-          backgroundColor.contrastWCAG21(foregroundColor).toFixed(1),
-        );
-      } catch (fallbackError) {
-        // If even the fallback fails, set a default contrast ratio
-        console.warn(
-          `Could not parse fallback color "${fallbackColor}":`,
-          fallbackError,
-        );
-        setContrastRatio('21.0');
-      }
-    }
-  }, [backgroundColor]);
-
-  useEffect(computeContrast, [computeContrast]);
+    const computedForegroundColor = new Color(computedStyle.color || 'white');
+    setContrastRatio(
+      backgroundColor.contrastWCAG21(computedForegroundColor).toFixed(1),
+    );
+    container.current.textContent = `${foreground} (${computedForegroundColor.toString({ format: 'hex' }).toUpperCase()})`;
+  }, [backgroundColor, foreground]);
 
   const cssProperties: IressCSSProperties = {
     '--iress-text-color': `var(${foreground})`,
@@ -144,16 +112,19 @@ const ColourSwatch = ({
   useEffect(() => {
     if (!container) return;
     const computedStyle = getComputedStyle(container);
-    try {
-      setBackgroundColor(new Color(computedStyle.backgroundColor));
-    } catch (error) {
-      console.warn(
-        `Could not parse background color "${computedStyle.backgroundColor}":`,
-        error,
-      );
-      // Set to undefined to handle gracefully
-      setBackgroundColor(undefined);
-    }
+    const timeout = setTimeout(() => {
+      try {
+        setBackgroundColor(new Color(computedStyle.backgroundColor));
+      } catch (error) {
+        console.warn(
+          `Could not parse background color "${computedStyle.backgroundColor}":`,
+          error,
+        );
+        // Set to undefined to handle gracefully
+        setBackgroundColor(undefined);
+      }
+    }, 0);
+    return () => clearTimeout(timeout);
   }, [container, background]);
 
   const backgroundCssProperties: IressCSSProperties = {

@@ -16,6 +16,7 @@ interface FieldValues {
 export const HookFormExample = () => {
   const form = useForm<FieldValues>();
 
+  // eslint-disable-next-line react-hooks/incompatible-library -- Known limitation: react-hook-form's watch() API cannot be memoized by React Compiler
   const firstName = form.watch('firstName');
   const lastName = form.watch('lastName');
 

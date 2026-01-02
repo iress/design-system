@@ -21,7 +21,7 @@ import { toArray } from '@helpers/formatting/toArray';
 import { composeLabelValueDescriptor } from '@helpers/label-value/composeLabelValueDescriptor';
 import { type IressSelectTagsProps } from './SelectTags.types';
 import { getFormControlValueAsStringIfDefined } from '@helpers/form/getFormControlValueAsStringIfDefined';
-import { useCallback, useEffect, useState, useMemo } from 'react';
+import { useCallback, useState, useMemo } from 'react';
 import styles from './SelectTags.module.scss';
 import { usePopover } from '@/components/Popover/hooks/usePopover';
 import { focusableElements } from '@/helpers/dom/focusableElements';
@@ -105,13 +105,11 @@ const Tags = ({
     [onDeleteAll, popover],
   );
 
-  useEffect(() => {
-    if (!selectedArray.length) {
-      setExpanded(false);
-    }
-  }, [selectedArray]);
-
-  if (expanded || !limit || selectedArray.length <= limit)
+  if (
+    (expanded && selectedArray.length) ||
+    !limit ||
+    selectedArray.length <= limit
+  )
     return selectedArray.map((item) => (
       <IressTag
         className={styles.tag}

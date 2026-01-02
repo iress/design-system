@@ -90,12 +90,6 @@ export const ComponentLoading = ({
   }, [template]);
 
   useEffect(() => {
-    if (loaded === true) {
-      setShowSkeleton(false);
-    }
-  }, [loaded]);
-
-  useEffect(() => {
     const showTimeout = setTimeout(
       () => setShowSkeleton(true),
       timeout?.skeleton ?? 0,
@@ -111,8 +105,6 @@ export const ComponentLoading = ({
       return;
     }
 
-    setShowUpdate(false);
-
     const showTimeout = setTimeout(
       () => setShowUpdate(true),
       timeout?.update ?? 1000,
@@ -123,12 +115,6 @@ export const ComponentLoading = ({
     };
   }, [timeout?.update, update]);
 
-  useEffect(() => {
-    if (!update && showUpdate) {
-      setShowUpdate(false);
-    }
-  }, [update, showUpdate]);
-
   if (loaded !== true) {
     return (
       <div
@@ -137,7 +123,7 @@ export const ComponentLoading = ({
           className,
           loadingStyles['fade-in'],
           {
-            [loadingStyles['fade-in--active']]: showSkeleton,
+            [loadingStyles['fade-in--active']]: showSkeleton && !loaded,
           },
         )}
         {...restProps}
@@ -166,7 +152,7 @@ export const ComponentLoading = ({
       {update && (
         <IressText
           className={classNames(styles.message, loadingStyles['fade-in'], {
-            [loadingStyles['fade-in--active']]: showUpdate,
+            [loadingStyles['fade-in--active']]: showUpdate && !!update,
           })}
         >
           <IressSpinner className={styles.spinner} />{' '}

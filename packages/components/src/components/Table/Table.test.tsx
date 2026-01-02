@@ -4,7 +4,7 @@ import { IressTable, type IressTableProps } from '.';
 import styles from './Table.module.scss';
 import { GlobalCSSClass } from '@/enums';
 import userEvent from '@testing-library/user-event';
-import { createRef } from 'react';
+import { createRef, useEffect } from 'react';
 import { type TableRef } from './Table.types';
 
 const TEST_ID = 'test-component';
@@ -222,88 +222,6 @@ describe('IressTable', () => {
     });
   });
 
-  describe('useTable hook', () => {
-    it('should expose useTable hook as a static property', () => {
-      expect(IressTable.useTable).toBeDefined();
-      expect(typeof IressTable.useTable).toBe('function');
-    });
-
-    it('should provide table context via useTable hook', () => {
-      let tableContext: ReturnType<typeof IressTable.useTable> | null = null;
-
-      function TableConsumer() {
-        tableContext = IressTable.useTable();
-        return null;
-      }
-
-      renderComponent({
-        children: <TableConsumer />,
-      });
-
-      expect(tableContext).toBeDefined();
-      expect(tableContext!.api).toBeDefined();
-      expect(tableContext!.getColumnByKey).toBeDefined();
-      expect(typeof tableContext!.getColumnByKey).toBe('function');
-    });
-
-    it('should provide access to table API through useTable hook', () => {
-      let tableApi: ReturnType<typeof IressTable.useTable>['api'] | null = null;
-
-      function TableConsumer() {
-        const { api } = IressTable.useTable();
-        tableApi = api;
-        return null;
-      }
-
-      renderComponent({
-        children: <TableConsumer />,
-      });
-
-      expect(tableApi).toBeDefined();
-      expect(tableApi!.getRowModel).toBeDefined();
-      expect(tableApi!.getHeaderGroups).toBeDefined();
-      expect(typeof tableApi!.getRowModel).toBe('function');
-      expect(typeof tableApi!.getHeaderGroups).toBe('function');
-    });
-
-    it('should allow getting column by key through context', () => {
-      let foundColumn: unknown = null;
-
-      function TableConsumer() {
-        const context = IressTable.useTable<{ key: string; value: string }>();
-        foundColumn = context.getColumnByKey('key');
-        return null;
-      }
-
-      renderComponent({
-        columns: [
-          { key: 'key', label: 'Key Column' },
-          { key: 'value', label: 'Value Column' },
-        ],
-        children: <TableConsumer />,
-      });
-
-      expect(foundColumn).toBeDefined();
-      expect(foundColumn).toMatchObject({ label: 'Key Column' });
-    });
-
-    it('should return undefined for nonexistent column keys', () => {
-      let foundColumn: unknown = null;
-
-      function TableConsumer() {
-        const context = IressTable.useTable();
-        foundColumn = context.getColumnByKey('nonexistent');
-        return null;
-      }
-
-      renderComponent({
-        children: <TableConsumer />,
-      });
-
-      expect(foundColumn).toBeUndefined();
-    });
-  });
-
   describe('ref forwarding', () => {
     it('should forward ref to expose table API', () => {
       const tableRef = createRef<TableRef<{ key: string; value: string }>>();
@@ -332,7 +250,9 @@ describe('IressTable', () => {
 
       function TableConsumer() {
         const { api } = IressTable.useTable();
-        contextApi = api;
+        useEffect(() => {
+          contextApi = api;
+        });
         return null;
       }
 

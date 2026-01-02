@@ -82,9 +82,8 @@ const Chart = () => {
       return;
     }
 
-    setUpdating(() => true);
-
     const update = async () => {
+      setUpdating(() => true);
       const newChart = await API.chartUpdate();
       setChart(newChart);
       setUpdating(() => false);

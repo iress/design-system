@@ -66,7 +66,8 @@ export const IressToggle = forwardRef(
     };
 
     useEffect(() => {
-      setChecked(checkedProp);
+      const timeout = setTimeout(() => setChecked(checkedProp), 0);
+      return () => clearTimeout(timeout);
     }, [checkedProp, onChange]);
 
     return (

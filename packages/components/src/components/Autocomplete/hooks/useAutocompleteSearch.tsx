@@ -104,7 +104,9 @@ const useSearchOperations = (
     ) => {
       if (shouldSkipQuery(query)) return;
 
-      const requestId = ++requestIdCounter.current;
+      // eslint-disable-next-line react-hooks/immutability -- Safe: tracking request IDs with ref counter
+      requestIdCounter.current = requestIdCounter.current + 1;
+      const requestId = requestIdCounter.current;
       updateQueryTracking(query);
 
       if (query.length >= minSearchLength) {

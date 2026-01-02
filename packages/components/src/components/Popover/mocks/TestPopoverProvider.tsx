@@ -97,6 +97,7 @@ export const TestPopoverProvider = ({
 
   const context = useMemo(
     () =>
+      // eslint-disable-next-line react-hooks/refs -- Safe: ref passed to test mock context
       getMockPopoverContext({
         ...contextProps,
         list: contextProps.list ?? list,

@@ -127,14 +127,11 @@ export const IressLoadingSuspense = ({
   const resolved = useRef(false);
   const [loaded, setLoaded] = useState(false);
   const showFallback = IressLoading.shouldRender(loaded, delay, startFrom);
-  const [showChildren, setShowChildren] = useState(false);
+  const showChildren = loaded && !showFallback;
 
   useEffect(() => {
-    if (loaded && !showFallback) {
-      setShowChildren(true);
-      onLoaded?.();
-    }
-  }, [loaded, onLoaded, showFallback]);
+    onLoaded?.();
+  }, [showChildren, onLoaded]);
 
   // Called when suspense resolves
   const onResolved = () => {
