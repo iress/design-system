@@ -26,14 +26,12 @@ export interface IressToasterOptions {
 }
 
 export interface IressToasterProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    IressToasterOptions {
+  extends React.HTMLAttributes<HTMLDivElement>, IressToasterOptions {
   toasts?: ToastItem[];
 }
 
 export interface IressToasterProviderProps
-  extends PropsWithChildren,
-    IressToasterOptions {}
+  extends PropsWithChildren, IressToasterOptions {}
 
 /** @deprecated IressToaster.Position is now deprecated and will be removed in a future version. Please use the value directly. **/
 export enum ToasterPosition {

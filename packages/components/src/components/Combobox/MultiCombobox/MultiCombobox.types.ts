@@ -2,8 +2,10 @@ import { type InputBaseElement, type LabelValueMeta } from '@/main';
 import { type IressComboboxProps } from '../Combobox.types';
 import { type SyntheticEvent } from 'react';
 
-export interface IressMultiComboboxProps
-  extends Omit<IressComboboxProps, 'defaultValue' | 'onChange' | 'value'> {
+export interface IressMultiComboboxProps extends Omit<
+  IressComboboxProps,
+  'defaultValue' | 'onChange' | 'value'
+> {
   /**
    * Value of selected option for uncontrolled combobox.
    */

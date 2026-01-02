@@ -5,7 +5,8 @@ import { type ButtonGroupItemProps } from '../ButtonGroup';
 import { type Breakpoints, type FormControlValue } from '@/types';
 
 export interface IressButtonProps
-  extends Omit<IressButtonHTMLAttributes<ButtonRef>, 'value'>,
+  extends
+    Omit<IressButtonHTMLAttributes<ButtonRef>, 'value'>,
     ButtonGroupItemProps {
   /**
    * Content for the append slot.
@@ -125,10 +126,9 @@ export enum ButtonCssClass {
 
 export type ButtonRef = HTMLAnchorElement | HTMLButtonElement;
 
-export interface ButtonComponent
-  extends React.ForwardRefExoticComponent<
-    IressButtonProps & React.RefAttributes<ButtonRef>
-  > {
+export interface ButtonComponent extends React.ForwardRefExoticComponent<
+  IressButtonProps & React.RefAttributes<ButtonRef>
+> {
   /** @deprecated IressButton.Mode enum is now deprecated and will be removed in a future version. Please use the value directly instead. **/
   Mode: typeof ButtonMode;
 

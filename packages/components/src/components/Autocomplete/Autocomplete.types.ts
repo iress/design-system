@@ -11,7 +11,8 @@ import {
 import { type ReactNode, type SyntheticEvent } from 'react';
 
 export interface IressAutocompleteProps<T extends FormControlValue = string>
-  extends Omit<IressInputProps<T>, 'children' | 'onChange'>,
+  extends
+    Omit<IressInputProps<T>, 'children' | 'onChange'>,
     Omit<AutocompleteSearchHookProps, 'query'>,
     Pick<IressSelectMenuProps, 'limitMobile' | 'limitDesktop'> {
   /**
@@ -157,23 +158,24 @@ export interface AutocompleteSearchHookReturn {
   displayResults: FormattedLabelValueMeta[];
 }
 
-export interface AutocompletePopoverProps
-  extends Pick<
-    IressInputPopoverProps,
-    | 'autoHighlight'
-    | 'align'
-    | 'className'
-    | 'container'
-    | 'contentClassName'
-    | 'displayMode'
-    | 'style'
-  > {
+export interface AutocompletePopoverProps extends Pick<
+  IressInputPopoverProps,
+  | 'autoHighlight'
+  | 'align'
+  | 'className'
+  | 'container'
+  | 'contentClassName'
+  | 'displayMode'
+  | 'style'
+> {
   append?: ReactNode;
   prepend?: ReactNode;
 }
 
-export interface AutocompleteNoResultsProps
-  extends Pick<IressAutocompleteProps, 'noResultsText'> {
+export interface AutocompleteNoResultsProps extends Pick<
+  IressAutocompleteProps,
+  'noResultsText'
+> {
   /**
    * Pass a CSS module object to override styles.
    */

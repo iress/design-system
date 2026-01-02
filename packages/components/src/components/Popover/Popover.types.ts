@@ -169,8 +169,7 @@ export interface PopoverNavigationHookReturn {
 }
 
 export interface PopoverProviderProps
-  extends PropsWithChildren,
-    PopoverStateHookProps {
+  extends PropsWithChildren, PopoverStateHookProps {
   align: FloatingUIAligns;
   autoHighlight?: boolean;
   disabledAutoToggle?: boolean;
@@ -192,8 +191,7 @@ export interface PopoverProviderProps
 }
 
 export interface PopoverContextValue
-  extends PopoverStateHookReturn,
-    PopoverAriaHookReturn {
+  extends PopoverStateHookReturn, PopoverAriaHookReturn {
   activeIndex: number | null;
   api: UseFloatingReturn;
   disabledAutoToggle?: boolean;
@@ -213,7 +211,8 @@ export interface PopoverContextValue
 }
 
 export interface PopoverRef
-  extends Pick<PopoverContextValue, 'setShow' | 'show'>,
+  extends
+    Pick<PopoverContextValue, 'setShow' | 'show'>,
     Pick<PopoverAriaHookReturn, 'toggleAriaControls'> {
   getActivator: () => HTMLElement | null;
   getFocusableActivator?: () => HTMLElement | undefined;
@@ -251,10 +250,9 @@ export enum PopoverCssClass {
   Active = 'iress--popover-active',
 }
 
-export interface PopoverWithEnums
-  extends React.ForwardRefExoticComponent<
-    IressPopoverProps & React.RefAttributes<PopoverRef>
-  > {
+export interface PopoverWithEnums extends React.ForwardRefExoticComponent<
+  IressPopoverProps & React.RefAttributes<PopoverRef>
+> {
   /** @deprecated IressPopover.Align is now deprecated and will be removed in a future version. Please use the value directly instead. **/
   Align: typeof FloatingUIAlign;
 

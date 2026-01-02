@@ -107,10 +107,9 @@ export enum IconSpin {
 export const ICON_SPINS = ['half', '1', '2', '3'] as const;
 export type IconSpins = (typeof ICON_SPINS)[number];
 
-export interface IconWithEnums
-  extends React.ForwardRefExoticComponent<
-    IressIconProps & React.RefAttributes<HTMLElement>
-  > {
+export interface IconWithEnums extends React.ForwardRefExoticComponent<
+  IressIconProps & React.RefAttributes<HTMLElement>
+> {
   /** @deprecated IressIcon.Set is now deprecated and will be removed in a future version. Please use the value directly instead. */
   Set: typeof IconSet;
 

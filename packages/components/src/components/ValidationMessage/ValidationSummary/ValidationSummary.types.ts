@@ -6,8 +6,10 @@ import {
 import { type SystemValidationStatus } from '@/enums';
 import { type SystemValidationStatuses } from '@/main';
 
-export interface IressValidationSummaryProps
-  extends Omit<IressHTMLAttributes<HTMLUListElement>, 'prefix'> {
+export interface IressValidationSummaryProps extends Omit<
+  IressHTMLAttributes<HTMLUListElement>,
+  'prefix'
+> {
   /**
    * ValidationMessage Array containing the `id` of the field and the validation message
    **/

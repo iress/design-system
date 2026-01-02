@@ -1,7 +1,6 @@
 import { type IressHTMLAttributes } from '@/interfaces';
 
-export interface IressProgressProps
-  extends IressHTMLAttributes<HTMLDivElement> {
+export interface IressProgressProps extends IressHTMLAttributes<HTMLDivElement> {
   /**
    * The maximum value of the progress indicator.
    * @default 100

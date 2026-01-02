@@ -91,10 +91,8 @@ export interface StartUpLoadingProps extends IressHTMLAttributes {
 }
 
 interface MessageProps
-  extends Pick<
-      StartUpLoadingProps,
-      'children' | 'messageList' | 'screenReaderText'
-    >,
+  extends
+    Pick<StartUpLoadingProps, 'children' | 'messageList' | 'screenReaderText'>,
     IressTextProps {
   progressValue: number;
   show: boolean;

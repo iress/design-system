@@ -1,7 +1,9 @@
 import { type IressInputProps } from '@/main';
 
-export interface IressSelectSearchInputProps
-  extends Omit<IressInputProps, 'rows' | 'width'> {
+export interface IressSelectSearchInputProps extends Omit<
+  IressInputProps,
+  'rows' | 'width'
+> {
   /**
    * Content to place inside the input when it has no value.
    * @default Search

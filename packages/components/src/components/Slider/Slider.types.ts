@@ -1,11 +1,10 @@
 import { type ReactNode } from 'react';
 import { type IressHTMLAttributes, type ResponsiveSizing } from '@/interfaces';
 
-export interface IressSliderProps
-  extends Omit<
-    IressHTMLAttributes<HTMLInputElement>,
-    'children' | 'onInput' | 'onChange'
-  > {
+export interface IressSliderProps extends Omit<
+  IressHTMLAttributes<HTMLInputElement>,
+  'children' | 'onInput' | 'onChange'
+> {
   /**
    * Initial value of the slider. Used for uncontrolled sliders.
    */
@@ -69,8 +68,7 @@ export interface IressSliderProps
   value?: number;
 }
 
-export interface SliderTicksProps
-  extends IressHTMLAttributes<HTMLDataListElement> {
+export interface SliderTicksProps extends IressHTMLAttributes<HTMLDataListElement> {
   /**
    * Set the maximum value for the slider.
    * @default 10
@@ -89,8 +87,10 @@ export interface SliderTicksProps
   tickLabels?: SliderTickLabelValue[];
 }
 
-export interface SliderReadonlyProps
-  extends Omit<IressHTMLAttributes<HTMLInputElement>, 'value'> {
+export interface SliderReadonlyProps extends Omit<
+  IressHTMLAttributes<HTMLInputElement>,
+  'value'
+> {
   /**
    * The label of the value.
    */

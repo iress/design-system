@@ -3,8 +3,10 @@ import type React from 'react';
 import { type IressHTMLAttributes } from '@/interfaces';
 import { type FormControlValue } from '@/types';
 
-export interface IressTabSetProps
-  extends Omit<IressHTMLAttributes, 'onChange'> {
+export interface IressTabSetProps extends Omit<
+  IressHTMLAttributes,
+  'onChange'
+> {
   /**
    * Content to be displayed inside the IressTabs, usually multiple `IressTab`.
    */
@@ -68,8 +70,7 @@ export interface TabSetItemProps extends IressHTMLAttributes {
   value?: FormControlValue;
 }
 
-export interface TabSetItemRenderProps
-  extends React.HTMLAttributes<HTMLElement> {
+export interface TabSetItemRenderProps extends React.HTMLAttributes<HTMLElement> {
   ref?: (instance: HTMLElement | null) => void;
 }
 

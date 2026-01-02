@@ -1,7 +1,6 @@
 import { type IressHTMLAttributes } from '@/interfaces';
 
-export interface IressContainerProps
-  extends IressHTMLAttributes<HTMLDivElement> {
+export interface IressContainerProps extends IressHTMLAttributes<HTMLDivElement> {
   /**
    * Any content you would like to be contained. Best used with `IressRow` and `IressCol`.
    */

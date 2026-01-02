@@ -35,7 +35,9 @@ export type CustomRules<T extends FieldValues = FieldValues> =
 export interface IressFormFieldProps<
   T extends FieldValues = FieldValues,
   TName extends FieldPath<T> = FieldPath<T>,
-> extends Omit<IressFieldProps, OmittedFieldProps>,
+>
+  extends
+    Omit<IressFieldProps, OmittedFieldProps>,
     Omit<UseControllerProps<T, FieldPath<T>>, 'disabled' | 'shouldUnregister'> {
   /**
    * React Hook Form control object. It is used to register the field with the form.
@@ -93,7 +95,9 @@ export interface IressFormFieldProps<
 export interface IressFormFieldsetProps<
   T extends FieldValues = FieldValues,
   TName extends FieldPath<T> = FieldPath<T>,
-> extends Omit<IressFieldGroupProps, OmittedFieldProps>,
+>
+  extends
+    Omit<IressFieldGroupProps, OmittedFieldProps>,
     Omit<UseControllerProps<T, FieldPath<T>>, 'disabled'> {
   /**
    * React Hook Form control object. It is used to register the field with the form.
@@ -133,8 +137,9 @@ export interface IressFormFieldsetProps<
   shouldUnregister?: boolean;
 }
 
-export interface FormFieldRenderProps<T extends FieldValues>
-  extends ControllerRenderProps<T, FieldPath<T>> {
+export interface FormFieldRenderProps<
+  T extends FieldValues,
+> extends ControllerRenderProps<T, FieldPath<T>> {
   /**
    * ID of the field. It is automatically generated based on the name of the field and its parent form.
    */

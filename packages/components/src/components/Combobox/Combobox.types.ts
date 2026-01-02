@@ -19,8 +19,10 @@ import {
   type InputRef,
 } from '../Input/InputBase/InputBase.types';
 
-export interface IressComboboxProps
-  extends Omit<IressAutocompleteProps, 'defaultValue' | 'onChange' | 'value'> {
+export interface IressComboboxProps extends Omit<
+  IressAutocompleteProps,
+  'defaultValue' | 'onChange' | 'value'
+> {
   /**
    * Value of selected option for uncontrolled combobox.
    */
@@ -54,8 +56,7 @@ export interface IressComboboxProps
 }
 
 export interface ComboboxResultsProps
-  extends IressSelectMenuProps,
-    Pick<IressComboboxProps, 'noResultsText'> {
+  extends IressSelectMenuProps, Pick<IressComboboxProps, 'noResultsText'> {
   append: ReactNode;
   prepend: ReactNode;
   dataTestId?: string;
@@ -64,19 +65,22 @@ export interface ComboboxResultsProps
 }
 
 export interface ComboboxHiddenInputProps
-  extends IressInputHTMLAttributes,
+  extends
+    IressInputHTMLAttributes,
     Pick<IressComboboxProps, 'hiddenInputProps'> {
   dataTestId?: string;
 }
 
 export interface ComboboxResultsDescriptorProps
-  extends Pick<IressComboboxProps, 'noResultsText' | 'value'>,
+  extends
+    Pick<IressComboboxProps, 'noResultsText' | 'value'>,
     Partial<Pick<AutocompleteSearchHookReturn, 'loading' | 'results'>>,
     Pick<IressPopoverProps, 'show'>,
     Omit<IressHTMLAttributes, 'children' | 'className' | 'results'> {}
 
 export interface ComboboxInlineCompletionHookProps
-  extends Pick<AutocompleteSearchHookReturn, 'debouncedQuery' | 'results'>,
+  extends
+    Pick<AutocompleteSearchHookReturn, 'debouncedQuery' | 'results'>,
     Pick<IressComboboxProps, 'autoSelect' | 'debounceThreshold' | 'onChange'> {
   queryRef: MutableRefObject<InputRef | null>;
   setTypedQuery: (query: string) => void;
@@ -88,10 +92,9 @@ export interface ComboboxInlineCompletionHookReturn {
   setKeyPressed: (e?: KeyboardEvent) => void;
 }
 
-export interface ComboboxWithEnums
-  extends React.ForwardRefExoticComponent<
-    IressComboboxProps & React.RefAttributes<HTMLInputElement>
-  > {
+export interface ComboboxWithEnums extends React.ForwardRefExoticComponent<
+  IressComboboxProps & React.RefAttributes<HTMLInputElement>
+> {
   /** @deprecated IressCombobox.DisplayMode enum is now deprecated and will be removed in a future version. Please use the value directly instead. */
   DisplayMode: typeof DisplayMode;
 

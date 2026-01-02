@@ -2,8 +2,10 @@ import { type IressHTMLAttributes } from '@/interfaces';
 import { type FormControlValue } from '@/types';
 import { type PropsWithChildren } from 'react';
 
-export interface IressMenuProps
-  extends Omit<IressHTMLAttributes, 'defaultValue' | 'onChange' | 'value'> {
+export interface IressMenuProps extends Omit<
+  IressHTMLAttributes,
+  'defaultValue' | 'onChange' | 'value'
+> {
   /**
    * If set to true, change event will be fired with the correctly selected value.
    */

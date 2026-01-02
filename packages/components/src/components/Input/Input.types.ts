@@ -5,8 +5,9 @@ import {
   type InputBaseProps,
 } from './InputBase/InputBase.types';
 
-export interface IressInputProps<T extends FormControlValue = string | number>
-  extends Omit<InputBaseProps, 'defaultValue' | 'onChange' | 'value'> {
+export interface IressInputProps<
+  T extends FormControlValue = string | number,
+> extends Omit<InputBaseProps, 'defaultValue' | 'onChange' | 'value'> {
   /**
    * Content to append to the input field, usually a button or icon.
    **/

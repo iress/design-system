@@ -9,7 +9,8 @@ import {
 import { type ReactNode } from 'react';
 
 export interface IressFilterProps
-  extends Omit<IressHTMLAttributes, 'defaultValue' | 'onChange'>,
+  extends
+    Omit<IressHTMLAttributes, 'defaultValue' | 'onChange'>,
     Omit<AutocompleteSearchHookProps, 'query'>,
     Pick<IressSelectMenuProps, 'limitMobile' | 'limitDesktop'> {
   /**
@@ -81,7 +82,8 @@ export interface IressFilterProps
 }
 
 export interface FilterResultsDescriptorProps
-  extends Pick<IressFilterProps, 'searchNoResultsText'>,
+  extends
+    Pick<IressFilterProps, 'searchNoResultsText'>,
     Pick<AutocompleteSearchHookReturn, 'loading' | 'results'>,
     Omit<IressHTMLAttributes, 'children' | 'className' | 'results'> {}
 
@@ -91,11 +93,10 @@ export interface FilterRef {
   reset: () => void;
 }
 
-export interface FilterPopoverProps
-  extends Pick<
-    IressPopoverProps,
-    'align' | 'className' | 'container' | 'displayMode'
-  > {
+export interface FilterPopoverProps extends Pick<
+  IressPopoverProps,
+  'align' | 'className' | 'container' | 'displayMode'
+> {
   append?: ReactNode;
   prepend?: ReactNode;
 }

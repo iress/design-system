@@ -11,7 +11,8 @@ import { IressIcon } from '@/components/Icon';
 import { IressHide } from '@/components/Hide';
 
 interface SelectActivatorProps
-  extends Pick<
+  extends
+    Pick<
       IressRichSelectProps,
       | 'id'
       | 'multiSelect'

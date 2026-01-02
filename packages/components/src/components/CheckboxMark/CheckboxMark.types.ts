@@ -4,8 +4,7 @@ import styles from './CheckboxMark.module.scss';
 Object.assign(variables, styles);
 export const IressCheckboxStyles = styles;
 
-export interface IressCheckboxMarkProps
-  extends React.HTMLAttributes<HTMLOrSVGElement> {
+export interface IressCheckboxMarkProps extends React.HTMLAttributes<HTMLOrSVGElement> {
   /**
    * Checked status of the checkbox mark
    */

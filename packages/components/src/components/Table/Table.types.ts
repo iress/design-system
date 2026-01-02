@@ -76,7 +76,8 @@ export interface IressTableCommonProps<
 }
 
 export interface IressTableProps<TRow extends object = never, TVal = never>
-  extends IressHTMLAttributes<HTMLTableElement>,
+  extends
+    IressHTMLAttributes<HTMLTableElement>,
     IressTableCommonProps<TRow, TVal> {
   /**
    * Compact view of the table, used for tables with a lot of data.
@@ -161,8 +162,10 @@ export type TableColumnNoKey<TRow extends object, TVal = unknown> = Omit<
   'key'
 >;
 
-export interface IressTableProviderProps<TRow extends object, TVal = unknown>
-  extends PropsWithChildren {
+export interface IressTableProviderProps<
+  TRow extends object,
+  TVal = unknown,
+> extends PropsWithChildren {
   columns?: IressTableProps<TRow, TVal>['columns'];
   rows: TRow[];
 }
@@ -172,8 +175,9 @@ export interface TableContextValue<TRow extends object, TVal = unknown> {
   getColumnByKey: (key: string) => TableColumnNoKey<TRow, TVal> | undefined;
 }
 
-export interface TableHeaderProps
-  extends Partial<Pick<AriaRelationshipProps, 'setControlViaRef'>> {
+export interface TableHeaderProps extends Partial<
+  Pick<AriaRelationshipProps, 'setControlViaRef'>
+> {
   additionalHeaders?: string;
   className?: string;
   tableId: string;
@@ -181,8 +185,7 @@ export interface TableHeaderProps
 }
 
 export interface TableHeaderCellProps
-  extends PropsWithChildren,
-    WithDataAttributes {
+  extends PropsWithChildren, WithDataAttributes {
   additionalHeaders?: string;
   columnApi: Pick<
     Column<object, unknown>,
@@ -191,8 +194,9 @@ export interface TableHeaderCellProps
   tableId: string;
 }
 
-export interface TableRowsProps<TRow extends object = never>
-  extends Partial<Pick<AriaRelationshipProps, 'setControlViaRef'>> {
+export interface TableRowsProps<TRow extends object = never> extends Partial<
+  Pick<AriaRelationshipProps, 'setControlViaRef'>
+> {
   additionalHeaders?: string;
   hiddenHeader?: boolean;
   scope?: TableScopes;
@@ -202,8 +206,7 @@ export interface TableRowsProps<TRow extends object = never>
 }
 
 export interface TableBodyCellProps<TRow extends object = never>
-  extends PropsWithChildren,
-    WithDataAttributes {
+  extends PropsWithChildren, WithDataAttributes {
   additionalHeaders?: string;
   cellApi: Pick<Cell<TRow, unknown>, 'column' | 'row' | 'id'>;
   hiddenHeader?: boolean;

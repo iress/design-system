@@ -2,11 +2,10 @@ import { type SyntheticEvent } from 'react';
 import { type TagListInputProps } from '../components/TagListInput/TagListInput.types';
 import { type InputBaseElement } from '@/components/Input';
 
-export interface IressTagInputProps
-  extends Omit<
-    TagListInputProps,
-    'defaultValue' | 'deleteButton' | 'onChange' | 'styles' | 'tags' | 'value'
-  > {
+export interface IressTagInputProps extends Omit<
+  TagListInputProps,
+  'defaultValue' | 'deleteButton' | 'onChange' | 'styles' | 'tags' | 'value'
+> {
   /**
    * Tags to display (uncontrolled)
    */

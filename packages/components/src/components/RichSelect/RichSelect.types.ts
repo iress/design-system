@@ -17,7 +17,8 @@ import {
 } from 'react';
 
 export interface IressRichSelectProps
-  extends Omit<AutocompleteSearchHookProps, 'query'>,
+  extends
+    Omit<AutocompleteSearchHookProps, 'query'>,
     Omit<
       IressPopoverProps,
       | 'activator'
@@ -266,7 +267,6 @@ export interface SelectOptionsRenderProps extends SelectLabelRenderProps {
 }
 
 export interface RichSelectRef
-  extends Partial<PopoverRef>,
-    Partial<FocusableElementRef> {
+  extends Partial<PopoverRef>, Partial<FocusableElementRef> {
   hiddenInput?: HTMLInputElement;
 }
