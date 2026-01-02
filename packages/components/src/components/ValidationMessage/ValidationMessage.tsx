@@ -5,7 +5,6 @@ import { cx } from '@/styled-system/css';
 import { IressText, type IressTextProps } from '../Text';
 import { styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
-import { isValidFormInputElement } from '@/helpers/form/isValidFormInputElement';
 
 type ValidationElement<TLinkToTarget extends string | undefined = undefined> =
   TLinkToTarget extends string ? 'a' : 'div';
@@ -60,7 +59,15 @@ const ValidationPrefix = ({
     status === 'danger' ? 'Error' : capitalizeFirstLetter(status);
   return `${statusPrefix}: `;
 };
-ValidationPrefix.displayName = 'ValidationPrefix';
+
+const isValidFormInputElement = (ele: HTMLElement): boolean =>
+  (ele.tagName === 'SELECT' && !(ele as HTMLSelectElement).disabled) ||
+  (!!(ele as HTMLInputElement).name &&
+    !(ele as HTMLInputElement).disabled &&
+    (ele as HTMLInputElement).type !== 'file' &&
+    (ele as HTMLInputElement).type !== 'reset' &&
+    (ele as HTMLInputElement).type !== 'submit' &&
+    (ele as HTMLInputElement).type !== 'button');
 
 export const IressValidationMessage = <
   TLinkToTarget extends string | undefined = undefined,

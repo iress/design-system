@@ -1,4 +1,6 @@
-import { hasShadowDom } from '@helpers/dom/hasShadowDom';
+const hasShadowDom = (el: HTMLElement) => {
+  return !!el && !!el.shadowRoot && !!el.attachShadow;
+};
 
 export const getActiveElement = () => {
   const activeEle = document.activeElement as HTMLElement;
