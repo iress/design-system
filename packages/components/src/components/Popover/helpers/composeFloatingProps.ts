@@ -2,7 +2,7 @@ import { getActiveElement } from '@helpers/dom/getActiveElement';
 import { type KeyboardEvent, type CSSProperties } from 'react';
 import { handlePopoverTabKey } from './handlePopoverTabKey';
 import { type DisplayModes, type IressUnstyledProps } from '@/types';
-import { type PopoverHookReturn } from '../hooks/usePopover';
+import { type FloatingPopoverHookReturn } from '../hooks/useFloatingPopover';
 
 /**
  * This adds additional props to the Floating UI floatingProps to better suit the requirements of IressPopover.
@@ -10,14 +10,14 @@ import { type PopoverHookReturn } from '../hooks/usePopover';
  *
  * See: https://floating-ui.com/docs/useFloating#floatingstyles
  *
- * @param {PopoverHookReturn} popover the popover context
+ * @param {FloatingPopoverHookReturn} popover the popover context
  * @param {DisplayModes} displayMode how the content is to be displayed, whether inline (static, underneath activator) or overlay (floating, anchored to the activator)
  * @param {CSSProperties} style any custom styles for the popover, it will be appended to the Floating UI styles
  * @param {string} customId optional custom ID to override the floating ID - used to prevent ID conflicts
  * @returns {IressUnstyledProps} the props to be passed to the floating content
  */
 export const composePopoverFloatingProps = (
-  popover: PopoverHookReturn,
+  popover: FloatingPopoverHookReturn,
   displayMode?: DisplayModes,
   style?: CSSProperties,
   customId?: string,
@@ -81,7 +81,10 @@ export const composePopoverFloatingProps = (
 };
 
 // This closes the popover when the first item in the listbox is focused and the up arrow key is pressed
-const handleArrowUpKey = (popover: PopoverHookReturn, e: KeyboardEvent) => {
+const handleArrowUpKey = (
+  popover: FloatingPopoverHookReturn,
+  e: KeyboardEvent,
+) => {
   if (
     popover.type !== 'listbox' ||
     e.key !== 'ArrowUp' ||

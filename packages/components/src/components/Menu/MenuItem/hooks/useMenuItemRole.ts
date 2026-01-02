@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import { MenuContext } from '../../Menu';
-import { PopoverContext } from '@/components/Popover/hooks/usePopover';
+import { usePopover } from '@/components/Popover';
 
 /**
  * Calculate the role of the menu item. It will change depending on its context (if its inside a menu or popover, and based on their role/type).
  */
 export const useMenuItemRole = () => {
   const menu = useContext(MenuContext);
-  const popover = useContext(PopoverContext);
+  const popover = usePopover();
   const role = menu?.role ?? popover?.type;
 
   if (role === 'listbox') return 'option';

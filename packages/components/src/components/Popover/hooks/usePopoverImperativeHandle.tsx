@@ -1,8 +1,8 @@
 import { type ForwardedRef, useImperativeHandle } from 'react';
-import { type PopoverHookReturn } from './usePopover';
+import { type FloatingPopoverHookReturn } from './useFloatingPopover';
 
 export interface PopoverRef extends Pick<
-  PopoverHookReturn,
+  FloatingPopoverHookReturn,
   'setShow' | 'show' | 'toggleAriaControls'
 > {
   getActivator: () => HTMLElement | null;
@@ -12,7 +12,7 @@ export interface PopoverRef extends Pick<
 
 export const usePopoverImperativeHandle = (
   ref: ForwardedRef<PopoverRef>,
-  context: PopoverHookReturn,
+  context: FloatingPopoverHookReturn,
 ) => {
   useImperativeHandle(
     ref,

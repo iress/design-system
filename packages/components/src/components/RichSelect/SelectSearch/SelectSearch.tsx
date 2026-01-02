@@ -1,11 +1,10 @@
 import { cx } from '@/styled-system/css';
 import { selectSearch } from './SelectSearch.styles';
 import { handlePopoverTabKey } from '@/components/Popover/helpers/handlePopoverTabKey';
-import { useContext } from 'react';
-import { PopoverContext } from '@/components/Popover/hooks/usePopover';
 import { GlobalCSSClass } from '@/enums';
 import {
   IressInputPopover,
+  usePopover,
   type IressInputPopoverProps,
 } from '@/components/Popover';
 
@@ -21,7 +20,7 @@ export const IressSelectSearch = ({
   onKeyDown,
   ...restProps
 }: IressSelectSearchProps) => {
-  const parentPopover = useContext(PopoverContext);
+  const parentPopover = usePopover();
   const searchClasses = selectSearch();
 
   return (

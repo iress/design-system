@@ -4,7 +4,6 @@ import {
   type HTMLAttributes,
   type ReactNode,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
 } from 'react';
@@ -19,8 +18,8 @@ import { styled } from '@/styled-system/jsx';
 import { toArray } from '@/helpers/formatting/toArray';
 import { menu } from './Menu.styles';
 import { cx } from '@/styled-system/css';
-import { PopoverContext } from '../Popover/hooks/usePopover';
 import { GlobalCSSClass } from '@/enums';
+import { usePopover } from '../Popover';
 
 export interface IressMenuProps<
   T = FormControlValue,
@@ -189,7 +188,7 @@ export const IressMenu = <
   ...restProps
 }: IressMenuProps<T, TMultiple>) => {
   const id = useIdIfNeeded({ id: idProp });
-  const popover = useContext(PopoverContext);
+  const popover = usePopover();
 
   const role = useMemo(() => {
     if (popover?.type === 'listbox' || popover?.type === 'menu') {

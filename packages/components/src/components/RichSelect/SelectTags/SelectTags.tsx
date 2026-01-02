@@ -2,18 +2,9 @@ import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { toArray } from '@helpers/formatting/toArray';
 import { composeLabelValueDescriptor } from '@helpers/label-value/composeLabelValueDescriptor';
 import { getFormControlValueAsStringIfDefined } from '@helpers/form/getFormControlValueAsStringIfDefined';
-import {
-  useCallback,
-  useState,
-  useMemo,
-  useContext,
-  type ReactNode,
-} from 'react';
+import { useCallback, useState, useMemo, type ReactNode } from 'react';
 import { focusableElements } from '@/helpers/dom/focusableElements';
-import {
-  PopoverContext,
-  type PopoverHookReturn,
-} from '@/components/Popover/hooks/usePopover';
+import { type FloatingPopoverHookReturn } from '@/components/Popover/hooks/useFloatingPopover';
 import { IressText, type IressTextProps } from '@/components/Text';
 import { type IressSelectActivatorProps } from '../components/SelectActivator';
 import { cx } from '@/styled-system/css';
@@ -25,7 +16,7 @@ import {
   IressMenuItem,
   type IressMenuItemProps,
 } from '@/components/Menu';
-import { IressPopover } from '@/components/Popover';
+import { IressPopover, usePopover } from '@/components/Popover';
 import { IressButton } from '@/components/Button';
 import { IressIcon } from '@/components/Icon';
 import { GlobalCSSClass } from '@/enums';
@@ -71,7 +62,7 @@ export interface IressSelectTagsProps
 }
 
 const adjustFocusOnTagDelete = (
-  popover?: PopoverHookReturn,
+  popover?: FloatingPopoverHookReturn,
   e?: React.SyntheticEvent<HTMLButtonElement | HTMLDivElement>,
 ) => {
   if (!popover?.api.elements.reference || !e) {
@@ -126,7 +117,7 @@ const Tags = ({
   selectedArray: LabelValueMeta[];
 }) => {
   const [expanded, setExpanded] = useState(false);
-  const popover = useContext(PopoverContext);
+  const popover = usePopover();
   const classes = selectTags();
 
   const onTagDelete: IressTagProps['onDelete'] = useCallback(
@@ -150,7 +141,11 @@ const Tags = ({
     [onDeleteAll, popover],
   );
 
-  if (expanded || !limit || selectedArray.length <= limit)
+  if (
+    (expanded && selectedArray.length) ||
+    !limit ||
+    selectedArray.length <= limit
+  )
     return selectedArray.map((item) => (
       <IressTag
         className={classes.tag}

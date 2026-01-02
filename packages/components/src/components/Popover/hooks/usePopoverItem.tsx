@@ -6,7 +6,7 @@ import {
   useId,
   useMemo,
 } from 'react';
-import { PopoverContext } from './usePopover';
+import { FloatingPopoverContext } from './useFloatingPopover';
 
 export interface PopoverItemHookReturn {
   /**
@@ -48,13 +48,13 @@ export interface PopoverVirtualNode<T extends HTMLElement = HTMLElement> {
  *
  * @param {string} typeAheadLabel the label to be used when the user is typing to navigate the activator (currently unused in IDS)
  * @param {PopoverVirtualNode | null} virtualNode the virtual node to use when the item is focused. This contains some interactions to emulate keydown and blur on the popover item.
- * @returns {IressHTMLAttributes} the props to be passed to the floating content
+ * @returns {PopoverItemHookReturn} the props to be passed to the floating content
  */
 export const usePopoverItem = <T extends HTMLElement = HTMLElement>(
   typeAheadLabel?: string,
   virtualNode: PopoverVirtualNode<T> | null = null,
 ): PopoverItemHookReturn => {
-  const popover = useContext(PopoverContext);
+  const popover = useContext(FloatingPopoverContext);
   const { ref, index } = useListItem({ label: typeAheadLabel });
   const id = useId();
 
