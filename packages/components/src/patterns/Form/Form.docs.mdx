@@ -174,6 +174,30 @@ Here are some examples of how to use `IressFormField` with different form contro
   }}
 />
 
+### Supplementary content
+
+The `renderSupplementary` prop allows you to render additional content alongside the field that has access to the field props and state. This is useful for displaying dynamic information such as character counters, password strength meters, or custom help text that responds to user input.
+
+The render function receives two arguments:
+
+1. `field`: An object containing the field props (id, name, value, onChange, onBlur, ref)
+2. `state`: An object containing the field state (fieldState, formState)
+
+Common use cases include:
+
+- **Character counters**: Display the current character count and maximum allowed
+- **Password strength indicators**: Show password strength based on the current value
+- **Dynamic hints**: Provide contextual help based on the field value
+- **Custom validation feedback**: Display real-time validation feedback separate from error messages
+
+<ComponentExample
+  of={FormFieldStories.RenderSupplementary}
+  story={{
+    inline: false,
+    height: '300px',
+  }}
+/>
+
 ### Rules
 
 Use the `rules` prop on the `IressFormField` component to add validation rules. These are based on the [rules available in React Hook Forms](https://www.react-hook-form.com/api/useform/register/#options). The following rules are supported.

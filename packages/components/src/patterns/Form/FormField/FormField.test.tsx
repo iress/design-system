@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { IressFormField } from './FormField';
+import { IressFormField, IressFormFieldProps } from './FormField';
 import {
   IressButton,
   IressCheckbox,
@@ -142,6 +142,194 @@ describe('IressFormField', () => {
     expect(
       screen.queryByText('Label: This field is required'),
     ).not.toBeInTheDocument();
+  });
+
+  it('does not apply validation rules when readOnly is true', async () => {
+    const onSubmit = vi.fn();
+    const onError = vi.fn();
+
+    render(
+      <IressForm id="iress-form" onSubmit={onSubmit} onError={onError}>
+        <IressFormField
+          label="Label"
+          name="name"
+          readOnly
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          rules={{
+            required: 'This field is required',
+            minLength: { value: 5, message: 'Minimum 5 characters' },
+          }}
+        />
+        <IressButton type="submit">Submit</IressButton>
+      </IressForm>,
+    );
+
+    const submit = screen.getByRole('button', { name: 'Submit' });
+    await userEvent.click(submit);
+
+    // Should submit without errors since readOnly bypasses validation
+    expect(onSubmit).toHaveBeenCalledWith({ name: undefined });
+    expect(onError).not.toHaveBeenCalled();
+  });
+
+  it('renders supplementary content via renderSupplementary prop', async () => {
+    render(
+      <IressForm id="iress-form">
+        <IressFormField
+          label="Label"
+          name="name"
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          renderSupplementary={() => (
+            <div data-testid="supplementary-content">Character count: 0</div>
+          )}
+        />
+      </IressForm>,
+    );
+
+    const supplementary = await screen.findByTestId('supplementary-content');
+    expect(supplementary).toBeInTheDocument();
+    expect(supplementary).toHaveTextContent('Character count: 0');
+  });
+
+  it('provides field props and state to renderSupplementary', async () => {
+    const renderSupplementary = vi.fn(() => (
+      <div data-testid="supplementary">Supplementary</div>
+    ));
+
+    render(
+      <IressForm id="iress-form">
+        <IressFormField
+          label="Label"
+          name="name"
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          renderSupplementary={renderSupplementary}
+        />
+      </IressForm>,
+    );
+
+    await screen.findByTestId('supplementary');
+
+    expect(renderSupplementary).toHaveBeenCalledWith(
+      expect.objectContaining({
+        id: 'iress-form__name',
+        name: 'name',
+        value: undefined,
+        onChange: expect.any(Function) as never,
+        onBlur: expect.any(Function) as never,
+      }),
+      expect.objectContaining({
+        fieldState: expect.objectContaining({
+          isDirty: false,
+          isTouched: false,
+          invalid: false,
+        }) as never,
+        formState: expect.objectContaining({
+          defaultValues: expect.anything() as never,
+        }) as never,
+      }),
+    );
+  });
+
+  it('updates renderSupplementary when field value changes', async () => {
+    const renderSupplementary = vi.fn<
+      Exclude<
+        IressFormFieldProps<{
+          name: string;
+        }>['renderSupplementary'],
+        undefined
+      >
+    >((field) => (
+      <div data-testid="char-count">Characters: {field.value?.length ?? 0}</div>
+    ));
+
+    render(
+      <IressForm id="iress-form">
+        <IressFormField
+          label="Label"
+          name="name"
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          renderSupplementary={renderSupplementary}
+        />
+      </IressForm>,
+    );
+
+    const input = await screen.findByRole('textbox', { name: 'Label' });
+    const charCount = await screen.findByTestId('char-count');
+
+    expect(charCount).toHaveTextContent('Characters: 0');
+
+    await userEvent.type(input, 'test');
+
+    expect(charCount).toHaveTextContent('Characters: 4');
+    expect(renderSupplementary).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        value: 'test',
+      }),
+      expect.any(Object),
+    );
+  });
+
+  it('renders both renderSupplementary and supplementary prop content', async () => {
+    render(
+      <IressForm id="iress-form">
+        <IressFormField
+          label="Label"
+          name="name"
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          renderSupplementary={() => (
+            <div data-testid="render-supplementary">Dynamic content</div>
+          )}
+          supplementary={
+            <div data-testid="static-supplementary">Static content</div>
+          }
+        />
+      </IressForm>,
+    );
+
+    const dynamicContent = await screen.findByTestId('render-supplementary');
+    const staticContent = await screen.findByTestId('static-supplementary');
+
+    expect(dynamicContent).toBeInTheDocument();
+    expect(staticContent).toBeInTheDocument();
+  });
+
+  it('provides field error state to renderSupplementary', async () => {
+    const renderSupplementary = vi.fn<
+      Exclude<
+        IressFormFieldProps<{
+          name: string;
+        }>['renderSupplementary'],
+        undefined
+      >
+    >((_field, state) => (
+      <div data-testid="error-indicator">
+        {state.fieldState?.error ? 'Error' : 'No error'}
+      </div>
+    ));
+
+    render(
+      <IressForm id="iress-form">
+        <IressFormField
+          label="Label"
+          name="name"
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          renderSupplementary={renderSupplementary}
+          rules={{ required: 'This field is required' }}
+        />
+        <IressButton type="submit">Submit</IressButton>
+      </IressForm>,
+    );
+
+    const errorIndicator = await screen.findByTestId('error-indicator');
+    expect(errorIndicator).toHaveTextContent('No error');
+
+    const submit = screen.getByRole('button', { name: 'Submit' });
+    await userEvent.click(submit);
+
+    // After submit with empty field, error should appear
+    const fieldError = await screen.findByText('This field is required');
+    expect(fieldError).toBeInTheDocument();
+    expect(errorIndicator).not.toBeInTheDocument();
   });
 
   describe('integration', () => {
