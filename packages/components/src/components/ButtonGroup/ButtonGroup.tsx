@@ -3,7 +3,7 @@ import { type IressButtonGroupProps } from './ButtonGroup.types';
 import styles from './ButtonGroup.module.scss';
 import { useIdIfNeeded } from '../../hooks';
 import { IressButtonGroupProvider } from './ButtonGroupProvider';
-import React, { useMemo } from 'react';
+import { cloneElement, useMemo } from 'react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { toArray } from '@helpers/formatting/toArray';
 import { IressButton } from '../Button/Button';
@@ -39,9 +39,9 @@ export const IressButtonGroup = ({
         </div>
       );
 
-    return React.cloneElement(labelProp, {
+    return cloneElement(labelProp, {
       id: labelId,
-    });
+    } as never);
   }, [dataTestId, hiddenLabel, labelId, labelProp]);
 
   return (

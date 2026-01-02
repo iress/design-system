@@ -225,7 +225,7 @@ export const IressSlideout: SlideoutWithEnums = ({
     return headingProp
       ? cloneElement(headingProp, {
           id: headingId,
-        })
+        } as never)
       : null;
   }, [dataTestid, headingId, headingProp]);
 

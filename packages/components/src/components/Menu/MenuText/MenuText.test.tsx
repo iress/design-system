@@ -17,7 +17,7 @@ function renderTextInsideMenu(
   itemProps?: IressMenuTextProps,
   wrapperTag = 'div',
 ) {
-  const Wrapper = wrapperTag as keyof JSX.IntrinsicElements;
+  const Wrapper = wrapperTag as React.ElementType;
 
   return render(
     <Wrapper>

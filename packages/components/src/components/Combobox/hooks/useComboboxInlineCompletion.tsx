@@ -17,7 +17,7 @@ export const useComboboxInlineCompletion = ({
   setTypedQuery,
   setValue,
 }: ComboboxInlineCompletionHookProps): ComboboxInlineCompletionHookReturn => {
-  const lastKeyPressed = useRef<string | undefined>();
+  const lastKeyPressed = useRef<string | undefined>(undefined);
   const lastQuery = useRef<string>('');
   const lastResults = useRef<ComboboxInlineCompletionHookProps['results']>([]);
 

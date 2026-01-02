@@ -50,7 +50,7 @@ const MenuItem = (
   );
   const elementRef = useRef<ButtonRef | null>(null);
 
-  useImperativeHandle(ref, () => elementRef.current);
+  useImperativeHandle(ref, () => elementRef.current!);
 
   return useMenuItemComposite(
     <IressButton {...aria} {...interactions} {...buttonProps} {...restProps} />,
