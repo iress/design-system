@@ -46,17 +46,15 @@ export const FieldFooter = ({
 }: FieldFooterProps) => {
   const classes = field({ multipleFields });
   const elementRef = useRef<HTMLDivElement>(null);
-  const textContent = useRef<string | null>(null);
+  const previousHasError = useRef<boolean | null>(null);
   const hasError = useMemo(
     () => !!error || errorMessages.length > 0,
     [error, errorMessages.length],
   );
 
   useEffect(() => {
-    if (
-      !elementRef.current ||
-      elementRef.current.textContent === textContent.current
-    ) {
+    if (!elementRef.current || previousHasError.current === hasError) {
+      previousHasError.current = hasError;
       return;
     }
     elementRef.current.classList.remove(
@@ -65,10 +63,10 @@ export const FieldFooter = ({
 
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions -- Trigger reflow
     elementRef.current.offsetHeight;
-    textContent.current = elementRef.current.textContent;
+    previousHasError.current = hasError;
 
     elementRef.current.classList.add(css({ animationStyle: 'field-footer' }));
-  }, [supplementary, hasError]);
+  }, [hasError]);
 
   if (!supplementary && !hasError) {
     return null;

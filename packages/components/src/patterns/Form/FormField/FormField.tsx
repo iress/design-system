@@ -56,6 +56,16 @@ export interface IressFormFieldProps<
   ) => ReactNode;
 
   /**
+   * Render function to allow you to render supplementary content alongside the field, with access to the field props and state.
+   * This can be useful for rendering custom components that need to interact with the form state, such as character counters, password strength meters, or custom validation messages.
+   * (eg. `renderSupplementary={{ value } => <CharCount value={value} />}`)
+   */
+  renderSupplementary?: (
+    field: FormFieldRenderProps<T>,
+    state: FormFieldRenderState<T>,
+  ) => ReactNode;
+
+  /**
    * Validation rules, including: required, min, max, minLength, maxLength, pattern, validate
    * @see https://react-hook-form.com/api/useform/register)
    */
@@ -108,8 +118,10 @@ export const IressFormField = <T extends FieldValues>({
   defaultValue,
   name,
   render,
+  renderSupplementary,
   rules: withCustomRules,
   shouldUnregister,
+  supplementary,
   readOnly,
   ...fieldProps
 }: IressFormFieldProps<T>) => {
@@ -159,26 +171,33 @@ export const IressFormField = <T extends FieldValues>({
 
   const renderField = useFieldRenderProps<T>(field, fieldRef);
 
+  const controlProps = {
+    ...renderField,
+    id: `${form.id}__${name}`,
+  };
+
+  const controlState = {
+    formState,
+    fieldState,
+  };
+
   return (
     <IressField
       errorMessages={
         errorMessage && !readOnly ? [{ message: errorMessage }] : undefined
       }
+      htmlFor={`${form.id}__${name}`}
       readOnly={readOnly}
       required={!!rules?.required}
-      htmlFor={`${form.id}__${name}`}
+      supplementary={
+        <>
+          {renderSupplementary?.(controlProps, controlState)}
+          {supplementary}
+        </>
+      }
       {...fieldProps}
     >
-      {render(
-        {
-          ...renderField,
-          id: `${form.id}__${name}`,
-        },
-        {
-          formState,
-          fieldState,
-        },
-      )}
+      {render(controlProps, controlState)}
     </IressField>
   );
 };
