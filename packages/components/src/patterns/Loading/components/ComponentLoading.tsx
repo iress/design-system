@@ -142,3 +142,4 @@ export const ComponentLoading = ({
     </styled.div>
   );
 };
+ComponentLoading.displayName = 'ComponentLoading';

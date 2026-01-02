@@ -95,3 +95,5 @@ export const IressButtonGroup = <
     </ButtonGroupProvider>
   );
 };
+
+IressButtonGroup.displayName = 'IressButtonGroup';

@@ -134,3 +134,5 @@ export const SelectActivator = <TMultiple extends boolean = false>({
     />
   );
 };
+
+SelectActivator.displayName = 'SelectActivator';

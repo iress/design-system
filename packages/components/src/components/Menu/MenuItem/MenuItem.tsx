@@ -451,11 +451,15 @@ const MenuItem = <
   );
 };
 
-export const IressMenuItem = forwardRef(MenuItem) as <
+export const IressMenuItem = forwardRef(MenuItem) as (<
   C extends ElementType | undefined = undefined,
   THref extends string | undefined = undefined,
 >(
   props: IressMenuItemProps<C, THref> & {
     ref?: ButtonRef<C, THref>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressMenuItem';
+};
+
+IressMenuItem.displayName = 'IressMenuItem';

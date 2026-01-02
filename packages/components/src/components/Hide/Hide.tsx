@@ -51,3 +51,5 @@ export const IressHide = ({
     </Div>
   );
 };
+
+IressHide.displayName = 'IressHide';

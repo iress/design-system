@@ -253,3 +253,5 @@ export const IressSelectTags = ({
     </IressText>
   );
 };
+
+IressSelectTags.displayName = 'IressSelectTags';

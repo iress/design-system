@@ -35,3 +35,4 @@ export const IressValidationLink = ({
     linkToTarget={linkToTarget}
   />
 );
+IressValidationLink.displayName = 'IressValidationLink';

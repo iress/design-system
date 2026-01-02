@@ -135,3 +135,4 @@ export const IressTooltip = ({
     </styled.div>
   );
 };
+IressTooltip.displayName = 'IressTooltip';

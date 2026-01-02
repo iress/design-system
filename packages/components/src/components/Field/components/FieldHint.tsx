@@ -77,3 +77,5 @@ export const FieldHintIcon = ({ hint }: { hint: ReactNode }) => (
     />
   </IressTooltip>
 );
+
+FieldHint.displayName = 'FieldHint';

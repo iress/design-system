@@ -66,6 +66,10 @@ const Component = <T = FormControlValue,>(
   );
 };
 
-export const SelectControl = forwardRef(Component) as <T = FormControlValue>(
+export const SelectControl = forwardRef(Component) as (<T = FormControlValue>(
   props: SelectControlProps<T> & { ref?: Ref<HTMLSelectElement> },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'SelectControl';
+};
+
+SelectControl.displayName = 'SelectControl';

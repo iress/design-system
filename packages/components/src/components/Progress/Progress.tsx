@@ -113,3 +113,5 @@ export const IressProgress = <TMin extends number | undefined = undefined>({
     />
   );
 };
+
+IressProgress.displayName = 'IressProgress';

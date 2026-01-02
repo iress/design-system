@@ -87,3 +87,5 @@ export const IressSelectCreate = ({
     </IressMenu>
   );
 };
+
+IressSelectCreate.displayName = 'IressSelectCreate';

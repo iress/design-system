@@ -100,6 +100,8 @@ const SelectAsyncResults = <TMultiple extends boolean = false>({
   );
 };
 
+SelectAsyncResults.displayName = 'SelectAsyncResults';
+
 const SelectAsyncError = ({ error }: Pick<SelectOptionsProps, 'error'>) => {
   if (!error) return null;
 
@@ -116,6 +118,8 @@ const SelectAsyncError = ({ error }: Pick<SelectOptionsProps, 'error'>) => {
     </IressAlert>
   );
 };
+
+SelectAsyncError.displayName = 'SelectAsyncError';
 
 const SelectAsyncOptions = <TMultiple extends boolean = false>({
   autoHighlight,
@@ -227,6 +231,8 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
   );
 };
 
+SelectAsyncOptions.displayName = 'SelectAsyncOptions';
+
 export const SelectOptions = <TMultiple extends boolean = false>({
   autoHighlight,
   debouncedQuery,
@@ -335,3 +341,5 @@ export const SelectOptions = <TMultiple extends boolean = false>({
     />
   );
 };
+
+SelectOptions.displayName = 'SelectOptions';

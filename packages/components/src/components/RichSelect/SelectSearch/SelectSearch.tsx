@@ -52,3 +52,5 @@ export const IressSelectSearch = ({
     />
   );
 };
+
+IressSelectSearch.displayName = 'IressSelectSearch';

@@ -25,3 +25,5 @@ export const IressSpinner = ({
     />
   );
 };
+
+IressSpinner.displayName = 'IressSpinner';

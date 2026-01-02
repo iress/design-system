@@ -25,3 +25,5 @@ const Component = styled(IressText, panel) as FC<IressPanelProps>;
 export const IressPanel = ({ className, ...restProps }: IressPanelProps) => (
   <Component {...restProps} className={cx(className, GlobalCSSClass.Panel)} />
 );
+
+IressPanel.displayName = 'IressPanel';

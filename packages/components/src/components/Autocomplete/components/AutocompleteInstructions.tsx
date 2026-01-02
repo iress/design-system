@@ -14,3 +14,5 @@ export const AutocompleteInstructions = ({
 
   return <IressPanel>{instructionText}</IressPanel>;
 };
+
+AutocompleteInstructions.displayName = 'AutocompleteInstructions';

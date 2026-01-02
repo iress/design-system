@@ -58,3 +58,5 @@ export const IressCheckboxMark = ({
     </svg>
   );
 };
+
+IressCheckboxMark.displayName = 'IressCheckboxMark';

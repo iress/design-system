@@ -196,3 +196,4 @@ export const PageLoading = ({
     </styled.div>
   );
 };
+PageLoading.displayName = 'PageLoading';

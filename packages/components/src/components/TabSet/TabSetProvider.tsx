@@ -160,3 +160,5 @@ export const TabSetProvider = ({
     <TabSetContext.Provider value={context}>{children}</TabSetContext.Provider>
   );
 };
+
+TabSetProvider.displayName = 'TabSetProvider';

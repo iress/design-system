@@ -276,11 +276,15 @@ const Button = <
   );
 };
 
-export const IressButton = forwardRef(Button) as <
+export const IressButton = forwardRef(Button) as (<
   C extends ElementType | undefined = undefined,
   THref extends string | undefined = undefined,
 >(
   props: IressButtonProps<C, THref> & {
     ref?: ButtonRef<C, THref>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressButton';
+};
+
+IressButton.displayName = 'IressButton';

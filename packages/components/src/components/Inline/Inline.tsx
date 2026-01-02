@@ -50,3 +50,5 @@ const Component = styled('div', inline) as FC<IressInlineProps>;
 export const IressInline = ({ className, ...restProps }: IressInlineProps) => (
   <Component {...restProps} className={cx(className, GlobalCSSClass.Inline)} />
 );
+
+IressInline.displayName = 'IressInline';

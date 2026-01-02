@@ -94,3 +94,5 @@ export const IressToasterProvider = ({
     </ToasterContext.Provider>
   );
 };
+
+IressToasterProvider.displayName = 'IressToasterProvider';

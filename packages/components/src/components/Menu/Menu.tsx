@@ -316,3 +316,5 @@ export const IressMenu = <
     </Provider>
   );
 };
+
+IressMenu.displayName = 'IressMenu';

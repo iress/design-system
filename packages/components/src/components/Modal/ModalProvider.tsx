@@ -49,3 +49,5 @@ export const IressModalProvider = ({
     </ModalContext.Provider>
   );
 };
+
+IressModalProvider.displayName = 'IressModalProvider';

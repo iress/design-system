@@ -25,6 +25,9 @@ const Form = <T extends FieldValues, TContext = object>(
 
 Form.displayName = 'IressForm';
 
-export const IressForm = forwardRef(Form) as <T extends FieldValues>(
+export const IressForm = forwardRef(Form) as (<T extends FieldValues>(
   props: IressFormProps<T> & { ref?: Ref<FormRef<T>> },
-) => React.ReactElement;
+) => React.ReactElement) & {
+  displayName: 'IressForm';
+};
+IressForm.displayName = 'IressForm';

@@ -195,10 +195,14 @@ const CheckboxGroup = <T = FormControlValue,>(
   );
 };
 
-export const IressCheckboxGroup = forwardRef(CheckboxGroup) as <
+export const IressCheckboxGroup = forwardRef(CheckboxGroup) as (<
   T = FormControlValue,
 >(
   props: IressCheckboxGroupProps<T> & {
     ref?: ForwardedRef<CheckboxGroupRef<T>>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressCheckboxGroup';
+};
+
+IressCheckboxGroup.displayName = 'IressCheckboxGroup';

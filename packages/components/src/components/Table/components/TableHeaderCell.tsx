@@ -50,3 +50,5 @@ export const TableHeaderCell = ({
     </th>
   );
 };
+
+TableHeaderCell.displayName = 'TableHeaderCell';

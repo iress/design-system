@@ -255,8 +255,12 @@ const Checkbox = <T = FormControlValue,>(
   );
 };
 
-export const IressCheckbox = forwardRef(Checkbox) as <T = FormControlValue>(
+export const IressCheckbox = forwardRef(Checkbox) as (<T = FormControlValue>(
   props: IressCheckboxProps<T> & {
     ref?: ForwardedRef<ReactHookFormCompatibleRef<HTMLInputElement>>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressCheckbox';
+};
+
+IressCheckbox.displayName = 'IressCheckbox';

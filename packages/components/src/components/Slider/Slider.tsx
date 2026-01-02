@@ -234,3 +234,5 @@ const Slider = (
 };
 
 export const IressSlider = forwardRef(Slider);
+
+IressSlider.displayName = 'IressSlider';

@@ -16,3 +16,5 @@ export const TableEmpty = ({ children }: PropsWithChildren) => {
     </tr>
   );
 };
+
+TableEmpty.displayName = 'TableEmpty';

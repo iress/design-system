@@ -92,3 +92,5 @@ export const IressFieldGroup = ({
     </fieldset>
   );
 };
+
+IressFieldGroup.displayName = 'IressFieldGroup';

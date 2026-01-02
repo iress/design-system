@@ -44,3 +44,5 @@ export const FilterResultsDescriptor = ({
     </div>
   );
 };
+
+FilterResultsDescriptor.displayName = 'FilterResultsDescriptor';

@@ -86,3 +86,5 @@ export const SlideoutInner = ({
     </styled.div>
   );
 };
+
+SlideoutInner.displayName = 'SlideoutInner';

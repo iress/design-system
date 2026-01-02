@@ -35,3 +35,5 @@ export const TableSortButton = ({
     </button>
   );
 };
+
+TableSortButton.displayName = 'TableSortButton';

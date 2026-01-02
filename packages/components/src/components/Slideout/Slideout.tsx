@@ -331,3 +331,5 @@ export const IressSlideout = ({
     </FloatingPortal>
   );
 };
+
+IressSlideout.displayName = 'IressSlideout';
