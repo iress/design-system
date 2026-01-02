@@ -32,7 +32,8 @@ import { GlobalCSSClass } from '@/enums';
 import { IressInline } from '@/components/Inline';
 
 export interface IressSelectTagsProps
-  extends Omit<IressSelectActivatorProps, 'width'>,
+  extends
+    Omit<IressSelectActivatorProps, 'width'>,
     Omit<IressTextProps, 'element' | 'width'> {
   /**
    * Append content.

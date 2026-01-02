@@ -4,8 +4,10 @@ import { cx } from '@/styled-system/css';
 import { styled } from '@/styled-system/jsx';
 import { type IressStyledProps } from '@/types';
 
-export interface IressImageProps
-  extends Omit<IressStyledProps<'img'>, 'maxWidth' | 'alt' | 'src'> {
+export interface IressImageProps extends Omit<
+  IressStyledProps<'img'>,
+  'maxWidth' | 'alt' | 'src'
+> {
   /**
    * The alternative text representation of the image. It is used by screen readers to describe the image. If the image is intended for decoration purposes only, make it an empty string.
    */

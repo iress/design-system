@@ -29,11 +29,13 @@ import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 import { propagateTestid } from '@/helpers/utility/propagateTestid';
 
-export interface IressHookFormProps<T extends FieldValues, TContext = object>
-  extends Omit<
-    IressStyledProps<'form'>,
-    'defaultChecked' | 'defaultValue' | 'onSubmit' | 'onError'
-  > {
+export interface IressHookFormProps<
+  T extends FieldValues,
+  TContext = object,
+> extends Omit<
+  IressStyledProps<'form'>,
+  'defaultChecked' | 'defaultValue' | 'onSubmit' | 'onError'
+> {
   /**
    * The content of the alert section.
    * @default <IressFormValidationSummary srOnly />
@@ -116,10 +118,12 @@ export interface FormRef<T extends FieldValues> {
 /**
  * Common form pattern props, pretty much adding commentary to UseFormProps from `react-hook-form`.
  */
-export interface FormPatternProps<T extends FieldValues, TContext = object>
-  extends Partial<
-    Omit<UseFormProps<T, TContext>, 'disabled' | 'errors' | 'shouldFocusError'>
-  > {
+export interface FormPatternProps<
+  T extends FieldValues,
+  TContext = object,
+> extends Partial<
+  Omit<UseFormProps<T, TContext>, 'disabled' | 'errors' | 'shouldFocusError'>
+> {
   /**
    * This context object is mutable and will be injected into the `resolver`'s second argument (eg. [Yup](https://github.com/jquense/yup) validation's context object).
    * @see https://react-hook-form.com/docs/useform#context

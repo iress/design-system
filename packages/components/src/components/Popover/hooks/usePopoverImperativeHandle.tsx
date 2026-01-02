@@ -1,8 +1,10 @@
 import { type ForwardedRef, useImperativeHandle } from 'react';
 import { type PopoverHookReturn } from './usePopover';
 
-export interface PopoverRef
-  extends Pick<PopoverHookReturn, 'setShow' | 'show' | 'toggleAriaControls'> {
+export interface PopoverRef extends Pick<
+  PopoverHookReturn,
+  'setShow' | 'show' | 'toggleAriaControls'
+> {
   getActivator: () => HTMLElement | null;
   getFocusableActivator?: () => HTMLElement | undefined;
   getContent: () => HTMLElement | null;

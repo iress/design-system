@@ -45,7 +45,8 @@ import { IressReadonly } from '../Readonly';
 import type { IressButtonProps } from '../Button';
 
 export interface IressRichSelectProps<TMultiple extends boolean = false>
-  extends Omit<AutocompleteSearchHookProps, 'query'>,
+  extends
+    Omit<AutocompleteSearchHookProps, 'query'>,
     Omit<
       IressPopoverProps,
       | 'activator'
@@ -221,8 +222,9 @@ export interface SelectLabelRenderProps<TMultiple extends boolean = false> {
   value?: ControlledValue<LabelValueMeta, TMultiple>;
 }
 
-export interface SelectOptionsRenderProps<TMultiple extends boolean = false>
-  extends SelectLabelRenderProps<TMultiple> {
+export interface SelectOptionsRenderProps<
+  TMultiple extends boolean = false,
+> extends SelectLabelRenderProps<TMultiple> {
   /**
    * The query value that was used to filter the items (may be different from query).
    */

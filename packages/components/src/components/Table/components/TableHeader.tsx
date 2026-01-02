@@ -5,8 +5,9 @@ import { type AriaRelationshipProps } from '@/hooks/useAriaRelationship';
 import { useContext } from 'react';
 import { TableContext } from '../TableProvider';
 
-export interface TableHeaderProps
-  extends Partial<Pick<AriaRelationshipProps, 'setControlViaRef'>> {
+export interface TableHeaderProps extends Partial<
+  Pick<AriaRelationshipProps, 'setControlViaRef'>
+> {
   additionalHeaders?: string;
   className?: string;
   tableId: string;

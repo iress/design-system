@@ -54,8 +54,10 @@ export interface SliderTickMarkProps extends IressTestProps {
   tickLabel: SliderTickLabelValue;
 }
 
-export interface SliderTickLabelValue
-  extends Omit<IressStyledProps, 'children'> {
+export interface SliderTickLabelValue extends Omit<
+  IressStyledProps,
+  'children'
+> {
   /**
    * The label of the tick mark. If not provided, the value will be displayed.
    */

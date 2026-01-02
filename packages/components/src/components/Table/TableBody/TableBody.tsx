@@ -13,11 +13,13 @@ import { type IressTableProps } from '../Table';
 import { TableContext, TableProvider } from '../TableProvider';
 import { styled } from '@/styled-system/jsx';
 
-export interface IressTableBodyProps<TRow extends object = never, TVal = never>
-  extends Omit<
-    IressTableProps<TRow, TVal, 'tbody'>,
-    'alternate' | 'compact' | 'hover' | 'removeRowBorders'
-  > {
+export interface IressTableBodyProps<
+  TRow extends object = never,
+  TVal = never,
+> extends Omit<
+  IressTableProps<TRow, TVal, 'tbody'>,
+  'alternate' | 'compact' | 'hover' | 'removeRowBorders'
+> {
   /**
    * Caption that describes the data in the inner table, required for accessibility.
    * Used to open/close the inner table.
@@ -49,7 +51,8 @@ export interface IressTableBodyProps<TRow extends object = never, TVal = never>
 }
 
 interface TableBodyHeaderProps
-  extends Pick<IressTableBodyProps, 'caption' | 'hiddenCaption'>,
+  extends
+    Pick<IressTableBodyProps, 'caption' | 'hiddenCaption'>,
     Pick<AriaRelationshipProps<HTMLTableCellElement>, 'setController'> {
   onChange?: () => void;
   open?: boolean;

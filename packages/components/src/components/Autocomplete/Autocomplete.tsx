@@ -33,7 +33,8 @@ import { GlobalCSSClass } from '@/enums';
 import { type FormControlValue } from '@/types';
 
 export interface IressAutocompleteProps<T extends FormControlValue = string>
-  extends Omit<IressInputProps<T>, 'children' | 'onChange'>,
+  extends
+    Omit<IressInputProps<T>, 'children' | 'onChange'>,
     Omit<AutocompleteSearchHookProps, 'query'>,
     Pick<IressSelectMenuProps, 'limitMobile' | 'limitDesktop'> {
   /**
@@ -86,18 +87,17 @@ export interface IressAutocompleteProps<T extends FormControlValue = string>
   popoverProps?: AutocompletePopoverProps;
 }
 
-export interface AutocompletePopoverProps
-  extends Pick<
-    IressInputPopoverProps,
-    | 'autoHighlight'
-    | 'align'
-    | 'className'
-    | 'container'
-    | 'contentClassName'
-    | 'contentStyle'
-    | 'displayMode'
-    | 'style'
-  > {
+export interface AutocompletePopoverProps extends Pick<
+  IressInputPopoverProps,
+  | 'autoHighlight'
+  | 'align'
+  | 'className'
+  | 'container'
+  | 'contentClassName'
+  | 'contentStyle'
+  | 'displayMode'
+  | 'style'
+> {
   append?: ReactNode;
   prepend?: ReactNode;
 }

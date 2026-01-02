@@ -16,8 +16,10 @@ import {
   type TableColumn,
 } from './helpers/composeTableColumnDefs';
 
-export interface TableProviderProps<TRow extends object, TVal = unknown>
-  extends PropsWithChildren {
+export interface TableProviderProps<
+  TRow extends object,
+  TVal = unknown,
+> extends PropsWithChildren {
   columns?: TableColumn<TRow, TVal>[];
   rows: TRow[];
 }

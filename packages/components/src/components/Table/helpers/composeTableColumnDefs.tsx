@@ -11,11 +11,10 @@ import { formatObjectKey } from '@helpers/formatting/formatObjectKey';
 import { type IressCSSProps } from '@/interfaces';
 import { type ReactNode } from 'react';
 
-export interface TableColumn<TRow extends object, TVal = never>
-  extends Pick<
-    IressCSSProps,
-    'bg' | 'color' | 'noGutter' | 'srOnly' | 'textAlign' | 'textStyle'
-  > {
+export interface TableColumn<TRow extends object, TVal = never> extends Pick<
+  IressCSSProps,
+  'bg' | 'color' | 'noGutter' | 'srOnly' | 'textAlign' | 'textStyle'
+> {
   /**
    * The currency code to prefix to the value if `format` is set to currency.
    * @default $

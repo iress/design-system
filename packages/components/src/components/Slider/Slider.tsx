@@ -22,8 +22,10 @@ import { splitCssProps, styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
 
-export interface IressSliderProps
-  extends Omit<IressStyledProps<'input'>, 'children' | 'onInput' | 'onChange'> {
+export interface IressSliderProps extends Omit<
+  IressStyledProps<'input'>,
+  'children' | 'onInput' | 'onChange'
+> {
   /**
    * Initial value of the slider. Used for uncontrolled sliders.
    */
@@ -87,8 +89,10 @@ export interface IressSliderProps
   value?: number;
 }
 
-export interface SliderReadonlyProps
-  extends Omit<IressUnstyledProps<'input'>, 'value'> {
+export interface SliderReadonlyProps extends Omit<
+  IressUnstyledProps<'input'>,
+  'value'
+> {
   /**
    * The label of the value.
    */

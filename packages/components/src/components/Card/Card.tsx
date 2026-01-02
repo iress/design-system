@@ -12,8 +12,7 @@ import { GlobalCSSClass } from '@/enums';
 import { type IressCSSProps, type IressTestProps } from '@/interfaces';
 
 export interface InternalCardProps<E extends ElementType = 'div'>
-  extends IressCSSProps,
-    IressTestProps {
+  extends IressCSSProps, IressTestProps {
   /**
    * Main body of the card
    */

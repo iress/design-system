@@ -22,8 +22,10 @@ import { splitCssProps, styled } from '@/styled-system/jsx';
 import { IressText } from '../Text';
 import { type IressCSSProps } from '@/interfaces';
 
-export interface IressRadioProps<T = FormControlValue>
-  extends Omit<IressStyledProps<'input'>, 'defaultValue' | 'value'> {
+export interface IressRadioProps<T = FormControlValue> extends Omit<
+  IressStyledProps<'input'>,
+  'defaultValue' | 'value'
+> {
   /**
    * Sets the checked state of the radio.
    * If it is within a radio group, it will be overridden by the radio group's value

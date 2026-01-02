@@ -22,8 +22,10 @@ import { styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
 
-export interface IressRadioGroupProps<T = FormControlValue>
-  extends Omit<IressStyledProps, 'onChange' | 'defaultValue'> {
+export interface IressRadioGroupProps<T = FormControlValue> extends Omit<
+  IressStyledProps,
+  'onChange' | 'defaultValue'
+> {
   /**
    * Content of the radio group, usually multiple `IressRadio` components.
    */
@@ -88,8 +90,7 @@ export type RadioGroupContextValue<T = FormControlValue> = Pick<
   | 'touch'
 >;
 
-export interface RadioGroupRef
-  extends ReactHookFormCompatibleRef<HTMLDivElement> {
+export interface RadioGroupRef extends ReactHookFormCompatibleRef<HTMLDivElement> {
   reset: () => void;
 }
 

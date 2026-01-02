@@ -19,8 +19,10 @@ import { type ReactHookFormCompatibleRef } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
 
-export interface IressCheckboxGroupProps<T = FormControlValue>
-  extends Omit<IressStyledProps, 'defaultValue' | 'onChange' | 'color'> {
+export interface IressCheckboxGroupProps<T = FormControlValue> extends Omit<
+  IressStyledProps,
+  'defaultValue' | 'onChange' | 'color'
+> {
   /**
    * Content to be displayed inside the group, usually multiple `IressCheckbox`.
    */
@@ -68,8 +70,9 @@ export interface IressCheckboxGroupProps<T = FormControlValue>
   touch?: boolean;
 }
 
-export interface CheckboxGroupRef<T = FormControlValue>
-  extends ReactHookFormCompatibleRef<HTMLDivElement> {
+export interface CheckboxGroupRef<
+  T = FormControlValue,
+> extends ReactHookFormCompatibleRef<HTMLDivElement> {
   check: (checked: T) => void;
   reset: () => void;
 }

@@ -20,15 +20,15 @@ import { splitCssProps } from '@/styled-system/jsx';
 export interface IressReadonlyProps<
   T extends FormControlValue = FormControlValue,
 > extends Omit<
-    IressInputProps<T, undefined>,
-    | 'clearable'
-    | 'onClear'
-    | 'onChange'
-    | 'onInput'
-    | 'placeholder'
-    | 'rows'
-    | 'color'
-  > {
+  IressInputProps<T, undefined>,
+  | 'clearable'
+  | 'onClear'
+  | 'onChange'
+  | 'onInput'
+  | 'placeholder'
+  | 'rows'
+  | 'color'
+> {
   /**
    * The formatted value. If not provided, the value will be displayed.
    */

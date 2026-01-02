@@ -13,7 +13,8 @@ import { createPortal } from 'react-dom';
 import { defaultFonts } from '@iress-oss/ids-tokens';
 
 export interface IressProviderProps
-  extends IressSlideoutProviderProps,
+  extends
+    IressSlideoutProviderProps,
     Pick<IressToasterProviderProps, 'position'> {
   /**
    * The contents of your application, and/or the components which will be calling slideouts, modals and toasts.

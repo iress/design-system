@@ -7,7 +7,8 @@ import { type IressPopoverProps } from '../../Popover';
 import { css } from '@/styled-system/css';
 
 export interface FilterResultsDescriptorProps
-  extends Partial<Pick<AutocompleteSearchHookReturn, 'loading' | 'results'>>,
+  extends
+    Partial<Pick<AutocompleteSearchHookReturn, 'loading' | 'results'>>,
     Pick<IressPopoverProps, 'show'>,
     Omit<IressHTMLAttributes, 'children' | 'className' | 'results'> {
   /**

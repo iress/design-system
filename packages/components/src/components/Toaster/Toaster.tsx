@@ -12,8 +12,10 @@ import { styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 import { ToasterContext } from './hooks/useToaster';
 
-export interface ToasterItem
-  extends Omit<ToastAnimatedProps, 'children' | 'animation'> {
+export interface ToasterItem extends Omit<
+  ToastAnimatedProps,
+  'children' | 'animation'
+> {
   /**
    * A unique identifier for the toast.
    */

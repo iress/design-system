@@ -6,11 +6,10 @@ import { css, cx } from '@/styled-system/css';
 import { type FormControlValue, type IressUnstyledProps } from '@/types';
 import { input, type IressInputProps } from '@/components/Input';
 
-export interface SelectControlProps<T = FormControlValue>
-  extends Omit<
-    IressUnstyledProps<'select'>,
-    'defaultValue' | 'value' | 'width'
-  > {
+export interface SelectControlProps<T = FormControlValue> extends Omit<
+  IressUnstyledProps<'select'>,
+  'defaultValue' | 'value' | 'width'
+> {
   /**
    * Value of selected option for uncontrolled select.
    */

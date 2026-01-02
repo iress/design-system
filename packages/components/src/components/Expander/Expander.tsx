@@ -8,8 +8,10 @@ import { type IressCustomiseSlot } from '@/interfaces';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 
-export interface IressExpanderProps
-  extends Omit<IressTextProps<'div'>, 'element' | 'onChange'> {
+export interface IressExpanderProps extends Omit<
+  IressTextProps<'div'>,
+  'element' | 'onChange'
+> {
   /**
    * The element used to activate the expandable container.
    */

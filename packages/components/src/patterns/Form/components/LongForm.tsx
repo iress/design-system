@@ -20,7 +20,8 @@ import { IressPanel, type IressPanelProps } from '@/components/Panel';
 import { IressInline } from '@/components/Inline';
 
 export interface LongFormProps<T extends FieldValues, TContext = object>
-  extends Omit<IressHookFormProps<T, TContext>, 'form'>,
+  extends
+    Omit<IressHookFormProps<T, TContext>, 'form'>,
     FormPatternProps<T, TContext> {
   /**
    * The actions to be displayed at the top right of the form.
