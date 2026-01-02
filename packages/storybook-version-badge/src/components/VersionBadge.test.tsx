@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { VersionBadge } from './VersionBadge';
-import { ThemeProvider } from 'storybook/theming';
+import { convert, ThemeProvider, themes } from 'storybook/theming';
 import type { API } from 'storybook/manager-api';
 
 // Mock API for testing
@@ -16,22 +16,15 @@ const createMockApi = (
 // Test wrapper with ThemeProvider - similar to VersionBadge.stories.tsx
 const renderWithTheme = (ui: React.ReactElement) => {
   return render(
-    <ThemeProvider
-      theme={{
-        textMutedColor: '#6f6f6f',
-        typography: {
-          size: {
-            s1: 12,
-          } as never,
-          weight: {
-            bold: 600,
-          } as never,
-        } as never,
-      }}
-    >
-      {ui}
-    </ThemeProvider>,
+    <ThemeProvider theme={convert(themes.light)}>{ui}</ThemeProvider>,
   );
+};
+
+const rerenderWithTheme = (
+  ui: React.ReactElement,
+  rerender: (ui: React.ReactNode) => void,
+) => {
+  rerender(<ThemeProvider theme={convert(themes.light)}>{ui}</ThemeProvider>);
 };
 
 describe('VersionBadge', () => {
@@ -268,22 +261,9 @@ describe('VersionBadge', () => {
         expect(screen.getByText('1.0.0')).toBeInTheDocument();
       });
 
-      rerender(
-        <ThemeProvider
-          theme={{
-            textMutedColor: '#6f6f6f',
-            typography: {
-              size: {
-                s1: 12,
-              } as never,
-              weight: {
-                bold: 600,
-              } as never,
-            } as never,
-          }}
-        >
-          <VersionBadge api={mockApi} version={versionFunction2} />
-        </ThemeProvider>,
+      rerenderWithTheme(
+        <VersionBadge api={mockApi} version={versionFunction2} />,
+        rerender,
       );
 
       await waitFor(() => {
@@ -310,26 +290,13 @@ describe('VersionBadge', () => {
         expect(screen.getByText('dev')).toBeInTheDocument();
       });
 
-      rerender(
-        <ThemeProvider
-          theme={{
-            textMutedColor: '#6f6f6f',
-            typography: {
-              size: {
-                s1: 12,
-              } as never,
-              weight: {
-                bold: 600,
-              } as never,
-            } as never,
-          }}
-        >
-          <VersionBadge
-            api={mockApi}
-            version="1.0.0"
-            environment={environmentFunction2}
-          />
-        </ThemeProvider>,
+      rerenderWithTheme(
+        <VersionBadge
+          api={mockApi}
+          version="1.0.0"
+          environment={environmentFunction2}
+        />,
+        rerender,
       );
 
       await waitFor(() => {
@@ -449,22 +416,9 @@ describe('VersionBadge', () => {
         refs,
       ) as API;
 
-      rerender(
-        <ThemeProvider
-          theme={{
-            textMutedColor: '#6f6f6f',
-            typography: {
-              size: {
-                s1: 12,
-              } as never,
-              weight: {
-                bold: 600,
-              } as never,
-            } as never,
-          }}
-        >
-          <VersionBadge api={apiRefB} version={versionFunction} />
-        </ThemeProvider>,
+      rerenderWithTheme(
+        <VersionBadge api={apiRefB} version={versionFunction} />,
+        rerender,
       );
 
       await waitFor(() => {
