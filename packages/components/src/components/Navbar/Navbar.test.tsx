@@ -29,7 +29,7 @@ describe('IressNavbar', () => {
     expect(component).toHaveClass('test-class');
   });
 
-  it('renders with the correct data-testids', () => {
+  it('renders with the correct data-testids', async () => {
     const screen = render(
       <IressNavbar
         data-testid="test-navbar"
@@ -41,7 +41,7 @@ describe('IressNavbar', () => {
       />,
     );
 
-    expect(screen.getByTestId('test-navbar__nav')).toBeInTheDocument();
+    expect(await screen.findByTestId('test-navbar__nav')).toBeInTheDocument();
 
     expect(screen.getByTestId('test-navbar__logo')).toBeInTheDocument();
     expect(screen.getByTestId('test-navbar__logo-link')).toBeInTheDocument();
