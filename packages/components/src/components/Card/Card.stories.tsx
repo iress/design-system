@@ -46,7 +46,7 @@ export const Padding: Story = {
         I&rsquo;m a card with sm padding
       </IressCard>
       <IressCard {...args} p="md">
-        I&rsquo;m a card with sm padding
+        I&rsquo;m a card with md padding
       </IressCard>
     </IressStack>
   ),
