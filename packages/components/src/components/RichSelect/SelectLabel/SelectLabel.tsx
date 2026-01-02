@@ -58,3 +58,5 @@ export const IressSelectLabel = ({
     </button>
   );
 };
+
+IressSelectLabel.displayName = 'IressSelectLabel';

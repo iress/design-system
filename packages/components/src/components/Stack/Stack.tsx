@@ -55,3 +55,5 @@ export const IressStack = <
     />
   );
 };
+
+IressStack.displayName = 'IressStack';

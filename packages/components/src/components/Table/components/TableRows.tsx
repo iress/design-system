@@ -65,3 +65,5 @@ export const TableRows = <TRow extends object = never>({
     </styled.tr>
   ));
 };
+
+TableRows.displayName = 'TableRows';

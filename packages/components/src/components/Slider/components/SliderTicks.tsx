@@ -124,6 +124,8 @@ const TickMark = ({
   );
 };
 
+TickMark.displayName = 'TickMark';
+
 export const SliderTicks = ({
   max = 10,
   min = 0,
@@ -148,3 +150,5 @@ export const SliderTicks = ({
     </datalist>
   );
 };
+
+SliderTicks.displayName = 'SliderTicks';

@@ -79,3 +79,5 @@ export const IressProvider = ({
     </IressModalProvider>
   );
 };
+
+IressProvider.displayName = 'IressProvider';

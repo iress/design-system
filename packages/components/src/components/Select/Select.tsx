@@ -192,11 +192,15 @@ const Select = <
   );
 };
 
-export const IressSelect = forwardRef(Select) as <
+export const IressSelect = forwardRef(Select) as (<
   T extends FormControlValue = FormControlValue,
   TReadonly extends boolean | undefined = undefined,
 >(
   props: IressSelectProps<T, TReadonly> & {
     ref?: ForwardedRef<HTMLElementTagNameMap[SelectElement<TReadonly>]>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressSelect';
+};
+
+IressSelect.displayName = 'IressSelect';

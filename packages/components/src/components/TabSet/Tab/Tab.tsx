@@ -143,6 +143,8 @@ const TabInsideTabSet = ({
   />
 );
 
+TabInsideTabSet.displayName = 'TabInsideTabSet';
+
 const Tab = <THref extends string | undefined = undefined>(
   {
     active,
@@ -291,10 +293,14 @@ const Tab = <THref extends string | undefined = undefined>(
   );
 };
 
-export const IressTab = forwardRef(Tab) as <
+export const IressTab = forwardRef(Tab) as (<
   THref extends string | undefined = undefined,
 >(
   props: IressTabProps<THref> & {
     ref?: Ref<HTMLElementTagNameMap[ButtonElement<undefined, THref>]>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressTab';
+};
+
+IressTab.displayName = 'IressTab';

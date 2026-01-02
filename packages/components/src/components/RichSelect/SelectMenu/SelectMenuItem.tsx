@@ -60,3 +60,5 @@ export const IressSelectMenuItem = ({
     </IressMenuItem>
   );
 };
+
+IressSelectMenuItem.displayName = 'IressSelectMenuItem';

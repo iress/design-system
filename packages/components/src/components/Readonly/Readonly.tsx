@@ -103,8 +103,12 @@ const Readonly = <T extends FormControlValue = string | number>(
   );
 };
 
-export const IressReadonly = forwardRef(Readonly) as <
+export const IressReadonly = forwardRef(Readonly) as (<
   T extends FormControlValue = string | number,
 >(
   props: IressReadonlyProps<T> & RefAttributes<HTMLInputElement | null>,
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressReadonly';
+};
+
+IressReadonly.displayName = 'IressReadonly';

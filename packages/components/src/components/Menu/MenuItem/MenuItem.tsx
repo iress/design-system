@@ -36,12 +36,12 @@ import { menu as menuStyles } from '../Menu.styles';
 import {
   type PopoverItemHookReturn,
   type PopoverVirtualNode,
+  usePopover,
   usePopoverItem,
 } from '@/components/Popover';
 import { CompositeItem } from '@floating-ui/react';
 import { IressMenuDivider } from '../MenuDivider/MenuDivider';
 import { type IressCSSProps, type IressTestProps } from '@/interfaces';
-import { PopoverContext } from '@/components/Popover/hooks/usePopover';
 import { GlobalCSSClass } from '@/enums';
 import { spreadUnlessUndefined } from '@/helpers/utility/spreadUnlessUndefined';
 
@@ -191,7 +191,7 @@ const MenuItem = <
   ref: Ref<ButtonRef<C, THref>>,
 ) => {
   const menu = useContext(MenuContext);
-  const popover = useContext(PopoverContext);
+  const popover = usePopover();
   const role = useMenuItemRole();
   const elementRef = useRef<ButtonInstance<C, THref> | null>(null);
 
@@ -451,11 +451,15 @@ const MenuItem = <
   );
 };
 
-export const IressMenuItem = forwardRef(MenuItem) as <
+export const IressMenuItem = forwardRef(MenuItem) as (<
   C extends ElementType | undefined = undefined,
   THref extends string | undefined = undefined,
 >(
   props: IressMenuItemProps<C, THref> & {
     ref?: ButtonRef<C, THref>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressMenuItem';
+};
+
+IressMenuItem.displayName = 'IressMenuItem';

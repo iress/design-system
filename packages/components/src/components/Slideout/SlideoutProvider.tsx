@@ -60,3 +60,5 @@ export const IressSlideoutProvider = ({
     </SlideoutContext.Provider>
   );
 };
+
+IressSlideoutProvider.displayName = 'IressSlideoutProvider';

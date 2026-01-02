@@ -2,12 +2,12 @@ import { renderHook } from '@testing-library/react';
 import { MutableRefObject, PropsWithChildren } from 'react';
 import { PopoverVirtualNode, usePopoverItem } from './usePopoverItem';
 import { TestPopoverProvider } from '../mocks/TestPopoverProvider';
-import { PopoverHookReturn } from './usePopover';
+import { FloatingPopoverHookReturn } from './useFloatingPopover';
 
 function renderHookInPopover(
   typeAheadLabel?: string,
   virtualNode: PopoverVirtualNode | null = null,
-  context: Partial<PopoverHookReturn> = {},
+  context: Partial<FloatingPopoverHookReturn> = {},
 ) {
   return renderHook(() => usePopoverItem(typeAheadLabel, virtualNode), {
     wrapper: ({ children }: PropsWithChildren) => (

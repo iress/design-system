@@ -222,3 +222,4 @@ export const StartUpLoading = ({
     </div>
   );
 };
+StartUpLoading.displayName = 'StartUpLoading';

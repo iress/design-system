@@ -171,11 +171,18 @@ export const IressCard = <E extends ElementType = 'div'>({
     </StyledElement>
   );
 };
+
+IressCard.displayName = 'IressCard';
+
 export const IressButtonCard = (props: IressButtonCardProps) => {
   const { type = 'button', ...restProps } = props;
   return <IressCard element="button" type={type} {...restProps} />;
 };
 
+IressButtonCard.displayName = 'IressButtonCard';
+
 export const IressLinkCard = (props: IressLinkCardProps) => {
   return <IressCard element="a" {...props} />;
 };
+
+IressLinkCard.displayName = 'IressLinkCard';

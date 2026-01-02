@@ -170,11 +170,15 @@ const Link = <
   );
 };
 
-export const IressLink = forwardRef(Link) as <
+export const IressLink = forwardRef(Link) as (<
   C extends ElementType | undefined = undefined,
   THref extends string | undefined = undefined,
 >(
   props: IressLinkProps<C, THref> & {
     ref?: ButtonRef<C, THref>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressLink';
+};
+
+IressLink.displayName = 'IressLink';

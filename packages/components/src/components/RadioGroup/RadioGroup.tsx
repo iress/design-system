@@ -202,6 +202,12 @@ const RadioGroup = <T = FormControlValue,>(
   );
 };
 
-export const IressRadioGroup = forwardRef(RadioGroup) as <T = FormControlValue>(
+export const IressRadioGroup = forwardRef(RadioGroup) as (<
+  T = FormControlValue,
+>(
   props: IressRadioGroupProps<T> & { ref?: Ref<RadioGroupRef> },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressRadioGroup';
+};
+
+IressRadioGroup.displayName = 'IressRadioGroup';

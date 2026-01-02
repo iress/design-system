@@ -1,15 +1,9 @@
-import {
-  type ReactElement,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react';
+import { type ReactElement, useEffect, useMemo, useRef } from 'react';
 import { focusableElements } from '@helpers/dom/focusableElements';
 import { usePopoverActivatorInteractions } from '../hooks/usePopoverActivatorInteractions';
-import { PopoverContext } from '../hooks/usePopover';
 import { type IressUnstyledProps } from '@/types';
 import { type IressButtonProps } from '@/components/Button';
+import { usePopover } from '../hooks/usePopover';
 
 export interface PopoverActivatorProps extends IressUnstyledProps {
   children?: ReactElement;
@@ -51,7 +45,7 @@ export const PopoverActivator = ({
   children,
   ...restProps
 }: PopoverActivatorProps) => {
-  const popover = useContext(PopoverContext);
+  const popover = usePopover();
   const a11yElement = useRef<HTMLElement | null>(null);
 
   const childrenProps = children?.props as IressButtonProps<undefined>;
@@ -153,3 +147,5 @@ export const PopoverActivator = ({
     </div>
   );
 };
+
+PopoverActivator.displayName = 'PopoverActivator';

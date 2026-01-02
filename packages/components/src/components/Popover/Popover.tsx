@@ -27,12 +27,12 @@ import {
 } from './hooks/usePopoverImperativeHandle';
 import { popover } from './Popover.styles';
 import { type IressCustomiseSlot } from '@/interfaces';
-import {
-  PopoverContext,
-  type PopoverHookReturn,
-  usePopover,
-} from './hooks/usePopover';
 import { NestedPopoverActivator } from './components/NestedPopoverActivator';
+import {
+  FloatingPopoverContext,
+  type FloatingPopoverHookReturn,
+  useFloatingPopover,
+} from './hooks/useFloatingPopover';
 
 export interface IressPopoverProps extends IressStyledProps {
   /**
@@ -131,7 +131,7 @@ export interface IressPopoverProps extends IressStyledProps {
   /**
    * Describes the type of content contained in the popover.
    */
-  type?: PopoverHookReturn['type'];
+  type?: FloatingPopoverHookReturn['type'];
 
   /**
    * Whether the focus is virtual (using `aria-activedescendant`).
@@ -171,7 +171,7 @@ const Popover = (
     matchActivatorWidthProp && displayMode === 'overlay';
   const classes = popover({ fluid, matchActivatorWidth });
 
-  const context = usePopover({
+  const context = useFloatingPopover({
     align,
     defaultShow,
     focusStartIndex,
@@ -187,7 +187,7 @@ const Popover = (
   usePopoverImperativeHandle(ref, context);
 
   return (
-    <PopoverContext.Provider value={context}>
+    <FloatingPopoverContext.Provider value={context}>
       <styled.div
         {...restProps}
         className={cx(
@@ -198,7 +198,9 @@ const Popover = (
         )}
         ref={element}
       >
-        <NestedPopoverActivator parentPopover={useContext(PopoverContext)}>
+        <NestedPopoverActivator
+          parentPopover={useContext(FloatingPopoverContext)}
+        >
           <PopoverActivator
             className={classes.activator}
             data-testid={propagateTestid(restProps['data-testid'], 'activator')}
@@ -222,8 +224,10 @@ const Popover = (
           {children}
         </PopoverContent>
       </styled.div>
-    </PopoverContext.Provider>
+    </FloatingPopoverContext.Provider>
   );
 };
 
 export const IressPopover = forwardRef(Popover);
+
+IressPopover.displayName = 'IressPopover';

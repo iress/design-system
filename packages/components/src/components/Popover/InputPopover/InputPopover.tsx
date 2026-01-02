@@ -14,10 +14,13 @@ import {
   usePopoverImperativeHandle,
 } from '../hooks/usePopoverImperativeHandle';
 import { styled } from '@/styled-system/jsx';
-import { PopoverContext, usePopover } from '../hooks/usePopover';
 import { cx } from '@/styled-system/css';
 import { popover } from '../Popover.styles';
 import { NestedPopoverActivator } from '../components/NestedPopoverActivator';
+import {
+  FloatingPopoverContext,
+  useFloatingPopover,
+} from '../hooks/useFloatingPopover';
 
 export interface IressInputPopoverProps
   extends
@@ -67,7 +70,7 @@ const InputPopover = (
 ) => {
   const matchActivatorWidth = displayMode === 'overlay';
   const classes = popover({ hasInputActivator: true, matchActivatorWidth });
-  const context = usePopover({
+  const context = useFloatingPopover({
     align,
     autoHighlight,
     defaultShow,
@@ -85,7 +88,7 @@ const InputPopover = (
   usePopoverImperativeHandle(ref, context);
 
   return (
-    <PopoverContext.Provider value={context}>
+    <FloatingPopoverContext.Provider value={context}>
       <styled.div
         {...restProps}
         className={cx(
@@ -96,7 +99,9 @@ const InputPopover = (
           GlobalCSSClass.InputPopover,
         )}
       >
-        <NestedPopoverActivator parentPopover={useContext(PopoverContext)}>
+        <NestedPopoverActivator
+          parentPopover={useContext(FloatingPopoverContext)}
+        >
           <InputPopoverActivator
             className={classes.activator}
             data-testid={propagateTestid(restProps['data-testid'], 'activator')}
@@ -121,8 +126,10 @@ const InputPopover = (
           {children}
         </PopoverContent>
       </styled.div>
-    </PopoverContext.Provider>
+    </FloatingPopoverContext.Provider>
   );
 };
 
 export const IressInputPopover = forwardRef(InputPopover);
+
+InputPopover.displayName = 'IressInputPopover';

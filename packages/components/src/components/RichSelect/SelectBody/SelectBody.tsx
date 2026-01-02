@@ -41,3 +41,5 @@ export const IressSelectBody = ({
     </IressText>
   );
 };
+
+IressSelectBody.displayName = 'IressSelectBody';

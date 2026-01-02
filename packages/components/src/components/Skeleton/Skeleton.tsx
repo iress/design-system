@@ -64,3 +64,5 @@ export const IressSkeleton = <TMode extends SkeletonMode = 'text'>({
     </IressText>
   );
 };
+
+IressSkeleton.displayName = 'IressSkeleton';

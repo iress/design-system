@@ -78,3 +78,5 @@ export const IressTag = ({
     </IressText>
   );
 };
+
+IressTag.displayName = 'IressTag';

@@ -186,3 +186,5 @@ export const IressAlert = ({
     </IressText>
   );
 };
+
+IressAlert.displayName = 'IressAlert';

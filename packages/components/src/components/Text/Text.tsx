@@ -49,3 +49,5 @@ export const IressText = <E extends TextElements = 'div'>({
     />
   );
 };
+
+IressText.displayName = 'IressText';

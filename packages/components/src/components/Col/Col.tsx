@@ -38,3 +38,5 @@ const Component = styled('div', col) as FC<IressColProps>;
 export const IressCol = ({ className, ...restProps }: IressColProps) => (
   <Component {...restProps} className={cx(className, GlobalCSSClass.Col)} />
 );
+
+IressCol.displayName = 'IressCol';

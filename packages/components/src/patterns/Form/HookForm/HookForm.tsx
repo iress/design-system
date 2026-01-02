@@ -359,11 +359,14 @@ const HookForm = <T extends FieldValues, TContext = object>(
 
 HookForm.displayName = 'IressHookForm';
 
-export const IressHookForm = forwardRef(HookForm) as <
+export const IressHookForm = forwardRef(HookForm) as (<
   T extends FieldValues,
   TContext = object,
 >(
   props: IressHookFormProps<T, TContext> & {
     ref?: Ref<FormRef<T>>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressHookForm';
+};
+IressHookForm.displayName = 'IressHookForm';

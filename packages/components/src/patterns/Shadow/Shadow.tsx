@@ -160,3 +160,4 @@ export const IressShadow = forwardRef<ShadowRoot | null, IressShadowProps>(
     );
   },
 );
+IressShadow.displayName = 'IressShadow';

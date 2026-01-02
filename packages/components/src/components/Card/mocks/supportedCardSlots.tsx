@@ -8,6 +8,7 @@ import {
   IressBadge,
 } from '@/main';
 
+// eslint-disable-next-line react-refresh/only-export-components -- helper function, not component
 export const supportedCardSlots = {
   prepend: <IressIcon name="star" />,
   media: (

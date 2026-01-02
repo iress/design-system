@@ -79,6 +79,8 @@ export const IressLoading = ({ pattern, ...restProps }: IressLoadingProps) => {
   return <DefaultLoading {...(restProps as DefaultLoadingProps)} />;
 };
 
+IressLoading.displayName = 'IressLoading';
+
 /**
  * This hook is used to smooth the loading experience by delaying the loading indicator being removed after the loading of an element finishes.
  *

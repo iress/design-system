@@ -13,9 +13,9 @@ import {
   type FloatingUIContainer,
   type IressStyledProps,
 } from '@/types';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { styled } from '@/styled-system/jsx';
-import { PopoverContext } from '../hooks/usePopover';
+import { usePopover } from '../hooks/usePopover';
 
 export interface PopoverContentProps extends IressStyledProps {
   container?: FloatingUIContainer;
@@ -31,7 +31,7 @@ const PopoverContentInner = ({
   virtualFocus,
   ...restProps
 }: Omit<PopoverContentProps, 'container'>) => {
-  const popover = useContext(PopoverContext);
+  const popover = usePopover();
 
   // Fix accessibility issue with floating-ui focus guards
   // See: https://github.com/floating-ui/floating-ui/issues/2823
@@ -112,6 +112,8 @@ const PopoverContentInner = ({
   );
 };
 
+PopoverContentInner.displayName = 'PopoverContentInner';
+
 const PopoverContentContainer = ({
   container,
   ...restProps
@@ -135,6 +137,8 @@ const PopoverContentContainer = ({
   );
 };
 
+PopoverContentContainer.displayName = 'PopoverContentContainer';
+
 export const PopoverContent = (props: PopoverContentProps) => {
   const parentId = useFloatingParentNodeId();
 
@@ -149,3 +153,5 @@ export const PopoverContent = (props: PopoverContentProps) => {
 
   return <PopoverContentContainer {...props} />;
 };
+
+PopoverContent.displayName = 'PopoverContent';

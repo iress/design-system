@@ -128,3 +128,4 @@ export const IressFormFieldset = <TFieldValues extends FieldValues>({
     </IressFieldGroup>
   );
 };
+IressFormFieldset.displayName = 'IressFormFieldset';

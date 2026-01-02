@@ -168,3 +168,5 @@ export const IressTable = <TRow extends object = never, TVal = never>({
     </div>
   );
 };
+
+IressTable.displayName = 'IressTable';

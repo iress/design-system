@@ -9,7 +9,6 @@ import {
   type Ref,
   forwardRef,
   useCallback,
-  useContext,
   useId,
   useImperativeHandle,
   useMemo,
@@ -22,8 +21,8 @@ import { type ButtonGroupItemProps, useButtonGroupItem } from '../ButtonGroup';
 import { splitCssProps } from '@/styled-system/jsx';
 import { css, cx } from '@/styled-system/css';
 import { button } from '@/styled-system/recipes';
-import { PopoverContext } from '../Popover/hooks/usePopover';
 import { type IressCSSProps, type IressTestProps } from '@/interfaces';
+import { usePopover } from '../Popover';
 
 export type ButtonElement<
   C extends ElementType | undefined = undefined,
@@ -178,7 +177,7 @@ const Button = <
     typeof children === 'boolean'
       ? children
       : undefined);
-  const popover = useContext(PopoverContext);
+  const popover = usePopover();
   const elementRef = useRef<ButtonInstance<C, THref> | null>(null);
   const buttonGroupItem = useButtonGroupItem({ value });
 
@@ -277,11 +276,15 @@ const Button = <
   );
 };
 
-export const IressButton = forwardRef(Button) as <
+export const IressButton = forwardRef(Button) as (<
   C extends ElementType | undefined = undefined,
   THref extends string | undefined = undefined,
 >(
   props: IressButtonProps<C, THref> & {
     ref?: ButtonRef<C, THref>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressButton';
+};
+
+IressButton.displayName = 'IressButton';

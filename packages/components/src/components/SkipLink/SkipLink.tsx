@@ -49,11 +49,15 @@ const SkipLink = <
   </IressButton>
 );
 
-export const IressSkipLink = forwardRef(SkipLink) as <
+export const IressSkipLink = forwardRef(SkipLink) as (<
   C extends ElementType | undefined = undefined,
   THref extends string | undefined = undefined,
 >(
   props: IressSkipLinkProps<C, THref> & {
     ref?: ButtonRef<C, THref>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressSkipLink';
+};
+
+IressSkipLink.displayName = 'IressSkipLink';

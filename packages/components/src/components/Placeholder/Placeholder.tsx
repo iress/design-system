@@ -60,3 +60,5 @@ export const IressPlaceholder = ({
     </IressText>
   );
 };
+
+IressPlaceholder.displayName = 'IressPlaceholder';
