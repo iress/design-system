@@ -3,6 +3,7 @@ import { type ResponsiveSizing } from '@/interfaces';
 import { type FC, type ReactNode } from 'react';
 import { styled } from '@/styled-system/jsx';
 import { type IressStyledProps } from '@/types';
+import { useBreakpoint } from '@/hooks';
 
 const Div = styled('div') as FC<IressStyledProps>;
 
@@ -31,7 +32,7 @@ export interface IressHideProps extends IressStyledProps {
 /**
  * @deprecated IressHide has been deprecated.
  * - Please use the `srOnly` prop on any component to show or hide content from screen readers.
- * - Please use the `hide` prop on any component to show or hide content at different breakpoints.
+ * - Please use the `hideFrom` and `hideBelow` props on any component to show or hide content at different breakpoints. For more complex logic, consider using the `useBreakpoint` hook to conditionally render content.
  */
 export const IressHide = ({
   children,
@@ -40,13 +41,14 @@ export const IressHide = ({
   ...restProps
 }: IressHideProps) => {
   const hideValues = normaliseHideValues(hiddenOn);
+  const { breakpoint } = useBreakpoint();
+
+  if (!visuallyHidden && hideValues[breakpoint]) {
+    return null;
+  }
 
   return (
-    <Div
-      {...restProps}
-      srOnly={visuallyHidden ? hideValues : undefined}
-      hide={visuallyHidden ? undefined : hideValues}
-    >
+    <Div {...restProps} srOnly={visuallyHidden ? hideValues : undefined}>
       {children}
     </Div>
   );

@@ -21,7 +21,6 @@ import { animationStyles } from './tokens/animationStyles';
 
 import { span } from './utilities/span';
 import { offset } from './utilities/offset';
-import { hide } from './utilities/hide';
 import { gutter } from './utilities/gutter';
 import {
   selectChevron,
@@ -122,7 +121,6 @@ export default definePreset({
       selectChevron,
       selectChevronRtl,
       tableChevron,
-      hide,
       offset,
       span,
       topLeftTriangle,

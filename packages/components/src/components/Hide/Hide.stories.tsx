@@ -15,7 +15,7 @@ type Story = StoryObj<typeof IressHide>;
 export default {
   title: 'Components/Hide',
   component: IressHide,
-  tags: ['caution:srOnly and hide props'],
+  tags: ['caution:srOnly, hideFrom and hideBelow props'],
 } as Meta<typeof IressHide>;
 
 export const Default: Story = {
