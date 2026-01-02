@@ -14,7 +14,7 @@ export const srOnly: Story = {
     children: 'Hello screen readers',
   },
   parameters: {
-    controls: { include: ['srOnly'] },
+    controls: { include: ['hideFrom', 'hideBelow', 'srOnly'] },
   },
 };
 
@@ -23,5 +23,21 @@ export const srOnlyResponsive: Story = {
   args: {
     children: 'This content is visible on large screens and screen readers',
     srOnly: { base: true, lg: false },
+  },
+};
+
+export const hideFrom: Story = {
+  ...srOnly,
+  args: {
+    children: 'Only on mobile screens',
+    hideFrom: 'lg',
+  },
+};
+
+export const hideBelow: Story = {
+  ...srOnly,
+  args: {
+    children: 'Only on large screens',
+    hideBelow: 'lg',
   },
 };
