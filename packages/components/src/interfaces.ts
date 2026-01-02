@@ -213,16 +213,27 @@ export interface IressCSSProps {
   focusable?: 'true' | 'within';
 
   /**
-   * Set **`hide`** to hide an element completely using `display: none`. It can also be set to an object of breakpoints to hide the element at specific breakpoints.
+   * Set **`hideFrom`** to hide an element completely using `display: none`. It can be combined with `hideBelow` to create complex responsive visibility rules.
    *
-   * Hide on all breakpoints: `hide: true`
-   * Hide on specific breakpoints: `hide: { xs: false, sm: true, md: false, lg: true, xl: false, xxl: true }`
+   * Hide on all breakpoints: `hideFrom: true`
+   * Hide on specific breakpoints: `hideFrom: 'lg'`
    *
    * Notes:
    * - If you need to hide an element but allow it to be visible to screen readers, use the `srOnly` prop instead.
-   * - Consider if you can conditionally render the element instead of hiding it.
+   * - Consider if you can conditionally render the element instead of hiding it using the `useBreakpoint` hook.
    */
-  hide?: ResponsiveProp<UtilityValues['hide']>;
+  hideFrom?: ResponsiveProp<UtilityValues['hideFrom']>;
+
+  /**
+   * Set **`hideBelow`** to hide an element completely using `display: none`. It can be combined with `hideFrom` to create complex responsive visibility rules.
+   *
+   * Hide below a specific breakpoint: `hideBelow: 'lg'`
+   *
+   * Notes:
+   * - If you need to hide an element but allow it to be visible to screen readers, use the `srOnly` prop instead.
+   * - Consider if you can conditionally render the element instead of hiding it using the `useBreakpoint` hook.
+   */
+  hideBelow?: ResponsiveProp<UtilityValues['hideBelow']>;
 
   /**
    * Elevate a layer by using a **`layerStyle`**. These are connected to the elevation tokens in the design system. They can be combined to create hierarchy and structure.

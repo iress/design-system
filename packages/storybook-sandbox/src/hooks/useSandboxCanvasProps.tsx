@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { useCallback, useRef, type ComponentProps } from 'react';
 import type { Canvas, SourceProps } from '@storybook/addon-docs/blocks';
-import { ADDON_ID } from '../constants';
+import { ADDON_ID, COMMON_TRANSFORMERS } from '../constants';
 import type {
   AddonConfig,
   ParametersConfig,
   SandboxTransformers,
 } from '../types';
-import { transformCodeWithParameters } from '../helpers/transformCode';
+import {
+  transformCode,
+  transformCodeWithParameters,
+} from '../helpers/transformCode';
 import type { IFiles } from 'codesandbox-import-utils/lib/api/define';
 import OpenInCodeSandboxCustomTemplate from '../components/OpenInCodeSandboxCustom.template?raw';
 import OpenInCodeSandboxHTML from '../components/OpenInCodeSandbox.html?raw';
@@ -46,7 +49,7 @@ export const useSandboxCanvasProps = ({
 
   // These refs are used to persist values in the additional actions - on click handler
   const addonConfig = useRef<AddonConfig | null>(parameters?.[ADDON_ID]);
-  const renderedCode = useRef<string | null>(
+  const sandboxCode = useRef<string | null>(
     sourceProp?.code ?? docsConfig?.source?.code ?? null,
   );
 
@@ -60,7 +63,7 @@ export const useSandboxCanvasProps = ({
     if (!docsConfig?.source?.code) {
       return {
         'index.tsx': {
-          content: renderedCode.current ?? '',
+          content: sandboxCode.current ?? '',
           isBinary: false,
         },
       } as IFiles;
@@ -73,7 +76,7 @@ export const useSandboxCanvasProps = ({
         isBinary: false,
       },
       'component.tsx': {
-        content: renderedCode.current ?? '',
+        content: sandboxCode.current ?? '',
         isBinary: false,
       },
     };
@@ -86,15 +89,24 @@ export const useSandboxCanvasProps = ({
     async (code, transformContext) => {
       const transformFn =
         sourceProp?.transform ?? docsConfig?.source?.transform;
-      const transformed = transformCodeWithParameters(
-        (await transformFn?.(code, transformContext)) ?? code,
+
+      // First apply the user defined transform function
+      const transformed = (await transformFn?.(code, transformContext)) ?? code;
+
+      // Store the transformed code for the sandbox
+      sandboxCode.current = transformCodeWithParameters(
+        transformed,
         addonConfig.current ?? undefined,
         docsConfig,
         additionalTransformers,
       );
 
-      renderedCode.current = transformed;
-      return transformed;
+      // Return the transformed code for the source block
+      return transformCode(transformed, {
+        ...COMMON_TRANSFORMERS,
+        ...addonConfig.current?.additionalTransformers,
+        ...additionalTransformers,
+      });
     },
     [sourceProp?.transform, additionalTransformers, docsConfig, addonConfig],
   );

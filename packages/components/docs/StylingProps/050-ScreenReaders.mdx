@@ -23,3 +23,10 @@ The `srOnly` prop allows you to set a component to be only visible on screen rea
 The `srOnly` prop is responsive, allowing you to show content on larger screens and hiding them on smaller ones, enabling screen readers to have the same context as larger screens as they are not limited by device size.
 
 <ComponentExample of={ComponentStories.srOnlyResponsive} sourceState="shown" />
+
+## `hideFrom` and `hideBelow`
+
+The `hideFrom` and `hideBelow` props allow you to hide content from both visual users and screen readers at different breakpoints. This is useful when certain content is not relevant on smaller screens, and you want to ensure that screen reader users have the same experience as visual users.
+
+<ComponentExample of={ComponentStories.hideFrom} sourceState="shown" />
+<ComponentExample of={ComponentStories.hideBelow} sourceState="shown" />

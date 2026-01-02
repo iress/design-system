@@ -10,6 +10,7 @@ vi.mock('../helpers/getSandboxUrl', () => ({
 }));
 
 vi.mock('../helpers/transformCode', () => ({
+  transformCode: vi.fn((code) => `transformed: ${code}`),
   transformCodeWithParameters: vi.fn((code) => `transformed: ${code}`),
 }));
 

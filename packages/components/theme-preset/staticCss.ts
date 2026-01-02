@@ -6,6 +6,7 @@ import { textCompositions } from './tokens/textStyles';
 import { spanCompositions } from './utilities/span';
 import { offsetCompositions } from './utilities/offset';
 import { MARGIN_TOKENS, SPACING_TOKENS } from './tokens/spacing';
+import { breakpoints } from './tokens/breakpoints';
 
 /**
  * Allowed CSS properties for all components.
@@ -20,7 +21,6 @@ const allowedCssProps = {
   color: Object.keys(colors),
   columnGap: ['*'],
   gap: ['*'],
-  hide: ['true', 'false'],
   layerStyle: Object.keys(elevationCompositions),
   maxWidth: ['*'],
 
@@ -64,6 +64,8 @@ export const staticCss: ExtendableOptions['staticCss'] = {
     {
       properties: {
         focusable: ['true', 'within'],
+        hideFrom: Object.keys(breakpoints),
+        hideBelow: Object.keys(breakpoints),
         noGutter: ['true'],
         stretch: ['true'],
       },

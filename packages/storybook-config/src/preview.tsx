@@ -3,7 +3,12 @@ import {
   IressStorybook,
   type IressStorybookProps,
 } from './components/IressStorybook';
-import { IressProvider } from '@iress-oss/ids-components';
+import {
+  BREAKPOINT_DETAILS,
+  type Breakpoints,
+  BREAKPOINTS,
+  IressProvider,
+} from '@iress-oss/ids-components';
 import { lazy, Suspense } from 'react';
 import { type AddonConfig } from '@iress-oss/ids-storybook-sandbox';
 import sandboxHtml from './sandbox.html?raw';
@@ -89,6 +94,27 @@ export const getPreview = ({
         template: sandboxTemplate,
         ...sandboxConfig,
       } satisfies AddonConfig,
+      viewport: {
+        options: BREAKPOINTS.reduce(
+          (accumulator, breakpoint) => {
+            const details = BREAKPOINT_DETAILS[breakpoint];
+
+            accumulator[breakpoint] = {
+              name: `${breakpoint} (${details.screenWidthRange})`,
+              styles: {
+                width: `${details.viewportWidth}px`,
+                height: '100vh',
+              },
+            };
+
+            return accumulator;
+          },
+          {} as Record<
+            Breakpoints,
+            { name: string; styles: { width: string; height: string } }
+          >,
+        ),
+      },
     },
   };
 };
