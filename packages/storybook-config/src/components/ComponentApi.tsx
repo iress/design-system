@@ -10,7 +10,8 @@ import {
 } from 'storybook/internal/types';
 
 export interface ComponentApiProps
-  extends Omit<ComponentProps<typeof Controls>, 'children'>,
+  extends
+    Omit<ComponentProps<typeof Controls>, 'children'>,
     Omit<ComponentApiHeadingProps, 'children'> {
   /**
    * Additional details to display above the API table.
