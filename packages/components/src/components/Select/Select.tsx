@@ -58,7 +58,7 @@ const Select = (
     [children],
   );
 
-  useImperativeHandle(ref, () => elementRef.current);
+  useImperativeHandle(ref, () => elementRef.current!);
 
   return (
     <div
@@ -79,7 +79,9 @@ const Select = (
           data-testid={propagateTestid(dataTestid, 'select')}
           id={id}
           name={restProps.name}
-          ref={(element) => (elementRef.current = element)}
+          ref={(element) => {
+            elementRef.current = element;
+          }}
           style={style}
           value={value}
           width={width}

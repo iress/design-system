@@ -75,13 +75,13 @@ export const useControlledState = <
   propName = 'value',
   value,
 }: ControlledStateProps<TValue>): ControlledStateHook<TValue, TArrayValue> => {
-  const previousValue = useRef<TValue | undefined>();
+  const previousValue = useRef<TValue | undefined>(undefined);
   const isControlled = useMemo(() => value !== undefined, [value]);
   const [uncontrolled, setUncontrolled] = useState<TValue | undefined>(
     multiple ? (toArray(defaultValue) as TValue) : defaultValue,
   );
 
-  resetUncontrolledValue(setUncontrolled, previousValue.current, value);
+  resetUncontrolledValue<TValue>(setUncontrolled, previousValue.current, value);
   previousValue.current = value;
 
   useEffect(() => {

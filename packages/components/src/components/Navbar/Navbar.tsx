@@ -34,8 +34,7 @@ export const IressNavbar: NavbarWithEnums = ({
   'data-testid': dataTestid,
   ...restProps
 }: IressNavbarProps) => {
-  const elementRef: React.RefObject<HTMLDivElement> =
-    useRef<HTMLDivElement>(null);
+  const elementRef = useRef<HTMLDivElement>(null);
 
   const [hasNavSlotContent, setHasNavSlotContent] = useState(false);
   const [logoFound, setLogoFound] = useState(true);

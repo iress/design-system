@@ -136,7 +136,7 @@ export const IressModal: ModalWithEnums = ({
     return headingProp
       ? cloneElement(headingProp, {
           id: headingId,
-        })
+        } as never)
       : null;
   }, [dataTestid, headingId, headingProp]);
 
