@@ -61,9 +61,8 @@ export interface ButtonRenderProps<
 export interface InternalButtonProps<
   C extends ElementType | undefined = undefined,
   THref extends string | undefined = undefined,
-> extends IressCSSProps,
-    IressTestProps,
-    ButtonGroupItemProps {
+>
+  extends IressCSSProps, IressTestProps, ButtonGroupItemProps {
   /**
    * Sets the active state of the button, usually used to indicate the button has activated a modal, popover or slideout.
    */

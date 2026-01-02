@@ -15,8 +15,7 @@ import {
 import { ToasterContext } from './hooks/useToaster';
 
 export interface IressToasterProviderProps
-  extends Omit<ToasterProps, 'toasts'>,
-    PropsWithChildren {
+  extends Omit<ToasterProps, 'toasts'>, PropsWithChildren {
   /**
    * A unique identifier for the toaster provider.
    * This is useful if you have multiple toaster providers in your application based on context.

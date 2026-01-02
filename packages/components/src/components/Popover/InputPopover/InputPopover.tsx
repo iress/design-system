@@ -20,10 +20,8 @@ import { popover } from '../Popover.styles';
 import { NestedPopoverActivator } from '../components/NestedPopoverActivator';
 
 export interface IressInputPopoverProps
-  extends Omit<
-      IressPopoverProps,
-      'fluid' | 'matchActivatorWidth' | 'virtualFocus'
-    >,
+  extends
+    Omit<IressPopoverProps, 'fluid' | 'matchActivatorWidth' | 'virtualFocus'>,
     Omit<InputPopoverActivatorProps, 'children'> {
   /**
    * Content for an activator element, usually an `IressInput`.

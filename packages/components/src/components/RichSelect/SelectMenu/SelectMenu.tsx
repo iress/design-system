@@ -22,11 +22,12 @@ import { GlobalCSSClass } from '@/enums';
 import { cx } from '@/styled-system/css';
 import { type FormControlValue } from '@/types';
 
-export interface IressSelectMenuProps<TMultiple extends boolean = false>
-  extends Omit<
-    IressMenuProps<FormControlValue, TMultiple>,
-    'children' | 'onChange' | 'selected' | 'type'
-  > {
+export interface IressSelectMenuProps<
+  TMultiple extends boolean = false,
+> extends Omit<
+  IressMenuProps<FormControlValue, TMultiple>,
+  'children' | 'onChange' | 'selected' | 'type'
+> {
   /**
    * Heading slot. Often used for a title or description.
    * If a string, will automatically provide an id for aria-labelledby.
@@ -76,8 +77,7 @@ export interface IressSelectMenuProps<TMultiple extends boolean = false>
 }
 
 export interface IressSelectMenuItemProps
-  extends Omit<IressMenuItemProps<'button'>, 'value'>,
-    FormattedLabelValueMeta {
+  extends Omit<IressMenuItemProps<'button'>, 'value'>, FormattedLabelValueMeta {
   /**
    * Set whether this item is hidden on mobile
    */

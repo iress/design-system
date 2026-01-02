@@ -18,7 +18,8 @@ import { cx } from '@/styled-system/css';
 import { IressText } from '@/components/Text';
 
 export interface ShortFormProps<T extends FieldValues, TContext = object>
-  extends Omit<IressHookFormProps<T, TContext>, 'form'>,
+  extends
+    Omit<IressHookFormProps<T, TContext>, 'form'>,
     FormPatternProps<T, TContext> {
   /**
    * The actions to be displayed at the bottom left of the form.

@@ -27,8 +27,10 @@ import { splitCssProps, styled } from '@/styled-system/jsx';
 import { IressText } from '../Text';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
 
-export interface IressCheckboxProps<T = FormControlValue>
-  extends Omit<IressStyledProps<'input'>, 'defaultValue' | 'value'> {
+export interface IressCheckboxProps<T = FormControlValue> extends Omit<
+  IressStyledProps<'input'>,
+  'defaultValue' | 'value'
+> {
   /**
    * If true, the checkbox is selected.
    * Please use this when are rendering the checkbox in controlled mode.

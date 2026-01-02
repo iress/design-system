@@ -8,8 +8,10 @@ import { GlobalCSSClass } from '@/enums';
 import { LabelBase } from '@/components/Label/LabelBase/LabelBase';
 import { type ReactNode } from 'react';
 
-export interface IressFieldGroupProps
-  extends IressFieldProps<'fieldset', 'legend'> {
+export interface IressFieldGroupProps extends IressFieldProps<
+  'fieldset',
+  'legend'
+> {
   /**
    * Should contain multiple `IressField`, or other elements supported in field group such as `IressButton`.
    */

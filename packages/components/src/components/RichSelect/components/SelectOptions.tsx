@@ -29,7 +29,8 @@ import { type IressButtonProps } from '@/components/Button';
 import { type ControlledValue } from '@/hooks';
 
 interface SelectOptionsProps<TMultiple extends boolean = false>
-  extends Pick<
+  extends
+    Pick<
       IressRichSelectProps<TMultiple>,
       | 'autoHighlight'
       | 'minSearchLength'

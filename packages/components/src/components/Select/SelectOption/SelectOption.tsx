@@ -2,8 +2,10 @@ import { styled } from '@/styled-system/jsx';
 import { type FormControlValue, type IressStyledProps } from '@/types';
 import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAsString';
 
-export interface IressSelectOptionProps
-  extends Omit<IressStyledProps<'option'>, 'value'> {
+export interface IressSelectOptionProps extends Omit<
+  IressStyledProps<'option'>,
+  'value'
+> {
   /**
    * Value of selected option.
    * It will be converted to a string and used to match with the value of IressSelect during the onChange event.

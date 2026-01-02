@@ -7,8 +7,9 @@ import { useContext } from 'react';
 import { getTableContext } from '../TableProvider';
 import { styled } from '@/styled-system/jsx';
 
-export interface TableRowsProps<TRow extends object = never>
-  extends Partial<Pick<AriaRelationshipProps, 'setControlViaRef'>> {
+export interface TableRowsProps<TRow extends object = never> extends Partial<
+  Pick<AriaRelationshipProps, 'setControlViaRef'>
+> {
   additionalHeaders?: string;
   hiddenHeader?: boolean;
   scope?: 'row' | 'col';

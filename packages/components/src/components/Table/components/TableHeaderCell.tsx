@@ -7,8 +7,7 @@ import { type Column } from '@tanstack/react-table';
 import { TableContext } from '../TableProvider';
 
 export interface TableHeaderCellProps
-  extends PropsWithChildren,
-    IressTestProps {
+  extends PropsWithChildren, IressTestProps {
   additionalHeaders?: string;
   columnApi: Pick<
     Column<object, unknown>,

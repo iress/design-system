@@ -6,8 +6,10 @@ import {
   type UseSandboxCanvasProps,
 } from '@iress-oss/ids-storybook-sandbox';
 
-export interface ComponentCanvasProps
-  extends Omit<UseSandboxCanvasProps, 'additionalTransformers'> {
+export interface ComponentCanvasProps extends Omit<
+  UseSandboxCanvasProps,
+  'additionalTransformers'
+> {
   /**
    * Allow refreshing the canvas.
    * Useful for resetting if the story has side effects.

@@ -11,8 +11,10 @@ import { styled } from '@/styled-system/jsx';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 
-export interface IressValidationSummaryProps
-  extends Omit<IressStyledProps<'ul'>, 'prefix'> {
+export interface IressValidationSummaryProps extends Omit<
+  IressStyledProps<'ul'>,
+  'prefix'
+> {
   /**
    * ValidationMessage Array containing the `id` of the field and the validation message
    **/

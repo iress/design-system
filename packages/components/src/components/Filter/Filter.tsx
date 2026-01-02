@@ -39,7 +39,8 @@ import { GlobalCSSClass } from '@/enums';
 import { FilterResultsDescriptor } from './components/FilterResultsDescriptor';
 
 export interface IressFilterProps<TMultiple extends boolean = false>
-  extends Omit<IressHTMLAttributes, 'defaultValue' | 'onChange'>,
+  extends
+    Omit<IressHTMLAttributes, 'defaultValue' | 'onChange'>,
     Omit<AutocompleteSearchHookProps, 'query'>,
     Pick<IressSelectMenuProps, 'limitMobile' | 'limitDesktop'> {
   /**
@@ -111,7 +112,8 @@ export interface IressFilterProps<TMultiple extends boolean = false>
 }
 
 export interface FilterResultsDescriptorProps
-  extends Pick<IressFilterProps, 'searchNoResultsText'>,
+  extends
+    Pick<IressFilterProps, 'searchNoResultsText'>,
     Pick<AutocompleteSearchHookReturn, 'loading' | 'results'>,
     Omit<IressHTMLAttributes, 'children' | 'className' | 'results'> {}
 
@@ -121,11 +123,10 @@ export interface FilterRef {
   reset: () => void;
 }
 
-export interface FilterPopoverProps
-  extends Pick<
-    IressPopoverProps,
-    'align' | 'className' | 'container' | 'displayMode'
-  > {
+export interface FilterPopoverProps extends Pick<
+  IressPopoverProps,
+  'align' | 'className' | 'container' | 'displayMode'
+> {
   footer?: ReactNode;
   header?: ReactNode;
 }

@@ -18,11 +18,10 @@ import { propagateTestid } from '@/helpers/utility/propagateTestid';
 import { IressInline } from '@/components/Inline';
 import { tagInput } from './TagInput.styles';
 
-export interface IressTagInputProps
-  extends Omit<
-    IressInputProps<string>,
-    'defaultValue' | 'onChange' | 'prepend' | 'value' | 'rows'
-  > {
+export interface IressTagInputProps extends Omit<
+  IressInputProps<string>,
+  'defaultValue' | 'onChange' | 'prepend' | 'value' | 'rows'
+> {
   /**
    * Tags to display (uncontrolled)
    */

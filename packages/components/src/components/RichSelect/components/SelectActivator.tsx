@@ -46,7 +46,8 @@ export interface IressSelectActivatorProps {
 }
 
 interface SelectActivatorProps<TMultiple extends boolean = false>
-  extends Pick<
+  extends
+    Pick<
       IressRichSelectProps<TMultiple>,
       | 'id'
       | 'multiSelect'

@@ -4,8 +4,7 @@ import { type Cell } from '@tanstack/react-table';
 import { useTableColumnStyles } from '../hooks/useTableColumnStyles';
 
 export interface TableBodyCellProps<TRow extends object = never>
-  extends PropsWithChildren,
-    IressTestProps {
+  extends PropsWithChildren, IressTestProps {
   additionalHeaders?: string;
   cellApi: Pick<Cell<TRow, unknown>, 'column' | 'row' | 'id'>;
   hiddenHeader?: boolean;

@@ -12,8 +12,9 @@ export interface MockAPI extends Partial<API> {
   getChannel: Mock;
 }
 
-export interface MockStoryContext
-  extends Partial<StoryContext<Renderer, Args>> {
+export interface MockStoryContext extends Partial<
+  StoryContext<Renderer, Args>
+> {
   parameters: {
     docs?: {
       source?: {

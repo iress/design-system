@@ -95,10 +95,8 @@ export interface StartUpLoadingProps extends Omit<IressStyledProps, 'color'> {
 }
 
 interface MessageProps
-  extends Pick<
-      StartUpLoadingProps,
-      'children' | 'messageList' | 'screenReaderText'
-    >,
+  extends
+    Pick<StartUpLoadingProps, 'children' | 'messageList' | 'screenReaderText'>,
     IressTextProps<'div'> {
   progressValue: number;
   show: boolean;

@@ -24,7 +24,9 @@ import { type ReactHookFormCompatibleRef } from '@/interfaces';
 export interface IressFormFieldsetProps<
   T extends FieldValues = FieldValues,
   TName extends FieldPath<T> = FieldPath<T>,
-> extends Omit<
+>
+  extends
+    Omit<
       IressFieldGroupProps,
       'children' | 'htmlFor' | 'required' | 'join' | 'inline'
     >,

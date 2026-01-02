@@ -8,8 +8,9 @@ import { GlobalCSSClass } from '@/enums';
 
 type SkeletonMode = 'rect' | 'circle' | 'text';
 
-export interface IressSkeletonProps<TMode extends SkeletonMode = 'text'>
-  extends Omit<IressStyledProps, 'width' | 'height'> {
+export interface IressSkeletonProps<
+  TMode extends SkeletonMode = 'text',
+> extends Omit<IressStyledProps, 'width' | 'height'> {
   /**
    * Sets the height of the skeleton bones. If no unit is specified it will default to pixels.
    * Not allowed when in `text` mode.

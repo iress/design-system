@@ -11,7 +11,8 @@ import {
 import { IressIcon } from '@/components/Icon';
 
 export interface IressSelectCreateProps
-  extends Omit<
+  extends
+    Omit<
       IressMenuProps,
       | 'changeOnBlur'
       | 'children'

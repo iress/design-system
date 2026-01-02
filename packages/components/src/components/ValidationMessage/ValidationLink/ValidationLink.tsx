@@ -9,8 +9,7 @@ import { GlobalCSSClass } from '@/enums';
 /**
  * @deprecated Use `IressValidationMessageProps<string>` instead.
  */
-export interface IressValidationLinkProps
-  extends IressValidationMessageProps<string> {
+export interface IressValidationLinkProps extends IressValidationMessageProps<string> {
   /**
    * Validation content (what went wrong, what went right).
    */

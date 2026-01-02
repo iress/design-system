@@ -4,8 +4,10 @@ import { forwardRef, type Ref } from 'react';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 
-export interface IressCloseButtonProps
-  extends Omit<IressButtonProps, 'children' | 'mode'> {
+export interface IressCloseButtonProps extends Omit<
+  IressButtonProps,
+  'children' | 'mode'
+> {
   /**
    * Description for screen readers.
    * @default Close button

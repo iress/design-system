@@ -26,7 +26,9 @@ import { useFieldRenderProps } from './hooks/useFieldRenderProps';
 export interface IressFormFieldProps<
   T extends FieldValues = FieldValues,
   TName extends FieldPath<T> = FieldPath<T>,
-> extends Omit<IressFieldProps, 'children' | 'htmlFor' | 'required'>,
+>
+  extends
+    Omit<IressFieldProps, 'children' | 'htmlFor' | 'required'>,
     Omit<UseControllerProps<T, FieldPath<T>>, 'disabled'> {
   /**
    * React Hook Form control object. It is used to register the field with the form.
@@ -86,8 +88,9 @@ export interface IressFormFieldProps<
 /**
  * Props for the `IressFormField` `render` prop.
  */
-export interface FormFieldRenderProps<T extends FieldValues>
-  extends ControllerRenderProps<T, FieldPath<T>> {
+export interface FormFieldRenderProps<
+  T extends FieldValues,
+> extends ControllerRenderProps<T, FieldPath<T>> {
   /**
    * ID of the field. It is automatically generated based on the name of the field and its parent form.
    */
