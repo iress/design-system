@@ -2180,7 +2180,7 @@ __metadata:
     "@types/mdx": "npm:^2.0.13"
     "@types/query-selector-shadow-dom": "npm:1.0.4"
     "@types/react": "npm:^19.2.7"
-    "@types/react-dom": "npm:^19.1.1"
+    "@types/react-dom": "npm:^19.2.3"
     "@vitejs/plugin-react": "npm:^5.1.1"
     "@vitest/coverage-v8": "npm:4.0.15"
     "@vitest/ui": "npm:4.0.15"
@@ -2201,8 +2201,8 @@ __metadata:
     postcss-preset-env: "npm:10.3.1"
     prettier: "npm:^3.6.2"
     query-selector-shadow-dom: "npm:1.0.1"
-    react: "npm:^19.2.0"
-    react-dom: "npm:^19.1.1"
+    react: "npm:^19.2.1"
+    react-dom: "npm:^19.2.1"
     react-dropzone: "npm:14.3.8"
     react-hook-form: "npm:7.67.0"
     rimraf: "npm:^6.1.2"
@@ -2262,6 +2262,7 @@ __metadata:
     "@iress-oss/ids-storybook-toggle-stories": "npm:^0.1.0"
     "@iress-oss/ids-storybook-version-badge": "npm:^0.1.1"
     "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.5"
+    "@mdx-js/react": "npm:3.1.1"
     "@storybook/addon-a11y": "npm:10.0.8"
     "@storybook/addon-docs": "npm:10.0.8"
     "@storybook/addon-links": "npm:10.0.8"
@@ -2289,9 +2290,9 @@ __metadata:
     json5: "npm:^2.2.3"
     prettier: "npm:^3.6.2"
     radash: "npm:12.1.1"
-    react: "npm:^19.2.0"
+    react: "npm:^19.2.1"
     react-diff-viewer: "npm:^3.1.1"
-    react-dom: "npm:^19.2.0"
+    react-dom: "npm:^19.2.1"
     react-element-to-jsx-string: "npm:^17.0.1"
     react-is: "npm:^19.2.1"
     remark-gfm: "npm:^4.0.1"
@@ -2337,7 +2338,7 @@ __metadata:
     "@testing-library/react": "npm:^16.3.0"
     "@types/node": "npm:^24.10.1"
     "@types/react": "npm:^19.2.7"
-    "@types/react-dom": "npm:^19.2.0"
+    "@types/react-dom": "npm:^19.2.3"
     "@typescript-eslint/eslint-plugin": "npm:^8.48.0"
     "@typescript-eslint/parser": "npm:^8.48.0"
     "@vitejs/plugin-react": "npm:^5.1.1"
@@ -2350,8 +2351,8 @@ __metadata:
     eslint-plugin-mdx: "npm:^3.6.2"
     eslint-plugin-prettier: "npm:^5.5.4"
     prettier: "npm:^3.3.3"
-    react: "npm:^19.2.0"
-    react-dom: "npm:^19.2.0"
+    react: "npm:^19.2.1"
+    react-dom: "npm:^19.2.1"
     rimraf: "npm:6.1.2"
     storybook: "npm:10.1.10"
     tsup: "npm:^8.5.1"
@@ -2374,7 +2375,7 @@ __metadata:
     "@storybook/react-vite": "npm:10.0.8"
     "@types/node": "npm:^24.10.1"
     "@types/react": "npm:^19.2.7"
-    "@types/react-dom": "npm:^19.2.0"
+    "@types/react-dom": "npm:^19.2.3"
     "@typescript-eslint/eslint-plugin": "npm:^8.48.0"
     "@typescript-eslint/parser": "npm:^8.48.0"
     "@vitejs/plugin-react": "npm:^5.1.1"
@@ -2387,8 +2388,8 @@ __metadata:
     eslint-plugin-mdx: "npm:^3.6.2"
     eslint-plugin-prettier: "npm:^5.5.4"
     prettier: "npm:^3.3.3"
-    react: "npm:^19.2.0"
-    react-dom: "npm:^19.2.0"
+    react: "npm:^19.2.1"
+    react-dom: "npm:^19.2.1"
     rimraf: "npm:6.1.2"
     storybook: "npm:10.1.10"
     tsup: "npm:^8.5.1"
@@ -2412,7 +2413,7 @@ __metadata:
     "@storybook/react-vite": "npm:10.0.8"
     "@types/node": "npm:^24.10.1"
     "@types/react": "npm:^19.2.7"
-    "@types/react-dom": "npm:^19.2.0"
+    "@types/react-dom": "npm:^19.2.3"
     "@typescript-eslint/eslint-plugin": "npm:^8.48.0"
     "@typescript-eslint/parser": "npm:^8.48.0"
     "@vitejs/plugin-react": "npm:^5.1.1"
@@ -2424,8 +2425,8 @@ __metadata:
     eslint-plugin-mdx: "npm:^3.6.2"
     eslint-plugin-prettier: "npm:^5.5.4"
     prettier: "npm:^3.3.3"
-    react: "npm:^19.2.0"
-    react-dom: "npm:^19.2.0"
+    react: "npm:^19.2.1"
+    react-dom: "npm:^19.2.1"
     rimraf: "npm:6.1.2"
     storybook: "npm:10.1.10"
     tsup: "npm:^8.5.1"
@@ -2447,7 +2448,7 @@ __metadata:
     "@storybook/react-vite": "npm:10.0.8"
     "@types/node": "npm:^24.10.1"
     "@types/react": "npm:^19.2.7"
-    "@types/react-dom": "npm:^19.2.0"
+    "@types/react-dom": "npm:^19.2.3"
     "@typescript-eslint/eslint-plugin": "npm:^8.48.0"
     "@typescript-eslint/parser": "npm:^8.48.0"
     "@vitejs/plugin-react": "npm:^5.1.1"
@@ -2459,8 +2460,8 @@ __metadata:
     eslint-plugin-mdx: "npm:^3.6.2"
     eslint-plugin-prettier: "npm:^5.5.4"
     prettier: "npm:^3.3.3"
-    react: "npm:^19.2.0"
-    react-dom: "npm:^19.2.0"
+    react: "npm:^19.2.1"
+    react-dom: "npm:^19.2.1"
     rimraf: "npm:6.1.2"
     storybook: "npm:10.1.10"
     tsup: "npm:^8.5.1"
@@ -2479,7 +2480,7 @@ __metadata:
   resolution: "@iress-oss/ids-tokens@workspace:packages/tokens"
   dependencies:
     "@types/react": "npm:^19.2.7"
-    "@types/react-dom": "npm:^19.2.0"
+    "@types/react-dom": "npm:^19.2.3"
     "@typescript-eslint/eslint-plugin": "npm:^8.48.0"
     "@typescript-eslint/parser": "npm:^8.48.0"
     "@vitejs/plugin-react": "npm:^5.1.1"
@@ -2496,8 +2497,8 @@ __metadata:
     nodemon: "npm:^3.1.11"
     prettier: "npm:^3.6.2"
     radash: "npm:^12.1.1"
-    react: "npm:^19.2.0"
-    react-dom: "npm:^19.2.0"
+    react: "npm:^19.2.1"
+    react-dom: "npm:^19.2.1"
     remark-gfm: "npm:^4.0.1"
     rimraf: "npm:^6.1.2"
     rollup-plugin-tree-shakeable: "npm:^2.0.0"
@@ -2539,6 +2540,7 @@ __metadata:
     "@types/ws": "npm:^8.18.1"
     "@typescript-eslint/eslint-plugin": "npm:^8.48.0"
     "@typescript-eslint/parser": "npm:^8.48.0"
+    "@vitest/mocker": "npm:4.0.16"
     "@vueless/storybook-dark-mode": "npm:10.0.3"
     boxen: "npm:^8.0.1"
     chalk: "npm:^5.6.2"
@@ -2555,8 +2557,8 @@ __metadata:
     pinst: "npm:^3.0.0"
     prettier: "npm:^3.6.2"
     puppeteer: "npm:^24.31.0"
-    react: "npm:^19.2.0"
-    react-dom: "npm:^19.2.0"
+    react: "npm:^19.2.1"
+    react-dom: "npm:^19.2.1"
     storybook: "npm:10.1.10"
     storybook-addon-tag-badges: "npm:^3.0.2"
     ts-dedent: "npm:^2.2.0"
@@ -2803,7 +2805,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/react@npm:^3.0.0":
+"@mdx-js/react@npm:3.1.1, @mdx-js/react@npm:^3.0.0":
   version: 3.1.1
   resolution: "@mdx-js/react@npm:3.1.1"
   dependencies:
@@ -4572,12 +4574,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^19, @types/react-dom@npm:^19.1.1, @types/react-dom@npm:^19.2.0":
+"@types/react-dom@npm:^19":
   version: 19.2.2
   resolution: "@types/react-dom@npm:19.2.2"
   peerDependencies:
     "@types/react": ^19.2.0
   checksum: 10c0/6154dfb8e7a638313d7fa15b2b16494f2235afda4c43be37d10f34e5c7a730f6b95117facb5e6eebc73b15cceea7f6da23be46cda5d2262fd00fd7e6069547e3
+  languageName: node
+  linkType: hard
+
+"@types/react-dom@npm:^19.2.3":
+  version: 19.2.3
+  resolution: "@types/react-dom@npm:19.2.3"
+  peerDependencies:
+    "@types/react": ^19.2.0
+  checksum: 10c0/b486ebe0f4e2fb35e2e108df1d8fc0927ca5d6002d5771e8a739de11239fe62d0e207c50886185253c99eb9dedfeeb956ea7429e5ba17f6693c7acb4c02f8cd1
   languageName: node
   linkType: hard
 
@@ -4920,6 +4931,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vitest/mocker@npm:4.0.16":
+  version: 4.0.16
+  resolution: "@vitest/mocker@npm:4.0.16"
+  dependencies:
+    "@vitest/spy": "npm:4.0.16"
+    estree-walker: "npm:^3.0.3"
+    magic-string: "npm:^0.30.21"
+  peerDependencies:
+    msw: ^2.4.9
+    vite: ^6.0.0 || ^7.0.0-0
+  peerDependenciesMeta:
+    msw:
+      optional: true
+    vite:
+      optional: true
+  checksum: 10c0/cf4469a4745e3cdd46e8ee4e20aa04369e7f985d40175d974d3a6f6d331bf9d8610f9638c5a18f7ff59a30ff04b19f4b823457b4c79142186fe463fa4cee80c5
+  languageName: node
+  linkType: hard
+
 "@vitest/pretty-format@npm:3.2.4":
   version: 3.2.4
   resolution: "@vitest/pretty-format@npm:3.2.4"
@@ -4972,6 +5002,13 @@ __metadata:
   version: 4.0.15
   resolution: "@vitest/spy@npm:4.0.15"
   checksum: 10c0/22319cead44964882d9e7bd197a9cd317c945ff75a4a9baefe06c32c5719d4cb887e86b4560d79716765f288a93a6c76e78e3eeab0000f24b2236dab678b7c34
+  languageName: node
+  linkType: hard
+
+"@vitest/spy@npm:4.0.16":
+  version: 4.0.16
+  resolution: "@vitest/spy@npm:4.0.16"
+  checksum: 10c0/2502918e703d60ef64854d0fa83ebf94da64b80e81b80c319568feee3d86069fd46e24880a768edba06c8caba13801e44005e17a0f16d9b389486f24d539f0bf
   languageName: node
   linkType: hard
 
@@ -13398,7 +13435,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react-dom@npm:^19.0.0, react-dom@npm:^19.1.1, react-dom@npm:^19.2.0":
+"react-dom@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react-dom@npm:^19.0.0":
   version: 19.2.0
   resolution: "react-dom@npm:19.2.0"
   dependencies:
@@ -13406,6 +13443,17 @@ __metadata:
   peerDependencies:
     react: ^19.2.0
   checksum: 10c0/fa2cae05248d01288e91523b590ce4e7635b1e13f1344e225f850d722a8da037bf0782f63b1c1d46353334e0c696909b82e582f8cad607948fde6f7646cc18d9
+  languageName: node
+  linkType: hard
+
+"react-dom@npm:^19.2.1":
+  version: 19.2.3
+  resolution: "react-dom@npm:19.2.3"
+  dependencies:
+    scheduler: "npm:^0.27.0"
+  peerDependencies:
+    react: ^19.2.3
+  checksum: 10c0/dc43f7ede06f46f3acc16ee83107c925530de9b91d1d0b3824583814746ff4c498ea64fd65cd83aba363205268adff52e2827c582634ae7b15069deaeabc4892
   languageName: node
   linkType: hard
 
@@ -13480,10 +13528,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react@npm:^19.0.0, react@npm:^19.2.0":
+"react@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react@npm:^19.0.0":
   version: 19.2.0
   resolution: "react@npm:19.2.0"
   checksum: 10c0/1b6d64eacb9324725bfe1e7860cb7a6b8a34bc89a482920765ebff5c10578eb487e6b46b2f0df263bd27a25edbdae2c45e5ea5d81ae61404301c1a7192c38330
+  languageName: node
+  linkType: hard
+
+"react@npm:^19.2.1":
+  version: 19.2.3
+  resolution: "react@npm:19.2.3"
+  checksum: 10c0/094220b3ba3a76c1b668f972ace1dd15509b157aead1b40391d1c8e657e720c201d9719537375eff08f5e0514748c0319063392a6f000e31303aafc4471f1436
   languageName: node
   linkType: hard
 
