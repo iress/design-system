@@ -6,8 +6,10 @@ import {
 import { type IressHTMLAttributes } from '@/interfaces';
 import { type FormControlValue } from '@/types';
 
-export interface IressButtonGroupProps
-  extends Omit<IressHTMLAttributes, 'onChange'> {
+export interface IressButtonGroupProps extends Omit<
+  IressHTMLAttributes,
+  'onChange'
+> {
   /**
    * Content of the button group, usually multiple `IressButton`.
    */

@@ -51,8 +51,9 @@ export interface IressCardSlotsProps extends WithDataAttributes {
   topRight?: React.ReactNode;
 }
 
-export interface IressCardWrapperProps<T = HTMLDivElement>
-  extends IressHTMLAttributes<T> {
+export interface IressCardWrapperProps<
+  T = HTMLDivElement,
+> extends IressHTMLAttributes<T> {
   /**
    * Sets whether the card is clickable.
    */
@@ -75,8 +76,7 @@ export interface IressCardWrapperProps<T = HTMLDivElement>
 }
 
 export interface IressCardProps<T = HTMLDivElement>
-  extends Omit<IressCardWrapperProps<T>, 'clickable'>,
-    IressCardSlotsProps {
+  extends Omit<IressCardWrapperProps<T>, 'clickable'>, IressCardSlotsProps {
   /**
    * When set, the card will be clickable and will apply the selected style
    */
@@ -84,11 +84,13 @@ export interface IressCardProps<T = HTMLDivElement>
 }
 
 export interface IressButtonCardProps
-  extends IressCardProps<HTMLButtonElement>,
+  extends
+    IressCardProps<HTMLButtonElement>,
     React.DetailedHTMLProps<IressButtonHTMLAttributes, HTMLButtonElement> {}
 
 export interface IressLinkCardProps
-  extends IressCardProps<HTMLAnchorElement>,
+  extends
+    IressCardProps<HTMLAnchorElement>,
     Omit<
       React.DetailedHTMLProps<
         React.AnchorHTMLAttributes<HTMLAnchorElement>,

@@ -28,7 +28,8 @@ import styles from '@/components/RichSelect/RichSelect.module.scss';
 import { toArray } from '@helpers/formatting/toArray';
 
 interface SelectOptionsProps
-  extends Pick<
+  extends
+    Pick<
       IressRichSelectProps,
       | 'autoHighlight'
       | 'minSearchLength'

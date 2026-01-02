@@ -2,8 +2,10 @@ import { type ReactNode } from 'react';
 import { type IressButtonHTMLAttributes } from '@/interfaces';
 import { type FormControlValue } from '@/types';
 
-export interface IressTabProps
-  extends Omit<IressButtonHTMLAttributes, 'children' | 'value'> {
+export interface IressTabProps extends Omit<
+  IressButtonHTMLAttributes,
+  'children' | 'value'
+> {
   /**
    * Sets the active styling of the tab.
    */

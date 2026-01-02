@@ -9,7 +9,9 @@ import { type LabelBaseProps } from '../Label/LabelBase/LabelBase.types';
 export interface IressFieldProps<
   T = HTMLDivElement,
   U extends LabelBaseProps = IressLabelProps,
-> extends Omit<IressHTMLAttributes<T>, 'defaultValue'>,
+>
+  extends
+    Omit<IressHTMLAttributes<T>, 'defaultValue'>,
     Pick<U, 'hiddenLabel' | 'htmlFor' | 'optional' | 'required'>,
     Omit<FieldAppendToLabelProps<U>, 'data-parent-testid'> {
   /**

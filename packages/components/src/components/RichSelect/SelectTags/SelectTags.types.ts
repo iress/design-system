@@ -7,8 +7,7 @@ import { type IressSelectActivatorProps } from '../RichSelect.types';
 import { type ReactNode } from 'react';
 
 export interface IressSelectTagsProps
-  extends IressSelectActivatorProps,
-    Omit<IressHTMLAttributes, 'children'> {
+  extends IressSelectActivatorProps, Omit<IressHTMLAttributes, 'children'> {
   /**
    * Append content.
    * @default <IressButton mode="tertiary" role="combobox" aria-label="Select"><IressIcon name="chevron-down" /></IressButton>

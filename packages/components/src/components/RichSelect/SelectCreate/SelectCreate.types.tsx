@@ -3,7 +3,8 @@ import { type IressMenuItemProps, type IressMenuProps } from '../../Menu';
 import { type ButtonRef } from '@/components/Button';
 
 export interface IressSelectCreateProps
-  extends Omit<
+  extends
+    Omit<
       IressMenuProps,
       | 'changeOnBlur'
       | 'children'

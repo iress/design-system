@@ -11,8 +11,7 @@ export type InputRef = FocusableElementRef & {
   input?: InputBaseElement | null;
 };
 
-export interface InputBaseProps
-  extends IressInputHTMLAttributes<InputBaseElement> {
+export interface InputBaseProps extends IressInputHTMLAttributes<InputBaseElement> {
   /**
    * Number of rows in the `textarea` (when set the component renders a textarea element)
    */

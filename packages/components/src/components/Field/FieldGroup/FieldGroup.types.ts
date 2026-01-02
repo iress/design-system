@@ -1,10 +1,9 @@
 import { type FieldLegendProps, type IressFieldProps } from '@/main';
 
-export interface IressFieldGroupProps
-  extends Omit<
-    IressFieldProps<HTMLFieldSetElement, FieldLegendProps>,
-    'htmlFor'
-  > {
+export interface IressFieldGroupProps extends Omit<
+  IressFieldProps<HTMLFieldSetElement, FieldLegendProps>,
+  'htmlFor'
+> {
   /**
    * Should contain multiple `IressField`, or other elements supported in field group such as `IressButton`.
    */

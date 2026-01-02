@@ -7,11 +7,10 @@ import {
 import { type FormControlValue, type FormElementWidths } from '@/types';
 import { type IressReadonlyProps } from '../Readonly';
 
-export interface IressSelectProps<T = HTMLSelectElement>
-  extends Omit<
-    IressSelectHTMLAttributes<T>,
-    'defaultValue' | 'value' | 'onChange'
-  > {
+export interface IressSelectProps<T = HTMLSelectElement> extends Omit<
+  IressSelectHTMLAttributes<T>,
+  'defaultValue' | 'value' | 'onChange'
+> {
   /**
    * The `option` and `optgroup` elements to render within the select.
    */
@@ -62,8 +61,10 @@ export interface IressSelectProps<T = HTMLSelectElement>
   width?: FormElementWidth | FormElementWidths;
 }
 
-export interface IressSelectOptionProps
-  extends Omit<IressHTMLAttributes<HTMLOptionElement>, 'value'> {
+export interface IressSelectOptionProps extends Omit<
+  IressHTMLAttributes<HTMLOptionElement>,
+  'value'
+> {
   /**
    * Value of selected option.
    * It will be converted to a string and used to match with the value of IressSelect during the onChange event.
@@ -75,11 +76,10 @@ type IressSelectHTMLAttributes<T = HTMLSelectElement> = WithDataAttributes<
   React.SelectHTMLAttributes<T>
 >;
 
-export interface SelectControlProps
-  extends Omit<
-    IressSelectHTMLAttributes<HTMLSelectElement>,
-    'defaultValue' | 'value'
-  > {
+export interface SelectControlProps extends Omit<
+  IressSelectHTMLAttributes<HTMLSelectElement>,
+  'defaultValue' | 'value'
+> {
   /**
    * Value of selected option for uncontrolled select.
    */

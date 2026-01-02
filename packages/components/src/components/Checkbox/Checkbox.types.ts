@@ -1,11 +1,10 @@
 import { type IressInputHTMLAttributes } from '@/interfaces';
 import { type FormControlValue } from '@/types';
 
-export interface IressCheckboxProps
-  extends Omit<
-    IressInputHTMLAttributes<HTMLInputElement>,
-    'defaultValue' | 'value'
-  > {
+export interface IressCheckboxProps extends Omit<
+  IressInputHTMLAttributes<HTMLInputElement>,
+  'defaultValue' | 'value'
+> {
   /**
    * If true, the checkbox is selected.
    * Please use this when are rendering the checkbox in controlled mode.

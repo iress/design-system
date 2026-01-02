@@ -1,8 +1,10 @@
 import { type ReactNode } from 'react';
 import { type IressHTMLAttributes } from '@/interfaces';
 
-export interface IressExpanderProps
-  extends Omit<IressHTMLAttributes, 'onChange'> {
+export interface IressExpanderProps extends Omit<
+  IressHTMLAttributes,
+  'onChange'
+> {
   /**
    * The element used to activate the expandable container.
    */

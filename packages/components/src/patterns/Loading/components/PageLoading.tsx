@@ -90,8 +90,10 @@ const templates = {
   dashboard: DashboardTemplate,
 };
 
-export interface PageLoadingProps
-  extends Omit<IressHTMLAttributes, 'children'> {
+export interface PageLoadingProps extends Omit<
+  IressHTMLAttributes,
+  'children'
+> {
   /**
    * If provided, will switch the skeleton to this template. Use when you have critical content that can be displayed while loading to allow the user to see some content while the rest is loading.
    */

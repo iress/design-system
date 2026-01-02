@@ -2,8 +2,10 @@ import { type ReactNode } from 'react';
 import { type IressHTMLAttributes } from '@/interfaces';
 import { type FormControlValue } from '@/types';
 
-export interface IressRadioGroupProps
-  extends Omit<IressHTMLAttributes, 'onChange' | 'defaultValue'> {
+export interface IressRadioGroupProps extends Omit<
+  IressHTMLAttributes,
+  'onChange' | 'defaultValue'
+> {
   /**
    * Content of the radio group, usually multiple `IressRadio` components.
    */
@@ -78,10 +80,9 @@ export interface RadioGroupRef {
   blur: () => void;
 }
 
-export interface RadioGroupWithEnums
-  extends React.ForwardRefExoticComponent<
-    IressRadioGroupProps & React.RefAttributes<HTMLElement>
-  > {
+export interface RadioGroupWithEnums extends React.ForwardRefExoticComponent<
+  IressRadioGroupProps & React.RefAttributes<HTMLElement>
+> {
   /** @deprecated IressRadioGroup.Layout will be removed in future versions of IDS. Please use the value directly. */
   Layout: typeof RadioGroupLayout;
 }

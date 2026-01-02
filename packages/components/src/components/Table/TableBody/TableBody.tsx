@@ -17,7 +17,8 @@ import {
 import { GlobalCSSClass } from '@/enums';
 
 interface TableBodyHeaderProps
-  extends Pick<IressTableBodyProps, 'caption' | 'hiddenCaption'>,
+  extends
+    Pick<IressTableBodyProps, 'caption' | 'hiddenCaption'>,
     Pick<AriaRelationshipProps<HTMLTableCellElement>, 'setController'> {
   onChange?: () => void;
   open?: boolean;

@@ -5,11 +5,10 @@ import {
   type LabelValueMeta,
 } from '@/interfaces';
 
-export interface IressSelectMenuProps
-  extends Omit<
-    IressMenuProps,
-    'children' | 'onChange' | 'role' | 'selected' | 'type'
-  > {
+export interface IressSelectMenuProps extends Omit<
+  IressMenuProps,
+  'children' | 'onChange' | 'role' | 'selected' | 'type'
+> {
   /**
    * Heading slot. Often used for a title or description.
    * If a string, will automatically provide an id for aria-labelledby.
@@ -59,8 +58,7 @@ export interface IressSelectMenuProps
 }
 
 export interface IressSelectMenuItemProps
-  extends Omit<IressMenuItemProps, 'value'>,
-    FormattedLabelValueMeta {
+  extends Omit<IressMenuItemProps, 'value'>, FormattedLabelValueMeta {
   /**
    * Set whether this item is hidden on mobile
    */

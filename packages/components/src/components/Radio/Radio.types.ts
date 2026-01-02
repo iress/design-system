@@ -2,11 +2,10 @@ import { type ReactNode } from 'react';
 import { type IressInputHTMLAttributes } from '@/interfaces';
 import { type FormControlValue } from '@/types';
 
-export interface IressRadioProps
-  extends Omit<
-    IressInputHTMLAttributes<HTMLInputElement>,
-    'defaultValue' | 'value'
-  > {
+export interface IressRadioProps extends Omit<
+  IressInputHTMLAttributes<HTMLInputElement>,
+  'defaultValue' | 'value'
+> {
   /**
    * Sets the checked state of the radio.
    * If it is within a radio group, it will be overridden by the radio group's value

@@ -3,7 +3,8 @@ import { type IressTableCommonProps } from '../Table.types';
 import { type IressHTMLAttributes } from '@/interfaces';
 
 export interface IressTableBodyProps<TRow extends object = never, TVal = never>
-  extends IressHTMLAttributes<HTMLTableSectionElement>,
+  extends
+    IressHTMLAttributes<HTMLTableSectionElement>,
     IressTableCommonProps<TRow, TVal> {
   /**
    * Caption that describes the data in the inner table, required for accessibility.

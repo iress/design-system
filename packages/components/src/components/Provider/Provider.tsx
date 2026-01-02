@@ -12,7 +12,8 @@ import {
 import { createPortal } from 'react-dom';
 
 export interface IressProviderProps
-  extends Pick<IressSlideoutProviderProps, 'injectPushStyles'>,
+  extends
+    Pick<IressSlideoutProviderProps, 'injectPushStyles'>,
     Pick<IressToasterProviderProps, 'position'> {
   /**
    * The contents of your application, and/or the components which will be calling slideouts, modals and toasts.

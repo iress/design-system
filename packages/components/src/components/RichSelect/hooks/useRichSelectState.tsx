@@ -7,8 +7,9 @@ import {
 import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAsString';
 import { type IressSelectMenuProps } from '../SelectMenu/SelectMenu.types';
 
-export interface RichSelectStateHookReturn
-  extends ControlledStateHook<IressSelectMenuProps['selected']> {
+export interface RichSelectStateHookReturn extends ControlledStateHook<
+  IressSelectMenuProps['selected']
+> {
   getLabelsArray: () => string[];
   getLabelsString: (separator?: string) => string;
   getValuesArray: () => string[];

@@ -2,8 +2,10 @@ import { type TextVariant } from '@/enums';
 import { type IressHTMLAttributes } from '@/interfaces';
 import { type TextVariants } from '@/types';
 
-export interface IressSkeletonProps
-  extends Omit<IressHTMLAttributes, 'children'> {
+export interface IressSkeletonProps extends Omit<
+  IressHTMLAttributes,
+  'children'
+> {
   /**
    * Sets the height of the skeleton bones. If no unit is specified it will default to pixels. Will be ignored when in `text` mode.
    */

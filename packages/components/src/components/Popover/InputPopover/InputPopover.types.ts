@@ -1,7 +1,8 @@
 import { type IressPopoverProps, type PopoverActivatorProps } from '@/main';
 
 export interface IressInputPopoverProps
-  extends Omit<IressPopoverProps, 'matchActivatorWidth' | 'virtualFocus'>,
+  extends
+    Omit<IressPopoverProps, 'matchActivatorWidth' | 'virtualFocus'>,
     Pick<InputPopoverActivatorProps, 'minLength'> {
   /**
    * Content for an activator element, usually an `IressInput`.

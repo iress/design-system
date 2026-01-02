@@ -9,7 +9,8 @@ import {
 } from '@/main';
 
 export interface IressMenuItemProps
-  extends MenuItemStyleHookProps,
+  extends
+    MenuItemStyleHookProps,
     Omit<MenuItemInteractionsHookProps, 'id' | 'onClick' | 'onKeyDown'>,
     Omit<IressButtonProps, 'mode' | 'fluid'> {}
 
@@ -73,8 +74,9 @@ export interface MenuItemInteractionsHookProps<T = ButtonRef> {
   value?: FormControlValue;
 }
 
-export interface MenuItemInteractionsHookReturn<T>
-  extends PopoverItemHookReturn {
+export interface MenuItemInteractionsHookReturn<
+  T,
+> extends PopoverItemHookReturn {
   /**
    * Changes the value of its parent menu on click.
    */
@@ -115,17 +117,16 @@ export interface MenuItemAriaHookReturn {
   'aria-current'?: boolean;
 }
 
-export interface MenuItemButtonHookProps
-  extends Pick<
-    IressButtonProps,
-    | 'append'
-    | 'children'
-    | 'className'
-    | 'data-testid'
-    | 'prepend'
-    | 'role'
-    | 'value'
-  > {
+export interface MenuItemButtonHookProps extends Pick<
+  IressButtonProps,
+  | 'append'
+  | 'children'
+  | 'className'
+  | 'data-testid'
+  | 'prepend'
+  | 'role'
+  | 'value'
+> {
   /**
    * When true, will render a divider before the item.
    */

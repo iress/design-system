@@ -11,8 +11,9 @@ interface ToastHeadingProps<T = HTMLDivElement> extends IressHTMLAttributes<T> {
   heading?: React.ReactNode;
 }
 
-interface ToastCloseButtonProps<T = HTMLDivElement>
-  extends IressHTMLAttributes<T> {
+interface ToastCloseButtonProps<
+  T = HTMLDivElement,
+> extends IressHTMLAttributes<T> {
   /**
    * A boolean to show hide the dismiss close button on the top right of the corner.
    * @default true
@@ -33,9 +34,7 @@ interface ToastActionProps<T = HTMLDivElement> extends IressHTMLAttributes<T> {
 }
 
 interface ToastContentProps
-  extends ToastHeadingProps,
-    ToastCloseButtonProps,
-    ToastActionProps {
+  extends ToastHeadingProps, ToastCloseButtonProps, ToastActionProps {
   /**
    * The toast message.
    */
@@ -54,8 +53,7 @@ interface ToastContentProps
 }
 
 export interface IressToastProps
-  extends IressHTMLAttributes<HTMLDivElement>,
-    ToastContentProps {
+  extends IressHTMLAttributes<HTMLDivElement>, ToastContentProps {
   /**
    * The toast message.
    */

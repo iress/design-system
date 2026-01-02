@@ -29,11 +29,13 @@ export enum FormDefaultText {
   ErrorSummaryHeading = 'There was a problem submitting this form',
 }
 
-export interface IressHookFormProps<T extends FieldValues, TContext = object>
-  extends Omit<
-    IressFormHTMLAttributes,
-    'defaultValue' | 'onSubmit' | 'onError'
-  > {
+export interface IressHookFormProps<
+  T extends FieldValues,
+  TContext = object,
+> extends Omit<
+  IressFormHTMLAttributes,
+  'defaultValue' | 'onSubmit' | 'onError'
+> {
   /**
    * Section to place error summary when the app is in control of validation.
    */
@@ -110,7 +112,8 @@ export interface IressHookFormProps<T extends FieldValues, TContext = object>
 }
 
 export interface IressFormProps<T extends FieldValues, TContext = object>
-  extends Partial<Omit<UseFormProps<T, TContext>, 'disabled' | 'errors'>>,
+  extends
+    Partial<Omit<UseFormProps<T, TContext>, 'disabled' | 'errors'>>,
     Omit<IressHookFormProps<T, TContext>, 'form'> {
   /**
    * This context object is mutable and will be injected into the `resolver`'s second argument (eg. [Yup](https://github.com/jquense/yup) validation's context object).

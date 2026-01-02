@@ -55,10 +55,9 @@ export const TOGGLE_LAYOUTS = [
 ] as const;
 export type ToggleLayouts = (typeof TOGGLE_LAYOUTS)[number];
 
-export interface ToggleWithEnums
-  extends React.ForwardRefExoticComponent<
-    ToggleProps & React.RefAttributes<HTMLDivElement>
-  > {
+export interface ToggleWithEnums extends React.ForwardRefExoticComponent<
+  ToggleProps & React.RefAttributes<HTMLDivElement>
+> {
   /** @deprecated The IressToggle.Layout enum will be removed in future versions of IDS. Please use the value directly instead. */
   Layout: typeof ToggleLayout;
 }

@@ -3,8 +3,10 @@ import { type IressHTMLAttributes } from '@/interfaces';
 import { type FormControlValue } from '@/types';
 import { type IressCheckboxProps } from '@/main';
 
-export interface IressCheckboxGroupProps
-  extends Omit<IressHTMLAttributes, 'defaultValue' | 'onChange'> {
+export interface IressCheckboxGroupProps extends Omit<
+  IressHTMLAttributes,
+  'defaultValue' | 'onChange'
+> {
   /**
    * Content to be displayed inside the group, usually multiple `IressCheckbox`.
    */
@@ -52,8 +54,10 @@ export interface IressCheckboxGroupProps
   touch?: boolean;
 }
 
-export interface IressCheckboxItemsProps
-  extends Omit<IressCheckboxGroupProps, 'onChange'> {
+export interface IressCheckboxItemsProps extends Omit<
+  IressCheckboxGroupProps,
+  'onChange'
+> {
   checkedValues: FormControlValue[];
   onChange?: (newValue: FormControlValue) => void;
 }
@@ -90,10 +94,9 @@ export type CheckboxGroupContextValue = Pick<
 > &
   Pick<IressCheckboxProps, 'onChange'>;
 
-export interface CheckboxGroupWithEnums
-  extends React.ForwardRefExoticComponent<
-    IressCheckboxGroupProps & React.RefAttributes<HTMLElement>
-  > {
+export interface CheckboxGroupWithEnums extends React.ForwardRefExoticComponent<
+  IressCheckboxGroupProps & React.RefAttributes<HTMLElement>
+> {
   /** @deprecated The CheckboxGroupLayout enum will be removed in future versions of IDS. Please use the value directly. */
   Layout: typeof CheckboxGroupLayout;
 }
