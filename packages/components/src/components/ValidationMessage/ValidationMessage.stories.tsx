@@ -5,8 +5,8 @@ import {
   IressDivider,
   IressInput,
   type IressValidationMessageProps,
-  SYSTEM_VALIDATION_STATUSES,
-  type SystemValidationStatuses,
+  STATUSES,
+  type Statuses,
 } from '@/main';
 import {
   disableArgTypes,
@@ -14,7 +14,7 @@ import {
 } from '@iress-oss/ids-storybook-config';
 
 interface CustomArgs {
-  messages: Record<SystemValidationStatuses, string>;
+  messages: Record<Statuses, string>;
 }
 type Story = StoryObj<Partial<IressValidationMessageProps> & CustomArgs>;
 type LinkToTargetStory = StoryObj<
@@ -55,7 +55,7 @@ export const Status: Story = {
   },
   render: ({ messages, ...args }) => (
     <IressStack>
-      {SYSTEM_VALIDATION_STATUSES.map((status) => (
+      {STATUSES.map((status) => (
         <IressValidationMessage {...args} key={status} status={status}>
           {messages[status]}
         </IressValidationMessage>
@@ -88,7 +88,7 @@ export const Prefix: Story = {
   },
   render: ({ messages, ...args }) => (
     <IressStack>
-      {SYSTEM_VALIDATION_STATUSES.map((status) => (
+      {STATUSES.map((status) => (
         <IressValidationMessage {...args} key={status} status={status}>
           {messages[status]}
         </IressValidationMessage>
@@ -120,7 +120,7 @@ export const LinkToTarget: LinkToTargetStory = {
   render: ({ messages, ...args }) => (
     <IressStack gap="md">
       <IressStack>
-        {SYSTEM_VALIDATION_STATUSES.map((status) => (
+        {STATUSES.map((status) => (
           <IressValidationMessage
             {...args}
             key={status}

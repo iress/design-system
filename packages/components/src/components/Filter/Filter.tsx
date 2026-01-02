@@ -22,9 +22,8 @@ import {
 import {
   useAutocompleteSearch,
   type AutocompleteSearchHookProps,
-  type AutocompleteSearchHookReturn,
 } from '../Autocomplete';
-import { type IressInputProps } from '../Input';
+import type { IressInputProps } from '../Input';
 import { IressPanel } from '../Panel';
 import { useFilterFlags } from './hooks/useFilterFlags';
 import { useIdIfNeeded } from '@/hooks';
@@ -33,14 +32,16 @@ import { IressDivider } from '../Divider';
 import { FilterResetButton } from './components/FilterResetButton';
 import { FilterLabel } from './components/FilterLabel';
 import { IressIcon } from '../Icon';
-import { type ControlledValue } from '@/hooks/useControlledState';
-import { type IressHTMLAttributes, type LabelValueMeta } from '@/interfaces';
+import type { ControlledValue } from '@/hooks/useControlledState';
+import type { LabelValueMeta } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import { FilterResultsDescriptor } from './components/FilterResultsDescriptor';
+import type { IressStyledProps } from '@/types';
+import { styled } from '@/styled-system/jsx';
 
 export interface IressFilterProps<TMultiple extends boolean = false>
   extends
-    Omit<IressHTMLAttributes, 'defaultValue' | 'onChange'>,
+    Omit<IressStyledProps, 'defaultValue' | 'onChange'>,
     Omit<AutocompleteSearchHookProps, 'query'>,
     Pick<IressSelectMenuProps, 'limitMobile' | 'limitDesktop'> {
   /**
@@ -110,12 +111,6 @@ export interface IressFilterProps<TMultiple extends boolean = false>
    */
   visibleResetButton?: boolean | string;
 }
-
-export interface FilterResultsDescriptorProps
-  extends
-    Pick<IressFilterProps, 'searchNoResultsText'>,
-    Pick<AutocompleteSearchHookReturn, 'loading' | 'results'>,
-    Omit<IressHTMLAttributes, 'children' | 'className' | 'results'> {}
 
 export interface FilterRef {
   element?: HTMLDivElement;
@@ -256,7 +251,7 @@ const Filter = <TMultiple extends boolean = false>(
   const classes = filter();
 
   return (
-    <div
+    <styled.div
       {...restProps}
       className={cx(className, classes.root, GlobalCSSClass.Filter)}
       data-testid={dataTestId}
@@ -344,7 +339,7 @@ const Filter = <TMultiple extends boolean = false>(
         noResultsText={searchNoResultsText}
         results={results}
       />
-    </div>
+    </styled.div>
   );
 };
 

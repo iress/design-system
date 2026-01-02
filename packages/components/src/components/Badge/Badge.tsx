@@ -2,7 +2,7 @@ import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { css, cx } from '@/styled-system/css';
 import { badge as badgeStyles } from './Badge.styles';
 import { type ReactElement, type ReactNode } from 'react';
-import { type IressStyledProps, type SystemValidationStatuses } from '@/types';
+import type { IressStyledProps, Statuses } from '@/types';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 
@@ -20,7 +20,7 @@ export interface IressBadgeProps extends IressStyledProps<'span'> {
   /**
    * Style of the badge.
    */
-  mode?: SystemValidationStatuses | 'neutral' | 'primary';
+  mode?: Statuses | 'neutral' | 'primary';
 
   /**
    * Whether the Badge should be styled as a pill.

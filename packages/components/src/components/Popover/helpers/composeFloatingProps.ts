@@ -1,7 +1,7 @@
 import { getActiveElement } from '@helpers/dom/getActiveElement';
 import { type KeyboardEvent, type CSSProperties } from 'react';
 import { handlePopoverTabKey } from './handlePopoverTabKey';
-import { type DisplayModes, type IressUnstyledProps } from '@/types';
+import { type IressUnstyledProps } from '@/types';
 import { type FloatingPopoverHookReturn } from '../hooks/useFloatingPopover';
 
 /**
@@ -11,14 +11,14 @@ import { type FloatingPopoverHookReturn } from '../hooks/useFloatingPopover';
  * See: https://floating-ui.com/docs/useFloating#floatingstyles
  *
  * @param {FloatingPopoverHookReturn} popover the popover context
- * @param {DisplayModes} displayMode how the content is to be displayed, whether inline (static, underneath activator) or overlay (floating, anchored to the activator)
+ * @param {'inline' | 'overlay'} displayMode how the content is to be displayed, whether inline (static, underneath activator) or overlay (floating, anchored to the activator)
  * @param {CSSProperties} style any custom styles for the popover, it will be appended to the Floating UI styles
  * @param {string} customId optional custom ID to override the floating ID - used to prevent ID conflicts
  * @returns {IressUnstyledProps} the props to be passed to the floating content
  */
 export const composePopoverFloatingProps = (
   popover: FloatingPopoverHookReturn,
-  displayMode?: DisplayModes,
+  displayMode?: 'inline' | 'overlay',
   style?: CSSProperties,
   customId?: string,
 ): IressUnstyledProps => {

@@ -102,13 +102,13 @@ describe('IressReadonly', () => {
 
       it('adds the width class to the wrapper when its a percentage', () => {
         renderReadonly({
-          width: '25perc',
+          width: '25%',
           'data-testid': 'test-input',
           value: 'Value',
         });
 
         const wrapper = screen.getByTestId('test-input');
-        expect(wrapper).toHaveClass(readonly({ width: '25perc' }).root!);
+        expect(wrapper).toHaveClass(readonly({ width: '25%' }).root!);
       });
     });
   });

@@ -1,5 +1,5 @@
 import { spacing as spacingTokens, cssVars } from '@iress-oss/ids-tokens';
-import { sliderSizes } from './sizes';
+import { sizes } from './sizes';
 
 const publicSpacing = {
   'spacing.0': {
@@ -94,7 +94,7 @@ export const spacing = {
   'slider.tick': {
     description:
       'Spacing between top and bottom of the slider tick marks from the track',
-    value: `calc((${sliderSizes['slider.track'].value} - ${sliderSizes['slider.tick'].value}) / 2)`,
+    value: `calc((${sizes['slider.track'].value} - ${sizes['slider.tick'].value}) / 2)`,
   },
 };
 

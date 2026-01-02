@@ -1,16 +1,17 @@
 import { useMemo, type ReactNode } from 'react';
 import { composeLabelValueDescriptor } from '@helpers/label-value/composeLabelValueDescriptor';
 
-import { type IressHTMLAttributes, type LabelValueMeta } from '@/interfaces';
-import { type AutocompleteSearchHookReturn } from '../../Autocomplete';
-import { type IressPopoverProps } from '../../Popover';
+import type { LabelValueMeta } from '@/interfaces';
+import type { AutocompleteSearchHookReturn } from '../../Autocomplete';
+import type { IressPopoverProps } from '../../Popover';
 import { css } from '@/styled-system/css';
+import type { IressUnstyledProps } from '@/types';
 
 export interface FilterResultsDescriptorProps
   extends
     Partial<Pick<AutocompleteSearchHookReturn, 'loading' | 'results'>>,
     Pick<IressPopoverProps, 'show'>,
-    Omit<IressHTMLAttributes, 'children' | 'className' | 'results'> {
+    Omit<IressUnstyledProps, 'children' | 'className' | 'results'> {
   /**
    * Text to be displayed when no results are found.
    */

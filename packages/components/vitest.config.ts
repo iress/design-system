@@ -28,12 +28,6 @@ export default defineConfig({
     },
     // Performance optimizations
     pool: 'threads',
-    poolOptions: {
-      threads: {
-        singleThread: false,
-        useAtomics: true,
-      },
-    },
     // Better error reporting
     outputFile: {
       html: './coverage/index.html',

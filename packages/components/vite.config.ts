@@ -70,7 +70,6 @@ export default defineConfig({
         'src/**/*.stories.*',
         'src/**/*.docs.*',
         'src/styled-system/**/*',
-        'src/sandbox/**/*',
       ],
       tsconfigPath: './tsconfig.base.json',
     }),
@@ -78,11 +77,15 @@ export default defineConfig({
     // Instead we are using a plugin to copy them to the dist folder
     // In future, possibly do this instead: https://panda-css.com/docs/guides/component-library#use-panda-as-external-package
     viteStaticCopy({
-      structured: true,
       targets: [
         {
           src: 'src/styled-system/**/*.d.ts',
-          dest: '',
+          dest: 'styled-system',
+          rename: (name, ext, fullPath) => {
+            // Extract everything after 'src/styled-system/' from the absolute path
+            const match = /src\/styled-system\/(.+)$/.exec(fullPath);
+            return match ? match[1] : `${name}${ext}`;
+          },
         },
       ],
     }),

@@ -1,5 +1,5 @@
-import { type ReactNode, type MouseEvent, type MouseEventHandler } from 'react';
-import { type SystemValidationStatuses } from '@/types';
+import type { ReactNode, MouseEvent, MouseEventHandler } from 'react';
+import type { Statuses } from '@/types';
 import { capitalizeFirstLetter } from '@/helpers/formatting/capitalizeFirstLetter';
 import { cx } from '@/styled-system/css';
 import { IressText, type IressTextProps } from '../Text';
@@ -39,7 +39,7 @@ export type IressValidationMessageProps<
    * **Note**: danger is translated to Error when used as the prefix.
    * @default 'danger'
    **/
-  status?: SystemValidationStatuses;
+  status?: Statuses;
 
   /**
    * If set to true, the prefix will be visually displayed (default is only available to screen readers)

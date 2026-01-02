@@ -1,61 +1,46 @@
-import {
-  type BREAKPOINTS,
-  type DISPLAY_MODES,
-  type FLOATING_UI_ALIGNS,
-  type FORM_ELEMENT_WIDTHS,
-  type GUTTER_SIZES,
-  type HEADING_LEVELS,
-  type HORIZONTAL_ALIGNS,
-  type LOGGER_LEVELS,
-  type PADDING_SIZES,
-  type SYSTEM_VALIDATION_STATUSES,
-  type TEXT_ALIGNS,
-  type TEXT_MODES,
-  type TEXT_VARIANTS,
-  type VERTICAL_ALIGNS,
+import type {
+  BREAKPOINTS,
+  FORM_ELEMENT_WIDTHS,
+  HORIZONTAL_ALIGNS,
+  STATUSES,
+  VERTICAL_ALIGNS,
 } from '@/constants';
-import {
-  type IressCSSProps,
-  type IressTestProps,
-  type VariablePaddingSize,
-} from './interfaces';
-import { type PaddingSize } from './enums';
-import { type SpacingToken as PureSpacingToken } from '@/styled-system/tokens';
+import type { IressCSSProps, IressTestProps } from './interfaces';
+import type { SpacingToken as PureSpacingToken } from '@/styled-system/tokens';
+import type { Placement } from '@floating-ui/react';
+import type { RefObject } from 'react';
 
-export type PositiveSpacingToken = Exclude<
-  PureSpacingToken,
-  `-${string}` | `button.${string}` | `field.${string}` | `slider.${string}`
->;
-
-export type SpacingToken = Exclude<
-  PureSpacingToken,
-  | `button.${string}`
-  | `field.${string}`
-  | `slider.${string}`
-  | `-button.${string}`
-  | `-field.${string}`
-  | `-slider.${string}`
->;
-
+/**
+ * The breakpoints available in the design system.
+ */
 export type Breakpoints = (typeof BREAKPOINTS)[number];
 
-export type DisplayModes = (typeof DISPLAY_MODES)[number];
-
+/**
+ * The container element to render floating elements into.
+ */
 export type FloatingUIContainer =
   | HTMLElement
   | null
-  | React.MutableRefObject<HTMLElement | null>;
+  | RefObject<HTMLElement | null>;
 
-export type FloatingUIAligns = (typeof FLOATING_UI_ALIGNS)[number];
+/**
+ * The alignment options for floating elements.
+ */
+export type FloatingUIAligns = 'auto' | Placement;
 
+/**
+ * Allowed values for form control elements.
+ */
 export type FormControlValue = string | number | boolean | null;
 
+/**
+ * Allowed widths for form elements.
+ */
 export type FormElementWidths = (typeof FORM_ELEMENT_WIDTHS)[number];
 
-export type GutterSizes = (typeof GUTTER_SIZES)[number];
-
-export type HeadingLevels = (typeof HEADING_LEVELS)[number];
-
+/**
+ * The horizontal alignment options.
+ */
 export type HorizontalAligns = (typeof HORIZONTAL_ALIGNS)[number];
 
 /**
@@ -77,25 +62,38 @@ export type IressStyledProps<
   T extends keyof React.JSX.IntrinsicElements = 'div',
 > = IressUnstyledProps<T> & IressCSSProps;
 
-export type LoggerLevelsUnion = (typeof LOGGER_LEVELS)[number];
+/**
+ * A spacing token that is guaranteed to be positive, and can be used for properties that do not accept negative values (eg. padding).
+ */
+export type PositiveSpacingToken = Exclude<
+  PureSpacingToken,
+  `-${string}` | `button.${string}` | `field.${string}` | `slider.${string}`
+>;
 
-export type MixedPaddingSize =
-  | VariablePaddingSize
-  | PaddingSize
-  | PaddingSizes
-  | SpacingToken;
-
-export type PaddingSizes = (typeof PADDING_SIZES)[number];
-
+/**
+ * Responsive prop type that allows a single value or an object specifying values per breakpoint.
+ */
 export type ResponsiveProp<T> = T | Partial<Record<Breakpoints | 'base', T>>;
 
-export type SystemValidationStatuses =
-  (typeof SYSTEM_VALIDATION_STATUSES)[number];
+/**
+ * A spacing token that can be either positive or negative, used for properties that accept negative values (eg. margin).
+ */
+export type SpacingToken = Exclude<
+  PureSpacingToken,
+  | `button.${string}`
+  | `field.${string}`
+  | `slider.${string}`
+  | `-button.${string}`
+  | `-field.${string}`
+  | `-slider.${string}`
+>;
 
-export type TextAligns = (typeof TEXT_ALIGNS)[number];
+/**
+ * The validation statuses used in feedback components.
+ */
+export type Statuses = (typeof STATUSES)[number];
 
-export type TextModes = (typeof TEXT_MODES)[number] | 'body';
-
-export type TextVariants = (typeof TEXT_VARIANTS)[number];
-
+/**
+ * Vertical alignment options.
+ */
 export type VerticalAligns = (typeof VERTICAL_ALIGNS)[number];

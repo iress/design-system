@@ -1,4 +1,7 @@
-import { type NameValue } from '@/interfaces';
+interface NameValue {
+  name: string;
+  value: string;
+}
 
 export const stringReplacer = (
   str: string,

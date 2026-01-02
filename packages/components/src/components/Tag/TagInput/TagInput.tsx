@@ -139,7 +139,7 @@ export const IressTagInput = forwardRef(
       selectedOptionsTagText = 'selected',
       style,
       tagLimit = 5,
-      width = '100perc',
+      width = '100%',
       value: valueProp,
       ...restProps
     }: IressTagInputProps,

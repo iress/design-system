@@ -7,7 +7,7 @@ import {
   useRef,
 } from 'react';
 import { cx } from '@/styled-system/css';
-import { type InputRef } from '@/components/Input/InputBase/InputBase';
+import type { InputRef } from '@/components/Input/InputBase/InputBase';
 import { IressInput, type IressInputProps } from '@/components/Input';
 
 export const FilterSearch = forwardRef(

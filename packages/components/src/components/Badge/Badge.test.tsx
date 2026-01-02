@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { IressBadge } from './Badge';
 import { axe } from 'jest-axe';
 import { IressButton } from '../Button';
-import { SYSTEM_VALIDATION_STATUSES } from '@/constants';
+import { STATUSES } from '@/constants';
 import { GlobalCSSClass } from '@/enums';
 
 const modeStyles = {
@@ -27,7 +27,7 @@ describe('IressBadge', () => {
   });
 
   it('should apply the correct class when the mode prop is set', () => {
-    const modes = [...SYSTEM_VALIDATION_STATUSES, 'neutral'] as const;
+    const modes = [...STATUSES, 'neutral'] as const;
 
     modes.forEach((mode) => {
       render(<IressBadge mode={mode}>{mode}</IressBadge>);

@@ -39,9 +39,7 @@ export const elevationCompositions = {
   },
 } satisfies CompositionStyles['layerStyles'];
 
-export type Elevations = keyof typeof elevationCompositions;
-
-export const internalLayerStyles: CompositionStyles['layerStyles'] = {
+const internalLayerStyles: CompositionStyles['layerStyles'] = {
   dots: {
     description: 'Used to represent a loading state with dots',
     value: {
@@ -61,4 +59,8 @@ export const internalLayerStyles: CompositionStyles['layerStyles'] = {
 export const layerStyles = defineLayerStyles({
   ...elevationCompositions,
   ...internalLayerStyles,
+});
+
+export const ELEVATION_TOKENS = Object.keys({
+  ...elevationCompositions,
 });

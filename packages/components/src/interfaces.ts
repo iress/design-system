@@ -1,14 +1,12 @@
-import { type ReactNode } from 'react';
-import { type SystemValidationStatus, type PaddingSize } from './enums';
-import {
-  type PositiveSpacingToken,
-  type FormControlValue,
-  type PaddingSizes,
-  type ResponsiveProp,
-  type SystemValidationStatuses,
-  type SpacingToken,
+import type { CSSProperties, ReactNode } from 'react';
+import type {
+  PositiveSpacingToken,
+  FormControlValue,
+  ResponsiveProp,
+  SpacingToken,
+  Statuses,
 } from './types';
-import { type UtilityValues } from './styled-system/types/prop-type';
+import type { UtilityValues } from './styled-system/types/prop-type';
 
 /**
  * This interface is used to ensure that the ref returned by a component is compatible with React Hook Form.
@@ -49,102 +47,158 @@ export interface ReactHookFormCompatibleRef<
   };
 }
 
+/**
+ * Validation message object used in feedback components.
+ */
 export interface ValidationMessageObj {
-  status?: SystemValidationStatus | SystemValidationStatuses;
-  message: string;
-  linkToTarget?: string;
+  /**
+   * The test ID for the validation message element.
+   */
   dataTestId?: string;
+
+  /**
+   * The validation message to be displayed.
+   */
+  message: string;
+
+  /**
+   * The validation status indicating the type of message.
+   */
+  status?: Statuses;
+
+  /**
+   * The ID of the element the message is describing.
+   */
+  linkToTarget?: string;
+
+  /**
+   * Prefix to the validation message. Will be `status` prop if nothing is provided.
+   */
   prefix?: ReactNode;
+
+  /**
+   * If set to true, the prefix will be visually displayed (default is only available to screen readers)
+   */
   visiblePrefix?: boolean;
-}
-
-export type WithDataAttributes<T = NonNullable<unknown>> = T & {
-  'data-testid'?: string;
-  'data-value'?: string;
-};
-
-export interface NameValue {
-  name: string;
-  value: string;
 }
 
 /**
  * This allows for customising the slot/render props of a component.
  */
 export interface IressCustomiseSlot extends IressCSSProps, IressTestProps {
+  /**
+   * Class name of the slot.
+   */
   className?: string;
-  style?: React.CSSProperties;
+
+  /**
+   * Style object to be applied to the slot.
+   */
+  style?: CSSProperties;
 }
-
-export type IressHTMLAttributes<T = HTMLDivElement> = WithDataAttributes<
-  React.HTMLAttributes<T>
->;
-
-export type IressInputHTMLAttributes<T = HTMLInputElement> = WithDataAttributes<
-  React.InputHTMLAttributes<T>
->;
-
-export type IressAnchorHTMLAttributes<T = HTMLAnchorElement> =
-  WithDataAttributes<React.AnchorHTMLAttributes<T>>;
-
-export type IressButtonHTMLAttributes<T = HTMLButtonElement> =
-  WithDataAttributes<React.ButtonHTMLAttributes<T>>;
-
-export type IressFormHTMLAttributes<T = HTMLFormElement> = WithDataAttributes<
-  React.FormHTMLAttributes<T>
->;
 
 /**
- * @deprecated, use ResponsiveProps<T> instead
+ * Value that is used across custom form controls that display a label and store the value, usually to display in a select or dropdown.
  */
-export interface ResponsiveSizing<T> {
-  xs?: T | null;
-  sm?: T | null;
-  md?: T | null;
-  lg?: T | null;
-  xl?: T | null;
-  xxl?: T | null;
-}
-
-type VariablePaddingSizeDimension =
-  | PaddingSize
-  | PaddingSizes
-  | SpacingToken
-  | null;
-
-export interface VariablePaddingSize {
-  b?: VariablePaddingSizeDimension;
-  l?: VariablePaddingSizeDimension;
-  r?: VariablePaddingSizeDimension;
-  t?: VariablePaddingSizeDimension;
-  x?: VariablePaddingSizeDimension;
-  y?: VariablePaddingSizeDimension;
-}
-
-export interface LabelValue {
+export interface LabelValue<T extends FormControlValue = FormControlValue> {
+  /**
+   * The label to be displayed for the option.
+   */
   label: string;
+
+  /**
+   * The test ID for the option element.
+   */
   testId?: string;
-  value?: FormControlValue;
+
+  /**
+   * The value associated with the option.
+   */
+  value?: T;
 }
 
-export interface LabelValueMeta extends LabelValue {
-  append?: React.ReactNode;
+/**
+ * Extended label-value pair with additional metadata for richer display options.
+ */
+export interface LabelValueMeta<
+  T extends FormControlValue = FormControlValue,
+> extends LabelValue<T> {
+  /**
+   * Append content to provide extra context after the label.
+   * Usually used for badges or supplementary information.
+   */
+  append?: ReactNode;
+
+  /**
+   * Whether to display a divider below the option.
+   */
   divider?: boolean;
-  meta?: React.ReactNode;
-  prepend?: React.ReactNode;
+
+  /**
+   * Metadata to provide more context about the option.
+   * Usually displayed in a smaller font or different style.
+   */
+  meta?: ReactNode;
+
+  /**
+   * Content to prepend before the label.
+   * Usually used for icons or indicators.
+   */
+  prepend?: ReactNode;
 }
 
-export interface FormattedLabelValueMeta extends LabelValueMeta {
-  formattedLabel?: React.ReactNode;
-  formattedMeta?: React.ReactNode;
+/**
+ * Extended label-value pair with formatted label and metadata for advanced display options, usually to display the search term highlighted.
+ */
+export interface FormattedLabelValueMeta<
+  T extends FormControlValue = FormControlValue,
+> extends LabelValueMeta<T> {
+  /**
+   * Formatted label content, allowing for highlighted search terms.
+   */
+  formattedLabel?: ReactNode;
+
+  /**
+   * Formatted metadata content, allowing for highlighted search terms.
+   */
+  formattedMeta?: ReactNode;
 }
 
+/**
+ * Details about a specific breakpoint in the design system.
+ */
 export interface BreakpointDetail {
+  /**
+   * The media query string for the breakpoint.
+   * This must be valid CSS media query syntax.
+   */
   mediaQuery: string;
+
+  /**
+   * The name of the screen width range for the breakpoint.
+   * Used to display in documentation and debugging.
+   */
   screenWidthRange: string;
+
+  /**
+   * The minimum screen width for the breakpoint.
+   */
   minScreenWidth: string;
+
+  /**
+   * The maximum screen width for the breakpoint.
+   */
   maxScreenWidth?: string;
+
+  /**
+   * The maximum width of the container at this breakpoint.
+   */
   containerMaxWidth: string;
+
+  /**
+   * The viewport width in pixels for the breakpoint.
+   * Used for design and development reference, as a guideline for debugging responsive layouts.
+   */
   viewportWidth: number;
 }
 
@@ -243,11 +297,7 @@ export interface IressCSSProps {
    * - `elevation.overflow`: Overflow is a shadow indicating content has scrolled outside a view. It can be used for vertical or horizontal scroll. An example of overflow shadows is the horizontal scroll in tables on a Confluence page.
    */
   layerStyle?: ResponsiveProp<
-    | 'elevation.raised'
-    | 'elevation.floating'
-    | 'elevation.overflow'
-    | 'elevation.focus'
-    | 'elevation.focusCompact'
+    Extract<UtilityValues['layerStyle'], `elevation.${string}`>
   >;
 
   /**
@@ -259,7 +309,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-width
    */
-  maxWidth?: ResponsiveProp<UtilityValues['maxWidth']>;
+  maxWidth?: UtilityValues['maxWidth'];
 
   /**
    * The **`m`** property is short for `margin`, and sets the margin area on all four sides of an element.

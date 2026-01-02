@@ -8,18 +8,25 @@ import {
   useFloatingParentNodeId,
 } from '@floating-ui/react';
 import { composePopoverFloatingProps } from '../helpers/composeFloatingProps';
-import {
-  type DisplayModes,
-  type FloatingUIContainer,
-  type IressStyledProps,
-} from '@/types';
+import { type FloatingUIContainer, type IressStyledProps } from '@/types';
 import { useEffect } from 'react';
 import { styled } from '@/styled-system/jsx';
 import { usePopover } from '../hooks/usePopover';
 
 export interface PopoverContentProps extends IressStyledProps {
+  /**
+   * The container element to render the popover into.
+   */
   container?: FloatingUIContainer;
-  displayMode?: DisplayModes;
+
+  /**
+   * Whether the popover is displayed as an inline element or an overlay.
+   */
+  displayMode?: 'inline' | 'overlay';
+
+  /**
+   * Whether to use virtual focus management to prevent focus traps when using nested popovers.
+   */
   virtualFocus?: boolean;
 }
 

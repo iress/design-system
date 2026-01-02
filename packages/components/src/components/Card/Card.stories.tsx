@@ -3,7 +3,6 @@ import { IressCard, type IressCardProps } from './Card';
 import { IressRow } from '../Row';
 import { IressCol } from '../Col';
 import { IressStack } from '../Stack';
-import { PADDING_SIZES } from '@/main';
 
 type Story = StoryObj<IressCardProps>;
 
@@ -37,11 +36,18 @@ export const Padding: Story = {
   },
   render: ({ ...args }) => (
     <IressStack gap="md">
-      {PADDING_SIZES.map((padding) => (
-        <IressCard {...args} p={padding} key={padding}>
-          I&rsquo;m a card with {padding} padding
-        </IressCard>
-      ))}
+      <IressCard {...args} p="none">
+        I&rsquo;m a card with no padding
+      </IressCard>
+      <IressCard {...args} p="xs">
+        I&rsquo;m a card with xs padding
+      </IressCard>
+      <IressCard {...args} p="sm">
+        I&rsquo;m a card with sm padding
+      </IressCard>
+      <IressCard {...args} p="md">
+        I&rsquo;m a card with sm padding
+      </IressCard>
     </IressStack>
   ),
 };

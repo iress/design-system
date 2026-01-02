@@ -103,33 +103,33 @@ export const select = sva({
           width: 'auto',
         },
       },
-      '25perc': {
+      '25%': {
         wrapper: {
-          width: 'input.25perc',
+          width: 'input.25%',
         },
         element: {
           width: 'auto',
         },
       },
-      '50perc': {
+      '50%': {
         wrapper: {
-          width: 'input.50perc',
+          width: 'input.50%',
         },
         element: {
           width: 'auto',
         },
       },
-      '75perc': {
+      '75%': {
         wrapper: {
-          width: 'input.75perc',
+          width: 'input.75%',
         },
         element: {
           width: 'auto',
         },
       },
-      '100perc': {
+      '100%': {
         wrapper: {
-          width: 'input.100perc',
+          width: 'input.100%',
         },
         element: {
           width: 'auto',

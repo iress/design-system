@@ -1,9 +1,6 @@
-import { type LoggerLevels } from '@/enums';
-import { type LoggerLevelsUnion } from '@/types';
-
 export const idsLogger = (
   msg: string,
-  level: LoggerLevels | LoggerLevelsUnion = 'log',
+  level: 'log' | 'warn' | 'error' = 'log',
 ): void => {
   console[level](
     '%c IDS ',

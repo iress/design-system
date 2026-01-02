@@ -92,11 +92,11 @@ describe('IressInput', () => {
 
     it('adds the width class to the wrapper when its a percentage', () => {
       const screen = render(
-        <IressInput width="25perc" data-testid="test-input" />,
+        <IressInput width="25%" data-testid="test-input" />,
       );
 
       const wrapper = screen.getByTestId('test-input');
-      const styles = input({ width: '25perc' });
+      const styles = input({ width: '25%' });
       expect(wrapper).toHaveClass(styles.wrapper ?? '');
     });
   });

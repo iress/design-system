@@ -1,8 +1,7 @@
 import { normaliseHideValues } from './helpers/normaliseHideValues';
-import { type ResponsiveSizing } from '@/interfaces';
 import { type FC, type ReactNode } from 'react';
 import { styled } from '@/styled-system/jsx';
-import { type IressStyledProps } from '@/types';
+import type { ResponsiveProp, IressStyledProps } from '@/types';
 import { useBreakpoint } from '@/hooks';
 
 const Div = styled('div') as FC<IressStyledProps>;
@@ -21,7 +20,7 @@ export interface IressHideProps extends IressStyledProps {
   /**
    * Content will be hidden on any screen sizes that are set to true.
    */
-  hiddenOn: ResponsiveSizing<boolean>;
+  hiddenOn: ResponsiveProp<boolean>;
 
   /**
    * If true, the content will not be visible, but will be available to screen readers

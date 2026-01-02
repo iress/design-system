@@ -1,5 +1,4 @@
-import { version as IDS_VERSION } from '../package.json';
-import { type BreakpointDetail } from './interfaces';
+import type { BreakpointDetail } from './interfaces';
 
 /**
  * Breakpoints are the points at which the layout of a page will change in response to the size of the viewport.
@@ -75,33 +74,22 @@ export const BREAKPOINT_DETAILS = {
   },
 } satisfies Record<string, BreakpointDetail>;
 
+/**
+ * The breakpoints used in the design system.
+ */
 export const BREAKPOINTS = Object.keys(
   BREAKPOINT_DETAILS,
 ) as (keyof typeof BREAKPOINT_DETAILS)[];
 
-export const CSS_IDS_VERSION = `v${IDS_VERSION.replace(/\./g, '')}`;
-
-export const DISPLAY_MODES = ['inline', 'overlay'] as const;
-
-export const FLOATING_UI_ALIGNS = [
-  'auto',
-  'bottom-start',
-  'bottom',
-  'bottom-end',
-  'top-start',
-  'top',
-  'top-end',
-  'left-start',
-  'left',
-  'left-end',
-  'right-start',
-  'right',
-  'right-end',
-] as const;
-
+/**
+ * A CSS selector string that matches all focusable elements.
+ */
 export const FOCUSABLE_QUERY_SELECTOR =
   'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
+/**
+ * The widths available for form elements.
+ */
 export const FORM_ELEMENT_WIDTHS = [
   '2',
   '4',
@@ -110,10 +98,10 @@ export const FORM_ELEMENT_WIDTHS = [
   '10',
   '12',
   '16',
-  '25perc',
-  '50perc',
-  '75perc',
-  '100perc',
+  '25%',
+  '50%',
+  '75%',
+  '100%',
 ] as const;
 
 /**
@@ -121,10 +109,9 @@ export const FORM_ELEMENT_WIDTHS = [
  */
 export const GRID_SIZE = 12;
 
-export const GUTTER_SIZES = ['none', 'xs', 'sm', 'md', 'lg', 'xl'] as const;
-
-export const HEADING_LEVELS = ['h2', 'h3', 'h4', 'h5', 'h6'] as const;
-
+/**
+ * The horizontal alignment options.
+ */
 export const HORIZONTAL_ALIGNS = [
   'around',
   'between',
@@ -134,17 +121,14 @@ export const HORIZONTAL_ALIGNS = [
   'right',
 ] as const;
 
-export const LOGGER_LEVELS = ['log', 'warn', 'error'] as const;
+/**
+ * The statuses available for various components.
+ */
+export const STATUSES = ['danger', 'info', 'success', 'warning'] as const;
 
-export const PADDING_SIZES = ['none', 'sm', 'md', 'lg'] as const;
-
-export const SYSTEM_VALIDATION_STATUSES = [
-  'danger',
-  'info',
-  'success',
-  'warning',
-] as const;
-
+/**
+ * The text alignment options.
+ */
 export const TEXT_ALIGNS = [
   'inherit',
   'left',
@@ -153,40 +137,9 @@ export const TEXT_ALIGNS = [
   'justify',
 ] as const;
 
-export const TEXT_MODES = [
-  'danger',
-  'info',
-  'muted',
-  'primary',
-  'success',
-  'warning',
-  'positive',
-  'negative',
-] as const;
-
-export const TEXT_VARIANTS = [
-  'blockquote',
-  'body',
-  'bold',
-  'code',
-  'display',
-  'display1',
-  'display2',
-  'display3',
-  'display4',
-  'h1',
-  'h2',
-  'h3',
-  'h4',
-  'h5',
-  'h6',
-  'italic',
-  'lead',
-  'small',
-  'cite',
-  'caption',
-] as const;
-
+/**
+ * The vertical alignment options.
+ */
 export const VERTICAL_ALIGNS = ['top', 'middle', 'bottom', 'stretch'] as const;
 
 /**
