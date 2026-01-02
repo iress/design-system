@@ -42,18 +42,18 @@
   ],
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.24.3",
-    "zod": "3.25.67"
+    "zod": "4.1.13"
   },
   "devDependencies": {
     "@types/minimist": "^1",
-    "@types/node": "24.10.1",
+    "@types/node": "25.0.2",
     "@types/turndown": "5.0.5",
-    "@typescript-eslint/eslint-plugin": "8.49.0",
-    "@typescript-eslint/parser": "8.49.0",
+    "@typescript-eslint/eslint-plugin": "8.50.0",
+    "@typescript-eslint/parser": "8.50.0",
     "@vitest/coverage-v8": "4.0.15",
-    "commander": "12.1.0",
+    "commander": "14.0.2",
     "dotenv": "17.2.3",
-    "eslint": "^9.39.1",
+    "eslint": "^9.39.2",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-file-progress": "3.0.2",
     "eslint-plugin-prettier": "5.5.4",
