@@ -28,7 +28,6 @@ import {
   useRole,
   useTransitionStatus,
 } from '@floating-ui/react';
-import { timeStringToNumber } from '@helpers/transition/timeStringToNumber';
 import { GlobalCSSClass, PaddingSize } from '@/enums';
 import { idsLogger } from '@helpers/utility/idsLogger';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
@@ -39,6 +38,7 @@ import pushElementStyles from './SlideoutPushElement.module.scss';
 import { useIdIfNeeded } from '../../hooks';
 import { IressText } from '../Text';
 import { useIDSProvidedSlideout } from './hooks/useIDSProvidedSlideout';
+import { getTransitionDuration } from '@/helpers/transition/getTransitionDuration';
 
 export const IressSlideout: SlideoutWithEnums = ({
   backdrop,
@@ -66,7 +66,7 @@ export const IressSlideout: SlideoutWithEnums = ({
 }: IressSlideoutProps) => {
   const [uncontrolledShow, setUncontrolledShow] =
     useState<boolean>(defaultShow);
-  const durationRef = useRef<number>(240);
+  let duration = 240;
   const pushElement = useRef<HTMLElement | null | undefined>(null);
   const provider = useIDSProvidedSlideout(restProps.id);
   const id = useIdIfNeeded({ id: restProps.id });
@@ -97,8 +97,16 @@ export const IressSlideout: SlideoutWithEnums = ({
     enabled: backdrop === true,
   });
   const interactions = useInteractions([dismiss, role]);
+  if (floatingContext.refs.floating.current) {
+    duration = getTransitionDuration(
+      floatingContext.refs.floating.current,
+      1.2,
+      240,
+    );
+  }
+
   const { isMounted, status } = useTransitionStatus(floatingContext, {
-    duration: durationRef.current,
+    duration,
   });
 
   useEffect(() => {
@@ -138,15 +146,6 @@ export const IressSlideout: SlideoutWithEnums = ({
         pushElementStyles[position],
         pushElementStyles[`size--${size}`],
       );
-
-      if (floatingContext.refs.floating?.current) {
-        durationRef.current =
-          timeStringToNumber(
-            window
-              .getComputedStyle(floatingContext.refs.floating.current, null)
-              ?.getPropertyValue('--iress-transition-duration') || '.3s',
-          ) * 1.2;
-      }
     }
   }, [floatingContext.refs.floating, position, size, status]);
 
@@ -242,6 +241,7 @@ export const IressSlideout: SlideoutWithEnums = ({
       styles[`size--${size}`],
       GlobalCSSClass.IgnoreStack,
       {
+        // eslint-disable-next-line react-hooks/refs -- Safe: pushElement.current used for conditional styling
         [styles.push]: mode === 'push' && pushElement.current,
         [`${className}`]: className && !backdrop,
       },

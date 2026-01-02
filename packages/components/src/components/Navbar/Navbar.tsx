@@ -69,17 +69,46 @@ export const IressNavbar: NavbarWithEnums = ({
   }, [breakpoint, hideNavigation]);
 
   useEffect(() => {
-    updateNavBreakpoints();
-    if (nav) {
-      setHasNavSlotContent(true);
-    }
+    const timeout = setTimeout(() => {
+      updateNavBreakpoints();
+      if (nav) {
+        setHasNavSlotContent(true);
+      }
+    }, 0);
     if (logoSrc !== '' && logoAltText === '') {
       idsLogger(
         `IressNavbar: You've supplied a logo but no alt text, which is a failure of WCAG Level A Success Criterion 1.1.1 - Non-text content. Set the logoAltText prop to add alt text to the logo.`,
         'warn',
       );
     }
+    return () => clearTimeout(timeout);
   }, [updateNavBreakpoints, nav, logoSrc, logoAltText]);
+
+  const applyStickyMargin = useCallback(() => {
+    if (!elementRef.current?.classList.contains(styles.fixed)) {
+      return;
+    }
+
+    const { top, height } = elementRef.current.getBoundingClientRect();
+    const adjustedTop = `${top + height}px`;
+
+    const navbarElement = document.querySelector('[data-component="navbar"]');
+    if (navbarElement) {
+      navbarElement.setAttribute('data-sticky-margin', adjustedTop);
+    }
+  }, []);
+
+  const initHandleFocus = useCallback(() => {
+    const observer = new ResizeObserver(applyStickyMargin.bind(elementRef));
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+    document.addEventListener(
+      'focus',
+      applyStickyMargin.bind(elementRef),
+      true,
+    );
+  }, [applyStickyMargin]);
 
   useEffect(() => {
     if (fixed && handledFocus) {
@@ -92,34 +121,7 @@ export const IressNavbar: NavbarWithEnums = ({
         true,
       );
     };
-  });
-
-  const initHandleFocus = () => {
-    const observer = new ResizeObserver(applyStickyMargin.bind(elementRef));
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-    document.addEventListener(
-      'focus',
-      applyStickyMargin.bind(elementRef),
-      true,
-    );
-  };
-
-  const applyStickyMargin = () => {
-    const focused = document.activeElement ?? document.body;
-
-    if (elementRef.current) {
-      const applicable =
-        focused !== document.body && !elementRef.current?.contains(focused);
-
-      if (!applicable) return;
-      const diff =
-        focused.getBoundingClientRect().top -
-        elementRef.current.getBoundingClientRect().bottom;
-      if (diff < 0) window.scrollBy(0, diff);
-    }
-  };
+  }, [fixed, handledFocus, initHandleFocus, applyStickyMargin]);
 
   const toggleNavigation = () => {
     setHideNavigation(!hideNavigation);

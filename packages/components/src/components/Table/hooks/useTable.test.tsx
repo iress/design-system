@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import { useEffect } from 'react';
 import { IressTable } from '..';
 import { useTable } from './useTable';
 
@@ -13,7 +14,10 @@ describe('useTable hook', () => {
     let tableContext: ReturnType<typeof useTable> | null = null;
 
     function TestComponent() {
-      tableContext = useTable();
+      const context = useTable();
+      useEffect(() => {
+        tableContext = context;
+      });
       return <div>Test</div>;
     }
 
@@ -34,7 +38,9 @@ describe('useTable hook', () => {
 
     function TestComponent() {
       const context = useTable();
-      api = context.api;
+      useEffect(() => {
+        api = context.api;
+      });
       return <div>Test</div>;
     }
 
@@ -58,9 +64,14 @@ describe('useTable hook', () => {
 
     function TestComponent() {
       const context = useTable();
-      foundIdColumn = context.getColumnByKey('id');
-      foundNameColumn = context.getColumnByKey('name');
-      foundNonexistentColumn = context.getColumnByKey('nonexistent');
+      const idColumn = context.getColumnByKey('id');
+      const nameColumn = context.getColumnByKey('name');
+      const nonexistentColumn = context.getColumnByKey('nonexistent');
+      useEffect(() => {
+        foundIdColumn = idColumn;
+        foundNameColumn = nameColumn;
+        foundNonexistentColumn = nonexistentColumn;
+      });
       return <div>Test</div>;
     }
 
@@ -92,13 +103,16 @@ describe('useTable hook', () => {
   it('should return undefined when used outside of IressTable context', () => {
     let tableContext: ReturnType<typeof useTable> | null = null;
 
-    function TestComponent() {
-      tableContext = useTable();
-      return <div>Test</div>;
+    function IsolatedTestComponent() {
+      const context = useTable();
+      useEffect(() => {
+        tableContext = context;
+      });
+      return <div>Isolated Test</div>;
     }
 
     // This should not throw an error but return undefined context
-    render(<TestComponent />);
+    render(<IsolatedTestComponent />);
 
     expect(tableContext).toBeUndefined();
   });

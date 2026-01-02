@@ -141,7 +141,8 @@ export const PageLoading = ({
   ...restProps
 }: PageLoadingProps) => {
   const [show, setShow] = useState(false);
-  const [hideTemplate, setHideTemplate] = useState(false);
+  const hideTemplate = !!critical;
+  const showIndicator = loaded !== true && show;
   const [showCritical, setShowCritical] = useState(false);
 
   const skeleton = useMemo(() => {
@@ -162,17 +163,18 @@ export const PageLoading = ({
   }, [timeout]);
 
   useEffect(() => {
-    if (loaded === true) {
-      setShow(false);
-    }
-  }, [loaded]);
+    const showTimeout = setTimeout(() => setShow(true), timeout);
+
+    return () => {
+      clearTimeout(showTimeout);
+    };
+  }, [timeout]);
 
   useEffect(() => {
     if (!critical) {
       return;
     }
 
-    setHideTemplate(true);
     const showTimeout = setTimeout(() => setShowCritical(true), 200);
 
     return () => {
@@ -184,7 +186,7 @@ export const PageLoading = ({
     <div
       {...restProps}
       className={classNames(className, styles.root, loadingStyles['fade-in'], {
-        [loadingStyles['fade-in--active']]: show,
+        [loadingStyles['fade-in--active']]: showIndicator,
         [styles.hideTemplate]: hideTemplate,
         [styles.showCritical]: showCritical,
       })}

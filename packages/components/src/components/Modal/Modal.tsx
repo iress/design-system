@@ -4,10 +4,8 @@ import styles from './Modal.module.scss';
 import {
   cloneElement,
   type TransitionEvent,
-  useCallback,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from 'react';
 import { GlobalCSSClass, ModalSize, PaddingSize } from '@/enums';
@@ -23,13 +21,13 @@ import {
   useRole,
   useTransitionStatus,
 } from '@floating-ui/react';
-import { timeStringToNumber } from '@helpers/transition/timeStringToNumber';
 import { idsLogger } from '@helpers/utility/idsLogger';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { useIdIfNeeded } from '../../hooks';
 import { IressText } from '../Text';
 import { useIDSProvidedModal } from './hooks/useIDSProvidedModal';
 import toasterStyles from '../Toaster/Toaster.module.scss';
+import { getTransitionDuration } from '@/helpers/transition/getTransitionDuration';
 
 export const IressModal: ModalWithEnums = ({
   children,
@@ -57,7 +55,7 @@ export const IressModal: ModalWithEnums = ({
 }: IressModalProps) => {
   const [uncontrolledShow, setUncontrolledShow] =
     useState<boolean>(defaultShow);
-  const durationRef = useRef<number>(240);
+  let duration = 240;
   const provider = useIDSProvidedModal(restProps.id);
   const id = useIdIfNeeded({ id: restProps.id });
   const headingId = `${id}--heading`;
@@ -85,9 +83,18 @@ export const IressModal: ModalWithEnums = ({
   });
   const role = useRole(floatingContext);
   const interactions = useInteractions([dismiss, role]);
+
+  if (floatingContext.refs.floating.current) {
+    duration = getTransitionDuration(
+      floatingContext.refs.floating.current,
+      1.2,
+      240,
+    );
+  }
+
   const { isMounted, status } = useTransitionStatus(floatingContext, {
     duration: {
-      close: durationRef.current,
+      close: duration,
     },
   });
 
@@ -102,17 +109,6 @@ export const IressModal: ModalWithEnums = ({
   useEffect(() => {
     onStatus?.(status);
   }, [status, onStatus]);
-
-  useEffect(() => {
-    if (status === 'initial' && floatingContext.refs.floating?.current) {
-      durationRef.current =
-        timeStringToNumber(
-          window
-            .getComputedStyle(floatingContext.refs.floating.current, null)
-            ?.getPropertyValue('--iress-transition-duration') || '.3s',
-        ) * 1.2;
-    }
-  }, [status, floatingContext.refs.floating]);
 
   const sizeClasses = getResponsiveLayoutModifiers(
     'size',
@@ -144,32 +140,23 @@ export const IressModal: ModalWithEnums = ({
       : null;
   }, [dataTestid, headingId, headingProp]);
 
-  const handleTransitionEnd = useCallback(
-    (e: TransitionEvent<HTMLDivElement>) => {
-      onTransitionEnd?.(e);
+  const handleTransitionEnd = (e: TransitionEvent<HTMLDivElement>) => {
+    onTransitionEnd?.(e);
 
-      // TODO: Tests are not filling in the property name, so we need to check for an empty one instead
-      const isFade = e.propertyName === 'opacity' || !e.propertyName;
+    // TODO: Tests are not filling in the property name, so we need to check for an empty one instead
+    const isFade = e.propertyName === 'opacity' || !e.propertyName;
 
-      if (!isFade || e.target !== e.currentTarget) {
-        return;
-      }
+    if (!isFade || e.target !== e.currentTarget) {
+      return;
+    }
 
-      if (status === 'open') {
-        onEntered?.();
-        floatingContext.refs.floating?.current?.focus();
-      } else if (status === 'close') {
-        onExited?.();
-      }
-    },
-    [
-      onTransitionEnd,
-      status,
-      onEntered,
-      floatingContext.refs.floating,
-      onExited,
-    ],
-  );
+    if (status === 'open') {
+      onEntered?.();
+      floatingContext.refs.floating?.current?.focus();
+    } else if (status === 'close') {
+      onExited?.();
+    }
+  };
 
   if (!isMounted) return null;
 

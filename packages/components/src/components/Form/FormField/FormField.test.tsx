@@ -226,7 +226,9 @@ describe('IressFormField', () => {
       const [showField, setShowField] = React.useState(true);
       const formRef = React.useRef<FormRef<object>>(null);
 
-      dirtyFields(formRef.current?.api.formState.dirtyFields);
+      React.useEffect(() => {
+        dirtyFields(formRef.current?.api.formState.dirtyFields);
+      });
 
       return (
         <IressForm id="iress-form" onSubmit={onSubmit} ref={formRef}>

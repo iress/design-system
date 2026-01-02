@@ -90,6 +90,7 @@ export const PopoverActivator = ({
       className={classNames(styles.activator, {
         [PopoverCssClass.Active]: popover?.show,
       })}
+      // eslint-disable-next-line react-hooks/refs -- false positive: https://github.com/floating-ui/floating-ui/discussions/3405
       {...popover?.interactions.getReferenceProps({
         ...activatorInteractions,
         'aria-controls': ariaControls,
