@@ -30,7 +30,7 @@ export const hideFrom: Story = {
   ...srOnly,
   args: {
     children: 'Only on mobile screens',
-    hideBelow: 'lg',
+    hideFrom: 'lg',
   },
 };
 
