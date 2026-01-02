@@ -72,5 +72,10 @@
     "test:ci": "yarn test:coverage && yarn check-coverage --all",
     "typecheck": "yarn monorepo run typecheck",
     "monorepo": "yarn workspaces foreach -Ai --topological-dev --exclude=@iress/design-system-monorepo"
+  },
+  "resolutions": {
+    "glob@^10.2.0": "^10.5.0",
+    "glob@^10.3.0": "^10.5.0",
+    "glob@^10.4.0": "^10.5.0"
   }
 }
