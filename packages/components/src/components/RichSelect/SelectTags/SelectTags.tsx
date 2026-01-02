@@ -141,7 +141,11 @@ const Tags = ({
     [onDeleteAll, popover],
   );
 
-  if (expanded || !limit || selectedArray.length <= limit)
+  if (
+    (expanded && selectedArray.length) ||
+    !limit ||
+    selectedArray.length <= limit
+  )
     return selectedArray.map((item) => (
       <IressTag
         className={classes.tag}
