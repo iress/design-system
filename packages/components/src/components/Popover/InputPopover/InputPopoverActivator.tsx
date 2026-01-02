@@ -4,13 +4,12 @@ import {
   type MouseEvent,
   cloneElement,
   useCallback,
-  useContext,
 } from 'react';
 import { hasFocus } from '../helpers/hasFocus';
 import { usePopoverActivatorInteractions } from '../hooks/usePopoverActivatorInteractions';
 import { type PopoverActivatorProps } from '../components/PopoverActivator';
-import { PopoverContext } from '../hooks/usePopover';
 import { type InputBaseProps, type IressInputProps } from '@/components/Input';
+import { usePopover } from '../hooks/usePopover';
 
 export interface InputPopoverActivatorProps extends PopoverActivatorProps {
   /**
@@ -25,7 +24,7 @@ export const InputPopoverActivator = ({
   minLength,
   ...restProps
 }: InputPopoverActivatorProps) => {
-  const popover = useContext(PopoverContext);
+  const popover = usePopover();
 
   const childrenProps = children?.props as IressInputProps;
   const inputMinLength = minLength ?? childrenProps.minLength ?? 1;

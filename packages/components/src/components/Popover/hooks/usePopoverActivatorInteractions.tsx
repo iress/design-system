@@ -1,11 +1,11 @@
 import { type KeyboardEvent, type FocusEvent, useCallback } from 'react';
 import { type IressUnstyledProps } from '@/types';
-import { type PopoverHookReturn } from './usePopover';
+import { type FloatingPopoverHookReturn } from './useFloatingPopover';
 
 /**
  * This adds additional props to the activator to handle keyboard interactions with a virtually focused item.
  *
- * @param {PopoverHookReturn} popover the popover context
+ * @param {FloatingPopoverHookReturn} popover the popover context
  * @param {HTMLAttributes<HTMLElement>} referenceProps the props of the activator, allowing them to be drilled down to the virtual reference
  *
  * @returns {IressHTMLAttributes} the props to be passed to the floating content
@@ -13,7 +13,7 @@ import { type PopoverHookReturn } from './usePopover';
 export const usePopoverActivatorInteractions = <
   E extends keyof HTMLElementTagNameMap = 'div',
 >(
-  popover?: PopoverHookReturn,
+  popover?: FloatingPopoverHookReturn,
   referenceProps?: Omit<IressUnstyledProps<E>, 'value'>,
 ) => {
   // This will call the onBlur method of the currently virtual focused node.
@@ -47,7 +47,7 @@ export const usePopoverActivatorInteractions = <
 
 const handleKeyDownWhenShown = (
   e: KeyboardEvent<HTMLElement>,
-  popover?: PopoverHookReturn,
+  popover?: FloatingPopoverHookReturn,
 ) => {
   const popoverIsVirtual = popover?.getVirtualFocus !== undefined;
   popover?.getVirtualFocus?.()?.onKeyDown?.(e);
@@ -92,7 +92,7 @@ const handleKeyDownWhenShown = (
 
 const handleKeyDownWhenHidden = (
   e: KeyboardEvent<HTMLElement>,
-  popover?: PopoverHookReturn,
+  popover?: FloatingPopoverHookReturn,
 ) => {
   if (e.key === 'ArrowDown') {
     popover?.setShowWithReason(true, e.nativeEvent, 'focus');

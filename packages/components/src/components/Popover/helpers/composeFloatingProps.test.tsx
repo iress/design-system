@@ -4,9 +4,8 @@ import {
   MOCK_FLOATING_UI_CONTEXT,
   TestPopoverProvider,
 } from '../mocks/TestPopoverProvider';
-import { DisplayModes } from '@/main';
-import { CSSProperties, useContext } from 'react';
-import { PopoverContext } from '../hooks/usePopover';
+import { DisplayModes, usePopover } from '@/main';
+import { CSSProperties } from 'react';
 
 const TEST_ID = 'component-using-hook';
 
@@ -16,7 +15,7 @@ interface HookProps {
 }
 
 const ComponentWithFloatingProps = ({ displayMode, style }: HookProps) => {
-  const popover = useContext(PopoverContext);
+  const popover = usePopover();
 
   if (!popover) return null;
 
@@ -142,7 +141,7 @@ describe('composeFloatingProps', () => {
 
   it('allows custom id to override floating context id', () => {
     const CustomComponentWithId = () => {
-      const popover = useContext(PopoverContext);
+      const popover = usePopover();
       if (!popover) return null;
 
       return (

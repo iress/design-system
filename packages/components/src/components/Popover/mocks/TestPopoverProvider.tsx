@@ -6,7 +6,10 @@ import {
   FloatingList,
   type ReferenceType,
 } from '@floating-ui/react';
-import { PopoverContext, type PopoverHookReturn } from '../hooks/usePopover';
+import {
+  FloatingPopoverContext,
+  type FloatingPopoverHookReturn,
+} from '../hooks/useFloatingPopover';
 
 export const MOCK_FLOATING_UI_CONTEXT: FloatingContext<ReferenceType> = {
   x: 0,
@@ -52,7 +55,7 @@ export const MOCK_FLOATING_UI_CONTEXT: FloatingContext<ReferenceType> = {
   middlewareData: {},
 };
 
-export const MOCK_FLOATING_UI_INTERACTIONS: PopoverHookReturn['interactions'] =
+export const MOCK_FLOATING_UI_INTERACTIONS: FloatingPopoverHookReturn['interactions'] =
   {
     getReferenceProps: vitest.fn(),
     getFloatingProps: vitest.fn(() => ({
@@ -63,8 +66,8 @@ export const MOCK_FLOATING_UI_INTERACTIONS: PopoverHookReturn['interactions'] =
   };
 
 export const getMockPopoverContext = (
-  contextProps: Partial<PopoverHookReturn> = {},
-): PopoverHookReturn =>
+  contextProps: Partial<FloatingPopoverHookReturn> = {},
+): FloatingPopoverHookReturn =>
   ({
     ...contextProps,
     activeIndex: contextProps.activeIndex ?? 0,
@@ -90,12 +93,12 @@ export const getMockPopoverContext = (
     setShow: contextProps.setShow ?? vitest.fn(),
     show: contextProps.show ?? false,
     toggleAriaControls: contextProps.toggleAriaControls ?? vitest.fn(),
-  }) satisfies PopoverHookReturn;
+  }) satisfies FloatingPopoverHookReturn;
 
 export const TestPopoverProvider = ({
   children,
   ...contextProps
-}: Partial<PopoverHookReturn> & PropsWithChildren) => {
+}: Partial<FloatingPopoverHookReturn> & PropsWithChildren) => {
   const list = useRef<(HTMLElement | null)[]>([]);
 
   const context = useMemo(
@@ -109,8 +112,8 @@ export const TestPopoverProvider = ({
   );
 
   return (
-    <PopoverContext.Provider value={context}>
+    <FloatingPopoverContext.Provider value={context}>
       <FloatingList elementsRef={list}>{children}</FloatingList>
-    </PopoverContext.Provider>
+    </FloatingPopoverContext.Provider>
   );
 };
