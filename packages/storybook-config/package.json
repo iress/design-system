@@ -54,6 +54,7 @@
     "@iress-oss/ids-storybook-sandbox": "^0.2.1",
     "@iress-oss/ids-storybook-toggle-stories": "^0.1.0",
     "@iress-oss/ids-storybook-version-badge": "^0.1.1",
+    "@mdx-js/react": "3.1.1",
     "@storybook/addon-a11y": "10.0.8",
     "@storybook/addon-docs": "10.0.8",
     "@storybook/addon-links": "10.0.8",
