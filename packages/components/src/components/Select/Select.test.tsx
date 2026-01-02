@@ -197,10 +197,10 @@ describe('IressSelect', () => {
     describe('width', () => {
       it('renders correct classes', () => {
         const screen = renderComponent({
-          width: '75perc',
+          width: '75%',
         });
 
-        expect(screen.getByTestId(TEST_ID)).toHaveClass(`w_input.75perc`);
+        expect(screen.getByTestId(TEST_ID)).toHaveClass(`w_input.75%`);
       });
     });
   });

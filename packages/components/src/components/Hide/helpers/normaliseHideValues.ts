@@ -1,7 +1,13 @@
 import { BREAKPOINTS } from '@/constants';
-import { type ResponsiveSizing } from '@/interfaces';
+import type { ResponsiveProp } from '@/types';
 
-export const normaliseHideValues = (values: ResponsiveSizing<boolean> = {}) => {
+export const normaliseHideValues = (values: ResponsiveProp<boolean> = {}) => {
+  if (typeof values === 'boolean') {
+    return Object.fromEntries(
+      BREAKPOINTS.map((breakpoint) => [breakpoint, values]),
+    );
+  }
+
   return BREAKPOINTS.reduce<Record<string, boolean>>(
     (hideValues, breakpoint, index) => {
       // If value is undefined, use previous value

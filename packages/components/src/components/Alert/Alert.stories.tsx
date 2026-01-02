@@ -5,7 +5,7 @@ import {
   type IressAlertProps,
   IressStack,
   IressText,
-  type SystemValidationStatuses,
+  type Statuses,
 } from '@/main';
 import {
   disableArgTypes,
@@ -13,7 +13,7 @@ import {
 } from '@iress-oss/ids-storybook-config';
 
 type CustomArgs = Partial<IressAlertProps> & {
-  messages: Record<SystemValidationStatuses, string>;
+  messages: Record<Statuses, string>;
 };
 type Story = StoryObj<CustomArgs>;
 

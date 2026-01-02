@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { capitalizeFirstLetter } from '@helpers/formatting/capitalizeFirstLetter';
 import { IressValidationSummary } from './ValidationSummary';
-import { GlobalCSSClass, SYSTEM_VALIDATION_STATUSES } from '@/main';
+import { GlobalCSSClass, STATUSES } from '@/main';
 import { css } from '@/styled-system/css';
 
 describe('IressValidationSummary', () => {
@@ -35,7 +35,7 @@ describe('IressValidationSummary', () => {
 
   describe('props', () => {
     describe('status', () => {
-      SYSTEM_VALIDATION_STATUSES.forEach((status) => {
+      STATUSES.forEach((status) => {
         it(`renders a ${status} message`, () => {
           const { getByText, getByTestId } = render(
             <IressValidationSummary
@@ -184,7 +184,7 @@ describe('IressValidationSummary', () => {
       });
 
       describe('status', () => {
-        SYSTEM_VALIDATION_STATUSES.forEach((status) => {
+        STATUSES.forEach((status) => {
           it(`renders a ${status} message`, () => {
             const { getByText, getByTestId } = render(
               <IressValidationSummary

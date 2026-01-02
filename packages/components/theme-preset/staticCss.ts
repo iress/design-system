@@ -1,6 +1,6 @@
 import { type ExtendableOptions } from '@pandacss/types';
 import { colors } from './tokens/colors';
-import { elevationCompositions } from './tokens/layerStyles';
+import { ELEVATION_TOKENS } from './tokens/layerStyles';
 import { radii } from './tokens/radii';
 import { textCompositions } from './tokens/textStyles';
 import { spanCompositions } from './utilities/span';
@@ -21,8 +21,7 @@ const allowedCssProps = {
   color: Object.keys(colors),
   columnGap: ['*'],
   gap: ['*'],
-  layerStyle: Object.keys(elevationCompositions),
-  maxWidth: ['*'],
+  layerStyle: ELEVATION_TOKENS,
 
   // We can't use margin shorthand because it won't generate the correct CSS
   margin: MARGIN_TOKENS,
@@ -66,6 +65,7 @@ export const staticCss: ExtendableOptions['staticCss'] = {
         focusable: ['true', 'within'],
         hideFrom: Object.keys(breakpoints),
         hideBelow: Object.keys(breakpoints),
+        maxWidth: ['*'],
         noGutter: ['true'],
         stretch: ['true'],
       },

@@ -1,14 +1,10 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
-import { SYSTEM_VALIDATION_STATUSES } from '@/constants';
+import { STATUSES } from '@/constants';
 import { IressBadge, IressButton, IressInline, IressTab } from '@/main';
 
 type Story = StoryObj<typeof IressBadge>;
-const BADGE_MODES = [
-  'primary',
-  ...SYSTEM_VALIDATION_STATUSES,
-  'neutral',
-] as const;
+const BADGE_MODES = ['primary', ...STATUSES, 'neutral'] as const;
 
 export default {
   title: 'Components/Badge',

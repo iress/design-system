@@ -13,7 +13,6 @@ import {
 } from './components/PopoverActivator';
 import { PopoverContent } from './components/PopoverContent';
 import {
-  type DisplayModes,
   type FloatingUIAligns,
   type FloatingUIContainer,
   type IressStyledProps,
@@ -80,7 +79,7 @@ export interface IressPopoverProps extends IressStyledProps {
    * Sets the display mode of popover.
    * @default overlay
    */
-  displayMode?: DisplayModes;
+  displayMode?: 'inline' | 'overlay';
 
   /**
    * Popovers can be fluid, meaning they will take up the full width of their container.

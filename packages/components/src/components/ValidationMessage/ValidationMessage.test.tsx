@@ -1,11 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { capitalizeFirstLetter } from '@helpers/formatting/capitalizeFirstLetter';
-import {
-  GlobalCSSClass,
-  IressValidationMessage,
-  SYSTEM_VALIDATION_STATUSES,
-} from '@/main';
+import { GlobalCSSClass, IressValidationMessage, STATUSES } from '@/main';
 import { css } from '@/styled-system/css';
 import userEvent from '@testing-library/user-event';
 
@@ -56,7 +52,7 @@ describe('ValidationMessage', () => {
     });
 
     describe('status', () => {
-      SYSTEM_VALIDATION_STATUSES.forEach((status) => {
+      STATUSES.forEach((status) => {
         it(`renders a ${status} message`, () => {
           render(
             <IressValidationMessage

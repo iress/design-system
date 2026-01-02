@@ -1153,12 +1153,7 @@ describe('IressRichSelect', () => {
     });
 
     it('applies correct width styling for percentage width variants', () => {
-      const percentageVariants = [
-        '25perc',
-        '50perc',
-        '75perc',
-        '100perc',
-      ] as const;
+      const percentageVariants = ['25%', '50%', '75%', '100%'] as const;
 
       percentageVariants.forEach((width) => {
         const { unmount } = render(

@@ -4,7 +4,7 @@ import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { alert } from './Alert.styles';
 import { cx } from '@/styled-system/css';
 import { type ReactNode, useMemo } from 'react';
-import { type SystemValidationStatuses } from '@/types';
+import type { Statuses } from '@/types';
 import { GlobalCSSClass } from '@/enums';
 import {
   IressButton,
@@ -66,7 +66,7 @@ export interface IressAlertProps extends Omit<IressTextProps, 'element'> {
    * Alert type - danger, info, success or warning.
    * @default info
    */
-  status?: SystemValidationStatuses;
+  status?: Statuses;
 
   /**
    * Variants of the alert, allowing it to be styled differently based on where its used in the application.
@@ -76,7 +76,7 @@ export interface IressAlertProps extends Omit<IressTextProps, 'element'> {
   variant?: 'sidebar' | 'site-wide';
 }
 
-const ALERT_ICONS: Record<SystemValidationStatuses, IressIconProps['name']> = {
+const ALERT_ICONS: Record<Statuses, IressIconProps['name']> = {
   danger: 'ban',
   info: 'info-square',
   success: 'check',

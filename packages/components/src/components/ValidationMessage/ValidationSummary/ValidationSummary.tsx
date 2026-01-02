@@ -1,12 +1,9 @@
-import {
-  type IressCustomiseSlot,
-  type ValidationMessageObj,
-} from '@/interfaces';
+import type { IressCustomiseSlot, ValidationMessageObj } from '@/interfaces';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { IressValidationMessage } from '../ValidationMessage';
 import { useIdIfNeeded } from '@/hooks';
-import { type IressStyledProps, type SystemValidationStatuses } from '@/types';
-import { type ReactNode } from 'react';
+import type { IressStyledProps, Statuses } from '@/types';
+import type { ReactNode } from 'react';
 import { styled } from '@/styled-system/jsx';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
@@ -39,7 +36,7 @@ export interface IressValidationSummaryProps extends Omit<
   /**
    * Status for all child ValidationMessage components
    */
-  status?: SystemValidationStatuses;
+  status?: Statuses;
 
   /**
    * If set to true, the prefix will be visually displayed (default is only available to screen readers)

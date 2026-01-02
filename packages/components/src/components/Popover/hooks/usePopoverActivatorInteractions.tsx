@@ -1,6 +1,6 @@
 import { type KeyboardEvent, type FocusEvent, useCallback } from 'react';
-import { type IressUnstyledProps } from '@/types';
-import { type FloatingPopoverHookReturn } from './useFloatingPopover';
+import type { IressUnstyledProps } from '@/types';
+import type { FloatingPopoverHookReturn } from './useFloatingPopover';
 
 /**
  * This adds additional props to the activator to handle keyboard interactions with a virtually focused item.
@@ -8,7 +8,7 @@ import { type FloatingPopoverHookReturn } from './useFloatingPopover';
  * @param {FloatingPopoverHookReturn} popover the popover context
  * @param {HTMLAttributes<HTMLElement>} referenceProps the props of the activator, allowing them to be drilled down to the virtual reference
  *
- * @returns {IressHTMLAttributes} the props to be passed to the floating content
+ * @returns {IressUnstyledProps} the props to be passed to the floating content
  */
 export const usePopoverActivatorInteractions = <
   E extends keyof HTMLElementTagNameMap = 'div',

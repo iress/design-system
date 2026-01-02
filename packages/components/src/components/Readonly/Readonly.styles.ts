@@ -136,33 +136,33 @@ export const readonly = sva({
           width: 'input.16',
         },
       },
-      '25perc': {
+      '25%': {
         root: {
-          width: 'input.25perc',
+          width: 'input.25%',
         },
         formControl: {
           width: '[100%]',
         },
       },
-      '50perc': {
+      '50%': {
         root: {
-          width: 'input.50perc',
+          width: 'input.50%',
         },
         formControl: {
           width: '[100%]',
         },
       },
-      '75perc': {
+      '75%': {
         root: {
-          width: 'input.75perc',
+          width: 'input.75%',
         },
         formControl: {
           width: '[100%]',
         },
       },
-      '100perc': {
+      '100%': {
         root: {
-          width: 'input.100perc',
+          width: 'input.100%',
         },
         formControl: {
           width: '[100%]',

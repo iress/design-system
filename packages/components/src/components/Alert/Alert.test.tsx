@@ -2,11 +2,11 @@ import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { IressAlert, alert as alertStyles } from '.';
 import { GlobalCSSClass } from '@/enums';
-import { SYSTEM_VALIDATION_STATUSES } from '@/constants';
-import { SystemValidationStatuses } from '@/types';
+import { STATUSES } from '@/constants';
+import { Statuses } from '@/types';
 import { IressIconProps } from '../Icon';
 
-const ALERT_ICONS: Record<SystemValidationStatuses, IressIconProps['name']> = {
+const ALERT_ICONS: Record<Statuses, IressIconProps['name']> = {
   danger: 'ban',
   info: 'info-square',
   success: 'check',
@@ -136,10 +136,7 @@ describe('IressAlert', () => {
   });
 
   describe('status', () => {
-    const statusArr = SYSTEM_VALIDATION_STATUSES.map((status) => [
-      status,
-      status,
-    ]);
+    const statusArr = STATUSES.map((status) => [status, status]);
     it.each(statusArr)(
       'renders a %s alert if the status is set to %s',
       (status) => {

@@ -1,76 +1,50 @@
 // https://panda-css.com/docs/theming/tokens#sizes
-import { BREAKPOINT_DETAILS } from '../../src/constants';
+import {
+  BREAKPOINT_DETAILS,
+  FORM_ELEMENT_WIDTHS,
+  GRID_SIZE,
+} from '../../src/constants';
 import { cssVars } from '@iress-oss/ids-tokens';
 
-export const containerSizes = {
-  'container.xs': {
-    value: BREAKPOINT_DETAILS.xs.containerMaxWidth,
-  },
-  'container.sm': {
-    value: BREAKPOINT_DETAILS.sm.containerMaxWidth,
-  },
-  'container.md': {
-    value: BREAKPOINT_DETAILS.md.containerMaxWidth,
-  },
-  'container.lg': {
-    value: BREAKPOINT_DETAILS.lg.containerMaxWidth,
-  },
-  'container.xl': {
-    value: BREAKPOINT_DETAILS.xl.containerMaxWidth,
-  },
-  'container.xxl': {
-    value: BREAKPOINT_DETAILS.xxl.containerMaxWidth,
+const containerSizes = Object.fromEntries(
+  Object.entries(BREAKPOINT_DETAILS).map(([breakpoint, detail]) => [
+    `container.${breakpoint}`,
+    {
+      description: `Width of the container at the ${breakpoint} breakpoint`,
+      value: detail.containerMaxWidth,
+    },
+  ]),
+);
+
+const inputSizes = {
+  ...Object.fromEntries(
+    FORM_ELEMENT_WIDTHS.map((width) => [
+      `input.${width}`,
+      {
+        description: width.includes('%') ? `${width} width` : `1rem * ${width}`,
+        value: width.includes('%')
+          ? width
+          : `calc(${cssVars.typography.base.size} * ${width})`,
+      },
+    ]),
+  ),
+  'input.height': {
+    description: 'input height based on typography size',
+    value: `calc(${cssVars.typography.base.size} * (36 / 14))`,
   },
 };
 
-export const inputSizes = {
-  'input.2': {
-    description: '1rem * 2',
-    value: `calc(${cssVars.typography.base.size} * 2.5)`,
-  },
-  'input.4': {
-    description: '1rem * 4',
-    value: `calc(${cssVars.typography.base.size} * 4)`,
-  },
-  'input.6': {
-    description: '1rem * 6',
-    value: `calc(${cssVars.typography.base.size} * 6)`,
-  },
-  'input.8': {
-    description: '1rem * 8',
-    value: `calc(${cssVars.typography.base.size} * 8)`,
-  },
-  'input.10': {
-    description: '1rem * 10',
-    value: `calc(${cssVars.typography.base.size} * 10)`,
-  },
-  'input.12': {
-    description: '1rem * 12',
-    value: `calc(${cssVars.typography.base.size} * 12)`,
-  },
-  'input.16': {
-    description: '1rem * 16',
-    value: `calc(${cssVars.typography.base.size} * 16)`,
-  },
-  'input.25perc': {
-    description: '25%',
-    value: '25%',
-  },
-  'input.50perc': {
-    description: '50%',
-    value: '50%',
-  },
-  'input.75perc': {
-    description: '75%',
-    value: '75%',
-  },
-  'input.100perc': {
-    description: '100%',
-    value: '100%',
-  },
-};
+const gridSizes = Object.fromEntries(
+  Array.from({ length: GRID_SIZE }, (_, i) => i + 1).map((size) => [
+    `${size}/${GRID_SIZE}`,
+    {
+      description: `Grid size ${size}`,
+      value: `${(size / GRID_SIZE) * 100}%`,
+    },
+  ]),
+);
 
-export const overlaySizes = {
+const overlaySizes = {
   'overlay.sm': {
     description:
       'Used for small modals and slideouts. Small overlays communicate the outcome of an irreversible action. They should be concise and straightforward, containing a single action and, in some cases, a single input field.',
@@ -88,7 +62,7 @@ export const overlaySizes = {
   },
 };
 
-export const chevronSizes = {
+const chevronSizes = {
   'chevron.select': {
     description:
       'Used for the chevron when selecting an option in a dropdown or select component.',
@@ -100,18 +74,14 @@ export const chevronSizes = {
   },
 };
 
-export const heights = {
-  'input.height': {
-    description: 'input height based on typography size',
-    value: `calc(${cssVars.typography.base.size} * (36 / 14))`,
-  },
+const progressSizes = {
   'progress.height': {
     description: 'Height of the progress bar',
     value: cssVars.spacing['2'],
   },
 };
 
-export const sliderSizes = {
+const sliderSizes = {
   'slider.track': {
     description: 'Height of the slider track',
     value: `calc(${cssVars.typography.base.size} * (10 / 14))`,
@@ -126,7 +96,7 @@ export const sliderSizes = {
   },
 };
 
-export const toggleSizes = {
+const toggleSizes = {
   'toggle.width': {
     description: 'Total width of the toggle',
     value: `calc(${cssVars.typography.base.size} * (48 / 14))`,
@@ -137,7 +107,7 @@ export const toggleSizes = {
   },
 };
 
-export const other = {
+const typographySizes = {
   'typography.base': {
     description: 'Base typography size',
     value: cssVars.typography.base.size,
@@ -147,10 +117,13 @@ export const other = {
 export const sizes = {
   ...containerSizes,
   ...inputSizes,
+  ...gridSizes,
   ...overlaySizes,
   ...chevronSizes,
-  ...heights,
+  ...progressSizes,
   ...sliderSizes,
   ...toggleSizes,
-  ...other,
+  ...typographySizes,
 };
+
+export const SIZE_TOKENS = Object.keys(sizes);

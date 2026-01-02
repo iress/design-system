@@ -1,11 +1,10 @@
-import { type ReactNode, type MouseEvent, type MouseEventHandler } from 'react';
-import { type SystemValidationStatuses } from '@/types';
+import type { ReactNode, MouseEvent, MouseEventHandler } from 'react';
+import type { Statuses } from '@/types';
 import { capitalizeFirstLetter } from '@/helpers/formatting/capitalizeFirstLetter';
 import { cx } from '@/styled-system/css';
 import { IressText, type IressTextProps } from '../Text';
 import { styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
-import { isValidFormInputElement } from '@/helpers/form/isValidFormInputElement';
 
 type ValidationElement<TLinkToTarget extends string | undefined = undefined> =
   TLinkToTarget extends string ? 'a' : 'div';
@@ -40,7 +39,7 @@ export type IressValidationMessageProps<
    * **Note**: danger is translated to Error when used as the prefix.
    * @default 'danger'
    **/
-  status?: SystemValidationStatuses;
+  status?: Statuses;
 
   /**
    * If set to true, the prefix will be visually displayed (default is only available to screen readers)
@@ -60,7 +59,15 @@ const ValidationPrefix = ({
     status === 'danger' ? 'Error' : capitalizeFirstLetter(status);
   return `${statusPrefix}: `;
 };
-ValidationPrefix.displayName = 'ValidationPrefix';
+
+const isValidFormInputElement = (ele: HTMLElement): boolean =>
+  (ele.tagName === 'SELECT' && !(ele as HTMLSelectElement).disabled) ||
+  (!!(ele as HTMLInputElement).name &&
+    !(ele as HTMLInputElement).disabled &&
+    (ele as HTMLInputElement).type !== 'file' &&
+    (ele as HTMLInputElement).type !== 'reset' &&
+    (ele as HTMLInputElement).type !== 'submit' &&
+    (ele as HTMLInputElement).type !== 'button');
 
 export const IressValidationMessage = <
   TLinkToTarget extends string | undefined = undefined,

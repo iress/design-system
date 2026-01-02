@@ -76,24 +76,24 @@ export const richSelect = sva({
             '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.16})]',
         },
       },
-      '25perc': {
+      '25%': {
         richSelect: {
-          width: 'input.25perc',
+          width: 'input.25%',
         },
       },
-      '50perc': {
+      '50%': {
         richSelect: {
-          width: 'input.50perc',
+          width: 'input.50%',
         },
       },
-      '75perc': {
+      '75%': {
         richSelect: {
-          width: 'input.75perc',
+          width: 'input.75%',
         },
       },
-      '100perc': {
+      '100%': {
         richSelect: {
-          width: 'input.100perc',
+          width: 'input.100%',
         },
       },
     },

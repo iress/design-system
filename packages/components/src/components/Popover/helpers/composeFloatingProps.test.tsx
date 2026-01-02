@@ -4,13 +4,13 @@ import {
   MOCK_FLOATING_UI_CONTEXT,
   TestPopoverProvider,
 } from '../mocks/TestPopoverProvider';
-import { DisplayModes, usePopover } from '@/main';
 import { CSSProperties } from 'react';
+import { usePopover } from '../hooks/usePopover';
 
 const TEST_ID = 'component-using-hook';
 
 interface HookProps {
-  displayMode?: DisplayModes;
+  displayMode?: 'inline' | 'overlay';
   style?: CSSProperties;
 }
 
