@@ -61,8 +61,12 @@ const Component = <T extends FormControlValue = FormControlValue>(
   );
 };
 
-export const SelectReadonly = forwardRef(Component) as <
+export const SelectReadonly = forwardRef(Component) as (<
   T extends FormControlValue = FormControlValue,
 >(
   props: SelectReadonlyProps<T> & { ref?: Ref<HTMLInputElement> },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'SelectReadonly';
+};
+
+SelectReadonly.displayName = 'SelectReadonly';

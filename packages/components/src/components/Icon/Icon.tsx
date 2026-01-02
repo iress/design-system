@@ -80,3 +80,5 @@ export const IressIcon = ({
     />
   );
 };
+
+IressIcon.displayName = 'IressIcon';

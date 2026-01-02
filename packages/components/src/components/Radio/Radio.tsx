@@ -197,6 +197,10 @@ const Radio = <T = FormControlValue,>(
   );
 };
 
-export const IressRadio = forwardRef(Radio) as <T = FormControlValue>(
+export const IressRadio = forwardRef(Radio) as (<T = FormControlValue>(
   props: IressRadioProps<T> & { ref?: Ref<HTMLInputElement> },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressRadio';
+};
+
+IressRadio.displayName = 'IressRadio';

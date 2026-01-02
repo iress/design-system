@@ -96,6 +96,8 @@ export const IressMenuText = <E extends TextElements = 'div'>({
   );
 };
 
+IressMenuText.displayName = 'IressMenuText';
+
 export const IressMenuHeading = <E extends TextElements = 'h2'>({
   className,
   element = 'h2' as E,
@@ -109,3 +111,5 @@ export const IressMenuHeading = <E extends TextElements = 'h2'>({
     className={cx(className, GlobalCSSClass.MenuHeading)}
   />
 );
+
+IressMenuHeading.displayName = 'IressMenuHeading';

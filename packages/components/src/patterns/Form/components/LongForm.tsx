@@ -154,11 +154,14 @@ const LongFormPattern = <T extends FieldValues, TContext = object>(
   );
 };
 
-export const LongForm = forwardRef(LongFormPattern) as <
+export const LongForm = forwardRef(LongFormPattern) as (<
   T extends FieldValues,
   TContext = object,
 >(
   props: LongFormProps<T, TContext> & {
     ref?: Ref<FormRef<T>>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'LongForm';
+};
+LongForm.displayName = 'LongForm';

@@ -121,6 +121,8 @@ const Tags = ({
   );
 };
 
+Tags.displayName = 'Tags';
+
 export const IressTagInput = forwardRef(
   (
     {

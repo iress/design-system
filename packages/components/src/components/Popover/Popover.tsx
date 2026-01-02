@@ -229,3 +229,5 @@ const Popover = (
 };
 
 export const IressPopover = forwardRef(Popover);
+
+IressPopover.displayName = 'IressPopover';

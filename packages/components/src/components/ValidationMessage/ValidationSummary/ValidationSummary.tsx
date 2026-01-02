@@ -107,3 +107,4 @@ export const IressValidationSummary = ({
     </styled.ul>
   );
 };
+IressValidationSummary.displayName = 'IressValidationSummary';

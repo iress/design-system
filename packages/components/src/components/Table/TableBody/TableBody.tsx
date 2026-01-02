@@ -94,6 +94,8 @@ const TableBodyHeader = ({
   );
 };
 
+TableBodyHeader.displayName = 'TableBodyHeader';
+
 const TableBodyChildren = ({
   children,
   setControlViaRef,
@@ -115,6 +117,8 @@ const TableBodyChildren = ({
     </tr>
   );
 };
+
+TableBodyChildren.displayName = 'TableBodyChildren';
 
 export const IressTableBody = <TRow extends object = never, TVal = never>({
   caption,
@@ -198,3 +202,5 @@ export const IressTableBody = <TRow extends object = never, TVal = never>({
     </TableProvider>
   );
 };
+
+IressTableBody.displayName = 'IressTableBody';

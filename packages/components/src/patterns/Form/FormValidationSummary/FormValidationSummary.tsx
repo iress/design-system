@@ -133,3 +133,4 @@ export const IressFormValidationSummary = ({
     </FocusableAlert>
   );
 };
+IressFormValidationSummary.displayName = 'IressFormValidationSummary';

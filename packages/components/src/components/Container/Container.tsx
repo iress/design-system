@@ -28,3 +28,5 @@ export const IressContainer = ({
     className={cx(className, GlobalCSSClass.Container)}
   />
 );
+
+IressContainer.displayName = 'IressContainer';

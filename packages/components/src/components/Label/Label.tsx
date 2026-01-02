@@ -24,3 +24,5 @@ export type IressLabelProps<THtmlFor extends string | undefined = undefined> =
 export const IressLabel = <THtmlFor extends string | undefined = undefined>(
   props: IressLabelProps<THtmlFor>,
 ) => <LabelBase {...props} element={props.htmlFor ? 'label' : 'strong'} />;
+
+IressLabel.displayName = 'IressLabel';

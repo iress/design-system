@@ -1,7 +1,12 @@
 import { IressInput } from '@/components/Input';
 import { IressText } from '@/components/Text';
 import { type InputRef } from '@/components/Input/InputBase/InputBase';
-import { forwardRef, type ReactElement, type RefAttributes } from 'react';
+import {
+  type ForwardedRef,
+  forwardRef,
+  type ReactElement,
+  type RefAttributes,
+} from 'react';
 import { formatCurrency } from '@/helpers/formatting/formatCurrency';
 import { type IressInputProps } from '@/components/Input/Input';
 import { cx } from '@/styled-system/css';
@@ -10,7 +15,7 @@ import { type FormControlValue } from '@/types';
 
 export interface IressInputCurrencyProps<
   T extends FormControlValue = string | number,
-> extends IressInputProps<T, undefined> {
+> extends Omit<IressInputProps<T, undefined>, 'rows'> {
   /**
    * Set input content align to right.
    */
@@ -38,10 +43,12 @@ export interface IressInputCurrencyProps<
   withSymbol?: boolean;
 }
 
-export const IressInputCurrency = forwardRef<
-  InputRef<undefined>,
-  IressInputCurrencyProps
->((props, ref) => {
+const InputCurrency = <
+  T extends Exclude<FormControlValue, boolean> = string | number,
+>(
+  props: IressInputCurrencyProps<T>,
+  ref: ForwardedRef<InputRef>,
+) => {
   const {
     locale = 'en-AU',
     currencyCode = 'AUD',
@@ -54,7 +61,7 @@ export const IressInputCurrency = forwardRef<
   } = props;
 
   return (
-    <IressInput
+    <IressInput<T>
       className={cx(className, GlobalCSSClass.InputCurrency)}
       formatter={(value) =>
         formatCurrency({
@@ -73,6 +80,14 @@ export const IressInputCurrency = forwardRef<
       {...inputProps}
     />
   );
-}) as <T extends FormControlValue = string | number>(
-  props: IressInputCurrencyProps<T> & RefAttributes<InputRef<undefined> | null>,
-) => ReactElement;
+};
+
+export const IressInputCurrency = forwardRef(InputCurrency) as (<
+  T extends Exclude<FormControlValue, boolean> = string | number,
+>(
+  props: IressInputCurrencyProps<T> & RefAttributes<InputRef | null>,
+) => ReactElement) & {
+  displayName: 'IressInputCurrency';
+};
+
+IressInputCurrency.displayName = 'IressInputCurrency';

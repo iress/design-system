@@ -112,6 +112,8 @@ const PopoverContentInner = ({
   );
 };
 
+PopoverContentInner.displayName = 'PopoverContentInner';
+
 const PopoverContentContainer = ({
   container,
   ...restProps
@@ -135,6 +137,8 @@ const PopoverContentContainer = ({
   );
 };
 
+PopoverContentContainer.displayName = 'PopoverContentContainer';
+
 export const PopoverContent = (props: PopoverContentProps) => {
   const parentId = useFloatingParentNodeId();
 
@@ -149,3 +153,5 @@ export const PopoverContent = (props: PopoverContentProps) => {
 
   return <PopoverContentContainer {...props} />;
 };
+
+PopoverContent.displayName = 'PopoverContent';

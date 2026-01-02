@@ -111,3 +111,5 @@ export const IressExpander = ({
     </IressText>
   );
 };
+
+IressExpander.displayName = 'IressExpander';

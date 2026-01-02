@@ -86,3 +86,5 @@ export const ToastAnimated = ({
     />
   );
 };
+
+ToastAnimated.displayName = 'ToastAnimated';

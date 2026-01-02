@@ -71,3 +71,5 @@ export const TableProvider = <TRow extends object, TVal = unknown>({
   const { Provider } = getTableContext<TRow, TVal>();
   return <Provider value={context}>{children}</Provider>;
 };
+
+TableProvider.displayName = 'TableProvider';

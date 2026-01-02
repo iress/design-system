@@ -477,10 +477,14 @@ const RichSelect = <TMultiple extends boolean = false>(
   );
 };
 
-export const IressRichSelect = forwardRef(RichSelect) as <
+export const IressRichSelect = forwardRef(RichSelect) as (<
   TMultiple extends boolean = false,
 >(
   props: IressRichSelectProps<TMultiple> & {
     ref?: ForwardedRef<RichSelectRef>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressRichSelect';
+};
+
+IressRichSelect.displayName = 'IressRichSelect';

@@ -131,3 +131,5 @@ const InputPopover = (
 };
 
 export const IressInputPopover = forwardRef(InputPopover);
+
+InputPopover.displayName = 'IressInputPopover';

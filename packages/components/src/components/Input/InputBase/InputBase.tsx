@@ -93,10 +93,14 @@ const Input = <TRows extends number | undefined = undefined>(
  *
  * - **Ref Forwarding and Imperative Handle**: This component forwards a ref to the input or textarea element and provides a `focus` method via `useImperativeHandle`. This allows parent components to programmatically focus the input.
  */
-export const InputBase = forwardRef(Input) as <
+export const InputBase = forwardRef(Input) as (<
   TRows extends number | undefined = undefined,
 >(
   props: InputBaseProps<TRows> & {
     ref?: Ref<InputRef<TRows>>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'InputBase';
+};
+
+InputBase.displayName = 'InputBase';

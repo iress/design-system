@@ -71,3 +71,5 @@ export const IressTableFormattedValue = <TRow extends object, TVal = unknown>({
   if (format === 'percent') return formatPercentage(value as never);
   return value;
 };
+
+IressTableFormattedValue.displayName = 'IressTableFormattedValue';

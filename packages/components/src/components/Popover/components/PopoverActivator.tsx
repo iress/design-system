@@ -147,3 +147,5 @@ export const PopoverActivator = ({
     </div>
   );
 };
+
+PopoverActivator.displayName = 'PopoverActivator';

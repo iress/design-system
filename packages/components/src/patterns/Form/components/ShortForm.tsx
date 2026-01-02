@@ -117,11 +117,14 @@ const ShortFormPattern = <T extends FieldValues, TContext = object>(
   );
 };
 
-export const ShortForm = forwardRef(ShortFormPattern) as <
+export const ShortForm = forwardRef(ShortFormPattern) as (<
   T extends FieldValues,
   TContext = object,
 >(
   props: ShortFormProps<T, TContext> & {
     ref?: Ref<FormRef<T>>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'ShortForm';
+};
+ShortForm.displayName = 'ShortForm';

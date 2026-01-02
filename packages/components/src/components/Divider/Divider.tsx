@@ -32,3 +32,5 @@ export const IressDivider = ({
     />
   );
 };
+
+IressDivider.displayName = 'IressDivider';

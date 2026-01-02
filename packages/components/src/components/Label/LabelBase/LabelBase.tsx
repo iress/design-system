@@ -99,3 +99,5 @@ export const LabelBase = <E extends 'label' | 'strong' | 'legend' = 'label'>({
     </Tag>
   );
 };
+
+LabelBase.displayName = 'LabelBase';

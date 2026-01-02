@@ -274,9 +274,13 @@ const Input = <
   );
 };
 
-export const IressInput = forwardRef(Input) as <
+export const IressInput = forwardRef(Input) as (<
   T extends FormControlValue = string | number,
   TRows extends number | undefined = undefined,
 >(
   props: IressInputProps<T, TRows> & RefAttributes<InputRef<TRows> | null>,
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressInput';
+};
+
+IressInput.displayName = 'IressInput';

@@ -189,6 +189,7 @@ export const IressLoadingSuspense = ({
     </>
   );
 };
+IressLoadingSuspense.displayName = 'IressLoadingSuspense';
 
 /**
  * A polyfill for the `use` hook in React 19. It allows you to suspend a component until the resource (Promise) is resolved.

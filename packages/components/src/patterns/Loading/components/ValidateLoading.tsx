@@ -89,3 +89,4 @@ export const ValidateLoading = ({
     </styled.div>
   );
 };
+ValidateLoading.displayName = 'ValidateLoading';

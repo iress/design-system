@@ -95,3 +95,5 @@ export const FieldFooter = ({
     </styled.div>
   );
 };
+
+FieldFooter.displayName = 'FieldFooter';

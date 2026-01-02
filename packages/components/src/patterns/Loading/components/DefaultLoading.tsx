@@ -69,3 +69,5 @@ export const DefaultLoading = ({
     </styled.div>
   );
 };
+
+DefaultLoading.displayName = 'DefaultLoading';

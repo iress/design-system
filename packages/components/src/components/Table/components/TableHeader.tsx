@@ -56,3 +56,5 @@ export const TableHeader = ({
     </tr>
   ));
 };
+
+TableHeader.displayName = 'TableHeader';

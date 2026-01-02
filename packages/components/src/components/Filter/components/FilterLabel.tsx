@@ -22,3 +22,5 @@ export const FilterLabel = <TMultiple extends boolean = false>({
 
   return label;
 };
+
+FilterLabel.displayName = 'FilterLabel';

@@ -99,3 +99,5 @@ export const InputPopoverActivator = ({
     </div>
   );
 };
+
+InputPopoverActivator.displayName = 'InputPopoverActivator';

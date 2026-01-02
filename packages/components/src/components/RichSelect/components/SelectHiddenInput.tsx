@@ -66,10 +66,14 @@ const Component = <TMultiple extends boolean = false>(
   );
 };
 
-export const SelectHiddenInput = forwardRef(Component) as <
+export const SelectHiddenInput = forwardRef(Component) as (<
   TMultiple extends boolean,
 >(
   props: SelectHiddenInputProps<TMultiple> & {
     ref?: ForwardedRef<HTMLInputElement>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'SelectHiddenInput';
+};
+
+SelectHiddenInput.displayName = 'SelectHiddenInput';

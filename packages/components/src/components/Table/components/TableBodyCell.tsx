@@ -49,3 +49,5 @@ export const TableBodyCell = <TRow extends object = never>({
     </Element>
   );
 };
+
+TableBodyCell.displayName = 'TableBodyCell';

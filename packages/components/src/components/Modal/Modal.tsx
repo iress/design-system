@@ -316,3 +316,5 @@ export const IressModal = ({
     </FloatingPortal>
   );
 };
+
+IressModal.displayName = 'IressModal';

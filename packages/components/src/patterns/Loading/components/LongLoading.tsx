@@ -219,3 +219,5 @@ export const LongLoading = ({
     </styled.div>
   );
 };
+
+LongLoading.displayName = 'LongLoading';

@@ -169,3 +169,5 @@ export const IressTabSet = ({
     </TabSetProvider>
   );
 };
+
+IressTabSet.displayName = 'IressTabSet';

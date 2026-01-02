@@ -191,6 +191,8 @@ export const IressSelectMenu = <TMultiple extends boolean = false>({
   );
 };
 
+IressSelectMenu.displayName = 'IressSelectMenu';
+
 const orderSelectedFirst = <TMultiple extends boolean = false>(
   items: LabelValueMeta[],
   selected?: IressSelectMenuProps<TMultiple>['selected'],

@@ -97,3 +97,5 @@ export const IressSelectHeading = ({
     </IressInline>
   </IressMenuHeading>
 );
+
+IressSelectHeading.displayName = 'IressSelectHeading';

@@ -74,6 +74,7 @@ const ToggleLabel = ({
     </span>
   );
 };
+ToggleLabel.displayName = 'ToggleLabel';
 
 export const IressToggle = ({
   checked: checkedProp,
@@ -158,3 +159,4 @@ export const IressToggle = ({
     </styled.div>
   );
 };
+IressToggle.displayName = 'IressToggle';

@@ -60,6 +60,7 @@ const ValidationPrefix = ({
     status === 'danger' ? 'Error' : capitalizeFirstLetter(status);
   return `${statusPrefix}: `;
 };
+ValidationPrefix.displayName = 'ValidationPrefix';
 
 export const IressValidationMessage = <
   TLinkToTarget extends string | undefined = undefined,
@@ -109,3 +110,4 @@ export const IressValidationMessage = <
     <styled.div display="inline">{children}</styled.div>
   </IressText>
 );
+IressValidationMessage.displayName = 'IressValidationMessage';

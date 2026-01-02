@@ -348,10 +348,14 @@ const Filter = <TMultiple extends boolean = false>(
   );
 };
 
-export const IressFilter = forwardRef(Filter) as <
+export const IressFilter = forwardRef(Filter) as (<
   TMultiple extends boolean = false,
 >(
   props: IressFilterProps<TMultiple> & {
     ref?: ForwardedRef<FilterRef>;
   },
-) => ReactElement;
+) => ReactElement) & {
+  displayName: 'IressFilter';
+};
+
+IressFilter.displayName = 'IressFilter';

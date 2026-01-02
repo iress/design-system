@@ -16,3 +16,5 @@ export const NestedPopoverActivator = ({
     <FloatingList elementsRef={parentPopover.list}>{children}</FloatingList>
   );
 };
+
+NestedPopoverActivator.displayName = 'NestedPopoverActivator';

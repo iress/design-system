@@ -64,3 +64,5 @@ export const IressBadge = ({
     badge
   );
 };
+
+IressBadge.displayName = 'IressBadge';

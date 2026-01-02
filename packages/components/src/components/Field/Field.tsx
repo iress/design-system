@@ -177,3 +177,5 @@ export const IressField = ({
     </styled.div>
   );
 };
+
+IressField.displayName = 'IressField';
