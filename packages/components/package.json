@@ -55,12 +55,11 @@
     "jsdom": "27.2.0",
     "lightningcss": "^1.30.2",
     "postcss": "8.4.31",
-    "postcss-preset-env": "10.3.1",
     "prettier": "^3.7.4",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-dropzone": "14.3.8",
-    "react-hook-form": "7.67.0",
+    "react-hook-form": "7.68.0",
     "rimraf": "^6.1.2",
     "storybook": "10.1.10",
     "typescript": "5.9.3",
@@ -68,7 +67,7 @@
     "vite-bundle-visualizer": "^1.2.1",
     "vite-plugin-dts": "4.5.4",
     "vite-plugin-static-copy": "3.1.4",
-    "vite-tsconfig-paths": "^5.1.4",
+    "vite-tsconfig-paths": "^6.0.1",
     "vitest": "4.0.15"
   },
   "dependencies": {
