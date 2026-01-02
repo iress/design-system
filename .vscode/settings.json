@@ -9,10 +9,6 @@
     "typescript",
     "typescriptreact"
   ],
-  "eslint.workingDirectories": [
-    { "directory": "packages/components", "changeProcessCWD": true },
-    { "directory": "packages/tokens", "changeProcessCWD": true }
-  ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
