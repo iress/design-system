@@ -156,6 +156,12 @@ export const textCompositions: CompositionStyles['textStyles'] = {
       font: cssVars.typography.code,
     },
   },
+  inherit: {
+    description: 'Inherit text styles from parent',
+    value: {
+      font: 'inherit',
+    },
+  },
 };
 
 export const textStyles = defineTextStyles(textCompositions);
