@@ -18,6 +18,7 @@ import {
   useImperativeHandle,
   type ElementType,
   type ComponentPropsWithoutRef,
+  type RefAttributes,
 } from 'react';
 import { useMenuItemRole } from './hooks/useMenuItemRole';
 import {
@@ -167,6 +168,16 @@ export type IressMenuItemProps<
      */
     value?: FormControlValue;
   };
+
+const mergeRefs = <T,>(...refs: (React.Ref<T> | undefined)[]) => {
+  return (value: T) => {
+    refs.forEach((ref) => {
+      if (!ref) return;
+      if (typeof ref === 'function') ref(value);
+      else ref.current = value;
+    });
+  };
+};
 
 const MenuItem = <
   C extends ElementType | undefined = undefined,
@@ -321,8 +332,10 @@ const MenuItem = <
   );
 
   const classes = useMemo(
+    // eslint-disable-next-line react-hooks/refs -- ref needed for forwarding
     () =>
       menuStyles({
+        active: !!popover?.isActiveActivator(elementRef.current as HTMLElement),
         hasAppendOrPrepend: !!(append ?? prependProp ?? menu?.multiSelect),
         isActiveInPopover,
         layout: menu?.layout,
@@ -336,6 +349,7 @@ const MenuItem = <
       menu?.layout,
       menu?.multiSelect,
       menu?.noWrap,
+      popover,
       prependProp,
       selected,
     ],
@@ -442,7 +456,17 @@ const MenuItem = <
   return (
     <>
       {menu?.isComposite ? (
-        <CompositeItem render={(htmlProps) => cloneElement(node, htmlProps)} />
+        <CompositeItem
+          render={(htmlProps) =>
+            cloneElement(node, {
+              ...htmlProps,
+              ref: mergeRefs(
+                renderProps.ref,
+                (htmlProps as RefAttributes<never>).ref,
+              ),
+            })
+          }
+        />
       ) : (
         node
       )}

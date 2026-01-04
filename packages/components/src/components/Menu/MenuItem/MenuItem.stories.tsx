@@ -1,7 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressMenuItem } from './MenuItem';
 import { IressMenu } from '../Menu';
-import { IressBadge, IressIcon } from '@/main';
+import { IressBadge, IressIcon, IressPanel, IressPopover } from '@/main';
 import { RoutingLinkMenu } from './mocks/RoutingLinkMenu';
 import RoutingLinkMenuSource from './mocks/RoutingLinkMenu.tsx?raw';
 
@@ -84,4 +84,17 @@ export const Element: Story = {
       },
     },
   },
+};
+
+export const PopoverActivator: Story = {
+  args: {
+    children: 'Open sub-menu',
+  },
+  render: (args) => (
+    <IressMenu role="menu">
+      <IressPopover activator={<IressMenuItem {...args} />}>
+        <IressPanel>I'm a sub-menu that opens from a MenuItem</IressPanel>
+      </IressPopover>
+    </IressMenu>
+  ),
 };

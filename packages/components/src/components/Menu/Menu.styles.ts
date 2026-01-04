@@ -47,6 +47,14 @@ export const menu = sva({
     },
   },
   variants: {
+    active: {
+      true: {
+        item: {
+          bg: 'colour.primary.surface',
+          color: 'colour.primary.text',
+        },
+      },
+    },
     fluid: {
       true: {
         root: {
