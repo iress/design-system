@@ -19,6 +19,14 @@ To use IDS, please refer to the [documentation](https://main--691abcc79dfa560a36
 
 If you find a bug in any of the Design System packages or would like an enhancement, please reach out to us using the [issues tab](https://github.com/iress/design-system/issues).
 
+## GitHub Copilot Integration
+
+This repository includes specialized GitHub Copilot agents to assist with development tasks:
+
+- **Bug-Fixing Agent**: Systematically fixes bugs from the issue tracker with comprehensive documentation
+
+**Learn more**: See the [Copilot Agent Setup Guide](docs/COPILOT-AGENT-SETUP.md) for detailed instructions on using these agents in VS Code and Slack.
+
 ## Development
 
 ### Stack
