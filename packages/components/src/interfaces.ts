@@ -5,6 +5,7 @@ import type {
   ResponsiveProp,
   SpacingToken,
   Statuses,
+  SizeToken,
 } from './types';
 import type { UtilityValues } from './styled-system/types/prop-type';
 
@@ -309,7 +310,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-width
    */
-  maxWidth?: UtilityValues['maxWidth'];
+  maxWidth?: SizeToken;
 
   /**
    * The **`m`** property is short for `margin`, and sets the margin area on all four sides of an element.
@@ -570,7 +571,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/width
    */
-  width?: ResponsiveProp<UtilityValues['width']>;
+  width?: ResponsiveProp<SizeToken | 'auto'>;
 }
 
 export interface IressTestProps {

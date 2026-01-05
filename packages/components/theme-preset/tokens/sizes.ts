@@ -126,4 +126,10 @@ export const sizes = {
   ...typographySizes,
 };
 
-export const SIZE_TOKENS = Object.keys(sizes);
+export const SIZE_TOKENS = Object.keys({
+  ...containerSizes,
+  ...inputSizes,
+  ...gridSizes,
+  ...overlaySizes,
+  ...typographySizes,
+});
