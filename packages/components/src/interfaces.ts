@@ -516,7 +516,7 @@ export interface IressCSSProps {
    * The **`scrollable`** property enables scrolling behavior for an element when its content overflows its bounds. It sets the `overflow` CSS property to `auto`, allowing scrollbars to appear as needed. The scrollbar has been styled to match the design system.
    * You can set the value to `true` to enable scrolling on both axes, or specify `'x'` or `'y'` to restrict scrolling to a single axis.
    */
-  scrollable?: 'x' | 'y' | boolean;
+  scrollable?: UtilityValues['scrollable'];
 
   /**
    * Set **`srOnly`** to hide an element visually but still make it accessible to screen readers. It can also be set to an object of breakpoints to hide the element at specific breakpoints.

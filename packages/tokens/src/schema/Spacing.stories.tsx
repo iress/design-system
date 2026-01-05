@@ -1,7 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import {
   IressInline,
-  iressStyled,
+  IressStyled,
   IressTable,
   type IressTableProps,
   IressText,
@@ -13,14 +13,12 @@ import { type IressDesignToken } from '../interfaces';
 import { get } from 'radash';
 import cssVars from '~/generated/css-vars';
 
-const StyledDiv = iressStyled('div');
-
 const VisualSpark = ({ cssVar }: { cssVar: string }) => {
   const [size, setSize] = useState<number | null>(null);
 
   return (
     <IressInline gap="xs">
-      <StyledDiv
+      <IressStyled
         bg="colour.primary.fill"
         style={{ height: '20px', width: cssVar }}
         ref={(el) => {

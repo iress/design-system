@@ -8,7 +8,7 @@ import {
   IressPanel,
   IressRow,
   IressStack,
-  iressStyled,
+  IressStyled,
   IressTable,
   type IressTableProps,
   IressText,
@@ -21,14 +21,12 @@ import { type ReactNode, useState } from 'react';
 import { get } from 'radash';
 import cssVars from '~/generated/css-vars';
 
-const StyledDiv = iressStyled('div');
-
 const VisualSpark = ({ cssVar }: { cssVar: string }) => {
   const [size, setSize] = useState<string | null>(null);
 
   return (
     <IressInline gap="xs">
-      <StyledDiv
+      <IressStyled
         bg="colour.primary.fill"
         style={{ width: '20px', height: '20px', borderTopRightRadius: cssVar }}
         ref={(el) => {
