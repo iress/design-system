@@ -105,7 +105,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
     ) => {
       onChange?.(e, newValue);
       setValue(newValue);
-      setValueChanged(true);
+      setValueChanged(!!newValue);
     };
 
     const handleInputClear: IressInputProps['onClear'] = (e) => {
