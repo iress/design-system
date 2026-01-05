@@ -59,7 +59,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-sizing--docs#container-widths',
     cssProperty: 'max-width',
     tokenMapping: 'N/A',
-    responsive: true,
+    responsive: false,
   },
   {
     jsxProp: 'm',
@@ -179,6 +179,13 @@ const stylingPropsReference: StylingPropsReference[] = [
     tokenMapping: 'Spacing',
     tokenMappingLink: '/?path=/docs/foundations-tokens-spacing--docs',
     responsive: true,
+  },
+  {
+    jsxProp: 'scrollable',
+    jsxPropLink: '/?path=/docs/styling-props-scrollable--docs#scrollable',
+    cssProperty: 'Multiple properties',
+    tokenMapping: 'N/A',
+    responsive: false,
   },
   {
     jsxProp: 'srOnly',

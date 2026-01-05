@@ -33,6 +33,7 @@ import { sliderThumb } from './utilities/sliderThumb';
 import { noGutter } from './utilities/noGutter';
 import { stretch } from './utilities/stretch';
 import { focusable } from './utilities/focusable';
+import { scrollable } from './utilities/scrollable';
 
 export default definePreset({
   name: 'theme-preset',
@@ -127,6 +128,7 @@ export default definePreset({
       checkmark,
       sliderThumb,
       noGutter,
+      scrollable,
       stretch,
     },
   },

@@ -5,6 +5,7 @@ import type {
   ResponsiveProp,
   SpacingToken,
   Statuses,
+  SizeToken,
 } from './types';
 import type { UtilityValues } from './styled-system/types/prop-type';
 
@@ -309,7 +310,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-width
    */
-  maxWidth?: UtilityValues['maxWidth'];
+  maxWidth?: SizeToken;
 
   /**
    * The **`m`** property is short for `margin`, and sets the margin area on all four sides of an element.
@@ -513,6 +514,12 @@ export interface IressCSSProps {
   rowGap?: ResponsiveProp<PositiveSpacingToken>;
 
   /**
+   * The **`scrollable`** property enables scrolling behavior for an element when its content overflows its bounds. It sets the `overflow` CSS property to `auto`, allowing scrollbars to appear as needed. The scrollbar has been styled to match the design system.
+   * You can set the value to `true` to enable scrolling on both axes, or specify `'x'` or `'y'` to restrict scrolling to a single axis.
+   */
+  scrollable?: UtilityValues['scrollable'];
+
+  /**
    * Set **`srOnly`** to hide an element visually but still make it accessible to screen readers. It can also be set to an object of breakpoints to hide the element at specific breakpoints.
    *
    * Hide on all breakpoints: `srOnly: true`
@@ -564,7 +571,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/width
    */
-  width?: ResponsiveProp<UtilityValues['width']>;
+  width?: ResponsiveProp<SizeToken | 'auto'>;
 }
 
 export interface IressTestProps {

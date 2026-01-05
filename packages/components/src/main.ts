@@ -42,6 +42,7 @@ export * from './components/Slideout';
 export * from './components/Slider';
 export * from './components/Spinner';
 export * from './components/Stack';
+export * from './components/Styled';
 export * from './components/Table';
 export * from './components/TabSet';
 export * from './components/Tag';

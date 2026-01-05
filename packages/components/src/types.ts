@@ -6,7 +6,10 @@ import type {
   VERTICAL_ALIGNS,
 } from '@/constants';
 import type { IressCSSProps, IressTestProps } from './interfaces';
-import type { SpacingToken as PureSpacingToken } from '@/styled-system/tokens';
+import type {
+  SpacingToken as PureSpacingToken,
+  SizeToken as PureSizeToken,
+} from '@/styled-system/tokens';
 import type { Placement } from '@floating-ui/react';
 import type { RefObject } from 'react';
 
@@ -74,6 +77,18 @@ export type PositiveSpacingToken = Exclude<
  * Responsive prop type that allows a single value or an object specifying values per breakpoint.
  */
 export type ResponsiveProp<T> = T | Partial<Record<Breakpoints | 'base', T>>;
+
+/**
+ * All available size tokens in the design system.
+ */
+export type SizeToken = Exclude<
+  PureSizeToken,
+  | `breakpoint-${string}`
+  | `chevron.${string}`
+  | `progress.${string}`
+  | `slider.${string}`
+  | `toggle.${string}`
+>;
 
 /**
  * A spacing token that can be either positive or negative, used for properties that accept negative values (eg. margin).
