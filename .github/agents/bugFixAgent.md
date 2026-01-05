@@ -154,13 +154,26 @@ Fix bugs in both 5.x and main branches with precision, minimal changes, and comp
    - Consider performance impact
    - Maintain component API contracts
 
-3. **Testing Strategy**:
-   - Identify and run existing tests using `yarn test:coverage` commands
-   - Add test cases for bug scenario if needed
-   - Test edge cases
+3. **Testing Strategy (MANDATORY)**:
+   - **REQUIRED: Write test that reproduces the bug FIRST**
+   - Run the test to confirm it fails (proving bug exists)
+   - Apply your fix to the component code
+   - **REQUIRED: Verify the test now passes** (proving fix works)
+   - Run existing tests using `yarn test:coverage` commands
+   - Add edge case tests if needed
    - Ensure no regressions
    - **Always use workspace-specific coverage commands**: `yarn workspace @iress-oss/ids-components run test:coverage [file]`
    - Wait patiently for tests to complete (30+ seconds is normal)
+
+   **Test Pattern:**
+
+   ```typescript
+   it('[fix description] without [bug symptom]', () => {
+     // Setup: Props/data that triggered the bug
+     // Action: Perform the previously failing operation
+     // Assert: Verify correct behavior
+   });
+   ```
 
 4. **Communicate Completion**:
    - Summarize changes made
@@ -245,6 +258,8 @@ Follow the principles in `.github/instructions/file-organization.instructions.md
 
 - ✅ Found exact root cause through systematic investigation
 - ✅ Applied minimal, targeted fix following existing patterns
+- ✅ **Written test that reproduces bug and validates fix**
+- ✅ **All tests pass** (new test + existing tests)
 - ✅ Maintained backward compatibility and component contracts
 - ✅ Provided clear explanation of problem and solution
 - ✅ Considered similar cases and potential side effects
@@ -378,22 +393,25 @@ yarn workspace @iress-oss/ids-components exec npx eslint src/components/Button/B
 
 8. User: "Option 1"
 
-9. You: [Implement fix on 5.x first, then main, run tests on both, create documentation]
+9. You: [Write test first, implement fix, verify test passes, run all tests, create documentation]
    "I've implemented the fix on both branches:
 
    **5.x Branch PR:**
    - Title: `Fix: Button keyboard navigation (5.x)`
    - Changes: Adds keyboard event handlers
+   - Test: `Button.test.tsx` - Added test that reproduces the bug and now passes
    - Please add label: `affects-5.x`
 
    **main Branch PR:**
    - Title: `Fix: Button keyboard navigation (main)`
    - Changes: Same fix (code is compatible)
+   - Test: `Button.test.tsx` - Added test that reproduces the bug and now passes
    - Please add label: `affects-main`
 
    Both PRs should reference: `Fixes #456`
    Link them: In 5.x PR add \"Related: #[main-pr-number] (main)\"
 
+   I wrote a test that fails before the fix and passes after, confirming the bug is resolved.
    All tests pass on both branches. The fixes are ready for review."
 ```
 
