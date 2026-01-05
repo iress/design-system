@@ -45,7 +45,7 @@
     "@types/minimist": "1.2.5",
     "@types/node": "^25.0.2",
     "@types/turndown": "5.0.6",
-    "@vitest/coverage-v8": "4.0.15",
+    "@vitest/coverage-v8": "4.0.16",
     "minimist": "1.2.8",
     "playwright": "1.57.0",
     "rimraf": "6.1.2",
@@ -53,7 +53,7 @@
     "turndown": "7.2.2",
     "turndown-plugin-gfm": "1.0.2",
     "typescript": "5.9.3",
-    "vitest": "4.0.15"
+    "vitest": "4.0.16"
   },
   "repository": {
     "type": "git",
