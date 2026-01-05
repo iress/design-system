@@ -332,7 +332,7 @@ const MenuItem = <
   );
 
   const classes = useMemo(
-    // eslint-disable-next-line react-hooks/refs -- ref needed for forwarding
+    // eslint-disable-next-line react-hooks/refs -- popover uses elementRef.current; exhaustive deps warning is intentionally suppressed
     () =>
       menuStyles({
         active: !!popover?.isActiveActivator(elementRef.current as HTMLElement),
