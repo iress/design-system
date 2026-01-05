@@ -93,52 +93,60 @@ The agent supports fixing bugs in both **5.x** (maintenance) and **main** (devel
 **Scenario**: Bug only in main branch
 
 ```
-You: @workspace Fix issue #456 - New feature in Button causing keyboard issues (main branch)
+You: @workspace Fix issue #456 - New feature in Button causing keyboard issues. I saw this on main branch.
 
-Agent: I understand this is a keyboard event issue in the Button component on the
-main branch. I'll focus on the main branch for this fix. Let me search for the
-Button component files.
+Agent: I understand this is a keyboard event issue in the Button component on main.
+Let me investigate if this also affects the 5.x branch by checking the code.
 
-[Agent performs searches and analysis on main branch]
+[Agent searches both branches]
 
-Agent: Found the issue in the new feature code on main. This doesn't exist in 5.x.
-Proceeding with main-only fix.
-```
+Agent: I've checked both branches. This issue only exists in main - the feature
+doesn't exist in 5.x. I'll focus on fixing main only.
+
+Please add the label `affects-main` to the issue.
+
+Proceeding to search for the Button component files...
 
 #### Example 2: Dual Branch Bug Fix
 
 **Scenario**: Button component not responding to keyboard events in both branches
 
 ```
-You: @workspace Fix issue #456 - Button component not responding to keyboard events
 
-Agent: I understand the Button component has keyboard event issues. Which branch(es)
-are affected?
-- 5.x only
-- main only
-- Both branches
+You: @workspace Fix issue #456 - Button component not responding to keyboard events.
+I noticed this on main branch.
 
-You: Both branches
+Agent: I understand the Button component has keyboard event issues on main. Let me
+check if this also affects the 5.x branch.
 
-Agent: Perfect, I'll check both branches and ensure the fix works for both. Let me
-search for the Button component files.
+[Agent searches both branches]
 
-[Agent performs searches and analysis]
+Agent: I've checked both branches. The bug exists in BOTH 5.x and main - both are
+missing keyboard event handlers. The code structure is similar, so I can apply a
+consistent fix.
+
+Please add the label `affects-both-branches` to the issue.
+
+Should I proceed with creating a bug reproduction story and fixing both branches?
+
+You: Yes, please
+
+Agent: I've created a bug reproduction story at Button.stories.tsx.
+
+[Agent performs analysis]
 
 Agent: I found the Button component in both branches. The issue exists in both, and
-the code structure is similar, so I can apply a consistent fix. Should I proceed with
-creating a bug reproduction story?
-
-Agent: I've created a bug reproduction story at Button.stories.tsx. I can fix
-this in 3 ways:
+the code structure is similar, so I can apply a consistent fix. Should I proceed?
 
 Option 1 (Recommended): Add keyboard event handlers to existing button
+
 - Pros: Minimal change, maintains API
 - Cons: None
 - Risk: Low
 - Effort: Small
 
 Option 2: Refactor event system
+
 - Pros: More comprehensive
 - Cons: Larger change, higher risk
 - Risk: Medium
@@ -152,33 +160,47 @@ Agent: [Implements fix on 5.x first, then main, runs tests, creates documentatio
 I've implemented the fix on both branches:
 
 - PR for 5.x: Adds keyboard event handlers
-- PR for main: Same fix (code is compatible)
+- PR for 5.x: Adds keyboard event handlers (labeled `affects-5.x`)
+- PR for main: Same fix (labeled `affects-main`, linked to 5.x PR)
 
 All tests pass on both branches. The fixes are ready for review.
+
 ```
 
-### Cross-Branch Automation
+### Cross-Branch Tracking with Labels
 
-The repository includes GitHub Actions workflow to help track cross-branch bug fixes:
+The repository uses a simple label-based system for tracking cross-branch bug fixes:
 
-#### Automatic PR Comments
+#### Branch Labels
 
-When you create a PR with "Fix" in the title or the "bug" label, the workflow automatically:
+- `affects-5.x` - Bug exists in the 5.x branch
+- `affects-main` - Bug exists in the main branch
+- `affects-both-branches` - Bug exists in both branches
 
-- Comments on the PR with a cross-branch checklist
-- Reminds you to check if the bug exists in the other branch
-- Asks you to link related PRs
+#### How It Works
+
+1. **User reports bug**: Simply state which branch you saw the bug on (e.g., "I saw this on main")
+2. **Agent investigates**: Checks both branches to determine if bug exists in both
+3. **Agent provides labels**: Tells you exactly which label(s) to add based on investigation
+4. **Agent creates PRs**: Generates properly titled and linked PRs with clear instructions
+5. **User adds labels**: Simply copy the labels the agent specifies
+
+**You don't need to know the label system** - just report where you saw the bug, and the agent figures out the rest!
 
 #### Bug Fix PR Template
 
-Use the bug fix PR template (`.github/PULL_REQUEST_TEMPLATE/bug_fix.md`) which includes:
+Use the simple bug fix PR template (`.github/PULL_REQUEST_TEMPLATE/bug_fix.md`):
 
-- Branch selection dropdown
-- Cross-branch checklist
-- Space to document branch-specific differences
-- Links to related PRs
+- What was broken?
+- Related issue number
+- What changed?
+- Testing checklist
 
-To use the template, add `?template=bug_fix.md` to your PR URL.
+To use: Add `?template=bug_fix.md` to your PR URL.
+
+See [Cross-Branch Labels Guide](.github/CROSS_BRANCH_LABELS.md) for complete workflow details.
+
+### What the Agent Creates
 
 For simple bugs:
 
@@ -211,21 +233,25 @@ You can trigger GitHub Copilot coding agent (including the bug-fixing agent) dir
 
 1. In Slack, open a direct message with the GitHub App or mention it in a channel:
 
-   ```
-   @GitHub Copilot
-   ```
+```
+
+@GitHub Copilot
+
+```
 
 2. Send a prompt or type `login`:
 
-   ```
-   login
-   ```
+```
+
+login
+
+```
 
 3. Authorize the app to access your GitHub account when prompted
 
 4. Click **Configure settings** to set your default repository:
-   - Repository: `iress/design-system-public`
-   - Click **Save changes**
+- Repository: `iress/design-system-public`
+- Click **Save changes**
 
 ### Using the Agent in Slack
 
@@ -234,7 +260,9 @@ You can trigger GitHub Copilot coding agent (including the bug-fixing agent) dir
 Send a direct message to the GitHub App:
 
 ```
+
 @GitHub Fix the button alignment issue in RichSelect
+
 ```
 
 #### Thread Mentions
@@ -242,12 +270,14 @@ Send a direct message to the GitHub App:
 Mention the GitHub App in a thread to include conversation context:
 
 ```
+
 User 1: The RichSelect component shows duplicate items when fetching from API
 
 User 2: This happens with concurrent requests
 
 You: @GitHub Copilot please fix the duplicate items issue in RichSelect when
 there are concurrent API requests
+
 ```
 
 **Important**: Thread context is captured and stored in the pull request!
@@ -257,25 +287,33 @@ there are concurrent API requests
 **Basic invocation:**
 
 ```
+
 @GitHub [your bug description]
+
 ```
 
 **Specify repository:**
 
 ```
+
 @GitHub Fix the dropdown bug in repo=iress/design-system-public
+
 ```
 
 **Specify branch:**
 
 ```
+
 @GitHub Fix validation issue in repo=iress/design-system-public branch=fix/form-validation
+
 ```
 
 **With issue number:**
 
 ```
+
 @GitHub Fix issue #456
+
 ```
 
 ### How Slack Integration Works
@@ -331,26 +369,29 @@ there are concurrent API requests
 2. **Check Both Branches**: Even if reported on one branch, verify if the bug exists in the other
 3. **Fix Older Branch First**: When fixing both branches, fix 5.x first, then port to main
 4. **Document Differences**: If the fix differs between branches, clearly document why
-5. **Link PRs**: Always cross-reference PRs for the same bug on different branches
-6. **Use Issue Labels**: Add appropriate labels (e.g., `affects-5.x`, `affects-main`, `cross-branch`)
-7. **Test Both Branches**: Run tests on both branches before submitting PRs
-8. **Version-Specific Fixes**: If a fix only applies to one branch, explain why in the PR
+5. **Link PRs**: Always cross-reference PRs for the same bug: "Related: #XXX (5.x)"
+6. **Use Labels**: Add `affects-5.x`, `affects-main`, or `affects-both-branches` labels
+7. **PR Titles**: Use `Fix(5.x):` or `Fix(main):` prefixes to clarify target branch
+8. **Test Both Branches**: Run tests on both branches before submitting PRs
+9. **Version-Specific Fixes**: If a fix only applies to one branch, explain why in the PR
 
 #### Branch Fix Workflow
 
 **For Dual-Branch Bugs:**
 
 1. Create bug reproduction story (works for both branches)
-2. Checkout 5.x branch → implement fix → test → create PR
-3. Checkout main branch → implement fix → test → create PR
-4. Link both PRs in descriptions: "Related to #XXX (5.x)" and "Related to #YYY (main)"
-5. Document in issue: "Fixed in PR #XXX (5.x) and PR #YYY (main)"
+2. Checkout 5.x branch → implement fix → test → create PR with title `Fix: [description] (5.x)`
+3. Checkout main branch → implement fix → test → create PR with title `Fix: [description] (main)`
+4. Add labels: Both PRs get `affects-5.x` and `affects-main` labels (or `affects-both-branches` on issue)
+5. Link PRs: "Related: #XXX (5.x)" and "Related: #YYY (main)"
+6. Document in issue: "Fixed in PR #XXX (5.x) and PR #YYY (main)"
 
 **For Single-Branch Bugs:**
 
-1. Document why the bug only affects one branch
-2. Add comment explaining version differences
-3. Label appropriately (`affects-5.x-only` or `affects-main-only`)
+1. Create PR with title `Fix(branch): [description]` (e.g., `Fix(main): Button keyboard issue`)
+2. Add appropriate label: `affects-5.x` or `affects-main`
+3. Document why the bug only affects one branch in PR description
+4. Add comment explaining version differences if needed
 
 ### Slack Integration
 
@@ -454,3 +495,4 @@ For issues or questions:
 ---
 
 **Happy bug fixing with GitHub Copilot!** 🐛→✨
+```

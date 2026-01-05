@@ -31,10 +31,12 @@ Fix bugs in both 5.x and main branches with precision, minimal changes, and comp
    - Note reproduction context
 
 2. **Determine Target Branch(es)**:
-   - Ask user which branch(es) the bug affects: 5.x, main, or both
-   - Check if bug exists in both branches (even if only reported on one)
+   - Ask user which branch they saw the bug on (where they encountered it)
+   - **Investigate both branches** to check if bug exists in both
+   - Don't assume - actually search and examine code in both branches
    - Understand version-specific differences that might affect the fix
-   - Document branch scope in issue/PR
+   - Tell user which branches are affected based on your investigation
+   - Provide specific labels to add: `affects-5.x`, `affects-main`, or `affects-both-branches`
 
 3. **Understand Technical Flow**:
    - Trace the data path
@@ -163,6 +165,11 @@ Fix bugs in both 5.x and main branches with precision, minimal changes, and comp
 4. **Communicate Completion**:
    - Summarize changes made
    - Confirm tests pass
+   - **Provide specific label instructions** based on your investigation:
+     - "Please add label: `affects-both-branches`" (if bug exists in both)
+     - "Please add label: `affects-5.x`" (if only 5.x)
+     - "Please add label: `affects-main`" (if only main)
+   - Provide exact PR title format to use
    - Ask user to verify fix
 
 #### Phase 6: Documentation
@@ -173,14 +180,20 @@ Fix bugs in both 5.x and main branches with precision, minimal changes, and comp
    - Use kebab-case filename
    - Include problem summary
    - **Document target branch(es)**: Clearly state 5.x, main, or both
+   - **For dual-branch fixes**: Include PR linking instructions
    - Document expected vs actual behavior
    - List technical fixes in bullet points
    - **For dual-branch fixes**: Document any differences between branches
    - Provide self-contained usage example using proper IDS imports
    - Format for copy-paste to GitHub PR or CodeSandbox
+2. **PR Title and Description Guidance**:
+   - **Single branch**: Use `Fix(5.x):` or `Fix(main):` prefix
+   - **Dual branch**: Use `Fix:` with branch noted in parentheses
+   - Include "Related: #XXX (branch)" links in descriptions
+   - Reference the issue: "Fixes #123"
    - **Include cross-branch checklist** if fixing both branches
 
-2. **Usage Example Format**:
+3. **Usage Example Format**:
 
    ```typescript
    import { IressComponentName } from '@iress-oss/ids-components';
@@ -318,22 +331,25 @@ yarn workspace @iress-oss/ids-components exec npx eslint src/components/Button/B
 ## Example Workflow
 
 ```
-1. User: "Fix issue #456 - Button component not responding to keyboard events"
+1. User: "Fix issue #456 - Button component not responding to keyboard events. I saw this on main branch."
 
-2. You: "I understand the issue is that the Button component doesn't respond
-   to keyboard events. Before I begin, which branch(es) does this affect?
-   - 5.x branch only
-   - main branch only
-   - Both branches
+2. You: "I understand the Button component doesn't respond to keyboard events
+   on main. Let me investigate if this also affects the 5.x branch by examining
+   the code in both branches."
+   [Perform searches in both branches]
 
-   I can check both branches to verify if needed."
+3. You: "I've checked both branches. The bug exists in BOTH 5.x and main -
+   both are missing keyboard event handlers. The code structure is similar,
+   so I can apply a consistent fix.
 
-3. User: "Both branches"
+   Please add the label `affects-both-branches` to the issue."
 
-4. You: "Perfect, I'll ensure the fix works for both 5.x and main. Let me
-   search for the Button component files and examine the event handling
-   implementation in both branches."
-   [Perform searches]
+4. You: "Should I proceed with creating a bug reproduction story and fixing both branches?"
+
+5. User: "Yes, please"
+
+6. You: "I've created a bug reproduction story at Button.stories.tsx.
+   [Searches in both branches, analyzes code]
 
 5. You: "I found the Button component and identified that it's missing
    keyboard event handlers in both branches. The root cause is missing
@@ -365,8 +381,18 @@ yarn workspace @iress-oss/ids-components exec npx eslint src/components/Button/B
 9. You: [Implement fix on 5.x first, then main, run tests on both, create documentation]
    "I've implemented the fix on both branches:
 
-   - PR for 5.x: Adds keyboard event handlers
-   - PR for main: Same fix (code is compatible)
+   **5.x Branch PR:**
+   - Title: `Fix: Button keyboard navigation (5.x)`
+   - Changes: Adds keyboard event handlers
+   - Please add label: `affects-5.x`
+
+   **main Branch PR:**
+   - Title: `Fix: Button keyboard navigation (main)`
+   - Changes: Same fix (code is compatible)
+   - Please add label: `affects-main`
+
+   Both PRs should reference: `Fixes #456`
+   Link them: In 5.x PR add \"Related: #[main-pr-number] (main)\"
 
    All tests pass on both branches. The fixes are ready for review."
 ```
