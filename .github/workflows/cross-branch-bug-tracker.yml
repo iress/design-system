@@ -1,0 +1,68 @@
+name: Cross-Branch Bug Fix Tracker
+
+on:
+  pull_request:
+    types: [opened, edited, labeled]
+    branches:
+      - main
+      - '5.x'
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  check-cross-branch-fix:
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.title, 'Fix') || contains(github.event.pull_request.labels.*.name, 'bug')
+
+    steps:
+      - name: Check if this is a bug fix
+        id: check_bug_fix
+        run: |
+          echo "is_bug_fix=true" >> $GITHUB_OUTPUT
+
+      - name: Extract issue number from PR
+        id: extract_issue
+        run: |
+          ISSUE_NUM=$(echo "${{ github.event.pull_request.body }}" | grep -oP '(?<=#)\d+' | head -1)
+          echo "issue_number=$ISSUE_NUM" >> $GITHUB_OUTPUT
+
+      - name: Check target branch and comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          TARGET_BRANCH: ${{ github.event.pull_request.base.ref }}
+          ISSUE_NUM: ${{ steps.extract_issue.outputs.issue_number }}
+        run: |
+          if [ "$TARGET_BRANCH" = "5.x" ]; then
+            OTHER_BRANCH="main"
+          else
+            OTHER_BRANCH="5.x"
+          fi
+
+          COMMENT="## 🔄 Cross-Branch Bug Fix Reminder
+
+          This bug fix targets the **$TARGET_BRANCH** branch.
+
+          ### ✅ Checklist
+          - [ ] Does this bug also exist in the **$OTHER_BRANCH** branch?
+          - [ ] If yes, create a corresponding PR for the **$OTHER_BRANCH** branch
+          - [ ] Link both PRs to issue #$ISSUE_NUM (if applicable)
+          - [ ] Document any version-specific differences in the fix
+
+          ### 📋 Related
+          "
+
+          if [ -n "$ISSUE_NUM" ]; then
+            COMMENT="$COMMENT
+          - Issue: #$ISSUE_NUM"
+          fi
+
+          COMMENT="$COMMENT
+          - Target Branch: \`$TARGET_BRANCH\`
+          - Check Also: \`$OTHER_BRANCH\`
+
+          > **Note:** If this bug only affects **$TARGET_BRANCH**, please add a comment explaining why the **$OTHER_BRANCH** branch is not affected."
+
+          gh pr comment $PR_NUMBER --body "$COMMENT" --repo ${{ github.repository }}
