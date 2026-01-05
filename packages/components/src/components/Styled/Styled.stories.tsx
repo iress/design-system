@@ -174,7 +174,7 @@ export const Complex: Story = {
   render: (args) => (
     <IressStyled
       {...args}
-      maxWidth="1/6"
+      maxWidth="2/12"
       m="auto"
       p="spacing.5"
       bg="colour.neutral.10"
