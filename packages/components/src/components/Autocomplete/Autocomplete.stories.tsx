@@ -192,3 +192,34 @@ export const ReadOnly: Story = {
     readOnly: true,
   },
 };
+
+export const BugBackspaceClearDropdownClose: Story = {
+  name: 'Bug: Dropdown not closing after backspace clear',
+  args: {
+    options: [...Array(5).keys()].map((number) => ({
+      label: `Option ${number + 1}`,
+    })),
+    placeholder: 'Select an option',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+**Problem Summary:** When user clears the autocomplete value by pressing backspace repeatedly, and then clicks outside the dropdown, the dropdown does not close.
+
+**Expected Behavior:** Dropdown should close when clicking outside after clearing the value.
+
+**Actual Behavior:** Dropdown remains open and does not respond to outside clicks.
+
+**How to Test:**
+1. Click on the autocomplete input
+2. Select an option from the dropdown (e.g., "Option 1")
+3. Press BACKSPACE repeatedly to clear the value completely
+4. Dropdown remains open
+5. Click somewhere else on the page
+6. BUG: Dropdown does NOT close (Expected: dropdown should close)
+        `,
+      },
+    },
+  },
+};

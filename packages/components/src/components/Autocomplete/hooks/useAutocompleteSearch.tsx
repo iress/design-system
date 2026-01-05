@@ -277,7 +277,8 @@ export const useAutocompleteSearch = ({
     debouncedQuery,
     error: searchState.error,
     loading: searchState.loading,
-    shouldShowInstructions: query.length < minSearchLength,
+    shouldShowInstructions:
+      query.length < minSearchLength && !searchState.results.length,
     shouldShowDebounceWaiting:
       query.length >= minSearchLength &&
       debouncedQuery.length < minSearchLength &&

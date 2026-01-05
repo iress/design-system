@@ -167,10 +167,10 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
     });
 
     useEffect(() => {
-      if (valueChanged && !show && results.length > 0) {
+      if (valueChanged && !show && results.length > 0 && value) {
         setShow(true);
       }
-    }, [results.length, show, valueChanged]);
+    }, [results.length, show, valueChanged, value]);
 
     useEffect(() => {
       if (error) {

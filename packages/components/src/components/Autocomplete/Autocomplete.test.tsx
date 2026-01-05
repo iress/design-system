@@ -327,6 +327,39 @@ describe('IressAutocomplete', () => {
       await waitFor(() => expect(options).toHaveLength(1));
       expect(options[0]).toHaveTextContent(MOCK_LABEL_VALUE_META[0].label);
     });
+
+    it('does not reopen dropdown when value is cleared and results become available', async () => {
+      renderAutocomplete({
+        options: () => mockAsyncSearchLabelValues(MOCK_LABEL_VALUE_META),
+      });
+
+      const input = screen.getByRole('combobox');
+
+      // Type to get results - dropdown opens
+      await userEvent.type(input, 'opt');
+      const options = await screen.findAllByRole('option');
+      expect(options).toHaveLength(MOCK_LABEL_VALUE_META.length);
+      expect(options[0]).toBeVisible();
+
+      // Select an option - dropdown closes
+      await userEvent.click(options[0]);
+      await waitFor(() => {
+        expect(options[0]).not.toBeVisible();
+      });
+
+      // Clear the input completely using backspace
+      await userEvent.clear(input);
+
+      // Wait a moment for any state updates
+      await act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      });
+
+      // Dropdown should NOT reopen just because results are available
+      // (without the fix, the dropdown would reopen here when results.length > 0)
+      const popoverContent = screen.getByTestId('test-component__content');
+      expect(popoverContent).not.toBeVisible();
+    });
   });
 
   describe('accessibility', () => {
