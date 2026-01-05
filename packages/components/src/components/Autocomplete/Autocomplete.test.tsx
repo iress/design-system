@@ -316,6 +316,30 @@ describe('IressAutocomplete', () => {
       expect(options).toHaveLength(1);
       expect(options[0]).toHaveTextContent(MOCK_LABEL_VALUE_META[0].label);
     });
+
+    it('closes the dropdown when clicking outside after clearing value with backspace', async () => {
+      const { container } = renderAutocomplete();
+
+      const input = screen.getByRole('combobox');
+
+      // Type to show options
+      await userEvent.type(input, 'opt');
+      const options = await screen.findAllByRole('option');
+      expect(options[0]).toBeVisible();
+
+      // Select an option
+      await userEvent.click(options[0]);
+
+      // Clear the value with backspace
+      await userEvent.clear(input);
+
+      // Click outside the autocomplete
+      await userEvent.click(container);
+
+      // Dropdown should close (element should not be in the document or not visible)
+      const listbox = screen.queryByRole('listbox');
+      expect(listbox).toBeNull();
+    });
   });
 
   describe('accessibility', () => {
