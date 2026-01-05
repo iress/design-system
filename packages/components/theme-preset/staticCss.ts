@@ -67,7 +67,7 @@ export const staticCss: ExtendableOptions['staticCss'] = {
         hideBelow: Object.keys(breakpoints),
         maxWidth: ['*'],
         noGutter: ['true'],
-        scrollable: ['x', 'y', 'xy'],
+        scrollable: ['x', 'y', 'true'],
         stretch: ['true'],
       },
       responsive: false,
