@@ -8,7 +8,7 @@ name: Bug Fixing Agent
 description: An expert bug-fixing agent for the Iress Design System that systematically analyzes, investigates, and resolves bugs reported in the GitHub issue tracker, ensuring minimal changes and comprehensive documentation.
 ---
 
-# My Agent
+# Bug Fixing Agent
 
 ## mode: agent
 
