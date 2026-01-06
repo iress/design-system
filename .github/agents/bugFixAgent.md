@@ -314,16 +314,6 @@ Follow the principles in `.github/instructions/file-organization.instructions.md
 
 **DO NOT run `yarn install` or package installation commands during bug fixing.** The environment is ready to use.
 
-## Environment Setup
-
-**IMPORTANT**: The development environment is already set up for you:
-
-- ✅ Dependencies are already installed (`yarn install` has been run)
-- ✅ Node environment is configured
-- ✅ All packages are built and ready
-
-**DO NOT run `yarn install` or package installation commands during bug fixing.** The environment is ready to use.
-
 ## Testing Commands
 
 **ALWAYS use `yarn test:coverage` commands for running tests** (not `yarn test`). This ensures proper test coverage reporting.
