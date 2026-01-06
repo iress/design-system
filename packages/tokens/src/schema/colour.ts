@@ -22,9 +22,11 @@ interface ColourSchema extends IressDesignTokenGroup {
     60: IressDesignToken;
     70: IressDesignToken;
     80: IressDesignToken;
+    90: IressDesignToken;
   };
   accent: IressDesignTokenGroup & {
-    brand: IressDesignToken;
+    1: IressDesignToken;
+    2: IressDesignToken;
   };
   system: IressDesignTokenGroup & {
     success: IressDesignTokenGroup & {
@@ -59,6 +61,30 @@ interface ColourSchema extends IressDesignTokenGroup {
       fill: IressDesignToken;
     };
   };
+  data: IressDesignTokenGroup & {
+    subtle: IressDesignTokenGroup & {
+      10: IressDesignToken;
+      20: IressDesignToken;
+      30: IressDesignToken;
+      40: IressDesignToken;
+      50: IressDesignToken;
+      60: IressDesignToken;
+      70: IressDesignToken;
+      80: IressDesignToken;
+      90: IressDesignToken;
+    };
+    bold: IressDesignTokenGroup & {
+      10: IressDesignToken;
+      20: IressDesignToken;
+      30: IressDesignToken;
+      40: IressDesignToken;
+      50: IressDesignToken;
+      60: IressDesignToken;
+      70: IressDesignToken;
+      80: IressDesignToken;
+      90: IressDesignToken;
+    };
+  };
 }
 
 const colour = {
@@ -71,7 +97,7 @@ const colour = {
       $description:
         'Used for primary buttons and the active state of form controls such as checkboxes and radio buttons. Also used for the border of tags when they have a custom button.',
       $type: Type.Color,
-      $value: '#13213F',
+      $value: '#1D1F4B',
       $extensions: {
         'iress.contrast.AA': ['colour.primary.onFill'],
         'styler.panel': 'colour.primary',
@@ -81,7 +107,7 @@ const colour = {
       $description:
         'Used for the hover state of primary buttons as well as hovering over active form controls.',
       $type: Type.Color,
-      $value: '#2B3752',
+      $value: '#0D0E24',
       $extensions: {
         'iress.contrast.AA': ['colour.primary.onFill'],
         'styler.panel': 'colour.primary',
@@ -91,7 +117,7 @@ const colour = {
       $description:
         'Used as the foreground colour on primary buttons and active form controls.',
       $type: Type.Color,
-      $value: '#ECF2FF',
+      $value: '#FFFFFF',
       $extensions: {
         'iress.contrast.AA': ['colour.primary.fill'],
         'styler.panel': 'colour.primary',
@@ -101,7 +127,7 @@ const colour = {
       $description:
         'Used as the background colour for secondary buttons and the focused state of menu and tab items. Also used as the background colour of active buttons.',
       $type: Type.Color,
-      $value: '#D9E5FF',
+      $value: '#E9E9ED',
       $extensions: {
         'iress.contrast.AA': ['colour.primary.text', 'colour.neutral.80'],
         'styler.panel': 'colour.primary',
@@ -111,7 +137,7 @@ const colour = {
       $description:
         'Used for the hover state of secondary buttons, form controls and hovering over focused menu and tab items. Also used when hovering over table rows.',
       $type: Type.Color,
-      $value: '#E1EAFF',
+      $value: '#D2D2DB',
       $extensions: {
         'iress.contrast.AA': ['colour.primary.text', 'colour.neutral.80'],
         'styler.panel': 'colour.primary',
@@ -121,7 +147,7 @@ const colour = {
       $description:
         'Used for text on primary buttons, active form controls and focused tab and menu items. Also used for the link text colour and tertiary buttons.',
       $type: Type.Color,
-      $value: '#13213F',
+      $value: '#141F4D',
       $extensions: {
         'iress.contrast.AA': ['colour.primary.surface'],
         'styler.panel': 'colour.primary',
@@ -139,9 +165,9 @@ const colour = {
       $extensions: {
         'iress.aliases': ['page'],
         'iress.contrast.AA': [
-          'colour.neutral.80',
           'colour.neutral.70',
-          'colour.neutral.60',
+          'colour.neutral.80',
+          'colour.neutral.90',
         ],
         'styler.panel': 'colour.neutral',
       },
@@ -150,10 +176,14 @@ const colour = {
       $description:
         'Used as the alternating background colour for components such as tables. Used as the background colour behind panels and cards for highly interactive screens.',
       $type: Type.Color,
-      $value: '#F9F9F9',
+      $value: '#F5F6F8',
       $extensions: {
         'iress.aliases': ['alt'],
-        'iress.contrast.AA': ['colour.neutral.80', 'colour.neutral.70'],
+        'iress.contrast.AA': [
+          'colour.neutral.70',
+          'colour.neutral.80',
+          'colour.neutral.90',
+        ],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -161,8 +191,9 @@ const colour = {
       $description:
         'Used as the border colour for dividers, and the default divider colour for components with in-built headers and footers such as cards.',
       $type: Type.Color,
-      $value: '#E4E5E7',
+      $value: '#E2E6EA',
       $extensions: {
+        'iress.contrast.AA': ['colour.neutral.80', 'colour.neutral.90'],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -170,8 +201,9 @@ const colour = {
       $description:
         'Used for borders in subtle interactive components, such as checkboxes and radios with hidden controls and the progress bar.',
       $type: Type.Color,
-      $value: '#D7D8DA',
+      $value: '#CFD5DA',
       $extensions: {
+        'iress.contrast.AA': ['colour.neutral.80', 'colour.neutral.90'],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -179,8 +211,9 @@ const colour = {
       $description:
         'Used as the background colour for interactive components such as the slider.',
       $type: Type.Color,
-      $value: '#AFB2B6',
+      $value: '#A8B2BB',
       $extensions: {
+        'iress.contrast.AA': ['colour.neutral.90'],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -188,9 +221,9 @@ const colour = {
       $description:
         'Used for placeholder text in form controls and disabled states.',
       $type: Type.Color,
-      $value: '#878B92',
+      $value: '#828F9D',
       $extensions: {
-        'iress.contrast.AA': ['colour.neutral.10'],
+        'iress.contrast.AA': ['colour.neutral.90'],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -198,7 +231,7 @@ const colour = {
       $description:
         'Used for muted text such as hints and descriptions to allow for content hierarchy.',
       $type: Type.Color,
-      $value: '#6D7278',
+      $value: '#5D6C7E',
       $extensions: {
         'iress.aliases': ['muted'],
         'iress.contrast.AA': ['colour.neutral.10', 'colour.neutral.20'],
@@ -209,10 +242,30 @@ const colour = {
       $description:
         'Used as the default text colour for most components. For tooltips, it is used as the background colour.',
       $type: Type.Color,
-      $value: '#393F46',
+      $value: '#384666',
       $extensions: {
         'iress.aliases': ['text'],
-        'iress.contrast.AA': ['colour.neutral.10', 'colour.neutral.20'],
+        'iress.contrast.AA': [
+          'colour.neutral.10',
+          'colour.neutral.20',
+          'colour.neutral.30',
+          'colour.neutral.40',
+        ],
+        'styler.panel': 'colour.neutral',
+      },
+    },
+    90: {
+      $description:
+        'Used for very dark text or UI elements requiring maximum contrast.',
+      $type: Type.Color,
+      $value: '#13213F',
+      $extensions: {
+        'iress.contrast.AA': [
+          'colour.neutral.10',
+          'colour.neutral.20',
+          'colour.neutral.30',
+          'colour.neutral.40',
+        ],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -220,11 +273,20 @@ const colour = {
   accent: {
     $description:
       'The accent colour is a colour used to emphasise key parts of the UI. These act as "secondary" or "supporting" colours to you primary colour.',
-    brand: {
+    1: {
       $description:
-        'The brand accent is useful for grabbing attention and to support your primary/brand colour. It should be used sparingly to draw attention to key elements.',
+        'First accent colour, useful for grabbing attention and to support your primary/brand colour. It should be used sparingly to draw attention to key elements.',
       $type: Type.Color,
-      $value: '#FF99A8',
+      $value: '#C26EF4',
+      $extensions: {
+        'styler.panel': 'colour.accent',
+      },
+    },
+    2: {
+      $description:
+        'Second accent colour, useful for grabbing attention and to support your primary/brand colour. It should be used sparingly to draw attention to key elements.',
+      $type: Type.Color,
+      $value: '#7599F9',
       $extensions: {
         'styler.panel': 'colour.accent',
       },
@@ -240,7 +302,7 @@ const colour = {
         $description:
           'Used for the background colour of primary success buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts.',
         $type: Type.Color,
-        $value: '#02794D',
+        $value: '#6FECC9',
         $extensions: {
           'iress.contrast.AA': ['colour.system.success.onFill'],
           'styler.panel': 'colour.system.success',
@@ -249,7 +311,7 @@ const colour = {
       fillHover: {
         $description: 'Used for the hover state of primary success buttons.',
         $type: Type.Color,
-        $value: '#01603D',
+        $value: '#2CC098',
         $extensions: {
           'iress.contrast.AA': ['colour.system.success.onFill'],
           'styler.panel': 'colour.system.success',
@@ -259,7 +321,7 @@ const colour = {
         $description:
           'Used for the foreground colour of primary success buttons and badges.',
         $type: Type.Color,
-        $value: '#EFFBF2',
+        $value: '#0A4535',
         $extensions: {
           'iress.contrast.AA': ['colour.system.success.fill'],
           'styler.panel': 'colour.system.success',
@@ -269,11 +331,11 @@ const colour = {
         $description:
           'Used for the background colour of success alerts and toasts, and the background of secondary success buttons.',
         $type: Type.Color,
-        $value: '#E6F9EB',
+        $value: '#B2FCE0',
         $extensions: {
           'iress.contrast.AA': [
             'colour.system.success.text',
-            'colour.neutral.80',
+            'colour.neutral.90',
           ],
           'styler.panel': 'colour.system.success',
         },
@@ -281,11 +343,11 @@ const colour = {
       surfaceHover: {
         $description: 'Used for the hover state of secondary success buttons.',
         $type: Type.Color,
-        $value: '#D5F6DE',
+        $value: '#96EBD0',
         $extensions: {
           'iress.contrast.AA': [
             'colour.system.success.text',
-            'colour.neutral.80',
+            'colour.neutral.90',
           ],
           'styler.panel': 'colour.system.success',
         },
@@ -294,7 +356,7 @@ const colour = {
         $description:
           'Used for the text colour of success alerts and toasts, and success tertiary buttons.',
         $type: Type.Color,
-        $value: '#015537',
+        $value: '#0F7D61',
         $extensions: {
           'iress.contrast.AA': ['colour.system.success.surface'],
           'styler.panel': 'colour.system.success',
@@ -308,7 +370,7 @@ const colour = {
         $description:
           'Used for the background colour of primary danger buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts.',
         $type: Type.Color,
-        $value: '#C20A0A',
+        $value: '#D92D20',
         $extensions: {
           'iress.contrast.AA': ['colour.system.danger.onFill'],
           'styler.panel': 'colour.system.danger',
@@ -317,7 +379,7 @@ const colour = {
       fillHover: {
         $description: 'Used for the hover state of primary danger buttons.',
         $type: Type.Color,
-        $value: '#A50606',
+        $value: '#B91C1C',
         $extensions: {
           'iress.contrast.AA': ['colour.system.danger.onFill'],
           'styler.panel': 'colour.system.danger',
@@ -337,11 +399,11 @@ const colour = {
         $description:
           'Used for the background colour of danger alerts and toasts, and the background of secondary danger buttons.',
         $type: Type.Color,
-        $value: '#FEE8E7',
+        $value: '#FEEBEA',
         $extensions: {
           'iress.contrast.AA': [
             'colour.system.danger.text',
-            'colour.neutral.80',
+            'colour.neutral.90',
           ],
           'styler.panel': 'colour.system.danger',
         },
@@ -353,7 +415,7 @@ const colour = {
         $extensions: {
           'iress.contrast.AA': [
             'colour.system.danger.text',
-            'colour.neutral.80',
+            'colour.neutral.90',
           ],
           'styler.panel': 'colour.system.danger',
         },
@@ -376,7 +438,7 @@ const colour = {
         $description:
           'Used for the border of warning alerts and the background of warning badges.',
         $type: Type.Color,
-        $value: '#F6C84C',
+        $value: '#FFB800',
         $extensions: {
           'iress.contrast.AA': ['colour.system.warning.onFill'],
           'styler.panel': 'colour.system.warning',
@@ -385,7 +447,7 @@ const colour = {
       onFill: {
         $description: 'Used for the foreground colour of warning badges.',
         $type: Type.Color,
-        $value: '#1A1200',
+        $value: '#000000',
         $extensions: {
           'iress.contrast.AA': ['colour.system.warning.fill'],
           'styler.panel': 'colour.system.warning',
@@ -394,11 +456,11 @@ const colour = {
       surface: {
         $description: 'Used for the background colour of warning alerts.',
         $type: Type.Color,
-        $value: '#FEF4CD',
+        $value: '#FFF4CC',
         $extensions: {
           'iress.contrast.AA': [
             'colour.system.warning.text',
-            'colour.neutral.80',
+            'colour.neutral.90',
           ],
           'styler.panel': 'colour.system.warning',
         },
@@ -406,7 +468,7 @@ const colour = {
       text: {
         $description: 'Used for the text colour of warning alerts.',
         $type: Type.Color,
-        $value: '#1A1200',
+        $value: '#664600',
         $extensions: {
           'iress.contrast.AA': ['colour.system.warning.surface'],
           'styler.panel': 'colour.system.warning',
@@ -419,7 +481,7 @@ const colour = {
         $description:
           'Used for the border of info alerts and toasts and the background of info badges.',
         $type: Type.Color,
-        $value: '#004FBD',
+        $value: '#669AFF',
         $extensions: {
           'iress.contrast.AA': ['colour.system.info.onFill'],
           'styler.panel': 'colour.system.info',
@@ -428,7 +490,7 @@ const colour = {
       onFill: {
         $description: 'Used for the foreground colour of info badges.',
         $type: Type.Color,
-        $value: '#F5FAFF',
+        $value: '#141F4D',
         $extensions: {
           'iress.contrast.AA': ['colour.system.info.fill'],
           'styler.panel': 'colour.system.info',
@@ -438,16 +500,16 @@ const colour = {
         $description:
           'Used for the background colour of info alerts and toasts.',
         $type: Type.Color,
-        $value: '#E5F3FF',
+        $value: '#E0ECFF',
         $extensions: {
-          'iress.contrast.AA': ['colour.system.info.text', 'colour.neutral.80'],
+          'iress.contrast.AA': ['colour.system.info.text', 'colour.neutral.90'],
           'styler.panel': 'colour.system.info',
         },
       },
       text: {
         $description: 'Used for the text colour of info alerts and toasts.',
         $type: Type.Color,
-        $value: '#123987',
+        $value: '#0A2041',
         $extensions: {
           'iress.contrast.AA': ['colour.system.info.surface'],
           'styler.panel': 'colour.system.info',
@@ -464,6 +526,181 @@ const colour = {
         $extensions: {
           'iress.contrast.AA': ['colour.neutral.10'],
           'styler.panel': 'colour.system.backdrop',
+        },
+      },
+    },
+  },
+  data: {
+    $description:
+      'Data colours are used to visualise data in charts, graphs, and other data visualisation components. They provide visual distinction between different data series.',
+    subtle: {
+      $description:
+        'Subtle data colours provide softer contrast for backgrounds and less prominent data visualisations.',
+      10: {
+        $description: 'First data visualisation colour in the subtle palette.',
+        $type: Type.Color,
+        $value: '#FFE6F2',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.bold.10', 'colour.neutral.90'],
+          'styler.panel': 'colour.data.subtle',
+        },
+      },
+      20: {
+        $description: 'Second data visualisation colour in the subtle palette.',
+        $type: Type.Color,
+        $value: '#FEEAFF',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.bold.20', 'colour.neutral.90'],
+          'styler.panel': 'colour.data.subtle',
+        },
+      },
+      30: {
+        $description: 'Third data visualisation colour in the subtle palette.',
+        $type: Type.Color,
+        $value: '#F1E6FF',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.bold.30', 'colour.neutral.90'],
+          'styler.panel': 'colour.data.subtle',
+        },
+      },
+      40: {
+        $description: 'Fourth data visualisation colour in the subtle palette.',
+        $type: Type.Color,
+        $value: '#E5F5FF',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.bold.40', 'colour.neutral.90'],
+          'styler.panel': 'colour.data.subtle',
+        },
+      },
+      50: {
+        $description: 'Fifth data visualisation colour in the subtle palette.',
+        $type: Type.Color,
+        $value: '#E6EEFF',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.bold.50', 'colour.neutral.90'],
+          'styler.panel': 'colour.data.subtle',
+        },
+      },
+      60: {
+        $description: 'Sixth data visualisation colour in the subtle palette.',
+        $type: Type.Color,
+        $value: '#C8D7FF',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.bold.60', 'colour.neutral.90'],
+          'styler.panel': 'colour.data.subtle',
+        },
+      },
+      70: {
+        $description:
+          'Seventh data visualisation colour in the subtle palette.',
+        $type: Type.Color,
+        $value: '#E4FFFD',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.bold.70', 'colour.neutral.90'],
+          'styler.panel': 'colour.data.subtle',
+        },
+      },
+      80: {
+        $description: 'Eighth data visualisation colour in the subtle palette.',
+        $type: Type.Color,
+        $value: '#BADFD4',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.bold.80', 'colour.neutral.90'],
+          'styler.panel': 'colour.data.subtle',
+        },
+      },
+      90: {
+        $description: 'Ninth data visualisation colour in the subtle palette.',
+        $type: Type.Color,
+        $value: '#ECECEC',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.bold.90', 'colour.neutral.90'],
+          'styler.panel': 'colour.data.subtle',
+        },
+      },
+    },
+    bold: {
+      $description:
+        'Bold data colours provide strong contrast for foregrounds and prominent data visualisations.',
+      10: {
+        $description: 'First data visualisation colour in the bold palette.',
+        $type: Type.Color,
+        $value: '#AC2C6A',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.subtle.10', 'colour.neutral.10'],
+          'styler.panel': 'colour.data.bold',
+        },
+      },
+      20: {
+        $description: 'Second data visualisation colour in the bold palette.',
+        $type: Type.Color,
+        $value: '#AA20AF',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.subtle.20', 'colour.neutral.10'],
+          'styler.panel': 'colour.data.bold',
+        },
+      },
+      30: {
+        $description: 'Third data visualisation colour in the bold palette.',
+        $type: Type.Color,
+        $value: '#7E38D7',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.subtle.30', 'colour.neutral.10'],
+          'styler.panel': 'colour.data.bold',
+        },
+      },
+      40: {
+        $description: 'Fourth data visualisation colour in the bold palette.',
+        $type: Type.Color,
+        $value: '#006EB8',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.subtle.40', 'colour.neutral.10'],
+          'styler.panel': 'colour.data.bold',
+        },
+      },
+      50: {
+        $description: 'Fifth data visualisation colour in the bold palette.',
+        $type: Type.Color,
+        $value: '#0055FF',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.subtle.50', 'colour.neutral.10'],
+          'styler.panel': 'colour.data.bold',
+        },
+      },
+      60: {
+        $description: 'Sixth data visualisation colour in the bold palette.',
+        $type: Type.Color,
+        $value: '#0032B2',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.subtle.60', 'colour.neutral.10'],
+          'styler.panel': 'colour.data.bold',
+        },
+      },
+      70: {
+        $description: 'Seventh data visualisation colour in the bold palette.',
+        $type: Type.Color,
+        $value: '#1D7C73',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.subtle.70', 'colour.neutral.10'],
+          'styler.panel': 'colour.data.bold',
+        },
+      },
+      80: {
+        $description: 'Eighth data visualisation colour in the bold palette.',
+        $type: Type.Color,
+        $value: '#124E3D',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.subtle.80', 'colour.neutral.10'],
+          'styler.panel': 'colour.data.bold',
+        },
+      },
+      90: {
+        $description: 'Ninth data visualisation colour in the bold palette.',
+        $type: Type.Color,
+        $value: '#000000',
+        $extensions: {
+          'iress.contrast.AA': ['colour.data.subtle.90', 'colour.neutral.10'],
+          'styler.panel': 'colour.data.bold',
         },
       },
     },

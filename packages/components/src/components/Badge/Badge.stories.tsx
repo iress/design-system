@@ -4,7 +4,20 @@ import { STATUSES } from '@/constants';
 import { IressBadge, IressButton, IressInline, IressTab } from '@/main';
 
 type Story = StoryObj<typeof IressBadge>;
-const BADGE_MODES = ['primary', ...STATUSES, 'neutral'] as const;
+const BADGE_MODES = [
+  'primary',
+  ...STATUSES,
+  'neutral',
+  10,
+  20,
+  30,
+  40,
+  50,
+  60,
+  70,
+  80,
+  90,
+] as const;
 
 export default {
   title: 'Components/Badge',

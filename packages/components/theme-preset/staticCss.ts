@@ -16,9 +16,7 @@ import { breakpoints } from './tokens/breakpoints';
  * Note: If you update this list, you should also update the `IressCSSProps` interface in `packages/components/src/interfaces.ts`
  */
 const allowedCssProps = {
-  bg: Object.keys(colors),
   borderRadius: Object.keys(radii),
-  color: Object.keys(colors),
   columnGap: ['*'],
   gap: ['*'],
   layerStyle: ELEVATION_TOKENS,
@@ -62,6 +60,8 @@ export const staticCss: ExtendableOptions['staticCss'] = {
     },
     {
       properties: {
+        bg: Object.keys(colors),
+        color: Object.keys(colors),
         focusable: ['true', 'within'],
         hideFrom: Object.keys(breakpoints),
         hideBelow: Object.keys(breakpoints),

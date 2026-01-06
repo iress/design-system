@@ -289,6 +289,12 @@ export const Neutral: Story = {
         bg="colour.neutral.80"
         token={colour.neutral[80]}
       />,
+
+      <ColourSwatch
+        title="90"
+        bg="colour.neutral.90"
+        token={colour.neutral[90]}
+      />,
     ],
   },
 };
@@ -298,11 +304,8 @@ export const Accent: Story = {
     children: [
       <Markdown>{colour.accent.$description}</Markdown>,
       <IressStack gap="md">
-        <ColourSwatch
-          title="Brand"
-          bg="colour.accent.brand"
-          token={colour.accent.brand}
-        />
+        <ColourSwatch title="1" bg="colour.accent.1" token={colour.accent[1]} />
+        <ColourSwatch title="2" bg="colour.accent.2" token={colour.accent[2]} />
       </IressStack>,
     ],
   },
@@ -469,6 +472,116 @@ export const Backdrop: Story = {
           title="Fill"
           bg="colour.system.backdrop.fill"
           token={colour.system.backdrop.fill}
+        />
+      </IressStack>,
+    ],
+  },
+};
+
+export const DataSubtle: Story = {
+  args: {
+    children: [
+      <Markdown>{colour.data.subtle.$description}</Markdown>,
+      <IressStack gap="md">
+        <ColourSwatch
+          title="10"
+          bg="colour.data.subtle.10"
+          token={colour.data.subtle[10]}
+        />
+        <ColourSwatch
+          title="20"
+          bg="colour.data.subtle.20"
+          token={colour.data.subtle[20]}
+        />
+        <ColourSwatch
+          title="30"
+          bg="colour.data.subtle.30"
+          token={colour.data.subtle[30]}
+        />
+        <ColourSwatch
+          title="40"
+          bg="colour.data.subtle.40"
+          token={colour.data.subtle[40]}
+        />
+        <ColourSwatch
+          title="50"
+          bg="colour.data.subtle.50"
+          token={colour.data.subtle[50]}
+        />
+        <ColourSwatch
+          title="60"
+          bg="colour.data.subtle.60"
+          token={colour.data.subtle[60]}
+        />
+        <ColourSwatch
+          title="70"
+          bg="colour.data.subtle.70"
+          token={colour.data.subtle[70]}
+        />
+        <ColourSwatch
+          title="80"
+          bg="colour.data.subtle.80"
+          token={colour.data.subtle[80]}
+        />
+        <ColourSwatch
+          title="90"
+          bg="colour.data.subtle.90"
+          token={colour.data.subtle[90]}
+        />
+      </IressStack>,
+    ],
+  },
+};
+
+export const DataBold: Story = {
+  args: {
+    children: [
+      <Markdown>{colour.data.bold.$description}</Markdown>,
+      <IressStack gap="md">
+        <ColourSwatch
+          title="10"
+          bg="colour.data.bold.10"
+          token={colour.data.bold[10]}
+        />
+        <ColourSwatch
+          title="20"
+          bg="colour.data.bold.20"
+          token={colour.data.bold[20]}
+        />
+        <ColourSwatch
+          title="30"
+          bg="colour.data.bold.30"
+          token={colour.data.bold[30]}
+        />
+        <ColourSwatch
+          title="40"
+          bg="colour.data.bold.40"
+          token={colour.data.bold[40]}
+        />
+        <ColourSwatch
+          title="50"
+          bg="colour.data.bold.50"
+          token={colour.data.bold[50]}
+        />
+        <ColourSwatch
+          title="60"
+          bg="colour.data.bold.60"
+          token={colour.data.bold[60]}
+        />
+        <ColourSwatch
+          title="70"
+          bg="colour.data.bold.70"
+          token={colour.data.bold[70]}
+        />
+        <ColourSwatch
+          title="80"
+          bg="colour.data.bold.80"
+          token={colour.data.bold[80]}
+        />
+        <ColourSwatch
+          title="90"
+          bg="colour.data.bold.90"
+          token={colour.data.bold[90]}
         />
       </IressStack>,
     ],

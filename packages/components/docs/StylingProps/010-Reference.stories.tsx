@@ -1,6 +1,6 @@
 import { IressLink } from '@/components/Link';
 import { type IressCSSProps } from '@/interfaces';
-import { IressBadge, IressInline, IressTable } from '@/main';
+import { IressBadge, IressIcon, IressInline, IressTable } from '@/main';
 import { DiffViewer } from '@iress-oss/ids-storybook-config';
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 
@@ -20,7 +20,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     cssProperty: 'background',
     tokenMapping: 'Colour',
     tokenMappingLink: '/?path=/docs/foundations-tokens-colour--docs',
-    responsive: true,
+    responsive: false,
   },
   {
     jsxProp: 'borderRadius',
@@ -36,7 +36,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     cssProperty: 'color',
     tokenMapping: 'Colour',
     tokenMappingLink: '/?path=/docs/foundations-tokens-colour--docs',
-    responsive: true,
+    responsive: false,
   },
   {
     jsxProp: 'focusable',
@@ -272,7 +272,10 @@ const StylingPropsReferenceTable = () => (
       {
         label: 'Responsive',
         key: 'responsive',
-        format: (responsive) => (responsive ? 'Yes' : 'No'),
+        format: (responsive) =>
+          responsive ? (
+            <IressIcon name="check" color="colour.system.success.text" />
+          ) : null,
         textAlign: 'right',
       },
     ]}

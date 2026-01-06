@@ -20,7 +20,28 @@ export interface IressBadgeProps extends IressStyledProps<'span'> {
   /**
    * Style of the badge.
    */
-  mode?: Statuses | 'neutral' | 'primary';
+  mode?:
+    | Statuses
+    | 'neutral'
+    | 'primary'
+    | 10
+    | 20
+    | 30
+    | 40
+    | 50
+    | 60
+    | 70
+    | 80
+    | 90
+    | '10'
+    | '20'
+    | '30'
+    | '40'
+    | '50'
+    | '60'
+    | '70'
+    | '80'
+    | '90';
 
   /**
    * Whether the Badge should be styled as a pill.
@@ -36,7 +57,11 @@ export const IressBadge = ({
   host,
   ...restProps
 }: IressBadgeProps) => {
-  const classes = badgeStyles.raw({ mode, pill, host: !!host });
+  const classes = badgeStyles.raw({
+    mode: mode as Extract<IressBadgeProps['mode'], string>,
+    pill,
+    host: !!host,
+  });
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
 
   const badge = (
