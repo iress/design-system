@@ -226,25 +226,20 @@ const HookForm = <T extends FieldValues, TContext = object>(
   const element = useRef<HTMLFormElement | null>(null);
 
   const { handleSubmit, reset, formState } = methods;
-  const { isValid, isSubmitted } = formState;
-  const [pendingErrorUpdate, setPendingErrorUpdate] = useState(false);
+  const { isValid, submitCount } = formState;
 
   const handleError = useCallback<SubmitErrorHandler<T>>(
     (errors) => {
       onError?.(errors);
       focusRef.current?.focus();
-
-      if (updateErrorSummaryOnSubmit) {
-        // Signal that we need to update error messages from the queue
-        setPendingErrorUpdate(true);
-      }
     },
-    [onError, updateErrorSummaryOnSubmit],
+    [onError],
   );
 
   const submitHandler = useCallback(
     (e?: FormEvent) => {
       void handleSubmit((data) => {
+        // Validation passed - clear all errors
         onSubmit?.(data);
         setErrorMessages({});
         messageQueue.current = {};
@@ -269,15 +264,16 @@ const HookForm = <T extends FieldValues, TContext = object>(
 
   const setErrorMessage = useCallback<FormContextValue['setErrorMessage']>(
     (field, message) => {
-      if (
-        message === errorMessages[field] ||
-        (!message && !errorMessages[field])
-      )
-        return;
-
+      // Compare against the correct source to prevent redundant updates
       const currentMessages = updateErrorSummaryOnSubmit
         ? messageQueue.current
         : errorMessages;
+
+      if (
+        message === currentMessages[field] ||
+        (!message && !currentMessages[field])
+      )
+        return;
 
       const newMessages = [...methods.control._names.mount.values()].reduce(
         (acc, key) => ({
@@ -313,13 +309,12 @@ const HookForm = <T extends FieldValues, TContext = object>(
     onValidChange?.(isValid);
   }, [isValid, onValidChange]);
 
-  // Update error messages when form is submitted and updateErrorSummaryOnSubmit is true
+  // Sync error messages from queue when form is submitted with updateErrorSummaryOnSubmit enabled
   useEffect(() => {
-    if (updateErrorSummaryOnSubmit && pendingErrorUpdate && isSubmitted) {
+    if (updateErrorSummaryOnSubmit && submitCount > 0) {
       setErrorMessages(() => messageQueue.current);
-      setPendingErrorUpdate(false);
     }
-  }, [updateErrorSummaryOnSubmit, pendingErrorUpdate, isSubmitted]);
+  }, [updateErrorSummaryOnSubmit, submitCount]);
 
   // Context for form fields to reference the form ID and error messages
   const formContext = useMemo<FormContextValue>(
