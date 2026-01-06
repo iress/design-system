@@ -200,16 +200,42 @@ Fix bugs in both 5.x and main branches with precision, minimal changes, and comp
      ```
    - Commit the version changes with message: `chore: bump version for bug fix`
 
-5. **Communicate Completion**:
+5. **Linting and Typechecking (MANDATORY)**:
+   - **REQUIRED: Run linting on affected files**:
+
+     ```bash
+     # For specific files
+     yarn workspace @iress-oss/ids-components exec npx eslint src/path/to/file.tsx --fix
+
+     # For entire package (if multiple files changed)
+     yarn workspace @iress-oss/ids-components run lint
+     ```
+
+   - **REQUIRED: Run TypeScript typechecking**:
+
+     ```bash
+     # For the affected package
+     yarn workspace @iress-oss/ids-components run typecheck
+
+     # Or typecheck all packages
+     yarn typecheck
+     ```
+
+   - **Fix all linting and type errors before proceeding**
+   - Ensure code follows project conventions and type safety
+
+6. **Communicate Completion**:
    - Summarize changes made
    - Confirm tests pass
+   - **Confirm linting passes**
+   - **Confirm typechecking passes**
    - **List version bumps performed**
    - **Provide specific label instructions** based on your investigation:
      - "Please add label: `affects-both-branches`" (if bug exists in both)
      - "Please add label: `affects-5.x`" (if only 5.x)
      - "Please add label: `affects-main`" (if only main)
    - Provide exact PR title format to use
-   - **Provide git squash command** for commit cleanup
+   - **Include git squash command in PR description** (with actual commit count)
    - Ask user to verify fix
 
 #### Phase 6: Documentation
@@ -234,12 +260,13 @@ Fix bugs in both 5.x and main branches with precision, minimal changes, and comp
    - **Include cross-branch checklist** if fixing both branches
 
 3. **Git Squash Helper**:
-   - **After completing all commits, provide the squash command**:
+   - **Include the squash command in the PR description or add as a PR comment**:
      ```bash
      # Replace {number} with actual count of commits you made
      git reset --soft HEAD~{number} && git commit && git push -f
      ```
-   - Make it easy for the user to clean up commit history before final review
+   - This makes it easy for reviewers and maintainers to clean up commit history before merging
+   - Include the actual number of commits made, not a placeholder
 
 4. **Usage Example Format**:
 
@@ -295,6 +322,8 @@ Follow the principles in `.github/instructions/file-organization.instructions.md
 - ✅ Applied minimal, targeted fix following existing patterns
 - ✅ **Written test that reproduces bug and validates fix**
 - ✅ **All tests pass** (new test + existing tests)
+- ✅ **Linting passes** (no ESLint errors)
+- ✅ **Typechecking passes** (no TypeScript errors)
 - ✅ Maintained backward compatibility and component contracts
 - ✅ Provided clear explanation of problem and solution
 - ✅ Considered similar cases and potential side effects
@@ -364,6 +393,18 @@ yarn workspace @iress-oss/ids-components run lint
 yarn workspace @iress-oss/ids-components exec npx eslint src/components/Button/Button.tsx --fix
 ```
 
+## Typechecking Commands
+
+```bash
+# Run all typechecking
+yarn typecheck
+
+# Specific packages
+yarn workspace @iress-oss/ids-components run typecheck
+yarn workspace @iress-oss/ids-tokens run typecheck
+yarn workspace @iress-oss/ids-mcp-server run typecheck
+```
+
 ## Available Workspaces
 
 - `@iress-oss/ids-components`
@@ -430,13 +471,15 @@ yarn workspace @iress-oss/ids-components exec npx eslint src/components/Button/B
 
 8. User: "Option 1"
 
-9. You: [Write test first, implement fix, verify test passes, run all tests, bump versions, create documentation]
+9. You: [Write test first, implement fix, verify test passes, run all tests, run linting, run typechecking, bump versions, create documentation]
    "I've implemented the fix on both branches:
 
    **5.x Branch PR:**
    - Title: `Fix: Button keyboard navigation (5.x)`
    - Changes: Adds keyboard event handlers
    - Test: `Button.test.tsx` - Added test that reproduces the bug and now passes
+   - Linting: ✅ All ESLint checks pass
+   - Typechecking: ✅ All TypeScript checks pass
    - Versions: Bumped @iress-oss/ids-components and @iress-oss/ids-mcp-server (patch)
    - Please add label: `affects-5.x`
 
@@ -444,6 +487,8 @@ yarn workspace @iress-oss/ids-components exec npx eslint src/components/Button/B
    - Title: `Fix: Button keyboard navigation (main)`
    - Changes: Same fix (code is compatible)
    - Test: `Button.test.tsx` - Added test that reproduces the bug and now passes
+   - Linting: ✅ All ESLint checks pass
+   - Typechecking: ✅ All TypeScript checks pass
    - Versions: Bumped @iress-oss/ids-components and @iress-oss/ids-mcp-server (patch)
    - Please add label: `affects-main`
 
@@ -451,11 +496,11 @@ yarn workspace @iress-oss/ids-components exec npx eslint src/components/Button/B
    Link them: In 5.x PR add \"Related: #[main-pr-number] (main)\"
 
    I wrote a test that fails before the fix and passes after, confirming the bug is resolved.
-   All tests pass on both branches. The fixes are ready for review.
+   All tests pass, linting passes, and typechecking passes on both branches. The fixes are ready for review.
 
-   **To squash commits for cleaner history:**
+   **Note:** Both PR descriptions include this squash command for commit cleanup:
    ```bash
-   # I made 4 commits (fix, test, versions, docs)
+   # To squash 4 commits before merging
    git reset --soft HEAD~4 && git commit && git push -f
    ```"
 ````

@@ -179,6 +179,98 @@ describe('IressHookForm', () => {
       // After clicking submit again, the summary error should go away as well
       expect(summaryError).not.toBeInTheDocument();
     });
+
+    it('syncs validation summary when errors are cleared programmatically with clearErrors()', async () => {
+      const FormWithProgrammaticClearErrors = () => {
+        const form = useForm({
+          shouldFocusError: false,
+          defaultValues: {
+            field1: '',
+            field2: '',
+          },
+        });
+
+        const { clearErrors, setError, watch } = form;
+        // eslint-disable-next-line react-hooks/incompatible-library
+        const field1Value = watch('field1');
+        const field2Value = watch('field2');
+
+        // Validate that at least one field has a value
+        const validateFields = (value: string, fieldName: string) => {
+          const otherValue = fieldName === 'field1' ? field2Value : field1Value;
+
+          const hasValue =
+            (value?.length ?? 0) > 0 || (otherValue?.length ?? 0) > 0;
+
+          if (hasValue) {
+            // Clear both fields if at least one has a value
+            clearErrors('field1');
+            clearErrors('field2');
+            return true;
+          }
+
+          // Set errors on both if neither has a value
+          setError('field1', {
+            message: 'At least one field must have a value',
+          });
+          setError('field2', {
+            message: 'At least one field must have a value',
+          });
+          return 'At least one field must have a value';
+        };
+
+        return (
+          <IressHookForm
+            alert={<IressFormValidationSummary />}
+            form={form}
+            updateErrorSummaryOnSubmit
+          >
+            <IressFormField
+              name="field1"
+              label="Field 1"
+              rules={{
+                validate: (value: string) => validateFields(value, 'field1'),
+              }}
+              render={(controlledProps) => <IressInput {...controlledProps} />}
+            />
+            <IressFormField
+              name="field2"
+              label="Field 2"
+              rules={{
+                validate: (value: string) => validateFields(value, 'field2'),
+              }}
+              render={(controlledProps) => <IressInput {...controlledProps} />}
+            />
+            <IressButton type="submit" mode="primary">
+              Submit
+            </IressButton>
+          </IressHookForm>
+        );
+      };
+
+      render(<FormWithProgrammaticClearErrors />);
+
+      const submitButton = screen.getByRole('button', { name: 'Submit' });
+      const field2Input = screen.getByRole('textbox', { name: /Field 2/ });
+
+      // Step 1: Submit with both fields empty - should show errors
+      await userEvent.click(submitButton);
+
+      // Wait for validation summary to show both errors
+      await screen.findByText(/Field 1:/);
+      expect(screen.getByText(/Field 2:/)).toBeInTheDocument();
+
+      // Step 2: Fill field2 to make validation pass (clearErrors is called in validate function)
+      await userEvent.type(field2Input, 'test value');
+
+      // Step 3: Submit again - validation summary should sync and NOT show errors
+      // This is the key test - errors cleared via clearErrors() should be synced
+      await userEvent.click(submitButton);
+
+      // Validation summary should NOT show field1/field2 errors (they were cleared)
+      expect(screen.queryByText(/Field 1:/)).not.toBeInTheDocument();
+      expect(screen.queryByText(/Field 2:/)).not.toBeInTheDocument();
+    });
   });
 
   describe('controlled form elements', () => {
