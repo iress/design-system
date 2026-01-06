@@ -108,23 +108,29 @@ const HookForm = <T extends FieldValues>(
       )
         return;
 
-      const fn = updateErrorSummaryOnSubmit
-        ? setMessageQueue
-        : setErrorMessages;
-
-      const currentMessages = updateErrorSummaryOnSubmit
-        ? messageQueue.current
-        : errorMessages;
-
-      fn(() =>
-        [...methods.control._names.mount.values()].reduce(
-          (acc, key) => ({
-            ...acc,
-            [key]: key === field ? message : currentMessages[key],
-          }),
-          {},
-        ),
-      );
+      if (updateErrorSummaryOnSubmit) {
+        // For updateErrorSummaryOnSubmit mode, use messageQueue ref
+        setMessageQueue(() =>
+          [...methods.control._names.mount.values()].reduce(
+            (acc, key) => ({
+              ...acc,
+              [key]: key === field ? message : messageQueue.current[key],
+            }),
+            {},
+          ),
+        );
+      } else {
+        // For normal mode, use functional setState to get current state
+        setErrorMessages((prevMessages) =>
+          [...methods.control._names.mount.values()].reduce(
+            (acc, key) => ({
+              ...acc,
+              [key]: key === field ? message : prevMessages[key],
+            }),
+            {},
+          ),
+        );
+      }
     },
     [
       errorMessages,
