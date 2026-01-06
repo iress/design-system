@@ -10,7 +10,7 @@ assignees: ''
 A clear and concise description of what the bug is.
 
 **Version**
-Which version or branch are you using? Note: Versions that are no longer supported will not be investigated.
+Which version are you using? Note: Versions that are no longer supported will not be investigated.
 
 - [ ] 6.x
 - [ ] 5.x
