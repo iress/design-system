@@ -175,14 +175,29 @@ Fix bugs in both 5.x and main branches with precision, minimal changes, and comp
    });
    ```
 
-4. **Communicate Completion**:
+4. **Version Patching (REQUIRED)**:
+   - **After fixing a bug, always increment the patch version**:
+     ```bash
+     # For the affected package
+     yarn workspace @iress-oss/ids-components version patch
+     yarn workspace @iress-oss/ids-tokens version patch
+     ```
+   - **CRITICAL: If components or tokens are updated, ALSO patch MCP package**:
+     ```bash
+     yarn workspace @iress-oss/ids-mcp-server version patch
+     ```
+   - Commit the version changes with message: `chore: bump version for bug fix`
+
+5. **Communicate Completion**:
    - Summarize changes made
    - Confirm tests pass
+   - **List version bumps performed**
    - **Provide specific label instructions** based on your investigation:
      - "Please add label: `affects-both-branches`" (if bug exists in both)
      - "Please add label: `affects-5.x`" (if only 5.x)
      - "Please add label: `affects-main`" (if only main)
    - Provide exact PR title format to use
+   - **Provide git squash command** for commit cleanup
    - Ask user to verify fix
 
 #### Phase 6: Documentation
@@ -206,7 +221,15 @@ Fix bugs in both 5.x and main branches with precision, minimal changes, and comp
    - Reference the issue: "Fixes #123"
    - **Include cross-branch checklist** if fixing both branches
 
-3. **Usage Example Format**:
+3. **Git Squash Helper**:
+   - **After completing all commits, provide the squash command**:
+     ```bash
+     # Replace {number} with actual count of commits you made
+     git reset --soft HEAD~{number} && git commit && git push -f
+     ```
+   - Make it easy for the user to clean up commit history before final review
+
+4. **Usage Example Format**:
 
    ```typescript
    import { IressComponentName } from '@iress-oss/ids-components';
@@ -278,6 +301,18 @@ Follow the principles in `.github/instructions/file-organization.instructions.md
 - ❌ Creating bug stories in subcomponent files instead of main components
 - ❌ Running `yarn install` or other setup commands (environment is pre-configured)
 - ❌ Using `yarn test` instead of `yarn test:coverage`
+- ❌ Forgetting to bump package versions after bug fixes
+- ❌ Not providing git squash command for commit cleanup
+
+## Environment Setup
+
+**IMPORTANT**: The development environment is already set up for you:
+
+- ✅ Dependencies are already installed (`yarn install` has been run)
+- ✅ Node environment is configured
+- ✅ All packages are built and ready
+
+**DO NOT run `yarn install` or package installation commands during bug fixing.** The environment is ready to use.
 
 ## Environment Setup
 
@@ -345,7 +380,7 @@ yarn workspace @iress-oss/ids-components exec npx eslint src/components/Button/B
 
 ## Example Workflow
 
-```
+````
 1. User: "Fix issue #456 - Button component not responding to keyboard events. I saw this on main branch."
 
 2. You: "I understand the Button component doesn't respond to keyboard events
@@ -393,27 +428,35 @@ yarn workspace @iress-oss/ids-components exec npx eslint src/components/Button/B
 
 8. User: "Option 1"
 
-9. You: [Write test first, implement fix, verify test passes, run all tests, create documentation]
+9. You: [Write test first, implement fix, verify test passes, run all tests, bump versions, create documentation]
    "I've implemented the fix on both branches:
 
    **5.x Branch PR:**
    - Title: `Fix: Button keyboard navigation (5.x)`
    - Changes: Adds keyboard event handlers
    - Test: `Button.test.tsx` - Added test that reproduces the bug and now passes
+   - Versions: Bumped @iress-oss/ids-components and @iress-oss/ids-mcp-server (patch)
    - Please add label: `affects-5.x`
 
    **main Branch PR:**
    - Title: `Fix: Button keyboard navigation (main)`
    - Changes: Same fix (code is compatible)
    - Test: `Button.test.tsx` - Added test that reproduces the bug and now passes
+   - Versions: Bumped @iress-oss/ids-components and @iress-oss/ids-mcp-server (patch)
    - Please add label: `affects-main`
 
    Both PRs should reference: `Fixes #456`
    Link them: In 5.x PR add \"Related: #[main-pr-number] (main)\"
 
    I wrote a test that fails before the fix and passes after, confirming the bug is resolved.
-   All tests pass on both branches. The fixes are ready for review."
-```
+   All tests pass on both branches. The fixes are ready for review.
+
+   **To squash commits for cleaner history:**
+   ```bash
+   # I made 4 commits (fix, test, versions, docs)
+   git reset --soft HEAD~4 && git commit && git push -f
+   ```"
+````
 
 ## Remember
 
