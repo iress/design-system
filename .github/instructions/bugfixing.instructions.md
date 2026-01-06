@@ -291,8 +291,9 @@ Which approach would you prefer? I recommend Option 1 because [reasoning].
 
 ### Testing
 
+- [ ] **REQUIRED: Write test that reproduces the bug** (should fail before fix)
+- [ ] **REQUIRED: Verify test passes after fix**
 - [ ] Run existing tests for affected components
-- [ ] Add test case for bug scenario
 - [ ] Test edge cases and similar patterns
 - [ ] Verify no regressions in related functionality
 
@@ -337,15 +338,48 @@ Which approach would you prefer? I recommend Option 1 because [reasoning].
 
 ### Testing Strategy
 
+**CRITICAL: Every bug fix MUST include a test that:**
+
+1. **Reproduces the bug** - Write a test that fails before your fix
+2. **Validates the fix** - Verify the test passes after your fix
+3. **Prevents regression** - Ensures the bug won't reoccur in future changes
+
+**Test Writing Process:**
+
 - **Identify test files** for the modified components
+- **Write bug reproduction test FIRST** (it should fail, proving the bug exists)
+- **Apply your fix** to the component code
+- **Verify the test now passes** (proving the fix works)
 - **Run existing tests** to ensure no regressions
-- **Add test cases** for the specific bug scenario if needed
-- **Test edge cases** that might be affected
+- **Add edge case tests** if the bug affects multiple scenarios
+
+**Test Requirements:**
+
+- Test should clearly describe what bug it prevents (use descriptive test name)
+- Test should be minimal and focused on the specific bug scenario
+- Test should use realistic data/props that would trigger the bug
+- Test should verify the correct behavior, not just absence of errors
+
+**Example test pattern:**
+
+```typescript
+it('handles [bug scenario] without [bug symptom]', () => {
+  // Arrange: Set up conditions that trigger the bug
+  const problematicProps = { /* props that caused the bug */ };
+
+  // Act: Perform the action that previously failed
+  const { result } = render(<Component {...problematicProps} />);
+
+  // Assert: Verify the correct behavior
+  expect(result).toBe(expectedCorrectBehavior);
+});
+```
 
 **Communicate implementation completion:**
 
 - "I've implemented the fix in [files]. Here's what changed: [summary]"
-- "All existing tests pass, and I've added/updated tests for this scenario."
+- "I've written a test in [test file] that reproduces the bug and now passes with the fix."
+- "All existing tests pass, confirming no regressions."
 - "Can you test this fix and confirm it resolves the original issue?"
 
 ## 6. Documentation and Communication
@@ -512,6 +546,8 @@ Bug: "Component X doesn't work when Y happens"
 
 - ✅ **Found the exact root cause** through systematic investigation
 - ✅ **Applied minimal, targeted fix** that follows existing patterns
+- ✅ **Written test that reproduces bug and validates fix**
+- ✅ **All tests pass** (new test + existing tests)
 - ✅ **Maintained backward compatibility** and component contracts
 - ✅ **Provided clear explanation** of the problem and solution
 - ✅ **Considered similar cases** and potential side effects
