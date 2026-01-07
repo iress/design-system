@@ -30,6 +30,7 @@ export default {
 
 export const Default: Story = {
   args: {
+    minSearchLength: 0,
     options: [...Array(5).keys()].map((number) => ({
       label: `Option ${number + 1}`,
     })),

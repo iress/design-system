@@ -7,7 +7,7 @@ export const useComboboxFlags = ({
   results,
 }: Omit<
   AutocompleteSearchHookReturn,
-  'clearError' | 'error' | 'stopSearch'
+  'clearError' | 'error' | 'startSearch' | 'stopSearch'
 >) => {
   const showResults = useMemo(() => {
     return !!results.length;

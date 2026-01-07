@@ -1,10 +1,13 @@
 import { searchLabelValues } from './searchLabelValues';
-import { generateLabelValueMeta } from '@/mocks/generateLabelValues';
+import {
+  generateLabelValueMeta,
+  MOCK_LABEL_VALUES_LENGTH,
+} from '@/mocks/generateLabelValues';
 
 describe('searchLabelValues', () => {
-  it('returns no items if query is empty', () => {
+  it('returns all items if query is empty', () => {
     const items = searchLabelValues('', generateLabelValueMeta());
-    expect(items).toHaveLength(0);
+    expect(items).toHaveLength(MOCK_LABEL_VALUES_LENGTH);
   });
 
   it('returns no items if they do not match query', () => {

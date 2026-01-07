@@ -187,7 +187,19 @@ Fix bugs in both 5.x and main branches with precision, minimal changes, and comp
    });
    ```
 
-4. **Version Patching (REQUIRED)**:
+4. **Linting and Type-Checking (MANDATORY)**:
+   - **REQUIRED: Run linting on modified files**:
+     ```bash
+     yarn workspace @iress-oss/ids-components exec npx eslint src/components/[Component]/[Component].tsx --fix
+     ```
+   - **REQUIRED: Run type-checking on affected package**:
+     ```bash
+     yarn workspace @iress-oss/ids-components run typecheck
+     ```
+   - Fix any linting or type errors before proceeding
+   - Ensure code follows established patterns and type safety
+
+5. **Version Patching (REQUIRED)**:
    - **After fixing a bug, always increment the patch version**:
      ```bash
      # For the affected package
@@ -199,10 +211,10 @@ Fix bugs in both 5.x and main branches with precision, minimal changes, and comp
      ```
    - Commit the version changes with message: `chore: bump version for bug fix`
 
-5. **Communicate Completion**:
+6. **Communicate Completion**:
    - Summarize changes made
-   - Confirm tests pass
-   - **List version bumps performed**
+   - Confirm tests pass - **Confirm linting passes** (no eslint errors)
+   - **Confirm type-checking passes** (no TypeScript errors) - **List version bumps performed**
    - **Provide specific label instructions** based on your investigation:
      - "Please add label: `affects-both-branches`" (if bug exists in both)
      - "Please add label: `affects-5.x`" (if only 5.x)
@@ -294,6 +306,8 @@ Follow the principles in `.github/instructions/file-organization.instructions.md
 - ✅ Applied minimal, targeted fix following existing patterns
 - ✅ **Written test that reproduces bug and validates fix**
 - ✅ **All tests pass** (new test + existing tests)
+- ✅ **Linting passes** (no ESLint errors)
+- ✅ **Type-checking passes** (no TypeScript errors)
 - ✅ Maintained backward compatibility and component contracts
 - ✅ Provided clear explanation of problem and solution
 - ✅ Considered similar cases and potential side effects
@@ -312,6 +326,7 @@ Follow the principles in `.github/instructions/file-organization.instructions.md
 - ❌ Creating bug stories in subcomponent files instead of main components
 - ❌ Running `yarn install` or other setup commands (environment is pre-configured)
 - ❌ Using `yarn test` instead of `yarn test:coverage`
+- ❌ Skipping linting or type-checking before committing changes
 - ❌ Forgetting to bump package versions after bug fixes
 - ❌ Not providing git squash command for commit cleanup
 
@@ -362,6 +377,23 @@ yarn workspace @iress-oss/ids-components run lint
 # Specific files
 yarn workspace @iress-oss/ids-components exec npx eslint src/components/Button/Button.tsx --fix
 ```
+
+## Type-Checking Commands
+
+```bash
+# Type-check all packages
+yarn typecheck
+
+# Type-check specific packages
+yarn workspace @iress-oss/ids-components run typecheck
+yarn workspace @iress-oss/ids-mcp-server run typecheck
+
+# Build packages (includes type-checking)
+yarn build
+yarn build:affected
+```
+
+**Important**: Always run type-checking after making code changes to catch TypeScript errors early.
 
 ## Available Workspaces
 
@@ -427,13 +459,15 @@ yarn workspace @iress-oss/ids-components exec npx eslint src/components/Button/B
 
 8. User: "Option 1"
 
-9. You: [Write test first, implement fix, verify test passes, run all tests, bump versions, create documentation]
+9. You: [Write test first, implement fix, verify test passes, run all tests, lint, type-check, bump versions, create documentation]
    "I've implemented the fix on both branches:
 
    **5.x Branch PR:**
    - Title: `Fix: Button keyboard navigation (5.x)`
    - Changes: Adds keyboard event handlers
    - Test: `Button.test.tsx` - Added test that reproduces the bug and now passes
+   - Linting: ✅ Passes (no ESLint errors)
+   - Type-checking: ✅ Passes (no TypeScript errors)
    - Versions: Bumped @iress-oss/ids-components and @iress-oss/ids-mcp-server (patch)
    - Please add label: `affects-5.x`
 
@@ -441,6 +475,8 @@ yarn workspace @iress-oss/ids-components exec npx eslint src/components/Button/B
    - Title: `Fix: Button keyboard navigation (main)`
    - Changes: Same fix (code is compatible)
    - Test: `Button.test.tsx` - Added test that reproduces the bug and now passes
+   - Linting: ✅ Passes (no ESLint errors)
+   - Type-checking: ✅ Passes (no TypeScript errors)
    - Versions: Bumped @iress-oss/ids-components and @iress-oss/ids-mcp-server (patch)
    - Please add label: `affects-main`
 

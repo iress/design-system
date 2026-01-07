@@ -72,6 +72,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
       error,
       loading,
       results,
+      startSearch,
       stopSearch,
       shouldShowInstructions,
       shouldShowNoResults,
@@ -121,6 +122,22 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
       }
     };
 
+    const handleInputKeyDown: IressInputProps['onKeyDown'] = (e) => {
+      restProps.onKeyDown?.(e);
+
+      // When Down key is pressed, open the popover and start search
+      // Trigger when the popover is currently closed OR when the input value
+      // has not been changed yet, so the user can initiate the first search.
+      if (e.key === 'ArrowDown' && (!show || !valueChanged)) {
+        if (!results.length) {
+          startSearch(true);
+        }
+
+        setValueChanged(true);
+        setShow(true);
+      }
+    };
+
     const handleMenuChange: IressSelectMenuProps['onChange'] = (selected) => {
       const selectedItem = toArray(selected)?.[0];
       onChange?.(
@@ -162,6 +179,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
             onChange={handleInputChange}
             onClear={handleInputClear}
             onFocus={handleInputFocus}
+            onKeyDown={handleInputKeyDown}
             value={value}
             watermark={watermark}
             ref={ref}

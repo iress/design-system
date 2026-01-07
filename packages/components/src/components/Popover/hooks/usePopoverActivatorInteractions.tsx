@@ -31,7 +31,7 @@ export const usePopoverActivatorInteractions = <
   );
 
   // This will call appropriate methods of the currently virtual focused node.
-  // It will also close the popover if the user presses the arrow key on the first item and open it if they press the arrow down key on the activator.
+  // It will also open the popover if the user presses the arrow down key on the activator.
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<TElement>) => {
       if (popover?.show) {
@@ -75,7 +75,7 @@ const handleKeyDownWhenShown = (
     popover.setActiveIndex(lastIndex);
   }
 
-  if (e.key === 'ArrowUp' && popover?.activeIndex === 0) {
+  if (e.key === 'Escape') {
     popover?.setShowWithReason(false, e.nativeEvent, 'focus');
   }
 

@@ -101,8 +101,9 @@ const useSearchOperations = (
       searchFn: (query: string) => Promise<LabelValueMeta[]>,
       query: string,
       minSearchLength: number,
+      force = false,
     ) => {
-      if (shouldSkipQuery(query)) return;
+      if (shouldSkipQuery(query) && !force) return;
 
       // eslint-disable-next-line react-hooks/immutability -- Safe: tracking request IDs with ref counter
       requestIdCounter.current = requestIdCounter.current + 1;
@@ -142,8 +143,9 @@ const useSearchOperations = (
       optionsArray: LabelValueMeta[],
       query: string,
       minSearchLength: number,
+      force = false,
     ) => {
-      if (shouldSkipQuery(query)) return;
+      if (shouldSkipQuery(query) && !force) return;
       updateQueryTracking(query);
 
       if (query.length >= minSearchLength) {
@@ -180,18 +182,29 @@ export const useAutocompleteSearch = ({
 
   const [debouncedQuery] = useDebounce(query, debounceThreshold);
 
-  useEffect(() => {
-    if (typeof options === 'function') {
-      void searchOperations.handleAsync(
+  const search = useCallback(
+    (force = false) => {
+      if (typeof options === 'function') {
+        void searchOperations.handleAsync(
+          options,
+          debouncedQuery,
+          minSearchLength,
+          force,
+        );
+        return;
+      }
+
+      searchOperations.handleSync(
         options,
         debouncedQuery,
         minSearchLength,
+        force,
       );
-      return;
-    }
+    },
+    [debouncedQuery, minSearchLength, options, searchOperations],
+  );
 
-    searchOperations.handleSync(options, debouncedQuery, minSearchLength);
-  }, [debouncedQuery, options, minSearchLength, searchOperations]);
+  useEffect(search, [search]);
 
   const getDisplayResults = (): FormattedLabelValueMeta[] => {
     if (debouncedQuery.length < minSearchLength) {
@@ -210,7 +223,8 @@ export const useAutocompleteSearch = ({
     debouncedQuery,
     error: searchState.error,
     loading: searchState.loading,
-    shouldShowInstructions: query.length < minSearchLength,
+    shouldShowInstructions:
+      query.length < minSearchLength && initialOptions.length === 0,
     shouldShowDebounceWaiting:
       query.length >= minSearchLength &&
       debouncedQuery.length < minSearchLength &&
@@ -223,8 +237,10 @@ export const useAutocompleteSearch = ({
       debouncedQuery.length >= minSearchLength,
     displayResults: getDisplayResults(),
     // Backward compatibility
-    results: debouncedQuery ? searchState.results : (initialOptions ?? []),
-
+    results: searchState.results.length
+      ? searchState.results
+      : (initialOptions ?? []),
+    startSearch: search,
     stopSearch: searchState.reset,
   };
 };

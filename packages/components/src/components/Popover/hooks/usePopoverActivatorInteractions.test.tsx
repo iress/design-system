@@ -62,7 +62,7 @@ describe('usePopoverActivatorInteractions', () => {
       expect(setShowWithReason).toHaveBeenCalledWith(false, undefined, 'focus');
     });
 
-    it('closes the popover when the user clicks arrow up while the first item is focused', () => {
+    it('does not close the popover when the user clicks arrow up while the first item is focused', () => {
       const setShowWithReason = vi.fn();
       const hook = renderHook(() =>
         usePopoverActivatorInteractions(
@@ -76,6 +76,24 @@ describe('usePopoverActivatorInteractions', () => {
 
       hook.result.current.onKeyDown({
         key: 'ArrowUp',
+      } as React.KeyboardEvent<HTMLDivElement>);
+
+      expect(setShowWithReason).not.toHaveBeenCalled();
+    });
+
+    it('closes the popover when the user presses escape while the popover is open', () => {
+      const setShowWithReason = vi.fn();
+      const hook = renderHook(() =>
+        usePopoverActivatorInteractions(
+          getMockPopoverContext({
+            setShowWithReason,
+            show: true,
+          }),
+        ),
+      );
+
+      hook.result.current.onKeyDown({
+        key: 'Escape',
       } as React.KeyboardEvent<HTMLDivElement>);
 
       expect(setShowWithReason).toHaveBeenCalledWith(false, undefined, 'focus');
