@@ -1,4 +1,4 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { IressAutocomplete, type IressAutocompleteProps } from '.';
 import userEvent from '@testing-library/user-event';
@@ -339,6 +339,239 @@ describe('IressAutocomplete', () => {
       // Dropdown should close (element should not be in the document or not visible)
       const listbox = screen.queryByRole('listbox');
       expect(listbox).toBeNull();
+    });
+  });
+
+  describe('keyboard navigation', () => {
+    it('does not close popover when pressing up key on first item', async () => {
+      renderAutocomplete({
+        initialOptions: MOCK_LABEL_VALUE_META.slice(0, 3),
+      });
+
+      const input = screen.getByRole('combobox');
+      input.focus();
+
+      // Wait for popover to open with initial options
+      const options = await screen.findAllByRole('option');
+      expect(options).toHaveLength(3);
+      expect(options[0]).toBeVisible();
+
+      // Press ArrowDown to move to first item
+      await userEvent.keyboard('{ArrowDown}');
+
+      // Press ArrowUp while on first item
+      await userEvent.keyboard('{ArrowUp}');
+
+      // Popover should still be visible
+      const listbox = screen.getByRole('listbox');
+      expect(listbox).toBeVisible();
+    });
+
+    it('opens popover with initial options when pressing down key', async () => {
+      renderAutocomplete({
+        initialOptions: MOCK_LABEL_VALUE_META.slice(0, 3),
+      });
+
+      const input = screen.getByRole('combobox');
+
+      // Press ArrowDown on the input to open popover
+      input.focus();
+      await userEvent.keyboard('{ArrowDown}');
+
+      // Popover should now be visible with initial options
+      const options = await screen.findAllByRole('option');
+      expect(options).toHaveLength(3);
+      expect(options[0]).toBeVisible();
+    });
+
+    it('does not show instructions when initial options are present', async () => {
+      renderAutocomplete({
+        initialOptions: MOCK_LABEL_VALUE_META.slice(0, 3),
+        minSearchLength: 2,
+      });
+
+      const input = screen.getByRole('combobox');
+      input.focus();
+
+      // Wait for popover to open with initial options
+      const options = await screen.findAllByRole('option');
+      expect(options).toHaveLength(3);
+
+      // Instructions should not be shown
+      const instructions = screen.queryByText(/Type at least/);
+      expect(instructions).toBeNull();
+    });
+
+    it('shows instructions when no initial options and query is too short', async () => {
+      renderAutocomplete({
+        minSearchLength: 2,
+      });
+
+      const input = screen.getByRole('combobox');
+      await userEvent.type(input, 'o');
+
+      // Instructions should be shown since we need 2 characters
+      const instructions = screen.getByText(/Type at least 2 characters/);
+      expect(instructions).toBeInTheDocument();
+    });
+
+    it('closes popover when pressing escape key', async () => {
+      renderAutocomplete({
+        initialOptions: MOCK_LABEL_VALUE_META.slice(0, 3),
+      });
+
+      const input = screen.getByRole('combobox');
+      input.focus();
+
+      // Wait for popover to open with initial options
+      const options = await screen.findAllByRole('option');
+      expect(options).toHaveLength(3);
+      expect(options[0]).toBeVisible();
+
+      // Press Escape to close popover
+      await userEvent.keyboard('{Escape}');
+
+      // Popover should be closed
+      const listbox = screen.queryByRole('listbox');
+      expect(listbox).toBeNull();
+    });
+
+    it('opens popover with static options when pressing down key', async () => {
+      renderAutocomplete({
+        options: MOCK_LABEL_VALUE_META.slice(0, 5),
+      });
+
+      const input = screen.getByRole('combobox');
+      input.focus();
+
+      // Press ArrowDown on the input to open popover
+      await userEvent.keyboard('{ArrowDown}');
+
+      // Type to trigger search
+      await userEvent.type(input, 'opt');
+
+      // Popover should now be visible with matching options
+      const options = await screen.findAllByRole('option');
+      expect(options.length).toBeGreaterThan(0);
+      expect(options[0]).toBeVisible();
+    });
+
+    it('opens popover when pressing down key with async options and existing value', async () => {
+      renderAutocomplete({
+        options: () => mockAsyncSearchLabelValues(MOCK_LABEL_VALUE_META),
+        defaultValue: 'Option 1',
+      });
+
+      const input = screen.getByRole('combobox');
+      input.focus();
+
+      // Press ArrowDown on the input to trigger search with existing value
+      await userEvent.keyboard('{ArrowDown}');
+
+      // Popover should open and show results for the existing value
+      const options = await screen.findAllByRole('option');
+      expect(options.length).toBeGreaterThan(0);
+    });
+
+    it('triggers search when pressing down key on empty autocomplete with async options', async () => {
+      const mockSearch = vi.fn();
+      mockSearch.mockImplementation(() =>
+        mockAsyncSearchLabelValues(MOCK_LABEL_VALUE_META),
+      );
+
+      renderAutocomplete({
+        options: mockSearch,
+        minSearchLength: 0,
+      });
+
+      const input = screen.getByRole('combobox');
+      input.focus();
+
+      // Press ArrowDown without any value to force search
+      await userEvent.keyboard('{ArrowDown}');
+
+      // Should call the search function to fetch options
+      await waitFor(() => expect(mockSearch).toHaveBeenCalled());
+
+      // Popover should open and show results
+      const options = await screen.findAllByRole('option');
+      expect(options.length).toBeGreaterThan(0);
+    });
+
+    it('forces new search when pressing down key even if value has not changed', async () => {
+      const mockSearch = vi.fn();
+      mockSearch.mockImplementation(() =>
+        mockAsyncSearchLabelValues(MOCK_LABEL_VALUE_META),
+      );
+
+      renderAutocomplete({
+        options: mockSearch,
+        defaultValue: 'test',
+        minSearchLength: 0,
+      });
+
+      const input = screen.getByRole('combobox');
+      input.focus();
+
+      // Press ArrowDown with existing value to force search
+      await userEvent.keyboard('{ArrowDown}');
+
+      // Should call the search function even though value hasn't changed
+      await waitFor(() => expect(mockSearch).toHaveBeenCalled());
+
+      // Popover should open
+      const options = await screen.findAllByRole('option');
+      expect(options).toHaveLength(MOCK_LABEL_VALUE_META.length);
+    });
+
+    it('sets valueChanged when pressing down key to enable popover display', async () => {
+      renderAutocomplete({
+        options: MOCK_LABEL_VALUE_META.slice(0, 5),
+        minSearchLength: 0,
+      });
+
+      const input = screen.getByRole('combobox');
+      input.focus();
+
+      // Press ArrowDown to trigger search and set valueChanged
+      await userEvent.keyboard('{ArrowDown}');
+
+      // Type to see results
+      await userEvent.type(input, 'opt');
+
+      // Popover should be visible because valueChanged was set by ArrowDown
+      const options = await screen.findAllByRole('option');
+      expect(options.length).toBeGreaterThan(0);
+      expect(options[0]).toBeVisible();
+    });
+
+    it('opens popover when pressing down key even if popover was previously closed', async () => {
+      renderAutocomplete({
+        options: MOCK_LABEL_VALUE_META.slice(0, 5),
+        minSearchLength: 0,
+      });
+
+      const input = screen.getByRole('combobox');
+      await userEvent.type(input, 'opt');
+
+      // Wait for popover to open
+      const options = await screen.findAllByRole('option');
+      expect(options[0]).toBeVisible();
+
+      // Close popover by pressing Escape
+      await userEvent.keyboard('{Escape}');
+
+      // Popover should be closed
+      let listbox = screen.queryByRole('listbox');
+      expect(listbox).toBeNull();
+
+      // Press ArrowDown to reopen popover
+      input.focus();
+      await userEvent.keyboard('{ArrowDown}');
+
+      // Popover should reopen
+      listbox = screen.getByRole('listbox');
+      expect(listbox).toBeVisible();
     });
   });
 

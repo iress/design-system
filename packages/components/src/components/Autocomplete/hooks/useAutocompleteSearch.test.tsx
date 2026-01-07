@@ -382,6 +382,165 @@ describe('useAutocompleteSearch', () => {
     });
   });
 
+  describe('startSearch force parameter', () => {
+    it('forces a search even when the query has not changed', async () => {
+      const mockOptions = vi.fn();
+
+      mockOptions.mockResolvedValue([
+        { label: 'Result 1', value: '1' },
+        { label: 'Result 2', value: '2' },
+      ]);
+
+      const hook = renderAutocompleteSearchHook({
+        options: mockOptions,
+        debounceThreshold: 0,
+      });
+
+      hook.rerender({
+        ...DEFAULT_PROPS,
+        options: mockOptions,
+        query: 'test',
+        debounceThreshold: 0,
+      });
+
+      // Wait for initial search to complete
+      await waitFor(() => expect(mockOptions).toHaveBeenCalledTimes(1));
+      await waitFor(() => expect(hook.result.current.loading).toBe(false));
+      expect(hook.result.current.results).toHaveLength(2);
+
+      // Call startSearch with force=true to trigger search again with same query
+      hook.result.current.startSearch(true);
+
+      // Should call the search function again even though query hasn't changed
+      await waitFor(() => expect(mockOptions).toHaveBeenCalledTimes(2));
+      await waitFor(() => expect(hook.result.current.loading).toBe(false));
+      expect(hook.result.current.results).toHaveLength(2);
+    });
+
+    it('forces async search with existing query value', async () => {
+      const mockOptions = vi.fn();
+
+      mockOptions.mockResolvedValue([
+        { label: 'Apple iPhone', value: 'apple-1' },
+        { label: 'Apple MacBook', value: 'apple-2' },
+      ]);
+
+      const hook = renderAutocompleteSearchHook({
+        options: mockOptions,
+        debounceThreshold: 0,
+        query: 'apple', // Start with a query
+      });
+
+      // Initial search should happen
+      await waitFor(() => expect(mockOptions).toHaveBeenCalledTimes(1));
+      await waitFor(() => expect(hook.result.current.loading).toBe(false));
+      expect(hook.result.current.results).toHaveLength(2);
+
+      // Force search with the same query
+      hook.result.current.startSearch(true);
+
+      // Should trigger search again
+      await waitFor(() => expect(mockOptions).toHaveBeenCalledTimes(2));
+      await waitFor(() => expect(hook.result.current.loading).toBe(false));
+      expect(hook.result.current.results).toHaveLength(2);
+    });
+
+    it('forces sync search with existing query value', async () => {
+      const staticOptions = [
+        { label: 'Option 1', value: '1' },
+        { label: 'Option 2', value: '2' },
+        { label: 'Option 3', value: '3' },
+      ];
+
+      const hook = renderAutocompleteSearchHook({
+        options: staticOptions,
+        debounceThreshold: 0,
+        query: 'opt', // Start with a query
+      });
+
+      // Initial search should happen
+      await waitFor(() => expect(hook.result.current.loading).toBe(false));
+      expect(hook.result.current.results).toHaveLength(3);
+
+      // Clear results to simulate a reset
+      hook.result.current.stopSearch();
+
+      await waitFor(() => expect(hook.result.current.results).toHaveLength(0));
+
+      // Force search with the same query
+      hook.result.current.startSearch(true);
+
+      // Should trigger search again and show results
+      await waitFor(() => expect(hook.result.current.loading).toBe(false));
+      expect(hook.result.current.results).toHaveLength(3);
+    });
+
+    it('does not search when force is false and query has not changed', async () => {
+      const mockOptions = vi.fn();
+
+      mockOptions.mockResolvedValue([{ label: 'Result 1', value: '1' }]);
+
+      const hook = renderAutocompleteSearchHook({
+        options: mockOptions,
+        debounceThreshold: 0,
+      });
+
+      hook.rerender({
+        ...DEFAULT_PROPS,
+        options: mockOptions,
+        query: 'test',
+        debounceThreshold: 0,
+      });
+
+      // Wait for initial search to complete
+      await waitFor(() => expect(mockOptions).toHaveBeenCalledTimes(1));
+      await waitFor(() => expect(hook.result.current.loading).toBe(false));
+
+      // Call startSearch without force parameter (default is false)
+      hook.result.current.startSearch();
+
+      // Should NOT call the search function again since query hasn't changed
+      await waitDelay(100); // Give it time to potentially trigger
+      expect(mockOptions).toHaveBeenCalledTimes(1);
+    });
+
+    it('respects minSearchLength when forcing search', async () => {
+      const mockOptions = vi.fn();
+
+      mockOptions.mockResolvedValue([{ label: 'Result', value: '1' }]);
+
+      const hook = renderAutocompleteSearchHook({
+        options: mockOptions,
+        debounceThreshold: 0,
+        minSearchLength: 3,
+        query: 'ab', // Query is too short (less than 3 characters)
+      });
+
+      // Should not trigger initial search because query is too short
+      await waitDelay(100);
+      expect(mockOptions).not.toHaveBeenCalled();
+
+      // Force search with query that's still too short
+      hook.result.current.startSearch(true);
+
+      // Should still not trigger search because query doesn't meet minimum length
+      await waitDelay(100);
+      expect(mockOptions).not.toHaveBeenCalled();
+
+      // Update query to meet minimum length
+      hook.rerender({
+        ...DEFAULT_PROPS,
+        options: mockOptions,
+        query: 'abc',
+        debounceThreshold: 0,
+        minSearchLength: 3,
+      });
+
+      // Now search should trigger
+      await waitFor(() => expect(mockOptions).toHaveBeenCalledTimes(1));
+    });
+  });
+
   describe('trailing edge debouncing behavior', () => {
     it('prevents visual flashing during rapid typing by not showing immediate loading states', async () => {
       const mockSearch = createSlowMockSearch(100);
@@ -1037,9 +1196,9 @@ describe('useAutocompleteSearch', () => {
         minSearchLength: 2,
       });
 
-      // When autocomplete opens, should display initial options and wait for user input
+      // When autocomplete opens with initial options, should NOT display instructions
       expect(hook.result.current.displayResults).toEqual(initialOptions);
-      expect(hook.result.current.shouldShowInstructions).toBe(true); // Waiting for input
+      expect(hook.result.current.shouldShowInstructions).toBe(false); // No instructions when initial options exist
       expect(hook.result.current.shouldShowNoResults).toBe(false); // No search performed yet
       expect(hook.result.current.loading).toBe(false);
     });
@@ -1283,9 +1442,9 @@ describe('useAutocompleteSearch', () => {
         minSearchLength: 2,
       });
 
-      // Initially displays initial options and shows instructions
+      // Initially displays initial options and does not show instructions
       expect(hook.result.current.displayResults).toEqual(initialOptions);
-      expect(hook.result.current.shouldShowInstructions).toBe(true);
+      expect(hook.result.current.shouldShowInstructions).toBe(false);
 
       // User types insufficient characters - should continue showing initial options
       hook.rerender({
@@ -1297,7 +1456,7 @@ describe('useAutocompleteSearch', () => {
       });
 
       expect(hook.result.current.displayResults).toEqual(initialOptions);
-      expect(hook.result.current.shouldShowInstructions).toBe(true);
+      expect(hook.result.current.shouldShowInstructions).toBe(false);
 
       // User types sufficient characters - should search and display search results instead
       hook.rerender({

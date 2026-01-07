@@ -129,6 +129,11 @@ export interface AutocompleteSearchHookReturn {
   results: FormattedLabelValueMeta[];
 
   /**
+   * Start the search.
+   */
+  startSearch: (force?: boolean) => void;
+
+  /**
    * Stop the search.
    */
   stopSearch: () => void;
