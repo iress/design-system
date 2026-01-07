@@ -66,6 +66,11 @@ function calculateRelevanceScore(
   const contentMatches = content.toLowerCase().split(queryLower).length - 1;
   relevanceScore += contentMatches * 2;
 
+  // Boost pattern-based files as they're often searched for
+  if (file.startsWith('patterns-')) {
+    relevanceScore += 25;
+  }
+
   return relevanceScore;
 }
 

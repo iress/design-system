@@ -28,6 +28,13 @@ export function getMarkdownFiles(): string[] {
 
 /**
  * Map Iress component names (e.g., IressButton) to their documentation files
+ * Supports both components and patterns with hierarchical fallback:
+ * 1. Exact component match
+ * 2. Exact pattern match
+ * 3. Partial component matching
+ * 4. Partial pattern matching
+ * 5. Fuzzy component matching
+ * 6. Fuzzy pattern matching
  */
 export function mapIressComponentToFile(componentName: string): string | null {
   // Remove 'Iress' prefix and convert to lowercase
@@ -35,22 +42,39 @@ export function mapIressComponentToFile(componentName: string): string | null {
 
   const markdownFiles = getMarkdownFiles();
 
-  // Try to find exact match first
+  // 1. Try exact component match first (maintain existing behavior)
   let matchingFile = markdownFiles.find(
     (file) => file === `components-${baseComponentName}-docs.md`,
   );
 
-  // If no exact match, try partial matching
+  // 2. Try exact pattern match
+  matchingFile ??= markdownFiles.find(
+    (file) => file === `patterns-${baseComponentName}-docs.md`,
+  );
+
+  // 3. Try partial component matching
   matchingFile ??= markdownFiles.find(
     (file) =>
       file.startsWith(`components-${baseComponentName}`) &&
       file.endsWith('-docs.md'),
   );
 
-  // If still no match, try fuzzy matching
+  // 4. Try partial pattern matching
+  matchingFile ??= markdownFiles.find(
+    (file) =>
+      file.startsWith(`patterns-${baseComponentName}`) &&
+      file.endsWith('-docs.md'),
+  );
+
+  // 5. Try fuzzy component matching
   matchingFile ??= markdownFiles.find(
     (file) =>
       file.includes(baseComponentName) && file.startsWith('components-'),
+  );
+
+  // 6. Try fuzzy pattern matching
+  matchingFile ??= markdownFiles.find(
+    (file) => file.includes(baseComponentName) && file.startsWith('patterns-'),
   );
 
   return matchingFile ?? null;

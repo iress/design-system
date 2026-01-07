@@ -23,7 +23,7 @@
     "build": "tsc",
     "clean": "rimraf coverage dist",
     "collect": "tsx scripts/collect.ts",
-    "dev": "tsx src/index.ts",
+    "dev": "mcp-inspector tsx src/index.ts",
     "generate": "tsx scripts/generate.ts",
     "guidelines": "tsx scripts/guidelines.ts",
     "lint": "npx eslint . --max-warnings 0",
@@ -42,6 +42,7 @@
     "zod": "4.2.1"
   },
   "devDependencies": {
+    "@modelcontextprotocol/inspector": "0.18.0",
     "@types/minimist": "1.2.5",
     "@types/node": "^25.0.2",
     "@types/turndown": "5.0.6",

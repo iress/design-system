@@ -221,6 +221,102 @@ A versatile button component for user interactions.
       const entries = result.content[0].text.split(/\n\d+\. /).length - 1;
       expect(entries).toBeLessThanOrEqual(10);
     });
+
+    // Pattern support integration tests
+    it('should find IressForm from pattern documentation', () => {
+      const args = {
+        query: 'IressForm',
+      };
+
+      mockUtils.mapIressComponentToFile.mockReturnValue(
+        'patterns-form-docs.md',
+      );
+
+      const result = handleFindComponent(args);
+
+      expect(mockUtils.mapIressComponentToFile).toHaveBeenCalledWith(
+        'IressForm',
+      );
+      expect(result.content[0].text).toContain(
+        'Found exact match for **IressForm**',
+      );
+      expect(result.content[0].text).toContain('patterns-form-docs.md');
+    });
+
+    it('should find IressHookForm from pattern documentation', () => {
+      const args = {
+        query: 'IressHookForm',
+      };
+
+      mockUtils.mapIressComponentToFile.mockReturnValue(
+        'patterns-hookform-docs.md',
+      );
+
+      const result = handleFindComponent(args);
+
+      expect(result.content[0].text).toContain(
+        'Found exact match for **IressHookForm**',
+      );
+      expect(result.content[0].text).toContain('patterns-hookform-docs.md');
+    });
+
+    it('should boost relevance score for pattern files in search results', () => {
+      const args = {
+        query: 'form',
+      };
+
+      const mockFormPatternContent = `# Form Pattern
+
+A comprehensive form pattern with validation.
+form form form form form
+`;
+
+      const mockFormComponentContent = `# Form Component
+
+Basic form component.
+form
+`;
+
+      mockUtils.mapIressComponentToFile.mockReturnValue(null);
+      mockUtils.getMarkdownFiles.mockReturnValue([
+        'components-form-docs.md',
+        'patterns-form-docs.md',
+      ]);
+      mockUtils.extractIressComponents.mockReturnValue([]);
+
+      // Mock different content for different files
+      mockUtils.readFileContent.mockImplementation((path: string) => {
+        if (path.includes('patterns-form-docs.md')) {
+          return mockFormPatternContent;
+        }
+        return mockFormComponentContent;
+      });
+
+      const result = handleFindComponent(args);
+
+      // Pattern should appear first due to +25 relevance boost
+      expect(result.content[0].text).toContain('patterns-form-docs.md');
+      expect(
+        result.content[0].text.indexOf('patterns-form-docs.md'),
+      ).toBeLessThan(result.content[0].text.indexOf('components-form-docs.md'));
+    });
+
+    it('should maintain backward compatibility with existing component searches', () => {
+      const args = {
+        query: 'IressButton',
+      };
+
+      mockUtils.mapIressComponentToFile.mockReturnValue(
+        'components-button-docs.md',
+      );
+
+      const result = handleFindComponent(args);
+
+      expect(result.content[0].text).toContain(
+        'Found exact match for **IressButton**',
+      );
+      expect(result.content[0].text).toContain('components-button-docs.md');
+    });
   });
 
   describe('handleGetComponentProps', () => {

@@ -266,6 +266,180 @@ describe('utils', () => {
 
       expect(result).toBe(mapping.filePath);
     });
+
+    // Pattern support tests
+    it('should find exact pattern match for IressForm', () => {
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'components-button-docs.md',
+          'patterns-form-docs.md',
+        ),
+      );
+
+      const result = mapIressComponentToFile('IressForm');
+
+      expect(result).toBe('patterns-form-docs.md');
+    });
+
+    it('should find exact pattern match for IressHookForm', () => {
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'components-button-docs.md',
+          'patterns-hookform-docs.md',
+        ),
+      );
+
+      const result = mapIressComponentToFile('IressHookForm');
+
+      expect(result).toBe('patterns-hookform-docs.md');
+    });
+
+    it('should prioritize component match over pattern match', () => {
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray('components-form-docs.md', 'patterns-form-docs.md'),
+      );
+
+      const result = mapIressComponentToFile('IressForm');
+
+      expect(result).toBe('components-form-docs.md');
+    });
+
+    it('should find partial pattern match when exact pattern match is not available', () => {
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'components-button-docs.md',
+          'patterns-form-advanced-docs.md',
+        ),
+      );
+
+      const result = mapIressComponentToFile('IressForm');
+
+      expect(result).toBe('patterns-form-advanced-docs.md');
+    });
+
+    it('should find fuzzy pattern match when exact and partial pattern matches are not available', () => {
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'components-button-docs.md',
+          'patterns-custom-form-docs.md',
+        ),
+      );
+
+      const result = mapIressComponentToFile('IressForm');
+
+      expect(result).toBe('patterns-custom-form-docs.md');
+    });
+
+    it('should handle pattern matching with camelCase conversion', () => {
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray('patterns-loginform-docs.md'),
+      );
+
+      const result = mapIressComponentToFile('IressLoginForm');
+
+      expect(result).toBe('patterns-loginform-docs.md');
+    });
+
+    it('should follow correct fallback priority: exact component → exact pattern → partial component → partial pattern → fuzzy component → fuzzy pattern', () => {
+      // Test exact component wins over everything
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'components-form-docs.md',
+          'patterns-form-docs.md',
+          'components-form-advanced-docs.md',
+          'patterns-form-advanced-docs.md',
+          'components-custom-form-docs.md',
+          'patterns-custom-form-docs.md',
+        ),
+      );
+
+      expect(mapIressComponentToFile('IressForm')).toBe(
+        'components-form-docs.md',
+      );
+
+      // Test exact pattern wins when no exact component
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'patterns-form-docs.md',
+          'components-form-advanced-docs.md',
+          'patterns-form-advanced-docs.md',
+          'components-custom-form-docs.md',
+          'patterns-custom-form-docs.md',
+        ),
+      );
+
+      expect(mapIressComponentToFile('IressForm')).toBe(
+        'patterns-form-docs.md',
+      );
+
+      // Test partial component wins when no exact matches
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'components-form-advanced-docs.md',
+          'patterns-form-advanced-docs.md',
+          'components-custom-form-docs.md',
+          'patterns-custom-form-docs.md',
+        ),
+      );
+
+      expect(mapIressComponentToFile('IressForm')).toBe(
+        'components-form-advanced-docs.md',
+      );
+
+      // Test partial pattern wins when no component matches
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'patterns-form-advanced-docs.md',
+          'components-custom-form-docs.md',
+          'patterns-custom-form-docs.md',
+        ),
+      );
+
+      expect(mapIressComponentToFile('IressForm')).toBe(
+        'patterns-form-advanced-docs.md',
+      );
+
+      // Test fuzzy component wins when no exact/partial matches
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'components-custom-form-docs.md',
+          'patterns-custom-form-docs.md',
+        ),
+      );
+
+      expect(mapIressComponentToFile('IressForm')).toBe(
+        'components-custom-form-docs.md',
+      );
+
+      // Test fuzzy pattern is last resort
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray('patterns-custom-form-docs.md'),
+      );
+
+      expect(mapIressComponentToFile('IressForm')).toBe(
+        'patterns-custom-form-docs.md',
+      );
+    });
+
+    it('should maintain backward compatibility with existing component searches', () => {
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'components-button-docs.md',
+          'components-input-docs.md',
+          'components-richselect-docs.md',
+        ),
+      );
+
+      expect(mapIressComponentToFile('IressButton')).toBe(
+        'components-button-docs.md',
+      );
+      expect(mapIressComponentToFile('IressInput')).toBe(
+        'components-input-docs.md',
+      );
+      expect(mapIressComponentToFile('IressRichSelect')).toBe(
+        'components-richselect-docs.md',
+      );
+    });
   });
 
   describe('extractIressComponents', () => {

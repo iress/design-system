@@ -4,12 +4,12 @@ A Model Context Protocol (MCP) server specifically designed for the **Iress Desi
 
 ## Features
 
-- **Component Discovery**: Find IDS components by name or functionality
+- **Component Discovery**: Find IDS components and patterns by name or functionality
 - **Props & API Reference**: Get detailed component prop information and usage examples
 - **Usage Examples**: Real-world React code examples and implementation patterns
 - **Design Tokens**: Access to IDS design tokens (colors, spacing, typography)
 - **Smart Search**: Search across all IDS documentation with context-aware results
-- **Categorized Resources**: Organized by Components, Foundations, and Resources
+- **Categorized Resources**: Organized by Components, Patterns, Foundations, and Resources
 - **Engineer-Focused**: Tools designed specifically for UI development workflows
 
 ## Installation
@@ -54,7 +54,7 @@ For other MCP clients or manual configuration, use this server configuration:
 
 ## Available Tools
 
-1. **find_component**: Find IDS components by name or functionality - perfect for component discovery
+1. **find_component**: Find IDS components and patterns by name or functionality - supports both components and patterns (e.g., IressForm, IressButton)
 2. **get_component_props**: Get detailed prop information and API reference for specific components
 3. **get_usage_examples**: Get real-world React code examples and implementation patterns
 4. **search_ids_docs**: Search across all IDS documentation with context-aware results
@@ -66,6 +66,7 @@ For other MCP clients or manual configuration, use this server configuration:
 All IDS component documentation files are exposed as categorized resources:
 
 - **Components**: Button, Input, Table, Modal, etc. (`components-*-docs.md`)
+- **Patterns**: Form, HookForm, etc. (`patterns-*-docs.md`)
 - **Foundations**: Colors, Typography, Spacing, etc. (`foundations-*-docs.md`)
 - **Resources**: Changelog, Guidelines, etc. (`resources-*-docs.md`)
 
@@ -80,6 +81,11 @@ The server works with the IDS component library documentation in the `generated/
 - `components-table-docs.md` - IressTable component
 - `components-modal-docs.md` - IressModal component
 - `components-*-recipes-docs.md` - Usage patterns and recipes
+
+**Patterns** (Composite patterns and workflows):
+
+- `patterns-form-docs.md` - IressForm pattern
+- `patterns-hookform-docs.md` - IressHookForm pattern
 
 **Foundations** (Guidelines and tokens):
 
