@@ -1351,7 +1351,479 @@ export const AsyncSelectExample = () => {
 - ✅ Shows loading states
 - ✅ All imports included
 
-### Solution 10: Integration Examples ⭐ MEDIUM PRIORITY
+### Solution 10: Styling Props Reference and Discovery ⭐ HIGH PRIORITY
+
+**Approach:** Provide comprehensive styling props documentation and discovery
+
+**Problem:** Developers don't know:
+
+- Which styling props are available in IDS components
+- What each styling prop does and its purpose
+- How to use styling props correctly
+- Where styling props apply (which components accept them)
+- When to use style props vs CSS-in-JS vs design tokens
+- How Panda CSS style props integrate with IDS components
+
+**Common issues:**
+
+- Trying to use `className` when style props exist
+- Not knowing about layout props like `spacing`, `gap`, `align`
+- Hardcoding styles instead of using semantic style props
+- Confusion between design tokens and style props
+- Not understanding which props are shared vs component-specific
+
+#### Storybook Responsibilities
+
+- ❌ **NEW**: Create "Styling System" documentation page
+- ❌ **NEW**: Document all available style props with categories:
+  - **Layout props** (`display`, `flexDirection`, `gap`, `align`, `justify`)
+  - **Spacing props** (`padding`, `margin`, `p`, `m`, `px`, `py`, etc.)
+  - **Color props** (`color`, `backgroundColor`, `borderColor`)
+  - **Typography props** (`fontSize`, `fontWeight`, `lineHeight`)
+  - **Border props** (`borderRadius`, `borderWidth`, `border`)
+  - **Sizing props** (`width`, `height`, `minWidth`, `maxWidth`)
+- ❌ **NEW**: Show which components accept style props (most IDS components)
+- ❌ **NEW**: Include visual examples for each prop category
+- ❌ **NEW**: Document Panda CSS integration patterns
+- ❌ **NEW**: Show when to use different styling approaches:
+  - Style props (quick inline styles)
+  - CSS function from Panda (reusable styles)
+  - Design tokens (theme consistency)
+
+**Example Storybook content:**
+
+```markdown
+## Styling Props
+
+IDS components support Panda CSS style props for quick, type-safe styling.
+
+### Layout Props
+
+Control component layout and positioning:
+
+\`\`\`tsx
+import { IressStack } from '@iress-oss/ids-components';
+
+<IressStack
+direction="row" // flexDirection
+gap="md" // gap between items
+align="center" // align-items
+justify="space-between" // justify-content
+
+> {children}
+> </IressStack>
+> \`\`\`
+
+**Available layout props:**
+
+- `display` - Display mode (`flex`, `block`, `inline`, etc.)
+- `flexDirection` / `direction` - Flex direction
+- `gap` - Gap between flex/grid items (uses spacing tokens)
+- `alignItems` / `align` - Flex/grid alignment
+- `justifyContent` / `justify` - Flex/grid justification
+
+### Spacing Props
+
+Control padding and margin using design tokens:
+
+\`\`\`tsx
+<IressButton
+padding="md" // All sides
+px="lg" // Horizontal (left + right)
+py="sm" // Vertical (top + bottom)
+m="md" // Margin all sides
+
+> Button
+> </IressButton>
+> \`\`\`
+
+**Available spacing props:**
+
+- `padding` / `p` - All sides
+- `paddingX` / `px` - Horizontal
+- `paddingY` / `py` - Vertical
+- `paddingTop` / `pt`, `paddingBottom` / `pb`, `paddingLeft` / `pl`, `paddingRight` / `pr`
+- Same pattern for margin: `m`, `mx`, `my`, `mt`, `mb`, `ml`, `mr`
+
+**Spacing token values:** `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`
+
+### Color Props
+
+Use semantic color tokens:
+
+\`\`\`tsx
+<IressText
+color="text.primary" // Text color
+backgroundColor="background.secondary" // Background
+
+> Content
+> </IressText>
+> \`\`\`
+
+**Available color props:**
+
+- `color` - Text/foreground color
+- `backgroundColor` / `bg` - Background color
+- `borderColor` - Border color
+
+**Color token categories:** `text.*`, `background.*`, `border.*`, `brand.*`
+
+### Typography Props
+
+Control text appearance:
+
+\`\`\`tsx
+<IressText
+fontSize="lg"
+fontWeight="bold"
+lineHeight="tight"
+
+> Content
+> </IressText>
+> \`\`\`
+
+**Note:** Prefer using `IressText` with `variant` prop for typography instead of individual props.
+
+### When to Use Each Approach
+
+✅ **Style Props** - Quick inline styles, layout adjustments
+\`\`\`tsx
+<IressStack spacing="md" padding="lg">
+\`\`\`
+
+✅ **CSS Function** - Reusable styles, complex styling
+\`\`\`tsx
+import { css } from '@iress-oss/ids-components/css';
+
+const cardStyles = css({
+padding: 'spacing.lg',
+borderRadius: 'md',
+backgroundColor: 'background.primary',
+});
+
+<div className={cardStyles}>
+\`\`\`
+
+✅ **Design Tokens** - Theme consistency, semantic values
+\`\`\`tsx
+<IressText color="text.primary"> // Uses theme token
+\`\`\`
+
+### Which Components Support Style Props?
+
+Most IDS components support style props:
+
+- ✅ Layout components: `IressStack`, `IressBox`, `IressGrid`
+- ✅ Form components: `IressInput`, `IressSelect`, `IressButton`
+- ✅ Typography: `IressText`, `IressHeading`
+- ✅ Data display: `IressTable`, `IressCard`
+
+Check component documentation for specific supported props.
+```
+
+#### MCP Server Changes
+
+1. **Add new tool `get_styling_props_reference` in `tools.ts`:**
+
+   ```typescript
+   {
+     name: 'get_styling_props_reference',
+     description:
+       'Get comprehensive reference for IDS styling props including layout, spacing, colors, typography, and borders. Shows which props are available, their purpose, usage examples, and which components accept them.',
+     inputSchema: {
+       type: 'object',
+       properties: {
+         category: {
+           type: 'string',
+           enum: ['layout', 'spacing', 'colors', 'typography', 'borders', 'sizing', 'all'],
+           description: 'Style prop category to get reference for',
+           default: 'all',
+         },
+         component: {
+           type: 'string',
+           description: 'Optional: specific component to check style prop support for',
+         },
+       },
+     },
+   }
+   ```
+
+2. **Create `stylingHandlers.ts` with comprehensive prop documentation:**
+
+   ```typescript
+   const STYLING_PROPS_REFERENCE = {
+     layout: {
+       description: 'Control component layout and positioning',
+       props: {
+         display: {
+           type: 'string',
+           values: ['flex', 'block', 'inline', 'inline-block', 'grid', 'none'],
+           description: 'CSS display property',
+           example: '<IressBox display="flex">',
+         },
+         flexDirection: {
+           type: 'string',
+           values: ['row', 'column', 'row-reverse', 'column-reverse'],
+           description: 'Flex direction',
+           alias: 'direction',
+           example: '<IressStack direction="row">',
+         },
+         gap: {
+           type: 'spacing',
+           values: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'],
+           description: 'Gap between flex/grid items',
+           example: '<IressStack gap="md">',
+         },
+         alignItems: {
+           type: 'string',
+           values: ['start', 'center', 'end', 'stretch', 'baseline'],
+           description: 'Flex/grid alignment',
+           alias: 'align',
+           example: '<IressStack align="center">',
+         },
+         justifyContent: {
+           type: 'string',
+           values: ['start', 'center', 'end', 'space-between', 'space-around'],
+           description: 'Flex/grid justification',
+           alias: 'justify',
+           example: '<IressStack justify="space-between">',
+         },
+       },
+       examples: `
+   // Layout example
+   <IressStack
+     direction="row"
+     gap="md"
+     align="center"
+     justify="space-between"
+   >
+     <IressButton>Left</IressButton>
+     <IressButton>Right</IressButton>
+   </IressStack>
+       `,
+     },
+     spacing: {
+       description: 'Control padding and margin using design tokens',
+       props: {
+         padding: {
+           type: 'spacing',
+           values: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'],
+           description: 'Padding on all sides',
+           alias: 'p',
+           example: '<IressBox padding="md">',
+         },
+         paddingX: {
+           type: 'spacing',
+           description: 'Horizontal padding (left + right)',
+           alias: 'px',
+           example: '<IressBox px="lg">',
+         },
+         paddingY: {
+           type: 'spacing',
+           description: 'Vertical padding (top + bottom)',
+           alias: 'py',
+           example: '<IressBox py="sm">',
+         },
+         margin: {
+           type: 'spacing',
+           description: 'Margin on all sides',
+           alias: 'm',
+           example: '<IressBox m="md">',
+         },
+       },
+       examples: `
+   // Spacing example
+   <IressButton
+     padding="md"      // All sides
+     px="lg"           // Horizontal only
+     py="sm"           // Vertical only
+   >
+     Button
+   </IressButton>
+       `,
+     },
+     colors: {
+       description: 'Use semantic color tokens for consistent theming',
+       props: {
+         color: {
+           type: 'color',
+           values: [
+             'text.primary',
+             'text.secondary',
+             'text.disabled',
+             'brand.primary',
+           ],
+           description: 'Text/foreground color',
+           example: '<IressText color="text.primary">',
+         },
+         backgroundColor: {
+           type: 'color',
+           values: [
+             'background.primary',
+             'background.secondary',
+             'background.tertiary',
+           ],
+           description: 'Background color',
+           alias: 'bg',
+           example: '<IressBox bg="background.secondary">',
+         },
+         borderColor: {
+           type: 'color',
+           values: ['border.default', 'border.focus', 'border.error'],
+           description: 'Border color',
+           example: '<IressBox borderColor="border.default">',
+         },
+       },
+       examples: `
+   // Color example
+   <IressText
+     color="text.primary"
+     backgroundColor="background.secondary"
+   >
+     Styled text
+   </IressText>
+       `,
+     },
+   };
+
+   export function handleGetStylingPropsReference(args: unknown): ToolResponse {
+     const schema = z.object({
+       category: z
+         .enum([
+           'layout',
+           'spacing',
+           'colors',
+           'typography',
+           'borders',
+           'sizing',
+           'all',
+         ])
+         .default('all'),
+       component: z.string().optional(),
+     });
+
+     const { category, component } = schema.parse(args);
+
+     if (component) {
+       // Return component-specific style prop support
+       return formatComponentStylingInfo(component);
+     }
+
+     if (category === 'all') {
+       return formatAllStylingProps();
+     }
+
+     return formatStylingPropsCategory(category);
+   }
+   ```
+
+3. **Add component-specific style prop support matrix:**
+
+   ```typescript
+   const COMPONENT_STYLING_SUPPORT = {
+     IressStack: {
+       supports: ['layout', 'spacing', 'colors', 'sizing'],
+       commonProps: [
+         'direction',
+         'gap',
+         'align',
+         'justify',
+         'spacing',
+         'padding',
+       ],
+       example: `
+   <IressStack
+     direction="row"
+     gap="md"
+     align="center"
+     padding="lg"
+   >
+       `,
+     },
+     IressButton: {
+       supports: ['spacing', 'sizing'],
+       commonProps: ['padding', 'margin', 'width'],
+       example: `
+   <IressButton
+     padding="md"
+     width="full"
+   >
+       `,
+       notes: 'Color and typography are controlled by variant prop',
+     },
+     IressText: {
+       supports: ['colors', 'typography', 'spacing'],
+       commonProps: ['color', 'fontSize', 'fontWeight', 'margin'],
+       example: `
+   <IressText
+     color="text.primary"
+     fontSize="lg"
+   >
+       `,
+       notes: 'Prefer using variant prop for semantic typography',
+     },
+   };
+   ```
+
+4. **Add styling approach decision guide:**
+
+   ```typescript
+   const STYLING_APPROACH_GUIDE = {
+     title: 'When to Use Each Styling Approach',
+     approaches: {
+       styleProps: {
+         when: 'Quick inline styles, layout adjustments, one-off styling',
+         pros: [
+           'Type-safe',
+           'Quick to write',
+           'No CSS files needed',
+           'Automatic theme tokens',
+         ],
+         cons: [
+           'Not reusable',
+           'Can clutter JSX',
+           'Limited to supported props',
+         ],
+         example: '<IressStack spacing="md" padding="lg">',
+       },
+       cssFunction: {
+         when: 'Reusable styles, complex styling, custom components',
+         pros: [
+           'Reusable',
+           'Type-safe',
+           'Full CSS support',
+           'Design token access',
+         ],
+         cons: ['Requires import', 'Extra abstraction'],
+         example: `
+   import { css } from '@iress-oss/ids-components/css';
+   
+   const cardStyles = css({
+     padding: 'spacing.lg',
+     borderRadius: 'md',
+   });
+         `,
+       },
+       designTokens: {
+         when: 'Accessing theme values, ensuring consistency',
+         pros: ['Theme-aware', 'Consistent', 'Semantic naming'],
+         cons: ['Indirect usage', 'Requires token knowledge'],
+         example: '<IressText color="text.primary">',
+       },
+     },
+   };
+   ```
+
+**Impact:**
+
+- ✅ Developers understand available styling props
+- ✅ Clear guidance on when to use each styling approach
+- ✅ Reduced hardcoded styles
+- ✅ Better Panda CSS integration
+- ✅ Component-specific styling documentation
+- ✅ Type-safe styling with autocomplete
+
+### Solution 11: Integration Examples ⭐ MEDIUM PRIORITY
 
 **Approach:** Show how IDS works with popular libraries
 
@@ -1530,12 +2002,13 @@ error={fieldState.error?.message}
 2. **✅ Solution 6: Component Composition Patterns** - Critical for quality UI generation
 3. **✅ Solution 7: Design Tokens Integration** - High priority for consistency
 4. **✅ Solution 9: Context-Aware Code Generation** - High priority for complete examples
-5. **✅ Solution 3: Multi-Component Search** - High impact on UX
-6. **✅ Solution 2: Testing Examples** - Important for test quality
-7. **🔄 Solution 8: Anti-Patterns and Best Practices** - Medium priority
-8. **🔄 Solution 10: Integration Examples** - Medium priority
-9. **🔄 Solution 4: Enhanced Search** - Nice to have
-10. **🔄 Solution 5: Aliases** - Nice to have
+5. **✅ Solution 10: Styling Props Reference** - High priority for reducing hardcoded styles
+6. **✅ Solution 3: Multi-Component Search** - High impact on UX
+7. **✅ Solution 2: Testing Examples** - Important for test quality
+8. **🔄 Solution 8: Anti-Patterns and Best Practices** - Medium priority
+9. **🔄 Solution 11: Integration Examples** - Medium priority
+10. **🔄 Solution 4: Enhanced Search** - Nice to have
+11. **🔄 Solution 5: Aliases** - Nice to have
 
 ## Testing Requirements
 
@@ -1587,6 +2060,15 @@ error={fieldState.error?.message}
 - [ ] Test examples include error handling
 - [ ] Test examples include loading states
 - [ ] Test examples are complete and runnable
+
+### For Styling Props Reference
+
+- [ ] Test layout props reference includes all common props
+- [ ] Test spacing props show correct token values
+- [ ] Test color props use semantic tokens
+- [ ] Test component-specific styling support matrix is accurate
+- [ ] Test styling approach guide provides clear decision criteria
+- [ ] Test Panda CSS integration examples are correct
 
 ### For Integration Examples
 
@@ -1644,6 +2126,7 @@ After implementation:
    - Document `get_design_tokens_usage` with examples
    - Add `get_best_practices` reference guide
    - Document `get_testing_examples` patterns
+   - Add `get_styling_props_reference` comprehensive guide
    - Add `get_integration_examples` library matrix
 
 3. **Developer Guides:**
@@ -1716,13 +2199,14 @@ To maximize the effectiveness of the improved MCP server, developers should:
 - ✅ Solution 2: Testing Examples
 - ✅ Solution 7: Design Tokens Integration
 - ✅ Solution 9: Context-Aware Code Generation
+- ✅ Solution 10: Styling Props Reference
 
-**Goal:** Improve code quality and completeness
+**Goal:** Improve code quality, completeness, and reduce hardcoded styles
 
 ### Phase 3: Advanced Features (Week 5-6)
 
 - 🔄 Solution 8: Anti-Patterns and Best Practices
-- 🔄 Solution 10: Integration Examples
+- 🔄 Solution 11: Integration Examples
 - 🔄 Solution 4: Enhanced Search
 
 **Goal:** Advanced scenarios and integrations
