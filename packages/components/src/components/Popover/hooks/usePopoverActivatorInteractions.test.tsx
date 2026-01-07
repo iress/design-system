@@ -62,25 +62,6 @@ describe('usePopoverActivatorInteractions', () => {
       expect(setShowWithReason).toHaveBeenCalledWith(false, undefined, 'focus');
     });
 
-    it('closes the popover when the user clicks arrow up while the first item is focused', () => {
-      const setShowWithReason = vi.fn();
-      const hook = renderHook(() =>
-        usePopoverActivatorInteractions(
-          getMockPopoverContext({
-            activeIndex: 0,
-            setShowWithReason,
-            show: true,
-          }),
-        ),
-      );
-
-      hook.result.current.onKeyDown({
-        key: 'ArrowUp',
-      } as React.KeyboardEvent<HTMLDivElement>);
-
-      expect(setShowWithReason).toHaveBeenCalledWith(false, undefined, 'focus');
-    });
-
     it('opens the popover when the user clicks arrow down while focused on the activator', () => {
       const setShowWithReason = vi.fn();
       const hook = renderHook(() =>
@@ -173,6 +154,48 @@ describe('usePopoverActivatorInteractions', () => {
       } as unknown as React.KeyboardEvent<HTMLInputElement>);
 
       expect(setActiveIndex).toHaveBeenCalledWith(items.length - 1);
+    });
+
+    it('does NOT close the popover when ArrowUp is pressed on the first item (bug fix)', () => {
+      const setShowWithReason = vi.fn();
+      const hook = renderHook(() =>
+        usePopoverActivatorInteractions(
+          getMockPopoverContext({
+            activeIndex: 0,
+            setShowWithReason,
+            show: true,
+          }),
+        ),
+      );
+
+      hook.result.current.onKeyDown({
+        key: 'ArrowUp',
+      } as React.KeyboardEvent<HTMLDivElement>);
+
+      // Should NOT call setShowWithReason to close the popover
+      expect(setShowWithReason).not.toHaveBeenCalled();
+    });
+
+    it('closes the popover when Escape is pressed', () => {
+      const setShowWithReason = vi.fn();
+      const hook = renderHook(() =>
+        usePopoverActivatorInteractions(
+          getMockPopoverContext({
+            setShowWithReason,
+            show: true,
+          }),
+        ),
+      );
+
+      hook.result.current.onKeyDown({
+        key: 'Escape',
+      } as React.KeyboardEvent<HTMLDivElement>);
+
+      expect(setShowWithReason).toHaveBeenCalledWith(
+        false,
+        undefined,
+        'escape-key',
+      );
     });
   });
 });

@@ -1045,9 +1045,9 @@ describe('useAutocompleteSearch', () => {
         minSearchLength: 2,
       });
 
-      // When autocomplete opens, should display initial options and wait for user input
+      // When autocomplete opens with initial options, should NOT show instructions message
       expect(hook.result.current.results).toEqual(initialOptions);
-      expect(hook.result.current.shouldShowInstructions).toBe(true); // Waiting for input
+      expect(hook.result.current.shouldShowInstructions).toBe(false); // Fixed: No instructions when initialOptions exist
       expect(hook.result.current.shouldShowNoResults).toBe(false); // No search performed yet
       expect(hook.result.current.loading).toBe(false);
     });
@@ -1291,9 +1291,9 @@ describe('useAutocompleteSearch', () => {
         minSearchLength: 2,
       });
 
-      // Initially displays initial options and shows instructions
+      // Initially displays initial options and does NOT show instructions (bug fix)
       expect(hook.result.current.results).toEqual(initialOptions);
-      expect(hook.result.current.shouldShowInstructions).toBe(true);
+      expect(hook.result.current.shouldShowInstructions).toBe(false);
 
       // User types insufficient characters - should continue showing initial options
       hook.rerender({
@@ -1305,7 +1305,7 @@ describe('useAutocompleteSearch', () => {
       });
 
       expect(hook.result.current.results).toEqual(initialOptions);
-      expect(hook.result.current.shouldShowInstructions).toBe(true);
+      expect(hook.result.current.shouldShowInstructions).toBe(false);
 
       // User types sufficient characters - should search and display search results instead
       hook.rerender({
@@ -1333,6 +1333,450 @@ describe('useAutocompleteSearch', () => {
       );
       expect(hook.result.current.shouldShowInstructions).toBe(false);
       expect(hook.result.current.shouldShowNoResults).toBe(false);
+    });
+  });
+
+  describe('Bug Fix: shouldShowInstructions with initialOptions', () => {
+    it('should NOT show instructions when initialOptions are available', () => {
+      const initialOptions = [
+        { label: 'Initial 1', value: '1' },
+        { label: 'Initial 2', value: '2' },
+      ];
+      const hook = renderAutocompleteSearchHook({
+        initialOptions,
+        minSearchLength: 3,
+        query: '',
+      });
+
+      // With initialOptions present, should NOT show "Type X characters" message
+      expect(hook.result.current.shouldShowInstructions).toBe(false);
+      expect(hook.result.current.results).toEqual(initialOptions);
+    });
+
+    it('should show instructions when no initialOptions and query is insufficient', () => {
+      const hook = renderAutocompleteSearchHook({
+        minSearchLength: 3,
+        query: 'ab',
+      });
+
+      // With no initialOptions and insufficient query, SHOULD show instructions
+      expect(hook.result.current.shouldShowInstructions).toBe(true);
+      expect(hook.result.current.results).toEqual([]);
+    });
+
+    it('should NOT show instructions when initialOptions exist even with insufficient query', () => {
+      const initialOptions = [{ label: 'Initial', value: '1' }];
+      const hook = renderAutocompleteSearchHook({
+        initialOptions,
+        minSearchLength: 3,
+        query: 'a', // Insufficient
+      });
+
+      // With initialOptions, should NOT show instructions regardless of query length
+      expect(hook.result.current.shouldShowInstructions).toBe(false);
+      expect(hook.result.current.results).toEqual(initialOptions);
+    });
+  });
+
+  describe('startSearch with force parameter', () => {
+    describe('synchronous options', () => {
+      it('forces search to run even with empty query', async () => {
+        const options = [
+          { label: 'Option 1', value: '1' },
+          { label: 'Option 2', value: '2' },
+          { label: 'Option 3', value: '3' },
+        ];
+
+        const hook = renderAutocompleteSearchHook({
+          options,
+          query: '', // Empty query
+        });
+
+        // Initially should have no results for empty query
+        expect(hook.result.current.results).toHaveLength(0);
+
+        // Force search with empty query
+        act(() => {
+          hook.result.current.startSearch(true);
+        });
+
+        await waitFor(() => {
+          expect(hook.result.current.results).toHaveLength(options.length);
+        });
+      });
+
+      it('forces search to run even below minSearchLength', async () => {
+        const options = [
+          { label: 'Test 1', value: '1' },
+          { label: 'Test 2', value: '2' },
+        ];
+
+        const hook = renderAutocompleteSearchHook({
+          options,
+          query: 'te', // Below minSearchLength
+          minSearchLength: 3,
+        });
+
+        // Should show instructions initially
+        expect(hook.result.current.shouldShowInstructions).toBe(true);
+        expect(hook.result.current.results).toHaveLength(0);
+
+        // Force search despite being below minSearchLength
+        act(() => {
+          hook.result.current.startSearch(true);
+        });
+
+        await waitFor(() => {
+          expect(hook.result.current.results).toHaveLength(options.length);
+          expect(hook.result.current.shouldShowInstructions).toBe(false);
+        });
+      });
+
+      it('bypasses duplicate query check when forced', async () => {
+        const options = [
+          { label: 'Same Query', value: '1' },
+          { label: 'Same Result', value: '2' },
+        ];
+
+        const hook = renderAutocompleteSearchHook({
+          options,
+          query: 'same',
+        });
+
+        // Wait for initial search
+        await waitFor(() => {
+          expect(hook.result.current.results).toHaveLength(options.length);
+        });
+
+        const initialResults = hook.result.current.results;
+
+        // Force search again with same query (should bypass shouldSkipQuery check)
+        act(() => {
+          hook.result.current.startSearch(true);
+        });
+
+        await waitFor(() => {
+          // Results should be refreshed (new highlighting instances)
+          expect(hook.result.current.results).toHaveLength(options.length);
+        });
+
+        // Should still have results even though query didn't change
+        expect(hook.result.current.results).not.toBe(initialResults);
+      });
+
+      it('does not force search when force=false with insufficient query', async () => {
+        const options = [{ label: 'Test', value: '1' }];
+
+        const hook = renderAutocompleteSearchHook({
+          options,
+          query: 'te',
+          minSearchLength: 3,
+        });
+
+        expect(hook.result.current.results).toHaveLength(0);
+
+        // Call startSearch without force (or force=false)
+        act(() => {
+          hook.result.current.startSearch(false);
+        });
+
+        // Should still have no results
+        await waitFor(() => {
+          expect(hook.result.current.results).toHaveLength(0);
+        });
+      });
+    });
+
+    describe('asynchronous options', () => {
+      it('forces async search to run even with empty query', async () => {
+        const mockResults = [
+          { label: 'Async 1', value: '1' },
+          { label: 'Async 2', value: '2' },
+        ];
+
+        const asyncSearchFn = vi.fn().mockResolvedValue(mockResults);
+
+        const hook = renderAutocompleteSearchHook({
+          options: asyncSearchFn,
+          query: '', // Empty query
+        });
+
+        // Initially should have no results and no search call
+        expect(hook.result.current.results).toHaveLength(0);
+        expect(asyncSearchFn).not.toHaveBeenCalled();
+
+        // Force search with empty query
+        act(() => {
+          hook.result.current.startSearch(true);
+        });
+
+        // Should trigger async search
+        await waitFor(() => {
+          expect(asyncSearchFn).toHaveBeenCalledWith('');
+          expect(hook.result.current.loading).toBe(false);
+        });
+
+        expect(hook.result.current.results).toHaveLength(mockResults.length);
+      });
+
+      it('forces async search to run even below minSearchLength', async () => {
+        const mockResults = [{ label: 'Result', value: '1' }];
+        const asyncSearchFn = vi.fn().mockResolvedValue(mockResults);
+
+        const hook = renderAutocompleteSearchHook({
+          options: asyncSearchFn,
+          query: 'ab', // Below minSearchLength
+          minSearchLength: 3,
+        });
+
+        // Should show instructions initially
+        expect(hook.result.current.shouldShowInstructions).toBe(true);
+        expect(asyncSearchFn).not.toHaveBeenCalled();
+
+        // Force search despite being below minSearchLength
+        act(() => {
+          hook.result.current.startSearch(true);
+        });
+
+        await waitFor(() => {
+          expect(asyncSearchFn).toHaveBeenCalledWith('ab');
+          expect(hook.result.current.loading).toBe(false);
+        });
+
+        expect(hook.result.current.results).toHaveLength(mockResults.length);
+      });
+
+      it('bypasses duplicate query check for async search when forced', async () => {
+        const mockResults = [{ label: 'Same', value: '1' }];
+        const asyncSearchFn = vi.fn().mockResolvedValue(mockResults);
+
+        const hook = renderAutocompleteSearchHook({
+          options: asyncSearchFn,
+          query: 'same',
+        });
+
+        // Wait for initial search
+        await waitFor(() => {
+          expect(asyncSearchFn).toHaveBeenCalledTimes(1);
+          expect(hook.result.current.loading).toBe(false);
+        });
+
+        // Force search again with same query
+        act(() => {
+          hook.result.current.startSearch(true);
+        });
+
+        await waitFor(() => {
+          expect(asyncSearchFn).toHaveBeenCalledTimes(2);
+          expect(hook.result.current.loading).toBe(false);
+        });
+
+        expect(hook.result.current.results).toHaveLength(mockResults.length);
+      });
+
+      it('handles errors correctly when forced async search fails', async () => {
+        const errorMessage = 'Forced search failed';
+        const asyncSearchFn = vi
+          .fn()
+          .mockRejectedValue(new Error(errorMessage));
+
+        const hook = renderAutocompleteSearchHook({
+          options: asyncSearchFn,
+          query: '',
+        });
+
+        // Force search with empty query
+        act(() => {
+          hook.result.current.startSearch(true);
+        });
+
+        await waitFor(() => {
+          expect(asyncSearchFn).toHaveBeenCalledWith('');
+          expect(hook.result.current.loading).toBe(false);
+        });
+
+        expect(hook.result.current.error).toBe(errorMessage);
+        expect(hook.result.current.results).toHaveLength(0);
+      });
+
+      it('respects race condition protection with forced searches', async () => {
+        let resolveFirst: (value: LabelValueMeta[]) => void;
+        let resolveSecond: (value: LabelValueMeta[]) => void;
+
+        const firstPromise = new Promise<LabelValueMeta[]>((resolve) => {
+          resolveFirst = resolve;
+        });
+        const secondPromise = new Promise<LabelValueMeta[]>((resolve) => {
+          resolveSecond = resolve;
+        });
+
+        const asyncSearchFn = vi
+          .fn()
+          .mockReturnValueOnce(firstPromise)
+          .mockReturnValueOnce(secondPromise);
+
+        const hook = renderAutocompleteSearchHook({
+          options: asyncSearchFn,
+          query: 'first',
+        });
+
+        // Wait for first search to be triggered
+        await waitFor(() => expect(asyncSearchFn).toHaveBeenCalledTimes(1));
+
+        // Force a second search before first completes
+        act(() => {
+          hook.result.current.startSearch(true);
+        });
+
+        await waitFor(() => expect(asyncSearchFn).toHaveBeenCalledTimes(2));
+
+        // Resolve second search first (out of order)
+        act(() => {
+          resolveSecond!([{ label: 'Second Result', value: '2' }]);
+        });
+
+        await waitFor(() => expect(hook.result.current.loading).toBe(false));
+        expect(hook.result.current.results[0]?.label).toBe('Second Result');
+
+        // Resolve first search (should be ignored due to race condition protection)
+        act(() => {
+          resolveFirst!([{ label: 'First Result', value: '1' }]);
+        });
+
+        // Results should still be from second search
+        await waitFor(() => {
+          expect(hook.result.current.results[0]?.label).toBe('Second Result');
+        });
+      });
+    });
+
+    describe('integration with normal search flow', () => {
+      it('normal search after forced search works correctly', async () => {
+        const options = [
+          { label: 'Apple', value: '1' },
+          { label: 'Banana', value: '2' },
+          { label: 'Cherry', value: '3' },
+        ];
+
+        const hook = renderAutocompleteSearchHook({
+          options,
+          query: '',
+        });
+
+        // Force search with empty query
+        act(() => {
+          hook.result.current.startSearch(true);
+        });
+
+        await waitFor(() => {
+          expect(hook.result.current.results).toHaveLength(3);
+        });
+
+        // Normal search with query
+        hook.rerender({
+          ...DEFAULT_PROPS,
+          options,
+          query: 'app',
+        });
+
+        await waitFor(() => {
+          expect(hook.result.current.results).toHaveLength(1);
+          expect(hook.result.current.results[0].label).toBe('Apple');
+        });
+      });
+
+      it('forced search after normal search works correctly', async () => {
+        const options = [
+          { label: 'Test 1', value: '1' },
+          { label: 'Test 2', value: '2' },
+        ];
+
+        const hook = renderAutocompleteSearchHook({
+          options,
+          query: 'test',
+        });
+
+        // Wait for normal search
+        await waitFor(() => {
+          expect(hook.result.current.results).toHaveLength(2);
+        });
+
+        // Clear query
+        hook.rerender({
+          ...DEFAULT_PROPS,
+          options,
+          query: '',
+        });
+
+        await waitFor(() => {
+          expect(hook.result.current.results).toHaveLength(0);
+        });
+
+        // Force search with empty query
+        act(() => {
+          hook.result.current.startSearch(true);
+        });
+
+        await waitFor(() => {
+          expect(hook.result.current.results).toHaveLength(2);
+        });
+      });
+    });
+  });
+
+  describe('stopSearch functionality', () => {
+    it('resets search state when stopSearch is called', async () => {
+      const options = [
+        { label: 'Test 1', value: '1' },
+        { label: 'Test 2', value: '2' },
+      ];
+
+      const hook = renderAutocompleteSearchHook({
+        options,
+        query: 'test',
+      });
+
+      // Wait for search results
+      await waitFor(() => {
+        expect(hook.result.current.results).toHaveLength(2);
+      });
+
+      // Stop search
+      act(() => {
+        hook.result.current.stopSearch();
+      });
+
+      await waitFor(() => {
+        expect(hook.result.current.results).toHaveLength(0);
+        expect(hook.result.current.loading).toBe(false);
+        expect(hook.result.current.error).toBe(false);
+      });
+    });
+
+    it('clears error state when stopSearch is called', async () => {
+      const asyncSearchFn = vi
+        .fn()
+        .mockRejectedValue(new Error('Search failed'));
+
+      const hook = renderAutocompleteSearchHook({
+        options: asyncSearchFn,
+        query: 'test',
+      });
+
+      // Wait for error
+      await waitFor(() => {
+        expect(hook.result.current.error).toBeTruthy();
+      });
+
+      // Stop search should clear error
+      act(() => {
+        hook.result.current.stopSearch();
+      });
+
+      await waitFor(() => {
+        expect(hook.result.current.error).toBe(false);
+        expect(hook.result.current.results).toHaveLength(0);
+      });
     });
   });
 });

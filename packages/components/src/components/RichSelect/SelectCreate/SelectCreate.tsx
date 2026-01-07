@@ -3,12 +3,12 @@ import { useIdIfNeeded } from '@/hooks';
 import { type MouseEvent, type ReactNode } from 'react';
 import {
   IressMenu,
-  IressMenuHeading,
   IressMenuItem,
   type IressMenuItemProps,
   type IressMenuProps,
 } from '../../Menu';
 import { IressIcon } from '@/components/Icon';
+import { IressSelectHeading } from '../SelectHeading/SelectHeading';
 
 export interface IressSelectCreateProps
   extends
@@ -77,7 +77,7 @@ export const IressSelectCreate = ({
       fluid={fluid}
     >
       {hasStringHeading ? (
-        <IressMenuHeading id={labelId}>{heading}</IressMenuHeading>
+        <IressSelectHeading id={labelId}>{heading}</IressSelectHeading>
       ) : (
         heading
       )}
