@@ -3,8 +3,7 @@
     "baseUrl": "./",
     "types": ["vitest/globals", "node"],
     "paths": {
-      "~/*": ["./src/*"],
-      "~/extras/*": ["../extras/*"]
+      "~/*": ["./src/*"]
     },
     "checkJs": true,
     "target": "ES2022",

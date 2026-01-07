@@ -9,13 +9,16 @@ import {
 import {
   handleGetUsageExamples,
   handleSearchIdsDocs,
-  handleGetDesignTokens,
   handleGetDesignGuidelines,
 } from './searchHandlers.js';
 import {
   handleGetIressComponentInfo,
   handleAnalyzeComponentMentions,
 } from './iressHandlers.js';
+import {
+  handleGetDesignTokensUsage,
+  handleGetDesignTokens,
+} from './tokenHandlers.js';
 
 interface ToolCallRequest {
   params: {
@@ -45,6 +48,9 @@ export function handleToolCall(request: ToolCallRequest) {
 
     case 'get_design_tokens':
       return handleGetDesignTokens(args);
+
+    case 'get_design_tokens_usage':
+      return handleGetDesignTokensUsage(args as { category?: string });
 
     case 'get_iress_component_info':
       return handleGetIressComponentInfo(args);

@@ -1418,6 +1418,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-mcp-server@workspace:packages/mcp-server"
   dependencies:
+    "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.5"
     "@modelcontextprotocol/inspector": "npm:0.18.0"
     "@modelcontextprotocol/sdk": "npm:1.25.1"
     "@types/minimist": "npm:1.2.5"

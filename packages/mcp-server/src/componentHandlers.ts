@@ -437,11 +437,27 @@ export function handleGetComponentProps(args: unknown) {
     const content = readFileContent(filePath);
     const propSections = extractPropSections(content);
 
+    // Most IDS components support styling props - add helpful token usage guidance
+    // We include the hint for all components since even components without full styling props
+    // often accept margin/padding props, and the guidance is beneficial for AI code generation
+    const tokenUsageHint =
+      '\n\n---\n\n**💡 Token Usage Tip**\n\n' +
+      'Most IDS components support styling props that accept design tokens. ' +
+      'Always prefer tokens over hardcoded values for consistency and theming support.\n\n' +
+      '**Common styling props:**\n' +
+      '- Spacing: `p="md"`, `m="lg"`, `px="sm"`, `py="xl"`\n' +
+      '- Colors: `bg="colour.primary.fill"`, `color="colour.primary.text"`\n' +
+      '- Typography: `textStyle="typography.body.lg"`\n' +
+      '- Layout: `maxWidth`, `width`, `textAlign`\n\n' +
+      '✅ **DO**: Use design tokens for consistency and theming\n' +
+      '❌ **DON\'T**: Use `style={{ padding: "16px" }}` or hardcoded colors\n\n' +
+      '*Use `get_design_tokens_usage` tool for complete token usage guidelines and best practices.*';
+
     return {
       content: [
         {
           type: 'text',
-          text: `**${component} Component Props & API**\n\n${formatPropsResponse(propSections, content, componentFile)}`,
+          text: `**${component} Component Props & API**\n\n${formatPropsResponse(propSections, content, componentFile)}${tokenUsageHint}`,
         },
       ],
     };
