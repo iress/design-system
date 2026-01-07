@@ -155,6 +155,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
       error,
       loading,
       results,
+      startSearch,
       stopSearch,
       shouldShowInstructions,
       shouldShowNoResults,
@@ -188,7 +189,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
     ) => {
       onChange?.(e, newValue);
       setValue(newValue);
-      setValueChanged(true);
+      setValueChanged(!!newValue); // Only set to true if there's a value
     };
 
     const handleInputClear: IressInputProps['onClear'] = (e) => {
@@ -231,8 +232,26 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
         }
       };
 
+    const handleInputKeyDown: IressInputProps['onKeyDown'] = (e) => {
+      restProps.onKeyDown?.(e);
+
+      // When Down key is pressed, open the popover and start search
+      if (e.key === 'ArrowDown' && (!show || !valueChanged)) {
+        if (!results.length) {
+          startSearch(true);
+        }
+
+        setValueChanged(true);
+        setShow(true);
+      }
+    };
+
     const classes = autoCompleteStyles({
-      isEmpty: results.length === 0,
+      isEmpty:
+        results.length === 0 &&
+        !error &&
+        !shouldShowInstructions &&
+        !shouldShowNoResults,
     });
 
     return (
@@ -249,6 +268,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
             onChange={handleInputChange}
             onClear={handleInputClear}
             onFocus={handleInputFocus}
+            onKeyDown={handleInputKeyDown}
             value={value}
             ref={ref}
           />
