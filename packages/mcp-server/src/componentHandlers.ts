@@ -8,9 +8,14 @@ import {
   mapIressComponentToFile,
   extractIressComponents,
   readFileContent,
+  parseMultiComponentQuery,
 } from './utils.js';
 import { DOCS_DIR } from './config.js';
-import { type SearchResult, type ComponentCategories } from './types.js';
+import {
+  type SearchResult,
+  type ComponentCategories,
+  type ComponentSearchResult,
+} from './types.js';
 
 function checkIressComponentMatch(query: string) {
   if (query.startsWith('Iress')) {
@@ -98,6 +103,171 @@ function createSearchResult(
   };
 }
 
+/**
+ * Categorize file as component, pattern, or foundation
+ */
+function categorizeFile(
+  filename: string,
+): 'component' | 'pattern' | 'foundation' {
+  // New naming convention with namespace prefix
+  if (filename.startsWith('components_patterns-')) return 'pattern';
+  if (filename.startsWith('components_foundations-')) return 'foundation';
+  if (filename.startsWith('components_components-')) return 'component';
+
+  // Legacy naming convention (without namespace prefix)
+  if (filename.startsWith('patterns-')) return 'pattern';
+  if (filename.startsWith('foundations-')) return 'foundation';
+
+  return 'component';
+}
+
+/**
+ * Extract description from documentation content
+ */
+function extractDescription(lines: string[]): string {
+  // Look for first paragraph after title
+  const descriptionStart = lines.findIndex(
+    (line) =>
+      (line.startsWith('##') && !line.startsWith('###')) ||
+      (line.trim().length > 50 && !line.startsWith('#')),
+  );
+
+  if (descriptionStart === -1) return '';
+
+  return lines[descriptionStart]
+    .replace(/^#+\s*/, '')
+    .trim()
+    .slice(0, 200);
+}
+
+/**
+ * Format individual component summary
+ */
+function formatComponentSummary(result: ComponentSearchResult): string {
+  const typeEmoji = {
+    component: '🧩',
+    pattern: '📐',
+    foundation: '🏗️',
+  };
+
+  const emoji = result.type ? typeEmoji[result.type] : '📦';
+  const typeLabel = result.type
+    ? result.type.charAt(0).toUpperCase() + result.type.slice(1)
+    : 'Unknown';
+
+  let output = `${emoji} **${result.component}**\n`;
+  output += `Type: ${typeLabel}\n`;
+
+  if (result.file) {
+    output += `File: ${result.file}\n`;
+  }
+
+  output += `\n${result.description}\n`;
+
+  if (result.content) {
+    const contentPreview = result.content.slice(0, 500);
+    output += `\n\`\`\`\n${contentPreview}${result.content.length > 500 ? '...' : ''}\n\`\`\`\n`;
+  }
+
+  return output;
+}
+
+/**
+ * Format search results for multiple components
+ */
+function formatMultiComponentResults(results: ComponentSearchResult[]): string {
+  const foundResults = results.filter((r) => r.found);
+  const notFoundResults = results.filter((r) => !r.found);
+
+  let output = '';
+
+  // Header summary
+  if (foundResults.length > 0) {
+    output += `Found ${foundResults.length} component${foundResults.length !== 1 ? 's' : ''}:\n\n`;
+  }
+
+  // Found components
+  for (const result of foundResults) {
+    output += formatComponentSummary(result);
+    output += '\n---\n\n';
+  }
+
+  // Not found components
+  if (notFoundResults.length > 0) {
+    output += `\n❌ Not found (${notFoundResults.length}):\n`;
+    for (const result of notFoundResults) {
+      output += `- ${result.component}\n`;
+    }
+  }
+
+  return output.trim();
+}
+
+/**
+ * Search for multiple components and return combined results
+ */
+function handleMultiComponentSearch(
+  componentNames: string[],
+  category?: string,
+) {
+  const results: ComponentSearchResult[] = [];
+
+  for (const componentName of componentNames) {
+    // Map component to documentation file
+    const file = mapIressComponentToFile(componentName);
+
+    if (file) {
+      // Read and extract content
+      const filePath = path.join(DOCS_DIR, file);
+      const content = readFileContent(filePath);
+      const lines = content.split('\n');
+
+      // Extract metadata
+      const description = extractDescription(lines);
+      const type = categorizeFile(file);
+
+      // Apply category filter if provided
+      // Note: category uses plural form ('components'), type uses singular ('component')
+      const categoryMatchesType =
+        (category === 'components' && type === 'component') ||
+        (category === 'foundations' && type === 'foundation') ||
+        (category === 'resources' && type === 'pattern'); // Patterns aren't in resources typically
+
+      if (category && !categoryMatchesType) {
+        // Skip components that don't match the category filter
+        continue;
+      }
+
+      results.push({
+        component: componentName,
+        found: true,
+        file,
+        type,
+        description,
+        content: content.slice(0, 1000), // First 1000 chars
+      });
+    } else {
+      // Only add not-found components if no category filter, or always add them
+      results.push({
+        component: componentName,
+        found: false,
+        file: null,
+        type: null,
+        description: 'Component not found in documentation',
+      });
+    }
+  }
+
+  return {
+    content: [
+      {
+        type: 'text' as const,
+        text: formatMultiComponentResults(results),
+      },
+    ],
+  };
+}
+
 export function handleFindComponent(args: unknown) {
   const schema = z.object({
     query: z.string(),
@@ -105,6 +275,14 @@ export function handleFindComponent(args: unknown) {
   });
 
   const { query, category } = schema.parse(args);
+
+  // ENHANCEMENT: Detect multiple components
+  const componentNames = parseMultiComponentQuery(query);
+
+  if (componentNames.length > 1) {
+    // Multi-component search
+    return handleMultiComponentSearch(componentNames, category);
+  }
 
   // Check if query is an Iress component name
   const iressMatch = checkIressComponentMatch(query);

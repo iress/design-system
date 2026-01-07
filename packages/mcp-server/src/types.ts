@@ -39,3 +39,12 @@ export interface FileOperationResult {
   content?: string;
   error?: Error;
 }
+
+export interface ComponentSearchResult {
+  component: string;
+  found: boolean;
+  file: string | null;
+  type: 'component' | 'pattern' | 'foundation' | null;
+  description: string;
+  content?: string;
+}

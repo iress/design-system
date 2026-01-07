@@ -24,6 +24,7 @@
     "clean": "rimraf coverage dist",
     "collect": "tsx scripts/collect.ts",
     "dev": "mcp-inspector tsx src/index.ts",
+    "dev:kill": "kill $(lsof -ti tcp:6277) || true; kill $(lsof -ti tcp:6244) || true",
     "generate": "tsx scripts/generate.ts",
     "guidelines": "tsx scripts/guidelines.ts",
     "lint": "npx eslint . --max-warnings 0",

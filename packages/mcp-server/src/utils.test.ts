@@ -18,6 +18,7 @@ import {
   extractIressComponents,
   readFileContent,
   fileExists,
+  parseMultiComponentQuery,
 } from './utils.js';
 
 // Mock fs module
@@ -611,6 +612,151 @@ describe('utils', () => {
       expect(fileExists(' ')).toBe(false);
       expect(fileExists('.')).toBe(false);
       expect(fileExists('..')).toBe(false);
+    });
+  });
+
+  describe('parseMultiComponentQuery', () => {
+    it('should detect multiple Iress-prefixed components', () => {
+      const result = parseMultiComponentQuery('IressForm IressSelect');
+
+      expect(result).toEqual(['IressForm', 'IressSelect']);
+    });
+
+    it('should detect multiple unprefixed component names', () => {
+      const result = parseMultiComponentQuery('Form Select Button');
+
+      expect(result).toEqual(['IressForm', 'IressSelect', 'IressButton']);
+    });
+
+    it('should handle mixed prefixed and unprefixed components', () => {
+      const result = parseMultiComponentQuery('IressForm Select Button');
+
+      expect(result).toEqual(['IressForm', 'IressSelect', 'IressButton']);
+    });
+
+    it('should return empty array for single component', () => {
+      expect(parseMultiComponentQuery('IressForm')).toEqual([]);
+      expect(parseMultiComponentQuery('Form')).toEqual([]);
+      expect(parseMultiComponentQuery('Button')).toEqual([]);
+    });
+
+    it('should filter out common words', () => {
+      const result = parseMultiComponentQuery('Form and Select with Button');
+
+      expect(result).toEqual(['IressForm', 'IressSelect', 'IressButton']);
+    });
+
+    it('should handle empty string', () => {
+      const result = parseMultiComponentQuery('');
+
+      expect(result).toEqual([]);
+    });
+
+    it('should require minimum word length of 3', () => {
+      const result = parseMultiComponentQuery('A B C Form Select');
+
+      expect(result).toEqual(['IressForm', 'IressSelect']);
+    });
+
+    it('should require capitalized words', () => {
+      const result = parseMultiComponentQuery('form select button');
+
+      expect(result).toEqual([]);
+    });
+
+    it('should filter out excluded words regardless of case', () => {
+      const result = parseMultiComponentQuery('Form And Select With Button');
+
+      expect(result).toEqual(['IressForm', 'IressSelect', 'IressButton']);
+    });
+
+    it('should handle component names that already have Iress prefix', () => {
+      const result = parseMultiComponentQuery(
+        'IressButton IressInput IressSelect',
+      );
+
+      expect(result).toEqual(['IressButton', 'IressInput', 'IressSelect']);
+    });
+
+    it('should handle multiple spaces between words', () => {
+      const result = parseMultiComponentQuery('Form    Select     Button');
+
+      expect(result).toEqual(['IressForm', 'IressSelect', 'IressButton']);
+    });
+
+    it('should handle trailing and leading spaces', () => {
+      const result = parseMultiComponentQuery('  Form Select Button  ');
+
+      expect(result).toEqual(['IressForm', 'IressSelect', 'IressButton']);
+    });
+
+    it('should handle newlines and tabs', () => {
+      const result = parseMultiComponentQuery('Form\nSelect\tButton');
+
+      expect(result).toEqual(['IressForm', 'IressSelect', 'IressButton']);
+    });
+
+    it('should maintain unique component names when duplicates present', () => {
+      const result = parseMultiComponentQuery(
+        'IressForm IressSelect IressForm',
+      );
+
+      // extractIressComponents already handles deduplication
+      expect(result).toEqual(['IressForm', 'IressSelect']);
+    });
+
+    it('should handle complex queries with multiple components and text', () => {
+      const result = parseMultiComponentQuery(
+        'I need Form and Select for the user interface',
+      );
+
+      expect(result).toEqual(['IressForm', 'IressSelect']);
+    });
+
+    it('should exclude words that are too short even if capitalized', () => {
+      const result = parseMultiComponentQuery('To In On Form Select');
+
+      expect(result).toEqual(['IressForm', 'IressSelect']);
+    });
+
+    it('should handle camelCase component names', () => {
+      const result = parseMultiComponentQuery('DatePicker TimePicker');
+
+      expect(result).toEqual(['IressDatePicker', 'IressTimePicker']);
+    });
+
+    it('should handle three or more components', () => {
+      const result = parseMultiComponentQuery(
+        'Button Input Select Form Table Card',
+      );
+
+      expect(result).toEqual([
+        'IressButton',
+        'IressInput',
+        'IressSelect',
+        'IressForm',
+        'IressTable',
+        'IressCard',
+      ]);
+    });
+
+    it('should return empty for queries with only excluded words', () => {
+      const result = parseMultiComponentQuery('and or the with for');
+
+      expect(result).toEqual([]);
+    });
+
+    it('should return empty for queries with only lowercase words', () => {
+      const result = parseMultiComponentQuery('button input select');
+
+      expect(result).toEqual([]);
+    });
+
+    it('should handle punctuation in queries', () => {
+      const result = parseMultiComponentQuery('Form, Select, and Button');
+
+      // Commas create separate words, 'and' is filtered
+      expect(result).toEqual(['IressForm', 'IressSelect', 'IressButton']);
     });
   });
 

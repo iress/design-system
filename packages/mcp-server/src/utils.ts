@@ -42,37 +42,75 @@ export function mapIressComponentToFile(componentName: string): string | null {
 
   const markdownFiles = getMarkdownFiles();
 
-  // 1. Try exact component match first (maintain existing behavior)
+  // 1. Try exact component match with namespace prefix (e.g., components_components-button-docs.md)
   let matchingFile = markdownFiles.find(
+    (file) => file === `components_components-${baseComponentName}-docs.md`,
+  );
+
+  // 2. Try exact pattern match with namespace prefix (e.g., components_patterns-form-docs.md)
+  matchingFile ??= markdownFiles.find(
+    (file) => file === `components_patterns-${baseComponentName}-docs.md`,
+  );
+
+  // 3. Try exact component match without namespace (legacy support)
+  matchingFile ??= markdownFiles.find(
     (file) => file === `components-${baseComponentName}-docs.md`,
   );
 
-  // 2. Try exact pattern match
+  // 4. Try exact pattern match without namespace (legacy support)
   matchingFile ??= markdownFiles.find(
     (file) => file === `patterns-${baseComponentName}-docs.md`,
   );
 
-  // 3. Try partial component matching
+  // 5. Try partial component matching with namespace
+  matchingFile ??= markdownFiles.find(
+    (file) =>
+      file.startsWith(`components_components-${baseComponentName}`) &&
+      file.endsWith('-docs.md'),
+  );
+
+  // 6. Try partial pattern matching with namespace
+  matchingFile ??= markdownFiles.find(
+    (file) =>
+      file.startsWith(`components_patterns-${baseComponentName}`) &&
+      file.endsWith('-docs.md'),
+  );
+
+  // 7. Try partial component matching without namespace (legacy)
   matchingFile ??= markdownFiles.find(
     (file) =>
       file.startsWith(`components-${baseComponentName}`) &&
       file.endsWith('-docs.md'),
   );
 
-  // 4. Try partial pattern matching
+  // 8. Try partial pattern matching without namespace (legacy)
   matchingFile ??= markdownFiles.find(
     (file) =>
       file.startsWith(`patterns-${baseComponentName}`) &&
       file.endsWith('-docs.md'),
   );
 
-  // 5. Try fuzzy component matching
+  // 9. Try fuzzy component matching (with namespace first)
+  matchingFile ??= markdownFiles.find(
+    (file) =>
+      file.includes(baseComponentName) &&
+      file.startsWith('components_components-'),
+  );
+
+  // 10. Try fuzzy pattern matching (with namespace first)
+  matchingFile ??= markdownFiles.find(
+    (file) =>
+      file.includes(baseComponentName) &&
+      file.startsWith('components_patterns-'),
+  );
+
+  // 11. Try fuzzy component matching (without namespace, legacy)
   matchingFile ??= markdownFiles.find(
     (file) =>
       file.includes(baseComponentName) && file.startsWith('components-'),
   );
 
-  // 6. Try fuzzy pattern matching
+  // 12. Try fuzzy pattern matching (without namespace, legacy)
   matchingFile ??= markdownFiles.find(
     (file) => file.includes(baseComponentName) && file.startsWith('patterns-'),
   );
@@ -87,6 +125,67 @@ export function extractIressComponents(text: string): string[] {
   const iressComponentRegex = /Iress[A-Z][a-zA-Z]*/g;
   const matches = text.match(iressComponentRegex) ?? [];
   return [...new Set(matches)]; // Remove duplicates
+}
+
+/**
+ * Parse a query string to extract multiple component names
+ * Supports both "IressForm IressSelect" and "Form Select" formats
+ */
+export function parseMultiComponentQuery(query: string): string[] {
+  // First try to extract Iress-prefixed components
+  const iressComponents = extractIressComponents(query);
+  if (iressComponents.length > 1) {
+    return iressComponents;
+  }
+
+  // Try splitting by whitespace for queries like "Form Select Button"
+  const words = query
+    .split(/\s+/)
+    .map((word) => word.trim())
+    // Remove punctuation from words
+    .map((word) => word.replace(/[.,;!?]+$/g, ''))
+    .filter((word) => word.length > 0);
+
+  // Filter for potential component names
+  // - Must be at least 3 characters
+  // - Should start with capital letter (PascalCase)
+  // - Exclude common words that aren't components
+  const EXCLUDED_WORDS = new Set([
+    'and',
+    'or',
+    'the',
+    'with',
+    'for',
+    'from',
+    'to',
+    'in',
+    'on',
+    'a',
+    'an',
+    'is',
+    'are',
+    'was',
+    'were',
+    'has',
+    'have',
+  ]);
+
+  const potentialComponents = words.filter((word) => {
+    if (word.length < 3) return false;
+    if (EXCLUDED_WORDS.has(word.toLowerCase())) return false;
+    if (!/^[A-Z]/.test(word)) return false; // Must start with capital
+    return true;
+  });
+
+  if (potentialComponents.length > 1) {
+    // Add "Iress" prefix if not present
+    return potentialComponents.map((name) =>
+      name.startsWith('Iress') ? name : `Iress${name}`,
+    );
+  }
+
+  // Return empty array to signal single-component search
+  return [];
 }
 
 /**

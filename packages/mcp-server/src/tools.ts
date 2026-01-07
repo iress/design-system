@@ -6,14 +6,14 @@ export const toolDefinitions = [
   {
     name: 'find_component',
     description:
-      'Find IDS components by name or functionality. Perfect for discovering which component to use for specific UI needs.',
+      'Find IDS components by name or functionality. Supports searching for multiple components at once (e.g., "IressForm IressSelect" or "Button Input"). Perfect for discovering which components to use for specific UI needs.',
     inputSchema: {
       type: 'object',
       properties: {
         query: {
           type: 'string',
           description:
-            "Component name (e.g., 'button', 'input') or functionality (e.g., 'form submission', 'navigation')",
+            "Component name (e.g., 'button', 'input') or functionality (e.g., 'form submission', 'navigation'). Can also search for multiple components at once (e.g., 'IressForm IressSelect' or 'Button Input Select')",
         },
         category: {
           type: 'string',
