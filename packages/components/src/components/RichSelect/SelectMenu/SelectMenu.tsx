@@ -1,6 +1,5 @@
 import {
   IressMenu,
-  IressMenuHeading,
   IressMenuText,
   type IressMenuItemProps,
   type IressMenuProps,
@@ -21,6 +20,7 @@ import { selectMenu } from './SelectMenu.styles';
 import { GlobalCSSClass } from '@/enums';
 import { cx } from '@/styled-system/css';
 import { type FormControlValue } from '@/types';
+import { IressSelectHeading } from '../SelectHeading/SelectHeading';
 
 export interface IressSelectMenuProps<
   TMultiple extends boolean = false,
@@ -168,7 +168,7 @@ export const IressSelectMenu = <TMultiple extends boolean = false>({
       )}
     >
       {typeof heading === 'string' ? (
-        <IressMenuHeading id={labelId}>{heading}</IressMenuHeading>
+        <IressSelectHeading id={labelId}>{heading}</IressSelectHeading>
       ) : (
         heading
       )}

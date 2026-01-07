@@ -221,6 +221,219 @@ describe('IressAutocomplete', () => {
           expect.objectContaining(MOCK_LABEL_VALUE_META[2]),
         );
       });
+
+      it('closes the popover when Escape key is pressed', async () => {
+        renderAutocomplete();
+
+        const input = screen.getByRole('combobox');
+        await userEvent.type(input, 'opt');
+
+        // Wait for the popover to open and show options
+        await screen.findAllByRole('option');
+        const listbox = screen.getByRole('listbox');
+        expect(listbox).toBeVisible();
+
+        // Press Escape key
+        await userEvent.type(input, '{Escape}');
+
+        // Verify the popover is closed
+        await waitFor(() => {
+          expect(listbox).not.toBeVisible();
+        });
+      });
+
+      it('opens popover with Down key even without initial options', async () => {
+        renderAutocomplete({
+          // No initial options
+          initialOptions: undefined,
+        });
+
+        const input = screen.getByRole('combobox');
+
+        // Press Down key without typing first
+        await userEvent.type(input, '{ArrowDown}');
+
+        // Type to trigger search
+        await userEvent.type(input, 'opt');
+
+        // Wait for the popover to open and show options
+        const options = await screen.findAllByRole('option');
+        expect(options.length).toBeGreaterThan(0);
+      });
+
+      it('triggers async search on Down key with existing value', async () => {
+        const mockAsyncOptions = vi.fn(async (query: string) => {
+          return query.length >= 1
+            ? [
+                { label: `Async Result 1 for ${query}` },
+                { label: `Async Result 2 for ${query}` },
+              ]
+            : [];
+        });
+
+        renderAutocomplete({
+          value: 'test',
+          options: mockAsyncOptions,
+          minSearchLength: 1,
+        });
+
+        const input = screen.getByRole('combobox');
+
+        // Press Down key with existing value (first focus scenario)
+        await userEvent.type(input, '{ArrowDown}');
+
+        // Should trigger async search with the existing value
+        await waitFor(() => {
+          expect(mockAsyncOptions).toHaveBeenCalledWith('test');
+        });
+
+        // Wait for the popover to show results
+        const options = await screen.findAllByRole('option');
+        expect(options.length).toBe(2);
+        expect(options[0]).toHaveTextContent('Async Result 1 for test');
+      });
+    });
+
+    describe('keyboard interactions', () => {
+      describe('ArrowDown key', () => {
+        it('opens popover and shows all options when pressed with empty input', async () => {
+          renderAutocomplete();
+
+          const input = screen.getByRole('combobox');
+          const popoverContent = screen.getByTestId('test-component__content');
+
+          // Initially closed
+          expect(popoverContent).not.toBeVisible();
+
+          // Press ArrowDown on empty input
+          await userEvent.type(input, '{ArrowDown}');
+
+          // Should open popover with all options (forced search)
+          const options = await screen.findAllByRole('option');
+          expect(options.length).toBe(MOCK_LABEL_VALUE_META.length);
+          expect(popoverContent).toBeVisible();
+        });
+
+        it('triggers forced search when no results exist', async () => {
+          const mockAsyncOptions = vi.fn(async () => {
+            return MOCK_LABEL_VALUE_META;
+          });
+
+          renderAutocomplete({
+            options: mockAsyncOptions,
+          });
+
+          const input = screen.getByRole('combobox');
+
+          // Press ArrowDown - should trigger forced search
+          await userEvent.type(input, '{ArrowDown}');
+
+          // Wait for async search to complete
+          await waitFor(() => {
+            expect(mockAsyncOptions).toHaveBeenCalled();
+          });
+
+          const options = await screen.findAllByRole('option');
+          expect(options.length).toBe(MOCK_LABEL_VALUE_META.length);
+        });
+
+        it('opens closed popover when pressed after popover was closed', async () => {
+          renderAutocomplete();
+
+          const input = screen.getByRole('combobox');
+          const popoverContent = screen.getByTestId('test-component__content');
+
+          // Type to open popover
+          await userEvent.type(input, 'opt');
+          let options = await screen.findAllByRole('option');
+          expect(options[0]).toBeVisible();
+          expect(popoverContent).toBeVisible();
+
+          // Press Escape to close
+          await userEvent.type(input, '{Escape}');
+          await waitFor(() => {
+            expect(popoverContent).not.toBeVisible();
+          });
+
+          // Press ArrowDown to reopen
+          await userEvent.type(input, '{ArrowDown}');
+
+          // Should reopen and show options again
+          await waitFor(async () => {
+            options = await screen.findAllByRole('option');
+            expect(options.length).toBeGreaterThan(0);
+            expect(options[0]).toBeVisible();
+          });
+        });
+
+        it('does not trigger duplicate search when popover is already open', async () => {
+          const mockAsyncOptions = vi.fn(async (query: string) => {
+            return query.length >= 1 ? MOCK_LABEL_VALUE_META : [];
+          });
+
+          renderAutocomplete({
+            options: mockAsyncOptions,
+          });
+
+          const input = screen.getByRole('combobox');
+
+          // Type to trigger initial search
+          await userEvent.type(input, 'opt');
+          await screen.findAllByRole('option');
+
+          const initialCallCount = mockAsyncOptions.mock.calls.length;
+
+          // Press ArrowDown when popover is already open with results
+          await userEvent.type(input, '{ArrowDown}');
+
+          // Should not trigger another search
+          expect(mockAsyncOptions).toHaveBeenCalledTimes(initialCallCount);
+        });
+
+        it('opens popover with ArrowDown even with minSearchLength when input is empty', async () => {
+          renderAutocomplete({
+            minSearchLength: 3,
+          });
+
+          const input = screen.getByRole('combobox');
+          const popoverContent = screen.getByTestId('test-component__content');
+
+          // Initially closed with no input
+          expect(popoverContent).not.toBeVisible();
+
+          // Press ArrowDown on empty input (bypasses minSearchLength with force=true)
+          await userEvent.type(input, '{ArrowDown}');
+
+          // Should show all options despite minSearchLength requirement
+          const options = await screen.findAllByRole('option');
+          expect(options.length).toBe(MOCK_LABEL_VALUE_META.length);
+          expect(popoverContent).toBeVisible();
+        });
+
+        it('propagates existing onKeyDown handler', async () => {
+          const onKeyDown = vi.fn();
+
+          renderAutocomplete({
+            onKeyDown,
+          });
+
+          const input = screen.getByRole('combobox');
+
+          // Press ArrowDown
+          await userEvent.type(input, '{ArrowDown}');
+
+          // Should call the provided onKeyDown handler
+          expect(onKeyDown).toHaveBeenCalledWith(
+            expect.objectContaining({
+              key: 'ArrowDown',
+            }),
+          );
+
+          // And still open the popover
+          const options = await screen.findAllByRole('option');
+          expect(options.length).toBeGreaterThan(0);
+        });
+      });
     });
 
     describe('onClear', () => {

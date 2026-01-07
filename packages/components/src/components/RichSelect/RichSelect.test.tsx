@@ -210,7 +210,7 @@ describe('IressRichSelect', () => {
         await userEvent.type(combobox, 'op');
 
         // The initial options should be replaced by the search results
-        expect(options[0]).not.toBeInTheDocument();
+        await waitFor(() => expect(options[0]).not.toBeInTheDocument());
       });
     });
 

@@ -68,6 +68,7 @@ export const IressSelectHeading = ({
   className,
   clearAll,
   onClearAll,
+  textStyle = 'typography.body.lg.strong',
   ...restProps
 }: IressSelectHeadingProps) => (
   <IressMenuHeading
@@ -78,6 +79,7 @@ export const IressSelectHeading = ({
       GlobalCSSClass.RichSelectHeading,
     )}
     role={undefined}
+    textStyle={textStyle}
   >
     <IressInline horizontalAlign="between" verticalAlign="middle">
       {children}

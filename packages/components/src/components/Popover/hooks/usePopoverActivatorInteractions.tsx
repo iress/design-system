@@ -60,6 +60,10 @@ const handleKeyDownWhenShown = (
     }
   }
 
+  if (e.key === 'Escape') {
+    popover?.setShowWithReason(false, e.nativeEvent, 'escape-key');
+  }
+
   if (e.key === 'PageUp' && popoverIsVirtual) {
     popover.setActiveIndex(0);
   }
@@ -67,10 +71,6 @@ const handleKeyDownWhenShown = (
   if (e.key === 'PageDown' && popoverIsVirtual) {
     const lastIndex = Math.max(popover?.list.current.length - 1, 0);
     popover.setActiveIndex(lastIndex);
-  }
-
-  if (e.key === 'ArrowUp' && popover?.activeIndex === 0) {
-    popover?.setShowWithReason(false, e.nativeEvent, 'focus');
   }
 
   // TODO: This is a workaround for the issue where the caret does not move when pressing the right arrow key in an input field.

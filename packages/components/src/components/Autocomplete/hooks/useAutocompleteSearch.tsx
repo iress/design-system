@@ -83,6 +83,11 @@ export interface AutocompleteSearchHookReturn {
   shouldShowNoResults: boolean;
 
   /**
+   * Start the search.
+   */
+  startSearch: (force?: boolean) => void;
+
+  /**
    * Stop the search.
    */
   stopSearch: () => void;
@@ -181,14 +186,15 @@ const useSearchOperations = (
       searchFn: (query: string) => Promise<LabelValueMeta[]>,
       query: string,
       minSearchLength: number,
+      force = false,
     ) => {
-      if (shouldSkipQuery(query)) return;
+      if (shouldSkipQuery(query) && !force) return;
 
       // eslint-disable-next-line react-hooks/immutability -- this is intentional, as we are tracking the latest request ID for improved UX
       const requestId = ++requestIdCounter.current;
       updateQueryTracking(query);
 
-      if (query.length >= minSearchLength) {
+      if (query.length >= minSearchLength || force) {
         searchState.setLoadingState(true);
         searchState.clearErrorState();
 
@@ -221,11 +227,12 @@ const useSearchOperations = (
       optionsArray: LabelValueMeta[],
       query: string,
       minSearchLength: number,
+      force = false,
     ) => {
-      if (shouldSkipQuery(query)) return;
+      if (shouldSkipQuery(query) && !force) return;
       updateQueryTracking(query);
 
-      if (query.length >= minSearchLength) {
+      if (query.length >= minSearchLength || force) {
         searchState.setSearched(true);
         const searchResults = searchLabelValues(query, optionsArray);
         searchState.updateWithResults(searchResults, query);
@@ -259,18 +266,29 @@ export const useAutocompleteSearch = ({
 
   const [debouncedQuery] = useDebounce(query, debounceThreshold);
 
-  useEffect(() => {
-    if (typeof options === 'function') {
-      void searchOperations.handleAsync(
+  const search = useCallback(
+    (force = false) => {
+      if (typeof options === 'function') {
+        void searchOperations.handleAsync(
+          options,
+          debouncedQuery,
+          minSearchLength,
+          force,
+        );
+        return;
+      }
+
+      searchOperations.handleSync(
         options,
         debouncedQuery,
         minSearchLength,
+        force,
       );
-      return;
-    }
+    },
+    [debouncedQuery, minSearchLength, options, searchOperations],
+  );
 
-    searchOperations.handleSync(options, debouncedQuery, minSearchLength);
-  }, [debouncedQuery, options, minSearchLength, searchOperations]);
+  useEffect(search, [search]);
 
   return {
     clearError: searchState.clearError,
@@ -278,7 +296,9 @@ export const useAutocompleteSearch = ({
     error: searchState.error,
     loading: searchState.loading,
     shouldShowInstructions:
-      query.length < minSearchLength && !searchState.results.length,
+      query.length < minSearchLength &&
+      !searchState.results.length &&
+      !initialOptions?.length,
     shouldShowDebounceWaiting:
       query.length >= minSearchLength &&
       debouncedQuery.length < minSearchLength &&
@@ -288,9 +308,11 @@ export const useAutocompleteSearch = ({
       searchState.hasSearched &&
       !searchState.loading &&
       searchState.results.length === 0 &&
-      debouncedQuery.length >= minSearchLength,
-    results: debouncedQuery ? searchState.results : (initialOptions ?? []),
-
+      query.length >= minSearchLength,
+    results: searchState.results.length
+      ? searchState.results
+      : (initialOptions ?? []),
+    startSearch: search,
     stopSearch: searchState.reset,
   };
 };

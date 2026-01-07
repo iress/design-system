@@ -12,7 +12,7 @@ export const checkboxMark = sva({
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'colour.neutral.70',
-      borderRadius: 'radius.system.form',
+      borderRadius: 'radius.system.badge',
       bg: 'colour.neutral.10',
       transitionProperty: '[all]',
       transitionDuration: '0.2s',
