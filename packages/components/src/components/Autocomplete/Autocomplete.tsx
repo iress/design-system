@@ -126,6 +126,8 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
       restProps.onKeyDown?.(e);
 
       // When Down key is pressed, open the popover and start search
+      // Trigger when the popover is currently closed OR when the input value
+      // has not been changed yet, so the user can initiate the first search.
       if (e.key === 'ArrowDown' && (!show || !valueChanged)) {
         if (!results.length) {
           startSearch(true);
