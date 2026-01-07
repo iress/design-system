@@ -8,7 +8,10 @@ export const useFilterFlags = ({
   results,
   searchable,
   visibleResetButton,
-}: Omit<AutocompleteSearchHookReturn, 'clearError' | 'error' | 'stopSearch'> &
+}: Omit<
+  AutocompleteSearchHookReturn,
+  'clearError' | 'error' | 'startSearch' | 'stopSearch'
+> &
   Pick<IressFilterProps, 'searchable' | 'visibleResetButton'>) => {
   const showHeader = useMemo(
     // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
