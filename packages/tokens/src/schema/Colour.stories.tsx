@@ -415,6 +415,12 @@ export const Warning: Story = {
         />
 
         <ColourSwatch
+          title="Fill Hover"
+          bg="colour.system.warning.fillHover"
+          token={colour.system.warning.fillHover}
+        />
+
+        <ColourSwatch
           title="Surface"
           bg="colour.system.warning.surface"
           token={colour.system.warning.surface}
@@ -424,6 +430,12 @@ export const Warning: Story = {
           title="Text"
           bg="colour.system.warning.text"
           token={colour.system.warning.text}
+        />
+
+        <ColourSwatch
+          title="Surface Hover"
+          bg="colour.system.warning.surfaceHover"
+          token={colour.system.warning.surfaceHover}
         />
       </IressStack>,
     ],
@@ -448,6 +460,12 @@ export const Info: Story = {
         />
 
         <ColourSwatch
+          title="Fill Hover"
+          bg="colour.system.info.fillHover"
+          token={colour.system.info.fillHover}
+        />
+
+        <ColourSwatch
           title="Surface"
           bg="colour.system.info.surface"
           token={colour.system.info.surface}
@@ -457,6 +475,12 @@ export const Info: Story = {
           title="Text"
           bg="colour.system.info.text"
           token={colour.system.info.text}
+        />
+
+        <ColourSwatch
+          title="Surface Hover"
+          bg="colour.system.info.surfaceHover"
+          token={colour.system.info.surfaceHover}
         />
       </IressStack>,
     ],

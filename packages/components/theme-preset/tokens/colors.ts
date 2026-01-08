@@ -126,6 +126,10 @@ export const colors = {
     description: colour.system.warning.onFill.$description,
     value: cssVars.colour.system.warning.onFill,
   },
+  'colour.system.warning.fillHover': {
+    description: colour.system.warning.fillHover.$description,
+    value: cssVars.colour.system.warning.fillHover,
+  },
   'colour.system.warning.surface': {
     description: colour.system.warning.surface.$description,
     value: cssVars.colour.system.warning.surface,
@@ -133,6 +137,10 @@ export const colors = {
   'colour.system.warning.text': {
     description: colour.system.warning.text.$description,
     value: cssVars.colour.system.warning.text,
+  },
+  'colour.system.warning.surfaceHover': {
+    description: colour.system.warning.surfaceHover.$description,
+    value: cssVars.colour.system.warning.surfaceHover,
   },
   'colour.system.info.fill': {
     description: colour.system.info.fill.$description,
@@ -142,6 +150,10 @@ export const colors = {
     description: colour.system.info.onFill.$description,
     value: cssVars.colour.system.info.onFill,
   },
+  'colour.system.info.fillHover': {
+    description: colour.system.info.fillHover.$description,
+    value: cssVars.colour.system.info.fillHover,
+  },
   'colour.system.info.surface': {
     description: colour.system.info.surface.$description,
     value: cssVars.colour.system.info.surface,
@@ -149,6 +161,10 @@ export const colors = {
   'colour.system.info.text': {
     description: colour.system.info.text.$description,
     value: cssVars.colour.system.info.text,
+  },
+  'colour.system.info.surfaceHover': {
+    description: colour.system.info.surfaceHover.$description,
+    value: cssVars.colour.system.info.surfaceHover,
   },
   'colour.system.backdrop.fill': {
     description: colour.system.backdrop.fill.$description,

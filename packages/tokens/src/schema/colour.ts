@@ -47,14 +47,18 @@ interface ColourSchema extends IressDesignTokenGroup {
     };
     warning: IressDesignTokenGroup & {
       fill: IressDesignToken;
+      fillHover: IressDesignToken;
       onFill: IressDesignToken;
       surface: IressDesignToken;
+      surfaceHover: IressDesignToken;
       text: IressDesignToken;
     };
     info: IressDesignTokenGroup & {
       fill: IressDesignToken;
+      fillHover: IressDesignToken;
       onFill: IressDesignToken;
       surface: IressDesignToken;
+      surfaceHover: IressDesignToken;
       text: IressDesignToken;
     };
     backdrop: IressDesignTokenGroup & {
@@ -302,7 +306,7 @@ const colour = {
         $description:
           'Used for the background colour of primary success buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts.',
         $type: Type.Color,
-        $value: '#6FECC9',
+        $value: '#37C49C',
         $extensions: {
           'iress.contrast.AA': ['colour.system.success.onFill'],
           'styler.panel': 'colour.system.success',
@@ -311,7 +315,7 @@ const colour = {
       fillHover: {
         $description: 'Used for the hover state of primary success buttons.',
         $type: Type.Color,
-        $value: '#2CC098',
+        $value: '#2DAB88',
         $extensions: {
           'iress.contrast.AA': ['colour.system.success.onFill'],
           'styler.panel': 'colour.system.success',
@@ -321,7 +325,7 @@ const colour = {
         $description:
           'Used for the foreground colour of primary success buttons and badges.',
         $type: Type.Color,
-        $value: '#0A4535',
+        $value: '#0A2E25',
         $extensions: {
           'iress.contrast.AA': ['colour.system.success.fill'],
           'styler.panel': 'colour.system.success',
@@ -331,7 +335,7 @@ const colour = {
         $description:
           'Used for the background colour of success alerts and toasts, and the background of secondary success buttons.',
         $type: Type.Color,
-        $value: '#B2FCE0',
+        $value: '#EBF9F5',
         $extensions: {
           'iress.contrast.AA': [
             'colour.system.success.text',
@@ -343,7 +347,7 @@ const colour = {
       surfaceHover: {
         $description: 'Used for the hover state of secondary success buttons.',
         $type: Type.Color,
-        $value: '#96EBD0',
+        $value: '#D7F3EB',
         $extensions: {
           'iress.contrast.AA': [
             'colour.system.success.text',
@@ -356,7 +360,7 @@ const colour = {
         $description:
           'Used for the text colour of success alerts and toasts, and success tertiary buttons.',
         $type: Type.Color,
-        $value: '#0F7D61',
+        $value: '#0A2E25',
         $extensions: {
           'iress.contrast.AA': ['colour.system.success.surface'],
           'styler.panel': 'colour.system.success',
@@ -370,7 +374,7 @@ const colour = {
         $description:
           'Used for the background colour of primary danger buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts.',
         $type: Type.Color,
-        $value: '#D92D20',
+        $value: '#C32F2F',
         $extensions: {
           'iress.contrast.AA': ['colour.system.danger.onFill'],
           'styler.panel': 'colour.system.danger',
@@ -379,7 +383,7 @@ const colour = {
       fillHover: {
         $description: 'Used for the hover state of primary danger buttons.',
         $type: Type.Color,
-        $value: '#B91C1C',
+        $value: '#B32727',
         $extensions: {
           'iress.contrast.AA': ['colour.system.danger.onFill'],
           'styler.panel': 'colour.system.danger',
@@ -389,7 +393,7 @@ const colour = {
         $description:
           'Used for the foreground colour of primary danger buttons and badges.',
         $type: Type.Color,
-        $value: '#FFF6F5',
+        $value: '#FFF4F3',
         $extensions: {
           'iress.contrast.AA': ['colour.system.danger.fill'],
           'styler.panel': 'colour.system.danger',
@@ -399,7 +403,7 @@ const colour = {
         $description:
           'Used for the background colour of danger alerts and toasts, and the background of secondary danger buttons.',
         $type: Type.Color,
-        $value: '#FEEBEA',
+        $value: '#FFEDEC',
         $extensions: {
           'iress.contrast.AA': [
             'colour.system.danger.text',
@@ -411,7 +415,7 @@ const colour = {
       surfaceHover: {
         $description: 'Used for the hover state of secondary danger buttons.',
         $type: Type.Color,
-        $value: '#FEDEDC',
+        $value: '#FFD9D6',
         $extensions: {
           'iress.contrast.AA': [
             'colour.system.danger.text',
@@ -424,7 +428,7 @@ const colour = {
         $description:
           'Used for the text colour of danger alerts and toasts, and danger tertiary buttons.',
         $type: Type.Color,
-        $value: '#970202',
+        $value: '#2D0909',
         $extensions: {
           'iress.contrast.AA': ['colour.system.danger.surface'],
           'styler.panel': 'colour.system.danger',
@@ -438,7 +442,16 @@ const colour = {
         $description:
           'Used for the border of warning alerts and the background of warning badges.',
         $type: Type.Color,
-        $value: '#FFB800',
+        $value: '#F0AD03',
+        $extensions: {
+          'iress.contrast.AA': ['colour.system.warning.onFill'],
+          'styler.panel': 'colour.system.warning',
+        },
+      },
+      fillHover: {
+        $description: 'Used for the hover state of primary warning buttons.',
+        $type: Type.Color,
+        $value: '#DA9D00',
         $extensions: {
           'iress.contrast.AA': ['colour.system.warning.onFill'],
           'styler.panel': 'colour.system.warning',
@@ -447,7 +460,7 @@ const colour = {
       onFill: {
         $description: 'Used for the foreground colour of warning badges.',
         $type: Type.Color,
-        $value: '#000000',
+        $value: '#2B1F00',
         $extensions: {
           'iress.contrast.AA': ['colour.system.warning.fill'],
           'styler.panel': 'colour.system.warning',
@@ -456,7 +469,19 @@ const colour = {
       surface: {
         $description: 'Used for the background colour of warning alerts.',
         $type: Type.Color,
-        $value: '#FFF4CC',
+        $value: '#FFF8E6',
+        $extensions: {
+          'iress.contrast.AA': [
+            'colour.system.warning.text',
+            'colour.neutral.90',
+          ],
+          'styler.panel': 'colour.system.warning',
+        },
+      },
+      surfaceHover: {
+        $description: 'Used for the hover state of secondary warning buttons.',
+        $type: Type.Color,
+        $value: '#FFEAA0',
         $extensions: {
           'iress.contrast.AA': [
             'colour.system.warning.text',
@@ -468,7 +493,7 @@ const colour = {
       text: {
         $description: 'Used for the text colour of warning alerts.',
         $type: Type.Color,
-        $value: '#664600',
+        $value: '#2B1F00',
         $extensions: {
           'iress.contrast.AA': ['colour.system.warning.surface'],
           'styler.panel': 'colour.system.warning',
@@ -487,10 +512,19 @@ const colour = {
           'styler.panel': 'colour.system.info',
         },
       },
+      fillHover: {
+        $description: 'Used for the hover state of primary info buttons.',
+        $type: Type.Color,
+        $value: '#5685E1',
+        $extensions: {
+          'iress.contrast.AA': ['colour.system.info.onFill'],
+          'styler.panel': 'colour.system.info',
+        },
+      },
       onFill: {
         $description: 'Used for the foreground colour of info badges.',
         $type: Type.Color,
-        $value: '#141F4D',
+        $value: '#121D33',
         $extensions: {
           'iress.contrast.AA': ['colour.system.info.fill'],
           'styler.panel': 'colour.system.info',
@@ -500,7 +534,16 @@ const colour = {
         $description:
           'Used for the background colour of info alerts and toasts.',
         $type: Type.Color,
-        $value: '#E0ECFF',
+        $value: '#E5EEFF',
+        $extensions: {
+          'iress.contrast.AA': ['colour.system.info.text', 'colour.neutral.90'],
+          'styler.panel': 'colour.system.info',
+        },
+      },
+      surfaceHover: {
+        $description: 'Used for the hover state of secondary info buttons.',
+        $type: Type.Color,
+        $value: '#CCDEFF',
         $extensions: {
           'iress.contrast.AA': ['colour.system.info.text', 'colour.neutral.90'],
           'styler.panel': 'colour.system.info',
@@ -509,7 +552,7 @@ const colour = {
       text: {
         $description: 'Used for the text colour of info alerts and toasts.',
         $type: Type.Color,
-        $value: '#0A2041',
+        $value: '#121D33',
         $extensions: {
           'iress.contrast.AA': ['colour.system.info.surface'],
           'styler.panel': 'colour.system.info',
