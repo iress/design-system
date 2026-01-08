@@ -15,7 +15,9 @@ import {
   withJsxTransformer,
   disableArgTypes,
   withTransformedRawSource,
+  mergeStorybookConfig,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressTable>;
 
@@ -23,7 +25,11 @@ export default {
   title: 'Components/Table',
   component: IressTable,
   argTypes: {
-    ...disableArgTypes(['children']),
+    ...mergeStorybookConfig(disableArgTypes(['children']), {
+      children: reactNodeArgType,
+    }),
+    empty: reactNodeArgType,
+    ...stylingProps,
   },
   parameters: {
     ...withJsxTransformer({

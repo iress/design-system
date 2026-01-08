@@ -593,63 +593,6 @@ expect(summaryError).toBeInTheDocument();
 
 ## Caveat
 
-### Using `IressSelect` with non-string values in `IressFormField`
-
-When using form controls that support non-string values (like `IressSelect` with number values), you might encounter type conflicts with React Hook Form's default event handling. By default, React Hook Form expects string values from form controls.
-
-**Problem:**
-
-```tsx
-<IressFormField
-  name="dependents"
-  label="Dependents"
-  render={(controlledProps) => (
-    <IressSelect {...controlledProps}>
-      <option key="0" value={0}>
-        0
-      </option>
-      <option key="1" value={1}>
-        1
-      </option>
-      <option key="2" value={2}>
-        2
-      </option>
-    </IressSelect>
-  )}
-/>
-```
-
-In this case, React Hook Form will try to convert the value to string, which might cause type issues.
-
-**Solution:**
-Override the `onChange` handler to pass the actual value as a second parameter:
-
-```tsx
-<IressFormField
-  name="dependents"
-  label="Dependents"
-  render={(controlledProps) => (
-    <IressSelect
-      {...controlledProps}
-      onChange={(_e, value) => controlledProps.onChange(value)}
-    >
-      <option key="0" value={0}>
-        0
-      </option>
-      <option key="1" value={1}>
-        1
-      </option>
-      <option key="2" value={2}>
-        2
-      </option>
-    </IressSelect>
-  )}
-/>
-```
-
-This ensures the original value type is preserved when passed to React Hook Form.
-You can find out more about the code example in the [Switch Edit Readonly Form Documentation](?path=/docs/components-form-recipes--docs#switching-between-readonly-and-edit-modes).
-
 ### Properly resetting fields
 
 When resetting fields that accept non-string values (like `IressRichSelect`), you should reset them to `null` or `undefined` instead of an empty string. This is because the underlying component is strictly typed and expects a specific value type.

@@ -10,6 +10,7 @@ import {
 } from '@iress-oss/ids-storybook-config';
 import { ControlledToggle } from './mocks/ControlledToggle';
 import ControlledToggleSource from './mocks/ControlledToggle.tsx?raw';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressToggle>;
 
@@ -17,6 +18,10 @@ export default {
   title: 'Components/Toggle',
   component: IressToggle,
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressToggle>;
 
 export const Default: Story = {

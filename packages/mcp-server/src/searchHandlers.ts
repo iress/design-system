@@ -68,11 +68,23 @@ export function handleGetUsageExamples(args: unknown): ToolResponse {
   const patternSuffix = pattern ? ` (${pattern} pattern)` : '';
   const patternNotFoundSuffix = pattern ? ` with pattern "${pattern}"` : '';
 
+  // Add token usage best practices note if examples found
+  const tokenBestPractices =
+    examples.length > 0
+      ? '\n\n---\n\n**🎨 Styling Best Practices**\n\n' +
+        'When implementing IDS components, always use design tokens for styling:\n\n' +
+        '- **Spacing**: Use `p="md"`, `m="lg"` instead of hardcoded pixel values\n' +
+        '- **Colors**: Use `bg="colour.primary.fill"`, `color="colour.primary.text"` instead of hex codes\n' +
+        '- **Typography**: Use `<IressText>` component or `textStyle` prop with tokens\n\n' +
+        '*See `get_design_tokens_usage` for complete token usage guidelines and anti-patterns.*\n' +
+        '*See styling props documentation for available props and tokens.*'
+      : '';
+
   const examplesText =
     examples.length > 0
       ? `**${component} Usage Examples**${patternSuffix}:\n\n${examples
           .slice(0, 5)
-          .join('\n\n---\n\n')}`
+          .join('\n\n---\n\n')}${tokenBestPractices}`
       : `No usage examples found for "${component}"${patternNotFoundSuffix}.`;
 
   return {
@@ -94,6 +106,28 @@ export function handleSearchIdsDocs(args: unknown): ToolResponse {
   const { query, case_sensitive } = schema.parse(args);
   const markdownFiles = getMarkdownFiles();
   const results: SearchMatch[] = [];
+
+  // Track if styling props are relevant to this search
+  const stylingKeywords = [
+    'spacing',
+    'color',
+    'colour',
+    'typography',
+    'padding',
+    'margin',
+    'props',
+    'styling',
+    'hideFrom',
+    'hideBelow',
+    'srOnly',
+    'bg',
+    'textAlign',
+    'borderRadius',
+    'elevation',
+  ];
+  const isStylingRelated = stylingKeywords.some((keyword) =>
+    query.toLowerCase().includes(keyword.toLowerCase()),
+  );
 
   for (const file of markdownFiles) {
     try {
@@ -124,94 +158,24 @@ export function handleSearchIdsDocs(args: unknown): ToolResponse {
     }
   }
 
-  return {
-    content: [
-      {
-        type: 'text',
-        text:
-          results.length > 0
-            ? `Found ${
-                results.length
-              } matches in IDS documentation:\n\n${results
-                .slice(0, 15) // Limit results
-                .map(
-                  (r) =>
-                    `**${r.file}:${r.line}**\n\`\`\`\n${r.context}\n\`\`\``,
-                )
-                .join('\n\n')}`
-            : `No matches found for "${query}" in IDS documentation.`,
-      },
-    ],
-  };
-}
+  let responseText =
+    results.length > 0
+      ? `Found ${results.length} matches in IDS documentation:\n\n${results
+          .slice(0, 15) // Limit results
+          .map((r) => `**${r.file}:${r.line}**\n\`\`\`\n${r.context}\n\`\`\``)
+          .join('\n\n')}`
+      : `No matches found for "${query}" in IDS documentation.`;
 
-export function handleGetDesignTokens(args: unknown): ToolResponse {
-  const schema = z.object({
-    type: z
-      .enum(['colors', 'spacing', 'typography', 'breakpoints', 'all'])
-      .default('all'),
-  });
-
-  const { type } = schema.parse(args);
-  const markdownFiles = getMarkdownFiles();
-
-  // Find foundation files related to design tokens
-  const foundationFiles = markdownFiles.filter(
-    (file) =>
-      file.startsWith('foundations-') &&
-      (type === 'all' || file.includes(type)),
-  );
-
-  const tokenInfo: string[] = [];
-
-  for (const file of foundationFiles) {
-    try {
-      const filePath = path.join(DOCS_DIR, file);
-      const content = readFileContent(filePath);
-
-      // Extract CSS custom properties and token information
-      const cssVariables = content.match(/--iress-[a-z-]+/g) ?? [];
-      const tokenSections = content.match(/#{2,3}\s+[^#\n]+/g) ?? [];
-
-      if (cssVariables.length > 0 || tokenSections.length > 0) {
-        let fileInfo = `**${file
-          .replace('foundations-', '')
-          .replace('-docs.md', '')}**\n`;
-
-        if (cssVariables.length > 0) {
-          const uniqueVars = [...new Set(cssVariables)].slice(0, 10);
-          fileInfo += `CSS Variables: ${uniqueVars.join(', ')}\n`;
-        }
-
-        if (tokenSections.length > 0) {
-          fileInfo += `\n${tokenSections.slice(0, 3).join('\n\n')}`;
-        }
-
-        tokenInfo.push(fileInfo);
-      }
-    } catch (error) {
-      console.error(`Error reading file ${file}:`, error);
-    }
+  // Add styling props hint if relevant
+  if (results.length > 0 && isStylingRelated) {
+    responseText += `\n\n*For comprehensive styling props documentation, use the \`get_styling_props_reference\` tool.*`;
   }
 
-  const typeLabel = type !== 'all' ? ` (${type})` : '';
-  const typeNotFoundLabel = type !== 'all' ? ` for ${type}` : '';
-
   return {
     content: [
       {
         type: 'text',
-        text:
-          tokenInfo.length > 0
-            ? `**IDS Design Tokens${typeLabel}**\n\n${tokenInfo.join(
-                '\n\n---\n\n',
-              )}`
-            : `No design token information found${typeNotFoundLabel}. Available foundations: ${markdownFiles
-                .filter((f) => f.startsWith('foundations-'))
-                .map((f) =>
-                  f.replace('foundations-', '').replace('-docs.md', ''),
-                )
-                .join(', ')}`,
+        text: responseText,
       },
     ],
   };

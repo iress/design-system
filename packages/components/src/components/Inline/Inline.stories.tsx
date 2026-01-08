@@ -12,6 +12,7 @@ import {
   CurrentBreakpoint,
   disableArgTypes,
 } from '@iress-oss/ids-storybook-config';
+import { stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressInline>;
 
@@ -79,6 +80,7 @@ export default {
       options: Object.keys(childrenOptions),
       mapping: childrenOptions,
     },
+    ...stylingProps,
   },
   tags: ['updated'],
 } as Meta<typeof IressInline>;

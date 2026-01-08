@@ -3,6 +3,7 @@ import { IressSkipLink } from '.';
 import { IressContainer } from '../Container';
 import { IressPanel } from '../Panel';
 import { withJsxTransformer } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressSkipLink>;
 
@@ -10,6 +11,10 @@ export default {
   title: 'Components/SkipLink',
   component: IressSkipLink,
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressSkipLink>;
 
 export const SkipLink: Story = {

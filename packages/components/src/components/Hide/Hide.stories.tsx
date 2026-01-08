@@ -9,6 +9,7 @@ import {
   disableArgTypes,
 } from '@iress-oss/ids-storybook-config';
 import { BREAKPOINT_DETAILS, BREAKPOINTS, IressTable } from '@/main';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressHide>;
 
@@ -16,6 +17,10 @@ export default {
   title: 'Components/Hide',
   component: IressHide,
   tags: ['caution:srOnly, hideFrom and hideBelow props'],
+  argsTypes: {
+    children: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressHide>;
 
 export const Default: Story = {

@@ -4,6 +4,7 @@ import { IressMenu } from '../Menu';
 import { IressBadge, IressIcon, IressPanel, IressPopover } from '@/main';
 import { RoutingLinkMenu } from './mocks/RoutingLinkMenu';
 import RoutingLinkMenuSource from './mocks/RoutingLinkMenu.tsx?raw';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressMenuItem>;
 
@@ -11,6 +12,12 @@ export default {
   title: 'Components/Menu/MenuItem',
   component: IressMenuItem,
   tags: ['updated'],
+  argTypes: {
+    append: reactNodeArgType,
+    children: reactNodeArgType,
+    prepend: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressMenuItem>;
 
 export const Unselected: Story = {

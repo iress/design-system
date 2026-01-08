@@ -3,6 +3,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressProgress } from '.';
 import { IressStack } from '../Stack';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressProgress>;
 
@@ -10,6 +11,7 @@ export default {
   title: 'Components/Progress',
   component: IressProgress,
   tags: ['updated'],
+  argTypes: stylingProps,
 } as Meta<typeof IressProgress>;
 
 export const Default: Story = {

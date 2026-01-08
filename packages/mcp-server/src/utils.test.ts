@@ -18,6 +18,7 @@ import {
   extractIressComponents,
   readFileContent,
   fileExists,
+  parseMultiComponentQuery,
 } from './utils.js';
 
 // Mock fs module
@@ -266,6 +267,180 @@ describe('utils', () => {
 
       expect(result).toBe(mapping.filePath);
     });
+
+    // Pattern support tests
+    it('should find exact pattern match for IressForm', () => {
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'components-button-docs.md',
+          'patterns-form-docs.md',
+        ),
+      );
+
+      const result = mapIressComponentToFile('IressForm');
+
+      expect(result).toBe('patterns-form-docs.md');
+    });
+
+    it('should find exact pattern match for IressHookForm', () => {
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'components-button-docs.md',
+          'patterns-hookform-docs.md',
+        ),
+      );
+
+      const result = mapIressComponentToFile('IressHookForm');
+
+      expect(result).toBe('patterns-hookform-docs.md');
+    });
+
+    it('should prioritize component match over pattern match', () => {
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray('components-form-docs.md', 'patterns-form-docs.md'),
+      );
+
+      const result = mapIressComponentToFile('IressForm');
+
+      expect(result).toBe('components-form-docs.md');
+    });
+
+    it('should find partial pattern match when exact pattern match is not available', () => {
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'components-button-docs.md',
+          'patterns-form-advanced-docs.md',
+        ),
+      );
+
+      const result = mapIressComponentToFile('IressForm');
+
+      expect(result).toBe('patterns-form-advanced-docs.md');
+    });
+
+    it('should find fuzzy pattern match when exact and partial pattern matches are not available', () => {
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'components-button-docs.md',
+          'patterns-custom-form-docs.md',
+        ),
+      );
+
+      const result = mapIressComponentToFile('IressForm');
+
+      expect(result).toBe('patterns-custom-form-docs.md');
+    });
+
+    it('should handle pattern matching with camelCase conversion', () => {
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray('patterns-loginform-docs.md'),
+      );
+
+      const result = mapIressComponentToFile('IressLoginForm');
+
+      expect(result).toBe('patterns-loginform-docs.md');
+    });
+
+    it('should follow correct fallback priority: exact component → exact pattern → partial component → partial pattern → fuzzy component → fuzzy pattern', () => {
+      // Test exact component wins over everything
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'components-form-docs.md',
+          'patterns-form-docs.md',
+          'components-form-advanced-docs.md',
+          'patterns-form-advanced-docs.md',
+          'components-custom-form-docs.md',
+          'patterns-custom-form-docs.md',
+        ),
+      );
+
+      expect(mapIressComponentToFile('IressForm')).toBe(
+        'components-form-docs.md',
+      );
+
+      // Test exact pattern wins when no exact component
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'patterns-form-docs.md',
+          'components-form-advanced-docs.md',
+          'patterns-form-advanced-docs.md',
+          'components-custom-form-docs.md',
+          'patterns-custom-form-docs.md',
+        ),
+      );
+
+      expect(mapIressComponentToFile('IressForm')).toBe(
+        'patterns-form-docs.md',
+      );
+
+      // Test partial component wins when no exact matches
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'components-form-advanced-docs.md',
+          'patterns-form-advanced-docs.md',
+          'components-custom-form-docs.md',
+          'patterns-custom-form-docs.md',
+        ),
+      );
+
+      expect(mapIressComponentToFile('IressForm')).toBe(
+        'components-form-advanced-docs.md',
+      );
+
+      // Test partial pattern wins when no component matches
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'patterns-form-advanced-docs.md',
+          'components-custom-form-docs.md',
+          'patterns-custom-form-docs.md',
+        ),
+      );
+
+      expect(mapIressComponentToFile('IressForm')).toBe(
+        'patterns-form-advanced-docs.md',
+      );
+
+      // Test fuzzy component wins when no exact/partial matches
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'components-custom-form-docs.md',
+          'patterns-custom-form-docs.md',
+        ),
+      );
+
+      expect(mapIressComponentToFile('IressForm')).toBe(
+        'components-custom-form-docs.md',
+      );
+
+      // Test fuzzy pattern is last resort
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray('patterns-custom-form-docs.md'),
+      );
+
+      expect(mapIressComponentToFile('IressForm')).toBe(
+        'patterns-custom-form-docs.md',
+      );
+    });
+
+    it('should maintain backward compatibility with existing component searches', () => {
+      mockedFs.readdirSync.mockReturnValue(
+        createMockFileArray(
+          'components-button-docs.md',
+          'components-input-docs.md',
+          'components-richselect-docs.md',
+        ),
+      );
+
+      expect(mapIressComponentToFile('IressButton')).toBe(
+        'components-button-docs.md',
+      );
+      expect(mapIressComponentToFile('IressInput')).toBe(
+        'components-input-docs.md',
+      );
+      expect(mapIressComponentToFile('IressRichSelect')).toBe(
+        'components-richselect-docs.md',
+      );
+    });
   });
 
   describe('extractIressComponents', () => {
@@ -437,6 +612,151 @@ describe('utils', () => {
       expect(fileExists(' ')).toBe(false);
       expect(fileExists('.')).toBe(false);
       expect(fileExists('..')).toBe(false);
+    });
+  });
+
+  describe('parseMultiComponentQuery', () => {
+    it('should detect multiple Iress-prefixed components', () => {
+      const result = parseMultiComponentQuery('IressForm IressSelect');
+
+      expect(result).toEqual(['IressForm', 'IressSelect']);
+    });
+
+    it('should detect multiple unprefixed component names', () => {
+      const result = parseMultiComponentQuery('Form Select Button');
+
+      expect(result).toEqual(['IressForm', 'IressSelect', 'IressButton']);
+    });
+
+    it('should handle mixed prefixed and unprefixed components', () => {
+      const result = parseMultiComponentQuery('IressForm Select Button');
+
+      expect(result).toEqual(['IressForm', 'IressSelect', 'IressButton']);
+    });
+
+    it('should return empty array for single component', () => {
+      expect(parseMultiComponentQuery('IressForm')).toEqual([]);
+      expect(parseMultiComponentQuery('Form')).toEqual([]);
+      expect(parseMultiComponentQuery('Button')).toEqual([]);
+    });
+
+    it('should filter out common words', () => {
+      const result = parseMultiComponentQuery('Form and Select with Button');
+
+      expect(result).toEqual(['IressForm', 'IressSelect', 'IressButton']);
+    });
+
+    it('should handle empty string', () => {
+      const result = parseMultiComponentQuery('');
+
+      expect(result).toEqual([]);
+    });
+
+    it('should require minimum word length of 3', () => {
+      const result = parseMultiComponentQuery('A B C Form Select');
+
+      expect(result).toEqual(['IressForm', 'IressSelect']);
+    });
+
+    it('should require capitalized words', () => {
+      const result = parseMultiComponentQuery('form select button');
+
+      expect(result).toEqual([]);
+    });
+
+    it('should filter out excluded words regardless of case', () => {
+      const result = parseMultiComponentQuery('Form And Select With Button');
+
+      expect(result).toEqual(['IressForm', 'IressSelect', 'IressButton']);
+    });
+
+    it('should handle component names that already have Iress prefix', () => {
+      const result = parseMultiComponentQuery(
+        'IressButton IressInput IressSelect',
+      );
+
+      expect(result).toEqual(['IressButton', 'IressInput', 'IressSelect']);
+    });
+
+    it('should handle multiple spaces between words', () => {
+      const result = parseMultiComponentQuery('Form    Select     Button');
+
+      expect(result).toEqual(['IressForm', 'IressSelect', 'IressButton']);
+    });
+
+    it('should handle trailing and leading spaces', () => {
+      const result = parseMultiComponentQuery('  Form Select Button  ');
+
+      expect(result).toEqual(['IressForm', 'IressSelect', 'IressButton']);
+    });
+
+    it('should handle newlines and tabs', () => {
+      const result = parseMultiComponentQuery('Form\nSelect\tButton');
+
+      expect(result).toEqual(['IressForm', 'IressSelect', 'IressButton']);
+    });
+
+    it('should maintain unique component names when duplicates present', () => {
+      const result = parseMultiComponentQuery(
+        'IressForm IressSelect IressForm',
+      );
+
+      // extractIressComponents already handles deduplication
+      expect(result).toEqual(['IressForm', 'IressSelect']);
+    });
+
+    it('should handle complex queries with multiple components and text', () => {
+      const result = parseMultiComponentQuery(
+        'I need Form and Select for the user interface',
+      );
+
+      expect(result).toEqual(['IressForm', 'IressSelect']);
+    });
+
+    it('should exclude words that are too short even if capitalized', () => {
+      const result = parseMultiComponentQuery('To In On Form Select');
+
+      expect(result).toEqual(['IressForm', 'IressSelect']);
+    });
+
+    it('should handle camelCase component names', () => {
+      const result = parseMultiComponentQuery('DatePicker TimePicker');
+
+      expect(result).toEqual(['IressDatePicker', 'IressTimePicker']);
+    });
+
+    it('should handle three or more components', () => {
+      const result = parseMultiComponentQuery(
+        'Button Input Select Form Table Card',
+      );
+
+      expect(result).toEqual([
+        'IressButton',
+        'IressInput',
+        'IressSelect',
+        'IressForm',
+        'IressTable',
+        'IressCard',
+      ]);
+    });
+
+    it('should return empty for queries with only excluded words', () => {
+      const result = parseMultiComponentQuery('and or the with for');
+
+      expect(result).toEqual([]);
+    });
+
+    it('should return empty for queries with only lowercase words', () => {
+      const result = parseMultiComponentQuery('button input select');
+
+      expect(result).toEqual([]);
+    });
+
+    it('should handle punctuation in queries', () => {
+      const result = parseMultiComponentQuery('Form, Select, and Button');
+
+      // Commas create separate words, 'and' is filtered
+      expect(result).toEqual(['IressForm', 'IressSelect', 'IressButton']);
     });
   });
 

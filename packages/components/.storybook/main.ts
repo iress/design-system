@@ -7,4 +7,17 @@ const config = getMainConfig({
   tsConfigWithAlias: 'tsconfig.base.json',
 });
 
+config.typescript = {
+  reactDocgen: 'react-docgen-typescript',
+  reactDocgenTypescriptOptions: {
+    tsconfigPath: 'tsconfig.lib.json',
+    shouldExtractValuesFromUnion: true,
+    savePropValueAsString: true,
+    propFilter: (prop) => {
+      // Filter out props from node_modules (except specific ones you want)
+      return !prop.parent?.fileName.includes('node_modules');
+    },
+  },
+};
+
 export default config;

@@ -5,9 +5,21 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js",
-    "./mapTokensToCssVariables": "./dist/helpers/mapTokensToCssVariables.js",
-    "./convertReferencesToVariables": "./dist/helpers/convertReferencesToVariables.js",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./mapTokensToCssVariables": {
+      "types": "./dist/helpers/mapTokensToCssVariables.d.ts",
+      "import": "./dist/helpers/mapTokensToCssVariables.js",
+      "default": "./dist/helpers/mapTokensToCssVariables.js"
+    },
+    "./convertReferencesToVariables": {
+      "types": "./dist/helpers/convertReferencesToVariables.d.ts",
+      "import": "./dist/helpers/convertReferencesToVariables.js",
+      "default": "./dist/helpers/convertReferencesToVariables.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [

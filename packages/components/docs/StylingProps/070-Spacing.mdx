@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/addon-docs/blocks';
-import { IressText } from '@/main';
+import { IressText, IressButton } from '@/main';
 import * as ComponentStories from './070-Spacing.stories';
 import { ComponentExample } from '@iress-oss/ids-storybook-config';
 
@@ -78,3 +78,123 @@ Negative margin is supported in the same way as positive margin. You can use the
 The `noGutter` prop removes the bottom margin of the last direct child of a component. This is useful when you have nested content inside a component with padding, such as `IressPanel` or `IressCard`, to remove unnecessary spacing in your layout.
 
 <ComponentExample of={ComponentStories.noGutter} />
+
+---
+
+## Best Practices
+
+Always use spacing tokens from the design system scale instead of hardcoded pixel values. This ensures visual consistency and rhythm across your application.
+
+### ✅ DO: Use spacing token aliases
+
+The spacing scale provides convenient aliases (`xs`, `sm`, `md`, `lg`, `xl`) that map to specific pixel values.
+
+```tsx
+// ✅ CORRECT - Using aliases
+<IressPanel p="xl">Extra large padding (48px)</IressPanel>
+<IressStack spacing="md">Medium gap between items (16px)</IressStack>
+```
+
+### ✅ DO: Use full token names
+
+You can also use the full token names (e.g., `spacing.4`) for the same effect as aliases.
+
+```tsx
+// ✅ CORRECT - Using full token names
+<IressPanel p="spacing.10">Same as xl (48px)</IressPanel>
+<IressStack spacing="spacing.4">Same as md (16px)</IressStack>
+```
+
+### ✅ DO: Use directional props for precise control
+
+Use directional spacing props (`px`, `py`, `pl`, `pr`, `pt`, `pb`) when you need different spacing on different axes.
+
+```tsx
+// ✅ CORRECT - Directional spacing with tokens
+<IressPanel px="lg" py="sm">
+  Horizontal padding: large (24px), Vertical padding: small (8px)
+</IressPanel>
+```
+
+### ❌ DON'T: Use hardcoded pixel values
+
+Hardcoded pixel values break the design system's visual rhythm and don't adapt to spacing scale changes.
+
+```tsx
+// ❌ INCORRECT - Hardcoded pixel values
+<IressPanel style={{ padding: '24px' }}>Content</IressPanel>
+
+// ✅ CORRECT - Spacing token
+<IressPanel p="lg">Content</IressPanel>
+```
+
+### ❌ DON'T: Use inline styles for spacing
+
+Inline styles bypass the design system and make code non-themeable.
+
+```tsx
+// ❌ INCORRECT - Inline styles
+<IressPanel style={{ margin: '16px 0', padding: '8px 24px' }}>
+  Content
+</IressPanel>
+
+// ✅ CORRECT - Styling props with tokens
+<IressPanel my="md" px="lg" py="sm">
+  Content
+</IressPanel>
+```
+
+### ✅ DO: Use `cssVars` for CSS-in-JS
+
+If you're using a CSS-in-JS library, use `cssVars` from `@iress-oss/ids-tokens` to reference spacing tokens.
+
+```tsx
+import { cssVars } from '@iress-oss/ids-tokens';
+import styled from 'styled-components';
+
+// ✅ CORRECT - Using cssVars for spacing in CSS-in-JS
+const StyledPanel = styled.div`
+  padding: ${cssVars.spacing[10]}; /* xl - 40px */
+  margin: ${cssVars.spacing[4]} 0; /* md - 16px vertical */
+  gap: ${cssVars.spacing[2]}; /* sm - 8px */
+`;
+
+// ✅ CORRECT - Directional spacing
+const StyledBox = styled.div`
+  padding-left: ${cssVars.spacing[6]}; /* lg - 24px */
+  padding-right: ${cssVars.spacing[6]};
+  padding-top: ${cssVars.spacing[2]}; /* sm - 8px */
+  padding-bottom: ${cssVars.spacing[2]};
+`;
+```
+
+### ❌ DON'T: Use arbitrary values - stick to the spacing scale
+
+The spacing scale is designed to create visual consistency. Avoid arbitrary values that don't fit the scale.
+
+```tsx
+// ❌ INCORRECT - Arbitrary spacing value
+<IressPanel style={{ padding: '17px' }}>Content</IressPanel>
+
+// ✅ CORRECT - Use the closest value from the scale
+<IressPanel p="md">Content (16px)</IressPanel>
+
+// ✅ ALSO CORRECT - If you need more, use the next step
+<IressPanel p="lg">Content (24px)</IressPanel>
+```
+
+## Token Reference
+
+For a complete reference of the full spacing scale with all available tokens (spacing.0 through spacing.10), visual examples, and pixel values, see the documentation.
+
+**Quick reference - Most commonly used spacing tokens:**
+
+- `spacing.1` / `xs`: 4px - Extra small spacing
+- `spacing.2` / `sm`: 8px - Small spacing
+- `spacing.4` / `md`: 16px - Medium spacing (default for many components)
+- `spacing.6` / `lg`: 24px - Large spacing
+- `spacing.10` / `xl`: 40px - Extra large spacing
+
+<IressButton href="/?path=/docs/tokens_spacing--docs" mt="md">
+  View Full Spacing Token Reference
+</IressButton>

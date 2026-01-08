@@ -2,6 +2,11 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { type FC } from 'react';
 import { StartUpLoading } from './StartUpLoading';
 import { IressText } from '@/main';
+import {
+  customTypeArgType,
+  reactNodeArgType,
+  stylingProps,
+} from '@theme-preset/storybookHelpers';
 
 // This is a pattern for IressLoading, hence we change the name
 (StartUpLoading as FC).displayName = 'IressLoading';
@@ -12,6 +17,12 @@ export default {
   title: 'Patterns/Loading/Patterns/StartUp',
   component: StartUpLoading,
   tags: ['beta: '],
+  argTypes: {
+    children: reactNodeArgType,
+    messageList: customTypeArgType('Record<number, ReactNode>'),
+    screenReaderText: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof StartUpLoading>;
 
 export const StartUp: Story = {

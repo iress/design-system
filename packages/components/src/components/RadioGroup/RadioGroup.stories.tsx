@@ -9,6 +9,7 @@ import {
   getFinancialReviewManyChildren,
 } from './mocks/radioGroupChildren';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressRadioGroup>;
 
@@ -18,6 +19,8 @@ export default {
   subcomponents: { IressRadio },
   argTypes: {
     ...disableArgTypes(['children', 'onChange']),
+    children: reactNodeArgType,
+    ...stylingProps,
   },
   tags: ['updated'],
 } as Meta<typeof IressRadioGroup>;

@@ -5,6 +5,7 @@ import {
   CurrentBreakpoint,
   withCustomSource,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 import { IressText } from '../Text';
 import { IressIcon } from '../Icon';
 import { IressBadge } from '../Badge';
@@ -20,6 +21,12 @@ export default {
   title: 'Components/Button',
   component: IressButton,
   tags: ['updated'],
+  argTypes: {
+    append: reactNodeArgType,
+    children: reactNodeArgType,
+    prepend: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressButton>;
 
 export const Default: ButtonStory = {

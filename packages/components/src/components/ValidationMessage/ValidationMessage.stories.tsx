@@ -12,6 +12,7 @@ import {
   disableArgTypes,
   STORYBOOK_ONLY_CATEGORY,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 interface CustomArgs {
   messages: Record<Statuses, string>;
@@ -25,6 +26,11 @@ export default {
   title: 'Components/ValidationMessage',
   component: IressValidationMessage,
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    prefix: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressValidationMessage>;
 
 export const Default: Story = {

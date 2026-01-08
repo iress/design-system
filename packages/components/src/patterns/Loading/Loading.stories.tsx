@@ -5,6 +5,7 @@ import LoadingWizardSource from './mocks/LoadingWizard.tsx?raw';
 import { LoadingWizardFast } from './mocks/LoadingWizardFast';
 import LoadingWizardFastSource from './mocks/LoadingWizardFast.tsx?raw';
 import { withCustomSource } from '@iress-oss/ids-storybook-config';
+import { stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressLoading>;
 
@@ -12,6 +13,9 @@ export default {
   title: 'Patterns/Loading',
   component: IressLoading,
   tags: ['beta: '],
+  argTypes: {
+    ...stylingProps,
+  },
 } as Meta<typeof IressLoading>;
 
 export const Wizard: Story = {

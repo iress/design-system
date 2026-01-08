@@ -5,7 +5,7 @@
 Terminal 1:
 
 ```bash
-yarn apps/docs dev
+yarn dev
 ```
 
 Terminal 2:
@@ -13,9 +13,9 @@ Terminal 2:
 ```bash
 yarn install
 yarn playwright install chromium # Install Chromium for Playwright tests
-yarn generate list               # Generate a list of all pages in Storybook
-yarn generate fetch-all          # Generate all pages in Storybook from the list
-yarn generate guidelines         # Merge foundations into guidelines for easier context
+yarn collect               # Generate a list of all pages in Storybook
+yarn generate          # Generate all pages in Storybook from the list
+yarn guidelines         # Merge foundations into guidelines for easier context
 yarn build                       # Build the server
 ```
 
@@ -78,9 +78,22 @@ Available commands:
 
 #### Common Dev Server Commands
 
+**Testing Pattern Support (NEW):**
+
+- `find-component IressForm` - Find the Form pattern (was previously not discoverable)
+- `find-component Form` - Also works without "Iress" prefix
+- `find-component IressHookForm` - Find the HookForm pattern
+- `get-props IressForm` - Get Form pattern props and API
+
+**Testing Backward Compatibility:**
+
 - `find-component button` - Find button-related components
+- `find-component IressButton` - Direct component lookup still works
 - `get-props button` - Get IressButton component props and API
 - `get-examples input` - Get IressInput usage examples
+
+**Other Commands:**
+
 - `search-ids "mode=primary"` - Search for primary mode usage
 - `list-components components` - List all UI components
 - `get-tokens colors` - Get IDS color design tokens

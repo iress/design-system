@@ -232,11 +232,6 @@ export interface IressCSSProps {
   /**
    * The **`border-radius`** CSS property rounds the corners of an element's outer border edge using the radius tokens in the design system.
    *
-   * | Chrome  | Firefox | Safari  |  Edge  |  IE   |
-   * | :-----: | :-----: | :-----: | :----: | :---: |
-   * |  **4**  |  **4**  |  **5**  | **12** | **9** |
-   * | 1 _-x-_ |         | 3 _-x-_ |        |       |
-   *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-radius
    */
   borderRadius?: ResponsiveProp<UtilityValues['borderRadius']>;
@@ -277,7 +272,7 @@ export interface IressCSSProps {
    * - If you need to hide an element but allow it to be visible to screen readers, use the `srOnly` prop instead.
    * - Consider if you can conditionally render the element instead of hiding it using the `useBreakpoint` hook.
    */
-  hideFrom?: ResponsiveProp<UtilityValues['hideFrom']>;
+  hideFrom?: UtilityValues['hideFrom'];
 
   /**
    * Set **`hideBelow`** to hide an element completely using `display: none`. It can be combined with `hideFrom` to create complex responsive visibility rules.
@@ -288,7 +283,7 @@ export interface IressCSSProps {
    * - If you need to hide an element but allow it to be visible to screen readers, use the `srOnly` prop instead.
    * - Consider if you can conditionally render the element instead of hiding it using the `useBreakpoint` hook.
    */
-  hideBelow?: ResponsiveProp<UtilityValues['hideBelow']>;
+  hideBelow?: UtilityValues['hideBelow'];
 
   /**
    * Elevate a layer by using a **`layerStyle`**. These are connected to the elevation tokens in the design system. They can be combined to create hierarchy and structure.
@@ -304,10 +299,6 @@ export interface IressCSSProps {
   /**
    * The **`max-width`** CSS property sets the maximum width of an element. It prevents the used value of the `width` property from becoming larger than the value specified by `max-width`.
    *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **7** |
-   *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-width
    */
   maxWidth?: SizeToken;
@@ -316,10 +307,6 @@ export interface IressCSSProps {
    * The **`m`** property is short for `margin`, and sets the margin area on all four sides of an element.
    *
    * It uses the spacing tokens in the design system. You can also use the negative values to overlap elements or ignore padding based on the design requirements.
-   *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **3** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin
    */
@@ -330,10 +317,6 @@ export interface IressCSSProps {
    *
    * It uses the spacing tokens in the design system. You can also use the negative values to overlap elements or ignore padding based on the design requirements.
    *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **3** |
-   *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-block
    */
   my?: ResponsiveProp<SpacingToken | 'auto'>;
@@ -342,10 +325,6 @@ export interface IressCSSProps {
    * The **`mx`** property is short for `margin-inline`. It is a shorthand property that defines both the logical inline start and end margins of an element, which maps to physical margins depending on the element's writing mode, directionality, and text orientation.
    *
    * It uses the spacing tokens in the design system. You can also use the negative values to overlap elements or ignore padding based on the design requirements.
-   *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **3** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline
    */
@@ -356,10 +335,6 @@ export interface IressCSSProps {
    *
    * It uses the spacing tokens in the design system.
    *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **3** |
-   *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
    */
   mb?: ResponsiveProp<SpacingToken | 'auto'>;
@@ -368,10 +343,6 @@ export interface IressCSSProps {
    * The **`ml`** property is short for `margin-left` and sets the margin area on the left side of an element. A positive value places it farther from its neighbors, while a negative value places it closer.
    *
    * It uses the spacing tokens in the design system.
-   *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **3** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-left
    */
@@ -382,10 +353,6 @@ export interface IressCSSProps {
    *
    * It uses the spacing tokens in the design system.
    *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **3** |
-   *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-right
    */
   mr?: ResponsiveProp<SpacingToken | 'auto'>;
@@ -394,10 +361,6 @@ export interface IressCSSProps {
    * The **`mt`** property is short for `margin-top` and sets the margin area on the top side of an element. A positive value places it farther from its neighbors, while a negative value places it closer.
    *
    * It uses the spacing tokens in the design system.
-   *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **3** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
    */
@@ -414,10 +377,6 @@ export interface IressCSSProps {
    *
    * It uses the spacing tokens in the design system. Padding cannot use negative values, if you need to overlap elements or ignore padding, use the margin property instead.
    *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **3** |
-   *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding
    */
   p?: ResponsiveProp<PositiveSpacingToken>;
@@ -426,10 +385,6 @@ export interface IressCSSProps {
    * The **`py`** property is short for `padding-block`. It defines the logical block start and end paddings of an element, which maps to physical paddings depending on the element's writing mode, directionality, and text orientation.
    *
    * It uses the spacing tokens in the design system. Padding cannot use negative values, if you need to overlap elements or ignore padding, use the margin property instead.
-   *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **3** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-block
    */
@@ -440,10 +395,6 @@ export interface IressCSSProps {
    *
    * It uses the spacing tokens in the design system. Padding cannot use negative values, if you need to overlap elements or ignore padding, use the margin property instead.
    *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **3** |
-   *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline
    */
   px?: ResponsiveProp<PositiveSpacingToken>;
@@ -452,10 +403,6 @@ export interface IressCSSProps {
    * The **`pb`** property is short for `padding-bottom` and sets the padding area on the bottom side of an element.
    *
    * It uses the spacing tokens in the design system. Padding cannot use negative values, if you need to overlap elements or ignore padding, use the margin property instead.
-   *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **3** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
    */
@@ -466,10 +413,6 @@ export interface IressCSSProps {
    *
    * It uses the spacing tokens in the design system. Padding cannot use negative values, if you need to overlap elements or ignore padding, use the margin property instead.
    *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **3** |
-   *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-left
    */
   pl?: ResponsiveProp<PositiveSpacingToken>;
@@ -478,10 +421,6 @@ export interface IressCSSProps {
    * The **`pr`** property is short for `padding-right` and sets the padding area on the right side of an element.
    *
    * It uses the spacing tokens in the design system. Padding cannot use negative values, if you need to overlap elements or ignore padding, use the margin property instead.
-   *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **3** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-right
    */
@@ -492,10 +431,6 @@ export interface IressCSSProps {
    *
    * It uses the spacing tokens in the design system. Padding cannot use negative values, if you need to overlap elements or ignore padding, use the margin property instead.
    *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **3** |
-   *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
    */
   pt?: ResponsiveProp<PositiveSpacingToken>;
@@ -504,10 +439,6 @@ export interface IressCSSProps {
    * The **`row-gap`** CSS property sets the size of the gap (gutter) between an element's rows.
    *
    * Note: It only has an effect when used as a direct child of a layout component, such as IressRow, IressStack or IressInline.
-   *
-   * | Chrome | Firefox |  Safari  |  Edge  | IE  |
-   * | :----: | :-----: | :------: | :----: | :-: |
-   * | **47** | **52**  | **10.1** | **16** | No  |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
    */
@@ -535,10 +466,6 @@ export interface IressCSSProps {
   /**
    * The **`text-align`** CSS property sets the horizontal alignment of the inline-level content inside a block element or table-cell box.
    *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **3** |
-   *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-align
    */
   textAlign?: ResponsiveProp<
@@ -564,10 +491,6 @@ export interface IressCSSProps {
    * The **`width`** CSS property sets an element's width. By default, it sets the width of the content area, but if `box-sizing` is set to `border-box`, it sets the width of the border area.
    *
    * This prop only allows widths available throughout the component library. To use a custom width, you need to use the `style` prop, or add a custom class to the element and use CSS.
-   *
-   * | Chrome | Firefox | Safari |  Edge  |  IE   |
-   * | :----: | :-----: | :----: | :----: | :---: |
-   * | **1**  |  **1**  | **1**  | **12** | **4** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/width
    */

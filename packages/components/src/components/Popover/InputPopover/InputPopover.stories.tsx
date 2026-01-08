@@ -3,6 +3,10 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressInputPopover } from './InputPopover';
 import { IressInput, IressMenu, IressMenuItem, IressPanel } from '@/main';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import {
+  reactElementArgType,
+  stylingProps,
+} from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressInputPopover>;
 
@@ -23,6 +27,7 @@ export default {
   component: IressInputPopover,
   argTypes: {
     ...disableArgTypes(['activator']),
+    activator: reactElementArgType,
     children: {
       control: {
         type: 'select',
@@ -33,6 +38,7 @@ export default {
       options: Object.keys(childrenOptions),
       mapping: childrenOptions,
     },
+    ...stylingProps,
   },
 } as Meta<typeof IressInputPopover>;
 

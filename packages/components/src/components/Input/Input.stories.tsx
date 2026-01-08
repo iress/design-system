@@ -15,6 +15,7 @@ import {
   disableArgTypes,
   withJsxTransformer,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<IressInputProps>;
 type TextareaStory = StoryObj<IressInputProps<string, number>>;
@@ -23,6 +24,11 @@ export default {
   title: 'Components/Input',
   component: IressInput,
   tags: ['updated'],
+  argTypes: {
+    append: reactNodeArgType,
+    prepend: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressInput>;
 
 export const Default: Story = {

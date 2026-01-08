@@ -17,6 +17,7 @@ import {
   CurrentBreakpoint,
   disableArgTypes,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressRow>;
 
@@ -24,6 +25,10 @@ export default {
   title: 'Components/Row',
   component: IressRow,
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressRow>;
 
 const ROW_CHILDREN_OPTIONS = {

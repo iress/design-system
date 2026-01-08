@@ -6,6 +6,7 @@ import {
   withJsxTransformer,
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 import { AutocompleteUsingState } from './mocks/AutocompleteUsingState';
 import AutocompleteUsingStateSource from './mocks/AutocompleteUsingState.tsx?raw';
 import { AutocompleteUsingAsync } from './mocks/AutocompleteUsingAsync';
@@ -25,6 +26,13 @@ export default {
     popoverProps: {
       container: document.body,
     },
+  },
+  argTypes: {
+    append: reactNodeArgType,
+    errorText: reactNodeArgType,
+    noResultsText: reactNodeArgType,
+    prepend: reactNodeArgType,
+    ...stylingProps,
   },
 } as Meta<typeof IressAutocomplete>;
 
