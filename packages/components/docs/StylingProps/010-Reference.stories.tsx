@@ -18,6 +18,13 @@ interface StylingPropsReference {
 
 const stylingPropsReference: StylingPropsReference[] = [
   {
+    jsxProp: 'alignSelf',
+    jsxPropLink: '/?path=/docs/styling-props-layout--docs#alignself',
+    cssProperty: 'align-self',
+    tokenMapping: 'N/A',
+    responsive: true,
+  },
+  {
     jsxProp: 'bg',
     jsxPropLink: '/?path=/docs/styling-props-colour--docs#bg',
     cssProperty: 'background',

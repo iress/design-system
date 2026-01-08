@@ -15,10 +15,22 @@ export const useShouldRenderLoading = (
   startFrom = 250,
   avoidDelayTimeout = 250,
 ) => {
-  const [renderLoading, setRenderLoading] = useState<boolean>(startFrom === 0);
+  const [renderLoading, setRenderLoading] = useState<boolean>(false);
   const startShowing = useRef<number>(0);
 
   useEffect(() => {
+    // Use microtask to check if loading should be shown
+    // This prevents flicker when content loads immediately (timeout=0 case)
+    if (startFrom === 0) {
+      const microtask = setTimeout(() => {
+        if (!isLoaded) {
+          setRenderLoading(true);
+          startShowing.current = performance.now();
+        }
+      }, 0);
+      return () => clearTimeout(microtask);
+    }
+
     const timeout = setTimeout(() => {
       if (!isLoaded) {
         setRenderLoading(true);

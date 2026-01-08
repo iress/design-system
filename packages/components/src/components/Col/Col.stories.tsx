@@ -13,7 +13,7 @@ import {
   STORYBOOK_ONLY_CATEGORY,
   withJsxTransformer,
 } from '@iress-oss/ids-storybook-config';
-import { stylingProps } from '@theme-preset/storybookHelpers';
+import { omitStylingProps } from '@theme-preset/storybookHelpers';
 
 type ColWithCustomArgs = React.ComponentProps<typeof IressCol> & {
   numberOfColumns?: number;
@@ -35,7 +35,7 @@ export default {
   component: IressCol,
   argTypes: {
     ...disableArgTypes(['children']),
-    ...stylingProps,
+    ...omitStylingProps(['alignSelf']),
     numberOfColumns: {
       name: 'Number of columns',
       description: 'Number of columns to render',

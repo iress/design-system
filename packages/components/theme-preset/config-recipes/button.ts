@@ -27,7 +27,6 @@ export const buttonRecipe = defineSlotRecipe({
     },
     root: {
       alignItems: 'center',
-      alignSelf: 'flex-start',
       borderRadius: 'radius.system.button',
       boxSizing: 'border-box',
       cursor: 'pointer',
