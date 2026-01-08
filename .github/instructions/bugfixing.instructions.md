@@ -542,6 +542,39 @@ Bug: "Component X doesn't work when Y happens"
 - **Over-engineering simple problems**
 - **Adding complex workarounds** when simple deletion would work
 
+## 7. Cleanup After Verification
+
+### Remove Reproduction Stories
+
+**After the user/orchestrator has verified the fix is working:**
+
+1. **Ask for confirmation**:
+   - "The fix has been implemented and tested. Should I remove the bug reproduction story now that the issue is resolved?"
+   - Wait for user confirmation before proceeding
+
+2. **Remove the reproduction story**:
+   - Delete the `BugReproduction` story export from the main component's stories file
+   - Remove any associated mock data specific to the bug reproduction
+   - Keep any useful test cases in the actual test files
+
+3. **Communicate removal**:
+   - "I've removed the bug reproduction story from [story file location]"
+   - "The fix and tests remain in place to prevent regression"
+
+**Why Remove Reproduction Stories:**
+
+- Reproduction stories serve a temporary purpose during bug investigation and fixing
+- Once the bug is fixed and verified, they clutter the Storybook UI
+- The actual regression tests in test files provide permanent protection
+- Keeping only production-ready stories in Storybook maintains clarity for users
+
+**What to Keep:**
+
+- ✅ Regression tests in test files (these stay permanently)
+- ✅ Production stories demonstrating proper usage
+- ✅ Documentation of the fix in PR/issue comments
+- ❌ Temporary bug reproduction stories (remove after verification)
+
 ## Success Criteria
 
 - ✅ **Found the exact root cause** through systematic investigation
@@ -551,3 +584,4 @@ Bug: "Component X doesn't work when Y happens"
 - ✅ **Maintained backward compatibility** and component contracts
 - ✅ **Provided clear explanation** of the problem and solution
 - ✅ **Considered similar cases** and potential side effects
+- ✅ **Removed reproduction story after verification** (cleanup completed)
