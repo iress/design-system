@@ -1,5 +1,5 @@
 import { type IressProgressProps } from '@/components/Progress';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * This hook is used to calculate the estimated progress of a loading component, allowing you to show an animated progress bar even when real progress is not available.
@@ -18,49 +18,39 @@ export const useEstimatedProgressValue = (
 ) => {
   const [progressValue, setProgressValue] = useState(progress ?? 0);
 
-  const isTrackingProgress = useMemo(() => {
-    return (
-      !isLoaded &&
-      !progress &&
-      isProgressing(progressValue, estimatedFinishTime, latestMessageTimecode)
-    );
-  }, [
-    estimatedFinishTime,
-    latestMessageTimecode,
-    isLoaded,
-    progress,
-    progressValue,
-  ]);
-
   useEffect(() => {
+    // Skip animation if already loaded or using explicit progress value
+    if (isLoaded || progress !== undefined) {
+      return;
+    }
+
     const startTime = performance.now();
+    let animationFrameId: number;
 
     const animate = () => {
       const elapsed = Math.max(performance.now() - startTime, 0);
-      const newProgress = progressValue + elapsed;
 
-      setProgressValue(newProgress);
+      setProgressValue(elapsed);
 
-      if (
-        isProgressing(newProgress, estimatedFinishTime, latestMessageTimecode)
-      ) {
-        requestAnimationFrame(animate);
+      if (isProgressing(elapsed, estimatedFinishTime, latestMessageTimecode)) {
+        animationFrameId = requestAnimationFrame(animate);
       }
     };
 
-    requestAnimationFrame(animate);
-  }, [
-    estimatedFinishTime,
-    isTrackingProgress,
-    latestMessageTimecode,
-    progressValue,
-  ]);
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [estimatedFinishTime, isLoaded, latestMessageTimecode, progress]);
 
   if (progress !== undefined) {
     return isLoaded ? estimatedFinishTime : progress;
   }
 
-  if (!isTrackingProgress && progressValue < estimatedFinishTime) {
+  if (isLoaded || progressValue >= estimatedFinishTime) {
     return estimatedFinishTime;
   }
 

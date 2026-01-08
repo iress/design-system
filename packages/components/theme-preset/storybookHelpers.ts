@@ -5,6 +5,7 @@ import type { ArgTypes } from '@storybook/react-vite';
  * They are pulled from `IressCSSProps`.
  */
 const PROPS = [
+  'alignSelf',
   'bg',
   'color',
   'borderRadius',
@@ -28,14 +29,13 @@ const PROPS = [
   'pl',
   'px',
   'py',
-  'rowGap',
   'scrollable',
   'srOnly',
   'stretch',
   'textAlign',
   'textStyle',
   'width',
-];
+] as const;
 
 /**
  * ArgType configurations for common styling props.
@@ -58,6 +58,18 @@ export const stylingProps = {
       },
     ]),
   ),
+};
+
+export const omitStylingProps = (omit: (typeof PROPS)[number][]) => {
+  return Object.fromEntries(
+    PROPS.filter((prop) => !omit.includes(prop)).map((prop) => [
+      prop,
+      {
+        if: { arg: 'stylingProps' },
+        table: { category: 'Advanced', subcategory: 'Styling props' },
+      },
+    ]),
+  );
 };
 
 /**

@@ -119,6 +119,7 @@ export const HORIZONTAL_ALIGNS = [
   'evenly',
   'left',
   'right',
+  'stretch',
 ] as const;
 
 /**

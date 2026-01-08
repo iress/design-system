@@ -76,4 +76,45 @@ describe('useShouldRenderLoading', () => {
 
     vi.useRealTimers();
   });
+
+  it('does not flicker when startFrom is 0 and content loads immediately', async () => {
+    vi.useFakeTimers();
+
+    const hook = renderHook(
+      (props: HookProps) => useShouldRenderLoading(props.isLoaded, 500, 0, 250),
+      { initialProps: { isLoaded: true } },
+    );
+
+    // Should be false immediately when already loaded, no flicker
+    expect(hook.result.current).toBe(false);
+
+    // Even after microtask execution
+    await act(() => vi.advanceTimersByTime(0));
+    expect(hook.result.current).toBe(false);
+
+    vi.useRealTimers();
+  });
+
+  it('shows loading immediately when startFrom is 0 and content is not loaded', async () => {
+    vi.useFakeTimers();
+
+    const hook = renderHook(
+      (props: HookProps) => useShouldRenderLoading(props.isLoaded, 500, 0, 250),
+      { initialProps: { isLoaded: false } },
+    );
+
+    // Should be true initially (waiting to load)
+    expect(hook.result.current).toBe(true);
+
+    // After microtask, should still be true showing loading
+    await act(() => vi.advanceTimersByTime(0));
+    expect(hook.result.current).toBe(true);
+
+    // When content loads
+    hook.rerender({ isLoaded: true });
+    await act(() => vi.advanceTimersByTime(1));
+    expect(hook.result.current).toBe(false);
+
+    vi.useRealTimers();
+  });
 });

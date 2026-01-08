@@ -6,21 +6,6 @@ export const col = cva({
     boxSizing: 'border-box',
     span: 'auto',
   },
-  variants: {
-    alignSelf: {
-      start: {
-        alignSelf: 'start',
-      },
-      end: {
-        alignSelf: 'end',
-      },
-      center: {
-        alignSelf: 'center',
-      },
-      stretch: {
-        alignSelf: 'stretch',
-      },
-    },
-  },
+  variants: {},
   defaultVariants: {},
 });

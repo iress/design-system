@@ -209,6 +209,15 @@ export interface BreakpointDetail {
  */
 export interface IressCSSProps {
   /**
+   * The **`align-self`** CSS property overrides a flex item's alignment set by its flex container's `align-items` property.
+   *
+   * This is useful when you want a single flex item to have a different alignment than the others in the flex container.
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/align-self
+   */
+  alignSelf?: ResponsiveProp<'start' | 'end' | 'center' | 'stretch'>;
+
+  /**
    * **`bg`** sets the background color of an element using the `background-color` css property using the color tokens in the design system.
    *
    * We recommend using the following token values for best background contrast:
@@ -434,15 +443,6 @@ export interface IressCSSProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
    */
   pt?: ResponsiveProp<PositiveSpacingToken>;
-
-  /**
-   * The **`row-gap`** CSS property sets the size of the gap (gutter) between an element's rows.
-   *
-   * Note: It only has an effect when used as a direct child of a layout component, such as IressRow, IressStack or IressInline.
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
-   */
-  rowGap?: ResponsiveProp<PositiveSpacingToken>;
 
   /**
    * The **`scrollable`** property enables scrolling behavior for an element when its content overflows its bounds. It sets the `overflow` CSS property to `auto`, allowing scrollbars to appear as needed. The scrollbar has been styled to match the design system.

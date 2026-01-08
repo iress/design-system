@@ -37,10 +37,10 @@ export const textCompositions: CompositionStyles['textStyles'] = {
     description: typography.body.sm.$description,
     value: {
       font: cssVars.typography.body.sm.regular,
-      '& strong': {
+      '& strong, &:is(strong)': {
         font: cssVars.typography.body.sm.strong,
       },
-      '& em': {
+      '& em, &:is(em)': {
         font: cssVars.typography.body.sm.em,
       },
       '& code': {
@@ -82,10 +82,10 @@ export const textCompositions: CompositionStyles['textStyles'] = {
     description: typography.body.md.$description,
     value: {
       font: cssVars.typography.body.md.regular,
-      '& strong': {
+      '& strong, &:is(strong)': {
         font: cssVars.typography.body.md.strong,
       },
-      '& em': {
+      '& em, &:is(em)': {
         font: cssVars.typography.body.md.em,
       },
       '& code': {
@@ -115,10 +115,10 @@ export const textCompositions: CompositionStyles['textStyles'] = {
     description: typography.body.lg.$description,
     value: {
       font: cssVars.typography.body.lg.regular,
-      '& strong': {
+      '& strong, &:is(strong)': {
         font: cssVars.typography.body.lg.strong,
       },
-      '& em': {
+      '& em, &:is(em)': {
         font: cssVars.typography.body.lg.em,
       },
       '& code': {

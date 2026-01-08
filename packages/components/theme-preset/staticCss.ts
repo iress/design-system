@@ -7,6 +7,7 @@ import { spanCompositions } from './utilities/span';
 import { offsetCompositions } from './utilities/offset';
 import { MARGIN_TOKENS, SPACING_TOKENS } from './tokens/spacing';
 import { breakpoints } from './tokens/breakpoints';
+import { HORIZONTAL_ALIGNS } from '../src/constants';
 
 /**
  * Allowed CSS properties for all components.
@@ -16,9 +17,11 @@ import { breakpoints } from './tokens/breakpoints';
  * Note: If you update this list, you should also update the `IressCSSProps` interface in `packages/components/src/interfaces.ts`
  */
 const allowedCssProps = {
+  alignSelf: ['start', 'end', 'center', 'stretch'],
   borderRadius: Object.keys(radii),
-  columnGap: ['*'],
-  gap: ['*'],
+  columnGap: SPACING_TOKENS,
+  gap: SPACING_TOKENS,
+  horizontalAlign: [...HORIZONTAL_ALIGNS],
   layerStyle: ELEVATION_TOKENS,
 
   // We can't use margin shorthand because it won't generate the correct CSS
