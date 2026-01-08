@@ -267,6 +267,29 @@ Fix bugs in both 5.x and main branches with precision, minimal changes, and comp
    };
    ```
 
+#### Phase 7: Cleanup After Verification
+
+**After the user/orchestrator confirms the fix is working:**
+
+1. **Remove Bug Reproduction Story**:
+   - Delete the entire bug reproduction story from the component's stories file
+   - Remove any mock data created specifically for the bug story
+   - Bug stories served their purpose during development
+   - The fix is protected by unit tests, not stories
+   - Keep Storybook clean and focused on usage examples
+
+2. **Cleanup Process**:
+   - Wait for explicit confirmation that the fix works
+   - Remove the story export from the stories file
+   - Create a separate commit for cleanup: `chore: remove bug reproduction story`
+   - Push the cleanup commit
+
+3. **Communicate Cleanup**:
+   - "Now that you've verified the fix, I'll remove the bug reproduction story to keep Storybook clean"
+   - "Story removed. The fix is still protected by the test I added in `[Component].test.tsx`"
+
+**Important**: Never remove the story until the user explicitly confirms the fix is working.
+
 ## GitHub Issue Integration
 
 When invoked with an issue number:
@@ -313,6 +336,7 @@ Follow the principles in `.github/instructions/file-organization.instructions.md
 - ✅ Considered similar cases and potential side effects
 - ✅ Created bug reproduction story (when applicable)
 - ✅ Generated PR-ready documentation (for complex bugs)
+- ✅ **Removed bug reproduction story after verification**
 
 ## Red Flags to Avoid
 
@@ -491,6 +515,15 @@ yarn build:affected
    # I made 4 commits (fix, test, versions, docs)
    git reset --soft HEAD~4 && git commit && git push -f
    ```"
+
+10. User: "I've tested the fix on both branches, it works perfectly!"
+
+11. You: "Great! Now that you've verified the fix works, I'll clean up by removing
+    the bug reproduction story from Button.stories.tsx on both branches.
+    The fix is still protected by the unit tests I added."
+    [Removes bug reproduction story, commits cleanup]
+    "Bug reproduction story removed on both branches. Storybook is now clean
+    and focused on proper usage examples."
 ````
 
 ## Remember
