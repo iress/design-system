@@ -542,6 +542,58 @@ Bug: "Component X doesn't work when Y happens"
 - **Over-engineering simple problems**
 - **Adding complex workarounds** when simple deletion would work
 
+## 7. Cleanup After Verification
+
+### Remove Bug Reproduction Stories
+
+**After the user/orchestrator has verified the fix works:**
+
+- **Remove the bug reproduction story** from the component's stories file
+- Bug reproduction stories served their purpose during development and testing
+- The actual fix is validated by unit tests, not stories
+- Keeping reproduction stories clutters the Storybook documentation
+- Stories should demonstrate proper usage, not past bugs
+
+**Process:**
+
+1. **Wait for verification**: Don't remove until user confirms fix works
+2. **Remove the story export**: Delete the entire `BugReproduction` story export
+3. **Clean up test data**: Remove any mock data created specifically for the bug story
+4. **Commit the cleanup**: Create a separate commit for story removal
+5. **Communicate**: "I've removed the bug reproduction story now that the fix is verified"
+
+**Example cleanup:**
+
+```typescript
+// Before cleanup - Bug reproduction story present
+export const BugReproduction: Story = {
+  name: 'Bug: [Brief Description]',
+  args: {
+    /* ... */
+  },
+  // ... story configuration
+};
+
+// After cleanup - Story removed, only proper usage examples remain
+export const Default: Story = {
+  /* ... */
+};
+export const WithOptions: Story = {
+  /* ... */
+};
+```
+
+**When to keep reproduction stories:**
+
+- **Never** - bug reproduction stories should always be removed after verification
+- The test suite provides regression prevention
+- Storybook is for documentation and usage examples, not bug tracking
+
+**Communicate cleanup:**
+
+- "Now that you've verified the fix, I'll remove the bug reproduction story to keep Storybook clean"
+- "Story removed. The fix is still protected by the test I added in `[Component].test.tsx`"
+
 ## Success Criteria
 
 - ✅ **Found the exact root cause** through systematic investigation
@@ -551,3 +603,4 @@ Bug: "Component X doesn't work when Y happens"
 - ✅ **Maintained backward compatibility** and component contracts
 - ✅ **Provided clear explanation** of the problem and solution
 - ✅ **Considered similar cases** and potential side effects
+- ✅ **Removed bug reproduction story after verification**
