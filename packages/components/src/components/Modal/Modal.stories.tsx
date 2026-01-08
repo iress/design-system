@@ -21,6 +21,7 @@ import {
   withTransformedProviderSource,
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 const MODAL_ID = 'storybook-modal';
 
@@ -47,6 +48,12 @@ export default {
   title: 'Components/Modal',
   component: IressModal,
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    footer: reactNodeArgType,
+    heading: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressModal>;
 
 export const Default: Story = {

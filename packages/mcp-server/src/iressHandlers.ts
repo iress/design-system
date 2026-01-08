@@ -83,6 +83,11 @@ export function handleGetIressComponentInfo(args: unknown): ToolResponse {
       }
     }
 
+    // Add cross-reference to styling props tool
+    response += `\n**Related Tools:**\n`;
+    response += `- For styling props (spacing, colors, typography, etc.), use \`get_styling_props_reference\` tool\n`;
+    response += `- For design token values, use \`get_design_token_info\` tool\n`;
+
     return {
       content: [
         {
@@ -182,6 +187,8 @@ export function handleAnalyzeComponentMentions(args: unknown): ToolResponse {
   ) {
     response +=
       '\n*Use the `get_iress_component_info` tool with a specific component name for detailed information.*';
+    response +=
+      '\n*For styling props (spacing, colors, etc.), use the `get_styling_props_reference` tool.*';
   }
 
   return {

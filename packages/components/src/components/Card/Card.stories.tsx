@@ -3,6 +3,7 @@ import { IressCard, type IressCardProps } from './Card';
 import { IressRow } from '../Row';
 import { IressCol } from '../Col';
 import { IressStack } from '../Stack';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<IressCardProps>;
 
@@ -15,6 +16,15 @@ export default {
     },
   },
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    footer: reactNodeArgType,
+    heading: reactNodeArgType,
+    media: reactNodeArgType,
+    prepend: reactNodeArgType,
+    topRight: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressCard>;
 
 export const Default: Story = {

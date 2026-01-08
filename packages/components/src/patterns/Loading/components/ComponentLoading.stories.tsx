@@ -4,6 +4,7 @@ import { LoadingGraph } from '../mocks/LoadingGraph';
 import LoadingGraphSource from '../mocks/LoadingGraph.tsx?raw';
 import { type FC } from 'react';
 import { withCustomSource } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 // This is a pattern for IressLoading, hence we change the name
 (ComponentLoading as FC).displayName = 'IressLoading';
@@ -14,6 +15,12 @@ export default {
   title: 'Patterns/Loading/Patterns/Component',
   component: ComponentLoading,
   tags: ['beta: '],
+  argTypes: {
+    children: reactNodeArgType,
+    screenReaderText: reactNodeArgType,
+    update: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof ComponentLoading>;
 
 export const Component: Story = {

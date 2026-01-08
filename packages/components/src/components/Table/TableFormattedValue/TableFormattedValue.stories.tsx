@@ -1,6 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTable, IressTableFormattedValue } from '..';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressTableFormattedValue<object, string>>;
 
@@ -8,6 +9,10 @@ export default {
   title: 'Components/Table/FormattedValue',
   component: IressTableFormattedValue,
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressTableFormattedValue>;
 
 const fourDaysAgo = new Date();

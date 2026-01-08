@@ -20,6 +20,10 @@ import {
   withCustomSource,
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
+import {
+  reactElementArgType,
+  stylingProps,
+} from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressPopover>;
 
@@ -78,6 +82,7 @@ export default {
   component: IressPopover,
   argTypes: {
     ...disableArgTypes(['activator']),
+    activator: reactElementArgType,
     children: {
       control: {
         type: 'select',
@@ -88,6 +93,7 @@ export default {
       options: Object.keys(childrenOptions),
       mapping: childrenOptions,
     },
+    ...stylingProps,
   },
 } as Meta<typeof IressPopover>;
 

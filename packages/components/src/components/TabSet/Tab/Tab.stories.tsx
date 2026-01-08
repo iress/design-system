@@ -1,5 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTab, type IressTabProps, IressTabSet } from '..';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<IressTabProps<undefined>>;
 
@@ -7,6 +8,10 @@ export default {
   title: 'Components/TabSet/Tab',
   component: IressTab,
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<IressTabProps<undefined>>;
 
 export const Inactive: Story = {

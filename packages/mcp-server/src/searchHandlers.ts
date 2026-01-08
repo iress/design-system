@@ -107,6 +107,28 @@ export function handleSearchIdsDocs(args: unknown): ToolResponse {
   const markdownFiles = getMarkdownFiles();
   const results: SearchMatch[] = [];
 
+  // Track if styling props are relevant to this search
+  const stylingKeywords = [
+    'spacing',
+    'color',
+    'colour',
+    'typography',
+    'padding',
+    'margin',
+    'props',
+    'styling',
+    'hideFrom',
+    'hideBelow',
+    'srOnly',
+    'bg',
+    'textAlign',
+    'borderRadius',
+    'elevation',
+  ];
+  const isStylingRelated = stylingKeywords.some((keyword) =>
+    query.toLowerCase().includes(keyword.toLowerCase()),
+  );
+
   for (const file of markdownFiles) {
     try {
       const filePath = path.join(DOCS_DIR, file);
@@ -136,22 +158,24 @@ export function handleSearchIdsDocs(args: unknown): ToolResponse {
     }
   }
 
+  let responseText =
+    results.length > 0
+      ? `Found ${results.length} matches in IDS documentation:\n\n${results
+          .slice(0, 15) // Limit results
+          .map((r) => `**${r.file}:${r.line}**\n\`\`\`\n${r.context}\n\`\`\``)
+          .join('\n\n')}`
+      : `No matches found for "${query}" in IDS documentation.`;
+
+  // Add styling props hint if relevant
+  if (results.length > 0 && isStylingRelated) {
+    responseText += `\n\n*For comprehensive styling props documentation, use the \`get_styling_props_reference\` tool.*`;
+  }
+
   return {
     content: [
       {
         type: 'text',
-        text:
-          results.length > 0
-            ? `Found ${
-                results.length
-              } matches in IDS documentation:\n\n${results
-                .slice(0, 15) // Limit results
-                .map(
-                  (r) =>
-                    `**${r.file}:${r.line}**\n\`\`\`\n${r.context}\n\`\`\``,
-                )
-                .join('\n\n')}`
-            : `No matches found for "${query}" in IDS documentation.`,
+        text: responseText,
       },
     ],
   };

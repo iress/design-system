@@ -11,6 +11,7 @@ import {
   mergeStorybookConfig,
   addToStorybookCategory,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressFormField>;
 
@@ -36,6 +37,12 @@ export default {
         'hiddenLabel',
         'hint',
       ]),
+      {
+        label: reactNodeArgType,
+        error: reactNodeArgType,
+        supplementary: reactNodeArgType,
+        ...stylingProps,
+      },
     ),
   },
   decorators: [

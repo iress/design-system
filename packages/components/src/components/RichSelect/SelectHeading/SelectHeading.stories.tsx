@@ -4,6 +4,7 @@ import {
   type IressSelectHeadingProps,
 } from './SelectHeading';
 import { addToStorybookCategory } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressSelectHeading>;
 
@@ -11,6 +12,8 @@ export default {
   title: 'Components/RichSelect/Subcomponents/Heading',
   component: IressSelectHeading,
   argTypes: {
+    children: reactNodeArgType,
+    ...stylingProps,
     ...addToStorybookCategory<IressSelectHeadingProps>('MenuText props', [
       'append',
       'divider',

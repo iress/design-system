@@ -86,6 +86,9 @@ Additional API documentation here.
       expect(result.content[0].text).toContain(
         '<IressButton variant="primary"',
       );
+      expect(result.content[0].text).toContain('**Related Tools:**');
+      expect(result.content[0].text).toContain('get_styling_props_reference');
+      expect(result.content[0].text).toContain('get_design_token_info');
     });
 
     it('should include examples when include_examples is true', () => {
@@ -294,6 +297,9 @@ Example 4
       expect(result.content[0].text).toContain('**IressInput** ✅ Available');
       expect(result.content[0].text).toContain(
         '*Use the `get_iress_component_info` tool with a specific component name for detailed information.*',
+      );
+      expect(result.content[0].text).toContain(
+        '*For styling props (spacing, colors, etc.), use the `get_styling_props_reference` tool.*',
       );
     });
 

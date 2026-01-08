@@ -1,5 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTable, Z_INDEX } from '@/main';
+import { stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressTable>;
 
@@ -22,6 +23,7 @@ export default {
       disable: true,
     },
   },
+  argTypes: stylingProps,
 } as Meta<typeof IressTable>;
 
 export const Reference: Story = {

@@ -14,6 +14,7 @@ import {
   disableArgTypes,
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressFilter>;
 type SingleFilterStory = StoryObj<IressFilterProps<false>>;
@@ -22,6 +23,12 @@ export default {
   title: 'Components/Filter',
   component: IressFilter,
   tags: ['updated'],
+  argTypes: {
+    footer: reactNodeArgType,
+    header: reactNodeArgType,
+    searchNoResultsText: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressFilter>;
 
 export const Default: Story = {

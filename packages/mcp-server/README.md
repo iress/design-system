@@ -71,12 +71,17 @@ For other MCP clients or manual configuration, use this server configuration:
    - Includes accessibility guidelines for colors
    - Covers spacing scale and directional props
    - Explains IressText vs textStyle prop for typography
+8. **get_styling_props_reference**: Get comprehensive reference for IDS styling props including spacing, colors, typography, visual effects, and sizing
+   - Shows available props by category (spacing, colors, typography, visual, sizing, utility)
+   - Includes usage examples and token values
+   - Explains when to use style props vs iressCss() vs CSS-in-JS
+   - Provides component-specific styling guidance
 
 ### Documentation & Guidelines
 
-8. **search_ids_docs**: Search across all IDS documentation with context-aware results
-9. **list_components**: List all available components organized by category
-10. **get_design_guidelines**: Get IDS design guidelines covering core principles, visual standards, and accessibility requirements
+9. **search_ids_docs**: Search across all IDS documentation with context-aware results
+10. **list_components**: List all available components organized by category
+11. **get_design_guidelines**: Get IDS design guidelines covering core principles, visual standards, and accessibility requirements
 
 ## Design Token Usage Quick Start
 
@@ -131,6 +136,67 @@ When generating code with the IDS component library:
    - ❌ `background: '#13213F'; padding: '16px';`
 
 Use `get_design_tokens_usage` to see practical examples and anti-patterns for each category.
+
+## Styling Props Quick Start
+
+The IDS MCP Server provides comprehensive reference for using styling props across all components:
+
+### Using `get_styling_props_reference`
+
+```typescript
+// Get all styling props documentation
+get_styling_props_reference({ category: 'all' });
+// Returns: Complete reference + styling approach decision guide
+
+// Get spacing props (padding, margin, textAlign, stretch)
+get_styling_props_reference({ category: 'spacing' });
+// Returns: p, px, py, m, mx, my + token values
+
+// Get color props
+get_styling_props_reference({ category: 'colors' });
+// Returns: bg, color props with semantic color tokens
+
+// Get typography props
+get_styling_props_reference({ category: 'typography' });
+// Returns: textStyle prop usage
+
+// Get visual props (elevation, radius)
+get_styling_props_reference({ category: 'visual' });
+// Returns: layerStyle, borderRadius, focusable props
+
+// Get sizing props
+get_styling_props_reference({ category: 'sizing' });
+// Returns: width, maxWidth props
+
+// Get utility props (screen readers, scrollable, responsive)
+get_styling_props_reference({ category: 'utility' });
+// Returns: hideFrom, hideBelow, srOnly, scrollable, noGutter props
+
+// Get component-specific styling info
+get_styling_props_reference({ component: 'IressButton' });
+// Returns: Which styling props IressButton supports
+```
+
+### When to Use Different Styling Approaches
+
+The `get_styling_props_reference` tool includes comprehensive best practices from the IDS documentation (see the "Best Practices" section in the reference docs):
+
+1. **Style Props (Recommended)**: Use on IDS components for type-safe, theme-compatible inline styles
+   - `<IressButton p="md" bg="colour.primary.fill">`
+
+2. **iressCss() Function**: Use on non-IDS elements to apply styling props anywhere
+   - `<div className={iressCss({ p: 'xs', bg: 'neutral.alt' })}>`
+
+3. **IressStyled Component**: Use when you need styled wrapper without creating a component
+   - `<IressStyled p="md" bg="alt"><YourContent /></IressStyled>`
+
+4. **CSS-in-JS with cssVars**: Use with CSS-in-JS libraries (styled-components, emotion, etc.)
+   - `background: ${cssVars.colour.primary.fill};`
+
+5. **Custom CSS**: Use for complex styling, animations, pseudo-selectors
+   - When styling props aren't sufficient
+
+Use `get_styling_props_reference({ category: 'all' })` to see the complete reference including detailed best practices, decision guide with flowchart, common anti-patterns, and when to use each approach.
 
 ### CSS-in-JS Usage
 

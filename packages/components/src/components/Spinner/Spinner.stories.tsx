@@ -3,6 +3,7 @@ import { IressSpinner } from '.';
 import { IressInline } from '../Inline';
 import { IressText } from '../Text';
 import { addToStorybookCategory } from '@iress-oss/ids-storybook-config';
+import { stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressSpinner>;
 
@@ -10,6 +11,7 @@ export default {
   title: 'Components/Spinner',
   component: IressSpinner,
   argTypes: {
+    ...stylingProps,
     ...addToStorybookCategory('Icon props', [
       'fixedWidth',
       'flip',

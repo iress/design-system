@@ -208,4 +208,34 @@ export const toolDefinitions = [
       },
     },
   },
+  {
+    name: 'get_styling_props_reference',
+    description:
+      'Get comprehensive reference for IDS styling props including spacing, colors, typography, visual effects, and sizing. Shows which props are available, their purpose, usage examples, and when to use different styling approaches.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        category: {
+          type: 'string',
+          enum: [
+            'all',
+            'spacing',
+            'colors',
+            'typography',
+            'visual',
+            'sizing',
+            'utility',
+          ],
+          description:
+            'Styling prop category to get reference for (default: all)',
+          default: 'all',
+        },
+        component: {
+          type: 'string',
+          description:
+            'Optional: specific component name to check styling prop support for (e.g., "IressButton")',
+        },
+      },
+    },
+  },
 ] as const;

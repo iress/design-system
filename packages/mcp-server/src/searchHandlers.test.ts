@@ -382,6 +382,117 @@ PRIMARY button example
 
       consoleSpy.mockRestore();
     });
+
+    it('should find styling props documentation in search results', () => {
+      const mockMarkdownFiles = [
+        'components_styling-props-spacing-docs.md',
+        'components_styling-props-screen-readers-docs.md',
+      ];
+
+      const mockSpacingContent = `
+# Spacing Styling Props
+Available spacing props: p, px, py, m, mx, my
+Use textAlign for text alignment
+      `;
+
+      const mockScreenReadersContent = `
+# Screen Reader Utility Props
+Use hideFrom to hide content from specific breakpoints
+Use hideBelow for responsive hiding
+Use srOnly for screen reader only content
+      `;
+
+      mockUtils.getMarkdownFiles.mockReturnValue(mockMarkdownFiles);
+      mockUtils.readFileContent
+        .mockReturnValueOnce(mockSpacingContent)
+        .mockReturnValueOnce(mockScreenReadersContent);
+
+      const result: ToolResponse = handleSearchIdsDocs({
+        query: 'hideFrom',
+        case_sensitive: false,
+      });
+
+      expect(result.content[0].text).toContain('Found');
+      expect(result.content[0].text).toContain('styling-props-screen-readers');
+      expect(result.content[0].text).toContain('hideFrom');
+      expect(result.content[0].text).toContain('get_styling_props_reference');
+    });
+
+    it('should include styling props files when searching for "spacing"', () => {
+      const mockMarkdownFiles = [
+        'components_styling-props-spacing-docs.md',
+        'components-stack-docs.md',
+      ];
+
+      const mockSpacingContent = `
+# Spacing Styling Props
+Control spacing with p, m props
+      `;
+
+      const mockStackContent = `
+# Stack Component  
+Stack controls spacing between children
+      `;
+
+      mockUtils.getMarkdownFiles.mockReturnValue(mockMarkdownFiles);
+      mockUtils.readFileContent
+        .mockReturnValueOnce(mockSpacingContent)
+        .mockReturnValueOnce(mockStackContent);
+
+      const result: ToolResponse = handleSearchIdsDocs({
+        query: 'spacing',
+        case_sensitive: false,
+      });
+
+      expect(result.content[0].text).toContain('Found');
+      expect(result.content[0].text).toContain('styling-props-spacing');
+      expect(result.content[0].text).toContain('stack');
+      expect(result.content[0].text).toContain('get_styling_props_reference');
+    });
+
+    it('should suggest styling props tool for color-related searches', () => {
+      const mockMarkdownFiles = ['components_styling-props-colour-docs.md'];
+
+      const mockContent = `
+# Color Styling Props
+Available color props: bg, color
+      `;
+
+      mockUtils.getMarkdownFiles.mockReturnValue(mockMarkdownFiles);
+      mockUtils.readFileContent.mockReturnValue(mockContent);
+
+      const result: ToolResponse = handleSearchIdsDocs({
+        query: 'color',
+        case_sensitive: false,
+      });
+
+      expect(result.content[0].text).toContain('Found');
+      expect(result.content[0].text).toContain(
+        '*For comprehensive styling props documentation, use the `get_styling_props_reference` tool.*',
+      );
+    });
+
+    it('should not suggest styling props tool for non-styling searches', () => {
+      const mockMarkdownFiles = ['components-button-docs.md'];
+
+      const mockContent = `
+# Button Component
+The button component allows user interaction
+      `;
+
+      mockUtils.getMarkdownFiles.mockReturnValue(mockMarkdownFiles);
+      mockUtils.readFileContent.mockReturnValue(mockContent);
+
+      const result: ToolResponse = handleSearchIdsDocs({
+        query: 'button',
+        case_sensitive: false,
+      });
+
+      expect(result.content[0].text).toContain('Found');
+      expect(result.content[0].text).not.toContain(
+        'get_styling_props_reference',
+      );
+    });
   });
 
   describe('handleGetDesignGuidelines', () => {

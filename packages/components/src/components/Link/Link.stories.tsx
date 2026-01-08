@@ -9,6 +9,7 @@ import {
   disableArgTypes,
   withCustomSource,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressLink>;
 
@@ -16,6 +17,12 @@ export default {
   title: 'Components/Link',
   component: IressLink,
   tags: ['updated'],
+  argTypes: {
+    append: reactNodeArgType,
+    children: reactNodeArgType,
+    prepend: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressLink>;
 
 export const Default: Story = {

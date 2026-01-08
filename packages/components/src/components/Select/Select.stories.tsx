@@ -2,7 +2,11 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSelect, IressSelectOption } from '.';
 import { IressStack } from '../Stack';
 import { FORM_ELEMENT_WIDTHS } from '@/constants';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import {
+  disableArgTypes,
+  mergeStorybookConfig,
+} from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressSelect>;
 
@@ -10,7 +14,10 @@ export default {
   title: 'Components/Select',
   component: IressSelect,
   argTypes: {
-    ...disableArgTypes(['children']),
+    ...mergeStorybookConfig(disableArgTypes(['children']), {
+      children: reactNodeArgType,
+    }),
+    ...stylingProps,
   },
   tags: ['updated'],
 } as Meta<typeof IressSelect>;

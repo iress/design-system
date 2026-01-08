@@ -16,6 +16,11 @@ import {
   mergeStorybookConfig,
   removeArgTypes,
 } from '@iress-oss/ids-storybook-config';
+import {
+  reactElementArgType,
+  reactNodeArgType,
+  stylingProps,
+} from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressSelectSearch>;
 
@@ -23,6 +28,9 @@ export default {
   title: 'Components/RichSelect/Subcomponents/Search',
   component: IressSelectSearch,
   argTypes: {
+    activator: reactElementArgType,
+    children: reactNodeArgType,
+    ...stylingProps,
     ...mergeStorybookConfig(
       removeArgTypes(['style']),
       disableArgTypes(['activator', 'children']),

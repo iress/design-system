@@ -2,6 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { type FC } from 'react';
 import { ValidateLoading } from './ValidateLoading';
 import { IressButton, IressInline } from '@/main';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 // This is a pattern for IressLoading, hence we change the name
 (ValidateLoading as FC).displayName = 'IressLoading';
@@ -12,6 +13,10 @@ export default {
   title: 'Patterns/Loading/Patterns/Validate',
   component: ValidateLoading,
   tags: ['beta: '],
+  argTypes: {
+    children: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof ValidateLoading>;
 
 export const Validate: Story = {

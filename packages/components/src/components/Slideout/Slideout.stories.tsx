@@ -29,6 +29,7 @@ import {
   withTransformedProviderSource,
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 const SLIDEOUT_ID = 'storybook-slideout';
 
@@ -55,6 +56,12 @@ export default {
   title: 'Components/Slideout',
   component: IressSlideout,
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    footer: reactNodeArgType,
+    heading: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressSlideout>;
 
 export const Default: Story = {

@@ -4,6 +4,7 @@ import { IressStack } from '../Stack';
 import { IressPanel } from '../Panel';
 import { IressText } from '../Text';
 import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressSlider>;
 
@@ -11,6 +12,10 @@ export default {
   title: 'Components/Slider',
   component: IressSlider,
   tags: ['updated'],
+  argTypes: {
+    label: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressSlider>;
 
 export const Default: Story = {};

@@ -9,6 +9,7 @@ import {
   disableArgTypes,
   withJsxTransformer,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressCheckbox>;
 
@@ -17,6 +18,10 @@ export default {
   component: IressCheckbox,
   subcomponents: { IressCheckboxMark },
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressCheckbox>;
 
 export const Default: Story = {

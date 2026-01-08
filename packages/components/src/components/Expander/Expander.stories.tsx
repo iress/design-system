@@ -8,11 +8,16 @@ import {
   disableArgTypes,
   withCustomSource,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 export default {
   title: 'Components/Expander',
   component: IressExpander,
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressExpander>;
 
 export const Default: StoryObj<typeof IressExpander> = {

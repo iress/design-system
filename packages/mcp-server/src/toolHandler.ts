@@ -19,6 +19,7 @@ import {
   handleGetDesignTokensUsage,
   handleGetDesignTokens,
 } from './tokenHandlers.js';
+import { handleGetStylingPropsReference } from './stylingHandlers.js';
 
 interface ToolCallRequest {
   params: {
@@ -60,6 +61,9 @@ export function handleToolCall(request: ToolCallRequest) {
 
     case 'get_design_guidelines':
       return handleGetDesignGuidelines(args);
+
+    case 'get_styling_props_reference':
+      return handleGetStylingPropsReference(args);
 
     default:
       throw new Error(`Unknown tool: ${name}`);

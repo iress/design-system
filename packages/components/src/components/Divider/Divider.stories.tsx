@@ -5,6 +5,7 @@ import { IressText } from '../Text';
 import { IressStack } from '../Stack/Stack';
 import { IressPanel } from '../Panel';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { stylingProps } from '@theme-preset/storybookHelpers';
 
 const GUTTER_SIZES = ['none', 'xs', 'sm', 'md', 'lg', 'xl'];
 
@@ -20,6 +21,9 @@ export default {
   title: 'Components/Divider',
   component: IressDivider,
   tags: ['updated'],
+  argTypes: {
+    ...stylingProps,
+  },
 } as Meta<typeof IressDivider>;
 
 export const Horizontal: Story = {};
