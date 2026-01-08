@@ -1355,7 +1355,7 @@ __metadata:
   dependencies:
     "@floating-ui/react": "npm:0.27.16"
     "@fortawesome/fontawesome-common-types": "npm:0.2.36"
-    "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.6"
+    "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.7"
     "@pandacss/dev": "npm:1.7.1"
     "@tanstack/react-table": "npm:8.21.3"
     "@testing-library/dom": "npm:10.4.1"
@@ -1418,7 +1418,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-mcp-server@workspace:packages/mcp-server"
   dependencies:
-    "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.6"
+    "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.7"
     "@modelcontextprotocol/inspector": "npm:0.18.0"
     "@modelcontextprotocol/sdk": "npm:1.25.1"
     "@types/minimist": "npm:1.2.5"
@@ -1448,7 +1448,7 @@ __metadata:
     "@iress-oss/ids-storybook-sandbox": "npm:^0.2.2"
     "@iress-oss/ids-storybook-toggle-stories": "npm:^0.1.0"
     "@iress-oss/ids-storybook-version-badge": "npm:^0.1.1"
-    "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.6"
+    "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.7"
     "@mdx-js/react": "npm:3.1.1"
     "@storybook/addon-a11y": "npm:10.1.10"
     "@storybook/addon-docs": "npm:10.1.10"
@@ -1662,7 +1662,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@iress-oss/ids-tokens@npm:^6.0.0-alpha.6, @iress-oss/ids-tokens@workspace:packages/tokens":
+"@iress-oss/ids-tokens@npm:^6.0.0-alpha.7, @iress-oss/ids-tokens@workspace:packages/tokens":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-tokens@workspace:packages/tokens"
   dependencies:

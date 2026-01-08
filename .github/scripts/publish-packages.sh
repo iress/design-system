@@ -35,8 +35,22 @@ compare_versions() {
   elif [ -z "$v1_pre" ]; then echo "greater"
   elif [ -z "$v2_pre" ]; then echo "less"
   else
-    if [[ "$v1_pre" > "$v2_pre" ]]; then echo "greater"
-    elif [[ "$v1_pre" < "$v2_pre" ]]; then echo "less"
+    # Compare prerelease versions (e.g., alpha.9 vs alpha.10)
+    # Extract the prerelease identifier and number (e.g., "alpha" and "10" from "alpha.10")
+    IFS='.' read -r v1_pre_id v1_pre_num <<< "$v1_pre"
+    IFS='.' read -r v2_pre_id v2_pre_num <<< "$v2_pre"
+    
+    # Compare prerelease identifiers first (alpha, beta, rc, etc.)
+    if [[ "$v1_pre_id" > "$v2_pre_id" ]]; then echo "greater"; return
+    elif [[ "$v1_pre_id" < "$v2_pre_id" ]]; then echo "less"; return; fi
+    
+    # If identifiers are the same, compare numeric parts
+    # Handle cases where prerelease number might be missing
+    v1_pre_num=${v1_pre_num:-0}
+    v2_pre_num=${v2_pre_num:-0}
+    
+    if [ "$v1_pre_num" -gt "$v2_pre_num" ]; then echo "greater"
+    elif [ "$v1_pre_num" -lt "$v2_pre_num" ]; then echo "less"
     else echo "equal"; fi
   fi
 }
