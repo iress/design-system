@@ -12,6 +12,7 @@ import {
   disableArgTypes,
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressSkeleton>;
 type TextStory = StoryObj<IressSkeletonProps<'text'>>;
@@ -23,6 +24,10 @@ export default {
   title: 'Components/Skeleton',
   component: IressSkeleton,
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressSkeleton>;
 
 export const Default: Story = {};

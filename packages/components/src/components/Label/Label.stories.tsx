@@ -4,6 +4,7 @@ import { IressLabel } from './Label';
 import { IressIcon } from '../Icon';
 import { IressInline } from '../Inline';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressLabel>;
 
@@ -11,6 +12,11 @@ export default {
   title: 'Components/Label',
   component: IressLabel,
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    append: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressLabel>;
 
 export const Default: Story = {

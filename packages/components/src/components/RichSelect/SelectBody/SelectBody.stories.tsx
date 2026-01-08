@@ -14,6 +14,7 @@ import {
   mergeStorybookConfig,
   removeArgTypes,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressSelectBody>;
 
@@ -21,6 +22,10 @@ export default {
   title: 'Components/RichSelect/Subcomponents/Body',
   component: IressSelectBody,
   argTypes: {
+    children: reactNodeArgType,
+    header: reactNodeArgType,
+    footer: reactNodeArgType,
+    ...stylingProps,
     ...mergeStorybookConfig(
       removeArgTypes(['style']),
       disableArgTypes(['children', 'footer', 'header']),

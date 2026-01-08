@@ -12,9 +12,9 @@ import {
 import {
   handleGetUsageExamples,
   handleSearchIdsDocs,
-  handleGetDesignTokens,
   handleGetDesignGuidelines,
 } from './searchHandlers.js';
+import { handleGetDesignTokens } from './tokenHandlers.js';
 import {
   handleGetIressComponentInfo,
   handleAnalyzeComponentMentions,
@@ -30,8 +30,12 @@ vi.mock('./componentHandlers.js', () => ({
 vi.mock('./searchHandlers.js', () => ({
   handleGetUsageExamples: vi.fn(),
   handleSearchIdsDocs: vi.fn(),
-  handleGetDesignTokens: vi.fn(),
   handleGetDesignGuidelines: vi.fn(),
+}));
+
+vi.mock('./tokenHandlers.js', () => ({
+  handleGetDesignTokensUsage: vi.fn(),
+  handleGetDesignTokens: vi.fn(),
 }));
 
 vi.mock('./iressHandlers.js', () => ({
@@ -174,14 +178,14 @@ describe('handleToolCall', () => {
       const request = {
         params: {
           name: 'get_design_tokens',
-          arguments: { category: 'colors' },
+          arguments: { type: 'colour' },
         },
       };
 
       const result = handleToolCall(request);
 
       expect(mockedHandleGetDesignTokens).toHaveBeenCalledWith({
-        category: 'colors',
+        type: 'colour',
       });
       expect(result).toEqual(mockResponse);
     });

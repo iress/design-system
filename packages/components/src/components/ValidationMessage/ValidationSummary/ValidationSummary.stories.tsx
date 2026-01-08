@@ -1,11 +1,16 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressValidationSummary } from '@/main';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressValidationSummary>;
 
 export default {
   title: 'Components/ValidationMessage/ValidationSummary',
   component: IressValidationSummary,
+  argTypes: {
+    prefix: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressValidationSummary>;
 
 export const ValidationSummary: Story = {

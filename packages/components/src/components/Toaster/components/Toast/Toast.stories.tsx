@@ -4,6 +4,7 @@ import { type ToastStatus, Toast } from './Toast';
 import { capitalizeFirstLetter } from '@helpers/formatting/capitalizeFirstLetter';
 import { IressStack } from '../../../Stack/Stack';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof Toast>;
 const TOAST_STATUS: ToastStatus[] = ['success', 'error', 'info'];
@@ -39,7 +40,9 @@ export default {
   component: Toast,
   argTypes: {
     ...disableArgTypes(['onClose']),
+    content: reactNodeArgType,
     heading: {
+      ...reactNodeArgType,
       control: {
         type: 'select',
         labels: {
@@ -50,7 +53,9 @@ export default {
       options: Object.keys(headingOptions),
       mapping: headingOptions,
     },
+    ...stylingProps,
     actions: {
+      ...reactNodeArgType,
       control: {
         type: 'select',
         labels: {

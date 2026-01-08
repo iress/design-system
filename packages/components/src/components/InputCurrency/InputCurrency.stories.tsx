@@ -1,5 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressInputCurrency } from './InputCurrency';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressInputCurrency>;
 
@@ -7,6 +8,11 @@ export default {
   title: 'Components/InputCurrency',
   component: IressInputCurrency,
   tags: ['updated'],
+  argTypes: {
+    append: reactNodeArgType,
+    prepend: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressInputCurrency>;
 
 export const Default: Story = {

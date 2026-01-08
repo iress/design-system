@@ -2,6 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressContainer } from '.';
 import { IressPanel } from '../Panel';
 import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 import { IressTable } from '../Table';
 import { BREAKPOINT_DETAILS, BREAKPOINTS } from '@/constants';
 
@@ -14,6 +15,10 @@ export default {
     layout: 'fullscreen',
   },
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    ...stylingProps,
+  },
   decorators: [
     (Story) => (
       <IressPanel bg="alt" borderRadius="radius.000" stretch>

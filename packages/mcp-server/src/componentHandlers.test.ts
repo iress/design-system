@@ -15,6 +15,7 @@ vi.mock('./utils.js', () => ({
   mapIressComponentToFile: vi.fn(),
   extractIressComponents: vi.fn(),
   readFileContent: vi.fn(),
+  parseMultiComponentQuery: vi.fn(),
 }));
 
 // Mock the config module
@@ -27,6 +28,8 @@ const mockUtils = vi.mocked(utils);
 describe('componentHandlers', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    // Default mock for parseMultiComponentQuery returns empty array (single component mode)
+    mockUtils.parseMultiComponentQuery.mockReturnValue([]);
   });
 
   afterEach(() => {
@@ -220,6 +223,102 @@ A versatile button component for user interactions.
       // Count the number of component entries by splitting on numbered items
       const entries = result.content[0].text.split(/\n\d+\. /).length - 1;
       expect(entries).toBeLessThanOrEqual(10);
+    });
+
+    // Pattern support integration tests
+    it('should find IressForm from pattern documentation', () => {
+      const args = {
+        query: 'IressForm',
+      };
+
+      mockUtils.mapIressComponentToFile.mockReturnValue(
+        'patterns-form-docs.md',
+      );
+
+      const result = handleFindComponent(args);
+
+      expect(mockUtils.mapIressComponentToFile).toHaveBeenCalledWith(
+        'IressForm',
+      );
+      expect(result.content[0].text).toContain(
+        'Found exact match for **IressForm**',
+      );
+      expect(result.content[0].text).toContain('patterns-form-docs.md');
+    });
+
+    it('should find IressHookForm from pattern documentation', () => {
+      const args = {
+        query: 'IressHookForm',
+      };
+
+      mockUtils.mapIressComponentToFile.mockReturnValue(
+        'patterns-hookform-docs.md',
+      );
+
+      const result = handleFindComponent(args);
+
+      expect(result.content[0].text).toContain(
+        'Found exact match for **IressHookForm**',
+      );
+      expect(result.content[0].text).toContain('patterns-hookform-docs.md');
+    });
+
+    it('should boost relevance score for pattern files in search results', () => {
+      const args = {
+        query: 'form',
+      };
+
+      const mockFormPatternContent = `# Form Pattern
+
+A comprehensive form pattern with validation.
+form form form form form
+`;
+
+      const mockFormComponentContent = `# Form Component
+
+Basic form component.
+form
+`;
+
+      mockUtils.mapIressComponentToFile.mockReturnValue(null);
+      mockUtils.getMarkdownFiles.mockReturnValue([
+        'components-form-docs.md',
+        'patterns-form-docs.md',
+      ]);
+      mockUtils.extractIressComponents.mockReturnValue([]);
+
+      // Mock different content for different files
+      mockUtils.readFileContent.mockImplementation((path: string) => {
+        if (path.includes('patterns-form-docs.md')) {
+          return mockFormPatternContent;
+        }
+        return mockFormComponentContent;
+      });
+
+      const result = handleFindComponent(args);
+
+      // Pattern should appear first due to +25 relevance boost
+      expect(result.content[0].text).toContain('patterns-form-docs.md');
+      expect(
+        result.content[0].text.indexOf('patterns-form-docs.md'),
+      ).toBeLessThan(result.content[0].text.indexOf('components-form-docs.md'));
+    });
+
+    it('should maintain backward compatibility with existing component searches', () => {
+      const args = {
+        query: 'IressButton',
+      };
+
+      mockUtils.mapIressComponentToFile.mockReturnValue(
+        'components-button-docs.md',
+      );
+
+      const result = handleFindComponent(args);
+
+      expect(result.content[0].text).toContain(
+        'Found exact match for **IressButton**',
+      );
+      expect(result.content[0].text).toContain('components-button-docs.md');
     });
   });
 
@@ -518,6 +617,268 @@ Different modes
       expect(result.content[0].text).toContain('- complex-button-component');
       expect(result.content[0].text).toContain('- design-tokens');
       expect(result.content[0].text).toContain('- icon-library');
+    });
+  });
+
+  describe('handleFindComponent - Multi-Component Search', () => {
+    const mockFiles = [
+      'components-button-docs.md',
+      'components-input-docs.md',
+      'patterns-form-docs.md',
+      'components-richselect-docs.md',
+    ];
+
+    const mockButtonContent = `# Button Component
+
+A versatile button component for user interactions.
+
+## Props
+- variant: primary | secondary
+- size: small | medium | large
+
+## Examples
+\`\`\`tsx
+<IressButton variant="primary">Click me</IressButton>
+\`\`\`
+`;
+
+    const mockFormContent = `# Form Pattern
+
+Form component with built-in React Hook Form integration.
+
+## Props
+- pattern: short | long
+- onSubmit: function
+
+## Examples
+\`\`\`tsx
+<IressForm pattern="short" onSubmit={handleSubmit}>
+  {/* Form fields */}
+</IressForm>
+\`\`\`
+`;
+
+    const mockInputContent = `# Input Component
+
+Text input component for forms.
+
+## Props
+- type: text | email | password
+- placeholder: string
+
+## Examples
+\`\`\`tsx
+<IressInput type="text" placeholder="Enter text" />
+\`\`\`
+`;
+
+    beforeEach(() => {
+      mockUtils.getMarkdownFiles.mockReturnValue(mockFiles);
+    });
+
+    it('should handle multi-component search for Iress-prefixed components', () => {
+      const args = {
+        query: 'IressButton IressForm',
+      };
+
+      mockUtils.parseMultiComponentQuery.mockReturnValue([
+        'IressButton',
+        'IressForm',
+      ]);
+      mockUtils.mapIressComponentToFile
+        .mockReturnValueOnce('components-button-docs.md')
+        .mockReturnValueOnce('patterns-form-docs.md');
+      mockUtils.readFileContent
+        .mockReturnValueOnce(mockButtonContent)
+        .mockReturnValueOnce(mockFormContent);
+
+      const result = handleFindComponent(args);
+
+      expect(mockUtils.parseMultiComponentQuery).toHaveBeenCalledWith(
+        'IressButton IressForm',
+      );
+      expect(result.content[0].text).toContain('Found 2 components');
+      expect(result.content[0].text).toContain('🧩 **IressButton**');
+      expect(result.content[0].text).toContain('Type: Component');
+      expect(result.content[0].text).toContain('📐 **IressForm**');
+      expect(result.content[0].text).toContain('Type: Pattern');
+    });
+
+    it('should handle multi-component search for unprefixed components', () => {
+      const args = {
+        query: 'Button Input Form',
+      };
+
+      mockUtils.parseMultiComponentQuery.mockReturnValue([
+        'IressButton',
+        'IressInput',
+        'IressForm',
+      ]);
+      mockUtils.mapIressComponentToFile
+        .mockReturnValueOnce('components-button-docs.md')
+        .mockReturnValueOnce('components-input-docs.md')
+        .mockReturnValueOnce('patterns-form-docs.md');
+      mockUtils.readFileContent
+        .mockReturnValueOnce(mockButtonContent)
+        .mockReturnValueOnce(mockInputContent)
+        .mockReturnValueOnce(mockFormContent);
+
+      const result = handleFindComponent(args);
+
+      expect(result.content[0].text).toContain('Found 3 components');
+      expect(result.content[0].text).toContain('IressButton');
+      expect(result.content[0].text).toContain('IressInput');
+      expect(result.content[0].text).toContain('IressForm');
+    });
+
+    it('should handle mix of found and not-found components', () => {
+      const args = {
+        query: 'IressButton IressNonExistent',
+      };
+
+      mockUtils.parseMultiComponentQuery.mockReturnValue([
+        'IressButton',
+        'IressNonExistent',
+      ]);
+      mockUtils.mapIressComponentToFile
+        .mockReturnValueOnce('components-button-docs.md')
+        .mockReturnValueOnce(null); // Not found
+      mockUtils.readFileContent.mockReturnValueOnce(mockButtonContent);
+
+      const result = handleFindComponent(args);
+
+      expect(result.content[0].text).toContain('Found 1 component');
+      expect(result.content[0].text).toContain('IressButton');
+      expect(result.content[0].text).toContain('❌ Not found (1)');
+      expect(result.content[0].text).toContain('- IressNonExistent');
+    });
+
+    it('should apply category filter in multi-component search', () => {
+      const args = {
+        query: 'IressButton IressForm',
+        category: 'components' as const,
+      };
+
+      mockUtils.parseMultiComponentQuery.mockReturnValue([
+        'IressButton',
+        'IressForm',
+      ]);
+      mockUtils.mapIressComponentToFile
+        .mockReturnValueOnce('components-button-docs.md')
+        .mockReturnValueOnce('patterns-form-docs.md');
+      mockUtils.readFileContent
+        .mockReturnValueOnce(mockButtonContent)
+        .mockReturnValueOnce(mockFormContent); // Needed to determine type
+
+      const result = handleFindComponent(args);
+
+      // IressForm is a pattern, should be filtered out
+      expect(result.content[0].text).toContain('Found 1 component');
+      expect(result.content[0].text).toContain('IressButton');
+      expect(result.content[0].text).not.toContain('IressForm');
+    });
+
+    it('should fall back to single-component search when only one component detected', () => {
+      const args = {
+        query: 'IressButton',
+      };
+
+      mockUtils.parseMultiComponentQuery.mockReturnValue([]); // Empty = single component
+      mockUtils.mapIressComponentToFile.mockReturnValue(
+        'components-button-docs.md',
+      );
+
+      const result = handleFindComponent(args);
+
+      // Should use single-component logic
+      expect(result.content[0].text).toContain(
+        'Found exact match for **IressButton**',
+      );
+      expect(result.content[0].text).not.toContain('Found 1 component'); // Multi-component format
+    });
+
+    it('should show correct component types (component, pattern, foundation)', () => {
+      const args = {
+        query: 'IressButton IressForm',
+      };
+
+      mockUtils.parseMultiComponentQuery.mockReturnValue([
+        'IressButton',
+        'IressForm',
+      ]);
+      mockUtils.mapIressComponentToFile
+        .mockReturnValueOnce('components-button-docs.md')
+        .mockReturnValueOnce('patterns-form-docs.md');
+      mockUtils.readFileContent
+        .mockReturnValueOnce(mockButtonContent)
+        .mockReturnValueOnce(mockFormContent);
+
+      const result = handleFindComponent(args);
+
+      expect(result.content[0].text).toContain('Type: Component');
+      expect(result.content[0].text).toContain('Type: Pattern');
+    });
+
+    it('should truncate content preview appropriately', () => {
+      const longContent = 'x'.repeat(2000);
+      const args = {
+        query: 'IressButton',
+      };
+
+      mockUtils.parseMultiComponentQuery.mockReturnValue(['IressButton']);
+      mockUtils.mapIressComponentToFile.mockReturnValue(
+        'components-button-docs.md',
+      );
+      mockUtils.readFileContent.mockReturnValue(longContent);
+
+      const result = handleFindComponent(args);
+
+      // Content should be truncated in the preview
+      const textLength = result.content[0].text.length;
+      expect(textLength).toBeLessThan(longContent.length);
+    });
+
+    it('should handle all components not found', () => {
+      const args = {
+        query: 'IressNope IressNada',
+      };
+
+      mockUtils.parseMultiComponentQuery.mockReturnValue([
+        'IressNope',
+        'IressNada',
+      ]);
+      mockUtils.mapIressComponentToFile.mockReturnValue(null);
+
+      const result = handleFindComponent(args);
+
+      expect(result.content[0].text).not.toContain('Found');
+      expect(result.content[0].text).toContain('❌ Not found (2)');
+      expect(result.content[0].text).toContain('- IressNope');
+      expect(result.content[0].text).toContain('- IressNada');
+    });
+
+    it('should include file paths in results', () => {
+      const args = {
+        query: 'IressButton IressForm',
+      };
+
+      mockUtils.parseMultiComponentQuery.mockReturnValue([
+        'IressButton',
+        'IressForm',
+      ]);
+      mockUtils.mapIressComponentToFile
+        .mockReturnValueOnce('components-button-docs.md')
+        .mockReturnValueOnce('patterns-form-docs.md');
+      mockUtils.readFileContent
+        .mockReturnValueOnce(mockButtonContent)
+        .mockReturnValueOnce(mockFormContent);
+
+      const result = handleFindComponent(args);
+
+      expect(result.content[0].text).toContain(
+        'File: components-button-docs.md',
+      );
+      expect(result.content[0].text).toContain('File: patterns-form-docs.md');
     });
   });
 });

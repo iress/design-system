@@ -14,6 +14,7 @@ import {
 import { type FieldValues } from 'react-hook-form';
 import { addToStorybookCategory } from '@iress-oss/ids-storybook-config';
 import type { AddonConfig } from '@iress-oss/ids-storybook-sandbox';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 const alertOptions = {
   none: undefined,
@@ -115,6 +116,7 @@ export const formArgs = {
 
 export const formArgTypes = {
   actions: {
+    ...reactNodeArgType,
     control: {
       type: 'select',
       labels: {
@@ -125,6 +127,7 @@ export const formArgTypes = {
     mapping: actionOptions,
   },
   alert: {
+    ...reactNodeArgType,
     control: {
       type: 'select',
       labels: {
@@ -135,6 +138,7 @@ export const formArgTypes = {
     mapping: alertOptions,
   },
   children: {
+    ...reactNodeArgType,
     control: {
       type: 'select',
       labels: {
@@ -158,6 +162,7 @@ export const formArgTypes = {
     'shouldUnregister',
     'values',
   ]),
+  ...stylingProps,
 };
 
 export const formParameters = {

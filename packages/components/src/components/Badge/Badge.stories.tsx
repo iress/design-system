@@ -1,5 +1,10 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import {
+  reactElementArgType,
+  reactNodeArgType,
+  stylingProps,
+} from '@theme-preset/storybookHelpers';
 import { STATUSES } from '@/constants';
 import { IressBadge, IressButton, IressInline, IressTab } from '@/main';
 
@@ -10,6 +15,11 @@ export default {
   title: 'Components/Badge',
   component: IressBadge,
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    host: reactElementArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressBadge>;
 
 export const Default: Story = {

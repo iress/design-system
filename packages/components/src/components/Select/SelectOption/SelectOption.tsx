@@ -1,9 +1,9 @@
 import { styled } from '@/styled-system/jsx';
-import { type FormControlValue, type IressStyledProps } from '@/types';
+import type { IressUnstyledProps, FormControlValue } from '@/types';
 import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAsString';
 
 export interface IressSelectOptionProps extends Omit<
-  IressStyledProps<'option'>,
+  IressUnstyledProps<'option'>,
   'value'
 > {
   /**

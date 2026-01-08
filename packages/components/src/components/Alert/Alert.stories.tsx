@@ -5,12 +5,14 @@ import {
   type IressAlertProps,
   IressStack,
   IressText,
+  STATUSES,
   type Statuses,
 } from '@/main';
 import {
   disableArgTypes,
   STORYBOOK_ONLY_CATEGORY,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type CustomArgs = Partial<IressAlertProps> & {
   messages: Record<Statuses, string>;
@@ -21,9 +23,13 @@ export default {
   title: 'Components/Alert',
   component: IressAlert,
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    footer: reactNodeArgType,
+    heading: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressAlert>;
-
-const statuses = ['danger', 'info', 'success', 'warning'] as const;
 
 export const Default: Story = {
   args: {
@@ -59,7 +65,7 @@ export const Status: Story = {
   },
   render: ({ messages, ...args }) => (
     <IressStack gap="md">
-      {statuses.map((status) => (
+      {STATUSES.map((status) => (
         <IressAlert {...args} status={status} key={status}>
           {messages[status]}
         </IressAlert>

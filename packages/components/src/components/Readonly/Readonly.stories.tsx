@@ -4,6 +4,7 @@ import { IressInline } from '../Inline';
 import { IressIcon } from '../Icon';
 import { IressText } from '../Text';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<IressReadonlyProps>;
 
@@ -12,6 +13,8 @@ export default {
   component: IressReadonly,
   argTypes: {
     ...disableArgTypes(['children']),
+    children: reactNodeArgType,
+    ...stylingProps,
   },
   tags: ['updated'],
 } as Meta<typeof IressReadonly>;

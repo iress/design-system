@@ -11,6 +11,7 @@ import {
   TEXT_ALIGNS,
 } from '@/main';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { stylingProps } from '@theme-preset/storybookHelpers';
 
 type PanelCustomArgs = React.ComponentProps<typeof IressPanel>;
 type Story = StoryObj<PanelCustomArgs>;
@@ -63,6 +64,7 @@ export default {
       options: Object.keys(childrenOptions),
       mapping: childrenOptions,
     },
+    ...stylingProps,
   },
   tags: ['updated'],
   decorators: [

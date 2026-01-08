@@ -19,6 +19,7 @@ import {
   CurrentBreakpoint,
   withCustomSource,
 } from '@iress-oss/ids-storybook-config';
+import { stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressTable>;
 
@@ -31,6 +32,7 @@ const BreakpointXl = lazy(() => import('@docs/components/BreakpointXl'));
 export default {
   title: 'Foundations/Responsive layout',
   component: IressTable,
+  argTypes: stylingProps,
 } as Meta<typeof IressTable>;
 
 export const Breakpoints: Story = {

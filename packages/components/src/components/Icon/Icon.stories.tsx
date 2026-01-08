@@ -3,6 +3,7 @@ import { IressIcon, type IressIconProps } from './Icon';
 import { IressText } from '../Text';
 import { IressInline } from '../Inline';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<IressIconProps>;
 
@@ -10,6 +11,9 @@ export default {
   title: 'Components/Icon',
   component: IressIcon,
   tags: ['updated'],
+  argTypes: {
+    ...stylingProps,
+  },
 } as Meta<typeof IressIcon>;
 
 export const Default: Story = {

@@ -29,7 +29,7 @@
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json"
   },
   "devDependencies": {
-    "@iress-oss/ids-tokens": "^6.0.0-alpha.5",
+    "@iress-oss/ids-tokens": "^6.0.0-alpha.6",
     "@pandacss/dev": "1.7.1",
     "@testing-library/dom": "10.4.1",
     "@testing-library/jest-dom": "6.9.1",

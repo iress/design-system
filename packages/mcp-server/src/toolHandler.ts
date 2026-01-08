@@ -9,13 +9,17 @@ import {
 import {
   handleGetUsageExamples,
   handleSearchIdsDocs,
-  handleGetDesignTokens,
   handleGetDesignGuidelines,
 } from './searchHandlers.js';
 import {
   handleGetIressComponentInfo,
   handleAnalyzeComponentMentions,
 } from './iressHandlers.js';
+import {
+  handleGetDesignTokensUsage,
+  handleGetDesignTokens,
+} from './tokenHandlers.js';
+import { handleGetStylingPropsReference } from './stylingHandlers.js';
 
 interface ToolCallRequest {
   params: {
@@ -46,6 +50,9 @@ export function handleToolCall(request: ToolCallRequest) {
     case 'get_design_tokens':
       return handleGetDesignTokens(args);
 
+    case 'get_design_tokens_usage':
+      return handleGetDesignTokensUsage(args as { category?: string });
+
     case 'get_iress_component_info':
       return handleGetIressComponentInfo(args);
 
@@ -54,6 +61,9 @@ export function handleToolCall(request: ToolCallRequest) {
 
     case 'get_design_guidelines':
       return handleGetDesignGuidelines(args);
+
+    case 'get_styling_props_reference':
+      return handleGetStylingPropsReference(args);
 
     default:
       throw new Error(`Unknown tool: ${name}`);

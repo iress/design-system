@@ -13,6 +13,7 @@ import {
   disableArgTypes,
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressCheckboxGroup>;
 
@@ -20,7 +21,8 @@ export default {
   title: 'Components/CheckboxGroup',
   component: IressCheckboxGroup,
   argTypes: {
-    ...disableArgTypes(['children']),
+    children: reactNodeArgType,
+    ...stylingProps,
   },
   tags: ['updated'],
 } as Meta<typeof IressCheckboxGroup>;

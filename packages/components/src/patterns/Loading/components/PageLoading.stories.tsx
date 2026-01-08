@@ -6,6 +6,7 @@ import LoadingDashboardSource from '../mocks/LoadingDashboard.tsx?raw';
 import { LoadingDashboardError } from '../mocks/LoadingDashboardError';
 import LoadingDashboardErrorSource from '../mocks/LoadingDashboardError.tsx?raw';
 import { withCustomSource } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 // This is a pattern for IressLoading, hence we change the name
 (PageLoading as FC).displayName = 'IressLoading';
@@ -16,6 +17,12 @@ export default {
   title: 'Patterns/Loading/Patterns/Page',
   component: PageLoading,
   tags: ['beta: '],
+  argTypes: {
+    critical: reactNodeArgType,
+    error: reactNodeArgType,
+    screenReaderText: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof PageLoading>;
 
 export const Page: Story = {

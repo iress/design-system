@@ -6,14 +6,14 @@ export const toolDefinitions = [
   {
     name: 'find_component',
     description:
-      'Find IDS components by name or functionality. Perfect for discovering which component to use for specific UI needs.',
+      'Find IDS components by name or functionality. Supports searching for multiple components at once (e.g., "IressForm IressSelect" or "Button Input"). Perfect for discovering which components to use for specific UI needs.',
     inputSchema: {
       type: 'object',
       properties: {
         query: {
           type: 'string',
           description:
-            "Component name (e.g., 'button', 'input') or functionality (e.g., 'form submission', 'navigation')",
+            "Component name (e.g., 'button', 'input') or functionality (e.g., 'form submission', 'navigation'). Can also search for multiple components at once (e.g., 'IressForm IressSelect' or 'Button Input Select')",
         },
         category: {
           type: 'string',
@@ -101,14 +101,41 @@ export const toolDefinitions = [
   {
     name: 'get_design_tokens',
     description:
-      'Get information about IDS design tokens (colors, spacing, typography) for consistent UI implementation.',
+      'Get information about IDS design tokens (colors, spacing, typography, elevation, radius, etc.) for consistent UI implementation. Automatically detects all available token types from the design system.',
     inputSchema: {
       type: 'object',
       properties: {
         type: {
           type: 'string',
-          description: 'Type of design token to search for',
-          enum: ['colors', 'spacing', 'typography', 'breakpoints', 'all'],
+          description:
+            'Type of design token to retrieve. Use "all" to see all available token types, or specify a specific type like "colors", "spacing", "typography", "elevation", or "radius".',
+          default: 'all',
+        },
+      },
+    },
+  },
+  {
+    name: 'get_design_tokens_usage',
+    description:
+      "Get design token usage examples, best practices, and anti-patterns from generated Storybook documentation. Shows when to use tokens vs hardcoded values with practical ✅ DO / ❌ DON'T examples. Essential for generating code that follows the design system properly.",
+    inputSchema: {
+      type: 'object',
+      properties: {
+        category: {
+          type: 'string',
+          description:
+            'Token usage category to get examples for: colour/color/colors (semantic tokens, accessibility), spacing (scale, directional props), typography (IressText vs textStyle), elevation (layering, shadows), radius (border radius), best-practices (when to use styling props vs iressCss vs custom CSS), or all',
+          enum: [
+            'colour',
+            'color',
+            'colors',
+            'spacing',
+            'typography',
+            'elevation',
+            'radius',
+            'best-practices',
+            'all',
+          ],
           default: 'all',
         },
       },
@@ -177,6 +204,36 @@ export const toolDefinitions = [
           type: 'string',
           description:
             'Optional: search for specific guidelines or best practices',
+        },
+      },
+    },
+  },
+  {
+    name: 'get_styling_props_reference',
+    description:
+      'Get comprehensive reference for IDS styling props including spacing, colors, typography, visual effects, and sizing. Shows which props are available, their purpose, usage examples, and when to use different styling approaches.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        category: {
+          type: 'string',
+          enum: [
+            'all',
+            'spacing',
+            'colors',
+            'typography',
+            'visual',
+            'sizing',
+            'utility',
+          ],
+          description:
+            'Styling prop category to get reference for (default: all)',
+          default: 'all',
+        },
+        component: {
+          type: 'string',
+          description:
+            'Optional: specific component name to check styling prop support for (e.g., "IressButton")',
         },
       },
     },

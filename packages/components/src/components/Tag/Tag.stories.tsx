@@ -7,6 +7,7 @@ import { IressButton } from '../Button';
 import { IressIcon } from '../Icon';
 import { IressPanel } from '../Panel';
 import { withCustomSource } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressTag>;
 
@@ -14,6 +15,11 @@ export default {
   title: 'Components/Tag',
   component: IressTag,
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    deleteButton: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressTag>;
 
 export const Tag: Story = {

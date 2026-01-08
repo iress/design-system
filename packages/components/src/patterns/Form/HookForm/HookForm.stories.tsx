@@ -7,6 +7,7 @@ import {
   removeArgTypes,
   withCustomSource,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressHookForm>;
 
@@ -15,6 +16,8 @@ export default {
   component: IressHookForm,
   argTypes: {
     ...removeArgTypes(['ref']),
+    children: reactNodeArgType,
+    ...stylingProps,
   },
   parameters: {
     IDS_Sandbox: {

@@ -14,8 +14,10 @@ import { TabsLazyLoading } from './mocks/TabsLazyLoading';
 import TabsLazyLoadingSource from './mocks/TabsLazyLoading.tsx?raw';
 import {
   disableArgTypes,
+  mergeStorybookConfig,
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressTabSet>;
 
@@ -23,7 +25,10 @@ export default {
   title: 'Components/TabSet',
   component: IressTabSet,
   argTypes: {
-    ...disableArgTypes(['children']),
+    ...mergeStorybookConfig(disableArgTypes(['children']), {
+      children: reactNodeArgType,
+    }),
+    ...stylingProps,
   },
   tags: ['updated'],
 } as Meta<typeof IressTabSet>;

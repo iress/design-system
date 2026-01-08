@@ -13,7 +13,6 @@ import {
 import {
   handleGetUsageExamples,
   handleSearchIdsDocs,
-  handleGetDesignTokens,
   handleGetDesignGuidelines,
 } from './searchHandlers.js';
 import { ToolResponse } from './types.js';
@@ -383,159 +382,116 @@ PRIMARY button example
 
       consoleSpy.mockRestore();
     });
-  });
 
-  describe('handleGetDesignTokens', () => {
-    it('should return all design tokens when type is "all"', () => {
+    it('should find styling props documentation in search results', () => {
       const mockMarkdownFiles = [
-        'foundations-colors-docs.md',
-        'foundations-spacing-docs.md',
-        'foundations-typography-docs.md',
+        'components_styling-props-spacing-docs.md',
+        'components_styling-props-screen-readers-docs.md',
       ];
 
-      const mockColorsContent = `
-# Colors
-## Primary Colors
-Use these CSS variables: --iress-color-primary, --iress-color-secondary
-      `;
-
       const mockSpacingContent = `
-# Spacing
-## Base Spacing
-Available variables: --iress-space-sm, --iress-space-md, --iress-space-lg
+# Spacing Styling Props
+Available spacing props: p, px, py, m, mx, my
+Use textAlign for text alignment
       `;
 
-      const mockTypographyContent = `
-# Typography
-## Font Sizes
-Typography tokens: --iress-font-size-sm, --iress-font-size-lg
+      const mockScreenReadersContent = `
+# Screen Reader Utility Props
+Use hideFrom to hide content from specific breakpoints
+Use hideBelow for responsive hiding
+Use srOnly for screen reader only content
       `;
 
       mockUtils.getMarkdownFiles.mockReturnValue(mockMarkdownFiles);
       mockUtils.readFileContent
-        .mockReturnValueOnce(mockColorsContent)
         .mockReturnValueOnce(mockSpacingContent)
-        .mockReturnValueOnce(mockTypographyContent);
+        .mockReturnValueOnce(mockScreenReadersContent);
 
-      const result: ToolResponse = handleGetDesignTokens({ type: 'all' });
-
-      expect(result.content[0].text).toContain('**IDS Design Tokens**');
-      expect(result.content[0].text).toContain('**colors**');
-      expect(result.content[0].text).toContain('**spacing**');
-      expect(result.content[0].text).toContain('**typography**');
-      expect(result.content[0].text).toContain('--iress-color-primary');
-      expect(result.content[0].text).toContain('--iress-space-sm');
-      expect(result.content[0].text).toContain('--iress-font-size-sm');
-    });
-
-    it('should filter tokens by specific type', () => {
-      const mockMarkdownFiles = [
-        'foundations-colors-docs.md',
-        'foundations-spacing-docs.md',
-      ];
-
-      const mockColorsContent = `
-# Colors
-CSS Variables: --iress-color-primary, --iress-color-secondary
-      `;
-
-      mockUtils.getMarkdownFiles.mockReturnValue(mockMarkdownFiles);
-      mockUtils.readFileContent.mockReturnValue(mockColorsContent);
-
-      const result: ToolResponse = handleGetDesignTokens({ type: 'colors' });
-
-      expect(result.content[0].text).toContain(
-        '**IDS Design Tokens (colors)**',
-      );
-      expect(result.content[0].text).toContain('--iress-color-primary');
-      // Should only process the colors file
-      expect(mockUtils.readFileContent).toHaveBeenCalledTimes(1);
-    });
-
-    it('should handle case when no foundation files match the type', () => {
-      mockUtils.getMarkdownFiles.mockReturnValue([
-        'components-button-docs.md',
-        'foundations-other-docs.md',
-      ]);
-
-      const result: ToolResponse = handleGetDesignTokens({ type: 'colors' });
-
-      expect(result.content[0].text).toContain(
-        'No design token information found for colors',
-      );
-      expect(result.content[0].text).toContain('Available foundations: other');
-    });
-
-    it('should use default type "all" when not specified', () => {
-      const mockMarkdownFiles = ['foundations-colors-docs.md'];
-      const mockContent = 'Colors with --iress-color-primary';
-
-      mockUtils.getMarkdownFiles.mockReturnValue(mockMarkdownFiles);
-      mockUtils.readFileContent.mockReturnValue(mockContent);
-
-      const result: ToolResponse = handleGetDesignTokens({});
-
-      expect(result.content[0].text).toContain('**IDS Design Tokens**');
-      expect(result.content[0].text).not.toContain('(colors)');
-    });
-
-    it('should extract token sections and CSS variables correctly', () => {
-      const mockMarkdownFiles = ['foundations-tokens-docs.md'];
-      const mockContent = `
-# Design Tokens
-
-## Primary Colors
-Main brand colors
-
-### Secondary Colors  
-Supporting colors
-
-CSS Variables available:
-- --iress-primary-100
-- --iress-primary-200
-- --iress-secondary-100
-      `;
-
-      mockUtils.getMarkdownFiles.mockReturnValue(mockMarkdownFiles);
-      mockUtils.readFileContent.mockReturnValue(mockContent);
-
-      const result: ToolResponse = handleGetDesignTokens({ type: 'all' });
-
-      expect(result.content[0].text).toContain('## Primary Colors');
-      expect(result.content[0].text).toContain('### Secondary Colors');
-      expect(result.content[0].text).toContain('--iress-primary-');
-      expect(result.content[0].text).toContain('--iress-secondary-');
-    });
-
-    it('should handle file reading errors during token extraction', () => {
-      const mockMarkdownFiles = [
-        'foundations-colors-docs.md',
-        'foundations-spacing-docs.md',
-      ];
-
-      mockUtils.getMarkdownFiles.mockReturnValue(mockMarkdownFiles);
-      mockUtils.readFileContent.mockImplementation((filePath: string) => {
-        if (filePath.includes('colors')) {
-          return 'Colors with --iress-color-primary token';
-        }
-        throw new Error('File read error for spacing');
+      const result: ToolResponse = handleSearchIdsDocs({
+        query: 'hideFrom',
+        case_sensitive: false,
       });
 
-      const consoleSpy = vi
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
+      expect(result.content[0].text).toContain('Found');
+      expect(result.content[0].text).toContain('styling-props-screen-readers');
+      expect(result.content[0].text).toContain('hideFrom');
+      expect(result.content[0].text).toContain('get_styling_props_reference');
+    });
 
-      const result: ToolResponse = handleGetDesignTokens({ type: 'all' });
+    it('should include styling props files when searching for "spacing"', () => {
+      const mockMarkdownFiles = [
+        'components_styling-props-spacing-docs.md',
+        'components-stack-docs.md',
+      ];
 
-      expect(consoleSpy).toHaveBeenCalledWith(
-        'Error reading file foundations-spacing-docs.md:',
-        expect.any(Error),
+      const mockSpacingContent = `
+# Spacing Styling Props
+Control spacing with p, m props
+      `;
+
+      const mockStackContent = `
+# Stack Component  
+Stack controls spacing between children
+      `;
+
+      mockUtils.getMarkdownFiles.mockReturnValue(mockMarkdownFiles);
+      mockUtils.readFileContent
+        .mockReturnValueOnce(mockSpacingContent)
+        .mockReturnValueOnce(mockStackContent);
+
+      const result: ToolResponse = handleSearchIdsDocs({
+        query: 'spacing',
+        case_sensitive: false,
+      });
+
+      expect(result.content[0].text).toContain('Found');
+      expect(result.content[0].text).toContain('styling-props-spacing');
+      expect(result.content[0].text).toContain('stack');
+      expect(result.content[0].text).toContain('get_styling_props_reference');
+    });
+
+    it('should suggest styling props tool for color-related searches', () => {
+      const mockMarkdownFiles = ['components_styling-props-colour-docs.md'];
+
+      const mockContent = `
+# Color Styling Props
+Available color props: bg, color
+      `;
+
+      mockUtils.getMarkdownFiles.mockReturnValue(mockMarkdownFiles);
+      mockUtils.readFileContent.mockReturnValue(mockContent);
+
+      const result: ToolResponse = handleSearchIdsDocs({
+        query: 'color',
+        case_sensitive: false,
+      });
+
+      expect(result.content[0].text).toContain('Found');
+      expect(result.content[0].text).toContain(
+        '*For comprehensive styling props documentation, use the `get_styling_props_reference` tool.*',
       );
-      expect(result.content[0].text).toContain('**IDS Design Tokens**');
-      expect(result.content[0].text).toContain('**colors**');
-      expect(result.content[0].text).toContain('--iress-color-primary');
+    });
 
-      consoleSpy.mockRestore();
+    it('should not suggest styling props tool for non-styling searches', () => {
+      const mockMarkdownFiles = ['components-button-docs.md'];
+
+      const mockContent = `
+# Button Component
+The button component allows user interaction
+      `;
+
+      mockUtils.getMarkdownFiles.mockReturnValue(mockMarkdownFiles);
+      mockUtils.readFileContent.mockReturnValue(mockContent);
+
+      const result: ToolResponse = handleSearchIdsDocs({
+        query: 'button',
+        case_sensitive: false,
+      });
+
+      expect(result.content[0].text).toContain('Found');
+      expect(result.content[0].text).not.toContain(
+        'get_styling_props_reference',
+      );
     });
   });
 

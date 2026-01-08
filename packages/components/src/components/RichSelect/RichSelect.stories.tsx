@@ -28,6 +28,7 @@ import {
   IressInline,
   IressMenuText,
 } from '@/main';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 import {
   addToStorybookCategory,
   disableArgTypes,
@@ -45,6 +46,10 @@ export default {
     placeholder: '',
   },
   argTypes: {
+    footer: reactNodeArgType,
+    header: reactNodeArgType,
+    placeholder: reactNodeArgType,
+    ...stylingProps,
     ...mergeStorybookConfig(
       disableArgTypes(['container']),
       addToStorybookCategory<IressRichSelectProps>('Popover props', [

@@ -18,6 +18,7 @@ import {
   disableArgTypes,
   STORYBOOK_ONLY_CATEGORY,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 interface FieldAndInputProps {
   field: IressFieldProps;
@@ -77,6 +78,10 @@ export default {
   title: 'Components/Field/FieldGroup',
   argTypes: {
     ...disableArgTypes(['children']),
+    error: reactNodeArgType,
+    hint: reactNodeArgType,
+    supplementary: reactNodeArgType,
+    ...stylingProps,
     inputs: {
       name: 'Input settings',
       type: 'array',

@@ -4,6 +4,11 @@ import { LongLoading } from './LongLoading';
 import { LoadingLongWithError } from '../mocks/LoadingLongWithError';
 import LoadingLongWithErrorSource from '../mocks/LoadingLongWithError.tsx?raw';
 import { withCustomSource } from '@iress-oss/ids-storybook-config';
+import {
+  customTypeArgType,
+  reactNodeArgType,
+  stylingProps,
+} from '@theme-preset/storybookHelpers';
 
 // This is a pattern for IressLoading, hence we change the name
 (LongLoading as FC).displayName = 'IressLoading';
@@ -14,6 +19,11 @@ export default {
   title: 'Patterns/Loading/Patterns/Long',
   component: LongLoading,
   tags: ['beta: '],
+  argTypes: {
+    children: reactNodeArgType,
+    messageList: customTypeArgType('Record<number, ReactNode>'),
+    ...stylingProps,
+  },
 } as Meta<typeof LongLoading>;
 
 export const Long: Story = {

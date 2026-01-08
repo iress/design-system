@@ -17,6 +17,7 @@ import {
   STORYBOOK_ONLY_CATEGORY,
   withJsxTransformer,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type IressFieldPropsAndCustomArgs = ComponentProps<typeof IressField> & {
   input: Omit<IressInputProps, 'onChange'>;
@@ -36,6 +37,10 @@ export default {
   component: IressField,
   argTypes: {
     ...disableArgTypes(['children']),
+    error: reactNodeArgType,
+    hint: reactNodeArgType,
+    supplementary: reactNodeArgType,
+    ...stylingProps,
     input: {
       name: 'Input settings',
       type: 'array',

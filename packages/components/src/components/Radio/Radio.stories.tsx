@@ -3,6 +3,7 @@ import { IressRadio } from '.';
 import { IressPanel } from '../Panel';
 import { IressStack } from '../Stack';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressRadio>;
 
@@ -10,6 +11,10 @@ export default {
   title: 'Components/Radio',
   component: IressRadio,
   tags: ['updated'],
+  argTypes: {
+    children: reactNodeArgType,
+    ...stylingProps,
+  },
 } as Meta<typeof IressRadio>;
 
 export const Default: Story = {

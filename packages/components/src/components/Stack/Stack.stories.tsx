@@ -11,6 +11,7 @@ import {
   CurrentBreakpoint,
   disableArgTypes,
 } from '@iress-oss/ids-storybook-config';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressStack>;
 
@@ -47,12 +48,14 @@ export default {
   component: IressStack,
   argTypes: {
     children: {
+      ...reactNodeArgType,
       control: {
         type: 'select',
       },
       options: Object.keys(childrenOptions),
       mapping: childrenOptions,
     },
+    ...stylingProps,
   },
   tags: ['updated'],
 } as Meta<typeof IressStack>;

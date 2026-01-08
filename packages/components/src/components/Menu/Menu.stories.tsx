@@ -8,6 +8,7 @@ import { useArgs } from 'storybook/preview-api';
 import { MenuRoleDescription } from './mocks/MenuRoleDescription';
 import { IressToggle } from '../Toggle';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressMenu>;
 
@@ -16,7 +17,6 @@ export default {
   component: IressMenu,
   tags: ['updated'],
   argTypes: {
-    ...disableArgTypes(['children']),
     children: {
       control: {
         type: 'select',
@@ -24,6 +24,7 @@ export default {
       options: Object.keys(MENU_CHILDREN_OPTIONS),
       mapping: MENU_CHILDREN_OPTIONS,
     },
+    ...stylingProps,
   },
 } as Meta<typeof IressMenu>;
 
