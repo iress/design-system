@@ -86,7 +86,7 @@ export function handleGetIressComponentInfo(args: unknown): ToolResponse {
     // Add cross-reference to styling props tool
     response += `\n**Related Tools:**\n`;
     response += `- For styling props (spacing, colors, typography, etc.), use \`get_styling_props_reference\` tool\n`;
-    response += `- For design token values, use \`get_design_token_info\` tool\n`;
+    response += `- For design token values, use \`get_design_tokens\` tool\n`;
 
     return {
       content: [

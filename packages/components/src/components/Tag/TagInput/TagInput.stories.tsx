@@ -8,7 +8,7 @@ export default {
   title: 'Components/Tag/TagInput',
   component: IressTagInput,
   tags: ['updated'],
-  args: stylingProps,
+  argTypes: stylingProps,
 } as Meta<typeof IressTagInput>;
 
 export const TagInput: Story = {

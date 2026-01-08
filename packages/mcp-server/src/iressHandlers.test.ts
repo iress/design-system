@@ -88,7 +88,7 @@ Additional API documentation here.
       );
       expect(result.content[0].text).toContain('**Related Tools:**');
       expect(result.content[0].text).toContain('get_styling_props_reference');
-      expect(result.content[0].text).toContain('get_design_token_info');
+      expect(result.content[0].text).toContain('get_design_tokens');
     });
 
     it('should include examples when include_examples is true', () => {
