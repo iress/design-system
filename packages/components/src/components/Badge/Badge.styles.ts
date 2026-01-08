@@ -93,6 +93,60 @@ export const badge = sva({
           color: 'colour.neutral.80',
         },
       },
+      '10': {
+        root: {
+          bg: 'colour.data.subtle.10',
+          color: 'colour.data.bold.10',
+        },
+      },
+      '20': {
+        root: {
+          bg: 'colour.data.subtle.20',
+          color: 'colour.data.bold.20',
+        },
+      },
+      '30': {
+        root: {
+          bg: 'colour.data.subtle.30',
+          color: 'colour.data.bold.30',
+        },
+      },
+      '40': {
+        root: {
+          bg: 'colour.data.subtle.40',
+          color: 'colour.data.bold.40',
+        },
+      },
+      '50': {
+        root: {
+          bg: 'colour.data.subtle.50',
+          color: 'colour.data.bold.50',
+        },
+      },
+      '60': {
+        root: {
+          bg: 'colour.data.subtle.60',
+          color: 'colour.data.bold.60',
+        },
+      },
+      '70': {
+        root: {
+          bg: 'colour.data.subtle.70',
+          color: 'colour.data.bold.70',
+        },
+      },
+      '80': {
+        root: {
+          bg: 'colour.data.subtle.80',
+          color: 'colour.data.bold.80',
+        },
+      },
+      '90': {
+        root: {
+          bg: 'colour.data.subtle.90',
+          color: 'colour.data.bold.90',
+        },
+      },
     },
   },
   defaultVariants: {

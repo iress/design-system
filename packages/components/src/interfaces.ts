@@ -227,7 +227,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-color
    */
-  bg?: ResponsiveProp<UtilityValues['color']>;
+  bg?: UtilityValues['color'];
 
   /**
    * The **`border-radius`** CSS property rounds the corners of an element's outer border edge using the radius tokens in the design system.
@@ -255,7 +255,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/color
    */
-  color?: ResponsiveProp<UtilityValues['color']>;
+  color?: UtilityValues['color'];
 
   /**
    * The `focusable` prop is used to apply the focus elevation when focused. It can be set to `true` to apply focus styles on focus, or `'within'` to apply focus styles when the element or any of its children are focused.

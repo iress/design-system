@@ -58,9 +58,17 @@ export const colors = {
     description: colour.neutral['80'].$description,
     value: cssVars.colour.neutral['80'],
   },
-  'colour.accent.brand': {
-    description: colour.accent.brand.$description,
-    value: cssVars.colour.accent.brand,
+  'colour.neutral.90': {
+    description: colour.neutral['90'].$description,
+    value: cssVars.colour.neutral['90'],
+  },
+  'colour.accent.1': {
+    description: colour.accent[1].$description,
+    value: cssVars.colour.accent['1'],
+  },
+  'colour.accent.2': {
+    description: colour.accent[2].$description,
+    value: cssVars.colour.accent['2'],
   },
   'colour.system.success.fill': {
     description: colour.system.success.fill.$description,
@@ -118,6 +126,10 @@ export const colors = {
     description: colour.system.warning.onFill.$description,
     value: cssVars.colour.system.warning.onFill,
   },
+  'colour.system.warning.fillHover': {
+    description: colour.system.warning.fillHover.$description,
+    value: cssVars.colour.system.warning.fillHover,
+  },
   'colour.system.warning.surface': {
     description: colour.system.warning.surface.$description,
     value: cssVars.colour.system.warning.surface,
@@ -125,6 +137,10 @@ export const colors = {
   'colour.system.warning.text': {
     description: colour.system.warning.text.$description,
     value: cssVars.colour.system.warning.text,
+  },
+  'colour.system.warning.surfaceHover': {
+    description: colour.system.warning.surfaceHover.$description,
+    value: cssVars.colour.system.warning.surfaceHover,
   },
   'colour.system.info.fill': {
     description: colour.system.info.fill.$description,
@@ -134,6 +150,10 @@ export const colors = {
     description: colour.system.info.onFill.$description,
     value: cssVars.colour.system.info.onFill,
   },
+  'colour.system.info.fillHover': {
+    description: colour.system.info.fillHover.$description,
+    value: cssVars.colour.system.info.fillHover,
+  },
   'colour.system.info.surface': {
     description: colour.system.info.surface.$description,
     value: cssVars.colour.system.info.surface,
@@ -142,9 +162,85 @@ export const colors = {
     description: colour.system.info.text.$description,
     value: cssVars.colour.system.info.text,
   },
+  'colour.system.info.surfaceHover': {
+    description: colour.system.info.surfaceHover.$description,
+    value: cssVars.colour.system.info.surfaceHover,
+  },
   'colour.system.backdrop.fill': {
     description: colour.system.backdrop.fill.$description,
     value: cssVars.colour.system.backdrop.fill,
+  },
+  'colour.data.subtle.10': {
+    description: colour.data.subtle['10'].$description,
+    value: cssVars.colour.data.subtle['10'],
+  },
+  'colour.data.subtle.20': {
+    description: colour.data.subtle['20'].$description,
+    value: cssVars.colour.data.subtle['20'],
+  },
+  'colour.data.subtle.30': {
+    description: colour.data.subtle['30'].$description,
+    value: cssVars.colour.data.subtle['30'],
+  },
+  'colour.data.subtle.40': {
+    description: colour.data.subtle['40'].$description,
+    value: cssVars.colour.data.subtle['40'],
+  },
+  'colour.data.subtle.50': {
+    description: colour.data.subtle['50'].$description,
+    value: cssVars.colour.data.subtle['50'],
+  },
+  'colour.data.subtle.60': {
+    description: colour.data.subtle['60'].$description,
+    value: cssVars.colour.data.subtle['60'],
+  },
+  'colour.data.subtle.70': {
+    description: colour.data.subtle['70'].$description,
+    value: cssVars.colour.data.subtle['70'],
+  },
+  'colour.data.subtle.80': {
+    description: colour.data.subtle['80'].$description,
+    value: cssVars.colour.data.subtle['80'],
+  },
+  'colour.data.subtle.90': {
+    description: colour.data.subtle['90'].$description,
+    value: cssVars.colour.data.subtle['90'],
+  },
+  'colour.data.bold.10': {
+    description: colour.data.bold['10'].$description,
+    value: cssVars.colour.data.bold['10'],
+  },
+  'colour.data.bold.20': {
+    description: colour.data.bold['20'].$description,
+    value: cssVars.colour.data.bold['20'],
+  },
+  'colour.data.bold.30': {
+    description: colour.data.bold['30'].$description,
+    value: cssVars.colour.data.bold['30'],
+  },
+  'colour.data.bold.40': {
+    description: colour.data.bold['40'].$description,
+    value: cssVars.colour.data.bold['40'],
+  },
+  'colour.data.bold.50': {
+    description: colour.data.bold['50'].$description,
+    value: cssVars.colour.data.bold['50'],
+  },
+  'colour.data.bold.60': {
+    description: colour.data.bold['60'].$description,
+    value: cssVars.colour.data.bold['60'],
+  },
+  'colour.data.bold.70': {
+    description: colour.data.bold['70'].$description,
+    value: cssVars.colour.data.bold['70'],
+  },
+  'colour.data.bold.80': {
+    description: colour.data.bold['80'].$description,
+    value: cssVars.colour.data.bold['80'],
+  },
+  'colour.data.bold.90': {
+    description: colour.data.bold['90'].$description,
+    value: cssVars.colour.data.bold['90'],
   },
   transparent: {
     description: 'Transparent colour, used to create a transparent background.',
