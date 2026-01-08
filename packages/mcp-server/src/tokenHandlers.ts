@@ -28,7 +28,6 @@ interface GroupInfo {
   description: string;
 }
 
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
 function extractTokensFromGroup(
   obj: Record<string, unknown>,
   prefix = '',
@@ -115,7 +114,6 @@ function extractTokensFromGroup(
 
   return { tokens, groups, topLevelDescription };
 }
-/* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
 
 // Map category to generated documentation file
 const CATEGORY_FILE_MAP: Record<string, string> = {
@@ -312,7 +310,7 @@ export function handleGetDesignTokens(args: unknown): ToolResponse {
   ] as const satisfies readonly (keyof typeof designTokens)[];
 
   type TokenCategory = (typeof availableTypes)[number];
-  const requestedType = (typeAliases[type] || type) as TokenCategory;
+  const requestedType = typeAliases[type] || type;
 
   // Determine which token categories to include
   const categoriesToInclude: TokenCategory[] =
@@ -341,7 +339,6 @@ export function handleGetDesignTokens(args: unknown): ToolResponse {
   const tokenInfo: string[] = [];
 
   for (const category of categoriesToInclude) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     const categoryData = designTokens[category];
     const { tokens, groups, topLevelDescription } = extractTokensFromGroup(
       categoryData as Record<string, unknown>,
