@@ -68,7 +68,7 @@ export const checkbox = sva({
           borderStyle: 'solid',
           borderWidth: '1px',
           _hover: {
-            backgroundColor: 'colour.primary.surfaceHover',
+            backgroundColor: 'colour.neutral.20',
           },
           _groupFocusWithin: {
             layerStyle: 'elevation.focus',
@@ -108,6 +108,10 @@ export const checkbox = sva({
       css: {
         label: {
           topLeftTriangle: true,
+
+          _before: {
+            borderTopLeftRadius: 'none',
+          },
         },
         mark: {
           checkmark: true,

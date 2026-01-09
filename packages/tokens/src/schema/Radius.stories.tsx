@@ -1,10 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import {
-  IressBadge,
-  IressButton,
   IressCol,
   IressDivider,
-  IressInput,
   IressPanel,
   IressRow,
   IressStack,
@@ -102,7 +99,7 @@ export const System: Story = {
       <IressText>{radius.system.$description}</IressText>
       <IressRow gutter="md" verticalAlign="bottom">
         <IressCol span={{ md: 8 }}>
-          <IressBadge
+          <IressPanel
             bg="colour.primary.surface"
             width="input.6"
             aria-hidden="true"
@@ -121,7 +118,8 @@ export const System: Story = {
       <IressDivider />
       <IressRow gutter="md" verticalAlign="bottom">
         <IressCol span={{ md: 8 }}>
-          <IressButton
+          <IressPanel
+            bg="colour.primary.surface"
             width="input.8"
             aria-hidden="true"
             mb="sm"
@@ -139,8 +137,9 @@ export const System: Story = {
       <IressDivider />
       <IressRow gutter="md" verticalAlign="bottom">
         <IressCol span={{ md: 8 }}>
-          <IressInput
-            width="12"
+          <IressPanel
+            bg="colour.primary.surface"
+            width="input.12"
             aria-hidden="true"
             mb="sm"
             style={{ borderRadius: cssVars.radius.system.form }}

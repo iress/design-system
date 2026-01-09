@@ -43,7 +43,6 @@ const HomePage = () => {
                 mode="primary"
                 href="/?path=/docs/get-started-develop--docs"
                 px="md"
-                py="spacing.3"
               >
                 Start developing
               </IressButton>
@@ -51,7 +50,6 @@ const HomePage = () => {
                 href="/?path=/docs/foundations-introduction--docs"
                 mode="secondary"
                 px="md"
-                py="spacing.3"
               >
                 Read foundations
               </IressButton>

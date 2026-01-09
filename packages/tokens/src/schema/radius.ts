@@ -101,10 +101,10 @@ const radius = {
         'Applies to buttons and other interactive elements such as the hover state of links.',
       $type: Type.Radius,
       $value: {
-        topLeft: `{radius.075 || calc(0.75 * ${baseRadius})}`,
-        topRight: `{radius.075 || calc(0.75 * ${baseRadius})}`,
-        bottomRight: `{radius.075 || calc(0.75 * ${baseRadius})}`,
-        bottomLeft: `{radius.075 || calc(0.75 * ${baseRadius})}`,
+        topLeft: `{radius.025 || calc(0.25 * ${baseRadius})}`,
+        topRight: `{radius.025 || calc(0.25 * ${baseRadius})}`,
+        bottomRight: `{radius.025 || calc(0.25 * ${baseRadius})}`,
+        bottomLeft: `{radius.025 || calc(0.25 * ${baseRadius})}`,
       },
       $extensions: {
         'styler.panel': 'radius.system',
@@ -114,10 +114,10 @@ const radius = {
       $description: 'Applies to form inputs and alerts.',
       $type: Type.Radius,
       $value: {
-        topLeft: `{radius.050 || calc(0.5 * ${baseRadius})}`,
-        topRight: `{radius.050 || calc(0.5 * ${baseRadius})}`,
-        bottomRight: `{radius.050 || calc(0.5 * ${baseRadius})}`,
-        bottomLeft: `{radius.050 || calc(0.5 * ${baseRadius})}`,
+        topLeft: `{radius.025 || calc(0.25 * ${baseRadius})}`,
+        topRight: `{radius.025 || calc(0.25 * ${baseRadius})}`,
+        bottomRight: `{radius.025 || calc(0.25 * ${baseRadius})}`,
+        bottomLeft: `{radius.025 || calc(0.25 * ${baseRadius})}`,
       },
       $extensions: {
         'styler.panel': 'radius.system',

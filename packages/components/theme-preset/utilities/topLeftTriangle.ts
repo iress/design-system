@@ -23,7 +23,7 @@ export const topLeftTriangle = defineUtility({
         height: `calc(${cssVars.typography.base.size} * 2)`,
         backgroundColor: 'currentColor',
         clipPath: 'polygon(0 0, 100% 0, 0% 100%)',
-        borderTopLeftRadius: '0.3rem',
+        borderTopLeftRadius: cssVars.radius.system._form.topLeft,
       },
     };
   },
