@@ -7,6 +7,7 @@ export default defineConfig({
     passWithNoTests: true,
     environment: 'node',
     reporters: ['verbose'],
+    exclude: ['**/node_modules/**', '**/dist/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'lcov', 'html', 'json', 'json-summary'],
