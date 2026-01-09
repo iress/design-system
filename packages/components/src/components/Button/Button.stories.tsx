@@ -142,6 +142,9 @@ export const Loading: ButtonStory = {
       <IressButton {...args} mode="tertiary">
         {children}
       </IressButton>
+      <IressButton {...args} mode="muted">
+        <IressIcon name="file-edit" />
+      </IressButton>
     </IressInline>
   ),
 };

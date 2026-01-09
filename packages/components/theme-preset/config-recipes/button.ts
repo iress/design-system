@@ -488,7 +488,7 @@ export const buttonRecipe = defineSlotRecipe({
           _after: {
             bg: 'colour.system.success.surfaceHover',
             borderColor:
-              '[color-mix(in srgb, {colors.colour.system.successHover.surface}, black 5%)]',
+              '[color-mix(in srgb, {colors.colour.system.success.surfaceHover}, black 5%)]',
           },
 
           _active: {
@@ -579,6 +579,20 @@ export const buttonRecipe = defineSlotRecipe({
       css: {
         root: {
           borderColor: 'colour.neutral.60',
+          color: 'colour.neutral.60',
+        },
+        spinner: {
+          color: 'colour.neutral.60',
+        },
+      },
+    },
+    {
+      mode: 'muted',
+      loading: true,
+      css: {
+        root: {
+          bg: 'transparent',
+          borderColor: 'transparent',
           color: 'colour.neutral.60',
         },
         spinner: {
