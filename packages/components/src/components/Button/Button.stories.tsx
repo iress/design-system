@@ -53,6 +53,9 @@ export const Mode: ButtonStory = {
       <IressButton mode="tertiary" {...args}>
         {children === '' ? 'Tertiary button' : children}
       </IressButton>
+      <IressButton mode="muted" {...args}>
+        {children === '' ? <IressIcon name="share-alt" /> : children}
+      </IressButton>
     </IressInline>
   ),
 };
@@ -76,6 +79,9 @@ export const Status: ButtonStory = {
         <IressButton mode="tertiary" status="success" {...args}>
           {children === '' ? 'Tertiary button' : children}
         </IressButton>
+        <IressButton mode="muted" status="success" {...args}>
+          {children === '' ? <IressIcon name="shopping-cart" /> : children}
+        </IressButton>
       </IressInline>
       <IressInline gap="md">
         <IressButton mode="primary" status="danger" {...args}>
@@ -86,6 +92,9 @@ export const Status: ButtonStory = {
         </IressButton>
         <IressButton mode="tertiary" status="danger" {...args}>
           {children === '' ? 'Tertiary button' : children}
+        </IressButton>
+        <IressButton mode="muted" status="danger" {...args}>
+          {children === '' ? <IressIcon name="trash" /> : children}
         </IressButton>
       </IressInline>
     </IressStack>
@@ -132,6 +141,9 @@ export const Loading: ButtonStory = {
       </IressButton>
       <IressButton {...args} mode="tertiary">
         {children}
+      </IressButton>
+      <IressButton {...args} mode="muted">
+        <IressIcon name="file-edit" />
       </IressButton>
     </IressInline>
   ),
@@ -287,4 +299,27 @@ export const Element: ButtonStory = {
   parameters: {
     ...withCustomSource(RoutingButtonSource),
   },
+};
+
+export const Active: ButtonStory = {
+  args: {
+    active: true,
+    children: 'Active Button',
+  },
+  render: (args) => (
+    <IressInline gap="md">
+      <IressButton mode="primary" {...args}>
+        Active Primary
+      </IressButton>
+      <IressButton mode="secondary" {...args}>
+        Active Secondary
+      </IressButton>
+      <IressButton mode="tertiary" {...args}>
+        Active Tertiary
+      </IressButton>
+      <IressButton mode="muted" {...args}>
+        <IressIcon name="ellipsis-v" />
+      </IressButton>
+    </IressInline>
+  ),
 };

@@ -107,13 +107,14 @@ export interface InternalButtonProps<
    * - Primary: Used for the main action on a page. Usually only used once per screen.
    * - Secondary: Used for secondary actions on a page, often an action on multiple `IressPanel`s. Can used multiple times per screen.
    * - Tertiary: Used for tertiary actions on a page, often the secondary action on multiple `IressPanel`s. Can used multiple times per screen.
+   * - Muted: Used for less prominent actions, often used in toolbars or inline with headings. They are mainly used with icons only.
    *
    * **Migrating to version 6**
    * - `link` mode has been removed. If it is an action, use the `tertiary` mode. If it is a link inside a paragraph, use the new `IressLink` component instead.
    * - `danger` has been removed. Please use the `status` prop instead.
    * - `positive` and `success` have been removed. Please use the `status` prop instead.
    */
-  mode?: 'primary' | 'secondary' | 'tertiary';
+  mode?: 'primary' | 'secondary' | 'tertiary' | 'muted';
 
   /**
    * Emitted when the menu item is clicked.

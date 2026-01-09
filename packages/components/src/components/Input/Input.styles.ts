@@ -73,7 +73,7 @@ export const input = sva({
         borderRadius: 'radius.system.form',
         py: 'spacing.2',
         px: 'spacing.2',
-        m: '-spacing.1',
+        ml: '-spacing.1',
         mr: 'spacing.2',
         cursor: 'pointer',
         _hover: {

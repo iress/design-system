@@ -11,7 +11,7 @@ describe('IressCloseButton', () => {
 
     const component = getByTestId('test');
     expect(component).toHaveClass(
-      `test-class ${button({ mode: 'tertiary' }).root}`,
+      `test-class ${button({ mode: 'muted' }).root}`,
       GlobalCSSClass.CloseButton,
     );
   });
