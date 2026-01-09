@@ -27,7 +27,7 @@ export const IressCloseButton = forwardRef(
     <IressButton
       {...restProps}
       className={cx(className, GlobalCSSClass.CloseButton)}
-      mode="tertiary"
+      mode="muted"
       ref={ref}
     >
       <IressIcon name="times" screenreaderText={screenreaderText} />

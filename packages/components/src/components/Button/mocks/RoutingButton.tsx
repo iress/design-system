@@ -6,12 +6,12 @@ import { type HTMLAttributes, forwardRef } from 'react';
  */
 const Link = forwardRef<
   HTMLAnchorElement,
-  HTMLAttributes<HTMLAnchorElement> & { to: string }
+  HTMLAttributes<HTMLSpanElement> & { to: string }
 >(({ children, className, to, ...restProps }, ref) => (
   <div className={className}>
-    <a href={to} ref={ref} {...restProps}>
+    <span onClick={() => console.log(to)} ref={ref} {...restProps}>
       {children}
-    </a>
+    </span>
   </div>
 ));
 

@@ -14,7 +14,6 @@ export const badge = sva({
       textDecoration: 'none',
       minHeight: '[1.35em]',
       minWidth: '[1.35em]',
-      alignSelf: 'flex-start',
     },
     badge: {
       alignItems: 'center',
