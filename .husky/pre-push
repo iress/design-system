@@ -18,7 +18,7 @@ done
 
 if [ -z "$BASE_BRANCH" ]; then
   echo "⚠️  Warning: Could not determine base branch, defaulting to origin/main"
-  BASE_BRANCH="origin/main"
+  BASE_BRANCH="origin/5.x"
 fi
 
 echo "🔍 Pre-push: Detected base branch: $BASE_BRANCH"
