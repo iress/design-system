@@ -255,13 +255,14 @@ const Filter = <TMultiple extends boolean = false>(
   });
 
   const classes = filter();
+  const styles = filter.raw();
 
   return (
     <styled.div
       {...nonStyleProps}
       className={cx(
         className,
-        css(classes.root, styleProps),
+        css(styles.root, styleProps),
         GlobalCSSClass.Filter,
       )}
       data-testid={dataTestId}
