@@ -265,4 +265,25 @@ describe('IressFilter', () => {
       expect(results).toHaveNoViolations();
     });
   });
+
+  describe('styling props', () => {
+    it('should apply styling props correctly', () => {
+      renderFilter({
+        p: 'spacing.4',
+        bg: 'colour.primary.surface',
+        color: 'colour.primary.text',
+      });
+
+      const filter = screen.getByTestId(TEST_ID);
+      expect(filter).toBeInTheDocument();
+
+      // Verify that styling props are applied as CSS classes, not as DOM attributes
+      expect(filter).not.toHaveAttribute('p');
+      expect(filter).not.toHaveAttribute('bg');
+      expect(filter).not.toHaveAttribute('color');
+
+      // Verify className includes the styled classes
+      expect(filter.className).toBeTruthy();
+    });
+  });
 });

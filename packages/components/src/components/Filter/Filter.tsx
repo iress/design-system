@@ -8,8 +8,9 @@ import {
   type ReactNode,
   type ForwardedRef,
 } from 'react';
-import { cx } from '@/styled-system/css';
+import { css, cx } from '@/styled-system/css';
 import { filter } from './Filter.styles';
+import { splitCssProps } from '@/styled-system/jsx';
 
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { IressPopover, type IressPopoverProps } from '../Popover';
@@ -189,6 +190,11 @@ const Filter = <TMultiple extends boolean = false>(
   const [query, setQuery] = useState('');
   const [show, setShow] = useState(false);
 
+  const [styleProps, nonStyleProps] = useMemo(
+    () => splitCssProps(restProps),
+    [restProps],
+  );
+
   const handleQueryChange: IressInputProps['onChange'] = (e) => {
     setQuery(e.target.value);
   };
@@ -252,8 +258,12 @@ const Filter = <TMultiple extends boolean = false>(
 
   return (
     <styled.div
-      {...restProps}
-      className={cx(className, classes.root, GlobalCSSClass.Filter)}
+      {...nonStyleProps}
+      className={cx(
+        className,
+        css(classes.root, styleProps),
+        GlobalCSSClass.Filter,
+      )}
       data-testid={dataTestId}
       id={id}
       ref={elementRef}

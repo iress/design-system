@@ -260,3 +260,13 @@ export const SelectedOptionsText: Story = {
     selectedOptionsText: '{{numOptions}} activated',
   },
 };
+
+export const StylingProps: Story = {
+  args: {
+    ...Default.args,
+    label: 'Styled Filter',
+    p: 'spacing.4',
+    bg: 'colour.primary.surface',
+    borderRadius: 'radius.100',
+  },
+};
