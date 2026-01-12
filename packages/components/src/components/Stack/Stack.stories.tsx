@@ -40,7 +40,11 @@ const childrenOptions = {
       Panel 3 (block)
     </IressPanel>,
   ],
-  list: [<li>List item 1</li>, <li>List item 2</li>, <li>List item 3</li>],
+  list: [
+    <li key="1">List item 1</li>,
+    <li key="2">List item 2</li>,
+    <li key="3">List item 3</li>,
+  ],
 };
 
 export default {
@@ -126,4 +130,20 @@ export const Lists: Story = {
     gap: 'spacing.7',
     element: 'ul',
   },
+};
+
+export const VerticalAlign: Story = {
+  args: {
+    children: 'even',
+    gap: 'spacing.4',
+    verticalAlign: 'bottom',
+  },
+  render: (args) => (
+    <IressText>
+      <h2>{args.verticalAlign}</h2>
+      <IressPanel style={{ height: '1000px' }}>
+        <IressStack {...args} stretch />
+      </IressPanel>
+    </IressText>
+  ),
 };

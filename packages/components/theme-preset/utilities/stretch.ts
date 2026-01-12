@@ -3,7 +3,7 @@ import { defineUtility } from '@pandacss/dev';
 export const stretch = defineUtility({
   className: 'stretch',
   values: { type: 'boolean' },
-  transform: (value) => {
+  transform: (value: boolean) => {
     if (!value) return {};
 
     return {
