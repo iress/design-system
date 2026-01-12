@@ -274,7 +274,7 @@ export interface IressCSSProps {
   /**
    * The `flex` prop is used to set the flex grow property of an element. It allows the element to grow and fill available space in a flex container.
    *
-   * In the design system, we only allow `1` as a value to ensure consistent behavior across components whilst
+   * In the design system, we only allow `1` as a value to ensure consistent behavior across components, ensuring that flex items expand in a predictable way and preventing layout inconsistencies between implementations.
    */
   flex?: '1';
 

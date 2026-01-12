@@ -50,7 +50,7 @@ const stylingPropsReference: StylingPropsReference[] = [
   },
   {
     jsxProp: 'flex',
-    jsxPropLink: '/?path=/docs/styling-props-layout--docs#flex',
+    jsxPropLink: '/?path=/docs/styling-props-layout--docs#flex1',
     cssProperty: 'flex',
     tokenMapping: 'N/A',
     responsive: false,

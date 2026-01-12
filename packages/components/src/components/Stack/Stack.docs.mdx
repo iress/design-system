@@ -54,8 +54,8 @@ In the example below: `IressButton` are inline because of wrapped by `IressInlin
 
 ### Vertical alignment
 
-The `verticalAlign` prop controls the vertical alignment of content within the stack. It accepts four values: `top`, `middle`, `bottom`, and `stretch`.
+The `verticalAlign` prop controls how content is positioned vertically within the stack. It accepts six values: `top`, `middle`, `bottom`, `between`, `around`, and `evenly`.
 
-This is useful when you have a fixed height container and want to control how the content is positioned vertically.
+Use `top`, `middle`, or `bottom` to align items within the available space, and `between`, `around`, or `evenly` to distribute extra vertical space between items (similar to `space-between`, `space-around`, and `space-evenly` in CSS flexbox).
 
 <ComponentExample of={ComponentStories.VerticalAlign} />
