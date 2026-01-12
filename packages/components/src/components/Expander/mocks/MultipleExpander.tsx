@@ -1,4 +1,4 @@
-import { IressExpander } from '@/main';
+import { IressExpander, IressStack } from '@/main';
 import { useState } from 'react';
 
 export const MultipleExpander = () => {
@@ -9,7 +9,7 @@ export const MultipleExpander = () => {
   };
 
   return (
-    <div>
+    <IressStack gap="spacing.4">
       <IressExpander
         activator="Top"
         open={openActivator === 'top'}
@@ -24,6 +24,6 @@ export const MultipleExpander = () => {
       >
         Expander content for the bottom activator goes here.
       </IressExpander>
-    </div>
+    </IressStack>
   );
 };

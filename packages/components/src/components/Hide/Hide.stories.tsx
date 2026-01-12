@@ -100,16 +100,3 @@ export const BreakpointTable: Story = {
     />
   ),
 };
-
-export const UtilityBreakpointTable: Story = {
-  render: () => (
-    <IressTable
-      caption="Hide breakpoints"
-      rows={BREAKPOINTS.map((breakpoint) => ({
-        totallyHidden: <code>iress-hidden--{breakpoint}</code>,
-        visuallyHidden: <code>iress-sr-only--{breakpoint}</code>,
-        screenWidths: BREAKPOINT_DETAILS[breakpoint].screenWidthRange,
-      }))}
-    />
-  ),
-};

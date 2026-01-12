@@ -1,5 +1,9 @@
 import { propagateTestid } from '@helpers/utility/propagateTestid';
-import { IressCloseButton } from '../../../Button';
+import {
+  IressButton,
+  type IressButtonProps,
+  IressCloseButton,
+} from '../../../Button';
 import { IressInline } from '../../../Inline';
 import { IressText } from '../../../Text';
 import { forwardRef, type ReactNode, type MouseEvent } from 'react';
@@ -14,9 +18,10 @@ export type ToastStatus = 'success' | 'error' | 'info';
 
 export interface ToastProps extends Omit<IressStyledProps, 'content'> {
   /**
-   * Buttons and controls for the toast.
-   */
-  actions?: ReactNode;
+   * Actions to display in the alert. These will be rendered as buttons with opinionated styling.
+   * If you want to use custom buttons, use the `footer` prop instead.
+   **/
+  actions?: Omit<IressButtonProps, 'mode' | 'status'>[];
 
   /**
    * Alternative to children.
@@ -61,9 +66,9 @@ const icons: Record<ToastStatus, IressIconProps['name']> = {
 export const Toast = forwardRef<HTMLDivElement, ToastProps>(
   (
     {
+      actions,
       heading,
       status,
-      actions,
       children,
       content,
       dismissible = true,
@@ -75,6 +80,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
     ref,
   ) => {
     const classes = toastStyles({ status });
+    const hasActions = !!actions?.length;
 
     return (
       <styled.div
@@ -120,7 +126,17 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
 
               <div className={classes.content}>{content ?? children}</div>
 
-              {actions && <div className={classes.footer}>{actions}</div>}
+              {hasActions && (
+                <IressInline gap="sm" mt="spacing.1">
+                  {actions?.map((action, index) => (
+                    <IressButton
+                      {...action}
+                      className={cx(action.className, classes.action)}
+                      key={index}
+                    />
+                  ))}
+                </IressInline>
+              )}
             </div>
           </IressInline>
         </div>

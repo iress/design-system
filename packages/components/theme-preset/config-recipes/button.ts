@@ -72,7 +72,7 @@ export const buttonRecipe = defineSlotRecipe({
       true: {
         root: {
           bg: 'colour.primary.surface',
-          borderColor: 'colour.primary.fill',
+          borderColor: 'colour.primary.text',
           color: 'colour.primary.text',
         },
       },
@@ -552,10 +552,12 @@ export const buttonRecipe = defineSlotRecipe({
       },
     },
     {
-      mode: ['primary', 'muted'],
+      mode: ['primary', 'secondary', 'tertiary', 'quaternary', 'muted'],
       active: true,
       css: {
         root: {
+          bg: 'colour.primary.surface',
+          borderColor: 'colour.primary.text',
           color: 'colour.primary.text',
         },
       },

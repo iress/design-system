@@ -38,21 +38,21 @@ export const ComponentApiHeading = forwardRef(
           h2: (props) => (
             <IressText
               element="h2"
-              textStyle="typography.heading.4"
+              textStyle="typography.heading.3"
               {...props}
             />
           ),
           h3: (props) => (
             <IressText
               element="h3"
-              textStyle="typography.heading.4"
+              textStyle="typography.heading.3"
               {...props}
             />
           ),
           h4: (props) => (
             <IressText
               element="h4"
-              textStyle="typography.heading.4"
+              textStyle="typography.heading.3"
               {...props}
             />
           ),

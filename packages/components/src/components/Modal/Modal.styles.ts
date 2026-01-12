@@ -70,7 +70,7 @@ export const modal = sva({
         content: {
           flex: '[1]',
           overflowX: 'hidden',
-          overflowY: 'auto',
+          scrollable: 'y',
           maxHeight: '[calc(100vh - ({spacing.spacing.7} * 2))]',
           '@media (min-height: 600px)': {
             maxHeight: '[calc(100vh - (100px * 2))]',

@@ -85,12 +85,12 @@ const IressStorybookStyles = () => (
 
       /** Style the heading anchors */
       .sbdocs-content {
-        h1[id],
-        h2[id],
-        h3[id],
-        h4[id],
-        h5[id],
-        h6[id] {
+        h1[id]:not(.sr_true),
+        h2[id]:not(.sr_true),
+        h3[id]:not(.sr_true),
+        h4[id]:not(.sr_true),
+        h5[id]:not(.sr_true),
+        h6[id]:not(.sr_true) {
           position: relative;
 
           a[href^='#'] {

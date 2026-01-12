@@ -3,12 +3,12 @@ import { sva } from '@/styled-system/css';
 export const toast = sva({
   slots: [
     'root',
+    'action',
     'panel',
     'wrapper',
     'icon',
     'heading',
     'content',
-    'footer',
     'closeButton',
   ],
   base: {
@@ -52,9 +52,6 @@ export const toast = sva({
     content: {
       noGutter: true,
     },
-    footer: {
-      paddingBlockStart: 'spacing.2',
-    },
     closeButton: {
       position: 'absolute',
       top: 'spacing.1',
@@ -72,6 +69,16 @@ export const toast = sva({
         heading: {
           color: 'colour.system.danger.text',
         },
+        action: {
+          bg: 'colour.system.danger.fill',
+          borderColor: 'colour.system.danger.fill',
+          color: 'colour.system.danger.onFill',
+          _hover: {
+            bg: 'colour.system.danger.fillHover',
+            borderColor: 'colour.system.danger.fillHover',
+            color: 'colour.system.danger.onFill',
+          },
+        },
       },
       success: {
         panel: {
@@ -82,6 +89,16 @@ export const toast = sva({
         heading: {
           color: 'colour.system.success.text',
         },
+        action: {
+          bg: 'colour.system.success.fill',
+          borderColor: 'colour.system.success.fill',
+          color: 'colour.system.success.onFill',
+          _hover: {
+            bg: 'colour.system.success.fillHover',
+            borderColor: 'colour.system.success.fillHover',
+            color: 'colour.system.success.onFill',
+          },
+        },
       },
       info: {
         panel: {
@@ -91,6 +108,16 @@ export const toast = sva({
         },
         heading: {
           color: 'colour.system.info.text',
+        },
+        action: {
+          bg: 'colour.system.info.fill',
+          borderColor: 'colour.system.info.fill',
+          color: 'colour.system.info.onFill',
+          _hover: {
+            bg: 'colour.system.info.fillHover',
+            borderColor: 'colour.system.info.fillHover',
+            color: 'colour.system.info.onFill',
+          },
         },
       },
     },

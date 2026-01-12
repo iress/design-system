@@ -4,7 +4,6 @@ import {
   IressAlert,
   type IressAlertProps,
   IressStack,
-  IressText,
   STATUSES,
   type Statuses,
 } from '@/main';
@@ -84,7 +83,8 @@ export const Heading: Story = {
 export const Footer: Story = {
   args: {
     heading: 'Alert heading',
-    children: <IressText>Here is the warning</IressText>,
+    status: 'danger',
+    children: 'Are you sure you want to proceed with this action?',
     actions: [
       {
         children: 'Action',

@@ -326,6 +326,9 @@ export const Active: ButtonStory = {
       <IressButton mode="tertiary" {...args}>
         Active Tertiary
       </IressButton>
+      <IressButton mode="quaternary" {...args}>
+        Active Quaternary
+      </IressButton>
       <IressButton mode="muted" {...args}>
         <IressIcon name="ellipsis-v" />
       </IressButton>

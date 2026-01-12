@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useState } from 'react';
+import { type FC, type ReactNode, useEffect, useState } from 'react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { useIdIfNeeded } from '@/hooks';
 import { expander } from './Expander.styles';
@@ -7,6 +7,22 @@ import { IressText, type IressTextProps } from '../Text';
 import { type IressCustomiseSlot } from '@/interfaces';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
+
+/**
+ * https://fonts.google.com/icons?selected=Material+Symbols+Rounded:keyboard_arrow_down:FILL@1;wght@300;GRAD@0;opsz@24&icon.style=Rounded&icon.query=keybo&icon.size=24&icon.color=%23e3e3e3&icon.platform=web
+ */
+const Chevron: FC<{
+  className?: string;
+}> = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 -960 960 960"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M480-372.92q-7.23 0-13.46-2.31t-11.85-7.92L274.92-562.92q-8.3-8.31-8.5-20.89-.19-12.57 8.5-21.27 8.7-8.69 21.08-8.69 12.38 0 21.08 8.69L480-442.15l162.92-162.93q8.31-8.3 20.89-8.5 12.57-.19 21.27 8.5 8.69 8.7 8.69 21.08 0 12.38-8.69 21.08L505.31-383.15q-5.62 5.61-11.85 7.92-6.23 2.31-13.46 2.31Z" />
+  </svg>
+);
 
 export interface IressExpanderProps extends Omit<
   IressTextProps<'div'>,
@@ -87,6 +103,7 @@ export const IressExpander = ({
         className={cx(
           activatorStyle?.className,
           css(classesRaw.activator, styleProps),
+          GlobalCSSClass.Group,
         )}
         data-testid={
           activatorStyle?.['data-testid'] ??
@@ -96,6 +113,7 @@ export const IressExpander = ({
         type="button"
       >
         {activator}
+        <Chevron className={classes.chevron} />
       </styled.button>
       <div
         id={`${id}__container`}

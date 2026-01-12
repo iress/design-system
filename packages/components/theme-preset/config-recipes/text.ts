@@ -50,7 +50,7 @@ const blockStyles = {
     textStyle: 'typography.heading.5',
   },
   '& h6': {
-    textStyle: 'typography.body.md.strong',
+    textStyle: 'typography.body.sm.strong',
   },
   _nestedHeadings: {
     marginBlockStart: 'spacing.4',

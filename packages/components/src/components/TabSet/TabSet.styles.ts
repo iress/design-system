@@ -47,7 +47,7 @@ export const tabSet = sva({
       top: 'spacing.2',
       bottom: 'spacing.2',
       left: '[0]',
-      bg: 'colour.primary.surfaceHover',
+      bg: 'colour.neutral.20',
       transition: 'all',
       borderRadius: 'radius.system.button',
       pointerEvents: 'none',
