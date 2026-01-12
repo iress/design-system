@@ -102,7 +102,9 @@ const Tags = ({
         onDelete={onTagDelete}
         onDeleteButtonBlur={onTagDeleteButtonBlur}
         data-testid={propagateTestid(dataTestId, 'tag')}
-        ml="xs"
+        compact
+        my="spacing.1"
+        mr="spacing.1"
       >
         {tag}
       </IressTag>
@@ -113,8 +115,9 @@ const Tags = ({
       onDelete={onTagDeleteAll}
       onDeleteButtonBlur={onTagDeleteButtonBlur}
       data-testid={propagateTestid(dataTestId, 'tag')}
-      ml="xs"
-      py="none"
+      compact
+      my="spacing.1"
+      mr="spacing.1"
     >
       {String(tags.length) || '0'} {selectedOptionsTagText}
     </IressTag>

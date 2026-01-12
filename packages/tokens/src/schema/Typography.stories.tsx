@@ -2,6 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import typography from './typography';
 import {
   IressCol,
+  IressDivider,
   IressInline,
   IressRow,
   IressStack,
@@ -55,11 +56,6 @@ const body = [
     name: 'Medium',
     tokenName: 'typography.body.md',
     token: typography.body.md,
-  },
-  {
-    name: 'Large',
-    tokenName: 'typography.body.lg',
-    token: typography.body.lg,
   },
 ];
 
@@ -251,7 +247,7 @@ export const Body: Story = {
     children: (
       <IressStack gap="xl">
         {body.map(({ name, token, tokenName }) => (
-          <IressRow gutter="xl" key={tokenName} verticalAlign="bottom">
+          <IressRow gutter="xl" key={tokenName} verticalAlign="stretch">
             <IressCol span={{ lg: 4 }}>
               <IressText
                 textStyle={tokenName as never}
@@ -282,61 +278,68 @@ export const Body: Story = {
               <Markdown>{token.$description}</Markdown>
               <TokenTag>{tokenName}</TokenTag>
             </IressCol>
-            {bodyVariants.map((variant) => {
-              const variantName =
-                variant === 'Emphasis' ? 'em' : variant.toLowerCase();
-              const variantCssVar = get<string>(
-                cssVars,
-                `${tokenName}.${variantName}`,
-              );
-              const variantCssVars = get<Record<string, string>>(
-                cssVars,
-                `${tokenName}._${variantName}`,
-              );
+            <IressCol span={{ lg: 1 }}>
+              <IressDivider vertical stretch />
+            </IressCol>
+            <IressCol>
+              <IressRow gutter="md">
+                {bodyVariants.map((variant) => {
+                  const variantName =
+                    variant === 'Emphasis' ? 'em' : variant.toLowerCase();
+                  const variantCssVar = get<string>(
+                    cssVars,
+                    `${tokenName}.${variantName}`,
+                  );
+                  const variantCssVars = get<Record<string, string>>(
+                    cssVars,
+                    `${tokenName}._${variantName}`,
+                  );
 
-              return (
-                <IressCol key={variant}>
-                  <IressStack gap="sm">
-                    <IressText style={{ font: variantCssVar }}>
-                      {variant}
-                    </IressText>
-                    <IressInline gap="sm">
-                      <strong>Font</strong>
-                      <CssSpark
-                        cssVar={variantCssVars.fontFamily}
-                        property="fontFamily"
-                        trimmed
-                      />
-                    </IressInline>
-                    <IressInline gap="sm">
-                      <strong>Weight</strong>
-                      <CssSpark
-                        cssVar={variantCssVars.fontWeight}
-                        property="fontWeight"
-                      />
-                    </IressInline>
-                    <IressInline gap="sm">
-                      <strong>Size</strong>
-                      <CssSpark
-                        cssVar={variantCssVars.fontSize}
-                        property="fontSize"
-                      />
-                    </IressInline>
-                    <IressInline gap="sm">
-                      <strong>Line height</strong>
-                      <CssSpark
-                        additionalStyles={{
-                          fontSize: variantCssVars.fontSize,
-                        }}
-                        cssVar={variantCssVars.lineHeight}
-                        property="lineHeight"
-                      />
-                    </IressInline>
-                    <TokenTag>{`${tokenName}.${variantName}`}</TokenTag>
-                  </IressStack>
-                </IressCol>
-              );
-            })}
+                  return (
+                    <IressCol key={variant} span={{ lg: 6 }}>
+                      <IressStack gap="sm">
+                        <IressText style={{ font: variantCssVar }}>
+                          {variant}
+                        </IressText>
+                        <IressInline gap="sm">
+                          <strong>Font</strong>
+                          <CssSpark
+                            cssVar={variantCssVars.fontFamily}
+                            property="fontFamily"
+                            trimmed
+                          />
+                        </IressInline>
+                        <IressInline gap="sm">
+                          <strong>Weight</strong>
+                          <CssSpark
+                            cssVar={variantCssVars.fontWeight}
+                            property="fontWeight"
+                          />
+                        </IressInline>
+                        <IressInline gap="sm">
+                          <strong>Size</strong>
+                          <CssSpark
+                            cssVar={variantCssVars.fontSize}
+                            property="fontSize"
+                          />
+                        </IressInline>
+                        <IressInline gap="sm">
+                          <strong>Line height</strong>
+                          <CssSpark
+                            additionalStyles={{
+                              fontSize: variantCssVars.fontSize,
+                            }}
+                            cssVar={variantCssVars.lineHeight}
+                            property="lineHeight"
+                          />
+                        </IressInline>
+                        <TokenTag>{`${tokenName}.${variantName}`}</TokenTag>
+                      </IressStack>
+                    </IressCol>
+                  );
+                })}
+              </IressRow>
+            </IressCol>
           </IressRow>
         ))}
       </IressStack>

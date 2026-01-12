@@ -12,7 +12,7 @@ export const textStyle: Story = {
   args: {
     bg: 'alt',
     children: 'A panel with large text',
-    textStyle: 'typography.body.lg',
+    textStyle: 'typography.heading.5',
   },
   parameters: {
     controls: { include: ['textAlign', 'textStyle'] },

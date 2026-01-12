@@ -27,7 +27,7 @@ export const card = sva({
       padding: 'spacing.4',
       '& > h1:not([class]), & > h2:not([class]), & > h3:not([class]), & > h4:not([class]), & > h5:not([class]), & > h6:not([class])':
         {
-          textStyle: 'typography.heading.4',
+          textStyle: 'typography.heading.3',
           mb: 'spacing.0',
         },
       '& a': {

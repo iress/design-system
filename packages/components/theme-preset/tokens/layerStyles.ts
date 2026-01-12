@@ -40,6 +40,12 @@ export const elevationCompositions = {
 } satisfies CompositionStyles['layerStyles'];
 
 const internalLayerStyles: CompositionStyles['layerStyles'] = {
+  'elevation.focusNoBorder': {
+    description: elevation.focus.$description,
+    value: {
+      boxShadow: cssVars.elevation.focus.shadow,
+    },
+  },
   dots: {
     description: 'Used to represent a loading state with dots',
     value: {

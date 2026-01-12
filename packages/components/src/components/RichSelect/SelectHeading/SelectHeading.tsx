@@ -68,7 +68,7 @@ export const IressSelectHeading = ({
   className,
   clearAll,
   onClearAll,
-  textStyle = 'typography.body.lg.strong',
+  textStyle = 'typography.heading.4',
   ...restProps
 }: IressSelectHeadingProps) => (
   <IressMenuHeading

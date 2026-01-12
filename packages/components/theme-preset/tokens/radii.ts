@@ -46,4 +46,8 @@ export const radii = {
     description: 'No border radius',
     value: cssVars.radius['000'],
   },
+  '50%': {
+    description: 'Circle radius',
+    value: '50%',
+  },
 };

@@ -4,6 +4,7 @@ import { IressText } from '../Text';
 import { IressInline } from '../Inline';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 import { stylingProps } from '@theme-preset/storybookHelpers';
+import { IressLink } from '../Link';
 
 type Story = StoryObj<IressIconProps>;
 
@@ -160,13 +161,16 @@ export const ExternalLink: Story = {
     ...Default.args,
     name: 'external-link',
     pl: 'spacing.2',
+    screenreaderText: '(Opens in a new tab)',
   },
   render: (args) => (
-    <IressText>
-      <a href="https://www.iress.com/" target="_blank" rel="noreferrer">
-        Go to this link
-        <IressIcon {...args} />
-      </a>
-    </IressText>
+    <IressLink
+      href="https://www.iress.com/"
+      target="_blank"
+      rel="noreferrer"
+      append={<IressIcon {...args} />}
+    >
+      Go to this link
+    </IressLink>
   ),
 };

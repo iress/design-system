@@ -53,6 +53,9 @@ export const Mode: ButtonStory = {
       <IressButton mode="tertiary" {...args}>
         {children === '' ? 'Tertiary button' : children}
       </IressButton>
+      <IressButton mode="quaternary" {...args}>
+        {children === '' ? 'Quaternary button' : children}
+      </IressButton>
       <IressButton mode="muted" {...args}>
         {children === '' ? <IressIcon name="share-alt" /> : children}
       </IressButton>
@@ -79,6 +82,9 @@ export const Status: ButtonStory = {
         <IressButton mode="tertiary" status="success" {...args}>
           {children === '' ? 'Tertiary button' : children}
         </IressButton>
+        <IressButton mode="quaternary" status="success" {...args}>
+          {children === '' ? 'Quaternary button' : children}
+        </IressButton>
         <IressButton mode="muted" status="success" {...args}>
           {children === '' ? <IressIcon name="shopping-cart" /> : children}
         </IressButton>
@@ -92,6 +98,9 @@ export const Status: ButtonStory = {
         </IressButton>
         <IressButton mode="tertiary" status="danger" {...args}>
           {children === '' ? 'Tertiary button' : children}
+        </IressButton>
+        <IressButton mode="quaternary" status="danger" {...args}>
+          {children === '' ? 'Quaternary button' : children}
         </IressButton>
         <IressButton mode="muted" status="danger" {...args}>
           {children === '' ? <IressIcon name="trash" /> : children}
@@ -140,6 +149,9 @@ export const Loading: ButtonStory = {
         {children}
       </IressButton>
       <IressButton {...args} mode="tertiary">
+        {children}
+      </IressButton>
+      <IressButton {...args} mode="quaternary">
         {children}
       </IressButton>
       <IressButton {...args} mode="muted">
@@ -316,6 +328,9 @@ export const Active: ButtonStory = {
       </IressButton>
       <IressButton mode="tertiary" {...args}>
         Active Tertiary
+      </IressButton>
+      <IressButton mode="quaternary" {...args}>
+        Active Quaternary
       </IressButton>
       <IressButton mode="muted" {...args}>
         <IressIcon name="ellipsis-v" />

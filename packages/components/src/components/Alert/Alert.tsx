@@ -163,7 +163,6 @@ export const IressAlert = ({
                   <IressButton
                     {...action}
                     className={cx(action.className, classes.action)}
-                    color={`colour.system.${status}.text`}
                     key={index}
                   />
                 ))}

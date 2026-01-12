@@ -78,7 +78,7 @@ export const ComponentOverview = ({
             <IressText element="h2" id="overview" srOnly>
               Overview
             </IressText>
-            <IressText textStyle="typography.body.lg">{description}</IressText>
+            <IressText>{description}</IressText>
           </>
         )}
 

@@ -58,8 +58,8 @@ const DashboardTemplate = () => (
       <IressRow horizontalAlign="between" verticalAlign="middle">
         <IressSkeleton textStyle="typography.heading.1" width="25%" />
         <IressInline gap="lg">
-          <IressSkeleton textStyle="typography.body.lg" width="200px" />
-          <IressSkeleton textStyle="typography.body.lg" width="200px" />
+          <IressSkeleton textStyle="typography.heading.4" width="200px" />
+          <IressSkeleton textStyle="typography.heading.4" width="200px" />
         </IressInline>
       </IressRow>
       <IressDivider />

@@ -5,7 +5,7 @@ export const borders = {
   alert: {
     description: 'Used for alert borders',
     value: {
-      width: '0.5px',
+      width: '1px',
       style: 'solid',
       color: 'currentColor',
     },

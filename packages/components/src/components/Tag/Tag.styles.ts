@@ -8,26 +8,29 @@ export const tag = sva({
       bg: 'colour.neutral.20',
       border: 'divider',
       borderRadius: 'radius.system.badge',
+      color: 'colour.neutral.80',
       display: 'inline-flex',
       gap: 'spacing.1',
-      px: 'xs',
-      transition: 'colors',
-    },
-    content: {
-      lineHeight: 1,
+      py: 'xs',
+      px: 'sm',
+      transition: '[all .2s]',
+      textStyle: 'typography.body.md',
     },
     deleteButton: {
+      my: '-spacing.1',
+      mr: '-spacing.1',
+
       '& button': {
         color: '[inherit]',
         fontSize: 'inherit',
         minWidth: '[0]',
         minHeight: '[0]',
-        py: 'spacing.0',
-        px: 'spacing.0',
-        mx: 'spacing.1',
+        p: 'spacing.1',
+        m: 'spacing.0',
 
-        _after: {
-          display: 'none',
+        _hover: {
+          bg: 'transparent',
+          borderColor: 'transparent',
         },
       },
     },
@@ -39,6 +42,33 @@ export const tag = sva({
           bg: 'colour.primary.surface',
           borderColor: 'colour.primary.fill',
           color: 'colour.primary.text',
+        },
+      },
+    },
+    clickable: {
+      true: {
+        root: {
+          _hover: {
+            bg: 'colour.primary.surface',
+            borderColor: 'colour.primary.fill',
+            color: 'colour.primary.text',
+            cursor: 'pointer',
+          },
+
+          _active: {
+            boxShadow:
+              'color-mix(in srgb, {colors.colour.primary.surface}, transparent 60%) 0px 0px 0px 3px',
+          },
+        },
+      },
+    },
+    compact: {
+      true: {
+        root: {
+          height: '[calc({sizes.input.height} - {spacing.spacing.2} - 2px)]',
+          py: 'none',
+          px: 'xs',
+          textStyle: 'typography.body.sm',
         },
       },
     },

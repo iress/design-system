@@ -272,6 +272,13 @@ export interface IressCSSProps {
   focusable?: 'true' | 'within';
 
   /**
+   * The `flex` prop is used to set the flex grow property of an element. It allows the element to grow and fill available space in a flex container.
+   *
+   * In the design system, we only allow `1` as a value to ensure consistent behavior across components, ensuring that flex items expand in a predictable way and preventing layout inconsistencies between implementations.
+   */
+  flex?: '1';
+
+  /**
    * Set **`hideFrom`** to hide an element completely using `display: none`. It can be combined with `hideBelow` to create complex responsive visibility rules.
    *
    * Hide on all breakpoints: `hideFrom: true`
@@ -477,9 +484,8 @@ export interface IressCSSProps {
    *
    * - `typography.body.sm` - Use for small components such as badges and disclaimers, as well as compact variations of tables and lists.
    * - `typography.body.md` - The most commonly used body text size, used for most text content in the product and the default state of all components in the design system.
-   * - `typography.body.lg` - Use for tag lines, subtitles, and other large text content in the product.
    * - `typography.heading.1` - Use for the main page title to establish a clear hierarchy. There is typically only one H1 per screen, emphasising the primary purpose or context of the page.
-   * - `typography.heading.2` - Use for primary section headings within a page to organise content and guide the user through key areas. Also suitable for large components—such as modals—where space allows and where it pairs well with body.md or body.lg.
+   * - `typography.heading.2` - Use for primary section headings within a page to organise content and guide the user through key areas. Also suitable for large components—such as modals—where space allows and where it pairs well with body.md.
    * - `typography.heading.3` - Use for sub-sections under H2s to further structure content and maintain a clear visual hierarchy. Ideal for breaking down complex sections into manageable parts.
    * - `typography.heading.4` - Use for supporting headings within content blocks or small components where space is limited—such as table headers, cards, or side panels. Provides structure without overwhelming the layout.
    * - `typography.heading.5` - Use for minor labels or titles in compact UI elements, such as cards, sidebars, or inline labels. Best used to emphasise supplementary information without drawing too much attention. Works well with body.sm and is ideal for subtle content like fine print. Use sparingly to preserve typographic hierarchy.

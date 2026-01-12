@@ -14,7 +14,6 @@ export const divider = cva({
         alignSelf: 'stretch',
         borderInlineStartWidth: '1px',
         borderInlineStartStyle: 'solid',
-        height: 'auto',
         minHeight: '[1em]',
         verticalAlign: 'middle',
       },
@@ -24,7 +23,22 @@ export const divider = cva({
         borderBlockStartStyle: 'solid',
       },
     },
+    verticalStretch: {
+      true: {
+        height: '[100%]',
+        alignSelf: 'center',
+      },
+    },
   },
+  compoundVariants: [
+    {
+      vertical: true,
+      verticalStretch: false,
+      css: {
+        height: 'auto',
+      },
+    },
+  ],
   defaultVariants: {
     vertical: false,
   },

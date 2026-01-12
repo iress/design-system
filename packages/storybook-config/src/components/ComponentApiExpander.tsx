@@ -14,7 +14,7 @@ export const ComponentApiExpander = ({
   headingLevel = 2,
   ...restProps
 }: ComponentApiProps) => {
-  const { IressExpander, IressText, IressPanel } = use(IressStorybookContext);
+  const { IressExpander, IressText } = use(IressStorybookContext);
   const headingElement = useRef<HTMLDivElement | null>(null);
   const activeProps = useIsActiveHeading(headingElement);
   const [show, setShow] = useState(false);
@@ -26,29 +26,23 @@ export const ComponentApiExpander = ({
   }, [activeProps]);
 
   return (
-    <IressPanel
-      layerStyle="elevation.raised"
-      borderRadius="radius.025"
-      py="xs"
+    <IressExpander
+      activator={
+        <ComponentApiHeading
+          headingId={headingId}
+          headingLevel={headingLevel}
+          ref={headingElement}
+        >
+          {heading}
+        </ComponentApiHeading>
+      }
+      onChange={(open) => setShow(!!open)}
+      open={show}
       mb="lg"
     >
-      <IressExpander
-        activator={
-          <ComponentApiHeading
-            headingId={headingId}
-            headingLevel={headingLevel}
-            ref={headingElement}
-          >
-            {heading}
-          </ComponentApiHeading>
-        }
-        onChange={(open) => setShow(!!open)}
-        open={show}
-      >
-        <IressText pr="xs">
-          <ComponentApi {...restProps} heading="" />
-        </IressText>
-      </IressExpander>
-    </IressPanel>
+      <IressText pr="xs" my="-lg">
+        <ComponentApi {...restProps} heading="" />
+      </IressText>
+    </IressExpander>
   );
 };

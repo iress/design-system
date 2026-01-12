@@ -49,6 +49,13 @@ const stylingPropsReference: StylingPropsReference[] = [
     responsive: false,
   },
   {
+    jsxProp: 'flex',
+    jsxPropLink: '/?path=/docs/styling-props-layout--docs#flex1',
+    cssProperty: 'flex',
+    tokenMapping: 'N/A',
+    responsive: false,
+  },
+  {
     jsxProp: 'focusable',
     jsxPropLink: '/?path=/docs/styling-props-elevation--docs#focusable',
     cssProperty: 'border and box-shadow',
@@ -206,8 +213,8 @@ const stylingPropsReference: StylingPropsReference[] = [
   },
   {
     jsxProp: 'stretch',
-    jsxPropLink: '/?path=/docs/styling-props-spacing--docs#stretch',
-    cssProperty: 'align-self: stretch and height: 100%',
+    jsxPropLink: '/?path=/docs/styling-props-layout--docs#stretch',
+    cssProperty: 'align-self, height and flex',
     tokenMapping: 'N/A',
     responsive: false,
   },

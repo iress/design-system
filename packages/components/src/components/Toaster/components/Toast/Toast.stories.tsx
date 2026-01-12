@@ -1,5 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressButton, IressText } from '@/main';
+import { IressText } from '@/main';
 import { type ToastStatus, Toast } from './Toast';
 import { capitalizeFirstLetter } from '@helpers/formatting/capitalizeFirstLetter';
 import { IressStack } from '../../../Stack/Stack';
@@ -10,11 +10,12 @@ type Story = StoryObj<typeof Toast>;
 const TOAST_STATUS: ToastStatus[] = ['success', 'error', 'info'];
 const actionOptions = {
   none: null,
-  TryAgain: (
-    <IressButton key="test" status="danger">
-      Try Again
-    </IressButton>
-  ),
+  tryAgain: [
+    {
+      children: 'Action',
+      onClick: () => 'Take me somewhere please',
+    },
+  ],
 };
 
 const headingOptions = {
@@ -113,7 +114,7 @@ export const Status: Story = {
 export const Footer: Story = {
   args: {
     ...Default.args,
-    actions: actionOptions.TryAgain,
+    actions: actionOptions.tryAgain,
   },
 };
 

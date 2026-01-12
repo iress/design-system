@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { IressTag } from '.';
 import userEvent from '@testing-library/user-event';
@@ -7,23 +7,48 @@ import { GlobalCSSClass } from '@/enums';
 
 describe('IressTag', () => {
   it('should render the component with the correct text, classes and testids', () => {
-    const { getByTestId } = render(
-      <IressTag data-testid="test-component" className="test-class" />,
-    );
+    render(<IressTag data-testid="test-component" className="test-class" />);
 
-    const component = getByTestId('test-component');
+    const component = screen.getByTestId('test-component');
     expect(component).toHaveClass(
       `test-class ${tag().root}`,
       GlobalCSSClass.Tag,
     );
 
     expect(
-      getByTestId('test-component__delete-button__button'),
+      screen.queryByTestId('test-component__delete-button__button'),
+    ).not.toBeInTheDocument();
+  });
+
+  it('renders as clickable when onClick is provided', async () => {
+    const handleClick = vi.fn();
+    render(
+      <IressTag onClick={handleClick} data-testid="clickable-tag">
+        Click me
+      </IressTag>,
+    );
+
+    const component = screen.getByRole('button', { name: 'Click me' });
+    expect(component).toHaveClass(
+      ...(tag({ clickable: true }).root ?? '').split(' '),
+    );
+
+    await userEvent.click(component);
+    expect(handleClick).toHaveBeenCalled();
+  });
+
+  it('should render the delete button if onDelete is provided', () => {
+    render(<IressTag onDelete={vi.fn()} data-testid="test-component" />);
+
+    expect(
+      screen.getByTestId('test-component__delete-button__button'),
     ).toBeInTheDocument();
   });
 
   it('should set the correct aria-label on the delete button when you set the deleteButtonText', () => {
-    const { getByRole } = render(<IressTag deleteButtonText="Remove item" />);
+    const { getByRole } = render(
+      <IressTag onDelete={vi.fn()} deleteButtonText="Remove item" />,
+    );
 
     const component = getByRole('img');
     expect(component).toHaveAttribute('aria-label', 'Remove item');
@@ -43,7 +68,11 @@ describe('IressTag', () => {
   it('should call the onDeleteButtonBlur function with the tag text when the delete button is blurred', async () => {
     const deleteBlurSpy = vitest.fn();
 
-    render(<IressTag onDeleteButtonBlur={deleteBlurSpy}>Bacon</IressTag>);
+    render(
+      <IressTag onDelete={vi.fn()} onDeleteButtonBlur={deleteBlurSpy}>
+        Bacon
+      </IressTag>,
+    );
 
     await userEvent.tab(); // Go to button
     await userEvent.tab(); // Blur away

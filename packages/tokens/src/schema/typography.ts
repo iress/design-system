@@ -39,12 +39,6 @@ interface TypographySchema extends IressDesignTokenGroup {
       strong: IressDesignToken<CompositeValue['typography']>;
       em: IressDesignToken<CompositeValue['typography']>;
     };
-    lg: IressDesignTokenGroup & {
-      regular: IressDesignToken<CompositeValue['typography']>;
-      medium: IressDesignToken<CompositeValue['typography']>;
-      strong: IressDesignToken<CompositeValue['typography']>;
-      em: IressDesignToken<CompositeValue['typography']>;
-    };
   };
   code: IressDesignToken<CompositeValue['typography']>;
 }
@@ -91,9 +85,9 @@ const typography = {
       $type: Type.Typography,
       $value: {
         fontFamily: `{typography.base.headingFont || ${headingFont}}`,
-        fontSize: `calc({typography.base.size || ${baseSize}} * (36 / 14))`,
+        fontSize: `calc({typography.base.size || ${baseSize}} * (24 / 14))`,
         fontWeight: 500,
-        lineHeight: 1.3,
+        lineHeight: 1.33,
       },
       $extensions: {
         'styler.panel': 'typography.heading.1',
@@ -103,13 +97,13 @@ const typography = {
     },
     2: {
       $description:
-        'Use for **primary section headings** within a page to organise content and guide the user through key areas. Also suitable for large components—such as modals—where space allows and where it pairs well with: body.md or body.lg.',
+        'Use for **primary section headings** within a page to organise content and guide the user through key areas. Also suitable for large components—such as modals—where space allows and where it pairs well with: body.md.',
       $type: Type.Typography,
       $value: {
         fontFamily: `{typography.base.headingFont || ${headingFont}}`,
-        fontSize: `calc({typography.base.size || ${baseSize}} * (30 / 14))`,
+        fontSize: `calc({typography.base.size || ${baseSize}} * (20 / 14))`,
         fontWeight: 500,
-        lineHeight: 1.3,
+        lineHeight: 1.4,
       },
       $extensions: {
         'styler.panel': 'typography.heading.2',
@@ -123,9 +117,9 @@ const typography = {
       $type: Type.Typography,
       $value: {
         fontFamily: `{typography.base.headingFont || ${headingFont}}`,
-        fontSize: `calc({typography.base.size || ${baseSize}} * (26 / 14))`,
+        fontSize: `calc({typography.base.size || ${baseSize}} * (16 / 14))`,
         fontWeight: 500,
-        lineHeight: 1.3,
+        lineHeight: 1.5,
       },
       $extensions: {
         'styler.panel': 'typography.heading.3',
@@ -139,9 +133,9 @@ const typography = {
       $type: Type.Typography,
       $value: {
         fontFamily: `{typography.base.headingFont || ${headingFont}}`,
-        fontSize: `calc({typography.base.size || ${baseSize}} * (22 / 14))`,
+        fontSize: `calc({typography.base.size || ${baseSize}} * (14 / 14))`,
         fontWeight: 500,
-        lineHeight: 1.3,
+        lineHeight: 1.42,
       },
       $extensions: {
         'styler.panel': 'typography.heading.4',
@@ -155,9 +149,9 @@ const typography = {
       $type: Type.Typography,
       $value: {
         fontFamily: `{typography.base.headingFont || ${headingFont}}`,
-        fontSize: `calc({typography.base.size || ${baseSize}} * (18 / 14))`,
+        fontSize: `calc({typography.base.size || ${baseSize}} * (14 / 14))`,
         fontWeight: 400,
-        lineHeight: 1.3,
+        lineHeight: 1.42,
       },
       $extensions: {
         'styler.panel': 'typography.heading.5',
@@ -299,71 +293,6 @@ const typography = {
         },
       },
     },
-    lg: {
-      $description:
-        'Used for tag lines, subtitles, and other large text content in the product.',
-      regular: {
-        $description:
-          'The default large text, most commonly used to display large text across all products.',
-        $type: Type.Typography,
-        $value: {
-          fontFamily: `{typography.base.bodyFont || ${bodyFont}}`,
-          fontSize: `calc({typography.base.size || ${baseSize}} * (18 / 14))`,
-          fontWeight: 400,
-          lineHeight: 1.5,
-        },
-        $extensions: {
-          'styler.panel': 'typography.body.lg',
-          'styler.watchToken': 'typography.base.bodyFont',
-        },
-      },
-      medium: {
-        $description:
-          'Medium text is used to indicate text is interactive, such as a button or a link.',
-        $type: Type.Typography,
-        $value: {
-          fontFamily: `{typography.base.bodyFont || ${bodyFont}}`,
-          fontSize: `calc({typography.base.size || ${baseSize}} * (18 / 14))`,
-          fontWeight: 500,
-          lineHeight: 1.5,
-        },
-        $extensions: {
-          'styler.panel': 'typography.body.lg',
-          'styler.watchToken': 'typography.base.bodyFont',
-        },
-      },
-      strong: {
-        $description:
-          'Strong text is used to highlight important information in a paragraph of text.',
-        $type: Type.Typography,
-        $value: {
-          fontFamily: `{typography.base.bodyFont || ${bodyFont}}`,
-          fontSize: `calc({typography.base.size || ${baseSize}} * (18 / 14))`,
-          fontWeight: 600,
-          lineHeight: 1.5,
-        },
-        $extensions: {
-          'styler.panel': 'typography.body.lg',
-          'styler.watchToken': 'typography.base.bodyFont',
-        },
-      },
-      em: {
-        $description:
-          'Emphasised text is used to highlight a term or definition in a paragraph of text. It is used sparingly, usually for legal purposes.',
-        $type: Type.Typography,
-        $value: {
-          fontFamily: `{typography.base.bodyFont || ${bodyFont}}`,
-          fontSize: `calc({typography.base.size || ${baseSize}} * (18 / 14))`,
-          fontWeight: 500,
-          lineHeight: 1.5,
-          fontStyle: 'italic',
-        },
-        $extensions: {
-          'styler.panel': 'typography.body.lg',
-          'styler.watchToken': 'typography.base.bodyFont',
-        },
-      },
-    },
   },
   code: {
     $description:
@@ -371,7 +300,7 @@ const typography = {
     $type: Type.Typography,
     $value: {
       fontFamily: 'Space, monospace',
-      fontSize: `{typography.base.size || ${baseSize}}`,
+      fontSize: `calc({typography.base.size || ${baseSize}} * (16 / 14))`,
       fontWeight: 400,
       lineHeight: 1.6,
     },

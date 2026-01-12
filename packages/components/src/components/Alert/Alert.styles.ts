@@ -83,7 +83,7 @@ export const alert = sva({
         alert: {
           backgroundColor: 'colour.system.danger.surface',
           color: 'colour.neutral.80',
-          borderColor: 'colour.system.danger.fill',
+          borderColor: 'colour.system.danger.text',
         },
         heading: {
           color: 'colour.system.danger.text',
@@ -92,14 +92,12 @@ export const alert = sva({
           color: 'colour.system.danger.text',
         },
         action: {
-          color: 'colour.system.danger.text',
-          _before: {
-            borderColor: 'colour.system.danger.text',
-          },
-          _after: {
-            bg: 'colour.system.danger.fill',
-          },
+          bg: 'colour.system.danger.fill',
+          borderColor: 'colour.system.danger.fill',
+          color: 'colour.system.danger.onFill',
           _hover: {
+            bg: 'colour.system.danger.fillHover',
+            borderColor: 'colour.system.danger.fillHover',
             color: 'colour.system.danger.onFill',
           },
         },
@@ -108,7 +106,7 @@ export const alert = sva({
         alert: {
           backgroundColor: 'colour.system.info.surface',
           color: 'colour.neutral.80',
-          borderColor: 'colour.system.info.fill',
+          borderColor: 'colour.system.info.text',
         },
         heading: {
           color: 'colour.system.info.text',
@@ -117,14 +115,12 @@ export const alert = sva({
           color: 'colour.system.info.text',
         },
         action: {
-          color: 'colour.system.info.text',
-          _before: {
-            borderColor: 'colour.system.info.text',
-          },
-          _after: {
-            bg: 'colour.system.info.fill',
-          },
+          bg: 'colour.system.info.fill',
+          borderColor: 'colour.system.info.fill',
+          color: 'colour.system.info.onFill',
           _hover: {
+            bg: 'colour.system.info.fillHover',
+            borderColor: 'colour.system.info.fillHover',
             color: 'colour.system.info.onFill',
           },
         },
@@ -133,7 +129,7 @@ export const alert = sva({
         alert: {
           backgroundColor: 'colour.system.success.surface',
           color: 'colour.neutral.80',
-          borderColor: 'colour.system.success.fill',
+          borderColor: 'colour.system.success.text',
         },
         heading: {
           color: 'colour.system.success.text',
@@ -142,14 +138,12 @@ export const alert = sva({
           color: 'colour.system.success.text',
         },
         action: {
-          color: 'colour.system.success.text',
-          _before: {
-            borderColor: 'colour.system.success.text',
-          },
-          _after: {
-            bg: 'colour.system.success.fill',
-          },
+          bg: 'colour.system.success.fill',
+          borderColor: 'colour.system.success.fill',
+          color: 'colour.system.success.onFill',
           _hover: {
+            bg: 'colour.system.success.fillHover',
+            borderColor: 'colour.system.success.fillHover',
             color: 'colour.system.success.onFill',
           },
         },
@@ -158,7 +152,7 @@ export const alert = sva({
         alert: {
           backgroundColor: 'colour.system.warning.surface',
           color: 'colour.neutral.80',
-          borderColor: 'colour.system.warning.fill',
+          borderColor: 'colour.system.warning.text',
         },
         heading: {
           color: 'colour.system.warning.text',
@@ -167,14 +161,12 @@ export const alert = sva({
           color: 'colour.system.warning.text',
         },
         action: {
-          color: 'colour.system.warning.text',
-          _before: {
-            borderColor: 'colour.system.warning.text',
-          },
-          _after: {
-            bg: 'colour.system.warning.fill',
-          },
+          bg: 'colour.system.warning.fill',
+          borderColor: 'colour.system.warning.fill',
+          color: 'colour.system.warning.onFill',
           _hover: {
+            bg: 'colour.system.warning.fillHover',
+            borderColor: 'colour.system.warning.fillHover',
             color: 'colour.system.warning.onFill',
           },
         },

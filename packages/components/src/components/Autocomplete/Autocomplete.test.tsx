@@ -24,6 +24,7 @@ describe('IressAutocomplete', () => {
   it('should render the component with the correct text', async () => {
     renderAutocomplete({
       className: 'test-class',
+      minSearchLength: 0,
     });
 
     const popover = screen.getByTestId(TEST_ID);
@@ -50,7 +51,7 @@ describe('IressAutocomplete', () => {
     expect(listbox).toStrictEqual(listboxTestId);
     expect(options).toHaveLength(MOCK_LABEL_VALUE_META.length);
 
-    await userEvent.type(input, '{backspace}{backspace}{backspace}');
+    await userEvent.type(input, '{backspace}{backspace}{backspace}{Escape}');
 
     expect(listbox).not.toBeVisible();
   });

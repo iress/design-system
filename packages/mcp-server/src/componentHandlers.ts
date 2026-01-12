@@ -447,7 +447,7 @@ export function handleGetComponentProps(args: unknown) {
       '**Common styling props:**\n' +
       '- Spacing: `p="md"`, `m="lg"`, `px="sm"`, `py="xl"`\n' +
       '- Colors: `bg="colour.primary.fill"`, `color="colour.primary.text"`\n' +
-      '- Typography: `textStyle="typography.body.lg"`\n' +
+      '- Typography: `textStyle="typography.heading.4"`\n' +
       '- Layout: `maxWidth`, `width`, `textAlign`\n\n' +
       '✅ **DO**: Use design tokens for consistency and theming\n' +
       '❌ **DON\'T**: Use `style={{ padding: "16px" }}` or hardcoded colors\n\n' +

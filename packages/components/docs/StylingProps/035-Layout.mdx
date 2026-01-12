@@ -7,12 +7,24 @@ import { ComponentExample } from '@iress-oss/ids-storybook-config';
 
 # Layout
 
-<IressText textStyle="typography.body.lg" mb="md">
-  These are all styling props related to modifying layout.
-</IressText>
+These are all styling props related to modifying layout.
 
 ## `alignSelf`
 
 The `alignSelf` prop allows you to override the alignItems value set by a parent flex container for individual components. This is useful when you want to adjust the alignment of a single item without affecting the entire container.
 
 <ComponentExample of={ComponentStories.alignSelf} />
+
+## `flex="1"`
+
+The `flex="1"` prop is used to make a component grow and fill available space in a flex container. Setting `flex` to `1` allows the component to take up one unit of available space, ensuring consistent behavior across components.
+
+Note: We only allow `1` as a value to maintain design consistency.
+
+<ComponentExample of={ComponentStories.flex1} />
+
+## Stretch
+
+The `stretch` prop is used to stretch a component to fill the available space. It is used in components such as `IressPanel` to ensure each column in a layout takes up the same amount of space.
+
+<ComponentExample of={ComponentStories.stretch} />

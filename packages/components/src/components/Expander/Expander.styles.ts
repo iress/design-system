@@ -1,10 +1,21 @@
 import { sva } from '@/styled-system/css';
 
 export const expander = sva({
-  slots: ['root', 'activator', 'content', 'container', 'containerInner'],
+  slots: [
+    'root',
+    'activator',
+    'chevron',
+    'content',
+    'container',
+    'containerInner',
+  ],
   base: {
     root: {
       display: 'block',
+
+      '&:has([aria-controls]:focus-visible)': {
+        layerStyle: 'elevation.focusNoBorder',
+      },
     },
     activator: {
       display: 'inline-block',
@@ -13,27 +24,17 @@ export const expander = sva({
       width: 'auto',
       bg: 'transparent',
       cursor: 'pointer',
-      tableChevron: true,
       position: 'relative',
-
-      _before: {
-        content: '""',
-        position: 'absolute',
-        top: '[-1.5px]',
-        left: '[-1.5px]',
-        right: '[-1.5px]',
-        bottom: '[-1.5px]',
-        pointerEvents: 'none',
-        zIndex: '[-1]',
-        borderRadius: 'radius.system.badge',
-      },
 
       _focusVisible: {
         outline: '[none]',
-        _before: {
-          layerStyle: 'elevation.focus',
-        },
       },
+    },
+    chevron: {
+      width: '[1.5em]',
+      height: '[1.5em]',
+      color: 'colour.neutral.90',
+      transition: '[all 0.3s ease-in-out]',
     },
     container: {
       display: 'grid',
@@ -50,23 +51,33 @@ export const expander = sva({
   variants: {
     mode: {
       section: {
+        root: {
+          border: 'table',
+          borderRadius: 'radius.system.layout',
+          p: 'spacing.4',
+          transition: 'colors',
+
+          '&:has([aria-controls]:hover)': {
+            borderColor: 'colour.primary.fill',
+          },
+        },
         activator: {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'flex-end',
           width: '[100%]',
-          textStyle: 'typography.heading.4',
-          py: 'spacing.3',
-          borderBottom: 'divider',
-          transition: '[all 0.2s ease-in-out]',
-
-          _after: {
-            mr: 'spacing.2',
-          },
+          textStyle: 'typography.heading.3',
 
           _hover: {
             color: 'colour.primary.text',
-            borderBottom: 'hover',
+          },
+        },
+        chevron: {
+          bg: 'colour.neutral.30',
+          borderRadius: '50%',
+
+          _groupHover: {
+            bg: 'colour.primary.surfaceHover',
           },
         },
       },
@@ -83,12 +94,15 @@ export const expander = sva({
             textDecoration: 'none',
           },
         },
+        chevron: {
+          display: 'inline',
+        },
       },
     },
     open: {
       true: {
-        activator: {
-          tableChevron: false,
+        chevron: {
+          transform: 'rotate(180deg)',
         },
         container: {
           gridTemplateRows: '1fr',

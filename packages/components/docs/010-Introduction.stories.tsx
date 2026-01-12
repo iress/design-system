@@ -31,7 +31,7 @@ const HomePage = () => {
               <IressBadge mode="neutral">{version}</IressBadge>
             </IressText>
 
-            <IressText element="p" textStyle="typography.body.lg">
+            <IressText element="p">
               The Iress Design System (IDS) serves as a shared visual language,
               working code, design tools and resources, human interface
               guidelines, and a community. It supports designers and developers
@@ -56,7 +56,7 @@ const HomePage = () => {
             </IressInline>
           </IressStack>
         </IressCol>
-        <IressCol span={{ md: 6 }}>
+        <IressCol span={{ md: 5 }} offset={{ md: 1 }}>
           <Suspense>
             <HomePageHero />
           </Suspense>

@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta, Story } from '@storybook/addon-docs/blocks';
 import * as ComponentStories from './Hide.stories';
 import {
   ComponentOverview,
@@ -28,7 +28,7 @@ The `hiddenOn` prop accepts a `ResponsiveSizing<boolean>` object, which is an ob
 
 It determines which screen sizes the component's children will be hidden on. It's set up as an object containing the following IDS breakpoints:
 
-<ComponentExample of={ComponentStories.BreakpointTable} />
+<Story of={ComponentStories.BreakpointTable} />
 
 ## Behaviour
 
@@ -62,10 +62,6 @@ This `visuallyHidden` prop is used if you don't want content to be visible on sc
 
 ## Utility classes
 
-To make it easier for developers to hide content, we've exposed the classes we use for the hide component as part of our global styles.
+Utility classes are no longer available to use. Instead, please use the `hideFrom`, `hideBelow`, and `srOnly` styling props.
 
-This means you can use them without having to use the Hide component. Unlike the Hide component, the utility classes only apply to a single breakpoint:
-
-<ComponentExample of={ComponentStories.UtilityBreakpointTable} />
-
-If you use `iress-hidden` or `iress-sr-only` without the breakpoint suffix, it will apply to all screen sizes.
+For more information, please see the [styling props documentation](/?path=/docs/components_styling-props-reference--docs).
