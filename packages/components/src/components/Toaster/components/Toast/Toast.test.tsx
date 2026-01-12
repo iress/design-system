@@ -1,7 +1,6 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { IressText } from '../../../Text';
-import { IressButton } from '../../../Button';
 import { Toast, ToastProps } from './Toast';
 
 const defaultProps: ToastProps = {
@@ -59,7 +58,14 @@ describe('Toast', () => {
 
     it('should render the component with actions', () => {
       const { getByRole } = renderComponent({
-        actions: <IressButton>Action</IressButton>,
+        actions: [
+          {
+            children: 'Action',
+            onClick: () => {
+              console.log('Action clicked');
+            },
+          },
+        ],
       });
 
       const button = getByRole('button', { name: 'Action' });
