@@ -23,7 +23,6 @@ export const link = sva({
     },
     root: {
       alignItems: 'baseline',
-      alignSelf: 'flex-start',
       cursor: 'pointer',
       display: 'inline-flex',
       fontKerning: 'none',
