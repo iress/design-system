@@ -14,7 +14,7 @@ export const expander = sva({
       display: 'block',
 
       '&:has([aria-controls]:focus-visible)': {
-        layerStyle: 'elevation.focus',
+        layerStyle: 'elevation.focusNoBorder',
       },
     },
     activator: {

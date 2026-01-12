@@ -36,9 +36,7 @@ describe('IressAlert', () => {
       );
 
       const component = getByTestId('test-component');
-      expect(component).toHaveClass(
-        'bd-c_colour.system.info.fill bg-c_colour.system.info.surface',
-      );
+      expect(component).toHaveClass(alertStyles({ status: 'info' }).alert!);
     });
 
     it('renders no heading and no footer by default', () => {
@@ -93,9 +91,7 @@ describe('IressAlert', () => {
 
         const { getByTestId, getByRole } = screen;
         const component = getByTestId('test-component');
-        expect(component).toHaveClass(
-          'bd-c_colour.system.info.fill bg-c_colour.system.info.surface',
-        );
+        expect(component).toHaveClass(alertStyles({ status: 'info' }).alert!);
 
         const footer = getByTestId('footer');
         expect(footer).toBeInTheDocument();
@@ -145,9 +141,7 @@ describe('IressAlert', () => {
         );
 
         const component = getByTestId('test-component');
-        expect(component).toHaveClass(
-          `bd-c_colour.system.${status}.fill bg-c_colour.system.${status}.surface`,
-        );
+        expect(component).toHaveClass(alertStyles({ status }).alert!);
         const icon = getByRole('img');
         expect(icon).toHaveAttribute('aria-label', `${status}: `);
         expect(icon).toHaveClass(`fa-${ALERT_ICONS[status]}`);

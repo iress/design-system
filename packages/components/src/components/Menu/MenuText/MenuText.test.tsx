@@ -168,7 +168,7 @@ describe('IressMenuHeading', () => {
     const screen = render(<IressMenuHeading>Test</IressMenuHeading>);
 
     const heading = screen.getByRole('heading', { name: 'Test', level: 2 });
-    expect(heading).toHaveClass(css({ textStyle: 'typography.heading.4' }));
+    expect(heading).toHaveClass(css({ textStyle: 'typography.heading.3' }));
     expect(heading.closest(`.${GlobalCSSClass.MenuHeading}`)).not.toBeNull();
   });
 });
