@@ -16,3 +16,11 @@ import { ComponentExample } from '@iress-oss/ids-storybook-config';
 The `alignSelf` prop allows you to override the alignItems value set by a parent flex container for individual components. This is useful when you want to adjust the alignment of a single item without affecting the entire container.
 
 <ComponentExample of={ComponentStories.alignSelf} />
+
+## Stretch
+
+The `stretch` prop used to stretch a component to fill the available space. It is used in components such as `IressPanel` to ensure each column in a layout takes up the same amount of space.
+
+It can also accept a value of `1`, which allows the component to take up one unit of available space in a flex container, similar to using `flex: 1`.
+
+<ComponentExample of={ComponentStories.stretch} />

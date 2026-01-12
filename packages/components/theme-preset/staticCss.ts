@@ -71,7 +71,7 @@ export const staticCss: ExtendableOptions['staticCss'] = {
         maxWidth: ['*'],
         noGutter: ['true'],
         scrollable: ['x', 'y', 'true'],
-        stretch: ['true'],
+        stretch: ['true', '1'],
       },
       responsive: false,
     },

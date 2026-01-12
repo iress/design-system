@@ -2,6 +2,7 @@ import { useMemo, type FC, type ReactNode } from 'react';
 import {
   type PositiveSpacingToken,
   type HorizontalAligns,
+  type VerticalAligns,
   type IressStyledProps,
   type ResponsiveProp,
 } from '@/types';
@@ -34,6 +35,15 @@ export type IressStackProps<
    * Sets the horizontal alignment of the stack content.
    */
   horizontalAlign?: HorizontalAligns;
+
+  /**
+   * Sets the vertical alignment of the stack content.
+   */
+  verticalAlign?:
+    | Omit<VerticalAligns, 'stretch'>
+    | 'between'
+    | 'around'
+    | 'evenly';
 };
 
 export const IressStack = <

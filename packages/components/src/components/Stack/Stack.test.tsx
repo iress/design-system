@@ -3,6 +3,16 @@ import { axe } from 'jest-axe';
 import { IressStack, IressStackProps } from './Stack';
 import { GlobalCSSClass } from '@/enums';
 
+const classNames = {
+  horizontalAlignCenter: 'ai_center',
+  horizontalAlignLeft: 'ai_flex-start',
+  horizontalAlignRight: 'ai_flex-end',
+  verticalAlignTop: 'jc_flex-start',
+  verticalAlignMiddle: 'jc_center',
+  verticalAlignBottom: 'jc_flex-end',
+  verticalAlignStretch: 'jc_stretch',
+};
+
 const renderComponent = (args: IressStackProps) => {
   return render(
     <IressStack data-testid="test-component" {...args}>
@@ -42,6 +52,52 @@ describe('IressStack', () => {
         expect(container).not.toHaveClass('iress-u-stack');
         expect(container).not.toHaveClass(/iress--gutter/);
         expect(container).toHaveClass('gap_spacing.4');
+      });
+    });
+
+    describe('horizontalAlign', () => {
+      it('should apply center horizontal alignment', () => {
+        const { getByTestId } = renderComponent({ horizontalAlign: 'center' });
+        const component = getByTestId('test-component');
+        expect(component).toHaveClass(classNames.horizontalAlignCenter);
+      });
+
+      it('should apply left horizontal alignment', () => {
+        const { getByTestId } = renderComponent({ horizontalAlign: 'left' });
+        const component = getByTestId('test-component');
+        expect(component).toHaveClass(classNames.horizontalAlignLeft);
+      });
+
+      it('should apply right horizontal alignment', () => {
+        const { getByTestId } = renderComponent({ horizontalAlign: 'right' });
+        const component = getByTestId('test-component');
+        expect(component).toHaveClass(classNames.horizontalAlignRight);
+      });
+    });
+
+    describe('verticalAlign', () => {
+      it('should apply top vertical alignment', () => {
+        const { getByTestId } = renderComponent({ verticalAlign: 'top' });
+        const component = getByTestId('test-component');
+        expect(component).toHaveClass(classNames.verticalAlignTop);
+      });
+
+      it('should apply middle vertical alignment', () => {
+        const { getByTestId } = renderComponent({ verticalAlign: 'middle' });
+        const component = getByTestId('test-component');
+        expect(component).toHaveClass(classNames.verticalAlignMiddle);
+      });
+
+      it('should apply bottom vertical alignment', () => {
+        const { getByTestId } = renderComponent({ verticalAlign: 'bottom' });
+        const component = getByTestId('test-component');
+        expect(component).toHaveClass(classNames.verticalAlignBottom);
+      });
+
+      it('should apply stretch vertical alignment', () => {
+        const { getByTestId } = renderComponent({ verticalAlign: 'stretch' });
+        const component = getByTestId('test-component');
+        expect(component).toHaveClass(classNames.verticalAlignStretch);
       });
     });
 

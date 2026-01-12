@@ -20,5 +20,25 @@ export const stack = cva({
         alignItems: 'flex-end',
       },
     },
+    verticalAlign: {
+      top: {
+        justifyContent: 'flex-start',
+      },
+      middle: {
+        justifyContent: 'center',
+      },
+      bottom: {
+        justifyContent: 'flex-end',
+      },
+      between: {
+        justifyContent: 'space-between',
+      },
+      around: {
+        justifyContent: 'space-around',
+      },
+      evenly: {
+        justifyContent: 'space-evenly',
+      },
+    },
   },
 });

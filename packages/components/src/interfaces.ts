@@ -460,8 +460,10 @@ export interface IressCSSProps {
 
   /**
    * The **`stretch`** property is used to stretch an element to fill the available space in its parent container. It sets the `height` property to `100%` and `alignSelf` to `stretch`, allowing the element to expand and contract based on the size of its parent.
+   *
+   * You can set the value to `true` to enable stretching, or to `1` to indicate that the element should take up one unit of available space in a flex container (similar to `flex: 1`).
    */
-  stretch?: boolean;
+  stretch?: boolean | 1;
 
   /**
    * The **`text-align`** CSS property sets the horizontal alignment of the inline-level content inside a block element or table-cell box.
