@@ -25,8 +25,14 @@ const API = {
                   Dashboard
                 </IressText>
                 <IressInline gap="lg">
-                  <IressSkeleton textStyle="typography.body.lg" width="200px" />
-                  <IressSkeleton textStyle="typography.body.lg" width="200px" />
+                  <IressSkeleton
+                    textStyle="typography.heading.4"
+                    width="200px"
+                  />
+                  <IressSkeleton
+                    textStyle="typography.heading.4"
+                    width="200px"
+                  />
                 </IressInline>
               </IressRow>
               <IressDivider />

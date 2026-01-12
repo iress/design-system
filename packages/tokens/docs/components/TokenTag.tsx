@@ -11,6 +11,7 @@ export const TokenTag = (props: IressBadgeProps) => (
     style={{
       border: `1px solid color-mix(in srgb, ${cssVars.colour.neutral[70]}, transparent 60%)`,
     }}
+    alignSelf="start"
     {...props}
   />
 );

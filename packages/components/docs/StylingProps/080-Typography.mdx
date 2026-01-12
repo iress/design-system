@@ -7,9 +7,7 @@ import { ComponentExample } from '@iress-oss/ids-storybook-config';
 
 # Typography
 
-<IressText textStyle="typography.body.lg" mb="md">
-  These are all styling props related to changing the typography of a component.
-</IressText>
+These are all styling props related to changing the typography of a component.
 
 ## `textStyle`
 
@@ -38,10 +36,6 @@ The `IressText` component is the recommended way to render text content. It hand
 <IressText>Default body text with proper styling</IressText>
 
 <IressText element="h1">Heading rendered as h1 element</IressText>
-
-<IressText element="p" textStyle="typography.body.lg">
-  Paragraph with large body text
-</IressText>
 ```
 
 **Why use IressText:**
@@ -57,10 +51,6 @@ When you need to apply typography styling to components that aren't text-specifi
 
 ```tsx
 // ✅ CORRECT - Using textStyle prop with tokens
-<IressPanel textStyle="typography.body.lg">
-  Panel content with large body text
-</IressPanel>
-
 <IressPanel textStyle="typography.heading.1">
   Panel with heading-sized text
 </IressPanel>
@@ -68,7 +58,7 @@ When you need to apply typography styling to components that aren't text-specifi
 
 **Available typography tokens:**
 
-- `typography.body.sm`, `typography.body.md`, `typography.body.lg` - Body text variants
+- `typography.body.sm`, `typography.body.md` - Body text variants
 - `typography.heading.1`, `typography.heading.2`, `typography.heading.3` - Heading text variants
 
 ### ❌ DON'T: Use inline styles for typography

@@ -23,7 +23,7 @@ export const supportedCardSlots = {
     <IressPopover
       align="bottom-end"
       activator={
-        <IressButton mode="tertiary" textStyle="typography.body.lg">
+        <IressButton mode="quaternary">
           <IressIcon name="ellipsis-v" />
         </IressButton>
       }

@@ -274,6 +274,7 @@ const Filter = <TMultiple extends boolean = false>(
               'activator-button__button',
             )}
             onClick={() => setShow(true)}
+            append={<span className={classes.chevron} />}
             {...(styleProps as IressCSSProps)}
           >
             <FilterLabel
@@ -281,7 +282,6 @@ const Filter = <TMultiple extends boolean = false>(
               selectedOptionsText={selectedOptionsText}
               value={value}
             />
-            <span className={classes.chevron} />
           </IressButton>
         }
         contentStyle={{ className: classes.popoverContent }}

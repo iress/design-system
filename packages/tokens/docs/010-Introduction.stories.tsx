@@ -36,7 +36,7 @@ interface TokenMetadata {
 const ColumnInfo = ({ children }: PropsWithChildren) => (
   <IressPopover
     activator={
-      <IressButton mode="tertiary">
+      <IressButton mode="muted">
         <IressIcon name="info-circle" screenreaderText="More information" />
       </IressButton>
     }

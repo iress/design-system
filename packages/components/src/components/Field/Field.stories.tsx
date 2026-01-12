@@ -363,9 +363,7 @@ export const RemoveErrorMargin: Story = {
           {/* Vertical Layout Column */}
           <IressCol span="6">
             <IressStack gap="spacing.2">
-              <IressText element="h3" textStyle="typography.body.lg.strong">
-                Vertical Label Layout
-              </IressText>
+              <IressText element="h3">Vertical Label Layout</IressText>
               <IressStack gap="spacing.0">
                 <IressField {...args} {...fieldProps} label="First Name">
                   <IressInput {...input} placeholder="Enter first name" />
@@ -391,9 +389,7 @@ export const RemoveErrorMargin: Story = {
           {/* Horizontal Layout Column */}
           <IressCol span="6">
             <IressStack gap="spacing.2">
-              <IressText element="h3" textStyle="typography.body.lg.strong">
-                Horizontal Label Layout
-              </IressText>
+              <IressText element="h3">Horizontal Label Layout</IressText>
               <IressStack gap="spacing.0">
                 <IressField
                   {...args}

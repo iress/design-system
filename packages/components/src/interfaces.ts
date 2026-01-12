@@ -477,7 +477,6 @@ export interface IressCSSProps {
    *
    * - `typography.body.sm` - Use for small components such as badges and disclaimers, as well as compact variations of tables and lists.
    * - `typography.body.md` - The most commonly used body text size, used for most text content in the product and the default state of all components in the design system.
-   * - `typography.body.lg` - Use for tag lines, subtitles, and other large text content in the product.
    * - `typography.heading.1` - Use for the main page title to establish a clear hierarchy. There is typically only one H1 per screen, emphasising the primary purpose or context of the page.
    * - `typography.heading.2` - Use for primary section headings within a page to organise content and guide the user through key areas. Also suitable for large components—such as modals—where space allows and where it pairs well with body.md or body.lg.
    * - `typography.heading.3` - Use for sub-sections under H2s to further structure content and maintain a clear visual hierarchy. Ideal for breaking down complex sections into manageable parts.

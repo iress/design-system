@@ -22,7 +22,9 @@ type TagElement<
   : 'span';
 
 export type IressTagProps<
-  TOnClick extends (e: SyntheticEvent<HTMLButtonElement>) => void | undefined,
+  TOnClick extends
+    | ((e: SyntheticEvent<HTMLButtonElement>) => void)
+    | undefined = undefined,
 > = IressStyledProps<TagElement<TOnClick>> & {
   /**
    * Contents of the tag.

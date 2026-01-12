@@ -97,7 +97,6 @@ Modify the Panda CSS text style recipe to detect the element type and choose the
 
 - When `typography.body.sm` is applied to `<strong>` → use `.strong` variant
 - When `typography.body.md` is applied to `<strong>` → use `.strong` variant
-- When `typography.body.lg` is applied to `<strong>` → use `.strong` variant
 - When any typography style is applied to `<em>` → use `.em` variant
 - When applied to other elements → use `.regular` variant
 
