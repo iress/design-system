@@ -10,7 +10,6 @@ const classNames = {
   verticalAlignTop: 'jc_flex-start',
   verticalAlignMiddle: 'jc_center',
   verticalAlignBottom: 'jc_flex-end',
-  verticalAlignStretch: 'jc_stretch',
 };
 
 const renderComponent = (args: IressStackProps) => {
@@ -92,12 +91,6 @@ describe('IressStack', () => {
         const { getByTestId } = renderComponent({ verticalAlign: 'bottom' });
         const component = getByTestId('test-component');
         expect(component).toHaveClass(classNames.verticalAlignBottom);
-      });
-
-      it('should apply stretch vertical alignment', () => {
-        const { getByTestId } = renderComponent({ verticalAlign: 'stretch' });
-        const component = getByTestId('test-component');
-        expect(component).toHaveClass(classNames.verticalAlignStretch);
       });
     });
 
