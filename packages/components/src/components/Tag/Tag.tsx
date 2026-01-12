@@ -98,6 +98,7 @@ export const IressTag = <
       )}
       data-testid={dataTestId}
       {...nonStyleProps}
+      {...(onClick ? { onClick } : {})}
     >
       <span ref={contentRef} className={classes.content}>
         {children}
