@@ -8,7 +8,7 @@ import {
   type ReactNode,
   type ForwardedRef,
 } from 'react';
-import { css, cx } from '@/styled-system/css';
+import { cx } from '@/styled-system/css';
 import { filter } from './Filter.styles';
 import { splitCssProps } from '@/styled-system/jsx';
 
@@ -34,7 +34,7 @@ import { FilterResetButton } from './components/FilterResetButton';
 import { FilterLabel } from './components/FilterLabel';
 import { IressIcon } from '../Icon';
 import type { ControlledValue } from '@/hooks/useControlledState';
-import type { LabelValueMeta } from '@/interfaces';
+import type { IressCSSProps, LabelValueMeta } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import { FilterResultsDescriptor } from './components/FilterResultsDescriptor';
 import type { IressStyledProps } from '@/types';
@@ -255,16 +255,11 @@ const Filter = <TMultiple extends boolean = false>(
   });
 
   const classes = filter();
-  const styles = filter.raw();
 
   return (
     <styled.div
       {...nonStyleProps}
-      className={cx(
-        className,
-        css(styles.root, styleProps),
-        GlobalCSSClass.Filter,
-      )}
+      className={cx(className, classes.root, GlobalCSSClass.Filter)}
       data-testid={dataTestId}
       id={id}
       ref={elementRef}
@@ -279,6 +274,7 @@ const Filter = <TMultiple extends boolean = false>(
               'activator-button__button',
             )}
             onClick={() => setShow(true)}
+            {...(styleProps as IressCSSProps)}
           >
             <FilterLabel
               label={labelProp}

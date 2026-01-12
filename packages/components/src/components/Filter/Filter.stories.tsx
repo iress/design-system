@@ -263,10 +263,8 @@ export const SelectedOptionsText: Story = {
 
 export const StylingProps: Story = {
   args: {
-    ...Default.args,
     label: 'Styled Filter',
     p: 'spacing.4',
-    bg: 'colour.primary.surface',
-    borderRadius: 'radius.100',
   },
+  render: (args) => <IressFilter {...args} p="spacing.4" />,
 };
