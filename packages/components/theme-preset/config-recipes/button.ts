@@ -491,6 +491,8 @@ export const buttonRecipe = defineSlotRecipe({
       loading: true,
       css: {
         root: {
+          bg: 'colour.neutral.30',
+          borderColor: 'colour.neutral.30',
           color: 'colour.neutral.60',
         },
         spinner: {
@@ -499,23 +501,11 @@ export const buttonRecipe = defineSlotRecipe({
       },
     },
     {
-      mode: 'secondary',
+      mode: ['secondary', 'tertiary', 'quaternary'],
       loading: true,
       css: {
         root: {
-          borderColor: 'colour.neutral.60',
-          color: 'colour.neutral.60',
-        },
-        spinner: {
-          color: 'colour.neutral.60',
-        },
-      },
-    },
-    {
-      mode: 'tertiary',
-      loading: true,
-      css: {
-        root: {
+          bg: 'colour.neutral.30',
           borderColor: 'colour.neutral.60',
           color: 'colour.neutral.60',
         },
