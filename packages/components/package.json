@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@iress-oss/ids-tokens": "^6.0.0-alpha.8",
-    "@pandacss/dev": "1.7.1",
+    "@pandacss/dev": "1.7.2",
     "@testing-library/dom": "10.4.1",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.1",
