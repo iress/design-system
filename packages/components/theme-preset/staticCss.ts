@@ -65,6 +65,7 @@ export const staticCss: ExtendableOptions['staticCss'] = {
       properties: {
         bg: Object.keys(colors),
         color: Object.keys(colors),
+        flex: ['1'],
         focusable: ['true', 'within'],
         hideFrom: Object.keys(breakpoints),
         hideBelow: Object.keys(breakpoints),

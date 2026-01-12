@@ -34,6 +34,28 @@ export const alignSelf: Story = {
   ),
 };
 
+export const flex1: Story = {
+  args: {
+    bg: 'alt',
+    flex: 1,
+  },
+  render: ({ children, ...args }) => (
+    <IressStack gap="md" horizontalAlign="center" style={{ height: 400 }}>
+      <IressPanel bg="alt">First panel (no flex)</IressPanel>
+      <IressPanel {...args}>
+        {children ?? (
+          <>
+            {args.flex
+              ? 'Panel with flex set to 1, so it will fill the available space.'
+              : 'This panel is not set to flex, so it will only take up the space it needs.'}
+          </>
+        )}
+      </IressPanel>
+      <IressPanel bg="alt">Third panel (no flex)</IressPanel>
+    </IressStack>
+  ),
+};
+
 export const stretch: Story = {
   args: {
     stretch: true,

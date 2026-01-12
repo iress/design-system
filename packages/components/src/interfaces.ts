@@ -272,6 +272,13 @@ export interface IressCSSProps {
   focusable?: 'true' | 'within';
 
   /**
+   * The `flex` prop is used to set the flex grow property of an element. It allows the element to grow and fill available space in a flex container.
+   *
+   * In the design system, we only allow `1` as a value to ensure consistent behavior across components whilst
+   */
+  flex?: 1;
+
+  /**
    * Set **`hideFrom`** to hide an element completely using `display: none`. It can be combined with `hideBelow` to create complex responsive visibility rules.
    *
    * Hide on all breakpoints: `hideFrom: true`
@@ -463,7 +470,7 @@ export interface IressCSSProps {
    *
    * You can set the value to `true` to enable stretching, or to `1` to indicate that the element should take up one unit of available space in a flex container (similar to `flex: 1`).
    */
-  stretch?: boolean | 1;
+  stretch?: boolean;
 
   /**
    * The **`text-align`** CSS property sets the horizontal alignment of the inline-level content inside a block element or table-cell box.
