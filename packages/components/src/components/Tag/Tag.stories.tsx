@@ -6,7 +6,10 @@ import { IressPopover } from '../Popover';
 import { IressButton } from '../Button';
 import { IressIcon } from '../Icon';
 import { IressPanel } from '../Panel';
-import { withCustomSource } from '@iress-oss/ids-storybook-config';
+import {
+  withCustomSource,
+  withJsxTransformer,
+} from '@iress-oss/ids-storybook-config';
 import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressTag>;
@@ -28,6 +31,20 @@ export const Tag: Story = {
   },
 };
 
+export const ClickableTag: Story = {
+  args: {
+    children: 'Tag',
+    onClick: () => {
+      console.log('Tag clicked');
+    },
+  },
+  parameters: {
+    ...withJsxTransformer({
+      showFunctions: true,
+    }),
+  },
+};
+
 export const DeletingTags: Story = {
   render: (args) => <TagDeletion {...args} />,
   parameters: {
@@ -41,7 +58,7 @@ export const CustomButton: Story = {
     deleteButton: (
       <IressPopover
         activator={
-          <IressButton mode="tertiary">
+          <IressButton mode="muted">
             <IressIcon name="chevron-circle-down" screenreaderText="Actions" />
           </IressButton>
         }

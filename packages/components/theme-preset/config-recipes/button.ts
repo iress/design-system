@@ -123,6 +123,7 @@ export const buttonRecipe = defineSlotRecipe({
       true: {
         root: {
           py: 'spacing.0',
+          borderWidth: '[0px]',
         },
       },
     },
