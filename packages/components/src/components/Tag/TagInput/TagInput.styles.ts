@@ -5,8 +5,7 @@ export const tagInput = sva({
   base: {
     input: {
       flexWrap: 'wrap',
-      rowGap: 'xs',
-      py: 'xs',
+      pl: 'spacing.1',
 
       '& > :first-child': {
         display: 'contents',
@@ -15,12 +14,7 @@ export const tagInput = sva({
 
       '& > input': {
         width: 'auto',
-        minHeight: '[calc({sizes.input.height} - {spacing.xs} * 2.5)]',
-        py: 'none',
       },
-    },
-    tag: {
-      marginLeft: 'xs',
     },
   },
 });

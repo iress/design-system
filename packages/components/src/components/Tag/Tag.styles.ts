@@ -12,12 +12,9 @@ export const tag = sva({
       display: 'inline-flex',
       gap: 'spacing.1',
       py: 'xs',
-      px: 'xs',
+      px: 'sm',
       transition: '[all .2s]',
       textStyle: 'typography.body.md',
-    },
-    content: {
-      lineHeight: 1,
     },
     deleteButton: {
       my: '-spacing.1',
@@ -62,6 +59,16 @@ export const tag = sva({
             boxShadow:
               'color-mix(in srgb, {colors.colour.primary.surface}, transparent 60%) 0px 0px 0px 3px',
           },
+        },
+      },
+    },
+    compact: {
+      true: {
+        root: {
+          height: '[calc({sizes.input.height} - {spacing.spacing.2} - 2px)]',
+          py: 'none',
+          px: 'xs',
+          textStyle: 'typography.body.sm',
         },
       },
     },

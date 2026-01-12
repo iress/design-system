@@ -1,4 +1,5 @@
 import {
+  type MouseEventHandler,
   useMemo,
   useRef,
   type FocusEvent,
@@ -13,23 +14,16 @@ import { GlobalCSSClass } from '@/enums';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import type { IressStyledProps } from '@/types';
 
-type TagElement<
-  TOnClick extends
-    | ((e: SyntheticEvent<HTMLButtonElement>) => void)
-    | undefined = undefined,
-> = TOnClick extends (e: SyntheticEvent<HTMLButtonElement>) => void
-  ? 'button'
-  : 'span';
-
-export type IressTagProps<
-  TOnClick extends
-    | ((e: SyntheticEvent<HTMLButtonElement>) => void)
-    | undefined = undefined,
-> = IressStyledProps<TagElement<TOnClick>> & {
+interface TagBaseProps {
   /**
    * Contents of the tag.
    */
   children?: ReactNode;
+
+  /**
+   * If true, reduces the padding and height of the tag. Useful when used inside an input component.
+   */
+  compact?: boolean;
 
   /**
    * You can completely replace the delete button to provide your own functionality.
@@ -43,12 +37,6 @@ export type IressTagProps<
   deleteButtonText?: string;
 
   /**
-   * Callback triggered when the tag is clicked.
-   * If this prop is provided, the tag will render as a `<button>` element with hover styles to indicate it is clickable.
-   */
-  onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void;
-
-  /**
    * Callback triggered when the tag is deleted
    */
   onDelete?: (children: string, e: SyntheticEvent<HTMLButtonElement>) => void;
@@ -57,13 +45,34 @@ export type IressTagProps<
    * Callback triggered when the close button is blurred
    */
   onDeleteButtonBlur?: (e: FocusEvent<HTMLButtonElement>) => void;
-};
+}
 
-export const IressTag = <
-  TOnClick extends (e: SyntheticEvent<HTMLButtonElement>) => void | undefined,
->({
+/**
+ * Props for IressTag when onClick is provided (renders as button)
+ */
+type ClickableTagProps = Omit<IressStyledProps<'button'>, 'onClick'> &
+  TagBaseProps & {
+    /**
+     * Callback triggered when the tag is clicked.
+     * If this prop is provided, the tag will render as a `<button>` element with hover styles to indicate it is clickable.
+     */
+    onClick: MouseEventHandler<HTMLButtonElement>;
+  };
+
+/**
+ * Props for IressTag when onClick is not provided (renders as span)
+ */
+type StaticTagProps = IressStyledProps<'span'> &
+  TagBaseProps & {
+    onClick?: never;
+  };
+
+export type IressTagProps = ClickableTagProps | StaticTagProps;
+
+const Tag = ({
   children,
   className,
+  compact,
   'data-testid': dataTestId,
   deleteButton,
   deleteButtonText = 'Delete',
@@ -71,15 +80,17 @@ export const IressTag = <
   onDelete,
   onDeleteButtonBlur,
   ...restProps
-}: IressTagProps<TOnClick>) => {
+}: IressTagProps) => {
   const contentRef = useRef<HTMLSpanElement>(null);
   const classes = tag({
     customDeleteButton: !!deleteButton,
     clickable: !!onClick,
+    compact,
   });
   const styles = tag.raw({
     customDeleteButton: !!deleteButton,
     clickable: !!onClick,
+    compact,
   });
   const showDelete = Boolean(onDelete ?? deleteButton);
 
@@ -97,8 +108,8 @@ export const IressTag = <
         GlobalCSSClass.Tag,
       )}
       data-testid={dataTestId}
-      {...nonStyleProps}
-      {...(onClick ? { onClick } : {})}
+      {...(onClick ? { onClick, type: 'button' as const } : {})}
+      {...(nonStyleProps as object)}
     >
       <span ref={contentRef} className={classes.content}>
         {children}
@@ -122,4 +133,10 @@ export const IressTag = <
   );
 };
 
-IressTag.displayName = 'IressTag';
+Tag.displayName = 'IressTag';
+
+export const IressTag: {
+  (props: StaticTagProps): React.JSX.Element;
+  (props: ClickableTagProps): React.JSX.Element;
+  displayName: string;
+} = Tag;

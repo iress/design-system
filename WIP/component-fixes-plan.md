@@ -118,7 +118,7 @@ Use Panda CSS recipes or patterns to create element-aware text styles. This coul
 - [ ] Implement element-aware text style selection in IressText
 - [ ] Create mapping: `element="strong"` → append `.strong` to textStyle
 - [ ] Create mapping: `element="em"` → append `.em` to textStyle
-- [ ] Handle all typography variants (body.sm, body.md, body.lg)
+- [ ] Handle all typography variants (body.sm, body.md)
 - [ ] Create test case demonstrating the fix
 - [ ] Create story showing strong/em elements with typography styles
 - [ ] Run existing tests
@@ -430,7 +430,7 @@ useEffect(() => {
 
 - ✅ `<strong>` elements (or `element="strong"`) automatically use `.strong` variant
 - ✅ `<em>` elements (or `element="em"`) automatically use `.em` variant
-- ✅ Works for all typography variants (body.sm, body.md, body.lg)
+- ✅ Works for all typography variants (body.sm, body.md)
 - ✅ Backward compatible - existing explicit `.strong`/`.em` usage still works
 - ✅ Direct class application (`<strong className="typography.body.sm" />`) works correctly
 - ✅ Test and story added

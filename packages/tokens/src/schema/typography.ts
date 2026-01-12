@@ -97,7 +97,7 @@ const typography = {
     },
     2: {
       $description:
-        'Use for **primary section headings** within a page to organise content and guide the user through key areas. Also suitable for large components—such as modals—where space allows and where it pairs well with: body.md or body.lg.',
+        'Use for **primary section headings** within a page to organise content and guide the user through key areas. Also suitable for large components—such as modals—where space allows and where it pairs well with: body.md.',
       $type: Type.Typography,
       $value: {
         fontFamily: `{typography.base.headingFont || ${headingFont}}`,
