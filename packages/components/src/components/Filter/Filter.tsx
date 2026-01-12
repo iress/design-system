@@ -10,6 +10,7 @@ import {
 } from 'react';
 import { cx } from '@/styled-system/css';
 import { filter } from './Filter.styles';
+import { splitCssProps } from '@/styled-system/jsx';
 
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { IressPopover, type IressPopoverProps } from '../Popover';
@@ -33,7 +34,7 @@ import { FilterResetButton } from './components/FilterResetButton';
 import { FilterLabel } from './components/FilterLabel';
 import { IressIcon } from '../Icon';
 import type { ControlledValue } from '@/hooks/useControlledState';
-import type { LabelValueMeta } from '@/interfaces';
+import type { IressCSSProps, LabelValueMeta } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import { FilterResultsDescriptor } from './components/FilterResultsDescriptor';
 import type { IressStyledProps } from '@/types';
@@ -189,6 +190,11 @@ const Filter = <TMultiple extends boolean = false>(
   const [query, setQuery] = useState('');
   const [show, setShow] = useState(false);
 
+  const [styleProps, nonStyleProps] = useMemo(
+    () => splitCssProps(restProps),
+    [restProps],
+  );
+
   const handleQueryChange: IressInputProps['onChange'] = (e) => {
     setQuery(e.target.value);
   };
@@ -252,7 +258,7 @@ const Filter = <TMultiple extends boolean = false>(
 
   return (
     <styled.div
-      {...restProps}
+      {...nonStyleProps}
       className={cx(className, classes.root, GlobalCSSClass.Filter)}
       data-testid={dataTestId}
       id={id}
@@ -268,6 +274,7 @@ const Filter = <TMultiple extends boolean = false>(
               'activator-button__button',
             )}
             onClick={() => setShow(true)}
+            {...(styleProps as IressCSSProps)}
           >
             <FilterLabel
               label={labelProp}

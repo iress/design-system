@@ -260,3 +260,11 @@ export const SelectedOptionsText: Story = {
     selectedOptionsText: '{{numOptions}} activated',
   },
 };
+
+export const StylingProps: Story = {
+  args: {
+    label: 'Styled Filter',
+    p: 'spacing.4',
+  },
+  render: (args) => <IressFilter {...args} p="spacing.4" />,
+};

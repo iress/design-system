@@ -25,12 +25,18 @@ export const useEstimatedProgressValue = (
     }
 
     const startTime = performance.now();
+    const updateInterval = 50; // Update every 50ms for smoother rendering
+    let lastUpdate = 0;
     let animationFrameId: number;
 
     const animate = () => {
       const elapsed = Math.max(performance.now() - startTime, 0);
 
-      setProgressValue(elapsed);
+      // Throttle updates to prevent too frequent re-renders
+      if (elapsed - lastUpdate >= updateInterval) {
+        setProgressValue(elapsed);
+        lastUpdate = elapsed;
+      }
 
       if (isProgressing(elapsed, estimatedFinishTime, latestMessageTimecode)) {
         animationFrameId = requestAnimationFrame(animate);

@@ -24,6 +24,7 @@ export default defineConfig({
         'src/vite-env.d.ts',
         '**/meta/**/*',
         '**/sandbox/**/*',
+        '**/*.mdx',
       ],
     },
     // Performance optimizations
