@@ -13,6 +13,7 @@ export interface IressDividerProps extends IressStyledProps<'hr'> {
 
 export const IressDivider = ({
   className,
+  stretch,
   vertical,
   ...restProps
 }: IressDividerProps) => {
@@ -23,7 +24,10 @@ export const IressDivider = ({
       className={cx(
         className,
         css({
-          ...divider.raw({ vertical: !!vertical }),
+          ...divider.raw({
+            vertical: !!vertical,
+            verticalStretch: !!stretch && vertical,
+          }),
           ...styleProps,
         }),
         GlobalCSSClass.Divider,

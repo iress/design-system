@@ -577,11 +577,11 @@ These files read from generated documentation. They do NOT hardcode content.
 
 ```tsx
 // ✅ CORRECT - Using textStyle prop with token
-<IressPanel textStyle="typography.body.lg">Panel with large text</IressPanel>
+<IressPanel textStyle="typography.body.md">Panel with large text</IressPanel>
 
 // Available typography tokens:
-// typography.body.sm, typography.body.md, typography.body.lg
-// typography.heading.sm, typography.heading.md, typography.heading.lg
+// typography.body.sm, typography.body.md
+// typography.heading.1, typography.heading.2, typography.heading.3
 ```
 
 ## Success Criteria

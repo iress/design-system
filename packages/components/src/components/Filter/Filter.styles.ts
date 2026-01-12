@@ -16,8 +16,10 @@ export const filter = sva({
   base: {
     root: {},
     chevron: {
+      position: 'relative',
       selectChevron: true,
-      marginInlineStart: 'spacing.2',
+      marginInlineStart: 'spacing.4',
+      marginInlineEnd: '-spacing.2',
 
       _rtl: {
         selectChevronRtl: true,

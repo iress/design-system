@@ -1,4 +1,5 @@
 import {
+  useMemo,
   useRef,
   type FocusEvent,
   type ReactNode,
@@ -6,12 +7,25 @@ import {
 } from 'react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { IressCloseButton } from '../Button';
-import { IressText, type IressTextProps } from '../Text';
 import { tag } from './Tag.styles';
-import { cx } from '@/styled-system/css';
+import { css, cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
+import { splitCssProps, styled } from '@/styled-system/jsx';
+import type { IressStyledProps } from '@/types';
 
-export interface IressTagProps extends Omit<IressTextProps<'span'>, 'element'> {
+type TagElement<
+  TOnClick extends
+    | ((e: SyntheticEvent<HTMLButtonElement>) => void)
+    | undefined = undefined,
+> = TOnClick extends (e: SyntheticEvent<HTMLButtonElement>) => void
+  ? 'button'
+  : 'span';
+
+export type IressTagProps<
+  TOnClick extends
+    | ((e: SyntheticEvent<HTMLButtonElement>) => void)
+    | undefined = undefined,
+> = IressStyledProps<TagElement<TOnClick>> & {
   /**
    * Contents of the tag.
    */
@@ -29,6 +43,12 @@ export interface IressTagProps extends Omit<IressTextProps<'span'>, 'element'> {
   deleteButtonText?: string;
 
   /**
+   * Callback triggered when the tag is clicked.
+   * If this prop is provided, the tag will render as a `<button>` element with hover styles to indicate it is clickable.
+   */
+  onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void;
+
+  /**
    * Callback triggered when the tag is deleted
    */
   onDelete?: (children: string, e: SyntheticEvent<HTMLButtonElement>) => void;
@@ -37,45 +57,67 @@ export interface IressTagProps extends Omit<IressTextProps<'span'>, 'element'> {
    * Callback triggered when the close button is blurred
    */
   onDeleteButtonBlur?: (e: FocusEvent<HTMLButtonElement>) => void;
-}
+};
 
-export const IressTag = ({
+export const IressTag = <
+  TOnClick extends (e: SyntheticEvent<HTMLButtonElement>) => void | undefined,
+>({
   children,
   className,
   'data-testid': dataTestId,
   deleteButton,
   deleteButtonText = 'Delete',
+  onClick,
   onDelete,
   onDeleteButtonBlur,
   ...restProps
-}: IressTagProps) => {
+}: IressTagProps<TOnClick>) => {
   const contentRef = useRef<HTMLSpanElement>(null);
-  const styles = tag({ customDeleteButton: !!deleteButton });
+  const classes = tag({
+    customDeleteButton: !!deleteButton,
+    clickable: !!onClick,
+  });
+  const styles = tag.raw({
+    customDeleteButton: !!deleteButton,
+    clickable: !!onClick,
+  });
+  const showDelete = Boolean(onDelete ?? deleteButton);
+
+  const [styleProps, nonStyleProps] = splitCssProps(restProps);
+
+  const StyledComponent = useMemo(() => {
+    return onClick ? styled.button : styled.span;
+  }, [onClick]);
 
   return (
-    <IressText
-      className={cx(className, styles.root, GlobalCSSClass.Tag)}
+    <StyledComponent
+      className={cx(
+        className,
+        css(styles.root, styleProps),
+        GlobalCSSClass.Tag,
+      )}
       data-testid={dataTestId}
-      element="span"
-      {...restProps}
+      {...nonStyleProps}
     >
-      <span ref={contentRef} className={styles.content}>
+      <span ref={contentRef} className={classes.content}>
         {children}
       </span>
 
-      <span className={styles.deleteButton}>
-        {deleteButton ?? (
-          <IressCloseButton
-            data-testid={propagateTestid(dataTestId, 'delete-button__button')}
-            onBlur={onDeleteButtonBlur}
-            onClick={(e) =>
-              onDelete?.(contentRef.current?.textContent ?? '', e)
-            }
-            screenreaderText={deleteButtonText}
-          />
-        )}
-      </span>
-    </IressText>
+      {showDelete && (
+        <span className={classes.deleteButton}>
+          {deleteButton ?? (
+            <IressCloseButton
+              data-testid={propagateTestid(dataTestId, 'delete-button__button')}
+              onBlur={onDeleteButtonBlur}
+              onClick={(e) =>
+                onDelete?.(contentRef.current?.textContent ?? '', e)
+              }
+              screenreaderText={deleteButtonText}
+            />
+          )}
+        </span>
+      )}
+    </StyledComponent>
   );
 };
 

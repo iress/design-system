@@ -16,7 +16,27 @@ import {
   meta={ComponentStories}
 />
 
+## When to use
+
+Use tags for **categorization and selection** where users need to interact with items:
+
+- Displaying selected items in multi-select interfaces
+- Managing email recipients or domains
+- Showing applied filters that can be removed
+- Categorizing content with removable labels
+- Any scenario where users need to add or remove items from a collection
+
+Tags are **interactive** - they can be clicked and deleted by users.
+
+**Not sure?** If you need to display status or highlight information without user interaction, use [Badge](/?path=/docs/components-badge--docs) instead.
+
 ## Usage
+
+### Clickable tags
+
+Tags can be made clickable by passing an `onClick` handler. This will apply hover styles to the tag to indicate it is clickable.
+
+<ComponentExample of={ComponentStories.ClickableTag} />
 
 ### Deleting tags
 

@@ -185,7 +185,7 @@ export const Complex: Story = {
         <IressIcon
           name="info"
           color="colour.system.info.text"
-          textStyle="typography.body.lg"
+          textStyle="typography.heading.4"
         />
         <IressText element="h2" textStyle="typography.heading.3">
           Complex Styled Component

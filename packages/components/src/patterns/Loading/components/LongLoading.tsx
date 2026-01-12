@@ -206,7 +206,7 @@ export const LongLoading = ({
               value: Math.min(progressValue, estimatedFinishTime),
               sectionTitle: `${(Math.min(progressValue, estimatedFinishTime) / estimatedFinishTime) * 100}% loaded`,
             })}
-            <IressText textStyle="typography.body.lg" noGutter>
+            <IressText noGutter>
               <ul className={listStyles.root}>
                 {checkListItems.map(({ timecode, ...checkListItem }) => (
                   <ListItem key={timecode} {...checkListItem} />

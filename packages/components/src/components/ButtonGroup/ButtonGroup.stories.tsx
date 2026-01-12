@@ -38,27 +38,23 @@ export const RichButtons: Story = {
     children: [
       <IressTooltip key="left" tooltipText="Left">
         <IressButton value="left">
-          <IressIcon name="align-left" />
-          <span className="iress-sr-only">Left</span>
+          <IressIcon name="align-left" screenreaderText="Left" />
         </IressButton>
       </IressTooltip>,
       <IressTooltip key="center" tooltipText="Center">
         <IressButton value="center">
-          <IressIcon name="align-center" />
-          <span className="iress-sr-only">Center</span>
+          <IressIcon name="align-center" screenreaderText="Center" />
         </IressButton>
       </IressTooltip>,
       <IressTooltip key="right" tooltipText="Right">
         <IressButton value="right">
-          <IressIcon name="align-right" />
-          <span className="iress-sr-only">Right</span>
+          <IressIcon name="align-right" screenreaderText="Right" />
         </IressButton>
       </IressTooltip>,
       <IressDivider key="divider" vertical mx="xs" />,
       <IressTooltip key="justify" tooltipText="Justify">
         <IressButton value="justify">
-          <IressIcon name="align-justify" />
-          <span className="iress-sr-only">Justify</span>
+          <IressIcon name="align-justify" screenreaderText="Justify" />
         </IressButton>
       </IressTooltip>,
     ],
