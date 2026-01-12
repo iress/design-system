@@ -37,7 +37,7 @@ export const alignSelf: Story = {
 export const flex1: Story = {
   args: {
     bg: 'alt',
-    flex: 1,
+    flex: '1',
   },
   render: ({ children, ...args }) => (
     <IressStack gap="md" horizontalAlign="center" style={{ height: 400 }}>

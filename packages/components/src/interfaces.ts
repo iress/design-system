@@ -276,7 +276,7 @@ export interface IressCSSProps {
    *
    * In the design system, we only allow `1` as a value to ensure consistent behavior across components whilst
    */
-  flex?: 1;
+  flex?: '1';
 
   /**
    * Set **`hideFrom`** to hide an element completely using `display: none`. It can be combined with `hideBelow` to create complex responsive visibility rules.
