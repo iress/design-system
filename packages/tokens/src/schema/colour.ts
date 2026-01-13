@@ -281,7 +281,7 @@ const colour = {
       $description:
         'First accent colour, useful for grabbing attention and to support your primary/brand colour. It should be used sparingly to draw attention to key elements.',
       $type: Type.Color,
-      $value: '#C26EF4',
+      $value: '#7599F9',
       $extensions: {
         'styler.panel': 'colour.accent',
       },
@@ -290,7 +290,7 @@ const colour = {
       $description:
         'Second accent colour, useful for grabbing attention and to support your primary/brand colour. It should be used sparingly to draw attention to key elements.',
       $type: Type.Color,
-      $value: '#7599F9',
+      $value: '#C26EF4',
       $extensions: {
         'styler.panel': 'colour.accent',
       },
