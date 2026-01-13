@@ -101,7 +101,7 @@ const colour = {
       $description:
         'Used for primary buttons and the active state of form controls such as checkboxes and radio buttons. Also used for the border of tags when they have a custom button.',
       $type: Type.Color,
-      $value: '#1D1F4B',
+      $value: '#3D3078',
       $extensions: {
         'iress.contrast.AA': ['colour.primary.onFill'],
         'styler.panel': 'colour.primary',
@@ -111,7 +111,7 @@ const colour = {
       $description:
         'Used for the hover state of primary buttons as well as hovering over active form controls.',
       $type: Type.Color,
-      $value: '#0D0E24',
+      $value: '#2E235E',
       $extensions: {
         'iress.contrast.AA': ['colour.primary.onFill'],
         'styler.panel': 'colour.primary',
@@ -131,9 +131,9 @@ const colour = {
       $description:
         'Used as the background colour for secondary buttons and the focused state of menu and tab items. Also used as the background colour of active buttons.',
       $type: Type.Color,
-      $value: '#E9E9ED',
+      $value: '#F0EBFF',
       $extensions: {
-        'iress.contrast.AA': ['colour.primary.text', 'colour.neutral.80'],
+        'iress.contrast.AA': ['colour.primary.text', 'colour.neutral.90'],
         'styler.panel': 'colour.primary',
       },
     },
@@ -141,9 +141,9 @@ const colour = {
       $description:
         'Used for the hover state of secondary buttons, form controls and hovering over focused menu and tab items. Also used when hovering over table rows.',
       $type: Type.Color,
-      $value: '#D2D2DB',
+      $value: '#E2D9FF',
       $extensions: {
-        'iress.contrast.AA': ['colour.primary.text', 'colour.neutral.80'],
+        'iress.contrast.AA': ['colour.primary.text', 'colour.neutral.90'],
         'styler.panel': 'colour.primary',
       },
     },
@@ -151,7 +151,7 @@ const colour = {
       $description:
         'Used for text on primary buttons, active form controls and focused tab and menu items. Also used for the link text colour and tertiary buttons.',
       $type: Type.Color,
-      $value: '#141F4D',
+      $value: '#3D3078',
       $extensions: {
         'iress.contrast.AA': ['colour.primary.surface'],
         'styler.panel': 'colour.primary',
@@ -235,7 +235,7 @@ const colour = {
       $description:
         'Used for muted text such as hints and descriptions to allow for content hierarchy.',
       $type: Type.Color,
-      $value: '#5D6C7E',
+      $value: '#6D7278',
       $extensions: {
         'iress.aliases': ['muted'],
         'iress.contrast.AA': ['colour.neutral.10', 'colour.neutral.20'],
@@ -262,7 +262,7 @@ const colour = {
       $description:
         'Used for very dark text or UI elements requiring maximum contrast.',
       $type: Type.Color,
-      $value: '#13213F',
+      $value: '#141F4D',
       $extensions: {
         'iress.contrast.AA': [
           'colour.neutral.10',
