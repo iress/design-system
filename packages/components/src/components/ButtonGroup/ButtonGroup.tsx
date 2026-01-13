@@ -1,10 +1,10 @@
 import { type ControlledValue, useIdIfNeeded } from '../../hooks';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { buttonGroup } from './ButtonGroup.styles';
-import { cx } from '@/styled-system/css';
+import { cx, css } from '@/styled-system/css';
 import { type FormControlValue, type IressStyledProps } from '@/types';
 import { type ReactNode } from 'react';
-import { styled } from '@/styled-system/jsx';
+import { splitCssProps, styled } from '@/styled-system/jsx';
 import { ButtonGroupProvider } from './ButtonGroupProvider';
 import { GlobalCSSClass } from '@/enums';
 
@@ -67,6 +67,8 @@ export const IressButtonGroup = <
   const id = useIdIfNeeded({ id: restProps.id });
   const labelId = `${id}--label`;
   const classes = buttonGroup({ hiddenLabel });
+  const styles = buttonGroup.raw({ hiddenLabel });
+  const [styleProps, nonStyleProps] = splitCssProps(restProps);
 
   return (
     <ButtonGroupProvider
@@ -76,10 +78,14 @@ export const IressButtonGroup = <
       selected={selected}
     >
       <styled.div
-        className={cx(className, classes.root, GlobalCSSClass.ButtonGroup)}
+        className={cx(
+          className,
+          css(styles.root, styleProps),
+          GlobalCSSClass.ButtonGroup,
+        )}
         id={id}
         data-testid={dataTestId}
-        {...restProps}
+        {...nonStyleProps}
       >
         <div
           className={classes.label}

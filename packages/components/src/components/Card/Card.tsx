@@ -70,7 +70,6 @@ export const IressCard = <E extends ElementType = 'div'>({
   element,
   className,
   selected,
-  stretch,
   children,
   footer,
   heading,
@@ -87,21 +86,22 @@ export const IressCard = <E extends ElementType = 'div'>({
   const hasMedia = !!media;
   const isInteractiveElement = element == 'button' || element == 'a';
   const clickable = isInteractiveElement || !!restProps.onClick;
+  const [styleProps, nonStyleProps] = splitCssProps(restProps);
+  const { stretch, ...otherStyleProps } = styleProps;
 
   const styles = card.raw({
     clickable,
     // Convert the element to a string for compatibility with the card.raw function
     element: String(element) as never,
     selected,
-    stretch,
+    stretch: !!stretch,
     hasSlots,
     hasHeading,
     hasMedia,
     hasPrepend,
   });
 
-  const testId = restProps['data-testid'];
-  const [styleProps, nonStyleProps] = splitCssProps(restProps);
+  const testId = nonStyleProps['data-testid'];
 
   const StyledElement = useMemo(() => element ?? 'div', [element]);
 
@@ -109,7 +109,7 @@ export const IressCard = <E extends ElementType = 'div'>({
     <StyledElement
       {...nonStyleProps}
       className={cx(
-        css(styles.root, styleProps),
+        css(styles.root, otherStyleProps),
         className,
         GlobalCSSClass.Card,
       )}
@@ -118,7 +118,9 @@ export const IressCard = <E extends ElementType = 'div'>({
         <>
           {prepend && (
             <div
-              className={css(styles.prepend)}
+              className={css(styles.prepend, {
+                p: otherStyleProps.p,
+              })}
               data-testid={propagateTestid(testId, 'prepend')}
             >
               {prepend}
@@ -142,7 +144,9 @@ export const IressCard = <E extends ElementType = 'div'>({
           )}
           {headerElement && (
             <div
-              className={css(styles.heading)}
+              className={css(styles.heading, {
+                p: otherStyleProps.p,
+              })}
               data-testid={propagateTestid(testId, 'heading')}
             >
               {headerElement}
@@ -150,7 +154,9 @@ export const IressCard = <E extends ElementType = 'div'>({
           )}
           {children && (
             <div
-              className={css(styles.body)}
+              className={css(styles.body, {
+                p: otherStyleProps.p,
+              })}
               data-testid={propagateTestid(testId, 'body')}
             >
               {children}
@@ -158,7 +164,9 @@ export const IressCard = <E extends ElementType = 'div'>({
           )}
           {footer && (
             <div
-              className={css(styles.footer)}
+              className={css(styles.footer, {
+                p: otherStyleProps.p,
+              })}
               data-testid={propagateTestid(testId, 'footer')}
             >
               {footer}

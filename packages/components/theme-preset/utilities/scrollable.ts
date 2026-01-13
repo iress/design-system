@@ -22,7 +22,6 @@ export const scrollable = defineUtility({
 
     return {
       [overflowProp]: 'auto',
-      scrollbarGutter: 'stable',
 
       '&::-webkit-scrollbar': {
         width: sizes['typography.base'].value,
