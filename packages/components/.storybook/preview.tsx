@@ -30,10 +30,10 @@ const NewPanel = ({
   const classNames: string[] = [];
 
   if (mt == '-lg') {
-    classNames.push('iress-mt--n-md');
+    classNames.push('iress-mt--n-lg');
   }
 
-  if (mb == '-spacing.900') {
+  if (mb == '-spacing.8') {
     classNames.push('iress-mb--n-lg');
   }
 

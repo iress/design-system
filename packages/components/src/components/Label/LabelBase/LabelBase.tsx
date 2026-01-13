@@ -4,6 +4,7 @@ import { GlobalCSSClass } from '@/enums';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { type LabelBaseProps } from './LabelBase.types';
 import { useState } from 'react';
+import { LockIcon } from '../components/LockIcon';
 
 export const LabelBase = ({
   append,
@@ -11,6 +12,7 @@ export const LabelBase = ({
   children,
   className,
   'data-testid': dataTestId,
+  disabled = false,
   hiddenLabel = false,
   optional,
   required,
@@ -34,11 +36,13 @@ export const LabelBase = ({
         [styles.label]: true,
         [styles.hidden]: hiddenLabel,
         [styles.hasAppend]: append,
+        [styles.hasDisabled]: disabled,
       })}
       {...restProps}
       data-name={name}
       data-testid={dataTestId}
     >
+      {disabled && <LockIcon className={styles.lock} title="(Locked) " />}
       {required && (
         <>
           {!hiddenLabel && (

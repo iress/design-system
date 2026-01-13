@@ -3,7 +3,6 @@ import {
   ComponentOverview,
   ComponentExample,
 } from '@iress-oss/ids-storybook-config';
-import { IressInline } from '../../main';
 import * as ComponentStories from './Label.stories';
 
 <Meta of={ComponentStories} />
@@ -37,20 +36,17 @@ The `optional` prop also accepts a string, in which case it will replace the def
 
 **Note:** that the `optional` and `required` props are mutually exclusive, with `required` taking precedence.
 
-<IressInline
-  gutter={IressInline.Gutter.Md}
-  horizontalAlign={IressInline.HorizontalAlign.Around}
->
-  <ComponentExample
-    of={ComponentStories.Optional}
-    meta={ComponentStories}
-  />
+<ComponentExample of={ComponentStories.Optional} meta={ComponentStories} />
 
-  <ComponentExample
-    of={ComponentStories.OptionalText}
-    meta={ComponentStories}
-  />
-</IressInline>
+#### Custom optional text
+
+<ComponentExample of={ComponentStories.OptionalText} meta={ComponentStories} />
+
+### Disabled label
+
+To indicate that an input is disabled, you may use the `disabled` prop to style the label accordingly.
+
+<ComponentExample of={ComponentStories.Disabled} meta={ComponentStories} />
 
 ### Hidden label
 

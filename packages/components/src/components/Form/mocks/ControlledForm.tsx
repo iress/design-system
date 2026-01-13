@@ -55,6 +55,7 @@ export const ControlledForm = (args: IressFormProps<FieldValues>) => {
               },
               required: 'Email is required',
             }}
+            disabled
           />
           <IressButton mode="primary" type="submit">
             Sign up

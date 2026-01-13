@@ -17,6 +17,7 @@ import { IressField } from '@/components/Field';
 export const IressFormField = <TFieldValues extends FieldValues>({
   control: controlProp,
   defaultValue,
+  disabled,
   name,
   render,
   rules: withCustomRules,
@@ -45,6 +46,7 @@ export const IressFormField = <TFieldValues extends FieldValues>({
   const { field, fieldState } = useController<TFieldValues>({
     control: controlProp,
     defaultValue,
+    disabled,
     name,
     rules,
     shouldUnregister:
@@ -81,6 +83,7 @@ export const IressFormField = <TFieldValues extends FieldValues>({
 
   return (
     <IressField
+      disabled={field.disabled}
       errorMessages={
         errorMessage && !readOnly ? [{ message: errorMessage }] : undefined
       }

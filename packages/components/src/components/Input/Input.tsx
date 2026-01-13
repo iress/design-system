@@ -46,6 +46,7 @@ const Input = <T extends FormControlValue = string | number>(
     type,
     inline,
     alignRight,
+    disabled,
     ...inputProps
   } = props;
 
@@ -120,6 +121,11 @@ const Input = <T extends FormControlValue = string | number>(
   };
 
   const handleInputChange: React.ChangeEventHandler<InputBaseElement> = (e) => {
+    // Prevent changes when disabled (for accessibility, we use aria-disabled instead of disabled)
+    if (disabled) {
+      e.preventDefault();
+      return;
+    }
     const newValue = e.target.value as T;
     setValue(newValue);
     onChange?.(e, newValue);
@@ -132,6 +138,7 @@ const Input = <T extends FormControlValue = string | number>(
     {
       [`${GlobalCSSClass.Width}--${width}`]: width?.includes('perc'),
       [styles.watermark]: watermark,
+      [styles.disabled]: disabled,
     },
   );
 
@@ -147,6 +154,8 @@ const Input = <T extends FormControlValue = string | number>(
         )}
         <InputBase
           {...inputProps}
+          aria-disabled={disabled ? 'true' : undefined}
+          readOnly={disabled ? true : readOnly}
           className={classNames({
             [`${GlobalCSSClass.Width}--${width}`]:
               width && !width?.includes('perc'),
@@ -181,7 +190,9 @@ const Input = <T extends FormControlValue = string | number>(
               screenreaderText={loading === true ? 'loading' : loading}
             />
           )}
-          {validValue && clearable && <ClearButton onClick={handleClear} />}
+          {validValue && clearable && !disabled && (
+            <ClearButton onClick={handleClear} />
+          )}
         </div>
         {append && (
           <div className={`${styles.addon} ${styles.append}`}>{append}</div>

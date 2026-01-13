@@ -139,5 +139,42 @@ describe('LabelBase', () => {
         expect(asterisk).toHaveAttribute('aria-hidden', 'true');
       });
     });
+
+    describe('disabled', () => {
+      it('renders lock icon when disabled is true', () => {
+        const screen = renderComponent({
+          disabled: true,
+        });
+
+        const lockIcon = screen.getByRole('img', { name: '(Locked)' });
+        expect(lockIcon).toBeInTheDocument();
+        expect(lockIcon).toHaveClass(styles.lock);
+      });
+
+      it('does not render lock icon when disabled is false', () => {
+        const screen = renderComponent({
+          disabled: false,
+        });
+
+        const lockIcon = screen.queryByRole('img', { name: '(Locked)' });
+        expect(lockIcon).not.toBeInTheDocument();
+      });
+
+      it('does not render lock icon by default', () => {
+        const screen = renderComponent();
+
+        const lockIcon = screen.queryByRole('img', { name: '(Locked)' });
+        expect(lockIcon).not.toBeInTheDocument();
+      });
+
+      it('applies hasDisabled class when disabled', () => {
+        const screen = renderComponent({
+          disabled: true,
+        });
+
+        const label = screen.getByTestId(TEST_ID);
+        expect(label).toHaveClass(styles.hasDisabled);
+      });
+    });
   });
 });

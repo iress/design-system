@@ -21,6 +21,11 @@ export type LabelBaseProps<T = ElementType, U = LabelHTMLAttributes<T>> = U & {
   children: ReactNode;
 
   /**
+   * When set to true, displays a lock icon before the label text to indicate the field is disabled/locked.
+   */
+  disabled?: boolean;
+
+  /**
    * Visually hides the label text, but still available to screen readers.
    */
   hiddenLabel?: boolean;

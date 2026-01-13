@@ -370,4 +370,129 @@ describe('IressFormField', () => {
 
     expect(onSubmit).toHaveBeenCalledWith({ autoControl: 'new value' });
   });
+
+  describe('disabled', () => {
+    it('passes disabled to the underlying field component', async () => {
+      render(
+        <IressForm id="iress-form">
+          <IressFormField
+            disabled
+            label="Disabled Input"
+            name="disabledInput"
+            render={(controlledProps) => (
+              <IressInput {...controlledProps} data-testid="disabled-input" />
+            )}
+          />
+        </IressForm>,
+      );
+
+      const input = await screen.findByRole('textbox', {
+        name: '(Locked) Disabled Input',
+      });
+
+      // Input should have aria-disabled attribute from IressInput disabled handling
+      expect(input).toHaveAttribute('aria-disabled', 'true');
+      expect(input).toHaveAttribute('readonly');
+    });
+
+    it('excludes disabled field from form submission', async () => {
+      const onSubmit = vi.fn();
+
+      render(
+        <IressForm id="iress-form" onSubmit={onSubmit}>
+          <IressFormField
+            disabled
+            label="Disabled Field"
+            name="disabledField"
+            defaultValue="disabled value"
+            render={(controlledProps) => <IressInput {...controlledProps} />}
+          />
+          <IressFormField
+            label="Enabled Field"
+            name="enabledField"
+            defaultValue="enabled value"
+            render={(controlledProps) => <IressInput {...controlledProps} />}
+          />
+          <IressButton type="submit">Submit</IressButton>
+        </IressForm>,
+      );
+
+      const submit = screen.getByRole('button', { name: 'Submit' });
+      await userEvent.click(submit);
+
+      // Only enabled field should be in submission
+      expect(onSubmit).toHaveBeenCalledWith({
+        enabledField: 'enabled value',
+      });
+    });
+
+    it('prevents value changes when disabled', async () => {
+      render(
+        <IressForm id="iress-form">
+          <IressFormField
+            disabled
+            label="Disabled Input"
+            name="disabledInput"
+            defaultValue="initial"
+            render={(controlledProps) => <IressInput {...controlledProps} />}
+          />
+        </IressForm>,
+      );
+
+      const input = await screen.findByRole('textbox', {
+        name: '(Locked) Disabled Input',
+      });
+
+      expect(input).toHaveValue('initial');
+
+      // Attempt to type in the input
+      await userEvent.type(input, 'new text');
+
+      // Value should remain unchanged
+      expect(input).toHaveValue('initial');
+    });
+
+    it('can be toggled between disabled and enabled states', async () => {
+      const ToggleDisabledForm = () => {
+        const [isDisabled, setIsDisabled] = React.useState(true);
+
+        return (
+          <IressForm id="iress-form">
+            <IressFormField
+              disabled={isDisabled}
+              label="Toggle Field"
+              name="toggleField"
+              render={(controlledProps) => <IressInput {...controlledProps} />}
+            />
+            <IressButton
+              type="button"
+              onClick={() => setIsDisabled(!isDisabled)}
+            >
+              Toggle Disabled
+            </IressButton>
+          </IressForm>
+        );
+      };
+
+      const { container } = render(<ToggleDisabledForm />);
+
+      const input = await screen.findByRole('textbox', {
+        name: '(Locked) Toggle Field',
+      });
+
+      // Initially disabled
+      expect(input).toHaveAttribute('aria-disabled', 'true');
+      expect(container.querySelector('svg')).toBeInTheDocument();
+
+      // Toggle to enabled
+      const toggleButton = screen.getByRole('button', {
+        name: 'Toggle Disabled',
+      });
+      await userEvent.click(toggleButton);
+
+      // Should be enabled now
+      expect(input).not.toHaveAttribute('aria-disabled');
+      expect(container.querySelector('svg')).not.toBeInTheDocument();
+    });
+  });
 });

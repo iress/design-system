@@ -20,6 +20,11 @@ export interface IressFieldProps<
   children?: React.ReactNode;
 
   /**
+   * When set to true, displays a lock icon in the label to indicate the field is disabled/locked.
+   */
+  disabled?: boolean;
+
+  /**
    * Text to be displayed in the label.
    **/
   label: ReactNode;

@@ -175,6 +175,20 @@ export const Optional = {
   },
 };
 
+export const Disabled = {
+  ...Default,
+  args: {
+    ...Default.args,
+    label: 'This field is disabled',
+    disabled: true,
+    input: {
+      ...defaultInput,
+      disabled: true,
+      value: 'Cannot edit this field',
+    },
+  },
+};
+
 export const ReadonlyData: Story = {
   args: {
     label: 'First name',

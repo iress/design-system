@@ -104,6 +104,65 @@ describe('IressInput', () => {
     });
   });
 
+  describe('disabled', () => {
+    it('renders with aria-disabled and readonly when disabled prop is true', () => {
+      const { getByRole } = render(<IressInput disabled />);
+      const input = getByRole('textbox') as HTMLInputElement;
+
+      expect(input).toHaveAttribute('aria-disabled', 'true');
+      expect(input).toHaveAttribute('readonly');
+    });
+
+    it('remains focusable when disabled for accessibility', () => {
+      const { getByRole } = render(
+        <IressInput disabled value="Locked value" />,
+      );
+      const input = getByRole('textbox') as HTMLInputElement;
+
+      // Input should be focusable (not have disabled attribute)
+      expect(input).not.toHaveAttribute('disabled');
+
+      // Input should be able to receive focus
+      input.focus();
+      expect(input).toHaveFocus();
+    });
+
+    it('does not show clear button when disabled', async () => {
+      const { queryByRole } = render(
+        <IressInput disabled clearable value="test" />,
+      );
+
+      // Clear button should not be present even though clearable is true
+      expect(queryByRole('button')).not.toBeInTheDocument();
+    });
+
+    it('applies disabled styling class', () => {
+      const { getByTestId } = render(
+        <IressInput disabled data-testid="test-input" />,
+      );
+
+      const wrapper = getByTestId('test-input');
+      expect(wrapper.className).toContain('disabled');
+    });
+
+    it('prevents value changes when disabled', async () => {
+      const handleChange = vi.fn();
+      const { getByRole } = render(
+        <IressInput disabled value="initial" onChange={handleChange} />,
+      );
+      const input = getByRole('textbox') as HTMLInputElement;
+
+      expect(input.value).toBe('initial');
+
+      await userEvent.type(input, 'new text');
+
+      // Value should not change
+      expect(input.value).toBe('initial');
+      // onChange should not be called
+      expect(handleChange).not.toHaveBeenCalled();
+    });
+  });
+
   describe('formatter', () => {
     it('formats the value correctly', async () => {
       const screen = render(

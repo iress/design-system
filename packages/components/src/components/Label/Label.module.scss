@@ -1,20 +1,55 @@
 @use '../../styles/mixins';
 
 .label {
-  --iress-font-family: var(--iress-label-font-family, var(--iress-a-form-font-family, var(--iress-g-font-family)));
+  --iress-font-family: var(
+    --iress-label-font-family,
+    var(--iress-a-form-font-family, var(--iress-g-font-family))
+  );
   --iress-font-size: var(--iress-label-font-size);
-  --iress-font-weight: var(--iress-label-font-weight, var(--iress-g-label-font-weight, bold));
-  --iress-text-color: var(--iress-label-text-color, var(--iress-a-label-text-color, var(--iress-g-text-color)));
-  --iress-line-height: var(--iress-label-line-height, var(--iress-a-form-line-height, var(--iress-g-line-height, 1.5)));
+  --iress-font-weight: var(
+    --iress-label-font-weight,
+    var(--iress-g-label-font-weight, bold)
+  );
+  --iress-text-color: var(
+    --iress-label-text-color,
+    var(--iress-a-label-text-color, var(--iress-g-text-color))
+  );
+  --iress-line-height: var(
+    --iress-label-line-height,
+    var(--iress-a-form-line-height, var(--iress-g-line-height, 1.5))
+  );
   --iress-margin-bottom: var(--iress-label-margin-bottom, 0);
-  --iress-meta-font-size: var(--iress-label-meta-font-size, var(--iress-g-font-size-xxxs, var(--iress-default-font-size-xxxs)));
+  --iress-meta-font-size: var(
+    --iress-label-meta-font-size,
+    var(--iress-g-font-size-xxxs, var(--iress-default-font-size-xxxs))
+  );
   --iress-meta-font-style: var(--iress-label-meta-font-style, normal);
-  --iress-meta-margin: var(--iress-label-meta-margin, var(--iress-g-spacing-xs));
-  --iress-meta-padding-left: var(--iress-label-meta-padding-left, var(--iress-g-spacing-xs));
-  --iress-optional-font-weight: var(--iress-label-optional-font-weight, var(--iress-a-muted-font-weight, var(--iress-g-font-weight)));
-  --iress-optional-text-color: var(--iress-label-optional-text-color, var(--iress-g-muted-text-color, var(--iress-default-text-color--light)));
-  --iress-required-text-color: var(--iress-label-required-text-color, var(--iress-a-danger-text-color, var(--iress-g-danger-color, var(--iress-default-danger-color))));
+  --iress-meta-margin: var(
+    --iress-label-meta-margin,
+    var(--iress-g-spacing-xs)
+  );
+  --iress-meta-padding-left: var(
+    --iress-label-meta-padding-left,
+    var(--iress-g-spacing-xs)
+  );
+  --iress-optional-font-weight: var(
+    --iress-label-optional-font-weight,
+    var(--iress-a-muted-font-weight, var(--iress-g-font-weight))
+  );
+  --iress-optional-text-color: var(
+    --iress-label-optional-text-color,
+    var(--iress-g-muted-text-color, var(--iress-default-text-color--light))
+  );
+  --iress-required-text-color: var(
+    --iress-label-required-text-color,
+    var(
+      --iress-a-danger-text-color,
+      var(--iress-g-danger-color, var(--iress-default-danger-color))
+    )
+  );
   --iress-required-inset-top: calc(var(--iress-g-spacing-xs) * -1);
+  --iress-lock-size: 1em;
+  --iress-lock-margin-right: var(--iress-g-spacing-xs);
 
   @include mixins.defaultFontStyles();
 
@@ -46,4 +81,13 @@
   margin-inline: var(--iress-meta-margin) 0;
   color: var(--iress-optional-text-color);
   font-weight: var(--iress-optional-font-weight);
+}
+
+.lock {
+  width: var(--iress-lock-size);
+  height: var(--iress-lock-size);
+  fill: currentColor;
+  display: inline-block;
+  vertical-align: text-top;
+  margin-right: var(--iress-lock-margin-right);
 }

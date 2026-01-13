@@ -53,6 +53,13 @@ export interface IressFormFieldProps<
   defaultValue?: FieldPathValue<T, TName>;
 
   /**
+   * Whether the field is disabled. A disabled field will not be editable, not included in the form response and will have a distinct visual style.
+   *
+   * [Learn more](https://react-hook-form.com/docs/usecontroller#disabled)
+   */
+  disabled?: boolean;
+
+  /**
    * Name of the field. It is used to identify the field in the form. It must be unique within the form.
    */
   name: FieldPath<T>;

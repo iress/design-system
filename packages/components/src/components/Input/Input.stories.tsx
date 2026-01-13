@@ -231,6 +231,23 @@ export const Readonly: Story = {
   },
 };
 
+export const Disabled: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    disabled: true,
+    value: 'This field is locked',
+    id: 'disabled-input',
+  },
+  render: (args) => (
+    <IressStack gutter="md">
+      <IressField label="First name" disabled>
+        <IressInput {...args} value="John" />
+      </IressField>
+    </IressStack>
+  ),
+};
+
 export const Formatter: Story = {
   ...Default,
   args: {

@@ -12,6 +12,7 @@ export const IressField = ({
   children,
   className,
   'data-testid': dataTestId,
+  disabled,
   error,
   errorMessages,
   hiddenLabel,
@@ -59,6 +60,7 @@ export const IressField = ({
     >
       <IressLabel
         append={append}
+        disabled={disabled}
         className={styles.label}
         data-testid={propagateTestid(dataTestId, 'label')}
         hiddenLabel={hiddenLabel}

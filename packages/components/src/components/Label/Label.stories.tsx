@@ -25,6 +25,13 @@ export const Required: Story = {
   },
 };
 
+export const Disabled: Story = {
+  args: {
+    children: 'This is a label for a disabled input',
+    disabled: true,
+  },
+};
+
 export const Optional: Story = {
   args: {
     children: 'This is a label for an optional input',

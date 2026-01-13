@@ -93,6 +93,16 @@ If you need more control over the read-only state (for example, rendering a styl
 
 <ComponentExample of={ComponentStories.Readonly} meta={ComponentStories} />
 
+### Disabled
+
+The `disabled` prop can be set to disable the input. This will change the input to a custom disabled style and the user will not be able to interact with the input.
+
+It is recommended to use the `disabled` prop on the `IressField` component as wellas on the `IressInput` component to ensure all associated elements (like label) are also disabled.
+
+**Note:** For accessibility reasons, this prop does not set a `disabled` attribute on the native input element, to allow screen readers to still read the value.
+
+<ComponentExample of={ComponentStories.Disabled} meta={ComponentStories} />
+
 ### Formatter
 
 `formatter` allows you to display the value in a different format when the input is not focused. A typical use case is to format a string with currency symbols and commas.
