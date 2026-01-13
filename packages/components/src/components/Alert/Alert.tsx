@@ -2,7 +2,7 @@ import { IressIcon, type IressIconProps } from '../Icon';
 import { IressText, type IressTextProps } from '../Text';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { alert } from './Alert.styles';
-import { cx } from '@/styled-system/css';
+import { cx, css } from '@/styled-system/css';
 import { type ReactNode, useMemo } from 'react';
 import type { Statuses } from '@/types';
 import { GlobalCSSClass } from '@/enums';
@@ -14,6 +14,7 @@ import {
 } from '../Button';
 import { IressInline } from '../Inline';
 import { useControlledState } from '@/hooks';
+import { splitCssProps } from '@/styled-system/jsx';
 
 export interface IressAlertProps extends Omit<IressTextProps, 'element'> {
   /**
@@ -99,8 +100,10 @@ export const IressAlert = ({
 }: IressAlertProps) => {
   const dismissable = !!onDismiss;
   const classes = alert({ status, variant });
+  const styles = alert.raw({ status, variant });
   const hasActions = !!actions?.length;
   const hasFooter = !!footer || hasActions;
+  const [styleProps, nonStyleProps] = splitCssProps(restProps);
 
   const { value: dismissed, setValue: dismiss } = useControlledState({
     component: 'IressAlert',
@@ -132,8 +135,12 @@ export const IressAlert = ({
 
   return (
     <IressText
-      className={cx(className, classes.alert, GlobalCSSClass.Alert)}
-      {...restProps}
+      className={cx(
+        className,
+        css(styles.alert, styleProps),
+        GlobalCSSClass.Alert,
+      )}
+      {...nonStyleProps}
     >
       {variant !== 'sidebar' && icon}
       <div className={classes.wrapper}>

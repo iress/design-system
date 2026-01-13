@@ -64,7 +64,7 @@ export const expander = sva({
         activator: {
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'flex-end',
+          alignItems: 'flex-start',
           width: '[100%]',
           textStyle: 'typography.heading.3',
 
