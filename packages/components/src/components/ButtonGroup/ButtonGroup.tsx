@@ -78,11 +78,7 @@ export const IressButtonGroup = <
       selected={selected}
     >
       <styled.div
-        className={cx(
-          className,
-          css(styles.root, styleProps),
-          GlobalCSSClass.ButtonGroup,
-        )}
+        className={cx(className, classes.root, GlobalCSSClass.ButtonGroup)}
         id={id}
         data-testid={dataTestId}
         {...nonStyleProps}
@@ -94,7 +90,11 @@ export const IressButtonGroup = <
         >
           {label}
         </div>
-        <div role="group" aria-labelledby={labelId} className={classes.values}>
+        <div
+          role="group"
+          aria-labelledby={labelId}
+          className={css(styles.values, styleProps)}
+        >
           {children}
         </div>
       </styled.div>
