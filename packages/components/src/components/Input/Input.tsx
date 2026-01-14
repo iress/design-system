@@ -95,8 +95,10 @@ export type IressInputProps<
 } & (TRows extends number
     ? {
         /**
-         * Maximum number of rows the textarea will auto-grow to before scrolling. Only applies when `rows` is set.
-         * Set to a number to control the maximum visible rows before the component stops auto-growing.
+         * Controls the auto-grow behaviour of the textarea when `rows` is set.
+         * - Set to a number (e.g. `autoGrow={10}`) to define the maximum number of visible rows before the textarea starts scrolling.
+         * - Set to `true` to enable auto-grow with a default maximum of 5 visible rows.
+         * @default false (no auto-grow) or 5 rows when `autoGrow` is `true`
          */
         autoGrow?: number | boolean;
       }

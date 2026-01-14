@@ -1471,7 +1471,7 @@ describe('useAutocompleteSearch', () => {
       );
     });
 
-    it.skip('should return to initialOptions when query is cleared', async () => {
+    it('should return to initialOptions when query is cleared', async () => {
       const initialOptions = [{ label: 'Initial', value: '1' }];
       const mockAsyncOptions = vi.fn().mockResolvedValue([]);
 
@@ -1498,7 +1498,9 @@ describe('useAutocompleteSearch', () => {
       });
 
       // Should return to showing initialOptions
-      expect(hook.result.current.results).toEqual(initialOptions);
+      await waitFor(() =>
+        expect(hook.result.current.results).toEqual(initialOptions),
+      );
       expect(hook.result.current.shouldShowNoResults).toBe(false);
     });
   });

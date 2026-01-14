@@ -28,7 +28,7 @@ type IressSpinnerChattyProps = IressStyledProps<'span'> & {
   /**
    * Screen reader text for the chatty spinner.
    */
-  screenreaderText?: string;
+  screenreaderText: string;
 };
 
 export type IressSpinnerProps =
