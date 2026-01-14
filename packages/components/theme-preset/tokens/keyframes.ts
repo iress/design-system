@@ -2,6 +2,10 @@ import { cssVars } from '@iress-oss/ids-tokens';
 import { defineKeyframes } from '@pandacss/dev';
 
 export const keyframes = defineKeyframes({
+  chatty: {
+    '0%, 60%, 100%': { transform: 'translateY(0)', opacity: '0.7' },
+    '30%': { transform: 'translateY(50%)', opacity: '1' },
+  },
   fieldFooter: {
     '0%': {
       display: 'none',

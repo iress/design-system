@@ -4,7 +4,11 @@ export const autoComplete = sva({
   slots: ['root', 'popoverContent', 'optionList'],
   base: {
     root: {},
-    popoverContent: {},
+    popoverContent: {
+      _empty: {
+        display: 'none',
+      },
+    },
     optionList: {
       _empty: {
         display: 'none',

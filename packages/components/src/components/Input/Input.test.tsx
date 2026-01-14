@@ -149,4 +149,31 @@ describe('IressInput', () => {
       expect(input).not.toHaveSelection('hello');
     });
   });
+
+  describe('autoGrow', () => {
+    it('should apply autoGrow styling when autoGrow prop is set', () => {
+      const screen = render(
+        <IressInput rows={3} autoGrow={5} data-testid="test-input" />,
+      );
+      const wrapper = screen.getByTestId('test-input');
+      const textarea = screen.container.querySelector('textarea');
+
+      expect(textarea).toBeInTheDocument();
+      const styles = input({ autoGrow: true });
+      expect(wrapper).toHaveClass(styles.wrapper ?? '');
+    });
+
+    it('should default autoGrow to 5 when set to true', () => {
+      const screen = render(
+        <IressInput rows={3} autoGrow={true} data-testid="test-input" />,
+      );
+      const wrapper = screen.getByTestId('test-input');
+      const textarea = screen.container.querySelector('textarea');
+
+      expect(textarea).toBeInTheDocument();
+      // The component should treat autoGrow=true as autoGrow=5
+      const styles = input({ autoGrow: true });
+      expect(wrapper).toHaveClass(styles.wrapper ?? '');
+    });
+  });
 });

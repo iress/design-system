@@ -26,6 +26,7 @@ export const slideout = sva({
     content: {
       overflow: 'auto',
       flex: '[1 1 auto]',
+      scrollable: 'y',
     },
     footer: {
       borderBlockStart: 'divider',
