@@ -53,6 +53,30 @@ describe('IressProgress', () => {
     expect(progressBar).toHaveAccessibleName('Step 0 of 100');
   });
 
+  describe('backgroundImage', () => {
+    it('applies background image CSS variable when backgroundImage prop is provided', () => {
+      const imageUrl = 'https://example.com/image.jpg';
+      render(<IressProgress backgroundImage={imageUrl} value={50} />);
+
+      const progressBar = screen.getByRole('progressbar');
+
+      expect(progressBar).toHaveStyle({
+        '--iress-background-image': `url(${imageUrl})`,
+      });
+    });
+
+    it('does not apply background image CSS variable when prop is not provided', () => {
+      render(<IressProgress value={50} />);
+
+      const progressBar = screen.getByRole('progressbar');
+
+      // Should not have the custom property
+      expect(
+        progressBar.style.getPropertyValue('--iress-background-image'),
+      ).toBe('');
+    });
+  });
+
   it('should not have basic accessibility issues', async () => {
     const { container } = render(
       <>

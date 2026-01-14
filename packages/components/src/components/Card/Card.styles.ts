@@ -103,7 +103,7 @@ export const card = sva({
             borderColor: 'colour.primary.fill',
             borderStyle: 'solid',
             borderWidth: '[2px]',
-            borderRadius: 'radius.system.form',
+            borderRadius: 'radius.system.layout',
             pointerEvents: '[none]',
           },
         },

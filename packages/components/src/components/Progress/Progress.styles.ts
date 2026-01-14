@@ -21,6 +21,9 @@ export const progress = cva({
     _progressValue: {
       appearance: 'none',
       bg: '[currentColor]',
+      backgroundImage: 'var(--iress-background-image)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
       borderRadius: 'var(--iress-border-radius)',
       margin: 'spacing.0',
       transition: 'all',
@@ -29,6 +32,9 @@ export const progress = cva({
     _mozProgressValue: {
       appearance: 'none',
       bg: '[currentColor]',
+      backgroundImage: 'var(--iress-background-image)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
       borderRadius: 'var(--iress-border-radius)',
       margin: 'spacing.0',
       transition: 'all',

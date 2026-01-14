@@ -322,7 +322,7 @@ export const IressSlideout = ({
   };
 
   return (
-    <FloatingPortal root={container}>
+    <FloatingPortal root={container ?? provider?.container}>
       <SlideoutInner
         {...slideoutInnerProps}
         style={style}

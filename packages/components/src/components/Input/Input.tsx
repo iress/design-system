@@ -2,6 +2,7 @@ import {
   type ChangeEvent,
   type ChangeEventHandler,
   forwardRef,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -45,12 +46,6 @@ export type IressInputProps<
    * Content to append to the input field, usually a button or icon.
    **/
   append?: ReactNode;
-
-  /**
-   * If `true`, then user can clear the value of the input. Will be ignored if `rows` prop is in use.
-   * @default false
-   */
-  clearable?: boolean;
 
   /**
    * The value of the input. Can be a string or a number. Use for uncontrolled inputs.
@@ -97,7 +92,21 @@ export type IressInputProps<
    * The width of the input.
    */
   width?: FormElementWidths;
-};
+} & (TRows extends number
+    ? {
+        /**
+         * Maximum number of rows the textarea will auto-grow to before scrolling. Only applies when `rows` is set.
+         * Set to a number to control the maximum visible rows before the component stops auto-growing.
+         */
+        autoGrow?: number | boolean;
+      }
+    : {
+        /**
+         * If `true`, then user can clear the value of the input.
+         * @default false
+         */
+        clearable?: boolean;
+      });
 
 /**
  * - **Clearable**: If the `clearable` prop is set to `true`, a clear button will appear when there is a value in the input field. Clicking this button will clear the input and trigger the `onChange` event.
@@ -127,6 +136,15 @@ const Input = <
     alignRight,
     ...inputProps
   } = props as IressInputProps<T, undefined>;
+
+  let autoGrow =
+    rows !== undefined
+      ? (props as IressInputProps<T, number>).autoGrow
+      : undefined;
+
+  if (autoGrow === true) {
+    autoGrow = 5;
+  }
 
   useNoDefaultValueInForms({
     component: 'IressInput',
@@ -163,6 +181,30 @@ const Input = <
         },
       }) as InputRef<TRows>,
   );
+
+  // Auto-grow functionality for textarea
+  useEffect(() => {
+    if (rows && autoGrow && inputRef.current) {
+      const textarea = inputRef.current.input as HTMLTextAreaElement;
+      if (!textarea) return;
+
+      // Reset height to auto to get the correct scrollHeight
+      textarea.style.height = 'auto';
+
+      // Calculate the height of one row
+      const lineHeight =
+        parseFloat(getComputedStyle(textarea).lineHeight) * 1.075;
+      const maxHeight = lineHeight * autoGrow;
+
+      // Set height to scrollHeight but not exceeding maxHeight
+      const newHeight = Math.min(textarea.scrollHeight, maxHeight);
+      textarea.style.height = `${newHeight}px`;
+
+      // Enable/disable overflow based on whether we've hit the max
+      textarea.style.overflowY =
+        textarea.scrollHeight > maxHeight ? 'auto' : 'hidden';
+    }
+  }, [value, rows, autoGrow]);
 
   if (readOnly) {
     return (
@@ -207,6 +249,7 @@ const Input = <
 
   const classes = input({
     alignRight,
+    autoGrow: !!autoGrow,
     inline,
     isTextarea: rows !== undefined,
     width,

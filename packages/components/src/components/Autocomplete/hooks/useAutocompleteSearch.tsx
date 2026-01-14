@@ -290,6 +290,15 @@ export const useAutocompleteSearch = ({
 
   useEffect(search, [search]);
 
+  let calculatedResults: FormattedLabelValueMeta[];
+  if (searchState.results.length) {
+    calculatedResults = searchState.results;
+  } else if (debouncedQuery.length) {
+    calculatedResults = [];
+  } else {
+    calculatedResults = initialOptions ?? [];
+  }
+
   return {
     clearError: searchState.clearError,
     debouncedQuery,
@@ -309,9 +318,7 @@ export const useAutocompleteSearch = ({
       !searchState.loading &&
       searchState.results.length === 0 &&
       query.length >= minSearchLength,
-    results: searchState.results.length
-      ? searchState.results
-      : (initialOptions ?? []),
+    results: calculatedResults,
     startSearch: search,
     stopSearch: searchState.reset,
   };
