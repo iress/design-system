@@ -23,7 +23,6 @@ export const alert = sva({
       paddingInline: 'spacing.3',
       textStyle: 'typography.body.md',
       border: 'alert',
-      height: 'auto',
       justifyContent: 'flex-start',
       alignItems: 'flex-start',
     },
