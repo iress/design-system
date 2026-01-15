@@ -37,6 +37,8 @@ export const modal = sva({
       borderBlockStart: 'divider',
     },
     modal: {
+      // Performance: CSS containment (no paint due to fixed positioning)
+      contain: 'layout style',
       position: 'relative',
       borderRadius: 'radius.system.layout',
       padding: 'spacing.0',

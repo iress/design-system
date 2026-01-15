@@ -4,6 +4,8 @@ export const badge = sva({
   slots: ['root', 'badge', 'host'],
   base: {
     root: {
+      // Performance: CSS containment limits style recalculation scope
+      contain: 'layout style paint',
       display: 'inline-block',
       overflow: 'visible',
       textStyle: 'typography.body.sm.regular',

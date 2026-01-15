@@ -12,6 +12,8 @@ export const radio = sva({
   ],
   base: {
     root: {
+      // Performance: CSS containment (no paint to allow focus ring/shadow)
+      contain: 'layout style',
       color: 'colour.primary.fill',
       display: 'flex',
       position: 'relative',

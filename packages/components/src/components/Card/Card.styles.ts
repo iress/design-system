@@ -4,6 +4,8 @@ export const card = sva({
   slots: ['root', 'prepend', 'heading', 'topRight', 'media', 'body', 'footer'],
   base: {
     root: {
+      // Performance: CSS containment (no paint to allow overflow)
+      contain: 'layout style',
       position: 'relative',
       borderRadius: 'radius.system.layout',
       bg: 'colour.neutral.10',

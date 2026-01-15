@@ -11,6 +11,8 @@ export const expander = sva({
   ],
   base: {
     root: {
+      // Performance: CSS containment (no paint to allow overflow)
+      contain: 'layout style',
       display: 'block',
 
       '&:has([aria-controls]:focus-visible)': {

@@ -4,6 +4,8 @@ export const tag = sva({
   slots: ['root', 'content', 'deleteButton'],
   base: {
     root: {
+      // Performance: CSS containment limits style recalculation scope
+      contain: 'layout style paint',
       alignItems: 'center',
       bg: 'colour.neutral.20',
       border: 'divider',

@@ -10,6 +10,8 @@ export const popover = sva({
       display: 'inline-block',
     },
     content: {
+      // Performance: CSS containment (no paint due to floating nature)
+      contain: 'layout style',
       bg: 'colour.neutral.10',
       border: 'divider',
       borderRadius: 'radius.system.form',

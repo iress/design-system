@@ -11,6 +11,8 @@ export const select = sva({
   slots,
   base: {
     wrapper: {
+      // Performance: CSS containment limits style recalculation scope
+      contain: 'layout style paint',
       display: 'block',
       position: 'relative',
       lineHeight: 1,
