@@ -190,6 +190,24 @@ export const ReadonlyData: Story = {
   ),
 };
 
+export const LockedReadonly: Story = {
+  args: {
+    label: 'Account Number',
+    hint: 'You do not have permission to edit this field',
+    input: {
+      ...defaultInput,
+      value: 'ACC-123456789',
+    },
+    readOnly: 'locked',
+    required: true,
+  },
+  render: ({ input, ...args }) => (
+    <IressField {...args}>
+      <IressReadonly {...input} variant="locked" />
+    </IressField>
+  ),
+};
+
 export const Supplementary: Story = {
   ...Default,
   args: {

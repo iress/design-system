@@ -53,3 +53,12 @@ export const InlineStyle: Story = {
     inline: true,
   },
 };
+
+export const LockedVariant: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    variant: 'locked',
+    value: 'This field is locked',
+  },
+};

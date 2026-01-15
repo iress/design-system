@@ -233,6 +233,15 @@ export const ReadOnly: Story = {
   },
 };
 
+export const LockedReadOnly: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    readOnly: 'locked',
+    value: 'Locked Value - User cannot edit',
+  },
+};
+
 export const Formatter: Story = {
   ...Default,
   args: {
