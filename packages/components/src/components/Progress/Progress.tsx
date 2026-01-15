@@ -22,6 +22,11 @@ type ProgressElement<TMin extends number | undefined = undefined> =
 export type IressProgressProps<TMin extends number | undefined = undefined> =
   Omit<IressStyledProps<ProgressElement<TMin>>, 'borderRadius' | 'value'> & {
     /**
+     * A background image URL to be used as the background of the progress bar.
+     */
+    backgroundImage?: string;
+
+    /**
      * The **`border-radius`** CSS property rounds the corners of an element's outer border edge using the radius tokens in the design system.
      * @see https://developer.mozilla.org/docs/Web/CSS/border-radius
      */
@@ -54,9 +59,11 @@ export type IressProgressProps<TMin extends number | undefined = undefined> =
 
 export interface ProgressCustomCSSProperties extends CSSProperties {
   '--iress-border-radius'?: string;
+  '--iress-background-image'?: string;
 }
 
 export const IressProgress = <TMin extends number | undefined = undefined>({
+  backgroundImage,
   borderRadius,
   className: classNameProp,
   max = 100,
@@ -84,6 +91,9 @@ export const IressProgress = <TMin extends number | undefined = undefined>({
   const style: ProgressCustomCSSProperties = {
     '--iress-border-radius': borderRadius
       ? token(`radii.${borderRadius}`)
+      : undefined,
+    '--iress-background-image': backgroundImage
+      ? `url(${backgroundImage})`
       : undefined,
     ...styleProp,
   };

@@ -275,3 +275,10 @@ export const CurrencyFormatter: Story = {
     }),
   },
 };
+
+export const AutoGrow: TextareaStory = {
+  args: {
+    rows: 1,
+    autoGrow: true,
+  },
+};

@@ -11,6 +11,8 @@ export const expander = sva({
   ],
   base: {
     root: {
+      // Performance: CSS containment (no paint to allow overflow)
+      contain: 'layout style',
       display: 'block',
 
       '&:has([aria-controls]:focus-visible)': {
@@ -64,7 +66,7 @@ export const expander = sva({
         activator: {
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'flex-end',
+          alignItems: 'flex-start',
           width: '[100%]',
           textStyle: 'typography.heading.3',
 

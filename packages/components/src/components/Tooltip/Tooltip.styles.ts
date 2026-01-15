@@ -9,6 +9,8 @@ export const tooltip = sva({
     },
     activator: {},
     content: {
+      // Performance: CSS containment limits style recalculation scope
+      contain: 'layout style paint',
       zIndex: '600',
       width: '[max-content]',
       maxWidth: '[20em]',

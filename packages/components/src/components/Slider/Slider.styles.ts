@@ -11,6 +11,8 @@ export const slider = sva({
   ],
   base: {
     root: {
+      // Performance: CSS containment (no paint to allow focus ring/shadow)
+      contain: 'layout style',
       display: 'flex',
       flexDirection: 'column',
     },

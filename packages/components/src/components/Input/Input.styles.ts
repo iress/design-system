@@ -4,6 +4,8 @@ export const input = sva({
   slots: ['root', 'wrapper', 'inline', 'addon', 'internal', 'formControl'],
   base: {
     wrapper: {
+      // Performance: CSS containment limits style recalculation scope
+      contain: 'layout style paint',
       display: 'flex',
       alignItems: 'stretch',
       borderRadius: 'radius.system.form',
@@ -90,6 +92,13 @@ export const input = sva({
         },
       },
     },
+    autoGrow: {
+      true: {
+        formControl: {
+          resize: 'none',
+        },
+      },
+    },
     inline: {
       true: {
         wrapper: {
@@ -102,6 +111,7 @@ export const input = sva({
         formControl: {
           lineHeight: 1.5,
           height: 'auto',
+          scrollable: 'y',
         },
       },
     },

@@ -1374,7 +1374,134 @@ describe('useAutocompleteSearch', () => {
 
       // With initialOptions, should NOT show instructions regardless of query length
       expect(hook.result.current.shouldShowInstructions).toBe(false);
+      expect(hook.result.current.results).toEqual([]);
+    });
+  });
+
+  describe('Regression: initialOptions shown instead of "No results found" for async search', () => {
+    it('should show empty results (not initialOptions) when async search returns no results', async () => {
+      const initialOptions = [
+        { label: 'Frequently selected 1', value: 'freq-1' },
+        { label: 'Frequently selected 2', value: 'freq-2' },
+      ];
+
+      const mockAsyncOptions = vi
+        .fn()
+        .mockImplementation(async (query: string) => {
+          if (query === 'nothing') {
+            return [];
+          }
+          return [
+            { label: 'Option 1', value: 'option-1' },
+            { label: 'Option 2', value: 'option-2' },
+          ];
+        });
+
+      const hook = renderAutocompleteSearchHook({
+        initialOptions,
+        options: mockAsyncOptions,
+        debounceThreshold: 0,
+        query: '',
+      });
+
+      // Initially should show initialOptions
       expect(hook.result.current.results).toEqual(initialOptions);
+      expect(hook.result.current.shouldShowNoResults).toBe(false);
+
+      // Search for something that returns no results
+      hook.rerender({
+        initialOptions,
+        options: mockAsyncOptions,
+        debounceThreshold: 0,
+        query: 'nothing',
+      });
+
+      await waitFor(() => {
+        expect(hook.result.current.loading).toBe(false);
+      });
+
+      // Should show empty results array (which triggers "No results found" message)
+      // NOT initialOptions
+      // TODO: Why does this need a waitFor?
+      await waitFor(() => {
+        expect(hook.result.current.results).toEqual([]);
+      });
+      expect(hook.result.current.shouldShowNoResults).toBe(true);
+      expect(mockAsyncOptions).toHaveBeenCalledWith('nothing');
+    });
+
+    it('should show initialOptions only when query is empty', async () => {
+      const initialOptions = [
+        { label: 'Initial 1', value: '1' },
+        { label: 'Initial 2', value: '2' },
+      ];
+
+      const mockAsyncOptions = vi
+        .fn()
+        .mockResolvedValue([{ label: 'Search Result', value: '3' }]);
+
+      const hook = renderAutocompleteSearchHook({
+        initialOptions,
+        options: mockAsyncOptions,
+        debounceThreshold: 0,
+        query: '',
+      });
+
+      // Query is empty - should show initialOptions
+      expect(hook.result.current.results).toEqual(initialOptions);
+
+      // Now search for something
+      hook.rerender({
+        initialOptions,
+        options: mockAsyncOptions,
+        debounceThreshold: 0,
+        query: 'test',
+      });
+
+      await waitFor(() => {
+        expect(hook.result.current.loading).toBe(false);
+      });
+
+      // Should show search results, not initialOptions
+      expect(hook.result.current.results.length).toBeGreaterThan(0);
+
+      // TODO: Why does this need a wait for?
+      await waitFor(() =>
+        expect(hook.result.current.results).not.toEqual(initialOptions),
+      );
+    });
+
+    it('should return to initialOptions when query is cleared', async () => {
+      const initialOptions = [{ label: 'Initial', value: '1' }];
+      const mockAsyncOptions = vi.fn().mockResolvedValue([]);
+
+      const hook = renderAutocompleteSearchHook({
+        initialOptions,
+        options: mockAsyncOptions,
+        debounceThreshold: 0,
+        query: 'test',
+      });
+
+      await waitFor(() => {
+        expect(hook.result.current.loading).toBe(false);
+      });
+
+      // Should show empty results
+      expect(hook.result.current.results).toEqual([]);
+
+      // Clear the query
+      hook.rerender({
+        initialOptions,
+        options: mockAsyncOptions,
+        debounceThreshold: 0,
+        query: '',
+      });
+
+      // Should return to showing initialOptions
+      await waitFor(() =>
+        expect(hook.result.current.results).toEqual(initialOptions),
+      );
+      expect(hook.result.current.shouldShowNoResults).toBe(false);
     });
   });
 

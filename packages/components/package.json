@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-components",
-  "version": "6.0.0-alpha.14",
+  "version": "6.0.0-alpha.18",
   "description": "Iress React Component Library",
   "license": "Apache-2.0",
   "type": "module",
@@ -99,5 +99,5 @@
     "type": "git",
     "url": "https://github.com/iress/design-system"
   },
-  "stableVersion": "6.0.0-alpha.4"
+  "stableVersion": "6.0.0-alpha.16"
 }

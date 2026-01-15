@@ -4,6 +4,8 @@ export const selectTags = sva({
   slots: ['root', 'placeholder', 'prepend', 'append', 'tag', 'tagsList'],
   base: {
     root: {
+      // Performance: CSS containment limits style recalculation scope
+      contain: 'layout style paint',
       display: 'flex',
       alignItems: 'center',
       width: '[100%]',

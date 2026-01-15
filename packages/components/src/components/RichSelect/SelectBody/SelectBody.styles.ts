@@ -4,6 +4,8 @@ export const selectBody = sva({
   slots: ['selectBody', 'children'],
   base: {
     selectBody: {
+      // Performance: CSS containment (no paint due to overflow)
+      contain: 'layout style',
       display: 'flex',
       flexDirection: 'column',
       maxHeight: '[30rem]',

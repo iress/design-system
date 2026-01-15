@@ -988,4 +988,30 @@ describe('IressSlideout', () => {
       expect(results).toHaveNoViolations();
     });
   });
+
+  describe('IressSlideoutProvider integration', () => {
+    it('uses provider container when available and no custom container specified', async () => {
+      const customContainer = document.createElement('div');
+      customContainer.id = 'custom-provider-container';
+      document.body.appendChild(customContainer);
+
+      const screen = renderComponentInProvider(
+        {
+          show: true,
+          children: 'Test content',
+        },
+        {
+          container: customContainer,
+        },
+      );
+
+      const slideout = await screen.findByRole(TEST_ROLE);
+
+      expect(slideout).toBeInTheDocument();
+      // The slideout should be rendered into the provider's container
+      expect(customContainer.contains(slideout)).toBe(true);
+
+      document.body.removeChild(customContainer);
+    });
+  });
 });

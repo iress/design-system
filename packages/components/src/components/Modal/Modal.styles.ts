@@ -27,6 +27,9 @@ export const modal = sva({
       top: 'spacing.2',
       right: 'spacing.2',
     },
+    content: {
+      scrollable: 'y',
+    },
     header: {
       mb: 'spacing.4',
     },
@@ -34,6 +37,8 @@ export const modal = sva({
       borderBlockStart: 'divider',
     },
     modal: {
+      // Performance: CSS containment (no paint due to fixed positioning)
+      contain: 'layout style',
       position: 'relative',
       borderRadius: 'radius.system.layout',
       padding: 'spacing.0',
@@ -70,7 +75,6 @@ export const modal = sva({
         content: {
           flex: '[1]',
           overflowX: 'hidden',
-          scrollable: 'y',
           maxHeight: '[calc(100vh - ({spacing.spacing.7} * 2))]',
           '@media (min-height: 600px)': {
             maxHeight: '[calc(100vh - (100px * 2))]',

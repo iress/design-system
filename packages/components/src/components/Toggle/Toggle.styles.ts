@@ -11,6 +11,8 @@ export const toggle = sva({
   ],
   base: {
     toggleBase: {
+      // Performance: CSS containment (no paint to allow focus ring/shadow)
+      contain: 'layout style',
       display: 'inline-flex',
       gap: 'spacing.1',
       color: 'colour.primary.fill',

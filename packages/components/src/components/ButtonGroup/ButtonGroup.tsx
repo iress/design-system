@@ -1,10 +1,10 @@
 import { type ControlledValue, useIdIfNeeded } from '../../hooks';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { buttonGroup } from './ButtonGroup.styles';
-import { cx } from '@/styled-system/css';
+import { cx, css } from '@/styled-system/css';
 import { type FormControlValue, type IressStyledProps } from '@/types';
 import { type ReactNode } from 'react';
-import { styled } from '@/styled-system/jsx';
+import { splitCssProps, styled } from '@/styled-system/jsx';
 import { ButtonGroupProvider } from './ButtonGroupProvider';
 import { GlobalCSSClass } from '@/enums';
 
@@ -67,6 +67,8 @@ export const IressButtonGroup = <
   const id = useIdIfNeeded({ id: restProps.id });
   const labelId = `${id}--label`;
   const classes = buttonGroup({ hiddenLabel });
+  const styles = buttonGroup.raw({ hiddenLabel });
+  const [styleProps, nonStyleProps] = splitCssProps(restProps);
 
   return (
     <ButtonGroupProvider
@@ -79,7 +81,7 @@ export const IressButtonGroup = <
         className={cx(className, classes.root, GlobalCSSClass.ButtonGroup)}
         id={id}
         data-testid={dataTestId}
-        {...restProps}
+        {...nonStyleProps}
       >
         <div
           className={classes.label}
@@ -88,7 +90,11 @@ export const IressButtonGroup = <
         >
           {label}
         </div>
-        <div role="group" aria-labelledby={labelId} className={classes.values}>
+        <div
+          role="group"
+          aria-labelledby={labelId}
+          className={css(styles.values, styleProps)}
+        >
           {children}
         </div>
       </styled.div>

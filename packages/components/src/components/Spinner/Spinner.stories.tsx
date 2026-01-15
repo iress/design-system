@@ -29,6 +29,13 @@ export const Standalone: Story = {
   },
 };
 
+export const Chatty: Story = {
+  args: {
+    variant: 'chatty',
+    screenreaderText: 'User is typing...',
+  },
+};
+
 export const Message: Story = {
   render: (args) => (
     <IressInline gap="sm" verticalAlign="middle">

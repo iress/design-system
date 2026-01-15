@@ -255,7 +255,7 @@ export const Overflow: Story = {
       <IressPopover
         {...args}
         activator={<IressButton>Fixed height popover</IressButton>}
-        contentStyle={{ style: { maxHeight: '200px', overflowY: 'auto' } }}
+        contentStyle={{ scrollable: 'y', style: { maxHeight: '200px' } }}
       />
     </IressInline>
   ),

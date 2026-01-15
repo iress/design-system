@@ -1,6 +1,9 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as ComponentStories from './Progress.stories';
-import { ComponentOverview } from '@iress-oss/ids-storybook-config';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 
@@ -51,3 +54,16 @@ For example, if the component has been implemented with a max of 10, a value of 
 ```
 Step 6 of 10
 ```
+
+## Examples
+
+### Progress variants
+
+The following examples demonstrate different ways to use the Progress component:
+
+- **Empty state**: Shows a progress bar at 0% completion
+- **Partial progress**: Shows a progress bar with partial completion (using custom min/max values)
+- **With section title**: Uses the `sectionTitle` prop with tokens to display "Step X of Y"
+- **With background image**: Demonstrates using a custom background image for visual interest
+
+<ComponentExample of={ComponentStories.ProgressExamples} />
