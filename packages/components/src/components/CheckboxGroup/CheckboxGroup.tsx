@@ -56,8 +56,9 @@ export interface IressCheckboxGroupProps<T = FormControlValue> extends Omit<
 
   /**
    * Renders the group in a read-only state.
+   * Use 'locked' to indicate the user does not have permission to edit.
    */
-  readOnly?: boolean;
+  readOnly?: boolean | 'locked';
 
   /**
    * Value of checkbox group when in controlled mode.
@@ -183,7 +184,7 @@ const CheckboxGroup = <T = FormControlValue,>(
         ref={divRef}
         className={cx(
           className,
-          checkboxGroup({ layout, readOnly }),
+          checkboxGroup({ layout, readOnly: readOnly === true }),
           GlobalCSSClass.CheckboxGroup,
         )}
         onBlur={handleBlur}

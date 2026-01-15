@@ -121,7 +121,7 @@ const Radio = <T = FormControlValue,>(
     : internalChecked;
   const readOnly = hasRadioGroup ? radioGroup.readOnly : readOnlyProp;
 
-  if (readOnly) {
+  if (readOnly === true) {
     return isChecked ? (
       <IressReadonly
         {...restProps}
@@ -142,6 +142,7 @@ const Radio = <T = FormControlValue,>(
     hiddenControl: isHidden,
     touch: isTouch,
     checked: isChecked,
+    locked: readOnly === 'locked',
   });
 
   const [styleProps, nonStyleProps] = splitCssProps(restProps);

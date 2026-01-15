@@ -11,6 +11,7 @@ export const checkbox = sva({
     'mark',
     'hiddenControl',
     'touch',
+    'locked',
   ],
   base: {
     formElement: {},
@@ -99,6 +100,19 @@ export const checkbox = sva({
       true: {
         label: {
           borderColor: '[currentColor]',
+        },
+      },
+    },
+    locked: {
+      true: {
+        label: {
+          cursor: 'not-allowed',
+        },
+        mark: {
+          cursor: 'not-allowed',
+          _groupHover: {
+            backgroundColor: '[unset]',
+          },
         },
       },
     },

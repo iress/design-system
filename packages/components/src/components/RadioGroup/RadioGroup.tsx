@@ -65,8 +65,9 @@ export interface IressRadioGroupProps<T = FormControlValue> extends Omit<
 
   /**
    * Renders a readOnly radio group.
+   * Use 'locked' to indicate the user does not have permission to edit.
    */
-  readOnly?: boolean;
+  readOnly?: boolean | 'locked';
 
   /**
    * Value of radio group when in controlled mode.

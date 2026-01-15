@@ -9,6 +9,7 @@ export const radio = sva({
     'radioMark',
     'checkedRadioMark',
     'checkboxMark',
+    'locked',
   ],
   base: {
     root: {
@@ -125,6 +126,24 @@ export const radio = sva({
         radioMark: {
           _hover: {
             backgroundColor: 'colour.primary.surfaceHover',
+          },
+        },
+      },
+    },
+    locked: {
+      true: {
+        root: {
+          '&:has(svg:hover)': {
+            color: '[unset]',
+          },
+        },
+        label: {
+          cursor: 'not-allowed',
+        },
+        radioMark: {
+          cursor: 'not-allowed',
+          _hover: {
+            backgroundColor: '[unset]',
           },
         },
       },

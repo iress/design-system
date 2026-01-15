@@ -197,7 +197,7 @@ const Checkbox = <T = FormControlValue,>(
     input: currentElement,
   }));
 
-  if (isReadonly) {
+  if (isReadonly === true) {
     return checked ? (
       <IressReadonly
         {...restProps}
@@ -214,13 +214,14 @@ const Checkbox = <T = FormControlValue,>(
     hiddenLabel,
     touch: isTouch,
     checked,
+    locked: isReadonly === 'locked',
   });
 
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
 
   return (
     <div
-      data-testid={dataTestId}
+      data-testid={propagateTestid(dataTestId, 'container')}
       className={cx(
         className,
         css(styles.root, styleProps),
