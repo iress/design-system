@@ -11,6 +11,8 @@ export const chatty = sva({
   slots: ['root', 'dot'],
   base: {
     root: {
+      // Performance: CSS containment (no paint to allow animation effects)
+      contain: 'layout style',
       display: 'inline-flex',
       alignItems: 'center',
       gap: 'spacing.1',

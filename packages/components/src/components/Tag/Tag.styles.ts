@@ -4,6 +4,8 @@ export const tag = sva({
   slots: ['root', 'content', 'deleteButton'],
   base: {
     root: {
+      // Performance: CSS containment limits style recalculation scope
+      contain: 'layout style',
       alignItems: 'center',
       bg: 'colour.neutral.20',
       border: 'divider',
@@ -58,6 +60,14 @@ export const tag = sva({
           _active: {
             boxShadow:
               'color-mix(in srgb, {colors.colour.primary.surface}, transparent 60%) 0px 0px 0px 3px',
+          },
+
+          _focus: {
+            outline: '[none]',
+          },
+
+          _focusVisible: {
+            layerStyle: 'elevation.focus',
           },
         },
       },

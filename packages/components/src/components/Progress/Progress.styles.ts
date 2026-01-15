@@ -2,6 +2,8 @@ import { cva } from '@/styled-system/css';
 
 export const progress = cva({
   base: {
+    // Performance: CSS containment limits style recalculation scope
+    contain: 'layout style paint',
     appearance: 'none',
     bg: 'colour.neutral.40',
     color: 'colour.neutral.50',

@@ -4,6 +4,8 @@ export const input = sva({
   slots: ['root', 'wrapper', 'inline', 'addon', 'internal', 'formControl'],
   base: {
     wrapper: {
+      // Performance: CSS containment limits style recalculation scope
+      contain: 'layout style paint',
       display: 'flex',
       alignItems: 'stretch',
       borderRadius: 'radius.system.form',

@@ -4,6 +4,8 @@ export const selectSearchInput = sva({
   slots: ['root'],
   base: {
     root: {
+      // Performance: CSS containment limits style recalculation scope
+      contain: 'layout style paint',
       borderWidth: '0px',
       borderBottomWidth: '1px',
       borderBottomStyle: 'solid',
