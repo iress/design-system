@@ -61,6 +61,14 @@ export const tag = sva({
             boxShadow:
               'color-mix(in srgb, {colors.colour.primary.surface}, transparent 60%) 0px 0px 0px 3px',
           },
+
+          _focus: {
+            outline: '[none]',
+          },
+
+          _focusVisible: {
+            layerStyle: 'elevation.focus',
+          },
         },
       },
     },
