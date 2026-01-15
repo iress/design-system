@@ -5,7 +5,7 @@ export const tag = sva({
   base: {
     root: {
       // Performance: CSS containment limits style recalculation scope
-      contain: 'layout style paint',
+      contain: 'layout style',
       alignItems: 'center',
       bg: 'colour.neutral.20',
       border: 'divider',
