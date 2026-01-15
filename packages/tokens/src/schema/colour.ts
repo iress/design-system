@@ -101,7 +101,7 @@ const colour = {
       $description:
         'Used for primary buttons and the active state of form controls such as checkboxes and radio buttons. Also used for the border of tags when they have a custom button.',
       $type: Type.Color,
-      $value: '#1D1F4B',
+      $value: '#003271',
       $extensions: {
         'iress.contrast.AA': ['colour.primary.onFill'],
         'styler.panel': 'colour.primary',
@@ -111,7 +111,7 @@ const colour = {
       $description:
         'Used for the hover state of primary buttons as well as hovering over active form controls.',
       $type: Type.Color,
-      $value: '#0D0E24',
+      $value: '#002352',
       $extensions: {
         'iress.contrast.AA': ['colour.primary.onFill'],
         'styler.panel': 'colour.primary',
@@ -131,7 +131,7 @@ const colour = {
       $description:
         'Used as the background colour for secondary buttons and the focused state of menu and tab items. Also used as the background colour of active buttons.',
       $type: Type.Color,
-      $value: '#E9E9ED',
+      $value: '#EBF3FF',
       $extensions: {
         'iress.contrast.AA': ['colour.primary.text', 'colour.neutral.80'],
         'styler.panel': 'colour.primary',
@@ -141,7 +141,7 @@ const colour = {
       $description:
         'Used for the hover state of secondary buttons, form controls and hovering over focused menu and tab items. Also used when hovering over table rows.',
       $type: Type.Color,
-      $value: '#D2D2DB',
+      $value: '#DCEAFE',
       $extensions: {
         'iress.contrast.AA': ['colour.primary.text', 'colour.neutral.80'],
         'styler.panel': 'colour.primary',
@@ -151,7 +151,7 @@ const colour = {
       $description:
         'Used for text on primary buttons, active form controls and focused tab and menu items. Also used for the link text colour and tertiary buttons.',
       $type: Type.Color,
-      $value: '#141F4D',
+      $value: '#13213f',
       $extensions: {
         'iress.contrast.AA': ['colour.primary.surface'],
         'styler.panel': 'colour.primary',
@@ -262,7 +262,7 @@ const colour = {
       $description:
         'Used for very dark text or UI elements requiring maximum contrast.',
       $type: Type.Color,
-      $value: '#13213F',
+      $value: '#141F4D',
       $extensions: {
         'iress.contrast.AA': [
           'colour.neutral.10',
@@ -360,7 +360,7 @@ const colour = {
         $description:
           'Used for the text colour of success alerts and toasts, and success tertiary buttons.',
         $type: Type.Color,
-        $value: '#0A2E25',
+        $value: '#124d3d',
         $extensions: {
           'iress.contrast.AA': ['colour.system.success.surface'],
           'styler.panel': 'colour.system.success',
@@ -428,7 +428,7 @@ const colour = {
         $description:
           'Used for the text colour of danger alerts and toasts, and danger tertiary buttons.',
         $type: Type.Color,
-        $value: '#2D0909',
+        $value: '#8a1f1f',
         $extensions: {
           'iress.contrast.AA': ['colour.system.danger.surface'],
           'styler.panel': 'colour.system.danger',
@@ -493,7 +493,7 @@ const colour = {
       text: {
         $description: 'Used for the text colour of warning alerts.',
         $type: Type.Color,
-        $value: '#2B1F00',
+        $value: '#6b4700',
         $extensions: {
           'iress.contrast.AA': ['colour.system.warning.surface'],
           'styler.panel': 'colour.system.warning',
@@ -552,7 +552,7 @@ const colour = {
       text: {
         $description: 'Used for the text colour of info alerts and toasts.',
         $type: Type.Color,
-        $value: '#121D33',
+        $value: '#203a75',
         $extensions: {
           'iress.contrast.AA': ['colour.system.info.surface'],
           'styler.panel': 'colour.system.info',
@@ -565,7 +565,7 @@ const colour = {
       fill: {
         $description: 'Used for the background colour of the backdrop.',
         $type: Type.Color,
-        $value: '#393F46CC',
+        $value: '#61656bcc',
         $extensions: {
           'iress.contrast.AA': ['colour.neutral.10'],
           'styler.panel': 'colour.system.backdrop',
