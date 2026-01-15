@@ -121,8 +121,10 @@ export interface IressRichSelectProps<TMultiple extends boolean = false>
 
   /**
    * Renders the select as read-only.
+   * - When `true`, displays standard readonly appearance.
+   * - When `'locked'`, displays with lock icon in label and border to indicate permission restrictions.
    */
-  readOnly?: boolean;
+  readOnly?: boolean | 'locked';
 
   /**
    * Completely customise the rendering of the hidden input.
@@ -375,7 +377,10 @@ const RichSelect = <TMultiple extends boolean = false>(
 
   if (readOnly) {
     return (
-      <IressReadonly value={getValuesString()}>
+      <IressReadonly
+        value={getValuesString()}
+        variant={readOnly === 'locked' ? 'locked' : undefined}
+      >
         {getLabelsString(', ')}
       </IressReadonly>
     );

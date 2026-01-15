@@ -180,7 +180,12 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
     }, [error]);
 
     if (readOnly) {
-      return <IressReadonly value={value} />;
+      return (
+        <IressReadonly
+          value={value}
+          variant={readOnly === 'locked' ? 'locked' : undefined}
+        />
+      );
     }
 
     const handleInputChange: IressAutocompleteProps['onChange'] = (

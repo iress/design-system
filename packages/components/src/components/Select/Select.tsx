@@ -27,12 +27,12 @@ import { GlobalCSSClass } from '@/enums';
 import { splitCssProps } from '@/styled-system/jsx';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
 
-type SelectElement<TReadonly extends boolean | undefined = undefined> =
-  TReadonly extends true ? 'div' : 'select';
+type SelectElement<TReadonly extends boolean | string | undefined = undefined> =
+  TReadonly extends true | 'locked' ? 'div' : 'select';
 
 export type IressSelectProps<
   T extends FormControlValue = FormControlValue,
-  TReadonly extends boolean | undefined = undefined,
+  TReadonly extends boolean | string | undefined = undefined,
 > = Omit<
   IressStyledProps<SelectElement<TReadonly>>,
   'defaultValue' | 'value' | 'onChange' | 'width'
@@ -60,6 +60,7 @@ export type IressSelectProps<
 
   /**
    * If `true`, the user cannot modify the value.
+   * When set to 'locked', displays with lock icon in label and border to indicate permission restrictions.
    */
   readOnly?: TReadonly;
 
@@ -86,7 +87,7 @@ export type IressSelectProps<
 
 const Select = <
   T extends FormControlValue = FormControlValue,
-  TReadonly extends boolean | undefined = undefined,
+  TReadonly extends boolean | string | undefined = undefined,
 >(
   {
     children,
@@ -150,13 +151,14 @@ const Select = <
     >
       {readOnly ? (
         <SelectReadonly
-          {...(nonStyleProps as IressSelectProps<T, true>)}
+          {...(nonStyleProps as IressSelectProps<T, true | 'locked'>)}
           data-testid={propagateTestid(dataTestid, 'select')}
           id={id}
           name={restProps.name}
           ref={setElementRef}
           style={style}
           value={value}
+          variant={readOnly === 'locked' ? 'locked' : undefined}
           width={width}
         >
           {children}

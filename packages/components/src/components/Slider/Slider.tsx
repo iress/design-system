@@ -69,8 +69,9 @@ export interface IressSliderProps extends Omit<
 
   /**
    * If `true`, the user cannot modify the value.
+   * When set to 'locked', displays with lock icon in label and border to indicate permission restrictions.
    */
-  readOnly?: boolean;
+  readOnly?: boolean | 'locked';
 
   /**
    * Sets the step value of the slider.
@@ -182,6 +183,7 @@ const Slider = (
         data-testid={propagateTestid(dataTestId, 'slider')}
         name={restProps?.name}
         value={value}
+        variant={readOnly === 'locked' ? 'locked' : undefined}
       >
         {getValueLabel()}
       </IressReadonly>

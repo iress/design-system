@@ -74,7 +74,7 @@ const InputCurrency = <
       }
       type={type}
       append={<IressText color="colour.neutral.70">{currencyCode}</IressText>}
-      inline={inputProps.readOnly ? true : false}
+      inline={inputProps.readOnly === true}
       alignRight={alignRight}
       ref={ref}
       {...inputProps}
