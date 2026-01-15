@@ -49,7 +49,7 @@ export interface IressSliderProps extends Omit<
   /**
    * If `true`, the user cannot modify the value.
    */
-  readonly?: boolean;
+  readonly?: boolean | 'locked';
 
   /**
    * Sets the step value of the slider.

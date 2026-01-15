@@ -60,7 +60,7 @@ const Slider = (
   const getValueLabel = useCallback(() => {
     const valueTick = ticksWithLabels?.find((tick) => tick.value === value);
     return formatValue
-      ? formatValue(value ?? 0, valueTick, readonly)
+      ? formatValue(value ?? 0, valueTick, !!readonly)
       : (valueTick?.label ?? value);
   }, [ticksWithLabels, formatValue, value, readonly]);
 
@@ -72,7 +72,7 @@ const Slider = (
     }px))`;
   }, [max, min, value]);
 
-  if (readonly) {
+  if (readonly === true) {
     return (
       <IressReadonly
         data-testid={propagateTestid(dataTestId, 'slider')}
@@ -86,7 +86,9 @@ const Slider = (
 
   return (
     <div
-      className={classNames(className, styles.slider)}
+      className={classNames(className, styles.slider, {
+        [styles.locked]: readonly === 'locked',
+      })}
       style={
         {
           '--iress-thumb-value-offset': getThumbValueOffset(),

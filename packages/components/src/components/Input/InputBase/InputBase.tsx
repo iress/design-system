@@ -18,6 +18,7 @@ export const InputBase = forwardRef<InputRef, InputBaseProps>((props, ref) => {
     type = 'text',
     'data-testid': testid,
     className,
+    readOnly,
     ...inputProps
   } = props;
 
@@ -25,6 +26,10 @@ export const InputBase = forwardRef<InputRef, InputBaseProps>((props, ref) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Convert 'locked' string to boolean for native HTML elements
+  const nativeReadOnly =
+    readOnly === 'locked' || readOnly === true ? true : undefined;
 
   useImperativeHandle(ref, () => {
     const currentElement = isTextArea ? textareaRef.current : inputRef.current;
@@ -53,6 +58,7 @@ export const InputBase = forwardRef<InputRef, InputBaseProps>((props, ref) => {
         rows={rows}
         {...(testid && { 'data-testid': `${testid}__textarea` })}
         {...inputProps}
+        readOnly={nativeReadOnly}
         ref={textareaRef}
         className={classNames(styles.formControl, styles.textarea, className)}
       />
@@ -64,6 +70,7 @@ export const InputBase = forwardRef<InputRef, InputBaseProps>((props, ref) => {
       type={type}
       {...(testid && { 'data-testid': `${testid}__input` })}
       {...inputProps}
+      readOnly={nativeReadOnly}
       ref={inputRef}
       className={classNames(styles.formControl, className)}
     />

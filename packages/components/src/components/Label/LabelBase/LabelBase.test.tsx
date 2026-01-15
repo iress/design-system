@@ -139,5 +139,16 @@ describe('LabelBase', () => {
         expect(asterisk).toHaveAttribute('aria-hidden', 'true');
       });
     });
+
+    describe('locked', () => {
+      it('renders lock icon when readOnly is "locked"', () => {
+        const screen = renderComponent({
+          locked: true,
+        });
+
+        const label = screen.getByTestId(TEST_ID);
+        expect(label).toHaveTextContent(`(Locked) ${TEST_LABEL}`);
+      });
+    });
   });
 });

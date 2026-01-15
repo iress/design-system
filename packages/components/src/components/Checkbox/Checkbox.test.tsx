@@ -110,6 +110,73 @@ describe('IressCheckbox', () => {
         const input = screen.container.querySelector(`input[value="checkbox"]`);
         expect(input).not.toBeInTheDocument();
       });
+
+      describe('locked', () => {
+        it('renders the checkbox with locked class when readOnly="locked"', () => {
+          const screen = render(
+            <IressCheckbox
+              value="checkbox"
+              readOnly="locked"
+              data-testid="test-checkbox"
+            >
+              Label
+            </IressCheckbox>,
+          );
+
+          const container = screen.getByTestId('test-checkbox__container');
+          expect(container).toHaveClass(styles.locked);
+        });
+
+        it('renders the checkbox as interactive (not IressReadonly) when readOnly="locked"', () => {
+          const screen = render(
+            <IressCheckbox value="checkbox" readOnly="locked">
+              Label
+            </IressCheckbox>,
+          );
+
+          // Checkbox should still be rendered in locked mode (unlike readOnly={true})
+          const checkbox = screen.getByRole('checkbox', { name: 'Label' });
+          expect(checkbox).toBeInTheDocument();
+          expect(checkbox).toHaveAttribute('value', 'checkbox');
+        });
+
+        it('renders checked checkbox with locked class when readOnly="locked" and checked', () => {
+          const screen = render(
+            <IressCheckbox
+              value="checkbox"
+              readOnly="locked"
+              defaultChecked
+              data-testid="test-checkbox"
+            >
+              Label
+            </IressCheckbox>,
+          );
+
+          const container = screen.getByTestId('test-checkbox__container');
+          expect(container).toHaveClass(styles.locked);
+          const checkbox = screen.getByTestId('test-checkbox');
+          expect(checkbox).toBeChecked();
+        });
+
+        it('applies locked styling to prevent interaction visually', () => {
+          const screen = render(
+            <IressCheckbox
+              value="test-value"
+              readOnly="locked"
+              data-testid="test-checkbox"
+            >
+              Test Label
+            </IressCheckbox>,
+          );
+
+          const container = screen.getByTestId('test-checkbox__container');
+          expect(container).toHaveClass(styles.locked);
+
+          // Checkbox element should still exist
+          const checkbox = screen.getByTestId('test-checkbox');
+          expect(checkbox).toBeInTheDocument();
+        });
+      });
     });
   });
 

@@ -193,6 +193,59 @@ describe('IressSlider', () => {
         const hiddenInput = screen.getByTestId(`${TEST_ID}__slider__input`);
         expect(hiddenInput).toHaveValue('0');
       });
+
+      describe('locked', () => {
+        it('renders the slider with locked class when readonly="locked"', () => {
+          const screen = renderComponent({
+            readonly: 'locked',
+          });
+
+          const wrapper = screen.getByTestId(TEST_ID);
+          expect(wrapper).toHaveClass(styles.locked);
+        });
+
+        it('renders the slider as interactive (not IressReadonly) when readonly="locked"', () => {
+          const screen = renderComponent({
+            readonly: 'locked',
+            value: 5,
+          });
+
+          // Slider should still be rendered in locked mode (unlike readonly={true})
+          const slider = screen.getByRole('slider');
+          expect(slider).toBeInTheDocument();
+          expect(slider).toHaveValue('5');
+        });
+
+        it('renders slider with value and locked class when readonly="locked"', () => {
+          const screen = renderComponent({
+            readonly: 'locked',
+            defaultValue: 7,
+          });
+
+          const wrapper = screen.getByTestId(TEST_ID);
+          expect(wrapper).toHaveClass(styles.locked);
+
+          const slider = screen.getByRole('slider');
+          expect(slider).toHaveValue('7');
+        });
+
+        it('applies locked styling to prevent interaction visually', () => {
+          const screen = renderComponent({
+            readonly: 'locked',
+            min: 0,
+            max: 100,
+            value: 50,
+          });
+
+          const wrapper = screen.getByTestId(TEST_ID);
+          expect(wrapper).toHaveClass(styles.locked);
+
+          // Slider element should still exist
+          const slider = screen.getByRole('slider');
+          expect(slider).toBeInTheDocument();
+          expect(slider).toHaveValue('50');
+        });
+      });
     });
 
     describe('step', () => {

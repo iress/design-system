@@ -88,8 +88,9 @@ export interface IressFormFieldProps<
 
   /**
    * Text to be displayed instead of input field.
+   * When 'locked', displays with a lock icon to indicate permission-based restriction.
    */
-  readOnly?: boolean;
+  readOnly?: boolean | 'locked';
 }
 
 export interface IressFormFieldsetProps<

@@ -1,7 +1,8 @@
 import { forwardRef } from 'react';
 import { type IressReadonlyProps } from './Readonly.types';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
-import { type FormControlValue, GlobalCSSClass, IressSpinner } from '@/main';
+import { type FormControlValue, GlobalCSSClass } from '@/main';
+import { IressSpinner } from '@/components/Spinner';
 import classNames from 'classnames';
 
 import styles from '../Input/Input.module.scss';
@@ -18,6 +19,7 @@ const Readonly = <T extends FormControlValue = string | number>(
     defaultValue,
     loading,
     prepend,
+    variant,
     style,
     watermark,
     width,
@@ -33,30 +35,28 @@ const Readonly = <T extends FormControlValue = string | number>(
     defaultValue,
   });
 
+  const validDefaultValue = getFormControlValueAsStringIfDefined(defaultValue);
+  const validValue = getFormControlValueAsStringIfDefined(value);
+
   const classes = classNames(
     styles.input,
-    styles.readonly,
     className,
     GlobalCSSClass.FormElement,
     {
       [`${GlobalCSSClass.Width}--${width}`]: width?.includes('perc'),
       [styles.watermark]: watermark,
+      [styles.readonly]: variant !== 'locked',
+      [styles.locked]: variant === 'locked',
     },
   );
 
-  const inputClasses = classNames(
-    className,
-    baseStyles.formControl,
-    baseStyles.readonly,
-    styles.readonlyControl,
-    {
-      [`${GlobalCSSClass.Width}--${width}`]: width && !width?.includes('perc'),
-      [baseStyles.readonlyAlignRight]: alignRight,
-    },
-  );
-
-  const validDefaultValue = getFormControlValueAsStringIfDefined(defaultValue);
-  const validValue = getFormControlValueAsStringIfDefined(value);
+  const inputClasses = classNames(className, baseStyles.formControl, {
+    [`${GlobalCSSClass.Width}--${width}`]: width && !width?.includes('perc'),
+    [baseStyles.readonlyAlignRight]: alignRight,
+    [styles.readonlyControl]: variant !== 'locked',
+    [baseStyles.readonly]: variant !== 'locked',
+    [baseStyles.locked]: variant === 'locked',
+  });
 
   return (
     <div className={classes} data-testid={dataTestId} style={style}>
@@ -89,6 +89,7 @@ const Readonly = <T extends FormControlValue = string | number>(
         ref={ref}
         data-testid={propagateTestid(dataTestId, 'input')}
         value={validValue}
+        readOnly
       />
     </div>
   );

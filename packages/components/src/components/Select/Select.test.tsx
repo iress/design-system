@@ -174,6 +174,52 @@ describe('IressSelect', () => {
         expect(input).toBeInTheDocument();
         expect(realInput).toBeInTheDocument();
       });
+
+      describe('locked', () => {
+        it('renders IressReadonly component when readonly="locked"', () => {
+          const screen = renderComponent({
+            readonly: 'locked',
+            defaultValue: 2,
+          });
+
+          // Should render IressReadonly, not the interactive select
+          expect(screen.queryByRole('combobox')).not.toBeInTheDocument();
+          expect(screen.getByText('Two')).toBeInTheDocument();
+        });
+
+        it('passes locked variant to IressReadonly', () => {
+          const screen = renderComponent({
+            readonly: 'locked',
+            defaultValue: 2,
+            'data-testid': 'locked-select',
+          });
+
+          const wrapper = screen.getByTestId('locked-select');
+          // IressReadonly should be rendered as a div with the value
+          expect(wrapper.querySelector('div')).toBeInTheDocument();
+          expect(screen.getByText('Two')).toBeInTheDocument();
+        });
+
+        it('renders hidden input with correct value when readonly="locked"', () => {
+          const screen = renderComponent({
+            readonly: 'locked',
+            defaultValue: 2,
+          });
+
+          const realInput = screen.getByDisplayValue('2');
+          expect(realInput).toBeInTheDocument();
+          expect(realInput).toHaveAttribute('type', 'hidden');
+        });
+
+        it('does not render options when readonly="locked"', () => {
+          const screen = renderComponent({
+            readonly: 'locked',
+            defaultValue: 2,
+          });
+
+          expect(screen.queryAllByRole('option')).toHaveLength(0);
+        });
+      });
     });
 
     describe('value', () => {

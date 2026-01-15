@@ -3,6 +3,7 @@ import { IressSelect, IressSelectOption } from '.';
 import { IressStack } from '../Stack';
 import { FORM_ELEMENT_WIDTHS } from '@/constants';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { IressField } from '../Field';
 
 type Story = StoryObj<typeof IressSelect>;
 
@@ -139,4 +140,17 @@ export const Readonly: Story = {
     value: '2',
     readonly: true,
   },
+};
+
+export const Locked: Story = {
+  args: {
+    ...Options.args,
+    value: '2',
+    readonly: 'locked',
+  },
+  render: (args) => (
+    <IressField label="Locked Select" readOnly="locked">
+      <IressSelect {...args} />
+    </IressField>
+  ),
 };

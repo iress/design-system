@@ -46,6 +46,13 @@ export const HiddenLabel: Story = {
   },
 };
 
+export const Locked: Story = {
+  args: {
+    children: 'This is a label for a locked form control',
+    locked: true,
+  },
+};
+
 export const RichContent: Story = {
   args: {
     hiddenLabel: false,

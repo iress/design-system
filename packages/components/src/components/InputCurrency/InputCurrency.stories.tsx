@@ -1,5 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 import { IressInputCurrency } from './InputCurrency';
+import { IressField } from '../Field';
 
 type Story = StoryObj<typeof IressInputCurrency>;
 
@@ -46,6 +47,18 @@ export const ReadOnly: Story = {
     alignRight: true,
     withSymbol: true,
   },
+};
+
+export const Locked: Story = {
+  args: {
+    ...Default.args,
+    readOnly: 'locked',
+  },
+  render: (args) => (
+    <IressField label="Locked Input" readOnly="locked">
+      <IressInputCurrency {...args} />
+    </IressField>
+  ),
 };
 
 export const AlignRight: Story = {

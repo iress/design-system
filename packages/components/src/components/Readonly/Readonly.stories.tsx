@@ -5,6 +5,7 @@ import { IressInline } from '../Inline';
 import { IressIcon } from '../Icon';
 import { IressText } from '../Text';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { IressField } from '../Field';
 
 type Story = StoryObj<IressReadonlyProps>;
 
@@ -49,4 +50,18 @@ export const InlineStyle: Story = {
     append: <IressText mode="muted">Append</IressText>,
     inline: true,
   },
+};
+
+export const Locked: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    children: 'Australia',
+    variant: 'locked',
+  },
+  render: (args) => (
+    <IressField label="Locked value" readOnly="locked">
+      <IressReadonly {...args} />
+    </IressField>
+  ),
 };

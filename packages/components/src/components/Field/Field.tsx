@@ -1,12 +1,12 @@
 import classNames from 'classnames';
 import styles from './Field.module.scss';
-import { type IressFieldProps } from './Field.types';
+import type { IressFieldProps } from './Field.types';
 import { isValidElement, useMemo } from 'react';
 import { IressLabel } from '../Label';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { toArray } from '@helpers/formatting/toArray';
 import { FieldAppendToLabel } from './components/FieldAppendToLabel';
-import { type IressHTMLAttributes } from '@/main';
+import type { IressHTMLAttributes } from '@/interfaces';
 
 export const IressField = ({
   children,
@@ -19,8 +19,8 @@ export const IressField = ({
   htmlFor: htmlForProp,
   label,
   optional,
-  required,
   readOnly,
+  required,
   ...restProps
 }: IressFieldProps) => {
   const hasError = useMemo(
@@ -62,6 +62,7 @@ export const IressField = ({
         className={styles.label}
         data-testid={propagateTestid(dataTestId, 'label')}
         hiddenLabel={hiddenLabel}
+        locked={readOnly === 'locked'}
         htmlFor={htmlFor}
         optional={optional}
         required={readOnly ? false : !!required}

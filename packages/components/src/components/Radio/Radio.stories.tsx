@@ -3,6 +3,7 @@ import { IressRadio } from '.';
 import { IressPanel } from '../Panel';
 import { IressStack } from '../Stack';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { IressField } from '../Field';
 
 type Story = StoryObj<typeof IressRadio>;
 
@@ -53,4 +54,24 @@ export const Touch: Story = {
     ...Default.args,
     touch: true,
   },
+};
+
+export const Locked: Story = {
+  args: {
+    ...Default.args,
+    readOnly: 'locked',
+  },
+  argTypes: {
+    ...disableArgTypes(['readOnly', 'value', 'prepend', 'append']),
+  },
+  render: (args) => (
+    <IressStack gutter="lg">
+      <IressField label="Locked Radio (checked)" readOnly="locked">
+        <IressRadio {...args} checked />
+      </IressField>
+      <IressField label="Locked Radio (unchecked)" readOnly="locked">
+        <IressRadio {...args} checked={false} />
+      </IressField>
+    </IressStack>
+  ),
 };

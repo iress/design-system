@@ -271,6 +271,66 @@ describe('IressRadioGroup', () => {
         const radioGroup = screen.getByRole('radiogroup');
         expect(radioGroup.innerHTML).toBe('');
       });
+
+      describe('locked', () => {
+        it('renders all radios with locked class when readonly="locked"', () => {
+          const screen = renderRadioGroup({
+            readonly: 'locked',
+          });
+
+          // All radio elements should have the locked class
+          screen.getAllByTestId(CHILDREN_TEST_ID).forEach((radio) => {
+            expect(radio).toHaveClass(radioStyles.locked);
+          });
+        });
+
+        it('renders radios as interactive (not IressReadonly) when readonly="locked"', () => {
+          const screen = renderRadioGroup({
+            readonly: 'locked',
+            defaultValue: 'home',
+          });
+
+          // Radios should still be rendered in locked mode (unlike readonly={true})
+          const radios = screen.getAllByRole('radio');
+          expect(radios.length).toBeGreaterThan(0);
+
+          // The checked radio should still be checked
+          const checkedRadio = screen.getByRole('radio', {
+            name: 'Buying my first home',
+          });
+          expect(checkedRadio).toBeChecked();
+        });
+
+        it('propagates locked state to all child radios through context', () => {
+          const screen = renderRadioGroup({
+            readonly: 'locked',
+            defaultValue: 'holiday',
+          });
+
+          // All radios should have the locked class from the group's readonly="locked"
+          const allRadios = screen.getAllByTestId(CHILDREN_TEST_ID);
+          expect(allRadios.length).toBeGreaterThan(0);
+
+          allRadios.forEach((radio) => {
+            expect(radio).toHaveClass(radioStyles.locked);
+          });
+        });
+
+        it('renders unchecked radios with locked class when readonly="locked"', () => {
+          const screen = renderRadioGroup({
+            readonly: 'locked',
+            // No value selected
+          });
+
+          // All radios should still render with locked class
+          const radios = screen.getAllByRole('radio');
+          expect(radios.length).toBeGreaterThan(0);
+
+          screen.getAllByTestId(CHILDREN_TEST_ID).forEach((radio) => {
+            expect(radio).toHaveClass(radioStyles.locked);
+          });
+        });
+      });
     });
   });
 

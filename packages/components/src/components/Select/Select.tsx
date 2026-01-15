@@ -84,6 +84,7 @@ const Select = (
           }}
           style={style}
           value={value}
+          variant={typeof readonly === 'string' ? readonly : undefined}
           width={width}
         >
           {children}

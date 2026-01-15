@@ -27,6 +27,7 @@ import {
   IressText,
   IressInline,
   IressMenuText,
+  IressField,
 } from '@/main';
 import { SelectOptionsFooter } from './mocks/SelectOptionsFooter';
 import SelectOptionsFooterSource from './mocks/SelectOptionsFooter.tsx?raw';
@@ -185,6 +186,19 @@ export const Readonly: Story = {
     readonly: true,
     value: MOCK_LABEL_VALUE_META,
   },
+};
+
+export const Locked: Story = {
+  args: {
+    ...MultiSelect.args,
+    readonly: 'locked',
+    value: MOCK_LABEL_VALUE_META,
+  },
+  render: (args) => (
+    <IressField label="Locked Rich Select" readOnly="locked">
+      <IressRichSelect {...args} />
+    </IressField>
+  ),
 };
 
 export const LotsOfOptions: Story = {

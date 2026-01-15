@@ -4,7 +4,7 @@ import styles from '../Input/Input.module.scss';
 import baseStyles from '../Input/InputBase/InputBase.module.scss';
 import { type IressReadonlyProps } from './Readonly.types';
 import { IressReadonly } from './Readonly';
-import { GlobalCSSClass } from '@/main';
+import { GlobalCSSClass, IressIcon } from '@/main';
 
 const renderReadonly = (props: IressReadonlyProps = {}) => {
   return render(<IressReadonly {...props} />);
@@ -82,6 +82,38 @@ describe('ReadonlyInput', () => {
       });
     });
 
+    describe('variant', () => {
+      it('does not render lock icon when variant is not provided', () => {
+        renderReadonly({
+          value: 'Test value',
+          'data-testid': 'test-component',
+        });
+
+        // Lock icon should not be present in Readonly component
+        // (it would be in the Field component's label if used with IressField)
+        expect(
+          screen.queryByTestId('test-component__lock-icon'),
+        ).not.toBeInTheDocument();
+      });
+
+      it('does not render lock icon when variant is "locked"', () => {
+        renderReadonly({
+          variant: 'locked',
+          value: 'Test value',
+          'data-testid': 'test-component',
+        });
+
+        // Lock icon should not be present in Readonly component itself
+        // (it would be in the Field component's label if used with IressField)
+        expect(
+          screen.queryByTestId('test-component__lock-icon'),
+        ).not.toBeInTheDocument();
+
+        // Value should still be rendered
+        expect(screen.getByText('Test value')).toBeInTheDocument();
+      });
+    });
+
     describe('width', () => {
       it('adds the width class to the input when its not a percentage, so its not affected by prepend/append', () => {
         renderReadonly({
@@ -109,6 +141,27 @@ describe('ReadonlyInput', () => {
   describe('accessibility', () => {
     it('should not have basic accessibility issues', async () => {
       const { container } = renderReadonly();
+
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
+    it('should not have accessibility issues with locked state', async () => {
+      const { container } = renderReadonly({
+        variant: 'locked',
+        value: 'Locked value',
+      });
+
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
+    it('should not have accessibility issues with locked state and prepend', async () => {
+      const { container } = renderReadonly({
+        variant: 'locked',
+        value: 'Locked value',
+        prepend: <IressIcon name="envelope" />,
+      });
 
       const results = await axe(container);
       expect(results).toHaveNoViolations();

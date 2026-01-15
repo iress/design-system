@@ -102,6 +102,57 @@ describe('IressInput', () => {
       expect(screen.getByText('Hello')).toBeInTheDocument();
       expect(input).toBeInTheDocument();
     });
+
+    it('renders with readOnly={true} without lock icon', () => {
+      const screen = render(
+        <IressInput
+          defaultValue="Test value"
+          readOnly={true}
+          data-testid="test-input"
+        />,
+      );
+
+      expect(screen.getByText('Test value')).toBeInTheDocument();
+      // Lock icon is not in the Readonly component itself
+      expect(
+        screen.queryByTestId('test-input__lock-icon'),
+      ).not.toBeInTheDocument();
+    });
+
+    it('renders with readOnly="locked" without lock icon in component', () => {
+      const screen = render(
+        <IressInput
+          defaultValue="Test value"
+          readOnly="locked"
+          data-testid="test-input"
+        />,
+      );
+
+      expect(screen.getByText('Test value')).toBeInTheDocument();
+      // Lock icon is not rendered in the Readonly component itself
+      // It should be rendered in the Field component's label when wrapped with IressField
+      expect(
+        screen.queryByTestId('test-input__lock-icon'),
+      ).not.toBeInTheDocument();
+    });
+
+    it('renders with readOnly="locked" and preserves prepend content', () => {
+      const screen = render(
+        <IressInput
+          defaultValue="Test value"
+          readOnly="locked"
+          prepend={<div data-testid="custom-prepend">Custom</div>}
+          data-testid="test-input"
+        />,
+      );
+
+      expect(screen.getByText('Test value')).toBeInTheDocument();
+      // Lock icon is not in Readonly component
+      expect(
+        screen.queryByTestId('test-input__lock-icon'),
+      ).not.toBeInTheDocument();
+      expect(screen.getByTestId('custom-prepend')).toBeInTheDocument();
+    });
   });
 
   describe('formatter', () => {

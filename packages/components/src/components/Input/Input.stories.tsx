@@ -231,6 +231,23 @@ export const Readonly: Story = {
   },
 };
 
+export const Locked: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    readOnly: 'locked',
+    value: 'Value',
+  },
+  argTypes: {
+    ...disableArgTypes(['readOnly', 'value', 'prepend', 'append']),
+  },
+  render: (args) => (
+    <IressField label="Locked Input" readOnly="locked">
+      <IressInput {...args} />
+    </IressField>
+  ),
+};
+
 export const Formatter: Story = {
   ...Default,
   args: {

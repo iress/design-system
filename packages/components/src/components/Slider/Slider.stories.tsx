@@ -4,6 +4,7 @@ import { IressStack } from '../Stack';
 import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
 import { IressPanel } from '../Panel';
 import { IressText } from '../Text';
+import { IressField } from '../Field';
 
 type Story = StoryObj<typeof IressSlider>;
 
@@ -151,4 +152,16 @@ export const Readonly: Story = {
       { value: 200, label: 'All' },
     ],
   },
+};
+
+export const Locked: Story = {
+  args: {
+    ...Readonly.args,
+    readonly: 'locked',
+  },
+  render: (args) => (
+    <IressField label="Locked Slider" readOnly="locked">
+      <IressSlider {...args} />
+    </IressField>
+  ),
 };

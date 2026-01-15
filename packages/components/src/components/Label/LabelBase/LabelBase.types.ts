@@ -26,6 +26,11 @@ export type LabelBaseProps<T = ElementType, U = LabelHTMLAttributes<T>> = U & {
   hiddenLabel?: boolean;
 
   /**
+   * When set to true, displays a lock icon before the label text to indicate its related content is restricted.
+   */
+  locked?: boolean;
+
+  /**
    * When set to true, the text '(optional)' is displayed next to the label text.
    * Can also be a string to display custom optional text.
    * Will be ignored if `required` is `true`.

@@ -41,7 +41,7 @@ export interface IressCheckboxGroupProps extends Omit<
   /**
    * Renders the group in a read-only state.
    */
-  readonly?: boolean;
+  readonly?: boolean | 'locked';
 
   /**
    * Value of checkbox group when in controlled mode.

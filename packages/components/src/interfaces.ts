@@ -30,7 +30,13 @@ export type IressHTMLAttributes<T = HTMLDivElement> = WithDataAttributes<
 >;
 
 export type IressInputHTMLAttributes<T = HTMLInputElement> = WithDataAttributes<
-  React.InputHTMLAttributes<T>
+  Omit<React.InputHTMLAttributes<T>, 'readOnly'> & {
+    /**
+     * When true, the input is read-only and cannot be edited.
+     * When 'locked', the input is read-only due to permissions (displays lock icon).
+     */
+    readOnly?: boolean | 'locked';
+  }
 >;
 
 export type IressAnchorHTMLAttributes<T = HTMLAnchorElement> =

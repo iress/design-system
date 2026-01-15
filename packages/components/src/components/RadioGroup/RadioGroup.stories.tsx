@@ -152,3 +152,16 @@ export const Touch: Story = {
     touch: true,
   },
 };
+
+export const Locked: Story = {
+  ...RadioSelection,
+  args: {
+    ...RadioSelection.args,
+    readonly: 'locked',
+  },
+  render: (args) => (
+    <IressField label="Locked Radio Group" readOnly="locked">
+      <IressRadioGroup {...args} />
+    </IressField>
+  ),
+};

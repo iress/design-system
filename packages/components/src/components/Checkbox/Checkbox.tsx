@@ -21,6 +21,7 @@ import { useNoDefaultValueInForms } from '../Form/hooks/useNoDefaultValueInForms
 import { CheckboxGroupContext } from '../CheckboxGroup/CheckboxGroupContext';
 import { toArray } from '../../helpers/formatting/toArray';
 import { type FormControlValue } from '@/types';
+import { propagateTestid } from '@/helpers/utility/propagateTestid';
 
 const Checkbox = (
   {
@@ -114,7 +115,7 @@ const Checkbox = (
     },
   }));
 
-  if (isReadonly) {
+  if (isReadonly === true) {
     return checked ? (
       <IressReadonly
         {...restProps}
@@ -136,7 +137,9 @@ const Checkbox = (
         [styles.hiddenLabel]: hiddenLabel,
         [styles.indeterminate]: indeterminate,
         [styles.touch]: isTouch,
+        [styles.locked]: isReadonly === 'locked',
       })}
+      data-testid={propagateTestid(restProps['data-testid'], 'container')}
     >
       <input
         {...restProps}

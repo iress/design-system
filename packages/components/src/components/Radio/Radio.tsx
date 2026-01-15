@@ -45,7 +45,7 @@ const Radio = (
   const isChecked = hasRadioGroup ? radioGroup.value === value : checked;
   const readOnly = hasRadioGroup ? radioGroup.readonly : readOnlyProp;
 
-  if (readOnly) {
+  if (readOnly === true) {
     return isChecked ? (
       <IressReadonly
         {...restProps}
@@ -69,6 +69,7 @@ const Radio = (
         [styles.radio]: true,
         [styles.hiddenControl]: isHidden,
         [styles.touch]: isTouch,
+        [styles.locked]: readOnly === 'locked',
       })}
     >
       <input

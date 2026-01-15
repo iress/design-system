@@ -95,8 +95,9 @@ export interface IressRichSelectProps
 
   /**
    * Renders the select as read-only.
+   * When 'locked', displays a lock icon to indicate permission-based restriction.
    */
-  readonly?: boolean;
+  readonly?: boolean | 'locked';
 
   /**
    * Completely customise the rendering of the hidden input.

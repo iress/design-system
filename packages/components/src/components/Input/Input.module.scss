@@ -71,11 +71,13 @@
 }
 
 .prepend {
-  border-inline-end: var(--iress-addon-border-width) solid var(--iress-border-color);
+  border-inline-end: var(--iress-addon-border-width) solid
+    var(--iress-border-color);
 }
 
 .append {
-  border-inline-start: var(--iress-addon-border-width) solid var(--iress-border-color);
+  border-inline-start: var(--iress-addon-border-width) solid
+    var(--iress-border-color);
 }
 
 .alignRight {
@@ -103,4 +105,8 @@
   .formControl:not(:last-child) {
     border-inline-end: none;
   }
+}
+
+.locked {
+  cursor: not-allowed;
 }

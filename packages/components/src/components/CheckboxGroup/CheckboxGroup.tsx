@@ -109,7 +109,7 @@ export const IressCheckboxGroup = forwardRef<
             styles.checkboxGroup,
             styles[layout],
             {
-              [styles.readonly]: readonly,
+              [styles.readonly]: readonly === true,
             },
           )}
           onFocus={handleFocus}

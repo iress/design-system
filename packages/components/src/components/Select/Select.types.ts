@@ -38,7 +38,7 @@ export interface IressSelectProps<T = HTMLSelectElement> extends Omit<
   /**
    * If `true`, the user cannot modify the value.
    */
-  readonly?: boolean;
+  readonly?: boolean | 'locked';
 
   /**
    * Mark the select as a required field.

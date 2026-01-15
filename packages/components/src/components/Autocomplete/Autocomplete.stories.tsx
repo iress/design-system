@@ -15,6 +15,7 @@ import {
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
 import { IressStack } from '../Stack';
+import { IressField } from '../Field';
 
 type Story = StoryObj<typeof IressAutocomplete>;
 
@@ -190,4 +191,17 @@ export const Readonly: Story = {
     ...Uncontrolled.args,
     readOnly: true,
   },
+};
+
+export const Locked: Story = {
+  ...Uncontrolled,
+  args: {
+    ...Uncontrolled.args,
+    readOnly: 'locked',
+  },
+  render: (args) => (
+    <IressField label="Locked Autocomplete" readOnly="locked">
+      <IressAutocomplete {...args} />
+    </IressField>
+  ),
 };

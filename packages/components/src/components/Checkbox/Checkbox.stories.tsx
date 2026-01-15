@@ -9,6 +9,7 @@ import {
   disableArgTypes,
   withJsxTransformer,
 } from '@iress-oss/ids-storybook-config';
+import { IressField } from '../Field';
 
 type Story = StoryObj<typeof IressCheckbox>;
 
@@ -122,6 +123,26 @@ export const Readonly: Story = {
     <IressStack>
       <IressCheckbox {...args} defaultChecked />
       <IressCheckbox {...args} />
+    </IressStack>
+  ),
+};
+
+export const Locked: Story = {
+  args: {
+    children: 'I agree to the terms and conditions',
+    readOnly: 'locked',
+  },
+  argTypes: {
+    ...disableArgTypes(['checked', 'readOnly']),
+  },
+  render: (args) => (
+    <IressStack gutter="lg">
+      <IressField label="Locked Checkbox (checked)" readOnly="locked">
+        <IressCheckbox {...args} checked />
+      </IressField>
+      <IressField label="Locked Checkbox (unchecked)" readOnly="locked">
+        <IressCheckbox {...args} checked={false} />
+      </IressField>
     </IressStack>
   ),
 };

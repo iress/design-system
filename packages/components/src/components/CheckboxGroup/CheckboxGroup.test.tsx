@@ -192,6 +192,75 @@ describe('IressCheckboxGroup', () => {
         const checkboxGroup = screen.getByRole('group');
         expect(checkboxGroup.innerHTML).toBe('');
       });
+
+      describe('locked', () => {
+        it('renders all checkboxes with locked class when readonly="locked"', () => {
+          const screen = renderComponent({
+            readonly: 'locked',
+          });
+
+          // The test ID is on the input, we need to check the parent div for locked class
+          screen.getAllByTestId(CHILDREN_TEST_ID).forEach((checkboxInput) => {
+            const checkboxContainer = checkboxInput.closest(
+              '.' + checkboxStyles.checkbox,
+            );
+            expect(checkboxContainer).toHaveClass(checkboxStyles.locked);
+          });
+        });
+
+        it('renders checkboxes as interactive (not IressReadonly) when readonly="locked"', () => {
+          const screen = renderComponent({
+            readonly: 'locked',
+            defaultValue: ['home'],
+          });
+
+          // Checkboxes should still be rendered in locked mode (unlike readonly={true})
+          const checkboxes = screen.getAllByRole('checkbox');
+          expect(checkboxes.length).toBeGreaterThan(0);
+
+          // The checked checkbox should still be checked
+          const checkedCheckbox = screen.getByRole('checkbox', {
+            name: 'Buying my first home',
+          });
+          expect(checkedCheckbox).toBeChecked();
+        });
+
+        it('propagates locked state to all child checkboxes through context', () => {
+          const screen = renderComponent({
+            readonly: 'locked',
+            defaultValue: ['holiday'],
+          });
+
+          // All checkboxes should have the locked class from the group's readonly="locked"
+          const allCheckboxInputs = screen.getAllByTestId(CHILDREN_TEST_ID);
+          expect(allCheckboxInputs.length).toBeGreaterThan(0);
+
+          allCheckboxInputs.forEach((checkboxInput) => {
+            const checkboxContainer = checkboxInput.closest(
+              '.' + checkboxStyles.checkbox,
+            );
+            expect(checkboxContainer).toHaveClass(checkboxStyles.locked);
+          });
+        });
+
+        it('renders unchecked checkboxes with locked class when readonly="locked"', () => {
+          const screen = renderComponent({
+            readonly: 'locked',
+            // No value selected
+          });
+
+          // All checkboxes should still render with locked class
+          const checkboxes = screen.getAllByRole('checkbox');
+          expect(checkboxes.length).toBeGreaterThan(0);
+
+          screen.getAllByTestId(CHILDREN_TEST_ID).forEach((checkboxInput) => {
+            const checkboxContainer = checkboxInput.closest(
+              '.' + checkboxStyles.checkbox,
+            );
+            expect(checkboxContainer).toHaveClass(checkboxStyles.locked);
+          });
+        });
+      });
     });
 
     describe('value', () => {

@@ -150,7 +150,10 @@ export const IressRichSelect = forwardRef(
 
     if (readonly) {
       return (
-        <IressReadonly value={getValuesString()}>
+        <IressReadonly
+          value={getValuesString()}
+          variant={typeof readonly === 'string' ? readonly : undefined}
+        >
           {getLabelsString(', ')}
         </IressReadonly>
       );

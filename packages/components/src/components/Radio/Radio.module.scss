@@ -30,7 +30,8 @@
   display: flex;
   position: relative;
   padding: 0;
-  transition: all var(--iress-transition-hover-duration) var(--iress-transition-hover-type);
+  transition: all var(--iress-transition-hover-duration)
+    var(--iress-transition-hover-type);
 }
 
 .input {
@@ -108,4 +109,8 @@
 
 .touch .input:checked + .label {
   border-color: var(--iress-mark-color);
+}
+
+.locked .label {
+  cursor: not-allowed;
 }

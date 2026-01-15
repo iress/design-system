@@ -49,7 +49,7 @@ export interface IressRadioGroupProps extends Omit<
   /**
    * Renders a readonly radio group.
    */
-  readonly?: boolean;
+  readonly?: boolean | 'locked';
 
   /**
    * Value of radio group when in controlled mode.

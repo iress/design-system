@@ -6,18 +6,30 @@ import { forwardRef } from 'react';
 
 export const ComboboxHiddenInput = forwardRef(
   (
-    { dataTestId, hiddenInputProps, ...restProps }: ComboboxHiddenInputProps,
+    {
+      dataTestId,
+      hiddenInputProps,
+      readOnly,
+      ...restProps
+    }: ComboboxHiddenInputProps,
     ref: React.ForwardedRef<HTMLInputElement>,
-  ) => (
-    <input
-      {...hiddenInputProps}
-      {...restProps}
-      className={classNames(hiddenInputProps?.className, styles.hiddenInput)}
-      data-testid={propagateTestid(dataTestId, 'hidden-input')}
-      ref={ref}
-      type="hidden"
-    />
-  ),
+  ) => {
+    // Convert 'locked' string to boolean for native HTML elements
+    const nativeReadOnly =
+      readOnly === 'locked' || readOnly === true ? true : undefined;
+
+    return (
+      <input
+        {...hiddenInputProps}
+        {...restProps}
+        className={classNames(hiddenInputProps?.className, styles.hiddenInput)}
+        data-testid={propagateTestid(dataTestId, 'hidden-input')}
+        ref={ref}
+        type="hidden"
+        readOnly={nativeReadOnly}
+      />
+    );
+  },
 );
 
 ComboboxHiddenInput.displayName = 'ComboboxHiddenInput';

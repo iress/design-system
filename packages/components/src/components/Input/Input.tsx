@@ -94,7 +94,9 @@ const Input = <T extends FormControlValue = string | number>(
         value={value}
         alignRight={alignRight}
         append={append}
+        prepend={prepend}
         className={className}
+        variant={readOnly === 'locked' ? 'locked' : undefined}
       >
         {displayValue}
       </IressReadonly>

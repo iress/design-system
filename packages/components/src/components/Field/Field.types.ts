@@ -26,8 +26,9 @@ export interface IressFieldProps<
 
   /**
    * Renders the group in a read-only state (no asterisk symbol).
+   * When 'locked', displays a lock icon to indicate permission-based restriction.
    */
-  readOnly?: boolean;
+  readOnly?: boolean | 'locked';
 }
 
 export type FieldLegendProps = Omit<

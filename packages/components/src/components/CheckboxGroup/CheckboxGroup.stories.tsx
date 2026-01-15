@@ -180,6 +180,19 @@ export const Readonly: Story = {
   },
 };
 
+export const Locked: Story = {
+  ...DefaultChecked,
+  args: {
+    ...DefaultChecked.args,
+    readonly: 'locked',
+  },
+  render: (args) => (
+    <IressField label="Locked Checkbox Group" readOnly="locked">
+      <IressCheckboxGroup {...args} />
+    </IressField>
+  ),
+};
+
 export const Touch: Story = {
   ...DefaultChecked,
   args: {

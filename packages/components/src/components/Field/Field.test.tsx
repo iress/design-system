@@ -128,6 +128,19 @@ describe('IressField', () => {
         expect(screen.queryByText(/Required/)).not.toBeInTheDocument();
       });
     });
+
+    describe('readOnly="locked"', () => {
+      it('renders lock icon when readOnly is "locked"', () => {
+        const screen = renderComponent({
+          readOnly: 'locked',
+        });
+
+        const lockedInput = screen.getByRole('textbox', {
+          name: `(Locked) ${TEST_LABEL}`,
+        });
+        expect(lockedInput).toBeInTheDocument();
+      });
+    });
   });
 
   describe('accessibility', () => {

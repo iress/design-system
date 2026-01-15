@@ -146,6 +146,56 @@ describe('IressRadio', () => {
         const input = screen.container.querySelector(`input[value="radio"]`);
         expect(input).not.toBeInTheDocument();
       });
+
+      describe('locked', () => {
+        it('renders the radio with locked class when readOnly="locked"', () => {
+          const screen = renderRadio({
+            readOnly: 'locked',
+          });
+
+          const component = screen.getByTestId(TEST_ID);
+          expect(component).toHaveClass(styles.locked);
+        });
+
+        it('renders the radio as interactive (not IressReadonly) when readOnly="locked"', () => {
+          const screen = renderRadio({
+            value: 'radio-value',
+            readOnly: 'locked',
+          });
+
+          // Radio should still be rendered in locked mode (unlike readOnly={true})
+          const radio = screen.getByRole('radio', { name: TEST_ID });
+          expect(radio).toBeInTheDocument();
+          expect(radio).toHaveAttribute('value', 'radio-value');
+        });
+
+        it('renders checked radio with locked class when readOnly="locked" and checked', () => {
+          const screen = renderRadio({
+            readOnly: 'locked',
+            checked: true,
+          });
+
+          const component = screen.getByTestId(TEST_ID);
+          expect(component).toHaveClass(styles.locked);
+
+          const radio = screen.getByRole('radio', { name: TEST_ID });
+          expect(radio).toBeChecked();
+        });
+
+        it('applies locked styling to prevent interaction visually', () => {
+          const screen = renderRadio({
+            readOnly: 'locked',
+            value: 'test-value',
+          });
+
+          const component = screen.getByTestId(TEST_ID);
+          expect(component).toHaveClass(styles.locked);
+
+          // Radio element should still exist
+          const radio = screen.getByRole('radio', { name: TEST_ID });
+          expect(radio).toBeInTheDocument();
+        });
+      });
     });
 
     describe('required', () => {

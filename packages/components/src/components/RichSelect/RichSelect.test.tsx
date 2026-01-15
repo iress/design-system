@@ -1,6 +1,7 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import styles from './RichSelect.module.scss';
+import inputBaseStyles from '../Input/InputBase/InputBase.module.scss';
 import {
   MOCK_LABEL_VALUES,
   MOCK_LARGE_LABEL_VALUES_DATASET,
@@ -722,6 +723,72 @@ describe('IressRichSelect', () => {
           screen.getByText(MOCK_LABEL_VALUES[0].label),
         ).toBeInTheDocument();
         expect(input).toBeInTheDocument();
+      });
+
+      describe('locked', () => {
+        it('renders IressReadonly component when readonly="locked"', () => {
+          const screen = render(
+            <IressRichSelect
+              defaultValue={MOCK_LABEL_VALUES[0]}
+              options={MOCK_LABEL_VALUES}
+              readonly="locked"
+            />,
+          );
+
+          // Should render IressReadonly, not the interactive combobox
+          expect(screen.queryByRole('combobox')).not.toBeInTheDocument();
+          expect(
+            screen.getByText(MOCK_LABEL_VALUES[0].label),
+          ).toBeInTheDocument();
+        });
+
+        it('passes locked variant to IressReadonly', () => {
+          const { container } = render(
+            <IressRichSelect
+              defaultValue={MOCK_LABEL_VALUES[0]}
+              options={MOCK_LABEL_VALUES}
+              readonly="locked"
+            />,
+          );
+
+          // IressReadonly should be rendered with the locked class from InputBase
+          const lockedElement = container.querySelector(
+            `.${inputBaseStyles.locked}`,
+          );
+          expect(lockedElement).toBeInTheDocument();
+          expect(
+            screen.getByText(MOCK_LABEL_VALUES[0].label),
+          ).toBeInTheDocument();
+        });
+
+        it('renders hidden input with correct value when readonly="locked"', () => {
+          const screen = render(
+            <IressRichSelect
+              defaultValue={MOCK_LABEL_VALUES[0]}
+              options={MOCK_LABEL_VALUES}
+              readonly="locked"
+            />,
+          );
+
+          const input = screen.container.querySelector(
+            `input[value="${MOCK_LABEL_VALUES[0].value}"]`,
+          );
+          expect(input).toBeInTheDocument();
+          expect(input).toHaveAttribute('type', 'hidden');
+        });
+
+        it('does not render interactive elements when readonly="locked"', () => {
+          const screen = render(
+            <IressRichSelect
+              defaultValue={MOCK_LABEL_VALUES[0]}
+              options={MOCK_LABEL_VALUES}
+              readonly="locked"
+            />,
+          );
+
+          expect(screen.queryByRole('combobox')).not.toBeInTheDocument();
+          expect(screen.queryByRole('option')).not.toBeInTheDocument();
+        });
       });
     });
 
