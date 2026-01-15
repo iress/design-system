@@ -33,4 +33,40 @@ describe('IressLabel', () => {
       expect(results).toHaveNoViolations();
     });
   });
+
+  describe('locked prop', () => {
+    it('renders lock icon when locked is true', () => {
+      const screen = render(
+        <IressLabel htmlFor="test" locked data-testid="label">
+          Test Label
+        </IressLabel>,
+      );
+
+      const lockIcon = screen.getByTestId('label__lock-icon');
+      expect(lockIcon).toBeInTheDocument();
+    });
+
+    it('does not render lock icon when locked is false', () => {
+      const screen = render(
+        <IressLabel htmlFor="test" locked={false} data-testid="label">
+          Test Label
+        </IressLabel>,
+      );
+
+      expect(screen.queryByTestId('label__lock-icon')).not.toBeInTheDocument();
+    });
+
+    it('lock icon has accessible title', () => {
+      const screen = render(
+        <IressLabel htmlFor="test" locked data-testid="label">
+          Test Label
+        </IressLabel>,
+      );
+
+      const lockIcon = screen.getByTestId('label__lock-icon');
+      const title = lockIcon.querySelector('title');
+      expect(title).toBeInTheDocument();
+      expect(title?.textContent).toBe('(Locked)');
+    });
+  });
 });

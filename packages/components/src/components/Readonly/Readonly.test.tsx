@@ -111,6 +111,33 @@ describe('IressReadonly', () => {
         expect(wrapper).toHaveClass(readonly({ width: '25%' }).root!);
       });
     });
+
+    describe('variant', () => {
+      it('renders with locked variant styling', () => {
+        renderReadonly({
+          variant: 'locked',
+          value: 'Locked Value',
+          'data-testid': 'test-readonly',
+        });
+
+        const wrapper = screen.getByTestId('test-readonly');
+        expect(wrapper).toHaveClass(readonly({ variant: 'locked' }).root!);
+      });
+
+      it('renders without locked variant styling by default', () => {
+        renderReadonly({
+          value: 'Normal Value',
+          'data-testid': 'test-readonly',
+        });
+
+        const wrapper = screen.getByTestId('test-readonly');
+        expect(wrapper).toHaveClass(readonly().root!);
+        // Check that the locked-specific border styling is NOT present
+        expect(wrapper).not.toHaveClass('bd-w_[1px]');
+        expect(wrapper).not.toHaveClass('bd-s_solid');
+        expect(wrapper).not.toHaveClass('cur_not-allowed');
+      });
+    });
   });
 
   describe('accessibility', () => {
