@@ -35,7 +35,10 @@ import { IressCloseButton } from '../Button';
 export type IressInputProps<
   T extends FormControlValue = string | number,
   TRows extends number | undefined = undefined,
-> = Omit<InputBaseProps<TRows>, 'defaultValue' | 'onChange' | 'value' | 'readOnly'> & {
+> = Omit<
+  InputBaseProps<TRows>,
+  'defaultValue' | 'onChange' | 'value' | 'readOnly'
+> & {
   /**
    * Set input content align to right, useful for numeric inputs.
    * @default false

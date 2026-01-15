@@ -79,7 +79,8 @@ export const readonly = sva({
           borderStyle: 'solid',
           borderColor: 'colour.neutral.30',
           borderRadius: 'radius.system.form',
-          padding: '[calc(token(spacing.2) - 1px) calc(token(spacing.3) - 1px)]',
+          padding:
+            '[calc(token(spacing.2) - 1px) calc(token(spacing.3) - 1px)]',
           cursor: 'not-allowed',
         },
         formControl: {

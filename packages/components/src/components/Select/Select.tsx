@@ -158,6 +158,7 @@ const Select = <
           ref={setElementRef}
           style={style}
           value={value}
+          // eslint-disable-next-line sonarjs/different-types-comparison
           variant={readOnly === 'locked' ? 'locked' : undefined}
           width={width}
         >

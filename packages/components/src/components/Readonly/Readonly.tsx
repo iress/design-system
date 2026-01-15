@@ -71,7 +71,12 @@ const Readonly = <T extends FormControlValue = string | number>(
     defaultValue,
   });
 
-  const classes = readonly.raw({ inline, width, alignRight, locked: variant === 'locked' });
+  const classes = readonly.raw({
+    inline,
+    width,
+    alignRight,
+    locked: variant === 'locked',
+  });
 
   const validDefaultValue = getFormControlValueAsStringIfDefined(defaultValue);
   const validValue = getFormControlValueAsStringIfDefined(value);
