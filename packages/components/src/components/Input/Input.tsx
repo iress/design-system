@@ -35,7 +35,7 @@ import { IressCloseButton } from '../Button';
 export type IressInputProps<
   T extends FormControlValue = string | number,
   TRows extends number | undefined = undefined,
-> = Omit<InputBaseProps<TRows>, 'defaultValue' | 'onChange' | 'value'> & {
+> = Omit<InputBaseProps<TRows>, 'defaultValue' | 'onChange' | 'value' | 'readOnly'> & {
   /**
    * Set input content align to right, useful for numeric inputs.
    * @default false
@@ -82,6 +82,13 @@ export type IressInputProps<
    * Content to prepended to the input field, usually an icon.
    */
   prepend?: ReactNode;
+
+  /**
+   * Makes the input read-only.
+   * - When `true`, displays standard readonly appearance.
+   * - When `'locked'`, displays with lock icon in label and border to indicate permission restrictions.
+   */
+  readOnly?: boolean | 'locked';
 
   /**
    * The value of the input. Can be a string or a number. Use for controlled inputs.
@@ -217,6 +224,7 @@ const Input = <
         alignRight={alignRight}
         append={append}
         className={className}
+        variant={readOnly === 'locked' ? 'locked' : undefined}
       >
         {displayValue}
       </IressReadonly>

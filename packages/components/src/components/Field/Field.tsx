@@ -64,8 +64,9 @@ export type IressFieldProps<
 
     /**
      * Renders the group in a read-only state (no asterisk symbol).
+     * When set to 'locked', displays a lock icon in the label to indicate permission restrictions.
      */
-    readOnly?: boolean;
+    readOnly?: boolean | 'locked';
 
     /**
      * Removes the reserved space for error messages, allowing fields to stack with narrower gaps.
@@ -122,6 +123,7 @@ export const IressField = ({
         data-testid={propagateTestid(dataTestId, 'label')}
         hiddenLabel={hiddenLabel}
         htmlFor={htmlFor}
+        locked={readOnly === 'locked'}
         required={readOnly ? false : !!required}
       >
         {label}

@@ -72,6 +72,21 @@ export const readonly = sva({
     },
   },
   variants: {
+    locked: {
+      true: {
+        root: {
+          borderWidth: '[1px]',
+          borderStyle: 'solid',
+          borderColor: 'colour.neutral.30',
+          borderRadius: 'radius.system.form',
+          padding: '[calc(token(spacing.2) - 1px) calc(token(spacing.3) - 1px)]',
+          cursor: 'not-allowed',
+        },
+        formControl: {
+          cursor: 'not-allowed',
+        },
+      },
+    },
     inline: {
       true: {
         root: {

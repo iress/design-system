@@ -38,6 +38,13 @@ export interface IressReadonlyProps<
    * Make prepend/append element closer to the input content.
    */
   inline?: boolean;
+
+  /**
+   * Visual variant for the readonly component.
+   * - When set to 'locked', displays with a visible border to indicate permission restrictions.
+   * - When undefined (default), displays standard readonly appearance.
+   */
+  variant?: 'locked';
 }
 
 const Readonly = <T extends FormControlValue = string | number>(
@@ -54,6 +61,7 @@ const Readonly = <T extends FormControlValue = string | number>(
     value,
     inline,
     alignRight,
+    variant,
     ...restProps
   }: IressReadonlyProps<T>,
   ref: Ref<HTMLInputElement>,
@@ -63,7 +71,7 @@ const Readonly = <T extends FormControlValue = string | number>(
     defaultValue,
   });
 
-  const classes = readonly.raw({ inline, width, alignRight });
+  const classes = readonly.raw({ inline, width, alignRight, locked: variant === 'locked' });
 
   const validDefaultValue = getFormControlValueAsStringIfDefined(defaultValue);
   const validValue = getFormControlValueAsStringIfDefined(value);
