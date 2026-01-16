@@ -7,16 +7,104 @@ import * as ComponentStories from './030-Highcharts.stories';
 
 # Highcharts Usage Examples
 
-This page demonstrates how to use IDS tokens with Highcharts for data visualization. The examples show how to integrate IDS color tokens, typography, and spacing into your charts for a consistent design system experience.
+This page demonstrates how to use IDS tokens with [Highcharts](https://www.highcharts.com/) for data visualization. The examples show how to integrate IDS color tokens, typography, and spacing into your charts for a consistent design system experience.
+
+## Why Use IDS Tokens with Highcharts?
+
+Using IDS design tokens with Highcharts provides several benefits:
+
+- **Consistency**: Charts automatically match your brand colors and design system
+- **Theming**: Easy to switch themes by updating token values
+- **Maintainability**: Central source of truth for design decisions
+- **Accessibility**: Use tested, accessible color combinations
+
+## Key Features Demonstrated
+
+Each example demonstrates:
+
+1. **Color Integration**: Using `colour.data.bold`, `colour.primary`, and `colour.system` tokens for chart colors
+2. **Typography Styling**: Applying IDS typography tokens to chart labels and legends
+3. **Helper Functions**: Extracting hex colors from CSS variables for Highcharts compatibility
+4. **Layout & Spacing**: Using IDS spacing tokens for consistent padding and margins
 
 ## Interactive Examples
 
 Each example below is fully interactive and editable in CodeSandbox. Click on any example to open it in a new sandbox where you can modify the code and see the results.
 
+### Pie Chart
+
+Demonstrates using IDS data visualization colors (`colour.data.bold`) for pie slices with a market share use case.
+
 <Story of={ComponentStories.PieChart} />
+
+### Bar Chart
+
+Shows how to use IDS system colors (`colour.primary`, `colour.system.success`, `colour.system.info`) for grouped column charts.
 
 <Story of={ComponentStories.BarChart} />
 
+### Line Chart
+
+Illustrates multi-series line charts using IDS data visualization colors with proper legend and tooltip styling.
+
 <Story of={ComponentStories.LineChart} />
 
+### Animated Chart
+
+Features a real-time updating chart with IDS colors, demonstrating dynamic data visualization with pause/resume controls.
+
 <Story of={ComponentStories.AnimatedChart} />
+
+## Getting Started
+
+To use IDS tokens with Highcharts in your project:
+
+1. Install the required packages:
+
+```bash
+npm install @iress-oss/ids-tokens highcharts highcharts-react-official
+```
+
+2. Import the tokens and Highcharts:
+
+```jsx
+import { cssVars } from '@iress-oss/ids-tokens';
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+```
+
+3. Create a helper to extract colors from CSS variables:
+
+```jsx
+const extractColor = (cssVar: string): string => {
+  const regex = /#[0-9A-Fa-f]{6}/;
+  const match = regex.exec(cssVar);
+  return match ? match[0] : cssVar;
+};
+```
+
+4. Use IDS tokens in your chart options:
+
+```jsx
+const options = {
+  colors: [
+    extractColor(cssVars.colour.data.bold['10']),
+    extractColor(cssVars.colour.data.bold['30']),
+    extractColor(cssVars.colour.data.bold['50']),
+  ],
+  chart: {
+    backgroundColor: extractColor(cssVars.colour.neutral['10']),
+  },
+  // ... more configuration
+};
+```
+
+## Available IDS Color Tokens for Data Visualization
+
+The IDS design system provides specific color palettes for data visualization:
+
+- **Bold Colors** (`colour.data.bold`): 10, 20, 30, 40, 50, 60, 70, 80, 90 - High contrast colors for charts
+- **Subtle Colors** (`colour.data.subtle`): 10, 20, 30, 40, 50, 60, 70, 80, 90 - Softer colors for backgrounds
+- **System Colors**: `primary`, `success`, `info`, `warning`, `danger` - Semantic colors
+- **Neutral Colors**: 10-90 scale for backgrounds, text, and borders
+
