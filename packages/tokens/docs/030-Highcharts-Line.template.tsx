@@ -2,26 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { designTokens } from '@iress-oss/ids-tokens';
+import { cssVars } from '@iress-oss/ids-tokens';
 
 const App = () => {
   // Use data visualization bold colors for line series
   const lineColors = [
-    designTokens.colour.data.bold['40'].$value,
-    designTokens.colour.data.bold['70'].$value,
-    designTokens.colour.data.bold['10'].$value,
+    cssVars.colour.data.bold['40'],
+    cssVars.colour.data.bold['70'],
+    cssVars.colour.data.bold['10'],
   ];
 
   const options: Highcharts.Options = {
     colors: lineColors,
     chart: {
       type: 'line',
-      backgroundColor: designTokens.colour.neutral['10'].$value,
+      backgroundColor: cssVars.colour.neutral['10'],
     },
     title: {
       text: 'Stock Price Trends',
       style: {
-        color: designTokens.colour.neutral['90'].$value,
+        color: cssVars.colour.neutral['90'],
         fontSize: '18px',
         fontWeight: '600',
       },
@@ -29,7 +29,7 @@ const App = () => {
     subtitle: {
       text: 'Monthly average closing prices',
       style: {
-        color: designTokens.colour.neutral['70'].$value,
+        color: cssVars.colour.neutral['70'],
         fontSize: '14px',
       },
     },
@@ -50,32 +50,32 @@ const App = () => {
       ],
       labels: {
         style: {
-          color: designTokens.colour.neutral['80'].$value,
+          color: cssVars.colour.neutral['80'],
           fontSize: '12px',
         },
       },
-      lineColor: designTokens.colour.neutral['40'].$value,
+      lineColor: cssVars.colour.neutral['40'],
     },
     yAxis: {
       title: {
         text: 'Price ($)',
         style: {
-          color: designTokens.colour.neutral['80'].$value,
+          color: cssVars.colour.neutral['80'],
         },
       },
       labels: {
         style: {
-          color: designTokens.colour.neutral['80'].$value,
+          color: cssVars.colour.neutral['80'],
           fontSize: '12px',
         },
       },
-      gridLineColor: designTokens.colour.neutral['30'].$value,
+      gridLineColor: cssVars.colour.neutral['30'],
     },
     tooltip: {
-      backgroundColor: designTokens.colour.neutral['10'].$value,
-      borderColor: designTokens.colour.neutral['40'].$value,
+      backgroundColor: cssVars.colour.neutral['10'],
+      borderColor: cssVars.colour.neutral['40'],
       style: {
-        color: designTokens.colour.neutral['90'].$value,
+        color: cssVars.colour.neutral['90'],
       },
       shared: true,
       crosshairs: true,
@@ -102,11 +102,11 @@ const App = () => {
     },
     legend: {
       itemStyle: {
-        color: designTokens.colour.neutral['80'].$value,
+        color: cssVars.colour.neutral['80'],
         fontSize: '12px',
       },
       itemHoverStyle: {
-        color: designTokens.colour.primary.text.$value,
+        color: cssVars.colour.primary.text,
       },
     },
     series: [
@@ -135,13 +135,13 @@ const App = () => {
     <div
       style={{
         padding: '24px',
-        backgroundColor: designTokens.colour.neutral['20'].$value,
+        backgroundColor: cssVars.colour.neutral['20'],
         minHeight: '100vh',
       }}
     >
       <div
         style={{
-          backgroundColor: designTokens.colour.neutral['10'].$value,
+          backgroundColor: cssVars.colour.neutral['10'],
           borderRadius: '8px',
           padding: '24px',
         }}

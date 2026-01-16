@@ -2,26 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { designTokens } from '@iress-oss/ids-tokens';
+import { cssVars } from '@iress-oss/ids-tokens';
 
 const App = () => {
   // Use IDS system colors for different data series
   const seriesColors = [
-    designTokens.colour.primary.fill.$value,
-    designTokens.colour.system.success.fill.$value,
-    designTokens.colour.system.info.fill.$value,
+    cssVars.colour.primary.fill,
+    cssVars.colour.system.success.fill,
+    cssVars.colour.system.info.fill,
   ];
 
   const options: Highcharts.Options = {
     colors: seriesColors,
     chart: {
       type: 'column',
-      backgroundColor: designTokens.colour.neutral['10'].$value,
+      backgroundColor: cssVars.colour.neutral['10'],
     },
     title: {
       text: 'Quarterly Revenue Comparison',
       style: {
-        color: designTokens.colour.neutral['90'].$value,
+        color: cssVars.colour.neutral['90'],
         fontSize: '18px',
         fontWeight: '600',
       },
@@ -29,7 +29,7 @@ const App = () => {
     subtitle: {
       text: 'Revenue in millions (USD)',
       style: {
-        color: designTokens.colour.neutral['70'].$value,
+        color: cssVars.colour.neutral['70'],
         fontSize: '14px',
       },
     },
@@ -37,33 +37,33 @@ const App = () => {
       categories: ['Q1', 'Q2', 'Q3', 'Q4'],
       labels: {
         style: {
-          color: designTokens.colour.neutral['80'].$value,
+          color: cssVars.colour.neutral['80'],
           fontSize: '12px',
         },
       },
-      lineColor: designTokens.colour.neutral['40'].$value,
+      lineColor: cssVars.colour.neutral['40'],
     },
     yAxis: {
       min: 0,
       title: {
         text: 'Revenue ($M)',
         style: {
-          color: designTokens.colour.neutral['80'].$value,
+          color: cssVars.colour.neutral['80'],
         },
       },
       labels: {
         style: {
-          color: designTokens.colour.neutral['80'].$value,
+          color: cssVars.colour.neutral['80'],
           fontSize: '12px',
         },
       },
-      gridLineColor: designTokens.colour.neutral['30'].$value,
+      gridLineColor: cssVars.colour.neutral['30'],
     },
     tooltip: {
-      backgroundColor: designTokens.colour.neutral['10'].$value,
-      borderColor: designTokens.colour.neutral['40'].$value,
+      backgroundColor: cssVars.colour.neutral['10'],
+      borderColor: cssVars.colour.neutral['40'],
       style: {
-        color: designTokens.colour.neutral['90'].$value,
+        color: cssVars.colour.neutral['90'],
       },
       shared: true,
       valueSuffix: 'M',
@@ -78,11 +78,11 @@ const App = () => {
     },
     legend: {
       itemStyle: {
-        color: designTokens.colour.neutral['80'].$value,
+        color: cssVars.colour.neutral['80'],
         fontSize: '12px',
       },
       itemHoverStyle: {
-        color: designTokens.colour.primary.text.$value,
+        color: cssVars.colour.primary.text,
       },
     },
     series: [
@@ -111,13 +111,13 @@ const App = () => {
     <div
       style={{
         padding: '24px',
-        backgroundColor: designTokens.colour.neutral['20'].$value,
+        backgroundColor: cssVars.colour.neutral['20'],
         minHeight: '100vh',
       }}
     >
       <div
         style={{
-          backgroundColor: designTokens.colour.neutral['10'].$value,
+          backgroundColor: cssVars.colour.neutral['10'],
           borderRadius: '8px',
           padding: '24px',
         }}

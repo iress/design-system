@@ -2,39 +2,39 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { designTokens } from '@iress-oss/ids-tokens';
+import { cssVars } from '@iress-oss/ids-tokens';
 
 const App = () => {
   // Create a color palette from IDS data visualization tokens
   const chartColors = [
-    designTokens.colour.data.bold['10'].$value,
-    designTokens.colour.data.bold['30'].$value,
-    designTokens.colour.data.bold['50'].$value,
-    designTokens.colour.data.bold['70'].$value,
-    designTokens.colour.data.bold['20'].$value,
-    designTokens.colour.data.bold['40'].$value,
+    cssVars.colour.data.bold['10'],
+    cssVars.colour.data.bold['30'],
+    cssVars.colour.data.bold['50'],
+    cssVars.colour.data.bold['70'],
+    cssVars.colour.data.bold['20'],
+    cssVars.colour.data.bold['40'],
   ];
 
   const options: Highcharts.Options = {
     colors: chartColors,
     chart: {
       type: 'pie',
-      backgroundColor: designTokens.colour.neutral['10'].$value,
+      backgroundColor: cssVars.colour.neutral['10'],
     },
     title: {
       text: 'Market Share by Product Category',
       style: {
-        color: designTokens.colour.neutral['90'].$value,
+        color: cssVars.colour.neutral['90'],
         fontSize: '18px',
         fontWeight: '600',
       },
     },
     tooltip: {
       pointFormat: '<b>{point.percentage:.1f}%</b>',
-      backgroundColor: designTokens.colour.neutral['10'].$value,
-      borderColor: designTokens.colour.neutral['40'].$value,
+      backgroundColor: cssVars.colour.neutral['10'],
+      borderColor: cssVars.colour.neutral['40'],
       style: {
-        color: designTokens.colour.neutral['90'].$value,
+        color: cssVars.colour.neutral['90'],
       },
     },
     plotOptions: {
@@ -45,7 +45,7 @@ const App = () => {
           enabled: true,
           format: '<b>{point.name}</b>: {point.percentage:.1f}%',
           style: {
-            color: designTokens.colour.neutral['80'].$value,
+            color: cssVars.colour.neutral['80'],
             fontSize: '12px',
           },
         },
@@ -54,11 +54,11 @@ const App = () => {
     },
     legend: {
       itemStyle: {
-        color: designTokens.colour.neutral['80'].$value,
+        color: cssVars.colour.neutral['80'],
         fontSize: '12px',
       },
       itemHoverStyle: {
-        color: designTokens.colour.primary.text.$value,
+        color: cssVars.colour.primary.text,
       },
     },
     series: [
@@ -84,13 +84,13 @@ const App = () => {
     <div
       style={{
         padding: '24px',
-        backgroundColor: designTokens.colour.neutral['20'].$value,
+        backgroundColor: cssVars.colour.neutral['20'],
         minHeight: '100vh',
       }}
     >
       <div
         style={{
-          backgroundColor: designTokens.colour.neutral['10'].$value,
+          backgroundColor: cssVars.colour.neutral['10'],
           borderRadius: '8px',
           padding: '24px',
         }}

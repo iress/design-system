@@ -23,7 +23,7 @@ Using IDS design tokens with Highcharts provides several benefits:
 Each example demonstrates:
 
 1. **Color Integration**: Using `colour.data.bold`, `colour.primary`, and `colour.system` tokens for chart colors
-2. **Direct Token Access**: Accessing token values via `designTokens` object with `$value` property
+2. **CSS Variables**: Using `cssVars` directly for dynamic theming support
 3. **Typography Styling**: Applying IDS typography tokens to chart labels and legends
 4. **Layout & Spacing**: Using design tokens for consistent padding and margins
 
@@ -68,7 +68,7 @@ npm install @iress-oss/ids-tokens highcharts highcharts-react-official
 2. Import the tokens and Highcharts:
 
 ```jsx
-import { designTokens } from '@iress-oss/ids-tokens';
+import { cssVars } from '@iress-oss/ids-tokens';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 ```
@@ -78,18 +78,18 @@ import HighchartsReact from 'highcharts-react-official';
 ```jsx
 const options = {
   colors: [
-    designTokens.colour.data.bold['10'].$value,
-    designTokens.colour.data.bold['30'].$value,
-    designTokens.colour.data.bold['50'].$value,
+    cssVars.colour.data.bold['10'],
+    cssVars.colour.data.bold['30'],
+    cssVars.colour.data.bold['50'],
   ],
   chart: {
-    backgroundColor: designTokens.colour.neutral['10'].$value,
+    backgroundColor: cssVars.colour.neutral['10'],
   },
   // ... more configuration
 };
 ```
 
-Each design token has a `$value` property containing the actual color hex value (e.g., `#AC2C6A`).
+The `cssVars` object provides CSS variable strings in the format `var(--iress-colour-primary-fill, #003271)`, which Highcharts supports natively. This allows for dynamic theming and respects the CSS cascade.
 
 ## Available IDS Color Tokens for Data Visualization
 

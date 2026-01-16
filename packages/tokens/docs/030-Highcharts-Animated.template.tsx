@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { designTokens } from '@iress-oss/ids-tokens';
+import { cssVars } from '@iress-oss/ids-tokens';
 
 /* eslint-disable sonarjs/pseudo-random */
 
@@ -36,15 +36,15 @@ const App = () => {
   }, [isAnimating]);
 
   const chartColors = [
-    designTokens.colour.primary.fill.$value,
-    designTokens.colour.system.success.fill.$value,
+    cssVars.colour.primary.fill,
+    cssVars.colour.system.success.fill,
   ];
 
   const options: Highcharts.Options = {
     colors: chartColors,
     chart: {
       type: 'spline',
-      backgroundColor: designTokens.colour.neutral['10'].$value,
+      backgroundColor: cssVars.colour.neutral['10'],
       animation: {
         duration: 1000,
       },
@@ -52,7 +52,7 @@ const App = () => {
     title: {
       text: 'Real-time Trading Volume',
       style: {
-        color: designTokens.colour.neutral['90'].$value,
+        color: cssVars.colour.neutral['90'],
         fontSize: '18px',
         fontWeight: '600',
       },
@@ -61,8 +61,8 @@ const App = () => {
       text: isAnimating ? 'Live Updates Active' : 'Paused',
       style: {
         color: isAnimating
-          ? designTokens.colour.system.success.text.$value
-          : designTokens.colour.neutral['60'].$value,
+          ? cssVars.colour.system.success.text
+          : cssVars.colour.neutral['60'],
         fontSize: '14px',
       },
     },
@@ -71,30 +71,30 @@ const App = () => {
       labels: {
         enabled: false,
       },
-      lineColor: designTokens.colour.neutral['40'].$value,
+      lineColor: cssVars.colour.neutral['40'],
     },
     yAxis: {
       title: {
         text: 'Volume',
         style: {
-          color: designTokens.colour.neutral['80'].$value,
+          color: cssVars.colour.neutral['80'],
         },
       },
       labels: {
         style: {
-          color: designTokens.colour.neutral['80'].$value,
+          color: cssVars.colour.neutral['80'],
           fontSize: '12px',
         },
       },
-      gridLineColor: designTokens.colour.neutral['30'].$value,
+      gridLineColor: cssVars.colour.neutral['30'],
       min: 0,
       max: 200,
     },
     tooltip: {
-      backgroundColor: designTokens.colour.neutral['10'].$value,
-      borderColor: designTokens.colour.neutral['40'].$value,
+      backgroundColor: cssVars.colour.neutral['10'],
+      borderColor: cssVars.colour.neutral['40'],
       style: {
-        color: designTokens.colour.neutral['90'].$value,
+        color: cssVars.colour.neutral['90'],
       },
       formatter: function () {
         return `<b>Volume:</b> ${this.y}`;
@@ -131,13 +131,13 @@ const App = () => {
     <div
       style={{
         padding: '24px',
-        backgroundColor: designTokens.colour.neutral['20'].$value,
+        backgroundColor: cssVars.colour.neutral['20'],
         minHeight: '100vh',
       }}
     >
       <div
         style={{
-          backgroundColor: designTokens.colour.neutral['10'].$value,
+          backgroundColor: cssVars.colour.neutral['10'],
           borderRadius: '8px',
           padding: '24px',
         }}
@@ -154,9 +154,9 @@ const App = () => {
             style={{
               padding: '8px 16px',
               backgroundColor: isAnimating
-                ? designTokens.colour.system.warning.fill.$value
-                : designTokens.colour.system.success.fill.$value,
-              color: designTokens.colour.neutral['10'].$value,
+                ? cssVars.colour.system.warning.fill
+                : cssVars.colour.system.success.fill,
+              color: cssVars.colour.neutral['10'],
               border: 'none',
               borderRadius: '4px',
               cursor: 'pointer',
@@ -170,8 +170,8 @@ const App = () => {
             onClick={() => setChartData([])}
             style={{
               padding: '8px 16px',
-              backgroundColor: designTokens.colour.system.danger.fill.$value,
-              color: designTokens.colour.neutral['10'].$value,
+              backgroundColor: cssVars.colour.system.danger.fill,
+              color: cssVars.colour.neutral['10'],
               border: 'none',
               borderRadius: '4px',
               cursor: 'pointer',
