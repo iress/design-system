@@ -278,10 +278,10 @@ describe('IressTabs', () => {
       // Verify tabs are rendered
       expect(tabs.length).toBe(20);
 
-      // Verify tabs are accessible
+      // Click on a tab far to the right to trigger scrollIntoView
       await userEvent.click(tabs[10]);
 
-      // But scrollIntoView should not have been called on initial mount
+      // Verify that scrollIntoView was called
       expect(tabs[10].scrollIntoView).toHaveBeenCalled();
     });
 
