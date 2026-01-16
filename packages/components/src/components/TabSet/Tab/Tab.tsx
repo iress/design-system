@@ -190,7 +190,8 @@ const Tab = <THref extends string | undefined = undefined>(
         return;
       }
 
-      element.current.scrollIntoView({
+      // Made optional so it doesnt crash jsdom tests
+      element.current.scrollIntoView?.({
         behavior: 'smooth',
         block: 'nearest',
         inline: 'center',
