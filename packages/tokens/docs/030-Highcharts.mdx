@@ -56,6 +56,85 @@ Features a real-time updating chart with IDS colors, demonstrating dynamic data 
 
 <ComponentExample api={false} of={ComponentStories.AnimatedChart} />
 
+### Line Chart - 20 Series with Patterns
+
+Demonstrates handling many data series by combining IDS colors with line styles (solid, dashed, dotted). This approach uses color to identify "families" and patterns to differentiate individual series.
+
+<Story of={ComponentStories.LineWith20Series} />
+
+### Bar Chart - 20 Series with Patterns
+
+Shows how to use fill patterns with IDS colors for bar charts with many categories. Patterns help differentiate series when color alone isn't sufficient.
+
+<Story of={ComponentStories.BarWith20Series} />
+
+## Handling More Than 9 Series
+
+### Is it OK to have more than 9 series in one chart?
+
+For the majority of UI dashboards and business charts:
+
+- **3 to 7 series is the sweet spot**
+- **8 to 9 is already pushing cognitive load**
+- **Beyond 9, users stop comparing and start squinting**
+
+In practice, many products deliberately cap at ~6–8 series because:
+
+- Legends get crowded
+- Color discrimination drops sharply
+- The chart becomes a decoding exercise instead of insight
+
+If your charts are:
+
+- KPI dashboards
+- Time series comparisons
+- Category comparisons meant for decision-making
+
+Then 9 colors is usually enough.
+
+### What to do when 9 colors isn't enough?
+
+Color should stop doing all the work. Here are practical escape hatches:
+
+#### 1. Reuse colors with structure (recommended)
+
+After color 9, cycle back but vary something else:
+
+- **Line style**: solid, dashed, dotted
+- **Marker shape**: circle, square, diamond
+- **Opacity levels**
+- **Stroke width**
+
+This works especially well for:
+
+- Line charts
+- Area charts
+- Overlaid comparisons
+
+**Color identifies the "family"; style disambiguates siblings.**
+
+See the **Line Chart - 20 Series with Patterns** example above for a practical implementation.
+
+#### 2. De-emphasize the long tail
+
+Let the important series shine, mute the rest:
+
+- Top 5–7 series get distinct colors
+- Remaining series use neutral greys or a single muted color
+- Highlight on hover or selection
+
+This mirrors how people actually read charts: hero first, background later.
+
+#### 3. Group or aggregate categories
+
+If a chart needs 14 colors, that's often a smell. Options:
+
+- Combine smaller categories into "Other"
+- Allow drill-down instead of showing everything at once
+- Use small multiples instead of one mega-chart
+
+Clarity usually improves, not suffers.
+
 ## Getting Started
 
 To use IDS tokens with Highcharts in your project:

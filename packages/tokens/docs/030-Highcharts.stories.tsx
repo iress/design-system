@@ -8,6 +8,10 @@ import { LineChartExample } from './030-Highcharts-Line';
 import LineChartSource from './030-Highcharts-Line.tsx?raw';
 import { AnimatedChartExample } from './030-Highcharts-Animated';
 import AnimatedChartSource from './030-Highcharts-Animated.tsx?raw';
+import { LineWithPatternsExample } from './030-Highcharts-LineWithPatterns';
+import LineWithPatternsSource from './030-Highcharts-LineWithPatterns.tsx?raw';
+import { BarWithPatternsExample } from './030-Highcharts-BarWithPatterns';
+import BarWithPatternsSource from './030-Highcharts-BarWithPatterns.tsx?raw';
 
 export default {
   title: 'Highcharts Usage',
@@ -47,5 +51,21 @@ export const AnimatedChart: StoryObj = {
   render: () => <AnimatedChartExample />,
   parameters: {
     ...withCustomSource(AnimatedChartSource as string),
+  },
+};
+
+export const LineWith20Series: StoryObj = {
+  name: 'Line Chart - 20 Series with Patterns',
+  render: () => <LineWithPatternsExample />,
+  parameters: {
+    ...withCustomSource(LineWithPatternsSource as string),
+  },
+};
+
+export const BarWith20Series: StoryObj = {
+  name: 'Bar Chart - 20 Series with Patterns',
+  render: () => <BarWithPatternsExample />,
+  parameters: {
+    ...withCustomSource(BarWithPatternsSource as string),
   },
 };
