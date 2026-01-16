@@ -2,49 +2,39 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { cssVars } from '@iress-oss/ids-tokens';
-
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
-// Helper function to extract hex color from CSS variable
-const extractColor = (cssVar: string): string => {
-  // Extract the fallback color from the var() syntax
-  const regex = /#[0-9A-Fa-f]{6}/;
-  const match = regex.exec(cssVar);
-  return match ? match[0] : cssVar;
-};
+import { designTokens } from '@iress-oss/ids-tokens';
 
 const App = () => {
   // Create a color palette from IDS data visualization tokens
   const chartColors = [
-    extractColor(cssVars.colour.data.bold['10']),
-    extractColor(cssVars.colour.data.bold['30']),
-    extractColor(cssVars.colour.data.bold['50']),
-    extractColor(cssVars.colour.data.bold['70']),
-    extractColor(cssVars.colour.data.bold['20']),
-    extractColor(cssVars.colour.data.bold['40']),
+    designTokens.colour.data.bold['10'].$value,
+    designTokens.colour.data.bold['30'].$value,
+    designTokens.colour.data.bold['50'].$value,
+    designTokens.colour.data.bold['70'].$value,
+    designTokens.colour.data.bold['20'].$value,
+    designTokens.colour.data.bold['40'].$value,
   ];
 
   const options: Highcharts.Options = {
     colors: chartColors,
     chart: {
       type: 'pie',
-      backgroundColor: extractColor(cssVars.colour.neutral['10']),
+      backgroundColor: designTokens.colour.neutral['10'].$value,
     },
     title: {
       text: 'Market Share by Product Category',
       style: {
-        color: extractColor(cssVars.colour.neutral['90']),
+        color: designTokens.colour.neutral['90'].$value,
         fontSize: '18px',
         fontWeight: '600',
       },
     },
     tooltip: {
       pointFormat: '<b>{point.percentage:.1f}%</b>',
-      backgroundColor: extractColor(cssVars.colour.neutral['10']),
-      borderColor: extractColor(cssVars.colour.neutral['40']),
+      backgroundColor: designTokens.colour.neutral['10'].$value,
+      borderColor: designTokens.colour.neutral['40'].$value,
       style: {
-        color: extractColor(cssVars.colour.neutral['90']),
+        color: designTokens.colour.neutral['90'].$value,
       },
     },
     plotOptions: {
@@ -55,7 +45,7 @@ const App = () => {
           enabled: true,
           format: '<b>{point.name}</b>: {point.percentage:.1f}%',
           style: {
-            color: extractColor(cssVars.colour.neutral['80']),
+            color: designTokens.colour.neutral['80'].$value,
             fontSize: '12px',
           },
         },
@@ -64,11 +54,11 @@ const App = () => {
     },
     legend: {
       itemStyle: {
-        color: extractColor(cssVars.colour.neutral['80']),
+        color: designTokens.colour.neutral['80'].$value,
         fontSize: '12px',
       },
       itemHoverStyle: {
-        color: extractColor(cssVars.colour.primary.text),
+        color: designTokens.colour.primary.text.$value,
       },
     },
     series: [
@@ -94,13 +84,13 @@ const App = () => {
     <div
       style={{
         padding: '24px',
-        backgroundColor: extractColor(cssVars.colour.neutral['20']),
+        backgroundColor: designTokens.colour.neutral['20'].$value,
         minHeight: '100vh',
       }}
     >
       <div
         style={{
-          backgroundColor: extractColor(cssVars.colour.neutral['10']),
+          backgroundColor: designTokens.colour.neutral['10'].$value,
           borderRadius: '8px',
           padding: '24px',
         }}

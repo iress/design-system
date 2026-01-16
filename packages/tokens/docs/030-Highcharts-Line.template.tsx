@@ -2,36 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { cssVars } from '@iress-oss/ids-tokens';
-
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
-// Helper function to extract hex color from CSS variable
-const extractColor = (cssVar: string): string => {
-  // Extract the fallback color from the var() syntax
-  const regex = /#[0-9A-Fa-f]{6}/;
-  const match = regex.exec(cssVar);
-  return match ? match[0] : cssVar;
-};
+import { designTokens } from '@iress-oss/ids-tokens';
 
 const App = () => {
   // Use data visualization bold colors for line series
   const lineColors = [
-    extractColor(cssVars.colour.data.bold['40']),
-    extractColor(cssVars.colour.data.bold['70']),
-    extractColor(cssVars.colour.data.bold['10']),
+    designTokens.colour.data.bold['40'].$value,
+    designTokens.colour.data.bold['70'].$value,
+    designTokens.colour.data.bold['10'].$value,
   ];
 
   const options: Highcharts.Options = {
     colors: lineColors,
     chart: {
       type: 'line',
-      backgroundColor: extractColor(cssVars.colour.neutral['10']),
+      backgroundColor: designTokens.colour.neutral['10'].$value,
     },
     title: {
       text: 'Stock Price Trends',
       style: {
-        color: extractColor(cssVars.colour.neutral['90']),
+        color: designTokens.colour.neutral['90'].$value,
         fontSize: '18px',
         fontWeight: '600',
       },
@@ -39,7 +29,7 @@ const App = () => {
     subtitle: {
       text: 'Monthly average closing prices',
       style: {
-        color: extractColor(cssVars.colour.neutral['70']),
+        color: designTokens.colour.neutral['70'].$value,
         fontSize: '14px',
       },
     },
@@ -60,32 +50,32 @@ const App = () => {
       ],
       labels: {
         style: {
-          color: extractColor(cssVars.colour.neutral['80']),
+          color: designTokens.colour.neutral['80'].$value,
           fontSize: '12px',
         },
       },
-      lineColor: extractColor(cssVars.colour.neutral['40']),
+      lineColor: designTokens.colour.neutral['40'].$value,
     },
     yAxis: {
       title: {
         text: 'Price ($)',
         style: {
-          color: extractColor(cssVars.colour.neutral['80']),
+          color: designTokens.colour.neutral['80'].$value,
         },
       },
       labels: {
         style: {
-          color: extractColor(cssVars.colour.neutral['80']),
+          color: designTokens.colour.neutral['80'].$value,
           fontSize: '12px',
         },
       },
-      gridLineColor: extractColor(cssVars.colour.neutral['30']),
+      gridLineColor: designTokens.colour.neutral['30'].$value,
     },
     tooltip: {
-      backgroundColor: extractColor(cssVars.colour.neutral['10']),
-      borderColor: extractColor(cssVars.colour.neutral['40']),
+      backgroundColor: designTokens.colour.neutral['10'].$value,
+      borderColor: designTokens.colour.neutral['40'].$value,
       style: {
-        color: extractColor(cssVars.colour.neutral['90']),
+        color: designTokens.colour.neutral['90'].$value,
       },
       shared: true,
       crosshairs: true,
@@ -112,11 +102,11 @@ const App = () => {
     },
     legend: {
       itemStyle: {
-        color: extractColor(cssVars.colour.neutral['80']),
+        color: designTokens.colour.neutral['80'].$value,
         fontSize: '12px',
       },
       itemHoverStyle: {
-        color: extractColor(cssVars.colour.primary.text),
+        color: designTokens.colour.primary.text.$value,
       },
     },
     series: [
@@ -145,13 +135,13 @@ const App = () => {
     <div
       style={{
         padding: '24px',
-        backgroundColor: extractColor(cssVars.colour.neutral['20']),
+        backgroundColor: designTokens.colour.neutral['20'].$value,
         minHeight: '100vh',
       }}
     >
       <div
         style={{
-          backgroundColor: extractColor(cssVars.colour.neutral['10']),
+          backgroundColor: designTokens.colour.neutral['10'].$value,
           borderRadius: '8px',
           padding: '24px',
         }}

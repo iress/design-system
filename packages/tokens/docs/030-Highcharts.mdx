@@ -23,9 +23,9 @@ Using IDS design tokens with Highcharts provides several benefits:
 Each example demonstrates:
 
 1. **Color Integration**: Using `colour.data.bold`, `colour.primary`, and `colour.system` tokens for chart colors
-2. **Typography Styling**: Applying IDS typography tokens to chart labels and legends
-3. **Helper Functions**: Extracting hex colors from CSS variables for Highcharts compatibility
-4. **Layout & Spacing**: Using IDS spacing tokens for consistent padding and margins
+2. **Direct Token Access**: Accessing token values via `designTokens` object with `$value` property
+3. **Typography Styling**: Applying IDS typography tokens to chart labels and legends
+4. **Layout & Spacing**: Using design tokens for consistent padding and margins
 
 ## Interactive Examples
 
@@ -68,36 +68,28 @@ npm install @iress-oss/ids-tokens highcharts highcharts-react-official
 2. Import the tokens and Highcharts:
 
 ```jsx
-import { cssVars } from '@iress-oss/ids-tokens';
+import { designTokens } from '@iress-oss/ids-tokens';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 ```
 
-3. Create a helper to extract colors from CSS variables:
-
-```jsx
-const extractColor = (cssVar: string): string => {
-  const regex = /#[0-9A-Fa-f]{6}/;
-  const match = regex.exec(cssVar);
-  return match ? match[0] : cssVar;
-};
-```
-
-4. Use IDS tokens in your chart options:
+3. Use IDS tokens directly in your chart options:
 
 ```jsx
 const options = {
   colors: [
-    extractColor(cssVars.colour.data.bold['10']),
-    extractColor(cssVars.colour.data.bold['30']),
-    extractColor(cssVars.colour.data.bold['50']),
+    designTokens.colour.data.bold['10'].$value,
+    designTokens.colour.data.bold['30'].$value,
+    designTokens.colour.data.bold['50'].$value,
   ],
   chart: {
-    backgroundColor: extractColor(cssVars.colour.neutral['10']),
+    backgroundColor: designTokens.colour.neutral['10'].$value,
   },
   // ... more configuration
 };
 ```
+
+Each design token has a `$value` property containing the actual color hex value (e.g., `#AC2C6A`).
 
 ## Available IDS Color Tokens for Data Visualization
 
