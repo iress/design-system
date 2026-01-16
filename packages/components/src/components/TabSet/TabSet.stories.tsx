@@ -117,16 +117,19 @@ export const LazyLoading: Story = {
 export const TabsWithBadges: Story = {
   args: {
     children: [
-      <IressBadge
+      <IressTab
         key="address"
-        pill
-        host={
-          <IressTab label="Address">Address information goes here</IressTab>
+        label={
+          <>
+            Address{' '}
+            <IressBadge pill mode="info" ml="xs">
+              3
+            </IressBadge>
+          </>
         }
-        mode="info"
       >
-        3
-      </IressBadge>,
+        Address information goes here{' '}
+      </IressTab>,
       <IressTab
         key="employment"
         label={

@@ -110,11 +110,11 @@ const elevation = {
       $description: 'Shadow for overflow elevations',
       $type: Type.Shadow,
       $value: {
-        color: '#091E4215',
+        color: '#091E420D',
         type: 'inset',
-        offsetX: '7px',
+        offsetX: '-13px',
         offsetY: '0px',
-        blur: '5px',
+        blur: '18.8px',
       },
       $extensions: {
         'styler.panel': 'elevation.overflow',

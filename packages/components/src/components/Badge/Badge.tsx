@@ -1,7 +1,6 @@
-import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { css, cx } from '@/styled-system/css';
 import { badge as badgeStyles } from './Badge.styles';
-import { type ReactElement, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import type { IressStyledProps, Statuses } from '@/types';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
@@ -11,11 +10,6 @@ export interface IressBadgeProps extends IressStyledProps<'span'> {
    * Content of the badge.
    */
   children?: ReactNode;
-
-  /**
-   * Element to attach the badge to.
-   */
-  host?: ReactElement;
 
   /**
    * Style of the badge.
@@ -54,17 +48,15 @@ export const IressBadge = ({
   mode = 'neutral',
   pill,
   className,
-  host,
   ...restProps
 }: IressBadgeProps) => {
   const classes = badgeStyles.raw({
     mode: mode as Extract<IressBadgeProps['mode'], string>,
     pill,
-    host: !!host,
   });
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
 
-  const badge = (
+  return (
     <styled.span
       {...nonStyleProps}
       className={cx(
@@ -75,18 +67,6 @@ export const IressBadge = ({
     >
       {children}
     </styled.span>
-  );
-
-  return host ? (
-    <div
-      className={css(classes.host)}
-      data-testid={propagateTestid(restProps['data-testid'], 'host')}
-    >
-      {host}
-      {badge}
-    </div>
-  ) : (
-    badge
   );
 };
 

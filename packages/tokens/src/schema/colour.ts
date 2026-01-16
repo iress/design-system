@@ -151,7 +151,7 @@ const colour = {
       $description:
         'Used for text on primary buttons, active form controls and focused tab and menu items. Also used for the link text colour and tertiary buttons.',
       $type: Type.Color,
-      $value: '#13213f',
+      $value: '#003271',
       $extensions: {
         'iress.contrast.AA': ['colour.primary.surface'],
         'styler.panel': 'colour.primary',
@@ -235,7 +235,7 @@ const colour = {
       $description:
         'Used for muted text such as hints and descriptions to allow for content hierarchy.',
       $type: Type.Color,
-      $value: '#5D6C7E',
+      $value: '#6D7278',
       $extensions: {
         'iress.aliases': ['muted'],
         'iress.contrast.AA': ['colour.neutral.10', 'colour.neutral.20'],

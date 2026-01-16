@@ -159,7 +159,7 @@ describe('IressInput', () => {
       const textarea = screen.container.querySelector('textarea');
 
       expect(textarea).toBeInTheDocument();
-      const styles = input({ autoGrow: true });
+      const styles = input({ autoGrow: true, isTextarea: true });
       expect(wrapper).toHaveClass(styles.wrapper ?? '');
     });
 
@@ -172,7 +172,7 @@ describe('IressInput', () => {
 
       expect(textarea).toBeInTheDocument();
       // The component should treat autoGrow=true as autoGrow=5
-      const styles = input({ autoGrow: true });
+      const styles = input({ autoGrow: true, isTextarea: true });
       expect(wrapper).toHaveClass(styles.wrapper ?? '');
     });
   });

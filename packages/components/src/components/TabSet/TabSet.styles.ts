@@ -8,6 +8,8 @@ export const tabSet = sva({
     'panel',
     'activeIndicator',
     'hoverIndicator',
+    'overflowEndIndicator',
+    'overflowStartIndicator',
   ],
   base: {
     root: {
@@ -16,20 +18,33 @@ export const tabSet = sva({
       bg: 'colour.neutral.10',
       borderRadius: 'radius.system.layout',
     },
-    list: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      borderBottom: 'divider',
+    listHolder: {
+      position: 'relative',
+      overflowX: 'clip',
+      overflowY: 'visible',
+      pt: 'spacing.2',
 
-      '& > :has(.ids-badge)': {
-        mr: 'spacing.4',
+      _after: {
+        content: '""',
+        position: 'absolute',
+        bottom: 'spacing.1',
+        left: 'spacing.0',
+        right: 'spacing.0',
+        borderBottom: 'divider',
+        pointerEvents: 'none',
       },
     },
-    listHolder: {
+    list: {
+      display: 'flex',
+      flexWrap: 'nowrap',
+      scrollable: 'x',
+      overflowY: 'visible',
+      scrollSnapType: '[x proximity]',
       position: 'relative',
     },
     panel: {
       pt: 'md',
+      textStyle: 'typography.body.md',
 
       _focusVisible: {
         layerStyle: 'elevation.focus',
@@ -38,20 +53,36 @@ export const tabSet = sva({
     },
     activeIndicator: {
       position: 'absolute',
-      bottom: '[0]',
-      left: '[0]',
-      height: '[2px]',
-      bg: 'colour.primary.text',
-      transition: 'all',
-    },
-    hoverIndicator: {
-      position: 'absolute',
-      top: 'spacing.2',
-      bottom: 'spacing.2',
+      top: 'spacing.1',
+      bottom: 'spacing.1',
       left: '[0]',
       bg: 'colour.neutral.20',
       transition: 'all',
-      borderRadius: 'radius.system.button',
+      borderRadius: 'radius.075',
+      borderBottomRadius: 'none',
+      pointerEvents: 'none',
+
+      _after: {
+        content: '""',
+        position: 'absolute',
+        bottom: 'spacing.0',
+        left: 'spacing.0',
+        right: 'spacing.0',
+        height: '[2px]',
+        bg: 'colour.primary.text',
+        transition: 'all',
+        zIndex: '[2]',
+      },
+    },
+    hoverIndicator: {
+      position: 'absolute',
+      top: 'spacing.1',
+      bottom: 'spacing.1',
+      left: '[0]',
+      bg: 'colour.primary.surfaceHover',
+      transition: 'all',
+      borderRadius: 'radius.075',
+      borderBottomRadius: 'none',
       pointerEvents: 'none',
     },
   },
@@ -76,6 +107,35 @@ export const tabSet = sva({
         },
         activeIndicator: {
           left: '[100%]',
+        },
+      },
+    },
+    overflowEnd: {
+      true: {
+        overflowEndIndicator: {
+          layerStyle: 'elevation.overflow',
+          position: 'absolute',
+          top: 'spacing.0',
+          bottom: 'spacing.1',
+          right: 'spacing.0',
+          width: 'input.4',
+          pointerEvents: '[none]',
+          maskImage: `[linear-gradient(to right, transparent 30%, black 100%)]`,
+        },
+      },
+    },
+    overflowStart: {
+      true: {
+        overflowStartIndicator: {
+          layerStyle: 'elevation.overflow',
+          position: 'absolute',
+          top: 'spacing.0',
+          bottom: 'spacing.1',
+          left: 'spacing.0',
+          width: 'input.4',
+          pointerEvents: '[none]',
+          maskImage: `[linear-gradient(to right, transparent 30%, black 100%)]`,
+          transform: '[rotate(180deg)]',
         },
       },
     },

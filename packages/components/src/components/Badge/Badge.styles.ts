@@ -1,7 +1,7 @@
 import { sva } from '@/styled-system/css';
 
 export const badge = sva({
-  slots: ['root', 'badge', 'host'],
+  slots: ['root', 'badge'],
   base: {
     root: {
       // Performance: CSS containment limits style recalculation scope
@@ -15,7 +15,7 @@ export const badge = sva({
       whiteSpace: 'nowrap',
       textDecoration: 'none',
       minHeight: '[1.35em]',
-      minWidth: '[1.35em]',
+      minWidth: '[1.5em]',
     },
     badge: {
       alignItems: 'center',
@@ -28,28 +28,8 @@ export const badge = sva({
         display: 'inline-block',
       },
     },
-    host: {
-      position: 'relative',
-      height: 'auto',
-    },
   },
   variants: {
-    host: {
-      true: {
-        badge: {
-          position: 'absolute',
-          insetBlockStart: 'spacing.0',
-          insetInlineEnd: 'spacing.0',
-          zIndex: '100',
-          transformOrigin: '100% 0',
-          borderRadius: 'radius.100',
-          transform: {
-            base: 'translate(50%, -50%)',
-            _rtl: 'translate(-50%, -50%)',
-          },
-        },
-      },
-    },
     pill: {
       true: {
         badge: {
@@ -153,6 +133,5 @@ export const badge = sva({
   defaultVariants: {
     mode: 'neutral',
     pill: false,
-    host: false,
   },
 });

@@ -45,6 +45,10 @@ export const tab = cva({
         _hover: {
           bg: '[none]',
         },
+
+        _focusVisible: {
+          layerStyle: 'elevation.focusCompact',
+        },
       },
     },
   },

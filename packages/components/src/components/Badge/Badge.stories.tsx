@@ -6,7 +6,7 @@ import {
   stylingProps,
 } from '@theme-preset/storybookHelpers';
 import { STATUSES } from '@/constants';
-import { IressBadge, IressButton, IressInline, IressTab } from '@/main';
+import { IressBadge, IressInline } from '@/main';
 
 type Story = StoryObj<typeof IressBadge>;
 const BADGE_MODES = [
@@ -66,26 +66,4 @@ export const Pill: Story = {
     mode: 'primary',
     pill: true,
   },
-};
-
-export const Host: Story = {
-  ...Default,
-  args: {
-    ...Default.args,
-    pill: true,
-    mode: 'success',
-  },
-  argTypes: {
-    ...disableArgTypes(['host']),
-  },
-  render: (args) => (
-    <IressInline gap="lg">
-      <IressBadge {...args} host={<IressButton>Host button</IressButton>}>
-        3
-      </IressBadge>
-      <IressBadge {...args} host={<IressTab label="Host tab" active />}>
-        99+
-      </IressBadge>
-    </IressInline>
-  ),
 };
