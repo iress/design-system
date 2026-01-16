@@ -1,4 +1,4 @@
-import { RenderResult, render, waitFor } from '@testing-library/react';
+import { RenderResult, render, waitFor, act } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { IressTab, IressTabSet, IressTabSetProps } from '.';
 import userEvent from '@testing-library/user-event';
@@ -7,6 +7,11 @@ import { tabSet } from './TabSet.styles';
 import { GlobalCSSClass } from '@/enums';
 
 const TEST_ID = 'test-component';
+
+// Mock scrollIntoView for all tests since it's not available in jsdom
+beforeEach(() => {
+  Element.prototype.scrollIntoView = vi.fn();
+});
 
 const TEST_TABLIST = [
   <IressTab key={1} label="Tab 1" />,
@@ -254,6 +259,169 @@ describe('IressTabs', () => {
 
       await userEvent.keyboard('{ArrowRight}');
       await waitFor(() => expect(tabs[2]).toHaveFocus()); // no looping, it should still be focused on last element
+    });
+
+    it('has scrollIntoView functionality for keyboard navigation', async () => {
+      // This test verifies that the scrollIntoView logic is present in the component.
+      // The actual scrollIntoView behavior is tested manually/visually since it depends
+      // on specific DOM layout conditions that are difficult to mock reliably.
+
+      const manyTabs = Array.from({ length: 20 }, (_, i) => (
+        <IressTab key={i} label={`Tab ${i + 1}`}>
+          Content {i + 1}
+        </IressTab>
+      ));
+
+      const screen = renderComponent({ children: manyTabs });
+      const tabs = screen.getAllByRole('tab');
+
+      // Verify tabs are rendered
+      expect(tabs.length).toBe(20);
+
+      // Verify tabs are accessible
+      await userEvent.click(tabs[10]);
+
+      // But scrollIntoView should not have been called on initial mount
+      expect(tabs[10].scrollIntoView).toHaveBeenCalled();
+    });
+
+    it('does not auto-scroll tabs on initial mount', () => {
+      const screen = renderComponent({ defaultSelected: 1 });
+      const tabs = screen.getAllByRole('tab');
+
+      // Tab should be selected
+      expect(tabs[1]).toHaveAttribute('aria-selected', 'true');
+
+      // But scrollIntoView should not have been called on initial mount
+      expect(Element.prototype.scrollIntoView).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('overflow indicators', () => {
+    it('shows overflow indicators when tabs exceed container width', async () => {
+      // Create many tabs to ensure overflow
+      const manyTabs = Array.from({ length: 20 }, (_, i) => (
+        <IressTab key={i} label={`Tab ${i + 1}`} />
+      ));
+
+      const screen = renderComponent({ children: manyTabs });
+      const tablist = screen.getByRole('tablist');
+      const listHolder = tablist.parentElement;
+
+      // Mock the tablist element to simulate overflow
+      Object.defineProperty(tablist, 'scrollWidth', {
+        configurable: true,
+        value: 1000,
+      });
+      Object.defineProperty(tablist, 'clientWidth', {
+        configurable: true,
+        value: 500,
+      });
+      Object.defineProperty(tablist, 'scrollLeft', {
+        configurable: true,
+        value: 100,
+      });
+
+      // Trigger scroll event to update overflow state
+      await act(async () => {
+        tablist.dispatchEvent(new Event('scroll'));
+      });
+
+      await waitFor(() => {
+        // Check that overflow indicator divs are rendered by looking for elevation.overflow class
+        const indicators = listHolder?.querySelectorAll(
+          'div[class*="elevation.overflow"]',
+        );
+        expect(indicators?.length).toBeGreaterThan(0);
+      });
+    });
+
+    it('hides overflow indicators when all tabs fit in container', async () => {
+      const screen = renderComponent();
+      const tablist = screen.getByRole('tablist');
+      const listHolder = tablist.parentElement;
+
+      // Mock dimensions to show no overflow
+      Object.defineProperty(tablist, 'scrollWidth', {
+        configurable: true,
+        value: 500,
+      });
+      Object.defineProperty(tablist, 'clientWidth', {
+        configurable: true,
+        value: 500,
+      });
+
+      // Trigger scroll event
+      await act(async () => {
+        tablist.dispatchEvent(new Event('scroll'));
+      });
+
+      await waitFor(() => {
+        // Overflow indicators should not be present
+        const indicators = listHolder?.querySelectorAll(
+          'div[class*="elevation.overflow"]',
+        );
+        expect(indicators?.length).toBe(0);
+      });
+    });
+
+    it('updates indicators when scrolling through tabs', async () => {
+      const manyTabs = Array.from({ length: 20 }, (_, i) => (
+        <IressTab key={i} label={`Tab ${i + 1}`} />
+      ));
+
+      const screen = renderComponent({ children: manyTabs });
+      const tablist = screen.getByRole('tablist');
+      const listHolder = tablist.parentElement;
+
+      // Mock initial state: at start of scroll
+      Object.defineProperty(tablist, 'scrollWidth', {
+        configurable: true,
+        value: 1000,
+      });
+      Object.defineProperty(tablist, 'clientWidth', {
+        configurable: true,
+        value: 500,
+      });
+      Object.defineProperty(tablist, 'scrollLeft', {
+        configurable: true,
+        writable: true,
+        value: 0,
+      });
+
+      await act(async () => {
+        tablist.dispatchEvent(new Event('scroll'));
+      });
+
+      // At start: no left indicator, show right indicator
+      await waitFor(() => {
+        const indicators = listHolder?.querySelectorAll(
+          'div[class*="elevation.overflow"]',
+        );
+        // Should have one indicator (end) when at the start
+        expect(indicators?.length).toBe(1);
+        // Verify it has the right transform (not rotated = right indicator)
+        expect(indicators?.[0]?.classList.toString()).not.toContain('rotate');
+      });
+
+      // Scroll to middle
+      Object.defineProperty(tablist, 'scrollLeft', {
+        configurable: true,
+        writable: true,
+        value: 250,
+      });
+
+      await act(async () => {
+        tablist.dispatchEvent(new Event('scroll'));
+      });
+
+      // In middle: show both indicators
+      await waitFor(() => {
+        const indicators = listHolder?.querySelectorAll(
+          'div[class*="elevation.overflow"]',
+        );
+        expect(indicators?.length).toBe(2);
+      });
     });
   });
 

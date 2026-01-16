@@ -126,7 +126,44 @@ export const IressTabSet = ({
   ...restProps
 }: IressTabSetProps) => {
   const [panel, setPanel] = useState<HTMLDivElement | null>(null);
-  const styles = tabSet({ layout });
+  const [overflowStart, setOverflowStart] = useState(false);
+  const [overflowEnd, setOverflowEnd] = useState(false);
+  const listHolderRef = useRef<HTMLDivElement>(null);
+  const styles = tabSet({ layout, overflowStart, overflowEnd });
+
+  useEffect(() => {
+    const checkOverflow = () => {
+      const listElement =
+        listHolderRef.current?.querySelector('[role="tablist"]');
+      if (listElement) {
+        const { scrollWidth, clientWidth, scrollLeft } = listElement;
+        const hasOverflow = scrollWidth > clientWidth;
+
+        if (hasOverflow) {
+          // Show left indicator if scrolled right (not at start)
+          setOverflowStart(scrollLeft > 1);
+          // Show right indicator if not scrolled to end
+          setOverflowEnd(scrollLeft < scrollWidth - clientWidth - 1);
+        } else {
+          setOverflowStart(false);
+          setOverflowEnd(false);
+        }
+      }
+    };
+
+    checkOverflow();
+
+    const listElement =
+      listHolderRef.current?.querySelector('[role="tablist"]');
+
+    listElement?.addEventListener('scroll', checkOverflow);
+    window.addEventListener('resize', checkOverflow);
+
+    return () => {
+      listElement?.removeEventListener('scroll', checkOverflow);
+      window.removeEventListener('resize', checkOverflow);
+    };
+  }, [children]);
 
   return (
     <TabSetProvider
@@ -143,14 +180,19 @@ export const IressTabSet = ({
           <>
             <styled.div
               {...tabHolderStyle}
+              ref={listHolderRef}
               className={cx(styles.listHolder, tabHolderStyle?.className)}
             >
-              <ActiveIndicator className={styles.activeIndicator} />
-              <HoverIndicator className={styles.hoverIndicator} />
+              {overflowStart && (
+                <div className={styles.overflowStartIndicator} />
+              )}
+              {overflowEnd && <div className={styles.overflowEndIndicator} />}
               <Composite
                 render={<div className={styles.list} role="tablist" />}
                 loop={false}
               >
+                <ActiveIndicator className={styles.activeIndicator} />
+                <HoverIndicator className={styles.hoverIndicator} />
                 {children}
               </Composite>
             </styled.div>

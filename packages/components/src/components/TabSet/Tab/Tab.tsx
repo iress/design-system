@@ -12,6 +12,7 @@ import {
   type MouseEvent,
   type ReactElement,
   useContext,
+  useEffect,
 } from 'react';
 import { useIdIfNeeded } from '@/hooks';
 import { createPortal } from 'react-dom';
@@ -165,6 +166,7 @@ const Tab = <THref extends string | undefined = undefined>(
   const tabSet = useContext(TabSetContext);
   const { register, unregister, setHover } = tabSet ?? {};
   const { onMouseEnter, onMouseLeave } = restProps;
+  const isInitialMount = useRef(true);
 
   useImperativeHandle(ref, () => element.current!);
 
@@ -178,6 +180,24 @@ const Tab = <THref extends string | undefined = undefined>(
 
   // eslint-disable-next-line react-hooks/refs -- forwards ref
   const isActive = tabSet ? tabSet.isActive(element.current) : active;
+
+  // Scroll into view when tab becomes active (for keyboard navigation)
+  useEffect(() => {
+    if (isActive && element.current && tabSet) {
+      // Skip scrolling on initial mount
+      if (isInitialMount.current) {
+        isInitialMount.current = false;
+        return;
+      }
+
+      element.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+    }
+  }, [isActive, tabSet]);
+
   const className = cx(
     classNameProp,
     tab({ active: isActive, insideTabSet: !!tabSet }),

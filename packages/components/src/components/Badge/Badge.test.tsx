@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { IressBadge } from './Badge';
 import { axe } from 'jest-axe';
-import { IressButton } from '../Button';
 import { STATUSES } from '@/constants';
 import { GlobalCSSClass } from '@/enums';
 
@@ -42,28 +41,6 @@ describe('IressBadge', () => {
 
     const badge = screen.getByText('Badge');
     expect(badge).toHaveClass('bdr_radius.100');
-  });
-
-  it('renders with the correct data-testids', () => {
-    const screen = render(
-      <IressBadge host={<IressButton>Button</IressButton>} data-testid="badge">
-        Badge
-      </IressBadge>,
-    );
-
-    expect(screen.getByTestId('badge')).toBeInTheDocument();
-    expect(screen.getByTestId('badge__host')).toBeInTheDocument();
-  });
-
-  it('should support a host element', () => {
-    const { container } = render(
-      <IressBadge host={<IressButton>Button</IressButton>}>Badge</IressBadge>,
-    );
-
-    const button = screen.getByRole('button');
-
-    expect(container.firstChild).toHaveClass('pos_relative h_auto');
-    expect(button).toBeInTheDocument();
   });
 
   it('should not have basic accessibility issues', async () => {

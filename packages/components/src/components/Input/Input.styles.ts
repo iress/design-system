@@ -108,6 +108,9 @@ export const input = sva({
     },
     isTextarea: {
       true: {
+        wrapper: {
+          alignItems: 'end',
+        },
         formControl: {
           lineHeight: 1.5,
           height: 'auto',

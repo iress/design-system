@@ -280,5 +280,6 @@ export const AutoGrow: TextareaStory = {
   args: {
     rows: 1,
     autoGrow: true,
+    append: <IressIcon name="sparkles" />,
   },
 };
