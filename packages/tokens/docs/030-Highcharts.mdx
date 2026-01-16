@@ -1,6 +1,7 @@
 import { Meta, Story } from '@storybook/addon-docs/blocks';
 import { HideSidebar } from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './030-Highcharts.stories';
+import { ComponentExample } from '@iress-oss/ids-storybook-config';
 
 <Meta of={ComponentStories} />
 <HideSidebar />
@@ -35,25 +36,25 @@ Each example below is fully interactive and editable in CodeSandbox. Click on an
 
 Demonstrates using IDS data visualization colors (`colour.data.bold`) for pie slices with a market share use case.
 
-<Story of={ComponentStories.PieChart} />
+<ComponentExample api={false} of={ComponentStories.PieChart} />
 
 ### Bar Chart
 
 Shows how to use IDS system colors (`colour.primary`, `colour.system.success`, `colour.system.info`) for grouped column charts.
 
-<Story of={ComponentStories.BarChart} />
+<ComponentExample api={false} of={ComponentStories.BarChart} />
 
 ### Line Chart
 
 Illustrates multi-series line charts using IDS data visualization colors with proper legend and tooltip styling.
 
-<Story of={ComponentStories.LineChart} />
+<ComponentExample api={false} of={ComponentStories.LineChart} />
 
 ### Animated Chart
 
 Features a real-time updating chart with IDS colors, demonstrating dynamic data visualization with pause/resume controls.
 
-<Story of={ComponentStories.AnimatedChart} />
+<ComponentExample api={false} of={ComponentStories.AnimatedChart} />
 
 ## Getting Started
 
@@ -99,4 +100,3 @@ The IDS design system provides specific color palettes for data visualization:
 - **Subtle Colors** (`colour.data.subtle`): 10, 20, 30, 40, 50, 60, 70, 80, 90 - Softer colors for backgrounds
 - **System Colors**: `primary`, `success`, `info`, `warning`, `danger` - Semantic colors
 - **Neutral Colors**: 10-90 scale for backgrounds, text, and borders
-
