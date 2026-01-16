@@ -10,7 +10,6 @@ export const tab = cva({
     position: 'relative',
     px: 'spacing.3',
     py: 'spacing.3',
-    // scrollSnapAlign: 'start',
     textOverflow: 'ellipsis',
     textDecoration: 'none',
     textStyle: 'typography.body.md',
