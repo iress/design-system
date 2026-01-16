@@ -1,72 +1,59 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { cssVars } from '@iress-oss/ids-tokens';
 
-const App = () => {
-  // Use data visualization bold colors for line series
-  const lineColors = [
-    cssVars.colour.data.bold['40'],
-    cssVars.colour.data.bold['70'],
-    cssVars.colour.data.bold['10'],
+export const BarChartExample = () => {
+  // Use IDS system colors for different data series
+  const seriesColors = [
+    cssVars.colour.primary.fill,
+    cssVars.colour.system.success.fill,
+    cssVars.colour.system.info.fill,
   ];
 
   const options: Highcharts.Options = {
-    colors: lineColors,
+    colors: seriesColors,
     chart: {
-      type: 'line',
+      type: 'column',
       backgroundColor: cssVars.colour.neutral['10'],
     },
     title: {
-      text: 'Stock Price Trends',
+      text: 'Quarterly Revenue Comparison',
       style: {
         color: cssVars.colour.neutral['90'],
-        fontSize: '18px',
-        fontWeight: '600',
+        font: cssVars.typography.heading['3'],
       },
     },
     subtitle: {
-      text: 'Monthly average closing prices',
+      text: 'Revenue in millions (USD)',
       style: {
         color: cssVars.colour.neutral['70'],
-        fontSize: '14px',
+        font: cssVars.typography.body.md.regular,
       },
     },
     xAxis: {
-      categories: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ],
+      categories: ['Q1', 'Q2', 'Q3', 'Q4'],
       labels: {
         style: {
           color: cssVars.colour.neutral['80'],
-          fontSize: '12px',
+          font: cssVars.typography.body.sm.regular,
         },
       },
       lineColor: cssVars.colour.neutral['40'],
     },
     yAxis: {
+      min: 0,
       title: {
-        text: 'Price ($)',
+        text: 'Revenue ($M)',
         style: {
           color: cssVars.colour.neutral['80'],
+          font: cssVars.typography.body.md.regular,
         },
       },
       labels: {
         style: {
           color: cssVars.colour.neutral['80'],
-          fontSize: '12px',
+          font: cssVars.typography.body.sm.regular,
         },
       },
       gridLineColor: cssVars.colour.neutral['30'],
@@ -76,34 +63,23 @@ const App = () => {
       borderColor: cssVars.colour.neutral['40'],
       style: {
         color: cssVars.colour.neutral['90'],
+        font: cssVars.typography.body.sm.regular,
       },
       shared: true,
-      crosshairs: true,
-      valuePrefix: '$',
+      valueSuffix: 'M',
     },
     plotOptions: {
-      line: {
-        marker: {
-          enabled: true,
-          radius: 4,
-        },
-        lineWidth: 2,
-      },
-      series: {
-        marker: {
-          states: {
-            hover: {
-              enabled: true,
-              radius: 6,
-            },
-          },
+      column: {
+        borderRadius: 4,
+        dataLabels: {
+          enabled: false,
         },
       },
     },
     legend: {
       itemStyle: {
         color: cssVars.colour.neutral['80'],
-        fontSize: '12px',
+        font: cssVars.typography.body.sm.regular,
       },
       itemHoverStyle: {
         color: cssVars.colour.primary.text,
@@ -111,19 +87,19 @@ const App = () => {
     },
     series: [
       {
-        type: 'line',
-        name: 'Tech Corp',
-        data: [125, 132, 128, 145, 152, 158, 162, 168, 175, 182, 188, 195],
+        type: 'column',
+        name: 'Product A',
+        data: [45, 52, 48, 61],
       },
       {
-        type: 'line',
-        name: 'Finance Inc',
-        data: [85, 88, 92, 95, 98, 102, 105, 108, 112, 115, 118, 122],
+        type: 'column',
+        name: 'Product B',
+        data: [38, 42, 51, 44],
       },
       {
-        type: 'line',
-        name: 'Energy Ltd',
-        data: [65, 68, 70, 72, 75, 78, 80, 82, 85, 87, 90, 92],
+        type: 'column',
+        name: 'Product C',
+        data: [29, 35, 39, 42],
       },
     ],
     credits: {
@@ -136,7 +112,7 @@ const App = () => {
       style={{
         padding: '24px',
         backgroundColor: cssVars.colour.neutral['20'],
-        minHeight: '100vh',
+        minHeight: '400px',
       }}
     >
       <div
@@ -151,9 +127,3 @@ const App = () => {
     </div>
   );
 };
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);

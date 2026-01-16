@@ -1,10 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { cssVars } from '@iress-oss/ids-tokens';
 
-const App = () => {
+export const PieChartExample = () => {
   // Create a color palette from IDS data visualization tokens
   const chartColors = [
     cssVars.colour.data.bold['10'],
@@ -25,8 +24,7 @@ const App = () => {
       text: 'Market Share by Product Category',
       style: {
         color: cssVars.colour.neutral['90'],
-        fontSize: '18px',
-        fontWeight: '600',
+        font: cssVars.typography.heading['3'],
       },
     },
     tooltip: {
@@ -35,6 +33,7 @@ const App = () => {
       borderColor: cssVars.colour.neutral['40'],
       style: {
         color: cssVars.colour.neutral['90'],
+        font: cssVars.typography.body.sm.regular,
       },
     },
     plotOptions: {
@@ -46,7 +45,7 @@ const App = () => {
           format: '<b>{point.name}</b>: {point.percentage:.1f}%',
           style: {
             color: cssVars.colour.neutral['80'],
-            fontSize: '12px',
+            font: cssVars.typography.body.sm.regular,
           },
         },
         showInLegend: true,
@@ -55,7 +54,7 @@ const App = () => {
     legend: {
       itemStyle: {
         color: cssVars.colour.neutral['80'],
-        fontSize: '12px',
+        font: cssVars.typography.body.sm.regular,
       },
       itemHoverStyle: {
         color: cssVars.colour.primary.text,
@@ -85,7 +84,7 @@ const App = () => {
       style={{
         padding: '24px',
         backgroundColor: cssVars.colour.neutral['20'],
-        minHeight: '100vh',
+        minHeight: '400px',
       }}
     >
       <div
@@ -100,9 +99,3 @@ const App = () => {
     </div>
   );
 };
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);

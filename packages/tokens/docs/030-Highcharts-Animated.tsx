@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { cssVars } from '@iress-oss/ids-tokens';
 
 /* eslint-disable sonarjs/pseudo-random */
 
-const App = () => {
+export const AnimatedChartExample = () => {
   const [chartData, setChartData] = useState<number[]>([]);
   const [isAnimating, setIsAnimating] = useState(true);
 
@@ -53,8 +52,7 @@ const App = () => {
       text: 'Real-time Trading Volume',
       style: {
         color: cssVars.colour.neutral['90'],
-        fontSize: '18px',
-        fontWeight: '600',
+        font: cssVars.typography.heading['3'],
       },
     },
     subtitle: {
@@ -63,7 +61,7 @@ const App = () => {
         color: isAnimating
           ? cssVars.colour.system.success.text
           : cssVars.colour.neutral['60'],
-        fontSize: '14px',
+        font: cssVars.typography.body.md.regular,
       },
     },
     xAxis: {
@@ -78,12 +76,13 @@ const App = () => {
         text: 'Volume',
         style: {
           color: cssVars.colour.neutral['80'],
+          font: cssVars.typography.body.md.regular,
         },
       },
       labels: {
         style: {
           color: cssVars.colour.neutral['80'],
-          fontSize: '12px',
+          font: cssVars.typography.body.sm.regular,
         },
       },
       gridLineColor: cssVars.colour.neutral['30'],
@@ -95,6 +94,7 @@ const App = () => {
       borderColor: cssVars.colour.neutral['40'],
       style: {
         color: cssVars.colour.neutral['90'],
+        font: cssVars.typography.body.sm.regular,
       },
       formatter: function () {
         return `<b>Volume:</b> ${this.y}`;
@@ -103,13 +103,9 @@ const App = () => {
     plotOptions: {
       spline: {
         marker: {
-          enabled: true,
-          radius: 3,
+          enabled: false,
         },
         lineWidth: 2,
-        animation: {
-          duration: 1000,
-        },
       },
     },
     legend: {
@@ -132,7 +128,7 @@ const App = () => {
       style={{
         padding: '24px',
         backgroundColor: cssVars.colour.neutral['20'],
-        minHeight: '100vh',
+        minHeight: '400px',
       }}
     >
       <div
@@ -160,8 +156,7 @@ const App = () => {
               border: 'none',
               borderRadius: '4px',
               cursor: 'pointer',
-              fontSize: '14px',
-              fontWeight: '500',
+              font: cssVars.typography.body.md.medium,
             }}
           >
             {isAnimating ? 'Pause' : 'Resume'}
@@ -175,8 +170,7 @@ const App = () => {
               border: 'none',
               borderRadius: '4px',
               cursor: 'pointer',
-              fontSize: '14px',
-              fontWeight: '500',
+              font: cssVars.typography.body.md.medium,
             }}
           >
             Clear
@@ -187,9 +181,3 @@ const App = () => {
     </div>
   );
 };
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
