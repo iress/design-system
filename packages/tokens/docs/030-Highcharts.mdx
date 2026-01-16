@@ -1,0 +1,22 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import { HideSidebar } from '@iress-oss/ids-storybook-config';
+import * as ComponentStories from './030-Highcharts.stories';
+
+<Meta of={ComponentStories} />
+<HideSidebar />
+
+# Highcharts Usage Examples
+
+This page demonstrates how to use IDS tokens with Highcharts for data visualization. The examples show how to integrate IDS color tokens, typography, and spacing into your charts for a consistent design system experience.
+
+## Interactive Examples
+
+Each example below is fully interactive and editable in CodeSandbox. Click on any example to open it in a new sandbox where you can modify the code and see the results.
+
+<Story of={ComponentStories.PieChart} />
+
+<Story of={ComponentStories.BarChart} />
+
+<Story of={ComponentStories.LineChart} />
+
+<Story of={ComponentStories.AnimatedChart} />
