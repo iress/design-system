@@ -5,7 +5,7 @@ export const slideout = sva({
   base: {
     root: {
       // Performance: CSS containment (no paint due to fixed positioning)
-      contain: 'layout style',
+      contain: 'style',
       textStyle: 'typography.body.md',
       position: 'fixed',
       insetBlockStart: 'spacing.0',
