@@ -254,13 +254,13 @@ const Input = <
     autoGrow: !!autoGrow,
     inline,
     isTextarea: rows !== undefined,
+    stretched: !!styleProps.stretch,
     width,
   });
 
   return (
     <styled.div
       className={cx(
-        // classes.root,
         GlobalCSSClass.FormElement,
         GlobalCSSClass.Input,
         className,
