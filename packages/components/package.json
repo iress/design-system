@@ -61,7 +61,7 @@
     "react-dropzone": "14.3.8",
     "react-hook-form": "7.69.0",
     "rimraf": "^6.1.2",
-    "storybook": "10.1.10",
+    "storybook": "10.1.11",
     "typescript": "5.9.3",
     "vite": "7.3.0",
     "vite-bundle-visualizer": "^1.2.1",
