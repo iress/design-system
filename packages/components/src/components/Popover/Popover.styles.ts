@@ -11,7 +11,7 @@ export const popover = sva({
     },
     content: {
       // Performance: CSS containment (no paint due to floating nature)
-      contain: 'layout style',
+      contain: 'style',
       bg: 'colour.neutral.10',
       border: 'divider',
       borderRadius: 'radius.system.form',
