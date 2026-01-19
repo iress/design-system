@@ -1621,7 +1621,7 @@ __metadata:
     react: "npm:^19.2.3"
     react-dom: "npm:^19.2.3"
     react-dropzone: "npm:14.3.8"
-    react-hook-form: "npm:7.53.1"
+    react-hook-form: "npm:7.70.0"
     rimraf: "npm:^6.1.2"
     sass: "npm:^1.97.1"
     storybook: "npm:^10.1.10"
@@ -11386,12 +11386,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:7.53.1":
-  version: 7.53.1
-  resolution: "react-hook-form@npm:7.53.1"
+"react-hook-form@npm:7.70.0":
+  version: 7.70.0
+  resolution: "react-hook-form@npm:7.70.0"
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18 || ^19
-  checksum: 10c0/dd2466359a633f873755b366d367d51ab17100566b687fb3b098f704232bc6ab1c79d29f879151e492880ca5eeac35e9425fbe5a309e2a55f7a4b5baf7826e8d
+  checksum: 10c0/009c9c86b9ddb4f68964a121693fedcf61d656bc30052b217d4c87002ee26d6c5540cabd193abca4eb290775fdcd3c0a06b3b96fd54d9fead0c0d268a1760a5e
   languageName: node
   linkType: hard
 
