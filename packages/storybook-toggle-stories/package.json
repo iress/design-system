@@ -39,8 +39,8 @@
     "@storybook/icons": "2.0.1"
   },
   "devDependencies": {
-    "@storybook/addon-docs": "10.1.10",
-    "@storybook/react-vite": "10.1.10",
+    "@storybook/addon-docs": "10.1.11",
+    "@storybook/react-vite": "10.1.11",
     "@types/node": "^25.0.2",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
@@ -58,7 +58,7 @@
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "rimraf": "6.1.2",
-    "storybook": "10.1.10",
+    "storybook": "10.1.11",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "vite": "7.3.0",
