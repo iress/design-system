@@ -96,7 +96,6 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
               name={icons[status]}
               screenreaderText={`${status}: `}
               textStyle="typography.heading.2"
-              fixedWidth
               color={iconColor[status]}
             />
 

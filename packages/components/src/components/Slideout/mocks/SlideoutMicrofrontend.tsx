@@ -303,17 +303,17 @@ const MicrofrontendApp = () => {
                   {
                     label: 'Male',
                     value: 'male',
-                    prepend: <IressIcon name="mars" />,
+                    prepend: <IressIcon name="male" />,
                   },
                   {
                     label: 'Female',
                     value: 'female',
-                    prepend: <IressIcon name="venus" />,
+                    prepend: <IressIcon name="female" />,
                   },
                   {
                     label: 'Other',
                     value: 'other',
-                    prepend: <IressIcon name="otter" />,
+                    prepend: <IressIcon name="agender" />,
                   },
                 ]}
               />

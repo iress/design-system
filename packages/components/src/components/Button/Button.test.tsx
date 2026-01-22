@@ -92,9 +92,7 @@ describe('IressButton', () => {
 
       it('renders loading spinner when loading is true', () => {
         render(<IressButton loading>Button</IressButton>);
-        const button = screen.getByRole('button');
-        const spinner = button.querySelector('.fal');
-
+        const spinner = screen.getByLabelText('Loading');
         expect(spinner).toBeVisible();
       });
 
@@ -105,16 +103,14 @@ describe('IressButton', () => {
           </IressButton>,
         );
         const button = screen.getByRole('button');
-        expect(button.textContent).toBe('Button');
-        expect(button.textContent).not.toBe('BeforeButton');
+        expect(button).toHaveTextContent('Button');
+        expect(button).not.toHaveTextContent('BeforeButton');
       });
 
       it('renders the correct aria-label on the spinner when loading is a string', () => {
         render(<IressButton loading="This is loading">Button</IressButton>);
-        const button = screen.getByRole('button');
-        const spinner = button.querySelector('.fal');
-
-        expect(spinner).toHaveAttribute('aria-label', 'This is loading');
+        const spinner = screen.getByLabelText('This is loading');
+        expect(spinner).toBeVisible();
       });
 
       it('renders the correct aria-describedby attribute on the button', () => {

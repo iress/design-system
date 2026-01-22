@@ -224,7 +224,6 @@ const Button = <
           {!!loading && (
             <IressSpinner
               className={styles.spinner}
-              fixedWidth
               id={spinnerId}
               screenreaderText={loading === true ? 'Loading' : loading}
             />

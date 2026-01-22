@@ -43,12 +43,15 @@ export const tabSet = sva({
       position: 'relative',
     },
     panel: {
-      pt: 'md',
       textStyle: 'typography.body.md',
 
       _focusVisible: {
         layerStyle: 'elevation.focus',
         outline: '[none]',
+      },
+
+      '& > :not([hidden])': {
+        pt: 'sm',
       },
     },
     activeIndicator: {

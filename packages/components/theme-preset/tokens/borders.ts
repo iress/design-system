@@ -26,14 +26,6 @@ export const borders = {
       color: cssVars.colour.neutral['70'],
     },
   },
-  placeholder: {
-    description: 'Used for placeholders',
-    value: {
-      width: '1.5px',
-      style: 'solid',
-      color: cssVars.colour.neutral['30'],
-    },
-  },
   hover: {
     description: 'Used when hovering over elements such as expanders',
     value: {

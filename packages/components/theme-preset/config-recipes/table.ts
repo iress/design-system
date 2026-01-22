@@ -8,6 +8,7 @@ export const tableRecipe = defineSlotRecipe({
     'caption',
     'sortHeader',
     'sortIcon',
+    'sortIconActive',
     'activator',
     'rowGroupHeader',
   ],
@@ -68,6 +69,10 @@ export const tableRecipe = defineSlotRecipe({
     sortIcon: {
       color: 'colour.neutral.70',
       marginInlineStart: 'spacing.2',
+    },
+    sortIconActive: {
+      color: 'colour.neutral.70',
+      marginInlineStart: '-spacing.1',
     },
     activator: {
       display: 'flex',

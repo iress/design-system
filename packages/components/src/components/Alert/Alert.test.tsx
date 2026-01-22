@@ -7,10 +7,10 @@ import { Statuses } from '@/types';
 import { IressIconProps } from '../Icon';
 
 const ALERT_ICONS: Record<Statuses, IressIconProps['name']> = {
-  danger: 'ban',
-  info: 'info-square',
+  danger: 'block',
+  info: 'info',
   success: 'check',
-  warning: 'exclamation-triangle',
+  warning: 'warning',
 };
 
 describe('IressAlert', () => {
@@ -144,7 +144,7 @@ describe('IressAlert', () => {
         expect(component).toHaveClass(alertStyles({ status }).alert!);
         const icon = getByRole('img');
         expect(icon).toHaveAttribute('aria-label', `${status}: `);
-        expect(icon).toHaveClass(`fa-${ALERT_ICONS[status]}`);
+        expect(icon).toHaveTextContent(ALERT_ICONS[status]);
       },
     );
   });

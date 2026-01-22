@@ -111,8 +111,7 @@ export const ErrorMessage: Story = {
       required: true,
       append: (
         <IressButton
-          data-testid="show-password-icon"
-          mode="tertiary"
+          mode="muted"
           prepend={<IressIcon name="eye" screenreaderText="Show" />}
         ></IressButton>
       ),

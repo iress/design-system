@@ -3,8 +3,6 @@ import {
   IressToasterProvider,
   type IressToasterProviderProps,
 } from './ToasterProvider';
-import { IressStack } from '../Stack';
-import { IressAlert } from '../Alert';
 import { ToastStatuses } from './mocks/ToasterStatuses';
 import ToastStatusesSource from './mocks/ToasterStatuses.tsx?raw';
 import { ToasterPositionExamples } from './mocks/ToasterPositions';
@@ -44,15 +42,7 @@ export const Provider: Story = {
   argTypes: {
     ...removeArgTypes(['toast']),
   },
-  render: (args) => (
-    <IressStack gap="md">
-      <IressAlert status="info">
-        <code>IressToasterProvider</code> does not change the position on each
-        render, it can only be done on the initial render.
-      </IressAlert>
-      <SimpleToasterExample {...args} />
-    </IressStack>
-  ),
+  render: (args) => <SimpleToasterExample {...args} />,
   parameters: {
     ...withTransformedRawSource(
       SimpleToasterExampleSource,

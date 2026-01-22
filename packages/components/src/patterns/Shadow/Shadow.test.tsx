@@ -155,37 +155,6 @@ describe('IressShadow', () => {
     expect(fontLinks).toHaveLength(1);
   });
 
-  it('loads icons stylesheet when noIcons is false', async () => {
-    render(
-      <IressShadow noIcons={false}>
-        <div>Test</div>
-      </IressShadow>,
-    );
-
-    await waitFor(() => {
-      const iconLink = document.head.querySelector(
-        'link[href*="cdn.iress.com/icons"]',
-      )!;
-      expect(iconLink).toBeTruthy();
-    });
-  });
-
-  it('does not load icons stylesheet when noIcons is true', async () => {
-    render(
-      <IressShadow noIcons={true}>
-        <div>Test</div>
-      </IressShadow>,
-    );
-
-    // Wait for a short period to ensure no icon link is added
-    await waitFor(() => {
-      const iconLink = document.head.querySelector(
-        'link[href*="cdn.iress.com/icons"]',
-      );
-      expect(iconLink).toBeFalsy();
-    });
-  });
-
   it('loads custom stylesheet URLs in shadow DOM', async () => {
     const stylesheetUrl = 'https://example.com/custom.css';
     const { container } = render(

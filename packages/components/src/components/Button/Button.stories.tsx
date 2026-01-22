@@ -57,7 +57,7 @@ export const Mode: ButtonStory = {
         {children === '' ? 'Quaternary button' : children}
       </IressButton>
       <IressButton mode="muted" {...args}>
-        {children === '' ? <IressIcon name="share-alt" /> : children}
+        {children === '' ? <IressIcon name="share" /> : children}
       </IressButton>
     </IressInline>
   ),
@@ -86,7 +86,7 @@ export const Status: ButtonStory = {
           {children === '' ? 'Quaternary button' : children}
         </IressButton>
         <IressButton mode="muted" status="success" {...args}>
-          {children === '' ? <IressIcon name="shopping-cart" /> : children}
+          {children === '' ? <IressIcon name="shopping_cart" /> : children}
         </IressButton>
       </IressInline>
       <IressInline gap="md">
@@ -155,7 +155,7 @@ export const Loading: ButtonStory = {
         {children}
       </IressButton>
       <IressButton {...args} mode="muted">
-        <IressIcon name="file-edit" />
+        <IressIcon name="edit" />
       </IressButton>
     </IressInline>
   ),

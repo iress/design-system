@@ -18,7 +18,7 @@ export const MENU_CHILDREN_OPTIONS = {
     </IressMenuItem>,
   ],
   complex: [
-    <IressMenuHeading key="1" prepend={<IressIcon name="smile" fixedWidth />}>
+    <IressMenuHeading key="1" prepend={<IressIcon name="sentiment_excited" />}>
       Heading with prepend
     </IressMenuHeading>,
     <IressMenuItem
@@ -26,7 +26,7 @@ export const MENU_CHILDREN_OPTIONS = {
       value="3"
       divider
       selected
-      prepend={<IressIcon name="flag" fixedWidth />}
+      prepend={<IressIcon name="flag" />}
       append={<IressIcon name="chevron-right" />}
     >
       Button with append and prepend
@@ -34,8 +34,8 @@ export const MENU_CHILDREN_OPTIONS = {
     <IressMenuHeading
       key="2"
       element="h3"
-      append={<IressIcon name="smile" fixedWidth />}
-      prepend={<IressIcon name="smile" fixedWidth />}
+      append={<IressIcon name="sentiment_excited" />}
+      prepend={<IressIcon name="sentiment_excited" />}
     >
       Heading with append and prepend
     </IressMenuHeading>,

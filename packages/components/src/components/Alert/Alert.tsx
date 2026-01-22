@@ -123,7 +123,6 @@ export const IressAlert = ({
       <IressIcon
         name={iconName}
         screenreaderText={`${status}: `}
-        fixedWidth
         className={classes.icon}
       />
     );

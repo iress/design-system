@@ -213,7 +213,7 @@ export const ButtonSlots: Story = {
         {...args}
         append={
           append ?? (
-            <IressButton mode="tertiary">
+            <IressButton mode="muted">
               <IressIcon name="search" />
             </IressButton>
           )
@@ -280,6 +280,6 @@ export const AutoGrow: TextareaStory = {
   args: {
     rows: 1,
     autoGrow: true,
-    append: <IressIcon name="sparkles" />,
+    append: <IressIcon name="wand_shine" />,
   },
 };

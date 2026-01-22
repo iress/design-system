@@ -40,14 +40,6 @@ const App = () => {
 };
 
 describe('IressProvider', () => {
-  it('adds icons', () => {
-    render(<IressProvider />);
-
-    expect(document.head.innerHTML).toContain(
-      'https://cdn.iress.com/icons/5.15.4/css/combined.min.css',
-    );
-  });
-
   it('adds providers', async () => {
     render(
       <IressProvider>
@@ -103,16 +95,6 @@ describe('IressProvider', () => {
 
         await waitFor(() =>
           expect(container.querySelector('[role="dialog"]')).not.toBeNull(),
-        );
-      });
-    });
-
-    describe('noIcons', () => {
-      it('does not render icons into the head', () => {
-        render(<IressProvider noIcons />);
-
-        expect(document.head.innerHTML).not.toContain(
-          'https://cdn.iress.com/icons/5.15.4/css/combined.min.css',
         );
       });
     });

@@ -1,6 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressShadow } from '.';
-import { IressPanel } from '@/main';
+import { IressIcon, IressPanel } from '@/main';
 import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressShadow>;
@@ -17,6 +17,10 @@ export default {
 
 export const Shadow: Story = {
   args: {
-    children: <IressPanel>Content inside shadow DOM</IressPanel>,
+    children: (
+      <IressPanel>
+        Content inside shadow DOM <IressIcon name="heart_smile" />
+      </IressPanel>
+    ),
   },
 };

@@ -20,11 +20,10 @@ describe('IressSpinner', () => {
     const spinner = screen.getByRole('img', { name: 'spinner' });
     expect(spinner).toHaveClass(
       'test-class',
-      'bx-s_border-box', // spinner styles
-      'fa-spinner-third', // icon name
       icon({ spin: 'half' }), // icon styles
       GlobalCSSClass.Spinner,
     );
+    expect(spinner).toHaveTextContent('progress_activity');
   });
 
   describe('variant', () => {

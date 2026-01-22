@@ -28,9 +28,13 @@ const renderCheckbox = (
 
 export function getFinancialReviewCheckboxes(
   items: CustomCheckboxProps[] = [
-    { value: 'home', label: 'Buying my first home', icon: 'house' },
-    { value: 'holiday', label: 'Saving for a holiday', icon: 'mountain' },
-    { value: 'debt', label: 'Reducing my debt', icon: 'credit-card' },
+    { value: 'home', label: 'Buying my first home', icon: 'cottage' },
+    {
+      value: 'holiday',
+      label: 'Saving for a holiday',
+      icon: 'downhill_skiing',
+    },
+    { value: 'debt', label: 'Reducing my debt', icon: 'credit_card' },
   ],
   testId?: string,
 ) {
@@ -39,21 +43,33 @@ export function getFinancialReviewCheckboxes(
 
 export function getFinancialReviewManyCheckboxes() {
   return getFinancialReviewCheckboxes([
-    { value: 'retirement', label: 'Retirement', icon: 'tree-palm' },
-    { value: 'home', label: 'Buying my first home', icon: 'house' },
-    { value: 'holiday', label: 'Saving for a holiday', icon: 'mountain' },
+    { value: 'retirement', label: 'Retirement', icon: 'houseboat' },
+    { value: 'home', label: 'Buying my first home', icon: 'cottage' },
+    {
+      value: 'holiday',
+      label: 'Saving for a holiday',
+      icon: 'downhill_skiing',
+    },
     {
       value: 'education',
       label: "Saving for my child's education",
-      icon: 'graduation-cap',
+      icon: 'school',
     },
-    { value: 'emergency', label: 'Saving for emergency', icon: 'medkit' },
+    {
+      value: 'emergency',
+      label: 'Saving for emergency',
+      icon: 'medical_services',
+    },
     {
       value: 'hobby',
       label: 'Spending more time on my hobbies',
-      icon: 'bicycle',
+      icon: 'pedal_bike',
     },
-    { value: 'debt', label: 'Reducing my debt', icon: 'chart-line-down' },
-    { value: 'business', label: 'Starting a business', icon: 'user-tie' },
+    { value: 'debt', label: 'Reducing my debt', icon: 'trending_down' },
+    {
+      value: 'business',
+      label: 'Starting a business',
+      icon: 'business_center',
+    },
   ]);
 }
