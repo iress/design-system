@@ -69,7 +69,7 @@ export const icon = cva({
       type: 'material',
       filled: true,
       css: {
-        fontVariationSettings: `'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 36`,
+        fontVariationSettings: `'FILL' 1, 'wght' ${MATERIAL_SYMBOLS.weight}, 'GRAD' ${MATERIAL_SYMBOLS.grade}, 'opsz' ${MATERIAL_SYMBOLS.opticalSize}`,
       },
     },
   ],
