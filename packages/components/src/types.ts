@@ -79,6 +79,15 @@ export type PositiveSpacingToken = Exclude<
 export type ResponsiveProp<T> = T | Partial<Record<Breakpoints | 'base', T>>;
 
 /**
+ * A container that can be used for injecting stylesheets.
+ */
+export type ShadowContainer =
+  | ShadowRoot
+  | HTMLElement
+  | RefObject<ShadowRoot | HTMLElement | null>
+  | null;
+
+/**
  * All available size tokens in the design system.
  */
 export type SizeToken = Exclude<

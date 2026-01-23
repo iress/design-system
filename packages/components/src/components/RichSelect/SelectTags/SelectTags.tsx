@@ -165,7 +165,7 @@ const Tags = ({
       deleteButton={
         <IressPopover
           activator={
-            <IressButton mode="tertiary">
+            <IressButton mode="muted">
               <IressIcon
                 name="chevron-circle-down"
                 screenreaderText="Actions"

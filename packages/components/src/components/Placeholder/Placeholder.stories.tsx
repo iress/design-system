@@ -16,7 +16,8 @@ export default {
 
 export const Placeholder: Story = {
   args: {
-    children: 'Placeholder',
+    children: 'This should be a description of the expected content',
+    heading: 'Placeholder',
     width: '300',
     height: '300',
   },

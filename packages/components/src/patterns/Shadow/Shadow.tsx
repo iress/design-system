@@ -26,11 +26,6 @@ export interface IressShadowProps extends IressUnstyledProps {
   fontFaceUrls?: string[];
 
   /**
-   * If true, the Iress icon stylesheet will not be included in the shadow DOM and the head.
-   */
-  noIcons?: boolean;
-
-  /**
    * Optional array of stylesheet contents to be included in the shadow DOM
    * (e.g. { styleId: '.my-class { color: red; }' })
    */
@@ -53,7 +48,6 @@ export const IressShadow = forwardRef<ShadowRoot | null, IressShadowProps>(
     {
       children,
       fontFaceUrls = [...defaultFonts],
-      noIcons,
       stylesheetContents = {},
       stylesheetUrls = [],
       ...restProps
@@ -103,19 +97,6 @@ export const IressShadow = forwardRef<ShadowRoot | null, IressShadowProps>(
     }, [fontFaceUrls]);
 
     useEffect(() => {
-      if (noIcons || !shadowRoot) return;
-
-      const icons = document.createElement('link');
-      icons.href = 'https://cdn.iress.com/icons/5.15.4/css/combined.min.css';
-      icons.rel = 'stylesheet';
-      shadowRoot.appendChild(icons);
-
-      if (!document.head.querySelector(`link[href="${icons.href}"]`)) {
-        document.head.appendChild(icons.cloneNode());
-      }
-    }, [noIcons, shadowRoot]);
-
-    useEffect(() => {
       if (!shadowRoot) return;
       stylesheetUrls.forEach((url) => {
         if (shadowRoot.querySelector(`link[href="${url}"]`)) {
@@ -153,7 +134,7 @@ export const IressShadow = forwardRef<ShadowRoot | null, IressShadowProps>(
 
     return (
       <div ref={hostRef} {...restProps}>
-        <IressProvider container={containerRef} noDefaultFont noIcons>
+        <IressProvider container={containerRef} noDefaultFont>
           {shadowRoot && createPortal(children, shadowRoot)}
         </IressProvider>
       </div>

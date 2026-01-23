@@ -1,5 +1,5 @@
-import { type FloatingUIContainer } from '@/types';
-import { type ReactNode } from 'react';
+import type { FloatingUIContainer } from '@/types';
+import type { ReactNode } from 'react';
 import { IressModalProvider } from '../Modal';
 import {
   IressToasterProvider,
@@ -11,6 +11,7 @@ import {
 } from '../Slideout';
 import { createPortal } from 'react-dom';
 import { defaultFonts } from '@iress-oss/ids-tokens';
+import { IressIconProvider, type IressIconProviderProps } from '../Icon';
 
 export interface IressProviderProps
   extends
@@ -28,21 +29,23 @@ export interface IressProviderProps
   container?: FloatingUIContainer;
 
   /**
+   * Disable automatic font subsetting via Google Fonts CDN
+   * When false, only icons actually used in the component tree are loaded
+   * When true, the full Material Symbols font is loaded
+   * @default false
+   */
+  noSubsetting?: IressIconProviderProps['noSubsetting'];
+
+  /**
    * If you don't want to load the default Iress font from the CDN, set this to true.
    */
   noDefaultFont?: boolean;
-
-  /**
-   * If you don't want to load the Iress Icon CSS from the CDN, set this to true.
-   */
-  noIcons?: boolean;
 }
 
 export const IressProvider = ({
   children,
   container,
   noDefaultFont,
-  noIcons,
   position,
   ...restProps
 }: IressProviderProps) => {
@@ -50,7 +53,9 @@ export const IressProvider = ({
     <IressModalProvider container={container}>
       <IressToasterProvider container={container} position={position}>
         <IressSlideoutProvider container={container} {...restProps}>
-          {children}
+          <IressIconProvider container={container} noSubsetting>
+            {children}
+          </IressIconProvider>
         </IressSlideoutProvider>
       </IressToasterProvider>
       {!noDefaultFont &&
@@ -65,16 +70,6 @@ export const IressProvider = ({
           )),
           document.head,
           'design-system-font',
-        )}
-      {!noIcons &&
-        createPortal(
-          <link
-            rel="stylesheet"
-            href="https://cdn.iress.com/icons/5.15.4/css/combined.min.css"
-            data-iress-design-system-icons
-          />,
-          document.head,
-          'design-system-icons',
         )}
     </IressModalProvider>
   );

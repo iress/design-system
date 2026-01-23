@@ -5,9 +5,9 @@ export const placeholder = sva({
   base: {
     root: {
       alignItems: 'center',
-      bg: 'colour.neutral.20',
-      border: 'placeholder',
-      borderRadius: 'radius.system.layout',
+      flexDirection: 'column',
+      bg: 'colour.primary.surface',
+      color: 'colour.primary.text',
       boxSizing: 'border-box',
       display: 'flex',
       justifyContent: 'center',
@@ -22,9 +22,10 @@ export const placeholder = sva({
       zIndex: '[-1]',
     },
     line: {
-      strokeWidth: '1.5px',
-      stroke: 'colour.neutral.30',
-      strokeOpacity: '0.5',
+      display: 'none',
+      strokeWidth: '0.5px',
+      stroke: 'colour.primary.fill',
+      strokeOpacity: '0.1',
     },
   },
 });

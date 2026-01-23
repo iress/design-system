@@ -15,6 +15,7 @@ export default defineConfig({
     './src/styled-system/**/*',
     './node_modules/**/*',
     './src/**/mocks/**/*',
+    './src/**/*.test.{ts,tsx}',
   ],
 
   presets: [themePreset],

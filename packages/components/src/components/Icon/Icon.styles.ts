@@ -1,7 +1,25 @@
 import { cva } from '@/styled-system/css';
+import { MATERIAL_SYMBOLS } from './Icon.constants';
 
 export const icon = cva({
+  base: {},
   variants: {
+    type: {
+      fontawesome: {},
+      material: {
+        fontFamily: 'Material Symbols Rounded',
+        textStyle: 'inherit',
+        verticalAlign: 'middle',
+        fontVariationSettings: `'FILL' 0, 'wght' ${MATERIAL_SYMBOLS.weight}, 'GRAD' ${MATERIAL_SYMBOLS.grade}, 'opsz' ${MATERIAL_SYMBOLS.opticalSize}`,
+        scale: '[1.5]',
+        fontFeatureSettings: 'liga',
+      },
+    },
+    filled: {
+      true: {
+        fontVariationSettings: `'FILL' 1, 'wght' ${MATERIAL_SYMBOLS.weight}, 'GRAD' ${MATERIAL_SYMBOLS.grade}, 'opsz' ${MATERIAL_SYMBOLS.opticalSize}`,
+      },
+    },
     flip: {
       horizontal: {
         transform: 'scaleX(-1)',
@@ -11,6 +29,13 @@ export const icon = cva({
       },
       both: {
         transform: 'scale(-1)',
+      },
+    },
+    loading: {
+      true: {
+        visibility: 'hidden',
+        width: '[1em]',
+        height: '[1em]',
       },
     },
     rotate: {
@@ -39,4 +64,13 @@ export const icon = cva({
       },
     },
   },
+  compoundVariants: [
+    {
+      type: 'material',
+      filled: true,
+      css: {
+        fontVariationSettings: `'FILL' 1, 'wght' ${MATERIAL_SYMBOLS.weight}, 'GRAD' ${MATERIAL_SYMBOLS.grade}, 'opsz' ${MATERIAL_SYMBOLS.opticalSize}`,
+      },
+    },
+  ],
 });

@@ -1,6 +1,7 @@
-import { Meta } from '@storybook/addon-docs/blocks';
-import { IressAlert, IressButton } from '@/main';
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import { IressAlert, IressButton, IressExpander } from '@/main';
 import * as ComponentStories from './Icon.stories';
+import * as ProviderStories from './IconProvider.stories';
 import {
   ComponentExample,
   ComponentOverview,
@@ -18,15 +19,70 @@ import {
 
 ## Installation
 
+### Material Symbols
+
+From version 6, the `IressIcon` component supports Material Symbols icons from Google as this is the new icon library being used in new Iress designs.
+
+#### Option 1: Automatic loading with `IressProvider` (recommended)
+
+If you are already using the `IressProvider` component in your application, no further action is required as the Material Symbols font will be automatically loaded for you as it contains the `IressIconProvider` component.
+
+```tsx
+import { IressProvider } from '@iress-oss/ids-components';
+
+<IressProvider>
+  <App />
+</IressProvider>;
+```
+
+<IressExpander mode="link" activator="Shadow DOM (Microfrontends)" mt="-md" mb="lg">
+  If you are using Microfrontends or Web Components that use Shadow DOM, you need to ensure that the Material Symbols font is loaded in the parent application as well as the Microfrontend or Web Component. This is because `@font-face` declarations are not supported inside the Shadow DOM.
+
+The `IressProvider` component takes care of this for you when you use it with the `container` prop, which accepts a `HTMLElement` or `Ref<HTMLElement>`.
+
+</IressExpander>
+
+#### Option 2: Using the `IressIconProvider`
+
+For more simpler applications, you can use the `IressIconProvider` directly.
+
+<IressExpander mode="link" activator="Shadow DOM (Microfrontends)"  mb="md">
+  If you are using Microfrontends or Web Components that use Shadow DOM, you need to ensure that the Material Symbols font is loaded in the parent application as well as the Microfrontend or Web Component. This is because `@font-face` declarations are not supported inside the Shadow DOM.
+
+The `IressIconProvider` component takes care of this for you when you use it with the `container` prop, which accepts a `HTMLElement | ShadowRoot` or `Ref<HTMLElement | ShadowRoot>`.
+
+</IressExpander>
+
+<ComponentExample
+  of={ProviderStories.IconProvider}
+  refresh
+  story={{
+    inline: false,
+    height: '300px',
+  }}
+/>
+
+#### Option 3: Manual font loading
+
+If you prefer to manually load the Material Symbols font, you can add the following `<link />` tag to the `<head />` of your application:
+
+```html
+<link
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0..1,0"
+  rel="stylesheet"
+/>
+```
+
+### Font Awesome
+
+<IressAlert status="warning" title="Deprecation Notice">
+  The Font Awesome icon library will be removed in a future release. Please
+  migrate to Material Symbols as soon as possible.
+</IressAlert>
+
 If you are planning to include the `<IressIcon />` component in your application, you need to include the Font Awesome CSS.
 
 The easiest way to import the Font Awesome CSS is to use the `combined.css` file and add it to the `<head />` if your application. This file includes both the [Pro Light](https://fontawesome.com/v5/search?o=r&s=light) and [Brand](https://fontawesome.com/v5/search?o=r&f=brands) icon sets.
-
-<IressAlert status="info" heading="Microfrontends" mb="md">
-  If you are using a Microfrontend, you need to include the Font Awesome CSS in
-  the parent application as well as the Microfrontend. This is because
-  `@font-face` declarations are not supported inside the Shadow DOM.
-</IressAlert>
 
 ```html
 <link
@@ -35,13 +91,43 @@ The easiest way to import the Font Awesome CSS is to use the `combined.css` file
 />
 ```
 
-## Supported library sets and names
+<IressExpander mode="link" activator="Shadow DOM (Microfrontends)">
+  If you are using Microfrontends or Web Components that use Shadow DOM, you need to ensure that the Font Awesome CSS is loaded in the parent application as well as the Microfrontend or Web Component. This is because styles are not inherited inside the Shadow DOM.
 
-`IressIcon` currently supports Font Awesome (V5) [Light](https://fontawesome.com/v5/search?o=r&s=light) and [Brand](https://fontawesome.com/v5/search?o=r&f=brands) sets. The library sets are controlled by the `set` prop and it defaults to the Light set (`fal`).
+The easiest way to do this is to use the `IressIconProvider` component with the `container` prop.
 
-The `name` prop controls which icon is shown, and needs to match the icon name exactly as displayed on the [Font Awesome website](https://fontawesome.com/v5/search). Icon names should be lower case, and separated by hyphens where required; for example `home-alt` or `check-circle.` Icon names should not include the `fa-` prefix.
+```tsx
+import { IressIconProvider, IressIcon as Icon } from '@iress/ids-components';
 
-## Behaviour
+<IressIconProvider type="fontawesome" container={shadowRoot}>
+  <App />
+</IressIconProvider>;
+```
+
+</IressExpander>
+
+#### Making Font Awesome icons the default
+
+From version 6, the default icon type is Material Symbols. If you want to make Font Awesome the default icon type, you can wrap your application in the `IressIconProvider` component.
+
+```tsx
+import { IressIconProvider, IressIcon as Icon } from '@iress/ids-components';
+
+// Export a version of IressIcon that uses Font Awesome by default for typing
+export const IressIcon = Icon<'fontawesome'>;
+
+<IressIconProvider type="fontawesome">
+  <App />
+</IressIconProvider>;
+```
+
+## Usage
+
+### `name`
+
+The `name` prop controls which icon is shown. You can use either Material Symbols or Font Awesome icons.
+
+It should be automatically inferred based on the `type` prop of `IressIcon`.
 
 ### Screen Reader Text
 
@@ -52,6 +138,26 @@ If you use an icon to improve the visual appeal of content, for example by repla
 If you use an icon to convey meaning, for example using an icon as the only content inside a button, you do need to supply a value for the `screenreaderText`; if you don't the button meaning will be completely lost for screen reader users.
 
 <ComponentExample of={ComponentStories.ScreenReaderText} />
+
+### Filled
+
+The `filled` prop allows you to use a filled version of the icon, usually to indicate an active state.
+
+<ComponentExample of={ComponentStories.Filled} />
+
+---
+
+## Reference
+
+This is a list of all the icons available in the Iress Design System (we only list the Material Symbols icons here as Font Awesome is no longer supported).
+
+It is a very basic search tool, so if you can't find the icon you are looking for, please refer to the [Material Symbols documentation](https://fonts.google.com/icons?icon.style=Rounded&icon.set=Material+Symbols).
+
+<Story of={ComponentStories.Reference} />
+
+---
+
+## Examples
 
 ### Size
 
@@ -87,16 +193,16 @@ The `spin` prop can be set to half (fastest), 1, 2 or 3 (slowest) to control the
 
 <ComponentExample of={ComponentStories.Spin} />
 
-### Fixed Width
-
-Because of the wide variety of Font Awesome icons, not every icon is the same size. This can cause alignment issued when the icons stack vertically, so you can use the `fixedWidth` prop to ensure each icon is the same width. Very useful when using icons in menus.
-
-<ComponentExample of={ComponentStories.FixedWidth} />
-
-## Examples
-
 ### External link
 
 Icons now inherit the size of the parent component. This means you can use them inside buttons, links and other components without needing to set a size.
 
 <ComponentExample of={ComponentStories.ExternalLink} />
+
+## Migrating from Font Awesome
+
+To help with migrating, we have mapped some common Font Awesome icons to their Material Symbols equivalents.
+
+As of version 6, these names will automatically be mapped when using the `IressIcon` component with the default `type` of `material`. However, we strongly recommend you change them to the material equivalent as soon as possible as the automatic mapping will be removed in a future release.
+
+<Story of={ComponentStories.FontAwesomeToMaterialMigration} />

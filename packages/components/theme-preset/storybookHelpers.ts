@@ -9,6 +9,7 @@ const PROPS = [
   'bg',
   'color',
   'borderRadius',
+  'flex',
   'focusable',
   'hideBelow',
   'hideFrom',

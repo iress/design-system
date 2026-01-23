@@ -20,7 +20,7 @@ describe('Toast', () => {
       });
 
       const icon = getByRole('img', { name: 'info:' });
-      expect(icon).toHaveClass('fa-info-square');
+      expect(icon).toHaveTextContent('info');
 
       const content = getByText(/Content/);
       expect(content).toBeInTheDocument();

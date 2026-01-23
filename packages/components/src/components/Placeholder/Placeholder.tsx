@@ -13,6 +13,11 @@ export interface IressPlaceholderProps extends Omit<IressStyledProps, 'width'> {
   children?: ReactNode;
 
   /**
+   * Title for the placeholder content.
+   */
+  heading?: ReactNode;
+
+  /**
    * Sets the height of the placeholder.
    */
   height?: string | number;
@@ -31,6 +36,7 @@ export interface IressPlaceholderProps extends Omit<IressStyledProps, 'width'> {
 export const IressPlaceholder = ({
   children,
   className,
+  heading,
   height = 'auto',
   stretch,
   style,
@@ -41,6 +47,7 @@ export const IressPlaceholder = ({
   const placeholderHeight =
     height === 'auto' ? autoHeight : toCSSLengthValue(height);
   const classes = placeholder();
+  const noContent = !children && !heading;
 
   return (
     <IressText
@@ -52,10 +59,29 @@ export const IressPlaceholder = ({
         height: placeholderHeight,
       }}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" className={classes.svg}>
-        <line x1="0" y1="0" x2="100%" y2="100%" className={classes.line}></line>
-        <line x1="100%" y1="0" x2="0" y2="100%" className={classes.line}></line>
-      </svg>
+      {noContent && (
+        <svg xmlns="http://www.w3.org/2000/svg" className={classes.svg}>
+          <line
+            x1="0"
+            y1="0"
+            x2="100%"
+            y2="100%"
+            className={classes.line}
+          ></line>
+          <line
+            x1="100%"
+            y1="0"
+            x2="0"
+            y2="100%"
+            className={classes.line}
+          ></line>
+        </svg>
+      )}
+      {heading && (
+        <IressText element="strong" textStyle="typography.heading.4">
+          {heading}
+        </IressText>
+      )}
       {children}
     </IressText>
   );

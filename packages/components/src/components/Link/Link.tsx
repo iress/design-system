@@ -120,7 +120,6 @@ const Link = <
           {!!loading && (
             <IressSpinner
               className={css(styles.spinner)}
-              fixedWidth
               id={spinnerId}
               screenreaderText={loading === true ? 'Loading' : loading}
             />

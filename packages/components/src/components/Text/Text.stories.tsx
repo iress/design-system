@@ -134,34 +134,34 @@ export const HeadingsWithIcons: HeadingStory = {
   render: (args) => (
     <IressStack>
       <IressText {...args} element="h1">
-        <IressIcon name="smile-wink" />
+        <IressIcon name="sentiment_calm" />
         <span>H1 heading with icons</span>
-        <IressIcon name="smile-wink" />
+        <IressIcon name="sentiment_calm" />
       </IressText>
       <IressText {...args} element="h2">
-        <IressIcon name="smile-wink" />
+        <IressIcon name="sentiment_calm" />
         <span>H2 heading with icons</span>
-        <IressIcon name="smile-wink" />
+        <IressIcon name="sentiment_calm" />
       </IressText>
       <IressText {...args} element="h3">
-        <IressIcon name="smile-wink" />
+        <IressIcon name="sentiment_calm" />
         <span>H3 heading with icons</span>
-        <IressIcon name="smile-wink" />
+        <IressIcon name="sentiment_calm" />
       </IressText>
       <IressText {...args} element="h4">
-        <IressIcon name="smile-wink" />
+        <IressIcon name="sentiment_calm" />
         <span>H4 heading with icons</span>
-        <IressIcon name="smile-wink" />
+        <IressIcon name="sentiment_calm" />
       </IressText>
       <IressText {...args} element="h5">
-        <IressIcon name="smile-wink" />
+        <IressIcon name="sentiment_calm" />
         <span>H5 heading with icons</span>
-        <IressIcon name="smile-wink" />
+        <IressIcon name="sentiment_calm" />
       </IressText>
       <IressText {...args} element="h6">
-        <IressIcon name="smile-wink" />
+        <IressIcon name="sentiment_calm" />
         <span>H6 heading with icons</span>
-        <IressIcon name="smile-wink" />
+        <IressIcon name="sentiment_calm" />
       </IressText>
     </IressStack>
   ),

@@ -6,7 +6,6 @@ export const toast = sva({
     'action',
     'panel',
     'wrapper',
-    'icon',
     'heading',
     'content',
     'closeButton',
@@ -33,9 +32,6 @@ export const toast = sva({
     wrapper: {
       lineHeight: '1.5',
       paddingRight: 'spacing.6',
-    },
-    icon: {
-      lineHeight: 'normal',
     },
     heading: {
       display: 'inline-block',
