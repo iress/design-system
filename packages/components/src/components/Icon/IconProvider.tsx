@@ -145,11 +145,11 @@ export const IressIconProvider = <P extends IconType = 'material'>({
   const { isIconLoaded } = useDynamicFontSubsetting({
     icons: usedIcons,
     buildUrl: (icons) => {
-      let iconText = noSubsetting
+      let iconNamesParam = noSubsetting
         ? ''
         : `&icon_names=${encodeURIComponent(icons.join(','))}`;
       const fontFamily = 'Material+Symbols+Rounded';
-      return `https://fonts.googleapis.com/css2?family=${fontFamily}:opsz,wght,FILL,GRAD@${MATERIAL_SYMBOLS.opticalSize},${MATERIAL_SYMBOLS.weight},0..1,${MATERIAL_SYMBOLS.grade}${iconText}`;
+      return `https://fonts.googleapis.com/css2?family=${fontFamily}:opsz,wght,FILL,GRAD@${MATERIAL_SYMBOLS.opticalSize},${MATERIAL_SYMBOLS.weight},0..1,${MATERIAL_SYMBOLS.grade}${iconNamesParam}`;
     },
     dataAttribute: 'material-icons-subset',
     fontFamily: 'Material Symbols Rounded',
