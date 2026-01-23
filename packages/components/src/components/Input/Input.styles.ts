@@ -5,7 +5,7 @@ export const input = sva({
   base: {
     wrapper: {
       // Performance: CSS containment limits style recalculation scope
-      contain: 'style paint',
+      contain: 'style',
       display: 'flex',
       alignItems: 'stretch',
       borderRadius: 'radius.system.form',
@@ -223,5 +223,16 @@ export const input = sva({
       },
     },
   },
+  compoundVariants: [
+    {
+      isTextarea: true,
+      stretched: true,
+      css: {
+        formControl: {
+          height: '[100%]',
+        },
+      },
+    },
+  ],
   defaultVariants: {},
 });

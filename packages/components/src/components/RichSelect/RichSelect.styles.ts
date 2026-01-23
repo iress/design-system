@@ -11,7 +11,7 @@ export const richSelect = sva({
   base: {
     richSelect: {
       // Performance: CSS containment (no paint to allow focus ring/shadow)
-      contain: 'layout style',
+      contain: 'style',
       display: 'block',
     },
     popoverContent: {
