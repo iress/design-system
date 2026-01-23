@@ -1,5 +1,4 @@
 import { cva } from '@/styled-system/css';
-import { MATERIAL_SYMBOLS } from './Icon.constants';
 
 export const icon = cva({
   base: {},
@@ -10,14 +9,14 @@ export const icon = cva({
         fontFamily: 'Material Symbols Rounded',
         textStyle: 'inherit',
         verticalAlign: 'middle',
-        fontVariationSettings: `'FILL' 0, 'wght' ${MATERIAL_SYMBOLS.weight}, 'GRAD' ${MATERIAL_SYMBOLS.grade}, 'opsz' ${MATERIAL_SYMBOLS.opticalSize}`,
+        materialSymbols: 'true',
         scale: '[1.5]',
         fontFeatureSettings: 'liga',
       },
     },
     filled: {
       true: {
-        fontVariationSettings: `'FILL' 1, 'wght' ${MATERIAL_SYMBOLS.weight}, 'GRAD' ${MATERIAL_SYMBOLS.grade}, 'opsz' ${MATERIAL_SYMBOLS.opticalSize}`,
+        materialSymbols: 'filled',
       },
     },
     flip: {
@@ -69,7 +68,7 @@ export const icon = cva({
       type: 'material',
       filled: true,
       css: {
-        fontVariationSettings: `'FILL' 1, 'wght' ${MATERIAL_SYMBOLS.weight}, 'GRAD' ${MATERIAL_SYMBOLS.grade}, 'opsz' ${MATERIAL_SYMBOLS.opticalSize}`,
+        materialSymbols: 'filled',
       },
     },
   ],

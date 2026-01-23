@@ -34,6 +34,7 @@ import { noGutter } from './utilities/noGutter';
 import { stretch } from './utilities/stretch';
 import { focusable } from './utilities/focusable';
 import { scrollable } from './utilities/scrollable';
+import { materialSymbols } from './utilities/materialSymbols';
 
 export default definePreset({
   name: 'theme-preset',
@@ -122,6 +123,7 @@ export default definePreset({
       selectChevron,
       selectChevronRtl,
       tableChevron,
+      materialSymbols,
       offset,
       span,
       topLeftTriangle,
