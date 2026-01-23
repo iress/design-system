@@ -486,10 +486,8 @@ describe('useDynamicFontSubsetting', () => {
       // Should not throw error on unmount
       expect(() => unmount()).not.toThrow();
     });
-  });
 
-  describe('Old stylesheet removal', () => {
-    it('should remove old stylesheet when URL changes', async () => {
+    it('removes old stylesheet when URL changes', async () => {
       const icons1 = new Set(['icon1']);
       const icons2 = new Set(['icon2']);
 
@@ -509,7 +507,7 @@ describe('useDynamicFontSubsetting', () => {
           'style[data-test-font]',
         );
         expect(styleElements.length).toBe(1);
-        expect(styleElements[0].getAttribute('data-font-url')).toBe(
+        expect(styleElements[0].getAttribute('data-url')).toBe(
           'https://fonts.test/icon1',
         );
       });
@@ -524,7 +522,7 @@ describe('useDynamicFontSubsetting', () => {
         );
         // Should only have one style element (old one removed)
         expect(styleElements.length).toBe(1);
-        expect(styleElements[0].getAttribute('data-font-url')).toBe(
+        expect(styleElements[0].getAttribute('data-url')).toBe(
           'https://fonts.test/icon2',
         );
       });
