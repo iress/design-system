@@ -59,7 +59,7 @@
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-dropzone": "14.3.8",
-    "react-hook-form": "7.70.0",
+    "react-hook-form": "7.71.0",
     "rimraf": "^6.1.2",
     "storybook": "10.1.11",
     "typescript": "5.9.3",
