@@ -1425,11 +1425,11 @@ __metadata:
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     use-debounce: "npm:10.0.6"
-    vite: "npm:7.3.0"
+    vite: "npm:7.3.1"
     vite-bundle-visualizer: "npm:^1.2.1"
     vite-plugin-dts: "npm:4.5.4"
     vite-plugin-static-copy: "npm:3.1.4"
-    vite-tsconfig-paths: "npm:^6.0.1"
+    vite-tsconfig-paths: "npm:^6.0.4"
     vitest: "npm:4.0.16"
   peerDependencies:
     react: ^17 || ^18 || ^19
@@ -1519,11 +1519,11 @@ __metadata:
     storybook: "npm:10.1.11"
     storybook-addon-tag-badges: "npm:^3.0.4"
     typescript: "npm:^5.9.3"
-    vite: "npm:7.3.0"
+    vite: "npm:7.3.1"
     vite-bundle-visualizer: "npm:^1.2.1"
     vite-plugin-dts: "npm:^4.5.4"
     vite-plugin-lib-inject-css: "npm:^2.2.2"
-    vite-tsconfig-paths: "npm:^6.0.1"
+    vite-tsconfig-paths: "npm:^6.0.4"
     vitest: "npm:4.0.16"
   peerDependencies:
     "@chromatic-com/storybook": ^4
@@ -1575,7 +1575,7 @@ __metadata:
     storybook: "npm:10.1.11"
     tsup: "npm:^8.5.1"
     typescript: "npm:^5.9.3"
-    vite: "npm:7.3.0"
+    vite: "npm:7.3.1"
     vitest: "npm:4.0.16"
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
@@ -1612,7 +1612,7 @@ __metadata:
     storybook: "npm:10.1.11"
     tsup: "npm:^8.5.1"
     typescript: "npm:^5.9.3"
-    vite: "npm:7.3.0"
+    vite: "npm:7.3.1"
     vitest: "npm:4.0.16"
   peerDependencies:
     "@storybook/addon-docs": ^10
@@ -1649,7 +1649,7 @@ __metadata:
     storybook: "npm:10.1.11"
     tsup: "npm:^8.5.1"
     typescript: "npm:^5.9.3"
-    vite: "npm:7.3.0"
+    vite: "npm:7.3.1"
     vitest: "npm:4.0.16"
   peerDependencies:
     react: ^18 || ^19
@@ -1684,7 +1684,7 @@ __metadata:
     storybook: "npm:10.1.11"
     tsup: "npm:^8.5.1"
     typescript: "npm:^5.9.3"
-    vite: "npm:7.3.0"
+    vite: "npm:7.3.1"
     vitest: "npm:4.0.16"
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
@@ -1724,10 +1724,10 @@ __metadata:
     style-dictionary: "npm:^5.1.1"
     tsx: "npm:^4.21.0"
     typescript: "npm:^5.9.3"
-    vite: "npm:7.3.0"
+    vite: "npm:7.3.1"
     vite-bundle-visualizer: "npm:^1.2.1"
     vite-plugin-dts: "npm:^4.5.4"
-    vite-tsconfig-paths: "npm:^6.0.1"
+    vite-tsconfig-paths: "npm:^6.0.4"
     vitest: "npm:4.0.16"
   peerDependencies:
     radash: ^12.1.0
@@ -1782,7 +1782,7 @@ __metadata:
     ts-dedent: "npm:^2.2.0"
     tsx: "npm:^4.21.0"
     typescript: "npm:^5.9.3"
-    vite: "npm:7.3.0"
+    vite: "npm:7.3.1"
     wait-on: "npm:^9.0.3"
     ws: "npm:^8.18.3"
     zx: "npm:^8.8.5"
@@ -15456,23 +15456,79 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-tsconfig-paths@npm:^6.0.1":
-  version: 6.0.3
-  resolution: "vite-tsconfig-paths@npm:6.0.3"
+"vite-tsconfig-paths@npm:^6.0.4":
+  version: 6.0.4
+  resolution: "vite-tsconfig-paths@npm:6.0.4"
   dependencies:
     debug: "npm:^4.1.1"
     globrex: "npm:^0.1.2"
     tsconfck: "npm:^3.0.3"
+    vite: "npm:*"
   peerDependencies:
     vite: "*"
   peerDependenciesMeta:
     vite:
       optional: true
-  checksum: 10c0/75cfe470f1ec0e776b2aec1d2e71316d5e1214f485fce7daaed4e4789d6f667881fb85d98129b6463a5b70c7524ef258b401c4871ed8b6318ac45cc892ee778a
+  checksum: 10c0/c41df8194b060916115c1321d053c05dc7d50d88bbf1fba86659bbcab97fd0b83cac39cfff00cf498589330459debc97aa172eabfefde445a3af83d6717e7cc2
   languageName: node
   linkType: hard
 
-"vite@npm:7.3.0, vite@npm:^6.0.0 || ^7.0.0":
+"vite@npm:*, vite@npm:7.3.1":
+  version: 7.3.1
+  resolution: "vite@npm:7.3.1"
+  dependencies:
+    esbuild: "npm:^0.27.0"
+    fdir: "npm:^6.5.0"
+    fsevents: "npm:~2.3.3"
+    picomatch: "npm:^4.0.3"
+    postcss: "npm:^8.5.6"
+    rollup: "npm:^4.43.0"
+    tinyglobby: "npm:^0.2.15"
+  peerDependencies:
+    "@types/node": ^20.19.0 || >=22.12.0
+    jiti: ">=1.21.0"
+    less: ^4.0.0
+    lightningcss: ^1.21.0
+    sass: ^1.70.0
+    sass-embedded: ^1.70.0
+    stylus: ">=0.54.8"
+    sugarss: ^5.0.0
+    terser: ^5.16.0
+    tsx: ^4.8.1
+    yaml: ^2.4.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    jiti:
+      optional: true
+    less:
+      optional: true
+    lightningcss:
+      optional: true
+    sass:
+      optional: true
+    sass-embedded:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    terser:
+      optional: true
+    tsx:
+      optional: true
+    yaml:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: 10c0/5c7548f5f43a23533e53324304db4ad85f1896b1bfd3ee32ae9b866bac2933782c77b350eb2b52a02c625c8ad1ddd4c000df077419410650c982cd97fde8d014
+  languageName: node
+  linkType: hard
+
+"vite@npm:^6.0.0 || ^7.0.0":
   version: 7.3.0
   resolution: "vite@npm:7.3.0"
   dependencies:

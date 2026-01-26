@@ -58,10 +58,10 @@
     "style-dictionary": "^5.1.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "vite": "7.3.0",
+    "vite": "7.3.1",
     "vite-bundle-visualizer": "^1.2.1",
     "vite-plugin-dts": "^4.5.4",
-    "vite-tsconfig-paths": "^6.0.1",
+    "vite-tsconfig-paths": "^6.0.4",
     "vitest": "4.0.16"
   },
   "peerDependencies": {
