@@ -66,11 +66,11 @@
     "sass": "^1.97.1",
     "storybook": "^10.1.11",
     "typescript": "^5.9.3",
-    "vite": "^7.2.7",
+    "vite": "^7.3.1",
     "vite-bundle-visualizer": "^1.2.1",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-static-copy": "^3.1.2",
-    "vite-tsconfig-paths": "^6.0.1",
+    "vite-tsconfig-paths": "^6.0.4",
     "vitest": "^4.0.16"
   },
   "dependencies": {
