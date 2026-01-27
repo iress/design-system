@@ -265,11 +265,11 @@
   .input:checked + .label {
     --iress-border-color: var(
       --iress-checkbox-locked-border-color,
-      var(--iress-g-muted-text-color, var(--iress-default-muted-text-color))
+      var(--iress-g-border-color, var(--iress-default-border-color))
     );
     --iress-mark-color: var(
       --iress-checkbox-locked-label-background-color,
-      var(--iress-g-muted-text-color, var(--iress-default-muted-text-color))
+      var(--iress-g-border-color, var(--iress-default-border-color))
     );
   }
 }
