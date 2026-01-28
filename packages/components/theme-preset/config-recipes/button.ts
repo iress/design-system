@@ -156,6 +156,12 @@ export const buttonRecipe = defineSlotRecipe({
             boxShadow:
               'color-mix(in srgb, {colors.colour.primary.fill}, transparent 80%) 0px 0px 0px 3px',
           },
+
+          '&[data-active="true"]': {
+            bg: 'colour.primary.surface',
+            borderColor: 'colour.primary.fill',
+            color: 'colour.primary.text',
+          },
         },
         spinner: {
           color: 'colour.primary.onFill',
@@ -178,6 +184,12 @@ export const buttonRecipe = defineSlotRecipe({
             boxShadow:
               'color-mix(in srgb, {colors.colour.primary.surface}, transparent 60%) 0px 0px 0px 3px',
           },
+
+          '&[data-active="true"]': {
+            bg: 'colour.primary.surface',
+            borderColor: 'colour.primary.fill',
+            color: 'colour.primary.text',
+          },
         },
         spinner: {
           color: 'colour.primary.text',
@@ -197,6 +209,12 @@ export const buttonRecipe = defineSlotRecipe({
             boxShadow:
               'color-mix(in srgb, {colors.colour.neutral.70}, transparent 90%) 0px 0px 0px 3px',
           },
+
+          '&[data-active="true"]': {
+            bg: 'colour.primary.surface',
+            borderColor: 'colour.primary.fill',
+            color: 'colour.primary.text',
+          },
         },
         spinner: {
           color: 'colour.primary.text',
@@ -215,6 +233,12 @@ export const buttonRecipe = defineSlotRecipe({
           _active: {
             boxShadow:
               'color-mix(in srgb, {colors.colour.neutral.50}, transparent 90%) 0px 0px 0px 3px',
+          },
+
+          '&[data-active="true"]': {
+            bg: 'colour.primary.surface',
+            borderColor: 'colour.primary.fill',
+            color: 'colour.primary.text',
           },
         },
         spinner: {
@@ -236,6 +260,12 @@ export const buttonRecipe = defineSlotRecipe({
           _active: {
             boxShadow:
               'color-mix(in srgb, {colors.colour.neutral.70}, transparent 90%) 0px 0px 0px 3px',
+          },
+
+          '&[data-active="true"]': {
+            bg: 'colour.primary.surface',
+            borderColor: 'colour.primary.fill',
+            color: 'colour.primary.text',
           },
         },
         spinner: {
