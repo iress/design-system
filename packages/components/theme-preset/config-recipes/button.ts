@@ -154,7 +154,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.primary.fill}, transparent 80%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.primary.fill}, transparent 80%) 0px 0px 0px 2px',
           },
 
           '&[data-active="true"]': {
@@ -170,19 +170,17 @@ export const buttonRecipe = defineSlotRecipe({
       secondary: {
         root: {
           bg: 'colour.primary.surface',
-          borderColor:
-            '[color-mix(in srgb, {colors.colour.primary.surface}, black 5%)]',
+          borderColor: 'colour.neutral.40',
           color: 'colour.primary.text',
 
           _hover: {
             bg: 'colour.primary.surfaceHover',
-            borderColor:
-              '[color-mix(in srgb, {colors.colour.primary.surfaceHover}, black 5%)]',
+            boxShadow: '{colors.colour.neutral.40} 0px 0px 0px 1px',
           },
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.primary.surface}, transparent 60%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.primary.fill}, transparent 90%) 0px 0px 0px 2px',
           },
 
           '&[data-active="true"]': {
@@ -202,12 +200,12 @@ export const buttonRecipe = defineSlotRecipe({
           color: 'colour.primary.text',
 
           _hover: {
-            bg: 'colour.neutral.20',
+            bg: 'colour.primary.surfaceHover',
           },
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.neutral.70}, transparent 90%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.primary.fill}, transparent 80%) 0px 0px 0px 2px',
           },
 
           '&[data-active="true"]': {
@@ -223,7 +221,7 @@ export const buttonRecipe = defineSlotRecipe({
       quaternary: {
         root: {
           bg: 'transparent',
-          borderColor: 'colour.primary.surface',
+          borderColor: 'colour.neutral.40',
           color: 'colour.primary.text',
 
           _hover: {
@@ -232,7 +230,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.neutral.50}, transparent 90%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.primary.fill}, transparent 90%) 0px 0px 0px 2px',
           },
 
           '&[data-active="true"]': {
@@ -259,7 +257,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.neutral.70}, transparent 90%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.primary.fill}, transparent 90%) 0px 0px 0px 3px',
           },
 
           '&[data-active="true"]': {
@@ -521,26 +519,44 @@ export const buttonRecipe = defineSlotRecipe({
       loading: true,
       css: {
         root: {
-          bg: 'colour.neutral.30',
-          borderColor: 'colour.neutral.30',
-          color: 'colour.neutral.60',
+          bg: 'colour.neutral.20',
+          borderColor: 'colour.neutral.20',
+          color: 'colour.neutral.70',
         },
         spinner: {
-          color: 'colour.neutral.60',
+          color: 'colour.neutral.70',
         },
       },
     },
     {
-      mode: ['secondary', 'tertiary', 'quaternary'],
+      mode: ['secondary', 'quaternary'],
       loading: true,
       css: {
         root: {
-          bg: 'colour.neutral.30',
-          borderColor: 'colour.neutral.60',
-          color: 'colour.neutral.60',
+          bg: 'colour.neutral.20',
+          borderColor: 'colour.neutral.40',
+          color: 'colour.neutral.70',
+
+          _hover: {
+            boxShadow: 'none',
+          },
         },
         spinner: {
-          color: 'colour.neutral.60',
+          color: 'colour.neutral.70',
+        },
+      },
+    },
+    {
+      mode: 'tertiary',
+      loading: true,
+      css: {
+        root: {
+          bg: 'colour.neutral.20',
+          borderColor: 'colour.neutral.70',
+          color: 'colour.neutral.70',
+        },
+        spinner: {
+          color: 'colour.neutral.70',
         },
       },
     },
