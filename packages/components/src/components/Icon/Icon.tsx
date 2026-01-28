@@ -12,6 +12,7 @@ import {
   FA_TO_MATERIAL_MAP,
   type FontAwesomeIconWithMaterialEquivalent,
 } from './helpers/iconMapping';
+import { MATERIAL_SYMBOLS } from './Icon.constants';
 
 export type IressIconProps<P extends IconType = 'material'> =
   IressStyledProps<'span'> & {
@@ -131,7 +132,7 @@ export const IressIcon = <P extends IconType = 'material'>({
         className={cx(
           css(styles, styleProps),
           GlobalCSSClass.Icon,
-          'material-symbols-rounded',
+          MATERIAL_SYMBOLS.className,
           className,
         )}
         aria-hidden={!screenreaderText && 'true'}
