@@ -5,14 +5,38 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js",
-    "./cssVars": "./dist/generated/css-vars.js",
-    "./schema": "./dist/schema/index.js",
-    "./enums": "./dist/enums.js",
-    "./types": "./dist/types.js",
-    "./interfaces": "./dist/interfaces.js",
-    "./mapTokensToCssVariables": "./dist/helpers/mapTokensToCssVariables.js",
-    "./convertReferencesToVariables": "./dist/helpers/convertReferencesToVariables.js",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./cssVars": {
+      "types": "./dist/generated/css-vars.d.ts",
+      "import": "./dist/generated/css-vars.js"
+    },
+    "./schema": {
+      "types": "./dist/schema/index.d.ts",
+      "import": "./dist/schema/index.js"
+    },
+    "./enums": {
+      "types": "./dist/enums.d.ts",
+      "import": "./dist/enums.js"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/types.js"
+    },
+    "./interfaces": {
+      "types": "./dist/interfaces.d.ts",
+      "import": "./dist/interfaces.js"
+    },
+    "./mapTokensToCssVariables": {
+      "types": "./dist/helpers/mapTokensToCssVariables.d.ts",
+      "import": "./dist/helpers/mapTokensToCssVariables.js"
+    },
+    "./convertReferencesToVariables": {
+      "types": "./dist/helpers/convertReferencesToVariables.d.ts",
+      "import": "./dist/helpers/convertReferencesToVariables.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
