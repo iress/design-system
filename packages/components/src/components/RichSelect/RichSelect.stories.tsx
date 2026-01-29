@@ -197,28 +197,34 @@ export const LotsOfOptions: Story = {
 
 /**
  * Bug Reproduction: Double Scrollbar Issue with initialOptions
- * 
- * When using `initialOptions` with many items, the component displays two scrollbars:
+ *
+ * When using `initialOptions` with async options and many items, the component displays two scrollbars:
  * 1. One on the Popover content wrapper (overflow-y: auto)
  * 2. One on the menu items container
- * 
+ *
  * Expected behavior: Only one scrollbar should be visible (on the menu items)
  * Actual behavior: Two nested scrollbars appear, creating a confusing UX
- * 
+ *
  * Test steps:
- * 1. Click on the select to open the dropdown
+ * 1. Click on the select to open the dropdown (you'll see search input and initial options)
  * 2. Observe the scrollbar behavior in the menu
  * 3. You should see two scrollbars (one nested inside the other)
- * 
- * Root cause: When using `initialOptions`, the component renders `IressSelectMenu` 
- * directly without the `IressSelectSearch` wrapper that provides `overflow: hidden`.
- * This causes both the Popover content and the menu to scroll independently.
+ *
+ * Root cause: When using `initialOptions` with async options, the component renders
+ * `IressSelectMenu` directly without the `IressSelectSearch` wrapper that provides
+ * `overflow: hidden`. This causes both the Popover content and the menu to scroll independently.
  */
 export const BugReproduction: Story = {
   args: {
     placeholder: 'Select with double scrollbar bug',
     initialOptions: generateLabelValueMeta(50),
-    options: [],
+    options: async (query: string) => {
+      // Simulate async search with delay
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      return generateLabelValueMeta(50).filter((option) =>
+        option.label.toLowerCase().includes(query.toLowerCase()),
+      );
+    },
     width: '50perc',
   },
 };
