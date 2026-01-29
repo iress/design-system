@@ -1,4 +1,4 @@
-.selectSearchInput.ids-input {
+.selectSearchInput.ids-input:global(.ids-selectSearchInput) {
   --iress-addon-spacing: 0 var(--iress-g-spacing-sm);
   --iress-addon-border-width: var(--iress-select-beta-search-addon-border-width, var(--iress-a-form-border-width, var(--iress-g-border-width, var(--iress-default-border-width))));
 
