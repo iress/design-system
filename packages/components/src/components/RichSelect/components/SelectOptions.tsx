@@ -340,13 +340,15 @@ export const SelectOptions = ({
 
   return (
     <>
-      <IressSelectMenu
-        items={menuItems}
-        multiSelect={multiSelect}
-        onChange={handleMenuChange}
-        selected={value}
-        selectedFirst
-      />
+      <div className={styles.menuWrapper}>
+        <IressSelectMenu
+          items={menuItems}
+          multiSelect={multiSelect}
+          onChange={handleMenuChange}
+          selected={value}
+          selectedFirst
+        />
+      </div>
       {renderOptionsFooter?.(renderProps)}
     </>
   );

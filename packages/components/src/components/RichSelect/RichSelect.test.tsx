@@ -1295,6 +1295,65 @@ describe('IressRichSelect', () => {
     });
   });
 
+  describe('overflow behavior', () => {
+    it('wraps non-async menu in overflow container to prevent double scrollbars', async () => {
+      const { container } = render(
+        <IressRichSelect
+          options={[]}
+          initialOptions={MOCK_LARGE_LABEL_VALUES_DATASET}
+          data-testid="test-component"
+        />,
+      );
+
+      const combobox = screen.getByRole('combobox');
+      await userEvent.click(combobox);
+
+      // Wait for the popover to open
+      await waitFor(() => {
+        expect(screen.getByRole('listbox')).toBeVisible();
+      });
+
+      // Find the menu wrapper div (should have overflow: hidden via CSS module)
+      const menuWrapper = container.querySelector(`.${styles.menuWrapper}`);
+      expect(menuWrapper).toBeInTheDocument();
+
+      // Verify the menu is a direct child of the wrapper
+      const menu = menuWrapper?.querySelector('[role="listbox"]');
+      expect(menu).toBeInTheDocument();
+
+      // Verify menuWrapper is the direct parent of the menu
+      expect(menu?.parentElement).toBe(menuWrapper);
+    });
+
+    it('async select uses IressSelectSearch which provides overflow container', async () => {
+      const asyncOptions = async (query: string) => {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        return query ? MOCK_LABEL_VALUES : [];
+      };
+
+      const { container } = render(
+        <IressRichSelect
+          options={asyncOptions}
+          data-testid="test-component"
+        />,
+      );
+
+      const button = screen.getByRole('button');
+      await userEvent.click(button);
+
+      // Wait for the search input to appear
+      await waitFor(() => {
+        expect(screen.getByPlaceholderText('Search and select')).toBeVisible();
+      });
+
+      // The async path uses IressSelectSearch which has its own overflow handling
+      // No menuWrapper should exist for async selects
+      const menuWrapper = container.querySelector(`.${styles.menuWrapper}`);
+      // Menu wrapper should not exist in async mode
+      expect(menuWrapper).not.toBeInTheDocument();
+    });
+  });
+
   describe('accessibility', () => {
     it('should not have basic accessibility issues', async () => {
       const { container } = render(
