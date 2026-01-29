@@ -6,6 +6,11 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
+    "./cssVars": "./dist/generated/css-vars.js",
+    "./schema": "./dist/schema/index.js",
+    "./enums": "./dist/enums.js",
+    "./types": "./dist/types.js",
+    "./interfaces": "./dist/interfaces.js",
     "./mapTokensToCssVariables": "./dist/helpers/mapTokensToCssVariables.js",
     "./convertReferencesToVariables": "./dist/helpers/convertReferencesToVariables.js",
     "./package.json": "./package.json"

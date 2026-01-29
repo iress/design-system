@@ -25,8 +25,18 @@ Default value: {colour.primary.text.$value}
 
 The design tokens are available as CSS variables. You can use them in your CSS files or inline styles.
 
+For optimal tree-shaking and to avoid unnecessary dependencies, import `cssVars` directly:
+
 ```tsx
-import { cssVars } from '@iress/ids-tokens';
+import { cssVars } from '@iress-oss/ids-tokens/cssVars';
+
+<div style={{ color: cssVars.colour.primary.text }}>Hello world</div>;
+```
+
+Alternatively, you can import from the main package (though this may include additional dependencies):
+
+```tsx
+import { cssVars } from '@iress-oss/ids-tokens';
 
 <div style={{ color: cssVars.colour.primary.text }}>Hello world</div>;
 ```
@@ -34,7 +44,7 @@ import { cssVars } from '@iress/ids-tokens';
 You can also get the underlying CSS variable for a composite token by using the `_` prefix.
 
 ```tsx
-import { cssVars } from '@iress/ids-tokens';
+import { cssVars } from '@iress-oss/ids-tokens/cssVars';
 
 <div
   style={{
@@ -45,6 +55,19 @@ import { cssVars } from '@iress/ids-tokens';
   Hello world
 </div>;
 ```
+
+## Package Exports
+
+The package provides several export paths for optimal tree-shaking:
+
+- `@iress-oss/ids-tokens` - Main entry point (includes all exports)
+- `@iress-oss/ids-tokens/cssVars` - CSS variables only (recommended for minimal bundle size)
+- `@iress-oss/ids-tokens/schema` - Design token schema
+- `@iress-oss/ids-tokens/enums` - Type enums
+- `@iress-oss/ids-tokens/types` - TypeScript types
+- `@iress-oss/ids-tokens/interfaces` - TypeScript interfaces
+- `@iress-oss/ids-tokens/mapTokensToCssVariables` - Helper function for token mapping
+- `@iress-oss/ids-tokens/convertReferencesToVariables` - Helper function for reference conversion
 
 ## Concepts
 
