@@ -14,6 +14,9 @@
     "build",
     "dist"
   ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
     "analyse": "yarn vite-bundle-visualizer",
     "build": "yarn cssVars && vite build",
