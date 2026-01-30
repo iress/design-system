@@ -25,18 +25,18 @@ Default value: {colour.primary.text.$value}
 
 The design tokens are available as CSS variables. You can use them in your CSS files or inline styles.
 
-For optimal tree-shaking and to avoid unnecessary dependencies, import `cssVars` directly:
+**The package is marked with `"sideEffects": false`**, which means modern bundlers (webpack, Rollup, Vite) will automatically tree-shake unused exports when importing from the main entry point:
 
 ```tsx
-import { cssVars } from '@iress-oss/ids-tokens/cssVars';
+import { cssVars } from '@iress-oss/ids-tokens';
 
 <div style={{ color: cssVars.colour.primary.text }}>Hello world</div>;
 ```
 
-Alternatively, you can import from the main package (though this may include additional dependencies):
+For explicit control and guaranteed tree-shaking, you can also use the direct export path:
 
 ```tsx
-import { cssVars } from '@iress-oss/ids-tokens';
+import { cssVars } from '@iress-oss/ids-tokens/cssVars';
 
 <div style={{ color: cssVars.colour.primary.text }}>Hello world</div>;
 ```
@@ -60,14 +60,22 @@ import { cssVars } from '@iress-oss/ids-tokens/cssVars';
 
 The package provides several export paths for optimal tree-shaking:
 
-- `@iress-oss/ids-tokens` - Main entry point (includes all exports)
-- `@iress-oss/ids-tokens/cssVars` - CSS variables only (recommended for minimal bundle size)
+- `@iress-oss/ids-tokens` - Main entry point (automatically tree-shaken by modern bundlers)
+- `@iress-oss/ids-tokens/cssVars` - CSS variables only (explicit export for guaranteed tree-shaking)
 - `@iress-oss/ids-tokens/schema` - Design token schema
 - `@iress-oss/ids-tokens/enums` - Type enums
 - `@iress-oss/ids-tokens/types` - TypeScript types
 - `@iress-oss/ids-tokens/interfaces` - TypeScript interfaces
 - `@iress-oss/ids-tokens/mapTokensToCssVariables` - Helper function for token mapping
 - `@iress-oss/ids-tokens/convertReferencesToVariables` - Helper function for reference conversion
+
+### Tree-Shaking
+
+This package is marked with `"sideEffects": false`, which tells bundlers that all modules are side-effect-free and can be safely tree-shaken. This means:
+
+- **Automatic tree-shaking**: When you `import { cssVars } from '@iress-oss/ids-tokens'`, modern bundlers will automatically eliminate unused transforms and dependencies
+- **No manual optimization needed**: You don't need to use specific export paths unless you want explicit control
+- **Works with**: webpack 4+, Rollup, Vite, esbuild, and other modern bundlers that support the `sideEffects` field
 
 ## Concepts
 

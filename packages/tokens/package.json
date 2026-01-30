@@ -2,6 +2,7 @@
   "name": "@iress-oss/ids-tokens",
   "version": "6.0.0-alpha.10",
   "type": "module",
+  "sideEffects": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
