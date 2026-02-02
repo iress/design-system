@@ -1,13 +1,15 @@
 {
   "name": "@iress-oss/ids-tokens",
-  "version": "6.0.0-alpha.12",
+  "version": "6.0.0-alpha.13",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
-    "./mapTokensToCssVariables": "./dist/helpers/mapTokensToCssVariables.js",
+    "./build/css-vars.css": "./build/css-vars.css",
     "./convertReferencesToVariables": "./dist/helpers/convertReferencesToVariables.js",
+    "./mapTokensToCssVariables": "./dist/helpers/mapTokensToCssVariables.js",
+    "./transforms": "./dist/transforms/index.js",
     "./package.json": "./package.json"
   },
   "files": [
