@@ -31,6 +31,17 @@ describe('IressCheckboxMark', () => {
       const component = getByTestId(TEST_ID);
       expect(component).toHaveClass(checkboxMark({ checked: true }).root!);
     });
+
+    it('applies the correct stroke color class to the checked mark', () => {
+      const { container } = renderComponent({
+        checked: true,
+      });
+
+      const checkedMark = container.querySelector('polyline');
+      expect(checkedMark).toHaveClass(
+        checkboxMark({ checked: true }).checkedMark!,
+      );
+    });
   });
 
   describe('indeterminate', () => {

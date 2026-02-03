@@ -29,7 +29,7 @@ export const checkboxMark = sva({
       display: 'none',
     },
     checkedMark: {
-      stroke: 'colour.neutral.10',
+      stroke: 'colour.primary.onFill',
       fill: '[transparent]',
       strokeWidth: 22,
       display: 'none',
