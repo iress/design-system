@@ -1503,7 +1503,7 @@ __metadata:
     eslint-plugin-file-progress: "npm:^3.0.2"
     eslint-plugin-mdx: "npm:^3.6.2"
     eslint-plugin-prettier: "npm:^5.5.5"
-    happy-dom: "npm:20.1.0"
+    happy-dom: "npm:20.3.4"
     jsdom: "npm:^27.4.0"
     json5: "npm:^2.2.3"
     prettier: "npm:^3.7.4"
@@ -4657,19 +4657,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:>=20.0.0":
+  version: 25.0.10
+  resolution: "@types/node@npm:25.0.10"
+  dependencies:
+    undici-types: "npm:~7.16.0"
+  checksum: 10c0/9edc3c812b487c32c76eebac7c87acae1f69515a0bc3f6b545806d513eb9e918c3217bf751dc93da39f60e06bf1b0caa92258ef3a6dd6457124b2e761e54f61f
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:^17.0.36":
   version: 17.0.45
   resolution: "@types/node@npm:17.0.45"
   checksum: 10c0/0db377133d709b33a47892581a21a41cd7958f22723a3cc6c71d55ac018121382de42fbfc7970d5ae3e7819dbe5f40e1c6a5174aedf7e7964e9cb8fa72b580b0
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^20.0.0":
-  version: 20.19.23
-  resolution: "@types/node@npm:20.19.23"
-  dependencies:
-    undici-types: "npm:~6.21.0"
-  checksum: 10c0/a230f2ad8a5c10f3c5b2e31112e49b61f2cc9e7eacb95960b555ef133c0276c52b7f3841af744762ce355009fc03520ab7af5645cd877ab8699e45412bccf9b8
   languageName: node
   linkType: hard
 
@@ -9066,16 +9066,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:20.1.0":
-  version: 20.1.0
-  resolution: "happy-dom@npm:20.1.0"
+"happy-dom@npm:20.3.4":
+  version: 20.3.4
+  resolution: "happy-dom@npm:20.3.4"
   dependencies:
-    "@types/node": "npm:^20.0.0"
+    "@types/node": "npm:>=20.0.0"
     "@types/whatwg-mimetype": "npm:^3.0.2"
     "@types/ws": "npm:^8.18.1"
+    entities: "npm:^4.5.0"
     whatwg-mimetype: "npm:^3.0.0"
     ws: "npm:^8.18.3"
-  checksum: 10c0/a55b5fe6de845124644bc51184c8e761e75936de50ba5f4093ff844802d2b13f700c71a5e8236cb78c2b23c1368125b98f38e3c99e472b6d6becec7ddb720c58
+  checksum: 10c0/fba02d229d6fdefb8d17b5c987bec2d562f1b184b8bf5b69c44942a2e7432987b4bf3b2de113b19078baa46a28601402ac6142639e86093c940a1fdfaf7a36dc
   languageName: node
   linkType: hard
 
