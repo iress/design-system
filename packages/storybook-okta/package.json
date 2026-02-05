@@ -55,7 +55,7 @@
     "@typescript-eslint/eslint-plugin": "^8.53.0",
     "@typescript-eslint/parser": "^8.53.0",
     "@vitejs/plugin-react": "^5.1.2",
-    "@vitest/coverage-v8": "4.0.16",
+    "@vitest/coverage-v8": "4.0.17",
     "chokidar": "^5.0.0",
     "concurrently": "^9.2.1",
     "dotenv": "^17.2.3",
@@ -71,7 +71,7 @@
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "vite": "7.3.1",
-    "vitest": "4.0.16"
+    "vitest": "4.0.17"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",

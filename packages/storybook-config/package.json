@@ -69,7 +69,7 @@
     "@typescript-eslint/eslint-plugin": "^8.53.0",
     "@typescript-eslint/parser": "^8.53.0",
     "@vitejs/plugin-react": "^5.1.2",
-    "@vitest/coverage-v8": "4.0.16",
+    "@vitest/coverage-v8": "4.0.17",
     "@vueless/storybook-dark-mode": "10.0.6",
     "chalk": "^5.6.2",
     "colorjs.io": "^0.6.0",
@@ -94,7 +94,7 @@
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-lib-inject-css": "^2.2.2",
     "vite-tsconfig-paths": "^6.0.4",
-    "vitest": "4.0.16"
+    "vitest": "4.0.17"
   },
   "peerDependencies": {
     "@chromatic-com/storybook": "^4",
