@@ -1498,7 +1498,7 @@ __metadata:
     "@vitest/coverage-v8": "npm:4.0.16"
     "@vueless/storybook-dark-mode": "npm:10.0.6"
     chalk: "npm:^5.6.2"
-    colorjs.io: "npm:^0.6.0"
+    colorjs.io: "npm:^0.6.1"
     eslint: "npm:^9.39.2"
     eslint-plugin-file-progress: "npm:^3.0.2"
     eslint-plugin-mdx: "npm:^3.6.2"
@@ -1704,7 +1704,7 @@ __metadata:
     "@vitejs/plugin-react": "npm:^5.1.2"
     "@vitest/coverage-v8": "npm:4.0.16"
     chalk: "npm:^5.6.2"
-    colorjs.io: "npm:^0.6.0"
+    colorjs.io: "npm:^0.6.1"
     concurrently: "npm:^9.2.1"
     eslint: "npm:^9.39.2"
     eslint-plugin-file-progress: "npm:^3.0.2"
@@ -6591,10 +6591,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colorjs.io@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "colorjs.io@npm:0.6.0"
-  checksum: 10c0/e7393f7c76186428bb3c2b332577389dba5722cdfc43e61c3e2566f1cd76b733e2302e148f52c84763cf59c94acc6babbf0e5bd7e55869ba809c047190b0c677
+"colorjs.io@npm:^0.6.1":
+  version: 0.6.1
+  resolution: "colorjs.io@npm:0.6.1"
+  checksum: 10c0/972aff12d88e86726898ff110aa15ea57a0348a3b958aeb93f4d6ae2d0ca91e487864e4d0d98b53943cc3ac3f747fb01b5ba3b6d922848d5c6888cb56e470b84
   languageName: node
   linkType: hard
 
