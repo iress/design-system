@@ -46,7 +46,7 @@
   "devDependencies": {
     "@modelcontextprotocol/inspector": "0.18.0",
     "@types/minimist": "1.2.5",
-    "@types/node": "^25.0.6",
+    "@types/node": "^25.0.10",
     "@types/turndown": "5.0.6",
     "@vitest/coverage-v8": "4.0.16",
     "minimist": "1.2.8",
