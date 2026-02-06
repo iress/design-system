@@ -130,7 +130,7 @@ export const modal = sva({
       },
       open: {
         backdrop: {
-          bg: 'colour.system.backdrop.fill',
+          bg: 'colour.globalInteractions.backdrop',
         },
         modal: {
           opacity: 1,
