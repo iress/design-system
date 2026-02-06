@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-storybook-config",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -97,7 +97,7 @@
     "vitest": "4.0.17"
   },
   "peerDependencies": {
-    "@chromatic-com/storybook": "^4",
+    "@chromatic-com/storybook": "^4 || ^5",
     "@iress-oss/ids-components": "^6",
     "@iress-oss/ids-storybook-okta": "^0",
     "@iress-oss/ids-storybook-sandbox": "^0.2",
