@@ -70,9 +70,7 @@ export const radio = sva({
         fill: '[currentColor]',
         display: 'none',
       },
-      _groupFocusWithin: {
-        layerStyle: 'elevation.focus',
-      },
+      focusable: 'has-input',
     },
     checkboxMark: {
       checkmark: false,
@@ -135,6 +133,7 @@ export const radio = sva({
       hiddenControl: true,
       css: {
         input: {
+          focusable: 'label-after',
           _checked: {
             '& + label': {
               border: '[none]',
@@ -161,7 +160,6 @@ export const radio = sva({
                 display: 'block',
                 borderRadius: '[inherit]',
                 pointerEvents: 'none',
-                layerStyle: 'elevation.focus',
               },
             },
           },

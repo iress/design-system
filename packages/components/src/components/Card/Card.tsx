@@ -39,6 +39,11 @@ export interface InternalCardProps<E extends ElementType = 'div'>
   media?: ReactNode;
 
   /**
+   * When set to true, the card will not have a border. This is useful to de-prioritise a card within another bordered container, such as a card within a sidebar.
+   */
+  noBorder?: boolean;
+
+  /**
    * Slot to the left of card content.
    */
   prepend?: ReactNode;
@@ -74,6 +79,7 @@ export const IressCard = <E extends ElementType = 'div'>({
   footer,
   heading,
   media,
+  noBorder,
   prepend,
   topRight,
   ...restProps
@@ -99,6 +105,7 @@ export const IressCard = <E extends ElementType = 'div'>({
     hasHeading,
     hasMedia,
     hasPrepend,
+    noBorder,
   });
 
   const testId = nonStyleProps['data-testid'];

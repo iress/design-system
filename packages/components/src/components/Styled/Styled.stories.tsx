@@ -179,7 +179,6 @@ export const Complex: Story = {
       p="spacing.5"
       bg="colour.neutral.10"
       borderRadius="radius.100"
-      layerStyle="elevation.raised"
     >
       <IressStyled mb="spacing.4">
         <IressIcon

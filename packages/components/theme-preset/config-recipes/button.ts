@@ -54,7 +54,7 @@ export const buttonRecipe = defineSlotRecipe({
 
       _focusVisible: {
         outline: 'none',
-        layerStyle: 'elevation.focusNoBorder',
+        focusable: 'true',
       },
 
       '&[data-active="true"]': {

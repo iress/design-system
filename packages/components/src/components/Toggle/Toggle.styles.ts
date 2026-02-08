@@ -29,9 +29,7 @@ export const toggle = sva({
       borderColor: '[currentColor]',
       borderRadius: '[{sizes.toggle.thumb}]',
       transition: '[background-color 0.3s ease-out]',
-      '&:has([role="switch"]:focus-visible)': {
-        layerStyle: 'elevation.focus',
-      },
+      focusable: 'has-switch',
       _hover: {
         color: 'colour.neutral.80',
       },

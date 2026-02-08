@@ -1,6 +1,5 @@
 import { type ExtendableOptions } from '@pandacss/types';
 import { colors } from './tokens/colors';
-import { ELEVATION_TOKENS } from './tokens/layerStyles';
 import { radii } from './tokens/radii';
 import { textCompositions } from './tokens/textStyles';
 import { spanCompositions } from './utilities/span';
@@ -22,7 +21,6 @@ const allowedCssProps = {
   columnGap: SPACING_TOKENS,
   gap: SPACING_TOKENS,
   horizontalAlign: [...HORIZONTAL_ALIGNS],
-  layerStyle: ELEVATION_TOKENS,
 
   // We can't use margin shorthand because it won't generate the correct CSS
   margin: MARGIN_TOKENS,

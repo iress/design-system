@@ -30,7 +30,7 @@ const FocusableAlert = styled(
   {
     base: {
       borderRadius: 'radius.system.form',
-      _focus: { outline: '[none]', layerStyle: 'elevation.focus' },
+      focusable: 'true',
     },
   },
   {

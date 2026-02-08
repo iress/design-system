@@ -40,6 +40,13 @@ export const Simple: Story = {
   },
 };
 
+export const NoBorder: Story = {
+  args: {
+    ...Default.args,
+    noBorder: true,
+  },
+};
+
 export const Padding: Story = {
   args: {
     ...Default.args,

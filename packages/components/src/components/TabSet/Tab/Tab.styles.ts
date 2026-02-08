@@ -16,11 +16,7 @@ export const tab = cva({
     transition: 'all',
     whiteSpace: 'nowrap',
     width: '[auto]',
-
-    _focusVisible: {
-      layerStyle: 'elevation.focus',
-      outline: '[none]',
-    },
+    focusable: 'true',
 
     _hover: {
       bg: 'colour.neutral.20',
@@ -44,10 +40,6 @@ export const tab = cva({
 
         _hover: {
           bg: '[none]',
-        },
-
-        _focusVisible: {
-          layerStyle: 'elevation.focusCompact',
         },
       },
     },

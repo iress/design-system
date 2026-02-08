@@ -24,15 +24,7 @@ export const slider = sva({
       height: 'slider.thumb',
       margin: 'spacing.0',
       width: '[100%]',
-      _focus: {
-        outline: '[none]',
-      },
-      _focusVisibleWebkitSliderThumb: {
-        layerStyle: 'elevation.focus',
-      },
-      _focusVisibleMozRangeThumb: {
-        layerStyle: 'elevation.focus',
-      },
+      focusable: 'slider',
       _webkitSliderThumb: {
         appearance: 'none',
         marginBlockStart:

@@ -33,14 +33,7 @@ export const link = sva({
       width: 'auto',
       color: 'colour.primary.text',
       borderRadius: 'radius.025',
-
-      _focus: {
-        outline: '[none]',
-      },
-
-      _focusVisible: {
-        layerStyle: 'elevation.focus',
-      },
+      focusable: 'true',
     },
     prepend: {
       display: 'contents',

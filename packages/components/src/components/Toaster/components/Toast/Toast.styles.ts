@@ -16,7 +16,7 @@ export const toast = sva({
       position: 'relative',
       zIndex: '500',
       transition: '[all 0.3s ease-in-out]',
-      layerStyle: 'elevation.floating',
+      layerStyle: 'floating',
       _motionReduce: {
         transform: 'none',
         transition: '[opacity 0.3s ease-in-out]',

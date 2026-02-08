@@ -343,8 +343,7 @@ export const AlignSelf: Story = {
     <IressContainer>
       <IressRow
         {...row}
-        layerStyle="elevation.raised"
-        style={{ height: '10rem' }}
+        style={{ border: '1px dashed hsl(43deg 100% 45%)', height: '10rem' }}
       >
         <IressCol {...column} alignSelf="start">
           <IressPlaceholder>Start</IressPlaceholder>

@@ -14,10 +14,7 @@ export const expander = sva({
       // Performance: CSS containment (no paint to allow overflow)
       contain: 'layout style',
       display: 'block',
-
-      '&:has([aria-controls]:focus-visible)': {
-        layerStyle: 'elevation.focusNoBorder',
-      },
+      focusable: 'has-controller',
     },
     activator: {
       display: 'inline-block',
@@ -27,10 +24,6 @@ export const expander = sva({
       bg: 'transparent',
       cursor: 'pointer',
       position: 'relative',
-
-      _focusVisible: {
-        outline: '[none]',
-      },
     },
     chevron: {
       width: '[1.5em]',

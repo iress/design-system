@@ -12,6 +12,7 @@ export const selectSearchInput = sva({
       borderBottomColor: 'colour.neutral.70',
       zIndex: '[100]',
       overflow: 'hidden',
+      focusable: 'has-input-compact',
 
       '&&': {
         borderRadius: 'radius.000',
@@ -20,11 +21,6 @@ export const selectSearchInput = sva({
       '& div:first-child': {
         borderBottomColor: 'transparent',
         borderRadius: 'radius.000',
-      },
-
-      '&:has(input:focus, textarea:focus)': {
-        border: '[none]',
-        layerStyle: 'elevation.focusCompact',
       },
 
       '&:has(input:focus, textarea:focus) > *': {

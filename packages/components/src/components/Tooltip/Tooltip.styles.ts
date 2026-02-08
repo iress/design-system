@@ -17,7 +17,7 @@ export const tooltip = sva({
       padding: 'spacing.2',
       borderRadius: 'radius.system.form',
       borderStyle: 'solid',
-      layerStyle: 'elevation.floating',
+      layerStyle: 'floating',
       textStyle: 'typography.body.sm.regular',
       color: 'colour.neutral.10',
       bg: 'colour.neutral.80',

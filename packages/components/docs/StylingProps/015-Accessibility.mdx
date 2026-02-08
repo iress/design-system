@@ -1,14 +1,21 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import { IressText } from '@/main';
-import * as ComponentStories from './050-ScreenReaders.stories';
+import * as ComponentStories from './015-Accessibility.stories';
 import { ComponentExample } from '@iress-oss/ids-storybook-config';
 
-<Meta title="Styling props/Screen readers" />
+<Meta of={ComponentStories} />
 
-# Screen readers
+# Accessibility
 
-These are all styling props related to adjusting components for screen
-readers.
+These are all styling props related to screen readers and accessibility. They allow you to hide content from visual users while still providing context for screen reader users, ensuring an inclusive experience for all users.
+
+## `focusable`
+
+The `focusable` prop allows you to set the focus state of a component. This is useful for components that need to be interactive via keyboard, but are not necessarily a button or input.
+
+It can be set to `true` to enable focus styles when the element is focused using keyboard navigation, or `within` to show focus styles when an element within is focused.
+
+<ComponentExample of={ComponentStories.focusable} />
 
 ## `srOnly`
 
@@ -21,10 +28,3 @@ The `srOnly` prop allows you to set a component to be only visible on screen rea
 The `srOnly` prop is responsive, allowing you to show content on larger screens and hiding them on smaller ones, enabling screen readers to have the same context as larger screens as they are not limited by device size.
 
 <ComponentExample of={ComponentStories.srOnlyResponsive} sourceState="shown" />
-
-## `hideFrom` and `hideBelow`
-
-The `hideFrom` and `hideBelow` props allow you to hide content from both visual users and screen readers at different breakpoints. This is useful when certain content is not relevant on smaller screens, and you want to ensure that screen reader users have the same experience as visual users.
-
-<ComponentExample of={ComponentStories.hideFrom} sourceState="shown" />
-<ComponentExample of={ComponentStories.hideBelow} sourceState="shown" />

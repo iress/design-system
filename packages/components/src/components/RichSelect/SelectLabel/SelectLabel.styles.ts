@@ -21,16 +21,7 @@ export const selectLabel = sva({
       color: 'colour.neutral.80',
       cursor: 'pointer',
       transition: 'common',
-      _focusWithin: {
-        backgroundColor: 'colour.neutral.10',
-        layerStyle: 'elevation.focus',
-        outline: '[none]',
-      },
-      _active: {
-        backgroundColor: 'colour.neutral.10',
-        layerStyle: 'elevation.focus',
-        outline: '[none]',
-      },
+      focusable: 'select',
     },
     contents: {
       textStyle: 'typography.body.md',

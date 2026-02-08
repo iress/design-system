@@ -45,7 +45,7 @@ export const modal = sva({
       width: 'overlay.md',
       maxWidth: '[calc(100vw - ({spacing.spacing.7}))]',
       minHeight: 'auto',
-      layerStyle: 'elevation.floating',
+      layerStyle: 'floating',
       background: 'colour.neutral.10',
       outline: '[0]',
       opacity: 0,

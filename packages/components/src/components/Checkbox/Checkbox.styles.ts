@@ -39,9 +39,7 @@ export const checkbox = sva({
       color: '[currentColor]',
       marginInlineEnd: 'spacing.2',
       flexShrink: 0,
-      _groupFocusWithin: {
-        layerStyle: 'elevation.focus',
-      },
+      focusable: 'within',
     },
   },
   variants: {
@@ -72,9 +70,7 @@ export const checkbox = sva({
           _hover: {
             backgroundColor: 'colour.neutral.20',
           },
-          _groupFocusWithin: {
-            layerStyle: 'elevation.focus',
-          },
+          focusable: 'within',
         },
         labelSpan: {
           display: 'block',

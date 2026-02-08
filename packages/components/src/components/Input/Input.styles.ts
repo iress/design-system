@@ -14,9 +14,7 @@ export const input = sva({
       margin: '[0]',
       flexGrow: '1',
       border: 'input',
-      '&:has(input:focus, textarea:focus)': {
-        layerStyle: 'elevation.focus',
-      },
+      focusable: 'has-input',
     },
     addon: {
       borderRadius: 'radius.100',
@@ -62,9 +60,6 @@ export const input = sva({
       maxWidth: '[100%]',
       minHeight: '[calc({sizes.input.height} - 2px)]',
       lineHeight: 1,
-      _focus: {
-        outline: '[none]',
-      },
       _placeholder: {
         color: 'colour.neutral.60',
       },

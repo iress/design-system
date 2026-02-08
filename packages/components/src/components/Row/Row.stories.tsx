@@ -18,6 +18,7 @@ import {
   disableArgTypes,
 } from '@iress-oss/ids-storybook-config';
 import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { cssVars } from '@iress-oss/ids-tokens';
 
 type Story = StoryObj<typeof IressRow>;
 
@@ -271,8 +272,10 @@ export const VerticalAlignment: Story = {
           <div key={verticalAlign}>
             <IressText element="h2">Vertical align: {verticalAlign}</IressText>
             <IressRow
-              style={{ height: '10rem' }}
-              layerStyle="elevation.raised"
+              style={{
+                height: '10rem',
+                border: `1px solid ${cssVars.colour.neutral[30]}`,
+              }}
               {...args}
               verticalAlign={verticalAlign}
             />

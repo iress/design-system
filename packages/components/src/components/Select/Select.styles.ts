@@ -16,9 +16,7 @@ export const select = sva({
       display: 'block',
       position: 'relative',
       lineHeight: 1,
-      '&:has(select:focus)': {
-        layerStyle: 'elevation.focus',
-      },
+      focusable: 'has-input',
     },
     control: {
       position: 'relative',

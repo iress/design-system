@@ -22,15 +22,11 @@ export const menu = sva({
       textStyle: 'typography.body.md',
       transition: '[0.2s all ease-in-out]',
 
+      focusable: 'true',
+
       _focus: {
-        outline: '[none]',
         bg: 'colour.primary.surface',
         color: 'colour.primary.text',
-      },
-
-      _focusVisible: {
-        layerStyle: 'elevation.focus',
-        zIndex: '[1]',
       },
 
       _hover: {

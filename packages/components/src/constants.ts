@@ -144,41 +144,41 @@ export const TEXT_ALIGNS = [
 export const VERTICAL_ALIGNS = ['top', 'middle', 'bottom', 'stretch'] as const;
 
 /**
- * The z-index determines the stacking order of elements. Elements with a higher z-index always sit in front of elements with a lower z-index. Each index has been mapped to the appropriate elevation(s).
+ * The z-index determines the stacking order of elements. Elements with a higher z-index always sit in front of elements with a lower z-index.
  */
 export const Z_INDEX = {
   /**
-   * The default z-index used for most elements. Can be combined with raised and floating elevations.
+   * The default z-index used for most elements.
    */
   DEFAULT: 0,
 
   /**
-   * Used for IressNavbar. Can be combined with overflow elevation.
+   * Used for IressNavbar.
    */
   NAVBAR: 100,
 
   /**
-   * Used for IressPopover. Can be combined with floating elevation.
+   * Used for IressPopover.
    */
   POPOVER: 200,
 
   /**
-   * Used for IressSlideout. Can be combined with floating elevation.
+   * Used for IressSlideout.
    */
   SLIDEOUT: 300,
 
   /**
-   * Used for IressModal. Can be combined with floating elevation.
+   * Used for IressModal.
    */
   MODAL: 400,
 
   /**
-   * Used for IressToast. Can be combined with floating elevation.
+   * Used for IressToast.
    */
   TOAST: 500,
 
   /**
-   * Used for IressTooltip. Can be combined with floating elevation.
+   * Used for IressTooltip.
    */
   TOOLTIP: 600,
 };

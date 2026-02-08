@@ -44,11 +44,7 @@ export const tabSet = sva({
     },
     panel: {
       textStyle: 'typography.body.md',
-
-      _focusVisible: {
-        layerStyle: 'elevation.focus',
-        outline: '[none]',
-      },
+      focusable: 'true',
 
       '& > :not([hidden])': {
         pt: 'sm',
@@ -116,7 +112,7 @@ export const tabSet = sva({
     overflowEnd: {
       true: {
         overflowEndIndicator: {
-          layerStyle: 'elevation.overflow',
+          layerStyle: 'overflow',
           position: 'absolute',
           top: 'spacing.0',
           bottom: 'spacing.1',
@@ -130,7 +126,7 @@ export const tabSet = sva({
     overflowStart: {
       true: {
         overflowStartIndicator: {
-          layerStyle: 'elevation.overflow',
+          layerStyle: 'overflow',
           position: 'absolute',
           top: 'spacing.0',
           bottom: 'spacing.1',

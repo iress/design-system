@@ -1,55 +1,26 @@
 import { type CompositionStyles, defineLayerStyles } from '@pandacss/dev';
-import { elevation, cssVars } from '@iress-oss/ids-tokens';
-
-export const elevationCompositions = {
-  'elevation.raised': {
-    description: elevation.raised.$description,
-    value: {
-      boxShadow: cssVars.elevation.raised.shadow,
-      border: cssVars.elevation.raised.border,
-    },
-  },
-  'elevation.floating': {
-    description: elevation.floating.$description,
-    value: {
-      boxShadow: cssVars.elevation.floating.shadow,
-      border: cssVars.elevation.floating.border,
-    },
-  },
-  'elevation.overflow': {
-    description: elevation.overflow.$description,
-    value: {
-      boxShadow: cssVars.elevation.overflow.shadow,
-      border: cssVars.elevation.overflow.border,
-    },
-  },
-  'elevation.focus': {
-    description: elevation.focus.$description,
-    value: {
-      boxShadow: cssVars.elevation.focus.shadow,
-      borderColor: `${cssVars.elevation.focus.borderColor} !important`,
-    },
-  },
-  'elevation.focusCompact': {
-    description: elevation.focusCompact.$description,
-    value: {
-      boxShadow: cssVars.elevation.focusCompact.shadow,
-      borderColor: cssVars.elevation.focusCompact.borderColor,
-    },
-  },
-} satisfies CompositionStyles['layerStyles'];
+import { cssVars } from '@iress-oss/ids-tokens';
 
 const internalLayerStyles: CompositionStyles['layerStyles'] = {
-  'elevation.focusNoBorder': {
-    description: elevation.focus.$description,
-    value: {
-      boxShadow: cssVars.elevation.focus.shadow,
-    },
-  },
   dots: {
     description: 'Used to represent a loading state with dots',
     value: {
       background: `radial-gradient(circle closest-side, currentcolor 90%, transparent) 0 / calc(100% / 3) 100% space`,
+    },
+  },
+  floating: {
+    description:
+      'Used to represent a floating element (eg. Modal, Slideout or Popover)',
+    value: {
+      boxShadow: '0 10px 18px #091E4215',
+      border: '0.5px solid #091E4215',
+    },
+  },
+  overflow: {
+    description:
+      'Used to indicate an element is scrollable when its content overflows (eg. TabSet and Table)',
+    value: {
+      boxShadow: 'inset -13px 0px 18.8px #091E420D',
     },
   },
   skeleton: {
@@ -63,10 +34,5 @@ const internalLayerStyles: CompositionStyles['layerStyles'] = {
 };
 
 export const layerStyles = defineLayerStyles({
-  ...elevationCompositions,
   ...internalLayerStyles,
-});
-
-export const ELEVATION_TOKENS = Object.keys({
-  ...elevationCompositions,
 });

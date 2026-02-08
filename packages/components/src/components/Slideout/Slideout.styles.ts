@@ -13,7 +13,7 @@ export const slideout = sva({
       maxWidth: '[100%]',
       overflowY: 'auto',
       transition: '[all 0.3s ease-out]',
-      layerStyle: 'elevation.floating',
+      layerStyle: 'floating',
       backgroundColor: 'colour.neutral.10',
       zIndex: '300',
       display: 'flex',
