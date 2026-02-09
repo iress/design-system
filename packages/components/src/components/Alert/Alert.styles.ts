@@ -174,8 +174,8 @@ export const alert = sva({
     variant: {
       sidebar: {
         alert: {
-          borderTopLeftRadius: 'radius.000',
-          borderBottomLeftRadius: 'radius.000',
+          borderTopLeftRadius: 'none',
+          borderBottomLeftRadius: 'none',
           borderWidth: '[0]',
           borderLeftWidth: '[2.5px]',
           paddingBlock: 'spacing.4',
@@ -183,7 +183,7 @@ export const alert = sva({
       },
       'site-wide': {
         alert: {
-          borderRadius: 'radius.000',
+          borderRadius: 'none',
           borderWidth: '[0]',
           borderBottomWidth: '[0.5px]',
         },

@@ -101,7 +101,7 @@ export const radio = sva({
           borderWidth: '1px',
           borderStyle: 'solid',
           borderColor: 'colour.neutral.40',
-          borderRadius: 'radius.050',
+          borderRadius: 'radius.system.form',
           padding: 'spacing.4',
         },
       },

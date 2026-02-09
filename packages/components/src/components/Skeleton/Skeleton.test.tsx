@@ -20,7 +20,7 @@ describe('IressSkeleton', () => {
       const skeleton = screen.getByTestId(TEST_ID);
 
       expect(skeleton).toHaveClass(
-        'bg-c_colour.neutral.30 bdr_radius.025 motionReduce:anim_none moreContrast:ring_[1px_solid_transparent] layerStyle_skeleton animationStyle_skeleton-loading w_[100%] h_[spacing.6]',
+        'bg-c_colour.neutral.30 bdr_radius.1 motionReduce:anim_none moreContrast:ring_[1px_solid_transparent] layerStyle_skeleton animationStyle_skeleton-loading w_[100%] h_[spacing.6]',
         GlobalCSSClass.Skeleton,
       );
     });

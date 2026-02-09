@@ -94,33 +94,33 @@ export const fieldGroup = sva({
           },
 
           _nestedFieldsExceptFirst: {
-            borderTopLeftRadius: 'radius.000',
-            borderBottomLeftRadius: 'radius.000',
+            borderTopLeftRadius: 'radius.0',
+            borderBottomLeftRadius: 'radius.0',
 
             _before: {
-              borderTopLeftRadius: 'radius.000',
-              borderBottomLeftRadius: 'radius.000',
+              borderTopLeftRadius: 'radius.0',
+              borderBottomLeftRadius: 'radius.0',
             },
 
             _after: {
-              borderTopLeftRadius: 'radius.000',
-              borderBottomLeftRadius: 'radius.000',
+              borderTopLeftRadius: 'radius.0',
+              borderBottomLeftRadius: 'radius.0',
             },
           },
 
           _nestedFieldsExceptLast: {
-            borderTopRightRadius: 'radius.000',
-            borderBottomRightRadius: 'radius.000',
+            borderTopRightRadius: 'radius.0',
+            borderBottomRightRadius: 'radius.0',
             borderRightWidth: '[0px]',
 
             _before: {
-              borderTopRightRadius: 'radius.000',
-              borderBottomRightRadius: 'radius.000',
+              borderTopRightRadius: 'radius.0',
+              borderBottomRightRadius: 'radius.0',
             },
 
             _after: {
-              borderTopRightRadius: 'radius.000',
-              borderBottomRightRadius: 'radius.000',
+              borderTopRightRadius: 'radius.0',
+              borderBottomRightRadius: 'radius.0',
             },
           },
         },

@@ -32,7 +32,7 @@ export const link = sva({
       whiteSpace: 'normal',
       width: 'auto',
       color: 'colour.primary.text',
-      borderRadius: 'radius.025',
+      borderRadius: 'radius.system.button',
       focusable: 'true',
     },
     prepend: {

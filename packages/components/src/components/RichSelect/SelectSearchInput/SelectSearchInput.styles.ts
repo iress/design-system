@@ -15,12 +15,12 @@ export const selectSearchInput = sva({
       focusable: 'has-input-compact',
 
       '&&': {
-        borderRadius: 'radius.000',
+        borderRadius: 'radius.0',
       },
 
       '& div:first-child': {
         borderBottomColor: 'transparent',
-        borderRadius: 'radius.000',
+        borderRadius: 'radius.0',
       },
 
       '&:has(input:focus, textarea:focus) > *': {

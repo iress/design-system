@@ -54,7 +54,8 @@ export const card = sva({
         maxWidth: '[100%]',
       },
       '&:not(:last-child)': {
-        borderBottomRadius: 'radius.000',
+        borderBottomRadius: 'radius.0',
+        borderBottomLeftRadius: 'radius.0',
       },
     },
     body: {

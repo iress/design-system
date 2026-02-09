@@ -69,7 +69,7 @@ export default {
   tags: ['updated'],
   decorators: [
     (Story) => (
-      <IressPanel bg="alt" borderRadius="radius.000" stretch>
+      <IressPanel bg="alt" borderRadius="radius.0" stretch>
         <Story />
       </IressPanel>
     ),

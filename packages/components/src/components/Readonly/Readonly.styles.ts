@@ -15,7 +15,7 @@ export const readonly = sva({
       lineHeight: 'inherit',
     },
     addon: {
-      borderRadius: 'radius.100',
+      borderRadius: 'radius.system.form',
       backgroundColor: 'colour.neutral.10',
       minHeight: 'input.height',
       color: 'colour.neutral.80',

@@ -34,7 +34,7 @@ export const badge = sva({
     pill: {
       true: {
         badge: {
-          borderRadius: 'radius.100',
+          borderRadius: 'radius.4',
         },
       },
     },

@@ -17,7 +17,7 @@ export const input = sva({
       focusable: 'has-input',
     },
     addon: {
-      borderRadius: 'radius.100',
+      borderRadius: 'radius.system.form',
       backgroundColor: 'colour.neutral.10',
       minHeight: '[calc({sizes.input.height} - 2px)]',
       color: 'colour.neutral.80',
