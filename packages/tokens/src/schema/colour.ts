@@ -281,7 +281,7 @@ const colour = {
   },
   accent: {
     $description:
-      'The accent colour is a colour used to emphasise key parts of the UI. These act as "secondary" or "supporting" colours to you primary colour. The brand accent is useful for grabbing attention or to support your primary/brand colour.',
+      'The accent colour is a colour used to emphasise key parts of the UI. These act as "secondary" or "supporting" colours to your primary colour. The brand accent is useful for grabbing attention or to support your primary/brand colour.',
     fill: {
       $description:
         'Used in illustrations to support the primary colour and to add visual interest to the UI.',
