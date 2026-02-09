@@ -29,7 +29,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-colour--docs#bg',
     cssProperty: 'background',
     tokenMapping: 'Colour',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-colour--docs',
+    tokenMappingLink: '/?path=/docs/tokens_colour--docs',
     responsive: false,
   },
   {
@@ -37,7 +37,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-radius--docs#borderradius',
     cssProperty: 'border-radius',
     tokenMapping: 'Radius',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-radius--docs',
+    tokenMappingLink: '/?path=/docs/tokens_radius--docs',
     responsive: true,
   },
   {
@@ -45,7 +45,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-colour--docs#color',
     cssProperty: 'color',
     tokenMapping: 'Colour',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-colour--docs',
+    tokenMappingLink: '/?path=/docs/tokens_colour--docs',
     responsive: false,
   },
   {
@@ -60,7 +60,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-accessibility--docs#focusable',
     cssProperty: 'border and box-shadow',
     tokenMapping: 'Colour',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-colour--docs',
+    tokenMappingLink: '/?path=/docs/tokens_colour--docs',
     responsive: false,
   },
   {
@@ -89,7 +89,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-spacing--docs#margin',
     cssProperty: 'margin',
     tokenMapping: 'Spacing',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-spacing--docs',
+    tokenMappingLink: '/?path=/docs/tokens_spacing--docs',
     responsive: true,
   },
   {
@@ -97,7 +97,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-spacing--docs#margin',
     cssProperty: 'margin-inline',
     tokenMapping: 'Spacing',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-spacing--docs',
+    tokenMappingLink: '/?path=/docs/tokens_spacing--docs',
     responsive: true,
   },
   {
@@ -105,7 +105,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-spacing--docs#margin',
     cssProperty: 'margin-block',
     tokenMapping: 'Spacing',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-spacing--docs',
+    tokenMappingLink: '/?path=/docs/tokens_spacing--docs',
     responsive: true,
   },
   {
@@ -113,7 +113,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-spacing--docs#margin',
     cssProperty: 'margin-bottom',
     tokenMapping: 'Spacing',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-spacing--docs',
+    tokenMappingLink: '/?path=/docs/tokens_spacing--docs',
     responsive: true,
   },
   {
@@ -121,7 +121,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-spacing--docs#margin',
     cssProperty: 'margin-left',
     tokenMapping: 'Spacing',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-spacing--docs',
+    tokenMappingLink: '/?path=/docs/tokens_spacing--docs',
     responsive: true,
   },
   {
@@ -129,7 +129,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-spacing--docs#margin',
     cssProperty: 'margin-right',
     tokenMapping: 'Spacing',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-spacing--docs',
+    tokenMappingLink: '/?path=/docs/tokens_spacing--docs',
     responsive: true,
   },
   {
@@ -137,7 +137,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-spacing--docs#margin',
     cssProperty: 'margin-top',
     tokenMapping: 'Spacing',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-spacing--docs',
+    tokenMappingLink: '/?path=/docs/tokens_spacing--docs',
     responsive: true,
   },
   {
@@ -152,7 +152,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-spacing--docs#padding',
     cssProperty: 'padding',
     tokenMapping: 'Spacing',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-spacing--docs',
+    tokenMappingLink: '/?path=/docs/tokens_spacing--docs',
     responsive: true,
   },
   {
@@ -160,7 +160,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-spacing--docs#padding',
     cssProperty: 'padding-inline',
     tokenMapping: 'Spacing',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-spacing--docs',
+    tokenMappingLink: '/?path=/docs/tokens_spacing--docs',
     responsive: true,
   },
   {
@@ -168,7 +168,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-spacing--docs#padding',
     cssProperty: 'padding-block',
     tokenMapping: 'Spacing',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-spacing--docs',
+    tokenMappingLink: '/?path=/docs/tokens_spacing--docs',
     responsive: true,
   },
   {
@@ -176,7 +176,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-spacing--docs#padding',
     cssProperty: 'padding-bottom',
     tokenMapping: 'Spacing',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-spacing--docs',
+    tokenMappingLink: '/?path=/docs/tokens_spacing--docs',
     responsive: true,
   },
   {
@@ -184,7 +184,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-spacing--docs#padding',
     cssProperty: 'padding-left',
     tokenMapping: 'Spacing',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-spacing--docs',
+    tokenMappingLink: '/?path=/docs/tokens_spacing--docs',
     responsive: true,
   },
   {
@@ -192,7 +192,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-spacing--docs#padding',
     cssProperty: 'padding-right',
     tokenMapping: 'Spacing',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-spacing--docs',
+    tokenMappingLink: '/?path=/docs/tokens_spacing--docs',
     responsive: true,
   },
   {
@@ -200,7 +200,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-spacing--docs#padding',
     cssProperty: 'padding-top',
     tokenMapping: 'Spacing',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-spacing--docs',
+    tokenMappingLink: '/?path=/docs/tokens_spacing--docs',
     responsive: true,
   },
   {
@@ -236,7 +236,7 @@ const stylingPropsReference: StylingPropsReference[] = [
     jsxPropLink: '/?path=/docs/styling-props-typography--docs#textStyle',
     cssProperty: 'font',
     tokenMapping: 'Typography',
-    tokenMappingLink: '/?path=/docs/foundations-tokens-typography--docs',
+    tokenMappingLink: '/?path=/docs/tokens_typography--docs',
     responsive: true,
   },
   {

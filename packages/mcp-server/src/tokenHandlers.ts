@@ -294,7 +294,6 @@ export function handleGetDesignTokens(args: unknown): ToolResponse {
     margin: 'spacing',
     gutter: 'spacing',
     gap: 'spacing',
-    layer: 'elevation',
     text: 'typography',
     font: 'typography',
     radii: 'radius',
@@ -303,7 +302,6 @@ export function handleGetDesignTokens(args: unknown): ToolResponse {
   // Explicitly define available token categories to avoid Object.keys type issues
   const availableTypes = [
     'colour',
-    'elevation',
     'radius',
     'spacing',
     'typography',
