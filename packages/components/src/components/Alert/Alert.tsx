@@ -181,7 +181,7 @@ export const IressAlert = ({
                   <IressButton
                     {...action}
                     className={cx(action.className, classes.action)}
-                    status={status as never} // Only for feedback components, we allow warning and info statuses to be used for actions, which is not normally allowed for buttons. This is because the alert provides the necessary context to use these statuses appropriately, whereas using them on a standalone button could be confusing. We cast it as never to bypass the type check, but we ensure through documentation and design that this is used correctly.
+                    status={status as IressButtonProps['status']} // Only for feedback components, we allow warning and info statuses to be used for actions, which is not normally allowed for buttons. This is because the alert provides the necessary context to use these statuses appropriately, whereas using them on a standalone button could be confusing. We cast it as never to bypass the type check, but we ensure through documentation and design that this is used correctly.
                     key={index}
                   />
                 ))}

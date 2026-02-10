@@ -101,7 +101,7 @@ export interface InternalButtonProps<
   href?: THref;
 
   /**
-   * The icon to be displayed in the button. If provided, the icon will be displayed and the `children` will be used as screen reader text.
+   * The icon to be displayed in the button. If provided, the icon will be displayed and the `children` will be used as screen reader text (although you can explicitly override this with `aria-label`)
    */
   icon?: MaterialSymbol;
 
@@ -277,10 +277,13 @@ const Button = <
   );
 
   if (icon && children) {
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string
+    const childrenLabel = String(children);
+
     return (
-      // eslint-disable-next-line @typescript-eslint/no-base-to-string
-      <IressTooltip tooltipText={String(children)}>
+      <IressTooltip tooltipText={childrenLabel}>
         <Component
+          aria-label={childrenLabel}
           aria-describedby={loading ? spinnerId : undefined}
           type={element || !nonStyleProps.href ? 'button' : undefined}
           {...renderProps}
