@@ -33,7 +33,7 @@ export const buttonRecipe = defineSlotRecipe({
       boxSizing: 'border-box',
       cursor: 'pointer',
       display: 'inline-flex',
-      fontKerning: 'none',
+      fontKerning: '[none]',
       gap: 'spacing.2',
       justifyContent: 'center',
       maxWidth: '[100%]',
@@ -46,7 +46,7 @@ export const buttonRecipe = defineSlotRecipe({
       textAlign: 'center',
       textDecoration: 'none',
       textStyle: 'typography.body.md.medium',
-      transition: 'all .2s',
+      transition: 'all',
       userSelect: 'none',
       whiteSpace: 'normal',
       width: 'auto',
@@ -297,6 +297,16 @@ export const buttonRecipe = defineSlotRecipe({
           color: 'colour.system.danger.onFill',
         },
       },
+      info: {
+        root: {
+          color: 'colour.system.info.onFill',
+        },
+      },
+      warning: {
+        root: {
+          color: 'colour.system.warning.onFill',
+        },
+      },
     },
   },
   compoundVariants: [
@@ -539,7 +549,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.system.info.surface}, transparent 40%) 0px 0px 0px 3px',
+              '[color-mix(in srgb, {colors.colour.system.info.surface}, transparent 40%) 0px 0px 0px 3px]',
           },
         },
         spinner: {
@@ -561,7 +571,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.system.info.surface}, transparent 40%) 0px 0px 0px 3px',
+              '[color-mix(in srgb, {colors.colour.system.info.surface}, transparent 40%) 0px 0px 0px 3px]',
           },
         },
         spinner: {
@@ -587,7 +597,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.system.warning.surface}, transparent 40%) 0px 0px 0px 3px',
+              '[color-mix(in srgb, {colors.colour.system.warning.surface}, transparent 40%) 0px 0px 0px 3px]',
           },
         },
         spinner: {
@@ -609,7 +619,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.system.warning.surface}, transparent 40%) 0px 0px 0px 3px',
+              '[color-mix(in srgb, {colors.colour.system.warning.surface}, transparent 40%) 0px 0px 0px 3px]',
           },
         },
         spinner: {

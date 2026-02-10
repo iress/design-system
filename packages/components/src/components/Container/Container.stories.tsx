@@ -21,7 +21,7 @@ export default {
   },
   decorators: [
     (Story) => (
-      <IressPanel bg="alt" borderRadius="radius.000" stretch>
+      <IressPanel bg="alt" borderRadius="none" stretch>
         <Story />
       </IressPanel>
     ),
