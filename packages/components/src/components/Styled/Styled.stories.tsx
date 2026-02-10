@@ -18,7 +18,7 @@ export const Default: Story = {
     children: 'This is styled content using Panda CSS',
     p: 'spacing.4',
     bg: 'colour.neutral.20',
-    borderRadius: 'radius.050',
+    borderRadius: 'radius.2',
   },
 };
 
@@ -30,7 +30,7 @@ export const Elements: Story = {
         element="section"
         p="spacing.4"
         bg="colour.neutral.20"
-        borderRadius="radius.050"
+        borderRadius="radius.2"
       >
         <IressText element="h3">Section Element</IressText>
         <IressText>This is rendered as a section element.</IressText>
@@ -41,7 +41,7 @@ export const Elements: Story = {
         element="article"
         p="spacing.4"
         bg="colour.neutral.20"
-        borderRadius="radius.050"
+        borderRadius="radius.2"
       >
         <IressText element="h3">Article Element</IressText>
         <IressText>This is rendered as an article element.</IressText>
@@ -52,7 +52,7 @@ export const Elements: Story = {
         element="aside"
         p="spacing.4"
         bg="colour.neutral.20"
-        borderRadius="radius.050"
+        borderRadius="radius.2"
       >
         <IressText element="h3">Aside Element</IressText>
         <IressText>This is rendered as an aside element.</IressText>
@@ -63,7 +63,7 @@ export const Elements: Story = {
         element="nav"
         p="spacing.4"
         bg="colour.neutral.20"
-        borderRadius="radius.050"
+        borderRadius="radius.2"
       >
         <IressText element="h3">Nav Element</IressText>
         <IressText>This is rendered as a nav element.</IressText>
@@ -82,7 +82,7 @@ export const Spacing: Story = {
         {...args}
         p="spacing.2"
         bg="colour.neutral.20"
-        borderRadius="radius.050"
+        borderRadius="radius.2"
       >
         <IressText>Small padding (spacing.2)</IressText>
       </IressStyled>
@@ -91,7 +91,7 @@ export const Spacing: Story = {
         {...args}
         p="spacing.4"
         bg="colour.neutral.20"
-        borderRadius="radius.050"
+        borderRadius="radius.2"
       >
         <IressText>Medium padding (spacing.4)</IressText>
       </IressStyled>
@@ -100,7 +100,7 @@ export const Spacing: Story = {
         {...args}
         p="spacing.6"
         bg="colour.neutral.20"
-        borderRadius="radius.050"
+        borderRadius="radius.2"
       >
         <IressText>Large padding (spacing.6)</IressText>
       </IressStyled>
@@ -110,7 +110,7 @@ export const Spacing: Story = {
         m="spacing.4"
         p="spacing.4"
         bg="colour.system.info.surface"
-        borderRadius="radius.050"
+        borderRadius="radius.2"
       >
         <IressText>With margin (spacing.4)</IressText>
       </IressStyled>
@@ -129,7 +129,7 @@ export const Colors: Story = {
         p="spacing.4"
         bg="colour.system.info.surface"
         color="colour.system.info.text"
-        borderRadius="radius.050"
+        borderRadius="radius.2"
       >
         <IressText>Info color scheme</IressText>
       </IressStyled>
@@ -139,7 +139,7 @@ export const Colors: Story = {
         p="spacing.4"
         bg="colour.system.success.surface"
         color="colour.system.success.text"
-        borderRadius="radius.050"
+        borderRadius="radius.2"
       >
         <IressText>Success color scheme</IressText>
       </IressStyled>
@@ -149,7 +149,7 @@ export const Colors: Story = {
         p="spacing.4"
         bg="colour.system.warning.surface"
         color="colour.system.warning.text"
-        borderRadius="radius.050"
+        borderRadius="radius.2"
       >
         <IressText>Warning color scheme</IressText>
       </IressStyled>
@@ -159,7 +159,7 @@ export const Colors: Story = {
         p="spacing.4"
         bg="colour.system.danger.surface"
         color="colour.system.danger.text"
-        borderRadius="radius.050"
+        borderRadius="radius.2"
       >
         <IressText>Danger color scheme</IressText>
       </IressStyled>
@@ -178,8 +178,7 @@ export const Complex: Story = {
       m="auto"
       p="spacing.5"
       bg="colour.neutral.10"
-      borderRadius="radius.100"
-      layerStyle="elevation.raised"
+      borderRadius="radius.4"
     >
       <IressStyled mb="spacing.4">
         <IressIcon
@@ -198,11 +197,7 @@ export const Complex: Story = {
         without writing custom CSS.
       </IressText>
 
-      <IressStyled
-        p="spacing.4"
-        bg="colour.neutral.20"
-        borderRadius="radius.050"
-      >
+      <IressStyled p="spacing.4" bg="colour.neutral.20" borderRadius="radius.2">
         <IressText>
           This example demonstrates combining multiple styling properties to
           create a rich, semantic HTML structure with custom styling.

@@ -6,13 +6,13 @@ import {
 } from '../interfaces';
 
 interface RadiusSchema extends IressDesignTokenGroup {
-  '000': IressDesignToken;
-  '100': IressDesignToken;
+  0: IressDesignToken;
+  1: IressDesignToken;
 
   // Relative values
-  '025': IressDesignToken;
-  '050': IressDesignToken;
-  '075': IressDesignToken;
+  2: IressDesignToken;
+  3: IressDesignToken;
+  4: IressDesignToken;
 
   system: IressDesignTokenGroup & {
     badge: IressDesignToken<CompositeValue['radius']>;
@@ -22,12 +22,12 @@ interface RadiusSchema extends IressDesignTokenGroup {
   };
 }
 
-const baseRadius = '1rem';
+const baseRadius = '0.25rem'; // 4px
 
 const radius = {
   $description:
     'Radius is the curvature of the corners of elements. It is used to soften the appearance of elements and make them more visually appealing and/or align to a client brand.',
-  '000': {
+  0: {
     $description: 'No radius',
     $type: Type.Dimension,
     $value: '0px',
@@ -36,45 +36,39 @@ const radius = {
       'styler.hide': true,
     },
   },
-  '100': {
+  1: {
     $description: 'The base unit for radius',
     $type: Type.Dimension,
-    $value: baseRadius, // 16px
+    $value: baseRadius,
     $extensions: {
       'styler.field.range': {
-        max: 32,
-        tokens: [
-          'radius.000',
-          'radius.025',
-          'radius.050',
-          'radius.075',
-          'radius.100',
-        ],
+        max: 16,
+        tokens: ['radius.0', 'radius.1', 'radius.2', 'radius.3', 'radius.4'],
         visual: 'topRightRadius',
       },
       'styler.label': 'Base radius',
     },
   },
-  '025': {
-    $description: '25% (0.25x) radius',
+  2: {
+    $description: '2x radius',
     $type: Type.Dimension,
-    $value: `calc(0.25 * {radius.100 || ${baseRadius}})`, // 4px
+    $value: `calc(2 * {radius.1 || ${baseRadius}})`, // 8px
     $extensions: {
       'styler.hide': true,
     },
   },
-  '050': {
-    $description: '50% (0.5x) radius',
+  3: {
+    $description: '3x radius',
     $type: Type.Dimension,
-    $value: `calc(0.5 * {radius.100 || ${baseRadius}})`, // 8px
+    $value: `calc(3 * {radius.1 || ${baseRadius}})`, // 12px
     $extensions: {
       'styler.hide': true,
     },
   },
-  '075': {
-    $description: '75% (0.75x) radius',
+  4: {
+    $description: '4x radius',
     $type: Type.Dimension,
-    $value: `calc(0.75 * {radius.100 || ${baseRadius}})`, // 12px
+    $value: `calc(4 * {radius.1 || ${baseRadius}})`, // 16px
     $extensions: {
       'styler.hide': true,
     },
@@ -87,10 +81,10 @@ const radius = {
         'Applies to badges and tags (that have not been designated to be a circle).',
       $type: Type.Radius,
       $value: {
-        topLeft: `{radius.025 || calc(0.25 * ${baseRadius})}`,
-        topRight: `{radius.025 || calc(0.25 * ${baseRadius})}`,
-        bottomRight: `{radius.025 || calc(0.25 * ${baseRadius})}`,
-        bottomLeft: `{radius.025 || calc(0.25 * ${baseRadius})}`,
+        topLeft: `{radius.1 || ${baseRadius}}`,
+        topRight: `{radius.1 || ${baseRadius}}`,
+        bottomRight: `{radius.1 || ${baseRadius}}`,
+        bottomLeft: `{radius.1 || ${baseRadius}}`,
       },
       $extensions: {
         'styler.panel': 'radius.system',
@@ -101,10 +95,10 @@ const radius = {
         'Applies to buttons and other interactive elements such as the hover state of links.',
       $type: Type.Radius,
       $value: {
-        topLeft: `{radius.025 || calc(0.25 * ${baseRadius})}`,
-        topRight: `{radius.025 || calc(0.25 * ${baseRadius})}`,
-        bottomRight: `{radius.025 || calc(0.25 * ${baseRadius})}`,
-        bottomLeft: `{radius.025 || calc(0.25 * ${baseRadius})}`,
+        topLeft: `{radius.1 || ${baseRadius}}`,
+        topRight: `{radius.1 || ${baseRadius}}`,
+        bottomRight: `{radius.1 || ${baseRadius}}`,
+        bottomLeft: `{radius.1 || ${baseRadius}}`,
       },
       $extensions: {
         'styler.panel': 'radius.system',
@@ -114,10 +108,10 @@ const radius = {
       $description: 'Applies to form inputs and alerts.',
       $type: Type.Radius,
       $value: {
-        topLeft: `{radius.025 || calc(0.25 * ${baseRadius})}`,
-        topRight: `{radius.025 || calc(0.25 * ${baseRadius})}`,
-        bottomRight: `{radius.025 || calc(0.25 * ${baseRadius})}`,
-        bottomLeft: `{radius.025 || calc(0.25 * ${baseRadius})}`,
+        topLeft: `{radius.1 || ${baseRadius}}`,
+        topRight: `{radius.1 || ${baseRadius}}`,
+        bottomRight: `{radius.1 || ${baseRadius}}`,
+        bottomLeft: `{radius.1 || ${baseRadius}}`,
       },
       $extensions: {
         'styler.panel': 'radius.system',
@@ -127,10 +121,10 @@ const radius = {
       $description: 'Applies to panels, modals and slideouts.',
       $type: Type.Radius,
       $value: {
-        topLeft: `{radius.100 || ${baseRadius}}`,
-        topRight: `{radius.100 || ${baseRadius}}`,
-        bottomRight: `{radius.100 || ${baseRadius}}`,
-        bottomLeft: `{radius.100 || ${baseRadius}}`,
+        topLeft: `{radius.3 || calc(3 * ${baseRadius})}`,
+        topRight: `{radius.3 || calc(3 * ${baseRadius})}`,
+        bottomRight: `{radius.3 || calc(3 * ${baseRadius})}`,
+        bottomLeft: `{radius.3 || calc(3 * ${baseRadius})}`,
       },
       $extensions: {
         'styler.panel': 'radius.system',

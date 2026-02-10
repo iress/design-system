@@ -53,9 +53,7 @@ export const radio = sva({
     radioMark: {
       boxSizing: 'border-box',
       position: 'relative',
-      borderWidth: '1px',
-      borderStyle: 'solid',
-      borderColor: 'colour.neutral.70',
+      border: 'input',
       backgroundColor: 'colour.neutral.10',
       display: 'inline-flex',
       alignItems: 'center',
@@ -70,9 +68,7 @@ export const radio = sva({
         fill: '[currentColor]',
         display: 'none',
       },
-      _groupFocusWithin: {
-        layerStyle: 'elevation.focus',
-      },
+      focusable: 'group',
     },
     checkboxMark: {
       checkmark: false,
@@ -99,12 +95,23 @@ export const radio = sva({
     },
     touch: {
       true: {
+        input: {
+          _checked: {
+            '& + label:hover': {
+              backgroundColor: 'transparent',
+            },
+          },
+        },
         label: {
           borderWidth: '1px',
           borderStyle: 'solid',
           borderColor: 'colour.neutral.40',
-          borderRadius: 'radius.050',
+          borderRadius: 'radius.system.form',
           padding: 'spacing.4',
+
+          _hover: {
+            backgroundColor: 'colour.primary.surfaceHover',
+          },
         },
       },
     },
@@ -114,9 +121,9 @@ export const radio = sva({
           borderColor: '[currentColor]',
         },
         radioMark: {
-          borderColor: '[currentColor]',
+          '--iress-border-color': '[currentColor]',
+
           '& circle': {
-            fill: '[currentColor]',
             display: 'block',
           },
         },
@@ -135,6 +142,7 @@ export const radio = sva({
       hiddenControl: true,
       css: {
         input: {
+          focusable: 'label-after',
           _checked: {
             '& + label': {
               border: '[none]',
@@ -161,7 +169,6 @@ export const radio = sva({
                 display: 'block',
                 borderRadius: '[inherit]',
                 pointerEvents: 'none',
-                layerStyle: 'elevation.focus',
               },
             },
           },

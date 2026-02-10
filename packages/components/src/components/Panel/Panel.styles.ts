@@ -13,7 +13,7 @@ export const panel = cva({
   variants: {
     noBorderRadius: {
       true: {
-        borderRadius: 'radius.000',
+        borderRadius: 'radius.0',
       },
     },
   },

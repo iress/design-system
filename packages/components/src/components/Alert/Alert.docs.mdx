@@ -43,12 +43,18 @@ The `icon` prop allows you to customise the icon displayed in the alert. It acce
 
 <ComponentExample of={AlertStories.Icon} />
 
+### Multi-line
+
+By default, the alert is designed to display short messages. If you need to display a longer message that spans multiple lines, you can set the `multiLine` prop to `true`. This will adjust the spacing and layout of the alert to accommodate longer content.
+
+<ComponentExample of={AlertStories.MultiLine} />
+
 ### Variants
 
 The alert can be displayed in different variants to suit different use cases. The `variant` prop allows you to set the variant of the alert. The available variants are:
 
 - `sidebar`: The alert is displayed in the sidebar of the page, typically used for informational messages on longer forms.
-- `site-wide`: The alert is displayed in the site-wide banner, typically used for important messages that need to be seen by all users.
+- `full-width`: The alert is displayed in the site-wide banner, typically used for important messages that need to be seen by all users.
 
 <ComponentExample of={AlertStories.Variant} />
 

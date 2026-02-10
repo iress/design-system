@@ -33,12 +33,12 @@ export const scrollable = defineUtility({
 
       '&::-webkit-scrollbar-track': {
         background: trackColour,
-        borderRadius: radii['radius.100'].value,
+        borderRadius: radii['radius.system.layout'].value,
       },
 
       '&::-webkit-scrollbar-thumb': {
         backgroundColor: colors['colour.neutral.60'].value,
-        borderRadius: radii['radius.025'].value,
+        borderRadius: radii['radius.system.form'].value,
       },
 
       '&::-webkit-scrollbar-thumb:hover': {

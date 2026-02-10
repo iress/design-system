@@ -21,6 +21,7 @@ import {
   reactNodeArgType,
   stylingProps,
 } from '@theme-preset/storybookHelpers';
+import { cssVars } from '@iress-oss/ids-tokens';
 
 type Story = StoryObj<typeof IressSelectSearch>;
 
@@ -76,9 +77,9 @@ export const Search: Story = {
         <IressSelectMenu fluid items={MOCK_LARGE_LABEL_VALUES_DATASET} />
       </IressSelectBody>
     ),
-    layerStyle: 'elevation.raised',
     style: {
       maxHeight: 400,
+      border: `1px solid ${cssVars.colour.neutral[30]}`,
     },
   },
 };

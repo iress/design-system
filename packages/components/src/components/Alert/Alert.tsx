@@ -12,16 +12,22 @@ import {
   IressCloseButton,
   type IressCloseButtonProps,
 } from '../Button';
-import { IressInline } from '../Inline';
 import { useControlledState } from '@/hooks';
 import { splitCssProps } from '@/styled-system/jsx';
+
+export interface IressAlertButtonProps extends Omit<
+  IressButtonProps,
+  'mode' | 'status'
+> {
+  mode?: 'secondary' | 'tertiary';
+}
 
 export interface IressAlertProps extends Omit<IressTextProps, 'element'> {
   /**
    * Actions to display in the alert. These will be rendered as buttons with opinionated styling.
    * If you want to use custom buttons, use the `footer` prop instead.
    **/
-  actions?: Omit<IressButtonProps, 'mode' | 'status'>[];
+  actions?: IressAlertButtonProps[];
 
   /**
    * Contents of the alert. Is automatically wrapped in `<IressText />` and will inherit its styling.
@@ -29,12 +35,12 @@ export interface IressAlertProps extends Omit<IressTextProps, 'element'> {
   children?: ReactNode;
 
   /**
-   * Contents of the alert. Is automatically wrapped in `<IressText />` and will inherit its styling.
+   * If true, the alert will be dismissed and unrendered from the DOM. Use for uncontrolled dismissal of the alert, where the component manages its own dismissed state internally.
    **/
   defaultDismissed?: boolean;
 
   /**
-   * Contents of the alert. Is automatically wrapped in `<IressText />` and will inherit its styling.
+   * If true, the alert will be dismissed and unrendered from the DOM. Use for controlled dismissal of the alert, where the parent component manages the dismissed state and passes it down via this prop.
    **/
   dismissed?: boolean;
 
@@ -57,6 +63,11 @@ export interface IressAlertProps extends Omit<IressTextProps, 'element'> {
   icon?: IressIconProps['name'] | false;
 
   /**
+   * If true, the alert will have a layout that supports longer content, with increased spacing and the icon aligned to the top of the alert instead of centered. Should be used when the content of the alert is more than a couple of sentences.
+   */
+  multiLine?: boolean;
+
+  /**
    * Icon to display in the alert.
    * If set to `false`, no icon will be displayed.
    * If not provided, the icon will be determined by the `status` prop.
@@ -72,16 +83,16 @@ export interface IressAlertProps extends Omit<IressTextProps, 'element'> {
   /**
    * Variants of the alert, allowing it to be styled differently based on where its used in the application.
    * - Sidebar: The icon will be aligned to the heading, and the text will appear below the icon.
-   * - Site-wide: The border will be removed, except for the bottom border.
+   * - Full-width: The border will be removed, except for the bottom border.
    */
-  variant?: 'sidebar' | 'site-wide';
+  variant?: 'sidebar' | 'full-width';
 }
 
 const ALERT_ICONS: Record<Statuses, IressIconProps['name']> = {
-  danger: 'ban',
-  info: 'info-square',
-  success: 'check',
-  warning: 'exclamation-triangle',
+  danger: 'cancel',
+  info: 'info',
+  success: 'check_circle',
+  warning: 'error',
 };
 
 export const IressAlert = ({
@@ -93,16 +104,17 @@ export const IressAlert = ({
   footer,
   heading,
   icon: iconProp,
+  multiLine = false,
   onDismiss,
   status = 'info',
   variant,
   ...restProps
 }: IressAlertProps) => {
   const dismissable = !!onDismiss;
-  const classes = alert({ status, variant });
-  const styles = alert.raw({ status, variant });
   const hasActions = !!actions?.length;
   const hasFooter = !!footer || hasActions;
+  const classes = alert({ hasFooter, multiLine, status, variant });
+  const styles = alert.raw({ hasFooter, multiLine, status, variant });
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
 
   const { value: dismissed, setValue: dismiss } = useControlledState({
@@ -164,15 +176,16 @@ export const IressAlert = ({
             data-testid={propagateTestid(restProps['data-testid'], 'footer')}
           >
             {hasActions && (
-              <IressInline gap="sm" pb="spacing.1">
+              <div className={classes.footerActions}>
                 {actions?.map((action, index) => (
                   <IressButton
                     {...action}
                     className={cx(action.className, classes.action)}
+                    status={status as IressButtonProps['status']} // Only for feedback components, we allow warning and info statuses to be used for actions, which is not normally allowed for buttons. This is because the alert provides the necessary context to use these statuses appropriately, whereas using them on a standalone button could be confusing. We cast it as never to bypass the type check, but we ensure through documentation and design that this is used correctly.
                     key={index}
                   />
                 ))}
-              </IressInline>
+              </div>
             )}
 
             {footer}

@@ -394,13 +394,6 @@ Not included
       expect(result.content[0].text).toContain('typography');
     });
 
-    it('should return elevation tokens when type is "elevation"', () => {
-      const result = handleGetDesignTokens({ type: 'elevation' });
-
-      expect(result.content).toHaveLength(1);
-      expect(result.content[0].text).toContain('elevation');
-    });
-
     it('should return radius tokens when type is "radius"', () => {
       const result = handleGetDesignTokens({ type: 'radius' });
 
@@ -434,13 +427,6 @@ Not included
 
       expect(result.content).toHaveLength(1);
       expect(result.content[0].text).toContain('spacing');
-    });
-
-    it('should handle elevation alias "layer"', () => {
-      const result = handleGetDesignTokens({ type: 'layer' });
-
-      expect(result.content).toHaveLength(1);
-      expect(result.content[0].text).toContain('elevation');
     });
 
     it('should handle typography alias "text"', () => {
@@ -571,14 +557,6 @@ Not included
       // Groups should be sorted - verify by checking structure
       const text = result.content[0].text;
       expect(text).toContain('Tokens (');
-    });
-
-    it('should handle tokens without group path', () => {
-      const result = handleGetDesignTokens({ type: 'elevation' });
-
-      // Should still work even if tokens don't have deep nesting
-      expect(result.content[0].text).toContain('elevation');
-      expect(result.content[0].text).toContain('Tokens (');
     });
 
     it('should include group descriptions when available', () => {

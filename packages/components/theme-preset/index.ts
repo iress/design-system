@@ -79,8 +79,6 @@ export default definePreset({
       mozProgressValue: ['&::-moz-progress-bar', '&::-moz-meter-bar'].join(
         ', ',
       ),
-      focusVisibleWebkitSliderThumb: '&:focus-visible::-webkit-slider-thumb',
-      focusVisibleMozRangeThumb: '&:focus-visible::-moz-range-thumb',
       webkitSliderThumb: '&::-webkit-slider-thumb',
       mozRangeThumb: '&::-moz-range-thumb',
       webkitSliderRunnableTrack: '&::-webkit-slider-runnable-track',

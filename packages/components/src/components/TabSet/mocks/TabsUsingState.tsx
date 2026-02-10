@@ -12,7 +12,10 @@ export const TabsUsingState = (args: IressTabSetProps) => {
 
   return (
     <IressStack gap="md">
-      <IressButton onClick={() => setSelected(selected === 2 ? 0 : 2)}>
+      <IressButton
+        onClick={() => setSelected(selected === 2 ? 0 : 2)}
+        alignSelf="start"
+      >
         {selected === 2 ? `Back to first tab` : `Change to last tab`}
       </IressButton>
       <IressTabSet

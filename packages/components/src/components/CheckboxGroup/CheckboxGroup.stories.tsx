@@ -71,20 +71,32 @@ export const Controlled: Story = {
 export const Layout: Story = {
   args: {
     children: [
-      <IressCheckbox value="google" key="google" layerStyle="elevation.raised">
+      <IressCheckbox
+        value="google"
+        key="google"
+        style={{ border: '1px dashed hsl(43deg 100% 45%)' }}
+      >
         Google
       </IressCheckbox>,
       <IressCheckbox
         value="newspaper"
         key="newspaper"
-        layerStyle="elevation.raised"
+        style={{ border: '1px dashed hsl(43deg 100% 45%)' }}
       >
         Newspaper
       </IressCheckbox>,
-      <IressCheckbox value="friend" key="friend" layerStyle="elevation.raised">
+      <IressCheckbox
+        value="friend"
+        key="friend"
+        style={{ border: '1px dashed hsl(43deg 100% 45%)' }}
+      >
         Friend
       </IressCheckbox>,
-      <IressCheckbox value="other" key="other" layerStyle="elevation.raised">
+      <IressCheckbox
+        value="other"
+        key="other"
+        style={{ border: '1px dashed hsl(43deg 100% 45%)' }}
+      >
         Other
       </IressCheckbox>,
     ],

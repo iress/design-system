@@ -6,25 +6,25 @@ const form = radius.system.form;
 const layout = radius.system.layout;
 
 export const radii = {
-  'radius.000': {
-    description: radius['000'].$description,
-    value: cssVars.radius['000'],
+  'radius.0': {
+    description: radius[0].$description,
+    value: cssVars.radius['0'],
   },
-  'radius.025': {
-    description: radius['025'].$description,
-    value: cssVars.radius['025'],
+  'radius.1': {
+    description: radius[1].$description,
+    value: cssVars.radius['1'],
   },
-  'radius.050': {
-    description: radius['050'].$description,
-    value: cssVars.radius['050'],
+  'radius.2': {
+    description: radius[2].$description,
+    value: cssVars.radius['2'],
   },
-  'radius.075': {
-    description: radius['075'].$description,
-    value: cssVars.radius['075'],
+  'radius.3': {
+    description: radius[3].$description,
+    value: cssVars.radius['3'],
   },
-  'radius.100': {
-    description: radius['100'].$description,
-    value: cssVars.radius['100'],
+  'radius.4': {
+    description: radius[4].$description,
+    value: cssVars.radius['4'],
   },
   'radius.system.badge': {
     description: badge.$description,
@@ -44,7 +44,7 @@ export const radii = {
   },
   none: {
     description: 'No border radius',
-    value: cssVars.radius['000'],
+    value: cssVars.radius['0'],
   },
   '50%': {
     description: 'Circle radius',

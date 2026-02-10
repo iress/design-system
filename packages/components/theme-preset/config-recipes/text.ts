@@ -10,7 +10,7 @@ const inlineStyles = {
     color: 'colour.neutral.80',
     borderWidth: '0.5px',
     borderColor: 'colour.neutral.30',
-    borderRadius: 'radius.025',
+    borderRadius: 'radius.system.form',
     alignSelf: 'flex-start',
   },
   '& small': {

@@ -1,38 +1,53 @@
 import { sva } from '@/styled-system/css';
 
 export const input = sva({
-  slots: ['root', 'wrapper', 'inline', 'addon', 'internal', 'formControl'],
+  slots: [
+    'root',
+    'wrapper',
+    'inline',
+    'addon',
+    'internal',
+    'formControl',
+    'action',
+  ],
   base: {
+    root: {
+      contain: 'style',
+      display: 'flex',
+      alignItems: 'stretch',
+      flexGrow: '1',
+      margin: 'spacing.0',
+      gap: 'spacing.2',
+    },
     wrapper: {
       // Performance: CSS containment limits style recalculation scope
       contain: 'style',
       display: 'flex',
       alignItems: 'stretch',
+      flexGrow: '1',
       borderRadius: 'radius.system.form',
       backgroundColor: 'colour.neutral.10',
       minHeight: '[calc({sizes.input.height} - 2px)]',
-      margin: '[0]',
-      flexGrow: '1',
       border: 'input',
-      '&:has(input:focus, textarea:focus)': {
-        layerStyle: 'elevation.focus',
-      },
+      focusable: 'has-input',
     },
     addon: {
-      borderRadius: 'radius.100',
-      backgroundColor: 'colour.neutral.10',
+      borderRadius: 'radius.system.form',
       minHeight: '[calc({sizes.input.height} - 2px)]',
-      color: 'colour.neutral.80',
+      color: 'colour.neutral.60',
       lineHeight: '1',
       fontWeight: '300',
       display: 'inline-flex',
       alignItems: 'center',
       py: 'none',
-      '&:not(:empty)': {
-        px: 'spacing.3',
-      },
       _empty: {
         display: 'none',
+      },
+      _first: {
+        pl: 'spacing.3',
+      },
+      _last: {
+        px: 'spacing.3',
       },
       '&:not(:empty):has(button)': {
         px: 'none',
@@ -51,22 +66,25 @@ export const input = sva({
     formControl: {
       borderWidth: 0,
       borderRadius: 'radius.system.form',
-      paddingInline: 'spacing.2',
+      paddingInline: 'spacing.3',
       paddingBlock: 'spacing.1',
-      backgroundColor: 'colour.neutral.10',
       textStyle: 'typography.body.md',
-      color: 'colour.neutral.80',
+      color: 'colour.neutral.90',
       display: 'block',
       boxSizing: 'border-box',
       flex: 'auto',
       maxWidth: '[100%]',
       minHeight: '[calc({sizes.input.height} - 2px)]',
       lineHeight: 1,
-      _focus: {
-        outline: '[none]',
-      },
+      bg: 'transparent',
+
       _placeholder: {
         color: 'colour.neutral.60',
+      },
+
+      _disabled: {
+        color: 'colour.neutral.70',
+        cursor: 'not-allowed',
       },
 
       '&::file-selector-button': {
@@ -81,6 +99,22 @@ export const input = sva({
         _hover: {
           backgroundColor: 'colour.primary.surfaceHover',
         },
+      },
+    },
+    action: {
+      border: 'input',
+      color: 'colour.neutral.70',
+      bg: 'colour.neutral.10',
+
+      _hover: {
+        bg: 'colour.neutral.20',
+        boxShadow: '{colors.colour.neutral.70} 0px 0px 0px 1px',
+      },
+
+      _active: {
+        bg: 'colour.neutral.10',
+        borderColor: 'colour.neutral.90',
+        boxShadow: '{colors.colour.neutral.90} 0px 0px 0px 1px',
       },
     },
   },
@@ -122,6 +156,10 @@ export const input = sva({
       true: {
         wrapper: {
           border: '[none]',
+
+          _hover: {
+            boxShadow: 'none',
+          },
         },
       },
     },
@@ -212,6 +250,13 @@ export const input = sva({
         },
         formControl: {
           width: '[100%]',
+        },
+      },
+    },
+    variant: {
+      search: {
+        wrapper: {
+          borderRadius: 'radius.4',
         },
       },
     },

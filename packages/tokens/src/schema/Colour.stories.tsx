@@ -3,9 +3,9 @@ import { Markdown } from '@storybook/addon-docs/blocks';
 import {
   type ColorToken,
   IressBadge,
+  IressCard,
   IressCol,
   IressInline,
-  IressPanel,
   type IressPanelProps,
   IressRow,
   IressStack,
@@ -75,7 +75,7 @@ const AllowedForeground = ({
   useEffect(computeContrast, [computeContrast]);
 
   return (
-    <IressInline horizontalAlign="between">
+    <IressInline horizontalAlign="between" verticalAlign="middle">
       <IressText style={{ color: get(cssVars, foreground as string) }}>
         <span
           ref={(element) => {
@@ -126,15 +126,14 @@ const ColourSwatch = ({
         setContainer(element.firstElementChild);
       }}
     >
-      <IressPanel
+      <IressCard
         {...panelProps}
         bg={bg}
         color={color}
         style={{
           ...colourStyle,
-          background: get(cssVars, bg),
+          background: get<string>(cssVars, bg),
         }}
-        layerStyle="elevation.raised"
       >
         <IressRow gutter="spacing.7">
           <IressCol span={6}>
@@ -182,7 +181,7 @@ const ColourSwatch = ({
             </IressCol>
           )}
         </IressRow>
-      </IressPanel>
+      </IressCard>
     </div>
   );
 };
@@ -199,44 +198,6 @@ export default {
     },
   },
 } as Meta<typeof IressStack>;
-
-export const Primary: Story = {
-  args: {
-    children: [
-      <Markdown>{colour.primary.$description}</Markdown>,
-      <ColourSwatch
-        title="Fill"
-        bg="colour.primary.fill"
-        token={colour.primary.fill}
-      />,
-      <ColourSwatch
-        title="On Fill"
-        bg="colour.primary.onFill"
-        token={colour.primary.onFill}
-      />,
-      <ColourSwatch
-        title="Fill Hover"
-        bg="colour.primary.fillHover"
-        token={colour.primary.fillHover}
-      />,
-      <ColourSwatch
-        title="Surface"
-        bg="colour.primary.surface"
-        token={colour.primary.surface}
-      />,
-      <ColourSwatch
-        title="Text"
-        bg="colour.primary.text"
-        token={colour.primary.text}
-      />,
-      <ColourSwatch
-        title="Surface Hover"
-        bg="colour.primary.surfaceHover"
-        token={colour.primary.surfaceHover}
-      />,
-    ],
-  },
-};
 
 export const Neutral: Story = {
   args: {
@@ -299,14 +260,78 @@ export const Neutral: Story = {
   },
 };
 
+export const Primary: Story = {
+  args: {
+    children: [
+      <Markdown>{colour.primary.$description}</Markdown>,
+      <ColourSwatch
+        title="Fill"
+        bg="colour.primary.fill"
+        token={colour.primary.fill}
+      />,
+      <ColourSwatch
+        title="On Fill"
+        bg="colour.primary.onFill"
+        token={colour.primary.onFill}
+      />,
+      <ColourSwatch
+        title="Fill Hover"
+        bg="colour.primary.fillHover"
+        token={colour.primary.fillHover}
+      />,
+      <ColourSwatch
+        title="Surface"
+        bg="colour.primary.surface"
+        token={colour.primary.surface}
+      />,
+      <ColourSwatch
+        title="Text"
+        bg="colour.primary.text"
+        token={colour.primary.text}
+      />,
+      <ColourSwatch
+        title="Surface Hover"
+        bg="colour.primary.surfaceHover"
+        token={colour.primary.surfaceHover}
+      />,
+    ],
+  },
+};
+
 export const Accent: Story = {
   args: {
     children: [
       <Markdown>{colour.accent.$description}</Markdown>,
-      <IressStack gap="md">
-        <ColourSwatch title="1" bg="colour.accent.1" token={colour.accent[1]} />
-        <ColourSwatch title="2" bg="colour.accent.2" token={colour.accent[2]} />
-      </IressStack>,
+      <ColourSwatch
+        title="Fill"
+        bg="colour.accent.fill"
+        token={colour.accent.fill}
+      />,
+      <ColourSwatch
+        title="On Fill"
+        bg="colour.accent.onFill"
+        token={colour.accent.onFill}
+      />,
+      <ColourSwatch
+        title="Fill Hover"
+        bg="colour.accent.fillHover"
+        token={colour.accent.fillHover}
+      />,
+      <ColourSwatch
+        title="Surface"
+        bg="colour.accent.surface"
+        token={colour.accent.surface}
+      />,
+      <ColourSwatch
+        title="Text"
+        bg="colour.accent.text"
+        token={colour.accent.text}
+      />,
+      <ColourSwatch
+        title="Surface Hover"
+        bg="colour.accent.surfaceHover"
+        token={colour.accent.surfaceHover}
+      />,
     ],
   },
 };
@@ -487,21 +512,6 @@ export const Info: Story = {
   },
 };
 
-export const Backdrop: Story = {
-  args: {
-    children: [
-      <Markdown>{colour.system.backdrop.$description}</Markdown>,
-      <IressStack gap="md">
-        <ColourSwatch
-          title="Fill"
-          bg="colour.system.backdrop.fill"
-          token={colour.system.backdrop.fill}
-        />
-      </IressStack>,
-    ],
-  },
-};
-
 export const DataSubtle: Story = {
   args: {
     children: [
@@ -606,6 +616,26 @@ export const DataBold: Story = {
           title="90"
           bg="colour.data.bold.90"
           token={colour.data.bold[90]}
+        />
+      </IressStack>,
+    ],
+  },
+};
+
+export const GlobalInteractions: Story = {
+  args: {
+    children: [
+      <Markdown>{colour.globalInteractions.$description}</Markdown>,
+      <IressStack gap="md">
+        <ColourSwatch
+          title="Backdrop"
+          bg="colour.globalInteractions.backdrop"
+          token={colour.globalInteractions.backdrop}
+        />
+        <ColourSwatch
+          title="Focus ring"
+          bg="colour.globalInteractions.focusRing"
+          token={colour.globalInteractions.focusRing}
         />
       </IressStack>,
     ],

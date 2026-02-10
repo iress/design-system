@@ -15,7 +15,7 @@ export const popover = sva({
       bg: 'colour.neutral.10',
       border: 'divider',
       borderRadius: 'radius.system.form',
-      layerStyle: 'elevation.floating',
+      layerStyle: 'floating',
       maxWidth: 'input.16',
     },
   },

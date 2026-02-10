@@ -2,27 +2,12 @@ import { defineUtility } from '@pandacss/dev';
 import { borders } from '../tokens/borders';
 import { sizes } from '../tokens/sizes';
 import { spacing } from '../tokens/spacing';
+import { cssVars } from '@iress-oss/ids-tokens';
 
 export const selectChevron = defineUtility({
   className: 'selectChevron',
   values: { type: 'boolean' },
   transform: (value) => {
-    if (value !== true) {
-      return {
-        content: `''` as never,
-        width: sizes['chevron.select'].value,
-        height: sizes['chevron.select'].value,
-        top: '50%',
-        insetInlineEnd: `calc(${spacing['spacing.2'].value} + calc(0.25 * ${spacing['spacing.2'].value}))`,
-        position: 'absolute',
-        border: `${borders.input.value.width} ${borders.input.value.style} ${borders.input.value.color}`,
-        borderBlockStart: 'none',
-        borderInlineStart: 'none',
-        transform: 'translateY(-50%) rotate(-135deg)',
-        pointerEvents: 'none',
-      };
-    }
-
     return {
       '&:after': {
         content: `''` as never,
@@ -31,11 +16,19 @@ export const selectChevron = defineUtility({
         top: '50%',
         insetInlineEnd: `calc(${spacing['spacing.2'].value} + calc(0.25 * ${spacing['spacing.2'].value}))`,
         position: 'absolute',
-        border: `${borders.input.value.width} ${borders.input.value.style} ${borders.input.value.color}`,
-        borderBlockStart: 'none',
-        borderInlineStart: 'none',
-        transform: 'translateY(-50%) rotate(45deg)',
+        mask: `no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`,
+        transform:
+          value === true
+            ? 'translateY(-50%)'
+            : 'translateY(-50%) rotate(180deg)',
+        backgroundColor: cssVars.colour.neutral[90],
         pointerEvents: 'none',
+      },
+      '&[aria-expanded="true"]:after, [aria-expanded="true"] > &:after': {
+        transform:
+          value === true
+            ? 'translateY(-50%) rotate(180deg)'
+            : 'translateY(-50%)',
       },
     };
   },

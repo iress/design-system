@@ -23,7 +23,25 @@ Note: We only allow `1` as a value to maintain design consistency.
 
 <ComponentExample of={ComponentStories.flex1} />
 
-## Stretch
+## `hideFrom` and `hideBelow`
+
+The `hideFrom` and `hideBelow` props allow you to hide content from both visual users and screen readers at different breakpoints. This is useful when certain content is not relevant on smaller screens, and you want to ensure that screen reader users have the same experience as visual users.
+
+<ComponentExample of={ComponentStories.hideFrom} sourceState="shown" />
+<ComponentExample of={ComponentStories.hideBelow} sourceState="shown" />
+
+## `scrollable`
+
+The scrollable prop enables scrolling behavior for an element when its content
+overflows its bounds. It sets the `overflow` CSS property to `auto`, allowing
+scrollbars to appear as needed. The scrollbar has been styled to match the
+design system.
+
+You can set the value to `true` to enable scrolling on both axes, or specify `'x'` or `'y'` to restrict scrolling to a single axis.
+
+<ComponentExample of={ComponentStories.scrollable} />
+
+## `stretch`
 
 The `stretch` prop is used to stretch a component to fill the available space. It is used in components such as `IressPanel` to ensure each column in a layout takes up the same amount of space.
 

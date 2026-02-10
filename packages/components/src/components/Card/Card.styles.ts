@@ -10,15 +10,13 @@ export const card = sva({
       borderRadius: 'radius.system.layout',
       bg: 'colour.neutral.10',
       color: 'colour.neutral.80',
-      layerStyle: 'elevation.raised',
+      border: 'table',
       textStyle: 'typography.body.md.regular',
       textAlign: 'start',
       noGutter: true,
       padding: 'spacing.4',
       transition: 'all',
-      _focus: {
-        layerStyle: 'elevation.focus',
-      },
+      focusable: 'true',
     },
     prepend: {
       gridArea: 'prepend',
@@ -56,7 +54,8 @@ export const card = sva({
         maxWidth: '[100%]',
       },
       '&:not(:last-child)': {
-        borderBottomRadius: 'radius.000',
+        borderBottomRadius: 'radius.0',
+        borderBottomLeftRadius: 'radius.0',
       },
     },
     body: {
@@ -74,12 +73,9 @@ export const card = sva({
       true: {
         root: {
           cursor: 'pointer',
+          focusable: 'true',
           _hover: {
             borderColor: 'colour.primary.fill',
-          },
-          _focus: {
-            layerStyle: 'elevation.focus',
-            outline: '[none]',
           },
         },
       },
@@ -141,6 +137,13 @@ export const card = sva({
       true: {
         root: {
           padding: 'spacing.0',
+        },
+      },
+    },
+    noBorder: {
+      true: {
+        root: {
+          border: '[none]',
         },
       },
     },

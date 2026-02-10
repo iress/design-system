@@ -2,30 +2,6 @@ import { colour, cssVars } from '@iress-oss/ids-tokens';
 import { type ColorToken } from '@/styled-system/tokens';
 
 export const colors = {
-  'colour.primary.fill': {
-    description: colour.primary.fill.$description,
-    value: cssVars.colour.primary.fill,
-  },
-  'colour.primary.fillHover': {
-    description: colour.primary.fillHover.$description,
-    value: cssVars.colour.primary.fillHover,
-  },
-  'colour.primary.onFill': {
-    description: colour.primary.onFill.$description,
-    value: cssVars.colour.primary.onFill,
-  },
-  'colour.primary.surface': {
-    description: colour.primary.surface.$description,
-    value: cssVars.colour.primary.surface,
-  },
-  'colour.primary.surfaceHover': {
-    description: colour.primary.surfaceHover.$description,
-    value: cssVars.colour.primary.surfaceHover,
-  },
-  'colour.primary.text': {
-    description: colour.primary.text.$description,
-    value: cssVars.colour.primary.text,
-  },
   'colour.neutral.10': {
     description: colour.neutral['10'].$description,
     value: cssVars.colour.neutral['10'],
@@ -62,13 +38,53 @@ export const colors = {
     description: colour.neutral['90'].$description,
     value: cssVars.colour.neutral['90'],
   },
-  'colour.accent.1': {
-    description: colour.accent[1].$description,
-    value: cssVars.colour.accent['1'],
+  'colour.primary.fill': {
+    description: colour.primary.fill.$description,
+    value: cssVars.colour.primary.fill,
   },
-  'colour.accent.2': {
-    description: colour.accent[2].$description,
-    value: cssVars.colour.accent['2'],
+  'colour.primary.fillHover': {
+    description: colour.primary.fillHover.$description,
+    value: cssVars.colour.primary.fillHover,
+  },
+  'colour.primary.onFill': {
+    description: colour.primary.onFill.$description,
+    value: cssVars.colour.primary.onFill,
+  },
+  'colour.primary.surface': {
+    description: colour.primary.surface.$description,
+    value: cssVars.colour.primary.surface,
+  },
+  'colour.primary.surfaceHover': {
+    description: colour.primary.surfaceHover.$description,
+    value: cssVars.colour.primary.surfaceHover,
+  },
+  'colour.primary.text': {
+    description: colour.primary.text.$description,
+    value: cssVars.colour.primary.text,
+  },
+  'colour.accent.fill': {
+    description: colour.accent.fill.$description,
+    value: cssVars.colour.accent.fill,
+  },
+  'colour.accent.fillHover': {
+    description: colour.accent.fillHover.$description,
+    value: cssVars.colour.accent.fillHover,
+  },
+  'colour.accent.onFill': {
+    description: colour.accent.onFill.$description,
+    value: cssVars.colour.accent.onFill,
+  },
+  'colour.accent.surface': {
+    description: colour.accent.surface.$description,
+    value: cssVars.colour.accent.surface,
+  },
+  'colour.accent.surfaceHover': {
+    description: colour.accent.surfaceHover.$description,
+    value: cssVars.colour.accent.surfaceHover,
+  },
+  'colour.accent.text': {
+    description: colour.accent.text.$description,
+    value: cssVars.colour.accent.text,
   },
   'colour.system.success.fill': {
     description: colour.system.success.fill.$description,
@@ -166,10 +182,6 @@ export const colors = {
     description: colour.system.info.surfaceHover.$description,
     value: cssVars.colour.system.info.surfaceHover,
   },
-  'colour.system.backdrop.fill': {
-    description: colour.system.backdrop.fill.$description,
-    value: cssVars.colour.system.backdrop.fill,
-  },
   'colour.data.subtle.10': {
     description: colour.data.subtle['10'].$description,
     value: cssVars.colour.data.subtle['10'],
@@ -241,6 +253,14 @@ export const colors = {
   'colour.data.bold.90': {
     description: colour.data.bold['90'].$description,
     value: cssVars.colour.data.bold['90'],
+  },
+  'colour.globalInteractions.backdrop': {
+    description: colour.globalInteractions.backdrop.$description,
+    value: cssVars.colour.globalInteractions.backdrop,
+  },
+  'colour.globalInteractions.focusRing': {
+    description: colour.globalInteractions.focusRing.$description,
+    value: cssVars.colour.globalInteractions.focusRing,
   },
   transparent: {
     description: 'Transparent colour, used to create a transparent background.',

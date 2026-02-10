@@ -12,7 +12,7 @@ export const TabsLazyLoading = (args: IressTabSetProps) => {
 
   return (
     <IressStack gap="md">
-      <IressButton onClick={() => setLoadTabs(!loadTabs)}>
+      <IressButton onClick={() => setLoadTabs(!loadTabs)} alignSelf="start">
         Toggle tabs
       </IressButton>
       <IressTabSet {...args}>

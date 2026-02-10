@@ -22,15 +22,11 @@ export const menu = sva({
       textStyle: 'typography.body.md',
       transition: '[0.2s all ease-in-out]',
 
+      focusable: 'true',
+
       _focus: {
-        outline: '[none]',
         bg: 'colour.primary.surface',
         color: 'colour.primary.text',
-      },
-
-      _focusVisible: {
-        layerStyle: 'elevation.focus',
-        zIndex: '[1]',
       },
 
       _hover: {
@@ -190,7 +186,7 @@ export const menu = sva({
             top: 'spacing.0',
             left: 'spacing.0',
             bottom: 'spacing.0',
-            width: '[{radii.radius.025}]',
+            width: '[{radii.radius.system.badge}]',
             bg: 'colour.primary.fill',
             borderRadius: 'radius.system.badge',
           },
@@ -209,7 +205,7 @@ export const menu = sva({
             left: 'spacing.0',
             right: 'spacing.0',
             bottom: 'spacing.0',
-            height: '[{radii.radius.025}]',
+            height: '[{radii.radius.system.badge}]',
             bg: 'colour.primary.fill',
             borderRadius: 'radius.system.badge',
           },

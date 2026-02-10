@@ -77,6 +77,11 @@ export const spacing = {
 
   'button.inline': {
     description: 'Spacing on the left and right of inline button content',
+    value: `calc((${cssVars.radius.system._button.topLeft} * 0.25) + ${cssVars.spacing['3']})`,
+  },
+
+  'button.iconInline': {
+    description: 'Spacing on the left and right of inline button content',
     value: `calc((${cssVars.radius.system._button.topLeft} * 0.25) + ${cssVars.spacing['2']})`,
   },
 

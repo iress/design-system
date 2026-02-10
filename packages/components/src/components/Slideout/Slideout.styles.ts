@@ -13,7 +13,7 @@ export const slideout = sva({
       maxWidth: '[100%]',
       overflowY: 'auto',
       transition: '[all 0.3s ease-out]',
-      layerStyle: 'elevation.floating',
+      layerStyle: 'floating',
       backgroundColor: 'colour.neutral.10',
       zIndex: '300',
       display: 'flex',
@@ -44,10 +44,9 @@ export const slideout = sva({
       right: {
         root: {
           insetInlineEnd: 'spacing.0',
-          borderStartStartRadius: 'radius.050',
-          borderEndStartRadius: 'radius.050',
-          borderStartEndRadius: 'radius.000',
-          borderEndEndRadius: 'radius.000',
+          borderRadius: 'radius.system.layout',
+          borderStartEndRadius: 'radius.0',
+          borderEndEndRadius: 'radius.0',
 
           _motionReduce: {
             transition: '[none]',
@@ -57,10 +56,9 @@ export const slideout = sva({
       left: {
         root: {
           insetInlineStart: 'spacing.0',
-          borderStartStartRadius: 'radius.000',
-          borderEndStartRadius: 'radius.000',
-          borderStartEndRadius: 'radius.050',
-          borderEndEndRadius: 'radius.050',
+          borderRadius: 'radius.system.layout',
+          borderStartStartRadius: 'radius.0',
+          borderEndStartRadius: 'radius.0',
 
           _motionReduce: {
             transition: '[none]',
@@ -101,7 +99,7 @@ export const slideout = sva({
       push: {
         root: {
           xl: {
-            borderRadius: 'radius.000',
+            borderRadius: 'radius.0',
           },
         },
       },

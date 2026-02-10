@@ -85,11 +85,11 @@ Content (typically icons) can be added to slots (`append` and `prepend`) within 
 
 <ComponentExample of={ComponentStories.Slots} />
 
-### Button slots
+### Actions
 
-You can also include interactive elements like buttons in the append slot. This is useful for search inputs or other scenarios where you want to trigger an action related to the input content.
+The `actions` prop allows you to add buttons to the input. These buttons will appear next to the input and can be used for actions such as copying the input value to the clipboard or triggering a search.
 
-<ComponentExample of={ComponentStories.ButtonSlots} />
+<ComponentExample of={ComponentStories.Actions} />
 
 ### Read only
 
@@ -126,6 +126,14 @@ For textareas (when `rows` prop is set), you can enable the `autoGrow` prop to a
 
 <ComponentExample of={ComponentStories.AutoGrow} />
 
-### `onChange` and `onInput`
+### `variant`
+
+The `variant` prop allows you to apply different styles to the input.
+
+- `search`: Used for search inputs, you can use the `prepend` or `append` slot to add a search icon.
+
+<ComponentExample of={ComponentStories.Variant} />
+
+## `onChange` and `onInput`
 
 As of version 5, the `onChange` and `onInput` events are now consistent with how React handles the events. This means that the `onChange` event will fire at the same time as `onInput`.

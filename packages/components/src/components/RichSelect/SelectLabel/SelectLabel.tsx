@@ -54,7 +54,9 @@ export const IressSelectLabel = ({
       >
         {label}
       </IressText>
-      <span className={classes.append}>{append}</span>
+      <span className={cx(classes.append, GlobalCSSClass.InputAddon)}>
+        {append}
+      </span>
     </button>
   );
 };

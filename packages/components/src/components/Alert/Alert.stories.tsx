@@ -85,18 +85,71 @@ export const Footer: Story = {
     heading: 'Alert heading',
     status: 'danger',
     children: 'Are you sure you want to proceed with this action?',
+    onDismiss: () => console.log('Alert dismissed'),
     actions: [
       {
         children: 'Action',
+        mode: 'tertiary',
+        onClick: () => 'Take me somewhere please',
+      },
+      {
+        children: 'Action',
+        mode: 'secondary',
         onClick: () => 'Take me somewhere please',
       },
     ],
   },
+  argTypes: {
+    ...disableArgTypes(['status']),
+  },
+  render: (args) => (
+    <IressStack gap="md">
+      <IressAlert {...args} status="danger" />
+      <IressAlert {...args} status="info" />
+      <IressAlert {...args} status="success" />
+      <IressAlert {...args} status="warning" />
+    </IressStack>
+  ),
+};
+
+export const MultiLine: Story = {
+  args: {
+    heading: 'Alert heading',
+    status: 'danger',
+    children:
+      'Once you confirm, the system will begin re-indexing your entire library, which may temporarily limit access to certain collaborative features for approximately five to ten minutes depending on your connection speed. If you are currently working in a multi-user environment, other active contributors will be notified of these updates automatically. If you have any doubts regarding the integrity of the incoming data, we strongly recommend canceling this prompt and consulting your administrator.',
+    multiLine: true,
+    onDismiss: () => console.log('Alert dismissed'),
+    actions: [
+      {
+        children: 'Action',
+        mode: 'secondary',
+        onClick: () => 'Take me somewhere please',
+      },
+      {
+        children: 'Action',
+        mode: 'tertiary',
+        onClick: () => 'Take me somewhere please',
+      },
+    ],
+  },
+  argTypes: {
+    ...disableArgTypes(['status']),
+  },
+  render: (args) => (
+    <IressStack gap="md">
+      <IressAlert {...args} status="danger" />
+      <IressAlert {...args} status="info" />
+      <IressAlert {...args} status="success" />
+      <IressAlert {...args} status="warning" />
+    </IressStack>
+  ),
 };
 
 export const Icon: Story = {
   args: {
     heading: 'Some information',
+    multiLine: true,
     icon: false,
     children: 'This is an alert without an icon',
   },
@@ -112,7 +165,7 @@ export const Variant: Story = {
   render: (args) => (
     <IressStack gap="md">
       <IressAlert {...args} variant="sidebar" />
-      <IressAlert {...args} variant="site-wide" />
+      <IressAlert {...args} variant="full-width" />
     </IressStack>
   ),
 };
@@ -126,4 +179,15 @@ export const Dismissable: Story = {
       );
     },
   },
+  argTypes: {
+    ...disableArgTypes(['status']),
+  },
+  render: (args) => (
+    <IressStack gap="md">
+      <IressAlert {...args} status="danger" />
+      <IressAlert {...args} status="info" />
+      <IressAlert {...args} status="success" />
+      <IressAlert {...args} status="warning" />
+    </IressStack>
+  ),
 };

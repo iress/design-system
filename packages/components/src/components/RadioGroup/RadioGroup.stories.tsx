@@ -10,6 +10,7 @@ import {
 } from './mocks/radioGroupChildren';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { cssVars } from '@iress-oss/ids-tokens';
 
 type Story = StoryObj<typeof IressRadioGroup>;
 
@@ -54,16 +55,32 @@ export const RadioSelection: Story = {
 export const Layout: Story = {
   args: {
     children: [
-      <IressRadio value="google" key="google" layerStyle="elevation.raised">
+      <IressRadio
+        value="google"
+        key="google"
+        style={{ border: `1px solid ${cssVars.colour.neutral[30]}` }}
+      >
         Google
       </IressRadio>,
-      <IressRadio value="newspaper" key="google" layerStyle="elevation.raised">
+      <IressRadio
+        value="newspaper"
+        key="google"
+        style={{ border: `1px solid ${cssVars.colour.neutral[30]}` }}
+      >
         Newspaper
       </IressRadio>,
-      <IressRadio value="friend" key="google" layerStyle="elevation.raised">
+      <IressRadio
+        value="friend"
+        key="google"
+        style={{ border: `1px solid ${cssVars.colour.neutral[30]}` }}
+      >
         Friend
       </IressRadio>,
-      <IressRadio value="other" key="google" layerStyle="elevation.raised">
+      <IressRadio
+        value="other"
+        key="google"
+        style={{ border: `1px solid ${cssVars.colour.neutral[30]}` }}
+      >
         Other
       </IressRadio>,
     ],

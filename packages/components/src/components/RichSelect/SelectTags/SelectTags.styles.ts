@@ -20,24 +20,13 @@ export const selectTags = sva({
       textAlign: 'left',
       fontWeight: 'normal',
       cursor: 'pointer',
+      focusable: 'rich-select',
 
       transition: '[all 0.3s ease]',
 
       '&:hover': {
         backgroundColor: 'colour.neutral.10',
         color: 'colour.neutral.80',
-      },
-
-      '&:focus': {
-        backgroundColor: 'colour.neutral.10',
-        layerStyle: 'elevation.focus',
-        outline: '[none]',
-      },
-
-      '&:focus-within': {
-        backgroundColor: 'colour.neutral.10',
-        layerStyle: 'elevation.focus',
-        outline: '[none]',
       },
 
       '&:has(.tag)': {

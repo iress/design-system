@@ -43,7 +43,7 @@ describe('IressPanel', () => {
       expect(component).toHaveClass('stretch_true');
       expect(component).toHaveClass('ta_center');
       expect(component).toHaveClass('bg_alt');
-      expect(component).toHaveClass('bdr_radius.000');
+      expect(component).toHaveClass('bdr_radius.0');
       expect(component).toHaveClass('p_lg');
     });
   });

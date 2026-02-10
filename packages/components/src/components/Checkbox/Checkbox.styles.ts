@@ -20,7 +20,7 @@ export const checkbox = sva({
       color: 'colour.primary.fill',
       display: 'flex',
       position: 'relative',
-      textStyle: 'typography.body.md',
+      textStyle: 'typography.body.md.medium',
     },
     input: {
       srOnly: true,
@@ -34,14 +34,13 @@ export const checkbox = sva({
     },
     labelSpan: {
       font: 'inherit',
+      color: 'colour.neutral.90',
     },
     mark: {
       color: '[currentColor]',
       marginInlineEnd: 'spacing.2',
       flexShrink: 0,
-      _groupFocusWithin: {
-        layerStyle: 'elevation.focus',
-      },
+      focusable: 'group',
     },
   },
   variants: {
@@ -60,6 +59,9 @@ export const checkbox = sva({
     },
     hiddenControl: {
       true: {
+        input: {
+          focusable: 'label-after',
+        },
         label: {
           position: 'relative',
           padding: 'spacing.0',
@@ -71,9 +73,6 @@ export const checkbox = sva({
           borderWidth: '1px',
           _hover: {
             backgroundColor: 'colour.neutral.20',
-          },
-          _groupFocusWithin: {
-            layerStyle: 'elevation.focus',
           },
         },
         labelSpan: {

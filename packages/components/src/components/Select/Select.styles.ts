@@ -16,13 +16,16 @@ export const select = sva({
       display: 'block',
       position: 'relative',
       lineHeight: 1,
-      '&:has(select:focus)': {
-        layerStyle: 'elevation.focus',
-      },
+      focusable: 'has-input',
     },
     control: {
       position: 'relative',
       selectChevron: true,
+      color: 'colour.neutral.90',
+
+      '&:has(:disabled)': {
+        color: 'colour.neutral.60',
+      },
     },
     element: {
       textStyle: 'typography.body.md',
@@ -32,7 +35,7 @@ export const select = sva({
       paddingInline: 'spacing.2',
       appearance: 'none',
       border: '[0]',
-      background: '[transparent]',
+      bg: 'transparent',
 
       _focus: {
         outline: '[none]',

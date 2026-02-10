@@ -30,12 +30,22 @@ import { cx } from '@/styled-system/css';
 import { input } from './Input.styles';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
-import { IressCloseButton } from '../Button';
+import {
+  IressButton,
+  type IressButtonProps,
+  IressCloseButton,
+} from '../Button';
 
 export type IressInputProps<
   T extends FormControlValue = string | number,
   TRows extends number | undefined = undefined,
 > = Omit<InputBaseProps<TRows>, 'defaultValue' | 'onChange' | 'value'> & {
+  /**
+   * Actions to display in the input field, rendered inside the input on the right. These will be rendered with opinionated styling.
+   * If you want to use custom buttons or controls, use the `append` prop instead.
+   */
+  actions?: Omit<IressButtonProps, 'mode' | 'status'>[];
+
   /**
    * Set input content align to right, useful for numeric inputs.
    * @default false
@@ -108,6 +118,11 @@ export type IressInputProps<
          * @default false
          */
         clearable?: boolean;
+
+        /**
+         * The variant of the input, which will apply different styles to the input. The `search` variant is designed for search inputs and will have a different style for the clear button and loading spinner.
+         */
+        variant?: 'search';
       });
 
 /**
@@ -136,6 +151,8 @@ const Input = <
     type,
     inline,
     alignRight,
+    actions,
+    variant,
     ...inputProps
   } = props as IressInputProps<T, undefined>;
 
@@ -255,67 +272,86 @@ const Input = <
     inline,
     isTextarea: rows !== undefined,
     stretched: !!styleProps.stretch,
+    variant,
     width,
   });
 
   return (
-    <styled.div
+    <div
       className={cx(
         GlobalCSSClass.FormElement,
         GlobalCSSClass.Input,
         className,
-        classes.wrapper,
-        GlobalCSSClass.FormElementInner,
+        classes.root,
       )}
       data-testid={inputProps['data-testid']}
-      {...styleProps}
     >
-      {prepend && <div className={cx(classes.addon)}>{prepend}</div>}
-      <InputBase
-        {...(nonStyleProps as InputBaseProps<TRows>)}
-        {...displayType}
-        className={classes.formControl}
-        value={displayValue}
-        onChange={handleInputChange}
-        onFocus={(e: FocusEvent<HTMLInputElement & HTMLTextAreaElement>) => {
-          setFocused(true);
-          inputProps?.onFocus?.(e);
+      <styled.div
+        className={cx(classes.wrapper, GlobalCSSClass.FormElementInner)}
+        {...styleProps}
+      >
+        {prepend && (
+          <div className={cx(classes.addon, GlobalCSSClass.InputAddon)}>
+            {prepend}
+          </div>
+        )}
+        <InputBase
+          {...(nonStyleProps as InputBaseProps<TRows>)}
+          {...displayType}
+          className={classes.formControl}
+          value={displayValue}
+          onChange={handleInputChange}
+          onFocus={(e: FocusEvent<HTMLInputElement & HTMLTextAreaElement>) => {
+            setFocused(true);
+            inputProps?.onFocus?.(e);
 
-          if (!interactedUsingMouse.current) {
-            queueMicrotask(() => e.target.select());
-          } else {
-            interactedUsingMouse.current = null;
-          }
-        }}
-        onMouseDown={(
-          e: MouseEvent<HTMLInputElement & HTMLTextAreaElement>,
-        ) => {
-          inputProps?.onMouseDown?.(e);
-          interactedUsingMouse.current = true;
-        }}
-        onBlur={(e: FocusEvent<HTMLInputElement & HTMLTextAreaElement>) => {
-          setFocused(false);
-          inputProps?.onBlur?.(e);
-        }}
-        rows={rows}
-        ref={inputRef}
-      />
-      <div className={cx(classes.internal)}>
-        {loading && (
-          <IressSpinner
-            screenreaderText={loading === true ? 'loading' : loading}
-          />
+            if (!interactedUsingMouse.current) {
+              queueMicrotask(() => e.target.select());
+            } else {
+              interactedUsingMouse.current = null;
+            }
+          }}
+          onMouseDown={(
+            e: MouseEvent<HTMLInputElement & HTMLTextAreaElement>,
+          ) => {
+            inputProps?.onMouseDown?.(e);
+            interactedUsingMouse.current = true;
+          }}
+          onBlur={(e: FocusEvent<HTMLInputElement & HTMLTextAreaElement>) => {
+            setFocused(false);
+            inputProps?.onBlur?.(e);
+          }}
+          rows={rows}
+          ref={inputRef}
+        />
+        <div className={cx(classes.internal)}>
+          {loading && (
+            <IressSpinner
+              screenreaderText={loading === true ? 'loading' : loading}
+            />
+          )}
+          {validValue && clearable && (
+            <IressCloseButton
+              onClick={handleClear}
+              onMouseDown={(e) => e.preventDefault()}
+              screenreaderText="Clear"
+            />
+          )}
+        </div>
+        {append && (
+          <div className={cx(classes.addon, GlobalCSSClass.InputAddon)}>
+            {append}
+          </div>
         )}
-        {validValue && clearable && (
-          <IressCloseButton
-            onClick={handleClear}
-            onMouseDown={(e) => e.preventDefault()}
-            screenreaderText="Clear"
-          />
-        )}
-      </div>
-      {append && <div className={cx(classes.addon)}>{append}</div>}
-    </styled.div>
+      </styled.div>
+      {actions?.map((action, index) => (
+        <IressButton
+          {...action}
+          className={cx(action.className, classes.action)}
+          key={index}
+        />
+      ))}
+    </div>
   );
 };
 

@@ -13,7 +13,7 @@ export const tag = sva({
       color: 'colour.neutral.80',
       display: 'inline-flex',
       gap: 'spacing.1',
-      py: 'xs',
+      py: 'none',
       px: 'sm',
       transition: '[all .2s]',
       textStyle: 'typography.body.md',
@@ -50,6 +50,8 @@ export const tag = sva({
     clickable: {
       true: {
         root: {
+          focusable: 'true',
+
           _hover: {
             bg: 'colour.primary.surface',
             borderColor: 'colour.primary.fill',
@@ -60,14 +62,6 @@ export const tag = sva({
           _active: {
             boxShadow:
               'color-mix(in srgb, {colors.colour.primary.surface}, transparent 60%) 0px 0px 0px 3px',
-          },
-
-          _focus: {
-            outline: '[none]',
-          },
-
-          _focusVisible: {
-            layerStyle: 'elevation.focus',
           },
         },
       },

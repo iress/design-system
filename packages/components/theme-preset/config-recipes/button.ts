@@ -33,7 +33,7 @@ export const buttonRecipe = defineSlotRecipe({
       boxSizing: 'border-box',
       cursor: 'pointer',
       display: 'inline-flex',
-      fontKerning: 'none',
+      fontKerning: '[none]',
       gap: 'spacing.2',
       justifyContent: 'center',
       maxWidth: '[100%]',
@@ -46,7 +46,7 @@ export const buttonRecipe = defineSlotRecipe({
       textAlign: 'center',
       textDecoration: 'none',
       textStyle: 'typography.body.md.medium',
-      transition: 'all .2s',
+      transition: 'all',
       userSelect: 'none',
       whiteSpace: 'normal',
       width: 'auto',
@@ -54,7 +54,7 @@ export const buttonRecipe = defineSlotRecipe({
 
       _focusVisible: {
         outline: 'none',
-        layerStyle: 'elevation.focusNoBorder',
+        focusable: 'true',
       },
 
       '&[data-active="true"]': {
@@ -124,6 +124,13 @@ export const buttonRecipe = defineSlotRecipe({
         root: {
           py: 'spacing.0',
           borderWidth: '[0px]',
+        },
+      },
+    },
+    iconOnly: {
+      true: {
+        root: {
+          paddingInline: 'button.iconInline',
         },
       },
     },
@@ -290,6 +297,16 @@ export const buttonRecipe = defineSlotRecipe({
           color: 'colour.system.danger.onFill',
         },
       },
+      info: {
+        root: {
+          color: 'colour.system.info.onFill',
+        },
+      },
+      warning: {
+        root: {
+          color: 'colour.system.warning.onFill',
+        },
+      },
     },
   },
   compoundVariants: [
@@ -335,7 +352,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.system.danger.surface}, transparent 60%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.system.danger.surface}, transparent 40%) 0px 0px 0px 3px',
           },
         },
         spinner: {
@@ -357,7 +374,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.system.danger.surface}, transparent 60%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.system.danger.surface}, transparent 40%) 0px 0px 0px 3px',
           },
         },
         spinner: {
@@ -379,7 +396,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.system.danger.surface}, transparent 60%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.system.danger.surface}, transparent 40%) 0px 0px 0px 3px',
           },
         },
         spinner: {
@@ -445,7 +462,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.system.success.surface}, transparent 60%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.system.success.surface}, transparent 40%) 0px 0px 0px 3px',
           },
         },
         spinner: {
@@ -467,7 +484,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.system.success.surface}, transparent 60%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.system.success.surface}, transparent 40%) 0px 0px 0px 3px',
           },
         },
         spinner: {
@@ -489,7 +506,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.system.success.surface}, transparent 60%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.system.success.surface}, transparent 40%) 0px 0px 0px 3px',
           },
         },
         spinner: {
@@ -511,6 +528,102 @@ export const buttonRecipe = defineSlotRecipe({
         },
         spinner: {
           color: 'colour.system.success.text',
+        },
+      },
+    },
+    {
+      mode: 'secondary',
+      status: 'info',
+      css: {
+        root: {
+          bg: 'colour.system.info.surface',
+          borderColor:
+            '[color-mix(in srgb, {colors.colour.system.info.surface}, black 5%)]',
+          color: 'colour.system.info.text',
+
+          _hover: {
+            bg: 'colour.system.info.surfaceHover',
+            borderColor:
+              '[color-mix(in srgb, {colors.colour.system.info.surfaceHover}, black 5%)]',
+          },
+
+          _active: {
+            boxShadow:
+              '[color-mix(in srgb, {colors.colour.system.info.surface}, transparent 40%) 0px 0px 0px 3px]',
+          },
+        },
+        spinner: {
+          color: 'colour.system.info.text',
+        },
+      },
+    },
+    {
+      mode: 'tertiary',
+      status: 'info',
+      css: {
+        root: {
+          borderColor: 'colour.system.info.fill',
+          color: 'colour.system.info.text',
+
+          _hover: {
+            bg: 'colour.system.info.surfaceHover',
+          },
+
+          _active: {
+            boxShadow:
+              '[color-mix(in srgb, {colors.colour.system.info.surface}, transparent 40%) 0px 0px 0px 3px]',
+          },
+        },
+        spinner: {
+          color: 'colour.system.info.text',
+        },
+      },
+    },
+    {
+      mode: 'secondary',
+      status: 'warning',
+      css: {
+        root: {
+          bg: 'colour.system.warning.surface',
+          borderColor:
+            '[color-mix(in srgb, {colors.colour.system.warning.surface}, black 5%)]',
+          color: 'colour.system.warning.text',
+
+          _hover: {
+            bg: 'colour.system.warning.surfaceHover',
+            borderColor:
+              '[color-mix(in srgb, {colors.colour.system.warning.surfaceHover}, black 5%)]',
+          },
+
+          _active: {
+            boxShadow:
+              '[color-mix(in srgb, {colors.colour.system.warning.surface}, transparent 40%) 0px 0px 0px 3px]',
+          },
+        },
+        spinner: {
+          color: 'colour.system.warning.text',
+        },
+      },
+    },
+    {
+      mode: 'tertiary',
+      status: 'warning',
+      css: {
+        root: {
+          borderColor: 'colour.system.warning.fill',
+          color: 'colour.system.warning.text',
+
+          _hover: {
+            bg: 'colour.system.warning.surfaceHover',
+          },
+
+          _active: {
+            boxShadow:
+              '[color-mix(in srgb, {colors.colour.system.warning.surface}, transparent 40%) 0px 0px 0px 3px]',
+          },
+        },
+        spinner: {
+          color: 'colour.system.warning.text',
         },
       },
     },

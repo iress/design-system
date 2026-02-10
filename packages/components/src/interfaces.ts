@@ -267,7 +267,7 @@ export interface IressCSSProps {
   color?: UtilityValues['color'];
 
   /**
-   * The `focusable` prop is used to apply the focus elevation when focused. It can be set to `true` to apply focus styles on focus, or `'within'` to apply focus styles when the element or any of its children are focused.
+   * The `focusable` prop is used to apply the focus ring when focused. It can be set to `true` to apply focus styles on focus, or `'within'` to apply focus styles when the element or any of its children are focused.
    */
   focusable?: 'true' | 'within';
 
@@ -300,17 +300,6 @@ export interface IressCSSProps {
    * - Consider if you can conditionally render the element instead of hiding it using the `useBreakpoint` hook.
    */
   hideBelow?: UtilityValues['hideBelow'];
-
-  /**
-   * Elevate a layer by using a **`layerStyle`**. These are connected to the elevation tokens in the design system. They can be combined to create hierarchy and structure.
-   *
-   * - `elevation.raised`: Raised elevations sit slightly higher than other content. They are reserved for cards that can be moved, such as Jira issue cards and Trello cards. In special circumstances, they can be used for cards as a way to provide additional heirarchy or emphasis.
-   * - `elevation.floating`: Floating is the highest elevation available. It is reserved for a UI that sits over another UI, such as modals, dialogs, dropdown menus, floating toolbars, and floating single-action buttons.
-   * - `elevation.overflow`: Overflow is a shadow indicating content has scrolled outside a view. It can be used for vertical or horizontal scroll. An example of overflow shadows is the horizontal scroll in tables on a Confluence page.
-   */
-  layerStyle?: ResponsiveProp<
-    Extract<UtilityValues['layerStyle'], `elevation.${string}`>
-  >;
 
   /**
    * The **`max-width`** CSS property sets the maximum width of an element. It prevents the used value of the `width` property from becoming larger than the value specified by `max-width`.

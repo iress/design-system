@@ -20,11 +20,12 @@ describe('SelectControl', () => {
   it('renders the component with the correct classes and test ids', () => {
     const screen = renderComponent({
       className: 'test-class',
+      'data-testid': TEST_ID,
     });
 
     const combobox = screen.getByRole('combobox');
 
-    expect(combobox).toHaveClass('test-class', select().element!);
+    expect(combobox).toHaveClass('test-class');
     expect(combobox.parentElement).toHaveClass(
       select().control!,
       GlobalCSSClass.FormElementInner,

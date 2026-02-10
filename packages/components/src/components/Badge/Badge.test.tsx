@@ -18,7 +18,7 @@ describe('IressBadge', () => {
     const badge = screen.getByText('Badge');
 
     expect(badge).toBeInTheDocument();
-    expect(badge).not.toHaveClass('bdr_radius.100');
+    expect(badge).not.toHaveClass('bdr_radius.4');
     expect(badge).toHaveClass(
       'bg_colour.neutral.20 c_colour.neutral.80',
       GlobalCSSClass.Badge,
@@ -40,7 +40,7 @@ describe('IressBadge', () => {
     render(<IressBadge pill>Badge</IressBadge>);
 
     const badge = screen.getByText('Badge');
-    expect(badge).toHaveClass('bdr_radius.100');
+    expect(badge).toHaveClass('bdr_radius.4');
   });
 
   it('should not have basic accessibility issues', async () => {

@@ -32,7 +32,7 @@ export interface FieldFooterProps extends IressStyledProps {
 }
 
 const ErrorIcon = (props: Omit<IressIconProps, 'name'>) => (
-  <IressIcon name="exclamation-triangle" {...props} pr="xs" />
+  <IressIcon name="cancel" {...props} />
 );
 
 export const FieldFooter = ({
@@ -80,10 +80,14 @@ export const FieldFooter = ({
     >
       {hasError && (
         <IressValidationSummary
-          itemStyle={{ textStyle: 'typography.body.sm' }}
+          itemStyle={{
+            textStyle: 'typography.body.sm',
+          }}
           messages={getUniqueItemsByKey(errorMessages, 'message')}
           data-testid={dataTestId}
-          prefix={<ErrorIcon aria-label="Error: " />}
+          prefix={
+            <ErrorIcon aria-label="Error: " className={classes.footerIcon} />
+          }
           visiblePrefix
         >
           {error}

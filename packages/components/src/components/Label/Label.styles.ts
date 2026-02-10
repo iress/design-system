@@ -10,12 +10,12 @@ export const label = sva({
       color: 'colour.system.danger.text',
       display: 'inline-block',
       position: 'relative',
-      textStyle: 'typography.body.sm.strong',
+      textStyle: 'typography.body.sm.medium',
       top: '-spacing.1',
       mr: 'spacing.1',
     },
     text: {
-      textStyle: 'typography.body.md.strong',
+      textStyle: 'typography.body.md.medium',
     },
   },
   compoundVariants: [

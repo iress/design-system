@@ -23,6 +23,9 @@ import { css, cx } from '@/styled-system/css';
 import { button } from '@/styled-system/recipes';
 import { type IressCSSProps, type IressTestProps } from '@/interfaces';
 import { usePopover } from '../Popover';
+import type { MaterialSymbol } from 'material-symbols';
+import { IressIcon } from '../Icon';
+import { IressTooltip } from '../Tooltip';
 
 export type ButtonElement<
   C extends ElementType | undefined = undefined,
@@ -98,6 +101,11 @@ export interface InternalButtonProps<
   href?: THref;
 
   /**
+   * The icon to be displayed in the button. If provided, the icon will be displayed and the `children` will be used as screen reader text (although you can explicitly override this with `aria-label`)
+   */
+  icon?: MaterialSymbol;
+
+  /**
    * When true, button is in loading state. If provided a string, will be used as the loading text for screen readers.
    */
   loading?: boolean | string;
@@ -160,6 +168,7 @@ const Button = <
     className,
     element,
     fluid,
+    icon,
     loading = false,
     mode = 'secondary',
     prepend,
@@ -195,6 +204,7 @@ const Button = <
     fluid: fluid === true ? 'true' : fluid,
     inButtonGroup: !!buttonGroupItem,
     mode: buttonMode,
+    iconOnly: !!icon,
     loading: !!loading,
     noWrap,
     status,
@@ -228,7 +238,7 @@ const Button = <
               screenreaderText={loading === true ? 'Loading' : loading}
             />
           )}
-          {children}
+          {icon ? <IressIcon name={icon} /> : children}
           {append && <span className={styles.append}>{append}</span>}
         </>
       ),
@@ -247,6 +257,7 @@ const Button = <
       children,
       className,
       handleClick,
+      icon,
       loading,
       prepend,
       spinnerId,
@@ -264,6 +275,25 @@ const Button = <
     () => element ?? (nonStyleProps.href ? 'a' : 'button'),
     [element, nonStyleProps.href],
   );
+
+  if (icon && children) {
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string
+    const childrenLabel = String(children);
+
+    return (
+      <IressTooltip tooltipText={childrenLabel}>
+        <Component
+          aria-label={childrenLabel}
+          aria-describedby={loading ? spinnerId : undefined}
+          type={element || !nonStyleProps.href ? 'button' : undefined}
+          {...renderProps}
+          {...buttonGroupItem?.props}
+          {...nonStyleProps}
+          ref={elementRef}
+        />
+      </IressTooltip>
+    );
+  }
 
   return (
     <Component

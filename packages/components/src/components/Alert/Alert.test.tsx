@@ -7,10 +7,10 @@ import { Statuses } from '@/types';
 import { IressIconProps } from '../Icon';
 
 const ALERT_ICONS: Record<Statuses, IressIconProps['name']> = {
-  danger: 'block',
+  danger: 'cancel',
   info: 'info',
-  success: 'check',
-  warning: 'warning',
+  success: 'check_circle',
+  warning: 'error',
 };
 
 describe('IressAlert', () => {
@@ -147,6 +147,49 @@ describe('IressAlert', () => {
         expect(icon).toHaveTextContent(ALERT_ICONS[status]);
       },
     );
+  });
+
+  describe('multiLine', () => {
+    it('applies multiLine styling when multiLine is true', () => {
+      const screen = render(
+        <IressAlert data-testid="test-component" multiLine={true}>
+          This is a longer alert message that might span multiple lines and
+          needs additional spacing.
+        </IressAlert>,
+      );
+
+      const component = screen.getByTestId('test-component');
+      expect(component).toHaveClass(
+        alertStyles({ status: 'info', multiLine: true }).alert!,
+      );
+    });
+
+    it('applies default styling when multiLine is false', () => {
+      const screen = render(
+        <IressAlert data-testid="test-component" multiLine={false}>
+          Short alert message
+        </IressAlert>,
+      );
+
+      const component = screen.getByTestId('test-component');
+      expect(component).toHaveClass(
+        alertStyles({ status: 'info', multiLine: false }).alert!,
+      );
+    });
+
+    it('applies default styling when multiLine is not provided', () => {
+      const screen = render(
+        <IressAlert data-testid="test-component">
+          Short alert message
+        </IressAlert>,
+      );
+
+      const component = screen.getByTestId('test-component');
+      // multiLine defaults to false
+      expect(component).toHaveClass(
+        alertStyles({ status: 'info', multiLine: false }).alert!,
+      );
+    });
   });
 
   describe('accessibility', () => {

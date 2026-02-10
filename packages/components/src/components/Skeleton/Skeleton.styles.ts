@@ -3,7 +3,7 @@ import { cva } from '@/styled-system/css';
 export const skeleton = cva({
   base: {
     backgroundColor: 'colour.neutral.30',
-    borderRadius: 'radius.025',
+    borderRadius: 'radius.1',
     _motionReduce: {
       animation: 'none',
     },

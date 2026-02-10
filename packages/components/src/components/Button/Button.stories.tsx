@@ -56,8 +56,8 @@ export const Mode: ButtonStory = {
       <IressButton mode="quaternary" {...args}>
         {children === '' ? 'Quaternary button' : children}
       </IressButton>
-      <IressButton mode="muted" {...args}>
-        {children === '' ? <IressIcon name="share" /> : children}
+      <IressButton mode="muted" icon="share" {...args}>
+        {children === '' ? 'Share' : children}
       </IressButton>
     </IressInline>
   ),
@@ -85,8 +85,13 @@ export const Status: ButtonStory = {
         <IressButton mode="quaternary" status="success" {...args}>
           {children === '' ? 'Quaternary button' : children}
         </IressButton>
-        <IressButton mode="muted" status="success" {...args}>
-          {children === '' ? <IressIcon name="shopping_cart" /> : children}
+        <IressButton
+          mode="muted"
+          status="success"
+          icon="shopping_cart"
+          {...args}
+        >
+          {children === '' ? 'Add to cart' : children}
         </IressButton>
       </IressInline>
       <IressInline gap="md">
@@ -102,8 +107,8 @@ export const Status: ButtonStory = {
         <IressButton mode="quaternary" status="danger" {...args}>
           {children === '' ? 'Quaternary button' : children}
         </IressButton>
-        <IressButton mode="muted" status="danger" {...args}>
-          {children === '' ? <IressIcon name="trash" /> : children}
+        <IressButton mode="muted" status="danger" icon="delete" {...args}>
+          {children === '' ? 'Delete' : children}
         </IressButton>
       </IressInline>
     </IressStack>
@@ -270,8 +275,8 @@ export const Slots: ButtonStory = {
       </IressInline>
 
       <IressInline gap="md">
-        <IressButton {...args}>
-          <IressIcon name="home" />
+        <IressButton {...args} icon="home">
+          Home
         </IressButton>
       </IressInline>
     </IressStack>
@@ -332,8 +337,8 @@ export const Active: ButtonStory = {
       <IressButton mode="quaternary" {...args}>
         Active Quaternary
       </IressButton>
-      <IressButton mode="muted" {...args}>
-        <IressIcon name="ellipsis-v" />
+      <IressButton mode="muted" icon="more_vert" {...args}>
+        More actions
       </IressButton>
     </IressInline>
   ),

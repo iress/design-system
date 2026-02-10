@@ -111,7 +111,11 @@ export const IressValidationMessage = <
     }}
     className={cx(className, GlobalCSSClass.ValidationMessage)}
   >
-    <styled.div srOnly={!visiblePrefix} display="inline" pe="spacing.1">
+    <styled.div
+      srOnly={visiblePrefix ? undefined : true}
+      display="inline"
+      pe="spacing.1"
+    >
       <ValidationPrefix prefix={prefix} status={status} />
     </styled.div>
     <styled.div display="inline">{children}</styled.div>

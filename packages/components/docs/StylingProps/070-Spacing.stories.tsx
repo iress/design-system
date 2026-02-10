@@ -141,13 +141,14 @@ export const responsiveVariableMargin: Story = {
 export const negativeMargin: Story = {
   ...padding,
   args: {
-    bg: 'alt',
+    bg: 'colour.primary.fill',
+    color: 'colour.primary.onFill',
     children:
       'A panel that has negative margin and escapes its parent container',
     mx: '-xl',
   },
   render: (args) => (
-    <IressPanel layerStyle="elevation.raised" maxWidth="container.sm" mx="auto">
+    <IressPanel bg="colour.primary.surface" maxWidth="container.sm" mx="auto">
       <IressPanel {...args} />
     </IressPanel>
   ),

@@ -5,14 +5,6 @@ import {
 } from '../interfaces';
 
 interface ColourSchema extends IressDesignTokenGroup {
-  primary: IressDesignTokenGroup & {
-    fill: IressDesignToken;
-    fillHover: IressDesignToken;
-    onFill: IressDesignToken;
-    surface: IressDesignToken;
-    surfaceHover: IressDesignToken;
-    text: IressDesignToken;
-  };
   neutral: IressDesignTokenGroup & {
     10: IressDesignToken;
     20: IressDesignToken;
@@ -24,9 +16,21 @@ interface ColourSchema extends IressDesignTokenGroup {
     80: IressDesignToken;
     90: IressDesignToken;
   };
+  primary: IressDesignTokenGroup & {
+    fill: IressDesignToken;
+    fillHover: IressDesignToken;
+    onFill: IressDesignToken;
+    surface: IressDesignToken;
+    surfaceHover: IressDesignToken;
+    text: IressDesignToken;
+  };
   accent: IressDesignTokenGroup & {
-    1: IressDesignToken;
-    2: IressDesignToken;
+    fill: IressDesignToken;
+    fillHover: IressDesignToken;
+    onFill: IressDesignToken;
+    surface: IressDesignToken;
+    surfaceHover: IressDesignToken;
+    text: IressDesignToken;
   };
   system: IressDesignTokenGroup & {
     success: IressDesignTokenGroup & {
@@ -61,9 +65,6 @@ interface ColourSchema extends IressDesignTokenGroup {
       surfaceHover: IressDesignToken;
       text: IressDesignToken;
     };
-    backdrop: IressDesignTokenGroup & {
-      fill: IressDesignToken;
-    };
   };
   data: IressDesignTokenGroup & {
     subtle: IressDesignTokenGroup & {
@@ -89,75 +90,15 @@ interface ColourSchema extends IressDesignTokenGroup {
       90: IressDesignToken;
     };
   };
+  globalInteractions: IressDesignTokenGroup & {
+    backdrop: IressDesignToken;
+    focusRing: IressDesignToken;
+  };
 }
 
 const colour = {
   $description:
     'Colour distinguishes our brand and reinforces consistent experiences across products.',
-  primary: {
-    $description:
-      'The primary colour is your "brand" colour, and is used across all interactive elements such as buttons, links, inputs, etc. This colour can define the overall feel and can elicit emotion.',
-    fill: {
-      $description:
-        'Used for primary buttons and the active state of form controls such as checkboxes and radio buttons. Also used for the border of tags when they have a custom button.',
-      $type: Type.Color,
-      $value: '#003271',
-      $extensions: {
-        'iress.contrast.AA': ['colour.primary.onFill'],
-        'styler.panel': 'colour.primary',
-      },
-    },
-    fillHover: {
-      $description:
-        'Used for the hover state of primary buttons as well as hovering over active form controls.',
-      $type: Type.Color,
-      $value: '#002352',
-      $extensions: {
-        'iress.contrast.AA': ['colour.primary.onFill'],
-        'styler.panel': 'colour.primary',
-      },
-    },
-    onFill: {
-      $description:
-        'Used as the foreground colour on primary buttons and active form controls.',
-      $type: Type.Color,
-      $value: '#FFFFFF',
-      $extensions: {
-        'iress.contrast.AA': ['colour.primary.fill'],
-        'styler.panel': 'colour.primary',
-      },
-    },
-    surface: {
-      $description:
-        'Used as the background colour for secondary buttons and the focused state of menu and tab items. Also used as the background colour of active buttons.',
-      $type: Type.Color,
-      $value: '#EBF3FF',
-      $extensions: {
-        'iress.contrast.AA': ['colour.primary.text', 'colour.neutral.80'],
-        'styler.panel': 'colour.primary',
-      },
-    },
-    surfaceHover: {
-      $description:
-        'Used for the hover state of secondary buttons, form controls and hovering over focused menu and tab items. Also used when hovering over table rows.',
-      $type: Type.Color,
-      $value: '#DCEAFE',
-      $extensions: {
-        'iress.contrast.AA': ['colour.primary.text', 'colour.neutral.80'],
-        'styler.panel': 'colour.primary',
-      },
-    },
-    text: {
-      $description:
-        'Used for text on primary buttons, active form controls and focused tab and menu items. Also used for the link text colour and tertiary buttons.',
-      $type: Type.Color,
-      $value: '#003271',
-      $extensions: {
-        'iress.contrast.AA': ['colour.primary.surface'],
-        'styler.panel': 'colour.primary',
-      },
-    },
-  },
   neutral: {
     $description:
       'Neutral colours apply to most backgrounds, text, and shapes in our experiences. They do not typically have a meaning associated with them, though they can imply things like disabled states. **Note:** There are some colour contrasts that are AA Large and are used for placeholders. If WCAG compliance is necessary for your application, please avoid using placeholders to meet this requirement.',
@@ -235,7 +176,7 @@ const colour = {
       $description:
         'Used for muted text such as hints and descriptions to allow for content hierarchy.',
       $type: Type.Color,
-      $value: '#6D7278',
+      $value: '#5D6C7E',
       $extensions: {
         'iress.aliases': ['muted'],
         'iress.contrast.AA': ['colour.neutral.10', 'colour.neutral.20'],
@@ -274,24 +215,129 @@ const colour = {
       },
     },
   },
+  primary: {
+    $description:
+      'The primary colour is your "brand" colour, and is used across all interactive elements such as buttons, links, inputs, etc. This colour can define the overall feel and can elicit emotion.',
+    fill: {
+      $description:
+        'Used for primary buttons and the active state of form controls such as checkboxes and radio buttons. Also used for the border of tags when they have a custom button.',
+      $type: Type.Color,
+      $value: '#003271',
+      $extensions: {
+        'iress.contrast.AA': ['colour.primary.onFill'],
+        'styler.panel': 'colour.primary',
+      },
+    },
+    fillHover: {
+      $description:
+        'Used for the hover state of primary buttons as well as hovering over active form controls.',
+      $type: Type.Color,
+      $value: '#002352',
+      $extensions: {
+        'iress.contrast.AA': ['colour.primary.onFill'],
+        'styler.panel': 'colour.primary',
+      },
+    },
+    onFill: {
+      $description:
+        'Used as the foreground colour on primary buttons and active form controls.',
+      $type: Type.Color,
+      $value: '#FFFFFF',
+      $extensions: {
+        'iress.contrast.AA': ['colour.primary.fill'],
+        'styler.panel': 'colour.primary',
+      },
+    },
+    surface: {
+      $description:
+        'Used as the background colour for secondary buttons and the focused state of menu and tab items. Also used as the background colour of active buttons.',
+      $type: Type.Color,
+      $value: '#EBF3FF',
+      $extensions: {
+        'iress.contrast.AA': ['colour.primary.text', 'colour.neutral.80'],
+        'styler.panel': 'colour.primary',
+      },
+    },
+    surfaceHover: {
+      $description:
+        'Used for the hover state of secondary buttons, form controls and hovering over focused menu and tab items. Also used when hovering over table rows.',
+      $type: Type.Color,
+      $value: '#DCEAFE',
+      $extensions: {
+        'iress.contrast.AA': ['colour.primary.text', 'colour.neutral.80'],
+        'styler.panel': 'colour.primary',
+      },
+    },
+    text: {
+      $description:
+        'Used for text on primary buttons, active form controls and focused tab and menu items. Also used for the link text colour and tertiary buttons.',
+      $type: Type.Color,
+      $value: '#003271',
+      $extensions: {
+        'iress.contrast.AA': ['colour.primary.surface'],
+        'styler.panel': 'colour.primary',
+      },
+    },
+  },
   accent: {
     $description:
-      'The accent colour is a colour used to emphasise key parts of the UI. These act as "secondary" or "supporting" colours to you primary colour.',
-    1: {
+      'The accent colour is a colour used to emphasise key parts of the UI. These act as "secondary" or "supporting" colours to your primary colour. The brand accent is useful for grabbing attention or to support your primary/brand colour.',
+    fill: {
       $description:
-        'First accent colour, useful for grabbing attention and to support your primary/brand colour. It should be used sparingly to draw attention to key elements.',
+        'Used in illustrations to support the primary colour and to add visual interest to the UI.',
       $type: Type.Color,
       $value: '#C26EF4',
       $extensions: {
+        'iress.contrast.AA': ['colour.accent.onFill'],
         'styler.panel': 'colour.accent',
       },
     },
-    2: {
+    fillHover: {
       $description:
-        'Second accent colour, useful for grabbing attention and to support your primary/brand colour. It should be used sparingly to draw attention to key elements.',
+        'Used in illustrations to support the primary colour and to add visual interest to the UI when hovered.',
       $type: Type.Color,
-      $value: '#7599F9',
+      $value: '#A855D9',
       $extensions: {
+        'iress.contrast.AA': ['colour.accent.onFill'],
+        'styler.panel': 'colour.accent',
+      },
+    },
+    onFill: {
+      $description:
+        'Used in illustrations to support the primary colour and to add visual interest to the UI when used as a foreground colour.',
+      $type: Type.Color,
+      $value: '#1F0032',
+      $extensions: {
+        'iress.contrast.AA': ['colour.accent.fill'],
+        'styler.panel': 'colour.accent',
+      },
+    },
+    surface: {
+      $description: 'Used to highlight a selected row in a table.',
+      $type: Type.Color,
+      $value: '#E0BDF5',
+      $extensions: {
+        'iress.contrast.AA': ['colour.accent.text', 'colour.neutral.80'],
+        'styler.panel': 'colour.accent',
+      },
+    },
+    surfaceHover: {
+      $description:
+        'Used for the hover state of a highlighted row in a table to provide additional emphasis on hover.',
+      $type: Type.Color,
+      $value: '#D4A6F2',
+      $extensions: {
+        'iress.contrast.AA': ['colour.accent.text', 'colour.neutral.80'],
+        'styler.panel': 'colour.accent',
+      },
+    },
+    text: {
+      $description:
+        'Used for text on top of accent surfaces (such as highlighted table rows).',
+      $type: Type.Color,
+      $value: '#1F0032',
+      $extensions: {
+        'iress.contrast.AA': ['colour.accent.surface'],
         'styler.panel': 'colour.accent',
       },
     },
@@ -360,7 +406,7 @@ const colour = {
         $description:
           'Used for the text colour of success alerts and toasts, and success tertiary buttons.',
         $type: Type.Color,
-        $value: '#124d3d',
+        $value: '#006b44',
         $extensions: {
           'iress.contrast.AA': ['colour.system.success.surface'],
           'styler.panel': 'colour.system.success',
@@ -374,7 +420,7 @@ const colour = {
         $description:
           'Used for the background colour of primary danger buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts.',
         $type: Type.Color,
-        $value: '#C32F2F',
+        $value: '#c21010',
         $extensions: {
           'iress.contrast.AA': ['colour.system.danger.onFill'],
           'styler.panel': 'colour.system.danger',
@@ -428,7 +474,7 @@ const colour = {
         $description:
           'Used for the text colour of danger alerts and toasts, and danger tertiary buttons.',
         $type: Type.Color,
-        $value: '#8a1f1f',
+        $value: '#c21010',
         $extensions: {
           'iress.contrast.AA': ['colour.system.danger.surface'],
           'styler.panel': 'colour.system.danger',
@@ -493,7 +539,7 @@ const colour = {
       text: {
         $description: 'Used for the text colour of warning alerts.',
         $type: Type.Color,
-        $value: '#6b4700',
+        $value: '#825400',
         $extensions: {
           'iress.contrast.AA': ['colour.system.warning.surface'],
           'styler.panel': 'colour.system.warning',
@@ -552,23 +598,10 @@ const colour = {
       text: {
         $description: 'Used for the text colour of info alerts and toasts.',
         $type: Type.Color,
-        $value: '#203a75',
+        $value: '#0047ab',
         $extensions: {
           'iress.contrast.AA': ['colour.system.info.surface'],
           'styler.panel': 'colour.system.info',
-        },
-      },
-    },
-    backdrop: {
-      $description:
-        'Used to cover the page in order to highlight a specific component, such as a modal.',
-      fill: {
-        $description: 'Used for the background colour of the backdrop.',
-        $type: Type.Color,
-        $value: '#61656bcc',
-        $extensions: {
-          'iress.contrast.AA': ['colour.neutral.10'],
-          'styler.panel': 'colour.system.backdrop',
         },
       },
     },
@@ -740,11 +773,35 @@ const colour = {
       90: {
         $description: 'Ninth data visualisation colour in the bold palette.',
         $type: Type.Color,
-        $value: '#000000',
+        $value: '#384666',
         $extensions: {
           'iress.contrast.AA': ['colour.data.subtle.90', 'colour.neutral.10'],
           'styler.panel': 'colour.data.bold',
         },
+      },
+    },
+  },
+  globalInteractions: {
+    $description:
+      "These tokens govern the interface's behavior during user engagement, ensuring clear visual hierarchy and accessible navigation across all components.",
+    backdrop: {
+      $description:
+        "By dimming the underlying interface, the Backdrop reduces cognitive load and establishes a clear depth of field, signalling that the user's attention is required exclusively on the foreground element.",
+      $type: Type.Color,
+      $value: '#61656bcc',
+      $extensions: {
+        'iress.contrast.AA': ['colour.neutral.10'],
+        'styler.panel': 'colour.globalInteractions',
+      },
+    },
+    focusRing: {
+      $description:
+        'A high-contrast "halo" used to identify the currently active element during keyboard navigation. Applied with a 2px width and 2px offset to ensure the indicator remains distinct from the component border, satisfying WCAG 2.4.7 for visibility.',
+      $type: Type.Color,
+      $value: '#005BFF',
+      $extensions: {
+        'iress.contrast.AA': ['colour.neutral.10'],
+        'styler.panel': 'colour.globalInteractions',
       },
     },
   },

@@ -16,6 +16,7 @@ export const badge = sva({
       textDecoration: 'none',
       minHeight: '[1.35em]',
       minWidth: '[1.5em]',
+      verticalAlign: 'middle',
     },
     badge: {
       alignItems: 'center',
@@ -33,7 +34,7 @@ export const badge = sva({
     pill: {
       true: {
         badge: {
-          borderRadius: 'radius.100',
+          borderRadius: 'radius.4',
         },
       },
     },

@@ -44,11 +44,7 @@ export const tabSet = sva({
     },
     panel: {
       textStyle: 'typography.body.md',
-
-      _focusVisible: {
-        layerStyle: 'elevation.focus',
-        outline: '[none]',
-      },
+      focusable: 'true',
 
       '& > :not([hidden])': {
         pt: 'sm',
@@ -59,9 +55,9 @@ export const tabSet = sva({
       top: 'spacing.1',
       bottom: 'spacing.1',
       left: '[0]',
-      bg: 'colour.neutral.20',
+      bg: 'colour.neutral.30',
       transition: 'all',
-      borderRadius: 'radius.075',
+      borderRadius: 'radius.system.layout',
       borderBottomRadius: 'none',
       pointerEvents: 'none',
 
@@ -72,7 +68,7 @@ export const tabSet = sva({
         left: 'spacing.0',
         right: 'spacing.0',
         height: '[2px]',
-        bg: 'colour.primary.text',
+        bg: 'colour.neutral.90',
         transition: 'all',
         zIndex: '[2]',
       },
@@ -82,9 +78,9 @@ export const tabSet = sva({
       top: 'spacing.1',
       bottom: 'spacing.1',
       left: '[0]',
-      bg: 'colour.primary.surfaceHover',
+      bg: 'colour.neutral.20',
       transition: 'all',
-      borderRadius: 'radius.075',
+      borderRadius: 'radius.system.layout',
       borderBottomRadius: 'none',
       pointerEvents: 'none',
     },
@@ -116,7 +112,7 @@ export const tabSet = sva({
     overflowEnd: {
       true: {
         overflowEndIndicator: {
-          layerStyle: 'elevation.overflow',
+          layerStyle: 'overflow',
           position: 'absolute',
           top: 'spacing.0',
           bottom: 'spacing.1',
@@ -130,7 +126,7 @@ export const tabSet = sva({
     overflowStart: {
       true: {
         overflowStartIndicator: {
-          layerStyle: 'elevation.overflow',
+          layerStyle: 'overflow',
           position: 'absolute',
           top: 'spacing.0',
           bottom: 'spacing.1',

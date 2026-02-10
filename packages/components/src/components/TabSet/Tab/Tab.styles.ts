@@ -12,15 +12,12 @@ export const tab = cva({
     py: 'spacing.3',
     textOverflow: 'ellipsis',
     textDecoration: 'none',
-    textStyle: 'typography.body.md',
+    textStyle: 'typography.body.md.medium',
     transition: 'all',
     whiteSpace: 'nowrap',
     width: '[auto]',
-
-    _focusVisible: {
-      layerStyle: 'elevation.focus',
-      outline: '[none]',
-    },
+    borderRadius: 'radius.system.layout',
+    borderBottomRadius: 'none',
 
     _hover: {
       bg: 'colour.neutral.20',
@@ -33,21 +30,18 @@ export const tab = cva({
   variants: {
     active: {
       true: {
-        borderBottomColor: 'colour.primary.text',
-        color: 'colour.primary.text',
-        textStyle: 'typography.body.md.strong',
+        borderBottomColor: 'colour.neutral.90',
+        backgroundColor: 'colour.neutral.30',
+        color: 'colour.neutral.90',
       },
     },
     insideTabSet: {
       true: {
         borderBottomWidth: '0px',
+        backgroundColor: 'transparent',
 
         _hover: {
           bg: '[none]',
-        },
-
-        _focusVisible: {
-          layerStyle: 'elevation.focusCompact',
         },
       },
     },

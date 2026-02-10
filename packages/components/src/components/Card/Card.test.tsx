@@ -78,6 +78,22 @@ describe('IressCard', () => {
         expect(component).toHaveClass(card({ selected: true }).root!);
       });
     });
+
+    describe('noBorder', () => {
+      it('applies noBorder styling when noBorder is true', () => {
+        const screen = renderCard({ noBorder: true });
+        const component = screen.getByTestId(TEST_ID);
+
+        expect(component).toHaveClass(card({ noBorder: true }).root!);
+      });
+
+      it('applies default border styling when noBorder is false', () => {
+        const screen = renderCard({ noBorder: false });
+        const component = screen.getByTestId(TEST_ID);
+
+        expect(component).toHaveClass(card({ noBorder: false }).root!);
+      });
+    });
   });
 
   describe('Card slots', () => {

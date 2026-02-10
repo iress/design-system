@@ -328,9 +328,9 @@ describe('IressTabs', () => {
       });
 
       await waitFor(() => {
-        // Check that overflow indicator divs are rendered by looking for elevation.overflow class
+        // Check that overflow indicator divs are rendered by looking for overflow class
         const indicators = listHolder?.querySelectorAll(
-          'div[class*="elevation.overflow"]',
+          'div[class*="overflow"]',
         );
         expect(indicators?.length).toBeGreaterThan(0);
       });
@@ -359,7 +359,7 @@ describe('IressTabs', () => {
       await waitFor(() => {
         // Overflow indicators should not be present
         const indicators = listHolder?.querySelectorAll(
-          'div[class*="elevation.overflow"]',
+          'div[class*="overflow"]',
         );
         expect(indicators?.length).toBe(0);
       });
@@ -396,7 +396,7 @@ describe('IressTabs', () => {
       // At start: no left indicator, show right indicator
       await waitFor(() => {
         const indicators = listHolder?.querySelectorAll(
-          'div[class*="elevation.overflow"]',
+          'div[class*="overflow"]',
         );
         // Should have one indicator (end) when at the start
         expect(indicators?.length).toBe(1);
@@ -418,7 +418,7 @@ describe('IressTabs', () => {
       // In middle: show both indicators
       await waitFor(() => {
         const indicators = listHolder?.querySelectorAll(
-          'div[class*="elevation.overflow"]',
+          'div[class*="overflow"]',
         );
         expect(indicators?.length).toBe(2);
       });
