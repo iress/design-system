@@ -1,4 +1,6 @@
 import {
+  IressCard,
+  type IressCardProps,
   IressDivider,
   type IressDividerProps,
   IressExpander,
@@ -22,6 +24,7 @@ import {
 import { type ComponentType, createContext } from 'react';
 
 export interface IressStorybookComponentMapping {
+  IressCard: ComponentType<IressCardProps>;
   IressDivider: ComponentType<IressDividerProps>;
   IressExpander: ComponentType<IressExpanderProps>;
   IressInline: ComponentType<IressInlineProps>;
@@ -36,6 +39,7 @@ export interface IressStorybookComponentMapping {
 }
 
 export const COMPONENT_MAPPING_DEFAULT: IressStorybookComponentMapping = {
+  IressCard: IressCard,
   IressDivider: IressDivider,
   IressExpander: IressExpander,
   IressInline: IressInline,

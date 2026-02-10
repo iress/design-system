@@ -24,17 +24,13 @@ export const DiffViewer = ({
   splitView = false,
   ...restProps
 }: DiffViewerProps) => {
-  const { IressPanel, IressStack, IressTab, IressTabSet } = use(
+  const { IressCard, IressStack, IressTab, IressTabSet } = use(
     IressStorybookContext,
   );
   const [mode, setMode] = useState<DiffViewerMode>('diff');
 
   return (
-    <IressPanel
-      className="sbdocs-diff-viewer"
-      borderRadius="none"
-      layerStyle="elevation.raised"
-    >
+    <IressCard className="sbdocs-diff-viewer" borderRadius="radius.1">
       <IressStack gap="md">
         {allowModeChange && (
           <IressTabSet
@@ -60,6 +56,6 @@ export const DiffViewer = ({
           extraLinesSurroundingDiff={extraLinesSurroundingDiff}
         />
       </IressStack>
-    </IressPanel>
+    </IressCard>
   );
 };
