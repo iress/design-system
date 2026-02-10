@@ -1,5 +1,5 @@
 import {
-  IressBadge,
+  IressPill,
   IressTable,
   IressTableFormattedValue,
   type IressTableProps,
@@ -8,9 +8,9 @@ import {
 type Props = Partial<IressTableProps<object, never>>;
 
 const renderColumn = (value: number) => (
-  <IressBadge mode={value > 30000 ? 'success' : 'danger'}>
+  <IressPill mode={value > 30000 ? '70' : '10'}>
     <IressTableFormattedValue value={value} format="currency" />
-  </IressBadge>
+  </IressPill>
 );
 
 export const TableSorting = (args: Props) => (

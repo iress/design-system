@@ -8,11 +8,11 @@ import {
 import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 import { IressText } from '../Text';
 import { IressIcon } from '../Icon';
-import { IressBadge } from '../Badge';
 import { IressInline } from '../Inline';
 import { IressStack } from '../Stack';
 import { RoutingButton } from './mocks/RoutingButton';
 import RoutingButtonSource from './mocks/RoutingButton.tsx?raw';
+import { IressPill } from '@/main';
 
 type ButtonStory = StoryObj<IressButtonProps>;
 type AnchorStory = StoryObj<IressButtonProps<undefined, string>>;
@@ -252,13 +252,6 @@ export const Slots: ButtonStory = {
         <IressButton {...args} prepend={<IressIcon name="home" />}>
           Prepend icon
         </IressButton>
-
-        <IressButton
-          {...args}
-          prepend={<IressBadge mode="info">New</IressBadge>}
-        >
-          Prepend badge
-        </IressButton>
       </IressInline>
 
       <IressInline gap="md">
@@ -266,11 +259,8 @@ export const Slots: ButtonStory = {
           Append icon
         </IressButton>
 
-        <IressButton
-          {...args}
-          append={<IressBadge mode="info">+999</IressBadge>}
-        >
-          Append badge
+        <IressButton {...args} append={<IressPill>+999</IressPill>}>
+          Append pill
         </IressButton>
       </IressInline>
 

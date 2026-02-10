@@ -1,7 +1,6 @@
 import {
   IressButton,
   type IressButtonProps,
-  IressIcon,
   IressInline,
   IressTag,
   type IressTagProps,
@@ -32,8 +31,8 @@ export const TagDeletion = () => {
           {tag}
         </IressTag>
       ))}
-      <IressButton onClick={handleAdd}>
-        <IressIcon name="plus" />
+      <IressButton onClick={handleAdd} icon="add" mode="muted">
+        Add tag
       </IressButton>
     </IressInline>
   );

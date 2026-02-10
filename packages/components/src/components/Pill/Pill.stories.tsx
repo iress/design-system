@@ -5,40 +5,25 @@ import {
   reactNodeArgType,
   stylingProps,
 } from '@theme-preset/storybookHelpers';
-import { STATUSES } from '@/constants';
-import { IressBadge, IressInline } from '@/main';
+import { IressPill, IressInline } from '@/main';
 
-type Story = StoryObj<typeof IressBadge>;
-const BADGE_MODES = [
-  'primary',
-  ...STATUSES,
-  'neutral',
-  10,
-  20,
-  30,
-  40,
-  50,
-  60,
-  70,
-  80,
-  90,
-] as const;
+type Story = StoryObj<typeof IressPill>;
+const BADGE_MODES = [10, 20, 30, 40, 50, 60, 70, 80, 90] as const;
 
 export default {
-  title: 'Components/Badge',
-  component: IressBadge,
+  title: 'Components/Pill',
+  component: IressPill,
   tags: ['updated'],
   argTypes: {
     children: reactNodeArgType,
     host: reactElementArgType,
     ...stylingProps,
   },
-} as Meta<typeof IressBadge>;
+} as Meta<typeof IressPill>;
 
 export const Default: Story = {
   args: {
-    children: 'badge',
-    mode: 'neutral',
+    children: 'Label',
   },
 };
 
@@ -50,20 +35,10 @@ export const Mode: Story = {
   render: (args) => (
     <IressInline gap="sm">
       {BADGE_MODES.map((mode) => (
-        <IressBadge {...args} key={mode} mode={mode}>
+        <IressPill {...args} key={mode} mode={mode}>
           {mode}
-        </IressBadge>
+        </IressPill>
       ))}
     </IressInline>
   ),
-};
-
-export const Pill: Story = {
-  ...Default,
-  args: {
-    ...Default.args,
-    children: '99+',
-    mode: 'primary',
-    pill: true,
-  },
 };

@@ -9,10 +9,13 @@ import { IressPanel } from '../Panel';
 import {
   withCustomSource,
   withJsxTransformer,
+  disableArgTypes,
 } from '@iress-oss/ids-storybook-config';
 import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { IressInline } from '@/main';
 
 type Story = StoryObj<typeof IressTag>;
+const BADGE_MODES = [10, 20, 30, 40, 50, 60, 70, 80, 90] as const;
 
 export default {
   title: 'Components/Tag',
@@ -25,10 +28,26 @@ export default {
   },
 } as Meta<typeof IressTag>;
 
-export const Tag: Story = {
+export const Default: Story = {
   args: {
-    children: 'Tag',
+    children: 'Label',
   },
+};
+
+export const Mode: Story = {
+  ...Default,
+  argTypes: {
+    ...disableArgTypes(['mode']),
+  },
+  render: (args) => (
+    <IressInline gap="sm">
+      {BADGE_MODES.map((mode) => (
+        <IressTag {...args} key={mode} mode={mode}>
+          {mode}
+        </IressTag>
+      ))}
+    </IressInline>
+  ),
 };
 
 export const ClickableTag: Story = {
@@ -54,7 +73,7 @@ export const DeletingTags: Story = {
 
 export const CustomButton: Story = {
   args: {
-    ...Tag.args,
+    ...Default.args,
     deleteButton: (
       <IressPopover
         activator={

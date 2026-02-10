@@ -1,4 +1,4 @@
-import { IressIcon, IressBadge, IressText, IressMenuHeading } from '@/main';
+import { IressIcon, IressText, IressMenuHeading, IressPill } from '@/main';
 import { IressMenuDivider } from '../MenuDivider/MenuDivider';
 import { IressMenuItem } from '../MenuItem/MenuItem';
 
@@ -154,7 +154,7 @@ export const MENU_CHILDREN_OPTIONS = {
     </IressMenuItem>,
     <IressMenuItem
       href="https://google.com"
-      append={<IressBadge mode="warning">8+</IressBadge>}
+      append={<IressPill>8+</IressPill>}
       key={5}
     >
       Visit Google

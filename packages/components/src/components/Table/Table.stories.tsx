@@ -1,6 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTable } from '.';
-import { IressBadge } from '../Badge';
 import { IressButton } from '../Button';
 import { TableCustomColumns } from './mocks/TableCustomColumns';
 import TableCustomColumnsSource from './mocks/TableCustomColumns.tsx?raw';
@@ -18,6 +17,7 @@ import {
   mergeStorybookConfig,
 } from '@iress-oss/ids-storybook-config';
 import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { IressPill } from '../Pill';
 
 type Story = StoryObj<typeof IressTable>;
 
@@ -231,19 +231,19 @@ export const RichRows: Story = {
         ),
         cost: '$23,898',
         investmentDate: '2019/09/23',
-        totalPercentage: <IressBadge mode="info">24.8%</IressBadge>,
+        totalPercentage: <IressPill mode="20">24.8%</IressPill>,
       },
       {
         investment_name: <IressButton>CASH.CASH</IressButton>,
         cost: '$49,751.40',
         investmentDate: '2020/06/28',
-        totalPercentage: <IressBadge mode="success">49%</IressBadge>,
+        totalPercentage: <IressPill mode="30">49%</IressPill>,
       },
       {
         investment_name: <IressButton>VODAFONE GRP</IressButton>,
         cost: '$26,382.46',
         investmentDate: '2019/02/05',
-        totalPercentage: <IressBadge mode="info">26.2%</IressBadge>,
+        totalPercentage: <IressPill mode="40">26.2%</IressPill>,
       },
     ],
   },

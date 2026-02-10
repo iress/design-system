@@ -1,10 +1,8 @@
-import { IressBadge, IressTable, type IressTableProps } from '@/main';
+import { IressPill, IressTable, type IressTableProps } from '@/main';
 
 type Props = Partial<IressTableProps<object, never>>;
 
-const renderColumn = (value: string) => (
-  <IressBadge mode="info">{value}</IressBadge>
-);
+const renderColumn = (value: string) => <IressPill>{value}</IressPill>;
 
 // https://blog.devgenius.io/javascript-date-subtract-seconds-83b3285b7959
 const subtractSeconds = (date: Date, seconds: number) => {

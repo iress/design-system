@@ -37,6 +37,31 @@ interface TagBaseProps {
   deleteButtonText?: string;
 
   /**
+   * Style of the tag, based on the data colour palette.
+   * Can be a number (10-90) or a string ('10'-'90').
+   * @default '90'
+   */
+  mode?:
+    | 10
+    | 20
+    | 30
+    | 40
+    | 50
+    | 60
+    | 70
+    | 80
+    | 90
+    | '10'
+    | '20'
+    | '30'
+    | '40'
+    | '50'
+    | '60'
+    | '70'
+    | '80'
+    | '90';
+
+  /**
    * Callback triggered when the tag is deleted
    */
   onDelete?: (children: string, e: SyntheticEvent<HTMLButtonElement>) => void;
@@ -76,6 +101,7 @@ const Tag = ({
   'data-testid': dataTestId,
   deleteButton,
   deleteButtonText = 'Delete',
+  mode,
   onClick,
   onDelete,
   onDeleteButtonBlur,
@@ -86,11 +112,13 @@ const Tag = ({
     customDeleteButton: !!deleteButton,
     clickable: !!onClick,
     compact,
+    mode: mode as Extract<TagBaseProps['mode'], string>,
   });
   const styles = tag.raw({
     customDeleteButton: !!deleteButton,
     clickable: !!onClick,
     compact,
+    mode: mode as Extract<TagBaseProps['mode'], string>,
   });
   const showDelete = Boolean(onDelete ?? deleteButton);
 

@@ -15,10 +15,11 @@ interface RadiusSchema extends IressDesignTokenGroup {
   4: IressDesignToken;
 
   system: IressDesignTokenGroup & {
-    badge: IressDesignToken<CompositeValue['radius']>;
     button: IressDesignToken<CompositeValue['radius']>;
     form: IressDesignToken<CompositeValue['radius']>;
     layout: IressDesignToken<CompositeValue['radius']>;
+    pill: IressDesignToken<CompositeValue['radius']>;
+    tag: IressDesignToken<CompositeValue['radius']>;
   };
 }
 
@@ -76,20 +77,6 @@ const radius = {
   system: {
     $description:
       'Some components have a default radius to better align to a brand. By default they inherit from the base radius, for some brands you may need to customise this to further emphasise their identity.',
-    badge: {
-      $description:
-        'Applies to badges and tags (that have not been designated to be a circle).',
-      $type: Type.Radius,
-      $value: {
-        topLeft: `{radius.1 || ${baseRadius}}`,
-        topRight: `{radius.1 || ${baseRadius}}`,
-        bottomRight: `{radius.1 || ${baseRadius}}`,
-        bottomLeft: `{radius.1 || ${baseRadius}}`,
-      },
-      $extensions: {
-        'styler.panel': 'radius.system',
-      },
-    },
     button: {
       $description:
         'Applies to buttons and other interactive elements such as the hover state of links.',
@@ -125,6 +112,32 @@ const radius = {
         topRight: `{radius.3 || calc(3 * ${baseRadius})}`,
         bottomRight: `{radius.3 || calc(3 * ${baseRadius})}`,
         bottomLeft: `{radius.3 || calc(3 * ${baseRadius})}`,
+      },
+      $extensions: {
+        'styler.panel': 'radius.system',
+      },
+    },
+    pill: {
+      $description: 'Applies to pills.',
+      $type: Type.Radius,
+      $value: {
+        topLeft: `{radius.4 || calc(4 * ${baseRadius})}`,
+        topRight: `{radius.4 || calc(4 * ${baseRadius})}`,
+        bottomRight: `{radius.4 || calc(4 * ${baseRadius})}`,
+        bottomLeft: `{radius.4 || calc(4 * ${baseRadius})}`,
+      },
+      $extensions: {
+        'styler.panel': 'radius.system',
+      },
+    },
+    tag: {
+      $description: 'Applies to tags.',
+      $type: Type.Radius,
+      $value: {
+        topLeft: `{radius.1 || ${baseRadius}}`,
+        topRight: `{radius.1 || ${baseRadius}}`,
+        bottomRight: `{radius.1 || ${baseRadius}}`,
+        bottomLeft: `{radius.1 || ${baseRadius}}`,
       },
       $extensions: {
         'styler.panel': 'radius.system',

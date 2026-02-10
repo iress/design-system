@@ -10,7 +10,6 @@ export enum GlobalCSSClass {
   // Since the move to utility first CSS, these classes are mainly used for targeting in custom styling and easier debugging.
   Alert = 'ids-alert',
   Autocomplete = 'ids-autocomplete',
-  Badge = 'ids-badge',
   Button = 'ids-button',
   ButtonGroup = 'ids-button-group',
   Card = 'ids-card',
@@ -43,6 +42,7 @@ export enum GlobalCSSClass {
   Modal = 'ids-modal',
   ModalBackdrop = 'ids-modal__backdrop',
   Panel = 'ids-panel',
+  Pill = 'ids-pill',
   Placeholder = 'ids-placeholder',
   Popover = 'ids-popover',
   PopoverContent = 'ids-popover__content',

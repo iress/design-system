@@ -82,7 +82,7 @@ export const expander = sva({
           textDecoration: 'underline',
 
           _before: {
-            borderRadius: 'radius.system.badge',
+            borderRadius: 'radius.system.button',
           },
 
           _hover: {

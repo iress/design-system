@@ -3,7 +3,6 @@ import './styled-system/styles.css';
 /* Generator: React components */
 export * from './components/Alert';
 export * from './components/Autocomplete';
-export * from './components/Badge';
 export * from './components/Button';
 export * from './components/ButtonGroup';
 export * from './components/Card';
@@ -26,6 +25,7 @@ export * from './components/Link';
 export * from './components/Menu';
 export * from './components/Modal';
 export * from './components/Panel';
+export * from './components/Pill';
 export * from './components/Placeholder';
 export * from './components/Popover';
 export * from './components/Progress';

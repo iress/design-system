@@ -9,12 +9,12 @@ import FilterUsingAsyncSource from './mocks/FilterUsingAsync.tsx?raw';
 import { IressText } from '../Text';
 import { IressPanel } from '../Panel';
 import { IressButton } from '../Button';
-import { IressBadge } from '../Badge';
 import {
   disableArgTypes,
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
 import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { IressPill } from '../Pill';
 
 type Story = StoryObj<typeof IressFilter>;
 type SingleFilterStory = StoryObj<IressFilterProps<false>>;
@@ -160,7 +160,7 @@ export const ComplexOptions: Story = {
             Individual
           </IressText>,
         ],
-        append: <IressBadge mode="success">Active</IressBadge>,
+        append: <IressPill mode="70">Active</IressPill>,
       },
       {
         value: 'opt4',
