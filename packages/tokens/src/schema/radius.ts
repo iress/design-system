@@ -121,10 +121,10 @@ const radius = {
       $description: 'Applies to panels, modals and slideouts.',
       $type: Type.Radius,
       $value: {
-        topLeft: `{radius.3 || calc(${baseRadius} * 3)}`,
-        topRight: `{radius.3 || calc(${baseRadius} * 3)}`,
-        bottomRight: `{radius.3 || calc(${baseRadius} * 3)}`,
-        bottomLeft: `{radius.3 || calc(${baseRadius} * 3)}`,
+        topLeft: `{radius.3 || calc(3 * ${baseRadius})}`,
+        topRight: `{radius.3 || calc(3 * ${baseRadius})}`,
+        bottomRight: `{radius.3 || calc(3 * ${baseRadius})}`,
+        bottomLeft: `{radius.3 || calc(3 * ${baseRadius})}`,
       },
       $extensions: {
         'styler.panel': 'radius.system',
