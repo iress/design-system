@@ -40,7 +40,7 @@ export const checkbox = sva({
       color: '[currentColor]',
       marginInlineEnd: 'spacing.2',
       flexShrink: 0,
-      focusable: 'within',
+      focusable: 'group',
     },
   },
   variants: {
@@ -59,6 +59,9 @@ export const checkbox = sva({
     },
     hiddenControl: {
       true: {
+        input: {
+          focusable: 'label-after',
+        },
         label: {
           position: 'relative',
           padding: 'spacing.0',
@@ -71,7 +74,6 @@ export const checkbox = sva({
           _hover: {
             backgroundColor: 'colour.neutral.20',
           },
-          focusable: 'within',
         },
         labelSpan: {
           display: 'block',

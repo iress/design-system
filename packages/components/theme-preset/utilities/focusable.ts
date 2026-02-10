@@ -85,7 +85,7 @@ export const focusable = defineUtility({
         '&:focus-visible': {
           outline: 'none',
         },
-        '&:focus + label': {
+        '&:focus-visible + label': {
           boxShadow: `0 0 0 1.5px ${cssVars.colour.neutral[10]}, 0 0 0 3.5px ${cssVars.colour.globalInteractions.focusRing}`,
         },
       };
