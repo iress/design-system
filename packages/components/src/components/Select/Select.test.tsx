@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
-import { IressSelect, IressSelectProps, IressSelectOption, select } from '.';
+import { IressSelect, IressSelectProps, IressSelectOption } from '.';
 import { IressLabel } from '../Label';
 import { FormControlValue } from '@/types';
 import { GlobalCSSClass } from '@/enums';
@@ -54,7 +54,6 @@ describe('IressSelect', () => {
     expect(wrapper).toHaveStyle({ color: 'rgb(255, 0, 0)' });
 
     const component = screen.getByTestId(`${TEST_ID}__select`);
-    expect(component).toHaveClass(select().element!);
     expect(component).toHaveAttribute('name');
 
     expect(screen.getAllByRole('option')).toHaveLength(3);

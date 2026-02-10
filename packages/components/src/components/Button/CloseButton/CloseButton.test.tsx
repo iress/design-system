@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { button, IressCloseButton } from '..';
 import { axe } from 'jest-axe';
 import { GlobalCSSClass } from '@/enums';
@@ -17,12 +17,10 @@ describe('IressCloseButton', () => {
   });
 
   it('should render the correct screen reader text on the icon', () => {
-    const { getByRole } = render(
-      <IressCloseButton screenreaderText="Click me" />,
-    );
+    render(<IressCloseButton screenreaderText="Click me" />);
 
-    const icon = getByRole('img');
-    expect(icon).toHaveAttribute('aria-label', 'Click me');
+    const button = screen.getByRole('button', { name: 'Click me' });
+    expect(button).toBeInTheDocument();
   });
 
   it('renders the correct data-testid when set via the data-testid attribute', () => {

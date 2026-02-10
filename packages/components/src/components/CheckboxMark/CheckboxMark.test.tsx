@@ -37,8 +37,8 @@ describe('IressCheckboxMark', () => {
         checked: true,
       });
 
-      const checkedMark = container.querySelector('polyline');
-      expect(checkedMark).toHaveClass(
+      const checkedMarks = container.querySelectorAll('path');
+      expect(checkedMarks?.[1]).toHaveClass(
         checkboxMark({ checked: true }).checkedMark!,
       );
     });

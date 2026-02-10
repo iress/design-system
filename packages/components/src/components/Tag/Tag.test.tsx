@@ -46,12 +46,10 @@ describe('IressTag', () => {
   });
 
   it('should set the correct aria-label on the delete button when you set the deleteButtonText', () => {
-    const { getByRole } = render(
-      <IressTag onDelete={vi.fn()} deleteButtonText="Remove item" />,
-    );
+    render(<IressTag onDelete={vi.fn()} deleteButtonText="Remove item" />);
 
-    const component = getByRole('img');
-    expect(component).toHaveAttribute('aria-label', 'Remove item');
+    const removeButton = screen.getByRole('button', { name: 'Remove item' });
+    expect(removeButton).toBeInTheDocument();
   });
 
   it('should call the onDelete function with the tag text when the delete button is clicked', () => {

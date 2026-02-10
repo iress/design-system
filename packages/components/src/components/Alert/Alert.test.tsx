@@ -7,10 +7,10 @@ import { Statuses } from '@/types';
 import { IressIconProps } from '../Icon';
 
 const ALERT_ICONS: Record<Statuses, IressIconProps['name']> = {
-  danger: 'block',
+  danger: 'cancel',
   info: 'info',
-  success: 'check',
-  warning: 'warning',
+  success: 'check_circle',
+  warning: 'error',
 };
 
 describe('IressAlert', () => {

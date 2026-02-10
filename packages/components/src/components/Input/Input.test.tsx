@@ -82,12 +82,12 @@ describe('IressInput', () => {
   describe('width', () => {
     it('adds the width class to the input when its not a percentage, so its not affected by prepend/append', () => {
       const screen = render(<IressInput width="10" data-testid="test-input" />);
-      const wrapper = screen.getByTestId('test-input');
+      const wrapper = screen.getByTestId('test-input').firstChild;
       const inputElement = screen.getByRole('textbox');
 
       const styles = input({ width: '10' });
-      expect(wrapper).toHaveClass(styles.wrapper ?? '');
-      expect(inputElement).toHaveClass(styles.formControl ?? '');
+      expect(wrapper).toHaveClass(styles.wrapper!);
+      expect(inputElement).toHaveClass(styles.formControl!);
     });
 
     it('adds the width class to the wrapper when its a percentage', () => {
@@ -95,9 +95,9 @@ describe('IressInput', () => {
         <IressInput width="25%" data-testid="test-input" />,
       );
 
-      const wrapper = screen.getByTestId('test-input');
+      const wrapper = screen.getByTestId('test-input').firstChild;
       const styles = input({ width: '25%' });
-      expect(wrapper).toHaveClass(styles.wrapper ?? '');
+      expect(wrapper).toHaveClass(styles.wrapper!);
     });
   });
 
@@ -155,25 +155,25 @@ describe('IressInput', () => {
       const screen = render(
         <IressInput rows={3} autoGrow={5} data-testid="test-input" />,
       );
-      const wrapper = screen.getByTestId('test-input');
+      const wrapper = screen.getByTestId('test-input').firstChild;
       const textarea = screen.container.querySelector('textarea');
 
       expect(textarea).toBeInTheDocument();
       const styles = input({ autoGrow: true, isTextarea: true });
-      expect(wrapper).toHaveClass(styles.wrapper ?? '');
+      expect(wrapper).toHaveClass(styles.wrapper!);
     });
 
     it('should default autoGrow to 5 when set to true', () => {
       const screen = render(
         <IressInput rows={3} autoGrow={true} data-testid="test-input" />,
       );
-      const wrapper = screen.getByTestId('test-input');
+      const wrapper = screen.getByTestId('test-input').firstChild;
       const textarea = screen.container.querySelector('textarea');
 
       expect(textarea).toBeInTheDocument();
       // The component should treat autoGrow=true as autoGrow=5
       const styles = input({ autoGrow: true, isTextarea: true });
-      expect(wrapper).toHaveClass(styles.wrapper ?? '');
+      expect(wrapper).toHaveClass(styles.wrapper!);
     });
   });
 });
