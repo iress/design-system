@@ -18,17 +18,28 @@ const containerSizes = Object.fromEntries(
 
 const inputSizes = {
   ...Object.fromEntries(
-    FORM_ELEMENT_WIDTHS.map((width) => [
-      `input.${width}`,
-      {
-        description: width.includes('%') ? `${width} width` : `1rem * ${width}`,
-        value: width.includes('%')
-          ? width
-          : width === '2'
-            ? `calc(${cssVars.typography.base.size} * ${width} + ${cssVars.typography.base.size})`
-            : `calc(${cssVars.typography.base.size} * ${width})`,
-      },
-    ]),
+    FORM_ELEMENT_WIDTHS.map((width) => {
+      const description = width.includes('%')
+        ? `${width} width`
+        : `1rem * ${width}`;
+
+      let value;
+      if (width.includes('%')) {
+        value = width;
+      } else if (width === '2') {
+        value = `calc(${cssVars.typography.base.size} * ${width} + ${cssVars.typography.base.size})`;
+      } else {
+        value = `calc(${cssVars.typography.base.size} * ${width})`;
+      }
+
+      return [
+        `input.${width}`,
+        {
+          description,
+          value,
+        },
+      ];
+    }),
   ),
   'input.height': {
     description: 'input height based on typography size',
