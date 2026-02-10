@@ -28,10 +28,15 @@ export const alert = sva({
     },
     wrapper: {
       display: 'flex',
-      flexDirection: 'row',
+      flexDirection: 'column',
       gap: 'spacing.1',
       flex: '1',
       noGutter: true,
+
+      md: {
+        flexDirection: 'row',
+        flexWrap: 'nowrap',
+      },
     },
     heading: {
       display: 'inline-block',
@@ -50,7 +55,12 @@ export const alert = sva({
       '& > p': { marginBlock: 'spacing.0' },
     },
     footer: {
-      ml: 'auto',
+      pt: 'spacing.1',
+
+      md: {
+        pt: 'spacing.0',
+        ml: 'auto',
+      },
     },
     footerActions: {
       display: 'flex',
@@ -82,12 +92,15 @@ export const alert = sva({
     multiLine: {
       true: {
         wrapper: {
-          flexDirection: 'column',
-          gap: 'spacing.1',
+          md: {
+            flexDirection: 'column',
+          },
         },
         footer: {
-          pt: 'spacing.1',
-          ml: 'spacing.0',
+          md: {
+            pt: 'spacing.1',
+            ml: 'spacing.0',
+          },
         },
         action: {
           textStyle: 'typography.body.md.medium',
