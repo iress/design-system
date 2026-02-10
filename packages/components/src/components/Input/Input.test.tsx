@@ -176,4 +176,74 @@ describe('IressInput', () => {
       expect(wrapper).toHaveClass(styles.wrapper!);
     });
   });
+
+  describe('actions', () => {
+    it('should render action buttons when provided', () => {
+      const screen = render(
+        <IressInput
+          data-testid="test-input"
+          actions={[
+            { children: 'Action 1', onClick: vi.fn() },
+            { children: 'Action 2', onClick: vi.fn() },
+          ]}
+        />,
+      );
+
+      expect(screen.getByText('Action 1')).toBeInTheDocument();
+      expect(screen.getByText('Action 2')).toBeInTheDocument();
+    });
+
+    it('should call onClick handler when action button is clicked', async () => {
+      const handleAction1 = vi.fn();
+      const handleAction2 = vi.fn();
+
+      const screen = render(
+        <IressInput
+          data-testid="test-input"
+          actions={[
+            { children: 'Action 1', onClick: handleAction1 },
+            { children: 'Action 2', onClick: handleAction2 },
+          ]}
+        />,
+      );
+
+      const action1Button = screen.getByText('Action 1');
+      const action2Button = screen.getByText('Action 2');
+
+      await userEvent.click(action1Button);
+      expect(handleAction1).toHaveBeenCalledTimes(1);
+      expect(handleAction2).not.toHaveBeenCalled();
+
+      await userEvent.click(action2Button);
+      expect(handleAction2).toHaveBeenCalledTimes(1);
+      expect(handleAction1).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not render action buttons when actions is not provided', () => {
+      const screen = render(<IressInput data-testid="test-input" />);
+
+      // Should only have the input, no action buttons
+      const buttons = screen.queryAllByRole('button');
+      expect(buttons).toHaveLength(0);
+    });
+
+    it('should render actions with custom button props', () => {
+      const screen = render(
+        <IressInput
+          data-testid="test-input"
+          actions={[
+            {
+              children: 'Custom Action',
+              onClick: vi.fn(),
+              'aria-label': 'Custom action button',
+            },
+          ]}
+        />,
+      );
+
+      const actionButton = screen.getByLabelText('Custom action button');
+      expect(actionButton).toBeInTheDocument();
+      expect(actionButton).toHaveTextContent('Custom Action');
+    });
+  });
 });
