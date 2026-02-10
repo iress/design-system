@@ -1710,7 +1710,7 @@ __metadata:
     rimraf: "npm:^6.1.2"
     rollup-plugin-tree-shakeable: "npm:^2.0.0"
     storybook: "npm:10.1.11"
-    style-dictionary: "npm:^5.1.4"
+    style-dictionary: "npm:^5.2.0"
     tsx: "npm:^4.21.0"
     typescript: "npm:^5.9.3"
     vite: "npm:7.3.1"
@@ -14197,9 +14197,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-dictionary@npm:^5.1.4":
-  version: 5.1.4
-  resolution: "style-dictionary@npm:5.1.4"
+"style-dictionary@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "style-dictionary@npm:5.2.0"
   dependencies:
     "@bundled-es-modules/deepmerge": "npm:^4.3.1"
     "@bundled-es-modules/glob": "npm:^11.1.0"
@@ -14215,7 +14215,7 @@ __metadata:
     tinycolor2: "npm:^1.6.0"
   bin:
     style-dictionary: bin/style-dictionary.js
-  checksum: 10c0/71ff560d4786f93a51595bafdfd1f69f95ba782764b3b5e2fcbe085cfe777d8198cd5e2779c96234e8b3b946f2f75e46610a16234967f740aabc8f442f7a10e3
+  checksum: 10c0/67667dcdfa86dce2e368682354440ea4f4a6a03f1459e459e8adc0cef62a5cc6d47903691e22b25ccc1bc76593f64da3b5255977be2bb70bfec0ba2fe568eda2
   languageName: node
   linkType: hard
 
