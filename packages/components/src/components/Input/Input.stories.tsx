@@ -2,7 +2,6 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { capitalizeFirstLetter } from '@helpers/formatting/capitalizeFirstLetter';
 import { IressIcon } from '../Icon';
 import {
-  IressButton,
   IressInput,
   IressStack,
   IressToasterProvider,
@@ -199,29 +198,20 @@ export const Slots: Story = {
   ),
 };
 
-export const ButtonSlots: Story = {
+export const Actions: Story = {
+  args: {
+    actions: [
+      {
+        icon: 'content_copy',
+        children: 'Copy to clipboard',
+        onClick: () => {
+          void navigator.clipboard.writeText('Copied text!');
+        },
+      },
+    ],
+    placeholder: 'Input with action button',
+  },
   argTypes: {},
-  render: ({ placeholder, append, ...args }) => (
-    <IressStack gap="md">
-      <IressInput
-        {...args}
-        append={append ?? <IressIcon name="search" />}
-        placeholder={placeholder ?? 'Append slot'}
-      />
-
-      <IressInput
-        {...args}
-        append={
-          append ?? (
-            <IressButton mode="muted">
-              <IressIcon name="search" />
-            </IressButton>
-          )
-        }
-        placeholder={placeholder ?? 'Append slot button'}
-      />
-    </IressStack>
-  ),
 };
 
 export const ReadOnly: Story = {
@@ -229,6 +219,15 @@ export const ReadOnly: Story = {
   args: {
     ...Default.args,
     readOnly: true,
+    value: 'Value',
+  },
+};
+
+export const Disabled: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    disabled: true,
     value: 'Value',
   },
 };
@@ -281,5 +280,13 @@ export const AutoGrow: TextareaStory = {
     rows: 1,
     autoGrow: true,
     append: <IressIcon name="wand_shine" />,
+  },
+};
+
+export const Variant: Story = {
+  args: {
+    variant: 'search',
+    placeholder: 'Start your search...',
+    prepend: <IressIcon name="search" />,
   },
 };

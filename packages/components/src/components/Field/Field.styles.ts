@@ -6,6 +6,7 @@ export const field = sva({
     'hint',
     'label',
     'footer',
+    'footerIcon',
     'supplementary',
     'element',
     'labelContainer',
@@ -28,6 +29,9 @@ export const field = sva({
     footer: {
       textStyle: 'typography.body.sm.regular',
       mt: 'spacing.1',
+    },
+    footerIcon: {
+      verticalAlign: '-1.5px',
     },
     supplementary: {
       fontSize: 'inherit',
@@ -73,7 +77,7 @@ export const field = sva({
       true: {
         root: {
           _nestedFormElements: {
-            borderColor: 'colour.system.danger.fill',
+            '--iress-border-color': '{colors.colour.system.danger.fill}',
           },
         },
       },

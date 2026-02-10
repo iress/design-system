@@ -1,5 +1,4 @@
 import { IressButton, type IressButtonProps } from '../Button';
-import { IressIcon } from '../../Icon';
 import { forwardRef, type Ref } from 'react';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
@@ -26,12 +25,12 @@ export const IressCloseButton = forwardRef(
   ) => (
     <IressButton
       {...restProps}
+      aria-label={screenreaderText}
       className={cx(className, GlobalCSSClass.CloseButton)}
       mode="muted"
+      icon="close"
       ref={ref}
-    >
-      <IressIcon name="times" screenreaderText={screenreaderText} />
-    </IressButton>
+    />
   ),
 );
 

@@ -3,7 +3,6 @@ import { type StoryObj, type Meta } from '@storybook/react-vite';
 import { IressInput, type IressInputProps } from '../Input';
 import { IressField } from './Field';
 import { IressIcon } from '../Icon';
-import { IressButton } from '../Button';
 import { IressReadonly } from '../Readonly';
 import { IressText } from '../Text';
 import { IressStack } from '../Stack';
@@ -109,12 +108,12 @@ export const ErrorMessage: Story = {
       id: 'name',
       name: 'name',
       required: true,
-      append: (
-        <IressButton
-          mode="muted"
-          prepend={<IressIcon name="eye" screenreaderText="Show" />}
-        ></IressButton>
-      ),
+      actions: [
+        {
+          icon: 'visibility',
+          children: 'Show',
+        },
+      ],
     },
   },
 };

@@ -20,7 +20,7 @@ export const checkbox = sva({
       color: 'colour.primary.fill',
       display: 'flex',
       position: 'relative',
-      textStyle: 'typography.body.md',
+      textStyle: 'typography.body.md.medium',
     },
     input: {
       srOnly: true,
@@ -34,6 +34,7 @@ export const checkbox = sva({
     },
     labelSpan: {
       font: 'inherit',
+      color: 'colour.neutral.90',
     },
     mark: {
       color: '[currentColor]',

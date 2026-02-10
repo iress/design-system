@@ -21,7 +21,7 @@ export const selectLabel = sva({
       color: 'colour.neutral.80',
       cursor: 'pointer',
       transition: 'common',
-      focusable: 'select',
+      focusable: 'rich-select',
     },
     contents: {
       textStyle: 'typography.body.md',

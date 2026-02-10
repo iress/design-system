@@ -24,7 +24,9 @@ const inputSizes = {
         description: width.includes('%') ? `${width} width` : `1rem * ${width}`,
         value: width.includes('%')
           ? width
-          : `calc(${cssVars.typography.base.size} * ${width})`,
+          : width === '2'
+            ? `calc(${cssVars.typography.base.size} * ${width} + ${cssVars.typography.base.size})`
+            : `calc(${cssVars.typography.base.size} * ${width})`,
       },
     ]),
   ),
@@ -66,7 +68,7 @@ const chevronSizes = {
   'chevron.select': {
     description:
       'Used for the chevron when selecting an option in a dropdown or select component.',
-    value: `calc(${cssVars.typography.base.size} * 0.5)`,
+    value: `calc(${cssVars.typography.base.size} * 0.7)`,
   },
   'chevron.table': {
     description: 'Used for the chevron when expanding the child table.',

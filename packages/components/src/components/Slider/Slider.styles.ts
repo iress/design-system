@@ -20,7 +20,7 @@ export const slider = sva({
       appearance: 'none',
       background: 'transparent',
       cursor: 'pointer',
-      borderRadius: 'radius.100',
+      borderRadius: 'radius.4',
       height: 'slider.thumb',
       margin: 'spacing.0',
       width: '[100%]',
@@ -34,7 +34,7 @@ export const slider = sva({
       _mozRangeThumb: {
         appearance: 'none',
         border: '[none]',
-        borderRadius: 'radius.000',
+        borderRadius: 'radius.0',
         sliderThumb: true,
       },
       _webkitSliderRunnableTrack: {
@@ -80,7 +80,7 @@ export const slider = sva({
         height: 'slider.tick',
         width: 'slider.tick',
         backgroundColor: 'colour.neutral.10',
-        borderRadius: 'radius.075',
+        borderRadius: 'radius.3',
         content: '""',
         position: 'absolute',
         top: '[calc(-1 * (({sizes.slider.thumb} - {sizes.slider.track}) / 2) - {sizes.slider.tick} - {spacing.slider.tick})]',

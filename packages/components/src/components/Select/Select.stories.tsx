@@ -1,5 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressSelect, IressSelectOption } from '.';
+import { IressSelect, IressSelectOption, type IressSelectProps } from '.';
 import { IressStack } from '../Stack';
 import { FORM_ELEMENT_WIDTHS } from '@/constants';
 import {
@@ -9,6 +9,7 @@ import {
 import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressSelect>;
+type EditableStory = StoryObj<IressSelectProps<string, undefined>>;
 
 export default {
   title: 'Components/Select',
@@ -146,5 +147,13 @@ export const ReadOnly: Story = {
     ...Options.args,
     value: '2',
     readOnly: true,
+  },
+};
+
+export const Disabled: EditableStory = {
+  args: {
+    children: Options.args?.children,
+    value: '2',
+    disabled: true,
   },
 };

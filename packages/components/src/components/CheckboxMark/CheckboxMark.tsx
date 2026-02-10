@@ -41,20 +41,11 @@ export const IressCheckboxMark = ({
       data-checked={checked ? 'true' : 'false'}
       {...nonStyleProps}
       version="1.1"
-      viewBox="0 0 200 200"
+      viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <line
-        className={css(classes.indeterminateMark)}
-        x1="30"
-        y1="100"
-        x2="170"
-        y2="100"
-      ></line>
-      <polyline
-        className={css(classes.checkedMark)}
-        points="30 95 80 142 170 50"
-      ></polyline>
+      <path d="M5 10H15" className={css(classes.indeterminateMark)} />
+      <path d="M5 10L8.5 13.5L16 6" className={css(classes.checkedMark)} />
     </svg>
   );
 };

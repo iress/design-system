@@ -58,6 +58,8 @@ export const IressStack = <
     [element],
   );
 
+  console.log(restProps);
+
   return (
     <Tag
       {...(restProps as IressStackProps<E>)}

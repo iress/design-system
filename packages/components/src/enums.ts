@@ -30,6 +30,7 @@ export enum GlobalCSSClass {
   Image = 'ids-image',
   Inline = 'ids-inline',
   Input = 'ids-input',
+  InputAddon = 'ids-input__addon',
   InputCurrency = 'ids-input--currency',
   InputPopover = 'ids-popover--input',
   Label = 'ids-label',

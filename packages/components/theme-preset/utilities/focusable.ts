@@ -7,34 +7,45 @@ export const focusable = defineUtility({
     'true',
     'within',
     'has-input',
-    'has-input-compact',
     'has-controller',
     'label-after',
-    'select',
+    'rich-select',
     'slider',
     'has-switch',
+    'group',
   ],
   transform: (value) => {
     if (value === 'has-input') {
       return {
+        background: cssVars.colour.neutral[10],
+        borderColor: `var(--iress-border-color, ${cssVars.colour.neutral[70]})`,
+
+        '&:has(input:disabled, textarea:disabled, select:disabled)': {
+          background: cssVars.colour.neutral[20],
+          cursor: 'not-allowed',
+        },
+        '&:hover:not(:has(input:disabled, textarea:disabled, select:disabled))':
+          {
+            background: `var(--iress-background-hover, ${cssVars.colour.neutral[20]})`,
+            borderColor: cssVars.colour.neutral[70],
+            boxShadow: `var(--iress-shadow-hover, 0 0 0 1px ${cssVars.colour.neutral[70]})`,
+          },
         'input:focus, textarea:focus, select:focus': {
           outline: 'none',
         },
-        '&:has(input:focus, textarea:focus, select:focus)': {
-          boxShadow: `0 0 0 1.5px ${cssVars.colour.neutral[10]}, 0 0 0 3.5px ${cssVars.colour.globalInteractions.focusRing}`,
-        },
-      };
-    }
+        '&:has(input:focus:not(:disabled), textarea:focus:not(:disabled), select:focus:not(:disabled))':
+          {
+            borderColor: `var(--iress-border-color, ${cssVars.colour.neutral[90]})`,
+            boxShadow: `var(--iress-shadow-focus, 0 0 0 1px var(--iress-border-color, ${cssVars.colour.neutral[90]}))`,
 
-    if (value === 'has-input-compact') {
-      return {
-        'input:focus, textarea:focus': {
-          outline: 'none',
-        },
-        '&:has(input:focus, textarea:focus)': {
-          border: 'none',
-          boxShadow: `inset 0 -2px 0 0 ${cssVars.colour.globalInteractions.focusRing}`,
-        },
+            '&:hover': {
+              background: cssVars.colour.neutral[10],
+            },
+
+            '& .ids-input__addon': {
+              color: cssVars.colour.neutral[90],
+            },
+          },
       };
     }
 
@@ -55,6 +66,14 @@ export const focusable = defineUtility({
           outline: 'none',
         },
         '&:has([role="switch"]:focus-visible)': {
+          boxShadow: `0 0 0 1.5px ${cssVars.colour.neutral[10]}, 0 0 0 3.5px ${cssVars.colour.globalInteractions.focusRing}`,
+        },
+      };
+    }
+
+    if (value === 'group') {
+      return {
+        '.group:has(:focus-visible) &': {
           boxShadow: `0 0 0 1.5px ${cssVars.colour.neutral[10]}, 0 0 0 3.5px ${cssVars.colour.globalInteractions.focusRing}`,
         },
       };
@@ -82,12 +101,17 @@ export const focusable = defineUtility({
       };
     }
 
-    if (value === 'select') {
+    if (value === 'rich-select') {
       return {
-        '&:focus-within, &:active': {
+        '&:hover': {
+          backgroundColor: cssVars.colour.neutral[20],
+          boxShadow: `0 0 0 1px ${cssVars.colour.neutral[70]}`,
+        },
+        '&:focus-within, &:active, &[aria-expanded="true"]': {
           backgroundColor: cssVars.colour.neutral[10],
           outline: 'none',
-          boxShadow: `0 0 0 1.5px ${cssVars.colour.neutral[10]}, 0 0 0 3.5px ${cssVars.colour.globalInteractions.focusRing}`,
+          borderColor: `var(--iress-border-color, ${cssVars.colour.neutral[90]})`,
+          boxShadow: `0 0 0 1px var(--iress-border-color, ${cssVars.colour.neutral[90]})`,
         },
       };
     }

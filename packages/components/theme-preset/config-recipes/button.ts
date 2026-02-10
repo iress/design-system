@@ -127,6 +127,13 @@ export const buttonRecipe = defineSlotRecipe({
         },
       },
     },
+    iconOnly: {
+      true: {
+        root: {
+          paddingInline: 'button.iconInline',
+        },
+      },
+    },
     loading: {
       true: {
         root: {
@@ -335,7 +342,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.system.danger.surface}, transparent 60%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.system.danger.surface}, transparent 40%) 0px 0px 0px 3px',
           },
         },
         spinner: {
@@ -357,7 +364,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.system.danger.surface}, transparent 60%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.system.danger.surface}, transparent 40%) 0px 0px 0px 3px',
           },
         },
         spinner: {
@@ -379,7 +386,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.system.danger.surface}, transparent 60%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.system.danger.surface}, transparent 40%) 0px 0px 0px 3px',
           },
         },
         spinner: {
@@ -445,7 +452,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.system.success.surface}, transparent 60%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.system.success.surface}, transparent 40%) 0px 0px 0px 3px',
           },
         },
         spinner: {
@@ -467,7 +474,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.system.success.surface}, transparent 60%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.system.success.surface}, transparent 40%) 0px 0px 0px 3px',
           },
         },
         spinner: {
@@ -489,7 +496,7 @@ export const buttonRecipe = defineSlotRecipe({
 
           _active: {
             boxShadow:
-              'color-mix(in srgb, {colors.colour.system.success.surface}, transparent 60%) 0px 0px 0px 3px',
+              'color-mix(in srgb, {colors.colour.system.success.surface}, transparent 40%) 0px 0px 0px 3px',
           },
         },
         spinner: {

@@ -13,7 +13,7 @@ export const tag = sva({
       color: 'colour.neutral.80',
       display: 'inline-flex',
       gap: 'spacing.1',
-      py: 'xs',
+      py: 'none',
       px: 'sm',
       transition: '[all .2s]',
       textStyle: 'typography.body.md',

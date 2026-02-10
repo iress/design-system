@@ -174,6 +174,7 @@ Icons are loaded lazily from the material-symbols library for optimal performanc
               type="search"
               prepend={<IressIcon name="search" />}
               loading={searching || loading}
+              variant="search"
             />
             <IressInline
               gap="md"

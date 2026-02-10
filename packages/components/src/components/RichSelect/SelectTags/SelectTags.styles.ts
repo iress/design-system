@@ -20,7 +20,7 @@ export const selectTags = sva({
       textAlign: 'left',
       fontWeight: 'normal',
       cursor: 'pointer',
-      focusable: 'select',
+      focusable: 'rich-select',
 
       transition: '[all 0.3s ease]',
 
