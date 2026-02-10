@@ -13,6 +13,7 @@ export const focusable = defineUtility({
     'slider',
     'has-switch',
     'group',
+    'inset',
   ],
   transform: (value) => {
     if (value === 'has-input') {
@@ -112,6 +113,15 @@ export const focusable = defineUtility({
           outline: 'none',
           borderColor: `var(--iress-border-color, ${cssVars.colour.neutral[90]})`,
           boxShadow: `0 0 0 1px var(--iress-border-color, ${cssVars.colour.neutral[90]})`,
+        },
+      };
+    }
+
+    if (value === 'inset') {
+      return {
+        '&:focus-visible': {
+          outline: 'none',
+          boxShadow: `inset 0 -2px 0 0px ${cssVars.colour.globalInteractions.focusRing}`,
         },
       };
     }

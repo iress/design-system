@@ -16,7 +16,8 @@ export const tab = cva({
     transition: 'all',
     whiteSpace: 'nowrap',
     width: '[auto]',
-    focusable: 'true',
+    borderRadius: 'radius.system.layout',
+    borderBottomRadius: 'none',
 
     _hover: {
       bg: 'colour.neutral.20',
@@ -30,12 +31,14 @@ export const tab = cva({
     active: {
       true: {
         borderBottomColor: 'colour.neutral.90',
+        backgroundColor: 'colour.neutral.30',
         color: 'colour.neutral.90',
       },
     },
     insideTabSet: {
       true: {
         borderBottomWidth: '0px',
+        backgroundColor: 'transparent',
 
         _hover: {
           bg: '[none]',

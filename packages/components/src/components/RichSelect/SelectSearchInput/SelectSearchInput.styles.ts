@@ -8,7 +8,6 @@ export const selectSearchInput = sva({
       contain: 'layout style paint',
       zIndex: '[100]',
       overflow: 'hidden',
-      focusable: 'has-input-compact',
 
       '& > div:first-child': {
         borderRadius: 'radius.0',
