@@ -3,9 +3,9 @@ import { Markdown } from '@storybook/addon-docs/blocks';
 import {
   type ColorToken,
   IressBadge,
+  IressCard,
   IressCol,
   IressInline,
-  IressPanel,
   type IressPanelProps,
   IressRow,
   IressStack,
@@ -126,15 +126,14 @@ const ColourSwatch = ({
         setContainer(element.firstElementChild);
       }}
     >
-      <IressPanel
+      <IressCard
         {...panelProps}
         bg={bg}
         color={color}
         style={{
           ...colourStyle,
-          background: get(cssVars, bg),
+          background: get<string>(cssVars, bg),
         }}
-        layerStyle="elevation.raised"
       >
         <IressRow gutter="spacing.7">
           <IressCol span={6}>
@@ -182,7 +181,7 @@ const ColourSwatch = ({
             </IressCol>
           )}
         </IressRow>
-      </IressPanel>
+      </IressCard>
     </div>
   );
 };
