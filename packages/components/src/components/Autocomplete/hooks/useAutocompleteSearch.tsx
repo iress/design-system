@@ -236,10 +236,8 @@ export const useAutocompleteSearch = ({
       searchState.results.length === 0 &&
       debouncedQuery.length >= minSearchLength,
     displayResults: getDisplayResults(),
-    // Backward compatibility
-    results: searchState.results.length
-      ? searchState.results
-      : (initialOptions ?? []),
+    // Backward compatibility - use displayResults to ensure proper handling of search states
+    results: getDisplayResults(),
     startSearch: search,
     stopSearch: searchState.reset,
   };
