@@ -1578,7 +1578,7 @@ describe('IressRichSelect', () => {
       );
     });
 
-    it('does NOT trigger onChange when using setValue directly (regression test for bug)', async () => {
+    it('does not trigger onChange when using setValue directly (demonstrates bug behavior)', async () => {
       const onChange = vi.fn();
       const customRenderOptions: IressRichSelectProps['renderOptions'] = ({
         results,
