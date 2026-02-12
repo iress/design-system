@@ -27,6 +27,7 @@ import {
   IressText,
   IressInline,
   IressMenuText,
+  IressSelectMenu,
 } from '@/main';
 import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 import {
@@ -35,6 +36,7 @@ import {
   mergeStorybookConfig,
   withCustomSource,
 } from '@iress-oss/ids-storybook-config';
+import { useState } from 'react';
 
 type Story = StoryObj<typeof IressRichSelect>;
 
@@ -200,5 +202,71 @@ export const LongTextOptions: Story = {
   render: (args) => <OptionsLongText {...args} />,
   parameters: {
     ...withCustomSource(SelectOptionLongTextSource),
+  },
+};
+
+/**
+ * Bug Reproduction Story for Issue #123
+ *
+ * **Problem**: When using custom `renderOptions`, the parent `onChange` prop is not triggered
+ * when selections are made. This happens because developers call `setValue` directly instead
+ * of using the provided `handleMenuChange` callback.
+ *
+ * **Expected Behavior**: Selecting an option should trigger the `onChange` callback.
+ * **Actual Behavior**: `onChange` is never called, console shows no output.
+ *
+ * **Test Steps**:
+ * 1. Open this story
+ * 2. Click the select to open the dropdown
+ * 3. Click an option
+ * 4. Check the browser console
+ * 5. Notice: No "Selection changed" message appears (BUG!)
+ * 6. The selection appears in the UI (via setValue), but onChange wasn't called
+ */
+export const BugReproduction: Story = {
+  render: () => {
+    const [value, setValue] = useState<
+      (typeof MOCK_LABEL_VALUE_META)[number] | undefined
+    >();
+
+    const customRenderOptions: IressRichSelectProps['renderOptions'] = ({
+      results,
+      setValue: setValueFromProps,
+      value: currentValue,
+    }) => {
+      return (
+        <IressSelectMenu
+          items={results}
+          // BUG: This calls setValue directly, bypassing handleMenuChange
+          // which means onChange is never triggered
+          onChange={setValueFromProps}
+          selected={currentValue}
+        />
+      );
+    };
+
+    return (
+      <div>
+        <IressText element="p" style={{ marginBottom: 'var(--spacing-md)' }}>
+          <strong>Bug Test:</strong> Select an option and check the console.
+          <br />
+          You should see &quot;Selection changed:&quot; logged, but you won&apos;t (BUG!)
+        </IressText>
+        <IressRichSelect
+          options={MOCK_LABEL_VALUE_META}
+          renderOptions={customRenderOptions}
+          value={value}
+          onChange={(_e, newValue) => {
+            // This SHOULD be called but isn't when using custom renderOptions
+            console.log('Selection changed:', newValue);
+            setValue(newValue);
+          }}
+          placeholder="Select an option"
+        />
+        <IressText element="p" style={{ marginTop: 'var(--spacing-md)' }}>
+          Current selection: {value?.label ?? 'None'}
+        </IressText>
+      </div>
+    );
   },
 };

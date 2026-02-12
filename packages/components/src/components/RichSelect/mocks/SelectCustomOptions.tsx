@@ -14,7 +14,7 @@ const CustomOptions: IressRichSelectProps<true>['renderOptions'] = ({
   query,
   results,
   setQuery,
-  setValue,
+  handleMenuChange, // Use handleMenuChange instead of setValue to trigger onChange
   value,
 }) => {
   const valueArray = Array.isArray(value) ? value : [value];
@@ -49,7 +49,10 @@ const CustomOptions: IressRichSelectProps<true>['renderOptions'] = ({
           heading={`Selected (${selected.length})`}
           items={simpleSelected}
           multiSelect
-          onChange={setValue}
+          // CRITICAL: Use handleMenuChange (not setValue) to ensure onChange callback is triggered.
+          // handleMenuChange wraps setValue and calls the parent onChange prop, while setValue only
+          // updates internal state without notifying parent components of selection changes.
+          onChange={handleMenuChange}
           selected={value}
         />
       )}
@@ -60,7 +63,10 @@ const CustomOptions: IressRichSelectProps<true>['renderOptions'] = ({
           items={results}
           multiSelect
           noResults={query ? 'No results found' : undefined}
-          onChange={setValue}
+          // CRITICAL: Use handleMenuChange (not setValue) to ensure onChange callback is triggered.
+          // handleMenuChange wraps setValue and calls the parent onChange prop, while setValue only
+          // updates internal state without notifying parent components of selection changes.
+          onChange={handleMenuChange}
           selected={value}
           hideSelectedItems
         />
