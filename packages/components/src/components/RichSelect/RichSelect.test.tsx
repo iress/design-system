@@ -7,12 +7,17 @@ import {
   mockAsyncSearchLabelValues,
 } from '@/mocks/generateLabelValues';
 import userEvent from '@testing-library/user-event';
-import { IressRichSelect, RichSelectRef } from './RichSelect';
+import {
+  IressRichSelect,
+  RichSelectRef,
+  type IressRichSelectProps,
+} from './RichSelect';
 import { toArray } from '@helpers/formatting/toArray';
 import { button } from '../Button';
 import { menu } from '../Menu';
 import { createRef } from 'react';
 import { IressLabel } from '../Label';
+import { IressSelectMenu } from './SelectMenu/SelectMenu';
 
 describe('IressRichSelect', () => {
   const classes = richSelect();
@@ -1481,6 +1486,132 @@ describe('IressRichSelect', () => {
       expect(highlightedText[1].parentElement).toHaveTextContent(
         'Regular option meta',
       );
+    });
+  });
+
+  describe('custom renderOptions onChange behavior', () => {
+    it('triggers onChange callback when using custom renderOptions with handleMenuChange', async () => {
+      const onChange = vi.fn();
+      const customRenderOptions: IressRichSelectProps['renderOptions'] = ({
+        results,
+        handleMenuChange,
+        value,
+      }) => {
+        return (
+          <IressSelectMenu
+            items={results}
+            // Use handleMenuChange to ensure onChange is triggered
+            onChange={handleMenuChange}
+            selected={value}
+          />
+        );
+      };
+
+      render(
+        <IressRichSelect
+          data-testid="test-component"
+          options={MOCK_LABEL_VALUES}
+          renderOptions={customRenderOptions}
+          onChange={onChange}
+        />,
+      );
+
+      const combobox = screen.getByRole('combobox');
+      await userEvent.click(combobox);
+
+      const options = await screen.findAllByRole('option');
+      await userEvent.click(options[0]);
+
+      // Verify onChange was called with the correct value
+      expect(onChange).toHaveBeenCalledWith(
+        expect.objectContaining({ target: { value: MOCK_LABEL_VALUES[0] } }),
+        MOCK_LABEL_VALUES[0],
+      );
+    });
+
+    it('triggers onChange callback in multiSelect mode with custom renderOptions', async () => {
+      const onChange = vi.fn();
+      const customRenderOptions: IressRichSelectProps<true>['renderOptions'] =
+        ({ results, handleMenuChange, value }) => {
+          return (
+            <IressSelectMenu
+              items={results}
+              multiSelect
+              // Use handleMenuChange to ensure onChange is triggered
+              onChange={handleMenuChange}
+              selected={value}
+            />
+          );
+        };
+
+      render(
+        <IressRichSelect
+          data-testid="test-component"
+          options={MOCK_LABEL_VALUES}
+          renderOptions={customRenderOptions}
+          onChange={onChange}
+          multiSelect
+        />,
+      );
+
+      const combobox = screen.getByRole('combobox');
+      await userEvent.click(combobox);
+
+      const options = await screen.findAllByRole('option');
+      await userEvent.click(options[0]);
+
+      // Verify onChange was called with array of selected values
+      expect(onChange).toHaveBeenCalledWith(
+        expect.objectContaining({ target: { value: [MOCK_LABEL_VALUES[0]] } }),
+        [MOCK_LABEL_VALUES[0]],
+      );
+
+      // Select another option
+      await userEvent.click(options[1]);
+
+      // Verify onChange was called again with both values
+      expect(onChange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: { value: [MOCK_LABEL_VALUES[0], MOCK_LABEL_VALUES[1]] },
+        }),
+        [MOCK_LABEL_VALUES[0], MOCK_LABEL_VALUES[1]],
+      );
+    });
+
+    it('does NOT trigger onChange when using setValue directly (regression test for bug)', async () => {
+      const onChange = vi.fn();
+      const customRenderOptions: IressRichSelectProps['renderOptions'] = ({
+        results,
+        setValue,
+        value,
+      }) => {
+        return (
+          <IressSelectMenu
+            items={results}
+            // Using setValue directly bypasses onChange callback (this is the bug)
+            onChange={setValue}
+            selected={value}
+          />
+        );
+      };
+
+      render(
+        <IressRichSelect
+          data-testid="test-component"
+          options={MOCK_LABEL_VALUES}
+          renderOptions={customRenderOptions}
+          onChange={onChange}
+        />,
+      );
+
+      const combobox = screen.getByRole('combobox');
+      await userEvent.click(combobox);
+
+      const options = await screen.findAllByRole('option');
+      await userEvent.click(options[0]);
+
+      // This demonstrates the bug: onChange is NOT called when using setValue
+      expect(onChange).not.toHaveBeenCalled();
     });
   });
 });
