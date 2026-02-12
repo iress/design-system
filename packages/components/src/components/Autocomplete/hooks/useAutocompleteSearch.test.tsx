@@ -1486,4 +1486,164 @@ describe('useAutocompleteSearch', () => {
       expect(hook.result.current.shouldShowNoResults).toBe(false);
     });
   });
+
+  describe('Bug Fix: initialOptions showing when no search results found', () => {
+    it('should not show initialOptions when search returns no results', async () => {
+      const initialOptions = [
+        { label: 'Apple', value: 'apple' },
+        { label: 'Banana', value: 'banana' },
+        { label: 'Cherry', value: 'cherry' },
+      ];
+
+      const mockSearch = vi.fn();
+      const { promise: searchPromise, resolve: resolveSearch } =
+        createControllablePromise();
+      mockSearch.mockReturnValue(searchPromise);
+
+      const hook = renderAutocompleteSearchHook({
+        initialOptions,
+        options: mockSearch,
+        debounceThreshold: 100,
+      });
+
+      // Initially should show initialOptions
+      expect(hook.result.current.displayResults).toEqual(initialOptions);
+      expect(hook.result.current.results).toEqual(initialOptions);
+      expect(hook.result.current.shouldShowNoResults).toBe(false);
+
+      // User searches for something with no results
+      hook.rerender({
+        ...DEFAULT_PROPS,
+        initialOptions,
+        options: mockSearch,
+        query: 'xyz',
+        debounceThreshold: 100,
+      });
+
+      // Wait for debounced query and loading to start
+      await waitFor(() =>
+        expect(hook.result.current.debouncedQuery).toBe('xyz'),
+      );
+      await waitFor(() => expect(hook.result.current.loading).toBe(true));
+
+      // Search returns no results
+      resolveSearch([]);
+
+      await waitFor(() => expect(hook.result.current.loading).toBe(false));
+
+      // Bug Fix: results and displayResults should be empty (not initialOptions)
+      expect(hook.result.current.displayResults).toEqual([]);
+      expect(hook.result.current.results).toEqual([]);
+      expect(hook.result.current.shouldShowNoResults).toBe(true);
+      expect(mockSearch).toHaveBeenCalledWith('xyz');
+    });
+
+    it('should show search results instead of initialOptions when search succeeds', async () => {
+      const initialOptions = [
+        { label: 'Apple', value: 'apple' },
+        { label: 'Banana', value: 'banana' },
+      ];
+
+      const searchResults = [
+        { label: 'Apricot', value: 'apricot' },
+        { label: 'Avocado', value: 'avocado' },
+      ];
+
+      const mockSearch = vi.fn();
+      const { promise: searchPromise, resolve: resolveSearch } =
+        createControllablePromise();
+      mockSearch.mockReturnValue(searchPromise);
+
+      const hook = renderAutocompleteSearchHook({
+        initialOptions,
+        options: mockSearch,
+        debounceThreshold: 100,
+      });
+
+      // Search for something
+      hook.rerender({
+        ...DEFAULT_PROPS,
+        initialOptions,
+        options: mockSearch,
+        query: 'av',
+        debounceThreshold: 100,
+      });
+
+      await waitFor(() =>
+        expect(hook.result.current.debouncedQuery).toBe('av'),
+      );
+      await waitFor(() => expect(hook.result.current.loading).toBe(true));
+
+      // Search returns results
+      resolveSearch(searchResults);
+
+      await waitFor(() => expect(hook.result.current.loading).toBe(false));
+
+      // Should show search results, not initialOptions
+      // Use arrayContaining and objectContaining because displayResults may have formatted fields
+      expect(hook.result.current.displayResults).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ label: 'Apricot', value: 'apricot' }),
+          expect.objectContaining({ label: 'Avocado', value: 'avocado' }),
+        ]),
+      );
+      expect(hook.result.current.displayResults).toHaveLength(2);
+      expect(hook.result.current.shouldShowNoResults).toBe(false);
+    });
+
+    it('should return to initialOptions when query is cleared after search', async () => {
+      const initialOptions = [
+        { label: 'Apple', value: 'apple' },
+        { label: 'Banana', value: 'banana' },
+      ];
+
+      const mockSearch = vi.fn();
+      const { promise: searchPromise, resolve: resolveSearch } =
+        createControllablePromise();
+      mockSearch.mockReturnValue(searchPromise);
+
+      const hook = renderAutocompleteSearchHook({
+        initialOptions,
+        options: mockSearch,
+        debounceThreshold: 100,
+      });
+
+      // Search for something
+      hook.rerender({
+        ...DEFAULT_PROPS,
+        initialOptions,
+        options: mockSearch,
+        query: 'xyz',
+        debounceThreshold: 100,
+      });
+
+      await waitFor(() =>
+        expect(hook.result.current.debouncedQuery).toBe('xyz'),
+      );
+      await waitFor(() => expect(hook.result.current.loading).toBe(true));
+
+      // Search returns no results
+      resolveSearch([]);
+
+      await waitFor(() => expect(hook.result.current.loading).toBe(false));
+      expect(hook.result.current.displayResults).toEqual([]);
+      expect(hook.result.current.shouldShowNoResults).toBe(true);
+
+      // Clear the query
+      hook.rerender({
+        ...DEFAULT_PROPS,
+        initialOptions,
+        options: mockSearch,
+        query: '',
+        debounceThreshold: 100,
+      });
+
+      await waitFor(() => expect(hook.result.current.debouncedQuery).toBe(''));
+
+      // Should return to showing initialOptions
+      expect(hook.result.current.displayResults).toEqual(initialOptions);
+      expect(hook.result.current.results).toEqual(initialOptions);
+      expect(hook.result.current.shouldShowNoResults).toBe(false);
+    });
+  });
 });
