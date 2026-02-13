@@ -33,12 +33,6 @@ export const selectLabel = sva({
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',
       padding: '[0]',
-      _focus: {
-        outline: '[none]',
-      },
-      _hover: {
-        cursor: 'pointer',
-      },
     },
     placeholder: {
       color: 'colour.neutral.60',

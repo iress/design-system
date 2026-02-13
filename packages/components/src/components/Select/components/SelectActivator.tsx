@@ -46,6 +46,7 @@ interface SelectActivatorProps<TMultiple extends boolean = false>
   extends
     Pick<
       IressSelectProps<TMultiple>,
+      | 'disabled'
       | 'id'
       | 'multiSelect'
       | 'onChange'
@@ -65,6 +66,7 @@ export const SelectActivator = <TMultiple extends boolean = false>({
   append,
   async,
   id,
+  disabled,
   error,
   loading,
   multiSelect,
@@ -81,6 +83,7 @@ export const SelectActivator = <TMultiple extends boolean = false>({
   if (renderLabel) {
     return renderLabel({
       close: () => setShow(false),
+      disabled,
       error,
       loading,
       setValue,
@@ -123,6 +126,7 @@ export const SelectActivator = <TMultiple extends boolean = false>({
     <IressSelectLabel
       append={append}
       id={id}
+      disabled={disabled}
       placeholder={placeholder}
       prepend={prepend}
       role={async ? undefined : 'combobox'}

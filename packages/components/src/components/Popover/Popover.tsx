@@ -200,7 +200,7 @@ const Popover = (
           parentPopover={useContext(FloatingPopoverContext)}
         >
           <PopoverActivator
-            className={classes.activator}
+            className={cx(classes.activator, GlobalCSSClass.PopoverActivator)}
             data-testid={propagateTestid(restProps['data-testid'], 'activator')}
           >
             {activator}

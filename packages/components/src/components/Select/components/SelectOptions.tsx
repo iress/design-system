@@ -106,7 +106,7 @@ const SelectAsyncError = ({ error }: Pick<SelectOptionsProps, 'error'>) => {
   if (!error) return null;
 
   return (
-    <IressAlert className="iress-m--sm" status="danger">
+    <IressAlert status="danger">
       {typeof error === 'string' ? (
         error
       ) : (

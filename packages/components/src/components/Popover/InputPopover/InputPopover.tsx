@@ -103,7 +103,7 @@ const InputPopover = (
           parentPopover={useContext(FloatingPopoverContext)}
         >
           <InputPopoverActivator
-            className={classes.activator}
+            className={cx(classes.activator, GlobalCSSClass.PopoverActivator)}
             data-testid={propagateTestid(restProps['data-testid'], 'activator')}
             minLength={minLength}
           >

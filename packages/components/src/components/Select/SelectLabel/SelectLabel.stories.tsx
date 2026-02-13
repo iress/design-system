@@ -33,3 +33,10 @@ export const MultipleSelected: Story = {
     selected: MOCK_LABEL_VALUE_META,
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    ...OneSelected.args,
+    disabled: true,
+  },
+};

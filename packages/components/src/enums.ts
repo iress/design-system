@@ -45,6 +45,7 @@ export enum GlobalCSSClass {
   Pill = 'ids-pill',
   Placeholder = 'ids-placeholder',
   Popover = 'ids-popover',
+  PopoverActivator = 'ids-popover__activator',
   PopoverContent = 'ids-popover__content',
   Progress = 'ids-progress',
   Radio = 'ids-radio',

@@ -237,6 +237,8 @@ export interface SelectLabelRenderProps<TMultiple extends boolean = false> {
    */
   close: () => void;
 
+  disabled?: boolean;
+
   /**
    * Whether the select has errored, use this to show an error state.
    * Only applies when options are asynchronous.
@@ -338,6 +340,7 @@ const Select = <
   });
 
   const [show, setShow] = useState(false);
+  const showPopover = show && !disabled;
   const [query, setQuery] = useState('');
   const { value, setValue, getValuesString, getLabelsString } = useSelectState({
     component: 'IressSelect',
@@ -508,6 +511,16 @@ const Select = <
 
   return (
     <>
+      <SelectHiddenInput
+        data-testid={restProps['data-testid']}
+        getValuesString={getValuesString}
+        name={name}
+        renderHiddenInput={renderHiddenInput}
+        required={required}
+        value={value as SelectValue<TMultiple, false>}
+        disabled={disabled}
+        ref={hiddenInputRef}
+      />
       <IressPopover
         {...(restProps as Omit<
           IressSelectProps<TMultiple, false>,
@@ -517,6 +530,7 @@ const Select = <
           <SelectActivator
             append={append}
             async={isAsync}
+            disabled={disabled}
             error={error}
             id={id}
             loading={loading}
@@ -539,7 +553,7 @@ const Select = <
         onActivated={handlePopoverActivated}
         onDeactivated={handlePopoverDeactivated}
         ref={popoverRef}
-        show={show}
+        show={showPopover}
         type={type}
         virtualFocus={virtualFocus}
         onBlur={handleBlur}
@@ -564,21 +578,12 @@ const Select = <
             setValue={setValue}
             shouldShowInstructions={shouldShowInstructions}
             shouldShowNoResults={shouldShowNoResults}
-            show={show}
+            show={showPopover}
             value={value as SelectValue<TMultiple, false>}
           />
           {footer}
         </div>
       </IressPopover>
-      <SelectHiddenInput
-        data-testid={restProps['data-testid']}
-        getValuesString={getValuesString}
-        name={name}
-        renderHiddenInput={renderHiddenInput}
-        required={required}
-        value={value as SelectValue<TMultiple, false>}
-        ref={hiddenInputRef}
-      />
     </>
   );
 };

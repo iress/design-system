@@ -209,3 +209,11 @@ export const Native: Story = {
     native: 'md',
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    ...SingleSelect.args,
+    defaultValue: MOCK_LABEL_VALUE_META[0],
+    disabled: true,
+  },
+};

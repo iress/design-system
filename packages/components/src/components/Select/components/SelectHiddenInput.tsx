@@ -12,6 +12,8 @@ export interface SelectHiddenInputRenderProps<
    */
   getValuesString: () => string;
 
+  disabled?: boolean;
+
   /**
    * Selected items.
    */
@@ -37,6 +39,7 @@ type SelectHiddenInputProps<TMultiple extends boolean = false> = Pick<
 const Component = <TMultiple extends boolean = false>(
   {
     'data-testid': dataTestId,
+    disabled,
     getValuesString,
     name,
     renderHiddenInput,
@@ -62,6 +65,7 @@ const Component = <TMultiple extends boolean = false>(
       value={getValuesString()}
       ref={ref}
       required={required}
+      disabled={disabled}
     />
   );
 };

@@ -112,6 +112,17 @@ export const focusable = defineUtility({
           borderColor: `var(--iress-border-color, ${cssVars.colour.neutral[90]})`,
           boxShadow: `0 0 0 1px var(--iress-border-color, ${cssVars.colour.neutral[90]})`,
         },
+        '&:disabled, &[aria-disabled="true"]': {
+          backgroundColor: cssVars.colour.neutral[30],
+          color: cssVars.colour.neutral[60],
+          '--iress-chevron-color': cssVars.colour.neutral[60],
+          cursor: 'not-allowed',
+
+          '&:focus-within, &:active, &[aria-expanded="true"]': {
+            borderColor: 'unset',
+            boxShadow: 'none',
+          },
+        },
       };
     }
 
