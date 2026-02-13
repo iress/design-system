@@ -34,7 +34,7 @@ export * from './components/Radio';
 export * from './components/RadioMark';
 export * from './components/RadioGroup';
 export * from './components/Readonly';
-export * from './components/RichSelect';
+export * from './components/Select';
 export * from './components/Row';
 export * from './components/Select';
 export * from './components/Skeleton';

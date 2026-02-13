@@ -102,7 +102,7 @@ export interface FloatingPopoverHookReturn extends PopoverAriaHookReturn {
 
   /**
    * If controlled, this will return true, meaning the popover is controlled by the parent component and will not change its state on its own.
-   * It is used by components such as `IressRichSelect` to manage the state of the popover using other methods.
+   * It is used by components such as `IressSelect` to manage the state of the popover using other methods.
    */
   isControlled: boolean;
 
@@ -154,7 +154,7 @@ export interface FloatingPopoverHookReturn extends PopoverAriaHookReturn {
 
   /**
    * This function is used to set the virtual focus of the popover.
-   * It is used by components such as `IressRichSelect` with searchable options to manage the focus state of the items in the popover.
+   * It is used by components such as `IressSelect` with searchable options to manage the focus state of the items in the popover.
    */
   setVirtualFocus?: (node: PopoverVirtualNode | null) => void;
 

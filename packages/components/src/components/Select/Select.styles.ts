@@ -1,143 +1,101 @@
 import { sva } from '@/styled-system/css';
 
-const slots = ['wrapper', 'control', 'element'] as const;
-
-/**
- * The atomic recipe is a function that takes a variant and returns a class name object. It can be used to create a component without JSX (eg. as a utility class).
- *
- * [Learn more](https://panda-css.com/docs/concepts/recipes#atomic-recipe-or-cva)
- */
 export const select = sva({
-  slots,
+  slots: [
+    'root',
+    'popoverContent',
+    'dropdownSelectedHeading',
+    'dropdownClear',
+    'wrapper',
+  ],
   base: {
-    wrapper: {
-      // Performance: CSS containment limits style recalculation scope
-      contain: 'layout style',
+    root: {
+      // Performance: CSS containment (no paint to allow focus ring/shadow)
+      contain: 'style',
       display: 'block',
-      position: 'relative',
-      lineHeight: 1,
-      focusable: 'has-input',
     },
-    control: {
-      position: 'relative',
-      selectChevron: true,
-      color: 'colour.neutral.90',
-
-      '&:has(:disabled)': {
-        color: 'colour.neutral.60',
-      },
+    popoverContent: {
+      minWidth: '[fit-content]',
+      maxHeight: '[30rem]',
+      overflowY: 'auto',
     },
-    element: {
-      textStyle: 'typography.body.md',
-      display: 'block',
+    dropdownSelectedHeading: {
       width: '[100%]',
-      height: '[calc({sizes.input.height} - 2px)]',
-      paddingInline: 'spacing.2',
-      appearance: 'none',
-      border: '[0]',
-      bg: 'transparent',
-
-      _focus: {
-        outline: '[none]',
-      },
-
-      '& option, & optgroup': {
-        color: 'colour.neutral.80',
-      },
+    },
+    dropdownClear: {
+      paddingX: 'spacing.2',
+      paddingY: 'spacing.1',
+      minHeight: '[0px]',
+      boxShadow: '[none]',
+    },
+    wrapper: {
+      width: '[100%]',
+      display: 'flex',
+      flexDirection: 'column',
     },
   },
   variants: {
     width: {
       '2': {
-        wrapper: {
+        root: {
           width:
             '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.2})]',
         },
-        element: {
-          width: 'auto',
-        },
       },
       '4': {
-        wrapper: {
+        root: {
           width:
             '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.4})]',
         },
-        element: {
-          width: 'auto',
-        },
       },
       '6': {
-        wrapper: {
+        root: {
           width:
             '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.6})]',
         },
-        element: {
-          width: 'auto',
-        },
       },
       '8': {
-        wrapper: {
+        root: {
           width:
             '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.8})]',
         },
-        element: {
-          width: 'auto',
-        },
       },
       '10': {
-        wrapper: {
+        root: {
           width:
             '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.10})]',
         },
-        element: {
-          width: 'auto',
-        },
       },
       '12': {
-        wrapper: {
+        root: {
           width:
             '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.12})]',
         },
       },
       '16': {
-        wrapper: {
+        root: {
           width:
             '[calc({spacing.spacing.2} + calc({sizes.chevron.select} * 2) + {sizes.input.16})]',
         },
-        element: {
-          width: 'auto',
-        },
       },
       '25%': {
-        wrapper: {
+        root: {
           width: 'input.25%',
-        },
-        element: {
-          width: 'auto',
         },
       },
       '50%': {
-        wrapper: {
+        root: {
           width: 'input.50%',
-        },
-        element: {
-          width: 'auto',
         },
       },
       '75%': {
-        wrapper: {
+        root: {
           width: 'input.75%',
-        },
-        element: {
-          width: 'auto',
         },
       },
       '100%': {
-        wrapper: {
+        root: {
           width: 'input.100%',
-        },
-        element: {
-          width: 'auto',
         },
       },
     },

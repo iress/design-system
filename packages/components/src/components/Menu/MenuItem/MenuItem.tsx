@@ -395,8 +395,8 @@ const MenuItem = <
       return <IressIcon name="keyboard_arrow_right" />;
     }
 
-    return prependProp;
-  }, [menu?.variant, prependProp]);
+    return appendProp;
+  }, [menu?.variant, appendProp]);
 
   const [styleProps, nonStyleProps] = useMemo(
     () => splitCssProps(restProps),

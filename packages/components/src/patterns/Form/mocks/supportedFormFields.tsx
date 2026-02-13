@@ -2,7 +2,6 @@ import {
   IressFormField,
   IressInput,
   IressSelect,
-  IressRichSelect,
   IressIcon,
   IressCheckboxGroup,
   IressCheckbox,
@@ -56,41 +55,13 @@ export const SUPPORTED_FORM_FIELDS = {
         key="IressSelect"
         name="gender"
         label="Gender"
-        rules={{ required: true }}
-        render={(controlledProps) => (
-          <IressSelect
-            {...controlledProps}
-            placeholder="Select"
-            data-component="IressSelect"
-          >
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-          </IressSelect>
-        )}
-      />
-    ),
-    renderSnippet: `(controlledProps) => (
-          <IressSelect {...controlledProps} placeholder="Select">
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-          </IressSelect>
-        )`,
-  },
-  IressRichSelect: {
-    formField: (
-      <IressFormField
-        key="IressRichSelect"
-        name="gender-with-icons"
-        label="Gender with icons"
         rules={{
           required: true,
         }}
         render={(controlledProps) => (
-          <IressRichSelect
+          <IressSelect
             {...controlledProps}
-            data-component="IressRichSelect"
+            data-component="IressSelect"
             options={[
               {
                 label: 'Male',
@@ -113,7 +84,7 @@ export const SUPPORTED_FORM_FIELDS = {
       />
     ),
     renderSnippet: `(controlledProps) => (
-      <IressRichSelect
+      <IressSelect
         {...controlledProps}
         options={[
           {

@@ -10,7 +10,7 @@ import {
   IressInput,
   IressModal,
   IressProgress,
-  IressRichSelect,
+  IressSelect,
   IressRow,
   IressStack,
   IressTable,
@@ -253,7 +253,7 @@ const LargeModal = () => {
               </IressField>
               <IressDivider />
               <IressField label="Type of data">
-                <IressRichSelect
+                <IressSelect
                   options={[
                     { label: 'Clients' },
                     { label: 'Products' },

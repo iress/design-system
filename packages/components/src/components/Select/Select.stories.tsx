@@ -1,132 +1,117 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressSelect, IressSelectOption, type IressSelectProps } from '.';
+import { IressSelect } from './Select';
+import {
+  generateLabelValueMeta,
+  MOCK_LABEL_VALUE_META,
+} from '@/mocks/generateLabelValues';
+import { SelectAsync } from './mocks/SelectAsync';
+import SelectAsyncSource from './mocks/SelectAsync.tsx?raw';
+import { SelectAsyncMinLength } from './mocks/SelectAsyncMinLength';
+import SelectAsyncMinLengthSource from './mocks/SelectAsyncMinLength.tsx?raw';
+import { SelectCustomLabel } from './mocks/SelectCustomLabel';
+import SelectCustomLabelSource from './mocks/SelectCustomLabel.tsx?raw';
+import { SelectCustomOptions } from './mocks/SelectCustomOptions';
+import SelectCustomOptionsSource from './mocks/SelectCustomOptions.tsx?raw';
+import { SelectInitialOptions } from './mocks/SelectInitialOptions';
+import SelectInitialOptionsSource from './mocks/SelectInitialOptions.tsx?raw';
+import { SelectNewOption } from './mocks/SelectNewOption';
+import SelectNewOptionSource from './mocks/SelectNewOption.tsx?raw';
+import { OptionsLongText } from './mocks/SelectOptionLongText';
+import SelectOptionLongTextSource from './mocks/SelectOptionLongText.tsx?raw';
 import { IressStack } from '../Stack';
 import { FORM_ELEMENT_WIDTHS } from '@/constants';
 import {
+  type IressSelectProps,
+  IressDivider,
+  IressButton,
+  IressText,
+  IressInline,
+  IressMenuText,
+} from '@/main';
+import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import {
+  addToStorybookCategory,
   disableArgTypes,
   mergeStorybookConfig,
+  withCustomSource,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressSelect>;
-type EditableStory = StoryObj<IressSelectProps<string, undefined>>;
 
 export default {
   title: 'Components/Select',
   component: IressSelect,
+  args: {
+    container: document.body,
+    placeholder: '',
+  },
   argTypes: {
-    ...mergeStorybookConfig(disableArgTypes(['children']), {
-      children: reactNodeArgType,
-    }),
+    footer: reactNodeArgType,
+    header: reactNodeArgType,
+    placeholder: reactNodeArgType,
     ...stylingProps,
+    ...mergeStorybookConfig(
+      disableArgTypes(['container']),
+      addToStorybookCategory<IressSelectProps>('Popover props', [
+        'align',
+        'container',
+        'displayMode',
+        'focusStartIndex',
+        'onActivated',
+        'onDeactivated',
+        'onNavigate',
+        'type',
+        'virtualFocus',
+      ]),
+    ),
   },
   tags: ['updated'],
 } as Meta<typeof IressSelect>;
 
-export const Options: Story = {
+export const SingleSelect: Story = {
   args: {
-    children: [
-      <option value="1" key="1">
-        Option 1
-      </option>,
-      <option value="2" key="2">
-        Option 2
-      </option>,
-      <option value="3" key="3">
-        Option 3
-      </option>,
-      <option value="4" key="4">
-        Option 4
-      </option>,
-      <option value="5" key="5">
-        Option 5
-      </option>,
-    ],
+    options: MOCK_LABEL_VALUE_META,
   },
 };
 
-export const OptionGroups: Story = {
+export const MultiSelect: Story = {
   args: {
-    children: [
-      <optgroup label="Group 1" key="1">
-        <option value="1-1" key="1-1">
-          Group 1 / Option 1
-        </option>
-        <option value="1-2" key="1-2">
-          Group 1 / Option 2
-        </option>
-        <option value="1-3" key="1-3">
-          Group 1 / Option 3
-        </option>
-        <option value="1-4" key="1-4">
-          Group 1 / Option 4
-        </option>
-        <option value="1-5" key="1-5">
-          Group 1 / Option 5
-        </option>
-      </optgroup>,
-      <optgroup label="Group 2" key="2">
-        <option value="2-1" key="2-1">
-          Group 2 / Option 1
-        </option>
-        <option value="2-2" key="2-2">
-          Group 2 / Option 2
-        </option>
-        <option value="2-3" key="2-3">
-          Group 2 / Option 3
-        </option>
-        <option value="2-4" key="2-4">
-          Group 2 / Option 4
-        </option>
-        <option value="2-5" key="2-5">
-          Group 2 / Option 5
-        </option>
-      </optgroup>,
-    ],
-  },
-};
-
-export const NonStringValues: Story = {
-  args: {
-    children: [
-      <IressSelectOption value={1} key="0-1">
-        Option 1
-      </IressSelectOption>,
-      <IressSelectOption value={2} key="0-2">
-        Option 2
-      </IressSelectOption>,
-      <optgroup label="Group 1" key="1">
-        <IressSelectOption value="1-1" key="1-1">
-          Group 1 / Option 1
-        </IressSelectOption>
-        <IressSelectOption value="1-2" key="1-2">
-          Group 1 / Option 2
-        </IressSelectOption>
-        <IressSelectOption value="1-3" key="1-3">
-          Group 1 / Option 3
-        </IressSelectOption>
-      </optgroup>,
-    ],
+    ...SingleSelect.args,
+    multiSelect: true,
   },
 };
 
 export const Placeholder: Story = {
   args: {
-    ...Options.args,
-    placeholder: 'Please select an option',
+    placeholder: 'Select an option',
+    options: MOCK_LABEL_VALUE_META,
   },
 };
 
-export const SelectedOption: Story = {
-  args: {
-    ...Options.args,
-    defaultValue: 3,
+export const AsyncOptions: Story = {
+  render: (args) => <SelectAsync {...args} />,
+  parameters: {
+    ...withCustomSource(SelectAsyncSource),
+  },
+};
+
+export const AsyncOptionsMinSearchLength: Story = {
+  render: (args) => <SelectAsyncMinLength {...args} />,
+  parameters: {
+    ...withCustomSource(SelectAsyncMinLengthSource),
+  },
+};
+
+export const InitialOptions: Story = {
+  render: (args) => <SelectInitialOptions {...args} />,
+  parameters: {
+    ...withCustomSource(SelectInitialOptionsSource),
   },
 };
 
 export const Sizing: Story = {
   args: {
-    ...Options.args,
+    ...SingleSelect.args,
   },
   argTypes: {
     ...disableArgTypes(['placeholder', 'width']),
@@ -135,25 +120,85 @@ export const Sizing: Story = {
     <IressStack gap="md">
       {FORM_ELEMENT_WIDTHS.map((width) => (
         <div key={width}>
-          <IressSelect {...args} placeholder={width} width={width} />
+          <IressSelect
+            {...args}
+            placeholder={width}
+            width={width}
+            aria-label={`Select option (width: ${width})`}
+          />
         </div>
       ))}
     </IressStack>
   ),
 };
 
-export const ReadOnly: Story = {
-  args: {
-    ...Options.args,
-    value: '2',
-    readOnly: true,
+export const CustomLabel: Story = {
+  render: (args) => <SelectCustomLabel {...args} />,
+  parameters: {
+    ...withCustomSource(SelectCustomLabelSource),
   },
 };
 
-export const Disabled: EditableStory = {
+export const CustomOptions: Story = {
+  render: (args) => <SelectCustomOptions {...args} />,
+  parameters: {
+    ...withCustomSource(SelectCustomOptionsSource),
+  },
+};
+
+export const CreateNewOption: Story = {
+  render: (args) => <SelectNewOption {...args} />,
+  parameters: {
+    ...withCustomSource(SelectNewOptionSource),
+  },
+};
+
+export const HeaderFooter: Story = {
   args: {
-    children: Options.args?.children,
-    value: '2',
-    disabled: true,
+    options: MOCK_LABEL_VALUE_META,
+    header: (
+      <>
+        <IressMenuText>
+          <IressText element="h3" style={{ margin: 0 }}>
+            Header
+          </IressText>
+        </IressMenuText>
+        <IressDivider style={{ marginTop: 0 }} />
+      </>
+    ),
+    footer: (
+      <>
+        <IressDivider style={{ marginBottom: 0 }} />
+        <IressMenuText>
+          <IressInline gap="sm">
+            <IressButton>Button 1</IressButton>
+            <IressButton>Button 2</IressButton>
+          </IressInline>
+        </IressMenuText>
+      </>
+    ),
+  },
+};
+
+export const Readonly: Story = {
+  args: {
+    ...MultiSelect.args,
+    readOnly: true,
+    value: MOCK_LABEL_VALUE_META,
+  },
+};
+
+export const LotsOfOptions: Story = {
+  args: {
+    ...SingleSelect.args,
+    options: async () => Promise.resolve(generateLabelValueMeta(200)),
+    autoHighlight: false,
+  },
+};
+
+export const LongTextOptions: Story = {
+  render: (args) => <OptionsLongText {...args} />,
+  parameters: {
+    ...withCustomSource(SelectOptionLongTextSource),
   },
 };

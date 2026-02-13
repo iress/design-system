@@ -14,7 +14,7 @@ import {
   IressIcon,
   IressInline,
   IressPanel,
-  IressRichSelect,
+  IressSelect,
   IressSlideout,
   IressSlideoutProvider,
   IressStack,
@@ -286,7 +286,7 @@ const MicrofrontendApp = () => {
             label="Asynchronous options"
             name="star_wars_name"
             render={(controlledProps) => (
-              <IressRichSelect
+              <IressSelect
                 {...controlledProps}
                 options={searchStarWarsCharacters}
               />
@@ -297,7 +297,7 @@ const MicrofrontendApp = () => {
             label="Static options"
             name="gender"
             render={(controlledProps) => (
-              <IressRichSelect
+              <IressSelect
                 {...controlledProps}
                 options={[
                   {

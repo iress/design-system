@@ -101,7 +101,7 @@ export const focusable = defineUtility({
       };
     }
 
-    if (value === 'rich-select') {
+    if (value === 'select-activator') {
       return {
         '&:hover': {
           backgroundColor: cssVars.colour.neutral[20],

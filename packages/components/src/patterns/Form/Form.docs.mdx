@@ -595,7 +595,7 @@ expect(summaryError).toBeInTheDocument();
 
 ### Properly resetting fields
 
-When resetting fields that accept non-string values (like `IressRichSelect`), you should reset them to `null` or `undefined` instead of an empty string. This is because the underlying component is strictly typed and expects a specific value type.
+When resetting fields that accept non-string values (like `IressSelect`), you should reset them to `null` or `undefined` instead of an empty string. This is because the underlying component is strictly typed and expects a specific value type.
 
 **Problem:**
 

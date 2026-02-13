@@ -15,11 +15,7 @@ import { splitCssProps } from '@/styled-system/jsx';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { IressPopover, type IressPopoverProps } from '../Popover';
 import { IressButton } from '../Button';
-import {
-  IressSelectMenu,
-  type IressSelectMenuProps,
-  useRichSelectState,
-} from '../RichSelect';
+import { IressSelectMenu, type IressSelectMenuProps } from '../Select';
 import {
   useAutocompleteSearch,
   type AutocompleteSearchHookProps,
@@ -39,6 +35,7 @@ import { GlobalCSSClass } from '@/enums';
 import { FilterResultsDescriptor } from './components/FilterResultsDescriptor';
 import type { IressStyledProps } from '@/types';
 import { styled } from '@/styled-system/jsx';
+import { useSelectState } from '../Select/hooks/useSelectState';
 
 export interface IressFilterProps<TMultiple extends boolean = false>
   extends
@@ -181,7 +178,7 @@ const Filter = <TMultiple extends boolean = false>(
   };
   const popoverProps = { ...DEFAULT_POPOVER_PROPS, ...popoverPropsProp };
 
-  const { value, setValue } = useRichSelectState({
+  const { value, setValue } = useSelectState({
     component: 'IressFilter',
     defaultValue,
     multiple: multiSelect,
