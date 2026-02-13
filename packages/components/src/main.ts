@@ -31,6 +31,7 @@ export * from './components/Popover';
 export * from './components/Progress';
 export * from './components/Provider';
 export * from './components/Radio';
+export * from './components/RadioMark';
 export * from './components/RadioGroup';
 export * from './components/Readonly';
 export * from './components/RichSelect';

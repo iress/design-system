@@ -1,15 +1,7 @@
 import { sva } from '@/styled-system/css';
 
 export const radio = sva({
-  slots: [
-    'root',
-    'input',
-    'label',
-    'labelContent',
-    'radioMark',
-    'checkedRadioMark',
-    'checkboxMark',
-  ],
+  slots: ['root', 'input', 'label', 'labelContent', 'checkboxMark'],
   base: {
     root: {
       // Performance: CSS containment (no paint to allow focus ring/shadow)
@@ -50,26 +42,6 @@ export const radio = sva({
     labelContent: {
       font: 'inherit',
     },
-    radioMark: {
-      boxSizing: 'border-box',
-      position: 'relative',
-      border: 'input',
-      backgroundColor: 'colour.neutral.10',
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '[1.4em]',
-      height: '[1.4em]',
-      borderRadius: '[100%]',
-      marginInlineEnd: 'spacing.2',
-      flexShrink: 0,
-      color: '[currentColor]',
-      '& circle': {
-        fill: '[currentColor]',
-        display: 'none',
-      },
-      focusable: 'group',
-    },
     checkboxMark: {
       checkmark: false,
     },
@@ -87,9 +59,6 @@ export const radio = sva({
           _hover: {
             backgroundColor: 'colour.primary.surfaceHover',
           },
-        },
-        radioMark: {
-          display: 'none',
         },
       },
     },
@@ -119,20 +88,6 @@ export const radio = sva({
       true: {
         label: {
           borderColor: '[currentColor]',
-        },
-        radioMark: {
-          '--iress-border-color': '[currentColor]',
-
-          '& circle': {
-            display: 'block',
-          },
-        },
-      },
-      false: {
-        radioMark: {
-          _hover: {
-            backgroundColor: 'colour.primary.surfaceHover',
-          },
         },
       },
     },

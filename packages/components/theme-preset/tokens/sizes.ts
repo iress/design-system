@@ -43,7 +43,7 @@ const inputSizes = {
   ),
   'input.height': {
     description: 'input height based on typography size',
-    value: `calc(${cssVars.typography.base.size} * (36 / 14))`,
+    value: `calc(${cssVars.typography.base.size} * (34 / 14))`,
   },
 };
 

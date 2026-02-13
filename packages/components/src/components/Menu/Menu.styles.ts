@@ -10,33 +10,35 @@ export const menu = sva({
       m: 'none',
     },
     item: {
-      borderRadius: 'radius.system.button',
-      color: 'colour.neutral.80',
+      color: 'colour.neutral.70',
       cursor: 'pointer',
       display: 'flex',
       width: '[100%]',
-      px: 'md',
-      py: 'sm',
+      px: 'spacing.3',
+      py: 'spacing.2',
       textAlign: 'left',
       textDecoration: 'none',
       textStyle: 'typography.body.md',
       transition: '[0.2s all ease-in-out]',
 
-      focusable: 'true',
-
-      _focus: {
-        bg: 'colour.primary.surface',
-        color: 'colour.primary.text',
+      _focusVisible: {
+        bg: 'colour.neutral.30',
+        color: 'colour.neutral.90',
+        outline: '[0]',
       },
 
       _hover: {
-        bg: 'colour.primary.surface',
-        color: 'colour.primary.text',
+        bg: 'colour.neutral.20',
+      },
+
+      '&:active': {
+        bg: 'colour.neutral.30',
+        color: 'colour.neutral.90',
       },
     },
     text: {
-      px: 'md',
-      py: 'sm',
+      px: 'spacing.3',
+      py: 'spacing.2',
     },
     append: {
       marginInlineStart: 'auto',
@@ -47,6 +49,7 @@ export const menu = sva({
       true: {
         item: {
           bg: 'colour.primary.surface',
+          borderColor: 'colour.primary.text',
           color: 'colour.primary.text',
         },
       },
@@ -63,39 +66,35 @@ export const menu = sva({
         item: {
           display: 'flex',
           alignItems: 'center',
-          gap: 'sm',
+          gap: 'spacing.2',
         },
         text: {
           display: 'flex',
           alignItems: 'center',
-          gap: 'sm',
+          gap: 'spacing.2',
         },
       },
     },
     heading: {
       true: {
         text: {
-          pb: 'xs',
+          pb: 'spacing.1',
 
           '&:not(:first-child)': {
-            pt: 'md',
+            pt: 'spacing.4',
           },
         },
       },
     },
     insidePopover: {
       true: {
-        root: {
-          my: 'spacing.2',
-          px: 'spacing.2',
-        },
+        root: {},
       },
     },
     isActiveInPopover: {
       true: {
         item: {
-          bg: 'colour.primary.surface',
-          color: 'colour.primary.text',
+          bg: 'colour.neutral.20',
         },
       },
     },
@@ -105,7 +104,6 @@ export const menu = sva({
           display: 'inline-flex',
           flexWrap: 'wrap',
           flexDirection: 'column',
-          rowGap: 'spacing.1',
         },
       },
       inline: {
@@ -118,6 +116,7 @@ export const menu = sva({
           alignItems: 'center',
           justifyContent: 'center',
           height: '[100%]',
+          py: 'spacing.4',
         },
       },
       'inline-equal-width': {
@@ -136,6 +135,7 @@ export const menu = sva({
           justifyContent: 'center',
           height: '[100%]',
           textAlign: 'center',
+          py: 'spacing.4',
         },
         contents: {
           flex: '1',
@@ -163,12 +163,30 @@ export const menu = sva({
         },
       },
     },
+    role: {
+      listitem: {
+        item: {
+          focusable: 'true',
+        },
+      },
+      menuitem: {},
+      option: {},
+    },
     selected: {
       true: {
         item: {
-          bg: 'colour.neutral.20',
-          color: 'colour.primary.text',
+          color: 'colour.neutral.90',
           position: 'relative',
+
+          _before: {
+            content: '""',
+            position: 'absolute',
+            top: 'spacing.0',
+            left: 'spacing.0',
+            bottom: 'spacing.0',
+            width: '[2px]',
+            bg: 'colour.primary.fill',
+          },
         },
       },
     },
@@ -199,15 +217,14 @@ export const menu = sva({
       selected: true,
       css: {
         item: {
-          _after: {
-            content: '""',
+          _before: {
             position: 'absolute',
             left: 'spacing.0',
             right: 'spacing.0',
             bottom: 'spacing.0',
-            height: '[{radii.radius.system.button}]',
-            bg: 'colour.primary.fill',
-            borderRadius: 'radius.system.button',
+            top: '[auto]',
+            width: 'auto',
+            height: '[2px]',
           },
         },
       },

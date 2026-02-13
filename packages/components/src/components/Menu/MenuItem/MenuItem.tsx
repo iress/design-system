@@ -45,6 +45,8 @@ import { IressMenuDivider } from '../MenuDivider/MenuDivider';
 import { type IressCSSProps, type IressTestProps } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import { spreadUnlessUndefined } from '@/helpers/utility/spreadUnlessUndefined';
+import { IressRadioMark } from '@/components/RadioMark';
+import { IressIcon } from '@/components/Icon';
 
 export interface MenuItemRenderProps<
   C extends ElementType | undefined = undefined,
@@ -184,7 +186,7 @@ const MenuItem = <
   THref extends string | undefined = undefined,
 >(
   {
-    append,
+    append: appendProp,
     canToggle,
     children,
     className,
@@ -336,21 +338,23 @@ const MenuItem = <
     () =>
       menuStyles({
         active: !!popover?.isActiveActivator(elementRef.current as HTMLElement),
-        hasAppendOrPrepend: !!(append ?? prependProp ?? menu?.multiSelect),
+        hasAppendOrPrepend: !!(appendProp ?? prependProp ?? menu?.multiSelect),
         isActiveInPopover,
         layout: menu?.layout,
         multiSelect: !!menu?.multiSelect,
         noWrap: menu?.noWrap,
+        role,
         selected,
       }),
     [
-      append,
+      appendProp,
       isActiveInPopover,
       menu?.layout,
       menu?.multiSelect,
       menu?.noWrap,
       popover,
       prependProp,
+      role,
       selected,
     ],
   );
@@ -365,14 +369,34 @@ const MenuItem = <
         />
       );
     }
+
+    if (menu?.variant === 'radio') {
+      return (
+        <IressRadioMark
+          checked={selected}
+          className={classes.checkboxMark}
+          data-testid={propagateTestid(dataTestId, 'checkbox')}
+        />
+      );
+    }
+
     return prependProp;
   }, [
     classes.checkboxMark,
     dataTestId,
     menu?.multiSelect,
+    menu?.variant,
     prependProp,
     selected,
   ]);
+
+  const append = useMemo(() => {
+    if (menu?.variant === 'subdraw') {
+      return <IressIcon name="keyboard_arrow_right" />;
+    }
+
+    return prependProp;
+  }, [menu?.variant, prependProp]);
 
   const [styleProps, nonStyleProps] = useMemo(
     () => splitCssProps(restProps),

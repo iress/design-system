@@ -136,3 +136,13 @@ A value is supplied to `IressMenuButton` (like you would with an option element 
 Set the `multiSelect` prop to true for a multi-selectable listbox.
 
 <ComponentExample of={ComponentStories.ListboxRole} />
+
+### Variants
+
+The `variant` prop can be used to change the style of the menu to suit different contexts. There are two variants:
+
+- Not defined - for use inside popovers, side menus and navigation
+- `subdraw` - for use with navigation drawers, it adds an arrow icon to the end of menu items to indicate that they will open a sub-menu.
+- `radio` - for use when you want the menu item to have a radio mark style indicator (only supports single select listbox role)
+
+<ComponentExample of={ComponentStories.Variants} />

@@ -19,7 +19,7 @@ export const focusable = defineUtility({
     if (value === 'has-input') {
       return {
         background: cssVars.colour.neutral[10],
-        borderColor: `var(--iress-border-color, ${cssVars.colour.neutral[70]})`,
+        borderColor: `var(--iress-border-color--default, var(--iress-border-color, ${cssVars.colour.neutral[70]}))`,
 
         '&:has(input:disabled, textarea:disabled, select:disabled)': {
           background: cssVars.colour.neutral[20],
@@ -28,8 +28,7 @@ export const focusable = defineUtility({
         '&:hover:not(:has(input:disabled, textarea:disabled, select:disabled))':
           {
             background: `var(--iress-background-hover, ${cssVars.colour.neutral[20]})`,
-            borderColor: cssVars.colour.neutral[70],
-            boxShadow: `var(--iress-shadow-hover, 0 0 0 1px ${cssVars.colour.neutral[70]})`,
+            borderColor: `var(--iress-border-color--hover, ${cssVars.colour.neutral[70]})`,
           },
         'input:focus, textarea:focus, select:focus': {
           outline: 'none',
@@ -106,7 +105,6 @@ export const focusable = defineUtility({
       return {
         '&:hover': {
           backgroundColor: cssVars.colour.neutral[20],
-          boxShadow: `0 0 0 1px ${cssVars.colour.neutral[70]}`,
         },
         '&:focus-within, &:active, &[aria-expanded="true"]': {
           backgroundColor: cssVars.colour.neutral[10],

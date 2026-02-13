@@ -35,7 +35,7 @@ export const borders = {
     },
   },
   table: {
-    description: 'Used for tables and cards',
+    description: 'Used for tables, search bar and cards',
     value: {
       width: '1px',
       style: 'solid',

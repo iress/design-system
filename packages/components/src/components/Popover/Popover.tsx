@@ -89,7 +89,6 @@ export interface IressPopoverProps extends IressStyledProps {
   /**
    * Which index to start the focus on when the popover is opened. Only works with `type` listbox and menu.
    * Note: The index must exist in the list of items, otherwise it will not work.
-   * @default 0
    */
   focusStartIndex?: number;
 

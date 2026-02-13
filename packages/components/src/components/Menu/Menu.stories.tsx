@@ -106,10 +106,10 @@ export const NoWrap: Story = {
   },
   render: (args) => (
     <IressInline>
-      <IressMenu {...args} maxWidth="input.12">
+      <IressMenu {...args} width="input.12">
         <IressMenuItem>Menu item with some text that wraps</IressMenuItem>
       </IressMenu>
-      <IressMenu {...args} maxWidth="input.12" noWrap>
+      <IressMenu {...args} width="input.12" noWrap>
         <IressMenuItem>Non wrapping menu item with some text</IressMenuItem>
       </IressMenu>
     </IressInline>
@@ -181,4 +181,20 @@ export const ListboxRole: Story = {
     role: 'listbox',
     'aria-label': 'Selectable listbox',
   },
+};
+
+export const Variants: Story = {
+  args: {
+    children: 'basic',
+    defaultSelected: '5',
+  },
+  argTypes: {
+    ...disableArgTypes(['variant']),
+  },
+  render: (args) => (
+    <IressStack gap="lg">
+      <IressMenu {...args} variant="radio" />
+      <IressMenu {...args} variant="subdraw" />
+    </IressStack>
+  ),
 };

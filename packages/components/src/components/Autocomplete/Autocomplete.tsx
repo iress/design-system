@@ -291,6 +291,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
         onDeactivated={handlePopoverDeactivated}
         show={show}
         type="listbox"
+        focusStartIndex={0}
       >
         {results.length > 0 && (
           <>

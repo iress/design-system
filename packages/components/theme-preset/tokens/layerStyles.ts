@@ -2,6 +2,13 @@ import { type CompositionStyles, defineLayerStyles } from '@pandacss/dev';
 import { cssVars } from '@iress-oss/ids-tokens';
 
 const internalLayerStyles: CompositionStyles['layerStyles'] = {
+  dropdown: {
+    description: 'Used for dropdown elements (eg. Select and RichSelect)',
+    value: {
+      boxShadow: '0 5px 8px 2px #141F4D0A',
+      border: `1px solid ${cssVars.colour.neutral[40]}`,
+    },
+  },
   dots: {
     description: 'Used to represent a loading state with dots',
     value: {

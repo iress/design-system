@@ -17,10 +17,10 @@ import { radio } from './Radio.styles';
 import { GlobalCSSClass } from '@/enums';
 import { useControlledState } from '@/hooks/useControlledState';
 import { IressCheckboxMark } from '@/components/CheckboxMark';
+import { IressRadioMark } from '@/components/RadioMark';
 import { getRadioGroupContext } from '../RadioGroup';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { IressText } from '../Text';
-import { type IressCSSProps } from '@/interfaces';
 
 export interface IressRadioProps<T = FormControlValue> extends Omit<
   IressStyledProps<'input'>,
@@ -74,18 +74,6 @@ export interface IressRadioProps<T = FormControlValue> extends Omit<
    */
   touch?: boolean;
 }
-
-const RadioMark = (props: IressCSSProps) => (
-  <styled.svg
-    version="1.1"
-    viewBox="0 0 200 200"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-    className={GlobalCSSClass.FormElement}
-  >
-    <circle cx="100" cy="100" r="70" />
-  </styled.svg>
-);
 
 const Radio = <T = FormControlValue,>(
   {
@@ -177,8 +165,8 @@ const Radio = <T = FormControlValue,>(
       />
       <styled.label htmlFor={id} {...styles.label}>
         {!isHidden && (
-          <RadioMark
-            {...(styles.radioMark as IressCSSProps)}
+          <IressRadioMark
+            checked={isChecked}
             data-testid={propagateTestid(dataTestId, 'radioMark')}
           />
         )}
