@@ -61,17 +61,17 @@ const overlaySizes = {
   'overlay.sm': {
     description:
       'Used for small modals and slideouts. Small overlays communicate the outcome of an irreversible action. They should be concise and straightforward, containing a single action and, in some cases, a single input field.',
-    value: '375px',
+    value: '368px',
   },
   'overlay.md': {
     description:
       'Used for medium modals and slideouts. Medium overlays provide optional supporting information to help users understand the context of a word or screen. They may contain a single action and, in some cases, a larger input such as a textarea.',
-    value: '640px',
+    value: '628px',
   },
   'overlay.lg': {
     description:
       'Large modals facilitate sub-flows within a primary flow, allowing users to focus on tasks that will impact the underlying screen once the modal is closed (e.g., adding an item to a table or bulk uploading items). They should be used sparingly and only when there is a direct relationship to the underlying screen, where the action would not warrant a separate dedicated screen.',
-    value: '900px',
+    value: '800px',
   },
 };
 

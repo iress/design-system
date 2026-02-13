@@ -12,7 +12,7 @@ export const tab = cva({
     py: 'spacing.3',
     textOverflow: 'ellipsis',
     textDecoration: 'none',
-    textStyle: 'typography.body.md.medium',
+    textStyle: 'typography.body.sm.medium',
     transition: 'all',
     whiteSpace: 'nowrap',
     width: '[auto]',
@@ -40,7 +40,6 @@ export const tab = cva({
       true: {
         borderBottomWidth: '0px',
         backgroundColor: 'transparent',
-        my: 'spacing.1',
 
         _hover: {
           bg: '[none]',

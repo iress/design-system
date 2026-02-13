@@ -1,13 +1,13 @@
 import { sva } from '@/styled-system/css';
 
 export const placeholder = sva({
-  slots: ['root', 'svg', 'line'],
+  slots: ['root', 'svg', 'line', 'heading'],
   base: {
     root: {
       alignItems: 'center',
       flexDirection: 'column',
-      bg: 'colour.primary.surface',
-      color: 'colour.primary.text',
+      bg: 'colour.data.subtle.50',
+      color: 'colour.data.bold.50',
       boxSizing: 'border-box',
       display: 'flex',
       justifyContent: 'center',
@@ -26,6 +26,9 @@ export const placeholder = sva({
       strokeWidth: '0.5px',
       stroke: 'colour.primary.fill',
       strokeOpacity: '0.1',
+    },
+    heading: {
+      color: '[inherit]',
     },
   },
 });
