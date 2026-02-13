@@ -50,13 +50,14 @@ export const focusable = defineUtility({
       };
     }
 
-    if (value === 'has-controller') {
+    if (value === 'expander-activator') {
       return {
-        '[aria-controls]:focus-visible': {
-          outline: 'none',
+        '&:focus-visible': {
+          boxShadow: `0 0 0 2px ${cssVars.colour.globalInteractions.focusRing}`,
         },
-        '&:has([aria-controls]:focus-visible)': {
-          boxShadow: `0 0 0 1.5px ${cssVars.colour.neutral[10]}, 0 0 0 3.5px ${cssVars.colour.globalInteractions.focusRing}`,
+        '&[aria-expanded="true"]:focus-visible': {
+          borderRadius: cssVars.radius.system.layout,
+          bg: cssVars.colour.neutral[10],
         },
       };
     }
