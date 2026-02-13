@@ -18,6 +18,7 @@ export const tab = cva({
     width: '[auto]',
     borderRadius: 'radius.system.layout',
     borderBottomRadius: 'none',
+    focusable: 'inset',
 
     _hover: {
       bg: 'colour.neutral.20',
@@ -39,6 +40,7 @@ export const tab = cva({
       true: {
         borderBottomWidth: '0px',
         backgroundColor: 'transparent',
+        my: 'spacing.1',
 
         _hover: {
           bg: '[none]',

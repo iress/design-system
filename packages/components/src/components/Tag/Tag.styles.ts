@@ -16,6 +16,7 @@ export const tag = sva({
       p: 'spacing.1',
       transition: '[all .2s]',
       textStyle: 'typography.body.sm',
+      focusable: 'has-button',
     },
     deleteButton: {
       my: '-spacing.1',

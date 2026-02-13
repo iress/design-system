@@ -72,6 +72,22 @@ export const focusable = defineUtility({
       };
     }
 
+    if (value === 'has-button') {
+      return {
+        '&:focus-visible': {
+          outline: 'none',
+        },
+        '&:has(:focus-visible)': {
+          boxShadow: `0 0 0 1.5px ${cssVars.colour.neutral[10]}, 0 0 0 3.5px ${cssVars.colour.globalInteractions.focusRing}`,
+
+          '& :focus-visible': {
+            outline: 'none',
+            boxShadow: 'none',
+          },
+        },
+      };
+    }
+
     if (value === 'group') {
       return {
         '.group:has(:focus-visible) &': {
@@ -131,7 +147,7 @@ export const focusable = defineUtility({
       return {
         '&:focus-visible': {
           outline: 'none',
-          boxShadow: `inset 0 -2px 0 0px ${cssVars.colour.globalInteractions.focusRing}`,
+          boxShadow: `inset 0 0 0 2px ${cssVars.colour.globalInteractions.focusRing}`,
         },
       };
     }
