@@ -202,3 +202,10 @@ export const LongTextOptions: Story = {
     ...withCustomSource(SelectOptionLongTextSource),
   },
 };
+
+export const Native: Story = {
+  args: {
+    ...SingleSelect.args,
+    native: 'md',
+  },
+};

@@ -1906,4 +1906,200 @@ describe('useAutocompleteSearch', () => {
       });
     });
   });
+
+  describe('disabled functionality', () => {
+    it('returns all options when disabled is true with array options', async () => {
+      const options = [
+        { label: 'Option 1', value: '1' },
+        { label: 'Option 2', value: '2' },
+        { label: 'Option 3', value: '3' },
+      ];
+
+      const hook = renderAutocompleteSearchHook({
+        options,
+        disabled: true,
+        query: 'opt',
+      });
+
+      // Should immediately return all options without filtering
+      await waitFor(() => {
+        expect(hook.result.current.results).toHaveLength(3);
+        expect(hook.result.current.loading).toBe(false);
+      });
+
+      // Results should be the original options, not filtered
+      expect(hook.result.current.results).toEqual(options);
+    });
+
+    it('returns initial options when disabled is true with async options', async () => {
+      const initialOptions = [
+        { label: 'Initial 1', value: '1' },
+        { label: 'Initial 2', value: '2' },
+      ];
+
+      const asyncSearchFn = vi.fn().mockResolvedValue([
+        { label: 'Async 1', value: 'a1' },
+        { label: 'Async 2', value: 'a2' },
+      ]);
+
+      const hook = renderAutocompleteSearchHook({
+        options: asyncSearchFn,
+        initialOptions,
+        disabled: true,
+        query: 'test',
+      });
+
+      // Should return initial options, not call async function
+      await waitFor(() => {
+        expect(hook.result.current.results).toEqual(initialOptions);
+        expect(hook.result.current.loading).toBe(false);
+      });
+
+      // Async function should not be called when disabled
+      expect(asyncSearchFn).not.toHaveBeenCalled();
+    });
+
+    it('sets loading to false when disabled is true', async () => {
+      const asyncSearchFn = vi.fn().mockImplementation(async () => {
+        await waitDelay(100);
+        return [{ label: 'Result', value: '1' }];
+      });
+
+      const hook = renderAutocompleteSearchHook({
+        options: asyncSearchFn,
+        disabled: true,
+        query: 'test',
+      });
+
+      // Loading should always be false when disabled
+      expect(hook.result.current.loading).toBe(false);
+
+      await waitFor(() => {
+        expect(hook.result.current.loading).toBe(false);
+      });
+
+      // Should still be false after any potential async operations
+      expect(asyncSearchFn).not.toHaveBeenCalled();
+    });
+
+    it('sets all boolean flags to false when disabled is true', async () => {
+      const hook = renderAutocompleteSearchHook({
+        options: [],
+        disabled: true,
+        query: 'a', // Long enough to normally trigger search
+        minSearchLength: 2,
+      });
+
+      await waitFor(() => {
+        expect(hook.result.current.shouldShowInstructions).toBe(false);
+        expect(hook.result.current.shouldShowDebounceWaiting).toBe(false);
+        expect(hook.result.current.shouldShowNoResults).toBe(false);
+        expect(hook.result.current.loading).toBe(false);
+      });
+    });
+
+    it('does not trigger search when disabled is true', async () => {
+      const asyncSearchFn = vi
+        .fn()
+        .mockResolvedValue([{ label: 'Result', value: '1' }]);
+
+      const hook = renderAutocompleteSearchHook({
+        options: asyncSearchFn,
+        disabled: true,
+        query: 'test',
+      });
+
+      // Wait to ensure no search is triggered
+      await waitDelay(200);
+
+      expect(asyncSearchFn).not.toHaveBeenCalled();
+      expect(hook.result.current.loading).toBe(false);
+    });
+
+    it('does not trigger search when startSearch is called with disabled=true', async () => {
+      const asyncSearchFn = vi
+        .fn()
+        .mockResolvedValue([{ label: 'Result', value: '1' }]);
+
+      const hook = renderAutocompleteSearchHook({
+        options: asyncSearchFn,
+        disabled: true,
+        query: 'test',
+      });
+
+      // Try to force a search
+      act(() => {
+        hook.result.current.startSearch(true);
+      });
+
+      // Wait to ensure no search is triggered
+      await waitDelay(200);
+
+      expect(asyncSearchFn).not.toHaveBeenCalled();
+      expect(hook.result.current.loading).toBe(false);
+    });
+
+    it('resumes search when disabled changes from true to false', async () => {
+      const options = [
+        { label: 'Test 1', value: '1' },
+        { label: 'Test 2', value: '2' },
+      ];
+
+      const hook = renderAutocompleteSearchHook({
+        options,
+        disabled: true,
+        query: 'test',
+      });
+
+      // Initially should show all options
+      await waitFor(() => {
+        expect(hook.result.current.results).toEqual(options);
+      });
+
+      // Re-enable the hook
+      hook.rerender({
+        options,
+        disabled: false,
+        query: 'test',
+      });
+
+      // Should now perform search and filter results
+      await waitFor(() => {
+        expect(hook.result.current.results).toHaveLength(2);
+        // Results should have highlighted text (formatted)
+        expect(hook.result.current.results[0].formattedLabel).toBeDefined();
+      });
+    });
+
+    it('stops search when disabled changes from false to true', async () => {
+      const asyncSearchFn = vi.fn().mockImplementation(async (query) => {
+        await waitDelay(100);
+        return [{ label: `Result for ${query}`, value: '1' }];
+      });
+
+      const hook = renderAutocompleteSearchHook({
+        options: asyncSearchFn,
+        disabled: false,
+        query: 'test',
+      });
+
+      // Wait for initial search to complete
+      await waitFor(() => {
+        expect(asyncSearchFn).toHaveBeenCalledTimes(1);
+        expect(hook.result.current.results).toHaveLength(1);
+      });
+
+      // Disable the hook
+      hook.rerender({
+        options: asyncSearchFn,
+        disabled: true,
+        query: 'new query',
+      });
+
+      // Should not trigger new search
+      await waitDelay(200);
+      expect(asyncSearchFn).toHaveBeenCalledTimes(1); // Still only 1 call
+      expect(hook.result.current.loading).toBe(false);
+    });
+  });
 });

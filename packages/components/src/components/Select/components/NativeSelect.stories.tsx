@@ -5,14 +5,14 @@ import {
   mergeStorybookConfig,
 } from '@iress-oss/ids-storybook-config';
 import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
-import { NativeSelect } from './NativeSelect';
 import { IressStack } from '../../Stack';
+import { IressSelect } from '../Select';
 
-type Story = StoryObj<typeof NativeSelect>;
+type Story = StoryObj<typeof IressSelect>;
 
 export default {
   title: 'Components/Select/Native',
-  component: NativeSelect,
+  component: IressSelect,
   argTypes: {
     ...mergeStorybookConfig(disableArgTypes(['children']), {
       children: reactNodeArgType,
@@ -20,7 +20,7 @@ export default {
     ...stylingProps,
   },
   tags: ['updated'],
-} as Meta<typeof NativeSelect>;
+} as Meta<typeof IressSelect>;
 
 export const Options: Story = {
   args: {
@@ -31,6 +31,7 @@ export const Options: Story = {
       { label: 'Option 4', value: 4 },
       { label: 'Option 5', value: '5' },
     ],
+    native: true,
   },
 };
 
@@ -58,6 +59,7 @@ export const OptionGroups: Story = {
         ],
       },
     ],
+    native: true,
   },
 };
 
@@ -84,7 +86,7 @@ export const Sizing: Story = {
     <IressStack gap="md">
       {FORM_ELEMENT_WIDTHS.map((width) => (
         <div key={width}>
-          <NativeSelect {...args} placeholder={width} width={width} />
+          <IressSelect {...args} placeholder={width} width={width} />
         </div>
       ))}
     </IressStack>

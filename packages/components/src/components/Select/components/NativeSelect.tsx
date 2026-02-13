@@ -1,7 +1,7 @@
 import { type ChangeEvent, type ForwardedRef, forwardRef } from 'react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import type { IressStyledProps } from '@/types';
-import type { FormattedLabelValueMeta } from '@/interfaces';
+import type { LabelValueMeta } from '@/interfaces';
 import type { IressInputProps } from '../../Input';
 import { nativeSelect } from './NativeSelect.styles';
 import { input } from '../../Input/Input.styles';
@@ -21,13 +21,13 @@ export type NativeSelectProps = Omit<
    */
   onChange?: (
     e: ChangeEvent<HTMLSelectElement>,
-    value?: FormattedLabelValueMeta,
+    value?: LabelValueMeta,
   ) => void;
 
   /**
    * The available options that the user can select from.
    */
-  options: FormattedLabelValueMeta[];
+  options: LabelValueMeta[];
 
   /**
    * The placeholder text to display when no option is selected.
@@ -37,7 +37,7 @@ export type NativeSelectProps = Omit<
   /**
    * Value of selected option for controlled select.
    */
-  value?: FormattedLabelValueMeta;
+  value?: LabelValueMeta;
 
   /**
    * The width of the select.
@@ -62,7 +62,10 @@ export const NativeSelect = forwardRef(
   ) => {
     const id = useIdIfNeeded(restProps as IressStyledProps);
 
-    const styles = nativeSelect.raw({ width });
+    const styles = nativeSelect.raw({
+      showingPlaceholder: !value && !!placeholder,
+      width,
+    });
     const inputStyles = input.raw();
 
     const [styleProps, nonStyleProps] = splitCssProps(restProps);
@@ -80,6 +83,7 @@ export const NativeSelect = forwardRef(
       >
         <select
           {...nonStyleProps}
+          className={css(styles.element)}
           data-testid={propagateTestid(dataTestid, 'select')}
           id={id}
           onChange={(event) => {
@@ -96,7 +100,7 @@ export const NativeSelect = forwardRef(
             value?.value ?? value?.label,
           )}
         >
-          {placeholder && <option value="">{placeholder}</option>}
+          {placeholder !== undefined && <option value="">{placeholder}</option>}
           {options.map((option) => {
             if (option.children) {
               return (

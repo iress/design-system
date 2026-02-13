@@ -8,6 +8,15 @@ interface BreakpointResult {
   detail: BreakpointDetail;
 }
 
+interface UseBreakpointOptions {
+  /**
+   * Disables the hook from running any side effects.
+   * When disabled, the hook returns the initial breakpoint without listening to resize events.
+   * @default false
+   */
+  disabled?: boolean;
+}
+
 const getCurrentBreakpoint = () =>
   BREAKPOINTS.find((breakpoint) => {
     return window.matchMedia(BREAKPOINT_DETAILS[breakpoint].mediaQuery)
@@ -17,7 +26,10 @@ const getCurrentBreakpoint = () =>
 /**
  * Retrieve the current breakpoint and its detail based on the window size
  */
-export const useBreakpoint = (): BreakpointResult => {
+export const useBreakpoint = (
+  options: UseBreakpointOptions = {},
+): BreakpointResult => {
+  const { disabled = false } = options;
   const [breakpoint, setBreakpoint] = useState(getCurrentBreakpoint());
 
   const updateBreakpoint = useCallback(() => {
@@ -25,11 +37,13 @@ export const useBreakpoint = (): BreakpointResult => {
   }, []);
 
   useLayoutEffect(() => {
+    if (disabled) return;
+
     const callback = updateBreakpoint;
     window.addEventListener('resize', callback);
     callback();
     return () => window.removeEventListener('resize', callback);
-  }, [updateBreakpoint]);
+  }, [disabled, updateBreakpoint]);
 
   return {
     breakpoint,

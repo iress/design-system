@@ -163,6 +163,14 @@ This example demonstrates both single-select and multi-select behavior with long
 
 <ComponentExample of={ComponentStories.LongTextOptions} />
 
+### Native select
+
+If you need to support older browsers or require the native select experience, you can set the `native` prop to `true`. This will render a native select element instead of the custom select.
+
+You can also set the `native` prop to a breakpoint (eg. `native="md"`) to only render the native select on smaller screens.
+
+<ComponentExample of={ComponentStories.Native} />
+
 ## Sub-components
 
 `IressSelect` is composed of several sub-components that can be used to customise the appearance and behaviour of the select.

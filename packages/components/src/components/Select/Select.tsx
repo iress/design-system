@@ -29,7 +29,7 @@ import {
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
 import { GlobalCSSClass } from '@/enums';
 import type { IressInputProps } from '../Input';
-import type { ControlledValue } from '@/hooks';
+import { useResponsiveProps, type ControlledValue } from '@/hooks';
 import type {
   FormattedLabelValueMeta,
   LabelValueMeta,
@@ -52,11 +52,9 @@ import { useSelectState } from './hooks/useSelectState';
 type SelectValue<
   TMultiple extends boolean = false,
   TNative extends boolean | Breakpoints = false,
-> = TMultiple extends true
-  ? LabelValueMeta[]
-  : TNative extends false
-    ? LabelValueMeta | undefined
-    : FormattedLabelValueMeta;
+> = TNative extends false
+  ? ControlledValue<LabelValueMeta, TMultiple>
+  : LabelValueMeta;
 
 type SelectChangeEvent<
   TMultiple extends boolean = false,
@@ -94,7 +92,7 @@ type SelectProps<TNative extends boolean | Breakpoints = false> =
         | 'show'
         | 'width'
       > &
-        Omit<AutocompleteSearchHookProps, 'query'> &
+        Omit<AutocompleteSearchHookProps, 'disabled' | 'query'> &
         Pick<
           IressSelectActivatorProps,
           'append' | 'prepend' | 'selectedOptionsText'
@@ -118,10 +116,12 @@ export type IressSelectProps<
    */
   autoHighlight?: boolean;
 
+  disabled?: boolean;
+
   /**
    * Value of selected option for uncontrolled select.
    */
-  defaultValue?: ControlledValue<LabelValueMeta, TMultiple>;
+  defaultValue?: SelectValue<TMultiple, TNative>;
 
   /**
    * Set to true if the user can select multiple options.
@@ -159,7 +159,7 @@ export type IressSelectProps<
   /**
    * Placeholder, shown when there is nothing selected.
    */
-  placeholder?: ReactNode;
+  placeholder?: TNative extends true ? string : ReactNode;
 
   /**
    * Renders the select as read-only.
@@ -198,7 +198,7 @@ export type IressSelectProps<
   /**
    * Value of selected option for controlled select.
    */
-  value?: ControlledValue<LabelValueMeta, TMultiple>;
+  value?: SelectValue<TMultiple, TNative>;
 
   /*
    * Whether the focus is virtual (using `aria-activedescendant`, usually for screen readers).
@@ -307,6 +307,7 @@ const Select = <
     autoHighlight = true,
     className,
     defaultValue,
+    disabled,
     footer,
     header,
     id,
@@ -316,7 +317,7 @@ const Select = <
     onChange,
     onBlur,
     options,
-    native,
+    native: nativeProp,
     placeholder,
     readOnly,
     renderHiddenInput,
@@ -347,6 +348,14 @@ const Select = <
   const popoverRef = useRef<PopoverRef | null>(null);
   const selectRef = useRef<HTMLSelectElement | null>(null);
   const hiddenInputRef = useRef<HTMLInputElement | null>(null);
+  const { value: native } = useResponsiveProps(
+    typeof nativeProp === 'string'
+      ? { xs: true, [nativeProp]: false }
+      : { xs: nativeProp },
+    {
+      disabled: !nativeProp,
+    },
+  );
 
   const {
     append,
@@ -370,6 +379,7 @@ const Select = <
     shouldShowNoResults,
   } = useAutocompleteSearch({
     debounceThreshold,
+    disabled: !show || !!native,
     initialOptions,
     minSearchLength,
     options,
@@ -453,10 +463,19 @@ const Select = <
       <NativeSelect
         className={cx(className, GlobalCSSClass.Select)}
         data-testid={restProps['data-testid']}
+        disabled={disabled}
         id={id}
         name={name}
-        onChange={onChange as SelectChangeEvent<false, true>}
+        onChange={(e, value) => {
+          (onChange as SelectChangeEvent<false, true>)?.(e, value);
+          setValue(value);
+        }}
         options={options}
+        placeholder={
+          typeof nativeProp === 'string'
+            ? ((placeholder as string) ?? '')
+            : (placeholder as string)
+        }
         style={restProps.style}
         value={value as SelectValue<false, true>}
         width={width}
@@ -510,7 +529,7 @@ const Select = <
             setValue={setValue}
             setShow={setShow}
             show={show}
-            value={value}
+            value={value as SelectValue<TMultiple, false>}
           />
         }
         align={align}
@@ -546,7 +565,7 @@ const Select = <
             shouldShowInstructions={shouldShowInstructions}
             shouldShowNoResults={shouldShowNoResults}
             show={show}
-            value={value}
+            value={value as SelectValue<TMultiple, false>}
           />
           {footer}
         </div>
@@ -557,7 +576,7 @@ const Select = <
         name={name}
         renderHiddenInput={renderHiddenInput}
         required={required}
-        value={value}
+        value={value as SelectValue<TMultiple, false>}
         ref={hiddenInputRef}
       />
     </>

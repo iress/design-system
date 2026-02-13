@@ -22,7 +22,7 @@ export const focusable = defineUtility({
         borderColor: `var(--iress-border-color--default, var(--iress-border-color, ${cssVars.colour.neutral[70]}))`,
 
         '&:has(input:disabled, textarea:disabled, select:disabled)': {
-          background: cssVars.colour.neutral[20],
+          background: `var(--iress-background--disabled, ${cssVars.colour.neutral[20]})`,
           cursor: 'not-allowed',
         },
         '&:hover:not(:has(input:disabled, textarea:disabled, select:disabled))':

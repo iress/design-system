@@ -17,18 +17,12 @@ export const nativeSelect = sva({
       position: 'relative',
       lineHeight: 1,
       focusable: 'has-input',
-    },
-    control: {
-      position: 'relative',
       selectChevron: true,
-      color: 'colour.neutral.90',
-
-      '&:has(:disabled)': {
-        color: 'colour.neutral.60',
-      },
+      '--iress-background--disabled': '{colors.colour.neutral.30}',
     },
     element: {
       textStyle: 'typography.body.md',
+      color: 'colour.neutral.90',
       display: 'block',
       width: '[100%]',
       height: '[calc({sizes.input.height} - 2px)]',
@@ -37,16 +31,24 @@ export const nativeSelect = sva({
       border: '[0]',
       bg: 'transparent',
 
-      _focus: {
-        outline: '[none]',
+      '&:disabled': {
+        color: 'colour.neutral.70',
+        cursor: 'not-allowed',
       },
 
       '& option, & optgroup': {
-        color: 'colour.neutral.80',
+        color: 'colour.neutral.70',
       },
     },
   },
   variants: {
+    showingPlaceholder: {
+      true: {
+        element: {
+          color: 'colour.neutral.70',
+        },
+      },
+    },
     width: {
       '2': {
         wrapper: {

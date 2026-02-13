@@ -8,3 +8,6 @@ export * from './SelectMenu/SelectMenu';
 export * from './SelectSearch/SelectSearch';
 export * from './SelectSearchInput/SelectSearchInput';
 export * from './SelectTags/SelectTags';
+
+export * from './Select.styles';
+export * from './components/NativeSelect.styles';
