@@ -13,10 +13,10 @@ export const popover = sva({
       // Performance: CSS containment (no paint due to floating nature)
       contain: 'style',
       bg: 'colour.neutral.10',
-      border: 'divider',
       borderRadius: 'radius.system.form',
-      layerStyle: 'floating',
+      layerStyle: 'dropdown',
       maxWidth: 'input.16',
+      zIndex: '200',
     },
   },
   variants: {

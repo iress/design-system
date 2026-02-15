@@ -15,8 +15,8 @@ const renderRadio = (
   testId?: string,
 ) => (
   <IressRadio value={value} key={value} data-testid={testId}>
-    <IressPanel textAlign="center" bg="transparent" p="lg">
-      <IressStack gap="md">
+    <IressPanel textAlign="center" bg="transparent" px="none" py="md" mr="-md">
+      <IressStack gap="xs">
         <IressIcon name={icon} textStyle="typography.heading.1" />
         <IressText textStyle="typography.heading.4" noGutter>
           {label}

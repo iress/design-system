@@ -1,7 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressMenuItem } from './MenuItem';
 import { IressMenu } from '../Menu';
-import { IressBadge, IressIcon, IressPanel, IressPopover } from '@/main';
+import { IressIcon, IressPanel, IressPill, IressPopover } from '@/main';
 import { RoutingLinkMenu } from './mocks/RoutingLinkMenu';
 import RoutingLinkMenuSource from './mocks/RoutingLinkMenu.tsx?raw';
 import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
@@ -67,7 +67,7 @@ export const PrependAndAppend: Story = {
   args: {
     ...Unselected.args,
     prepend: <IressIcon name="home" />,
-    append: <IressBadge mode="success">New</IressBadge>,
+    append: <IressPill mode="70">New</IressPill>,
   },
 };
 

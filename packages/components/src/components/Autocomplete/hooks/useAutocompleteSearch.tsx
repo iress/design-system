@@ -15,6 +15,13 @@ export interface AutocompleteSearchHookProps {
   debounceThreshold?: number;
 
   /**
+   * Disables the hook from running any effects or search operations.
+   * When disabled, the hook returns empty results and default state.
+   * @default false
+   */
+  disabled?: boolean;
+
+  /**
    * Initial options data set, shown when the input is empty.
    */
   initialOptions?: LabelValueMeta[];
@@ -255,6 +262,7 @@ const useSearchOperations = (
  */
 export const useAutocompleteSearch = ({
   debounceThreshold = DEFAULT_DEBOUNCE_THRESHOLD,
+  disabled = false,
   initialOptions = [],
   minSearchLength = DEFAULT_MIN_SEARCH_LENGTH,
   options = [],
@@ -268,6 +276,8 @@ export const useAutocompleteSearch = ({
 
   const search = useCallback(
     (force = false) => {
+      if (disabled) return;
+
       if (typeof options === 'function') {
         void searchOperations.handleAsync(
           options,
@@ -285,13 +295,23 @@ export const useAutocompleteSearch = ({
         force,
       );
     },
-    [debouncedQuery, minSearchLength, options, searchOperations],
+    [disabled, debouncedQuery, minSearchLength, options, searchOperations],
   );
 
-  useEffect(search, [search]);
+  useEffect(() => {
+    if (!disabled) {
+      search();
+    }
+  }, [disabled, search]);
 
   let calculatedResults: FormattedLabelValueMeta[];
-  if (searchState.results.length) {
+  if (disabled) {
+    // When disabled, return all available options without filtering
+    const allOptions = Array.isArray(options)
+      ? options
+      : (initialOptions ?? []);
+    calculatedResults = allOptions;
+  } else if (searchState.results.length) {
     calculatedResults = searchState.results;
   } else if (debouncedQuery.length) {
     calculatedResults = [];
@@ -303,17 +323,20 @@ export const useAutocompleteSearch = ({
     clearError: searchState.clearError,
     debouncedQuery,
     error: searchState.error,
-    loading: searchState.loading,
+    loading: disabled ? false : searchState.loading,
     shouldShowInstructions:
+      !disabled &&
       query.length < minSearchLength &&
       !searchState.results.length &&
       !initialOptions?.length,
     shouldShowDebounceWaiting:
+      !disabled &&
       query.length >= minSearchLength &&
       debouncedQuery.length < minSearchLength &&
       !searchState.loading &&
       !searchState.hasSearched,
     shouldShowNoResults:
+      !disabled &&
       searchState.hasSearched &&
       !searchState.loading &&
       searchState.results.length === 0 &&

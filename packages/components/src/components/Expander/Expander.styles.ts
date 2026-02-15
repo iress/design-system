@@ -14,7 +14,6 @@ export const expander = sva({
       // Performance: CSS containment (no paint to allow overflow)
       contain: 'layout style',
       display: 'block',
-      focusable: 'has-controller',
     },
     activator: {
       display: 'inline-block',
@@ -24,6 +23,7 @@ export const expander = sva({
       bg: 'transparent',
       cursor: 'pointer',
       position: 'relative',
+      focusable: 'true',
     },
     chevron: {
       width: '[1.5em]',
@@ -49,12 +49,6 @@ export const expander = sva({
         root: {
           border: 'table',
           borderRadius: 'radius.system.layout',
-          p: 'spacing.4',
-          transition: 'colors',
-
-          '&:has([aria-controls]:hover)': {
-            borderColor: 'colour.primary.fill',
-          },
         },
         activator: {
           display: 'flex',
@@ -62,28 +56,35 @@ export const expander = sva({
           alignItems: 'flex-start',
           width: '[100%]',
           textStyle: 'typography.heading.3',
+          px: 'spacing.4',
+          py: 'spacing.3',
+          borderRadius: 'radius.system.layout',
+          transition: '[all 0.3s linear]',
+          focusable: 'expander-activator',
 
           _hover: {
-            color: 'colour.primary.text',
+            bg: 'colour.neutral.20',
+          },
+
+          '&[aria-expanded="true"]': {
+            borderBottomRadius: 'radius.0',
           },
         },
         chevron: {
           bg: 'colour.neutral.30',
           borderRadius: '50%',
-
-          _groupHover: {
-            bg: 'colour.primary.surfaceHover',
-          },
+        },
+        content: {
+          px: 'spacing.4',
+          pb: 'spacing.4',
+          pt: 'spacing.3',
         },
       },
       link: {
         activator: {
           color: 'colour.primary.text',
           textDecoration: 'underline',
-
-          _before: {
-            borderRadius: 'radius.system.badge',
-          },
+          borderRadius: 'radius.system.button',
 
           _hover: {
             textDecoration: 'none',

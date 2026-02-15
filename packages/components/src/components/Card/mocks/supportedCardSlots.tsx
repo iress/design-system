@@ -5,7 +5,8 @@ import {
   IressPanel,
   IressText,
   IressInline,
-  IressBadge,
+  IressTag,
+  IressPill,
 } from '@/main';
 
 // eslint-disable-next-line react-refresh/only-export-components -- helper function, not component
@@ -38,12 +39,12 @@ export const supportedCardSlots = {
     </IressText>
   ),
   footer: (
-    <IressInline gap="sm" horizontalAlign="between">
+    <IressInline gap="sm" horizontalAlign="between" verticalAlign="middle">
       <IressInline gap="sm">
-        <IressBadge pill>#new-starter</IressBadge>
-        <IressBadge pill>#first-day</IressBadge>
+        <IressTag mode="30">#new-starter</IressTag>
+        <IressTag mode="60">#first-day</IressTag>
       </IressInline>
-      <IressBadge mode="success">NEW</IressBadge>
+      <IressPill mode="70">NEW</IressPill>
     </IressInline>
   ),
 };

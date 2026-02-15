@@ -17,7 +17,6 @@ import { useState, useMemo, Suspense } from 'react';
 
 import alert from './Alert/meta';
 import autocomplete from './Autocomplete/meta';
-import badge from './Badge/meta';
 import button from './Button/meta';
 import buttonGroup from './ButtonGroup/meta';
 import card from './Card/meta';
@@ -40,13 +39,13 @@ import link from './Link/meta';
 import menu from './Menu/meta';
 import modal from './Modal/meta';
 import panel from './Panel/meta';
+import pill from './Pill/meta';
 import placeholder from './Placeholder/meta';
 import popover from './Popover/meta';
 import progress from './Progress/meta';
 import radio from './Radio/meta';
 import radioGroup from './RadioGroup/meta';
 import readonly from './Readonly/meta';
-import richSelect from './RichSelect/meta';
 import row from './Row/meta';
 import select from './Select/meta';
 import skeleton from './Skeleton/meta';
@@ -72,7 +71,6 @@ const components: {
 }[] = [
   alert,
   autocomplete,
-  badge,
   button,
   buttonGroup,
   card,
@@ -95,13 +93,13 @@ const components: {
   menu,
   modal,
   panel,
+  pill,
   placeholder,
   popover,
   progress,
   radio,
   radioGroup,
   readonly,
-  richSelect,
   row,
   select,
   skeleton,

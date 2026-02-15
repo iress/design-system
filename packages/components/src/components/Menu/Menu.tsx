@@ -84,6 +84,11 @@ export interface IressMenuProps<
    * Will be set automatically when used inside popover or when the `multiSelect` prop is set to true.
    */
   role?: 'menu' | 'list' | 'listbox';
+
+  /**
+   * The variant of the menu, which determines some opinionated styles for the menu items
+   */
+  variant?: TMultiple extends true ? never : 'subdraw' | 'radio';
 }
 
 export interface MenuContextValue<
@@ -151,6 +156,11 @@ export interface MenuContextValue<
    * This is used by components such as `IressMenuItem` to change the selected value.
    */
   toggle: (value?: T, flag?: boolean) => void;
+
+  /**
+   * The variant of the menu, which determines some opinionated styles for the menu items. This is used by components such as `IressMenuItem` to determine how to display itself.
+   */
+  variant?: IressMenuProps<T, TMultiple>['variant'];
 }
 
 function createMenuContext<
@@ -185,6 +195,7 @@ export const IressMenu = <
   onChange,
   role: roleProp = 'list',
   selected: selectedProp,
+  variant,
   ...restProps
 }: IressMenuProps<T, TMultiple>) => {
   const id = useIdIfNeeded({ id: idProp });
@@ -267,6 +278,7 @@ export const IressMenu = <
       role,
       supportsSelection,
       toggle,
+      variant,
     }),
     [
       changeOnBlur,
@@ -279,6 +291,7 @@ export const IressMenu = <
       role,
       supportsSelection,
       toggle,
+      variant,
     ],
   );
 

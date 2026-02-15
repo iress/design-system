@@ -8,7 +8,7 @@ const Thumbnail = () => (
     xmlns="http://www.w3.org/2000/svg"
     className={image()}
   >
-    <g clipPath="url(#clip0_1016_2784)">
+    <g clipPath="url(#clip0_1016_2757)">
       <rect
         width="751"
         height="467"
@@ -23,7 +23,7 @@ const Thumbnail = () => (
         height="229"
         style={{ fill: cssVars.colour.neutral[20] }}
       />
-      <g filter="url(#filter0_d_1016_2784)">
+      <g filter="url(#filter0_d_1016_2757)">
         <rect
           x="50"
           y="74"
@@ -42,7 +42,7 @@ const Thumbnail = () => (
           strokeWidth="2"
         />
       </g>
-      <g filter="url(#filter1_d_1016_2784)">
+      <g filter="url(#filter1_d_1016_2757)">
         <rect
           x="50"
           y="199"
@@ -63,29 +63,45 @@ const Thumbnail = () => (
         />
       </g>
       <path
+        d="M51 406C51 419.255 61.7452 430 75 430H685C698.807 430 710 418.807 710 405V315H51V406Z"
+        style={{ fill: cssVars.colour.primary.surface }}
+      />
+      <rect
+        x="86"
+        y="355"
+        width="590"
+        height="27"
+        rx="13.5"
+        style={{ fill: cssVars.colour.primary.text }}
+      />
+      <path
         d="M675.622 110.064C676.126 110.559 676.126 111.252 675.622 111.746L654.357 132.629C653.853 133.124 653.147 133.124 652.643 132.629L631.378 111.746C630.874 111.252 630.874 110.559 631.378 110.064L632.083 109.371C632.587 108.876 633.293 108.876 633.797 109.371L653.55 128.67L673.203 109.371C673.707 108.876 674.413 108.876 674.917 109.371L675.622 110.064Z"
         style={{ fill: cssVars.colour.primary.text }}
       />
       <rect
         x="86"
-        y="259"
-        width="582"
+        y="245"
+        width="259"
         height="27"
         rx="13.5"
         style={{ fill: cssVars.colour.neutral[50] }}
       />
-      <rect
-        x="86"
-        y="342"
-        width="582"
-        height="27"
-        rx="13.5"
-        style={{ fill: cssVars.colour.neutral[50] }}
+      <line
+        x1="51"
+        y1="313"
+        x2="710"
+        y2="313"
+        style={{ stroke: cssVars.colour.primary.text }}
+        strokeWidth="4"
+      />
+      <path
+        d="M677.641 280.061C678.12 280.539 678.12 281.208 677.641 281.686L676.683 282.642C676.205 283.119 675.534 283.119 675.056 282.642L662.704 270.314C662.512 270.123 662.417 269.836 662.417 269.454V268.498C658.874 271.747 654.086 273.754 648.916 273.754C637.905 273.754 629 264.867 629 253.877C629 242.983 637.905 234 648.916 234C659.831 234 668.832 242.983 668.832 253.877C668.832 259.133 666.821 263.816 663.47 267.447H664.523C664.81 267.447 665.098 267.543 665.289 267.734L677.641 280.061ZM648.916 270.696C658.204 270.696 665.768 263.242 665.768 253.877C665.768 244.608 658.204 237.058 648.916 237.058C639.532 237.058 632.064 244.608 632.064 253.877C632.064 263.242 639.532 270.696 648.916 270.696Z"
+        style={{ fill: cssVars.colour.neutral[70] }}
       />
     </g>
     <defs>
       <filter
-        id="filter0_d_1016_2784"
+        id="filter0_d_1016_2757"
         x="48"
         y="73"
         width="664"
@@ -110,17 +126,17 @@ const Thumbnail = () => (
         <feBlend
           mode="normal"
           in2="BackgroundImageFix"
-          result="effect1_dropShadow_1016_2784"
+          result="effect1_dropShadow_1016_2757"
         />
         <feBlend
           mode="normal"
           in="SourceGraphic"
-          in2="effect1_dropShadow_1016_2784"
+          in2="effect1_dropShadow_1016_2757"
           result="shape"
         />
       </filter>
       <filter
-        id="filter1_d_1016_2784"
+        id="filter1_d_1016_2757"
         x="32"
         y="191"
         width="696"
@@ -144,16 +160,16 @@ const Thumbnail = () => (
         <feBlend
           mode="normal"
           in2="BackgroundImageFix"
-          result="effect1_dropShadow_1016_2784"
+          result="effect1_dropShadow_1016_2757"
         />
         <feBlend
           mode="normal"
           in="SourceGraphic"
-          in2="effect1_dropShadow_1016_2784"
+          in2="effect1_dropShadow_1016_2757"
           result="shape"
         />
       </filter>
-      <clipPath id="clip0_1016_2784">
+      <clipPath id="clip0_1016_2757">
         <rect
           width="751"
           height="467"

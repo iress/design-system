@@ -131,6 +131,12 @@ export interface LabelValueMeta<
   append?: ReactNode;
 
   /**
+   * Group options under a common heading.
+   * **Note:** When `children` is provided, the option becomes a non-selectable group label and its children are the selectable options within that group. `value` is not used in these cases.
+   */
+  children?: Omit<LabelValueMeta<T>, 'children'>[];
+
+  /**
    * Whether to display a divider below the option.
    */
   divider?: boolean;
@@ -154,6 +160,12 @@ export interface LabelValueMeta<
 export interface FormattedLabelValueMeta<
   T extends FormControlValue = FormControlValue,
 > extends LabelValueMeta<T> {
+  /**
+   * Group options under a common heading.
+   * **Note:** When `children` is provided, the option becomes a non-selectable group label and its children are the selectable options within that group. `value` is not used in these cases.
+   */
+  children?: Omit<FormattedLabelValueMeta<T>, 'children'>[];
+
   /**
    * Formatted label content, allowing for highlighted search terms.
    */

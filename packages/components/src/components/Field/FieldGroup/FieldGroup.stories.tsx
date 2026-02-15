@@ -10,7 +10,6 @@ import {
   IressPanel,
   IressPopover,
   IressReadonly,
-  IressRichSelect,
   IressSelect,
 } from '@/main';
 import { type ComponentProps } from 'react';
@@ -129,7 +128,7 @@ export const InlineSink: Story = {
     <form>
       <IressFieldGroup {...{ ...args, inputs: undefined }}>
         <IressField label="Emoji" htmlFor="emoji">
-          <IressRichSelect
+          <IressSelect
             width="2"
             id="emoji"
             options={[
@@ -142,11 +141,16 @@ export const InlineSink: Story = {
         </IressField>
 
         <IressField label="Title" htmlFor="title">
-          <IressSelect width="2" id="title">
-            <option value="mr">Mr</option>
-            <option value="mrs">Mrs</option>
-            <option value="miss">Miss</option>
-          </IressSelect>
+          <IressSelect
+            native
+            width="2"
+            id="title"
+            options={[
+              { label: 'Mr', value: 'mr' },
+              { label: 'Mrs', value: 'mrs' },
+              { label: 'Miss', value: 'miss' },
+            ]}
+          />
         </IressField>
 
         <IressField label="First name" htmlFor="firstName" required>
@@ -183,11 +187,15 @@ export const InlineAndReadonly: Story = {
     <form>
       <IressFieldGroup {...{ ...args, inputs: undefined }}>
         <IressField label="Title" htmlFor="title">
-          <IressSelect width="2" id="title">
-            <option value="mr">Mr</option>
-            <option value="mrs">Mrs</option>
-            <option value="miss">Miss</option>
-          </IressSelect>
+          <IressSelect
+            width="2"
+            id="title"
+            options={[
+              { label: 'Mr', value: 'mr' },
+              { label: 'Mrs', value: 'mrs' },
+              { label: 'Miss', value: 'miss' },
+            ]}
+          />
         </IressField>
 
         <IressField label="First name" htmlFor="firstName" required>

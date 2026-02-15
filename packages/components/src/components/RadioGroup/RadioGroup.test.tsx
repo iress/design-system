@@ -69,30 +69,6 @@ describe('IressRadioGroup', () => {
   });
 
   describe('props', () => {
-    describe('hiddenRadio', () => {
-      it('renders all radio children as hidden radios', () => {
-        const screen = renderRadioGroup({
-          hiddenRadio: true,
-        });
-
-        screen.getAllByTestId(CHILDREN_TEST_ID).forEach((radio) => {
-          const input = radio.querySelector('input');
-          const label = input?.nextElementSibling;
-
-          expect(input).toHaveClass(
-            radioStyles({ hiddenControl: true }).input!,
-          );
-          expect(label).toHaveClass(
-            radioStyles({ hiddenControl: true }).label!,
-          );
-          const svg = radio.querySelector('svg');
-          expect(svg).toHaveClass(
-            radioStyles({ hiddenControl: true }).checkboxMark!,
-          );
-        });
-      });
-    });
-
     describe('layout', () => {
       it('changes the layout class name on the radio group', () => {
         const screen = renderRadioGroup({
@@ -201,6 +177,30 @@ describe('IressRadioGroup', () => {
         expect(radioGroup.innerHTML).toBe('');
       });
     });
+
+    describe('variant', () => {
+      it('adds the card class to the radio group when variant prop is card', () => {
+        const screen = renderRadioGroup({
+          variant: 'card',
+        });
+
+        screen.getAllByRole('radio').forEach((checkbox) => {
+          expect(checkbox).toHaveClass(radioStyles({ variant: 'card' }).input!);
+        });
+      });
+
+      it('adds the touch class to the radio group when variant prop is touch', () => {
+        const screen = renderRadioGroup({
+          variant: 'touch',
+        });
+
+        screen.getAllByRole('radio').forEach((checkbox) => {
+          expect(checkbox).toHaveClass(
+            radioStyles({ variant: 'touch' }).input!,
+          );
+        });
+      });
+    });
   });
 
   describe('interactions', () => {
@@ -228,26 +228,6 @@ describe('IressRadioGroup', () => {
       const screen = renderRadioGroupInField();
       const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
-    });
-  });
-
-  describe('touch', () => {
-    it('adds the touch class to the radio when touch prop is true', () => {
-      const screen = renderRadioGroup({
-        touch: true,
-      });
-
-      screen.getAllByTestId(CHILDREN_TEST_ID).forEach((radio) => {
-        const input = radio.querySelector('input');
-        const label = input?.nextElementSibling;
-
-        expect(input).toHaveClass(radioStyles({ touch: true }).input!);
-        expect(label).toHaveClass(radioStyles({ touch: true }).label!);
-
-        const svg = label?.querySelector('svg');
-        expect(svg).toBeInTheDocument();
-        expect(svg).toHaveClass(radioStyles({ touch: true }).radioMark!);
-      });
     });
   });
 });

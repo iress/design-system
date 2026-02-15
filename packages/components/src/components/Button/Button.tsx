@@ -90,7 +90,7 @@ export interface InternalButtonProps<
    * If `true`, the button will stretch to fill it's container. The prop is responsive, so you can set the breakpoint(s) at which the button will be fluid.
    *
    * All breakpoints: `fluid={true}`
-   * Up to a specific breakpoint: `fluid={{ base: true, md: false }}`
+   * Up to a specific breakpoint: `fluid="md"`
    */
   fluid?: true | Breakpoints;
 

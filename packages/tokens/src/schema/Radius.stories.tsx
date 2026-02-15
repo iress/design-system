@@ -101,16 +101,37 @@ export const System: Story = {
         <IressCol span={{ md: 8 }}>
           <IressPanel
             bg="colour.primary.surface"
+            width="input.2"
+            aria-hidden="true"
+            mb="sm"
+            p="spacing.3"
+            style={{ borderRadius: cssVars.radius.system.pill }}
+          />
+          <IressText>
+            <h3>Pill</h3>
+            <p>{radius.system.pill.$description}</p>
+            <p>
+              <TokenTag>radius.system.pill</TokenTag>
+            </p>
+          </IressText>
+        </IressCol>
+      </IressRow>
+      <IressDivider />
+      <IressRow gutter="md" verticalAlign="bottom">
+        <IressCol span={{ md: 8 }}>
+          <IressPanel
+            bg="colour.primary.surface"
             width="input.6"
             aria-hidden="true"
             mb="sm"
-            style={{ borderRadius: cssVars.radius.system.badge }}
+            p="spacing.3"
+            style={{ borderRadius: cssVars.radius.system.tag }}
           />
           <IressText>
-            <h3>Badge</h3>
-            <p>{radius.system.badge.$description}</p>
+            <h3>Tag</h3>
+            <p>{radius.system.tag.$description}</p>
             <p>
-              <TokenTag>radius.system.badge</TokenTag>
+              <TokenTag>radius.system.tag</TokenTag>
             </p>
           </IressText>
         </IressCol>
@@ -123,7 +144,7 @@ export const System: Story = {
             width="input.8"
             aria-hidden="true"
             mb="sm"
-            style={{ borderRadius: cssVars.radius.system.badge }}
+            style={{ borderRadius: cssVars.radius.system.button }}
           />
           <IressText>
             <h3>Button</h3>

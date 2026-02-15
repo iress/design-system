@@ -42,15 +42,6 @@ export const radioGroup = cva({
         },
       },
     },
-    hiddenRadio: {
-      true: {
-        '& label': {
-          _hover: {
-            backgroundColor: 'colour.primary.surfaceHover',
-          },
-        },
-      },
-    },
   },
   defaultVariants: {
     layout: 'stack',

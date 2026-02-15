@@ -2,11 +2,11 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { Markdown } from '@storybook/addon-docs/blocks';
 import {
   type ColorToken,
-  IressBadge,
   IressCard,
   IressCol,
   IressInline,
   type IressPanelProps,
+  IressPill,
   IressRow,
   IressStack,
   IressText,
@@ -40,18 +40,32 @@ interface ColourSwatchProps extends IressPanelProps {
 
 const ContrastRating = ({ ratio }: { ratio: number }) => {
   if (ratio < 3) {
-    return <IressBadge mode="danger">Fail</IressBadge>;
+    return (
+      <IressPill
+        bg="colour.system.danger.fill"
+        color="colour.system.danger.onFill"
+      >
+        Fail
+      </IressPill>
+    );
   }
 
   if (ratio < 4.5) {
-    return <IressBadge mode="warning">AA Large</IressBadge>;
+    return (
+      <IressPill
+        bg="colour.system.warning.fill"
+        color="colour.system.warning.onFill"
+      >
+        AA Large
+      </IressPill>
+    );
   }
 
   if (ratio < 7) {
-    return <IressBadge mode="success">AA</IressBadge>;
+    return <IressPill mode="70">AA</IressPill>;
   }
 
-  return <IressBadge mode="success">AAA</IressBadge>;
+  return <IressPill mode="70">AAA</IressPill>;
 };
 
 const AllowedForeground = ({

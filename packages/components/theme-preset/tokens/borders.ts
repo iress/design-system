@@ -15,7 +15,7 @@ export const borders = {
     value: {
       width: '1px',
       style: 'solid',
-      color: cssVars.colour.neutral['30'],
+      color: cssVars.colour.neutral['50'],
     },
   },
   input: {
@@ -35,7 +35,7 @@ export const borders = {
     },
   },
   table: {
-    description: 'Used for tables and cards',
+    description: 'Used for tables, search bar and cards',
     value: {
       width: '1px',
       style: 'solid',

@@ -3,18 +3,34 @@ import { type Breakpoints, type ResponsiveProp } from '@/types';
 import { useBreakpoint } from './useBreakpoint';
 import { BREAKPOINTS } from '@/constants';
 
+export interface UseResponsivePropsOptions {
+  /**
+   * Whether to inherit the previous breakpoint value, if none was found for the current one.
+   * @default true
+   */
+  inheritPrevious?: boolean;
+
+  /**
+   * Disables the hook from running any side effects.
+   * When disabled, the hook returns the initial breakpoint without listening to resize events.
+   * @default false
+   */
+  disabled?: boolean;
+}
+
 /**
  * Allows you to pluck a value from an object with breakpoint keys.
  * Note: Where possible, we recommend using media queries in CSS instead of JS, as that will reduce the load for the user. However, sometimes it's necessary to change a prop based on the user's breakpoint, hence why this hook is provided.
  * @param {ResponsiveProp<T>} values A set of values, separated by breakpoint and ready for plucking.
- * @param {boolean} inheritPrevious Whether to inherit the previous breakpoint value, if none was found for the current one.
+ * @param {UseResponsivePropsOptions} options Configuration options for the hook.
  * @returns { breakpoint: Breakpoints; value?: T | null } The current user's breakpoint, along with a matching value if one was found.
  */
 export const useResponsiveProps = <T>(
   prop?: ResponsiveProp<T>,
-  inheritPrevious = true,
+  options: UseResponsivePropsOptions = {},
 ): { breakpoint: Breakpoints; value?: T } => {
-  const { breakpoint } = useBreakpoint();
+  const { inheritPrevious = true, disabled = false } = options;
+  const { breakpoint } = useBreakpoint({ disabled });
 
   const value = useMemo(() => {
     // If no props are provided, return undefined and don't waste time

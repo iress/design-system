@@ -345,10 +345,14 @@ describe('IressHookForm', () => {
               name="master"
               label="Master"
               render={(controlledProps) => (
-                <IressSelect {...controlledProps}>
-                  <option value="show">show</option>
-                  <option value="hide">hide</option>
-                </IressSelect>
+                <IressSelect
+                  {...controlledProps}
+                  options={[
+                    { label: 'Show', value: 'show' },
+                    { label: 'Hide', value: 'hide' },
+                  ]}
+                  native
+                />
               )}
             />
             <SlaveField />

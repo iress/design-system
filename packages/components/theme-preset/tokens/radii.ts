@@ -1,10 +1,5 @@
 import { radius, cssVars } from '@iress-oss/ids-tokens';
 
-const badge = radius.system.badge;
-const button = radius.system.button;
-const form = radius.system.form;
-const layout = radius.system.layout;
-
 export const radii = {
   'radius.0': {
     description: radius[0].$description,
@@ -26,21 +21,25 @@ export const radii = {
     description: radius[4].$description,
     value: cssVars.radius['4'],
   },
-  'radius.system.badge': {
-    description: badge.$description,
-    value: cssVars.radius.system.badge,
-  },
   'radius.system.button': {
-    description: button.$description,
+    description: radius.system.button.$description,
     value: cssVars.radius.system.button,
   },
   'radius.system.form': {
-    description: form.$description,
+    description: radius.system.form.$description,
     value: cssVars.radius.system.form,
   },
   'radius.system.layout': {
-    description: layout.$description,
+    description: radius.system.layout.$description,
     value: cssVars.radius.system.layout,
+  },
+  'radius.system.pill': {
+    description: radius.system.pill.$description,
+    value: cssVars.radius.system.pill,
+  },
+  'radius.system.tag': {
+    description: radius.system.tag.$description,
+    value: cssVars.radius.system.tag,
   },
   none: {
     description: 'No border radius',

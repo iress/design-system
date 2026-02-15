@@ -1,9 +1,9 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressRadio } from '.';
-import { IressPanel } from '../Panel';
+import { IressRadio, type IressRadioProps } from '.';
 import { IressStack } from '../Stack';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { type FormControlValue } from '@/types';
 
 type Story = StoryObj<typeof IressRadio>;
 
@@ -30,16 +30,6 @@ export const Checked: Story = {
   },
 };
 
-export const HiddenControl: Story = {
-  args: {
-    hiddenControl: true,
-    children: <IressPanel bg="transparent">Hidden radio button</IressPanel>,
-  },
-  argTypes: {
-    ...disableArgTypes(['children']),
-  },
-};
-
 export const ReadOnly: Story = {
   ...Default,
   args: {
@@ -54,9 +44,21 @@ export const ReadOnly: Story = {
   ),
 };
 
-export const Touch: Story = {
-  args: {
-    ...Default.args,
-    touch: true,
+export const Variants: Story = {
+  argTypes: {
+    ...disableArgTypes(['children', 'variant', 'heading']),
   },
+  render: (args) => (
+    <IressStack gap="lg">
+      <IressRadio {...args} variant="card" heading="Widget">
+        A description of the widget
+      </IressRadio>
+      <IressRadio
+        {...(args as IressRadioProps<FormControlValue, 'touch'>)}
+        variant="touch"
+      >
+        Touch variant
+      </IressRadio>
+    </IressStack>
+  ),
 };

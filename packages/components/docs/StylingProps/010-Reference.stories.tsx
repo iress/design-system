@@ -1,6 +1,6 @@
 import { IressLink } from '@/components/Link';
 import { type IressCSSProps } from '@/interfaces';
-import { IressBadge, IressIcon, IressInline, IressTable } from '@/main';
+import { IressPill, IressIcon, IressInline, IressTable } from '@/main';
 import {
   DiffViewer,
   type DiffViewerProps,
@@ -282,7 +282,7 @@ const StylingPropsReferenceTable = () => (
           const tokens = Array.isArray(tokenMapping) ? (
             <IressInline gap="xs">
               {tokenMapping.map((token) => (
-                <IressBadge mode="info">{token}</IressBadge>
+                <IressPill>{token}</IressPill>
               ))}
             </IressInline>
           ) : (

@@ -92,7 +92,7 @@ describe('usePushElement', () => {
 
     // Checks if the element is pushed correctly
     expect(element.style.getPropertyValue('margin-inline-end')).toBe(
-      'var(--sizes-overlay\\.sm, 375px)',
+      'var(--sizes-overlay\\.sm, 368px)',
     );
 
     expect(onOpen).toHaveBeenCalledTimes(1);

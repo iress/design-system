@@ -9,7 +9,16 @@ import { IressButton } from '../Button';
 import { useModal } from './hooks/useModal';
 import { ModalUsingState } from './mocks/ModalUsingState';
 import ModalUsingStateSource from './mocks/ModalUsingState.tsx?raw';
-import { IressStack, IressText } from '../../main';
+import {
+  IressStack,
+  IressText,
+  IressTabSet,
+  IressTab,
+  IressInline,
+  IressTag,
+  IressPlaceholder,
+  IressStyled,
+} from '../../main';
 import { ModalSizes } from './mocks/ModalSizes';
 import ModalSizesSource from './mocks/ModalSizes.tsx?raw';
 import {
@@ -58,8 +67,58 @@ export default {
 
 export const Default: Story = {
   args: {
-    children: 'Modal content',
-    footer: 'Footer slot',
+    children: (
+      <IressStack gap="sm">
+        <IressText element="p">
+          Optional contextual information added here, this can be introductory
+          text or any other relevant copy.
+        </IressText>
+        <IressTabSet>
+          <IressTab label="John">
+            <IressStack gap="md" pt="sm">
+              <IressInline
+                gap="md"
+                horizontalAlign="between"
+                verticalAlign="middle"
+              >
+                <IressInline gap="md">
+                  <IressTag onDelete={() => console.log('Deleting...')}>
+                    Label
+                  </IressTag>
+                  <IressTag onDelete={() => console.log('Deleting...')}>
+                    Label
+                  </IressTag>
+                  <IressTag onDelete={() => console.log('Deleting...')}>
+                    Label
+                  </IressTag>
+                </IressInline>
+                <IressText
+                  textStyle="typography.body.sm"
+                  color="colour.neutral.70"
+                >
+                  3/5 Widgets Selected
+                </IressText>
+              </IressInline>
+              <IressPlaceholder heading="Slot" py="xl">
+                <IressStyled maxWidth="input.16" mx="auto" textAlign="center">
+                  Swap slot through instance swap, to change into input field of
+                  choice.
+                </IressStyled>
+              </IressPlaceholder>
+            </IressStack>
+          </IressTab>
+          <IressTab label="John" />
+          <IressTab label="John" />
+        </IressTabSet>
+      </IressStack>
+    ),
+    footer: (
+      <IressInline gap="md" horizontalAlign="right">
+        <IressButton>Button</IressButton>
+        <IressButton mode="primary">Button</IressButton>
+      </IressInline>
+    ),
+    heading: 'Modal Header',
     id: MODAL_ID,
   },
   argTypes: {
@@ -112,6 +171,17 @@ export const ShowWithState: Story = {
   render: (args) => <ModalUsingState {...args} />,
   parameters: {
     ...withTransformedRawSource(ModalUsingStateSource, 'IressModalProps'),
+  },
+};
+
+export const Heading: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    heading: 'Modal heading',
+  },
+  argTypes: {
+    ...disableArgTypes(['show', 'heading']),
   },
 };
 

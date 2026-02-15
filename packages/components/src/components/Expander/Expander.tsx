@@ -75,8 +75,9 @@ export const IressExpander = ({
 }: IressExpanderProps) => {
   const [isOpen, setIsOpen] = useState(open);
   const id = useIdIfNeeded({ id: idProp });
+
   const classes = expander({ mode, open: isOpen });
-  const classesRaw = expander.raw({ mode, open: isOpen });
+  const styles = expander.raw({ mode, open: isOpen });
 
   useEffect((): void => {
     setIsOpen(open);
@@ -102,7 +103,7 @@ export const IressExpander = ({
         aria-controls={`${id}__container`}
         className={cx(
           activatorStyle?.className,
-          css(classesRaw.activator, styleProps),
+          css(styles.activator, styleProps),
           GlobalCSSClass.Group,
         )}
         data-testid={

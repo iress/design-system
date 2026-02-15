@@ -25,7 +25,7 @@ import {
 } from 'react';
 import { type InputRef } from '../Input/InputBase/InputBase';
 import { AutocompleteInstructions } from './components/AutocompleteInstructions';
-import { IressSelectMenu, type IressSelectMenuProps } from '../RichSelect';
+import { IressSelectMenu, type IressSelectMenuProps } from '../Select';
 import { IressReadonly } from '../Readonly';
 import { IressAlert } from '../Alert';
 import { type LabelValueMeta } from '@/interfaces';
@@ -115,7 +115,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
       debounceThreshold,
       defaultValue,
       errorText = (
-        <IressAlert status="danger" mb="none">
+        <IressAlert status="danger" mb="none" borderRadius="radius.system.form">
           An unknown error occurred. Please contact support if the error
           persists.
         </IressAlert>
@@ -291,6 +291,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
         onDeactivated={handlePopoverDeactivated}
         show={show}
         type="listbox"
+        focusStartIndex={0}
       >
         {results.length > 0 && (
           <>

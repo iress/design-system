@@ -2,10 +2,10 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTab, IressTabSet } from '.';
 import { IressStack } from '../Stack';
 import {
-  IressBadge,
   IressIcon,
   IressInline,
   IressPanel,
+  IressPill,
   IressText,
 } from '../../main';
 import { TabsUsingState } from './mocks/TabsUsingState';
@@ -121,10 +121,7 @@ export const TabsWithBadges: Story = {
         key="address"
         label={
           <>
-            Address{' '}
-            <IressBadge pill mode="info" ml="xs">
-              3
-            </IressBadge>
+            Address <IressPill ml="xs">3</IressPill>
           </>
         }
       >
@@ -133,7 +130,7 @@ export const TabsWithBadges: Story = {
       <IressTab
         key="employment"
         label={
-          <IressInline gap="sm">
+          <IressInline gap="sm" noWrap>
             <IressIcon name="user" /> Employment
           </IressInline>
         }

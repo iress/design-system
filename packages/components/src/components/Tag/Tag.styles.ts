@@ -8,15 +8,15 @@ export const tag = sva({
       contain: 'layout style',
       alignItems: 'center',
       bg: 'colour.neutral.20',
+      borderRadius: 'radius.system.tag',
       border: 'divider',
-      borderRadius: 'radius.system.badge',
       color: 'colour.neutral.80',
       display: 'inline-flex',
       gap: 'spacing.1',
-      py: 'none',
-      px: 'sm',
+      p: 'spacing.1',
       transition: '[all .2s]',
-      textStyle: 'typography.body.md',
+      textStyle: 'typography.body.sm',
+      focusable: 'has-button',
     },
     deleteButton: {
       my: '-spacing.1',
@@ -69,10 +69,8 @@ export const tag = sva({
     compact: {
       true: {
         root: {
+          py: 'spacing.0',
           height: '[calc({sizes.input.height} - {spacing.spacing.2} - 2px)]',
-          py: 'none',
-          px: 'xs',
-          textStyle: 'typography.body.sm',
         },
       },
     },
@@ -96,8 +94,74 @@ export const tag = sva({
         },
       },
     },
+    mode: {
+      '10': {
+        root: {
+          bg: 'colour.data.subtle.10',
+          borderColor: 'colour.data.subtle.10',
+          color: 'colour.data.bold.10',
+        },
+      },
+      '20': {
+        root: {
+          bg: 'colour.data.subtle.20',
+          borderColor: 'colour.data.subtle.20',
+          color: 'colour.data.bold.20',
+        },
+      },
+      '30': {
+        root: {
+          bg: 'colour.data.subtle.30',
+          borderColor: 'colour.data.subtle.30',
+          color: 'colour.data.bold.30',
+        },
+      },
+      '40': {
+        root: {
+          bg: 'colour.data.subtle.40',
+          borderColor: 'colour.data.subtle.40',
+          color: 'colour.data.bold.40',
+        },
+      },
+      '50': {
+        root: {
+          bg: 'colour.data.subtle.50',
+          borderColor: 'colour.data.subtle.50',
+          color: 'colour.data.bold.50',
+        },
+      },
+      '60': {
+        root: {
+          bg: 'colour.data.subtle.60',
+          borderColor: 'colour.data.subtle.60',
+          color: 'colour.data.bold.60',
+        },
+      },
+      '70': {
+        root: {
+          bg: 'colour.data.subtle.70',
+          borderColor: 'colour.data.subtle.70',
+          color: 'colour.data.bold.70',
+        },
+      },
+      '80': {
+        root: {
+          bg: 'colour.data.subtle.80',
+          borderColor: 'colour.data.subtle.80',
+          color: 'colour.data.bold.80',
+        },
+      },
+      '90': {
+        root: {
+          bg: 'colour.data.subtle.90',
+          borderColor: 'colour.data.subtle.90',
+          color: 'colour.data.bold.90',
+        },
+      },
+    },
   },
   defaultVariants: {
     customDeleteButton: false,
+    mode: '90',
   },
 });

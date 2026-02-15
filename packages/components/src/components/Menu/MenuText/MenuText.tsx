@@ -101,7 +101,7 @@ IressMenuText.displayName = 'IressMenuText';
 export const IressMenuHeading = <E extends TextElements = 'h2'>({
   className,
   element = 'h2' as E,
-  textStyle = 'typography.heading.3',
+  textStyle = 'typography.body.md.medium',
   ...restProps
 }: IressMenuTextProps<E>) => (
   <IressMenuText

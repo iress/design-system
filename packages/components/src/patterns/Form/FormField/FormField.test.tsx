@@ -342,9 +342,12 @@ describe('IressFormField', () => {
             label="Select"
             name="select"
             render={(controlledProps) => (
-              <IressSelect {...controlledProps} placeholder="Select">
-                <option value={1}>One</option>
-              </IressSelect>
+              <IressSelect
+                {...controlledProps}
+                placeholder="Select"
+                options={[{ label: 'One', value: 1 }]}
+                native
+              />
             )}
           />
           <IressButton type="submit">Submit</IressButton>
@@ -360,7 +363,12 @@ describe('IressFormField', () => {
       const submit = screen.getByRole('button', { name: 'Submit' });
       await userEvent.click(submit);
 
-      expect(onSubmit).toHaveBeenCalledWith({ select: 1 });
+      expect(onSubmit).toHaveBeenCalledWith({
+        select: {
+          label: 'One',
+          value: 1,
+        },
+      });
     });
 
     it('changes the renderProps to use checked instead of value when used with IressCheckbox', async () => {

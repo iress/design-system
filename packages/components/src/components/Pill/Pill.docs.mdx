@@ -1,0 +1,38 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-oss/ids-storybook-config';
+import * as ComponentStories from './Pill.stories';
+
+<Meta of={ComponentStories} />
+
+# Pill
+
+<ComponentOverview
+  description="Pills are used primarily for status updates, notifications and counts."
+  of={ComponentStories.Default}
+  meta={ComponentStories}
+/>
+
+## When to use
+
+Use pills for **status indication and notifications** where information needs to be highlighted:
+
+- Notification counts (e.g., unread messages, pending items)
+- Status indicators (success, warning, danger, info)
+- "New" or "Updated" labels
+- Drawing attention to important information
+- Quick visual highlights that don't require user interaction
+
+Pills are **informational** - they display information but are not meant to be interactive.
+
+**Not sure?** If users need to interact with items (click, delete, or manage selections), use [Tag](/?path=/docs/components-tag--docs) instead.
+
+## Examples
+
+### Mode
+
+The `mode` prop controls the colour scheme of the badge. There are a range of options, including system and brand colours.
+
+<ComponentExample of={ComponentStories.Mode} />

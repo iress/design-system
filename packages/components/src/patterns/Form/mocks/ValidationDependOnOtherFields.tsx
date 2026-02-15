@@ -89,13 +89,8 @@ export const ValidationDependOnOtherFields = () => {
                   <IressSelect
                     {...field}
                     placeholder="Select your budget range"
-                  >
-                    {budgetOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </IressSelect>
+                    options={budgetOptions}
+                  />
                 )}
               />
             </IressCol>

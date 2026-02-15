@@ -1,6 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import {
-  IressBadge,
+  IressPill,
   IressCol,
   IressRow,
   IressStack,
@@ -28,7 +28,7 @@ const HomePage = () => {
           <IressStack gap="md">
             <IressText>
               <h1>Iress Design System</h1>
-              <IressBadge mode="neutral">{version}</IressBadge>
+              <IressPill mode="30">{version}</IressPill>
             </IressText>
 
             <IressText element="p">

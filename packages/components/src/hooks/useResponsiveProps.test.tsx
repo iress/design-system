@@ -68,7 +68,7 @@ describe('useResponsiveProps', () => {
             base: 'test',
             xs: 'matches',
           },
-          false,
+          { inheritPrevious: false },
         ),
       );
       expect(hook.result.current.value).toBe('test');
@@ -91,10 +91,156 @@ describe('useResponsiveProps', () => {
           {
             xs: 'matches',
           },
-          false,
+          { inheritPrevious: false },
         ),
       );
       expect(hook.result.current.value).toBe(undefined);
+    });
+  });
+
+  describe('disabled functionality', () => {
+    it('returns value based on initial breakpoint when disabled', () => {
+      const hook = renderHook(() =>
+        useResponsiveProps(
+          {
+            [MATCHING_BREAKPOINT]: 'matches',
+            xxl: 'should not match',
+          },
+          { disabled: true },
+        ),
+      );
+      expect(hook.result.current.value).toBe('matches');
+      expect(hook.result.current.breakpoint).toBe(MATCHING_BREAKPOINT);
+    });
+
+    it('does not add resize event listener when disabled', () => {
+      const addEventListenerSpy = vi.spyOn(window, 'addEventListener');
+
+      renderHook(() =>
+        useResponsiveProps(
+          {
+            xs: 'value',
+          },
+          { disabled: true },
+        ),
+      );
+
+      expect(addEventListenerSpy).not.toHaveBeenCalledWith(
+        'resize',
+        expect.any(Function),
+      );
+
+      addEventListenerSpy.mockRestore();
+    });
+
+    it('respects inheritPrevious when disabled', () => {
+      const hook = renderHook(() =>
+        useResponsiveProps(
+          {
+            xs: 'inherited value',
+          },
+          { disabled: true, inheritPrevious: true },
+        ),
+      );
+      expect(hook.result.current.value).toBe('inherited value');
+    });
+
+    it('does not inherit previous when disabled and inheritPrevious is false', () => {
+      const hook = renderHook(() =>
+        useResponsiveProps(
+          {
+            xs: 'should not inherit',
+          },
+          { disabled: true, inheritPrevious: false },
+        ),
+      );
+      expect(hook.result.current.value).toBe(undefined);
+    });
+
+    it('returns base value when disabled and no matching breakpoint', () => {
+      const hook = renderHook(() =>
+        useResponsiveProps(
+          {
+            base: 'base value',
+            xxl: 'should not match',
+          },
+          { disabled: true, inheritPrevious: false },
+        ),
+      );
+      expect(hook.result.current.value).toBe('base value');
+    });
+
+    it('returns undefined when disabled and no value provided', () => {
+      const hook = renderHook(() =>
+        useResponsiveProps(undefined, { disabled: true }),
+      );
+      expect(hook.result.current.value).toBe(undefined);
+    });
+
+    it('starts responding to breakpoint changes when disabled changes from true to false', () => {
+      const hook = renderHook(
+        ({ disabled }) =>
+          useResponsiveProps(
+            {
+              [MATCHING_BREAKPOINT]: 'matches',
+            },
+            { disabled },
+          ),
+        {
+          initialProps: { disabled: true },
+        },
+      );
+
+      expect(hook.result.current.value).toBe('matches');
+
+      // Re-enable the hook
+      hook.rerender({ disabled: false });
+
+      expect(hook.result.current.value).toBe('matches');
+    });
+
+    it('removes event listener on unmount when disabled', () => {
+      const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
+
+      const hook = renderHook(() =>
+        useResponsiveProps(
+          {
+            xs: 'value',
+          },
+          { disabled: true },
+        ),
+      );
+      hook.unmount();
+
+      // Should not try to remove listener if it was never added
+      expect(removeEventListenerSpy).not.toHaveBeenCalledWith(
+        'resize',
+        expect.any(Function),
+      );
+
+      removeEventListenerSpy.mockRestore();
+    });
+
+    it('removes event listener on unmount when enabled', () => {
+      const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
+
+      const hook = renderHook(() =>
+        useResponsiveProps(
+          {
+            xs: 'value',
+          },
+          { disabled: false },
+        ),
+      );
+      hook.unmount();
+
+      // Should remove listener when it was added
+      expect(removeEventListenerSpy).toHaveBeenCalledWith(
+        'resize',
+        expect.any(Function),
+      );
+
+      removeEventListenerSpy.mockRestore();
     });
   });
 });

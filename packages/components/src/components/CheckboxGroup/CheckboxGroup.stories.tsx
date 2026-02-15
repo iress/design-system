@@ -119,7 +119,7 @@ export const Layout: Story = {
 export const HiddenCheckboxes: Story = {
   args: {
     defaultValue: ['home'],
-    hiddenCheckbox: true,
+    variant: 'card',
     name: 'financial-review',
     layout: 'inline',
     children: getFinancialReviewCheckboxes(),
@@ -137,7 +137,7 @@ export const HiddenCheckboxes: Story = {
 export const CustomCheckboxGroupLayout: Story = {
   args: {
     defaultValue: ['home'],
-    hiddenCheckbox: true,
+    variant: 'card',
     name: 'financial-review',
     layout: 'block',
     children: getFinancialReviewManyCheckboxes(),
@@ -180,6 +180,6 @@ export const Touch: Story = {
   ...DefaultChecked,
   args: {
     ...DefaultChecked.args,
-    touch: true,
+    variant: 'touch',
   },
 };

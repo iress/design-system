@@ -21,6 +21,7 @@ import { cx } from '@/styled-system/css';
 import { styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
+import type { CheckboxVariants } from '../Checkbox';
 
 export interface IressRadioGroupProps<T = FormControlValue> extends Omit<
   IressStyledProps,
@@ -30,11 +31,6 @@ export interface IressRadioGroupProps<T = FormControlValue> extends Omit<
    * Content of the radio group, usually multiple `IressRadio` components.
    */
   children?: ReactNode;
-
-  /**
-   * Hides the radio control to allow the creation of custom radio buttons.
-   */
-  hiddenRadio?: boolean;
 
   /**
    * Sets which of the block / inline layout options apply.
@@ -74,20 +70,17 @@ export interface IressRadioGroupProps<T = FormControlValue> extends Omit<
   value?: T;
 
   /**
-   * Add the button-like border and padding to radio when `touch` is true.
+   * The visual variant of the radios in the group. This is passed down to child radios, but can be overridden at the individual radio level.
+   * - `card`: Provides a larger, card-like style with a heading slot.
+   * - `touch`: Provides a larger, button-like style, great for mobile devices.
+   * - `undefined`: The default radio style.
    */
-  touch?: boolean;
+  variant?: CheckboxVariants;
 }
 
 export type RadioGroupContextValue<T = FormControlValue> = Pick<
   IressRadioGroupProps<T>,
-  | 'name'
-  | 'value'
-  | 'hiddenRadio'
-  | 'required'
-  | 'onChange'
-  | 'readOnly'
-  | 'touch'
+  'name' | 'value' | 'required' | 'onChange' | 'readOnly' | 'variant'
 >;
 
 export interface RadioGroupRef extends ReactHookFormCompatibleRef<HTMLDivElement> {
@@ -111,7 +104,6 @@ const RadioGroup = <T = FormControlValue,>(
   {
     children,
     className,
-    hiddenRadio,
     layout = 'stack',
     name,
     onBlur,
@@ -122,7 +114,7 @@ const RadioGroup = <T = FormControlValue,>(
     defaultValue,
     readOnly,
     value: valueProp,
-    touch,
+    variant,
     ...restProps
   }: IressRadioGroupProps<T>,
   ref: ForwardedRef<RadioGroupRef>,
@@ -145,16 +137,15 @@ const RadioGroup = <T = FormControlValue,>(
     () => ({
       name,
       value,
-      hiddenRadio,
       required,
       readOnly,
-      touch,
       onChange: (e, newValue) => {
         setValue(newValue);
         onChange?.(e, newValue);
       },
+      variant,
     }),
-    [name, value, hiddenRadio, required, readOnly, setValue, onChange, touch],
+    [name, value, required, readOnly, variant, setValue, onChange],
   );
 
   useImperativeHandle(ref, () => ({
@@ -190,7 +181,7 @@ const RadioGroup = <T = FormControlValue,>(
         role={role}
         className={cx(
           className,
-          radioGroup({ layout, hiddenRadio }),
+          radioGroup({ layout }),
           GlobalCSSClass.RadioGroup,
         )}
         onBlur={handleBlur}

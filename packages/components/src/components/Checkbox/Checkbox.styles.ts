@@ -1,19 +1,8 @@
 import { sva } from '@/styled-system/css';
 
 export const checkbox = sva({
-  slots: [
-    'formElement',
-    'input',
-    'srOnly',
-    'root',
-    'label',
-    'labelSpan',
-    'mark',
-    'hiddenControl',
-    'touch',
-  ],
+  slots: ['root', 'label', 'content', 'mark', 'heading', 'input'],
   base: {
-    formElement: {},
     root: {
       // Performance: CSS containment (no paint to allow focus ring/shadow)
       contain: 'layout style',
@@ -22,17 +11,16 @@ export const checkbox = sva({
       position: 'relative',
       textStyle: 'typography.body.md.medium',
     },
-    input: {
-      srOnly: true,
-    },
     label: {
-      position: 'relative',
       lineHeight: '1.5',
       margin: 'spacing.0',
       display: 'inline-flex',
       cursor: 'pointer',
     },
-    labelSpan: {
+    heading: {
+      display: 'block',
+    },
+    content: {
       font: 'inherit',
       color: 'colour.neutral.90',
     },
@@ -41,6 +29,9 @@ export const checkbox = sva({
       marginInlineEnd: 'spacing.2',
       flexShrink: 0,
       focusable: 'group',
+    },
+    input: {
+      srOnly: true,
     },
   },
   variants: {
@@ -52,45 +43,8 @@ export const checkbox = sva({
         mark: {
           marginInlineEnd: 'spacing.0',
         },
-        labelSpan: {
+        content: {
           srOnly: true,
-        },
-      },
-    },
-    hiddenControl: {
-      true: {
-        input: {
-          focusable: 'label-after',
-        },
-        label: {
-          position: 'relative',
-          padding: 'spacing.0',
-          width: '[100%]',
-          cursor: 'pointer',
-          borderRadius: 'radius.system.form',
-          borderColor: 'colour.neutral.40',
-          borderStyle: 'solid',
-          borderWidth: '1px',
-          _hover: {
-            backgroundColor: 'colour.neutral.20',
-          },
-        },
-        labelSpan: {
-          display: 'block',
-        },
-        mark: {
-          checkmark: false,
-        },
-      },
-    },
-    touch: {
-      true: {
-        label: {
-          borderColor: 'colour.neutral.40',
-          borderStyle: 'solid',
-          borderWidth: '1px',
-          borderRadius: 'radius.system.form',
-          padding: 'spacing.3',
         },
       },
     },
@@ -101,21 +55,61 @@ export const checkbox = sva({
         },
       },
     },
-  },
-  compoundVariants: [
-    {
-      hiddenControl: true,
-      checked: true,
-      css: {
+    variant: {
+      card: {
+        root: {
+          textStyle: 'typography.body.md',
+        },
         label: {
-          topLeftTriangle: true,
+          p: 'spacing.4',
+          width: '12/12',
+          cursor: 'pointer',
+          borderRadius: 'radius.system.layout',
+          border: 'table',
+          display: 'flex',
+          flexDirection: 'row-reverse',
+          _hover: {
+            backgroundColor: 'colour.neutral.20',
+          },
+        },
+        content: {
+          flex: '1',
+        },
+        mark: {
+          flex: '[0]',
+          mr: 'none',
+          focusable: 'true',
+        },
+        input: {
+          focusable: 'label-after',
+        },
+      },
+      touch: {
+        label: {
+          border: 'table',
+          borderRadius: 'radius.system.form',
+          p: 'spacing.3',
 
-          _before: {
-            borderTopLeftRadius: 'none',
+          _hover: {
+            bg: 'colour.neutral.20',
           },
         },
         mark: {
-          checkmark: true,
+          focusable: 'true',
+        },
+        input: {
+          focusable: 'label-after',
+        },
+      },
+    },
+  },
+  compoundVariants: [
+    {
+      variant: ['card', 'touch'],
+      checked: true,
+      css: {
+        label: {
+          borderWidth: '2px',
         },
       },
     },

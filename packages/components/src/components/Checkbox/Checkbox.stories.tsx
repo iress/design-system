@@ -2,7 +2,6 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 
 import { IressCheckbox } from '.';
 import { IressCheckboxMark } from '../CheckboxMark';
-import { IressPanel } from '../Panel';
 import { IressTable } from '../Table';
 import { IressStack } from '../Stack';
 import {
@@ -59,14 +58,20 @@ export const Indeterminate: Story = {
   },
 };
 
-export const HiddenControl: Story = {
-  args: {
-    hiddenControl: true,
-    children: <IressPanel bg="transparent">Hidden checkbox</IressPanel>,
-  },
+export const Variants: Story = {
   argTypes: {
-    ...disableArgTypes(['children']),
+    ...disableArgTypes(['children', 'variant', 'heading']),
   },
+  render: (args) => (
+    <IressStack gap="lg">
+      <IressCheckbox {...args} variant="card" heading="Widget">
+        A description of the widget
+      </IressCheckbox>
+      <IressCheckbox {...args} variant="touch">
+        Touch variant
+      </IressCheckbox>
+    </IressStack>
+  ),
 };
 
 export const WithTableData: Story = {
@@ -130,12 +135,4 @@ export const ReadOnly: Story = {
       <IressCheckbox {...args} />
     </IressStack>
   ),
-};
-
-export const Touch: Story = {
-  args: {
-    ...Default.args,
-    children: 'Checkbox with touch styles',
-    touch: true,
-  },
 };

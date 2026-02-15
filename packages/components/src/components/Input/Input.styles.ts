@@ -256,6 +256,8 @@ export const input = sva({
     variant: {
       search: {
         wrapper: {
+          '--iress-border-color--default': '{colors.colour.neutral.40}',
+          '--iress-border-color--hover': '{colors.colour.neutral.40}',
           borderRadius: 'radius.4',
         },
       },

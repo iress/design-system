@@ -18,8 +18,8 @@ export const filter = sva({
     chevron: {
       position: 'relative',
       selectChevron: true,
-      marginInlineStart: 'spacing.4',
-      marginInlineEnd: '-spacing.2',
+      ml: 'spacing.4',
+      mr: '-spacing.2',
 
       _rtl: {
         selectChevronRtl: true,

@@ -31,21 +31,23 @@ export const modal = sva({
       scrollable: 'y',
     },
     header: {
+      textStyle: 'typography.heading.3',
       mb: 'spacing.4',
+      color: 'colour.neutral.90',
     },
     footer: {
-      borderBlockStart: 'divider',
+      textAlign: 'right',
     },
     modal: {
       // Performance: CSS containment (no paint due to fixed positioning)
       contain: 'layout style',
       position: 'relative',
       borderRadius: 'radius.system.layout',
+      border: 'table',
       padding: 'spacing.0',
       width: 'overlay.md',
       maxWidth: '[calc(100vw - ({spacing.spacing.7}))]',
       minHeight: 'auto',
-      layerStyle: 'floating',
       background: 'colour.neutral.10',
       outline: '[0]',
       opacity: 0,
@@ -131,6 +133,7 @@ export const modal = sva({
       open: {
         backdrop: {
           bg: 'colour.globalInteractions.backdrop',
+          'backdrop-filter': '[blur(2px)]',
         },
         modal: {
           opacity: 1,

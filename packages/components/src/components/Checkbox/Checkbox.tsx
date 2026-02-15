@@ -27,32 +27,38 @@ import { splitCssProps, styled } from '@/styled-system/jsx';
 import { IressText } from '../Text';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
 
-export interface IressCheckboxProps<T = FormControlValue> extends Omit<
-  IressStyledProps<'input'>,
-  'defaultValue' | 'value'
-> {
+export type CheckboxVariants = 'card' | 'touch' | undefined;
+
+export interface IressCheckboxProps<
+  T = FormControlValue,
+  TVariant extends CheckboxVariants = undefined,
+> extends Omit<IressStyledProps<'input'>, 'defaultValue' | 'value'> {
   /**
    * If true, the checkbox is selected.
-   * Please use this when are rendering the checkbox in controlled mode.
+   * Please use this when rendering the checkbox in controlled mode.
    */
   checked?: boolean;
 
   /**
+   * The checkbox content
+   */
+  children?: ReactNode;
+
+  /**
    * If true, the checkbox will be initially rendered as selected.
-   * Please use this when are rendering the checkbox in uncontrolled mode.
+   * Please use this when rendering the checkbox in uncontrolled mode.
    */
   defaultChecked?: boolean;
 
   /**
-   * Sets whether the control is hidden. If it is within a checkbox group,
-   * it will be overridden with the checkbox group's hiddenCheckbox setting.
+   * Sets the heading for the checkbox when using the `card` variant
    */
-  hiddenControl?: boolean;
+  heading?: TVariant extends 'card' ? ReactNode : never;
 
   /**
    * Visually hides the label (if set), label will still be read out by screenreaders.
    */
-  hiddenLabel?: boolean;
+  hiddenLabel?: TVariant extends undefined ? boolean : undefined;
 
   /**
    * If true, the checkbox will visually appear as indeterminate.
@@ -63,19 +69,6 @@ export interface IressCheckboxProps<T = FormControlValue> extends Omit<
    * The name of the control, which is submitted with the form data.
    */
   name?: string;
-
-  /**
-   * If `true`, the checkbox is a required field and will be validated as such.
-   */
-  required?: boolean;
-
-  /**
-   * Value of the checkbox when used in a checkbox group. The checked state of the checkbox will be overridden based on this value if used inside a checkbox group.
-   * **Note:**
-   * - The value of the checkbox does not mean if its checked or not, use the checked property for that.
-   * - If the value of the checkbox is true/false, and checked is undefined and not inside a CheckboxGroup, it will use this as the checked value. This ensures out-of-the-box compatibility with React Hook Form.
-   */
-  value?: T;
 
   /**
    * Emitted when the checkbox loses focus.
@@ -97,34 +90,48 @@ export interface IressCheckboxProps<T = FormControlValue> extends Omit<
   onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
 
   /**
-   * The checkbox content
+   * If `true`, the checkbox is a required field and will be validated as such.
    */
-  children?: ReactNode;
+  required?: boolean;
 
   /**
-   * Add the button-like border and padding to checkbox when `touch` is true.
+   * Value of the checkbox when used in a checkbox group. The checked state of the checkbox will be overridden based on this value if used inside a checkbox group.
+   * **Note:**
+   * - The value of the checkbox does not mean if its checked or not, use the checked property for that.
+   * - If the value of the checkbox is true/false, and checked is undefined and not inside a CheckboxGroup, it will use this as the checked value. This ensures out-of-the-box compatibility with React Hook Form.
    */
-  touch?: boolean;
+  value?: T;
+
+  /**
+   * The visual variant of the checkbox.
+   * - `card`: Provides a larger, card-like style with a heading slot.
+   * - `touch`: Provides a larger, button-like style, great for mobile devices.
+   * - `undefined`: The default checkbox style.
+   */
+  variant?: TVariant;
 }
 
-const Checkbox = <T = FormControlValue,>(
+const Checkbox = <
+  T = FormControlValue,
+  TVariant extends CheckboxVariants = undefined,
+>(
   {
     checked: checkedProp,
     className,
     defaultChecked,
-    hiddenControl,
+    heading,
     hiddenLabel,
     indeterminate: indeterminateProp,
     id,
     name: nameProp,
     onChange,
     value,
+    variant: variantProp,
     children,
     readOnly,
-    touch,
     'data-testid': dataTestId,
     ...restProps
-  }: IressCheckboxProps<T>,
+  }: IressCheckboxProps<T, TVariant>,
   ref: ForwardedRef<ReactHookFormCompatibleRef<HTMLInputElement>>,
 ) => {
   useNoDefaultValueInForms({
@@ -150,8 +157,7 @@ const Checkbox = <T = FormControlValue,>(
   // Inside checkbox group
   const checkboxGroup = useContext(getCheckboxGroupContext<T>());
   const uncontrolledChecked = checkboxGroup ? undefined : defaultChecked;
-  const isHidden = checkboxGroup?.hiddenCheckbox ?? hiddenControl;
-  const isTouch = checkboxGroup?.touch ?? touch;
+  const variant = variantProp ?? checkboxGroup?.variant;
   const isReadonly = checkboxGroup?.readOnly ?? readOnly;
   const name = checkboxGroup?.name ?? nameProp;
 
@@ -209,11 +215,15 @@ const Checkbox = <T = FormControlValue,>(
     ) : null;
   }
 
-  const styles = checkboxStyles.raw({
-    hiddenControl: isHidden,
+  const classes = checkboxStyles({
     hiddenLabel,
-    touch: isTouch,
     checked,
+    variant,
+  });
+  const styles = checkboxStyles.raw({
+    hiddenLabel,
+    checked,
+    variant,
   });
 
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
@@ -242,12 +252,23 @@ const Checkbox = <T = FormControlValue,>(
       />
       <styled.label htmlFor={inputId} {...styles.label}>
         <IressCheckboxMark
-          className={cx(css(styles.mark), GlobalCSSClass.FormElement)}
+          className={cx(classes.mark, GlobalCSSClass.FormElement)}
           checked={checked}
           indeterminate={indeterminate}
           data-testid={propagateTestid(dataTestId, 'checkboxMark')}
         />
-        <IressText element="span" className={css(styles.labelSpan)}>
+        <IressText element="span" className={classes.content}>
+          {typeof heading === 'string' ? (
+            <IressText
+              element="strong"
+              textStyle="typography.heading.4"
+              className={classes.heading}
+            >
+              {heading}
+            </IressText>
+          ) : (
+            heading
+          )}
           {children}
         </IressText>
       </styled.label>
@@ -255,8 +276,11 @@ const Checkbox = <T = FormControlValue,>(
   );
 };
 
-export const IressCheckbox = forwardRef(Checkbox) as (<T = FormControlValue>(
-  props: IressCheckboxProps<T> & {
+export const IressCheckbox = forwardRef(Checkbox) as (<
+  T = FormControlValue,
+  TVariant extends CheckboxVariants = undefined,
+>(
+  props: IressCheckboxProps<T, TVariant> & {
     ref?: ForwardedRef<ReactHookFormCompatibleRef<HTMLInputElement>>;
   },
 ) => ReactElement) & {

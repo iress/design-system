@@ -12,12 +12,13 @@ export const tab = cva({
     py: 'spacing.3',
     textOverflow: 'ellipsis',
     textDecoration: 'none',
-    textStyle: 'typography.body.md.medium',
+    textStyle: 'typography.body.sm.medium',
     transition: 'all',
     whiteSpace: 'nowrap',
     width: '[auto]',
     borderRadius: 'radius.system.layout',
     borderBottomRadius: 'none',
+    focusable: 'inset',
 
     _hover: {
       bg: 'colour.neutral.20',

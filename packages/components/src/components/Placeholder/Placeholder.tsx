@@ -78,7 +78,11 @@ export const IressPlaceholder = ({
         </svg>
       )}
       {heading && (
-        <IressText element="strong" textStyle="typography.heading.4">
+        <IressText
+          element="strong"
+          textStyle="typography.heading.4"
+          className={classes.heading}
+        >
           {heading}
         </IressText>
       )}

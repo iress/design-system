@@ -1,5 +1,5 @@
 import type { ReactHookFormCompatibleRef } from '@/interfaces';
-import { type RefObject, useCallback, useMemo, useState } from 'react';
+import { type RefObject, useCallback, useMemo, useRef, useState } from 'react';
 import type { ControllerRenderProps, FieldValues } from 'react-hook-form';
 import type { FormFieldRenderProps } from '../FormField';
 
@@ -14,6 +14,7 @@ export const useFieldRenderProps = <T extends FieldValues>(
   fieldRef: RefObject<ReactHookFormCompatibleRef | null>,
 ) => {
   const [extraString, setExtraString] = useState<string>('null');
+  const extraStringRef = useRef<string>('null');
 
   const handleChange = useCallback<ControllerRenderProps<T>['onChange']>(
     (...args) => {
@@ -37,14 +38,14 @@ export const useFieldRenderProps = <T extends FieldValues>(
       if (instance) {
         const newExtrasString = JSON.stringify(instance.extras ?? null);
 
-        if (newExtrasString !== extraString) {
+        if (newExtrasString !== extraStringRef.current) {
+          extraStringRef.current = newExtrasString;
           setExtraString(newExtrasString);
         }
       }
     },
-    [extraString, field, fieldRef],
+    [field, fieldRef],
   );
-
   const renderField = useMemo(() => {
     let newField: Partial<ControllerRenderProps<T>> = { ...field };
 
