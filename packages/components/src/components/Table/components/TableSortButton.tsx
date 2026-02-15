@@ -46,7 +46,7 @@ export const TableSortButton = ({
     sortDescription = '';
   }
 
-  const label = `${labelProp} ${sortDescription}`;
+  const label = `${labelProp}${sortDescription}`;
 
   return (
     <button

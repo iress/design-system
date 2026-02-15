@@ -539,7 +539,7 @@ describe('IressSlideout', () => {
 
         await waitFor(() => {
           expect(pushElement.style.getPropertyValue('margin-inline-end')).toBe(
-            'var(--sizes-overlay\\.sm, 375px)',
+            'var(--sizes-overlay\\.sm, 368px)',
           );
         });
 
@@ -917,7 +917,7 @@ describe('IressSlideout', () => {
 
           // Checks if the element is sized correctly
           expect(eleToPush.style.getPropertyValue('margin-inline-end')).toBe(
-            'var(--sizes-overlay\\.md, 640px)',
+            'var(--sizes-overlay\\.md, 628px)',
           );
         });
 

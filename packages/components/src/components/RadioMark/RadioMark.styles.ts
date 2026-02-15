@@ -11,6 +11,7 @@ export const radioMark = cva({
     alignItems: 'center',
     justifyContent: 'center',
     width: '[1.4em]',
+    minWidth: '[1.4em]',
     height: '[1.4em]',
     borderRadius: '[100%]',
     marginInlineEnd: 'spacing.2',
@@ -20,7 +21,6 @@ export const radioMark = cva({
       fill: '[currentColor]',
       display: 'none',
     },
-    focusable: 'group',
   },
   variants: {
     checked: {

@@ -116,11 +116,11 @@ export const Layout: Story = {
 
 export const HiddenRadioButtons: Story = {
   args: {
-    hiddenRadio: true,
     defaultValue: 'home',
     required: true,
     layout: 'inline',
     children: getFinancialReviewChildren(),
+    variant: 'card',
   },
   render: (args) => (
     <IressField
@@ -134,11 +134,11 @@ export const HiddenRadioButtons: Story = {
 
 export const CustomRadioGroupLayout: Story = {
   args: {
-    hiddenRadio: true,
     name: 'financial-review',
     required: true,
     layout: 'block',
     children: getFinancialReviewManyChildren(),
+    variant: 'card',
   },
   render: ({ children, ...args }) => (
     <IressField
@@ -178,6 +178,6 @@ export const Touch: Story = {
   ...RadioSelection,
   args: {
     ...RadioSelection.args,
-    touch: true,
+    variant: 'touch',
   },
 };

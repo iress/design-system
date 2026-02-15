@@ -61,8 +61,11 @@ It is understandable that this may not be the desired behavior for all use cases
 
 <ComponentExample of={ComponentStories.ReadOnly} />
 
-### Touch
+### Variants
 
-The `touch` prop adds the button-like border and padding to checkbox.
+The checkbox component has multiple variants that can be used to change the appearance of the checkbox. The `variant` prop can be set to `default`, `card`, or `touch`. The default variant is `default`.
 
-<ComponentExample of={ComponentStories.Touch} />
+- `card` variant is used to display the checkbox as a card, which is useful when the checkbox needs to contain more information than just a label. It is used in the `IressCheckboxGroup` component when the `variant` prop is set to `card`.
+- `touch` variant is used to display the checkbox with a larger touch target, which is useful for mobile devices. It is used in the `IressCheckboxGroup` component when the `variant` prop is set to `touch`.
+
+<ComponentExample of={ComponentStories.Variants} />

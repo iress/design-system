@@ -44,10 +44,7 @@ describe('IressRadio', () => {
     const input = screen.getByRole('radio', { name: 'Test text' });
     expect(input).toBeInTheDocument();
     expect(input).not.toBeChecked();
-    expect(input).toHaveAttribute(
-      'class',
-      expect.stringContaining('pos_absolute'),
-    );
+    expect(input).toHaveClass('sr_true');
   });
 
   describe('props', () => {
@@ -69,50 +66,6 @@ describe('IressRadio', () => {
 
         await userEvent.click(input);
         expect(input).toBeChecked();
-      });
-    });
-
-    describe('hiddenControl', () => {
-      it('before checked: hides the radio mark and the checkbox mark (visually), yet still accessible', () => {
-        const screen = renderRadio({
-          required: true,
-          hiddenControl: true,
-        });
-
-        const input = screen.getByRole('radio', { name: TEST_ID });
-        expect(input).toBeInTheDocument();
-
-        const radioMark = screen.queryByTestId(`${TEST_ID}__radioMark`);
-        expect(radioMark).not.toBeInTheDocument();
-        const checkboxMark = screen.queryByTestId(`${TEST_ID}__checkboxMark`);
-        expect(checkboxMark).toBeInTheDocument();
-        expect(checkboxMark).toHaveClass(
-          radioStyles({ hiddenControl: true, checked: false }).checkboxMark!,
-        );
-      });
-
-      it('after checked: hides the radio mark, shows the checkbox mark and colored border, yet still accessible', async () => {
-        const screen = renderRadio({
-          required: true,
-          hiddenControl: true,
-        });
-
-        const input = screen.getByRole('radio', { name: TEST_ID });
-        expect(input).toBeInTheDocument();
-
-        await userEvent.click(input);
-
-        const radioMark = screen.queryByTestId(`${TEST_ID}__radioMark`);
-        expect(radioMark).not.toBeInTheDocument();
-        const checkboxMark = screen.queryByTestId(`${TEST_ID}__checkboxMark`);
-        expect(checkboxMark).toBeInTheDocument();
-        expect(checkboxMark).toHaveClass(
-          radioStyles({ hiddenControl: true, checked: true }).checkboxMark!,
-        );
-        const label = screen.getByText(TEST_ID).closest('label');
-        expect(label).toHaveClass(
-          radioStyles({ hiddenControl: true, checked: true }).label!,
-        );
       });
     });
 
@@ -212,6 +165,33 @@ describe('IressRadio', () => {
         });
       });
     });
+
+    describe('variant', () => {
+      it('adds touch class when variant prop is touch', () => {
+        const screen = render(
+          <IressRadio value="Test value" name="test-name" variant="touch">
+            Test
+          </IressRadio>,
+        );
+        const radio = screen.getByRole('radio');
+        expect(radio).toHaveClass(radioStyles({ variant: 'touch' }).input!);
+      });
+
+      it('adds the card class when variant prop is card', () => {
+        const screen = render(
+          <IressRadio
+            value="Test value"
+            name="test-name"
+            data-testid={TEST_ID}
+            variant="card"
+          >
+            Test
+          </IressRadio>,
+        );
+        const radioMark = screen.queryByTestId(`${TEST_ID}__radioMark`);
+        expect(radioMark).toHaveClass(radioStyles({ variant: 'card' }).mark!);
+      });
+    });
   });
 
   describe('accessibility', () => {
@@ -219,20 +199,6 @@ describe('IressRadio', () => {
       const screen = renderRadio();
       const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
-    });
-  });
-
-  describe('touch', () => {
-    it('adds the touch class to the radio when touch prop is true', () => {
-      const screen = renderRadio({
-        touch: true,
-      });
-
-      const component = screen.getByTestId(TEST_ID);
-      expect(component).toHaveClass('group');
-
-      const label = component.querySelector('label');
-      expect(label).toHaveClass(radioStyles({ touch: true }).label!);
     });
   });
 });

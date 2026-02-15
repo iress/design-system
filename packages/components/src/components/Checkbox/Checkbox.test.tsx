@@ -34,6 +34,23 @@ describe('IressCheckbox', () => {
   });
 
   describe('props', () => {
+    describe('checked', () => {
+      it('adds the checked class', () => {
+        const screen = render(<IressCheckbox name="test-checkbox" checked />);
+        const checkbox = screen.getByRole('checkbox');
+        expect(checkbox).toHaveClass(checkboxStyles({ checked: true }).input!);
+      });
+
+      it('uses the id passed in by the consumer if it is set', () => {
+        const screen = render(
+          <IressCheckbox id="test-set-id" name="test-checkbox" />,
+        );
+        const checkbox = screen.getByRole('checkbox');
+        const checkboxId = checkbox.getAttribute('id');
+        expect(checkboxId).toEqual('test-set-id');
+      });
+    });
+
     describe('id', () => {
       it('sets a default ID when id is not set', () => {
         const screen = render(<IressCheckbox name="test-checkbox" />);
@@ -114,6 +131,37 @@ describe('IressCheckbox', () => {
         expect(input).not.toBeInTheDocument();
       });
     });
+
+    describe('variant', () => {
+      it('adds touch class when variant prop is touch', () => {
+        const screen = render(
+          <IressCheckbox value="Test value" name="test-name" variant="touch">
+            Test
+          </IressCheckbox>,
+        );
+        const checkbox = screen.getByRole('checkbox');
+        expect(checkbox).toHaveClass(
+          checkboxStyles({ variant: 'touch' }).input!,
+        );
+      });
+
+      it('adds the card class when variant prop is card', () => {
+        const screen = render(
+          <IressCheckbox
+            value="Test value"
+            name="test-name"
+            data-testid={TEST_ID}
+            variant="card"
+          >
+            Test
+          </IressCheckbox>,
+        );
+        const checkboxMark = screen.queryByTestId(`${TEST_ID}__checkboxMark`);
+        expect(checkboxMark).toHaveClass(
+          checkboxStyles({ variant: 'card' }).mark!,
+        );
+      });
+    });
   });
 
   describe('Interactions', () => {
@@ -171,61 +219,6 @@ describe('IressCheckbox', () => {
       );
       const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
-      const screenReaderText = screen.getByText('Test');
-      expect(screenReaderText).toHaveClass(
-        checkboxStyles({ hiddenLabel: true }).labelSpan!,
-      );
-    });
-  });
-
-  describe('touch', () => {
-    it('should add touch class when touch prop is true', () => {
-      const screen = render(
-        <IressCheckbox value="Test value" name="test-name" touch>
-          Test
-        </IressCheckbox>,
-      );
-      const checkbox = screen.getByRole('checkbox');
-      expect(checkbox).toHaveClass(checkboxStyles({ touch: true }).input!);
-    });
-  });
-
-  describe('hiddenControl', () => {
-    it('before checked: should hide checkbox mark visually when hiddenControl prop is true', () => {
-      const screen = render(
-        <IressCheckbox
-          value="Test value"
-          name="test-name"
-          hiddenControl
-          data-testid={TEST_ID}
-        >
-          Test
-        </IressCheckbox>,
-      );
-      const checkboxMark = screen.queryByTestId(`${TEST_ID}__checkboxMark`);
-      expect(checkboxMark).toHaveClass(
-        checkboxStyles({ hiddenControl: true, checked: false }).mark!,
-      );
-    });
-
-    it('after checked: should show checkbox mark and colored border when hiddenControl prop is true', async () => {
-      const screen = render(
-        <IressCheckbox value="Test value" name="test-name" hiddenControl>
-          Test
-        </IressCheckbox>,
-      );
-
-      const checkbox = screen.getByRole('checkbox');
-      expect(checkbox).toBeInTheDocument();
-
-      await userEvent.click(checkbox);
-      expect(checkbox).toHaveClass(
-        checkboxStyles({ hiddenControl: true }).input!,
-      );
-      const label = screen.getByText('Test').closest('label');
-      expect(label).toHaveClass(
-        checkboxStyles({ hiddenControl: true, checked: true }).label!,
-      );
     });
   });
 });

@@ -77,7 +77,9 @@ export interface IressSelectMenuProps<
 }
 
 export interface IressSelectMenuItemProps
-  extends Omit<IressMenuItemProps<'button'>, 'value'>, FormattedLabelValueMeta {
+  extends
+    Omit<IressMenuItemProps<'button'>, 'children' | 'value'>,
+    FormattedLabelValueMeta {
   /**
    * Set whether this item is hidden on mobile
    */

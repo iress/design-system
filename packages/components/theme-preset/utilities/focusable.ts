@@ -9,6 +9,7 @@ export const focusable = defineUtility({
     'has-input',
     'has-button',
     'label-after',
+    'expander-activator',
     'select-activator',
     'slider',
     'has-switch',

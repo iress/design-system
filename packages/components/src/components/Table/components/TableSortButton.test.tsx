@@ -16,9 +16,6 @@ describe('TableSortButton', () => {
 
     await userEvent.click(button);
     expect(toggleSorting).toHaveBeenCalled();
-
-    const icon = screen.getByRole('img', { name: 'sortable' });
-    expect(icon).toHaveTextContent('sort');
   });
 
   describe('props', () => {
@@ -57,8 +54,10 @@ describe('TableSortButton', () => {
           />,
         );
 
-        const icon = screen.getByRole('img', { name: 'sortable' });
-        expect(icon).toHaveTextContent('sort');
+        const icon = screen.getByRole('button', {
+          name: 'sortable (ascending)',
+        });
+        expect(icon).toBeInTheDocument();
       });
     });
   });

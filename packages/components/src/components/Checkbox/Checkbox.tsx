@@ -95,20 +95,20 @@ export interface IressCheckboxProps<
   required?: boolean;
 
   /**
-   * The visual variant of the checkbox.
-   * - `card`: Provides a larger, card-like style with a heading slot.
-   * - `touch`: Provides a larger, button-like style, great for mobile devices.
-   * - `undefined`: The default checkbox style.
-   */
-  variant?: TVariant;
-
-  /**
    * Value of the checkbox when used in a checkbox group. The checked state of the checkbox will be overridden based on this value if used inside a checkbox group.
    * **Note:**
    * - The value of the checkbox does not mean if its checked or not, use the checked property for that.
    * - If the value of the checkbox is true/false, and checked is undefined and not inside a CheckboxGroup, it will use this as the checked value. This ensures out-of-the-box compatibility with React Hook Form.
    */
   value?: T;
+
+  /**
+   * The visual variant of the checkbox.
+   * - `card`: Provides a larger, card-like style with a heading slot.
+   * - `touch`: Provides a larger, button-like style, great for mobile devices.
+   * - `undefined`: The default checkbox style.
+   */
+  variant?: TVariant;
 }
 
 const Checkbox = <

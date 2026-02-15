@@ -12,7 +12,6 @@ export const checkbox = sva({
       textStyle: 'typography.body.md.medium',
     },
     label: {
-      position: 'relative',
       lineHeight: '1.5',
       margin: 'spacing.0',
       display: 'inline-flex',
@@ -106,16 +105,7 @@ export const checkbox = sva({
   },
   compoundVariants: [
     {
-      variant: 'card',
-      checked: true,
-      css: {
-        label: {
-          borderWidth: '2px',
-        },
-      },
-    },
-    {
-      variant: 'touch',
+      variant: ['card', 'touch'],
       checked: true,
       css: {
         label: {

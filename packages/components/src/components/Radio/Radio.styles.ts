@@ -1,7 +1,7 @@
 import { sva } from '@/styled-system/css';
 
 export const radio = sva({
-  slots: ['root', 'input', 'label', 'labelContent', 'checkboxMark'],
+  slots: ['root', 'input', 'label', 'content', 'mark', 'heading'],
   base: {
     root: {
       // Performance: CSS containment (no paint to allow focus ring/shadow)
@@ -9,81 +9,33 @@ export const radio = sva({
       color: 'colour.primary.fill',
       display: 'flex',
       position: 'relative',
-      padding: 'spacing.0',
-      transition: '[all 0.2s ease-out]',
-      textStyle: 'typography.body.md',
-
-      '&:has(svg:hover)': {
-        color: 'colour.primary.fillHover',
-      },
+      textStyle: 'typography.body.md.medium',
     },
     input: {
-      border: '[0px]',
-      clip: 'rect(0, 0, 0, 0)',
-      height: '[1px]',
-      margin: '[-1px]',
-      overflow: 'hidden',
-      padding: 'spacing.0',
-      position: 'absolute',
-      width: '[1px]',
+      srOnly: true,
     },
     label: {
       display: 'inline-flex',
       alignItems: 'center',
-      padding: 'spacing.0',
-      border: '[0px solid transparent]',
       borderRadius: 'radius.system.form',
-      backgroundColor: '[transparent]',
-      position: 'relative',
       lineHeight: '1.5',
-      margin: '[0px]',
+      margin: 'none',
       cursor: 'pointer',
     },
-    labelContent: {
+    content: {
       font: 'inherit',
+      color: 'colour.neutral.90',
     },
-    checkboxMark: {
-      checkmark: false,
+    heading: {
+      display: 'block',
+    },
+    mark: {
+      focusable: 'group',
+      color: '[currentColor]',
+      flexShrink: 0,
     },
   },
   variants: {
-    hiddenControl: {
-      true: {
-        label: {
-          display: 'block',
-          borderWidth: '1px',
-          borderStyle: 'solid',
-          borderColor: 'colour.neutral.40',
-          cursor: 'pointer',
-
-          _hover: {
-            backgroundColor: 'colour.primary.surfaceHover',
-          },
-        },
-      },
-    },
-    touch: {
-      true: {
-        input: {
-          _checked: {
-            '& + label:hover': {
-              backgroundColor: 'transparent',
-            },
-          },
-        },
-        label: {
-          borderWidth: '1px',
-          borderStyle: 'solid',
-          borderColor: 'colour.neutral.40',
-          borderRadius: 'radius.system.form',
-          padding: 'spacing.4',
-
-          _hover: {
-            backgroundColor: 'colour.primary.surfaceHover',
-          },
-        },
-      },
-    },
     checked: {
       true: {
         label: {
@@ -91,78 +43,62 @@ export const radio = sva({
         },
       },
     },
+    variant: {
+      card: {
+        root: {
+          textStyle: 'typography.body.md',
+        },
+        label: {
+          p: 'spacing.4',
+          width: '12/12',
+          cursor: 'pointer',
+          borderRadius: 'radius.system.layout',
+          border: 'table',
+          display: 'flex',
+          flexDirection: 'row-reverse',
+          alignItems: 'start',
+          _hover: {
+            backgroundColor: 'colour.neutral.20',
+          },
+        },
+        content: {
+          flex: '1',
+        },
+        mark: {
+          flex: '[0]',
+          mr: 'none',
+          focusable: 'true',
+        },
+        input: {
+          focusable: 'label-after',
+        },
+      },
+      touch: {
+        label: {
+          border: 'table',
+          borderRadius: 'radius.system.form',
+          p: 'spacing.3',
+
+          _hover: {
+            bg: 'colour.neutral.20',
+          },
+        },
+        mark: {
+          focusable: 'true',
+        },
+        input: {
+          focusable: 'label-after',
+        },
+      },
+    },
   },
   compoundVariants: [
     {
-      hiddenControl: true,
-      css: {
-        input: {
-          focusable: 'label-after',
-          _checked: {
-            '& + label': {
-              border: '[none]',
-              padding: '[1px]',
-              _after: {
-                content: '""',
-                position: 'absolute',
-                inset: '[0]',
-                display: 'block',
-                borderWidth: '1px',
-                borderStyle: 'solid',
-                borderColor: 'colour.primary.fill',
-                borderRadius: '[inherit]',
-                pointerEvents: 'none',
-              },
-            },
-          },
-          _focus: {
-            '& + label': {
-              _after: {
-                content: '""',
-                position: 'absolute',
-                inset: '[0]',
-                display: 'block',
-                borderRadius: '[inherit]',
-                pointerEvents: 'none',
-              },
-            },
-          },
-        },
-      },
-    },
-    {
-      hiddenControl: false,
-      css: {
-        input: {
-          _checked: {
-            '& ~ div svg circle': {
-              display: 'revert',
-            },
-          },
-        },
-      },
-    },
-    {
-      touch: true,
-      css: {
-        input: {
-          _checked: {
-            '& + label': {
-              borderColor: 'colour.primary.fill',
-            },
-          },
-        },
-      },
-    },
-    {
-      hiddenControl: true,
+      variant: ['card', 'touch'],
       checked: true,
       css: {
         label: {
-          topLeftTriangle: true,
-        },
-        checkboxMark: {
-          checkmark: true,
+          borderWidth: '2px',
         },
       },
     },

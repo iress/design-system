@@ -1,4 +1,4 @@
-import { RenderResult, render, within } from '@testing-library/react';
+import { RenderResult, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import {
   IressCheckboxGroup,
@@ -81,21 +81,6 @@ describe('IressCheckboxGroup', () => {
           checked: true,
         });
         expect(checkedRadio).toBeInTheDocument();
-      });
-    });
-
-    describe('hiddenCheckbox', () => {
-      it('renders all checkbox children as hidden checkboxes', () => {
-        const screen = renderComponent({
-          hiddenCheckbox: true,
-        });
-
-        screen.getAllByTestId(CHILDREN_TEST_ID).forEach((checkboxContainer) => {
-          const checkbox = within(checkboxContainer).getByRole('checkbox');
-          expect(checkbox).toHaveClass(
-            checkboxStyles({ hiddenControl: true }).input!,
-          );
-        });
       });
     });
 
@@ -215,6 +200,32 @@ describe('IressCheckboxGroup', () => {
         expect(checkedRadio).toBeInTheDocument();
       });
     });
+
+    describe('variant', () => {
+      it('adds the card class to the checkbox group when variant prop is card', () => {
+        const screen = renderComponent({
+          variant: 'card',
+        });
+
+        screen.getAllByRole('checkbox').forEach((checkbox) => {
+          expect(checkbox).toHaveClass(
+            checkboxStyles({ variant: 'card' }).input!,
+          );
+        });
+      });
+
+      it('adds the touch class to the checkbox group when variant prop is touch', () => {
+        const screen = renderComponent({
+          variant: 'touch',
+        });
+
+        screen.getAllByRole('checkbox').forEach((checkbox) => {
+          expect(checkbox).toHaveClass(
+            checkboxStyles({ variant: 'touch' }).input!,
+          );
+        });
+      });
+    });
   });
 
   describe('interactions', () => {
@@ -242,18 +253,6 @@ describe('IressCheckboxGroup', () => {
       const screen = renderComponentInField();
       const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
-    });
-  });
-
-  describe('touch', () => {
-    it('adds the touch class to the checkbox group when touch prop is true', () => {
-      const screen = renderComponent({
-        touch: true,
-      });
-
-      screen.getAllByRole('checkbox').forEach((checkbox) => {
-        expect(checkbox).toHaveClass(checkboxStyles({ touch: true }).input!);
-      });
     });
   });
 });

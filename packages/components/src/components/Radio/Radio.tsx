@@ -16,16 +16,16 @@ import { css, cx } from '@/styled-system/css';
 import { radio } from './Radio.styles';
 import { GlobalCSSClass } from '@/enums';
 import { useControlledState } from '@/hooks/useControlledState';
-import { IressCheckboxMark } from '@/components/CheckboxMark';
 import { IressRadioMark } from '@/components/RadioMark';
 import { getRadioGroupContext } from '../RadioGroup';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { IressText } from '../Text';
+import type { CheckboxVariants } from '../Checkbox';
 
-export interface IressRadioProps<T = FormControlValue> extends Omit<
-  IressStyledProps<'input'>,
-  'defaultValue' | 'value'
-> {
+export interface IressRadioProps<
+  T = FormControlValue,
+  TVariant extends CheckboxVariants = undefined,
+> extends Omit<IressStyledProps<'input'>, 'defaultValue' | 'value'> {
   /**
    * Sets the checked state of the radio.
    * If it is within a radio group, it will be overridden by the radio group's value
@@ -39,10 +39,9 @@ export interface IressRadioProps<T = FormControlValue> extends Omit<
   children?: ReactNode;
 
   /**
-   * Sets whether the control is hidden. If it is within a radio group,
-   * it will be overridden with the radio group's hiddenControl setting.
+   * Sets the heading for the radio when using the `card` variant
    */
-  hiddenControl?: boolean;
+  heading?: TVariant extends 'card' ? ReactNode : never;
 
   /**
    * Sets the name attribute on the radio input. If it is within a radio group,
@@ -70,27 +69,33 @@ export interface IressRadioProps<T = FormControlValue> extends Omit<
   value?: T;
 
   /**
-   * Add the button-like border and padding to radio when `touch` is true.
+   * The visual variant of the radio.
+   * - `card`: Provides a larger, card-like style with a heading slot.
+   * - `touch`: Provides a larger, button-like style, great for mobile devices.
+   * - `undefined`: The default radio style.
    */
-  touch?: boolean;
+  variant?: TVariant;
 }
 
-const Radio = <T = FormControlValue,>(
+const Radio = <
+  T = FormControlValue,
+  TVariant extends CheckboxVariants = undefined,
+>(
   {
     checked: controlledChecked,
     children,
     className,
     'data-testid': dataTestId,
     defaultChecked: uncontrolledChecked,
-    hiddenControl,
+    heading,
     name,
     onChange,
     readOnly: readOnlyProp,
     required,
     value,
-    touch,
+    variant: variantProp,
     ...restProps
-  }: IressRadioProps<T>,
+  }: IressRadioProps<T, TVariant>,
   ref: ForwardedRef<HTMLInputElement>,
 ) => {
   const id = useIdIfNeeded(restProps);
@@ -122,14 +127,16 @@ const Radio = <T = FormControlValue,>(
   }
 
   const radioName = radioGroup?.name ?? name;
-  const isHidden = radioGroup?.hiddenRadio ?? hiddenControl;
+  const variant = variantProp ?? radioGroup?.variant;
   const isRequired = radioGroup?.required ?? required;
-  const isTouch = radioGroup?.touch ?? touch;
 
-  const styles = radio.raw({
-    hiddenControl: isHidden,
-    touch: isTouch,
+  const classes = radio({
     checked: isChecked,
+    variant,
+  });
+  const styles = radio.raw({
+    checked: isChecked,
+    variant,
   });
 
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
@@ -164,20 +171,23 @@ const Radio = <T = FormControlValue,>(
         required={isRequired}
       />
       <styled.label htmlFor={id} {...styles.label}>
-        {!isHidden && (
-          <IressRadioMark
-            checked={isChecked}
-            data-testid={propagateTestid(dataTestId, 'radioMark')}
-          />
-        )}
-        {isHidden && (
-          <IressCheckboxMark
-            className={css(styles.checkboxMark)}
-            checked={isChecked}
-            data-testid={propagateTestid(dataTestId, 'checkboxMark')}
-          />
-        )}
-        <IressText element="span" className={css(styles.labelContent)}>
+        <IressRadioMark
+          checked={isChecked}
+          data-testid={propagateTestid(dataTestId, 'radioMark')}
+          className={classes.mark}
+        />
+        <IressText element="span" className={classes.content}>
+          {typeof heading === 'string' ? (
+            <IressText
+              element="strong"
+              textStyle="typography.heading.4"
+              className={classes.heading}
+            >
+              {heading}
+            </IressText>
+          ) : (
+            heading
+          )}
           {children}
         </IressText>
       </styled.label>
@@ -185,8 +195,11 @@ const Radio = <T = FormControlValue,>(
   );
 };
 
-export const IressRadio = forwardRef(Radio) as (<T = FormControlValue>(
-  props: IressRadioProps<T> & { ref?: Ref<HTMLInputElement> },
+export const IressRadio = forwardRef(Radio) as (<
+  T = FormControlValue,
+  TVariant extends CheckboxVariants = undefined,
+>(
+  props: IressRadioProps<T, TVariant> & { ref?: Ref<HTMLInputElement> },
 ) => ReactElement) & {
   displayName: 'IressRadio';
 };

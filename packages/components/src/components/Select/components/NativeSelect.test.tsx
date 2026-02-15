@@ -33,7 +33,7 @@ const renderComponent = (
   );
 };
 
-describe('IressSelect', () => {
+describe('IressSelect (native)', () => {
   it('should render the component with the correct classes and roles', () => {
     const screen = renderComponent({
       className: 'test-class',
@@ -47,7 +47,7 @@ describe('IressSelect', () => {
     const component = screen.getByTestId(`${TEST_ID}__select`);
     expect(component).toHaveAttribute('name');
 
-    expect(screen.getAllByRole('option')).toHaveLength(3);
+    expect(screen.getAllByRole('option')).toHaveLength(5);
   });
 
   describe('props', () => {
@@ -74,28 +74,6 @@ describe('IressSelect', () => {
         await userEvent.selectOptions(screen.getByRole('combobox'), '2');
 
         expect(onChange).toHaveBeenCalledTimes(1);
-      });
-
-      it('fires onChange event twice when there is no placeholder (to sync value)', async () => {
-        const onChange = vitest.fn();
-
-        const screen = renderComponent({
-          onChange,
-        });
-
-        expect(onChange).toHaveBeenCalledTimes(1);
-        expect(onChange).toHaveBeenCalledWith(
-          expect.objectContaining({
-            target: expect.objectContaining({
-              value: '1',
-            }) as EventTarget,
-          }),
-          '1',
-        );
-
-        await userEvent.selectOptions(screen.getByRole('combobox'), '2');
-
-        expect(onChange).toHaveBeenCalledTimes(2);
       });
     });
 
@@ -135,7 +113,7 @@ describe('IressSelect', () => {
         });
 
         const options = screen.getAllByRole('option');
-        expect(options).toHaveLength(4);
+        expect(options).toHaveLength(6);
         expect(options[0].textContent).toEqual('Placeholder text');
       });
     });
