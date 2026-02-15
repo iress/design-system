@@ -97,17 +97,8 @@ const Form = () => {
                   <IressSelect
                     {...controlledProps}
                     readOnly={!editable}
-                    onChange={(
-                      _e: React.ChangeEvent<HTMLSelectElement>,
-                      value?: FormControlValue,
-                    ) => controlledProps.onChange(value)}
-                  >
-                    {dependentOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </IressSelect>
+                    options={dependentOptions}
+                  />
                 )}
               />
             </IressCol>

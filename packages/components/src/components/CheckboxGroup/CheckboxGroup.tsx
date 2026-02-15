@@ -14,7 +14,10 @@ import { type FormControlValue, type IressStyledProps } from '@/types';
 import { useControlledState } from '@/hooks/useControlledState';
 import { checkboxGroup } from './CheckboxGroup.styles';
 import { cx } from '@/styled-system/css';
-import { type IressCheckboxProps } from '../Checkbox/Checkbox';
+import type {
+  IressCheckboxProps,
+  CheckboxVariants,
+} from '../Checkbox/Checkbox';
 import { type ReactHookFormCompatibleRef } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
@@ -32,11 +35,6 @@ export interface IressCheckboxGroupProps<T = FormControlValue> extends Omit<
    * Value of checkbox group when in uncontrolled mode.
    */
   defaultValue?: T | T[];
-
-  /**
-   * Hides the checkbox controls to allow the creation of custom checkboxes.
-   */
-  hiddenCheckbox?: boolean;
 
   /**
    * Sets which of the block / inline layout options apply.
@@ -65,9 +63,12 @@ export interface IressCheckboxGroupProps<T = FormControlValue> extends Omit<
   value?: T | T[];
 
   /**
-   * Add the button-like border and padding to checkbox when `touch` is true.
+   * The visual variant of the checkboxes in the group. This is passed down to child checkboxes, but can be overridden at the individual checkbox level.
+   * - `card`: Provides a larger, card-like style with a heading slot.
+   * - `touch`: Provides a larger, button-like style, great for mobile devices.
+   * - `undefined`: The default checkbox style.
    */
-  touch?: boolean;
+  variant?: CheckboxVariants;
 }
 
 export interface CheckboxGroupRef<
@@ -79,7 +80,7 @@ export interface CheckboxGroupRef<
 
 export type CheckboxGroupContextValue<T = FormControlValue> = Pick<
   IressCheckboxGroupProps<T>,
-  'name' | 'hiddenCheckbox' | 'readOnly' | 'touch'
+  'name' | 'readOnly' | 'variant'
 > &
   Pick<IressCheckboxProps<T>, 'onChange'> & {
     value: T[];
@@ -108,11 +109,10 @@ const CheckboxGroup = <T = FormControlValue,>(
     onBlur,
     onChange,
     onFocus,
-    hiddenCheckbox,
     name,
     role = 'group',
     readOnly,
-    touch,
+    variant,
     ...restProps
   }: IressCheckboxGroupProps<T>,
   ref: ForwardedRef<CheckboxGroupRef<T>>,
@@ -148,14 +148,13 @@ const CheckboxGroup = <T = FormControlValue,>(
 
   const context: CheckboxGroupContextValue<T> = useMemo(
     () => ({
-      hiddenCheckbox,
       name,
       onChange: (_e, checked, value) => toggleValue(value, checked),
       readOnly,
-      touch,
       value: value ?? [],
+      variant,
     }),
-    [name, value, hiddenCheckbox, readOnly, touch, toggleValue],
+    [name, readOnly, value, variant, toggleValue],
   );
 
   const handleFocus: FocusEventHandler<HTMLDivElement> = (e) => {

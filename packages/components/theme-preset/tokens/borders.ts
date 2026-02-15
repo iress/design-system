@@ -15,7 +15,7 @@ export const borders = {
     value: {
       width: '1px',
       style: 'solid',
-      color: cssVars.colour.neutral['30'],
+      color: cssVars.colour.neutral['50'],
     },
   },
   input: {
