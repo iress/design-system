@@ -512,8 +512,10 @@ describe('IressSelect', () => {
 
         expect(activator).toHaveTextContent('Option 1');
 
-        // TODO: this should be aria-selected, but its being a fit flakey. Will review in a seperate PR
-        // expect(options[0]).toHaveAttribute('aria-selected', 'true');
+        // TODO: this should be aria-selected, but it is being a bit flaky in tests, so using the class instead
+        // await waitFor(() =>
+        //   expect(options[0]).toHaveAttribute('aria-selected', 'true'),
+        // );
 
         const hiddenInput = screen.getByTestId('test-component__hidden-input');
         expect(hiddenInput).toHaveValue('1');
