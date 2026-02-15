@@ -339,6 +339,35 @@ export const Compact: Story = {
   ...AutomaticColumns,
   args: {
     ...AutomaticColumns.args,
+    scope: 'col',
     compact: true,
+    columns: [
+      {
+        key: 'investment_name',
+        label: 'Investment',
+        divider: true,
+        sort: 'asc',
+      },
+      {
+        key: 'investmentDate',
+        label: 'Date',
+        format: 'date',
+        sort: true,
+      },
+      {
+        key: 'totalPercentage',
+        label: 'Share',
+        format: 'percent',
+        sort: true,
+      },
+    ],
+    alternate: true,
+    removeRowBorders: true,
+    rowProps: (row: Row<{ investment_name?: string }>) => ({
+      bg:
+        row.original.investment_name === 'VODAFONE GRP'
+          ? 'colour.data.subtle.30'
+          : undefined,
+    }),
   },
 };

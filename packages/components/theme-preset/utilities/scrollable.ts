@@ -20,9 +20,6 @@ export const scrollable = defineUtility({
       overflowProp = 'overflowY';
     }
 
-    const trackColour =
-      direction === 'x' ? colors.page.value : colors.alt.value;
-
     return {
       [overflowProp]: 'auto',
 
@@ -32,12 +29,12 @@ export const scrollable = defineUtility({
       },
 
       '&::-webkit-scrollbar-track': {
-        background: trackColour,
+        background: colors.page.value,
         borderRadius: radii['radius.system.layout'].value,
       },
 
       '&::-webkit-scrollbar-thumb': {
-        backgroundColor: colors['colour.neutral.60'].value,
+        backgroundColor: colors['colour.neutral.50'].value,
         borderRadius: radii['radius.system.form'].value,
       },
 
@@ -50,7 +47,7 @@ export const scrollable = defineUtility({
       },
 
       scrollbarWidth: 'thin',
-      scrollbarColor: `${colors['colour.neutral.60'].value} ${trackColour}`,
+      scrollbarColor: `${colors['colour.neutral.50'].value} ${colors.page.value}`,
     } as NestedCssProperties;
   },
 });

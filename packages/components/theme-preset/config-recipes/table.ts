@@ -1,3 +1,4 @@
+import { cssVars } from '@iress-oss/ids-tokens';
 import { defineSlotRecipe } from '@pandacss/dev';
 
 export const tableRecipe = defineSlotRecipe({
@@ -8,19 +9,19 @@ export const tableRecipe = defineSlotRecipe({
     'caption',
     'sortHeader',
     'sortIcon',
-    'sortIconActive',
+    'sortIconInactive',
     'activator',
     'rowGroupHeader',
   ],
   base: {
     root: {
       display: 'block',
-      overflow: 'auto',
+      scrollable: 'true',
     },
     table: {
       textStyle: 'typography.body.md',
       bg: 'colour.neutral.10',
-      color: 'colour.neutral.80',
+      color: 'colour.neutral.90',
       borderRadius: 'radius.system.layout',
       borderSpacing: 'spacing.0',
       minWidth: '[100%]',
@@ -37,11 +38,12 @@ export const tableRecipe = defineSlotRecipe({
 
       '& th': {
         textAlign: 'start',
-        textStyle: 'typography.regular.md.strong',
+        textStyle: 'typography.body.md.strong',
       },
 
       '& thead th': {
         textStyle: 'typography.heading.5',
+        paddingBlock: 'spacing.2',
       },
 
       '& thead tr:first-child th, & thead tr:first-child td, &:not(:has(thead)) tbody tr:first-child th, &:not(:has(thead)) tbody tr:first-child td':
@@ -56,7 +58,7 @@ export const tableRecipe = defineSlotRecipe({
     },
     caption: {
       textAlign: 'center',
-      textStyle: 'typography.heading.4',
+      textStyle: 'typography.heading.3',
       paddingBlockEnd: 'spacing.2',
     },
     sortHeader: {
@@ -67,12 +69,18 @@ export const tableRecipe = defineSlotRecipe({
       cursor: 'pointer',
     },
     sortIcon: {
-      color: 'colour.neutral.70',
-      marginInlineStart: 'spacing.2',
+      fill: 'colour.neutral.90',
+      width: '[1.31em]',
+      height: '[1.31em]',
+      display: 'inline-block',
+      ml: 'spacing.1',
+
+      '& path': {
+        transition: 'fill 0.2s',
+      },
     },
-    sortIconActive: {
-      color: 'colour.neutral.70',
-      marginInlineStart: '-spacing.1',
+    sortIconInactive: {
+      fill: 'colour.neutral.60',
     },
     activator: {
       display: 'flex',
@@ -119,19 +127,35 @@ export const tableRecipe = defineSlotRecipe({
     compact: {
       true: {
         table: {
-          textStyle: 'typography.body.sm',
+          border: 'table',
+          borderRadius: 'radius.system.layout',
+          borderCollapse: 'separate',
           '& th, & td': {
-            paddingBlock: 'spacing.1',
+            padding: 'spacing.2',
+            borderTopWidth: '0px',
           },
-          '& th': {
-            textStyle: 'typography.body.sm.strong',
+          '& thead th, & thead td': {
+            bg: 'colour.primary.surface',
           },
-          '& thead th': {
-            textStyle: 'typography.body.sm.strong',
+          '& th, & thead th': {
+            textStyle: 'typography.body.md.medium',
+          },
+          '& > thead:first-of-type > :first-child > :first-child': {
+            borderTopLeftRadius: cssVars.radius.system._layout.topLeft,
+          },
+          '& > thead:first-of-type > :first-child > :last-child': {
+            borderTopRightRadius: cssVars.radius.system._layout.topRight,
+          },
+          '& > tbody:last-of-type > :last-child > :first-child': {
+            borderBottomLeftRadius: cssVars.radius.system._layout.bottomLeft,
+          },
+          '& > tbody:last-of-type > :last-child > :last-child': {
+            borderBottomRightRadius: cssVars.radius.system._layout.bottomRight,
           },
         },
         caption: {
-          textStyle: 'typography.body.md',
+          paddingBlock: 'spacing.5',
+          textAlign: 'left',
         },
       },
     },

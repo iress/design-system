@@ -149,7 +149,7 @@ const typography = {
       $type: Type.Typography,
       $value: {
         fontFamily: `{typography.base.headingFont || ${headingFont}}`,
-        fontSize: `calc({typography.base.size || ${baseSize}} * (14 / 14))`,
+        fontSize: `calc({typography.base.size || ${baseSize}} * (16 / 14))`,
         fontWeight: 400,
         lineHeight: 1.42,
       },
