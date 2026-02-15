@@ -1314,6 +1314,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hono/node-server@npm:^1.19.9":
+  version: 1.19.9
+  resolution: "@hono/node-server@npm:1.19.9"
+  peerDependencies:
+    hono: ^4
+  checksum: 10c0/de18c06b6b266dc45fe55fb82053bd1da8fe84939c49b6fbab4d2448b679d54ab5affbf8b15de9bead26f29b1755284d770aafb5ad14a8e4b3cfb4f79334554e
+  languageName: node
+  linkType: hard
+
 "@humanfs/core@npm:^0.19.1":
   version: 0.19.1
   resolution: "@humanfs/core@npm:0.19.1"
@@ -1439,7 +1448,7 @@ __metadata:
   resolution: "@iress-oss/ids-mcp-server@workspace:packages/mcp-server"
   dependencies:
     "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.15"
-    "@modelcontextprotocol/inspector": "npm:0.18.0"
+    "@modelcontextprotocol/inspector": "npm:0.19.0"
     "@modelcontextprotocol/sdk": "npm:1.25.2"
     "@types/minimist": "npm:1.2.5"
     "@types/node": "npm:^25.0.10"
@@ -2130,24 +2139,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/inspector-cli@npm:^0.18.0":
-  version: 0.18.0
-  resolution: "@modelcontextprotocol/inspector-cli@npm:0.18.0"
+"@modelcontextprotocol/inspector-cli@npm:^0.19.0":
+  version: 0.19.0
+  resolution: "@modelcontextprotocol/inspector-cli@npm:0.19.0"
   dependencies:
-    "@modelcontextprotocol/sdk": "npm:^1.24.3"
+    "@modelcontextprotocol/sdk": "npm:^1.25.2"
     commander: "npm:^13.1.0"
+    express: "npm:^5.2.1"
     spawn-rx: "npm:^5.1.2"
   bin:
     mcp-inspector-cli: build/cli.js
-  checksum: 10c0/373fff4f4c2d1486e11d9731b5d0f03dbf49fcb361b6af617bc14513aa6d256998264d01a94d13acd1b4bc540e191ab1af6beb67cb5f5e88ff0f95a85bec363a
+  checksum: 10c0/03f9c1b6cf6f7ec320b7b0efa83915b04ec07e3a302ea601ca05108a846484be00868898113dfa94c020b06ed577f231d15211cedd3d95826c94c4b62d7ed324
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/inspector-client@npm:^0.18.0":
-  version: 0.18.0
-  resolution: "@modelcontextprotocol/inspector-client@npm:0.18.0"
+"@modelcontextprotocol/inspector-client@npm:^0.19.0":
+  version: 0.19.0
+  resolution: "@modelcontextprotocol/inspector-client@npm:0.19.0"
   dependencies:
-    "@modelcontextprotocol/sdk": "npm:^1.24.3"
+    "@modelcontextprotocol/sdk": "npm:^1.25.2"
     "@radix-ui/react-checkbox": "npm:^1.1.4"
     "@radix-ui/react-dialog": "npm:^1.1.3"
     "@radix-ui/react-icons": "npm:^1.3.0"
@@ -2174,15 +2184,15 @@ __metadata:
     zod: "npm:^3.25.76"
   bin:
     mcp-inspector-client: bin/start.js
-  checksum: 10c0/cfcadf7785e3a2a56a855f4967acff239bba2466c84d4afef625d6d461c5c758b01ac7c768e25682ccfb9b8395c44d420f1f1d34151884a4ef8edfc492f36301
+  checksum: 10c0/62a5d7309b21deeee820be496303c235e3649d49f5d4d436d47959a5df0f79b7990e7dfe5c0ee50b5a9c3a251892d58f7e458dfc6453cf979cc86ebfb9f507f5
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/inspector-server@npm:^0.18.0":
-  version: 0.18.0
-  resolution: "@modelcontextprotocol/inspector-server@npm:0.18.0"
+"@modelcontextprotocol/inspector-server@npm:^0.19.0":
+  version: 0.19.0
+  resolution: "@modelcontextprotocol/inspector-server@npm:0.19.0"
   dependencies:
-    "@modelcontextprotocol/sdk": "npm:^1.24.3"
+    "@modelcontextprotocol/sdk": "npm:^1.25.2"
     cors: "npm:^2.8.5"
     express: "npm:^5.1.0"
     shell-quote: "npm:^1.8.3"
@@ -2191,18 +2201,18 @@ __metadata:
     zod: "npm:^3.25.76"
   bin:
     mcp-inspector-server: build/index.js
-  checksum: 10c0/e76d7df33e2970b0fc4dd74d59860c10d7622a8c83a2bbc61acd3e241a0553d599f87b04bedc11ffc292d67354b53bc7aa603cdc2f8bc1749d90907db0347ae8
+  checksum: 10c0/1679a40379dc2125c0f845489cea6633092cbbee8e1dbc71b4c7c2c126341b6c8ade655ac8acd4e003d6289a3261508645796285c0a8dc80b1389c0d584237bc
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/inspector@npm:0.18.0":
-  version: 0.18.0
-  resolution: "@modelcontextprotocol/inspector@npm:0.18.0"
+"@modelcontextprotocol/inspector@npm:0.19.0":
+  version: 0.19.0
+  resolution: "@modelcontextprotocol/inspector@npm:0.19.0"
   dependencies:
-    "@modelcontextprotocol/inspector-cli": "npm:^0.18.0"
-    "@modelcontextprotocol/inspector-client": "npm:^0.18.0"
-    "@modelcontextprotocol/inspector-server": "npm:^0.18.0"
-    "@modelcontextprotocol/sdk": "npm:^1.24.3"
+    "@modelcontextprotocol/inspector-cli": "npm:^0.19.0"
+    "@modelcontextprotocol/inspector-client": "npm:^0.19.0"
+    "@modelcontextprotocol/inspector-server": "npm:^0.19.0"
+    "@modelcontextprotocol/sdk": "npm:^1.25.2"
     concurrently: "npm:^9.2.0"
     node-fetch: "npm:^3.3.2"
     open: "npm:^10.2.0"
@@ -2212,11 +2222,11 @@ __metadata:
     zod: "npm:^3.25.76"
   bin:
     mcp-inspector: cli/build/cli.js
-  checksum: 10c0/44ec802ec71ae02722fad4a1364742bba05c334ba676214f8eb4cd65139047de4cc2be617a7495abb66dfecc32c275c35ecb0abe2237e42aec418fdb19d4d38d
+  checksum: 10c0/5a091d8cf17947f32a06208e2137bdbfeae18e7b2fb31293c937c16ad75a7d8be1c073a7ebb4dc5b1fee24f05fbd3b59f2c9f230e82da95490294311b5944245
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/sdk@npm:1.25.2, @modelcontextprotocol/sdk@npm:^1.24.3, @modelcontextprotocol/sdk@npm:^1.25.1":
+"@modelcontextprotocol/sdk@npm:1.25.2, @modelcontextprotocol/sdk@npm:^1.25.1":
   version: 1.25.2
   resolution: "@modelcontextprotocol/sdk@npm:1.25.2"
   dependencies:
@@ -2245,6 +2255,38 @@ __metadata:
     zod:
       optional: false
   checksum: 10c0/ffc024398e1b7841fb1ff2dc540e2e84f4b97a2a4058ef48e58836ce6077321c536a3858e9155472b7933c4773975b375167815bd4d721c3ca1e92db62e9488c
+  languageName: node
+  linkType: hard
+
+"@modelcontextprotocol/sdk@npm:^1.25.2":
+  version: 1.25.3
+  resolution: "@modelcontextprotocol/sdk@npm:1.25.3"
+  dependencies:
+    "@hono/node-server": "npm:^1.19.9"
+    ajv: "npm:^8.17.1"
+    ajv-formats: "npm:^3.0.1"
+    content-type: "npm:^1.0.5"
+    cors: "npm:^2.8.5"
+    cross-spawn: "npm:^7.0.5"
+    eventsource: "npm:^3.0.2"
+    eventsource-parser: "npm:^3.0.0"
+    express: "npm:^5.0.1"
+    express-rate-limit: "npm:^7.5.0"
+    jose: "npm:^6.1.1"
+    json-schema-typed: "npm:^8.0.2"
+    pkce-challenge: "npm:^5.0.0"
+    raw-body: "npm:^3.0.0"
+    zod: "npm:^3.25 || ^4.0"
+    zod-to-json-schema: "npm:^3.25.0"
+  peerDependencies:
+    "@cfworker/json-schema": ^4.1.1
+    zod: ^3.25 || ^4.0
+  peerDependenciesMeta:
+    "@cfworker/json-schema":
+      optional: true
+    zod:
+      optional: false
+  checksum: 10c0/0d2943450cab4c352376e5c0d888afe6129fcbf13d7b3b0c86c02094143e30b5f3f9380a27ecaa8f7007364793f9907494d8675bb0671727cf67eefa4e63c2df
   languageName: node
   linkType: hard
 
@@ -8368,7 +8410,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express@npm:^5.0.1, express@npm:^5.1.0":
+"express@npm:^5.0.1, express@npm:^5.1.0, express@npm:^5.2.1":
   version: 5.2.1
   resolution: "express@npm:5.2.1"
   dependencies:
