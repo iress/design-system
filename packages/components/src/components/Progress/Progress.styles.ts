@@ -6,7 +6,7 @@ export const progress = cva({
     contain: 'layout style paint',
     appearance: 'none',
     bg: 'colour.neutral.40',
-    color: 'colour.neutral.50',
+    color: 'colour.primary.fill',
     display: 'block',
     height: 'progress.height',
     width: '[100%]',
