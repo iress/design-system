@@ -1731,17 +1731,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@iress-oss/ids-storybook-config@npm:^0.2.12":
-  version: 0.2.13
-  resolution: "@iress-oss/ids-storybook-config@npm:0.2.13"
+"@iress-oss/ids-storybook-config@npm:^0.3.0":
+  version: 0.3.1
+  resolution: "@iress-oss/ids-storybook-config@npm:0.3.1"
   dependencies:
-    "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.9"
+    "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.13"
     radash: "npm:12.1.1"
     react-diff-viewer: "npm:^3.1.1"
     react-element-to-jsx-string: "npm:^17.0.1"
     remark-gfm: "npm:^4.0.1"
   peerDependencies:
-    "@chromatic-com/storybook": ^4
+    "@chromatic-com/storybook": ^4 || ^5
     "@iress-oss/ids-components": ^6
     "@iress-oss/ids-storybook-okta": ^0
     "@iress-oss/ids-storybook-sandbox": ^0.2
@@ -1756,7 +1756,7 @@ __metadata:
     storybook: ^10
     storybook-addon-tag-badges: ^3
     vite: ^7
-  checksum: 10c0/d76613d15e1d6051c7361027701a17bbe7a81b4de88b63d382ea6de28096c58ff354e4602a5244ceb68446c7f8c7cce812c4baa65155da3bc17e393133fbfaaa
+  checksum: 10c0/afbfd3f78cedf49e9495154c0d8e9a2a2aaaafc57305a879038246de342279231071e06d5f9f4726c16dba487cd249d20df1051b12cb26766e681c2439ec9f15
   languageName: node
   linkType: hard
 
@@ -1813,7 +1813,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iress-oss/ids-tokens@npm:^6.0.0-alpha.9":
+"@iress-oss/ids-tokens@npm:^6.0.0-alpha.13":
   version: 6.0.0-alpha.8-canary-20260109034157-86acbb4
   resolution: "@iress-oss/ids-tokens@npm:6.0.0-alpha.8-canary-20260109034157-86acbb4"
   peerDependencies:
@@ -1834,7 +1834,7 @@ __metadata:
   dependencies:
     "@chromatic-com/storybook": "npm:^5.0.0"
     "@iress-oss/ids-components": "npm:^6.0.0-alpha.4"
-    "@iress-oss/ids-storybook-config": "npm:^0.2.12"
+    "@iress-oss/ids-storybook-config": "npm:^0.3.0"
     "@iress-oss/ids-storybook-okta": "npm:^0.1.2"
     "@iress-oss/ids-storybook-sandbox": "npm:^0.2.2"
     "@iress-oss/ids-storybook-toggle-stories": "npm:^0.1.0"
@@ -1842,7 +1842,7 @@ __metadata:
     "@mermaid-js/mermaid-cli": "npm:^11.12.0"
     "@storybook/addon-a11y": "npm:^10.2.0"
     "@storybook/addon-docs": "npm:^10.2.0"
-    "@storybook/addon-links": "npm:10.2.0"
+    "@storybook/addon-links": "npm:10.2.3"
     "@storybook/react-vite": "npm:^10.2.0"
     "@typescript-eslint/eslint-plugin": "npm:^8.53.1"
     "@typescript-eslint/parser": "npm:^8.53.1"
@@ -1863,7 +1863,7 @@ __metadata:
     react: "npm:^19.2.3"
     react-dom: "npm:^19.2.3"
     storybook: "npm:^10.2.0"
-    storybook-addon-tag-badges: "npm:^3.0.4"
+    storybook-addon-tag-badges: "npm:^3.0.5"
     tsx: "npm:^4.21.0"
     typescript: "npm:^5.9.3"
     vite: "npm:^7.3.1"
@@ -2928,18 +2928,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-links@npm:10.2.0":
-  version: 10.2.0
-  resolution: "@storybook/addon-links@npm:10.2.0"
+"@storybook/addon-links@npm:10.2.3":
+  version: 10.2.3
+  resolution: "@storybook/addon-links@npm:10.2.3"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    storybook: ^10.2.0
+    storybook: ^10.2.3
   peerDependenciesMeta:
     react:
       optional: true
-  checksum: 10c0/59926c59ab46ec8252efb7b6953de61471fe67bd885e28e649cce2ad9b0bd92d597980395fdd8fa971f2d679180a52a64aaced8eeff07fe8727030fa006a8206
+  checksum: 10c0/648efe8de027ad43c8015d70fed57d7268cf9cc5b8dcae402a8624f681f2fb081c5c4e19c5b333bd972b40f251f2010bd2c9430ecdd4df5adad0cf785e56fa61
   languageName: node
   linkType: hard
 
@@ -8887,6 +8887,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"map-or-similar@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "map-or-similar@npm:1.5.0"
+  checksum: 10c0/33c6ccfdc272992e33e4e99a69541a3e7faed9de3ac5bc732feb2500a9ee71d3f9d098980a70b7746e7eeb7f859ff7dfb8aa9b5ecc4e34170a32ab78cfb18def
+  languageName: node
+  linkType: hard
+
 "markdown-table@npm:^3.0.0":
   version: 3.0.4
   resolution: "markdown-table@npm:3.0.4"
@@ -9143,6 +9150,15 @@ __metadata:
   version: 5.2.1
   resolution: "memoize-one@npm:5.2.1"
   checksum: 10c0/fd22dbe9a978a2b4f30d6a491fc02fb90792432ad0dab840dc96c1734d2bd7c9cdeb6a26130ec60507eb43230559523615873168bcbe8fafab221c30b11d54c1
+  languageName: node
+  linkType: hard
+
+"memoizerific@npm:^1.11.3":
+  version: 1.11.3
+  resolution: "memoizerific@npm:1.11.3"
+  dependencies:
+    map-or-similar: "npm:^1.5.0"
+  checksum: 10c0/661bf69b7afbfad57f0208f0c63324f4c96087b480708115b78ee3f0237d86c7f91347f6db31528740b2776c2e34c709bcb034e1e910edee2270c9603a0a469e
   languageName: node
   linkType: hard
 
@@ -12337,12 +12353,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-addon-tag-badges@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "storybook-addon-tag-badges@npm:3.0.4"
+"storybook-addon-tag-badges@npm:^3.0.5":
+  version: 3.0.6
+  resolution: "storybook-addon-tag-badges@npm:3.0.6"
+  dependencies:
+    memoizerific: "npm:^1.11.3"
   peerDependencies:
     storybook: ^10.0.0
-  checksum: 10c0/567def0d746a743e622d0cf21c44b1d537769c93c99d32f46920494898312fd11e88b8c0de1dbb98c1a7925d034fb36507d8cdc63429e898e908c2ea848eaf35
+  checksum: 10c0/ecc5bf0696d4c7807834409362335e20584ddbc8e5e87eb0d6f99061e845bced67584f414a6bcc44b68af8ad12419d4b7d5d73ed2a7f66e391d435a913ec5f3c
   languageName: node
   linkType: hard
 
