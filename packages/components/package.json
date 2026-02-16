@@ -61,7 +61,7 @@
     "radash": "^12.1.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-dropzone": "14.3.8",
+    "react-dropzone": "14.4.0",
     "rimraf": "^6.1.2",
     "sass": "^1.97.2",
     "storybook": "^10.2.0",
