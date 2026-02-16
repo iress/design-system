@@ -40,7 +40,7 @@ const Hash = () => {
   }, []);
 
   return (
-    <IressPanel bg="alt">
+    <IressPanel>
       <p>
         This story is to test the main Storybook configuration which broadcasts
         theme changes via postMessage.
@@ -68,7 +68,7 @@ export const BroadcastHash: Story = {
 export const PassAndLoadTheme: Story = {
   render: () => (
     <IressStack gap="md">
-      <IressPanel bg="alt">
+      <IressPanel>
         <p>
           This story is to test the main Storybook configuration which passes
           theme changes via postMessage. It is used to communicate theme changes
@@ -109,7 +109,7 @@ export const PassAndLoadTheme: Story = {
           </IressButton>
         </IressInline>
       </IressPanel>
-      <IressPanel bg="alt">
+      <IressPanel>
         <p>
           Here you can also test sending theme changes from within the iframe
           itself. You probably wouldn't do this in a real-world scenario, but

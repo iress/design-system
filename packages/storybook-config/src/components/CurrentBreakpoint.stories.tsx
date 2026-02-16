@@ -55,7 +55,7 @@ export const RenderCustomLabel: Story = {
   args: {
     renderLabel: ({ breakpoint }) => {
       return (
-        <IressPanel bg="colour.neutral.20">
+        <IressPanel bg="alt">
           You are currently in the <strong>{breakpoint}</strong> breakpoint
         </IressPanel>
       );

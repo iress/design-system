@@ -16,42 +16,18 @@ import {
   meta={ComponentStories}
 />
 
-## Examples
+## Usage
 
-### Background
+`IressPanel` uses `IressCard` under the hood, so it inherits all of the same props and styling options. However, `IressPanel` has some default styles applied to it, such as padding and a background color.
 
-By default, panels use the `colour.neutral.10` token. For most applications, this is the preferred background as panels are usually placed on a `colour.neutral.20` background.
+<IressButton href="/?path=/docs/components-card--docs">
+  View the API documentation for `IressCard`
+</IressButton>
 
-However, there are times when a panel needs to be placed on a different background. In these cases, you can use [the `bg` prop](/docs/styling-props-colour--docs#bg) to set the background to a different colour.
+### When to use
 
-<ComponentExample of={ComponentStories.bg} />
+Panels are used to group related content. They can be used to create sections within a page, as well as group lists of items together.
 
-### Padding
-
-Panel padding now is a global styling prop.
-
-<p>
-  <IressButton href="/?path=/docs/styling-props-spacing--docs#padding">
-    Learn more
-  </IressButton>
-</p>
-
-### Text align
-
-Text alignment can be set to `inherit`, `left`, `center`, `right` or `justify`.
-
-It's default value is `inherit`.
-
-<ComponentExample of={ComponentStories.TextAlign} />
-
-### Stretch
-
-Panel can be set to fill its available container height by setting the `stretch` prop.
-
-<ComponentExample of={ComponentStories.Stretch} />
-
-### Removing border radius
-
-Panels can inherit the theme's border radius which may result in an undesirable look to those components that use panels internally such as slideouts. To remove rounding from all panels set the prop `borderRadius="none"` to ensure panels have a zero border radius.
-
-<ComponentExample of={ComponentStories.NoBorderRadius} />
+- If you need to display micro-content, use [IressCard](/?path=/docs/components-card--docs) instead.
+- If you need to add padding or a background to a section of content, use [IressStyled](/?path=/docs/styling-props-reference--docs) on the component itself.
+- Otherwise, use `IressPanel` to group related content together.
