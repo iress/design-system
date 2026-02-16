@@ -1,96 +1,79 @@
-import { render } from '@testing-library/react';
-import { axe } from 'jest-axe';
-import { IressText } from '../../../Text';
-import { Toast, ToastProps } from './Toast';
-
-const defaultProps: ToastProps = {
-  status: 'info',
-  content: 'Content',
-};
-
-const renderComponent = (props?: Partial<ToastProps>) => {
-  return render(<Toast {...defaultProps} {...props} />);
-};
+import { render, waitFor, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { toast } from './Toast.styles';
+import { Toast } from './Toast';
+import { GlobalCSSClass } from '@/enums';
 
 describe('Toast', () => {
-  describe('Default rendering', () => {
-    it('should render the component content and info status', () => {
-      const { getByText, getByRole } = renderComponent({
-        heading: 'headingText',
-      });
+  it('render the component with the correct attributes', async () => {
+    render(<Toast data-testid="test" content="I am a toast message" />);
 
-      const icon = getByRole('img', { name: 'info:' });
-      expect(icon).toHaveTextContent('info');
+    const toastMessage = screen.getByText('I am a toast message');
+    expect(toastMessage).toBeInTheDocument();
 
-      const content = getByText(/Content/);
-      expect(content).toBeInTheDocument();
-    });
+    const element = screen.getByTestId('test');
+    await waitFor(() => expect(element).toHaveAttribute('data-state', 'open'));
+    await waitFor(async () => expect(element).toHaveFocus());
 
-    it('should render the component with heading text and heading level', () => {
-      const { getByText } = renderComponent({
-        heading: 'headingText',
-      });
+    expect(element).toHaveClass(toast(), GlobalCSSClass.Toast);
 
-      const content = getByText(/Content/);
-      expect(content).toBeInTheDocument();
+    const closeButton = screen.getByRole('button');
+    await userEvent.click(closeButton);
 
-      const heading = getByText(/headingText/);
-      expect(heading).toContainHTML('h2');
-    });
-
-    it('should render the component with heading', () => {
-      const { getByText } = renderComponent({
-        heading: <IressText>headingText</IressText>,
-      });
-
-      const heading = getByText(/headingText/);
-      expect(heading).toBeInTheDocument();
-    });
-
-    it('should render the component with string heading', () => {
-      const { getByRole } = renderComponent({
-        heading: 'headingText',
-      });
-
-      const heading = getByRole('heading', { name: 'headingText', level: 2 });
-      expect(heading).toBeInTheDocument();
-    });
-
-    it('should render the component with actions', () => {
-      const { getByRole } = renderComponent({
-        actions: [
-          {
-            children: 'Action',
-            onClick: () => {
-              console.log('Action clicked');
-            },
-          },
-        ],
-      });
-
-      const button = getByRole('button', { name: 'Action' });
-      expect(button).toBeInTheDocument();
-    });
+    await waitFor(() =>
+      expect(element).toHaveAttribute('data-state', 'closed'),
+    );
   });
 
-  it('should render the component with all testids', () => {
-    const { getByTestId } = renderComponent({
-      heading: 'headingText',
-      'data-testid': 'test-toast',
-      dismissible: true,
+  describe('props', () => {
+    describe('animation', () => {
+      it('changes the animation on the toast', () => {
+        render(
+          <Toast
+            data-testid="toast"
+            animation="start-x"
+            content="I am a toast message"
+          />,
+        );
+
+        const toastElement = screen.getByTestId('toast');
+        expect(toastElement).toHaveClass(toast({ animation: 'start-x' }));
+      });
     });
 
-    expect(getByTestId('test-toast')).toBeInTheDocument();
-    expect(getByTestId('test-toast__content')).toBeInTheDocument();
-    expect(getByTestId('test-toast__close-button__button')).toBeInTheDocument();
-    expect(getByTestId('test-toast__heading')).toBeInTheDocument();
-  });
+    describe('onClose', () => {
+      it('calls the onClose prop when the user dismisses the toast', async () => {
+        const onClose = vi.fn();
+        const onTimeout = vi.fn();
 
-  describe('accessibility', () => {
-    it('should not have basic accessibility issues', async () => {
-      const { container } = renderComponent();
-      const results = await axe(container);
-      expect(results).toHaveNoViolations();
+        render(
+          <Toast
+            onClose={onClose}
+            onTimeout={onTimeout}
+            content="I am a toast message"
+          />,
+        );
+
+        const closeButton = screen.getByRole('button');
+        await userEvent.click(closeButton);
+
+        await waitFor(() =>
+          expect(onClose).toHaveBeenCalledWith(
+            expect.objectContaining({
+              target: closeButton,
+            }),
+          ),
+        );
+        expect(onTimeout).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('timeout and onTimeout', () => {
+      it('calls the onTimeout prop when the toast times out', async () => {
+        const onTimeout = vi.fn();
+        render(<Toast onTimeout={onTimeout} content="I am a toast message" />);
+        await waitFor(() => expect(onTimeout).toHaveBeenCalledTimes(1));
+      });
     });
   });
 });

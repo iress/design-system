@@ -50,7 +50,7 @@ export const ComponentExample = ({
 
   return (
     <>
-      <IressPanel noBorder bg="transparent" mt="-lg" mx="-md">
+      <IressPanel noBorder bg="transparent" mt="-lg" mb="-xl" mx="-md">
         <ComponentCanvas
           {...restProps}
           of={of as StoryAnnotations}

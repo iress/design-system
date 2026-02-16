@@ -32,7 +32,6 @@ export default {
     ...disableArgTypes(['container']),
     ...stylingProps,
   },
-  tags: ['updated'],
 } as Meta<typeof IressToasterProvider>;
 
 export const Provider: Story = {

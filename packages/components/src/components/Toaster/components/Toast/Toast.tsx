@@ -1,147 +1,110 @@
-import { propagateTestid } from '@helpers/utility/propagateTestid';
-import {
-  IressButton,
-  type IressButtonProps,
-  IressCloseButton,
-} from '../../../Button';
-import { IressInline } from '../../../Inline';
-import { IressText } from '../../../Text';
-import { forwardRef, type ReactNode, type MouseEvent } from 'react';
-import { cx } from '@/styled-system/css';
+import { type ReactNode, useEffect, useState } from 'react';
+import { getTransitionDuration } from '@helpers/transition/getTransitionDuration';
+import { useFloating, useTransitionStatus } from '@floating-ui/react';
 import { toast as toastStyles } from './Toast.styles';
-import { type IressStyledProps } from '@/types';
-import { styled } from '@/styled-system/jsx';
-import { IressIcon, type IressIconProps } from '@/components/Icon';
+import { cx } from '@/styled-system/css';
+import { IressAlert, type IressAlertProps } from '@/components/Alert';
 import { GlobalCSSClass } from '@/enums';
 
-export type ToastStatus = 'success' | 'error' | 'info';
-
-export interface ToastProps extends Omit<IressStyledProps, 'content'> {
+export interface ToastProps extends Omit<
+  IressAlertProps,
+  'children' | 'content' | 'multiLine' | 'variant'
+> {
   /**
-   * Actions to display in the alert. These will be rendered as buttons with opinionated styling.
-   * If you want to use custom buttons, use the `footer` prop instead.
-   **/
-  actions?: Omit<IressButtonProps, 'mode' | 'status'>[];
+   * The animation of the toast. If not provided, it will simply fade in and out.
+   */
+  animation?: 'start-x' | 'end-x' | 'start-y' | 'end-y';
 
   /**
-   * Alternative to children.
+   * Contents of the toast.
    */
   content?: ReactNode;
 
   /**
-   * A boolean to show/hide the dismiss close button.
-   * @default true
+   * Called when the element timed out.
    */
-  dismissible?: boolean;
+  onTimeout?: () => void;
 
   /**
-   * The heading area of the toast. You can pass react component such as `<IressText>Error</IressText>`.
-   * If a string is provided, it will default to a `<h2 />` element.
+   * The amount of time, in milliseconds, the toast is displayed on screen without
+   * the users interaction. Will fall back to timeout prop on parent toaster and then
+   * the default time of 6000ms. If set to 0, the toast will not auto dismiss.
+   * @default 6000
    */
-  heading?: ReactNode;
-
-  /**
-   * Click event on the close button of the toast.
-   */
-  onClose?: (e?: MouseEvent<HTMLButtonElement>) => void;
-
-  /**
-   * System status of Toast
-   */
-  status: ToastStatus;
+  timeout?: number;
 }
 
-const iconColor: Record<ToastStatus, IressStyledProps['color']> = {
-  error: 'colour.system.danger.text',
-  success: 'colour.system.success.text',
-  info: 'colour.system.info.text',
-};
+export const Toast = ({
+  animation,
+  className,
+  content,
+  onClose,
+  onTimeout,
+  timeout = 6000,
+  ...restProps
+}: ToastProps) => {
+  const [open, setOpen] = useState<boolean>(true);
+  let duration = 240;
 
-const icons: Record<ToastStatus, IressIconProps['name']> = {
-  error: 'ban',
-  success: 'check',
-  info: 'info-square',
-};
+  const { context: floatingContext } = useFloating({
+    open,
+    onOpenChange: setOpen,
+  });
 
-export const Toast = forwardRef<HTMLDivElement, ToastProps>(
-  (
-    {
-      actions,
-      heading,
-      status,
-      children,
-      content,
-      dismissible = true,
-      onClose,
-      'data-testid': dataTestId,
-      className,
-      ...restProps
-    },
-    ref,
-  ) => {
-    const classes = toastStyles({ status });
-    const hasActions = !!actions?.length;
+  if (floatingContext.refs.floating.current) {
+    duration = getTransitionDuration(floatingContext.refs.floating.current);
+  }
 
-    return (
-      <styled.div
+  const { isMounted, status } = useTransitionStatus(floatingContext, {
+    duration,
+  });
+
+  useEffect(() => {
+    if (!timeout) return;
+
+    setTimeout(() => {
+      setOpen(false);
+      setTimeout(() => onTimeout?.(), duration);
+    }, timeout);
+  }, [duration, onTimeout, timeout]);
+
+  useEffect(() => {
+    if (status === 'open') {
+      floatingContext.refs.floating.current?.focus();
+    }
+  }, [status, floatingContext.refs.floating]);
+
+  if (!isMounted) return false;
+
+  const mappedStatus = status === 'close' ? 'closed' : status;
+
+  const classes = toastStyles({
+    animation: animation ?? 'fade',
+    transitionState: mappedStatus,
+  });
+
+  return (
+    <div
+      ref={(ref) =>
+        floatingContext.refs.setFloating(ref?.firstChild as HTMLElement)
+      }
+    >
+      <IressAlert
         {...restProps}
-        data-testid={dataTestId}
-        className={cx(className, classes.root, GlobalCSSClass.Toast)}
-        tabIndex={-1}
-        ref={ref}
+        className={cx(className, classes, GlobalCSSClass.Toast)}
+        multiLine
+        data-state={mappedStatus}
+        closed={false}
+        onClose={(e) => {
+          setOpen(false);
+          setTimeout(() => onClose?.(e), duration);
+        }}
+        mb="none"
       >
-        <div className={classes.panel}>
-          <IressInline gap="sm" verticalAlign="top" noWrap>
-            <IressIcon
-              name={icons[status]}
-              screenreaderText={`${status}: `}
-              textStyle="typography.heading.4"
-              color={iconColor[status]}
-            />
-
-            <div
-              className={classes.wrapper}
-              data-testid={propagateTestid(dataTestId, 'content')}
-            >
-              {heading && (
-                <IressText
-                  className={classes.heading}
-                  data-testid={propagateTestid(dataTestId, 'heading')}
-                >
-                  {typeof heading === 'string' ? <h2>{heading}</h2> : heading}
-                </IressText>
-              )}
-              {dismissible && (
-                <IressCloseButton
-                  data-testid={propagateTestid(
-                    dataTestId,
-                    'close-button__button',
-                  )}
-                  className={classes.closeButton}
-                  onClick={(e) => onClose?.(e)}
-                  screenreaderText="Dismiss"
-                />
-              )}
-
-              <div className={classes.content}>{content ?? children}</div>
-
-              {hasActions && (
-                <IressInline gap="sm" mt="spacing.1">
-                  {actions?.map((action, index) => (
-                    <IressButton
-                      {...action}
-                      className={cx(action.className, classes.action)}
-                      key={index}
-                    />
-                  ))}
-                </IressInline>
-              )}
-            </div>
-          </IressInline>
-        </div>
-      </styled.div>
-    );
-  },
-);
+        {content}
+      </IressAlert>
+    </div>
+  );
+};
 
 Toast.displayName = 'Toast';

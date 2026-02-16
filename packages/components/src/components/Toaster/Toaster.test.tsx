@@ -8,7 +8,7 @@ interface MockToasterItem extends Omit<ToasterItem, 'content'> {
 }
 
 const mockToasts: MockToasterItem[] = [
-  { id: '1', status: 'error', content: 'Sample Toast 1' },
+  { id: '1', status: 'danger', content: 'Sample Toast 1' },
   { id: '2', status: 'info', content: 'Sample Toast 2' },
   { id: '3', status: 'success', content: 'Sample Toast 3' },
 ];

@@ -85,7 +85,7 @@ export const useToaster = (id?: string): ToasterHookReturn => {
       success: (toast: NewToast | string) =>
         show('success', transformToNewToast(toast)),
       error: (toast: NewToast | string) =>
-        show('error', transformToNewToast(toast)),
+        show('danger', transformToNewToast(toast)),
       info: (toast: NewToast | string) =>
         show('info', transformToNewToast(toast)),
       close,

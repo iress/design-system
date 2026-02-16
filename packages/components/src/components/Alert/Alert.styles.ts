@@ -79,6 +79,7 @@ export const alert = sva({
     dismiss: {
       marginLeft: 'auto',
       my: '-spacing.2',
+      mr: '-spacing.1',
     },
   },
   variants: {

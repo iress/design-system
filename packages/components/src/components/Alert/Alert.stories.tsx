@@ -85,7 +85,7 @@ export const Footer: Story = {
     heading: 'Alert heading',
     status: 'danger',
     children: 'Are you sure you want to proceed with this action?',
-    onDismiss: () => console.log('Alert dismissed'),
+    onClose: () => console.log('Alert dismissed'),
     actions: [
       {
         children: 'Action',
@@ -119,7 +119,7 @@ export const MultiLine: Story = {
     children:
       'Once you confirm, the system will begin re-indexing your entire library, which may temporarily limit access to certain collaborative features for approximately five to ten minutes depending on your connection speed. If you are currently working in a multi-user environment, other active contributors will be notified of these updates automatically. If you have any doubts regarding the integrity of the incoming data, we strongly recommend canceling this prompt and consulting your administrator.',
     multiLine: true,
-    onDismiss: () => console.log('Alert dismissed'),
+    onClose: () => console.log('Alert dismissed'),
     actions: [
       {
         children: 'Action',
@@ -173,7 +173,7 @@ export const Variant: Story = {
 export const Dismissable: Story = {
   args: {
     ...Default.args,
-    onDismiss: () => {
+    onClose: () => {
       console.log(
         'Some logic to dismiss the alert, probably saving its dismissed state in local storage or in a database',
       );

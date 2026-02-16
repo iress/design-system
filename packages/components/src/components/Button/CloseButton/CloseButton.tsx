@@ -24,6 +24,7 @@ export const IressCloseButton = forwardRef(
     ref: Ref<HTMLButtonElement>,
   ) => (
     <IressButton
+      borderRadius="50%"
       {...restProps}
       aria-label={screenreaderText}
       className={cx(className, GlobalCSSClass.CloseButton)}

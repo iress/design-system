@@ -3,17 +3,26 @@ import {
   IressInline,
   IressToasterProvider,
   type IressToasterProviderProps,
-  type ToastStatus,
   useToaster,
 } from '@/main';
 
-const ToastWithTrigger = ({ status }: { status: ToastStatus }) => {
+const ToastWithTrigger = ({
+  status,
+}: {
+  status: 'error' | 'success' | 'info';
+}) => {
   const toaster = useToaster();
 
   return (
     <IressButton
       onClick={() =>
-        toaster[status]({ content: `Hello, I am a ${status} toast` })
+        toaster[status]({
+          heading: `${status[0].toUpperCase() + status.slice(1)} toast`,
+          content: `Hello, I am a ${status} toast`,
+          actions: [
+            { onClick: () => alert('Action clicked!'), children: 'Click me' },
+          ],
+        })
       }
     >
       {status}
