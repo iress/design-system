@@ -10,6 +10,8 @@ export const BREAKPOINT_DETAILS = {
   xs: {
     mediaQuery: '(min-width: 0) and (max-width: 575px)',
     screenWidthRange: '0 - 575px',
+    margin: 'spacing.4',
+    maxColumns: 4,
     minScreenWidth: '0px',
     maxScreenWidth: '575px',
     containerMaxWidth: '100%',
@@ -21,6 +23,7 @@ export const BREAKPOINT_DETAILS = {
   sm: {
     mediaQuery: '(min-width: 576px) and (max-width: 767px)',
     screenWidthRange: '576px - 767px',
+    margin: 'spacing.4',
     minScreenWidth: '576px',
     maxScreenWidth: '767px',
     containerMaxWidth: '100%',
@@ -32,45 +35,51 @@ export const BREAKPOINT_DETAILS = {
   md: {
     mediaQuery: '(min-width: 768px) and (max-width: 1023px)',
     screenWidthRange: '768px - 1023px',
+    margin: 'spacing.6',
+    maxColumns: 4,
     minScreenWidth: '768px',
     maxScreenWidth: '1023px',
     containerMaxWidth: '100%',
-    viewportWidth: 962,
+    viewportWidth: 1022,
   },
 
   /**
    * Large breakpoint for desktops
    */
   lg: {
-    mediaQuery: '(min-width: 1024px) and (max-width: 1199px)',
-    screenWidthRange: '1024px - 1199px',
+    mediaQuery: '(min-width: 1024px) and (max-width: 1279px)',
+    screenWidthRange: '1024px - 1279px',
+    margin: 'spacing.6',
+    maxColumns: 6,
     minScreenWidth: '1024px',
-    maxScreenWidth: '1199px',
+    maxScreenWidth: '1279px',
     containerMaxWidth: '100%',
-    viewportWidth: 1180,
+    viewportWidth: 1278,
   },
 
   /**
    * Extra large breakpoint for large desktops
    */
   xl: {
-    mediaQuery: '(min-width: 1200px) and (max-width: 1499px)',
-    screenWidthRange: '1200px - 1499px',
-    minScreenWidth: '1200px',
-    maxScreenWidth: '1499px',
-    containerMaxWidth: '1280px',
-    viewportWidth: 1366,
+    mediaQuery: '(min-width: 1280px) and (max-width: 1599px)',
+    screenWidthRange: '1280px - 1599px',
+    margin: 'spacing.8',
+    minScreenWidth: '1280px',
+    maxScreenWidth: '1599px',
+    containerMaxWidth: '1440px',
+    viewportWidth: 1440 + 64,
   },
 
   /**
    * Extra extra large breakpoint for extra large desktops (32inch)
    */
   xxl: {
-    mediaQuery: '(min-width: 1500px)',
-    screenWidthRange: '1500px and above',
-    minScreenWidth: '1500px',
-    containerMaxWidth: '1280px',
-    viewportWidth: 1920,
+    mediaQuery: '(min-width: 1600px)',
+    margin: 'spacing.8',
+    screenWidthRange: '1600px and above',
+    minScreenWidth: '1600px',
+    containerMaxWidth: '1690px',
+    viewportWidth: 1690 + 64,
   },
 } satisfies Record<string, BreakpointDetail>;
 

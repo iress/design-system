@@ -8,13 +8,16 @@ import {
   IressDivider,
   IressInline,
   IressPanel,
+  IressPill,
   IressPlaceholder,
   IressRow,
   IressStack,
+  IressStyled,
   IressTable,
   IressText,
+  type PositiveSpacingToken,
 } from '@/main';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import {
   CurrentBreakpoint,
   withCustomSource,
@@ -28,6 +31,29 @@ const BreakpointSm = lazy(() => import('@docs/components/BreakpointSm'));
 const BreakpointMd = lazy(() => import('@docs/components/BreakpointMd'));
 const BreakpointLg = lazy(() => import('@docs/components/BreakpointLg'));
 const BreakpointXl = lazy(() => import('@docs/components/BreakpointXl'));
+
+const MarginToken = ({ token }: { token: PositiveSpacingToken }) => {
+  const [size, setSize] = useState<number | null>(null);
+
+  return (
+    <IressInline gap="xs">
+      {size !== null && <IressText element="span">{size}px</IressText>}
+      <IressPill>{token}</IressPill>
+      <IressStyled
+        srOnly
+        pl={token}
+        ref={(el) => {
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.width !== size) {
+              setSize(rect.width);
+            }
+          }
+        }}
+      />
+    </IressInline>
+  );
+};
 
 export default {
   title: 'Foundations/Responsive layout',
@@ -50,6 +76,7 @@ export const Breakpoints: Story = {
         mediaQuery: value.mediaQuery,
         activeViewport: value.containerMaxWidth,
         exampleViewport: `${value.viewportWidth}px width`,
+        marginToken: value.margin,
       })),
   },
 };
@@ -81,12 +108,12 @@ export const Xs: Story = {
             <IressText>{BREAKPOINT_DETAILS.xs.maxScreenWidth}</IressText>
           </IressInline>
           <IressInline gap="sm">
-            <IressText element="strong">Example viewport</IressText>
+            <IressText element="strong">Active viewport</IressText>
             <IressText>{BREAKPOINT_DETAILS.xs.containerMaxWidth}</IressText>
           </IressInline>
           <IressInline gap="sm">
             <IressText element="strong">Margin</IressText>
-            <IressText>16px</IressText>
+            <MarginToken token={BREAKPOINT_DETAILS.xs.margin} />
           </IressInline>
         </IressStack>
       </IressInline>
@@ -160,12 +187,12 @@ export const Sm: Story = {
             <IressText>{BREAKPOINT_DETAILS.sm.maxScreenWidth}</IressText>
           </IressInline>
           <IressInline gap="sm">
-            <IressText element="strong">Example viewport</IressText>
+            <IressText element="strong">Active viewport</IressText>
             <IressText>{BREAKPOINT_DETAILS.sm.containerMaxWidth}</IressText>
           </IressInline>
           <IressInline gap="sm">
             <IressText element="strong">Margin</IressText>
-            <IressText>16px</IressText>
+            <MarginToken token={BREAKPOINT_DETAILS.sm.margin} />
           </IressInline>
         </IressStack>
       </IressInline>
@@ -239,12 +266,12 @@ export const Md: Story = {
             <IressText>{BREAKPOINT_DETAILS.md.maxScreenWidth}</IressText>
           </IressInline>
           <IressInline gap="sm">
-            <IressText element="strong">Example viewport</IressText>
+            <IressText element="strong">Active viewport</IressText>
             <IressText>{BREAKPOINT_DETAILS.md.containerMaxWidth}</IressText>
           </IressInline>
           <IressInline gap="sm">
             <IressText element="strong">Margin</IressText>
-            <IressText>16px</IressText>
+            <MarginToken token={BREAKPOINT_DETAILS.md.margin} />
           </IressInline>
         </IressStack>
       </IressInline>
@@ -333,12 +360,12 @@ export const Lg: Story = {
             <IressText>{BREAKPOINT_DETAILS.lg.maxScreenWidth}</IressText>
           </IressInline>
           <IressInline gap="sm">
-            <IressText element="strong">Example viewport</IressText>
+            <IressText element="strong">Active viewport</IressText>
             <IressText>{BREAKPOINT_DETAILS.lg.containerMaxWidth}</IressText>
           </IressInline>
           <IressInline gap="sm">
             <IressText element="strong">Margin</IressText>
-            <IressText>16px</IressText>
+            <MarginToken token={BREAKPOINT_DETAILS.lg.margin} />
           </IressInline>
         </IressStack>
       </IressInline>
@@ -463,12 +490,12 @@ export const Xl: Story = {
             <IressText>{BREAKPOINT_DETAILS.xl.maxScreenWidth}</IressText>
           </IressInline>
           <IressInline gap="sm">
-            <IressText element="strong">Example viewport</IressText>
+            <IressText element="strong">Active viewport</IressText>
             <IressText>{BREAKPOINT_DETAILS.xl.containerMaxWidth}</IressText>
           </IressInline>
           <IressInline gap="sm">
             <IressText element="strong">Margin</IressText>
-            <IressText>16px</IressText>
+            <MarginToken token={BREAKPOINT_DETAILS.xl.margin} />
           </IressInline>
         </IressStack>
       </IressInline>
@@ -594,12 +621,12 @@ export const Xxl: Story = {
             <IressText>N/A</IressText>
           </IressInline>
           <IressInline gap="sm">
-            <IressText element="strong">Example viewport</IressText>
+            <IressText element="strong">Active viewport</IressText>
             <IressText>{BREAKPOINT_DETAILS.xxl.containerMaxWidth}</IressText>
           </IressInline>
           <IressInline gap="sm">
             <IressText element="strong">Margin</IressText>
-            <IressText>16px</IressText>
+            <MarginToken token={BREAKPOINT_DETAILS.xxl.margin} />
           </IressInline>
         </IressStack>
       </IressInline>

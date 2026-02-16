@@ -11,21 +11,11 @@ type Story = StoryObj<typeof IressContainer>;
 export default {
   title: 'Components/Container',
   component: IressContainer,
-  parameters: {
-    layout: 'fullscreen',
-  },
   tags: ['updated'],
   argTypes: {
     children: reactNodeArgType,
     ...stylingProps,
   },
-  decorators: [
-    (Story) => (
-      <IressPanel bg="alt" borderRadius="none" stretch>
-        <Story />
-      </IressPanel>
-    ),
-  ],
 } as Meta<typeof IressContainer>;
 
 export const Container: Story = {
