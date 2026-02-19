@@ -1,4 +1,4 @@
-import { IressFilter, type IressFilterProps } from '@/main';
+import { IressDropdownMenu } from '@/main';
 
 interface StarWarsCharacter {
   name: string;
@@ -9,11 +9,14 @@ interface StarWarsCharacterApi {
   results: StarWarsCharacter[];
 }
 
-export const FilterUsingAsync = <TMultiple extends boolean = false>(
-  args: IressFilterProps<TMultiple>,
-) => (
-  <IressFilter
-    {...args}
+const INITIAL_VALUE = {
+  label: 'Any character',
+  value: undefined,
+};
+
+export const ControlledDropdownMenuAsync = () => (
+  <IressDropdownMenu
+    label="Select a Star Wars character"
     options={async (query: string) => {
       if (!query) return [];
 
@@ -21,11 +24,14 @@ export const FilterUsingAsync = <TMultiple extends boolean = false>(
         `https://swapi.py4e.com/api/people/?search=${query}`,
       ).then((response) => response.json() as Promise<StarWarsCharacterApi>);
 
-      return data.results.map((character: StarWarsCharacter) => ({
+      const results = data.results.map((character: StarWarsCharacter) => ({
         label: character.name,
         value: character.name,
         meta: character.gender,
       }));
+
+      return [INITIAL_VALUE, ...results];
     }}
+    selected={INITIAL_VALUE}
   />
 );

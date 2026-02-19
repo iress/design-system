@@ -1,8 +1,8 @@
 import { renderHook } from '@testing-library/react';
-import { useFilterFlags } from './useFilterFlags';
+import { useDropdownMenuFlags } from './useDropdownMenuFlags';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
 
-const DEFAULT_PROPS: Parameters<typeof useFilterFlags>[0] = {
+const DEFAULT_PROPS: Parameters<typeof useDropdownMenuFlags>[0] = {
   debouncedQuery: '',
   results: [],
   loading: false,
@@ -11,10 +11,10 @@ const DEFAULT_PROPS: Parameters<typeof useFilterFlags>[0] = {
   shouldShowNoResults: false,
 };
 
-describe('useFilterFlags', () => {
+describe('useDropdownMenuFlags', () => {
   it('shows nothing by default', () => {
     const hook = renderHook(() =>
-      useFilterFlags({
+      useDropdownMenuFlags({
         ...DEFAULT_PROPS,
       }),
     );
@@ -27,7 +27,7 @@ describe('useFilterFlags', () => {
   describe('showHeader', () => {
     it('shows header if searchable', () => {
       const hook = renderHook(() =>
-        useFilterFlags({
+        useDropdownMenuFlags({
           ...DEFAULT_PROPS,
           searchable: true,
         }),
@@ -38,7 +38,7 @@ describe('useFilterFlags', () => {
 
     it('shows header if has visible reset button', () => {
       const hook = renderHook(() =>
-        useFilterFlags({
+        useDropdownMenuFlags({
           ...DEFAULT_PROPS,
           visibleResetButton: true,
         }),
@@ -51,7 +51,7 @@ describe('useFilterFlags', () => {
   describe('showResults', () => {
     it('always shows results if more than one', () => {
       const hook = renderHook(() =>
-        useFilterFlags({
+        useDropdownMenuFlags({
           ...DEFAULT_PROPS,
           results: MOCK_LABEL_VALUE_META,
         }),
@@ -64,7 +64,7 @@ describe('useFilterFlags', () => {
   describe('showNoResults', () => {
     it('shows no results if no results, has searched and no longer loading', () => {
       const hook = renderHook(() =>
-        useFilterFlags({
+        useDropdownMenuFlags({
           ...DEFAULT_PROPS,
           loading: false,
           results: [],

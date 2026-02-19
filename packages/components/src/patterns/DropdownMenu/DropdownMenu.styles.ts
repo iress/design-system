@@ -1,9 +1,10 @@
 import { sva } from '@/styled-system/css';
 
-export const filter = sva({
+export const dropdownMenu = sva({
   slots: [
     'root',
-    'chevron',
+    'activator',
+    'searchHeader',
     'searchInput',
     'optionList',
     'optionContent',
@@ -15,15 +16,32 @@ export const filter = sva({
   ],
   base: {
     root: {},
-    chevron: {
+    activator: {
+      appearance: 'none',
+      color: 'colour.neutral.90',
+      bg: 'colour.neutral.10',
+      border: 'input',
+      pl: 'spacing.3',
+      pr: 'spacing.8',
+      textStyle: 'typography.body.md.medium',
+      minHeight: 'input.height',
+      borderRadius: 'radius.system.form',
+      cursor: 'pointer',
+      focusable: 'select-activator',
+      display: 'inline-flex',
+      gap: 'spacing.2',
+      alignItems: 'center',
       position: 'relative',
       selectChevron: true,
-      ml: 'spacing.4',
-      mr: '-spacing.2',
 
       _rtl: {
         selectChevronRtl: true,
+        pr: 'spacing.3',
+        pl: 'spacing.8',
       },
+    },
+    searchHeader: {
+      p: 'spacing.2',
     },
     searchInput: {
       minWidth: '[270px]',
@@ -64,5 +82,3 @@ export const filter = sva({
   variants: {},
   compoundVariants: [],
 });
-
-export type FilterVariants = Parameters<typeof filter>[0];

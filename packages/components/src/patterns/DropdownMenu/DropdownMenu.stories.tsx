@@ -1,27 +1,32 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressFilter, type IressFilterProps } from '.';
-import { FilterSearchTable } from './mocks/FilterSearchTable';
-import FilterSearchTableSource from './mocks/FilterSearchTable.tsx?raw';
-import { FilterUsingState } from './mocks/FilterUsingState';
-import FilterUsingStateSource from './mocks/FilterUsingState.tsx?raw';
-import { FilterUsingAsync } from './mocks/FilterUsingAsync';
-import FilterUsingAsyncSource from './mocks/FilterUsingAsync.tsx?raw';
-import { IressText } from '../Text';
-import { IressPanel } from '../Panel';
-import { IressButton } from '../Button';
+import { TableWithFilters } from './mocks/TableWithFilters';
+import TableWithFiltersSource from './mocks/TableWithFilters.tsx?raw';
 import {
-  disableArgTypes,
+  withCustomSource,
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
 import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
-import { IressPill } from '../Pill';
+import {
+  IressDropdownMenu,
+  IressMenuDivider,
+  IressPill,
+  IressSelectCreate,
+  IressText,
+  type IressDropdownMenuProps,
+} from '@/main';
+import { ControlledDropdownMenu } from './mocks/ControlledDropdownMenu';
+import ControlledDropdownMenuSource from './mocks/ControlledDropdownMenu.tsx?raw';
+import { ControlledDropdownMenuMultiselect } from './mocks/ControlledDropdownMenuMultiselect';
+import ControlledDropdownMenuMultiselectSource from './mocks/ControlledDropdownMenuMultiselect.tsx?raw';
+import { ControlledDropdownMenuAsync } from './mocks/ControlledDropdownMenuAsync';
+import ControlledDropdownMenuAsyncSource from './mocks/ControlledDropdownMenuAsync.tsx?raw';
 
-type Story = StoryObj<typeof IressFilter>;
-type SingleFilterStory = StoryObj<IressFilterProps<false>>;
+type Story = StoryObj<IressDropdownMenuProps<true>>;
+type SingleStory = StoryObj<IressDropdownMenuProps<false>>;
 
 export default {
-  title: 'Components/Filter',
-  component: IressFilter,
+  title: 'Patterns/DropdownMenu',
+  component: IressDropdownMenu,
   tags: ['updated'],
   argTypes: {
     footer: reactNodeArgType,
@@ -29,107 +34,71 @@ export default {
     searchNoResultsText: reactNodeArgType,
     ...stylingProps,
   },
-} as Meta<typeof IressFilter>;
+} as Meta<typeof IressDropdownMenu>;
 
-export const Default: Story = {
-  args: {
-    label: 'Filter',
-    options: [...Array(5).keys()].map((number) => ({
-      label: `Option ${number + 1}`,
-      value: number + 1,
-    })),
-    popoverProps: {
-      container: document.body,
-    },
-  },
-};
-
-export const Label: Story = {
-  ...Default,
-  args: {
-    ...Default.args,
-    label: 'Custom label',
-    multiSelect: true,
-  },
-};
-
-export const SearchTable: SingleFilterStory = {
-  args: {
-    ...(Default as SingleFilterStory).args,
-    visibleResetButton: true,
-  },
-  argTypes: {
-    ...disableArgTypes(['label', 'options', 'value']),
-  },
-  render: (args) => <FilterSearchTable {...args} />,
+export const Controlled: SingleStory = {
+  render: (args) => <ControlledDropdownMenu {...args} />,
   parameters: {
-    ...withTransformedRawSource(FilterSearchTableSource, 'IressFilterProps'),
+    ...withCustomSource(ControlledDropdownMenuSource),
   },
 };
 
-export const Uncontrolled: Story = {
-  args: {
-    ...Default.args,
-    defaultValue: {
-      label: 'Option 1',
-      value: 1,
-    },
-  },
-};
-
-export const Controlled: Story = {
-  ...Default,
-  argTypes: {
-    ...disableArgTypes(['defaultValue', 'value']),
-  },
-  render: (args) => <FilterUsingState {...args} />,
+export const SearchTable: SingleStory = {
+  render: (args) => <TableWithFilters {...args} />,
   parameters: {
-    ...withTransformedRawSource(FilterUsingStateSource, 'IressFilterProps'),
+    ...withTransformedRawSource(
+      TableWithFiltersSource,
+      'IressDropdownMenuProps',
+    ),
   },
 };
 
 export const MultiSelect: Story = {
-  ...Default,
-  args: {
-    ...Default.args,
-    multiSelect: true,
-  },
-};
-
-export const Options: Story = {
-  ...Default,
-};
-
-export const AsyncOptions: Story = {
-  args: {
-    ...Default.args,
-    label: 'Filter',
-    searchable: true,
-  },
-  argTypes: {
-    ...disableArgTypes(['options']),
-  },
-  render: (args) => <FilterUsingAsync {...args} />,
+  render: (args) => <ControlledDropdownMenuMultiselect {...args} />,
   parameters: {
-    ...withTransformedRawSource(FilterUsingAsyncSource, 'IressFilterProps'),
+    ...withCustomSource(ControlledDropdownMenuMultiselectSource),
   },
 };
 
-export const InitialOptions: Story = {
+export const Options: SingleStory = {
+  args: {
+    options: [
+      { label: 'Option 1', value: 'opt1' },
+      { label: 'Option 2', value: 'opt2' },
+      { label: 'Option 3', value: 'opt3' },
+    ],
+    label: 'Select an option',
+    selected: { label: 'Option 1', value: 'opt1' },
+  },
+};
+
+export const AsyncOptions: SingleStory = {
+  render: (args) => <ControlledDropdownMenuAsync {...args} />,
+  parameters: {
+    ...withCustomSource(ControlledDropdownMenuAsyncSource),
+  },
+};
+
+export const InitialOptions: SingleStory = {
   args: {
     ...Options.args,
+    label: 'Select an option',
     initialOptions: [...Array(3).keys()].map((number) => ({
       label: `Favourite option ${number + 1}`,
       value: `fav-${number + 1}`,
     })),
     searchable: true,
+    selected: {
+      label: `Favourite option 1`,
+      value: `fav-1`,
+    },
   },
 };
 
-export const ComplexOptions: Story = {
+export const ComplexOptions: SingleStory = {
   args: {
-    ...Default.args,
-    label: 'User',
+    ...Controlled.args,
+    label: 'Select a contact',
     options: [
       {
         value: 'opt1',
@@ -201,10 +170,14 @@ export const ComplexOptions: Story = {
         ],
       },
     ],
+    selected: {
+      value: 'opt1',
+      label: 'John Smith',
+    },
   },
 };
 
-export const InputProps: Story = {
+export const InputProps: SingleStory = {
   args: {
     ...Options.args,
     inputProps: {
@@ -214,57 +187,54 @@ export const InputProps: Story = {
   },
 };
 
-export const Searchable: Story = {
+export const Searchable: SingleStory = {
   args: {
     ...Options.args,
     searchable: true,
   },
 };
 
-export const ResetFilters: Story = {
+export const ResetFilters: SingleStory = {
   args: {
     ...Options.args,
     visibleResetButton: true,
   },
 };
 
-export const NoResultsText: Story = {
+export const NoResultsText: SingleStory = {
   args: {
     ...Options.args,
     inputProps: {
       placeholder: 'Type "no" to see the no results text',
     },
     searchable: true,
-    searchNoResultsText: <IressPanel>No results found</IressPanel>,
+    searchNoResultsText: 'No results found',
   },
 };
 
 export const PopoverProps: Story = {
   args: {
-    ...Options.args,
-    popoverProps: {
-      ...Options.args?.popoverProps,
-      footer: (
-        <IressPanel>
-          <IressButton>Add an option</IressButton>
-        </IressPanel>
-      ),
-    },
+    footer: (
+      <>
+        <IressMenuDivider />
+        <IressSelectCreate label="Add an option" />
+      </>
+    ),
   },
 };
 
 export const SelectedOptionsText: Story = {
   args: {
-    ...Options.args,
+    ...(Options as Story).args,
     multiSelect: true,
     selectedOptionsText: '{{numOptions}} activated',
   },
 };
 
-export const StylingProps: Story = {
+export const StylingProps: SingleStory = {
   args: {
-    label: 'Styled Filter',
+    ...Options.args,
     p: 'spacing.4',
   },
-  render: (args) => <IressFilter {...args} p="spacing.4" />,
+  render: (args) => <IressDropdownMenu {...args} p="spacing.4" />,
 };

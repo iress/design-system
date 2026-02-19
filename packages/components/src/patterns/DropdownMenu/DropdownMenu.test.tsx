@@ -2,21 +2,28 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
-import { IressFilter, IressFilterProps } from './Filter';
+import { IressDropdownMenu, IressDropdownMenuProps } from './DropdownMenu';
 
 const TEST_ID = 'test-component';
 const TEST_LABEL = 'Label';
 
 const renderFilter = <TMultiple extends boolean = false>(
-  props: Partial<IressFilterProps<TMultiple>> = {},
+  props: Partial<IressDropdownMenuProps<TMultiple>> = {},
 ) => {
+  const selected =
+    props.value ??
+    (props.multiSelect
+      ? MOCK_LABEL_VALUE_META
+      : MOCK_LABEL_VALUE_METAMOCK_LABEL_VALUE_META[0]);
+
   return render(
-    <IressFilter
+    <IressDropdownMenu
       {...props}
       data-testid={props['data-testid'] ?? TEST_ID}
       debounceThreshold={props.debounceThreshold ?? 0}
       label={TEST_LABEL}
       options={props.options ?? MOCK_LABEL_VALUE_META}
+      value={selected}
     />,
   );
 };
@@ -184,10 +191,8 @@ describe('IressFilter', () => {
     describe('popoverProps', () => {
       it('renders the prepend and append nodes', async () => {
         renderFilter({
-          popoverProps: {
-            footer: <span>There</span>,
-            header: <span>Hello</span>,
-          },
+          header: <span>Hello</span>,
+          footer: <span>There</span>,
         });
 
         const activator = screen.getByRole('button', { name: TEST_LABEL });

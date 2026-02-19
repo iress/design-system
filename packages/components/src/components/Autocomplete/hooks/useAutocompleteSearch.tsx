@@ -36,7 +36,7 @@ export interface AutocompleteSearchHookProps {
   /**
    * Options data set, shown when the input is not empty.
    */
-  options?: LabelValueMeta[] | ((query: string) => Promise<LabelValueMeta[]>);
+  options: LabelValueMeta[] | ((query: string) => Promise<LabelValueMeta[]>);
 
   /**
    * The query value to filter items by and create search results.

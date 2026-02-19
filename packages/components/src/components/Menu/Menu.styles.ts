@@ -244,7 +244,7 @@ export const menu = sva({
       isActiveInPopover: true,
       css: {
         item: {
-          bg: 'colour.primary.surfaceHover',
+          bg: 'colour.neutral.30',
         },
       },
     },

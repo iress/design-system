@@ -86,7 +86,6 @@ type SelectProps<TNative extends boolean | Breakpoints = false> =
         | 'contentClassName'
         | 'defaultShow'
         | 'defaultValue'
-        | 'disabledAutoToggle'
         | 'onChange'
         | 'matchActivatorWidth'
         | 'show'
