@@ -37,3 +37,95 @@ export const NoResults: Story = {
     items: [],
   },
 };
+
+export const GroupedOptions: Story = {
+  args: {
+    heading: 'Select a food',
+    items: [
+      {
+        label: 'Fruits',
+        children: [
+          { label: 'Apple', value: 'apple' },
+          { label: 'Banana', value: 'banana' },
+          { label: 'Orange', value: 'orange' },
+          { label: 'Strawberry', value: 'strawberry' },
+        ],
+      },
+      {
+        label: 'Vegetables',
+        children: [
+          { label: 'Carrot', value: 'carrot' },
+          { label: 'Broccoli', value: 'broccoli' },
+          { label: 'Spinach', value: 'spinach' },
+        ],
+      },
+      {
+        label: 'Grains',
+        children: [
+          { label: 'Rice', value: 'rice' },
+          { label: 'Wheat', value: 'wheat' },
+          { label: 'Oats', value: 'oats' },
+        ],
+      },
+    ],
+    fluid: true,
+  },
+};
+
+export const GroupedWithSelection: Story = {
+  args: {
+    ...GroupedOptions.args,
+    selected: { label: 'Apple', value: 'apple' },
+  },
+};
+
+export const GroupedWithDividers: Story = {
+  args: {
+    heading: 'Select a food',
+    items: [
+      {
+        label: 'Fruits',
+        divider: true,
+        children: [
+          { label: 'Apple', value: 'apple' },
+          { label: 'Banana', value: 'banana' },
+        ],
+      },
+      {
+        label: 'Vegetables',
+        divider: true,
+        children: [
+          { label: 'Carrot', value: 'carrot' },
+          { label: 'Broccoli', value: 'broccoli' },
+        ],
+      },
+    ],
+    fluid: true,
+  },
+};
+
+export const MixedFlatAndGrouped: Story = {
+  args: {
+    heading: 'Select an option',
+    items: [
+      { label: 'All items', value: 'all' },
+      { label: 'None', value: 'none' },
+      {
+        label: 'Favorites',
+        divider: true,
+        children: [
+          { label: 'Favorite 1', value: 'fav1' },
+          { label: 'Favorite 2', value: 'fav2' },
+        ],
+      },
+      {
+        label: 'Recent',
+        children: [
+          { label: 'Recent 1', value: 'rec1' },
+          { label: 'Recent 2', value: 'rec2' },
+        ],
+      },
+    ],
+    fluid: true,
+  },
+};

@@ -89,6 +89,14 @@ No filtering is done for asynchronous options, you must filter the options yours
 
 <ComponentExample of={ComponentStories.AsyncOptions} />
 
+### Grouped options
+
+You can group options by setting the `children` property of a `LabelValueMeta` object to an array of `LabelValueMeta[]` objects. The parent option will be rendered as a non-selectable heading, and the children will be rendered as selectable options under that heading.
+
+**Note:** You can only have one level of grouping, meaning the `children` of a `LabelValueMeta` object cannot have their own `children`.
+
+<ComponentExample of={ComponentStories.GroupedOptions} />
+
 ### Minimum search length for async options
 
 When using asynchronous options, you can set a minimum number of characters required before triggering the search using the `minSearchLength` prop. This prevents unnecessary API calls and loading states for very short queries.

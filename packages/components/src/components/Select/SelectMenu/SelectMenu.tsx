@@ -1,6 +1,7 @@
 import {
   IressMenu,
   IressMenuText,
+  IressMenuGroup,
   type IressMenuItemProps,
   type IressMenuProps,
 } from '../../Menu';
@@ -109,17 +110,41 @@ export const IressSelectMenu = <TMultiple extends boolean = false>({
 
   const menuItems = useMemo(() => {
     let itemsToShow = selectedFirst
-      ? orderSelectedFirst(items, selected, menuSelected)
+      ? orderSelectedFirst(items, menuSelected)
       : items;
 
     if (hideSelectedItems) {
       const menuSelectedArray = toArray(menuSelected);
-      itemsToShow = itemsToShow.filter(
-        (item) =>
-          !menuSelectedArray.includes(
-            getFormControlValueAsStringIfDefined(item.value) ?? item.label,
-          ),
-      );
+      itemsToShow = itemsToShow
+        .map((item) => {
+          // Handle grouped items
+          if (item.children && item.children.length > 0) {
+            const filteredChildren = item.children.filter(
+              (child) =>
+                !menuSelectedArray.includes(
+                  getFormControlValueAsStringIfDefined(child.value) ??
+                    child.label,
+                ),
+            );
+
+            // Only include group if it has remaining children
+            if (filteredChildren.length > 0) {
+              return { ...item, children: filteredChildren };
+            }
+            return null;
+          }
+
+          // Handle flat items
+          if (
+            !menuSelectedArray.includes(
+              getFormControlValueAsStringIfDefined(item.value) ?? item.label,
+            )
+          ) {
+            return item;
+          }
+          return null;
+        })
+        .filter((item): item is LabelValueMeta => item !== null);
     }
 
     return addLimitsToItems(itemsToShow, limitDesktop, limitMobile);
@@ -129,7 +154,6 @@ export const IressSelectMenu = <TMultiple extends boolean = false>({
     limitDesktop,
     limitMobile,
     menuSelected,
-    selected,
     selectedFirst,
   ]);
   const showNoResults = menuItems.length === 0;
@@ -174,15 +198,51 @@ export const IressSelectMenu = <TMultiple extends boolean = false>({
       ) : (
         heading
       )}
-      {menuItems.map((menuItem, index) => (
-        <IressSelectMenuItem
-          {...menuItem}
-          data-testid={propagateTestid(restProps?.['data-testid'], 'menu-item')}
-          key={`${getFormControlValueAsString(
-            menuItem.value ?? menuItem.label,
-          )}-${index}`}
-        />
-      ))}
+      {menuItems.map((menuItem, index) => {
+        // Check if this item has children (is a group)
+        if (menuItem.children && menuItem.children.length > 0) {
+          return (
+            <IressMenuGroup
+              label={menuItem.label}
+              key={`group-${getFormControlValueAsString(
+                menuItem.value ?? menuItem.label,
+              )}-${index}`}
+              data-testid={propagateTestid(
+                restProps?.['data-testid'],
+                'menu-group',
+              )}
+              divider={menuItem.divider}
+            >
+              {menuItem.children.map((childItem, childIndex) => (
+                <IressSelectMenuItem
+                  {...childItem}
+                  data-testid={propagateTestid(
+                    restProps?.['data-testid'],
+                    'menu-item',
+                  )}
+                  key={`${getFormControlValueAsString(
+                    childItem.value ?? childItem.label,
+                  )}-${childIndex}`}
+                />
+              ))}
+            </IressMenuGroup>
+          );
+        }
+
+        // Regular item without children
+        return (
+          <IressSelectMenuItem
+            {...menuItem}
+            data-testid={propagateTestid(
+              restProps?.['data-testid'],
+              'menu-item',
+            )}
+            key={`${getFormControlValueAsString(
+              menuItem.value ?? menuItem.label,
+            )}-${index}`}
+          />
+        );
+      })}
       {showNoResults &&
         (typeof noResults === 'string' ? (
           <IressMenuText>{noResults}</IressMenuText>
@@ -197,21 +257,40 @@ IressSelectMenu.displayName = 'IressSelectMenu';
 
 const orderSelectedFirst = <TMultiple extends boolean = false>(
   items: LabelValueMeta[],
-  selected?: IressSelectMenuProps<TMultiple>['selected'],
   menuSelected?: ControlledValue<FormControlValue, TMultiple>,
 ) => {
-  const selectedArray = toArray(selected);
   const menuSelectedArray = toArray(menuSelected);
 
-  const unselected = items.filter(
-    (item) => !menuSelectedArray.includes(item.value ?? item.label),
-  );
+  const selectedItems: LabelValueMeta[] = [];
+  const unselectedItems: LabelValueMeta[] = [];
 
-  return selectedArray.length && unselected.length
-    ? selectedArray
+  for (const item of items) {
+    if (item.children && item.children.length > 0) {
+      // For grouped items, check if any child is selected
+      const hasSelectedChild = item.children.some((child) =>
+        menuSelectedArray.includes(child.value ?? child.label),
+      );
+
+      if (hasSelectedChild) {
+        selectedItems.push(item);
+      } else {
+        unselectedItems.push(item);
+      }
+    } else {
+      // For flat items, check if the item itself is selected
+      if (menuSelectedArray.includes(item.value ?? item.label)) {
+        selectedItems.push(item);
+      } else {
+        unselectedItems.push(item);
+      }
+    }
+  }
+
+  return selectedItems.length && unselectedItems.length
+    ? selectedItems
         .concat([{ label: '', value: '', divider: true }])
-        .concat(unselected)
-    : selectedArray.concat(unselected);
+        .concat(unselectedItems)
+    : selectedItems.concat(unselectedItems);
 };
 
 const addLimitsToItems = (
@@ -219,12 +298,63 @@ const addLimitsToItems = (
   limitDesktop?: number,
   limitMobile?: number,
 ): IressSelectMenuItemProps[] => {
-  return items
-    .map((item, index) => ({
-      ...item,
-      hiddenOnMobile: limitMobile ? index > limitMobile - 1 : false,
-    }))
-    .slice(0, limitDesktop ?? items.length);
+  const counts = { mobileCount: 0, desktopCount: 0 };
+  const result: IressSelectMenuItemProps[] = [];
+
+  for (const item of items) {
+    const hasReachedDesktopLimit =
+      limitDesktop && counts.desktopCount >= limitDesktop;
+    if (hasReachedDesktopLimit) break;
+
+    const isGrouped = item.children && item.children.length > 0;
+
+    if (isGrouped) {
+      const processedChildren = processGroupChildren(
+        item.children!,
+        counts,
+        limitDesktop,
+        limitMobile,
+      );
+
+      if (processedChildren.length > 0) {
+        result.push({ ...item, children: processedChildren });
+      }
+    } else {
+      result.push({
+        ...item,
+        hiddenOnMobile: limitMobile ? counts.mobileCount >= limitMobile : false,
+      });
+      counts.mobileCount++;
+      counts.desktopCount++;
+    }
+  }
+
+  return result;
+};
+
+const processGroupChildren = (
+  children: LabelValueMeta[],
+  counts: { mobileCount: number; desktopCount: number },
+  limitDesktop?: number,
+  limitMobile?: number,
+): IressSelectMenuItemProps[] => {
+  const processedChildren: IressSelectMenuItemProps[] = [];
+
+  for (const child of children) {
+    const hasReachedDesktopLimit =
+      limitDesktop && counts.desktopCount >= limitDesktop;
+    if (hasReachedDesktopLimit) break;
+
+    processedChildren.push({
+      ...child,
+      hiddenOnMobile: limitMobile ? counts.mobileCount >= limitMobile : false,
+    });
+
+    counts.mobileCount++;
+    counts.desktopCount++;
+  }
+
+  return processedChildren;
 };
 
 const getLabelValueMetaFromMenuSelected = <TMultiple extends boolean = false>(
@@ -244,11 +374,28 @@ const findNewValueInItemsOrSelected = (
   selected: LabelValueMeta[],
   newValue?: FormControlValue,
 ) => {
-  const found = items?.find(
+  // Search top-level items first
+  let found = items?.find(
     (item) =>
       item.value === newValue ||
       (item.value === undefined && item.label === newValue),
   );
+
+  // If not found, search within children of grouped items
+  if (!found) {
+    for (const item of items) {
+      if (item.children && item.children.length > 0) {
+        found = item.children.find(
+          (child) =>
+            child.value === newValue ||
+            (child.value === undefined && child.label === newValue),
+        );
+        if (found) break;
+      }
+    }
+  }
+
+  // Fallback to searching in selected items
   return (
     found ??
     selected.find(
