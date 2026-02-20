@@ -15,6 +15,7 @@ import {
   flip,
   type Middleware,
   offset,
+  type OffsetOptions,
   type OpenChangeReason,
   shift,
   size,
@@ -32,7 +33,6 @@ import { focusableElements } from '@/helpers/dom/focusableElements';
 import { type PopoverAriaHookReturn, usePopoverAria } from './usePopoverAria';
 import { closestCrossShadow } from '@/helpers/dom/closestCrossShadow';
 import { GlobalCSSClass } from '@/enums';
-import type { OffsetOptions } from '@floating-ui/core';
 
 const POPOVER_USE_MAX_HEIGHT = 200;
 
