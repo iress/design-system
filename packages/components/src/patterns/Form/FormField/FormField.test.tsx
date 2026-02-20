@@ -454,5 +454,53 @@ describe('IressFormField', () => {
 
       expect(onError).toHaveBeenCalled();
     });
+
+    it('handles multiple ref callbacks without infinite loops (LastPass autofill scenario)', async () => {
+      const onSubmit = vi.fn();
+      const renderSpy = vi.fn();
+
+      render(
+        <IressForm onSubmit={onSubmit}>
+          <IressFormField
+            label="Email"
+            name="email"
+            render={(controlledProps) => {
+              renderSpy();
+              return <IressInput {...controlledProps} type="email" clearable />;
+            }}
+          />
+          <IressButton type="submit">Submit</IressButton>
+        </IressForm>,
+      );
+
+      const input = await screen.findByRole('textbox', { name: 'Email' });
+
+      // Get initial render count
+      const initialRenderCount = renderSpy.mock.calls.length;
+
+      // Simulate what LastPass does: trigger the component to re-evaluate
+      // by typing and clearing multiple times rapidly
+      await userEvent.type(input, 'test');
+      await userEvent.clear(input);
+      await userEvent.type(input, 'test');
+      await userEvent.clear(input);
+
+      // Wait a bit to ensure no additional renders are triggered
+      await new Promise((resolve) => setTimeout(resolve, 100));
+
+      const finalRenderCount = renderSpy.mock.calls.length;
+
+      // Render count should not have increased excessively
+      // There will be some re-renders due to value changes, but not hundreds
+      expect(finalRenderCount - initialRenderCount).toBeLessThan(20);
+
+      // Verify the form still works correctly
+      await userEvent.type(input, 'test@example.com');
+
+      const submit = screen.getByRole('button', { name: 'Submit' });
+      await userEvent.click(submit);
+
+      expect(onSubmit).toHaveBeenCalledWith({ email: 'test@example.com' });
+    });
   });
 });
