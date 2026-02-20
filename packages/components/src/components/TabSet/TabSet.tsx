@@ -62,6 +62,14 @@ export interface IressTabSetProps extends Omit<IressStyledProps, 'onChange'> {
    * Custom style for the tab holder (the area that contains the tabs).
    */
   tabHolderStyle?: IressCustomiseSlot;
+
+  /**
+   * The type of the tabs, which determines their styling.
+   * - `primary`: The default tab style, which is more prominent and suitable for main navigation.
+   * - `secondary`: A more subdued tab style, suitable for secondary level of tabs (within expanders)
+   * @default 'primary'
+   */
+  type?: 'primary' | 'secondary';
 }
 
 const HoverIndicator = (props: IressUnstyledProps) => {
@@ -109,7 +117,7 @@ const ActiveIndicator = (props: IressUnstyledProps) => {
       }
     }, 150);
     return () => clearTimeout(activeTimeout);
-  }, [tabSet?.active]);
+  }, [tabSet?.active, tabSet?.layoutVersion]);
 
   return <div {...props} style={style} />;
 };
@@ -123,13 +131,14 @@ export const IressTabSet = ({
   panelStyle,
   selected,
   tabHolderStyle,
+  type,
   ...restProps
 }: IressTabSetProps) => {
   const [panel, setPanel] = useState<HTMLDivElement | null>(null);
   const [overflowStart, setOverflowStart] = useState(false);
   const [overflowEnd, setOverflowEnd] = useState(false);
   const listHolderRef = useRef<HTMLDivElement>(null);
-  const styles = tabSet({ layout, overflowStart, overflowEnd });
+  const styles = tabSet({ layout, overflowStart, overflowEnd, type });
 
   useEffect(() => {
     const checkOverflow = () => {
@@ -171,6 +180,7 @@ export const IressTabSet = ({
       onChange={onChange}
       panel={panel}
       selected={selected}
+      type={type}
     >
       <styled.div
         className={cx(className, styles.root, GlobalCSSClass.TabSet)}

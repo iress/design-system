@@ -29,12 +29,7 @@ export const Redirect = ({ title, to }: RedirectProps) => {
   }, [to]);
 
   return (
-    <IressPanel
-      bg="colour.neutral.20"
-      textAlign="center"
-      p="spacing.10"
-      m="spacing.10"
-    >
+    <IressPanel bg="alt" textAlign="center" p="spacing.10" m="spacing.10">
       <h2>{title ?? 'Redirecting...'}</h2>
       <p>
         If you are not redirected automatically,{' '}

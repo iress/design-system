@@ -9,19 +9,25 @@ import { App as AppWithToasterProvider } from '../mocks/AppWithToasterProvider';
 import userEvent from '@testing-library/user-event';
 import { IressToasterProvider } from '../ToasterProvider';
 import { useToaster } from './useToaster';
-import { ToastProps } from '../components/Toast/Toast';
 import { IressButton } from '@/components/Button';
 import { CloseToastViaProvider } from '../mocks/CloseToastViaProvider';
+import { NewToast } from '../helpers/toasterRegister';
 
 const TestTopWrapper = ({ children }: PropsWithChildren) => (
   <IressToasterProvider position="top-center">{children}</IressToasterProvider>
 );
 
-const WithTrigger = ({ status, ...toast }: ToastProps) => {
+const WithTrigger = ({
+  status,
+  message,
+}: {
+  status: 'error' | 'info' | 'success';
+  message: string | NewToast;
+}) => {
   const toaster = useToaster();
 
   return (
-    <IressButton onClick={() => toaster[status](toast)}>
+    <IressButton onClick={() => toaster[status](message)}>
       Show toast using provider
     </IressButton>
   );
@@ -56,15 +62,7 @@ describe('useToaster hook', () => {
   });
 
   it('opens and closes a toast', async () => {
-    const screen = render(
-      <AppWithToasterProvider
-        toast={{
-          content: 'Test toast',
-          status: 'error',
-          dismissible: true,
-        }}
-      />,
-    );
+    const screen = render(<AppWithToasterProvider />);
 
     await userEvent.click(
       screen.getByRole('button', {
@@ -72,7 +70,7 @@ describe('useToaster hook', () => {
       }),
     );
 
-    const toast = await screen.findByText('Test toast');
+    const toast = await screen.findByText('Message sent successfully');
     expect(toast).toBeInTheDocument();
 
     const closeButton = screen.getByRole('button', { name: 'Dismiss' });
@@ -84,9 +82,7 @@ describe('useToaster hook', () => {
 
   it('prepends the toast position starts with top-*', async () => {
     const screen = render(
-      <WithTrigger status="error" dismissible>
-        Error toast
-      </WithTrigger>,
+      <WithTrigger status="error" message="Error toast" />,
       { wrapper: TestTopWrapper },
     );
 

@@ -3,14 +3,13 @@ import { IressText, type IressTextProps } from '../Text';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { alert } from './Alert.styles';
 import { cx, css } from '@/styled-system/css';
-import { type ReactNode, useMemo } from 'react';
+import { type ReactNode, type MouseEvent, useMemo } from 'react';
 import type { Statuses } from '@/types';
 import { GlobalCSSClass } from '@/enums';
 import {
   IressButton,
   type IressButtonProps,
   IressCloseButton,
-  type IressCloseButtonProps,
 } from '../Button';
 import { useControlledState } from '@/hooks';
 import { splitCssProps } from '@/styled-system/jsx';
@@ -37,12 +36,17 @@ export interface IressAlertProps extends Omit<IressTextProps, 'element'> {
   /**
    * If true, the alert will be dismissed and unrendered from the DOM. Use for uncontrolled dismissal of the alert, where the component manages its own dismissed state internally.
    **/
-  defaultDismissed?: boolean;
+  defaultClosed?: boolean;
 
   /**
    * If true, the alert will be dismissed and unrendered from the DOM. Use for controlled dismissal of the alert, where the parent component manages the dismissed state and passes it down via this prop.
    **/
-  dismissed?: boolean;
+  closed?: boolean;
+
+  /**
+   * Optional override for the default close button label "Close".
+   */
+  closeLabel?: string;
 
   /**
    * Buttons and controls for the alert.
@@ -72,13 +76,13 @@ export interface IressAlertProps extends Omit<IressTextProps, 'element'> {
    * If set to `false`, no icon will be displayed.
    * If not provided, the icon will be determined by the `status` prop.
    **/
-  onDismiss?: IressCloseButtonProps['onClick'];
+  onClose?: (e?: MouseEvent<HTMLButtonElement>) => void;
 
   /**
    * Alert type - danger, info, success or warning.
    * @default info
    */
-  status?: Statuses;
+  status?: Statuses | 'neutral';
 
   /**
    * Variants of the alert, allowing it to be styled differently based on where its used in the application.
@@ -88,40 +92,42 @@ export interface IressAlertProps extends Omit<IressTextProps, 'element'> {
   variant?: 'sidebar' | 'full-width';
 }
 
-const ALERT_ICONS: Record<Statuses, IressIconProps['name']> = {
+const ALERT_ICONS: Record<Statuses | 'neutral', IressIconProps['name']> = {
   danger: 'cancel',
   info: 'info',
   success: 'check_circle',
   warning: 'error',
+  neutral: 'info',
 };
 
 export const IressAlert = ({
   actions,
   children,
   className,
-  defaultDismissed,
-  dismissed: dismissedProp,
+  defaultClosed,
+  closed: closedProp,
+  closeLabel,
   footer,
   heading,
   icon: iconProp,
   multiLine = false,
-  onDismiss,
+  onClose,
   status = 'info',
   variant,
   ...restProps
 }: IressAlertProps) => {
-  const dismissable = !!onDismiss;
+  const dismissable = !!onClose;
   const hasActions = !!actions?.length;
   const hasFooter = !!footer || hasActions;
   const classes = alert({ hasFooter, multiLine, status, variant });
   const styles = alert.raw({ hasFooter, multiLine, status, variant });
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
 
-  const { value: dismissed, setValue: dismiss } = useControlledState({
+  const { value: dismissed, setValue: close } = useControlledState({
     component: 'IressAlert',
-    defaultValue: defaultDismissed,
-    propName: 'dismissed',
-    value: dismissedProp,
+    defaultValue: defaultClosed,
+    propName: 'closed',
+    value: closedProp,
   });
 
   const icon = useMemo(() => {
@@ -196,9 +202,10 @@ export const IressAlert = ({
         <IressCloseButton
           className={classes.dismiss}
           onClick={(e) => {
-            onDismiss?.(e);
-            dismiss(true);
+            onClose?.(e);
+            close(true);
           }}
+          screenreaderText={closeLabel}
         />
       )}
     </IressText>

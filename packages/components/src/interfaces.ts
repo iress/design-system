@@ -182,21 +182,19 @@ export interface FormattedLabelValueMeta<
  */
 export interface BreakpointDetail {
   /**
-   * The media query string for the breakpoint.
-   * This must be valid CSS media query syntax.
+   * The maximum width of the container at this breakpoint.
    */
-  mediaQuery: string;
+  containerMaxWidth: string;
 
   /**
-   * The name of the screen width range for the breakpoint.
-   * Used to display in documentation and debugging.
+   * The margin on the left and right of the container at this breakpoint. This is used to calculate the viewport width for design reference.
    */
-  screenWidthRange: string;
+  margin?: SpacingToken;
 
   /**
-   * The minimum screen width for the breakpoint.
+   * The maximum number of columns to display in a grid layout at this breakpoint. This is used for design reference and is not enforced in the code, as we want to allow for flexibility in implementation based on the design requirements.
    */
-  minScreenWidth: string;
+  maxColumns?: number;
 
   /**
    * The maximum screen width for the breakpoint.
@@ -204,9 +202,21 @@ export interface BreakpointDetail {
   maxScreenWidth?: string;
 
   /**
-   * The maximum width of the container at this breakpoint.
+   * The media query string for the breakpoint.
+   * This must be valid CSS media query syntax.
    */
-  containerMaxWidth: string;
+  mediaQuery: string;
+
+  /**
+   * The minimum screen width for the breakpoint.
+   */
+  minScreenWidth: string;
+
+  /**
+   * The name of the screen width range for the breakpoint.
+   * Used to display in documentation and debugging.
+   */
+  screenWidthRange: string;
 
   /**
    * The viewport width in pixels for the breakpoint.

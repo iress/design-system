@@ -56,7 +56,7 @@ export const input = sva({
     internal: {
       display: 'flex',
       alignItems: 'center',
-      '& > *': {
+      '& > :not(.ids-button)': {
         padding: '[0 {spacing.spacing.3}]',
       },
       _empty: {

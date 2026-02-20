@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import { type IressFilterProps } from '../Filter';
-import { type AutocompleteSearchHookReturn } from '@/components/Autocomplete';
+import type { AutocompleteSearchHookReturn } from '@/components/Autocomplete';
+import type { IressDropdownMenuProps } from '../DropdownMenu';
 
-export const useFilterFlags = ({
+export const useDropdownMenuFlags = ({
   debouncedQuery,
   loading,
   results,
@@ -12,7 +12,7 @@ export const useFilterFlags = ({
   AutocompleteSearchHookReturn,
   'clearError' | 'error' | 'startSearch' | 'stopSearch'
 > &
-  Pick<IressFilterProps, 'searchable' | 'visibleResetButton'>) => {
+  Pick<IressDropdownMenuProps, 'searchable' | 'visibleResetButton'>) => {
   const showHeader = useMemo(
     // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     () => searchable || visibleResetButton,

@@ -43,7 +43,7 @@ describe('IressSelectMenuItem', () => {
         });
 
         const listItem = screen.getByRole('button');
-        expect(listItem).toHaveClass(css({ srOnly: true }));
+        expect(listItem).toHaveClass(css({ hideBelow: 'md' }));
       });
     });
 

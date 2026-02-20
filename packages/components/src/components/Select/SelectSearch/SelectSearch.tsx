@@ -10,7 +10,7 @@ import {
 
 export type IressSelectSearchProps = Omit<
   IressInputPopoverProps,
-  'disabledAutoToggle' | 'displayMode' | 'show' | 'width'
+  'displayMode' | 'show' | 'width'
 >;
 
 export const IressSelectSearch = ({

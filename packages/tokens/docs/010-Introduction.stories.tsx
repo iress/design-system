@@ -1,14 +1,14 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import {
   IressButton,
-  IressFilter,
+  IressDropdownMenu,
   IressIcon,
   IressInline,
   IressInput,
-  IressPanel,
   IressPopover,
   IressStack,
   IressTable,
+  IressText,
   IressToggle,
   toArray,
   useAutocompleteSearch,
@@ -36,14 +36,16 @@ interface TokenMetadata {
 const ColumnInfo = ({ children }: PropsWithChildren) => (
   <IressPopover
     activator={
-      <IressButton mode="muted">
-        <IressIcon name="info-circle" screenreaderText="More information" />
+      <IressButton mode="muted" icon="info">
+        More information
       </IressButton>
     }
     align="top"
     container={document.body}
   >
-    <IressPanel>{children}</IressPanel>
+    <IressText p="md" textStyle="typography.body.sm">
+      {children}
+    </IressText>
   </IressPopover>
 );
 
@@ -279,7 +281,7 @@ const TokenTable = () => {
         type="search"
       />
       <IressInline gap="md" horizontalAlign="between">
-        <IressFilter
+        <IressDropdownMenu
           label="Columns"
           onChange={(values) =>
             setShowing(
@@ -289,7 +291,7 @@ const TokenTable = () => {
           options={columns.map((column) => ({
             label: column.key,
           }))}
-          value={showing.map((column) => ({
+          selected={showing.map((column) => ({
             label: column,
           }))}
           multiSelect

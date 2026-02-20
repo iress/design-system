@@ -13,7 +13,6 @@ export * from './components/Container';
 export * from './components/Divider';
 export * from './components/Expander';
 export * from './components/Field';
-export * from './components/Filter';
 export * from './components/Hide';
 export * from './components/Icon';
 export * from './components/Image';
@@ -54,9 +53,11 @@ export * from './components/Tooltip';
 export * from './components/ValidationMessage';
 
 /* Generator: Pattern components */
+export * from './patterns/DropdownMenu';
 export * from './patterns/Form';
 export * from './patterns/Loading';
 export * from './patterns/Shadow';
+export * from './patterns/ContextualMenu';
 
 export * from './constants';
 export * from './enums';

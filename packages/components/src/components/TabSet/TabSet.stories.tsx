@@ -2,6 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTab, IressTabSet } from '.';
 import { IressStack } from '../Stack';
 import {
+  IressExpander,
   IressIcon,
   IressInline,
   IressPanel,
@@ -142,4 +143,23 @@ export const TabsWithBadges: Story = {
       </IressTab>,
     ],
   },
+};
+
+export const Type: Story = {
+  ...Panels,
+  args: {
+    ...TabNavigation.args,
+    defaultSelected: 1,
+  },
+  render: (args) => (
+    <IressStack gap="md">
+      <IressPanel>
+        <IressText element="h2">Primary</IressText>
+        <IressTabSet {...args} type="primary" />
+      </IressPanel>
+      <IressExpander activator="Secondary">
+        <IressTabSet {...args} type="secondary" mt="-md" />
+      </IressExpander>
+    </IressStack>
+  ),
 };

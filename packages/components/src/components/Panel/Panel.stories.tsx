@@ -2,15 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressPanel } from './Panel';
 import { IressPlaceholder } from '../Placeholder';
 import { IressText } from '../Text';
-import { IressStack } from '../Stack';
-import {
-  IressCol,
-  IressContainer,
-  IressInline,
-  IressRow,
-  TEXT_ALIGNS,
-} from '@/main';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { IressInline } from '@/main';
 import { stylingProps } from '@theme-preset/storybookHelpers';
 
 type PanelCustomArgs = React.ComponentProps<typeof IressPanel>;
@@ -67,111 +59,11 @@ export default {
     ...stylingProps,
   },
   tags: ['updated'],
-  decorators: [
-    (Story) => (
-      <IressPanel bg="alt" borderRadius="radius.0" stretch>
-        <Story />
-      </IressPanel>
-    ),
-  ],
-  parameters: {
-    layout: 'fullscreen',
-  },
 } as Meta<typeof IressPanel>;
 
 export const Default: Story = {
   args: {
+    heading: 'Panel Heading',
     children: 'text',
-  },
-};
-
-export const bg: Story = {
-  args: {
-    children: 'text',
-  },
-  argTypes: {
-    ...Default.argTypes,
-    ...disableArgTypes(['bg', 'color']),
-  },
-  render: (args) => (
-    <IressContainer>
-      <IressRow gutter="spacing.4">
-        <IressCol>
-          <IressPanel {...args}>
-            <IressText element="h2">(default)</IressText>
-            {args.children}
-          </IressPanel>
-        </IressCol>
-        <IressCol>
-          <IressPanel
-            {...args}
-            bg="colour.primary.fill"
-            color="colour.primary.onFill"
-          >
-            <h2>
-              Primary <code>bg</code>
-            </h2>
-            {args.children}
-          </IressPanel>
-        </IressCol>
-        <IressCol>
-          <IressPanel {...args} bg="transparent">
-            <IressText element="h2">
-              Transparent <code>bg</code>
-            </IressText>
-            {args.children}
-          </IressPanel>
-        </IressCol>
-      </IressRow>
-    </IressContainer>
-  ),
-};
-
-export const TextAlign: Story = {
-  ...Default,
-  argTypes: {
-    ...Default.argTypes,
-    ...disableArgTypes(['textAlign']),
-  },
-  render: (args) => (
-    <IressStack gap="md">
-      {TEXT_ALIGNS.map((textAlign) => (
-        <IressPanel
-          key={textAlign}
-          {...args}
-          textAlign={textAlign === 'inherit' ? 'center' : textAlign}
-        >
-          <IressText element="h2">{textAlign}</IressText>
-          {args.children}
-          {textAlign === 'inherit' && (
-            <IressPanel {...args} textAlign={textAlign}>
-              <h3>Inherits center align of parent panel</h3>
-              {args.children}
-            </IressPanel>
-          )}
-        </IressPanel>
-      ))}
-    </IressStack>
-  ),
-};
-
-export const Stretch: Story = {
-  ...Default,
-  args: {
-    ...Default.args,
-    stretch: true,
-  },
-  render: (args) => (
-    <IressStack style={{ height: '200px' }}>
-      <IressPanel {...args} />
-    </IressStack>
-  ),
-};
-
-export const NoBorderRadius: Story = {
-  ...Default,
-  args: {
-    ...Default.args,
-    borderRadius: 'none',
   },
 };

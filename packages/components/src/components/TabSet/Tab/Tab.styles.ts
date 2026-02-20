@@ -8,11 +8,9 @@ export const tab = cva({
     display: 'inline-flex',
     minHeight: 'input.height',
     position: 'relative',
-    px: 'spacing.3',
     py: 'spacing.3',
     textOverflow: 'ellipsis',
     textDecoration: 'none',
-    textStyle: 'typography.body.sm.medium',
     transition: 'all',
     whiteSpace: 'nowrap',
     width: '[auto]',
@@ -46,5 +44,18 @@ export const tab = cva({
         },
       },
     },
+    tabSetType: {
+      primary: {
+        textStyle: 'typography.body.md.medium',
+        px: 'spacing.4',
+      },
+      secondary: {
+        textStyle: 'typography.body.sm.medium',
+        px: 'spacing.3',
+      },
+    },
+  },
+  defaultVariants: {
+    tabSetType: 'primary',
   },
 });

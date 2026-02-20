@@ -45,6 +45,10 @@ const inputSizes = {
     description: 'input height based on typography size',
     value: `calc(${cssVars.typography.base.size} * (34 / 14))`,
   },
+  'input.height.sm': {
+    description: 'input height based on typography size (sm)',
+    value: `calc(${cssVars.typography.base.size} * (30 / 14))`,
+  },
 };
 
 const gridSizes = Object.fromEntries(

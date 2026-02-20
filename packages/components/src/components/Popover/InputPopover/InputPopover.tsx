@@ -24,7 +24,10 @@ import {
 
 export interface IressInputPopoverProps
   extends
-    Omit<IressPopoverProps, 'fluid' | 'matchActivatorWidth' | 'virtualFocus'>,
+    Omit<
+      IressPopoverProps,
+      'fluid' | 'offset' | 'matchActivatorWidth' | 'virtualFocus'
+    >,
     Omit<InputPopoverActivatorProps, 'children'> {
   /**
    * Content for an activator element, usually an `IressInput`.

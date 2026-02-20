@@ -83,6 +83,18 @@ export const tabSet = sva({
       borderRadius: 'radius.system.layout',
       borderBottomRadius: 'none',
       pointerEvents: 'none',
+
+      _after: {
+        content: '""',
+        position: 'absolute',
+        bottom: 'spacing.0',
+        left: 'spacing.0',
+        right: 'spacing.0',
+        height: '[2px]',
+        bg: 'colour.neutral.90',
+        transition: 'all',
+        zIndex: '[2]',
+      },
     },
   },
   variants: {
@@ -135,6 +147,16 @@ export const tabSet = sva({
           pointerEvents: '[none]',
           maskImage: `[linear-gradient(to right, transparent 30%, black 100%)]`,
           transform: '[rotate(180deg)]',
+        },
+      },
+    },
+    type: {
+      primary: {},
+      secondary: {
+        hoverIndicator: {
+          _after: {
+            bg: 'colour.neutral.50',
+          },
         },
       },
     },

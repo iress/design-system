@@ -8,10 +8,9 @@ import { cva } from '@/styled-system/css';
 export const container = cva({
   base: {
     borderRadius: 'radius.system.layout',
-    paddingBlock: undefined,
-    paddingInline: 'spacing.4',
-    marginInline: 'auto',
-    width: '[100%]',
+    px: 'spacing.4',
+    mx: 'auto',
+    width: '12/12',
   },
   variants: {
     /**
@@ -19,7 +18,7 @@ export const container = cva({
      */
     fluid: {
       true: {
-        maxWidth: '[100%]',
+        maxWidth: '12/12',
       },
       false: {
         xs: {
@@ -30,15 +29,19 @@ export const container = cva({
         },
         md: {
           maxWidth: 'container.md',
+          px: 'spacing.6',
         },
         lg: {
           maxWidth: 'container.lg',
+          px: 'spacing.6',
         },
         xl: {
           maxWidth: 'container.xl',
+          px: 'spacing.8',
         },
         xxl: {
           maxWidth: 'container.xxl',
+          px: 'spacing.8',
         },
       },
     },

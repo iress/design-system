@@ -19,6 +19,7 @@ export enum GlobalCSSClass {
   CloseButton = 'ids-button--close',
   Col = 'ids-col',
   Container = 'ids-container',
+  ContextualMenu = 'ids-contextual-menu',
   Divider = 'ids-divider',
   Expander = 'ids-expander',
   Field = 'ids-field',

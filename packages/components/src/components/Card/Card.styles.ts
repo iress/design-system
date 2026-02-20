@@ -11,7 +11,7 @@ export const card = sva({
       bg: 'colour.neutral.10',
       color: 'colour.neutral.80',
       border: 'table',
-      textStyle: 'typography.body.md.regular',
+      textStyle: 'typography.body.md',
       textAlign: 'start',
       noGutter: true,
       padding: 'spacing.4',

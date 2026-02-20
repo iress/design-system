@@ -1,29 +1,16 @@
-import {
-  IressButton,
-  IressToasterProvider,
-  type IressToasterProviderProps,
-  type NewToast,
-  type ToastStatus,
-  useToaster,
-} from '@/main';
+import { IressButton, IressToasterProvider, useToaster } from '@/main';
 
-export const App = ({
-  toast: toastProps,
-  ...toasterProps
-}: IressToasterProviderProps & { toast: NewToast }) => (
-  <IressToasterProvider {...toasterProps}>
-    <ToastWithTrigger {...toastProps} />
+export const App = () => (
+  <IressToasterProvider>
+    <ToastWithTrigger />
   </IressToasterProvider>
 );
 
-const ToastWithTrigger = ({
-  status = 'success',
-  ...toastProps
-}: NewToast & { status?: ToastStatus }) => {
+const ToastWithTrigger = () => {
   const toaster = useToaster();
 
   return (
-    <IressButton onClick={() => toaster[status](toastProps)}>
+    <IressButton onClick={() => toaster.success('Message sent successfully')}>
       Show toast using provider
     </IressButton>
   );
