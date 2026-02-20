@@ -13,8 +13,13 @@ export const useFieldRenderProps = <T extends FieldValues>(
   field: ControllerRenderProps<T>,
   fieldRef: RefObject<ReactHookFormCompatibleRef | null>,
 ) => {
-  const [extraString, setExtraString] = useState<string>('null');
-  const extraStringRef = useRef<string>('null');
+  const fieldRefCallback = useRef(field.ref);
+  const extrasRef = useRef<ReactHookFormCompatibleRef['extras'] | null>(null);
+  const extrasStringRef = useRef<string>('null');
+  const [extrasVersion, setExtrasVersion] = useState(0);
+
+  // Update the field ref callback on every render
+  fieldRefCallback.current = field.ref;
 
   const handleChange = useCallback<ControllerRenderProps<T>['onChange']>(
     (...args) => {
@@ -33,26 +38,28 @@ export const useFieldRenderProps = <T extends FieldValues>(
   const handleRef = useCallback<ControllerRenderProps<T>['ref']>(
     (instance: ReactHookFormCompatibleRef) => {
       fieldRef.current = instance;
-      field.ref(instance);
+      fieldRefCallback.current(instance);
 
       if (instance) {
         const newExtrasString = JSON.stringify(instance.extras ?? null);
 
-        if (newExtrasString !== extraStringRef.current) {
-          extraStringRef.current = newExtrasString;
-          setExtraString(newExtrasString);
+        // Only trigger update if extras actually changed
+        if (newExtrasString !== extrasStringRef.current) {
+          extrasStringRef.current = newExtrasString;
+          extrasRef.current = instance.extras ?? null;
+          // Increment version to trigger renderField recalculation
+          setExtrasVersion((v) => v + 1);
         }
       }
     },
-    [field, fieldRef],
+    [fieldRef],
   );
+
   const renderField = useMemo(() => {
     let newField: Partial<ControllerRenderProps<T>> = { ...field };
 
-    // Always parse extraString, even if it's 'null'
-    const extras = JSON.parse(extraString) as
-      | ReactHookFormCompatibleRef['extras']
-      | null;
+    // Read extras from ref - extrasVersion ensures this updates when extras change
+    const extras = extrasRef.current;
 
     if (extras?.additionalOnChangeProps) {
       extras.additionalOnChangeProps.forEach((prop) => {
@@ -70,7 +77,8 @@ export const useFieldRenderProps = <T extends FieldValues>(
     }
 
     return newField as ControllerRenderProps<T>;
-  }, [field, extraString]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [field, extrasVersion]);
 
   return useMemo<Omit<FormFieldRenderProps<T>, 'id'>>(
     () => ({
