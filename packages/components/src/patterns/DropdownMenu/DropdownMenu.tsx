@@ -12,7 +12,7 @@ import { css, cx } from '@/styled-system/css';
 import { dropdownMenu } from './DropdownMenu.styles';
 import { splitCssProps } from '@/styled-system/jsx';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
-import { useIdIfNeeded } from '@/hooks';
+import { useControlledState, useIdIfNeeded } from '@/hooks';
 import type { ControlledValue } from '@/hooks/useControlledState';
 import type { FormattedLabelValueMeta, LabelValueMeta } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
@@ -57,6 +57,11 @@ export interface IressDropdownMenuProps<TMultiple extends boolean = false>
     Omit<AutocompleteSearchHookProps, 'query'>,
     Pick<IressSelectMenuProps, 'limitMobile' | 'limitDesktop'> {
   /**
+   * The current value of the dropdown menu. Use this in uncontrolled mode when you want to set an initial value that can be changed internally by the component. For a controlled dropdown menu, use the `selected` prop instead.
+   */
+  defaultSelected?: ControlledValue<FormattedLabelValueMeta, TMultiple>;
+
+  /**
    * Footer showed in option panel when expanded.
    */
   footer?: ReactNode;
@@ -76,7 +81,7 @@ export interface IressDropdownMenuProps<TMultiple extends boolean = false>
   >;
 
   /**
-   * The label is a description of the dropdown menu's purpose. It is not displayed to the user but is used for accessibility purposes to describe the activator button. Ensure the label is descriptive of the options contained within the dropdown menu, e.g. "Filter by status" or "Select a category".
+   * The label is a description of the dropdown menu's purpose.
    */
   label: ReactNode;
 
@@ -106,10 +111,9 @@ export interface IressDropdownMenuProps<TMultiple extends boolean = false>
   searchNoResultsText?: ReactNode;
 
   /**
-   * The current value of the dropdown menu.
-   * It is required as there should always be an initial state for navigation and filtering.
+   * The current value of the dropdown menu. Use this in controlled mode when you want to manage the selected value from a parent component. For an uncontrolled dropdown menu, use the `defaultSelected` prop instead.
    */
-  selected: ControlledValue<FormattedLabelValueMeta, TMultiple>;
+  selected?: ControlledValue<FormattedLabelValueMeta, TMultiple>;
 
   /**
    * Text displayed next to label when two or more options are selected.
@@ -161,6 +165,7 @@ const DropdownMenu = <TMultiple extends boolean = false>(
     container,
     className,
     'data-testid': dataTestId,
+    defaultSelected,
     debounceThreshold,
     footer,
     header,
@@ -179,8 +184,8 @@ const DropdownMenu = <TMultiple extends boolean = false>(
     options,
     searchable,
     searchNoResultsText,
-    selected,
-    selectedOptionsText = '{{numOptions}} selected',
+    selected: selectedProp,
+    selectedOptionsText = ' ({{numOptions}})',
     visibleResetButton,
     ...restProps
   }: IressDropdownMenuProps<TMultiple>,
@@ -200,6 +205,12 @@ const DropdownMenu = <TMultiple extends boolean = false>(
     },
     ...inputPropsProp,
   };
+
+  const { value: selected, setValue } = useControlledState({
+    component: 'IressDropdownMenu',
+    defaultValue: defaultSelected,
+    value: selectedProp,
+  });
 
   const [query, setQuery] = useState('');
   const [show, setShow] = useState(false);
@@ -223,6 +234,7 @@ const DropdownMenu = <TMultiple extends boolean = false>(
     if (!selected) return;
 
     onChange?.(selected);
+    setValue(selected);
 
     if (!multiSelect) {
       setShow(false);
@@ -271,14 +283,19 @@ const DropdownMenu = <TMultiple extends boolean = false>(
     const values = toArray(selected);
 
     if (multiSelect) {
-      return selectedOptionsText.replace(
-        '{{numOptions}}',
-        values.length.toString(),
+      return (
+        <>
+          {label}
+          {selectedOptionsText.replace(
+            '{{numOptions}}',
+            values.length.toString(),
+          )}
+        </>
       );
     }
 
-    return values[0]?.formattedLabel ?? values[0]?.label ?? '';
-  }, [selected, multiSelect, selectedOptionsText]);
+    return values[0]?.label ?? label;
+  }, [selected, multiSelect, label, selectedOptionsText]);
 
   const descriptor = useMemo(() => {
     if (loading) return 'loading';
@@ -289,9 +306,6 @@ const DropdownMenu = <TMultiple extends boolean = false>(
 
   return (
     <>
-      <IressStyled id={screenreaderId} srOnly>
-        {label}
-      </IressStyled>
       <IressPopover
         matchActivatorWidth
         {...nonStyleProps}
@@ -302,6 +316,7 @@ const DropdownMenu = <TMultiple extends boolean = false>(
               dataTestId,
               'activator-button__button',
             )}
+            id={screenreaderId}
             onClick={() => setShow(true)}
             className={css(styles.activator, styleProps)}
           >
@@ -334,7 +349,7 @@ const DropdownMenu = <TMultiple extends boolean = false>(
                   onClear={handleQueryClear}
                 />
               )}
-              {visibleResetButton && (
+              {visibleResetButton && selected && (
                 <ResetButton
                   data-testid={propagateTestid(dataTestId, 'reset-button')}
                   onClick={handleResetFilter}

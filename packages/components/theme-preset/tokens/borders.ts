@@ -42,4 +42,13 @@ export const borders = {
       color: cssVars.colour.neutral['40'],
     },
   },
+  transparent: {
+    description:
+      'Used to make a border transparent (e.g. for specific variants)',
+    value: {
+      width: '1px',
+      style: 'solid',
+      color: 'transparent',
+    },
+  },
 } satisfies Tokens['borders'];

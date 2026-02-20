@@ -40,20 +40,8 @@ export const dropdownMenu = sva({
         pl: 'spacing.8',
       },
     },
-    searchHeader: {
-      p: 'spacing.2',
-    },
-    searchInput: {
-      minWidth: '[270px]',
-      position: 'relative',
-      '&:not(:last-child)': {
-        marginBottom: 'spacing.4',
-      },
-      '& .ids-spinner': {
-        position: 'absolute',
-        right: 'spacing.5',
-      },
-    },
+    searchHeader: {},
+    searchInput: {},
     optionList: {
       _empty: {
         display: 'none',
@@ -72,11 +60,13 @@ export const dropdownMenu = sva({
     },
     reset: {
       minHeight: 'auto',
+      m: 'spacing.2',
     },
     noResults: {},
     popoverContent: {
       maxHeight: 'overlay.sm',
       overflowY: 'auto',
+      maxWidth: '[none]',
     },
   },
   variants: {},

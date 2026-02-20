@@ -8,7 +8,7 @@ import {
   useAutocompleteSearch,
   IressIcon,
   IressField,
-  IressFilter,
+  IressDropdownMenu,
   IressInline,
   type LabelValueMeta,
   IressSkeleton,
@@ -27,7 +27,6 @@ import container from './Container/meta';
 import divider from './Divider/meta';
 import expander from './Expander/meta';
 import field from './Field/meta';
-import filter from './Filter/meta';
 import hide from './Hide/meta';
 import icon from './Icon/meta';
 import image from './Image/meta';
@@ -81,7 +80,6 @@ const components: {
   divider,
   expander,
   field,
-  filter,
   hide,
   icon,
   image,
@@ -203,18 +201,15 @@ const Reference = () => {
             id="search-components"
           />
         </IressField>
-        <IressFilter
+        <IressDropdownMenu
           label="Filter by tags"
           multiSelect
           options={allTags}
-          value={selectedTags}
-          onChange={(value = []) => setSelectedTags(value)}
+          selected={selectedTags}
+          onChange={setSelectedTags}
           onReset={() => setSelectedTags([])}
           visibleResetButton
           limitDesktop={9999}
-          popoverProps={{
-            align: 'bottom-end',
-          }}
         />
       </IressInline>
       <IressRow gutter="lg">

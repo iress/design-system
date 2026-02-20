@@ -18,25 +18,6 @@ interface StarWarsCharacterApi {
   results: StarWarsCharacter[];
 }
 
-const INITIAL_FILTER = {
-  name: {
-    label: 'Any name',
-    value: undefined,
-  },
-  status: {
-    label: 'Any status',
-    value: undefined,
-  },
-  location: {
-    label: 'Any location',
-    value: undefined,
-  },
-  gender: {
-    label: 'Any gender',
-    value: undefined,
-  },
-};
-
 const USERS = [
   {
     user: 'farmboy',
@@ -102,12 +83,10 @@ async function searchStarWarsCharacters(query: string) {
 }
 
 export const TableWithFilters = () => {
-  const [name, setName] = useState<LabelValueMeta>(INITIAL_FILTER.name);
-  const [status, setStatus] = useState<LabelValueMeta>(INITIAL_FILTER.status);
-  const [location, setLocation] = useState<LabelValueMeta>(
-    INITIAL_FILTER.location,
-  );
-  const [gender, setGender] = useState<LabelValueMeta>(INITIAL_FILTER.gender);
+  const [name, setName] = useState<LabelValueMeta | undefined>();
+  const [status, setStatus] = useState<LabelValueMeta | undefined>();
+  const [location, setLocation] = useState<LabelValueMeta | undefined>();
+  const [gender, setGender] = useState<LabelValueMeta | undefined>();
 
   const columns = [
     { key: 'user', label: 'User' },
@@ -134,43 +113,43 @@ export const TableWithFilters = () => {
   }, [name, status, location, gender]);
 
   const handleReset = () => {
-    setName(INITIAL_FILTER.name);
-    setStatus(INITIAL_FILTER.status);
-    setLocation(INITIAL_FILTER.location);
-    setGender(INITIAL_FILTER.gender);
+    setName(undefined);
+    setStatus(undefined);
+    setLocation(undefined);
+    setGender(undefined);
   };
 
   return (
     <IressStack gap="md">
       <IressInline gap="md">
         <IressDropdownMenu
-          label="Filter by name"
+          label="Name"
           options={searchStarWarsCharacters}
           selected={name}
           onChange={setName}
-          onReset={() => setName(INITIAL_FILTER.name)}
+          onReset={() => setName(undefined)}
           visibleResetButton
         />
         <IressDropdownMenu
-          label="Filter by status"
+          label="Status"
           options={getUniqueValues('status')}
           selected={status}
           onChange={setStatus}
-          onReset={() => setStatus(INITIAL_FILTER.status)}
+          onReset={() => setStatus(undefined)}
         />
         <IressDropdownMenu
-          label="Filter by location"
+          label="Location"
           options={getUniqueValues('location')}
           selected={location}
           onChange={setLocation}
-          onReset={() => setLocation(INITIAL_FILTER.location)}
+          onReset={() => setLocation(undefined)}
         />
         <IressDropdownMenu
-          label="Filter by gender"
+          label="Gender"
           options={getUniqueValues('gender')}
           selected={gender}
           onChange={setGender}
-          onReset={() => setGender(INITIAL_FILTER.gender)}
+          onReset={() => setGender(undefined)}
         />
         <IressButton onClick={handleReset} mode="quaternary">
           Reset filters

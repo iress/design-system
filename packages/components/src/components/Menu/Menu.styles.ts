@@ -21,12 +21,6 @@ export const menu = sva({
       textStyle: 'typography.body.md',
       transition: '[0.2s all ease-in-out]',
 
-      _focusVisible: {
-        bg: 'colour.neutral.30',
-        color: 'colour.neutral.90',
-        outline: '[0]',
-      },
-
       _hover: {
         bg: 'colour.neutral.20',
       },
@@ -169,8 +163,20 @@ export const menu = sva({
           focusable: 'true',
         },
       },
-      menuitem: {},
-      option: {},
+      menuitem: {
+        item: {
+          focusable: 'inset',
+        },
+      },
+      option: {
+        item: {
+          _focusVisible: {
+            bg: 'colour.neutral.30',
+            color: 'colour.neutral.90',
+            outline: '[0]',
+          },
+        },
+      },
     },
     selected: {
       true: {
@@ -245,6 +251,15 @@ export const menu = sva({
       css: {
         item: {
           bg: 'colour.neutral.30',
+        },
+      },
+    },
+    {
+      role: 'menuitem',
+      isActiveInPopover: true,
+      css: {
+        item: {
+          bg: 'colour.neutral.10',
         },
       },
     },

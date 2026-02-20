@@ -7,6 +7,7 @@ import {
 } from '@iress-oss/ids-storybook-config';
 import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 import {
+  IressAlert,
   IressDropdownMenu,
   IressMenuDivider,
   IressPill,
@@ -67,8 +68,7 @@ export const Options: SingleStory = {
       { label: 'Option 2', value: 'opt2' },
       { label: 'Option 3', value: 'opt3' },
     ],
-    label: 'Select an option',
-    selected: { label: 'Option 1', value: 'opt1' },
+    label: 'Options',
   },
 };
 
@@ -88,17 +88,12 @@ export const InitialOptions: SingleStory = {
       value: `fav-${number + 1}`,
     })),
     searchable: true,
-    selected: {
-      label: `Favourite option 1`,
-      value: `fav-1`,
-    },
   },
 };
 
 export const ComplexOptions: SingleStory = {
   args: {
-    ...Controlled.args,
-    label: 'Select a contact',
+    label: 'Contact',
     options: [
       {
         value: 'opt1',
@@ -170,10 +165,6 @@ export const ComplexOptions: SingleStory = {
         ],
       },
     ],
-    selected: {
-      value: 'opt1',
-      label: 'John Smith',
-    },
   },
 };
 
@@ -181,7 +172,7 @@ export const InputProps: SingleStory = {
   args: {
     ...Options.args,
     inputProps: {
-      placeholder: 'Search...',
+      placeholder: 'Search some stuff...',
     },
     searchable: true,
   },
@@ -208,12 +199,17 @@ export const NoResultsText: SingleStory = {
       placeholder: 'Type "no" to see the no results text',
     },
     searchable: true,
-    searchNoResultsText: 'No results found',
+    searchNoResultsText: (
+      <IressAlert variant="full-width" mb="none">
+        No results found
+      </IressAlert>
+    ),
   },
 };
 
-export const PopoverProps: Story = {
+export const PopoverProps: SingleStory = {
   args: {
+    ...Options.args,
     footer: (
       <>
         <IressMenuDivider />
@@ -227,7 +223,7 @@ export const SelectedOptionsText: Story = {
   args: {
     ...(Options as Story).args,
     multiSelect: true,
-    selectedOptionsText: '{{numOptions}} activated',
+    selectedOptionsText: ' - {{numOptions}}',
   },
 };
 

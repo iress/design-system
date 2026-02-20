@@ -1,0 +1,58 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import * as ComponentStories from './ContextualMenu.stories';
+import {
+  ComponentExample,
+  ComponentOverview,
+} from '@iress-oss/ids-storybook-config';
+
+<Meta of={ComponentStories} />
+
+# Contextual Menu
+
+<ComponentOverview
+  description="A compact overflow action pattern that surfaces contextual actions in a popover menu. Use this pattern for row-level or card-level secondary actions where space is constrained."
+  of={ComponentStories.Default}
+  meta={ComponentStories}
+/>
+
+## Usage
+
+Use `IressContextualMenu` when actions are related to a specific item (such as a row, card or panel) and should not dominate the layout.
+
+- Keep menus short and action-focused.
+- Prefer verbs for labels (`Edit`, `Lock`, `Delete`).
+- Place destructive actions at the end of the list.
+
+<ComponentExample of={ComponentStories.Default} />
+
+## Examples
+
+### Size
+
+Use `size="small"` or `size="medium"` to match surrounding density.
+
+<ComponentExample of={ComponentStories.Sizes} />
+
+### Align
+
+Use `align` to align the menu relative to the trigger. If there is not enough space in the preferred direction, it will flip to the opposite side.
+
+<ComponentExample of={ComponentStories.Align} />
+
+### Bordered Trigger
+
+Use `bordered` when the trigger needs stronger visual affordance.
+
+<ComponentExample of={ComponentStories.Bordered} />
+
+### Themes
+
+Use `theme="dark"` on panels using `colour.neutral.20` or darker backgrounds.
+
+<ComponentExample of={ComponentStories.Themes} />
+
+## Accessibility
+
+- Provide a meaningful `ariaLabel` that describes the menu purpose in context. By default it is `More options...`.
+- Ensure destructive labels are explicit (for example, `Delete account`).
+- Keep item labels concise and unique within the menu.

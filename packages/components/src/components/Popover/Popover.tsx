@@ -17,7 +17,7 @@ import {
   type FloatingUIContainer,
   type IressStyledProps,
 } from '@/types';
-import { type OpenChangeReason } from '@floating-ui/react';
+import { type OffsetOptions, type OpenChangeReason } from '@floating-ui/react';
 import { styled } from '@/styled-system/jsx';
 import { cx } from '@/styled-system/css';
 import {
@@ -99,6 +99,12 @@ export interface IressPopoverProps extends IressStyledProps {
   matchActivatorWidth?: boolean;
 
   /**
+   * The offset of the popover from its default position. This can be a number or an object with `mainAxis` and `crossAxis` properties, which specify the offset in pixels along the main axis (the axis along which the popover is aligned) and the cross axis (the perpendicular axis).
+   * @default 5
+   */
+  offset?: OffsetOptions | number;
+
+  /**
    * Is called when popover is activated.
    */
   onActivated?: (
@@ -154,6 +160,7 @@ const Popover = (
     fluid,
     focusStartIndex,
     matchActivatorWidth: matchActivatorWidthProp,
+    offset,
     onActivated,
     onDeactivated,
     onNavigate,
@@ -174,6 +181,7 @@ const Popover = (
     defaultShow,
     focusStartIndex,
     matchActivatorWidth,
+    offset,
     onActivated,
     onDeactivated,
     onNavigate,

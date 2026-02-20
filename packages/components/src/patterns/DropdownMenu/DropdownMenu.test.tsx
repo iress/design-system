@@ -10,12 +10,6 @@ const TEST_LABEL = 'Label';
 const renderFilter = <TMultiple extends boolean = false>(
   props: Partial<IressDropdownMenuProps<TMultiple>> = {},
 ) => {
-  const selected =
-    props.value ??
-    (props.multiSelect
-      ? MOCK_LABEL_VALUE_META
-      : MOCK_LABEL_VALUE_METAMOCK_LABEL_VALUE_META[0]);
-
   return render(
     <IressDropdownMenu
       {...props}
@@ -23,7 +17,6 @@ const renderFilter = <TMultiple extends boolean = false>(
       debounceThreshold={props.debounceThreshold ?? 0}
       label={TEST_LABEL}
       options={props.options ?? MOCK_LABEL_VALUE_META}
-      value={selected}
     />,
   );
 };

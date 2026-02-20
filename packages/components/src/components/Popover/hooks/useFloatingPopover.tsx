@@ -32,30 +32,101 @@ import { focusableElements } from '@/helpers/dom/focusableElements';
 import { type PopoverAriaHookReturn, usePopoverAria } from './usePopoverAria';
 import { closestCrossShadow } from '@/helpers/dom/closestCrossShadow';
 import { GlobalCSSClass } from '@/enums';
+import type { OffsetOptions } from '@floating-ui/core';
 
 const POPOVER_USE_MAX_HEIGHT = 200;
 
 export interface FloatingPopoverHookProps {
+  /**
+   * The alignment of the popover relative to the activator element. It determines the placement of the popover and how it will flip when there is not enough space in the viewport.
+   * @default auto
+   */
   align?: FloatingUIAligns;
+
+  /**
+   * Whether the first item in the popover should be automatically highlighted (ie. focused or virtually focused) when the popover is opened.
+   * @default true
+   */
   autoHighlight?: boolean;
+
+  /**
+   * The component name used in the useControlledState hook to manage the controlled state of the popover. It is used to determine whether the popover is controlled by the parent component or not.
+   * @default IressPopover
+   */
   component?: ControlledStateProps['component'];
+
+  /**
+   * Whether the popover is triggered by an input element, which requires different middleware to prevent the popover from closing when interacting with the input.
+   */
   defaultShow?: boolean;
+
+  /**
+   * The index of the item that should be focused or virtually focused when the popover is opened. It is used by the usePopoverNavigation hook to set the initial active index of the popover items.
+   * @default 0
+   */
   focusStartIndex?: number;
+
+  /**
+   * Whether the popover is triggered by an input element, which requires different middleware to prevent the popover from closing when interacting with the input.
+   */
   hasInputActivator?: boolean;
+
+  /**
+   * Whether the popover should match the width of the activator element. It is used to determine whether to apply the size middleware to the popover or not.
+   * @default false
+   */
   matchActivatorWidth?: boolean;
+
+  /**
+   * The offset of the popover relative to the activator element. It is used to determine the distance between the popover and the activator element, and can be used to fine-tune the position of the popover.
+   * @default 5
+   */
+  offset?: OffsetOptions;
+
+  /**
+   * This function is called when the popover is opened, either by click or keyboard interaction. It is used to trigger any side effects that should happen when the popover is opened, such as setting the active index of the popover items or managing focus.
+   * @param e - The event that triggered the popover to open, either a click event or a keyboard event.
+   * @param reason - The reason why the popover was opened, either 'click', 'keyboard', or 'focus'.
+   * @param activeIndex - The index of the currently active item in the popover, which is either focused or virtually focused. It can be used to determine which item is active when the popover is opened.
+   */
   onActivated?: (
     e?: Event,
     reason?: OpenChangeReason,
     activeIndex?: number | null,
   ) => void;
+
+  /**
+   * This function is called when the popover is closed, either by click, keyboard interaction, or clicking outside the popover. It is used to trigger any side effects that should happen when the popover is closed, such as resetting the active index of the popover items or managing focus.
+   * @param e - The event that triggered the popover to close, either a click event, a keyboard event, or a dismiss event.
+   * @param reason - The reason why the popover was closed, either 'click', 'keyboard', 'dismiss', or 'focus'.
+   * @param activeIndex - The index of the currently active item in the popover, which is either focused or virtually focused. It can be used to determine which item was active when the popover was closed.
+   */
   onDeactivated?: (
     e?: Event,
     reason?: OpenChangeReason,
     activeIndex?: number | null,
   ) => void;
+
+  /**
+   * This function is called when the active index of the popover items is changed by keyboard navigation. It is used to trigger any side effects that should happen when navigating through the popover items, such as updating the virtual focus or managing aria attributes.
+   * @param activeIndex - The index of the currently active item in the popover, which is either focused or virtually focused. It can be used to determine which item is active when navigating through the popover items.
+   */
   onNavigate?: (activeIndex: number | null) => void;
+
+  /**
+   * When set to `true` the popover will be visible. Use for controlled popovers. If not provided, the popover will manage its own state internally.
+   */
   show?: boolean;
+
+  /**
+   * Describes the type of content contained in the popover, which is used to determine the role of the popover and how it should be navigated by screen readers and assistive technologies.
+   * It is used by components such as `IressMenu` to manage the aria attributes and keyboard navigation of the items in the popover.
+   */
   type?: 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog';
+
+  /**
+   * Whether the popover should use virtual focus to manage the focus state of the items in the popover. When true, the popover will keep the focus on the reference element and use aria-activedescendant to indicate which item is active, allowing for more flexible keyboard navigation patterns.
+   */
   virtualFocus?: boolean;
 }
 
@@ -187,6 +258,7 @@ export const useFloatingPopover = ({
   focusStartIndex,
   hasInputActivator,
   matchActivatorWidth,
+  offset: offsetValue = 5,
   onActivated,
   onDeactivated,
   onNavigate,
@@ -210,9 +282,9 @@ export const useFloatingPopover = ({
 
   const combinedMiddleware = useMemo(() => {
     const middleware: Middleware[] = hasInputActivator
-      ? [offset(5), flip({ padding: 5 })]
+      ? [offset(offsetValue), flip({ padding: 5 })]
       : [
-          offset(5),
+          offset(offsetValue),
           align === 'auto' ? autoPlacement() : flip(),
           shift((state) => {
             const insideSlideout = closestCrossShadow(
@@ -248,7 +320,7 @@ export const useFloatingPopover = ({
     }
 
     return middleware;
-  }, [matchActivatorWidth, hasInputActivator, align]);
+  }, [hasInputActivator, offsetValue, align, matchActivatorWidth]);
 
   const api = useFloating({
     open: show,

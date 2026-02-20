@@ -77,6 +77,15 @@ export const buttonRecipe = defineSlotRecipe({
         },
       },
     },
+    compact: {
+      true: {
+        root: {
+          textStyle: 'typography.body.sm.medium',
+          minWidth: 'input.height.sm',
+          minHeight: 'input.height.sm',
+        },
+      },
+    },
     fluid: {
       true: {
         root: {

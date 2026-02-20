@@ -17,7 +17,7 @@ export const ControlledDropdownMenuMultiselect = () => {
 
   return (
     <IressDropdownMenu
-      label="Select your favourite descriptors"
+      label="Descriptors"
       options={ALL_OPTIONS}
       multiSelect
       onChange={(newValue) => setSelected(newValue)}

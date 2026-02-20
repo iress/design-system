@@ -13,14 +13,13 @@ const ALL_OPTIONS = [
 ];
 
 export const ControlledDropdownMenu = () => {
-  const [selected, setSelected] = useState<
-    IressDropdownMenuProps<false>['selected']
-  >(ALL_OPTIONS[0]);
+  const [selected, setSelected] =
+    useState<IressDropdownMenuProps<false>['selected']>();
 
   return (
     <IressDropdownMenu
       container={document.body}
-      label="Filter portfolio performance by time period"
+      label="Portfolio performance"
       options={ALL_OPTIONS}
       onChange={(newValue) => setSelected(newValue)}
       onReset={() => setSelected(ALL_OPTIONS[0])}
