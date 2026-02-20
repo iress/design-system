@@ -11,11 +11,11 @@ export function filterMobileOnlyOptions(options: HTMLElement[]) {
 
     if (!closest) return false;
 
-    const srOnlyClass = css({ srOnly: true });
+    const hiddenClass = css({ hideBelow: 'md' });
 
     return (
-      closest?.classList.contains(srOnlyClass) ||
-      option?.classList.contains(srOnlyClass)
+      closest?.classList.contains(hiddenClass) ||
+      option?.classList.contains(hiddenClass)
     );
   });
 }

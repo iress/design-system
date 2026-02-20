@@ -12,17 +12,15 @@ describe('Toast', () => {
     expect(toastMessage).toBeInTheDocument();
 
     const element = screen.getByTestId('test');
-    await waitFor(() => expect(element).toHaveAttribute('data-state', 'open'));
     await waitFor(async () => expect(element).toHaveFocus());
 
-    expect(element).toHaveClass(toast(), GlobalCSSClass.Toast);
+    expect(element).toHaveClass(
+      toast({ transitionState: 'open' }),
+      GlobalCSSClass.Toast,
+    );
 
     const closeButton = screen.getByRole('button');
     await userEvent.click(closeButton);
-
-    await waitFor(() =>
-      expect(element).toHaveAttribute('data-state', 'closed'),
-    );
   });
 
   describe('props', () => {
@@ -71,7 +69,13 @@ describe('Toast', () => {
     describe('timeout and onTimeout', () => {
       it('calls the onTimeout prop when the toast times out', async () => {
         const onTimeout = vi.fn();
-        render(<Toast onTimeout={onTimeout} content="I am a toast message" />);
+        render(
+          <Toast
+            timeout={200}
+            onTimeout={onTimeout}
+            content="I am a toast message"
+          />,
+        );
         await waitFor(() => expect(onTimeout).toHaveBeenCalledTimes(1));
       });
     });

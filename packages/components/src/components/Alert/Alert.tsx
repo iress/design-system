@@ -44,6 +44,11 @@ export interface IressAlertProps extends Omit<IressTextProps, 'element'> {
   closed?: boolean;
 
   /**
+   * Optional override for the default close button label "Close".
+   */
+  closeLabel?: string;
+
+  /**
    * Buttons and controls for the alert.
    * @deprecated Use `actions` instead for buttons with opinionated styling. If you need other footer content, use the `children` prop instead.
    **/
@@ -101,6 +106,7 @@ export const IressAlert = ({
   className,
   defaultClosed,
   closed: closedProp,
+  closeLabel,
   footer,
   heading,
   icon: iconProp,
@@ -199,6 +205,7 @@ export const IressAlert = ({
             onClose?.(e);
             close(true);
           }}
+          screenreaderText={closeLabel}
         />
       )}
     </IressText>

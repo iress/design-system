@@ -342,6 +342,7 @@ const DropdownMenu = <TMultiple extends boolean = false>(
               {isSearchable && (
                 <IressSelectSearchInput
                   {...inputProps}
+                  role="searchbox"
                   className={classes.searchInput}
                   data-testid={propagateTestid(dataTestId, 'input')}
                   loading={loading}

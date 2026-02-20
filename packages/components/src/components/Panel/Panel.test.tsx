@@ -8,8 +8,9 @@ describe('IressPanel', () => {
     it('renders the correct default classes', () => {
       render(<IressPanel className="test-class">Hello</IressPanel>);
 
-      const panel = screen.getByText('Hello');
-      expect(panel).toBeInTheDocument();
+      const text = screen.getByText('Hello');
+      expect(text).toBeInTheDocument();
+      const panel = text.parentElement;
       expect(panel).toHaveClass('test-class', GlobalCSSClass.Panel);
     });
   });

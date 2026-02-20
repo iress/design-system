@@ -93,13 +93,14 @@ export const Toast = ({
         {...restProps}
         className={cx(className, classes, GlobalCSSClass.Toast)}
         multiLine
-        data-state={mappedStatus}
         closed={false}
+        closeLabel="Dismiss"
         onClose={(e) => {
           setOpen(false);
           setTimeout(() => onClose?.(e), duration);
         }}
         mb="none"
+        tabIndex={-1}
       >
         {content}
       </IressAlert>

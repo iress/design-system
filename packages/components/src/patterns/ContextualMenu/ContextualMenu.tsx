@@ -16,7 +16,13 @@ import { IressIcon } from '@/components/Icon';
 
 export interface ContextualMenuItem extends Omit<
   IressMenuItemProps,
-  'canToggle' | 'label' | 'selected' | 'value' | 'children'
+  | 'canToggle'
+  | 'label'
+  | 'selected'
+  | 'value'
+  | 'children'
+  | 'href'
+  | 'component'
 > {
   /**
    * Unique identifier for the menu item, used by React as a key and passed in the onAction callback.
@@ -68,7 +74,8 @@ export interface IressContextualMenuProps extends Omit<
   ariaLabel?: string;
 
   /**
-   * Emitted when a menu item is selected.
+   * Emitted when a menu item is clicked.
+   * Receives the clicked item as an argument.
    */
   onAction?: (item: ContextualMenuItem) => void;
 }
@@ -82,6 +89,7 @@ export const IressContextualMenu = ({
   'data-testid': dataTestId,
   items,
   offset = { mainAxis: -6, crossAxis: 0 },
+  onAction,
   size = 'small',
   theme = 'light',
   ...restProps
@@ -129,6 +137,10 @@ export const IressContextualMenu = ({
                 {...item}
                 className={cx(classes.item, item.className)}
                 key={item.key}
+                onClick={(e) => {
+                  onAction?.(item);
+                  item.onClick?.(e);
+                }}
                 prepend={
                   item.icon ? <IressIcon name={item.icon} /> : item.prepend
                 }
