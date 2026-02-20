@@ -201,7 +201,7 @@ const Tab = <THref extends string | undefined = undefined>(
 
   const className = cx(
     classNameProp,
-    tab({ active: isActive, insideTabSet: !!tabSet }),
+    tab({ active: isActive, insideTabSet: !!tabSet, tabSetType: tabSet?.type }),
     GlobalCSSClass.Tab,
   );
 

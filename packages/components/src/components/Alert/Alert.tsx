@@ -77,7 +77,7 @@ export interface IressAlertProps extends Omit<IressTextProps, 'element'> {
    * Alert type - danger, info, success or warning.
    * @default info
    */
-  status?: Statuses;
+  status?: Statuses | 'neutral';
 
   /**
    * Variants of the alert, allowing it to be styled differently based on where its used in the application.
@@ -87,11 +87,12 @@ export interface IressAlertProps extends Omit<IressTextProps, 'element'> {
   variant?: 'sidebar' | 'full-width';
 }
 
-const ALERT_ICONS: Record<Statuses, IressIconProps['name']> = {
+const ALERT_ICONS: Record<Statuses | 'neutral', IressIconProps['name']> = {
   danger: 'cancel',
   info: 'info',
   success: 'check_circle',
   warning: 'error',
+  neutral: 'info',
 };
 
 export const IressAlert = ({

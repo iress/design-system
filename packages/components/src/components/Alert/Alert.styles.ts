@@ -273,6 +273,52 @@ export const alert = sva({
           },
         },
       },
+      neutral: {
+        alert: {
+          backgroundColor: 'colour.neutral.20',
+          color: 'colour.neutral.90',
+          borderColor: 'colour.neutral.90',
+        },
+        heading: {
+          color: 'colour.neutral.90',
+        },
+        children: {
+          color: 'colour.neutral.90',
+        },
+        icon: {
+          color: 'colour.neutral.90',
+        },
+        dismiss: {
+          color: 'colour.neutral.90',
+
+          _hover: {
+            bg: 'colour.neutral.30',
+            borderColor: 'colour.neutral.30',
+          },
+        },
+        action: {
+          '&.button__root--mode_secondary': {
+            bg: 'colour.neutral.70',
+            borderColor: 'colour.neutral.70',
+            color: 'colour.neutral.20',
+
+            _hover: {
+              bg: 'colour.neutral.80',
+              borderColor: 'colour.neutral.80',
+            },
+
+            _active: {
+              boxShadow:
+                'color-mix(in srgb, {colour.neutral.70}, transparent 80%) 0px 0px 0px 3px',
+            },
+          },
+          '&.button__root--mode_tertiary': {
+            _hover: {
+              bg: 'colour.neutral.30',
+            },
+          },
+        },
+      },
     },
     variant: {
       sidebar: {
