@@ -97,7 +97,7 @@ export const ComponentOverview = ({
         )}
       </IressStack>
 
-      <IressPanel noBorder bg="transparent" mt="-lg" mx="-md">
+      <IressPanel noBorder bg="transparent" mt="-lg" mb="-xl" mx="-md">
         <ComponentCanvas
           {...canvasProps}
           of={of as StoryAnnotations}
