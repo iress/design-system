@@ -65,7 +65,7 @@ export const dropdownMenu = sva({
     noResults: {},
     popoverContent: {
       maxHeight: 'overlay.sm',
-      overflowY: 'auto',
+      scrollable: 'y',
       maxWidth: '[none]',
     },
   },
