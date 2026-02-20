@@ -15,7 +15,6 @@ import {
 import { searchStarWarsCharacters } from '@/mocks/starWars';
 import { withJsxTransformer } from '@iress-oss/ids-storybook-config';
 
-// eslint-disable-next-line react-refresh/only-export-components -- helper function, not component
 export const SUPPORTED_FORM_FIELDS = {
   IressInput: {
     formField: (
@@ -245,7 +244,6 @@ export const SUPPORTED_FORM_FIELDS = {
 export const SUPPORTED_CONTROLS = Object.keys(SUPPORTED_FORM_FIELDS);
 export type SupportedControls = keyof typeof SUPPORTED_FORM_FIELDS;
 
-// eslint-disable-next-line react-refresh/only-export-components -- helper function, not component
 export const withRenderSnippet = () =>
   withJsxTransformer({
     functionValue: (functionString: string) => {

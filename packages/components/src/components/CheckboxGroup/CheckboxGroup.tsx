@@ -97,6 +97,7 @@ export function getCheckboxGroupContext<T = FormControlValue>() {
   >;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- Context is exported alongside component for consumer convenience
 export const CheckboxGroupContext = createCheckboxGroupContext();
 
 const CheckboxGroup = <T = FormControlValue,>(

@@ -38,6 +38,7 @@ export function getTableContext<TRow extends object, TVal = unknown>() {
   return TableContext as unknown as Context<TableContextValue<TRow, TVal>>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- Context is exported alongside provider for consumer convenience
 export const TableContext = createTableContext();
 
 export const TableProvider = <TRow extends object, TVal = unknown>({

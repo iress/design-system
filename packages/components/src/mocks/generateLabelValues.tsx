@@ -7,7 +7,6 @@ export const MOCK_LABEL_VALUES = generateLabelValues();
 export const MOCK_LABEL_VALUE_META = generateLabelValueMeta();
 export const MOCK_LARGE_LABEL_VALUES_DATASET = generateLabelValueMeta(15);
 
-// eslint-disable-next-line react-refresh/only-export-components -- helper function, not component
 export function generateLabels(
   amount = MOCK_LABEL_VALUES_LENGTH,
 ): LabelValue[] {
@@ -16,7 +15,6 @@ export function generateLabels(
   }));
 }
 
-// eslint-disable-next-line react-refresh/only-export-components -- helper function, not component
 export function generateLabelValues(
   amount = MOCK_LABEL_VALUES_LENGTH,
   valueAppend = '',
@@ -27,7 +25,6 @@ export function generateLabelValues(
   }));
 }
 
-// eslint-disable-next-line react-refresh/only-export-components -- helper function, not component
 export function generateLabelValueMeta(
   amount = MOCK_LABEL_VALUES_LENGTH,
   withMeta = true,
@@ -61,7 +58,6 @@ export function generateLabelValueMeta(
   });
 }
 
-// eslint-disable-next-line react-refresh/only-export-components -- helper function, not component
 export const mockAsyncSearchLabelValues = (
   items = MOCK_LABEL_VALUES,
 ): Promise<LabelValueMeta[]> =>
