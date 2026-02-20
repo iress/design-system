@@ -82,7 +82,6 @@ export const IressContextualMenu = ({
   'data-testid': dataTestId,
   items,
   offset = { mainAxis: -6, crossAxis: 0 },
-  onAction,
   size = 'small',
   theme = 'light',
   ...restProps
@@ -130,11 +129,6 @@ export const IressContextualMenu = ({
                 {...item}
                 className={cx(classes.item, item.className)}
                 key={item.key}
-                onClick={() => {
-                  if (!item.disabled) {
-                    onAction?.(item);
-                  }
-                }}
                 prepend={
                   item.icon ? <IressIcon name={item.icon} /> : item.prepend
                 }

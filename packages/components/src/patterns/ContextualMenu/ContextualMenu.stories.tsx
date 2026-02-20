@@ -10,6 +10,9 @@ const DEFAULT_ITEMS: ContextualMenuItem[] = [
     key: 'edit',
     label: 'Edit',
     icon: 'edit',
+    onClick: () => {
+      alert('Edit action');
+    },
   },
   {
     key: 'lock',

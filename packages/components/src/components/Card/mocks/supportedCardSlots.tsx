@@ -1,7 +1,5 @@
 import {
   IressIcon,
-  IressPopover,
-  IressButton,
   IressPanel,
   IressText,
   IressInline,
