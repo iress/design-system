@@ -3,9 +3,10 @@ import { cssVars } from '@iress-oss/ids-tokens';
 
 const internalLayerStyles: CompositionStyles['layerStyles'] = {
   dropdown: {
-    description: 'Used for dropdown elements (eg. Select and RichSelect)',
+    description:
+      'Used for dropdown elements (eg. DropdownMenu, Select and Popover)',
     value: {
-      boxShadow: '0 5px 8px 2px #141F4D0A',
+      boxShadow: '0 4px 8px #141F4D0A',
       border: `1px solid ${cssVars.colour.neutral[40]}`,
     },
   },
@@ -16,8 +17,7 @@ const internalLayerStyles: CompositionStyles['layerStyles'] = {
     },
   },
   floating: {
-    description:
-      'Used to represent a floating element (eg. Modal, Slideout or Popover)',
+    description: 'Used to represent a floating element (eg. Slideout)',
     value: {
       boxShadow: '0 10px 18px #091E4215',
       border: '0.5px solid #091E4215',

@@ -119,7 +119,7 @@ export type IressMenuItemProps<
 
     /**
      * Adds a divider after any content.
-     * If you would like to add content before the menu item, use a `<hr />` instead.
+     * If you would like to add a divider before the menu item, use a `<IressMenuDivider />` instead.
      */
     divider?: boolean;
 
@@ -494,7 +494,7 @@ const MenuItem = <
       ) : (
         node
       )}
-      {divider && <IressMenuDivider mt="spacing.1" />}
+      {divider && <IressMenuDivider />}
     </>
   );
 };

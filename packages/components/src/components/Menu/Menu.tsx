@@ -307,7 +307,12 @@ export const IressMenu = <
     };
   }, [id, popover]);
 
-  const classes = menu({ fluid, layout, noWrap, insidePopover: !!popover });
+  const classes = menu({
+    fluid,
+    layout,
+    noWrap,
+    insidePopover: !!popover,
+  });
 
   const props: IressStyledProps = {
     ...restProps,

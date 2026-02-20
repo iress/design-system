@@ -3,13 +3,20 @@ import {
   IressStack,
   IressTable,
   type LabelValueMeta,
-  IressFilter,
-  type IressFilterProps,
   IressButton,
   IressDivider,
+  IressDropdownMenu,
 } from '@/main';
 import { useMemo, useState } from 'react';
-import { searchStarWarsCharacters } from '@/mocks/starWars';
+
+interface StarWarsCharacter {
+  name: string;
+  gender: string;
+}
+
+interface StarWarsCharacterApi {
+  results: StarWarsCharacter[];
+}
 
 const USERS = [
   {
@@ -63,11 +70,23 @@ const getUniqueValues = (key: string): LabelValueMeta[] => {
   }));
 };
 
-export const FilterSearchTable = (args: IressFilterProps<false>) => {
+async function searchStarWarsCharacters(query: string) {
+  const data = await fetch(
+    `https://swapi.py4e.com/api/people/?search=${query}`,
+  ).then((response) => response.json() as Promise<StarWarsCharacterApi>);
+
+  return data.results.map((character: StarWarsCharacter) => ({
+    label: character.name,
+    value: character.name,
+    meta: character.gender,
+  }));
+}
+
+export const TableWithFilters = () => {
   const [name, setName] = useState<LabelValueMeta | undefined>();
   const [status, setStatus] = useState<LabelValueMeta | undefined>();
   const [location, setLocation] = useState<LabelValueMeta | undefined>();
-  const [gender, setGender] = useState<LabelValueMeta | undefined>(undefined);
+  const [gender, setGender] = useState<LabelValueMeta | undefined>();
 
   const columns = [
     { key: 'user', label: 'User' },
@@ -78,8 +97,11 @@ export const FilterSearchTable = (args: IressFilterProps<false>) => {
   ];
 
   const rows = useMemo(() => {
-    const match = (filterItem?: LabelValueMeta, detail?: string): boolean =>
-      (filterItem?.value ?? filterItem?.label) === detail;
+    const match = (filterItem?: LabelValueMeta, detail?: string): boolean => {
+      if (!filterItem?.value) return true;
+
+      return (filterItem?.value ?? filterItem?.label) == detail;
+    };
 
     return USERS.filter(
       (user) =>
@@ -100,39 +122,36 @@ export const FilterSearchTable = (args: IressFilterProps<false>) => {
   return (
     <IressStack gap="md">
       <IressInline gap="md">
-        <IressFilter
-          {...args}
+        <IressDropdownMenu
           label="Name"
           options={searchStarWarsCharacters}
-          value={name}
+          selected={name}
           onChange={setName}
           onReset={() => setName(undefined)}
+          visibleResetButton
         />
-        <IressFilter
-          {...args}
+        <IressDropdownMenu
           label="Status"
           options={getUniqueValues('status')}
-          value={status}
+          selected={status}
           onChange={setStatus}
           onReset={() => setStatus(undefined)}
         />
-        <IressFilter
-          {...args}
+        <IressDropdownMenu
           label="Location"
           options={getUniqueValues('location')}
-          value={location}
+          selected={location}
           onChange={setLocation}
           onReset={() => setLocation(undefined)}
         />
-        <IressFilter
-          {...args}
+        <IressDropdownMenu
           label="Gender"
           options={getUniqueValues('gender')}
-          value={gender}
+          selected={gender}
           onChange={setGender}
           onReset={() => setGender(undefined)}
         />
-        <IressButton onClick={handleReset} mode="tertiary">
+        <IressButton onClick={handleReset} mode="quaternary">
           Reset filters
         </IressButton>
       </IressInline>

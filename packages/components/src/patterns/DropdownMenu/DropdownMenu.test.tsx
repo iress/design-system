@@ -2,16 +2,16 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
-import { IressFilter, IressFilterProps } from './Filter';
+import { IressDropdownMenu, IressDropdownMenuProps } from './DropdownMenu';
 
 const TEST_ID = 'test-component';
 const TEST_LABEL = 'Label';
 
 const renderFilter = <TMultiple extends boolean = false>(
-  props: Partial<IressFilterProps<TMultiple>> = {},
+  props: Partial<IressDropdownMenuProps<TMultiple>> = {},
 ) => {
   return render(
-    <IressFilter
+    <IressDropdownMenu
       {...props}
       data-testid={props['data-testid'] ?? TEST_ID}
       debounceThreshold={props.debounceThreshold ?? 0}
@@ -37,12 +37,10 @@ describe('IressFilter', () => {
     );
     expect(activator).toEqual(activatorTestId);
 
-    const popover = screen.getByTestId('test-component__popover');
+    const popover = screen.getByTestId('test-component');
     expect(popover).toBeInTheDocument();
 
-    const popoverContent = screen.getByTestId(
-      'test-component__popover__content',
-    );
+    const popoverContent = screen.getByTestId('test-component__content');
     expect(popoverContent).toBeInTheDocument();
     expect(popoverContent).not.toBeVisible();
 
@@ -95,7 +93,9 @@ describe('IressFilter', () => {
           onChange,
         });
 
-        const activator = screen.getByRole('button', { name: TEST_LABEL });
+        const activator = screen.getByRole('button', {
+          name: `${TEST_LABEL} (0)`,
+        });
         await userEvent.click(activator);
 
         await userEvent.click((await screen.findAllByRole('option'))[0]);
@@ -167,9 +167,12 @@ describe('IressFilter', () => {
         renderFilter({
           onReset,
           visibleResetButton: true,
+          defaultSelected: MOCK_LABEL_VALUE_META[0],
         });
 
-        const activator = screen.getByRole('button', { name: TEST_LABEL });
+        const activator = screen.getByRole('button', {
+          name: MOCK_LABEL_VALUE_META[0].label,
+        });
         await userEvent.click(activator);
 
         const clearButton = screen.getByRole('button', {
@@ -184,10 +187,8 @@ describe('IressFilter', () => {
     describe('popoverProps', () => {
       it('renders the prepend and append nodes', async () => {
         renderFilter({
-          popoverProps: {
-            footer: <span>There</span>,
-            header: <span>Hello</span>,
-          },
+          header: <span>Hello</span>,
+          footer: <span>There</span>,
         });
 
         const activator = screen.getByRole('button', { name: TEST_LABEL });
@@ -229,7 +230,7 @@ describe('IressFilter', () => {
         await userEvent.type(searchbox, 'nonexistent');
 
         await waitFor(() => {
-          expect(screen.getByText('No results')).toBeInTheDocument();
+          expect(screen.getAllByText('No results')).toHaveLength(2); // One in the popover content, one in the screen reader text
         });
       });
 
@@ -247,7 +248,7 @@ describe('IressFilter', () => {
         await userEvent.type(searchbox, 'nonexistent');
 
         await waitFor(() => {
-          expect(screen.getByText('No results')).toBeInTheDocument();
+          expect(screen.getAllByText('No results')).toHaveLength(2); // One in the popover content, one in the screen reader text
         });
       });
     });

@@ -1,12 +1,11 @@
 import {
   IressIcon,
-  IressPopover,
-  IressButton,
   IressPanel,
   IressText,
   IressInline,
   IressTag,
   IressPill,
+  IressContextualMenu,
 } from '@/main';
 
 // eslint-disable-next-line react-refresh/only-export-components -- helper function, not component
@@ -21,16 +20,9 @@ export const supportedCardSlots = {
   ),
   heading: <h2>Welcome to Iress!</h2>,
   topRight: (
-    <IressPopover
-      align="bottom-end"
-      activator={
-        <IressButton mode="quaternary">
-          <IressIcon name="ellipsis-v" />
-        </IressButton>
-      }
-    >
+    <IressContextualMenu>
       <IressPanel>More actions in here</IressPanel>
-    </IressPopover>
+    </IressContextualMenu>
   ),
   children: (
     <IressText>

@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import * as ComponentStories from './Filter.stories';
+import * as ComponentStories from './DropdownMenu.stories';
 import {
   ComponentExample,
   ComponentOverview,
@@ -7,39 +7,29 @@ import {
 
 <Meta of={ComponentStories} />
 
-# Filter
+# Dropdown Menu
 
 <ComponentOverview
-  description="A filter allows you to pick one or more options from a list (that may be searchable) and is triggered by an activator button."
-  of={ComponentStories.Default}
+  description="A component designed to filter a section based on a list of options and quickly navigate to relevant content."
+  of={ComponentStories.Controlled}
   meta={ComponentStories}
 />
 
 ## Usage
 
-The `IressFilter` component has been built to be flexible enough to cover most application needs, allowing a user to add or remove data items from a displayed data set.
+The `IressDropdownMenu` component is a fully controlled component. It is designed to be used in situations where the selection of an option(s) should trigger an immediate update to the rendered data.
 
-This component is not designed to be used within forms and should be used to provide instant updates to rendered data. Instead, in forms, you should use components like `IressSelect`, `IressCombobox` and `IressCheckboxGroup`.
+Some examples of usage include:
 
-Here is an example using multiple `IressFilter`s to filter an `IressTable`.
+- Filtering a table based on a list of options
+- Navigating to a different section based on a list of options
+- Updating a chart based on a list of options
+
+This component is **not** designed to be used within forms and should be used to provide instant updates to rendered data. Instead, in forms, you should use components like `IressSelect`, `IressRadioGroup` or `IressCheckboxGroup`.
+
+Here is an example using multiple `IressDropdownMenu`s to filter an `IressTable`.
 
 <ComponentExample of={ComponentStories.SearchTable} />
-
-### Label
-
-The `label` prop is required for the filter to be displayed. It is used to describe the filter to the user.
-
-When the filter has selected options, it will append the label of the first option, or the number of selected options if `multiSelect` is true and there is more than one item selected.
-
-<ComponentExample of={ComponentStories.Label} />
-
-### Uncontrolled
-
-The `defaultValue` prop can be used to set the initial value of the combobox. The value will be managed by the component.
-
-**Note:** The `defaultValue` prop is not checked against the options provided, allowing it to work with asynchronous options.
-
-<ComponentExample of={ComponentStories.Uncontrolled} />
 
 ### Controlled
 
@@ -51,7 +41,7 @@ The `value` prop can be used to completely control the state of the component. U
 
 ### Multiple selection
 
-Using the `multiSelect` prop, the `IressFilter` will allow the user to make multiple selections.
+Using the `multiSelect` prop, the `IressDropdownMenu` will allow the user to make multiple selections.
 
 <ComponentExample of={ComponentStories.MultiSelect} />
 
@@ -59,7 +49,7 @@ Using the `multiSelect` prop, the `IressFilter` will allow the user to make mult
 
 #### `options`
 
-The `options` prop is required for the combobox. You can provide an array of `LabelValueMeta[]` objects to the `options` prop. Filtering is done based on the `label` property.
+The `options` prop is required for the combobox. You can provide an array of `LabelValueMeta[]` objects to the `options` prop. Filtering is done based on the `label` property. Unique selected value(s) will be determined by the `value` property, falling back to `label` if `value` is not provided.
 
 <ComponentExample of={ComponentStories.Options} />
 
@@ -87,7 +77,7 @@ The options prop also accepts further properties for each option. This is useful
 - meta: accepts a ReactNode to display additional information about the option.
 - prepend: accepts a ReactNode to add to the start of the option, usually an icon.
 
-All `IressFilter`s accept meta as an attribute in the option array.
+All `IressDropdownMenu`s accept meta as an attribute in the option array.
 
 <ComponentExample of={ComponentStories.ComplexOptions} />
 
@@ -115,7 +105,7 @@ It does have some defaults to help with user experience. `prepend` automatically
 
 ### Searchable
 
-When an `IressFilter` has 10 or more options, it is recommended that you enable the search functionality. This can be done by adding the `searchable` prop.
+When an `IressDropdownMenu` has 10 or more options, it is recommended that you enable the search functionality. This can be done by adding the `searchable` prop.
 
 **Note:** When using asynchronous options, the `searchable` prop is automatically set to true.
 

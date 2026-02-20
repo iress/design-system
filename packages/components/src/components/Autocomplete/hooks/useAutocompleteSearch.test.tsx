@@ -71,6 +71,7 @@ describe('useAutocompleteSearch', () => {
     const initialOptions = MOCK_LABEL_VALUE_META.slice(3);
     const hook = renderAutocompleteSearchHook({
       initialOptions,
+      options: MOCK_LABEL_VALUE_META,
     });
 
     expect(hook.result.current.loading).toBe(false);
@@ -935,6 +936,7 @@ describe('useAutocompleteSearch', () => {
     it('shows "Type at least X characters" when user has not typed enough', async () => {
       const hook = renderAutocompleteSearchHook({
         minSearchLength: 2,
+        options: vi.fn().mockResolvedValue([]),
       });
 
       // User opens autocomplete - should show instructions
@@ -1021,6 +1023,7 @@ describe('useAutocompleteSearch', () => {
       const hook = renderAutocompleteSearchHook({
         initialOptions,
         minSearchLength: 2,
+        options: vi.fn().mockResolvedValue([]),
       });
 
       // User opens autocomplete - should see initial options
@@ -1043,6 +1046,7 @@ describe('useAutocompleteSearch', () => {
       const hook = renderAutocompleteSearchHook({
         initialOptions,
         minSearchLength: 2,
+        options: vi.fn().mockResolvedValue([]),
       });
 
       // When autocomplete opens with initial options, should NOT show instructions message
@@ -1055,6 +1059,7 @@ describe('useAutocompleteSearch', () => {
     it('Typing insufficient characters shows "Type at least X characters" message', () => {
       const hook = renderAutocompleteSearchHook({
         minSearchLength: 3,
+        options: vi.fn().mockResolvedValue([]),
       });
 
       // User types 1 character (insufficient)
@@ -1346,6 +1351,7 @@ describe('useAutocompleteSearch', () => {
         initialOptions,
         minSearchLength: 3,
         query: '',
+        options: vi.fn().mockResolvedValue([]),
       });
 
       // With initialOptions present, should NOT show "Type X characters" message
@@ -1357,6 +1363,7 @@ describe('useAutocompleteSearch', () => {
       const hook = renderAutocompleteSearchHook({
         minSearchLength: 3,
         query: 'ab',
+        options: vi.fn().mockResolvedValue([]),
       });
 
       // With no initialOptions and insufficient query, SHOULD show instructions
@@ -1370,6 +1377,7 @@ describe('useAutocompleteSearch', () => {
         initialOptions,
         minSearchLength: 3,
         query: 'a', // Insufficient
+        options: vi.fn().mockResolvedValue([]),
       });
 
       // With initialOptions, should NOT show instructions regardless of query length

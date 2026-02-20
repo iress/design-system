@@ -34,6 +34,9 @@ export default defineConfig({
         'src/**/*.docs.mdx',
         'src/**/*.html',
       ],
+      thresholds: {
+        lines: 80,
+      },
     },
   },
 });

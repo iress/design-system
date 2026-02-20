@@ -15,10 +15,12 @@ export interface TabSetContextValue {
   active?: HTMLElement;
   hover?: HTMLElement;
   isActive: (node?: HTMLElement | null) => boolean;
+  layoutVersion: number;
   panel: HTMLDivElement | null;
   register: (node: HTMLElement, value?: FormControlValue) => void;
   setHover: (node?: HTMLElement) => void;
   unregister: (node: HTMLElement) => void;
+  type?: 'primary' | 'secondary';
 }
 
 export interface TabSetProviderProps extends PropsWithChildren {
@@ -27,6 +29,7 @@ export interface TabSetProviderProps extends PropsWithChildren {
   onChange?: (event: TabSetChangedEventDetail) => void;
   panel: HTMLDivElement | null;
   selected?: FormControlValue;
+  type?: 'primary' | 'secondary';
 }
 
 export interface TabSetChangedEventDetail {
@@ -53,12 +56,14 @@ export const TabSetProvider = ({
   onChange,
   panel,
   selected: selectedProp,
+  type,
 }: TabSetProviderProps) => {
   const [hover, setHover] = useState<HTMLElement | undefined>();
   const [nodes, setNodes] = useState(() => new Set<HTMLElement>());
   const [values, setValues] = useState(
     () => new Map<number, FormControlValue>(),
   );
+  const [layoutVersion, setLayoutVersion] = useState(0);
   const { value: selected, setValue: setSelected } = useControlledState({
     component: 'IressTabSet',
     defaultValue: defaultSelected,
@@ -83,6 +88,7 @@ export const TabSetProvider = ({
 
         if (!prevSet.has(node)) {
           newSet = new Set(prevSet).add(node);
+          setLayoutVersion((v) => v + 1);
         }
 
         const nodeIndex = [...newSet].indexOf(node);
@@ -106,6 +112,7 @@ export const TabSetProvider = ({
       const newSet = new Set(prevSet);
       const nodeIndex = [...newSet].indexOf(node);
       newSet.delete(node);
+      setLayoutVersion((v) => v + 1);
 
       setValues((prevValues) => {
         if (!prevValues.has(nodeIndex)) return prevValues;
@@ -136,19 +143,23 @@ export const TabSetProvider = ({
       },
       isActive: (node) => (node ? active === node : false),
       hover,
+      layoutVersion,
       panel,
       register,
       setHover: (node?: HTMLElement) => {
         setHover(node);
       },
       unregister,
+      type,
     }),
     [
       active,
       hover,
+      layoutVersion,
       panel,
       register,
       unregister,
+      type,
       nodes,
       values,
       onChange,

@@ -335,6 +335,7 @@ const Input = <
               onClick={handleClear}
               onMouseDown={(e) => e.preventDefault()}
               screenreaderText="Clear"
+              compact
             />
           )}
         </div>

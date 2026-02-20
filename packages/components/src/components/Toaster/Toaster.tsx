@@ -4,18 +4,12 @@ import { FloatingPortal } from '@floating-ui/react';
 import { type FloatingUIContainer, type IressStyledProps } from '@/types';
 import { toaster as toasterStyles } from './Toaster.styles';
 import { cx } from '@/styled-system/css';
-import {
-  ToastAnimated,
-  type ToastAnimatedProps,
-} from './components/Toast/ToastAnimated';
 import { styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 import { ToasterContext } from './hooks/useToaster';
+import { Toast, type ToastProps } from './components/Toast/Toast';
 
-export interface ToasterItem extends Omit<
-  ToastAnimatedProps,
-  'children' | 'animation'
-> {
+export interface ToasterItem extends Omit<ToastProps, 'animation'> {
   /**
    * A unique identifier for the toast.
    */
@@ -49,7 +43,7 @@ export interface ToasterProps extends Omit<IressStyledProps, 'children'> {
 
 const toastAnimationBasedOnToasterPosition: Record<
   Exclude<ToasterProps['position'], undefined>,
-  Exclude<ToastAnimatedProps['animation'], undefined>
+  Exclude<ToastProps['animation'], undefined>
 > = {
   'bottom-end': 'end-x',
   'bottom-start': 'start-x',
@@ -106,7 +100,7 @@ export const Toaster = ({
           {...restProps}
         >
           {toasts.map((toast) => (
-            <ToastAnimated
+            <Toast
               {...toast}
               animation={toastAnimationBasedOnToasterPosition[position]}
               key={toast.id}

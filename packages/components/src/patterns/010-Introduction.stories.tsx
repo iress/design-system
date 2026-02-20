@@ -6,18 +6,20 @@ import {
   IressCol,
   IressSkeleton,
 } from '@/main';
+import { Suspense } from 'react';
 
+import contextualMenu from './ContextualMenu/meta';
+import dropdownMenu from './DropdownMenu/meta';
 import form from './Form/meta';
 import loading from './Loading/meta';
 import shadow from './Shadow/meta';
-import { Suspense } from 'react';
 
 const patterns: {
   heading: string;
   href: string;
   tags?: string[];
   Thumbnail: React.FC;
-}[] = [form, loading, shadow];
+}[] = [contextualMenu, dropdownMenu, form, loading, shadow];
 
 const Reference = () => {
   return (

@@ -30,7 +30,10 @@ export const DiffViewer = ({
   const [mode, setMode] = useState<DiffViewerMode>('diff');
 
   return (
-    <IressCard className="sbdocs-diff-viewer" borderRadius="radius.1">
+    <IressCard
+      className="sbdocs-diff-viewer"
+      pt={allowModeChange ? 'sm' : undefined}
+    >
       <IressStack gap="md">
         {allowModeChange && (
           <IressTabSet

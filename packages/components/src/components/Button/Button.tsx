@@ -81,6 +81,11 @@ export interface InternalButtonProps<
   children?: ReactNode;
 
   /**
+   * Makes the button more compact by reducing padding and font size. Used for buttons with icon only or when space is limited.
+   */
+  compact?: boolean;
+
+  /**
    * Change the component that will be rendered as the button, used for third-party libraries that require a specific element type.
    * By default, it will render a button or an anchor tag based on the `href` prop.
    */
@@ -166,6 +171,7 @@ const Button = <
     append,
     children,
     className,
+    compact,
     element,
     fluid,
     icon,
@@ -201,6 +207,7 @@ const Button = <
     active:
       // eslint-disable-next-line react-hooks/refs -- ref needed for forwarding
       active ?? popover?.isActiveActivator(elementRef.current as HTMLElement),
+    compact,
     fluid: fluid === true ? 'true' : fluid,
     inButtonGroup: !!buttonGroupItem,
     mode: buttonMode,

@@ -1,4 +1,4 @@
-import { IressFilter, type IressFilterProps } from '@/main';
+import { IressDropdownMenu } from '@/main';
 
 interface StarWarsCharacter {
   name: string;
@@ -9,11 +9,9 @@ interface StarWarsCharacterApi {
   results: StarWarsCharacter[];
 }
 
-export const FilterUsingAsync = <TMultiple extends boolean = false>(
-  args: IressFilterProps<TMultiple>,
-) => (
-  <IressFilter
-    {...args}
+export const ControlledDropdownMenuAsync = () => (
+  <IressDropdownMenu
+    label="Character"
     options={async (query: string) => {
       if (!query) return [];
 

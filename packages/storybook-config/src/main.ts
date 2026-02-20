@@ -112,6 +112,11 @@ export const getMainConfig = ({
         optimizeDeps: {
           exclude: ['./node_modules/.cache/storybook'],
         },
+
+        // Enable CORS for Storybook composition mode
+        server: {
+          cors: true,
+        },
       };
 
       config.plugins = config.plugins?.filter((plugin) => {
@@ -149,15 +154,14 @@ export const getMainConfig = ({
       // check if refs is not a promise
 
       if (proxyChildren && IS_DEV) {
+        modifiedConfig.server = modifiedConfig.server ?? {};
+        modifiedConfig.server.proxy = modifiedConfig.server.proxy ?? {};
+
         Object.entries(proxyChildren).forEach(([path, location]) => {
-          modifiedConfig.server = modifiedConfig.server ?? {};
-          modifiedConfig.server.proxy = {
-            ...modifiedConfig.server.proxy,
-            [path]: {
-              target: location,
-              changeOrigin: true,
-              rewrite: (path) => path.replace(path, '/'),
-            },
+          modifiedConfig.server!.proxy![path] = {
+            target: location,
+            changeOrigin: true,
+            rewrite: (path) => path.replace(path, '/'),
           };
         });
       }

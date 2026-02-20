@@ -32,7 +32,7 @@ export const CodeSandbox = ({
   }, [url]);
 
   return (
-    <IressPanel bg="colour.neutral.20" textAlign="center" p="xl" m="xl">
+    <IressPanel bg="alt" textAlign="center" p="xl" m="xl">
       <h2>{title}</h2>
       <p>
         <a href={url} target="_blank" rel="noopener noreferrer">

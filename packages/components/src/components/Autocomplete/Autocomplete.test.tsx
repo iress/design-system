@@ -9,7 +9,7 @@ import {
 
 const TEST_ID = 'test-component';
 
-const renderAutocomplete = (props: IressAutocompleteProps = {}) => {
+const renderAutocomplete = (props: Partial<IressAutocompleteProps> = {}) => {
   return render(
     <IressAutocomplete
       {...props}
@@ -585,6 +585,7 @@ describe('IressAutocomplete', () => {
             data-testid="test-component"
             className="test-class"
             id={TEST_ID}
+            options={MOCK_LABEL_VALUE_META}
           />
         </>,
       );
