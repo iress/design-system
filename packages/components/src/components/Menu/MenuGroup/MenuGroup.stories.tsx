@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { IressMenuGroup } from './MenuGroup';
+import { IressMenuGroup, type IressMenuGroupProps } from './MenuGroup';
 import { IressMenu } from '../Menu';
 import { IressMenuItem } from '../MenuItem/MenuItem';
+import { IressPanel } from '@/main';
 
 export default {
   title: 'Components/Menu/MenuGroup',
@@ -12,7 +13,7 @@ export default {
   tags: ['autodocs'],
 } satisfies Meta<typeof IressMenuGroup>;
 
-type Story = StoryObj<typeof IressMenuGroup>;
+type Story = StoryObj<IressMenuGroupProps<never, 'subdraw'>>;
 
 export const Default: Story = {
   render: (args) => (
@@ -77,4 +78,85 @@ export const Selectable: Story = {
       </IressMenuGroup>
     </IressMenu>
   ),
+};
+
+export const SubdrawVariant: Story = {
+  render: () => (
+    <IressPanel>
+      <IressMenu>
+        <IressMenuItem>Regular Item</IressMenuItem>
+        <IressMenuGroup label="More Options" variant="subdraw">
+          <IressMenuItem>Submenu Item 1</IressMenuItem>
+          <IressMenuItem>Submenu Item 2</IressMenuItem>
+          <IressMenuItem>Submenu Item 3</IressMenuItem>
+        </IressMenuGroup>
+        <IressMenuItem>Another Item</IressMenuItem>
+      </IressMenu>
+    </IressPanel>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The subdraw variant renders the group label as a clickable menu item that opens a fly-over submenu. Click the "More Options" item to see the submenu.',
+      },
+    },
+  },
+};
+
+export const SubdrawWithDividers: Story = {
+  render: () => (
+    <IressPanel>
+      <IressMenu>
+        <IressMenuGroup label="File" variant="subdraw" divider>
+          <IressMenuItem>New</IressMenuItem>
+          <IressMenuItem>Open</IressMenuItem>
+          <IressMenuItem>Save</IressMenuItem>
+        </IressMenuGroup>
+        <IressMenuGroup label="Edit" variant="subdraw" divider>
+          <IressMenuItem>Cut</IressMenuItem>
+          <IressMenuItem>Copy</IressMenuItem>
+          <IressMenuItem>Paste</IressMenuItem>
+        </IressMenuGroup>
+        <IressMenuItem>Exit</IressMenuItem>
+      </IressMenu>
+    </IressPanel>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Multiple subdraw groups with dividers. Each group opens its own fly-over submenu.',
+      },
+    },
+  },
+};
+
+export const NestedSubdraw: Story = {
+  render: () => (
+    <IressPanel>
+      <IressMenu>
+        <IressMenuGroup label="Settings" variant="subdraw">
+          <IressMenuItem>General</IressMenuItem>
+          <IressMenuGroup label="Advanced" variant="subdraw">
+            <IressMenuItem>Developer Options</IressMenuItem>
+            <IressMenuItem>Debug Mode</IressMenuItem>
+            <IressMenuGroup label="Experimental" variant="subdraw">
+              <IressMenuItem>Feature A</IressMenuItem>
+              <IressMenuItem>Feature B</IressMenuItem>
+            </IressMenuGroup>
+          </IressMenuGroup>
+          <IressMenuItem>About</IressMenuItem>
+        </IressMenuGroup>
+      </IressMenu>
+    </IressPanel>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Subdraw groups can be nested to create multi-level submenus. Click through Settings → Advanced → Experimental to see all levels.',
+      },
+    },
+  },
 };
