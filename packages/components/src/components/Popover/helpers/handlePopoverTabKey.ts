@@ -37,7 +37,7 @@ export const handlePopoverTabKey = async (
     focusableReference.focus();
   }
 
-  if (!e.shiftKey) {
+  if (!e.shiftKey && popover.hasInnerRole()) {
     popover.setShowWithReason(false);
     const elements = tabbable(document.documentElement).filter(
       (element) =>
@@ -54,6 +54,17 @@ export const handlePopoverTabKey = async (
       () => !nextElement.hasAttribute('data-floating-ui-inert'),
     );
 
-    nextElement.focus();
+    setTimeout(() => nextElement.focus());
+  }
+
+  if (!e.shiftKey && !popover.hasInnerRole()) {
+    const innerElements = tabbable(document.documentElement).filter((element) =>
+      popover.api.elements.floating?.contains(element),
+    );
+    const lastInnerElement = innerElements[innerElements.length - 1];
+
+    if (document.activeElement !== lastInnerElement) return;
+
+    popover.setShowWithReason(false, e as never, 'focus-out');
   }
 };

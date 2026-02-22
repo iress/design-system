@@ -10,6 +10,7 @@ export enum GlobalCSSClass {
   // Since the move to utility first CSS, these classes are mainly used for targeting in custom styling and easier debugging.
   Alert = 'ids-alert',
   Autocomplete = 'ids-autocomplete',
+  Breadcrumbs = 'ids-breadcrumbs',
   Button = 'ids-button',
   ButtonGroup = 'ids-button-group',
   Card = 'ids-card',

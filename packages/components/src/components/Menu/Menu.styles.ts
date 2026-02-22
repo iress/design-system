@@ -160,7 +160,7 @@ export const menu = sva({
     role: {
       listitem: {
         item: {
-          focusable: 'true',
+          focusable: 'inset',
         },
       },
       menuitem: {

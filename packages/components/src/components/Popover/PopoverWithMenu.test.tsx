@@ -124,20 +124,6 @@ describe('IressPopover with IressMenu (integration test)', () => {
       expect(option).not.toBeVisible();
     });
 
-    it('closes after pressing up key on first element', async () => {
-      renderComponent('listbox');
-
-      await userEvent.click(screen.getByRole('button', { name: 'Menu' }));
-
-      const option = screen.queryByRole('option', { name: 'Option 1' });
-
-      await waitFor(() => expect(option).toHaveFocus());
-
-      await userEvent.keyboard('{ArrowUp}');
-
-      expect(option).not.toBeVisible();
-    });
-
     it('maintains the selected state when a popover is opened', async () => {
       renderComponent('listbox', {
         children: (

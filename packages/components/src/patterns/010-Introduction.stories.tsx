@@ -8,6 +8,7 @@ import {
 } from '@/main';
 import { Suspense } from 'react';
 
+import breadcrumbs from './Breadcrumbs/meta';
 import contextualMenu from './ContextualMenu/meta';
 import dropdownMenu from './DropdownMenu/meta';
 import form from './Form/meta';
@@ -19,7 +20,7 @@ const patterns: {
   href: string;
   tags?: string[];
   Thumbnail: React.FC;
-}[] = [contextualMenu, dropdownMenu, form, loading, shadow];
+}[] = [breadcrumbs, contextualMenu, dropdownMenu, form, loading, shadow];
 
 const Reference = () => {
   return (

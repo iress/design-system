@@ -53,6 +53,7 @@ export * from './components/Tooltip';
 export * from './components/ValidationMessage';
 
 /* Generator: Pattern components */
+export * from './patterns/Breadcrumbs';
 export * from './patterns/DropdownMenu';
 export * from './patterns/Form';
 export * from './patterns/Loading';

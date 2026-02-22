@@ -1,5 +1,5 @@
 import { getActiveElement } from '@helpers/dom/getActiveElement';
-import { type KeyboardEvent, type CSSProperties } from 'react';
+import { type CSSProperties } from 'react';
 import { handlePopoverTabKey } from './handlePopoverTabKey';
 import { type IressUnstyledProps } from '@/types';
 import { type FloatingPopoverHookReturn } from '../hooks/useFloatingPopover';
@@ -54,8 +54,6 @@ export const composePopoverFloatingProps = (
       const lastIndex = Math.max(popover?.list.current.length - 1, 0);
       popover.list.current[lastIndex]?.focus();
     }
-
-    handleArrowUpKey(popover, e);
   };
 
   const floatingProps = popover.interactions.getFloatingProps({
@@ -78,20 +76,4 @@ export const composePopoverFloatingProps = (
       ...(isInline ? {} : popover?.api?.floatingStyles),
     },
   };
-};
-
-// This closes the popover when the first item in the listbox is focused and the up arrow key is pressed
-const handleArrowUpKey = (
-  popover: FloatingPopoverHookReturn,
-  e: KeyboardEvent,
-) => {
-  if (
-    popover.type !== 'listbox' ||
-    e.key !== 'ArrowUp' ||
-    popover.activeIndex !== 0
-  ) {
-    return;
-  }
-
-  popover.setShowWithReason(false, e.nativeEvent, 'list-navigation');
 };
