@@ -13,7 +13,7 @@ export default {
   tags: ['autodocs'],
 } satisfies Meta<typeof IressMenuGroup>;
 
-type Story = StoryObj<IressMenuGroupProps<never, 'subdraw'>>;
+type Story = StoryObj<IressMenuGroupProps>;
 
 export const Default: Story = {
   render: (args) => (
@@ -135,7 +135,7 @@ export const SubdrawWithDividers: Story = {
 export const NestedSubdraw: Story = {
   render: () => (
     <IressPanel>
-      <IressMenu>
+      <IressMenu role="menu">
         <IressMenuGroup label="Settings" variant="subdraw">
           <IressMenuItem>General</IressMenuItem>
           <IressMenuGroup label="Advanced" variant="subdraw">

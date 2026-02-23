@@ -54,6 +54,12 @@ export const composePopoverFloatingProps = (
       const lastIndex = Math.max(popover?.list.current.length - 1, 0);
       popover.list.current[lastIndex]?.focus();
     }
+
+    if (e.key === 'ArrowLeft' && popover.nested) {
+      e.stopPropagation();
+      popover.setShowWithReason(false, e.nativeEvent, 'escape-key');
+      popover.getFocusableActivator()?.focus();
+    }
   };
 
   const floatingProps = popover.interactions.getFloatingProps({

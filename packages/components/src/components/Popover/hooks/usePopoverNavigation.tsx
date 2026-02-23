@@ -58,6 +58,7 @@ export const usePopoverNavigation = <
     focusItemOnHover: false,
     listRef: list,
     loop: type === 'menu',
+    openOnArrowKeyDown: false,
     onNavigate: (newActiveIndex) => {
       setActiveIndex(newActiveIndex);
       onNavigate?.(newActiveIndex);

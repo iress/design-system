@@ -27,7 +27,7 @@ import {
   type ButtonRef,
 } from '../../Button';
 import { idsLogger } from '@helpers/utility/idsLogger';
-import { type FormControlValue } from '@/types';
+import type { FormControlValue } from '@/types';
 import { MenuContext } from '../Menu';
 import { IressCheckboxMark } from '@/components/CheckboxMark';
 import { propagateTestid } from '@/helpers/utility/propagateTestid';
@@ -42,11 +42,10 @@ import {
 } from '@/components/Popover';
 import { CompositeItem } from '@floating-ui/react';
 import { IressMenuDivider } from '../MenuDivider/MenuDivider';
-import { type IressCSSProps, type IressTestProps } from '@/interfaces';
+import type { IressCSSProps, IressTestProps } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import { spreadUnlessUndefined } from '@/helpers/utility/spreadUnlessUndefined';
 import { IressRadioMark } from '@/components/RadioMark';
-import { IressIcon } from '@/components/Icon';
 
 export interface MenuItemRenderProps<
   C extends ElementType | undefined = undefined,
@@ -186,7 +185,7 @@ const MenuItem = <
   THref extends string | undefined = undefined,
 >(
   {
-    append: appendProp,
+    append,
     canToggle,
     children,
     className,
@@ -338,20 +337,22 @@ const MenuItem = <
     () =>
       menuStyles({
         active: !!popover?.isActiveActivator(elementRef.current as HTMLElement),
-        hasAppendOrPrepend: !!(appendProp ?? prependProp ?? menu?.multiSelect),
+        hasAppendOrPrepend: !!(append ?? prependProp ?? menu?.multiSelect),
         isActiveInPopover,
         layout: menu?.layout,
         multiSelect: !!menu?.multiSelect,
         noWrap: menu?.noWrap,
         role,
         selected,
+        variant: menu?.variant,
       }),
     [
-      appendProp,
+      append,
       isActiveInPopover,
       menu?.layout,
       menu?.multiSelect,
       menu?.noWrap,
+      menu?.variant,
       popover,
       prependProp,
       role,
@@ -389,14 +390,6 @@ const MenuItem = <
     prependProp,
     selected,
   ]);
-
-  const append = useMemo(() => {
-    if (menu?.variant === 'subdraw') {
-      return <IressIcon name="keyboard_arrow_right" />;
-    }
-
-    return appendProp;
-  }, [menu?.variant, appendProp]);
 
   const [styleProps, nonStyleProps] = useMemo(
     () => splitCssProps(restProps),

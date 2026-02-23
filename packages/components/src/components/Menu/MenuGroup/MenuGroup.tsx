@@ -11,28 +11,35 @@ import {
   usePopover,
 } from '@/components/Popover';
 import { IressMenuItem } from '../MenuItem/MenuItem';
-import { IressMenu, MenuContext } from '../Menu';
+import { IressMenu, MenuContext, type MenuVariants } from '../Menu';
 import { IressIcon } from '@/components/Icon';
 import { propagateTestid } from '@/helpers/utility/propagateTestid';
-
-/**
- * Variant of the menu group.
- * - `undefined` (default): Renders inline with label as heading and children below.
- * - `'subdraw'`: Renders as a trigger that opens a fly-over submenu containing children.
- */
-export type MenuGroupVariant = 'subdraw' | undefined;
+import { menu as menuStyles } from '../Menu.styles';
+import { useControlledState } from '@/hooks';
 
 type MenuGroupRestProps<
   TLabel extends TextElements = 'h2',
-  TVariant extends MenuGroupVariant = undefined,
+  TVariant extends MenuVariants = undefined,
 > = TVariant extends 'subdraw'
   ? Omit<IressPopoverProps, 'children' | 'activator'>
   : Omit<IressMenuTextProps<TLabel>, 'children'>;
 
 export type IressMenuGroupProps<
   TLabel extends TextElements = 'h2',
-  TVariant extends MenuGroupVariant = undefined,
+  TVariant extends MenuVariants = undefined,
 > = MenuGroupRestProps<TLabel, TVariant> & {
+  /**
+   * Whether this header is active/expanded, revealing child drawer items.
+   * Only used when parent Menu has variant="side".
+   */
+  active?: boolean;
+
+  /**
+   * Append an element after the label. Only used when variant is 'subdraw' to add an icon indicating a submenu.
+   * By default, a right arrow icon is used when variant is 'subdraw', so this prop is only needed if you want to override that.
+   */
+  append?: ReactNode;
+
   /**
    * Label for the group, displayed as a non-selectable heading.
    */
@@ -44,14 +51,27 @@ export type IressMenuGroupProps<
   children?: ReactNode;
 
   /**
+   * Uncontrolled default for the active/expanded state.
+   * Only used when parent Menu has variant="side".
+   */
+  defaultActive?: boolean;
+
+  /**
    * Adds a divider after the group.
    */
   divider?: boolean;
 
   /**
+   * Callback fired when the active/expanded state changes.
+   * Only used when parent Menu has variant="side".
+   */
+  onActiveChange?: (active?: boolean) => void;
+
+  /**
    * Variant of the menu group.
    * - `undefined` (default): Renders inline with label as heading and children below.
    * - `'subdraw'`: Renders as a trigger that opens a fly-over submenu containing children.
+   * - `'side'`: Renders as a numbered header with an expandable drawer containing children.
    */
   variant?: TVariant;
 };
@@ -65,34 +85,77 @@ export type IressMenuGroupProps<
  */
 export const IressMenuGroup = <
   E extends TextElements = 'div',
-  TVariant extends MenuGroupVariant = undefined,
+  TVariant extends MenuVariants = undefined,
 >({
-  label,
+  append,
+  active: activeProp,
   children,
+  defaultActive,
   divider,
-  variant,
+  label,
+  onActiveChange,
+  variant: variantProp,
   'data-testid': dataTestId,
   ...restProps
 }: IressMenuGroupProps<E, TVariant>) => {
   const menu = useContext(MenuContext);
   const popover = usePopover();
+  const variant = variantProp ?? menu?.variant;
+
+  if (variant && (popover?.type === 'listbox' || menu?.role === 'listbox')) {
+    throw new Error(
+      '[IressMenuGroup] IressMenu with variants cannot be used within a Menu with role="listbox" or Popover with type="listbox", as it is not intended for that use case. Please unset the variant for grouping in listbox contexts.',
+    );
+  }
+
+  const { value: active, setValue: setActive } = useControlledState<boolean>({
+    component: 'IressMenuGroup',
+    defaultValue: defaultActive,
+    onChange: onActiveChange,
+    value: activeProp,
+  });
+
+  // Side variant - numbered header with expandable drawer
+  if (variant == 'side') {
+    const classes = menuStyles({
+      numbered: menu?.numbered,
+      open: active,
+    });
+
+    return (
+      <>
+        <div className={classes.group} {...restProps} data-testid={dataTestId}>
+          <button
+            className={classes.groupActivator}
+            onClick={() => setActive(!active)}
+            data-testid={propagateTestid(dataTestId, 'activator')}
+          >
+            {label}
+          </button>
+          <div className={classes.groupWrapper}>
+            <div className={classes.groupContent}>{children}</div>
+          </div>
+        </div>
+        {divider && <IressMenuDivider />}
+      </>
+    );
+  }
 
   // Subdraw variant - compose existing components
   if (variant == 'subdraw') {
-    const popoverProps = restProps as MenuGroupRestProps<E, 'subdraw'>;
-
     return (
       <>
         <IressPopover
           align="right-start"
+          nested
           offset={{ mainAxis: 0, crossAxis: 0 }}
           type={menu?.role === 'list' ? undefined : menu?.role}
           virtualFocus={popover?.isVirtualFocus}
-          {...popoverProps}
+          {...restProps}
           data-testid={propagateTestid(dataTestId, 'subdraw')}
           activator={
             <IressMenuItem
-              append={<IressIcon name="keyboard_arrow_right" />}
+              append={append ?? <IressIcon name="keyboard_arrow_right" />}
               data-testid={propagateTestid(dataTestId, 'subdraw__trigger')}
             >
               {label}

@@ -21,9 +21,16 @@ import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 import { usePopover } from '../Popover';
 
+/**
+ * Menu component that provides context for its child menu items, headings, dividers, and text.
+ * Does not apply to `multiSelect`, as the presence of checkboxes is determined by the `multiSelect` prop on the parent MenuItem instead to allow for more flexible combinations of single and multi select items within the same menu.
+ */
+export type MenuVariants = 'subdraw' | 'radio' | 'side' | undefined;
+
 export interface IressMenuProps<
   T = FormControlValue,
   TMultiple extends boolean = false,
+  TVariant extends MenuVariants = undefined,
 > extends Omit<IressStyledProps, 'defaultValue' | 'onChange' | 'value'> {
   /**
    * If set to true, change event will be fired with the correctly selected value.
@@ -69,6 +76,11 @@ export interface IressMenuProps<
   noWrap?: boolean;
 
   /**
+   * Add a numbered header style to the menu group. Only used when variant is 'side'.
+   */
+  numbered?: TVariant extends 'side' ? boolean : never;
+
+  /**
    * Emitted when the menu value changes
    */
   onChange?: (value?: ControlledValue<T, TMultiple> | null) => void;
@@ -88,12 +100,13 @@ export interface IressMenuProps<
   /**
    * The variant of the menu, which determines some opinionated styles for the menu items
    */
-  variant?: TMultiple extends true ? never : 'subdraw' | 'radio';
+  variant?: TMultiple extends true ? never : TVariant;
 }
 
 export interface MenuContextValue<
   T = FormControlValue,
   TMultiple extends boolean = false,
+  TVariant extends MenuVariants = undefined,
 > {
   /**
    * Whether the menu should change the selected value on blur.
@@ -138,6 +151,11 @@ export interface MenuContextValue<
   noWrap?: boolean;
 
   /**
+   * Add a numbered header style to the menu group. Only used when variant is 'side'.
+   */
+  numbered?: IressMenuProps<T, TMultiple, TVariant>['numbered'];
+
+  /**
    * The role of the menu. This is used by components such as `IressMenuItem` to determine which role to use.
    * - `menu` means that sub-items should be `menuitem`
    * - `list` means that sub-items should be `listitem`
@@ -160,22 +178,28 @@ export interface MenuContextValue<
   /**
    * The variant of the menu, which determines some opinionated styles for the menu items. This is used by components such as `IressMenuItem` to determine how to display itself.
    */
-  variant?: IressMenuProps<T, TMultiple>['variant'];
+  variant?: IressMenuProps<T, TMultiple, TVariant>['variant'];
 }
 
 function createMenuContext<
   T = FormControlValue,
   TMultiple extends boolean = false,
+  TVariant extends MenuVariants = undefined,
 >() {
-  return createContext<MenuContextValue<T, TMultiple> | undefined>(undefined);
+  return createContext<MenuContextValue<T, TMultiple, TVariant> | undefined>(
+    undefined,
+  );
 }
 
 // TODO: Is there a way to do this without casting?
 function getMenuContext<
   T = FormControlValue,
   TMultiple extends boolean = false,
+  TVariant extends MenuVariants = undefined,
 >() {
-  return MenuContext as unknown as Context<MenuContextValue<T, TMultiple>>;
+  return MenuContext as unknown as Context<
+    MenuContextValue<T, TMultiple, TVariant>
+  >;
 }
 
 export const MenuContext = createMenuContext();
@@ -183,6 +207,7 @@ export const MenuContext = createMenuContext();
 export const IressMenu = <
   T = FormControlValue,
   TMultiple extends boolean = false,
+  TVariant extends MenuVariants = undefined,
 >({
   changeOnBlur,
   className,
@@ -190,14 +215,16 @@ export const IressMenu = <
   fluid,
   id: idProp,
   layout = 'stack',
+  maxWidth = '12/12',
   multiSelect,
   noWrap,
+  numbered,
   onChange,
   role: roleProp = 'list',
   selected: selectedProp,
   variant,
   ...restProps
-}: IressMenuProps<T, TMultiple>) => {
+}: IressMenuProps<T, TMultiple, TVariant>) => {
   const id = useIdIfNeeded({ id: idProp });
   const popover = usePopover();
 
@@ -266,7 +293,7 @@ export const IressMenu = <
     [multiSelect, selected, supportsSelection],
   );
 
-  const context: MenuContextValue<T, TMultiple> = useMemo(
+  const context: MenuContextValue<T, TMultiple, TVariant> = useMemo(
     () => ({
       changeOnBlur: changeOnBlur && role === 'listbox',
       hasArrowKeyNav,
@@ -275,6 +302,7 @@ export const IressMenu = <
       layout,
       multiSelect,
       noWrap,
+      numbered,
       role,
       supportsSelection,
       toggle,
@@ -288,6 +316,7 @@ export const IressMenu = <
       layout,
       multiSelect,
       noWrap,
+      numbered,
       role,
       supportsSelection,
       toggle,
@@ -312,6 +341,7 @@ export const IressMenu = <
     layout,
     noWrap,
     insidePopover: !!popover,
+    variant,
   });
 
   const props: IressStyledProps = {
@@ -322,14 +352,17 @@ export const IressMenu = <
     role,
   };
 
-  const { Provider } = getMenuContext<T, TMultiple>();
+  const { Provider } = getMenuContext<T, TMultiple, TVariant>();
 
   return (
     <Provider value={context}>
       {isComposite ? (
-        <Composite loop={role === 'menu'} render={<styled.div {...props} />} />
+        <Composite
+          loop={role === 'menu'}
+          render={<styled.div {...props} maxWidth={maxWidth} />}
+        />
       ) : (
-        <styled.div {...props} />
+        <styled.div {...props} maxWidth={maxWidth} />
       )}
     </Provider>
   );
