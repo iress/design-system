@@ -15,7 +15,7 @@ import { IressMenu, MenuContext, type MenuVariants } from '../Menu';
 import { IressIcon } from '@/components/Icon';
 import { propagateTestid } from '@/helpers/utility/propagateTestid';
 import { menuGroup } from './MenuGroup.styles';
-import { useControlledState } from '@/hooks';
+import { useControlledState, useIdIfNeeded } from '@/hooks';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 
@@ -101,6 +101,7 @@ export const IressMenuGroup = <
   'data-testid': dataTestId,
   ...restProps
 }: IressMenuGroupProps<E, TVariant>) => {
+  const id = useIdIfNeeded(restProps as never);
   const menu = useContext(MenuContext);
   const popover = usePopover();
   const variant = variantProp ?? menu?.variant;
@@ -154,10 +155,16 @@ export const IressMenuGroup = <
             className={cx(classes.activator, GlobalCSSClass.MenuGroupActivator)}
             data-testid={propagateTestid(dataTestId, 'activator')}
             onClick={() => setActive(!active)}
+            aria-expanded={active}
+            id={id}
+            aria-controls={`${id}-content`}
           >
             {label}
           </IressMenuItem>
-          <div className={cx(classes.wrapper, GlobalCSSClass.MenuGroup)}>
+          <div
+            className={cx(classes.wrapper, GlobalCSSClass.MenuGroup)}
+            id={`${id}-content`}
+          >
             <div className={classes.content}>{children}</div>
           </div>
         </div>
