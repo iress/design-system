@@ -73,7 +73,7 @@
     "@vueless/storybook-dark-mode": "10.0.7",
     "chalk": "^5.6.2",
     "colorjs.io": "^0.6.1",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.0",
     "eslint-plugin-file-progress": "^3.0.2",
     "eslint-plugin-mdx": "^3.6.2",
     "eslint-plugin-prettier": "^5.5.5",
