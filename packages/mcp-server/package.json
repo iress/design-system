@@ -59,7 +59,7 @@
     "eslint-plugin-prettier": "5.5.5",
     "eslint-plugin-sonarjs": "3.0.6",
     "minimist": "^1.2.8",
-    "playwright": "1.58.1",
+    "playwright": "1.58.2",
     "prettier": "3.8.1",
     "prettier-plugin-sh": "0.18.0",
     "rimraf": "6.1.2",
