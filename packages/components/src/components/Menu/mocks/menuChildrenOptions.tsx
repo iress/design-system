@@ -213,9 +213,43 @@ export const MENU_CHILDREN_OPTIONS = {
       <IressMenuItem value="1-3">Option 3</IressMenuItem>
     </IressMenuGroup>,
     <IressMenuGroup key={1} label="Group 2">
-      <IressMenuItem value="2-1">Option 1</IressMenuItem>
+      <IressMenuItem value="2-1" selected>
+        Option 1
+      </IressMenuItem>
       <IressMenuItem value="2-2">Option 2</IressMenuItem>
       <IressMenuItem value="2-3">Option 3</IressMenuItem>
     </IressMenuGroup>,
+    <IressMenuItem key={3} value="3" selected>
+      Ungrouped
+    </IressMenuItem>,
+  ],
+  groupedIcons: [
+    <IressMenuGroup key={0} label="Group 1" divider>
+      <IressMenuItem value="1-1" icon="hub">
+        Option 1
+      </IressMenuItem>
+      <IressMenuItem value="1-2" icon="share">
+        Option 2
+      </IressMenuItem>
+      <IressMenuItem value="1-3" icon="database">
+        Option 3
+      </IressMenuItem>
+    </IressMenuGroup>,
+    <IressMenuGroup key={1} label="Group 2" divider>
+      <IressMenuItem value="2-1" icon="lab_research" selected>
+        Option 1
+      </IressMenuItem>
+      <IressMenuItem value="2-2" icon="settings_account_box">
+        Option 2
+      </IressMenuItem>
+    </IressMenuGroup>,
+    <IressMenuItem
+      key={3}
+      value="3"
+      icon="keyboard_double_arrow_right"
+      selected
+    >
+      Ungrouped
+    </IressMenuItem>,
   ],
 };

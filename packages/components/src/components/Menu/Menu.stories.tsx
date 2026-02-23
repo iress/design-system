@@ -197,6 +197,11 @@ export const Variants: Story = {
       <IressMenu {...args} variant="subdraw" maxWidth="input.12" />
       <IressMenu {...args} variant="side" maxWidth="input.12" />
       <IressMenu {...args} variant="side" maxWidth="input.12" numbered />
+      <IressMenu
+        {...args}
+        children={MENU_CHILDREN_OPTIONS.groupedIcons}
+        variant="rail"
+      />
     </IressStack>
   ),
 };

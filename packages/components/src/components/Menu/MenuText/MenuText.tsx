@@ -6,7 +6,7 @@ import {
   type IressTextProps,
   type TextElements,
 } from '@/components/Text';
-import { menu as menuStyles } from '../Menu.styles';
+import { menuItem } from '../MenuItem/MenuItem.styles';
 import { css, cx } from '@/styled-system/css';
 import { IressMenuDivider } from '../MenuDivider/MenuDivider';
 import { GlobalCSSClass } from '@/enums';
@@ -62,9 +62,9 @@ export const IressMenuText = <E extends TextElements = 'div'>({
 }: IressMenuTextProps<E>) => {
   const menu = useContext(MenuContext);
   const menuItemRole = useMenuItemRole() ?? role;
-  const classes = menuStyles.raw({
+  const classes = menuItem.raw({
     layout: menu?.layout,
-    heading: isHeading<E>(element, textStyle),
+    isHeading: isHeading<E>(element, textStyle),
     hasAppendOrPrepend: !!(append ?? prepend),
   });
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
@@ -74,7 +74,7 @@ export const IressMenuText = <E extends TextElements = 'div'>({
       <div
         className={cx(
           className,
-          css(classes.text, styleProps),
+          css(classes.root, styleProps),
           GlobalCSSClass.MenuText,
         )}
         data-testid={dataTestid}

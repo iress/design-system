@@ -21,11 +21,7 @@ import {
   type RefAttributes,
 } from 'react';
 import { useMenuItemRole } from './hooks/useMenuItemRole';
-import {
-  type ButtonElement,
-  type ButtonInstance,
-  type ButtonRef,
-} from '../../Button';
+import type { ButtonElement, ButtonInstance, ButtonRef } from '../../Button';
 import { idsLogger } from '@helpers/utility/idsLogger';
 import type { FormControlValue } from '@/types';
 import { MenuContext } from '../Menu';
@@ -33,7 +29,7 @@ import { IressCheckboxMark } from '@/components/CheckboxMark';
 import { propagateTestid } from '@/helpers/utility/propagateTestid';
 import { css, cx } from '@/styled-system/css';
 import { splitCssProps } from '@/styled-system/jsx';
-import { menu as menuStyles } from '../Menu.styles';
+import { menuItem } from './MenuItem.styles';
 import {
   type PopoverItemHookReturn,
   type PopoverVirtualNode,
@@ -46,6 +42,9 @@ import type { IressCSSProps, IressTestProps } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import { spreadUnlessUndefined } from '@/helpers/utility/spreadUnlessUndefined';
 import { IressRadioMark } from '@/components/RadioMark';
+import type { MaterialSymbol } from 'material-symbols';
+import { IressIcon } from '@/components/Icon';
+import { IressTooltip } from '@/components/Tooltip';
 
 export interface MenuItemRenderProps<
   C extends ElementType | undefined = undefined,
@@ -135,6 +134,11 @@ export type IressMenuItemProps<
     href?: THref;
 
     /**
+     * The icon to be displayed in the button. If provided, the icon will be displayed and the `children` will be used as screen reader text (although you can explicitly override this with `aria-label`)
+     */
+    icon?: MaterialSymbol;
+
+    /**
      * Emitted when the menu item is blurred.
      */
     onBlur?: FocusEventHandler<ButtonInstance<C, THref>>;
@@ -192,6 +196,7 @@ const MenuItem = <
     'data-testid': dataTestId,
     divider,
     element,
+    icon,
     onBlur,
     onClick,
     onKeyDown,
@@ -335,13 +340,19 @@ const MenuItem = <
   const classes = useMemo(
     // eslint-disable-next-line react-hooks/refs -- popover uses elementRef.current; exhaustive deps warning is intentionally suppressed
     () =>
-      menuStyles({
+      menuItem({
         active: !!popover?.isActiveActivator(elementRef.current as HTMLElement),
-        hasAppendOrPrepend: !!(append ?? prependProp ?? menu?.multiSelect),
+        hasAppendOrPrepend: !!(
+          append ??
+          prependProp ??
+          menu?.multiSelect ??
+          menu?.numbered
+        ),
         isActiveInPopover,
         layout: menu?.layout,
         multiSelect: !!menu?.multiSelect,
         noWrap: menu?.noWrap,
+        numbered: menu?.numbered,
         role,
         selected,
         variant: menu?.variant,
@@ -352,6 +363,7 @@ const MenuItem = <
       menu?.layout,
       menu?.multiSelect,
       menu?.noWrap,
+      menu?.numbered,
       menu?.variant,
       popover,
       prependProp,
@@ -371,7 +383,7 @@ const MenuItem = <
       );
     }
 
-    if (menu?.variant === 'radio') {
+    if (menu?.variant == 'radio') {
       return (
         <IressRadioMark
           checked={selected}
@@ -402,13 +414,17 @@ const MenuItem = <
       children: (
         <>
           {prepend}
-          {children && <span className={classes.contents}>{children}</span>}
+          {(icon ?? children) && (
+            <span className={classes.contents}>
+              {icon ? <IressIcon name={icon} /> : children}
+            </span>
+          )}
           {append && <span className={classes.append}>{append}</span>}
         </>
       ),
       className: cx(
         className,
-        classes.item,
+        classes.root,
         css(styleProps),
         GlobalCSSClass.MenuItem,
       ),
@@ -435,10 +451,11 @@ const MenuItem = <
       className,
       classes.append,
       classes.contents,
-      classes.item,
+      classes.root,
       dataTestId,
       handleClick,
       handleKeyDown,
+      icon,
       menu?.hasArrowKeyNav,
       menu?.isComposite,
       popoverItem,
@@ -451,6 +468,25 @@ const MenuItem = <
   const rendered = useMemo(() => {
     const Component = element ?? (nonStyleProps.href ? 'a' : 'button');
     const buttonProps = Component === 'button' ? { type: 'button' } : {};
+
+    if (icon && children) {
+      // eslint-disable-next-line @typescript-eslint/no-base-to-string
+      const childrenLabel = String(children);
+
+      return (
+        <IressTooltip
+          tooltipText={childrenLabel}
+          align={menu?.variant == 'rail' ? 'right' : undefined}
+        >
+          <Component
+            // eslint-disable-next-line react-hooks/refs -- we are forwarding the ref
+            {...spreadUnlessUndefined(renderProps, nonStyleProps as object)}
+            {...buttonProps}
+          />
+        </IressTooltip>
+      );
+    }
+
     return (
       <Component
         // eslint-disable-next-line react-hooks/refs -- we are forwarding the ref
@@ -458,7 +494,7 @@ const MenuItem = <
         {...buttonProps}
       />
     );
-  }, [element, nonStyleProps, renderProps]);
+  }, [children, element, icon, menu?.variant, nonStyleProps, renderProps]);
 
   useImperativeHandle(ref, () => elementRef.current!);
 

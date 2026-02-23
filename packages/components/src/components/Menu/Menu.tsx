@@ -25,7 +25,7 @@ import { usePopover } from '../Popover';
  * Menu component that provides context for its child menu items, headings, dividers, and text.
  * Does not apply to `multiSelect`, as the presence of checkboxes is determined by the `multiSelect` prop on the parent MenuItem instead to allow for more flexible combinations of single and multi select items within the same menu.
  */
-export type MenuVariants = 'subdraw' | 'radio' | 'side' | undefined;
+export type MenuVariants = 'subdraw' | 'radio' | 'side' | 'rail' | undefined;
 
 export interface IressMenuProps<
   T = FormControlValue,

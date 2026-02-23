@@ -14,8 +14,10 @@ import { IressMenuItem } from '../MenuItem/MenuItem';
 import { IressMenu, MenuContext, type MenuVariants } from '../Menu';
 import { IressIcon } from '@/components/Icon';
 import { propagateTestid } from '@/helpers/utility/propagateTestid';
-import { menu as menuStyles } from '../Menu.styles';
+import { menuGroup } from './MenuGroup.styles';
 import { useControlledState } from '@/hooks';
+import { cx } from '@/styled-system/css';
+import { GlobalCSSClass } from '@/enums';
 
 type MenuGroupRestProps<
   TLabel extends TextElements = 'h2',
@@ -90,6 +92,7 @@ export const IressMenuGroup = <
   append,
   active: activeProp,
   children,
+  className,
   defaultActive,
   divider,
   label,
@@ -116,24 +119,46 @@ export const IressMenuGroup = <
   });
 
   // Side variant - numbered header with expandable drawer
+  if (variant == 'rail') {
+    return (
+      <>
+        <IressMenuHeading
+          data-testid={dataTestId}
+          {...restProps}
+          className={cx(GlobalCSSClass.MenuGroup, className)}
+          srOnly
+        >
+          {label}
+        </IressMenuHeading>
+        {children}
+        {divider && <IressMenuDivider />}
+      </>
+    );
+  }
+
+  // Side variant - numbered header with expandable drawer
   if (variant == 'side') {
-    const classes = menuStyles({
+    const classes = menuGroup({
       numbered: menu?.numbered,
       open: active,
     });
 
     return (
       <>
-        <div className={classes.group} {...restProps} data-testid={dataTestId}>
-          <button
-            className={classes.groupActivator}
-            onClick={() => setActive(!active)}
+        <div
+          className={cx(classes.root, className)}
+          {...restProps}
+          data-testid={dataTestId}
+        >
+          <IressMenuItem
+            className={cx(classes.activator, GlobalCSSClass.MenuGroupActivator)}
             data-testid={propagateTestid(dataTestId, 'activator')}
+            onClick={() => setActive(!active)}
           >
             {label}
-          </button>
-          <div className={classes.groupWrapper}>
-            <div className={classes.groupContent}>{children}</div>
+          </IressMenuItem>
+          <div className={cx(classes.wrapper, GlobalCSSClass.MenuGroup)}>
+            <div className={classes.content}>{children}</div>
           </div>
         </div>
         {divider && <IressMenuDivider />}
@@ -152,10 +177,12 @@ export const IressMenuGroup = <
           type={menu?.role === 'list' ? undefined : menu?.role}
           virtualFocus={popover?.isVirtualFocus}
           {...restProps}
+          className={cx(GlobalCSSClass.MenuGroup, className)}
           data-testid={propagateTestid(dataTestId, 'subdraw')}
           activator={
             <IressMenuItem
               append={append ?? <IressIcon name="keyboard_arrow_right" />}
+              className={GlobalCSSClass.MenuGroupActivator}
               data-testid={propagateTestid(dataTestId, 'subdraw__trigger')}
             >
               {label}
@@ -172,7 +199,11 @@ export const IressMenuGroup = <
   // Default variant - inline rendering
   return (
     <>
-      <IressMenuHeading data-testid={dataTestId} {...restProps}>
+      <IressMenuHeading
+        data-testid={dataTestId}
+        {...restProps}
+        className={cx(GlobalCSSClass.MenuGroup, className)}
+      >
         {label}
       </IressMenuHeading>
       {children}

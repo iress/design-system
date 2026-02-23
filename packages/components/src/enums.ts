@@ -37,6 +37,8 @@ export enum GlobalCSSClass {
   Label = 'ids-label',
   Link = 'ids-link',
   Menu = 'ids-menu',
+  MenuGroup = 'ids-menu__group',
+  MenuGroupActivator = 'ids-menu__group-activator',
   MenuHeading = 'ids-text--menu-heading',
   MenuDivider = 'ids-divider--menu',
   MenuItem = 'ids-menu-item',
