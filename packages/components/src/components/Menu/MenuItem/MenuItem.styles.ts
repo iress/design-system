@@ -272,6 +272,15 @@ export const menuItem = sva({
         },
       },
     },
+    {
+      variant: 'rail',
+      role: ['listitem', 'menuitem', 'option'],
+      css: {
+        root: {
+          focusable: 'colour.primary.onFill',
+        },
+      },
+    },
   ],
   defaultVariants: {
     layout: 'stack',

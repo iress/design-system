@@ -479,6 +479,7 @@ const MenuItem = <
           align={menu?.variant == 'rail' ? 'right' : undefined}
         >
           <Component
+            aria-label={childrenLabel}
             // eslint-disable-next-line react-hooks/refs -- we are forwarding the ref
             {...spreadUnlessUndefined(renderProps, nonStyleProps as object)}
             {...buttonProps}

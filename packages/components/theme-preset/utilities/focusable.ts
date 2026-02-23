@@ -15,6 +15,7 @@ export const focusable = defineUtility({
     'slider',
     'group',
     'inset',
+    'colour.primary.onFill',
   ],
   transform: (value) => {
     if (value === 'has-input') {
@@ -164,6 +165,15 @@ export const focusable = defineUtility({
         },
         '&:focus-visible::-moz-range-thumb': {
           boxShadow: `0 0 0 1.5px ${cssVars.colour.neutral[10]}, 0 0 0 3.5px ${cssVars.colour.globalInteractions.focusRing}`,
+        },
+      };
+    }
+
+    if (value === 'colour.primary.onFill') {
+      return {
+        '&:focus-visible': {
+          outline: 'none',
+          boxShadow: `0 0 0 1.5px ${cssVars.colour.primary.fill}, 0 0 0 3.5px ${cssVars.colour.primary.onFill}`,
         },
       };
     }

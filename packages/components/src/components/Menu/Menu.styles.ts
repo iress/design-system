@@ -60,7 +60,7 @@ export const menu = sva({
       rail: {
         root: {
           bg: 'colour.primary.fill',
-          px: 'spacing.1',
+          px: 'spacing.2',
           py: 'spacing.4',
           gap: 'spacing.2',
           width: '[fit-content]',
