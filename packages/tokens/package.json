@@ -59,7 +59,7 @@
     "remark-gfm": "^4.0.1",
     "rimraf": "^6.1.2",
     "rollup-plugin-tree-shakeable": "^2.0.0",
-    "storybook": "10.2.3",
+    "storybook": "10.2.7",
     "style-dictionary": "^5.2.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
