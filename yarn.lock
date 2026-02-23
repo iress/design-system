@@ -1887,7 +1887,7 @@ __metadata:
     "@mermaid-js/mermaid-cli": "npm:^11.12.0"
     "@storybook/addon-a11y": "npm:^10.2.0"
     "@storybook/addon-docs": "npm:^10.2.0"
-    "@storybook/addon-links": "npm:10.2.3"
+    "@storybook/addon-links": "npm:10.2.7"
     "@storybook/react-vite": "npm:^10.2.0"
     "@typescript-eslint/eslint-plugin": "npm:^8.54.0"
     "@typescript-eslint/parser": "npm:^8.54.0"
@@ -2982,18 +2982,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-links@npm:10.2.3":
-  version: 10.2.3
-  resolution: "@storybook/addon-links@npm:10.2.3"
+"@storybook/addon-links@npm:10.2.7":
+  version: 10.2.7
+  resolution: "@storybook/addon-links@npm:10.2.7"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    storybook: ^10.2.3
+    storybook: ^10.2.7
   peerDependenciesMeta:
     react:
       optional: true
-  checksum: 10c0/648efe8de027ad43c8015d70fed57d7268cf9cc5b8dcae402a8624f681f2fb081c5c4e19c5b333bd972b40f251f2010bd2c9430ecdd4df5adad0cf785e56fa61
+  checksum: 10c0/b5961687e2f8c9d318136ec2c27f36d84094f44ae86539ba00137cea5eab3ee3842c02a93b22bd2946428cda4e6bdd2423e4e1044b25e90ca9e186a7334adedb
   languageName: node
   linkType: hard
 
