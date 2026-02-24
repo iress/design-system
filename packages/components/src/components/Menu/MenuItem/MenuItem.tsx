@@ -38,7 +38,11 @@ import {
 } from '@/components/Popover';
 import { CompositeItem } from '@floating-ui/react';
 import { IressMenuDivider } from '../MenuDivider/MenuDivider';
-import type { IressCSSProps, IressTestProps } from '@/interfaces';
+import type {
+  IressCSSProps,
+  IressCustomiseSlot,
+  IressTestProps,
+} from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import { spreadUnlessUndefined } from '@/helpers/utility/spreadUnlessUndefined';
 import { IressRadioMark } from '@/components/RadioMark';
@@ -139,6 +143,12 @@ export type IressMenuItemProps<
     icon?: MaterialSymbol;
 
     /**
+     * Style overrides for the menu item wrapper, which is the element rendered at the top level and contains a `role` attribute for accessibility. This is useful for menu item variants that require additional structure, such as the side nav drawer items.
+     * This is only applicable for the `listitem` role, as other roles will have the `role` attribute applied directly to the menu item element itself.
+     */
+    listItemStyle?: IressCustomiseSlot;
+
+    /**
      * Emitted when the menu item is blurred.
      */
     onBlur?: FocusEventHandler<ButtonInstance<C, THref>>;
@@ -197,6 +207,7 @@ const MenuItem = <
     divider,
     element,
     icon,
+    listItemStyle,
     onBlur,
     onClick,
     onKeyDown,
@@ -501,11 +512,15 @@ const MenuItem = <
 
   const node = useMemo(() => {
     if (role === 'listitem') {
-      return <span role="listitem">{rendered}</span>;
+      return (
+        <span role="listitem" {...listItemStyle}>
+          {rendered}
+        </span>
+      );
     }
 
     return rendered;
-  }, [rendered, role]);
+  }, [listItemStyle, rendered, role]);
 
   return (
     <>

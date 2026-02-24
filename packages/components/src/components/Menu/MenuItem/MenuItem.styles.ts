@@ -104,8 +104,7 @@ export const menuItem = sva({
             content: 'counter(menu-step, decimal-leading-zero)',
             aspectRatio: '1',
             borderRadius: '50%',
-            border: '[2px solid]',
-            borderColor: 'colour.neutral.50',
+            border: '[2px solid currentColor]',
             width: '[2em]',
             height: '[2em]',
             display: 'inline-flex',
@@ -181,9 +180,16 @@ export const menuItem = sva({
           color: 'colour.neutral.70',
           textStyle: 'typography.heading.4',
           px: 'spacing.4',
+          borderTop: 'table',
+
+          _hover: {
+            bg: 'colour.neutral.30',
+            color: 'colour.primary.text',
+          },
 
           '.ids-menu__group &': {
             textStyle: 'typography.body.md.regular',
+            borderTop: '[none]',
           },
         },
       },

@@ -340,6 +340,7 @@ export const IressMenu = <
     fluid,
     layout,
     noWrap,
+    numbered,
     insidePopover: !!popover,
     variant,
   });

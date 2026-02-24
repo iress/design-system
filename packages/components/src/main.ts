@@ -59,6 +59,7 @@ export * from './patterns/Form';
 export * from './patterns/Loading';
 export * from './patterns/Shadow';
 export * from './patterns/ContextualMenu';
+export * from './patterns/SideNav';
 
 export * from './constants';
 export * from './enums';

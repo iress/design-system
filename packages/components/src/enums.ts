@@ -67,6 +67,7 @@ export enum GlobalCSSClass {
   SelectHeading = 'ids-select-heading',
   SelectClearButton = 'ids-select-clear-button',
   SelectBody = 'ids-select-body',
+  SideNav = 'ids-side-nav',
   Skeleton = 'ids-skeleton',
   SkipLink = 'ids-skip-link',
   Slideout = 'ids-slideout',

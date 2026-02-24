@@ -120,24 +120,6 @@ export const IressMenuGroup = <
   });
 
   // Side variant - numbered header with expandable drawer
-  if (variant == 'rail') {
-    return (
-      <>
-        <IressMenuHeading
-          data-testid={dataTestId}
-          {...restProps}
-          className={cx(GlobalCSSClass.MenuGroup, className)}
-          srOnly
-        >
-          {label}
-        </IressMenuHeading>
-        {children}
-        {divider && <IressMenuDivider />}
-      </>
-    );
-  }
-
-  // Side variant - numbered header with expandable drawer
   if (variant == 'side') {
     const classes = menuGroup({
       numbered: menu?.numbered,
@@ -210,6 +192,7 @@ export const IressMenuGroup = <
         data-testid={dataTestId}
         {...restProps}
         className={cx(GlobalCSSClass.MenuGroup, className)}
+        srOnly={variant == 'rail' ? true : undefined}
       >
         {label}
       </IressMenuHeading>

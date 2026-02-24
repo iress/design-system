@@ -4,7 +4,6 @@ export const menuGroup = sva({
   slots: ['root', 'activator', 'content', 'wrapper'],
   base: {
     root: {
-      borderTop: 'table',
       position: 'relative',
 
       _before: {
@@ -65,8 +64,7 @@ export const menuGroup = sva({
             content: 'counter(menu-step, decimal-leading-zero)',
             aspectRatio: '1',
             borderRadius: '50%',
-            border: '[2px solid]',
-            borderColor: 'colour.neutral.50',
+            border: '[2px solid currentColor]',
             width: '[2em]',
             height: '[2em]',
             display: 'inline-flex',
@@ -88,10 +86,6 @@ export const menuGroup = sva({
         activator: {
           color: 'colour.primary.text',
           bg: 'colour.neutral.20',
-
-          _before: {
-            borderColor: '[currentColor]',
-          },
         },
 
         wrapper: {

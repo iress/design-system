@@ -55,6 +55,13 @@ export const menu = sva({
         },
       },
     },
+    numbered: {
+      true: {
+        root: {
+          counterReset: 'menu-step',
+        },
+      },
+    },
     variant: {
       side: {},
       rail: {
