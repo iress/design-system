@@ -71,6 +71,18 @@ describe('IressSideNav', () => {
       expect(screen.getByTestId('sidenav__panel')).toBeInTheDocument();
       expect(screen.getByTestId('sidenav__toggle')).toBeInTheDocument();
     });
+
+    it('sets --iress-width CSS custom property from the width prop', () => {
+      renderSideNav({ width: '300px' });
+      const nav = screen.getByRole('navigation');
+      expect(nav.style.getPropertyValue('--iress-width')).toBe('300px');
+    });
+
+    it('converts numeric width to pixels', () => {
+      renderSideNav({ width: 400 });
+      const nav = screen.getByRole('navigation');
+      expect(nav.style.getPropertyValue('--iress-width')).toBe('400px');
+    });
   });
 
   // -------------------------------------------------------------------------
@@ -299,7 +311,7 @@ describe('IressSideNav', () => {
   // -------------------------------------------------------------------------
 
   describe('numbered', () => {
-    it('passes the numbered prop to the side menu', () => {
+    it('forwards the numbered prop to the side menu', () => {
       renderSideNav({
         activeItemKey: 'hubs',
         defaultExpanded: true,
@@ -308,6 +320,29 @@ describe('IressSideNav', () => {
 
       const sideMenu = screen.getByTestId('sidenav__side-menu');
       expect(sideMenu).toBeInTheDocument();
+    });
+
+    it('does not render numbered class when numbered is false', () => {
+      renderSideNav({
+        activeItemKey: 'hubs',
+        defaultExpanded: true,
+        numbered: false,
+      });
+
+      const sideMenuWithoutNumbered = screen.getByTestId('sidenav__side-menu');
+      renderSideNav({
+        activeItemKey: 'hubs',
+        defaultExpanded: true,
+        numbered: true,
+      });
+
+      const sideMenuWithNumbered =
+        screen.getAllByTestId('sidenav__side-menu')[1];
+
+      // The class lists should differ when numbered is toggled
+      expect(sideMenuWithoutNumbered.className).not.toBe(
+        sideMenuWithNumbered.className,
+      );
     });
   });
 
@@ -371,6 +406,61 @@ describe('IressSideNav', () => {
       const childItem = screen.getByText('Child Item');
       await user.click(childItem);
       expect(onClick).toHaveBeenCalled();
+    });
+
+    it('forwards the element prop to rail items for custom routing', () => {
+      const CustomLink = vi.fn(({ children, ...props }) => (
+        <a {...props}>{children}</a>
+      ));
+
+      const items: SideNavItem[] = [
+        {
+          key: 'test',
+          icon: 'hub',
+          label: 'Test Item',
+          href: '/test',
+          element: CustomLink,
+        },
+      ];
+
+      render(<IressSideNav items={items} data-testid="sidenav" />);
+
+      expect(CustomLink).toHaveBeenCalled();
+    });
+
+    it('forwards the element prop to sub-items for custom routing', () => {
+      const CustomLink = vi.fn(({ children, ...props }) => (
+        <a {...props}>{children}</a>
+      ));
+
+      const items: SideNavItem[] = [
+        {
+          key: 'test',
+          icon: 'hub',
+          label: 'Test Section',
+          children: [
+            {
+              key: 'child',
+              label: 'Child Link',
+              href: '/test/child',
+              element: CustomLink,
+            },
+          ],
+        },
+      ];
+
+      render(
+        <IressSideNav
+          items={items}
+          activeItemKey="test"
+          defaultExpanded={true}
+          data-testid="sidenav"
+        />,
+      );
+
+      expect(CustomLink).toHaveBeenCalled();
+      const childLink = screen.getByText('Child Link').closest('a');
+      expect(childLink).toHaveAttribute('href', '/test/child');
     });
   });
 

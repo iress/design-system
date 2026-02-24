@@ -65,6 +65,9 @@ export interface SideNavSideMenuGroup {
 
 /**
  * A panel content entry — either a flat item or a group of items.
+ *
+ * When mixing flat items and groups in a single array, ensure all `key` values
+ * are unique across both types to avoid React reconciliation issues.
  */
 export type SideNavPanelItem = SideNavSubItem | SideNavSideMenuGroup;
 
@@ -103,8 +106,6 @@ export interface SideNavItem {
   divider?: boolean;
 }
 
-/**
- * Props for the IressSideNav component.
 /**
  * Common props shared by all IressSideNav configurations.
  */

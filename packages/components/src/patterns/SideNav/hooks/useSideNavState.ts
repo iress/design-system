@@ -81,7 +81,9 @@ export const useSideNavState = ({
   } = useControlledState<boolean>({
     component: 'IressSideNav',
     defaultValue: defaultExpanded,
-    onChange: onExpandedChange as (selected?: boolean) => void,
+    onChange: onExpandedChange
+      ? (value?: boolean) => onExpandedChange(value ?? false)
+      : undefined,
     propName: 'expanded',
     value: expanded,
   });
