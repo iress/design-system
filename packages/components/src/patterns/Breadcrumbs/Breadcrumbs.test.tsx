@@ -101,7 +101,7 @@ describe('IressBreadcrumbs', () => {
       expect(listItems.length).toBeGreaterThan(0);
 
       // First n-1 items should have the separator class
-      listItems.forEach((item, index) => {
+      listItems.forEach((item) => {
         const hasAfterPseudo = item.className.includes(
           '[&:not(:last-child):after]',
         );

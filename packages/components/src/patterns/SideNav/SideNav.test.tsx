@@ -17,9 +17,12 @@ import type { SideNavItem } from './SideNav';
 const renderSideNav = (props: Partial<IressSideNavProps> = {}) =>
   render(
     <IressSideNav
-      items={MOCK_SIDE_NAV_ITEMS}
-      data-testid="sidenav"
-      {...props}
+      {...({
+        items: MOCK_SIDE_NAV_ITEMS,
+        activeItemKey: 'hubs',
+        'data-testid': 'sidenav',
+        ...props,
+      } as IressSideNavProps)}
     />,
   );
 
@@ -158,6 +161,7 @@ describe('IressSideNav', () => {
       const { rerender } = render(
         <IressSideNav
           items={MOCK_SIDE_NAV_ITEMS}
+          activeItemKey="hubs"
           expanded={false}
           expandLabel="Open menu"
           collapseLabel="Close menu"
@@ -373,7 +377,13 @@ describe('IressSideNav', () => {
         },
       ];
 
-      render(<IressSideNav items={items} data-testid="sidenav" />);
+      render(
+        <IressSideNav
+          items={items}
+          activeItemKey="test"
+          data-testid="sidenav"
+        />,
+      );
 
       const railItem = screen.getByTestId('sidenav__rail-item-test');
       await user.click(railItem);
@@ -423,7 +433,13 @@ describe('IressSideNav', () => {
         },
       ];
 
-      render(<IressSideNav items={items} data-testid="sidenav" />);
+      render(
+        <IressSideNav
+          items={items}
+          activeItemKey="test"
+          data-testid="sidenav"
+        />,
+      );
 
       expect(CustomLink).toHaveBeenCalled();
     });
@@ -568,6 +584,7 @@ describe('IressSideNav', () => {
       const { rerender } = render(
         <IressSideNav
           items={MOCK_SIDE_NAV_ITEMS}
+          activeItemKey="hubs"
           expanded={false}
           data-testid="sidenav"
         />,

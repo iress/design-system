@@ -11,7 +11,7 @@ import userEvent from '@testing-library/user-event';
 import { IressSelect, SelectRef } from './Select';
 import { toArray } from '@helpers/formatting/toArray';
 import { button } from '../Button';
-import { menu } from '../Menu';
+import { menuItem } from '../Menu';
 import { createRef } from 'react';
 import { IressLabel } from '../Label';
 
@@ -117,7 +117,9 @@ describe('IressSelect', () => {
 
         // first option should be highlighted
         // TODO: this should be aria-activedescendant, but floating ui is not setting it on first load when autoHighlight is true, so using the class instead
-        expect(options[0]).toHaveClass(menu({ isActiveInPopover: true }).item!);
+        expect(options[0]).toHaveClass(
+          menuItem({ isActiveInPopover: true }).root!,
+        );
       });
 
       it('does not highlight first option if set to false', async () => {
