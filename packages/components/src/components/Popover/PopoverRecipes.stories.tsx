@@ -75,7 +75,6 @@ export const WithMenu: Story = {
               <MenuInPopoverRoleDescription role={role}>
                 {role === 'listbox' && (
                   <IressToggle
-                    mb="md"
                     checked={multiSelect}
                     onChange={() => setMultiSelect(!multiSelect)}
                   >

@@ -21,19 +21,15 @@ import {
   type RefAttributes,
 } from 'react';
 import { useMenuItemRole } from './hooks/useMenuItemRole';
-import {
-  type ButtonElement,
-  type ButtonInstance,
-  type ButtonRef,
-} from '../../Button';
+import type { ButtonElement, ButtonInstance, ButtonRef } from '../../Button';
 import { idsLogger } from '@helpers/utility/idsLogger';
-import { type FormControlValue } from '@/types';
+import type { FormControlValue } from '@/types';
 import { MenuContext } from '../Menu';
 import { IressCheckboxMark } from '@/components/CheckboxMark';
 import { propagateTestid } from '@/helpers/utility/propagateTestid';
 import { css, cx } from '@/styled-system/css';
 import { splitCssProps } from '@/styled-system/jsx';
-import { menu as menuStyles } from '../Menu.styles';
+import { menuItem } from './MenuItem.styles';
 import {
   type PopoverItemHookReturn,
   type PopoverVirtualNode,
@@ -42,11 +38,17 @@ import {
 } from '@/components/Popover';
 import { CompositeItem } from '@floating-ui/react';
 import { IressMenuDivider } from '../MenuDivider/MenuDivider';
-import { type IressCSSProps, type IressTestProps } from '@/interfaces';
+import type {
+  IressCSSProps,
+  IressCustomiseSlot,
+  IressTestProps,
+} from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import { spreadUnlessUndefined } from '@/helpers/utility/spreadUnlessUndefined';
 import { IressRadioMark } from '@/components/RadioMark';
+import type { MaterialSymbol } from 'material-symbols';
 import { IressIcon } from '@/components/Icon';
+import { IressTooltip } from '@/components/Tooltip';
 
 export interface MenuItemRenderProps<
   C extends ElementType | undefined = undefined,
@@ -136,6 +138,17 @@ export type IressMenuItemProps<
     href?: THref;
 
     /**
+     * The icon to be displayed in the button. If provided, the icon will be displayed and the `children` will be used as screen reader text (although you can explicitly override this with `aria-label`)
+     */
+    icon?: MaterialSymbol;
+
+    /**
+     * Style overrides for the menu item wrapper, which is the element rendered at the top level and contains a `role` attribute for accessibility. This is useful for menu item variants that require additional structure, such as the side nav drawer items.
+     * This is only applicable for the `listitem` role, as other roles will have the `role` attribute applied directly to the menu item element itself.
+     */
+    listItemStyle?: IressCustomiseSlot;
+
+    /**
      * Emitted when the menu item is blurred.
      */
     onBlur?: FocusEventHandler<ButtonInstance<C, THref>>;
@@ -186,13 +199,15 @@ const MenuItem = <
   THref extends string | undefined = undefined,
 >(
   {
-    append: appendProp,
+    append,
     canToggle,
     children,
     className,
     'data-testid': dataTestId,
     divider,
     element,
+    icon,
+    listItemStyle,
     onBlur,
     onClick,
     onKeyDown,
@@ -336,22 +351,31 @@ const MenuItem = <
   const classes = useMemo(
     // eslint-disable-next-line react-hooks/refs -- popover uses elementRef.current; exhaustive deps warning is intentionally suppressed
     () =>
-      menuStyles({
+      menuItem({
         active: !!popover?.isActiveActivator(elementRef.current as HTMLElement),
-        hasAppendOrPrepend: !!(appendProp ?? prependProp ?? menu?.multiSelect),
+        hasAppendOrPrepend: !!(
+          append ??
+          prependProp ??
+          menu?.multiSelect ??
+          menu?.numbered
+        ),
         isActiveInPopover,
         layout: menu?.layout,
         multiSelect: !!menu?.multiSelect,
         noWrap: menu?.noWrap,
+        numbered: menu?.numbered,
         role,
         selected,
+        variant: menu?.variant,
       }),
     [
-      appendProp,
+      append,
       isActiveInPopover,
       menu?.layout,
       menu?.multiSelect,
       menu?.noWrap,
+      menu?.numbered,
+      menu?.variant,
       popover,
       prependProp,
       role,
@@ -370,7 +394,7 @@ const MenuItem = <
       );
     }
 
-    if (menu?.variant === 'radio') {
+    if (menu?.variant == 'radio') {
       return (
         <IressRadioMark
           checked={selected}
@@ -390,14 +414,6 @@ const MenuItem = <
     selected,
   ]);
 
-  const append = useMemo(() => {
-    if (menu?.variant === 'subdraw') {
-      return <IressIcon name="keyboard_arrow_right" />;
-    }
-
-    return appendProp;
-  }, [menu?.variant, appendProp]);
-
   const [styleProps, nonStyleProps] = useMemo(
     () => splitCssProps(restProps),
     [restProps],
@@ -409,13 +425,17 @@ const MenuItem = <
       children: (
         <>
           {prepend}
-          {children && <span className={classes.contents}>{children}</span>}
+          {(icon ?? children) && (
+            <span className={classes.contents}>
+              {icon ? <IressIcon name={icon} /> : children}
+            </span>
+          )}
           {append && <span className={classes.append}>{append}</span>}
         </>
       ),
       className: cx(
         className,
-        classes.item,
+        classes.root,
         css(styleProps),
         GlobalCSSClass.MenuItem,
       ),
@@ -442,10 +462,11 @@ const MenuItem = <
       className,
       classes.append,
       classes.contents,
-      classes.item,
+      classes.root,
       dataTestId,
       handleClick,
       handleKeyDown,
+      icon,
       menu?.hasArrowKeyNav,
       menu?.isComposite,
       popoverItem,
@@ -458,6 +479,26 @@ const MenuItem = <
   const rendered = useMemo(() => {
     const Component = element ?? (nonStyleProps.href ? 'a' : 'button');
     const buttonProps = Component === 'button' ? { type: 'button' } : {};
+
+    if (icon && children) {
+      // eslint-disable-next-line @typescript-eslint/no-base-to-string
+      const childrenLabel = String(children);
+
+      return (
+        <IressTooltip
+          tooltipText={childrenLabel}
+          align={menu?.variant == 'rail' ? 'right' : undefined}
+        >
+          <Component
+            aria-label={childrenLabel}
+            // eslint-disable-next-line react-hooks/refs -- we are forwarding the ref
+            {...spreadUnlessUndefined(renderProps, nonStyleProps as object)}
+            {...buttonProps}
+          />
+        </IressTooltip>
+      );
+    }
+
     return (
       <Component
         // eslint-disable-next-line react-hooks/refs -- we are forwarding the ref
@@ -465,17 +506,21 @@ const MenuItem = <
         {...buttonProps}
       />
     );
-  }, [element, nonStyleProps, renderProps]);
+  }, [children, element, icon, menu?.variant, nonStyleProps, renderProps]);
 
   useImperativeHandle(ref, () => elementRef.current!);
 
   const node = useMemo(() => {
     if (role === 'listitem') {
-      return <span role="listitem">{rendered}</span>;
+      return (
+        <span role="listitem" {...listItemStyle}>
+          {rendered}
+        </span>
+      );
     }
 
     return rendered;
-  }, [rendered, role]);
+  }, [listItemStyle, rendered, role]);
 
   return (
     <>

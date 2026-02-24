@@ -10,6 +10,7 @@ import {
 } from 'react';
 import { GlobalCSSClass } from '@/enums';
 import { type IressCSSProps, type IressTestProps } from '@/interfaces';
+import { IressText } from '../Text';
 
 export interface InternalCardProps<E extends ElementType = 'div'>
   extends IressCSSProps, IressTestProps {
@@ -110,7 +111,7 @@ export const IressCard = <E extends ElementType = 'div'>({
 
   const testId = nonStyleProps['data-testid'];
 
-  const StyledElement = useMemo(() => element ?? 'div', [element]);
+  const StyledElement = useMemo(() => element ?? IressText, [element]);
 
   return (
     <StyledElement

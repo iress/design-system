@@ -15,6 +15,7 @@ import {
   flip,
   type Middleware,
   offset,
+  type OffsetOptions,
   type OpenChangeReason,
   shift,
   size,
@@ -32,7 +33,6 @@ import { focusableElements } from '@/helpers/dom/focusableElements';
 import { type PopoverAriaHookReturn, usePopoverAria } from './usePopoverAria';
 import { closestCrossShadow } from '@/helpers/dom/closestCrossShadow';
 import { GlobalCSSClass } from '@/enums';
-import type { OffsetOptions } from '@floating-ui/core';
 
 const POPOVER_USE_MAX_HEIGHT = 200;
 
@@ -128,6 +128,13 @@ export interface FloatingPopoverHookProps {
    * Whether the popover should use virtual focus to manage the focus state of the items in the popover. When true, the popover will keep the focus on the reference element and use aria-activedescendant to indicate which item is active, allowing for more flexible keyboard navigation patterns.
    */
   virtualFocus?: boolean;
+
+  /**
+   * Whether this popover is nested inside another popover (e.g. a subdraw menu).
+   * When true, the activator opens with ArrowRight instead of ArrowDown,
+   * and ArrowLeft closes the submenu from within.
+   */
+  nested?: boolean;
 }
 
 export interface FloatingPopoverHookReturn extends PopoverAriaHookReturn {
@@ -188,6 +195,12 @@ export interface FloatingPopoverHookReturn extends PopoverAriaHookReturn {
    * It is used by other components to manage the aria attributes and keyboard navigation of the items.
    */
   list: RefObject<(HTMLElement | null)[]>;
+
+  /**
+   * Whether this popover is nested inside another popover (e.g. a subdraw menu).
+   * When true, the activator uses ArrowRight to open and ArrowLeft closes from within.
+   */
+  nested: boolean;
 
   /**
    * Resets the active index of the popover items, either to the `focusStartIndex` or null
@@ -258,6 +271,7 @@ export const useFloatingPopover = ({
   focusStartIndex,
   hasInputActivator,
   matchActivatorWidth,
+  nested,
   offset: offsetValue = 5,
   onActivated,
   onDeactivated,
@@ -406,6 +420,7 @@ export const useFloatingPopover = ({
       isControlled,
       isVirtualFocus: !!virtualFocus,
       list,
+      nested: !!nested,
       resetActiveIndex,
       setActiveIndex,
       setShow,
@@ -426,6 +441,7 @@ export const useFloatingPopover = ({
       isActiveActivator,
       isControlled,
       list,
+      nested,
       resetActiveIndex,
       setActiveIndex,
       setShow,

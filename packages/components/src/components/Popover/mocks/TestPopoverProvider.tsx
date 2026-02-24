@@ -86,6 +86,7 @@ export const getMockPopoverContext = (
     list: contextProps.list ?? {
       current: [],
     },
+    nested: false,
     resetActiveIndex: contextProps.resetActiveIndex ?? vitest.fn(),
     setActiveIndex: contextProps.setActiveIndex ?? vitest.fn(),
     setHasInnerRole: contextProps.setHasInnerRole ?? vitest.fn(),

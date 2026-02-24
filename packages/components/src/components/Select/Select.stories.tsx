@@ -217,3 +217,103 @@ export const Disabled: Story = {
     disabled: true,
   },
 };
+
+export const GroupedOptions: Story = {
+  args: {
+    placeholder: 'Select a food',
+    options: [
+      {
+        label: 'Fruits',
+        children: [
+          { label: 'Apple', value: 'apple' },
+          { label: 'Banana', value: 'banana' },
+          { label: 'Orange', value: 'orange' },
+          { label: 'Strawberry', value: 'strawberry' },
+        ],
+      },
+      {
+        label: 'Vegetables',
+        children: [
+          { label: 'Carrot', value: 'carrot' },
+          { label: 'Broccoli', value: 'broccoli' },
+          { label: 'Spinach', value: 'spinach' },
+        ],
+      },
+      {
+        label: 'Grains',
+        children: [
+          { label: 'Rice', value: 'rice' },
+          { label: 'Wheat', value: 'wheat' },
+          { label: 'Oats', value: 'oats' },
+        ],
+      },
+    ],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `Use the \`children\` property in \`LabelValueMeta\` to create grouped options. 
+        Groups provide visual organization for related options. The group label is non-selectable, 
+        and only the child items can be selected.`,
+      },
+    },
+  },
+};
+
+export const GroupedMultiSelect: Story = {
+  args: {
+    ...GroupedOptions.args,
+    multiSelect: true,
+    placeholder: 'Select multiple foods',
+  },
+};
+
+export const GroupedWithSearch: Story = {
+  args: {
+    ...GroupedOptions.args,
+    options: async (query: string) => {
+      // Simulate async search with grouped results
+      const allOptions = [
+        {
+          label: 'Fruits',
+          children: [
+            { label: 'Apple', value: 'apple' },
+            { label: 'Banana', value: 'banana' },
+            { label: 'Orange', value: 'orange' },
+            { label: 'Strawberry', value: 'strawberry' },
+          ],
+        },
+        {
+          label: 'Vegetables',
+          children: [
+            { label: 'Carrot', value: 'carrot' },
+            { label: 'Broccoli', value: 'broccoli' },
+            { label: 'Spinach', value: 'spinach' },
+          ],
+        },
+      ];
+
+      if (!query) return Promise.resolve(allOptions);
+
+      // Filter groups and their children based on query
+      return Promise.resolve(
+        allOptions
+          .map((group) => ({
+            ...group,
+            children: group.children.filter((item) =>
+              item.label.toLowerCase().includes(query.toLowerCase()),
+            ),
+          }))
+          .filter((group) => group.children.length > 0),
+      );
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `When using async options with groups, filter the children based on the search query 
+        and return only groups that have matching children.`,
+      },
+    },
+  },
+};

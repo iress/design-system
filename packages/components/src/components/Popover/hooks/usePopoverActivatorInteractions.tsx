@@ -94,7 +94,8 @@ const handleKeyDownWhenHidden = (
   e: KeyboardEvent<HTMLElement>,
   popover?: FloatingPopoverHookReturn,
 ) => {
-  if (e.key === 'ArrowDown') {
+  const openKey = popover?.nested ? 'ArrowRight' : 'ArrowDown';
+  if (e.key === openKey) {
     popover?.setShowWithReason(true, e.nativeEvent, 'focus');
   }
 };

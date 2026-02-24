@@ -26,7 +26,6 @@ import {
 } from './hooks/usePopoverImperativeHandle';
 import { popover } from './Popover.styles';
 import { type IressCustomiseSlot } from '@/interfaces';
-import { NestedPopoverActivator } from './components/NestedPopoverActivator';
 import {
   FloatingPopoverContext,
   type FloatingPopoverHookReturn,
@@ -144,6 +143,12 @@ export interface IressPopoverProps extends IressStyledProps {
    * @default false
    */
   virtualFocus?: boolean;
+
+  /**
+   * Whether this popover uses nested navigation (ArrowRight to open, ArrowLeft to close).
+   * When not set, this is auto-detected based on whether the popover is inside another popover.
+   */
+  nested?: boolean;
 }
 
 const Popover = (
@@ -167,11 +172,13 @@ const Popover = (
     type,
     show,
     virtualFocus,
+    nested: nestedProp,
     ...restProps
   }: IressPopoverProps,
   ref: ForwardedRef<PopoverRef>,
 ) => {
   const element = useRef<HTMLDivElement>(null);
+  const parentPopover = useContext(FloatingPopoverContext);
   const matchActivatorWidth =
     matchActivatorWidthProp && displayMode === 'overlay';
   const classes = popover({ fluid, matchActivatorWidth });
@@ -181,6 +188,7 @@ const Popover = (
     defaultShow,
     focusStartIndex,
     matchActivatorWidth,
+    nested: nestedProp ?? !!parentPopover,
     offset,
     onActivated,
     onDeactivated,
@@ -204,16 +212,12 @@ const Popover = (
         )}
         ref={element}
       >
-        <NestedPopoverActivator
-          parentPopover={useContext(FloatingPopoverContext)}
+        <PopoverActivator
+          className={cx(classes.activator, GlobalCSSClass.PopoverActivator)}
+          data-testid={propagateTestid(restProps['data-testid'], 'activator')}
         >
-          <PopoverActivator
-            className={cx(classes.activator, GlobalCSSClass.PopoverActivator)}
-            data-testid={propagateTestid(restProps['data-testid'], 'activator')}
-          >
-            {activator}
-          </PopoverActivator>
-        </NestedPopoverActivator>
+          {activator}
+        </PopoverActivator>
         <PopoverContent
           {...contentStyle}
           className={cx(

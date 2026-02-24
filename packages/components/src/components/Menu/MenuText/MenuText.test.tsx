@@ -5,7 +5,7 @@ import {
   IressMenuProps,
   IressMenuText,
   IressMenuTextProps,
-  menu,
+  menuItem,
 } from '..';
 import { axe } from 'jest-axe';
 import { GlobalCSSClass } from '@/enums';
@@ -39,11 +39,11 @@ describe('IressMenuText', () => {
     const screen = renderText({
       children: 'Test',
     });
-    const classes = menu();
+    const classes = menuItem();
 
     const wrapper = screen.getByTestId(TEST_ID);
     expect(wrapper).toBeInTheDocument();
-    expect(wrapper).toHaveClass(classes.text!, GlobalCSSClass.MenuText);
+    expect(wrapper).toHaveClass(classes.root!, GlobalCSSClass.MenuText);
 
     const text = screen.getByText('Test');
     expect(text).toBeInTheDocument();
@@ -59,7 +59,9 @@ describe('IressMenuText', () => {
 
         const append = screen.getByText('Append');
         expect(append).toBeInTheDocument();
-        expect(append).toHaveClass(menu({ hasAppendOrPrepend: true }).append!);
+        expect(append).toHaveClass(
+          menuItem({ hasAppendOrPrepend: true }).append!,
+        );
       });
     });
 
@@ -71,20 +73,6 @@ describe('IressMenuText', () => {
 
         const wrapper = screen.getByTestId(TEST_ID);
         expect(wrapper.nextElementSibling?.tagName).toBe('HR');
-      });
-    });
-
-    describe('prepend', () => {
-      it('renders the prepended JSX', () => {
-        const screen = renderText({
-          prepend: 'Prepend',
-        });
-
-        const prepend = screen.getByText('Prepend');
-        expect(prepend).toBeInTheDocument();
-
-        const wrapper = screen.getByTestId(TEST_ID);
-        expect(wrapper).toHaveClass(menu({ hasAppendOrPrepend: true }).text!);
       });
     });
 

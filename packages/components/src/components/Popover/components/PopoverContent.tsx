@@ -9,7 +9,7 @@ import {
 } from '@floating-ui/react';
 import { composePopoverFloatingProps } from '../helpers/composeFloatingProps';
 import { type FloatingUIContainer, type IressStyledProps } from '@/types';
-import { useEffect } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { styled } from '@/styled-system/jsx';
 import { usePopover } from '../hooks/usePopover';
 
@@ -39,6 +39,7 @@ const PopoverContentInner = ({
   ...restProps
 }: Omit<PopoverContentProps, 'container'>) => {
   const popover = usePopover();
+  const returnFocusRef = useRef<HTMLElement | null>(null);
 
   // Fix accessibility issue with floating-ui focus guards
   // See: https://github.com/floating-ui/floating-ui/issues/2823
@@ -88,6 +89,17 @@ const PopoverContentInner = ({
     }
   }, [popover?.show]);
 
+  useEffect(() => {
+    if (popover?.show && popover.api.elements.reference) {
+      returnFocusRef.current = popover.getFocusableActivator() ?? null;
+    }
+  }, [popover?.show, popover]);
+
+  const returnFocus = useMemo(
+    () => (virtualFocus ? false : returnFocusRef),
+    [virtualFocus],
+  );
+
   if (!popover) return null;
 
   const floatingProps = composePopoverFloatingProps(
@@ -104,7 +116,7 @@ const PopoverContentInner = ({
         initialFocus={virtualFocus ? -1 : 0}
         modal={false}
         disabled={!popover?.show}
-        returnFocus={!virtualFocus}
+        returnFocus={returnFocus}
       >
         <styled.div
           {...restProps}

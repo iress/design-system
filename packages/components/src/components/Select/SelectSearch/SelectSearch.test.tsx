@@ -153,7 +153,7 @@ describe('IressSelectSearch', () => {
       await waitFor(() => expect(parentActivator).toHaveFocus());
 
       // input should be hidden (popover is closed)
-      expect(input).not.toBeVisible();
+      await waitFor(() => expect(input).not.toBeVisible());
     });
   });
 

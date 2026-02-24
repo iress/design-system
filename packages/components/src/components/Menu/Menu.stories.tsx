@@ -10,7 +10,7 @@ import { IressToggle } from '../Toggle';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 import { stylingProps } from '@theme-preset/storybookHelpers';
 
-type Story = StoryObj<typeof IressMenu>;
+type Story = StoryObj<IressMenuProps>;
 
 export default {
   title: 'Components/Menu',
@@ -185,7 +185,7 @@ export const ListboxRole: Story = {
 
 export const Variants: Story = {
   args: {
-    children: 'basic',
+    children: 'grouped',
     defaultSelected: '5',
   },
   argTypes: {
@@ -194,7 +194,14 @@ export const Variants: Story = {
   render: (args) => (
     <IressStack gap="lg">
       <IressMenu {...args} variant="radio" />
-      <IressMenu {...args} variant="subdraw" />
+      <IressMenu {...args} variant="subdraw" maxWidth="input.12" />
+      <IressMenu {...args} variant="side" maxWidth="input.12" />
+      <IressMenu {...args} variant="side" maxWidth="input.12" numbered />
+      <IressMenu
+        {...args}
+        children={MENU_CHILDREN_OPTIONS.groupedIcons}
+        variant="rail"
+      />
     </IressStack>
   ),
 };

@@ -73,7 +73,7 @@ export const IressTooltip = ({
   });
   const hover = useHover(context, {
     move: false,
-    delay: { open: delay, close: 500 },
+    restMs: delay,
   });
   const focus = useFocus(context);
   const dismiss = useDismiss(context);

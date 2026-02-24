@@ -1,4 +1,4 @@
-import { type ForwardedRef, forwardRef, useContext } from 'react';
+import { type ForwardedRef, forwardRef } from 'react';
 
 import { GlobalCSSClass } from '@/enums';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
@@ -16,7 +16,6 @@ import {
 import { styled } from '@/styled-system/jsx';
 import { cx } from '@/styled-system/css';
 import { popover } from '../Popover.styles';
-import { NestedPopoverActivator } from '../components/NestedPopoverActivator';
 import {
   FloatingPopoverContext,
   useFloatingPopover,
@@ -102,17 +101,13 @@ const InputPopover = (
           GlobalCSSClass.InputPopover,
         )}
       >
-        <NestedPopoverActivator
-          parentPopover={useContext(FloatingPopoverContext)}
+        <InputPopoverActivator
+          className={cx(classes.activator, GlobalCSSClass.PopoverActivator)}
+          data-testid={propagateTestid(restProps['data-testid'], 'activator')}
+          minLength={minLength}
         >
-          <InputPopoverActivator
-            className={cx(classes.activator, GlobalCSSClass.PopoverActivator)}
-            data-testid={propagateTestid(restProps['data-testid'], 'activator')}
-            minLength={minLength}
-          >
-            {activator}
-          </InputPopoverActivator>
-        </NestedPopoverActivator>
+          {activator}
+        </InputPopoverActivator>
         <PopoverContent
           className={cx(
             contentClassName,

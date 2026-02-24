@@ -146,3 +146,42 @@ The `variant` prop can be used to change the style of the menu to suit different
 - `radio` - for use when you want the menu item to have a radio mark style indicator (only supports single select listbox role)
 
 <ComponentExample of={ComponentStories.Variants} />
+
+### Menu Groups
+
+`IressMenuGroup` can be used to group related menu items together under a common label.
+
+#### Default (Inline)
+
+By default, `IressMenuGroup` renders the label as a non-focusable heading with the children displayed inline below it.
+
+```tsx
+<IressMenu>
+  <IressMenuGroup label="Recent Files">
+    <IressMenuItem>Document.pdf</IressMenuItem>
+    <IressMenuItem>Spreadsheet.xlsx</IressMenuItem>
+  </IressMenuGroup>
+</IressMenu>
+```
+
+#### Subdraw Variant
+
+When `variant="subdraw"` is set, the group label becomes a clickable menu item that opens a fly-over submenu containing the group's children. This is useful for organizing large menus into collapsible sections.
+
+```tsx
+<IressMenu>
+  <IressMenuGroup label="More Options" variant="subdraw">
+    <IressMenuItem>Option 1</IressMenuItem>
+    <IressMenuItem>Option 2</IressMenuItem>
+    <IressMenuItem>Option 3</IressMenuItem>
+  </IressMenuGroup>
+</IressMenu>
+```
+
+The subdraw variant:
+
+- Renders the label as a `IressMenuItem` with a chevron icon
+- Opens a popover submenu when clicked
+- Supports proper ARIA attributes (`aria-haspopup`, `aria-expanded`)
+- Can be nested for multi-level submenus
+- Closes on Escape key or click outside
