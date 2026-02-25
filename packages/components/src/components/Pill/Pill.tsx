@@ -37,7 +37,7 @@ export interface IressPillProps extends IressStyledProps<'span'> {
     | '90';
 
   /**
-   * System status colour variant for the badge.
+   * System status colour variant for the pill.
    * When provided, overrides the mode prop.
    * Use for semantic status indicators (e.g., error states, success messages).
    */

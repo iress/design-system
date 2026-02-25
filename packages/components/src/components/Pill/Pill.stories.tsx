@@ -5,7 +5,7 @@ import {
   reactNodeArgType,
   stylingProps,
 } from '@theme-preset/storybookHelpers';
-import { IressPill, IressInline, IressStack } from '@/main';
+import { IressPill, IressInline } from '@/main';
 import { STATUSES } from '@/constants';
 
 type Story = StoryObj<typeof IressPill>;
@@ -50,17 +50,12 @@ export const Status: Story = {
     ...disableArgTypes(['status']),
   },
   render: (args) => (
-    <IressStack gap="sm">
+    <IressInline gap="sm">
       {STATUSES.map((status) => (
-        <IressInline gap="sm" key={status}>
-          <IressPill {...args} status={status}>
-            {status}
-          </IressPill>
-          <IressPill {...args} status={status}>
-            {status.charAt(0).toUpperCase() + status.slice(1)}
-          </IressPill>
-        </IressInline>
+        <IressPill {...args} status={status} key={status}>
+          {status}
+        </IressPill>
       ))}
-    </IressStack>
+    </IressInline>
   ),
 };
