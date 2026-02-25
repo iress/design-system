@@ -20,30 +20,17 @@ describe('IressPill', () => {
         const badge = screen.getByText('Badge');
         expect(badge).toHaveClass(pill({ mode: '20' }));
       });
-    });
 
-    describe('status', () => {
       const statusArr = STATUSES.map((status) => [status, status]);
 
       it.each(statusArr)(
-        'renders a %s variant when status is set to %s',
+        'renders a %s variant when mode is set to %s',
         (status) => {
-          render(<IressPill status={status}>Badge</IressPill>);
+          render(<IressPill mode={status}>Badge</IressPill>);
           const badge = screen.getByText('Badge');
-          expect(badge).toHaveClass(pill({ status }));
+          expect(badge).toHaveClass(pill({ mode: status }));
         },
       );
-
-      it('overrides mode when both mode and status are provided', () => {
-        render(
-          <IressPill mode="20" status="danger">
-            Badge
-          </IressPill>,
-        );
-        const badge = screen.getByText('Badge');
-        expect(badge).toHaveClass(pill({ status: 'danger' }));
-        expect(badge).not.toHaveClass(pill({ mode: '20' }));
-      });
     });
   });
 
@@ -52,8 +39,8 @@ describe('IressPill', () => {
       const { container } = render(
         <>
           <IressPill>Content</IressPill>
-          <IressPill mode="10">Success</IressPill>
-          <IressPill status="success">Success Status</IressPill>
+          <IressPill mode="10">Mode 10</IressPill>
+          <IressPill mode="success">Success</IressPill>
         </>,
       );
       const results = await axe(container);

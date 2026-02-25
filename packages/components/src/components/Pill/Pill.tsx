@@ -1,7 +1,7 @@
 import { css, cx } from '@/styled-system/css';
 import { pill } from './Pill.styles';
 import { type ReactNode } from 'react';
-import type { IressStyledProps, Statuses } from '@/types';
+import type { IressStyledProps } from '@/types';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 
@@ -12,8 +12,8 @@ export interface IressPillProps extends IressStyledProps<'span'> {
   children?: ReactNode;
 
   /**
-   * Style of the badge, based on the data colour palette.
-   * Can be a number (10-90) or a string ('10'-'90').
+   * Style of the badge, based on the data colour palette (10-90) or system status colours (danger, info, success, warning).
+   * Can be a number (10-90), a string ('10'-'90'), or a system status ('danger', 'info', 'success', 'warning').
    * @default '90'
    */
   mode?:
@@ -34,28 +34,21 @@ export interface IressPillProps extends IressStyledProps<'span'> {
     | '60'
     | '70'
     | '80'
-    | '90';
-
-  /**
-   * System status colour variant for the pill.
-   * When provided, overrides the mode prop.
-   * Use for semantic status indicators (e.g., error states, success messages).
-   */
-  status?: Statuses;
+    | '90'
+    | 'danger'
+    | 'info'
+    | 'success'
+    | 'warning';
 }
 
 export const IressPill = ({
   children,
   mode = '90',
-  status,
   className,
   ...restProps
 }: IressPillProps) => {
   const styles = pill.raw({
-    mode: status
-      ? undefined
-      : (mode as Extract<IressPillProps['mode'], string>),
-    status,
+    mode: mode as Extract<IressPillProps['mode'], string>,
   });
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
 

@@ -56,8 +56,6 @@ export const pill = cva({
         bg: 'colour.data.bold.90',
         color: 'colour.data.subtle.90',
       },
-    },
-    status: {
       danger: {
         bg: 'colour.system.danger.fill',
         color: 'colour.system.danger.onFill',

@@ -47,12 +47,12 @@ export const Mode: Story = {
 export const Status: Story = {
   ...Default,
   argTypes: {
-    ...disableArgTypes(['status']),
+    ...disableArgTypes(['mode']),
   },
   render: (args) => (
     <IressInline gap="sm">
       {STATUSES.map((status) => (
-        <IressPill {...args} status={status} key={status}>
+        <IressPill {...args} mode={status} key={status}>
           {status}
         </IressPill>
       ))}
