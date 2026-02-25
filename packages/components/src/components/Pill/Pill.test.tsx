@@ -3,6 +3,7 @@ import { IressPill } from './Pill';
 import { axe } from 'jest-axe';
 import { GlobalCSSClass } from '@/enums';
 import { pill } from './Pill.styles';
+import { STATUSES } from '@/constants';
 
 describe('IressPill', () => {
   it('renders the component with defaults', () => {
@@ -20,6 +21,30 @@ describe('IressPill', () => {
         expect(badge).toHaveClass(pill({ mode: '20' }));
       });
     });
+
+    describe('status', () => {
+      const statusArr = STATUSES.map((status) => [status, status]);
+
+      it.each(statusArr)(
+        'renders a %s variant when status is set to %s',
+        (status) => {
+          render(<IressPill status={status}>Badge</IressPill>);
+          const badge = screen.getByText('Badge');
+          expect(badge).toHaveClass(pill({ status }));
+        },
+      );
+
+      it('overrides mode when both mode and status are provided', () => {
+        render(
+          <IressPill mode="20" status="danger">
+            Badge
+          </IressPill>,
+        );
+        const badge = screen.getByText('Badge');
+        expect(badge).toHaveClass(pill({ status: 'danger' }));
+        expect(badge).not.toHaveClass(pill({ mode: '20' }));
+      });
+    });
   });
 
   describe('accessibility', () => {
@@ -28,6 +53,7 @@ describe('IressPill', () => {
         <>
           <IressPill>Content</IressPill>
           <IressPill mode="10">Success</IressPill>
+          <IressPill status="success">Success Status</IressPill>
         </>,
       );
       const results = await axe(container);

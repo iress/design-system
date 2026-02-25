@@ -5,7 +5,8 @@ import {
   reactNodeArgType,
   stylingProps,
 } from '@theme-preset/storybookHelpers';
-import { IressPill, IressInline } from '@/main';
+import { IressPill, IressInline, IressStack } from '@/main';
+import { STATUSES } from '@/constants';
 
 type Story = StoryObj<typeof IressPill>;
 const BADGE_MODES = [10, 20, 30, 40, 50, 60, 70, 80, 90] as const;
@@ -40,5 +41,26 @@ export const Mode: Story = {
         </IressPill>
       ))}
     </IressInline>
+  ),
+};
+
+export const Status: Story = {
+  ...Default,
+  argTypes: {
+    ...disableArgTypes(['status']),
+  },
+  render: (args) => (
+    <IressStack gap="sm">
+      {STATUSES.map((status) => (
+        <IressInline gap="sm" key={status}>
+          <IressPill {...args} status={status}>
+            {status}
+          </IressPill>
+          <IressPill {...args} status={status}>
+            {status.charAt(0).toUpperCase() + status.slice(1)}
+          </IressPill>
+        </IressInline>
+      ))}
+    </IressStack>
   ),
 };
