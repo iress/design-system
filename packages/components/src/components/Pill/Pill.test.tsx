@@ -3,6 +3,7 @@ import { IressPill } from './Pill';
 import { axe } from 'jest-axe';
 import { GlobalCSSClass } from '@/enums';
 import { pill } from './Pill.styles';
+import { STATUSES } from '@/constants';
 
 describe('IressPill', () => {
   it('renders the component with defaults', () => {
@@ -19,6 +20,17 @@ describe('IressPill', () => {
         const badge = screen.getByText('Badge');
         expect(badge).toHaveClass(pill({ mode: '20' }));
       });
+
+      const statusArr = STATUSES.map((status) => [status, status]);
+
+      it.each(statusArr)(
+        'renders a %s variant when mode is set to %s',
+        (status) => {
+          render(<IressPill mode={status}>Badge</IressPill>);
+          const badge = screen.getByText('Badge');
+          expect(badge).toHaveClass(pill({ mode: status }));
+        },
+      );
     });
   });
 
@@ -27,7 +39,8 @@ describe('IressPill', () => {
       const { container } = render(
         <>
           <IressPill>Content</IressPill>
-          <IressPill mode="10">Success</IressPill>
+          <IressPill mode="10">Mode 10</IressPill>
+          <IressPill mode="success">Success</IressPill>
         </>,
       );
       const results = await axe(container);

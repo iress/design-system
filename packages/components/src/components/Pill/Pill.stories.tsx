@@ -6,6 +6,7 @@ import {
   stylingProps,
 } from '@theme-preset/storybookHelpers';
 import { IressPill, IressInline } from '@/main';
+import { STATUSES } from '@/constants';
 
 type Story = StoryObj<typeof IressPill>;
 const BADGE_MODES = [10, 20, 30, 40, 50, 60, 70, 80, 90] as const;
@@ -37,6 +38,22 @@ export const Mode: Story = {
       {BADGE_MODES.map((mode) => (
         <IressPill {...args} key={mode} mode={mode}>
           {mode}
+        </IressPill>
+      ))}
+    </IressInline>
+  ),
+};
+
+export const Status: Story = {
+  ...Default,
+  argTypes: {
+    ...disableArgTypes(['mode']),
+  },
+  render: (args) => (
+    <IressInline gap="sm">
+      {STATUSES.map((status) => (
+        <IressPill {...args} mode={status} key={status}>
+          {status}
         </IressPill>
       ))}
     </IressInline>
