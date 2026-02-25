@@ -15,7 +15,8 @@ export const pill = cva({
     textDecoration: 'none',
     minHeight: '[1.35em]',
     minWidth: '[1.5em]',
-    p: 'spacing.1',
+    py: 'spacing.1',
+    px: 'spacing.2',
     verticalAlign: 'middle',
   },
   variants: {
