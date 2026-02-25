@@ -27,62 +27,79 @@ The input with collapsed tags (e.g., "12 selected") appears shorter than the inp
 
 ### Technical Changes
 
-- **File**: `packages/components/src/components/Select/SelectTags/SelectTags.styles.ts`
-- **Change**: Removed `height: '[100%]'` from the `tagsList` slot
-- **Reason**: The percentage-based height caused the wrapper to stretch to fill the parent, resulting in inconsistent heights when switching between display states
-- **Solution**: Added `alignItems: 'center'` for proper vertical centering and let the content size naturally
+**Files Modified:**
+1. `packages/components/src/components/Select/SelectTags/SelectTags.tsx` - Added vertical alignment
+2. `packages/components/src/components/Select/SelectTags/SelectTags.styles.ts` - Updated tagsList styles
 
-### Code Change
+### Root Cause
+
+The `IressInline` component (which wraps the tags) had default `verticalAlign="top"` alignment. When tags collapsed into a single "X selected" tag, the content aligned to the top, making the container appear shorter than when multiple tags were displayed.
+
+### The Fix
+
+**1. SelectTags.tsx** - Added `verticalAlign="middle"` to IressInline:
+
+```diff
+- <IressInline gap="sm" className={classes.tagsList}>
++ <IressInline gap="sm" verticalAlign="middle" className={classes.tagsList}>
+```
+
+**2. SelectTags.styles.ts** - Added flex grow to tagsList:
 
 ```diff
 tagsList: {
   overflow: 'hidden',
-- height: '[100%]',
-+ alignItems: 'center',
++ flex: '1',
 },
 ```
 
 ### Why This Works
 
-1. The parent `root` container already has `minHeight: 'input.height'` which provides a consistent baseline height
-2. Removing `height: 100%` from `tagsList` allows it to size based on its content rather than stretching to fill
-3. Adding `alignItems: 'center'` ensures proper vertical alignment of tags
-4. Both visible tags and collapsed "X selected" tag now respect the same height constraints
+1. `verticalAlign="middle"` centers the tag content vertically within the container
+2. Both collapsed tags ("X selected") and multiple visible tags now align to the center
+3. The parent `root` container's `minHeight: 'input.height'` provides consistent baseline height
+4. Tags maintain consistent vertical positioning regardless of quantity or display state
 
 ## Testing
 
-### New Test Added
+### New Tests Added
 
 **File**: `packages/components/src/components/Select/SelectTags/SelectTags.test.tsx`
 
 ```typescript
 describe('height consistency', () => {
-  it('applies consistent minHeight regardless of tag display state', () => {
-    // Test renders component with 3 visible tags
-    // Then rerenders with 5+ tags (triggering collapse)
-    // Verifies both states maintain the same root CSS structure
+  it('applies vertical centering to maintain consistent height with collapsed tags', () => {
+    // Verifies IressInline has middle vertical alignment (ai_center class)
+    // This ensures collapsed tags maintain same height as visible tags
+  });
+
+  it('renders collapsed tag text when limit is exceeded', () => {
+    // Confirms "X selected" text appears when limit is reached
   });
 });
 ```
 
 ### Test Results
 
-All tests passing:
-```
-Test Files  165 passed (165)
-     Tests  1521 passed | 6 skipped (1527)
-  Duration  146.57s
+All SelectTags tests pass, including the new height consistency regression tests. Run tests with:
+
+```bash
+yarn workspace @iress-oss/ids-components run test:coverage -- --testFile SelectTags.test.tsx
 ```
 
 ## Files Modified
 
-1. `packages/components/src/components/Select/SelectTags/SelectTags.styles.ts` - Fixed height constraint
-2. `packages/components/src/components/Select/Select.stories.tsx` - Added bug reproduction story
-3. `packages/components/src/components/Select/SelectTags/SelectTags.test.tsx` - Added regression test
+1. `packages/components/src/components/Select/SelectTags/SelectTags.tsx` - Added verticalAlign="middle" to IressInline
+2. `packages/components/src/components/Select/SelectTags/SelectTags.styles.ts` - Updated tagsList to use flex: '1'
+3. `packages/components/src/components/Select/Select.stories.tsx` - Added bug reproduction story (uses correct defaultValue prop)
+4. `packages/components/src/components/Select/SelectTags/SelectTags.test.tsx` - Added height consistency regression tests
 
 ## Risk Assessment
 
-- **Change Impact**: Low - minimal CSS change affecting only tag container height
+- **Change Impact**: Low - minimal changes to component props and CSS
+- **Scope**: SelectTags component only
+- **Breaking Changes**: None
+- **Backward Compatibility**: Fully maintained - only adds vertical alignment prop
 - **Backward Compatibility**: Maintained - no API changes, only visual fix
 - **Scope**: Limited to SelectTags component in multiselect mode with collapsed tags
 

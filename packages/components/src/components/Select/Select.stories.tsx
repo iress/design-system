@@ -326,9 +326,8 @@ export const BugReproductionHeightInconsistency: Story = {
     return (
       <IressStack gap="md">
         <IressText>
-          The two selects below should have the same height, but the one with
-          collapsed tags (12 selected) appears shorter than the one with visible
-          tags.
+          Comparing multiselect inputs with visible tags vs collapsed tags to
+          verify consistent height.
         </IressText>
         <IressStack gap="md">
           <div>
@@ -338,7 +337,7 @@ export const BugReproductionHeightInconsistency: Story = {
             <IressSelect
               multiSelect
               options={manyOptions}
-              selected={[
+              defaultValue={[
                 { label: 'High', value: 'high' },
                 { label: 'Medium', value: 'medium' },
                 { label: 'Low', value: 'low' },
@@ -353,7 +352,7 @@ export const BugReproductionHeightInconsistency: Story = {
             <IressSelect
               multiSelect
               options={manyOptions}
-              selected={manyOptions.slice(0, 12)}
+              defaultValue={manyOptions.slice(0, 12)}
               placeholder="Select types"
             />
           </div>
@@ -365,16 +364,17 @@ export const BugReproductionHeightInconsistency: Story = {
     docs: {
       description: {
         story: `
-**Problem Summary:** When tags are collapsed after reaching the limit (showing "X selected"), the height of the input changes and no longer matches inputs with visible tags.
+**Purpose:** This story verifies that multiselect inputs maintain consistent height regardless of tag display state.
 
-**Expected Behavior:** The height should remain consistent regardless of whether tags are displayed individually or collapsed.
+**What to verify:**
+1. Both selects should have the same height
+2. The first shows 3 individual tags (High, Medium, Low)
+3. The second shows "12 selected" (collapsed state)
+4. Heights should be identical
 
-**Actual Behavior:** The input with collapsed tags appears shorter than the input with visible tags.
+**Previous behavior:** The collapsed tags input appeared shorter than the visible tags input.
 
-**How to Test:**
-1. Compare the two selects in this story
-2. Notice the height difference between "3 visible tags" and "12 selected"
-3. The heights should be identical but they are not
+**Fixed behavior:** Both inputs now maintain consistent height through vertical centering.
         `,
       },
     },

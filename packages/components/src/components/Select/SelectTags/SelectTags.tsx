@@ -232,7 +232,11 @@ export const IressSelectTags = ({
         <IressText className={classes.placeholder}>{placeholder}</IressText>
       )}
       {hasSelected && (
-        <IressInline gap="sm" className={classes.tagsList}>
+        <IressInline
+          gap="sm"
+          verticalAlign="middle"
+          className={classes.tagsList}
+        >
           <Tags
             data-testid={dataTestId}
             limit={limit}

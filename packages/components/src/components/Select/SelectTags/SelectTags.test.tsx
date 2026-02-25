@@ -281,27 +281,27 @@ describe('IressSelectTags', () => {
   });
 
   describe('height consistency', () => {
-    it('applies consistent minHeight regardless of tag display state', () => {
-      const { rerender, container } = render(
-        <IressSelectTags selected={MOCK_LABEL_VALUE_META.slice(0, 3)} />,
-      );
-
-      // Get the root element (IressText renders as div by default)
-      const rootWithVisibleTags = container.querySelector('div[tabindex="0"]');
-      expect(rootWithVisibleTags).toBeInTheDocument();
-
-      // Rerender with many items (should collapse to "X selected")
-      rerender(
+    it('applies vertical centering to maintain consistent height with collapsed tags', () => {
+      const { container } = render(
         <IressSelectTags limit={5} selected={MOCK_LABEL_VALUE_META} />,
       );
 
-      const rootWithCollapsedTags = container.querySelector('div[tabindex="0"]');
-      expect(rootWithCollapsedTags).toBeInTheDocument();
+      // Find the IressInline wrapper (tagsList)
+      const tagsListWrapper = container.querySelector('.ids-inline');
+      expect(tagsListWrapper).toBeInTheDocument();
 
-      // Both should maintain the same base structure with minHeight applied
-      // The fix removed height: 100% from tagsList to prevent height inconsistency
-      expect(rootWithVisibleTags).toHaveClass('ids-select-tags');
-      expect(rootWithCollapsedTags).toHaveClass('ids-select-tags');
+      // Verify it has middle vertical alignment for height consistency
+      // This ensures collapsed tags ("X selected") maintain same height as visible tags
+      expect(tagsListWrapper).toHaveClass('ai_center');
+    });
+
+    it('renders collapsed tag text when limit is exceeded', () => {
+      render(<IressSelectTags limit={3} selected={MOCK_LABEL_VALUE_META} />);
+
+      // Should show "5 selected" instead of individual tags
+      expect(
+        screen.getByText(`${MOCK_LABEL_VALUE_META.length} selected`),
+      ).toBeInTheDocument();
     });
   });
 
