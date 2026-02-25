@@ -317,3 +317,66 @@ export const GroupedWithSearch: Story = {
     },
   },
 };
+
+export const BugReproductionHeightInconsistency: Story = {
+  name: 'Bug: Height Inconsistency with Collapsed Tags',
+  render: () => {
+    const manyOptions = generateLabelValueMeta(15);
+
+    return (
+      <IressStack gap="md">
+        <IressText>
+          The two selects below should have the same height, but the one with
+          collapsed tags (12 selected) appears shorter than the one with visible
+          tags.
+        </IressText>
+        <IressStack gap="md">
+          <div>
+            <IressText weight="semibold">
+              Priority is (3 visible tags)
+            </IressText>
+            <IressSelect
+              multiSelect
+              options={manyOptions}
+              selected={[
+                { label: 'High', value: 'high' },
+                { label: 'Medium', value: 'medium' },
+                { label: 'Low', value: 'low' },
+              ]}
+              placeholder="Select priorities"
+            />
+          </div>
+          <div>
+            <IressText weight="semibold">
+              Type is (12 collapsed to "12 selected")
+            </IressText>
+            <IressSelect
+              multiSelect
+              options={manyOptions}
+              selected={manyOptions.slice(0, 12)}
+              placeholder="Select types"
+            />
+          </div>
+        </IressStack>
+      </IressStack>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+**Problem Summary:** When tags are collapsed after reaching the limit (showing "X selected"), the height of the input changes and no longer matches inputs with visible tags.
+
+**Expected Behavior:** The height should remain consistent regardless of whether tags are displayed individually or collapsed.
+
+**Actual Behavior:** The input with collapsed tags appears shorter than the input with visible tags.
+
+**How to Test:**
+1. Compare the two selects in this story
+2. Notice the height difference between "3 visible tags" and "12 selected"
+3. The heights should be identical but they are not
+        `,
+      },
+    },
+  },
+};
