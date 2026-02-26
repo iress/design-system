@@ -70,6 +70,9 @@
     "test": "yarn monorepo run test",
     "test:coverage": "yarn monorepo run test:coverage",
     "test:ci": "yarn test:coverage && yarn check-coverage --all",
+    "translate:docs": "yarn workspace @iress-oss/ids-guidelines run translate",
+    "translate:tokens": "yarn workspace @iress-oss/ids-guidelines run translate:tokens",
+    "translate": "yarn translate:docs && yarn translate:tokens",
     "typecheck": "yarn monorepo run typecheck",
     "monorepo": "yarn workspaces foreach -Ai --topological-dev --exclude=@iress/design-system-monorepo"
   },

@@ -26,3 +26,6 @@ dist
 generated
 packages/components/src/styled-system
 storybook-static
+packages/*/.ai/*
+!packages/*/.ai/skills/
+!packages/*/.ai/skills/**

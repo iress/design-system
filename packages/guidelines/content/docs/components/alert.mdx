@@ -1,0 +1,59 @@
+---
+title: Alert
+description: "An alert displays a short, important message in a way that attracts the user's attention without interrupting the user's task."
+component: "Alert/Alert.tsx"
+propsType: "IressAlertProps"
+---
+
+## Examples
+
+### Status
+
+The alert offers four statuses that set a distinctive colour and icon. They can be set using the `status` prop. Their different use cases are described here.
+
+[Open Status in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--status)
+
+### Heading
+
+An alert can be displayed with a heading. This is controlled by the `heading` prop. If provided a string, it will display a `<h2 />` element with the string as its content. If provided a React element, it will display that element directly.
+
+**Note**: The `heading` prop replaces the `headingText` and `headingLevel` props from previous versions of IDS. These prop are now deprecated and will be removed in a future version.
+
+[Open Heading in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--heading)
+
+### Actions
+
+The `actions` prop allows you to display call to action buttons within the alert. This is useful for providing users with options to take action based on the alert message.
+
+[Open Footer in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--footer)
+
+### Icon
+
+The `icon` prop allows you to customise the icon displayed in the alert. It accepts a string for the icon name, or can be set to `false` to remove the icon entirely.
+
+[Open Icon in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--icon)
+
+### Multi-line
+
+By default, the alert is designed to display short messages. If you need to display a longer message that spans multiple lines, you can set the `multiLine` prop to `true`. This will adjust the spacing and layout of the alert to accommodate longer content.
+
+[Open MultiLine in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--multi-line)
+
+### Variants
+
+The alert can be displayed in different variants to suit different use cases. The `variant` prop allows you to set the variant of the alert. The available variants are:
+
+- `sidebar`: The alert is displayed in the sidebar of the page, typically used for informational messages on longer forms.
+- `full-width`: The alert is displayed in the site-wide banner, typically used for important messages that need to be seen by all users.
+
+[Open Variant in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--variant)
+
+### Dimissable
+
+The alert can be made dismissable by setting the `onDismiss` prop. This will display a close button in the top right corner of the alert, allowing users to dismiss it.
+
+[Open Dismissable in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--dismissable)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Alert/Alert.tsx" name="IressAlertProps" />

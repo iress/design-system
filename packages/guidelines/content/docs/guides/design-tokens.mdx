@@ -1,0 +1,104 @@
+---
+title: Design Tokens
+description: Design tokens are the visual design atoms of the design system — specifically, they are named entities that store visual design attributes.
+---
+
+## Overview
+
+Design tokens from `@iress-oss/ids-tokens` provide consistent values for colours, spacing, typography, and other visual properties across the design system.
+
+## Installation
+
+```bash
+yarn add @iress-oss/ids-tokens
+```
+
+## Usage
+
+### CSS Variables
+
+Import the CSS variables stylesheet to use tokens as CSS custom properties:
+
+```tsx
+import '@iress-oss/ids-tokens/build/css-vars.css';
+```
+
+Then use them in your CSS:
+
+```css
+.my-element {
+  color: var(--ids-colour-primary-500);
+  padding: var(--ids-spacing-md);
+  font-size: var(--ids-font-size-body);
+}
+```
+
+### JavaScript/TypeScript
+
+Import tokens as JavaScript objects:
+
+```tsx
+import { colour, spacing, typography } from '@iress-oss/ids-tokens';
+
+// Colour tokens
+colour.primary[500]; // Primary actions
+colour.success[500]; // Success states
+colour.danger[500]; // Error states
+colour.neutral[100]; // Backgrounds
+
+// Spacing tokens
+spacing.xs; // 4px
+spacing.sm; // 8px
+spacing.md; // 16px
+spacing.lg; // 24px
+spacing.xl; // 32px
+```
+
+## Token Categories
+
+### Colours
+
+Semantic colour tokens convey meaning:
+
+| Token            | Purpose                              |
+| ---------------- | ------------------------------------ |
+| `colour.primary` | Primary actions and links            |
+| `colour.success` | Success states and confirmations     |
+| `colour.warning` | Warning states and cautions          |
+| `colour.danger`  | Error states and destructive actions |
+| `colour.neutral` | Backgrounds, borders, and text       |
+
+### Spacing
+
+Consistent spacing scale:
+
+| Token        | Value | Use             |
+| ------------ | ----- | --------------- |
+| `spacing.xs` | 4px   | Tight spacing   |
+| `spacing.sm` | 8px   | Small gaps      |
+| `spacing.md` | 16px  | Default spacing |
+| `spacing.lg` | 24px  | Section spacing |
+| `spacing.xl` | 32px  | Large spacing   |
+
+### Typography
+
+Typography tokens for consistent text styling across the system.
+
+## Best Practices
+
+- **Always use tokens** — Never hardcode colour or spacing values
+- **Semantic naming** — Use purpose-based tokens (primary, success) not colour names (blue, green)
+- **Consistent spacing** — Use the spacing scale, don't create custom values
+- **Responsive** — Tokens adapt to screen size automatically
+
+### Do
+
+```tsx
+<div style={{ color: colour.primary[500], padding: spacing.md }}>Content</div>
+```
+
+### Don't
+
+```tsx
+<div style={{ color: '#0066CC', padding: '15px' }}>Content</div>
+```

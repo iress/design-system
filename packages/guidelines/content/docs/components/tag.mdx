@@ -1,0 +1,54 @@
+---
+title: Tag
+description: "Tags represent individual units in a group of selected items."
+component: "Tag/Tag.tsx"
+propsType: "IressTagProps"
+---
+
+## When to use
+
+Use tags for **categorization and selection** where users need to interact with items:
+
+- Displaying selected items in multi-select interfaces
+- Managing email recipients or domains
+- Showing applied filters that can be removed
+- Categorizing content with removable labels
+- Any scenario where users need to add or remove items from a collection
+
+Tags are **interactive** - they can be clicked and deleted by users.
+
+**Not sure?** If you need to display status or highlight information without user interaction, use [Badge](/?path=/docs/components-badge--docs) instead.
+
+## Usage
+
+### Clickable tags
+
+Tags can be made clickable by passing an `onClick` handler. This will apply hover styles to the tag to indicate it is clickable.
+
+[Open ClickableTag in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-tag--clickable-tag)
+
+### Deleting tags
+
+The delete button will not automatically remove the tag from the screen. Instead it will trigger the `onDelete` event. Use this event within your app to handle the display of tags.
+
+The text a screen reader will announce defaults to "Delete" but can be changed using the `deleteButtonText` prop.
+
+[Open DeletingTags in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-tag--deleting-tags)
+
+### Custom button
+
+You can completely override the delete button by passing a custom component to the `deleteButton` prop.
+
+[Open CustomButton in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-tag--custom-button)
+
+## IressTagInput
+
+`IressTagInput` allows you to manage multiple tags, and is often used for managing email addresses, domains or other simple metadata that does not have to be selected from a list.
+
+If you need to manage tags that are selected from a existing list, use `IressSelect` with the `multiple` prop.
+
+[Open TagInput in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-tag-input--tag-input)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Tag/Tag.tsx" name="IressTagProps" />

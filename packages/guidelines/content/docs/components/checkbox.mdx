@@ -1,0 +1,59 @@
+---
+title: Checkbox
+description: "Checkboxes are used to let a user select one or more options for a limited number of choices. Also, works as a child of IressCheckboxGroup"
+component: "Checkbox/Checkbox.tsx"
+propsType: "IressCheckboxProps"
+---
+
+## Usage
+
+### Checked
+
+For single checkboxes in controlled mode the `checked` prop sets the checked state.
+
+When used as part of an `IressCheckboxGroup`, the `checked` prop will be ignored. Instead, the `value` prop on the `IressCheckboxGroup` will determine the checked state of each checkbox. See the [checkbox group documentation](/docs/components/checkboxgroup) for more details.
+
+[Open Checked in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-checkbox--checked)
+
+### Default Checked
+
+For single checkboxes in uncontrolled mode the `defaultChecked` prop sets the default checked state.
+
+[Open DefaultChecked in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-checkbox--default-checked)
+
+### Indeterminate
+
+The `indeterminate` prop sets the checkbox appearance to an indeterminate dash until it is clicked. It has no impact on the checkbox behavior beyond this purely visual indicator.
+
+[Open Indeterminate in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-checkbox--indeterminate)
+
+### Hidden Label
+
+It is very rare to want to render a checkbox without a visible label. However, one case where you might want to is within tables.
+
+When using a checkbox without a visible label, you must supply a label and apply the `hiddenLabel` property to still be accessible by screen readers.
+
+It is also important to not hide the table headers.
+
+[Open WithTableData in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-checkbox--with-table-data)
+
+### Read only
+
+The `readOnly` prop changes how the checkbox is rendered. It will only render if the checkbox is checked (alongside a hidden input that contains the `value` if it was set), otherwise it will not be rendered.
+
+It is understandable that this may not be the desired behavior for all use cases. If you need a checkbox that is not editable, but still visible, simply do not set the `readOnly` prop and set the `checked` prop instead.
+
+[Open ReadOnly in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-checkbox--read-only)
+
+### Variants
+
+The checkbox component has multiple variants that can be used to change the appearance of the checkbox. The `variant` prop can be set to `default`, `card`, or `touch`. The default variant is `default`.
+
+- `card` variant is used to display the checkbox as a card, which is useful when the checkbox needs to contain more information than just a label. It is used in the `IressCheckboxGroup` component when the `variant` prop is set to `card`.
+- `touch` variant is used to display the checkbox with a larger touch target, which is useful for mobile devices. It is used in the `IressCheckboxGroup` component when the `variant` prop is set to `touch`.
+
+[Open Variants in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-checkbox--variants)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Checkbox/Checkbox.tsx" name="IressCheckboxProps" />

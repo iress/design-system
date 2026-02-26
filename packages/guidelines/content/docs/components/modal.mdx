@@ -1,0 +1,125 @@
+---
+title: Modal
+description: "Modals gather information, complete a subtask, or provide additional information without losing the context of an underlying page."
+component: "Modal/Modal.tsx"
+propsType: "IressModalProps"
+---
+
+## Controlling the modal
+
+### Using the `show` property
+
+You can use state to control the modal by setting the `show` property to `true` or `false`. To sync your state with the modal, you can use the `onShowChange` prop, which is normally passed the set function from `useState`.
+
+[Open ShowWithState in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-modal--show-with-state)
+
+### Using the `IressModalProvider`
+
+You can use the `IressModalProvider` to open and close modals from anywhere in your application, as long as the modal has a unique `id`. In this case you would use the `useModal` hook to open and close the modal.
+
+To use, wrap your `<App/>` or the component that you want to use the `useModal` hook with `<IressModalProvider />`.
+
+[Open Provider in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-provider--provider)
+
+## Behaviour
+
+- No other interaction on the main page can be accessed while a modal is active. A backdrop covers the content beneath so that the content beneath cannot be interacted with.
+- Clicking on the the backdrop closes the modal and returns the focus to the triggering element.
+- When the modal is active the body is set to overflow: hidden to stop any scrolling of the underlying page. Scrolling should then only be possible on the modal wrapper.
+- By default there are 3 ways to dismiss the modal; click X in the header; press ESC on a keyboard; click anywhere on the backdrop. It is also recommended that consumers add a Cancel or Close button to the modal's footer slot if required.
+
+## Examples
+
+### Heading
+
+The `heading` prop can be used to set a heading for the modal. This will be rendered in the header of the modal, and will be announced by screen readers when the modal is opened.
+
+[Open Heading in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-modal--heading)
+
+### Footer slot
+
+Content to appear underneath the main content. Usually used for extra controls like buttons etc.
+
+[Open FooterSlot in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-modal--footer-slot)
+
+### Fixed footer
+
+The `fixedFooter` prop can be used to set the footer to be fixed to the bottom of the modal. This is often useful when there is a lot of content in the main area that you would like to scroll underneath the footer content.
+
+**Note:** Also works without footer content.
+
+> [!WARNING]
+> **Using with popovers and tooltips**
+>
+> The fixed footer variant of IressModal prevents content from overflowing the
+>   modal. This can cause layout issues when using with components that use
+>   popovers (for example IressCombobox), especially when these components sit at
+>   the end of the modal&apos;s content. If you encounter these issues, try using
+>   a modal without a fixed footer. Normal modals allow content to overflow, which
+>   should fix the issue.
+
+[Open FixedFooter in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-modal--fixed-footer)
+
+### Size
+
+The `size` prop can be set to `sm`, `md` or `lg`. It defaults to `md`.
+
+Below is a guide on when to use which size.
+
+[Open Size in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-modal--size)
+
+### Responsive size
+
+The `size` prop no longer accepts responsive values directly, instead you must use the `width` styling prop to set responsive sizes.
+
+The `width` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
+
+If you set a responsive `width`, the modal becomes full width on screens smaller than the value you specified. For example, if you want to create a large modal on medium screens and above:
+
+```tsx
+  <IressModal size="lg" width={{ md: 'overlay.lg' }}>
+```
+
+The modal will be full width on extra-small and small screens, and large width on medium, large and extra-large screens. This is the same as setting:
+
+```tsx
+  <IressModal size={{ xs: IressModal.Size.Fullpage, md: IressModal.Size.Lg }}>
+```
+
+You can override this behaviour by specifying a value for `xs` in your size object:
+
+```tsx
+  <IressModal size={{ xs: IressModal.Size.Sm, md: IressModal.Size.Lg }}>
+```
+
+[Open ResponsiveSize in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-modal--responsive-size)
+
+### Disable closing
+
+For instances where you require the user's full attention and you want to ensure they continue the current task before closing the modal, you can disable the backdrop and escape key using `disableBackdropClick` and/or hide the close button using `noCloseButton`.
+
+**Note:** As these options remove the default handling of the closing the modal, please ensure you provide a clear way for the user to close the modal.
+
+[Open DisableClosing in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-modal--disable-closing)
+
+## Migrating to version 5
+
+### Adding the provider
+
+For your components to work as previously, you will need to set up the `IressModalProvider` at the root of your application. This will allow you to use the `useModal` hook to open and close modals from anywhere in your application using the ID of the modal.
+
+```tsx
+const App = () => <IressModalProvider>Rest of app here</IressModalProvider>;
+```
+
+### Testing
+
+In version 5, modals are rendered conditionally, meaning they will not be available in the DOM until they are shown. This means that you will need to update your tests to account for this, as you cannot interact with its contents until it is shown, unlike in version 4.
+
+See below for an example in version 4 and version 5.
+
+[Open V5ModalDiff in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-modal--v5modal-diff)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Modal/Modal.tsx" name="IressModalProps" />

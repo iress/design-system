@@ -1,0 +1,54 @@
+---
+title: Col
+description: "Used in conjunction with the IressRow component to layout page content"
+component: "Col/Col.tsx"
+propsType: "IressColProps"
+---
+
+## Examples
+
+### Auto-sized
+
+When no column widths are specified the `IressCol` component will render equal width columns.
+
+[Open AutoSized in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-col--auto-sized)
+
+### Span
+
+The `span` prop controls the number of grid columns the component should span.
+
+If no `span` is provided it will default to `auto` which will make the column either fill the remaining space in the row (when used with a col number) or size evenly when used with other columns set to auto sizing.
+
+[Open Span in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-col--span)
+
+### Responsive span
+
+The `span` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints. Any missing keys will fall back to the value defined for the next smallest key.
+
+**Note:** If a `span` prop is provided an object but no value is given for `xs` it will default to `12`. This means that columns will be full width on screen sizes below the sizes you've specified.
+
+[Open ResponsiveSpan in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-col--responsive-span)
+
+### Offset
+
+The `offset` prop controls the amount of grid columns to offset.
+
+[Open Offset in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-col--offset)
+
+### Responsive offset
+
+When a `ResponsiveSizing` object is passed into the `offset` prop, the offset will change at the specified breakpoints. It will apply to all breakpoints above the specified breakpoint.
+
+For example, if you specify an offset for `md`, it will apply to `lg`, `xl` and `xxl` as well. If you want to change the offset at a specific breakpoint, you can pass in an object with the breakpoint as the key and the offset as the value.
+
+[Open ResponsiveOffset in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-col--responsive-offset)
+
+### Align self
+
+The `alignSelf` prop controls the vertical alignment of the column (use if column alignment needs to differ from other columns in the row).
+
+[Open AlignSelf in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-col--align-self)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Col/Col.tsx" name="IressColProps" />

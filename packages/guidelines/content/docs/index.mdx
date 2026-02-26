@@ -1,0 +1,39 @@
+---
+title: Iress Design System
+description: Component documentation, patterns, and guidelines for building consistent Iress user interfaces.
+---
+
+Welcome to the Iress Design System documentation.
+
+## Getting Started
+
+Install the IDS component library:
+
+```bash
+yarn add @iress-oss/ids-components @iress-oss/ids-tokens
+```
+
+Wrap your application with `IressProvider`:
+
+```tsx
+import { IressProvider } from '@iress-oss/ids-components';
+import '@iress-oss/ids-components/style.css';
+
+function App() {
+  return (
+    <IressProvider>
+      <YourApp />
+    </IressProvider>
+  );
+}
+```
+
+## Documentation Sections
+
+- **Components** — Individual UI components with props, examples, and usage guidelines
+- **Patterns** — Common UI patterns built from component compositions
+- **Guides** — Getting started, design tokens, and best practices
+
+## Interactive Playground
+
+Explore components interactively on [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com).

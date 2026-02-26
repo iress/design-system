@@ -1,0 +1,72 @@
+---
+title: Menu Item
+description: "Menu items are headings, buttons and dividers used inside an `IressMenu`"
+component: "Menu/MenuItem/MenuItem.tsx"
+propsType: "IressMenuItemProps"
+---
+
+## Examples
+
+### Selected
+
+The `IressMenuItem` can be set to selected using the `selected` prop.
+
+**Note:** If you are using `IressMenu` with a `role` of `listbox`, you should use the `defaultSelected` or `selected` prop on the `IressMenu` to set the selected state of its `<IressMenuItem />` children, as the `selected` prop will be ignored.
+
+[Open Selected in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu-item--selected)
+
+### Value
+
+A menu item can have a unique value set to it, used to determine its selected state in a `IressMenu` component with a `role` of `listbox`. The value is not visible to end users.
+
+[Open Value in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu-item--value)
+
+### `canToggle`
+
+When `canToggle` is set to true, the menu item can be toggled between selected and unselected states. This only works in a `IressMenu` component with a `role` of `listbox`.
+
+[Open CanToggle in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu-item--can-toggle)
+
+### Prepend and append
+
+You can prepend and append content to a menu item using the `prepend` and `append` props.
+
+[Open PrependAndAppend in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu-item--prepend-and-append)
+
+### Multi-select menus
+
+Inside a `IressMenu` with a `role` of `listbox` and the `multiSelect` prop set to true, the menu item will display with a checkbox.
+
+[Open MultiSelect in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu-item--multi-select)
+
+### Element
+
+You can use the `element` prop to render a custom component inside the menu item. This is useful for rendering a component from a third-party library, such as `react-router-dom`.
+
+[Open Element in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu-item--element)
+
+### Divider
+
+When `divider` is set to true, the menu item will render with a bottom border.
+
+[Open Divider in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu-item--divider)
+
+However, it is recommended to use the `IressMenuDivider` component instead.
+
+[Open Divider in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu-divider--divider)
+
+### Heading
+
+You can use the `IressMenuHeading` to render headings within a menu. This adds styling so the appropriate padding is applied.
+
+[Open Heading in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu-heading--heading)
+
+### Text
+
+You can use the `IressMenuText` to render other text within a menu. This adds styling so the appropriate padding is applied.
+
+[Open Text in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu-text--text)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Menu/MenuItem/MenuItem.tsx" name="IressMenuItemProps" />

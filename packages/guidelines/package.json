@@ -1,0 +1,33 @@
+{
+  "name": "@iress-oss/ids-guidelines",
+  "version": "0.0.0-development",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "translate": "tsx scripts/translate-docs.ts",
+    "translate:tokens": "tsx scripts/translate-tokens.ts",
+    "generate:manifest": "tsx scripts/generate-manifest.ts"
+  },
+  "dependencies": {
+    "@iress-oss/ids-components": "workspace:*",
+    "@iress-oss/ids-tokens": "workspace:*",
+    "fumadocs-core": "^15.8.5",
+    "fumadocs-mdx": "^14.2.7",
+    "fumadocs-typescript": "4.0.7",
+    "next": "^15.4.9",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/mdx": "^2.0.13",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "gray-matter": "^4.0.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

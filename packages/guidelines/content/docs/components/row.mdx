@@ -1,0 +1,44 @@
+---
+title: Row
+description: "Used in conjunction with the IressCol component to lay out page content."
+component: "Row/Row.tsx"
+propsType: "IressRowProps"
+---
+
+## Usage
+
+`IressRow` supports visual hierarchy by allowing you to add multiple columns in your layout, allowing the user to see more content on the screen at the same time.
+
+It works best alongside the `IressContainer` and `IressCol` components.
+
+### Gutter
+
+The spacing between columns is controlled by the `gutter` prop. To change the spacing between multiple columns once the row wraps, you can use the `rowGrap` prop.
+
+Note: The `gutter` prop only works with `IressCol` components. If you are using other components, please use the `IressInline` component instead.
+
+[Open Gutter in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-row--gutter)
+
+### Responsive Gutter
+
+The `gutter` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
+
+[Open ResponsiveGutter in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-row--responsive-gutter)
+
+### Alignment
+
+### Horizontal alignment
+
+`IressRow` can be set to align horizontally using the `horizontalAlign` prop.
+
+[Open HorizontalAlignment in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-row--horizontal-alignment)
+
+### Vertical alignment
+
+`IressRow` can be set to align vertically using the `verticalAlign` prop.
+
+[Open VerticalAlignment in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-row--vertical-alignment)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Row/Row.tsx" name="IressRowProps" />

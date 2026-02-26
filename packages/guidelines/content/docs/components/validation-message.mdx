@@ -1,0 +1,38 @@
+---
+title: Validation message
+description: "A validation message is used to inform the user of the status of a form input. If there are multiple messages, they can be combined using the IressValidationSummary component."
+component: "ValidationMessage/ValidationMessage.tsx"
+propsType: "IressValidationMessageProps"
+---
+
+## Examples
+
+### Status
+
+Validation status is controlled by the status prop. It defaults to `error`.
+
+[Open Status in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-validation-message--status)
+
+### Prefix
+
+You can add a prefix to the message. If not provided, it uses the `status` prop to determine the prefix.
+
+It is hidden by default, but can be shown by setting the `visiblePrefix` prop to `true`.
+
+[Open Prefix in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-validation-message--prefix)
+
+### Link to target
+
+You can use the `linkToTarget` prop to link the message to a specific target in the DOM. This is useful to take the user to a specific part of the form when they click on the message.
+
+[Open LinkToTarget in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-validation-message--link-to-target)
+
+## `IressValidationSummary`
+
+Messages can be passed programmatically as a `ValidationMessageObj[]` using the `messages` prop of the `IressValidationSummary` component.
+
+[Open ValidationSummary in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-validation-summary--validation-summary)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/ValidationMessage/ValidationMessage.tsx" name="IressValidationMessageProps" />

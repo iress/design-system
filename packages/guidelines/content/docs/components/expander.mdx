@@ -1,0 +1,38 @@
+---
+title: Expander
+description: "Expanders are commonly used to reveal more information or details about an element or content on a page."
+component: "Expander/Expander.tsx"
+propsType: "IressExpanderProps"
+---
+
+## Accessibility
+
+For Accessibility guidelines refer to
+[W3 ARIA Patterns Disclosure](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/), [W3 ARIA Patterns Accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/).
+
+## Examples
+
+### Mode
+
+Expander has a `mode` prop which can be used to change how the expander is displayed. There are two modes `section` (default) and `link`.
+
+- `section` mode is used to expand larger sections of rich content, such as a table or a detailed transcript.
+- `link` mode is used to expand a small section of content, usually used to provide additional context (eg. "Learn more" or "See more details").
+
+[Open Mode in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components---mode)
+
+### Open
+
+The `open` prop can be used to control the open state of the expander as can be seen below.
+
+[Open Open in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components---open)
+
+### Multiple expanders (accordion)
+
+You can use multiple expanders to create an accordion, where all expander closes when another is opened.
+
+[Open Multiple in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components---multiple)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Expander/Expander.tsx" name="IressExpanderProps" />

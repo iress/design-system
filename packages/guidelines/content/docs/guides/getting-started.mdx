@@ -1,0 +1,91 @@
+---
+title: Getting Started
+description: Set up and start using the Iress Design System in your project.
+---
+
+## Installation
+
+Install the component library and design tokens:
+
+```bash
+yarn add @iress-oss/ids-components @iress-oss/ids-tokens
+```
+
+## Setup
+
+### 1. Import Styles
+
+Import the IDS component styles in your application entry point:
+
+```tsx
+import '@iress-oss/ids-components/style.css';
+```
+
+### 2. Wrap with IressProvider
+
+Wrap your application with `IressProvider` to inject IDS fonts and theming:
+
+```tsx
+import { IressProvider } from '@iress-oss/ids-components';
+import '@iress-oss/ids-components/style.css';
+
+function App() {
+  return (
+    <IressProvider>
+      <YourApp />
+    </IressProvider>
+  );
+}
+```
+
+### 3. Use Components
+
+Import and use any IDS component:
+
+```tsx
+import {
+  IressButton,
+  IressField,
+  IressInput,
+  IressStack,
+} from '@iress-oss/ids-components';
+
+function LoginForm() {
+  return (
+    <IressStack gap="md">
+      <IressField label="Email">
+        <IressInput type="email" />
+      </IressField>
+      <IressField label="Password">
+        <IressInput type="password" />
+      </IressField>
+      <IressButton mode="primary" type="submit">
+        Log in
+      </IressButton>
+    </IressStack>
+  );
+}
+```
+
+## Component Naming
+
+All IDS components use the `Iress` prefix:
+
+- `IressButton`
+- `IressInput`
+- `IressSelect`
+- `IressAlert`
+- `IressModal`
+- etc.
+
+## TypeScript Support
+
+All components are fully typed. Import types alongside components:
+
+```tsx
+import { IressButton, type IressButtonProps } from '@iress-oss/ids-components';
+```
+
+## Interactive Playground
+
+Explore all components interactively on [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com).

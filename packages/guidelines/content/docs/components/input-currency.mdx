@@ -1,0 +1,46 @@
+---
+title: InputCurrency
+description: "InputCurrency allows a user to input and interact with currency number. It works just like IressInput, with new props locale and currencyCode. This component meets ISO-4217 standard"
+component: "InputCurrency/InputCurrency.tsx"
+propsType: "IressInputCurrencyProps"
+---
+
+## Examples
+
+### Different Locale and CurrencyCode
+
+Display the GBP with `locale="en-GB"` and `currencyCode="GBP"` props (must pass both together)
+
+[Open GBP in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-input-currency--gbp)
+
+Display the JPY with `locale="ja-JPY"` and `currencyCode="JPY"` props (must pass both together)
+
+[Open JPY in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-input-currency--jpy)
+
+### With Symbol
+
+Display the currency symbol with `withSymbol` props
+
+[Open WithSymbol in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-input-currency--with-symbol)
+
+### More Format Options
+
+Pass more format options with `formatOptions` props. More format options in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat">here</a>
+
+[Open FormatOptions in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-input-currency--format-options)
+
+### Read Only
+
+The `readOnly` prop can be set to prevent the user from changing the value of the input. This will change the input to a custom read-only style and the user will not be able to interact with the input. If you want to make the number align to right, please pass `alignRight` together.
+
+[Open ReadOnly in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-input-currency--read-only)
+
+### Align Right
+
+Set the input content align to right with `alignRight` prop, which is more friendly for number input.
+
+[Open AlignRight in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-input-currency--align-right)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/InputCurrency/InputCurrency.tsx" name="IressInputCurrencyProps" />

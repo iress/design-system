@@ -1,0 +1,13 @@
+{
+  "title": "Patterns",
+  "pages": [
+    "breadcrumbs",
+    "contextual-menu",
+    "dropdown-menu",
+    "form",
+    "form-recipes",
+    "loading",
+    "shadow",
+    "side-nav"
+  ]
+}

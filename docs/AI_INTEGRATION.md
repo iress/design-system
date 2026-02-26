@@ -1,0 +1,179 @@
+# AI Integration with IDS
+
+## Overview
+
+The Iress Design System (IDS) ships **embedded AI documentation** inside its npm packages. When AI agents (Copilot, Cursor, Cline, etc.) work in a project that has `@iress-oss/ids-components` or `@iress-oss/ids-tokens` installed, they can read these files to understand the component library without needing external APIs or MCP servers.
+
+## Embedded Documentation Structure
+
+### Components Package (`@iress-oss/ids-components`)
+
+```
+node_modules/@iress-oss/ids-components/.ai/
+├── index.json                          # Manifest with all components, patterns, and skills
+├── components/
+│   ├── alert.md                        # Alert component docs
+│   ├── button.md                       # Button component docs
+│   ├── ...                             # 56 component docs total
+│   └── tooltip.md
+├── patterns/
+│   ├── breadcrumbs.md                  # Breadcrumbs pattern
+│   ├── contextual-menu.md              # Contextual menu pattern
+│   ├── dropdown-menu.md                # Dropdown menu pattern
+│   ├── form.md                         # Form pattern
+│   ├── loading.md                      # Loading pattern
+│   ├── shadow.md                       # Shadow pattern
+│   └── side-nav.md                     # Side navigation pattern
+└── skills/
+    ├── ui-translation.md               # UI requirements → IDS components
+    └── figma-to-ids.md                 # Figma designs → IDS code
+```
+
+### Tokens Package (`@iress-oss/ids-tokens`)
+
+```
+node_modules/@iress-oss/ids-tokens/.ai/
+├── index.json                          # Manifest with all token docs and skills
+├── tokens/
+│   ├── overview.md                     # Token system overview
+│   ├── colour.md                       # All colour tokens with hex values
+│   ├── spacing.md                      # Spacing scale 0–10
+│   ├── radius.md                       # Border radius tokens
+│   ├── typography.md                   # Typography tokens
+│   └── css-variables.md                # CSS variable usage guide
+└── skills/
+    └── token-usage.md                  # How to use tokens correctly
+```
+
+## For AI Agents
+
+### Getting Started
+
+1. **Read the manifest** to discover available documentation:
+
+```
+@iress-oss/ids-components/.ai/index.json
+@iress-oss/ids-tokens/.ai/index.json
+```
+
+2. **Read component docs** for specific component usage:
+
+```
+@iress-oss/ids-components/.ai/components/button.md
+```
+
+3. **Read skills** for translation tasks:
+
+```
+@iress-oss/ids-components/.ai/skills/ui-translation.md    # UI specs → IDS
+@iress-oss/ids-components/.ai/skills/figma-to-ids.md      # Figma → IDS
+@iress-oss/ids-tokens/.ai/skills/token-usage.md           # Token usage rules
+```
+
+4. **Read TypeScript declarations** for full API details:
+
+```
+@iress-oss/ids-components/dist/components/Button/Button.d.ts
+```
+
+The manifest's `typeDeclPath` field points to the `.d.ts` file for each component.
+
+### Manifest Structure
+
+```json
+{
+  "package": "@iress-oss/ids-components",
+  "version": "6.0.0-alpha.28",
+  "urls": {
+    "guidelines": "https://iress.github.io/design-system",
+    "storybook": "https://main--691abcc79dfa560a36d0a74f.chromatic.com"
+  },
+  "documentation": {
+    "components": [
+      {
+        "name": "Button",
+        "path": "components/button.md",
+        "category": "component",
+        "guidelinesUrl": "https://iress.github.io/design-system/docs/components/button",
+        "propsType": "IressButtonProps",
+        "typeDeclPath": "dist/components/Button/Button.d.ts"
+      }
+    ]
+  },
+  "skills": [
+    {
+      "name": "UI Translation",
+      "path": "skills/ui-translation.md",
+      "description": "Translate UI requirements into IDS component implementations."
+    }
+  ],
+  "api": {
+    "source": "TypeScript .d.ts type declarations with JSDoc annotations"
+  }
+}
+```
+
+### Sharing Visual Examples
+
+When users need to see interactive examples, share Chromatic links from the manifest:
+
+- **Storybook:** `https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/{story-id}`
+- **Guidelines:** `https://iress.github.io/design-system/docs/components/{component}`
+
+### Using Browser Tools (Advanced)
+
+If you have access to Chrome DevTools MCP or Playwright MCP:
+
+1. Navigate to Chromatic URLs from the manifest
+2. Inspect component behaviour and DOM structure
+3. Capture screenshots or interactions
+4. Verify accessibility and responsive behaviour
+
+## For Developers
+
+### Documentation Sites
+
+| Site | URL | Purpose |
+|---|---|---|
+| Guidelines | https://iress.github.io/design-system | Full documentation (Fumadocs) |
+| Storybook | https://main--691abcc79dfa560a36d0a74f.chromatic.com | Component playground |
+| Guidelines (Canary) | https://iress.github.io/design-system/canary | Pre-release docs |
+| Storybook (Canary) | https://canary--691abcc79dfa560a36d0a74f.chromatic.com | Pre-release playground |
+
+### How Embedded Docs Are Generated
+
+The `.ai/` directories are generated by translation scripts in the `@iress-oss/ids-guidelines` package:
+
+```bash
+# Translate component MDX docs → .ai/ markdown
+yarn translate:docs
+
+# Validate token .ai/ manifest and sync version
+yarn translate:tokens
+
+# Run both
+yarn translate
+```
+
+The component docs are translated from the Fumadocs MDX source files. The token docs are hand-crafted reference documents with manifest version syncing.
+
+### Adding New Component Docs
+
+1. Write the component's MDX documentation in `packages/guidelines/content/docs/`
+2. Include `component` and `propsType` fields in the MDX frontmatter
+3. Run `yarn translate:docs` to regenerate the `.ai/` directory
+4. The manifest (`index.json`) is regenerated automatically
+
+### Adding New Skills
+
+1. Create a markdown file in `packages/components/.ai/skills/` or `packages/tokens/.ai/skills/`
+2. Add the skill entry to the package's `.ai/index.json` manifest
+3. Include the skill in the `"skills"` array
+
+## Architecture Benefits
+
+- **Zero infrastructure** — No MCP servers to maintain or deploy
+- **Offline access** — Docs are in the installed npm package
+- **Version-locked** — Docs always match the installed component version
+- **Agent-agnostic** — Works with any AI agent that can read files
+- **Progressive disclosure** — Manifest → summary docs → full `.d.ts` types

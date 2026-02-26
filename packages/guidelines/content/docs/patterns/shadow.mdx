@@ -1,0 +1,18 @@
+---
+title: Shadow
+description: "The shadow pattern allows you to wrap your content in the shadow DOM, allowing you to isolate your styles from the rest of the application. This is useful when you want to create a component that has its own styles, without affecting the rest of the application (such as microfrontends)."
+---
+
+## Usage
+
+This is a simple component that is an alternative to the `IressProvider`. To use it, simply wrap your content in the `IressShadow` component.
+
+It has similar props to the `IressProvider`, however it will apply the styles to the correct area depending on where its needed.
+
+- Font faces are injected into the document head, as they cannot be injected into the shadow DOM
+- The IDS styles are injected into the shadow DOM
+- The icon stylesheet is injected into both the document head and the shadow DOM, as the icon stylesheet includes both font face and icon styles
+
+**Note:** The `IressShadow` component does not create a custom element, it simply creates a shadow root on a `div` element.
+
+[Open Shadow in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/patterns---shadow)

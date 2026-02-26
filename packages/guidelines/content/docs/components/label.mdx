@@ -1,0 +1,40 @@
+---
+title: Label
+description: "Use the IressLabel component when building bespoke form inputs and IressField is too restrictive."
+component: "Label/Label.tsx"
+propsType: "IressLabelProps"
+---
+
+## Examples
+
+### Required
+
+To indicate that an input is required, you may use the `required` prop to distinguish the label with an asterix.
+
+[Open Required in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-label--required)
+
+### Hidden label
+
+Sometimes you may wish to have an input with no visible label, but to still wrap the input in a label for accessibility. In this case, set `hiddenLabel` to `true`.
+
+[Open HiddenLabel in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-label--hidden-label)
+
+### Rich content
+
+You can render custom content into the label.
+
+[Open RichContent in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-label--rich-content)
+
+## Accessibility
+
+Don't place interactive elements such as anchors or buttons inside the `IressLabel`. Doing so makes it difficult for people to activate the form input associated with the label.
+
+See the [MDN Label Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#accessibility_concerns) for more info.
+
+### Labelling non-interactive content
+
+`IressLabel` can be used to label non-interactive content, such as readonly data. In this case, do not provide a `htmlFor` prop. This will render the label using a `strong` tag instead of a `label` tag.
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Label/Label.tsx" name="IressLabelProps" />

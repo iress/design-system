@@ -1,0 +1,20 @@
+---
+title: Image
+description: "IressImage renders an image that resizes based on the user's screen width. The component accepts standard image attributes like `src` and `alt`."
+component: "Image/Image.tsx"
+propsType: "IressImageProps"
+---
+
+## Examples
+
+### MaxWidth
+
+`maxWidth` accepts formats like `70 (numbers)` `250px (pixels)` `50% (percentages)` `undefined (fall back to default 100%)`, allowing you to display the image smaller than its original size, yet still responsive on smaller screen sizes.
+
+**Note:** Please consider not using this prop, but rather exporting images at the largest size required for your application (the maximum width).
+
+[Open MaxWidth in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-image--max-width)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Image/Image.tsx" name="IressImageProps" />

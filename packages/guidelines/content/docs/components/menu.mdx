@@ -1,0 +1,166 @@
+---
+title: Menu
+description: "A menu can display grouped action buttons, navigation items or headings."
+component: "Menu/Menu.tsx"
+propsType: "IressMenuProps"
+---
+
+## Usage
+
+### Basic
+
+`IressMenuDivider`, `IressMenuHeading`, `IressMenuItem` and `IressMenuText` should be supplied as `children` of the menu.
+
+- `IressMenuDivider` can be used to display a divider, it supports all of the props of `hr`. It will adjust according to the menu's role and layout.
+- `IressMenuHeading` is used to display headings. It supports all of the props of `IressText` and will adjust according to the menu's role and layout.
+- `IressMenuItem` is used to display an interactive item. If provided a `href` prop will render the item as a link, otherwise it will render as a button.
+- `IressMenuText` can be used to display other non-interactive text. It supports all of the props of `IressText`.
+
+[Open Basic in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu--basic)
+
+### Complex
+
+`IressMenuItem`, `IressMenuHeading` and `IressMenuText` support `prepend`, `divider` and `append` slots, to allow you to create complex menu items.
+
+Note: Instead of using the `divider` prop on `IressMenuItem`, you can use `IressMenuDivider` to separate items. This gives you more control over where the divider sits.
+
+[Open Complex in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu--complex)
+
+## Examples
+
+### Secondary navigation
+
+When the `href` prop is set on `IressMenuItem`, it will render as a link.
+
+When rendering a set of links for navigation purposes (as a secondary nav in this example) make sure you wrap the `IressMenu` in a nav element and set the menu's `role` prop to list.
+
+[Open SecondaryNavigation in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu--secondary-navigation)
+
+### Headings
+
+Using the `IressMenuHeading` component, you can create headings within the menu. Simply set the `element` or `textStyle` prop to your desired heading level.
+
+[Open Headings in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu--headings)
+
+### Dividers
+
+When the `divider` prop is set, the `IressMenuItem`, `IressMenuHeading` and `IressMenuText` will render a bottom border.
+
+In situations where a bottom border will not work, you can also use `IressMenuDivider` inside the menu to separate items.
+
+[Open Dividers in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu--dividers)
+
+### Fluid menus
+
+By setting the `fluid` prop on the menu component, the menu will stretch to the width of its containing element.
+
+[Open Fluid in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu--fluid)
+
+### Layout
+
+The `layout` prop comes with three options:
+
+- `stack` (default) - menu items will stack on top of each other
+- `inline` - menu items will be inline
+- `inline-equal-width` - menu items will be inline and have equal width
+
+[Open Layout in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu--layout)
+
+### Text wrapping
+
+By default, menu item text will wrap on to the next line when it exceeds the menu width. Using the `noWrap` prop, you set the menu item text to not wrap.
+
+[Open NoWrap in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu--no-wrap)
+
+### Slot props
+
+`IressMenuItem`, `IressMenuHeading` and `IressMenuText` provide `prepend` and `append` props to position content either before or after its content.
+
+[Open SlotProps in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu--slot-props)
+
+### Roles
+
+The `role` prop that comes with the menu component not only changes the aria-role of the menu to allow it to be easily recognised in screen readers, but also changes how the menu is interacted with.
+
+There are four roles supported:
+
+- `list` (default): The menu is treated as a list of items. Child menu subcomponents render with the `listitem` role where appropriate. The user navigates using the `tab` key.
+- `menu`: The menu is treated as a menu of items. Child menu subcomponents render with the `menuitem` role where appropriate. The user navigates using `arrow` keys.
+- `listbox`: The menu is treated as a list of selectable items, similar to a `<select />`. Child menu subcomponents render with the `option` role where appropriate. The user navigates using `arrow` keys.
+
+**Note:** When menu is used as a child of popover, the `type` that is set on popover will be applied to menu (so you don't need to set it twice).
+
+#### List
+
+The default role for the menu component is `list`. It is most often used for navigation and its items can be navigated (using the keyboard) with the `tab` key.
+
+[Open ListRole in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu--list-role)
+
+#### Menu
+
+The `menu` role is used when the items in the menu has an action that performs a task in the application. The items can be navigated (using the keyboard) with the `arrow` keys, depending on the layout.
+
+[Open MenuRole in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu--menu-role)
+
+#### Listbox
+
+The `listbox` role is used for lists from which a user may select one or more items.
+
+A value is supplied to `IressMenuButton` (like you would with an option element inside a select) and a `onChange` event is emitted with the selected value(s) whenever the selection is changed by the user.
+
+Set the `multiSelect` prop to true for a multi-selectable listbox.
+
+[Open ListboxRole in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu--listbox-role)
+
+### Variants
+
+The `variant` prop can be used to change the style of the menu to suit different contexts. There are two variants:
+
+- Not defined - for use inside popovers, side menus and navigation
+- `subdraw` - for use with navigation drawers, it adds an arrow icon to the end of menu items to indicate that they will open a sub-menu.
+- `radio` - for use when you want the menu item to have a radio mark style indicator (only supports single select listbox role)
+
+[Open Variants in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-menu--variants)
+
+### Menu Groups
+
+`IressMenuGroup` can be used to group related menu items together under a common label.
+
+#### Default (Inline)
+
+By default, `IressMenuGroup` renders the label as a non-focusable heading with the children displayed inline below it.
+
+```tsx
+<IressMenu>
+  <IressMenuGroup label="Recent Files">
+    <IressMenuItem>Document.pdf</IressMenuItem>
+    <IressMenuItem>Spreadsheet.xlsx</IressMenuItem>
+  </IressMenuGroup>
+</IressMenu>
+```
+
+#### Subdraw Variant
+
+When `variant="subdraw"` is set, the group label becomes a clickable menu item that opens a fly-over submenu containing the group's children. This is useful for organizing large menus into collapsible sections.
+
+```tsx
+<IressMenu>
+  <IressMenuGroup label="More Options" variant="subdraw">
+    <IressMenuItem>Option 1</IressMenuItem>
+    <IressMenuItem>Option 2</IressMenuItem>
+    <IressMenuItem>Option 3</IressMenuItem>
+  </IressMenuGroup>
+</IressMenu>
+```
+
+The subdraw variant:
+
+- Renders the label as a `IressMenuItem` with a chevron icon
+- Opens a popover submenu when clicked
+- Supports proper ARIA attributes (`aria-haspopup`, `aria-expanded`)
+- Can be nested for multi-level submenus
+- Closes on Escape key or click outside
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Menu/Menu.tsx" name="IressMenuProps" />

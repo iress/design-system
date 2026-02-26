@@ -1,0 +1,81 @@
+---
+title: Breadcrumbs
+description: "Breadcrumbs are a secondary navigation aid that helps users understand their current location within the site hierarchy and provides a simple way to navigate back to higher-level pages."
+---
+
+## Usage
+
+### Items
+
+This is the only required prop for the `IressBreadcrumbs` component, which defines the breadcrumb items to be displayed.
+
+- **label**: The text displayed for the breadcrumb item
+- **href**: The URL to navigate to when the item is clicked (optional for the current page)
+- **element**: The component used for rendering links, allowing integration with routing libraries
+
+[Open Default in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/patterns-breadcrumbs--default)
+
+### When to Use
+
+- **Site hierarchy navigation**: Help users understand where they are in a multi-level site structure
+- **Secondary navigation**: Provide an alternative way to navigate back to parent pages
+- **Context awareness**: Show the current page's relationship to parent sections
+
+### When Not to Use
+
+- **Single-level sites**: If your site has no hierarchy, breadcrumbs aren't necessary
+- **Primary navigation**: Breadcrumbs are supplementary; don't rely on them as the only navigation
+
+### Best Practices
+
+1. **Keep labels concise**: Use short, descriptive labels that clearly identify each level
+2. **Current page**: The last item should represent the current page and not be clickable
+3. **Consistent placement**: Position breadcrumbs near the top of the page, below primary navigation and close to the current page title
+4. **Mobile consideration**: On small screens, consider showing only the parent page link
+
+## Behaviour
+
+The Breadcrumb component follows WCAG 2.1 AA guidelines and includes:
+
+- **Semantic HTML**: Uses `<nav>`, `<ol>`, and `<li>` elements for proper structure
+- **ARIA labels**: `aria-label` identifies the navigation as breadcrumbs
+- **Current page**: `aria-current="page"` marks the current page item
+- **Keyboard navigation**: All links are keyboard accessible via Tab key
+- **Screen readers**: Separators are hidden from screen readers with `aria-hidden="true"`
+- **Focus indicators**: Visible focus rings for keyboard navigation
+
+## Examples
+
+This example demonstrates all supported breadcrumb configurations side by side.
+
+[Open AllConfigurations in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/patterns-breadcrumbs--all-configurations)
+
+### Integration with Routing Libraries
+
+The Breadcrumb component supports custom elements for integration with routing libraries:
+
+#### React Router
+
+```tsx
+
+<IressBreadcrumb
+  items={[
+    { label: 'Home', href: '/', element: RouterLink },
+    { label: 'Products', href: '/products', element: RouterLink },
+    { label: 'Details' },
+  ]}
+/>;
+```
+
+#### Next.js
+
+```tsx
+
+<IressBreadcrumb
+  items={[
+    { label: 'Home', href: '/', element: Link },
+    { label: 'Products', href: '/products', element: Link },
+    { label: 'Details' },
+  ]}
+/>;
+```

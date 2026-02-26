@@ -1,0 +1,32 @@
+---
+title: Tab
+description: "A tab is an interactive element that controls the display of other content, usually a panel"
+component: "TabSet/Tab/Tab.tsx"
+propsType: "IressTabProps"
+---
+
+## Examples
+
+### Active
+
+The tab can be set to active using the `active` prop.
+
+**Note:** If you are using `IressTabSet`, you should use the `selected` prop on the `IressTabSet` to set the active state of its `<IressTab />` children, as the `active` prop will be ignored.
+
+[Open Active in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-tab--active)
+
+### Value
+
+A tab can have a unique value set to it, used to determine its active state in a `IressTabSet` component. The value is not visible to end users.
+
+[Open Value in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-tab--value)
+
+### Panel
+
+A tab can set its `children` when used inside an `IressTabSet` component, and it will render as its panel. If the tab is not used inside an `IressTabSet` component, `children` will not render.
+
+[Open Panel in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-tab--panel)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/TabSet/Tab/Tab.tsx" name="IressTabProps" />

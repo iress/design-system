@@ -1,0 +1,161 @@
+---
+title: Select
+description: Selects provide select and multi-select functionality with the benefit of live filtering.
+---
+
+## Usage
+
+```tsx
+import { IressSelect, IressField } from '@iress-oss/ids-components';
+
+const options = [
+  { label: 'Option 1', value: '1' },
+  { label: 'Option 2', value: '2' },
+  { label: 'Option 3', value: '3' },
+];
+
+function MyComponent() {
+  return (
+    <IressField label="Choose an option">
+      <IressSelect options={options} />
+    </IressField>
+  );
+}
+```
+
+## When to Use
+
+- If you have less than 5 options to choose from, consider using `IressRadioGroup` instead.
+- You probably need `IressAutocomplete` if you're looking for an input box that can be typed.
+- Otherwise, `IressSelect` is the way to go.
+
+## Accessibility
+
+This component follows the [WAI combobox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/).
+
+Key differences:
+
+- Virtual focus is used to highlight suggestions. Focus remains on the input, but suggestions are highlighted via `aria-activedescendant`.
+- The filter input is only shown once the user activates the dropdown.
+
+## Examples
+
+### Single Select
+
+The `options` prop is required. Provide an array of `LabelValueMeta[]` objects.
+
+[Open in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-select--single-select)
+
+### Multi-Select
+
+Adding the `multiSelect` prop allows the user to select multiple options.
+
+[Open in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-select--multi-select)
+
+### Asynchronous Options
+
+Pass a function to the `options` prop that accepts a string parameter and returns a `Promise<LabelValueMeta[]>`. The user experience changes to show a search input that filters as they type.
+
+No filtering is done for asynchronous options — you must filter the options yourself using the query.
+
+[Open in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-select--async-options)
+
+### Grouped Options
+
+Group options by setting the `children` property of a `LabelValueMeta` object. The parent option renders as a non-selectable heading.
+
+**Note:** Only one level of grouping is supported.
+
+[Open in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-select--grouped-options)
+
+### Minimum Search Length for Async Options
+
+Use `minSearchLength` to set the minimum characters before triggering async search. Default is 1.
+
+### Initial Options
+
+Use `initialOptions` to display options before user interaction with async selects.
+
+### Sizing
+
+Rich selects can be resized to suit a specific number of characters or set as a percentage width.
+
+### Custom Label
+
+Pass a function to `renderLabel` to customise the display of selected items.
+
+### Custom Options
+
+Pass a function to `renderOptions` to customise how options are displayed.
+
+### Create New Option
+
+Use `renderOptions` with a create button to allow users to add new options.
+
+### Header and Footer
+
+Use the `header` and `footer` props to add fixed content to the dropdown.
+
+### Readonly
+
+Set `readOnly` to `true` to prevent value changes. Multiple values display comma-separated.
+
+### Native Select
+
+Set `native` to `true` for native select rendering. Can also accept a breakpoint (e.g., `native="md"`) for responsive behavior.
+
+[Open in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-select--native)
+
+## Sub-components
+
+`IressSelect` is composed of several sub-components for customisation:
+
+- **IressSelectBody** — Container for the options list with `header` and `footer` props
+- **IressSelectCreate** — Button to create a new option
+- **IressSelectHeading** — Heading with clear-all functionality
+- **IressSelectLabel** — Text representation of selected items
+- **IressSelectMenu** — Transforms `LabelValueMeta[]` into a listbox menu
+- **IressSelectSearch** — Inline search navigator for the dropdown
+- **IressSelectSearchInput** — Input designed for use inside a dropdown
+- **IressSelectTags** — Displays selected items as tags with delete capability
+
+## Testing
+
+### Getting the Value
+
+The value is not accessed like a standard input. Use `getByText` instead of `getByValue`:
+
+```tsx
+render(<IressSelect options={options} value={{ label: 'Option 1' }} />);
+const select = screen.getByRole('combobox');
+
+// Works
+expect(select).toHaveTextContent('Option 1');
+
+// Does not work
+expect(select).toHaveValue('Option 1');
+```
+
+For multi-select, values are prefixed with "Selected: ":
+
+```tsx
+render(
+  <IressSelect options={options} value={[{ label: 'Option 1' }]} multiSelect />,
+);
+expect(screen.getByRole('combobox')).toHaveTextContent('Selected: Option 1');
+```
+
+## Props
+
+<auto-type-table
+  path="../../../../../packages/components/src/components/Select/Select.tsx"
+  name="IressSelectProps"
+/>
+
+## Best Practices
+
+- Use `IressField` with a label for accessibility
+- Prefer synchronous options for small lists
+- Use `minSearchLength` for async options to reduce unnecessary API calls
+- Use grouped options to organize long lists
+- Provide `initialOptions` for async selects to improve initial UX

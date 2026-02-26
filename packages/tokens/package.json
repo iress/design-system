@@ -14,7 +14,8 @@
   },
   "files": [
     "build",
-    "dist"
+    "dist",
+    ".ai"
   ],
   "sideEffects": [
     "**/*.css"

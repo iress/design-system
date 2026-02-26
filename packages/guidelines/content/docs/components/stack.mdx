@@ -1,0 +1,50 @@
+---
+title: Stack
+description: "Use IressStack to control vertical spacing between content with consistent present values."
+component: "Stack/Stack.tsx"
+propsType: "IressStackProps"
+---
+
+## Examples
+
+### Gap
+
+Vertical spacing is applied to the direct children of the `IressStack` component. The amount of spacing is controlled by the gap prop which accepts from `spacing.0` to `spacing.10`.
+
+#### What happened to `gutter`?
+
+The previous `gutter` prop has been replaced by `gap`, which uses the latest set of spacing tokens. In terms of how it is used to space items inside the `IressStack` component, it is now directly mapped to the [CSS gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/gap), which may change how your application is spaced. For most cases, there should be no change.
+
+[Open Gap in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-stack--gap)
+
+### Responsive gap
+
+The `gap` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
+
+[Open ResponsiveGap in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-stack--responsive-gap)
+
+### Inline children
+
+The stack component will treat the direct children as a block element. If you want to wrap some items to display them inline, wrap them with `IressInline`.
+
+In the example below: `IressButton` are inline because of wrapped by `IressInline`.
+
+[Open InlineChildren in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-stack--inline-children)
+
+### Lists
+
+`IressStack` can also apply gap between the list items by using the new `element` (e.g. `ul`) prop.
+
+[Open Lists in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-stack--lists)
+
+### Vertical alignment
+
+The `verticalAlign` prop controls how content is positioned vertically within the stack. It accepts six values: `top`, `middle`, `bottom`, `between`, `around`, and `evenly`.
+
+Use `top`, `middle`, or `bottom` to align items within the available space, and `between`, `around`, or `evenly` to distribute extra vertical space between items (similar to `space-between`, `space-around`, and `space-evenly` in CSS flexbox).
+
+[Open VerticalAlign in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-stack--vertical-align)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Stack/Stack.tsx" name="IressStackProps" />

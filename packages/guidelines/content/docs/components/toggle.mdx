@@ -1,0 +1,51 @@
+---
+title: Toggle
+description: "Toggles allow users to turn things on or off. When toggled, the associated change happens straight away."
+component: "Toggle/Toggle.tsx"
+propsType: "IressToggleProps"
+---
+
+## Usage
+
+Toggles are typically on / off switches, similar to a household light switch. They allow users to choose between two mutually exclusive options, and will always have a default value.
+
+The `IressToggle` component should only be used for actions that happen immediately, for example switching a device's WiFi connection on or off.
+
+> [!WARNING]
+> **Don't use Toggles in forms**
+>
+> Toggles shouldn’t be used as part of a form as they don’t have the correct
+>   semantics, and won’t submit a value when the form data is submitted. If you
+>   need a toggleable component in a form, use a checkbox or radio group instead.
+
+### Labels
+
+Toggles should always have a label, which is set via its `children`.
+
+[Open Default in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-toggle--default)
+
+### Hidden labels
+
+Labels can be hidden via the `hiddenLabel` prop; this will hide the label from view, but it'll still be available to screen reader users.
+
+[Open HiddenLabel in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-toggle--hidden-label)
+
+### Checked
+
+The on / off state of the toggle can be controlled by setting the `checked` prop (for controlled components). If you want an uncontrolled component, you can set the `defaultChecked` prop instead to set it checked by default.
+
+[Open Checked in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-toggle--checked)
+
+### Layout
+
+The `layout` prop allows you to control the position of the label in relation to the control. The default layout is `inline`, but you can also choose the following options:',
+
+- `inline-between` similar to inline, but this positions the label and control at opposite ends of their container
+- `inline-reverse` renders the label after the control instead of before the control
+- `stack` positions the label above the control
+
+[Open Layout in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-toggle--layout)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Toggle/Toggle.tsx" name="IressToggleProps" />

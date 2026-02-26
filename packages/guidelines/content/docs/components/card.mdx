@@ -1,0 +1,123 @@
+---
+title: Card
+description: "Cards are used to group small, related pieces of information into one digestible unit."
+component: "Card/Card.tsx"
+propsType: "IressCardProps"
+---
+
+## Examples
+
+### Simple cards
+
+All slots and props for card are optional. You can create a simple card by adding some content to the default slot.
+
+[Open Simple in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-card--simple)
+
+### No border
+
+The `noBorder` prop can be used to remove the border from the card, which is useful when you want to de-prioritise a card within another bordered container, such as a card within a sidebar.
+
+[Open NoBorder in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-card--no-border)
+
+### Padding
+
+Padding can be controlled using the `p` prop. It can be set to `none`, `sm`, `md` or `lg`. It defaults to `md`.
+
+[Open Padding in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-card--padding)
+
+### Stretch
+
+The `stretch` prop can be used to stretch the card to fill its container.
+
+[Open Stretch in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-card--stretch)
+
+### Selected
+
+Setting the `selected` prop highlights the card, usually to allow selection in a list.
+
+[Open Selected in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-card--selected)
+
+## Render props (slots)
+
+If you're coming from v4 or earlier, you might be used to slots. In v5, we've replaced slots with render props which align with the React API. Render props allow you to create a structured layout for your card, while still having the flexibility to add custom content. They are simply functions that return JSX, so you can pass any component you like.
+
+However, please be diligent as the component you use may not fit withing the confines of the `IressCard` layout.
+
+### Prepend
+
+Use the `prepend` prop to add content to the left side of the card.
+
+[Open Prepend in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-card-slots--prepend)
+
+### Top Right
+
+Use the `topRight` prop to add content to the top right of the card. This is useful for adding a badge, icon, or an actions menu.
+
+[Open TopRight in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-card-slots--top-right)
+
+### Heading
+
+Use the `heading` prop to add a header to the card. The header can be any component you like, but it is designed to support a simple heading element, optionally wrapped with a link.
+
+**Note:** `headingText` and `headingLevel` props have been replaced with the `heading` render prop to give you more control over the heading element and its content. To use the previous behaviour, you can pass a string which will automatically create a `h2` element, or pass a `h*` element with the text as a child.
+
+[Open Heading in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-card-slots--heading)
+
+### Media
+
+Use the `media` prop to add media to the card. The media can be any component you like, but it is designed to support an image or video.
+
+[Open Media in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-card-slots--media)
+
+### Content
+
+Use the `content` prop to add content to the card. The content can be any component you like, but it is designed to support simple text based elements.
+
+[Open Content in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-card-slots--content)
+
+### Footer
+
+Use the `footer` prop to add a footer to the card. The footer can be any component you like, but it is designed to support buttons.
+
+[Open Footer in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-card-slots--footer)
+
+### All slots
+
+You can use all the slots together to create a custom card layout.
+
+[Open AllSlots in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-card-slots--all-slots)
+
+## Clickable cards
+
+Note: The `clickable` prop has been deprecated in favour of using component variations, or the `onClick` prop.
+
+### Heading only
+
+Since the `heading` prop now renders the component you give it, you have full control over the content of the `heading`. This means you can add pass it a heading with a link.
+
+[Open HeadingOnly in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-card-clickable--heading-only)
+
+### Whole card
+
+The whole card can be made clickable by passing an `onClick` prop. All the appropriate styling will be added as well.
+
+It's recommended to add `role="button"` and `tabindex="0"` to the card to make it clear to screen readers that the card is clickable.
+
+[Open WholeCard in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-card-clickable--whole-card)
+
+### Links and Buttons
+
+To simplify the process of making the whole card clickable, you can use the `IressLinkCard` and `IressButtonCard` components. These components look exactly the same as the `IressCard` component, however their base tags are different, allowing you to use them exactly like you would a html link and button.
+
+**Note:** These components replace the `button`, `clickable` and `href` props. You no longer need `button` and `clickable`, as these are automatically inferred. To mimic the `href` prop, simply change the component you are using to `IressLinkCard`.
+
+```tsx
+<IressInline gap="md" horizontalAlign="around">
+  [Open ButtonCard in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-card-clickable--button-card)
+  [Open LinkCard in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-card-clickable--link-card)
+</IressInline>
+```
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Card/Card.tsx" name="IressCardProps" />

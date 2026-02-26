@@ -1,0 +1,40 @@
+---
+title: Radio
+description: "A radio is a single option presented with a radio button. It is used to select a single option from multiple options. It is typically used in an IressRadioGroup."
+component: "Radio/Radio.tsx"
+propsType: "IressRadioProps"
+---
+
+## Examples
+
+### Checked
+
+You can set the radio to `checked` by default. This is useful when you want to pre-select an option.
+
+**Note:** If you are using an `IressRadioGroup`, you should use the `value` prop on the `IressRadioGroup` to set the checked state of its `<IressRadio />` children, as the `checked` prop will be ignored.
+
+[Open Checked in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-radio--checked)
+
+### Hidden control
+
+You can hide the radio button and use a custom UI to display the content. Even though the radio button is hidden, it still acts like a radio.
+
+[Open HiddenControl in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-radio--hidden-control)
+
+### Read only
+
+The `readOnly` prop changes how the radio is rendered. It will only render if the radio is checked (alongside a hidden input that contains the `value` if it was set), otherwise it not be rendered.
+
+It is understandable that this may not be the desired behavior for all use cases. If you need a radio that is not editable, but still visible, simply do not set the `readOnly` prop and set the `checked` prop instead.
+
+[Open ReadOnly in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-radio--read-only)
+
+### Touch
+
+The `touch` prop adds the button-like border and padding to radio.
+
+[Open Touch in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-radio--touch)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Radio/Radio.tsx" name="IressRadioProps" />

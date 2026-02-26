@@ -1,0 +1,52 @@
+---
+title: Skeleton
+description: "Skeletons can increase perceived performance for users. As opposed to spinners, skeletons make it feel as though things are happening/loading immediately, then the information is incrementally displayed on the screen."
+component: "Skeleton/Skeleton.tsx"
+propsType: "IressSkeletonProps"
+---
+
+## Examples
+
+### Modes
+
+The `mode` prop can be set to `text` (default), `rect` or `circle`.
+
+[Open Mode in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-skeleton--mode)
+
+### Text
+
+`text` mode allows you to use `IressSkeleton` in place of `IressText` and keep the same sizing. To achieve this you can use `text` mode in conjunction with the `textVariant` prop.
+
+`text` also accepts the width prop but does not use the `height` prop like other modes. The height is achieved through font size and line height.
+
+[Open Text in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-skeleton--text)
+
+### Rect
+
+`rect` mode allows you to use `IressSkeleton` in place of block elements, a good example would be in place of images.
+
+`rect` accepts both `width` and `height` props for sizing. It will default to 100% width and 100px height.
+
+[Open Rect in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-skeleton--rect)
+
+### Circle
+
+`circle` mode allows you to use `IressSkeleton` in place of circular elements, a good example would be for profile images.
+
+`circle` accepts both `width` and `height` props for sizing. It will default to 100% width and 100px height.
+
+[Open Circle in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-skeleton--circle)
+
+### Size
+
+`width` and `height` props can be used to match the layout of the loaded content.
+
+These props accept any unit of dimension, but if no unit is provided it will default to pixels.
+
+**Note:** `height` will be ignored for text mode as this is calculated using the `IressText` component.
+
+[Open Size in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-skeleton--size)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Skeleton/Skeleton.tsx" name="IressSkeletonProps" />

@@ -1,0 +1,62 @@
+---
+title: Inline
+description: "IressInline renders a set of components in a row with equal spacing around them, wrapping onto multiple lines when necessary."
+component: "Inline/Inline.tsx"
+propsType: "IressInlineProps"
+---
+
+## Examples
+
+### Gap
+
+Inline spacing is applied to the direct children of the `IressInline` component.
+
+The amount of spacing is controlled by the `gap` prop and can be set from `spacing.0` to `spacing.10`.
+
+#### What happened to `gutter`?
+
+The previous `gutter` prop has been replaced by `gap`, which uses the latest set of spacing tokens.
+
+The existing `gutter` values are still supported, as they are now aliases for the spacing tokens.
+
+[Open Gap in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-inline--gap)
+
+### Responsive gap
+
+The `gap` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
+
+[Open ResponsiveGap in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-inline--responsive-gap)
+
+### Horizontal align
+
+Horizontal alignment of the children is controlled by the `horizontalAlign` prop. It defaults to left and can be set to the following:
+
+- `around` - space is distributed so each direct child has the same space on the left and on the right. This means that the gap between children is twice as large as the gap between the first / last items and the edges of the container, because the gap between children is comprised one child's spacing right plus the next child's spacing left.
+- `between` - space is distributed evenly between direct children, but the first and last children sit tight to the edges of the container.
+- `center` - children are aligned center, similar to `text-align: center`.
+- `evenly` - space is distributed evenly between direct children.
+- `left` - children are aligned left, similar to `text-align: left`.
+- `right` - children are aligned right, similar to `text-align: right`.
+
+[Open HorizontalAlign in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-inline--horizontal-align)
+
+### Vertical align
+
+Vertical alignment of the children is controlled by the `verticalAlign` prop. It defaults to top and can be set to the following:
+
+- `bottom` - children are aligned to the bottom of the container.
+- `middle` - children are aligned to the middle of the container.
+- `stretch` - each direct child stretches to the full height of the inline container.
+- `top` - children are aligned to the top of the container.
+
+[Open VerticalAlign in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-inline--vertical-align)
+
+### No wrap
+
+The `IressInline` component automatically wraps children. There may be some scenarios where you do not require children to be wrapped. For this you can use the `noWrap` prop.
+
+[Open NoWrap in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-inline--no-wrap)
+
+## Props
+
+<auto-type-table path="../../../../../packages/components/src/components/Inline/Inline.tsx" name="IressInlineProps" />
