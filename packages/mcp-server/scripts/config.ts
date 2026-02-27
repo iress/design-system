@@ -12,9 +12,6 @@ export default {
   folder,
   guidelinesFile: `${folder}/docs/guidelines.md`,
   selectorTimeout: 10000,
-  storybookBaseUrl: getEnvVar(
-    'STORYBOOK_BASE_URL',
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com',
-  ),
+  storybookBaseUrl: getEnvVar('STORYBOOK_BASE_URL', 'http://localhost:6005'),
   storybookContentSelector: '#storybook-docs',
 };
