@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { IDSClientProvider } from '@/components/ids-client-provider';
 import './global.css';
+import './fumadocs-story.css';
 import '@iress-oss/ids-components/dist/style.css';
 
 export const metadata: Metadata = {

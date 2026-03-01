@@ -1,0 +1,166 @@
+/*
+ * Tailwind CSS v4 entry point for fumadocs-story integration.
+ *
+ * This file:
+ * 1. Loads Tailwind v4 theme variables + utility classes (NO preflight reset)
+ * 2. Tells Tailwind to scan @fumadocs/story + fumadocs-ui classes
+ * 3. Maps the fumadocs fd-* color variables to IDS-aligned values
+ *
+ * We deliberately skip `tailwindcss/preflight` because it contains a full
+ * CSS reset that conflicts with IDS / Panda CSS component styles.
+ * See: https://tailwindcss.com/docs/preflight#disabling-preflight
+ *
+ * Tailwind layers are renamed to tw-theme / tw-utilities so they don't
+ * collide with Panda CSS's identically-named layers. The combined order
+ * ensures Panda styles resolve first, then Tailwind utilities on top.
+ *
+ * Panda CSS (from IDS):  @layer reset, base, tokens, recipes, utilities;
+ * Tailwind (this file):  @layer tw-theme, tw-utilities;
+ */
+
+@layer reset, base, tokens, recipes, utilities, tw-theme, tw-utilities;
+@import 'tailwindcss/theme.css' layer(tw-theme);
+@import 'tailwindcss/utilities.css' layer(tw-utilities);
+
+/* Scan fumadocs-story client-side components for Tailwind classes */
+@source '../../../node_modules/@fumadocs/story/dist/client/**/*.js';
+/* Scan fumadocs-ui button (used by fumadocs-story) */
+@source '../../../node_modules/fumadocs-ui/dist/components/ui/button.js';
+
+/*
+ * Default border colour for Tailwind's `border` utility.
+ *
+ * We skip preflight (which normally sets border-color on every element).
+ * Tailwind v4's `.border` only sets `border-style` + `border-width`,
+ * so without this rule the colour falls back to `currentColor`.
+ *
+ * Uses the fd-border token which maps to IDS neutral.30 at runtime.
+ *
+ * See: https://tailwindcss.com/docs/upgrade-guide (v3→v4 border color)
+ */
+@layer tw-theme {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-fd-border, currentColor);
+  }
+}
+
+/*
+ * Map fumadocs "fd-*" theme colours to IDS design tokens.
+ *
+ * Tailwind v4 @theme generates --color-fd-* custom properties on :root.
+ * The utility classes (e.g. bg-fd-card) reference these via var().
+ *
+ * We define fallback values in @theme (required for Tailwind build-time
+ * features like color-mix), then override them at runtime in a :root rule
+ * that maps each fd-* variable to the corresponding IDS token.
+ */
+@theme {
+  /* Surfaces */
+  --color-fd-background: #ffffff;
+  --color-fd-foreground: #384666;
+
+  --color-fd-card: #f5f6f8;
+  --color-fd-card-foreground: #384666;
+
+  --color-fd-popover: #ffffff;
+  --color-fd-popover-foreground: #384666;
+
+  /* Muted / secondary */
+  --color-fd-muted: #e2e6ea;
+  --color-fd-muted-foreground: #828f9d;
+
+  --color-fd-secondary: #f5f6f8;
+  --color-fd-secondary-foreground: #384666;
+
+  /* Primary (playground CTA buttons) */
+  --color-fd-primary: #003271;
+  --color-fd-primary-foreground: #ffffff;
+
+  /* Accent (hover / focus states) */
+  --color-fd-accent: #ebf3ff;
+  --color-fd-accent-foreground: #003271;
+
+  /* Border (used by @layer tw-theme default rule) */
+  --color-fd-border: #e2e6ea;
+
+  /* Focus ring */
+  --color-fd-ring: #005bff;
+
+  /* Status colours */
+  --color-fd-error: #c21010;
+
+  /*
+   * Tailwind v4 --default-* theme overrides.
+   * These control the fallback colour/width for ring/outline utilities.
+   */
+  --default-ring-color: #005bff;
+}
+
+/*
+ * Runtime overrides — map fd-* variables to live IDS tokens.
+ *
+ * When IDS component CSS is loaded the --iress-colour-* custom properties
+ * are defined on :root. By referencing them here the playground
+ * automatically picks up the active IDS theme (including any future
+ * dark-mode or brand overrides).
+ *
+ * Mapping:
+ *   fd-background        → neutral.10 (page white)
+ *   fd-foreground         → neutral.80 (body text)
+ *   fd-card / popover     → neutral.20 (alt surface)
+ *   fd-muted              → neutral.30 (subtle bg / default border)
+ *   fd-muted-foreground   → neutral.60 (muted text)
+ *   fd-secondary          → neutral.20 (alt surface)
+ *   fd-primary            → primary.fill
+ *   fd-primary-foreground → primary.onFill
+ *   fd-accent             → primary.surface
+ *   fd-accent-foreground  → primary.text
+ *   fd-border             → neutral.30 (border)
+ *   fd-ring               → globalInteractions.focusRing
+ *   fd-error              → system.danger.text
+ */
+:root {
+  /* Surfaces */
+  --color-fd-background: var(--iress-colour-neutral-10, #ffffff);
+  --color-fd-foreground: var(--iress-colour-neutral-80, #384666);
+
+  --color-fd-card: var(--iress-colour-neutral-20, #f5f6f8);
+  --color-fd-card-foreground: var(--iress-colour-neutral-80, #384666);
+
+  --color-fd-popover: var(--iress-colour-neutral-10, #ffffff);
+  --color-fd-popover-foreground: var(--iress-colour-neutral-80, #384666);
+
+  /* Muted / secondary */
+  --color-fd-muted: var(--iress-colour-neutral-30, #e2e6ea);
+  --color-fd-muted-foreground: var(--iress-colour-neutral-60, #828f9d);
+
+  --color-fd-secondary: var(--iress-colour-neutral-20, #f5f6f8);
+  --color-fd-secondary-foreground: var(--iress-colour-neutral-80, #384666);
+
+  /* Primary */
+  --color-fd-primary: var(--iress-colour-primary-fill, #003271);
+  --color-fd-primary-foreground: var(--iress-colour-primary-on-fill, #ffffff);
+
+  /* Accent (hover / focus) */
+  --color-fd-accent: var(--iress-colour-primary-surface, #ebf3ff);
+  --color-fd-accent-foreground: var(--iress-colour-primary-text, #003271);
+
+  /* Focus ring */
+  --color-fd-ring: var(--iress-colour-global-interactions-focus-ring, #005bff);
+
+  /* Border */
+  --color-fd-border: var(--iress-colour-neutral-30, #e2e6ea);
+
+  /* Status */
+  --color-fd-error: var(--iress-colour-system-danger-text, #c21010);
+
+  /* Tailwind --default-* overrides (ring utility default colour) */
+  --default-ring-color: var(
+    --iress-colour-global-interactions-focus-ring,
+    #005bff
+  );
+}

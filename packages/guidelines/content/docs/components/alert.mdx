@@ -1,9 +1,15 @@
 ---
 title: Alert
 description: "An alert displays a short, important message in a way that attracts the user's attention without interrupting the user's task."
-component: "Alert/Alert.tsx"
-propsType: "IressAlertProps"
+component: 'Alert/Alert.tsx'
+propsType: 'IressAlertProps'
 ---
+
+import { story } from '@/components/stories/alert.story';
+
+## Interactive Playground
+
+<story.WithControl />
 
 ## Examples
 
@@ -54,6 +60,20 @@ The alert can be made dismissable by setting the `onDismiss` prop. This will dis
 
 [Open Dismissable in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--dismissable)
 
-## Props
+## Component Props
 
-<auto-type-table path="../../../../../packages/components/src/components/Alert/Alert.tsx" name="IressAlertProps" />
+These are the props specific to the Alert component.
+
+<auto-type-table
+  path="../../../../../packages/components/src/components/Alert/Alert.tsx"
+  name="IressAlertProps"
+/>
+
+## Styling Props
+
+All IDS components accept a shared set of styling props (`IressCSSProps`) for layout and visual customisation using design tokens. These include spacing (`m`, `p`, `mx`, `py`, …), sizing (`width`, `maxWidth`), typography (`textStyle`, `textAlign`, `color`), background (`bg`), visibility (`hideFrom`, `hideBelow`, `srOnly`), and more.
+
+<auto-type-table
+  path="../../../../../packages/components/src/interfaces.ts"
+  name="IressCSSProps"
+/>
