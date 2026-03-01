@@ -170,3 +170,92 @@ pre code span {
   color: var(--ids-semantic-foreground-subtle);
   opacity: 0.5;
 }
+
+/* ── Component Links ── */
+.component-links {
+  border: 1px solid var(--ids-semantic-border-default, #e5e7eb);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.component-links-row {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--ids-semantic-border-default, #e5e7eb);
+  gap: 1rem;
+}
+
+.component-links-row:last-child {
+  border-bottom: none;
+}
+
+.component-links-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ids-semantic-foreground-subtle, #6b7280);
+  min-width: 3.5rem;
+}
+
+.component-links-code {
+  font-size: 0.8125rem;
+  cursor: pointer;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  background: var(--ids-semantic-background-subtle, #f3f4f6);
+}
+
+.component-links-code:hover {
+  background: var(--ids-semantic-background-muted, #e5e7eb);
+}
+
+.component-links-items {
+  display: flex;
+  gap: 1rem;
+}
+
+/* ── Storybook Embed ── */
+.storybook-embed {
+  border: 1px solid var(--ids-semantic-border-default, #e5e7eb);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.storybook-embed-iframe {
+  display: block;
+  border: none;
+  border-bottom: 1px solid var(--ids-semantic-border-default, #e5e7eb);
+}
+
+.storybook-embed-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  justify-content: flex-end;
+}
+
+.storybook-embed-toggle {
+  font-size: 0.8125rem;
+  color: var(--ids-semantic-foreground-subtle, #6b7280);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.storybook-embed-toggle:hover {
+  color: var(--ids-semantic-foreground-interactive, #2563eb);
+}
+
+.storybook-embed-code {
+  margin: 0;
+  padding: 1rem;
+  background: var(--ids-semantic-background-subtle, #f3f4f6);
+  border-top: 1px solid var(--ids-semantic-border-default, #e5e7eb);
+  overflow-x: auto;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}

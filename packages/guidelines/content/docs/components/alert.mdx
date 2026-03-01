@@ -3,62 +3,118 @@ title: Alert
 description: "An alert displays a short, important message in a way that attracts the user's attention without interrupting the user's task."
 component: 'Alert/Alert.tsx'
 propsType: 'IressAlertProps'
+storybookTitle: 'Components/Alert'
+figma: 'https://www.figma.com/design/REPLACE_WITH_FIGMA_FILE_ID?node-id=REPLACE_WITH_NODE_ID'
 ---
 
 import { story } from '@/components/stories/alert.story';
 
-## Interactive Playground
+<ComponentLinks
+  title="Alert"
+  component="Alert/Alert.tsx"
+  storybookTitle="Components/Alert"
+/>
 
-<story.WithControl />
+<ComponentTabs figma="https://www.figma.com/design/REPLACE_WITH_FIGMA_FILE_ID?node-id=REPLACE_WITH_NODE_ID">
+  <DevelopmentTab>
+
+## When To Use
+
+- When you need to show alert messages to users.
+- When you need a persistent static container which is closable by user actions.
+
+### When Not To Use
+
+- For transient messages that auto-dismiss → [Toaster](/docs/components/toaster)
+- For inline field-level errors → [ValidationMessage](/docs/components/validation-message)
+- For blocking actions that require user confirmation → [Modal](/docs/components/modal)
 
 ## Examples
 
 ### Status
 
-The alert offers four statuses that set a distinctive colour and icon. They can be set using the `status` prop. Their different use cases are described here.
+The alert offers four statuses that set a distinctive colour and icon. They can be set using the `status` prop.
 
-[Open Status in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--status)
+<StorybookEmbed storyId="components-alert--status" code={`<IressAlert status="info">Info alert</IressAlert>
+<IressAlert status="success">Success alert</IressAlert>
+<IressAlert status="warning">Warning alert</IressAlert>
+<IressAlert status="danger">Danger alert</IressAlert>
+<IressAlert status="neutral">Neutral alert</IressAlert>`} />
 
 ### Heading
 
-An alert can be displayed with a heading. This is controlled by the `heading` prop. If provided a string, it will display a `<h2 />` element with the string as its content. If provided a React element, it will display that element directly.
+An alert can be displayed with a heading via the `heading` prop. If provided a string, it renders a `<h2 />`. If provided a React element, it renders that directly.
 
-**Note**: The `heading` prop replaces the `headingText` and `headingLevel` props from previous versions of IDS. These prop are now deprecated and will be removed in a future version.
-
-[Open Heading in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--heading)
+<StorybookEmbed storyId="components-alert--heading" code={`<IressAlert heading="Alert heading" status="info">
+  This is an alert with a heading.
+</IressAlert>`} />
 
 ### Actions
 
-The `actions` prop allows you to display call to action buttons within the alert. This is useful for providing users with options to take action based on the alert message.
+The `actions` prop displays call to action buttons within the alert, providing users with options to take action based on the alert message.
 
-[Open Footer in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--footer)
+<StorybookEmbed storyId="components-alert--footer" code={`<IressAlert
+  heading="Confirm"
+  status="danger"
+  actions={[
+    { children: 'Cancel', mode: 'tertiary' },
+    { children: 'Confirm', mode: 'secondary' },
+  ]}
+>
+  Are you sure you want to proceed?
+</IressAlert>`} />
 
 ### Icon
 
-The `icon` prop allows you to customise the icon displayed in the alert. It accepts a string for the icon name, or can be set to `false` to remove the icon entirely.
+The `icon` prop customises the icon displayed. It accepts a string for the icon name, or `false` to remove the icon entirely.
 
-[Open Icon in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--icon)
+<StorybookEmbed storyId="components-alert--icon" code={`<IressAlert icon={false} heading="No icon" multiLine>
+  This is an alert without an icon.
+</IressAlert>`} />
 
 ### Multi-line
 
-By default, the alert is designed to display short messages. If you need to display a longer message that spans multiple lines, you can set the `multiLine` prop to `true`. This will adjust the spacing and layout of the alert to accommodate longer content.
+Set `multiLine` to `true` for longer content. This adjusts spacing and aligns the icon to the top of the alert.
 
-[Open MultiLine in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--multi-line)
+<StorybookEmbed storyId="components-alert--multi-line" height={500} code={`<IressAlert multiLine heading="Alert heading" status="danger">
+  Once you confirm, the system will begin re-indexing your
+  entire library, which may temporarily limit access...
+</IressAlert>`} />
 
 ### Variants
 
-The alert can be displayed in different variants to suit different use cases. The `variant` prop allows you to set the variant of the alert. The available variants are:
+The `variant` prop changes the alert layout:
 
-- `sidebar`: The alert is displayed in the sidebar of the page, typically used for informational messages on longer forms.
-- `full-width`: The alert is displayed in the site-wide banner, typically used for important messages that need to be seen by all users.
+- `sidebar` — for informational messages on longer forms
+- `full-width` — for site-wide banners
 
-[Open Variant in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--variant)
+<StorybookEmbed storyId="components-alert--variant" code={`<IressAlert variant="sidebar" heading="Did you know?">
+  You can use the alert component in different ways.
+</IressAlert>
+<IressAlert variant="full-width" heading="Did you know?">
+  You can use the alert component in different ways.
+</IressAlert>`} />
 
-### Dimissable
+### Dismissable
 
-The alert can be made dismissable by setting the `onDismiss` prop. This will display a close button in the top right corner of the alert, allowing users to dismiss it.
+Set `onClose` to make the alert dismissable. This displays a close button in the top right corner.
 
-[Open Dismissable in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--dismissable)
+<StorybookEmbed storyId="components-alert--dismissable" code={`<IressAlert
+  status="info"
+  onClose={() => console.log('dismissed')}
+>
+  This is a simple info alert
+</IressAlert>`} />
+
+  </DevelopmentTab>
+
+  <DesignTab />
+
+  <APITab>
+
+## Interactive Playground
+
+<story.WithControl />
 
 ## Component Props
 
@@ -71,9 +127,12 @@ These are the props specific to the Alert component.
 
 ## Styling Props
 
-All IDS components accept a shared set of styling props (`IressCSSProps`) for layout and visual customisation using design tokens. These include spacing (`m`, `p`, `mx`, `py`, …), sizing (`width`, `maxWidth`), typography (`textStyle`, `textAlign`, `color`), background (`bg`), visibility (`hideFrom`, `hideBelow`, `srOnly`), and more.
+All IDS components accept a shared set of styling props (`IressCSSProps`) for layout and visual customisation using design tokens.
 
 <auto-type-table
   path="../../../../../packages/components/src/interfaces.ts"
   name="IressCSSProps"
 />
+
+  </APITab>
+</ComponentTabs>
