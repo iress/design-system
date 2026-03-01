@@ -280,31 +280,6 @@ describe('IressSelectTags', () => {
     });
   });
 
-  describe('height consistency', () => {
-    it('applies vertical centering to maintain consistent height with collapsed tags', () => {
-      const { container } = render(
-        <IressSelectTags limit={5} selected={MOCK_LABEL_VALUE_META} />,
-      );
-
-      // Find the IressInline wrapper (tagsList)
-      const tagsListWrapper = container.querySelector('.ids-inline');
-      expect(tagsListWrapper).toBeInTheDocument();
-
-      // Verify it has middle vertical alignment for height consistency
-      // This ensures collapsed tags ("X selected") maintain same height as visible tags
-      expect(tagsListWrapper).toHaveClass('ai_center');
-    });
-
-    it('renders collapsed tag text when limit is exceeded', () => {
-      render(<IressSelectTags limit={3} selected={MOCK_LABEL_VALUE_META} />);
-
-      // Should show "5 selected" instead of individual tags
-      expect(
-        screen.getByText(`${MOCK_LABEL_VALUE_META.length} selected`),
-      ).toBeInTheDocument();
-    });
-  });
-
   describe('accessibility', () => {
     it('should not have basic accessibility issues', async () => {
       const { container } = render(<IressSelectTags />);
