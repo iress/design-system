@@ -55,7 +55,7 @@
     "jsdom": "27.4.0",
     "lightningcss": "^1.31.1",
     "postcss": "8.4.31",
-    "prettier": "^3.7.4",
+    "prettier": "^3.8.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-dropzone": "14.4.0",
