@@ -52,7 +52,7 @@
     "eslint-plugin-sonarjs": "^3.0.5",
     "glob": "13.0.0",
     "jest-axe": "10.0.0",
-    "jsdom": "27.4.0",
+    "jsdom": "28.1.0",
     "lightningcss": "^1.31.1",
     "postcss": "8.4.31",
     "prettier": "^3.8.1",
