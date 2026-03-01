@@ -52,7 +52,7 @@ export const selectTags = sva({
     },
     tagsList: {
       overflow: 'hidden',
-      height: '[100%]',
+      flex: '1',
     },
   },
   variants: {

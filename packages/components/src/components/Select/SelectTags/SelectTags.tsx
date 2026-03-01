@@ -179,6 +179,8 @@ const Tags = ({
             adjustFocusOnTagDelete(popover, e);
           }}
           onDeactivated={() => onToggleActions?.(false)}
+          container={document.body}
+          align="bottom-end"
         >
           <IressMenu>
             <IressMenuItem onClick={() => setExpanded(true)}>
@@ -188,6 +190,7 @@ const Tags = ({
           </IressMenu>
         </IressPopover>
       }
+      compact
     >
       {composeLabelValueDescriptor(selectedArray, selectedOptionsText)}
     </IressTag>
