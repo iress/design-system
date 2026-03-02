@@ -1823,7 +1823,7 @@ __metadata:
     eslint-plugin-react-refresh: "npm:^0.5.0"
     eslint-plugin-sonarjs: "npm:^3.0.7"
     fuzzysort: "npm:3.1.0"
-    glob: "npm:^13.0.0"
+    glob: "npm:^13.0.3"
     jest-axe: "npm:^10.0.0"
     jsdom: "npm:^28.1.0"
     postcss: "npm:^8.5.6"
