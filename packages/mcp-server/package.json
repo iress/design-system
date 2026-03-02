@@ -41,7 +41,7 @@
     "LICENSE.txt"
   ],
   "dependencies": {
-    "@modelcontextprotocol/sdk": "1.25.3",
+    "@modelcontextprotocol/sdk": "1.26.0",
     "zod": "4.3.6"
   },
   "devDependencies": {
@@ -55,7 +55,6 @@
     "dotenv": "17.2.4",
     "eslint": "^10.0.0",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-file-progress": "3.0.2",
     "eslint-plugin-prettier": "5.5.5",
     "eslint-plugin-sonarjs": "3.0.7",
     "minimist": "^1.2.8",
