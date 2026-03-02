@@ -49,6 +49,7 @@ export function getButtonGroupContext<
   >;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- Context export for use throughout the component tree
 export const ButtonGroupContext = createButtonGroupContext();
 
 export const ButtonGroupProvider = <
