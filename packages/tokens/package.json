@@ -47,7 +47,7 @@
     "concurrently": "^9.2.1",
     "eslint": "^10.0.0",
     "eslint-plugin-file-progress": "^3.0.2",
-    "eslint-plugin-mdx": "^3.6.2",
+    "eslint-plugin-mdx": "3.6.2",
     "eslint-plugin-prettier": "^5.5.5",
     "jsdom": "^28.1.0",
     "json5": "^2.2.3",

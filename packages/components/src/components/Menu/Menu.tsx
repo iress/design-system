@@ -202,6 +202,7 @@ function getMenuContext<
   >;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- Context export for use throughout the component tree
 export const MenuContext = createMenuContext();
 
 export const IressMenu = <

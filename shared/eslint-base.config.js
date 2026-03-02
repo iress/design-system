@@ -1,7 +1,6 @@
 import typescriptEslintParser from '@typescript-eslint/parser';
 import typescriptEslintPlugin from '@typescript-eslint/eslint-plugin';
 import prettierPlugin from 'eslint-plugin-prettier';
-import fileProgressPlugin from 'eslint-plugin-file-progress';
 
 // Dynamic imports for optional plugins
 export async function createReactConfig() {
@@ -27,15 +26,25 @@ export async function createReactConfig() {
 }
 
 export async function createMdxConfig() {
-  const mdxPlugin = await import('eslint-plugin-mdx');
-
+  // Temporarily disabled due to ESLint 10 incompatibility
+  // The eslint-plugin-mdx package uses deprecated context.getFilename() API
+  // which was removed in ESLint 10. Re-enable when the plugin is updated.
+  // See: https://github.com/mdx-js/eslint-mdx/issues
+  
+  // Return an ignore configuration for MDX files to prevent parsing errors
   return {
-    ...mdxPlugin.flat,
-    files: ['**/*.mdx'],
-    rules: {
-      ...mdxPlugin.flat.rules,
-    },
+    ignores: ['**/*.mdx'],
   };
+
+  // Original implementation (disabled):
+  // const mdxPlugin = await import('eslint-plugin-mdx');
+  // return {
+  //   ...mdxPlugin.flat,
+  //   files: ['**/*.mdx'],
+  //   rules: {
+  //     ...mdxPlugin.flat.rules,
+  //   },
+  // };
 }
 
 export async function createSonarConfig() {
@@ -94,12 +103,10 @@ export const baseTypeScriptConfig = {
   },
   plugins: {
     '@typescript-eslint': typescriptEslintPlugin,
-    'file-progress': fileProgressPlugin,
   },
   rules: {
     ...typescriptEslintPlugin.configs['recommended-type-checked'].rules,
     ...typescriptEslintPlugin.configs['stylistic-type-checked'].rules,
-    'file-progress/activate': 'warn',
     '@typescript-eslint/no-explicit-any': 'error',
     // Allow underscored `_value`
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
@@ -108,6 +115,9 @@ export const baseTypeScriptConfig = {
       'warn',
       { prefer: 'type-imports', fixStyle: 'inline-type-imports' },
     ],
+    // Temporarily disabled due to bug with ESLint 10 and isolatedDeclarations
+    // See: https://github.com/typescript-eslint/typescript-eslint/issues/10571
+    '@typescript-eslint/consistent-generic-constructors': 'off',
   },
 };
 
