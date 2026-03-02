@@ -115,6 +115,9 @@ export const baseTypeScriptConfig = {
       'warn',
       { prefer: 'type-imports', fixStyle: 'inline-type-imports' },
     ],
+    // Temporarily disabled due to bug with ESLint 10 and isolatedDeclarations
+    // See: https://github.com/typescript-eslint/typescript-eslint/issues/10571
+    '@typescript-eslint/consistent-generic-constructors': 'off',
   },
 };
 
