@@ -436,22 +436,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bundled-es-modules/glob@npm:^11.1.0":
-  version: 11.1.0
-  resolution: "@bundled-es-modules/glob@npm:11.1.0"
+"@bundled-es-modules/glob@npm:^13.0.1":
+  version: 13.0.1
+  resolution: "@bundled-es-modules/glob@npm:13.0.1"
   dependencies:
     buffer: "npm:^6.0.3"
     events: "npm:^3.3.0"
-    glob: "npm:^11.1.0"
+    glob: "npm:^13.0.1"
     path: "npm:^0.12.7"
     stream: "npm:^0.0.3"
     string_decoder: "npm:^1.3.0"
     url: "npm:^0.11.4"
-  checksum: 10c0/a3a40f63a7686872fc8c83d4e05d4e167320cc662fbaedf4cbab7a9ad9961f2a859305c6c22b44a177f1abfa33fccaaff06f6ffa70775192b6d8bc4fa9198b4f
+  checksum: 10c0/05c448c2afb8b4d860dcedc6cdfd4ed8c0238f6b55675d769a2bb92856678695007cc4c9633bcf272add183ad188e13a11d3273c699cf4a5fd3a1eb6a79bcded
   languageName: node
   linkType: hard
 
-"@bundled-es-modules/memfs@npm:^4.9.4":
+"@bundled-es-modules/memfs@npm:^4.17.0":
   version: 4.17.0
   resolution: "@bundled-es-modules/memfs@npm:4.17.0"
   dependencies:
@@ -1702,7 +1702,7 @@ __metadata:
     rimraf: "npm:^6.1.3"
     rollup-plugin-tree-shakeable: "npm:^2.0.0"
     storybook: "npm:10.2.8"
-    style-dictionary: "npm:^5.2.0"
+    style-dictionary: "npm:^5.3.0"
     tsx: "npm:^4.21.0"
     typescript: "npm:^5.9.3"
     vite: "npm:7.3.1"
@@ -6732,6 +6732,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"colorjs.io@npm:^0.5.2":
+  version: 0.5.2
+  resolution: "colorjs.io@npm:0.5.2"
+  checksum: 10c0/2e6ea43629e325e721b92429239de3a6f42fb6d88ba6e4c2aeff0288c196d876f2f7ee82aea95bd40072d5cdc8cb87f042f4d94c134dcabf0e34a717e4caacb9
+  languageName: node
+  linkType: hard
+
 "colorjs.io@npm:^0.6.1":
   version: 0.6.1
   resolution: "colorjs.io@npm:0.6.1"
@@ -9193,7 +9200,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^13.0.3":
+"glob@npm:^13.0.1, glob@npm:^13.0.3":
   version: 13.0.3
   resolution: "glob@npm:13.0.3"
   dependencies:
@@ -14646,16 +14653,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-dictionary@npm:^5.2.0":
-  version: 5.2.0
-  resolution: "style-dictionary@npm:5.2.0"
+"style-dictionary@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "style-dictionary@npm:5.3.0"
   dependencies:
     "@bundled-es-modules/deepmerge": "npm:^4.3.1"
-    "@bundled-es-modules/glob": "npm:^11.1.0"
-    "@bundled-es-modules/memfs": "npm:^4.9.4"
+    "@bundled-es-modules/glob": "npm:^13.0.1"
+    "@bundled-es-modules/memfs": "npm:^4.17.0"
     "@zip.js/zip.js": "npm:^2.7.44"
     chalk: "npm:^5.3.0"
     change-case: "npm:^5.3.0"
+    colorjs.io: "npm:^0.5.2"
     commander: "npm:^12.1.0"
     is-plain-obj: "npm:^4.1.0"
     json5: "npm:^2.2.2"
@@ -14664,7 +14672,7 @@ __metadata:
     tinycolor2: "npm:^1.6.0"
   bin:
     style-dictionary: bin/style-dictionary.js
-  checksum: 10c0/67667dcdfa86dce2e368682354440ea4f4a6a03f1459e459e8adc0cef62a5cc6d47903691e22b25ccc1bc76593f64da3b5255977be2bb70bfec0ba2fe568eda2
+  checksum: 10c0/f1489cc28112b84c3b75a4a510507186b0c4f1d2ad142e334f1e8be001437dc68a065a89e327ce21143ce77259b7d360bb0032ec4fec6c5082e50bd02b803976
   languageName: node
   linkType: hard
 
