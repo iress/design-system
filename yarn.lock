@@ -1405,8 +1405,8 @@ __metadata:
     vitest: "npm:4.0.18"
     xml2js: "npm:0.6.2"
   peerDependencies:
-    react: ^17 || ^18 || ^19
-    react-dom: ^17 || ^18 || ^19
+    react: ^18 || ^19
+    react-dom: ^18 || ^19
     react-hook-form: ^7
   peerDependenciesMeta:
     react:
