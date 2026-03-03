@@ -18,6 +18,20 @@ import {
   FA_TO_MATERIAL_MAP,
   type FontAwesomeIconWithMaterialEquivalent,
 } from './helpers/iconMapping';
+import { loadIconModule } from './iconLoader';
+
+// Hardcoded fallback SVG (question mark) for when both the requested icon and help icon are missing
+const FallbackIcon = () => (
+  <svg
+    viewBox="0 -960 960 960"
+    width="100%"
+    height="100%"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M424-320q0-81 29.5-124t77.5-97q36-43 58-78.5t22-81.5q0-51-33-83.5T492-816q-45 0-80 28t-46 76l-56-24q18-58 64.5-97T492-872q72 0 120 46.5T660-708q0 54-26.5 97T568-526q-40 38-60 66.5T484-396h-60Zm56 240q-17 0-28.5-11.5T440-120q0-17 11.5-28.5T480-160q17 0 28.5 11.5T520-120q0 17-11.5 28.5T480-80Z" />
+  </svg>
+);
 
 // Module-level cache for lazy icon components to prevent re-creation on every render
 const iconCache = new Map<string, LazyExoticComponent<ComponentType>>();
@@ -25,20 +39,21 @@ const iconCache = new Map<string, LazyExoticComponent<ComponentType>>();
 function getIconComponent(
   iconName: string,
   filled: boolean,
-): LazyExoticComponent<React.ComponentType> {
+): LazyExoticComponent<ComponentType> {
   const cacheKey = `${iconName}${filled ? '-fill' : ''}`;
 
   const cached = iconCache.get(cacheKey);
   if (cached) return cached;
 
+  const fileName = `${iconName}${filled ? '-fill' : ''}`;
   const component = lazy(() => {
-    const iconPath = `./generated/${iconName}${filled ? '-fill' : ''}`;
-    return import(/* @vite-ignore */ iconPath).catch(() => {
-      idsLogger(
-        `[IressIcon] Icon "${iconName}" not found, falling back to "help" icon`,
-      );
-      return import('./generated/help');
-    });
+    const result = loadIconModule(fileName);
+    if (result) return result;
+
+    idsLogger(
+      `[IressIcon] Icon "${iconName}" not found, falling back to "help" icon`,
+    );
+    return loadIconModule('help') ?? Promise.resolve({ default: FallbackIcon });
   });
 
   iconCache.set(cacheKey, component);
@@ -125,6 +140,7 @@ export type IressIconProps<P extends IconType = 'material'> =
 
 export const IressIcon = <P extends IconType = 'material'>({
   className,
+  filled,
   flip,
   name,
   rotate,
@@ -143,10 +159,6 @@ export const IressIcon = <P extends IconType = 'material'>({
     );
   }
 
-  // Extract filled prop to prevent it from being passed to DOM
-  const { filled, ...otherRestProps } = restProps as IressIconProps<P> & {
-    filled?: boolean;
-  };
   // Compute Material Symbol icon name once (with auto-mapping from Font Awesome names)
   let materialIconName: MaterialSymbol | undefined;
   if (effectiveProvider === 'material') {
@@ -163,11 +175,17 @@ export const IressIcon = <P extends IconType = 'material'>({
       spin,
       type: effectiveProvider,
     });
-    const [styleProps, otherProps] = splitCssProps(otherRestProps);
+    const [styleProps, otherProps] = splitCssProps(restProps);
 
     const a11yProps = screenreaderText
       ? { 'aria-label': screenreaderText }
       : { 'aria-hidden': 'true' as const };
+
+    const sharedProps = {
+      role: 'img' as const,
+      ...a11yProps,
+      ...otherProps,
+    };
 
     return (
       <Suspense
@@ -178,21 +196,17 @@ export const IressIcon = <P extends IconType = 'material'>({
               GlobalCSSClass.Icon,
               className,
             )}
-            role="img"
-            {...a11yProps}
-            {...otherProps}
+            {...sharedProps}
           />
         }
       >
         <styled.span
-          role="img"
           className={cx(
             css(styles, styleProps),
             GlobalCSSClass.Icon,
             className,
           )}
-          {...a11yProps}
-          {...otherProps}
+          {...sharedProps}
         >
           <IconSvgRenderer iconName={materialIconName} filled={!!filled} />
         </styled.span>
@@ -204,15 +218,13 @@ export const IressIcon = <P extends IconType = 'material'>({
   const prefix = 'fa-';
 
   // Extract Font Awesome-specific props to prevent them from being passed to DOM
-  // Note: rotate, flip, spin are already extracted at function level
-  // but TypeScript needs explicit type exclusion to prevent conflicts with CSS properties
   const {
     set: setFromProps,
     fixedWidth: fixedWidthFromProps,
     ...faOtherProps
-  } = otherRestProps as Omit<
+  } = restProps as Omit<
     IressIconProps<'fontawesome'>,
-    'rotate' | 'flip' | 'spin'
+    'rotate' | 'flip' | 'spin' | 'filled'
   > & {
     set?: 'fal' | 'fab';
     fixedWidth?: boolean;
