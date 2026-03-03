@@ -15,25 +15,6 @@ import { menuItem } from '../Menu';
 import { createRef } from 'react';
 import { IressLabel } from '../Label';
 
-// Mock the Icon component to avoid lazy-loading timing issues in tests
-vi.mock('@/components/Icon', () => ({
-  IressIcon: ({
-    name,
-    screenreaderText,
-  }: {
-    name: string;
-    screenreaderText?: string;
-  }) => (
-    <span
-      data-testid="mock-icon"
-      data-icon-name={name}
-      aria-label={screenreaderText}
-    >
-      {name}
-    </span>
-  ),
-}));
-
 describe('IressSelect', () => {
   const classes = select();
 

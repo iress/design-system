@@ -10,6 +10,13 @@ export const radio = sva({
       display: 'flex',
       position: 'relative',
       textStyle: 'typography.body.md.medium',
+      '&:has(input:disabled)': {
+        opacity: '[0.5]',
+        cursor: 'not-allowed',
+        '& label': {
+          pointerEvents: 'none',
+        },
+      },
     },
     input: {
       srOnly: true,

@@ -20,7 +20,7 @@ import {
   transformCustomRulesToValidateRule,
 } from './helpers/transformCustomRulesToValidateRule';
 import { IressField, type IressFieldProps } from '@/components/Field';
-import { createFieldRenderProps } from './helpers/createFieldRenderProps';
+import { useFieldRenderProps } from './hooks/useFieldRenderProps';
 
 export interface IressFormFieldProps<
   T extends FieldValues = FieldValues,
@@ -170,8 +170,10 @@ export const IressFormField = <T extends FieldValues>({
     }
   }, [errorMessage, form, name, readOnly]);
 
+  const renderField = useFieldRenderProps<T>(field);
+
   const controlProps = {
-    ...createFieldRenderProps<T>(field),
+    ...renderField,
     id: `${form.id}__${name}`,
   };
 

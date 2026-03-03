@@ -5,13 +5,63 @@ import { icon } from './Icon.styles';
 import { GlobalCSSClass } from '@/enums';
 import type { IconName } from '@fortawesome/fontawesome-common-types';
 import type { MaterialSymbol } from 'material-symbols';
-import { lazy, Suspense, useContext } from 'react';
+import {
+  type LazyExoticComponent,
+  type ComponentType,
+  lazy,
+  Suspense,
+  useContext,
+} from 'react';
 import { IconContext, type IconType } from './IconProvider';
 import { idsLogger } from '@/helpers/utility/idsLogger';
 import {
   FA_TO_MATERIAL_MAP,
   type FontAwesomeIconWithMaterialEquivalent,
 } from './helpers/iconMapping';
+
+// Module-level cache for lazy icon components to prevent re-creation on every render
+const iconCache = new Map<string, LazyExoticComponent<ComponentType>>();
+
+function getIconComponent(
+  iconName: string,
+  filled: boolean,
+): LazyExoticComponent<React.ComponentType> {
+  const cacheKey = `${iconName}${filled ? '-fill' : ''}`;
+
+  const cached = iconCache.get(cacheKey);
+  if (cached) return cached;
+
+  const component = lazy(() => {
+    const iconPath = `./generated/${iconName}${filled ? '-fill' : ''}`;
+    return import(/* @vite-ignore */ iconPath).catch(() => {
+      idsLogger(
+        `[IressIcon] Icon "${iconName}" not found, falling back to "help" icon`,
+      );
+      return import('./generated/help');
+    });
+  });
+
+  iconCache.set(cacheKey, component);
+  return component;
+}
+
+/**
+ * Static wrapper component for lazy-loaded SVG icons.
+ * Declared at module scope so the parent component only renders a stable reference.
+ * The eslint-disable is safe because getIconComponent uses a module-level Map cache,
+ * guaranteeing the same LazyExoticComponent instance for a given name+filled pair.
+ */
+function IconSvgRenderer({
+  iconName,
+  filled,
+}: Readonly<{
+  iconName: string;
+  filled: boolean;
+}>) {
+  const Component = getIconComponent(iconName, filled);
+  // eslint-disable-next-line react-hooks/static-components -- cached lazy components are stable
+  return <Component />;
+}
 
 export type IressIconProps<P extends IconType = 'material'> =
   IressStyledProps<'span'> & {
@@ -97,7 +147,6 @@ export const IressIcon = <P extends IconType = 'material'>({
   const { filled, ...otherRestProps } = restProps as IressIconProps<P> & {
     filled?: boolean;
   };
-
   // Compute Material Symbol icon name once (with auto-mapping from Font Awesome names)
   let materialIconName: MaterialSymbol | undefined;
   if (effectiveProvider === 'material') {
@@ -108,16 +157,6 @@ export const IressIcon = <P extends IconType = 'material'>({
 
   // Render based on provider
   if (effectiveProvider === 'material' && materialIconName) {
-    // Lazy load the icon SVG component
-    const IconSvg = lazy(() => {
-      const iconPath = `./generated/${materialIconName}${filled ? '-fill' : ''}`;
-      return import(/* @vite-ignore */ iconPath).catch((error) => {
-        console.warn(`Icon "${materialIconName}" not found:`, error);
-        // Fallback to help icon
-        return import('./generated/help');
-      });
-    });
-
     const styles = icon.raw({
       flip,
       rotate,
@@ -126,19 +165,21 @@ export const IressIcon = <P extends IconType = 'material'>({
     });
     const [styleProps, otherProps] = splitCssProps(otherRestProps);
 
+    const a11yProps = screenreaderText
+      ? { 'aria-label': screenreaderText }
+      : { 'aria-hidden': 'true' as const };
+
     return (
       <Suspense
         fallback={
-          <span
+          <styled.span
             className={cx(
-              css(styles, icon.raw({ loading: true })),
+              css(styles, icon.raw({ loading: true }), styleProps),
               GlobalCSSClass.Icon,
               className,
             )}
             role="img"
-            {...(screenreaderText
-              ? { 'aria-label': screenreaderText }
-              : { 'aria-hidden': 'true' as const })}
+            {...a11yProps}
             {...otherProps}
           />
         }
@@ -150,12 +191,10 @@ export const IressIcon = <P extends IconType = 'material'>({
             GlobalCSSClass.Icon,
             className,
           )}
-          {...(screenreaderText
-            ? { 'aria-label': screenreaderText }
-            : { 'aria-hidden': 'true' as const })}
+          {...a11yProps}
           {...otherProps}
         >
-          <IconSvg />
+          <IconSvgRenderer iconName={materialIconName} filled={!!filled} />
         </styled.span>
       </Suspense>
     );

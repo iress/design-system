@@ -18,7 +18,7 @@ import {
   transformCustomRulesToValidateRule,
 } from './helpers/transformCustomRulesToValidateRule';
 import { type FormFieldRenderProps } from './FormField';
-import { createFieldRenderProps } from './helpers/createFieldRenderProps';
+import { useFieldRenderProps } from './hooks/useFieldRenderProps';
 
 export interface IressFormFieldsetProps<
   T extends FieldValues = FieldValues,
@@ -114,7 +114,7 @@ export const IressFormFieldset = <TFieldValues extends FieldValues>({
     form.setErrorMessage(name, errorMessage);
   }, [errorMessage, form, name]);
 
-  const renderField = createFieldRenderProps<TFieldValues>(field);
+  const renderField = useFieldRenderProps<TFieldValues>(field);
 
   return (
     <IressFieldGroup

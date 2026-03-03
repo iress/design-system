@@ -1,223 +1,147 @@
 import { describe, it, expect, vi } from 'vitest';
 import { parseStringPromise } from 'xml2js';
 
-// Mock xml2js
+// Mock xml2js so extractPathData doesn't need real SVG files
 vi.mock('xml2js', () => ({
   parseStringPromise: vi.fn(),
 }));
 
-// Import the parseStringPromise mock
+import {
+  extractPathData,
+  toComponentName,
+  generateComponentContent,
+  generateIndexContent,
+  type IconData,
+} from './generate-icons.utils';
+
 const mockedParseStringPromise = vi.mocked(parseStringPromise);
 
 // Test Data
-const VALID_SVG_CONTENT = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-  <path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/>
-</svg>`;
-
-const INVALID_SVG_CONTENT = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-</svg>`;
+const VALID_PATH_DATA =
+  'M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z';
 
 const PARSED_VALID_SVG = {
   svg: {
     $: { viewBox: '0 -960 960 960' },
-    path: [
-      {
-        $: {
-          d: 'M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z',
-        },
-      },
-    ],
+    path: [{ $: { d: VALID_PATH_DATA } }],
   },
 };
 
 const PARSED_SVG_NO_VIEWBOX = {
   svg: {
     $: {},
-    path: [
-      {
-        $: {
-          d: 'M480-80q-83 0-156-31.5T197-197',
-        },
-      },
-    ],
+    path: [{ $: { d: 'M480-80q-83 0-156-31.5T197-197' } }],
   },
 };
 
 const PARSED_INVALID_SVG = {
   svg: {
     $: { viewBox: '0 -960 960 960' },
+    // no path element
   },
 };
 
 describe('generate-icons script', () => {
   describe('extractPathData', () => {
-    interface SvgAttributes {
-      d: string;
-      viewBox?: string;
-    }
-
-    interface PathElement {
-      $: SvgAttributes;
-    }
-
-    interface SvgElement {
-      $: { viewBox?: string };
-      path?: PathElement[];
-    }
-
-    interface ParsedSvg {
-      svg: SvgElement;
-    }
-
     it('should extract path data and viewBox from valid SVG', async () => {
       mockedParseStringPromise.mockResolvedValue(PARSED_VALID_SVG);
 
-      // Since extractPathData is not exported, we test it indirectly
-      // by mocking parseStringPromise and checking the expected behavior
-      const result = (await parseStringPromise(VALID_SVG_CONTENT)) as ParsedSvg;
+      const result = await extractPathData('<svg>...</svg>');
 
-      expect(result.svg.path?.[0]?.$.d).toBe(
-        'M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z',
-      );
-      expect(result.svg.$.viewBox).toBe('0 -960 960 960');
+      expect(result.path).toBe(VALID_PATH_DATA);
+      expect(result.viewBox).toBe('0 -960 960 960');
     });
 
     it('should use default viewBox when not provided', async () => {
       mockedParseStringPromise.mockResolvedValue(PARSED_SVG_NO_VIEWBOX);
 
-      const result = (await parseStringPromise(VALID_SVG_CONTENT)) as ParsedSvg;
+      const result = await extractPathData('<svg>...</svg>');
 
-      expect(result.svg.$).toEqual({});
-      expect(result.svg.path?.[0]?.$.d).toBeDefined();
+      expect(result.viewBox).toBe('0 -960 960 960');
+      expect(result.path).toBe('M480-80q-83 0-156-31.5T197-197');
     });
 
-    it('should throw error for invalid SVG structure', async () => {
+    it('should throw error for invalid SVG structure (missing path)', async () => {
       mockedParseStringPromise.mockResolvedValue(PARSED_INVALID_SVG);
 
-      const result = (await parseStringPromise(
-        INVALID_SVG_CONTENT,
-      )) as ParsedSvg;
-
-      expect(result.svg.path).toBeUndefined();
+      await expect(extractPathData('<svg>...</svg>')).rejects.toThrow(
+        'Failed to parse SVG',
+      );
     });
 
-    it('should handle SVG parsing errors', async () => {
+    it('should throw error when XML parsing fails', async () => {
       mockedParseStringPromise.mockRejectedValue(new Error('Parse error'));
 
-      await expect(parseStringPromise('<invalid>')).rejects.toThrow(
-        'Parse error',
+      await expect(extractPathData('<invalid>')).rejects.toThrow(
+        'Failed to parse SVG: Parse error',
       );
     });
   });
 
-  describe('toComponentName conversion', () => {
+  describe('toComponentName', () => {
     it('should convert snake_case to PascalCase with Icon suffix', () => {
-      const testCases = [
-        { input: 'home', expected: 'HomeIcon' },
-        { input: 'search', expected: 'SearchIcon' },
-        {
-          input: 'settings_applications',
-          expected: 'SettingsApplicationsIcon',
-        },
-        { input: 'account_circle', expected: 'AccountCircleIcon' },
-      ];
-
-      // Test the expected naming pattern
-      testCases.forEach(({ input, expected }) => {
-        const componentName =
-          input
-            .split('_')
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join('') + 'Icon';
-
-        expect(componentName).toBe(expected);
-      });
+      expect(toComponentName('home')).toBe('HomeIcon');
+      expect(toComponentName('search')).toBe('SearchIcon');
+      expect(toComponentName('settings_applications')).toBe(
+        'SettingsApplicationsIcon',
+      );
+      expect(toComponentName('account_circle')).toBe('AccountCircleIcon');
     });
 
     it('should handle icon names starting with numbers by prepending "Icon"', () => {
-      const testCases = [
-        { input: '6k_plus', expected: 'Icon6kPlusIcon' },
-        { input: '10k', expected: 'Icon10kIcon' },
-        { input: '360', expected: 'Icon360Icon' },
-      ];
-
-      testCases.forEach(({ input, expected }) => {
-        const pascalCase = input
-          .split('_')
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join('');
-
-        const componentName = /^\d/.test(pascalCase)
-          ? `Icon${pascalCase}Icon`
-          : `${pascalCase}Icon`;
-
-        expect(componentName).toBe(expected);
-      });
+      expect(toComponentName('6k_plus')).toBe('Icon6kPlus');
+      expect(toComponentName('10k')).toBe('Icon10k');
+      expect(toComponentName('360')).toBe('Icon360');
     });
 
     it('should handle single word names', () => {
-      const componentName =
-        'home'.charAt(0).toUpperCase() + 'home'.slice(1) + 'Icon';
-      expect(componentName).toBe('HomeIcon');
+      expect(toComponentName('home')).toBe('HomeIcon');
     });
 
     it('should handle multi-word snake_case names', () => {
-      const componentName =
-        'settings_applications'
-          .split('_')
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join('') + 'Icon';
-
-      expect(componentName).toBe('SettingsApplicationsIcon');
+      expect(toComponentName('settings_applications')).toBe(
+        'SettingsApplicationsIcon',
+      );
     });
 
-    it('should add Fill suffix for filled variants to avoid naming conflicts', () => {
-      const testCases = [
-        { input: 'home', isFilled: false, expected: 'HomeIcon' },
-        { input: 'home', isFilled: true, expected: 'HomeFillIcon' },
-        { input: 'search', isFilled: false, expected: 'SearchIcon' },
-        { input: 'search', isFilled: true, expected: 'SearchFillIcon' },
-        {
-          input: 'settings_applications',
-          isFilled: false,
-          expected: 'SettingsApplicationsIcon',
-        },
-        {
-          input: 'settings_applications',
-          isFilled: true,
-          expected: 'SettingsApplicationsFillIcon',
-        },
-        { input: '10k', isFilled: false, expected: 'Icon10k' },
-        { input: '10k', isFilled: true, expected: 'Icon10kFill' },
-      ];
+    it('should handle names with multiple underscores', () => {
+      expect(toComponentName('settings_applications_tv')).toBe(
+        'SettingsApplicationsTvIcon',
+      );
+    });
 
-      testCases.forEach(({ input, isFilled, expected }) => {
-        const pascalCase = input
-          .split('_')
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join('');
+    it('should handle names with single characters', () => {
+      expect(toComponentName('a_b_c')).toBe('ABCIcon');
+    });
 
-        const startsWithNumber = /^\d/.test(pascalCase);
+    describe('filled variants', () => {
+      it('should add Fill suffix for regular filled variants', () => {
+        expect(toComponentName('home', true)).toBe('HomeFillIcon');
+        expect(toComponentName('search', true)).toBe('SearchFillIcon');
+        expect(toComponentName('settings_applications', true)).toBe(
+          'SettingsApplicationsFillIcon',
+        );
+      });
 
-        let componentName: string;
-        if (startsWithNumber) {
-          componentName = isFilled
-            ? `Icon${pascalCase}Fill`
-            : `Icon${pascalCase}`;
-        } else {
-          componentName = isFilled
-            ? `${pascalCase}FillIcon`
-            : `${pascalCase}Icon`;
-        }
+      it('should not add Fill suffix for non-filled variants', () => {
+        expect(toComponentName('home', false)).toBe('HomeIcon');
+        expect(toComponentName('search', false)).toBe('SearchIcon');
+      });
 
-        expect(componentName).toBe(expected);
+      it('should add Fill suffix for number-prefixed filled variants', () => {
+        expect(toComponentName('10k', true)).toBe('Icon10kFill');
+        expect(toComponentName('6k_plus', true)).toBe('Icon6kPlusFill');
+      });
+
+      it('should not add Fill suffix for number-prefixed non-filled variants', () => {
+        expect(toComponentName('10k', false)).toBe('Icon10k');
       });
     });
   });
 
   describe('generateComponentContent', () => {
     it('should generate correct React component code', () => {
-      const iconData = {
+      const iconData: IconData = {
         name: 'home',
         componentName: 'HomeIcon',
         pathData: 'M240-200h120v-240h240v240h120v-360L480-740 240-560v360Z',
@@ -225,7 +149,9 @@ describe('generate-icons script', () => {
         isFilled: false,
       };
 
-      const expectedContent = `// Auto-generated from @material-symbols/svg-300
+      const content = generateComponentContent(iconData);
+
+      expect(content).toBe(`// Auto-generated from @material-symbols/svg-300
 export const HomeIcon = () => (
   <svg
     viewBox="0 -960 960 960"
@@ -239,54 +165,40 @@ export const HomeIcon = () => (
 );
 
 export default HomeIcon;
-`;
-
-      const content = `// Auto-generated from @material-symbols/svg-300
-export const ${iconData.componentName} = () => (
-  <svg
-    viewBox="${iconData.viewBox}"
-    width="100%"
-    height="100%"
-    fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="${iconData.pathData}" />
-  </svg>
-);
-
-export default ${iconData.componentName};
-`;
-
-      expect(content).toBe(expectedContent);
+`);
     });
 
-    it('should handle filled variant icons', () => {
-      const iconData = {
-        name: 'home',
-        componentName: 'HomeIcon',
-        pathData: 'M240-200h120v-240h240v240h120v-360L480-740 240-560v360Z',
+    it('should use the component name from iconData', () => {
+      const iconData: IconData = {
+        name: 'star',
+        componentName: 'StarFillIcon',
+        pathData: 'M200-200h560v-560H200v560Z',
         viewBox: '0 -960 960 960',
         isFilled: true,
       };
 
-      const content = `// Auto-generated from @material-symbols/svg-300
-export const ${iconData.componentName} = () => (
-  <svg
-    viewBox="${iconData.viewBox}"
-    width="100%"
-    height="100%"
-    fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="${iconData.pathData}" />
-  </svg>
-);
+      const content = generateComponentContent(iconData);
 
-export default ${iconData.componentName};
-`;
+      expect(content).toContain('export const StarFillIcon');
+      expect(content).toContain('export default StarFillIcon');
+      expect(content).toContain('M200-200h560v-560H200v560Z');
+    });
 
-      expect(content).toContain('export const HomeIcon');
-      expect(content).toContain('export default HomeIcon');
+    it('should include correct SVG attributes', () => {
+      const iconData: IconData = {
+        name: 'custom',
+        componentName: 'CustomIcon',
+        pathData: 'M0 0h24v24H0z',
+        viewBox: '0 0 24 24',
+        isFilled: false,
+      };
+
+      const content = generateComponentContent(iconData);
+
+      expect(content).toContain('viewBox="0 0 24 24"');
+      expect(content).toContain('width="100%"');
+      expect(content).toContain('height="100%"');
+      expect(content).toContain('fill="currentColor"');
     });
   });
 
@@ -337,86 +249,55 @@ export default ${iconData.componentName};
     });
   });
 
-  describe('index file generation', () => {
-    interface IconData {
-      name: string;
-      componentName: string;
-      isFilled: boolean;
-    }
-
-    it('should generate correct exports for multiple icons with distinct names for fill variants', () => {
+  describe('generateIndexContent', () => {
+    it('should generate correct exports for multiple icons', () => {
       const iconDataList: IconData[] = [
-        { name: 'home', componentName: 'HomeIcon', isFilled: false },
-        { name: 'home', componentName: 'HomeFillIcon', isFilled: true },
-        { name: 'search', componentName: 'SearchIcon', isFilled: false },
+        {
+          name: 'home',
+          componentName: 'HomeIcon',
+          pathData: '',
+          viewBox: '',
+          isFilled: false,
+        },
+        {
+          name: 'home',
+          componentName: 'HomeFillIcon',
+          pathData: '',
+          viewBox: '',
+          isFilled: true,
+        },
+        {
+          name: 'search',
+          componentName: 'SearchIcon',
+          pathData: '',
+          viewBox: '',
+          isFilled: false,
+        },
       ];
 
-      const exports = iconDataList
-        .map((icon) => {
-          const fileName = icon.isFilled ? `${icon.name}-fill` : icon.name;
-          return `export { ${icon.componentName} } from './${fileName}';`;
-        })
-        .join('\n');
+      const content = generateIndexContent(iconDataList);
 
-      expect(exports).toContain("export { HomeIcon } from './home';");
-      expect(exports).toContain("export { HomeFillIcon } from './home-fill';");
-      expect(exports).toContain("export { SearchIcon } from './search';");
+      expect(content).toContain("export { HomeIcon } from './home';");
+      expect(content).toContain("export { HomeFillIcon } from './home-fill';");
+      expect(content).toContain("export { SearchIcon } from './search';");
     });
 
-    it('should include header comment in index file', () => {
-      const indexContent = `// Auto-generated index file for icon components
-// This file is used for type checking only
-export { HomeIcon } from './home';
-`;
+    it('should include header comments', () => {
+      const content = generateIndexContent([]);
 
-      expect(indexContent).toContain(
+      expect(content).toContain(
         '// Auto-generated index file for icon components',
       );
-      expect(indexContent).toContain(
-        '// This file is used for type checking only',
-      );
+      expect(content).toContain('// This file is used for type checking only');
     });
 
     it('should handle empty icon list', () => {
-      const emptyExports = '';
+      const content = generateIndexContent([]);
 
-      expect(emptyExports).toBe('');
-    });
-  });
+      expect(content).toBe(`// Auto-generated index file for icon components
+// This file is used for type checking only
 
-  describe('component name edge cases', () => {
-    it('should handle names with multiple underscores', () => {
-      const componentName =
-        'settings_applications_tv'
-          .split('_')
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join('') + 'Icon';
-
-      expect(componentName).toBe('SettingsApplicationsTvIcon');
-    });
-
-    it('should handle names with single characters', () => {
-      const componentName =
-        'a_b_c'
-          .split('_')
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join('') + 'Icon';
-
-      expect(componentName).toBe('ABCIcon');
-    });
-
-    it('should preserve numerical prefixes correctly', () => {
-      const testInput = '6k_plus';
-      const pascalCase = testInput
-        .split('_')
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join('');
-
-      const componentName = /^\d/.test(pascalCase)
-        ? `Icon${pascalCase}Icon`
-        : `${pascalCase}Icon`;
-
-      expect(componentName).toBe('Icon6kPlusIcon');
+`);
     });
   });
 });

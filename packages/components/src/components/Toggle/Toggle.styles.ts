@@ -17,6 +17,10 @@ export const toggle = sva({
       gap: 'spacing.1',
       color: 'colour.primary.fill',
       textStyle: 'typography.body.md.strong',
+      '&:has(button:disabled)': {
+        opacity: '[0.5]',
+        cursor: 'not-allowed',
+      },
     },
     toggleButtonContainer: {
       position: 'relative',
@@ -24,6 +28,9 @@ export const toggle = sva({
       height: 'toggle.thumb',
       lineHeight: '0',
       bg: '[currentColor]',
+      '&:has(button:disabled)': {
+        pointerEvents: 'none',
+      },
       borderWidth: '2px',
       borderStyle: 'solid',
       borderColor: '[currentColor]',
