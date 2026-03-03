@@ -22,7 +22,6 @@
     "lint": "eslint . --max-warnings 0",
     "panda:prepare": "panda cssgen && panda codegen",
     "panda:watch": "panda --watch",
-
     "storybook": "storybook dev -p 6006",
     "test": "vitest --config vitest.config.ts --watch",
     "test:coverage": "vitest run --config vitest.config.ts --coverage",
@@ -87,8 +86,8 @@
     "use-debounce": "10.1.0"
   },
   "peerDependencies": {
-    "react": "^17 || ^18 || ^19",
-    "react-dom": "^17 || ^18 || ^19",
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19",
     "react-hook-form": "^7"
   },
   "peerDependenciesMeta": {

@@ -183,6 +183,7 @@ export const IressIcon = <P extends IconType = 'material'>({
 
     const sharedProps = {
       role: 'img' as const,
+      'data-icon': materialIconName,
       ...a11yProps,
       ...otherProps,
     };

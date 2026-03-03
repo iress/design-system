@@ -3,6 +3,15 @@ import { axe } from 'jest-axe';
 import { IressAlert, alert as alertStyles } from '.';
 import { GlobalCSSClass } from '@/enums';
 import { STATUSES } from '@/constants';
+import { Statuses } from '@/types';
+import { IressIconProps } from '../Icon';
+
+const ALERT_ICONS: Record<Statuses, IressIconProps['name']> = {
+  danger: 'cancel',
+  info: 'info',
+  success: 'check_circle',
+  warning: 'error',
+};
 
 describe('IressAlert', () => {
   describe('Default rendering', () => {
@@ -135,6 +144,7 @@ describe('IressAlert', () => {
         expect(component).toHaveClass(alertStyles({ status }).alert!);
         const icon = getByRole('img');
         expect(icon).toHaveAttribute('aria-label', `${status}: `);
+        expect(icon).toHaveAttribute('data-icon', ALERT_ICONS[status]);
       },
     );
   });

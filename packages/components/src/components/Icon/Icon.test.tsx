@@ -93,6 +93,7 @@ describe('IressIcon', () => {
       expect(iconContainer.tagName).toBe('SPAN');
       expect(iconContainer).toHaveAttribute('role', 'img');
       expect(iconContainer).toHaveAttribute('aria-hidden', 'true');
+      expect(iconContainer).toHaveAttribute('data-icon', 'home');
     });
 
     it('renders without deprecation warning', () => {
@@ -119,6 +120,7 @@ describe('IressIcon', () => {
           expect(component).toBeInTheDocument();
           expect(component).toHaveAccessibleName('Home screen');
           expect(component).not.toHaveAttribute('aria-hidden');
+          expect(component).toHaveAttribute('data-icon', 'home');
         });
       });
 
@@ -130,6 +132,7 @@ describe('IressIcon', () => {
           const component = await screen.findByRole('img', { hidden: true });
           expect(component).toBeInTheDocument();
           expect(component).toHaveClass(GlobalCSSClass.Icon);
+          expect(component).toHaveAttribute('data-icon', 'star');
         });
 
         it('renders outline variant', async () => {
@@ -138,6 +141,7 @@ describe('IressIcon', () => {
           const component = await screen.findByRole('img', { hidden: true });
           expect(component).toBeInTheDocument();
           expect(component).toHaveClass(GlobalCSSClass.Icon);
+          expect(component).toHaveAttribute('data-icon', 'star');
         });
       });
 

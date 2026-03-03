@@ -26,6 +26,7 @@ describe('IressSpinner', () => {
     // SVG icons don't have text content - verify structure instead
     expect(spinner.tagName).toBe('SPAN');
     expect(spinner).toHaveAttribute('role', 'img');
+    expect(spinner).toHaveAttribute('data-icon', 'progress_activity');
   });
 
   describe('variant', () => {

@@ -16,6 +16,7 @@ describe('IressSelectSearchInput', () => {
 
     const prepend = screen.getByRole('img', { hidden: true });
     expect(prepend).toBeInTheDocument();
+    expect(prepend).toHaveAttribute('data-icon', 'search');
 
     expect(screen.getByPlaceholderText('Search')).toBeInTheDocument();
   });
