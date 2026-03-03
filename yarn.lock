@@ -1398,6 +1398,7 @@ __metadata:
     "@floating-ui/react": "npm:0.27.17"
     "@fortawesome/fontawesome-common-types": "npm:0.2.36"
     "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.15"
+    "@material-symbols/svg-300": "npm:0.40.2"
     "@pandacss/dev": "npm:1.8.1"
     "@tanstack/react-table": "npm:8.21.3"
     "@testing-library/dom": "npm:10.4.1"
@@ -1409,6 +1410,7 @@ __metadata:
     "@types/query-selector-shadow-dom": "npm:1.0.4"
     "@types/react": "npm:^19.2.13"
     "@types/react-dom": "npm:^19.2.3"
+    "@types/xml2js": "npm:0.4.14"
     "@vitejs/plugin-react": "npm:^5.1.2"
     "@vitest/coverage-v8": "npm:4.0.18"
     "@vitest/ui": "npm:4.0.18"
@@ -1435,6 +1437,7 @@ __metadata:
     react-hook-form: "npm:7.71.1"
     rimraf: "npm:^6.1.2"
     storybook: "npm:10.2.8"
+    tsx: "npm:4.21.0"
     typescript: "npm:5.9.3"
     use-debounce: "npm:10.1.0"
     vite: "npm:7.3.1"
@@ -1443,6 +1446,7 @@ __metadata:
     vite-plugin-static-copy: "npm:3.2.0"
     vite-tsconfig-paths: "npm:^6.1.1"
     vitest: "npm:4.0.18"
+    xml2js: "npm:0.6.2"
   peerDependencies:
     react: ^17 || ^18 || ^19
     react-dom: ^17 || ^18 || ^19
@@ -2041,6 +2045,13 @@ __metadata:
   peerDependencies:
     tslib: 2
   checksum: 10c0/a720a6accaae71fa9e7fa06e93e382702aa5760ef2bdc3bc45c19dc2228a01cc735d36cb970c654bc5e88f1328d55d1f0d5eceef0b76bcc327a2ce863e7b0021
+  languageName: node
+  linkType: hard
+
+"@material-symbols/svg-300@npm:0.40.2":
+  version: 0.40.2
+  resolution: "@material-symbols/svg-300@npm:0.40.2"
+  checksum: 10c0/689a0de62493e0732c8cc4f8331f37d01b4dbf55ed8451005401d02acd23aaa88bb34ac54bf18fc99e2ddae3892085f9a92cd113bce624a1c0bd57adaebb2803
   languageName: node
   linkType: hard
 
@@ -4828,6 +4839,15 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10c0/61aff1129143fcc4312f083bc9e9e168aa3026b7dd6e70796276dcfb2c8211c4292603f9c4864fae702f2ed86e4abd4d38aa421831c2fd7f856c931a481afbab
+  languageName: node
+  linkType: hard
+
+"@types/xml2js@npm:0.4.14":
+  version: 0.4.14
+  resolution: "@types/xml2js@npm:0.4.14"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10c0/06776e7f7aec55a698795e60425417caa7d7db3ff680a7b4ccaae1567c5fec28ff49b9975e9a0d74ff4acb8f4a43730501bbe64f9f761d784c6476ba4db12e13
   languageName: node
   linkType: hard
 
@@ -13825,6 +13845,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sax@npm:>=0.6.0":
+  version: 1.4.4
+  resolution: "sax@npm:1.4.4"
+  checksum: 10c0/acb642f2de02ad6ae157cbf91fb026acea80cdf92e88c0aec2aa350c7db3479f62a7365c34a58e3b70a72ce11fa856a02c38cfd27f49e83c18c9c7e1d52aee55
+  languageName: node
+  linkType: hard
+
 "saxes@npm:^6.0.0":
   version: 6.0.0
   resolution: "saxes@npm:6.0.0"
@@ -16130,6 +16157,23 @@ __metadata:
   version: 5.0.0
   resolution: "xml-name-validator@npm:5.0.0"
   checksum: 10c0/3fcf44e7b73fb18be917fdd4ccffff3639373c7cb83f8fc35df6001fecba7942f1dbead29d91ebb8315e2f2ff786b508f0c9dc0215b6353f9983c6b7d62cb1f5
+  languageName: node
+  linkType: hard
+
+"xml2js@npm:0.6.2":
+  version: 0.6.2
+  resolution: "xml2js@npm:0.6.2"
+  dependencies:
+    sax: "npm:>=0.6.0"
+    xmlbuilder: "npm:~11.0.0"
+  checksum: 10c0/e98a84e9c172c556ee2c5afa0fc7161b46919e8b53ab20de140eedea19903ed82f7cd5b1576fb345c84f0a18da1982ddf65908129b58fc3d7cbc658ae232108f
+  languageName: node
+  linkType: hard
+
+"xmlbuilder@npm:~11.0.0":
+  version: 11.0.1
+  resolution: "xmlbuilder@npm:11.0.1"
+  checksum: 10c0/74b979f89a0a129926bc786b913459bdbcefa809afaa551c5ab83f89b1915bdaea14c11c759284bb9b931e3b53004dbc2181e21d3ca9553eeb0b2a7b4e40c35b
   languageName: node
   linkType: hard
 

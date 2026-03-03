@@ -6,7 +6,7 @@ import { chatty } from './Spinner.styles';
 import { GlobalCSSClass } from '@/enums';
 
 describe('IressSpinner', () => {
-  it('renders the correct defaults', () => {
+  it('renders the correct defaults', async () => {
     render(
       <IressSpinner
         data-testid="test-spinner"
@@ -17,13 +17,15 @@ describe('IressSpinner', () => {
 
     screen.getByTestId('test-spinner');
 
-    const spinner = screen.getByRole('img', { name: 'spinner' });
+    const spinner = await screen.findByRole('img', { name: 'spinner' });
     expect(spinner).toHaveClass(
       'test-class',
       icon({ spin: 'half' }), // icon styles
       GlobalCSSClass.Spinner,
     );
-    expect(spinner).toHaveTextContent('progress_activity');
+    // SVG icons don't have text content - verify structure instead
+    expect(spinner.tagName).toBe('SPAN');
+    expect(spinner).toHaveAttribute('role', 'img');
   });
 
   describe('variant', () => {

@@ -26,6 +26,9 @@ export const alert = sva({
       justifyContent: 'flex-start',
       alignItems: 'flex-start',
     },
+    icon: {
+      mt: 'spacing.1',
+    },
     wrapper: {
       display: 'flex',
       flexDirection: 'column',
@@ -346,7 +349,7 @@ export const alert = sva({
       multiLine: false,
       css: {
         icon: {
-          mt: 'spacing.1',
+          mt: 'spacing.2',
         },
         heading: {
           mt: 'spacing.1',

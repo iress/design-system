@@ -42,16 +42,21 @@ export const Reference: Story = {
     docs: {
       description: {
         story: `
-Search and browse through all 3,800+ Material Symbols icons.
-Icons are loaded lazily from the material-symbols library for optimal performance.
+Search and browse through all 3,798 Material Symbols icons.
+
+**Architecture:**
+Icons are now **pre-generated SVG React components** (not web fonts). Each icon is:
+- Bundled as an inline SVG component
+- Lazy-loaded on first use with React.lazy()
+- Tree-shakeable (unused icons don't increase bundle size)
 
 **Features:**
 - Search by name (e.g., "arrow", "home", "settings")
 - Toggle between outlined (default) and filled variants
-- Click any icon to copy its name to clipboard
+- Click any icon name to copy it to clipboard
 - Table view for easy browsing
 
-**Note:** Icons are loaded dynamically the first time you open this story.
+**Note:** The first time you render an icon, there's a brief lazy-load delay. Subsequent renders are instant.
         `,
       },
     },
@@ -162,54 +167,52 @@ Icons are loaded lazily from the material-symbols library for optimal performanc
     }, [loading, searching, debouncedQuery, results.length, showAllIcons]);
 
     return (
-      <IressIconProvider noSubsetting>
-        <IressStack gap="xs">
-          <IressStack gap="sm">
-            <IressInput
-              clearable
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onClear={() => setQuery('')}
-              placeholder="Search by name (e.g., home, arrow, settings)..."
-              type="search"
-              prepend={<IressIcon name="search" />}
-              loading={searching || loading}
-              variant="search"
-            />
-            <IressInline
-              gap="md"
-              horizontalAlign="between"
-              verticalAlign="middle"
-            >
-              <IressText color="muted">
-                Click any icon name to copy it to clipboard
-              </IressText>
-              <IressInline gap="md" verticalAlign="middle">
-                <IressToggle checked={showFilled} onChange={setShowFilled}>
-                  Show filled variant
-                </IressToggle>
-                <IressToggle checked={showAllIcons} onChange={setShowAllIcons}>
-                  Show all icons{' '}
-                  <IressTooltip tooltipText="Enable to use browser search (Ctrl+F/Cmd+F) for easier browsing">
-                    <IressButton mode="muted">
-                      <IressIcon name="info-circle" />
-                    </IressButton>
-                  </IressTooltip>
-                </IressToggle>
-              </IressInline>
-            </IressInline>
-          </IressStack>
-
-          <IressTable
-            caption={caption}
-            columns={columns}
-            rows={displayedResults}
-            empty={loading ? 'Loading icons...' : 'No icons found'}
-            scope="col"
-            mb="none"
+      <IressStack gap="xs">
+        <IressStack gap="sm">
+          <IressInput
+            clearable
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onClear={() => setQuery('')}
+            placeholder="Search by name (e.g., home, arrow, settings)..."
+            type="search"
+            prepend={<IressIcon name="search" />}
+            loading={searching || loading}
+            variant="search"
           />
+          <IressInline
+            gap="md"
+            horizontalAlign="between"
+            verticalAlign="middle"
+          >
+            <IressText color="muted">
+              Click any icon name to copy it to clipboard
+            </IressText>
+            <IressInline gap="md" verticalAlign="middle">
+              <IressToggle checked={showFilled} onChange={setShowFilled}>
+                Show filled variant
+              </IressToggle>
+              <IressToggle checked={showAllIcons} onChange={setShowAllIcons}>
+                Show all icons{' '}
+                <IressTooltip tooltipText="Enable to use browser search (Ctrl+F/Cmd+F) for easier browsing">
+                  <IressButton mode="muted">
+                    <IressIcon name="info-circle" />
+                  </IressButton>
+                </IressTooltip>
+              </IressToggle>
+            </IressInline>
+          </IressInline>
         </IressStack>
-      </IressIconProvider>
+
+        <IressTable
+          caption={caption}
+          columns={columns}
+          rows={displayedResults}
+          empty={loading ? 'Loading icons...' : 'No icons found'}
+          scope="col"
+          mb="none"
+        />
+      </IressStack>
     );
   },
 };
@@ -401,7 +404,7 @@ export const FontAwesomeToMaterialMigration: Story = {
   decorators: [
     (Story) => (
       <IressIconProvider type="fontawesome">
-        <IressIconProvider noSubsetting>
+        <IressIconProvider>
           <Story />
         </IressIconProvider>
       </IressIconProvider>

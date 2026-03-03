@@ -19,46 +19,39 @@ export const IconProvider: Story = {
     docs: {
       description: {
         story: `
-The \`IressIconProvider\` enables automatic font subsetting, dramatically reducing bundle size
-by loading only the icons actually used in your application.
+The \`IressIconProvider\` is **optional** for Material Symbols icons as they are now bundled as SVG components.
 
-**Bundle Size Optimization:**
-- Full font: ~1.4MB
-- 18 icons (typical usage): ~15-20KB (85% savings)
-- Auto-optimizes based on actual usage
+**Material Symbols (v6+):**
+Icons are pre-generated as SVG React components:
+- ✅ No provider required (works without IressIconProvider)
+- ✅ Tree-shakeable (bundle only includes icons you use)
+- ✅ Lazy-loaded (icons load on first use with React.lazy)
+- ✅ CSP compliant (no external requests)
+- ✅ Works offline (no CDN dependency)
+- ✅ Works in Shadow DOM without special handling
 
-**Usage:**
+**Font Awesome (deprecated):**
+Provider is required for Font Awesome icons to load fonts from CDN:
+
 \`\`\`tsx
 import { IressIconProvider } from '@iress-oss/ids-components';
 
 function App() {
   return (
-    <IressIconProvider>
+    <IressIconProvider type="fontawesome">
       <YourApp />
     </IressIconProvider>
   );
 }
 \`\`\`
 
-**Benefits:**
-- ✅ Automatic optimization (no configuration needed)
-- ✅ Works for any number of icons (1 to 1000+)
-- ✅ Google CDN handles caching and delivery
-- ✅ Seamless icon transitions (existing icons stay visible while new ones load)
-- ⚠️ Requires internet connection
-- ⚠️ Brief loading delay (< 500ms on fast connections)
+**When to Use Provider:**
+- Using Font Awesome icons (deprecated)
+- Want to set default icon type for all child icons
+- Otherwise, provider is optional for Material Symbols
 
-**When to Use:**
-- Production apps where bundle size matters
-- Apps with network connectivity
-- When using < 100 unique icons
-
-**When NOT to Use:**
-- Offline/enterprise apps without internet (use full bundled font instead)
-- SSR apps with critical icons above the fold
-
-**Test Dynamic Loading:**
-Click "Load More Icons" below to see how new icons are added without the existing ones disappearing.
+**Test Lazy Loading:**
+Click "Load More Icons" below to see how icons lazy-load on first use.
         `,
       },
     },
@@ -70,11 +63,10 @@ Click "Load More Icons" below to see how new icons are added without the existin
     return (
       <IressIconProvider>
         <IressText element="h3" textStyle="typography.heading.4" mb="spacing.4">
-          Icons with Auto-Subsetting Enabled
+          Material Symbols Icons (SVG Components)
         </IressText>
         <IressText mb="spacing.4" color="muted">
-          Initial set: 6 icons (~5-10KB from Google Fonts CDN vs 100KB full
-          font)
+          Initial set: Icons lazy-load on first use, then render instantly
         </IressText>
         <IressInline gap="md" mb="spacing.6">
           <IressText textAlign="center">
@@ -132,7 +124,7 @@ Click "Load More Icons" below to see how new icons are added without the existin
               Additional Icons (Set 2)
             </IressText>
             <IressText mb="spacing.4" color="muted">
-              Watch: Previous icons stay visible while these load!
+              Watch: Previous icons stay loaded (cached by React.lazy)
             </IressText>
             <IressInline gap="md" mb="spacing.6">
               <IressText textAlign="center">
@@ -188,7 +180,7 @@ Click "Load More Icons" below to see how new icons are added without the existin
               Even More Icons (Set 3)
             </IressText>
             <IressText mb="spacing.4" color="muted">
-              All previous icons remain visible during this transition too!
+              All previous icons remain loaded (React.lazy caching)
             </IressText>
             <IressInline gap="md">
               <IressText textAlign="center">

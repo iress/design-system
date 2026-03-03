@@ -4,7 +4,7 @@ import { resolve } from 'path';
 
 export default defineConfig({
   test: {
-    include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
+    include: ['src/**/*.test.ts', 'src/**/*.test.tsx', 'scripts/**/*.test.ts'],
     globals: true,
     environment: 'jsdom',
     setupFiles: './vitest.setup.ts',

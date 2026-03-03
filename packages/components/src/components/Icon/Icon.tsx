@@ -5,14 +5,13 @@ import { icon } from './Icon.styles';
 import { GlobalCSSClass } from '@/enums';
 import type { IconName } from '@fortawesome/fontawesome-common-types';
 import type { MaterialSymbol } from 'material-symbols';
-import { useContext, useEffect } from 'react';
+import { lazy, Suspense, useContext } from 'react';
 import { IconContext, type IconType } from './IconProvider';
 import { idsLogger } from '@/helpers/utility/idsLogger';
 import {
   FA_TO_MATERIAL_MAP,
   type FontAwesomeIconWithMaterialEquivalent,
 } from './helpers/iconMapping';
-import { MATERIAL_SYMBOLS } from './Icon.constants';
 
 export type IressIconProps<P extends IconType = 'material'> =
   IressStyledProps<'span'> & {
@@ -94,6 +93,11 @@ export const IressIcon = <P extends IconType = 'material'>({
     );
   }
 
+  // Extract filled prop to prevent it from being passed to DOM
+  const { filled, ...otherRestProps } = restProps as IressIconProps<P> & {
+    filled?: boolean;
+  };
+
   // Compute Material Symbol icon name once (with auto-mapping from Font Awesome names)
   let materialIconName: MaterialSymbol | undefined;
   if (effectiveProvider === 'material') {
@@ -102,53 +106,81 @@ export const IressIcon = <P extends IconType = 'material'>({
     ] ?? name) as MaterialSymbol;
   }
 
-  // Register Material Symbol icons with provider context if available
-  useEffect(() => {
-    if (effectiveProvider === 'material' && iconContext && materialIconName) {
-      iconContext.registerIcon(materialIconName);
-    }
-  }, [effectiveProvider, iconContext, materialIconName]);
-
   // Render based on provider
   if (effectiveProvider === 'material' && materialIconName) {
-    // Check if this specific icon is loaded
-    const isLoaded = iconContext
-      ? iconContext.isIconLoaded(materialIconName)
-      : true;
+    // Lazy load the icon SVG component
+    const IconSvg = lazy(() => {
+      const iconPath = `./generated/${materialIconName}${filled ? '-fill' : ''}`;
+      return import(/* @vite-ignore */ iconPath).catch((error) => {
+        console.warn(`Icon "${materialIconName}" not found:`, error);
+        // Fallback to help icon
+        return import('./generated/help');
+      });
+    });
 
     const styles = icon.raw({
       flip,
       rotate,
       spin,
-      filled: restProps.filled,
       type: effectiveProvider,
-      loading: !isLoaded,
     });
-    const [styleProps, otherProps] = splitCssProps(restProps);
+    const [styleProps, otherProps] = splitCssProps(otherRestProps);
 
     return (
-      <styled.span
-        role="img"
-        className={cx(
-          css(styles, styleProps),
-          GlobalCSSClass.Icon,
-          MATERIAL_SYMBOLS.className,
-          className,
-        )}
-        aria-hidden={!screenreaderText && 'true'}
-        aria-label={screenreaderText}
-        {...otherProps}
+      <Suspense
+        fallback={
+          <span
+            className={cx(
+              css(styles, icon.raw({ loading: true })),
+              GlobalCSSClass.Icon,
+              className,
+            )}
+            role="img"
+            {...(screenreaderText
+              ? { 'aria-label': screenreaderText }
+              : { 'aria-hidden': 'true' as const })}
+            {...otherProps}
+          />
+        }
       >
-        {materialIconName}
-      </styled.span>
+        <styled.span
+          role="img"
+          className={cx(
+            css(styles, styleProps),
+            GlobalCSSClass.Icon,
+            className,
+          )}
+          {...(screenreaderText
+            ? { 'aria-label': screenreaderText }
+            : { 'aria-hidden': 'true' as const })}
+          {...otherProps}
+        >
+          <IconSvg />
+        </styled.span>
+      </Suspense>
     );
   }
 
   // Font Awesome rendering (legacy)
   const prefix = 'fa-';
-  const set = (restProps as IressIconProps<'fontawesome'>).set ?? 'fal';
-  const fixedWidth =
-    (restProps as IressIconProps<'fontawesome'>).fixedWidth ?? false;
+
+  // Extract Font Awesome-specific props to prevent them from being passed to DOM
+  // Note: rotate, flip, spin are already extracted at function level
+  // but TypeScript needs explicit type exclusion to prevent conflicts with CSS properties
+  const {
+    set: setFromProps,
+    fixedWidth: fixedWidthFromProps,
+    ...faOtherProps
+  } = otherRestProps as Omit<
+    IressIconProps<'fontawesome'>,
+    'rotate' | 'flip' | 'spin'
+  > & {
+    set?: 'fal' | 'fab';
+    fixedWidth?: boolean;
+  };
+
+  const set = setFromProps ?? 'fal';
+  const fixedWidth = fixedWidthFromProps ?? false;
 
   const classes = icon({
     flip,
@@ -167,9 +199,10 @@ export const IressIcon = <P extends IconType = 'material'>({
         fixedWidth && 'fa-fw',
         className,
       )}
-      aria-hidden={!screenreaderText && 'true'}
-      aria-label={screenreaderText}
-      {...restProps}
+      {...(screenreaderText
+        ? { 'aria-label': screenreaderText }
+        : { 'aria-hidden': 'true' as const })}
+      {...faOtherProps}
     />
   );
 };

@@ -1,24 +1,27 @@
 import { cva } from '@/styled-system/css';
-import { MATERIAL_SYMBOLS } from './Icon.constants';
 
 export const icon = cva({
-  base: {},
+  base: {
+    // Ensure icon spans have consistent sizing for SVG rendering
+    display: 'inline-block',
+    width: '[1em]',
+    height: '[1em]',
+    verticalAlign: 'middle',
+
+    // SVG should fill the container
+    '& svg': {
+      width: '12/12',
+      height: '12/12',
+      display: 'block',
+      shapeRendering: 'geometricPrecision',
+    },
+  },
   variants: {
     type: {
       fontawesome: {},
       material: {
-        fontFamily: 'Material Symbols Rounded',
-        fontWeight: MATERIAL_SYMBOLS.weight,
-        textStyle: 'inherit',
-        verticalAlign: 'middle',
-        materialSymbols: 'true',
+        // Material symbols use SVG rendering, base styles handle sizing
         scale: '[1.5]',
-        fontFeatureSettings: 'liga',
-      },
-    },
-    filled: {
-      true: {
-        materialSymbols: 'filled',
       },
     },
     flip: {
@@ -35,8 +38,6 @@ export const icon = cva({
     loading: {
       true: {
         visibility: 'hidden',
-        width: '[1em]',
-        height: '[1em]',
       },
     },
     rotate: {
@@ -65,13 +66,4 @@ export const icon = cva({
       },
     },
   },
-  compoundVariants: [
-    {
-      type: 'material',
-      filled: true,
-      css: {
-        materialSymbols: 'filled',
-      },
-    },
-  ],
 });

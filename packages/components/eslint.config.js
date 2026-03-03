@@ -14,6 +14,7 @@ export default [
     ignores: [
       ...baseIgnores,
       '**/storybook-static/**',
+      '**/src/components/Icon/generated/**',
       '**/*.d.ts',
       '**/theme-preset.ts',
       '**/styled-system/**',

@@ -21,57 +21,21 @@ import {
 
 ### Material Symbols
 
-From version 6, the `IressIcon` component supports Material Symbols icons from Google as this is the new icon library being used in new Iress designs.
+From version 6, the `IressIcon` component uses Material Symbols icons from Google as pre-generated SVG components.
 
-#### Option 1: Automatic loading with `IressProvider` (recommended)
+#### Basic Usage
 
-If you are already using the `IressProvider` component in your application, no further action is required as the Material Symbols font will be automatically loaded for you as it contains the `IressIconProvider` component.
+Simply use the `name` prop with any Material Symbol icon name:
 
 ```tsx
-import { IressProvider } from '@iress-oss/ids-components';
+import { IressIcon } from '@iress-oss/ids-components';
 
-<IressProvider>
-  <App />
-</IressProvider>;
+<IressIcon name="home" />
+<IressIcon name="search" />
+<IressIcon name="settings" filled />
 ```
 
-<IressExpander mode="link" activator="Shadow DOM (Microfrontends)" mt="-md" mb="lg">
-  If you are using Microfrontends or Web Components that use Shadow DOM, you need to ensure that the Material Symbols font is loaded in the parent application as well as the Microfrontend or Web Component. This is because `@font-face` declarations are not supported inside the Shadow DOM.
-
-The `IressProvider` component takes care of this for you when you use it with the `container` prop, which accepts a `HTMLElement` or `Ref<HTMLElement>`.
-
-</IressExpander>
-
-#### Option 2: Using the `IressIconProvider`
-
-For more simpler applications, you can use the `IressIconProvider` directly.
-
-<IressExpander mode="link" activator="Shadow DOM (Microfrontends)"  mb="md">
-  If you are using Microfrontends or Web Components that use Shadow DOM, you need to ensure that the Material Symbols font is loaded in the parent application as well as the Microfrontend or Web Component. This is because `@font-face` declarations are not supported inside the Shadow DOM.
-
-The `IressIconProvider` component takes care of this for you when you use it with the `container` prop, which accepts a `HTMLElement | ShadowRoot` or `Ref<HTMLElement | ShadowRoot>`.
-
-</IressExpander>
-
-<ComponentExample
-  of={ProviderStories.IconProvider}
-  refresh
-  story={{
-    inline: false,
-    height: '300px',
-  }}
-/>
-
-#### Option 3: Manual font loading
-
-If you prefer to manually load the Material Symbols font, you can add the following `<link />` tag to the `<head />` of your application:
-
-```html
-<link
-  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0..1,0"
-  rel="stylesheet"
-/>
-```
+The icons will automatically load on first use and be cached for future use. There is no need to manually import or register icons.
 
 ### Font Awesome
 

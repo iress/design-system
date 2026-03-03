@@ -11,7 +11,6 @@ import {
 } from '../Slideout';
 import { createPortal } from 'react-dom';
 import { defaultFonts } from '@iress-oss/ids-tokens';
-import { IressIconProvider, type IressIconProviderProps } from '../Icon';
 
 export interface IressProviderProps
   extends
@@ -27,14 +26,6 @@ export interface IressProviderProps
    * If not provided, will render into the body of the document.
    */
   container?: FloatingUIContainer;
-
-  /**
-   * Disable automatic font subsetting via Google Fonts CDN
-   * When false, only icons actually used in the component tree are loaded
-   * When true, the full Material Symbols font is loaded
-   * @default false
-   */
-  noSubsetting?: IressIconProviderProps['noSubsetting'];
 
   /**
    * If you don't want to load the default Iress font from the CDN, set this to true.
@@ -53,9 +44,7 @@ export const IressProvider = ({
     <IressModalProvider container={container}>
       <IressToasterProvider container={container} position={position}>
         <IressSlideoutProvider container={container} {...restProps}>
-          <IressIconProvider container={container} noSubsetting>
-            {children}
-          </IressIconProvider>
+          {children}
         </IressSlideoutProvider>
       </IressToasterProvider>
       {!noDefaultFont &&

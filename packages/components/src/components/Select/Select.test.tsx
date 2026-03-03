@@ -15,6 +15,25 @@ import { menuItem } from '../Menu';
 import { createRef } from 'react';
 import { IressLabel } from '../Label';
 
+// Mock the Icon component to avoid lazy-loading timing issues in tests
+vi.mock('@/components/Icon', () => ({
+  IressIcon: ({
+    name,
+    screenreaderText,
+  }: {
+    name: string;
+    screenreaderText?: string;
+  }) => (
+    <span
+      data-testid="mock-icon"
+      data-icon-name={name}
+      aria-label={screenreaderText}
+    >
+      {name}
+    </span>
+  ),
+}));
+
 describe('IressSelect', () => {
   const classes = select();
 
@@ -653,7 +672,12 @@ describe('IressSelect', () => {
         const combobox = await screen.findByRole('combobox', {
           name: 'Search',
         });
-        await waitFor(() => expect(combobox).toHaveFocus());
+
+        // Wait for focus and ensure component is ready
+        await waitFor(() => {
+          expect(combobox).toHaveFocus();
+          expect(combobox).not.toHaveAttribute('aria-busy');
+        });
 
         await userEvent.keyboard('op');
 
@@ -682,7 +706,12 @@ describe('IressSelect', () => {
         const combobox = await screen.findByRole('combobox', {
           name: 'Search',
         });
-        await waitFor(() => expect(combobox).toHaveFocus());
+
+        // Wait for focus and ensure component is ready
+        await waitFor(() => {
+          expect(combobox).toHaveFocus();
+          expect(combobox).not.toHaveAttribute('aria-busy');
+        });
 
         await userEvent.keyboard('op');
 

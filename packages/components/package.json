@@ -13,14 +13,16 @@
     "**/*.css"
   ],
   "scripts": {
-    "build": "yarn panda:prepare && vite build",
+    "build": "yarn panda:prepare && yarn generate:icons && vite build",
     "build-storybook": "storybook build --stats-json",
     "clean": "rimraf dist coverage src/styled-system",
     "dev": "concurrently \"yarn panda:watch\" \"yarn storybook\"",
     "dev:no-open": "concurrently \"yarn panda:watch\" \"yarn storybook --no-open\"",
+    "generate:icons": "tsx scripts/generate-icons.ts",
     "lint": "eslint . --max-warnings 0",
     "panda:prepare": "panda cssgen && panda codegen",
     "panda:watch": "panda --watch",
+    "prebuild": "yarn generate:icons",
     "storybook": "storybook dev -p 6006",
     "test": "vitest --config vitest.config.ts --watch",
     "test:coverage": "vitest run --config vitest.config.ts --coverage",
@@ -30,6 +32,7 @@
   },
   "devDependencies": {
     "@iress-oss/ids-tokens": "^6.0.0-alpha.15",
+    "@material-symbols/svg-300": "0.40.2",
     "@pandacss/dev": "1.8.1",
     "@testing-library/dom": "10.4.1",
     "@testing-library/jest-dom": "6.9.1",
@@ -39,6 +42,7 @@
     "@types/query-selector-shadow-dom": "1.0.4",
     "@types/react": "^19.2.13",
     "@types/react-dom": "^19.2.3",
+    "@types/xml2js": "0.4.14",
     "@vitejs/plugin-react": "^5.1.2",
     "@vitest/coverage-v8": "4.0.18",
     "@vitest/ui": "4.0.18",
@@ -62,13 +66,15 @@
     "react-hook-form": "7.71.1",
     "rimraf": "^6.1.2",
     "storybook": "10.2.8",
+    "tsx": "4.21.0",
     "typescript": "5.9.3",
     "vite": "7.3.1",
     "vite-bundle-visualizer": "^1.2.1",
     "vite-plugin-dts": "4.5.4",
     "vite-plugin-static-copy": "3.2.0",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "4.0.18"
+    "vitest": "4.0.18",
+    "xml2js": "0.6.2"
   },
   "dependencies": {
     "@floating-ui/react": "0.27.17",
