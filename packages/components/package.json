@@ -22,7 +22,7 @@
     "lint": "eslint . --max-warnings 0",
     "panda:prepare": "panda cssgen && panda codegen",
     "panda:watch": "panda --watch",
-    "prebuild": "yarn generate:icons",
+
     "storybook": "storybook dev -p 6006",
     "test": "vitest --config vitest.config.ts --watch",
     "test:coverage": "vitest run --config vitest.config.ts --coverage",
