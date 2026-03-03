@@ -11,7 +11,6 @@ export const checkbox = sva({
       position: 'relative',
       textStyle: 'typography.body.md.medium',
       '&:has(input:disabled)': {
-        opacity: '[0.5]',
         cursor: 'not-allowed',
         '& label': {
           pointerEvents: 'none',
@@ -36,6 +35,9 @@ export const checkbox = sva({
       marginInlineEnd: 'spacing.2',
       flexShrink: 0,
       focusable: 'group',
+      '.group:has(input:disabled) &': {
+        opacity: '[0.5]',
+      },
     },
     input: {
       srOnly: true,
