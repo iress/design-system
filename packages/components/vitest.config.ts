@@ -19,6 +19,7 @@ export default defineConfig({
         'src/**/*.test.*',
         'src/**/mocks/**/*',
         'src/**/examples/**/*',
+        'src/**/generated/**/*',
         'src/styled-system/**/*',
         'src/main.ts',
         'src/vite-env.d.ts',

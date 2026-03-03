@@ -236,6 +236,8 @@ jobs:
         run: yarn install --immutable
       - name: Publish to Chromatic
         uses: chromaui/action@latest
+        env:
+          NODE_OPTIONS: '--max-old-space-size=8192'
         with:
           projectToken: ${{ secrets[matrix.token] }}
           workingDir: ${{ matrix.dir }}
