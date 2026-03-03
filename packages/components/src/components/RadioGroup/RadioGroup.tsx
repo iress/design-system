@@ -98,6 +98,7 @@ export function getRadioGroupContext<T = FormControlValue>() {
   >;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- Context export for use throughout the component tree
 export const RadioGroupContext = createRadioGroupContext();
 
 const RadioGroup = <T = FormControlValue,>(
