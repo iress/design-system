@@ -30,22 +30,6 @@ export interface ReactHookFormCompatibleRef<
    * This method is used by react-hook-form as a fallback to get the value of the control.
    */
   input: T | null;
-
-  /**
-   * This object allows you to manipulate how `IressFormField` will handle your component, automating some of the changes you may usually have to do in the `render` prop.
-   */
-  extras?: {
-    /**
-     * Additional props that will be passed to the `onChange` handler of the control, essentially also triggering onChange
-     */
-    additionalOnChangeProps?: string[];
-
-    /**
-     * The name of the prop that will be used to set the value of the control.
-     * @default 'value'
-     */
-    valueProp?: string;
-  };
 }
 
 /**

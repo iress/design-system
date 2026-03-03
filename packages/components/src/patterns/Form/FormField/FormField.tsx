@@ -1,4 +1,4 @@
-import { type ReactNode, useContext, useEffect, useMemo, useRef } from 'react';
+import { type ReactNode, useContext, useEffect, useMemo } from 'react';
 import {
   type Control,
   type ControllerFieldState,
@@ -20,8 +20,7 @@ import {
   transformCustomRulesToValidateRule,
 } from './helpers/transformCustomRulesToValidateRule';
 import { IressField, type IressFieldProps } from '@/components/Field';
-import { type ReactHookFormCompatibleRef } from '@/interfaces';
-import { useFieldRenderProps } from './hooks/useFieldRenderProps';
+import { createFieldRenderProps } from './helpers/createFieldRenderProps';
 
 export interface IressFormFieldProps<
   T extends FieldValues = FieldValues,
@@ -129,7 +128,6 @@ export const IressFormField = <T extends FieldValues>({
   ...fieldProps
 }: IressFormFieldProps<T>) => {
   const form = useContext(FormContext);
-  const fieldRef = useRef<ReactHookFormCompatibleRef | null>(null);
 
   if (!form) {
     throw new Error(
@@ -172,10 +170,8 @@ export const IressFormField = <T extends FieldValues>({
     }
   }, [errorMessage, form, name, readOnly]);
 
-  const renderField = useFieldRenderProps<T>(field, fieldRef);
-
   const controlProps = {
-    ...renderField,
+    ...createFieldRenderProps<T>(field),
     id: `${form.id}__${name}`,
   };
 
