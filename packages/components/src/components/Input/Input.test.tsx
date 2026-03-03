@@ -79,6 +79,30 @@ describe('IressInput', () => {
     expect(input).toHaveFocus();
   });
 
+  it('should call onChange with empty value when clearing', async () => {
+    const handleChange = vi.fn();
+    const handleClear = vi.fn();
+    const { getByRole } = render(
+      <IressInput clearable onChange={handleChange} onClear={handleClear} />,
+    );
+    const input = getByRole('textbox') as HTMLInputElement;
+
+    await userEvent.type(input, 'test');
+    handleChange.mockClear();
+
+    await userEvent.click(getByRole('button') as HTMLButtonElement);
+    await waitFor(() => {
+      expect(handleChange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.objectContaining({ value: '' }) as EventTarget,
+          currentTarget: expect.objectContaining({ value: '' }) as EventTarget,
+        }),
+        '',
+      );
+      expect(handleClear).toHaveBeenCalled();
+    });
+  });
+
   describe('width', () => {
     it('adds the width class to the input when its not a percentage, so its not affected by prepend/append', () => {
       const screen = render(<IressInput width="10" data-testid="test-input" />);

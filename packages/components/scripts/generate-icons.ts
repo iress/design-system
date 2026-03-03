@@ -126,27 +126,40 @@ async function generateIconModules(): Promise<void> {
   await fs.mkdir(OUTPUT_DIR, { recursive: true });
   console.log(`✓ Output directory ready: ${OUTPUT_DIR}`);
 
-  // Process all SVG files
+  // Process all SVG files in parallel batches
   console.log('\n⚙️  Processing SVG files...');
   const iconDataList: IconData[] = [];
   let processedCount = 0;
   const totalCount = svgFiles.length;
+  const BATCH_SIZE = 100;
 
-  for (const file of svgFiles) {
-    try {
-      const iconData = await processSVGFile(file);
-      await writeComponentFile(iconData, file);
-      iconDataList.push(iconData);
-      processedCount++;
+  for (let i = 0; i < svgFiles.length; i += BATCH_SIZE) {
+    const batch = svgFiles.slice(i, i + BATCH_SIZE);
+    const results = await Promise.all(
+      batch.map(async (file) => {
+        try {
+          const iconData = await processSVGFile(file);
+          await writeComponentFile(iconData, file);
+          return iconData;
+        } catch (error) {
+          console.error(
+            `⚠️  Failed to process ${file}: ${error instanceof Error ? error.message : String(error)}`,
+          );
+          return null;
+        }
+      }),
+    );
 
-      // Log progress every 500 files
-      if (processedCount % 500 === 0) {
-        console.log(`  Progress: ${processedCount}/${totalCount} files...`);
+    for (const result of results) {
+      if (result) {
+        iconDataList.push(result);
+        processedCount++;
       }
-    } catch (error) {
-      console.error(
-        `⚠️  Failed to process ${file}: ${error instanceof Error ? error.message : String(error)}`,
-      );
+    }
+
+    // Log progress every 500 files
+    if (processedCount % 500 < BATCH_SIZE && processedCount >= 500) {
+      console.log(`  Progress: ${processedCount}/${totalCount} files...`);
     }
   }
 

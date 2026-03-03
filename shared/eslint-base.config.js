@@ -27,6 +27,7 @@ export async function createReactConfig() {
 }
 
 export async function createMdxConfig() {
+  // Re-enabled: eslint-plugin-mdx now supports ESLint 10 (context.getFilename() fix landed)
   const mdxPlugin = await import('eslint-plugin-mdx');
 
   return {
@@ -99,7 +100,7 @@ export const baseTypeScriptConfig = {
   rules: {
     ...typescriptEslintPlugin.configs['recommended-type-checked'].rules,
     ...typescriptEslintPlugin.configs['stylistic-type-checked'].rules,
-    'file-progress/activate': 'warn',
+    'file-progress/activate': process.env.CI ? 'off' : 'warn',
     '@typescript-eslint/no-explicit-any': 'error',
     // Allow underscored `_value`
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],

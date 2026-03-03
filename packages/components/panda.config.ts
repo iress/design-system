@@ -14,6 +14,7 @@ export default defineConfig({
   exclude: [
     './src/styled-system/**/*',
     './node_modules/**/*',
+    './src/**/generated/**/*',
     './src/**/mocks/**/*',
     './src/**/*.test.{ts,tsx}',
   ],

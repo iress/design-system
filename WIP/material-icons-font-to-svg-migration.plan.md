@@ -743,6 +743,10 @@ If you only use design system components (Alert, Button, Select, etc.) and don't
    - **Impact:** Low — provider is now optional for Material Symbols
    - **Workaround:** Remove these props from provider usage
 
+4. **`ReactHookFormCompatibleRef.extras` removed** — The `extras` property (`additionalOnChangeProps`, `valueProp`) has been removed from the ref interface
+   - **Impact:** Medium — consumers with custom form components using `extras` will break
+   - **Workaround:** Handle `onChange` directly in your component instead of relying on `extras.additionalOnChangeProps`. For custom value props, pass the value through `onChange` as the second argument.
+
 ---
 
 ## Risk Assessment

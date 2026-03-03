@@ -132,6 +132,7 @@ export const IressContextualMenu = ({
       >
         {!!items?.length && (
           <IressMenu data-testid={propagateTestid(dataTestId, 'menu')}>
+            {/* Destructure `icon` to avoid passing it as we handle it differently in contextual menu */}
             {items.map(({ icon, ...item }) => (
               <IressMenuItem
                 {...item}
