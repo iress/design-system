@@ -94,7 +94,9 @@ describe('IressInput', () => {
     await waitFor(() => {
       expect(handleChange).toHaveBeenCalledWith(
         expect.objectContaining({
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           target: expect.objectContaining({ value: '' }),
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           currentTarget: expect.objectContaining({ value: '' }),
         }),
         '',
