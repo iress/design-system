@@ -409,10 +409,9 @@ describe('IressFormField', () => {
       expect(checkbox).toBeChecked();
     });
 
-    it('changes the renderProps to include onClear when used with IressInput', async () => {
+    it('clears the form value when IressInput clear button is clicked', async () => {
       const onError = vi.fn();
       const onSubmit = vi.fn();
-      const renderProps = vi.fn();
 
       render(
         <IressForm onSubmit={onSubmit} onError={onError}>
@@ -420,7 +419,6 @@ describe('IressFormField', () => {
             label="Textbox"
             name="text"
             render={(controlledProps) => {
-              renderProps(controlledProps);
               return <IressInput {...controlledProps} clearable />;
             }}
             rules={{ required: true }}
@@ -432,13 +430,6 @@ describe('IressFormField', () => {
       const textbox = await screen.findByRole('textbox', {
         name: /Textbox/,
       });
-
-      expect(renderProps).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- should be mapped to onChange
-          onClear: expect.any(Function),
-        }),
-      );
 
       await userEvent.type(textbox, 'test value');
 

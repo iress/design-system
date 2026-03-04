@@ -1,5 +1,5 @@
 import { IressIcon, type IressIconProps } from '../../Icon';
-import { IressPanel } from '../../Panel';
+import { IressStyled } from '../../Styled';
 import { IressRadio } from '../../Radio';
 import { IressStack } from '../../Stack';
 import { IressText } from '../../Text';
@@ -15,14 +15,14 @@ const renderRadio = (
   testId?: string,
 ) => (
   <IressRadio value={value} key={value} data-testid={testId}>
-    <IressPanel textAlign="center" bg="transparent" px="none" py="md" mr="-md">
-      <IressStack gap="xs">
+    <IressStyled textAlign="center" bg="transparent" px="none" py="md" mr="-md">
+      <IressStack gap="sm" horizontalAlign="center">
         <IressIcon name={icon} textStyle="typography.heading.1" />
         <IressText textStyle="typography.heading.4" noGutter>
           {label}
         </IressText>
       </IressStack>
-    </IressPanel>
+    </IressStyled>
   </IressRadio>
 );
 
