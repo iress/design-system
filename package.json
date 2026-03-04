@@ -70,9 +70,10 @@
     "test": "yarn monorepo run test",
     "test:coverage": "yarn monorepo run test:coverage",
     "test:ci": "yarn test:coverage && yarn check-coverage --all",
-    "translate": "yarn translate:components && yarn translate:skills",
+    "translate": "yarn translate:components && yarn translate:skills && yarn generate:llms-txt",
     "translate:components": "tsx ./scripts/translate-components.ts",
     "translate:skills": "tsx ./scripts/translate-skills.ts",
+    "generate:llms-txt": "tsx ./scripts/generate-llms-txt.ts",
     "typecheck": "yarn monorepo run typecheck",
     "monorepo": "yarn workspaces foreach -Ai --topological-dev --exclude=@iress/design-system-monorepo"
   },
