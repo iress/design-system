@@ -51,6 +51,7 @@ env:
     packages/*/.ai
     packages/*/build
     packages/*/dist
+    packages/*/llms.txt
     packages/components/src/styled-system
     packages/tokens/src/generated
 
