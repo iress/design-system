@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-tokens",
-  "version": "6.0.0-alpha.16",
+  "version": "6.0.0-alpha.17",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,7 +15,8 @@
   "files": [
     ".ai",
     "build",
-    "dist"
+    "dist",
+    "llms.txt"
   ],
   "sideEffects": [
     "**/*.css"
