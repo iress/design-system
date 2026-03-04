@@ -195,9 +195,6 @@ const Input = <
     () =>
       ({
         ...inputRef.current,
-        extras: {
-          additionalOnChangeProps: ['onClear'],
-        },
       }) as InputRef<TRows>,
   );
 
@@ -255,6 +252,13 @@ const Input = <
       value: { value: '', ...e.target },
     });
 
+    Object.defineProperty(changeEvent, 'currentTarget', {
+      writable: false,
+      value: { ...e.currentTarget, value: '' },
+    });
+
+    // Clearing is a value change, so also call onChange to ensure form libraries are notified
+    onChange?.(changeEvent, '' as T);
     onClear?.(changeEvent);
   };
 

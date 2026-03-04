@@ -34,7 +34,7 @@ export const buttonRecipe = defineSlotRecipe({
       cursor: 'pointer',
       display: 'inline-flex',
       fontKerning: '[none]',
-      gap: 'spacing.1',
+      gap: 'spacing.2',
       justifyContent: 'center',
       maxWidth: '[100%]',
       minWidth: 'input.height',

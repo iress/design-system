@@ -45,7 +45,7 @@ export const Chatty: Story = {
 export const Message: Story = {
   render: (args) => (
     <IressInline gap="sm" verticalAlign="middle">
-      <IressSpinner {...args} />
+      <IressSpinner {...args} color="colour.neutral.70" />
       <IressText color="colour.neutral.70">Making magic happen...</IressText>
     </IressInline>
   ),

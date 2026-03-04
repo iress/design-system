@@ -1,4 +1,4 @@
-import { type ReactNode, useContext, useEffect, useMemo, useRef } from 'react';
+import { type ReactNode, useContext, useEffect, useMemo } from 'react';
 import {
   type Control,
   type FieldPath,
@@ -19,7 +19,6 @@ import {
 } from './helpers/transformCustomRulesToValidateRule';
 import { type FormFieldRenderProps } from './FormField';
 import { useFieldRenderProps } from './hooks/useFieldRenderProps';
-import { type ReactHookFormCompatibleRef } from '@/interfaces';
 
 export interface IressFormFieldsetProps<
   T extends FieldValues = FieldValues,
@@ -80,7 +79,6 @@ export const IressFormFieldset = <TFieldValues extends FieldValues>({
   ...fieldGroupProps
 }: IressFormFieldsetProps<TFieldValues>) => {
   const form = useContext(FormContext);
-  const fieldRef = useRef<ReactHookFormCompatibleRef | null>(null);
 
   if (!form) {
     throw new Error(
@@ -116,7 +114,7 @@ export const IressFormFieldset = <TFieldValues extends FieldValues>({
     form.setErrorMessage(name, errorMessage);
   }, [errorMessage, form, name]);
 
-  const renderField = useFieldRenderProps<TFieldValues>(field, fieldRef);
+  const renderField = useFieldRenderProps<TFieldValues>(field);
 
   return (
     <IressFieldGroup

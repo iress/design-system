@@ -133,7 +133,7 @@ export const TabsWithBadges: Story = {
       <IressTab
         key="employment"
         label={
-          <IressInline gap="sm" noWrap>
+          <IressInline gap="sm" verticalAlign="middle" noWrap>
             <IressIcon name="user" /> Employment
           </IressInline>
         }

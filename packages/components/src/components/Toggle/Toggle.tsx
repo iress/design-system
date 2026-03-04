@@ -36,6 +36,11 @@ export interface IressToggleProps extends Omit<IressStyledProps, 'onChange'> {
   defaultChecked?: boolean;
 
   /**
+   * If true, the toggle is disabled and cannot be interacted with.
+   */
+  disabled?: boolean;
+
+  /**
    * Hides the label if true (label will still be read out by screen readers).
    */
   hiddenLabel?: boolean;
@@ -78,6 +83,7 @@ ToggleLabel.displayName = 'ToggleLabel';
 
 export const IressToggle = ({
   checked: checkedProp,
+  disabled,
   hiddenLabel,
   defaultChecked,
   children,
@@ -143,6 +149,8 @@ export const IressToggle = ({
           role="switch"
           type="button"
           aria-checked={!!isChecked}
+          aria-disabled={disabled ?? undefined}
+          disabled={disabled}
           onClick={handleButtonClick}
           aria-labelledby={toggleId}
           data-testid={propagateTestid(testid, 'button__button')}
