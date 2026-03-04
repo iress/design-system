@@ -132,18 +132,17 @@ export const IressContextualMenu = ({
       >
         {!!items?.length && (
           <IressMenu data-testid={propagateTestid(dataTestId, 'menu')}>
-            {items.map((item) => (
+            {/* Destructure `icon` to avoid passing it as we handle it differently in contextual menu */}
+            {items.map(({ icon, ...item }) => (
               <IressMenuItem
                 {...item}
                 className={cx(classes.item, item.className)}
                 key={item.key}
                 onClick={(e) => {
-                  onAction?.(item);
+                  onAction?.({ icon, ...item });
                   item.onClick?.(e);
                 }}
-                prepend={
-                  item.icon ? <IressIcon name={item.icon} /> : item.prepend
-                }
+                prepend={icon ? <IressIcon name={icon} /> : item.prepend}
               >
                 {item.label}
               </IressMenuItem>

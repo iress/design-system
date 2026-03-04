@@ -30,7 +30,7 @@ export async function createMdxConfig() {
   // The eslint-plugin-mdx package uses deprecated context.getFilename() API
   // which was removed in ESLint 10. Re-enable when the plugin is updated.
   // See: https://github.com/mdx-js/eslint-mdx/issues
-  
+
   // Return an ignore configuration for MDX files to prevent parsing errors
   return {
     ignores: ['**/*.mdx'],
