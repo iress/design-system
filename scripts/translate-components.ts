@@ -1492,11 +1492,14 @@ function buildGuideOutput(
 
 interface ManifestEntry {
   name: string;
+  description: string;
   path: string;
   category: string;
   storybookUrl: string;
   propsType?: string;
   typeDeclPath?: string;
+  /** For guides: which section this belongs to (e.g. 'foundations', 'styling-props') */
+  guideSection?: string;
 }
 
 function generateManifest(translatedDocs: TranslatedDoc[]): object {
@@ -1508,9 +1511,11 @@ function generateManifest(translatedDocs: TranslatedDoc[]): object {
     if (doc.category === 'guide') {
       guides.push({
         name: doc.title,
+        description: doc.description,
         path: `guides/${doc.slug}.md`,
         category: 'guide',
         storybookUrl: `${STORYBOOK_URL}/?path=/docs/${STORYBOOK_REF_PREFIX}${doc.guideSection}-${doc.guideSbSlug}--docs`,
+        guideSection: doc.guideSection,
       });
       continue;
     }
@@ -1519,6 +1524,7 @@ function generateManifest(translatedDocs: TranslatedDoc[]): object {
       doc.category === 'component' ? 'components' : 'patterns';
     const entry: ManifestEntry = {
       name: doc.title,
+      description: doc.description,
       path: `${storybookPath}/${doc.slug}.md`,
       category: doc.category,
       storybookUrl: `${STORYBOOK_URL}/?path=/docs/${STORYBOOK_REF_PREFIX}${storybookPath}-${doc.slug}--docs`,

@@ -10,30 +10,7 @@ Coding standards, domain knowledge, and preferences that AI should follow when r
 
 When reviewing a PR, always verify that AI-facing documentation stays in sync with code changes. Flag any missing updates as **required changes** (not suggestions).
 
-### 1. LLMS.txt — Component / Pattern / Guide Catalogue
-
-**Trigger:** Any PR that adds, removes, or renames a component, pattern, or guide.
-
-**Files to check:**
-
-| Scope                               | LLMS.txt location              | AI index location                    |
-| ----------------------------------- | ------------------------------ | ------------------------------------ |
-| Components (add/remove/rename)      | `packages/components/llms.txt` | `packages/components/.ai/index.json` |
-| Tokens (add/remove/rename category) | `packages/tokens/llms.txt`     | `packages/tokens/.ai/index.json`     |
-
-**What to verify:**
-
-- Every **new** component, pattern, or guide has a corresponding entry in the relevant `llms.txt` under the correct section (`## Components`, `## Patterns`, `## Foundations & Guides`, `## Styling Props`, or `## Skills`).
-- Every **removed** component, pattern, or guide has its entry removed from `llms.txt`.
-- Every **renamed** component, pattern, or guide has its entry updated in `llms.txt` (both display name and link path).
-- The `.ai/index.json` file in the same package is also updated to match (new entries added, removed entries deleted, renamed entries corrected).
-- Link paths in `llms.txt` point to valid `.ai/` markdown files (e.g. `.ai/components/<name>.md`).
-
-**Review comment template:**
-
-> This PR adds/removes/renames `<ComponentName>` but `packages/components/llms.txt` (and/or `packages/components/.ai/index.json`) has not been updated. Please add/remove/update the entry so AI tools can discover the new component.
-
-### 2. Token Schema — `packages/tokens/.ai/index.json`
+### 1. Token Schema — `packages/tokens/.ai/index.json`
 
 **Trigger:** Any PR that modifies files under `packages/tokens/src/schema/` or changes the design token build pipeline (`packages/tokens/src/generated/`, token transforms, or token build config).
 
@@ -42,13 +19,12 @@ When reviewing a PR, always verify that AI-facing documentation stays in sync wi
 - If a **new token category** is introduced, `packages/tokens/.ai/index.json` has a new entry in `tokenCategories` with the correct `name`, `description`, `schemaSource`, and `cssVariablePrefix`.
 - If a token category is **removed**, its entry is deleted from `tokenCategories`.
 - If token values, descriptions, or structure **change significantly**, verify that the `description` fields in `index.json` still accurately reflect the token category.
-- The `packages/tokens/llms.txt` file is updated if the high-level category list changes (new section, removed section, or renamed section under `## Token Categories`).
 
 **Review comment template:**
 
 > This PR modifies the token schema (`packages/tokens/src/schema/`) but `packages/tokens/.ai/index.json` has not been updated. Please ensure `tokenCategories` reflects the current schema so AI tools have accurate token metadata.
 
-### 3. Agent Skills — `.agents/skills/`
+### 2. Agent Skills — `.agents/skills/`
 
 **Trigger:** Any PR that:
 
@@ -131,6 +107,12 @@ These checks apply to **every PR**, not just those touching AI documentation.
 - **No snapshot-only testing**: Snapshot tests are acceptable as supplements, but flag PRs where snapshots are the only form of testing for behavioral logic.
 - **Mock responsibly**: Flag mocks that are too broad (mocking entire modules when only one function is needed) or that mask the behavior being tested.
 - **No test implementation details**: Tests should assert on behavior (what the user sees/does), not internal state or implementation details. Flag tests that reach into component internals.
+- **Avoid `act()` warnings**: Flag test code patterns that cause React `act()` warnings. Specifically:
+  - Use `await waitFor(() => ...)` or `await findByX()` instead of manually wrapping in `act()` when waiting for async state updates. Testing Library queries already handle `act()` internally.
+  - Flag bare `render()` calls in tests where the component triggers async state updates on mount (e.g. `useEffect` with data fetching) — these need `await waitFor()` or `findBy*` to await the update.
+  - Flag `fireEvent` or `userEvent` calls that trigger async state updates without awaiting the result. Use `await userEvent.click(...)` and follow with `await waitFor()` or `findBy*` for assertions.
+  - Flag direct `act(() => { ... })` wrapping when Testing Library's async utilities (`waitFor`, `findBy*`) would be more appropriate and readable.
+  - When `act()` is genuinely needed (e.g. testing hooks directly with `renderHook`), ensure async updates use `await act(async () => { ... })`.
 
 ### Error Handling & Edge Cases
 
