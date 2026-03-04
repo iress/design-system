@@ -20,7 +20,7 @@ export default {
 
 export const Default: Story = {
   args: {
-    screenreaderText: 'Loading...',
+    screenReaderText: 'Loading...',
   },
 };
 
