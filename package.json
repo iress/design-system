@@ -44,7 +44,7 @@
     "puppeteer": "^24.37.3",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "storybook": "10.2.8",
+    "storybook": "10.2.10",
     "storybook-addon-tag-badges": "^3.0.6",
     "ts-dedent": "^2.2.0",
     "tsx": "^4.21.0",
