@@ -1,0 +1,114 @@
+# @iress-oss/ids-components
+
+> React component library for the Iress Design System — accessible, themeable UI primitives with built-in styling props, design tokens, and responsive layout support. All components use the `Iress` prefix (e.g. `IressButton`, `IressInput`).
+
+- Install: `npm install @iress-oss/ids-components`
+- Peer dependencies: `react`, `react-dom`, optionally `react-hook-form`
+- Import CSS: `import '@iress-oss/ids-components/dist/style.css'`
+- Wrap app in `<IressProvider>` for theming and context
+- Storybook: <https://main--691abcc79dfa560a36d0a74f.chromatic.com>
+- Structured AI index: `.ai/index.json` (machine-readable catalogue of all docs below)
+
+## Components
+
+- [Alert](.ai/components/alert.md): Displays a short, important message to attract attention without interrupting the user's task
+- [Autocomplete](.ai/components/autocomplete.md): Search input with suggestion dropdown
+- [Autocomplete Recipes](.ai/components/autocomplete-recipes.md): Common autocomplete usage patterns
+- [Button](.ai/components/button.md): Clickable action trigger with variants (primary, secondary, ghost, danger)
+- [ButtonGroup](.ai/components/button-group.md): Groups related buttons together
+- [Card](.ai/components/card.md): Content container with optional header, body, and footer
+- [Checkbox](.ai/components/checkbox.md): Single checkbox input for boolean selections
+- [Checkbox Group](.ai/components/checkbox-group.md): Group of related checkboxes
+- [Checkbox Group Recipes](.ai/components/checkbox-group-recipes.md): Common checkbox group usage patterns
+- [Col](.ai/components/col.md): Column layout primitive for grid-based layouts
+- [Container](.ai/components/container.md): Constrains content width with consistent horizontal padding
+- [Divider](.ai/components/divider.md): Visual separator between content sections
+- [Expander](.ai/components/expander.md): Collapsible content section with toggle
+- [Field](.ai/components/field.md): Form field wrapper providing label, help text, and validation
+- [Icon](.ai/components/icon.md): Material Symbols icon renderer
+- [Image](.ai/components/image.md): Responsive image with optional fallback
+- [Inline](.ai/components/inline.md): Horizontal layout primitive with gap and wrapping
+- [Input](.ai/components/input.md): Text input field with optional prefix/suffix
+- [Input Recipes](.ai/components/input-recipes.md): Common input usage patterns
+- [InputCurrency](.ai/components/input-currency.md): Currency-formatted numeric input
+- [InputCurrency Recipes](.ai/components/input-currency-recipes.md): Common currency input patterns
+- [Label](.ai/components/label.md): Accessible form label
+- [Link](.ai/components/link.md): Anchor element with consistent styling
+- [Menu](.ai/components/menu.md): Vertical list of interactive items
+- [MenuItem](.ai/components/menu-item.md): Individual item within a Menu
+- [Modal](.ai/components/modal.md): Dialog overlay for focused content or actions
+- [Panel](.ai/components/panel.md): Bordered content panel with optional heading
+- [Pill](.ai/components/pill.md): Compact status/category indicator
+- [Placeholder](.ai/components/placeholder.md): Empty state placeholder with optional action
+- [Popover](.ai/components/popover.md): Floating content anchored to a trigger element
+- [Popover Recipes](.ai/components/popover-recipes.md): Common popover usage patterns
+- [Progress](.ai/components/progress.md): Determinate/indeterminate progress indicator
+- [Provider](.ai/components/provider.md): Theme and context provider — wrap your app root
+- [Radio](.ai/components/radio.md): Single radio input for exclusive selection
+- [RadioGroup](.ai/components/radio-group.md): Group of related radio buttons
+- [Readonly](.ai/components/readonly.md): Read-only display of form values
+- [Row](.ai/components/row.md): Row layout primitive for grid-based layouts
+- [Skeleton](.ai/components/skeleton.md): Loading placeholder animation
+- [Skeleton Recipes](.ai/components/skeleton-recipes.md): Common skeleton loading patterns
+- [SkipLink](.ai/components/skip-link.md): Accessibility skip-to-content link
+- [Slideout](.ai/components/slideout.md): Side panel that slides in from the edge
+- [Slider](.ai/components/slider.md): Range input slider
+- [Spinner](.ai/components/spinner.md): Loading spinner animation
+- [Stack](.ai/components/stack.md): Vertical layout primitive with consistent gap
+- [Styled](.ai/components/styled.md): Low-level styled element with styling prop support
+- [Tab](.ai/components/tab.md): Individual tab within a TabSet
+- [TabSet](.ai/components/tab-set.md): Tabbed content navigation
+- [Table](.ai/components/table.md): Data table with sorting, pagination, and selection
+- [Tag](.ai/components/tag.md): Label tag for categorisation
+- [Text](.ai/components/text.md): Typography primitive with semantic variants
+- [Toaster](.ai/components/toaster.md): Toast notification system
+- [Toggle](.ai/components/toggle.md): On/off switch input
+- [Tooltip](.ai/components/tooltip.md): Hover/focus information overlay
+- [ValidationMessage](.ai/components/validation-message.md): Form field validation feedback
+
+## Patterns
+
+- [Breadcrumbs](.ai/patterns/breadcrumbs.md): Navigation breadcrumb trail
+- [Contextual Menu](.ai/patterns/contextual-menu.md): Right-click or action menu pattern
+- [Dropdown Menu](.ai/patterns/dropdown-menu.md): Button-triggered dropdown menu pattern
+- [Form](.ai/patterns/form.md): Complete form composition with validation
+- [Form Recipes](.ai/patterns/form-recipes.md): Common form layout and validation patterns
+- [Loading](.ai/patterns/loading.md): Loading state patterns with skeletons and spinners
+- [Shadow](.ai/patterns/shadow.md): Elevation and shadow patterns
+- [SideNav](.ai/patterns/side-nav.md): Sidebar navigation pattern
+
+## Foundations & Guides
+
+- [Core Design Principles](.ai/guides/foundations-principles.md): Fundamental design philosophy
+- [Accessibility](.ai/guides/foundations-accessibility.md): WCAG compliance and accessible patterns
+- [Iconography](.ai/guides/foundations-iconography.md): Icon usage and Material Symbols
+- [Responsive Layout](.ai/guides/foundations-responsive.md): Breakpoints and responsive patterns
+- [Z-index (Stacking)](.ai/guides/foundations-zindex.md): Layer management and stacking contexts
+- [Visual Design Standards](.ai/guides/foundations-visual-design.md): Visual consistency guidelines
+- [Using Components Consistently](.ai/guides/foundations-consistency.md): Composition best practices
+- [Content](.ai/guides/foundations-content.md): Content writing and UX copy guidelines
+- [User Experience](.ai/guides/foundations-user-experience.md): UX principles and interaction patterns
+- [Getting Started (Develop)](.ai/guides/get-started-develop.md): Developer setup and first steps
+- [Migration from v4 to v5](.ai/guides/migration-guides-v5.md): Breaking changes and upgrade guide
+
+## Styling Props
+
+- [Styling Props Reference](.ai/guides/styling-props-reference.md): Complete list of all styling props and their mapped tokens
+- [Accessibility Props](.ai/guides/styling-props-accessibility.md): Screen reader and focus-related props
+- [Colour Props](.ai/guides/styling-props-colour.md): Colour, background, and border colour props
+- [Layout Props](.ai/guides/styling-props-layout.md): Display, flex, grid, position, and overflow props
+- [Radius Props](.ai/guides/styling-props-radius.md): Border radius props
+- [Sizing Props](.ai/guides/styling-props-sizing.md): Width, height, min/max sizing props
+- [Spacing Props](.ai/guides/styling-props-spacing.md): Margin and padding props
+- [Typography Props](.ai/guides/styling-props-typography.md): Font, text alignment, and line-height props
+
+## Skills
+
+- [UI Translation](.ai/skills/ui-translation.md): Translate natural language UI descriptions into IDS component code
+- [UI Doctor](.ai/skills/ui-doctor.md): Audit apps for correct IDS component usage and compliance
+- [Figma to IDS](.ai/skills/figma-to-ids.md): Convert Figma design specs into IDS implementations
+
+## Optional
+
+- [Storybook (live)](<https://main--691abcc79dfa560a36d0a74f.chromatic.com>): Interactive component playground with all examples
+- [GitHub Repository](<https://github.com/iress/design-system>): Source code and issue tracker

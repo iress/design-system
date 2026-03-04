@@ -2,4 +2,157 @@
 applyTo: '**'
 ---
 
-Coding standards, domain knowledge, and preferences that AI should follow.
+# PR Review Instructions
+
+Coding standards, domain knowledge, and preferences that AI should follow when reviewing pull requests.
+
+## AI Context & Documentation Freshness Checks
+
+When reviewing a PR, always verify that AI-facing documentation stays in sync with code changes. Flag any missing updates as **required changes** (not suggestions).
+
+### 1. LLMS.txt — Component / Pattern / Guide Catalogue
+
+**Trigger:** Any PR that adds, removes, or renames a component, pattern, or guide.
+
+**Files to check:**
+
+| Scope                               | LLMS.txt location              | AI index location                    |
+| ----------------------------------- | ------------------------------ | ------------------------------------ |
+| Components (add/remove/rename)      | `packages/components/llms.txt` | `packages/components/.ai/index.json` |
+| Tokens (add/remove/rename category) | `packages/tokens/llms.txt`     | `packages/tokens/.ai/index.json`     |
+
+**What to verify:**
+
+- Every **new** component, pattern, or guide has a corresponding entry in the relevant `llms.txt` under the correct section (`## Components`, `## Patterns`, `## Foundations & Guides`, `## Styling Props`, or `## Skills`).
+- Every **removed** component, pattern, or guide has its entry removed from `llms.txt`.
+- Every **renamed** component, pattern, or guide has its entry updated in `llms.txt` (both display name and link path).
+- The `.ai/index.json` file in the same package is also updated to match (new entries added, removed entries deleted, renamed entries corrected).
+- Link paths in `llms.txt` point to valid `.ai/` markdown files (e.g. `.ai/components/<name>.md`).
+
+**Review comment template:**
+
+> This PR adds/removes/renames `<ComponentName>` but `packages/components/llms.txt` (and/or `packages/components/.ai/index.json`) has not been updated. Please add/remove/update the entry so AI tools can discover the new component.
+
+### 2. Token Schema — `packages/tokens/.ai/index.json`
+
+**Trigger:** Any PR that modifies files under `packages/tokens/src/schema/` or changes the design token build pipeline (`packages/tokens/src/generated/`, token transforms, or token build config).
+
+**What to verify:**
+
+- If a **new token category** is introduced, `packages/tokens/.ai/index.json` has a new entry in `tokenCategories` with the correct `name`, `description`, `schemaSource`, and `cssVariablePrefix`.
+- If a token category is **removed**, its entry is deleted from `tokenCategories`.
+- If token values, descriptions, or structure **change significantly**, verify that the `description` fields in `index.json` still accurately reflect the token category.
+- The `packages/tokens/llms.txt` file is updated if the high-level category list changes (new section, removed section, or renamed section under `## Token Categories`).
+
+**Review comment template:**
+
+> This PR modifies the token schema (`packages/tokens/src/schema/`) but `packages/tokens/.ai/index.json` has not been updated. Please ensure `tokenCategories` reflects the current schema so AI tools have accurate token metadata.
+
+### 3. Agent Skills — `.agents/skills/`
+
+**Trigger:** Any PR that:
+
+- Adds, removes, or significantly changes a **component, pattern, or guide** in `packages/components/`
+- Changes the **design token schema** in `packages/tokens/src/schema/`
+- Changes component **styling props** or **prop types**
+- Modifies the **component public API** (new/removed/renamed props, new/removed exports)
+
+**Skills to review:**
+
+| Skill            | Path                                     | Review when…                                                                                                                     |
+| ---------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `token-usage`    | `.agents/skills/token-usage/SKILL.md`    | Token schema changes, new token categories, changed CSS variable prefixes, or new import patterns                                |
+| `figma-to-ids`   | `.agents/skills/figma-to-ids/SKILL.md`   | New components added, component prop APIs changed, layout component changes, or new Figma-to-IDS mappings needed                 |
+| `ui-doctor`      | `.agents/skills/ui-doctor/SKILL.md`      | New components that should be flagged as IDS replacements for native HTML, component removals, or changes to compliance criteria |
+| `ui-translation` | `.agents/skills/ui-translation/SKILL.md` | New components, renamed components, changed component APIs, or new patterns that affect natural-language-to-code translation     |
+
+**What to verify:**
+
+- Skills reference up-to-date component names, prop names, and import paths.
+- Any new component or pattern is represented in the relevant mapping tables or examples within skills.
+- Removed or renamed components/tokens are no longer referenced (or references are updated).
+- Token usage examples use current token names and CSS variable prefixes.
+- Code examples in skills compile against the current public API.
+
+**Review comment template:**
+
+> This PR changes `<ComponentName>` / token schema but the `.agents/skills/<skill>/SKILL.md` file has not been updated. Please review and update the skill so AI agents produce correct code.
+
+## How to Apply These Checks
+
+When reviewing a PR:
+
+1. **Scan the changed file list** for files under `packages/components/src/components/`, `packages/components/src/patterns/`, `packages/components/docs/`, `packages/tokens/src/schema/`, or `packages/tokens/src/generated/`.
+2. If any of those paths appear, **apply the relevant checks above**.
+3. Flag missing updates as **required changes**, not optional suggestions — stale AI documentation degrades the entire AI-assisted development experience.
+4. If the PR is a pure refactor with no public API changes, these checks can be skipped.
+
+## General Code Review Standards
+
+These checks apply to **every PR**, not just those touching AI documentation.
+
+### Code Quality
+
+- **Follow existing patterns**: Match the conventions already used in the file and package being modified. Don't introduce new patterns without justification.
+- **Minimal, targeted changes**: Prefer small, focused diffs. Flag unnecessarily broad refactors mixed in with feature or bug fix work.
+- **No dead code**: Flag commented-out code, unused imports, unreachable branches, or unused variables/functions being added.
+- **DRY without over-abstracting**: Flag obvious duplication, but don't demand abstraction for code that's only used in two places and may diverge.
+- **Readable naming**: Variables, functions, and components should have clear, descriptive names. Flag single-letter variables (outside loop indices) and ambiguous names.
+
+### TypeScript
+
+- **Correct and complete types**: No `any` types unless explicitly justified with a comment. Prefer specific types and union types over broad ones.
+- **Export only what's needed**: Internal helpers and types should not be exported from the package public API unless intentionally public.
+- **Prop interfaces**: Component prop types should be exported and named `Iress<ComponentName>Props`. Flag deviations.
+- **Avoid type assertions (`as`)**: Prefer type guards or proper typing. Flag `as` casts that could mask bugs.
+- **Generics**: Ensure generic type parameters have meaningful constraints and names (not just `<T>` without context).
+
+### React & Component Patterns
+
+- **Component naming**: All IDS components use the `Iress` prefix (e.g. `IressButton`, `IressInput`). Flag components that don't follow this convention.
+- **Hooks rules**: Verify hooks are called at the top level and not inside conditions, loops, or nested functions.
+- **Avoid inline object/array/function creation in JSX props**: These create new references on every render. Flag patterns like `style={{ ... }}` or `onClick={() => ...}` in hot paths unless memoized.
+- **`key` prop usage**: Flag missing `key` props on list items. Flag use of array index as `key` when list items can be reordered, added, or removed.
+- **`useEffect` dependencies**: Verify dependency arrays are correct and complete. Flag missing dependencies and unnecessary effects (effects that could be derived during render).
+- **Forwarded refs**: Components that wrap native elements should forward refs correctly using `React.forwardRef` or the `ref` prop pattern used in this codebase.
+- **Accessibility**: Flag missing `aria-*` attributes, missing labels on interactive elements, non-semantic HTML where semantic elements exist (e.g. `<div onClick>` instead of `<button>`), and missing keyboard interaction support.
+
+### Styling (Panda CSS / Design Tokens)
+
+- **Use design tokens**: Flag hardcoded colour hex values, pixel spacing values, or font sizes. These should reference IDS design tokens via `cssVars` or CSS custom properties (`--iress-*`).
+- **Follow styling prop patterns**: Components should use IDS styling props (`p`, `m`, `gap`, `color`, etc.) rather than raw CSS or `style` props when available.
+- **No `!important`**: Flag use of `!important` in CSS. If specificity is needed, find the root cause instead.
+- **Responsive patterns**: Flag fixed pixel widths on layout containers. Prefer responsive tokens and relative units.
+
+### Testing
+
+- **Test coverage for changes**: Every new feature, bug fix, or behavioral change should include or update tests. Flag PRs that modify component behavior without corresponding test changes.
+- **Test names describe behavior**: Test names should read like specifications (e.g. `"renders error state when validation fails"`, not `"test 1"` or `"works"`).
+- **No snapshot-only testing**: Snapshot tests are acceptable as supplements, but flag PRs where snapshots are the only form of testing for behavioral logic.
+- **Mock responsibly**: Flag mocks that are too broad (mocking entire modules when only one function is needed) or that mask the behavior being tested.
+- **No test implementation details**: Tests should assert on behavior (what the user sees/does), not internal state or implementation details. Flag tests that reach into component internals.
+
+### Error Handling & Edge Cases
+
+- **Handle loading, empty, and error states**: Flag components that only handle the happy path. Check for null/undefined guards on data that comes from props or async sources.
+- **Validate inputs**: Public API functions and component prop processing should validate or gracefully handle unexpected input.
+- **Async error handling**: Flag missing `.catch()` on promises and missing error handling in `async` functions.
+
+### Performance
+
+- **Avoid unnecessary re-renders**: Flag state updates that trigger re-renders in parent components when only children need updating. Check for missing `useMemo`/`useCallback` where reference stability matters.
+- **Large lists**: Flag rendering of large datasets without virtualisation or pagination.
+- **Bundle size**: Flag new dependencies. Check that imports use tree-shakeable paths (e.g. `import { specific } from 'lib'` not `import lib from 'lib'`).
+
+### Documentation & Comments
+
+- **JSDoc on public APIs**: Exported functions, components, and types should have JSDoc comments describing their purpose, params, and return values.
+- **Explain "why", not "what"**: Inline comments should explain non-obvious reasoning, not restate what the code does.
+- **Storybook stories**: New or changed components should have corresponding Storybook stories showing realistic usage.
+- **Update README/docs**: If a PR changes public API, setup steps, or configuration, flag missing documentation updates.
+
+### Git & PR Hygiene
+
+- **Atomic commits**: Flag PRs that mix unrelated changes (e.g. a feature + an unrelated refactor + a dependency bump).
+- **No secrets or credentials**: Flag any hardcoded API keys, tokens, passwords, or internal URLs.
+- **No large generated files**: Flag checked-in build artifacts, `node_modules`, or large generated files that should be in `.gitignore`.

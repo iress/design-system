@@ -1,0 +1,24 @@
+# @iress-oss/ids-tokens
+
+> Design tokens for the Iress Design System — colours, spacing, radius, and typography as CSS custom properties and typed JavaScript objects. Used by `@iress-oss/ids-components` and available standalone.
+
+- Install: `npm install @iress-oss/ids-tokens`
+- CSS import: `import '@iress-oss/ids-tokens/build/css-vars.css'`
+- JS import: `import { cssVars } from '@iress-oss/ids-tokens'` (type-safe `var()` strings with fallbacks)
+- Schema: `import { designTokens } from '@iress-oss/ids-tokens'` (raw token metadata for tooling)
+- Structured AI index: `.ai/index.json`
+
+## Token Categories
+
+- **Colour**: Semantic palette — neutral (10-90), primary, accent, system (success/danger/warning/info), data visualisation (subtle/bold 10-90), global interactions. CSS prefix: `--iress-colour-`
+- **Spacing**: Scale based on 0.25rem (4px) base unit. Values: 0-8, 10. Aliases: none, xs, sm, md, lg, xl. CSS prefix: `--iress-spacing-`
+- **Radius**: Border radius scale based on 0.25rem (4px). Values: 0-4. System tokens for button, form, layout, pill, tag. CSS prefix: `--iress-radius-`
+- **Typography**: Composite tokens for headings (1-5), body (sm/md × regular/medium/strong/em), and code. Fonts: Ubuntu (headings), Inter (body), Space (code). CSS prefix: `--iress-typography-`
+
+## Skills
+
+- [Token Usage](.ai/skills/token-usage.md): How to correctly use IDS design tokens in React components and CSS — import patterns, common mistakes, usage rules by category, theming, and complete token enumeration
+
+## Optional
+
+- [GitHub Repository](<https://github.com/iress/design-system>): Source code and issue tracker
