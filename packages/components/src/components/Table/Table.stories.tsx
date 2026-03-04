@@ -39,6 +39,12 @@ export default {
   tags: ['updated'],
 } as Meta<typeof IressTable>;
 
+export const Default: Story = {
+  args: {
+    caption: 'Data table',
+  },
+};
+
 export const AutomaticColumns: Story = {
   args: {
     caption: 'My investments',

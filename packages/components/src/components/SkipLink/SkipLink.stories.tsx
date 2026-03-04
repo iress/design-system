@@ -17,6 +17,12 @@ export default {
   },
 } as Meta<typeof IressSkipLink>;
 
+export const Default: Story = {
+  args: {
+    href: '#main',
+  },
+};
+
 export const SkipLink: Story = {
   args: {
     href: '#main',

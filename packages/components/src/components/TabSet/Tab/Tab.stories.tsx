@@ -14,6 +14,12 @@ export default {
   },
 } as Meta<IressTabProps<undefined>>;
 
+export const Default: Story = {
+  args: {
+    label: 'Tab',
+  },
+};
+
 export const Inactive: Story = {
   args: {
     label: 'Tab',

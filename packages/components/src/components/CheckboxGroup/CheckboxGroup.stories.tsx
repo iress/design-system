@@ -27,6 +27,12 @@ export default {
   tags: ['updated'],
 } as Meta<typeof IressCheckboxGroup>;
 
+export const Default: Story = {
+  args: {
+    name: 'preferences',
+  },
+};
+
 export const CheckboxChildren: Story = {
   args: {
     name: 'let-them-eat-cake',

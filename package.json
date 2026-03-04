@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.1",
-    "@iress-oss/ids-components": "^6.0.0-alpha.28",
+    "@iress-oss/ids-components": "^6.0.0-alpha.30",
     "@iress-oss/ids-storybook-config": "^0.5.0",
     "@iress-oss/ids-storybook-okta": "^0.1.2",
     "@iress-oss/ids-storybook-sandbox": "^0.2.2",
@@ -55,7 +55,7 @@
     "zx": "^8.8.5"
   },
   "scripts": {
-    "build": "yarn monorepo run build",
+    "build": "yarn monorepo run build && yarn translate",
     "check-coverage": "tsx ./scripts/check-coverage.ts",
     "dev": "concurrently \"wait-on tcp:6006 && wait-on tcp:6007 && yarn storybook\" \"yarn packages/components dev:no-open\" \"yarn packages/tokens dev:no-open\"",
     "dev:mcp": "concurrently \"wait-on tcp:6006 && wait-on tcp:6007 && STORYBOOK_MCP=true yarn storybook --no-open\" \"yarn packages/components dev:no-open\" \"yarn packages/tokens dev:no-open\"",
@@ -70,6 +70,9 @@
     "test": "yarn monorepo run test",
     "test:coverage": "yarn monorepo run test:coverage",
     "test:ci": "yarn test:coverage && yarn check-coverage --all",
+    "translate": "yarn translate:components && yarn translate:skills",
+    "translate:components": "tsx ./scripts/translate-components.ts",
+    "translate:skills": "tsx ./scripts/translate-skills.ts",
     "typecheck": "yarn monorepo run typecheck",
     "monorepo": "yarn workspaces foreach -Ai --topological-dev --exclude=@iress/design-system-monorepo"
   },

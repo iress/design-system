@@ -23,6 +23,12 @@ export default {
   tags: ['updated'],
 } as Meta<typeof IressSpinner>;
 
+export const Default: Story = {
+  args: {
+    screenreaderText: 'Loading...',
+  },
+};
+
 export const Standalone: Story = {
   args: {
     screenreaderText: 'Making magic happen...',

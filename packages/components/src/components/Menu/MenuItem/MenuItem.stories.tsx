@@ -20,6 +20,12 @@ export default {
   },
 } as Meta<typeof IressMenuItem>;
 
+export const Default: Story = {
+  args: {
+    children: 'Menu item',
+  },
+};
+
 export const Unselected: Story = {
   args: {
     children: 'Menu item',

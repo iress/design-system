@@ -97,6 +97,13 @@ export default {
   },
 } as Meta<typeof IressPopover>;
 
+export const Default: Story = {
+  args: {
+    activator: <IressButton>Toggle popover</IressButton>,
+    children: 'basic',
+  },
+};
+
 export const Activator: Story = {
   args: {
     activator: <IressButton>Toggle popover</IressButton>,

@@ -26,3 +26,5 @@ dist
 generated
 packages/components/src/styled-system
 storybook-static
+packages/*/.ai/*
+!packages/tokens/.ai/index.json

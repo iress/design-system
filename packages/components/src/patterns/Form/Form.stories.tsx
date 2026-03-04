@@ -13,7 +13,7 @@ import { FormReset } from './mocks/FormReset';
 import FormResetSource from './mocks/FormReset.tsx?raw';
 import { IressStack } from '@/components/Stack';
 import { IressText } from '@/components/Text';
-import { IressFormValidationSummary } from '@/main';
+import { IressFormField, IressFormValidationSummary, IressInput } from '@/main';
 import {
   formArgs,
   formArgTypes,
@@ -41,6 +41,29 @@ export default {
     ...formParameters,
   },
 } as Meta<typeof IressForm>;
+
+export const Default: Story = {
+  args: {
+    heading: 'Contact details',
+    pattern: 'short',
+    children: [
+      <IressFormField
+        key="name"
+        name="name"
+        label="Name"
+        rules={{ required: 'Name is required' }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />,
+      <IressFormField
+        key="email"
+        name="email"
+        label="Email address"
+        rules={{ required: 'Email is required' }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />,
+    ],
+  },
+};
 
 export const Simple: Story = {
   args: {

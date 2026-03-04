@@ -37,6 +37,12 @@ export default {
   },
 } as Meta<typeof IressDropdownMenu>;
 
+export const Default: SingleStory = {
+  args: {
+    label: 'Select an option',
+  },
+};
+
 export const Controlled: SingleStory = {
   render: (args) => <ControlledDropdownMenu {...args} />,
   parameters: {

@@ -48,6 +48,7 @@ env:
     packages/*/node_modules
     ~/.cache/ms-playwright
   BUILD_CACHE_PATHS: |
+    packages/*/.ai
     packages/*/build
     packages/*/dist
     packages/components/src/styled-system

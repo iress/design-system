@@ -17,6 +17,8 @@ export default {
   },
 } as Meta<typeof IressProvider>;
 
+export const Default: Story = {};
+
 export const Provider: Story = {
   render: () => <AppWithProvider />,
   parameters: {

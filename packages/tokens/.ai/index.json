@@ -1,0 +1,75 @@
+{
+  "package": "@iress-oss/ids-tokens",
+  "description": "Design tokens for the Iress Design System — colours, spacing, radius, and typography as CSS custom properties and typed JavaScript objects.",
+  "skills": [
+    {
+      "name": "token-usage",
+      "description": "How to correctly use IDS design tokens in React components and CSS. Covers import patterns, common mistakes, usage rules by category, theming, and complete token enumeration.",
+      "path": "skills/token-usage.md"
+    }
+  ],
+  "sources": {
+    "css": {
+      "description": "CSS custom properties stylesheet — import once, use var() references anywhere",
+      "path": "build/css-vars.css",
+      "importPath": "@iress-oss/ids-tokens/build/css-vars.css"
+    },
+    "cssVars": {
+      "description": "Type-safe JavaScript object of var() strings with embedded fallbacks — recommended for CSS-in-JS and inline styles",
+      "path": "dist/generated/css-vars.js",
+      "importPath": "@iress-oss/ids-tokens",
+      "exportName": "cssVars"
+    },
+    "designTokens": {
+      "description": "Raw token schema with $value, $type, $description metadata — for tooling and inspection only, not for styling",
+      "path": "dist/schema/index.js",
+      "importPath": "@iress-oss/ids-tokens",
+      "exportName": "designTokens"
+    }
+  },
+  "tokenCategories": [
+    {
+      "name": "colour",
+      "description": "Semantic colour palette: neutral (10-90), primary, accent, system (success/danger/warning/info), data visualisation (subtle/bold 10-90), and global interactions",
+      "schemaSource": "dist/schema/colour.js",
+      "cssVariablePrefix": "--iress-colour-"
+    },
+    {
+      "name": "spacing",
+      "description": "Spacing scale based on 0.25rem (4px) base unit. Values: 0-8 and 10 (no 9). Aliases: none, xs, sm, md, lg, xl",
+      "schemaSource": "dist/schema/spacing.js",
+      "cssVariablePrefix": "--iress-spacing-"
+    },
+    {
+      "name": "radius",
+      "description": "Border radius scale based on 0.25rem (4px) base unit. Values: 0-4. System tokens for button, form, layout, pill, tag",
+      "schemaSource": "dist/schema/radius.js",
+      "cssVariablePrefix": "--iress-radius-"
+    },
+    {
+      "name": "typography",
+      "description": "Typography composite tokens for headings (1-5), body (sm/md × regular/medium/strong/em), and code. Base fonts: Ubuntu (headings), Inter (body), Space (code)",
+      "schemaSource": "dist/schema/typography.js",
+      "cssVariablePrefix": "--iress-typography-"
+    }
+  ],
+  "crossReferences": {
+    "components": {
+      "description": "The components package has styling-props guides that cover token usage from the component perspective",
+      "guides": [
+        "@iress-oss/ids-components/.ai/guides/styling-props-reference.md",
+        "@iress-oss/ids-components/.ai/guides/styling-props-colour.md",
+        "@iress-oss/ids-components/.ai/guides/styling-props-spacing.md",
+        "@iress-oss/ids-components/.ai/guides/styling-props-radius.md",
+        "@iress-oss/ids-components/.ai/guides/styling-props-typography.md",
+        "@iress-oss/ids-components/.ai/guides/styling-props-layout.md",
+        "@iress-oss/ids-components/.ai/guides/styling-props-sizing.md",
+        "@iress-oss/ids-components/.ai/guides/styling-props-accessibility.md"
+      ]
+    }
+  },
+  "meta": {
+    "generatedBy": "manual",
+    "source": "Curated index for AI agent discovery of the @iress-oss/ids-tokens package"
+  }
+}

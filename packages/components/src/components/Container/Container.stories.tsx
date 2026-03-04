@@ -18,6 +18,8 @@ export default {
   },
 } as Meta<typeof IressContainer>;
 
+export const Default: Story = {};
+
 export const Container: Story = {
   render: (args) => (
     <IressContainer {...args}>

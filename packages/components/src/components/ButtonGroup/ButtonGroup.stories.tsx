@@ -21,6 +21,17 @@ export default {
   tags: ['updated'],
 } as Meta<typeof IressButtonGroup>;
 
+export const Default: Story = {
+  args: {
+    children: [
+      <IressButton key="1">Option 1</IressButton>,
+      <IressButton key="2">Option 2</IressButton>,
+      <IressButton key="3">Option 3</IressButton>,
+    ],
+    label: 'Options',
+  },
+};
+
 export const ButtonChildren: Story = {
   args: {
     children: [

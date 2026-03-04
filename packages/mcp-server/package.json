@@ -40,7 +40,7 @@
     "LICENSE.txt"
   ],
   "dependencies": {
-    "@iress-oss/ids-tokens": "^6.0.0-alpha.15",
+    "@iress-oss/ids-tokens": "^6.0.0-alpha.16",
     "@modelcontextprotocol/sdk": "1.26.0",
     "zod": "4.3.6"
   },
