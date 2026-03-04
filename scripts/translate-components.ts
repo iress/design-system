@@ -23,10 +23,14 @@
 import fs from 'fs/promises';
 import { existsSync, readFileSync } from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 // ─── Configuration ───────────────────────────────────────────
 
-const ROOT = path.resolve(import.meta.dirname, '..');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const ROOT = path.resolve(__dirname, '..');
 const COMPONENTS_SRC = path.join(ROOT, 'packages/components/src/components');
 const PATTERNS_SRC = path.join(ROOT, 'packages/components/src/patterns');
 const DOCS_SRC = path.join(ROOT, 'packages/components/docs');
@@ -1033,9 +1037,10 @@ function transformContent(doc: DocFile): {
 
   let result = content;
 
-  // 1. Remove all import statements
-  result = result.replace(
-    /import\s+(?:\{[^}]*\}|\*\s+as\s+\w+|\w+)\s+from\s+['"][^'"]+['"];?\n?/g,
+  // 1. Remove all import statements (only outside code fences)
+  result = replaceOutsideCodeFences(
+    result,
+    /import\s+(?:\{[^}]*\}|\*\s+as\s+\w+|\w+)\s+from\s+['"][^'"]+['"];?/g,
     '',
   );
 

@@ -17,16 +17,20 @@
 import fs from 'fs/promises';
 import { existsSync } from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 // ─── Configuration ───────────────────────────────────────────
 
-const SKILLS_DIR = path.resolve(import.meta.dirname, '../.agents/skills');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const SKILLS_DIR = path.resolve(__dirname, '../.agents/skills');
 const COMPONENTS_AI_SKILLS = path.resolve(
-  import.meta.dirname,
+  __dirname,
   '../packages/components/.ai/skills',
 );
 const TOKENS_AI_SKILLS = path.resolve(
-  import.meta.dirname,
+  __dirname,
   '../packages/tokens/.ai/skills',
 );
 const DRY_RUN = process.argv.includes('--dry-run');

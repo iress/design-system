@@ -57,14 +57,14 @@
     "components": {
       "description": "The components package has styling-props guides that cover token usage from the component perspective",
       "guides": [
-        "packages/components/.ai/guides/styling-props-reference.md",
-        "packages/components/.ai/guides/styling-props-colour.md",
-        "packages/components/.ai/guides/styling-props-spacing.md",
-        "packages/components/.ai/guides/styling-props-radius.md",
-        "packages/components/.ai/guides/styling-props-typography.md",
-        "packages/components/.ai/guides/styling-props-layout.md",
-        "packages/components/.ai/guides/styling-props-sizing.md",
-        "packages/components/.ai/guides/styling-props-accessibility.md"
+        "@iress-oss/ids-components/.ai/guides/styling-props-reference.md",
+        "@iress-oss/ids-components/.ai/guides/styling-props-colour.md",
+        "@iress-oss/ids-components/.ai/guides/styling-props-spacing.md",
+        "@iress-oss/ids-components/.ai/guides/styling-props-radius.md",
+        "@iress-oss/ids-components/.ai/guides/styling-props-typography.md",
+        "@iress-oss/ids-components/.ai/guides/styling-props-layout.md",
+        "@iress-oss/ids-components/.ai/guides/styling-props-sizing.md",
+        "@iress-oss/ids-components/.ai/guides/styling-props-accessibility.md"
       ]
     }
   },
