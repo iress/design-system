@@ -26,6 +26,12 @@ export default {
   tags: ['updated'],
 } as Meta<typeof IressRadioGroup>;
 
+export const Default: Story = {
+  args: {
+    name: 'survey',
+  },
+};
+
 export const RadioChildren: Story = {
   args: {
     children: [

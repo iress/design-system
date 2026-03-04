@@ -14,7 +14,7 @@ export default {
   },
 } as Meta<typeof IressPlaceholder>;
 
-export const Placeholder: Story = {
+export const Default: Story = {
   args: {
     children: 'This should be a description of the expected content',
     heading: 'Placeholder',

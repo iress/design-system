@@ -110,18 +110,6 @@ If you set a responsive `width`, the modal becomes full width on screens smaller
   <IressModal size="lg" width={{ md: 'overlay.lg' }}>
 ```
 
-The modal will be full width on extra-small and small screens, and large width on medium, large and extra-large screens. This is the same as setting:
-
-```tsx
-  <IressModal size={{ xs: IressModal.Size.Fullpage, md: IressModal.Size.Lg }}>
-```
-
-You can override this behaviour by specifying a value for `xs` in your size object:
-
-```tsx
-  <IressModal size={{ xs: IressModal.Size.Sm, md: IressModal.Size.Lg }}>
-```
-
 <ComponentExample of={ComponentStories.ResponsiveSize} />
 
 ### Disable closing

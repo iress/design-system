@@ -28,6 +28,8 @@ export default {
   },
 } as Meta<typeof IressMenu>;
 
+export const Default: Story = {};
+
 export const Basic: Story = {
   args: {
     children: 'basic',

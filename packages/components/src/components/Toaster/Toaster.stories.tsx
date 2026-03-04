@@ -34,6 +34,8 @@ export default {
   },
 } as Meta<typeof IressToasterProvider>;
 
+export const Default: Story = {};
+
 export const Provider: Story = {
   args: {
     container: document.body,

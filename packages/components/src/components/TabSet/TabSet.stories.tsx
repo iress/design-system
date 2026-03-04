@@ -34,6 +34,8 @@ export default {
   tags: ['updated'],
 } as Meta<typeof IressTabSet>;
 
+export const Default: Story = {};
+
 export const TabNavigation: Story = {
   args: {
     children: [

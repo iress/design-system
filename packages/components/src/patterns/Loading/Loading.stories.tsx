@@ -18,6 +18,12 @@ export default {
   },
 } as Meta<typeof IressLoading>;
 
+export const Default: Story = {
+  args: {
+    screenreaderText: 'Loading...',
+  },
+};
+
 export const Wizard: Story = {
   render: () => <LoadingWizard />,
   parameters: {

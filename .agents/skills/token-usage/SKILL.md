@@ -395,6 +395,30 @@ Layout components accept responsive objects for spacing props:
 
 **General Rule:** Prefer component props when available. For custom styling, use CSS variables in stylesheets or `cssVars` in JavaScript. Only use `mapTokensToCssVariables` / `convertReferencesToVariables` for internal tooling like theme editors.
 
+## Complete Token Reference
+
+Every available colour, spacing, radius, and typography token with CSS variable names and default values. See [references/token-reference.md](references/token-reference.md).
+
+## Theming
+
+How themes override tokens via CSS variables, scoped theming, and guidance for AI agents. See [references/theming.md](references/theming.md).
+
+## Cross-References
+
+The components package has additional guides that cover tokens from the usage/component perspective:
+
+- **Styling Props Reference** — `packages/components/.ai/guides/styling-props-reference.md` — How to use styling props (`bg`, `p`, `gap`, `color`, `borderRadius`) on IDS components
+- **Colour guide** — `packages/components/.ai/guides/styling-props-colour.md` — Colour prop usage, semantic colour selection, do/don't patterns
+- **Spacing guide** — `packages/components/.ai/guides/styling-props-spacing.md` — Padding, margin, gap props with responsive patterns
+- **Radius guide** — `packages/components/.ai/guides/styling-props-radius.md` — Border radius prop usage
+- **Typography guide** — `packages/components/.ai/guides/styling-props-typography.md` — Text style props
+- **Layout guide** — `packages/components/.ai/guides/styling-props-layout.md` — Flex/alignment props
+- **Sizing guide** — `packages/components/.ai/guides/styling-props-sizing.md` — Width/height props
+- **Accessibility guide** — `packages/components/.ai/guides/styling-props-accessibility.md` — Accessible styling practices
+
 ## Reference
 
 - **Storybook and Guidelines:** https://main--691abcc79dfa560a36d0a74f.chromatic.com
+- **Token schema:** `@iress-oss/ids-tokens/dist/schema/` — Token definitions with descriptions and metadata
+- **Generated CSS:** `@iress-oss/ids-tokens/build/css-vars.css` — All CSS variables with fallbacks
+- **Generated JS:** `@iress-oss/ids-tokens/dist/generated/css-vars.js` — Type-safe `cssVars` object

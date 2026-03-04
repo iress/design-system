@@ -15,6 +15,12 @@ export default {
   },
 } as Meta<typeof IressShadow>;
 
+export const Default: Story = {
+  args: {
+    children: <IressPanel>Content inside shadow DOM</IressPanel>,
+  },
+};
+
 export const Shadow: Story = {
   args: {
     children: (

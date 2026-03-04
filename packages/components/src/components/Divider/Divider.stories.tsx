@@ -26,6 +26,8 @@ export default {
   },
 } as Meta<typeof IressDivider>;
 
+export const Default: Story = {};
+
 export const Horizontal: Story = {};
 
 export const Vertical: Story = {
