@@ -131,6 +131,12 @@ These checks apply to **every PR**, not just those touching AI documentation.
 - **No snapshot-only testing**: Snapshot tests are acceptable as supplements, but flag PRs where snapshots are the only form of testing for behavioral logic.
 - **Mock responsibly**: Flag mocks that are too broad (mocking entire modules when only one function is needed) or that mask the behavior being tested.
 - **No test implementation details**: Tests should assert on behavior (what the user sees/does), not internal state or implementation details. Flag tests that reach into component internals.
+- **Avoid `act()` warnings**: Flag test code patterns that cause React `act()` warnings. Specifically:
+  - Use `await waitFor(() => ...)` or `await findByX()` instead of manually wrapping in `act()` when waiting for async state updates. Testing Library queries already handle `act()` internally.
+  - Flag bare `render()` calls in tests where the component triggers async state updates on mount (e.g. `useEffect` with data fetching) — these need `await waitFor()` or `findBy*` to await the update.
+  - Flag `fireEvent` or `userEvent` calls that trigger async state updates without awaiting the result. Use `await userEvent.click(...)` and follow with `await waitFor()` or `findBy*` for assertions.
+  - Flag direct `act(() => { ... })` wrapping when Testing Library's async utilities (`waitFor`, `findBy*`) would be more appropriate and readable.
+  - When `act()` is genuinely needed (e.g. testing hooks directly with `renderHook`), ensure async updates use `await act(async () => { ... })`.
 
 ### Error Handling & Edge Cases
 
