@@ -1193,15 +1193,29 @@ function transformContent(doc: DocFile): {
   result = result.replace(/```tsx\s*\n\s*```tsx/g, '```tsx');
 
   // 16. Convert Storybook internal doc links to full Storybook URLs
+  // Handles all /?path=/docs/... and ?path=/docs/... link forms (components,
+  // patterns, foundations, styling-props, resources, tokens, etc.) and adds
+  // the composition ref prefix when the slug doesn't already carry one.
+  const resolveStorybookDocLink = (slug: string): string => {
+    // Slugs that already contain a composition ref prefix (word_) keep it as-is
+    const prefixedSlug = /^\w+_/.test(slug)
+      ? slug
+      : `${STORYBOOK_REF_PREFIX}${slug}`;
+    return `${STORYBOOK_URL}/?path=/docs/${prefixedSlug}`;
+  };
+
+  // Markdown-style links: [text](/?path=/docs/slug) or [text](?path=/docs/slug)
   result = result.replace(
-    /\(\?path=\/docs\/components-(\w+)--docs\)/g,
-    (_match, slug) =>
-      `(${STORYBOOK_URL}/?path=/docs/${STORYBOOK_REF_PREFIX}components-${slug}--docs)`,
+    /\(\/?\?path=\/docs\/([^)#\s]+)(#[^)\s]*)?\)/g,
+    (_match, slug, fragment) =>
+      `(${resolveStorybookDocLink(slug)}${fragment || ''})`,
   );
+
+  // HTML href attributes: href="/?path=/docs/slug" or href="?path=/docs/slug"
   result = result.replace(
-    /\(\?path=\/docs\/patterns-(\w+)--docs\)/g,
-    (_match, slug) =>
-      `(${STORYBOOK_URL}/?path=/docs/${STORYBOOK_REF_PREFIX}patterns-${slug}--docs)`,
+    /href="\/?\?path=\/docs\/([^"#\s]+)(#[^"\s]*)?"/g,
+    (_match, slug, fragment) =>
+      `href="${resolveStorybookDocLink(slug)}${fragment || ''}"`,
   );
 
   // 17. Remove any remaining MDX-specific elements
