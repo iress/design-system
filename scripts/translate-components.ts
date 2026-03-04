@@ -165,6 +165,360 @@ function getStoryModuleNames(content: string): string[] {
   return matches.map((m) => m[1]);
 }
 
+// ─── Story Code Extraction ───────────────────────────────────
+
+/**
+ * Find matching close delimiter, skipping string/template literals.
+ * Starts counting from position `startAfterOpen` with depth=1.
+ * Returns the position one past the closing delimiter, or -1 on failure.
+ */
+function findMatchingClose(
+  content: string,
+  startAfterOpen: number,
+  openChar: string,
+  closeChar: string,
+): number {
+  let depth = 1;
+  let pos = startAfterOpen;
+  while (pos < content.length && depth > 0) {
+    const ch = content[pos];
+    // Skip string / template literals
+    if (ch === "'" || ch === '"' || ch === '`') {
+      const quote = ch;
+      pos++;
+      while (pos < content.length) {
+        if (content[pos] === '\\') {
+          pos += 2;
+          continue;
+        }
+        if (content[pos] === quote) break;
+        // Template literal expression ${...}
+        if (
+          quote === '`' &&
+          content[pos] === '$' &&
+          pos + 1 < content.length &&
+          content[pos + 1] === '{'
+        ) {
+          pos += 2;
+          let exprDepth = 1;
+          while (pos < content.length && exprDepth > 0) {
+            if (content[pos] === '{') exprDepth++;
+            if (content[pos] === '}') exprDepth--;
+            pos++;
+          }
+          continue;
+        }
+        pos++;
+      }
+    } else if (ch === openChar) {
+      depth++;
+    } else if (ch === closeChar) {
+      depth--;
+    }
+    pos++;
+  }
+  return depth === 0 ? pos : -1;
+}
+
+/**
+ * Extract the object body (content between outer braces) of a named story export.
+ * e.g. for `export const Mode: ButtonStory = { args: {...}, render: ... };`
+ * returns the content between the outer `{` and `}`.
+ */
+function extractStoryObjectBody(
+  storiesContent: string,
+  exportName: string,
+): string | null {
+  const pattern = new RegExp(
+    `export\\s+const\\s+${exportName}(?=[^a-zA-Z0-9_])`,
+  );
+  const match = storiesContent.match(pattern);
+  if (!match || match.index === undefined) return null;
+
+  const startIdx = match.index;
+  const openBrace = storiesContent.indexOf('{', startIdx);
+  if (openBrace === -1 || openBrace - startIdx > 300) return null;
+
+  const endPos = findMatchingClose(storiesContent, openBrace + 1, '{', '}');
+  if (endPos === -1) return null;
+
+  return storiesContent.substring(openBrace + 1, endPos - 1);
+}
+
+/**
+ * Extract the render function's JSX from a story body.
+ * Handles:
+ * - Parenthesized arrow return: `render: (...) => (JSX)`
+ * - Block body with return: `render: (...) => { ... return (JSX); }`
+ * - Direct JSX element: `render: () => <Component />`
+ */
+function extractRenderJsx(
+  storyBody: string,
+): { jsx: string; hasLogic: boolean } | null {
+  const renderIdx = storyBody.indexOf('render:');
+  if (renderIdx === -1) return null;
+
+  const arrowIdx = storyBody.indexOf('=>', renderIdx);
+  if (arrowIdx === -1 || arrowIdx - renderIdx > 200) return null;
+
+  let pos = arrowIdx + 2;
+  while (pos < storyBody.length && /\s/.test(storyBody[pos])) pos++;
+
+  // Case 1: Parenthesized return — render: (args) => ( <JSX /> )
+  if (storyBody[pos] === '(') {
+    const endPos = findMatchingClose(storyBody, pos + 1, '(', ')');
+    if (endPos === -1) return null;
+    return {
+      jsx: storyBody.substring(pos + 1, endPos - 1).trim(),
+      hasLogic: false,
+    };
+  }
+
+  // Case 2: Block body — render: (args) => { ... return (...); }
+  if (storyBody[pos] === '{') {
+    const funcEndPos = findMatchingClose(storyBody, pos + 1, '{', '}');
+    if (funcEndPos === -1) return null;
+
+    const funcBody = storyBody.substring(pos + 1, funcEndPos - 1);
+    const hasLogic = /\b(const|let|var|use\w+|await|if|for|while)\b/.test(
+      funcBody,
+    );
+
+    // Find parenthesized return
+    const returnMatch = funcBody.match(/return\s*\(/);
+    if (returnMatch && returnMatch.index !== undefined) {
+      const retStart = returnMatch.index + returnMatch[0].length;
+      const retEndPos = findMatchingClose(funcBody, retStart, '(', ')');
+      if (retEndPos !== -1) {
+        if (hasLogic) {
+          // Include the full function body — it has meaningful state/hook logic
+          return { jsx: funcBody.trim(), hasLogic: true };
+        }
+        return {
+          jsx: funcBody.substring(retStart, retEndPos - 1).trim(),
+          hasLogic: false,
+        };
+      }
+    }
+
+    return null;
+  }
+
+  // Case 3: Direct JSX — render: () => <Component ... />
+  if (storyBody[pos] === '<') {
+    // Self-closing
+    const selfClose = storyBody.substring(pos).match(/^<\w+[^>]*\/>/);
+    if (selfClose) return { jsx: selfClose[0], hasLogic: false };
+
+    // Opening tag — find matching closing tag
+    const tagNameMatch = storyBody.substring(pos).match(/^<(\w+)/);
+    if (tagNameMatch) {
+      const tagName = tagNameMatch[1];
+      const closeTag = `</${tagName}>`;
+      const closeIdx = storyBody.indexOf(closeTag, pos);
+      if (closeIdx !== -1) {
+        return {
+          jsx: storyBody.substring(pos, closeIdx + closeTag.length).trim(),
+          hasLogic: false,
+        };
+      }
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Clean up extracted story JSX for AI consumption.
+ * - Removes Storybook-specific `{...args}` / `{...rest}` spreads
+ * - Simplifies ternary children expressions
+ * - Normalises indentation
+ */
+function cleanStoryJsx(jsx: string): string {
+  let result = jsx;
+
+  // Remove {...args}, {...rest} spreads
+  result = result.replace(/\s*\{\.\.\.(?:args|rest)\}\s*/g, ' ');
+
+  // Simplify {children === '' ? 'Text' : children} → Text
+  result = result.replace(
+    /\{children\s*===\s*''\s*\?\s*'([^']*)'\s*:\s*children\}/g,
+    '$1',
+  );
+  result = result.replace(
+    /\{children\s*===\s*""\s*\?\s*"([^"]*)"\s*:\s*children\}/g,
+    '$1',
+  );
+
+  // Simplify {children || 'Text'} → Text
+  result = result.replace(/\{children\s*\|\|\s*'([^']*)'\}/g, '$1');
+
+  // Replace bare {children} with placeholder
+  result = result.replace(/\{children\}/g, '...');
+
+  // Clean up double-spacing left by removed spreads
+  result = result.replace(/ {2,}/g, ' ');
+
+  // Fix trailing space before > or /> in JSX tags
+  result = result.replace(/ >/g, '>');
+  result = result.replace(/ \/>/g, ' />');
+
+  // Normalise indentation: strip the common leading whitespace
+  const lines = result.split('\n');
+  const nonEmptyLines = lines.filter((l) => l.trim().length > 0);
+  if (nonEmptyLines.length > 1) {
+    const indents = nonEmptyLines
+      .map((l) => {
+        const m = l.match(/^(\s+)/);
+        return m ? m[1].length : 0;
+      })
+      .filter((n) => n > 0);
+    if (indents.length > 0) {
+      const minIndent = Math.min(...indents);
+      if (minIndent > 0) {
+        result = lines
+          .map((l) =>
+            l.startsWith(' '.repeat(minIndent)) ? l.substring(minIndent) : l,
+          )
+          .join('\n');
+      }
+    }
+  }
+
+  return result.trim();
+}
+
+/**
+ * Extract args from a named story export (generalised extractDefaultArgs).
+ */
+function extractExportArgs(
+  storiesContent: string,
+  exportName: string,
+): Record<string, string> | null {
+  const storyBody = extractStoryObjectBody(storiesContent, exportName);
+  if (!storyBody) return null;
+
+  const argsIdx = storyBody.indexOf('args:');
+  if (argsIdx === -1) return null;
+
+  const openBrace = storyBody.indexOf('{', argsIdx + 5);
+  if (openBrace === -1) return null;
+
+  const endPos = findMatchingClose(storyBody, openBrace + 1, '{', '}');
+  if (endPos === -1) return null;
+
+  const argsBlock = storyBody.substring(openBrace + 1, endPos - 1);
+  const args: Record<string, string> = {};
+
+  // Extract only top-level simple values (skip nested objects/JSX)
+  let topLevel = '';
+  let nestDepth = 0;
+  for (let c = 0; c < argsBlock.length; c++) {
+    const ch = argsBlock[c];
+    if (ch === '{' || ch === '[' || ch === '<') nestDepth++;
+    else if (ch === '}' || ch === ']' || ch === '>') {
+      nestDepth--;
+      if (nestDepth < 0) nestDepth = 0;
+    } else if (nestDepth === 0) {
+      topLevel += ch;
+    }
+  }
+
+  const pairRegex =
+    /(\w+)\s*:\s*(?:'([^']*)'|"([^"]*)"|(true|false)|(\d+(?:\.\d+)?))\s*[,\n}]/g;
+  let m;
+  while ((m = pairRegex.exec(topLevel))) {
+    const key = m[1];
+    const value = m[2] ?? m[3] ?? m[4] ?? m[5];
+    if (value !== undefined && value !== '') {
+      args[key] = value;
+    }
+  }
+
+  return Object.keys(args).length > 0 ? args : null;
+}
+
+/**
+ * Generate a code example for a specific named story export.
+ * Tries render-function extraction first, then falls back to args-based generation.
+ * Returns null if no useful code can be extracted.
+ */
+function generateStoryCodeExample(
+  storiesContent: string,
+  exportName: string,
+  componentExportName: string,
+): string | null {
+  const storyBody = extractStoryObjectBody(storiesContent, exportName);
+  if (!storyBody) return null;
+
+  // Try render function JSX extraction
+  const renderResult = extractRenderJsx(storyBody);
+  if (renderResult) {
+    const code = renderResult.hasLogic
+      ? renderResult.jsx
+      : cleanStoryJsx(renderResult.jsx);
+    return code;
+  }
+
+  // No render — try args-only approach
+  const args = extractExportArgs(storiesContent, exportName);
+  if (args) {
+    const children = args.children;
+    const otherArgs = { ...args };
+    delete otherArgs.children;
+
+    const propFragments: string[] = [];
+    for (const [key, value] of Object.entries(otherArgs)) {
+      if (value === 'true') propFragments.push(key);
+      else if (value === 'false') propFragments.push(`${key}={false}`);
+      else if (/^\d+(\.\d+)?$/.test(value))
+        propFragments.push(`${key}={${value}}`);
+      else propFragments.push(`${key}="${value}"`);
+    }
+    const propsStr =
+      propFragments.length > 0 ? ' ' + propFragments.join(' ') : '';
+
+    if (children) {
+      return `<${componentExportName}${propsStr}>\n  ${children}\n</${componentExportName}>`;
+    }
+    return `<${componentExportName}${propsStr} />`;
+  }
+
+  return null;
+}
+
+/**
+ * Load stories file content for all imported story modules in a doc file.
+ * Returns a map from module variable name → file content.
+ */
+function loadStoriesContentMap(
+  docContent: string,
+  docFilePath: string,
+): Map<string, string> {
+  const map = new Map<string, string>();
+  const importRegex =
+    /import\s+\*\s+as\s+(\w+)\s+from\s+['"]([^'"]+\.stories[^'"]*)['"];?/g;
+
+  let match;
+  while ((match = importRegex.exec(docContent))) {
+    const moduleName = match[1];
+    const importPath = match[2];
+    const docDir = path.dirname(docFilePath);
+    let resolvedPath = path.resolve(docDir, importPath);
+
+    if (!resolvedPath.endsWith('.tsx') && !resolvedPath.endsWith('.ts')) {
+      if (existsSync(resolvedPath + '.tsx')) resolvedPath += '.tsx';
+      else if (existsSync(resolvedPath + '.ts')) resolvedPath += '.ts';
+    }
+
+    if (existsSync(resolvedPath)) {
+      map.set(moduleName, readFileSync(resolvedPath, 'utf-8'));
+    }
+  }
+
+  return map;
+}
+
 // ─── Stories File & Code Example Extraction ─────────────────
 
 /** Find the .stories.tsx file for a component */
@@ -656,7 +1010,7 @@ function transformContent(doc: DocFile): {
   const { content, componentName, category } = doc;
   const categoryPrefix =
     category === 'guide'
-      ? (doc.guideSection || 'foundations')
+      ? doc.guideSection || 'foundations'
       : category === 'component'
         ? 'components'
         : 'patterns';
@@ -668,6 +1022,14 @@ function transformContent(doc: DocFile): {
     extractFirstParagraph(content) ||
     `${componentName} ${category} documentation.`;
   const heading = extractHeading(content) || componentName;
+
+  // Pre-load stories files so we can extract code examples inline
+  const storiesContentMap = loadStoriesContentMap(content, doc.filePath);
+
+  // Store extracted code blocks behind placeholders so that later JSX-transformation
+  // steps (IressAlert→callout, IressExpander→details, IressButton→link) don't
+  // modify content that should stay as-is inside code fences.
+  const deferredCodeBlocks: string[] = [];
 
   let result = content;
 
@@ -684,7 +1046,7 @@ function transformContent(doc: DocFile): {
   // 3. Remove <ComponentOverview>
   result = removeComponentOverview(result);
 
-  // 4. Convert <ComponentExample of={ModuleName.ExportName} /> to Storybook links
+  // 4. Convert <ComponentExample of={ModuleName.ExportName} /> to code examples + Storybook links
   result = result.replace(
     /<ComponentExample[\s\S]*?of=\{(\w+)\.(\w+)\}[\s\S]*?\/>/g,
     (_match, moduleName, exportName) => {
@@ -704,7 +1066,25 @@ function transformContent(doc: DocFile): {
         exportName,
         categoryPrefix,
       );
-      return `[View "${exportName}" example in Storybook →](${url})`;
+      const link = `[View "${exportName}" example in Storybook →](${url})`;
+
+      // Try to extract inline code example from the stories file
+      const storiesContent = storiesContentMap.get(moduleName);
+      if (storiesContent) {
+        const componentExport = `Iress${storyComponentName}`;
+        const code = generateStoryCodeExample(
+          storiesContent,
+          exportName,
+          componentExport,
+        );
+        if (code) {
+          const idx = deferredCodeBlocks.length;
+          deferredCodeBlocks.push(code);
+          return `%%STORY_CODE_${idx}%%\n\n${link}`;
+        }
+      }
+
+      return link;
     },
   );
 
@@ -724,7 +1104,7 @@ function transformContent(doc: DocFile): {
     '',
   );
 
-  // 7. Convert <Story of={...} /> to Storybook links
+  // 7. Convert <Story of={...} /> to code examples + Storybook links
   result = result.replace(
     /<Story\s+of=\{(\w+)\.(\w+)\}\s*\/>/g,
     (_match, moduleName, exportName) => {
@@ -744,7 +1124,25 @@ function transformContent(doc: DocFile): {
         exportName,
         categoryPrefix,
       );
-      return `[View "${exportName}" example in Storybook →](${url})`;
+      const link = `[View "${exportName}" example in Storybook →](${url})`;
+
+      // Try to extract inline code example from the stories file
+      const storiesContent = storiesContentMap.get(moduleName);
+      if (storiesContent) {
+        const componentExport = `Iress${storyComponentName}`;
+        const code = generateStoryCodeExample(
+          storiesContent,
+          exportName,
+          componentExport,
+        );
+        if (code) {
+          const idx = deferredCodeBlocks.length;
+          deferredCodeBlocks.push(code);
+          return `%%STORY_CODE_${idx}%%\n\n${link}`;
+        }
+      }
+
+      return link;
     },
   );
 
@@ -767,7 +1165,11 @@ function transformContent(doc: DocFile): {
   result = replaceOutsideCodeFences(result, /<\/IressPanel>/g, '');
 
   // 11c. Remove inline JSX expressions like <>{VAR}</> (runtime JS we can't evaluate)
-  result = replaceOutsideCodeFences(result, /<>\{[^}]+\}<\/>/g, '(see Storybook)');
+  result = replaceOutsideCodeFences(
+    result,
+    /<>\{[^}]+\}<\/>/g,
+    '(see Storybook)',
+  );
 
   // 12. Convert <IressButton href="...">text</IressButton> to markdown links
   result = result.replace(
@@ -800,7 +1202,15 @@ function transformContent(doc: DocFile): {
   // 17. Remove any remaining MDX-specific elements
   result = result.replace(/import\s+.*from\s+['"].*['"];?\n/g, '');
 
-  // 18. Clean up excessive blank lines
+  // 18. Restore deferred story code blocks (protected from JSX transformations above)
+  for (let i = 0; i < deferredCodeBlocks.length; i++) {
+    result = result.replace(
+      `%%STORY_CODE_${i}%%`,
+      `\`\`\`tsx\n${deferredCodeBlocks[i]}\n\`\`\``,
+    );
+  }
+
+  // 19. Clean up excessive blank lines
   result = result.replace(/\n{3,}/g, '\n\n');
   result = result.trim();
 
@@ -915,7 +1325,10 @@ async function findDocFiles(
       const componentName = path.basename(path.dirname(fullPath));
 
       // Skip deprecated components (check the main .tsx source)
-      if (!isRecipe && isComponentDeprecated(path.dirname(fullPath), componentName)) {
+      if (
+        !isRecipe &&
+        isComponentDeprecated(path.dirname(fullPath), componentName)
+      ) {
         skippedDeprecated.push(componentName);
         continue;
       }
@@ -961,8 +1374,18 @@ const GUIDE_SOURCES: [string, string, string, string][] = [
   ['Foundations', '020-Iconography.mdx', 'foundations', 'iconography'],
   ['Foundations', '020-Responsive.mdx', 'foundations', 'responsive-layout'],
   ['Foundations', '040-Zindex.mdx', 'foundations', 'z-index-stacking'],
-  ['Foundations', '050-VisualDesign.mdx', 'foundations', 'visual-design-standards'],
-  ['Foundations', '060-Consistency.mdx', 'foundations', 'using-components-consistently'],
+  [
+    'Foundations',
+    '050-VisualDesign.mdx',
+    'foundations',
+    'visual-design-standards',
+  ],
+  [
+    'Foundations',
+    '060-Consistency.mdx',
+    'foundations',
+    'using-components-consistently',
+  ],
   ['Foundations', '070-Content.mdx', 'foundations', 'content'],
   ['Foundations', '080-UserExperience.mdx', 'foundations', 'user-experience'],
   // Styling Props
@@ -977,7 +1400,12 @@ const GUIDE_SOURCES: [string, string, string, string][] = [
   // Get Started
   ['GetStarted', '010-Develop.mdx', 'get-started', 'develop'],
   // Resources — Migration
-  ['Resources/030-MigrationGuides', 'v5.mdx', 'resources-migration-guides', 'migration-from-v4-to-v5'],
+  [
+    'Resources/030-MigrationGuides',
+    'v5.mdx',
+    'resources-migration-guides',
+    'migration-from-v4-to-v5',
+  ],
 ];
 
 /**
@@ -1197,7 +1625,10 @@ async function main() {
                 componentExportName,
                 defaultArgs,
               );
-            } else if (hasDefaultExport(storiesContent) && componentExportName) {
+            } else if (
+              hasDefaultExport(storiesContent) &&
+              componentExportName
+            ) {
               codeExample = generateMinimalUsageExample(componentExportName);
             }
           }
