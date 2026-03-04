@@ -407,14 +407,14 @@ How themes override tokens via CSS variables, scoped theming, and guidance for A
 
 The components package has additional guides that cover tokens from the usage/component perspective:
 
-- **Styling Props Reference** — `packages/components/.ai/guides/styling-props-reference.md` — How to use styling props (`bg`, `p`, `gap`, `color`, `borderRadius`) on IDS components
-- **Colour guide** — `packages/components/.ai/guides/styling-props-colour.md` — Colour prop usage, semantic colour selection, do/don't patterns
-- **Spacing guide** — `packages/components/.ai/guides/styling-props-spacing.md` — Padding, margin, gap props with responsive patterns
-- **Radius guide** — `packages/components/.ai/guides/styling-props-radius.md` — Border radius prop usage
-- **Typography guide** — `packages/components/.ai/guides/styling-props-typography.md` — Text style props
-- **Layout guide** — `packages/components/.ai/guides/styling-props-layout.md` — Flex/alignment props
-- **Sizing guide** — `packages/components/.ai/guides/styling-props-sizing.md` — Width/height props
-- **Accessibility guide** — `packages/components/.ai/guides/styling-props-accessibility.md` — Accessible styling practices
+- **Styling Props Reference** — `node_modules/@iress-oss/ids-components/.ai/guides/styling-props-reference.md` — How to use styling props (`bg`, `p`, `gap`, `color`, `borderRadius`) on IDS components
+- **Colour guide** — `node_modules/@iress-oss/ids-components/.ai/guides/styling-props-colour.md` — Colour prop usage, semantic colour selection, do/don't patterns
+- **Spacing guide** — `node_modules/@iress-oss/ids-components/.ai/guides/styling-props-spacing.md` — Padding, margin, gap props with responsive patterns
+- **Radius guide** — `node_modules/@iress-oss/ids-components/.ai/guides/styling-props-radius.md` — Border radius prop usage
+- **Typography guide** — `node_modules/@iress-oss/ids-components/.ai/guides/styling-props-typography.md` — Text style props
+- **Layout guide** — `node_modules/@iress-oss/ids-components/.ai/guides/styling-props-layout.md` — Flex/alignment props
+- **Sizing guide** — `node_modules/@iress-oss/ids-components/.ai/guides/styling-props-sizing.md` — Width/height props
+- **Accessibility guide** — `node_modules/@iress-oss/ids-components/.ai/guides/styling-props-accessibility.md` — Accessible styling practices
 
 ## Reference
 
