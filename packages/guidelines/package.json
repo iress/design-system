@@ -10,6 +10,7 @@
     "lint": "next lint",
     "translate": "tsx scripts/translate-docs.ts",
     "translate:tokens": "tsx scripts/translate-tokens.ts",
+    "translate:skills": "tsx scripts/translate-skills.ts",
     "generate:manifest": "tsx scripts/generate-manifest.ts"
   },
   "dependencies": {

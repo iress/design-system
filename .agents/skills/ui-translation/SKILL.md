@@ -1,3 +1,8 @@
+---
+name: ui-translation
+description: Translate natural language UI descriptions into IDS (Iress Design System) component implementations using `@iress-oss/ids-components` and `@iress-oss/ids-tokens`.
+---
+
 # Skill: UI Translation
 
 ## Purpose
@@ -228,3 +233,4 @@ function SettingsPage() {
 6. **Always include labels** — All form inputs need accessible labels via `IressField`
 7. **Use status for feedback** — `IressAlert` for messages, `status` prop on buttons for danger/success
 8. **Prefer IDS components** — Use `IressText` instead of raw `<p>`, `IressButton` instead of `<button>`
+9. **Check the component docs** — Read the specific component doc for detailed props and patterns (`node_modules/@iress-oss/ids-components/.ai/components/`)

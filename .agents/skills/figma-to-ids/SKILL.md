@@ -1,3 +1,8 @@
+---
+name: figma-to-ids
+description: Translate Figma design properties and structures into IDS (Iress Design System) component implementations. This skill helps AI agents interpret Figma design metadata (from tools like Figma MCP or exported design specs) and produce accurate IDS code.
+---
+
 # Skill: Figma to IDS Translation
 
 ## Purpose
@@ -249,4 +254,4 @@ function UsersTable({ users }) {
 4. **Prefer semantic props over manual styling** — Use `status="danger"` instead of `bg="colour.system.danger.fill"`
 5. **Use IressField for all form inputs** — It provides the label, hint, and validation layout
 6. **Respect responsive patterns** — Use `IressHide`, `hideFrom`/`hideBelow` for responsive visibility
-7. **Check the component docs** — Read the specific component doc for detailed props and patterns (run `yarn translate:docs` to generate them in `.ai/components/`)
+7. **Check the component docs** — Read the specific component doc for detailed props and patterns (`node_modules/@iress-oss/ids-components/.ai/components/`)
