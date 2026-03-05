@@ -174,6 +174,19 @@ describe('IressInput', () => {
       expect(input).toHaveFocus();
       expect(input).not.toHaveSelection('hello');
     });
+
+    it('does not select text on programmatic focus without relatedTarget (e.g. password manager autofill)', async () => {
+      const screen = render(<IressInput defaultValue="hello" />);
+
+      const input = screen.getByRole('textbox') as HTMLInputElement;
+      const selectSpy = vi.spyOn(input, 'select');
+
+      input.focus();
+      await waitFor(() => expect(input).toHaveFocus());
+
+      expect(selectSpy).not.toHaveBeenCalled();
+      selectSpy.mockRestore();
+    });
   });
 
   describe('autoGrow', () => {
