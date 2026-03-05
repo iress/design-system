@@ -80,7 +80,7 @@ const HomePage = () => {
                 <Version6Hero />
               </Suspense>
             }
-            href="https://docs.google.com/document/d/17K81rHBZjjF_tsrC8QFrSsmjrC0IJu_bpU4sB2N7PSQ/edit?usp=sharing"
+            href="/?path=/docs/resources-migration-guides-from-v5-to-v6--docs"
             stretch
             bg="colour.primary.surface"
             color="colour.primary.text"
