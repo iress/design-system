@@ -194,10 +194,6 @@ Fix bugs in both 5.x and main branches with precision, minimal changes, and comp
      yarn workspace @iress-oss/ids-components version patch
      yarn workspace @iress-oss/ids-tokens version patch
      ```
-   - **CRITICAL: If components or tokens are updated, ALSO patch MCP package**:
-     ```bash
-     yarn workspace @iress-oss/ids-mcp-server version patch
-     ```
    - Commit the version changes with message: `chore: bump version for bug fix`
 
 5. **Linting and Typechecking (MANDATORY)**:
@@ -398,11 +394,9 @@ yarn test:affected
 
 # Run tests for specific packages with coverage
 yarn workspace @iress-oss/ids-components run test:coverage
-yarn workspace @iress-oss/ids-mcp-server run test:coverage
 
 # Run single test files with coverage
 yarn workspace @iress-oss/ids-components run test:coverage Button.test.tsx
-yarn workspace @iress-oss/ids-mcp-server run test:coverage MyHandler.test.ts
 ```
 
 **Important**:
@@ -434,7 +428,6 @@ yarn typecheck
 # Specific packages
 yarn workspace @iress-oss/ids-components run typecheck
 yarn workspace @iress-oss/ids-tokens run typecheck
-yarn workspace @iress-oss/ids-mcp-server run typecheck
 ```
 
 ## Available Workspaces
@@ -442,7 +435,6 @@ yarn workspace @iress-oss/ids-mcp-server run typecheck
 - `@iress-oss/ids-components`
 - `@iress-oss/ids-tokens`
 - `@iress-oss/ids-storybook-addon`
-- `@iress-oss/ids-mcp-server`
 
 ## Communication Style
 
@@ -512,7 +504,7 @@ yarn workspace @iress-oss/ids-mcp-server run typecheck
    - Test: `Button.test.tsx` - Added test that reproduces the bug and now passes
    - Linting: ✅ All ESLint checks pass
    - Typechecking: ✅ All TypeScript checks pass
-   - Versions: Bumped @iress-oss/ids-components and @iress-oss/ids-mcp-server (patch)
+   - Versions: Bumped @iress-oss/ids-components (patch)
    - Please add label: `affects-5.x`
 
    **main Branch PR:**
@@ -521,7 +513,7 @@ yarn workspace @iress-oss/ids-mcp-server run typecheck
    - Test: `Button.test.tsx` - Added test that reproduces the bug and now passes
    - Linting: ✅ All ESLint checks pass
    - Typechecking: ✅ All TypeScript checks pass
-   - Versions: Bumped @iress-oss/ids-components and @iress-oss/ids-mcp-server (patch)
+   - Versions: Bumped @iress-oss/ids-components (patch)
    - Please add label: `affects-main`
 
    Both PRs should reference: `Fixes #456`

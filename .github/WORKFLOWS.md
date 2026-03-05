@@ -374,7 +374,6 @@ yarn add @iress-oss/ids-components@canary
 The following packages can be published individually or all together:
 
 - `@iress-oss/ids-components`
-- `@iress-oss/ids-mcp-server`
 - `@iress-oss/ids-storybook-config`
 - `@iress-oss/ids-storybook-okta`
 - `@iress-oss/ids-storybook-sandbox`

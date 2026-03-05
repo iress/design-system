@@ -1,5 +1,7 @@
 # IDS Component Library MCP Server
 
+> **⚠️ DEPRECATED** — This package is deprecated. AI context is now provided via static `.ai/` folders and `.agents/skills/` files in the repository. These deliver the same information without runtime dependencies, Playwright, or Storybook. See `packages/components/.ai/`, `packages/tokens/.ai/`, and `.agents/skills/` for the replacement.
+
 A Model Context Protocol (MCP) server specifically designed for the **Iress Design System (IDS)** component library. This server provides AI assistants and MCP clients with contextual information about IDS components, design tokens, usage patterns, and implementation details to help engineers build consistent user interfaces.
 
 ## Features

@@ -19,6 +19,5 @@ Available workspace names:
 - @iress-oss/ids-components
 - @iress-oss/ids-tokens
 - @iress-oss/ids-storybook-addon
-- @iress-oss/ids-mcp-server
 
 Replace `<workspace-name>` with the target workspace and `<file-path>` with the specific file or pattern to lint.
