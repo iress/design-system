@@ -1449,6 +1449,18 @@ const GUIDE_SOURCES: [string, string, string, string][] = [
     'resources-migration-guides',
     'migration-from-v4-to-v5',
   ],
+  [
+    'Resources/030-MigrationGuides',
+    'v6.mdx',
+    'resources-migration-guides',
+    'from-v5-to-v6',
+  ],
+  [
+    'Resources/030-MigrationGuides',
+    'oui.mdx',
+    'resources-migration-guides',
+    'from-oui-to-v6',
+  ],
 ];
 
 /**

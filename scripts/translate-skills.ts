@@ -40,6 +40,7 @@ const SKILL_TARGETS: Record<string, string> = {
   'figma-to-ids': COMPONENTS_AI_SKILLS,
   'ui-translation': COMPONENTS_AI_SKILLS,
   'ui-doctor': COMPONENTS_AI_SKILLS,
+  'version-migration': COMPONENTS_AI_SKILLS,
   'token-usage': TOKENS_AI_SKILLS,
 };
 
