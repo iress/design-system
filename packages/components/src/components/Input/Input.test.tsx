@@ -174,6 +174,22 @@ describe('IressInput', () => {
       expect(input).toHaveFocus();
       expect(input).not.toHaveSelection('hello');
     });
+
+    it('does not select text on tab focus when no formatter is set', async () => {
+      const screen = render(<IressInput defaultValue="hello" />);
+
+      const input = screen.getByRole('textbox') as HTMLInputElement;
+      const selectSpy = vi.spyOn(input, 'select');
+
+      await userEvent.tab();
+      expect(input).toHaveFocus();
+
+      // Flush the microtask queue so a queued select() would have fired
+      await new Promise<void>((resolve) => queueMicrotask(resolve));
+
+      expect(selectSpy).not.toHaveBeenCalled();
+      selectSpy.mockRestore();
+    });
   });
 
   describe('autoGrow', () => {
