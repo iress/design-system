@@ -2,28 +2,93 @@
 
 IDS v6 uses standard React Testing Library — no special test utilities needed.
 
-## Remove IDS v4 test utilities
+## Remove IDS v4 React test utilities
+
+v4 provided `@iress/ids-react-test-utils` with custom helpers for testing Stencil web component wrappers. These are no longer needed in v6.
 
 ```ts
-// ❌ Remove
-import {
-  idsFireEvent,
+// ❌ Remove v4 test utils
+import { 
+  idsFireEvent, 
   mockLazyLoadedComponents,
-} from '@iress/components-react/test';
+  componentLoad 
+} from '@iress/ids-react-test-utils';
 
 // ✅ Use standard RTL
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+```
+
+## idsFireEvent Migration
+
+v4's `idsFireEvent` was needed to fire custom Stencil events. v6 uses standard React events.
+
+| v4 `idsFireEvent` method             | v6 Replacement                                       |
+| ------------------------------------ | ---------------------------------------------------- |
+| `idsFireEvent.click(el)`             | `await userEvent.click(el)`                          |
+| `idsFireEvent.change(el, { target: { value } })` | `await userEvent.type(el, value)` or `fireEvent.change(el, { target: { value } })` |
+| `idsFireEvent.blur(el)`              | `await userEvent.tab()` or `fireEvent.blur(el)`      |
+| `idsFireEvent.focus(el)`             | `await userEvent.click(el)` or `fireEvent.focus(el)` |
+| `idsFireEvent.entered(modal)`        | Wait for `onEntered` callback or use `waitFor`       |
+| `idsFireEvent.exited(modal)`         | Wait for `onExited` callback or use `waitFor`        |
+| `idsFireEvent.select(el, detail)`    | Use `onChange` callback testing                      |
+| `idsFireEvent.submit(form, data)`    | `await userEvent.click(submitButton)`                |
+| `idsFireEvent.error(form, messages)` | Test validation via form submission                  |
+
+### Before/After Examples
+
+```tsx
+// ❌ v4: Testing modal entered
+import { idsFireEvent } from '@iress/ids-react-test-utils';
+
+const onEntered = jest.fn();
+render(<IressModal show onEntered={onEntered} />);
+const modal = screen.getByRole('dialog');
+idsFireEvent.entered(modal);
+expect(onEntered).toHaveBeenCalled();
+
+// ✅ v6: Testing modal entered
+const onEntered = jest.fn();
+render(<IressModal show onEntered={onEntered} />);
+await waitFor(() => expect(onEntered).toHaveBeenCalled());
+```
+
+```tsx
+// ❌ v4: Testing input change
+import { idsFireEvent } from '@iress/ids-react-test-utils';
+
+idsFireEvent.change(input, { target: { value: 'test' } });
+
+// ✅ v6: Testing input change
+await userEvent.type(input, 'test');
+// or
+fireEvent.change(input, { target: { value: 'test' } });
+```
+
+## Remove mockLazyLoadedComponents
+
+v4 required mocking lazy-loaded Stencil components. v6 components load synchronously.
+
+```ts
+// ❌ v4: Required for async component loading
+import { mockLazyLoadedComponents } from '@iress/ids-react-test-utils';
+
+beforeEach(() => {
+  mockLazyLoadedComponents();
+});
+
+// ✅ v6: Not needed — remove entirely
 ```
 
 ## Test pattern changes
 
-| Old pattern                          | New pattern                                          |
+| v4 pattern                           | v6 pattern                                           |
 | ------------------------------------ | ---------------------------------------------------- |
-| `idsFireEvent.click(el)`             | `fireEvent.click(el)` or `await userEvent.click(el)` |
+| `idsFireEvent.click(el)`             | `await userEvent.click(el)`                          |
 | `await findByTestId('x__button')`    | `getByRole('button', { name: 'X' })`                 |
 | `mockLazyLoadedComponents()`         | Remove — components load synchronously               |
 | Async `findBy*` for component render | Synchronous `getBy*` in most cases                   |
+| `componentLoad()`                    | Remove — not needed                                  |
 
 ## Prefer accessibility queries
 
@@ -50,19 +115,24 @@ transformIgnorePatterns: [
 ## Form test migration
 
 ```tsx
-// ❌ Old: Formik-based test
-const { getByLabelText } = render(
-  <Formik initialValues={{ name: '' }} onSubmit={mockSubmit}>
-    {() => (
-      <Form>
-        <Field name="name" as={Input} />
-      </Form>
-    )}
-  </Formik>,
+// ❌ v4: Testing with IressForm and idsFireEvent
+import { idsFireEvent } from '@iress/ids-react-test-utils';
+
+render(
+  <IressForm onSubmit={mockSubmit}>
+    <IressField label="Name">
+      <IressInput name="name" />
+    </IressField>
+    <IressButton type="submit">Submit</IressButton>
+  </IressForm>
 );
 
-// ✅ New: IDS v6 form test
-const { getByRole } = render(
+const input = screen.getByLabelText('Name');
+idsFireEvent.change(input, { target: { value: 'Test' } });
+idsFireEvent.submit(form, { name: 'Test' });
+
+// ✅ v6: Testing with IressForm and userEvent
+render(
   <IressForm defaultValues={{ name: '' }} onSubmit={mockSubmit}>
     <IressFormField
       name="name"
@@ -73,7 +143,7 @@ const { getByRole } = render(
   </IressForm>,
 );
 
-await userEvent.type(getByRole('textbox', { name: 'Name' }), 'Test');
-await userEvent.click(getByRole('button', { name: 'Submit' }));
+await userEvent.type(screen.getByRole('textbox', { name: 'Name' }), 'Test');
+await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
 expect(mockSubmit).toHaveBeenCalledWith({ name: 'Test' });
 ```

@@ -16,19 +16,35 @@ description: Guide AI agents on migrating applications between IDS (Iress Design
 
 ## Decision Table: Which Migration Path?
 
-| Current stack | Migration path                       | Complexity                      |
-| ------------- | ------------------------------------ | ------------------------------- |
-| OUI only      | OUI→v6 guide                         | High (form architecture change) |
-| IDS v4 only   | v5→v6 guide (skip v5 step)           | Medium                          |
-| IDS v5 only   | v5→v6 guide                          | Low–Medium                      |
-| OUI + IDS v4  | Both OUI→v6 and v5→v6 guides         | High                            |
-| OUI + IDS v5  | OUI→v6 guide + v5→v6 for IDS changes | High                            |
+| Current stack | Migration path                       | Complexity                        | Reference                                                 |
+| ------------- | ------------------------------------ | --------------------------------- | --------------------------------------------------------- |
+| OUI only      | OUI→v6 guide                         | High (form architecture change)   | [prop-renames.md](references/prop-renames.md)             |
+| IDS v4 only   | v4→v6 guide                          | Medium (form architecture change) | [prop-renames.md](references/prop-renames.md)             |
+| IDS v5 only   | v5→v6 guide                          | Low–Medium                        | [v5-to-v6-migration.md](references/v5-to-v6-migration.md) |
+| OUI + IDS v4  | Both OUI→v6 and v4→v6 guides         | High (form architecture change)   | [prop-renames.md](references/prop-renames.md)             |
+| OUI + IDS v5  | OUI→v6 guide + v5→v6 for IDS changes | High (form architecture change)   | [v5-to-v6-migration.md](references/v5-to-v6-migration.md) |
 
 Full interactive guides with diff viewers are available in Storybook:
 
 - [v4→v5 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/resources-migration-guides-from-v4-to-v5--docs)
 - [v5→v6 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/resources-migration-guides-from-v5-to-v6--docs)
 - [OUI→v6 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/resources-migration-guides-from-oui-to-v6--docs)
+
+---
+
+## Pre-Migration Assessment
+
+Before starting migration, run these scripts (or perform checks manually):
+
+1. **Identify current version**: `scripts/detect-version.sh` — detects IDS/OUI version and recommends migration path
+2. **Audit component usage**: `scripts/audit-components.sh` — generates component usage report
+3. **Check for deprecated props**: `scripts/find-deprecated-props.sh` — finds props that will break
+4. **Check form architecture**: `scripts/find-formik.sh` — identifies Formik forms needing migration
+5. **Check test patterns**: `scripts/find-test-utils.sh` — finds old test utilities
+6. **Review custom CSS**: Search for `.oui-`, `.ids-`, or `iress-` class selectors that may break
+7. **Setup VRT (recommended)**: `scripts/setup-playwright-vrt.sh` — generates Playwright visual regression tests
+8. **Capture baseline screenshots**: Run VRT suite before migration to capture current state
+9. **Create migration branch**: Ensure you can rollback if needed
 
 ---
 
@@ -66,6 +82,16 @@ import { cssVars } from '@iress-oss/ids-tokens';
 
 ## Key Migration Areas
 
+### v5 → v6 Migration
+
+For migrations specifically from IDS v5 to v6, see [references/v5-to-v6-migration.md](references/v5-to-v6-migration.md) for:
+
+- Package and CSS import changes
+- Component renames (`IressBadge` → `IressPill`, `IressFilter` → `IressDropdownMenu`, etc.)
+- Prop changes by component (Button, Alert, Toggle, Field, Modal, Select)
+- Icon migration (FontAwesome → Material Symbols)
+- Form migration patterns
+
 ### Component renames
 
 Components that changed names between versions (IDS and OUI → v6), plus removed and new components. See [references/component-renames.md](references/component-renames.md) for the full map.
@@ -78,7 +104,14 @@ Using old prop names will silently fail. See [references/prop-renames.md](refere
 
 Most common renames:
 
-| Component                  | Old prop     | New prop (v6)  |
+| Component               | Old prop (OUI) | New prop (v6)  |
+| ----------------------- | -------------- | -------------- |
+| `Alert`                 | `context`      | `status`       |
+| `Modal`                 | `onHide`       | `onShowChange` |
+| `Fieldset`/`RadioGroup` | `legend`       | `label`        |
+| `Label`                 | `optional`     | `required`     |
+
+| Component (IDS v4/v5)      | Old prop     | New prop (v6)  |
 | -------------------------- | ------------ | -------------- |
 | `IressButton`              | `variant`    | `mode`         |
 | `IressAlert`               | `variant`    | `status`       |
@@ -124,21 +157,38 @@ See [references/styling-migration.md](references/styling-migration.md) for examp
 
 ---
 
+## Post-Migration Validation
+
+After completing migration, run `scripts/validate-migration.sh` or verify manually:
+
+1. **Automated checks**: Run validation script to check for common issues
+2. **Visual regression**: Run VRT suite and review all visual diffs (see [references/visual-regression-testing.md](references/visual-regression-testing.md))
+3. **Visual check**: All components render without console errors or warnings
+4. **Form functionality**: Submit forms and verify validation rules work correctly
+5. **Test suite**: All tests pass with new testing patterns (no `idsFireEvent`, etc.)
+6. **Accessibility**: Keyboard navigation and screen reader functionality intact
+7. **Styling**: No missing styles, check responsive breakpoints
+8. **Interactive states**: Hover, focus, disabled, loading states work as expected
+9. **Build**: Production build completes without errors, check bundle size
+
+The validation script checks for:
+- Old imports (`@iress/oui`, `@iress/components-react`)
+- Old test utils (`idsFireEvent`, `mockLazyLoadedComponents`)
+- Deprecated props (`variant=`, `isOpen=`, `gutter=`, etc.)
+- Required CSS import
+- Remaining Formik usage
+
+---
+
 ## Common Gotchas
 
-| Problem                              | Cause                                            | Solution                                                             |
-| ------------------------------------ | ------------------------------------------------ | -------------------------------------------------------------------- |
-| Components have no styles            | Missing CSS import                               | Add `import '@iress-oss/ids-components/dist/style.css'` to app entry |
-| Form validation not working          | Using HTML5 attributes (`required`, `maxLength`) | Move validation to `rules` prop on `IressFormField`                  |
-| Modal won't close                    | Using `isOpen` prop                              | Rename to `show`                                                     |
-| Button variant not applying          | Using `variant` prop                             | Rename to `mode`                                                     |
-| Tests fail "Cannot find module"      | Jest can't transform IDS v6                      | Update `transformIgnorePatterns`                                     |
-| `idsFireEvent` not found             | Using removed IDS v4 test utils                  | Replace with standard `fireEvent` from RTL                           |
-| Form fields render without labels    | Using standalone `<Label>`                       | Move label text into `label` prop on `IressFormField`                |
-| Custom CSS overriding components     | Cascade layer ordering                           | Declare `@layer` order in stylesheet                                 |
-| `IressPanel alt` prop not working    | No boolean `alt` prop exists                     | Use `bg="alt"` instead                                               |
-| `IressAlert mode` not working        | Prop was renamed                                 | Use `status` (e.g. `status="danger"`)                                |
-| `IressFieldGroup legend` not working | Prop was renamed                                 | Use `label` instead                                                  |
+See [references/common-gotchas.md](references/common-gotchas.md) for a comprehensive troubleshooting guide covering:
+
+- Critical breaking changes (missing CSS, validation, renamed props)
+- IDS v4 React → v6 React gotchas (test utils, slots, helpers, icons)
+- OUI-specific gotchas (prop renames, removed components)
+- Component API changes (form fields, styling, composition patterns)
+- Form architecture changes (Formik → React Hook Form)
 
 ---
 
