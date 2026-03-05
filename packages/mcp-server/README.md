@@ -1,6 +1,25 @@
 # IDS Component Library MCP Server
 
-> **⚠️ DEPRECATED** — This package is deprecated. AI context is now provided via static `.ai/` folders and `.agents/skills/` files in the repository. These deliver the same information without runtime dependencies, Playwright, or Storybook. See `packages/components/.ai/`, `packages/tokens/.ai/`, and `.agents/skills/` for the replacement.
+> **⚠️ DEPRECATED** — This package is deprecated. AI context is now provided via static `.ai/` folders and `.agents/skills/` files in the repository. These deliver the same information without runtime dependencies, Playwright, or Storybook.
+>
+> **Use agent skills instead:**
+>
+> ```bash
+> npx skills add iress/design-system
+> ```
+>
+> Available skills: `figma-to-ids`, `token-usage`, `ui-doctor`, `ui-translation`
+>
+> See the [skills CLI documentation](https://github.com/vercel-labs/skills) for installation options, or browse the replacement files directly:
+>
+> - `packages/components/.ai/` — component and guide documentation
+> - `packages/tokens/.ai/` — design token documentation
+> - `.agents/skills/` — agent skill definitions
+
+---
+
+<details>
+<summary>Legacy documentation (archived)</summary>
 
 A Model Context Protocol (MCP) server specifically designed for the **Iress Design System (IDS)** component library. This server provides AI assistants and MCP clients with contextual information about IDS components, design tokens, usage patterns, and implementation details to help engineers build consistent user interfaces.
 
@@ -267,3 +286,5 @@ The server works with the IDS component library documentation in the `generated/
 
 - `resources-changelog-docs.md` - Version history and updates
 - `introduction-docs.md` - Getting started guide
+
+</details>

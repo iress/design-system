@@ -1,5 +1,16 @@
 # For developers
 
+> **⚠️ DEPRECATED** — This package is deprecated. AI context is now provided via static `.ai/` folders and `.agents/skills/` files in the repository. These deliver the same information without runtime dependencies, Playwright, or Storybook.
+>
+> **Use agent skills instead:** `npx skills add iress/design-system`
+>
+> See `packages/components/.ai/`, `packages/tokens/.ai/`, and `.agents/skills/` for the replacement.
+
+---
+
+<details>
+<summary>Legacy development instructions (archived)</summary>
+
 ## Installation
 
 Terminal 1:
@@ -171,3 +182,5 @@ const DOCS_DIR = path.join(__dirname, '..', 'docs', 'your-docs-folder');
 - Path traversal attacks are prevented
 - Only `.md` files are processed
 - All input parameters are validated
+
+</details>

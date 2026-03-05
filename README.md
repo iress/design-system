@@ -5,7 +5,7 @@ The IDS monorepo contains the React component library and supporting packages fo
 ## Packages
 
 - `@iress-oss/ids-components` - React components that implement the design system
-- `@iress-oss/ids-mcp-server` - Model Context Protocol (MCP) server providing AI assistants with contextual information about IDS components
+- `@iress-oss/ids-mcp-server` - **DEPRECATED** — Replaced by [Agent Skills](#agent-skills) (`.agents/skills/`) and `.ai/` folders
 - `@iress-oss/ids-storybook-config` - Shared Storybook configuration for IDS packages
 - `@iress-oss/ids-storybook-okta` - Storybook addon for integrating Okta authentication into Storybook
 - `@iress-oss/ids-storybook-sandbox` - Storybook addon for opening code examples in CodeSandbox
@@ -71,6 +71,41 @@ To run tests for all packages:
 ```bash
 yarn test
 ```
+
+## Agent Skills
+
+This repository provides **agent skills** that give AI coding assistants contextual knowledge about the Iress Design System — no MCP server or runtime dependencies required.
+
+### Available Skills
+
+| Skill            | Description                                                            |
+| ---------------- | ---------------------------------------------------------------------- |
+| `figma-to-ids`   | Translate Figma design properties into IDS component implementations   |
+| `token-usage`    | Guide on correctly using IDS design tokens in React components and CSS |
+| `ui-doctor`      | Audit and validate IDS component usage and compliance                  |
+| `ui-translation` | Translate natural language UI descriptions into IDS component code     |
+
+### Installation
+
+Install skills using the [skills CLI](https://github.com/vercel-labs/skills):
+
+```bash
+# Install all IDS skills (interactive — choose your agents)
+npx skills add iress/design-system
+
+# Install a specific skill
+npx skills add iress/design-system --skill token-usage
+
+# Install to a specific agent (e.g. GitHub Copilot, Claude Code, Cursor)
+npx skills add iress/design-system -a github-copilot
+npx skills add iress/design-system -a claude-code
+npx skills add iress/design-system -a cursor
+
+# List available skills before installing
+npx skills add iress/design-system --list
+```
+
+Skills are also available directly via the `.agents/skills/` and `packages/components/.ai/` directories in the repository.
 
 ## Contributing
 

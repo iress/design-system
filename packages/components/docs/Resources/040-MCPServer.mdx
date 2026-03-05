@@ -1,28 +1,110 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import { IressButton } from '@/main';
+import { IressButton, IressAlert } from '@/main';
 
-<Meta title="Resources/MCP Server" />
+<Meta title="Resources/Agent Skills" />
 
-# MCP Server
+# Agent Skills
 
-The MCP Server provides AI agents with contextual information about the Iress Design System (IDS) components, allowing them to assist with development tasks such as writing code and UIs consistently, generating documentation, and answering questions about the design system, and all according to best practice.
+Agent skills give AI coding assistants (GitHub Copilot, Claude Code, Cursor, Codex, and [37+ more](https://github.com/vercel-labs/skills#supported-agents)) contextual knowledge about the Iress Design System — components, design tokens, styling patterns, and best practices.
 
-<IressButton
-  href="https://www.npmjs.com/package/@iress-oss/ids-mcp-server"
-  target="_blank"
->
-  View MCP Server on NPM
-</IressButton>
+Skills are installed as static files alongside your project. No runtime server, no Playwright, no Storybook dependency.
+
+<IressAlert status="warning" mb="lg">
+  <strong>Deprecation notice:</strong> The{' '}
+  <code>@iress-oss/ids-mcp-server</code> npm package is deprecated. Agent skills
+  replace it with the same information in a simpler, zero-dependency format.
+</IressAlert>
+
+---
+
+## Available Skills
+
+| Skill              | Description                                                                                     |
+| ------------------ | ----------------------------------------------------------------------------------------------- |
+| **figma-to-ids**   | Translate Figma design properties and structures into IDS component implementations             |
+| **token-usage**    | Guide on correctly using IDS design tokens in React components and CSS                          |
+| **ui-doctor**      | Audit and validate that an application correctly uses IDS components and follows IDS principles |
+| **ui-translation** | Translate natural language UI descriptions into IDS component implementations                   |
 
 ---
 
 ## Installation
 
-<IressButton
-  href="vscode:mcp/install?%7B%22name%22%3A%22iress-design-system%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22%40iress-oss%2Fids-mcp-server%22%5D%7D"
-  mb="lg"
->
-  Install on Visual Studio Code
-</IressButton>
+Install skills using the open-source [skills CLI](https://github.com/vercel-labs/skills):
 
-For other MCP clients or manual configuration, check the [MCP Server README](https://www.npmjs.com/package/@iress-oss/ids-mcp-server)
+### Quick Start
+
+```bash
+# Install all IDS skills (interactive — choose your agents)
+npx skills add iress/design-system
+```
+
+### Install Specific Skills
+
+```bash
+# Install only the token-usage skill
+npx skills add iress/design-system --skill token-usage
+
+# Install multiple specific skills
+npx skills add iress/design-system --skill token-usage --skill figma-to-ids
+```
+
+### Install to Specific Agents
+
+```bash
+# GitHub Copilot
+npx skills add iress/design-system -a github-copilot
+
+# Claude Code
+npx skills add iress/design-system -a claude-code
+
+# Cursor
+npx skills add iress/design-system -a cursor
+
+# Multiple agents at once
+npx skills add iress/design-system -a github-copilot -a claude-code -a cursor
+```
+
+### Other Commands
+
+```bash
+# List available skills before installing
+npx skills add iress/design-system --list
+
+# List installed skills
+npx skills list
+
+# Update all installed skills
+npx skills update
+
+# Remove skills
+npx skills remove
+```
+
+---
+
+## How It Works
+
+Skills are `SKILL.md` files that get installed into your project (or globally). Your AI coding assistant reads them automatically and uses the knowledge when helping you write code.
+
+**Before (MCP Server):**
+
+- Required `npx @iress-oss/ids-mcp-server` running
+- Needed Playwright and Chromium installed
+- Runtime dependency on Storybook docs
+
+**After (Agent Skills):**
+
+- Static markdown files — zero runtime dependencies
+- Works with 37+ AI coding agents out of the box
+- Installed once, updated with `npx skills update`
+
+---
+
+## Manual Access
+
+Skills are also available directly in the repository:
+
+- **Skills directory:** [`.agents/skills/`](https://github.com/iress/design-system/tree/main/.agents/skills/)
+- **AI context files:** [`packages/components/.ai/`](https://github.com/iress/design-system/tree/main/packages/components/.ai/) and [`packages/tokens/.ai/`](https://github.com/iress/design-system/tree/main/packages/tokens/.ai/)
+- **LLM index:** [`packages/components/llms.txt`](https://github.com/iress/design-system/tree/main/packages/components/llms.txt)
