@@ -191,7 +191,7 @@ const HomePage = () => {
             href="/?path=/docs/resources-introduction--docs"
             stretch
           >
-            MCP server and other tools to help you make the most of the Iress
+            Agent skills and other tools to help you make the most of the Iress
             Design System.
           </IressCard>
         </IressCol>
