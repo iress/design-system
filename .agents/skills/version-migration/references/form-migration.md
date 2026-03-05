@@ -37,13 +37,11 @@ function MyForm() {
       {({ errors, touched }) => (
         <Form>
           <FormGroup>
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" label="Email" />
             <Field name="email" as={Input} type="email" />
             {errors.email && touched.email && <span>{errors.email}</span>}
           </FormGroup>
-          <Button type="submit" variant="primary">
-            Submit
-          </Button>
+          <Button type="submit" mode={Button.Mode.Primary} label="Submit" />
         </Form>
       )}
     </Formik>

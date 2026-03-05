@@ -82,6 +82,14 @@ SASS modules have been replaced with [Panda CSS](https://panda-css.com/) for typ
 | New `onDismiss`        | Add dismiss functionality                                                       |
 | New `multiLine`        | Display on multiple lines for longer content (single row after `md` by default) |
 
+### Autocomplete
+
+| Change                  | Details                                                |
+| ----------------------- | ------------------------------------------------------ |
+| Removed `watermark`     | No longer supported                                    |
+| Hook: `options` required | `options` is now required in `useAutocompleteSearch`  |
+| Hook: `displayResults`  | Removed from hook return                               |
+
 ### Badge → Pill (renamed)
 
 `IressBadge` has been renamed to `IressPill`. Use the new component.
@@ -125,6 +133,7 @@ SASS modules have been replaced with [Panda CSS](https://panda-css.com/) for typ
 | Removed `hiddenControl` and `touch` | Use the new `variant` prop (`"card"` or `"touch"`)                             |
 | New `variant` prop                  | `"card"` — checkbox on top right with heading. `"touch"` — larger touch target |
 | Updated `ref`                       | Now exposes `blur()`, `focus()`, and `input` (underlying DOM element)          |
+| Removed ref methods                 | `check()` and `reset()` removed from ref                                       |
 
 ### CheckboxGroup
 
@@ -141,6 +150,12 @@ No longer has a `ref` prop. Wrap the element in a `<div ref={elementRef} />` and
 ### Col
 
 No changes.
+
+### Combobox (removed)
+
+`IressCombobox` and `IressMultiCombobox` have been removed. Use:
+- `IressSelect` for restricted selection from options
+- `IressAutocomplete` for free-text input with suggestions
 
 ### Container
 
@@ -177,6 +192,9 @@ No changes.
 | New `supplementary` / `renderSupplementary` | Shown below the field; hidden when `error` or `errorMessages` is set                            |
 | Errors now below field                      | Errors animate in below the field                                                               |
 | Built-in bottom margin                      | Fields have bottom margin for error/supplementary area — **do not wrap fields in `IressStack`** |
+| New `horizontal`                            | Inline label/input layout                                                                       |
+| New `labelWidth`                            | Control label container width                                                                   |
+| New `removeErrorMargin`                     | Removes error space reservation                                                                 |
 
 ### FieldGroup
 
@@ -197,11 +215,14 @@ Use the `srOnly` or `hide` styling props available on any component.
 
 ### Icon
 
-| Change                  | Details                                                                                             |
-| ----------------------- | --------------------------------------------------------------------------------------------------- |
-| Removed `mode`          | Use `color` instead                                                                                 |
-| `name` is now type-safe | IDE autocompletion available                                                                        |
-| Removed `size`          | Inherits font size from parent. Use custom CSS for specific sizes; use `IressImage` for large icons |
+| Change                    | Details                                                                                             |
+| ------------------------- | --------------------------------------------------------------------------------------------------- |
+| Removed `mode`            | Use `color` instead                                                                                 |
+| `name` is now type-safe   | IDE autocompletion available                                                                        |
+| Removed `size`            | Inherits font size from parent. Use custom CSS for specific sizes; use `IressImage` for large icons |
+| New `IressIconProvider`   | Required for optimal Material Symbols usage with font subsetting                                    |
+| New `type` prop           | Select icon provider (`'fontawesome'` \| `'material'`)                                              |
+| New `filled` prop         | Material Symbols filled variant                                                                     |
 
 ### Image
 
@@ -209,7 +230,10 @@ New component for displaying responsive images.
 
 ### Inline
 
-`gutter` changed to `gap`, now accepts the larger spacing token spectrum.
+| Change          | Details                                                    |
+| --------------- | ---------------------------------------------------------- |
+| `gutter` → `gap`| Accepts the larger spacing token spectrum                  |
+| New `rowGap`    | Set top/bottom gap when content wraps                      |
 
 ### Input
 
@@ -240,7 +264,7 @@ New component for anchor links in text paragraphs. Accepts the same props as `Ir
 | `defaultValue`/`onChange`/`value` | Type-aware based on `multiSelect` — arrays when `true`, single value when `false` |
 | Removed `MenuSelected` interface  | Menu is now generic extending `FormControlValue`                                  |
 | Removed `mapMenuItems`            | Map `IressMenuItem` using arrays directly                                         |
-| Removed `role="nav"`              | Nav styling removed; use custom CSS                                               |
+| Removed `role="nav"`              | Nav styling removed. For navigation menus, use `IressSideNav` pattern or custom styling          |
 | New `radio` variant               | Radio prepend to show selection                                                   |
 | New `subdraw` variant             | Menu groups as popovers                                                           |
 | New `side` variant                | Side menu with collapsible groups                                                 |
@@ -272,7 +296,7 @@ No changes.
 
 | Change                       | Details                                                                                                                              |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `padding` → `p` styling prop | —                                                                                                                                    |
+| `padding` → `p` styling prop | Default padding changed from `'md'` to `'lg'`                                                                                        |
 | Removed `fullpage`           | Modal no longer covers the entire screen on small devices                                                                            |
 | Custom heading node          | `id` is no longer automatically added. Set the `id` prop on your custom node to connect to the modal. String headings work as before |
 | No shadow                    | Slight blur on the background instead                                                                                                |
@@ -326,6 +350,9 @@ New component supporting the data colour spectrum with automatic rounded corners
 | Removed `width`               | Use `contentStyle` prop with custom CSS                                                                    |
 | Deprecated `contentClassName` | Use `contentStyle.className`                                                                               |
 | New `contentStyle`            | Customise `className`, `style`, and styling props on the popover content                                   |
+| New `fluid`                   | Full container width                                                                                       |
+| New `offset`                  | Number or object for popover positioning offset (default: 5)                                               |
+| New `nested`                  | Nested navigation behaviour                                                                                |
 | Z-index                       | Now uses z-index for consistent layering                                                                   |
 
 ### Progress
@@ -335,6 +362,16 @@ New component supporting the data colour spectrum with automatic rounded corners
 | Renders `<meter>` or `<progress>` | `<meter>` when `min` is set; `<progress>` otherwise                                  |
 | Single element                    | No more `__progressbar` test id                                                      |
 | Simplified ARIA                   | Only `aria-label` is rendered. If testing by attribute (not role), update your tests |
+
+### Provider
+
+| Change                  | Details                                                                      |
+| ----------------------- | ---------------------------------------------------------------------------- |
+| Removed `noIcons`       | Use `noDefaultFont` instead                                                  |
+| Removed `injectPushStyles` | No longer available                                                       |
+| New `noSubsetting`      | Controls automatic font subsetting via Google Fonts CDN for icons            |
+| New `noDefaultFont`     | Controls loading of default Iress font from CDN                              |
+| Icon handling           | Now uses `IressIconProvider` with Material Symbols instead of icon CSS       |
 
 ### Radio
 
@@ -349,6 +386,10 @@ New component supporting the data colour spectrum with automatic rounded corners
 | ----------------------------------- | -------------------------------------------------- |
 | `readonly` → `readOnly`             | —                                                  |
 | Removed `hiddenControl` and `touch` | Use the new `variant` prop (`"card"` or `"touch"`) |
+
+### RadioMark
+
+New component for rendering a standalone radio mark indicator (similar to `IressCheckboxMark`).
 
 ### Readonly
 
@@ -375,6 +416,22 @@ Styled to match other input text sizes. Use the new `textStyle` prop for larger 
 | New `native` prop                 | Renders a browser-native select (replaces the old `IressSelect`). Note: still passes `LabelValueMeta` as the value |
 | Grouped items                     | Now supported                                                                                                      |
 | New hover and focus states        | —                                                                                                                  |
+
+The v5 native `IressSelect` with `children` (option elements) is replaced by `IressSelect` with the `native` prop:
+
+**Before (v5):**
+
+```tsx
+<IressSelect>
+  <IressSelectOption value="1">Option 1</IressSelectOption>
+</IressSelect>
+```
+
+**After (v6):**
+
+```tsx
+<IressSelect native options={[{ label: 'Option 1', value: '1' }]} />
+```
 
 ### SelectOption (removed)
 
@@ -419,7 +476,13 @@ Removed `name` prop. All spinners are now consistent across Iress products.
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `gutter` → `gap`        | Accepts the larger spacing token spectrum                                                                                                        |
 | No longer uses `margin` | Uses flexbox. Use `horizontalAlign` or wrap children with `IressInline` for inline display. Use `alignSelf` on children for individual alignment |
-| Lists inside Stack      | Use the new `element` prop to render as a list, then place list items inside                                                                     |
+| New `element` prop      | Render as a different HTML element (e.g. `<ul>` for lists)                                                                                       |
+| New `horizontalAlign`   | Set horizontal alignment of stack content                                                                                                        |
+| New `verticalAlign`     | Set vertical alignment with additional options (`'between'`, `'around'`, `'evenly'`)                                                             |
+
+### Styled
+
+New component for applying IDS styling props to any element or component without using the styled-system JSX components directly.
 
 ### Table
 
@@ -437,10 +500,13 @@ Removed `name` prop. All spinners are now consistent across Iress products.
 
 ### TabSet
 
-| Change            | Details                                      |
-| ----------------- | -------------------------------------------- |
-| Removed `mapTabs` | Use `Array.map` to map objects to `IressTab` |
-| Selected tabs     | Now have a highlighted background            |
+| Change               | Details                                      |
+| -------------------- | -------------------------------------------- |
+| Removed `mapTabs`    | Use `Array.map` to map objects to `IressTab` |
+| Selected tabs        | Now have a highlighted background            |
+| New `panelStyle`     | Custom style for panel area                  |
+| New `tabHolderStyle` | Custom style for tab holder area             |
+| New `type`           | Tab styling type (`'primary'` \| `'secondary'`) |
 
 ### Tag
 
@@ -452,10 +518,14 @@ Removed `name` prop. All spinners are now consistent across Iress products.
 
 ### TagInput
 
-| Change                         | Details                     |
-| ------------------------------ | --------------------------- |
-| Removed `testid__input__input` | Use `testid__input` instead |
-| Removed `testid__items`        | —                           |
+| Change                         | Details                                              |
+| ------------------------------ | ---------------------------------------------------- |
+| Removed `testid__input__input` | Use `testid__input` instead                          |
+| Removed `testid__items`        | —                                                    |
+| `onTagDelete` signature        | Now includes event: `(label, e) => void`             |
+| `onTagDeleteAll` signature     | Now includes event: `(label, e) => void`             |
+| New `tagLimit`                 | Limit tags before shortening (default: 5)            |
+| New `selectedOptionsTagText`   | Text for tag count display                           |
 
 ### Text
 
@@ -483,6 +553,7 @@ Removed `name` prop. All spinners are now consistent across Iress products.
 | `headingText` → `heading`   | —                                                         |
 | No `position` at hook level | Set `position` on `IressToasterProvider`                  |
 | Simple string toasts        | Pass a string directly for a simple message               |
+| `status` value change       | `'error'` is now `'danger'` (Alert-based)                 |
 
 ### Toggle
 
@@ -490,6 +561,15 @@ Removed `name` prop. All spinners are now consistent across Iress products.
 | ----------------------- | ------------------------------------------------------------------------------------ |
 | Controlled/uncontrolled | Now uses `checked`/`defaultChecked` like checkbox. Explicitly set whether controlled |
 | Removed forwarded `ref` | Wrap in a `<div>` and use query selectors if needed                                  |
+| New `defaultChecked`    | For uncontrolled mode                                                                |
+| New `disabled`          | Disable the toggle                                                                   |
+
+### Tooltip
+
+| Change                       | Details                                                    |
+| ---------------------------- | ---------------------------------------------------------- |
+| `align` prop simplified      | Removed deprecated enum option, now uses string literals   |
+| Removed `IressTooltip.Align` | Use string values directly                                 |
 
 ### ValidationLink
 
