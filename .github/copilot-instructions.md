@@ -56,8 +56,8 @@ When assisting with this repository, GitHub Copilot should:
 - **Main Packages**:
   - `@iress-oss/ids-components` - React component library
   - `@iress-oss/ids-tokens` - Design tokens
-  - `@iress-oss/ids-mcp-server` - Model Context Protocol server
   - Storybook addons for various integrations
+  - `@iress-oss/ids-mcp-server` - **DEPRECATED** (replaced by `.ai/` folders and `.agents/skills/`)
 
 - **Tech Stack**: React, TypeScript, Vite, Vitest, Storybook, Panda CSS
 - **Testing**: Use `yarn test:coverage` commands, wait patiently for test startup (can take 30+ seconds)

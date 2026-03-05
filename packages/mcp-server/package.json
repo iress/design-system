@@ -1,13 +1,13 @@
 {
   "name": "@iress-oss/ids-mcp-server",
-  "version": "6.0.0-alpha.29",
-  "description": "Model Context Protocol (MCP) server for Iress Design System (IDS) component library - provides AI assistants with contextual information about IDS components, design tokens, and usage patterns",
+  "version": "6.0.0-alpha.30",
+  "description": "DEPRECATED — Model Context Protocol (MCP) server for Iress Design System. Replaced by static .ai/ folders and .agents/skills/ files. See packages/components/.ai/ and packages/tokens/.ai/ instead.",
   "type": "module",
   "main": "./dist/index.js",
   "bin": {
     "ids": "dist/index.js"
   },
-  "private": true,
+  "deprecated": "Use static .ai/ folders and .agents/skills/ files instead. See packages/components/.ai/ and packages/tokens/.ai/.",
   "keywords": [
     "mcp",
     "model-context-protocol",

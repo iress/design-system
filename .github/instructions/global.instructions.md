@@ -20,7 +20,6 @@ yarn test:affected # Affected packages only
 
 ```bash
 yarn test:components
-yarn test:mcp-server
 yarn test:storybook-addon
 yarn test:tokens
 ```
@@ -30,7 +29,6 @@ yarn test:tokens
 ```bash
 # Most common approach
 yarn test:components Button.test.tsx
-yarn test:mcp-server MyHandler.test.ts
 
 # Direct workspace commands (recommended)
 yarn workspace @iress-oss/ids-components run test:coverage Button.test.tsx
@@ -58,7 +56,7 @@ yarn vitest run --reporter=verbose
 
 **Important**: Ensure your `vitest.config.ts` (or equivalent Vitest config file) includes `reporters: ['verbose']` in the configuration. This is required for compatibility with yarn workspace test commands and to ensure proper output formatting.
 
-**Note**: Test files must be in the project's `src/` directory (e.g., `packages/components/src/Button.test.tsx`, `packages/mcp-server/src/MyHandler.test.ts`)
+**Note**: Test files must be in the project's `src/` directory (e.g., `packages/components/src/Button.test.tsx`)
 
 # File Organization
 
@@ -91,7 +89,6 @@ yarn lint:affected # Affected packages only
 yarn lint:components # Only components has a specific lint command
 # For other packages, use direct workspace commands:
 yarn workspace @iress-oss/ids-components run lint
-yarn workspace @iress-oss/ids-mcp-server run lint
 yarn workspace @iress-oss/ids-storybook-addon run lint
 yarn workspace @iress-oss/ids-tokens run lint
 ```
@@ -106,7 +103,7 @@ Example: `yarn workspace @iress-oss/ids-components exec npx eslint src/component
 
 See [eslint.instructions.md](eslint.instructions.md) for more examples and patterns.
 
-**Note**: Test files must be in the project's `src/` directory (e.g., `packages/components/src/Button.test.tsx`, `packages/mcp-server/src/MyHandler.test.ts`)
+**Note**: Test files must be in the project's `src/` directory (e.g., `packages/components/src/Button.test.tsx`)
 
 ## Troubleshooting Tests
 

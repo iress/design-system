@@ -5,7 +5,6 @@
 ```bash
 # Run a specific test file using --testFile flag
 yarn workspace @iress-oss/ids-components run test:coverage -- --testFile MyComponent.test.tsx
-yarn workspace @iress-oss/ids-mcp-server run test:coverage -- --testFile MyHandler.test.ts
 
 # Run any project with a specific file
 yarn workspace <package-name> run test:coverage -- --testFile <filename>
@@ -16,15 +15,12 @@ yarn workspace <package-name> run test:coverage -- --testFile <filename>
 ```bash
 # Method 1: Using --testFile flag
 yarn workspace @iress-oss/ids-components run test:coverage -- --testFile MyComponent.test.tsx
-yarn workspace @iress-oss/ids-mcp-server run test:coverage -- --testFile MyHandler.test.ts
 
 # Method 2: Using positional argument (regex pattern)
 yarn workspace @iress-oss/ids-components run test:coverage -- MyComponent.test.tsx
-yarn workspace @iress-oss/ids-mcp-server run test:coverage -- MyHandler.test.ts
 
 # Method 3: Using partial filename matching
 yarn workspace @iress-oss/ids-components run test:coverage -- MyComponent
-yarn workspace @iress-oss/ids-mcp-server run test:coverage -- MyHandler
 ```
 
 ## 📂 **File Structure Requirements:**
@@ -32,7 +28,6 @@ yarn workspace @iress-oss/ids-mcp-server run test:coverage -- MyHandler
 Test files must be in the project's `src/` directory:
 
 - ✅ `packages/components/src/MyComponent.test.tsx`
-- ✅ `packages/mcp-server/src/MyHandler.test.ts`
 - ❌ `packages/components/MyComponent.test.tsx` (wrong location)
 
 ## 🚀 **Real Examples:**
@@ -40,11 +35,9 @@ Test files must be in the project's `src/` directory:
 ```bash
 # Test our example files
 yarn workspace @iress-oss/ids-components run test:coverage -- --testFile test-file-2.test.ts
-yarn workspace @iress-oss/ids-mcp-server run test:coverage -- --testFile componentHandlers.test.ts
 
 # Or using the shortcuts
 yarn test:components:file test-file-2.test.ts
-yarn test:mcp-server --testFile componentHandlers.test.ts
 ```
 
 ## 💡 **Pro Tips:**
@@ -60,14 +53,9 @@ yarn test:mcp-server --testFile componentHandlers.test.ts
 # Quick test of a specific component
 yarn workspace @iress-oss/ids-components run test:coverage -- --testFile Button.test.tsx
 
-# Quick test of MCP server handlers
-yarn workspace @iress-oss/ids-mcp-server run test:coverage -- --testFile componentHandlers.test.ts
-
 # Watch mode while developing
 yarn workspace @iress-oss/ids-components run test:coverage -- --testFile Button.test.tsx --watch
-yarn workspace @iress-oss/ids-mcp-server run test:coverage -- --testFile componentHandlers.test.ts --watch
 
 # UI mode for debugging
 yarn workspace @iress-oss/ids-components run test:coverage -- --testFile Button.test.tsx --ui
-yarn workspace @iress-oss/ids-mcp-server run test:coverage -- --testFile componentHandlers.test.ts --ui
 ```

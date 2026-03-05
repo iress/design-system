@@ -8,6 +8,13 @@
       "path": "skills/token-usage.md"
     }
   ],
+  "references": [
+    {
+      "name": "tokens-reference",
+      "description": "Complete enumeration of every design token — colours (with hex values and AA-compliant pairings), spacing (with aliases), radius (scale + system tokens), and typography (heading, body, code). Use when you need specific token names, values, or accessible colour combinations.",
+      "path": "tokens-reference.md"
+    }
+  ],
   "sources": {
     "css": {
       "description": "CSS custom properties stylesheet — import once, use var() references anywhere",

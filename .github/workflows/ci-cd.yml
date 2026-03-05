@@ -20,7 +20,6 @@ on:
         options:
           - ''
           - '@iress-oss/ids-components'
-          - '@iress-oss/ids-mcp-server'
           - '@iress-oss/ids-storybook-config'
           - '@iress-oss/ids-storybook-okta'
           - '@iress-oss/ids-storybook-sandbox'
@@ -308,10 +307,6 @@ jobs:
           chmod +x .github/scripts/publish-packages.sh
           .github/scripts/publish-packages.sh stable
 
-      - name: Generate MCP Documentation
-        uses: ./.github/actions/generate-mcp-docs
-        if: steps.version-check.outputs.has_version_changes == 'true' && contains(steps.version-check.outputs.packages_to_publish, '@iress-oss/ids-mcp-server')
-
       - name: Publish to NPM (Stable)
         if: steps.version-check.outputs.has_version_changes == 'true'
         id: publish
@@ -440,10 +435,6 @@ jobs:
               yarn workspace "$PACKAGE" version $CANARY_VERSION
             done
           fi
-
-      - name: Generate MCP Documentation
-        uses: ./.github/actions/generate-mcp-docs
-        if: (github.event_name == 'workflow_dispatch' && (github.event.inputs.package == '@iress-oss/ids-mcp-server' || github.event.inputs.package == '')) || (github.event_name == 'push' && (steps.extract-package.outputs.package == '@iress-oss/ids-mcp-server' || steps.extract-package.outputs.package == ''))
 
       - name: Configure npm authentication for OIDC
         run: |
