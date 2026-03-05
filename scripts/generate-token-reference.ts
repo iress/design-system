@@ -16,11 +16,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import {
-  designTokens,
-  type IressDesignToken,
-  type IressDesignTokenGroup,
-} from '@iress-oss/ids-tokens';
+import { designTokens, type IressDesignToken } from '@iress-oss/ids-tokens';
 
 // ─── Configuration ───────────────────────────────────────────
 
@@ -56,7 +52,10 @@ interface GroupInfo {
 // ─── Token Extraction ────────────────────────────────────────
 
 function tokenPathToCssVar(tokenPath: string): string {
-  return `--iress-${tokenPath.replace(/\./g, '-')}`;
+  const raw = tokenPath.replace(/\./g, '-');
+  // Convert camelCase segments to kebab-case to match getCssVariable.ts behaviour
+  const kebab = raw.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+  return `--iress-${kebab}`;
 }
 
 /**

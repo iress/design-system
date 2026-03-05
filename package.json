@@ -69,7 +69,7 @@
     "test": "yarn monorepo run test",
     "test:coverage": "yarn monorepo run test:coverage",
     "test:ci": "yarn test:coverage && yarn check-coverage --all",
-    "translate": "yarn translate:components && yarn translate:skills && yarn generate:token-reference && yarn generate:llms-txt",
+    "translate": "yarn translate:components && yarn generate:token-reference && yarn translate:skills && yarn generate:llms-txt",
     "translate:components": "tsx ./scripts/translate-components.ts",
     "translate:skills": "tsx ./scripts/translate-skills.ts",
     "generate:token-reference": "tsx ./scripts/generate-token-reference.ts",

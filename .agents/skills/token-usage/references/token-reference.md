@@ -35,10 +35,10 @@ The primary colour is your "brand" colour, and is used across all interactive el
 | Token | CSS Variable | Value | Description | AA-Compliant Pairings |
 | --- | --- | --- | --- | --- |
 | `colour.primary.fill` | `--iress-colour-primary-fill` | `#003271` | Used for primary buttons and the active state of form controls such as checkboxes and radio buttons. Also used for the border of tags when they have a custom button. | primary.onFill |
-| `colour.primary.fillHover` | `--iress-colour-primary-fillHover` | `#002352` | Used for the hover state of primary buttons as well as hovering over active form controls. | primary.onFill |
-| `colour.primary.onFill` | `--iress-colour-primary-onFill` | `#FFFFFF` | Used as the foreground colour on primary buttons and active form controls. | primary.fill |
+| `colour.primary.fillHover` | `--iress-colour-primary-fill-hover` | `#002352` | Used for the hover state of primary buttons as well as hovering over active form controls. | primary.onFill |
+| `colour.primary.onFill` | `--iress-colour-primary-on-fill` | `#FFFFFF` | Used as the foreground colour on primary buttons and active form controls. | primary.fill |
 | `colour.primary.surface` | `--iress-colour-primary-surface` | `#EBF3FF` | Used as the background colour for secondary buttons and the focused state of menu and tab items. Also used as the background colour of active buttons. | primary.text, neutral.80 |
-| `colour.primary.surfaceHover` | `--iress-colour-primary-surfaceHover` | `#DCEAFE` | Used for the hover state of secondary buttons, form controls and hovering over focused menu and tab items. Also used when hovering over table rows. | primary.text, neutral.80 |
+| `colour.primary.surfaceHover` | `--iress-colour-primary-surface-hover` | `#DCEAFE` | Used for the hover state of secondary buttons, form controls and hovering over focused menu and tab items. Also used when hovering over table rows. | primary.text, neutral.80 |
 | `colour.primary.text` | `--iress-colour-primary-text` | `#003271` | Used for text on primary buttons, active form controls and focused tab and menu items. Also used for the link text colour and tertiary buttons. | primary.surface |
 
 ### Accent
@@ -48,10 +48,10 @@ The accent colour is a colour used to emphasise key parts of the UI. These act a
 | Token | CSS Variable | Value | Description | AA-Compliant Pairings |
 | --- | --- | --- | --- | --- |
 | `colour.accent.fill` | `--iress-colour-accent-fill` | `#C26EF4` | Used in illustrations to support the primary colour and to add visual interest to the UI. | accent.onFill |
-| `colour.accent.fillHover` | `--iress-colour-accent-fillHover` | `#A855D9` | Used in illustrations to support the primary colour and to add visual interest to the UI when hovered. | accent.onFill |
-| `colour.accent.onFill` | `--iress-colour-accent-onFill` | `#1F0032` | Used in illustrations to support the primary colour and to add visual interest to the UI when used as a foreground colour. | accent.fill |
+| `colour.accent.fillHover` | `--iress-colour-accent-fill-hover` | `#A855D9` | Used in illustrations to support the primary colour and to add visual interest to the UI when hovered. | accent.onFill |
+| `colour.accent.onFill` | `--iress-colour-accent-on-fill` | `#1F0032` | Used in illustrations to support the primary colour and to add visual interest to the UI when used as a foreground colour. | accent.fill |
 | `colour.accent.surface` | `--iress-colour-accent-surface` | `#E0BDF5` | Used to highlight a selected row in a table. | accent.text, neutral.80 |
-| `colour.accent.surfaceHover` | `--iress-colour-accent-surfaceHover` | `#D4A6F2` | Used for the hover state of a highlighted row in a table to provide additional emphasis on hover. | accent.text, neutral.80 |
+| `colour.accent.surfaceHover` | `--iress-colour-accent-surface-hover` | `#D4A6F2` | Used for the hover state of a highlighted row in a table to provide additional emphasis on hover. | accent.text, neutral.80 |
 | `colour.accent.text` | `--iress-colour-accent-text` | `#1F0032` | Used for text on top of accent surfaces (such as highlighted table rows). | accent.surface |
 
 ### System — Success
@@ -61,10 +61,10 @@ Communicates that an action has been successful and inform a user that the actio
 | Token | CSS Variable | Value | Description | AA-Compliant Pairings |
 | --- | --- | --- | --- | --- |
 | `colour.system.success.fill` | `--iress-colour-system-success-fill` | `#37C49C` | Used for the background colour of primary success buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts. | system.success.onFill |
-| `colour.system.success.fillHover` | `--iress-colour-system-success-fillHover` | `#2DAB88` | Used for the hover state of primary success buttons. | system.success.onFill |
-| `colour.system.success.onFill` | `--iress-colour-system-success-onFill` | `#0A2E25` | Used for the foreground colour of primary success buttons and badges. | system.success.fill |
+| `colour.system.success.fillHover` | `--iress-colour-system-success-fill-hover` | `#2DAB88` | Used for the hover state of primary success buttons. | system.success.onFill |
+| `colour.system.success.onFill` | `--iress-colour-system-success-on-fill` | `#0A2E25` | Used for the foreground colour of primary success buttons and badges. | system.success.fill |
 | `colour.system.success.surface` | `--iress-colour-system-success-surface` | `#EBF9F5` | Used for the background colour of success alerts and toasts, and the background of secondary success buttons. | system.success.text, neutral.90 |
-| `colour.system.success.surfaceHover` | `--iress-colour-system-success-surfaceHover` | `#D7F3EB` | Used for the hover state of secondary success buttons. | system.success.text, neutral.90 |
+| `colour.system.success.surfaceHover` | `--iress-colour-system-success-surface-hover` | `#D7F3EB` | Used for the hover state of secondary success buttons. | system.success.text, neutral.90 |
 | `colour.system.success.text` | `--iress-colour-system-success-text` | `#006b44` | Used for the text colour of success alerts and toasts, and success tertiary buttons. | system.success.surface |
 
 ### System — Danger
@@ -74,10 +74,10 @@ Communicates something went wrong or prevents the user from moving forward with 
 | Token | CSS Variable | Value | Description | AA-Compliant Pairings |
 | --- | --- | --- | --- | --- |
 | `colour.system.danger.fill` | `--iress-colour-system-danger-fill` | `#c21010` | Used for the background colour of primary danger buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts. | system.danger.onFill |
-| `colour.system.danger.fillHover` | `--iress-colour-system-danger-fillHover` | `#B32727` | Used for the hover state of primary danger buttons. | system.danger.onFill |
-| `colour.system.danger.onFill` | `--iress-colour-system-danger-onFill` | `#FFF4F3` | Used for the foreground colour of primary danger buttons and badges. | system.danger.fill |
+| `colour.system.danger.fillHover` | `--iress-colour-system-danger-fill-hover` | `#B32727` | Used for the hover state of primary danger buttons. | system.danger.onFill |
+| `colour.system.danger.onFill` | `--iress-colour-system-danger-on-fill` | `#FFF4F3` | Used for the foreground colour of primary danger buttons and badges. | system.danger.fill |
 | `colour.system.danger.surface` | `--iress-colour-system-danger-surface` | `#FFEDEC` | Used for the background colour of danger alerts and toasts, and the background of secondary danger buttons. | system.danger.text, neutral.90 |
-| `colour.system.danger.surfaceHover` | `--iress-colour-system-danger-surfaceHover` | `#FFD9D6` | Used for the hover state of secondary danger buttons. | system.danger.text, neutral.90 |
+| `colour.system.danger.surfaceHover` | `--iress-colour-system-danger-surface-hover` | `#FFD9D6` | Used for the hover state of secondary danger buttons. | system.danger.text, neutral.90 |
 | `colour.system.danger.text` | `--iress-colour-system-danger-text` | `#c21010` | Used for the text colour of danger alerts and toasts, and danger tertiary buttons. | system.danger.surface |
 
 ### System — Warning
@@ -87,10 +87,10 @@ Communicates attention required but does not prevent the user from moving forwar
 | Token | CSS Variable | Value | Description | AA-Compliant Pairings |
 | --- | --- | --- | --- | --- |
 | `colour.system.warning.fill` | `--iress-colour-system-warning-fill` | `#F0AD03` | Used for the border of warning alerts and the background of warning badges. | system.warning.onFill |
-| `colour.system.warning.fillHover` | `--iress-colour-system-warning-fillHover` | `#DA9D00` | Used for the hover state of primary warning buttons. | system.warning.onFill |
-| `colour.system.warning.onFill` | `--iress-colour-system-warning-onFill` | `#2B1F00` | Used for the foreground colour of warning badges. | system.warning.fill |
+| `colour.system.warning.fillHover` | `--iress-colour-system-warning-fill-hover` | `#DA9D00` | Used for the hover state of primary warning buttons. | system.warning.onFill |
+| `colour.system.warning.onFill` | `--iress-colour-system-warning-on-fill` | `#2B1F00` | Used for the foreground colour of warning badges. | system.warning.fill |
 | `colour.system.warning.surface` | `--iress-colour-system-warning-surface` | `#FFF8E6` | Used for the background colour of warning alerts. | system.warning.text, neutral.90 |
-| `colour.system.warning.surfaceHover` | `--iress-colour-system-warning-surfaceHover` | `#FFEAA0` | Used for the hover state of secondary warning buttons. | system.warning.text, neutral.90 |
+| `colour.system.warning.surfaceHover` | `--iress-colour-system-warning-surface-hover` | `#FFEAA0` | Used for the hover state of secondary warning buttons. | system.warning.text, neutral.90 |
 | `colour.system.warning.text` | `--iress-colour-system-warning-text` | `#825400` | Used for the text colour of warning alerts. | system.warning.surface |
 
 ### System — Info
@@ -100,10 +100,10 @@ Provides additional helpful context.
 | Token | CSS Variable | Value | Description | AA-Compliant Pairings |
 | --- | --- | --- | --- | --- |
 | `colour.system.info.fill` | `--iress-colour-system-info-fill` | `#669AFF` | Used for the border of info alerts and toasts and the background of info badges. | system.info.onFill |
-| `colour.system.info.fillHover` | `--iress-colour-system-info-fillHover` | `#5685E1` | Used for the hover state of primary info buttons. | system.info.onFill |
-| `colour.system.info.onFill` | `--iress-colour-system-info-onFill` | `#121D33` | Used for the foreground colour of info badges. | system.info.fill |
+| `colour.system.info.fillHover` | `--iress-colour-system-info-fill-hover` | `#5685E1` | Used for the hover state of primary info buttons. | system.info.onFill |
+| `colour.system.info.onFill` | `--iress-colour-system-info-on-fill` | `#121D33` | Used for the foreground colour of info badges. | system.info.fill |
 | `colour.system.info.surface` | `--iress-colour-system-info-surface` | `#E5EEFF` | Used for the background colour of info alerts and toasts. | system.info.text, neutral.90 |
-| `colour.system.info.surfaceHover` | `--iress-colour-system-info-surfaceHover` | `#CCDEFF` | Used for the hover state of secondary info buttons. | system.info.text, neutral.90 |
+| `colour.system.info.surfaceHover` | `--iress-colour-system-info-surface-hover` | `#CCDEFF` | Used for the hover state of secondary info buttons. | system.info.text, neutral.90 |
 | `colour.system.info.text` | `--iress-colour-system-info-text` | `#0047ab` | Used for the text colour of info alerts and toasts. | system.info.surface |
 
 ### Data — Subtle
@@ -144,8 +144,8 @@ These tokens govern the interface's behavior during user engagement, ensuring cl
 
 | Token | CSS Variable | Value | Description | AA-Compliant Pairings |
 | --- | --- | --- | --- | --- |
-| `colour.globalInteractions.backdrop` | `--iress-colour-globalInteractions-backdrop` | `#61656bcc` | By dimming the underlying interface, the Backdrop reduces cognitive load and establishes a clear depth of field, signalling that the user's attention is required exclusively on the foreground element. | neutral.10 |
-| `colour.globalInteractions.focusRing` | `--iress-colour-globalInteractions-focusRing` | `#005BFF` | A high-contrast "halo" used to identify the currently active element during keyboard navigation. Applied with a 2px width and 2px offset to ensure the indicator remains distinct from the component border, satisfying WCAG 2.4.7 for visibility. | neutral.10 |
+| `colour.globalInteractions.backdrop` | `--iress-colour-global-interactions-backdrop` | `#61656bcc` | By dimming the underlying interface, the Backdrop reduces cognitive load and establishes a clear depth of field, signalling that the user's attention is required exclusively on the foreground element. | neutral.10 |
+| `colour.globalInteractions.focusRing` | `--iress-colour-global-interactions-focus-ring` | `#005BFF` | A high-contrast "halo" used to identify the currently active element during keyboard navigation. Applied with a 2px width and 2px offset to ensure the indicator remains distinct from the component border, satisfying WCAG 2.4.7 for visibility. | neutral.10 |
 
 ## Spacing Tokens
 
@@ -197,8 +197,8 @@ Component-specific radius tokens that can be overridden for branding.
 | Token | CSS Variable | Value | Description |
 | --- | --- | --- | --- |
 | `typography.base.size` | `--iress-typography-base-size` | `.875rem` | This is the base font size, and is used to calculate the font sizes of each token. |
-| `typography.base.headingFont` | `--iress-typography-base-headingFont` | `Ubuntu, Helvetica, sans-serif` | This is the base font family for headings, used for heading tokens. |
-| `typography.base.bodyFont` | `--iress-typography-base-bodyFont` | `Inter, Helvetica, sans-serif` | This is the base font family for body, used for body tokens. |
+| `typography.base.headingFont` | `--iress-typography-base-heading-font` | `Ubuntu, Helvetica, sans-serif` | This is the base font family for headings, used for heading tokens. |
+| `typography.base.bodyFont` | `--iress-typography-base-body-font` | `Inter, Helvetica, sans-serif` | This is the base font family for body, used for body tokens. |
 
 ### Headings
 

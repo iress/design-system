@@ -112,20 +112,38 @@ function App() {
 
 Most IDS components accept styling props for layout adjustments:
 
-| Prop                     | Purpose             | Values                                                              |
-| ------------------------ | ------------------- | ------------------------------------------------------------------- |
-| `m`                      | Margin (all sides)  | Spacing tokens: `"0"` – `"10"`, `"auto"`                            |
-| `my`                     | Margin vertical     | Same as `m`                                                         |
-| `mx`                     | Margin horizontal   | Same as `m`                                                         |
-| `p`                      | Padding (all sides) | Spacing tokens: `"0"` – `"10"`                                      |
-| `py`                     | Padding vertical    | Same as `p`                                                         |
-| `px`                     | Padding horizontal  | Same as `p`                                                         |
-| `bg`                     | Background colour   | Colour tokens: `"colour.primary.fill"`, `"colour.neutral.20"`, etc. |
-| `color`                  | Text colour         | Colour tokens: `"colour.neutral.80"`, `"colour.primary.text"`, etc. |
-| `borderRadius`           | Border radius       | Radius tokens: `"radius.0"` – `"radius.4"`                          |
-| `flex`                   | Flex grow           | `"1"` only                                                          |
-| `maxWidth`               | Max width           | Size tokens                                                         |
-| `hideFrom` / `hideBelow` | Responsive hide     | Breakpoints: `"sm"`, `"md"`, `"lg"`, `"xl"`                         |
+| Prop | Purpose | Values |
+| --- | --- | --- |
+| `alignSelf` | Override flex alignment | `"start"`, `"end"`, `"center"`, `"stretch"` (responsive) |
+| `bg` | Background colour | Colour tokens: `"colour.primary.fill"`, `"colour.neutral.20"`, `"alt"`, etc. |
+| `borderRadius` | Border radius | Radius tokens: `"radius.0"` – `"radius.4"`, `"none"` (responsive) |
+| `color` | Text colour | Colour tokens: `"colour.neutral.80"`, `"colour.primary.text"`, etc. |
+| `flex` | Flex grow | `"1"` only |
+| `focusable` | Apply focus ring | `"true"`, `"within"` |
+| `hideFrom` | Hide from breakpoint up | `true`, or breakpoints: `"sm"`, `"md"`, `"lg"`, `"xl"` |
+| `hideBelow` | Hide below breakpoint | Breakpoints: `"sm"`, `"md"`, `"lg"`, `"xl"` |
+| `maxWidth` | Max width | Size tokens: `"container.sm"`, `"container.md"`, etc. |
+| `m` | Margin (all sides) | Spacing tokens: `"xs"` – `"xl"`, `"spacing.1"` – `"spacing.10"`, `"auto"`, negatives (responsive) |
+| `mx` | Margin horizontal | Same as `m` (responsive) |
+| `my` | Margin vertical | Same as `m` (responsive) |
+| `mt` | Margin top | Same as `m` (responsive) |
+| `mr` | Margin right | Same as `m` (responsive) |
+| `mb` | Margin bottom | Same as `m` (responsive) |
+| `ml` | Margin left | Same as `m` (responsive) |
+| `noGutter` | Remove last-child bottom margin | `true` / `false` |
+| `p` | Padding (all sides) | Spacing tokens: `"xs"` – `"xl"`, `"spacing.1"` – `"spacing.10"` (responsive) |
+| `px` | Padding horizontal | Same as `p` (responsive) |
+| `py` | Padding vertical | Same as `p` (responsive) |
+| `pt` | Padding top | Same as `p` (responsive) |
+| `pr` | Padding right | Same as `p` (responsive) |
+| `pb` | Padding bottom | Same as `p` (responsive) |
+| `pl` | Padding left | Same as `p` (responsive) |
+| `scrollable` | Enable overflow scrolling | `true`, `"x"`, `"y"` |
+| `srOnly` | Screen-reader only | `true` / `false` (responsive) |
+| `stretch` | Fill parent height | `true` / `false` |
+| `textAlign` | Text alignment | `"left"`, `"right"`, `"center"`, `"justify"`, `"inherit"` (responsive) |
+| `textStyle` | Typography style | `"typography.body.sm"`, `"typography.body.md"`, `"typography.heading.1"` – `"typography.heading.5"`, `"typography.code"` (responsive) |
+| `width` | Element width | Size tokens: `"input.2"` – `"input.16"`, `"input.25perc"` – `"input.100perc"`, `"auto"` (responsive) |
 
 ## Translation Examples
 

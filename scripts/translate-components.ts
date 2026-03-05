@@ -1001,6 +1001,30 @@ function wrapBareJsxInCodeFences(content: string): string {
   return outputLines.join('\n');
 }
 
+// ─── Styling Props Reference Table Generation ───────────────
+
+import { stylingPropsReference } from '../packages/components/docs/StylingProps/stylingPropsReference.js';
+
+/**
+ * Generate a markdown table from the styling props reference data.
+ * Imports data directly from the shared source file
+ * (`packages/components/docs/StylingProps/stylingPropsReference.ts`)
+ * so the AI documentation always matches the Storybook table.
+ */
+function generateStylingPropsReferenceTable(): string {
+  const header = '| JSX Prop | CSS Property | Token Mapping | Responsive |';
+  const separator = '| --- | --- | --- | --- |';
+  const rows = stylingPropsReference.map((entry) => {
+    const tokenMapping = Array.isArray(entry.tokenMapping)
+      ? entry.tokenMapping.join(', ')
+      : entry.tokenMapping;
+    const responsive = entry.responsive ? '✓' : '';
+    return `| \`${entry.jsxProp}\` | ${entry.cssProperty} | ${tokenMapping} | ${responsive} |`;
+  });
+
+  return [header, separator, ...rows].join('\n');
+}
+
 /**
  * Transform raw Storybook MDX content to clean AI-consumable markdown.
  */
@@ -1476,12 +1500,26 @@ function buildGuideOutput(
 ): string {
   const storybookUrl = `${STORYBOOK_URL}/?path=/docs/${STORYBOOK_REF_PREFIX}${doc.guideSection}-${doc.guideSbSlug}--docs`;
 
+  let body = transformed;
+
+  // ── Styling Props Reference: inject the full table ──
+  // The translator converts <ComponentExample of={ComponentStories.Reference} />
+  // to a Storybook link. For the styling-props-reference guide, we insert a
+  // complete markdown table so AI consumers can read all props without loading
+  // Storybook.
+  if (doc.slug === 'styling-props-reference') {
+    const referenceStoryLink =
+      /\[View "Reference" example in Storybook →\]\([^)]+\)/;
+    const table = generateStylingPropsReferenceTable();
+    body = body.replace(referenceStoryLink, (link) => `${table}\n\n${link}`);
+  }
+
   let output = '';
   output += `# ${title}\n\n`;
   // Description is already the first paragraph in the body — don't duplicate it
   output += `> **Guide:** \`@iress-oss/ids-components\`\n`;
   output += `> **Storybook:** [${title} in Storybook](${storybookUrl})\n\n`;
-  output += transformed;
+  output += body;
   output += '\n\n---\n\n';
   output += `*View in Storybook: [${storybookUrl}](${storybookUrl})*\n`;
 
