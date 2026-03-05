@@ -310,7 +310,9 @@ const Input = <
             inputProps?.onFocus?.(e);
 
             if (!interactedUsingMouse.current) {
-              queueMicrotask(() => e.target.select());
+              if (e.relatedTarget && formatter) {
+                queueMicrotask(() => e.target.select());
+              }
             } else {
               interactedUsingMouse.current = null;
             }
