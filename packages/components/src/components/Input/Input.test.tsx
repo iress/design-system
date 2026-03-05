@@ -175,14 +175,17 @@ describe('IressInput', () => {
       expect(input).not.toHaveSelection('hello');
     });
 
-    it('does not select text on programmatic focus without relatedTarget (e.g. password manager autofill)', async () => {
+    it('does not select text on tab focus when no formatter is set', async () => {
       const screen = render(<IressInput defaultValue="hello" />);
 
       const input = screen.getByRole('textbox') as HTMLInputElement;
       const selectSpy = vi.spyOn(input, 'select');
 
-      input.focus();
-      await waitFor(() => expect(input).toHaveFocus());
+      await userEvent.tab();
+      expect(input).toHaveFocus();
+
+      // Flush the microtask queue so a queued select() would have fired
+      await new Promise<void>((resolve) => queueMicrotask(resolve));
 
       expect(selectSpy).not.toHaveBeenCalled();
       selectSpy.mockRestore();
