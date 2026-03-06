@@ -107,13 +107,16 @@ const ActiveIndicator = (props: IressUnstyledProps) => {
   const tabSet = useContext(TabSetContext);
 
   useEffect(() => {
+    const activeTab = tabSet?.active;
     const activeTimeout = setTimeout(() => {
-      if (tabSet?.active) {
-        const { offsetLeft, scrollWidth } = tabSet.active;
+      if (activeTab) {
+        const { offsetLeft, scrollWidth } = activeTab;
         setStyle({
           left: `${offsetLeft}px`,
           width: `${scrollWidth}px`,
         });
+      } else {
+        setStyle({});
       }
     }, 150);
     return () => clearTimeout(activeTimeout);

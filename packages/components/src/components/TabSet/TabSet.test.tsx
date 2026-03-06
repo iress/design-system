@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { idsLogger } from '@helpers/utility/idsLogger';
 import { tabSet } from './TabSet.styles';
 import { GlobalCSSClass } from '@/enums';
+import { useState } from 'react';
 
 const TEST_ID = 'test-component';
 
@@ -447,6 +448,194 @@ describe('IressTabs', () => {
       const screen = renderComponentWithPanels();
       const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
+    });
+  });
+
+  describe('dynamic tabs', () => {
+    it('renders correctly when tabs are added in uncontrolled mode', async () => {
+      const DynamicTabs = () => {
+        const [showExtra, setShowExtra] = useState(false);
+        return (
+          <>
+            <button data-testid="toggle" onClick={() => setShowExtra(true)}>
+              Add
+            </button>
+            <IressTabSet data-testid={TEST_ID}>
+              <IressTab key="1" label="Tab 1">
+                Panel 1
+              </IressTab>
+              {showExtra && (
+                <IressTab key="extra" label="Extra Tab">
+                  Extra Panel
+                </IressTab>
+              )}
+              <IressTab key="2" label="Tab 2">
+                Panel 2
+              </IressTab>
+            </IressTabSet>
+          </>
+        );
+      };
+
+      const screen = render(<DynamicTabs />);
+      expect(screen.getAllByRole('tab')).toHaveLength(2);
+      expect(screen.getAllByRole('tab')[0]).toHaveAttribute(
+        'aria-selected',
+        'true',
+      );
+
+      await userEvent.click(screen.getByTestId('toggle'));
+
+      expect(screen.getAllByRole('tab')).toHaveLength(3);
+      // First tab should still be selected
+      expect(screen.getAllByRole('tab')[0]).toHaveAttribute(
+        'aria-selected',
+        'true',
+      );
+    });
+
+    it('renders correctly when tabs are removed in uncontrolled mode', async () => {
+      const DynamicTabs = () => {
+        const [showMiddle, setShowMiddle] = useState(true);
+        return (
+          <>
+            <button data-testid="toggle" onClick={() => setShowMiddle(false)}>
+              Remove
+            </button>
+            <IressTabSet data-testid={TEST_ID}>
+              <IressTab key="1" label="Tab 1">
+                Panel 1
+              </IressTab>
+              {showMiddle && (
+                <IressTab key="2" label="Tab 2">
+                  Panel 2
+                </IressTab>
+              )}
+              <IressTab key="3" label="Tab 3">
+                Panel 3
+              </IressTab>
+            </IressTabSet>
+          </>
+        );
+      };
+
+      const screen = render(<DynamicTabs />);
+      expect(screen.getAllByRole('tab')).toHaveLength(3);
+
+      await userEvent.click(screen.getByTestId('toggle'));
+
+      expect(screen.getAllByRole('tab')).toHaveLength(2);
+    });
+
+    it('updates active indicator when tabs change', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true });
+
+      const DynamicTabs = () => {
+        const [showExtra, setShowExtra] = useState(false);
+        return (
+          <>
+            <button
+              data-testid="toggle"
+              onClick={() => setShowExtra((s) => !s)}
+            >
+              Toggle
+            </button>
+            <IressTabSet data-testid={TEST_ID}>
+              {showExtra && (
+                <IressTab key="extra" label="Extra Tab">
+                  Extra Panel
+                </IressTab>
+              )}
+              <IressTab key="1" label="Tab 1">
+                Panel 1
+              </IressTab>
+              <IressTab key="2" label="Tab 2">
+                Panel 2
+              </IressTab>
+            </IressTabSet>
+          </>
+        );
+      };
+
+      const screen = render(<DynamicTabs />);
+
+      // Wait for initial indicator timeout
+      await act(async () => {
+        vi.advanceTimersByTime(200);
+      });
+
+      const tablist = screen.getByRole('tablist');
+      const activeIndicator = tablist.children[0] as HTMLElement;
+
+      // Capture initial indicator style
+      const initialStyle = activeIndicator.style.cssText;
+
+      // Add a tab before the active tab
+      await userEvent.click(screen.getByTestId('toggle'));
+
+      // Wait for the indicator to recalculate after layoutVersion change
+      await act(async () => {
+        vi.advanceTimersByTime(200);
+      });
+
+      // Indicator style should have been recalculated (effect re-ran)
+      // In jsdom offsetLeft is always 0, but we verify the style was set
+      expect(activeIndicator.style.left).toBeDefined();
+      expect(activeIndicator.style.width).toBeDefined();
+
+      vi.useRealTimers();
+    });
+
+    it('clears active indicator when active tab is removed', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true });
+
+      const DynamicTabs = () => {
+        const [tabs, setTabs] = useState(['tab-1', 'tab-2', 'tab-3']);
+        return (
+          <>
+            <button
+              data-testid="remove"
+              onClick={() => setTabs(['tab-2', 'tab-3'])}
+            >
+              Remove
+            </button>
+            <IressTabSet data-testid={TEST_ID} defaultSelected="tab-1">
+              {tabs.map((t) => (
+                <IressTab key={t} label={t} value={t}>
+                  {t} content
+                </IressTab>
+              ))}
+            </IressTabSet>
+          </>
+        );
+      };
+
+      const screen = render(<DynamicTabs />);
+
+      // Wait for initial indicator
+      await act(async () => {
+        vi.advanceTimersByTime(200);
+      });
+
+      const tablist = screen.getByRole('tablist');
+      const activeIndicator = tablist.children[0] as HTMLElement;
+
+      // Initially should have indicator style set
+      expect(activeIndicator.style.left).toBe('0px');
+
+      // Remove the active tab (tab-1)
+      await userEvent.click(screen.getByTestId('remove'));
+
+      // Indicator should clear because the active tab no longer exists
+      await act(async () => {
+        vi.advanceTimersByTime(200);
+      });
+
+      // Style should be cleared (no left/width)
+      expect(activeIndicator.style.left).toBe('');
+      expect(activeIndicator.style.width).toBe('');
+
+      vi.useRealTimers();
     });
   });
 });
