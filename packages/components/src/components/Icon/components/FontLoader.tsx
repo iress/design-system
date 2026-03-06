@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
 import type { ShadowContainer } from '@/types';
 import type { IressTestProps } from '@/interfaces';
+import { getNonce } from '@helpers/dom/getNonce';
 
 export interface FontLoaderProps extends IressTestProps {
   /**
@@ -58,18 +59,23 @@ export const FontLoader = ({
   }
 
   const styleContent = `@import url("${url}") layer(reset);`;
+  const nonce = getNonce() ?? undefined;
 
   return (
     <>
       {!onlyShadow &&
         createPortal(
-          <style data-url={url}>{styleContent}</style>,
+          <style nonce={nonce} data-url={url}>
+            {styleContent}
+          </style>,
           document.head,
           `${keyPrefix}-head`,
         )}
       {target &&
         createPortal(
-          <style data-url={url}>{styleContent}</style>,
+          <style nonce={nonce} data-url={url}>
+            {styleContent}
+          </style>,
           target,
           `${keyPrefix}-shadow`,
         )}

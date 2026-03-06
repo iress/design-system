@@ -169,7 +169,7 @@ export const IressIconProvider = <P extends IconType = 'material'>({
       {children}
       {type === 'material' && container && (
         <FontLoader
-          url={`https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@${MATERIAL_SYMBOLS.opticalSize},${MATERIAL_SYMBOLS.weight},0..1,${MATERIAL_SYMBOLS.grade}`}
+          url={`https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@${MATERIAL_SYMBOLS.opticalSize},${MATERIAL_SYMBOLS.weight},0..1,${MATERIAL_SYMBOLS.grade}&icon_names=home`}
           container={container}
           onlyShadow
           keyPrefix="material-symbols-fonts"
