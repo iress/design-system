@@ -31,16 +31,22 @@ describe('useDynamicFontSubsetting', () => {
       configurable: true,
     });
 
-    // Clear any existing style elements
+    // Clear any existing style elements and nonce meta tags
     document.querySelectorAll('style[data-test-font]').forEach((el) => {
+      el.remove();
+    });
+    document.querySelectorAll("meta[name='csp-nonce']").forEach((el) => {
       el.remove();
     });
   });
 
   afterEach(() => {
     vi.clearAllMocks();
-    // Clean up style elements
+    // Clean up style elements and nonce meta tags
     document.querySelectorAll('style[data-test-font]').forEach((el) => {
+      el.remove();
+    });
+    document.querySelectorAll("meta[name='csp-nonce']").forEach((el) => {
       el.remove();
     });
   });
@@ -225,10 +231,13 @@ describe('useDynamicFontSubsetting', () => {
         }),
       );
 
-      // Wait a bit to ensure no fetch happens
+      // Wait a bit to ensure no style injection happens
       await new Promise((resolve) => setTimeout(resolve, 100));
 
       expect(mockFetch).not.toHaveBeenCalled();
+      expect(
+        document.querySelector('style[data-test-font]'),
+      ).not.toBeInTheDocument();
     });
 
     it('returns empty loadedIcons when disabled', () => {
@@ -290,7 +299,7 @@ describe('useDynamicFontSubsetting', () => {
   });
 
   describe('URL caching', () => {
-    it('does not refetch if URL has not changed', async () => {
+    it('does not recreate style if URL has not changed', async () => {
       const icons = new Set(['icon1']);
 
       const { rerender } = renderHook(
@@ -525,6 +534,51 @@ describe('useDynamicFontSubsetting', () => {
         expect(styleElements[0].getAttribute('data-url')).toBe(
           'https://fonts.test/icon2',
         );
+      });
+    });
+  });
+
+  describe('CSP nonce support', () => {
+    it('adds nonce attribute to style element when csp-nonce meta tag exists', async () => {
+      const meta = document.createElement('meta');
+      meta.setAttribute('name', 'csp-nonce');
+      meta.setAttribute('content', 'test-nonce-123');
+      document.head.appendChild(meta);
+
+      const icons = new Set(['icon1']);
+
+      renderHook(() =>
+        useDynamicFontSubsetting({
+          icons,
+          buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
+          dataAttribute: 'test-font',
+          fontFamily: 'Test Font',
+        }),
+      );
+
+      await waitFor(() => {
+        const styleElement = document.querySelector('style[data-test-font]');
+        expect(styleElement).toBeInTheDocument();
+        expect(styleElement?.getAttribute('nonce')).toBe('test-nonce-123');
+      });
+    });
+
+    it('does not add nonce attribute when csp-nonce meta tag is absent', async () => {
+      const icons = new Set(['icon1']);
+
+      renderHook(() =>
+        useDynamicFontSubsetting({
+          icons,
+          buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
+          dataAttribute: 'test-font',
+          fontFamily: 'Test Font',
+        }),
+      );
+
+      await waitFor(() => {
+        const styleElement = document.querySelector('style[data-test-font]');
+        expect(styleElement).toBeInTheDocument();
+        expect(styleElement?.getAttribute('nonce')).toBeNull();
       });
     });
   });

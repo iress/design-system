@@ -11,6 +11,7 @@ import idsCss from '../../styled-system/styles.css?raw';
 import { defaultFonts } from '@iress-oss/ids-tokens';
 import { type IressUnstyledProps } from '@/types';
 import { IressProvider } from '@/components/Provider';
+import { getNonce } from '@helpers/dom/getNonce';
 
 export interface IressShadowProps extends IressUnstyledProps {
   /**
@@ -65,9 +66,7 @@ export const IressShadow = forwardRef<ShadowRoot | null, IressShadowProps>(
         const shadow = hostRef.current.attachShadow({ mode: 'open' });
 
         const idsStyle = document.createElement('style');
-        const nonce = document
-          .querySelector("meta[name='csp-nonce']")
-          ?.getAttribute('content');
+        const nonce = getNonce();
         if (nonce) idsStyle.setAttribute('nonce', nonce);
 
         idsStyle.textContent = idsCss;
@@ -117,9 +116,7 @@ export const IressShadow = forwardRef<ShadowRoot | null, IressShadowProps>(
           return;
         }
         const style = document.createElement('style');
-        const nonce = document
-          .querySelector("meta[name='csp-nonce']")
-          ?.getAttribute('content');
+        const nonce = getNonce();
         if (nonce) style.setAttribute('nonce', nonce);
         style.setAttribute('id', key);
         style.textContent = contents;

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { getNonce } from '@helpers/dom/getNonce';
 
 export interface UseDynamicFontSubsettingOptions {
   /**
@@ -151,7 +152,9 @@ export const useDynamicFontSubsetting = ({
 
         // Create new style element with CSS in reset layer
         // This ensures Panda CSS utilities can override Material Symbols defaults
+        const nonce = getNonce();
         const style = document.createElement('style');
+        if (nonce) style.setAttribute('nonce', nonce);
         style.textContent = layeredCSS;
         style.setAttribute(`data-${dataAttribute}`, 'true');
         style.setAttribute('data-url', url);
