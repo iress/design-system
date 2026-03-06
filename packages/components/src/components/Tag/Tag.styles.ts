@@ -7,14 +7,15 @@ export const tag = sva({
       // Performance: CSS containment limits style recalculation scope
       contain: 'layout style',
       alignItems: 'center',
-      bg: 'colour.neutral.20',
+      bg: '[var(--tag-bg, {colors.colour.neutral.20})]',
       borderRadius: 'radius.system.tag',
       border: 'divider',
-      color: 'colour.neutral.80',
+      borderColor: '[var(--tag-border)]',
+      color: '[var(--tag-color, {colors.colour.neutral.80})]',
       display: 'inline-flex',
       gap: 'spacing.1',
       p: 'spacing.1',
-      transition: '[all .2s]',
+      transition: '[all 0.2s ease-in-out]',
       textStyle: 'typography.body.sm',
       focusable: 'has-button',
     },
@@ -97,65 +98,65 @@ export const tag = sva({
     mode: {
       '10': {
         root: {
-          bg: 'colour.data.subtle.10',
-          borderColor: 'colour.data.subtle.10',
-          color: 'colour.data.bold.10',
+          '--tag-bg': '{colors.colour.data.subtle.10}',
+          '--tag-border': '{colors.colour.data.subtle.10}',
+          '--tag-color': '{colors.colour.data.bold.10}',
         },
       },
       '20': {
         root: {
-          bg: 'colour.data.subtle.20',
-          borderColor: 'colour.data.subtle.20',
-          color: 'colour.data.bold.20',
+          '--tag-bg': '{colors.colour.data.subtle.20}',
+          '--tag-border': '{colors.colour.data.subtle.20}',
+          '--tag-color': '{colors.colour.data.bold.20}',
         },
       },
       '30': {
         root: {
-          bg: 'colour.data.subtle.30',
-          borderColor: 'colour.data.subtle.30',
-          color: 'colour.data.bold.30',
+          '--tag-bg': '{colors.colour.data.subtle.30}',
+          '--tag-border': '{colors.colour.data.subtle.30}',
+          '--tag-color': '{colors.colour.data.bold.30}',
         },
       },
       '40': {
         root: {
-          bg: 'colour.data.subtle.40',
-          borderColor: 'colour.data.subtle.40',
-          color: 'colour.data.bold.40',
+          '--tag-bg': '{colors.colour.data.subtle.40}',
+          '--tag-border': '{colors.colour.data.subtle.40}',
+          '--tag-color': '{colors.colour.data.bold.40}',
         },
       },
       '50': {
         root: {
-          bg: 'colour.data.subtle.50',
-          borderColor: 'colour.data.subtle.50',
-          color: 'colour.data.bold.50',
+          '--tag-bg': '{colors.colour.data.subtle.50}',
+          '--tag-border': '{colors.colour.data.subtle.50}',
+          '--tag-color': '{colors.colour.data.bold.50}',
         },
       },
       '60': {
         root: {
-          bg: 'colour.data.subtle.60',
-          borderColor: 'colour.data.subtle.60',
-          color: 'colour.data.bold.60',
+          '--tag-bg': '{colors.colour.data.subtle.60}',
+          '--tag-border': '{colors.colour.data.subtle.60}',
+          '--tag-color': '{colors.colour.data.bold.60}',
         },
       },
       '70': {
         root: {
-          bg: 'colour.data.subtle.70',
-          borderColor: 'colour.data.subtle.70',
-          color: 'colour.data.bold.70',
+          '--tag-bg': '{colors.colour.data.subtle.70}',
+          '--tag-border': '{colors.colour.data.subtle.70}',
+          '--tag-color': '{colors.colour.data.bold.70}',
         },
       },
       '80': {
         root: {
-          bg: 'colour.data.subtle.80',
-          borderColor: 'colour.data.subtle.80',
-          color: 'colour.data.bold.80',
+          '--tag-bg': '{colors.colour.data.subtle.80}',
+          '--tag-border': '{colors.colour.data.subtle.80}',
+          '--tag-color': '{colors.colour.data.bold.80}',
         },
       },
       '90': {
         root: {
-          bg: 'colour.data.subtle.90',
-          borderColor: 'colour.data.subtle.90',
-          color: 'colour.data.bold.90',
+          '--tag-bg': '{colors.colour.data.subtle.90}',
+          '--tag-border': '{colors.colour.data.subtle.90}',
+          '--tag-color': '{colors.colour.data.bold.90}',
         },
       },
     },

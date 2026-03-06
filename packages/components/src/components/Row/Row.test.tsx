@@ -15,15 +15,9 @@ describe('IressRow', () => {
 
     const element = getByTestId(TEST_ID);
 
-    expect(element).toHaveClass(
-      'jc_flex-start',
-      'ai_flex-start',
-      'test-class',
-      GlobalCSSClass.Row,
-    );
-
+    expect(element).toHaveClass('test-class', GlobalCSSClass.Row);
+    expect(element).toHaveAttribute('data-flex-dir', 'row');
     expect(element).not.toHaveClass('cg_spacing.0');
-
     expect(getByTestId('children')).toBeInTheDocument();
   });
 
@@ -83,7 +77,7 @@ describe('IressRow', () => {
           <IressRow data-testid={TEST_ID} horizontalAlign="between" />,
         );
 
-        expect(getByTestId(TEST_ID)).toHaveClass('jc_space-between');
+        expect(getByTestId(TEST_ID)).toHaveClass('ha_between');
       });
     });
 
@@ -93,7 +87,7 @@ describe('IressRow', () => {
           <IressRow data-testid={TEST_ID} verticalAlign="bottom" />,
         );
 
-        expect(getByTestId(TEST_ID)).toHaveClass('ai_flex-end');
+        expect(getByTestId(TEST_ID)).toHaveClass('va_bottom');
       });
     });
   });

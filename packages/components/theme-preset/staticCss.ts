@@ -6,7 +6,7 @@ import { spanCompositions } from './utilities/span';
 import { offsetCompositions } from './utilities/offset';
 import { MARGIN_TOKENS, SPACING_TOKENS } from './tokens/spacing';
 import { breakpoints } from './tokens/breakpoints';
-import { HORIZONTAL_ALIGNS } from '../src/constants';
+import { HORIZONTAL_ALIGNS, VERTICAL_ALIGNS } from '../src/constants';
 
 /**
  * Allowed CSS properties for all components.
@@ -15,12 +15,14 @@ import { HORIZONTAL_ALIGNS } from '../src/constants';
  *
  * Note: If you update this list, you should also update the `IressCSSProps` interface in `packages/components/src/interfaces.ts`
  */
-const allowedCssProps = {
-  alignSelf: ['start', 'end', 'center', 'stretch'],
-  borderRadius: Object.keys(radii),
+
+/**
+ * Properties that need responsive variants (used at different breakpoints).
+ * These generate classes for base + each breakpoint (7× per value).
+ */
+const responsiveProps = {
   columnGap: SPACING_TOKENS,
   gap: SPACING_TOKENS,
-  horizontalAlign: [...HORIZONTAL_ALIGNS],
 
   // We can't use margin shorthand because it won't generate the correct CSS
   margin: MARGIN_TOKENS,
@@ -41,7 +43,6 @@ const allowedCssProps = {
   paddingRight: SPACING_TOKENS,
   rowGap: SPACING_TOKENS,
   srOnly: ['true', 'false'],
-  textAlign: ['center', 'left', 'right', 'justify', 'inherit'],
   textStyle: Object.keys(textCompositions),
   width: ['*'],
 
@@ -53,14 +54,27 @@ const allowedCssProps = {
   gutter: SPACING_TOKENS,
 };
 
+/**
+ * Properties that don't need responsive variants (rarely change per breakpoint).
+ * These generate only base classes (1× per value).
+ */
+const staticProps = {
+  alignSelf: ['start', 'end', 'center', 'stretch'],
+  borderRadius: Object.keys(radii),
+  horizontalAlign: [...HORIZONTAL_ALIGNS],
+  verticalAlign: [...VERTICAL_ALIGNS],
+  textAlign: ['center', 'left', 'right', 'justify', 'inherit'],
+};
+
 export const staticCss: ExtendableOptions['staticCss'] = {
   css: [
     {
-      properties: allowedCssProps,
+      properties: responsiveProps,
       responsive: true,
     },
     {
       properties: {
+        ...staticProps,
         bg: Object.keys(colors),
         color: Object.keys(colors),
         flex: ['1'],

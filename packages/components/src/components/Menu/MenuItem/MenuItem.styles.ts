@@ -13,7 +13,7 @@ export const menuItem = sva({
       textAlign: 'left',
       textDecoration: 'none',
       textStyle: 'typography.body.md',
-      transition: '[0.2s all ease-in-out]',
+      transition: '[all 0.2s ease-in-out]',
 
       _hover: {
         bg: 'colour.neutral.20',

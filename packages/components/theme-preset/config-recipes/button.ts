@@ -169,8 +169,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              'color-mix(in srgb, {colors.colour.primary.fill}, transparent 80%) 0px 0px 0px 2px',
+            layerStyle: 'focusRing.primary.sm',
           },
 
           '&[data-active="true"]': {
@@ -195,8 +194,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              'color-mix(in srgb, {colors.colour.primary.fill}, transparent 90%) 0px 0px 0px 2px',
+            layerStyle: 'focusRing.primary.subtle',
           },
 
           '&[data-active="true"]': {
@@ -220,8 +218,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              'color-mix(in srgb, {colors.colour.primary.fill}, transparent 80%) 0px 0px 0px 2px',
+            layerStyle: 'focusRing.primary.sm',
           },
 
           '&[data-active="true"]': {
@@ -245,8 +242,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              'color-mix(in srgb, {colors.colour.primary.fill}, transparent 90%) 0px 0px 0px 2px',
+            layerStyle: 'focusRing.primary.subtle',
           },
 
           '&[data-active="true"]': {
@@ -272,8 +268,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              'color-mix(in srgb, {colors.colour.primary.fill}, transparent 90%) 0px 0px 0px 3px',
+            layerStyle: 'focusRing.primary.md',
           },
 
           '&[data-active="true"]': {
@@ -334,8 +329,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              'color-mix(in srgb, {colors.colour.system.danger.fill}, transparent 80%) 0px 0px 0px 3px',
+            layerStyle: 'focusRing.danger.md',
           },
         },
         spinner: {
@@ -360,8 +354,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              'color-mix(in srgb, {colors.colour.system.danger.surface}, transparent 40%) 0px 0px 0px 3px',
+            layerStyle: 'focusRing.danger.surface',
           },
         },
         spinner: {
@@ -382,8 +375,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              'color-mix(in srgb, {colors.colour.system.danger.surface}, transparent 40%) 0px 0px 0px 3px',
+            layerStyle: 'focusRing.danger.surface',
           },
         },
         spinner: {
@@ -404,8 +396,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              'color-mix(in srgb, {colors.colour.system.danger.surface}, transparent 40%) 0px 0px 0px 3px',
+            layerStyle: 'focusRing.danger.surface',
           },
         },
         spinner: {
@@ -444,8 +435,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              'color-mix(in srgb, {colors.colour.system.success.fill}, transparent 80%) 0px 0px 0px 3px',
+            layerStyle: 'focusRing.success.md',
           },
         },
         spinner: {
@@ -470,8 +460,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              'color-mix(in srgb, {colors.colour.system.success.surface}, transparent 40%) 0px 0px 0px 3px',
+            layerStyle: 'focusRing.success.surface',
           },
         },
         spinner: {
@@ -492,8 +481,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              'color-mix(in srgb, {colors.colour.system.success.surface}, transparent 40%) 0px 0px 0px 3px',
+            layerStyle: 'focusRing.success.surface',
           },
         },
         spinner: {
@@ -514,8 +502,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              'color-mix(in srgb, {colors.colour.system.success.surface}, transparent 40%) 0px 0px 0px 3px',
+            layerStyle: 'focusRing.success.surface',
           },
         },
         spinner: {
@@ -557,8 +544,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              '[color-mix(in srgb, {colors.colour.system.info.surface}, transparent 40%) 0px 0px 0px 3px]',
+            layerStyle: 'focusRing.info.surface',
           },
         },
         spinner: {
@@ -579,8 +565,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              '[color-mix(in srgb, {colors.colour.system.info.surface}, transparent 40%) 0px 0px 0px 3px]',
+            layerStyle: 'focusRing.info.surface',
           },
         },
         spinner: {
@@ -605,8 +590,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              '[color-mix(in srgb, {colors.colour.system.warning.surface}, transparent 40%) 0px 0px 0px 3px]',
+            layerStyle: 'focusRing.warning.surface',
           },
         },
         spinner: {
@@ -627,8 +611,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            boxShadow:
-              '[color-mix(in srgb, {colors.colour.system.warning.surface}, transparent 40%) 0px 0px 0px 3px]',
+            layerStyle: 'focusRing.warning.surface',
           },
         },
         spinner: {
@@ -721,5 +704,22 @@ export const buttonRecipe = defineSlotRecipe({
       },
     },
   ],
-  staticCss: ['*'],
+  staticCss: [
+    { mode: ['*'] },
+    { status: ['*'] },
+    { compact: ['*'] },
+    { fluid: ['true'] },
+    { loading: ['*'] },
+    { iconOnly: ['*'] },
+    { noWrap: ['*'] },
+    { inButtonGroup: ['*'] },
+    { active: ['*'] },
+    { mode: ['primary', 'secondary', 'tertiary', 'quaternary', 'muted'], status: ['danger'] },
+    { mode: ['primary', 'secondary', 'tertiary', 'quaternary', 'muted'], status: ['success'] },
+    { mode: ['secondary', 'tertiary'], status: ['info'] },
+    { mode: ['secondary', 'tertiary'], status: ['warning'] },
+    { mode: ['primary', 'secondary', 'tertiary', 'quaternary', 'muted'], loading: ['true'] },
+    { mode: ['tertiary'], inButtonGroup: ['true'] },
+    { mode: ['primary', 'secondary', 'tertiary', 'quaternary', 'muted'], active: ['true'] },
+  ],
 });

@@ -39,11 +39,7 @@ export type IressStackProps<
   /**
    * Sets the vertical alignment of the stack content.
    */
-  verticalAlign?:
-    | Omit<VerticalAligns, 'stretch'>
-    | 'between'
-    | 'around'
-    | 'evenly';
+  verticalAlign?: VerticalAligns;
 };
 
 export const IressStack = <
@@ -61,6 +57,7 @@ export const IressStack = <
   return (
     <Tag
       {...(restProps as IressStackProps<E>)}
+      data-flex-dir="column"
       className={cx(className, GlobalCSSClass.Stack)}
     />
   );

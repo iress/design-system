@@ -8,37 +8,4 @@ export const stack = cva({
       marginBlock: 'spacing.0', // If you stick it in a stack, you should be using gap instead of margin to space the items inside the stack
     },
   },
-  variants: {
-    horizontalAlign: {
-      center: {
-        alignItems: 'center',
-      },
-      left: {
-        alignItems: 'flex-start',
-      },
-      right: {
-        alignItems: 'flex-end',
-      },
-    },
-    verticalAlign: {
-      top: {
-        justifyContent: 'flex-start',
-      },
-      middle: {
-        justifyContent: 'center',
-      },
-      bottom: {
-        justifyContent: 'flex-end',
-      },
-      between: {
-        justifyContent: 'space-between',
-      },
-      around: {
-        justifyContent: 'space-around',
-      },
-      evenly: {
-        justifyContent: 'space-evenly',
-      },
-    },
-  },
 });

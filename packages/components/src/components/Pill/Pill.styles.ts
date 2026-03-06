@@ -3,7 +3,7 @@ import { cva } from '@/styled-system/css';
 export const pill = cva({
   base: {
     // Performance: CSS containment limits style recalculation scope
-    contain: 'layout style paint',
+    contain: 'layout style',
     display: 'inline-block',
     overflow: 'visible',
     textStyle: 'typography.body.sm',
@@ -18,60 +18,62 @@ export const pill = cva({
     py: 'spacing.1',
     px: 'spacing.2',
     verticalAlign: 'middle',
+    bg: '[var(--pill-bg)]',
+    color: '[var(--pill-color)]',
   },
   variants: {
     mode: {
       '10': {
-        bg: 'colour.data.bold.10',
-        color: 'colour.data.subtle.10',
+        '--pill-bg': '{colors.colour.data.bold.10}',
+        '--pill-color': '{colors.colour.data.subtle.10}',
       },
       '20': {
-        bg: 'colour.data.bold.20',
-        color: 'colour.data.subtle.20',
+        '--pill-bg': '{colors.colour.data.bold.20}',
+        '--pill-color': '{colors.colour.data.subtle.20}',
       },
       '30': {
-        bg: 'colour.data.bold.30',
-        color: 'colour.data.subtle.30',
+        '--pill-bg': '{colors.colour.data.bold.30}',
+        '--pill-color': '{colors.colour.data.subtle.30}',
       },
       '40': {
-        bg: 'colour.data.bold.40',
-        color: 'colour.data.subtle.40',
+        '--pill-bg': '{colors.colour.data.bold.40}',
+        '--pill-color': '{colors.colour.data.subtle.40}',
       },
       '50': {
-        bg: 'colour.data.bold.50',
-        color: 'colour.data.subtle.50',
+        '--pill-bg': '{colors.colour.data.bold.50}',
+        '--pill-color': '{colors.colour.data.subtle.50}',
       },
       '60': {
-        bg: 'colour.data.bold.60',
-        color: 'colour.data.subtle.60',
+        '--pill-bg': '{colors.colour.data.bold.60}',
+        '--pill-color': '{colors.colour.data.subtle.60}',
       },
       '70': {
-        bg: 'colour.data.bold.70',
-        color: 'colour.data.subtle.70',
+        '--pill-bg': '{colors.colour.data.bold.70}',
+        '--pill-color': '{colors.colour.data.subtle.70}',
       },
       '80': {
-        bg: 'colour.data.bold.80',
-        color: 'colour.data.subtle.80',
+        '--pill-bg': '{colors.colour.data.bold.80}',
+        '--pill-color': '{colors.colour.data.subtle.80}',
       },
       '90': {
-        bg: 'colour.data.bold.90',
-        color: 'colour.data.subtle.90',
+        '--pill-bg': '{colors.colour.data.bold.90}',
+        '--pill-color': '{colors.colour.data.subtle.90}',
       },
       danger: {
-        bg: 'colour.system.danger.fill',
-        color: 'colour.system.danger.onFill',
+        '--pill-bg': '{colors.colour.system.danger.fill}',
+        '--pill-color': '{colors.colour.system.danger.onFill}',
       },
       info: {
-        bg: 'colour.system.info.fill',
-        color: 'colour.system.info.onFill',
+        '--pill-bg': '{colors.colour.system.info.fill}',
+        '--pill-color': '{colors.colour.system.info.onFill}',
       },
       success: {
-        bg: 'colour.system.success.fill',
-        color: 'colour.system.success.onFill',
+        '--pill-bg': '{colors.colour.system.success.fill}',
+        '--pill-color': '{colors.colour.system.success.onFill}',
       },
       warning: {
-        bg: 'colour.system.warning.fill',
-        color: 'colour.system.warning.onFill',
+        '--pill-bg': '{colors.colour.system.warning.fill}',
+        '--pill-color': '{colors.colour.system.warning.onFill}',
       },
     },
   },
