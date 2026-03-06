@@ -103,10 +103,7 @@ export const spacing = {
   },
 };
 
-export const SPACING_TOKENS = Object.keys({
-  ...publicSpacing,
-  ...aliasSpacing,
-});
+export const SPACING_TOKENS = Object.keys(publicSpacing);
 
 export const MARGIN_TOKENS = [
   ...SPACING_TOKENS,

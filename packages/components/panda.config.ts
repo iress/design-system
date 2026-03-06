@@ -1,5 +1,7 @@
 import { defineConfig } from '@pandacss/dev';
 import themePreset from './theme-preset';
+import { codegenPrepareHook } from './theme-preset/hooks/codegenPrepareHook';
+import { cssgenDoneHook } from './theme-preset/hooks/cssgenDoneHook';
 
 export default defineConfig({
   // Whether to use css reset, will probably be enabled in version 6
@@ -27,9 +29,14 @@ export default defineConfig({
   jsxFramework: 'react',
 
   // Minify generated CSS (reduces bundle size for consumers using IressShadow)
-  minify: true,
+  minify: false,
 
   // Ensure token strictness so we catch changes in the design token schema
   strictTokens: true,
   strictPropertyValues: true,
+
+  hooks: {
+    'codegen:prepare': ({ artifacts }) => codegenPrepareHook(artifacts),
+    'cssgen:done': ({ artifact, content }) => cssgenDoneHook(artifact, content),
+  },
 });
