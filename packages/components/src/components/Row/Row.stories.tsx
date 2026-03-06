@@ -12,7 +12,7 @@ import {
   IressStack,
   VERTICAL_ALIGNS,
 } from '@/main';
-import { SPACING_TOKENS } from '@theme-preset/tokens/spacing';
+import { SPACING_AND_ALIAS_TOKENS } from '@theme-preset/tokens/spacing';
 import {
   CurrentBreakpoint,
   disableArgTypes,
@@ -130,7 +130,7 @@ export const Gutter: Story = {
   },
   render: (args) => (
     <IressStack maxWidth="container.xl" gap="xl">
-      {SPACING_TOKENS.map((spacing, index) => {
+      {SPACING_AND_ALIAS_TOKENS.map((spacing, index) => {
         return (
           <IressText key={spacing}>
             {index > 0 && <IressDivider mb="xl" />}

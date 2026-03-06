@@ -12,7 +12,7 @@ export const gutter = defineUtility({
     return {
       '--col-gap': spacing[value].value,
       marginInline: `calc(-1 * var(--col-gap) / 2)`,
-      columnGap: spacing.none.value,
+      columnGap: spacing['spacing.0'].value,
       rowGap: `var(--col-gap)`,
     };
   },

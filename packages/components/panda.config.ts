@@ -29,7 +29,7 @@ export default defineConfig({
   jsxFramework: 'react',
 
   // Minify generated CSS (reduces bundle size for consumers using IressShadow)
-  minify: false,
+  minify: true,
 
   // Ensure token strictness so we catch changes in the design token schema
   strictTokens: true,

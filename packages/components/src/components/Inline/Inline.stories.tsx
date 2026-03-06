@@ -7,7 +7,7 @@ import { IressStack } from '../Stack';
 import { IressText } from '../Text';
 import { IressContainer } from '../Container';
 import { HORIZONTAL_ALIGNS, VERTICAL_ALIGNS } from '@/constants';
-import { SPACING_TOKENS } from '@theme-preset/tokens/spacing';
+import { SPACING_AND_ALIAS_TOKENS } from '@theme-preset/tokens/spacing';
 import {
   CurrentBreakpoint,
   disableArgTypes,
@@ -103,7 +103,7 @@ export const Gap: Story = {
   },
   render: (args) => (
     <IressStack gap="spacing.10">
-      {SPACING_TOKENS.map((spacing) => (
+      {SPACING_AND_ALIAS_TOKENS.map((spacing) => (
         <IressText key={spacing}>
           <h2>{spacing}</h2>
           <IressInline {...args} gap={spacing as never} />

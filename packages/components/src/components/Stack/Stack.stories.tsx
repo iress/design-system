@@ -6,7 +6,7 @@ import { IressStack } from '.';
 import { IressText } from '../Text';
 import { IressButton } from '../Button';
 import { IressInline } from '../Inline';
-import { SPACING_TOKENS } from '@theme-preset/tokens/spacing';
+import { SPACING_AND_ALIAS_TOKENS } from '@theme-preset/tokens/spacing';
 import {
   CurrentBreakpoint,
   disableArgTypes,
@@ -82,7 +82,7 @@ export const Gap: Story = {
   },
   render: (args) => (
     <IressStack gap="spacing.4">
-      {SPACING_TOKENS.map((spacing) => (
+      {SPACING_AND_ALIAS_TOKENS.map((spacing) => (
         <IressText key={spacing}>
           <h2>{spacing}</h2>
           <IressStack {...args} gap={spacing as never} />
