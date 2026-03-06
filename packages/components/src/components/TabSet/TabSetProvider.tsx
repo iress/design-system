@@ -84,13 +84,19 @@ export const TabSetProvider = ({
   const register = useCallback(
     (node: HTMLElement, value?: FormControlValue) => {
       setNodes((prevSet) => {
-        let newSet = new Set(prevSet);
-
-        if (!prevSet.has(node)) {
-          newSet = new Set(prevSet).add(node);
-          setLayoutVersion((v) => v + 1);
+        if (prevSet.has(node)) {
+          if (value !== undefined) {
+            const nodeIndex = [...prevSet].indexOf(node);
+            setValues((prevValues) => {
+              const newValues = new Map(prevValues);
+              newValues.set(nodeIndex, value);
+              return newValues;
+            });
+          }
+          return prevSet;
         }
 
+        const newSet = new Set(prevSet).add(node);
         const nodeIndex = [...newSet].indexOf(node);
 
         if (value !== undefined) {
@@ -103,6 +109,7 @@ export const TabSetProvider = ({
 
         return newSet;
       });
+      setLayoutVersion((v) => v + 1);
     },
     [],
   );
@@ -112,7 +119,6 @@ export const TabSetProvider = ({
       const newSet = new Set(prevSet);
       const nodeIndex = [...newSet].indexOf(node);
       newSet.delete(node);
-      setLayoutVersion((v) => v + 1);
 
       setValues((prevValues) => {
         if (!prevValues.has(nodeIndex)) return prevValues;
@@ -123,6 +129,10 @@ export const TabSetProvider = ({
 
       return newSet;
     });
+    setLayoutVersion((v) => v + 1);
+    setHover((currentHover) =>
+      currentHover === node ? undefined : currentHover,
+    );
   }, []);
 
   useEffect(() => {

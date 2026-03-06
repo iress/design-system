@@ -108,16 +108,10 @@ export const tabSet = sva({
         list: {
           justifyContent: 'center',
         },
-        activeIndicator: {
-          left: '[50%]',
-        },
       },
       'top-right': {
         list: {
           justifyContent: 'flex-end',
-        },
-        activeIndicator: {
-          left: '[100%]',
         },
       },
     },

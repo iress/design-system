@@ -26,6 +26,9 @@ export default defineConfig({
   // The JSX framework to use
   jsxFramework: 'react',
 
+  // Minify generated CSS (reduces bundle size for consumers using IressShadow)
+  minify: true,
+
   // Ensure token strictness so we catch changes in the design token schema
   strictTokens: true,
   strictPropertyValues: true,
