@@ -567,9 +567,6 @@ describe('IressTabs', () => {
       const tablist = screen.getByRole('tablist');
       const activeIndicator = tablist.children[0] as HTMLElement;
 
-      // Capture initial indicator style
-      const initialStyle = activeIndicator.style.cssText;
-
       // Add a tab before the active tab
       await userEvent.click(screen.getByTestId('toggle'));
 
