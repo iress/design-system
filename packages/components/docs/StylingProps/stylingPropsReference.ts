@@ -30,7 +30,7 @@ export const stylingPropsReference: StylingPropsReferenceEntry[] = [
     jsxPropLink: '/?path=/docs/styling-props-layout--docs#alignself',
     cssProperty: 'align-self',
     tokenMapping: 'N/A',
-    responsive: true,
+    responsive: false,
   },
   {
     jsxProp: 'bg',
@@ -46,7 +46,7 @@ export const stylingPropsReference: StylingPropsReferenceEntry[] = [
     cssProperty: 'border-radius',
     tokenMapping: 'Radius',
     tokenMappingLink: '/?path=/docs/tokens_radius--docs',
-    responsive: true,
+    responsive: false,
   },
   {
     jsxProp: 'color',
@@ -237,7 +237,7 @@ export const stylingPropsReference: StylingPropsReferenceEntry[] = [
     jsxPropLink: '/?path=/docs/styling-props-typography--docs#textalign',
     cssProperty: 'text-align',
     tokenMapping: 'N/A',
-    responsive: true,
+    responsive: false,
   },
   {
     jsxProp: 'textStyle',
@@ -245,7 +245,7 @@ export const stylingPropsReference: StylingPropsReferenceEntry[] = [
     cssProperty: 'font',
     tokenMapping: 'Typography',
     tokenMappingLink: '/?path=/docs/tokens_typography--docs',
-    responsive: true,
+    responsive: false,
   },
   {
     jsxProp: 'width',

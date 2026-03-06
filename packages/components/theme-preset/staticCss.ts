@@ -43,7 +43,6 @@ const responsiveProps = {
   paddingRight: SPACING_TOKENS,
   rowGap: SPACING_TOKENS,
   srOnly: ['true', 'false'],
-  textStyle: Object.keys(textCompositions),
   width: ['*'],
 
   // Only available in IressCol
@@ -60,10 +59,21 @@ const responsiveProps = {
  */
 const staticProps = {
   alignSelf: ['start', 'end', 'center', 'stretch'],
+  bg: Object.keys(colors),
   borderRadius: Object.keys(radii),
+  color: Object.keys(colors),
+  flex: ['1'],
+  focusable: ['true', 'within'],
+  hideBelow: Object.keys(breakpoints),
+  hideFrom: Object.keys(breakpoints),
   horizontalAlign: [...HORIZONTAL_ALIGNS],
-  verticalAlign: [...VERTICAL_ALIGNS],
+  maxWidth: ['*'],
+  noGutter: ['true'],
+  scrollable: ['x', 'y', 'true'],
+  stretch: ['true'],
   textAlign: ['center', 'left', 'right', 'justify', 'inherit'],
+  textStyle: Object.keys(textCompositions),
+  verticalAlign: [...VERTICAL_ALIGNS],
 };
 
 export const staticCss: ExtendableOptions['staticCss'] = {
@@ -73,19 +83,7 @@ export const staticCss: ExtendableOptions['staticCss'] = {
       responsive: true,
     },
     {
-      properties: {
-        ...staticProps,
-        bg: Object.keys(colors),
-        color: Object.keys(colors),
-        flex: ['1'],
-        focusable: ['true', 'within'],
-        hideFrom: Object.keys(breakpoints),
-        hideBelow: Object.keys(breakpoints),
-        maxWidth: ['*'],
-        noGutter: ['true'],
-        scrollable: ['x', 'y', 'true'],
-        stretch: ['true'],
-      },
+      properties: staticProps,
       responsive: false,
     },
   ],

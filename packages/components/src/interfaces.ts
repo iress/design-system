@@ -221,7 +221,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/align-self
    */
-  alignSelf?: ResponsiveProp<'start' | 'end' | 'center' | 'stretch'>;
+  alignSelf?: 'start' | 'end' | 'center' | 'stretch';
 
   /**
    * **`bg`** sets the background color of an element using the `background-color` css property using the color tokens in the design system.
@@ -249,7 +249,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-radius
    */
-  borderRadius?: ResponsiveProp<UtilityValues['borderRadius']>;
+  borderRadius?: UtilityValues['borderRadius'];
 
   /**
    * The **`color`** CSS property sets the foreground color value of an element's text and text decorations using the colour tokens from the design system. It also sets the `currentcolor` value. `currentcolor` may be used as an indirect value on _other_ properties and is the default for other color properties, such as `border-color`.
@@ -470,9 +470,7 @@ export interface IressCSSProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-align
    */
-  textAlign?: ResponsiveProp<
-    'left' | 'right' | 'center' | 'justify' | 'inherit'
-  >;
+  textAlign?: 'left' | 'right' | 'center' | 'justify' | 'inherit';
 
   /**
    * Select the typography to be used using the **`textStyle`** prop. These are connected to the typography tokens in the design system.'
@@ -486,7 +484,7 @@ export interface IressCSSProps {
    * - `typography.heading.5` - Use for minor labels or titles in compact UI elements, such as cards, sidebars, or inline labels. Best used to emphasise supplementary information without drawing too much attention. Works well with body.sm and is ideal for subtle content like fine print. Use sparingly to preserve typographic hierarchy.
    * - `typography.code` - Used to display code snippets in the product, such as in the API documentation.
    */
-  textStyle?: ResponsiveProp<UtilityValues['textStyle']>;
+  textStyle?: UtilityValues['textStyle'];
 
   /**
    * The **`width`** CSS property sets an element's width. By default, it sets the width of the content area, but if `box-sizing` is set to `border-box`, it sets the width of the border area.
