@@ -51,7 +51,6 @@ describe('getNonce', () => {
     const originalDocument = globalThis.document;
 
     try {
-      // @ts-expect-error — simulating SSR environment
       (globalThis as Record<string, unknown>).document = undefined;
 
       expect(getNonce()).toBeNull();
