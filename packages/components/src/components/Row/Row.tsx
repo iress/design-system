@@ -41,7 +41,12 @@ export interface IressRowProps extends IressStyledProps {
   verticalAlign?: VerticalAligns;
 }
 
-const Component = styled('div', row) as FC<IressRowProps>;
+const Component = styled('div', row) as FC<
+  IressRowProps & {
+    flexHorizontalAlign?: HorizontalAligns;
+    flexVerticalAlign?: VerticalAligns;
+  }
+>;
 
 export const IressRow = ({
   className,
