@@ -18,6 +18,7 @@ export default defineConfig({
     './node_modules/**/*',
     './src/**/mocks/**/*',
     './src/**/*.test.{ts,tsx}',
+    './src/**/*.stories.{ts,tsx}',
   ],
 
   presets: [themePreset],
