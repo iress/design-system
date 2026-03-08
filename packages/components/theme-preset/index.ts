@@ -28,7 +28,6 @@ import {
   selectChevronRtl,
 } from './utilities/chevron';
 import { buttonRecipe } from './config-recipes/button';
-import { topLeftTriangle, checkmark } from './utilities/topLeftTriangle';
 import { sliderThumb } from './utilities/sliderThumb';
 import { noGutter } from './utilities/noGutter';
 import { stretch } from './utilities/stretch';
@@ -128,8 +127,6 @@ export default definePreset({
       materialSymbols,
       offset,
       span,
-      topLeftTriangle,
-      checkmark,
       sliderThumb,
       noGutter,
       scrollable,

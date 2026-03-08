@@ -714,12 +714,24 @@ export const buttonRecipe = defineSlotRecipe({
     { noWrap: ['*'] },
     { inButtonGroup: ['*'] },
     { active: ['*'] },
-    { mode: ['primary', 'secondary', 'tertiary', 'quaternary', 'muted'], status: ['danger'] },
-    { mode: ['primary', 'secondary', 'tertiary', 'quaternary', 'muted'], status: ['success'] },
+    {
+      mode: ['primary', 'secondary', 'tertiary', 'quaternary', 'muted'],
+      status: ['danger'],
+    },
+    {
+      mode: ['primary', 'secondary', 'tertiary', 'quaternary', 'muted'],
+      status: ['success'],
+    },
     { mode: ['secondary', 'tertiary'], status: ['info'] },
     { mode: ['secondary', 'tertiary'], status: ['warning'] },
-    { mode: ['primary', 'secondary', 'tertiary', 'quaternary', 'muted'], loading: ['true'] },
+    {
+      mode: ['primary', 'secondary', 'tertiary', 'quaternary', 'muted'],
+      loading: ['true'],
+    },
     { mode: ['tertiary'], inButtonGroup: ['true'] },
-    { mode: ['primary', 'secondary', 'tertiary', 'quaternary', 'muted'], active: ['true'] },
+    {
+      mode: ['primary', 'secondary', 'tertiary', 'quaternary', 'muted'],
+      active: ['true'],
+    },
   ],
 });
