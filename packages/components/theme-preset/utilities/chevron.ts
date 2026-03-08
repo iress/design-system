@@ -1,7 +1,6 @@
 import { defineUtility } from '@pandacss/dev';
 import { borders } from '../tokens/borders';
 import { sizes } from '../tokens/sizes';
-import { spacing } from '../tokens/spacing';
 import { cssVars } from '@iress-oss/ids-tokens';
 
 export const selectChevron = defineUtility({
@@ -14,7 +13,7 @@ export const selectChevron = defineUtility({
         width: sizes['chevron.select'].value,
         height: sizes['chevron.select'].value,
         top: '50%',
-        insetInlineEnd: `calc(${spacing['spacing.2'].value} + calc(0.25 * ${spacing['spacing.2'].value}))`,
+        insetInlineEnd: `calc(${cssVars.spacing[2]} + calc(0.25 * ${cssVars.spacing[2]}))`,
         position: 'absolute',
         mask: `no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`,
         transform:
@@ -44,7 +43,7 @@ export const selectChevronRtl = defineUtility({
         width: sizes['chevron.select'].value,
         height: sizes['chevron.select'].value,
         top: '50%',
-        insetInlineEnd: `calc(${spacing['spacing.2'].value} + calc(0.25 * ${spacing['spacing.4'].value}))`,
+        insetInlineEnd: `calc(${cssVars.spacing[2]} + calc(0.25 * ${cssVars.spacing[2]}))`,
         position: 'absolute',
         border: `${borders.input.value.width} ${borders.input.value.style} ${borders.input.value.color}`,
         borderBlockStart: 'none',
@@ -60,7 +59,7 @@ export const selectChevronRtl = defineUtility({
         width: sizes['chevron.select'].value,
         height: sizes['chevron.select'].value,
         top: '50%',
-        insetInlineEnd: `calc(${spacing['spacing.2'].value} + calc(0.25 * ${spacing['spacing.4'].value}))`,
+        insetInlineEnd: `calc(${cssVars.spacing[2]} + calc(0.25 * ${cssVars.spacing[4]}))`,
         position: 'absolute',
         border: `${borders.input.value.width} ${borders.input.value.style} ${borders.input.value.color}`,
         borderBlockStart: 'none',
@@ -93,7 +92,7 @@ export const tableChevron = defineUtility({
           transition: 'transform 0.3s ease',
           display: 'inline-block',
           verticalAlign: 'text-bottom',
-          marginInlineStart: `${spacing['spacing.2'].value}`,
+          marginInlineStart: `${cssVars.spacing[2]}`,
         },
       };
     }
@@ -113,7 +112,7 @@ export const tableChevron = defineUtility({
         transition: 'transform 0.3s ease',
         display: 'inline-block',
         verticalAlign: 'text-bottom',
-        marginInlineStart: `${spacing['spacing.2'].value}`,
+        marginInlineStart: `${cssVars.spacing[2]}`,
       },
     };
   },

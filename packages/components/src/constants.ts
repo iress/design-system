@@ -150,7 +150,15 @@ export const TEXT_ALIGNS = [
 /**
  * The vertical alignment options.
  */
-export const VERTICAL_ALIGNS = ['top', 'middle', 'bottom', 'stretch'] as const;
+export const VERTICAL_ALIGNS = [
+  'top',
+  'middle',
+  'bottom',
+  'between',
+  'around',
+  'evenly',
+  'stretch',
+] as const;
 
 /**
  * The z-index determines the stacking order of elements. Elements with a higher z-index always sit in front of elements with a lower z-index.

@@ -6,7 +6,7 @@ import { spanCompositions } from './utilities/span';
 import { offsetCompositions } from './utilities/offset';
 import { MARGIN_TOKENS, SPACING_TOKENS } from './tokens/spacing';
 import { breakpoints } from './tokens/breakpoints';
-import { HORIZONTAL_ALIGNS } from '../src/constants';
+import { HORIZONTAL_ALIGNS, VERTICAL_ALIGNS } from '../src/constants';
 
 /**
  * Allowed CSS properties for all components.
@@ -15,12 +15,14 @@ import { HORIZONTAL_ALIGNS } from '../src/constants';
  *
  * Note: If you update this list, you should also update the `IressCSSProps` interface in `packages/components/src/interfaces.ts`
  */
-const allowedCssProps = {
-  alignSelf: ['start', 'end', 'center', 'stretch'],
-  borderRadius: Object.keys(radii),
+
+/**
+ * Properties that need responsive variants (used at different breakpoints).
+ * These generate classes for base + each breakpoint (7× per value).
+ */
+const responsiveProps = {
   columnGap: SPACING_TOKENS,
   gap: SPACING_TOKENS,
-  horizontalAlign: [...HORIZONTAL_ALIGNS],
 
   // We can't use margin shorthand because it won't generate the correct CSS
   margin: MARGIN_TOKENS,
@@ -41,8 +43,6 @@ const allowedCssProps = {
   paddingRight: SPACING_TOKENS,
   rowGap: SPACING_TOKENS,
   srOnly: ['true', 'false'],
-  textAlign: ['center', 'left', 'right', 'justify', 'inherit'],
-  textStyle: Object.keys(textCompositions),
   width: ['*'],
 
   // Only available in IressCol
@@ -53,25 +53,37 @@ const allowedCssProps = {
   gutter: SPACING_TOKENS,
 };
 
+/**
+ * Properties that don't need responsive variants (rarely change per breakpoint).
+ * These generate only base classes (1× per value).
+ */
+const staticProps = {
+  alignSelf: ['start', 'end', 'center', 'stretch'],
+  bg: Object.keys(colors),
+  borderRadius: Object.keys(radii),
+  color: Object.keys(colors),
+  flex: ['1'],
+  focusable: ['true', 'within'],
+  hideBelow: Object.keys(breakpoints),
+  hideFrom: Object.keys(breakpoints),
+  flexHorizontalAlign: [...HORIZONTAL_ALIGNS],
+  maxWidth: ['*'],
+  noGutter: ['true'],
+  scrollable: ['x', 'y', 'true'],
+  stretch: ['true'],
+  textAlign: ['center', 'left', 'right', 'justify', 'inherit'],
+  textStyle: Object.keys(textCompositions),
+  flexVerticalAlign: [...VERTICAL_ALIGNS],
+};
+
 export const staticCss: ExtendableOptions['staticCss'] = {
   css: [
     {
-      properties: allowedCssProps,
+      properties: responsiveProps,
       responsive: true,
     },
     {
-      properties: {
-        bg: Object.keys(colors),
-        color: Object.keys(colors),
-        flex: ['1'],
-        focusable: ['true', 'within'],
-        hideFrom: Object.keys(breakpoints),
-        hideBelow: Object.keys(breakpoints),
-        maxWidth: ['*'],
-        noGutter: ['true'],
-        scrollable: ['x', 'y', 'true'],
-        stretch: ['true'],
-      },
+      properties: staticProps,
       responsive: false,
     },
   ],

@@ -12,40 +12,6 @@ export const inline = cva({
     gap: 'spacing.0',
   },
   variants: {
-    horizontalAlign: {
-      around: {
-        justifyContent: 'space-around',
-      },
-      between: {
-        justifyContent: 'space-between',
-      },
-      center: {
-        justifyContent: 'center',
-      },
-      evenly: {
-        justifyContent: 'space-evenly',
-      },
-      left: {
-        justifyContent: 'flex-start',
-      },
-      right: {
-        justifyContent: 'flex-end',
-      },
-    },
-    verticalAlign: {
-      bottom: {
-        alignItems: 'flex-end',
-      },
-      middle: {
-        alignItems: 'center',
-      },
-      top: {
-        alignItems: 'flex-start',
-      },
-      stretch: {
-        alignItems: 'stretch',
-      },
-    },
     noWrap: {
       true: {
         flexWrap: 'nowrap',
@@ -56,8 +22,6 @@ export const inline = cva({
     },
   },
   defaultVariants: {
-    horizontalAlign: 'left',
-    verticalAlign: 'top',
     noWrap: false,
   },
 });

@@ -114,9 +114,9 @@ Most IDS components accept styling props for layout adjustments:
 
 | Prop | Purpose | Values |
 | --- | --- | --- |
-| `alignSelf` | Override flex alignment | `"start"`, `"end"`, `"center"`, `"stretch"` (responsive) |
+| `alignSelf` | Override flex alignment | `"start"`, `"end"`, `"center"`, `"stretch"` |
 | `bg` | Background colour | Colour tokens: `"colour.primary.fill"`, `"colour.neutral.20"`, `"alt"`, etc. |
-| `borderRadius` | Border radius | Radius tokens: `"radius.0"` – `"radius.4"`, `"none"` (responsive) |
+| `borderRadius` | Border radius | Radius tokens: `"radius.0"` – `"radius.4"`, `"none"` |
 | `color` | Text colour | Colour tokens: `"colour.neutral.80"`, `"colour.primary.text"`, etc. |
 | `flex` | Flex grow | `"1"` only |
 | `focusable` | Apply focus ring | `"true"`, `"within"` |
@@ -141,8 +141,8 @@ Most IDS components accept styling props for layout adjustments:
 | `scrollable` | Enable overflow scrolling | `true`, `"x"`, `"y"` |
 | `srOnly` | Screen-reader only | `true` / `false` (responsive) |
 | `stretch` | Fill parent height | `true` / `false` |
-| `textAlign` | Text alignment | `"left"`, `"right"`, `"center"`, `"justify"`, `"inherit"` (responsive) |
-| `textStyle` | Typography style | `"typography.body.sm"`, `"typography.body.md"`, `"typography.heading.1"` – `"typography.heading.5"`, `"typography.code"` (responsive) |
+| `textAlign` | Text alignment | `"left"`, `"right"`, `"center"`, `"justify"`, `"inherit"` |
+| `textStyle` | Typography style | `"typography.body.sm"`, `"typography.body.md"`, `"typography.heading.1"` – `"typography.heading.5"`, `"typography.code"` |
 | `width` | Element width | Size tokens: `"input.2"` – `"input.16"`, `"input.25perc"` – `"input.100perc"`, `"auto"` (responsive) |
 
 ## Translation Examples

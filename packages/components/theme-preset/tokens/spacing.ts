@@ -1,80 +1,40 @@
-import { spacing as spacingTokens, cssVars } from '@iress-oss/ids-tokens';
+import {
+  spacing as spacingSchema,
+  cssVars,
+  type IressDesignToken,
+} from '@iress-oss/ids-tokens';
 import { sizes } from './sizes';
 
-const publicSpacing = {
-  'spacing.0': {
-    description: spacingTokens[0].$description,
-    value: cssVars.spacing['0'],
-  },
-  'spacing.1': {
-    description: spacingTokens[1].$description,
-    value: cssVars.spacing['1'],
-  },
-  'spacing.2': {
-    description: spacingTokens[2].$description,
-    value: cssVars.spacing['2'],
-  },
-  'spacing.3': {
-    description: spacingTokens[3].$description,
-    value: cssVars.spacing['3'],
-  },
-  'spacing.4': {
-    description: spacingTokens[4].$description,
-    value: cssVars.spacing['4'],
-  },
-  'spacing.5': {
-    description: spacingTokens[5].$description,
-    value: cssVars.spacing['5'],
-  },
-  'spacing.6': {
-    description: spacingTokens[6].$description,
-    value: cssVars.spacing['6'],
-  },
-  'spacing.7': {
-    description: spacingTokens[7].$description,
-    value: cssVars.spacing['7'],
-  },
-  'spacing.8': {
-    description: spacingTokens[8].$description,
-    value: cssVars.spacing['8'],
-  },
-  'spacing.10': {
-    description: spacingTokens[10].$description,
-    value: cssVars.spacing['10'],
-  },
-};
+type SpacingKey = keyof typeof cssVars.spacing;
 
-const aliasSpacing = {
-  none: {
-    description: spacingTokens[0].$description,
-    value: cssVars.spacing['0'],
-  },
-  xs: {
-    description: spacingTokens[1].$description,
-    value: cssVars.spacing['1'],
-  },
-  sm: {
-    description: spacingTokens[2].$description,
-    value: cssVars.spacing['2'],
-  },
-  md: {
-    description: spacingTokens[4].$description,
-    value: cssVars.spacing['4'],
-  },
-  lg: {
-    description: spacingTokens[6].$description,
-    value: cssVars.spacing['6'],
-  },
-  xl: {
-    description: spacingTokens[10].$description,
-    value: cssVars.spacing['10'],
-  },
-};
+const canonicalSpacing = Object.fromEntries(
+  Object.entries(spacingSchema)
+    .filter(([key]) => key in cssVars.spacing)
+    .map(([key, token]) => [
+      `spacing.${key}`,
+      {
+        description: (token as IressDesignToken).$description,
+        value: cssVars.spacing[key as SpacingKey],
+      },
+    ]),
+);
 
-export const spacing = {
-  ...publicSpacing,
-  ...aliasSpacing,
+const aliasSpacing = Object.fromEntries(
+  Object.entries(spacingSchema).flatMap(([key, token]) => {
+    const aliases = (token as { $extensions?: { 'iress.aliases'?: string[] } })
+      .$extensions?.['iress.aliases'];
+    if (!aliases || !(key in cssVars.spacing)) return [];
+    return aliases.map((alias) => [
+      alias,
+      {
+        description: (token as IressDesignToken).$description,
+        value: cssVars.spacing[key as SpacingKey],
+      },
+    ]);
+  }),
+);
 
+const componentSpacing = {
   'button.inline': {
     description: 'Spacing on the left and right of inline button content',
     value: `calc((${cssVars.radius.system._button.topLeft} * 0.25) + ${cssVars.spacing['3']})`,
@@ -103,8 +63,15 @@ export const spacing = {
   },
 };
 
-export const SPACING_TOKENS = Object.keys({
-  ...publicSpacing,
+export const spacing = {
+  ...canonicalSpacing,
+  ...aliasSpacing,
+  ...componentSpacing,
+};
+
+export const SPACING_TOKENS = Object.keys(canonicalSpacing);
+export const SPACING_AND_ALIAS_TOKENS = Object.keys({
+  ...canonicalSpacing,
   ...aliasSpacing,
 });
 

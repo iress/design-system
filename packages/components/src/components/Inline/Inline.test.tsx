@@ -8,10 +8,8 @@ const classNames = {
   gapMd: 'gap_spacing.4',
   wrapDefault: 'flex-wrap_wrap',
   wrapNoWrap: 'flex-wrap_nowrap',
-  horizontalAlignDefault: 'jc_flex-start',
-  horizontalAlignRight: 'jc_flex-end',
-  verticalAlignDefault: 'ai_flex-start',
-  verticalAlignCenter: 'ai_center',
+  horizontalAlignRight: 'fha_right',
+  verticalAlignCenter: 'fva_middle',
 };
 
 const renderComponent = (args: IressInlineProps) => {
@@ -30,8 +28,6 @@ describe('IressInline', () => {
       const { getByTestId } = renderComponent({});
       const component = getByTestId('test-component');
       expect(component).toHaveClass(classNames.wrapDefault);
-      expect(component).toHaveClass(classNames.horizontalAlignDefault);
-      expect(component).toHaveClass(classNames.verticalAlignDefault);
       expect(component).toHaveClass(classNames.gapDefault);
       expect(component).toHaveClass(GlobalCSSClass.Inline);
     });
@@ -79,6 +75,13 @@ describe('IressInline', () => {
 
       expect(container).not.toHaveClass('iress-u-inline');
       expect(container).toHaveClass(classNames.verticalAlignCenter);
+    });
+
+    test('should have data-flex-dir="row" attribute', () => {
+      const { getByTestId } = renderComponent({});
+      const component = getByTestId('test-component');
+
+      expect(component).toHaveAttribute('data-flex-dir', 'row');
     });
   });
 

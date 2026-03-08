@@ -45,10 +45,26 @@ export interface IressInlineProps extends IressStyledProps {
   verticalAlign?: VerticalAligns;
 }
 
-const Component = styled('div', inline) as FC<IressInlineProps>;
+const Component = styled('div', inline) as FC<
+  IressInlineProps & {
+    flexHorizontalAlign?: HorizontalAligns;
+    flexVerticalAlign?: VerticalAligns;
+  }
+>;
 
-export const IressInline = ({ className, ...restProps }: IressInlineProps) => (
-  <Component {...restProps} className={cx(className, GlobalCSSClass.Inline)} />
+export const IressInline = ({
+  className,
+  horizontalAlign,
+  verticalAlign,
+  ...restProps
+}: IressInlineProps) => (
+  <Component
+    {...restProps}
+    flexHorizontalAlign={horizontalAlign}
+    flexVerticalAlign={verticalAlign}
+    data-flex-dir="row"
+    className={cx(className, GlobalCSSClass.Inline)}
+  />
 );
 
 IressInline.displayName = 'IressInline';

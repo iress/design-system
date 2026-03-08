@@ -39,11 +39,7 @@ export type IressStackProps<
   /**
    * Sets the vertical alignment of the stack content.
    */
-  verticalAlign?:
-    | Omit<VerticalAligns, 'stretch'>
-    | 'between'
-    | 'around'
-    | 'evenly';
+  verticalAlign?: Exclude<VerticalAligns, 'stretch'>;
 };
 
 export const IressStack = <
@@ -51,6 +47,8 @@ export const IressStack = <
 >({
   className,
   element,
+  horizontalAlign,
+  verticalAlign,
   ...restProps
 }: IressStackProps<E>) => {
   const Tag = useMemo(
@@ -61,6 +59,9 @@ export const IressStack = <
   return (
     <Tag
       {...(restProps as IressStackProps<E>)}
+      flexHorizontalAlign={horizontalAlign}
+      flexVerticalAlign={verticalAlign}
+      data-flex-dir="column"
       className={cx(className, GlobalCSSClass.Stack)}
     />
   );

@@ -22,7 +22,7 @@ export const selectTags = sva({
       cursor: 'pointer',
       focusable: 'select-activator',
 
-      transition: '[all 0.3s ease]',
+      transition: '[all 0.3s ease-in-out]',
 
       '&:has(.tag)': {
         cursor: 'inherit',

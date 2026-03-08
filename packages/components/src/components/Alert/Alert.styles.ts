@@ -25,6 +25,9 @@ export const alert = sva({
       border: 'alert',
       justifyContent: 'flex-start',
       alignItems: 'flex-start',
+      backgroundColor: '[var(--alert-surface)]',
+      color: '[var(--alert-text)]',
+      borderColor: '[var(--alert-text)]',
     },
     wrapper: {
       display: 'flex',
@@ -42,6 +45,7 @@ export const alert = sva({
       display: 'inline-block',
       marginRight: 'spacing.1',
       whiteSpace: 'nowrap',
+      color: '[var(--alert-text)]',
       _empty: {
         display: 'none',
       },
@@ -52,6 +56,7 @@ export const alert = sva({
     },
     children: {
       marginBlock: 'spacing.0',
+      color: '[var(--alert-text)]',
       '& > p': { marginBlock: 'spacing.0' },
     },
     footer: {
@@ -75,11 +80,36 @@ export const alert = sva({
       '&.button__root--mode_tertiary:not(:hover)': {
         bg: 'colour.neutral.10',
       },
+
+      '&.button__root--mode_secondary': {
+        bg: '[var(--alert-fill)]',
+        borderColor: '[var(--alert-fill)]',
+        color: '[var(--alert-onFill)]',
+
+        _hover: {
+          bg: '[var(--alert-fillHover)]',
+          borderColor: '[var(--alert-fillHover)]',
+        },
+
+        _active: {
+          boxShadow:
+            '[color-mix(in srgb, var(--alert-fill), transparent 80%) 0px 0px 0px 3px]',
+        },
+      },
+    },
+    icon: {
+      color: '[var(--alert-text)]',
     },
     dismiss: {
       marginLeft: 'auto',
       my: '-spacing.2',
       mr: '-spacing.1',
+      color: '[var(--alert-text)]',
+
+      _hover: {
+        bg: '[var(--alert-surfaceHover)]',
+        borderColor: '[var(--alert-surfaceHover)]',
+      },
     },
   },
   variants: {
@@ -111,207 +141,54 @@ export const alert = sva({
     status: {
       danger: {
         alert: {
-          backgroundColor: 'colour.system.danger.surface',
-          color: 'colour.neutral.80',
-          borderColor: 'colour.system.danger.text',
-        },
-        heading: {
-          color: 'colour.system.danger.text',
-        },
-        children: {
-          color: 'colour.system.danger.text',
-        },
-        icon: {
-          color: 'colour.system.danger.text',
-        },
-        dismiss: {
-          color: 'colour.system.danger.text',
-
-          _hover: {
-            bg: 'colour.system.danger.surfaceHover',
-            borderColor: 'colour.system.danger.surfaceHover',
-          },
-        },
-        action: {
-          '&.button__root--mode_secondary': {
-            bg: 'colour.system.danger.fill',
-            borderColor: 'colour.system.danger.fill',
-            color: 'colour.system.danger.onFill',
-
-            _hover: {
-              bg: 'colour.system.danger.fillHover',
-              borderColor: 'colour.system.danger.fillHover',
-            },
-
-            _active: {
-              boxShadow:
-                'color-mix(in srgb, {colors.colour.system.danger.fill}, transparent 80%) 0px 0px 0px 3px',
-            },
-          },
+          '--alert-surface': '{colors.colour.system.danger.surface}',
+          '--alert-surfaceHover': '{colors.colour.system.danger.surfaceHover}',
+          '--alert-text': '{colors.colour.system.danger.text}',
+          '--alert-fill': '{colors.colour.system.danger.fill}',
+          '--alert-fillHover': '{colors.colour.system.danger.fillHover}',
+          '--alert-onFill': '{colors.colour.system.danger.onFill}',
         },
       },
       info: {
         alert: {
-          backgroundColor: 'colour.system.info.surface',
-          color: 'colour.neutral.80',
-          borderColor: 'colour.system.info.text',
-        },
-        heading: {
-          color: 'colour.system.info.text',
-        },
-        children: {
-          color: 'colour.system.info.text',
-        },
-        icon: {
-          color: 'colour.system.info.text',
-        },
-        dismiss: {
-          color: 'colour.system.info.text',
-
-          _hover: {
-            bg: 'colour.system.info.surfaceHover',
-            borderColor: 'colour.system.info.surfaceHover',
-          },
-        },
-        action: {
-          '&.button__root--mode_secondary': {
-            bg: 'colour.system.info.fill',
-            borderColor: 'colour.system.info.fill',
-            color: 'colour.system.info.onFill',
-
-            _hover: {
-              bg: 'colour.system.info.fillHover',
-              borderColor: 'colour.system.info.fillHover',
-            },
-
-            _active: {
-              boxShadow:
-                'color-mix(in srgb, {colors.colour.system.info.fill}, transparent 80%) 0px 0px 0px 3px',
-            },
-          },
+          '--alert-surface': '{colors.colour.system.info.surface}',
+          '--alert-surfaceHover': '{colors.colour.system.info.surfaceHover}',
+          '--alert-text': '{colors.colour.system.info.text}',
+          '--alert-fill': '{colors.colour.system.info.fill}',
+          '--alert-fillHover': '{colors.colour.system.info.fillHover}',
+          '--alert-onFill': '{colors.colour.system.info.onFill}',
         },
       },
       success: {
         alert: {
-          backgroundColor: 'colour.system.success.surface',
-          color: 'colour.neutral.80',
-          borderColor: 'colour.system.success.text',
-        },
-        heading: {
-          color: 'colour.system.success.text',
-        },
-        children: {
-          color: 'colour.system.success.text',
-        },
-        icon: {
-          color: 'colour.system.success.text',
-        },
-        dismiss: {
-          color: 'colour.system.success.text',
-
-          _hover: {
-            bg: 'colour.system.success.surfaceHover',
-            borderColor: 'colour.system.success.surfaceHover',
-          },
-        },
-        action: {
-          '&.button__root--mode_secondary': {
-            bg: 'colour.system.success.fill',
-            borderColor: 'colour.system.success.fill',
-            color: 'colour.system.success.onFill',
-
-            _hover: {
-              bg: 'colour.system.success.fillHover',
-              borderColor: 'colour.system.success.fillHover',
-            },
-
-            _active: {
-              boxShadow:
-                'color-mix(in srgb, {colors.colour.system.success.fill}, transparent 80%) 0px 0px 0px 3px',
-            },
-          },
+          '--alert-surface': '{colors.colour.system.success.surface}',
+          '--alert-surfaceHover': '{colors.colour.system.success.surfaceHover}',
+          '--alert-text': '{colors.colour.system.success.text}',
+          '--alert-fill': '{colors.colour.system.success.fill}',
+          '--alert-fillHover': '{colors.colour.system.success.fillHover}',
+          '--alert-onFill': '{colors.colour.system.success.onFill}',
         },
       },
       warning: {
         alert: {
-          backgroundColor: 'colour.system.warning.surface',
-          color: 'colour.neutral.80',
-          borderColor: 'colour.system.warning.text',
-        },
-        heading: {
-          color: 'colour.system.warning.text',
-        },
-        children: {
-          color: 'colour.system.warning.text',
-        },
-        icon: {
-          color: 'colour.system.warning.text',
-        },
-        dismiss: {
-          color: 'colour.system.warning.text',
-
-          _hover: {
-            bg: 'colour.system.warning.surfaceHover',
-            borderColor: 'colour.system.warning.surfaceHover',
-          },
-        },
-        action: {
-          '&.button__root--mode_secondary': {
-            bg: 'colour.system.warning.fill',
-            borderColor: 'colour.system.warning.fill',
-            color: 'colour.system.warning.onFill',
-
-            _hover: {
-              bg: 'colour.system.warning.fillHover',
-              borderColor: 'colour.system.warning.fillHover',
-            },
-
-            _active: {
-              boxShadow:
-                'color-mix(in srgb, {colors.colour.system.warning.fill}, transparent 80%) 0px 0px 0px 3px',
-            },
-          },
+          '--alert-surface': '{colors.colour.system.warning.surface}',
+          '--alert-surfaceHover': '{colors.colour.system.warning.surfaceHover}',
+          '--alert-text': '{colors.colour.system.warning.text}',
+          '--alert-fill': '{colors.colour.system.warning.fill}',
+          '--alert-fillHover': '{colors.colour.system.warning.fillHover}',
+          '--alert-onFill': '{colors.colour.system.warning.onFill}',
         },
       },
       neutral: {
         alert: {
-          backgroundColor: 'colour.neutral.20',
-          color: 'colour.neutral.90',
-          borderColor: 'colour.neutral.90',
-        },
-        heading: {
-          color: 'colour.neutral.90',
-        },
-        children: {
-          color: 'colour.neutral.90',
-        },
-        icon: {
-          color: 'colour.neutral.90',
-        },
-        dismiss: {
-          color: 'colour.neutral.90',
-
-          _hover: {
-            bg: 'colour.neutral.30',
-            borderColor: 'colour.neutral.30',
-          },
+          '--alert-surface': '{colors.colour.neutral.20}',
+          '--alert-surfaceHover': '{colors.colour.neutral.30}',
+          '--alert-text': '{colors.colour.neutral.90}',
+          '--alert-fill': '{colors.colour.neutral.70}',
+          '--alert-fillHover': '{colors.colour.neutral.80}',
+          '--alert-onFill': '{colors.colour.neutral.20}',
         },
         action: {
-          '&.button__root--mode_secondary': {
-            bg: 'colour.neutral.70',
-            borderColor: 'colour.neutral.70',
-            color: 'colour.neutral.20',
-
-            _hover: {
-              bg: 'colour.neutral.80',
-              borderColor: 'colour.neutral.80',
-            },
-
-            _active: {
-              boxShadow:
-                'color-mix(in srgb, {colour.neutral.70}, transparent 80%) 0px 0px 0px 3px',
-            },
-          },
           '&.button__root--mode_tertiary': {
             _hover: {
               bg: 'colour.neutral.30',

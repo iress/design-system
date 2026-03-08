@@ -31,7 +31,7 @@ export const field = sva({
       mt: 'spacing.1',
     },
     footerIcon: {
-      verticalAlign: '-1.5px',
+      verticalAlign: '[-1.5px]',
     },
     supplementary: {
       fontSize: 'inherit',
