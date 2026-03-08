@@ -26,7 +26,7 @@ export const alert = sva({
       justifyContent: 'flex-start',
       alignItems: 'flex-start',
       backgroundColor: '[var(--alert-surface)]',
-      color: 'colour.neutral.80',
+      color: '[var(--alert-text)]',
       borderColor: '[var(--alert-text)]',
     },
     wrapper: {
