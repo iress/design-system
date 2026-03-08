@@ -35,8 +35,8 @@ import { stretch } from './utilities/stretch';
 import { focusable } from './utilities/focusable';
 import { scrollable } from './utilities/scrollable';
 import { materialSymbols } from './utilities/materialSymbols';
-import { horizontalAlign } from './utilities/horizontalAlign';
-import { verticalAlign } from './utilities/verticalAlign';
+import { flexHorizontalAlign } from './utilities/horizontalAlign';
+import { flexVerticalAlign } from './utilities/verticalAlign';
 
 export default definePreset({
   name: 'theme-preset',
@@ -120,8 +120,8 @@ export default definePreset({
     extend: {
       focusable,
       gutter,
-      horizontalAlign,
-      verticalAlign,
+      flexHorizontalAlign,
+      flexVerticalAlign,
       selectChevron,
       selectChevronRtl,
       tableChevron,

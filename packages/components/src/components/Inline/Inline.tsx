@@ -47,9 +47,16 @@ export interface IressInlineProps extends IressStyledProps {
 
 const Component = styled('div', inline) as FC<IressInlineProps>;
 
-export const IressInline = ({ className, ...restProps }: IressInlineProps) => (
+export const IressInline = ({
+  className,
+  horizontalAlign,
+  verticalAlign,
+  ...restProps
+}: IressInlineProps) => (
   <Component
     {...restProps}
+    flexHorizontalAlign={horizontalAlign}
+    flexVerticalAlign={verticalAlign}
     data-flex-dir="row"
     className={cx(className, GlobalCSSClass.Inline)}
   />

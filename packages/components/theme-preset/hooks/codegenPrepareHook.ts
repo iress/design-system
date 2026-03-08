@@ -19,16 +19,38 @@ export function codegenPrepareHook(artifacts: Artifact[]): Artifact[] | void {
     Object.entries(SPACING_ALIAS_MAP).map(([k, v]) => [`-${k}`, `-${v}`]),
   );
 
+  const spacingProps = [
+    'gap',
+    'columnGap',
+    'rowGap',
+    'gutter',
+    'margin',
+    'marginTop',
+    'marginBottom',
+    'marginLeft',
+    'marginRight',
+    'marginBlock',
+    'marginInline',
+    'padding',
+    'paddingTop',
+    'paddingBottom',
+    'paddingLeft',
+    'paddingRight',
+    'paddingBlock',
+    'paddingInline',
+  ];
+
   const injection = `const __spacingAliases__ = ${JSON.stringify(SPACING_ALIAS_MAP)};
 const __negSpacingAliases__ = ${JSON.stringify(negAliases)};
-const __resolveAlias__ = (v) => __spacingAliases__[v] || __negSpacingAliases__[v] || v;
+const __spacingProps__ = new Set(${JSON.stringify(spacingProps)});
+const __resolveAlias__ = (prop, v) => __spacingProps__.has(prop) ? (__spacingAliases__[v] || __negSpacingAliases__[v] || v) : v;
 `;
 
   cssFile.code =
     injection +
     cssFile.code!.replace(
-      'withoutSpace(value)',
-      'withoutSpace(__resolveAlias__(value))',
+      /withoutSpace\(value\)/,
+      'withoutSpace(__resolveAlias__(key, value))',
     );
 
   return artifacts;

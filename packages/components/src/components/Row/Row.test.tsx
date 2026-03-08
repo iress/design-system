@@ -77,7 +77,7 @@ describe('IressRow', () => {
           <IressRow data-testid={TEST_ID} horizontalAlign="between" />,
         );
 
-        expect(getByTestId(TEST_ID)).toHaveClass('ha_between');
+        expect(getByTestId(TEST_ID)).toHaveClass('fha_between');
       });
     });
 
@@ -87,7 +87,7 @@ describe('IressRow', () => {
           <IressRow data-testid={TEST_ID} verticalAlign="bottom" />,
         );
 
-        expect(getByTestId(TEST_ID)).toHaveClass('va_bottom');
+        expect(getByTestId(TEST_ID)).toHaveClass('fva_bottom');
       });
     });
   });

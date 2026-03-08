@@ -257,7 +257,7 @@ describe('IressCard', () => {
         });
 
         const component = screen.getByTestId(TEST_ID);
-        expect(component).toHaveClass('p_lg');
+        expect(component).toHaveClass('p_spacing.6');
       });
     });
 

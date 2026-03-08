@@ -43,9 +43,16 @@ export interface IressRowProps extends IressStyledProps {
 
 const Component = styled('div', row) as FC<IressRowProps>;
 
-export const IressRow = ({ className, ...restProps }: IressRowProps) => (
+export const IressRow = ({
+  className,
+  horizontalAlign,
+  verticalAlign,
+  ...restProps
+}: IressRowProps) => (
   <Component
     {...restProps}
+    flexHorizontalAlign={horizontalAlign}
+    flexVerticalAlign={verticalAlign}
     data-flex-dir="row"
     className={cx(className, GlobalCSSClass.Row)}
   />

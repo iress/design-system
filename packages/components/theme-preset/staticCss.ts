@@ -66,14 +66,14 @@ const staticProps = {
   focusable: ['true', 'within'],
   hideBelow: Object.keys(breakpoints),
   hideFrom: Object.keys(breakpoints),
-  horizontalAlign: [...HORIZONTAL_ALIGNS],
+  flexHorizontalAlign: [...HORIZONTAL_ALIGNS],
   maxWidth: ['*'],
   noGutter: ['true'],
   scrollable: ['x', 'y', 'true'],
   stretch: ['true'],
   textAlign: ['center', 'left', 'right', 'justify', 'inherit'],
   textStyle: Object.keys(textCompositions),
-  verticalAlign: [...VERTICAL_ALIGNS],
+  flexVerticalAlign: [...VERTICAL_ALIGNS],
 };
 
 export const staticCss: ExtendableOptions['staticCss'] = {

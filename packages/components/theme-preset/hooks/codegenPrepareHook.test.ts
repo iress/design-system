@@ -20,7 +20,8 @@ describe('codegenPrepareHook', () => {
     const code = result[0].files[0].code!;
     expect(code).toContain('__spacingAliases__');
     expect(code).toContain('__negSpacingAliases__');
-    expect(code).toContain('withoutSpace(__resolveAlias__(value))');
+    expect(code).toContain('__spacingProps__');
+    expect(code).toContain('withoutSpace(__resolveAlias__(key, value))');
     expect(code).not.toContain('withoutSpace(value)');
   });
 

@@ -599,8 +599,8 @@ describe('IressModal', () => {
         const content = await screen.findByText('Content');
         const footer = await screen.findByText('Footer');
 
-        expect(content).toHaveClass('p_none');
-        expect(footer).toHaveClass('p_none');
+        expect(content).toHaveClass('p_spacing.0');
+        expect(footer).toHaveClass('p_spacing.0');
       });
     });
 

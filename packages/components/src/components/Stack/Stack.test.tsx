@@ -96,21 +96,21 @@ describe('IressStack', () => {
       const { getByTestId } = renderComponent({ horizontalAlign: 'center' });
       const component = getByTestId('test-component');
 
-      expect(component).toHaveClass('ha_center');
+      expect(component).toHaveClass('fha_center');
     });
 
     it('should apply left horizontal alignment', () => {
       const { getByTestId } = renderComponent({ horizontalAlign: 'left' });
       const component = getByTestId('test-component');
 
-      expect(component).toHaveClass('ha_left');
+      expect(component).toHaveClass('fha_left');
     });
 
     it('should apply right horizontal alignment', () => {
       const { getByTestId } = renderComponent({ horizontalAlign: 'right' });
       const component = getByTestId('test-component');
 
-      expect(component).toHaveClass('ha_right');
+      expect(component).toHaveClass('fha_right');
     });
   });
 
@@ -119,42 +119,42 @@ describe('IressStack', () => {
       const { getByTestId } = renderComponent({ verticalAlign: 'top' });
       const component = getByTestId('test-component');
 
-      expect(component).toHaveClass('va_top');
+      expect(component).toHaveClass('fva_top');
     });
 
     it('should apply middle vertical alignment', () => {
       const { getByTestId } = renderComponent({ verticalAlign: 'middle' });
       const component = getByTestId('test-component');
 
-      expect(component).toHaveClass('va_middle');
+      expect(component).toHaveClass('fva_middle');
     });
 
     it('should apply bottom vertical alignment', () => {
       const { getByTestId } = renderComponent({ verticalAlign: 'bottom' });
       const component = getByTestId('test-component');
 
-      expect(component).toHaveClass('va_bottom');
+      expect(component).toHaveClass('fva_bottom');
     });
 
     it('should apply between vertical alignment', () => {
       const { getByTestId } = renderComponent({ verticalAlign: 'between' });
       const component = getByTestId('test-component');
 
-      expect(component).toHaveClass('va_between');
+      expect(component).toHaveClass('fva_between');
     });
 
     it('should apply around vertical alignment', () => {
       const { getByTestId } = renderComponent({ verticalAlign: 'around' });
       const component = getByTestId('test-component');
 
-      expect(component).toHaveClass('va_around');
+      expect(component).toHaveClass('fva_around');
     });
 
     it('should apply evenly vertical alignment', () => {
       const { getByTestId } = renderComponent({ verticalAlign: 'evenly' });
       const component = getByTestId('test-component');
 
-      expect(component).toHaveClass('va_evenly');
+      expect(component).toHaveClass('fva_evenly');
     });
   });
 
@@ -168,8 +168,8 @@ describe('IressStack', () => {
       const component = getByTestId('test-component');
 
       expect(component).toHaveClass('gap_spacing.4');
-      expect(component).toHaveClass('ha_center');
-      expect(component).toHaveClass('va_middle');
+      expect(component).toHaveClass('fha_center');
+      expect(component).toHaveClass('fva_middle');
     });
 
     it('should merge custom className with component classes', () => {

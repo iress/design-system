@@ -8,8 +8,8 @@ const classNames = {
   gapMd: 'gap_spacing.4',
   wrapDefault: 'flex-wrap_wrap',
   wrapNoWrap: 'flex-wrap_nowrap',
-  horizontalAlignRight: 'ha_right',
-  verticalAlignCenter: 'va_middle',
+  horizontalAlignRight: 'fha_right',
+  verticalAlignCenter: 'fva_middle',
 };
 
 const renderComponent = (args: IressInlineProps) => {

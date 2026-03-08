@@ -10,8 +10,8 @@ const ALIGN_MAP: Record<string, string> = {
   stretch: 'stretch',
 };
 
-export const verticalAlign = defineUtility({
-  className: 'va',
+export const flexVerticalAlign = defineUtility({
+  className: 'fva',
   values: Object.keys(ALIGN_MAP),
   transform: (value: string) => {
     const cssValue = ALIGN_MAP[value];
@@ -20,7 +20,7 @@ export const verticalAlign = defineUtility({
         alignItems: cssValue,
       },
       '&:where([data-flex-dir="column"])': {
-        justifyContent: cssValue,
+        ...(cssValue === 'stretch' ? {} : { justifyContent: cssValue }),
       },
     };
   },
