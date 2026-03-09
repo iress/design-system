@@ -1857,7 +1857,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-mcp-server@workspace:packages/mcp-server"
   dependencies:
-    "@modelcontextprotocol/sdk": "npm:1.26.0"
+    "@modelcontextprotocol/sdk": "npm:1.27.0"
     "@types/minimist": "npm:^1"
     "@types/node": "npm:25.2.3"
     "@types/turndown": "npm:5.0.6"
@@ -2308,9 +2308,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/sdk@npm:1.26.0":
-  version: 1.26.0
-  resolution: "@modelcontextprotocol/sdk@npm:1.26.0"
+"@modelcontextprotocol/sdk@npm:1.27.0":
+  version: 1.27.0
+  resolution: "@modelcontextprotocol/sdk@npm:1.27.0"
   dependencies:
     "@hono/node-server": "npm:^1.19.9"
     ajv: "npm:^8.17.1"
@@ -2337,7 +2337,7 @@ __metadata:
       optional: true
     zod:
       optional: false
-  checksum: 10c0/b4098789d9fbbc4d9e0df240b18ba28867e4990ca4305322d6724fd03bba6685bbf21b39e02578b959da620b5a704ab1d565d3dbf377778ee9e4a0677b790728
+  checksum: 10c0/2c1a69d8873753f2152998633c31ae34f2bd434be5483a2a0b64224909068411493a5655f669aec3e9df782f98dcc9bbe95fd7e8eb487de8a8426f8249b583ce
   languageName: node
   linkType: hard
 
