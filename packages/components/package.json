@@ -74,7 +74,7 @@
     "vitest": "^4.0.18"
   },
   "dependencies": {
-    "@floating-ui/react": "0.27.17",
+    "@floating-ui/react": "0.27.18",
     "@tanstack/react-table": "8.21.3",
     "classnames": "2.5.1",
     "fuzzysort": "3.1.0",
