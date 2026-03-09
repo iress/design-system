@@ -1886,9 +1886,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@iress-oss/ids-storybook-config@npm:^0.4.1":
-  version: 0.4.1
-  resolution: "@iress-oss/ids-storybook-config@npm:0.4.1"
+"@iress-oss/ids-storybook-config@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@iress-oss/ids-storybook-config@npm:0.5.0"
   dependencies:
     "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.15"
     radash: "npm:12.1.1"
@@ -1911,7 +1911,7 @@ __metadata:
     storybook: ^10
     storybook-addon-tag-badges: ^3
     vite: ^7
-  checksum: 10c0/a1d2418479d166f14b34e496a6cc290c6dd7daaa2df8057cc40d334d0d67bba94cc898ea5566e7fc93efd459eaa2e173a127c5847e28397c9804bd151ddafcb7
+  checksum: 10c0/df0244507df29839eaf9c69ec67568f1affe5b072184400e4c9fc189a0c13e242530831ce4cdca1dbbadd156d7aa28622e42c360e6839fd52c47d77f1073001e
   languageName: node
   linkType: hard
 
@@ -1989,7 +1989,7 @@ __metadata:
   dependencies:
     "@chromatic-com/storybook": "npm:^5.0.1"
     "@iress-oss/ids-components": "npm:^6.0.0-alpha.4"
-    "@iress-oss/ids-storybook-config": "npm:^0.4.1"
+    "@iress-oss/ids-storybook-config": "npm:^0.5.0"
     "@iress-oss/ids-storybook-okta": "npm:^0.1.2"
     "@iress-oss/ids-storybook-sandbox": "npm:^0.2.2"
     "@iress-oss/ids-storybook-toggle-stories": "npm:^0.1.0"
@@ -1997,7 +1997,7 @@ __metadata:
     "@mermaid-js/mermaid-cli": "npm:^11.12.0"
     "@storybook/addon-a11y": "npm:^10.2.8"
     "@storybook/addon-docs": "npm:^10.2.8"
-    "@storybook/addon-links": "npm:10.2.8"
+    "@storybook/addon-links": "npm:10.2.10"
     "@storybook/react-vite": "npm:^10.2.8"
     "@typescript-eslint/eslint-plugin": "npm:^8.55.0"
     "@typescript-eslint/parser": "npm:^8.55.0"
@@ -3092,18 +3092,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-links@npm:10.2.8":
-  version: 10.2.8
-  resolution: "@storybook/addon-links@npm:10.2.8"
+"@storybook/addon-links@npm:10.2.10":
+  version: 10.2.10
+  resolution: "@storybook/addon-links@npm:10.2.10"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    storybook: ^10.2.8
+    storybook: ^10.2.10
   peerDependenciesMeta:
     react:
       optional: true
-  checksum: 10c0/ce4b39faaaf994ebe70c5e96132576c734a6c2f655c4c738db64a750ec342e0f240c0e73e39f40a9ff7f1ea13101d3bf309a44db68e95125d09502ed9593690d
+  checksum: 10c0/f0cd44c042fc3e6a02486a7e957d92bfc0f3d43a647ba236f4ef8b6f48ff05ad6380dccec206d2462a2fd0617d53d20d8dedc381b5e2194e82c03637277e5b31
   languageName: node
   linkType: hard
 
