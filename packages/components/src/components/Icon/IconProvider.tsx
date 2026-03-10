@@ -169,6 +169,10 @@ export const IressIconProvider = <P extends IconType = 'material'>({
       {children}
       {type === 'material' && container && (
         <FontLoader
+          // In the shadow DOM we mainly need the CSS class definition (e.g. `.material-symbols-rounded`)
+          // so elements can reference the correct font family. `icon_names=home` requests a minimal,
+          // single-icon subset from Google Fonts to keep the extra CSS/font payload small, while the
+          // main document's dynamic subsetting hook handles the full set of icons actually used.
           url={`https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@${MATERIAL_SYMBOLS.opticalSize},${MATERIAL_SYMBOLS.weight},0..1,${MATERIAL_SYMBOLS.grade}&icon_names=home`}
           container={container}
           onlyShadow
