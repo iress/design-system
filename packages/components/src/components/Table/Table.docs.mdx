@@ -164,6 +164,8 @@ The `TableColumnFilter` object accepts the following options:
 - `format`: Customises the display of filter option values in the dropdown. When not provided, falls back to the column's `format`. Accepts the same built-in formatters (`string`, `number`, `date`, `currency`, `percent`) or a custom function returning a ReactNode.
 - `values`: Explicit list of values to show in the filter dropdown. When provided, these are used instead of deriving values from the column data. Useful for stable filter options, server-side filtering, or showing all possible values regardless of current data.
 
+> **Note:** Column filtering is designed for selecting from discrete values. For more complex filtering needs (e.g., text search input, date ranges, or combining multiple filter criteria), use `IressDropdownMenu` with custom filter controls outside the table header.
+
 <ComponentExample of={ComponentStories.Filtering} />
 
 ### Width
