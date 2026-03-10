@@ -12,7 +12,7 @@ export const menuGroup = sva({
         left: 'spacing.0',
         top: 'spacing.0',
         bottom: 'spacing.0',
-        width: '[4px]',
+        width: 'menu.indicator',
         bg: 'colour.primary.fill',
         pointerEvents: 'none',
         transform: 'scaleX(0)',

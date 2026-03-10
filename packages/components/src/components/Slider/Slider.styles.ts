@@ -23,7 +23,7 @@ export const slider = sva({
       borderRadius: 'radius.4',
       height: 'slider.thumb',
       margin: 'spacing.0',
-      width: '[100%]',
+      width: '12/12',
       focusable: 'slider',
       _webkitSliderThumb: {
         appearance: 'none',

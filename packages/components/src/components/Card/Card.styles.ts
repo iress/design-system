@@ -49,9 +49,9 @@ export const card = sva({
       overflow: 'hidden',
       '& img': {
         display: 'block',
-        width: '[100%]',
+        width: '12/12',
         height: 'auto',
-        maxWidth: '[100%]',
+        maxWidth: '12/12',
       },
       '&:not(:last-child)': {
         borderBottomRadius: 'radius.0',
@@ -84,7 +84,7 @@ export const card = sva({
       a: {},
       button: {
         root: {
-          width: '[100%]',
+          width: '12/12',
         },
       },
       div: {},
@@ -111,7 +111,7 @@ export const card = sva({
       true: {
         root: {
           flex: '1',
-          width: '[100%]',
+          width: '12/12',
           stretch: true,
         },
       },

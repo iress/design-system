@@ -5,7 +5,7 @@ export const selectLabel = sva({
   base: {
     selectLabel: {
       display: 'flex',
-      width: '[100%]',
+      width: '12/12',
       justifyContent: 'space-between',
       alignItems: 'center',
       minHeight: 'input.height',

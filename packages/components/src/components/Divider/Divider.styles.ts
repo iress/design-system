@@ -25,7 +25,7 @@ export const divider = cva({
     },
     verticalStretch: {
       true: {
-        height: '[100%]',
+        height: '12/12',
         alignSelf: 'center',
       },
     },

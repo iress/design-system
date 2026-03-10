@@ -16,16 +16,16 @@ export const skeleton = cva({
   variants: {
     mode: {
       rect: {
-        width: '[100%]',
+        width: '12/12',
         height: '[100px]',
       },
       circle: {
-        borderRadius: '[50%]',
+        borderRadius: '50%',
         width: '[100px]',
         height: '[100px]',
       },
       text: {
-        width: '[100%]',
+        width: '12/12',
         height: '[spacing.6]',
       },
     },

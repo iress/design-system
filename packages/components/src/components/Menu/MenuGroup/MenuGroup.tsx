@@ -193,6 +193,7 @@ export const IressMenuGroup = <
         {...restProps}
         className={cx(GlobalCSSClass.MenuGroup, className)}
         srOnly={variant == 'rail' ? true : undefined}
+        width={variant == 'rail' ? 'auto' : undefined}
       >
         {label}
       </IressMenuHeading>

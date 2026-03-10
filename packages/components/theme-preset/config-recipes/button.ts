@@ -9,7 +9,7 @@ const fluidStyles: SystemStyleObject = {
   display: 'flex',
   justifyContent: 'center',
   marginInlineEnd: 'spacing.0',
-  width: '[100%]',
+  width: '12/12',
 };
 
 /**
@@ -36,7 +36,7 @@ export const buttonRecipe = defineSlotRecipe({
       fontKerning: '[none]',
       gap: 'spacing.2',
       justifyContent: 'center',
-      maxWidth: '[100%]',
+      maxWidth: '12/12',
       minWidth: 'input.height',
       minHeight: 'input.height',
       my: 'spacing.0',
@@ -94,7 +94,7 @@ export const buttonRecipe = defineSlotRecipe({
           display: 'flex',
           justifyContent: 'center',
           marginInlineEnd: 'spacing.0',
-          width: '[100%]',
+          width: '12/12',
         },
       },
       xs: {

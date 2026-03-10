@@ -17,13 +17,13 @@ export const radioGroup = cva({
         flexFlow: 'column wrap',
         rowGap: 'spacing.2',
         '& label': {
-          flexBasis: '[100%]',
+          flexBasis: '12/12',
         },
       },
       inline: {
         display: 'flex',
         flexFlow: 'row wrap',
-        width: '[100%]',
+        width: '12/12',
         gap: 'spacing.2',
         '& label': {
           flexBasis: '[auto]',
@@ -36,7 +36,7 @@ export const radioGroup = cva({
       },
       inlineEqualWidth: {
         display: 'flex',
-        width: '[100%]',
+        width: '12/12',
         '& > *': {
           flex: '[1 1 auto]',
         },

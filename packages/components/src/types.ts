@@ -97,6 +97,12 @@ export type SizeToken = Exclude<
   | `progress.${string}`
   | `slider.${string}`
   | `toggle.${string}`
+  | `menu.${string}`
+  | `pill.${string}`
+  | `mark.${string}`
+  | `icon.${string}`
+  | `spinner.${string}`
+  | `tab.${string}`
 >;
 
 /**

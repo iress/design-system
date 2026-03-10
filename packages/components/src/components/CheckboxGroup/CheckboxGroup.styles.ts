@@ -14,13 +14,13 @@ export const checkboxGroup = cva({
         rowGap: 'spacing.2',
         '& label': {
           display: 'flex',
-          flexBasis: '[100%]',
+          flexBasis: '12/12',
         },
         '& label span': {
-          flexBasis: '[100%]',
+          flexBasis: '12/12',
         },
         '& > *': {
-          flexBasis: '[100%]',
+          flexBasis: '12/12',
         },
       },
       stack: {
@@ -28,13 +28,13 @@ export const checkboxGroup = cva({
         flexWrap: 'wrap',
         rowGap: 'spacing.2',
         '& > *': {
-          flexBasis: '[100%]',
+          flexBasis: '12/12',
         },
       },
       inline: {
         display: 'flex',
         flexFlow: 'row wrap',
-        width: '[100%]',
+        width: '12/12',
         rowGap: 'spacing.2',
         columnGap: 'spacing.4',
       },

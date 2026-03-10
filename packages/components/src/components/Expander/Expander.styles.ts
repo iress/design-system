@@ -25,12 +25,7 @@ export const expander = sva({
       position: 'relative',
       focusable: 'true',
     },
-    chevron: {
-      width: '[1.5em]',
-      height: '[1.5em]',
-      color: 'colour.neutral.90',
-      transition: '[all 0.3s ease-in-out]',
-    },
+    chevron: {},
     container: {
       display: 'grid',
       gridTemplateRows: '0fr',
@@ -54,7 +49,7 @@ export const expander = sva({
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'flex-start',
-          width: '[100%]',
+          width: '12/12',
           textStyle: 'typography.heading.3',
           px: 'spacing.4',
           py: 'spacing.3',
@@ -69,10 +64,6 @@ export const expander = sva({
           '&[aria-expanded="true"]': {
             borderBottomRadius: 'radius.0',
           },
-        },
-        chevron: {
-          bg: 'colour.neutral.30',
-          borderRadius: '50%',
         },
         content: {
           px: 'spacing.4',
@@ -97,9 +88,6 @@ export const expander = sva({
     },
     open: {
       true: {
-        chevron: {
-          transform: 'rotate(180deg)',
-        },
         container: {
           gridTemplateRows: '1fr',
         },

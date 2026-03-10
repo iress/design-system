@@ -24,7 +24,7 @@ export const tableRecipe = defineSlotRecipe({
       color: 'colour.neutral.90',
       borderRadius: 'radius.system.layout',
       borderSpacing: 'spacing.0',
-      minWidth: '[100%]',
+      minWidth: '12/12',
       borderCollapse: 'collapse',
       margin: 'spacing.0',
 
@@ -87,13 +87,9 @@ export const tableRecipe = defineSlotRecipe({
       alignItems: 'center',
       justifyContent: 'space-between',
       position: 'relative',
-      width: '[100%]',
+      width: '12/12',
       cursor: 'pointer',
-      tableChevron: true,
       transition: 'all',
-      _after: {
-        alignSelf: 'flex-end',
-      },
       _hover: {
         color: 'colour.primary.text',
       },
@@ -187,11 +183,7 @@ export const tableRecipe = defineSlotRecipe({
       },
     },
     tableBodyOpen: {
-      true: {
-        activator: {
-          tableChevron: false,
-        },
-      },
+      true: {},
     },
     hiddenCaption: {
       true: {

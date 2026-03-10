@@ -17,8 +17,8 @@ export const placeholder = sva({
     },
     svg: {
       position: 'absolute',
-      width: '[100%]',
-      height: '[100%]',
+      width: '12/12',
+      height: '12/12',
       zIndex: '[-1]',
     },
     line: {

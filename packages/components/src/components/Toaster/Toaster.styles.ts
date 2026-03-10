@@ -7,7 +7,7 @@ export const toaster = sva({
       display: 'flex',
       position: 'fixed',
       width: '[500px]',
-      maxWidth: '[100%]',
+      maxWidth: '12/12',
       zIndex: '500',
       padding: 'spacing.7',
       boxSizing: 'border-box',

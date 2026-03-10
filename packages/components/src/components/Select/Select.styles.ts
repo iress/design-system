@@ -20,7 +20,7 @@ export const select = sva({
       overflowY: 'auto',
     },
     dropdownSelectedHeading: {
-      width: '[100%]',
+      width: '12/12',
     },
     dropdownClear: {
       paddingX: 'spacing.2',
@@ -29,7 +29,7 @@ export const select = sva({
       boxShadow: '[none]',
     },
     wrapper: {
-      width: '[100%]',
+      width: '12/12',
       display: 'flex',
       flexDirection: 'column',
     },
@@ -80,22 +80,22 @@ export const select = sva({
       },
       '25%': {
         root: {
-          width: 'input.25%',
+          width: '3/12',
         },
       },
       '50%': {
         root: {
-          width: 'input.50%',
+          width: '6/12',
         },
       },
       '75%': {
         root: {
-          width: 'input.75%',
+          width: '9/12',
         },
       },
       '100%': {
         root: {
-          width: 'input.100%',
+          width: '12/12',
         },
       },
     },

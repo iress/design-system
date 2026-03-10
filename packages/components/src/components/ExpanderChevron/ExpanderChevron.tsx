@@ -1,0 +1,29 @@
+import type { FC } from 'react';
+import { cx } from '@/styled-system/css';
+import { expanderChevron } from './ExpanderChevron.styles';
+
+export interface ExpanderChevronProps {
+  className?: string;
+  open?: boolean;
+}
+
+/**
+ * Internal chevron icon for expandable components.
+ * Uses Material Symbols "keyboard_arrow_down" (filled, weight 300).
+ * @see https://fonts.google.com/icons?selected=Material+Symbols+Rounded:keyboard_arrow_down
+ */
+export const ExpanderChevron: FC<ExpanderChevronProps> = ({
+  className,
+  open,
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 -960 960 960"
+    className={cx(expanderChevron({ open }), className)}
+    aria-hidden="true"
+  >
+    <path d="M480-372.92q-7.23 0-13.46-2.31t-11.85-7.92L274.92-562.92q-8.3-8.31-8.5-20.89-.19-12.57 8.5-21.27 8.7-8.69 21.08-8.69 12.38 0 21.08 8.69L480-442.15l162.92-162.93q8.31-8.3 20.89-8.5 12.57-.19 21.27 8.5 8.69 8.7 8.69 21.08 0 12.38-8.69 21.08L505.31-383.15q-5.62 5.61-11.85 7.92-6.23 2.31-13.46 2.31Z" />
+  </svg>
+);
+
+ExpanderChevron.displayName = 'ExpanderChevron';

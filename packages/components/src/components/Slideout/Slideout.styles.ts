@@ -9,8 +9,8 @@ export const slideout = sva({
       textStyle: 'typography.body.md',
       position: 'fixed',
       insetBlockStart: 'spacing.0',
-      height: '[100%]',
-      maxWidth: '[100%]',
+      height: '12/12',
+      maxWidth: '12/12',
       overflowY: 'auto',
       transition: '[all 0.3s ease-out]',
       layerStyle: 'floating',
@@ -22,7 +22,7 @@ export const slideout = sva({
         transition: '[none]',
       },
       smDown: {
-        width: '[100%]',
+        width: '12/12',
       },
     },
     content: {
