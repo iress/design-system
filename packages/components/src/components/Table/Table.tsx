@@ -9,6 +9,7 @@ import { table } from './Table.styles';
 import { cx } from '@/styled-system/css';
 import { styled } from '@/styled-system/jsx';
 import { type TableColumn } from './helpers/composeTableColumnDefs';
+import { type TableActiveFilter } from './TableProvider';
 import { type IressStyledProps } from '@/types';
 import { GlobalCSSClass } from '@/enums';
 
@@ -73,6 +74,21 @@ export type IressTableProps<
   removeRowBorders?: boolean;
 
   /**
+   * When true, disables client-side row filtering so the table renders
+   * whatever rows are passed in unchanged. Use with `onColumnFiltersChange`
+   * to implement server-side filtering.
+   * @default false
+   */
+  manualFiltering?: boolean;
+
+  /**
+   * Called whenever the column filter selection changes.
+   * Receives an array of `{ columnKey, values }` for each active filter.
+   * Use this to fetch filtered data from a server and update `rows`.
+   */
+  onColumnFiltersChange?: (filters: TableActiveFilter[]) => void;
+
+  /**
    * Add additional props to the row element.
    * Can be a props map or a function that returns an props map. The function is called with the row data.
    */
@@ -103,6 +119,8 @@ export const IressTable = <TRow extends object = never, TVal = never>({
   hiddenCaption,
   hiddenHeader,
   hover,
+  manualFiltering,
+  onColumnFiltersChange,
   removeRowBorders = false,
   rowProps,
   rows = [],
@@ -131,7 +149,12 @@ export const IressTable = <TRow extends object = never, TVal = never>({
 
   return (
     <div className={classes.root} data-testid={dataTestId}>
-      <TableProvider columns={columns} rows={rows}>
+      <TableProvider
+        columns={columns}
+        rows={rows}
+        manualFiltering={manualFiltering}
+        onColumnFiltersChange={onColumnFiltersChange}
+      >
         <styled.table
           {...restProps}
           className={cx(className, classes.table, GlobalCSSClass.Table)}

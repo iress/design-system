@@ -168,6 +168,45 @@ The `TableColumnFilter` object accepts the following options:
 
 <ComponentExample of={ComponentStories.Filtering} />
 
+### Server-side filtering
+
+For large datasets where rows are loaded from a server, you can disable the table's built-in client-side filtering and instead update `rows` yourself in response to filter changes.
+
+Two additional `IressTable` props support this pattern:
+
+- **`manualFiltering`** — when `true`, TanStack will not filter the rows. All rows passed in are displayed as-is (already filtered by the server).
+- **`onColumnFiltersChange`** — a callback that fires whenever the user changes the filter selection. It receives an array of `TableActiveFilter` objects (`{ columnKey: string, values: string[] }`), one for each column that has an active filter.
+
+Use `filter.values` on each column to provide explicit filter options. Without this, the dropdown only shows values present in the current (already-filtered) rows — so once a filter is applied, options would disappear. Providing `values` ensures the full list is always visible regardless of what rows are currently shown.
+
+```tsx
+const handleFilterChange = (filters: TableActiveFilter[]) => {
+  // Each entry has: { columnKey: string, values: string[] }
+  // An empty `values` array means no filter is active for that column.
+  const statusFilter = filters.find((f) => f.columnKey === 'status');
+  fetchRows({ status: statusFilter?.values });
+};
+
+<IressTable
+  rows={rows}
+  manualFiltering
+  onColumnFiltersChange={handleFilterChange}
+  columns={[
+    {
+      key: 'status',
+      label: 'Status',
+      filter: {
+        // Provide all possible options so the dropdown stays complete
+        // even when the current rows are already filtered.
+        values: ['Current', 'Proposed', 'Alternative', 'Archived'],
+      },
+    },
+  ]}
+/>
+```
+
+<ComponentExample of={ComponentStories.FilteringServerSide} />
+
 ### Width
 
 The width of a column is controlled by the `width` property on the `TableColumn` object. It takes a string so it can be set to a pixel value or a percentage.
