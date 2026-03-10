@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 import { IressButton } from '@/components/Button';
 import { IressMenu } from '@/components/Menu';
 import { IressMenuItem } from '@/components/Menu/MenuItem/MenuItem';
+import { IressPill } from '@/components/Pill';
 import { IressPopover } from '@/components/Popover';
 import {
   IressTableFormattedValue,
@@ -27,7 +28,9 @@ export const TableFilterButton = ({
   const isActive = filterValue.length > 0;
   const classes = table({ filterButtonActive: isActive });
 
-  const ariaLabel = isActive ? `${filterableText} (active)` : filterableText;
+  const ariaLabel = isActive
+    ? `${filterableText} (${filterValue.length} active)`
+    : filterableText;
 
   return (
     <IressPopover
@@ -52,9 +55,15 @@ export const TableFilterButton = ({
               fill="none"
             />
           </svg>
-          <span className={classes.filterIndicator} aria-hidden="true">
-            {filterValue.length > 9 ? '9+' : filterValue.length}
-          </span>
+          {isActive && (
+            <IressPill
+              mode="info"
+              className={classes.filterIndicator}
+              aria-hidden="true"
+            >
+              {filterValue.length > 9 ? '9+' : filterValue.length}
+            </IressPill>
+          )}
         </IressButton>
       }
       align="bottom-start"

@@ -92,7 +92,7 @@ describe('TableFilterButton', () => {
         );
 
         expect(
-          screen.getByRole('button', { name: 'filterable (active)' }),
+          screen.getByRole('button', { name: 'filterable (1 active)' }),
         ).toBeInTheDocument();
       });
 
@@ -107,6 +107,14 @@ describe('TableFilterButton', () => {
         const indicator = screen.getByText('2');
         expect(indicator).toBeInTheDocument();
         expect(indicator).toHaveAttribute('aria-hidden', 'true');
+      });
+
+      it('does not show a count indicator when no filters are active', () => {
+        const screen = render(
+          <TableFilterButton {...defaultProps} filterValue={[]} />,
+        );
+
+        expect(screen.queryByText('0')).not.toBeInTheDocument();
       });
 
       it('caps the indicator count at 9+ when more than 9 filters are active', () => {
@@ -127,7 +135,7 @@ describe('TableFilterButton', () => {
         );
 
         await userEvent.click(
-          screen.getByRole('button', { name: 'filterable (active)' }),
+          screen.getByRole('button', { name: 'filterable (2 active)' }),
         );
 
         await waitFor(() =>
@@ -191,7 +199,7 @@ describe('TableFilterButton', () => {
         );
 
         await userEvent.click(
-          screen.getByRole('button', { name: 'filterable (active)' }),
+          screen.getByRole('button', { name: 'filterable (2 active)' }),
         );
         await userEvent.click(screen.getByRole('option', { name: 'Value A' }));
 
