@@ -3,10 +3,8 @@ import {
   createContext,
   type PropsWithChildren,
   useMemo,
-  useState,
 } from 'react';
 import {
-  type ColumnFiltersState,
   getCoreRowModel,
   getFilteredRowModel,
   getFacetedRowModel,
@@ -23,35 +21,11 @@ import {
   type TableColumn,
 } from './helpers/composeTableColumnDefs';
 
-/**
- * Represents an active column filter, with a user-friendly key rather than
- * TanStack's internal `id` field.
- */
-export interface TableActiveFilter {
-  /** The `key` of the `TableColumn` the filter applies to. */
-  columnKey: string;
-  /** The selected filter values. An empty array means no filter is active. */
-  values: string[];
-}
-
 export interface TableProviderProps<
   TRow extends object,
   TVal = unknown,
 > extends PropsWithChildren {
   columns?: TableColumn<TRow, TVal>[];
-  /**
-   * When true, disables client-side row filtering so TanStack passes all rows
-   * through unchanged. Use with `onColumnFiltersChange` to implement
-   * server-side filtering where you update `rows` externally.
-   * @default false
-   */
-  manualFiltering?: boolean;
-  /**
-   * Called whenever the column filter selection changes.
-   * Receives the full list of active filters. Use this to fetch filtered data
-   * from a server and update the `rows` prop accordingly.
-   */
-  onColumnFiltersChange?: (filters: TableActiveFilter[]) => void;
   rows: TRow[];
 }
 
@@ -75,17 +49,11 @@ export const TableContext = createTableContext();
 export const TableProvider = <TRow extends object, TVal = unknown>({
   children,
   columns,
-  manualFiltering = false,
-  onColumnFiltersChange,
   rows,
 }: TableProviderProps<TRow, TVal>) => {
   const columnDefinitions = useMemo(() => {
     return composeTableColumnDefs(rows, columns);
   }, [columns, rows]);
-
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(() =>
-    composeTableInitialColumnFilters(columns),
-  );
 
   const api = useReactTable({
     columns: columnDefinitions,
@@ -98,24 +66,9 @@ export const TableProvider = <TRow extends object, TVal = unknown>({
     filterFns: {
       inArray: tableInArrayFilterFn,
     },
-    state: {
-      columnFilters,
-    },
-    onColumnFiltersChange: (updater) => {
-      setColumnFilters((prev) => {
-        const next = typeof updater === 'function' ? updater(prev) : updater;
-        onColumnFiltersChange?.(
-          next.map((f) => ({
-            columnKey: f.id,
-            values: (f.value as string[] | undefined) ?? [],
-          })),
-        );
-        return next;
-      });
-    },
-    manualFiltering,
     initialState: {
       sorting: composeTableInitialSorting(columns),
+      columnFilters: composeTableInitialColumnFilters(columns),
     },
   });
 
@@ -125,7 +78,7 @@ export const TableProvider = <TRow extends object, TVal = unknown>({
       getColumnByKey: (key) => columns?.find((column) => column.key === key),
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps -- only update when columns and rows change
-    [rows, columns, api.getState().sorting, columnFilters],
+    [rows, columns, api.getState().sorting, api.getState().columnFilters],
   );
 
   const { Provider } = getTableContext<TRow, TVal>();

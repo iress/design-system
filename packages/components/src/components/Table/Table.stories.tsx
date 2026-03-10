@@ -7,8 +7,6 @@ import { TableFormats } from './mocks/TableFormats';
 import TableFormatsSource from './mocks/TableFormats.tsx?raw';
 import { TableFiltering } from './mocks/TableFiltering';
 import TableFilteringSource from './mocks/TableFiltering.tsx?raw';
-import { TableFilteringServerSide } from './mocks/TableFilteringServerSide';
-import TableFilteringServerSideSource from './mocks/TableFilteringServerSide.tsx?raw';
 import { TableSorting } from './mocks/TableSorting';
 import TableSortingSource from './mocks/TableSorting.tsx?raw';
 import { TableSortingFn } from './mocks/TableSortingFn';
@@ -119,15 +117,6 @@ export const Filtering: Story = {
   render: (args) => <TableFiltering {...args} />,
   parameters: {
     ...withTransformedRawSource(TableFilteringSource, 'Props'),
-  },
-};
-
-export const FilteringServerSide: Story = {
-  ...CustomColumns,
-  name: 'Filtering (server-side)',
-  render: (args) => <TableFilteringServerSide {...args} />,
-  parameters: {
-    ...withTransformedRawSource(TableFilteringServerSideSource, 'Props'),
   },
 };
 

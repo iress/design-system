@@ -8,6 +8,4 @@ export type {
   TableColumnFilter,
 } from './helpers/composeTableColumnDefs';
 
-export type { TableActiveFilter } from './TableProvider';
-
 export * from './hooks/useTable';
