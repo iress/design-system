@@ -47,6 +47,8 @@ export const buttonRecipe = defineSlotRecipe({
       textDecoration: 'none',
       textStyle: 'typography.body.md.medium',
       transition: 'all',
+      '--transition-easing': 'linear',
+      '--transition-duration': '0.2s',
       userSelect: 'none',
       whiteSpace: 'normal',
       width: 'auto',
@@ -268,7 +270,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
 
           _active: {
-            layerStyle: 'focusRing.primary.md',
+            layerStyle: 'focusRing.primary.subtle',
           },
 
           '&[data-active="true"]': {

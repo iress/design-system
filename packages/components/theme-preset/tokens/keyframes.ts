@@ -45,6 +45,20 @@ export const keyframes = defineKeyframes({
     '40%': { backgroundPositionX: '-200%' },
     '100%': { backgroundPositionX: '-200%' },
   },
+  modalStatusIcon: {
+    '0%': {
+      boxShadow:
+        '0 0 0 0 color-mix(in srgb, var(--alert-fill) 0%, transparent)',
+    },
+    '50%': {
+      boxShadow:
+        '0 0 0 6px color-mix(in srgb, var(--alert-fill) 25%, transparent)',
+    },
+    '100%': {
+      boxShadow:
+        '0 0 0 12px color-mix(in srgb, var(--alert-fill) 0%, transparent)',
+    },
+  },
   toggleActive: {
     '0%': { opacity: 0, transform: 'scale(1)' },
     '40%': { opacity: 1, transform: 'scaleX(1.25) scaleY(1.5)' },
