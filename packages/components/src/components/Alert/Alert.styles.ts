@@ -3,6 +3,7 @@ import { sva } from '@/styled-system/css';
 export const alert = sva({
   slots: [
     'alert',
+    'alertVars',
     'icon',
     'wrapper',
     'heading',
@@ -140,7 +141,7 @@ export const alert = sva({
     },
     status: {
       danger: {
-        alert: {
+        alertVars: {
           '--alert-surface': '{colors.colour.system.danger.surface}',
           '--alert-surfaceHover': '{colors.colour.system.danger.surfaceHover}',
           '--alert-text': '{colors.colour.system.danger.text}',
@@ -150,7 +151,7 @@ export const alert = sva({
         },
       },
       info: {
-        alert: {
+        alertVars: {
           '--alert-surface': '{colors.colour.system.info.surface}',
           '--alert-surfaceHover': '{colors.colour.system.info.surfaceHover}',
           '--alert-text': '{colors.colour.system.info.text}',
@@ -160,7 +161,7 @@ export const alert = sva({
         },
       },
       success: {
-        alert: {
+        alertVars: {
           '--alert-surface': '{colors.colour.system.success.surface}',
           '--alert-surfaceHover': '{colors.colour.system.success.surfaceHover}',
           '--alert-text': '{colors.colour.system.success.text}',
@@ -170,7 +171,7 @@ export const alert = sva({
         },
       },
       warning: {
-        alert: {
+        alertVars: {
           '--alert-surface': '{colors.colour.system.warning.surface}',
           '--alert-surfaceHover': '{colors.colour.system.warning.surfaceHover}',
           '--alert-text': '{colors.colour.system.warning.text}',
@@ -180,7 +181,7 @@ export const alert = sva({
         },
       },
       neutral: {
-        alert: {
+        alertVars: {
           '--alert-surface': '{colors.colour.neutral.20}',
           '--alert-surfaceHover': '{colors.colour.neutral.30}',
           '--alert-text': '{colors.colour.neutral.90}',

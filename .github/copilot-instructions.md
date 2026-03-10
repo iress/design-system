@@ -57,7 +57,6 @@ When assisting with this repository, GitHub Copilot should:
   - `@iress-oss/ids-components` - React component library
   - `@iress-oss/ids-tokens` - Design tokens
   - Storybook addons for various integrations
-  - `@iress-oss/ids-mcp-server` - **DEPRECATED** — Replaced by `.ai/` folders and `.agents/skills/`. Install skills via `npx skills add iress/design-system`. See `.agents/skills/` for available skills: `figma-to-ids`, `token-usage`, `ui-doctor`, `ui-translation`, `version-migration`.
 
 - **Tech Stack**: React, TypeScript, Vite, Vitest, Storybook, Panda CSS
 - **Testing**: Use `yarn test:coverage` commands, wait patiently for test startup (can take 30+ seconds)

@@ -4,7 +4,12 @@ import {
   type StoryObj,
 } from '@storybook/react-vite';
 import { type ArgsStoryFn } from 'storybook/internal/types';
-import { IressModal, type IressModalProps, IressModalProvider } from '.';
+import {
+  IressModal,
+  type IressModalProps,
+  IressModalProvider,
+  type ModalStatus,
+} from '.';
 import { IressButton } from '../Button';
 import { useModal } from './hooks/useModal';
 import { ModalUsingState } from './mocks/ModalUsingState';
@@ -21,6 +26,8 @@ import {
 } from '../../main';
 import { ModalSizes } from './mocks/ModalSizes';
 import ModalSizesSource from './mocks/ModalSizes.tsx?raw';
+import { ModalStatuses } from './mocks/ModalStatuses';
+import ModalStatusesSource from './mocks/ModalStatuses.tsx?raw';
 import {
   CurrentBreakpoint,
   DiffViewer,
@@ -34,9 +41,9 @@ import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 const MODAL_ID = 'storybook-modal';
 
-const renderWithButtonFn = (
+const renderWithButtonFn = <TStatus extends ModalStatus>(
   buttonTitle = 'Show modal',
-): ArgsStoryFn<ReactRenderer, IressModalProps> => {
+): ArgsStoryFn<ReactRenderer, IressModalProps<TStatus>> => {
   return (args) => {
     const { showModal } = useModal();
 
@@ -51,7 +58,8 @@ const renderWithButtonFn = (
   };
 };
 
-type Story = StoryObj<typeof IressModal>;
+type Story = StoryObj<IressModalProps>;
+type StatusStory = StoryObj<IressModalProps<'danger' | 'success' | 'warning'>>;
 
 export default {
   title: 'Components/Modal',
@@ -188,9 +196,10 @@ export const Heading: Story = {
 export const FooterSlot: Story = {
   ...Default,
   args: {
-    ...Default.args,
     children: 'Normal modal content',
     footer: <IressButton>Button in footer</IressButton>,
+    heading: 'Modal Header',
+    id: MODAL_ID,
   },
   argTypes: {
     ...disableArgTypes(['show', 'footer']),
@@ -201,7 +210,8 @@ export const FooterSlot: Story = {
 export const FixedFooter: Story = {
   ...Default,
   args: {
-    ...Default.args,
+    heading: 'Modal Header',
+    id: MODAL_ID,
     children: (
       <>
         <IressText element="h2">
@@ -360,6 +370,33 @@ export const DisableClosing: Story = {
   render: (args) => {
     const { showModal } = useModal();
 
+    const noCloseButtonModal = (
+      <IressModal
+        {...args}
+        id="no-close-button"
+        noCloseButton
+        footer={
+          <IressButton onClick={() => showModal('no-close-button', false)}>
+            Close
+          </IressButton>
+        }
+      />
+    );
+
+    const bothModal = (
+      <IressModal
+        {...args}
+        id="both"
+        disableBackdropClick
+        noCloseButton
+        footer={
+          <IressButton onClick={() => showModal('both', false)}>
+            Close
+          </IressButton>
+        }
+      />
+    );
+
     return (
       <IressStack gap="md">
         <IressButton onClick={() => showModal('disable-backdrop-click')} fluid>
@@ -375,34 +412,36 @@ export const DisableClosing: Story = {
           No close button (please provide one, if you decide to hide the close
           button)
         </IressButton>
-        <IressModal
-          {...args}
-          id="no-close-button"
-          noCloseButton
-          footer={
-            <IressButton onClick={() => showModal('no-close-button', false)}>
-              Close
-            </IressButton>
-          }
-        />
+        {noCloseButtonModal}
 
         <IressButton onClick={() => showModal('both')} fluid>
           Both (If you hide the close button, ensure you provide another way to
           close the modal)
         </IressButton>
-        <IressModal
-          {...args}
-          id="both"
-          disableBackdropClick
-          noCloseButton
-          footer={
-            <IressButton onClick={() => showModal('both', false)}>
-              Close
-            </IressButton>
-          }
-        />
+        {bothModal}
       </IressStack>
     );
+  },
+};
+
+export const Status: StatusStory = {
+  args: {
+    children: (
+      <IressText element="p">
+        Optional contextual information added here, this can be introductory
+        text or any other relevant copy.
+      </IressText>
+    ),
+    actions: [{ children: 'Button', mode: 'tertiary' }, { children: 'Button' }],
+    heading: 'Modal Header',
+    status: 'danger',
+  },
+  argTypes: {
+    ...disableArgTypes(['show', 'status', 'size', 'id']),
+  },
+  render: (args) => <ModalStatuses {...args} />,
+  parameters: {
+    ...withCustomSource(ModalStatusesSource),
   },
 };
 

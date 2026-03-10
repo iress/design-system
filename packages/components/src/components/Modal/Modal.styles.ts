@@ -7,7 +7,11 @@ const slots = [
   'header',
   'content',
   'footer',
+  'footerActions',
+  'action',
   'pushElement',
+  'statusIcon',
+  'statusHeader',
 ] as const;
 
 /**
@@ -35,8 +39,33 @@ export const modal = sva({
       mb: 'spacing.4',
       color: 'colour.neutral.90',
     },
+    action: {
+      flex: '1',
+    },
     footer: {
       textAlign: 'right',
+    },
+    footerActions: {
+      display: 'flex',
+      flexDirection: 'row',
+      gap: 'spacing.3',
+      justifyContent: 'flex-end',
+    },
+    statusIcon: {
+      flexShrink: 0,
+      fontSize: '[2em]',
+      width: '[1.5em]',
+      textAlign: 'center',
+      borderRadius: '50%',
+      aspectRatio: '1 / 1',
+      scale: '[1]',
+    },
+    statusHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'spacing.2',
+      pt: 'spacing.4',
+      mb: 'spacing.2',
     },
     modal: {
       // Performance: CSS containment (no paint due to fixed positioning)
@@ -149,6 +178,29 @@ export const modal = sva({
       },
     },
     /**
+     * Sets the status style of the modal with an accompanying status icon.
+     */
+    alertStatus: {
+      danger: {
+        statusIcon: {
+          color: 'colour.system.danger.onFill',
+          bg: 'colour.system.danger.fill',
+        },
+      },
+      success: {
+        statusIcon: {
+          color: 'colour.system.success.onFill',
+          bg: 'colour.system.success.fill',
+        },
+      },
+      warning: {
+        statusIcon: {
+          color: 'colour.system.warning.onFill',
+          bg: 'colour.system.warning.fill',
+        },
+      },
+    },
+    /**
      * When set to `true`, the modal will act like a static element when open.
      * This means it will not lock scroll or focus within the modal.
      * Note: This is used internally to display modals in Styler. It is not recommended to use this prop in your own applications.
@@ -164,4 +216,35 @@ export const modal = sva({
       },
     },
   },
+  compoundVariants: [
+    {
+      alertStatus: ['danger', 'success', 'warning'],
+      size: 'sm',
+      css: {
+        header: {
+          textAlign: 'center',
+        },
+        statusHeader: {
+          flexDirection: 'column',
+        },
+      },
+    },
+    {
+      alertStatus: ['danger', 'success', 'warning'],
+      css: {
+        header: {
+          mb: 'spacing.0',
+        },
+      },
+    },
+    {
+      alertStatus: ['danger', 'success', 'warning'],
+      status: 'open',
+      css: {
+        statusIcon: {
+          animation: 'modalStatusIcon 0.7s linear .1s',
+        },
+      },
+    },
+  ],
 });
