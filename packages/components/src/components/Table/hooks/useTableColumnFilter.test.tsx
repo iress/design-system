@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react';
+import type { Table } from '@tanstack/react-table';
 import { PropsWithChildren } from 'react';
 import { TableColumn } from '../helpers/composeTableColumnDefs';
 import {
@@ -21,6 +22,13 @@ const columnApi = {
       ['Value B', 1],
     ]),
 };
+
+const mockApi = {
+  getState: () => ({
+    sorting: [],
+    columnFilters: [],
+  }),
+} as unknown as Table<object>;
 
 const columns: TableColumn<object, unknown>[] = [
   {
@@ -47,12 +55,7 @@ function renderHookInTable(
       <TableContext.Provider
         value={
           {
-            api: {
-              getState: () => ({
-                sorting: [],
-                columnFilters: [],
-              }),
-            },
+            api: mockApi,
             getColumnByKey: (key: string) =>
               (wrapperProps.columns ?? columns).find(
                 (column) => column.key === key,
