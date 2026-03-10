@@ -161,6 +161,96 @@ describe('IressTable', () => {
         // Should have called the sort function
         expect(sortFn).toHaveBeenCalledTimes(1);
       });
+
+      describe('filter', () => {
+        it('renders a filter input when filter is true on a column', () => {
+          const screen = renderComponent({
+            columns: [
+              { key: 'key', label: 'Key', filter: true },
+              { key: 'value', label: 'Value' },
+            ],
+          });
+
+          expect(
+            screen.getByRole('textbox', { name: 'Filter' }),
+          ).toBeInTheDocument();
+        });
+
+        it('does not render a filter input when filter is not set', () => {
+          const screen = renderComponent({
+            columns: [
+              { key: 'key', label: 'Key' },
+              { key: 'value', label: 'Value' },
+            ],
+          });
+
+          expect(
+            screen.queryByRole('textbox', { name: 'Filter' }),
+          ).not.toBeInTheDocument();
+        });
+
+        it('filters rows when text is typed into the filter input', async () => {
+          const screen = renderComponent({
+            columns: [
+              { key: 'key', label: 'Key', filter: true },
+              { key: 'value', label: 'Value' },
+            ],
+          });
+
+          // Initially both rows are visible (+1 header row +1 filter row)
+          expect(screen.getAllByRole('row')).toHaveLength(TEST_ROWS.length + 2);
+
+          // Type in the filter
+          const filterInput = screen.getByRole('textbox', { name: 'Filter' });
+          await userEvent.type(filterInput, '1');
+
+          // Only the matching row should be visible (1 header + 1 filter row + 1 data row)
+          expect(screen.getAllByRole('row')).toHaveLength(3);
+          expect(screen.getByText('one')).toBeInTheDocument();
+          expect(screen.queryByText('two')).not.toBeInTheDocument();
+        });
+
+        it('renders a custom filter placeholder when filterPlaceholder is set', () => {
+          const screen = renderComponent({
+            columns: [
+              {
+                key: 'key',
+                label: 'Key',
+                filter: true,
+                filterPlaceholder: 'Search...',
+              },
+            ],
+          });
+
+          const filterInput = screen.getByRole('textbox', { name: 'Filter' });
+          expect(filterInput).toHaveAttribute('placeholder', 'Search...');
+        });
+
+        it('renders with default filter placeholder when filterPlaceholder is not set', () => {
+          const screen = renderComponent({
+            columns: [{ key: 'key', label: 'Key', filter: true }],
+          });
+
+          const filterInput = screen.getByRole('textbox', { name: 'Filter' });
+          expect(filterInput).toHaveAttribute('placeholder', 'Filter...');
+        });
+
+        it('has filter input accessible via aria-describedby referencing the column header', () => {
+          const screen = renderComponent({
+            columns: [{ key: 'key', label: 'Key', filter: true }],
+          });
+
+          const columnHeader = screen.getByRole('columnheader', {
+            name: 'Key',
+          });
+          const filterInput = screen.getByRole('textbox', { name: 'Filter' });
+
+          expect(filterInput).toHaveAttribute(
+            'aria-describedby',
+            columnHeader.id,
+          );
+        });
+      });
     });
 
     describe('compact', () => {

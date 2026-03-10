@@ -6,6 +6,7 @@ import {
 } from 'react';
 import {
   getCoreRowModel,
+  getFilteredRowModel,
   getSortedRowModel,
   type Table,
   useReactTable,
@@ -54,6 +55,7 @@ export const TableProvider = <TRow extends object, TVal = unknown>({
     columns: columnDefinitions,
     data: rows,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
     initialState: {
       sorting: composeTableInitialSorting(columns),
@@ -65,8 +67,8 @@ export const TableProvider = <TRow extends object, TVal = unknown>({
       api,
       getColumnByKey: (key) => columns?.find((column) => column.key === key),
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- only update when columns and rows change
-    [rows, columns, api.getState().sorting],
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only update when columns, rows, sorting, or column filters change
+    [rows, columns, api.getState().sorting, api.getState().columnFilters],
   );
 
   const { Provider } = getTableContext<TRow, TVal>();

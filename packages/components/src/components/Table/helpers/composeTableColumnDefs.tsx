@@ -1,5 +1,6 @@
 import {
   createColumnHelper,
+  type FilterFnOption,
   type SortDirection,
   type SortingFnOption,
 } from '@tanstack/react-table';
@@ -25,6 +26,25 @@ export interface TableColumn<TRow extends object, TVal = never> extends Pick<
    * When set to true, a divider will be rendered after the column.
    */
   divider?: boolean;
+
+  /**
+   * When set to true, the column will be filterable.
+   * A filter input will be rendered in the table header below the column label.
+   */
+  filter?: boolean;
+
+  /**
+   * The filter function to use when filtering the column.
+   * If not provided, the default `includesString` filter function will be used.
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-filtering#filterfn)
+   */
+  filterFn?: FilterFnOption<TRow>;
+
+  /**
+   * The placeholder text for the filter input.
+   * @default 'Filter...'
+   */
+  filterPlaceholder?: string;
 
   /**
    * Formats the cell content.
@@ -87,6 +107,7 @@ export const composeTableColumnDefs = <TRow extends object, TVal = never>(
         id: key,
         cell: (info) => info.getValue(),
         header: () => formatObjectKey(key),
+        enableColumnFilter: false,
         enableSorting: false,
       }),
     );
@@ -98,6 +119,7 @@ export const composeTableColumnDefs = <TRow extends object, TVal = never>(
 
   return columnEntries.map(([key, column]) => {
     const enableSorting = !!column?.sort || !!column?.sortFn;
+    const enableColumnFilter = !!column?.filter;
 
     const columnOptions: Parameters<typeof columnHelper.accessor>['1'] = {
       id: key,
@@ -110,6 +132,8 @@ export const composeTableColumnDefs = <TRow extends object, TVal = never>(
       ),
       header: () => column?.label,
       enableSorting,
+      enableColumnFilter,
+      filterFn: column?.filterFn ?? 'includesString',
     };
 
     if (column?.sortFn) {

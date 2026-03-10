@@ -15,6 +15,7 @@ describe('composeTableColumnDefs', () => {
       {
         accessorFn: expect.any(Function) as AccessorFn,
         cell: expect.any(Function) as CellFn,
+        enableColumnFilter: false,
         enableSorting: false,
         header: expect.any(Function) as HeaderFn,
         id: 'test',
@@ -39,7 +40,9 @@ describe('composeTableColumnDefs', () => {
       {
         accessorFn: expect.any(Function) as AccessorFn,
         cell: expect.any(Function) as CellFn,
+        enableColumnFilter: false,
         enableSorting: true,
+        filterFn: 'includesString',
         header: expect.any(Function) as HeaderFn,
         id: 'test',
       },
@@ -78,10 +81,64 @@ describe('composeTableColumnDefs', () => {
       {
         accessorFn: expect.any(Function) as AccessorFn,
         cell: expect.any(Function) as CellFn,
+        enableColumnFilter: false,
         enableSorting: true,
+        filterFn: 'includesString',
         header: expect.any(Function) as HeaderFn,
         id: 'test',
         sortingFn: sortFn,
+      },
+    ]);
+  });
+
+  it('creates a filtering column when filter is true', () => {
+    const columnDefs = composeTableColumnDefs(
+      [{ test: 'test' }],
+      [
+        {
+          key: 'test',
+          label: 'Test',
+          filter: true,
+        },
+      ],
+    );
+
+    expect(columnDefs).toEqual([
+      {
+        accessorFn: expect.any(Function) as AccessorFn,
+        cell: expect.any(Function) as CellFn,
+        enableColumnFilter: true,
+        enableSorting: false,
+        filterFn: 'includesString',
+        header: expect.any(Function) as HeaderFn,
+        id: 'test',
+      },
+    ]);
+  });
+
+  it('uses a custom filter function when filterFn is provided', () => {
+    const filterFn = () => true;
+    const columnDefs = composeTableColumnDefs(
+      [{ test: 'test' }],
+      [
+        {
+          key: 'test',
+          label: 'Test',
+          filter: true,
+          filterFn,
+        },
+      ],
+    );
+
+    expect(columnDefs).toEqual([
+      {
+        accessorFn: expect.any(Function) as AccessorFn,
+        cell: expect.any(Function) as CellFn,
+        enableColumnFilter: true,
+        enableSorting: false,
+        filterFn,
+        header: expect.any(Function) as HeaderFn,
+        id: 'test',
       },
     ]);
   });
