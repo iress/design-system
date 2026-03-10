@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { TableFilterButton } from './TableFilterButton';
@@ -17,60 +17,46 @@ describe('TableFilterButton', () => {
     expect(button).toBeInTheDocument();
   });
 
-  it('does not show the filter panel by default', () => {
+  it('does not show the filter menu by default', () => {
     const screen = render(<TableFilterButton {...defaultProps} />);
 
-    const panel = screen.queryByRole('dialog');
-    expect(panel).not.toBeInTheDocument();
+    expect(
+      screen.getAllByRole('option', { hidden: true })[0],
+    ).not.toBeVisible();
   });
 
-  it('opens the filter panel when the button is clicked', async () => {
-    const screen = render(<TableFilterButton {...defaultProps} />);
-
-    const button = screen.getByRole('button', { name: 'filterable' });
-    await userEvent.click(button);
-
-    const panel = screen.getByRole('dialog');
-    expect(panel).toBeInTheDocument();
-  });
-
-  it('closes the filter panel when the button is clicked again', async () => {
-    const screen = render(<TableFilterButton {...defaultProps} />);
-
-    const button = screen.getByRole('button', { name: 'filterable' });
-    await userEvent.click(button);
-    await userEvent.click(button);
-
-    const panel = screen.queryByRole('dialog');
-    expect(panel).not.toBeInTheDocument();
-  });
-
-  it('closes the filter panel when Escape is pressed', async () => {
-    const screen = render(<TableFilterButton {...defaultProps} />);
-
-    const button = screen.getByRole('button', { name: 'filterable' });
-    await userEvent.click(button);
-
-    expect(screen.getByRole('dialog')).toBeInTheDocument();
-
-    await userEvent.keyboard('{Escape}');
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-  });
-
-  it('renders all unique values as checkboxes', async () => {
+  it('opens the filter menu when the button is clicked', async () => {
     const screen = render(<TableFilterButton {...defaultProps} />);
 
     await userEvent.click(screen.getByRole('button', { name: 'filterable' }));
 
+    expect(screen.getByRole('option', { name: 'Value A' })).toBeVisible();
+    expect(screen.getByRole('option', { name: 'Value B' })).toBeVisible();
+    expect(screen.getByRole('option', { name: 'Value C' })).toBeVisible();
+  });
+
+  it('closes the filter menu when the button is clicked again', async () => {
+    const screen = render(<TableFilterButton {...defaultProps} />);
+
+    const button = screen.getByRole('button', { name: 'filterable' });
+    await userEvent.click(button);
+    await userEvent.click(button);
+
     expect(
-      screen.getByRole('checkbox', { name: 'Value A' }),
-    ).toBeInTheDocument();
+      screen.getAllByRole('option', { hidden: true })[0],
+    ).not.toBeVisible();
+  });
+
+  it('closes the filter menu when Escape is pressed', async () => {
+    const screen = render(<TableFilterButton {...defaultProps} />);
+
+    await userEvent.click(screen.getByRole('button', { name: 'filterable' }));
+    expect(screen.getByRole('option', { name: 'Value A' })).toBeVisible();
+
+    await userEvent.keyboard('{Escape}');
     expect(
-      screen.getByRole('checkbox', { name: 'Value B' }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('checkbox', { name: 'Value C' }),
-    ).toBeInTheDocument();
+      screen.getAllByRole('option', { hidden: true })[0],
+    ).not.toBeVisible();
   });
 
   it('shows the aria-expanded attribute on the button', async () => {
@@ -93,10 +79,9 @@ describe('TableFilterButton', () => {
           />,
         );
 
-        const button = screen.getByRole('button', {
-          name: 'Investment filter',
-        });
-        expect(button).toBeInTheDocument();
+        expect(
+          screen.getByRole('button', { name: 'Investment filter' }),
+        ).toBeInTheDocument();
       });
     });
 
@@ -106,13 +91,12 @@ describe('TableFilterButton', () => {
           <TableFilterButton {...defaultProps} filterValue={['Value A']} />,
         );
 
-        const button = screen.getByRole('button', {
-          name: 'filterable (active)',
-        });
-        expect(button).toBeInTheDocument();
+        expect(
+          screen.getByRole('button', { name: 'filterable (active)' }),
+        ).toBeInTheDocument();
       });
 
-      it('checks the selected filter values', async () => {
+      it('shows selected options as aria-selected when the menu is open', async () => {
         const screen = render(
           <TableFilterButton
             {...defaultProps}
@@ -124,16 +108,24 @@ describe('TableFilterButton', () => {
           screen.getByRole('button', { name: 'filterable (active)' }),
         );
 
-        expect(screen.getByRole('checkbox', { name: 'Value A' })).toBeChecked();
-        expect(
-          screen.getByRole('checkbox', { name: 'Value B' }),
-        ).not.toBeChecked();
-        expect(screen.getByRole('checkbox', { name: 'Value C' })).toBeChecked();
+        await waitFor(() =>
+          expect(
+            screen.getByRole('option', { name: 'Value A' }),
+          ).toHaveAttribute('aria-selected', 'true'),
+        );
+        expect(screen.getByRole('option', { name: 'Value B' })).toHaveAttribute(
+          'aria-selected',
+          'false',
+        );
+        expect(screen.getByRole('option', { name: 'Value C' })).toHaveAttribute(
+          'aria-selected',
+          'true',
+        );
       });
     });
 
     describe('setFilter', () => {
-      it('calls setFilter with new value when a checkbox is selected', async () => {
+      it('calls setFilter with new value when an option is selected', async () => {
         const setFilter = vi.fn();
         const screen = render(
           <TableFilterButton {...defaultProps} setFilter={setFilter} />,
@@ -142,14 +134,12 @@ describe('TableFilterButton', () => {
         await userEvent.click(
           screen.getByRole('button', { name: 'filterable' }),
         );
-        await userEvent.click(
-          screen.getByRole('checkbox', { name: 'Value A' }),
-        );
+        await userEvent.click(screen.getByRole('option', { name: 'Value A' }));
 
         expect(setFilter).toHaveBeenCalledWith(['Value A']);
       });
 
-      it('calls setFilter without the value when a checkbox is deselected', async () => {
+      it('calls setFilter without the value when an option is deselected', async () => {
         const setFilter = vi.fn();
         const screen = render(
           <TableFilterButton
@@ -162,9 +152,7 @@ describe('TableFilterButton', () => {
         await userEvent.click(
           screen.getByRole('button', { name: 'filterable (active)' }),
         );
-        await userEvent.click(
-          screen.getByRole('checkbox', { name: 'Value A' }),
-        );
+        await userEvent.click(screen.getByRole('option', { name: 'Value A' }));
 
         expect(setFilter).toHaveBeenCalledWith(['Value B']);
       });

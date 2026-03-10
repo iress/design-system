@@ -64,7 +64,6 @@ export const TableHeaderCell = ({
       headers={additionalHeaders}
       {...columnSort?.columnProps}
       {...columnStyles}
-      style={{ position: 'relative', ...columnStyles?.style }}
     >
       {hasFilter ? (
         <div className={classes.headerContent}>

@@ -15,8 +15,6 @@ export const tableRecipe = defineSlotRecipe({
     'headerContent',
     'filterButton',
     'filterIcon',
-    'filterPanel',
-    'filterItem',
   ],
   base: {
     root: {
@@ -125,29 +123,6 @@ export const tableRecipe = defineSlotRecipe({
       width: '[1.1em]',
       height: '[1.1em]',
       fill: 'currentColor',
-    },
-    filterPanel: {
-      position: 'absolute',
-      top: '[calc(100% + {spacing.1})]',
-      left: 'spacing.0',
-      zIndex: 'overlay',
-      bg: 'colour.neutral.10',
-      border: 'divider',
-      borderRadius: 'radius.system.layout',
-      minWidth: '[160px]',
-      boxShadow: 'card',
-      padding: 'spacing.2',
-    },
-    filterItem: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 'spacing.2',
-      padding: 'spacing.1',
-      cursor: 'pointer',
-      borderRadius: 'radius.system.form',
-      _hover: {
-        bg: 'colour.primary.surfaceHover',
-      },
     },
     rowGroupHeader: {
       textStyle: 'typography.heading.4',
