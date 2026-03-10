@@ -44,6 +44,14 @@ export interface TableColumnFilter<TRow extends object> {
    * Use a custom renderer by passing a function that returns a ReactNode.
    */
   format?: TableCellFormats | ((value: string) => ReactNode);
+
+  /**
+   * Explicit list of values to show in the filter dropdown.
+   * When provided, these values are used instead of deriving them from the column data.
+   * Useful for stable filter options, server-side filtering, or showing all possible
+   * values regardless of current data. Values are stringified for display.
+   */
+  values?: unknown[];
 }
 
 /**

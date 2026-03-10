@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/react';
+import { act, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { TableFilterButton } from './TableFilterButton';
@@ -146,11 +146,15 @@ describe('TableFilterButton', () => {
 
     describe('filterFormat', () => {
       it('renders formatted content for each filter option when a function is provided', async () => {
-        const filterFormat = (value: string) => (
-          <span data-testid={`badge-${value}`}>{value.toUpperCase()}</span>
-        );
         const screen = render(
-          <TableFilterButton {...defaultProps} filterFormat={filterFormat} />,
+          <TableFilterButton
+            {...defaultProps}
+            filterFormat={(value: string) => (
+              <span data-testid={`badge-${value}`}>
+                {String(value).toUpperCase()}
+              </span>
+            )}
+          />,
         );
 
         await userEvent.click(
@@ -245,6 +249,11 @@ describe('TableFilterButton', () => {
   describe('accessibility', () => {
     it('should not have basic accessibility issues when closed', async () => {
       const screen = render(<TableFilterButton {...defaultProps} />);
+
+      // TODO: act warning only shows when running in parallel with other tests. not sure why.
+      // Floating UI flushing: https://floating-ui.com/docs/react#testing
+      await act(async () => {});
+
       const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
     });
@@ -252,6 +261,10 @@ describe('TableFilterButton', () => {
     it('should not have basic accessibility issues when open', async () => {
       const screen = render(<TableFilterButton {...defaultProps} />);
       await userEvent.click(screen.getByRole('button', { name: 'filterable' }));
+
+      // TODO: act warning only shows when running in parallel with other tests. not sure why.
+      // Floating UI flushing: https://floating-ui.com/docs/react#testing
+      await act(async () => {});
 
       const results = await axe(screen.container);
       expect(results).toHaveNoViolations();

@@ -118,7 +118,7 @@ describe('useTableColumnFilter', () => {
     expect(hook.result.current?.uniqueValues).toEqual(['Value A', 'Value B']);
   });
 
-  it('returns sorted unique values', () => {
+  it('returns unique values from the column sorted alphabetically', () => {
     const hook = renderHookInTable({
       columnApi: {
         ...columnApi,
@@ -198,5 +198,49 @@ describe('useTableColumnFilter', () => {
 
     hook.result.current?.setFilter([]);
     expect(setFilterValue).toHaveBeenCalledWith(undefined);
+  });
+
+  it('uses explicit values from filter config when provided', () => {
+    const hook = renderHookInTable(
+      {
+        columnApi,
+        columnKey: 'explicit',
+      },
+      {
+        columns: [
+          ...columns,
+          {
+            key: 'explicit',
+            filter: { values: ['Option A', 'Option B', 'Option C'] },
+          },
+        ],
+      },
+    );
+
+    expect(hook.result.current?.uniqueValues).toEqual([
+      'Option A',
+      'Option B',
+      'Option C',
+    ]);
+  });
+
+  it('preserves original types for non-string values', () => {
+    const hook = renderHookInTable(
+      {
+        columnApi,
+        columnKey: 'numeric',
+      },
+      {
+        columns: [
+          ...columns,
+          {
+            key: 'numeric',
+            filter: { values: [3, 1, 2] },
+          },
+        ],
+      },
+    );
+
+    expect(hook.result.current?.uniqueValues).toEqual([3, 1, 2]);
   });
 });

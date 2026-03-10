@@ -1,5 +1,5 @@
 import { type Column } from '@tanstack/react-table';
-import { type ReactNode, useContext } from 'react';
+import { type ReactNode, useContext, useMemo } from 'react';
 import { TableContext } from '../TableProvider';
 import { type TableCellFormats } from '../TableFormattedValue/TableFormattedValue';
 import { normalizeColumnFilter } from '../helpers/composeTableColumnDefs';
@@ -15,12 +15,12 @@ export interface TableColumnFilterHookProps {
   columnKey: string;
 }
 
-export interface TableColumnFilterHookReturn {
+export interface TableColumnFilterHookReturn<TValue = unknown> {
   filterValue: string[];
   filterableText: string;
-  filterFormat?: TableCellFormats | ((value: string) => ReactNode);
+  filterFormat?: TableCellFormats | ((value: TValue) => ReactNode);
   setFilter: (values: string[]) => void;
-  uniqueValues: string[];
+  uniqueValues: TValue[];
 }
 
 export const useTableColumnFilter = ({
@@ -31,13 +31,19 @@ export const useTableColumnFilter = ({
   const column = table?.getColumnByKey(columnKey);
   const filterConfig = normalizeColumnFilter(column?.filter);
 
-  if (!column || !filterConfig || !columnApi?.getCanFilter()) return undefined;
+  const facetedValues = columnApi?.getFacetedUniqueValues();
+  const uniqueValues = useMemo(() => {
+    const rawValues =
+      filterConfig?.values ??
+      (facetedValues ? Array.from(facetedValues.keys()) : []);
+    const filtered = rawValues.filter((v) => v != null && v !== '');
+    if (filtered.every((v) => typeof v === 'string')) {
+      return filtered.sort((a, b) => a.localeCompare(b));
+    }
+    return filtered;
+  }, [facetedValues, filterConfig?.values]);
 
-  const facetedValues = columnApi.getFacetedUniqueValues();
-  const uniqueValues = Array.from(facetedValues.keys())
-    .map((v) => String(v ?? ''))
-    .filter((v) => v !== '')
-    .sort((a, b) => a.localeCompare(b));
+  if (!column || !filterConfig || !columnApi?.getCanFilter()) return undefined;
 
   const filterValue =
     (columnApi.getFilterValue() as string[] | undefined) ?? [];
@@ -47,7 +53,7 @@ export const useTableColumnFilter = ({
     filterableText: filterConfig.filterableText ?? 'filterable',
     filterFormat: (filterConfig.format ?? column.format) as
       | TableCellFormats
-      | ((value: string) => ReactNode)
+      | ((value: unknown) => ReactNode)
       | undefined,
     setFilter: (values: string[]) => {
       columnApi.setFilterValue(values.length ? values : undefined);

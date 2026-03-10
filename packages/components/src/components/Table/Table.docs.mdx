@@ -73,6 +73,7 @@ export interface TableColumn<TRow extends object, TVal = unknown> {
    * - `filterableText`: Screen reader text for the filter button (defaults to "filterable").
    * - `filterFn`: Custom filter function or a built-in TanStack filter function name to override the default matching logic.
    * - `format`: Custom display for filter dropdown options. Falls back to the column's `format`.
+   * - `values`: Explicit list of filter options. When provided, these are used instead of deriving values from the data.
    */
   filter?: boolean | TableColumnFilter;
 
@@ -161,6 +162,7 @@ The `TableColumnFilter` object accepts the following options:
 - `filterableText`: Screen reader text for the filter button. Defaults to "filterable". Useful for translation purposes.
 - `filterFn`: The filter function to use for this column. Can be a custom function that receives `(row, columnId, filterValue)` and returns `true`/`false`, or the name of a built-in TanStack filter function: `includesString`, `includesStringSensitive`, `equalsString`, `equalsStringSensitive`, `arrIncludes`, `arrIncludesAll`, `arrIncludesSome`, `equals`, `weakEquals`, `inNumberRange`. See the [TanStack Table filtering documentation](https://tanstack.com/table/v8/docs/api/features/column-filtering#filterfn) for details.
 - `format`: Customises the display of filter option values in the dropdown. When not provided, falls back to the column's `format`. Accepts the same built-in formatters (`string`, `number`, `date`, `currency`, `percent`) or a custom function returning a ReactNode.
+- `values`: Explicit list of values to show in the filter dropdown. When provided, these are used instead of deriving values from the column data. Useful for stable filter options, server-side filtering, or showing all possible values regardless of current data.
 
 <ComponentExample of={ComponentStories.Filtering} />
 

@@ -11,21 +11,21 @@ import { table } from '../Table.styles';
 import { IressIcon } from '@/components/Icon';
 import { IressTooltip } from '@/main';
 
-export interface TableFilterButtonProps {
+export interface TableFilterButtonProps<TValue = unknown> {
   filterableText?: string;
-  filterFormat?: TableCellFormats | ((value: string) => ReactNode);
+  filterFormat?: TableCellFormats | ((value: TValue) => ReactNode);
   filterValue: string[];
   setFilter: (values: string[]) => void;
-  uniqueValues: string[];
+  uniqueValues: TValue[];
 }
 
-export const TableFilterButton = ({
+export const TableFilterButton = <TValue,>({
   filterableText = 'filterable',
   filterFormat,
   filterValue,
   setFilter,
   uniqueValues,
-}: TableFilterButtonProps) => {
+}: TableFilterButtonProps<TValue>) => {
   const isActive = filterValue.length > 0;
   const classes = table({ hasFilterButton: true });
   const popoverRef = useRef<PopoverRef>(null);
@@ -59,18 +59,21 @@ export const TableFilterButton = ({
         selected={filterValue}
         onChange={(values) => setFilter(values ?? [])}
       >
-        {uniqueValues.map((value) => (
-          <IressMenuItem key={value} value={value}>
-            {filterFormat ? (
-              <IressTableFormattedValue<object, string>
-                format={filterFormat}
-                value={value}
-              />
-            ) : (
-              value
-            )}
-          </IressMenuItem>
-        ))}
+        {uniqueValues.map((value) => {
+          const stringValue = String(value);
+          return (
+            <IressMenuItem key={stringValue} value={stringValue}>
+              {filterFormat ? (
+                <IressTableFormattedValue<object, TValue>
+                  format={filterFormat}
+                  value={value}
+                />
+              ) : (
+                stringValue
+              )}
+            </IressMenuItem>
+          );
+        })}
       </IressMenu>
       {isActive && (
         <>
