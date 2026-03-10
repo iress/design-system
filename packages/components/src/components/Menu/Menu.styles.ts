@@ -50,7 +50,7 @@ export const menu = sva({
       true: {
         root: {
           '& > *': {
-            maxWidth: '[100%]',
+            maxWidth: '12/12',
           },
         },
       },

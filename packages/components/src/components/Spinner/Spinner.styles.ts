@@ -18,8 +18,8 @@ export const chatty = sva({
       gap: 'spacing.1',
     },
     dot: {
-      width: '[0.5em]',
-      height: '[0.5em]',
+      width: 'spinner.dot',
+      height: 'spinner.dot',
       borderRadius: '50%',
       bg: 'colour.neutral.50',
       animation: 'chatty 1.4s infinite ease-in-out',

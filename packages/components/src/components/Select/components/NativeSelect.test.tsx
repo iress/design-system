@@ -135,7 +135,7 @@ describe('IressSelect (native)', () => {
           width: '75%',
         });
 
-        expect(screen.getByTestId(TEST_ID)).toHaveClass(`w_input.75%`);
+        expect(screen.getByTestId(TEST_ID)).toHaveClass(`w_9\/12`);
       });
     });
   });

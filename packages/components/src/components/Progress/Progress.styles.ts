@@ -9,7 +9,7 @@ export const progress = cva({
     color: 'colour.primary.fill',
     display: 'block',
     height: 'progress.height',
-    width: '[100%]',
+    width: '12/12',
     borderRadius: 'var(--iress-border-radius)',
     '--iress-border-radius': '{radii.radius.system.form}',
     overflow: 'hidden',

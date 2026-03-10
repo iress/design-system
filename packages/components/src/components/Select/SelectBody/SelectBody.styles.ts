@@ -10,7 +10,7 @@ export const selectBody = sva({
       flexDirection: 'column',
       maxHeight: '[30rem]',
       flex: '1',
-      width: '[100%]',
+      width: '12/12',
       scrollable: 'y',
     },
     children: {

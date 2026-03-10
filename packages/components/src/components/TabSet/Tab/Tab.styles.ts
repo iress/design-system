@@ -3,7 +3,7 @@ import { cva } from '@/styled-system/css';
 export const tab = cva({
   base: {
     alignItems: 'center',
-    borderBottom: '[2px solid transparent]',
+    borderBottom: '[{sizes.tab.indicator} solid transparent]',
     cursor: 'pointer',
     display: 'inline-flex',
     minHeight: 'input.height',

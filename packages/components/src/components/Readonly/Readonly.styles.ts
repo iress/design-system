@@ -7,7 +7,7 @@ export const readonly = sva({
       display: 'flex',
       backgroundColor: 'colour.neutral.10',
       minHeight: 'input.height',
-      margin: '[0]',
+      margin: 'spacing.0',
       flexGrow: '1',
       textStyle: 'typography.body.md',
       alignItems: 'center',
@@ -59,7 +59,7 @@ export const readonly = sva({
       alignItems: 'center',
       boxSizing: 'border-box',
       flex: 'auto',
-      maxWidth: '[100%]',
+      maxWidth: '12/12',
       minHeight: 'input.height',
       height: 'auto',
       lineHeight: 'inherit',
@@ -138,34 +138,34 @@ export const readonly = sva({
       },
       '25%': {
         root: {
-          width: 'input.25%',
+          width: '3/12',
         },
         formControl: {
-          width: '[100%]',
+          width: '12/12',
         },
       },
       '50%': {
         root: {
-          width: 'input.50%',
+          width: '6/12',
         },
         formControl: {
-          width: '[100%]',
+          width: '12/12',
         },
       },
       '75%': {
         root: {
-          width: 'input.75%',
+          width: '9/12',
         },
         formControl: {
-          width: '[100%]',
+          width: '12/12',
         },
       },
       '100%': {
         root: {
-          width: 'input.100%',
+          width: '12/12',
         },
         formControl: {
-          width: '[100%]',
+          width: '12/12',
         },
       },
     },

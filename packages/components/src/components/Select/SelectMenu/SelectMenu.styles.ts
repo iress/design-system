@@ -6,7 +6,7 @@ export const selectMenu = sva({
     root: {
       // Performance: CSS containment limits style recalculation scope
       contain: 'layout style paint',
-      width: '[100%]',
+      width: '12/12',
     },
   },
   variants: {},

@@ -29,12 +29,12 @@ Input widths are sizes that suit a specific number of characters. This sets an e
 - `input.12`: Twelve character width
 - `input.16`: Sixteen character width, usually used for credit cards
 
-For variable data entry, you can use percentage widths. These are usually used inside `IressFieldGroup`, and denote a connection between fields with different widths (eg. First name and Last name under Name). In most cases where there is no relationship but you would like to compact the layout to make it easier to scan, and you should use `IressRow` and `IressCol` instead with the `span` prop.
+For variable data entry, you can use grid tokens. These are usually used inside `IressFieldGroup`, and denote a connection between fields with different widths (eg. First name and Last name under Name). In most cases where there is no relationship but you would like to compact the layout to make it easier to scan, and you should use `IressRow` and `IressCol` instead with the `span` prop.
 
-- `input.25perc`: 25% width of parent container
-- `input.50perc`: 50% width of parent container
-- `input.75perc`: 75% width of parent container
-- `input.100perc`: 100% width of parent container
+- `3/12`: 25% width of parent container
+- `6/12`: 50% width of parent container
+- `9/12`: 75% width of parent container
+- `12/12`: 100% width of parent container
 
 <ComponentExample of={ComponentStories.inputWidths} />
 

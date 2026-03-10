@@ -8,7 +8,7 @@ export const selectTags = sva({
       contain: 'layout style paint',
       display: 'flex',
       alignItems: 'center',
-      width: '[100%]',
+      width: '12/12',
       paddingBlock: 'spacing.1',
       paddingInline: 'spacing.2',
       minHeight: 'input.height',

@@ -15,7 +15,7 @@ export const field = sva({
   base: {
     root: {
       display: 'block',
-      maxWidth: '[100%]',
+      maxWidth: '12/12',
       position: 'relative',
     },
     element: {

@@ -35,8 +35,8 @@ export const icon = cva({
     loading: {
       true: {
         visibility: 'hidden',
-        width: '[1em]',
-        height: '[1em]',
+        width: 'icon.sm',
+        height: 'icon.sm',
       },
     },
     rotate: {

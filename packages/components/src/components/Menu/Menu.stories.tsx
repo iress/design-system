@@ -40,7 +40,7 @@ export const Basic: Story = {
 export const Complex: Story = {
   args: {
     children: 'complex',
-    maxWidth: 'input.25%',
+    maxWidth: '3/12',
   },
 };
 

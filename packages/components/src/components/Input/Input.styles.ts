@@ -27,13 +27,13 @@ export const input = sva({
       flexGrow: '1',
       borderRadius: 'radius.system.form',
       backgroundColor: 'colour.neutral.10',
-      minHeight: '[calc({sizes.input.height} - 2px)]',
+      minHeight: 'input.innerHeight',
       border: 'input',
       focusable: 'has-input',
     },
     addon: {
       borderRadius: 'radius.system.form',
-      minHeight: '[calc({sizes.input.height} - 2px)]',
+      minHeight: 'input.innerHeight',
       color: 'colour.neutral.60',
       lineHeight: '1',
       fontWeight: '300',
@@ -73,8 +73,8 @@ export const input = sva({
       display: 'block',
       boxSizing: 'border-box',
       flex: 'auto',
-      maxWidth: '[100%]',
-      minHeight: '[calc({sizes.input.height} - 2px)]',
+      maxWidth: '12/12',
+      minHeight: 'input.innerHeight',
       lineHeight: 1,
       bg: 'transparent',
 
@@ -222,34 +222,34 @@ export const input = sva({
       },
       '25%': {
         wrapper: {
-          width: 'input.25%',
+          width: '3/12',
         },
         formControl: {
-          width: '[100%]',
+          width: '12/12',
         },
       },
       '50%': {
         wrapper: {
-          width: 'input.50%',
+          width: '6/12',
         },
         formControl: {
-          width: '[100%]',
+          width: '12/12',
         },
       },
       '75%': {
         wrapper: {
-          width: 'input.75%',
+          width: '9/12',
         },
         formControl: {
-          width: '[100%]',
+          width: '12/12',
         },
       },
       '100%': {
         wrapper: {
-          width: 'input.100%',
+          width: '12/12',
         },
         formControl: {
-          width: '[100%]',
+          width: '12/12',
         },
       },
     },
@@ -265,7 +265,7 @@ export const input = sva({
     stretched: {
       true: {
         formControl: {
-          height: '[100%]',
+          height: '12/12',
         },
       },
     },
@@ -276,7 +276,7 @@ export const input = sva({
       stretched: true,
       css: {
         formControl: {
-          height: '[100%]',
+          height: '12/12',
         },
       },
     },

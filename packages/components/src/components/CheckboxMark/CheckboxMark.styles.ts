@@ -6,9 +6,9 @@ export const checkboxMark = sva({
     root: {
       display: 'inline-flex',
       position: 'relative',
-      width: `[1.4em]`,
-      minWidth: `[1.4em]`,
-      height: `[1.4em]`,
+      width: 'mark.size',
+      minWidth: 'mark.size',
+      height: 'mark.size',
       border: 'input',
       borderRadius: 'radius.system.form',
       bg: 'colour.neutral.10',

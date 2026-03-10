@@ -18,15 +18,11 @@ const containerSizes = Object.fromEntries(
 
 const inputSizes = {
   ...Object.fromEntries(
-    FORM_ELEMENT_WIDTHS.map((width) => {
-      const description = width.includes('%')
-        ? `${width} width`
-        : `1rem * ${width}`;
+    FORM_ELEMENT_WIDTHS.filter((value) => !value.includes('%')).map((width) => {
+      const description = `1rem * ${width}`;
 
       let value;
-      if (width.includes('%')) {
-        value = width;
-      } else if (width === '2') {
+      if (width === '2') {
         value = `calc(${cssVars.typography.base.size} * ${width} + ${cssVars.typography.base.size})`;
       } else {
         value = `calc(${cssVars.typography.base.size} * ${width})`;
@@ -85,10 +81,6 @@ const chevronSizes = {
       'Used for the chevron when selecting an option in a dropdown or select component.',
     value: `calc(${cssVars.typography.base.size} * 0.7)`,
   },
-  'chevron.table': {
-    description: 'Used for the chevron when expanding the child table.',
-    value: `calc(${cssVars.typography.base.size} * 0.85)`,
-  },
 };
 
 const progressSizes = {
@@ -131,6 +123,45 @@ const typographySizes = {
   },
 };
 
+const componentSizes = {
+  'input.innerHeight': {
+    description: 'Inner height of input (accounting for border)',
+    value: `calc(${cssVars.typography.base.size} * (34 / 14) - 2px)`,
+  },
+  'mark.size': {
+    description: 'Size of checkbox/radio marks',
+    value: '1.4em',
+  },
+  'icon.sm': {
+    description: 'Small icon size',
+    value: '1em',
+  },
+  'icon.md': {
+    description: 'Medium icon size',
+    value: '1.5em',
+  },
+  'spinner.dot': {
+    description: 'Size of spinner dots',
+    value: '0.5em',
+  },
+  'pill.minHeight': {
+    description: 'Minimum height of pill',
+    value: '1.35em',
+  },
+  'pill.minWidth': {
+    description: 'Minimum width of pill',
+    value: '1.5em',
+  },
+  'tab.indicator': {
+    description: 'Height of tab active indicator',
+    value: '2px',
+  },
+  'menu.indicator': {
+    description: 'Width of menu group indicator',
+    value: '4px',
+  },
+};
+
 export const sizes = {
   ...containerSizes,
   ...inputSizes,
@@ -141,6 +172,7 @@ export const sizes = {
   ...sliderSizes,
   ...toggleSizes,
   ...typographySizes,
+  ...componentSizes,
 };
 
 export const SIZE_TOKENS = Object.keys({

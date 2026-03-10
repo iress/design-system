@@ -5,7 +5,7 @@ export const fieldGroup = sva({
   base: {
     root: {
       display: 'block',
-      maxWidth: '[100%]',
+      maxWidth: '12/12',
       mb: 'field.footer',
       position: 'relative',
       border: '[none]',

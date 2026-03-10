@@ -22,11 +22,7 @@ import { animationStyles } from './tokens/animationStyles';
 import { span } from './utilities/span';
 import { offset } from './utilities/offset';
 import { gutter } from './utilities/gutter';
-import {
-  selectChevron,
-  tableChevron,
-  selectChevronRtl,
-} from './utilities/chevron';
+import { selectChevron } from './utilities/chevron';
 import { buttonRecipe } from './config-recipes/button';
 import { sliderThumb } from './utilities/sliderThumb';
 import { noGutter } from './utilities/noGutter';
@@ -122,8 +118,6 @@ export default definePreset({
       flexHorizontalAlign,
       flexVerticalAlign,
       selectChevron,
-      selectChevronRtl,
-      tableChevron,
       materialSymbols,
       offset,
       span,

@@ -35,7 +35,6 @@ export const dropdownMenu = sva({
       selectChevron: true,
 
       _rtl: {
-        selectChevronRtl: true,
         pr: 'spacing.3',
         pl: 'spacing.8',
       },

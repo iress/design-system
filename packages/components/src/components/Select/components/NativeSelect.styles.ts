@@ -24,8 +24,8 @@ export const nativeSelect = sva({
       textStyle: 'typography.body.md',
       color: 'colour.neutral.90',
       display: 'block',
-      width: '[100%]',
-      height: '[calc({sizes.input.height} - 2px)]',
+      width: '12/12',
+      height: 'input.innerHeight',
       paddingInline: 'spacing.2',
       appearance: 'none',
       border: '[0]',
@@ -112,7 +112,7 @@ export const nativeSelect = sva({
       },
       '25%': {
         wrapper: {
-          width: 'input.25%',
+          width: '3/12',
         },
         element: {
           width: 'auto',
@@ -120,7 +120,7 @@ export const nativeSelect = sva({
       },
       '50%': {
         wrapper: {
-          width: 'input.50%',
+          width: '6/12',
         },
         element: {
           width: 'auto',
@@ -128,7 +128,7 @@ export const nativeSelect = sva({
       },
       '75%': {
         wrapper: {
-          width: 'input.75%',
+          width: '9/12',
         },
         element: {
           width: 'auto',
@@ -136,7 +136,7 @@ export const nativeSelect = sva({
       },
       '100%': {
         wrapper: {
-          width: 'input.100%',
+          width: '12/12',
         },
         element: {
           width: 'auto',

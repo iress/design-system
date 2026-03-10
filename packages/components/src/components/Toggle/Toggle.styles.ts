@@ -42,8 +42,8 @@ export const toggle = sva({
       },
     },
     toggleButton: {
-      height: '[100%]',
-      width: '[100%]',
+      height: '12/12',
+      width: '12/12',
       position: 'relative',
       justifyContent: 'flex-start',
       alignItems: 'center',
@@ -135,7 +135,7 @@ export const toggle = sva({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
-          width: '[100%]',
+          width: '12/12',
         },
         label: {
           display: 'block',

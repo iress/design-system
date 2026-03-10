@@ -7,7 +7,7 @@ export const menuItem = sva({
       color: 'colour.neutral.70',
       cursor: 'pointer',
       display: 'flex',
-      width: '[100%]',
+      width: '12/12',
       px: 'spacing.3',
       py: 'spacing.2',
       textAlign: 'left',
@@ -77,7 +77,7 @@ export const menuItem = sva({
         root: {
           alignItems: 'center',
           justifyContent: 'center',
-          height: '[100%]',
+          height: '12/12',
           py: 'spacing.4',
         },
       },
@@ -85,7 +85,7 @@ export const menuItem = sva({
         root: {
           alignItems: 'center',
           justifyContent: 'center',
-          height: '[100%]',
+          height: '12/12',
           textAlign: 'center',
           py: 'spacing.4',
         },
@@ -197,6 +197,7 @@ export const menuItem = sva({
         root: {
           color: 'colour.primary.onFill',
           borderRadius: 'radius.system.button',
+          width: 'auto',
 
           _hover: {
             bg: 'colour.primary.surface',
