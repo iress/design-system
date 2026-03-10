@@ -9,22 +9,17 @@ Agent skills give AI coding assistants (GitHub Copilot, Claude Code, Cursor, Cod
 
 Skills are installed as static files alongside your project. No runtime server, no Playwright, no Storybook dependency.
 
-<IressAlert status="warning" mb="lg">
-  <strong>Deprecation notice:</strong> The{' '}
-  <code>@iress-oss/ids-mcp-server</code> npm package is deprecated. Agent skills
-  replace it with the same information in a simpler, zero-dependency format.
-</IressAlert>
-
 ---
 
 ## Available Skills
 
-| Skill              | Description                                                                                     |
-| ------------------ | ----------------------------------------------------------------------------------------------- |
-| **figma-to-ids**   | Translate Figma design properties and structures into IDS component implementations             |
-| **token-usage**    | Guide on correctly using IDS design tokens in React components and CSS                          |
-| **ui-doctor**      | Audit and validate that an application correctly uses IDS components and follows IDS principles |
-| **ui-translation** | Translate natural language UI descriptions into IDS component implementations                   |
+| Skill                 | Description                                                                                     |
+| --------------------- | ----------------------------------------------------------------------------------------------- |
+| **figma-to-ids**      | Translate Figma design properties and structures into IDS component implementations             |
+| **token-usage**       | Guide on correctly using IDS design tokens in React components and CSS                          |
+| **ui-doctor**         | Audit and validate that an application correctly uses IDS components and follows IDS principles |
+| **ui-translation**    | Translate natural language UI descriptions into IDS component implementations                   |
+| **version-migration** | Guide on migrating between IDS major versions (v4→v5, v5→v6, OUI→v6)                            |
 
 ---
 
@@ -87,13 +82,7 @@ npx skills remove
 
 Skills are `SKILL.md` files that get installed into your project (or globally). Your AI coding assistant reads them automatically and uses the knowledge when helping you write code.
 
-**Before (MCP Server):**
-
-- Required `npx @iress-oss/ids-mcp-server` running
-- Needed Playwright and Chromium installed
-- Runtime dependency on Storybook docs
-
-**After (Agent Skills):**
+**How it works:**
 
 - Static markdown files — zero runtime dependencies
 - Works with 37+ AI coding agents out of the box
@@ -108,3 +97,14 @@ Skills are also available directly in the repository:
 - **Skills directory:** [`.agents/skills/`](https://github.com/iress/design-system/tree/main/.agents/skills/)
 - **AI context files:** [`packages/components/.ai/`](https://github.com/iress/design-system/tree/main/packages/components/.ai/) and [`packages/tokens/.ai/`](https://github.com/iress/design-system/tree/main/packages/tokens/.ai/)
 - **LLM index:** [`packages/components/llms.txt`](https://github.com/iress/design-system/tree/main/packages/components/llms.txt)
+
+---
+
+## llms.txt
+
+The `llms.txt` files provide a machine-readable index of IDS documentation for LLM-based tools. These follow the [llms.txt standard](https://llmstxt.org/) and are located at:
+
+- [`packages/components/llms.txt`](https://github.com/iress/design-system/tree/main/packages/components/llms.txt) — Component documentation index
+- [`packages/tokens/llms.txt`](https://github.com/iress/design-system/tree/main/packages/tokens/llms.txt) — Design token documentation index
+
+These files list all available documentation with links to the detailed `.ai/` markdown files, making it easy for AI tools to discover and reference IDS documentation.
