@@ -15,6 +15,7 @@ export const tableRecipe = defineSlotRecipe({
     'headerContent',
     'filterButton',
     'filterIcon',
+    'filterIndicator',
   ],
   base: {
     root: {
@@ -108,6 +109,7 @@ export const tableRecipe = defineSlotRecipe({
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
+      position: 'relative',
       color: 'colour.neutral.60',
       borderRadius: 'radius.system.form',
       padding: 'spacing.1',
@@ -123,6 +125,23 @@ export const tableRecipe = defineSlotRecipe({
       width: '[1.1em]',
       height: '[1.1em]',
       fill: 'currentColor',
+    },
+    filterIndicator: {
+      display: 'none',
+      position: 'absolute',
+      top: '[0px]',
+      right: '[0px]',
+      minWidth: '[0.85em]',
+      height: '[0.85em]',
+      lineHeight: '[0.85em]',
+      paddingInline: '[0.2em]',
+      borderRadius: 'radius.full',
+      bg: 'colour.primary.fill',
+      color: 'colour.primary.textInverse',
+      textStyle: 'typography.label.xs',
+      fontSize: '[0.6em]',
+      fontWeight: 'bold',
+      textAlign: 'center',
     },
     rowGroupHeader: {
       textStyle: 'typography.heading.4',
@@ -216,6 +235,11 @@ export const tableRecipe = defineSlotRecipe({
       true: {
         filterButton: {
           color: 'colour.primary.text',
+        },
+        filterIndicator: {
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         },
       },
     },

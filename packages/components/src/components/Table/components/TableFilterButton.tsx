@@ -52,6 +52,9 @@ export const TableFilterButton = ({
               fill="none"
             />
           </svg>
+          <span className={classes.filterIndicator} aria-hidden="true">
+            {filterValue.length > 9 ? '9+' : filterValue.length}
+          </span>
         </IressButton>
       }
       align="bottom-start"

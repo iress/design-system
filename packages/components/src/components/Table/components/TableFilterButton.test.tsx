@@ -96,6 +96,28 @@ describe('TableFilterButton', () => {
         ).toBeInTheDocument();
       });
 
+      it('shows a count indicator when filters are active', () => {
+        const screen = render(
+          <TableFilterButton
+            {...defaultProps}
+            filterValue={['Value A', 'Value B']}
+          />,
+        );
+
+        const indicator = screen.getByText('2');
+        expect(indicator).toBeInTheDocument();
+        expect(indicator).toHaveAttribute('aria-hidden', 'true');
+      });
+
+      it('caps the indicator count at 9+ when more than 9 filters are active', () => {
+        const manyValues = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+        const screen = render(
+          <TableFilterButton {...defaultProps} filterValue={manyValues} />,
+        );
+
+        expect(screen.getByText('9+')).toBeInTheDocument();
+      });
+
       it('shows selected options as aria-selected when the menu is open', async () => {
         const screen = render(
           <TableFilterButton
