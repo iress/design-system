@@ -145,10 +145,10 @@ export interface TableColumn<TRow extends object, TVal = never> extends Pick<
 export const tableInArrayFilterFn = <TRow extends object>(
   row: Parameters<FilterFn<TRow>>[0],
   columnId: string,
-  filterValue: string[],
+  filterValue: unknown[],
 ): boolean => {
   if (!filterValue?.length) return true;
-  return filterValue.includes(String(row.getValue(columnId) ?? ''));
+  return filterValue.includes(row.getValue(columnId));
 };
 
 export const composeTableColumnDefs = <TRow extends object, TVal = never>(
