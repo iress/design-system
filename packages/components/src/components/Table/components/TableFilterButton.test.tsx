@@ -124,6 +124,25 @@ describe('TableFilterButton', () => {
       });
     });
 
+    describe('filterFormat', () => {
+      it('renders formatted content for each filter option when a function is provided', async () => {
+        const filterFormat = (value: string) => (
+          <span data-testid={`badge-${value}`}>{value.toUpperCase()}</span>
+        );
+        const screen = render(
+          <TableFilterButton {...defaultProps} filterFormat={filterFormat} />,
+        );
+
+        await userEvent.click(
+          screen.getByRole('button', { name: 'filterable' }),
+        );
+
+        expect(screen.getByTestId('badge-Value A')).toBeInTheDocument();
+        expect(screen.getByTestId('badge-Value B')).toBeInTheDocument();
+        expect(screen.getByTestId('badge-Value C')).toBeInTheDocument();
+      });
+    });
+
     describe('setFilter', () => {
       it('calls setFilter with new value when an option is selected', async () => {
         const setFilter = vi.fn();

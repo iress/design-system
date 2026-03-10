@@ -41,6 +41,14 @@ export interface TableColumn<TRow extends object, TVal = never> extends Pick<
   filterableText?: string;
 
   /**
+   * Formats the display of filter option values in the filter dropdown.
+   * When not provided, falls back to the column's `format`.
+   * To use the in-built formatters, set this to: string, number, date, currency, percent.
+   * Use a custom renderer by passing a function that returns a ReactNode.
+   */
+  formatFilter?: TableCellFormats | ((value: string) => ReactNode);
+
+  /**
    * Formats the cell content.
    * To use the in-built formatters, set this to: string, number, date, currency, percent.
    * Use a custom formatter by passing a function that returns a ReactNode.

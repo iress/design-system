@@ -1,6 +1,7 @@
 import { type Column } from '@tanstack/react-table';
-import { useContext } from 'react';
+import { type ReactNode, useContext } from 'react';
 import { TableContext } from '../TableProvider';
+import { type TableCellFormats } from '../TableFormattedValue/TableFormattedValue';
 
 export interface TableColumnFilterHookProps {
   columnApi?: Pick<
@@ -16,6 +17,7 @@ export interface TableColumnFilterHookProps {
 export interface TableColumnFilterHookReturn {
   filterValue: string[];
   filterableText: string;
+  filterFormat?: TableCellFormats | ((value: string) => ReactNode);
   setFilter: (values: string[]) => void;
   uniqueValues: string[];
 }
@@ -42,6 +44,10 @@ export const useTableColumnFilter = ({
   return {
     filterValue,
     filterableText: column.filterableText ?? 'filterable',
+    filterFormat: (column.formatFilter ?? column.format) as
+      | TableCellFormats
+      | ((value: string) => ReactNode)
+      | undefined,
     setFilter: (values: string[]) => {
       columnApi.setFilterValue(values.length ? values : undefined);
     },

@@ -67,8 +67,8 @@ export const TableHeaderCell = ({
     >
       {hasFilter ? (
         <div className={classes.headerContent}>
-          {headerContent}
           <TableFilterButton {...columnFilter} />
+          {headerContent}
         </div>
       ) : (
         headerContent

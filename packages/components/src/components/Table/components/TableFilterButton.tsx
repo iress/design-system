@@ -1,11 +1,17 @@
+import { type ReactNode } from 'react';
 import { IressButton } from '@/components/Button';
 import { IressMenu } from '@/components/Menu';
 import { IressMenuItem } from '@/components/Menu/MenuItem/MenuItem';
 import { IressPopover } from '@/components/Popover';
+import {
+  IressTableFormattedValue,
+  type TableCellFormats,
+} from '../TableFormattedValue/TableFormattedValue';
 import { table } from '../Table.styles';
 
 export interface TableFilterButtonProps {
   filterableText?: string;
+  filterFormat?: TableCellFormats | ((value: string) => ReactNode);
   filterValue: string[];
   setFilter: (values: string[]) => void;
   uniqueValues: string[];
@@ -13,6 +19,7 @@ export interface TableFilterButtonProps {
 
 export const TableFilterButton = ({
   filterableText = 'filterable',
+  filterFormat,
   filterValue,
   setFilter,
   uniqueValues,
@@ -59,7 +66,14 @@ export const TableFilterButton = ({
       >
         {uniqueValues.map((value) => (
           <IressMenuItem key={value} value={value}>
-            {value}
+            {filterFormat ? (
+              <IressTableFormattedValue<object, string>
+                format={filterFormat}
+                value={value}
+              />
+            ) : (
+              value
+            )}
           </IressMenuItem>
         ))}
       </IressMenu>
