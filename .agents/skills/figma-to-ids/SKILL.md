@@ -53,6 +53,9 @@ Translate Figma design properties and structures into IDS (Iress Design System) 
 | Alert / Warning    | `IressAlert status="warning"`                |                            |
 | Alert / Info       | `IressAlert status="info"`                   |                            |
 | Modal              | `IressModal`                                 |                            |
+| Modal / Danger     | `IressModal status="danger"`                 | actions, size sm/md only   |
+| Modal / Success    | `IressModal status="success"`                | actions, size sm/md only   |
+| Modal / Warning    | `IressModal status="warning"`                | actions, size sm/md only   |
 | Slideout / Drawer  | `IressSlideout`                              |                            |
 | Tabs               | `IressTabSet` + `IressTab`                   |                            |
 | Table              | `IressTable`                                 | Head, Body, Row, Cell      |
@@ -200,6 +203,35 @@ import { IressAlert } from '@iress-oss/ids-components';
 ```
 
 > **Key insight:** IDS components encapsulate their styling. Don't recreate layout/colours from Figma — use the component's props (like `status`) and let IDS handle the visual treatment.
+
+### Figma: Status Modal (Danger Confirmation)
+
+**Figma structure:**
+
+- Modal frame with danger icon in header
+  - Heading: "Delete record?"
+  - Body text: "This action cannot be undone."
+  - Footer: Two buttons (Cancel, Delete)
+
+**IDS implementation:**
+
+```tsx
+import { IressModal } from '@iress-oss/ids-components';
+
+// Status modals use the `status` prop — the icon, colours, and button status are handled automatically.
+// Use `actions` instead of `footer` for opinionated action buttons.
+<IressModal
+  status="danger"
+  heading="Delete record?"
+  actions={[{ children: 'Cancel', mode: 'tertiary' }, { children: 'Delete' }]}
+  show={isOpen}
+  onShowChange={setIsOpen}
+>
+  This action cannot be undone.
+</IressModal>;
+```
+
+> **Key insight:** When `status` is set on `IressModal`, the `footer` prop is not available — use `actions` instead. Each action button automatically inherits the modal's status. Size is restricted to `sm` (default) or `md`.
 
 ### Figma: Data Table
 

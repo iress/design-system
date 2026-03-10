@@ -699,7 +699,7 @@ describe('IressModal', () => {
 
         const statusIcon = await screen.findByTestId(`${TEST_ID}__status-icon`);
         expect(statusIcon).toBeInTheDocument();
-        expect(statusIcon).toHaveTextContent('cancel');
+        expect(statusIcon).toHaveTextContent('report');
       });
 
       it('renders success status icon', async () => {
@@ -711,7 +711,7 @@ describe('IressModal', () => {
 
         const statusIcon = await screen.findByTestId(`${TEST_ID}__status-icon`);
         expect(statusIcon).toBeInTheDocument();
-        expect(statusIcon).toHaveTextContent('check_circle');
+        expect(statusIcon).toHaveTextContent('check');
       });
 
       it('renders warning status icon', async () => {
@@ -723,7 +723,7 @@ describe('IressModal', () => {
 
         const statusIcon = await screen.findByTestId(`${TEST_ID}__status-icon`);
         expect(statusIcon).toBeInTheDocument();
-        expect(statusIcon).toHaveTextContent('error');
+        expect(statusIcon).toHaveTextContent('warning');
       });
 
       it('renders a status header container', async () => {
