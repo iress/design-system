@@ -6,7 +6,12 @@ import {
   useState,
   type TransitionEvent,
 } from 'react';
-import { IressCloseButton } from '../Button';
+import {
+  IressButton,
+  type IressButtonProps,
+  IressCloseButton,
+} from '../Button';
+import { IressIcon, type IressIconProps } from '../Icon';
 import {
   FloatingFocusManager,
   FloatingOverlay,
@@ -24,12 +29,24 @@ import { IressText, text } from '../Text';
 import { useProviderModal } from './hooks/useProviderModal';
 import { type FloatingUIContainer, type IressStyledProps } from '@/types';
 import { modal } from './Modal.styles';
+import { alert as alertStyles } from '../Alert/Alert.styles';
 import { cx } from '@/styled-system/css';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 import { getTransitionDuration } from '@/helpers/transition/getTransitionDuration';
+import type { IressAlertButtonProps } from '../Alert';
 
-export interface IressModalProps extends IressStyledProps {
+export type ModalStatus = 'danger' | 'success' | 'warning' | undefined;
+
+export interface IressModalProps<
+  TStatus extends ModalStatus = undefined,
+> extends IressStyledProps {
+  /**
+   * Opinionated action buttons rendered in the modal footer.
+   * Each action is rendered as an `IressButton` with the modal's status automatically applied.
+   */
+  actions?: TStatus extends undefined ? never : IressAlertButtonProps[];
+
   /**
    * Text to be displayed inside the modal.
    */
@@ -63,7 +80,7 @@ export interface IressModalProps extends IressStyledProps {
   fixedFooter?: boolean;
 
   /**
-   * Panel to place modal controls.
+   * Content to be rendered in the modal footer. If `actions` are also provided, this content will be rendered below the actions.
    */
   footer?: ReactNode;
 
@@ -109,12 +126,14 @@ export interface IressModalProps extends IressStyledProps {
   show?: boolean;
 
   /**
-   * Size of the modal
+   * Size of the modal:
    * - `sm`: Small modals communicate the outcome of an irreversible action. They should be concise and straightforward, containing a single action and, in some cases, a single input field.
    * - `md`: Medium modals provide optional supporting information to help users understand the context of a word or screen. They may contain a single action and, in some cases, a larger input such as a textarea.
    * - `lg`: Large modals are used for more complex tasks that require multiple steps or a lot of information as well as media such as video and PDF documents. They can contain multiple actions, inputs, and supporting information.
+   *
+   * If status is set, size can only be `sm` or `md`, and will default to `sm`. If status is not set, size can be `sm`, `md` or `lg`, and will default to `md`.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: TStatus extends undefined ? 'sm' | 'md' | 'lg' : 'sm' | 'md';
 
   /**
    * When set to `true`, the modal will act like a static element when open.
@@ -122,9 +141,28 @@ export interface IressModalProps extends IressStyledProps {
    * Note: This is used internally to display modals in Styler. It is not recommended to use this prop in your own applications.
    */
   static?: boolean;
+
+  /**
+   * Sets the status style of the modal with an accompanying status icon.
+   * Use status modals for communicating outcomes of actions.
+   * - `danger`: Communicates destructive or critical action outcomes.
+   * - `success`: Communicates successful completions.
+   * - `warning`: Communicates important cautions before proceeding.
+   */
+  status?: TStatus;
 }
 
-export const IressModal = ({
+const MODAL_STATUS_ICONS: Record<
+  NonNullable<ModalStatus>,
+  IressIconProps['name']
+> = {
+  danger: 'report',
+  success: 'check',
+  warning: 'warning',
+};
+
+export const IressModal = <TStatus extends ModalStatus = undefined>({
+  actions,
   children,
   className,
   closeText,
@@ -142,11 +180,14 @@ export const IressModal = ({
   onStatus,
   onTransitionEnd,
   show,
-  size = 'md',
+  size: sizeProp,
+  status: alertStatus,
   static: isStatic,
   style,
   ...restProps
-}: IressModalProps) => {
+}: IressModalProps<TStatus>) => {
+  const size = sizeProp ?? (alertStatus ? 'sm' : 'md');
+  const hasActions = !!actions?.length;
   const [uncontrolledShow, setUncontrolledShow] =
     useState<boolean>(defaultShow);
   let duration = 240;
@@ -193,11 +234,15 @@ export const IressModal = ({
   });
 
   const styles = modal({
+    alertStatus,
     fixedFooter,
     size,
     static: isStatic,
     status,
   });
+  const actionStyles = alertStyles({ status: alertStatus });
+
+  const isSmallStatus = size === 'sm' && !!alertStatus;
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
   const { p = 'lg', ...restStyleProps } = styleProps;
 
@@ -266,7 +311,12 @@ export const IressModal = ({
       >
         <styled.div
           ref={(ref) => floatingContext.refs.setFloating(ref)}
-          className={cx(styles.modal, text(), GlobalCSSClass.Modal)}
+          className={cx(
+            styles.modal,
+            actionStyles.alertVars,
+            text(),
+            GlobalCSSClass.Modal,
+          )}
           id={id}
           data-testid={dataTestid}
           aria-labelledby={heading ? headingId : undefined}
@@ -286,16 +336,48 @@ export const IressModal = ({
             className={styles.content}
             data-testid={propagateTestid(dataTestid, 'content')}
             p={p}
+            textAlign={isSmallStatus ? 'center' : undefined}
           >
-            {heading}
+            {alertStatus ? (
+              <div
+                className={styles.statusHeader}
+                data-testid={propagateTestid(dataTestid, 'status-header')}
+              >
+                <IressIcon
+                  name={MODAL_STATUS_ICONS[alertStatus]}
+                  className={styles.statusIcon}
+                  screenreaderText={`${alertStatus}: `}
+                  data-testid={propagateTestid(dataTestid, 'status-icon')}
+                />
+                {heading}
+              </div>
+            ) : (
+              heading
+            )}
             {children}
           </styled.div>
-          {footer && (
+          {(footer ?? hasActions) && (
             <styled.div
               className={styles.footer}
               data-testid={propagateTestid(dataTestid, 'footer')}
               p={p}
             >
+              {hasActions && (
+                <div className={styles.footerActions}>
+                  {actions?.map((action, index) => (
+                    <IressButton
+                      {...action}
+                      className={cx(
+                        action.className,
+                        styles.action,
+                        actionStyles.action,
+                      )}
+                      status={alertStatus as IressButtonProps['status']}
+                      key={index}
+                    />
+                  ))}
+                </div>
+              )}
               {footer}
             </styled.div>
           )}

@@ -91,16 +91,17 @@ function App() {
 
 ### Overlays & Navigation
 
-| Description       | IDS Component                 | Example                                                                   |
-| ----------------- | ----------------------------- | ------------------------------------------------------------------------- |
-| Modal / dialog    | `IressModal`                  | See Modal docs                                                            |
-| Slideout / drawer | `IressSlideout`               | See Slideout docs                                                         |
-| Popover           | `IressPopover`                | See Popover docs                                                          |
-| Menu              | `IressMenu` + `IressMenuItem` | See Menu docs                                                             |
-| Tab navigation    | `IressTabSet` + `IressTab`    | `<IressTabSet><IressTab label="Tab 1">Content 1</IressTab></IressTabSet>` |
-| Skip link (a11y)  | `IressSkipLink`               | `<IressSkipLink href="#main">Skip to content</IressSkipLink>`             |
-| Side navigation   | `IressSideNav`                | See SideNav pattern docs                                                  |
-| Breadcrumbs       | `IressBreadcrumbs`            | See Breadcrumbs pattern docs                                              |
+| Description                           | IDS Component                 | Example                                                                   |
+| ------------------------------------- | ----------------------------- | ------------------------------------------------------------------------- |
+| Modal / dialog                        | `IressModal`                  | See Modal docs                                                            |
+| Status modal (danger/success/warning) | `IressModal status="danger"`  | Use `actions` prop for buttons; size restricted to `sm`/`md`              |
+| Slideout / drawer                     | `IressSlideout`               | See Slideout docs                                                         |
+| Popover                               | `IressPopover`                | See Popover docs                                                          |
+| Menu                                  | `IressMenu` + `IressMenuItem` | See Menu docs                                                             |
+| Tab navigation                        | `IressTabSet` + `IressTab`    | `<IressTabSet><IressTab label="Tab 1">Content 1</IressTab></IressTabSet>` |
+| Skip link (a11y)                      | `IressSkipLink`               | `<IressSkipLink href="#main">Skip to content</IressSkipLink>`             |
+| Side navigation                       | `IressSideNav`                | See SideNav pattern docs                                                  |
+| Breadcrumbs                           | `IressBreadcrumbs`            | See Breadcrumbs pattern docs                                              |
 
 ### Tables
 
@@ -249,6 +250,6 @@ function SettingsPage() {
 4. **Use spacing tokens for gap** — Values 0–10 map to multiples of 4px
 5. **Use semantic button modes** — One `primary` per section, `secondary` for most actions
 6. **Always include labels** — All form inputs need accessible labels via `IressField`
-7. **Use status for feedback** — `IressAlert` for messages, `status` prop on buttons for danger/success
+7. **Use status for feedback** — `IressAlert` for inline messages, `IressModal status="danger"` for confirmation dialogs, `status` prop on buttons for danger/success
 8. **Prefer IDS components** — Use `IressText` instead of raw `<p>`, `IressButton` instead of `<button>`
 9. **Check the component docs** — Read the specific component doc for detailed props and patterns (`node_modules/@iress-oss/ids-components/.ai/components/`)

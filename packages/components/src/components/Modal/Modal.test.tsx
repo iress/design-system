@@ -21,12 +21,13 @@ import {
   IressToasterProvider,
   useModal,
   useToaster,
+  ModalStatus,
 } from '@/main';
 
 const TEST_ID = 'test-component';
 
-function renderComponent(
-  { children, ...restProps }: Partial<IressModalProps> = {},
+function renderComponent<TStatus extends ModalStatus>(
+  { children, ...restProps }: Partial<IressModalProps<TStatus>> = {},
   renderFn: typeof render = render,
 ): RenderResult {
   return renderFn(
@@ -686,6 +687,145 @@ describe('IressModal', () => {
         // The modal should still be visible
         expect(backdrop).toBeInTheDocument();
         expect(screen.getByRole('dialog')).toBeInTheDocument();
+      });
+    });
+    describe('status', () => {
+      it('renders a status icon when status is set', async () => {
+        const screen = renderComponent({
+          defaultShow: true,
+          status: 'danger',
+          heading: 'Danger Modal',
+        });
+
+        const statusIcon = await screen.findByTestId(`${TEST_ID}__status-icon`);
+        expect(statusIcon).toBeInTheDocument();
+        expect(statusIcon).toHaveTextContent('report');
+      });
+
+      it('renders success status icon', async () => {
+        const screen = renderComponent({
+          defaultShow: true,
+          status: 'success',
+          heading: 'Success Modal',
+        });
+
+        const statusIcon = await screen.findByTestId(`${TEST_ID}__status-icon`);
+        expect(statusIcon).toBeInTheDocument();
+        expect(statusIcon).toHaveTextContent('check');
+      });
+
+      it('renders warning status icon', async () => {
+        const screen = renderComponent({
+          defaultShow: true,
+          status: 'warning',
+          heading: 'Warning Modal',
+        });
+
+        const statusIcon = await screen.findByTestId(`${TEST_ID}__status-icon`);
+        expect(statusIcon).toBeInTheDocument();
+        expect(statusIcon).toHaveTextContent('warning');
+      });
+
+      it('renders a status header container', async () => {
+        const screen = renderComponent({
+          defaultShow: true,
+          status: 'danger',
+          heading: 'Test Heading',
+        });
+
+        const statusHeader = await screen.findByTestId(
+          `${TEST_ID}__status-header`,
+        );
+        expect(statusHeader).toBeInTheDocument();
+      });
+
+      it('does not render status icon when status is not set', async () => {
+        const screen = renderComponent({
+          defaultShow: true,
+          heading: 'Normal Modal',
+        });
+
+        await screen.findByRole('dialog');
+        expect(
+          screen.queryByTestId(`${TEST_ID}__status-icon`),
+        ).not.toBeInTheDocument();
+        expect(
+          screen.queryByTestId(`${TEST_ID}__status-header`),
+        ).not.toBeInTheDocument();
+      });
+
+      it('includes screenreader text on the status icon', async () => {
+        const screen = renderComponent({
+          defaultShow: true,
+          status: 'warning',
+          heading: 'Warning Modal',
+        });
+
+        const statusIcon = await screen.findByTestId(`${TEST_ID}__status-icon`);
+        expect(statusIcon).toHaveAttribute('aria-label', 'warning: ');
+      });
+
+      it('applies alertStatus class to the modal', async () => {
+        const screen = renderComponent({
+          defaultShow: true,
+          status: 'danger',
+          heading: 'Test',
+        });
+
+        const statusIcon = await screen.findByTestId(`${TEST_ID}__status-icon`);
+        const styles = modal({ alertStatus: 'danger', status: 'open' });
+        expect(statusIcon).toHaveClass(styles.statusIcon ?? '');
+      });
+
+      it('defaults to sm size when status is set', async () => {
+        const screen = renderComponent({
+          defaultShow: true,
+          status: 'danger',
+          heading: 'Test',
+        });
+
+        const dialog = await screen.findByRole('dialog');
+        const expectedStyles = modal({
+          alertStatus: 'danger',
+          size: 'sm',
+          status: 'open',
+        });
+        expect(dialog).toHaveClass(expectedStyles.modal ?? '');
+      });
+
+      it('renders action buttons when actions prop is provided', async () => {
+        const screen = renderComponent({
+          defaultShow: true,
+          status: 'danger',
+          heading: 'Test',
+          actions: [
+            { children: 'Cancel', mode: 'tertiary' },
+            { children: 'Delete' },
+          ],
+        });
+
+        const footer = await screen.findByTestId(`${TEST_ID}__footer`);
+        expect(footer).toBeInTheDocument();
+        expect(
+          await screen.findByRole('button', { name: 'Cancel' }),
+        ).toBeInTheDocument();
+        expect(
+          await screen.findByRole('button', { name: 'Delete' }),
+        ).toBeInTheDocument();
+      });
+
+      it('does not render footer when actions is empty', async () => {
+        const screen = renderComponent({
+          defaultShow: true,
+          status: 'danger',
+          heading: 'Test',
+          actions: [],
+        });
+
+        await screen.findByRole('dialog');
+        expect(
+          screen.queryByTestId(`${TEST_ID}__footer`),
+        ).not.toBeInTheDocument();
       });
     });
   });

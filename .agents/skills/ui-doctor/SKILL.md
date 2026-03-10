@@ -80,50 +80,51 @@ import { IressButton, IressModal } from '@iress-oss/ids-components';
 
 #### HTML Element → IDS Component Replacement Map
 
-| Raw HTML / Custom Code                  | IDS Replacement                                     | Priority |
-| --------------------------------------- | --------------------------------------------------- | -------- |
-| `<button>`                              | `IressButton`                                       | High     |
-| `<a>` (navigation link)                 | `IressLink`                                         | High     |
-| `<input type="text">`                   | `IressField` + `IressInput`                         | High     |
-| `<input type="checkbox">`               | `IressCheckbox`                                     | High     |
-| `<input type="radio">`                  | `IressRadio` + `IressRadioGroup`                    | High     |
-| `<select>`                              | `IressField` + `IressSelect`                        | High     |
-| `<textarea>`                            | `IressField` + `IressInput`                         | High     |
-| `<table>`                               | `IressTable`                                        | High     |
-| `<label>`                               | `IressField` (wraps input with label)               | High     |
-| `<h1>`–`<h6>`, `<p>`, `<span>` (styled) | `IressText`                                         | Medium   |
-| `<img>`                                 | `IressImage`                                        | Medium   |
-| `<hr>`                                  | `IressDivider`                                      | Medium   |
-| `<dialog>` / custom modal               | `IressModal`                                        | High     |
-| Custom drawer / slideout                | `IressSlideout`                                     | High     |
-| Custom tooltip                          | `IressTooltip`                                      | Medium   |
-| Custom popover                          | `IressPopover`                                      | Medium   |
-| Custom tabs                             | `IressTabSet` + `IressTab`                          | High     |
-| Custom spinner / loader                 | `IressSpinner`                                      | Medium   |
-| Custom skeleton loader                  | `IressSkeleton`                                     | Low      |
-| Custom progress bar                     | `IressProgress`                                     | Low      |
-| Custom alert / toast                    | `IressAlert` / `IressToaster`                       | High     |
-| Custom card / panel                     | `IressCard` / `IressPanel`                          | Medium   |
-| Custom toggle / switch                  | `IressToggle`                                       | High     |
-| Custom badge / tag                      | `IressTag` / `IressPill`                            | Low      |
-| Custom breadcrumbs                      | `IressBreadcrumbs`                                  | Medium   |
-| Custom side navigation                  | `IressSideNav`                                      | Medium   |
-| Custom context menu                     | `IressMenu` + `IressMenuItem`                       | Medium   |
-| Custom icon (SVG inline)                | `IressIcon`                                         | Medium   |
-| `<div>` with flex column styles         | `IressStack`                                        | Medium   |
-| `<div>` with flex row styles            | `IressInline`                                       | Medium   |
-| `<div>` with grid styles                | `IressRow` + `IressCol`                             | Medium   |
-| `<div>` with max-width container        | `IressContainer`                                    | Low      |
-| `<form>`                                | `IressForm` + `IressFormField`                      | High     |
-| `<input type="range">`                  | `IressSlider`                                       | Medium   |
-| `<input type="number">` (currency)      | `IressField` + `IressInputCurrency`                 | Medium   |
-| `<details>` / custom accordion          | `IressExpander`                                     | Medium   |
-| Custom autocomplete / typeahead         | `IressAutocomplete`                                 | High     |
-| Custom select with search               | `IressField` + `IressSelect`                        | High     |
-| Custom read-only display                | `IressReadonly`                                     | Medium   |
-| Custom segmented control / button group | `IressButtonGroup`                                  | Medium   |
-| Custom validation messages              | `IressValidationMessage` / `IressValidationSummary` | High     |
-| Custom styled wrapper `<div>`           | `IressStyled`                                       | Low      |
+| Raw HTML / Custom Code                  | IDS Replacement                                       | Priority |
+| --------------------------------------- | ----------------------------------------------------- | -------- |
+| `<button>`                              | `IressButton`                                         | High     |
+| `<a>` (navigation link)                 | `IressLink`                                           | High     |
+| `<input type="text">`                   | `IressField` + `IressInput`                           | High     |
+| `<input type="checkbox">`               | `IressCheckbox`                                       | High     |
+| `<input type="radio">`                  | `IressRadio` + `IressRadioGroup`                      | High     |
+| `<select>`                              | `IressField` + `IressSelect`                          | High     |
+| `<textarea>`                            | `IressField` + `IressInput`                           | High     |
+| `<table>`                               | `IressTable`                                          | High     |
+| `<label>`                               | `IressField` (wraps input with label)                 | High     |
+| `<h1>`–`<h6>`, `<p>`, `<span>` (styled) | `IressText`                                           | Medium   |
+| `<img>`                                 | `IressImage`                                          | Medium   |
+| `<hr>`                                  | `IressDivider`                                        | Medium   |
+| `<dialog>` / custom modal               | `IressModal`                                          | High     |
+| Custom confirmation / danger dialog     | `IressModal status="danger"` (or `success`/`warning`) | High     |
+| Custom drawer / slideout                | `IressSlideout`                                       | High     |
+| Custom tooltip                          | `IressTooltip`                                        | Medium   |
+| Custom popover                          | `IressPopover`                                        | Medium   |
+| Custom tabs                             | `IressTabSet` + `IressTab`                            | High     |
+| Custom spinner / loader                 | `IressSpinner`                                        | Medium   |
+| Custom skeleton loader                  | `IressSkeleton`                                       | Low      |
+| Custom progress bar                     | `IressProgress`                                       | Low      |
+| Custom alert / toast                    | `IressAlert` / `IressToaster`                         | High     |
+| Custom card / panel                     | `IressCard` / `IressPanel`                            | Medium   |
+| Custom toggle / switch                  | `IressToggle`                                         | High     |
+| Custom badge / tag                      | `IressTag` / `IressPill`                              | Low      |
+| Custom breadcrumbs                      | `IressBreadcrumbs`                                    | Medium   |
+| Custom side navigation                  | `IressSideNav`                                        | Medium   |
+| Custom context menu                     | `IressMenu` + `IressMenuItem`                         | Medium   |
+| Custom icon (SVG inline)                | `IressIcon`                                           | Medium   |
+| `<div>` with flex column styles         | `IressStack`                                          | Medium   |
+| `<div>` with flex row styles            | `IressInline`                                         | Medium   |
+| `<div>` with grid styles                | `IressRow` + `IressCol`                               | Medium   |
+| `<div>` with max-width container        | `IressContainer`                                      | Low      |
+| `<form>`                                | `IressForm` + `IressFormField`                        | High     |
+| `<input type="range">`                  | `IressSlider`                                         | Medium   |
+| `<input type="number">` (currency)      | `IressField` + `IressInputCurrency`                   | Medium   |
+| `<details>` / custom accordion          | `IressExpander`                                       | Medium   |
+| Custom autocomplete / typeahead         | `IressAutocomplete`                                   | High     |
+| Custom select with search               | `IressField` + `IressSelect`                          | High     |
+| Custom read-only display                | `IressReadonly`                                       | Medium   |
+| Custom segmented control / button group | `IressButtonGroup`                                    | Medium   |
+| Custom validation messages              | `IressValidationMessage` / `IressValidationSummary`   | High     |
+| Custom styled wrapper `<div>`           | `IressStyled`                                         | Low      |
 
 #### What to Look For
 
@@ -331,6 +332,7 @@ Applications should use `IressLoading` for all loading states to ensure consiste
 
 - **Use `IressText` for all text** — Instead of raw `<p>`, `<span>`, `<h1>`–`<h6>` (unless nested inside `IressText` for styling)
 - **Use `IressAlert` for feedback** — Instead of custom notification/alert components
+- **Use `IressModal status` for confirmation dialogs** — Instead of custom danger/success/warning confirmation modals. Use the `actions` prop for buttons (`footer` is not available when `status` is set)
 - **Use `IressIcon` for icons** — Instead of inline SVGs or custom icon components (unless the icon is a hero graphic that doesn't fit the standard icon use case)
 - **Use `IressDivider` for separators** — Instead of `<hr>` or custom dividers (unless nested inside `IressText` for inline separation)
 
