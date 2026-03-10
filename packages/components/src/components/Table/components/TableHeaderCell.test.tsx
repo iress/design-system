@@ -6,12 +6,22 @@ import { TableProvider } from '../TableProvider';
 const columnApi = {
   id: 'test',
   getCanSort: () => false,
+  getCanFilter: () => false,
   toggleSorting: () => undefined,
+  setFilterValue: () => undefined,
+  getFilterValue: () => undefined,
+  getFacetedUniqueValues: () => new Map(),
 };
 
 const columnApiWithSorting = {
   ...columnApi,
   getCanSort: () => true,
+};
+
+const columnApiWithFiltering = {
+  ...columnApi,
+  getCanFilter: () => true,
+  getFacetedUniqueValues: () => new Map([['Value A', 1]]),
 };
 
 describe('TableHeaderCell', () => {
@@ -57,6 +67,46 @@ describe('TableHeaderCell', () => {
 
     const sortButton = screen.getByRole('button', { name: 'Headingsortable' });
     expect(sortButton).toBeInTheDocument();
+  });
+
+  it('renders a filter button if column supports it', () => {
+    const screen = render(
+      <TableProvider columns={[{ key: 'test', filter: true }]} rows={[]}>
+        <table>
+          <thead>
+            <tr>
+              <TableHeaderCell columnApi={columnApiWithFiltering} tableId="id">
+                Heading
+              </TableHeaderCell>
+            </tr>
+          </thead>
+        </table>
+      </TableProvider>,
+    );
+
+    expect(
+      screen.getByRole('button', { name: 'filterable' }),
+    ).toBeInTheDocument();
+  });
+
+  it('does not render a filter button if column does not have filter enabled', () => {
+    const screen = render(
+      <TableProvider columns={[{ key: 'test' }]} rows={[]}>
+        <table>
+          <thead>
+            <tr>
+              <TableHeaderCell columnApi={columnApi} tableId="id">
+                Heading
+              </TableHeaderCell>
+            </tr>
+          </thead>
+        </table>
+      </TableProvider>,
+    );
+
+    expect(
+      screen.queryByRole('button', { name: 'filterable' }),
+    ).not.toBeInTheDocument();
   });
 
   describe('accessibility', () => {

@@ -16,6 +16,7 @@ describe('composeTableColumnDefs', () => {
         accessorFn: expect.any(Function) as AccessorFn,
         cell: expect.any(Function) as CellFn,
         enableSorting: false,
+        enableColumnFilter: false,
         header: expect.any(Function) as HeaderFn,
         id: 'test',
       },
@@ -40,6 +41,7 @@ describe('composeTableColumnDefs', () => {
         accessorFn: expect.any(Function) as AccessorFn,
         cell: expect.any(Function) as CellFn,
         enableSorting: true,
+        enableColumnFilter: false,
         header: expect.any(Function) as HeaderFn,
         id: 'test',
       },
@@ -79,9 +81,35 @@ describe('composeTableColumnDefs', () => {
         accessorFn: expect.any(Function) as AccessorFn,
         cell: expect.any(Function) as CellFn,
         enableSorting: true,
+        enableColumnFilter: false,
         header: expect.any(Function) as HeaderFn,
         id: 'test',
         sortingFn: sortFn,
+      },
+    ]);
+  });
+
+  it('creates a filterable column when filter is true', () => {
+    const columnDefs = composeTableColumnDefs(
+      [{ test: 'test' }],
+      [
+        {
+          key: 'test',
+          label: 'Test',
+          filter: true,
+        },
+      ],
+    );
+
+    expect(columnDefs).toEqual([
+      {
+        accessorFn: expect.any(Function) as AccessorFn,
+        cell: expect.any(Function) as CellFn,
+        enableSorting: false,
+        enableColumnFilter: true,
+        filterFn: expect.any(Function) as () => boolean,
+        header: expect.any(Function) as HeaderFn,
+        id: 'test',
       },
     ]);
   });

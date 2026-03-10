@@ -1,5 +1,6 @@
 import {
   createColumnHelper,
+  type FilterFn,
   type SortDirection,
   type SortingFnOption,
 } from '@tanstack/react-table';
@@ -25,6 +26,19 @@ export interface TableColumn<TRow extends object, TVal = never> extends Pick<
    * When set to true, a divider will be rendered after the column.
    */
   divider?: boolean;
+
+  /**
+   * When set to true, the column will be filterable.
+   * A filter icon will appear in the column header, and clicking it will open
+   * a panel showing unique column values as checkboxes.
+   */
+  filter?: boolean;
+
+  /**
+   * Text to be read by a screen reader for the filter button.
+   * @default filterable
+   */
+  filterableText?: string;
 
   /**
    * Formats the cell content.
@@ -75,6 +89,18 @@ export interface TableColumn<TRow extends object, TVal = never> extends Pick<
   width?: string;
 }
 
+/**
+ * Filter function that checks if the cell value is included in the array of selected filter values.
+ */
+export const tableInArrayFilterFn: FilterFn<object> = (
+  row,
+  columnId,
+  filterValue: string[],
+) => {
+  if (!filterValue?.length) return true;
+  return filterValue.includes(String(row.getValue(columnId) ?? ''));
+};
+
 export const composeTableColumnDefs = <TRow extends object, TVal = never>(
   rows: TRow[],
   columns?: TableColumn<TRow, TVal>[],
@@ -88,6 +114,7 @@ export const composeTableColumnDefs = <TRow extends object, TVal = never>(
         cell: (info) => info.getValue(),
         header: () => formatObjectKey(key),
         enableSorting: false,
+        enableColumnFilter: false,
       }),
     );
   }
@@ -98,6 +125,7 @@ export const composeTableColumnDefs = <TRow extends object, TVal = never>(
 
   return columnEntries.map(([key, column]) => {
     const enableSorting = !!column?.sort || !!column?.sortFn;
+    const enableColumnFilter = !!column?.filter;
 
     const columnOptions: Parameters<typeof columnHelper.accessor>['1'] = {
       id: key,
@@ -110,10 +138,15 @@ export const composeTableColumnDefs = <TRow extends object, TVal = never>(
       ),
       header: () => column?.label,
       enableSorting,
+      enableColumnFilter,
     };
 
     if (column?.sortFn) {
       columnOptions.sortingFn = column.sortFn;
+    }
+
+    if (enableColumnFilter) {
+      columnOptions.filterFn = tableInArrayFilterFn;
     }
 
     return columnHelper.accessor(

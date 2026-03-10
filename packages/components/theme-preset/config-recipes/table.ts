@@ -12,6 +12,11 @@ export const tableRecipe = defineSlotRecipe({
     'sortIconInactive',
     'activator',
     'rowGroupHeader',
+    'headerContent',
+    'filterButton',
+    'filterIcon',
+    'filterPanel',
+    'filterItem',
   ],
   base: {
     root: {
@@ -92,6 +97,56 @@ export const tableRecipe = defineSlotRecipe({
       transition: 'all',
       _hover: {
         color: 'colour.primary.text',
+      },
+    },
+    headerContent: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'spacing.1',
+    },
+    filterButton: {
+      all: 'unset',
+      cursor: 'pointer',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: 'colour.neutral.60',
+      borderRadius: 'radius.system.form',
+      padding: 'spacing.1',
+      transition: 'color 0.2s',
+      _hover: {
+        color: 'colour.primary.text',
+      },
+      _focusVisible: {
+        outline: 'focus',
+      },
+    },
+    filterIcon: {
+      width: '[1.1em]',
+      height: '[1.1em]',
+      fill: 'currentColor',
+    },
+    filterPanel: {
+      position: 'absolute',
+      top: '[calc(100% + {spacing.1})]',
+      left: 'spacing.0',
+      zIndex: 'overlay',
+      bg: 'colour.neutral.10',
+      border: 'divider',
+      borderRadius: 'radius.system.layout',
+      minWidth: '[160px]',
+      boxShadow: 'card',
+      padding: 'spacing.2',
+    },
+    filterItem: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'spacing.2',
+      padding: 'spacing.1',
+      cursor: 'pointer',
+      borderRadius: 'radius.system.form',
+      _hover: {
+        bg: 'colour.primary.surfaceHover',
       },
     },
     rowGroupHeader: {
@@ -179,6 +234,13 @@ export const tableRecipe = defineSlotRecipe({
       true: {
         sortHeader: {
           whiteSpace: 'nowrap',
+        },
+      },
+    },
+    filterButtonActive: {
+      true: {
+        filterButton: {
+          color: 'colour.primary.text',
         },
       },
     },
