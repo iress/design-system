@@ -237,5 +237,14 @@ export const modal = sva({
         },
       },
     },
+    {
+      alertStatus: ['danger', 'success', 'warning'],
+      status: 'open',
+      css: {
+        statusIcon: {
+          animation: 'modalStatusIcon 0.7s linear .1s',
+        },
+      },
+    },
   ],
 });
