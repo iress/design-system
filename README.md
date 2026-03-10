@@ -5,7 +5,6 @@ The IDS monorepo contains the React component library and supporting packages fo
 ## Packages
 
 - `@iress-oss/ids-components` - React components that implement the design system
-- `@iress-oss/ids-mcp-server` - **DEPRECATED** — Replaced by [Agent Skills](#agent-skills) (`.agents/skills/`) and `.ai/` folders
 - `@iress-oss/ids-storybook-config` - Shared Storybook configuration for IDS packages
 - `@iress-oss/ids-storybook-okta` - Storybook addon for integrating Okta authentication into Storybook
 - `@iress-oss/ids-storybook-sandbox` - Storybook addon for opening code examples in CodeSandbox
