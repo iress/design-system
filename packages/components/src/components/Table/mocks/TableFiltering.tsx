@@ -14,6 +14,7 @@ const STATUS_MODES: Record<string, 'success' | 'info' | 'warning' | 'danger'> =
 export const TableFiltering = (args: Props) => (
   <IressTable
     caption="My investments"
+    compact
     rows={[
       {
         investment_name: 'Artemis Fund Managers Limited',
@@ -61,7 +62,7 @@ export const TableFiltering = (args: Props) => (
         format: (value: string) => (
           <IressPill mode={STATUS_MODES[value] ?? 'info'}>{value}</IressPill>
         ),
-        formatFilter: (value) => (
+        formatFilter: (value: string) => (
           <IressPill mode={STATUS_MODES[value] ?? 'info'}>{value}</IressPill>
         ),
       },

@@ -76,9 +76,11 @@ const BreadcrumbOverflow = ({
   className,
   'data-testid': dataTestId,
   items = [],
+  overflowClassName,
   ...restProps
 }: Omit<IressPopoverProps, 'activator'> & {
   items: BreadcrumbItem[];
+  overflowClassName?: string;
 }) => (
   <IressPopover
     align="bottom"
@@ -92,7 +94,11 @@ const BreadcrumbOverflow = ({
   >
     <IressMenu data-testid={propagateTestid(dataTestId, 'menu')}>
       {items.map(({ key, label, ...item }, index) => (
-        <IressMenuItem key={key ?? index} {...item}>
+        <IressMenuItem
+          key={key ?? index}
+          {...item}
+          className={cx(item.className, overflowClassName)}
+        >
           {label}
         </IressMenuItem>
       ))}
@@ -166,6 +172,7 @@ export const IressBreadcrumbs = <
               className={cx(classes.link, overflowProps?.className)}
               data-testid={propagateTestid(dataTestId, 'overflow')}
               items={hiddenItems}
+              overflowClassName={classes.overflowItem}
             />
           </li>
         )}

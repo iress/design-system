@@ -92,11 +92,11 @@ describe('TableFilterButton', () => {
         );
 
         expect(
-          screen.getByRole('button', { name: 'filterable (1 active)' }),
+          screen.getByRole('button', { name: 'filterable(1 active)' }),
         ).toBeInTheDocument();
       });
 
-      it('shows a count indicator when filters are active', () => {
+      it('shows a indicator when filters are active', () => {
         const screen = render(
           <TableFilterButton
             {...defaultProps}
@@ -104,26 +104,16 @@ describe('TableFilterButton', () => {
           />,
         );
 
-        const indicator = screen.getByText('2');
+        const indicator = screen.getByLabelText('(2 active)');
         expect(indicator).toBeInTheDocument();
-        expect(indicator).toHaveAttribute('aria-hidden', 'true');
       });
 
-      it('does not show a count indicator when no filters are active', () => {
+      it('does not show a indicator when no filters are active', () => {
         const screen = render(
           <TableFilterButton {...defaultProps} filterValue={[]} />,
         );
 
         expect(screen.queryByText('0')).not.toBeInTheDocument();
-      });
-
-      it('caps the indicator count at 9+ when more than 9 filters are active', () => {
-        const manyValues = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-        const screen = render(
-          <TableFilterButton {...defaultProps} filterValue={manyValues} />,
-        );
-
-        expect(screen.getByText('9+')).toBeInTheDocument();
       });
 
       it('shows selected options as aria-selected when the menu is open', async () => {
@@ -135,7 +125,7 @@ describe('TableFilterButton', () => {
         );
 
         await userEvent.click(
-          screen.getByRole('button', { name: 'filterable (2 active)' }),
+          screen.getByRole('button', { name: 'filterable(2 active)' }),
         );
 
         await waitFor(() =>
@@ -199,7 +189,7 @@ describe('TableFilterButton', () => {
         );
 
         await userEvent.click(
-          screen.getByRole('button', { name: 'filterable (2 active)' }),
+          screen.getByRole('button', { name: 'filterable(2 active)' }),
         );
         await userEvent.click(screen.getByRole('option', { name: 'Value A' }));
 
@@ -222,11 +212,11 @@ describe('TableFilterButton', () => {
         );
 
         await userEvent.click(
-          screen.getByRole('button', { name: 'filterable (1 active)' }),
+          screen.getByRole('button', { name: 'filterable(1 active)' }),
         );
 
         expect(
-          screen.getByRole('button', { name: 'Clear filter' }),
+          screen.getByRole('option', { name: 'Clear filter' }),
         ).toBeInTheDocument();
       });
 
@@ -241,10 +231,10 @@ describe('TableFilterButton', () => {
         );
 
         await userEvent.click(
-          screen.getByRole('button', { name: 'filterable (2 active)' }),
+          screen.getByRole('button', { name: 'filterable(2 active)' }),
         );
         await userEvent.click(
-          screen.getByRole('button', { name: 'Clear filter' }),
+          screen.getByRole('option', { name: 'Clear filter' }),
         );
 
         expect(setFilter).toHaveBeenCalledWith([]);

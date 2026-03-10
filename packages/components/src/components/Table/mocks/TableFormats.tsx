@@ -17,6 +17,7 @@ const tenSecondsAgo = subtractSeconds(new Date(), 10);
 export const TableFormats = (args: Props) => (
   <IressTable
     caption="Available formats"
+    compact
     rows={[
       {
         string: 'Hello, world!',

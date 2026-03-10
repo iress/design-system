@@ -1,14 +1,15 @@
-import { type ReactNode } from 'react';
+import { useRef, type ReactNode } from 'react';
 import { IressButton } from '@/components/Button';
-import { IressMenu } from '@/components/Menu';
+import { IressMenu, IressMenuDivider } from '@/components/Menu';
 import { IressMenuItem } from '@/components/Menu/MenuItem/MenuItem';
-import { IressPill } from '@/components/Pill';
-import { IressPopover } from '@/components/Popover';
+import { IressPopover, type PopoverRef } from '@/components/Popover';
 import {
   IressTableFormattedValue,
   type TableCellFormats,
 } from '../TableFormattedValue/TableFormattedValue';
 import { table } from '../Table.styles';
+import { IressIcon } from '@/components/Icon';
+import { IressTooltip } from '@/main';
 
 export interface TableFilterButtonProps {
   filterableText?: string;
@@ -26,51 +27,33 @@ export const TableFilterButton = ({
   uniqueValues,
 }: TableFilterButtonProps) => {
   const isActive = filterValue.length > 0;
-  const classes = table({ filterButtonActive: isActive });
+  const classes = table({ hasFilterButton: true });
+  const popoverRef = useRef<PopoverRef>(null);
 
-  const ariaLabel = isActive
+  const tooltipText = isActive
     ? `${filterableText} (${filterValue.length} active)`
     : filterableText;
 
   return (
     <IressPopover
       activator={
-        <IressButton
-          mode="muted"
-          aria-label={ariaLabel}
-          className={classes.filterButton}
-        >
-          <svg
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-            className={classes.filterIcon}
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path
-              d="M3 5h14M5.5 10h9M8 15h4"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              fill="none"
-            />
-          </svg>
-          {isActive && (
-            <IressPill
-              mode="info"
-              className={classes.filterIndicator}
-              aria-hidden="true"
-            >
-              {filterValue.length > 9 ? '9+' : filterValue.length}
-            </IressPill>
-          )}
-        </IressButton>
+        <IressTooltip tooltipText={tooltipText} align="top">
+          <IressButton mode="muted" className={classes.filterButton}>
+            <IressIcon name="filter_list" screenreaderText={filterableText} />
+            {isActive && (
+              <span
+                className={classes.filterIndicator}
+                aria-label={`(${filterValue.length} active)`}
+              />
+            )}
+          </IressButton>
+        </IressTooltip>
       }
       align="bottom-start"
+      ref={popoverRef}
       type="listbox"
     >
       <IressMenu
-        role="listbox"
         multiSelect
         aria-label={filterableText}
         selected={filterValue}
@@ -90,15 +73,18 @@ export const TableFilterButton = ({
         ))}
       </IressMenu>
       {isActive && (
-        <div className={classes.filterFooter}>
-          <IressButton
-            mode="muted"
-            className={classes.filterClearButton}
-            onClick={() => setFilter([])}
+        <>
+          <IressMenuDivider />
+          <IressMenuItem
+            prepend={<IressIcon name="filter_list_off" />}
+            onClick={() => {
+              setFilter([]);
+              popoverRef.current?.setShow(false);
+            }}
           >
             Clear filter
-          </IressButton>
-        </div>
+          </IressMenuItem>
+        </>
       )}
     </IressPopover>
   );
