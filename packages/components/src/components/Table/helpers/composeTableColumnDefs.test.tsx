@@ -114,6 +114,57 @@ describe('composeTableColumnDefs', () => {
     ]);
   });
 
+  it('uses a custom filterFn when provided in filter object', () => {
+    const customFilterFn = vi.fn(() => true);
+    const columnDefs = composeTableColumnDefs(
+      [{ test: 'test' }],
+      [
+        {
+          key: 'test',
+          label: 'Test',
+          filter: { filterFn: customFilterFn },
+        },
+      ],
+    );
+
+    expect(columnDefs).toEqual([
+      {
+        accessorFn: expect.any(Function) as AccessorFn,
+        cell: expect.any(Function) as CellFn,
+        enableSorting: false,
+        enableColumnFilter: true,
+        filterFn: customFilterFn,
+        header: expect.any(Function) as HeaderFn,
+        id: 'test',
+      },
+    ]);
+  });
+
+  it('uses a built-in TanStack filterFn name when provided as a string', () => {
+    const columnDefs = composeTableColumnDefs(
+      [{ test: 'test' }],
+      [
+        {
+          key: 'test',
+          label: 'Test',
+          filter: { filterFn: 'includesString' },
+        },
+      ],
+    );
+
+    expect(columnDefs).toEqual([
+      {
+        accessorFn: expect.any(Function) as AccessorFn,
+        cell: expect.any(Function) as CellFn,
+        enableSorting: false,
+        enableColumnFilter: true,
+        filterFn: 'includesString',
+        header: expect.any(Function) as HeaderFn,
+        id: 'test',
+      },
+    ]);
+  });
+
   it('sets the currency symbol by default', () => {
     const columnDefs = composeTableColumnDefs(
       [{ test: 'test' }],

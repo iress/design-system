@@ -6,7 +6,7 @@ describe('composeTableInitialColumnFilters', () => {
     expect(filters).toEqual([]);
   });
 
-  it('returns empty array if no column has defaultFilter', () => {
+  it('returns empty array if no column has defaultValue', () => {
     const filters = composeTableInitialColumnFilters([
       { key: 'name', filter: true },
       { key: 'status' },
@@ -14,25 +14,25 @@ describe('composeTableInitialColumnFilters', () => {
     expect(filters).toEqual([]);
   });
 
-  it('ignores columns with an empty defaultFilter array', () => {
+  it('ignores columns with an empty defaultValue array', () => {
     const filters = composeTableInitialColumnFilters([
-      { key: 'status', filter: true, defaultFilter: [] },
+      { key: 'status', filter: { defaultValue: [] } },
     ]);
     expect(filters).toEqual([]);
   });
 
-  it('returns a column filter entry for a column with defaultFilter', () => {
+  it('returns a column filter entry for a column with defaultValue', () => {
     const filters = composeTableInitialColumnFilters([
-      { key: 'status', filter: true, defaultFilter: ['Current', 'Proposed'] },
+      { key: 'status', filter: { defaultValue: ['Current', 'Proposed'] } },
     ]);
     expect(filters).toEqual([{ id: 'status', value: ['Current', 'Proposed'] }]);
   });
 
-  it('returns multiple column filter entries when multiple columns have defaultFilter', () => {
+  it('returns multiple column filter entries when multiple columns have defaultValue', () => {
     const filters = composeTableInitialColumnFilters([
-      { key: 'status', defaultFilter: ['Current'] },
+      { key: 'status', filter: { defaultValue: ['Current'] } },
       { key: 'name' },
-      { key: 'type', defaultFilter: ['A', 'B'] },
+      { key: 'type', filter: { defaultValue: ['A', 'B'] } },
     ]);
     expect(filters).toEqual([
       { id: 'status', value: ['Current'] },

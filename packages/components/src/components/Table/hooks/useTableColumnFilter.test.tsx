@@ -25,8 +25,9 @@ const columnApi = {
 const columns: TableColumn<object, unknown>[] = [
   {
     key: 'test',
-    filter: true,
-    filterableText: 'Filter',
+    filter: {
+      filterableText: 'Filter',
+    },
   },
   {
     key: 'unfiltered',

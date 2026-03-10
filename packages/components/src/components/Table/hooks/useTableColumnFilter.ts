@@ -2,6 +2,7 @@ import { type Column } from '@tanstack/react-table';
 import { type ReactNode, useContext } from 'react';
 import { TableContext } from '../TableProvider';
 import { type TableCellFormats } from '../TableFormattedValue/TableFormattedValue';
+import { normalizeColumnFilter } from '../helpers/composeTableColumnDefs';
 
 export interface TableColumnFilterHookProps {
   columnApi?: Pick<
@@ -28,9 +29,9 @@ export const useTableColumnFilter = ({
 }: TableColumnFilterHookProps): TableColumnFilterHookReturn | undefined => {
   const table = useContext(TableContext);
   const column = table?.getColumnByKey(columnKey);
-  const canFilter = column?.filter;
+  const filterConfig = normalizeColumnFilter(column?.filter);
 
-  if (!column || !canFilter || !columnApi?.getCanFilter()) return undefined;
+  if (!column || !filterConfig || !columnApi?.getCanFilter()) return undefined;
 
   const facetedValues = columnApi.getFacetedUniqueValues();
   const uniqueValues = Array.from(facetedValues.keys())
@@ -43,8 +44,8 @@ export const useTableColumnFilter = ({
 
   return {
     filterValue,
-    filterableText: column.filterableText ?? 'filterable',
-    filterFormat: (column.formatFilter ?? column.format) as
+    filterableText: filterConfig.filterableText ?? 'filterable',
+    filterFormat: (filterConfig.format ?? column.format) as
       | TableCellFormats
       | ((value: string) => ReactNode)
       | undefined,
