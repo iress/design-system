@@ -55,7 +55,7 @@ export const TableFilterButton = ({
         multiSelect
         aria-label={filterableText}
         selected={filterValue}
-        onChange={(values) => setFilter(values! ?? [])}
+        onChange={(values) => setFilter(values ?? [])}
       >
         {uniqueValues.map((value) => (
           <IressMenuItem key={value} value={value}>
