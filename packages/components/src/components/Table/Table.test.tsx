@@ -239,6 +239,45 @@ describe('IressTable', () => {
     });
   });
 
+  describe('filtering', () => {
+    it('renders filter button when column has filter enabled', () => {
+      const screen = renderComponent({
+        columns: [{ key: 'key', label: 'Key', filter: true }],
+      });
+
+      expect(
+        screen.getByRole('button', { name: 'filterable' }),
+      ).toBeInTheDocument();
+    });
+
+    it('filters rows when a filter value is selected', async () => {
+      const screen = renderComponent({
+        columns: [{ key: 'key', label: 'Key', filter: true }],
+      });
+
+      expect(screen.getAllByRole('row')).toHaveLength(3); // header + 2 rows
+
+      await userEvent.click(screen.getByRole('button', { name: 'filterable' }));
+      await userEvent.click(screen.getByRole('option', { name: '1' }));
+
+      expect(screen.getAllByRole('row')).toHaveLength(2); // header + 1 filtered row
+    });
+
+    it('pre-filters rows with defaultValue', () => {
+      const screen = renderComponent({
+        columns: [
+          { key: 'key', label: 'Key', filter: { defaultValue: ['2'] } },
+        ],
+      });
+
+      expect(screen.getAllByRole('row')).toHaveLength(2); // header + 1 filtered row
+      expect(screen.getByRole('rowheader', { name: '2' })).toBeInTheDocument();
+      expect(
+        screen.queryByRole('rowheader', { name: '1' }),
+      ).not.toBeInTheDocument();
+    });
+  });
+
   describe('accessibility', () => {
     it('should not have basic accessibility issues', async () => {
       const screen = renderComponent();
