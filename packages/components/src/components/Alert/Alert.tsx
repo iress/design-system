@@ -154,7 +154,7 @@ export const IressAlert = ({
     <IressText
       className={cx(
         className,
-        css(styles.alert, styleProps),
+        css(styles.alert, styles.alertVars, styleProps),
         GlobalCSSClass.Alert,
       )}
       {...nonStyleProps}

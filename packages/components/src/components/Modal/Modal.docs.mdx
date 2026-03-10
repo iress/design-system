@@ -112,6 +112,16 @@ If you set a responsive `width`, the modal becomes full width on screens smaller
 
 <ComponentExample of={ComponentStories.ResponsiveSize} />
 
+### Status
+
+The `status` prop can be set to `danger`, `success` or `warning` to display a contextual status icon in the modal header. Status modals are intended for communicating outcomes of actions, confirmations, or alerts that require user acknowledgement.
+
+When `status` is set:
+
+- The `size` prop is restricted to `sm` or `md` (defaults to `sm`).
+
+<ComponentExample of={ComponentStories.Status} />
+
 ### Disable closing
 
 For instances where you require the user's full attention and you want to ensure they continue the current task before closing the modal, you can disable the backdrop and escape key using `disableBackdropClick` and/or hide the close button using `noCloseButton`.
