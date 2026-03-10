@@ -57,6 +57,7 @@ export const TableFiltering = (args: Props) => (
         key: 'status',
         label: 'Status',
         filter: true,
+        defaultFilter: ['Current', 'Proposed'],
         format: (value: string) => (
           <IressPill mode={STATUS_MODES[value] ?? 'info'}>{value}</IressPill>
         ),

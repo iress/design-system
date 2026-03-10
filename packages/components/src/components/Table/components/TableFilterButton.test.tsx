@@ -206,6 +206,50 @@ describe('TableFilterButton', () => {
         expect(setFilter).toHaveBeenCalledWith(['Value B']);
       });
     });
+
+    describe('clear filter', () => {
+      it('does not show a clear filter button when no filters are active', () => {
+        const screen = render(<TableFilterButton {...defaultProps} />);
+
+        expect(
+          screen.queryByRole('button', { name: 'Clear filter' }),
+        ).not.toBeInTheDocument();
+      });
+
+      it('shows a clear filter button when filters are active', async () => {
+        const screen = render(
+          <TableFilterButton {...defaultProps} filterValue={['Value A']} />,
+        );
+
+        await userEvent.click(
+          screen.getByRole('button', { name: 'filterable (1 active)' }),
+        );
+
+        expect(
+          screen.getByRole('button', { name: 'Clear filter' }),
+        ).toBeInTheDocument();
+      });
+
+      it('calls setFilter with an empty array when the clear filter button is clicked', async () => {
+        const setFilter = vi.fn();
+        const screen = render(
+          <TableFilterButton
+            {...defaultProps}
+            filterValue={['Value A', 'Value B']}
+            setFilter={setFilter}
+          />,
+        );
+
+        await userEvent.click(
+          screen.getByRole('button', { name: 'filterable (2 active)' }),
+        );
+        await userEvent.click(
+          screen.getByRole('button', { name: 'Clear filter' }),
+        );
+
+        expect(setFilter).toHaveBeenCalledWith([]);
+      });
+    });
   });
 
   describe('accessibility', () => {

@@ -14,6 +14,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { composeTableInitialSorting } from './helpers/composeTableInitialSorting';
+import { composeTableInitialColumnFilters } from './helpers/composeTableInitialColumnFilters';
 import {
   composeTableColumnDefs,
   tableInArrayFilterFn,
@@ -67,6 +68,7 @@ export const TableProvider = <TRow extends object, TVal = unknown>({
     },
     initialState: {
       sorting: composeTableInitialSorting(columns),
+      columnFilters: composeTableInitialColumnFilters(columns),
     },
   });
 

@@ -16,6 +16,8 @@ export const tableRecipe = defineSlotRecipe({
     'filterButton',
     'filterIcon',
     'filterIndicator',
+    'filterFooter',
+    'filterClearButton',
   ],
   base: {
     root: {
@@ -130,6 +132,15 @@ export const tableRecipe = defineSlotRecipe({
       position: 'absolute',
       top: '[0px]',
       right: '[0px]',
+    },
+    filterFooter: {
+      borderBlockStart: 'divider',
+      paddingBlock: 'spacing.100',
+      paddingInline: 'spacing.200',
+    },
+    filterClearButton: {
+      width: '[100%]',
+      justifyContent: 'center',
     },
     rowGroupHeader: {
       textStyle: 'typography.heading.4',

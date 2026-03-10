@@ -89,6 +89,17 @@ export const TableFilterButton = ({
           </IressMenuItem>
         ))}
       </IressMenu>
+      {isActive && (
+        <div className={classes.filterFooter}>
+          <IressButton
+            mode="muted"
+            className={classes.filterClearButton}
+            onClick={() => setFilter([])}
+          >
+            Clear filter
+          </IressButton>
+        </div>
+      )}
     </IressPopover>
   );
 };

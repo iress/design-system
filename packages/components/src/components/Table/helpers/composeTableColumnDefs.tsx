@@ -28,6 +28,13 @@ export interface TableColumn<TRow extends object, TVal = never> extends Pick<
   divider?: boolean;
 
   /**
+   * Pre-filters the column with these values on initial render.
+   * Provide an array of string values to filter on, matching the raw cell values.
+   * The user can still clear or change the filter interactively.
+   */
+  defaultFilter?: string[];
+
+  /**
    * When set to true, the column will be filterable.
    * A filter icon will appear in the column header, and clicking it will open
    * a panel showing unique column values as checkboxes.
