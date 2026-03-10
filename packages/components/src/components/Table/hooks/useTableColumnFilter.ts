@@ -32,12 +32,12 @@ export const useTableColumnFilter = ({
   const filterConfig = normalizeColumnFilter(column?.filter);
 
   const facetedValues = columnApi?.getFacetedUniqueValues();
-  const uniqueValues = useMemo(() => {
+  const uniqueValues = useMemo((): unknown[] => {
     const rawValues =
       filterConfig?.values ??
       (facetedValues ? Array.from(facetedValues.keys()) : []);
     const filtered = rawValues.filter((v) => v != null && v !== '');
-    if (filtered.every((v) => typeof v === 'string')) {
+    if (filtered.every((v): v is string => typeof v === 'string')) {
       return filtered.sort((a, b) => a.localeCompare(b));
     }
     return filtered;
