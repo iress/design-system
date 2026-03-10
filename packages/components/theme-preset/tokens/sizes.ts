@@ -19,9 +19,7 @@ const containerSizes = Object.fromEntries(
 const inputSizes = {
   ...Object.fromEntries(
     FORM_ELEMENT_WIDTHS.filter((value) => !value.includes('%')).map((width) => {
-      const description = width.includes('%')
-        ? `${width} width`
-        : `1rem * ${width}`;
+      const description = `1rem * ${width}`;
 
       let value;
       if (width === '2') {

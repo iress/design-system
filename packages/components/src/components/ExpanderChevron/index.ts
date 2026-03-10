@@ -1,1 +1,4 @@
-export { ExpanderChevron, type ExpanderChevronProps } from './ExpanderChevron';
+export {
+  IressExpanderChevron,
+  type IressExpanderChevronProps,
+} from './ExpanderChevron';

@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { cx } from '@/styled-system/css';
 import { expanderChevron } from './ExpanderChevron.styles';
 
-export interface ExpanderChevronProps {
+export interface IressExpanderChevronProps {
   className?: string;
   open?: boolean;
 }
@@ -12,7 +12,7 @@ export interface ExpanderChevronProps {
  * Uses Material Symbols "keyboard_arrow_down" (filled, weight 300).
  * @see https://fonts.google.com/icons?selected=Material+Symbols+Rounded:keyboard_arrow_down
  */
-export const ExpanderChevron: FC<ExpanderChevronProps> = ({
+export const IressExpanderChevron: FC<IressExpanderChevronProps> = ({
   className,
   open,
 }) => (
@@ -26,4 +26,4 @@ export const ExpanderChevron: FC<ExpanderChevronProps> = ({
   </svg>
 );
 
-ExpanderChevron.displayName = 'ExpanderChevron';
+IressExpanderChevron.displayName = 'IressExpanderChevron';

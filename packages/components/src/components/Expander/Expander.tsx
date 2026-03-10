@@ -7,7 +7,7 @@ import { IressText, type IressTextProps } from '../Text';
 import { type IressCustomiseSlot } from '@/interfaces';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
-import { ExpanderChevron } from '../ExpanderChevron';
+import { IressExpanderChevron } from '../ExpanderChevron';
 
 export interface IressExpanderProps extends Omit<
   IressTextProps<'div'>,
@@ -99,7 +99,7 @@ export const IressExpander = ({
         type="button"
       >
         {activator}
-        <ExpanderChevron open={isOpen} className={classes.chevron} />
+        <IressExpanderChevron open={isOpen} className={classes.chevron} />
       </styled.button>
       <div
         id={`${id}__container`}

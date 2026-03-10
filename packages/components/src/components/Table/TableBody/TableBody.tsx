@@ -11,7 +11,7 @@ import {
 import { table } from '../Table.styles';
 import { type IressTableProps } from '../Table';
 import { TableContext, TableProvider } from '../TableProvider';
-import { ExpanderChevron } from '../../ExpanderChevron';
+import { IressExpanderChevron } from '../../ExpanderChevron';
 import { styled } from '@/styled-system/jsx';
 
 export interface IressTableBodyProps<
@@ -89,7 +89,7 @@ const TableBodyHeader = ({
       >
         <button className={classes.activator} type="button">
           {caption}
-          <ExpanderChevron open={open} />
+          <IressExpanderChevron open={open} />
         </button>
       </styled.th>
     </tr>

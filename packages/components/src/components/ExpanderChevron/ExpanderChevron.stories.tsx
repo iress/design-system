@@ -1,19 +1,19 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { ExpanderChevron } from './ExpanderChevron';
+import { IressExpanderChevron } from './ExpanderChevron';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
 
-type Story = StoryObj<typeof ExpanderChevron>;
+type Story = StoryObj<typeof IressExpanderChevron>;
 
 export default {
   title: 'Components/ExpanderChevron',
-  component: ExpanderChevron,
+  component: IressExpanderChevron,
   tags: ['updated'],
   parameters: {
     docs: {
       description: {
         component: `
-The \`ExpanderChevron\` component renders the SVG chevron icon used to indicate expandable content.
+The \`IressExpanderChevron\` component renders the SVG chevron icon used to indicate expandable content.
 This is used internally by the \`IressExpander\` and \`IressTableBody\` components.
 
 **Key Features:**
@@ -25,14 +25,14 @@ This is used internally by the \`IressExpander\` and \`IressTableBody\` componen
       },
     },
   },
-} as Meta<typeof ExpanderChevron>;
+} as Meta<typeof IressExpanderChevron>;
 
 export const Default: Story = {
   args: {},
   render: (args) => (
     <IressStack gap="md">
       <IressText>
-        <ExpanderChevron {...args} /> Closed (default)
+        <IressExpanderChevron {...args} /> Closed (default)
       </IressText>
     </IressStack>
   ),
@@ -49,10 +49,10 @@ export const States: Story = {
   render: () => (
     <IressStack gap="md">
       <IressText>
-        <ExpanderChevron open={false} /> Closed
+        <IressExpanderChevron open={false} /> Closed
       </IressText>
       <IressText>
-        <ExpanderChevron open={true} /> Open
+        <IressExpanderChevron open={true} /> Open
       </IressText>
     </IressStack>
   ),

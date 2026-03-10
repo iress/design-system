@@ -4,7 +4,7 @@ export const expanderChevron = cva({
   base: {
     width: 'icon.md',
     height: 'icon.md',
-    color: 'colour.neutral.90',
+    color: '[currentColor]',
     bg: 'colour.neutral.30',
     borderRadius: '50%',
     transition: '[all 0.3s ease-in-out]',
