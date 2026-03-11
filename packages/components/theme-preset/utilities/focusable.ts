@@ -15,6 +15,7 @@ export const focusable = defineUtility({
     'slider',
     'group',
     'inset',
+    'within:inset',
     'colour.primary.onFill',
   ],
   transform: (value) => {
