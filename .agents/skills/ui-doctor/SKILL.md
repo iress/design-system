@@ -333,7 +333,7 @@ Applications should use `IressLoading` for all loading states to ensure consiste
 
 #### f. Semantic Component Usage
 
-- **Use `IressText` for all text** — Instead of raw `<p>`, `<span>`, `<h1>`–`<h6>` (unless nested inside `IressText` for styling)
+- **Use `IressText` for all text** — Instead of raw `<p>`, `<span>`, `<h1>`–`<h6>`. Note: nesting native HTML elements (e.g. `<p>`, `<strong>`, `<a>`, `<ul>`) *inside* `IressText` is an allowed pattern for rendering CMS content, markdown output, or other unstructured data sources
 - **Use `IressAlert` for feedback** — Instead of custom notification/alert components
 - **Use `IressModal status` for confirmation dialogs** — Instead of custom danger/success/warning confirmation modals. Use the `actions` prop for buttons (`footer` is not available when `status` is set)
 - **Use `IressIcon` for icons** — Instead of inline SVGs or custom icon components (unless the icon is a hero graphic that doesn't fit the standard icon use case)
@@ -354,6 +354,7 @@ Not every raw HTML element is a violation. The following are **acceptable except
 | `<form>` wrapping a single action (e.g., search bar)         | `IressForm` is best for multi-field forms; standalone search inputs may use `IressAutocomplete` or `IressField` + `IressInput` directly |
 | `<input type="hidden">`                                      | Not user-facing UI                                                                                                                      |
 | Custom components wrapping IDS components internally         | App-level abstraction is valid as long as IDS components are used underneath                                                            |
+| Native HTML elements nested inside `IressText`               | Allowed for rendering CMS content, markdown output, or other unstructured data sources where the content structure is not controlled by the application |
 
 **When reporting:** If a potential violation falls into an exception category, note it as "Reviewed — Acceptable Exception" rather than a finding. This prevents false positives and keeps reports actionable.
 
