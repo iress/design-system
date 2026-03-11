@@ -47,6 +47,7 @@ export const tableRecipe = defineSlotRecipe({
       '& thead th': {
         textStyle: 'typography.heading.5',
         paddingBlock: 'spacing.2',
+        focusable: 'within:inset',
       },
 
       '& thead tr:first-child th, & thead tr:first-child td, &:not(:has(thead)) tbody tr:first-child th, &:not(:has(thead)) tbody tr:first-child td':
@@ -70,7 +71,6 @@ export const tableRecipe = defineSlotRecipe({
       fontWeight: 'inherit',
       fontSize: 'inherit',
       cursor: 'pointer',
-      focusable: 'true',
     },
     sortIcon: {
       fill: 'colour.neutral.90',
