@@ -23,20 +23,22 @@ export const focusable = defineUtility({
         background: cssVars.colour.neutral[10],
         borderColor: `var(--iress-border-color--default, var(--iress-border-color, ${cssVars.colour.neutral[70]}))`,
 
-        '&:has(input:disabled, textarea:disabled, select:disabled)': {
-          background: `var(--iress-background--disabled, ${cssVars.colour.neutral[20]})`,
-          '--iress-chevron-color': cssVars.colour.neutral[60],
-          cursor: 'not-allowed',
-        },
-        '&:hover:not(:has(input:disabled, textarea:disabled, select:disabled))':
+        '&:has(input:disabled, textarea:disabled, select:disabled, [contenteditable][aria-disabled="true"])':
+          {
+            background: `var(--iress-background--disabled, ${cssVars.colour.neutral[20]})`,
+            '--iress-chevron-color': cssVars.colour.neutral[60],
+            cursor: 'not-allowed',
+          },
+        '&:hover:not(:has(input:disabled, textarea:disabled, select:disabled, [contenteditable][aria-disabled="true"]))':
           {
             background: `var(--iress-background-hover, ${cssVars.colour.neutral[20]})`,
             borderColor: `var(--iress-border-color--hover, ${cssVars.colour.neutral[70]})`,
           },
-        'input:focus, textarea:focus, select:focus': {
-          outline: 'none',
-        },
-        '&:has(input:focus:not(:disabled), textarea:focus:not(:disabled), select:focus:not(:disabled))':
+        'input:focus, textarea:focus, select:focus, [contenteditable="true"]:focus':
+          {
+            outline: 'none',
+          },
+        '&:has(input:focus:not(:disabled), textarea:focus:not(:disabled), select:focus:not(:disabled), [contenteditable="true"]:focus:not([aria-disabled="true"]))':
           {
             borderColor: `var(--iress-border-color, ${cssVars.colour.neutral[90]})`,
             boxShadow: `var(--iress-shadow-focus, 0 0 0 1px var(--iress-border-color, ${cssVars.colour.neutral[90]}))`,
