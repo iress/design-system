@@ -165,6 +165,35 @@ describe('composeTableColumnDefs', () => {
     ]);
   });
 
+  it('uses a no-op filterFn when filterFn is set to false', () => {
+    const columnDefs = composeTableColumnDefs(
+      [{ test: 'test' }],
+      [
+        {
+          key: 'test',
+          label: 'Test',
+          filter: { filterFn: false },
+        },
+      ],
+    );
+
+    expect(columnDefs).toEqual([
+      {
+        accessorFn: expect.any(Function) as AccessorFn,
+        cell: expect.any(Function) as CellFn,
+        enableSorting: false,
+        enableColumnFilter: true,
+        filterFn: expect.any(Function) as () => boolean,
+        header: expect.any(Function) as HeaderFn,
+        id: 'test',
+      },
+    ]);
+
+    // The no-op filterFn should always return true
+    const filterFn = columnDefs[0].filterFn as () => boolean;
+    expect(filterFn()).toBe(true);
+  });
+
   it('sets the currency symbol by default', () => {
     const columnDefs = composeTableColumnDefs(
       [{ test: 'test' }],

@@ -19,6 +19,7 @@ export interface TableColumnFilterHookReturn<TValue = unknown> {
   filterValue: string[];
   filterableText: string;
   filterFormat?: TableCellFormats | ((value: TValue) => ReactNode);
+  footer?: ReactNode;
   setFilter: (values: string[]) => void;
   uniqueValues: TValue[];
 }
@@ -55,8 +56,10 @@ export const useTableColumnFilter = ({
       | TableCellFormats
       | ((value: unknown) => ReactNode)
       | undefined,
+    footer: filterConfig.footer,
     setFilter: (values: string[]) => {
       columnApi.setFilterValue(values.length ? values : undefined);
+      filterConfig.onChange?.(values);
     },
     uniqueValues,
   };

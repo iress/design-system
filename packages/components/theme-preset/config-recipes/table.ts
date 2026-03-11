@@ -30,7 +30,6 @@ export const tableRecipe = defineSlotRecipe({
       minWidth: '12/12',
       borderCollapse: 'collapse',
       margin: 'spacing.0',
-      '--iress-header-background-color': '{colors.colour.neutral.10}',
 
       '& th, & td': {
         paddingBlock: 'spacing.4',
@@ -107,13 +106,17 @@ export const tableRecipe = defineSlotRecipe({
     filterIndicator: {
       position: 'absolute',
       top: '[0px]',
-      right: '[-3px]',
+      right: '[.05em]',
       width: '[8px]',
       height: '[8px]',
       borderRadius: '50%',
-      bg: 'colour.primary.fill',
+      bg: 'colour.accent.fill',
       border:
-        '[1.5px solid var(--iress-header-background-color, {colors.colour.neutral.10})]',
+        '[1.5px solid var(--iress-filter-button-bg, {colors.colour.primary.surfaceHover})]',
+      animationName: 'filterIndicatorBounceIn',
+      animationDuration: '0.4s',
+      animationTimingFunction: 'ease-out',
+      animationFillMode: 'both',
     },
     rowGroupHeader: {
       textStyle: 'typography.heading.4',
@@ -147,7 +150,6 @@ export const tableRecipe = defineSlotRecipe({
           border: 'table',
           borderRadius: 'radius.system.layout',
           borderCollapse: 'separate',
-          '--iress-header-background-color': '{colors.colour.primary.surface}',
 
           '& th, & td': {
             padding: 'spacing.2',
@@ -226,6 +228,22 @@ export const tableRecipe = defineSlotRecipe({
           minHeight: '[0]',
           position: 'relative',
           mr: 'spacing.1',
+
+          '&:hover:not([aria-expanded="true"])': {
+            '--iress-filter-button-bg': '{colors.colour.neutral.20}',
+          },
+        },
+      },
+    },
+    hasActiveFilter: {
+      true: {
+        filterButton: {
+          color: 'colour.primary.fill',
+          bg: 'colour.primary.surfaceHover',
+
+          '&[aria-expanded="true"]': {
+            '--iress-filter-button-bg': '{colors.colour.primary.surface}',
+          },
         },
       },
     },

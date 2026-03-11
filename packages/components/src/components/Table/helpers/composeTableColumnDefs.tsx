@@ -16,10 +16,10 @@ import type { ReactNode } from 'react';
 export interface TableColumnFilter<TRow extends object> {
   /**
    * Pre-filters the column with these values on initial render.
-   * Provide an array of string values to filter on, matching the raw cell values.
+   * Provide an array of values to filter on, matching the raw cell values.
    * The user can still clear or change the filter interactively.
    */
-  defaultValue?: string[];
+  defaultValue?: unknown[];
 
   /**
    * Text to be read by a screen reader for the filter button.
@@ -33,17 +33,35 @@ export interface TableColumnFilter<TRow extends object> {
    * `includesString`, `includesStringSensitive`, `equalsString`, `equalsStringSensitive`,
    * `arrIncludes`, `arrIncludesAll`, `arrIncludesSome`, `equals`, `weakEquals`, `inNumberRange`.
    * When not provided, defaults to the built-in "in array" matching.
+   *
+   * Set to `false` to disable client-side filtering for this column. The filter
+   * UI will still be shown, but all rows will pass through unchanged. Combine
+   * with `onChange` to implement server-side filtering.
    * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-filtering#filterfn)
    */
-  filterFn?: FilterFnOption<TRow>;
+  filterFn?: FilterFnOption<TRow> | false;
 
-  /**
-   * Formats the display of filter option values in the filter dropdown.
+  /**   * Custom footer content rendered at the bottom of the filter popover.
+   * Useful for adding actions like "Edit" buttons or additional controls.
+   */
+  footer?: ReactNode;
+
+  /**   * Formats the display of filter option values in the filter dropdown.
    * When not provided, falls back to the column's `format`.
    * To use the in-built formatters, set this to: string, number, date, currency, percent.
    * Use a custom renderer by passing a function that returns a ReactNode.
    */
-  format?: TableCellFormats | ((value: string) => ReactNode);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  format?: TableCellFormats | ((value: any) => ReactNode);
+
+  /**
+   * Called whenever the selected filter values change.
+   * Receives the array of currently selected values (empty array when cleared).
+   * Useful for server-side filtering: combine with a no-op `filterFn` that
+   * always returns `true`, then fetch new data and update `rows`.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onChange?: (values: any[]) => void;
 
   /**
    * Explicit list of values to show in the filter dropdown.
@@ -197,7 +215,10 @@ export const composeTableColumnDefs = <TRow extends object, TVal = never>(
 
     if (enableColumnFilter) {
       const filterConfig = normalizeColumnFilter(column?.filter);
-      columnOptions.filterFn = filterConfig?.filterFn ?? tableInArrayFilterFn;
+      columnOptions.filterFn =
+        filterConfig?.filterFn === false
+          ? () => true
+          : (filterConfig?.filterFn ?? tableInArrayFilterFn);
     }
 
     return columnHelper.accessor(

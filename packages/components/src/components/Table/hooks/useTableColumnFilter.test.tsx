@@ -243,4 +243,48 @@ describe('useTableColumnFilter', () => {
 
     expect(hook.result.current?.uniqueValues).toEqual([3, 1, 2]);
   });
+
+  it('calls onChange when setFilter is called with values', () => {
+    const onChange = vi.fn();
+    const hook = renderHookInTable(
+      {
+        columnApi,
+        columnKey: 'withOnChange',
+      },
+      {
+        columns: [
+          ...columns,
+          {
+            key: 'withOnChange',
+            filter: { onChange },
+          },
+        ],
+      },
+    );
+
+    hook.result.current?.setFilter(['Value A']);
+    expect(onChange).toHaveBeenCalledWith(['Value A']);
+  });
+
+  it('calls onChange with empty array when filter is cleared', () => {
+    const onChange = vi.fn();
+    const hook = renderHookInTable(
+      {
+        columnApi,
+        columnKey: 'withOnChange',
+      },
+      {
+        columns: [
+          ...columns,
+          {
+            key: 'withOnChange',
+            filter: { onChange },
+          },
+        ],
+      },
+    );
+
+    hook.result.current?.setFilter([]);
+    expect(onChange).toHaveBeenCalledWith([]);
+  });
 });

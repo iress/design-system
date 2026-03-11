@@ -160,13 +160,22 @@ The `TableColumnFilter` object accepts the following options:
 
 - `defaultValue`: An array of string values to pre-filter the column on initial render. The user can still clear or change the filter interactively.
 - `filterableText`: Screen reader text for the filter button. Defaults to "filterable". Useful for translation purposes.
-- `filterFn`: The filter function to use for this column. Can be a custom function that receives `(row, columnId, filterValue)` and returns `true`/`false`, or the name of a built-in TanStack filter function: `includesString`, `includesStringSensitive`, `equalsString`, `equalsStringSensitive`, `arrIncludes`, `arrIncludesAll`, `arrIncludesSome`, `equals`, `weakEquals`, `inNumberRange`. See the [TanStack Table filtering documentation](https://tanstack.com/table/v8/docs/api/features/column-filtering#filterfn) for details.
+- `filterFn`: The filter function to use for this column. Can be a custom function that receives `(row, columnId, filterValue)` and returns `true`/`false`, or the name of a built-in TanStack filter function: `includesString`, `includesStringSensitive`, `equalsString`, `equalsStringSensitive`, `arrIncludes`, `arrIncludesAll`, `arrIncludesSome`, `equals`, `weakEquals`, `inNumberRange`. Set to `false` to disable client-side filtering entirely (useful for server-side filtering). See the [TanStack Table filtering documentation](https://tanstack.com/table/v8/docs/api/features/column-filtering#filterfn) for details.
 - `format`: Customises the display of filter option values in the dropdown. When not provided, falls back to the column's `format`. Accepts the same built-in formatters (`string`, `number`, `date`, `currency`, `percent`) or a custom function returning a ReactNode.
+- `onChange`: Called whenever the selected filter values change. Receives an array of selected values (empty array when cleared). Useful for triggering server-side data fetching.
 - `values`: Explicit list of values to show in the filter dropdown. When provided, these are used instead of deriving values from the column data. Useful for stable filter options, server-side filtering, or showing all possible values regardless of current data.
 
 > **Note:** Column filtering is designed for selecting from discrete values. For more complex filtering needs (e.g., text search input, date ranges, or combining multiple filter criteria), use `IressDropdownMenu` with custom filter controls outside the table header.
 
 <ComponentExample of={ComponentStories.Filtering} />
+
+#### Server-side filtering
+
+For server-side filtering, set `filterFn: false` to disable client-side row filtering and use `onChange` to fetch new data when the user changes the filter selection. Provide explicit `values` so the filter dropdown always shows the full set of options regardless of which rows are currently loaded.
+
+Wrap the table in `IressLoading pattern="component"` to show a skeleton on initial load and an "Updating..." overlay on subsequent filter changes.
+
+<ComponentExample of={ComponentStories.ServerSideFiltering} />
 
 ### Width
 

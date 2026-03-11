@@ -244,6 +244,34 @@ describe('TableFilterButton', () => {
         expect(setFilter).toHaveBeenCalledWith([]);
       });
     });
+
+    describe('footer', () => {
+      it('renders custom footer content in the popover', async () => {
+        const screen = render(
+          <TableFilterButton
+            {...defaultProps}
+            footer={<button data-testid="custom-footer">Edit</button>}
+          />,
+        );
+
+        await userEvent.click(
+          screen.getByRole('button', { name: 'filterable' }),
+        );
+
+        expect(screen.getByTestId('custom-footer')).toBeVisible();
+      });
+
+      it('does not render a footer divider when footer is not provided', async () => {
+        const screen = render(<TableFilterButton {...defaultProps} />);
+
+        await userEvent.click(
+          screen.getByRole('button', { name: 'filterable' }),
+        );
+
+        const separators = screen.queryAllByRole('separator');
+        expect(separators).toHaveLength(0);
+      });
+    });
   });
 
   describe('accessibility', () => {

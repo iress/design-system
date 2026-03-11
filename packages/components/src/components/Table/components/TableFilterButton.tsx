@@ -15,6 +15,7 @@ export interface TableFilterButtonProps<TValue = unknown> {
   filterableText?: string;
   filterFormat?: TableCellFormats | ((value: TValue) => ReactNode);
   filterValue: string[];
+  footer?: ReactNode;
   setFilter: (values: string[]) => void;
   uniqueValues: TValue[];
 }
@@ -23,11 +24,12 @@ export const TableFilterButton = <TValue,>({
   filterableText = 'filterable',
   filterFormat,
   filterValue,
+  footer,
   setFilter,
   uniqueValues,
 }: TableFilterButtonProps<TValue>) => {
   const isActive = filterValue.length > 0;
-  const classes = table({ hasFilterButton: true });
+  const classes = table({ hasFilterButton: true, hasActiveFilter: isActive });
   const popoverRef = useRef<PopoverRef>(null);
 
   const tooltipText = isActive
@@ -87,6 +89,12 @@ export const TableFilterButton = <TValue,>({
           >
             Clear filter
           </IressMenuItem>
+        </>
+      )}
+      {footer && (
+        <>
+          <IressMenuDivider />
+          {footer}
         </>
       )}
     </IressPopover>
