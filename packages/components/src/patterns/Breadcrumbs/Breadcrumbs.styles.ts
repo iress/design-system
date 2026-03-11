@@ -1,7 +1,7 @@
 import { sva } from '@/styled-system/css';
 
 export const breadcrumbs = sva({
-  slots: ['root', 'list', 'item', 'link', 'current'],
+  slots: ['root', 'list', 'item', 'link', 'current', 'overflowItem'],
   base: {
     root: {
       // Performance: CSS containment
@@ -51,6 +51,11 @@ export const breadcrumbs = sva({
     current: {
       color: 'colour.neutral.90',
       textStyle: 'typography.body.sm.strong',
+    },
+    overflowItem: {
+      '&&': {
+        textStyle: 'typography.body.sm.medium',
+      },
     },
   },
 });

@@ -6,13 +6,18 @@ import {
 } from 'react';
 import {
   getCoreRowModel,
+  getFilteredRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
   getSortedRowModel,
   type Table,
   useReactTable,
 } from '@tanstack/react-table';
 import { composeTableInitialSorting } from './helpers/composeTableInitialSorting';
+import { composeTableInitialColumnFilters } from './helpers/composeTableInitialColumnFilters';
 import {
   composeTableColumnDefs,
+  tableInArrayFilterFn,
   type TableColumn,
 } from './helpers/composeTableColumnDefs';
 
@@ -55,8 +60,15 @@ export const TableProvider = <TRow extends object, TVal = unknown>({
     data: rows,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    filterFns: {
+      inArray: tableInArrayFilterFn,
+    },
     initialState: {
       sorting: composeTableInitialSorting(columns),
+      columnFilters: composeTableInitialColumnFilters(columns),
     },
   });
 
@@ -66,7 +78,7 @@ export const TableProvider = <TRow extends object, TVal = unknown>({
       getColumnByKey: (key) => columns?.find((column) => column.key === key),
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps -- only update when columns and rows change
-    [rows, columns, api.getState().sorting],
+    [rows, columns, api.getState().sorting, api.getState().columnFilters],
   );
 
   const { Provider } = getTableContext<TRow, TVal>();

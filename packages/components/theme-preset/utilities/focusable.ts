@@ -121,6 +121,17 @@ export const focusable = defineUtility({
       };
     }
 
+    if (value === 'within:inset') {
+      return {
+        '&:focus-visible, & :focus': {
+          outline: 'none',
+        },
+        '&:focus-within': {
+          boxShadow: `inset 0 0 0 2px ${cssVars.colour.globalInteractions.focusRing}`,
+        },
+      };
+    }
+
     if (value === 'select-activator') {
       return {
         '&:hover': {

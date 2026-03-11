@@ -12,6 +12,9 @@ export const tableRecipe = defineSlotRecipe({
     'sortIconInactive',
     'activator',
     'rowGroupHeader',
+    'headerContent',
+    'filterButton',
+    'filterIndicator',
   ],
   base: {
     root: {
@@ -44,6 +47,7 @@ export const tableRecipe = defineSlotRecipe({
       '& thead th': {
         textStyle: 'typography.heading.5',
         paddingBlock: 'spacing.2',
+        focusable: 'within:inset',
       },
 
       '& thead tr:first-child th, & thead tr:first-child td, &:not(:has(thead)) tbody tr:first-child th, &:not(:has(thead)) tbody tr:first-child td':
@@ -94,6 +98,26 @@ export const tableRecipe = defineSlotRecipe({
         color: 'colour.primary.text',
       },
     },
+    headerContent: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'spacing.1',
+    },
+    filterIndicator: {
+      position: 'absolute',
+      top: '[0px]',
+      right: '[.05em]',
+      width: '[8px]',
+      height: '[8px]',
+      borderRadius: '50%',
+      bg: 'colour.accent.fill',
+      border:
+        '[1.5px solid var(--iress-filter-button-bg, {colors.colour.primary.surfaceHover})]',
+      animationName: 'filterIndicatorBounceIn',
+      animationDuration: '0.4s',
+      animationTimingFunction: 'ease-out',
+      animationFillMode: 'both',
+    },
     rowGroupHeader: {
       textStyle: 'typography.heading.4',
       cursor: 'pointer',
@@ -126,6 +150,7 @@ export const tableRecipe = defineSlotRecipe({
           border: 'table',
           borderRadius: 'radius.system.layout',
           borderCollapse: 'separate',
+
           '& th, & td': {
             padding: 'spacing.2',
             borderTopWidth: '0px',
@@ -189,6 +214,36 @@ export const tableRecipe = defineSlotRecipe({
       true: {
         caption: {
           srOnly: true,
+        },
+      },
+    },
+    hasFilterButton: {
+      true: {
+        filterButton: {
+          color: 'colour.neutral.60',
+          textStyle: 'typography.body.sm.medium',
+          p: 'spacing.1',
+          aspectRatio: '1',
+          minWidth: '[0]',
+          minHeight: '[0]',
+          position: 'relative',
+          mr: 'spacing.1',
+
+          '&:hover:not([aria-expanded="true"])': {
+            '--iress-filter-button-bg': '{colors.colour.neutral.20}',
+          },
+        },
+      },
+    },
+    hasActiveFilter: {
+      true: {
+        filterButton: {
+          color: 'colour.primary.fill',
+          bg: 'colour.primary.surfaceHover',
+
+          '&[aria-expanded="true"]': {
+            '--iress-filter-button-bg': '{colors.colour.primary.surface}',
+          },
         },
       },
     },

@@ -2,9 +2,9 @@ import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { IressSkeleton } from '@/components/Skeleton';
 import { IressSpinner } from '@/components/Spinner';
 import { type IressStyledProps } from '@/types';
-import { styled } from '@/styled-system/jsx';
+import { splitCssProps, styled } from '@/styled-system/jsx';
 import { loading } from '../Loading.styles';
-import { cx } from '@/styled-system/css';
+import { css, cx } from '@/styled-system/css';
 
 const templates = {
   chart: <IressSkeleton mode="rect" height="250px" />,
@@ -79,12 +79,13 @@ export const ComponentLoading = ({
   const [showSkeleton, setShowSkeleton] = useState(false);
   const [showUpdate, setShowUpdate] = useState(false);
 
-  const styles = loading({
+  const styles = loading.raw({
     pattern: 'component',
     loaded,
     showIndicator: showSkeleton && !loaded,
     showMessage: showUpdate && !!update,
   });
+  const [styleProps, nonStyleProps] = splitCssProps(restProps);
 
   const skeleton = useMemo(() => {
     if (typeof template === 'string' && template in templates) {
@@ -122,7 +123,10 @@ export const ComponentLoading = ({
 
   if (loaded !== true) {
     return (
-      <styled.div {...restProps} className={cx(styles.root, className)}>
+      <styled.div
+        {...nonStyleProps}
+        className={cx(css(styles.root, styleProps), className)}
+      >
         {skeleton}
         <styled.div srOnly>{screenReaderText}</styled.div>
       </styled.div>
@@ -130,11 +134,14 @@ export const ComponentLoading = ({
   }
 
   return (
-    <styled.div className={cx(styles.root, className)} {...restProps}>
+    <styled.div
+      className={cx(css(styles.root, styleProps), className)}
+      {...nonStyleProps}
+    >
       {children}
-      {update && <div className={styles.overlay} />}
+      {update && <div className={css(styles.overlay)} />}
       {update && (
-        <styled.div className={styles.message}>
+        <styled.div className={css(styles.message)}>
           <IressSpinner />{' '}
           {typeof update === 'boolean' ? 'Updating...' : update}
         </styled.div>

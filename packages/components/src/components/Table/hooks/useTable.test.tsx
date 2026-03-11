@@ -18,7 +18,7 @@ describe('useTable hook', () => {
       useEffect(() => {
         tableContext = context;
       });
-      return <div>Test</div>;
+      return null;
     }
 
     render(
@@ -41,7 +41,7 @@ describe('useTable hook', () => {
       useEffect(() => {
         api = context.api;
       });
-      return <div>Test</div>;
+      return null;
     }
 
     render(
@@ -72,7 +72,7 @@ describe('useTable hook', () => {
         foundNameColumn = nameColumn;
         foundNonexistentColumn = nonexistentColumn;
       });
-      return <div>Test</div>;
+      return null;
     }
 
     render(

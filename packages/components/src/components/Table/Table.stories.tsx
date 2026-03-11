@@ -5,6 +5,10 @@ import { TableCustomColumns } from './mocks/TableCustomColumns';
 import TableCustomColumnsSource from './mocks/TableCustomColumns.tsx?raw';
 import { TableFormats } from './mocks/TableFormats';
 import TableFormatsSource from './mocks/TableFormats.tsx?raw';
+import { TableFiltering } from './mocks/TableFiltering';
+import TableFilteringSource from './mocks/TableFiltering.tsx?raw';
+import { TableFilteringServerSide } from './mocks/TableFilteringServerSide';
+import TableFilteringServerSideSource from './mocks/TableFilteringServerSide.tsx?raw';
 import { TableSorting } from './mocks/TableSorting';
 import TableSortingSource from './mocks/TableSorting.tsx?raw';
 import { TableSortingFn } from './mocks/TableSortingFn';
@@ -107,6 +111,22 @@ export const CustomSortingLogic: Story = {
   render: (args) => <TableSortingFn {...(args as object)} />,
   parameters: {
     ...withTransformedRawSource(TableSortingFnSource, 'Props'),
+  },
+};
+
+export const Filtering: Story = {
+  ...CustomColumns,
+  render: (args) => <TableFiltering {...args} />,
+  parameters: {
+    ...withTransformedRawSource(TableFilteringSource, 'Props'),
+  },
+};
+
+export const ServerSideFiltering: Story = {
+  ...CustomColumns,
+  render: (args) => <TableFilteringServerSide {...args} />,
+  parameters: {
+    ...withTransformedRawSource(TableFilteringServerSideSource, 'Props'),
   },
 };
 
