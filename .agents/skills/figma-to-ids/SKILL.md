@@ -16,6 +16,12 @@ Translate Figma design properties and structures into IDS (Iress Design System) 
 3. **Extract tokens** — Convert Figma design values to IDS design token references
 4. **Generate code** — Produce clean React/TypeScript with proper IDS imports
 
+> **Important:** IDS v6 is currently in alpha. Install with the `@alpha` tag:
+>
+> ```bash
+> npm install @iress-oss/ids-components@alpha
+> ```
+
 ## Figma Component → IDS Component Mapping
 
 ### Auto-Layout → Layout Components

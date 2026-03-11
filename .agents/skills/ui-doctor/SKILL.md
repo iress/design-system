@@ -160,8 +160,8 @@ Check that the application follows these core IDS principles:
 
 - **IressProvider must wrap the application root** — Required for fonts, CSS variables, and theming
 - **The IDS component CSS must be imported** — `@iress-oss/ids-components/dist/style.css` contains all component styles
-- Users only need to install `@iress-oss/ids-components` — the tokens are bundled within the component library and do not need to be installed separately
-- If using design tokens directly in application code (for custom styling), users should additionally install `@iress-oss/ids-tokens` and import `@iress-oss/ids-tokens/build/css-vars.css`
+- Users only need to install `@iress-oss/ids-components@alpha` — the tokens are bundled within the component library and do not need to be installed separately. **IDS v6 is currently in alpha**, so the `@alpha` tag is required (e.g. `npm install @iress-oss/ids-components@alpha`)
+- If using design tokens directly in application code (for custom styling), users should additionally install `@iress-oss/ids-tokens@alpha` and import `@iress-oss/ids-tokens/build/css-vars.css`
 
 ```typescript
 // ✅ Correct setup — minimum required
@@ -195,7 +195,10 @@ import { IressProvider } from '@iress-oss/ids-components';
 // Components will render without styles!
 
 // ❌ Incorrect — installing tokens separately just for provider setup
-yarn add @iress-oss/ids-tokens  // Not needed unless using tokens directly
+yarn add @iress-oss/ids-tokens@alpha  // Not needed unless using tokens directly
+
+// ❌ Incorrect — installing without @alpha tag (will not resolve to v6)
+yarn add @iress-oss/ids-components  // Must use @alpha tag
 ```
 
 #### b. Design Token Usage

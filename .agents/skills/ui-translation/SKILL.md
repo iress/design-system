@@ -11,6 +11,14 @@ Translate natural language UI descriptions into IDS (Iress Design System) compon
 
 ## Setup
 
+> **Important:** IDS v6 is currently in alpha. Install with the `@alpha` tag:
+>
+> ```bash
+> npm install @iress-oss/ids-components@alpha
+> # If using tokens directly:
+> npm install @iress-oss/ids-tokens@alpha
+> ```
+
 ```tsx
 import '@iress-oss/ids-components/dist/style.css'; // Required — component styles
 import '@iress-oss/ids-tokens/build/css-vars.css'; // Required if using tokens directly

@@ -19,6 +19,16 @@ Guide AI agents on correctly using IDS design tokens in React components and CSS
 
 ## Quick Start
 
+### Installation
+
+> **Important:** IDS v6 is currently in alpha. Install with the `@alpha` tag:
+>
+> ```bash
+> npm install @iress-oss/ids-tokens@alpha
+> # If also using IDS React components:
+> npm install @iress-oss/ids-components@alpha
+> ```
+
 ### Prerequisites (React only)
 
 If you are using IDS React components, wrap your application in `IressProvider` and import the CSS variables stylesheet:
