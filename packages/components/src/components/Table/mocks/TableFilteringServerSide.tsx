@@ -3,15 +3,7 @@ import { IressTable, type IressTableProps } from '@/main';
 import { IressPill } from '@/components/Pill';
 import { IressLoading } from '@/patterns/Loading';
 
-type Props = Partial<IressTableProps<Row, never>>;
-
-interface Row {
-  investment_name: string;
-  status: string;
-  cost: number;
-  investmentDate: string;
-  totalPercentage: number;
-}
+type Props = Partial<IressTableProps<object, never>>;
 
 const STATUS_MODES: Record<string, 'success' | 'info' | 'warning' | 'danger'> =
   {
@@ -21,7 +13,7 @@ const STATUS_MODES: Record<string, 'success' | 'info' | 'warning' | 'danger'> =
     Archived: 'danger',
   };
 
-const ALL_ROWS: Row[] = [
+const ALL_ROWS = [
   {
     investment_name: 'Artemis Fund Managers Limited',
     status: 'Current',
@@ -56,7 +48,7 @@ const ALL_ROWS: Row[] = [
  * Simulates a server-side fetch with a delay. In a real application,
  * replace this with an actual API call.
  */
-const simulateServerFetch = (statusFilter: string[]): Promise<Row[]> =>
+const simulateServerFetch = (statusFilter: string[]): Promise<object[]> =>
   new Promise((resolve) => {
     setTimeout(() => {
       const filtered =
@@ -68,7 +60,7 @@ const simulateServerFetch = (statusFilter: string[]): Promise<Row[]> =>
   });
 
 export const TableFilteringServerSide = (args: Props) => {
-  const [rows, setRows] = useState<Row[]>(ALL_ROWS);
+  const [rows, setRows] = useState<object[]>(ALL_ROWS);
   const [loaded, setLoaded] = useState(true);
   const [updating, setUpdating] = useState(false);
   const latestRequest = useRef(0);
@@ -92,7 +84,7 @@ export const TableFilteringServerSide = (args: Props) => {
       update={updating}
       width="12/12"
     >
-      <IressTable<Row>
+      <IressTable<object>
         caption="My investments"
         compact
         rows={rows}
