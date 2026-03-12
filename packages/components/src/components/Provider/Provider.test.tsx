@@ -98,5 +98,20 @@ describe('IressProvider', () => {
         );
       });
     });
+    describe('noIconProvider', () => {
+      it('does not render IconProvider when true', () => {
+        const { container } = render(
+          <IressProvider noIconProvider>
+            <span>test</span>
+          </IressProvider>,
+        );
+
+        expect(container).toHaveTextContent('test');
+        // Verify no icon font link was injected by IconProvider
+        expect(
+          document.head.querySelector('link[data-material-icons-subset]'),
+        ).toBeNull();
+      });
+    });
   });
 });

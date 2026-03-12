@@ -16,6 +16,8 @@ The IDS monorepo contains the React component library and supporting packages fo
 
 To use IDS, please refer to the [documentation](https://main--691abcc79dfa560a36d0a74f.chromatic.com).
 
+If your application enforces a Content Security Policy, see the [CSP Guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com?path=/docs/components_get-started-content-security-policy--docs) in the Storybook documentation for required origins.
+
 If you find a bug in any of the Design System packages or would like an enhancement, please reach out to us using the [issues tab](https://github.com/iress/design-system/issues).
 
 ## GitHub Copilot Integration

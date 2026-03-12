@@ -29,9 +29,18 @@ export interface IressProviderProps
   container?: FloatingUIContainer;
 
   /**
+   * Disable the built-in IconProvider.
+   * When true, no IconProvider is rendered, allowing you to provide your own
+   * icon loading mechanism (e.g. hiding the app until the Material Symbols font is fully loaded).
+   * @default false
+   */
+  noIconProvider?: boolean;
+
+  /**
    * Disable automatic font subsetting via Google Fonts CDN
    * When false, only icons actually used in the component tree are loaded
    * When true, the full Material Symbols font is loaded
+   * Ignored when `noIconProvider` is true.
    * @default false
    */
   noSubsetting?: IressIconProviderProps['noSubsetting'];
@@ -46,16 +55,24 @@ export const IressProvider = ({
   children,
   container,
   noDefaultFont,
+  noIconProvider,
+  noSubsetting,
   position,
   ...restProps
 }: IressProviderProps) => {
+  const content = noIconProvider ? (
+    children
+  ) : (
+    <IressIconProvider container={container} noSubsetting={noSubsetting}>
+      {children}
+    </IressIconProvider>
+  );
+
   return (
     <IressModalProvider container={container}>
       <IressToasterProvider container={container} position={position}>
         <IressSlideoutProvider container={container} {...restProps}>
-          <IressIconProvider container={container} noSubsetting>
-            {children}
-          </IressIconProvider>
+          {content}
         </IressSlideoutProvider>
       </IressToasterProvider>
       {!noDefaultFont &&

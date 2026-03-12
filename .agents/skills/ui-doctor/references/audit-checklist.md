@@ -10,6 +10,8 @@ Use this checklist when performing a UI doctor audit.
 - [ ] `@iress-oss/ids-tokens/build/css-vars.css` is imported only if tokens are used directly in application code
 - [ ] `react-hook-form` is installed as a peer dependency if using `IressForm`
 - [ ] No conflicting global CSS resets that override IDS styles
+- [ ] If CSP is enforced: `fonts.googleapis.com` and `fonts.gstatic.com` are in `style-src` / `font-src`; `cdn.iress.com` is included if using legacy Font Awesome icons or `IressTheme`
+- [ ] If using `IressShadow` and CSP blocks inline styles: `<meta name="csp-nonce" content="...">` is present in `<head>` (optional)
 
 ## Component Usage
 

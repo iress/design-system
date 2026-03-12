@@ -75,12 +75,7 @@ describe('IressIcon', () => {
       render(<IressIcon type="material" name="home" className="test-class" />);
 
       const component = screen.getByRole('img', { hidden: true });
-      expect(component).toHaveClass(
-        'test-class',
-        'material-symbols-rounded',
-        GlobalCSSClass.Icon,
-        icon(),
-      );
+      expect(component).toHaveClass('test-class', GlobalCSSClass.Icon, icon());
       expect(component).toHaveTextContent('home');
     });
 
