@@ -32,8 +32,7 @@ export interface FontLoaderProps extends IressTestProps {
  * Shared component for injecting font stylesheets into document head and optional shadow container.
  * This component uses React's createPortal to ensure the font styles are added where required.
  *
- * Uses <style> tags with @import to support CSS layers, which has lower priority
- * than Panda CSS utilities. This allows Panda CSS styling props to override the default font styles.
+ * Uses <link rel="stylesheet"> tags (CSP-safe, no nonce required).
  */
 export const FontLoader = ({
   container,
@@ -58,24 +57,19 @@ export const FontLoader = ({
     }
   }
 
-  const styleContent = `@import url("${url}") layer(reset);`;
   const nonce = getNonce() ?? undefined;
 
   return (
     <>
       {!onlyShadow &&
         createPortal(
-          <style nonce={nonce} data-url={url}>
-            {styleContent}
-          </style>,
+          <link rel="stylesheet" href={url} nonce={nonce} data-url={url} />,
           document.head,
           `${keyPrefix}-head`,
         )}
       {target &&
         createPortal(
-          <style nonce={nonce} data-url={url}>
-            {styleContent}
-          </style>,
+          <link rel="stylesheet" href={url} nonce={nonce} data-url={url} />,
           target,
           `${keyPrefix}-shadow`,
         )}

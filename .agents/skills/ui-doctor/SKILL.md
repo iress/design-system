@@ -161,6 +161,7 @@ Check that the application follows these core IDS principles:
 - **IressProvider must wrap the application root** — Required for fonts, CSS variables, and theming
 - **The IDS component CSS must be imported** — `@iress-oss/ids-components/dist/style.css` contains all component styles
 - Users only need to install `@iress-oss/ids-components@alpha` — the tokens are bundled within the component library and do not need to be installed separately. **IDS v6 is currently in alpha**, so the `@alpha` tag is required (e.g. `npm install @iress-oss/ids-components@alpha`)
+- **CSP must allowlist IDS external origins** — If the app enforces a Content Security Policy, `fonts.googleapis.com` and `fonts.gstatic.com` must be in `style-src`/`font-src`. Add `cdn.iress.com` if using legacy Font Awesome icons or `IressTheme`. If using `IressShadow` and inline styles are blocked, add `<meta name="csp-nonce" content="...">` in `<head>`. See the [CSP Guide](@iress-oss/ids-components/.ai/guides/get-started-content-security-policy.md) for details.
 - If using design tokens directly in application code (for custom styling), users should additionally install `@iress-oss/ids-tokens@alpha` and import `@iress-oss/ids-tokens/build/css-vars.css`
 
 ```typescript
@@ -333,7 +334,7 @@ Applications should use `IressLoading` for all loading states to ensure consiste
 
 #### f. Semantic Component Usage
 
-- **Use `IressText` for all text** — Instead of raw `<p>`, `<span>`, `<h1>`–`<h6>`. Note: nesting native HTML elements (e.g. `<p>`, `<strong>`, `<a>`, `<ul>`) *inside* `IressText` is an allowed pattern for rendering CMS content, markdown output, or other unstructured data sources
+- **Use `IressText` for all text** — Instead of raw `<p>`, `<span>`, `<h1>`–`<h6>`. Note: nesting native HTML elements (e.g. `<p>`, `<strong>`, `<a>`, `<ul>`) _inside_ `IressText` is an allowed pattern for rendering CMS content, markdown output, or other unstructured data sources
 - **Use `IressAlert` for feedback** — Instead of custom notification/alert components
 - **Use `IressModal status` for confirmation dialogs** — Instead of custom danger/success/warning confirmation modals. Use the `actions` prop for buttons (`footer` is not available when `status` is set)
 - **Use `IressIcon` for icons** — Instead of inline SVGs or custom icon components (unless the icon is a hero graphic that doesn't fit the standard icon use case)
@@ -343,17 +344,17 @@ Applications should use `IressLoading` for all loading states to ensure consiste
 
 Not every raw HTML element is a violation. The following are **acceptable exceptions** that should NOT be flagged:
 
-| Pattern                                                      | Why It's Acceptable                                                                                                                     |
-| ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `<a>` inside markdown/MDX renderers                          | Content-driven, not application UI                                                                                                      |
-| `<button>` inside third-party widgets the app cannot control | External dependency constraint                                                                                                          |
-| `<table>` in email templates                                 | Email clients don't support custom components                                                                                           |
-| `<img>` in SVG sprites or `<picture>` elements               | IressImage doesn't cover these use cases                                                                                                |
-| `<div>` for ref targets, portals, or measurement containers  | Technical necessity, not layout                                                                                                         |
-| Raw elements in test files / stories for demonstration       | Not shipped to users                                                                                                                    |
-| `<form>` wrapping a single action (e.g., search bar)         | `IressForm` is best for multi-field forms; standalone search inputs may use `IressAutocomplete` or `IressField` + `IressInput` directly |
-| `<input type="hidden">`                                      | Not user-facing UI                                                                                                                      |
-| Custom components wrapping IDS components internally         | App-level abstraction is valid as long as IDS components are used underneath                                                            |
+| Pattern                                                      | Why It's Acceptable                                                                                                                                     |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<a>` inside markdown/MDX renderers                          | Content-driven, not application UI                                                                                                                      |
+| `<button>` inside third-party widgets the app cannot control | External dependency constraint                                                                                                                          |
+| `<table>` in email templates                                 | Email clients don't support custom components                                                                                                           |
+| `<img>` in SVG sprites or `<picture>` elements               | IressImage doesn't cover these use cases                                                                                                                |
+| `<div>` for ref targets, portals, or measurement containers  | Technical necessity, not layout                                                                                                                         |
+| Raw elements in test files / stories for demonstration       | Not shipped to users                                                                                                                                    |
+| `<form>` wrapping a single action (e.g., search bar)         | `IressForm` is best for multi-field forms; standalone search inputs may use `IressAutocomplete` or `IressField` + `IressInput` directly                 |
+| `<input type="hidden">`                                      | Not user-facing UI                                                                                                                                      |
+| Custom components wrapping IDS components internally         | App-level abstraction is valid as long as IDS components are used underneath                                                                            |
 | Native HTML elements nested inside `IressText`               | Allowed for rendering CMS content, markdown output, or other unstructured data sources where the content structure is not controlled by the application |
 
 **When reporting:** If a potential violation falls into an exception category, note it as "Reviewed — Acceptable Exception" rather than a finding. This prevents false positives and keeps reports actionable.

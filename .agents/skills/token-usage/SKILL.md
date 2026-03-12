@@ -44,6 +44,8 @@ function App() {
 
 > **Non-React usage:** The tokens package works without React. Import the CSS stylesheet or use `cssVars` / `designTokens` directly in any JavaScript or CSS environment.
 
+> **CSP note:** `IressProvider` loads fonts from `fonts.googleapis.com` and `fonts.gstatic.com` at runtime. If your app enforces a Content Security Policy, allowlist these origins in `style-src` and `font-src`. If you use `IressShadow` and your CSP blocks inline styles, add `<meta name="csp-nonce" content="...">` for nonce support. See the [CSP Guide](@iress-oss/ids-components/.ai/guides/get-started-content-security-policy.md) for details.
+
 ### CSS Variables Stylesheet (Recommended for CSS)
 
 The CSS stylesheet is the simplest way to use tokens. Import it once and use `var()` references anywhere in your CSS.
