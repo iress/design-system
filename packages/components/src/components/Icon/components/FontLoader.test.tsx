@@ -28,14 +28,18 @@ describe('FontLoader', () => {
 
     render(<FontLoader keyPrefix="test" url={testUrl} />);
 
-    const link = document.head.querySelector(`link[data-url="${testUrl}"]`);
+    const link = document.head.querySelector<HTMLLinkElement>(
+      `link[data-url="${testUrl}"]`,
+    );
     expect(link?.nonce).toBe('test-nonce-123');
   });
 
   it('renders link tags without nonce when no csp-nonce meta is present', () => {
     render(<FontLoader keyPrefix="test" url={testUrl} />);
 
-    const link = document.head.querySelector(`link[data-url="${testUrl}"]`);
+    const link = document.head.querySelector<HTMLLinkElement>(
+      `link[data-url="${testUrl}"]`,
+    );
     expect(link?.nonce).toBeFalsy();
   });
 
