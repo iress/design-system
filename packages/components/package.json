@@ -31,7 +31,6 @@
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json"
   },
   "devDependencies": {
-    "@iress-oss/ids-storybook-config": "^0.5.0",
     "@iress-oss/ids-theme-preset": "^6.0.0-alpha.1",
     "@iress-oss/ids-tokens": "^6.0.0-alpha.17",
     "@pandacss/dev": "1.8.2",
