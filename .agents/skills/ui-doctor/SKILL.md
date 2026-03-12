@@ -160,8 +160,8 @@ Check that the application follows these core IDS principles:
 
 - **IressProvider must wrap the application root** — Required for fonts, CSS variables, and theming
 - **The IDS component CSS must be imported** — `@iress-oss/ids-components/dist/style.css` contains all component styles
-- Users only need to install `@iress-oss/ids-components` — the tokens are bundled within the component library and do not need to be installed separately
-- If using design tokens directly in application code (for custom styling), users should additionally install `@iress-oss/ids-tokens` and import `@iress-oss/ids-tokens/build/css-vars.css`
+- Users only need to install `@iress-oss/ids-components@alpha` — the tokens are bundled within the component library and do not need to be installed separately. **IDS v6 is currently in alpha**, so the `@alpha` tag is required (e.g. `npm install @iress-oss/ids-components@alpha`)
+- If using design tokens directly in application code (for custom styling), users should additionally install `@iress-oss/ids-tokens@alpha` and import `@iress-oss/ids-tokens/build/css-vars.css`
 
 ```typescript
 // ✅ Correct setup — minimum required
@@ -195,7 +195,10 @@ import { IressProvider } from '@iress-oss/ids-components';
 // Components will render without styles!
 
 // ❌ Incorrect — installing tokens separately just for provider setup
-yarn add @iress-oss/ids-tokens  // Not needed unless using tokens directly
+yarn add @iress-oss/ids-tokens@alpha  // Not needed unless using tokens directly
+
+// ❌ Incorrect — installing without @alpha tag (will not resolve to v6)
+yarn add @iress-oss/ids-components  // Must use @alpha tag
 ```
 
 #### b. Design Token Usage
@@ -330,7 +333,7 @@ Applications should use `IressLoading` for all loading states to ensure consiste
 
 #### f. Semantic Component Usage
 
-- **Use `IressText` for all text** — Instead of raw `<p>`, `<span>`, `<h1>`–`<h6>` (unless nested inside `IressText` for styling)
+- **Use `IressText` for all text** — Instead of raw `<p>`, `<span>`, `<h1>`–`<h6>`. Note: nesting native HTML elements (e.g. `<p>`, `<strong>`, `<a>`, `<ul>`) *inside* `IressText` is an allowed pattern for rendering CMS content, markdown output, or other unstructured data sources
 - **Use `IressAlert` for feedback** — Instead of custom notification/alert components
 - **Use `IressModal status` for confirmation dialogs** — Instead of custom danger/success/warning confirmation modals. Use the `actions` prop for buttons (`footer` is not available when `status` is set)
 - **Use `IressIcon` for icons** — Instead of inline SVGs or custom icon components (unless the icon is a hero graphic that doesn't fit the standard icon use case)
@@ -351,6 +354,7 @@ Not every raw HTML element is a violation. The following are **acceptable except
 | `<form>` wrapping a single action (e.g., search bar)         | `IressForm` is best for multi-field forms; standalone search inputs may use `IressAutocomplete` or `IressField` + `IressInput` directly |
 | `<input type="hidden">`                                      | Not user-facing UI                                                                                                                      |
 | Custom components wrapping IDS components internally         | App-level abstraction is valid as long as IDS components are used underneath                                                            |
+| Native HTML elements nested inside `IressText`               | Allowed for rendering CMS content, markdown output, or other unstructured data sources where the content structure is not controlled by the application |
 
 **When reporting:** If a potential violation falls into an exception category, note it as "Reviewed — Acceptable Exception" rather than a finding. This prevents false positives and keeps reports actionable.
 

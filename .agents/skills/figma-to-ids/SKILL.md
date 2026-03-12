@@ -16,6 +16,12 @@ Translate Figma design properties and structures into IDS (Iress Design System) 
 3. **Extract tokens** — Convert Figma design values to IDS design token references
 4. **Generate code** — Produce clean React/TypeScript with proper IDS imports
 
+> **Important:** IDS v6 is currently in alpha. Install with the `@alpha` tag:
+>
+> ```bash
+> npm install @iress-oss/ids-components@alpha
+> ```
+
 ## Figma Component → IDS Component Mapping
 
 ### Auto-Layout → Layout Components
@@ -136,6 +142,8 @@ IDS base spacing unit = 4px (0.25rem). Map Figma pixel values:
 | Body / SM Regular (Inter 12px/400) | `typography.body.sm.regular` | `<IressText size="sm">`                 |
 | Body / SM Strong (Inter 12px/600)  | `typography.body.sm.strong`  | `<IressText size="sm" weight="strong">` |
 | Code (Space 16px/400)              | `typography.code`            | `<IressText element="code">`            |
+
+> **Tip:** When translating Figma frames that contain mixed or unstructured text (e.g. CMS content, markdown, rich text blocks), wrap the content in `IressText` and nest native HTML elements (`<p>`, `<strong>`, `<a>`, `<ul>`, etc.) inside it. This is an allowed pattern that lets `IressText` apply consistent typography while preserving the original content structure.
 
 ## Translation Examples
 

@@ -59,9 +59,16 @@ import { IressButton } from '@iress/components-react';
 // ❌ Old (OUI)
 import { Button, Input } from '@iress/oui';
 
-// ✅ IDS v6
+// ✅ IDS v6 (install with @alpha tag: npm install @iress-oss/ids-components@alpha)
 import { IressButton, IressInput } from '@iress-oss/ids-components';
 ```
+
+> **Important:** IDS v6 is currently in alpha. Install with the `@alpha` tag:
+>
+> ```bash
+> npm install @iress-oss/ids-components@alpha
+> npm install @iress-oss/ids-tokens@alpha  # if using tokens directly
+> ```
 
 ### CSS entry point
 
@@ -172,6 +179,7 @@ After completing migration, run `scripts/validate-migration.sh` or verify manual
 9. **Build**: Production build completes without errors, check bundle size
 
 The validation script checks for:
+
 - Old imports (`@iress/oui`, `@iress/components-react`)
 - Old test utils (`idsFireEvent`, `mockLazyLoadedComponents`)
 - Deprecated props (`variant=`, `isOpen=`, `gutter=`, etc.)
