@@ -72,6 +72,7 @@ export default defineConfig({
         'src/styled-system/**/*',
       ],
       tsconfigPath: './tsconfig.base.json',
+      entryRoot: './src',
     }),
     // TODO: The styled-system types are declaration files, so they refuse to be copied via tsconfig.json
     // Instead we are using a plugin to copy them to the dist folder
