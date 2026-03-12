@@ -12,8 +12,9 @@ import { IressCheckbox } from '../Checkbox/Checkbox';
 import {
   disableArgTypes,
   withTransformedRawSource,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressCheckboxGroup>;
 

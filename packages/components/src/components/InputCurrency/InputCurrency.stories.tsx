@@ -1,6 +1,9 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressInputCurrency } from './InputCurrency';
-import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
+import {
+  reactNodeArgType,
+  stylingProps,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressInputCurrency>;
 

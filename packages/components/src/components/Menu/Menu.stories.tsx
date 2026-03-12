@@ -7,8 +7,7 @@ import { IressInline } from '../Inline';
 import { useArgs } from 'storybook/preview-api';
 import { MenuRoleDescription } from './mocks/MenuRoleDescription';
 import { IressToggle } from '../Toggle';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
-import { stylingProps } from '@iress-oss/ids-storybook-config';
+import { disableArgTypes, stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressMenuProps>;
 

@@ -10,8 +10,9 @@ import {
   withCustomSource,
   withJsxTransformer,
   disableArgTypes,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 import { IressInline } from '@/main';
 
 type Story = StoryObj<typeof IressTag>;

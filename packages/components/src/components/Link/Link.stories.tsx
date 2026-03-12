@@ -8,8 +8,9 @@ import RoutingLinkSource from './mocks/RoutingLink.tsx?raw';
 import {
   disableArgTypes,
   withCustomSource,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressLink>;
 

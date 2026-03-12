@@ -261,6 +261,8 @@ Base unit: 4px (0.25rem). Token value = multiple of base unit.
 
 **This is the recommended approach** for any custom styling beyond what IDS component props provide.
 
+> **Using Panda CSS?** If your project uses [Panda CSS](https://panda-css.com), use the `@iress-oss/ids-theme-preset` package instead of manually referencing CSS variables. It provides a Panda CSS preset with the full IDS token system, giving you type-safe token usage via Panda's `css()` function, utilities, and recipes. See [references/theme-preset.md](references/theme-preset.md) for setup.
+
 ### In CSS / SCSS
 
 ```css
@@ -402,6 +404,7 @@ Layout components accept responsive objects for spacing props:
 | Colours on IDS components        | Props: `bg`, `color`                            |
 | Custom CSS / SCSS                | CSS variables (`var(--iress-*)`)                |
 | Inline styles / CSS-in-JS        | `cssVars` object (`cssVars.colour.neutral[10]`) |
+| Custom CSS with Panda CSS        | `@iress-oss/ids-theme-preset` preset            |
 | Theming / overrides              | CSS variables on custom properties              |
 | Internal theme editors           | `mapTokensToCssVariables()` helper              |
 

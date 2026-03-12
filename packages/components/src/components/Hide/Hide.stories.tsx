@@ -7,9 +7,10 @@ import { IressDivider } from '../Divider';
 import {
   CurrentBreakpoint,
   disableArgTypes,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import { BREAKPOINT_DETAILS, BREAKPOINTS, IressTable } from '@/main';
-import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressHide>;
 

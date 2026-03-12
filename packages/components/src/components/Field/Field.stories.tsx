@@ -15,8 +15,9 @@ import {
   disableArgTypes,
   STORYBOOK_ONLY_CATEGORY,
   withJsxTransformer,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 type IressFieldPropsAndCustomArgs = ComponentProps<typeof IressField> & {
   input: Omit<IressInputProps, 'onChange'>;

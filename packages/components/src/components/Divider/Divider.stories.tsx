@@ -4,8 +4,7 @@ import { IressInline } from '../Inline';
 import { IressText } from '../Text';
 import { IressStack } from '../Stack/Stack';
 import { IressPanel } from '../Panel';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
-import { stylingProps } from '@iress-oss/ids-storybook-config';
+import { disableArgTypes, stylingProps } from '@iress-oss/ids-storybook-config';
 
 const GUTTER_SIZES = ['none', 'xs', 'sm', 'md', 'lg', 'xl'];
 

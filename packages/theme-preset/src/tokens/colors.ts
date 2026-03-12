@@ -1,5 +1,4 @@
 import { colour, cssVars } from '@iress-oss/ids-tokens';
-import { type ColorToken } from '@/styled-system/tokens';
 
 export const colors = {
   'colour.neutral.10': {
@@ -284,4 +283,4 @@ export const colors = {
   },
 };
 
-export const COLOR_TOKENS = Object.keys(colors) as ColorToken[];
+export const COLOR_TOKENS = Object.keys(colors) as (keyof typeof colors)[];

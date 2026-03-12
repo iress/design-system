@@ -20,8 +20,8 @@ import { lazy, Suspense, useState } from 'react';
 import {
   CurrentBreakpoint,
   withCustomSource,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressTable>;
 

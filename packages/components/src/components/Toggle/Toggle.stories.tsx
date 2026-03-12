@@ -7,10 +7,11 @@ import { IressStack } from '../Stack';
 import {
   disableArgTypes,
   withTransformedRawSource,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import { ControlledToggle } from './mocks/ControlledToggle';
 import ControlledToggleSource from './mocks/ControlledToggle.tsx?raw';
-import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressToggle>;
 

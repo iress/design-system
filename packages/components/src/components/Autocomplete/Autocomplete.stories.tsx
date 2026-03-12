@@ -5,8 +5,6 @@ import {
   disableArgTypes,
   withJsxTransformer,
   withTransformedRawSource,
-} from '@iress-oss/ids-storybook-config';
-import {
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';

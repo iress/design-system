@@ -12,8 +12,8 @@ import {
   removeArgTypes,
   STORYBOOK_ONLY_CATEGORY,
   withJsxTransformer,
+  omitStylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { omitStylingProps } from '@iress-oss/ids-storybook-config';
 
 type ColWithCustomArgs = React.ComponentProps<typeof IressCol> & {
   numberOfColumns?: number;

@@ -7,8 +7,9 @@ import { IressStack } from '../Stack';
 import {
   disableArgTypes,
   withCustomSource,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 export default {
   title: 'Components/Expander',
