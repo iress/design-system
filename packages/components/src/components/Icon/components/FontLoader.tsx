@@ -32,7 +32,8 @@ export interface FontLoaderProps extends IressTestProps {
  * Shared component for injecting font stylesheets into document head and optional shadow container.
  * This component uses React's createPortal to ensure the font styles are added where required.
  *
- * Uses <link rel="stylesheet"> tags (CSP-safe, no nonce required).
+ * Uses <link rel="stylesheet"> tags, which are CSP-safe without requiring a nonce.
+ * If a CSP nonce is available, it will be applied to the injected <link> elements.
  */
 export const FontLoader = ({
   container,
