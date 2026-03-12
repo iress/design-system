@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { getNonce } from '../../../helpers/dom/getNonce';
-import { idsLogger } from '../../../helpers/utility/idsLogger';
+import { getNonce } from '@helpers/dom/getNonce';
+import { idsLogger } from '@helpers/utility/idsLogger';
 
 export interface UseDynamicFontSubsettingOptions {
   /**
@@ -127,11 +127,16 @@ export const useDynamicFontSubsetting = ({
     const url = buildUrl(iconsArray);
     const existing = document.querySelector(`link[data-${dataAttribute}]`);
 
-    if (url === false || existing?.getAttribute('data-url') === url) {
+    if (url === false) {
       if (noSubsetting) setFullyLoaded(true);
       return;
     }
 
+    if (existing?.getAttribute('data-url') === url) {
+      // Reuse existing stylesheet link: wait for font readiness and update loaded icons
+      checkFontReady(null, iconsArray);
+      return;
+    }
     const nonce = getNonce();
     const link = document.createElement('link');
     link.rel = 'stylesheet';
