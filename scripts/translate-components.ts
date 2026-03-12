@@ -1431,6 +1431,7 @@ const GUIDE_SOURCES: [string, string, string, string][] = [
   ],
   ['Foundations', '070-Content.mdx', 'foundations', 'content'],
   ['Foundations', '080-UserExperience.mdx', 'foundations', 'user-experience'],
+  ['Foundations', '090-CommonMistakes.mdx', 'foundations', 'common-mistakes'],
   // Styling Props
   ['StylingProps', '010-Reference.mdx', 'styling-props', 'styling-props'],
   ['StylingProps', '015-Accessibility.mdx', 'styling-props', 'accessibility'],

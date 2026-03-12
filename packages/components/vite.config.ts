@@ -122,7 +122,6 @@ export default defineConfig({
               'src/vite-env.d.ts',
               'src/styled-system/**/*',
               'src/sandbox/**/*',
-              'theme-preset/**/*',
             ],
             cwd: __dirname,
           })

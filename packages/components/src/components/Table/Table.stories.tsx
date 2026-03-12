@@ -20,7 +20,7 @@ import {
   withTransformedRawSource,
   mergeStorybookConfig,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 import { IressPill } from '../Pill';
 
 type Story = StoryObj<typeof IressTable>;

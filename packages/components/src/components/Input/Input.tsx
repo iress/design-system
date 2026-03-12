@@ -153,8 +153,9 @@ const Input = <
     alignRight,
     actions,
     variant,
+    autoGrow: _autoGrowProp,
     ...inputProps
-  } = props as IressInputProps<T, undefined>;
+  } = props as IressInputProps<T, undefined> & { autoGrow?: number | boolean };
 
   let autoGrow =
     rows !== undefined

@@ -18,7 +18,7 @@ import {
   mergeStorybookConfig,
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressTabSet>;
 

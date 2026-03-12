@@ -3,7 +3,7 @@ import { IressSpinner } from '.';
 import { IressInline } from '../Inline';
 import { IressText } from '../Text';
 import { addToStorybookCategory } from '@iress-oss/ids-storybook-config';
-import { stylingProps } from '@theme-preset/storybookHelpers';
+import { stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSpinner>;
 

@@ -1,4 +1,4 @@
-import { MATERIAL_SYMBOLS } from '../../src/components/Icon/Icon.constants';
+import { MATERIAL_SYMBOLS } from '../constants';
 import { defineUtility } from '@pandacss/dev';
 
 export const materialSymbols = defineUtility({

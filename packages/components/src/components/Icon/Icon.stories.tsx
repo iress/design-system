@@ -3,7 +3,7 @@ import { IressIcon, type IressIconProps } from './Icon';
 import { IressText } from '../Text';
 import { IressInline } from '../Inline';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
-import { stylingProps } from '@theme-preset/storybookHelpers';
+import { stylingProps } from '@iress-oss/ids-storybook-config';
 import { IressLink } from '../Link';
 import { IressIconProvider } from './IconProvider';
 import React, { useMemo, useState } from 'react';

@@ -2,7 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressRadioMark } from './RadioMark';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
-import { stylingProps } from '@theme-preset/storybookHelpers';
+import { stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressRadioMark>;
 

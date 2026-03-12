@@ -162,54 +162,6 @@ export interface FormattedLabelValueMeta<
 }
 
 /**
- * Details about a specific breakpoint in the design system.
- */
-export interface BreakpointDetail {
-  /**
-   * The maximum width of the container at this breakpoint.
-   */
-  containerMaxWidth: string;
-
-  /**
-   * The margin on the left and right of the container at this breakpoint. This is used to calculate the viewport width for design reference.
-   */
-  margin?: SpacingToken;
-
-  /**
-   * The maximum number of columns to display in a grid layout at this breakpoint. This is used for design reference and is not enforced in the code, as we want to allow for flexibility in implementation based on the design requirements.
-   */
-  maxColumns?: number;
-
-  /**
-   * The maximum screen width for the breakpoint.
-   */
-  maxScreenWidth?: string;
-
-  /**
-   * The media query string for the breakpoint.
-   * This must be valid CSS media query syntax.
-   */
-  mediaQuery: string;
-
-  /**
-   * The minimum screen width for the breakpoint.
-   */
-  minScreenWidth: string;
-
-  /**
-   * The name of the screen width range for the breakpoint.
-   * Used to display in documentation and debugging.
-   */
-  screenWidthRange: string;
-
-  /**
-   * The viewport width in pixels for the breakpoint.
-   * Used for design and development reference, as a guideline for debugging responsive layouts.
-   */
-  viewportWidth: number;
-}
-
-/**
  * IressCSSProps allow you to style components using the design system tokens.
  * **Note:** These are the only props we support for styling components. Anything else is at your own risk.
  */

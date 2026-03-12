@@ -31,12 +31,6 @@ You can set the radio to `checked` by default. This is useful when you want to p
 
 <ComponentExample of={ComponentStories.Checked} />
 
-### Hidden control
-
-You can hide the radio button and use a custom UI to display the content. Even though the radio button is hidden, it still acts like a radio.
-
-<ComponentExample of={ComponentStories.HiddenControl} />
-
 ### Read only
 
 The `readOnly` prop changes how the radio is rendered. It will only render if the radio is checked (alongside a hidden input that contains the `value` if it was set), otherwise it not be rendered.
@@ -45,8 +39,8 @@ It is understandable that this may not be the desired behavior for all use cases
 
 <ComponentExample of={ComponentStories.ReadOnly} />
 
-### Touch
+### Variants
 
-The `touch` prop adds the button-like border and padding to radio.
+The `variant` prop changes the visual style of the radio. The `card` variant adds a card-like border and the `touch` variant adds button-like border and padding.
 
-<ComponentExample of={ComponentStories.Touch} />
+<ComponentExample of={ComponentStories.Variants} />

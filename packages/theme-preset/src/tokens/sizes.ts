@@ -3,7 +3,7 @@ import {
   BREAKPOINT_DETAILS,
   FORM_ELEMENT_WIDTHS,
   GRID_SIZE,
-} from '../../src/constants';
+} from '../constants';
 import { cssVars } from '@iress-oss/ids-tokens';
 
 const containerSizes = Object.fromEntries(

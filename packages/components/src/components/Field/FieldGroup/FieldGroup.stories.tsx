@@ -17,7 +17,7 @@ import {
   disableArgTypes,
   STORYBOOK_ONLY_CATEGORY,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 interface FieldAndInputProps {
   field: IressFieldProps;

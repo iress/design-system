@@ -11,7 +11,7 @@ import {
   withJsxTransformer,
   disableArgTypes,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 import { IressInline } from '@/main';
 
 type Story = StoryObj<typeof IressTag>;

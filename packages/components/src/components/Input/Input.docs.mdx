@@ -76,12 +76,14 @@ You can also use `IressInput` to render a `textarea` instead of an `input`. Simp
 
 <ComponentExample of={ComponentStories.TextAreas} />
 
-### Slot props
+### Prepend & Append
 
-Content (typically icons) can be added to slots (`append` and `prepend`) within the `IressInput` component.
+Content (typically icons) can be added via the `prepend` and `append` props on `IressInput`.
 
-- **Prepend**: appears before the input
-- **Append**: appears after the input
+- **`prepend`** — Appears before the input
+- **`append`** — Appears after the input
+
+> **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
 <ComponentExample of={ComponentStories.Slots} />
 
@@ -130,7 +132,7 @@ For textareas (when `rows` prop is set), you can enable the `autoGrow` prop to a
 
 The `variant` prop allows you to apply different styles to the input.
 
-- `search`: Used for search inputs, you can use the `prepend` or `append` slot to add a search icon.
+- `search`: Used for search inputs, you can use the `prepend` or `append` prop to add a search icon.
 
 <ComponentExample of={ComponentStories.Variant} />
 

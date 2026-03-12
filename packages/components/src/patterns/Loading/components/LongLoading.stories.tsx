@@ -8,7 +8,7 @@ import {
   customTypeArgType,
   reactNodeArgType,
   stylingProps,
-} from '@theme-preset/storybookHelpers';
+} from '@iress-oss/ids-storybook-config';
 
 // This is a pattern for IressLoading, hence we change the name
 (LongLoading as FC).displayName = 'IressLoading';

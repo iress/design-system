@@ -1,5 +1,5 @@
 import { BREAKPOINT_DETAILS, BREAKPOINTS } from '@/constants';
-import { type BreakpointDetail } from '@/interfaces';
+import { type BreakpointDetail } from '@theme-preset/constants';
 import { type Breakpoints } from '@/types';
 import { useCallback, useLayoutEffect, useState } from 'react';
 

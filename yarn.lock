@@ -1345,6 +1345,8 @@ __metadata:
   dependencies:
     "@floating-ui/react": "npm:0.27.18"
     "@fortawesome/fontawesome-common-types": "npm:0.2.36"
+    "@iress-oss/ids-storybook-config": "npm:^0.5.0"
+    "@iress-oss/ids-theme-preset": "npm:^6.0.0-alpha.1"
     "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.17"
     "@pandacss/dev": "npm:1.8.2"
     "@tanstack/react-table": "npm:8.21.3"
@@ -1625,6 +1627,25 @@ __metadata:
     react: ^18.0.0 || ^19.0.0
     react-dom: ^18.0.0 || ^19.0.0
     storybook: ^10
+  languageName: unknown
+  linkType: soft
+
+"@iress-oss/ids-theme-preset@npm:^6.0.0-alpha.1, @iress-oss/ids-theme-preset@workspace:packages/theme-preset":
+  version: 0.0.0-use.local
+  resolution: "@iress-oss/ids-theme-preset@workspace:packages/theme-preset"
+  dependencies:
+    "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.17"
+    "@pandacss/dev": "npm:1.8.2"
+    "@pandacss/types": "npm:1.8.2"
+    rimraf: "npm:^6.1.3"
+    tsup: "npm:^8.4.0"
+    typescript: "npm:5.9.3"
+    vitest: "npm:4.0.18"
+  peerDependencies:
+    "@pandacss/dev": ">=1.8.0"
+  peerDependenciesMeta:
+    "@pandacss/dev":
+      optional: false
   languageName: unknown
   linkType: soft
 
@@ -13649,7 +13670,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsup@npm:^8.5.1":
+"tsup@npm:^8.4.0, tsup@npm:^8.5.1":
   version: 8.5.1
   resolution: "tsup@npm:8.5.1"
   dependencies:

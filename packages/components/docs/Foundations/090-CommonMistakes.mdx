@@ -1,0 +1,221 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Common Mistakes" />
+
+# Common Mistakes
+
+This guide documents anti-patterns that developers and AI agents frequently introduce when working with IDS components. Each entry explains what goes wrong, why, and the correct approach.
+
+## React Props vs Legacy v4 `slot` Attributes
+
+**This is the most common mistake AI agents make.** In IDS v4 and below, components used `slot` attributes on children to position content (e.g. `<IressIcon slot="prepend" />`). This pattern is **no longer supported** in IDS v5+. Modern IDS uses typed React props instead.
+
+**AI agents are especially prone to this mistake** because they prioritise matching patterns found in existing codebases. If a codebase still contains legacy `slot` usage, agents will copy and propagate it.
+
+### Button — use `prepend` and `append` props
+
+```tsx
+// ❌ Wrong — legacy v4 slot pattern, no longer supported
+<IressButton>
+  <IressIcon slot="start" name="search" />
+  Search
+</IressButton>
+
+// ❌ Wrong — legacy v4 slot pattern
+<IressButton>
+  Search
+  <IressPill slot="end">99</IressPill>
+</IressButton>
+
+// ✅ Correct — use prepend/append props
+<IressButton prepend={<IressIcon name="search" />}>
+  Search
+</IressButton>
+
+// ✅ Correct — use append prop
+<IressButton append={<IressPill>99</IressPill>}>
+  Search
+</IressButton>
+
+// ✅ Correct — use icon prop for icon-only buttons
+<IressButton icon="edit" mode="muted">
+  Edit
+</IressButton>
+```
+
+### Input — use `prepend` and `append` props
+
+```tsx
+// ❌ Wrong — legacy v4 slot pattern
+<IressInput>
+  <IressIcon slot="prepend" name="search" />
+</IressInput>
+
+// ✅ Correct — use prepend prop
+<IressInput prepend={<IressIcon name="search" />} />
+```
+
+### Link — use `prepend` and `append` props
+
+```tsx
+// ❌ Wrong — legacy v4 slot pattern
+<IressLink href="/settings">
+  <IressIcon slot="prepend" name="settings" />
+  Settings
+</IressLink>
+
+// ✅ Correct — use prepend prop
+<IressLink href="/settings" prepend={<IressIcon name="settings" />}>
+  Settings
+</IressLink>
+```
+
+### Modal — use `footer` prop (or `actions` prop for status modals)
+
+```tsx
+// ❌ Wrong — legacy v4 slot pattern
+<IressModal show={show}>
+  Content
+  <div slot="footer">
+    <IressButton>Close</IressButton>
+  </div>
+</IressModal>
+
+// ✅ Correct — use footer prop
+<IressModal show={show} footer={<IressButton>Close</IressButton>}>
+  Content
+</IressModal>
+
+// ✅ Correct — use actions prop for status modals
+<IressModal
+  status="danger"
+  heading="Delete record?"
+  actions={[
+    { children: 'Cancel', mode: 'tertiary' },
+    { children: 'Delete' },
+  ]}
+  show={show}
+  onShowChange={setShow}
+>
+  This action cannot be undone.
+</IressModal>
+```
+
+### General rule
+
+If you see `slot="..."` on any child element inside an IDS component, replace it with the corresponding component prop. Common mappings:
+
+| Legacy v4 pattern                 | Modern IDS prop       |
+| --------------------------------- | --------------------- |
+| `<Child slot="prepend" />`        | `prepend={<Child />}` |
+| `<Child slot="append" />`         | `append={<Child />}`  |
+| `<Child slot="start" />`          | `prepend={<Child />}` |
+| `<Child slot="end" />`            | `append={<Child />}`  |
+| `<Child slot="icon-only" />`      | `icon="iconName"`     |
+| `<div slot="footer">...</div>`    | `footer={...}`        |
+| `<div slot="activator">...</div>` | `activator={...}`     |
+
+## Assuming `IressShadow` Means Custom Elements or Web Components
+
+**AI agents frequently make this mistake.** They see `IressShadow` or "shadow" in the codebase and incorrectly assume the application uses Shadow DOM custom elements, Web Components, or the `slot` HTML attribute. This is wrong.
+
+`IressShadow` is a **style isolation wrapper** — it attaches a shadow root to a plain `<div>` element so that IDS CSS does not leak into (or get affected by) the host application. This is useful for microfrontend scenarios. The key point:
+
+- **`IressShadow` does NOT create a custom element.** It creates a shadow root on a `<div>`.
+- **All children inside `IressShadow` are standard React components** — `IressButton`, `IressInput`, etc. They are NOT custom elements.
+- **The `slot` HTML attribute is irrelevant.** Shadow DOM used for CSS isolation does not mean components use `<slot>` elements or `slot` attributes.
+- **`IressShadow` is an alternative to `IressProvider`**, not a signal that the app uses Web Components.
+
+```tsx
+// ❌ Wrong — AI sees IressShadow and assumes slot attributes work
+<IressShadow>
+  <IressButton>
+    <IressIcon slot="start" name="search" />
+    Search
+  </IressButton>
+</IressShadow>
+
+// ✅ Correct — children are standard React components, use React props
+<IressShadow>
+  <IressButton prepend={<IressIcon name="search" />}>
+    Search
+  </IressButton>
+</IressShadow>
+```
+
+IDS has not offered Web Components since v4. The presence of `IressShadow` in a codebase is purely for CSS encapsulation.
+
+## Using Raw HTML Instead of IDS Components
+
+IDS components provide built-in accessibility, theming, and consistent styling. Raw HTML elements lose all of these benefits.
+
+```tsx
+// ❌ Wrong — raw HTML loses IDS benefits
+<button onClick={handleClick}>Submit</button>
+<input type="text" placeholder="Name" />
+<h2>Section Title</h2>
+<p>Body text</p>
+
+// ✅ Correct — IDS components
+<IressButton mode="primary" onClick={handleClick}>Submit</IressButton>
+<IressField label="Name" htmlFor="name">
+  <IressInput id="name" placeholder="Name" />
+</IressField>
+<IressText element="h2">Section Title</IressText>
+<IressText>Body text</IressText>
+```
+
+## Hardcoded Styling Values
+
+Never hardcode colours, spacing, font sizes, or border radii. Use design tokens or component props.
+
+```tsx
+// ❌ Wrong — hardcoded values
+<div style={{ padding: '16px', background: '#F5F6F8', borderRadius: '12px' }}>
+
+// ✅ Correct — use styling props with token values
+<IressStack p="spacing.4" bg="colour.neutral.20" borderRadius="radius.3">
+```
+
+## Inline Styles for Basic Layout
+
+Use IDS layout components (`IressStack`, `IressInline`, `IressRow`/`IressCol`) instead of custom CSS flexbox/grid.
+
+```tsx
+// ❌ Wrong — custom flex layout
+<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+  <div>Item 1</div>
+  <div>Item 2</div>
+</div>
+
+// ✅ Correct — IDS layout components
+<IressStack gap="spacing.4">
+  <IressText>Item 1</IressText>
+  <IressText>Item 2</IressText>
+</IressStack>
+```
+
+## Missing Form Structure
+
+Always wrap form inputs in `IressField` (standalone) or `IressFormField` (within `IressForm`) for proper labels and accessibility.
+
+```tsx
+// ❌ Wrong — input without field wrapper
+<IressInput placeholder="Email" />
+
+// ✅ Correct — proper form structure
+<IressField label="Email" htmlFor="email" required>
+  <IressInput id="email" type="email" placeholder="Enter your email" />
+</IressField>
+```
+
+## Copying Patterns from Existing Code Without Verification
+
+AI agents and developers commonly copy patterns from surrounding code without checking whether the pattern is current. **Always verify against the component documentation**, especially for:
+
+- Content positioning (use `prepend`/`append` props, not `slot` attributes)
+- Event handling (check the current callback prop names)
+- Form validation (use `IressForm` + `rules` prop, not custom validation)
+- Modal footers (use `footer` or `actions` prop, not children with `slot`)
+
+When in doubt, check the component docs at `node_modules/@iress-oss/ids-components/.ai/components/` or the [Storybook documentation](https://main--691abcc79dfa560a36d0a74f.chromatic.com).

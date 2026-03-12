@@ -17,7 +17,7 @@ import {
   CurrentBreakpoint,
   disableArgTypes,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 import { cssVars } from '@iress-oss/ids-tokens';
 
 type Story = StoryObj<typeof IressRow>;

@@ -14,7 +14,7 @@ import {
 import { type FieldValues } from 'react-hook-form';
 import { addToStorybookCategory } from '@iress-oss/ids-storybook-config';
 import type { AddonConfig } from '@iress-oss/ids-storybook-sandbox';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 const alertOptions = {
   none: undefined,

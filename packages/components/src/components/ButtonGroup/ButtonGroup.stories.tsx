@@ -6,7 +6,7 @@ import { IressIcon } from '../Icon';
 import { IressToasterProvider, useToaster } from '../Toaster';
 import { IressText } from '../Text';
 import { IressDivider } from '../Divider';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressButtonGroupProps<string>>;
 type MultipleStory = StoryObj<IressButtonGroupProps<string, true>>;

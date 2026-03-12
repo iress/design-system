@@ -1,7 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSelectTags } from './SelectTags';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSelectTags>;
 

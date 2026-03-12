@@ -1,7 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressMenuText } from './MenuText';
 import { IressMenu } from '../Menu';
-import { stylingProps } from '@theme-preset/storybookHelpers';
+import { stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressMenuText>;
 

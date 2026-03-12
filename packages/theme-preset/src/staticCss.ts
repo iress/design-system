@@ -6,7 +6,7 @@ import { spanCompositions } from './utilities/span';
 import { offsetCompositions } from './utilities/offset';
 import { MARGIN_TOKENS, SPACING_TOKENS } from './tokens/spacing';
 import { breakpoints } from './tokens/breakpoints';
-import { HORIZONTAL_ALIGNS, VERTICAL_ALIGNS } from '../src/constants';
+import { HORIZONTAL_ALIGNS, TEXT_ALIGNS, VERTICAL_ALIGNS } from './constants';
 
 /**
  * Allowed CSS properties for all components.
@@ -71,7 +71,7 @@ const staticProps = {
   noGutter: ['true'],
   scrollable: ['x', 'y', 'true'],
   stretch: ['true'],
-  textAlign: ['center', 'left', 'right', 'justify', 'inherit'],
+  textAlign: [...TEXT_ALIGNS],
   textStyle: Object.keys(textCompositions),
   flexVerticalAlign: [...VERTICAL_ALIGNS],
 };

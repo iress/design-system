@@ -3,7 +3,7 @@ import { IressCard, type IressCardProps } from './Card';
 import { IressRow } from '../Row';
 import { IressCol } from '../Col';
 import { IressStack } from '../Stack';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressCardProps>;
 

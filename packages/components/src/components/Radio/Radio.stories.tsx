@@ -2,7 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressRadio, type IressRadioProps } from '.';
 import { IressStack } from '../Stack';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 import { type FormControlValue } from '@/types';
 
 type Story = StoryObj<typeof IressRadio>;

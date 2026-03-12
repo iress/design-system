@@ -6,7 +6,7 @@ import LoadingDashboardSource from '../mocks/LoadingDashboard.tsx?raw';
 import { LoadingDashboardError } from '../mocks/LoadingDashboardError';
 import LoadingDashboardErrorSource from '../mocks/LoadingDashboardError.tsx?raw';
 import { withCustomSource } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 // This is a pattern for IressLoading, hence we change the name
 (PageLoading as FC).displayName = 'IressLoading';

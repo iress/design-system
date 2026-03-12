@@ -1,4 +1,4 @@
-import { Z_INDEX } from '../../src/constants';
+import { Z_INDEX } from '../constants';
 
 export const zIndex = {
   '000': {

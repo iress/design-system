@@ -9,7 +9,7 @@ import {
   disableArgTypes,
 } from '@iress-oss/ids-storybook-config';
 import { BREAKPOINT_DETAILS, BREAKPOINTS, IressTable } from '@/main';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressHide>;
 

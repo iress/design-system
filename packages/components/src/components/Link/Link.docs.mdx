@@ -38,12 +38,14 @@ When the loading state is activated, any click events on the link are disabled.
 
 <ComponentExample of={ComponentStories.Loading} />
 
-### Slot props
+### Prepend & Append
 
-Use the slots to correctly position icons or badges inside buttons.
+Use the `prepend` and `append` props to correctly position icons or badges inside links.
 
-- **Prepend** - Places the element before the text
-- **Append** - Places the element after the text
+- **`prepend`** — Places the element before the link text
+- **`append`** — Places the element after the link text
+
+> **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
 <ComponentExample of={ComponentStories.Slots} />
 

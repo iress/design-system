@@ -15,14 +15,13 @@ import {
   IressStyled,
   IressTable,
   IressText,
-  type PositiveSpacingToken,
 } from '@/main';
 import { lazy, Suspense, useState } from 'react';
 import {
   CurrentBreakpoint,
   withCustomSource,
 } from '@iress-oss/ids-storybook-config';
-import { stylingProps } from '@theme-preset/storybookHelpers';
+import { stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressTable>;
 
@@ -32,7 +31,7 @@ const BreakpointMd = lazy(() => import('@docs/components/BreakpointMd'));
 const BreakpointLg = lazy(() => import('@docs/components/BreakpointLg'));
 const BreakpointXl = lazy(() => import('@docs/components/BreakpointXl'));
 
-const MarginToken = ({ token }: { token: PositiveSpacingToken }) => {
+const MarginToken = ({ token }: { token?: string }) => {
   const [size, setSize] = useState<number | null>(null);
 
   return (
@@ -41,7 +40,7 @@ const MarginToken = ({ token }: { token: PositiveSpacingToken }) => {
       <IressPill>{token}</IressPill>
       <IressStyled
         srOnly
-        pl={token}
+        pl={token as 'spacing.4'}
         ref={(el) => {
           if (el) {
             const rect = el.getBoundingClientRect();

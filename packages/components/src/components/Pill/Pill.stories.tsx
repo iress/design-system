@@ -4,7 +4,7 @@ import {
   reactElementArgType,
   reactNodeArgType,
   stylingProps,
-} from '@theme-preset/storybookHelpers';
+} from '@iress-oss/ids-storybook-config';
 import { IressPill, IressInline } from '@/main';
 import { STATUSES } from '@/constants';
 

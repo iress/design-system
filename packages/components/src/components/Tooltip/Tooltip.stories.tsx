@@ -7,7 +7,7 @@ import { IressTooltip } from '.';
 import { IressButton } from '../Button';
 import { IressStack } from '../Stack';
 import { IressInline } from '../Inline';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressTooltip>;
 
