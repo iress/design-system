@@ -70,7 +70,7 @@ export interface IressIconProviderProps<P extends IconType = 'material'>
  * Loads Material Symbols Rounded with fixed parameters:
  * - Weight: 300
  * - FILL: 0 (default state) to 1 (active state)
- * - Grade: 24
+ * - Grade: 0
  * - Optical Size: 24dp
  *
  * @example
@@ -145,6 +145,10 @@ export const IressIconProvider = <P extends IconType = 'material'>({
   const { isIconLoaded } = useDynamicFontSubsetting({
     icons: usedIcons,
     buildUrl: (icons) => {
+      if (!icons.length && !noSubsetting) {
+        return false; // Don't load font if no icons are used
+      }
+
       const iconNamesParam = noSubsetting
         ? '&display=block'
         : `&icon_names=${encodeURIComponent(icons.join(','))}`;

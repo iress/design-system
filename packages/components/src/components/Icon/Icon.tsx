@@ -103,9 +103,10 @@ export const IressIcon = <P extends IconType = 'material'>({
 
   // Register Material Symbol icons with provider context if available
   useEffect(() => {
-    if (effectiveProvider === 'material' && iconContext && materialIconName) {
-      iconContext.registerIcon(materialIconName);
+    if (!iconContext || effectiveProvider !== 'material' || !materialIconName) {
+      return;
     }
+    iconContext.registerIcon(materialIconName);
   }, [effectiveProvider, iconContext, materialIconName]);
 
   // Render based on provider

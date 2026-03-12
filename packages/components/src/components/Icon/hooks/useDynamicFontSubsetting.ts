@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { getNonce } from '../../../helpers/dom/getNonce';
+import { idsLogger } from '../../../helpers/utility/idsLogger';
 
 export interface UseDynamicFontSubsettingOptions {
   /**
@@ -9,8 +10,9 @@ export interface UseDynamicFontSubsettingOptions {
 
   /**
    * Function to build the font URL from an array of icon names
+   * Should return false if the URL cannot be built (e.g. invalid icon names), in which case no font will be loaded
    */
-  buildUrl: (icons: string[]) => string;
+  buildUrl: (icons: string[]) => string | false;
 
   /**
    * Data attribute to identify the link element in the DOM. Must be kebab-case.
@@ -82,11 +84,14 @@ export const useDynamicFontSubsetting = ({
 
   const handleFontError = useCallback(
     (iconsToMerge: string[]) => {
+      idsLogger(
+        `[useDynamicFontSubsetting] Failed to load font "${fontFamily}" for icons: ${iconsToMerge.join(', ')}. Icons will render as text after timeout.`,
+      );
       setTimeout(() => {
         mergeLoadedIcons(iconsToMerge);
       }, 3000);
     },
-    [mergeLoadedIcons],
+    [mergeLoadedIcons, fontFamily],
   );
 
   const checkFontReady = useCallback(
@@ -122,7 +127,7 @@ export const useDynamicFontSubsetting = ({
     const url = buildUrl(iconsArray);
     const existing = document.querySelector(`link[data-${dataAttribute}]`);
 
-    if (existing?.getAttribute('data-url') === url) {
+    if (url === false || existing?.getAttribute('data-url') === url) {
       if (noSubsetting) setFullyLoaded(true);
       return;
     }

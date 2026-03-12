@@ -9,7 +9,7 @@ import {
   BREAKPOINTS,
   IressProvider,
 } from '@iress-oss/ids-components';
-import { lazy, Suspense } from 'react';
+import { Fragment, lazy, Suspense } from 'react';
 import { type AddonConfig } from '@iress-oss/ids-storybook-sandbox';
 import sandboxHtml from './sandbox.html?raw';
 import sandboxTemplate from './sandbox.template.tsx?raw';
@@ -41,14 +41,25 @@ export const getPreview = ({
 
   return {
     decorators: [
-      (Story) => (
-        <Provider>
+      (Story, context) => {
+        const hasProvider = !!context.parameters?.disableProvider;
+
+        if (hasProvider) {
+          <Provider noSubsetting>
+            <Suspense>
+              {!docsProps?.noStyles && <IDSStyles />}
+              <Story />
+            </Suspense>
+          </Provider>;
+        }
+
+        return (
           <Suspense>
             {!docsProps?.noStyles && <IDSStyles />}
             <Story />
           </Suspense>
-        </Provider>
-      ),
+        );
+      },
     ],
     parameters: {
       controls: {
