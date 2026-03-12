@@ -145,14 +145,14 @@ export const IressIconProvider = <P extends IconType = 'material'>({
   const { isIconLoaded } = useDynamicFontSubsetting({
     icons: usedIcons,
     buildUrl: (icons) => {
-      let iconNamesParam = noSubsetting
-        ? ''
+      const iconNamesParam = noSubsetting
+        ? '&display=block'
         : `&icon_names=${encodeURIComponent(icons.join(','))}`;
-      const fontFamily = 'Material+Symbols+Rounded';
+      const fontFamily = MATERIAL_SYMBOLS.family.replace(/ /g, '+');
       return `https://fonts.googleapis.com/css2?family=${fontFamily}:opsz,wght,FILL,GRAD@${MATERIAL_SYMBOLS.opticalSize},${MATERIAL_SYMBOLS.weight},0..1,${MATERIAL_SYMBOLS.grade}${iconNamesParam}`;
     },
     dataAttribute: 'material-icons-subset',
-    fontFamily: 'Material Symbols Rounded',
+    fontFamily: MATERIAL_SYMBOLS.family,
     disabled: type !== 'material',
     noSubsetting,
   });
@@ -167,19 +167,6 @@ export const IressIconProvider = <P extends IconType = 'material'>({
   return (
     <IconContext.Provider value={contextValue}>
       {children}
-      {type === 'material' && container && (
-        <FontLoader
-          // In the shadow DOM we mainly need the CSS class definition (e.g. `.material-symbols-rounded`)
-          // so elements can reference the correct font family. `icon_names=home` requests a minimal,
-          // single-icon subset from Google Fonts to keep the extra CSS/font payload small, while the
-          // main document's dynamic subsetting hook handles the full set of icons actually used.
-          url={`https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@${MATERIAL_SYMBOLS.opticalSize},${MATERIAL_SYMBOLS.weight},0..1,${MATERIAL_SYMBOLS.grade}&icon_names=home`}
-          container={container}
-          onlyShadow
-          keyPrefix="material-symbols-fonts"
-          data-testid={dataTestId}
-        />
-      )}
       {type === 'fontawesome' && (
         <FontLoader
           url="https://cdn.iress.com/icons/5.15.4/css/combined.min.css"

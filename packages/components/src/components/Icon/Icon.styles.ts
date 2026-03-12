@@ -1,5 +1,4 @@
 import { cva } from '@/styled-system/css';
-import { MATERIAL_SYMBOLS } from './Icon.constants';
 
 export const icon = cva({
   base: {},
@@ -7,13 +6,9 @@ export const icon = cva({
     type: {
       fontawesome: {},
       material: {
-        fontFamily: 'Material Symbols Rounded',
-        fontWeight: MATERIAL_SYMBOLS.weight,
         textStyle: 'inherit',
-        verticalAlign: 'middle',
         materialSymbols: 'true',
         scale: '[1.5]',
-        fontFeatureSettings: 'liga',
       },
     },
     filled: {

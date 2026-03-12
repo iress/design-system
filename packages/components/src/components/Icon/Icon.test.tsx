@@ -77,7 +77,6 @@ describe('IressIcon', () => {
       const component = screen.getByRole('img', { hidden: true });
       expect(component).toHaveClass(
         'test-class',
-        'material-symbols-rounded',
         GlobalCSSClass.Icon,
         icon(),
       );

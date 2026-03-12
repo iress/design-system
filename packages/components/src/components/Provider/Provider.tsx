@@ -46,6 +46,7 @@ export const IressProvider = ({
   children,
   container,
   noDefaultFont,
+  noSubsetting,
   position,
   ...restProps
 }: IressProviderProps) => {
@@ -53,7 +54,7 @@ export const IressProvider = ({
     <IressModalProvider container={container}>
       <IressToasterProvider container={container} position={position}>
         <IressSlideoutProvider container={container} {...restProps}>
-          <IressIconProvider container={container} noSubsetting>
+          <IressIconProvider container={container} noSubsetting={noSubsetting}>
             {children}
           </IressIconProvider>
         </IressSlideoutProvider>

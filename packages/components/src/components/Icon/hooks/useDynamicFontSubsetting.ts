@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { getNonce } from '@helpers/dom/getNonce';
+import { getNonce } from '../../../helpers/dom/getNonce';
 
 export interface UseDynamicFontSubsettingOptions {
   /**
@@ -38,6 +38,11 @@ export interface UseDynamicFontSubsettingOptions {
  * Hook to dynamically load fonts with text subsetting from a CDN.
  * Only loads the specific glyphs that are actually used, dramatically reducing payload size.
  *
+ * Uses <link rel="stylesheet"> to load the font CSS (CSP-safe for external stylesheets).
+ * The provider's CSS class (e.g. .material-symbols-rounded) is NOT applied to icon elements —
+ * Panda CSS utility classes handle all icon styling, so the class is harmless even though
+ * Google injects it alongside the @font-face declarations.
+ *
  * @example Material Symbols: 1407KB → 15-20KB (98.5% reduction)
  */
 export const useDynamicFontSubsetting = ({
@@ -50,9 +55,8 @@ export const useDynamicFontSubsetting = ({
 }: UseDynamicFontSubsettingOptions) => {
   const [loadedIcons, setLoadedIcons] = useState<Set<string>>(new Set());
   const [fullyLoaded, setFullyLoaded] = useState<boolean>(false);
-  const currentStyleRef = useRef<HTMLStyleElement | null>(null);
+  const currentLinkRef = useRef<HTMLLinkElement | null>(null);
 
-  // Helper to merge new icons with existing loaded icons
   const mergeLoadedIcons = useCallback((iconsToMerge: string[]) => {
     setLoadedIcons((prevLoaded) => {
       const newLoaded = new Set(prevLoaded);
@@ -61,19 +65,14 @@ export const useDynamicFontSubsetting = ({
     });
   }, []);
 
-  // Helper to remove old stylesheet
   const removeOldStylesheet = useCallback((existing: Element | null) => {
-    if (existing?.parentNode) {
-      existing.parentNode.removeChild(existing);
-    }
+    existing?.parentNode?.removeChild(existing);
   }, []);
 
   const handleFontLoaded = useCallback(
     (existing: Element | null, iconsToMerge: string[]) => {
       mergeLoadedIcons(iconsToMerge);
       removeOldStylesheet(existing);
-
-      // In noSubsetting mode, mark all icons as loaded after first load
       if (noSubsetting) {
         setFullyLoaded(true);
       }
@@ -83,7 +82,6 @@ export const useDynamicFontSubsetting = ({
 
   const handleFontError = useCallback(
     (iconsToMerge: string[]) => {
-      // Fallback: assume loaded after timeout
       setTimeout(() => {
         mergeLoadedIcons(iconsToMerge);
       }, 3000);
@@ -93,86 +91,55 @@ export const useDynamicFontSubsetting = ({
 
   const checkFontReady = useCallback(
     (existing: Element | null, iconsToMerge: string[]) => {
-      // Use Font Loading API to detect when fonts are ready
       if ('fonts' in document) {
         const fontPromise = document.fonts.check(`24px "${fontFamily}"`)
           ? Promise.resolve()
-          : document.fonts.load(`24px "${fontFamily}"`).catch(() => {
-              // Ignore font loading errors
-            });
+          : document.fonts.load(`24px "${fontFamily}"`);
 
         fontPromise
           .then(() => handleFontLoaded(existing, iconsToMerge))
           .catch(() => handleFontError(iconsToMerge));
       } else {
-        // Fallback for browsers without Font Loading API
         setTimeout(() => mergeLoadedIcons(iconsToMerge), 1000);
       }
     },
     [fontFamily, handleFontLoaded, handleFontError, mergeLoadedIcons],
   );
 
-  // Cleanup on unmount only
+  // Cleanup on unmount
   useEffect(() => {
     return () => {
-      if (currentStyleRef.current?.parentNode) {
-        currentStyleRef.current.parentNode.removeChild(currentStyleRef.current);
-      }
+      currentLinkRef.current?.parentNode?.removeChild(currentLinkRef.current);
     };
   }, []);
 
   // Load fonts dynamically based on usage
   useEffect(() => {
-    if (disabled) {
-      return;
-    }
+    if (disabled) return;
 
     const iconsArray = Array.from(icons);
     iconsArray.sort((a, b) => a.localeCompare(b));
     const url = buildUrl(iconsArray);
-    const existing = document.querySelector(`style[data-${dataAttribute}]`);
+    const existing = document.querySelector(`link[data-${dataAttribute}]`);
 
-    // Check if we already have this exact URL loaded
-    const existingUrl = existing?.getAttribute('data-url');
-    if (existingUrl === url) {
-      // Already loaded - in noSubsetting mode, ensure fullyLoaded is set
-      if (noSubsetting) {
-        setFullyLoaded(true);
-      }
+    if (existing?.getAttribute('data-url') === url) {
+      if (noSubsetting) setFullyLoaded(true);
       return;
     }
 
-    // Fetch the CSS content and insert it into a style tag
-    // This allows us to know when the CSS has loaded and properly wait for fonts
-    const loadFontCSS = async () => {
-      try {
-        const response = await fetch(url);
-        const cssContent = await response.text();
-        const layeredCSS = `@layer reset { ${cssContent} }`;
+    const nonce = getNonce();
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = url;
+    if (nonce) link.nonce = nonce;
+    link.setAttribute(`data-${dataAttribute}`, 'true');
+    link.setAttribute('data-url', url);
 
-        // Create new style element with CSS in reset layer
-        // This ensures Panda CSS utilities can override Material Symbols defaults
-        const nonce = getNonce();
-        const style = document.createElement('style');
-        if (nonce) style.setAttribute('nonce', nonce);
-        style.textContent = layeredCSS;
-        style.setAttribute(`data-${dataAttribute}`, 'true');
-        style.setAttribute('data-url', url);
+    link.addEventListener('load', () => checkFontReady(existing, iconsArray));
+    link.addEventListener('error', () => handleFontError(iconsArray));
 
-        document.head.appendChild(style);
-
-        // Track the current style for cleanup on unmount
-        currentStyleRef.current = style;
-
-        // Now that CSS is inserted, check when fonts are actually ready
-        checkFontReady(existing, iconsArray);
-      } catch {
-        // On fetch error, fall back to assuming loaded after timeout
-        handleFontError(iconsArray);
-      }
-    };
-
-    void loadFontCSS();
+    document.head.appendChild(link);
+    currentLinkRef.current = link;
   }, [
     icons,
     buildUrl,
@@ -180,19 +147,11 @@ export const useDynamicFontSubsetting = ({
     disabled,
     checkFontReady,
     handleFontError,
+    noSubsetting,
   ]);
 
   return {
-    /**
-     * Set of icons that have been loaded and are ready to use
-     */
     loadedIcons,
-
-    /**
-     * Check if a specific icon has been loaded
-     * In noSubsetting mode, returns true if fullyLoaded
-     * In subsetting mode, only returns true for individually loaded icons
-     */
     isIconLoaded: (name: string) =>
       noSubsetting ? fullyLoaded : loadedIcons.has(name),
   };
