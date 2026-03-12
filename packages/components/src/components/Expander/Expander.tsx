@@ -99,7 +99,11 @@ export const IressExpander = ({
         type="button"
       >
         {activator}
-        <IressExpanderChevron open={isOpen} className={classes.chevron} />
+        <IressExpanderChevron
+          open={isOpen}
+          inline={mode === 'link'}
+          className={classes.chevron}
+        />
       </styled.button>
       <div
         id={`${id}__container`}

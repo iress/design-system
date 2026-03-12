@@ -16,6 +16,7 @@ export default {
 export const IconProvider: Story = {
   name: 'Icon Provider',
   parameters: {
+    disableProvider: true, // Disable the default provider wrapper to test the provider in isolation
     docs: {
       description: {
         story: `

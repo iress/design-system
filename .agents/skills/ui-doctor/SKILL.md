@@ -173,9 +173,11 @@ Scan for raw HTML, third-party components, and custom implementations that have 
 
 #### a. Provider & CSS Setup
 
-- `IressProvider` must wrap the application root
-- `@iress-oss/ids-components/dist/style.css` must be imported
-- `@iress-oss/ids-tokens` is only needed if using tokens directly in app code
+- **IressProvider must wrap the application root** — Required for fonts, CSS variables, and theming
+- **The IDS component CSS must be imported** — `@iress-oss/ids-components/dist/style.css` contains all component styles
+- Users only need to install `@iress-oss/ids-components@alpha` — the tokens are bundled within the component library and do not need to be installed separately. **IDS v6 is currently in alpha**, so the `@alpha` tag is required (e.g. `npm install @iress-oss/ids-components@alpha`)
+- **CSP must allowlist IDS external origins** — If the app enforces a Content Security Policy, `fonts.googleapis.com` and `fonts.gstatic.com` must be in `style-src`/`font-src`. Add `cdn.iress.com` if using legacy Font Awesome icons or `IressTheme`. If using `IressShadow` and inline styles are blocked, add `<meta name="csp-nonce" content="...">` in `<head>`. See the [CSP Guide](@iress-oss/ids-components/.ai/guides/get-started-content-security-policy.md) for details.
+- If using design tokens directly in application code (for custom styling), users should additionally install `@iress-oss/ids-tokens@alpha` and import `@iress-oss/ids-tokens/build/css-vars.css`
 
 ```typescript
 // ✅ Minimum required setup
@@ -186,6 +188,35 @@ function App() {
   return <IressProvider>{/* app content */}</IressProvider>;
 }
 ```
+
+```typescript
+// ✅ With direct token usage in application code (optional)
+import '@iress-oss/ids-components/dist/style.css';
+import '@iress-oss/ids-tokens/build/css-vars.css';
+import { IressProvider } from '@iress-oss/ids-components';
+import { cssVars } from '@iress-oss/ids-tokens';
+
+function App() {
+  return (
+    <IressProvider>
+      <div style={{ padding: cssVars.spacing[4] }}>{/* app content */}</div>
+    </IressProvider>
+  );
+}
+```
+
+```typescript
+// ❌ Incorrect — missing component CSS
+import { IressProvider } from '@iress-oss/ids-components';
+// Components will render without styles!
+
+// ❌ Incorrect — installing tokens separately just for provider setup
+yarn add @iress-oss/ids-tokens@alpha  // Not needed unless using tokens directly
+
+// ❌ Incorrect — installing without @alpha tag (will not resolve to v6)
+yarn add @iress-oss/ids-components  // Must use @alpha tag
+```
+
 
 #### b. Design Token Usage
 
@@ -271,15 +302,94 @@ Use the [report template](references/report-template.md) to produce a structured
 
 The [full audit checklist](references/audit-checklist.md) covers these sections:
 
-1. **Setup & Configuration** — Provider, CSS imports, dependencies
-2. **Component Usage** — Raw HTML / third-party detection (see also [replacement tables](references/replacement-tables.md))
-3. **Design Tokens** — Hardcoded values vs token usage
-4. **Pattern Usage** — Forms, loading, navigation, dropdowns
-5. **Accessibility** — Labels, keyboard, focus, ARIA, contrast, screen readers
-6. **Cognitive Load** — Item counts, progressive disclosure, information density, focus management
-7. **Layout** — Stack, Inline, Row/Col, spacing tokens, responsive
-8. **Button Hierarchy** — Primary count, danger styling, icon-only text
-9. **Usability Heuristics** — Nielsen's 10 with IDS-specific guidance
+```typescript
+// ❌ Missing label / accessibility
+<IressInput placeholder="Email" />
+
+// ✅ Accessible standalone form input
+<IressField label="Email" htmlFor="email" required>
+  <IressInput id="email" type="email" placeholder="Enter your email" />
+</IressField>
+
+// ✅ Accessible form input within IressForm
+<IressFormField
+  name="email"
+  label="Email"
+  rules={{ required: true }}
+  render={(controlledProps) => <IressInput {...controlledProps} type="email" />}
+/>
+```
+
+#### d. Button Hierarchy
+
+- **One primary action per section** — Only one `mode="primary"` button per logical section
+- **Consistent button mode usage** — Primary for main action, secondary for supporting actions, tertiary/muted for less prominent actions
+- **Danger actions use status prop** — `status="danger"` for destructive actions, not red styling
+
+#### e. Layout Consistency
+
+- **Use IDS layout components** — `IressStack`, `IressInline`, `IressRow`/`IressCol` instead of custom CSS flex/grid
+- **Use spacing tokens for gaps** — Values 0–10 on `gap` prop
+- **Use IressCSSProps for spacing** — `m`, `mx`, `my`, `p`, `px`, `py` props instead of inline styles
+- **Responsive design** — Use `IressHide`, `hideFrom`/`hideBelow` for responsive visibility
+
+#### f. Semantic Component Usage
+
+- **Use `IressText` for all text** — Instead of raw `<p>`, `<span>`, `<h1>`–`<h6>`. Note: nesting native HTML elements (e.g. `<p>`, `<strong>`, `<a>`, `<ul>`) _inside_ `IressText` is an allowed pattern for rendering CMS content, markdown output, or other unstructured data sources
+- **Use `IressAlert` for feedback** — Instead of custom notification/alert components
+- **Use `IressModal status` for confirmation dialogs** — Instead of custom danger/success/warning confirmation modals. Use the `actions` prop for buttons (`footer` is not available when `status` is set)
+- **Use `IressIcon` for icons** — Instead of inline SVGs or custom icon components (unless the icon is a hero graphic that doesn't fit the standard icon use case)
+- **Use `IressDivider` for separators** — Instead of `<hr>` or custom dividers (unless nested inside `IressText` for inline separation)
+
+#### g. Acceptable Exceptions
+
+Not every raw HTML element is a violation. The following are **acceptable exceptions** that should NOT be flagged:
+
+| Pattern                                                      | Why It's Acceptable                                                                                                                                     |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<a>` inside markdown/MDX renderers                          | Content-driven, not application UI                                                                                                                      |
+| `<button>` inside third-party widgets the app cannot control | External dependency constraint                                                                                                                          |
+| `<table>` in email templates                                 | Email clients don't support custom components                                                                                                           |
+| `<img>` in SVG sprites or `<picture>` elements               | IressImage doesn't cover these use cases                                                                                                                |
+| `<div>` for ref targets, portals, or measurement containers  | Technical necessity, not layout                                                                                                                         |
+| Raw elements in test files / stories for demonstration       | Not shipped to users                                                                                                                                    |
+| `<form>` wrapping a single action (e.g., search bar)         | `IressForm` is best for multi-field forms; standalone search inputs may use `IressAutocomplete` or `IressField` + `IressInput` directly                 |
+| `<input type="hidden">`                                      | Not user-facing UI                                                                                                                                      |
+| Custom components wrapping IDS components internally         | App-level abstraction is valid as long as IDS components are used underneath                                                                            |
+| Native HTML elements nested inside `IressText`               | Allowed for rendering CMS content, markdown output, or other unstructured data sources where the content structure is not controlled by the application |
+
+**When reporting:** If a potential violation falls into an exception category, note it as "Reviewed — Acceptable Exception" rather than a finding. This prevents false positives and keeps reports actionable.
+
+### 3. Provide Recommendations
+
+Based on the audit findings, provide prioritised recommendations:
+
+#### Priority Levels
+
+| Priority     | Description                                                                                                                                                                                                      | Action                |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| **Critical** | Missing IressProvider, missing component CSS import, raw form inputs without labels, missing skip links, forms not using `IressForm`                                                                             | Must fix immediately  |
+| **High**     | Raw HTML buttons/inputs/selects/tables/modals, custom form handling instead of `IressForm`, custom loading instead of `IressLoading`, accessibility failures (colour contrast, missing alt text, focus trapping) | Fix in current sprint |
+| **Medium**   | Hardcoded colours/spacing, missing IressText usage, custom layout instead of IDS layout, custom menus instead of `IressContextualMenu`/`IressDropdownMenu`, missing ARIA landmarks                               | Plan for next sprint  |
+| **Low**      | Missing IressImage, custom badges, minor token inconsistencies, non-critical accessibility improvements                                                                                                          | Backlog               |
+
+#### Recommendation Format
+
+For each finding, provide:
+
+1. **What was found** — The specific code or pattern that needs attention
+2. **Why it matters** — Impact on consistency, accessibility, or maintainability
+3. **How to fix** — Specific code change with before/after examples
+4. **Priority** — Critical, High, Medium, or Low
+
+### 4. Generate Compliance Report
+
+Produce a structured report covering all audit areas. Use the [report template](references/report-template.md) to structure the output.
+
+## Audit Checklist
+
+Use the [full audit checklist](references/audit-checklist.md) when performing a UI doctor audit. It covers setup & configuration, component usage, design tokens, pattern usage, accessibility, layout, button hierarchy, and usability heuristics (based on Nielsen's 10 heuristics).
+
 
 ## Example Audit Output
 

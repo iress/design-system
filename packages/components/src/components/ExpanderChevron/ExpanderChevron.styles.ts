@@ -16,5 +16,11 @@ export const expanderChevron = cva({
         transform: 'rotate(180deg)',
       },
     },
+    inline: {
+      true: {
+        bg: 'transparent',
+        fill: '[currentColor]',
+      },
+    },
   },
 });

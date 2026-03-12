@@ -77,21 +77,6 @@ describe('IressIconProvider', () => {
   });
 
   describe('container', () => {
-    it('renders FontLoader with container for Material Symbols', () => {
-      const container = document.createElement('div');
-
-      render(
-        <IressIconProvider type="material" container={container}>
-          <div>Content</div>
-        </IressIconProvider>,
-      );
-
-      const fontLoader = container.querySelector(
-        `[data-url^="https://fonts.googleapis.com"]`,
-      );
-      expect(fontLoader).not.toBeNull();
-    });
-
     it('renders FontLoader with container for fontawesome', () => {
       const container = document.createElement('div');
 

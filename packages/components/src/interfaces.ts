@@ -225,9 +225,34 @@ export interface IressCSSProps {
   color?: UtilityValues['color'];
 
   /**
-   * The `focusable` prop is used to apply the focus ring when focused. It can be set to `true` to apply focus styles on focus, or `'within'` to apply focus styles when the element or any of its children are focused.
+   * The `focusable` prop is used to apply the focus ring when focused.
+   *
+   * - `'true'` — standard focus-visible ring on the element itself
+   * - `'within'` — focus ring when the element or any of its children are focused
+   * - `'inset'` — inset focus ring inside the element
+   * - `'has-button'` — focus ring delegated from a child button
+   * - `'has-input'` — focus ring delegated from a child input/textarea/select
+   * - `'has-switch'` — focus ring delegated from a child switch
+   * - `'label-after'` — focus ring applied to the adjacent label
+   * - `'expander-activator'` — focus ring for expander/activator elements
+   * - `'select-activator'` — focus ring for select activator elements
+   * - `'slider'` — focus ring for range slider thumbs
+   * - `'group'` — focus ring triggered by a parent `.group` container
+   * - `'within:inset'` — inset focus ring when a child element is focused
    */
-  focusable?: 'true' | 'within';
+  focusable?:
+    | 'true'
+    | 'within'
+    | 'within:inset'
+    | 'inset'
+    | 'has-button'
+    | 'has-input'
+    | 'has-switch'
+    | 'label-after'
+    | 'expander-activator'
+    | 'select-activator'
+    | 'slider'
+    | 'group';
 
   /**
    * The `flex` prop is used to set the flex grow property of an element. It allows the element to grow and fill available space in a flex container.
