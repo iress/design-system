@@ -80,6 +80,8 @@ Before starting, determine which files to scan.
 - CSS/SCSS/styled-component files for hardcoded design values
 - Application entry point(s) for Provider and CSS import checks
 
+**Important:** Always trace the component tree from the actual mount point (e.g. `main.tsx`, `index.tsx`) before evaluating Provider & Setup. The entry point may not be a route file — it could be a custom element wrapper, a shadow DOM host, or a separate bootstrap file that renders the router. Do not penalise missing Provider/CSS if a parent entry point already handles it.
+
 ### Files to Exclude
 
 - **Test files** (`*.test.tsx`, `*.spec.tsx`, `__tests__/`) — test mocks may legitimately use raw HTML
@@ -109,7 +111,7 @@ Start with what users experience — assess the UI's usability, accessibility, a
 
 Evaluate the application against all 10 heuristics. Each has IDS-specific guidance in the [audit checklist](references/audit-checklist.md) § Usability Heuristics. Key areas:
 
-1. **Visibility of system status** — Loading states use `IressLoading` with correct pattern; active states visible on tabs, nav, breadcrumbs
+1. **Visibility of system status** — Loading states use `IressLoading` (preferred) or `IressSkeleton` (for custom content placeholder patterns); active states visible on tabs, nav, breadcrumbs
 2. **Match between system and real world** — Labels use plain language; icons paired with text; status colours follow conventions
 3. **User control and freedom** — Modals/slideouts dismissible; destructive actions require confirmation; forms have cancel
 4. **Consistency and standards** — All components from IDS; tokens used consistently; same action = same pattern
@@ -164,7 +166,7 @@ Scan for raw HTML, third-party components, and custom implementations that have 
 - No raw `<button>`, `<input>`, `<select>`, `<form>`, `<table>` — use IDS equivalents
 - No third-party UI library imports (MUI, Ant, Chakra, Bootstrap, Radix, Headless UI) where IDS equivalents exist
 - No custom modals, drawers, tabs, tooltips, alerts — use IDS patterns
-- No custom loading spinners — use `IressLoading`
+- No custom loading spinners — use `IressLoading` (preferred) or `IressSkeleton` for custom content placeholder patterns
 - Layout divs with flex/grid styles → `IressStack`, `IressInline`, `IressRow`/`IressCol`
 
 **Acceptable exceptions** (do NOT flag): raw elements in test files, third-party widgets the app cannot control, `<input type="hidden">`, custom components wrapping IDS internally. See [replacement tables](references/replacement-tables.md) § Acceptable Exceptions.
@@ -180,12 +182,24 @@ Scan for raw HTML, third-party components, and custom implementations that have 
 - If using design tokens directly in application code (for custom styling), users should additionally install `@iress-oss/ids-tokens@alpha` and import `@iress-oss/ids-tokens/build/css-vars.css`
 
 ```typescript
-// ✅ Minimum required setup
+// ✅ Minimum required setup (option A — standard)
 import '@iress-oss/ids-components/dist/style.css';
 import { IressProvider } from '@iress-oss/ids-components';
 
 function App() {
   return <IressProvider>{/* app content */}</IressProvider>;
+}
+```
+
+```typescript
+// ✅ Minimum required setup (option B — IressShadow)
+// IressShadow is a superset of IressProvider — it wraps children in a shadow DOM,
+// injects style.css automatically, and provides the IressProvider context.
+// No separate IressProvider or CSS import is needed when using IressShadow.
+import { IressShadow } from '@iress-oss/ids-components';
+
+function App() {
+  return <IressShadow>{/* app content */}</IressShadow>;
 }
 ```
 
@@ -249,10 +263,13 @@ IDS provides patterns that ensure consistent UIs. Validate usage where appropria
 - `pattern="long"` for forms with >8 fields
 - `react-hook-form` as peer dependency
 
-**Loading Pattern (`IressLoading`):**
+**Loading Pattern (`IressLoading` / `IressSkeleton`):**
 
 - `page`, `component`, `start-up`, `validate`, `long` patterns
 - Handles timing thresholds automatically (no indicator <500ms, spinner at 500ms, message at 2s)
+- Prefer `IressLoading` for standard loading states — it handles timing, messaging, and accessibility automatically
+- `IressSkeleton` is valid for custom content placeholder patterns where you need skeleton screens that mirror the page layout; use `IressLoading` if possible
+- When a page reads from a pre-populated cache (e.g. SWR, React Query, or TanStack Query cache populated by a previous page), a separate loading state may be unnecessary — check whether the data source is a cache read vs a fresh fetch before flagging
 
 **Navigation Patterns:**
 
@@ -275,9 +292,12 @@ React error boundaries catch component crashes and should render IDS components 
 - **`IressModal status="danger"`** is the primary recommendation for root-level error boundaries — use `actions` prop to offer "Retry" or "Reload" buttons
 - **`IressAlert status="danger"`** is preferred for scoped boundaries that wrap individual features — shows inline where the broken component was
 
+**Before flagging missing error handling:** Check whether a parent component or layout route already provides an error boundary that covers the file being audited. Error boundaries are an app-wide pattern — a page component does not need its own error/empty state handling if a parent boundary already catches and renders IDS-based fallback UI (e.g. `IressModal status="danger"` with navigation-aware recovery). Only flag if no ancestor provides error handling.
+
 **Shadow DOM Pattern (`IressShadow`):**
 
-- For microfrontend CSS isolation only — NOT custom elements or Web Components
+- `IressShadow` is a **superset of `IressProvider`** — it creates a shadow root, injects `style.css` into it, and provides the `IressProvider` context automatically. When an app uses `IressShadow` at its entry point, no separate `IressProvider` or CSS import is required.
+- Commonly used for microfrontend CSS isolation, but also valid as the sole Provider + CSS setup for any application
 - Creates a shadow root on a `<div>` — children are standard React components
 - The `slot` attribute is irrelevant; always use React props (`prepend`, `append`, `footer`, etc.)
 

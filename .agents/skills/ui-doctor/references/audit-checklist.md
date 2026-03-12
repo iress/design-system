@@ -4,8 +4,8 @@ Use this checklist when performing a UI doctor audit.
 
 ## Setup & Configuration
 
-- [ ] `IressProvider` wraps the application root
-- [ ] `@iress-oss/ids-components/dist/style.css` is imported (required for component styles)
+- [ ] `IressProvider` wraps the application root (either directly, or via `IressShadow` which is a superset that includes Provider + CSS injection)
+- [ ] `@iress-oss/ids-components/dist/style.css` is imported (required for component styles — not needed if using `IressShadow`, which injects styles automatically)
 - [ ] `@iress-oss/ids-components` is a project dependency
 - [ ] `@iress-oss/ids-tokens/build/css-vars.css` is imported only if tokens are used directly in application code
 - [ ] `react-hook-form` is installed as a peer dependency if using `IressForm`
@@ -47,13 +47,13 @@ Use this checklist when performing a UI doctor audit.
 - [ ] Form validation uses declarative `rules` prop, not custom validation logic
 - [ ] Form state managed via React Hook Form (`useWatch`, `ref`), not `useState` + `onChange`
 - [ ] Long forms (>8 fields) use `pattern="long"` for sticky heading/actions
-- [ ] Loading states use `IressLoading` with the appropriate pattern
+- [ ] Loading states use `IressLoading` (preferred) or `IressSkeleton` for custom content placeholder patterns (cache-first data reads from SWR/React Query may not need a loading state if the cache is pre-populated by a prior page)
 - [ ] Filter/action dropdowns use `IressDropdownMenu` (not inside forms)
 - [ ] Row-level actions use `IressContextualMenu`
 - [ ] Application shell navigation uses `IressSideNav`
 - [ ] Hierarchy navigation uses `IressBreadcrumbs`
 - [ ] Microfrontend style isolation uses `IressShadow`
-- [ ] Root-level error boundaries render `IressModal status="danger"` with retry/reload actions (not custom error pages or raw HTML)
+- [ ] Root-level error boundaries render `IressModal status="danger"` with retry/reload actions (not custom error pages or raw HTML) — check parent components/layouts before flagging; a parent error boundary covering child routes is a valid app-wide pattern
 - [ ] Scoped error boundaries (around features/sections) render `IressAlert status="danger"` as inline fallback
 - [ ] Error boundaries do NOT use `IressToaster` — toasts are transient and cannot serve as persistent fallback UI
 
@@ -118,7 +118,7 @@ Evaluate the application against these usability principles (based on [Nielsen's
 
 The system should always keep users informed about what is going on, through appropriate feedback within reasonable time.
 
-- [ ] Loading states use `IressLoading` with the correct pattern (`page`, `component`, `start-up`, `validate`, `long`) so users always see feedback proportional to wait time
+- [ ] Loading states use `IressLoading` with the correct pattern (`page`, `component`, `start-up`, `validate`, `long`) so users always see feedback proportional to wait time; `IressSkeleton` is also valid for custom content placeholder patterns where skeleton screens mirror the page layout
 - [ ] Form submission provides visible feedback — use `IressLoading pattern="validate"` during submission, `IressAlert` or `IressToaster` for success/failure
 - [ ] Progress indicators are used for multi-step processes — `IressProgress` for deterministic operations, `IressSpinner` for indeterminate
 - [ ] Active states are visible — selected tabs (`IressTabSet`), active nav items (`IressSideNav`), current breadcrumb (`IressBreadcrumbs`) all show where the user is
