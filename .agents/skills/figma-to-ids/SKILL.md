@@ -287,3 +287,32 @@ function UsersTable({ users }) {
 5. **Use IressField for all form inputs** — It provides the label, hint, and validation layout
 6. **Respect responsive patterns** — Use `IressHide`, `hideFrom`/`hideBelow` for responsive visibility
 7. **Check the component docs** — Read the specific component doc for detailed props and patterns (`node_modules/@iress-oss/ids-components/.ai/components/`)
+
+## Common Mistakes
+
+> **⚠️ AI agents are especially prone to these mistakes** because they match patterns found in existing codebases. Always verify against component documentation rather than copying surrounding code.
+
+### Do not use `slot` attributes — use React props instead
+
+The `slot` attribute (e.g. `slot="start"`, `slot="prepend"`) is a legacy v4 pattern that is **no longer supported**. IDS v5+ uses typed React props to position content inside components.
+
+```tsx
+// ❌ Wrong — legacy v4 slot attribute
+<IressButton>
+  <IressIcon slot="start" name="home" />
+  Home
+</IressButton>
+
+// ✅ Correct — use prepend prop
+<IressButton prepend={<IressIcon name="home" />}>
+  Home
+</IressButton>
+```
+
+**Slot → prop mapping:** `slot="prepend"`/`slot="start"` → `prepend={...}`, `slot="append"`/`slot="end"` → `append={...}`, `slot="icon-only"` → `icon="name"`, `slot="footer"` → `footer={...}` or `actions={[...]}`, `slot="activator"` → `activator={...}`.
+
+### Do not translate Figma named slots to HTML slot attributes
+
+When Figma shows named content areas ("prepend", "append", "footer"), map them to the corresponding **React prop**, not to a `slot` attribute.
+
+> **⚠️ `IressShadow` does NOT imply custom elements.** If the codebase uses `IressShadow`, this is a CSS isolation wrapper for microfrontends — it creates a shadow root on a plain `<div>`. All children inside it are standard React components. Do not translate Figma designs into Web Component or `slot` patterns because of `IressShadow`.

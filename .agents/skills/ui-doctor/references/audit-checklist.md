@@ -51,6 +51,9 @@ Use this checklist when performing a UI doctor audit.
 - [ ] Application shell navigation uses `IressSideNav`
 - [ ] Hierarchy navigation uses `IressBreadcrumbs`
 - [ ] Microfrontend style isolation uses `IressShadow`
+- [ ] Root-level error boundaries render `IressModal status="danger"` with retry/reload actions (not custom error pages or raw HTML)
+- [ ] Scoped error boundaries (around features/sections) render `IressAlert status="danger"` as inline fallback
+- [ ] Error boundaries do NOT use `IressToaster` — toasts are transient and cannot serve as persistent fallback UI
 
 ## Accessibility
 
@@ -81,6 +84,23 @@ Use this checklist when performing a UI doctor audit.
 - [ ] Grid layouts use `IressRow` + `IressCol`
 - [ ] Spacing props use IDS token values (0–10)
 - [ ] Responsive visibility uses `IressHide` or `hideFrom`/`hideBelow`
+
+## Cognitive Load & Information Architecture
+
+- [ ] Menus/dropdowns with >10 items enable `searchable` to reduce scanning
+- [ ] Forms with >8 fields use `IressForm pattern="long"` for sticky heading/actions
+- [ ] Top-level navigation has ≤7 items; additional items are grouped or nested
+- [ ] Secondary content is hidden behind `IressExpander` or `IressTabSet` until needed (progressive disclosure)
+- [ ] Complex workflows are broken into multi-step flows rather than one overwhelming screen
+- [ ] Related content is grouped in `IressCard` or `IressPanel` rather than presented flat
+- [ ] Spacing between groups uses adequate `IressStack gap` tokens to prevent visual overload
+- [ ] Bulk/batch operations (select-all + delete, mass update) require explicit confirmation via `IressModal`, showing the count of affected items
+- [ ] After modal close, focus returns to the trigger element
+- [ ] After item deletion, focus moves to the next or previous item in the list
+- [ ] After form submission, focus moves to the success message, error summary, or next logical element
+- [ ] Loading state transitions do not cause layout shifts that disorient users
+- [ ] Visual hierarchy is established with `IressText textStyle` — primary content is prominent, secondary is de-emphasised
+- [ ] No more than one primary action (`mode="primary"`) per section to reduce decision paralysis
 
 ## Button Hierarchy
 

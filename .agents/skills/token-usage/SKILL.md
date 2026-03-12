@@ -395,6 +395,29 @@ Layout components accept responsive objects for spacing props:
 
 **General Rule:** Prefer component props when available. For custom styling, use CSS variables in stylesheets or `cssVars` in JavaScript. Only use `mapTokensToCssVariables` / `convertReferencesToVariables` for internal tooling like theme editors.
 
+## Common Mistakes to Avoid
+
+> **⚠️ AI agents are especially prone to these mistakes** because they match patterns found in existing codebases rather than consulting documentation.
+
+### Do not use `slot` attributes — use React props instead
+
+The `slot` attribute (e.g. `slot="start"`, `slot="prepend"`) is a legacy v4 pattern. IDS v5+ uses typed React props (`prepend`, `append`, `footer`, `icon`, etc.) to position content. This is not a token issue, but agents commonly introduce it alongside token-related fixes.
+
+```tsx
+// ❌ Wrong — legacy v4 slot attribute
+<IressButton>
+  <IressIcon slot="start" name="home" />
+  Home
+</IressButton>
+
+// ✅ Correct — use prepend prop
+<IressButton prepend={<IressIcon name="home" />}>
+  Home
+</IressButton>
+```
+
+For a comprehensive list of anti-patterns, see the [Common Mistakes guide](node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md).
+
 ## Complete Token Reference
 
 Every available colour, spacing, radius, and typography token with CSS variable names and default values. See [references/token-reference.md](references/token-reference.md).

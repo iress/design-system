@@ -253,3 +253,59 @@ function SettingsPage() {
 7. **Use status for feedback** — `IressAlert` for inline messages, `IressModal status="danger"` for confirmation dialogs, `status` prop on buttons for danger/success
 8. **Prefer IDS components** — Use `IressText` instead of raw `<p>`, `IressButton` instead of `<button>`
 9. **Check the component docs** — Read the specific component doc for detailed props and patterns (`node_modules/@iress-oss/ids-components/.ai/components/`)
+
+## Common Mistakes
+
+> **⚠️ AI agents are especially prone to these mistakes** because they match patterns found in existing codebases. Always verify against component documentation rather than copying surrounding code.
+
+### Do not use `slot` attributes — use React props instead
+
+The `slot` attribute (e.g. `slot="start"`, `slot="prepend"`, `slot="footer"`) is a legacy v4 pattern that is **no longer supported**. IDS v5+ uses typed React props (`prepend`, `append`, `footer`, `actions`, `icon`, `activator`) to position content.
+
+> **⚠️ `IressShadow` does NOT imply custom elements.** AI agents often see `IressShadow` in a codebase and incorrectly assume the app uses Web Components with `slot` attributes. `IressShadow` is a CSS isolation wrapper that creates a shadow root on a plain `<div>` — all children inside it are standard React components. The `slot` attribute is never correct in IDS v5+.
+
+```tsx
+// ❌ Wrong — legacy v4 slot attribute
+<IressButton>
+  <IressIcon slot="start" name="search" />
+  Search
+</IressButton>
+
+// ✅ Correct — use prepend prop
+<IressButton prepend={<IressIcon name="search" />}>
+  Search
+</IressButton>
+```
+
+```tsx
+// ❌ Wrong — legacy v4 modal footer slot
+<IressModal show={show}>
+  Content
+  <div slot="footer">
+    <IressButton>Close</IressButton>
+  </div>
+</IressModal>
+
+// ✅ Correct — use footer prop
+<IressModal show={show} footer={<IressButton>Close</IressButton>}>
+  Content
+</IressModal>
+```
+
+**Quick reference for slot → prop migration:**
+
+| Legacy `slot` attribute           | Modern IDS prop                     |
+| --------------------------------- | ----------------------------------- |
+| `slot="prepend"` / `slot="start"` | `prepend={...}`                     |
+| `slot="append"` / `slot="end"`    | `append={...}`                      |
+| `slot="icon-only"`                | `icon="iconName"`                   |
+| `slot="footer"`                   | `footer={...}` or `actions={[...]}` |
+| `slot="activator"`                | `activator={...}`                   |
+
+### Do not use raw HTML when IDS components exist
+
+See the Component Mapping tables above for the correct IDS replacement for every common HTML element.
+
+### Do not hardcode design values
+
+Use design tokens and component props instead of hex colours, pixel spacing, or font sizes. See the [token-usage skill](../../.agents/skills/token-usage/SKILL.md) for details.
