@@ -63,9 +63,9 @@ Content-Security-Policy: style-src 'self' 'nonce-abc123' https://fonts.googleapi
 
 - **`IressProvider`** injects `<link rel="stylesheet">` tags for default fonts (Inter, Ubuntu) from `fonts.googleapis.com`.
 - **`IressIconProvider`** injects `<link>` tags for Material Symbols from `fonts.googleapis.com` (with dynamic subsetting), or `<link>` tags for Font Awesome from `cdn.iress.com`.
-- **`IressShadow`** injects inline `<style>` tags into its Shadow DOM — inline styles require a nonce when your CSP blocks `'unsafe-inline'`.
+- **`IressShadow`** injects inline `<style>` tags into its Shadow DOM — this is the only component that requires a nonce when inline styles are blocked.
 
-All components use `<link>` tags for external stylesheets, which are covered by origin allowlisting alone. IDS will also propagate the CSP nonce (via `getNonce()`) onto injected `<link>` elements when a `<meta name="csp-nonce">` tag is present (for example, for icon font loading with `useDynamicFontSubsetting` and for `FontLoader`). Only `IressShadow` *requires* a nonce in order to work when inline styles are blocked by CSP.
+All components use `<link>` tags for external stylesheets, which are covered by origin allowlisting alone. Only `IressShadow` calls `getNonce()` to apply a nonce to its inline `<style>` elements.
 
 ---
 
