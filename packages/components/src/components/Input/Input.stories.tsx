@@ -13,8 +13,9 @@ import { FORM_ELEMENT_WIDTHS } from '@/constants';
 import {
   disableArgTypes,
   withJsxTransformer,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressInputProps>;
 type TextareaStory = StoryObj<IressInputProps<string, number>>;

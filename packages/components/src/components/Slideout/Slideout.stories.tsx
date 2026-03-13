@@ -28,8 +28,9 @@ import {
   withCustomSource,
   withTransformedProviderSource,
   withTransformedRawSource,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 const SLIDEOUT_ID = 'storybook-slideout';
 

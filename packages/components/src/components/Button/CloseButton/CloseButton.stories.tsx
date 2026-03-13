@@ -1,6 +1,9 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressCloseButton } from '..';
-import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
+import {
+  reactNodeArgType,
+  stylingProps,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressCloseButton>;
 

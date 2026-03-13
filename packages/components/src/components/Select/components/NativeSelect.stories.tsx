@@ -3,8 +3,9 @@ import { FORM_ELEMENT_WIDTHS } from '@/constants';
 import {
   disableArgTypes,
   mergeStorybookConfig,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 import { IressStack } from '../../Stack';
 import { IressSelect } from '../Select';
 

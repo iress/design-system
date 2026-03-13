@@ -11,6 +11,14 @@ Translate natural language UI descriptions into IDS (Iress Design System) compon
 
 ## Setup
 
+> **Important:** IDS v6 is currently in alpha. Install with the `@alpha` tag:
+>
+> ```bash
+> npm install @iress-oss/ids-components@alpha
+> # If using tokens directly:
+> npm install @iress-oss/ids-tokens@alpha
+> ```
+
 ```tsx
 import '@iress-oss/ids-components/dist/style.css'; // Required — component styles
 import '@iress-oss/ids-tokens/build/css-vars.css'; // Required if using tokens directly
@@ -113,38 +121,38 @@ function App() {
 
 Most IDS components accept styling props for layout adjustments:
 
-| Prop           | Purpose                         | Values                                                                                                                   |
-| -------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `alignSelf`    | Override flex alignment         | `"start"`, `"end"`, `"center"`, `"stretch"`                                                                              |
-| `bg`           | Background colour               | Colour tokens: `"colour.primary.fill"`, `"colour.neutral.20"`, `"alt"`, etc.                                             |
-| `borderRadius` | Border radius                   | Radius tokens: `"radius.0"` – `"radius.4"`, `"none"`                                                                     |
-| `color`        | Text colour                     | Colour tokens: `"colour.neutral.80"`, `"colour.primary.text"`, etc.                                                      |
-| `flex`         | Flex grow                       | `"1"` only                                                                                                               |
-| `focusable`    | Apply focus ring                | `"true"`, `"within"`                                                                                                     |
-| `hideFrom`     | Hide from breakpoint up         | `true`, or breakpoints: `"sm"`, `"md"`, `"lg"`, `"xl"`                                                                   |
-| `hideBelow`    | Hide below breakpoint           | Breakpoints: `"sm"`, `"md"`, `"lg"`, `"xl"`                                                                              |
-| `maxWidth`     | Max width                       | Size tokens: `"container.sm"`, `"container.md"`, etc.                                                                    |
-| `m`            | Margin (all sides)              | Spacing tokens: `"xs"` – `"xl"`, `"spacing.1"` – `"spacing.10"`, `"auto"`, negatives (responsive)                        |
-| `mx`           | Margin horizontal               | Same as `m` (responsive)                                                                                                 |
-| `my`           | Margin vertical                 | Same as `m` (responsive)                                                                                                 |
-| `mt`           | Margin top                      | Same as `m` (responsive)                                                                                                 |
-| `mr`           | Margin right                    | Same as `m` (responsive)                                                                                                 |
-| `mb`           | Margin bottom                   | Same as `m` (responsive)                                                                                                 |
-| `ml`           | Margin left                     | Same as `m` (responsive)                                                                                                 |
-| `noGutter`     | Remove last-child bottom margin | `true` / `false`                                                                                                         |
-| `p`            | Padding (all sides)             | Spacing tokens: `"xs"` – `"xl"`, `"spacing.1"` – `"spacing.10"` (responsive)                                             |
-| `px`           | Padding horizontal              | Same as `p` (responsive)                                                                                                 |
-| `py`           | Padding vertical                | Same as `p` (responsive)                                                                                                 |
-| `pt`           | Padding top                     | Same as `p` (responsive)                                                                                                 |
-| `pr`           | Padding right                   | Same as `p` (responsive)                                                                                                 |
-| `pb`           | Padding bottom                  | Same as `p` (responsive)                                                                                                 |
-| `pl`           | Padding left                    | Same as `p` (responsive)                                                                                                 |
-| `scrollable`   | Enable overflow scrolling       | `true`, `"x"`, `"y"`                                                                                                     |
-| `srOnly`       | Screen-reader only              | `true` / `false` (responsive)                                                                                            |
-| `stretch`      | Fill parent height              | `true` / `false`                                                                                                         |
-| `textAlign`    | Text alignment                  | `"left"`, `"right"`, `"center"`, `"justify"`, `"inherit"`                                                                |
-| `textStyle`    | Typography style                | `"typography.body.sm"`, `"typography.body.md"`, `"typography.heading.1"` – `"typography.heading.5"`, `"typography.code"` |
-| `width`        | Element width                   | Size tokens: `"input.2"` – `"input.16"`, `"3/12"` – `"12/12"` (grid), `"auto"` (responsive)                              |
+| Prop           | Purpose                         | Values                                                                                                                                                                                 |
+| -------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `alignSelf`    | Override flex alignment         | `"start"`, `"end"`, `"center"`, `"stretch"`                                                                                                                                            |
+| `bg`           | Background colour               | Colour tokens: `"colour.primary.fill"`, `"colour.neutral.20"`, `"alt"`, etc.                                                                                                           |
+| `borderRadius` | Border radius                   | Radius tokens: `"radius.0"` – `"radius.4"`, `"none"`                                                                                                                                   |
+| `color`        | Text colour                     | Colour tokens: `"colour.neutral.80"`, `"colour.primary.text"`, etc.                                                                                                                    |
+| `flex`         | Flex grow                       | `"1"` only                                                                                                                                                                             |
+| `focusable`    | Apply focus ring                | `"true"`, `"within"`, `"within:inset"`, `"inset"`, `"has-button"`, `"has-input"`, `"has-switch"`, `"label-after"`, `"expander-activator"`, `"select-activator"`, `"slider"`, `"group"` |
+| `hideFrom`     | Hide from breakpoint up         | `true`, or breakpoints: `"sm"`, `"md"`, `"lg"`, `"xl"`                                                                                                                                 |
+| `hideBelow`    | Hide below breakpoint           | Breakpoints: `"sm"`, `"md"`, `"lg"`, `"xl"`                                                                                                                                            |
+| `maxWidth`     | Max width                       | Size tokens: `"container.sm"`, `"container.md"`, etc.                                                                                                                                  |
+| `m`            | Margin (all sides)              | Spacing tokens: `"xs"` – `"xl"`, `"spacing.1"` – `"spacing.10"`, `"auto"`, negatives (responsive)                                                                                      |
+| `mx`           | Margin horizontal               | Same as `m` (responsive)                                                                                                                                                               |
+| `my`           | Margin vertical                 | Same as `m` (responsive)                                                                                                                                                               |
+| `mt`           | Margin top                      | Same as `m` (responsive)                                                                                                                                                               |
+| `mr`           | Margin right                    | Same as `m` (responsive)                                                                                                                                                               |
+| `mb`           | Margin bottom                   | Same as `m` (responsive)                                                                                                                                                               |
+| `ml`           | Margin left                     | Same as `m` (responsive)                                                                                                                                                               |
+| `noGutter`     | Remove last-child bottom margin | `true` / `false`                                                                                                                                                                       |
+| `p`            | Padding (all sides)             | Spacing tokens: `"xs"` – `"xl"`, `"spacing.1"` – `"spacing.10"` (responsive)                                                                                                           |
+| `px`           | Padding horizontal              | Same as `p` (responsive)                                                                                                                                                               |
+| `py`           | Padding vertical                | Same as `p` (responsive)                                                                                                                                                               |
+| `pt`           | Padding top                     | Same as `p` (responsive)                                                                                                                                                               |
+| `pr`           | Padding right                   | Same as `p` (responsive)                                                                                                                                                               |
+| `pb`           | Padding bottom                  | Same as `p` (responsive)                                                                                                                                                               |
+| `pl`           | Padding left                    | Same as `p` (responsive)                                                                                                                                                               |
+| `scrollable`   | Enable overflow scrolling       | `true`, `"x"`, `"y"`                                                                                                                                                                   |
+| `srOnly`       | Screen-reader only              | `true` / `false` (responsive)                                                                                                                                                          |
+| `stretch`      | Fill parent height              | `true` / `false`                                                                                                                                                                       |
+| `textAlign`    | Text alignment                  | `"left"`, `"right"`, `"center"`, `"justify"`, `"inherit"`                                                                                                                              |
+| `textStyle`    | Typography style                | `"typography.body.sm"`, `"typography.body.md"`, `"typography.heading.1"` – `"typography.heading.5"`, `"typography.code"`                                                               |
+| `width`        | Element width                   | Size tokens: `"input.2"` – `"input.16"`, `"3/12"` – `"12/12"` (grid), `"auto"` (responsive)                                                                                            |
 
 ## Translation Examples
 
@@ -252,7 +260,8 @@ function SettingsPage() {
 6. **Always include labels** — All form inputs need accessible labels via `IressField`
 7. **Use status for feedback** — `IressAlert` for inline messages, `IressModal status="danger"` for confirmation dialogs, `status` prop on buttons for danger/success
 8. **Prefer IDS components** — Use `IressText` instead of raw `<p>`, `IressButton` instead of `<button>`
-9. **Check the component docs** — Read the specific component doc for detailed props and patterns (`node_modules/@iress-oss/ids-components/.ai/components/`)
+9. **Native elements inside `IressText` are OK** — When rendering CMS content, markdown output, or other unstructured data sources, it is acceptable to nest native HTML elements (e.g. `<p>`, `<strong>`, `<a>`, `<ul>`) inside `IressText`. This lets `IressText` provide consistent typography while allowing flexible inner content structure.
+10. **Check the component docs** — Read the specific component doc for detailed props and patterns (`node_modules/@iress-oss/ids-components/.ai/components/`)
 
 ## Common Mistakes
 

@@ -1,8 +1,11 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressContainer } from '.';
 import { IressPanel } from '../Panel';
-import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
+import {
+  CurrentBreakpoint,
+  reactNodeArgType,
+  stylingProps,
+} from '@iress-oss/ids-storybook-config';
 import { IressTable } from '../Table';
 import { BREAKPOINT_DETAILS, BREAKPOINTS } from '@/constants';
 

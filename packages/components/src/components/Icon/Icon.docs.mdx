@@ -46,13 +46,6 @@ The `IressProvider` component takes care of this for you when you use it with th
 
 For more simpler applications, you can use the `IressIconProvider` directly.
 
-<IressExpander mode="link" activator="Shadow DOM (Microfrontends)"  mb="md">
-  If you are using Microfrontends or Web Components that use Shadow DOM, you need to ensure that the Material Symbols font is loaded in the parent application as well as the Microfrontend or Web Component. This is because `@font-face` declarations are not supported inside the Shadow DOM.
-
-The `IressIconProvider` component takes care of this for you when you use it with the `container` prop, which accepts a `HTMLElement | ShadowRoot` or `Ref<HTMLElement | ShadowRoot>`.
-
-</IressExpander>
-
 <ComponentExample
   of={ProviderStories.IconProvider}
   refresh

@@ -20,6 +20,20 @@ export const focusable: Story = {
   },
 };
 
+export const focusableInset: Story = {
+  args: {
+    children:
+      'This element uses an inset focus ring, which renders inside the element boundary.',
+    focusable: 'inset',
+    tabIndex: 0,
+    p: 'spacing.4',
+    bg: 'colour.neutral.20',
+  },
+  parameters: {
+    controls: { include: ['focusable'] },
+  },
+};
+
 export const srOnly: Story = {
   ...focusable,
   args: {

@@ -3,22 +3,12 @@ import { useDynamicFontSubsetting } from './useDynamicFontSubsetting';
 import { act } from '@testing-library/react';
 
 describe('useDynamicFontSubsetting', () => {
-  let mockFetch: ReturnType<typeof vi.fn>;
   let mockDocumentFonts: {
     check: ReturnType<typeof vi.fn>;
     load: ReturnType<typeof vi.fn>;
   };
 
   beforeEach(() => {
-    // Mock fetch
-    mockFetch = vi.fn(() =>
-      Promise.resolve({
-        text: () => Promise.resolve('@font-face { font-family: "Test Font"; }'),
-      } as Response),
-    );
-
-    global.fetch = mockFetch as never;
-
     // Mock document.fonts API
     mockDocumentFonts = {
       check: vi.fn(() => false),
@@ -31,8 +21,8 @@ describe('useDynamicFontSubsetting', () => {
       configurable: true,
     });
 
-    // Clear any existing style elements and nonce meta tags
-    document.querySelectorAll('style[data-test-font]').forEach((el) => {
+    // Clear any existing link elements and nonce meta tags
+    document.querySelectorAll('link[data-test-font]').forEach((el) => {
       el.remove();
     });
     document.querySelectorAll("meta[name='csp-nonce']").forEach((el) => {
@@ -42,8 +32,8 @@ describe('useDynamicFontSubsetting', () => {
 
   afterEach(() => {
     vi.clearAllMocks();
-    // Clean up style elements and nonce meta tags
-    document.querySelectorAll('style[data-test-font]').forEach((el) => {
+    // Clean up link elements and nonce meta tags
+    document.querySelectorAll('link[data-test-font]').forEach((el) => {
       el.remove();
     });
     document.querySelectorAll("meta[name='csp-nonce']").forEach((el) => {
@@ -81,7 +71,7 @@ describe('useDynamicFontSubsetting', () => {
   });
 
   describe('Font loading', () => {
-    it('fetches font CSS when icons are added', async () => {
+    it('creates a link element when icons are added', () => {
       const icons = new Set(['icon1', 'icon2']);
 
       renderHook(() =>
@@ -93,14 +83,14 @@ describe('useDynamicFontSubsetting', () => {
         }),
       );
 
-      await waitFor(() => {
-        expect(mockFetch).toHaveBeenCalledWith(
-          'https://fonts.test/icon1,icon2',
-        );
-      });
+      const linkElement = document.querySelector('link[data-test-font]');
+      expect(linkElement).toBeInTheDocument();
+      expect(linkElement?.getAttribute('href')).toBe(
+        'https://fonts.test/icon1,icon2',
+      );
     });
 
-    it('sorts icons alphabetically before building URL', async () => {
+    it('sorts icons alphabetically before building URL', () => {
       const icons = new Set(['zebra', 'alpha', 'beta']);
 
       renderHook(() =>
@@ -112,14 +102,13 @@ describe('useDynamicFontSubsetting', () => {
         }),
       );
 
-      await waitFor(() => {
-        expect(mockFetch).toHaveBeenCalledWith(
-          'https://fonts.test/alpha,beta,zebra',
-        );
-      });
+      const linkElement = document.querySelector('link[data-test-font]');
+      expect(linkElement?.getAttribute('href')).toBe(
+        'https://fonts.test/alpha,beta,zebra',
+      );
     });
 
-    it('injects CSS into document head with reset layer', async () => {
+    it('creates a link stylesheet element in document head', () => {
       const icons = new Set(['icon1']);
 
       renderHook(() =>
@@ -131,17 +120,12 @@ describe('useDynamicFontSubsetting', () => {
         }),
       );
 
-      await waitFor(() => {
-        const styleElement = document.querySelector('style[data-test-font]');
-        expect(styleElement).toBeInTheDocument();
-        expect(styleElement?.textContent).toContain('@layer reset');
-        expect(styleElement?.textContent).toContain(
-          '@font-face { font-family: "Test Font"; }',
-        );
-      });
+      const linkElement = document.querySelector('link[data-test-font]');
+      expect(linkElement).toBeInTheDocument();
+      expect(linkElement?.getAttribute('rel')).toBe('stylesheet');
     });
 
-    it('sets data-url attribute on style element', async () => {
+    it('sets data-url attribute on link element', () => {
       const icons = new Set(['icon1']);
 
       renderHook(() =>
@@ -153,12 +137,10 @@ describe('useDynamicFontSubsetting', () => {
         }),
       );
 
-      await waitFor(() => {
-        const styleElement = document.querySelector('style[data-test-font]');
-        expect(styleElement?.getAttribute('data-url')).toBe(
-          'https://fonts.test/icon1',
-        );
-      });
+      const linkElement = document.querySelector('link[data-test-font]');
+      expect(linkElement?.getAttribute('data-url')).toBe(
+        'https://fonts.test/icon1',
+      );
     });
 
     it('uses Font Loading API to detect when fonts are ready', async () => {
@@ -172,6 +154,10 @@ describe('useDynamicFontSubsetting', () => {
           fontFamily: 'Test Font',
         }),
       );
+
+      // Simulate link load event
+      const linkElement = document.querySelector('link[data-test-font]');
+      linkElement?.dispatchEvent(new Event('load'));
 
       await waitFor(() => {
         expect(mockDocumentFonts.check).toHaveBeenCalledWith(
@@ -193,6 +179,9 @@ describe('useDynamicFontSubsetting', () => {
         }),
       );
 
+      const linkElement = document.querySelector('link[data-test-font]');
+      linkElement?.dispatchEvent(new Event('load'));
+
       await waitFor(() => {
         expect(mockDocumentFonts.load).toHaveBeenCalledWith('24px "Test Font"');
       });
@@ -210,6 +199,9 @@ describe('useDynamicFontSubsetting', () => {
         }),
       );
 
+      const linkElement = document.querySelector('link[data-test-font]');
+      linkElement?.dispatchEvent(new Event('load'));
+
       await waitFor(() => {
         expect(result.current.isIconLoaded('icon1')).toBe(true);
         expect(result.current.isIconLoaded('icon2')).toBe(true);
@@ -218,7 +210,7 @@ describe('useDynamicFontSubsetting', () => {
   });
 
   describe('disabled', () => {
-    it('does not fetch fonts when disabled is true', async () => {
+    it('does not create link element when disabled is true', () => {
       const icons = new Set(['icon1']);
 
       renderHook(() =>
@@ -231,12 +223,8 @@ describe('useDynamicFontSubsetting', () => {
         }),
       );
 
-      // Wait a bit to ensure no style injection happens
-      await new Promise((resolve) => setTimeout(resolve, 100));
-
-      expect(mockFetch).not.toHaveBeenCalled();
       expect(
-        document.querySelector('style[data-test-font]'),
+        document.querySelector('link[data-test-font]'),
       ).not.toBeInTheDocument();
     });
 
@@ -272,14 +260,16 @@ describe('useDynamicFontSubsetting', () => {
         }),
       );
 
+      const linkElement = document.querySelector('link[data-test-font]');
+      linkElement?.dispatchEvent(new Event('load'));
+
       await waitFor(() => {
-        // Even icons not in the set should be marked as loaded
         expect(result.current.isIconLoaded('icon1')).toBe(true);
         expect(result.current.isIconLoaded('other-icon')).toBe(true);
       });
     });
 
-    it('still fetches fonts when noSubsetting is true', async () => {
+    it('still creates link element when noSubsetting is true', () => {
       const icons = new Set(['icon1']);
 
       renderHook(() =>
@@ -292,14 +282,14 @@ describe('useDynamicFontSubsetting', () => {
         }),
       );
 
-      await waitFor(() => {
-        expect(mockFetch).toHaveBeenCalled();
-      });
+      expect(
+        document.querySelector('link[data-test-font]'),
+      ).toBeInTheDocument();
     });
   });
 
   describe('URL caching', () => {
-    it('does not recreate style if URL has not changed', async () => {
+    it('does not recreate link if URL has not changed', () => {
       const icons = new Set(['icon1']);
 
       const { rerender } = renderHook(
@@ -313,19 +303,17 @@ describe('useDynamicFontSubsetting', () => {
         { initialProps: { icons } },
       );
 
-      await waitFor(() => {
-        expect(mockFetch).toHaveBeenCalledTimes(1);
-      });
+      const linkElements = document.querySelectorAll('link[data-test-font]');
+      expect(linkElements.length).toBe(1);
 
       // Rerender with same icons
       rerender({ icons });
 
-      // Should not fetch again
-      await new Promise((resolve) => setTimeout(resolve, 100));
-      expect(mockFetch).toHaveBeenCalledTimes(1);
+      // Should still only have one link element
+      expect(document.querySelectorAll('link[data-test-font]').length).toBe(1);
     });
 
-    it('fetches again if icons change', async () => {
+    it('creates new link if icons change', () => {
       const icons1 = new Set(['icon1']);
       const icons2 = new Set(['icon1', 'icon2']);
 
@@ -340,25 +328,26 @@ describe('useDynamicFontSubsetting', () => {
         { initialProps: { icons: icons1 } },
       );
 
-      await waitFor(() => {
-        expect(mockFetch).toHaveBeenCalledTimes(1);
-      });
+      expect(document.querySelectorAll('link[data-test-font]').length).toBe(1);
 
       // Rerender with different icons
       act(() => {
         rerender({ icons: icons2 });
       });
 
-      await waitFor(() => {
-        expect(mockFetch).toHaveBeenCalledTimes(2);
-      });
+      // New link element should be created (old one removed on load)
+      const linkElements = document.querySelectorAll('link[data-test-font]');
+      expect(linkElements.length).toBeGreaterThanOrEqual(1);
+      const urls = Array.from(linkElements).map((el) =>
+        el.getAttribute('data-url'),
+      );
+      expect(urls).toContain('https://fonts.test/icon1,icon2');
     });
   });
 
   describe('Error handling', () => {
-    it('handles fetch errors gracefully', async () => {
+    it('handles link error events gracefully', async () => {
       vi.useFakeTimers();
-      mockFetch.mockRejectedValueOnce(new Error('Network error'));
       const icons = new Set(['icon1']);
 
       const { result } = renderHook(() =>
@@ -369,6 +358,9 @@ describe('useDynamicFontSubsetting', () => {
           fontFamily: 'Test Font',
         }),
       );
+
+      const linkElement = document.querySelector('link[data-test-font]');
+      linkElement?.dispatchEvent(new Event('error'));
 
       await act(async () => {
         await vi.advanceTimersByTimeAsync(3000);
@@ -395,6 +387,9 @@ describe('useDynamicFontSubsetting', () => {
           fontFamily: 'Test Font',
         }),
       );
+
+      const linkElement = document.querySelector('link[data-test-font]');
+      linkElement?.dispatchEvent(new Event('load'));
 
       await act(async () => {
         await vi.advanceTimersByTimeAsync(3000);
@@ -426,6 +421,9 @@ describe('useDynamicFontSubsetting', () => {
         }),
       );
 
+      const linkElement = document.querySelector('link[data-test-font]');
+      linkElement?.dispatchEvent(new Event('load'));
+
       // Fast-forward past the 1000ms setTimeout fallback
       await act(async () => {
         await vi.advanceTimersByTimeAsync(2000);
@@ -446,7 +444,7 @@ describe('useDynamicFontSubsetting', () => {
   });
 
   describe('Cleanup', () => {
-    it('removes style element on unmount', async () => {
+    it('removes link element on unmount', () => {
       const icons = new Set(['icon1']);
 
       const { unmount } = renderHook(() =>
@@ -458,22 +456,18 @@ describe('useDynamicFontSubsetting', () => {
         }),
       );
 
-      await waitFor(() => {
-        expect(
-          document.querySelector('style[data-test-font]'),
-        ).toBeInTheDocument();
-      });
+      expect(
+        document.querySelector('link[data-test-font]'),
+      ).toBeInTheDocument();
 
       unmount();
 
-      await waitFor(() => {
-        expect(
-          document.querySelector('style[data-test-font]'),
-        ).not.toBeInTheDocument();
-      });
+      expect(
+        document.querySelector('link[data-test-font]'),
+      ).not.toBeInTheDocument();
     });
 
-    it('handles cleanup when style element has no parent', async () => {
+    it('handles cleanup when link element has no parent', () => {
       const icons = new Set(['icon1']);
 
       const { unmount } = renderHook(() =>
@@ -485,18 +479,16 @@ describe('useDynamicFontSubsetting', () => {
         }),
       );
 
-      await waitFor(() => {
-        const styleElement = document.querySelector('style[data-test-font]');
-        expect(styleElement).toBeInTheDocument();
-        // Manually remove the element to simulate edge case
-        styleElement?.remove();
-      });
+      const linkElement = document.querySelector('link[data-test-font]');
+      expect(linkElement).toBeInTheDocument();
+      // Manually remove the element to simulate edge case
+      linkElement?.remove();
 
       // Should not throw error on unmount
       expect(() => unmount()).not.toThrow();
     });
 
-    it('removes old stylesheet when URL changes', async () => {
+    it('removes old link when URL changes', async () => {
       const icons1 = new Set(['icon1']);
       const icons2 = new Set(['icon2']);
 
@@ -511,27 +503,28 @@ describe('useDynamicFontSubsetting', () => {
         { initialProps: { icons: icons1 } },
       );
 
-      await waitFor(() => {
-        const styleElements = document.querySelectorAll(
-          'style[data-test-font]',
-        );
-        expect(styleElements.length).toBe(1);
-        expect(styleElements[0].getAttribute('data-url')).toBe(
-          'https://fonts.test/icon1',
-        );
-      });
+      expect(document.querySelectorAll('link[data-test-font]').length).toBe(1);
+      expect(
+        document
+          .querySelector('link[data-test-font]')
+          ?.getAttribute('data-url'),
+      ).toBe('https://fonts.test/icon1');
 
       act(() => {
         rerender({ icons: icons2 });
       });
 
+      // Simulate load event on new link to trigger old link removal
+      const linkElements = document.querySelectorAll('link[data-test-font]');
+      const newLink = Array.from(linkElements).find(
+        (el) => el.getAttribute('data-url') === 'https://fonts.test/icon2',
+      );
+      newLink?.dispatchEvent(new Event('load'));
+
       await waitFor(() => {
-        const styleElements = document.querySelectorAll(
-          'style[data-test-font]',
-        );
-        // Should only have one style element (old one removed)
-        expect(styleElements.length).toBe(1);
-        expect(styleElements[0].getAttribute('data-url')).toBe(
+        const remaining = document.querySelectorAll('link[data-test-font]');
+        expect(remaining.length).toBe(1);
+        expect(remaining[0].getAttribute('data-url')).toBe(
           'https://fonts.test/icon2',
         );
       });
@@ -539,7 +532,7 @@ describe('useDynamicFontSubsetting', () => {
   });
 
   describe('CSP nonce support', () => {
-    it('adds nonce attribute to style element when csp-nonce meta tag exists', async () => {
+    it('adds nonce attribute to link element when csp-nonce meta tag exists', () => {
       const meta = document.createElement('meta');
       meta.setAttribute('name', 'csp-nonce');
       meta.setAttribute('content', 'test-nonce-123');
@@ -556,14 +549,14 @@ describe('useDynamicFontSubsetting', () => {
         }),
       );
 
-      await waitFor(() => {
-        const styleElement = document.querySelector('style[data-test-font]');
-        expect(styleElement).toBeInTheDocument();
-        expect(styleElement?.getAttribute('nonce')).toBe('test-nonce-123');
-      });
+      const linkElement = document.querySelector<HTMLLinkElement>(
+        'link[data-test-font]',
+      );
+      expect(linkElement).toBeInTheDocument();
+      expect(linkElement?.nonce).toBe('test-nonce-123');
     });
 
-    it('does not add nonce attribute when csp-nonce meta tag is absent', async () => {
+    it('does not add nonce attribute when csp-nonce meta tag is absent', () => {
       const icons = new Set(['icon1']);
 
       renderHook(() =>
@@ -575,11 +568,11 @@ describe('useDynamicFontSubsetting', () => {
         }),
       );
 
-      await waitFor(() => {
-        const styleElement = document.querySelector('style[data-test-font]');
-        expect(styleElement).toBeInTheDocument();
-        expect(styleElement?.getAttribute('nonce')).toBeNull();
-      });
+      const linkElement = document.querySelector<HTMLLinkElement>(
+        'link[data-test-font]',
+      );
+      expect(linkElement).toBeInTheDocument();
+      expect(linkElement?.nonce).toBeFalsy();
     });
   });
 });

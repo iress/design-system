@@ -3,8 +3,8 @@ import { type FC } from 'react';
 import { LongLoading } from './LongLoading';
 import { LoadingLongWithError } from '../mocks/LoadingLongWithError';
 import LoadingLongWithErrorSource from '../mocks/LoadingLongWithError.tsx?raw';
-import { withCustomSource } from '@iress-oss/ids-storybook-config';
 import {
+  withCustomSource,
   customTypeArgType,
   reactNodeArgType,
   stylingProps,

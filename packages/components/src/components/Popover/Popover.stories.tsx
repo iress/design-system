@@ -19,8 +19,6 @@ import {
   disableArgTypes,
   withCustomSource,
   withTransformedRawSource,
-} from '@iress-oss/ids-storybook-config';
-import {
   reactElementArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';

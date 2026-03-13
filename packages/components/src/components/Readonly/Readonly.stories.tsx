@@ -3,8 +3,11 @@ import { IressReadonly, type IressReadonlyProps } from './Readonly';
 import { IressInline } from '../Inline';
 import { IressIcon } from '../Icon';
 import { IressText } from '../Text';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
+import {
+  disableArgTypes,
+  reactNodeArgType,
+  stylingProps,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressReadonlyProps>;
 

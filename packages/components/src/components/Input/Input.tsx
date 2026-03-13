@@ -153,7 +153,7 @@ const Input = <
     alignRight,
     actions,
     variant,
-    autoGrow: _autoGrowProp,
+    autoGrow: _autoGrowProp, // eslint-disable-line sonarjs/no-unused-vars, @typescript-eslint/no-unused-vars -- destructured to exclude from inputProps spread
     ...inputProps
   } = props as IressInputProps<T, undefined> & { autoGrow?: number | boolean };
 

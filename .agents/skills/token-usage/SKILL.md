@@ -19,6 +19,16 @@ Guide AI agents on correctly using IDS design tokens in React components and CSS
 
 ## Quick Start
 
+### Installation
+
+> **Important:** IDS v6 is currently in alpha. Install with the `@alpha` tag:
+>
+> ```bash
+> npm install @iress-oss/ids-tokens@alpha
+> # If also using IDS React components:
+> npm install @iress-oss/ids-components@alpha
+> ```
+
 ### Prerequisites (React only)
 
 If you are using IDS React components, wrap your application in `IressProvider` and import the CSS variables stylesheet:
@@ -33,6 +43,8 @@ function App() {
 ```
 
 > **Non-React usage:** The tokens package works without React. Import the CSS stylesheet or use `cssVars` / `designTokens` directly in any JavaScript or CSS environment.
+
+> **CSP note:** `IressProvider` loads fonts from `fonts.googleapis.com` and `fonts.gstatic.com` at runtime. If your app enforces a Content Security Policy, allowlist these origins in `style-src` and `font-src`. If you use `IressShadow` and your CSP blocks inline styles, add `<meta name="csp-nonce" content="...">` for nonce support. See the [CSP Guide](@iress-oss/ids-components/.ai/guides/get-started-content-security-policy.md) for details.
 
 ### CSS Variables Stylesheet (Recommended for CSS)
 
@@ -249,6 +261,8 @@ Base unit: 4px (0.25rem). Token value = multiple of base unit.
 
 **This is the recommended approach** for any custom styling beyond what IDS component props provide.
 
+> **Using Panda CSS?** If your project uses [Panda CSS](https://panda-css.com), use the `@iress-oss/ids-theme-preset` package instead of manually referencing CSS variables. It provides a Panda CSS preset with the full IDS token system, giving you type-safe token usage via Panda's `css()` function, utilities, and recipes. See [references/theme-preset.md](references/theme-preset.md) for setup.
+
 ### In CSS / SCSS
 
 ```css
@@ -390,6 +404,7 @@ Layout components accept responsive objects for spacing props:
 | Colours on IDS components        | Props: `bg`, `color`                            |
 | Custom CSS / SCSS                | CSS variables (`var(--iress-*)`)                |
 | Inline styles / CSS-in-JS        | `cssVars` object (`cssVars.colour.neutral[10]`) |
+| Custom CSS with Panda CSS        | `@iress-oss/ids-theme-preset` preset            |
 | Theming / overrides              | CSS variables on custom properties              |
 | Internal theme editors           | `mapTokensToCssVariables()` helper              |
 

@@ -2,8 +2,11 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTableBody } from '..';
 import { TableGroupedRows } from '../mocks/TableGroupedRows';
 import GroupedRowsSource from '../mocks/TableGroupedRows.tsx?raw';
-import { withCustomSource } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
+import {
+  withCustomSource,
+  reactNodeArgType,
+  stylingProps,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressTableBody>;
 

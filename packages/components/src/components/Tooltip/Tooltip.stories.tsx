@@ -2,12 +2,13 @@ import { type StoryObj, type Meta } from '@storybook/react-vite';
 import {
   disableArgTypes,
   mergeStorybookConfig,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import { IressTooltip } from '.';
 import { IressButton } from '../Button';
 import { IressStack } from '../Stack';
 import { IressInline } from '../Inline';
-import { reactNodeArgType, stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressTooltip>;
 

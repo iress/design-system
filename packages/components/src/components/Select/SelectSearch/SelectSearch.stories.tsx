@@ -15,8 +15,6 @@ import {
   disableArgTypes,
   mergeStorybookConfig,
   removeArgTypes,
-} from '@iress-oss/ids-storybook-config';
-import {
   reactElementArgType,
   reactNodeArgType,
   stylingProps,

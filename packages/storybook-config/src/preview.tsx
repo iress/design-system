@@ -41,14 +41,27 @@ export const getPreview = ({
 
   return {
     decorators: [
-      (Story) => (
-        <Provider>
-          <Suspense>
-            {!docsProps?.noStyles && <IDSStyles />}
-            <Story />
-          </Suspense>
-        </Provider>
-      ),
+      (Story, context) => {
+        const disableProvider = !!context.parameters?.disableProvider;
+
+        if (disableProvider) {
+          return (
+            <Suspense>
+              {!docsProps?.noStyles && <IDSStyles />}
+              <Story />
+            </Suspense>
+          );
+        }
+
+        return (
+          <Provider noSubsetting>
+            <Suspense>
+              {!docsProps?.noStyles && <IDSStyles />}
+              <Story />
+            </Suspense>
+          </Provider>
+        );
+      },
     ],
     parameters: {
       controls: {

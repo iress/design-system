@@ -5,15 +5,45 @@ import { FontLoader } from './FontLoader';
 describe('FontLoader', () => {
   const testUrl = 'https://example.com/font.css';
 
-  it('renders style tag in document head', () => {
-    render(<FontLoader keyPrefix="test" url={testUrl} />);
-
-    const style = document.head.querySelector(`style[data-url="${testUrl}"]`);
-    expect(style).toBeTruthy();
-    expect(style?.textContent).toBe(`@import url("${testUrl}") layer(reset);`);
+  beforeEach(() => {
+    document.querySelectorAll("meta[name='csp-nonce']").forEach((el) => {
+      el.remove();
+    });
   });
 
-  it('renders style tag in shadow container when provided', () => {
+  it('renders link tag in document head', () => {
+    render(<FontLoader keyPrefix="test" url={testUrl} />);
+
+    const link = document.head.querySelector(`link[data-url="${testUrl}"]`);
+    expect(link).toBeTruthy();
+    expect(link?.getAttribute('href')).toBe(testUrl);
+    expect(link?.getAttribute('rel')).toBe('stylesheet');
+  });
+
+  it('applies nonce to link tags when csp-nonce meta is present', () => {
+    const meta = document.createElement('meta');
+    meta.setAttribute('name', 'csp-nonce');
+    meta.setAttribute('content', 'test-nonce-123');
+    document.head.appendChild(meta);
+
+    render(<FontLoader keyPrefix="test" url={testUrl} />);
+
+    const link = document.head.querySelector<HTMLLinkElement>(
+      `link[data-url="${testUrl}"]`,
+    );
+    expect(link?.nonce).toBe('test-nonce-123');
+  });
+
+  it('renders link tags without nonce when no csp-nonce meta is present', () => {
+    render(<FontLoader keyPrefix="test" url={testUrl} />);
+
+    const link = document.head.querySelector<HTMLLinkElement>(
+      `link[data-url="${testUrl}"]`,
+    );
+    expect(link?.nonce).toBeFalsy();
+  });
+
+  it('renders link tag in shadow container when provided', () => {
     const shadowRoot = document
       .createElement('div')
       .attachShadow({ mode: 'open' });
@@ -22,16 +52,12 @@ describe('FontLoader', () => {
       <FontLoader keyPrefix="test" url={testUrl} container={shadowRoot} />,
     );
 
-    const shadowStyle = shadowRoot.querySelector(
-      `style[data-url="${testUrl}"]`,
-    );
-    expect(shadowStyle).toBeTruthy();
-    expect(shadowStyle?.textContent).toBe(
-      `@import url("${testUrl}") layer(reset);`,
-    );
+    const shadowLink = shadowRoot.querySelector(`link[data-url="${testUrl}"]`);
+    expect(shadowLink).toBeTruthy();
+    expect(shadowLink?.getAttribute('href')).toBe(testUrl);
   });
 
-  it('renders style tag in shadow container via ref', () => {
+  it('renders link tag in shadow container via ref', () => {
     const shadowRoot = document
       .createElement('div')
       .attachShadow({ mode: 'open' });
@@ -40,10 +66,8 @@ describe('FontLoader', () => {
 
     render(<FontLoader keyPrefix="test" url={testUrl} container={ref} />);
 
-    const shadowStyle = shadowRoot.querySelector(
-      `style[data-url="${testUrl}"]`,
-    );
-    expect(shadowStyle).toBeTruthy();
+    const shadowLink = shadowRoot.querySelector(`link[data-url="${testUrl}"]`);
+    expect(shadowLink).toBeTruthy();
   });
 
   it('skips head injection when onlyShadow is true', () => {
@@ -60,15 +84,11 @@ describe('FontLoader', () => {
       />,
     );
 
-    const headStyle = document.head.querySelector(
-      `style[data-url="${testUrl}"]`,
-    );
-    expect(headStyle).toBeNull();
+    const headLink = document.head.querySelector(`link[data-url="${testUrl}"]`);
+    expect(headLink).toBeNull();
 
-    const shadowStyle = shadowRoot.querySelector(
-      `style[data-url="${testUrl}"]`,
-    );
-    expect(shadowStyle).toBeTruthy();
+    const shadowLink = shadowRoot.querySelector(`link[data-url="${testUrl}"]`);
+    expect(shadowLink).toBeTruthy();
   });
 
   it('handles null ref', () => {

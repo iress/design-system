@@ -2,6 +2,8 @@
 
 Panda CSS preset for the Iress Design System (IDS). Defines the complete IDS design token system — tokens, utilities, recipes, conditions, global CSS, and static CSS.
 
+> **Note:** If you are already using `@iress-oss/ids-components`, you probably don't need this package directly. IDS components ship with all the styling you need out of the box. This preset is intended for writing custom CSS that can't be achieved with IDS component styling props, while still using the Panda CSS methodology and the type-safety of the IDS token system — think of it as a tool for building IDS extensions.
+
 ## Installation
 
 ```bash
@@ -23,7 +25,9 @@ export default defineConfig({
 
 ### Using hooks
 
-The package also exports build hooks for spacing alias resolution and CSS cleanup:
+> **Note:** You probably don't need the hooks if you are already using IDS components. These are useful when you are extending IDS with custom Panda CSS styles and need spacing alias resolution or CSS cleanup during the build.
+
+The package exports build hooks for spacing alias resolution and CSS cleanup:
 
 ```ts
 import { defineConfig } from '@pandacss/dev';

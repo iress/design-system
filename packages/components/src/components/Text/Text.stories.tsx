@@ -3,12 +3,12 @@ import { IressText, type IressTextProps, text, type TextElements } from '.';
 import { IressStack } from '../Stack';
 import { IressIcon } from '../Icon';
 import { TEXT_STYLES } from '@theme-preset/tokens/textStyles';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
-import { COLOR_TOKENS } from '@theme-preset/tokens/colors';
 import {
+  disableArgTypes,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import { COLOR_TOKENS } from '@theme-preset/tokens/colors';
 
 type Story = StoryObj<typeof IressText>;
 type HeadingStory = StoryObj<

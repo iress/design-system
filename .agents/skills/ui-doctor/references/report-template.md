@@ -90,8 +90,8 @@ Use this template when generating compliance reports.
 
 ### Provider & Setup (X/10)
 
-- [ ] IressProvider wraps application root
-- [ ] `@iress-oss/ids-components/dist/style.css` imported
+- [ ] IressProvider wraps application root (or IressShadow, which is a superset)
+- [ ] `@iress-oss/ids-components/dist/style.css` imported (not needed if using IressShadow)
 - [ ] `@iress-oss/ids-tokens/build/css-vars.css` imported (only if using tokens directly)
 - [ ] `react-hook-form` installed (if using IressForm)
 - [ ] No conflicting CSS resets

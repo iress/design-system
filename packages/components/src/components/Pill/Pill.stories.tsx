@@ -1,6 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 import {
+  disableArgTypes,
   reactElementArgType,
   reactNodeArgType,
   stylingProps,

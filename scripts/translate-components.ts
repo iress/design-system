@@ -1443,6 +1443,12 @@ const GUIDE_SOURCES: [string, string, string, string][] = [
   ['StylingProps', '080-Typography.mdx', 'styling-props', 'typography'],
   // Get Started
   ['GetStarted', '010-Develop.mdx', 'get-started', 'develop'],
+  [
+    'GetStarted',
+    '030-ContentSecurityPolicy.mdx',
+    'get-started',
+    'content-security-policy',
+  ],
   // Resources — Migration
   [
     'Resources/030-MigrationGuides',

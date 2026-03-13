@@ -12,7 +12,6 @@ import {
   FA_TO_MATERIAL_MAP,
   type FontAwesomeIconWithMaterialEquivalent,
 } from './helpers/iconMapping';
-import { MATERIAL_SYMBOLS } from './Icon.constants';
 
 export type IressIconProps<P extends IconType = 'material'> =
   IressStyledProps<'span'> & {
@@ -104,9 +103,10 @@ export const IressIcon = <P extends IconType = 'material'>({
 
   // Register Material Symbol icons with provider context if available
   useEffect(() => {
-    if (effectiveProvider === 'material' && iconContext && materialIconName) {
-      iconContext.registerIcon(materialIconName);
+    if (!iconContext || effectiveProvider !== 'material' || !materialIconName) {
+      return;
     }
+    iconContext.registerIcon(materialIconName);
   }, [effectiveProvider, iconContext, materialIconName]);
 
   // Render based on provider
@@ -129,12 +129,7 @@ export const IressIcon = <P extends IconType = 'material'>({
     return (
       <styled.span
         role="img"
-        className={cx(
-          css(styles, styleProps),
-          GlobalCSSClass.Icon,
-          MATERIAL_SYMBOLS.className,
-          className,
-        )}
+        className={cx(css(styles, styleProps), GlobalCSSClass.Icon, className)}
         aria-hidden={!screenreaderText && 'true'}
         aria-label={screenreaderText}
         {...otherProps}
