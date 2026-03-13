@@ -141,7 +141,10 @@ Check form accessibility, keyboard & focus, screen reader support, and colour/co
 - Skip links present (`IressSkipLink`)
 - Focus trapping in modals/slideouts (automatic with IDS)
 - ARIA landmarks (`<nav>`, `<main>`, `<aside>`)
-- Dynamic content announced to screen readers (`IressAlert`, `IressToaster`)
+- Dynamic content announced to screen readers — choose the right tier:
+  - `IressAlert` — persistent, inline status messages (no `aria-live`; already in the reading flow)
+  - `IressToaster` — transient notifications demanding attention (`aria-live="assertive"`); avoid overuse
+  - Micro animations/interactions with colocated `aria-live="polite"` — for subtle, user-initiated updates (save indicators, count badges, status changes) that don't warrant a toast; place the live region near the component, not globally
 - Colour contrast meets WCAG AA; no reliance on colour alone
 
 #### d. Button Hierarchy

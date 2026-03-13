@@ -75,8 +75,10 @@ Use this checklist when performing a UI doctor audit.
 - [ ] `IressContextualMenu` has a meaningful `ariaLabel` describing the menu purpose
 - [ ] Tables use `IressTable` with proper header cells (`IressTable.HeaderCell`) for screen readers
 - [ ] Dynamic content updates (loading states, alerts, toasts) are announced to screen readers
-- [ ] `IressAlert` is used for status messages (automatically uses appropriate ARIA roles)
-- [ ] `IressToaster` is used for transient notifications (uses `aria-live` region)
+- [ ] `IressAlert` is used for persistent status messages (automatically uses appropriate ARIA roles)
+- [ ] `IressToaster` is used for transient notifications that demand attention (uses `aria-live="assertive"` region) — avoid overuse; not every update warrants a toast
+- [ ] Subtle, user-initiated UI updates (save indicators, count badges, status dot changes, inline confirmations) use micro animations/interactions with a colocated `aria-live="polite"` region near the component — these are less intrusive than toasts and keep context local
+- [ ] `aria-live="polite"` regions are only added for user-initiated updates; system-driven background changes that the user did not trigger should not announce unless they require attention (use `IressToaster` or `IressAlert` for those)
 - [ ] No reliance on colour alone to convey information — use text, icons, or patterns alongside colour
 
 ## Layout
@@ -120,6 +122,7 @@ The system should always keep users informed about what is going on, through app
 
 - [ ] Loading states use `IressLoading` with the correct pattern (`page`, `component`, `start-up`, `validate`, `long`) so users always see feedback proportional to wait time; `IressSkeleton` is also valid for custom content placeholder patterns where skeleton screens mirror the page layout
 - [ ] Form submission provides visible feedback — use `IressLoading pattern="validate"` during submission, `IressAlert` or `IressToaster` for success/failure
+- [ ] Subtle state confirmations (auto-save, background sync, inline status changes) use micro animations or transitions rather than toasts — pair with `aria-live="polite"` colocated near the component when the update was user-initiated
 - [ ] Progress indicators are used for multi-step processes — `IressProgress` for deterministic operations, `IressSpinner` for indeterminate
 - [ ] Active states are visible — selected tabs (`IressTabSet`), active nav items (`IressSideNav`), current breadcrumb (`IressBreadcrumbs`) all show where the user is
 - [ ] Toggled/selected states are visually clear — `IressToggle`, `IressCheckbox`, `IressRadio` provide built-in active states
