@@ -257,7 +257,7 @@ describe('useResponsiveProps', () => {
       // Should remove change listeners from matchMedia when it was added
       const removeCalls = mqlInstances.some((mql) =>
         mql.removeEventListener.mock.calls.some(
-          ([event]: [string]) => event === 'change',
+          (args: unknown[]) => args[0] === 'change',
         ),
       );
       expect(removeCalls).toBe(true);
