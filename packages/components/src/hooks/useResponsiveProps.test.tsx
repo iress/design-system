@@ -222,7 +222,27 @@ describe('useResponsiveProps', () => {
     });
 
     it('removes event listener on unmount when enabled', () => {
-      const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
+      const mqlInstances: { removeEventListener: ReturnType<typeof vi.fn> }[] =
+        [];
+      const originalMatchMedia = window.matchMedia;
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: vi.fn().mockImplementation((query: string) => {
+          const mql = {
+            matches:
+              query === BREAKPOINT_DETAILS[MATCHING_BREAKPOINT].mediaQuery,
+            media: query,
+            onchange: null,
+            addListener: vi.fn(),
+            removeListener: vi.fn(),
+            addEventListener: vi.fn(),
+            removeEventListener: vi.fn(),
+            dispatchEvent: vi.fn(),
+          };
+          mqlInstances.push(mql);
+          return mql;
+        }),
+      });
 
       const hook = renderHook(() =>
         useResponsiveProps(
@@ -234,13 +254,18 @@ describe('useResponsiveProps', () => {
       );
       hook.unmount();
 
-      // Should remove listener when it was added
-      expect(removeEventListenerSpy).toHaveBeenCalledWith(
-        'resize',
-        expect.any(Function),
+      // Should remove change listeners from matchMedia when it was added
+      const removeCalls = mqlInstances.some((mql) =>
+        mql.removeEventListener.mock.calls.some(
+          ([event]: [string]) => event === 'change',
+        ),
       );
+      expect(removeCalls).toBe(true);
 
-      removeEventListenerSpy.mockRestore();
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: originalMatchMedia,
+      });
     });
   });
 });

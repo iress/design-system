@@ -18,9 +18,10 @@ interface UseBreakpointOptions {
 }
 
 const getSnapshot = (): Breakpoints =>
-  BREAKPOINTS.find((breakpoint) =>
-    window.matchMedia(BREAKPOINT_DETAILS[breakpoint].mediaQuery)?.matches,
-  ) ?? BREAKPOINTS[0];
+  BREAKPOINTS.find((breakpoint) => {
+    return window.matchMedia(BREAKPOINT_DETAILS[breakpoint].mediaQuery)
+      ?.matches;
+  }) ?? BREAKPOINTS[0];
 
 const getServerSnapshot = (): Breakpoints => BREAKPOINTS[0];
 
@@ -43,8 +44,12 @@ export const useBreakpoint = (
 ): BreakpointResult => {
   const { disabled = false } = options;
 
+  const noop = () => {
+    // no-op: when disabled, no subscription is needed
+  };
+
   const breakpoint = useSyncExternalStore(
-    disabled ? () => () => {} : subscribe,
+    disabled ? () => noop : subscribe,
     disabled ? () => getSnapshot() : getSnapshot,
     getServerSnapshot,
   );

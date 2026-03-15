@@ -3,7 +3,7 @@ import { useBreakpoint } from './useBreakpoint';
 import { Breakpoints } from '@/types';
 import { BREAKPOINT_DETAILS } from '@/constants';
 
-let changeListeners: Array<() => void> = [];
+let changeListeners: (() => void)[] = [];
 let currentBreakpoint: Breakpoints = 'xs';
 
 const createMockMatchMedia = () => {
