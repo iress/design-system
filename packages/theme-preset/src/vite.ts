@@ -12,14 +12,18 @@ import type { Plugin } from 'vite';
  */
 export function preservePandaLayerDeclaration(stylesPath: string): Plugin {
   let layerDeclaration = '';
+  let root = process.cwd();
 
   return {
     name: 'ids-preserve-panda-layer',
     apply: 'build',
+    configResolved(config) {
+      root = config.root;
+    },
     buildStart() {
       const resolved = path.isAbsolute(stylesPath)
         ? stylesPath
-        : path.resolve(process.cwd(), stylesPath);
+        : path.resolve(root, stylesPath);
       const content = fs.readFileSync(resolved, 'utf-8');
       const match = /^@layer\s{1,10}[^;\n]{1,200};/m.exec(content);
       layerDeclaration = match ? match[0] : '';
