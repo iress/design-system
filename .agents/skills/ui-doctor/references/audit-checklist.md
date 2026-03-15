@@ -87,7 +87,10 @@ Use this checklist when performing a UI doctor audit.
 - [ ] Horizontal rows use `IressInline`
 - [ ] Grid layouts use `IressRow` + `IressCol`
 - [ ] Spacing props use IDS token values (0–10)
-- [ ] Responsive visibility uses `IressHide` or `hideFrom`/`hideBelow`
+- [ ] Responsive visibility uses `hideFrom`/`hideBelow` props or `useBreakpoint` hook
+- [ ] Multi-column grid layouts use responsive `span` values (e.g. `span={{ xs: 12, md: 6 }}`) so columns stack on mobile
+- [ ] Mobile layout prioritises the primary task — secondary content (filters, sidebars, metadata) is relocated to `IressSlideout`, `IressModal`, or collapsible sections rather than simply stacked
+- [ ] All functionality remains accessible on mobile — nothing is removed, only reorganised into appropriate containers
 
 ## Cognitive Load & Information Architecture
 
@@ -186,7 +189,8 @@ Accelerators — unseen by the novice user — may speed up interaction for the 
 - [ ] Skip links for keyboard users — `IressSkipLink` lets experienced keyboard users bypass repetitive navigation
 - [ ] Searchable selects — `IressSelect` and `IressDropdownMenu` with search enabled let power users type to filter instead of scrolling
 - [ ] Autocomplete for repetitive input — `IressAutocomplete` reduces typing for known-value fields
-- [ ] Responsive layouts — `IressHide`, `hideFrom`/`hideBelow` adapt the interface for different device contexts
+- [ ] Responsive layouts — `hideFrom`/`hideBelow` props or `useBreakpoint` hook adapt the interface for different device contexts
+- [ ] Mobile experience focuses on the primary task — secondary content is accessible via `IressSlideout` or collapsible sections, not competing for screen space
 
 ### 8. Aesthetic and Minimalist Design
 

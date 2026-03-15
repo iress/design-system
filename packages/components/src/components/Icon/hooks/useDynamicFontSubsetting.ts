@@ -161,7 +161,6 @@ export const useDynamicFontSubsetting = ({
     checkFontReady,
     handleFontError,
     noSubsetting,
-
   ]);
 
   return {

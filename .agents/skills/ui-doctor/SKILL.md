@@ -158,7 +158,7 @@ Check form accessibility, keyboard & focus, screen reader support, and colour/co
 - Vertical stacks → `IressStack`; horizontal rows → `IressInline`; grids → `IressRow`/`IressCol`
 - Spacing uses token values (0–10) on `gap` prop
 - `IressCSSProps` (`m`, `mx`, `p`, `px`) instead of inline styles
-- Responsive: `IressHide`, `hideFrom`/`hideBelow`
+- Responsive: `hideFrom`/`hideBelow` props or `useBreakpoint` hook; grid layouts use responsive `span` (e.g. `span={{ xs: 12, md: 6 }}`); mobile view focuses on primary task with secondary content in `IressSlideout` or collapsible sections
 
 ### 2. Validate IDS Component Usage
 
@@ -354,7 +354,7 @@ The [full audit checklist](references/audit-checklist.md) covers these sections:
 - **Use IDS layout components** — `IressStack`, `IressInline`, `IressRow`/`IressCol` instead of custom CSS flex/grid
 - **Use spacing tokens for gaps** — Values 0–10 on `gap` prop
 - **Use IressCSSProps for spacing** — `m`, `mx`, `my`, `p`, `px`, `py` props instead of inline styles
-- **Responsive design** — Use `IressHide`, `hideFrom`/`hideBelow` for responsive visibility
+- **Responsive design** — Use `hideFrom`/`hideBelow` props or the `useBreakpoint` hook for responsive visibility. Multi-column layouts should use responsive `span` on `IressCol`. On mobile, secondary content (filters, sidebars, metadata) should be relocated to `IressSlideout` or collapsible sections — the mobile view should focus on the primary task while preserving all functionality
 
 #### f. Semantic Component Usage
 

@@ -1,7 +1,7 @@
 import { BREAKPOINT_DETAILS, BREAKPOINTS } from '@/constants';
 import { type BreakpointDetail } from '@theme-preset/constants';
 import { type Breakpoints } from '@/types';
-import { useCallback, useLayoutEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 
 interface BreakpointResult {
   breakpoint: Breakpoints;
@@ -17,11 +17,23 @@ interface UseBreakpointOptions {
   disabled?: boolean;
 }
 
-const getCurrentBreakpoint = () =>
-  BREAKPOINTS.find((breakpoint) => {
-    return window.matchMedia(BREAKPOINT_DETAILS[breakpoint].mediaQuery)
-      ?.matches;
-  }) ?? BREAKPOINTS[0];
+const getSnapshot = (): Breakpoints =>
+  BREAKPOINTS.find((breakpoint) =>
+    window.matchMedia(BREAKPOINT_DETAILS[breakpoint].mediaQuery)?.matches,
+  ) ?? BREAKPOINTS[0];
+
+const getServerSnapshot = (): Breakpoints => BREAKPOINTS[0];
+
+const subscribe = (callback: () => void): (() => void) => {
+  const mediaQueryLists = BREAKPOINTS.map((bp) =>
+    window.matchMedia(BREAKPOINT_DETAILS[bp].mediaQuery),
+  );
+  mediaQueryLists.forEach((mql) => mql.addEventListener('change', callback));
+  return () =>
+    mediaQueryLists.forEach((mql) =>
+      mql.removeEventListener('change', callback),
+    );
+};
 
 /**
  * Retrieve the current breakpoint and its detail based on the window size
@@ -30,20 +42,12 @@ export const useBreakpoint = (
   options: UseBreakpointOptions = {},
 ): BreakpointResult => {
   const { disabled = false } = options;
-  const [breakpoint, setBreakpoint] = useState(getCurrentBreakpoint());
 
-  const updateBreakpoint = useCallback(() => {
-    setBreakpoint(getCurrentBreakpoint());
-  }, []);
-
-  useLayoutEffect(() => {
-    if (disabled) return;
-
-    const callback = updateBreakpoint;
-    window.addEventListener('resize', callback);
-    callback();
-    return () => window.removeEventListener('resize', callback);
-  }, [disabled, updateBreakpoint]);
+  const breakpoint = useSyncExternalStore(
+    disabled ? () => () => {} : subscribe,
+    disabled ? () => getSnapshot() : getSnapshot,
+    getServerSnapshot,
+  );
 
   return {
     breakpoint,
