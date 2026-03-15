@@ -4,11 +4,7 @@ import { resolve } from 'path';
 
 export default defineConfig({
   test: {
-    include: [
-      'src/**/*.test.ts',
-      'src/**/*.test.tsx',
-      'theme-preset/**/*.test.ts',
-    ],
+    include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
     globals: true,
     environment: 'jsdom',
     setupFiles: './vitest.setup.ts',
@@ -50,7 +46,7 @@ export default defineConfig({
       { find: '@helpers', replacement: resolve(__dirname, 'src/helpers') },
       {
         find: '@theme-preset',
-        replacement: resolve(__dirname, 'theme-preset'),
+        replacement: resolve(__dirname, '../theme-preset/src'),
       },
     ],
   },

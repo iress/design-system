@@ -101,14 +101,17 @@ If your button contains a lot of text, the text may wrap on to more than one lin
 
 <ComponentExample of={ComponentStories.WrappingText} />
 
-### Slot props
+### Prepend & Append
 
-Use the slots to correctly position icons or badges inside buttons.
+Use the `prepend` and `append` props to correctly position icons or badges inside buttons.
 
-- **Prepend** - Places the element before the text
-- **Append** - Places the element after the text
+- **`prepend`** — Places the element before the button text
+- **`append`** — Places the element after the button text
+- **`icon`** — Convenience prop for setting the icon name directly (useful for icon-only buttons)
 
-The iconOnly slot from previous versions of IDS has been deprecated. Please use the default slot instead.
+The `iconOnly` slot from previous versions of IDS (v4 and below) has been removed. Use the `icon` prop instead.
+
+> **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
 <ComponentExample of={ComponentStories.Slots} />
 

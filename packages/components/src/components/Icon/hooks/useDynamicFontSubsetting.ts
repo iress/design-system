@@ -134,9 +134,13 @@ export const useDynamicFontSubsetting = ({
 
     if (existing?.getAttribute('data-url') === url) {
       // Reuse existing stylesheet link: only check font readiness if there are new unloaded icons
-      const hasNewIcons = iconsArray.some((icon) => !loadedIcons.has(icon));
-      if (hasNewIcons) {
+      if (noSubsetting && !fullyLoaded) {
         checkFontReady(null, iconsArray);
+      } else {
+        const hasNewIcons = iconsArray.some((icon) => !loadedIcons.has(icon));
+        if (hasNewIcons) {
+          checkFontReady(null, iconsArray);
+        }
       }
       return;
     }
@@ -161,6 +165,8 @@ export const useDynamicFontSubsetting = ({
     checkFontReady,
     handleFontError,
     noSubsetting,
+    fullyLoaded,
+    loadedIcons,
   ]);
 
   return {

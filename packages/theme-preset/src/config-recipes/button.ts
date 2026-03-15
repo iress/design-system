@@ -1,4 +1,4 @@
-import { type SystemStyleObject } from '@/styled-system/types';
+import { type SystemStyleObject } from '@pandacss/dev';
 import { defineSlotRecipe } from '@pandacss/dev';
 
 const slots = ['root', 'prepend', 'append', 'spinner'] as const;

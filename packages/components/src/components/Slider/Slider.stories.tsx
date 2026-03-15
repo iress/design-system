@@ -3,8 +3,11 @@ import { IressSlider } from '.';
 import { IressStack } from '../Stack';
 import { IressPanel } from '../Panel';
 import { IressText } from '../Text';
-import { CurrentBreakpoint } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import {
+  CurrentBreakpoint,
+  reactNodeArgType,
+  stylingProps,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSlider>;
 

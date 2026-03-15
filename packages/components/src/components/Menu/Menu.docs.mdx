@@ -45,7 +45,7 @@ import {
 
 ### Complex
 
-`IressMenuItem`, `IressMenuHeading` and `IressMenuText` support `prepend`, `divider` and `append` slots, to allow you to create complex menu items.
+`IressMenuItem`, `IressMenuHeading` and `IressMenuText` support `prepend`, `divider` and `append` props, to allow you to create complex menu items.
 
 Note: Instead of using the `divider` prop on `IressMenuItem`, you can use `IressMenuDivider` to separate items. This gives you more control over where the divider sits.
 
@@ -97,9 +97,11 @@ By default, menu item text will wrap on to the next line when it exceeds the men
 
 <ComponentExample of={ComponentStories.NoWrap} />
 
-### Slot props
+### Prepend & Append
 
 `IressMenuItem`, `IressMenuHeading` and `IressMenuText` provide `prepend` and `append` props to position content either before or after its content.
+
+> **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
 <ComponentExample of={ComponentStories.SlotProps} />
 

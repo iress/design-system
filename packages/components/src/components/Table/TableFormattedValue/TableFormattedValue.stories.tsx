@@ -1,7 +1,10 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTable, IressTableFormattedValue } from '..';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import {
+  disableArgTypes,
+  reactNodeArgType,
+  stylingProps,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressTableFormattedValue<object, string>>;
 

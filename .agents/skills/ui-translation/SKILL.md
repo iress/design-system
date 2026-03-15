@@ -42,117 +42,61 @@ function App() {
 
 ## Component Mapping
 
-### Actions
+Read [references/component-mapping.md](references/component-mapping.md) for the full description → IDS component mapping tables (actions, form inputs, layout, content, overlays, navigation, tables).
 
-| Description                      | IDS Component                          | Example                                                            |
-| -------------------------------- | -------------------------------------- | ------------------------------------------------------------------ |
-| Submit / primary action button   | `IressButton mode="primary"`           | `<IressButton mode="primary">Submit</IressButton>`                 |
-| Cancel / secondary action button | `IressButton mode="secondary"`         | `<IressButton mode="secondary">Cancel</IressButton>`               |
-| Less prominent action            | `IressButton mode="tertiary"`          | `<IressButton mode="tertiary">Details</IressButton>`               |
-| Icon-only action                 | `IressButton icon="edit" mode="muted"` | `<IressButton mode="muted" icon="edit">Edit</IressButton>`         |
-| Danger / delete action           | `IressButton status="danger"`          | `<IressButton mode="primary" status="danger">Delete</IressButton>` |
-| Link in text                     | `IressLink`                            | `<IressLink href="/about">About</IressLink>`                       |
-| Dropdown/context menu trigger    | `IressDropdownMenu`                    | See patterns docs                                                  |
+## Styling Props
 
-### Form Inputs
+Read [references/styling-props.md](references/styling-props.md) for the full `IressCSSProps` reference (spacing, colour, visibility, sizing, typography props and their accepted values).
 
-| Description              | IDS Component                       | Example                                                                                                                        |
-| ------------------------ | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Labelled text input      | `IressField` + `IressInput`         | See Form example below                                                                                                         |
-| Select dropdown          | `IressField` + `IressSelect`        | `<IressField label="Country"><IressSelect>...</IressSelect></IressField>`                                                      |
-| Currency input           | `IressField` + `IressInputCurrency` | `<IressField label="Amount"><IressInputCurrency /></IressField>`                                                               |
-| Checkbox                 | `IressCheckbox`                     | `<IressCheckbox label="I agree" />`                                                                                            |
-| Checkbox group           | `IressCheckboxGroup`                | `<IressCheckboxGroup label="Options"><IressCheckbox label="A" /><IressCheckbox label="B" /></IressCheckboxGroup>`              |
-| Radio buttons            | `IressRadioGroup` + `IressRadio`    | `<IressRadioGroup label="Choice"><IressRadio label="Yes" value="yes" /><IressRadio label="No" value="no" /></IressRadioGroup>` |
-| Toggle switch            | `IressToggle`                       | `<IressToggle label="Enable" />`                                                                                               |
-| Slider / range           | `IressSlider`                       | `<IressSlider min={0} max={100} />`                                                                                            |
-| Autocomplete / typeahead | `IressAutocomplete`                 | See component docs                                                                                                             |
-| Read-only display        | `IressReadonly`                     | `<IressReadonly label="Status" value="Active" />`                                                                              |
+## Responsive Layout
 
-### Layout
+**Always produce responsive output.** Even when the UI description only mentions a desktop layout, every translation should adapt to smaller screens. IDS uses a 12-column grid with 6 breakpoints (`xs`, `sm`, `md`, `lg`, `xl`, `xxl`).
 
-| Description                                  | IDS Component           | Example                                                                                   |
-| -------------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------- |
-| Vertical stack (items stacked top-to-bottom) | `IressStack`            | `<IressStack gap="4">...</IressStack>`                                                    |
-| Horizontal row (items side-by-side)          | `IressInline`           | `<IressInline gap="2">...</IressInline>`                                                  |
-| Grid columns                                 | `IressRow` + `IressCol` | `<IressRow><IressCol span={6}>...</IressCol><IressCol span={6}>...</IressCol></IressRow>` |
-| Container with max-width                     | `IressContainer`        | `<IressContainer>...</IressContainer>`                                                    |
-| Divider / separator                          | `IressDivider`          | `<IressDivider />`                                                                        |
-| Responsive visibility                        | `IressHide`             | `<IressHide below="md">Desktop only</IressHide>`                                          |
+### Responsive Design Principles
 
-### Content & Display
+Apply these when translating any UI description:
 
-| Description          | IDS Component               | Example                                                                                                     |
-| -------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Text / paragraph     | `IressText`                 | `<IressText>Body text</IressText>`                                                                          |
-| Heading              | `IressText element="h2"`    | `<IressText element="h2">Heading</IressText>`                                                               |
-| Card / panel         | `IressCard` or `IressPanel` | `<IressCard><IressCard.Header>Title</IressCard.Header><IressCard.Body>Content</IressCard.Body></IressCard>` |
-| Alert / notification | `IressAlert`                | `<IressAlert status="success">Saved!</IressAlert>`                                                          |
-| Loading spinner      | `IressSpinner`              | `<IressSpinner />`                                                                                          |
-| Skeleton loader      | `IressSkeleton`             | `<IressSkeleton height="20px" width="200px" />`                                                             |
-| Progress bar         | `IressProgress`             | `<IressProgress value={75} max={100} />`                                                                    |
-| Image                | `IressImage`                | `<IressImage src="..." alt="..." />`                                                                        |
-| Icon                 | `IressIcon`                 | `<IressIcon name="settings" />`                                                                             |
-| Tag / badge          | `IressTag`                  | `<IressTag>New</IressTag>`                                                                                  |
-| Pill                 | `IressPill`                 | `<IressPill>Category</IressPill>`                                                                           |
-| Tooltip              | `IressTooltip`              | `<IressTooltip content="Help text"><IressButton>Hover me</IressButton></IressTooltip>`                      |
+1. **Identify the primary task** — What is the user trying to accomplish? The mobile layout should focus on this task and push everything else to secondary access points.
+2. **Stack multi-column layouts** — Side-by-side columns should stack to full-width on mobile (`span={{ xs: 12, md: ... }}`).
+3. **Relocate secondary content** — Move supplementary UI (filters, sidebars, metadata panels, secondary actions) into an `IressSlideout`, `IressModal`, or collapsible section on mobile.
+4. **Simplify dense layouts** — For tables with many columns or multi-panel dashboards, hide non-essential columns with `hideBelow`, collapse sections, or switch to a card-based layout using `useBreakpoint`.
+5. **Preserve all functionality** — Never remove features on mobile. Use `IressSlideout`, `IressModal`, expandable sections, or `IressTabSet` to keep functionality accessible without cluttering the view.
 
-### Overlays & Navigation
+### Responsive Props
 
-| Description                           | IDS Component                 | Example                                                                   |
-| ------------------------------------- | ----------------------------- | ------------------------------------------------------------------------- |
-| Modal / dialog                        | `IressModal`                  | See Modal docs                                                            |
-| Status modal (danger/success/warning) | `IressModal status="danger"`  | Use `actions` prop for buttons; size restricted to `sm`/`md`              |
-| Slideout / drawer                     | `IressSlideout`               | See Slideout docs                                                         |
-| Popover                               | `IressPopover`                | See Popover docs                                                          |
-| Menu                                  | `IressMenu` + `IressMenuItem` | See Menu docs                                                             |
-| Tab navigation                        | `IressTabSet` + `IressTab`    | `<IressTabSet><IressTab label="Tab 1">Content 1</IressTab></IressTabSet>` |
-| Skip link (a11y)                      | `IressSkipLink`               | `<IressSkipLink href="#main">Skip to content</IressSkipLink>`             |
-| Side navigation                       | `IressSideNav`                | See SideNav pattern docs                                                  |
-| Breadcrumbs                           | `IressBreadcrumbs`            | See Breadcrumbs pattern docs                                              |
+Many props accept a single value or an object keyed by breakpoint:
 
-### Tables
+```tsx
+// Full-width on mobile, half on medium+
+<IressCol span={{ xs: 12, md: 6 }} />
 
-| Description | IDS Component | Example                                                                                                 |
-| ----------- | ------------- | ------------------------------------------------------------------------------------------------------- |
-| Data table  | `IressTable`  | `<IressTable><IressTable.Head>...</IressTable.Head><IressTable.Body>...</IressTable.Body></IressTable>` |
+// Tighter gap on mobile, larger on desktop
+<IressRow gutter={{ xs: 'sm', md: 'lg' }} />
+```
 
-## Styling Props (IressCSSProps)
+Props that support responsive values: `span`, `offset`, `gap`, `gutter`, `rowGap`, `p`, `px`, `py`, `m`, `mx`, `my`, `width`, and all directional margin/padding props.
 
-Most IDS components accept styling props for layout adjustments:
+### Responsive Visibility
 
-| Prop           | Purpose                         | Values                                                                                                                                                                                 |
-| -------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `alignSelf`    | Override flex alignment         | `"start"`, `"end"`, `"center"`, `"stretch"`                                                                                                                                            |
-| `bg`           | Background colour               | Colour tokens: `"colour.primary.fill"`, `"colour.neutral.20"`, `"alt"`, etc.                                                                                                           |
-| `borderRadius` | Border radius                   | Radius tokens: `"radius.0"` – `"radius.4"`, `"none"`                                                                                                                                   |
-| `color`        | Text colour                     | Colour tokens: `"colour.neutral.80"`, `"colour.primary.text"`, etc.                                                                                                                    |
-| `flex`         | Flex grow                       | `"1"` only                                                                                                                                                                             |
-| `focusable`    | Apply focus ring                | `"true"`, `"within"`, `"within:inset"`, `"inset"`, `"has-button"`, `"has-input"`, `"has-switch"`, `"label-after"`, `"expander-activator"`, `"select-activator"`, `"slider"`, `"group"` |
-| `hideFrom`     | Hide from breakpoint up         | `true`, or breakpoints: `"sm"`, `"md"`, `"lg"`, `"xl"`                                                                                                                                 |
-| `hideBelow`    | Hide below breakpoint           | Breakpoints: `"sm"`, `"md"`, `"lg"`, `"xl"`                                                                                                                                            |
-| `maxWidth`     | Max width                       | Size tokens: `"container.sm"`, `"container.md"`, etc.                                                                                                                                  |
-| `m`            | Margin (all sides)              | Spacing tokens: `"xs"` – `"xl"`, `"spacing.1"` – `"spacing.10"`, `"auto"`, negatives (responsive)                                                                                      |
-| `mx`           | Margin horizontal               | Same as `m` (responsive)                                                                                                                                                               |
-| `my`           | Margin vertical                 | Same as `m` (responsive)                                                                                                                                                               |
-| `mt`           | Margin top                      | Same as `m` (responsive)                                                                                                                                                               |
-| `mr`           | Margin right                    | Same as `m` (responsive)                                                                                                                                                               |
-| `mb`           | Margin bottom                   | Same as `m` (responsive)                                                                                                                                                               |
-| `ml`           | Margin left                     | Same as `m` (responsive)                                                                                                                                                               |
-| `noGutter`     | Remove last-child bottom margin | `true` / `false`                                                                                                                                                                       |
-| `p`            | Padding (all sides)             | Spacing tokens: `"xs"` – `"xl"`, `"spacing.1"` – `"spacing.10"` (responsive)                                                                                                           |
-| `px`           | Padding horizontal              | Same as `p` (responsive)                                                                                                                                                               |
-| `py`           | Padding vertical                | Same as `p` (responsive)                                                                                                                                                               |
-| `pt`           | Padding top                     | Same as `p` (responsive)                                                                                                                                                               |
-| `pr`           | Padding right                   | Same as `p` (responsive)                                                                                                                                                               |
-| `pb`           | Padding bottom                  | Same as `p` (responsive)                                                                                                                                                               |
-| `pl`           | Padding left                    | Same as `p` (responsive)                                                                                                                                                               |
-| `scrollable`   | Enable overflow scrolling       | `true`, `"x"`, `"y"`                                                                                                                                                                   |
-| `srOnly`       | Screen-reader only              | `true` / `false` (responsive)                                                                                                                                                          |
-| `stretch`      | Fill parent height              | `true` / `false`                                                                                                                                                                       |
-| `textAlign`    | Text alignment                  | `"left"`, `"right"`, `"center"`, `"justify"`, `"inherit"`                                                                                                                              |
-| `textStyle`    | Typography style                | `"typography.body.sm"`, `"typography.body.md"`, `"typography.heading.1"` – `"typography.heading.5"`, `"typography.code"`                                                               |
-| `width`        | Element width                   | Size tokens: `"input.2"` – `"input.16"`, `"3/12"` – `"12/12"` (grid), `"auto"` (responsive)                                                                                            |
+Use `hideFrom`/`hideBelow` CSS props directly on any component:
+
+```tsx
+<IressButton hideBelow="md">Desktop action</IressButton>
+<IressText hideFrom="lg">Mobile only text</IressText>
+```
+
+For conditional rendering based on breakpoint (e.g. rendering entirely different components), use the `useBreakpoint` hook:
+
+```tsx
+import { useBreakpoint } from '@iress-oss/ids-components';
+
+function Navigation() {
+  const { breakpoint } = useBreakpoint();
+  const isMobile = breakpoint === 'xs' || breakpoint === 'sm';
+
+  return isMobile ? <MobileNav /> : <DesktopNav />;
+}
+```
 
 ## Translation Examples
 
@@ -250,6 +194,68 @@ function SettingsPage() {
 }
 ```
 
+### "A dashboard with a sidebar and main content area"
+
+Note: even though the description doesn't mention mobile, the sidebar is secondary content — on mobile it should move into a slideout so the main content gets focus.
+
+```tsx
+import {
+  useState,
+  IressRow,
+  IressCol,
+  IressStack,
+  IressText,
+  IressCard,
+  IressButton,
+  IressSlideout,
+  useBreakpoint,
+} from '@iress-oss/ids-components';
+
+function Dashboard() {
+  const { breakpoint } = useBreakpoint();
+  const isMobile = breakpoint === 'xs' || breakpoint === 'sm';
+  const [navOpen, setNavOpen] = useState(false);
+
+  const nav = (
+    <IressCard>
+      <IressCard.Body>
+        <IressStack gap="2">
+          <IressText weight="strong">Navigation</IressText>
+          <IressText>Menu items here</IressText>
+        </IressStack>
+      </IressCard.Body>
+    </IressCard>
+  );
+
+  return isMobile ? (
+    <IressStack gap="4">
+      <IressButton mode="secondary" icon="menu" onClick={() => setNavOpen(true)}>
+        Menu
+      </IressButton>
+      <IressCard>
+        <IressCard.Body>
+          <IressText element="h2">Main Content</IressText>
+        </IressCard.Body>
+      </IressCard>
+      <IressSlideout heading="Navigation" show={navOpen} onShowChange={setNavOpen}>
+        {nav}
+      </IressSlideout>
+    </IressStack>
+  ) : (
+    <IressRow gutter="lg">
+      <IressCol span={3}>{nav}</IressCol>
+      <IressCol span={9}>
+        <IressCard>
+          <IressCard.Body>
+            <IressText element="h2">Main Content</IressText>
+          </IressCard.Body>
+        </IressCard>
+      </IressCol>
+    </IressRow>
+  );
+}
+```
+
 ## Best Practices
 
 1. **Always wrap in IressProvider** — Required at the root of your app for fonts and CSS variables
@@ -261,4 +267,62 @@ function SettingsPage() {
 7. **Use status for feedback** — `IressAlert` for inline messages, `IressModal status="danger"` for confirmation dialogs, `status` prop on buttons for danger/success
 8. **Prefer IDS components** — Use `IressText` instead of raw `<p>`, `IressButton` instead of `<button>`
 9. **Native elements inside `IressText` are OK** — When rendering CMS content, markdown output, or other unstructured data sources, it is acceptable to nest native HTML elements (e.g. `<p>`, `<strong>`, `<a>`, `<ul>`) inside `IressText`. This lets `IressText` provide consistent typography while allowing flexible inner content structure.
-10. **Check the component docs** — Read the specific component doc for detailed props and patterns (`node_modules/@iress-oss/ids-components/.ai/components/`)
+10. **Always make grid layouts responsive** — When using `IressRow`/`IressCol`, use responsive `span` values (e.g. `span={{ xs: 12, md: 6 }}`) so columns stack on mobile instead of overflowing
+11. **Check the component docs** — Read the specific component doc for detailed props and patterns (`node_modules/@iress-oss/ids-components/.ai/components/`)
+
+
+## Common Mistakes
+
+> **⚠️ AI agents are especially prone to these mistakes** because they match patterns found in existing codebases. Always verify against component documentation rather than copying surrounding code.
+
+### Do not use `slot` attributes — use React props instead
+
+The `slot` attribute (e.g. `slot="start"`, `slot="prepend"`, `slot="footer"`) is a legacy v4 pattern that is **no longer supported**. IDS v5+ uses typed React props (`prepend`, `append`, `footer`, `actions`, `icon`, `activator`) to position content.
+
+> **⚠️ `IressShadow` does NOT imply custom elements.** AI agents often see `IressShadow` in a codebase and incorrectly assume the app uses Web Components with `slot` attributes. `IressShadow` is a CSS isolation wrapper that creates a shadow root on a plain `<div>` — all children inside it are standard React components. The `slot` attribute is never correct in IDS v5+.
+
+```tsx
+// ❌ Wrong — legacy v4 slot attribute
+<IressButton>
+  <IressIcon slot="start" name="search" />
+  Search
+</IressButton>
+
+// ✅ Correct — use prepend prop
+<IressButton prepend={<IressIcon name="search" />}>
+  Search
+</IressButton>
+```
+
+```tsx
+// ❌ Wrong — legacy v4 modal footer slot
+<IressModal show={show}>
+  Content
+  <div slot="footer">
+    <IressButton>Close</IressButton>
+  </div>
+</IressModal>
+
+// ✅ Correct — use footer prop
+<IressModal show={show} footer={<IressButton>Close</IressButton>}>
+  Content
+</IressModal>
+```
+
+**Quick reference for slot → prop migration:**
+
+| Legacy `slot` attribute           | Modern IDS prop                     |
+| --------------------------------- | ----------------------------------- |
+| `slot="prepend"` / `slot="start"` | `prepend={...}`                     |
+| `slot="append"` / `slot="end"`    | `append={...}`                      |
+| `slot="icon-only"`                | `icon="iconName"`                   |
+| `slot="footer"`                   | `footer={...}` or `actions={[...]}` |
+| `slot="activator"`                | `activator={...}`                   |
+
+### Do not use raw HTML when IDS components exist
+
+See the Component Mapping tables above for the correct IDS replacement for every common HTML element.
+
+### Do not hardcode design values
+
+Use design tokens and component props instead of hex colours, pixel spacing, or font sizes. See the [token-usage skill](../../.agents/skills/token-usage/SKILL.md) for details.

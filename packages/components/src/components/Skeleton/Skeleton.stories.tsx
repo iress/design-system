@@ -11,8 +11,9 @@ import SkeletonTextSource from './mocks/SkeletonText.tsx?raw';
 import {
   disableArgTypes,
   withTransformedRawSource,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressSkeleton>;
 type TextStory = StoryObj<IressSkeletonProps<'text'>>;

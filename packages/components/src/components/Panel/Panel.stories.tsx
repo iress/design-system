@@ -3,7 +3,7 @@ import { IressPanel } from './Panel';
 import { IressPlaceholder } from '../Placeholder';
 import { IressText } from '../Text';
 import { IressInline } from '@/main';
-import { stylingProps } from '@theme-preset/storybookHelpers';
+import { stylingProps } from '@iress-oss/ids-storybook-config';
 
 type PanelCustomArgs = React.ComponentProps<typeof IressPanel>;
 type Story = StoryObj<PanelCustomArgs>;

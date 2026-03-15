@@ -17,8 +17,8 @@ import {
   disableArgTypes,
   removeArgTypes,
   withTransformedRawSource,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<IressToasterProviderProps>;
 

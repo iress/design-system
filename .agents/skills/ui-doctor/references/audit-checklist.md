@@ -4,8 +4,8 @@ Use this checklist when performing a UI doctor audit.
 
 ## Setup & Configuration
 
-- [ ] `IressProvider` wraps the application root
-- [ ] `@iress-oss/ids-components/dist/style.css` is imported (required for component styles)
+- [ ] `IressProvider` wraps the application root (either directly, or via `IressShadow` which is a superset that includes Provider + CSS injection)
+- [ ] `@iress-oss/ids-components/dist/style.css` is imported (required for component styles — not needed if using `IressShadow`, which injects styles automatically)
 - [ ] `@iress-oss/ids-components` is a project dependency
 - [ ] `@iress-oss/ids-tokens/build/css-vars.css` is imported only if tokens are used directly in application code
 - [ ] `react-hook-form` is installed as a peer dependency if using `IressForm`
@@ -47,12 +47,15 @@ Use this checklist when performing a UI doctor audit.
 - [ ] Form validation uses declarative `rules` prop, not custom validation logic
 - [ ] Form state managed via React Hook Form (`useWatch`, `ref`), not `useState` + `onChange`
 - [ ] Long forms (>8 fields) use `pattern="long"` for sticky heading/actions
-- [ ] Loading states use `IressLoading` with the appropriate pattern
+- [ ] Loading states use `IressLoading` (preferred) or `IressSkeleton` for custom content placeholder patterns (cache-first data reads from SWR/React Query may not need a loading state if the cache is pre-populated by a prior page)
 - [ ] Filter/action dropdowns use `IressDropdownMenu` (not inside forms)
 - [ ] Row-level actions use `IressContextualMenu`
 - [ ] Application shell navigation uses `IressSideNav`
 - [ ] Hierarchy navigation uses `IressBreadcrumbs`
 - [ ] Microfrontend style isolation uses `IressShadow`
+- [ ] Root-level error boundaries render `IressModal status="danger"` with retry/reload actions (not custom error pages or raw HTML) — check parent components/layouts before flagging; a parent error boundary covering child routes is a valid app-wide pattern
+- [ ] Scoped error boundaries (around features/sections) render `IressAlert status="danger"` as inline fallback
+- [ ] Error boundaries do NOT use `IressToaster` — toasts are transient and cannot serve as persistent fallback UI
 
 ## Accessibility
 
@@ -72,8 +75,10 @@ Use this checklist when performing a UI doctor audit.
 - [ ] `IressContextualMenu` has a meaningful `ariaLabel` describing the menu purpose
 - [ ] Tables use `IressTable` with proper header cells (`IressTable.HeaderCell`) for screen readers
 - [ ] Dynamic content updates (loading states, alerts, toasts) are announced to screen readers
-- [ ] `IressAlert` is used for status messages (automatically uses appropriate ARIA roles)
-- [ ] `IressToaster` is used for transient notifications (uses `aria-live` region)
+- [ ] `IressAlert` is used for persistent status messages (automatically uses appropriate ARIA roles)
+- [ ] `IressToaster` is used for transient notifications that demand attention (uses `aria-live="assertive"` region) — avoid overuse; not every update warrants a toast
+- [ ] Subtle, user-initiated UI updates (save indicators, count badges, status dot changes, inline confirmations) use micro animations/interactions with a colocated `aria-live="polite"` region near the component — these are less intrusive than toasts and keep context local
+- [ ] `aria-live="polite"` regions are only added for user-initiated updates; system-driven background changes that the user did not trigger should not announce unless they require attention (use `IressToaster` or `IressAlert` for those)
 - [ ] No reliance on colour alone to convey information — use text, icons, or patterns alongside colour
 
 ## Layout
@@ -82,7 +87,27 @@ Use this checklist when performing a UI doctor audit.
 - [ ] Horizontal rows use `IressInline`
 - [ ] Grid layouts use `IressRow` + `IressCol`
 - [ ] Spacing props use IDS token values (0–10)
-- [ ] Responsive visibility uses `IressHide` or `hideFrom`/`hideBelow`
+- [ ] Responsive visibility uses `hideFrom`/`hideBelow` props or `useBreakpoint` hook
+- [ ] Multi-column grid layouts use responsive `span` values (e.g. `span={{ xs: 12, md: 6 }}`) so columns stack on mobile
+- [ ] Mobile layout prioritises the primary task — secondary content (filters, sidebars, metadata) is relocated to `IressSlideout`, `IressModal`, or collapsible sections rather than simply stacked
+- [ ] All functionality remains accessible on mobile — nothing is removed, only reorganised into appropriate containers
+
+## Cognitive Load & Information Architecture
+
+- [ ] Menus/dropdowns with >10 items enable `searchable` to reduce scanning
+- [ ] Forms with >8 fields use `IressForm pattern="long"` for sticky heading/actions
+- [ ] Top-level navigation has ≤7 items; additional items are grouped or nested
+- [ ] Secondary content is hidden behind `IressExpander` or `IressTabSet` until needed (progressive disclosure)
+- [ ] Complex workflows are broken into multi-step flows rather than one overwhelming screen
+- [ ] Related content is grouped in `IressCard` or `IressPanel` rather than presented flat
+- [ ] Spacing between groups uses adequate `IressStack gap` tokens to prevent visual overload
+- [ ] Bulk/batch operations (select-all + delete, mass update) require explicit confirmation via `IressModal`, showing the count of affected items
+- [ ] After modal close, focus returns to the trigger element
+- [ ] After item deletion, focus moves to the next or previous item in the list
+- [ ] After form submission, focus moves to the success message, error summary, or next logical element
+- [ ] Loading state transitions do not cause layout shifts that disorient users
+- [ ] Visual hierarchy is established with `IressText textStyle` — primary content is prominent, secondary is de-emphasised
+- [ ] No more than one primary action (`mode="primary"`) per section to reduce decision paralysis
 
 ## Button Hierarchy
 
@@ -98,8 +123,9 @@ Evaluate the application against these usability principles (based on [Nielsen's
 
 The system should always keep users informed about what is going on, through appropriate feedback within reasonable time.
 
-- [ ] Loading states use `IressLoading` with the correct pattern (`page`, `component`, `start-up`, `validate`, `long`) so users always see feedback proportional to wait time
+- [ ] Loading states use `IressLoading` with the correct pattern (`page`, `component`, `start-up`, `validate`, `long`) so users always see feedback proportional to wait time; `IressSkeleton` is also valid for custom content placeholder patterns where skeleton screens mirror the page layout
 - [ ] Form submission provides visible feedback — use `IressLoading pattern="validate"` during submission, `IressAlert` or `IressToaster` for success/failure
+- [ ] Subtle state confirmations (auto-save, background sync, inline status changes) use micro animations or transitions rather than toasts — pair with `aria-live="polite"` colocated near the component when the update was user-initiated
 - [ ] Progress indicators are used for multi-step processes — `IressProgress` for deterministic operations, `IressSpinner` for indeterminate
 - [ ] Active states are visible — selected tabs (`IressTabSet`), active nav items (`IressSideNav`), current breadcrumb (`IressBreadcrumbs`) all show where the user is
 - [ ] Toggled/selected states are visually clear — `IressToggle`, `IressCheckbox`, `IressRadio` provide built-in active states
@@ -163,7 +189,8 @@ Accelerators — unseen by the novice user — may speed up interaction for the 
 - [ ] Skip links for keyboard users — `IressSkipLink` lets experienced keyboard users bypass repetitive navigation
 - [ ] Searchable selects — `IressSelect` and `IressDropdownMenu` with search enabled let power users type to filter instead of scrolling
 - [ ] Autocomplete for repetitive input — `IressAutocomplete` reduces typing for known-value fields
-- [ ] Responsive layouts — `IressHide`, `hideFrom`/`hideBelow` adapt the interface for different device contexts
+- [ ] Responsive layouts — `hideFrom`/`hideBelow` props or `useBreakpoint` hook adapt the interface for different device contexts
+- [ ] Mobile experience focuses on the primary task — secondary content is accessible via `IressSlideout` or collapsible sections, not competing for screen space
 
 ### 8. Aesthetic and Minimalist Design
 

@@ -261,6 +261,8 @@ Base unit: 4px (0.25rem). Token value = multiple of base unit.
 
 **This is the recommended approach** for any custom styling beyond what IDS component props provide.
 
+> **Using Panda CSS?** If your project uses [Panda CSS](https://panda-css.com), use the `@iress-oss/ids-theme-preset` package instead of manually referencing CSS variables. It provides a Panda CSS preset with the full IDS token system, giving you type-safe token usage via Panda's `css()` function, utilities, and recipes. See [references/theme-preset.md](references/theme-preset.md) for setup.
+
 ### In CSS / SCSS
 
 ```css
@@ -402,10 +404,34 @@ Layout components accept responsive objects for spacing props:
 | Colours on IDS components        | Props: `bg`, `color`                            |
 | Custom CSS / SCSS                | CSS variables (`var(--iress-*)`)                |
 | Inline styles / CSS-in-JS        | `cssVars` object (`cssVars.colour.neutral[10]`) |
+| Custom CSS with Panda CSS        | `@iress-oss/ids-theme-preset` preset            |
 | Theming / overrides              | CSS variables on custom properties              |
 | Internal theme editors           | `mapTokensToCssVariables()` helper              |
 
 **General Rule:** Prefer component props when available. For custom styling, use CSS variables in stylesheets or `cssVars` in JavaScript. Only use `mapTokensToCssVariables` / `convertReferencesToVariables` for internal tooling like theme editors.
+
+## Common Mistakes to Avoid
+
+> **⚠️ AI agents are especially prone to these mistakes** because they match patterns found in existing codebases rather than consulting documentation.
+
+### Do not use `slot` attributes — use React props instead
+
+The `slot` attribute (e.g. `slot="start"`, `slot="prepend"`) is a legacy v4 pattern. IDS v5+ uses typed React props (`prepend`, `append`, `footer`, `icon`, etc.) to position content. This is not a token issue, but agents commonly introduce it alongside token-related fixes.
+
+```tsx
+// ❌ Wrong — legacy v4 slot attribute
+<IressButton>
+  <IressIcon slot="start" name="home" />
+  Home
+</IressButton>
+
+// ✅ Correct — use prepend prop
+<IressButton prepend={<IressIcon name="home" />}>
+  Home
+</IressButton>
+```
+
+For a comprehensive list of anti-patterns, see the [Common Mistakes guide](node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md).
 
 ## Complete Token Reference
 

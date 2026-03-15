@@ -6,8 +6,9 @@ import HookFormExampleSource from '../mocks/HookFormExample.tsx?raw';
 import {
   removeArgTypes,
   withCustomSource,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressHookForm>;
 

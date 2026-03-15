@@ -10,8 +10,9 @@ import {
   disableArgTypes,
   mergeStorybookConfig,
   addToStorybookCategory,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressFormField>;
 

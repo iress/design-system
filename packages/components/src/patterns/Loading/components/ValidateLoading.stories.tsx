@@ -2,7 +2,10 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { type FC } from 'react';
 import { ValidateLoading } from './ValidateLoading';
 import { IressButton, IressInline } from '@/main';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import {
+  reactNodeArgType,
+  stylingProps,
+} from '@iress-oss/ids-storybook-config';
 
 // This is a pattern for IressLoading, hence we change the name
 (ValidateLoading as FC).displayName = 'IressLoading';

@@ -2,8 +2,11 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSkipLink } from '.';
 import { IressContainer } from '../Container';
 import { IressPanel } from '../Panel';
-import { withJsxTransformer } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import {
+  withJsxTransformer,
+  reactNodeArgType,
+  stylingProps,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSkipLink>;
 

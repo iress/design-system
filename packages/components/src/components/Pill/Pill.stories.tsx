@@ -1,10 +1,10 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 import {
+  disableArgTypes,
   reactElementArgType,
   reactNodeArgType,
   stylingProps,
-} from '@theme-preset/storybookHelpers';
+} from '@iress-oss/ids-storybook-config';
 import { IressPill, IressInline } from '@/main';
 import { STATUSES } from '@/constants';
 

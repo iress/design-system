@@ -33,7 +33,7 @@ import { materialSymbols } from './utilities/materialSymbols';
 import { flexHorizontalAlign } from './utilities/horizontalAlign';
 import { flexVerticalAlign } from './utilities/verticalAlign';
 
-export default definePreset({
+const idsThemePreset = definePreset({
   name: 'theme-preset',
 
   globalCss,
@@ -128,3 +128,6 @@ export default definePreset({
     },
   },
 });
+
+export default idsThemePreset;
+export { idsThemePreset };

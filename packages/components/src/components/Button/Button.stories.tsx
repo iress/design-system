@@ -4,8 +4,9 @@ import {
   disableArgTypes,
   CurrentBreakpoint,
   withCustomSource,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 import { IressText } from '../Text';
 import { IressIcon } from '../Icon';
 import { IressInline } from '../Inline';

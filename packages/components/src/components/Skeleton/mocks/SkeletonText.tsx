@@ -18,8 +18,18 @@ export const SkeletonText = (args: IressSkeletonProps) => {
       </IressButton>
       <IressStack gap="md">
         {TEXT_STYLES.map((textStyle) => [
-          loading && <IressSkeleton {...args} textStyle={textStyle} />,
-          !loading && <IressText textStyle={textStyle}>{textStyle}</IressText>,
+          loading && (
+            <IressSkeleton
+              {...args}
+              key={`skeleton-${textStyle}`}
+              textStyle={textStyle}
+            />
+          ),
+          !loading && (
+            <IressText key={`text-${textStyle}`} textStyle={textStyle}>
+              {textStyle}
+            </IressText>
+          ),
         ])}
       </IressStack>
     </IressStack>

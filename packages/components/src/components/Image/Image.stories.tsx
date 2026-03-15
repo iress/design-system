@@ -3,7 +3,7 @@ import { IressImage } from '.';
 import { IressStack } from '@/components/Stack';
 import { IressText } from '@/components/Text';
 import React from 'react';
-import { stylingProps } from '@theme-preset/storybookHelpers';
+import { stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressImage>;
 const MAX_WIDTHS = [70, '250px', '50%', undefined] as const;

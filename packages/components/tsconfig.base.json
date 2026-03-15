@@ -42,7 +42,7 @@
       "@components/*": ["src/components/*"],
       "@docs/*": ["docs/*"],
       "@helpers/*": ["src/helpers/*"],
-      "@theme-preset/*": ["theme-preset/*"]
+      "@theme-preset/*": ["../theme-preset/src/*"]
     },
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
   }

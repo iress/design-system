@@ -1,8 +1,7 @@
 import { type CompositionStyles, defineTextStyles } from '@pandacss/dev';
 import { typography, cssVars } from '@iress-oss/ids-tokens';
-import { type UtilityValues } from '@/styled-system/types/prop-type';
 
-export const textCompositions: CompositionStyles['textStyles'] = {
+export const textCompositions = {
   'typography.heading.1': {
     description: typography.heading['1'].$description,
     value: {
@@ -123,10 +122,9 @@ export const textCompositions: CompositionStyles['textStyles'] = {
       font: 'inherit',
     },
   },
-};
+} satisfies CompositionStyles['textStyles'];
 
 export const textStyles = defineTextStyles(textCompositions);
-
 export const TEXT_STYLES = Object.keys(
   textCompositions,
-) as unknown as UtilityValues['textStyle'][];
+) as (keyof typeof textCompositions)[];

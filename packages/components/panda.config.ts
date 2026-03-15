@@ -1,13 +1,15 @@
 import { defineConfig } from '@pandacss/dev';
-import themePreset from './theme-preset';
-import { codegenPrepareHook } from './theme-preset/hooks/codegenPrepareHook';
-import { cssgenDoneHook } from './theme-preset/hooks/cssgenDoneHook';
+import themePreset from '@iress-oss/ids-theme-preset';
+import {
+  codegenPrepareHook,
+  cssgenDoneHook,
+} from '@iress-oss/ids-theme-preset/hooks';
 
 export default defineConfig({
   // Whether to use css reset, will probably be enabled in version 6
   preflight: true,
 
-  dependencies: ['../themes/dist/**/*.css', './theme-preset/**/*'],
+  dependencies: ['../themes/dist/**/*.css'],
 
   // Where to look for your css declarations
   include: ['./src/**/*.{js,jsx,ts,tsx}'],

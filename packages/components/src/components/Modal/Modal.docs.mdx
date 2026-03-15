@@ -57,7 +57,7 @@ To use, wrap your `<App/>` or the component that you want to use the `useModal` 
 - No other interaction on the main page can be accessed while a modal is active. A backdrop covers the content beneath so that the content beneath cannot be interacted with.
 - Clicking on the the backdrop closes the modal and returns the focus to the triggering element.
 - When the modal is active the body is set to overflow: hidden to stop any scrolling of the underlying page. Scrolling should then only be possible on the modal wrapper.
-- By default there are 3 ways to dismiss the modal; click X in the header; press ESC on a keyboard; click anywhere on the backdrop. It is also recommended that consumers add a Cancel or Close button to the modal's footer slot if required.
+- By default there are 3 ways to dismiss the modal; click X in the header; press ESC on a keyboard; click anywhere on the backdrop. It is also recommended that consumers add a Cancel or Close button using the modal's `footer` prop if required.
 
 ## Examples
 
@@ -67,9 +67,9 @@ The `heading` prop can be used to set a heading for the modal. This will be rend
 
 <ComponentExample of={ComponentStories.Heading} />
 
-### Footer slot
+### Footer
 
-Content to appear underneath the main content. Usually used for extra controls like buttons etc.
+Use the `footer` prop to place content underneath the main content. Usually used for extra controls like buttons etc.
 
 <ComponentExample of={ComponentStories.FooterSlot} />
 

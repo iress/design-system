@@ -26,6 +26,8 @@ It has similar props to the `IressProvider`, however it will apply the styles to
 - The IDS styles are injected into the shadow DOM
 - The icon stylesheet is injected into both the document head and the shadow DOM, as the icon stylesheet includes both font face and icon styles
 
-**Note:** The `IressShadow` component does not create a custom element, it simply creates a shadow root on a `div` element.
+**Note:** The `IressShadow` component does not create a custom element, it simply creates a shadow root on a `div` element. All children inside `IressShadow` are standard React components — **not** custom elements or Web Components. The `slot` HTML attribute is not used; content positioning uses React props (`prepend`, `append`, `footer`, etc.).
+
+> **⚠️ Common AI mistake:** Agents see "Shadow" in `IressShadow` and incorrectly assume the application uses Web Components or custom elements with `slot` attributes. This is wrong — `IressShadow` is purely for CSS isolation in microfrontend scenarios. IDS has not offered Web Components since v4.
 
 <ComponentExample of={Stories.Shadow} />

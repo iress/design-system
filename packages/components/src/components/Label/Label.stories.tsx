@@ -3,8 +3,11 @@ import { type StoryObj, type Meta } from '@storybook/react-vite';
 import { IressLabel } from './Label';
 import { IressIcon } from '../Icon';
 import { IressInline } from '../Inline';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import {
+  disableArgTypes,
+  reactNodeArgType,
+  stylingProps,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressLabel>;
 

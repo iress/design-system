@@ -11,8 +11,8 @@ import { SPACING_AND_ALIAS_TOKENS } from '@theme-preset/tokens/spacing';
 import {
   CurrentBreakpoint,
   disableArgTypes,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressInline>;
 

@@ -3,27 +3,44 @@ import { useBreakpoint } from './useBreakpoint';
 import { Breakpoints } from '@/types';
 import { BREAKPOINT_DETAILS } from '@/constants';
 
-const mockWindowResize = (breakpoint: Breakpoints) => {
+let changeListeners: (() => void)[] = [];
+let currentBreakpoint: Breakpoints = 'xs';
+
+const createMockMatchMedia = () => {
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
     value: vi.fn().mockImplementation((query: string) => ({
-      matches: query === BREAKPOINT_DETAILS[breakpoint].mediaQuery,
+      matches: query === BREAKPOINT_DETAILS[currentBreakpoint].mediaQuery,
       media: query,
       onchange: null,
-      addListener: vi.fn(), // Deprecated
-      removeListener: vi.fn(), // Deprecated
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn((_event: string, cb: () => void) => {
+        changeListeners.push(cb);
+      }),
+      removeEventListener: vi.fn((_event: string, cb: () => void) => {
+        changeListeners = changeListeners.filter((l) => l !== cb);
+      }),
       dispatchEvent: vi.fn(),
     })),
   });
-
-  window.dispatchEvent(new Event('resize'));
 };
+
+const simulateBreakpointChange = (breakpoint: Breakpoints) => {
+  currentBreakpoint = breakpoint;
+  createMockMatchMedia();
+  changeListeners.forEach((cb) => cb());
+};
+
+beforeEach(() => {
+  changeListeners = [];
+  currentBreakpoint = 'xs';
+});
 
 describe('useBreakpoint', () => {
   it('gets the current breakpoint and its detail', () => {
-    mockWindowResize('xl');
+    currentBreakpoint = 'xl';
+    createMockMatchMedia();
     const hook = renderHook(() => useBreakpoint());
 
     expect(hook.result.current).toStrictEqual({
@@ -31,8 +48,7 @@ describe('useBreakpoint', () => {
       detail: BREAKPOINT_DETAILS.xl,
     });
 
-    // Simulate window resize
-    act(() => mockWindowResize('xxl'));
+    act(() => simulateBreakpointChange('xxl'));
 
     expect(hook.result.current).toStrictEqual({
       breakpoint: 'xxl',
@@ -42,7 +58,8 @@ describe('useBreakpoint', () => {
 
   describe('disabled functionality', () => {
     it('returns the initial breakpoint when disabled', () => {
-      mockWindowResize('lg');
+      currentBreakpoint = 'lg';
+      createMockMatchMedia();
       const hook = renderHook(() => useBreakpoint({ disabled: true }));
 
       expect(hook.result.current).toStrictEqual({
@@ -51,99 +68,82 @@ describe('useBreakpoint', () => {
       });
     });
 
-    it('does not respond to resize events when disabled', () => {
-      mockWindowResize('md');
+    it('does not respond to breakpoint changes when disabled', () => {
+      currentBreakpoint = 'md';
+      createMockMatchMedia();
       const hook = renderHook(() => useBreakpoint({ disabled: true }));
 
       expect(hook.result.current.breakpoint).toBe('md');
 
-      // Simulate resize - should not update
-      act(() => mockWindowResize('xl'));
+      act(() => simulateBreakpointChange('xl'));
 
+      // Still returns md because getSnapshot is called but no subscription fires
       expect(hook.result.current.breakpoint).toBe('md');
     });
 
-    it('does not add resize event listener when disabled', () => {
-      const addEventListenerSpy = vi.spyOn(window, 'addEventListener');
-      mockWindowResize('sm');
+    it('does not subscribe to matchMedia change events when disabled', () => {
+      currentBreakpoint = 'sm';
+      createMockMatchMedia();
 
       renderHook(() => useBreakpoint({ disabled: true }));
 
-      expect(addEventListenerSpy).not.toHaveBeenCalledWith(
-        'resize',
-        expect.any(Function),
-      );
-
-      addEventListenerSpy.mockRestore();
+      expect(changeListeners).toHaveLength(0);
     });
 
-    it('starts listening to resize when disabled changes from true to false', () => {
-      mockWindowResize('md');
+    it('starts listening when disabled changes from true to false', () => {
+      currentBreakpoint = 'md';
+      createMockMatchMedia();
       const hook = renderHook(({ disabled }) => useBreakpoint({ disabled }), {
         initialProps: { disabled: true },
       });
 
       expect(hook.result.current.breakpoint).toBe('md');
 
-      // Re-enable the hook
       hook.rerender({ disabled: false });
 
-      // Now it should respond to resize
-      act(() => mockWindowResize('lg'));
+      act(() => simulateBreakpointChange('lg'));
 
       expect(hook.result.current.breakpoint).toBe('lg');
     });
 
-    it('stops listening to resize when disabled changes from false to true', () => {
-      mockWindowResize('md');
+    it('stops listening when disabled changes from false to true', () => {
+      currentBreakpoint = 'md';
+      createMockMatchMedia();
       const hook = renderHook(({ disabled }) => useBreakpoint({ disabled }), {
         initialProps: { disabled: false },
       });
 
       expect(hook.result.current.breakpoint).toBe('md');
 
-      // Verify it responds to resize when enabled
-      act(() => mockWindowResize('lg'));
+      act(() => simulateBreakpointChange('lg'));
       expect(hook.result.current.breakpoint).toBe('lg');
 
-      // Disable the hook
       hook.rerender({ disabled: true });
 
-      // Should not respond to resize anymore
-      act(() => mockWindowResize('xl'));
+      act(() => simulateBreakpointChange('xl'));
       expect(hook.result.current.breakpoint).toBe('lg');
     });
 
-    it('removes event listener on unmount when disabled', () => {
-      const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
-      mockWindowResize('sm');
+    it('cleans up listeners on unmount when disabled', () => {
+      currentBreakpoint = 'sm';
+      createMockMatchMedia();
 
       const hook = renderHook(() => useBreakpoint({ disabled: true }));
       hook.unmount();
 
-      // Should not try to remove listener if it was never added
-      expect(removeEventListenerSpy).not.toHaveBeenCalledWith(
-        'resize',
-        expect.any(Function),
-      );
-
-      removeEventListenerSpy.mockRestore();
+      expect(changeListeners).toHaveLength(0);
     });
 
-    it('removes event listener on unmount when enabled', () => {
-      const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
-      mockWindowResize('sm');
+    it('cleans up listeners on unmount when enabled', () => {
+      currentBreakpoint = 'sm';
+      createMockMatchMedia();
 
       const hook = renderHook(() => useBreakpoint({ disabled: false }));
+      expect(changeListeners.length).toBeGreaterThan(0);
+
       hook.unmount();
 
-      // Should remove listener when it was added
-      expect(removeEventListenerSpy).toHaveBeenCalledWith(
-        'resize',
-        expect.any(Function),
-      );
-
-      removeEventListenerSpy.mockRestore();
+      expect(changeListeners).toHaveLength(0);
     });
   });
 });

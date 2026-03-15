@@ -21,8 +21,8 @@ import { lazy, Suspense, useState } from 'react';
 import {
   CurrentBreakpoint,
   withCustomSource,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressTable>;
 
@@ -32,7 +32,7 @@ const BreakpointMd = lazy(() => import('@docs/components/BreakpointMd'));
 const BreakpointLg = lazy(() => import('@docs/components/BreakpointLg'));
 const BreakpointXl = lazy(() => import('@docs/components/BreakpointXl'));
 
-const MarginToken = ({ token }: { token: PositiveSpacingToken }) => {
+const MarginToken = ({ token }: { token?: PositiveSpacingToken }) => {
   const [size, setSize] = useState<number | null>(null);
 
   return (

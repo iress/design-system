@@ -36,8 +36,9 @@ import {
   withJsxTransformer,
   withTransformedProviderSource,
   withTransformedRawSource,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 const MODAL_ID = 'storybook-modal';
 

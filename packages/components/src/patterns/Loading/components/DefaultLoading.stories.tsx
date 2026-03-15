@@ -1,7 +1,10 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { DefaultLoading } from './DefaultLoading';
 import { type FC } from 'react';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import {
+  reactNodeArgType,
+  stylingProps,
+} from '@iress-oss/ids-storybook-config';
 
 // This is a pattern for IressLoading, hence we change the name
 (DefaultLoading as FC).displayName = 'IressLoading';

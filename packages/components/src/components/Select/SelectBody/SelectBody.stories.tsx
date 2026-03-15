@@ -13,8 +13,9 @@ import {
   disableArgTypes,
   mergeStorybookConfig,
   removeArgTypes,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressSelectBody>;
 

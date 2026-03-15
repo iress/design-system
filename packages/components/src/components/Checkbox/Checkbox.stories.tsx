@@ -7,8 +7,9 @@ import { IressStack } from '../Stack';
 import {
   disableArgTypes,
   withJsxTransformer,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 type Story = StoryObj<typeof IressCheckbox>;
 

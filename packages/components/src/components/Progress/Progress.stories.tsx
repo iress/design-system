@@ -2,8 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 
 import { IressProgress } from '.';
 import { IressStack } from '../Stack';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
-import { stylingProps } from '@theme-preset/storybookHelpers';
+import { disableArgTypes, stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressProgress>;
 

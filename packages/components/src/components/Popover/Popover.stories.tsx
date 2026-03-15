@@ -19,11 +19,9 @@ import {
   disableArgTypes,
   withCustomSource,
   withTransformedRawSource,
-} from '@iress-oss/ids-storybook-config';
-import {
   reactElementArgType,
   stylingProps,
-} from '@theme-preset/storybookHelpers';
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressPopover>;
 

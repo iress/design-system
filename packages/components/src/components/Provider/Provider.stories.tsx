@@ -2,8 +2,11 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressProvider } from './Provider';
 import { AppWithProvider } from './mocks/AppWithProvider';
 import AppWithProviderSource from './mocks/AppWithProvider.tsx?raw';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import {
+  disableArgTypes,
+  reactNodeArgType,
+  stylingProps,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressProvider>;
 

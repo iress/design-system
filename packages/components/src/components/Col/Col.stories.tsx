@@ -12,8 +12,8 @@ import {
   removeArgTypes,
   STORYBOOK_ONLY_CATEGORY,
   withJsxTransformer,
+  omitStylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { omitStylingProps } from '@theme-preset/storybookHelpers';
 
 type ColWithCustomArgs = React.ComponentProps<typeof IressCol> & {
   numberOfColumns?: number;
@@ -89,7 +89,7 @@ export const AutoSized: Story = {
   argTypes: {
     ...removeArgTypes(['numberOfColumns']),
   },
-  render: ({ row, ...column }) => (
+  render: ({ numberOfColumns: _noc, row, ...column }) => (
     <IressStack gap="spacing.4">
       <IressRow {...row}>
         <IressCol {...column}>
@@ -119,7 +119,7 @@ export const Span: Story = {
   argTypes: {
     ...removeArgTypes(['numberOfColumns', 'span']),
   },
-  render: ({ row, ...column }) => (
+  render: ({ numberOfColumns: _noc, row, ...column }) => (
     <IressStack gap="spacing.4">
       <IressRow {...row}>
         <IressCol {...column} span="12">
@@ -201,7 +201,7 @@ export const ResponsiveSpan: Story = {
     ...removeArgTypes(['numberOfColumns', 'span']),
     columns: columnsArgType,
   },
-  render: ({ row, columns = [], ...columnProps }) => (
+  render: ({ numberOfColumns: _noc, row, columns = [], ...columnProps }) => (
     <IressStack gap="spacing.4">
       <IressPanel>
         Current breakpoint: <CurrentBreakpoint />.
@@ -233,7 +233,7 @@ export const Offset: Story = {
   argTypes: {
     ...removeArgTypes(['numberOfColumns', 'offset']),
   },
-  render: ({ row, ...column }) => (
+  render: ({ numberOfColumns: _noc, row, ...column }) => (
     <IressStack gap="spacing.4">
       <IressRow {...row}>
         <IressCol {...column} offset="1">
@@ -311,7 +311,7 @@ export const ResponsiveOffset: Story = {
     ...removeArgTypes(['numberOfColumns', 'offset']),
     columns: columnsArgType,
   },
-  render: ({ row, columns = [], ...columnProps }) => (
+  render: ({ numberOfColumns: _noc, row, columns = [], ...columnProps }) => (
     <IressStack gap="spacing.4">
       <IressPanel>
         Current breakpoint: <CurrentBreakpoint />.
@@ -339,7 +339,7 @@ export const AlignSelf: Story = {
   argTypes: {
     ...removeArgTypes(['numberOfColumns', 'alignSelf']),
   },
-  render: ({ row, ...column }) => (
+  render: ({ numberOfColumns: _noc, row, ...column }) => (
     <IressContainer>
       <IressRow
         {...row}

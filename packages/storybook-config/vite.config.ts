@@ -7,6 +7,8 @@ import react from '@vitejs/plugin-react';
 import { peerDependencies } from './package.json';
 import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
+const externalDeps = Object.keys(peerDependencies || {});
+
 export default defineConfig({
   plugins: [
     react(),
@@ -45,28 +47,33 @@ export default defineConfig({
           entryFileNames: '[name].js',
         },
       ],
-      external: [
-        ...Object.keys(peerDependencies || {}),
-        'path',
-        'fs',
-        'url',
-        '@storybook/react',
-        '@storybook/react-vite',
-        '@storybook/react-vite/node',
-        '@storybook/addon-docs/blocks',
-        'storybook/internal/components',
-        'storybook/components',
-        'storybook/preview-api',
-        'storybook/internal/preview-api',
-        'storybook/internal/core-events',
-        'storybook/core-events',
-        'storybook/internal/manager-api',
-        'storybook/manager-api',
-        'storybook/theming',
-        '@mdx-js/react',
-        'react-jsx-runtime',
-        'react-element-to-jsx-string',
-      ],
+      external: (id) => {
+        // Allow CSS imports from peer dependencies to be bundled
+        if (id.endsWith('.css')) return false;
+        if (externalDeps.some((dep) => id === dep || id.startsWith(`${dep}/`)))
+          return true;
+        return [
+          'path',
+          'fs',
+          'url',
+          '@storybook/react',
+          '@storybook/react-vite',
+          '@storybook/react-vite/node',
+          '@storybook/addon-docs/blocks',
+          'storybook/internal/components',
+          'storybook/components',
+          'storybook/preview-api',
+          'storybook/internal/preview-api',
+          'storybook/internal/core-events',
+          'storybook/core-events',
+          'storybook/internal/manager-api',
+          'storybook/manager-api',
+          'storybook/theming',
+          '@mdx-js/react',
+          'react-jsx-runtime',
+          'react-element-to-jsx-string',
+        ].some((dep) => id === dep || id.startsWith(`${dep}/`));
+      },
     },
   },
 });

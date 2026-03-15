@@ -5,8 +5,9 @@ import {
   disableArgTypes,
   withJsxTransformer,
   withTransformedRawSource,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 import { AutocompleteUsingState } from './mocks/AutocompleteUsingState';
 import AutocompleteUsingStateSource from './mocks/AutocompleteUsingState.tsx?raw';
 import { AutocompleteUsingAsync } from './mocks/AutocompleteUsingAsync';

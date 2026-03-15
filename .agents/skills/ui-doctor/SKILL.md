@@ -1,23 +1,78 @@
 ---
 name: ui-doctor
-description: Audit and validate that an application correctly uses IDS (Iress Design System) components, follows IDS principles, and meets compliance requirements. This skill helps AI agents perform comprehensive UI reviews, identify areas where native HTML or third-party elements should be replaced with IDS components, assess adherence to IDS design principles, and produce actionable reports with recommendations.
+description: Audit and review application UI for IDS compliance, accessibility, usability, and cognitive load. Covers component usage validation, WCAG accessibility checks, cognitive load assessment, progressive disclosure review, and UX quality evaluation against Nielsen's heuristics. Produces actionable reports with prioritised recommendations. Use when asked to review UI, check accessibility, assess usability, or audit IDS compliance.
 ---
 
 # Skill: UI Doctor
 
-Audit and validate that an application correctly uses IDS (Iress Design System) components, follows IDS principles, and meets compliance requirements. This skill helps AI agents perform comprehensive UI reviews, identify areas where native HTML or third-party elements should be replaced with IDS components, assess adherence to IDS design principles, and produce actionable reports with recommendations.
+Audit and review application UI for IDS compliance, accessibility, usability, and cognitive load. This skill helps AI agents perform comprehensive UI reviews covering component usage, accessibility (WCAG), usability heuristics (Nielsen's 10), cognitive load, and progressive disclosure — then produce actionable reports with prioritised recommendations.
 
 ## When to Use
 
-- Reviewing an application's UI code for IDS compliance
-- Validating that IDS components are used where possible instead of raw HTML or custom implementations
-- Assessing design token usage and consistency
-- Generating a UI health report with an IDS compliance score
-- Providing recommendations to improve IDS adoption and consistency
+Activate this skill when the user says things like:
+
+- "Review this page / component / file for accessibility"
+- "Check the usability of this UI"
+- "Audit this for IDS compliance"
+- "This feels like too much cognitive load"
+- "Are we following IDS guidelines?"
+- "Check for a11y issues"
+- "Review this UI"
+- "Is this form accessible?"
+- "Can you do a UX review?"
+
+Or more generally:
+
+- Reviewing application UI code for IDS compliance
+- Validating accessibility (WCAG 2.1 AA)
+- Assessing usability and cognitive load
+- Evaluating design token usage and consistency
+- Generating a UI health report with a compliance score
+- Providing recommendations to improve UX, accessibility, and IDS adoption
+
+## Audit Modes
+
+Choose the mode that best matches the user's request. Each mode focuses on specific checklist sections.
+
+### Quick UX Review
+
+Use when the user asks for a general UI review, usability check, or "does this look right?"
+
+1. **Cognitive load & information architecture** — Is the UI overwhelming? Are there too many items, options, or actions visible at once?
+2. **Usability heuristics** — Evaluate against Nielsen's 10 (see [audit checklist](references/audit-checklist.md) § Usability Heuristics)
+3. **Button hierarchy & layout consistency** — One primary per section, consistent spacing
+4. **Quick component scan** — Are obvious raw HTML elements used where IDS components exist?
+
+### Accessibility Review
+
+Use when the user asks about a11y, WCAG, keyboard navigation, or screen reader support.
+
+1. **Form accessibility** — Labels, required indicators, validation messages, id/htmlFor pairing
+2. **Keyboard & focus** — Skip links, focus trapping in modals/slideouts, visible focus indicators
+3. **Screen reader** — ARIA landmarks, dynamic content announcements, accessible names on interactive elements
+4. **Colour & contrast** — WCAG AA contrast ratios, no reliance on colour alone
+5. **Cognitive load** — Progressive disclosure, information density (see [audit checklist](references/audit-checklist.md) § Cognitive Load)
+
+### Full Compliance Audit
+
+Use when the user asks for a complete IDS audit or compliance report.
+
+1. Run **all** checklist sections from the [audit checklist](references/audit-checklist.md)
+2. Validate component usage against [replacement tables](references/replacement-tables.md)
+3. Check design token usage and Provider/CSS setup
+4. Evaluate patterns (forms, loading, navigation)
+5. Assess usability and cognitive load
+6. Generate a full report using the [report template](references/report-template.md)
+
+## Scoped Audits
+
+If the user asks about a **specific file, component, or page**, focus the audit on that scope only. Apply the same checklist items but only to the files in question. Do not scan the entire application unless asked.
+
+Example: "Check the accessibility of `UserProfileForm.tsx`" → run the Accessibility Review mode on that single file.
 
 ## Audit Scope
 
-Before starting the audit, determine which files to scan and which to exclude.
+Before starting, determine which files to scan.
 
 ### Files to Scan
 
@@ -25,136 +80,101 @@ Before starting the audit, determine which files to scan and which to exclude.
 - CSS/SCSS/styled-component files for hardcoded design values
 - Application entry point(s) for Provider and CSS import checks
 
+**Important:** Always trace the component tree from the actual mount point (e.g. `main.tsx`, `index.tsx`) before evaluating Provider & Setup. The entry point may not be a route file — it could be a custom element wrapper, a shadow DOM host, or a separate bootstrap file that renders the router. Do not penalise missing Provider/CSS if a parent entry point already handles it.
+
 ### Files to Exclude
 
-- **Test files** (`*.test.tsx`, `*.spec.tsx`, `__tests__/`) — test mocks and utilities may legitimately use raw HTML
-- **Storybook stories** (`*.stories.tsx`) — stories may intentionally demonstrate raw HTML for comparison
-- **Configuration files** (`*.config.ts`, `*.config.js`) — not UI code
-- **Type definition files** (`*.d.ts`) — no runtime UI code
-- **Third-party code** (`node_modules/`, vendored libraries) — outside the application's control
+- **Test files** (`*.test.tsx`, `*.spec.tsx`, `__tests__/`) — test mocks may legitimately use raw HTML
+- **Storybook stories** (`*.stories.tsx`) — may intentionally show raw HTML for comparison
+- **Config files** (`*.config.ts`, `*.config.js`) — not UI code
+- **Type definitions** (`*.d.ts`) — no runtime UI code
+- **Third-party code** (`node_modules/`, vendored libraries) — outside application control
 - **Build output** (`dist/`, `build/`) — generated code
 
 ### Version-Aware Auditing
 
-IDS is currently on **version 6**. When auditing applications:
+IDS is currently on **version 6**. When auditing:
 
-- **Check the installed IDS version** — Look at `package.json` for `@iress-oss/ids-components` version
-- **v6 applications** — Apply all rules in this skill as-is
-- **v5 applications** — Some patterns differ (e.g., `IressForm` API changes between v5 and v6). Flag v5-specific patterns as "migration opportunities" rather than "non-compliant". Key v5→v6 differences include:
-  - `IressForm` now uses `rules` prop for validation instead of built-in validation props
-  - `react-hook-form` is now a peer dependency
-  - Form state management moved from `useState` to React Hook Form's `useWatch`/`ref`
-- **Pre-v5 applications** — Flag as requiring a major migration and prioritise Provider/CSS setup first
+- **Check the installed version** — `package.json` for `@iress-oss/ids-components`
+- **v6** — Apply all rules as-is
+- **v5** — Flag v5-specific patterns as "migration opportunities" (key differences: `IressForm` uses `rules` prop, `react-hook-form` is a peer dependency, form state via `useWatch`/`ref`)
+- **Pre-v5** — Flag as requiring major migration; prioritise Provider/CSS setup first
 - **Always note the version** in the audit report header
 
 ## Audit Process
 
-### 1. Validate IDS Component Usage
+### 1. Evaluate UX, Accessibility & Cognitive Load
 
-Scan the application code for raw HTML elements, third-party UI components, and custom implementations that have IDS equivalents. Flag instances where IDS components should be used instead.
+Start with what users experience — assess the UI's usability, accessibility, and information density before checking component compliance.
 
-#### Third-Party UI Library Detection
+#### a. Usability Heuristics (Nielsen's 10)
 
-Check for imports from third-party UI libraries that overlap with IDS. Common libraries to flag:
+Evaluate the application against all 10 heuristics. Each has IDS-specific guidance in the [audit checklist](references/audit-checklist.md) § Usability Heuristics. Key areas:
 
-| Third-Party Library                 | Common Imports to Flag                                    | IDS Replacement                |
-| ----------------------------------- | --------------------------------------------------------- | ------------------------------ |
-| Material UI (`@mui/*`)              | `Button`, `TextField`, `Select`, `Modal`, `Table`, `Tabs` | Equivalent `Iress*` components |
-| Ant Design (`antd`)                 | `Button`, `Input`, `Select`, `Modal`, `Table`, `Tabs`     | Equivalent `Iress*` components |
-| Chakra UI (`@chakra-ui/*`)          | `Button`, `Input`, `Select`, `Modal`, `Table`             | Equivalent `Iress*` components |
-| React Bootstrap (`react-bootstrap`) | `Button`, `Form`, `Modal`, `Table`, `Nav`                 | Equivalent `Iress*` components |
-| Radix UI (`@radix-ui/*`)            | `Dialog`, `Popover`, `Tooltip`, `Tabs`, `Select`          | Equivalent `Iress*` components |
-| Headless UI (`@headlessui/react`)   | `Dialog`, `Popover`, `Menu`, `Tab`, `Switch`              | Equivalent `Iress*` components |
+1. **Visibility of system status** — Loading states use `IressLoading` (preferred) or `IressSkeleton` (for custom content placeholder patterns); active states visible on tabs, nav, breadcrumbs
+2. **Match between system and real world** — Labels use plain language; icons paired with text; status colours follow conventions
+3. **User control and freedom** — Modals/slideouts dismissible; destructive actions require confirmation; forms have cancel
+4. **Consistency and standards** — All components from IDS; tokens used consistently; same action = same pattern
+5. **Error prevention** — Declarative `rules` validation; required fields marked; constraints communicated via `hint`
+6. **Recognition rather than recall** — Persistent navigation; visible breadcrumbs; labels always visible (not just placeholders)
+7. **Flexibility and efficiency** — Keyboard shortcuts; skip links; searchable selects; autocomplete
+8. **Aesthetic and minimalist design** — Clear visual hierarchy; consistent spacing; one primary action per section
+9. **Help users recognise/recover from errors** — Human-readable validation; inline errors; `IressValidationSummary` for long forms
+10. **Help and documentation** — Hint text; tooltips for non-obvious UI; placeholder supplementary to labels
 
-**How to detect:** Search for import statements matching these package names. Any UI component imported from a third-party library that has an IDS equivalent should be flagged as a **High** priority replacement.
+#### b. Cognitive Load & Information Architecture
 
-```typescript
-// ❌ Third-party UI component — should use IDS
-import { Button } from '@mui/material';
-import { Modal } from 'antd';
-import { Dialog } from '@radix-ui/react-dialog';
+Evaluate whether the UI presents too much information or too many choices at once.
 
-// ✅ IDS components
-import { IressButton, IressModal } from '@iress-oss/ids-components';
-```
+- **Item count thresholds** — Menus/dropdowns with >10 items should use `searchable`; long forms (>8 fields) should use `IressForm pattern="long"`; navigation with >7 top-level items should use grouping
+- **Progressive disclosure** — Use `IressExpander` or `IressTabSet` to hide secondary content until needed; multi-step flows break complex tasks into stages
+- **Information density** — Is the screen overwhelming? Use `IressCard`/`IressPanel` to group related content; use `IressStack` with adequate spacing
+- **Batch action safety** — Bulk operations (select-all + delete) need explicit confirmation via `IressModal`; show count of affected items
+- **Focus management after state changes** — After modal close, focus returns to trigger; after item deletion, focus moves to next/previous item; after form submission, focus moves to result or error
+- **Visual hierarchy** — Primary content is prominent; secondary content is de-emphasised; use `IressText textStyle` to establish hierarchy
 
-#### HTML Element → IDS Component Replacement Map
+#### c. Accessibility (WCAG 2.1 AA)
 
-| Raw HTML / Custom Code                  | IDS Replacement                                       | Priority |
-| --------------------------------------- | ----------------------------------------------------- | -------- |
-| `<button>`                              | `IressButton`                                         | High     |
-| `<a>` (navigation link)                 | `IressLink`                                           | High     |
-| `<input type="text">`                   | `IressField` + `IressInput`                           | High     |
-| `<input type="checkbox">`               | `IressCheckbox`                                       | High     |
-| `<input type="radio">`                  | `IressRadio` + `IressRadioGroup`                      | High     |
-| `<select>`                              | `IressField` + `IressSelect`                          | High     |
-| `<textarea>`                            | `IressField` + `IressInput`                           | High     |
-| `<table>`                               | `IressTable`                                          | High     |
-| `<label>`                               | `IressField` (wraps input with label)                 | High     |
-| `<h1>`–`<h6>`, `<p>`, `<span>` (styled) | `IressText`                                           | Medium   |
-| `<img>`                                 | `IressImage`                                          | Medium   |
-| `<hr>`                                  | `IressDivider`                                        | Medium   |
-| `<dialog>` / custom modal               | `IressModal`                                          | High     |
-| Custom confirmation / danger dialog     | `IressModal status="danger"` (or `success`/`warning`) | High     |
-| Custom drawer / slideout                | `IressSlideout`                                       | High     |
-| Custom tooltip                          | `IressTooltip`                                        | Medium   |
-| Custom popover                          | `IressPopover`                                        | Medium   |
-| Custom tabs                             | `IressTabSet` + `IressTab`                            | High     |
-| Custom spinner / loader                 | `IressSpinner`                                        | Medium   |
-| Custom skeleton loader                  | `IressSkeleton`                                       | Low      |
-| Custom progress bar                     | `IressProgress`                                       | Low      |
-| Custom alert / toast                    | `IressAlert` / `IressToaster`                         | High     |
-| Custom card / panel                     | `IressCard` / `IressPanel`                            | Medium   |
-| Custom toggle / switch                  | `IressToggle`                                         | High     |
-| Custom badge / tag                      | `IressTag` / `IressPill`                              | Low      |
-| Custom breadcrumbs                      | `IressBreadcrumbs`                                    | Medium   |
-| Custom side navigation                  | `IressSideNav`                                        | Medium   |
-| Custom context menu                     | `IressMenu` + `IressMenuItem`                         | Medium   |
-| Custom icon (SVG inline)                | `IressIcon`                                           | Medium   |
-| `<div>` with flex column styles         | `IressStack`                                          | Medium   |
-| `<div>` with flex row styles            | `IressInline`                                         | Medium   |
-| `<div>` with grid styles                | `IressRow` + `IressCol`                               | Medium   |
-| `<div>` with max-width container        | `IressContainer`                                      | Low      |
-| `<form>`                                | `IressForm` + `IressFormField`                        | High     |
-| `<input type="range">`                  | `IressSlider`                                         | Medium   |
-| `<input type="number">` (currency)      | `IressField` + `IressInputCurrency`                   | Medium   |
-| `<details>` / custom accordion          | `IressExpander`                                       | Medium   |
-| Custom autocomplete / typeahead         | `IressAutocomplete`                                   | High     |
-| Custom select with search               | `IressField` + `IressSelect`                          | High     |
-| Custom read-only display                | `IressReadonly`                                       | Medium   |
-| Custom segmented control / button group | `IressButtonGroup`                                    | Medium   |
-| Custom validation messages              | `IressValidationMessage` / `IressValidationSummary`   | High     |
-| Custom styled wrapper `<div>`           | `IressStyled`                                         | Low      |
+Check form accessibility, keyboard & focus, screen reader support, and colour/contrast. See [audit checklist](references/audit-checklist.md) § Accessibility for the full list. Key checks:
 
-#### What to Look For
+- All form inputs have labels (via `IressField` or `IressFormField`)
+- Skip links present (`IressSkipLink`)
+- Focus trapping in modals/slideouts (automatic with IDS)
+- ARIA landmarks (`<nav>`, `<main>`, `<aside>`)
+- Dynamic content announced to screen readers — choose the right tier:
+  - `IressAlert` — persistent, inline status messages (no `aria-live`; already in the reading flow)
+  - `IressToaster` — transient notifications demanding attention (`aria-live="assertive"`); avoid overuse
+  - Micro animations/interactions with colocated `aria-live="polite"` — for subtle, user-initiated updates (save indicators, count badges, status changes) that don't warrant a toast; place the live region near the component, not globally
+- Colour contrast meets WCAG AA; no reliance on colour alone
 
-```typescript
-// ❌ Raw HTML — should use IDS components
-<button onClick={handleClick}>Submit</button>
-<input type="text" placeholder="Name" />
-<select>
-  <option>Option 1</option>
-</select>
-<div className="modal-overlay">...</div>
-<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>...</div>
+#### d. Button Hierarchy
 
-// ✅ IDS components
-<IressButton mode="primary" onClick={handleClick}>Submit</IressButton>
-<IressField label="Name" htmlFor="name">
-  <IressInput id="name" placeholder="Name" />
-</IressField>
-<IressField label="Options" htmlFor="options">
-  <IressSelect id="options">
-    <option>Option 1</option>
-  </IressSelect>
-</IressField>
-<IressModal open={isOpen} onClose={handleClose}>...</IressModal>
-<IressStack gap="4">...</IressStack>
-```
+- One `mode="primary"` button per logical section
+- Destructive actions use `status="danger"`, not custom red styling
+- Icon-only buttons include accessible text
 
-### 2. Validate IDS Principles and Compliance
+#### e. Layout Consistency
 
-Check that the application follows these core IDS principles:
+- Vertical stacks → `IressStack`; horizontal rows → `IressInline`; grids → `IressRow`/`IressCol`
+- Spacing uses token values (0–10) on `gap` prop
+- `IressCSSProps` (`m`, `mx`, `p`, `px`) instead of inline styles
+- Responsive: `hideFrom`/`hideBelow` props or `useBreakpoint` hook; grid layouts use responsive `span` (e.g. `span={{ xs: 12, md: 6 }}`); mobile view focuses on primary task with secondary content in `IressSlideout` or collapsible sections
+
+### 2. Validate IDS Component Usage
+
+Scan for raw HTML, third-party components, and custom implementations that have IDS equivalents. Use the [replacement tables](references/replacement-tables.md) for the full mapping.
+
+**Quick checks:**
+
+- No raw `<button>`, `<input>`, `<select>`, `<form>`, `<table>` — use IDS equivalents
+- No third-party UI library imports (MUI, Ant, Chakra, Bootstrap, Radix, Headless UI) where IDS equivalents exist
+- No custom modals, drawers, tabs, tooltips, alerts — use IDS patterns
+- No custom loading spinners — use `IressLoading` (preferred) or `IressSkeleton` for custom content placeholder patterns
+- Layout divs with flex/grid styles → `IressStack`, `IressInline`, `IressRow`/`IressCol`
+
+**Acceptable exceptions** (do NOT flag): raw elements in test files, third-party widgets the app cannot control, `<input type="hidden">`, custom components wrapping IDS internally. See [replacement tables](references/replacement-tables.md) § Acceptable Exceptions.
+
+### 3. Validate IDS Principles & Setup
 
 #### a. Provider & CSS Setup
 
@@ -165,12 +185,24 @@ Check that the application follows these core IDS principles:
 - If using design tokens directly in application code (for custom styling), users should additionally install `@iress-oss/ids-tokens@alpha` and import `@iress-oss/ids-tokens/build/css-vars.css`
 
 ```typescript
-// ✅ Correct setup — minimum required
+// ✅ Minimum required setup (option A — standard)
 import '@iress-oss/ids-components/dist/style.css';
 import { IressProvider } from '@iress-oss/ids-components';
 
 function App() {
   return <IressProvider>{/* app content */}</IressProvider>;
+}
+```
+
+```typescript
+// ✅ Minimum required setup (option B — IressShadow)
+// IressShadow is a superset of IressProvider — it wraps children in a shadow DOM,
+// injects style.css automatically, and provides the IressProvider context.
+// No separate IressProvider or CSS import is needed when using IressShadow.
+import { IressShadow } from '@iress-oss/ids-components';
+
+function App() {
+  return <IressShadow>{/* app content */}</IressShadow>;
 }
 ```
 
@@ -202,12 +234,13 @@ yarn add @iress-oss/ids-tokens@alpha  // Not needed unless using tokens directly
 yarn add @iress-oss/ids-components  // Must use @alpha tag
 ```
 
+
 #### b. Design Token Usage
 
-- **Hardcoded colour values** — Flag any hex codes, rgb(), or named colours that should use IDS tokens
-- **Hardcoded spacing** — Flag pixel values for padding/margin/gap that should use spacing tokens (multiples of 4px)
-- **Hardcoded typography** — Flag font-family, font-size, font-weight that should use IDS typography tokens
-- **Hardcoded border-radius** — Flag radius values that should use IDS radius tokens
+- No hardcoded colour hex/rgb — use IDS colour tokens
+- No hardcoded pixel spacing — use IDS spacing tokens
+- No hardcoded font properties — use IDS typography tokens
+- No hardcoded border-radius — use IDS radius tokens
 
 ```typescript
 // ❌ Hardcoded values
@@ -224,82 +257,73 @@ import { cssVars } from '@iress-oss/ids-tokens';
 
 #### c. Form & Pattern Compliance
 
-IDS provides several patterns (composite components) that ensure consistent UIs across applications. Validate that the application uses these patterns where appropriate.
+IDS provides patterns that ensure consistent UIs. Validate usage where appropriate.
 
-##### Form Pattern (`IressForm`)
+**Form Pattern (`IressForm`):**
 
-Forms should use `IressForm` and `IressFormField` instead of building custom form handling. This ensures consistent validation, error display, and state management.
+- Use `IressForm` + `IressFormField` for all forms
+- `rules` prop for validation; `useWatch` for conditional fields
+- `pattern="long"` for forms with >8 fields
+- `react-hook-form` as peer dependency
 
-- **Use `IressForm` for all forms** — Built on React Hook Form, it provides consistent validation, error handling, and state management
-- **Use `IressFormField` for form fields** — Wraps form controls with `name`, `label`, and `rules` props for declarative validation
-- **Use `IressFormFieldset` for grouped inputs** — For checkbox groups, radio groups, and other multi-input fields
-- **Use `rules` prop for validation** — Declarative validation via React Hook Form rules, not custom validation logic
-- **Use `onSubmit` for state syncing** — Sync form data with external state via the submit event, not per-field `onChange`
-- **Use `useWatch` for conditional fields** — Not `useState` + `onChange` handlers
-- **Choose the right form pattern** — Use `pattern="long"` for forms with >8 fields (sticky heading/actions), `pattern="short"` (default) for ≤8 fields
-- **Use `react-hook-form` as a peer dependency** — Required alongside `@iress-oss/ids-components` when using `IressForm`
+**Loading Pattern (`IressLoading` / `IressSkeleton`):**
 
-```typescript
-// ❌ Custom form handling
-<form onSubmit={handleSubmit}>
-  <label>Email</label>
-  <IressInput value={email} onChange={(e) => setEmail(e.target.value)} />
-  {emailError && <span className="error">{emailError}</span>}
-  <button type="submit">Submit</button>
-</form>
+- `page`, `component`, `start-up`, `validate`, `long` patterns
+- Handles timing thresholds automatically (no indicator <500ms, spinner at 500ms, message at 2s)
+- Prefer `IressLoading` for standard loading states — it handles timing, messaging, and accessibility automatically
+- `IressSkeleton` is valid for custom content placeholder patterns where you need skeleton screens that mirror the page layout; use `IressLoading` if possible
+- When a page reads from a pre-populated cache (e.g. SWR, React Query, or TanStack Query cache populated by a previous page), a separate loading state may be unnecessary — check whether the data source is a cache read vs a fresh fetch before flagging
 
-// ✅ IDS Form pattern
-<IressForm onSubmit={handleSubmit} heading="Contact" actions={<IressButton mode="primary" type="submit">Submit</IressButton>}>
-  <IressFormField
-    name="email"
-    label="Email"
-    rules={{ required: true, pattern: { value: /^[^@]+@[^@]+$/, message: 'Invalid email' } }}
-    render={(controlledProps) => <IressInput {...controlledProps} type="email" />}
-  />
-</IressForm>
-```
+**Navigation Patterns:**
 
-##### Loading Pattern (`IressLoading`)
+- `IressDropdownMenu` for filter/action triggers (not inside forms)
+- `IressContextualMenu` for row-level actions with `ariaLabel`
+- `IressSideNav` for application shell navigation
+- `IressBreadcrumbs` for hierarchy navigation
 
-Applications should use `IressLoading` for all loading states to ensure consistent timing behaviour and user experience.
+**Error Boundary Pattern:**
 
-- **Use `IressLoading` instead of custom spinners/skeletons** — It handles timing thresholds automatically (no indicator <500ms, spinner at 500ms, message at 2s, detailed feedback at 10s)
-- **Choose the right loading pattern** — `page` for page loads, `component` for component loads, `start-up` for app initialisation, `validate` for form submission, `long` for operations >10s
-- **Be consistent** — Use the same loading pattern for similar operations across the application
+React error boundaries catch component crashes and should render IDS components as fallback UI — not custom error pages or raw HTML.
 
-##### Dropdown Menu Pattern (`IressDropdownMenu`)
+| Error Scope                                 | IDS Component                                          | Why                                                                 |
+| ------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------- |
+| Full-page crash (root error boundary)       | `IressModal status="danger"` with retry/reload actions | Blocks interaction, demands attention, provides structured recovery |
+| Section/feature crash (scoped boundary)     | `IressAlert status="danger"` as inline fallback        | Persistent, in-context — rest of the page still works               |
+| Transient API/network failure (not a crash) | `IressToaster`                                         | Retryable, doesn't block the UI                                     |
 
-- **Use `IressDropdownMenu` for filter/action triggers** — Not custom popover menus
-- **Do not use inside forms** — Use `IressSelect`, `IressRadioGroup`, or `IressCheckboxGroup` within forms instead
-- **Enable `searchable` for 10+ options** — Improves usability for long option lists
+- **Do NOT use `IressToaster` for error boundaries** — toasts are transient and dismissible; if the user dismisses it, the broken component tree has no recovery UI
+- **`IressModal status="danger"`** is the primary recommendation for root-level error boundaries — use `actions` prop to offer "Retry" or "Reload" buttons
+- **`IressAlert status="danger"`** is preferred for scoped boundaries that wrap individual features — shows inline where the broken component was
 
-##### Contextual Menu Pattern (`IressContextualMenu`)
+**Before flagging missing error handling:** Check whether a parent component or layout route already provides an error boundary that covers the file being audited. Error boundaries are an app-wide pattern — a page component does not need its own error/empty state handling if a parent boundary already catches and renders IDS-based fallback UI (e.g. `IressModal status="danger"` with navigation-aware recovery). Only flag if no ancestor provides error handling.
 
-- **Use for row-level or card-level secondary actions** — Not custom context menus
-- **Place destructive actions at the end** — Follow the established convention
-- **Provide meaningful `ariaLabel`** — Describe the menu purpose in context
+**Shadow DOM Pattern (`IressShadow`):**
 
-##### Side Navigation Pattern (`IressSideNav`)
+- `IressShadow` is a **superset of `IressProvider`** — it creates a shadow root, injects `style.css` into it, and provides the `IressProvider` context automatically. When an app uses `IressShadow` at its entry point, no separate `IressProvider` or CSS import is required.
+- Commonly used for microfrontend CSS isolation, but also valid as the sole Provider + CSS setup for any application
+- Creates a shadow root on a `<div>` — children are standard React components
+- The `slot` attribute is irrelevant; always use React props (`prepend`, `append`, `footer`, etc.)
 
-- **Use for application shell navigation** — Not custom sidebar implementations
-- **Use for multi-section apps** — When the application has several major sections with sub-navigation
+### 4. Provide Recommendations
 
-##### Breadcrumbs Pattern (`IressBreadcrumbs`)
+Prioritise findings using these levels:
 
-- **Use for site hierarchy navigation** — Not custom breadcrumb implementations
-- **Last item should represent current page** — And not be clickable
+| Priority     | Description                                                                                             | Action                |
+| ------------ | ------------------------------------------------------------------------------------------------------- | --------------------- |
+| **Critical** | Missing Provider/CSS, raw inputs without labels, missing skip links, forms not using `IressForm`        | Must fix immediately  |
+| **High**     | Raw HTML elements with IDS equivalents, custom form handling, a11y failures, high cognitive load issues | Fix in current sprint |
+| **Medium**   | Hardcoded tokens, missing IressText, custom layout, missing ARIA landmarks, information density issues  | Plan for next sprint  |
+| **Low**      | Missing IressImage, custom badges, minor token inconsistencies, non-critical UX improvements            | Backlog               |
 
-##### Shadow DOM Pattern (`IressShadow`)
+For each finding, provide: (1) what was found, (2) why it matters, (3) how to fix (with before/after code), (4) priority level.
 
-- **Use for microfrontend isolation** — When you need to isolate styles from the host application
-- **Alternative to `IressProvider`** — Injects styles into the shadow DOM instead of the document head
+### 5. Generate Compliance Report
 
-##### Form Accessibility
+Use the [report template](references/report-template.md) to produce a structured report.
 
-- **All form inputs must have labels** — Use `IressField` (standalone inputs) or `IressFormField` (within `IressForm`) to provide labels, hints, and validation
-- **Required fields must be marked** — Use `required` prop on `IressField` or `rules={{ required: true }}` on `IressFormField`
-- **Validation messages must use IDS patterns** — Use `IressField` `status` and `statusMessage` props, or `IressFormField` `rules` prop for declarative validation
-- **Form inputs must have `id` and `htmlFor` pairing** — For label association when using `IressField` directly
+## Audit Checklist Summary
+
+The [full audit checklist](references/audit-checklist.md) covers these sections:
 
 ```typescript
 // ❌ Missing label / accessibility
@@ -330,7 +354,7 @@ Applications should use `IressLoading` for all loading states to ensure consiste
 - **Use IDS layout components** — `IressStack`, `IressInline`, `IressRow`/`IressCol` instead of custom CSS flex/grid
 - **Use spacing tokens for gaps** — Values 0–10 on `gap` prop
 - **Use IressCSSProps for spacing** — `m`, `mx`, `my`, `p`, `px`, `py` props instead of inline styles
-- **Responsive design** — Use `IressHide`, `hideFrom`/`hideBelow` for responsive visibility
+- **Responsive design** — Use `hideFrom`/`hideBelow` props or the `useBreakpoint` hook for responsive visibility. Multi-column layouts should use responsive `span` on `IressCol`. On mobile, secondary content (filters, sidebars, metadata) should be relocated to `IressSlideout` or collapsible sections — the mobile view should focus on the primary task while preserving all functionality
 
 #### f. Semantic Component Usage
 
@@ -389,6 +413,7 @@ Produce a structured report covering all audit areas. Use the [report template](
 
 Use the [full audit checklist](references/audit-checklist.md) when performing a UI doctor audit. It covers setup & configuration, component usage, design tokens, pattern usage, accessibility, layout, button hierarchy, and usability heuristics (based on Nielsen's 10 heuristics).
 
+
 ## Example Audit Output
 
 ### Quick Scan Summary
@@ -426,3 +451,35 @@ Top Issues:
 - **Figma mapping skill:** `.agents/skills/figma-to-ids/SKILL.md`
 - **UI translation skill:** `.agents/skills/ui-translation/SKILL.md`
 - **Storybook and Guidelines:** https://main--691abcc79dfa560a36d0a74f.chromatic.com
+- **Common mistakes guide:** `node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md`
+
+## Common Mistakes to Flag in Audits
+
+> **⚠️ AI agents are especially prone to propagating these mistakes** because they match patterns found in existing codebases. Flag these as **High** priority issues.
+
+### Legacy `slot` attributes (v4 pattern)
+
+IDS v4 and below used `slot` attributes on children to position content. This is **no longer supported** in v5+. During audits, search for `slot=` on any child of an IDS component and flag it.
+
+```typescript
+// ❌ Flag this — legacy v4 slot pattern
+<IressButton>
+  <IressIcon slot="start" name="search" />
+  Search
+</IressButton>
+
+// ✅ Should be — use prepend prop
+<IressButton prepend={<IressIcon name="search" />}>
+  Search
+</IressButton>
+```
+
+**Audit rule:** Search for `slot="` inside any `<Iress*>` component. Every match is a finding.
+
+| Pattern to find                              | Replacement            | Priority |
+| -------------------------------------------- | ---------------------- | -------- |
+| `<Child slot="prepend" />` or `slot="start"` | `prepend={<Child />}`  | High     |
+| `<Child slot="append" />` or `slot="end"`    | `append={<Child />}`   | High     |
+| `<Child slot="icon-only" />`                 | `icon="iconName"` prop | High     |
+| `<div slot="footer">...</div>`               | `footer={...}` prop    | High     |
+| `<div slot="activator">...</div>`            | `activator={...}` prop | High     |

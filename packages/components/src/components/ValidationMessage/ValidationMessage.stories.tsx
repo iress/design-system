@@ -11,8 +11,9 @@ import {
 import {
   disableArgTypes,
   STORYBOOK_ONLY_CATEGORY,
+  reactNodeArgType,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
 
 interface CustomArgs {
   messages: Record<Statuses, string>;

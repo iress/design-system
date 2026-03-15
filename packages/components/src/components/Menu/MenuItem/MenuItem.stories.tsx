@@ -4,7 +4,10 @@ import { IressMenu } from '../Menu';
 import { IressIcon, IressPanel, IressPill, IressPopover } from '@/main';
 import { RoutingLinkMenu } from './mocks/RoutingLinkMenu';
 import RoutingLinkMenuSource from './mocks/RoutingLinkMenu.tsx?raw';
-import { reactNodeArgType, stylingProps } from '@theme-preset/storybookHelpers';
+import {
+  reactNodeArgType,
+  stylingProps,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressMenuItem>;
 
