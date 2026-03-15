@@ -3,9 +3,9 @@ import { defineUtility } from '@pandacss/dev';
 
 const baseStyles = {
   fontFamily: MATERIAL_SYMBOLS.family,
-  fontWeight: MATERIAL_SYMBOLS.weight,
+  fontWeight: String(MATERIAL_SYMBOLS.weight),
   verticalAlign: 'middle',
-  fontFeatureSettings: 'liga',
+  fontFeatureSettings: "'liga'",
   display: 'inline-block',
 };
 
