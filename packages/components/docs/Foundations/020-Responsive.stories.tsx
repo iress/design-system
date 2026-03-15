@@ -15,6 +15,7 @@ import {
   IressStyled,
   IressTable,
   IressText,
+  type PositiveSpacingToken,
 } from '@/main';
 import { lazy, Suspense, useState } from 'react';
 import {
@@ -31,7 +32,7 @@ const BreakpointMd = lazy(() => import('@docs/components/BreakpointMd'));
 const BreakpointLg = lazy(() => import('@docs/components/BreakpointLg'));
 const BreakpointXl = lazy(() => import('@docs/components/BreakpointXl'));
 
-const MarginToken = ({ token }: { token?: string }) => {
+const MarginToken = ({ token }: { token?: PositiveSpacingToken }) => {
   const [size, setSize] = useState<number | null>(null);
 
   return (
@@ -40,7 +41,7 @@ const MarginToken = ({ token }: { token?: string }) => {
       <IressPill>{token}</IressPill>
       <IressStyled
         srOnly
-        pl={token as 'spacing.4'}
+        pl={token}
         ref={(el) => {
           if (el) {
             const rect = el.getBoundingClientRect();

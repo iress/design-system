@@ -98,7 +98,7 @@ export const BREAKPOINT_DETAILS = {
     containerMaxWidth: '1690px',
     viewportWidth: 1690 + 64,
   },
-} satisfies Record<string, BreakpointDetail>;
+} as const satisfies Record<string, BreakpointDetail>;
 
 /**
  * The breakpoints used in the design system.
