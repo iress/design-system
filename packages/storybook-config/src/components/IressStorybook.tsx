@@ -209,7 +209,7 @@ export const IressStorybook = ({
     >
       <IressStorybookStyles />
       <Unstyled>
-        <IressProvider>
+        <IressProvider noSubsetting>
           <IressText>
             <MDXProvider
               components={{
