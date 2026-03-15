@@ -1330,7 +1330,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iress-oss/ids-components@npm:^6.0.0-alpha.40, @iress-oss/ids-components@workspace:packages/components":
+"@iress-oss/ids-components@npm:^6.0.0-alpha.41, @iress-oss/ids-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-components@workspace:packages/components"
   dependencies:
@@ -1402,7 +1402,7 @@ __metadata:
   resolution: "@iress-oss/ids-storybook-config@workspace:packages/storybook-config"
   dependencies:
     "@chromatic-com/storybook": "npm:^5.0.1"
-    "@iress-oss/ids-components": "npm:^6.0.0-alpha.40"
+    "@iress-oss/ids-components": "npm:^6.0.0-alpha.41"
     "@iress-oss/ids-storybook-okta": "npm:^0.1.2"
     "@iress-oss/ids-storybook-sandbox": "npm:^0.2.2"
     "@iress-oss/ids-storybook-toggle-stories": "npm:^0.1.0"
@@ -1699,7 +1699,7 @@ __metadata:
   resolution: "@iress/design-system-monorepo@workspace:."
   dependencies:
     "@chromatic-com/storybook": "npm:^5.0.1"
-    "@iress-oss/ids-components": "npm:^6.0.0-alpha.40"
+    "@iress-oss/ids-components": "npm:^6.0.0-alpha.41"
     "@iress-oss/ids-storybook-config": "npm:^0.5.0"
     "@iress-oss/ids-storybook-okta": "npm:^0.1.2"
     "@iress-oss/ids-storybook-sandbox": "npm:^0.2.2"
