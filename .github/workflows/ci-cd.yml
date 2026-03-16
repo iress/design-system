@@ -337,22 +337,10 @@ jobs:
               yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public --provenance
             else
               echo "  ⚠️ New package — using NPM_NEW_PACKAGE_TOKEN for first publish"
-              echo "  DEBUG: NPM_NEW_PKG_TOKEN is set: $([ -n "$NPM_NEW_PKG_TOKEN" ] && echo 'yes' || echo 'no')"
-              echo "  DEBUG: NPM_NEW_PKG_TOKEN length: ${#NPM_NEW_PKG_TOKEN}"
-              echo "  DEBUG: NODE_AUTH_TOKEN is set: $([ -n "$NODE_AUTH_TOKEN" ] && echo 'yes' || echo 'no')"
-              echo "  DEBUG: Current .yarnrc.yml auth config:"
-              grep -A2 'npmRegistries' .yarnrc.yml || echo "  DEBUG: No npmRegistries found"
-              echo "  DEBUG: Checking yarn config for npmAuthToken:"
-              yarn config get npmRegistries 2>&1 || true
-              echo "  DEBUG: Overriding NODE_AUTH_TOKEN..."
-              export NODE_AUTH_TOKEN="$NPM_NEW_PKG_TOKEN"
-              echo "  DEBUG: NODE_AUTH_TOKEN after override is set: $([ -n "$NODE_AUTH_TOKEN" ] && echo 'yes' || echo 'no')"
-              echo "  DEBUG: NODE_AUTH_TOKEN length after override: ${#NODE_AUTH_TOKEN}"
-              echo "  DEBUG: Running yarn npm whoami to test auth..."
-              yarn npm whoami 2>&1 || echo "  DEBUG: whoami failed"
-              echo "  DEBUG: Publishing..."
+              yarn config set 'npmRegistries["https://registry.npmjs.org"].npmAuthToken' "$NPM_NEW_PKG_TOKEN"
+              yarn npm whoami 2>&1 || echo "  DEBUG: whoami still failed after yarn config set"
               yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public
-              export NODE_AUTH_TOKEN="${{ secrets.NPM_TOKEN }}"
+              yarn config set 'npmRegistries["https://registry.npmjs.org"].npmAuthToken' "${NODE_AUTH_TOKEN:-${{ secrets.NPM_TOKEN }}}"
             fi
             echo "  ✅ Published $PACKAGE@$VERSION with tag '$NPM_TAG'"
             RELEASE_INFO="${RELEASE_INFO}${PACKAGE}|${VERSION}|${IS_PRERELEASE};"
