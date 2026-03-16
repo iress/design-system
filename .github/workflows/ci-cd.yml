@@ -310,6 +310,26 @@ jobs:
           chmod +x .github/scripts/publish-packages.sh
           .github/scripts/publish-packages.sh stable
 
+      - name: Verify npm authentication
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "❌ NODE_AUTH_TOKEN is empty! Check that NPM_TOKEN secret is configured in the 'npm-publishing' environment."
+            exit 1
+          fi
+          echo "✅ NODE_AUTH_TOKEN is set (length: ${#NODE_AUTH_TOKEN})"
+          echo "--- .yarnrc.yml contents (redacted) ---"
+          sed 's/npmAuthToken:.*/npmAuthToken: [REDACTED]/' .yarnrc.yml
+          echo "--- Yarn config npmPublishRegistry ---"
+          yarn config get npmPublishRegistry || true
+          echo "--- Yarn config npmAuthToken ---"
+          if yarn config get npmAuthToken 2>/dev/null | grep -q .; then
+            echo "npmAuthToken is configured"
+          else
+            echo "⚠️ npmAuthToken is NOT configured in Yarn"
+          fi
+
       - name: Publish to NPM (Stable)
         if: steps.version-check.outputs.has_version_changes == 'true'
         id: publish
