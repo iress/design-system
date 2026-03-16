@@ -122,7 +122,7 @@ const ActiveIndicator = (props: IressUnstyledProps) => {
       }
     };
 
-    const activeTimeout = setTimeout(updateStyle, 150);
+    updateStyle();
 
     // Observe all tab elements so the indicator recalculates when any tab's
     // content changes size (e.g. badge appears/disappears, label text changes).
@@ -137,7 +137,6 @@ const ActiveIndicator = (props: IressUnstyledProps) => {
     }
 
     return () => {
-      clearTimeout(activeTimeout);
       resizeObserver?.disconnect();
     };
   }, [tabSet?.active, tabSet?.layoutVersion]);
