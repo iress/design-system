@@ -313,6 +313,7 @@ jobs:
         id: publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_NEW_PKG_TOKEN: ${{ secrets.NPM_NEW_PACKAGE_TOKEN }}
         run: |
           PACKAGES="${{ steps.version-check.outputs.packages_to_publish }}"
           echo "Publishing packages: $PACKAGES"
@@ -332,7 +333,12 @@ jobs:
               IS_PRERELEASE="false"
               echo "  NPM Tag: $NPM_TAG (stable)"
             fi
-            yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public --provenance
+            if npm view "$PACKAGE" version &>/dev/null; then
+              yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public --provenance
+            else
+              echo "  ⚠️ New package — using NPM_NEW_PACKAGE_TOKEN for first publish"
+              NODE_AUTH_TOKEN="$NPM_NEW_PKG_TOKEN" yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public
+            fi
             echo "  ✅ Published $PACKAGE@$VERSION with tag '$NPM_TAG'"
             RELEASE_INFO="${RELEASE_INFO}${PACKAGE}|${VERSION}|${IS_PRERELEASE};"
           done
