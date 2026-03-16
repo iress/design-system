@@ -56,3 +56,19 @@ export const InlineStyle: Story = {
     inline: true,
   },
 };
+
+export const Actions: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    actions: [
+      {
+        icon: 'content_copy',
+        children: 'Copy to clipboard',
+        onClick: () => {
+          void navigator.clipboard.writeText('AU');
+        },
+      },
+    ],
+  },
+};
