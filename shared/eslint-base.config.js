@@ -26,7 +26,6 @@ export async function createReactConfig() {
 }
 
 export async function createMdxConfig() {
-  // eslint-plugin-mdx v3.7.0+ supports ESLint 10 via context.filename
   const mdxPlugin = await import('eslint-plugin-mdx');
   return {
     ...mdxPlugin.flat,
