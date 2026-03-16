@@ -13,6 +13,8 @@ import { TabsUsingState } from './mocks/TabsUsingState';
 import TabsUsingStateSource from './mocks/TabsUsingState.tsx?raw';
 import { TabsLazyLoading } from './mocks/TabsLazyLoading';
 import TabsLazyLoadingSource from './mocks/TabsLazyLoading.tsx?raw';
+import { TabsWithDynamicBadge } from './mocks/TabsWithDynamicBadge';
+import TabsWithDynamicBadgeSource from './mocks/TabsWithDynamicBadge.tsx?raw';
 import {
   disableArgTypes,
   mergeStorybookConfig,
@@ -145,6 +147,23 @@ export const TabsWithBadges: Story = {
         Medical history goes here
       </IressTab>,
     ],
+  },
+};
+
+export const DynamicBadge: Story = {
+  render: (args) => <TabsWithDynamicBadge {...args} />,
+  parameters: {
+    ...withTransformedRawSource(
+      TabsWithDynamicBadgeSource,
+      'IressTabSetProps',
+      ['children'],
+    ),
+    docs: {
+      description: {
+        story:
+          'Toggle the pill on the active tab to see the active indicator resize and reposition automatically. This demonstrates that `ResizeObserver` correctly tracks tab size changes at runtime.',
+      },
+    },
   },
 };
 
