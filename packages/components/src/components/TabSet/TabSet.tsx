@@ -201,15 +201,23 @@ export const IressTabSet = ({
 
     // Use ResizeObserver to detect when the tablist changes size (e.g. window
     // resize, container resize) instead of a global window resize listener.
+    // Fall back to the window resize event in environments where ResizeObserver
+    // is unavailable (e.g. older browsers or SSR test environments).
     let resizeObserver: ResizeObserver | undefined;
-    if (listElement && typeof ResizeObserver !== 'undefined') {
-      resizeObserver = new ResizeObserver(checkOverflow);
-      resizeObserver.observe(listElement);
+    if (listElement) {
+      if (typeof ResizeObserver !== 'undefined') {
+        resizeObserver = new ResizeObserver(checkOverflow);
+        resizeObserver.observe(listElement);
+      } else {
+        window.addEventListener('resize', checkOverflow);
+      }
     }
 
     return () => {
       listElement?.removeEventListener('scroll', checkOverflow);
       resizeObserver?.disconnect();
+      // No-op if the listener was never added (ResizeObserver path was taken).
+      window.removeEventListener('resize', checkOverflow);
     };
   }, [children]);
 

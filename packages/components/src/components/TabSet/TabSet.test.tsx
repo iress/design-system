@@ -563,10 +563,11 @@ describe('IressTabs', () => {
       // Add a tab before the active tab
       await userEvent.click(screen.getByTestId('toggle'));
 
-      // Indicator style should have been recalculated (effect re-ran)
-      // In jsdom offsetLeft is always 0, but we verify the style was set
-      expect(activeIndicator.style.left).toBeDefined();
-      expect(activeIndicator.style.width).toBeDefined();
+      // Indicator style should have been recalculated (effect re-ran).
+      // In jsdom getBoundingClientRect() returns all zeros so left/width are
+      // set to '0px' — check they are non-empty rather than just defined.
+      expect(activeIndicator.style.left).not.toBe('');
+      expect(activeIndicator.style.width).not.toBe('');
     });
 
     it('clears active indicator when active tab is removed', async () => {
@@ -623,33 +624,37 @@ describe('IressTabs', () => {
         },
       );
 
-      const screen = render(
-        <IressTabSet data-testid={TEST_ID}>
-          <IressTab key="1" label="Tab 1">
-            Panel 1
-          </IressTab>
-          <IressTab key="2" label="Tab 2">
-            Panel 2
-          </IressTab>
-        </IressTabSet>,
-      );
+      try {
+        const screen = render(
+          <IressTabSet data-testid={TEST_ID}>
+            <IressTab key="1" label="Tab 1">
+              Panel 1
+            </IressTab>
+            <IressTab key="2" label="Tab 2">
+              Panel 2
+            </IressTab>
+          </IressTabSet>,
+        );
 
-      const tablist = screen.getByRole('tablist');
-      const activeIndicator = tablist.children[0] as HTMLElement;
+        const tablist = screen.getByRole('tablist');
+        const activeIndicator = tablist.children[0] as HTMLElement;
 
-      // Verify the ResizeObserver is observing the tab elements
-      expect(observeMock).toHaveBeenCalled();
+        // Verify the ResizeObserver is observing the tab elements
+        expect(observeMock).toHaveBeenCalled();
 
-      // Simulate a tab resize event (e.g., badge appears, label text changes)
-      await act(async () => {
-        resizeCallback!([], {} as ResizeObserver);
-      });
+        // Simulate a tab resize event (e.g., badge appears, label text changes)
+        await act(async () => {
+          resizeCallback!([], {} as ResizeObserver);
+        });
 
-      // Indicator style should have been recalculated
-      expect(activeIndicator.style.left).toBeDefined();
-      expect(activeIndicator.style.width).toBeDefined();
-
-      vi.unstubAllGlobals();
+        // Indicator style should have been recalculated.
+        // In jsdom getBoundingClientRect() returns all zeros so left/width are
+        // set to '0px' — check they are non-empty rather than just defined.
+        expect(activeIndicator.style.left).not.toBe('');
+        expect(activeIndicator.style.width).not.toBe('');
+      } finally {
+        vi.unstubAllGlobals();
+      }
     });
   });
 });
