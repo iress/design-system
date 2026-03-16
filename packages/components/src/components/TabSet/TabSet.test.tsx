@@ -634,5 +634,58 @@ describe('IressTabs', () => {
 
       vi.useRealTimers();
     });
+
+    it('updates active indicator when active tab content changes size', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true });
+
+      let resizeCallback: ResizeObserverCallback | undefined;
+      const observeMock = vi.fn();
+      const disconnectMock = vi.fn();
+
+      vi.stubGlobal(
+        'ResizeObserver',
+        class MockResizeObserver {
+          observe = observeMock;
+          disconnect = disconnectMock;
+          constructor(callback: ResizeObserverCallback) {
+            resizeCallback = callback;
+          }
+        },
+      );
+
+      const screen = render(
+        <IressTabSet data-testid={TEST_ID}>
+          <IressTab key="1" label="Tab 1">
+            Panel 1
+          </IressTab>
+          <IressTab key="2" label="Tab 2">
+            Panel 2
+          </IressTab>
+        </IressTabSet>,
+      );
+
+      // Wait for initial indicator timeout
+      await act(async () => {
+        vi.advanceTimersByTime(200);
+      });
+
+      const tablist = screen.getByRole('tablist');
+      const activeIndicator = tablist.children[0] as HTMLElement;
+
+      // Verify the ResizeObserver is observing the tab elements
+      expect(observeMock).toHaveBeenCalled();
+
+      // Simulate a tab resize event (e.g., badge appears, label text changes)
+      await act(async () => {
+        resizeCallback!([], {} as ResizeObserver);
+      });
+
+      // Indicator style should have been recalculated
+      expect(activeIndicator.style.left).toBeDefined();
+      expect(activeIndicator.style.width).toBeDefined();
+
+      vi.useRealTimers();
+      vi.unstubAllGlobals();
+    });
   });
 });

@@ -105,10 +105,12 @@ const HoverIndicator = (props: IressUnstyledProps) => {
 const ActiveIndicator = (props: IressUnstyledProps) => {
   const [style, setStyle] = useState<CSSProperties>({});
   const tabSet = useContext(TabSetContext);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const activeTab = tabSet?.active;
-    const activeTimeout = setTimeout(() => {
+
+    const updateStyle = () => {
       if (activeTab) {
         const { offsetLeft, scrollWidth } = activeTab;
         setStyle({
@@ -118,11 +120,29 @@ const ActiveIndicator = (props: IressUnstyledProps) => {
       } else {
         setStyle({});
       }
-    }, 150);
-    return () => clearTimeout(activeTimeout);
+    };
+
+    const activeTimeout = setTimeout(updateStyle, 150);
+
+    // Observe all tab elements so the indicator recalculates when any tab's
+    // content changes size (e.g. badge appears/disappears, label text changes).
+    let resizeObserver: ResizeObserver | undefined;
+    if (activeTab && ref.current && typeof ResizeObserver !== 'undefined') {
+      const tabList = ref.current.parentElement;
+      const tabs = tabList?.querySelectorAll('[role="tab"]');
+      if (tabs?.length) {
+        resizeObserver = new ResizeObserver(updateStyle);
+        tabs.forEach((tab) => resizeObserver.observe(tab));
+      }
+    }
+
+    return () => {
+      clearTimeout(activeTimeout);
+      resizeObserver?.disconnect();
+    };
   }, [tabSet?.active, tabSet?.layoutVersion]);
 
-  return <div {...props} style={style} />;
+  return <div {...props} ref={ref} style={style} />;
 };
 
 export const IressTabSet = ({
