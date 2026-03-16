@@ -337,7 +337,9 @@ jobs:
               yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public --provenance
             else
               echo "  ⚠️ New package — using NPM_NEW_PACKAGE_TOKEN for first publish"
-              NODE_AUTH_TOKEN="$NPM_NEW_PKG_TOKEN" yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public
+              export NODE_AUTH_TOKEN="$NPM_NEW_PKG_TOKEN"
+              yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public
+              export NODE_AUTH_TOKEN="${{ secrets.NPM_TOKEN }}"
             fi
             echo "  ✅ Published $PACKAGE@$VERSION with tag '$NPM_TAG'"
             RELEASE_INFO="${RELEASE_INFO}${PACKAGE}|${VERSION}|${IS_PRERELEASE};"
