@@ -332,12 +332,7 @@ jobs:
               IS_PRERELEASE="false"
               echo "  NPM Tag: $NPM_TAG (stable)"
             fi
-            if npm view "$PACKAGE" version &>/dev/null; then
-              yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public --provenance
-            else
-              echo "  ⚠️ First publish of $PACKAGE — skipping --provenance and --tag"
-              yarn workspace "$PACKAGE" npm publish --access public
-            fi
+            yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public --provenance
             echo "  ✅ Published $PACKAGE@$VERSION with tag '$NPM_TAG'"
             RELEASE_INFO="${RELEASE_INFO}${PACKAGE}|${VERSION}|${IS_PRERELEASE};"
           done
