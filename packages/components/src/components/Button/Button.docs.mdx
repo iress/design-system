@@ -21,7 +21,7 @@ import * as CloseButtonStories from './CloseButton/CloseButton.stories';
 
 ### Avoid using `disabled`
 
-IDS intentionally does not expose a `disabled` prop on `IressButton`. While the native HTML `disabled` attribute can technically be passed through, it is an anti-pattern that should be avoided because:
+IDS discourages using `disabled` on `IressButton`. Although the native HTML `disabled` attribute is supported via the underlying `<button>`/`<a>` element, it is an anti-pattern that should be avoided because:
 
 - Screen readers skip disabled elements, making them invisible to assistive technology users
 - Users cannot understand why a button is disabled or what they need to do to enable it
