@@ -336,11 +336,13 @@ jobs:
             if npm view "$PACKAGE" version &>/dev/null; then
               yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public --provenance
             else
-              echo "  ⚠️ New package — using NPM_NEW_PACKAGE_TOKEN for first publish"
-              yarn config set 'npmRegistries["https://registry.npmjs.org"].npmAuthToken' "$NPM_NEW_PKG_TOKEN"
-              yarn npm whoami 2>&1 || echo "  DEBUG: whoami still failed after yarn config set"
-              yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public
-              yarn config set 'npmRegistries["https://registry.npmjs.org"].npmAuthToken' "${NODE_AUTH_TOKEN:-${{ secrets.NPM_TOKEN }}}"
+              echo "  ⚠️ New package — using npm publish directly for first publish"
+              PKG_DIR=$(yarn workspaces list --json | jq -r "select(.name == \"$PACKAGE\") | .location")
+              cd "$PKG_DIR"
+              echo "//registry.npmjs.org/:_authToken=${NPM_NEW_PKG_TOKEN}" > .npmrc
+              npm publish --tag "$NPM_TAG" --access public
+              rm -f .npmrc
+              cd "$GITHUB_WORKSPACE"
             fi
             echo "  ✅ Published $PACKAGE@$VERSION with tag '$NPM_TAG'"
             RELEASE_INFO="${RELEASE_INFO}${PACKAGE}|${VERSION}|${IS_PRERELEASE};"
