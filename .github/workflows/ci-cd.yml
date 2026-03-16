@@ -299,6 +299,10 @@ jobs:
         run: |
           echo 'npmPublishRegistry: "https://registry.npmjs.org"' >> .yarnrc.yml
           echo 'npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
+          echo 'npmScopes:' >> .yarnrc.yml
+          echo '  iress-oss:' >> .yarnrc.yml
+          echo '    npmPublishRegistry: "https://registry.npmjs.org"' >> .yarnrc.yml
+          echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
 
       - name: Detect Version Changes (Stable)
         id: version-check
@@ -445,6 +449,10 @@ jobs:
         run: |
           echo 'npmPublishRegistry: "https://registry.npmjs.org"' >> .yarnrc.yml
           echo 'npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
+          echo 'npmScopes:' >> .yarnrc.yml
+          echo '  iress-oss:' >> .yarnrc.yml
+          echo '    npmPublishRegistry: "https://registry.npmjs.org"' >> .yarnrc.yml
+          echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
 
       - name: Publish to NPM (Canary)
         env:
