@@ -163,9 +163,10 @@ export const IressTabSet = ({
   const styles = tabSet({ layout, overflowStart, overflowEnd, type });
 
   useEffect(() => {
+    const listElement =
+      listHolderRef.current?.querySelector('[role="tablist"]');
+
     const checkOverflow = () => {
-      const listElement =
-        listHolderRef.current?.querySelector('[role="tablist"]');
       if (listElement) {
         const { scrollWidth, clientWidth, scrollLeft } = listElement;
         const hasOverflow = scrollWidth > clientWidth;
@@ -184,15 +185,19 @@ export const IressTabSet = ({
 
     checkOverflow();
 
-    const listElement =
-      listHolderRef.current?.querySelector('[role="tablist"]');
-
     listElement?.addEventListener('scroll', checkOverflow);
-    window.addEventListener('resize', checkOverflow);
+
+    // Use ResizeObserver to detect when the tablist changes size (e.g. window
+    // resize, container resize) instead of a global window resize listener.
+    let resizeObserver: ResizeObserver | undefined;
+    if (listElement && typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(checkOverflow);
+      resizeObserver.observe(listElement);
+    }
 
     return () => {
       listElement?.removeEventListener('scroll', checkOverflow);
-      window.removeEventListener('resize', checkOverflow);
+      resizeObserver?.disconnect();
     };
   }, [children]);
 
