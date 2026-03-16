@@ -69,6 +69,7 @@ import idsPreset from '@iress-oss/ids-theme-preset';
 import {
   codegenPrepareHook,
   cssgenDoneHook,
+  staticCssStripHook,
 } from '@iress-oss/ids-theme-preset/hooks';
 
 export default defineConfig({
@@ -77,10 +78,20 @@ export default defineConfig({
   outdir: './styled-system',
   hooks: {
     'codegen:prepare': ({ artifacts }) => codegenPrepareHook(artifacts),
-    'cssgen:done': ({ artifact, content }) => cssgenDoneHook(artifact, content),
+    'cssgen:done': ({ artifact, content }) => {
+      // Chain both cleanup hooks: strip alias classes first, then IDS static CSS.
+      const afterAliasStrip = cssgenDoneHook(artifact, content) ?? content;
+      return staticCssStripHook(artifact, afterAliasStrip) ?? afterAliasStrip;
+    },
   },
 });
 ```
+
+| Hook | Description |
+|---|---|
+| `codegenPrepareHook` | Injects spacing alias resolution into the Panda CSS runtime so that `gap="sm"` reuses the canonical token class instead of generating a duplicate alias class. |
+| `cssgenDoneHook` | Strips leftover spacing alias utility classes and `:root` variable definitions from the final CSS. |
+| `staticCssStripHook` | Strips IDS static-CSS utility classes (spacing tokens, textStyle, custom utilities, colour tokens, etc.) from the generated CSS. Used by `createMinimalConfig` to prevent duplicating CSS that is already shipped by `@iress-oss/ids-components` style.css. |
 
 ## Exports
 
