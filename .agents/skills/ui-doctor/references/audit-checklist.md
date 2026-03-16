@@ -114,6 +114,12 @@ Use this checklist when performing a UI doctor audit.
 - [ ] Maximum one `mode="primary"` button per section
 - [ ] Destructive actions use `status="danger"` not custom red styling
 - [ ] Icon-only buttons include accessible text
+- [ ] No `disabled` attribute on `IressButton` — keep buttons enabled and validate on click instead (disabled buttons are invisible to screen readers and provide no path to resolution)
+
+## IressText Usage
+
+- [ ] No redundant `textStyle` when `element` already provides the correct typography (e.g. `element="h1" textStyle="typography.heading.1"` is redundant — use `element="h1"` alone)
+- [ ] `textStyle` is only used to intentionally override visual hierarchy (e.g. `element="h2" textStyle="typography.heading.4"`) or at the discretion of a designer
 
 ## Usability Heuristics
 

@@ -3,7 +3,7 @@ import {
   ComponentOverview,
   ComponentExample,
 } from '@iress-oss/ids-storybook-config';
-import { IressAlert } from '../../main';
+import { IressAlert, IressExpander } from '../../main';
 import * as ComponentStories from './Button.stories';
 import * as CloseButtonStories from './CloseButton/CloseButton.stories';
 
@@ -16,6 +16,79 @@ import * as CloseButtonStories from './CloseButton/CloseButton.stories';
   of={ComponentStories.Default}
   meta={ComponentStories}
 />
+
+## Usage
+
+### Avoid using `disabled`
+
+IDS discourages using `disabled` on `IressButton`. Although the native HTML `disabled` attribute is supported via the underlying `<button>`/`<a>` element, it is an anti-pattern that should be avoided because:
+
+- Screen readers skip disabled elements, making them invisible to assistive technology users
+- Users cannot understand why a button is disabled or what they need to do to enable it
+- It creates a poor user experience with no path to resolution
+
+<IressExpander activator="Alternatives by use case">
+
+**"Form is incomplete"** — Keep the submit button enabled. Use `IressForm` with `rules` validation — it will show inline errors on submit and prevent submission until the form is valid.
+
+```tsx
+// ❌ Disabling submit until form is valid
+<IressButton disabled={!isValid} type="submit">Save</IressButton>
+
+// ✅ Let IressForm handle validation on submit
+<IressForm onSubmit={handleSubmit}>
+  <IressFormField
+    name="email"
+    label="Email"
+    rules={{ required: 'Email is required' }}
+    render={(props) => <IressInput {...props} type="email" />}
+  />
+  <IressButton mode="primary" type="submit">Save</IressButton>
+</IressForm>
+```
+
+**"Action is in progress"** — Use the `loading` prop. It shows a spinner, announces the state to screen readers, and automatically prevents duplicate clicks.
+
+```tsx
+// ❌ Disabling during submission
+<IressButton disabled={isSubmitting}>Save</IressButton>
+
+// ✅ Use loading — prevents clicks and communicates state
+<IressButton loading={isSubmitting} mode="primary" type="submit">Save</IressButton>
+```
+
+**"User lacks permission"** — Hide the button entirely, or keep it enabled and show an explanation when clicked.
+
+```tsx
+// ❌ Showing a disabled button the user can never enable
+<IressButton disabled={!canEdit}>Edit</IressButton>;
+
+// ✅ Option A — don't render the button at all
+{
+  canEdit && <IressButton onClick={handleEdit}>Edit</IressButton>;
+}
+
+// ✅ Option B — explain on click
+<IressButton onClick={() => (canEdit ? handleEdit() : showPermissionError())}>
+  Edit
+</IressButton>;
+```
+
+**"Prerequisite step not completed"** — Guide the user to the prerequisite instead of silently disabling.
+
+```tsx
+// ❌ Disabled with no explanation
+<IressButton disabled={!hasSelectedItem}>Delete</IressButton>
+
+// ✅ Explain what's needed
+<IressButton onClick={() => !hasSelectedItem ? showAlert('Select an item first') : confirmDelete()}>
+  Delete
+</IressButton>
+```
+
+**"Destructive action needs confirmation"** — Use `IressModal` with `status="danger"` for a confirmation step.
+
+</IressExpander>
 
 ## Examples
 
@@ -52,7 +125,7 @@ The `type` property controls the behaviour of the button. It defaults to `button
 
 Loading buttons give the user an indication something is happening (eg. a form submission or extra content being loaded) after they have been triggered.
 
-The loading state can be activated by setting the `loading` prop to `true` and providing some `loadingText` for screenreaders to announce when in loading state (which defaults to Loading...).
+The loading state can be activated by setting the `loading` prop to `true`. To customise the screen reader announcement, pass a string instead of `true` (e.g. `loading="Submitting…"`). The default announcement is "Loading".
 
 When the loading state is activated, any click events on the button are disabled.
 

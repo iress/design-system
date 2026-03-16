@@ -172,6 +172,59 @@ Always wrap inputs in `IressField` (or `IressFormField` inside an `IressForm`) f
 </IressField>
 ```
 
+## Using `disabled` on IressButton
+
+IDS discourages using the `disabled` pattern on `IressButton`. While the native `disabled` attribute is still available, disabled buttons are invisible to screen readers and provide no way for users to understand how to enable the action.
+
+| Use case | Anti-pattern | IDS alternative |
+| --- | --- | --- |
+| Form is incomplete | `disabled={!isValid}` | Use `IressForm` with `rules` validation — validates on submit with inline errors |
+| Action in progress | `disabled={isSubmitting}` | Use `loading={isSubmitting}` — shows spinner, announces to screen readers, prevents clicks |
+| User lacks permission | `disabled={!canEdit}` | Hide the button (`{canEdit && <IressButton>…</IressButton>}`), or keep enabled and explain on click |
+| Prerequisite not met | `disabled={!hasSelection}` | Keep enabled and show guidance on click (e.g. "Select an item first" via `IressAlert`) |
+
+```tsx
+// ❌ disabled is an anti-pattern
+<IressButton disabled={!isValid}>Submit</IressButton>
+
+// ✅ Form validation — let IressForm handle it
+<IressForm onSubmit={handleSubmit}>
+  <IressFormField name="email" label="Email" rules={{ required: 'Email is required' }}
+    render={(props) => <IressInput {...props} type="email" />} />
+  <IressButton mode="primary" type="submit">Submit</IressButton>
+</IressForm>
+
+// ✅ In-progress — use loading
+<IressButton loading={isSubmitting} mode="primary" type="submit">Submit</IressButton>
+
+// ✅ Permission — hide or explain
+{canEdit && <IressButton onClick={handleEdit}>Edit</IressButton>}
+```
+
+## Redundant `textStyle` on IressText
+
+When `element` is set on `IressText`, the component already applies the correct typography. Adding a matching `textStyle` is redundant. Only use `textStyle` to intentionally override the visual treatment (e.g. making an h2 look like an h4).
+
+| Element | Default textStyle (redundant if matched) |
+| ------- | ---------------------------------------- |
+| `h1`    | `typography.heading.1`                   |
+| `h2`    | `typography.heading.2`                   |
+| `h3`    | `typography.heading.3`                   |
+| `h4`    | `typography.heading.4`                   |
+| `h5`    | `typography.heading.5`                   |
+| `p`     | `typography.body.md`                     |
+
+```tsx
+// ❌ Redundant — h1 already renders as typography.heading.1
+<IressText element="h1" textStyle="typography.heading.1">Page Title</IressText>
+
+// ✅ Element alone is sufficient
+<IressText element="h1">Page Title</IressText>
+
+// ✅ Intentional override for visual hierarchy
+<IressText element="h2" textStyle="typography.heading.4">Section Title</IressText>
+```
+
 ## Further reading
 
 When in doubt, check the component docs in [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com) — each component page includes props, examples, and usage guidelines.
