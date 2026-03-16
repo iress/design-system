@@ -338,8 +338,10 @@ jobs:
             else
               echo "  ⚠️ New package — using npm publish directly for first publish"
               PKG_DIR=$(yarn workspaces list --json | jq -r "select(.name == \"$PACKAGE\") | .location")
+              pushd "$PKG_DIR" > /dev/null
               NPM_CONFIG_USERCONFIG="$RUNNER_TEMP/.npmrc-new-pkg" \
-                npm publish "$PKG_DIR" --tag "$NPM_TAG" --access public --registry https://registry.npmjs.org/ --//registry.npmjs.org/:_authToken="$NPM_NEW_PKG_TOKEN"
+                npm publish --tag "$NPM_TAG" --access public --registry https://registry.npmjs.org/ --//registry.npmjs.org/:_authToken="$NPM_NEW_PKG_TOKEN"
+              popd > /dev/null
             fi
             echo "  ✅ Published $PACKAGE@$VERSION with tag '$NPM_TAG'"
             RELEASE_INFO="${RELEASE_INFO}${PACKAGE}|${VERSION}|${IS_PRERELEASE};"
