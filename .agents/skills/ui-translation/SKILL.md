@@ -1,6 +1,16 @@
 ---
 name: ui-translation
-description: Translate natural language UI descriptions into IDS (Iress Design System) component implementations using `@iress-oss/ids-components` and `@iress-oss/ids-tokens`.
+description: >
+  Translate natural language UI descriptions into IDS (Iress Design System)
+  component implementations using @iress-oss/ids-components and
+  @iress-oss/ids-tokens. Use when the user describes a UI in plain language
+  and wants IDS component code, or asks to build a form, page, layout, or
+  component using IDS.
+license: Apache-2.0
+compatibility: React 18+, TypeScript, @iress-oss/ids-components@alpha
+metadata:
+  author: iress
+  version: "1.0"
 ---
 
 # Skill: UI Translation
@@ -8,6 +18,15 @@ description: Translate natural language UI descriptions into IDS (Iress Design S
 ## Purpose
 
 Translate natural language UI descriptions into IDS (Iress Design System) component implementations using `@iress-oss/ids-components` and `@iress-oss/ids-tokens`.
+
+## Translation Workflow
+
+1. **Identify the UI elements** — Break the description into components: actions (buttons), inputs (fields), layout (stacks, grids), content (text, cards), overlays (modals, slideouts), navigation
+2. **Map to IDS components** — Use the [component mapping](references/component-mapping.md) to find the right IDS component for each element
+3. **Apply layout** — Wrap elements in `IressStack` (vertical), `IressInline` (horizontal), or `IressRow`/`IressCol` (grid). Always make grids responsive with `span={{ xs: 12, md: ... }}`
+4. **Add responsive behaviour** — Even if the description only mentions desktop, stack columns on mobile and relocate secondary content to `IressSlideout` or collapsible sections
+5. **Apply styling** — Use [styling props](references/styling-props.md) for spacing, colour, and typography. Use spacing tokens (0–10) for `gap` props
+6. **Verify output** — Check that all imports resolve, no raw HTML is used where IDS components exist, grid layouts use responsive `span` values, and no common anti-patterns are present (disabled buttons, slot attributes, redundant textStyle)
 
 ## Setup
 
@@ -42,11 +61,11 @@ function App() {
 
 ## Component Mapping
 
-Read [references/component-mapping.md](references/component-mapping.md) for the full description → IDS component mapping tables (actions, form inputs, layout, content, overlays, navigation, tables).
+When you need to find the right IDS component for a UI element, read [references/component-mapping.md](references/component-mapping.md) for the full description → IDS component mapping tables (actions, form inputs, layout, content, overlays, navigation, tables).
 
 ## Styling Props
 
-Read [references/styling-props.md](references/styling-props.md) for the full `IressCSSProps` reference (spacing, colour, visibility, sizing, typography props and their accepted values).
+When you need to apply spacing, colour, visibility, or typography props, read [references/styling-props.md](references/styling-props.md) for the full `IressCSSProps` reference and accepted values.
 
 ## Responsive Layout
 
@@ -229,7 +248,11 @@ function Dashboard() {
 
   return isMobile ? (
     <IressStack gap="4">
-      <IressButton mode="secondary" icon="menu" onClick={() => setNavOpen(true)}>
+      <IressButton
+        mode="secondary"
+        icon="menu"
+        onClick={() => setNavOpen(true)}
+      >
         Menu
       </IressButton>
       <IressCard>
@@ -237,7 +260,11 @@ function Dashboard() {
           <IressText element="h2">Main Content</IressText>
         </IressCard.Body>
       </IressCard>
-      <IressSlideout heading="Navigation" show={navOpen} onShowChange={setNavOpen}>
+      <IressSlideout
+        heading="Navigation"
+        show={navOpen}
+        onShowChange={setNavOpen}
+      >
         {nav}
       </IressSlideout>
     </IressStack>
@@ -270,59 +297,8 @@ function Dashboard() {
 10. **Always make grid layouts responsive** — When using `IressRow`/`IressCol`, use responsive `span` values (e.g. `span={{ xs: 12, md: 6 }}`) so columns stack on mobile instead of overflowing
 11. **Check the component docs** — Read the specific component doc for detailed props and patterns (`node_modules/@iress-oss/ids-components/.ai/components/`)
 
-
 ## Common Mistakes
 
-> **⚠️ AI agents are especially prone to these mistakes** because they match patterns found in existing codebases. Always verify against component documentation rather than copying surrounding code.
+For the full list of common anti-patterns (disabled buttons, redundant textStyle, legacy slot attributes, raw HTML, hardcoded values), read the [Common Mistakes guide](node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md).
 
-### Do not use `slot` attributes — use React props instead
-
-The `slot` attribute (e.g. `slot="start"`, `slot="prepend"`, `slot="footer"`) is a legacy v4 pattern that is **no longer supported**. IDS v5+ uses typed React props (`prepend`, `append`, `footer`, `actions`, `icon`, `activator`) to position content.
-
-> **⚠️ `IressShadow` does NOT imply custom elements.** AI agents often see `IressShadow` in a codebase and incorrectly assume the app uses Web Components with `slot` attributes. `IressShadow` is a CSS isolation wrapper that creates a shadow root on a plain `<div>` — all children inside it are standard React components. The `slot` attribute is never correct in IDS v5+.
-
-```tsx
-// ❌ Wrong — legacy v4 slot attribute
-<IressButton>
-  <IressIcon slot="start" name="search" />
-  Search
-</IressButton>
-
-// ✅ Correct — use prepend prop
-<IressButton prepend={<IressIcon name="search" />}>
-  Search
-</IressButton>
-```
-
-```tsx
-// ❌ Wrong — legacy v4 modal footer slot
-<IressModal show={show}>
-  Content
-  <div slot="footer">
-    <IressButton>Close</IressButton>
-  </div>
-</IressModal>
-
-// ✅ Correct — use footer prop
-<IressModal show={show} footer={<IressButton>Close</IressButton>}>
-  Content
-</IressModal>
-```
-
-**Quick reference for slot → prop migration:**
-
-| Legacy `slot` attribute           | Modern IDS prop                     |
-| --------------------------------- | ----------------------------------- |
-| `slot="prepend"` / `slot="start"` | `prepend={...}`                     |
-| `slot="append"` / `slot="end"`    | `append={...}`                      |
-| `slot="icon-only"`                | `icon="iconName"`                   |
-| `slot="footer"`                   | `footer={...}` or `actions={[...]}` |
-| `slot="activator"`                | `activator={...}`                   |
-
-### Do not use raw HTML when IDS components exist
-
-See the Component Mapping tables above for the correct IDS replacement for every common HTML element.
-
-### Do not hardcode design values
-
-Use design tokens and component props instead of hex colours, pixel spacing, or font sizes. See the [token-usage skill](../../.agents/skills/token-usage/SKILL.md) for details.
+> **Note:** The Common Mistakes guide lives in `node_modules` and requires `@iress-oss/ids-components` to be installed.

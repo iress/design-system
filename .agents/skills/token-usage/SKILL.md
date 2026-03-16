@@ -1,6 +1,16 @@
 ---
 name: token-usage
-description: Guide AI agents on correctly using IDS design tokens in React components and CSS. This skill covers import patterns, common mistakes, and practical usage rules for each token category.
+description: >
+  Guide on correctly using IDS design tokens in React components and CSS.
+  Covers import patterns, common mistakes, and practical usage rules for each
+  token category. Use when the user asks about design tokens, CSS variables,
+  spacing values, colour tokens, typography tokens, or mentions
+  @iress-oss/ids-tokens in an IDS application.
+license: Apache-2.0
+compatibility: React 18+, TypeScript, @iress-oss/ids-tokens@alpha
+metadata:
+  author: iress
+  version: "1.0"
 ---
 
 # Skill: IDS Token Usage
@@ -16,6 +26,13 @@ Guide AI agents on correctly using IDS design tokens in React components and CSS
 - Reviewing or fixing design token usage in existing code
 - Choosing between component props, CSS variables, and the `cssVars` JS object
 - Answering questions about available token values and naming conventions
+
+## Workflow
+
+1. **Check if a component prop handles it** — Most IDS components accept `IressCSSProps` (e.g. `p`, `m`, `gap`, `bg`, `color`, `textStyle`). Use props before reaching for tokens directly.
+2. **Identify the token category** — Is it colour, spacing, typography, or radius?
+3. **Choose the right import** — Use `cssVars` for inline styles, CSS variables for stylesheets. See the import patterns below.
+4. **Look up the value** — See [references/token-reference.md](references/token-reference.md) for the full list of available tokens if you need to find a specific value.
 
 ## Quick Start
 
@@ -412,26 +429,9 @@ Layout components accept responsive objects for spacing props:
 
 ## Common Mistakes to Avoid
 
-> **⚠️ AI agents are especially prone to these mistakes** because they match patterns found in existing codebases rather than consulting documentation.
+For the full list of common anti-patterns (disabled buttons, redundant textStyle, legacy slot attributes, raw HTML, hardcoded values), read the [Common Mistakes guide](node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md).
 
-### Do not use `slot` attributes — use React props instead
-
-The `slot` attribute (e.g. `slot="start"`, `slot="prepend"`) is a legacy v4 pattern. IDS v5+ uses typed React props (`prepend`, `append`, `footer`, `icon`, etc.) to position content. This is not a token issue, but agents commonly introduce it alongside token-related fixes.
-
-```tsx
-// ❌ Wrong — legacy v4 slot attribute
-<IressButton>
-  <IressIcon slot="start" name="home" />
-  Home
-</IressButton>
-
-// ✅ Correct — use prepend prop
-<IressButton prepend={<IressIcon name="home" />}>
-  Home
-</IressButton>
-```
-
-For a comprehensive list of anti-patterns, see the [Common Mistakes guide](node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md).
+> **Note:** The Common Mistakes guide lives in `node_modules` and requires `@iress-oss/ids-components` to be installed.
 
 ## Complete Token Reference
 

@@ -1,6 +1,16 @@
 ---
 name: version-migration
-description: Guide AI agents on migrating applications between IDS (Iress Design System) major versions — including v4→v5, v5→v6, and OUI→v6. Covers component renaming, prop changes, form architecture migration (Formik→React Hook Form), testing updates, and common gotchas.
+description: >
+  Migrate applications between IDS (Iress Design System) major versions —
+  including v4→v5, v5→v6, and OUI→v6. Covers component renaming, prop changes,
+  form architecture migration (Formik→React Hook Form), testing updates, and
+  common gotchas. Use when the user asks about upgrading, migrating, or updating
+  IDS versions, or mentions OUI, v4, v5, or v6 migration.
+license: Apache-2.0
+compatibility: React 18+, TypeScript, @iress-oss/ids-components@alpha
+metadata:
+  author: iress
+  version: "1.0"
 ---
 
 # Skill: IDS Version Migration

@@ -1,6 +1,17 @@
 ---
 name: ui-doctor
-description: Audit and review application UI for IDS compliance, accessibility, usability, and cognitive load. Covers component usage validation, WCAG accessibility checks, cognitive load assessment, progressive disclosure review, and UX quality evaluation against Nielsen's heuristics. Produces actionable reports with prioritised recommendations. Use when asked to review UI, check accessibility, assess usability, or audit IDS compliance.
+description: >
+  Audit and review application UI for IDS compliance, accessibility, usability,
+  and cognitive load. Covers component usage validation, WCAG accessibility
+  checks, cognitive load assessment, and UX quality evaluation. Use when asked
+  to review UI, check accessibility, assess usability, audit IDS compliance,
+  or when the user says "review this page", "check a11y", or "is this
+  accessible?"
+license: Apache-2.0
+compatibility: React 18+, TypeScript, @iress-oss/ids-components@alpha
+metadata:
+  author: iress
+  version: "1.0"
 ---
 
 # Skill: UI Doctor
@@ -32,9 +43,9 @@ Or more generally:
 
 ## Audit Modes
 
-Choose the mode that best matches the user's request. Each mode focuses on specific checklist sections.
+**Default: Quick UX Review.** Use this unless the user specifically asks for accessibility or full compliance. Escalate to a more thorough mode if the quick review reveals significant issues.
 
-### Quick UX Review
+### Quick UX Review (default)
 
 Use when the user asks for a general UI review, usability check, or "does this look right?"
 
@@ -234,7 +245,6 @@ yarn add @iress-oss/ids-tokens@alpha  // Not needed unless using tokens directly
 yarn add @iress-oss/ids-components  // Must use @alpha tag
 ```
 
-
 #### b. Design Token Usage
 
 - No hardcoded colour hex/rgb — use IDS colour tokens
@@ -321,99 +331,6 @@ For each finding, provide: (1) what was found, (2) why it matters, (3) how to fi
 
 Use the [report template](references/report-template.md) to produce a structured report.
 
-## Audit Checklist Summary
-
-The [full audit checklist](references/audit-checklist.md) covers these sections:
-
-```typescript
-// ❌ Missing label / accessibility
-<IressInput placeholder="Email" />
-
-// ✅ Accessible standalone form input
-<IressField label="Email" htmlFor="email" required>
-  <IressInput id="email" type="email" placeholder="Enter your email" />
-</IressField>
-
-// ✅ Accessible form input within IressForm
-<IressFormField
-  name="email"
-  label="Email"
-  rules={{ required: true }}
-  render={(controlledProps) => <IressInput {...controlledProps} type="email" />}
-/>
-```
-
-#### d. Button Hierarchy
-
-- **One primary action per section** — Only one `mode="primary"` button per logical section
-- **Consistent button mode usage** — Primary for main action, secondary for supporting actions, tertiary/muted for less prominent actions
-- **Danger actions use status prop** — `status="danger"` for destructive actions, not red styling
-
-#### e. Layout Consistency
-
-- **Use IDS layout components** — `IressStack`, `IressInline`, `IressRow`/`IressCol` instead of custom CSS flex/grid
-- **Use spacing tokens for gaps** — Values 0–10 on `gap` prop
-- **Use IressCSSProps for spacing** — `m`, `mx`, `my`, `p`, `px`, `py` props instead of inline styles
-- **Responsive design** — Use `hideFrom`/`hideBelow` props or the `useBreakpoint` hook for responsive visibility. Multi-column layouts should use responsive `span` on `IressCol`. On mobile, secondary content (filters, sidebars, metadata) should be relocated to `IressSlideout` or collapsible sections — the mobile view should focus on the primary task while preserving all functionality
-
-#### f. Semantic Component Usage
-
-- **Use `IressText` for all text** — Instead of raw `<p>`, `<span>`, `<h1>`–`<h6>`. Note: nesting native HTML elements (e.g. `<p>`, `<strong>`, `<a>`, `<ul>`) _inside_ `IressText` is an allowed pattern for rendering CMS content, markdown output, or other unstructured data sources
-- **Use `IressAlert` for feedback** — Instead of custom notification/alert components
-- **Use `IressModal status` for confirmation dialogs** — Instead of custom danger/success/warning confirmation modals. Use the `actions` prop for buttons (`footer` is not available when `status` is set)
-- **Use `IressIcon` for icons** — Instead of inline SVGs or custom icon components (unless the icon is a hero graphic that doesn't fit the standard icon use case)
-- **Use `IressDivider` for separators** — Instead of `<hr>` or custom dividers (unless nested inside `IressText` for inline separation)
-
-#### g. Acceptable Exceptions
-
-Not every raw HTML element is a violation. The following are **acceptable exceptions** that should NOT be flagged:
-
-| Pattern                                                      | Why It's Acceptable                                                                                                                                     |
-| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<a>` inside markdown/MDX renderers                          | Content-driven, not application UI                                                                                                                      |
-| `<button>` inside third-party widgets the app cannot control | External dependency constraint                                                                                                                          |
-| `<table>` in email templates                                 | Email clients don't support custom components                                                                                                           |
-| `<img>` in SVG sprites or `<picture>` elements               | IressImage doesn't cover these use cases                                                                                                                |
-| `<div>` for ref targets, portals, or measurement containers  | Technical necessity, not layout                                                                                                                         |
-| Raw elements in test files / stories for demonstration       | Not shipped to users                                                                                                                                    |
-| `<form>` wrapping a single action (e.g., search bar)         | `IressForm` is best for multi-field forms; standalone search inputs may use `IressAutocomplete` or `IressField` + `IressInput` directly                 |
-| `<input type="hidden">`                                      | Not user-facing UI                                                                                                                                      |
-| Custom components wrapping IDS components internally         | App-level abstraction is valid as long as IDS components are used underneath                                                                            |
-| Native HTML elements nested inside `IressText`               | Allowed for rendering CMS content, markdown output, or other unstructured data sources where the content structure is not controlled by the application |
-
-**When reporting:** If a potential violation falls into an exception category, note it as "Reviewed — Acceptable Exception" rather than a finding. This prevents false positives and keeps reports actionable.
-
-### 3. Provide Recommendations
-
-Based on the audit findings, provide prioritised recommendations:
-
-#### Priority Levels
-
-| Priority     | Description                                                                                                                                                                                                      | Action                |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| **Critical** | Missing IressProvider, missing component CSS import, raw form inputs without labels, missing skip links, forms not using `IressForm`                                                                             | Must fix immediately  |
-| **High**     | Raw HTML buttons/inputs/selects/tables/modals, custom form handling instead of `IressForm`, custom loading instead of `IressLoading`, accessibility failures (colour contrast, missing alt text, focus trapping) | Fix in current sprint |
-| **Medium**   | Hardcoded colours/spacing, missing IressText usage, custom layout instead of IDS layout, custom menus instead of `IressContextualMenu`/`IressDropdownMenu`, missing ARIA landmarks                               | Plan for next sprint  |
-| **Low**      | Missing IressImage, custom badges, minor token inconsistencies, non-critical accessibility improvements                                                                                                          | Backlog               |
-
-#### Recommendation Format
-
-For each finding, provide:
-
-1. **What was found** — The specific code or pattern that needs attention
-2. **Why it matters** — Impact on consistency, accessibility, or maintainability
-3. **How to fix** — Specific code change with before/after examples
-4. **Priority** — Critical, High, Medium, or Low
-
-### 4. Generate Compliance Report
-
-Produce a structured report covering all audit areas. Use the [report template](references/report-template.md) to structure the output.
-
-## Audit Checklist
-
-Use the [full audit checklist](references/audit-checklist.md) when performing a UI doctor audit. It covers setup & configuration, component usage, design tokens, pattern usage, accessibility, layout, button hierarchy, and usability heuristics (based on Nielsen's 10 heuristics).
-
-
 ## Example Audit Output
 
 ### Quick Scan Summary
@@ -451,35 +368,20 @@ Top Issues:
 - **Figma mapping skill:** `.agents/skills/figma-to-ids/SKILL.md`
 - **UI translation skill:** `.agents/skills/ui-translation/SKILL.md`
 - **Storybook and Guidelines:** https://main--691abcc79dfa560a36d0a74f.chromatic.com
-- **Common mistakes guide:** `node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md`
+- **Common mistakes guide:** `node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md` (requires `@iress-oss/ids-components` to be installed)
 
 ## Common Mistakes to Flag in Audits
 
-> **⚠️ AI agents are especially prone to propagating these mistakes** because they match patterns found in existing codebases. Flag these as **High** priority issues.
+For the full list of common anti-patterns with code examples, read the [Common Mistakes guide](node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md). When auditing, flag these with the following priorities and audit rules:
 
-### Legacy `slot` attributes (v4 pattern)
+### `disabled` attribute on IressButton — **High** priority
 
-IDS v4 and below used `slot` attributes on children to position content. This is **no longer supported** in v5+. During audits, search for `slot=` on any child of an IDS component and flag it.
+**Audit rule:** Search for `disabled` on any `<IressButton`. Every match is a finding.
 
-```typescript
-// ❌ Flag this — legacy v4 slot pattern
-<IressButton>
-  <IressIcon slot="start" name="search" />
-  Search
-</IressButton>
+### Redundant `textStyle` on IressText — **Medium** priority
 
-// ✅ Should be — use prepend prop
-<IressButton prepend={<IressIcon name="search" />}>
-  Search
-</IressButton>
-```
+**Audit rule:** Search for `IressText` with both `element` and `textStyle` where the textStyle matches the element's default styling (e.g. `element="h1" textStyle="typography.heading.1"`).
+
+### Legacy `slot` attributes (v4 pattern) — **High** priority
 
 **Audit rule:** Search for `slot="` inside any `<Iress*>` component. Every match is a finding.
-
-| Pattern to find                              | Replacement            | Priority |
-| -------------------------------------------- | ---------------------- | -------- |
-| `<Child slot="prepend" />` or `slot="start"` | `prepend={<Child />}`  | High     |
-| `<Child slot="append" />` or `slot="end"`    | `append={<Child />}`   | High     |
-| `<Child slot="icon-only" />`                 | `icon="iconName"` prop | High     |
-| `<div slot="footer">...</div>`               | `footer={...}` prop    | High     |
-| `<div slot="activator">...</div>`            | `activator={...}` prop | High     |

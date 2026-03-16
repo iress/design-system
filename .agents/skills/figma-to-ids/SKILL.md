@@ -1,6 +1,15 @@
 ---
 name: figma-to-ids
-description: Translate Figma design properties and structures into IDS (Iress Design System) component implementations. This skill helps AI agents interpret Figma design metadata (from tools like Figma MCP or exported design specs) and produce accurate IDS code.
+description: >
+  Translate Figma design properties and structures into IDS (Iress Design System)
+  component implementations. Use when the user provides Figma designs, mentions
+  Figma MCP, asks to convert a design to code, or references Figma component
+  names, variants, or auto-layout properties.
+license: Apache-2.0
+compatibility: React 18+, TypeScript, @iress-oss/ids-components@alpha
+metadata:
+  author: iress
+  version: "1.0"
 ---
 
 # Skill: Figma to IDS Translation
@@ -15,6 +24,7 @@ Translate Figma design properties and structures into IDS (Iress Design System) 
 2. **Map components** — Match Figma component names/variants to IDS components
 3. **Extract tokens** — Convert Figma design values to IDS design token references
 4. **Generate code** — Produce clean React/TypeScript with proper IDS imports
+5. **Verify output** — Check that all imports resolve, no raw HTML is used where IDS components exist, grid layouts use responsive `span` values, and no common anti-patterns are present (disabled buttons, slot attributes, redundant textStyle)
 
 > **Important:** IDS v6 is currently in alpha. Install with the `@alpha` tag:
 >
@@ -24,9 +34,9 @@ Translate Figma design properties and structures into IDS (Iress Design System) 
 
 ## Figma → IDS Mapping
 
-Read [references/component-mapping.md](references/component-mapping.md) for the full Figma component → IDS component mapping table.
+When mapping Figma components to IDS, read [references/component-mapping.md](references/component-mapping.md) for the full Figma component → IDS component mapping table.
 
-Read [references/token-mapping.md](references/token-mapping.md) for Figma design values (colours, spacing, radius, typography) → IDS token mapping.
+When converting Figma design values (colours, spacing, radius, typography) to IDS tokens, read [references/token-mapping.md](references/token-mapping.md).
 
 ## Translation Examples
 
@@ -185,14 +195,14 @@ When no mobile Figma frames are provided, apply these principles:
 
 ### Breakpoints
 
-| Breakpoint | Screen width     |
-| ---------- | ---------------- |
-| `xs`       | 0 – 575px        |
-| `sm`       | 576px – 767px    |
-| `md`       | 768px – 1023px   |
-| `lg`       | 1024px – 1279px  |
-| `xl`       | 1280px – 1599px  |
-| `xxl`      | 1600px+          |
+| Breakpoint | Screen width    |
+| ---------- | --------------- |
+| `xs`       | 0 – 575px       |
+| `sm`       | 576px – 767px   |
+| `md`       | 768px – 1023px  |
+| `lg`       | 1024px – 1279px |
+| `xl`       | 1280px – 1599px |
+| `xxl`      | 1600px+         |
 
 ### Responsive Props
 
@@ -231,7 +241,13 @@ When Figma provides separate mobile and desktop frames for the same layout:
 When Figma only provides a desktop frame with a sidebar + main content area, infer the mobile layout:
 
 ```tsx
-import { useBreakpoint, IressSlideout, IressButton, IressRow, IressCol } from '@iress-oss/ids-components';
+import {
+  useBreakpoint,
+  IressSlideout,
+  IressButton,
+  IressRow,
+  IressCol,
+} from '@iress-oss/ids-components';
 
 function Page() {
   const { breakpoint } = useBreakpoint();
@@ -243,19 +259,31 @@ function Page() {
       {isMobile ? (
         // Mobile: primary content first, secondary content in slideout
         <IressStack gap="4">
-          <IressButton mode="secondary" icon="filter_list" onClick={() => setFiltersOpen(true)}>
+          <IressButton
+            mode="secondary"
+            icon="filter_list"
+            onClick={() => setFiltersOpen(true)}
+          >
             Filters
           </IressButton>
           <MainContent />
-          <IressSlideout heading="Filters" show={filtersOpen} onShowChange={setFiltersOpen}>
+          <IressSlideout
+            heading="Filters"
+            show={filtersOpen}
+            onShowChange={setFiltersOpen}
+          >
             <FilterPanel />
           </IressSlideout>
         </IressStack>
       ) : (
         // Desktop: side-by-side layout as designed in Figma
         <IressRow gutter="lg">
-          <IressCol span={3}><FilterPanel /></IressCol>
-          <IressCol span={9}><MainContent /></IressCol>
+          <IressCol span={3}>
+            <FilterPanel />
+          </IressCol>
+          <IressCol span={9}>
+            <MainContent />
+          </IressCol>
         </IressRow>
       )}
     </>
@@ -298,29 +326,8 @@ function Navigation() {
 
 ## Common Mistakes
 
-> **⚠️ AI agents are especially prone to these mistakes** because they match patterns found in existing codebases. Always verify against component documentation rather than copying surrounding code.
+For the full list of common anti-patterns (disabled buttons, redundant textStyle, legacy slot attributes, raw HTML, hardcoded values), read the [Common Mistakes guide](node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md).
 
-### Do not use `slot` attributes — use React props instead
+> **Note:** The Common Mistakes guide lives in `node_modules` and requires `@iress-oss/ids-components` to be installed.
 
-The `slot` attribute (e.g. `slot="start"`, `slot="prepend"`) is a legacy v4 pattern that is **no longer supported**. IDS v5+ uses typed React props to position content inside components.
-
-```tsx
-// ❌ Wrong — legacy v4 slot attribute
-<IressButton>
-  <IressIcon slot="start" name="home" />
-  Home
-</IressButton>
-
-// ✅ Correct — use prepend prop
-<IressButton prepend={<IressIcon name="home" />}>
-  Home
-</IressButton>
-```
-
-**Slot → prop mapping:** `slot="prepend"`/`slot="start"` → `prepend={...}`, `slot="append"`/`slot="end"` → `append={...}`, `slot="icon-only"` → `icon="name"`, `slot="footer"` → `footer={...}` or `actions={[...]}`, `slot="activator"` → `activator={...}`.
-
-### Do not translate Figma named slots to HTML slot attributes
-
-When Figma shows named content areas ("prepend", "append", "footer"), map them to the corresponding **React prop**, not to a `slot` attribute.
-
-> **⚠️ `IressShadow` does NOT imply custom elements.** If the codebase uses `IressShadow`, this is a CSS isolation wrapper for microfrontends — it creates a shadow root on a plain `<div>`. All children inside it are standard React components. Do not translate Figma designs into Web Component or `slot` patterns because of `IressShadow`.
+**Figma-specific addition:** When Figma shows named content areas ("prepend", "append", "footer"), map them to the corresponding **React prop**, not to a `slot` attribute. When Figma shows a greyed-out or disabled button state, do not use `disabled` — see the guide for alternatives.
