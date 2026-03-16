@@ -10,6 +10,7 @@ import {
   type ReactNode,
   useContext,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
@@ -73,56 +74,86 @@ export interface IressTabSetProps extends Omit<IressStyledProps, 'onChange'> {
 }
 
 const HoverIndicator = (props: IressUnstyledProps) => {
+  const [style, setStyle] = useState<CSSProperties>({});
   const previousStyle = useRef<CSSProperties>({});
   const tabSet = useContext(TabSetContext);
+  const ref = useRef<HTMLDivElement>(null);
 
-  let style: CSSProperties;
-
-  if (tabSet?.hover) {
-    const { offsetLeft, scrollWidth } = tabSet.hover;
-    style = {
-      opacity: 1,
-      left: `${offsetLeft}px`,
-      width: `${scrollWidth}px`,
-    };
-  } else {
-    style = {
-      // eslint-disable-next-line react-hooks/refs -- we want to persist the previous style
-      ...previousStyle.current,
-      opacity: 0,
-    };
-  }
-
-  useEffect(() => {
-    if (tabSet?.hover) {
-      previousStyle.current = style;
+  useLayoutEffect(() => {
+    const hoverTab = tabSet?.hover;
+    if (hoverTab && ref.current) {
+      const tabList = ref.current.parentElement;
+      if (tabList) {
+        const tabListRect = tabList.getBoundingClientRect();
+        const tabRect = hoverTab.getBoundingClientRect();
+        const left = tabRect.left - tabListRect.left + tabList.scrollLeft;
+        const newStyle: CSSProperties = {
+          opacity: 1,
+          left: `${left}px`,
+          width: `${tabRect.width}px`,
+        };
+        setStyle(newStyle);
+        previousStyle.current = newStyle;
+      }
+    } else {
+      setStyle({ ...previousStyle.current, opacity: 0 });
     }
-  }, [tabSet?.hover, style]);
+  }, [tabSet?.hover]);
 
-  return <div {...props} style={style} />;
+  return <div {...props} ref={ref} style={style} />;
 };
 
 const ActiveIndicator = (props: IressUnstyledProps) => {
   const [style, setStyle] = useState<CSSProperties>({});
   const tabSet = useContext(TabSetContext);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const activeTab = tabSet?.active;
-    const activeTimeout = setTimeout(() => {
-      if (activeTab) {
-        const { offsetLeft, scrollWidth } = activeTab;
-        setStyle({
-          left: `${offsetLeft}px`,
-          width: `${scrollWidth}px`,
-        });
+
+    const updateStyle = () => {
+      if (activeTab && ref.current) {
+        const tabList = ref.current.parentElement;
+        if (tabList) {
+          const tabListRect = tabList.getBoundingClientRect();
+          const tabRect = activeTab.getBoundingClientRect();
+          const left = tabRect.left - tabListRect.left + tabList.scrollLeft;
+          setStyle({
+            left: `${left}px`,
+            width: `${tabRect.width}px`,
+          });
+        }
       } else {
         setStyle({});
       }
-    }, 150);
-    return () => clearTimeout(activeTimeout);
+    };
+
+    updateStyle();
+
+    // Observe all tab elements so the indicator recalculates when any tab's
+    // content changes size (e.g. badge appears/disappears, label text changes).
+    // Also observe the tablist itself so a container resize repositions the
+    // indicator correctly for top-center / top-right layouts (justify-content
+    // shifts tabs without changing their individual sizes).
+    let resizeObserver: ResizeObserver | undefined;
+    if (activeTab && ref.current && typeof ResizeObserver !== 'undefined') {
+      const tabList = ref.current.parentElement;
+      resizeObserver = new ResizeObserver(updateStyle);
+      const observer = resizeObserver;
+      if (tabList) {
+        observer.observe(tabList);
+        tabList
+          .querySelectorAll('[role="tab"]')
+          .forEach((tab) => observer.observe(tab));
+      }
+    }
+
+    return () => {
+      resizeObserver?.disconnect();
+    };
   }, [tabSet?.active, tabSet?.layoutVersion]);
 
-  return <div {...props} style={style} />;
+  return <div {...props} ref={ref} style={style} />;
 };
 
 export const IressTabSet = ({
@@ -144,9 +175,10 @@ export const IressTabSet = ({
   const styles = tabSet({ layout, overflowStart, overflowEnd, type });
 
   useEffect(() => {
+    const listElement =
+      listHolderRef.current?.querySelector('[role="tablist"]');
+
     const checkOverflow = () => {
-      const listElement =
-        listHolderRef.current?.querySelector('[role="tablist"]');
       if (listElement) {
         const { scrollWidth, clientWidth, scrollLeft } = listElement;
         const hasOverflow = scrollWidth > clientWidth;
@@ -165,15 +197,19 @@ export const IressTabSet = ({
 
     checkOverflow();
 
-    const listElement =
-      listHolderRef.current?.querySelector('[role="tablist"]');
-
     listElement?.addEventListener('scroll', checkOverflow);
-    window.addEventListener('resize', checkOverflow);
+
+    // Use ResizeObserver to detect when the tablist changes size (e.g. window
+    // resize, container resize) instead of a global window resize listener.
+    let resizeObserver: ResizeObserver | undefined;
+    if (listElement && typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(checkOverflow);
+      resizeObserver.observe(listElement);
+    }
 
     return () => {
       listElement?.removeEventListener('scroll', checkOverflow);
-      window.removeEventListener('resize', checkOverflow);
+      resizeObserver?.disconnect();
     };
   }, [children]);
 

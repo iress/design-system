@@ -528,8 +528,6 @@ describe('IressTabs', () => {
     });
 
     it('updates active indicator when tabs change', async () => {
-      vi.useFakeTimers({ shouldAdvanceTime: true });
-
       const DynamicTabs = () => {
         const [showExtra, setShowExtra] = useState(false);
         return (
@@ -559,33 +557,19 @@ describe('IressTabs', () => {
 
       const screen = render(<DynamicTabs />);
 
-      // Wait for initial indicator timeout
-      await act(async () => {
-        vi.advanceTimersByTime(200);
-      });
-
       const tablist = screen.getByRole('tablist');
       const activeIndicator = tablist.children[0] as HTMLElement;
 
       // Add a tab before the active tab
       await userEvent.click(screen.getByTestId('toggle'));
 
-      // Wait for the indicator to recalculate after layoutVersion change
-      await act(async () => {
-        vi.advanceTimersByTime(200);
-      });
-
       // Indicator style should have been recalculated (effect re-ran)
       // In jsdom offsetLeft is always 0, but we verify the style was set
       expect(activeIndicator.style.left).toBeDefined();
       expect(activeIndicator.style.width).toBeDefined();
-
-      vi.useRealTimers();
     });
 
     it('clears active indicator when active tab is removed', async () => {
-      vi.useFakeTimers({ shouldAdvanceTime: true });
-
       const DynamicTabs = () => {
         const [tabs, setTabs] = useState(['tab-1', 'tab-2', 'tab-3']);
         return (
@@ -609,11 +593,6 @@ describe('IressTabs', () => {
 
       const screen = render(<DynamicTabs />);
 
-      // Wait for initial indicator
-      await act(async () => {
-        vi.advanceTimersByTime(200);
-      });
-
       const tablist = screen.getByRole('tablist');
       const activeIndicator = tablist.children[0] as HTMLElement;
 
@@ -623,16 +602,54 @@ describe('IressTabs', () => {
       // Remove the active tab (tab-1)
       await userEvent.click(screen.getByTestId('remove'));
 
-      // Indicator should clear because the active tab no longer exists
-      await act(async () => {
-        vi.advanceTimersByTime(200);
-      });
-
       // Style should be cleared (no left/width)
       expect(activeIndicator.style.left).toBe('');
       expect(activeIndicator.style.width).toBe('');
+    });
 
-      vi.useRealTimers();
+    it('updates active indicator when active tab content changes size', async () => {
+      let resizeCallback: ResizeObserverCallback | undefined;
+      const observeMock = vi.fn();
+      const disconnectMock = vi.fn();
+
+      vi.stubGlobal(
+        'ResizeObserver',
+        class MockResizeObserver {
+          observe = observeMock;
+          disconnect = disconnectMock;
+          constructor(callback: ResizeObserverCallback) {
+            resizeCallback = callback;
+          }
+        },
+      );
+
+      const screen = render(
+        <IressTabSet data-testid={TEST_ID}>
+          <IressTab key="1" label="Tab 1">
+            Panel 1
+          </IressTab>
+          <IressTab key="2" label="Tab 2">
+            Panel 2
+          </IressTab>
+        </IressTabSet>,
+      );
+
+      const tablist = screen.getByRole('tablist');
+      const activeIndicator = tablist.children[0] as HTMLElement;
+
+      // Verify the ResizeObserver is observing the tab elements
+      expect(observeMock).toHaveBeenCalled();
+
+      // Simulate a tab resize event (e.g., badge appears, label text changes)
+      await act(async () => {
+        resizeCallback!([], {} as ResizeObserver);
+      });
+
+      // Indicator style should have been recalculated
+      expect(activeIndicator.style.left).toBeDefined();
+      expect(activeIndicator.style.width).toBeDefined();
+
+      vi.unstubAllGlobals();
     });
   });
 });
