@@ -295,13 +295,10 @@ jobs:
       - name: Install dependencies if needed
         run: yarn install --immutable
 
-      - name: Configure npm authentication
+      - name: Configure npm authentication for OIDC
         run: |
-          echo 'npmPublishRegistry: "https://registry.npmjs.org"' >> .yarnrc.yml
-          echo 'npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
-          echo 'npmScopes:' >> .yarnrc.yml
-          echo '  iress-oss:' >> .yarnrc.yml
-          echo '    npmPublishRegistry: "https://registry.npmjs.org"' >> .yarnrc.yml
+          echo 'npmRegistries:' >> .yarnrc.yml
+          echo '  "https://registry.npmjs.org":' >> .yarnrc.yml
           echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
 
       - name: Detect Version Changes (Stable)
@@ -309,26 +306,6 @@ jobs:
         run: |
           chmod +x .github/scripts/publish-packages.sh
           .github/scripts/publish-packages.sh stable
-
-      - name: Verify npm authentication
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          if [ -z "$NODE_AUTH_TOKEN" ]; then
-            echo "❌ NODE_AUTH_TOKEN is empty! Check that NPM_TOKEN secret is configured in the 'npm-publishing' environment."
-            exit 1
-          fi
-          echo "✅ NODE_AUTH_TOKEN is set (length: ${#NODE_AUTH_TOKEN})"
-          echo "--- .yarnrc.yml contents (redacted) ---"
-          sed 's/npmAuthToken:.*/npmAuthToken: [REDACTED]/' .yarnrc.yml
-          echo "--- Yarn config npmPublishRegistry ---"
-          yarn config get npmPublishRegistry || true
-          echo "--- Yarn config npmAuthToken ---"
-          if yarn config get npmAuthToken 2>/dev/null | grep -q .; then
-            echo "npmAuthToken is configured"
-          else
-            echo "⚠️ npmAuthToken is NOT configured in Yarn"
-          fi
 
       - name: Publish to NPM (Stable)
         if: steps.version-check.outputs.has_version_changes == 'true'
@@ -354,13 +331,7 @@ jobs:
               IS_PRERELEASE="false"
               echo "  NPM Tag: $NPM_TAG (stable)"
             fi
-            # Check if package exists on registry; first publish can't use --provenance
-            if npm view "$PACKAGE" version &>/dev/null; then
-              yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public --provenance
-            else
-              echo "  ⚠️ First publish — skipping --provenance"
-              yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public
-            fi
+            yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public --provenance
             echo "  ✅ Published $PACKAGE@$VERSION with tag '$NPM_TAG'"
             RELEASE_INFO="${RELEASE_INFO}${PACKAGE}|${VERSION}|${IS_PRERELEASE};"
           done
@@ -465,13 +436,10 @@ jobs:
             done
           fi
 
-      - name: Configure npm authentication
+      - name: Configure npm authentication for OIDC
         run: |
-          echo 'npmPublishRegistry: "https://registry.npmjs.org"' >> .yarnrc.yml
-          echo 'npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
-          echo 'npmScopes:' >> .yarnrc.yml
-          echo '  iress-oss:' >> .yarnrc.yml
-          echo '    npmPublishRegistry: "https://registry.npmjs.org"' >> .yarnrc.yml
+          echo 'npmRegistries:' >> .yarnrc.yml
+          echo '  "https://registry.npmjs.org":' >> .yarnrc.yml
           echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
 
       - name: Publish to NPM (Canary)
@@ -487,12 +455,7 @@ jobs:
 
           if [ -n "$TARGET_PACKAGE" ]; then
             echo "📦 Publishing package: $TARGET_PACKAGE"
-            if npm view "$TARGET_PACKAGE" version &>/dev/null; then
-              yarn workspace "$TARGET_PACKAGE" npm publish --tag canary --access public --provenance
-            else
-              echo "  ⚠️ First publish — skipping --provenance"
-              yarn workspace "$TARGET_PACKAGE" npm publish --tag canary --access public
-            fi
+            yarn workspace "$TARGET_PACKAGE" npm publish --tag canary --access public --provenance
           else
             echo "📦 Publishing all packages"
             yarn workspaces foreach -A --no-private npm publish --tag canary --access public --provenance
