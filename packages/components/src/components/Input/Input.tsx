@@ -227,6 +227,7 @@ const Input = <
     return (
       <IressReadonly
         {...inputProps}
+        actions={actions}
         defaultValue={undefined}
         value={value}
         alignRight={alignRight}

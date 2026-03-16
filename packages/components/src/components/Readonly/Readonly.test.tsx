@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { IressReadonlyProps } from './Readonly';
 import { IressReadonly } from './Readonly';
@@ -31,6 +32,52 @@ describe('IressReadonly', () => {
   });
 
   describe('props', () => {
+    describe('actions', () => {
+      it('renders action buttons when provided', () => {
+        renderReadonly({
+          actions: [
+            { children: 'Action 1', onClick: vi.fn() },
+            { children: 'Action 2', onClick: vi.fn() },
+          ],
+        });
+
+        expect(screen.getByText('Action 1')).toBeInTheDocument();
+        expect(screen.getByText('Action 2')).toBeInTheDocument();
+      });
+
+      it('calls onClick handler when an action button is clicked', async () => {
+        const handleAction = vi.fn();
+        renderReadonly({
+          actions: [{ children: 'Action', onClick: handleAction }],
+        });
+
+        await userEvent.click(screen.getByText('Action'));
+        expect(handleAction).toHaveBeenCalledTimes(1);
+      });
+
+      it('does not render action buttons when actions is not provided', () => {
+        renderReadonly({ value: 'Value' });
+
+        expect(screen.queryAllByRole('button')).toHaveLength(0);
+      });
+
+      it('renders actions with custom button props', () => {
+        renderReadonly({
+          actions: [
+            {
+              children: 'Custom Action',
+              onClick: vi.fn(),
+              'aria-label': 'Custom action button',
+            },
+          ],
+        });
+
+        const actionButton = screen.getByLabelText('Custom action button');
+        expect(actionButton).toBeInTheDocument();
+        expect(actionButton).toHaveTextContent('Custom Action');
+      });
+    });
+
     describe('append', () => {
       it('renders in append slot', () => {
         renderReadonly({
@@ -93,10 +140,10 @@ describe('IressReadonly', () => {
           'data-testid': 'test-input',
         });
 
-        const wrapper = screen.getByTestId('test-input');
+        const wrapper = screen.getByTestId('test-input').firstChild;
         const input = screen.getByText('Value');
 
-        expect(wrapper).toHaveClass(readonly({ width: '10' }).root!);
+        expect(wrapper).toHaveClass(readonly({ width: '10' }).wrapper!);
         expect(input).toHaveClass(readonly({ width: '10' }).formControl!);
       });
 
@@ -107,8 +154,8 @@ describe('IressReadonly', () => {
           value: 'Value',
         });
 
-        const wrapper = screen.getByTestId('test-input');
-        expect(wrapper).toHaveClass(readonly({ width: '25%' }).root!);
+        const wrapper = screen.getByTestId('test-input').firstChild;
+        expect(wrapper).toHaveClass(readonly({ width: '25%' }).wrapper!);
       });
     });
   });
