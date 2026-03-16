@@ -574,18 +574,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bundled-es-modules/glob@npm:^13.0.1":
-  version: 13.0.1
-  resolution: "@bundled-es-modules/glob@npm:13.0.1"
+"@bundled-es-modules/glob@npm:^13.0.6":
+  version: 13.0.6
+  resolution: "@bundled-es-modules/glob@npm:13.0.6"
   dependencies:
     buffer: "npm:^6.0.3"
     events: "npm:^3.3.0"
-    glob: "npm:^13.0.1"
+    glob: "npm:^13.0.6"
     path: "npm:^0.12.7"
     stream: "npm:^0.0.3"
     string_decoder: "npm:^1.3.0"
     url: "npm:^0.11.4"
-  checksum: 10c0/05c448c2afb8b4d860dcedc6cdfd4ed8c0238f6b55675d769a2bb92856678695007cc4c9633bcf272add183ad188e13a11d3273c699cf4a5fd3a1eb6a79bcded
+  checksum: 10c0/efe6879e8b33425d50a2cf01ff1a2ccc42b76e2a1fec26ac7293fdd229931554f053edcda6eabc2ee97ad7209b885c74278427357e8e7f41c15cc56438eb7b58
   languageName: node
   linkType: hard
 
@@ -1629,7 +1629,7 @@ __metadata:
     "@storybook/react-vite": "npm:10.2.13"
     "@testing-library/dom": "npm:^10.4.1"
     "@testing-library/react": "npm:^16.3.2"
-    "@types/node": "npm:^25.3.0"
+    "@types/node": "npm:^25.3.3"
     "@types/react": "npm:^19.2.14"
     "@types/react-dom": "npm:^19.2.3"
     "@typescript-eslint/eslint-plugin": "npm:^8.56.1"
@@ -1666,7 +1666,7 @@ __metadata:
     "@storybook/addon-docs": "npm:10.2.13"
     "@storybook/icons": "npm:2.0.1"
     "@storybook/react-vite": "npm:10.2.13"
-    "@types/node": "npm:^25.3.0"
+    "@types/node": "npm:^25.3.3"
     "@types/react": "npm:^19.2.14"
     "@types/react-dom": "npm:^19.2.3"
     "@typescript-eslint/eslint-plugin": "npm:^8.56.1"
@@ -1704,7 +1704,7 @@ __metadata:
     "@storybook/addon-docs": "npm:10.2.13"
     "@storybook/icons": "npm:2.0.1"
     "@storybook/react-vite": "npm:10.2.13"
-    "@types/node": "npm:^25.3.0"
+    "@types/node": "npm:^25.3.3"
     "@types/react": "npm:^19.2.14"
     "@types/react-dom": "npm:^19.2.3"
     "@typescript-eslint/eslint-plugin": "npm:^8.56.1"
@@ -1739,7 +1739,7 @@ __metadata:
   dependencies:
     "@storybook/addon-docs": "npm:10.2.13"
     "@storybook/react-vite": "npm:10.2.13"
-    "@types/node": "npm:^25.3.0"
+    "@types/node": "npm:^25.3.3"
     "@types/react": "npm:^19.2.14"
     "@types/react-dom": "npm:^19.2.3"
     "@typescript-eslint/eslint-plugin": "npm:^8.56.1"
@@ -1822,7 +1822,7 @@ __metadata:
     rimraf: "npm:^6.1.3"
     rollup-plugin-tree-shakeable: "npm:^2.0.0"
     storybook: "npm:10.2.13"
-    style-dictionary: "npm:^5.3.0"
+    style-dictionary: "npm:^5.3.3"
     tsx: "npm:^4.21.0"
     typescript: "npm:^5.9.3"
     vite: "npm:7.3.1"
@@ -3859,7 +3859,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=20.0.0, @types/node@npm:^25.3.0":
+"@types/node@npm:*, @types/node@npm:>=20.0.0":
   version: 25.3.0
   resolution: "@types/node@npm:25.3.0"
   dependencies:
@@ -3890,6 +3890,15 @@ __metadata:
   dependencies:
     undici-types: "npm:~7.16.0"
   checksum: 10c0/d6bca7a78f550fbb376f236f92b405d676003a8a09a1b411f55920ef34286ee3ee51f566203920e835478784df52662b5b2af89159d9d319352e9ea21801c002
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^25.3.3":
+  version: 25.3.3
+  resolution: "@types/node@npm:25.3.3"
+  dependencies:
+    undici-types: "npm:~7.18.0"
+  checksum: 10c0/63e1d3816a9f4a706ab5d588d18cb98aa824b97748ff585537d327528e9438f58f69f45c7762e7cd3a1ab32c1619f551aabe8075d13172f9273cf10f6d83ab91
   languageName: node
   linkType: hard
 
@@ -8006,7 +8015,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:13.0.6, glob@npm:^13.0.1, glob@npm:^13.0.3":
+"glob@npm:13.0.6, glob@npm:^13.0.1, glob@npm:^13.0.3, glob@npm:^13.0.6":
   version: 13.0.6
   resolution: "glob@npm:13.0.6"
   dependencies:
@@ -13147,12 +13156,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-dictionary@npm:^5.3.0":
-  version: 5.3.0
-  resolution: "style-dictionary@npm:5.3.0"
+"style-dictionary@npm:^5.3.3":
+  version: 5.3.3
+  resolution: "style-dictionary@npm:5.3.3"
   dependencies:
     "@bundled-es-modules/deepmerge": "npm:^4.3.1"
-    "@bundled-es-modules/glob": "npm:^13.0.1"
+    "@bundled-es-modules/glob": "npm:^13.0.6"
     "@bundled-es-modules/memfs": "npm:^4.17.0"
     "@zip.js/zip.js": "npm:^2.7.44"
     chalk: "npm:^5.3.0"
@@ -13166,7 +13175,7 @@ __metadata:
     tinycolor2: "npm:^1.6.0"
   bin:
     style-dictionary: bin/style-dictionary.js
-  checksum: 10c0/f1489cc28112b84c3b75a4a510507186b0c4f1d2ad142e334f1e8be001437dc68a065a89e327ce21143ce77259b7d360bb0032ec4fec6c5082e50bd02b803976
+  checksum: 10c0/6ec64b25d801bc2819472cbfd0a6f1e64e33de16eac058e61788e2467b199aca2189f0c54c62ed684ce2b0485094bec7d9191bf54ac847e2a9127fcd68fd6130
   languageName: node
   linkType: hard
 
