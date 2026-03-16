@@ -38,7 +38,7 @@
     "eslint-plugin-react-refresh": "^0.5.0",
     "eslint-plugin-sonarjs": "^4.0.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.7",
+    "lint-staged": "^16.3.1",
     "pinst": "^3.0.0",
     "prettier": "^3.8.1",
     "puppeteer": "^24.37.5",
