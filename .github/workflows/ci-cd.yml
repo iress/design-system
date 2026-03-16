@@ -297,6 +297,7 @@ jobs:
 
       - name: Configure npm authentication for OIDC
         run: |
+          echo 'npmPublishRegistry: "https://registry.npmjs.org"' >> .yarnrc.yml
           echo 'npmRegistries:' >> .yarnrc.yml
           echo '  "https://registry.npmjs.org":' >> .yarnrc.yml
           echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
@@ -444,6 +445,7 @@ jobs:
 
       - name: Configure npm authentication for OIDC
         run: |
+          echo 'npmPublishRegistry: "https://registry.npmjs.org"' >> .yarnrc.yml
           echo 'npmRegistries:' >> .yarnrc.yml
           echo '  "https://registry.npmjs.org":' >> .yarnrc.yml
           echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
