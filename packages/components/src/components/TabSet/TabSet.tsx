@@ -132,7 +132,8 @@ const ActiveIndicator = (props: IressUnstyledProps) => {
       const tabs = tabList?.querySelectorAll('[role="tab"]');
       if (tabs?.length) {
         resizeObserver = new ResizeObserver(updateStyle);
-        tabs.forEach((tab) => resizeObserver.observe(tab));
+        const observer = resizeObserver;
+        tabs.forEach((tab) => observer.observe(tab));
       }
     }
 
