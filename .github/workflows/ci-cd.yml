@@ -25,6 +25,7 @@ on:
           - '@iress-oss/ids-storybook-sandbox'
           - '@iress-oss/ids-storybook-toggle-stories'
           - '@iress-oss/ids-storybook-version-badge'
+          - '@iress-oss/ids-theme-preset'
           - '@iress-oss/ids-tokens'
 
 permissions:
@@ -331,7 +332,10 @@ jobs:
               IS_PRERELEASE="false"
               echo "  NPM Tag: $NPM_TAG (stable)"
             fi
-            yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public --provenance
+            if ! yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public --provenance 2>&1; then
+              echo "  ⚠️ Publish with provenance failed, retrying without --provenance (first publish of new package)..."
+              yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public
+            fi
             echo "  ✅ Published $PACKAGE@$VERSION with tag '$NPM_TAG'"
             RELEASE_INFO="${RELEASE_INFO}${PACKAGE}|${VERSION}|${IS_PRERELEASE};"
           done
