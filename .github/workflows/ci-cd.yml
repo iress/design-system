@@ -297,9 +297,7 @@ jobs:
 
       - name: Configure npm authentication for OIDC
         run: |
-          echo 'npmRegistries:' >> .yarnrc.yml
-          echo '  "https://registry.npmjs.org":' >> .yarnrc.yml
-          echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
+          echo 'npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
 
       - name: Detect Version Changes (Stable)
         id: version-check
@@ -444,9 +442,7 @@ jobs:
 
       - name: Configure npm authentication for OIDC
         run: |
-          echo 'npmRegistries:' >> .yarnrc.yml
-          echo '  "https://registry.npmjs.org":' >> .yarnrc.yml
-          echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
+          echo 'npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
 
       - name: Publish to NPM (Canary)
         env:
