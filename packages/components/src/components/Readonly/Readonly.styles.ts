@@ -1,18 +1,40 @@
 import { sva } from '@/styled-system/css';
 
 export const readonly = sva({
-  slots: ['root', 'wrapper', 'addon', 'internal', 'formControl'],
+  slots: ['root', 'wrapper', 'addon', 'internal', 'formControl', 'action'],
   base: {
     root: {
       display: 'flex',
+      alignItems: 'stretch',
+      flexGrow: '1',
+      margin: 'spacing.0',
+      gap: 'spacing.2',
+    },
+    wrapper: {
+      display: 'flex',
       backgroundColor: 'colour.neutral.10',
       minHeight: 'input.height',
-      margin: 'spacing.0',
       flexGrow: '1',
       textStyle: 'typography.body.md',
       alignItems: 'center',
       height: 'auto',
       lineHeight: 'inherit',
+    },
+    action: {
+      border: 'input',
+      color: 'colour.neutral.70',
+      bg: 'colour.neutral.10',
+
+      _hover: {
+        bg: 'colour.neutral.20',
+        boxShadow: '{colors.colour.neutral.70} 0px 0px 0px 1px',
+      },
+
+      _active: {
+        bg: 'colour.neutral.10',
+        borderColor: 'colour.neutral.90',
+        boxShadow: '{colors.colour.neutral.90} 0px 0px 0px 1px',
+      },
     },
     addon: {
       borderRadius: 'radius.system.form',
@@ -74,14 +96,14 @@ export const readonly = sva({
   variants: {
     inline: {
       true: {
-        root: {
+        wrapper: {
           display: 'inline-flex',
         },
       },
     },
     width: {
       '2': {
-        root: {
+        wrapper: {
           maxWidth: '[fit-content]',
         },
         formControl: {
@@ -89,7 +111,7 @@ export const readonly = sva({
         },
       },
       '4': {
-        root: {
+        wrapper: {
           maxWidth: '[fit-content]',
         },
         formControl: {
@@ -97,7 +119,7 @@ export const readonly = sva({
         },
       },
       '6': {
-        root: {
+        wrapper: {
           maxWidth: '[fit-content]',
         },
         formControl: {
@@ -105,7 +127,7 @@ export const readonly = sva({
         },
       },
       '8': {
-        root: {
+        wrapper: {
           maxWidth: '[fit-content]',
         },
         formControl: {
@@ -113,7 +135,7 @@ export const readonly = sva({
         },
       },
       '10': {
-        root: {
+        wrapper: {
           maxWidth: '[fit-content]',
         },
         formControl: {
@@ -121,7 +143,7 @@ export const readonly = sva({
         },
       },
       '12': {
-        root: {
+        wrapper: {
           maxWidth: '[fit-content]',
         },
         formControl: {
@@ -129,7 +151,7 @@ export const readonly = sva({
         },
       },
       '16': {
-        root: {
+        wrapper: {
           maxWidth: '[fit-content]',
         },
         formControl: {
@@ -137,7 +159,7 @@ export const readonly = sva({
         },
       },
       '25%': {
-        root: {
+        wrapper: {
           width: '3/12',
         },
         formControl: {
@@ -145,7 +167,7 @@ export const readonly = sva({
         },
       },
       '50%': {
-        root: {
+        wrapper: {
           width: '6/12',
         },
         formControl: {
@@ -153,7 +175,7 @@ export const readonly = sva({
         },
       },
       '75%': {
-        root: {
+        wrapper: {
           width: '9/12',
         },
         formControl: {
@@ -161,7 +183,7 @@ export const readonly = sva({
         },
       },
       '100%': {
-        root: {
+        wrapper: {
           width: '12/12',
         },
         formControl: {

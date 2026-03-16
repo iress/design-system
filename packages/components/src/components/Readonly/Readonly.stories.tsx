@@ -7,7 +7,10 @@ import {
   disableArgTypes,
   reactNodeArgType,
   stylingProps,
+  withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
+import { ReadonlyEditToggle } from './mocks/ReadonlyEditToggle';
+import ReadonlyEditToggleSource from './mocks/ReadonlyEditToggle.tsx?raw';
 
 type Story = StoryObj<IressReadonlyProps>;
 
@@ -54,5 +57,24 @@ export const InlineStyle: Story = {
     prepend: <IressText color="colour.neutral.70">Prepend</IressText>,
     append: <IressText color="colour.neutral.70">Append</IressText>,
     inline: true,
+  },
+};
+
+export const Actions: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    value: 'AU',
+  },
+  argTypes: {
+    ...disableArgTypes(['actions']),
+  },
+  render: (args) => <ReadonlyEditToggle {...args} />,
+  parameters: {
+    ...withTransformedRawSource(
+      ReadonlyEditToggleSource,
+      'IressReadonlyProps',
+      ['actions'],
+    ),
   },
 };
