@@ -25,6 +25,7 @@ on:
           - '@iress-oss/ids-storybook-sandbox'
           - '@iress-oss/ids-storybook-toggle-stories'
           - '@iress-oss/ids-storybook-version-badge'
+          - '@iress-oss/ids-theme-preset'
           - '@iress-oss/ids-tokens'
 
 permissions:
@@ -295,10 +296,11 @@ jobs:
       - name: Install dependencies if needed
         run: yarn install --immutable
 
-      - name: Configure npm authentication
+      - name: Configure npm authentication for OIDC
         run: |
-          echo 'npmPublishRegistry: "https://registry.npmjs.org"' >> .yarnrc.yml
-          echo 'npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
+          echo 'npmRegistries:' >> .yarnrc.yml
+          echo '  "https://registry.npmjs.org":' >> .yarnrc.yml
+          echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
 
       - name: Detect Version Changes (Stable)
         id: version-check
@@ -330,12 +332,15 @@ jobs:
               IS_PRERELEASE="false"
               echo "  NPM Tag: $NPM_TAG (stable)"
             fi
-            # Check if package exists on registry; first publish can't use --provenance
             if npm view "$PACKAGE" version &>/dev/null; then
               yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public --provenance
             else
-              echo "  ⚠️ First publish — skipping --provenance"
-              yarn workspace "$PACKAGE" npm publish --tag "$NPM_TAG" --access public
+              echo "  ⚠️ New package — using npm publish directly for first publish"
+              PKG_DIR=$(yarn workspaces list --json | jq -r "select(.name == \"$PACKAGE\") | .location")
+              pushd "$PKG_DIR" > /dev/null
+              NPM_CONFIG_USERCONFIG="$RUNNER_TEMP/.npmrc-new-pkg" \
+                npm publish --tag "$NPM_TAG" --access public --registry https://registry.npmjs.org/ --//registry.npmjs.org/:_authToken="$NODE_AUTH_TOKEN"
+              popd > /dev/null
             fi
             echo "  ✅ Published $PACKAGE@$VERSION with tag '$NPM_TAG'"
             RELEASE_INFO="${RELEASE_INFO}${PACKAGE}|${VERSION}|${IS_PRERELEASE};"
@@ -441,10 +446,11 @@ jobs:
             done
           fi
 
-      - name: Configure npm authentication
+      - name: Configure npm authentication for OIDC
         run: |
-          echo 'npmPublishRegistry: "https://registry.npmjs.org"' >> .yarnrc.yml
-          echo 'npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
+          echo 'npmRegistries:' >> .yarnrc.yml
+          echo '  "https://registry.npmjs.org":' >> .yarnrc.yml
+          echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
 
       - name: Publish to NPM (Canary)
         env:
@@ -459,12 +465,7 @@ jobs:
 
           if [ -n "$TARGET_PACKAGE" ]; then
             echo "📦 Publishing package: $TARGET_PACKAGE"
-            if npm view "$TARGET_PACKAGE" version &>/dev/null; then
-              yarn workspace "$TARGET_PACKAGE" npm publish --tag canary --access public --provenance
-            else
-              echo "  ⚠️ First publish — skipping --provenance"
-              yarn workspace "$TARGET_PACKAGE" npm publish --tag canary --access public
-            fi
+            yarn workspace "$TARGET_PACKAGE" npm publish --tag canary --access public --provenance
           else
             echo "📦 Publishing all packages"
             yarn workspaces foreach -A --no-private npm publish --tag canary --access public --provenance

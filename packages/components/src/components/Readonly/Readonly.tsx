@@ -16,6 +16,7 @@ import { IressSpinner } from '../Spinner';
 import { GlobalCSSClass } from '@/enums';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
 import { splitCssProps } from '@/styled-system/jsx';
+import { IressButton } from '../Button';
 
 export interface IressReadonlyProps<
   T extends FormControlValue = FormControlValue,
@@ -42,6 +43,7 @@ export interface IressReadonlyProps<
 
 const Readonly = <T extends FormControlValue = string | number>(
   {
+    actions,
     append,
     children,
     className,
@@ -71,34 +73,39 @@ const Readonly = <T extends FormControlValue = string | number>(
 
   return (
     <div
-      className={cx(
-        className,
-        css(classes.root, styleProps),
-        GlobalCSSClass.Readonly,
-      )}
+      className={cx(className, css(classes.root), GlobalCSSClass.Readonly)}
       data-testid={dataTestId}
       style={style}
     >
-      {prepend && <div className={css(classes.addon)}>{prepend}</div>}
-      <div className={css(classes.formControl)}>
-        {children ?? validValue ?? validDefaultValue}
+      <div className={css(classes.wrapper, styleProps)}>
+        {prepend && <div className={css(classes.addon)}>{prepend}</div>}
+        <div className={css(classes.formControl)}>
+          {children ?? validValue ?? validDefaultValue}
+        </div>
+        <div className={css(classes.internal)}>
+          {loading && (
+            <IressSpinner
+              screenreaderText={loading === true ? 'loading' : loading}
+            />
+          )}
+        </div>
+        {append && <div className={css(classes.addon)}>{append}</div>}
+        <input
+          {...nonStyleProps}
+          defaultValue={validDefaultValue}
+          type="hidden"
+          ref={ref}
+          data-testid={propagateTestid(dataTestId, 'input')}
+          value={validValue}
+        />
       </div>
-      <div className={css(classes.internal)}>
-        {loading && (
-          <IressSpinner
-            screenreaderText={loading === true ? 'loading' : loading}
-          />
-        )}
-      </div>
-      {append && <div className={css(classes.addon)}>{append}</div>}
-      <input
-        {...nonStyleProps}
-        defaultValue={validDefaultValue}
-        type="hidden"
-        ref={ref}
-        data-testid={propagateTestid(dataTestId, 'input')}
-        value={validValue}
-      />
+      {actions?.map((action, index) => (
+        <IressButton
+          {...action}
+          className={cx(action.className, css(classes.action))}
+          key={index}
+        />
+      ))}
     </div>
   );
 };
