@@ -73,6 +73,20 @@ The `options` prop is required for `IressSelect`. You can provide an array of `L
 
 <ComponentExample of={ComponentStories.SingleSelect} />
 
+### Pre-selected value
+
+You can pre-select an option by passing a raw string (or any `FormControlValue`) to the `defaultValue` prop — IressSelect will automatically find and display the matching option. This saves you from having to construct the full `LabelValueMeta` object when you already have the option's value (e.g. from an API response).
+
+<ComponentExample of={ComponentStories.PreSelectedValue} />
+
+For multi-select, pass an array of values to `defaultValue` and each will be resolved to its matching option.
+
+<ComponentExample of={ComponentStories.PreSelectedMultiValue} />
+
+If you need a controlled component (where the selection cannot be changed by the user), pass a `LabelValueMeta` object to the `value` prop instead.
+
+> **Note:** Passing a primitive string/number to `value` with asynchronous `options` is not supported. The component cannot resolve the value to an option without the full options list, so it will log a warning and fall back to uncontrolled behaviour. Use a `LabelValueMeta` object with async options.
+
 ### Multi-select
 
 Adding the `multiSelect` prop will allow the user to select multiple options.
