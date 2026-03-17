@@ -9,7 +9,7 @@ export default defineConfig({
   // Whether to use css reset, will probably be enabled in version 6
   preflight: true,
 
-  dependencies: ['../themes/dist/**/*.css'],
+  dependencies: ['../themes/dist/**/*.css', '../theme-preset/dist/**/*.js'],
 
   // Where to look for your css declarations
   include: ['./src/**/*.{js,jsx,ts,tsx}'],

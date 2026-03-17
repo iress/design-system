@@ -132,6 +132,13 @@ export type IressSelectProps<
   multiSelect?: TMultiple;
 
   /**
+   * Limits the number of tags displayed before collapsing into a summary.
+   * Only applies when `multiSelect` is `true`. This is not for validation — it only controls the visible tag count.
+   * @default 5
+   */
+  multiSelectLimit?: TMultiple extends true ? number : never;
+
+  /**
    * Name of the select. Used to pass data when submitted within a form.
    */
   name?: string;
@@ -382,6 +389,7 @@ const Select = <
     id,
     matchActivatorWidth = true,
     multiSelect,
+    multiSelectLimit,
     name,
     onChange,
     onBlur,
@@ -633,6 +641,7 @@ const Select = <
             id={id}
             loading={loading}
             multiSelect={multiSelect}
+            multiSelectLimit={multiSelectLimit}
             onChange={onChange as SelectChangeEvent<TMultiple, false>}
             placeholder={placeholder}
             prepend={prepend}

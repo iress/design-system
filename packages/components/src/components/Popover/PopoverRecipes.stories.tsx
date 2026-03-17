@@ -6,9 +6,11 @@ import {
   type IressMenuProps,
   IressPopover,
   IressRow,
+  IressSelect,
   IressStack,
   IressToggle,
 } from '@/main';
+import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
 import { MENU_CHILDREN_OPTIONS } from '../Menu/mocks/menuChildrenOptions';
 import { MenuInPopoverRoleDescription } from './mocks/MenuInPopoverRoleDescription';
 import { type ComponentProps, type ReactNode, useState } from 'react';
@@ -44,6 +46,9 @@ export default {
 export const WithMenu: Story = {
   args: {
     menuChildren: 'selectable',
+    contentStyle: {
+      p: 'none',
+    },
   },
   argTypes: {
     ...disableArgTypes(['activator', 'children', 'role', 'type']),
@@ -95,4 +100,22 @@ export const FocusableChildren: Story = {
   parameters: {
     ...withCustomSource(UsePopoverExampleSource),
   },
+};
+
+export const WithSelect: Story = {
+  render: (args) => (
+    <IressPopover
+      {...args}
+      activator={<IressButton>Open Popover with Select</IressButton>}
+      container={document.body}
+    >
+      <IressSelect
+        options={MOCK_LABEL_VALUE_META}
+        placeholder="Choose an option"
+        container={document.body}
+        multiSelect
+        multiSelectLimit={1}
+      />
+    </IressPopover>
+  ),
 };

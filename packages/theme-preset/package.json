@@ -34,6 +34,7 @@
   ],
   "scripts": {
     "build": "tsup",
+    "dev": "tsup --watch",
     "clean": "rimraf dist coverage",
     "lint": "eslint . --ext=.js,.jsx,.ts,.tsx,.mjs,.cjs --max-warnings=0",
     "test": "vitest --config vitest.config.ts --watch",
