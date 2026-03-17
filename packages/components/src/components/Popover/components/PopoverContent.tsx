@@ -133,22 +133,13 @@ const PopoverContentInner = ({
 
 PopoverContentInner.displayName = 'PopoverContentInner';
 
-interface PopoverContentContainerProps extends PopoverContentProps {
-  isNested?: boolean;
-}
-
 const PopoverContentContainer = ({
   container,
-  isNested,
   ...restProps
-}: PopoverContentContainerProps) => {
+}: PopoverContentProps) => {
   const nodeId = useFloatingNodeId();
 
-  // Both `container` and `isNested` result in a FloatingPortal. When a container is
-  // explicitly provided it takes priority as the portal root; when only `isNested` is
-  // true the portal renders at document.body (root=undefined), taking the content
-  // outside the parent popover's CSS stacking context to prevent z-index issues.
-  if (container || isNested) {
+  if (container) {
     return (
       <FloatingNode id={nodeId}>
         <FloatingPortal root={container} preserveTabOrder>
@@ -170,18 +161,15 @@ PopoverContentContainer.displayName = 'PopoverContentContainer';
 export const PopoverContent = (props: PopoverContentProps) => {
   const parentId = useFloatingParentNodeId();
 
-  // This is a root, so we wrap it with the tree
   if (parentId === null) {
     return (
       <FloatingTree>
-        <PopoverContentContainer {...props} isNested={false} />
+        <PopoverContentContainer {...props} />
       </FloatingTree>
     );
   }
 
-  // Nested popovers use FloatingPortal to render outside parent stacking context,
-  // which prevents z-index issues when popovers are opened inside other popovers.
-  return <PopoverContentContainer {...props} isNested />;
+  return <PopoverContentContainer {...props} />;
 };
 
 PopoverContent.displayName = 'PopoverContent';
