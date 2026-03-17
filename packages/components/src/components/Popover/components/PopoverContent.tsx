@@ -133,13 +133,18 @@ const PopoverContentInner = ({
 
 PopoverContentInner.displayName = 'PopoverContentInner';
 
+interface PopoverContentContainerProps extends PopoverContentProps {
+  isNested?: boolean;
+}
+
 const PopoverContentContainer = ({
   container,
+  isNested,
   ...restProps
-}: PopoverContentProps) => {
+}: PopoverContentContainerProps) => {
   const nodeId = useFloatingNodeId();
 
-  if (container) {
+  if (container || isNested) {
     return (
       <FloatingNode id={nodeId}>
         <FloatingPortal root={container} preserveTabOrder>
@@ -165,12 +170,14 @@ export const PopoverContent = (props: PopoverContentProps) => {
   if (parentId === null) {
     return (
       <FloatingTree>
-        <PopoverContentContainer {...props} />
+        <PopoverContentContainer {...props} isNested={false} />
       </FloatingTree>
     );
   }
 
-  return <PopoverContentContainer {...props} />;
+  // Nested popovers use FloatingPortal to render outside parent stacking context,
+  // which prevents z-index issues when popovers are opened inside other popovers.
+  return <PopoverContentContainer {...props} isNested />;
 };
 
 PopoverContent.displayName = 'PopoverContent';

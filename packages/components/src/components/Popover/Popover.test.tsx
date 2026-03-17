@@ -325,6 +325,13 @@ describe('IressPopover', () => {
         );
         expect(content).toHaveStyle({ 'background-color': 'rgb(255, 0, 0)' });
       });
+
+      it('has default padding applied to the content', () => {
+        renderComponent({ children: 'Content' });
+
+        const content = screen.getByText('Content');
+        expect(content).toHaveClass(popover().content!);
+      });
     });
 
     describe('displayMode', () => {
@@ -603,6 +610,33 @@ describe('IressPopover', () => {
 
         expect(activator.getAttribute('aria-controls')).toContain('test');
       });
+    });
+  });
+
+  describe('nested popovers', () => {
+    it('renders nested popover content outside the parent popover content via a portal', async () => {
+      const { container } = render(
+        <IressPopover
+          activator={<IressButton>Outer popover</IressButton>}
+          defaultShow
+        >
+          <IressPopover
+            activator={<IressButton>Inner popover</IressButton>}
+            defaultShow
+          >
+            Inner content
+          </IressPopover>
+        </IressPopover>,
+      );
+
+      // Floating UI flushing: https://floating-ui.com/docs/react#testing
+      await act(async () => {});
+
+      const innerContent = screen.getByText('Inner content');
+
+      // The inner popover content should be portaled outside the container
+      // (i.e., not a descendant of the outer popover's container)
+      expect(container.contains(innerContent)).toBe(false);
     });
   });
 

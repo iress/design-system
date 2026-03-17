@@ -647,6 +647,7 @@ const Select = <
         align={align}
         className={cx(className, classes.root, GlobalCSSClass.Select)}
         contentClassName={cx(classes.popoverContent)}
+        contentStyle={{ p: 'none' }}
         matchActivatorWidth={matchActivatorWidth}
         onActivated={handlePopoverActivated}
         onDeactivated={handlePopoverDeactivated}

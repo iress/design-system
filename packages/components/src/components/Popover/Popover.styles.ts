@@ -16,6 +16,7 @@ export const popover = sva({
       borderRadius: 'radius.system.form',
       layerStyle: 'dropdown',
       maxWidth: 'input.16',
+      padding: 'spacing.4',
       zIndex: '200',
     },
   },
@@ -35,6 +36,7 @@ export const popover = sva({
         content: {
           minWidth: 'input.12',
           maxWidth: 'auto',
+          padding: 'spacing.0',
         },
       },
     },

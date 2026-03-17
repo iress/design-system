@@ -326,7 +326,7 @@ const DropdownMenu = <TMultiple extends boolean = false>(
         align={align}
         className={cx(className, classes.root, GlobalCSSClass.Filter)}
         container={container}
-        contentStyle={{ className: classes.popoverContent }}
+        contentStyle={{ className: classes.popoverContent, p: 'none' }}
         data-testid={dataTestId}
         id={id}
         show={show}

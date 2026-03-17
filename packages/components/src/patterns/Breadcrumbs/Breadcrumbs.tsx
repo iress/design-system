@@ -84,6 +84,7 @@ const BreadcrumbOverflow = ({
 }) => (
   <IressPopover
     align="bottom"
+    contentStyle={{ p: 'none' }}
     {...restProps}
     activator={
       <IressLink aria-label={ariaLabel} className={className}>

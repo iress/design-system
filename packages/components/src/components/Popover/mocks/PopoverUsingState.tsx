@@ -1,6 +1,5 @@
 import {
   IressButton,
-  IressPanel,
   IressPopover,
   type IressPopoverProps,
 } from '@/main';
@@ -21,7 +20,7 @@ export const PopoverUsingState = (args: IressPopoverProps) => {
       onActivated={() => setShow(true)}
       onDeactivated={() => setShow(false)}
     >
-      <IressPanel>A little more information about this area.</IressPanel>
+      A little more information about this area.
     </IressPopover>
   );
 };
