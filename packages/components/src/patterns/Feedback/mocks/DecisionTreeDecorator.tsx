@@ -1,10 +1,9 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { IressRadioGroup, IressRadio, IressField, IressStack } from '@/main';
-
-type Recommendation = 'alert' | 'toast' | 'modal' | null;
-
-const RecommendationContext = createContext<Recommendation>(null);
-export const useRecommendation = () => useContext(RecommendationContext);
+import {
+  RecommendationContext,
+  type Recommendation,
+} from './RecommendationContext';
 
 const questions = [
   {

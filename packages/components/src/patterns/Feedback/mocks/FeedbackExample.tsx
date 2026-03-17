@@ -7,7 +7,7 @@ import {
   IressToasterProvider,
   useToaster,
 } from '@/main';
-import { useRecommendation } from './DecisionTreeDecorator';
+import { useRecommendation } from './RecommendationContext';
 
 const ToastExample = () => {
   const toaster = useToaster();

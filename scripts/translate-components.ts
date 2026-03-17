@@ -1291,8 +1291,6 @@ function buildOutput(
   // Reference links — show actual import for components/patterns
   if (componentExportName) {
     output += `> **${categoryLabel}:** \`import { ${componentExportName} } from '@iress-oss/ids-components'\`\n`;
-  } else {
-    output += `> **${categoryLabel}:** \`@iress-oss/ids-components\`\n`;
   }
   output += `> **Storybook:** [${title} in Storybook](${storybookUrl})\n\n`;
 
@@ -1690,10 +1688,15 @@ async function main() {
           }
         }
 
-        // Derive component export name
-        const componentExportName = !doc.isRecipe
-          ? `Iress${doc.componentName}`
-          : null;
+        // Derive component export name (only if a real component file exists)
+        const componentFile = path.join(
+          path.dirname(doc.filePath),
+          `${doc.componentName}.tsx`,
+        );
+        const componentExportName =
+          !doc.isRecipe && existsSync(componentFile)
+            ? `Iress${doc.componentName}`
+            : null;
 
         // Extract code example from stories Default export
         let codeExample: string | null = null;
