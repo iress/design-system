@@ -36,6 +36,8 @@ You can use state to control the slideout by setting the `show` property to `tru
 
 You can use the `IressSlideoutProvider` to open and close slideout from anywhere in your application, as long as the slideout has a unique `id`. In this case you would use the `useSlideout` hook to open and close the slideout.
 
+> **Note:** If you are already using `IressProvider` or `IressShadow`, you do not need to add `IressSlideoutProvider` separately — it is already included.
+
 To use, wrap your `<App/>` or the component that you want to use the `useSlideout` hook with `<IressSlideoutProvider />`.
 
 <ComponentExample
@@ -98,6 +100,8 @@ If you're using an absolutely positioned slideout you may also want to change th
 
 For your components to work as previously, you will need to set up the `IressSlideoutProvider` at the root of your application. This will allow you to use the `useSlideout` hook to open and close slideouts from anywhere in your application using the ID of the slideout.
 
+> **Note:** If you are using `IressProvider` or `IressShadow`, you do not need to add `IressSlideoutProvider` separately — it is already included.
+
 ```tsx
 const App = () => (
   <IressSlideoutProvider>Rest of app here</IressSlideoutProvider>
@@ -125,11 +129,11 @@ export const TestAppProvider = ({ children }: PropsWithChildren) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <IressModalProvider container={containerRef}>
+    <IressProvider container={containerRef}>
       <div style={themeOverrides} ref={containerRef}>
         {children}
       </div>
-    </IressModalProvider>
+    </IressProvider>
   );
 };
 ```

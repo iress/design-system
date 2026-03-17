@@ -189,10 +189,10 @@ Scan for raw HTML, third-party components, and custom implementations that have 
 
 #### a. Provider & CSS Setup
 
-- **IressProvider must wrap the application root** — Required for fonts, CSS variables, and theming
+- **IressProvider must wrap the application root** — Required for fonts, CSS variables, and theming. `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, and `IressIconProvider` — these should not be added separately. Similarly, `IressShadow` includes `IressProvider` internally, so no additional providers are needed when using `IressShadow`.
 - **The IDS component CSS must be imported** — `@iress-oss/ids-components/dist/style.css` contains all component styles
 - Users only need to install `@iress-oss/ids-components@alpha` — the tokens are bundled within the component library and do not need to be installed separately. **IDS v6 is currently in alpha**, so the `@alpha` tag is required (e.g. `npm install @iress-oss/ids-components@alpha`)
-- **CSP must allowlist IDS external origins** — If the app enforces a Content Security Policy, `fonts.googleapis.com` and `fonts.gstatic.com` must be in `style-src`/`font-src`. Add `cdn.iress.com` if using legacy Font Awesome icons or `IressTheme`. If using `IressShadow` and inline styles are blocked, add `<meta name="csp-nonce" content="...">` in `<head>`. See the [CSP Guide](@iress-oss/ids-components/.ai/guides/get-started-content-security-policy.md) for details.
+- **CSP must allowlist IDS external origins** — If the app enforces a Content Security Policy, `fonts.googleapis.com` and `fonts.gstatic.com` must be in `style-src`/`font-src`. Add `cdn.iress.com` if using legacy Font Awesome icons or `IressTheme`. If using `IressShadow` and inline styles are blocked, add `<meta name="csp-nonce" content="...">` in `<head>`. See the CSP Guide at `node_modules/@iress-oss/ids-components/.ai/guides/get-started-content-security-policy.md` for details (requires `@iress-oss/ids-components` to be installed).
 - If using design tokens directly in application code (for custom styling), users should additionally install `@iress-oss/ids-tokens@alpha` and import `@iress-oss/ids-tokens/build/css-vars.css`
 
 ```typescript
@@ -372,7 +372,7 @@ Top Issues:
 
 ## Common Mistakes to Flag in Audits
 
-For the full list of common anti-patterns with code examples, read the [Common Mistakes guide](node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md). When auditing, flag these with the following priorities and audit rules:
+For the full list of common anti-patterns with code examples, read the Common Mistakes guide at `node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md` (requires `@iress-oss/ids-components` to be installed). When auditing, flag these with the following priorities and audit rules:
 
 ### `disabled` attribute on IressButton — **High** priority
 

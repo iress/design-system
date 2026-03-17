@@ -220,7 +220,7 @@ Use the `srOnly` or `hide` styling props available on any component.
 | Removed `mode`            | Use `color` instead                                                                                 |
 | `name` is now type-safe   | IDE autocompletion available                                                                        |
 | Removed `size`            | Inherits font size from parent. Use custom CSS for specific sizes; use `IressImage` for large icons |
-| New `IressIconProvider`   | Required for optimal Material Symbols usage with font subsetting                                    |
+| New `IressIconProvider`   | Required for optimal Material Symbols usage with font subsetting. Already included in `IressProvider` and `IressShadow` — no need to add separately |
 | New `type` prop           | Select icon provider (`'fontawesome'` \| `'material'`)                                              |
 | New `filled` prop         | Material Symbols filled variant                                                                     |
 
@@ -372,6 +372,8 @@ New component supporting the data colour spectrum with automatic rounded corners
 | New `noSubsetting`      | Controls automatic font subsetting via Google Fonts CDN for icons            |
 | New `noDefaultFont`     | Controls loading of default Iress font from CDN                              |
 | Icon handling           | Now uses `IressIconProvider` with Material Symbols instead of icon CSS       |
+
+> **Note:** `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, and `IressIconProvider`. You do not need to add these separately. `IressShadow` includes `IressProvider` internally, so no additional providers are needed when using `IressShadow` either.
 
 ### Radio
 
@@ -541,6 +543,8 @@ New component for applying IDS styling props to any element or component without
 ### Toast
 
 `IressToast` is no longer directly available. Use `IressToasterProvider` and `useToaster` to create toasts. For static toasts, use `IressAlert`.
+
+> **Note:** `IressToasterProvider` is already included in `IressProvider` and `IressShadow` — you do not need to add it separately if you are using either of these.
 
 ### Toaster
 

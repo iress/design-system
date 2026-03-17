@@ -25,7 +25,7 @@ From version 6, the `IressIcon` component supports Material Symbols icons from G
 
 #### Option 1: Automatic loading with `IressProvider` (recommended)
 
-If you are already using the `IressProvider` component in your application, no further action is required as the Material Symbols font will be automatically loaded for you as it contains the `IressIconProvider` component.
+If you are already using the `IressProvider` component in your application, no further action is required as the Material Symbols font will be automatically loaded for you as it contains the `IressIconProvider` component. The same applies if you are using `IressShadow`, which includes `IressProvider` internally.
 
 ```tsx
 import { IressProvider } from '@iress-oss/ids-components';
@@ -44,7 +44,9 @@ The `IressProvider` component takes care of this for you when you use it with th
 
 #### Option 2: Using the `IressIconProvider`
 
-For more simpler applications, you can use the `IressIconProvider` directly.
+For more simpler applications, or if you need to customise the icon provider independently, you can use the `IressIconProvider` directly.
+
+> **Note:** If you are already using `IressProvider` or `IressShadow`, you do not need to add `IressIconProvider` separately — it is already included.
 
 <ComponentExample
   of={ProviderStories.IconProvider}
