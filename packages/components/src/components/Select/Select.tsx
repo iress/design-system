@@ -156,7 +156,8 @@ export type IressSelectProps<
   onBlur?: (event: Event | React.FocusEvent<HTMLElement>) => void;
 
   /**
-   * Emitted when the value changes.
+   * Emitted when the value changes. Required for integration with `IressForm`.
+   * When using custom `renderOptions`, pass `handleMenuChange` to your menu's `onChange` to ensure this callback fires.
    */
   onChange?: SelectChangeEvent<TMultiple, TNative>;
 
@@ -262,7 +263,9 @@ export interface SelectLabelRenderProps<TMultiple extends boolean = false> {
   loading: boolean;
 
   /**
-   * Sets the value (selected items) of the select. Use this if you are using an uncontrolled select.
+   * Sets the value (selected items) of the select without triggering the `onChange` callback.
+   * Use this for programmatic value updates where you don't need change notification.
+   * When using `renderOptions`, prefer `handleMenuChange` if you need `onChange` to fire instead of calling `setValue` directly.
    */
   setValue: (value?: ControlledValue<LabelValueMeta, TMultiple>) => void;
 
@@ -291,7 +294,8 @@ export interface SelectOptionsRenderProps<
   handleClear: IressButtonProps['onClick'] & IressButtonProps['onKeyDown'];
 
   /**
-   * When the menu selection changes, this will set the value and close the menu.
+   * When the menu selection changes, this will set the value, close the menu, and trigger the `onChange` callback.
+   * Use this instead of `setValue` inside custom `renderOptions` to ensure `onChange` is called.
    */
   handleMenuChange: IressSelectMenuProps<TMultiple>['onChange'];
 
