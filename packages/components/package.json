@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-components",
-  "version": "6.0.0-alpha.42",
+  "version": "6.0.0-alpha.43",
   "description": "Iress React Component Library",
   "license": "Apache-2.0",
   "type": "module",
@@ -18,8 +18,8 @@
     "build": "yarn panda:prepare && vite build",
     "build-storybook": "storybook build --stats-json",
     "clean": "rimraf dist coverage src/styled-system",
-    "dev": "concurrently \"yarn panda:watch\" \"yarn storybook\"",
-    "dev:no-open": "concurrently \"yarn panda:watch\" \"yarn storybook --no-open\"",
+    "dev": "concurrently \"yarn workspace @iress-oss/ids-theme-preset dev\" \"yarn panda:watch\" \"yarn storybook\"",
+    "dev:no-open": "concurrently \"yarn workspace @iress-oss/ids-theme-preset dev\" \"yarn panda:watch\" \"yarn storybook --no-open\"",
     "lint": "eslint . --max-warnings 0",
     "panda:prepare": "panda cssgen && panda codegen",
     "panda:watch": "panda --watch",
@@ -31,7 +31,7 @@
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json"
   },
   "devDependencies": {
-    "@iress-oss/ids-theme-preset": "^6.0.0-alpha.1",
+    "@iress-oss/ids-theme-preset": "^6.0.0-alpha.2",
     "@iress-oss/ids-tokens": "^6.0.0-alpha.17",
     "@pandacss/dev": "1.8.2",
     "@testing-library/dom": "10.4.1",

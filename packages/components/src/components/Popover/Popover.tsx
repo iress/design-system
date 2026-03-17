@@ -18,8 +18,8 @@ import {
   type IressStyledProps,
 } from '@/types';
 import { type OffsetOptions, type OpenChangeReason } from '@floating-ui/react';
-import { styled } from '@/styled-system/jsx';
-import { cx } from '@/styled-system/css';
+import { splitCssProps, styled } from '@/styled-system/jsx';
+import { css, cx } from '@/styled-system/css';
 import {
   type PopoverRef,
   usePopoverImperativeHandle,
@@ -159,7 +159,7 @@ const Popover = (
     className,
     container,
     contentClassName,
-    contentStyle,
+    contentStyle = {},
     defaultShow,
     displayMode = 'overlay',
     fluid,
@@ -182,6 +182,9 @@ const Popover = (
   const matchActivatorWidth =
     matchActivatorWidthProp && displayMode === 'overlay';
   const classes = popover({ fluid, matchActivatorWidth });
+  const styles = popover.raw({ fluid, matchActivatorWidth });
+
+  const [styleContentProps, nonStyleContentProps] = splitCssProps(contentStyle);
 
   const context = useFloatingPopover({
     align,
@@ -219,12 +222,12 @@ const Popover = (
           {activator}
         </PopoverActivator>
         <PopoverContent
-          {...contentStyle}
+          {...nonStyleContentProps}
           className={cx(
             contentClassName,
             contentStyle?.className,
             GlobalCSSClass.PopoverContent,
-            classes.content,
+            css(styles.content, styleContentProps),
           )}
           container={container}
           data-testid={propagateTestid(restProps['data-testid'], 'content')}

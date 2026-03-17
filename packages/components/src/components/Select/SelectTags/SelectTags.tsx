@@ -181,6 +181,8 @@ const Tags = ({
           onDeactivated={() => onToggleActions?.(false)}
           container={document.body}
           align="bottom-end"
+          contentStyle={{ p: 'none' }}
+          virtualFocus
         >
           <IressMenu>
             <IressMenuItem onClick={() => setExpanded(true)}>

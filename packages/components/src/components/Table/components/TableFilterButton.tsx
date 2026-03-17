@@ -52,6 +52,7 @@ export const TableFilterButton = <TValue,>({
         </IressTooltip>
       }
       align="bottom-start"
+      contentStyle={{ p: 'none' }}
       ref={popoverRef}
       type="listbox"
     >

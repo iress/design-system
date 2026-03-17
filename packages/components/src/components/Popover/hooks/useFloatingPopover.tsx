@@ -339,6 +339,18 @@ export const useFloatingPopover = ({
   const api = useFloating({
     open: show,
     onOpenChange: (open: boolean, e, reason) => {
+      // Don't close if focus moved to another floating element (e.g. a nested
+      // popover portaled to document.body). This prevents the parent popover
+      // from closing when a child popover steals focus.
+      if (
+        !open &&
+        reason === 'focus-out' &&
+        document.activeElement instanceof Element &&
+        document.activeElement.closest('[data-floating-ui-focusable]') != null
+      ) {
+        return;
+      }
+
       setShow(open);
 
       if (open) {

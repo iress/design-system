@@ -161,7 +161,6 @@ PopoverContentContainer.displayName = 'PopoverContentContainer';
 export const PopoverContent = (props: PopoverContentProps) => {
   const parentId = useFloatingParentNodeId();
 
-  // This is a root, so we wrap it with the tree
   if (parentId === null) {
     return (
       <FloatingTree>

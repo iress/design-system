@@ -2,7 +2,6 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 
 import { IressPopover } from './Popover';
 import { IressButton } from '../Button';
-import { IressPanel } from '../Panel';
 import { PopoverUsingState } from './mocks/PopoverUsingState';
 import PopoverUsingStateSource from './mocks/PopoverUsingState.tsx?raw';
 import { IressStack } from '../Stack';
@@ -11,8 +10,6 @@ import { IressTooltip } from '../Tooltip';
 import { IressRow } from '../Row';
 import { IressCol } from '../Col';
 import { IressText } from '../Text';
-import { MENU_CHILDREN_OPTIONS } from '../Menu/mocks/menuChildrenOptions';
-import { IressMenu } from '../Menu';
 import { PopoverParentContainer } from './mocks/PopoverParentContainer';
 import PopoverParentContainerSource from './mocks/PopoverParentContainer.tsx?raw';
 import {
@@ -27,51 +24,43 @@ type Story = StoryObj<typeof IressPopover>;
 
 const childrenOptions = {
   none: null,
-  hello: <IressPanel>Hello!</IressPanel>,
-  basic: <IressPanel>A little more information about this area.</IressPanel>,
+  hello: 'Hello!',
+  basic: 'A little more information about this area.',
   details: (
-    <IressPanel>
-      <IressRow>
-        <IressCol span={6}>
-          <IressText>Client</IressText>
-          <IressText noGutter>
-            <ul>
-              <li>Entity id 582323</li>
-              <li>Fruit Apple</li>
-              <li>Preferred email mamaduke@gmail.com</li>
-            </ul>
-          </IressText>
-        </IressCol>
-        <IressCol span={6}>
-          <IressText>Client</IressText>
-          <IressText noGutter>
-            <ul>
-              <li>Entity id 8766</li>
-              <li>Fruit Orange</li>
-              <li>Preferred email felicity@yahoo.com</li>
-            </ul>
-          </IressText>
-        </IressCol>
-      </IressRow>
-    </IressPanel>
+    <IressRow>
+      <IressCol span={6}>
+        <IressText>Client</IressText>
+        <IressText noGutter>
+          <ul>
+            <li>Entity id 582323</li>
+            <li>Fruit Apple</li>
+            <li>Preferred email mamaduke@gmail.com</li>
+          </ul>
+        </IressText>
+      </IressCol>
+      <IressCol span={6}>
+        <IressText>Client</IressText>
+        <IressText noGutter>
+          <ul>
+            <li>Entity id 8766</li>
+            <li>Fruit Orange</li>
+            <li>Preferred email felicity@yahoo.com</li>
+          </ul>
+        </IressText>
+      </IressCol>
+    </IressRow>
   ),
   paragraph: (
-    <IressPanel>
-      <IressText noGutter>
-        <p>
-          His head is gone, it is like it is been erased... Erased from
-          existence. That was the day I invented time travel. I remember it
-          vividly. I was standing on the edge of my toilet hanging a clock, the
-          porces was wet, I slipped, hit my head on the edge of the sink. And
-          when I came to I had a revelation, a picture, a picture in my head, a
-          picture of this. This is what makes time travel possible. The flux
-          capacitor.
-        </p>
-      </IressText>
-    </IressPanel>
-  ),
-  menu: (
-    <IressMenu role="listbox">{MENU_CHILDREN_OPTIONS.selectable}</IressMenu>
+    <IressText noGutter>
+      <p>
+        His head is gone, it is like it is been erased... Erased from existence.
+        That was the day I invented time travel. I remember it vividly. I was
+        standing on the edge of my toilet hanging a clock, the porces was wet, I
+        slipped, hit my head on the edge of the sink. And when I came to I had a
+        revelation, a picture, a picture in my head, a picture of this. This is
+        what makes time travel possible. The flux capacitor.
+      </p>
+    </IressText>
   ),
 };
 

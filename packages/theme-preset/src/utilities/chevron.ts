@@ -7,6 +7,7 @@ export const selectChevron = defineUtility({
   values: { type: 'boolean' },
   transform: (value) => {
     return {
+      paddingInlineEnd: `calc(${cssVars.spacing[2]} + ${sizes['chevron.select'].value})`,
       '&:after': {
         content: `''` as never,
         width: sizes['chevron.select'].value,

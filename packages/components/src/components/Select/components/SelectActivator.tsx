@@ -49,6 +49,7 @@ interface SelectActivatorProps<TMultiple extends boolean = false>
       | 'disabled'
       | 'id'
       | 'multiSelect'
+      | 'multiSelectLimit'
       | 'onChange'
       | 'placeholder'
       | 'renderLabel'
@@ -69,6 +70,7 @@ export const SelectActivator = <TMultiple extends boolean = false>({
   error,
   loading,
   multiSelect,
+  multiSelectLimit,
   onChange,
   placeholder,
   prepend,
@@ -96,6 +98,7 @@ export const SelectActivator = <TMultiple extends boolean = false>({
       <IressSelectTags
         append={append}
         id={id}
+        limit={multiSelectLimit}
         onDelete={(item) => {
           if (!item) return;
           const newValue = toArray(value).filter(

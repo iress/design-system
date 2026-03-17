@@ -165,6 +165,7 @@ export const IressMenuGroup = <
           offset={{ mainAxis: 0, crossAxis: 0 }}
           type={menu?.role === 'list' ? undefined : menu?.role}
           virtualFocus={popover?.isVirtualFocus}
+          contentStyle={{ p: 'none' }}
           {...restProps}
           className={cx(GlobalCSSClass.MenuGroup, className)}
           data-testid={propagateTestid(dataTestId, 'subdraw')}

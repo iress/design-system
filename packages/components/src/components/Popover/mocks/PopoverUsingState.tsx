@@ -1,9 +1,4 @@
-import {
-  IressButton,
-  IressPanel,
-  IressPopover,
-  type IressPopoverProps,
-} from '@/main';
+import { IressButton, IressPopover, type IressPopoverProps } from '@/main';
 import { useState } from 'react';
 
 export const PopoverUsingState = (args: IressPopoverProps) => {
@@ -21,7 +16,7 @@ export const PopoverUsingState = (args: IressPopoverProps) => {
       onActivated={() => setShow(true)}
       onDeactivated={() => setShow(false)}
     >
-      <IressPanel>A little more information about this area.</IressPanel>
+      A little more information about this area.
     </IressPopover>
   );
 };

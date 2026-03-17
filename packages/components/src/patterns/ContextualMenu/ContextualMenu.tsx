@@ -125,7 +125,7 @@ export const IressContextualMenu = ({
             icon="more_vert"
           />
         }
-        contentStyle={{ className: classes.menu }}
+        contentStyle={{ className: classes.menu, p: 'none' }}
         data-testid={propagateTestid(dataTestId, 'popover')}
         offset={offset}
         type="menu"
