@@ -1,4 +1,4 @@
-import { Meta, Markdown } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import * as ComponentStories from './Modal.stories';
 import * as ProviderStories from './ModalProvider.stories';
 import { IressAlert } from '../../main';
@@ -13,22 +13,24 @@ import {
 
 <ComponentOverview
   description="Modals gather information, complete a subtask, or provide additional information without losing the context of an underlying page."
-  readMore={(<Markdown>{`
-## Use a modal when
+  of={ComponentStories.Default}
+  meta={ComponentStories}
+/>
+
+## Usage
+
+### Use a modal when
+
 - Providing supplemental tasks required by the underlying page
 - Providing non-essential information related to the underlying page
 - Content require full attention
 
-## Avoid using a modal when
+### Avoid using a modal when
 
-- Conveying brief messages about background processes or status changes. Instead use IressAlert or IressToast.
+- Conveying brief messages about background processes or status changes. Instead use [IressAlert](?path=/docs/components-alert--docs) or [IressToaster](?path=/docs/components-toaster--docs).
 - The modal content can be incorporated into the page without complicating the page's intent
-  `}</Markdown>)}
-  of={ComponentStories.Default}
-  meta={ComponentStories}
-  />
 
-## Controlling the modal
+For a full comparison of feedback components, see the [Feedback pattern](?path=/docs/patterns-feedback--docs).
 
 ### Using the `show` property
 

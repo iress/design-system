@@ -11,6 +11,7 @@ import { Suspense } from 'react';
 import breadcrumbs from './Breadcrumbs/meta';
 import contextualMenu from './ContextualMenu/meta';
 import dropdownMenu from './DropdownMenu/meta';
+import feedback from './Feedback/meta';
 import form from './Form/meta';
 import loading from './Loading/meta';
 import shadow from './Shadow/meta';
@@ -25,6 +26,7 @@ const patterns: {
   breadcrumbs,
   contextualMenu,
   dropdownMenu,
+  feedback,
   form,
   loading,
   shadow,
