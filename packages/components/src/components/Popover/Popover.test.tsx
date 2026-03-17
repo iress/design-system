@@ -325,7 +325,6 @@ describe('IressPopover', () => {
         );
         expect(content).toHaveStyle({ 'background-color': 'rgb(255, 0, 0)' });
       });
-
     });
 
     describe('displayMode', () => {
