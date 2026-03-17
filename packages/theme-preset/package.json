@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-theme-preset",
-  "version": "6.0.0-alpha.1",
+  "version": "6.0.0-alpha.2",
   "description": "Panda CSS preset for the Iress Design System",
   "license": "Apache-2.0",
   "type": "module",
@@ -71,5 +71,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/iress/design-system"
-  }
+  },
+  "stableVersion": "6.0.0-alpha.1"
 }
