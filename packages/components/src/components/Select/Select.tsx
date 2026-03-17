@@ -265,7 +265,7 @@ export interface SelectLabelRenderProps<TMultiple extends boolean = false> {
   /**
    * Sets the value (selected items) of the select without triggering the `onChange` callback.
    * Use this for programmatic value updates where you don't need change notification.
-   * If you need `onChange` to fire (e.g. inside custom `renderOptions`), use `handleMenuChange` instead.
+   * When using `renderOptions`, prefer `handleMenuChange` if you need `onChange` to fire instead of calling `setValue` directly.
    */
   setValue: (value?: ControlledValue<LabelValueMeta, TMultiple>) => void;
 

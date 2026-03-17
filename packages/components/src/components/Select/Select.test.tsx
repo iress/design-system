@@ -1670,8 +1670,9 @@ describe('IressSelect', () => {
         [MOCK_LABEL_VALUES[0]],
       );
 
-      // Select another option
-      await userEvent.click(options[1]);
+      // Select another option. Re-query options to avoid using potentially stale DOM nodes.
+      const updatedOptions = await screen.findAllByRole('option');
+      await userEvent.click(updatedOptions[1]);
 
       // Verify onChange was called again with both values
       expect(onChange).toHaveBeenCalledWith(
@@ -1682,7 +1683,7 @@ describe('IressSelect', () => {
       );
     });
 
-    it('does not trigger onChange when using setValue directly (demonstrates bug behavior)', async () => {
+    it('does not trigger onChange when using setValue directly (documented behavior)', async () => {
       const onChange = vi.fn();
       const customRenderOptions: IressSelectProps['renderOptions'] = ({
         results,
@@ -1692,7 +1693,8 @@ describe('IressSelect', () => {
         return (
           <IressSelectMenu
             items={results}
-            // Using setValue directly bypasses onChange callback (this is the bug)
+            // Using setValue directly intentionally bypasses the Select onChange callback;
+            // use handleMenuChange instead when you need onChange to be triggered.
             onChange={setValue}
             selected={value}
           />
@@ -1714,7 +1716,7 @@ describe('IressSelect', () => {
       const options = await screen.findAllByRole('option');
       await userEvent.click(options[0]);
 
-      // This demonstrates the bug: onChange is NOT called when using setValue
+      // This demonstrates the documented behavior: onChange is NOT called when using setValue directly.
       expect(onChange).not.toHaveBeenCalled();
     });
   });
