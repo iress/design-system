@@ -78,20 +78,20 @@ export const SingleSelect: Story = {
 export const PreSelectedValue: Story = {
   args: {
     options: MOCK_LABEL_VALUE_META,
-    value: '2',
+    defaultValue: '2',
   },
   parameters: {
     docs: {
       description: {
-        story: `Pass a \`FormControlValue\` (string, number, etc.) directly as the \`value\` or \`defaultValue\` prop — IressSelect will find and display the matching option automatically.
+        story: `Pass a \`FormControlValue\` (string, number, etc.) directly as \`defaultValue\` — IressSelect will find and display the matching option automatically.
 This means you can work directly with the raw values your API returns, without constructing a full \`LabelValueMeta\` object.
 
 \`\`\`tsx
 // Previously required constructing the full object
-<IressSelect options={options} value={{ label: 'Option 2', value: '2' }} />
+<IressSelect options={options} defaultValue={{ label: 'Option 2', value: '2' }} />
 
 // Now a raw value string resolves to the matching option
-<IressSelect options={options} value="2" />
+<IressSelect options={options} defaultValue="2" />
 \`\`\``,
       },
     },
@@ -102,12 +102,12 @@ export const PreSelectedMultiValue: Story = {
   args: {
     options: MOCK_LABEL_VALUE_META,
     multiSelect: true,
-    value: ['1', '3', '5'],
+    defaultValue: ['1', '3', '5'],
   },
   parameters: {
     docs: {
       description: {
-        story: `In multi-select mode, pass an array of \`FormControlValue\` items and IressSelect will resolve each one to its matching option.`,
+        story: `In multi-select mode, pass an array of \`FormControlValue\` items as \`defaultValue\` and IressSelect will resolve each one to its matching option.`,
       },
     },
   },

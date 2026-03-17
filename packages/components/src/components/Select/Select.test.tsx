@@ -927,6 +927,39 @@ describe('IressSelect', () => {
         expect(tag1).toBeInTheDocument();
         expect(tag2).toBeInTheDocument();
       });
+
+      it('resolves a string value to a matching option inside a group', async () => {
+        const groupedOptions = [
+          {
+            label: 'Fruits',
+            children: [
+              { label: 'Apple', value: 'apple' },
+              { label: 'Banana', value: 'banana' },
+            ],
+          },
+          {
+            label: 'Vegetables',
+            children: [
+              { label: 'Carrot', value: 'carrot' },
+              { label: 'Broccoli', value: 'broccoli' },
+            ],
+          },
+        ];
+
+        render(
+          <IressSelect
+            data-testid="test-component"
+            options={groupedOptions}
+            value="carrot"
+          />,
+        );
+
+        const combobox = screen.getByRole('combobox');
+        expect(combobox).toHaveTextContent('Carrot');
+
+        const hiddenInput = screen.getByTestId('test-component__hidden-input');
+        expect(hiddenInput).toHaveValue('carrot');
+      });
     });
 
     describe('header', () => {

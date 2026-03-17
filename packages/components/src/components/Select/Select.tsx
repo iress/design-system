@@ -49,6 +49,7 @@ import {
   type NativeSelectProps,
 } from './components/NativeSelect';
 import { useSelectState } from './hooks/useSelectState';
+import { idsLogger } from '@helpers/utility/idsLogger';
 
 type SelectValue<
   TMultiple extends boolean = false,
@@ -412,6 +413,19 @@ const Select = <
     () => resolveSelectValueProp(defaultValue, options),
     [defaultValue, options],
   );
+
+  useEffect(() => {
+    if (
+      valueProp !== undefined &&
+      resolvedValueProp === undefined &&
+      typeof options === 'function'
+    ) {
+      idsLogger(
+        'IressSelect: A primitive value was passed but cannot be resolved because options are asynchronous. Pass a LabelValueMeta object instead when using async options, otherwise the component will behave as uncontrolled.',
+        'warn',
+      );
+    }
+  }, [valueProp, resolvedValueProp, options]);
 
   const { value, setValue, getValuesString, getLabelsString } = useSelectState({
     component: 'IressSelect',
