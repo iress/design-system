@@ -316,11 +316,7 @@ const findOptionByValue = (
     if (option.children) {
       const found = findOptionByValue(targetValue, option.children);
       if (found) return found;
-    } else if (
-      option.value !== undefined &&
-      (option.value === targetValue ||
-        String(option.value) === String(targetValue))
-    ) {
+    } else if (option.value !== undefined && option.value === targetValue) {
       return option;
     }
   }
@@ -335,7 +331,12 @@ const resolveValueToLabelValueMeta = (
 ): LabelValueMeta | undefined => {
   if (isLabelValueMeta(value)) return value;
   if (typeof options === 'function') return undefined;
-  return findOptionByValue(value, options);
+  return (
+    findOptionByValue(value, options) ??
+    (typeof value === 'number'
+      ? findOptionByValue(String(value), options)
+      : undefined)
+  );
 };
 
 const resolveSelectValueProp = <TMultiple extends boolean = false>(
@@ -349,12 +350,17 @@ const resolveSelectValueProp = <TMultiple extends boolean = false>(
 ): ControlledValue<LabelValueMeta, TMultiple> | undefined => {
   if (value === undefined) return undefined;
   if (Array.isArray(value)) {
-    return (value as (FormControlValue | LabelValueMeta)[])
+    const input = value as (FormControlValue | LabelValueMeta)[];
+    const resolved = input
       .map((v) => resolveValueToLabelValueMeta(v, options))
-      .filter((v): v is LabelValueMeta => v !== undefined) as ControlledValue<
-      LabelValueMeta,
-      TMultiple
-    >;
+      .filter((v): v is LabelValueMeta => v !== undefined);
+    if (resolved.length < input.length && typeof options !== 'function') {
+      idsLogger(
+        `IressSelect: ${input.length - resolved.length} value(s) could not be resolved to matching options and were dropped.`,
+        'warn',
+      );
+    }
+    return resolved as ControlledValue<LabelValueMeta, TMultiple>;
   }
   return resolveValueToLabelValueMeta(value, options) as
     | ControlledValue<LabelValueMeta, TMultiple>
@@ -417,6 +423,7 @@ const Select = <
   useEffect(() => {
     if (
       valueProp !== undefined &&
+      !isLabelValueMeta(valueProp as FormControlValue | LabelValueMeta) &&
       resolvedValueProp === undefined &&
       typeof options === 'function'
     ) {

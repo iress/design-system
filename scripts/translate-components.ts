@@ -943,12 +943,18 @@ function removeImportsOutsideCodeFences(content: string): string {
     }
 
     // Single-line import: import { X } from '...' or import X from '...' or import * as X from '...'
+    // Also handles: import type { X } from '...'
     if (/^import\s+.+from\s+['"][^'"]+['"];?\s*$/.test(trimmed)) {
       continue;
     }
 
-    // Start of a multi-line import: import { (no `from` on this line)
-    if (/^import\s+\{/.test(trimmed) && !/from\s+['"]/.test(trimmed)) {
+    // Side-effect import: import '...' or import "..."
+    if (/^import\s+['"][^'"]+['"];?\s*$/.test(trimmed)) {
+      continue;
+    }
+
+    // Start of a multi-line import (with or without `type`): import { / import type {
+    if (/^import\s+(?:type\s+)?\{/.test(trimmed) && !/from\s+['"]/.test(trimmed)) {
       inImport = true;
       continue;
     }
