@@ -79,12 +79,13 @@ This repository provides **agent skills** that give AI coding assistants context
 
 ### Available Skills
 
-| Skill            | Description                                                            |
-| ---------------- | ---------------------------------------------------------------------- |
-| `figma-to-ids`   | Translate Figma design properties into IDS component implementations   |
-| `token-usage`    | Guide on correctly using IDS design tokens in React components and CSS |
-| `ui-doctor`      | Audit and validate IDS component usage and compliance                  |
-| `ui-translation` | Translate natural language UI descriptions into IDS component code     |
+| Skill               | Description                                                            |
+| ------------------- | ---------------------------------------------------------------------- |
+| `figma-to-ids`      | Translate Figma design properties into IDS component implementations   |
+| `token-usage`       | Guide on correctly using IDS design tokens in React components and CSS |
+| `ui-doctor`         | Audit and validate IDS component usage and compliance                  |
+| `ui-translation`    | Translate natural language UI descriptions into IDS component code     |
+| `version-migration` | Migrate applications between IDS major versions (v4→v5, v5→v6, OUI→v6)|
 
 ### Installation
 

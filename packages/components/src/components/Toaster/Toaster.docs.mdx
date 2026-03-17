@@ -36,6 +36,8 @@ For a full comparison of feedback components, see the [Feedback pattern](?path=/
 
 To use the toaster, wrap your `<App/>` or the component that you want to use the toasts within with `<IressToasterProvider />`. This provides the context for the `useToaster` hook, which is used to trigger toasts in your application.
 
+> **Note:** If you are already using `IressProvider` or `IressShadow`, you do not need to add `IressToasterProvider` separately — it is already included.
+
 You can use the `success`, `info` and `error` methods from the hook to trigger toasts in your application.
 
 <ComponentExample of={ToasterStories.Provider} />
@@ -75,6 +77,8 @@ By default, the `IressToasterProvider`'s `position` is set to `bottom-end`, but 
 ### Adding the provider
 
 For your components to work as previously, you will need to set up the `IressToasterProvider` at the root of your application. This will allow you to use the `useToaster` hook to trigger toasts from anywhere in your application using the status and props of the toast.
+
+> **Note:** If you are using `IressProvider` or `IressShadow`, you do not need to add `IressToasterProvider` separately — it is already included.
 
 ```tsx
 const App = () => <IressToasterProvider>Rest of app here</IressToasterProvider>;

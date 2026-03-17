@@ -285,7 +285,7 @@ function Dashboard() {
 
 ## Best Practices
 
-1. **Always wrap in IressProvider** — Required at the root of your app for fonts and CSS variables
+1. **Always wrap in IressProvider** — Required at the root of your app for fonts and CSS variables. `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, and `IressIconProvider` — do not add these separately. If using `IressShadow`, no additional providers are needed as it includes `IressProvider` internally.
 2. **Use IressField for all form inputs** — Provides consistent labels, hints, and validation display
 3. **Use IressStack/IressInline for layout** — Prefer these over custom CSS flex/grid
 4. **Use spacing tokens for gap** — Values 0–10 map to multiples of 4px
@@ -299,6 +299,4 @@ function Dashboard() {
 
 ## Common Mistakes
 
-For the full list of common anti-patterns (disabled buttons, redundant textStyle, legacy slot attributes, raw HTML, hardcoded values), read the [Common Mistakes guide](node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md).
-
-> **Note:** The Common Mistakes guide lives in `node_modules` and requires `@iress-oss/ids-components` to be installed.
+For the full list of common anti-patterns (disabled buttons, redundant textStyle, legacy slot attributes, raw HTML, hardcoded values), read the Common Mistakes guide at `node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md` (requires `@iress-oss/ids-components` to be installed).

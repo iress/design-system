@@ -22,6 +22,8 @@ This is a simple component that is an alternative to the `IressProvider`. To use
 
 It has similar props to the `IressProvider`, however it will apply the styles to the correct area depending on where its needed.
 
+> **Note:** `IressShadow` includes `IressProvider` internally, which in turn includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, and `IressIconProvider`. You do not need to add any of these providers separately when using `IressShadow`.
+
 - Font faces are injected into the document head, as they cannot be injected into the shadow DOM
 - The IDS styles are injected into the shadow DOM
 - The icon stylesheet is injected into both the document head and the shadow DOM, as the icon stylesheet includes both font face and icon styles

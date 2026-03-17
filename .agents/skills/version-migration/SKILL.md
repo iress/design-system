@@ -8,6 +8,7 @@ description: >
   IDS versions, or mentions OUI, v4, v5, or v6 migration.
 license: Apache-2.0
 compatibility: React 18+, TypeScript, @iress-oss/ids-components@alpha
+allowed-tools: Bash(grep:*) Bash(sed:*) Bash(find:*) Bash(scripts/*:*)
 metadata:
   author: iress
   version: "1.0"

@@ -4,8 +4,9 @@ description: >
   Guide on correctly using IDS design tokens in React components and CSS.
   Covers import patterns, common mistakes, and practical usage rules for each
   token category. Use when the user asks about design tokens, CSS variables,
-  spacing values, colour tokens, typography tokens, or mentions
-  @iress-oss/ids-tokens in an IDS application.
+  CSS custom properties, spacing values, colour tokens, typography tokens,
+  theme tokens, token values, or mentions @iress-oss/ids-tokens in an IDS
+  application.
 license: Apache-2.0
 compatibility: React 18+, TypeScript, @iress-oss/ids-tokens@alpha
 metadata:
@@ -50,6 +51,8 @@ Guide AI agents on correctly using IDS design tokens in React components and CSS
 
 If you are using IDS React components, wrap your application in `IressProvider` and import the CSS variables stylesheet:
 
+> **Note:** `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, and `IressIconProvider` — you do not need to add these separately. If using `IressShadow`, no additional providers are needed as it includes `IressProvider` internally.
+
 ```tsx
 import '@iress-oss/ids-tokens/build/css-vars.css';
 import { IressProvider } from '@iress-oss/ids-components';
@@ -61,7 +64,7 @@ function App() {
 
 > **Non-React usage:** The tokens package works without React. Import the CSS stylesheet or use `cssVars` / `designTokens` directly in any JavaScript or CSS environment.
 
-> **CSP note:** `IressProvider` loads fonts from `fonts.googleapis.com` and `fonts.gstatic.com` at runtime. If your app enforces a Content Security Policy, allowlist these origins in `style-src` and `font-src`. If you use `IressShadow` and your CSP blocks inline styles, add `<meta name="csp-nonce" content="...">` for nonce support. See the [CSP Guide](@iress-oss/ids-components/.ai/guides/get-started-content-security-policy.md) for details.
+> **CSP note:** `IressProvider` loads fonts from `fonts.googleapis.com` and `fonts.gstatic.com` at runtime. If your app enforces a Content Security Policy, allowlist these origins in `style-src` and `font-src`. If you use `IressShadow` and your CSP blocks inline styles, add `<meta name="csp-nonce" content="...">` for nonce support. See the CSP Guide at `node_modules/@iress-oss/ids-components/.ai/guides/get-started-content-security-policy.md` for details (requires `@iress-oss/ids-components` to be installed).
 
 ### CSS Variables Stylesheet (Recommended for CSS)
 
@@ -429,9 +432,7 @@ Layout components accept responsive objects for spacing props:
 
 ## Common Mistakes to Avoid
 
-For the full list of common anti-patterns (disabled buttons, redundant textStyle, legacy slot attributes, raw HTML, hardcoded values), read the [Common Mistakes guide](node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md).
-
-> **Note:** The Common Mistakes guide lives in `node_modules` and requires `@iress-oss/ids-components` to be installed.
+For the full list of common anti-patterns (disabled buttons, redundant textStyle, legacy slot attributes, raw HTML, hardcoded values), read the Common Mistakes guide at `node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md` (requires `@iress-oss/ids-components` to be installed).
 
 ## Complete Token Reference
 
@@ -443,20 +444,4 @@ How themes override tokens via CSS variables, scoped theming, and guidance for A
 
 ## Cross-References
 
-The components package has additional guides that cover tokens from the usage/component perspective:
-
-- **Styling Props Reference** — `node_modules/@iress-oss/ids-components/.ai/guides/styling-props-reference.md` — How to use styling props (`bg`, `p`, `gap`, `color`, `borderRadius`) on IDS components
-- **Colour guide** — `node_modules/@iress-oss/ids-components/.ai/guides/styling-props-colour.md` — Colour prop usage, semantic colour selection, do/don't patterns
-- **Spacing guide** — `node_modules/@iress-oss/ids-components/.ai/guides/styling-props-spacing.md` — Padding, margin, gap props with responsive patterns
-- **Radius guide** — `node_modules/@iress-oss/ids-components/.ai/guides/styling-props-radius.md` — Border radius prop usage
-- **Typography guide** — `node_modules/@iress-oss/ids-components/.ai/guides/styling-props-typography.md` — Text style props
-- **Layout guide** — `node_modules/@iress-oss/ids-components/.ai/guides/styling-props-layout.md` — Flex/alignment props
-- **Sizing guide** — `node_modules/@iress-oss/ids-components/.ai/guides/styling-props-sizing.md` — Width/height props
-- **Accessibility guide** — `node_modules/@iress-oss/ids-components/.ai/guides/styling-props-accessibility.md` — Accessible styling practices
-
-## Reference
-
-- **Storybook and Guidelines:** https://main--691abcc79dfa560a36d0a74f.chromatic.com
-- **Token schema:** `@iress-oss/ids-tokens/dist/schema/` — Token definitions with descriptions and metadata
-- **Generated CSS:** `@iress-oss/ids-tokens/build/css-vars.css` — All CSS variables with fallbacks
-- **Generated JS:** `@iress-oss/ids-tokens/dist/generated/css-vars.js` — Type-safe `cssVars` object
+For styling props guides, package references, and links to component-level documentation, see [references/cross-references.md](references/cross-references.md). These require `@iress-oss/ids-components` to be installed.

@@ -42,6 +42,8 @@ You can use state to control the modal by setting the `show` property to `true` 
 
 You can use the `IressModalProvider` to open and close modals from anywhere in your application, as long as the modal has a unique `id`. In this case you would use the `useModal` hook to open and close the modal.
 
+> **Note:** If you are already using `IressProvider` or `IressShadow`, you do not need to add `IressModalProvider` separately — it is already included.
+
 To use, wrap your `<App/>` or the component that you want to use the `useModal` hook with `<IressModalProvider />`.
 
 <ComponentExample
@@ -138,6 +140,8 @@ For instances where you require the user's full attention and you want to ensure
 ### Adding the provider
 
 For your components to work as previously, you will need to set up the `IressModalProvider` at the root of your application. This will allow you to use the `useModal` hook to open and close modals from anywhere in your application using the ID of the modal.
+
+> **Note:** If you are using `IressProvider` or `IressShadow`, you do not need to add `IressModalProvider` separately — it is already included.
 
 ```tsx
 const App = () => <IressModalProvider>Rest of app here</IressModalProvider>;
