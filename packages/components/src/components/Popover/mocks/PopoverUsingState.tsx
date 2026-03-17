@@ -1,8 +1,4 @@
-import {
-  IressButton,
-  IressPopover,
-  type IressPopoverProps,
-} from '@/main';
+import { IressButton, IressPopover, type IressPopoverProps } from '@/main';
 import { useState } from 'react';
 
 export const PopoverUsingState = (args: IressPopoverProps) => {

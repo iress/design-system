@@ -144,6 +144,10 @@ const PopoverContentContainer = ({
 }: PopoverContentContainerProps) => {
   const nodeId = useFloatingNodeId();
 
+  // Both `container` and `isNested` result in a FloatingPortal. When a container is
+  // explicitly provided it takes priority as the portal root; when only `isNested` is
+  // true the portal renders at document.body (root=undefined), taking the content
+  // outside the parent popover's CSS stacking context to prevent z-index issues.
   if (container || isNested) {
     return (
       <FloatingNode id={nodeId}>

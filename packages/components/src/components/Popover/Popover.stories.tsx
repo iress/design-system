@@ -53,13 +53,12 @@ const childrenOptions = {
   paragraph: (
     <IressText noGutter>
       <p>
-        His head is gone, it is like it is been erased... Erased from
-        existence. That was the day I invented time travel. I remember it
-        vividly. I was standing on the edge of my toilet hanging a clock, the
-        porces was wet, I slipped, hit my head on the edge of the sink. And
-        when I came to I had a revelation, a picture, a picture in my head, a
-        picture of this. This is what makes time travel possible. The flux
-        capacitor.
+        His head is gone, it is like it is been erased... Erased from existence.
+        That was the day I invented time travel. I remember it vividly. I was
+        standing on the edge of my toilet hanging a clock, the porces was wet, I
+        slipped, hit my head on the edge of the sink. And when I came to I had a
+        revelation, a picture, a picture in my head, a picture of this. This is
+        what makes time travel possible. The flux capacitor.
       </p>
     </IressText>
   ),
