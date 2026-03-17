@@ -2,6 +2,7 @@ import {
   forwardRef,
   useEffect,
   useImperativeHandle,
+  useMemo,
   useRef,
   useState,
   useCallback,
@@ -35,7 +36,7 @@ import type {
   LabelValueMeta,
   ReactHookFormCompatibleRef,
 } from '@/interfaces';
-import type { FloatingUIAligns, Breakpoints } from '@/types';
+import type { FloatingUIAligns, Breakpoints, FormControlValue } from '@/types';
 import {
   IressPopover,
   type IressPopoverProps,
@@ -53,8 +54,10 @@ type SelectValue<
   TMultiple extends boolean = false,
   TNative extends boolean | Breakpoints = false,
 > = TNative extends false
-  ? ControlledValue<LabelValueMeta, TMultiple>
-  : LabelValueMeta;
+  ?
+      | ControlledValue<LabelValueMeta, TMultiple>
+      | ControlledValue<FormControlValue, TMultiple>
+  : LabelValueMeta | FormControlValue;
 
 type SelectChangeEvent<
   TMultiple extends boolean = false,
@@ -299,6 +302,64 @@ export interface SelectOptionsRenderProps<
   setQuery: (query: string) => void;
 }
 
+const isLabelValueMeta = (
+  value: FormControlValue | LabelValueMeta,
+): value is LabelValueMeta =>
+  typeof value === 'object' && value !== null && 'label' in value;
+
+const findOptionByValue = (
+  targetValue: FormControlValue,
+  options: LabelValueMeta[],
+): LabelValueMeta | undefined => {
+  for (const option of options) {
+    if (option.children) {
+      const found = findOptionByValue(targetValue, option.children);
+      if (found) return found;
+    } else if (
+      option.value !== undefined &&
+      (option.value === targetValue ||
+        String(option.value) === String(targetValue))
+    ) {
+      return option;
+    }
+  }
+  return undefined;
+};
+
+const resolveValueToLabelValueMeta = (
+  value: FormControlValue | LabelValueMeta,
+  options:
+    | FormattedLabelValueMeta[]
+    | ((query: string) => Promise<LabelValueMeta[]>),
+): LabelValueMeta | undefined => {
+  if (isLabelValueMeta(value)) return value;
+  if (typeof options === 'function') return undefined;
+  return findOptionByValue(value, options);
+};
+
+const resolveSelectValueProp = <TMultiple extends boolean = false>(
+  value:
+    | ControlledValue<LabelValueMeta, TMultiple>
+    | ControlledValue<FormControlValue, TMultiple>
+    | undefined,
+  options:
+    | FormattedLabelValueMeta[]
+    | ((query: string) => Promise<LabelValueMeta[]>),
+): ControlledValue<LabelValueMeta, TMultiple> | undefined => {
+  if (value === undefined) return undefined;
+  if (Array.isArray(value)) {
+    return (value as (FormControlValue | LabelValueMeta)[])
+      .map((v) => resolveValueToLabelValueMeta(v, options))
+      .filter((v): v is LabelValueMeta => v !== undefined) as ControlledValue<
+      LabelValueMeta,
+      TMultiple
+    >;
+  }
+  return resolveValueToLabelValueMeta(value, options) as
+    | ControlledValue<LabelValueMeta, TMultiple>
+    | undefined;
+};
+
 const Select = <
   TMultiple extends boolean = false,
   TNative extends boolean | Breakpoints = false,
@@ -341,11 +402,22 @@ const Select = <
   const [show, setShow] = useState(false);
   const showPopover = show && !disabled;
   const [query, setQuery] = useState('');
+
+  const resolvedValueProp = useMemo(
+    () => resolveSelectValueProp(valueProp, options),
+    [valueProp, options],
+  );
+
+  const resolvedDefaultValue = useMemo(
+    () => resolveSelectValueProp(defaultValue, options),
+    [defaultValue, options],
+  );
+
   const { value, setValue, getValuesString, getLabelsString } = useSelectState({
     component: 'IressSelect',
-    defaultValue,
+    defaultValue: resolvedDefaultValue,
     multiple: multiSelect,
-    value: valueProp,
+    value: resolvedValueProp,
   });
   const popoverRef = useRef<PopoverRef | null>(null);
   const selectRef = useRef<HTMLSelectElement | null>(null);

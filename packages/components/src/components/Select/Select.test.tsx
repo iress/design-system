@@ -176,6 +176,30 @@ describe('IressSelect', () => {
         });
         expect(selectedOption).toBeInTheDocument();
       });
+
+      it('resolves a string defaultValue to the matching option', async () => {
+        render(
+          <IressSelect
+            data-testid="test-component"
+            defaultValue={String(MOCK_LABEL_VALUES[2].value)}
+            options={MOCK_LABEL_VALUES}
+          />,
+        );
+
+        const combobox = screen.getByRole('combobox');
+        expect(combobox).toHaveTextContent(MOCK_LABEL_VALUES[2].label);
+
+        const hiddenInput = screen.getByTestId('test-component__hidden-input');
+        expect(hiddenInput).toHaveValue(String(MOCK_LABEL_VALUES[2].value));
+
+        await userEvent.click(combobox);
+
+        const selectedOption = await screen.findByRole('option', {
+          selected: true,
+          name: MOCK_LABEL_VALUES[2].label,
+        });
+        expect(selectedOption).toBeInTheDocument();
+      });
     });
 
     describe('initialOptions', () => {
@@ -848,6 +872,60 @@ describe('IressSelect', () => {
           name: MOCK_LABEL_VALUES[0].label,
         });
         expect(selectedOption).toBeInTheDocument();
+      });
+
+      it('resolves a string value to the matching option', async () => {
+        render(
+          <IressSelect
+            data-testid="test-component"
+            options={MOCK_LABEL_VALUES}
+            value={String(MOCK_LABEL_VALUES[1].value)}
+          />,
+        );
+
+        const combobox = screen.getByRole('combobox');
+        expect(combobox).toHaveTextContent(MOCK_LABEL_VALUES[1].label);
+
+        const hiddenInput = screen.getByTestId('test-component__hidden-input');
+        expect(hiddenInput).toHaveValue(String(MOCK_LABEL_VALUES[1].value));
+
+        await userEvent.click(combobox);
+
+        const selectedOption = await screen.findByRole('option', {
+          selected: true,
+          name: MOCK_LABEL_VALUES[1].label,
+        });
+        expect(selectedOption).toBeInTheDocument();
+      });
+
+      it('resolves a string array value to the matching options in multiSelect', async () => {
+        const values = [
+          String(MOCK_LABEL_VALUES[0].value),
+          String(MOCK_LABEL_VALUES[1].value),
+        ];
+
+        render(
+          <IressSelect
+            data-testid="test-component"
+            options={MOCK_LABEL_VALUES}
+            multiSelect
+            value={values}
+          />,
+        );
+
+        const hiddenInput = screen.getByTestId('test-component__hidden-input');
+        expect(hiddenInput).toHaveValue(
+          `${String(MOCK_LABEL_VALUES[0].value)},${String(MOCK_LABEL_VALUES[1].value)}`,
+        );
+
+        const tag1 = screen.getByRole('button', {
+          name: `Delete ${MOCK_LABEL_VALUES[0].label}`,
+        });
+        const tag2 = screen.getByRole('button', {
+          name: `Delete ${MOCK_LABEL_VALUES[1].label}`,
+        });
+        expect(tag1).toBeInTheDocument();
+        expect(tag2).toBeInTheDocument();
       });
     });
 
