@@ -24,7 +24,7 @@ export const radioGroup = cva({
         display: 'flex',
         flexFlow: 'row wrap',
         width: '12/12',
-        gap: 'spacing.2',
+        gap: 'spacing.6',
         '& label': {
           flexBasis: '[auto]',
           flexGrow: '[0]',
@@ -32,7 +32,7 @@ export const radioGroup = cva({
       },
       inlineFlex: {
         display: 'inline-flex',
-        gap: 'spacing.2',
+        gap: 'spacing.6',
       },
       inlineEqualWidth: {
         display: 'flex',

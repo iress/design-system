@@ -18,6 +18,22 @@ import {
 
 ## Usage
 
+### When to use
+
+- **Action confirmations**: "Record saved", "Email sent", "Item deleted"
+- **Background process updates**: "File uploaded successfully", "Data synced"
+- **Non-critical status changes**: Information the user should see but does not need to act on
+
+### When not to use
+
+- **Persistent contextual messages** that relate to page content — use [IressAlert](?path=/docs/components-alert--docs) instead
+- **Critical information or decisions** the user must acknowledge — use [IressModal](?path=/docs/components-modal--docs) instead
+- **Messages containing actions** the user needs to take — toasts auto-dismiss and should not contain essential actions
+
+For a full comparison of feedback components, see the [Feedback pattern](?path=/docs/patterns-feedback--docs).
+
+### Showing toasts
+
 To use the toaster, wrap your `<App/>` or the component that you want to use the toasts within with `<IressToasterProvider />`. This provides the context for the `useToaster` hook, which is used to trigger toasts in your application.
 
 You can use the `success`, `info` and `error` methods from the hook to trigger toasts in your application.

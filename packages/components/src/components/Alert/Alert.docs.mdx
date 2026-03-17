@@ -15,6 +15,22 @@ import * as AlertStories from './Alert.stories';
   meta={AlertStories}
 />
 
+## Usage
+
+### When to use
+
+- **Form validation**: Display errors or warnings near the relevant form section
+- **Page-level status**: Inform users about the state of the current page (e.g. "This record is read-only")
+- **Informational banners**: Provide tips, guidance, or announcements inline with content
+- **Persistent warnings**: Messages that should remain visible until the condition changes
+
+### When not to use
+
+- **Transient confirmations** of completed actions (e.g. "Saved") — use [IressToaster](?path=/docs/components-toaster--docs) instead
+- **Tasks requiring user decisions** before continuing — use [IressModal](?path=/docs/components-modal--docs) instead
+
+For a full comparison of feedback components, see the [Feedback pattern](?path=/docs/patterns-feedback--docs).
+
 ## Examples
 
 ### Status
