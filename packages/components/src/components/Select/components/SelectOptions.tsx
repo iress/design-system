@@ -38,7 +38,6 @@ interface SelectOptionsProps<TMultiple extends boolean = false>
       | 'onChange'
       | 'options'
       | 'renderOptions'
-      | 'value'
       | 'initialOptions'
     >,
     Omit<
