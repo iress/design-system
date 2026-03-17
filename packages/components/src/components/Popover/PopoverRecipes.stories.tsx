@@ -107,6 +107,7 @@ export const WithSelect: Story = {
     <IressPopover
       {...args}
       activator={<IressButton>Open Popover with Select</IressButton>}
+      container={document.body}
     >
       <IressSelect
         options={MOCK_LABEL_VALUE_META}

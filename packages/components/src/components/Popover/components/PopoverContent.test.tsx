@@ -1,7 +1,8 @@
-import { render, act } from '@testing-library/react';
+import { render, act, screen } from '@testing-library/react';
 import { IressPopover } from '../Popover';
 import { IressButton } from '../../Button';
 import { IressText } from '../../Text';
+import userEvent from '@testing-library/user-event';
 
 describe('PopoverContent Accessibility', () => {
   beforeEach(() => {
@@ -196,5 +197,42 @@ describe('PopoverContent Accessibility', () => {
 
     // Should still be focusable since the observer was cleaned up
     expect(focusGuardAfterUnmount.tabIndex).toBe(0);
+  });
+});
+
+describe('Nested Popover Focus Management', () => {
+  beforeEach(() => {
+    document
+      .querySelectorAll('[data-floating-ui-focus-guard]')
+      .forEach((el) => el.remove());
+  });
+
+  it('should not close the parent popover when a nested popover with container={document.body} opens', async () => {
+    render(
+      <IressPopover
+        activator={<IressButton>Open Parent</IressButton>}
+        defaultShow={true}
+      >
+        <IressText>Parent content</IressText>
+        <IressPopover
+          activator={<IressButton>Open Child</IressButton>}
+          container={document.body}
+        >
+          <IressText>Child content</IressText>
+        </IressPopover>
+      </IressPopover>,
+    );
+
+    await act(async () => {});
+
+    // Parent popover should be visible
+    expect(screen.getByText('Parent content')).toBeVisible();
+
+    // Click the child popover activator
+    const childActivator = screen.getByRole('button', { name: 'Open Child' });
+    await userEvent.click(childActivator);
+
+    // Parent popover should still be visible after child opens
+    expect(await screen.findByText('Parent content')).toBeVisible();
   });
 });

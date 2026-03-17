@@ -137,6 +137,17 @@ export const PopoverActivator = ({
 
             // Without the timeout, it makes the popover close and open again
             setTimeout(() => {
+              // Don't close if focus has moved to another floating element (e.g. a
+              // nested popover portaled to document.body). This prevents the parent
+              // popover from closing when a child popover opens and steals focus.
+              const active = document.activeElement;
+              if (
+                active instanceof Element &&
+                active.closest('[data-floating-ui-focusable]') &&
+                !floatingElement?.contains(active)
+              ) {
+                return;
+              }
               popover.setShowWithReason(false, e.nativeEvent, 'focus');
             }, 300);
           }
