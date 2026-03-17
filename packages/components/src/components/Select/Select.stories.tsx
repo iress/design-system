@@ -246,6 +246,7 @@ export const Native: Story = {
   args: {
     ...SingleSelect.args,
     native: 'md',
+    defaultValue: '2',
   },
 };
 
