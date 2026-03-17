@@ -132,8 +132,9 @@ export type IressSelectProps<
   multiSelect?: TMultiple;
 
   /**
-   * Limits the number of tags displayed before collapsing into a summary.
-   * Only applies when `multiSelect` is `true`. This is not for validation — it only controls the visible tag count.
+   * Limits the number of selected value tags shown before the rest are collapsed into a summary tag
+   * (e.g. "+3 more"). Only applies when `multiSelect` is `true`. This is not for validation — it
+   * only controls how many tags are visibly rendered.
    * @default 5
    */
   multiSelectLimit?: TMultiple extends true ? number : never;
@@ -656,7 +657,10 @@ const Select = <
         align={align}
         className={cx(className, classes.root, GlobalCSSClass.Select)}
         contentClassName={cx(classes.popoverContent)}
-        contentStyle={{ p: 'none' }}
+        contentStyle={{
+          ...restProps.contentStyle,
+          p: 'none',
+        }}
         matchActivatorWidth={matchActivatorWidth}
         onActivated={handlePopoverActivated}
         onDeactivated={handlePopoverDeactivated}

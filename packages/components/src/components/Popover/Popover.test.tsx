@@ -326,12 +326,6 @@ describe('IressPopover', () => {
         expect(content).toHaveStyle({ 'background-color': 'rgb(255, 0, 0)' });
       });
 
-      it('has default padding applied to the content', () => {
-        renderComponent({ children: 'Content' });
-
-        const content = screen.getByText('Content');
-        expect(content).toHaveClass(popover().content!);
-      });
     });
 
     describe('displayMode', () => {

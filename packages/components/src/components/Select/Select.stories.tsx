@@ -120,6 +120,15 @@ export const MultiSelect: Story = {
   },
 };
 
+export const MultiSelectLimit: Story = {
+  args: {
+    options: MOCK_LABEL_VALUE_META,
+    multiSelect: true,
+    multiSelectLimit: 2,
+    defaultValue: ['1', '2', '3', '4', '5'],
+  },
+};
+
 export const Placeholder: Story = {
   args: {
     placeholder: 'Select an option',

@@ -87,6 +87,12 @@ Adding the `multiSelect` prop will allow the user to select multiple options.
 
 <ComponentExample of={ComponentStories.MultiSelect} />
 
+#### Multi-select limit
+
+Use `multiSelectLimit` to control how many tags are shown before the rest collapse into a summary. Defaults to `5`.
+
+<ComponentExample of={ComponentStories.MultiSelectLimit} />
+
 ### Asynchronous options
 
 If you would like to render suggestions from the server, you can pass a function to the `options` prop. It accepts a string parameter and returns a promise that resolves to an array of `LabelValueMeta[]` objects.
