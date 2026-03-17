@@ -84,5 +84,5 @@ Components that changed names between versions. All other IDS components keep th
 | `IressButtonCard`            | Card rendered as a button                                                                                                                       |
 | `IressLinkCard`              | Card rendered as a link                                                                                                                         |
 | `IressFormValidationSummary` | Form validation summary alert                                                                                                                   |
-| `IressReadonly`              | Read-only display of form values                                                                                                                |
+| `IressReadonly`              | Read-only display of form values (supports `actions` prop for inline action buttons)                                                            |
 | `IressSpinner`               | Loading spinner                                                                                                                                 |

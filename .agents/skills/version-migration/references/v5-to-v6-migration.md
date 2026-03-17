@@ -123,13 +123,15 @@ This document covers changes specific to migrating from IDS v5 (`@iress-oss/ids-
 
 ### Select (was RichSelect)
 
-| v5 prop       | v6 prop       | Notes                                      |
-| ------------- | ------------- | ------------------------------------------ |
-| Component     | `IressSelect` | `IressRichSelect` renamed to `IressSelect` |
-| `options`     | `options`     | Unchanged                                  |
-| `value`       | `value`       | Unchanged                                  |
-| `multiSelect` | `multiSelect` | Unchanged                                  |
-| —             | `native`      | New: renders native `<select>` element     |
+| v5 prop       | v6 prop            | Notes                                                                                  |
+| ------------- | ------------------ | -------------------------------------------------------------------------------------- |
+| Component     | `IressSelect`      | `IressRichSelect` renamed to `IressSelect`                                             |
+| `options`     | `options`          | Unchanged                                                                              |
+| `value`       | `value`            | Now also accepts a plain string or `FormControlValue` (resolves to matching option)    |
+| `multiSelect` | `multiSelect`      | Unchanged                                                                              |
+| —             | `defaultValue`     | Accepts `LabelValueMeta` or plain string for uncontrolled pre-selection                |
+| —             | `multiSelectLimit` | New: limits visible selected tags before collapsing to "+N more" (default `5`)         |
+| —             | `native`           | New: renders native `<select>` element                                                 |
 
 ### Filter → DropdownMenu
 
@@ -140,6 +142,20 @@ This document covers changes specific to migrating from IDS v5 (`@iress-oss/ids-
 | `value`       | `selected`          | Prop renamed          |
 | `multiSelect` | `multiSelect`       | Unchanged             |
 | `searchable`  | `searchable`        | Unchanged             |
+
+### Popover
+
+| v5 prop        | v6 prop        | Notes                                                                                                |
+| -------------- | -------------- | ---------------------------------------------------------------------------------------------------- |
+| `contentStyle` | `contentStyle` | Unchanged                                                                                            |
+| —              | —              | ⚠️ **Breaking:** Popover content now has default `padding: spacing.4`. Override with `contentStyle={{ padding: 'spacing.0' }}` if you were providing your own inner padding |
+
+### Readonly
+
+| v5 prop | v6 prop   | Notes                                                                                                |
+| ------- | --------- | ---------------------------------------------------------------------------------------------------- |
+| —       | `actions` | New: array of button props rendered alongside the readonly value (e.g. edit/save toggles)            |
+| —       | —         | ⚠️ **Breaking:** DOM structure changed — inner content is now wrapped in an additional `wrapper` div inside `root`. CSS selectors targeting direct children of the root may need updating |
 
 ## Styling Changes
 

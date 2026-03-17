@@ -84,11 +84,11 @@ SASS modules have been replaced with [Panda CSS](https://panda-css.com/) for typ
 
 ### Autocomplete
 
-| Change                  | Details                                                |
-| ----------------------- | ------------------------------------------------------ |
-| Removed `watermark`     | No longer supported                                    |
-| Hook: `options` required | `options` is now required in `useAutocompleteSearch`  |
-| Hook: `displayResults`  | Removed from hook return                               |
+| Change                   | Details                                              |
+| ------------------------ | ---------------------------------------------------- |
+| Removed `watermark`      | No longer supported                                  |
+| Hook: `options` required | `options` is now required in `useAutocompleteSearch` |
+| Hook: `displayResults`   | Removed from hook return                             |
 
 ### Badge → Pill (renamed)
 
@@ -154,6 +154,7 @@ No changes.
 ### Combobox (removed)
 
 `IressCombobox` and `IressMultiCombobox` have been removed. Use:
+
 - `IressSelect` for restricted selection from options
 - `IressAutocomplete` for free-text input with suggestions
 
@@ -215,14 +216,14 @@ Use the `srOnly` or `hide` styling props available on any component.
 
 ### Icon
 
-| Change                    | Details                                                                                             |
-| ------------------------- | --------------------------------------------------------------------------------------------------- |
-| Removed `mode`            | Use `color` instead                                                                                 |
-| `name` is now type-safe   | IDE autocompletion available                                                                        |
-| Removed `size`            | Inherits font size from parent. Use custom CSS for specific sizes; use `IressImage` for large icons |
-| New `IressIconProvider`   | Required for optimal Material Symbols usage with font subsetting. Already included in `IressProvider` and `IressShadow` — no need to add separately |
-| New `type` prop           | Select icon provider (`'fontawesome'` \| `'material'`)                                              |
-| New `filled` prop         | Material Symbols filled variant                                                                     |
+| Change                  | Details                                                                                                                                             |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Removed `mode`          | Use `color` instead                                                                                                                                 |
+| `name` is now type-safe | IDE autocompletion available                                                                                                                        |
+| Removed `size`          | Inherits font size from parent. Use custom CSS for specific sizes; use `IressImage` for large icons                                                 |
+| New `IressIconProvider` | Required for optimal Material Symbols usage with font subsetting. Already included in `IressProvider` and `IressShadow` — no need to add separately |
+| New `type` prop         | Select icon provider (`'fontawesome'` \| `'material'`)                                                                                              |
+| New `filled` prop       | Material Symbols filled variant                                                                                                                     |
 
 ### Image
 
@@ -230,10 +231,10 @@ New component for displaying responsive images.
 
 ### Inline
 
-| Change          | Details                                                    |
-| --------------- | ---------------------------------------------------------- |
-| `gutter` → `gap`| Accepts the larger spacing token spectrum                  |
-| New `rowGap`    | Set top/bottom gap when content wraps                      |
+| Change           | Details                                   |
+| ---------------- | ----------------------------------------- |
+| `gutter` → `gap` | Accepts the larger spacing token spectrum |
+| New `rowGap`     | Set top/bottom gap when content wraps     |
 
 ### Input
 
@@ -259,16 +260,16 @@ New component for anchor links in text paragraphs. Accepts the same props as `Ir
 
 ### Menu
 
-| Change                            | Details                                                                           |
-| --------------------------------- | --------------------------------------------------------------------------------- |
-| `defaultValue`/`onChange`/`value` | Type-aware based on `multiSelect` — arrays when `true`, single value when `false` |
-| Removed `MenuSelected` interface  | Menu is now generic extending `FormControlValue`                                  |
-| Removed `mapMenuItems`            | Map `IressMenuItem` using arrays directly                                         |
-| Removed `role="nav"`              | Nav styling removed. For navigation menus, use `IressSideNav` pattern or custom styling          |
-| New `radio` variant               | Radio prepend to show selection                                                   |
-| New `subdraw` variant             | Menu groups as popovers                                                           |
-| New `side` variant                | Side menu with collapsible groups                                                 |
-| New `rail` variant                | Blue background, best with icons                                                  |
+| Change                            | Details                                                                                 |
+| --------------------------------- | --------------------------------------------------------------------------------------- |
+| `defaultValue`/`onChange`/`value` | Type-aware based on `multiSelect` — arrays when `true`, single value when `false`       |
+| Removed `MenuSelected` interface  | Menu is now generic extending `FormControlValue`                                        |
+| Removed `mapMenuItems`            | Map `IressMenuItem` using arrays directly                                               |
+| Removed `role="nav"`              | Nav styling removed. For navigation menus, use `IressSideNav` pattern or custom styling |
+| New `radio` variant               | Radio prepend to show selection                                                         |
+| New `subdraw` variant             | Menu groups as popovers                                                                 |
+| New `side` variant                | Side menu with collapsible groups                                                       |
+| New `rail` variant                | Blue background, best with icons                                                        |
 
 ### MenuItem
 
@@ -344,16 +345,17 @@ New component supporting the data colour spectrum with automatic rounded corners
 
 ### Popover
 
-| Change                        | Details                                                                                                    |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Removed `disabledAutoToggle`  | Use `show`, `onActivated`, and `onDeactivated` for controlled popovers. `ref` is reserved for uncontrolled |
-| Removed `width`               | Use `contentStyle` prop with custom CSS                                                                    |
-| Deprecated `contentClassName` | Use `contentStyle.className`                                                                               |
-| New `contentStyle`            | Customise `className`, `style`, and styling props on the popover content                                   |
-| New `fluid`                   | Full container width                                                                                       |
-| New `offset`                  | Number or object for popover positioning offset (default: 5)                                               |
-| New `nested`                  | Nested navigation behaviour                                                                                |
-| Z-index                       | Now uses z-index for consistent layering                                                                   |
+| Change                        | Details                                                                                                                                                |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Removed `disabledAutoToggle`  | Use `show`, `onActivated`, and `onDeactivated` for controlled popovers. `ref` is reserved for uncontrolled                                             |
+| Removed `width`               | Use `contentStyle` prop with custom CSS                                                                                                                |
+| Deprecated `contentClassName` | Use `contentStyle.className`                                                                                                                           |
+| New `contentStyle`            | Customise `className`, `style`, and styling props on the popover content                                                                               |
+| New `fluid`                   | Full container width                                                                                                                                   |
+| New `offset`                  | Number or object for popover positioning offset (default: 5)                                                                                           |
+| New `nested`                  | Nested navigation behaviour                                                                                                                            |
+| Z-index                       | Now uses z-index for consistent layering                                                                                                               |
+| Default padding               | ⚠️ Content now has `padding: spacing.4` by default. If you were adding your own inner padding, override with `contentStyle={{ padding: 'spacing.0' }}` |
 
 ### Progress
 
@@ -365,13 +367,13 @@ New component supporting the data colour spectrum with automatic rounded corners
 
 ### Provider
 
-| Change                  | Details                                                                      |
-| ----------------------- | ---------------------------------------------------------------------------- |
-| Removed `noIcons`       | Use `noDefaultFont` instead                                                  |
-| Removed `injectPushStyles` | No longer available                                                       |
-| New `noSubsetting`      | Controls automatic font subsetting via Google Fonts CDN for icons            |
-| New `noDefaultFont`     | Controls loading of default Iress font from CDN                              |
-| Icon handling           | Now uses `IressIconProvider` with Material Symbols instead of icon CSS       |
+| Change                     | Details                                                                |
+| -------------------------- | ---------------------------------------------------------------------- |
+| Removed `noIcons`          | Use `noDefaultFont` instead                                            |
+| Removed `injectPushStyles` | No longer available                                                    |
+| New `noSubsetting`         | Controls automatic font subsetting via Google Fonts CDN for icons      |
+| New `noDefaultFont`        | Controls loading of default Iress font from CDN                        |
+| Icon handling              | Now uses `IressIconProvider` with Material Symbols instead of icon CSS |
 
 > **Note:** `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, and `IressIconProvider`. You do not need to add these separately. `IressShadow` includes `IressProvider` internally, so no additional providers are needed when using `IressShadow` either.
 
@@ -395,7 +397,11 @@ New component for rendering a standalone radio mark indicator (similar to `Iress
 
 ### Readonly
 
-Styled to match other input text sizes. Use the new `textStyle` prop for larger text (e.g. statistics).
+| Change               | Details                                                                                                                                                              |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Styled to match      | Styled to match other input text sizes. Use the new `textStyle` prop for larger text (e.g. statistics)                                                               |
+| New `actions` prop   | Array of button props rendered alongside the readonly value (e.g. edit/save toggles). Actions passed to `IressInput` in `readOnly` mode are also forwarded           |
+| DOM structure change | ⚠️ Inner content is now wrapped in an additional `wrapper` div inside `root`. CSS selectors targeting direct children of the readonly root element may need updating |
 
 ### RichSelect → Select (renamed)
 
@@ -410,14 +416,16 @@ Styled to match other input text sizes. Use the new `textStyle` prop for larger 
 
 ### Select
 
-| Change                            | Details                                                                                                            |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Renamed from `IressRichSelect`    | Now uses `LabelValueMeta` via `options`                                                                            |
-| `readonly` → `readOnly`           | —                                                                                                                  |
-| `defaultValue`/`onChange`/`value` | Type-aware based on `multiSelect` — arrays when `true`, single value when `false`                                  |
-| New `native` prop                 | Renders a browser-native select (replaces the old `IressSelect`). Note: still passes `LabelValueMeta` as the value |
-| Grouped items                     | Now supported                                                                                                      |
-| New hover and focus states        | —                                                                                                                  |
+| Change                                 | Details                                                                                                                     |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Renamed from `IressRichSelect`         | Now uses `LabelValueMeta` via `options`                                                                                     |
+| `readonly` → `readOnly`                | —                                                                                                                           |
+| `defaultValue`/`onChange`/`value`      | Type-aware based on `multiSelect` — arrays when `true`, single value when `false`                                           |
+| `value`/`defaultValue` accepts strings | Now also accepts a plain string or `FormControlValue` that resolves to the matching option automatically                    |
+| New `multiSelectLimit` prop            | Limits visible selected tags before collapsing to "+N more" summary (default `5`). Display only — does not limit selections |
+| New `native` prop                      | Renders a browser-native select (replaces the old `IressSelect`). Note: still passes `LabelValueMeta` as the value          |
+| Grouped items                          | Now supported                                                                                                               |
+| New hover and focus states             | —                                                                                                                           |
 
 The v5 native `IressSelect` with `children` (option elements) is replaced by `IressSelect` with the `native` prop:
 
@@ -502,13 +510,14 @@ New component for applying IDS styling props to any element or component without
 
 ### TabSet
 
-| Change               | Details                                      |
-| -------------------- | -------------------------------------------- |
-| Removed `mapTabs`    | Use `Array.map` to map objects to `IressTab` |
-| Selected tabs        | Now have a highlighted background            |
-| New `panelStyle`     | Custom style for panel area                  |
-| New `tabHolderStyle` | Custom style for tab holder area             |
-| New `type`           | Tab styling type (`'primary'` \| `'secondary'`) |
+| Change               | Details                                                                                                                                    |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Removed `mapTabs`    | Use `Array.map` to map objects to `IressTab`                                                                                               |
+| Selected tabs        | Now have a highlighted background                                                                                                          |
+| New `panelStyle`     | Custom style for panel area                                                                                                                |
+| New `tabHolderStyle` | Custom style for tab holder area                                                                                                           |
+| New `type`           | Tab styling type (`'primary'` \| `'secondary'`)                                                                                            |
+| Active indicator     | Now uses `ResizeObserver` and `getBoundingClientRect()` for positioning — correctly updates when tab content changes size or layout shifts |
 
 ### Tag
 
@@ -520,14 +529,14 @@ New component for applying IDS styling props to any element or component without
 
 ### TagInput
 
-| Change                         | Details                                              |
-| ------------------------------ | ---------------------------------------------------- |
-| Removed `testid__input__input` | Use `testid__input` instead                          |
-| Removed `testid__items`        | —                                                    |
-| `onTagDelete` signature        | Now includes event: `(label, e) => void`             |
-| `onTagDeleteAll` signature     | Now includes event: `(label, e) => void`             |
-| New `tagLimit`                 | Limit tags before shortening (default: 5)            |
-| New `selectedOptionsTagText`   | Text for tag count display                           |
+| Change                         | Details                                   |
+| ------------------------------ | ----------------------------------------- |
+| Removed `testid__input__input` | Use `testid__input` instead               |
+| Removed `testid__items`        | —                                         |
+| `onTagDelete` signature        | Now includes event: `(label, e) => void`  |
+| `onTagDeleteAll` signature     | Now includes event: `(label, e) => void`  |
+| New `tagLimit`                 | Limit tags before shortening (default: 5) |
+| New `selectedOptionsTagText`   | Text for tag count display                |
 
 ### Text
 
@@ -570,10 +579,10 @@ New component for applying IDS styling props to any element or component without
 
 ### Tooltip
 
-| Change                       | Details                                                    |
-| ---------------------------- | ---------------------------------------------------------- |
-| `align` prop simplified      | Removed deprecated enum option, now uses string literals   |
-| Removed `IressTooltip.Align` | Use string values directly                                 |
+| Change                       | Details                                                  |
+| ---------------------------- | -------------------------------------------------------- |
+| `align` prop simplified      | Removed deprecated enum option, now uses string literals |
+| Removed `IressTooltip.Align` | Use string values directly                               |
 
 ### ValidationLink
 
