@@ -125,6 +125,18 @@ describe('staticCssStripHook', () => {
       expect(result).toContain('.not_a_span_class{color:red}');
     });
 
+    it('strips breakpoint-prefixed span utility classes', () => {
+      const css =
+        '.xs\\:span_6{flex-basis:50%}' +
+        '.md\\:span_auto{flex-grow:1;flex-shrink:0;flex-basis:0}' +
+        '.unrelated{color:red}';
+
+      const result = staticCssStripHook('styles.css', css);
+      expect(result).not.toContain('.xs\\:span_6');
+      expect(result).not.toContain('.md\\:span_auto');
+      expect(result).toContain('.unrelated{color:red}');
+    });
+
     it('strips offset utility classes', () => {
       const css =
         '.offset_3{margin-left:calc(3 / 12 * 100%)}' +
@@ -133,6 +145,18 @@ describe('staticCssStripHook', () => {
       const result = staticCssStripHook('styles.css', css);
       expect(result).not.toContain('.offset_3');
       expect(result).not.toContain('.offset_6');
+    });
+
+    it('strips breakpoint-prefixed offset utility classes', () => {
+      const css =
+        '.md\\:offset_3{margin-left:calc(3 / 12 * 100%)}' +
+        '.lg\\:offset_6{margin-left:50%}' +
+        '.unrelated{color:red}';
+
+      const result = staticCssStripHook('styles.css', css);
+      expect(result).not.toContain('.md\\:offset_3');
+      expect(result).not.toContain('.lg\\:offset_6');
+      expect(result).toContain('.unrelated{color:red}');
     });
 
     it('strips gutter utility classes', () => {
@@ -201,6 +225,18 @@ describe('staticCssStripHook', () => {
       const result = staticCssStripHook('styles.css', css);
       expect(result).not.toContain('.sr_true{');
       expect(result).not.toContain('.sr_false{');
+    });
+
+    it('strips breakpoint-prefixed sr utility classes', () => {
+      const css =
+        '.xs\\:sr_true{position:absolute;width:1px;height:1px}' +
+        '.md\\:sr_false{position:static;width:auto}' +
+        '.unrelated{color:red}';
+
+      const result = staticCssStripHook('styles.css', css);
+      expect(result).not.toContain('.xs\\:sr_true');
+      expect(result).not.toContain('.md\\:sr_false');
+      expect(result).toContain('.unrelated{color:red}');
     });
 
     it('preserves rules that reference .sr_true inside :not() pseudo-class', () => {

@@ -53,9 +53,9 @@ export function staticCssStripHook(
   //
   // These may have descendant-combinator selectors (e.g. `.textStyle_X strong`)
   // so we match everything from .textStyle_typography up to the closing }.
-  // This relies on Panda CSS generating flat (non-nested) CSS rules, which
-  // means `[^}]+` will always stop at the correct closing brace — CSS property
-  // values cannot contain unescaped `}` characters.
+  // This relies on Panda CSS generating flat (non-nested) rules — property
+  // values in Panda's output do not contain literal `}` characters, so
+  // `[^}]+` always terminates at the correct closing brace.
   //
   // Matches:
   //   .textStyle_typography\.body\.md{...}
@@ -72,11 +72,15 @@ export function staticCssStripHook(
   // `[^\s{]+` is safe here because `{` is in the exclusion set — it terminates
   // the match at the exact opening brace of the CSS block with no ambiguity.
   //
+  // An optional breakpoint prefix (`[a-z]+\:`) handles responsive variants
+  // for utilities in `responsiveProps` (span, offset, gutter), e.g.
+  // `.xs\:span_6{...}` or `.md\:offset_3{...}`.
+  //
   // Covers: focusable, span (IressCol), offset (IressCol), gutter (IressRow),
   // noGutter (IressRow), scrollable, stretch, fha (flexHorizontalAlign),
   // fva (flexVerticalAlign).
   css = css.replace(
-    /\.(focusable|span|offset|gutter|noGutter|scrollable|stretch|fha|fva)_[^\s{]+\{[^}]*\}/g,
+    /\.(?:[a-z]+\\:)?(focusable|span|offset|gutter|noGutter|scrollable|stretch|fha|fva)_[^\s{]+\{[^}]*\}/g,
     '',
   );
 
@@ -86,7 +90,10 @@ export function staticCssStripHook(
   // `nestedFormLabels` condition embeds `.sr_true` inside a :not() selector
   // (e.g. `.iress-form-label:not(.sr_true)`), which would otherwise be
   // incorrectly stripped.
-  css = css.replace(/(?<!\()\.sr_[^\s{]+\{[^}]*\}/g, '');
+  //
+  // An optional breakpoint prefix handles responsive variants (srOnly is in
+  // `responsiveProps`), e.g. `.xs\:sr_true{...}`.
+  css = css.replace(/(?<!\()\.(?:[a-z]+\\:)?sr_[^\s{]+\{[^}]*\}/g, '');
 
   // Strip responsive visibility utility classes (hideBelow / hideFrom).
   //
