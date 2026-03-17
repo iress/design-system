@@ -628,6 +628,16 @@ function hasDefaultExport(storiesContent: string): boolean {
 }
 
 /**
+ * Get the name of the first exported story const (excluding `default` and meta-like exports).
+ */
+function getFirstStoryExportName(storiesContent: string): string | null {
+  const match = storiesContent.match(
+    /export\s+const\s+([A-Z]\w*)(?:\s*:|[^a-zA-Z0-9_])/,
+  );
+  return match ? match[1] : null;
+}
+
+/**
  * Generate a minimal Quick Start when Default exists but args can't be parsed.
  */
 function generateMinimalUsageExample(componentExportName: string): string {
@@ -902,6 +912,54 @@ function convertIressExpanderToDetails(content: string): string {
 }
 
 /**
+ * Remove all import statements (single-line and multi-line) outside code fences.
+ */
+function removeImportsOutsideCodeFences(content: string): string {
+  const lines = content.split('\n');
+  const result: string[] = [];
+  let inCodeFence = false;
+  let inImport = false;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith('```')) {
+      inCodeFence = !inCodeFence;
+      result.push(line);
+      continue;
+    }
+
+    if (inCodeFence) {
+      result.push(line);
+      continue;
+    }
+
+    // Currently consuming a multi-line import — skip until we see the `from '...'` line
+    if (inImport) {
+      if (/from\s+['"][^'"]+['"];?\s*$/.test(trimmed)) {
+        inImport = false; // end of multi-line import
+      }
+      continue;
+    }
+
+    // Single-line import: import { X } from '...' or import X from '...' or import * as X from '...'
+    if (/^import\s+.+from\s+['"][^'"]+['"];?\s*$/.test(trimmed)) {
+      continue;
+    }
+
+    // Start of a multi-line import: import { (no `from` on this line)
+    if (/^import\s+\{/.test(trimmed) && !/from\s+['"]/.test(trimmed)) {
+      inImport = true;
+      continue;
+    }
+
+    result.push(line);
+  }
+
+  return result.join('\n');
+}
+
+/**
  * Apply a regex replacement only on lines outside code fences.
  */
 function replaceOutsideCodeFences(
@@ -1062,11 +1120,7 @@ function transformContent(doc: DocFile): {
   let result = content;
 
   // 1. Remove all import statements (only outside code fences)
-  result = replaceOutsideCodeFences(
-    result,
-    /import\s+(?:\{[^}]*\}|\*\s+as\s+\w+|\w+)\s+from\s+['"][^'"]+['"];?/g,
-    '',
-  );
+  result = removeImportsOutsideCodeFences(result);
 
   // 2. Remove <Meta of={...} /> and <Meta title="..." />
   result = result.replace(/<Meta\s+of=\{[^}]+\}\s*\/>\s*\n?/g, '');
@@ -1242,8 +1296,7 @@ function transformContent(doc: DocFile): {
       `href="${resolveStorybookDocLink(slug)}${fragment || ''}"`,
   );
 
-  // 17. Remove any remaining MDX-specific elements
-  result = result.replace(/import\s+.*from\s+['"].*['"];?\n/g, '');
+  // 17. (handled by step 1)
 
   // 18. Restore deferred story code blocks (protected from JSX transformations above)
   for (let i = 0; i < deferredCodeBlocks.length; i++) {
@@ -1698,23 +1751,23 @@ async function main() {
             ? `Iress${doc.componentName}`
             : null;
 
-        // Extract code example from stories Default export
+        // Extract code example from stories Default export (or first story as fallback)
         let codeExample: string | null = null;
         if (!doc.isRecipe) {
           const storiesFile = findStoriesFile(doc.filePath, doc.componentName);
           if (storiesFile) {
             const storiesContent = readFileSync(storiesFile, 'utf-8');
-            const defaultArgs = extractDefaultArgs(storiesContent);
-            if (defaultArgs && componentExportName) {
-              codeExample = generateUsageExample(
-                componentExportName,
-                defaultArgs,
-              );
-            } else if (
-              hasDefaultExport(storiesContent) &&
-              componentExportName
-            ) {
-              codeExample = generateMinimalUsageExample(componentExportName);
+            const storyName = hasDefaultExport(storiesContent)
+              ? 'Default'
+              : getFirstStoryExportName(storiesContent);
+
+            if (storyName && componentExportName) {
+              const args = extractExportArgs(storiesContent, storyName);
+              if (args) {
+                codeExample = generateUsageExample(componentExportName, args);
+              } else {
+                codeExample = generateMinimalUsageExample(componentExportName);
+              }
             }
           }
         }
