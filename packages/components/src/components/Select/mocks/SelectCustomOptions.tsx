@@ -14,7 +14,7 @@ const CustomOptions: IressSelectProps<true>['renderOptions'] = ({
   query,
   results,
   setQuery,
-  setValue,
+  handleMenuChange, // Use handleMenuChange instead of setValue to trigger onChange
   value,
 }) => {
   const valueArray = Array.isArray(value) ? value : [value];
@@ -49,7 +49,8 @@ const CustomOptions: IressSelectProps<true>['renderOptions'] = ({
           heading={`Selected (${selected.length})`}
           items={simpleSelected}
           multiSelect
-          onChange={setValue}
+          // Use handleMenuChange to trigger parent onChange callback
+          onChange={handleMenuChange}
           selected={value}
         />
       )}
@@ -60,7 +61,8 @@ const CustomOptions: IressSelectProps<true>['renderOptions'] = ({
           items={results}
           multiSelect
           noResults={query ? 'No results found' : undefined}
-          onChange={setValue}
+          // Use handleMenuChange to trigger parent onChange callback
+          onChange={handleMenuChange}
           selected={value}
           hideSelectedItems
         />
