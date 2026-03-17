@@ -51,8 +51,15 @@ const ModalExample = () => {
         heading="Discard unsaved changes?"
         status="warning"
         actions={[
-          { children: 'Discard', mode: 'tertiary' },
-          { children: 'Keep editing' },
+          {
+            children: 'Discard',
+            mode: 'tertiary',
+            onClick: () => setShow(false),
+          },
+          {
+            children: 'Keep editing',
+            onClick: () => setShow(false),
+          },
         ]}
       >
         You have unsaved changes that will be lost if you leave this page.

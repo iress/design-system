@@ -56,10 +56,12 @@ export const DecisionTreeDecorator = ({
         {questions.map((q) => (
           <IressField key={q.id} label={q.label}>
             <IressRadioGroup
+              name={q.id}
               value={answers[q.id] ?? ''}
-              onChange={(_, value) =>
-                setAnswers((prev) => ({ ...prev, [q.id]: value! }))
-              }
+              onChange={(_, value) => {
+                if (value === undefined) return;
+                setAnswers((prev) => ({ ...prev, [q.id]: value }));
+              }}
               layout="inline"
             >
               {q.options.map((opt) => (

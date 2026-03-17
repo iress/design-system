@@ -8,6 +8,7 @@ type Story = StoryObj<typeof FeedbackExample>;
 export default {
   title: 'Patterns/Feedback',
   component: FeedbackExample,
+  tags: ['beta'],
   parameters: {
     chromatic: {
       disableSnapshot: true,
