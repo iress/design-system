@@ -32,7 +32,7 @@ export interface SelectHiddenInputRenderProps<
 
 type SelectHiddenInputProps<TMultiple extends boolean = false> = Pick<
   IressSelectProps<TMultiple>,
-  'data-testid' | 'name' | 'renderHiddenInput' | 'value' | 'required'
+  'data-testid' | 'name' | 'renderHiddenInput' | 'required'
 > &
   SelectHiddenInputRenderProps<TMultiple>;
 

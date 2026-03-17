@@ -52,7 +52,6 @@ interface SelectActivatorProps<TMultiple extends boolean = false>
       | 'onChange'
       | 'placeholder'
       | 'renderLabel'
-      | 'value'
       | 'append'
       | 'prepend'
       | 'selectedOptionsText'

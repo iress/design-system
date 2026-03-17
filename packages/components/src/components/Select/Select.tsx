@@ -415,9 +415,13 @@ const Select = <
 
   const { value, setValue, getValuesString, getLabelsString } = useSelectState({
     component: 'IressSelect',
-    defaultValue: resolvedDefaultValue,
+    defaultValue: resolvedDefaultValue as
+      | ControlledValue<LabelValueMeta, TMultiple>
+      | undefined,
     multiple: multiSelect,
-    value: resolvedValueProp,
+    value: resolvedValueProp as
+      | ControlledValue<LabelValueMeta, TMultiple>
+      | undefined,
   });
   const popoverRef = useRef<PopoverRef | null>(null);
   const selectRef = useRef<HTMLSelectElement | null>(null);
@@ -542,7 +546,9 @@ const Select = <
         name={name}
         onChange={(e, value) => {
           (onChange as SelectChangeEvent<false, true>)?.(e, value);
-          setValue(value);
+          setValue(
+            value as ControlledValue<LabelValueMeta, TMultiple> | undefined,
+          );
         }}
         options={options}
         placeholder={
@@ -551,7 +557,7 @@ const Select = <
             : (placeholder as string)
         }
         style={restProps.style}
-        value={value as SelectValue<false, true>}
+        value={value as LabelValueMeta | undefined}
         width={width}
         ref={selectRef}
       />
@@ -588,7 +594,7 @@ const Select = <
         name={name}
         renderHiddenInput={renderHiddenInput}
         required={required}
-        value={value as SelectValue<TMultiple, false>}
+        value={value as ControlledValue<LabelValueMeta, TMultiple>}
         disabled={disabled}
         ref={hiddenInputRef}
       />
@@ -614,7 +620,7 @@ const Select = <
             setValue={setValue}
             setShow={setShow}
             show={show}
-            value={value as SelectValue<TMultiple, false>}
+            value={value as ControlledValue<LabelValueMeta, TMultiple>}
           />
         }
         align={align}
@@ -650,7 +656,7 @@ const Select = <
             shouldShowInstructions={shouldShowInstructions}
             shouldShowNoResults={shouldShowNoResults}
             show={showPopover}
-            value={value as SelectValue<TMultiple, false>}
+            value={value as ControlledValue<LabelValueMeta, TMultiple>}
           />
           {footer}
         </div>
