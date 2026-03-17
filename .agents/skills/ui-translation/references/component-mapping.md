@@ -25,7 +25,7 @@
 | Toggle switch            | `IressToggle`                       | `<IressToggle label="Enable" />`                                                                                               |
 | Slider / range           | `IressSlider`                       | `<IressSlider min={0} max={100} />`                                                                                            |
 | Autocomplete / typeahead | `IressAutocomplete`                 | See component docs                                                                                                             |
-| Read-only display        | `IressReadonly`                     | `<IressReadonly label="Status" value="Active" />`                                                                              |
+| Read-only display        | `IressReadonly`                     | `<IressReadonly label="Status" value="Active" />` — supports `actions` prop for inline action buttons (e.g. edit toggle) |
 
 ## Layout
 
