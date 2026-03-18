@@ -343,21 +343,18 @@ if (renderLoading) return <IressLoading pattern="page" loaded={loaded} />;
 else return <IressText>Content is loaded</IressText>;
 ```
 
-### `IressLoadingSuspense.use`
+### Using React 19's `use` hook
 
-The `IressLoadingSuspense.use` hook is a polyfill for the React 19 `use` hook, allowing you to have similar functionality in React 18. It is used to handle loading states when using `IressLoadingSuspense`.
-
-It is not as smart as the `use` hook in React 19, it will cache the result of the promise and will not re-fetch the data if the component is re-mounted. You can clear a function's results in the cache by using the `IressLoadingSuspense.uncache` function.
-
-<IressAlert status="warning" heading="Avoid in React 19">
-  If you are using React 19, it is recommended to use the built-in `use` hook
-  instead of this one. In future releases, this hook will be deprecated and
-  removed from the library.
-</IressAlert>
+The `IressLoadingSuspense` component works with React 19's built-in `use` hook to handle loading states. Create your promises outside of the render function so they remain stable references, then pass them to `use()`.
 
 ```tsx
+import { use } from 'react';
+
+// Create the promise once so it's a stable reference across renders.
+const homePagePromise = API.fetchPage('home');
+
 const HomePage = () => {
-  const pageData = IressLoadingSuspense.use(API.fetchPage('home'));
+  const pageData = use(homePagePromise);
 
   return (
     <IressText>
@@ -373,6 +370,12 @@ export const App = () => (
   </IressLoadingSuspense>
 );
 ```
+
+<IressAlert status="info" heading="Legacy polyfill">
+  The `IressLoadingSuspense.use` and `IressLoadingSuspense.uncache` static
+  methods are still available as a polyfill for React 18 applications. If you
+  are on React 19, use the built-in `use` hook instead.
+</IressAlert>
 
 ## Examples
 

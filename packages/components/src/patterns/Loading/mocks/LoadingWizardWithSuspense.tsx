@@ -8,7 +8,7 @@ import {
   IressStack,
   IressText,
 } from '@/main';
-import { useDeferredValue, useEffect, useState } from 'react';
+import { use, useDeferredValue, useEffect, useState } from 'react';
 import retirementGraph from './retirement-graph.png';
 import { IressLoadingSuspense } from '../LoadingSuspense';
 
@@ -21,37 +21,30 @@ interface ChartProps {
 }
 
 const API = {
-  getHomePage: async () => {
-    await new Promise((resolve) => {
-      setTimeout(resolve, 3000);
-    });
-
-    return 1;
-  },
-  getRetirementIncomeProjection: async () => {
-    await new Promise((resolve) => {
-      setTimeout(resolve, 2000);
-    });
-
-    return true;
-  },
-  getChart: async () => {
-    await new Promise((resolve) => {
+  getHomePage: () =>
+    new Promise<number>((resolve) => {
+      setTimeout(() => resolve(1), 3000);
+    }),
+  getRetirementIncomeProjection: () =>
+    new Promise<boolean>((resolve) => {
+      setTimeout(() => resolve(true), 2000);
+    }),
+  getChart: () =>
+    new Promise<boolean>((resolve) => {
       const chartImage = new Image();
       chartImage.src = retirementGraph;
-      setTimeout(resolve, 1000);
-    });
-
-    return true;
-  },
-  chartUpdate: async () =>
+      setTimeout(() => resolve(true), 1000);
+    }),
+  chartUpdate: () =>
     new Promise<boolean>((resolve) => {
-      // Simulate a slow network request.
-      setTimeout(() => {
-        resolve(true);
-      }, 2000);
+      setTimeout(() => resolve(true), 2000);
     }),
 };
+
+// Create promises once at module level so they are stable references for React 19's `use` hook.
+const homePagePromise = API.getHomePage();
+const retirementPromise = API.getRetirementIncomeProjection();
+const chartPromise = API.getChart();
 
 const Graph = () => (
   <img
@@ -62,7 +55,7 @@ const Graph = () => (
 );
 
 const Chart = () => {
-  const initialChart = IressLoadingSuspense.use(API.getChart);
+  const initialChart = use(chartPromise);
   const [updatedChart, setUpdatedChart] = useState<boolean | undefined>();
   const [money, setMoney] = useState<number | null>(null);
   const [updating, setUpdating] = useState(false);
@@ -126,9 +119,7 @@ const StartPage = ({ setPage }: PageProps) => (
 );
 
 const RetirementIncomeProjectionPage = () => {
-  const promise = API.getRetirementIncomeProjection;
-  IressLoadingSuspense.use(promise);
-  IressLoadingSuspense.uncache(promise);
+  use(retirementPromise);
 
   return (
     <IressText>
@@ -145,10 +136,7 @@ const RetirementIncomeProjectionPage = () => {
 };
 
 const HomePage = () => {
-  const promise = API.getHomePage;
-  const startPage = IressLoadingSuspense.use(promise);
-  IressLoadingSuspense.uncache(promise);
-
+  const startPage = use(homePagePromise);
   const [movedPage, setMovedPage] = useState<number | undefined>();
 
   const page = movedPage ?? startPage;

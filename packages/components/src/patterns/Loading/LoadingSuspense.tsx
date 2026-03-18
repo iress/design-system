@@ -1,11 +1,4 @@
-import {
-  type ReactNode,
-  Suspense,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { type ReactNode, Suspense, useEffect, useRef, useState } from 'react';
 import { IressLoading } from './Loading';
 import {
   uncacheSuspenseResource,
@@ -40,7 +33,7 @@ export type IressLoadingSuspenseProps = (
   delay?: number;
 
   /**
-   * By default it uses the default delay of the pattern.
+   * Called once when the loading transition completes and children are shown.
    */
   onLoaded?: () => void;
 
@@ -49,6 +42,31 @@ export type IressLoadingSuspenseProps = (
    * Default is 500ms, meaning a user will not even see the loading indicator if the page loads before this time.
    */
   startFrom?: number;
+};
+
+const getDelay = (
+  pattern: IressLoadingSuspenseProps['pattern'],
+  delayProp?: number,
+) => {
+  if (delayProp != null) return delayProp;
+  if (
+    pattern === 'component' ||
+    pattern === 'default' ||
+    pattern === 'validate'
+  )
+    return 0;
+  if (pattern === 'long') return 1300;
+  return 500;
+};
+
+const getStartFrom = (
+  pattern: IressLoadingSuspenseProps['pattern'],
+  startFromProp?: number,
+) => {
+  if (startFromProp != null) return startFromProp;
+  if (pattern === 'component' || pattern === 'default' || pattern === 'long')
+    return 0;
+  return 250;
 };
 
 /**
@@ -88,63 +106,31 @@ export const IressLoadingSuspense = ({
   startFrom: startFromProp,
   ...restProps
 }: IressLoadingSuspenseProps) => {
-  const delay = useMemo(() => {
-    if (delayProp) {
-      return delayProp;
-    }
-
-    if (
-      pattern === 'component' ||
-      pattern === 'default' ||
-      pattern === 'validate'
-    ) {
-      return 0;
-    }
-
-    if (pattern === 'long') {
-      return 1300;
-    }
-
-    return 500;
-  }, [delayProp, pattern]);
-
-  const startFrom = useMemo(() => {
-    if (startFromProp) {
-      return startFromProp;
-    }
-
-    if (
-      pattern === 'component' ||
-      pattern === 'default' ||
-      pattern === 'long'
-    ) {
-      return 0;
-    }
-
-    return 250;
-  }, [startFromProp, pattern]);
+  const delay = getDelay(pattern, delayProp);
+  const startFrom = getStartFrom(pattern, startFromProp);
 
   const resolved = useRef(false);
+  const hasNotifiedLoaded = useRef(false);
   const [loaded, setLoaded] = useState(false);
   const showFallback = IressLoading.shouldRender(loaded, delay, startFrom);
   const showChildren = loaded && !showFallback;
 
   useEffect(() => {
-    onLoaded?.();
+    if (showChildren && !hasNotifiedLoaded.current) {
+      hasNotifiedLoaded.current = true;
+      onLoaded?.();
+    }
   }, [showChildren, onLoaded]);
 
-  // Called when suspense resolves
   const onResolved = () => {
-    if (resolved.current) {
-      return;
-    }
-
+    if (resolved.current) return;
     resolved.current = true;
-    setLoaded(() => true);
+    setLoaded(true);
   };
 
-  // Patterns that accept children work differently, in these cases the `IressLoading` component is always there.
-  // The children are rendered inside the `IressLoading` component, and the `Suspense` component is used to manage whether the children has been resolved or not while children are not rendered.
+  // Patterns that accept children work differently — the `IressLoading` component is always rendered.
+  // Children appear inside `IressLoading` once resolved, while a hidden Suspense boundary
+  // detects when the children stop suspending via `OnSuspenseResolved`.
   if (pattern === 'component' || pattern === 'validate') {
     return (
       <>
@@ -155,13 +141,13 @@ export const IressLoadingSuspense = ({
         >
           {showChildren && children}
         </IressLoading>
-        <Suspense fallback={null}>
-          {!showChildren && (
+        {!showChildren && (
+          <Suspense fallback={null}>
             <OnSuspenseResolved onResolved={onResolved}>
-              {!loaded && children}
+              <div hidden>{children}</div>
             </OnSuspenseResolved>
-          )}
-        </Suspense>
+          </Suspense>
+        )}
       </>
     );
   }
@@ -182,7 +168,7 @@ export const IressLoadingSuspense = ({
           children
         ) : (
           <OnSuspenseResolved onResolved={onResolved}>
-            {!loaded && children}
+            <div hidden>{children}</div>
           </OnSuspenseResolved>
         )}
       </Suspense>
@@ -206,8 +192,10 @@ IressLoadingSuspense.use = useSuspenseResource;
 IressLoadingSuspense.uncache = uncacheSuspenseResource;
 
 /**
- * This calls a function when the children mounts, allowing us to trigger an animation to delay the unmounting of the fallback.
- * This is useful for patterns that have a fade-out animation when the loading state is resolved.
+ * Signals when Suspense children have resolved by firing `onResolved` on mount.
+ * When children suspend, this component is replaced by the Suspense fallback (null),
+ * so the effect only fires once all children have successfully rendered.
+ * Children are wrapped in a `hidden` div to prevent visual flicker.
  */
 const OnSuspenseResolved = ({
   onResolved,
