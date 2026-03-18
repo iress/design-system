@@ -76,7 +76,6 @@ export const loading = sva({
       long: {
         root: {
           borderRadius: 'radius.system.layout',
-          bg: 'colour.neutral.20',
           mx: 'auto',
           opacity: 0,
           transition: '[opacity 0.3s ease-in-out]',

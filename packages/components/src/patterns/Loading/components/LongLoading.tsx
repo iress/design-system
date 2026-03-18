@@ -139,6 +139,7 @@ const ListItem = ({ message, current, finished }: ListItemProps) => {
 };
 
 export const LongLoading = ({
+  bg = 'colour.neutral.20',
   children,
   className,
   error,
@@ -193,10 +194,11 @@ export const LongLoading = ({
   }, [messageList, currentMessageTimecode, progressValue]);
 
   return (
-    <styled.div {...restProps} className={cx(styles.root, className)}>
+    <styled.div {...restProps} bg={bg} className={cx(styles.root, className)}>
       <IressPanel
         data-testid={propagateTestid(restProps['data-testid'], 'panel')}
         bg="transparent"
+        noBorder
       >
         {error ?? (
           <IressStack gap="md">
