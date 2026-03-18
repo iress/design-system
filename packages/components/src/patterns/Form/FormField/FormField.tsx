@@ -21,6 +21,7 @@ import {
 } from './helpers/transformCustomRulesToValidateRule';
 import { IressField, type IressFieldProps } from '@/components/Field';
 import { useFieldRenderProps } from './hooks/useFieldRenderProps';
+import { type FormControlReadOnly } from '@/types';
 
 export interface IressFormFieldProps<
   T extends FieldValues = FieldValues,
@@ -80,8 +81,9 @@ export interface IressFormFieldProps<
 
   /**
    * Text to be displayed instead of input field.
+   * Use `'locked'` when the field is read-only due to permissions.
    */
-  readOnly?: boolean;
+  readOnly?: FormControlReadOnly;
 }
 
 /**

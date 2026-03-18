@@ -10,7 +10,11 @@ import {
   type ReactElement,
 } from 'react';
 import { toArray } from '@helpers/formatting/toArray';
-import { type FormControlValue, type IressStyledProps } from '@/types';
+import {
+  type FormControlReadOnly,
+  type FormControlValue,
+  type IressStyledProps,
+} from '@/types';
 import { useControlledState } from '@/hooks/useControlledState';
 import { checkboxGroup } from './CheckboxGroup.styles';
 import { cx } from '@/styled-system/css';
@@ -55,7 +59,7 @@ export interface IressCheckboxGroupProps<T = FormControlValue> extends Omit<
   /**
    * Renders the group in a read-only state.
    */
-  readOnly?: boolean;
+  readOnly?: FormControlReadOnly;
 
   /**
    * Value of checkbox group when in controlled mode.
@@ -183,7 +187,7 @@ const CheckboxGroup = <T = FormControlValue,>(
         ref={divRef}
         className={cx(
           className,
-          checkboxGroup({ layout, readOnly }),
+          checkboxGroup({ layout, readOnly: !!readOnly }),
           GlobalCSSClass.CheckboxGroup,
         )}
         onBlur={handleBlur}

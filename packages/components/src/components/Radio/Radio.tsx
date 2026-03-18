@@ -11,7 +11,11 @@ import { useIdIfNeeded } from '../../hooks';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { IressReadonly } from '../Readonly';
 import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAsString';
-import { type FormControlValue, type IressStyledProps } from '@/types';
+import {
+  type FormControlReadOnly,
+  type FormControlValue,
+  type IressStyledProps,
+} from '@/types';
 import { css, cx } from '@/styled-system/css';
 import { radio } from './Radio.styles';
 import { GlobalCSSClass } from '@/enums';
@@ -25,7 +29,10 @@ import type { CheckboxVariants } from '../Checkbox';
 export interface IressRadioProps<
   T = FormControlValue,
   TVariant extends CheckboxVariants = undefined,
-> extends Omit<IressStyledProps<'input'>, 'defaultValue' | 'value'> {
+> extends Omit<
+  IressStyledProps<'input'>,
+  'defaultValue' | 'readOnly' | 'value'
+> {
   /**
    * Sets the checked state of the radio.
    * If it is within a radio group, it will be overridden by the radio group's value
@@ -61,6 +68,12 @@ export interface IressRadioProps<
    * required state.
    */
   required?: boolean;
+
+  /**
+   * Renders the radio as read-only.
+   * Use `'locked'` when the value is read-only because of permissions.
+   */
+  readOnly?: FormControlReadOnly;
 
   /**
    * The value which is submitted with the form data when this radio button is checked.

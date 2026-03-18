@@ -37,6 +37,13 @@ export type FloatingUIAligns = 'auto' | Placement;
 export type FormControlValue = string | number | boolean | null;
 
 /**
+ * Read-only state for form controls.
+ * - `true`: readonly value, generally informational
+ * - `'locked'`: readonly because user lacks edit permission
+ */
+export type FormControlReadOnly = boolean | 'locked';
+
+/**
  * Allowed widths for form elements.
  */
 export type FormElementWidths = (typeof FORM_ELEMENT_WIDTHS)[number];

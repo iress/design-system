@@ -125,6 +125,16 @@ describe('IressField', () => {
         expect(input).toBeInTheDocument();
         expect(screen.queryByText(/Required/)).not.toBeInTheDocument();
       });
+
+      it('shows a lock icon when readOnly is "locked"', () => {
+        const screen = renderComponent({
+          readOnly: 'locked',
+        });
+
+        expect(
+          screen.container.querySelector(`.${GlobalCSSClass.Icon}`),
+        ).toBeInTheDocument();
+      });
     });
 
     it('renders label with hint icon inline when horizontal and hint are both provided', () => {

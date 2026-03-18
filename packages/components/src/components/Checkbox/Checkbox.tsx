@@ -16,7 +16,11 @@ import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAs
 import { IressCheckboxMark } from '../CheckboxMark';
 import { useControlledState } from '@/hooks/useControlledState';
 import { IressReadonly } from '../Readonly';
-import { type FormControlValue, type IressStyledProps } from '@/types';
+import {
+  type FormControlReadOnly,
+  type FormControlValue,
+  type IressStyledProps,
+} from '@/types';
 import { checkbox as checkboxStyles } from './Checkbox.styles';
 import { css, cx } from '@/styled-system/css';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
@@ -32,7 +36,10 @@ export type CheckboxVariants = 'card' | 'touch' | undefined;
 export interface IressCheckboxProps<
   T = FormControlValue,
   TVariant extends CheckboxVariants = undefined,
-> extends Omit<IressStyledProps<'input'>, 'defaultValue' | 'value'> {
+> extends Omit<
+  IressStyledProps<'input'>,
+  'defaultValue' | 'readOnly' | 'value'
+> {
   /**
    * If true, the checkbox is selected.
    * Please use this when rendering the checkbox in controlled mode.
@@ -93,6 +100,12 @@ export interface IressCheckboxProps<
    * If `true`, the checkbox is a required field and will be validated as such.
    */
   required?: boolean;
+
+  /**
+   * Renders the checkbox as read-only.
+   * Use `'locked'` when the value is read-only because of permissions.
+   */
+  readOnly?: FormControlReadOnly;
 
   /**
    * Value of the checkbox when used in a checkbox group. The checked state of the checkbox will be overridden based on this value if used inside a checkbox group.

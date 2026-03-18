@@ -27,6 +27,7 @@ export interface IressReadonlyProps<
   | 'onChange'
   | 'onInput'
   | 'placeholder'
+  | 'readOnly'
   | 'rows'
   | 'color'
 > {
