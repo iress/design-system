@@ -345,16 +345,16 @@ else return <IressText>Content is loaded</IressText>;
 
 ### Using React 19's `use` hook
 
-The `IressLoadingSuspense` component works with React 19's built-in `use` hook to handle loading states. Create your promises outside of the render function so they remain stable references, then pass them to `use()`.
+The `IressLoadingSuspense` component works with React 19's built-in `use` hook to handle loading states. Use `useRef` to create a stable promise per component instance — this ensures the request starts when the component mounts and each instance has its own independent promise, rather than sharing a single cached promise across all instances.
 
 ```tsx
-import { use } from 'react';
-
-// Create the promise once so it's a stable reference across renders.
-const homePagePromise = API.fetchPage('home');
+import { use, useRef } from 'react';
 
 const HomePage = () => {
-  const pageData = use(homePagePromise);
+  // Create the promise once per component instance.
+  // Using useRef ensures the request starts on mount and is not shared across instances.
+  const homePagePromiseRef = useRef(API.fetchPage('home'));
+  const pageData = use(homePagePromiseRef.current);
 
   return (
     <IressText>

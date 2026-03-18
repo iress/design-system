@@ -38,8 +38,9 @@ export type IressLoadingSuspenseProps = (
   onLoaded?: () => void;
 
   /**
-   * Duration (in milliseconds) before showing the loading pattern.
-   * Default is 500ms, meaning a user will not even see the loading indicator if the page loads before this time.
+   * Duration (in milliseconds) before showing the loading pattern,
+   * meaning users will not see the loading indicator if content loads before this time.
+   * Defaults to `0` for `component`, `default`, and `long` patterns, and `250` for all other patterns.
    */
   startFrom?: number;
 };
