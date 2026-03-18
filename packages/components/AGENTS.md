@@ -8,7 +8,7 @@
 yarn workspace @iress-oss/ids-components run build
 ```
 
-Depends on `@iress-oss/ids-tokens` — build tokens first.
+Depends on `@iress-oss/ids-tokens` and `@iress-oss/ids-theme-preset` — build tokens and theme-preset first.
 
 ## ⚠️ Long-running commands
 

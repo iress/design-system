@@ -5,11 +5,12 @@ Iress Design System (IDS) monorepo — React component library and design tokens
 ## Setup
 
 ```bash
+corepack enable
 yarn
 yarn prepare        # installs husky hooks and builds all packages
 ```
 
-Node 22, Yarn 4 (Berry). The `packageManager` field in `package.json` pins the exact Yarn version.
+Node 22, Yarn 4 (Berry). The `packageManager` field in `package.json` pins the exact Yarn version; `corepack enable` is required to activate it.
 
 ## ⚠️ Long-running commands — never run in agent workflows
 
@@ -45,6 +46,12 @@ yarn workspace @iress-oss/ids-components run test:coverage Button.test.tsx
 Tests use Vitest. Test startup can take 30+ seconds — this is normal, not a failure. Wait for explicit PASS/FAIL output.
 
 Test files must live inside each package's `src/` directory. Do not create tests for pure interface/type files with no runtime behavior.
+
+## Type checking
+
+```bash
+yarn typecheck               # all packages
+```
 
 ## Linting
 
@@ -83,7 +90,7 @@ Supporting: `storybook-config/`, `storybook-okta/`, `storybook-sandbox/`, `story
 
 ## PR guidelines
 
-- Run `yarn lint` and `yarn test` before committing
+- Run `yarn lint`, `yarn typecheck`, and `yarn test` before committing
 - Husky pre-commit and pre-push hooks enforce linting and tests
 - Follow existing patterns and conventions in the codebase
 - Prefer minimal, targeted changes over over-engineering
