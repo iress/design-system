@@ -54,12 +54,44 @@ When reviewing a PR, always verify that AI-facing documentation stays in sync wi
 
 > This PR changes `<ComponentName>` / token schema but the `.agents/skills/<skill>/SKILL.md` file has not been updated. Please review and update the skill so AI agents produce correct code.
 
+### 3. AGENTS.md Files
+
+**Trigger:** Any PR that:
+
+- Adds, removes, or renames a **package** in `packages/`
+- Changes **scripts** in any `package.json` (especially `test`, `dev`, `build`, `lint` commands)
+- Changes **setup steps**, Node/Yarn version requirements, or CI configuration
+- Modifies the **monorepo structure** (new workspaces, changed dependency graph between packages)
+- Changes **code style** config (`.prettierrc.cjs`, `.editorconfig`, `eslint.config.js`)
+- Adds or removes **long-running commands** (dev servers, watchers, watch-mode tests)
+
+**Files to review:**
+
+| File | Review when… |
+|---|---|
+| `AGENTS.md` (root) | Setup steps, monorepo structure, cross-package commands, code style, CI/CD, or long-running command list changes |
+| `packages/components/AGENTS.md` | Components package scripts, source layout, build dependencies, or styling approach changes |
+| `packages/tokens/AGENTS.md` | Tokens package scripts, source layout, exports, or build pipeline changes |
+| `packages/theme-preset/AGENTS.md` | Theme preset scripts, exports, or dependency changes |
+
+**What to verify:**
+
+- Build, test, and lint commands listed in AGENTS.md match the actual `package.json` scripts.
+- The long-running commands section is complete — any new watcher or dev server command is listed with its non-blocking alternative.
+- Package dependency relationships are accurate (e.g. "build tokens first").
+- Source layout descriptions reflect the current directory structure.
+- Node/Yarn version requirements match CI and `package.json` `packageManager` field.
+
+**Review comment template:**
+
+> This PR modifies `<package>/package.json` scripts but the corresponding `AGENTS.md` has not been updated. Please ensure the documented commands, long-running command warnings, and alternatives still match the actual scripts so AI agents don't run hanging commands or use stale instructions.
+
 ## How to Apply These Checks
 
 When reviewing a PR:
 
-1. **Scan the changed file list** for files under `packages/components/src/components/`, `packages/components/src/patterns/`, `packages/components/docs/`, `packages/tokens/src/schema/`, or `packages/tokens/src/generated/`.
-2. If any of those paths appear, **apply the relevant checks above**.
+1. **Scan the changed file list** for files under `packages/components/src/components/`, `packages/components/src/patterns/`, `packages/components/docs/`, `packages/tokens/src/schema/`, `packages/tokens/src/generated/`, or any `package.json`.
+2. If any of those paths appear, **apply the relevant checks above** (token schema, agent skills, and/or AGENTS.md drift).
 3. Flag missing updates as **required changes**, not optional suggestions — stale AI documentation degrades the entire AI-assisted development experience.
 4. If the PR is a pure refactor with no public API changes, these checks can be skipped.
 
