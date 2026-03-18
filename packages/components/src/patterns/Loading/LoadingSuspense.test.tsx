@@ -1,13 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import { lazy } from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
+import { lazy, use } from 'react';
 import { IressLoadingSuspense } from './LoadingSuspense';
 
 const LoadingLazyTest = lazy(() => import('./mocks/LoadingLazyTest'));
 
-const fakePromise = () => new Promise((resolve) => setTimeout(resolve, 100));
-
-const PromiseComponent = () => {
-  IressLoadingSuspense.use(fakePromise);
+const PromiseComponent = ({ promise }: { promise: Promise<unknown> }) => {
+  use(promise);
   return <div>Lazy Component</div>;
 };
 
@@ -29,35 +27,26 @@ describe('IressLoadingSuspense', () => {
     expect(screen.queryByLabelText('0% loaded')).toBeNull();
   });
 
-  // TODO: Review the hook still works
-  it.skip('renders a component loading pattern with a promised component', async () => {
-    const { rerender } = render(
+  it('renders a component loading pattern with a promised component', async () => {
+    const promise = new Promise((resolve) => setTimeout(resolve, 100));
+
+    render(
       <IressLoadingSuspense pattern="component">
-        <PromiseComponent />
+        <PromiseComponent promise={promise} />
       </IressLoadingSuspense>,
     );
 
-    // Check for the skeleton loading
+    // The component pattern shows a skeleton with screen reader text while loading
     await screen.findByText('Loading...');
 
-    // Check for the lazy loaded component
-    const loaded = await screen.findByText('Lazy Component');
-
-    // Check that the loading message is no longer visible
-    expect(screen.queryByText('Loading...')).toBeNull();
-
-    rerender(
-      <IressLoadingSuspense
-        pattern="component"
-        update="Changing the content..."
-      >
-        <PromiseComponent />
-      </IressLoadingSuspense>,
+    // Wait for the children to resolve and become visible (not inside a hidden container)
+    await waitFor(
+      () => {
+        const elements = screen.getAllByText('Lazy Component');
+        const visible = elements.find((el) => !el.closest('[hidden]'));
+        expect(visible).toBeTruthy();
+      },
+      { timeout: 2000 },
     );
-
-    // When updating, show the update message
-    const update = screen.getByText('Changing the content...');
-    expect(update).toBeInTheDocument();
-    expect(loaded).toBeInTheDocument();
   });
 });

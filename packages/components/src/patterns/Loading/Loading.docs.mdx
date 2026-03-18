@@ -343,21 +343,18 @@ if (renderLoading) return <IressLoading pattern="page" loaded={loaded} />;
 else return <IressText>Content is loaded</IressText>;
 ```
 
-### `IressLoadingSuspense.use`
+### Using React 19's `use` hook
 
-The `IressLoadingSuspense.use` hook is a polyfill for the React 19 `use` hook, allowing you to have similar functionality in React 18. It is used to handle loading states when using `IressLoadingSuspense`.
-
-It is not as smart as the `use` hook in React 19, it will cache the result of the promise and will not re-fetch the data if the component is re-mounted. You can clear a function's results in the cache by using the `IressLoadingSuspense.uncache` function.
-
-<IressAlert status="warning" heading="Avoid in React 19">
-  If you are using React 19, it is recommended to use the built-in `use` hook
-  instead of this one. In future releases, this hook will be deprecated and
-  removed from the library.
-</IressAlert>
+The `IressLoadingSuspense` component works with React 19's built-in `use` hook to handle loading states. Use `useRef` to create a stable promise per component instance — this ensures the request starts when the component mounts and each instance has its own independent promise, rather than sharing a single cached promise across all instances.
 
 ```tsx
+import { use, useRef } from 'react';
+
 const HomePage = () => {
-  const pageData = IressLoadingSuspense.use(API.fetchPage('home'));
+  // Create the promise once per component instance.
+  // Using useRef ensures the request starts on mount and is not shared across instances.
+  const homePagePromiseRef = useRef(API.fetchPage('home'));
+  const pageData = use(homePagePromiseRef.current);
 
   return (
     <IressText>
@@ -373,6 +370,12 @@ export const App = () => (
   </IressLoadingSuspense>
 );
 ```
+
+<IressAlert status="info" heading="Legacy polyfill">
+  The `IressLoadingSuspense.use` and `IressLoadingSuspense.uncache` static
+  methods are still available as a polyfill for React 18 applications. If you
+  are on React 19, use the built-in `use` hook instead.
+</IressAlert>
 
 ## Examples
 
