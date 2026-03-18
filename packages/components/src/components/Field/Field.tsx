@@ -11,7 +11,6 @@ import { css, cx } from '@/styled-system/css';
 import { FieldFooter } from './components/FieldFooter';
 import { FieldHint, FieldHintIcon } from './components/FieldHint';
 import { GlobalCSSClass } from '@/enums';
-import { IressIcon } from '../Icon';
 
 export type IressFieldProps<
   E extends 'div' | 'fieldset' = 'div',
@@ -117,7 +116,6 @@ export const IressField = ({
   });
   const [styleProps, nonStyledProps] = splitCssProps(restProps);
   const isReadOnly = !!readOnly;
-  const isLocked = readOnly === 'locked';
 
   const renderLabelWithHint = () => {
     const labelContent = (
@@ -126,6 +124,7 @@ export const IressField = ({
         data-testid={propagateTestid(dataTestId, 'label')}
         hiddenLabel={hiddenLabel}
         htmlFor={htmlFor}
+        readOnly={readOnly}
         required={isReadOnly ? false : !!required}
       >
         {label}
@@ -166,18 +165,7 @@ export const IressField = ({
       {...nonStyledProps}
     >
       <styled.div className={css(styles.labelContainer)}>
-        {isLocked && !hiddenLabel ? (
-          <styled.div display="inline-flex" alignItems="center" gap="spacing.1">
-            <IressIcon
-              name="lock"
-              color="colour.neutral.70"
-              screenreaderText="Locked field"
-            />
-            {renderLabelWithHint()}
-          </styled.div>
-        ) : (
-          renderLabelWithHint()
-        )}
+        {renderLabelWithHint()}
       </styled.div>
       <styled.div className={css(styles.fieldContainer)}>
         <div className={css(styles.element)}>{children}</div>

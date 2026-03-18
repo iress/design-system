@@ -1,10 +1,11 @@
 import { GlobalCSSClass } from '@/enums';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { type ReactNode, useState, useMemo, type FC } from 'react';
-import { type IressStyledProps } from '@/types';
+import { type FormControlReadOnly, type IressStyledProps } from '@/types';
 import { styled } from '@/styled-system/jsx';
 import { label } from '../Label.styles';
 import { cx } from '@/styled-system/css';
+import { IressIcon } from '@/components/Icon';
 
 export type LabelBaseProps<E extends 'label' | 'strong' | 'legend' = 'label'> =
   IressStyledProps<E> & {
@@ -35,6 +36,12 @@ export type LabelBaseProps<E extends 'label' | 'strong' | 'legend' = 'label'> =
      * When set to true, the 'required asterisk (*)' is displayed next to the label text.
      */
     required?: boolean;
+
+    /**
+     * Renders the label in a read-only state.
+     * Use `'locked'` to show a lock indicator when the related field is permission-locked.
+     */
+    readOnly?: FormControlReadOnly;
   };
 
 export const LabelBase = <E extends 'label' | 'strong' | 'legend' = 'label'>({
@@ -44,6 +51,7 @@ export const LabelBase = <E extends 'label' | 'strong' | 'legend' = 'label'>({
   'data-testid': dataTestId,
   element,
   hiddenLabel = false,
+  readOnly,
   required,
   ...restProps
 }: LabelBaseProps<E>) => {
@@ -77,6 +85,14 @@ export const LabelBase = <E extends 'label' | 'strong' | 'legend' = 'label'>({
       {...restProps}
       data-name={name}
     >
+      {readOnly === 'locked' && !hiddenLabel && (
+        <IressIcon
+          name="lock"
+          color="colour.neutral.70"
+          screenreaderText="Locked field"
+          mr="spacing.1"
+        />
+      )}
       {required && (
         <>
           {!hiddenLabel && (
