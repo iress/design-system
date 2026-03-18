@@ -4,6 +4,7 @@ import { IressTag } from '.';
 import userEvent from '@testing-library/user-event';
 import { tag } from './Tag.styles';
 import { GlobalCSSClass } from '@/enums';
+import { STATUSES } from '@/constants';
 
 describe('IressTag', () => {
   it('should render the component with the correct text, classes and testids', () => {
@@ -99,6 +100,17 @@ describe('IressTag', () => {
 
     expect(onCustomDelete).toHaveBeenCalledTimes(1);
     expect(onDelete).not.toHaveBeenCalled();
+  });
+
+  it.each(STATUSES)('applies %s status mode styles', (status) => {
+    render(
+      <IressTag mode={status} data-testid="status-tag">
+        Tag
+      </IressTag>,
+    );
+
+    const component = screen.getByTestId('status-tag');
+    expect(component).toHaveClass(tag({ mode: status }).root);
   });
 });
 
