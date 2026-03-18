@@ -7,8 +7,8 @@ import { propagateTestid } from '@/helpers/utility/propagateTestid';
 import { useShowIndicator } from '../hooks/useShowIndicator';
 import { useEstimatedProgressValue } from '../hooks/useEstimatedProgressValue';
 import { type IressStyledProps } from '@/types';
-import { styled } from '@/styled-system/jsx';
-import { cx } from '@/styled-system/css';
+import { splitCssProps, styled } from '@/styled-system/jsx';
+import { css, cx } from '@/styled-system/css';
 import { loading, loadingList } from '../Loading.styles';
 
 export interface LongLoadingProps extends IressStyledProps {
@@ -139,7 +139,6 @@ const ListItem = ({ message, current, finished }: ListItemProps) => {
 };
 
 export const LongLoading = ({
-  bg = 'colour.neutral.20',
   children,
   className,
   error,
@@ -166,13 +165,14 @@ export const LongLoading = ({
     progress,
     latestMessageTimecode,
   );
-  const styles = loading({
+  const styles = loading.raw({
     pattern: 'long',
     showIndicator,
     loaded,
     error: !!error,
   });
   const listStyles = loadingList();
+  const [styleProps, nonStyleProps] = splitCssProps(restProps);
 
   const currentMessageTimecode = useMemo(() => {
     const timecodes = Object.keys(messageList);
@@ -194,9 +194,12 @@ export const LongLoading = ({
   }, [messageList, currentMessageTimecode, progressValue]);
 
   return (
-    <styled.div {...restProps} bg={bg} className={cx(styles.root, className)}>
+    <styled.div
+      {...nonStyleProps}
+      className={cx(css(styles.root, styleProps), className)}
+    >
       <IressPanel
-        data-testid={propagateTestid(restProps['data-testid'], 'panel')}
+        data-testid={propagateTestid(nonStyleProps['data-testid'], 'panel')}
         bg="transparent"
         noBorder
       >
