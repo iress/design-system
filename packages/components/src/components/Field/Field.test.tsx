@@ -131,8 +131,10 @@ describe('IressField', () => {
           readOnly: 'locked',
         });
 
+        const lockedIcon = screen.getByLabelText('Locked field');
+        expect(lockedIcon).toBeInTheDocument();
         expect(
-          screen.container.querySelector(`.${GlobalCSSClass.Icon}`),
+          lockedIcon.closest(`.${GlobalCSSClass.Field}`),
         ).toBeInTheDocument();
       });
     });

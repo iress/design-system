@@ -168,7 +168,11 @@ export const IressField = ({
       <styled.div className={css(styles.labelContainer)}>
         {isLocked && !hiddenLabel ? (
           <styled.div display="inline-flex" alignItems="center" gap="spacing.1">
-            <IressIcon name="lock" color="colour.neutral.70" />
+            <IressIcon
+              name="lock"
+              color="colour.neutral.70"
+              screenreaderText="Locked field"
+            />
             {renderLabelWithHint()}
           </styled.div>
         ) : (
