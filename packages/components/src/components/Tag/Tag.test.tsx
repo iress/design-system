@@ -110,7 +110,7 @@ describe('IressTag', () => {
     );
 
     const component = screen.getByTestId('status-tag');
-    expect(component).toHaveClass(tag({ mode: status }).root);
+    expect(component).toHaveClass(tag({ mode: status }).root!);
   });
 });
 
