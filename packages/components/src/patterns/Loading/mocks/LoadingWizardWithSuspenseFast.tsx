@@ -30,9 +30,10 @@ const API = {
       setTimeout(() => resolve(true), 200);
     }),
   getChart: () =>
-    new Promise<boolean>((resolve) => {
+    new Promise<boolean>((resolve, reject) => {
       const chartImage = new Image();
-      chartImage.onload = resolve;
+      chartImage.onload = () => resolve(true);
+      chartImage.onerror = reject;
       chartImage.src = retirementGraph;
     }),
   chartUpdate: () =>
