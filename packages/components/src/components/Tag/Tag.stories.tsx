@@ -14,6 +14,7 @@ import {
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import { IressInline } from '@/main';
+import { STATUSES } from '@/constants';
 
 type Story = StoryObj<typeof IressTag>;
 const BADGE_MODES = [10, 20, 30, 40, 50, 60, 70, 80, 90] as const;
@@ -45,6 +46,22 @@ export const Mode: Story = {
       {BADGE_MODES.map((mode) => (
         <IressTag {...args} key={mode} mode={mode}>
           {mode}
+        </IressTag>
+      ))}
+    </IressInline>
+  ),
+};
+
+export const Status: Story = {
+  ...Default,
+  argTypes: {
+    ...disableArgTypes(['mode']),
+  },
+  render: (args) => (
+    <IressInline gap="sm">
+      {STATUSES.map((status) => (
+        <IressTag {...args} key={status} mode={status}>
+          {status}
         </IressTag>
       ))}
     </IressInline>

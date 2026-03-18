@@ -159,6 +159,34 @@ export const tag = sva({
           '--tag-color': '{colors.colour.data.bold.90}',
         },
       },
+      danger: {
+        root: {
+          '--tag-bg': '{colors.colour.system.danger.surface}',
+          '--tag-border': '{colors.colour.system.danger.surface}',
+          '--tag-color': '{colors.colour.system.danger.text}',
+        },
+      },
+      info: {
+        root: {
+          '--tag-bg': '{colors.colour.system.info.surface}',
+          '--tag-border': '{colors.colour.system.info.surface}',
+          '--tag-color': '{colors.colour.system.info.text}',
+        },
+      },
+      success: {
+        root: {
+          '--tag-bg': '{colors.colour.system.success.surface}',
+          '--tag-border': '{colors.colour.system.success.surface}',
+          '--tag-color': '{colors.colour.system.success.text}',
+        },
+      },
+      warning: {
+        root: {
+          '--tag-bg': '{colors.colour.system.warning.surface}',
+          '--tag-border': '{colors.colour.system.warning.surface}',
+          '--tag-color': '{colors.colour.system.warning.text}',
+        },
+      },
     },
   },
   defaultVariants: {

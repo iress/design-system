@@ -37,8 +37,8 @@ interface TagBaseProps {
   deleteButtonText?: string;
 
   /**
-   * Style of the tag, based on the data colour palette.
-   * Can be a number (10-90) or a string ('10'-'90').
+   * Style of the tag, based on the data colour palette (10-90) or system status colours (danger, info, success, warning).
+   * Can be a number (10-90), a string ('10'-'90'), or a system status ('danger', 'info', 'success', 'warning').
    * @default '90'
    */
   mode?:
@@ -59,7 +59,11 @@ interface TagBaseProps {
     | '60'
     | '70'
     | '80'
-    | '90';
+    | '90'
+    | 'danger'
+    | 'info'
+    | 'success'
+    | 'warning';
 
   /**
    * Callback triggered when the tag is deleted
