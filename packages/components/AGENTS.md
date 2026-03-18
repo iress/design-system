@@ -12,7 +12,7 @@ Depends on `@iress-oss/ids-tokens` and `@iress-oss/ids-theme-preset` — build t
 
 ## ⚠️ Long-running commands
 
-Do not run `dev`, `test`, `test:ui`, or `panda:watch` — they never exit. Use `test:coverage` instead.
+Do not run `dev`, `test`, `test:ui`, `storybook`, or `panda:watch` — they never exit. Use `test:coverage` or a build command (e.g. `build-storybook`, `build`) instead.
 
 ## Testing
 
@@ -53,7 +53,7 @@ Uses Panda CSS via `@iress-oss/ids-theme-preset`. Component styles are defined a
 
 ## Component conventions
 
-See `.github/instructions/component-creation.instructions.md` for the full creation guide. Props interfaces follow `{ComponentName}Props` naming.
+See `.github/instructions/component-creation.instructions.md` for the full creation guide. Props interfaces follow `Iress<ComponentName>Props` naming.
 
 ## AI context
 

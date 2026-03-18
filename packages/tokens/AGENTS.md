@@ -11,7 +11,7 @@ yarn workspace @iress-oss/ids-tokens run cssVars         # regenerate CSS variab
 
 ## ⚠️ Long-running commands
 
-Do not run `dev`, `test`, `watch`, or `watch:cssVars` — they never exit. Use `test:coverage` instead.
+Do not run `dev`, `test`, `watch`, `watch:cssVars`, or `storybook` — they never exit (any `storybook dev` server command is long-running). Use `test:coverage` instead.
 
 ## Testing
 

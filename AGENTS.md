@@ -16,9 +16,9 @@ Node 22, Yarn 4 (Berry). The `packageManager` field in `package.json` pins the e
 
 Any `dev`, `test` (without `:coverage`), or `watch` command starts a persistent process that **never exits**. Always use these non-blocking alternatives:
 
-| Instead of | Use |
-|---|---|
-| `yarn dev` / `yarn storybook` | `yarn build` (one-shot build) |
+| Instead of                    | Use                                                          |
+| ----------------------------- | ------------------------------------------------------------ |
+| `yarn dev` / `yarn storybook` | `yarn build` (one-shot build)                                |
 | `yarn workspace ... run test` | `yarn workspace ... run test:coverage` (runs once and exits) |
 
 ## Build
@@ -32,8 +32,7 @@ The `yarn monorepo` alias runs `yarn workspaces foreach -Ai --topological-dev --
 ## Testing
 
 ```bash
-yarn test                    # all packages
-yarn test:coverage           # with coverage
+yarn test:coverage           # all packages, with coverage
 yarn test:ci                 # coverage + threshold check
 
 # single package
@@ -61,9 +60,10 @@ yarn workspace @iress-oss/ids-components exec npx eslint src/components/Button/B
 ```
 
 ESLint 10 with flat config. Key rules:
+
 - TypeScript strict mode (`@typescript-eslint/no-explicit-any: error`)
 - Prettier enforced via eslint-plugin-prettier
-- `@typescript-eslint/consistent-type-imports` — prefer `import { type Foo }` inline style
+- `@typescript-eslint/consistent-type-imports` — prefer `import type { Foo }` inline style
 - Unused vars with `_` prefix are allowed
 
 ## Code style
@@ -90,7 +90,7 @@ Supporting: `storybook-config/`, `storybook-okta/`, `storybook-sandbox/`, `story
 
 ## PR guidelines
 
-- Run `yarn lint`, `yarn typecheck`, and `yarn test` before committing
+- Run `yarn lint`, `yarn typecheck`, and `yarn test:coverage` before committing
 - Husky pre-commit and pre-push hooks enforce linting and tests
 - Follow existing patterns and conventions in the codebase
 - Prefer minimal, targeted changes over over-engineering
@@ -102,7 +102,7 @@ GitHub Actions workflow in `.github/workflows/ci-cd.yml`. Runs on all pushes and
 ## Security
 
 - Never commit secrets or API keys
-- See `SECURITY.md` files in individual packages for security policies
+- See `SECURITY.md` in `packages/components/` and `packages/tokens/` for package-level security policies
 
 ## Additional context
 
