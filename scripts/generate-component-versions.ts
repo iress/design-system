@@ -37,12 +37,12 @@ function getVersion(relPath: string): string | undefined {
     if (!lastCommit) return undefined;
 
     const tag = exec(
-      `git tag --contains ${lastCommit} --list '${TAG_PREFIX}*' --sort=version:refname`,
+      `git tag --contains ${lastCommit} --list "${TAG_PREFIX}*" --sort=version:refname`,
     )
       .split('\n')
       .filter(Boolean)[0];
 
-    return tag ? tag.replace(TAG_PREFIX, '') : 'unknown';
+    return tag ? tag.replace(TAG_PREFIX, '') : undefined;
   } catch {
     return undefined;
   }

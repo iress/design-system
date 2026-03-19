@@ -13,6 +13,8 @@ vi.mock('storybook/internal/components', async (importOriginal) => ({
 }));
 
 // Mock React's use function to return mock components
+const mockComponentVersions: Record<string, string> = {};
+
 vi.mock('react', async (importOriginal) => {
   const actual = await importOriginal<typeof React>();
   return {
@@ -39,6 +41,7 @@ vi.mock('react', async (importOriginal) => {
         ) : (
           <span>{children}</span>
         ),
+      componentVersions: mockComponentVersions,
     }),
   };
 });
@@ -114,5 +117,47 @@ describe('ComponentStatus', () => {
 
     expect(screen.getByText('Updated')).toBeInTheDocument();
     expect(screen.getByText('Beta')).toBeInTheDocument();
+  });
+
+  it('renders version from componentVersions when title matches', () => {
+    mockComponentVersions['Button'] = '6.0.0-alpha.10';
+
+    const storiesMock: ModuleExports = {
+      default: { title: 'Components/Button', tags: [] },
+      __namedExportsOrder: [],
+    };
+
+    render(<ComponentStatus meta={storiesMock} />);
+
+    expect(screen.getByText('6.0.0-alpha.10')).toBeInTheDocument();
+    expect(screen.getByText(/Last updated in/)).toBeInTheDocument();
+
+    delete mockComponentVersions['Button'];
+  });
+
+  it('extracts component name from nested pattern title', () => {
+    mockComponentVersions['Form'] = '6.0.0-alpha.5';
+
+    const storiesMock: ModuleExports = {
+      default: { title: 'Patterns/Form/Rules', tags: [] },
+      __namedExportsOrder: [],
+    };
+
+    render(<ComponentStatus meta={storiesMock} />);
+
+    expect(screen.getByText('6.0.0-alpha.5')).toBeInTheDocument();
+
+    delete mockComponentVersions['Form'];
+  });
+
+  it('renders nothing when no tags and no version match', () => {
+    const storiesMock: ModuleExports = {
+      default: { title: 'Components/Unknown', tags: [] },
+      __namedExportsOrder: [],
+    };
+
+    const { container } = render(<ComponentStatus meta={storiesMock} />);
+
+    expect(container).toBeEmptyDOMElement();
   });
 });
