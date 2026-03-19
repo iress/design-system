@@ -196,13 +196,14 @@ export const LockedReadonlyData: Story = {
     input: {
       ...defaultInput,
       value: 'Luke Skywalker',
+      readOnly: 'locked',
     },
     readOnly: 'locked',
     required: true,
   },
   render: ({ input: { variant: _variant, ...input }, ...args }) => (
     <IressField {...args}>
-      <IressReadonly {...input} />
+      <IressInput {...input} />
     </IressField>
   ),
 };
