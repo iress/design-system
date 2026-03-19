@@ -99,17 +99,18 @@ const UpdatedTag = () => {
 
 /**
  * Extracts the component directory name from a Storybook meta title.
- * e.g. "Components/Button" → "Button", "Components/Select/SelectMenu" → "Select"
+ * e.g. "Components/Button" → "Button", "Patterns/Form/Rules" → "Form"
  */
 function getComponentName(meta?: ModuleExports): string | undefined {
   const title = (meta?.default as { title?: string })?.title;
   if (!title) return undefined;
   const parts = title.split('/');
-  // Title format is "Components/<ComponentName>" or "Components/<ComponentName>/Sub"
-  const componentsIndex = parts.indexOf('Components');
-  if (componentsIndex === -1 || componentsIndex + 1 >= parts.length)
-    return undefined;
-  return parts[componentsIndex + 1];
+  const prefixIndex = Math.max(
+    parts.indexOf('Components'),
+    parts.indexOf('Patterns'),
+  );
+  if (prefixIndex === -1 || prefixIndex + 1 >= parts.length) return undefined;
+  return parts[prefixIndex + 1];
 }
 
 const VersionTag = ({ version }: { version: string }) => {

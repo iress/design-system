@@ -1,9 +1,9 @@
 #!/usr/bin/env tsx
 
 /**
- * Generates a JSON map of component → last released version using git history.
+ * Generates a JSON map of component/pattern → last released version using git history.
  *
- * For each component directory under packages/components/src/components/,
+ * For each directory under packages/components/src/{components,patterns}/,
  * it finds the last commit that touched that directory, then finds the earliest
  * @iress-oss/ids-components release tag containing that commit.
  *
@@ -19,58 +19,53 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
-const COMPONENTS_DIR = path.join(
-  ROOT,
-  'packages/components/src/components',
-);
+const SRC_DIR = path.join(ROOT, 'packages/components/src');
 const OUTPUT = path.join(
   ROOT,
   'packages/components/.storybook/component-versions.json',
 );
 const TAG_PREFIX = '@iress-oss/ids-components@';
+const SCAN_DIRS = ['components', 'patterns'] as const;
 
 function exec(cmd: string): string {
   return execSync(cmd, { cwd: ROOT, encoding: 'utf-8' }).trim();
 }
 
-async function main() {
-  const entries = await fs.readdir(COMPONENTS_DIR, { withFileTypes: true });
-  const dirs = entries
-    .filter((e) => e.isDirectory())
-    .map((e) => e.name);
+function getVersion(relPath: string): string | undefined {
+  try {
+    const lastCommit = exec(`git log -1 --format=%H -- "${relPath}"`);
+    if (!lastCommit) return undefined;
 
+    const tag = exec(
+      `git tag --contains ${lastCommit} --list '${TAG_PREFIX}*' --sort=version:refname`,
+    )
+      .split('\n')
+      .filter(Boolean)[0];
+
+    return tag ? tag.replace(TAG_PREFIX, '') : 'unknown';
+  } catch {
+    return undefined;
+  }
+}
+
+async function main() {
   const versions: Record<string, string> = {};
 
-  for (const dir of dirs) {
-    const relPath = `packages/components/src/components/${dir}`;
+  for (const scanDir of SCAN_DIRS) {
+    const fullDir = path.join(SRC_DIR, scanDir);
+    const entries = await fs.readdir(fullDir, { withFileTypes: true });
 
-    try {
-      const lastCommit = exec(
-        `git log -1 --format=%H -- "${relPath}"`,
-      );
-
-      if (!lastCommit) continue;
-
-      const tag = exec(
-        `git tag --contains ${lastCommit} --list '${TAG_PREFIX}*' --sort=version:refname`,
-      )
-        .split('\n')
-        .filter(Boolean)[0];
-
-      if (tag) {
-        // Strip the package scope prefix to get just the version
-        versions[dir] = tag.replace(TAG_PREFIX, '');
-      } else {
-        versions[dir] = 'unknown';
-      }
-    } catch {
-      // Component has no git history (new/untracked) — skip
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue;
+      const relPath = `packages/components/src/${scanDir}/${entry.name}`;
+      const version = getVersion(relPath);
+      if (version) versions[entry.name] = version;
     }
   }
 
   await fs.writeFile(OUTPUT, JSON.stringify(versions, null, 2) + '\n');
   console.log(
-    `Generated component versions for ${Object.keys(versions).length} components → ${OUTPUT}`,
+    `Generated versions for ${Object.keys(versions).length} entries → ${OUTPUT}`,
   );
 }
 
