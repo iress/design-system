@@ -5,6 +5,7 @@ export const label = sva({
   base: {
     root: {
       display: 'block',
+      color: 'colour.neutral.90',
     },
     required: {
       color: 'colour.system.danger.text',
@@ -16,7 +17,6 @@ export const label = sva({
     },
     text: {
       textStyle: 'typography.body.md.medium',
-      color: 'colour.neutral.90',
     },
     lock: {
       mt: '-spacing.1',
