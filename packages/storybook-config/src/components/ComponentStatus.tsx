@@ -98,7 +98,32 @@ const UpdatedTag = () => {
 };
 
 /**
- * Component to display the status of a component in Storybook, such as beta, caution, or updated.
+ * Extracts the component directory name from a Storybook meta title.
+ * e.g. "Components/Button" → "Button", "Components/Select/SelectMenu" → "Select"
+ */
+function getComponentName(meta?: ModuleExports): string | undefined {
+  const title = (meta?.default as { title?: string })?.title;
+  if (!title) return undefined;
+  const parts = title.split('/');
+  // Title format is "Components/<ComponentName>" or "Components/<ComponentName>/Sub"
+  const componentsIndex = parts.indexOf('Components');
+  if (componentsIndex === -1 || componentsIndex + 1 >= parts.length)
+    return undefined;
+  return parts[componentsIndex + 1];
+}
+
+const VersionTag = ({ version }: { version: string }) => {
+  const { IressText } = use(IressStorybookContext);
+
+  return (
+    <IressText color="colour.neutral.70">
+      Last updated in <Badge status="neutral">{version}</Badge>
+    </IressText>
+  );
+};
+
+/**
+ * Component to display the status of a component in Storybook, such as beta, caution, updated, or last updated version.
  * It extracts status information from the story's tags and displays appropriate badges and messages.
  */
 export const ComponentStatus = ({
@@ -106,7 +131,8 @@ export const ComponentStatus = ({
   meta,
   ...restProps
 }: ComponentStatusProps) => {
-  const { IressDivider, IressInline } = use(IressStorybookContext);
+  const { IressDivider, IressInline, componentVersions } =
+    use(IressStorybookContext);
 
   if (!ofProp && !meta) {
     throw new Error('ComponentStatus requires either a story or stories prop');
@@ -119,7 +145,11 @@ export const ComponentStatus = ({
   const cautionTag = storyTags.find((tag) => tag.startsWith('caution:'));
   const updatedTag = storyTags.find((tag) => tag === 'updated');
 
-  if (!cautionTag && !betaTag && !updatedTag) {
+  const componentName = getComponentName(meta);
+  const version = componentName ? componentVersions?.[componentName] : undefined;
+  const hasStatusTags = betaTag || cautionTag || updatedTag;
+
+  if (!hasStatusTags && !version) {
     return null;
   }
 
@@ -131,6 +161,7 @@ export const ComponentStatus = ({
         {cautionTag && <CautionTag tag={cautionTag} />}
         {updatedTag && <UpdatedTag />}
       </IressInline>
+      {version && <VersionTag version={version} />}
     </>
   );
 };
