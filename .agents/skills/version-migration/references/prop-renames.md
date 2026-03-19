@@ -30,7 +30,7 @@ These prop names have been verified against the actual IDS v6 source. Using the 
 | `RadioGroup`  | `legendHidden`       | removed              | Use `IressFormField` `hiddenLabel` prop               |
 | `RadioGroup`  | `options`            | `children`           | Use `<IressRadio>` children instead of options array  |
 | `RadioGroup`  | `checked`            | `value`              | —                                                     |
-| `RadioGroup`  | `readOnly`           | `readOnly`           | Unchanged                                             |
+| `RadioGroup`  | `readOnly`           | `readOnly`           | Now accepts `boolean \| 'locked'`                     |
 | `Toggle`      | `legend`             | `children`           | —                                                     |
 | `Toggle`      | `legendHidden`       | `hiddenLabel`        | —                                                     |
 | `Toggle`      | `toggled`            | `checked`            | —                                                     |

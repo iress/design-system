@@ -80,7 +80,8 @@ export interface IressFormFieldProps<
   shouldUnregister?: boolean;
 
   /**
-   * Text to be displayed instead of input field.
+   * Renders the field in a read-only state, replacing the input with a
+   * static display of the current value. Validation rules are skipped.
    * Use `'locked'` when the field is read-only due to permissions.
    */
   readOnly?: FormControlReadOnly;

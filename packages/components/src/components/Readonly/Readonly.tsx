@@ -44,8 +44,8 @@ export interface IressReadonlyProps<
 
   /**
    * The readonly variant.
-   * - `'locked'`: Applies disabled-like styling while keeping the input
-   *   accessible to screen readers (renders a visible readonly input).
+   * - `'locked'`: Applies disabled-like styling (greyed out, `not-allowed`
+   *   cursor). The value is still submitted via a hidden input.
    */
   variant?: FormControlReadOnly;
 }

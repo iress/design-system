@@ -91,7 +91,7 @@ This document covers changes specific to migrating from IDS v5 (`@iress-oss/ids-
 | `errorMessages` | `errorMessages`     | Unchanged                              |
 | `optional`      | removed             | Use `required={false}` instead         |
 | `required`      | `required`          | Unchanged                              |
-| `readOnly`      | `readOnly`          | Unchanged                              |
+| `readOnly`      | `readOnly`          | Now accepts `boolean \| 'locked'`. Use `'locked'` when the field is read-only due to permissions |
 | `htmlFor`       | `htmlFor`           | Unchanged                              |
 | —               | `horizontal`        | New: inline label/input layout         |
 | —               | `labelWidth`        | New: label width in horizontal mode    |
@@ -155,6 +155,7 @@ This document covers changes specific to migrating from IDS v5 (`@iress-oss/ids-
 | v5 prop | v6 prop   | Notes                                                                                                |
 | ------- | --------- | ---------------------------------------------------------------------------------------------------- |
 | —       | `actions` | New: array of button props rendered alongside the readonly value (e.g. edit/save toggles)            |
+| —       | `variant` | New: set to `'locked'` for disabled-like styling when the value is read-only due to permissions      |
 | —       | —         | ⚠️ **Breaking:** DOM structure changed — inner content is now wrapped in an additional `wrapper` div inside `root`. CSS selectors targeting direct children of the root may need updating |
 
 ## Styling Changes

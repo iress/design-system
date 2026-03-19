@@ -37,9 +37,11 @@ export type FloatingUIAligns = 'auto' | Placement;
 export type FormControlValue = string | number | boolean | null;
 
 /**
- * Read-only state for form controls.
- * - `true`: readonly value, generally informational
- * - `'locked'`: readonly because user lacks edit permission
+ * Shared readonly type for form controls.
+ *
+ * - `true`  — the field is readonly, generally informational.
+ * - `'locked'` — the field is readonly because the user lacks edit
+ *   permission. Form controls render the "locked" visual treatment.
  */
 export type FormControlReadOnly = boolean | 'locked';
 

@@ -182,7 +182,7 @@ export const ReadonlyData: Story = {
     readOnly: true,
     required: true,
   },
-  render: ({ input, ...args }) => (
+  render: ({ input: { variant: _variant, ...input }, ...args }) => (
     <IressField {...args}>
       <IressReadonly {...input} />
     </IressField>
@@ -200,7 +200,7 @@ export const LockedReadonlyData: Story = {
     readOnly: 'locked',
     required: true,
   },
-  render: ({ input, ...args }) => (
+  render: ({ input: { variant: _variant, ...input }, ...args }) => (
     <IressField {...args}>
       <IressReadonly {...input} />
     </IressField>
