@@ -9,7 +9,7 @@ export const radio = sva({
       color: 'colour.primary.fill',
       display: 'flex',
       position: 'relative',
-      textStyle: 'typography.body.md.medium',
+      textStyle: 'typography.body.md',
       '&:has(input:disabled)': {
         cursor: 'not-allowed',
         '& label': {
