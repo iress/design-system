@@ -23,10 +23,11 @@ Translate natural language UI descriptions into IDS (Iress Design System) compon
 
 1. **Identify the UI elements** — Break the description into components: actions (buttons), inputs (fields), layout (stacks, grids), content (text, cards), overlays (modals, slideouts), navigation
 2. **Map to IDS components** — Use the [component mapping](references/component-mapping.md) to find the right IDS component for each element
-3. **Apply layout** — Wrap elements in `IressStack` (vertical), `IressInline` (horizontal), or `IressRow`/`IressCol` (grid). Always make grids responsive with `span={{ xs: 12, md: ... }}`
-4. **Add responsive behaviour** — Even if the description only mentions desktop, stack columns on mobile and relocate secondary content to `IressSlideout` or collapsible sections
-5. **Apply styling** — Use [styling props](references/styling-props.md) for spacing, colour, and typography. Use spacing tokens (0–10) for `gap` props
-6. **Verify output** — Check that all imports resolve, no raw HTML is used where IDS components exist, grid layouts use responsive `span` values, and no common anti-patterns are present (disabled buttons, slot attributes, redundant textStyle)
+3. **Verify component capabilities** — Before recommending a component, read its `.ai/components/<name>.md` doc (in `node_modules/@iress-oss/ids-components/.ai/components/`) to verify it supports the required features (async, filtering, validation, etc.)
+4. **Apply layout** — Wrap elements in `IressStack` (vertical), `IressInline` (horizontal), or `IressRow`/`IressCol` (grid). Always make grids responsive with `span={{ xs: 12, md: ... }}`
+5. **Add responsive behaviour** — Even if the description only mentions desktop, stack columns on mobile and relocate secondary content to `IressSlideout` or collapsible sections
+6. **Apply styling** — Use [styling props](references/styling-props.md) for spacing, colour, and typography. Use spacing tokens (0–10) for `gap` props
+7. **Verify output** — Check that all imports resolve, no raw HTML is used where IDS components exist, grid layouts use responsive `span` values, and no common anti-patterns are present (disabled buttons, slot attributes, redundant textStyle)
 
 ## Setup
 

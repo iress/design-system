@@ -17,15 +17,20 @@
 | Description              | IDS Component                       | Example                                                                                                                        |
 | ------------------------ | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | Labelled text input      | `IressField` + `IressInput`         | See Form example below                                                                                                         |
-| Select dropdown          | `IressField` + `IressSelect`        | `<IressField label="Country"><IressSelect>...</IressSelect></IressField>`                                                      |
+| Select dropdown (static or async) | `IressField` + `IressSelect` | `<IressField label="Country"><IressSelect>...</IressSelect></IressField>` — supports static options and async loading via an `options` function |
+| Freetext input with suggestions  | `IressField` + `IressAutocomplete` | `<IressField label="Search"><IressAutocomplete /></IressField>` — allows any text input; suggestions are optional |
 | Currency input           | `IressField` + `IressInputCurrency` | `<IressField label="Amount"><IressInputCurrency /></IressField>`                                                               |
 | Checkbox                 | `IressCheckbox`                     | `<IressCheckbox label="I agree" />`                                                                                            |
 | Checkbox group           | `IressCheckboxGroup`                | `<IressCheckboxGroup label="Options"><IressCheckbox label="A" /><IressCheckbox label="B" /></IressCheckboxGroup>`              |
 | Radio buttons            | `IressRadioGroup` + `IressRadio`    | `<IressRadioGroup label="Choice"><IressRadio label="Yes" value="yes" /><IressRadio label="No" value="no" /></IressRadioGroup>` |
 | Toggle switch            | `IressToggle`                       | `<IressToggle label="Enable" />`                                                                                               |
 | Slider / range           | `IressSlider`                       | `<IressSlider min={0} max={100} />`                                                                                            |
-| Autocomplete / typeahead | `IressAutocomplete`                 | See component docs                                                                                                             |
 | Read-only display        | `IressReadonly`                     | `<IressReadonly label="Status" value="Active" />` — supports `actions` prop for inline action buttons (e.g. edit toggle). Use `variant="locked"` when the value is read-only due to permissions |
+
+### Select vs Autocomplete Decision Guide
+
+- **Need to restrict to valid options?** → `IressSelect` — supports static options and async loading via an `options` function. Use this for most selection use cases. Always read the component doc to understand filtering behaviour for your use case.
+- **Need freetext with optional suggestions?** → `IressAutocomplete` — allows any text input; suggestions are offered but not enforced.
 
 ## Layout
 
