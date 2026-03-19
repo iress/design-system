@@ -11,7 +11,7 @@ import { getFormControlValueAsStringIfDefined } from '@/helpers/form/getFormCont
 import { type IressInputProps } from '@/components/Input';
 import { readonly } from './Readonly.styles';
 import { css, cx } from '@/styled-system/css';
-import { type FormControlValue } from '@/types';
+import type { FormControlReadOnly, FormControlValue } from '@/types';
 import { IressSpinner } from '../Spinner';
 import { GlobalCSSClass } from '@/enums';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
@@ -27,8 +27,10 @@ export interface IressReadonlyProps<
   | 'onChange'
   | 'onInput'
   | 'placeholder'
+  | 'readOnly'
   | 'rows'
   | 'color'
+  | 'variant'
 > {
   /**
    * The formatted value. If not provided, the value will be displayed.
@@ -39,6 +41,13 @@ export interface IressReadonlyProps<
    * Make prepend/append element closer to the input content.
    */
   inline?: boolean;
+
+  /**
+   * The readonly variant.
+   * - `'locked'`: Applies disabled-like styling (greyed out, `not-allowed`
+   *   cursor). The value is still submitted via a hidden input.
+   */
+  variant?: FormControlReadOnly;
 }
 
 const Readonly = <T extends FormControlValue = string | number>(
@@ -56,6 +65,7 @@ const Readonly = <T extends FormControlValue = string | number>(
     value,
     inline,
     alignRight,
+    variant,
     ...restProps
   }: IressReadonlyProps<T>,
   ref: Ref<HTMLInputElement>,
@@ -65,7 +75,8 @@ const Readonly = <T extends FormControlValue = string | number>(
     defaultValue,
   });
 
-  const classes = readonly.raw({ inline, width, alignRight });
+  const isLocked = variant === 'locked';
+  const classes = readonly.raw({ inline, width, alignRight, locked: isLocked });
 
   const validDefaultValue = getFormControlValueAsStringIfDefined(defaultValue);
   const validValue = getFormControlValueAsStringIfDefined(value);

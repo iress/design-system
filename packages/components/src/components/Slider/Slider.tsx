@@ -17,14 +17,18 @@ import {
 import { useIdIfNeeded } from '../../hooks';
 import { useControlledState } from '@/hooks/useControlledState';
 import { IressReadonly } from '../Readonly';
-import { type IressStyledProps, type IressUnstyledProps } from '@/types';
+import {
+  type FormControlReadOnly,
+  type IressStyledProps,
+  type IressUnstyledProps,
+} from '@/types';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
 
 export interface IressSliderProps extends Omit<
   IressStyledProps<'input'>,
-  'children' | 'onInput' | 'onChange'
+  'children' | 'onInput' | 'onChange' | 'readOnly'
 > {
   /**
    * Initial value of the slider. Used for uncontrolled sliders.
@@ -37,7 +41,7 @@ export interface IressSliderProps extends Omit<
   formatValue?: (
     value: number,
     tick?: SliderTickLabelValue,
-    readOnly?: boolean,
+    readOnly?: FormControlReadOnly,
   ) => ReactNode;
 
   /**
@@ -70,7 +74,7 @@ export interface IressSliderProps extends Omit<
   /**
    * If `true`, the user cannot modify the value.
    */
-  readOnly?: boolean;
+  readOnly?: FormControlReadOnly;
 
   /**
    * Sets the step value of the slider.
@@ -182,6 +186,7 @@ const Slider = (
         data-testid={propagateTestid(dataTestId, 'slider')}
         name={restProps?.name}
         value={value}
+        variant={readOnly}
       >
         {getValueLabel()}
       </IressReadonly>

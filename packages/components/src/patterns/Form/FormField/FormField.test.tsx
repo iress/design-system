@@ -172,6 +172,33 @@ describe('IressFormField', () => {
     expect(onError).not.toHaveBeenCalled();
   });
 
+  it('does not apply validation rules when readOnly is "locked"', async () => {
+    const onSubmit = vi.fn();
+    const onError = vi.fn();
+
+    render(
+      <IressForm id="iress-form" onSubmit={onSubmit} onError={onError}>
+        <IressFormField
+          label="Label"
+          name="name"
+          readOnly="locked"
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          rules={{
+            required: 'This field is required',
+            minLength: { value: 5, message: 'Minimum 5 characters' },
+          }}
+        />
+        <IressButton type="submit">Submit</IressButton>
+      </IressForm>,
+    );
+
+    const submit = screen.getByRole('button', { name: 'Submit' });
+    await userEvent.click(submit);
+
+    expect(onSubmit).toHaveBeenCalledWith({ name: undefined });
+    expect(onError).not.toHaveBeenCalled();
+  });
+
   it('renders supplementary content via renderSupplementary prop', async () => {
     render(
       <IressForm id="iress-form">

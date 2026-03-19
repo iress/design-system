@@ -1,7 +1,7 @@
 import { sva } from '@/styled-system/css';
 
 export const label = sva({
-  slots: ['root', 'required', 'text'],
+  slots: ['root', 'required', 'text', 'lock'],
   base: {
     root: {
       display: 'block',
@@ -16,6 +16,11 @@ export const label = sva({
     },
     text: {
       textStyle: 'typography.body.md.medium',
+    },
+    lock: {
+      mt: '-spacing.1',
+      mr: 'spacing.2',
+      fontSize: '[.7em]',
     },
   },
   compoundVariants: [

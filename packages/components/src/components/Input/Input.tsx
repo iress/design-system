@@ -25,7 +25,11 @@ import {
 import { IressSpinner } from '../Spinner';
 import { useControlledState } from '@/hooks/useControlledState';
 import { IressReadonly } from '../Readonly';
-import { type FormControlValue, type FormElementWidths } from '@/types';
+import {
+  type FormControlReadOnly,
+  type FormControlValue,
+  type FormElementWidths,
+} from '@/types';
 import { cx } from '@/styled-system/css';
 import { input } from './Input.styles';
 import { splitCssProps, styled } from '@/styled-system/jsx';
@@ -39,7 +43,10 @@ import {
 export type IressInputProps<
   T extends FormControlValue = string | number,
   TRows extends number | undefined = undefined,
-> = Omit<InputBaseProps<TRows>, 'defaultValue' | 'onChange' | 'value'> & {
+> = Omit<
+  InputBaseProps<TRows>,
+  'defaultValue' | 'onChange' | 'readOnly' | 'value'
+> & {
   /**
    * Actions to display in the input field, rendered inside the input on the right. These will be rendered with opinionated styling.
    * If you want to use custom buttons or controls, use the `append` prop instead.
@@ -92,6 +99,12 @@ export type IressInputProps<
    * Content to prepended to the input field, usually an icon.
    */
   prepend?: ReactNode;
+
+  /**
+   * Renders the input as read-only.
+   * Use `'locked'` when the value is read-only because of permissions.
+   */
+  readOnly?: FormControlReadOnly;
 
   /**
    * The value of the input. Can be a string or a number. Use for controlled inputs.
@@ -233,6 +246,7 @@ const Input = <
         alignRight={alignRight}
         append={append}
         className={className}
+        variant={readOnly}
       >
         {displayValue}
       </IressReadonly>

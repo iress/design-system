@@ -3,7 +3,7 @@ import { IressLabel } from '../Label';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { toArray } from '@helpers/formatting/toArray';
 import { type LabelBaseProps } from '../Label/LabelBase/LabelBase';
-import { type IressStyledProps } from '@/types';
+import { type FormControlReadOnly, type IressStyledProps } from '@/types';
 import { type ValidationMessageObj } from '@/interfaces';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { field } from './Field.styles';
@@ -64,8 +64,9 @@ export type IressFieldProps<
 
     /**
      * Renders the group in a read-only state (no asterisk symbol).
+     * Use `'locked'` when the control is read-only due to permissions.
      */
-    readOnly?: boolean;
+    readOnly?: FormControlReadOnly;
 
     /**
      * Removes the reserved space for error messages, allowing fields to stack with narrower gaps.
@@ -114,6 +115,7 @@ export const IressField = ({
     removeErrorMargin,
   });
   const [styleProps, nonStyledProps] = splitCssProps(restProps);
+  const isReadOnly = !!readOnly;
 
   const renderLabelWithHint = () => {
     const labelContent = (
@@ -122,7 +124,8 @@ export const IressField = ({
         data-testid={propagateTestid(dataTestId, 'label')}
         hiddenLabel={hiddenLabel}
         htmlFor={htmlFor}
-        required={readOnly ? false : !!required}
+        readOnly={readOnly}
+        required={isReadOnly ? false : !!required}
       >
         {label}
         {horizontal && hint && <FieldHintIcon hint={hint} />}

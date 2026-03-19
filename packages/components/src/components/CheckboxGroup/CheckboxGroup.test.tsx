@@ -185,6 +185,18 @@ describe('IressCheckboxGroup', () => {
         const checkboxGroup = screen.getByRole('group');
         expect(checkboxGroup.innerHTML).toBe('');
       });
+
+      it('supports readOnly="locked"', () => {
+        const screen = renderComponent({
+          value: ['home'],
+          readOnly: 'locked',
+        });
+
+        expect(screen.queryByRole('checkbox')).not.toBeInTheDocument();
+        expect(screen.getByText('Buying my first home')).toBeInTheDocument();
+        const input = screen.container.querySelector(`input[value="home"]`);
+        expect(input).toBeInTheDocument();
+      });
     });
 
     describe('value', () => {

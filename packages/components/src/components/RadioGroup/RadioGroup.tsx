@@ -15,7 +15,11 @@ import { useControlledState } from '@/hooks/useControlledState';
 
 import { type ReactNode } from 'react';
 import { type ReactHookFormCompatibleRef } from '@/interfaces';
-import { type FormControlValue, type IressStyledProps } from '@/types';
+import {
+  type FormControlReadOnly,
+  type FormControlValue,
+  type IressStyledProps,
+} from '@/types';
 import { radioGroup } from './RadioGroup.styles';
 import { cx } from '@/styled-system/css';
 import { styled } from '@/styled-system/jsx';
@@ -62,7 +66,7 @@ export interface IressRadioGroupProps<T = FormControlValue> extends Omit<
   /**
    * Renders a readOnly radio group.
    */
-  readOnly?: boolean;
+  readOnly?: FormControlReadOnly;
 
   /**
    * Value of radio group when in controlled mode.

@@ -69,6 +69,12 @@ You can also pass `readOnly` prop to remove the asterisk symbol (\*) even when t
 
 <ComponentExample of={ComponentStories.ReadonlyData} />
 
+Use `readOnly="locked"` when a value is read-only due to user permissions.
+This variation adds a lock icon to the label for a stronger visual cue while
+keeping the field value and label relationship accessible.
+
+<ComponentExample of={ComponentStories.LockedReadonlyData} />
+
 ### Supplementary
 
 The `supplementary` prop can be used to display additional information about the field.

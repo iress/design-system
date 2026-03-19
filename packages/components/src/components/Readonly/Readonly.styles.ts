@@ -198,6 +198,28 @@ export const readonly = sva({
         },
       },
     },
+    locked: {
+      true: {
+        wrapper: {
+          border: 'input',
+          borderRadius: 'radius.system.form',
+          backgroundColor: 'colour.neutral.20',
+          cursor: 'not-allowed',
+        },
+        formControl: {
+          backgroundColor: 'transparent',
+          color: 'colour.neutral.70',
+          cursor: 'not-allowed',
+          paddingInline: 'spacing.3',
+          paddingBlock: 'spacing.1',
+        },
+        addon: {
+          backgroundColor: 'transparent',
+          color: 'colour.neutral.60',
+          cursor: 'not-allowed',
+        },
+      },
+    },
   },
   defaultVariants: {},
 });

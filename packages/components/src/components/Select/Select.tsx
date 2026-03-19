@@ -36,7 +36,12 @@ import type {
   LabelValueMeta,
   ReactHookFormCompatibleRef,
 } from '@/interfaces';
-import type { FloatingUIAligns, Breakpoints, FormControlValue } from '@/types';
+import type {
+  FloatingUIAligns,
+  Breakpoints,
+  FormControlReadOnly,
+  FormControlValue,
+} from '@/types';
 import {
   IressPopover,
   type IressPopoverProps,
@@ -176,7 +181,7 @@ export type IressSelectProps<
   /**
    * Renders the select as read-only.
    */
-  readOnly?: boolean;
+  readOnly?: FormControlReadOnly;
 
   /**
    * Completely customise the rendering of the hidden input.
@@ -552,7 +557,11 @@ const Select = <
 
   if (readOnly) {
     return (
-      <IressReadonly value={getValuesString()} ref={hiddenInputRef}>
+      <IressReadonly
+        value={getValuesString()}
+        ref={hiddenInputRef}
+        variant={readOnly}
+      >
         {getLabelsString(', ')}
       </IressReadonly>
     );

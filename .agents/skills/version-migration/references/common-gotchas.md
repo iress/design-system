@@ -74,6 +74,7 @@
 | `IressSelect` `value` not selecting | Passing a string instead of `LabelValueMeta`     | v6 now accepts plain strings for `value`/`defaultValue` — ensure the string matches an option's `value` field. A console warning is logged if the value can't be resolved against the available options |
 | `IressPopover` content has extra padding | Default padding added in v6                  | Popover content now has `padding: spacing.4` by default. Override with `contentStyle={{ padding: 'spacing.0' }}` if you were providing your own inner padding |
 | `IressReadonly` CSS selectors broken | DOM structure changed                            | Inner content is now wrapped in an additional `wrapper` div inside `root`. Update CSS selectors targeting direct children of the readonly root element |
+| Form control `readOnly` type changed | `readOnly` now accepts `boolean \| 'locked'`    | Use `readOnly="locked"` when the field is read-only due to permissions. This applies locked styling via `IressReadonly variant="locked"` |
 | `IressModal` `title` not rendering   | Prop renamed                                     | Use `heading` prop                                                   |
 | `IressSlideout` `eleToPush` selector | Needs valid CSS selector or element ref          | Pass string selector, HTMLElement, or React ref                      |
 

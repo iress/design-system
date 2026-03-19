@@ -135,6 +135,16 @@ describe('IressInput', () => {
       expect(screen.getByText('Hello')).toBeInTheDocument();
       expect(input).toBeInTheDocument();
     });
+
+    it('supports readOnly="locked"', () => {
+      const screen = render(
+        <IressInput defaultValue="Hello" readOnly="locked" />,
+      );
+      const input = screen.container.querySelector('input[value="Hello"]');
+
+      expect(screen.getByText('Hello')).toBeInTheDocument();
+      expect(input).toBeInTheDocument();
+    });
   });
 
   describe('formatter', () => {

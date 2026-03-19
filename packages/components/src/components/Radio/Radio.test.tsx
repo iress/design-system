@@ -136,6 +136,19 @@ describe('IressRadio', () => {
         const input = screen.container.querySelector(`input[value="radio"]`);
         expect(input).not.toBeInTheDocument();
       });
+
+      it('supports readOnly="locked" when checked', () => {
+        const screen = render(
+          <IressRadio value="radio" defaultChecked readOnly="locked">
+            Label
+          </IressRadio>,
+        );
+
+        expect(screen.queryByRole('radio')).not.toBeInTheDocument();
+        expect(screen.getByText('Label')).toBeInTheDocument();
+        const input = screen.container.querySelector(`input[value="radio"]`);
+        expect(input).toBeInTheDocument();
+      });
     });
 
     describe('required', () => {
