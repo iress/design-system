@@ -52,6 +52,7 @@ env:
     packages/*/build
     packages/*/dist
     packages/*/llms.txt
+    packages/components/.storybook/component-versions.json
     packages/components/src/styled-system
     packages/tokens/src/generated
 

@@ -2,7 +2,7 @@ import * as componentMapping from '@/main';
 import { getPreview } from '@iress-oss/ids-storybook-config/preview';
 import type { Preview } from '@storybook/react-vite';
 import '../src/styled-system/styles.css';
-import componentVersions from './component-versions.json';
+import componentVersions from './component-versions.json' with { type: 'json' };
 
 const basePreview = getPreview({
   docsProps: {

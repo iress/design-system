@@ -15,7 +15,7 @@
     "**/*.css"
   ],
   "scripts": {
-    "build": "yarn panda:prepare && vite build",
+    "build": "yarn panda:prepare && yarn components:versions && vite build",
     "build-storybook": "yarn components:versions && storybook build --stats-json",
     "clean": "rimraf dist coverage src/styled-system",
     "dev": "concurrently \"yarn workspace @iress-oss/ids-theme-preset dev\" \"yarn panda:watch\" \"yarn storybook\"",
