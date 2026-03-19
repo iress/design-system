@@ -120,7 +120,7 @@ describe('ComponentStatus', () => {
   });
 
   it('renders version from componentVersions when title matches', () => {
-    mockComponentVersions['Button'] = '6.0.0-alpha.10';
+    mockComponentVersions.Button = '6.0.0-alpha.10';
 
     const storiesMock: ModuleExports = {
       default: { title: 'Components/Button', tags: [] },
@@ -132,11 +132,11 @@ describe('ComponentStatus', () => {
     expect(screen.getByText('6.0.0-alpha.10')).toBeInTheDocument();
     expect(screen.getByText(/Last updated in/)).toBeInTheDocument();
 
-    delete mockComponentVersions['Button'];
+    delete mockComponentVersions.Button;
   });
 
   it('extracts component name from nested pattern title', () => {
-    mockComponentVersions['Form'] = '6.0.0-alpha.5';
+    mockComponentVersions.Form = '6.0.0-alpha.5';
 
     const storiesMock: ModuleExports = {
       default: { title: 'Patterns/Form/Rules', tags: [] },
@@ -147,7 +147,7 @@ describe('ComponentStatus', () => {
 
     expect(screen.getByText('6.0.0-alpha.5')).toBeInTheDocument();
 
-    delete mockComponentVersions['Form'];
+    delete mockComponentVersions.Form;
   });
 
   it('renders nothing when no tags and no version match', () => {
