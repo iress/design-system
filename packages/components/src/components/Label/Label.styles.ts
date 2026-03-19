@@ -16,6 +16,7 @@ export const label = sva({
     },
     text: {
       textStyle: 'typography.body.md.medium',
+      color: 'colour.neutral.90',
     },
     lock: {
       mt: '-spacing.1',
