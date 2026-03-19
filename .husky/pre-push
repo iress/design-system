@@ -9,7 +9,7 @@ yarn install --immutable
 
 # Find the base branch (try common names in order)
 BASE_BRANCH=""
-for branch in origin/main origin/5.x main 5.x; do
+for branch in origin/5.x 5.x; do
   if git rev-parse --verify "$branch" >/dev/null 2>&1; then
     BASE_BRANCH="$branch"
     break
