@@ -200,11 +200,18 @@ export const IressStorybook = ({
   ...props
 }: IressStorybookProps) => {
   const { IressProvider, IressText } = componentMapping;
+  const docsParams = (
+    props.context?.projectAnnotations?.parameters as Record<string, unknown>
+  )?.docs as Record<string, unknown> | undefined;
+  const componentVersions = docsParams?.componentVersions as
+    | Record<string, string>
+    | undefined;
 
   return (
     <IressStorybookContext
       value={{
         ...componentMapping,
+        componentVersions,
       }}
     >
       <IressStorybookStyles />

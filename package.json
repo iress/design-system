@@ -74,6 +74,7 @@
     "translate:skills": "tsx ./scripts/translate-skills.ts",
     "generate:token-reference": "tsx ./scripts/generate-token-reference.ts",
     "generate:llms-txt": "tsx ./scripts/generate-llms-txt.ts",
+    "components:versions": "tsx ./scripts/generate-component-versions.ts",
     "typecheck": "yarn monorepo run typecheck",
     "monorepo": "yarn workspaces foreach -Ai --topological-dev --exclude=@iress/design-system-monorepo"
   },

@@ -27,6 +27,13 @@ export interface PreviewProps {
    * Configuration for the Storybook Sandbox addon.
    */
   sandboxConfig?: AddonConfig;
+
+  /**
+   * A map of component directory names to the version they were last updated in.
+   * Generated at build time by `scripts/generate-component-versions.ts`.
+   * When provided, the version is displayed on each component's docs page.
+   */
+  componentVersions?: Record<string, string>;
 }
 
 /**
@@ -36,6 +43,7 @@ export interface PreviewProps {
 export const getPreview = ({
   docsProps,
   sandboxConfig,
+  componentVersions,
 }: PreviewProps): Preview => {
   const Provider = docsProps?.componentMapping?.IressProvider ?? IressProvider;
 
@@ -78,6 +86,7 @@ export const getPreview = ({
         // - https://github.com/storybookjs/storybook/pull/30179
         // We also have to come up for a way to open in Sandbox again, which might just be another button
         codePanel: true,
+        componentVersions,
         container: (containerProps: IressStorybookProps) => (
           <IressStorybook {...containerProps} {...docsProps} />
         ),

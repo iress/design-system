@@ -36,6 +36,7 @@ export interface IressStorybookComponentMapping {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   IressText: ComponentType<IressTextProps<any>>;
   useBreakpoint: typeof useBreakpoint;
+  componentVersions?: Record<string, string>;
 }
 
 export const COMPONENT_MAPPING_DEFAULT: IressStorybookComponentMapping = {
