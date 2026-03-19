@@ -127,6 +127,15 @@ describe('IressField', () => {
         expect(input).toBeInTheDocument();
         expect(screen.queryByText(/Required/)).not.toBeInTheDocument();
       });
+
+      it('shows a lock icon when readOnly is "locked"', () => {
+        const screen = renderComponent({
+          readOnly: 'locked',
+        });
+
+        const lockedIcon = screen.getByLabelText('Locked field');
+        expect(lockedIcon).toBeInTheDocument();
+      });
     });
   });
 

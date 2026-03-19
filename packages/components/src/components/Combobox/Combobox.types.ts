@@ -4,6 +4,7 @@ import {
   type IressInputHTMLAttributes,
   type LabelValueMeta,
 } from '@/interfaces';
+import { type FormControlReadOnly } from '@/types';
 import {
   type AutocompleteSearchHookReturn,
   type IressAutocompleteProps,
@@ -21,7 +22,7 @@ import {
 
 export interface IressComboboxProps extends Omit<
   IressAutocompleteProps,
-  'defaultValue' | 'onChange' | 'value'
+  'defaultValue' | 'onChange' | 'readOnly' | 'value'
 > {
   /**
    * Value of selected option for uncontrolled combobox.
@@ -43,6 +44,12 @@ export interface IressComboboxProps extends Omit<
     e?: SyntheticEvent<InputBaseElement>,
     value?: LabelValueMeta,
   ) => void;
+
+  /**
+   * Renders the combobox as read-only.
+   * Use `'locked'` when the field is read-only due to permissions.
+   */
+  readOnly?: FormControlReadOnly;
 
   /**
    * Options data set, the available options that the user can select from.

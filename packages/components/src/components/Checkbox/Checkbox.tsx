@@ -120,6 +120,7 @@ const Checkbox = (
         {...restProps}
         width={undefined}
         value={getFormControlValueAsString(value)}
+        variant={isReadonly}
       >
         {children}
       </IressReadonly>

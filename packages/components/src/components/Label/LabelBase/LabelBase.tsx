@@ -4,6 +4,7 @@ import { GlobalCSSClass } from '@/enums';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { type LabelBaseProps } from './LabelBase.types';
 import { useState } from 'react';
+import { IressIcon } from '@/components/Icon';
 
 export const LabelBase = ({
   append,
@@ -13,6 +14,7 @@ export const LabelBase = ({
   'data-testid': dataTestId,
   hiddenLabel = false,
   optional,
+  readOnly,
   required,
   ...restProps
 }: LabelBaseProps) => {
@@ -39,6 +41,13 @@ export const LabelBase = ({
       data-name={name}
       data-testid={dataTestId}
     >
+      {readOnly === 'locked' && !hiddenLabel && (
+        <IressIcon
+          name="lock"
+          screenreaderText="Locked field"
+          className={styles.lockedIcon}
+        />
+      )}
       {required && (
         <>
           {!hiddenLabel && (

@@ -1,5 +1,6 @@
 import { type WithDataAttributes } from '@/interfaces';
 import { type ElementType, type ReactNode } from 'react';
+import { type FormControlReadOnly } from '@/types';
 
 export type LabelBaseProps<T = ElementType, U = LabelHTMLAttributes<T>> = U & {
   /**
@@ -36,6 +37,12 @@ export type LabelBaseProps<T = ElementType, U = LabelHTMLAttributes<T>> = U & {
    * When set to true, the 'required asterisk (*)' is displayed next to the label text.
    */
   required?: boolean;
+
+  /**
+   * Renders the label in a read-only state.
+   * Use `'locked'` to show a lock indicator when the related field is permission-locked.
+   */
+  readOnly?: FormControlReadOnly;
 };
 
 type LabelHTMLAttributes<T = HTMLLabelElement> = WithDataAttributes<

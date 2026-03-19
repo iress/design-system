@@ -28,3 +28,17 @@ You can pass in stylised content that represents the value by using the `childre
 You can make the prepend/append element closer to the input content using the `inline` prop.
 
 <ComponentExample of={ComponentStories.InlineStyle} meta={ComponentStories} />
+
+### Locked
+
+Use `variant="locked"` to indicate the value is read-only due to permissions.
+This applies disabled-like styling (greyed out, `not-allowed` cursor) and
+still submits the value via a hidden input, but the locked field itself is
+not focusable or announced as an editable form control by assistive
+technologies.
+
+When form controls such as `IressInput` or `IressSelect` are rendered with
+`readOnly="locked"`, they automatically pass the locked variant through to
+`IressReadonly`.
+
+<ComponentExample of={ComponentStories.Locked} meta={ComponentStories} />

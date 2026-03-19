@@ -723,6 +723,24 @@ describe('IressRichSelect', () => {
         ).toBeInTheDocument();
         expect(input).toBeInTheDocument();
       });
+
+      it('supports readonly="locked"', () => {
+        const screen = render(
+          <IressRichSelect
+            defaultValue={MOCK_LABEL_VALUES[0]}
+            options={MOCK_LABEL_VALUES}
+            readonly="locked"
+          />,
+        );
+        const input = screen.container.querySelector(
+          `input[value="${MOCK_LABEL_VALUES[0].value}"]`,
+        );
+
+        expect(
+          screen.getByText(MOCK_LABEL_VALUES[0].label),
+        ).toBeInTheDocument();
+        expect(input).toBeInTheDocument();
+      });
     });
 
     describe('renderHiddenInput', () => {

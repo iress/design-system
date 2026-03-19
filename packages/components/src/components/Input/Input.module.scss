@@ -104,3 +104,18 @@
     border-inline-end: none;
   }
 }
+
+
+.locked {
+  --iress-border-color: var(--iress-input-readonly-locked-border-color, var(--iress-default-form-border-color));
+  --iress-background-color: var(--iress-input-readonly-locked-background-color, var(--iress-default-background-color-alt));
+  --iress-text-color: var(--iress-input-readonly-locked-text-color, var(--iress-default-text-color--light));
+
+  .wrapper {
+    cursor: not-allowed;
+  }
+
+  .readonlyControl {
+    cursor: not-allowed;
+  }
+}

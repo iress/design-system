@@ -21,6 +21,16 @@ describe('IressLabel', () => {
     expect(label.tagName).toBe('STRONG');
   });
 
+  it('shows lock icon when readOnly is "locked"', () => {
+    const screen = render(
+      <IressLabel htmlFor="bacon" readOnly="locked">
+        Eggs
+      </IressLabel>,
+    );
+
+    expect(screen.getByLabelText('Locked field')).toBeInTheDocument();
+  });
+
   describe('accessibility', () => {
     it('should not have basic accessibility issues', async () => {
       const { container } = render(

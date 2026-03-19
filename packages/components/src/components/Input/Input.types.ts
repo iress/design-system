@@ -1,5 +1,9 @@
 import { type FormElementWidth } from '@/enums';
-import { type FormControlValue, type FormElementWidths } from '@/types';
+import {
+  type FormControlReadOnly,
+  type FormControlValue,
+  type FormElementWidths,
+} from '@/types';
 import {
   type InputBaseElement,
   type InputBaseProps,
@@ -7,7 +11,10 @@ import {
 
 export interface IressInputProps<
   T extends FormControlValue = string | number,
-> extends Omit<InputBaseProps, 'defaultValue' | 'onChange' | 'value'> {
+> extends Omit<
+  InputBaseProps,
+  'defaultValue' | 'onChange' | 'readOnly' | 'value'
+> {
   /**
    * Content to append to the input field, usually a button or icon.
    **/
@@ -73,6 +80,12 @@ export interface IressInputProps<
    * Set input content align to right.
    */
   alignRight?: boolean;
+
+  /**
+   * If `true`, the user cannot modify the value.
+   * Use `'locked'` when the field is read-only due to permissions.
+   */
+  readOnly?: FormControlReadOnly;
 }
 
 /** @deprecated InputMode enum is now deprecated and will be removed in a future version. Please use the InputModes type instead. */

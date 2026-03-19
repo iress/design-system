@@ -1,9 +1,9 @@
 import { type IressInputHTMLAttributes } from '@/interfaces';
-import { type FormControlValue } from '@/types';
+import { type FormControlReadOnly, type FormControlValue } from '@/types';
 
 export interface IressCheckboxProps extends Omit<
   IressInputHTMLAttributes<HTMLInputElement>,
-  'defaultValue' | 'value'
+  'defaultValue' | 'readOnly' | 'value'
 > {
   /**
    * If true, the checkbox is selected.
@@ -76,6 +76,12 @@ export interface IressCheckboxProps extends Omit<
    * Add the button-like border and padding to checkbox when `touch` is true.
    */
   touch?: boolean;
+
+  /**
+   * Renders the checkbox in a read-only state.
+   * Use `'locked'` when the field is read-only due to permissions.
+   */
+  readOnly?: FormControlReadOnly;
 }
 
 export interface CheckboxRef {

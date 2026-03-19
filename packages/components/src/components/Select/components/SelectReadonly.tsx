@@ -13,6 +13,7 @@ export const SelectReadonly = forwardRef(
       'data-testid': dataTestId,
       name,
       required,
+      variant,
       width,
       value,
       ...restProps
@@ -35,6 +36,7 @@ export const SelectReadonly = forwardRef(
         name={name}
         ref={ref}
         required={required}
+        variant={variant}
         width={width}
         value={getFormControlValueAsStringIfDefined(value)}
       >

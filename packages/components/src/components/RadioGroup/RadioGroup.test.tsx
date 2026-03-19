@@ -271,6 +271,18 @@ describe('IressRadioGroup', () => {
         const radioGroup = screen.getByRole('radiogroup');
         expect(radioGroup.innerHTML).toBe('');
       });
+
+      it('supports readOnly="locked"', () => {
+        const screen = renderRadioGroup({
+          defaultValue: 'home',
+          readonly: 'locked',
+        });
+
+        expect(screen.queryByRole('radio')).not.toBeInTheDocument();
+        expect(screen.getByText('Buying my first home')).toBeInTheDocument();
+        const input = screen.container.querySelector(`input[value="home"]`);
+        expect(input).toBeInTheDocument();
+      });
     });
   });
 

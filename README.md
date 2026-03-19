@@ -56,6 +56,10 @@ To run tests for all packages:
 yarn test
 ```
 
+## Troubleshooting
+
+See [AGENTS.md](./AGENTS.md) for known issues and fixes (e.g. Yarn 403 errors from Artifactory).
+
 ## Contributing
 
 1. Fork the repo

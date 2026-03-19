@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 import { type IressHTMLAttributes } from '@/interfaces';
-import { type FormControlValue } from '@/types';
+import { type FormControlReadOnly, type FormControlValue } from '@/types';
 import { type IressCheckboxProps } from '@/main';
 
 export interface IressCheckboxGroupProps extends Omit<
@@ -41,7 +41,7 @@ export interface IressCheckboxGroupProps extends Omit<
   /**
    * Renders the group in a read-only state.
    */
-  readonly?: boolean;
+  readonly?: FormControlReadOnly;
 
   /**
    * Value of checkbox group when in controlled mode.

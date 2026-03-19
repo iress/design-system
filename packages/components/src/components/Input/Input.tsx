@@ -95,6 +95,7 @@ const Input = <T extends FormControlValue = string | number>(
         alignRight={alignRight}
         append={append}
         className={className}
+        variant={readOnly}
       >
         {displayValue}
       </IressReadonly>

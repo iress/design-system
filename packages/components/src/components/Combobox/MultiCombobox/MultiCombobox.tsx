@@ -116,7 +116,7 @@ export const IressMultiCombobox = forwardRef(
 
     if (readOnly) {
       return (
-        <IressReadonly value={getValuesString()}>
+        <IressReadonly value={getValuesString()} variant={readOnly}>
           {getLabelsString(', ')}
         </IressReadonly>
       );

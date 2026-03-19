@@ -110,6 +110,19 @@ describe('IressCheckbox', () => {
         const input = screen.container.querySelector(`input[value="checkbox"]`);
         expect(input).not.toBeInTheDocument();
       });
+
+      it('supports readOnly="locked" when checked', () => {
+        const screen = render(
+          <IressCheckbox value="checkbox" defaultChecked readOnly="locked">
+            Label
+          </IressCheckbox>,
+        );
+
+        expect(screen.queryByRole('checkbox')).not.toBeInTheDocument();
+        expect(screen.getByText('Label')).toBeInTheDocument();
+        const input = screen.container.querySelector(`input[value="checkbox"]`);
+        expect(input).toBeInTheDocument();
+      });
     });
   });
 

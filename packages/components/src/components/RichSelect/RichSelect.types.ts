@@ -2,6 +2,7 @@ import { type AutocompleteSearchHookProps } from '../Autocomplete';
 import {
   type FloatingUIAligns,
   type FocusableElementRef,
+  type FormControlReadOnly,
   type FormattedLabelValueMeta,
   type FormElementWidths,
   type IressPopoverProps,
@@ -96,7 +97,7 @@ export interface IressRichSelectProps
   /**
    * Renders the select as read-only.
    */
-  readonly?: boolean;
+  readonly?: FormControlReadOnly;
 
   /**
    * Completely customise the rendering of the hidden input.

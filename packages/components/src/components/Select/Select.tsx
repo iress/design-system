@@ -84,6 +84,7 @@ const Select = (
           }}
           style={style}
           value={value}
+          variant={readonly}
           width={width}
         >
           {children}

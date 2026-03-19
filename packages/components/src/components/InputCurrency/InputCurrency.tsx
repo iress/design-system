@@ -32,7 +32,7 @@ export const IressInputCurrency = forwardRef<InputRef, IressInputCurrencyProps>(
         }
         type={type}
         append={<IressText mode="muted">{currencyCode}</IressText>}
-        inline={inputProps.readOnly}
+        inline={inputProps.readOnly === true}
         alignRight={alignRight}
         ref={ref}
         {...inputProps}

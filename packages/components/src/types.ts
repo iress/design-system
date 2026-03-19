@@ -30,6 +30,15 @@ export type FloatingUIAligns = (typeof FLOATING_UI_ALIGNS)[number];
 
 export type FormControlValue = string | number | boolean | null;
 
+/**
+ * Shared readonly type for form controls.
+ *
+ * - `true` — the field is readonly, generally informational.
+ * - `'locked'` — the field is readonly because the user lacks edit
+ *   permission.
+ */
+export type FormControlReadOnly = boolean | 'locked';
+
 export type FormElementWidths = (typeof FORM_ELEMENT_WIDTHS)[number];
 
 export type GutterSizes = (typeof GUTTER_SIZES)[number];

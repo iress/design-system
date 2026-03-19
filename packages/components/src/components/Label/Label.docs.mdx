@@ -64,6 +64,16 @@ You can render custom content into the label.
 
 <ComponentExample of={ComponentStories.RichContent} meta={ComponentStories} />
 
+### Locked readonly
+
+Use `readOnly="locked"` when the associated field is readonly due to
+permissions. This adds a lock indicator on the label.
+
+<ComponentExample
+  of={ComponentStories.LockedReadonly}
+  meta={ComponentStories}
+/>
+
 ## Accessibility
 
 Don't place interactive elements such as anchors or buttons inside the `IressLabel`. Doing so makes it difficult for people to activate the form input associated with the label.

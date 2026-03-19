@@ -4,7 +4,11 @@ import {
   type IressHTMLAttributes,
   type WithDataAttributes,
 } from '@/interfaces';
-import { type FormControlValue, type FormElementWidths } from '@/types';
+import {
+  type FormControlReadOnly,
+  type FormControlValue,
+  type FormElementWidths,
+} from '@/types';
 import { type IressReadonlyProps } from '../Readonly';
 
 export interface IressSelectProps<T = HTMLSelectElement> extends Omit<
@@ -37,8 +41,9 @@ export interface IressSelectProps<T = HTMLSelectElement> extends Omit<
 
   /**
    * If `true`, the user cannot modify the value.
+   * Use `'locked'` when the field is read-only due to permissions.
    */
-  readonly?: boolean;
+  readonly?: FormControlReadOnly;
 
   /**
    * Mark the select as a required field.

@@ -2,6 +2,7 @@ import {
   type IressHTMLAttributes,
   type ValidationMessageObj,
 } from '@/interfaces';
+import { type FormControlReadOnly } from '@/types';
 import { type IressLabelProps } from '../Label';
 import { type ReactNode } from 'react';
 import { type LabelBaseProps } from '../Label/LabelBase/LabelBase.types';
@@ -26,8 +27,9 @@ export interface IressFieldProps<
 
   /**
    * Renders the group in a read-only state (no asterisk symbol).
+   * Use `'locked'` when the field is read-only due to permissions.
    */
-  readOnly?: boolean;
+  readOnly?: FormControlReadOnly;
 }
 
 export type FieldLegendProps = Omit<

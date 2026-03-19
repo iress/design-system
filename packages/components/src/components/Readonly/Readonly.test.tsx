@@ -82,6 +82,20 @@ describe('ReadonlyInput', () => {
       });
     });
 
+    describe('variant', () => {
+      it('applies locked styles when variant is "locked"', () => {
+        renderReadonly({
+          variant: 'locked',
+          value: 'Locked value',
+          'data-testid': 'test-component',
+        });
+
+        const wrapper = screen.getByTestId('test-component');
+        expect(wrapper).toHaveClass(styles.locked);
+        expect(screen.getByText('Locked value')).toBeInTheDocument();
+      });
+    });
+
     describe('width', () => {
       it('adds the width class to the input when its not a percentage, so its not affected by prepend/append', () => {
         renderReadonly({

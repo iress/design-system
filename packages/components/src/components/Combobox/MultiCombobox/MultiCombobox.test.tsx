@@ -251,6 +251,23 @@ describe('IressMultiCombobox', () => {
         ).toBeInTheDocument();
         expect(input).toBeInTheDocument();
       });
+
+      it('supports readOnly="locked"', () => {
+        const { container } = renderCombobox({
+          defaultValue: MOCK_LABEL_VALUE_META,
+          readOnly: 'locked',
+        });
+        const input = container.querySelector(
+          `input[value="${MOCK_LABEL_VALUE_META.map((item) => item.value).join(',')}"]`,
+        );
+
+        expect(
+          screen.getByText(
+            MOCK_LABEL_VALUE_META.map((item) => item.label).join(', '),
+          ),
+        ).toBeInTheDocument();
+        expect(input).toBeInTheDocument();
+      });
     });
   });
 

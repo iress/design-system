@@ -97,7 +97,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
     }, [error]);
 
     if (readOnly) {
-      return <IressReadonly value={value} />;
+      return <IressReadonly value={value} variant={readOnly} />;
     }
 
     const handleInputChange: IressAutocompleteProps['onChange'] = (

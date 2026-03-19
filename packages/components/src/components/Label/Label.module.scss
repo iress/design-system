@@ -35,6 +35,11 @@
   display: inline-block;
 }
 
+.lockedIcon {
+  margin-inline-end: var(--iress-meta-margin);
+  color: var(--iress-optional-text-color);
+}
+
 .required {
   color: var(--iress-required-text-color);
   top: var(--iress-required-inset-top);

@@ -192,3 +192,21 @@ export const ReadonlyData: Story = {
     </IressField>
   ),
 };
+
+export const LockedReadonlyData: Story = {
+  args: {
+    label: 'First name',
+    hint: 'This field is locked',
+    input: {
+      ...defaultInput,
+      value: 'Luke Skywalker',
+    },
+    readOnly: 'locked',
+    required: true,
+  },
+  render: ({ input, ...args }) => (
+    <IressField {...args}>
+      <IressReadonly {...input} />
+    </IressField>
+  ),
+};
