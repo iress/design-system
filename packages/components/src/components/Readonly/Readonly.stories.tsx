@@ -50,3 +50,10 @@ export const InlineStyle: Story = {
     inline: true,
   },
 };
+
+export const Locked: Story = {
+  args: {
+    value: 'AU',
+    variant: 'locked',
+  },
+};

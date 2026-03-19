@@ -193,6 +193,16 @@ describe('IressSlider', () => {
         const hiddenInput = screen.getByTestId(`${TEST_ID}__slider__input`);
         expect(hiddenInput).toHaveValue('0');
       });
+
+      it('supports readOnly="locked"', () => {
+        const screen = renderComponent({
+          name: 'test',
+          readonly: 'locked',
+        });
+
+        expect(screen.queryByRole('slider')).not.toBeInTheDocument();
+        expect(screen.getByText('0')).toBeInTheDocument();
+      });
     });
 
     describe('step', () => {

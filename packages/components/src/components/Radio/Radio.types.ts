@@ -1,10 +1,10 @@
 import { type ReactNode } from 'react';
 import { type IressInputHTMLAttributes } from '@/interfaces';
-import { type FormControlValue } from '@/types';
+import { type FormControlReadOnly, type FormControlValue } from '@/types';
 
 export interface IressRadioProps extends Omit<
   IressInputHTMLAttributes<HTMLInputElement>,
-  'defaultValue' | 'value'
+  'defaultValue' | 'readOnly' | 'value'
 > {
   /**
    * Sets the checked state of the radio.
@@ -56,4 +56,10 @@ export interface IressRadioProps extends Omit<
    * Add the button-like border and padding to radio when `touch` is true.
    */
   touch?: boolean;
+
+  /**
+   * Renders the radio in a read-only state.
+   * Use `'locked'` when the field is read-only due to permissions.
+   */
+  readOnly?: FormControlReadOnly;
 }

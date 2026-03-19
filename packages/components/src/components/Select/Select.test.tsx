@@ -174,6 +174,18 @@ describe('IressSelect', () => {
         expect(input).toBeInTheDocument();
         expect(realInput).toBeInTheDocument();
       });
+
+      it('supports readOnly="locked"', () => {
+        const screen = renderComponent({
+          readonly: 'locked',
+          defaultValue: 2,
+        });
+
+        const input = screen.getByText('Two');
+        const realInput = screen.getByDisplayValue('2');
+        expect(input).toBeInTheDocument();
+        expect(realInput).toBeInTheDocument();
+      });
     });
 
     describe('value', () => {

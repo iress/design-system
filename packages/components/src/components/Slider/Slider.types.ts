@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react';
 import { type IressHTMLAttributes, type ResponsiveSizing } from '@/interfaces';
+import { type FormControlReadOnly } from '@/types';
 
 export interface IressSliderProps extends Omit<
   IressHTMLAttributes<HTMLInputElement>,
@@ -16,7 +17,7 @@ export interface IressSliderProps extends Omit<
   formatValue?: (
     value: number,
     tick?: SliderTickLabelValueWithClassName,
-    readonly?: boolean,
+    readonly?: FormControlReadOnly,
   ) => ReactNode;
 
   /**
@@ -48,8 +49,9 @@ export interface IressSliderProps extends Omit<
 
   /**
    * If `true`, the user cannot modify the value.
+   * Use `'locked'` when the field is read-only due to permissions.
    */
-  readonly?: boolean;
+  readonly?: FormControlReadOnly;
 
   /**
    * Sets the step value of the slider.

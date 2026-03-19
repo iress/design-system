@@ -46,6 +46,13 @@ export const HiddenLabel: Story = {
   },
 };
 
+export const LockedReadonly: Story = {
+  args: {
+    children: 'This label is locked',
+    readOnly: 'locked',
+  },
+};
+
 export const RichContent: Story = {
   args: {
     hiddenLabel: false,

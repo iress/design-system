@@ -24,6 +24,7 @@ const Readonly = <T extends FormControlValue = string | number>(
     value,
     inline,
     alignRight,
+    variant,
     ...restProps
   }: IressReadonlyProps<T>,
   ref: React.Ref<HTMLInputElement>,
@@ -33,6 +34,8 @@ const Readonly = <T extends FormControlValue = string | number>(
     defaultValue,
   });
 
+  const isLocked = variant === 'locked';
+
   const classes = classNames(
     styles.input,
     styles.readonly,
@@ -41,6 +44,7 @@ const Readonly = <T extends FormControlValue = string | number>(
     {
       [`${GlobalCSSClass.Width}--${width}`]: width?.includes('perc'),
       [styles.watermark]: watermark,
+      [styles.locked]: isLocked,
     },
   );
 

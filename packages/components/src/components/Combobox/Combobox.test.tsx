@@ -267,6 +267,21 @@ describe('IressCombobox', () => {
         ).toBeInTheDocument();
         expect(input).toBeInTheDocument();
       });
+
+      it('supports readOnly="locked"', () => {
+        const { container } = renderCombobox({
+          defaultValue: MOCK_LABEL_VALUE_META[0],
+          readOnly: 'locked',
+        });
+        const input = container.querySelector(
+          `input[value="${MOCK_LABEL_VALUE_META[0].value}"]`,
+        );
+
+        expect(
+          screen.getByText(MOCK_LABEL_VALUE_META[0].label),
+        ).toBeInTheDocument();
+        expect(input).toBeInTheDocument();
+      });
     });
   });
 

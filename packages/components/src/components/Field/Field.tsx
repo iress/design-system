@@ -64,6 +64,7 @@ export const IressField = ({
         hiddenLabel={hiddenLabel}
         htmlFor={htmlFor}
         optional={optional}
+        readOnly={readOnly}
         required={readOnly ? false : !!required}
       >
         {label}

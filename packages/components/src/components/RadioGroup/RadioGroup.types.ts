@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 import { type IressHTMLAttributes } from '@/interfaces';
-import { type FormControlValue } from '@/types';
+import { type FormControlReadOnly, type FormControlValue } from '@/types';
 
 export interface IressRadioGroupProps extends Omit<
   IressHTMLAttributes,
@@ -49,7 +49,7 @@ export interface IressRadioGroupProps extends Omit<
   /**
    * Renders a readonly radio group.
    */
-  readonly?: boolean;
+  readonly?: FormControlReadOnly;
 
   /**
    * Value of radio group when in controlled mode.
