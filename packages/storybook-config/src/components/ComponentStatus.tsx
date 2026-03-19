@@ -132,8 +132,9 @@ export const ComponentStatus = ({
   meta,
   ...restProps
 }: ComponentStatusProps) => {
-  const { IressDivider, IressInline, componentVersions } =
-    use(IressStorybookContext);
+  const { IressDivider, IressInline, componentVersions } = use(
+    IressStorybookContext,
+  );
 
   if (!ofProp && !meta) {
     throw new Error('ComponentStatus requires either a story or stories prop');
@@ -147,7 +148,10 @@ export const ComponentStatus = ({
   const updatedTag = storyTags.find((tag) => tag === 'updated');
 
   const componentName = getComponentName(meta);
-  const version = componentName ? componentVersions?.[componentName] : undefined;
+  const version = componentName
+    ? componentVersions?.[componentName]
+    : undefined;
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing -- intentionally filter empty strings
   const hasStatusTags = betaTag || cautionTag || updatedTag;
 
   if (!hasStatusTags && !version) {
