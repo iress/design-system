@@ -158,6 +158,20 @@ describe('IressReadonly', () => {
         expect(wrapper).toHaveClass(readonly({ width: '25%' }).wrapper!);
       });
     });
+
+    describe('variant', () => {
+      it('applies locked styles when variant is "locked"', () => {
+        renderReadonly({
+          variant: 'locked',
+          value: 'Locked value',
+          'data-testid': 'test-component',
+        });
+
+        const wrapper = screen.getByTestId('test-component').firstChild;
+        expect(wrapper).toHaveClass(readonly({ locked: true }).wrapper!);
+        expect(screen.getByText('Locked value')).toBeInTheDocument();
+      });
+    });
   });
 
   describe('accessibility', () => {
