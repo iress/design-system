@@ -78,3 +78,10 @@ export const Actions: Story = {
     ),
   },
 };
+
+export const Locked: Story = {
+  args: {
+    value: 'AU',
+    variant: 'locked',
+  },
+};

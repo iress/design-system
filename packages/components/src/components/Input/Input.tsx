@@ -246,6 +246,7 @@ const Input = <
         alignRight={alignRight}
         append={append}
         className={className}
+        variant={readOnly}
       >
         {displayValue}
       </IressReadonly>

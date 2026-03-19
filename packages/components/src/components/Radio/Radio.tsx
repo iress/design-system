@@ -133,6 +133,7 @@ const Radio = <
         {...restProps}
         width={undefined}
         value={getFormControlValueAsString(value)}
+        variant={readOnly}
       >
         {children}
       </IressReadonly>

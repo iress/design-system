@@ -88,9 +88,9 @@ export const LabelBase = <E extends 'label' | 'strong' | 'legend' = 'label'>({
       {readOnly === 'locked' && !hiddenLabel && (
         <IressIcon
           name="lock"
-          color="colour.neutral.70"
           screenreaderText="Locked field"
-          mr="spacing.1"
+          className={classes.lock}
+          filled
         />
       )}
       {required && (

@@ -186,6 +186,7 @@ const Slider = (
         data-testid={propagateTestid(dataTestId, 'slider')}
         name={restProps?.name}
         value={value}
+        variant={readOnly}
       >
         {getValueLabel()}
       </IressReadonly>

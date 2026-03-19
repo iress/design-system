@@ -557,7 +557,11 @@ const Select = <
 
   if (readOnly) {
     return (
-      <IressReadonly value={getValuesString()} ref={hiddenInputRef}>
+      <IressReadonly
+        value={getValuesString()}
+        ref={hiddenInputRef}
+        variant={readOnly}
+      >
         {getLabelsString(', ')}
       </IressReadonly>
     );
