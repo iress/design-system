@@ -74,7 +74,7 @@
     "vitest": "4.0.18"
   },
   "dependencies": {
-    "@floating-ui/react": "0.27.18",
+    "@floating-ui/react": "0.27.19",
     "@fortawesome/fontawesome-common-types": "0.2.36",
     "@tanstack/react-table": "8.21.3",
     "@types/mdx": "^2.0.13",
