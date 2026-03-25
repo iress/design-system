@@ -270,6 +270,9 @@ describe('IressModal', () => {
       });
       await userEvent.click(toastButton);
 
+      const toastIcon = await screen.findByText('cancel');
+      expect(toastIcon).toHaveClass('tt_none');
+
       const dismiss = await screen.findByRole('button', {
         name: 'Dismiss',
       });

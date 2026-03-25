@@ -9,6 +9,7 @@ export const icon = cva({
         textStyle: 'inherit',
         materialSymbols: 'true',
         scale: '[1.5]',
+        textTransform: 'none',
       },
     },
     filled: {
