@@ -147,6 +147,9 @@ export const tabSet = sva({
     type: {
       primary: {},
       secondary: {
+        activeIndicator: {
+          bg: '[none]',
+        },
         hoverIndicator: {
           _after: {
             bg: 'colour.neutral.50',

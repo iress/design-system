@@ -51,6 +51,17 @@ You can use state to control the active tab by setting the `selected` property t
 
 <ComponentExample of={ComponentStories.Layout} />
 
+### Type
+
+Use the `type` prop to control the visual emphasis of tab styles:
+
+- `primary` (default): prominent active state with a raised active indicator.
+- `secondary`: subdued style intended for nested or secondary tab groups. The
+  active state uses the underline/border indicator without the active
+  indicator background fill.
+
+<ComponentExample of={ComponentStories.Type} />
+
 ### Lazy Loading
 
 Tabs can be lazy loaded via state, allowing you to add/remove tabs as needed.
