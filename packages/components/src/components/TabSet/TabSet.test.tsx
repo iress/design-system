@@ -167,6 +167,22 @@ describe('IressTabs', () => {
       });
     });
 
+    describe('type', () => {
+      it('applies secondary active indicator style without background fill', () => {
+        const screen = renderComponent({
+          type: 'secondary',
+          defaultSelected: 1,
+        });
+
+        const tablist = screen.getByRole('tablist');
+        const activeIndicator = tablist.children[0];
+
+        expect(activeIndicator).toHaveClass(
+          tabSet({ type: 'secondary' }).activeIndicator!,
+        );
+      });
+    });
+
     describe('onChange', () => {
       it('emits the new index and value when the user changes tab, value is the same as index when tag has no value', async () => {
         const onChange = vi.fn();
