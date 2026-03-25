@@ -175,11 +175,17 @@ describe('IressTabs', () => {
         });
 
         const tablist = screen.getByRole('tablist');
+        const secondaryActiveIndicatorClass = tabSet({
+          type: 'secondary',
+        }).activeIndicator!;
+        const primaryActiveIndicatorClass = tabSet({
+          type: 'primary',
+        }).activeIndicator!;
         const activeIndicator = tablist.children[0];
 
-        expect(activeIndicator).toHaveClass(
-          tabSet({ type: 'secondary' }).activeIndicator!,
-        );
+        expect(activeIndicator).toBeInTheDocument();
+        expect(activeIndicator.className).toBe(secondaryActiveIndicatorClass);
+        expect(activeIndicator.className).not.toBe(primaryActiveIndicatorClass);
       });
     });
 
