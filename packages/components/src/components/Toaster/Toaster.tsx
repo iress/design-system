@@ -25,7 +25,7 @@ export interface ToasterProps extends Omit<IressStyledProps, 'children'> {
 
   /**
    * The position on the screen where the toast will appear.
-   * @default bottom-end
+   * @default top-end
    */
   position?:
     | 'bottom-center'
@@ -62,7 +62,7 @@ const toasterAriaAttributes: IressStyledProps = {
 export const Toaster = ({
   className,
   container,
-  position = 'bottom-end',
+  position = 'top-end',
   toasts = [],
   ...restProps
 }: ToasterProps) => {
