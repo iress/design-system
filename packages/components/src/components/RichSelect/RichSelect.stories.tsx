@@ -16,6 +16,8 @@ import { SelectCustomOptions } from './mocks/SelectCustomOptions';
 import SelectCustomOptionsSource from './mocks/SelectCustomOptions.tsx?raw';
 import { SelectInitialOptions } from './mocks/SelectInitialOptions';
 import SelectInitialOptionsSource from './mocks/SelectInitialOptions.tsx?raw';
+import { SelectManyInitialOptions } from './mocks/SelectManyInitialOptions';
+import SelectManyInitialOptionsSource from './mocks/SelectManyInitialOptions.tsx?raw';
 import { SelectNewOption } from './mocks/SelectNewOption';
 import SelectNewOptionSource from './mocks/SelectNewOption.tsx?raw';
 import { IressStack } from '../Stack';
@@ -103,6 +105,13 @@ export const InitialOptions: Story = {
   render: (args) => <SelectInitialOptions {...args} />,
   parameters: {
     ...withCustomSource(SelectInitialOptionsSource),
+  },
+};
+
+export const ManyInitialOptions: Story = {
+  render: (args) => <SelectManyInitialOptions {...args} />,
+  parameters: {
+    ...withCustomSource(SelectManyInitialOptionsSource),
   },
 };
 
