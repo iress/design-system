@@ -1,5 +1,6 @@
 import {
   IressButton,
+  IressIconProvider,
   IressModal,
   IressModalProvider,
   IressToasterProvider,
@@ -34,9 +35,11 @@ const ToastFromModalTrigger = () => {
 };
 
 export const ToasterWithModal = (args: IressToasterProviderProps) => (
-  <IressModalProvider>
-    <IressToasterProvider {...args}>
-      <ToastFromModalTrigger />
-    </IressToasterProvider>
-  </IressModalProvider>
+  <IressIconProvider>
+    <IressModalProvider>
+      <IressToasterProvider {...args}>
+        <ToastFromModalTrigger />
+      </IressToasterProvider>
+    </IressModalProvider>
+  </IressIconProvider>
 );
