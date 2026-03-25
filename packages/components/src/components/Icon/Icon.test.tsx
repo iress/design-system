@@ -77,6 +77,7 @@ describe('IressIcon', () => {
       const component = screen.getByRole('img', { hidden: true });
       expect(component).toHaveClass('test-class', GlobalCSSClass.Icon, icon());
       expect(component).toHaveTextContent('home');
+      expect(component).toHaveClass('ids_ms_true');
     });
 
     it('renders without deprecation warning', () => {
