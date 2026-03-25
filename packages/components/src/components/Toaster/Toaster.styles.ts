@@ -59,6 +59,6 @@ export const toaster = sva({
     },
   },
   defaultVariants: {
-    position: 'bottom-end',
+    position: 'top-end',
   },
 });

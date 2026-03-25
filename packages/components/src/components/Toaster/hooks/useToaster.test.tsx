@@ -103,6 +103,31 @@ describe('useToaster hook', () => {
     expect(secondRound[1]).toBe(firstRound[0]);
   });
 
+  it('prepends toasts when position is omitted (defaults to top-end)', async () => {
+    const DefaultWrapper = ({ children }: PropsWithChildren) => (
+      <IressToasterProvider>{children}</IressToasterProvider>
+    );
+
+    const screen = render(
+      <WithTrigger status="error" message="Error toast" />,
+      { wrapper: DefaultWrapper },
+    );
+
+    const triggerButton = screen.getByRole('button', {
+      name: 'Show toast using provider',
+    });
+
+    await userEvent.click(triggerButton);
+    await screen.findAllByText('Error toast');
+
+    await userEvent.click(triggerButton);
+
+    const toasts = await screen.findAllByText('Error toast');
+    expect(toasts).toHaveLength(2);
+    // Newest toast should be first (prepended) since default is top-end
+    expect(toasts[1]).not.toBe(toasts[0]);
+  });
+
   it('closes a toast programatically', async () => {
     const screen = render(<CloseToastViaProvider />);
 
