@@ -26,7 +26,7 @@ export interface IressToasterProviderProps
 export const IressToasterProvider = ({
   children,
   id,
-  position,
+  position = 'top-end',
   ...restProps
 }: IressToasterProviderProps) => {
   const [toasts, setToasts] = useState<ToasterItem[]>([]);
