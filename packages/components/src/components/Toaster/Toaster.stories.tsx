@@ -127,6 +127,7 @@ export const ModalContextIconVerification: Story = {
   },
   render: (args) => <ToasterWithModal {...args} />,
   parameters: {
+    disableProvider: true,
     docs: {
       description: {
         story: `
