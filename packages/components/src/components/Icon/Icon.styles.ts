@@ -6,7 +6,8 @@ export const icon = cva({
     type: {
       fontawesome: {},
       material: {
-        textStyle: 'inherit',
+        fontSize: 'inherit',
+        lineHeight: 'inherit',
         materialSymbols: 'true',
         scale: '[1.5]',
         textTransform: 'none',
