@@ -27,7 +27,8 @@ import { CustomFormFieldComponents as CustomFormFieldComponentsExample } from '.
 import CustomFormFieldComponentsSource from './mocks/CustomFormFieldComponents.tsx?raw';
 import SanitisedInputFormSource from './mocks/SanitisedInputForm.tsx?raw';
 import { withCustomSource } from '@iress-oss/ids-storybook-config';
-import { lazy, Suspense } from 'react';
+import { lazy } from 'react';
+import { IressLoadingSuspense } from '../Loading';
 
 const SanitisedInputForm = lazy(() =>
   import('./mocks/SanitisedInputForm').then((m) => ({
@@ -122,10 +123,10 @@ export const CustomFormFieldComponents: Story = {
 };
 
 export const SanitisingInput: Story = {
-  render: (args) => (
-    <Suspense>
-      <SanitisedInputForm {...args} />
-    </Suspense>
+  render: () => (
+    <IressLoadingSuspense>
+      <SanitisedInputForm />
+    </IressLoadingSuspense>
   ),
   parameters: {
     ...withCustomSource(SanitisedInputFormSource),

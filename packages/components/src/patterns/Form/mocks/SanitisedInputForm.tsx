@@ -9,6 +9,17 @@ import DOMPurify from 'dompurify';
 import { useState } from 'react';
 import type { FieldValues } from 'react-hook-form';
 
+const sanitiseDeep = (value: unknown): unknown => {
+  if (typeof value === 'string') return DOMPurify.sanitize(value);
+  if (Array.isArray(value)) return value.map(sanitiseDeep);
+  if (value !== null && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value).map(([k, v]) => [k, sanitiseDeep(v)]),
+    );
+  }
+  return value;
+};
+
 export const SanitisedInputForm = () => {
   const [sanitisedData, setSanitisedData] = useState<FieldValues | null>(null);
 
@@ -16,12 +27,7 @@ export const SanitisedInputForm = () => {
     <>
       <IressForm
         onSubmit={(data) => {
-          const clean = Object.fromEntries(
-            Object.entries(data).map(([key, value]) => [
-              key,
-              typeof value === 'string' ? DOMPurify.sanitize(value) : value,
-            ]),
-          );
+          const clean = sanitiseDeep(data) as FieldValues;
           setSanitisedData(clean);
           console.log('Sanitised form data:', clean);
         }}

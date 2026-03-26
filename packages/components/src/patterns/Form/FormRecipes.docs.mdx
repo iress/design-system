@@ -120,8 +120,8 @@ Key features demonstrated:
 
 When sending user input to a server or third-party API, it is important to
 sanitise the data to prevent cross-site scripting (XSS) attacks. This example
-uses [DOMPurify](https://github.com/cure53/DOMPurify) to strip malicious HTML
-from form values before submission.
+uses [DOMPurify](https://github.com/cure53/DOMPurify) to recursively strip
+malicious HTML from all string values in the form data before submission.
 
 Install DOMPurify in your project:
 
