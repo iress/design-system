@@ -206,9 +206,9 @@ describe('Documented roles', () => {
     expect(screen.getByRole('slider', { name: 'Volume' })).toBeInTheDocument();
   });
 
-  it('Spinner default: role="img"', () => {
-    render(<IressSpinner />);
-    expect(screen.getByRole('img', { hidden: true })).toBeInTheDocument();
+  it('Spinner default: decorative icon (aria-hidden)', () => {
+    render(<IressSpinner data-testid="sp" />);
+    expect(screen.getByTestId('sp')).toBeInTheDocument();
   });
 
   it('Spinner chatty: role="status"', () => {

@@ -23,7 +23,7 @@
 import fs from 'fs/promises';
 import { existsSync, readFileSync } from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 // ─── Configuration ───────────────────────────────────────────
 
@@ -754,10 +754,13 @@ async function loadTestIdsFromMeta(
   if (!existsSync(metaPath)) return null;
 
   try {
-    const mod = await import(metaPath);
+    const mod = await import(pathToFileURL(metaPath).href);
     const testIds = mod.testIds as TestIdEntry[] | undefined;
     return testIds?.length ? testIds : null;
-  } catch {
+  } catch (error) {
+    console.warn(
+      `  ⚠ Failed to load testIds from ${metaPath}: ${error instanceof Error ? error.message : error}`,
+    );
     return null;
   }
 }
@@ -1328,11 +1331,6 @@ async function transformContent(doc: DocFile): Promise<{
   // 10. Convert <IressExpander> to <details>
   result = convertIressExpanderToDetails(result);
 
-  // 10b. Restore protected code fences
-  for (let i = 0; i < protectedCodeBlocks.length; i++) {
-    result = result.replace(`%%PROTECTED_CODE_${i}%%`, protectedCodeBlocks[i]);
-  }
-
   // 11. Remove <p> wrappers around content
   result = result.replace(/<p>\s*\n?([\s\S]*?)\n?\s*<\/p>/g, (_match, inner) =>
     inner.trim(),
@@ -1354,6 +1352,11 @@ async function transformContent(doc: DocFile): Promise<{
     /<IressButton\s+href="([^"]+)"[^>]*>\s*([\s\S]*?)\s*<\/IressButton>/g,
     (_match, href, text) => `[${text.trim()}](${href})`,
   );
+
+  // 12b. Restore protected code fences (after all JSX transforms are done)
+  for (let i = 0; i < protectedCodeBlocks.length; i++) {
+    result = result.replace(`%%PROTECTED_CODE_${i}%%`, protectedCodeBlocks[i]);
+  }
 
   // 13. Wrap bare Iress JSX outside code fences in code blocks
   result = wrapBareJsxInCodeFences(result);

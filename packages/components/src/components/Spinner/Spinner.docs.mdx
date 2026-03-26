@@ -39,10 +39,11 @@ You can display a message alongside the spinner. In this case, you do not need t
 
 The query depends on the spinner variant:
 
-**Default spinner** — renders as an icon with `role="img"`:
+**Default spinner** — renders as a decorative icon with `aria-hidden="true"`.
+Wrap it in a container with an accessible label, or query by `data-testid`:
 
 ```tsx
-const spinner = screen.getByRole('img', { name: 'spinner' });
+const spinner = screen.getByTestId('my-spinner');
 ```
 
 **Chatty spinner** (`variant="chatty"`) — renders with `role="status"`:
