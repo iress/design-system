@@ -82,6 +82,21 @@ export const ClickableTag: Story = {
   },
 };
 
+export const Compact: Story = {
+  args: {
+    ...Default.args,
+    compact: true,
+    onDelete: () => {
+      console.log('Tag deleted');
+    },
+  },
+  parameters: {
+    ...withJsxTransformer({
+      showFunctions: true,
+    }),
+  },
+};
+
 export const DeletingTags: Story = {
   render: (args) => <TagDeletion {...args} />,
   parameters: {
