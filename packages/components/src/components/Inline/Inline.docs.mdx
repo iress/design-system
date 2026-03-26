@@ -72,3 +72,12 @@ Vertical alignment of the children is controlled by the `verticalAlign` prop. It
 The `IressInline` component automatically wraps children. There may be some scenarios where you do not require children to be wrapped. For this you can use the `noWrap` prop.
 
 <ComponentExample of={ComponentStories.NoWrap} />
+
+## Testing
+
+`IressInline` is a layout primitive with no semantic role. Target its children
+directly or use a `data-testid`:
+
+```tsx
+const inline = screen.getByTestId('my-inline');
+```

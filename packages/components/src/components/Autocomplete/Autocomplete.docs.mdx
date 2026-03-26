@@ -2,8 +2,10 @@ import { Meta } from '@storybook/addon-docs/blocks';
 import {
   ComponentOverview,
   ComponentExample,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
 import * as ComponentStories from './Autocomplete.stories';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -245,3 +247,10 @@ const autocomplete = screen.getByRole('combobox');
 await user.type(autocomplete, 'lu');
 const option = await screen.findAllByRole('option');
 ```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressAutocomplete`, the following nested test
+IDs are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-autocomplete" />

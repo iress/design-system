@@ -15,10 +15,10 @@ Every exported component's Storybook docs page has a Testing section that tells 
 
 Create a shared type and Storybook doc component for rendering testid tables.
 
-- [ ] Define a `TestId` type (suffix, description) and export from a shared location (e.g. `helpers/testing/`)
-- [ ] Create a `<TestIdTable />` Storybook doc component that renders a table from an array of `TestId` entries
-- [ ] Add `testIds` export to one component's `meta/index.tsx` as a proof of concept (e.g. Field — has `label`, `hint`, `error`)
-- [ ] Wire the `<TestIdTable />` into Field's `.docs.mdx` and verify it renders in Storybook
+- [x] Define a `TestId` type (suffix, description) and export from a shared location (e.g. `helpers/testing/`)
+- [x] Create a `<TestIdTable />` Storybook doc component that renders a table from an array of `TestId` entries
+- [x] Add `testIds` export to one component's `meta/index.tsx` as a proof of concept (e.g. Field — has `label`, `hint`, `error`)
+- [x] Wire the `<TestIdTable />` into Field's `.docs.mdx` and verify it renders in Storybook
 
 ## Phase 2: Populate testIds for all components using propagateTestid
 
@@ -26,8 +26,8 @@ Add `testIds` metadata to each component's `meta/index.tsx`. Components that use
 
 Alert, Autocomplete, ButtonGroup, Card, Checkbox, Expander, Field, Label, Menu, Modal, Popover, Radio, Readonly, Select, Slideout, Slider, Table, TabSet, Tag, Toggle, Tooltip, ValidationMessage
 
-- [ ] Audit each component's source for `propagateTestid` calls and map suffix → description
-- [ ] Add `testIds` export to each component's `meta/index.tsx`
+- [x] Audit each component's source for `propagateTestid` calls and map suffix → description
+- [x] Add `testIds` export to each component's `meta/index.tsx`
 
 ## Phase 3: Add Testing sections to all component docs
 
@@ -43,28 +43,31 @@ Group by complexity:
 ### Simple components (no propagateTestid, straightforward querying)
 Button, Col, Container, Divider, Hide, Icon, Image, Inline, Link, Panel, Pill, Placeholder, Progress, Row, Skeleton, SkipLink, Spinner, Stack, Text
 
-- [ ] Add Testing section with recommended role/query and a code example
+- [x] Add Testing section with recommended role/query and a code example
 
 ### Components with testIds (propagateTestid users)
 Alert, Autocomplete, ButtonGroup, Card, Checkbox, CheckboxGroup, Expander, Field, Input, InputCurrency, Label, Menu, Modal, Popover, Radio, RadioGroup, Readonly, Select, Slideout, Slider, Table, TabSet, Tag, Toaster, Toggle, Tooltip, ValidationMessage
 
-- [ ] Add Testing section with recommended query, `<TestIdTable />`, gotchas, and code example
-- [ ] Preserve and enhance existing Testing sections (Autocomplete, Modal, Select, Slideout, Input)
+- [x] Add Testing section with recommended query, `<TestIdTable />`, gotchas, and code example
+- [x] Preserve and enhance existing Testing sections (Autocomplete, Modal, Select, Slideout, Input)
 
 ## Phase 4: Verify
 
+- [x] Run `yarn typecheck` — passes
+- [x] Run `yarn lint` on modified files — passes
+- [x] Build storybook-config — passes
 - [ ] Run `yarn dev` and spot-check 5+ component doc pages for correct Testing section rendering
 - [ ] Confirm `<TestIdTable />` renders correctly with suffix and description columns
 - [ ] Confirm existing Testing sections (Autocomplete, Select, Modal, Slideout) are not regressed
-- [ ] Run `yarn lint` and `yarn typecheck`
 
-## Files to create
+## Files created
 
 - `packages/components/src/helpers/testing/types.ts` — `TestId` type
 - `packages/components/src/helpers/testing/index.ts` — barrel export
-- Storybook doc component for `<TestIdTable />` (location TBD — likely `storybook-config` or co-located)
+- `packages/storybook-config/src/components/TestIdTable.tsx` — Storybook doc component
 
-## Files to modify
+## Files modified
 
-- `packages/components/src/components/*/meta/index.tsx` — add `testIds` export (22 components)
-- `packages/components/src/components/*/*.docs.mdx` — add Testing section (~46 components)
+- `packages/storybook-config/src/index.ts` — added `TestIdTable` export
+- `packages/components/src/components/*/meta/index.tsx` — added `testIds` export (22 components)
+- `packages/components/src/components/*/*.docs.mdx` — added Testing section (~46 components)

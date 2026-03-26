@@ -34,3 +34,19 @@ The chatty variant displays an animated "typing" indicator with three dots. This
 You can display a message alongside the spinner. In this case, you do not need to define the `screenreaderText` prop, as you have a visible message to the user telling them what is happening.
 
 <ComponentExample of={ComponentStories.Message} />
+
+## Testing
+
+The query depends on the spinner variant:
+
+**Default spinner** — renders as an icon with `role="img"`:
+
+```tsx
+const spinner = screen.getByRole('img', { name: 'spinner' });
+```
+
+**Chatty spinner** (`variant="chatty"`) — renders with `role="status"`:
+
+```tsx
+const spinner = screen.getByRole('status');
+```

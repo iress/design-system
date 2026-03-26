@@ -14,7 +14,9 @@ import {
   ComponentApiExpander,
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -390,3 +392,10 @@ expect(select).toHaveTextContent('Selected: Option 1');
 // Won't work
 expect(select).toHaveValue('Option 1');
 ```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressSelect`, the following nested test IDs
+are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-select" />

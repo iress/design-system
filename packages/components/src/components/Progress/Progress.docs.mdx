@@ -67,3 +67,12 @@ The following examples demonstrate different ways to use the Progress component:
 - **With background image**: Demonstrates using a custom background image for visual interest
 
 <ComponentExample of={ComponentStories.ProgressExamples} />
+
+## Testing
+
+Query the progress bar by its role:
+
+```tsx
+const progress = screen.getByRole('progressbar');
+expect(progress).toHaveValue(75);
+```

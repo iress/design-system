@@ -63,3 +63,12 @@ For example, if you specify an offset for `md`, it will apply to `lg`, `xl` and 
 The `alignSelf` prop controls the vertical alignment of the column (use if column alignment needs to differ from other columns in the row).
 
 <ComponentExample of={ComponentStories.AlignSelf} />
+
+## Testing
+
+`IressCol` is a layout primitive with no semantic role. Target its children
+directly or use a `data-testid`:
+
+```tsx
+const col = screen.getByTestId('my-col');
+```

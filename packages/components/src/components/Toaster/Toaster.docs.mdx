@@ -83,3 +83,29 @@ For your components to work as previously, you will need to set up the `IressToa
 ```tsx
 const App = () => <IressToasterProvider>Rest of app here</IressToasterProvider>;
 ```
+
+## Testing
+
+Query toast notifications by their text content:
+
+```tsx
+const toast = await screen.findByText('Changes saved');
+expect(toast).toBeInTheDocument();
+```
+
+### Gotchas
+
+- **Toasts appear asynchronously**: Always use `findByText` or `findByRole`
+  (async) instead of `getByText`.
+- **Dismissing toasts**: After clicking the dismiss button, use
+  `waitForElementToBeRemoved` to wait for the exit animation:
+
+  ```tsx
+  const toast = await screen.findByText('Changes saved');
+  const dismiss = screen.getByRole('button', { name: 'Dismiss' });
+  await user.click(dismiss);
+  await waitForElementToBeRemoved(toast);
+  ```
+
+- **Toast status icons**: Each toast has a status label accessible via
+  `getByLabelText('success:')` (or `danger:`, `info:`, etc.).

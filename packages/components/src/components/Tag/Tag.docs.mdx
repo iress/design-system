@@ -4,7 +4,9 @@ import * as TagInputStories from './TagInput/TagInput.stories';
 import {
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -71,3 +73,30 @@ You can completely override the delete button by passing a custom component to t
 If you need to manage tags that are selected from a existing list, use `IressSelect` with the `multiple` prop.
 
 <ComponentExample of={TagInputStories.TagInput} meta={TagInputStories} />
+
+## Testing
+
+Query tags by their text content:
+
+```tsx
+const tag = screen.getByText('Category');
+```
+
+When `onClick` is provided, the tag renders as a `<button>`:
+
+```tsx
+const tag = screen.getByRole('button', { name: 'Category' });
+```
+
+For deletable tags, query the delete button:
+
+```tsx
+const deleteButton = screen.getByRole('button', { name: 'Delete Category' });
+```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressTag`, the following nested test IDs are
+generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-tag" />

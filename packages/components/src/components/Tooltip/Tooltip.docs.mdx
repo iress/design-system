@@ -3,7 +3,9 @@ import * as ComponentStories from './Tooltip.stories';
 import {
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -74,3 +76,20 @@ The `delay` prop requires a number that is the number of milliseconds that pass 
 The component will not make any provision for existing title HTML attributes. If one exists, it will be activated along with the tooltip, potentially overlaying it making it difficult to ascertain the information being imparted. The title could also contain different content to the tooltip increasing the chance of confusing the end user.
 
 We suggest removing the title attribute on elements that will use tooltip.
+
+## Testing
+
+Hover over the trigger to show the tooltip, then query the tooltip content:
+
+```tsx
+const trigger = screen.getByText('Hover me');
+await user.hover(trigger);
+expect(screen.getByRole('tooltip')).toHaveTextContent('Tooltip text');
+```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressTooltip`, the following nested test IDs
+are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-tooltip" />

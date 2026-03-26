@@ -42,3 +42,11 @@ The `mode` prop controls the colour scheme of the badge. Use data palette colour
 System status colours provide semantic meaning for feedback and state indication. Available options are: `danger`, `info`, `success`, and `warning`.
 
 <ComponentExample of={ComponentStories.Status} />
+
+## Testing
+
+Query pills by their text content:
+
+```tsx
+const pill = screen.getByText('Active');
+```

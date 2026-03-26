@@ -737,6 +737,79 @@ function generatePropsReference(
   return md;
 }
 
+// ─── TestId Table Resolution ─────────────────────────────────
+
+interface TestIdEntry {
+  suffix: string;
+  description: string;
+}
+
+/**
+ * Load the `testIds` export from a component's meta/index.tsx via dynamic import.
+ * Works because `import type` is erased at compile time, so no path alias resolution is needed.
+ */
+async function loadTestIdsFromMeta(
+  metaPath: string,
+): Promise<TestIdEntry[] | null> {
+  if (!existsSync(metaPath)) return null;
+
+  try {
+    const mod = await import(metaPath);
+    const testIds = mod.testIds as TestIdEntry[] | undefined;
+    return testIds?.length ? testIds : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Convert a TestIdEntry array to a markdown table.
+ */
+function testIdsToMarkdownTable(
+  entries: TestIdEntry[],
+  prefix?: string,
+): string {
+  const hasPrefix = !!prefix;
+  const header = hasPrefix
+    ? '| Suffix | Example | Description |'
+    : '| Suffix | Description |';
+  const separator = hasPrefix ? '| --- | --- | --- |' : '| --- | --- |';
+  const rows = entries.map((e) =>
+    hasPrefix
+      ? `| \`${e.suffix}\` | \`${prefix}__${e.suffix}\` | ${e.description} |`
+      : `| \`${e.suffix}\` | ${e.description} |`,
+  );
+  return [header, separator, ...rows].join('\n');
+}
+
+/**
+ * Replace <TestIdTable testIds={testIds} testIdPrefix="..." /> with a markdown table.
+ * Reads testIds from the component's meta/index.tsx via dynamic import.
+ */
+async function resolveTestIdTables(
+  content: string,
+  docFilePath: string,
+): Promise<string> {
+  const regex =
+    /<TestIdTable\s+testIds=\{testIds\}\s+testIdPrefix="([^"]+)"\s*\/>/g;
+  const matches = [...content.matchAll(regex)];
+  if (matches.length === 0) return content;
+
+  const metaPath = path.join(path.dirname(docFilePath), 'meta', 'index.tsx');
+  const entries = await loadTestIdsFromMeta(metaPath);
+
+  let result = content;
+  for (const match of matches) {
+    const prefix = match[1];
+    const replacement = entries
+      ? testIdsToMarkdownTable(entries, prefix)
+      : '*No test IDs documented.*';
+    result = result.replace(match[0], replacement);
+  }
+
+  return result;
+}
+
 // ─── Content Transformation ──────────────────────────────────
 
 /**
@@ -1092,12 +1165,12 @@ function generateStylingPropsReferenceTable(): string {
 /**
  * Transform raw Storybook MDX content to clean AI-consumable markdown.
  */
-function transformContent(doc: DocFile): {
+async function transformContent(doc: DocFile): Promise<{
   output: string;
   title: string;
   description: string;
   warnings: string[];
-} {
+}> {
   const warnings: string[] = [];
   const { content, componentName, category } = doc;
   const categoryPrefix =
@@ -1131,6 +1204,9 @@ function transformContent(doc: DocFile): {
   // 2. Remove <Meta of={...} /> and <Meta title="..." />
   result = result.replace(/<Meta\s+of=\{[^}]+\}\s*\/>\s*\n?/g, '');
   result = result.replace(/<Meta\s+title="[^"]*"\s*\/>\s*\n?/g, '');
+
+  // 2b. Resolve <TestIdTable> to markdown tables before other JSX transforms
+  result = await resolveTestIdTables(result, doc.filePath);
 
   // 3. Remove <ComponentOverview>
   result = removeComponentOverview(result);
@@ -1238,11 +1314,24 @@ function transformContent(doc: DocFile): {
   // 8. Remove remaining <Story> tags
   result = result.replace(/<Story[\s\S]*?\/>\s*\n?/g, '');
 
-  // 9. Convert <IressAlert> to blockquote callouts
+  // 9. Protect existing code fences from JSX transforms (IressAlert, IressExpander, IressButton)
+  const protectedCodeBlocks: string[] = [];
+  result = result.replace(/```[\s\S]*?```/g, (block) => {
+    const idx = protectedCodeBlocks.length;
+    protectedCodeBlocks.push(block);
+    return `%%PROTECTED_CODE_${idx}%%`;
+  });
+
+  // 9b. Convert <IressAlert> to blockquote callouts
   result = convertIressAlertToCallout(result);
 
   // 10. Convert <IressExpander> to <details>
   result = convertIressExpanderToDetails(result);
+
+  // 10b. Restore protected code fences
+  for (let i = 0; i < protectedCodeBlocks.length; i++) {
+    result = result.replace(`%%PROTECTED_CODE_${i}%%`, protectedCodeBlocks[i]);
+  }
 
   // 11. Remove <p> wrappers around content
   result = result.replace(/<p>\s*\n?([\s\S]*?)\n?\s*<\/p>/g, (_match, inner) =>
@@ -1710,7 +1799,7 @@ async function main() {
   for (const doc of allDocs) {
     try {
       // Transform content
-      const { output, title, description, warnings } = transformContent(doc);
+      const { output, title, description, warnings } = await transformContent(doc);
 
       for (const w of warnings) {
         allWarnings.push(`${doc.slug}: ${w}`);

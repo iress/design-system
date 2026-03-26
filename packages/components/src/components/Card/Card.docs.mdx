@@ -6,7 +6,9 @@ import * as CardSlotsStories from './CardSlots.stories';
 import {
   ComponentOverview,
   ComponentExample,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={CardStories} />
 
@@ -133,3 +135,31 @@ To simplify the process of making the whole card clickable, you can use the `Ire
   <ComponentExample of={CardClickableStories.ButtonCard} />
   <ComponentExample of={CardClickableStories.LinkCard} />
 </IressInline>
+
+## Testing
+
+Query cards by their content or use a `data-testid`:
+
+```tsx
+const card = screen.getByTestId('my-card');
+```
+
+The role depends on the `element` prop:
+
+```tsx
+// element="a" (clickable card with link)
+const card = screen.getByRole('link', { name: 'Card heading' });
+
+// element="button" (clickable card with button)
+const card = screen.getByRole('button', { name: 'Card heading' });
+
+// default (div) — no implicit role, use data-testid
+const card = screen.getByTestId('my-card');
+```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressCard`, the following nested test IDs are
+generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-card" />

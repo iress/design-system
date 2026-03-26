@@ -157,6 +157,7 @@ export const IressAlert = ({
         css(styles.alert, styles.alertVars, styleProps),
         GlobalCSSClass.Alert,
       )}
+      role={status === 'info' || status === 'neutral' ? 'status' : 'alert'}
       {...nonStyleProps}
     >
       {variant !== 'sidebar' && icon}

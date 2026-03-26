@@ -56,3 +56,14 @@ These props accept any unit of dimension, but if no unit is provided it will def
 **Note:** `height` will be ignored for text mode as this is calculated using the `IressText` component.
 
 <ComponentExample of={ComponentStories.Size} />
+
+## Testing
+
+`IressSkeleton` is a loading placeholder. Assert that the real content appears
+after loading:
+
+```tsx
+await waitFor(() => {
+  expect(screen.getByText('Loaded content')).toBeInTheDocument();
+});
+```

@@ -213,3 +213,17 @@ It has one additional prop, `screenReaderText`, which is used to provide a scree
   }}
   of={CloseButtonStories.CloseButton}
 />
+
+## Testing
+
+Query buttons by their accessible role:
+
+```tsx
+const button = screen.getByRole('button', { name: 'Submit' });
+```
+
+When `href` is provided, the button renders as a link:
+
+```tsx
+const link = screen.getByRole('link', { name: 'Go to dashboard' });
+```

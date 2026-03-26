@@ -3,7 +3,9 @@ import * as ComponentStories from './TabSet.stories';
 import {
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -82,3 +84,20 @@ Notes:
 - For best accessibility, the `IressTab` component will find the first focusable element inside the custom label to add the tab role.
 
 <ComponentExample of={ComponentStories.TabsWithBadges} />
+
+## Testing
+
+Query tabs by their role. The tab's accessible name comes from the `label` prop:
+
+```tsx
+const tab = screen.getByRole('tab', { name: 'Details' });
+await user.click(tab);
+const panel = screen.getByRole('tabpanel');
+```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressTabSet`, the following nested test IDs
+are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-tabset" />

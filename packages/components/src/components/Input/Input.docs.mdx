@@ -139,3 +139,40 @@ The `variant` prop allows you to apply different styles to the input.
 ## `onChange` and `onInput`
 
 As of version 5, the `onChange` and `onInput` events are now consistent with how React handles the events. This means that the `onChange` event will fire at the same time as `onInput`.
+
+## Testing
+
+Query the input by its role:
+
+```tsx
+const input = screen.getByRole('textbox', { name: 'Email' });
+```
+
+For number inputs, use `spinbutton`:
+
+```tsx
+const input = screen.getByRole('spinbutton', { name: 'Quantity' });
+```
+
+### Gotchas
+
+- **formatter changes the role**: When `formatter` is set on a `type="number"`
+  input, the role changes between `textbox` (blurred) and `spinbutton`
+  (focused).
+- **readOnly removes the input role**: When `readOnly` is set, the textbox role
+  is removed. The value is displayed as plain text and a hidden `<input>`
+  preserves the form value.
+- **Textarea vs Input test IDs**: When `rows` is set, the component renders a
+  `<textarea>` with a `__textarea` test ID suffix. Without `rows`, it renders an
+  `<input>` with a `__input` suffix.
+
+  ```tsx
+  // Single-line input
+  screen.getByTestId('my-input__input');
+
+  // Textarea (rows > 0)
+  screen.getByTestId('my-input__textarea');
+  ```
+
+- **clearable inputs**: The clear button only appears when the input has a
+  value. After clearing, focus returns to the input.
