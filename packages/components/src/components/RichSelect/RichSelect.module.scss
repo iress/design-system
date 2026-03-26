@@ -16,7 +16,7 @@
   min-width: fit-content;
   z-index: 1030;
 
-  &:has(.ids-selectSearchInput):not(:has(.ids-select-search--content)) {
+  &:has(.ids-selectSearchInput) {
     overflow: hidden;
   }
 
