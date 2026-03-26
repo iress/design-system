@@ -5,6 +5,7 @@ on:
     branches: [main, 5.x]
 
 permissions:
+  contents: read
   pull-requests: write
 
 env:
@@ -12,7 +13,7 @@ env:
 
 jobs:
   size:
-    name: Check Bundle Size
+    name: Check
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
