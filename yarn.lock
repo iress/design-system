@@ -1562,7 +1562,7 @@ __metadata:
     "@vitest/coverage-v8": "npm:4.0.18"
     "@vitest/ui": "npm:4.0.18"
     concurrently: "npm:^9.2.1"
-    dompurify: "npm:3.3.3"
+    dompurify: "npm:^3.2.5"
     eslint: "npm:10.0.3"
     eslint-plugin-file-progress: "npm:^3.0.2"
     eslint-plugin-mdx: "npm:3.7.0"
@@ -6693,7 +6693,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dompurify@npm:*, dompurify@npm:3.3.3":
+"dompurify@npm:*":
   version: 3.3.3
   resolution: "dompurify@npm:3.3.3"
   dependencies:
