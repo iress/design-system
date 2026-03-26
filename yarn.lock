@@ -1914,6 +1914,7 @@ __metadata:
     "@iress-oss/ids-storybook-toggle-stories": "npm:^0.1.0"
     "@iress-oss/ids-storybook-version-badge": "npm:^0.1.1"
     "@mermaid-js/mermaid-cli": "npm:^11.12.0"
+    "@size-limit/file": "npm:12.0.1"
     "@storybook/addon-a11y": "npm:10.2.16"
     "@storybook/addon-docs": "npm:10.2.16"
     "@storybook/react-vite": "npm:10.2.16"
@@ -1939,6 +1940,7 @@ __metadata:
     puppeteer: "npm:^24.38.0"
     react: "npm:^19.2.4"
     react-dom: "npm:^19.2.4"
+    size-limit: "npm:12.0.1"
     storybook: "npm:10.2.16"
     storybook-addon-tag-badges: "npm:^3.0.6"
     ts-dedent: "npm:^2.2.0"
@@ -3146,6 +3148,15 @@ __metadata:
   version: 0.34.41
   resolution: "@sinclair/typebox@npm:0.34.41"
   checksum: 10c0/0fb61fc2f90c25e30b19b0096eb8ab3ccef401d3e2acfce42168ff0ee877ba5981c8243fa6b1035ac756cde95316724e978b2837dd642d7e4e095de03a999c90
+  languageName: node
+  linkType: hard
+
+"@size-limit/file@npm:12.0.1":
+  version: 12.0.1
+  resolution: "@size-limit/file@npm:12.0.1"
+  peerDependencies:
+    size-limit: 12.0.1
+  checksum: 10c0/36a4d44786d3c953361cd3b482ef98fa7d6f4580ed499d2432d11b1be24055005b897746a1aad25218c6904f6cab5037b104acf4c2e3a4ca182f34ebcb428747
   languageName: node
   linkType: hard
 
@@ -5290,6 +5301,13 @@ __metadata:
   peerDependencies:
     esbuild: ">=0.18"
   checksum: 10c0/8bff9df68eb686f05af952003c78e70ffed2817968f92aebb2af620cc0b7428c8154df761d28f1b38508532204278950624ef86ce63644013dc57660a9d1810f
+  languageName: node
+  linkType: hard
+
+"bytes-iec@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "bytes-iec@npm:3.1.1"
+  checksum: 10c0/cb553a214d49afe2efb4f9f6f03c0a76dbf2b0db8fe176c1d9943f74b79fb36767938e5f0a60991d870309c96f21e440904dd4f92b54c9c316c88486e6eef025
   languageName: node
   linkType: hard
 
@@ -10576,7 +10594,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanospinner@npm:^1.2.0":
+"nanospinner@npm:^1.2.0, nanospinner@npm:^1.2.2":
   version: 1.2.2
   resolution: "nanospinner@npm:1.2.2"
   dependencies:
@@ -12663,6 +12681,26 @@ __metadata:
   version: 1.0.5
   resolution: "sisteransi@npm:1.0.5"
   checksum: 10c0/230ac975cca485b7f6fe2b96a711aa62a6a26ead3e6fb8ba17c5a00d61b8bed0d7adc21f5626b70d7c33c62ff4e63933017a6462942c719d1980bb0b1207ad46
+  languageName: node
+  linkType: hard
+
+"size-limit@npm:12.0.1":
+  version: 12.0.1
+  resolution: "size-limit@npm:12.0.1"
+  dependencies:
+    bytes-iec: "npm:^3.1.1"
+    lilconfig: "npm:^3.1.3"
+    nanospinner: "npm:^1.2.2"
+    picocolors: "npm:^1.1.1"
+    tinyglobby: "npm:^0.2.15"
+  peerDependencies:
+    jiti: ^2.0.0
+  peerDependenciesMeta:
+    jiti:
+      optional: true
+  bin:
+    size-limit: bin.js
+  checksum: 10c0/4318eb8808cff2df845429c945a7cf9243421f47ddd777225cf20bbfda1547892cdc92d8aff03d94bcf18c7b086d4818606aaf6436dae70fe47df34f91b9618c
   languageName: node
   linkType: hard
 
