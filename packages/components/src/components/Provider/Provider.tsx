@@ -60,19 +60,11 @@ export const IressProvider = ({
   position,
   ...restProps
 }: IressProviderProps) => {
-  const content = noIconProvider ? (
-    children
-  ) : (
-    <IressIconProvider container={container} noSubsetting={noSubsetting}>
-      {children}
-    </IressIconProvider>
-  );
-
-  return (
+  const providers = (
     <IressModalProvider container={container}>
       <IressToasterProvider container={container} position={position}>
         <IressSlideoutProvider container={container} {...restProps}>
-          {content}
+          {children}
         </IressSlideoutProvider>
       </IressToasterProvider>
       {!noDefaultFont &&
@@ -89,6 +81,16 @@ export const IressProvider = ({
           'design-system-font',
         )}
     </IressModalProvider>
+  );
+
+  if (noIconProvider) {
+    return providers;
+  }
+
+  return (
+    <IressIconProvider container={container} noSubsetting={noSubsetting}>
+      {providers}
+    </IressIconProvider>
   );
 };
 
