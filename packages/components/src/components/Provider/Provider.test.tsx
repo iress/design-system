@@ -40,6 +40,12 @@ const App = () => {
 };
 
 describe('IressProvider', () => {
+  afterEach(() => {
+    document.head
+      .querySelectorAll('link[data-material-icons-subset]')
+      .forEach((el) => el.remove());
+  });
+
   it('adds providers', async () => {
     render(
       <IressProvider>
