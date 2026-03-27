@@ -14,7 +14,11 @@ import { splitCssProps } from '@/styled-system/jsx';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { useControlledState, useIdIfNeeded } from '@/hooks';
 import type { ControlledValue } from '@/hooks/useControlledState';
-import type { FormattedLabelValueMeta, LabelValueMeta } from '@/interfaces';
+import type {
+  FormattedLabelValueMeta,
+  IressCustomiseSlot,
+  LabelValueMeta,
+} from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import {
   useAutocompleteSearch,
@@ -56,6 +60,12 @@ export interface IressDropdownMenuProps<TMultiple extends boolean = false>
     >,
     Omit<AutocompleteSearchHookProps, 'query'>,
     Pick<IressSelectMenuProps, 'limitMobile' | 'limitDesktop'> {
+  /**
+   * This allows you to customise the activator button styling.
+   * It accepts an object with any of the styling properties available on `IressCSSProps`, as well as `className` and `style`.
+   */
+  activatorStyle?: IressCustomiseSlot;
+
   /**
    * The current value of the dropdown menu. Use this in uncontrolled mode when you want to set an initial value that can be changed internally by the component. For a controlled dropdown menu, use the `selected` prop instead.
    */
@@ -161,6 +171,7 @@ const ResetButton = forwardRef(
 
 const DropdownMenu = <TMultiple extends boolean = false>(
   {
+    activatorStyle = {},
     align = 'bottom-start',
     container,
     className,
@@ -218,6 +229,11 @@ const DropdownMenu = <TMultiple extends boolean = false>(
   const [styleProps, nonStyleProps] = useMemo(
     () => splitCssProps(restProps),
     [restProps],
+  );
+
+  const [activatorCssProps, activatorNonStyleProps] = useMemo(
+    () => splitCssProps(activatorStyle),
+    [activatorStyle],
   );
 
   const handleQueryChange: IressInputProps['onChange'] = (e) => {
@@ -311,20 +327,29 @@ const DropdownMenu = <TMultiple extends boolean = false>(
         {...nonStyleProps}
         activator={
           <button
+            {...activatorNonStyleProps}
             aria-describedby={screenreaderId}
-            data-testid={propagateTestid(
-              dataTestId,
-              'activator-button__button',
-            )}
+            data-testid={
+              activatorStyle?.['data-testid'] ??
+              propagateTestid(dataTestId, 'activator-button__button')
+            }
             id={screenreaderId}
             onClick={() => setShow(true)}
-            className={css(styles.activator, styleProps)}
+            className={cx(
+              activatorStyle?.className,
+              css(styles.activator, activatorCssProps),
+            )}
           >
             {activatorLabel}
           </button>
         }
         align={align}
-        className={cx(className, classes.root, GlobalCSSClass.Filter)}
+        className={cx(
+          className,
+          css(styleProps),
+          classes.root,
+          GlobalCSSClass.Filter,
+        )}
         container={container}
         contentStyle={{ className: classes.popoverContent, p: 'none' }}
         data-testid={dataTestId}
