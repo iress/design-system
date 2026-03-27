@@ -52,6 +52,15 @@ Test files must live inside each package's `src/` directory. Do not create tests
 yarn typecheck               # all packages
 ```
 
+## Bundle size
+
+```bash
+yarn size                    # check all packages against budgets
+yarn size:check              # same, but JSON output (useful for scripting)
+```
+
+Budgets are defined in `.size-limit.json`. The `ci-cd.yml` workflow checks bundle sizes as part of the validation matrix on every push.
+
 ## Linting
 
 ```bash

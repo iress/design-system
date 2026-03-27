@@ -95,7 +95,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        check: [lint, typecheck, test:ci, lint:mermaid]
+        check: [lint, typecheck, test:ci, lint:mermaid, size]
     steps:
       - uses: actions/checkout@v6
       - name: Setup Node.js

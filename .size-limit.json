@@ -1,0 +1,26 @@
+[
+  {
+    "name": "@iress-oss/ids-components JS",
+    "path": "packages/components/dist/**/*.js",
+    "limit": "377 kB",
+    "gzip": true
+  },
+  {
+    "name": "@iress-oss/ids-components CSS",
+    "path": "packages/components/dist/style.css",
+    "limit": "46 kB",
+    "gzip": true
+  },
+  {
+    "name": "@iress-oss/ids-tokens JS",
+    "path": "packages/tokens/dist/**/*.js",
+    "limit": "20 kB",
+    "gzip": true
+  },
+  {
+    "name": "@iress-oss/ids-tokens CSS",
+    "path": "packages/tokens/build/css-vars.css",
+    "limit": "3 kB",
+    "gzip": true
+  }
+]
