@@ -115,3 +115,19 @@ Key features demonstrated:
 - **File Management**: Display uploaded files with remove functionality using `IressPanel`
 
 <ComponentExample of={ComponentStories.CustomFormFieldComponents} />
+
+## Sanitising input
+
+When sending user input to a server or third-party API, it is important to
+sanitise the data to prevent cross-site scripting (XSS) attacks. This example
+uses [DOMPurify](https://github.com/cure53/DOMPurify) to recursively strip
+malicious HTML from all string values in the form data before submission.
+
+Install DOMPurify in your project:
+
+```bash
+npm install dompurify
+npm install --save-dev @types/dompurify
+```
+
+<ComponentExample of={ComponentStories.SanitisingInput} />

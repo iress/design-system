@@ -25,7 +25,16 @@ import ValidationDependOnOtherFieldsSource from './mocks/ValidationDependOnOther
 import { ValidationDependOnOtherFields as ValidationDependOnOtherFieldsExample } from './mocks/ValidationDependOnOtherFields';
 import { CustomFormFieldComponents as CustomFormFieldComponentsExample } from './mocks/CustomFormFieldComponents';
 import CustomFormFieldComponentsSource from './mocks/CustomFormFieldComponents.tsx?raw';
+import SanitisedInputFormSource from './mocks/SanitisedInputForm.tsx?raw';
 import { withCustomSource } from '@iress-oss/ids-storybook-config';
+import { lazy } from 'react';
+import { IressLoadingSuspense } from '../Loading';
+
+const SanitisedInputForm = lazy(() =>
+  import('./mocks/SanitisedInputForm').then((m) => ({
+    default: m.SanitisedInputForm,
+  })),
+);
 
 type Story = StoryObj<typeof IressForm>;
 
@@ -110,5 +119,16 @@ export const CustomFormFieldComponents: Story = {
   render: (args) => <CustomFormFieldComponentsExample {...args} />,
   parameters: {
     ...withCustomSource(CustomFormFieldComponentsSource),
+  },
+};
+
+export const SanitisingInput: Story = {
+  render: () => (
+    <IressLoadingSuspense>
+      <SanitisedInputForm />
+    </IressLoadingSuspense>
+  ),
+  parameters: {
+    ...withCustomSource(SanitisedInputFormSource),
   },
 };
