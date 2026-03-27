@@ -267,11 +267,8 @@ export const SelectOptions = <TMultiple extends boolean = false>({
   >(
     (item) => {
       setValue(item);
-      onChange?.(
-        getValueAsEvent(toPrimitiveValue(item)),
-        toPrimitiveValue(item),
-        item,
-      );
+      const primitive = toPrimitiveValue(item);
+      onChange?.(getValueAsEvent(primitive), primitive, item);
 
       if (!multiSelect) {
         setShow(false);
@@ -293,11 +290,8 @@ export const SelectOptions = <TMultiple extends boolean = false>({
         TMultiple
       >;
       setValue(newValue);
-      onChange?.(
-        getValueAsEvent(toPrimitiveValue(newValue)),
-        toPrimitiveValue(newValue),
-        newValue,
-      );
+      const primitive = toPrimitiveValue(newValue);
+      onChange?.(getValueAsEvent(primitive), primitive, newValue);
     },
     [setValue, onChange],
   );

@@ -106,11 +106,8 @@ export const SelectActivator = <TMultiple extends boolean = false>({
             (valueItem) => valueItem.label !== item.label,
           ) as ControlledValue<LabelValueMeta, TMultiple>;
           setValue(newValue);
-          onChange?.(
-            getValueAsEvent(toPrimitiveValue(newValue)),
-            toPrimitiveValue(newValue),
-            newValue,
-          );
+          const primitive = toPrimitiveValue(newValue);
+          onChange?.(getValueAsEvent(primitive), primitive, newValue);
         }}
         onDeleteAll={() => {
           const newValue = [] as LabelValueMeta[] as ControlledValue<
@@ -118,11 +115,8 @@ export const SelectActivator = <TMultiple extends boolean = false>({
             TMultiple
           >;
           setValue(newValue);
-          onChange?.(
-            getValueAsEvent(toPrimitiveValue(newValue)),
-            toPrimitiveValue(newValue),
-            newValue,
-          );
+          const primitive = toPrimitiveValue(newValue);
+          onChange?.(getValueAsEvent(primitive), primitive, newValue);
         }}
         onToggleActions={() => setShow(false)}
         placeholder={placeholder}
