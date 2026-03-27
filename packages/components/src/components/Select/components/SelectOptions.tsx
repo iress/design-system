@@ -3,6 +3,7 @@ import {
   type IressSelectProps,
   type SelectOptionsRenderProps,
 } from '../Select';
+import { toPrimitiveValue } from '../helpers/toPrimitiveValue';
 import {
   type UIEventHandler,
   useCallback,
@@ -266,7 +267,8 @@ export const SelectOptions = <TMultiple extends boolean = false>({
   >(
     (item) => {
       setValue(item);
-      onChange?.(getValueAsEvent(item), item);
+      const primitive = toPrimitiveValue(item);
+      onChange?.(getValueAsEvent(primitive), primitive, item);
 
       if (!multiSelect) {
         setShow(false);
@@ -288,7 +290,8 @@ export const SelectOptions = <TMultiple extends boolean = false>({
         TMultiple
       >;
       setValue(newValue);
-      onChange?.(getValueAsEvent([]), newValue);
+      const primitive = toPrimitiveValue(newValue);
+      onChange?.(getValueAsEvent(primitive), primitive, newValue);
     },
     [setValue, onChange],
   );

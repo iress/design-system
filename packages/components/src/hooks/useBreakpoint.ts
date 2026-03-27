@@ -1,5 +1,5 @@
 import { BREAKPOINT_DETAILS, BREAKPOINTS } from '@/constants';
-import { type BreakpointDetail } from '@theme-preset/constants';
+import { type BreakpointDetail } from '@/constants';
 import { type Breakpoints } from '@/types';
 import { useSyncExternalStore } from 'react';
 

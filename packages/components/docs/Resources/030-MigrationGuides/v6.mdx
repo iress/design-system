@@ -423,7 +423,8 @@ New component for rendering a standalone radio mark indicator (similar to `Iress
 | `defaultValue`/`onChange`/`value`      | Type-aware based on `multiSelect` — arrays when `true`, single value when `false`                                           |
 | `value`/`defaultValue` accepts strings | Now also accepts a plain string or `FormControlValue` that resolves to the matching option automatically                    |
 | New `multiSelectLimit` prop            | Limits visible selected tags before collapsing to "+N more" summary (default `5`). Display only — does not limit selections |
-| New `native` prop                      | Renders a browser-native select (replaces the old `IressSelect`). Note: still passes `LabelValueMeta` as the value          |
+| New `native` prop                      | Renders a browser-native select (replaces the old `IressSelect`)                                                             |
+| `onChange` signature                   | `onChange(event, value, labelValue)` — `value` is the primitive (`FormControlValue`), `labelValue` is the full `LabelValueMeta` |
 | Grouped items                          | Now supported                                                                                                               |
 | New hover and focus states             | —                                                                                                                           |
 
