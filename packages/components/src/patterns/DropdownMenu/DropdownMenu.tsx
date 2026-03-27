@@ -61,8 +61,17 @@ export interface IressDropdownMenuProps<TMultiple extends boolean = false>
     Omit<AutocompleteSearchHookProps, 'query'>,
     Pick<IressSelectMenuProps, 'limitMobile' | 'limitDesktop'> {
   /**
-   * This allows you to customise the activator button styling.
-   * It accepts an object with any of the styling properties available on `IressCSSProps`, as well as `className` and `style`.
+   * Customisation options for the dropdown menu activator button.
+   *
+   * Accepts any styling properties available on `IressCSSProps`, as well as
+   * `className`, `style`, and `data-testid`.
+   *
+   * @example
+   * ```tsx
+   * <IressDropdownMenu
+   *   activatorStyle={{ 'data-testid': 'my-activator', p: 'spacing.2' }}
+   * />
+   * ```
    */
   activatorStyle?: IressCustomiseSlot;
 
@@ -333,7 +342,6 @@ const DropdownMenu = <TMultiple extends boolean = false>(
               activatorStyle?.['data-testid'] ??
               propagateTestid(dataTestId, 'activator-button__button')
             }
-            id={screenreaderId}
             onClick={() => setShow(true)}
             className={cx(
               activatorStyle?.className,
@@ -406,7 +414,9 @@ const DropdownMenu = <TMultiple extends boolean = false>(
         )}
         {footer}
       </IressPopover>
-      <IressStyled srOnly>{descriptor}</IressStyled>
+      <IressStyled srOnly id={screenreaderId}>
+        {descriptor}
+      </IressStyled>
     </>
   );
 };

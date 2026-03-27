@@ -278,12 +278,15 @@ describe('IressDropdownMenu', () => {
       const root = screen.getByTestId(TEST_ID);
       const activator = screen.getByRole('button', { name: TEST_LABEL });
 
-      expect(root.className).toContain(
-        css({ p: 'spacing.4', bg: 'colour.primary.surface' }),
-      );
-      expect(activator.className).not.toContain(
-        css({ p: 'spacing.4', bg: 'colour.primary.surface' }),
-      );
+      const expectedClasses = css({
+        p: 'spacing.4',
+        bg: 'colour.primary.surface',
+      }).split(' ');
+
+      expect(root).toHaveClass(...expectedClasses);
+      for (const cls of expectedClasses) {
+        expect(activator).not.toHaveClass(cls);
+      }
     });
   });
 
