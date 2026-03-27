@@ -33,3 +33,12 @@ The `IressContainer` snaps to fixed max widths at different breakpoints. Those m
 If you want the `IressContainer` to fill its containing element, you can set the `fluid` prop. Resize the example below to see how the IressContainer is 100% for all screen sizes.
 
 <ComponentExample of={ComponentStories.Fluid} />
+
+## Testing
+
+`IressContainer` is a layout primitive with no semantic role. Target its
+children directly or use a `data-testid`:
+
+```tsx
+const container = screen.getByTestId('my-container');
+```

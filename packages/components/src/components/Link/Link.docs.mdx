@@ -54,3 +54,17 @@ Use the `prepend` and `append` props to correctly position icons or badges insid
 You can use the `element` prop to render a custom component as the link. This is useful for rendering a component from a third-party library, such as `react-router-dom`.
 
 <ComponentExample of={ComponentStories.Element} />
+
+## Testing
+
+Query links by their accessible role:
+
+```tsx
+const link = screen.getByRole('link', { name: 'Learn more' });
+```
+
+When no `href` is provided, the link renders as a button:
+
+```tsx
+const button = screen.getByRole('button', { name: 'Show details' });
+```

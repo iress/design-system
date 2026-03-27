@@ -54,3 +54,12 @@ The `gutter` prop can take an object that takes five key/value pairs that correl
 `IressRow` can be set to align vertically using the `verticalAlign` prop.
 
 <ComponentExample of={ComponentStories.VerticalAlignment} />
+
+## Testing
+
+`IressRow` is a layout primitive with no semantic role. Target its children
+directly or use a `data-testid`:
+
+```tsx
+const row = screen.getByTestId('my-row');
+```

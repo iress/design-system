@@ -3,7 +3,9 @@ import * as ComponentStories from './Slider.stories';
 import {
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -76,3 +78,33 @@ Sliders can be set to read only by using the `readOnly` property. When set to re
 If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](?path=/docs/components-readonly--docs).
 
 <ComponentExample of={ComponentStories.ReadOnly} />
+
+## Testing
+
+Query the slider by its role:
+
+```tsx
+const slider = screen.getByRole('slider', { name: 'Volume' });
+```
+
+### Gotchas
+
+- **`userEvent` does not work on range inputs**: Due to a
+  [known limitation](https://github.com/testing-library/user-event/issues/1067),
+  `userEvent` cannot change range input values. Use `fireEvent.change` instead:
+
+  ```tsx
+  import { fireEvent } from '@testing-library/react';
+
+  fireEvent.change(screen.getByRole('slider'), { target: { value: '5' } });
+  ```
+
+- **readOnly removes the slider role**: When `readOnly` is set, the slider role
+  is removed and the value is displayed as plain text via `IressReadonly`.
+
+### Test IDs
+
+When you pass a `data-testid` to `IressSlider`, the following nested test IDs
+are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-slider" />

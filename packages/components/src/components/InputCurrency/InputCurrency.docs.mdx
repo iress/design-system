@@ -57,3 +57,17 @@ The `readOnly` prop can be set to prevent the user from changing the value of th
 Set the input content align to right with `alignRight` prop, which is more friendly for number input.
 
 <ComponentExample of={ComponentStories.AlignRight} />
+
+## Testing
+
+Query the currency input by its role. Note that when a `formatter` is active,
+the input role changes between `textbox` (blurred) and `spinbutton` (focused):
+
+```tsx
+const input = screen.getByRole('textbox', { name: 'Amount' });
+```
+
+### Gotchas
+
+- **readOnly removes the input role**: When `readOnly` is set, the textbox role
+  is removed and the formatted value is displayed as plain text.

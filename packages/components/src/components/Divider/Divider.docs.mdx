@@ -30,3 +30,11 @@ You can customise the gutter by using the `my` prop. If the divider is vertical,
 By default, dividers do not have a gutter, allowing them to adapt to `<IressStack>` and `<IressInline>` layouts.
 
 <ComponentExample of={ComponentStories.Gutter} />
+
+## Testing
+
+Query the divider by its `separator` role:
+
+```tsx
+const divider = screen.getByRole('separator');
+```

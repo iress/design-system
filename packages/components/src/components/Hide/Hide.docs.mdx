@@ -65,3 +65,12 @@ This `visuallyHidden` prop is used if you don't want content to be visible on sc
 Utility classes are no longer available to use. Instead, please use the `hideFrom`, `hideBelow`, and `srOnly` styling props.
 
 For more information, please see the [styling props documentation](/?path=/docs/components_styling-props-reference--docs).
+
+## Testing
+
+`IressHide` conditionally renders children based on breakpoints. Test the
+children directly rather than the wrapper:
+
+```tsx
+expect(screen.queryByText('Hidden content')).not.toBeInTheDocument();
+```

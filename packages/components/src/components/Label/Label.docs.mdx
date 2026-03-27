@@ -3,7 +3,9 @@ import * as ComponentStories from './Label.stories';
 import {
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -56,3 +58,19 @@ See the [MDN Label Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Eleme
 ### Labelling non-interactive content
 
 `IressLabel` can be used to label non-interactive content, such as readonly data. In this case, do not provide a `htmlFor` prop. This will render the label using a `strong` tag instead of a `label` tag.
+
+## Testing
+
+Labels are typically queried indirectly through the form control they describe.
+Use `getByLabelText` to find the associated input:
+
+```tsx
+const input = screen.getByLabelText('Email address');
+```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressLabel`, the following nested test IDs
+are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-label" />

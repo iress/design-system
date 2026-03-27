@@ -4,7 +4,9 @@ import * as ValidationSummaryStories from './ValidationSummary/ValidationSummary
 import {
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -56,3 +58,18 @@ Messages can be passed programmatically as a `ValidationMessageObj[]` using the 
   of={ValidationSummaryStories.ValidationSummary}
   meta={ValidationSummaryStories}
 />
+
+## Testing
+
+Query validation messages by their text content or `data-testid`:
+
+```tsx
+const error = screen.getByText('This field is required');
+```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressValidationSummary`, the following nested
+test IDs are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-validation" />

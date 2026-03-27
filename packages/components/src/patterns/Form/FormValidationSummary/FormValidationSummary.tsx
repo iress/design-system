@@ -117,6 +117,7 @@ export const IressFormValidationSummary = ({
         footer={footer}
         heading={heading}
         icon={icon}
+        role="none"
         status="danger"
         variant={variant}
       >

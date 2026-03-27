@@ -17,3 +17,11 @@ import { ComponentOverview } from '@iress-oss/ids-storybook-config';
 The `IressPlaceholder` component is a **last resort** component, as it provides very little context to the product team and/or user about what content will be placed in the placeholder.
 
 It is recommended to use placeholders that emulate the content that will be placed in the placeholder, such as images or text that is similar to the final content. This will help the product team and/or user understand what to expect in the final product.
+
+## Testing
+
+`IressPlaceholder` is a visual placeholder. Query by `data-testid`:
+
+```tsx
+const placeholder = screen.getByTestId('my-placeholder');
+```

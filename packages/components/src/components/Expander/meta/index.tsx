@@ -1,4 +1,10 @@
 import { lazy } from 'react';
+import type { TestId } from '@helpers/testing';
+
+export const testIds: TestId[] = [
+  { suffix: 'activator', description: 'The expand/collapse trigger button' },
+  { suffix: 'container', description: 'The collapsible content container' },
+];
 
 export default {
   heading: 'Expander',

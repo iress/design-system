@@ -3,7 +3,9 @@ import * as ComponentStories from './Checkbox.stories';
 import {
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -69,3 +71,26 @@ The checkbox component has multiple variants that can be used to change the appe
 - `touch` variant is used to display the checkbox with a larger touch target, which is useful for mobile devices. It is used in the `IressCheckboxGroup` component when the `variant` prop is set to `touch`.
 
 <ComponentExample of={ComponentStories.Variants} />
+
+## Testing
+
+Query checkboxes by their accessible role:
+
+```tsx
+const checkbox = screen.getByRole('checkbox', { name: 'Accept terms' });
+```
+
+### Gotchas
+
+- **readOnly mode**: When `readOnly` is set, the checkbox role is removed from
+  the DOM entirely. Only the text label and a hidden `<input>` remain. If the
+  checkbox is unchecked and readOnly, it renders nothing at all.
+- **indeterminate state**: An indeterminate checkbox starts unchecked
+  (`not.toBeChecked()`). Clicking it transitions to checked.
+
+### Test IDs
+
+When you pass a `data-testid` to `IressCheckbox`, the following nested test IDs
+are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-checkbox" />

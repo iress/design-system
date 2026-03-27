@@ -59,3 +59,12 @@ The `verticalAlign` prop controls how content is positioned vertically within th
 Use `top`, `middle`, or `bottom` to align items within the available space, and `between`, `around`, or `evenly` to distribute extra vertical space between items (similar to `space-between`, `space-around`, and `space-evenly` in CSS flexbox).
 
 <ComponentExample of={ComponentStories.VerticalAlign} />
+
+## Testing
+
+`IressStack` is a layout primitive with no semantic role. Target its children
+directly or use a `data-testid`:
+
+```tsx
+const stack = screen.getByTestId('my-stack');
+```
