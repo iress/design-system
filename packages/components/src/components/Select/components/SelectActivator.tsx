@@ -3,6 +3,7 @@ import { IressSelectLabel } from '../SelectLabel/SelectLabel';
 import { IressSelectTags } from '../SelectTags/SelectTags';
 import { getValueAsEvent } from '@helpers/form/getValueAsEvent';
 import { type IressSelectProps, type SelectLabelRenderProps } from '../Select';
+import { toPrimitiveValue } from '../helpers/toPrimitiveValue';
 import { type ControlledValue } from '@/hooks';
 import { type LabelValueMeta } from '@/interfaces';
 import { type ReactNode } from 'react';
@@ -105,7 +106,8 @@ export const SelectActivator = <TMultiple extends boolean = false>({
             (valueItem) => valueItem.label !== item.label,
           ) as ControlledValue<LabelValueMeta, TMultiple>;
           setValue(newValue);
-          onChange?.(getValueAsEvent(newValue), newValue);
+          const primitive = toPrimitiveValue(newValue);
+          onChange?.(getValueAsEvent(primitive), primitive, newValue);
         }}
         onDeleteAll={() => {
           const newValue = [] as LabelValueMeta[] as ControlledValue<
@@ -113,7 +115,8 @@ export const SelectActivator = <TMultiple extends boolean = false>({
             TMultiple
           >;
           setValue(newValue);
-          onChange?.(getValueAsEvent([]), newValue);
+          const primitive = toPrimitiveValue(newValue);
+          onChange?.(getValueAsEvent(primitive), primitive, newValue);
         }}
         onToggleActions={() => setShow(false)}
         placeholder={placeholder}

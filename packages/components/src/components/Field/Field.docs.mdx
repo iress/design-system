@@ -5,7 +5,9 @@ import * as FieldGroupStories from './FieldGroup/FieldGroup.stories';
 import {
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -169,3 +171,36 @@ If you want out-of-the-box validation, use the `IressFormField` inside an `Iress
 <IressButton href="/?path=/docs/patterns-form--docs#fields">
   View forms documentation for fields
 </IressButton>
+
+## Testing
+
+### Querying
+
+`IressField` is a wrapper component — query the child form control directly
+using its accessible role:
+
+```tsx
+render(
+  <IressField label="Email" htmlFor="email">
+    <input id="email" type="email" />
+  </IressField>,
+);
+
+const input = screen.getByRole('textbox', { name: 'Email' });
+expect(input).toBeInTheDocument();
+```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressField`, the following nested test IDs
+are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-field" />
+
+### Gotchas
+
+- **Nested test ID propagation**: The `label` test ID is passed to `IressLabel`,
+  which further propagates a `text` suffix. This means you can query
+  `my-field__label__text` to reach the label text span.
+- **Hint and error are conditional**: The `__hint` and `__error` test IDs only
+  appear when `hint` or `errorMessages`/`error` props are provided.

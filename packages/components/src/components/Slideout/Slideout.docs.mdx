@@ -5,7 +5,9 @@ import { IressButton } from '../../main';
 import {
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -137,3 +139,17 @@ export const TestAppProvider = ({ children }: PropsWithChildren) => {
   );
 };
 ```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressSlideout`, the following nested test IDs
+are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-slideout" />
+
+### Gotchas
+
+- **Conditional rendering**: Like modals, slideouts are not in the DOM until
+  shown. Use `findByRole` or `findByText` (async) to wait for content.
+- **Animation timing**: Slideout animations can affect test timing. Use the
+  speed-up technique above to set animation duration to `0s` in tests.

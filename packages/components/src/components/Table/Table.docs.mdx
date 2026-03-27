@@ -5,7 +5,9 @@ import * as TableFormattedValueStories from './TableFormattedValue/TableFormatte
 import {
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -284,3 +286,18 @@ It has been exposed so you can use it in your own components to format values in
   of={TableFormattedValueStories.FormattedValue}
   meta={TableFormattedValueStories}
 />
+
+## Testing
+
+Query the table by its role:
+
+```tsx
+const table = screen.getByRole('table', { name: 'Users' });
+```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressTable`, the following nested test IDs
+are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-table" />

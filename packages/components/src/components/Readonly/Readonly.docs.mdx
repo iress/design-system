@@ -3,7 +3,9 @@ import * as ComponentStories from './Readonly.stories';
 import {
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -48,3 +50,24 @@ When form controls such as `IressInput` or `IressSelect` are rendered with
 `IressReadonly`.
 
 <ComponentExample of={ComponentStories.Locked} />
+
+## Testing
+
+Query the readonly display by its text content:
+
+```tsx
+const value = screen.getByText('Read-only value');
+```
+
+### Gotchas
+
+- **No input role**: `IressReadonly` does not render a visible input element.
+  The value is displayed as plain text. A hidden `<input>` preserves the form
+  value but is not queryable by role.
+
+### Test IDs
+
+When you pass a `data-testid` to `IressReadonly`, the following nested test IDs
+are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-readonly" />

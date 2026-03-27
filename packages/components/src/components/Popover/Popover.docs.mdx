@@ -4,7 +4,9 @@ import * as InputPopoverStories from './InputPopover/InputPopover.stories';
 import {
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -97,3 +99,20 @@ Input popovers work slightly different to normal popovers, where the focus insid
   of={InputPopoverStories.Activator}
   meta={InputPopoverStories}
 />
+
+## Testing
+
+Query the popover trigger, then interact to open the content:
+
+```tsx
+const trigger = screen.getByRole('button', { name: 'Open popover' });
+await user.click(trigger);
+expect(screen.getByText('Popover content')).toBeVisible();
+```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressPopover`, the following nested test IDs
+are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-popover" />

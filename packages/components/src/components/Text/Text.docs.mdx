@@ -59,3 +59,12 @@ The `textAlign` prop (previously `align`) can be used to set the text's alignmen
 If you just need to style a block of typography content, you can just wrap the entire block of HTML with the text component.
 
 <ComponentExample of={ComponentStories.TypographicBlock} />
+
+## Testing
+
+Query text elements by their content:
+
+```tsx
+const heading = screen.getByRole('heading', { name: 'Page title' });
+const paragraph = screen.getByText('Some content');
+```

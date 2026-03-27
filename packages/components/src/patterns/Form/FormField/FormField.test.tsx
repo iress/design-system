@@ -391,10 +391,7 @@ describe('IressFormField', () => {
       await userEvent.click(submit);
 
       expect(onSubmit).toHaveBeenCalledWith({
-        select: {
-          label: 'One',
-          value: 1,
-        },
+        select: 1,
       });
     });
 

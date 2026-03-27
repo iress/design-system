@@ -71,14 +71,18 @@ type SelectChangeEvent<
 > = TNative extends false
   ? (
       e: ChangeEvent<HTMLElement> & {
-        currentTarget: { value?: SelectValue<TMultiple, TNative> };
-        target: { value?: SelectValue<TMultiple, TNative> };
+        currentTarget: {
+          value?: ControlledValue<FormControlValue, TMultiple>;
+        };
+        target: { value?: ControlledValue<FormControlValue, TMultiple> };
       },
-      value?: SelectValue<TMultiple, TNative>,
+      value?: ControlledValue<FormControlValue, TMultiple>,
+      labelValue?: ControlledValue<LabelValueMeta, TMultiple>,
     ) => void
   : (
       e: ChangeEvent<HTMLSelectElement>,
-      value?: SelectValue<TMultiple, TNative>,
+      value?: ControlledValue<FormControlValue, TMultiple>,
+      labelValue?: ControlledValue<LabelValueMeta, TMultiple>,
     ) => void;
 
 export type SelectRef<TNative extends boolean | Breakpoints = false> =
@@ -588,7 +592,11 @@ const Select = <
         id={id}
         name={name}
         onChange={(e, value) => {
-          (onChange as SelectChangeEvent<false, true>)?.(e, value);
+          (onChange as SelectChangeEvent<false, true>)?.(
+            e,
+            value?.value ?? null,
+            value,
+          );
           setValue(
             value as ControlledValue<LabelValueMeta, TMultiple> | undefined,
           );

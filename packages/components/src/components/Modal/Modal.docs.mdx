@@ -5,7 +5,9 @@ import { IressAlert } from '../../main';
 import {
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -154,3 +156,31 @@ In version 5, modals are rendered conditionally, meaning they will not be availa
 See below for an example in version 4 and version 5.
 
 <ComponentExample of={ComponentStories.V5ModalDiff} />
+
+## Testing
+
+Query the modal dialog by its role:
+
+```tsx
+const modal = screen.getByRole('dialog', { name: 'Modal heading' });
+```
+
+**Note:** In version 5, modals are rendered conditionally — they are not in the
+DOM until shown. Use `findByRole` when waiting for a modal to appear.
+
+### Gotchas
+
+- **Conditional rendering**: The modal and its contents are not in the DOM until
+  `show` is `true`. You cannot query or interact with modal content before
+  showing it. Use `findByRole` (async) instead of `getByRole`.
+- **Backdrop click closes the modal**: Clicking the backdrop dismisses the modal
+  by default. Use `disableBackdropClick` if your test needs to prevent this.
+- **Focus management**: When the modal opens, focus moves inside it. When it
+  closes, focus returns to the triggering element.
+
+### Test IDs
+
+When you pass a `data-testid` to `IressModal`, the following nested test IDs
+are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-modal" />

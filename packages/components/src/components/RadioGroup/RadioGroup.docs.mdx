@@ -80,3 +80,39 @@ It is understandable that this may not be the desired behavior for all use cases
 The `touch` prop adds the button-like border and padding to radio.
 
 <ComponentExample of={ComponentStories.Touch} />
+
+## Testing
+
+Query radio buttons within the group by their role:
+
+```tsx
+const radios = screen.getAllByRole('radio');
+await user.click(screen.getByRole('radio', { name: 'Option A' }));
+```
+
+Query the group itself by its `radiogroup` role:
+
+```tsx
+const group = screen.getByRole('radiogroup', { name: 'Choose an option' });
+```
+
+### Disambiguating multiple radio groups
+
+When you have multiple Yes/No radio groups on the same page, use `within` to
+scope queries to a specific group:
+
+```tsx
+import { within } from '@testing-library/react';
+
+const approvalGroup = screen.getByRole('radiogroup', { name: 'Approve' });
+const yes = within(approvalGroup).getByRole('radio', { name: 'Yes' });
+await user.click(yes);
+```
+
+### Gotchas
+
+- **readOnly mode**: When `readOnly` is set, all radio roles are removed from
+  the DOM. Only the selected option's label text and a hidden `<input>` remain.
+  If nothing is selected, the group renders empty.
+- **Focus behaviour**: Focusing the `radiogroup` element moves focus to the
+  first radio child. The group needs `tabIndex` to be focusable programmatically.

@@ -10,10 +10,13 @@ import { createPortal } from 'react-dom';
 import idsCss from '../../styled-system/styles.css?raw';
 import { defaultFonts } from '@iress-oss/ids-tokens';
 import { type IressUnstyledProps } from '@/types';
-import { IressProvider } from '@/components/Provider';
+import { IressProvider, type IressProviderProps } from '@/components/Provider';
 import { getNonce } from '@helpers/dom/getNonce';
 
-export interface IressShadowProps extends IressUnstyledProps {
+export interface IressShadowProps
+  extends
+    IressUnstyledProps,
+    Pick<IressProviderProps, 'noIconProvider' | 'noSubsetting' | 'position'> {
   /**
    * Children to be rendered inside the shadow DOM
    */
@@ -49,6 +52,9 @@ export const IressShadow = forwardRef<ShadowRoot | null, IressShadowProps>(
     {
       children,
       fontFaceUrls = [...defaultFonts],
+      noIconProvider,
+      noSubsetting,
+      position,
       stylesheetContents = {},
       stylesheetUrls = [],
       ...restProps
@@ -131,7 +137,13 @@ export const IressShadow = forwardRef<ShadowRoot | null, IressShadowProps>(
 
     return (
       <div ref={hostRef} {...restProps}>
-        <IressProvider container={containerRef} noDefaultFont>
+        <IressProvider
+          container={containerRef}
+          noDefaultFont
+          noIconProvider={noIconProvider}
+          noSubsetting={noSubsetting}
+          position={position}
+        >
           {shadowRoot && createPortal(children, shadowRoot)}
         </IressProvider>
       </div>

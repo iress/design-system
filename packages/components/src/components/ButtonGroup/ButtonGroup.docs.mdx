@@ -3,8 +3,10 @@ import * as ComponentStories from './ButtonGroup.stories';
 import {
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
 import { SourceType } from 'storybook/internal/docs-tools';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -81,3 +83,18 @@ For semantic reasons, you may need the label to be rendered as a heading. In thi
   of={ComponentStories.HeadingLabel}
   source={{ type: SourceType.CODE }}
 />
+
+## Testing
+
+Query the button group by its `group` role:
+
+```tsx
+const group = screen.getByRole('group', { name: 'Alignment' });
+```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressButtonGroup`, the following nested test
+IDs are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-button-group" />

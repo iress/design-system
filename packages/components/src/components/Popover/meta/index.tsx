@@ -1,4 +1,10 @@
 import { lazy } from 'react';
+import type { TestId } from '@helpers/testing';
+
+export const testIds: TestId[] = [
+  { suffix: 'activator', description: 'The popover trigger element' },
+  { suffix: 'content', description: 'The popover content panel' },
+];
 
 export default {
   heading: 'Popover',

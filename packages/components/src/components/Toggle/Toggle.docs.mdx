@@ -4,7 +4,9 @@ import { IressAlert } from '../../main';
 import {
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -55,3 +57,25 @@ The `layout` prop allows you to control the position of the label in relation to
 - `stack` positions the label above the control
 
 <ComponentExample of={ComponentStories.Layout} />
+
+## Testing
+
+Query the toggle by its `switch` role (not `checkbox`):
+
+```tsx
+const toggle = screen.getByRole('switch', { name: 'Dark mode' });
+await user.click(toggle);
+expect(toggle).toBeChecked();
+```
+
+### Gotchas
+
+- **Role is `switch`, not `checkbox`**: Although the toggle looks like a
+  checkbox, it uses `role="switch"`. Use `getByRole('switch')`.
+
+### Test IDs
+
+When you pass a `data-testid` to `IressToggle`, the following nested test IDs
+are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-toggle" />

@@ -31,3 +31,12 @@ Panels are used to group related content. They can be used to create sections wi
 - If you need to display micro-content, use [IressCard](/?path=/docs/components-card--docs) instead.
 - If you need to add padding or a background to a section of content, use [IressStyled](/?path=/docs/components-styled--docs) or [styling props](/?path=/docs/styling-props-reference--docs) on the component itself.
 - Otherwise, use `IressPanel` to group related content together.
+
+## Testing
+
+`IressPanel` is a layout container. Query by `data-testid` or target its
+children directly:
+
+```tsx
+const panel = screen.getByTestId('my-panel');
+```

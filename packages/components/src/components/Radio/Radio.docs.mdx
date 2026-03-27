@@ -3,7 +3,9 @@ import * as ComponentStories from './Radio.stories';
 import {
   ComponentExample,
   ComponentOverview,
+  TestIdTable,
 } from '@iress-oss/ids-storybook-config';
+import { testIds } from './meta';
 
 <Meta of={ComponentStories} />
 
@@ -44,3 +46,39 @@ It is understandable that this may not be the desired behavior for all use cases
 The `variant` prop changes the visual style of the radio. The `card` variant adds a card-like border and the `touch` variant adds button-like border and padding.
 
 <ComponentExample of={ComponentStories.Variants} />
+
+## Testing
+
+Query radio buttons by their accessible role and label text:
+
+```tsx
+const radio = screen.getByRole('radio', { name: 'Option A' });
+```
+
+When you have multiple radios on the same page (e.g. Yes/No questions), always
+query by the specific label text to disambiguate:
+
+```tsx
+// Multiple radio groups on the same page
+const yesRadio = screen.getByRole('radio', { name: 'Yes' });
+const noRadio = screen.getByRole('radio', { name: 'No' });
+
+// If labels are identical across groups, scope your query to a container
+const group = screen.getByRole('radiogroup', { name: 'Approve request' });
+const yes = within(group).getByRole('radio', { name: 'Yes' });
+```
+
+### Gotchas
+
+- **readOnly mode**: When `readOnly` is set, the radio role is removed from the
+  DOM entirely. Only the text label and a hidden `<input>` remain. Use
+  `queryByRole('radio')` to assert absence, and `getByText` to find the label.
+- **Unchecked readOnly radios render nothing**: If a radio is `readOnly` and not
+  checked, it renders no output at all.
+
+### Test IDs
+
+When you pass a `data-testid` to `IressRadio`, the following nested test IDs
+are generated automatically:
+
+<TestIdTable testIds={testIds} testIdPrefix="my-radio" />

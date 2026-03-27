@@ -201,3 +201,14 @@ To help with migrating, we have mapped some common Font Awesome icons to their M
 As of version 6, these names will automatically be mapped when using the `IressIcon` component with the default `type` of `material`. However, we strongly recommend you change them to the material equivalent as soon as possible as the automatic mapping will be removed in a future release.
 
 <Story of={ComponentStories.FontAwesomeToMaterialMigration} />
+
+## Testing
+
+Query icons by their accessible name via `screenreaderText`:
+
+```tsx
+const icon = screen.getByRole('img', { name: 'Close' });
+```
+
+Decorative icons (without `screenreaderText`) are hidden from the accessibility
+tree and should not be queried directly.

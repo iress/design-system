@@ -1,17 +1,40 @@
-// Re-export shared constants from theme-preset (single source of truth)
-export {
-  BREAKPOINT_DETAILS,
-  BREAKPOINTS,
-  FORM_ELEMENT_WIDTHS,
-  GRID_SIZE,
-  HORIZONTAL_ALIGNS,
-  MATERIAL_SYMBOLS,
-  TEXT_ALIGNS,
-  VERTICAL_ALIGNS,
-  Z_INDEX,
+// Import shared constants from theme-preset (single source of truth at runtime).
+// We use import + re-export (not `export { } from`) so that vite-plugin-dts
+// emits self-contained declarations instead of a re-export pointing to the
+// internal @theme-preset package which consumers cannot resolve.
+import {
+  BREAKPOINT_DETAILS as _BREAKPOINT_DETAILS,
+  BREAKPOINTS as _BREAKPOINTS,
+  FORM_ELEMENT_WIDTHS as _FORM_ELEMENT_WIDTHS,
+  GRID_SIZE as _GRID_SIZE,
+  HORIZONTAL_ALIGNS as _HORIZONTAL_ALIGNS,
+  MATERIAL_SYMBOLS as _MATERIAL_SYMBOLS,
+  TEXT_ALIGNS as _TEXT_ALIGNS,
+  VERTICAL_ALIGNS as _VERTICAL_ALIGNS,
+  Z_INDEX as _Z_INDEX,
 } from '@theme-preset/constants';
 
-export type { BreakpointDetail } from '@theme-preset/constants';
+/** Details about a specific breakpoint in the design system. */
+export interface BreakpointDetail {
+  containerMaxWidth: string;
+  margin?: string;
+  maxColumns?: number;
+  maxScreenWidth?: string;
+  mediaQuery: string;
+  minScreenWidth: string;
+  screenWidthRange: string;
+  viewportWidth: number;
+}
+
+export const BREAKPOINT_DETAILS = _BREAKPOINT_DETAILS;
+export const BREAKPOINTS = _BREAKPOINTS;
+export const FORM_ELEMENT_WIDTHS = _FORM_ELEMENT_WIDTHS;
+export const GRID_SIZE = _GRID_SIZE;
+export const HORIZONTAL_ALIGNS = _HORIZONTAL_ALIGNS;
+export const MATERIAL_SYMBOLS = _MATERIAL_SYMBOLS;
+export const TEXT_ALIGNS = _TEXT_ALIGNS;
+export const VERTICAL_ALIGNS = _VERTICAL_ALIGNS;
+export const Z_INDEX = _Z_INDEX;
 
 /**
  * A CSS selector string that matches all focusable elements.

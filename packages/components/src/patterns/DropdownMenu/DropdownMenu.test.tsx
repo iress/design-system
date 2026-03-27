@@ -1,13 +1,14 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
+import { css } from '@/styled-system/css';
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
 import { IressDropdownMenu, IressDropdownMenuProps } from './DropdownMenu';
 
 const TEST_ID = 'test-component';
 const TEST_LABEL = 'Label';
 
-const renderFilter = <TMultiple extends boolean = false>(
+const renderDropdownMenu = <TMultiple extends boolean = false>(
   props: Partial<IressDropdownMenuProps<TMultiple>> = {},
 ) => {
   return render(
@@ -21,15 +22,15 @@ const renderFilter = <TMultiple extends boolean = false>(
   );
 };
 
-describe('IressFilter', () => {
+describe('IressDropdownMenu', () => {
   it('should render the component with the correct text and classes', async () => {
-    renderFilter({
+    renderDropdownMenu({
       className: 'test-class',
     });
 
-    const filter = screen.getByTestId(TEST_ID);
-    expect(filter).toBeInTheDocument();
-    expect(filter).toHaveClass('test-class');
+    const dropdownMenu = screen.getByTestId(TEST_ID);
+    expect(dropdownMenu).toBeInTheDocument();
+    expect(dropdownMenu).toHaveClass('test-class');
 
     const activator = screen.getByRole('button', { name: TEST_LABEL });
     const activatorTestId = screen.getByTestId(
@@ -62,7 +63,7 @@ describe('IressFilter', () => {
   describe('props', () => {
     describe('inputProps', () => {
       it('renders the input with specific props', async () => {
-        renderFilter({
+        renderDropdownMenu({
           inputProps: {
             append: 'There',
             placeholder: 'May the force be with you',
@@ -85,10 +86,10 @@ describe('IressFilter', () => {
     });
 
     describe('multiSelect', () => {
-      it('allows multiple options to be selected from the filter', async () => {
+      it('allows multiple options to be selected from the dropdown menu', async () => {
         const onChange = vi.fn();
 
-        renderFilter({
+        renderDropdownMenu({
           multiSelect: true,
           onChange,
         });
@@ -115,7 +116,7 @@ describe('IressFilter', () => {
       it('emits a value when it is changed using the listbox', async () => {
         const onChange = vi.fn();
 
-        renderFilter({
+        renderDropdownMenu({
           onChange,
         });
 
@@ -135,7 +136,7 @@ describe('IressFilter', () => {
       it('emits a value when it is changed using arrow keys', async () => {
         const onChange = vi.fn();
 
-        renderFilter({
+        renderDropdownMenu({
           onChange,
         });
 
@@ -164,7 +165,7 @@ describe('IressFilter', () => {
       it('emits a value when the user clicks the reset button', async () => {
         const onReset = vi.fn();
 
-        renderFilter({
+        renderDropdownMenu({
           onReset,
           visibleResetButton: true,
           defaultSelected: MOCK_LABEL_VALUE_META[0],
@@ -186,7 +187,7 @@ describe('IressFilter', () => {
 
     describe('popoverProps', () => {
       it('renders the prepend and append nodes', async () => {
-        renderFilter({
+        renderDropdownMenu({
           header: <span>Hello</span>,
           footer: <span>There</span>,
         });
@@ -203,7 +204,7 @@ describe('IressFilter', () => {
 
     describe('searchable', () => {
       it('renders a searchbox to search the options', async () => {
-        renderFilter({
+        renderDropdownMenu({
           searchable: true,
         });
 
@@ -217,7 +218,7 @@ describe('IressFilter', () => {
 
     describe('searchNoResultsText', () => {
       it('should render the provided content when no results are found', async () => {
-        renderFilter({
+        renderDropdownMenu({
           options: () => Promise.resolve([]),
           searchNoResultsText: 'No results',
           searchable: true,
@@ -235,7 +236,7 @@ describe('IressFilter', () => {
       });
 
       it('should render React nodes when provided', async () => {
-        renderFilter({
+        renderDropdownMenu({
           options: () => Promise.resolve([]),
           searchNoResultsText: <p>No results</p>,
           searchable: true,
@@ -256,7 +257,7 @@ describe('IressFilter', () => {
 
   describe('accessibility', () => {
     it('should not have basic accessibility issues', async () => {
-      const { container } = renderFilter();
+      const { container } = renderDropdownMenu();
 
       // TODO: act warning only shows when running in parallel with other tests. not sure why.
       // Floating UI flushing: https://floating-ui.com/docs/react#testing
@@ -268,23 +269,51 @@ describe('IressFilter', () => {
   });
 
   describe('styling props', () => {
-    it('should apply styling props correctly', () => {
-      renderFilter({
+    it('should apply styling props to the root, not the activator button', () => {
+      renderDropdownMenu({
         p: 'spacing.4',
         bg: 'colour.primary.surface',
-        color: 'colour.primary.text',
       });
 
-      const filter = screen.getByTestId(TEST_ID);
-      expect(filter).toBeInTheDocument();
+      const root = screen.getByTestId(TEST_ID);
+      const activator = screen.getByRole('button', { name: TEST_LABEL });
 
-      // Verify that styling props are applied as CSS classes, not as DOM attributes
-      expect(filter).not.toHaveAttribute('p');
-      expect(filter).not.toHaveAttribute('bg');
-      expect(filter).not.toHaveAttribute('color');
+      const expectedClasses = css({
+        p: 'spacing.4',
+        bg: 'colour.primary.surface',
+      }).split(' ');
 
-      // Verify className includes the styled classes
-      expect(filter.className).toBeTruthy();
+      expect(root).toHaveClass(...expectedClasses);
+      for (const cls of expectedClasses) {
+        expect(activator).not.toHaveClass(cls);
+      }
+    });
+  });
+
+  describe('activatorStyle', () => {
+    it('applies className and CSS props to the activator button', () => {
+      renderDropdownMenu({
+        activatorStyle: {
+          className: 'custom-activator',
+          color: 'colour.neutral.10',
+        },
+      });
+
+      const activator = screen.getByRole('button', { name: TEST_LABEL });
+      expect(activator).toHaveClass(
+        'custom-activator',
+        css({ color: 'colour.neutral.10' }),
+      );
+    });
+
+    it('applies a custom data-testid to the activator button', () => {
+      renderDropdownMenu({
+        activatorStyle: {
+          'data-testid': 'custom-activator-testid',
+        },
+      });
+
+      expect(screen.getByTestId('custom-activator-testid')).toBeInTheDocument();
     });
   });
 });

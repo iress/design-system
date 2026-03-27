@@ -30,3 +30,11 @@ import {
 **Note:** Please consider not using this prop, but rather exporting images at the largest size required for your application (the maximum width).
 
 <ComponentExample of={ComponentStories.MaxWidth} />
+
+## Testing
+
+Query images by their `alt` text:
+
+```tsx
+const image = screen.getByRole('img', { name: 'Company logo' });
+```

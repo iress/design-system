@@ -53,7 +53,10 @@ describe('IressSelect', () => {
     expect(popover).not.toBeVisible();
 
     expect(onChange).toHaveBeenCalledWith(
-      expect.objectContaining({ target: { value: MOCK_LABEL_VALUES[0] } }),
+      expect.objectContaining({
+        target: { value: MOCK_LABEL_VALUES[0].value },
+      }),
+      MOCK_LABEL_VALUES[0].value,
       MOCK_LABEL_VALUES[0],
     );
     expect(hiddenInput).toHaveValue(String(MOCK_LABEL_VALUES[0].value));
@@ -396,8 +399,9 @@ describe('IressSelect', () => {
 
         expect(onChange).toHaveBeenLastCalledWith(
           expect.objectContaining({
-            target: { value: [MOCK_LABEL_VALUES[0]] },
+            target: { value: [MOCK_LABEL_VALUES[0].value] },
           }),
+          [MOCK_LABEL_VALUES[0].value],
           [MOCK_LABEL_VALUES[0]],
         );
         expect(hiddenInput).toHaveValue(String(MOCK_LABEL_VALUES[0].value));
@@ -414,8 +418,11 @@ describe('IressSelect', () => {
 
         expect(onChange).toHaveBeenLastCalledWith(
           expect.objectContaining({
-            target: { value: [MOCK_LABEL_VALUES[0], MOCK_LABEL_VALUES[1]] },
+            target: {
+              value: [MOCK_LABEL_VALUES[0].value, MOCK_LABEL_VALUES[1].value],
+            },
           }),
+          [MOCK_LABEL_VALUES[0].value, MOCK_LABEL_VALUES[1].value],
           [MOCK_LABEL_VALUES[0], MOCK_LABEL_VALUES[1]],
         );
         expect(hiddenInput).toHaveValue(
@@ -460,8 +467,9 @@ describe('IressSelect', () => {
 
         expect(onChange).toHaveBeenLastCalledWith(
           expect.objectContaining({
-            target: { value: [MOCK_LABEL_VALUES[1]] },
+            target: { value: [MOCK_LABEL_VALUES[1].value] },
           }),
+          [MOCK_LABEL_VALUES[1].value],
           [MOCK_LABEL_VALUES[1]],
         );
         expect(hiddenInput).toHaveValue(String(MOCK_LABEL_VALUES[1].value));
@@ -500,6 +508,7 @@ describe('IressSelect', () => {
           expect.objectContaining({
             target: { value: [] },
           }),
+          [],
           [],
         );
         expect(hiddenInput).toHaveValue('');
@@ -1643,7 +1652,10 @@ describe('IressSelect', () => {
 
       // Verify onChange was called with the correct value
       expect(onChange).toHaveBeenCalledWith(
-        expect.objectContaining({ target: { value: MOCK_LABEL_VALUES[0] } }),
+        expect.objectContaining({
+          target: { value: MOCK_LABEL_VALUES[0].value },
+        }),
+        MOCK_LABEL_VALUES[0].value,
         MOCK_LABEL_VALUES[0],
       );
     });
@@ -1684,7 +1696,10 @@ describe('IressSelect', () => {
 
       // Verify onChange was called with array of selected values
       expect(onChange).toHaveBeenCalledWith(
-        expect.objectContaining({ target: { value: [MOCK_LABEL_VALUES[0]] } }),
+        expect.objectContaining({
+          target: { value: [MOCK_LABEL_VALUES[0].value] },
+        }),
+        [MOCK_LABEL_VALUES[0].value],
         [MOCK_LABEL_VALUES[0]],
       );
 
@@ -1695,8 +1710,11 @@ describe('IressSelect', () => {
       // Verify onChange was called again with both values
       expect(onChange).toHaveBeenCalledWith(
         expect.objectContaining({
-          target: { value: [MOCK_LABEL_VALUES[0], MOCK_LABEL_VALUES[1]] },
+          target: {
+            value: [MOCK_LABEL_VALUES[0].value, MOCK_LABEL_VALUES[1].value],
+          },
         }),
+        [MOCK_LABEL_VALUES[0].value, MOCK_LABEL_VALUES[1].value],
         [MOCK_LABEL_VALUES[0], MOCK_LABEL_VALUES[1]],
       );
     });

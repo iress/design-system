@@ -21,3 +21,12 @@ import { ComponentOverview } from '@iress-oss/ids-storybook-config';
 ## Behaviour
 
 - The skip link component is visually hidden until it is tabbed to.
+
+## Testing
+
+Query the skip link by its role. When `href` is provided it renders as a link,
+otherwise as a button:
+
+```tsx
+const skipLink = screen.getByRole('link', { name: 'Skip to content' });
+```
