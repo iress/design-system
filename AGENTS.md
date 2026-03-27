@@ -56,10 +56,10 @@ yarn typecheck               # all packages
 
 ```bash
 yarn size                    # check all packages against budgets
-yarn size:check              # same, but JSON output (used by CI)
+yarn size:check              # same, but JSON output (useful for scripting)
 ```
 
-Budgets are defined in `.size-limit.json`. The `bundle-size.yml` workflow runs on PRs and posts a size diff comment.
+Budgets are defined in `.size-limit.json`. The `ci-cd.yml` workflow checks bundle sizes as part of the validation matrix on every push.
 
 ## Linting
 
