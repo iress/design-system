@@ -78,7 +78,7 @@
     "eslint-plugin-file-progress": "^3.0.2",
     "eslint-plugin-mdx": "3.7.0",
     "eslint-plugin-prettier": "^5.5.5",
-    "happy-dom": "20.8.8",
+    "happy-dom": "20.8.4",
     "jsdom": "^28.1.0",
     "json5": "^2.2.3",
     "prettier": "^3.8.1",
