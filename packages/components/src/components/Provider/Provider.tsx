@@ -91,10 +91,10 @@ export const IressProvider = ({
         Z_INDEX_OFFSET_VAR,
         String(zIndexOffset),
       );
+      return () => {
+        document.documentElement.style.removeProperty(Z_INDEX_OFFSET_VAR);
+      };
     }
-    return () => {
-      document.documentElement.style.removeProperty(Z_INDEX_OFFSET_VAR);
-    };
   }, [zIndexOffset]);
 
   useEffect(() => {
@@ -103,10 +103,10 @@ export const IressProvider = ({
         TOASTER_OFFSET_VAR,
         toasterOffset,
       );
+      return () => {
+        document.documentElement.style.removeProperty(TOASTER_OFFSET_VAR);
+      };
     }
-    return () => {
-      document.documentElement.style.removeProperty(TOASTER_OFFSET_VAR);
-    };
   }, [toasterOffset]);
 
   const providers = (
