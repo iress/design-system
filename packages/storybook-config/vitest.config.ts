@@ -1,9 +1,10 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vitest/config';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-  plugins: [tsconfigPaths()],
+  resolve: {
+    tsconfigPaths: './tsconfig.base.json',
+  },
   test: {
     globals: true,
     environment: 'jsdom',

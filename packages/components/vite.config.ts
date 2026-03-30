@@ -6,7 +6,6 @@ import { extname, relative, resolve } from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import { preservePandaLayerDeclaration } from '@iress-oss/ids-theme-preset/vite';
 
 // TODO: Monitor and fix "Sourcemap for "/virtual:/@storybook/builder-vite/setup-addons.js" points to missing source files"
@@ -14,10 +13,10 @@ import { preservePandaLayerDeclaration } from '@iress-oss/ids-theme-preset/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    tsconfigPaths: './tsconfig.base.json',
+  },
   plugins: [
-    tsconfigPaths({
-      projects: ['tsconfig.base.json'],
-    }),
     react(),
     dts({
       include: 'src/**/*',

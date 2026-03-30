@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import dts from 'vite-plugin-dts';
 import { extname, relative, resolve } from 'path';
 import { fileURLToPath } from 'url';
@@ -8,8 +7,10 @@ import treeShakeable from 'rollup-plugin-tree-shakeable';
 import { peerDependencies } from './package.json';
 
 export default defineConfig({
+  resolve: {
+    tsconfigPaths: './tsconfig.base.json',
+  },
   plugins: [
-    tsconfigPaths(),
     dts({
       include: ['src'],
       exclude: [

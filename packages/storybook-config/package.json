@@ -94,7 +94,6 @@
     "vite-bundle-visualizer": "^1.2.1",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-lib-inject-css": "^2.2.2",
-    "vite-tsconfig-paths": "^6.1.1",
     "vitest": "4.0.18"
   },
   "peerDependencies": {
