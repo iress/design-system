@@ -39,6 +39,19 @@ export const Z_INDEX = _Z_INDEX;
 export const Z_INDEX_OFFSET_VAR = _Z_INDEX_OFFSET_VAR;
 
 /**
+ * The CSS custom property name for the toaster position offset.
+ * Set this to push the toaster away from the viewport edge (e.g. to clear a fixed navbar):
+ *
+ * @example
+ * ```css
+ * :root {
+ *   --iress-toaster-offset: 60px;
+ * }
+ * ```
+ */
+export const TOASTER_OFFSET_VAR = '--iress-toaster-offset';
+
+/**
  * A CSS selector string that matches all focusable elements.
  */
 export const FOCUSABLE_QUERY_SELECTOR =

@@ -1,5 +1,5 @@
 import type { FloatingUIContainer } from '@/types';
-import type { ReactNode } from 'react';
+import { type ReactNode, useEffect } from 'react';
 import { IressModalProvider } from '../Modal';
 import {
   IressToasterProvider,
@@ -12,6 +12,7 @@ import {
 import { createPortal } from 'react-dom';
 import { defaultFonts } from '@iress-oss/ids-tokens';
 import { IressIconProvider, type IressIconProviderProps } from '../Icon';
+import { Z_INDEX_OFFSET_VAR, TOASTER_OFFSET_VAR } from '@/constants';
 
 export interface IressProviderProps
   extends
@@ -49,6 +50,28 @@ export interface IressProviderProps
    * If you don't want to load the default Iress font from the CDN, set this to true.
    */
   noDefaultFont?: boolean;
+
+  /**
+   * A value added to every IDS z-index layer via `calc()`.
+   * Use this when your application has a navigation element with a high z-index
+   * and IDS overlays (modal, slideout, toast) appear behind it.
+   *
+   * @example
+   * // Navbar sits at z-index 995 — shift IDS layers above it:
+   * <IressProvider zIndexOffset={1000}>...</IressProvider>
+   * // Modal → 1400, Toast → 1500, Tooltip → 1600
+   */
+  zIndexOffset?: number;
+
+  /**
+   * Offsets the toaster from the viewport edge (block axis).
+   * Useful when a fixed navbar would overlap the toaster.
+   * Accepts any valid CSS length value (e.g. `'60px'`, `'4rem'`).
+   *
+   * @example
+   * <IressProvider toasterOffset="60px">...</IressProvider>
+   */
+  toasterOffset?: string;
 }
 
 export const IressProvider = ({
@@ -58,8 +81,34 @@ export const IressProvider = ({
   noIconProvider,
   noSubsetting,
   position,
+  zIndexOffset,
+  toasterOffset,
   ...restProps
 }: IressProviderProps) => {
+  useEffect(() => {
+    if (zIndexOffset !== undefined) {
+      document.documentElement.style.setProperty(
+        Z_INDEX_OFFSET_VAR,
+        String(zIndexOffset),
+      );
+    }
+    return () => {
+      document.documentElement.style.removeProperty(Z_INDEX_OFFSET_VAR);
+    };
+  }, [zIndexOffset]);
+
+  useEffect(() => {
+    if (toasterOffset !== undefined) {
+      document.documentElement.style.setProperty(
+        TOASTER_OFFSET_VAR,
+        toasterOffset,
+      );
+    }
+    return () => {
+      document.documentElement.style.removeProperty(TOASTER_OFFSET_VAR);
+    };
+  }, [toasterOffset]);
+
   const providers = (
     <IressModalProvider container={container}>
       <IressToasterProvider container={container} position={position}>

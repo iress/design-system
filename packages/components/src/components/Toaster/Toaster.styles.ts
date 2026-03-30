@@ -1,4 +1,5 @@
 import { sva } from '@/styled-system/css';
+import { TOASTER_OFFSET_VAR } from '@/constants';
 
 export const toaster = sva({
   slots: ['root'],
@@ -20,38 +21,38 @@ export const toaster = sva({
     position: {
       'bottom-end': {
         root: {
-          insetBlockEnd: '[var(--iress-toaster-offset, 0px)]',
+          insetBlockEnd: `[var(${TOASTER_OFFSET_VAR}, 0px)]`,
           insetInlineEnd: '[0]',
         },
       },
       'bottom-start': {
         root: {
-          insetBlockEnd: '[var(--iress-toaster-offset, 0px)]',
+          insetBlockEnd: `[var(${TOASTER_OFFSET_VAR}, 0px)]`,
           insetInlineStart: '[0]',
         },
       },
       'bottom-center': {
         root: {
-          insetBlockEnd: '[var(--iress-toaster-offset, 0px)]',
+          insetBlockEnd: `[var(${TOASTER_OFFSET_VAR}, 0px)]`,
           insetInlineStart: '[50%]',
           transform: 'translateX(-50%)',
         },
       },
       'top-end': {
         root: {
-          insetBlockStart: '[var(--iress-toaster-offset, 0px)]',
+          insetBlockStart: `[var(${TOASTER_OFFSET_VAR}, 0px)]`,
           insetInlineEnd: '[0]',
         },
       },
       'top-start': {
         root: {
-          insetBlockStart: '[var(--iress-toaster-offset, 0px)]',
+          insetBlockStart: `[var(${TOASTER_OFFSET_VAR}, 0px)]`,
           insetInlineStart: '[0]',
         },
       },
       'top-center': {
         root: {
-          insetBlockStart: '[var(--iress-toaster-offset, 0px)]',
+          insetBlockStart: `[var(${TOASTER_OFFSET_VAR}, 0px)]`,
           insetInlineStart: '[50%]',
           transform: 'translateX(-50%)',
         },

@@ -119,5 +119,77 @@ describe('IressProvider', () => {
         ).toBeNull();
       });
     });
+
+    describe('zIndexOffset', () => {
+      afterEach(() => {
+        document.documentElement.style.removeProperty('--iress-zindex-offset');
+      });
+
+      it('sets --iress-zindex-offset on :root when provided', () => {
+        render(
+          <IressProvider zIndexOffset={1000}>
+            <span>test</span>
+          </IressProvider>,
+        );
+
+        expect(
+          document.documentElement.style.getPropertyValue(
+            '--iress-zindex-offset',
+          ),
+        ).toBe('1000');
+      });
+
+      it('removes --iress-zindex-offset from :root on unmount', () => {
+        const { unmount } = render(
+          <IressProvider zIndexOffset={1000}>
+            <span>test</span>
+          </IressProvider>,
+        );
+
+        unmount();
+
+        expect(
+          document.documentElement.style.getPropertyValue(
+            '--iress-zindex-offset',
+          ),
+        ).toBe('');
+      });
+    });
+
+    describe('toasterOffset', () => {
+      afterEach(() => {
+        document.documentElement.style.removeProperty('--iress-toaster-offset');
+      });
+
+      it('sets --iress-toaster-offset on :root when provided', () => {
+        render(
+          <IressProvider toasterOffset="60px">
+            <span>test</span>
+          </IressProvider>,
+        );
+
+        expect(
+          document.documentElement.style.getPropertyValue(
+            '--iress-toaster-offset',
+          ),
+        ).toBe('60px');
+      });
+
+      it('removes --iress-toaster-offset from :root on unmount', () => {
+        const { unmount } = render(
+          <IressProvider toasterOffset="60px">
+            <span>test</span>
+          </IressProvider>,
+        );
+
+        unmount();
+
+        expect(
+          document.documentElement.style.getPropertyValue(
+            '--iress-toaster-offset',
+          ),
+        ).toBe('');
+      });
+    });
   });
 });
