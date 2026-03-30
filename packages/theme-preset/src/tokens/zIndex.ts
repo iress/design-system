@@ -1,25 +1,25 @@
-import { Z_INDEX } from '../constants';
+import { Z_INDEX, Z_INDEX_OFFSET_VAR } from '../constants';
 
 export const zIndex = {
   '000': {
-    value: Z_INDEX.DEFAULT,
+    value: `calc(var(${Z_INDEX_OFFSET_VAR}, 0) + ${Z_INDEX.DEFAULT})`,
   },
   '100': {
-    value: Z_INDEX.NAVBAR,
+    value: `calc(var(${Z_INDEX_OFFSET_VAR}, 0) + ${Z_INDEX.NAVBAR})`,
   },
   '200': {
-    value: Z_INDEX.POPOVER,
+    value: `calc(var(${Z_INDEX_OFFSET_VAR}, 0) + ${Z_INDEX.POPOVER})`,
   },
   '300': {
-    value: Z_INDEX.SLIDEOUT,
+    value: `calc(var(${Z_INDEX_OFFSET_VAR}, 0) + ${Z_INDEX.SLIDEOUT})`,
   },
   '400': {
-    value: Z_INDEX.MODAL,
+    value: `calc(var(${Z_INDEX_OFFSET_VAR}, 0) + ${Z_INDEX.MODAL})`,
   },
   '500': {
-    value: Z_INDEX.TOAST,
+    value: `calc(var(${Z_INDEX_OFFSET_VAR}, 0) + ${Z_INDEX.TOAST})`,
   },
   '600': {
-    value: Z_INDEX.TOOLTIP,
+    value: `calc(var(${Z_INDEX_OFFSET_VAR}, 0) + ${Z_INDEX.TOOLTIP})`,
   },
 };

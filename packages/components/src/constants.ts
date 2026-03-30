@@ -12,6 +12,7 @@ import {
   TEXT_ALIGNS as _TEXT_ALIGNS,
   VERTICAL_ALIGNS as _VERTICAL_ALIGNS,
   Z_INDEX as _Z_INDEX,
+  Z_INDEX_OFFSET_VAR as _Z_INDEX_OFFSET_VAR,
 } from '@theme-preset/constants';
 
 /** Details about a specific breakpoint in the design system. */
@@ -35,6 +36,20 @@ export const MATERIAL_SYMBOLS = _MATERIAL_SYMBOLS;
 export const TEXT_ALIGNS = _TEXT_ALIGNS;
 export const VERTICAL_ALIGNS = _VERTICAL_ALIGNS;
 export const Z_INDEX = _Z_INDEX;
+export const Z_INDEX_OFFSET_VAR = _Z_INDEX_OFFSET_VAR;
+
+/**
+ * The CSS custom property name for the toaster position offset.
+ * Set this to push the toaster away from the viewport edge (e.g. to clear a fixed navbar):
+ *
+ * @example
+ * ```css
+ * :root {
+ *   --iress-toaster-offset: 60px;
+ * }
+ * ```
+ */
+export const TOASTER_OFFSET_VAR = '--iress-toaster-offset';
 
 /**
  * A CSS selector string that matches all focusable elements.

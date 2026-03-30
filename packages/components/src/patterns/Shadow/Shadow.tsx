@@ -5,6 +5,7 @@ import {
   useImperativeHandle,
   useRef,
   useState,
+  type CSSProperties,
 } from 'react';
 import { createPortal } from 'react-dom';
 import idsCss from '../../styled-system/styles.css?raw';
@@ -12,11 +13,19 @@ import { defaultFonts } from '@iress-oss/ids-tokens';
 import { type IressUnstyledProps } from '@/types';
 import { IressProvider, type IressProviderProps } from '@/components/Provider';
 import { getNonce } from '@helpers/dom/getNonce';
+import { Z_INDEX_OFFSET_VAR, TOASTER_OFFSET_VAR } from '@/constants';
 
 export interface IressShadowProps
   extends
     IressUnstyledProps,
-    Pick<IressProviderProps, 'noIconProvider' | 'noSubsetting' | 'position'> {
+    Pick<
+      IressProviderProps,
+      | 'noIconProvider'
+      | 'noSubsetting'
+      | 'position'
+      | 'zIndexOffset'
+      | 'toasterOffset'
+    > {
   /**
    * Children to be rendered inside the shadow DOM
    */
@@ -55,6 +64,8 @@ export const IressShadow = forwardRef<ShadowRoot | null, IressShadowProps>(
       noIconProvider,
       noSubsetting,
       position,
+      toasterOffset,
+      zIndexOffset,
       stylesheetContents = {},
       stylesheetUrls = [],
       ...restProps
@@ -136,7 +147,21 @@ export const IressShadow = forwardRef<ShadowRoot | null, IressShadowProps>(
     );
 
     return (
-      <div ref={hostRef} {...restProps}>
+      <div
+        ref={hostRef}
+        {...restProps}
+        style={
+          {
+            ...restProps.style,
+            ...(zIndexOffset !== undefined && {
+              [Z_INDEX_OFFSET_VAR]: String(zIndexOffset),
+            }),
+            ...(toasterOffset !== undefined && {
+              [TOASTER_OFFSET_VAR]: toasterOffset,
+            }),
+          } as CSSProperties
+        }
+      >
         <IressProvider
           container={containerRef}
           noDefaultFont
