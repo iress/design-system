@@ -21,7 +21,7 @@
     "@mermaid-js/mermaid-cli": "^11.12.0",
     "@storybook/addon-a11y": "^10.2.16",
     "@storybook/addon-docs": "^10.2.16",
-    "@storybook/addon-links": "10.2.16",
+    "@storybook/addon-links": "10.2.19",
     "@storybook/react-vite": "^10.2.16",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
