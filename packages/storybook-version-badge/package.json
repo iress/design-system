@@ -37,7 +37,7 @@
   "devDependencies": {
     "@storybook/addon-docs": "10.2.19",
     "@storybook/react-vite": "10.2.19",
-    "@types/node": "^25.4.0",
+    "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.57.0",
