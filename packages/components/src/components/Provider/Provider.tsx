@@ -86,27 +86,56 @@ export const IressProvider = ({
   ...restProps
 }: IressProviderProps) => {
   useEffect(() => {
-    if (zIndexOffset !== undefined) {
-      document.documentElement.style.setProperty(
-        Z_INDEX_OFFSET_VAR,
-        String(zIndexOffset),
-      );
-      return () => {
-        document.documentElement.style.removeProperty(Z_INDEX_OFFSET_VAR);
-      };
+    if (zIndexOffset === undefined) {
+      return;
     }
+
+    const root = document.documentElement;
+    const previousInlineValue = root.style.getPropertyValue(Z_INDEX_OFFSET_VAR);
+    const nextValue = String(zIndexOffset);
+
+    root.style.setProperty(Z_INDEX_OFFSET_VAR, nextValue);
+
+    return () => {
+      const currentInlineValue =
+        root.style.getPropertyValue(Z_INDEX_OFFSET_VAR);
+
+      if (currentInlineValue !== nextValue) {
+        return;
+      }
+
+      if (previousInlineValue) {
+        root.style.setProperty(Z_INDEX_OFFSET_VAR, previousInlineValue);
+      } else {
+        root.style.removeProperty(Z_INDEX_OFFSET_VAR);
+      }
+    };
   }, [zIndexOffset]);
 
   useEffect(() => {
-    if (toasterOffset !== undefined) {
-      document.documentElement.style.setProperty(
-        TOASTER_OFFSET_VAR,
-        toasterOffset,
-      );
-      return () => {
-        document.documentElement.style.removeProperty(TOASTER_OFFSET_VAR);
-      };
+    if (toasterOffset === undefined) {
+      return;
     }
+
+    const root = document.documentElement;
+    const previousInlineValue = root.style.getPropertyValue(TOASTER_OFFSET_VAR);
+
+    root.style.setProperty(TOASTER_OFFSET_VAR, toasterOffset);
+
+    return () => {
+      const currentInlineValue =
+        root.style.getPropertyValue(TOASTER_OFFSET_VAR);
+
+      if (currentInlineValue !== toasterOffset) {
+        return;
+      }
+
+      if (previousInlineValue) {
+        root.style.setProperty(TOASTER_OFFSET_VAR, previousInlineValue);
+      } else {
+        root.style.removeProperty(TOASTER_OFFSET_VAR);
+      }
+    };
   }, [toasterOffset]);
 
   const providers = (

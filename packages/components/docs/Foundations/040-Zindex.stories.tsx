@@ -1,5 +1,10 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressTable, Z_INDEX, Z_INDEX_OFFSET_VAR } from '@/main';
+import {
+  IressTable,
+  Z_INDEX,
+  Z_INDEX_OFFSET_VAR,
+  TOASTER_OFFSET_VAR,
+} from '@/main';
 import { stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressTable>;
@@ -32,11 +37,11 @@ export default {
 }
 \`\`\`
 
-The toaster also supports a \`--iress-toaster-offset\` CSS custom property to offset its position from the viewport edge, so it can clear a fixed navbar:
+The toaster also supports a \`${TOASTER_OFFSET_VAR}\` CSS custom property to offset its position from the viewport edge, so it can clear a fixed navbar:
 
 \`\`\`css
 :root {
-  --iress-toaster-offset: 60px;
+  ${TOASTER_OFFSET_VAR}: 60px;
 }
 \`\`\``,
       },

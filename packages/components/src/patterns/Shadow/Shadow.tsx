@@ -13,6 +13,7 @@ import { defaultFonts } from '@iress-oss/ids-tokens';
 import { type IressUnstyledProps } from '@/types';
 import { IressProvider, type IressProviderProps } from '@/components/Provider';
 import { getNonce } from '@helpers/dom/getNonce';
+import { Z_INDEX_OFFSET_VAR, TOASTER_OFFSET_VAR } from '@/constants';
 
 export interface IressShadowProps
   extends
@@ -153,10 +154,10 @@ export const IressShadow = forwardRef<ShadowRoot | null, IressShadowProps>(
           {
             ...restProps.style,
             ...(zIndexOffset !== undefined && {
-              '--iress-zindex-offset': String(zIndexOffset),
+              [Z_INDEX_OFFSET_VAR]: String(zIndexOffset),
             }),
             ...(toasterOffset !== undefined && {
-              '--iress-toaster-offset': toasterOffset,
+              [TOASTER_OFFSET_VAR]: toasterOffset,
             }),
           } as CSSProperties
         }

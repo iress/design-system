@@ -11,6 +11,8 @@ import {
   useModal,
   useSlideout,
   useToaster,
+  Z_INDEX_OFFSET_VAR,
+  TOASTER_OFFSET_VAR,
 } from '@/main';
 import userEvent from '@testing-library/user-event';
 import { IressProvider } from './Provider';
@@ -122,7 +124,7 @@ describe('IressProvider', () => {
 
     describe('zIndexOffset', () => {
       afterEach(() => {
-        document.documentElement.style.removeProperty('--iress-zindex-offset');
+        document.documentElement.style.removeProperty(Z_INDEX_OFFSET_VAR);
       });
 
       it('sets --iress-zindex-offset on :root when provided', () => {
@@ -133,9 +135,7 @@ describe('IressProvider', () => {
         );
 
         expect(
-          document.documentElement.style.getPropertyValue(
-            '--iress-zindex-offset',
-          ),
+          document.documentElement.style.getPropertyValue(Z_INDEX_OFFSET_VAR),
         ).toBe('1000');
       });
 
@@ -149,16 +149,34 @@ describe('IressProvider', () => {
         unmount();
 
         expect(
-          document.documentElement.style.getPropertyValue(
-            '--iress-zindex-offset',
-          ),
+          document.documentElement.style.getPropertyValue(Z_INDEX_OFFSET_VAR),
         ).toBe('');
+      });
+
+      it('restores a pre-existing value on unmount', () => {
+        document.documentElement.style.setProperty(Z_INDEX_OFFSET_VAR, '500');
+
+        const { unmount } = render(
+          <IressProvider zIndexOffset={1000}>
+            <span>test</span>
+          </IressProvider>,
+        );
+
+        expect(
+          document.documentElement.style.getPropertyValue(Z_INDEX_OFFSET_VAR),
+        ).toBe('1000');
+
+        unmount();
+
+        expect(
+          document.documentElement.style.getPropertyValue(Z_INDEX_OFFSET_VAR),
+        ).toBe('500');
       });
     });
 
     describe('toasterOffset', () => {
       afterEach(() => {
-        document.documentElement.style.removeProperty('--iress-toaster-offset');
+        document.documentElement.style.removeProperty(TOASTER_OFFSET_VAR);
       });
 
       it('sets --iress-toaster-offset on :root when provided', () => {
@@ -169,9 +187,7 @@ describe('IressProvider', () => {
         );
 
         expect(
-          document.documentElement.style.getPropertyValue(
-            '--iress-toaster-offset',
-          ),
+          document.documentElement.style.getPropertyValue(TOASTER_OFFSET_VAR),
         ).toBe('60px');
       });
 
@@ -185,10 +201,28 @@ describe('IressProvider', () => {
         unmount();
 
         expect(
-          document.documentElement.style.getPropertyValue(
-            '--iress-toaster-offset',
-          ),
+          document.documentElement.style.getPropertyValue(TOASTER_OFFSET_VAR),
         ).toBe('');
+      });
+
+      it('restores a pre-existing value on unmount', () => {
+        document.documentElement.style.setProperty(TOASTER_OFFSET_VAR, '40px');
+
+        const { unmount } = render(
+          <IressProvider toasterOffset="60px">
+            <span>test</span>
+          </IressProvider>,
+        );
+
+        expect(
+          document.documentElement.style.getPropertyValue(TOASTER_OFFSET_VAR),
+        ).toBe('60px');
+
+        unmount();
+
+        expect(
+          document.documentElement.style.getPropertyValue(TOASTER_OFFSET_VAR),
+        ).toBe('40px');
       });
     });
   });
