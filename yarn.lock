@@ -1544,7 +1544,7 @@ __metadata:
   dependencies:
     "@floating-ui/react": "npm:0.27.19"
     "@fortawesome/fontawesome-common-types": "npm:0.2.36"
-    "@iress-oss/ids-theme-preset": "npm:^6.0.0-alpha.2"
+    "@iress-oss/ids-theme-preset": "npm:^6.0.0-alpha.3"
     "@iress-oss/ids-tokens": "npm:^6.0.0-alpha.17"
     "@pandacss/dev": "npm:1.9.0"
     "@tanstack/react-table": "npm:8.21.3"
@@ -1831,7 +1831,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@iress-oss/ids-theme-preset@npm:^6.0.0-alpha.2, @iress-oss/ids-theme-preset@workspace:packages/theme-preset":
+"@iress-oss/ids-theme-preset@npm:^6.0.0-alpha.3, @iress-oss/ids-theme-preset@workspace:packages/theme-preset":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-theme-preset@workspace:packages/theme-preset"
   dependencies:
