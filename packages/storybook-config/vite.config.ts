@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import dts from 'vite-plugin-dts';
 import { resolve } from 'path';
 import treeShakeable from 'rollup-plugin-tree-shakeable';
@@ -10,9 +9,11 @@ import { libInjectCss } from 'vite-plugin-lib-inject-css';
 const externalDeps = Object.keys(peerDependencies || {});
 
 export default defineConfig({
+  resolve: {
+    tsconfigPaths: './tsconfig.base.json',
+  },
   plugins: [
     react(),
-    tsconfigPaths(),
     dts({
       include: ['src'],
       exclude: [
