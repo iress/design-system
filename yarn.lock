@@ -1613,7 +1613,7 @@ __metadata:
     jest-axe: "npm:10.0.0"
     jsdom: "npm:29.0.0"
     lightningcss: "npm:^1.32.0"
-    material-symbols: "npm:0.40.2"
+    material-symbols: "npm:0.43.0"
     postcss: "npm:8.5.8"
     prettier: "npm:^3.8.1"
     query-selector-shadow-dom: "npm:1.0.1"
@@ -9967,10 +9967,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"material-symbols@npm:0.40.2":
-  version: 0.40.2
-  resolution: "material-symbols@npm:0.40.2"
-  checksum: 10c0/0cf46db70081ed270e08f2352e86c92e0ea2e50416e95d364f17148995051e50c42e9dcbe6a39db0cd2b03dba43655b6a706961b593e6d84c9c33d78b8a7bb03
+"material-symbols@npm:0.43.0":
+  version: 0.43.0
+  resolution: "material-symbols@npm:0.43.0"
+  checksum: 10c0/021fa0c9bd033527864775ff5f12c61bdc9ca17366285e1601ccc859c2ff530322f5baa7974aaf51616b65c319b51703713f0b02077e93f03467464b9604aaf9
   languageName: node
   linkType: hard
 
