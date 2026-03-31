@@ -143,6 +143,19 @@ export const Z_INDEX = {
 };
 
 /**
+ * The CSS custom property name for the z-index offset.
+ * Set this in your application CSS to shift all IDS z-index values:
+ *
+ * @example
+ * ```css
+ * :root {
+ *   --iress-zindex-offset: 1000;
+ * }
+ * ```
+ */
+export const Z_INDEX_OFFSET_VAR = '--iress-zindex-offset';
+
+/**
  * Material Symbols icon configuration.
  */
 export const MATERIAL_SYMBOLS = {

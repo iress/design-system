@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-components",
-  "version": "6.0.0-alpha.50",
+  "version": "6.0.0-alpha.51",
   "description": "Iress React Component Library",
   "license": "Apache-2.0",
   "type": "module",
@@ -31,7 +31,7 @@
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json"
   },
   "devDependencies": {
-    "@iress-oss/ids-theme-preset": "^6.0.0-alpha.2",
+    "@iress-oss/ids-theme-preset": "^6.0.0-alpha.3",
     "@iress-oss/ids-tokens": "^6.0.0-alpha.17",
     "@pandacss/dev": "1.9.0",
     "@testing-library/dom": "10.4.1",
@@ -57,7 +57,7 @@
     "eslint-plugin-sonarjs": "^4.0.2",
     "glob": "13.0.6",
     "jest-axe": "10.0.0",
-    "jsdom": "28.1.0",
+    "jsdom": "29.0.0",
     "lightningcss": "^1.32.0",
     "postcss": "8.5.8",
     "prettier": "^3.8.1",
@@ -72,7 +72,6 @@
     "vite-bundle-visualizer": "^1.2.1",
     "vite-plugin-dts": "4.5.4",
     "vite-plugin-static-copy": "3.3.0",
-    "vite-tsconfig-paths": "^6.1.1",
     "vitest": "4.1.0"
   },
   "dependencies": {

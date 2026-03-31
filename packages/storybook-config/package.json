@@ -79,7 +79,7 @@
     "eslint-plugin-mdx": "3.7.0",
     "eslint-plugin-prettier": "^5.5.5",
     "happy-dom": "20.8.4",
-    "jsdom": "^28.1.0",
+    "jsdom": "^29.0.0",
     "json5": "^2.2.3",
     "prettier": "^3.8.1",
     "react": "^19.2.4",
@@ -94,7 +94,6 @@
     "vite-bundle-visualizer": "^1.2.1",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-lib-inject-css": "^2.2.2",
-    "vite-tsconfig-paths": "^6.1.1",
     "vitest": "4.1.0"
   },
   "peerDependencies": {

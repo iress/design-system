@@ -1,5 +1,10 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressTable, Z_INDEX } from '@/main';
+import {
+  IressTable,
+  Z_INDEX,
+  Z_INDEX_OFFSET_VAR,
+  TOASTER_OFFSET_VAR,
+} from '@/main';
 import { stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressTable>;
@@ -21,6 +26,25 @@ export default {
   parameters: {
     controls: {
       disable: true,
+    },
+    docs: {
+      description: {
+        component: `All z-index values support a global offset via the \`${Z_INDEX_OFFSET_VAR}\` CSS custom property. Set it on \`:root\` (or the shadow host) to shift every z-index layer up by a fixed amount — useful when embedding IDS inside an application that already uses high z-index values for its own navigation.
+
+\`\`\`css
+:root {
+  ${Z_INDEX_OFFSET_VAR}: 1000;
+}
+\`\`\`
+
+The toaster also supports a \`${TOASTER_OFFSET_VAR}\` CSS custom property to offset its position from the viewport edge, so it can clear a fixed navbar:
+
+\`\`\`css
+:root {
+  ${TOASTER_OFFSET_VAR}: 60px;
+}
+\`\`\``,
+      },
     },
   },
   argTypes: stylingProps,
