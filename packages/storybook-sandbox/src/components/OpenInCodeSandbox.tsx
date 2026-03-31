@@ -8,7 +8,7 @@ import { transformCodeWithParameters } from '../helpers/transformCode';
 import OpenInCodeSandboxHTML from './OpenInCodeSandbox.html?raw';
 import OpenInCodeSandboxTemplate from './OpenInCodeSandbox.template?raw';
 import OpenInCodeSandboxCustomTemplate from './OpenInCodeSandboxCustom.template?raw';
-import type { IFiles } from 'codesandbox-import-utils/lib/api/define';
+import type { IFiles } from '../helpers/getSandboxUrl';
 import { SandboxIcon } from './SandboxIcon';
 
 interface OpenInCodeSandboxProps {

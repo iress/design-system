@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@storybook/icons": "2.0.1",
-    "codesandbox-import-utils": "2.2.3"
+    "lz-string": "^1.5.0"
   },
   "devDependencies": {
     "@storybook/addon-docs": "10.2.19",
