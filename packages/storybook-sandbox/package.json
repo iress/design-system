@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@storybook/icons": "2.0.1",
-    "codesandbox-import-utils": "2.2.3"
+    "lz-string": "^1.5.0"
   },
   "devDependencies": {
     "@storybook/addon-docs": "10.2.19",
@@ -51,7 +51,7 @@
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.57.0",
     "@typescript-eslint/parser": "^8.57.0",
-    "@vitejs/plugin-react": "^5.1.4",
+    "@vitejs/plugin-react": "^6.0.1",
     "@vitest/coverage-v8": "4.1.0",
     "chokidar": "^5.0.0",
     "concurrently": "^9.2.1",

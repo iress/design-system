@@ -1,6 +1,15 @@
 import { use, useState } from 'react';
-import ReactDiffViewer, { type ReactDiffViewerProps } from 'react-diff-viewer';
+import ReactDiffViewerModule, {
+  type ReactDiffViewerProps,
+} from 'react-diff-viewer';
 import { IressStorybookContext } from './IressStorybookContext';
+
+// Handle CJS default export interop — react-diff-viewer uses `exports.default`
+const ReactDiffViewer = (
+  'default' in ReactDiffViewerModule
+    ? (ReactDiffViewerModule as Record<string, unknown>).default
+    : ReactDiffViewerModule
+) as typeof ReactDiffViewerModule;
 
 type DiffViewerMode = 'diff' | 'old' | 'new';
 

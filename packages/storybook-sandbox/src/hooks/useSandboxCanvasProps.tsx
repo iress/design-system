@@ -11,7 +11,7 @@ import {
   transformCode,
   transformCodeWithParameters,
 } from '../helpers/transformCode';
-import type { IFiles } from 'codesandbox-import-utils/lib/api/define';
+import type { IFiles } from '../helpers/getSandboxUrl';
 import OpenInCodeSandboxCustomTemplate from '../components/OpenInCodeSandboxCustom.template?raw';
 import OpenInCodeSandboxHTML from '../components/OpenInCodeSandbox.html?raw';
 import { getSandboxUrl } from '../helpers/getSandboxUrl';
