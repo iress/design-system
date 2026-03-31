@@ -44,7 +44,7 @@
   "dependencies": {
     "@iress-oss/ids-tokens": "^6.0.0-alpha.17",
     "radash": "12.1.1",
-    "react-diff-viewer": "^3.1.1",
+    "react-diff-viewer-continued": "4.2.0",
     "react-element-to-jsx-string": "^17.0.1",
     "remark-gfm": "^4.0.1"
   },

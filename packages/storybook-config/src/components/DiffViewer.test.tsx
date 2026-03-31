@@ -1,15 +1,16 @@
 import { DiffViewer } from './DiffViewer';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 
 describe('DiffViewer', () => {
-  it('renders default diff viewer', () => {
+  it('renders default diff viewer', async () => {
     render(<DiffViewer oldValue="<old />" newValue="<new />" />);
 
-    const oldCode = screen.getByText('<old />');
+    // react-diff-viewer-continued computes diffs asynchronously (componentDidMount setState)
+    const oldCode = await screen.findByText('<old />');
     expect(oldCode).toBeInTheDocument();
 
-    const newCode = screen.getByText('<new />');
+    const newCode = await screen.findByText('<new />');
     expect(newCode).toBeInTheDocument();
 
     // Check CSS classes applied
@@ -24,20 +25,26 @@ describe('DiffViewer', () => {
     const modeSwitcher = screen.getByRole('tablist');
     expect(modeSwitcher).toBeInTheDocument();
 
-    // By default, should show diff
-    expect(screen.getByText('<old />')).toBeInTheDocument();
-    expect(screen.getByText('<new />')).toBeInTheDocument();
+    // By default, should show diff (wait for async diff computation)
+    await waitFor(() => {
+      expect(screen.getByText('<old />')).toBeInTheDocument();
+      expect(screen.getByText('<new />')).toBeInTheDocument();
+    });
 
     await userEvent.click(screen.getByRole('tab', { name: 'New' }));
 
     // Should only show new code
-    expect(screen.queryByText('<old />')).not.toBeInTheDocument();
-    expect(screen.getByText('<new />')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.queryByText('<old />')).not.toBeInTheDocument();
+      expect(screen.getByText('<new />')).toBeInTheDocument();
+    });
 
     await userEvent.click(screen.getByRole('tab', { name: 'Old' }));
 
     // Should only show old code
-    expect(screen.getByText('<old />')).toBeInTheDocument();
-    expect(screen.queryByText('<new />')).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('<old />')).toBeInTheDocument();
+      expect(screen.queryByText('<new />')).not.toBeInTheDocument();
+    });
   });
 });

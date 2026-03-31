@@ -1,5 +1,7 @@
 import { use, useState } from 'react';
-import ReactDiffViewer, { type ReactDiffViewerProps } from 'react-diff-viewer';
+import ReactDiffViewer, {
+  type ReactDiffViewerProps,
+} from 'react-diff-viewer-continued';
 import { IressStorybookContext } from './IressStorybookContext';
 
 type DiffViewerMode = 'diff' | 'old' | 'new';
