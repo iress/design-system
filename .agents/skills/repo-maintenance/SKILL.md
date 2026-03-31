@@ -257,7 +257,7 @@ flowchart TD
 ```
 
 Steps:
-1. Bump the `version` field in the package's `package.json` (e.g. `6.0.0-alpha.51` → `6.0.0-alpha.52`)
+1. Bump the `version` field in the package's `package.json` (e.g. `6.0.0-beta.1` → `6.0.0-beta.2`)
 2. Merge to `main` (or `5.x` for v5 backports)
 3. CI detects the local version is higher than what's on npm and publishes automatically
 4. After publish, create a GitHub release: `.github/scripts/create-releases.sh` (currently run manually — the CI step is commented out pending permissions). It creates a tagged GitHub release with auto-generated notes and npm install instructions
@@ -268,7 +268,7 @@ The `stableVersion` field in `package.json` tracks the last known stable version
 **Stable releases:**
 - Triggered automatically on push to `main` or `5.x` branches
 - Detects version changes via `.github/scripts/publish-packages.sh` (compares local version to npm registry)
-- Publishes to npm with `latest` tag (or prerelease tag like `alpha` for alpha versions)
+- Publishes to npm with `latest` tag (or prerelease tag like `alpha`/`beta` based on the version string)
 - Requires the `npm-publishing` environment approval
 - Do NOT publish stable releases manually via `npm publish`
 
