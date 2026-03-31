@@ -10,7 +10,7 @@ const externalDeps = Object.keys(peerDependencies || {});
 
 export default defineConfig({
   resolve: {
-    tsconfigPaths: './tsconfig.base.json',
+    tsconfigPaths: true,
   },
   plugins: [
     react(),
