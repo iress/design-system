@@ -45,7 +45,7 @@
     "@vitest/ui": "^4.1.0",
     "colorjs.io": "^0.6.1",
     "eslint": "^10.0.3",
-    "eslint-plugin-file-progress": "^3.0.2",
+    "eslint-plugin-file-progress": "^4.0.0",
     "eslint-plugin-mdx": "^3.7.0",
     "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-react-hooks": "^7.0.1",
