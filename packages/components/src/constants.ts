@@ -48,6 +48,11 @@ export const Z_INDEX_OFFSET_VAR = _Z_INDEX_OFFSET_VAR;
  *   --iress-toaster-offset: 60px;
  * }
  * ```
+ *
+ * IMPORTANT: The literal string `'var(--iress-toaster-offset, 0px)'` used in
+ * `Toaster.styles.ts` must stay in sync with this constant. Template literals
+ * that interpolate this constant cannot be resolved by the Panda CSS static
+ * scanner, so the value is duplicated there as a plain string constant.
  */
 export const TOASTER_OFFSET_VAR = '--iress-toaster-offset';
 
