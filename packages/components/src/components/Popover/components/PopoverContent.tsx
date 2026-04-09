@@ -12,6 +12,7 @@ import { type FloatingUIContainer, type IressStyledProps } from '@/types';
 import { useEffect, useMemo, useRef } from 'react';
 import { styled } from '@/styled-system/jsx';
 import { usePopover } from '../hooks/usePopover';
+import { tabbable } from 'tabbable';
 
 export interface PopoverContentProps extends IressStyledProps {
   /**
@@ -95,6 +96,25 @@ const PopoverContentInner = ({
     }
   }, [popover?.show, popover]);
 
+  // When not using virtual focus (e.g. async Select with a search input inside
+  // the popup), FloatingFocusManager would normally focus the first tabbable
+  // element via `initialFocus={0}` using `preventScroll: false`, which causes
+  // the scrollable container to jump. Instead we set `initialFocus={-1}` and
+  // manually focus the first tabbable element here with `preventScroll: true`.
+  useEffect(() => {
+    if (!virtualFocus && popover?.show) {
+      queueMicrotask(() => {
+        const floatingEl = popover.api.refs.floating.current;
+        if (!floatingEl) return;
+        const firstTabbable = tabbable(floatingEl)[0];
+        if (firstTabbable) {
+          firstTabbable.focus({ preventScroll: true });
+        }
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally only run when show changes
+  }, [popover?.show]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const returnFocus = useMemo(
     () => (virtualFocus ? false : returnFocusRef),
     [virtualFocus],
@@ -113,7 +133,7 @@ const PopoverContentInner = ({
     <FloatingList elementsRef={popover.list}>
       <FloatingFocusManager
         context={popover.api.context}
-        initialFocus={virtualFocus ? -1 : 0}
+        initialFocus={-1}
         modal={false}
         disabled={!popover?.show}
         returnFocus={returnFocus}
