@@ -35,14 +35,13 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.react.tsbuildinfo",
 
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
     "declaration": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@docs/*": ["docs/*"],
-      "@helpers/*": ["src/helpers/*"],
-      "~storybook/*": [".storybook/*"]
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@docs/*": ["./docs/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "~storybook/*": ["./.storybook/*"]
     },
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
   }
