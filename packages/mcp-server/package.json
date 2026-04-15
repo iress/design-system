@@ -60,7 +60,7 @@
     "minimist": "^1.2.8",
     "playwright": "1.59.1",
     "prettier": "3.8.1",
-    "prettier-plugin-sh": "0.18.0",
+    "prettier-plugin-sh": "0.18.1",
     "rimraf": "6.1.3",
     "tsx": "4.21.0",
     "turndown": "7.2.2",
