@@ -1631,7 +1631,7 @@ __metadata:
   dependencies:
     "@iress-oss/ids-tokens": "npm:^6.0.0-beta.1"
     "@pandacss/dev": "npm:1.9.0"
-    "@pandacss/types": "npm:1.9.0"
+    "@pandacss/types": "npm:1.9.1"
     "@typescript-eslint/eslint-plugin": "npm:^8.57.0"
     "@typescript-eslint/parser": "npm:^8.57.0"
     eslint: "npm:^10.0.3"
@@ -2528,6 +2528,13 @@ __metadata:
   version: 1.9.0
   resolution: "@pandacss/types@npm:1.9.0"
   checksum: 10c0/d91e196528540a1c5ff23f870f3f9758d2499d1286c6ea6a1a4a9e902e47bff506968c92132b3410ad700ef8f537b4eaa1f8a17c6f82965ed0a74dd173e201fc
+  languageName: node
+  linkType: hard
+
+"@pandacss/types@npm:1.9.1":
+  version: 1.9.1
+  resolution: "@pandacss/types@npm:1.9.1"
+  checksum: 10c0/c5c0f016c437c81c2eaf3e3f2e1a17e9280005f5ca20a38a384479c0700df8782bece496f2d9fdb784ef8db0e9e16012fc704aad3988d8860bafabd392d575dd
   languageName: node
   linkType: hard
 
