@@ -10,7 +10,7 @@ export const tag = sva({
       bg: '[var(--tag-bg, {colors.colour.neutral.20})]',
       borderRadius: 'radius.system.tag',
       border: 'divider',
-      borderColor: '[var(--tag-border)]',
+      borderColor: '[var(--tag-border, transparent)]',
       color: '[var(--tag-color, {colors.colour.neutral.80})]',
       display: 'inline-flex',
       gap: 'spacing.1',
@@ -51,19 +51,8 @@ export const tag = sva({
     clickable: {
       true: {
         root: {
+          cursor: 'pointer',
           focusable: 'true',
-
-          _hover: {
-            bg: 'colour.primary.surface',
-            borderColor: 'colour.primary.fill',
-            color: 'colour.primary.text',
-            cursor: 'pointer',
-          },
-
-          _active: {
-            boxShadow:
-              'color-mix(in srgb, {colors.colour.primary.surface}, transparent 60%) 0px 0px 0px 3px',
-          },
         },
       },
     },
@@ -188,9 +177,51 @@ export const tag = sva({
         },
       },
     },
+    bordered: {
+      true: {
+        root: {
+          borderColor: '[currentColor]',
+        },
+      },
+    },
   },
+  compoundVariants: [
+    {
+      bordered: true,
+      clickable: true,
+      css: {
+        root: {
+          _hover: {
+            boxShadow: '[0 0 0 1px currentColor]',
+          },
+          _active: {
+            boxShadow:
+              '[0 0 0 1px currentColor, 0px 0px 0px 4px color-mix(in srgb, currentColor, transparent 60%)]',
+          },
+        },
+      },
+    },
+    {
+      bordered: false,
+      clickable: true,
+      css: {
+        root: {
+          _hover: {
+            bg: 'colour.primary.surface',
+            borderColor: 'colour.primary.fill',
+            color: 'colour.primary.text',
+            cursor: 'pointer',
+          },
+
+          _active: {
+            boxShadow:
+              'color-mix(in srgb, {colors.colour.primary.surface}, transparent 60%) 0px 0px 0px 3px',
+          },
+        },
+      },
+    },
+  ],
   defaultVariants: {
     customDeleteButton: false,
-    mode: '90',
   },
 });
