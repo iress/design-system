@@ -35,6 +35,7 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.react.tsbuildinfo",
 
     "allowSyntheticDefaultImports": true,
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "declaration": true,
     "paths": {
