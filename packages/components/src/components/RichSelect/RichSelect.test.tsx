@@ -649,15 +649,17 @@ describe('IressRichSelect', () => {
           });
           expect(combobox).toBeInTheDocument();
 
-          // Verify that the search input was focused with preventScroll: true,
-          // not preventScroll: false which would cause the container to scroll
-          const inputFocusCalls = focusSpy.mock.calls.filter(
-            ([options]) => options?.preventScroll !== undefined,
-          );
-          expect(inputFocusCalls.length).toBeGreaterThan(0);
+          // Verify that the search input was focused with preventScroll: true.
+          // Without the fix, FloatingFocusManager calls focus({ preventScroll: false })
+          // which would cause the container to scroll to top when its floating element
+          // is at its initial position. With the fix, our useLayoutEffect focuses first
+          // with preventScroll: true, so FloatingFocusManager skips its own call.
           expect(
-            inputFocusCalls.every(([options]) => options?.preventScroll === true),
+            focusSpy.mock.calls.some(([options]) => options?.preventScroll === true),
           ).toBe(true);
+          expect(
+            focusSpy.mock.calls.some(([options]) => options?.preventScroll === false),
+          ).toBe(false);
         } finally {
           focusSpy.mockRestore();
           document.body.removeChild(containerElement);
