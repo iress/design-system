@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { useIdIfNeeded } from '@/hooks';
 import { expander } from './Expander.styles';
@@ -60,6 +60,26 @@ export const IressExpander = ({
 }: IressExpanderProps) => {
   const [isOpen, setIsOpen] = useState(open);
   const id = useIdIfNeeded({ id: idProp });
+  const containerInnerRef = useRef<HTMLDivElement>(null);
+
+  // After the open animation completes, allow children to overflow so that
+  // floating elements (e.g. IressSelect dropdown) are not clipped by the
+  // overflow:hidden that the grid animation requires.  When closing, reset
+  // overflow immediately so the collapse animation works correctly.
+  useEffect(() => {
+    if (!isOpen && containerInnerRef.current) {
+      containerInnerRef.current.style.overflow = '';
+    }
+  }, [isOpen]);
+
+  // Handle the case where the expander starts open (no animation fires).
+  // We run this once on mount so the initial open state is also handled.
+  useEffect(() => {
+    if (isOpen && containerInnerRef.current) {
+      containerInnerRef.current.style.overflow = 'visible';
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const classes = expander({ mode, open: isOpen });
   const styles = expander.raw({ mode, open: isOpen });
@@ -109,8 +129,20 @@ export const IressExpander = ({
         id={`${id}__container`}
         className={classes.container}
         data-testid={propagateTestid(testid, 'container')}
+        onTransitionEnd={(e) => {
+          if (
+            e.propertyName === 'grid-template-rows' &&
+            containerInnerRef.current
+          ) {
+            // After the open animation finishes, allow overflow so floating
+            // children (e.g. IressSelect dropdowns) can render outside the
+            // expander bounds.  Keep it hidden in all other states so the
+            // collapse animation clips content correctly.
+            containerInnerRef.current.style.overflow = isOpen ? 'visible' : '';
+          }
+        }}
       >
-        <div className={classes.containerInner}>
+        <div className={classes.containerInner} ref={containerInnerRef}>
           <IressText className={classes.content} noGutter={noGutter}>
             {children}
           </IressText>

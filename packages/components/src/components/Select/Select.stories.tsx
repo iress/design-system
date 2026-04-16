@@ -27,6 +27,7 @@ import {
   IressText,
   IressInline,
   IressMenuText,
+  IressExpander,
 } from '@/main';
 import {
   reactNodeArgType,
@@ -362,6 +363,51 @@ export const GroupedWithSearch: Story = {
       description: {
         story: `When using async options with groups, filter the children based on the search query 
         and return only groups that have matching children.`,
+      },
+    },
+  },
+};
+
+export const InsideExpander: Story = {
+  args: {
+    options: MOCK_LABEL_VALUE_META,
+  },
+  render: (args) => {
+    const containerRef = { current: document.body };
+    return (
+      <div
+        style={{
+          height: '300px',
+          overflowY: 'auto',
+          border: '1px solid #ccc',
+          padding: '16px',
+        }}
+      >
+        <IressText element="p" style={{ marginBottom: '200px' }}>
+          Scroll down to see the Expander with a Select inside it. The select
+          dropdown should show a scrollbar and reposition correctly when near
+          the bottom of its container.
+        </IressText>
+        <IressExpander activator="Show options" open>
+          <IressStack gap="sm">
+            <IressText element="p">
+              The dropdown below should scroll and not be clipped.
+            </IressText>
+            <IressSelect
+              {...args}
+              container={containerRef.current}
+              aria-label="Select an option"
+            />
+          </IressStack>
+        </IressExpander>
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `A Select inside an Expander near the bottom of a scrollable container. The dropdown
+should display with a scrollbar instead of being cut off.`,
       },
     },
   },

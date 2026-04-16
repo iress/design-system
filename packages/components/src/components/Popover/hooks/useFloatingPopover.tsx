@@ -34,8 +34,6 @@ import { type PopoverAriaHookReturn, usePopoverAria } from './usePopoverAria';
 import { closestCrossShadow } from '@/helpers/dom/closestCrossShadow';
 import { GlobalCSSClass } from '@/enums';
 
-const POPOVER_USE_MAX_HEIGHT = 200;
-
 export interface FloatingPopoverHookProps {
   /**
    * The alignment of the popover relative to the activator element. It determines the placement of the popover and how it will flip when there is not enough space in the viewport.
@@ -321,10 +319,9 @@ export const useFloatingPopover = ({
               // The error is difficult/impossible to reproduce in Storybook, but it appears in other apps when the component is used without a fixed width.
               Object.assign(elements.floating.style, {
                 minWidth: `${rects.reference.width}px`,
-                maxHeight:
-                  availableHeight > POPOVER_USE_MAX_HEIGHT
-                    ? `${availableHeight}px`
-                    : undefined,
+                // Always constrain height to available space so the dropdown
+                // scrolls instead of overflowing its clipping boundary.
+                maxHeight: `${availableHeight}px`,
               });
             });
           },
