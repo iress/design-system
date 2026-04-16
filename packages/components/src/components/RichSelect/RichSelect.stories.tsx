@@ -34,6 +34,8 @@ import { SelectOptionsFooter } from './mocks/SelectOptionsFooter';
 import SelectOptionsFooterSource from './mocks/SelectOptionsFooter.tsx?raw';
 import { SelectInScrollableExpander } from './mocks/SelectInScrollableExpander';
 import SelectInScrollableExpanderSource from './mocks/SelectInScrollableExpander.tsx?raw';
+import { SelectScrollableContainer } from './mocks/SelectScrollableContainer';
+import SelectScrollableContainerSource from './mocks/SelectScrollableContainer.tsx?raw';
 import {
   addToStorybookCategory,
   disableArgTypes,
@@ -259,4 +261,17 @@ if there isn't enough space below.
       <div style={{ height: '20px' }} />
     </div>
   ),
+};
+
+export const AsyncOptionsInScrollableContainer: Story = {
+  render: (args) => <SelectScrollableContainer {...args} />,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Demonstrates async options with a `container` prop inside a scrollable container. Scroll down to the expander, open it, then click the RichSelect — the container should not auto-scroll.',
+      },
+    },
+    ...withCustomSource(SelectScrollableContainerSource),
+  },
 };

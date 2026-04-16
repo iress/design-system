@@ -8,6 +8,7 @@ import {
   useCallback,
   useEffect,
   useId,
+  useLayoutEffect,
   useMemo,
   useRef,
 } from 'react';
@@ -165,6 +166,21 @@ const SelectAsyncOptions = ({
       setQuery?.('');
     }
   }, [show, setQuery]);
+
+  /**
+   * When the popover opens, focus the search input with `preventScroll: true`.
+   *
+   * This runs as a layout effect so it fires before `FloatingFocusManager`'s layout
+   * effect (React fires child effects before parent effects). When `FloatingFocusManager`
+   * then checks `document.activeElement`, it finds focus is already inside the floating
+   * element and skips its own `enqueueFocus` call (which would use `preventScroll: false`
+   * and cause the container to scroll to the floating element's initial position).
+   */
+  useLayoutEffect(() => {
+    if (show) {
+      inputRef.current?.input?.focus({ preventScroll: true });
+    }
+  }, [show]);
 
   const focusIndexWhenSearching = hasSelected ? selectedArray.length + 1 : 0;
   const focusIndexWhenNotSearching = hasSelected ? 1 : 0;
