@@ -626,41 +626,42 @@ describe('IressRichSelect', () => {
         // With the fix, our useLayoutEffect calls focus({ preventScroll: true }) first,
         // preventing FloatingFocusManager from making its own focus call.
         const focusSpy = vi.spyOn(HTMLInputElement.prototype, 'focus');
-
         const containerElement = document.createElement('div');
         document.body.appendChild(containerElement);
 
-        render(
-          <IressRichSelect
-            container={containerElement}
-            options={() => mockAsyncSearchLabelValues()}
-            debounceThreshold={0}
-            placeholder="Select an item"
-          />,
-        );
+        try {
+          render(
+            <IressRichSelect
+              container={containerElement}
+              options={() => mockAsyncSearchLabelValues()}
+              debounceThreshold={0}
+              placeholder="Select an item"
+            />,
+          );
 
-        const activator = screen.getByRole('button', {
-          name: 'Select an item',
-        });
-        await userEvent.click(activator);
+          const activator = screen.getByRole('button', {
+            name: 'Select an item',
+          });
+          await userEvent.click(activator);
 
-        const combobox = await screen.findByRole('combobox', {
-          name: 'Search',
-        });
-        expect(combobox).toBeInTheDocument();
+          const combobox = await screen.findByRole('combobox', {
+            name: 'Search',
+          });
+          expect(combobox).toBeInTheDocument();
 
-        // Verify that the search input was focused with preventScroll: true,
-        // not preventScroll: false which would cause the container to scroll
-        const inputFocusCalls = focusSpy.mock.calls.filter(
-          ([options]) => options?.preventScroll !== undefined,
-        );
-        expect(inputFocusCalls.length).toBeGreaterThan(0);
-        expect(
-          inputFocusCalls.every(([options]) => options?.preventScroll === true),
-        ).toBe(true);
-
-        focusSpy.mockRestore();
-        document.body.removeChild(containerElement);
+          // Verify that the search input was focused with preventScroll: true,
+          // not preventScroll: false which would cause the container to scroll
+          const inputFocusCalls = focusSpy.mock.calls.filter(
+            ([options]) => options?.preventScroll !== undefined,
+          );
+          expect(inputFocusCalls.length).toBeGreaterThan(0);
+          expect(
+            inputFocusCalls.every(([options]) => options?.preventScroll === true),
+          ).toBe(true);
+        } finally {
+          focusSpy.mockRestore();
+          document.body.removeChild(containerElement);
+        }
       });
 
       it('renders an alert when options throw an error', async () => {
