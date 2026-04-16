@@ -5,6 +5,8 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
+    cooldown:
+      default-days: 10
     open-pull-requests-limit: 10
     reviewers:
       - 'iress/frontend-enablement'
@@ -44,6 +46,8 @@ updates:
     target-branch: '5.x'
     schedule:
       interval: 'weekly'
+    cooldown:
+      default-days: 10
     open-pull-requests-limit: 10
     reviewers:
       - 'iress/frontend-enablement'
