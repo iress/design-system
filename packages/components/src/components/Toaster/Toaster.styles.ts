@@ -1,5 +1,10 @@
 import { sva } from '@/styled-system/css';
-import { TOASTER_OFFSET_VAR } from '@/constants';
+
+// Note: this string must stay in sync with TOASTER_OFFSET_VAR in @/constants.
+// Template literals with imported constants cannot be statically analysed by
+// Panda CSS, so the literal CSS variable reference is used here to ensure the
+// correct utility classes are emitted during code-generation.
+const TOASTER_OFFSET_CSS_VAR = 'var(--iress-toaster-offset, 0px)';
 
 export const toaster = sva({
   slots: ['root'],
@@ -21,38 +26,38 @@ export const toaster = sva({
     position: {
       'bottom-end': {
         root: {
-          insetBlockEnd: `[var(${TOASTER_OFFSET_VAR}, 0px)]`,
+          insetBlockEnd: TOASTER_OFFSET_CSS_VAR,
           insetInlineEnd: '[0]',
         },
       },
       'bottom-start': {
         root: {
-          insetBlockEnd: `[var(${TOASTER_OFFSET_VAR}, 0px)]`,
+          insetBlockEnd: TOASTER_OFFSET_CSS_VAR,
           insetInlineStart: '[0]',
         },
       },
       'bottom-center': {
         root: {
-          insetBlockEnd: `[var(${TOASTER_OFFSET_VAR}, 0px)]`,
+          insetBlockEnd: TOASTER_OFFSET_CSS_VAR,
           insetInlineStart: '[50%]',
           transform: 'translateX(-50%)',
         },
       },
       'top-end': {
         root: {
-          insetBlockStart: `[var(${TOASTER_OFFSET_VAR}, 0px)]`,
+          insetBlockStart: TOASTER_OFFSET_CSS_VAR,
           insetInlineEnd: '[0]',
         },
       },
       'top-start': {
         root: {
-          insetBlockStart: `[var(${TOASTER_OFFSET_VAR}, 0px)]`,
+          insetBlockStart: TOASTER_OFFSET_CSS_VAR,
           insetInlineStart: '[0]',
         },
       },
       'top-center': {
         root: {
-          insetBlockStart: `[var(${TOASTER_OFFSET_VAR}, 0px)]`,
+          insetBlockStart: TOASTER_OFFSET_CSS_VAR,
           insetInlineStart: '[50%]',
           transform: 'translateX(-50%)',
         },

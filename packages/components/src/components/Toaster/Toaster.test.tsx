@@ -1,6 +1,7 @@
 import { act, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { Toaster, ToasterItem } from './Toaster';
+import { Toaster, type ToasterProps, ToasterItem } from './Toaster';
+import { toaster as toasterStyles } from './Toaster.styles';
 import { GlobalCSSClass } from '@/enums';
 
 interface MockToasterItem extends Omit<ToasterItem, 'content'> {
@@ -58,6 +59,33 @@ describe('Toaster', () => {
         expect(container).toHaveAttribute('role', 'alert');
         expect(container.innerHTML).toContain('Sample Toast 1');
       });
+    });
+
+    describe('position', () => {
+      const positions: NonNullable<ToasterProps['position']>[] = [
+        'bottom-center',
+        'bottom-end',
+        'bottom-start',
+        'top-center',
+        'top-end',
+        'top-start',
+      ];
+
+      it.each(positions)(
+        'applies correct CSS classes for position "%s"',
+        (position) => {
+          const { container } = render(
+            <Toaster toasts={mockToasts} position={position} />,
+          );
+
+          const toasterHolder = container.querySelector(
+            `.${GlobalCSSClass.Toaster}`,
+          );
+          const expectedClasses = toasterStyles({ position });
+
+          expect(toasterHolder).toHaveClass(expectedClasses.root!);
+        },
+      );
     });
   });
 
