@@ -91,6 +91,7 @@ export const IressContextualMenu = ({
   offset = { mainAxis: -6, crossAxis: 0 },
   onAction,
   size = 'small',
+  textStyle,
   theme = 'light',
   ...restProps
 }: IressContextualMenuProps) => {
@@ -135,6 +136,7 @@ export const IressContextualMenu = ({
             {/* Destructure `icon` to avoid passing it as we handle it differently in contextual menu */}
             {items.map(({ icon, ...item }) => (
               <IressMenuItem
+                textStyle={textStyle ?? 'typography.body.sm'}
                 {...item}
                 className={cx(classes.item, item.className)}
                 key={item.key}

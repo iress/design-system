@@ -23,7 +23,6 @@ export const contextualMenu = sva({
         px: 'spacing.3',
         py: 'spacing.1',
         gap: 'spacing.2',
-        textStyle: 'typography.body.sm',
       },
       '&:first-child': {
         borderTopRadius: 'radius.3',

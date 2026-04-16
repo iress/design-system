@@ -1,6 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import { act, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
+import { css } from '@/styled-system/css';
 import { ContextualMenuItem, IressContextualMenu } from './ContextualMenu';
 import { contextualMenu } from './ContextualMenu.styles';
 import { GlobalCSSClass } from '@/enums';
@@ -110,5 +111,39 @@ describe('IressContextualMenu', () => {
     });
 
     expect(results).toHaveNoViolations();
+  });
+
+  it('applies textStyle prop to menu items', async () => {
+    const textStyleClass = css({ textStyle: 'typography.heading.1' });
+
+    render(
+      <IressContextualMenu
+        data-testid="menu"
+        items={ITEMS}
+        textStyle="typography.heading.1"
+      />,
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: 'More options' }));
+
+    const menuItems = await screen.findAllByRole('menuitem');
+
+    for (const item of menuItems) {
+      expect(item).toHaveClass(textStyleClass);
+    }
+  });
+
+  it('uses default typography.body.sm textStyle when no textStyle prop is provided', async () => {
+    const defaultTextStyleClass = css({ textStyle: 'typography.body.sm' });
+
+    render(<IressContextualMenu data-testid="menu" items={ITEMS} />);
+
+    await userEvent.click(screen.getByRole('button', { name: 'More options' }));
+
+    const menuItems = await screen.findAllByRole('menuitem');
+
+    for (const item of menuItems) {
+      expect(item).toHaveClass(defaultTextStyleClass);
+    }
   });
 });
