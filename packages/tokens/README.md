@@ -42,9 +42,9 @@ The design tokens are available as CSS variables. Import the stylesheet once and
 @import '@iress-oss/ids-tokens/build/css-vars.css';
 
 .card {
-  background: var(--iress-colour-neutral-10);
-  padding: var(--iress-spacing-4);
-  color: var(--iress-colour-neutral-90);
+  background: var(--colour-neutral-10);
+  padding: var(--spacing-4);
+  color: var(--colour-neutral-90);
 }
 ```
 

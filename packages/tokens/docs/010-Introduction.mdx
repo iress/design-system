@@ -37,7 +37,22 @@ import { IressText } from '@iress-oss/ids-components';
 <IressText color="colour.primary.text">I am branded text</IressText>;
 ```
 
-If you are not using the IDS components, you can use the tokens directly by using the `cssVars` object from `@iress-oss/ids-tokens`.
+If you are not using the IDS components, you can use the tokens directly in plain CSS by importing the stylesheet and referencing the CSS variables it defines:
+
+```css
+/* Import the stylesheet once in your app root */
+@import '@iress-oss/ids-tokens/build/css-vars.css';
+
+.card {
+  background: var(--colour-neutral-10);
+  padding: var(--spacing-4);
+  color: var(--colour-neutral-90);
+}
+```
+
+> **Note:** Use the variables defined in `tokens/build/css-vars.css` (e.g. `--colour-neutral-10`). Do **not** use the `--iress-*` variables directly — those are set by theme files and are not part of the public token API.
+
+For CSS-in-JS or inline styles, use the type-safe `cssVars` object instead:
 
 ```jsx
 import { cssVars } from '@iress-oss/ids-tokens';
