@@ -21,12 +21,16 @@ The design tokens follow the official W3C [design tokens specification](https://
 ```tsx
 import { designTokens } from '@iress-oss/ids-tokens';
 
-const { colour } = designTokens;
-
-<h2>Primary token ({colour.primary.fill.$type})</h2>
-{colour.primary.fill.$description}
-
-Default value: {colour.primary.fill.$value}
+function TokenInfo() {
+  const { colour } = designTokens;
+  return (
+    <>
+      <h2>Primary token ({colour.primary.fill.$type})</h2>
+      <p>{colour.primary.fill.$description}</p>
+      <p>Default value: {colour.primary.fill.$value}</p>
+    </>
+  );
+}
 ```
 
 ### CSS Variables
