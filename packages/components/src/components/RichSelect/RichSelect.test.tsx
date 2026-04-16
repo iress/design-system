@@ -619,6 +619,70 @@ describe('IressRichSelect', () => {
         expect(selectedOption).not.toBeInTheDocument();
       });
 
+      it('focuses the search input without scrolling the container when opening async popover with a container prop', async () => {
+        // Spy on HTMLInputElement.prototype.focus to verify preventScroll behavior.
+        // Without the fix, FloatingFocusManager calls focus({ preventScroll: false })
+        // which causes the container to scroll to the floating element's initial position (top: 0).
+        // With the fix, our useLayoutEffect calls focus({ preventScroll: true }) first,
+        // preventing FloatingFocusManager from making its own focus call.
+        const focusSpy = vi.spyOn(HTMLInputElement.prototype, 'focus');
+        const containerElement = document.createElement('div');
+        document.body.appendChild(containerElement);
+
+        try {
+          render(
+            <IressRichSelect
+              container={containerElement}
+              options={() => mockAsyncSearchLabelValues()}
+              debounceThreshold={0}
+              placeholder="Select an item"
+            />,
+          );
+
+          const activator = screen.getByRole('button', {
+            name: 'Select an item',
+          });
+          await userEvent.click(activator);
+
+          const combobox = await screen.findByRole('combobox', {
+            name: 'Search',
+          });
+          expect(combobox).toBeInTheDocument();
+
+          // Verify that the search input was focused with preventScroll: true.
+          // Without the fix, FloatingFocusManager calls focus({ preventScroll: false })
+          // which would cause the container to scroll to top when its floating element
+          // is at its initial position. With the fix, our useLayoutEffect focuses first
+          // with preventScroll: true, so FloatingFocusManager skips its own call.
+          await waitFor(() =>
+            expect(
+              focusSpy.mock.calls.some(
+                ([options]) => options?.preventScroll === true,
+              ),
+            ).toBe(true),
+          );
+
+          // Flush any queued requestAnimationFrame callbacks (FloatingFocusManager
+          // schedules its own focus call via rAF) to ensure it has had a chance to
+          // run before we assert it was never called with preventScroll: false.
+          await act(
+            async () =>
+              await new Promise<void>((resolve) => {
+                requestAnimationFrame(() => resolve());
+              }),
+          );
+
+          expect(
+            focusSpy.mock.calls.some(
+              ([options]) => options?.preventScroll === false,
+            ),
+          ).toBe(false);
+        } finally {
+          focusSpy.mockRestore();
+          document.body.removeChild(containerElement);
+        }
+      });
+
       it('renders an alert when options throw an error', async () => {
         render(
           <IressRichSelect
