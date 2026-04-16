@@ -203,3 +203,51 @@ export const LotsOfOptions: Story = {
     autoHighlight: false,
   },
 };
+
+export const BugDropdownCutOffInScrollContainer: Story = {
+  name: 'Bug: Dropdown cut off in scroll container',
+  parameters: {
+    docs: {
+      description: {
+        story: `
+**Problem Summary:** When RichSelect is positioned near the bottom of a scrollable container,
+the dropdown is cut off without a scrollbar to view all options.
+
+**Expected Behavior:** Option dropdown either shows scroll or repositions to above the RichSelect
+if there isn't enough space below.
+
+**Actual Behavior (before fix):** Options dropdown is cut off and doesn't have a scroll bar.
+
+**How to Test:**
+1. Open this story
+2. Scroll to the bottom of the container below
+3. Click the RichSelect combobox near the bottom of the scroll container
+4. Verify the dropdown either shows scroll or positions above the trigger
+        `,
+      },
+    },
+  },
+  render: (args) => (
+    <div
+      style={{
+        height: '300px',
+        overflow: 'auto',
+        border: '1px solid #ccc',
+        padding: '16px',
+      }}
+    >
+      <div style={{ height: '250px', paddingBottom: '8px' }}>
+        <p>
+          Scroll down to see the RichSelect near the bottom of this container.
+        </p>
+      </div>
+      <IressRichSelect
+        {...args}
+        options={MOCK_LABEL_VALUE_META}
+        placeholder="Select an option"
+        container={document.body}
+      />
+      <div style={{ height: '20px' }} />
+    </div>
+  ),
+};

@@ -13,7 +13,6 @@ import {
   size,
 } from '@floating-ui/react';
 import {
-  POPOVER_USE_MAX_HEIGHT,
   type PopoverContextValue,
   type PopoverProviderProps,
   type PopoverRef,
@@ -26,6 +25,7 @@ import { usePopoverImperativeHandle } from './hooks/usePopoverImperativeHandle';
 import { focusableElements } from '@/helpers/dom/focusableElements';
 import slideoutStyles from '../Slideout/Slideout.module.scss';
 import { closestCrossShadow } from '@/helpers/dom/closestCrossShadow';
+import { applySizeMiddlewareStyles } from './helpers/applySizeMiddleware';
 
 export const PopoverContext = createContext<PopoverContextValue | undefined>(
   undefined,
@@ -80,13 +80,11 @@ export const PopoverProvider = forwardRef<PopoverRef, PopoverProviderProps>(
               requestAnimationFrame(() => {
                 // This must be wrapped in requestAnimationFrame to avoid ResizeObserver loop error; https://github.com/floating-ui/floating-ui/issues/1740
                 // The error is difficult/impossible to reproduce in Storybook, but it appears in other apps when the component is used without a fixed width.
-                Object.assign(elements.floating.style, {
-                  width: `${rects.reference.width}px`,
-                  maxHeight:
-                    availableHeight > POPOVER_USE_MAX_HEIGHT
-                      ? `${availableHeight}px`
-                      : undefined,
-                });
+                applySizeMiddlewareStyles(
+                  elements.floating.style,
+                  rects.reference.width,
+                  availableHeight,
+                );
               });
             },
             padding: 5,
