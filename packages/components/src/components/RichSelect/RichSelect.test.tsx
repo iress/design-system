@@ -654,11 +654,24 @@ describe('IressRichSelect', () => {
           // which would cause the container to scroll to top when its floating element
           // is at its initial position. With the fix, our useLayoutEffect focuses first
           // with preventScroll: true, so FloatingFocusManager skips its own call.
-          expect(
-            focusSpy.mock.calls.some(
-              ([options]) => options?.preventScroll === true,
-            ),
-          ).toBe(true);
+          await waitFor(() =>
+            expect(
+              focusSpy.mock.calls.some(
+                ([options]) => options?.preventScroll === true,
+              ),
+            ).toBe(true),
+          );
+
+          // Flush any queued requestAnimationFrame callbacks (FloatingFocusManager
+          // schedules its own focus call via rAF) to ensure it has had a chance to
+          // run before we assert it was never called with preventScroll: false.
+          await act(
+            async () =>
+              await new Promise<void>((resolve) => {
+                requestAnimationFrame(() => resolve());
+              }),
+          );
+
           expect(
             focusSpy.mock.calls.some(
               ([options]) => options?.preventScroll === false,
