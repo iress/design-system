@@ -30,6 +30,7 @@ Translate Figma design properties and structures into IDS (Iress Design System) 
 >
 > ```bash
 > npm install @iress-oss/ids-components@beta
+> npm install @iress-oss/ids-tokens@beta  # if using tokens directly (e.g. cssVars or CSS vars import)
 > ```
 
 ## Figma → IDS Mapping
