@@ -1859,5 +1859,64 @@ describe('IressSelect', () => {
 
       expect((submittedFormData as FormData).get('gender')).toBe('male');
     });
+
+    it('includes a primitive defaultValue in native form submit data (FormData)', async () => {
+      let submittedFormData: FormData | null = null;
+
+      const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        submittedFormData = new FormData(e.currentTarget);
+      };
+
+      render(
+        <form onSubmit={handleSubmit}>
+          <IressSelect
+            name="gender"
+            data-testid="test-select"
+            defaultValue="male"
+            options={[
+              { label: 'Male', value: 'male' },
+              { label: 'Female', value: 'female' },
+            ]}
+          />
+          <button type="submit">Submit</button>
+        </form>,
+      );
+
+      const submit = screen.getByRole('button', { name: 'Submit' });
+      await userEvent.click(submit);
+
+      expect((submittedFormData as FormData).get('gender')).toBe('male');
+    });
+
+    it('includes a primitive defaultValue in native form submit data (FormData) when readOnly', async () => {
+      let submittedFormData: FormData | null = null;
+
+      const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        submittedFormData = new FormData(e.currentTarget);
+      };
+
+      render(
+        <form onSubmit={handleSubmit}>
+          <IressSelect
+            name="gender"
+            data-testid="test-select"
+            defaultValue="male"
+            options={[
+              { label: 'Male', value: 'male' },
+              { label: 'Female', value: 'female' },
+            ]}
+            readOnly
+          />
+          <button type="submit">Submit</button>
+        </form>,
+      );
+
+      const submit = screen.getByRole('button', { name: 'Submit' });
+      await userEvent.click(submit);
+
+      expect((submittedFormData as FormData).get('gender')).toBe('male');
+    });
   });
 });
