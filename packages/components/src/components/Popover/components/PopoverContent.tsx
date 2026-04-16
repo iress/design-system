@@ -12,7 +12,7 @@ import { type FloatingUIContainer, type IressStyledProps } from '@/types';
 import { useEffect, useMemo, useRef } from 'react';
 import { styled } from '@/styled-system/jsx';
 import { usePopover } from '../hooks/usePopover';
-import { tabbable } from 'tabbable';
+import { FOCUSABLE_QUERY_SELECTOR } from '@/constants';
 
 export interface PopoverContentProps extends IressStyledProps {
   /**
@@ -34,11 +34,12 @@ export interface PopoverContentProps extends IressStyledProps {
 const PopoverContentInner = ({
   children,
   displayMode,
+  hasContainer,
   id,
   style,
   virtualFocus,
   ...restProps
-}: Omit<PopoverContentProps, 'container'>) => {
+}: Omit<PopoverContentProps, 'container'> & { hasContainer?: boolean }) => {
   const popover = usePopover();
   const returnFocusRef = useRef<HTMLElement | null>(null);
 
@@ -96,23 +97,26 @@ const PopoverContentInner = ({
     }
   }, [popover?.show, popover]);
 
-  // When not using virtual focus (e.g. async Select with a search input inside
-  // the popup), FloatingFocusManager would normally focus the first tabbable
-  // element via `initialFocus={0}` using `preventScroll: false`, which causes
-  // the scrollable container to jump. Instead we set `initialFocus={-1}` and
-  // manually focus the first tabbable element here with `preventScroll: true`.
+  // When the popup is portaled into a scrollable container and real (non-virtual)
+  // focus is used, FloatingFocusManager's default `initialFocus={0}` would call
+  // `focus({ preventScroll: false })` on the first tabbable element. Because the
+  // popup is appended as the last DOM child of the container, the browser scrolls
+  // the container to bring it into view — even if CSS transforms already position
+  // it correctly. We avoid this by setting `initialFocus={-1}` and manually
+  // focusing the first tabbable element with `preventScroll: true` instead.
   useEffect(() => {
-    if (!virtualFocus && popover?.show) {
+    if (hasContainer && !virtualFocus && popover?.show) {
       queueMicrotask(() => {
         const floatingEl = popover.api.refs.floating.current;
         if (!floatingEl) return;
-        const firstTabbable = tabbable(floatingEl)[0];
-        if (firstTabbable) {
-          firstTabbable.focus({ preventScroll: true });
-        }
+        // Fall back to the floating element itself when there are no focusable
+        // children, mirroring FloatingFocusManager's own fallback behaviour.
+        const firstEl =
+          floatingEl.querySelector<HTMLElement>(FOCUSABLE_QUERY_SELECTOR) ??
+          floatingEl;
+        firstEl.focus({ preventScroll: true });
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally only run when show changes
   }, [popover?.show]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const returnFocus = useMemo(
@@ -133,7 +137,7 @@ const PopoverContentInner = ({
     <FloatingList elementsRef={popover.list}>
       <FloatingFocusManager
         context={popover.api.context}
-        initialFocus={-1}
+        initialFocus={virtualFocus || hasContainer ? -1 : 0}
         modal={false}
         disabled={!popover?.show}
         returnFocus={returnFocus}
@@ -163,7 +167,7 @@ const PopoverContentContainer = ({
     return (
       <FloatingNode id={nodeId}>
         <FloatingPortal root={container} preserveTabOrder>
-          <PopoverContentInner {...restProps} />
+          <PopoverContentInner {...restProps} hasContainer />
         </FloatingPortal>
       </FloatingNode>
     );
