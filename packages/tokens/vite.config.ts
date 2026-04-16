@@ -8,7 +8,7 @@ import { peerDependencies } from './package.json';
 
 export default defineConfig({
   resolve: {
-    tsconfigPaths: './tsconfig.base.json',
+    tsconfigPaths: true,
   },
   plugins: [
     dts({

@@ -1,4 +1,4 @@
-import type { IFiles } from 'codesandbox-import-utils/lib/api/define';
+import type { IFiles } from './helpers/getSandboxUrl';
 
 import type { SourceProps } from '@storybook/addon-docs/blocks';
 import type { ADDON_ID } from './constants';

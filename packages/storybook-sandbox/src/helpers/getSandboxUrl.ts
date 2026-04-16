@@ -1,7 +1,12 @@
-import {
-  getParameters,
-  type IFiles,
-} from 'codesandbox-import-utils/lib/api/define';
+import { compressToBase64 } from 'lz-string';
+
+export type IFiles = Record<
+  string,
+  {
+    content: string;
+    isBinary: boolean;
+  }
+>;
 
 export interface GetSandboxProps {
   /**
@@ -23,6 +28,17 @@ export interface GetSandboxProps {
    */
   files: IFiles;
 }
+
+/**
+ * Compress sandbox parameters for the CodeSandbox define API.
+ * Replaces `codesandbox-import-utils` which is CJS-only and breaks
+ * in Vite 8/Rolldown ESM builds.
+ */
+const getParameters = (parameters: { files: IFiles }) =>
+  compressToBase64(JSON.stringify(parameters))
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/={1,2}$/, '');
 
 export const getSandboxUrl = ({ files }: GetSandboxProps) => {
   const parameters = getParameters({ files });

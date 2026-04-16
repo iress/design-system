@@ -7,7 +7,7 @@ description: >
   and wants IDS component code, or asks to build a form, page, layout, or
   component using IDS.
 license: Apache-2.0
-compatibility: React 18+, TypeScript, @iress-oss/ids-components@alpha
+compatibility: React 18+, TypeScript, @iress-oss/ids-components@beta
 metadata:
   author: iress
   version: "1.0"
@@ -31,12 +31,12 @@ Translate natural language UI descriptions into IDS (Iress Design System) compon
 
 ## Setup
 
-> **Important:** IDS v6 is currently in alpha. Install with the `@alpha` tag:
+> **Important:** IDS v6 is currently in beta. Install with the `@beta` tag:
 >
 > ```bash
-> npm install @iress-oss/ids-components@alpha
+> npm install @iress-oss/ids-components@beta
 > # If using tokens directly:
-> npm install @iress-oss/ids-tokens@alpha
+> npm install @iress-oss/ids-tokens@beta
 > ```
 
 ```tsx

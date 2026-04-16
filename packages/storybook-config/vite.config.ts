@@ -10,7 +10,7 @@ const externalDeps = Object.keys(peerDependencies || {});
 
 export default defineConfig({
   resolve: {
-    tsconfigPaths: './tsconfig.base.json',
+    tsconfigPaths: true,
   },
   plugins: [
     react(),
@@ -73,6 +73,7 @@ export default defineConfig({
           '@mdx-js/react',
           'react-jsx-runtime',
           'react-element-to-jsx-string',
+          'react-diff-viewer',
         ].some((dep) => id === dep || id.startsWith(`${dep}/`));
       },
     },

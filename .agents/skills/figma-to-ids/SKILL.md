@@ -6,7 +6,7 @@ description: >
   Figma MCP, asks to convert a design to code, or references Figma component
   names, variants, or auto-layout properties.
 license: Apache-2.0
-compatibility: React 18+, TypeScript, @iress-oss/ids-components@alpha
+compatibility: React 18+, TypeScript, @iress-oss/ids-components@beta
 metadata:
   author: iress
   version: "1.0"
@@ -26,10 +26,10 @@ Translate Figma design properties and structures into IDS (Iress Design System) 
 4. **Generate code** — Produce clean React/TypeScript with proper IDS imports
 5. **Verify output** — Check that all imports resolve, no raw HTML is used where IDS components exist, grid layouts use responsive `span` values, and no common anti-patterns are present (disabled buttons, slot attributes, redundant textStyle)
 
-> **Important:** IDS v6 is currently in alpha. Install with the `@alpha` tag:
+> **Important:** IDS v6 is currently in beta. Install with the `@beta` tag:
 >
 > ```bash
-> npm install @iress-oss/ids-components@alpha
+> npm install @iress-oss/ids-components@beta
 > ```
 
 ## Figma → IDS Mapping
