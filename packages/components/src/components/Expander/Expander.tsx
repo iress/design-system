@@ -61,25 +61,40 @@ export const IressExpander = ({
   const [isOpen, setIsOpen] = useState(open);
   const id = useIdIfNeeded({ id: idProp });
   const containerInnerRef = useRef<HTMLDivElement>(null);
+  // Tracks whether this is the first time the effect runs so we can distinguish
+  // "already open on mount (no animation)" from "just opened (animation running)".
+  const isFirstRenderRef = useRef(true);
 
-  // After the open animation completes, allow children to overflow so that
-  // floating elements (e.g. IressSelect dropdown) are not clipped by the
-  // overflow:hidden that the grid animation requires.  When closing, reset
-  // overflow immediately so the collapse animation works correctly.
+  // Manage overflow on containerInner to allow floating children (e.g. an
+  // IressSelect dropdown) to render outside the expander bounds once it is open.
+  //
+  // overflow:hidden is required during the CSS grid animation so content is
+  // clipped as the expander collapses.  Once fully open, we switch to
+  // overflow:visible; floating-UI then stops treating containerInner as a
+  // clipping boundary and can position/size the dropdown correctly.
+  //
+  // Three cases are handled here:
+  //   • Closing: reset overflow immediately before the collapse animation.
+  //   • Initial mount with open=true: set visible right away (no animation fires).
+  //   • Subsequent opens: handled by onTransitionEnd once the animation finishes.
   useEffect(() => {
-    if (!isOpen && containerInnerRef.current) {
-      containerInnerRef.current.style.overflow = '';
+    const containerInner = containerInnerRef.current;
+    if (!containerInner) return;
+
+    if (!isOpen) {
+      // Reset immediately so the collapse animation can clip content correctly.
+      containerInner.style.overflow = '';
+      isFirstRenderRef.current = false;
+      return;
     }
+
+    // On the very first render where open=true there is no animation, so
+    // onTransitionEnd will never fire — set visible straight away.
+    if (isFirstRenderRef.current) {
+      containerInner.style.overflow = 'visible';
+    }
+    isFirstRenderRef.current = false;
   }, [isOpen]);
-
-  // Handle the case where the expander starts open (no animation fires).
-  // We run this once on mount so the initial open state is also handled.
-  useEffect(() => {
-    if (isOpen && containerInnerRef.current) {
-      containerInnerRef.current.style.overflow = 'visible';
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const classes = expander({ mode, open: isOpen });
   const styles = expander.raw({ mode, open: isOpen });
