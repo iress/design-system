@@ -655,10 +655,14 @@ describe('IressRichSelect', () => {
           // is at its initial position. With the fix, our useLayoutEffect focuses first
           // with preventScroll: true, so FloatingFocusManager skips its own call.
           expect(
-            focusSpy.mock.calls.some(([options]) => options?.preventScroll === true),
+            focusSpy.mock.calls.some(
+              ([options]) => options?.preventScroll === true,
+            ),
           ).toBe(true);
           expect(
-            focusSpy.mock.calls.some(([options]) => options?.preventScroll === false),
+            focusSpy.mock.calls.some(
+              ([options]) => options?.preventScroll === false,
+            ),
           ).toBe(false);
         } finally {
           focusSpy.mockRestore();
