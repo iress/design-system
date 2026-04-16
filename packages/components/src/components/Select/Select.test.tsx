@@ -12,7 +12,7 @@ import { IressSelect, SelectRef, type IressSelectProps } from './Select';
 import { toArray } from '@helpers/formatting/toArray';
 import { button } from '../Button';
 import { menuItem } from '../Menu';
-import { createRef } from 'react';
+import { createRef, type FormEvent } from 'react';
 import { IressLabel } from '../Label';
 import { IressSelectMenu } from './SelectMenu/SelectMenu';
 import { IressForm } from '@/patterns/Form/Form';
@@ -1799,7 +1799,7 @@ describe('IressSelect', () => {
     it('includes the selected value in native form submit data (FormData)', async () => {
       let submittedFormData: FormData | null = null;
 
-      const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         submittedFormData = new FormData(e.currentTarget);
       };
@@ -1833,7 +1833,7 @@ describe('IressSelect', () => {
     it('includes the readOnly value in native form submit data (FormData)', async () => {
       let submittedFormData: FormData | null = null;
 
-      const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         submittedFormData = new FormData(e.currentTarget);
       };
@@ -1863,7 +1863,7 @@ describe('IressSelect', () => {
     it('includes a primitive defaultValue in native form submit data (FormData)', async () => {
       let submittedFormData: FormData | null = null;
 
-      const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         submittedFormData = new FormData(e.currentTarget);
       };
@@ -1892,7 +1892,7 @@ describe('IressSelect', () => {
     it('includes a primitive defaultValue in native form submit data (FormData) when readOnly', async () => {
       let submittedFormData: FormData | null = null;
 
-      const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         submittedFormData = new FormData(e.currentTarget);
       };
