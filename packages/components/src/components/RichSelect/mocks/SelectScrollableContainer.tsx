@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { IressExpander, IressPanel, IressRichSelect } from '@/main';
+import { mockAsyncSearchLabelValues } from '@/mocks/generateLabelValues';
 
 export const SelectScrollableContainer = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -23,7 +24,7 @@ export const SelectScrollableContainer = () => {
         <IressRichSelect
           placeholder="click me"
           container={containerRef}
-          options={() => Promise.resolve([])}
+          options={() => mockAsyncSearchLabelValues()}
         />
       </IressExpander>
     </div>
