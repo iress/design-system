@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@docs/*": ["docs/*"],
+      "@helpers/*": ["src/helpers/*"],
+      "@theme-preset/*": ["../theme-preset/dist/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["src/styled-system/**/*", "**/node_modules"]
+}

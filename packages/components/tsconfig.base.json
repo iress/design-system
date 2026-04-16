@@ -36,6 +36,7 @@
 
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "declaration": true,
     "paths": {
       "@/*": ["src/*"],
