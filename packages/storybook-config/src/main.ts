@@ -124,6 +124,29 @@ export const getMainConfig = ({
         return !removeVitePluginNames.includes(pluginName);
       });
 
+      // Fix: Storybook's external-globals-plugin transforms bare side-effect imports
+      // (e.g. `import "storybook/internal/core-events"`) into const declarations
+      // without an initializer (`const __STORYBOOK_MODULE_CORE_EVENTS__;`). This
+      // is valid JavaScript for esbuild (Vite 7) but rolldown (Vite 8) rejects it
+      // with a PARSE_ERROR. We add a post-transform plugin to add a `= undefined`
+      // initializer so the declaration is valid while preserving the semantics
+      // (the variable is unused since no named symbols were imported from the module).
+      config.plugins = [
+        ...(config.plugins ?? []),
+        {
+          name: 'fix-storybook-uninitialised-globals',
+          enforce: 'post',
+          transform(code) {
+            if (!code.includes('__STORYBOOK_MODULE_')) return null;
+            const fixed = code.replace(
+              /\bconst (__STORYBOOK_MODULE_[A-Z0-9_]+__);\n?/g,
+              'const $1 = undefined;\n',
+            );
+            return fixed !== code ? { code: fixed, map: null } : null;
+          },
+        } satisfies Plugin,
+      ];
+
       if (tsConfigWithAlias) {
         const tsConfigContent = readFileSync(
           resolve(absolutePath, tsConfigWithAlias),

@@ -7,7 +7,7 @@ description: >
   common gotchas. Use when the user asks about upgrading, migrating, or updating
   IDS versions, or mentions OUI, v4, v5, or v6 migration.
 license: Apache-2.0
-compatibility: React 18+, TypeScript, @iress-oss/ids-components@alpha
+compatibility: React 18+, TypeScript, @iress-oss/ids-components@beta
 allowed-tools: Bash(grep:*) Bash(sed:*) Bash(find:*) Bash(scripts/*:*)
 metadata:
   author: iress
@@ -70,15 +70,15 @@ import { IressButton } from '@iress/components-react';
 // ❌ Old (OUI)
 import { Button, Input } from '@iress/oui';
 
-// ✅ IDS v6 (install with @alpha tag: npm install @iress-oss/ids-components@alpha)
+// ✅ IDS v6 (install with @beta tag: npm install @iress-oss/ids-components@beta)
 import { IressButton, IressInput } from '@iress-oss/ids-components';
 ```
 
-> **Important:** IDS v6 is currently in alpha. Install with the `@alpha` tag:
+> **Important:** IDS v6 is currently in beta. Install with the `@beta` tag:
 >
 > ```bash
-> npm install @iress-oss/ids-components@alpha
-> npm install @iress-oss/ids-tokens@alpha  # if using tokens directly
+> npm install @iress-oss/ids-components@beta
+> npm install @iress-oss/ids-tokens@beta  # if using tokens directly
 > ```
 
 ### CSS entry point
