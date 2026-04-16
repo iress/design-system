@@ -1827,7 +1827,7 @@ describe('IressSelect', () => {
       const submit = screen.getByRole('button', { name: 'Submit' });
       await userEvent.click(submit);
 
-      expect((submittedFormData as FormData).get('gender')).toBe('male');
+      expect(submittedFormData!.get('gender')).toBe('male');
     });
 
     it('includes the readOnly value in native form submit data (FormData)', async () => {
@@ -1857,7 +1857,7 @@ describe('IressSelect', () => {
       const submit = screen.getByRole('button', { name: 'Submit' });
       await userEvent.click(submit);
 
-      expect((submittedFormData as FormData).get('gender')).toBe('male');
+      expect(submittedFormData!.get('gender')).toBe('male');
     });
 
     it('includes a primitive defaultValue in native form submit data (FormData)', async () => {
@@ -1886,7 +1886,7 @@ describe('IressSelect', () => {
       const submit = screen.getByRole('button', { name: 'Submit' });
       await userEvent.click(submit);
 
-      expect((submittedFormData as FormData).get('gender')).toBe('male');
+      expect(submittedFormData!.get('gender')).toBe('male');
     });
 
     it('includes a primitive defaultValue in native form submit data (FormData) when readOnly', async () => {
@@ -1916,7 +1916,7 @@ describe('IressSelect', () => {
       const submit = screen.getByRole('button', { name: 'Submit' });
       await userEvent.click(submit);
 
-      expect((submittedFormData as FormData).get('gender')).toBe('male');
+      expect(submittedFormData!.get('gender')).toBe('male');
     });
   });
 });
