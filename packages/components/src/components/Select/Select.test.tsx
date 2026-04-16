@@ -15,6 +15,9 @@ import { menuItem } from '../Menu';
 import { createRef } from 'react';
 import { IressLabel } from '../Label';
 import { IressSelectMenu } from './SelectMenu/SelectMenu';
+import { IressForm } from '@/patterns/Form/Form';
+import { IressFormField } from '@/patterns/Form/FormField/FormField';
+import { IressButton } from '@/components/Button';
 
 describe('IressSelect', () => {
   const classes = select();
@@ -1754,6 +1757,107 @@ describe('IressSelect', () => {
 
       // This demonstrates the documented behavior: onChange is NOT called when using setValue directly.
       expect(onChange).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('form submission', () => {
+    it('includes the selected value in IressForm submit data', async () => {
+      const onSubmit = vi.fn();
+
+      render(
+        <IressForm onSubmit={onSubmit}>
+          <IressFormField
+            label="Gender"
+            name="gender"
+            render={(controlledProps) => (
+              <IressSelect
+                {...controlledProps}
+                data-testid="test-select"
+                options={[
+                  { label: 'Male', value: 'male' },
+                  { label: 'Female', value: 'female' },
+                ]}
+              />
+            )}
+          />
+          <IressButton type="submit">Submit</IressButton>
+        </IressForm>,
+      );
+
+      const combobox = screen.getByRole('combobox');
+      await userEvent.click(combobox);
+
+      const option = await screen.findByRole('option', { name: 'Male' });
+      await userEvent.click(option);
+
+      const submit = screen.getByRole('button', { name: 'Submit' });
+      await userEvent.click(submit);
+
+      expect(onSubmit).toHaveBeenCalledWith({ gender: 'male' });
+    });
+
+    it('includes the selected value in native form submit data (FormData)', async () => {
+      let submittedFormData: FormData | null = null;
+
+      const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        submittedFormData = new FormData(e.currentTarget);
+      };
+
+      render(
+        <form onSubmit={handleSubmit}>
+          <IressSelect
+            name="gender"
+            data-testid="test-select"
+            options={[
+              { label: 'Male', value: 'male' },
+              { label: 'Female', value: 'female' },
+            ]}
+          />
+          <button type="submit">Submit</button>
+        </form>,
+      );
+
+      const combobox = screen.getByRole('combobox');
+      await userEvent.click(combobox);
+
+      const option = await screen.findByRole('option', { name: 'Male' });
+      await userEvent.click(option);
+
+      const submit = screen.getByRole('button', { name: 'Submit' });
+      await userEvent.click(submit);
+
+      expect((submittedFormData as FormData).get('gender')).toBe('male');
+    });
+
+    it('includes the readOnly value in native form submit data (FormData)', async () => {
+      let submittedFormData: FormData | null = null;
+
+      const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        submittedFormData = new FormData(e.currentTarget);
+      };
+
+      render(
+        <form onSubmit={handleSubmit}>
+          <IressSelect
+            name="gender"
+            data-testid="test-select"
+            defaultValue={{ label: 'Male', value: 'male' }}
+            options={[
+              { label: 'Male', value: 'male' },
+              { label: 'Female', value: 'female' },
+            ]}
+            readOnly
+          />
+          <button type="submit">Submit</button>
+        </form>,
+      );
+
+      const submit = screen.getByRole('button', { name: 'Submit' });
+      await userEvent.click(submit);
+
+      expect((submittedFormData as FormData).get('gender')).toBe('male');
     });
   });
 });

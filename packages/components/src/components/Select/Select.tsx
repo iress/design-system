@@ -565,6 +565,7 @@ const Select = <
         value={getValuesString()}
         ref={hiddenInputRef}
         variant={readOnly}
+        name={name}
       >
         {getLabelsString(', ')}
       </IressReadonly>
