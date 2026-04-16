@@ -565,6 +565,9 @@ const Select = <
         value={getValuesString()}
         ref={hiddenInputRef}
         variant={readOnly}
+        name={name}
+        disabled={disabled}
+        required={required}
       >
         {getLabelsString(', ')}
       </IressReadonly>
