@@ -99,6 +99,10 @@ export const IressContextualMenu = ({
     [restProps],
   );
 
+  const { textStyle } = styleProps as {
+    textStyle?: IressMenuItemProps['textStyle'];
+  };
+
   const classes = contextualMenu({ bordered, size, theme });
 
   return (
@@ -135,6 +139,7 @@ export const IressContextualMenu = ({
             {/* Destructure `icon` to avoid passing it as we handle it differently in contextual menu */}
             {items.map(({ icon, ...item }) => (
               <IressMenuItem
+                textStyle={textStyle ?? 'typography.body.sm'}
                 {...item}
                 className={cx(classes.item, item.className)}
                 key={item.key}
