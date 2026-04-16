@@ -91,6 +91,7 @@ export const IressContextualMenu = ({
   offset = { mainAxis: -6, crossAxis: 0 },
   onAction,
   size = 'small',
+  textStyle,
   theme = 'light',
   ...restProps
 }: IressContextualMenuProps) => {
@@ -98,10 +99,6 @@ export const IressContextualMenu = ({
     () => splitCssProps(restProps),
     [restProps],
   );
-
-  const { textStyle } = styleProps as {
-    textStyle?: IressMenuItemProps['textStyle'];
-  };
 
   const classes = contextualMenu({ bordered, size, theme });
 
