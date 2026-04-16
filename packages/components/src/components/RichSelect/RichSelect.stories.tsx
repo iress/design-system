@@ -32,6 +32,8 @@ import {
 } from '@/main';
 import { SelectOptionsFooter } from './mocks/SelectOptionsFooter';
 import SelectOptionsFooterSource from './mocks/SelectOptionsFooter.tsx?raw';
+import { SelectInScrollableExpander } from './mocks/SelectInScrollableExpander';
+import SelectInScrollableExpanderSource from './mocks/SelectInScrollableExpander.tsx?raw';
 import {
   addToStorybookCategory,
   disableArgTypes,
@@ -185,6 +187,13 @@ export const OptionsFooter: Story = {
   render: (args) => <SelectOptionsFooter {...args} />,
   parameters: {
     ...withCustomSource(SelectOptionsFooterSource),
+  },
+};
+
+export const InScrollableExpander: Story = {
+  render: (args) => <SelectInScrollableExpander {...args} />,
+  parameters: {
+    ...withCustomSource(SelectInScrollableExpanderSource),
   },
 };
 
