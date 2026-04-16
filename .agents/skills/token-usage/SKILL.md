@@ -70,16 +70,18 @@ function App() {
 
 The CSS stylesheet is the simplest way to use tokens. Import it once and use `var()` references anywhere in your CSS.
 
+> **Important:** Use the variable names defined in `tokens/build/css-vars.css` (e.g. `--colour-neutral-10`). Do **not** reference `--iress-*` variables directly — those are set by theme files and are not part of the public token API.
+
 ```css
 /* Import the stylesheet once in your app root */
 @import '@iress-oss/ids-tokens/build/css-vars.css';
 
 /* Use variables anywhere in your CSS */
 .card {
-  background: var(--iress-colour-neutral-10);
-  padding: var(--iress-spacing-4);
-  border-radius: var(--iress-radius-3);
-  color: var(--iress-colour-neutral-90);
+  background: var(--colour-neutral-10);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-3);
+  color: var(--colour-neutral-90);
 }
 ```
 
@@ -130,7 +132,7 @@ designTokens.typography.heading[1].$value; // { fontFamily, fontSize, fontWeight
 @import '@iress-oss/ids-tokens/build/css-vars.css';
 ```
 
-Once imported, all `--iress-*` variables are available globally.
+Once imported, all public token variables (e.g. `--colour-*`, `--spacing-*`, `--radius-*`, `--typography-*`) are available globally.
 
 ### For CSS-in-JS / Inline Styles
 
@@ -288,19 +290,19 @@ Base unit: 4px (0.25rem). Token value = multiple of base unit.
 ```css
 .custom-card {
   /* Colour tokens */
-  background: var(--iress-colour-neutral-10);
-  border: 1px solid var(--iress-colour-neutral-30);
-  color: var(--iress-colour-neutral-90);
+  background: var(--colour-neutral-10);
+  border: 1px solid var(--colour-neutral-30);
+  color: var(--colour-neutral-90);
 
   /* Spacing tokens */
-  padding: var(--iress-spacing-4);
-  gap: var(--iress-spacing-2);
+  padding: var(--spacing-4);
+  gap: var(--spacing-2);
 
   /* Radius tokens */
-  border-radius: var(--iress-radius-3);
+  border-radius: var(--radius-3);
 
   /* Typography tokens (composite shorthand) */
-  font: var(--iress-typography-body-md-regular);
+  font: var(--typography-body-md-regular);
 }
 ```
 
@@ -326,17 +328,21 @@ import { cssVars } from '@iress-oss/ids-tokens';
 
 ### CSS Variable Naming Convention
 
+Variables in `tokens/build/css-vars.css` follow this pattern:
+
 ```
---iress-{category}-{path}
+--{category}-{path}
 ```
 
 Examples:
 
-- `--iress-colour-primary-fill`
-- `--iress-spacing-4`
-- `--iress-radius-1`
-- `--iress-typography-heading-1` (shorthand)
-- `--iress-typography-heading--1-font-size` (decomposed, double-dash before token name)
+- `--colour-primary-fill`
+- `--spacing-4`
+- `--radius-1`
+- `--typography-heading-1` (shorthand)
+- `--typography-heading-_1-fontSize` (decomposed, underscore prefix before token name)
+
+> **Note:** Theme files define `--iress-{category}-{path}` override variables that are referenced as fallback defaults inside the css-vars.css public variables. Use the `--{category}-{path}` public variables in your own CSS — never the `--iress-*` theme overrides directly.
 
 ## Common Mistakes
 
@@ -422,7 +428,7 @@ Layout components accept responsive objects for spacing props:
 | -------------------------------- | ----------------------------------------------- |
 | Spacing on IDS layout components | Props: `gap`, `p`, `m`                          |
 | Colours on IDS components        | Props: `bg`, `color`                            |
-| Custom CSS / SCSS                | CSS variables (`var(--iress-*)`)                |
+| Custom CSS / SCSS                | CSS variables (`var(--colour-*)`, `var(--spacing-*)`, etc.) |
 | Inline styles / CSS-in-JS        | `cssVars` object (`cssVars.colour.neutral[10]`) |
 | Custom CSS with Panda CSS        | `@iress-oss/ids-theme-preset` preset            |
 | Theming / overrides              | CSS variables on custom properties              |
