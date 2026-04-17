@@ -41,7 +41,7 @@
 | Slideout / Drawer  | `IressSlideout`                              |                            |
 | Tabs               | `IressTabSet` + `IressTab`                   |                            |
 | Table              | `IressTable`                                 | Head, Body, Row, Cell      |
-| Tag                | `IressTag`                                   | clickable variant          |
+| Tag                | `IressTag`                                   | `bordered` for visible border; `element="button"` for clickable, `element="a"` for link; `onClick` alone also auto-renders as button |
 | Pill               | `IressPill`                                  |                            |
 | Tooltip            | `IressTooltip`                               |                            |
 | Icon               | `IressIcon name="..."`                       | Material Symbols name      |

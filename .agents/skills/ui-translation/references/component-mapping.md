@@ -56,7 +56,7 @@
 | Progress bar         | `IressProgress`             | `<IressProgress value={75} max={100} />`                                                                    |
 | Image                | `IressImage`                | `<IressImage src="..." alt="..." />`                                                                        |
 | Icon                 | `IressIcon`                 | `<IressIcon name="settings" />`                                                                             |
-| Tag / badge          | `IressTag`                  | `<IressTag>New</IressTag>`                                                                                  |
+| Tag / badge          | `IressTag`                  | `<IressTag>New</IressTag>`; use `bordered` for visible-border style; use `element="button"` for clickable tag, `element="a"` for link tag; `onClick` alone also auto-renders as `<button>` |
 | Pill                 | `IressPill`                 | `<IressPill>Category</IressPill>`                                                                           |
 | Tooltip              | `IressTooltip`              | `<IressTooltip content="Help text"><IressButton>Hover me</IressButton></IressTooltip>`                      |
 

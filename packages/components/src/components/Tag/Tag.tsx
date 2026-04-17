@@ -1,20 +1,22 @@
 import {
-  type MouseEventHandler,
   useMemo,
   useRef,
   type FocusEvent,
   type ReactNode,
   type SyntheticEvent,
+  type ElementType,
+  type ComponentPropsWithoutRef,
 } from 'react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { IressCloseButton } from '../Button';
 import { tag } from './Tag.styles';
 import { css, cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
-import { splitCssProps, styled } from '@/styled-system/jsx';
-import type { IressStyledProps } from '@/types';
+import { splitCssProps } from '@/styled-system/jsx';
+import type { IressCSSProps, IressTestProps } from '@/interfaces';
 
-interface TagBaseProps {
+interface InternalTagProps<E extends ElementType = 'span'>
+  extends IressCSSProps, IressTestProps {
   /**
    * Contents of the tag.
    */
@@ -37,9 +39,14 @@ interface TagBaseProps {
   deleteButtonText?: string;
 
   /**
+   * Element type to render the Tag as.
+   * @default 'span'
+   */
+  element?: E;
+
+  /**
    * Style of the tag, based on the data colour palette (10-90) or system status colours (danger, info, success, warning).
    * Can be a number (10-90), a string ('10'-'90'), or a system status ('danger', 'info', 'success', 'warning').
-   * @default '90'
    */
   mode?:
     | 10
@@ -66,6 +73,11 @@ interface TagBaseProps {
     | 'warning';
 
   /**
+   * When true, renders the tag with a visible border instead of a filled background.
+   */
+  bordered?: boolean;
+
+  /**
    * Callback triggered when the tag is deleted
    */
   onDelete?: (children: string, e: SyntheticEvent<HTMLButtonElement>) => void;
@@ -76,71 +88,64 @@ interface TagBaseProps {
   onDeleteButtonBlur?: (e: FocusEvent<HTMLButtonElement>) => void;
 }
 
-/**
- * Props for IressTag when onClick is provided (renders as button)
- */
-type ClickableTagProps = Omit<IressStyledProps<'button'>, 'onClick'> &
-  TagBaseProps & {
-    /**
-     * Callback triggered when the tag is clicked.
-     * If this prop is provided, the tag will render as a `<button>` element with hover styles to indicate it is clickable.
-     */
-    onClick: MouseEventHandler<HTMLButtonElement>;
-  };
+type ElementProps<E extends ElementType = 'span'> = Omit<
+  ComponentPropsWithoutRef<E>,
+  keyof InternalTagProps<E>
+>;
 
-/**
- * Props for IressTag when onClick is not provided (renders as span)
- */
-type StaticTagProps = IressStyledProps<'span'> &
-  TagBaseProps & {
-    onClick?: never;
-  };
+export type IressTagProps<E extends ElementType = 'span'> = ElementProps<E> &
+  InternalTagProps<E>;
 
-export type IressTagProps = ClickableTagProps | StaticTagProps;
-
-const Tag = ({
+export const IressTag = <E extends ElementType = 'span'>({
+  bordered = false,
   children,
   className,
   compact,
   'data-testid': dataTestId,
   deleteButton,
   deleteButtonText = 'Delete',
+  element,
   mode,
-  onClick,
   onDelete,
   onDeleteButtonBlur,
   ...restProps
-}: IressTagProps) => {
+}: IressTagProps<E>) => {
   const contentRef = useRef<HTMLSpanElement>(null);
+  const isInteractiveElement = element == 'button' || element == 'a';
+  const clickable = isInteractiveElement || !!restProps.onClick;
+
   const classes = tag({
+    bordered,
     customDeleteButton: !!deleteButton,
-    clickable: !!onClick,
+    clickable,
     compact,
-    mode: mode as Extract<TagBaseProps['mode'], string>,
+    mode: mode as Extract<InternalTagProps['mode'], string>,
   });
   const styles = tag.raw({
+    bordered,
     customDeleteButton: !!deleteButton,
-    clickable: !!onClick,
+    clickable,
     compact,
-    mode: mode as Extract<TagBaseProps['mode'], string>,
+    mode: mode as Extract<InternalTagProps['mode'], string>,
   });
   const showDelete = Boolean(onDelete ?? deleteButton);
 
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
 
-  const StyledComponent = useMemo(() => {
-    return onClick ? styled.button : styled.span;
-  }, [onClick]);
+  const StyledElement = useMemo(() => {
+    if (element) return element;
+    return clickable ? 'button' : 'span';
+  }, [element, clickable]);
 
   return (
-    <StyledComponent
+    <StyledElement
       className={cx(
         className,
         css(styles.root, styleProps),
         GlobalCSSClass.Tag,
       )}
       data-testid={dataTestId}
-      {...(onClick ? { onClick, type: 'button' as const } : {})}
+      {...(StyledElement === 'button' ? { type: 'button' as const } : {})}
       {...(nonStyleProps as object)}
     >
       <span ref={contentRef} className={classes.content}>
@@ -161,14 +166,8 @@ const Tag = ({
           )}
         </span>
       )}
-    </StyledComponent>
+    </StyledElement>
   );
 };
 
-Tag.displayName = 'IressTag';
-
-export const IressTag: {
-  (props: StaticTagProps): React.JSX.Element;
-  (props: ClickableTagProps): React.JSX.Element;
-  displayName: string;
-} = Tag;
+IressTag.displayName = 'IressTag';

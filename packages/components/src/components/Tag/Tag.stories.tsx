@@ -68,9 +68,34 @@ export const Status: Story = {
   ),
 };
 
+export const Bordered: Story = {
+  ...Default,
+  argTypes: {
+    ...disableArgTypes(['mode', 'bordered']),
+  },
+  render: (args) => (
+    <IressInline gap="sm">
+      <IressTag {...args} bordered>
+        No mode
+      </IressTag>
+      {BADGE_MODES.map((mode) => (
+        <IressTag {...args} key={mode} mode={mode} bordered>
+          {mode}
+        </IressTag>
+      ))}
+      {STATUSES.map((status) => (
+        <IressTag {...args} key={status} mode={status} bordered>
+          {status}
+        </IressTag>
+      ))}
+    </IressInline>
+  ),
+};
+
 export const ClickableTag: Story = {
   args: {
     children: 'Tag',
+    bordered: true,
     onClick: () => {
       console.log('Tag clicked');
     },
@@ -79,6 +104,14 @@ export const ClickableTag: Story = {
     ...withJsxTransformer({
       showFunctions: true,
     }),
+  },
+};
+
+export const LinkTag: Story = {
+  args: {
+    children: 'Link Tag',
+    element: 'a',
+    href: '#',
   },
 };
 

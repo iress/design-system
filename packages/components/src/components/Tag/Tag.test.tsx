@@ -21,10 +21,16 @@ describe('IressTag', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('renders as clickable when onClick is provided', async () => {
+  it('renders as a span by default', () => {
+    render(<IressTag data-testid="tag">Label</IressTag>);
+    const component = screen.getByTestId('tag');
+    expect(component.tagName).toBe('SPAN');
+  });
+
+  it('renders as a button when element="button"', async () => {
     const handleClick = vi.fn();
     render(
-      <IressTag onClick={handleClick} data-testid="clickable-tag">
+      <IressTag element="button" onClick={handleClick} data-testid="tag">
         Click me
       </IressTag>,
     );
@@ -36,6 +42,44 @@ describe('IressTag', () => {
 
     await userEvent.click(component);
     expect(handleClick).toHaveBeenCalled();
+  });
+
+  it('renders as a link when element="a"', () => {
+    render(
+      <IressTag element="a" href="/test" data-testid="tag">
+        Link tag
+      </IressTag>,
+    );
+
+    const component = screen.getByRole('link', { name: 'Link tag' });
+    expect(component).toHaveAttribute('href', '/test');
+    expect(component).toHaveClass(
+      ...(tag({ clickable: true }).root ?? '').split(' '),
+    );
+  });
+
+  it('renders as clickable when onClick is provided without element', async () => {
+    const handleClick = vi.fn();
+    render(
+      <IressTag onClick={handleClick} data-testid="clickable-tag">
+        Click me
+      </IressTag>,
+    );
+
+    const component = screen.getByRole('button', { name: 'Click me' });
+    await userEvent.click(component);
+    expect(handleClick).toHaveBeenCalled();
+  });
+
+  it('applies bordered styles', () => {
+    render(
+      <IressTag bordered data-testid="bordered-tag">
+        Bordered
+      </IressTag>,
+    );
+
+    const component = screen.getByTestId('bordered-tag');
+    expect(component).toHaveClass(tag({ bordered: true }).root!);
   });
 
   it('should render the delete button if onDelete is provided', () => {
@@ -65,7 +109,7 @@ describe('IressTag', () => {
   });
 
   it('should call the onDeleteButtonBlur function with the tag text when the delete button is blurred', async () => {
-    const deleteBlurSpy = vitest.fn();
+    const deleteBlurSpy = vi.fn();
 
     render(
       <IressTag onDelete={vi.fn()} onDeleteButtonBlur={deleteBlurSpy}>

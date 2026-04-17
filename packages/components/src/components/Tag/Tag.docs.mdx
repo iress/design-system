@@ -46,9 +46,25 @@ Use semantic status values (`danger`, `info`, `success`, `warning`) when tags ne
 
 <ComponentExample of={ComponentStories.Status} />
 
+### Bordered tags
+
+Set `bordered` to render a tag with a visible border using the tag's current
+colour, without altering its background. This enhances visibility and makes tags
+look more interactive — useful for dropdown filter tags or any context where
+tags need to stand out.
+
+<ComponentExample of={ComponentStories.Bordered} />
+
 ### Clickable tags
 
-Tags can be made clickable by passing an `onClick` handler. This will apply hover styles to the tag to indicate it is clickable.
+Tags can be made clickable by setting `element="button"`. This is the
+recommended, explicit API and renders the tag as a `<button>` with hover
+styles to indicate it is clickable.
+
+For backwards compatibility, passing `onClick` without setting `element` is
+also supported and will automatically render the tag as a `<button>`.
+
+Use `element="a"` to render the tag as a link.
 
 <ComponentExample of={ComponentStories.ClickableTag} />
 
@@ -89,10 +105,16 @@ Query tags by their text content:
 const tag = screen.getByText('Category');
 ```
 
-When `onClick` is provided, the tag renders as a `<button>`:
+When `element="button"` is set, the tag renders as a `<button>`:
 
 ```tsx
 const tag = screen.getByRole('button', { name: 'Category' });
+```
+
+When `element="a"` is set, the tag renders as a link:
+
+```tsx
+const tag = screen.getByRole('link', { name: 'Category' });
 ```
 
 For deletable tags, query the delete button:
