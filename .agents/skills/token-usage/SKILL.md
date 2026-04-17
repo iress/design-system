@@ -70,7 +70,7 @@ function App() {
 
 The CSS stylesheet is the simplest way to use tokens. Import it once and use `var()` references anywhere in your CSS.
 
-> **Important:** Use the variable names defined in `tokens/build/css-vars.css` (e.g. `--colour-neutral-10`). Do **not** reference `--iress-*` variables directly — those are set by theme files and are not part of the public token API.
+> **Important:** Use the variable names defined in `@iress-oss/ids-tokens/build/css-vars.css` (e.g. `--colour-neutral-10`). Do **not** reference `--iress-*` variables directly — those are set by theme files and are not part of the public token API.
 
 ```css
 /* Import the stylesheet once in your app root */
