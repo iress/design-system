@@ -48,17 +48,23 @@ Use semantic status values (`danger`, `info`, `success`, `warning`) when tags ne
 
 ### Bordered tags
 
-Set `bordered` to render a tag with a visible border and transparent background.
-This enhances visibility and makes tags look more interactive — useful for
-dropdown filter tags or any context where tags need to stand out.
+Set `bordered` to render a tag with a visible border using the tag's current
+colour, without altering its background. This enhances visibility and makes tags
+look more interactive — useful for dropdown filter tags or any context where
+tags need to stand out.
 
 <ComponentExample of={ComponentStories.Bordered} />
 
 ### Clickable tags
 
-Tags can be made clickable by setting `element="button"`. This renders the tag
-as a `<button>` with hover styles to indicate it is clickable. Use
-`element="a"` to render as a link.
+Tags can be made clickable by setting `element="button"`. This is the
+recommended, explicit API and renders the tag as a `<button>` with hover
+styles to indicate it is clickable.
+
+For backwards compatibility, passing `onClick` without setting `element` is
+also supported and will automatically render the tag as a `<button>`.
+
+Use `element="a"` to render the tag as a link.
 
 <ComponentExample of={ComponentStories.ClickableTag} />
 

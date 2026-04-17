@@ -10,10 +10,25 @@ This is the component library for the Iress Design System (IDS). You can use thi
 
 ## Set up the component library
 
-1. Install using: `yarn add @iress-oss/ids-components`
+1. Install using: `yarn add @iress-oss/ids-components@beta`
 2. Import the styles: `import '@iress-oss/ids-components/dist/style.css'`
 3. Import the components: `import { IressButton, IressText } from '@iress-oss/ids-components'`
 4. Use the components: `<IressButton>Click me</IressButton>`
+
+> **Note:** IDS v6 is currently in beta — install with the `@beta` tag as shown above.
+>
+> If you need to use design tokens directly in your application code (for custom CSS or inline styles), also install the tokens package:
+>
+> ```bash
+> yarn add @iress-oss/ids-tokens@beta
+> ```
+>
+> Then import the CSS variables stylesheet and use `cssVars` in your code:
+>
+> ```ts
+> import '@iress-oss/ids-tokens/build/css-vars.css';
+> import { cssVars } from '@iress-oss/ids-tokens';
+> ```
 
 ## Contributing
 
