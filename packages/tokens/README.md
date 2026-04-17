@@ -4,7 +4,13 @@ IDS Tokens are a single source of truth to name and store Iress design decisions
 
 ## Getting started
 
-1. Install: `yarn add @iress-oss/ids-tokens`
+> **Note:** IDS v6 is currently in beta. Install with the `@beta` tag:
+
+```bash
+yarn add @iress-oss/ids-tokens@beta
+# If also using IDS React components:
+yarn add @iress-oss/ids-components@beta
+```
 
 ## Using the design tokens in your application
 
@@ -13,20 +19,39 @@ IDS Tokens are a single source of truth to name and store Iress design decisions
 The design tokens follow the official W3C [design tokens specification](https://www.w3.org/TR/design-tokens/). The tokens are available in an object format, which can be used in JavaScript or TypeScript applications.
 
 ```tsx
-import { colour } from '@iress/ids-tokens';
+import { designTokens } from '@iress-oss/ids-tokens';
 
-<h2>Primary token ({colour.primary.text.$type})</h2>
-{colour.primary.text.$description}
-
-Default value: {colour.primary.text.$value}
+function TokenInfo() {
+  const { colour } = designTokens;
+  return (
+    <>
+      <h2>Primary token ({colour.primary.fill.$type})</h2>
+      <p>{colour.primary.fill.$description}</p>
+      <p>Default value: {colour.primary.fill.$value}</p>
+    </>
+  );
+}
 ```
 
 ### CSS Variables
 
-The design tokens are available as CSS variables. You can use them in your CSS files or inline styles.
+The design tokens are available as CSS variables. Import the stylesheet once and use `var()` references anywhere in your CSS.
+
+```css
+/* Import the stylesheet once in your app root */
+@import '@iress-oss/ids-tokens/build/css-vars.css';
+
+.card {
+  background: var(--colour-neutral-10);
+  padding: var(--spacing-4);
+  color: var(--colour-neutral-90);
+}
+```
+
+For CSS-in-JS or inline styles, use the type-safe `cssVars` object:
 
 ```tsx
-import { cssVars } from '@iress/ids-tokens';
+import { cssVars } from '@iress-oss/ids-tokens';
 
 <div style={{ color: cssVars.colour.primary.text }}>Hello world</div>;
 ```
@@ -34,7 +59,7 @@ import { cssVars } from '@iress/ids-tokens';
 You can also get the underlying CSS variable for a composite token by using the `_` prefix.
 
 ```tsx
-import { cssVars } from '@iress/ids-tokens';
+import { cssVars } from '@iress-oss/ids-tokens';
 
 <div
   style={{

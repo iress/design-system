@@ -46,7 +46,7 @@ src/
 ## Conventions
 
 - Token schemas are defined in TypeScript, not JSON
-- CSS variables follow `--iress-{category}-{name}` naming
+- Public CSS variables in `build/css-vars.css` follow `--{category}-{path}` naming (e.g. `--colour-neutral-10`, `--spacing-4`). Do **not** reference `--iress-*` variables directly — those are theme override variables, not part of the public token API.
 - Transforms convert composite token values into CSS shorthand strings
 
 ## AI context
