@@ -30,7 +30,7 @@ export const IressButtonGroupProvider = ({
 
   const context: ButtonGroupContextValue = useMemo(
     () => ({
-      isActive: (item) => !!(item && toArray(selected).includes(item)),
+      isActive: (item) => !!(item && toArray(selected).some((s) => s === item)),
       toggle,
       selected: toArray(selected),
     }),

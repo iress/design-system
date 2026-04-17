@@ -41,7 +41,7 @@ export const LabelBase = ({
     >
       {required && (
         <>
-          {!hiddenLabel && (
+          {Boolean(!hiddenLabel) && (
             <span className={classNames(styles.required)} aria-hidden="true">
               *
             </span>
@@ -60,7 +60,7 @@ export const LabelBase = ({
       >
         {children}
       </span>
-      {!required && optional && (
+      {Boolean(!required) && optional && (
         <span
           className={classNames(styles.optional, {
             [GlobalCSSClass.SROnly]: hiddenLabel === true,

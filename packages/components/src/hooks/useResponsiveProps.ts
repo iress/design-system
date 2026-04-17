@@ -29,7 +29,7 @@ export const useResponsiveProps = <T>(
 
     // If inheritPrevious is true, check the previous breakpoints for a value
     if (inheritPrevious) {
-      const index = BREAKPOINTS.indexOf(breakpoint);
+      const index = BREAKPOINTS.findIndex((b) => b === breakpoint);
       for (let i = index; i >= 0; i--) {
         if (props[BREAKPOINTS[i]]) {
           return props[BREAKPOINTS[i]];

@@ -153,12 +153,12 @@ export const IressLoadingSuspense = ({
           loaded={loaded}
           {...(restProps as object)}
         >
-          {showChildren && children}
+          {Boolean(showChildren) && children}
         </IressLoading>
         <Suspense fallback={null}>
-          {!showChildren && (
+          {Boolean(!showChildren) && (
             <OnSuspenseResolved onResolved={onResolved}>
-              {!loaded && children}
+              {Boolean(!loaded) && children}
             </OnSuspenseResolved>
           )}
         </Suspense>
@@ -170,7 +170,7 @@ export const IressLoadingSuspense = ({
   // The `children` is directly rendered inside the `Suspense` component, which will handle the loading state.
   return (
     <>
-      {showFallback && (
+      {Boolean(showFallback) && (
         <IressLoading
           pattern={pattern as never}
           loaded={loaded}
@@ -182,7 +182,7 @@ export const IressLoadingSuspense = ({
           children
         ) : (
           <OnSuspenseResolved onResolved={onResolved}>
-            {!loaded && children}
+            {Boolean(!loaded) && children}
           </OnSuspenseResolved>
         )}
       </Suspense>

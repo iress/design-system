@@ -29,12 +29,12 @@ export const IressSlideoutProvider = ({
   const [opened, setOpened] = useState<string[]>([]);
 
   const open = useCallback((id: string) => {
-    setOpened((prev) => (prev.includes(id) ? [...prev] : [...prev, id]));
+    setOpened((prev) => (prev.some((s) => s === id) ? [...prev] : [...prev, id]));
   }, []);
 
   const close = useCallback((id: string) => {
     setOpened((prev) =>
-      prev.includes(id) ? prev.filter((modalId) => modalId !== id) : [...prev],
+      prev.some((s) => s === id) ? prev.filter((modalId) => modalId !== id) : [...prev],
     );
   }, []);
 

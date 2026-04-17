@@ -23,5 +23,5 @@ export const useMenuComposite = (role?: MenuRoles): boolean => {
   const menu = useMenu();
   const menuRole = role ?? menu?.role;
   if (popover || !menuRole) return false;
-  return ['menu', 'listbox'].includes(menuRole);
+  return ['menu', 'listbox'].some((r) => r === menuRole);
 };

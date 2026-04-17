@@ -69,7 +69,7 @@ export const WithMenu: Story = {
                 <IressMenu
                   role={role}
                   defaultSelected={3}
-                  multiSelect={multiSelect && role === 'listbox'}
+                  multiSelect={Boolean(multiSelect) && role === 'listbox'}
                 >
                   {menuChildren}
                 </IressMenu>
@@ -77,7 +77,7 @@ export const WithMenu: Story = {
             </IressCol>
             <IressCol>
               <MenuInPopoverRoleDescription role={role}>
-                {role === 'listbox' && (
+                {Boolean(role === 'listbox') && (
                   <IressToggle
                     className="iress-mb--md"
                     checked={multiSelect}

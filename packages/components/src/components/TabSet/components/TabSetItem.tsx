@@ -53,7 +53,7 @@ export const TabSetItem = ({
         className={styles.listItem}
         onClick={() => handleSelection(index, value)}
         onKeyDown={(e) =>
-          ['Space', 'Enter'].includes(e.key) && handleSelection(index, value)
+          ['Space', 'Enter'].some((k) => k === e.key) && handleSelection(index, value)
         }
         ref={(element) => {
           if (!element) return;

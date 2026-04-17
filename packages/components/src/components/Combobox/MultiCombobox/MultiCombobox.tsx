@@ -146,7 +146,7 @@ export const IressMultiCombobox = forwardRef(
       const existingValues: FormControlValue[] = [];
       const uniqueSelected = toArray(selected).filter((newItem) => {
         const itemValue = newItem.value ?? newItem.label;
-        if (existingValues.includes(itemValue)) return false;
+        if (existingValues.some((v) => v === itemValue)) return false;
         existingValues.push(itemValue);
         return true;
       });

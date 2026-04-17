@@ -21,9 +21,9 @@ export const composePopoverFloatingProps = (
   style?: React.CSSProperties,
 ): IressHTMLAttributes => {
   const role = popover?.hasInnerRole() ? undefined : popover?.type;
-  const useAriaOrientation = role && ['listbox', 'menu', 'tree'].includes(role);
+  const useAriaOrientation = role && ['listbox', 'menu', 'tree'].some((r) => r === role);
   const useAriaActiveDescendant =
-    role && ['application', 'combobox', 'composite', 'group'].includes(role);
+    role && ['application', 'combobox', 'composite', 'group'].some((r) => r === role);
 
   const isInline = displayMode === 'inline';
 

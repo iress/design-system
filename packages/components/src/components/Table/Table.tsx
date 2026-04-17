@@ -85,7 +85,7 @@ const Table = <TRow extends object = never, TVal = never>(
             >
               {caption}
             </caption>
-            {!hiddenHeader && hasContent && (
+            {Boolean(!hiddenHeader) && Boolean(hasContent) && (
               <thead data-testid={theadTestId}>
                 <TableHeader tableId={id} testId={theadTestId} />
               </thead>

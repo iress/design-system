@@ -44,7 +44,7 @@ const CustomOptions: IressRichSelectProps['renderOptions'] = ({
         maxHeight: '210px',
       }}
     >
-      {hasSelected && (
+      {Boolean(hasSelected) && (
         <IressSelectMenu
           heading={`Selected (${selected.length})`}
           items={simpleSelected}

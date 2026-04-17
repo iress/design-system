@@ -94,7 +94,7 @@ const Chart = () => {
 
   return (
     <IressLoading pattern="component" loaded={!safeLoaded} update={updating}>
-      {chart && <Graph />}
+      {Boolean(chart) && <Graph />}
       <IressPanel>
         <IressForm<ChartProps>
           onSubmit={(projectionData) => setMoney(projectionData.money)}
@@ -184,8 +184,8 @@ export const LoadingWizard = () => {
 
   return (
     <IressContainer style={{ maxWidth: '600px', paddingBlock: '3rem' }}>
-      {page === 1 && <StartPage setPage={setPage} />}
-      {page === 2 && <RetirementIncomeProjectionPage />}
+      {Boolean(page === 1) && <StartPage setPage={setPage} />}
+      {Boolean(page === 2) && <RetirementIncomeProjectionPage />}
     </IressContainer>
   );
 };

@@ -5,7 +5,7 @@ export function useIDSProvidedModal(id?: string) {
   const provider = useContext(IressModalContext);
 
   return {
-    opened: id && provider?.opened.includes(id),
+    opened: id && provider?.opened.some((s) => s === id),
     container: provider?.container,
     show: (open?: boolean) => id && provider?.showModal(id, open),
   };

@@ -90,7 +90,7 @@ const WithNewOption: IressRichSelectProps['renderOptions'] = ({
           )
         }
       >
-        {hasSelected && (
+        {Boolean(hasSelected) && (
           <IressSelectMenu
             aria-labelledby={headingId}
             heading={
@@ -110,8 +110,8 @@ const WithNewOption: IressRichSelectProps['renderOptions'] = ({
             selected={value}
           />
         )}
-        {hasResultsAndSelected && <IressMenuDivider gutter="xs" />}
-        {hasResults && (
+        {Boolean(hasResultsAndSelected) && <IressMenuDivider gutter="xs" />}
+        {Boolean(hasResults) && (
           <IressSelectMenu
             heading="Search results"
             items={results}
@@ -122,8 +122,8 @@ const WithNewOption: IressRichSelectProps['renderOptions'] = ({
             hideSelectedItems
           />
         )}
-        {hasFrequentlyAndOther && <IressMenuDivider gutter="xs" />}
-        {showFrequentlySelected && (
+        {Boolean(hasFrequentlyAndOther) && <IressMenuDivider gutter="xs" />}
+        {Boolean(showFrequentlySelected) && (
           <IressSelectMenu
             heading="Frequently selected"
             items={FREQUENTLY_SELECTED}

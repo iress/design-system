@@ -23,7 +23,7 @@ export const HookFormExample = () => {
   return (
     <IressHookForm form={form}>
       <IressStack gutter="md">
-        {firstName && lastName && (
+        {Boolean(firstName) && lastName && (
           <IressPanel>
             Name: {firstName} {lastName}
           </IressPanel>

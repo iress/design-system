@@ -40,7 +40,7 @@ export const IressToaster = ({
 
   return (
     <>
-      {!container && (
+      {Boolean(!container) && (
         <div ref={fallbackContainer} {...TOASTER_ARIA_ATTRIBUTES} />
       )}
       <FloatingPortal root={container ?? fallbackContainer}>

@@ -94,7 +94,7 @@ const Slider = (
       }
       data-testid={dataTestId}
     >
-      {!hiddenValueTooltip && (
+      {Boolean(!hiddenValueTooltip) && (
         <output className={styles.thumbValue}>{getValueLabel()}</output>
       )}
       <input

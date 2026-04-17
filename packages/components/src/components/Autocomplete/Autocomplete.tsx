@@ -202,7 +202,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
         show={show}
         type="listbox"
       >
-        {results.length > 0 && (
+        {Boolean(results.length > 0) && (
           <>
             {popoverPrepend}
             <IressSelectMenu
@@ -219,13 +219,13 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
           </>
         )}
         {error && errorText}
-        {shouldShowInstructions && !error && (
+        {Boolean(shouldShowInstructions) && !error && (
           <AutocompleteInstructions
             minSearchLength={minSearchLength ?? 1}
             styles={styles}
           />
         )}
-        {shouldShowNoResults && !error && (
+        {Boolean(shouldShowNoResults) && !error && (
           <AutocompleteNoResults
             noResultsText={noResultsText}
             styles={styles}

@@ -215,7 +215,7 @@ export const TextAlign: Story = {
         >
           <IressText element="h2">{textAlign}</IressText>
           {args.children}
-          {textAlign === 'inherit' && (
+          {Boolean(textAlign === 'inherit') && (
             <IressPanel {...args} textAlign={textAlign}>
               <h3>Inherits center align of parent panel</h3>
               {args.children}

@@ -40,7 +40,7 @@ export const WatchForm = () => {
                   )}
                 />
               )}
-              {!insuredAtPolicyLevel && (
+              {Boolean(!insuredAtPolicyLevel) && (
                 <IressFormField
                   name="sumInsured_na"
                   defaultValue="N/A"

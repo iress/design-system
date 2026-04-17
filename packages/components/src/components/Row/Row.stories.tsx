@@ -210,7 +210,7 @@ export const HorizontalAlignment: Story = {
     <IressContainer className="iress-u-stack iress--gutter--md">
       {HORIZONTAL_ALIGNS.map((horizontalAlign, index) => (
         <>
-          {index !== 0 && <IressDivider />}
+          {Boolean(index !== 0) && <IressDivider />}
           <IressText element="h2">
             Horizontal align: {horizontalAlign}
           </IressText>

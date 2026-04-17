@@ -33,7 +33,7 @@ export const usePopoverNavigation = <
   startIndex = 0,
 ): PopoverNavigationHookReturn => {
   const usesArrowKeyNav = useMemo(
-    () => !!(type && ['menu', 'listbox'].includes(type)),
+    () => !!(type && ['menu', 'listbox'].some((t) => t === type)),
     [type],
   );
   const focusOnInitialRender = useMemo(() => {

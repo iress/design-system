@@ -181,7 +181,7 @@ const Input = <T extends FormControlValue = string | number>(
               screenreaderText={loading === true ? 'loading' : loading}
             />
           )}
-          {validValue && clearable && <ClearButton onClick={handleClear} />}
+          {Boolean(validValue) && Boolean(clearable) && <ClearButton onClick={handleClear} />}
         </div>
         {append && (
           <div className={`${styles.addon} ${styles.append}`}>{append}</div>

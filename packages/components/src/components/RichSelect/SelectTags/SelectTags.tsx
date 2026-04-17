@@ -43,7 +43,7 @@ const adjustFocusOnTagDelete = (
   if (focusable.length < 1) {
     popoverActivator?.focus();
   } else {
-    const index = focusable.indexOf(e.currentTarget);
+    const index = focusable.findIndex((el) => el === e.currentTarget);
     const focusableWithoutDeleted = focusable.filter(
       (element) => element !== e.currentTarget,
     );
@@ -193,7 +193,7 @@ export const IressSelectTags = ({
       {showPlaceholder && (
         <span className={classNames(styles.placeholder)}>{placeholder}</span>
       )}
-      {hasSelected && (
+      {Boolean(hasSelected) && (
         <IressInline gutter="sm" className={styles.tagsList}>
           <Tags
             data-testid={dataTestId}

@@ -57,7 +57,7 @@ export const NativeValidationForm = () => {
   return (
     <form onSubmit={handleSubmit} noValidate>
       <IressStack gutter="md">
-        {isSubmitted && hasErrors && (
+        {Boolean(isSubmitted) && Boolean(hasErrors) && (
           <IressAlert status="danger">
             There's a problem with your submission.
           </IressAlert>
@@ -65,7 +65,7 @@ export const NativeValidationForm = () => {
         <IressField
           label="Name"
           error={
-            errors.name && (
+            Boolean(errors.name) && (
               <IressValidationMessage>Name is required</IressValidationMessage>
             )
           }
@@ -76,7 +76,7 @@ export const NativeValidationForm = () => {
         <IressField
           label="Email address"
           error={
-            errors.email && (
+            Boolean(errors.email) && (
               <IressValidationMessage>Email is required</IressValidationMessage>
             )
           }
