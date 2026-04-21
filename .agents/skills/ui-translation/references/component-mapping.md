@@ -20,10 +20,10 @@
 | Select dropdown (static or async) | `IressField` + `IressSelect` | `<IressField label="Country"><IressSelect>...</IressSelect></IressField>` — supports static options and async loading via an `options` function |
 | Freetext input with suggestions  | `IressField` + `IressAutocomplete` | `<IressField label="Search"><IressAutocomplete /></IressField>` — allows any text input; suggestions are optional |
 | Currency input           | `IressField` + `IressInputCurrency` | `<IressField label="Amount"><IressInputCurrency /></IressField>`                                                               |
-| Checkbox                 | `IressCheckbox`                     | `<IressCheckbox label="I agree" />`                                                                                            |
-| Checkbox group           | `IressCheckboxGroup`                | `<IressCheckboxGroup label="Options"><IressCheckbox label="A" /><IressCheckbox label="B" /></IressCheckboxGroup>`              |
-| Radio buttons            | `IressRadioGroup` + `IressRadio`    | `<IressRadioGroup label="Choice"><IressRadio label="Yes" value="yes" /><IressRadio label="No" value="no" /></IressRadioGroup>` |
-| Toggle switch            | `IressToggle`                       | `<IressToggle label="Enable" />`                                                                                               |
+| Checkbox                 | `IressCheckbox`                     | `<IressCheckbox value="agree">I agree</IressCheckbox>`                                                                         |
+| Checkbox group           | `IressCheckboxGroup`                | `<IressField label="Options"><IressCheckboxGroup name="opts"><IressCheckbox value="a">A</IressCheckbox><IressCheckbox value="b">B</IressCheckbox></IressCheckboxGroup></IressField>` |
+| Radio buttons            | `IressRadioGroup` + `IressRadio`    | `<IressField label="Choice"><IressRadioGroup><IressRadio value="yes">Yes</IressRadio><IressRadio value="no">No</IressRadio></IressRadioGroup></IressField>` |
+| Toggle switch            | `IressToggle`                       | `<IressToggle>Enable</IressToggle>`                                                                                            |
 | Slider / range           | `IressSlider`                       | `<IressSlider min={0} max={100} />`                                                                                            |
 | Read-only display        | `IressReadonly`                     | `<IressReadonly label="Status" value="Active" />` — supports `actions` prop for inline action buttons (e.g. edit toggle). Use `variant="locked"` when the value is read-only due to permissions |
 
@@ -36,8 +36,8 @@
 
 | Description                                  | IDS Component           | Example                                                                                   |
 | -------------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------- |
-| Vertical stack (items stacked top-to-bottom) | `IressStack`            | `<IressStack gap="4">...</IressStack>`                                                    |
-| Horizontal row (items side-by-side)          | `IressInline`           | `<IressInline gap="2">...</IressInline>`                                                  |
+| Vertical stack (items stacked top-to-bottom) | `IressStack`            | `<IressStack gap="md">...</IressStack>`                                                    |
+| Horizontal row (items side-by-side)          | `IressInline`           | `<IressInline gap="sm">...</IressInline>`                                                  |
 | Grid columns                                 | `IressRow` + `IressCol` | `<IressRow><IressCol span={{ xs: 12, md: 6 }}>...</IressCol><IressCol span={{ xs: 12, md: 6 }}>...</IressCol></IressRow>` |
 | Container with max-width                     | `IressContainer`        | `<IressContainer>...</IressContainer>`                                                    |
 | Divider / separator                          | `IressDivider`          | `<IressDivider />`                                                                        |
@@ -49,7 +49,7 @@
 | -------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | Text / paragraph     | `IressText`                 | `<IressText>Body text</IressText>`                                                                          |
 | Heading              | `IressText element="h2"`    | `<IressText element="h2">Heading</IressText>`                                                               |
-| Card / panel         | `IressCard` or `IressPanel` | `<IressCard><IressCard.Header>Title</IressCard.Header><IressCard.Body>Content</IressCard.Body></IressCard>` |
+| Card / panel         | `IressCard` or `IressPanel` | `<IressCard heading={<h3>Title</h3>}>Content</IressCard>`                                   |
 | Alert / notification | `IressAlert`                | `<IressAlert status="success">Saved!</IressAlert>`                                                          |
 | Loading spinner      | `IressSpinner`              | `<IressSpinner />`                                                                                          |
 | Skeleton loader      | `IressSkeleton`             | `<IressSkeleton height="20px" width="200px" />`                                                             |
@@ -78,4 +78,4 @@
 
 | Description | IDS Component | Example                                                                                                 |
 | ----------- | ------------- | ------------------------------------------------------------------------------------------------------- |
-| Data table  | `IressTable`  | `<IressTable><IressTable.Head>...</IressTable.Head><IressTable.Body>...</IressTable.Body></IressTable>` |
+| Data table  | `IressTable`  | `<IressTable caption="Users" rows={users} columns={columns} />` — data-driven via `rows` and `columns` props |

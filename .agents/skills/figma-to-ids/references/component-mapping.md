@@ -24,11 +24,11 @@
 | Input / Text       | `IressField` + `IressInput`                  | label, placeholder         |
 | Input / Currency   | `IressField` + `IressInputCurrency`          | label                      |
 | Select / Dropdown  | `IressField` + `IressSelect`                 | label, options             |
-| Checkbox           | `IressCheckbox`                              | label                      |
-| Checkbox Group     | `IressCheckboxGroup` + `IressCheckbox`s      | label                      |
-| Radio Group        | `IressRadioGroup` + `IressRadio`s            | label                      |
-| Toggle             | `IressToggle`                                | label                      |
-| Card               | `IressCard`                                  | Header, Body, Footer slots |
+| Checkbox           | `IressCheckbox`                              | `children` for label       |
+| Checkbox Group     | `IressCheckboxGroup` + `IressCheckbox`s      | Wrap in `IressField` for label |
+| Radio Group        | `IressRadioGroup` + `IressRadio`s            | Wrap in `IressField` for label |
+| Toggle             | `IressToggle`                                | `children` for label       |
+| Card               | `IressCard`                                  | `heading`, `footer` props; `children` for body |
 | Panel              | `IressPanel`                                 |                            |
 | Alert / Success    | `IressAlert status="success"`                |                            |
 | Alert / Danger     | `IressAlert status="danger"`                 |                            |
@@ -40,7 +40,7 @@
 | Modal / Warning    | `IressModal status="warning"`                | actions, size sm/md only   |
 | Slideout / Drawer  | `IressSlideout`                              |                            |
 | Tabs               | `IressTabSet` + `IressTab`                   |                            |
-| Table              | `IressTable`                                 | Head, Body, Row, Cell      |
+| Table              | `IressTable`                                 | Data-driven: `rows`, `columns`, `caption` props |
 | Tag                | `IressTag`                                   | `bordered` for visible border; `element="button"` for clickable, `element="a"` for link; `onClick` alone also auto-renders as button |
 | Pill               | `IressPill`                                  |                            |
 | Tooltip            | `IressTooltip`                               |                            |
