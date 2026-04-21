@@ -23,7 +23,7 @@ Translate Figma design properties and structures into IDS (Iress Design System) 
 1. **Analyse Figma structure** — Identify frames, auto-layout, and component instances
 2. **Map components** — Match Figma component names/variants to IDS components
 3. **Extract tokens** — Convert Figma design values to IDS design token references
-4. **Generate code** — Produce clean React/TypeScript with proper IDS imports
+4. **Generate code** — Produce clean, minimal React/TypeScript with proper IDS imports. Use the fewest components possible — check whether parent components already handle layout before adding `IressInline`/`IressStack` wrappers. Never wrap a single child in a layout component.
 5. **Verify output** — Check that all imports resolve, no raw HTML is used where IDS components exist, grid layouts use responsive `span` values, and no common anti-patterns are present (disabled buttons, slot attributes, redundant textStyle)
 
 > **Important:** IDS v6 is currently in beta. Install with the `@beta` tag:
@@ -67,8 +67,8 @@ import {
 
 function LoginForm() {
   return (
-    <IressCard p="6">
-      <IressStack gap="4">
+    <IressCard p="lg">
+      <IressStack gap="md">
         <IressText element="h2">Log In</IressText>
         <IressField label="Email" htmlFor="email" required>
           <IressInput id="email" type="email" />
@@ -147,38 +147,40 @@ import { IressModal } from '@iress-oss/ids-components';
 
 ```tsx
 import { IressTable, IressTag, IressButton } from '@iress-oss/ids-components';
+import type { TableColumn } from '@iress-oss/ids-components';
 
-function UsersTable({ users }) {
-  return (
-    <IressTable>
-      <IressTable.Head>
-        <IressTable.Row>
-          <IressTable.HeaderCell>Name</IressTable.HeaderCell>
-          <IressTable.HeaderCell>Email</IressTable.HeaderCell>
-          <IressTable.HeaderCell>Status</IressTable.HeaderCell>
-          <IressTable.HeaderCell>Actions</IressTable.HeaderCell>
-        </IressTable.Row>
-      </IressTable.Head>
-      <IressTable.Body>
-        {users.map((user) => (
-          <IressTable.Row key={user.id}>
-            <IressTable.Cell>{user.name}</IressTable.Cell>
-            <IressTable.Cell>{user.email}</IressTable.Cell>
-            <IressTable.Cell>
-              <IressTag>{user.status}</IressTag>
-            </IressTable.Cell>
-            <IressTable.Cell>
-              <IressButton mode="tertiary" icon="edit">
-                Edit
-              </IressButton>
-            </IressTable.Cell>
-          </IressTable.Row>
-        ))}
-      </IressTable.Body>
-    </IressTable>
-  );
+interface User {
+  name: string;
+  email: string;
+  status: string;
+  id: string;
+}
+
+const columns: TableColumn<User>[] = [
+  { key: 'name', label: 'Name' },
+  { key: 'email', label: 'Email' },
+  {
+    key: 'status',
+    label: 'Status',
+    format: (value) => <IressTag>{value}</IressTag>,
+  },
+  {
+    key: 'actions',
+    label: 'Actions',
+    format: (_, row) => (
+      <IressButton mode="tertiary" icon="edit">
+        Edit
+      </IressButton>
+    ),
+  },
+];
+
+function UsersTable({ users }: { users: User[] }) {
+  return <IressTable caption="Users" rows={users} columns={columns} />;
 }
 ```
+
+> **Key insight:** `IressTable` is data-driven — pass `rows` and `columns` props instead of composing sub-components. Use the `format` function on columns to render custom cell content like tags or buttons.
 
 ## Responsive Layout
 
@@ -242,10 +244,12 @@ When Figma provides separate mobile and desktop frames for the same layout:
 When Figma only provides a desktop frame with a sidebar + main content area, infer the mobile layout:
 
 ```tsx
+import { useState } from 'react';
 import {
   useBreakpoint,
   IressSlideout,
   IressButton,
+  IressStack,
   IressRow,
   IressCol,
 } from '@iress-oss/ids-components';
@@ -259,7 +263,7 @@ function Page() {
     <>
       {isMobile ? (
         // Mobile: primary content first, secondary content in slideout
-        <IressStack gap="4">
+        <IressStack gap="md">
           <IressButton
             mode="secondary"
             icon="filter_list"
@@ -316,16 +320,41 @@ function Navigation() {
 
 ## Best Practices
 
-1. **Use IDS components, not raw elements** — IDS components encapsulate correct spacing, colours, border radius, and accessibility
-2. **Don't recreate component internals** — If Figma shows a button with specific padding/radius, use `IressButton` with the right `mode` — the styling is built in
-3. **Map Figma gap/padding to spacing tokens** — Divide pixel value by 4 to get the token number
-4. **Prefer semantic props over manual styling** — Use `status="danger"` instead of `bg="colour.system.danger.fill"`
-5. **Use IressField for all form inputs** — It provides the label, hint, and validation layout
-6. **Respect responsive patterns** — Use `hideFrom`/`hideBelow` props or the `useBreakpoint` hook for responsive visibility; use responsive `span` on `IressCol` for adaptive grid layouts
-7. **Always make grid layouts responsive** — When translating Figma multi-column layouts, use responsive `span` values (e.g. `span={{ xs: 12, md: 6 }}`) so columns stack on mobile
-8. **Check the component docs** — Read the specific component doc for detailed props and patterns (`node_modules/@iress-oss/ids-components/.ai/components/`)
+1. **Minimise component nesting** — Use the fewest components possible. Every wrapper must earn its place. Before adding `IressInline` or `IressStack`, check whether the parent already handles layout (e.g. `IressCard` has `heading` and `footer` props; `IressModal` has `actions`; `IressButtonGroup` handles horizontal button layout). Don't wrap a single child in a layout component.
+2. **Use IDS components, not raw elements** — IDS components encapsulate correct spacing, colours, border radius, and accessibility
+3. **Don't recreate component internals** — If Figma shows a button with specific padding/radius, use `IressButton` with the right `mode` — the styling is built in
+4. **Map Figma gap/padding to spacing tokens** — Divide pixel value by 4 to get the token number, then use the full token: 16px → `"spacing.4"`, 24px → `"spacing.6"`. Alias tokens (`"xs"`, `"sm"`, `"md"`, `"lg"`, `"xl"`) are also valid. Never use bare numbers like `gap="4"`.
+5. **Prefer semantic props over manual styling** — Use `status="danger"` instead of `bg="colour.system.danger.fill"`
+6. **Use IressField for all form inputs** — It provides the label, hint, and validation layout
+7. **Respect responsive patterns** — Use `hideFrom`/`hideBelow` props or the `useBreakpoint` hook for responsive visibility; use responsive `span` on `IressCol` for adaptive grid layouts
+8. **Always make grid layouts responsive** — When translating Figma multi-column layouts, use responsive `span` values (e.g. `span={{ xs: 12, md: 6 }}`) so columns stack on mobile
+9. **Check the component docs** — Read the specific component doc for detailed props and patterns (`node_modules/@iress-oss/ids-components/.ai/components/`)
 
 ## Common Mistakes
+
+### Unnecessary layout wrappers
+
+Don't add `IressInline` or `IressStack` when it adds no value. Every Figma auto-layout frame does NOT need its own layout wrapper — check the IDS component first.
+
+```tsx
+// ❌ Unnecessary nesting — IressStack wrapping a single child
+<IressStack gap="md">
+  <IressInline gap="sm">
+    <IressButton mode="primary">Save</IressButton>
+    <IressButton mode="secondary">Cancel</IressButton>
+  </IressInline>
+</IressStack>
+
+// ✅ Single group of buttons only needs IressInline
+<IressInline gap="sm">
+  <IressButton mode="primary">Save</IressButton>
+  <IressButton mode="secondary">Cancel</IressButton>
+</IressInline>
+```
+
+**Rule of thumb:** When Figma shows an auto-layout frame, check if the corresponding IDS component already provides that layout before adding a wrapper. Components like `IressModal` (with `actions`) and `IressButtonGroup` already handle their internal layout. For `IressCard`, use the `heading` and `footer` props to structure content — but note the `footer` slot does not auto-layout its children, so use `IressInline` inside `footer` when you need horizontal button layout.
+
+### Other common anti-patterns
 
 For the full list of common anti-patterns (disabled buttons, redundant textStyle, legacy slot attributes, raw HTML, hardcoded values), read the Common Mistakes guide at `node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md` (requires `@iress-oss/ids-components` to be installed).
 

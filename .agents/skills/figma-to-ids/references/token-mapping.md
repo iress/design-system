@@ -50,18 +50,21 @@ IDS base spacing unit = 4px (0.25rem). Map Figma pixel values:
 
 ## Typography
 
-| Figma Text Style                   | IDS Token                    | Component                               |
-| ---------------------------------- | ---------------------------- | --------------------------------------- |
-| Heading / H1 (Ubuntu 24px/500)     | `typography.heading.1`       | `<IressText element="h1">`              |
-| Heading / H2 (Ubuntu 20px/500)     | `typography.heading.2`       | `<IressText element="h2">`              |
-| Heading / H3 (Ubuntu 18px/500)     | `typography.heading.3`       | `<IressText element="h3">`              |
-| Heading / H4 (Ubuntu 16px/500)     | `typography.heading.4`       | `<IressText element="h4">`              |
-| Heading / H5 (Ubuntu 16px/400)     | `typography.heading.5`       | `<IressText element="h5">`              |
-| Body / MD Regular (Inter 14px/400) | `typography.body.md.regular` | `<IressText>` (default)                 |
-| Body / MD Medium (Inter 14px/500)  | `typography.body.md.medium`  | `<IressText weight="medium">`           |
-| Body / MD Strong (Inter 14px/600)  | `typography.body.md.strong`  | `<IressText weight="strong">`           |
-| Body / SM Regular (Inter 12px/400) | `typography.body.sm.regular` | `<IressText size="sm">`                 |
-| Body / SM Strong (Inter 12px/600)  | `typography.body.sm.strong`  | `<IressText size="sm" weight="strong">` |
-| Code (Space 16px/400)              | `typography.code`            | `<IressText element="code">`            |
+Prefer semantic HTML elements via the `element` prop — they convey meaning to screen readers. Only fall back to `textStyle` when no semantic element matches the visual treatment.
+
+| Figma Text Style                   | IDS Token                    | Component                                                                    |
+| ---------------------------------- | ---------------------------- | ---------------------------------------------------------------------------- |
+| Heading / H1 (Ubuntu 24px/500)     | `typography.heading.1`       | `<IressText element="h1">`                                                   |
+| Heading / H2 (Ubuntu 20px/500)     | `typography.heading.2`       | `<IressText element="h2">`                                                   |
+| Heading / H3 (Ubuntu 18px/500)     | `typography.heading.3`       | `<IressText element="h3">`                                                   |
+| Heading / H4 (Ubuntu 16px/500)     | `typography.heading.4`       | `<IressText element="h4">`                                                   |
+| Heading / H5 (Ubuntu 16px/400)     | `typography.heading.5`       | `<IressText element="h5">`                                                   |
+| Body / MD Regular (Inter 14px/400) | `typography.body.md.regular` | `<IressText>` (default) or `<IressText element="p">` for paragraph semantics |
+| Body / MD Strong (Inter 14px/600)  | `typography.body.md.strong`  | `<IressText element="strong">` — conveys emphasis to screen readers          |
+| Body / SM Regular (Inter 12px/400) | `typography.body.sm`         | `<IressText element="small">` — conveys fine print / secondary text          |
+| Body / SM Strong (Inter 12px/600)  | `typography.body.sm.strong`  | `<IressText element="small"><strong>...</strong></IressText>`                 |
+| Code (Space 16px/400)              | `typography.code`            | `<IressText element="code">`                                                 |
+
+> **When to use `textStyle`:** Only when you need to visually override the default styling of a semantic element — e.g. making an `h2` look like an `h4` for visual hierarchy while keeping the correct heading level for accessibility: `<IressText element="h2" textStyle="typography.heading.4">`.
 
 > **Tip:** When translating Figma frames that contain mixed or unstructured text (e.g. CMS content, markdown, rich text blocks), wrap the content in `IressText` and nest native HTML elements (`<p>`, `<strong>`, `<a>`, `<ul>`, etc.) inside it. This is an allowed pattern that lets `IressText` apply consistent typography while preserving the original content structure.
