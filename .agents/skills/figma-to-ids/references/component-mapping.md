@@ -26,7 +26,7 @@
 | Select / Dropdown  | `IressField` + `IressSelect`                 | label, options             |
 | Checkbox           | `IressCheckbox`                              | `children` for label       |
 | Checkbox Group     | `IressCheckboxGroup` + `IressCheckbox`s      | Wrap in `IressField` for label |
-| Radio Group        | `IressRadioGroup` + `IressRadio`s            | label                      |
+| Radio Group        | `IressRadioGroup` + `IressRadio`s            | Wrap in `IressField` for label |
 | Toggle             | `IressToggle`                                | `children` for label       |
 | Card               | `IressCard`                                  | `heading`, `footer` props; `children` for body |
 | Panel              | `IressPanel`                                 |                            |

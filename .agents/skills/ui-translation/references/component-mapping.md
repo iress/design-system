@@ -22,7 +22,7 @@
 | Currency input           | `IressField` + `IressInputCurrency` | `<IressField label="Amount"><IressInputCurrency /></IressField>`                                                               |
 | Checkbox                 | `IressCheckbox`                     | `<IressCheckbox value="agree">I agree</IressCheckbox>`                                                                         |
 | Checkbox group           | `IressCheckboxGroup`                | `<IressField label="Options"><IressCheckboxGroup name="opts"><IressCheckbox value="a">A</IressCheckbox><IressCheckbox value="b">B</IressCheckbox></IressCheckboxGroup></IressField>` |
-| Radio buttons            | `IressRadioGroup` + `IressRadio`    | `<IressRadioGroup label="Choice"><IressRadio label="Yes" value="yes" /><IressRadio label="No" value="no" /></IressRadioGroup>` |
+| Radio buttons            | `IressRadioGroup` + `IressRadio`    | `<IressField label="Choice"><IressRadioGroup><IressRadio value="yes">Yes</IressRadio><IressRadio value="no">No</IressRadio></IressRadioGroup></IressField>` |
 | Toggle switch            | `IressToggle`                       | `<IressToggle>Enable</IressToggle>`                                                                                            |
 | Slider / range           | `IressSlider`                       | `<IressSlider min={0} max={100} />`                                                                                            |
 | Read-only display        | `IressReadonly`                     | `<IressReadonly label="Status" value="Active" />` — supports `actions` prop for inline action buttons (e.g. edit toggle). Use `variant="locked"` when the value is read-only due to permissions |
