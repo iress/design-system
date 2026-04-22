@@ -2,7 +2,7 @@ import userEvent from '@testing-library/user-event';
 import { act, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { css } from '@/styled-system/css';
-import { ContextualMenuItem, IressContextualMenu } from './ContextualMenu';
+import { type ContextualMenuItem, IressContextualMenu } from './ContextualMenu';
 import { contextualMenu } from './ContextualMenu.styles';
 import { GlobalCSSClass } from '@/enums';
 
@@ -145,5 +145,25 @@ describe('IressContextualMenu', () => {
     for (const item of menuItems) {
       expect(item).toHaveClass(defaultTextStyleClass);
     }
+  });
+
+  it('forwards container prop to the popover so content is not clipped by overflow parents', async () => {
+    const portalContainer = document.createElement('div');
+    document.body.appendChild(portalContainer);
+
+    render(
+      <IressContextualMenu
+        container={portalContainer}
+        data-testid="menu"
+        items={ITEMS}
+      />,
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: 'More options' }));
+    await screen.findByRole('menuitem', { name: 'Edit' });
+
+    expect(portalContainer.querySelector('[role="menu"]')).toBeInTheDocument();
+
+    document.body.removeChild(portalContainer);
   });
 });
