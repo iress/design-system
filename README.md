@@ -88,6 +88,10 @@ This repository provides **agent skills** that give AI coding assistants context
 | `ui-translation`    | Translate natural language UI descriptions into IDS component code     |
 | `version-migration` | Migrate applications between IDS major versions (v4→v5, v5→v6, OUI→v6)|
 
+### Figma Integration
+
+A Figma MCP server is only required if you want AI agents to read Figma files directly. The `figma-to-ids` skill can still be used without MCP by pasting exported specs or other design metadata into your prompt. See the [figma-to-ids skill](.agents/skills/figma-to-ids/SKILL.md#figma-mcp-setup) for setup instructions covering Kiro CLI, Cursor, Claude Code, and VS Code.
+
 ### Installation
 
 Install skills using the [skills CLI](https://github.com/vercel-labs/skills):

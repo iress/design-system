@@ -18,6 +18,47 @@ metadata:
 
 Translate Figma design properties and structures into IDS (Iress Design System) component implementations. This skill helps AI agents interpret Figma design metadata (from tools like Figma MCP or exported design specs) and produce accurate IDS code.
 
+## Figma MCP Setup
+
+AI agents need a Figma MCP server to read Figma files directly. Without one, you can still use this skill by pasting exported design specs or Figma component descriptions manually.
+
+### Setup
+
+1. **Get a Figma personal access token** — In Figma, go to *Settings → Account → Personal access tokens* and create a token with **File content (Read-only)** scope.
+
+2. **Add the MCP server to your agent config.** The exact location depends on your tool:
+
+   | Tool | Config file |
+   | --- | --- |
+   | **Kiro CLI** | `~/.kiro/settings/mcp.json` (global) or `.kiro/settings/mcp.json` (workspace) |
+   | **Cursor** | `.cursor/mcp.json` |
+   | **Claude Code** | `.claude/mcp.json` or `~/.claude/mcp.json` |
+   | **VS Code (GitHub Copilot)** | `.vscode/mcp.json` |
+
+   Example configuration (using the community [`figma-developer-mcp`](https://github.com/nicholasgriffintn/figma-developer-mcp) server):
+
+   ```json
+   {
+     "mcpServers": {
+       "Figma": {
+         "command": "npx",
+         "args": ["-y", "figma-developer-mcp", "--stdio"],
+         "env": {
+           "FIGMA_API_KEY": "<your-figma-token>"
+         }
+       }
+     }
+   }
+   ```
+
+   For Kiro CLI, you can also add it via the command line:
+
+   ```bash
+   kiro-cli mcp add --name Figma --command npx --args "-y figma-developer-mcp --stdio" --env "FIGMA_API_KEY=<your-figma-token>"
+   ```
+
+3. **Verify** — Ask your agent to fetch data from a Figma file URL. It should return frame and component information.
+
 ## Process
 
 1. **Analyse Figma structure** — Identify frames, auto-layout, and component instances
