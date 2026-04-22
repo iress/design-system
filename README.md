@@ -90,7 +90,7 @@ This repository provides **agent skills** that give AI coding assistants context
 
 ### Figma Integration
 
-AI agents need a Figma MCP server to read Figma files directly. See the [figma-to-ids skill](.agents/skills/figma-to-ids/SKILL.md#figma-mcp-setup) for setup instructions covering Kiro CLI, Cursor, Claude Code, and VS Code.
+A Figma MCP server is only required if you want AI agents to read Figma files directly. The `figma-to-ids` skill can still be used without MCP by pasting exported specs or other design metadata into your prompt. See the [figma-to-ids skill](.agents/skills/figma-to-ids/SKILL.md#figma-mcp-setup) for setup instructions covering Kiro CLI, Cursor, Claude Code, and VS Code.
 
 ### Installation
 
