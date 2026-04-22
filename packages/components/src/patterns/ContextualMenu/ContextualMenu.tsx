@@ -86,6 +86,7 @@ export const IressContextualMenu = ({
   bordered = false,
   children,
   className,
+  container,
   'data-testid': dataTestId,
   items,
   offset = { mainAxis: -6, crossAxis: 0 },
@@ -117,6 +118,7 @@ export const IressContextualMenu = ({
       <IressPopover
         {...nonStyleProps}
         align={align}
+        container={container}
         activator={
           <IressButton
             aria-label={ariaLabel}
