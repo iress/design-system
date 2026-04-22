@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as ComponentStories from './Popover.stories';
 import * as InputPopoverStories from './InputPopover/InputPopover.stories';
+import * as ProviderStories from './PopoverProvider.stories';
 import {
   ComponentExample,
   ComponentOverview,
@@ -75,6 +76,30 @@ By default, the popover will be rendered where its parent is rendered. If you ne
 This will be the case when you are rendering into its parent container, which is not yet rendered when the popover is mounted. The example below shows how to use state instead of a reference to change where the popover is rendered.
 
 <ComponentExample of={ComponentStories.ParentContainer} />
+
+### Using the `IressPopoverProvider`
+
+You can use the `IressPopoverProvider` to set a shared container for
+all nested popovers. This is useful when you want all popovers in a
+section of your application to render into the same DOM node, similar
+to how `IressModalProvider` and `IressSlideoutProvider` work.
+
+Individual popovers can still override the provider's container by
+setting their own `container` prop.
+
+> **Note:** If you are already using `IressProvider` or `IressShadow`,
+> you do not need to add `IressPopoverProvider` separately — it is
+> already included.
+
+<ComponentExample
+  api={{
+    details:
+      'These are some settings you can use to customise the provider, such as setting where the popovers are rendered in the DOM.',
+    heading: 'Props',
+    headingId: 'provider-api',
+  }}
+  of={ProviderStories.Provider}
+/>
 
 ## `IressInputPopover`
 

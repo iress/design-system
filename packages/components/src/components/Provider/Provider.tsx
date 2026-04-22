@@ -9,6 +9,7 @@ import {
   IressSlideoutProvider,
   type IressSlideoutProviderProps,
 } from '../Slideout';
+import { IressPopoverProvider } from '../Popover';
 import { createPortal } from 'react-dom';
 import { defaultFonts } from '@iress-oss/ids-tokens';
 import { IressIconProvider, type IressIconProviderProps } from '../Icon';
@@ -139,26 +140,28 @@ export const IressProvider = ({
   }, [toasterOffset]);
 
   const providers = (
-    <IressModalProvider container={container}>
-      <IressToasterProvider container={container} position={position}>
-        <IressSlideoutProvider container={container} {...restProps}>
-          {children}
-        </IressSlideoutProvider>
-      </IressToasterProvider>
-      {!noDefaultFont &&
-        createPortal(
-          defaultFonts.map((font) => (
-            <link
-              key={font}
-              rel="stylesheet"
-              href={font}
-              data-iress-design-system-font
-            />
-          )),
-          document.head,
-          'design-system-font',
-        )}
-    </IressModalProvider>
+    <IressPopoverProvider container={container}>
+      <IressModalProvider container={container}>
+        <IressToasterProvider container={container} position={position}>
+          <IressSlideoutProvider container={container} {...restProps}>
+            {children}
+          </IressSlideoutProvider>
+        </IressToasterProvider>
+        {!noDefaultFont &&
+          createPortal(
+            defaultFonts.map((font) => (
+              <link
+                key={font}
+                rel="stylesheet"
+                href={font}
+                data-iress-design-system-font
+              />
+            )),
+            document.head,
+            'design-system-font',
+          )}
+      </IressModalProvider>
+    </IressPopoverProvider>
   );
 
   if (noIconProvider) {
