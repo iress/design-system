@@ -9,6 +9,7 @@ import {
   IressSlideoutProvider,
   type IressSlideoutProviderProps,
 } from '../Slideout';
+import { IressPopoverProvider } from '../Popover';
 import { createPortal } from 'react-dom';
 import { defaultFonts } from '@iress-oss/ids-tokens';
 import { IressIconProvider, type IressIconProviderProps } from '../Icon';
@@ -24,8 +25,11 @@ export interface IressProviderProps
   children?: ReactNode;
 
   /**
-   * Container to render modal, slideouts and toasts into.
+   * Container to render modals, slideouts and toasts into.
    * If not provided, will render into the body of the document.
+   *
+   * **Note:** This does not affect popovers. Use `popoverContainer` to set a
+   * shared container for all nested popovers.
    */
   container?: FloatingUIContainer;
 
@@ -50,6 +54,18 @@ export interface IressProviderProps
    * If you don't want to load the default Iress font from the CDN, set this to true.
    */
   noDefaultFont?: boolean;
+
+  /**
+   * Container to render popovers into.
+   * By default, popovers render where their parent is rendered (no portal).
+   *
+   * Set to `"container"` to reuse the same container as the `container` prop
+   * (useful when you want modals, slideouts, toasts **and** popovers in the
+   * same DOM node).
+   *
+   * Individual popovers can still override this by setting their own `container` prop.
+   */
+  popoverContainer?: FloatingUIContainer | 'container';
 
   /**
    * A value added to every IDS z-index layer via `calc()`.
@@ -80,6 +96,7 @@ export const IressProvider = ({
   noDefaultFont,
   noIconProvider,
   noSubsetting,
+  popoverContainer,
   position,
   zIndexOffset,
   toasterOffset,
@@ -138,27 +155,32 @@ export const IressProvider = ({
     };
   }, [toasterOffset]);
 
+  const resolvedPopoverContainer =
+    popoverContainer === 'container' ? container : popoverContainer;
+
   const providers = (
-    <IressModalProvider container={container}>
-      <IressToasterProvider container={container} position={position}>
-        <IressSlideoutProvider container={container} {...restProps}>
-          {children}
-        </IressSlideoutProvider>
-      </IressToasterProvider>
-      {!noDefaultFont &&
-        createPortal(
-          defaultFonts.map((font) => (
-            <link
-              key={font}
-              rel="stylesheet"
-              href={font}
-              data-iress-design-system-font
-            />
-          )),
-          document.head,
-          'design-system-font',
-        )}
-    </IressModalProvider>
+    <IressPopoverProvider container={resolvedPopoverContainer}>
+      <IressModalProvider container={container}>
+        <IressToasterProvider container={container} position={position}>
+          <IressSlideoutProvider container={container} {...restProps}>
+            {children}
+          </IressSlideoutProvider>
+        </IressToasterProvider>
+        {!noDefaultFont &&
+          createPortal(
+            defaultFonts.map((font) => (
+              <link
+                key={font}
+                rel="stylesheet"
+                href={font}
+                data-iress-design-system-font
+              />
+            )),
+            document.head,
+            'design-system-font',
+          )}
+      </IressModalProvider>
+    </IressPopoverProvider>
   );
 
   if (noIconProvider) {

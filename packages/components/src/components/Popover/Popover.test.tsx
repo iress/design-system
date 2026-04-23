@@ -11,6 +11,7 @@ import { axe } from 'jest-axe';
 import { createRef } from 'react';
 import { IressMenu, IressMenuItem } from '../Menu';
 import { IressPopover, IressPopoverProps } from './Popover';
+import { IressPopoverProvider } from './PopoverProvider';
 import { PopoverRef } from './hooks/usePopoverImperativeHandle';
 import { popover } from './Popover.styles';
 import { css } from '@/styled-system/css';
@@ -628,5 +629,120 @@ describe('IressPopover', () => {
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
+  });
+});
+
+describe('IressPopoverProvider', () => {
+  it('renders nested popovers into the provider container', async () => {
+    const providerContainer = document.createElement('div');
+    const classes = popover();
+    const contentSelector = classes.content
+      ?.replace(/\./g, '\\.')
+      .replace(/ /g, '.');
+
+    render(
+      <IressPopoverProvider container={providerContainer}>
+        <IressPopover
+          activator={<IressButton>Toggle</IressButton>}
+          defaultShow
+          data-testid={TEST_ID}
+        >
+          Provider content
+        </IressPopover>
+      </IressPopoverProvider>,
+    );
+
+    await waitFor(() => expect(providerContainer.children).toHaveLength(1));
+    expect(
+      providerContainer.querySelector(`.${contentSelector}`),
+    ).not.toBeNull();
+  });
+
+  it('allows the popover container prop to override the provider container', async () => {
+    const providerContainer = document.createElement('div');
+    const popoverContainer = document.createElement('div');
+    const classes = popover();
+    const contentSelector = classes.content
+      ?.replace(/\./g, '\\.')
+      .replace(/ /g, '.');
+
+    render(
+      <IressPopoverProvider container={providerContainer}>
+        <IressPopover
+          activator={<IressButton>Toggle</IressButton>}
+          container={popoverContainer}
+          defaultShow
+          data-testid={TEST_ID}
+        >
+          Override content
+        </IressPopover>
+      </IressPopoverProvider>,
+    );
+
+    await waitFor(() => expect(popoverContainer.children).toHaveLength(1));
+    expect(
+      popoverContainer.querySelector(`.${contentSelector}`),
+    ).not.toBeNull();
+    expect(providerContainer.children).toHaveLength(0);
+  });
+
+  it('renders inline when container={null} even with provider container', () => {
+    const providerContainer = document.createElement('div');
+
+    render(
+      <IressPopoverProvider container={providerContainer}>
+        <IressPopover
+          activator={<IressButton>Toggle</IressButton>}
+          container={null}
+          defaultShow
+          data-testid={TEST_ID}
+        >
+          Inline override content
+        </IressPopover>
+      </IressPopoverProvider>,
+    );
+
+    expect(screen.getByText('Inline override content')).toBeVisible();
+    expect(providerContainer.children).toHaveLength(0);
+  });
+
+  it('renders inline when no provider or container is set', () => {
+    render(
+      <IressPopover
+        activator={<IressButton>Toggle</IressButton>}
+        defaultShow
+        data-testid={TEST_ID}
+      >
+        Inline content
+      </IressPopover>,
+    );
+
+    expect(screen.getByText('Inline content')).toBeVisible();
+  });
+
+  it('renders into provider container and still supports interactions', async () => {
+    const providerContainer = document.createElement('div');
+    document.body.appendChild(providerContainer);
+
+    render(
+      <IressPopoverProvider container={providerContainer}>
+        <IressPopover
+          activator={<IressButton>Toggle</IressButton>}
+          data-testid={TEST_ID}
+        >
+          Interactive content
+        </IressPopover>
+      </IressPopoverProvider>,
+    );
+
+    const activator = screen.getByRole('button');
+
+    await userEvent.click(activator);
+    expect(screen.getByText('Interactive content')).toBeVisible();
+
+    await userEvent.click(activator);
+    expect(screen.getByText('Interactive content')).not.toBeVisible();
+
+    document.body.removeChild(providerContainer);
   });
 });
