@@ -16,4 +16,9 @@ describe('getTransitionDuration', () => {
   it('returns fallback if no element sent in', () => {
     expect(getTransitionDuration()).toBe(240);
   });
+
+  it('returns fallback if the element has no transition duration set', () => {
+    const element = document.createElement('div');
+    expect(getTransitionDuration(element)).toBe(240);
+  });
 });

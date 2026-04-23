@@ -7,11 +7,10 @@ export const getTransitionDuration = (
 ) => {
   if (!element) return fallback;
 
-  return (
-    timeStringToNumber(
-      window
-        .getComputedStyle(element, null)
-        ?.getPropertyValue('transition-duration') || '.3s',
-    ) * multiplier
-  );
+  const rawDuration =
+    window
+      .getComputedStyle(element, null)
+      ?.getPropertyValue('transition-duration') || '.3s';
+
+  return timeStringToNumber(rawDuration) * multiplier || fallback;
 };
