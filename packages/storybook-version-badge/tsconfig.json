@@ -16,7 +16,7 @@
     "noImplicitOverride": true,
     "noImplicitAny": true,
     "lib": ["es2023", "dom", "dom.iterable"],
-    "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "rootDir": "./src",
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },

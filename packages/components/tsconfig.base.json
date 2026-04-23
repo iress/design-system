@@ -35,7 +35,6 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.react.tsbuildinfo",
 
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
     "declaration": true,
     "paths": {
       "@/*": ["src/*"],
