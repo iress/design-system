@@ -271,7 +271,7 @@ function Dashboard() {
 ## Best Practices
 
 1. **Minimise component nesting** — Use the fewest components possible to achieve the layout. Every wrapper component should earn its place. Before adding `IressInline` or `IressStack`, check whether the parent component already handles the layout (e.g. `IressCard` has `heading` and `footer` props; `IressModal` has `actions`; `IressButtonGroup` handles horizontal button layout). See the "Unnecessary layout wrappers" section in Common Mistakes below.
-2. **Always wrap in IressProvider** — Required at the root of your app for fonts and CSS variables. `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, and `IressIconProvider` — do not add these separately. If using `IressShadow`, no additional providers are needed as it includes `IressProvider` internally.
+2. **Always wrap in IressProvider** — Required at the root of your app for fonts and CSS variables. `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, `IressPopoverProvider`, and `IressIconProvider` — do not add these separately. If using `IressShadow`, no additional providers are needed as it includes `IressProvider` internally.
 3. **Use IressField for all form inputs** — Provides consistent labels, hints, and validation display
 4. **Use IressStack/IressInline only when needed** — Prefer these over custom CSS flex/grid, but don't add them when the parent already provides spacing or layout
 5. **Use correct spacing token format** — Always prefix with the token category: `gap="spacing.4"`, `p="spacing.6"`. Alias tokens (`"xs"`, `"sm"`, `"md"`, `"lg"`, `"xl"`) are also valid. Never use bare numbers like `gap="4"`.

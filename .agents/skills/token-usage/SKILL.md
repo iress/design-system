@@ -51,7 +51,7 @@ Guide AI agents on correctly using IDS design tokens in React components and CSS
 
 If you are using IDS React components, wrap your application in `IressProvider` and import the CSS variables stylesheet:
 
-> **Note:** `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, and `IressIconProvider` — you do not need to add these separately. If using `IressShadow`, no additional providers are needed as it includes `IressProvider` internally.
+> **Note:** `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, `IressPopoverProvider`, and `IressIconProvider` — you do not need to add these separately. If using `IressShadow`, no additional providers are needed as it includes `IressProvider` internally.
 
 ```tsx
 import '@iress-oss/ids-tokens/build/css-vars.css';

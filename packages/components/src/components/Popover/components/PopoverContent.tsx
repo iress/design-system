@@ -140,7 +140,8 @@ const PopoverContentContainer = ({
 }: PopoverContentProps) => {
   const nodeId = useFloatingNodeId();
   const { container: providerContainer } = usePopoverContainer();
-  const resolvedContainer = container ?? providerContainer;
+  const resolvedContainer =
+    container !== undefined ? container : providerContainer;
 
   if (resolvedContainer) {
     return (

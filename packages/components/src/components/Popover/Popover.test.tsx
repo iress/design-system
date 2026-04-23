@@ -686,6 +686,26 @@ describe('IressPopoverProvider', () => {
     expect(providerContainer.children).toHaveLength(0);
   });
 
+  it('renders inline when container={null} even with provider container', () => {
+    const providerContainer = document.createElement('div');
+
+    render(
+      <IressPopoverProvider container={providerContainer}>
+        <IressPopover
+          activator={<IressButton>Toggle</IressButton>}
+          container={null}
+          defaultShow
+          data-testid={TEST_ID}
+        >
+          Inline override content
+        </IressPopover>
+      </IressPopoverProvider>,
+    );
+
+    expect(screen.getByText('Inline override content')).toBeVisible();
+    expect(providerContainer.children).toHaveLength(0);
+  });
+
   it('renders inline when no provider or container is set', () => {
     render(
       <IressPopover
