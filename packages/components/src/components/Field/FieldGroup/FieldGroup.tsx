@@ -39,6 +39,7 @@ export const IressFieldGroup = ({
   inline,
   join,
   label,
+  removeErrorMargin,
   required,
   supplementary,
   ...restProps
@@ -48,6 +49,7 @@ export const IressFieldGroup = ({
     hiddenLabel,
     inline,
     join,
+    removeErrorMargin,
   });
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
 

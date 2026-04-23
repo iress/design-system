@@ -126,6 +126,31 @@ describe('IressFieldGroup', () => {
         expect(field).toBeInTheDocument();
       });
     });
+
+    describe('removeErrorMargin', () => {
+      it('applies the removeErrorMargin class when true', () => {
+        const screen = renderComponent({
+          removeErrorMargin: true,
+        });
+
+        const field = screen.getByRole('group');
+        expect(field).toHaveClass(
+          fieldGroup({ removeErrorMargin: true }).root!,
+        );
+        expect(field).not.toHaveClass(
+          fieldGroup({ removeErrorMargin: false }).root!,
+        );
+      });
+
+      it('applies the default (false) class when removeErrorMargin is not set', () => {
+        const screen = renderComponent();
+
+        const field = screen.getByRole('group');
+        expect(field).toHaveClass(
+          fieldGroup({ removeErrorMargin: false }).root!,
+        );
+      });
+    });
   });
 
   describe('accessibility', () => {

@@ -6,7 +6,6 @@ export const fieldGroup = sva({
     root: {
       display: 'block',
       maxWidth: '12/12',
-      mb: 'field.footer',
       position: 'relative',
       border: '[none]',
       margin: 'spacing.0',
@@ -126,9 +125,22 @@ export const fieldGroup = sva({
         },
       },
     },
+    removeErrorMargin: {
+      true: {
+        root: {
+          mb: 'none',
+        },
+      },
+      false: {
+        root: {
+          mb: 'field.footer',
+        },
+      },
+    },
   },
   defaultVariants: {
     inline: false,
     join: false,
+    removeErrorMargin: false,
   },
 });
