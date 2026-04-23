@@ -22,6 +22,7 @@ export interface IressShadowProps
       IressProviderProps,
       | 'noIconProvider'
       | 'noSubsetting'
+      | 'popoverContainer'
       | 'position'
       | 'zIndexOffset'
       | 'toasterOffset'
@@ -63,6 +64,7 @@ export const IressShadow = forwardRef<ShadowRoot | null, IressShadowProps>(
       fontFaceUrls = [...defaultFonts],
       noIconProvider,
       noSubsetting,
+      popoverContainer,
       position,
       toasterOffset,
       zIndexOffset,
@@ -167,6 +169,7 @@ export const IressShadow = forwardRef<ShadowRoot | null, IressShadowProps>(
           noDefaultFont
           noIconProvider={noIconProvider}
           noSubsetting={noSubsetting}
+          popoverContainer={popoverContainer}
           position={position}
         >
           {shadowRoot && createPortal(children, shadowRoot)}

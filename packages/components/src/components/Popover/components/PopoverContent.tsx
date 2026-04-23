@@ -12,6 +12,7 @@ import { type FloatingUIContainer, type IressStyledProps } from '@/types';
 import { useEffect, useMemo, useRef } from 'react';
 import { styled } from '@/styled-system/jsx';
 import { usePopover } from '../hooks/usePopover';
+import { usePopoverContainer } from '../hooks/usePopoverContainer';
 
 export interface PopoverContentProps extends IressStyledProps {
   /**
@@ -138,11 +139,14 @@ const PopoverContentContainer = ({
   ...restProps
 }: PopoverContentProps) => {
   const nodeId = useFloatingNodeId();
+  const { container: providerContainer } = usePopoverContainer();
+  const resolvedContainer =
+    container !== undefined ? container : providerContainer;
 
-  if (container) {
+  if (resolvedContainer) {
     return (
       <FloatingNode id={nodeId}>
-        <FloatingPortal root={container} preserveTabOrder>
+        <FloatingPortal root={resolvedContainer} preserveTabOrder>
           <PopoverContentInner {...restProps} />
         </FloatingPortal>
       </FloatingNode>

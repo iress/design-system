@@ -7,12 +7,14 @@ import {
 import {
   IressButton,
   IressModal,
+  IressPopover,
   IressSlideout,
   useModal,
   useSlideout,
   useToaster,
   Z_INDEX_OFFSET_VAR,
   TOASTER_OFFSET_VAR,
+  popover as popoverStyles,
 } from '@/main';
 import userEvent from '@testing-library/user-event';
 import { IressProvider } from './Provider';
@@ -104,6 +106,72 @@ describe('IressProvider', () => {
         await waitFor(() =>
           expect(container.querySelector('[role="dialog"]')).not.toBeNull(),
         );
+      });
+    });
+
+    describe('popoverContainer', () => {
+      const contentSelector = popoverStyles()
+        .content?.replace(/\./g, '\\.')
+        .replace(/ /g, '.');
+
+      it('does not portal popovers when not set', () => {
+        const container = document.createElement('div');
+
+        render(
+          <IressProvider container={container}>
+            <IressPopover
+              activator={<IressButton>Toggle</IressButton>}
+              defaultShow
+            >
+              Popover content
+            </IressPopover>
+          </IressProvider>,
+        );
+
+        expect(container.querySelector(`.${contentSelector}`)).toBeNull();
+      });
+
+      it('portals popovers into a dedicated container', async () => {
+        const overlayContainer = document.createElement('div');
+        const popoverContainer = document.createElement('div');
+
+        render(
+          <IressProvider
+            container={overlayContainer}
+            popoverContainer={popoverContainer}
+          >
+            <IressPopover
+              activator={<IressButton>Toggle</IressButton>}
+              defaultShow
+            >
+              Popover content
+            </IressPopover>
+          </IressProvider>,
+        );
+
+        await waitFor(() => expect(popoverContainer.children).toHaveLength(1));
+        expect(
+          popoverContainer.querySelector(`.${contentSelector}`),
+        ).not.toBeNull();
+        expect(overlayContainer.children).toHaveLength(0);
+      });
+
+      it('reuses the container prop when set to "container"', async () => {
+        const container = document.createElement('div');
+
+        render(
+          <IressProvider container={container} popoverContainer="container">
+            <IressPopover
+              activator={<IressButton>Toggle</IressButton>}
+              defaultShow
+            >
+              Popover content
+            </IressPopover>
+          </IressProvider>,
+        );
+
+        await waitFor(() => expect(container.children).toHaveLength(1));
+        expect(container.querySelector(`.${contentSelector}`)).not.toBeNull();
       });
     });
     describe('noIconProvider', () => {
