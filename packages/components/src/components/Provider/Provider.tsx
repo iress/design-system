@@ -59,9 +59,13 @@ export interface IressProviderProps
    * Container to render popovers into.
    * By default, popovers render where their parent is rendered (no portal).
    *
+   * Set to `"container"` to reuse the same container as the `container` prop
+   * (useful when you want modals, slideouts, toasts **and** popovers in the
+   * same DOM node).
+   *
    * Individual popovers can still override this by setting their own `container` prop.
    */
-  popoverContainer?: FloatingUIContainer;
+  popoverContainer?: FloatingUIContainer | 'container';
 
   /**
    * A value added to every IDS z-index layer via `calc()`.
@@ -151,8 +155,11 @@ export const IressProvider = ({
     };
   }, [toasterOffset]);
 
+  const resolvedPopoverContainer =
+    popoverContainer === 'container' ? container : popoverContainer;
+
   const providers = (
-    <IressPopoverProvider container={popoverContainer}>
+    <IressPopoverProvider container={resolvedPopoverContainer}>
       <IressModalProvider container={container}>
         <IressToasterProvider container={container} position={position}>
           <IressSlideoutProvider container={container} {...restProps}>
