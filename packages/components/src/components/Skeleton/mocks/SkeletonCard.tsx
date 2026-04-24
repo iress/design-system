@@ -60,8 +60,8 @@ export const SkeletonCard = () => {
       <IressButton onClick={() => setLoading(!loading)}>
         Toggle load
       </IressButton>
-      {loading && <CardLoading />}
-      {!loading && <CardItem />}
+      {!!loading && <CardLoading />}
+      {!!(!loading) && <CardItem />}
     </IressStack>
   );
 };

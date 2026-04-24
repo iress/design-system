@@ -193,8 +193,8 @@ export const PageLoading = ({
         [styles.showCritical]: showCritical,
       })}
     >
-      {!showCritical && <div className={styles.skeleton}>{skeleton}</div>}
-      {hideTemplate && <div className={styles.critical}>{critical}</div>}
+      {!!(!showCritical) && <div className={styles.skeleton}>{skeleton}</div>}
+      {!!hideTemplate && <div className={styles.critical}>{critical}</div>}
       <IressHide hiddenOn={{ xs: true }} visuallyHidden>
         {screenReaderText}
       </IressHide>

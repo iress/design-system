@@ -188,9 +188,9 @@ export const LongLoading = ({
                       [styles.checkListItem__done]: checkListItem.finished,
                     })}
                   >
-                    {checkListItem.finished && <Checked />}
+                    {!!checkListItem.finished && <Checked />}
                     {checkListItem.message}
-                    {checkListItem.current && (
+                    {!!checkListItem.current && (
                       <span className={styles.dots}>
                         <span className={GlobalCSSClass.SROnly}>...</span>
                       </span>

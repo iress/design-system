@@ -90,7 +90,7 @@ const WithNewOption: IressRichSelectProps['renderOptions'] = ({
           )
         }
       >
-        {hasSelected && (
+        {!!hasSelected && (
           <IressSelectMenu
             aria-labelledby={headingId}
             heading={
@@ -110,8 +110,8 @@ const WithNewOption: IressRichSelectProps['renderOptions'] = ({
             selected={value}
           />
         )}
-        {hasResultsAndSelected && <IressMenuDivider gutter="xs" />}
-        {hasResults && (
+        {!!hasResultsAndSelected && <IressMenuDivider gutter="xs" />}
+        {!!hasResults && (
           <IressSelectMenu
             heading="Search results"
             items={results}

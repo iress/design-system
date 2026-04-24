@@ -36,7 +36,7 @@ export const IressSkeleton: SkeletonWithEnums = ({
       style={inlineStyles}
       aria-hidden="true"
     >
-      {isTextMode && <IressText variant={textVariant}>&nbsp;</IressText>}
+      {!!isTextMode && <IressText variant={textVariant}>&nbsp;</IressText>}
     </div>
   );
 };

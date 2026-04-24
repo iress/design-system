@@ -83,7 +83,7 @@ export const IressTooltip: TooltipWithEnums = ({
       >
         {children}
       </div>
-      {isOpen && (
+      {!!isOpen && (
         <div
           className={styles.content}
           style={floatingStyles}
@@ -95,7 +95,7 @@ export const IressTooltip: TooltipWithEnums = ({
           {toArray(tooltipText).map((line, index, array) => (
             <Fragment key={index}>
               {line}
-              {index < array.length - 1 && <br />}
+              {!!(index < array.length - 1) && <br />}
             </Fragment>
           ))}
         </div>

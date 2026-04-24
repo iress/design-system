@@ -33,7 +33,7 @@ export const IressTagInput = forwardRef(
           return;
         }
 
-        if (value?.includes(inputValue)) {
+        if ((value as string[] | undefined)?.includes(inputValue)) {
           onExistingTag?.(inputValue);
           return;
         }

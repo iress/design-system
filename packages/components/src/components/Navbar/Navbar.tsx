@@ -129,7 +129,7 @@ export const IressNavbar: NavbarWithEnums = ({
 
   const setToggleButtonHideProp = (): ResponsiveSizing<boolean> => {
     const breakpoints: Breakpoints[] = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
-    const thisBreakpointIndex = breakpoints.indexOf(breakpoint as Breakpoints);
+    const thisBreakpointIndex = (breakpoints as string[]).indexOf(breakpoint as string);
     const nextBreakpointIndex = thisBreakpointIndex + 1;
 
     if (nextBreakpointIndex >= breakpoints.length) {
@@ -161,7 +161,7 @@ export const IressNavbar: NavbarWithEnums = ({
           noBorderRadius
           className={styles.panel}
         >
-          {breakpoint !== undefined && (
+          {!!(breakpoint !== undefined) && (
             <IressHide hiddenOn={hideHiddenOnProp}>
               <IressButton
                 onClick={() => toggleNavigation()}
@@ -201,7 +201,7 @@ export const IressNavbar: NavbarWithEnums = ({
             })}
           >
             {children}
-            {hasNavSlotContent &&
+            {!!hasNavSlotContent &&
               (breakpoint !== undefined ? (
                 <IressHide hiddenOn={navBreakpoints} className={styles.navHide}>
                   <nav

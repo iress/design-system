@@ -199,7 +199,7 @@ export const IressFilter = forwardRef(
           {flags.showHeader && (
             <>
               <IressPanel background="transparent">
-                {isSearchable && (
+                {!!isSearchable && (
                   <FilterSearch
                     {...inputProps}
                     className={styles.searchInput}
@@ -223,7 +223,7 @@ export const IressFilter = forwardRef(
               <IressDivider gutter="none" />
             </>
           )}
-          {flags.showResults && (
+          {!!flags.showResults && (
             <IressSelectMenu
               className={styles.optionList}
               data-testid={propagateTestid(dataTestId, 'menu')}

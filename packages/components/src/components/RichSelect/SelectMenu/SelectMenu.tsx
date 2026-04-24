@@ -47,7 +47,7 @@ export const IressSelectMenu = ({
       const menuSelectedArray = toArray(menuSelected);
       itemsToShow = itemsToShow.filter(
         (item) =>
-          !menuSelectedArray.includes(
+          !(menuSelectedArray as (string | number | boolean | undefined)[]).includes(
             getFormControlValueAsStringIfDefined(item.value) ?? item.label,
           ),
       );
@@ -102,7 +102,7 @@ export const IressSelectMenu = ({
           )}-${index}`}
         />
       ))}
-      {showNoResults &&
+      {!!showNoResults &&
         (typeof noResults === 'string' ? (
           <IressMenuText>{noResults}</IressMenuText>
         ) : (
@@ -121,7 +121,7 @@ const orderSelectedFirst = (
   const menuSelectedArray = toArray(menuSelected);
 
   const unselected = items.filter(
-    (item) => !menuSelectedArray.includes(item.value ?? item.label),
+    (item) => !(menuSelectedArray as (string | undefined)[]).includes(item.value ?? item.label),
   );
 
   return selectedArray.length && unselected.length

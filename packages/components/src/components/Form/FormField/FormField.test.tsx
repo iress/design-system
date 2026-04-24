@@ -175,7 +175,7 @@ describe('IressFormField', () => {
 
       return (
         <IressForm id="iress-form" onSubmit={onSubmit}>
-          {showField && (
+          {!!showField && (
             <IressFormField
               label="Conditional Field"
               name="conditionalField"
@@ -232,7 +232,7 @@ describe('IressFormField', () => {
 
       return (
         <IressForm id="iress-form" onSubmit={onSubmit} ref={formRef}>
-          {showField && (
+          {!!showField && (
             <IressFormField
               label="Advanced Unregister"
               name="advancedField"
@@ -291,7 +291,7 @@ describe('IressFormField', () => {
 
       return (
         <IressForm id="iress-form" onSubmit={onSubmit}>
-          {showField && (
+          {!!showField && (
             <IressFormField
               label="Default Unregister"
               name="defaultField"

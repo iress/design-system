@@ -11,11 +11,11 @@ export function usePopoverAria(): PopoverAriaHookReturn {
 
   const toggleAriaControls = useCallback(
     (controlId: string, addOrRemove = true) => {
-      if (addOrRemove && !ariaControls.current.includes(controlId)) {
+      if (addOrRemove && !(ariaControls.current as string[]).includes(controlId)) {
         ariaControls.current = [...ariaControls.current, controlId];
       }
 
-      if (!addOrRemove && ariaControls.current.includes(controlId)) {
+      if (!addOrRemove && (ariaControls.current as string[]).includes(controlId)) {
         ariaControls.current = ariaControls.current.filter(
           (currentId) => controlId !== currentId,
         );

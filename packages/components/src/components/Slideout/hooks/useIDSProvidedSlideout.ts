@@ -6,7 +6,7 @@ export function useIDSProvidedSlideout(id?: string) {
 
   return {
     container: provider?.container,
-    opened: id && provider?.opened.includes(id),
+    opened: id && provider?.opened.includes(id as string),
     show: (open?: boolean) => id && provider?.showSlideout(id, open),
   };
 }

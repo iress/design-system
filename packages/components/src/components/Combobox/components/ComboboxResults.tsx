@@ -14,7 +14,7 @@ export const ComboboxResults = ({
   ...restProps
 }: ComboboxResultsProps) => (
   <>
-    {showResults && (
+    {!!showResults && (
       <>
         {prepend}
         <IressSelectMenu
@@ -25,7 +25,7 @@ export const ComboboxResults = ({
         {append}
       </>
     )}
-    {showNoResults && (
+    {!!showNoResults && (
       <AutocompleteNoResults noResultsText={noResultsText} styles={styles} />
     )}
   </>

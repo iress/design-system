@@ -45,7 +45,7 @@ export const handlePopoverTabKey = async (
         !element.closest(`.${styles.content}`) &&
         !element.hasAttribute('data-floating-ui-focus-guard'),
     );
-    const currentIndex = elements.indexOf(focusableReference);
+    const currentIndex = (elements as HTMLElement[]).indexOf(focusableReference);
     const nextElement = elements[currentIndex + 1];
 
     if (currentIndex === -1 || !nextElement) return;

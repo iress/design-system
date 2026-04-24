@@ -138,7 +138,7 @@ export const ListRole: Story = {
             role={options.args.role ?? 'list'}
             style={{ flex: 1 }}
           >
-            {options.args.role === 'listbox' && (
+            {!!(options.args.role === 'listbox') && (
               <IressToggle
                 className="iress-mb--md"
                 checked={multiSelect}

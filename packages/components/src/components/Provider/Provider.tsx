@@ -50,7 +50,7 @@ export const IressProvider = ({
         {children}
       </IressSlideoutProvider>
     </IressToasterProvider>
-    {!noIcons &&
+    {!!(!noIcons) &&
       createPortal(
         <link
           rel="stylesheet"

@@ -52,14 +52,14 @@ export const FormExpanders = (args: IressFormProps<FieldValues>) => {
         open={isOpen('Sender')}
         onChange={(open) => open && setExpander('Sender')}
       >
-        {isOpen('Sender') && <Form {...args} />}
+        {!!isOpen('Sender') && <Form {...args} />}
       </IressExpander>
       <IressExpander
         activator="Recipient"
         open={isOpen('Recipient')}
         onChange={(open) => open && setExpander('Recipient')}
       >
-        {isOpen('Recipient') && <Form {...args} />}
+        {!!isOpen('Recipient') && <Form {...args} />}
       </IressExpander>
     </IressStack>
   );

@@ -144,7 +144,7 @@ export const IressTableBody = <TRow extends object = never, TVal = never>({
         />
         {showRows && (
           <>
-            {!hiddenHeader && (
+            {!!(!hiddenHeader) && (
               <TableHeader
                 additionalHeaders={`${id}--caption`}
                 className={styles.rowGroupColumnHeaders}

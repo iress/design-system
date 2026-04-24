@@ -87,7 +87,7 @@ export const formatRelativeTime = (
   if (
     unitIndex > 0 &&
     useShortDateAfter &&
-    unitIndex >= units.indexOf(useShortDateAfter)
+    unitIndex >= (units as string[]).indexOf(useShortDateAfter)
   ) {
     return formatShortDate(dateVal);
   }

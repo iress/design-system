@@ -58,11 +58,11 @@ const validateFile =
     ) {
       const errors: string[] = [];
 
-      if (data.rejectedReasons.includes(REJECTION_REASONS.TYPE)) {
+      if ((data.rejectedReasons as string[]).includes(REJECTION_REASONS.TYPE)) {
         errors.push(`Only .${allowedExtensions.join(', ')} accepted`);
       }
 
-      if (data.rejectedReasons.includes(REJECTION_REASONS.SIZE)) {
+      if ((data.rejectedReasons as string[]).includes(REJECTION_REASONS.SIZE)) {
         errors.push(`File size must be less than ${maxSizeInMB}MB`);
       }
 
@@ -261,13 +261,13 @@ const SubmittedValuesDisplay: React.FC<SubmittedValuesDisplayProps> = ({
             : submittedValues.transcript.content}
         </IressText>
         {typeof submittedValues.transcript === 'object' &&
-          submittedValues.transcript.fileName && (
+          !!(submittedValues.transcript.fileName) && (
             <IressText>
               <strong>File Name:</strong> {submittedValues.transcript.fileName}
             </IressText>
           )}
         {typeof submittedValues.transcript === 'object' &&
-          submittedValues.transcript.size && (
+          !!(submittedValues.transcript.size) && (
             <IressText>
               <strong>File Size:</strong>
               {(submittedValues.transcript.size / 1024).toFixed(2)} KB

@@ -87,7 +87,7 @@ const Chart = () => {
 
   return (
     <IressLoadingSuspense pattern="component" update={updating}>
-      {chart && <Graph />}
+      {!!chart && <Graph />}
       <IressPanel>
         <IressForm<ChartProps>
           onSubmit={(projectionData) => setMoney(projectionData.money)}
@@ -155,12 +155,12 @@ const HomePage = () => {
 
   return (
     <IressContainer style={{ maxWidth: '600px', paddingBlock: '3rem' }}>
-      {page === 1 && (
+      {!!(page === 1) && (
         <IressLoadingSuspense pattern="page" template="form">
-          {page === 1 && <StartPage setPage={setMovedPage} />}
+          {!!(page === 1) && <StartPage setPage={setMovedPage} />}
         </IressLoadingSuspense>
       )}
-      {page === 2 && (
+      {!!(page === 2) && (
         <IressLoadingSuspense pattern="page" template="form">
           <RetirementIncomeProjectionPage />
         </IressLoadingSuspense>

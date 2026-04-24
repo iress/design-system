@@ -65,7 +65,7 @@ const Checkbox = (
   const checkboxGroup = useContext(CheckboxGroupContext);
   const uncontrolledChecked = checkboxGroup ? undefined : defaultChecked;
   const controlledChecked = checkboxGroup
-    ? toArray<FormControlValue | undefined>(checkboxGroup.value).includes(value)
+    ? (toArray<FormControlValue | undefined>(checkboxGroup.value) as Array<FormControlValue | null | undefined>).includes(value)
     : checkedProp;
   const isHidden = checkboxGroup?.hiddenCheckbox ?? hiddenControl;
   const isTouch = checkboxGroup?.touch ?? touch;
@@ -156,7 +156,7 @@ const Checkbox = (
           [styles.label]: true,
         })}
       >
-        {!isHidden && (
+        {!!(!isHidden) && (
           <IressCheckboxMark
             className={styles.mark}
             checked={checked}

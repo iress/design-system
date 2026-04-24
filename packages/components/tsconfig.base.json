@@ -37,11 +37,11 @@
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@docs/*": ["docs/*"],
-      "@helpers/*": ["src/helpers/*"],
-      "~storybook/*": [".storybook/*"]
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@docs/*": ["./docs/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "~storybook/*": ["./.storybook/*"]
     },
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
   }

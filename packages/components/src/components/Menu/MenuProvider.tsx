@@ -25,7 +25,7 @@ export const MenuProvider = ({
   selected: selectedProp,
 }: MenuProviderProps) => {
   const hasArrowKeyNav = useMemo(
-    () => role && ['menu', 'listbox'].includes(role),
+    () => role && (['menu', 'listbox'] as string[]).includes(role),
     [role],
   );
   const supportsSelection = useMemo(
@@ -49,7 +49,7 @@ export const MenuProvider = ({
       hasArrowKeyNav,
       id,
       isSelected: (value) =>
-        value !== undefined && toArray(selected).includes(value),
+        value !== undefined && (toArray(selected) as Array<string | number | boolean | null | undefined>).includes(value),
       layout,
       multiSelect,
       noWrap,
