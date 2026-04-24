@@ -32,6 +32,7 @@ export function preservePandaLayerDeclaration(stylesPath: string): Plugin {
       for (const fileName of Object.keys(bundle)) {
         if (fileName.endsWith('.css')) {
           const asset = bundle[fileName];
+          // eslint-disable-next-line sonarjs/in-operator-type-error
           if ('source' in asset) {
             asset.source = `${layerDeclaration} ${String(asset.source)}`;
             fs.writeFileSync(

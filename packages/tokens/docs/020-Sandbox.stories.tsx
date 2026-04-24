@@ -22,11 +22,11 @@ export const Sandbox: Story = {
   args: {
     files: {
       'index.html': {
-        content: SandboxHTML as string,
+        content: SandboxHTML,
         isBinary: false,
       },
       'index.tsx': {
-        content: SandboxTemplate as string,
+        content: SandboxTemplate,
         isBinary: false,
       },
       'package.json': {

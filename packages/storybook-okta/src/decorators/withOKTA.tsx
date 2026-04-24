@@ -90,6 +90,7 @@ export const withOKTA = (
 
   const unprotected = config.unprotected ?? [];
 
+  // eslint-disable-next-line sonarjs/argument-type
   if (unprotected.includes(context.id)) {
     // If the path is unprotected, we can skip authentication
     return StoryFn(context);

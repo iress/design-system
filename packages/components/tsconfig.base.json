@@ -37,10 +37,11 @@
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@docs/*": ["docs/*"],
-      "@helpers/*": ["src/helpers/*"],
+      "@iress-oss/ids-components": ["./src/main.ts"],
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@docs/*": ["./docs/*"],
+      "@helpers/*": ["./src/helpers/*"],
       "@theme-preset/*": ["../theme-preset/src/*"]
     },
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]

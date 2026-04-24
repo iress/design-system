@@ -244,19 +244,20 @@ const TokenTable = () => {
   const filteredColumns = useMemo(() => {
     return columns.filter(
       (column) =>
+        // eslint-disable-next-line sonarjs/argument-type
         showing.includes(column.key) ||
+        // eslint-disable-next-line sonarjs/argument-type
         (showing.includes('label') && column.key === 'formattedLabel'),
     );
   }, [columns, showing]);
 
   // TODO: Probably need to look at making useAutocompleteSearch use a generic type
-  const filteredResults = useMemo(
-    () =>
-      results.filter(
-        (result) => showDeprecated || !(result as TokenMetadata).deprecated,
-      ),
-    [results, showDeprecated],
-  );
+  const filteredResults = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return results.filter(
+      (result) => showDeprecated || !(result as TokenMetadata).deprecated,
+    );
+  }, [results, showDeprecated]);
 
   const caption = useMemo(() => {
     if (debouncedQuery && !loading) {
@@ -285,6 +286,7 @@ const TokenTable = () => {
           label="Columns"
           onChange={(values) =>
             setShowing(
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
               unique(['label', ...toArray(values).map((value) => value.label)]),
             )
           }

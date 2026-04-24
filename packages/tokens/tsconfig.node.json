@@ -4,7 +4,11 @@
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "allowSyntheticDefaultImports": true,
-    "types": ["vitest/globals", "node", "vite/client"]
+    "types": ["vitest/globals", "node", "vite/client"],
+    "paths": {
+      "~/*": ["./src/*"],
+      "@iress-oss/ids-components": ["../components/src/main.ts"]
+    }
   },
   "include": [
     "docs",

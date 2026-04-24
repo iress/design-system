@@ -67,9 +67,9 @@ export const VersionBadge = ({
   return (
     <div className="version-badge">
       <Badge status="neutral">{badgeVersion}</Badge>{' '}
-      {badgeEnvironment && (
+      {badgeEnvironment ? (
         <EnvironmentBadge>{badgeEnvironment}</EnvironmentBadge>
-      )}
+      ) : null}
     </div>
   );
 };

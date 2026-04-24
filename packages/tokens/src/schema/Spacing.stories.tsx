@@ -30,7 +30,7 @@ const VisualSpark = ({ cssVar }: { cssVar: string }) => {
           }
         }}
       />
-      {size !== null && <IressText element="span">{size}px</IressText>}
+      {size !== null ? <IressText element="span">{size}px</IressText> : null}
     </IressInline>
   );
 };

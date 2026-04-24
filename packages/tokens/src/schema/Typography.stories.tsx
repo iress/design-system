@@ -88,7 +88,7 @@ const CssSpark = ({
           <button>{prop?.split(',')[0]}</button>
         </IressTooltip>
       )}
-      {!trimmed && prop}
+      {!trimmed ? prop : null}
       <div
         ref={(el) => {
           if (el) {

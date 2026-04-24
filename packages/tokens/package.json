@@ -3,13 +3,25 @@
   "version": "6.0.0-beta.1",
   "type": "module",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "exports": {
-    ".": "./dist/index.js",
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/index.js"
+    },
     "./build/css-vars.css": "./build/css-vars.css",
-    "./convertReferencesToVariables": "./dist/helpers/convertReferencesToVariables.js",
-    "./mapTokensToCssVariables": "./dist/helpers/mapTokensToCssVariables.js",
-    "./transforms": "./dist/transforms/index.js",
+    "./convertReferencesToVariables": {
+      "types": "./dist/src/helpers/convertReferencesToVariables.d.ts",
+      "import": "./dist/helpers/convertReferencesToVariables.js"
+    },
+    "./mapTokensToCssVariables": {
+      "types": "./dist/src/helpers/mapTokensToCssVariables.d.ts",
+      "import": "./dist/helpers/mapTokensToCssVariables.js"
+    },
+    "./transforms": {
+      "types": "./dist/src/transforms/index.d.ts",
+      "import": "./dist/transforms/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [

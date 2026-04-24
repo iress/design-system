@@ -8,6 +8,7 @@ export const isSidebarItemVisible = (
   visibleStories?: boolean,
 ) => {
   const isAlwaysVisible =
+    // eslint-disable-next-line sonarjs/argument-type
     item.type !== 'story' || !!item.tags?.includes(ALWAYS_VISIBLE_TAG);
   return visibleStories ? true : isAlwaysVisible;
 };

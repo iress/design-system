@@ -118,6 +118,7 @@ function findMissingComponents(
 
   return jsxComponents.filter(
     (component) =>
+      // eslint-disable-next-line sonarjs/argument-type
       !localComponents.includes(component) && !existingImports[component],
   );
 }

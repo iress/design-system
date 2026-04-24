@@ -73,6 +73,7 @@ export const mapTokensToCssVariables = <T extends object>(
       if ('$type' in token || '$value' in token) {
         // If the token or any of its groups are readonly, we set the readonly flag to true
         const isReadonly =
+          // eslint-disable-next-line sonarjs/argument-type
           (readonly.includes(true) || options.noFallbacks) ??
           options.emptyVariables;
 
@@ -152,6 +153,7 @@ const getMapFromToken = <T extends object>(
 
       if (
         options?.addCompositeTokens &&
+        // eslint-disable-next-line sonarjs/argument-type
         COMPOSITE_TOKENS.includes(token.$type)
       ) {
         currentMap[`_${path[i]}`] = getCompositeValueFromToken(

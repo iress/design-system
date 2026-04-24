@@ -14,7 +14,7 @@ const canonicalSpacing = Object.fromEntries(
       `spacing.${key}`,
       {
         description: (token as IressDesignToken).$description,
-        value: cssVars.spacing[key as SpacingKey],
+        value: cssVars.spacing[key as unknown as SpacingKey],
       },
     ]),
 );
@@ -28,7 +28,7 @@ const aliasSpacing = Object.fromEntries(
       alias,
       {
         description: (token as IressDesignToken).$description,
-        value: cssVars.spacing[key as SpacingKey],
+        value: cssVars.spacing[key as unknown as SpacingKey],
       },
     ]);
   }),

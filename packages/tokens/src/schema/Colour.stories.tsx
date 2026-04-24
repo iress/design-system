@@ -130,7 +130,7 @@ const ColourSwatch = ({
   }, [container, bg]);
 
   const colourStyle: CSSProperties = {
-    color: get(cssVars, color as string),
+    color: get(cssVars, color),
   };
 
   return (
@@ -172,12 +172,9 @@ const ColourSwatch = ({
               <p>{token.$description}</p>
             </IressText>
           </IressCol>
-          {!!allowedForegrounds.length && backgroundColor && (
+          {!!allowedForegrounds.length && !!backgroundColor ? (
             <IressCol>
-              <IressText
-                color={color}
-                style={{ color: get(cssVars, color as string) }}
-              >
+              <IressText color={color} style={{ color: get(cssVars, color) }}>
                 <h4>Allowed foregrounds</h4>
                 <IressStack gap="spacing.1" noGutter>
                   <ul>
@@ -193,7 +190,7 @@ const ColourSwatch = ({
                 </IressStack>
               </IressText>
             </IressCol>
-          )}
+          ) : null}
         </IressRow>
       </IressCard>
     </div>

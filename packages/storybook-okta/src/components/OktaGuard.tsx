@@ -50,7 +50,9 @@ export const OktaGuard = ({ api }: OktaGuardProps) => {
       lastPage.current = path;
 
       if (
+        // eslint-disable-next-line sonarjs/argument-type
         unprotected.includes(path) ||
+        // eslint-disable-next-line sonarjs/argument-type
         (urlState.storyId && unprotected.includes(urlState.storyId))
       ) {
         // If the path is unprotected, we can skip authentication

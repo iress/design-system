@@ -3,22 +3,22 @@
   "version": "0.6.0",
   "type": "module",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/src/index.d.ts",
       "import": "./dist/index.js"
     },
     "./preview": {
-      "types": "./dist/preview.d.ts",
+      "types": "./dist/src/preview.d.ts",
       "import": "./dist/preview.js"
     },
     "./main": {
-      "types": "./dist/main.d.ts",
+      "types": "./dist/src/main.d.ts",
       "import": "./dist/main.js"
     },
     "./manager": {
-      "types": "./dist/manager.d.ts",
+      "types": "./dist/src/manager.d.ts",
       "import": "./dist/manager.js"
     }
   },
