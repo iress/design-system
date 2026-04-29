@@ -36,7 +36,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.3.1",
     "pinst": "^3.0.0",
-    "prettier": "^3.8.2",
+    "prettier": "^3.8.3",
     "puppeteer": "^24.38.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
