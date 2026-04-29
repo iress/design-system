@@ -11,7 +11,7 @@
     ]
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^5.1.1",
+    "@chromatic-com/storybook": "^5.1.2",
     "@iress-oss/ids-components": "^6.0.0-alpha.4",
     "@iress-oss/ids-storybook-config": "^0.6.0",
     "@iress-oss/ids-storybook-okta": "^0.1.2",
