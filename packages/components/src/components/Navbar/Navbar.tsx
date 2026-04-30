@@ -129,7 +129,9 @@ export const IressNavbar: NavbarWithEnums = ({
 
   const setToggleButtonHideProp = (): ResponsiveSizing<boolean> => {
     const breakpoints: Breakpoints[] = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
-    const thisBreakpointIndex = (breakpoints as string[]).indexOf(breakpoint as string);
+    const thisBreakpointIndex = (breakpoints as string[]).indexOf(
+      breakpoint as string,
+    );
     const nextBreakpointIndex = thisBreakpointIndex + 1;
 
     if (nextBreakpointIndex >= breakpoints.length) {

@@ -31,7 +31,9 @@ export const mapNodesToSelectOptions = (
           },
         ];
         // If the node is an option, use the props as the SelectOption[], and rename children to label
-      } else if (([IressSelectOption, 'option'] as unknown[]).includes(node.type)) {
+      } else if (
+        ([IressSelectOption, 'option'] as unknown[]).includes(node.type)
+      ) {
         const option = { ...node.props } as SelectOption;
         delete option.children;
 

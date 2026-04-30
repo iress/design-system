@@ -261,13 +261,13 @@ const SubmittedValuesDisplay: React.FC<SubmittedValuesDisplayProps> = ({
             : submittedValues.transcript.content}
         </IressText>
         {typeof submittedValues.transcript === 'object' &&
-          !!(submittedValues.transcript.fileName) && (
+          !!submittedValues.transcript.fileName && (
             <IressText>
               <strong>File Name:</strong> {submittedValues.transcript.fileName}
             </IressText>
           )}
         {typeof submittedValues.transcript === 'object' &&
-          !!(submittedValues.transcript.size) && (
+          !!submittedValues.transcript.size && (
             <IressText>
               <strong>File Size:</strong>
               {(submittedValues.transcript.size / 1024).toFixed(2)} KB

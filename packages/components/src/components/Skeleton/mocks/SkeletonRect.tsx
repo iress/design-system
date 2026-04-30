@@ -16,7 +16,7 @@ export const SkeletonRect = (args: IressSkeletonProps) => {
         Toggle load
       </IressButton>
       {!!loading && <IressSkeleton {...args} />}
-      {!!(!loading) && <IressPlaceholder {...args}>Image</IressPlaceholder>}
+      {!!!loading && <IressPlaceholder {...args}>Image</IressPlaceholder>}
     </IressStack>
   );
 };

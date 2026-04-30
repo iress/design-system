@@ -61,7 +61,7 @@ export const SkeletonCard = () => {
         Toggle load
       </IressButton>
       {!!loading && <CardLoading />}
-      {!!(!loading) && <CardItem />}
+      {!!!loading && <CardItem />}
     </IressStack>
   );
 };

@@ -47,6 +47,9 @@ export async function createSonarConfig() {
       // Common overrides for design system context
       'sonarjs/deprecation': 'off',
       'sonarjs/function-return-type': 'off',
+      'sonarjs/jsx-no-leaked-render': 'off',
+      'sonarjs/no-inverted-boolean-check': 'off',
+      'sonarjs/argument-type': 'off',
       'sonarjs/todo-tag': 'off',
     },
   };

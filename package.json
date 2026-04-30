@@ -36,16 +36,19 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.3.1",
     "pinst": "^3.0.0",
-    "prettier": "^3.8.2",
+    "prettier": "3.8.2",
     "puppeteer": "^24.38.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "storybook": "^10.3.4",
     "storybook-addon-tag-badges": "^3.1.0",
     "tsx": "^4.21.0",
-    "typescript": "^6.0.2",
-    "vite": "^8.0.8",
+    "typescript": "6.0.2",
+    "vite": "8.0.8",
     "wait-on": "^9.0.5"
+  },
+  "resolutions": {
+    "axios": "1.15.0"
   },
   "scripts": {
     "check-coverage": "tsx ./scripts/check-coverage.ts",

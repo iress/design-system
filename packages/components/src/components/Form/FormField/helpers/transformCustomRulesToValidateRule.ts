@@ -47,7 +47,8 @@ export const transformCustomRulesToValidateRule = <
   }
 
   if (minDateRule) {
-    const minDate = minDateRule instanceof Date ? minDateRule : minDateRule.value;
+    const minDate =
+      minDateRule instanceof Date ? minDateRule : minDateRule.value;
     const result = minDateRule instanceof Date ? false : minDateRule.message;
 
     customValidate.minDate = (value?: Date | string) => {
@@ -60,7 +61,8 @@ export const transformCustomRulesToValidateRule = <
   }
 
   if (maxDateRule) {
-    const maxDate = maxDateRule instanceof Date ? maxDateRule : maxDateRule.value;
+    const maxDate =
+      maxDateRule instanceof Date ? maxDateRule : maxDateRule.value;
     const result = maxDateRule instanceof Date ? false : maxDateRule.message;
 
     customValidate.maxDate = (value?: Date | string) => {

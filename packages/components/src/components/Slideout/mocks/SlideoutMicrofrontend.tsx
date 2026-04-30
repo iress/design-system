@@ -169,7 +169,7 @@ class IressCustomElement extends HTMLElement {
     }
 
     // Manage shared and instance-specific styles
-    if (!(IressCustomElement.sharedStyles as HTMLStyleElement[]).includes(style as HTMLStyleElement)) {
+    if (!IressCustomElement.sharedStyles.includes(style as HTMLStyleElement)) {
       IressCustomElement.sharedStyles.push(style as HTMLStyleElement);
       this.instanceStyles.push(style as HTMLStyleElement);
     }

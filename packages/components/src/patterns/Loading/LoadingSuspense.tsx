@@ -156,9 +156,9 @@ export const IressLoadingSuspense = ({
           {!!showChildren && children}
         </IressLoading>
         <Suspense fallback={null}>
-          {!!(!showChildren) && (
+          {!!!showChildren && (
             <OnSuspenseResolved onResolved={onResolved}>
-              {!!(!loaded) && children}
+              {!!!loaded && children}
             </OnSuspenseResolved>
           )}
         </Suspense>
@@ -182,7 +182,7 @@ export const IressLoadingSuspense = ({
           children
         ) : (
           <OnSuspenseResolved onResolved={onResolved}>
-            {!!(!loaded) && children}
+            {!!!loaded && children}
           </OnSuspenseResolved>
         )}
       </Suspense>

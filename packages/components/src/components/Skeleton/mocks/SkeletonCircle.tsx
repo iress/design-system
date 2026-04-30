@@ -16,7 +16,7 @@ export const SkeletonCircle = (args: IressSkeletonProps) => {
         Toggle load
       </IressButton>
       {!!loading && <IressSkeleton {...args} />}
-      {!!(!loading) && (
+      {!!!loading && (
         <IressPlaceholder {...args} style={{ borderRadius: '50%' }}>
           Image
         </IressPlaceholder>

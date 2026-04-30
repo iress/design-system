@@ -49,7 +49,10 @@ export const MenuProvider = ({
       hasArrowKeyNav,
       id,
       isSelected: (value) =>
-        value !== undefined && (toArray(selected) as Array<string | number | boolean | null | undefined>).includes(value),
+        value !== undefined &&
+        (
+          toArray(selected) as (string | number | boolean | null | undefined)[]
+        ).includes(value),
       layout,
       multiSelect,
       noWrap,

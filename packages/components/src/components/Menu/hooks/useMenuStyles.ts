@@ -24,7 +24,9 @@ export const useMenuStyles = ({
   return {
     className: classNames(className, styles.menu, styles[layout], {
       [styles.fluid]:
-        (popoverType && (['listbox', 'menu'] as string[]).includes(popoverType)) ?? fluid,
+        (popoverType &&
+          (['listbox', 'menu'] as string[]).includes(popoverType)) ??
+        fluid,
       [styles.nav]: role === 'nav' && styles.nav,
     }),
   };

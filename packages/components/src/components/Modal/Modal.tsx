@@ -196,7 +196,7 @@ export const IressModal: ModalWithEnums = ({
             {...interactions.getFloatingProps(restProps)}
             onTransitionEnd={handleTransitionEnd}
           >
-            {!!(!noCloseButton) && (
+            {!!!noCloseButton && (
               <IressCloseButton
                 onClick={() => onOpenChange(false)}
                 screenreaderText={closeText}

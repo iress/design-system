@@ -88,7 +88,7 @@ const Radio = (
         required={isRequired}
       />
       <label htmlFor={id} className={styles.label}>
-        {!!(!isHidden) && (
+        {!!!isHidden && (
           <RadioMark data-testid={propagateTestid(dataTestId, 'mark')} />
         )}
         {children}
