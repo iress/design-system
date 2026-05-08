@@ -42,7 +42,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.lib.json"
   },
   "dependencies": {
-    "@iress-oss/ids-tokens": "^6.0.0-beta.1"
+    "@iress-oss/ids-tokens": "^6.0.0-beta.2"
   },
   "peerDependencies": {
     "@pandacss/dev": ">=1.8.0",

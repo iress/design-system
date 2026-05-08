@@ -31,8 +31,8 @@
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json"
   },
   "devDependencies": {
-    "@iress-oss/ids-theme-preset": "^6.0.0-beta.1",
-    "@iress-oss/ids-tokens": "^6.0.0-beta.1",
+    "@iress-oss/ids-theme-preset": "^6.0.0-beta.2",
+    "@iress-oss/ids-tokens": "^6.0.0-beta.2",
     "@pandacss/dev": "1.9.1",
     "@testing-library/dom": "10.4.1",
     "@testing-library/jest-dom": "6.9.1",
