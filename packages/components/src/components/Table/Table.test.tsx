@@ -298,6 +298,28 @@ describe('IressTable', () => {
       initialRect: { width: 800, height: 400 },
     };
 
+    beforeAll(() => {
+      Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
+        configurable: true,
+        get: () => 400,
+      });
+      Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+        configurable: true,
+        get: () => 800,
+      });
+    });
+
+    afterAll(() => {
+      Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
+        configurable: true,
+        get: () => 0,
+      });
+      Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+        configurable: true,
+        get: () => 0,
+      });
+    });
+
     it('renders only a subset of rows when virtualise is enabled', () => {
       const screen = renderComponent({
         rows: LARGE_ROWS,
