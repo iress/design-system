@@ -259,6 +259,34 @@ The `compact` prop can be used to reduce the padding around the table cells and 
 
 <ComponentExample of={ComponentStories.Compact} />
 
+### Virtualisation
+
+For tables with large datasets (hundreds or thousands of rows), virtualisation
+renders only the visible rows to the DOM. This eliminates UI freezes during
+bulk state updates and keeps scrolling smooth.
+
+Enable it with the `virtualise` prop. The `virtualise` prop accepts `true` for defaults, or an options object:
+
+| Option         | Type               | Default | Description                                      |
+| -------------- | ------------------ | ------- | ------------------------------------------------ |
+| `height`       | `number \| string` | `400`   | Height of the scroll container (px or CSS value) |
+| `overscan`     | `number`           | `5`     | Extra rows rendered above/below the viewport     |
+| `estimateSize` | `number`           | `40`    | Estimated row height in pixels                   |
+
+**Requirements:**
+
+- The table container must have a bounded height (set via `height` option or
+  CSS on a parent). Without a fixed height, the browser cannot determine which
+  rows are visible.
+- Specify `width` on each column for stable column sizing. Without explicit
+  widths, columns may shift as rows with different content lengths scroll in
+  and out of view.
+- Sorting and filtering work normally with virtualisation enabled.
+- Screen readers announce the correct row position via `aria-rowcount` and
+  `aria-rowindex`.
+
+<ComponentExample of={ComponentStories.Virtualised} />
+
 ## `IressTableBody`
 
 In some cases you may have a table with multiple groups of rows inside it, however the columns are the same. For these cases, you can use the `IressTableBody` component.

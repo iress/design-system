@@ -13,6 +13,8 @@ import { TableSorting } from './mocks/TableSorting';
 import TableSortingSource from './mocks/TableSorting.tsx?raw';
 import { TableSortingFn } from './mocks/TableSortingFn';
 import TableSortingFnSource from './mocks/TableSortingFn.tsx?raw';
+import { TableVirtualised } from './mocks/TableVirtualised';
+import TableVirtualisedSource from './mocks/TableVirtualised.tsx?raw';
 import { type Row } from '@tanstack/react-table';
 import {
   withJsxTransformer,
@@ -396,5 +398,16 @@ export const Compact: Story = {
           ? 'colour.data.subtle.30'
           : undefined,
     }),
+  },
+};
+
+export const Virtualised: Story = {
+  args: {},
+  argTypes: {
+    ...disableArgTypes(['caption', 'rows', 'columns']),
+  },
+  render: () => <TableVirtualised />,
+  parameters: {
+    ...withTransformedRawSource(TableVirtualisedSource, 'Props'),
   },
 };

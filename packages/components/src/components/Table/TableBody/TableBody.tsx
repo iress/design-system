@@ -2,7 +2,7 @@ import { propagateTestid } from '@/helpers/utility/propagateTestid';
 import { TableEmpty } from '../components/TableEmpty';
 import { TableHeader } from '../components/TableHeader';
 import { useIdIfNeeded } from '@/hooks';
-import { useEffect, useState, type ReactNode, useContext } from 'react';
+import { useEffect, useRef, useState, type ReactNode, useContext } from 'react';
 import { TableRows } from '../components/TableRows';
 import {
   type AriaRelationshipProps,
@@ -10,6 +10,7 @@ import {
 } from '@/hooks/useAriaRelationship';
 import { table } from '../Table.styles';
 import { type IressTableProps } from '../Table';
+import { type TableVirtualiseOptions } from '../Table';
 import { TableContext, TableProvider } from '../TableProvider';
 import { IressExpanderChevron } from '../../ExpanderChevron';
 import { styled } from '@/styled-system/jsx';
@@ -49,6 +50,11 @@ export interface IressTableBodyProps<
    * When true, all rows will be visible, otherwise they are hidden.
    */
   open?: boolean;
+
+  /**
+   * Enable row virtualisation for large datasets.
+   */
+  virtualise?: boolean | TableVirtualiseOptions;
 }
 
 interface TableBodyHeaderProps
@@ -136,6 +142,7 @@ export const IressTableBody = <TRow extends object = never, TVal = never>({
   rowProps,
   rows = [],
   scope,
+  virtualise,
   ...restProps
 }: IressTableBodyProps<TRow, TVal>) => {
   const [isOpen, setIsOpen] = useState(open);
@@ -143,6 +150,7 @@ export const IressTableBody = <TRow extends object = never, TVal = never>({
     useAriaRelationship<HTMLTableCellElement>('aria-controls');
   const id = useIdIfNeeded({ id: restProps.id });
   const showTable = children ?? (empty && columns?.length) ?? !!rows?.length;
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect((): void => {
     setIsOpen(open);
@@ -193,6 +201,8 @@ export const IressTableBody = <TRow extends object = never, TVal = never>({
               scope={scope}
               hiddenHeader={hiddenHeader}
               testId={propagateTestid(dataTestId, 'tbody')}
+              virtualise={virtualise}
+              scrollContainerRef={scrollContainerRef}
             />
             <TableEmpty>{empty}</TableEmpty>
             <TableBodyChildren setControlViaRef={setControlViaRef} tableId={id}>

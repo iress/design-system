@@ -4,13 +4,41 @@ import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { TableHeader } from './components/TableHeader';
 import { TableProvider } from './TableProvider';
 import { TableRows, type TableRowsProps } from './components/TableRows';
-import { type ReactNode } from 'react';
+import { type ReactNode, useRef, useState, useCallback, useMemo } from 'react';
 import { table } from './Table.styles';
 import { cx } from '@/styled-system/css';
 import { styled } from '@/styled-system/jsx';
 import { type TableColumn } from './helpers/composeTableColumnDefs';
 import { type IressStyledProps } from '@/types';
 import { GlobalCSSClass } from '@/enums';
+
+export interface TableVirtualiseOptions {
+  /**
+   * Number of rows to render above and below the visible area.
+   * @default 5
+   */
+  overscan?: number;
+
+  /**
+   * Estimated row height in pixels. Used for scroll calculations.
+   * @default 40
+   */
+  estimateSize?: number;
+
+  /**
+   * Height of the scroll container in pixels or CSS value.
+   * Required for virtualisation to work — the container must have a bounded height.
+   * @default 400
+   */
+  height?: number | string;
+
+  /**
+   * Initial rect of the scroll container. Useful for SSR or testing environments
+   * where the scroll container has no layout dimensions.
+   * @internal
+   */
+  initialRect?: { width: number; height: number };
+}
 
 export type IressTableProps<
   TRow extends object = never,
@@ -89,6 +117,13 @@ export type IressTableProps<
    * @default 'row'
    */
   scope?: 'row' | 'col';
+
+  /**
+   * Enable row virtualisation for large datasets. Only visible rows (plus overscan)
+   * are rendered to the DOM. Requires a fixed height on the table container.
+   * Pass `true` for defaults, or an options object to configure.
+   */
+  virtualise?: boolean | TableVirtualiseOptions;
 };
 
 export const IressTable = <TRow extends object = never, TVal = never>({
@@ -107,12 +142,19 @@ export const IressTable = <TRow extends object = never, TVal = never>({
   rowProps,
   rows = [],
   scope,
+  virtualise,
   ...restProps
 }: IressTableProps<TRow, TVal>) => {
   const id = useIdIfNeeded({ id: restProps.id });
   const captionId = `${id}--caption`;
   const hasContent = (empty && columns?.length) ?? !!rows?.length;
   const showTable = children ?? hasContent;
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [, setScrollReady] = useState(false);
+  const scrollCallbackRef = useCallback((node: HTMLDivElement | null) => {
+    scrollContainerRef.current = node;
+    setScrollReady(!!node);
+  }, []);
 
   const classes = table({
     alternate,
@@ -120,23 +162,54 @@ export const IressTable = <TRow extends object = never, TVal = never>({
     hover,
     hiddenCaption,
     removeRowBorders,
+    virtualise: !!virtualise,
   });
 
   const theadTestId = propagateTestid(dataTestId, 'thead');
   const tbodyTestId = propagateTestid(dataTestId, 'tbody');
+
+  const scrollContainerStyle = useMemo(() => {
+    if (!virtualise) return undefined;
+    const rawHeight =
+      typeof virtualise === 'object' ? virtualise.height : undefined;
+    const height =
+      typeof rawHeight === 'number' ? `${rawHeight}px` : (rawHeight ?? '400px');
+    return { height, maxHeight: '100%' };
+  }, [virtualise]);
+
+  const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+    const el = e.currentTarget;
+    const tableEl = el.querySelector('table');
+    const theadEl = el.querySelector('thead');
+    const offset = tableEl?.offsetTop
+      ? tableEl?.offsetTop - (theadEl?.offsetHeight ?? 0)
+      : 0;
+    if (el.scrollTop > offset) {
+      el.setAttribute('data-scrolled', '');
+    } else {
+      el.removeAttribute('data-scrolled');
+    }
+  }, []);
 
   if (!showTable) {
     return null;
   }
 
   return (
-    <div className={classes.root} data-testid={dataTestId}>
+    <div
+      className={classes.root}
+      data-testid={dataTestId}
+      ref={virtualise ? scrollCallbackRef : undefined}
+      style={scrollContainerStyle}
+      onScroll={virtualise ? handleScroll : undefined}
+    >
       <TableProvider columns={columns} rows={rows}>
         <styled.table
           {...restProps}
           className={cx(className, classes.table, GlobalCSSClass.Table)}
           id={id}
           data-testid={propagateTestid(dataTestId, 'table')}
+          aria-rowcount={virtualise ? rows.length : undefined}
         >
           <caption
             id={captionId}
@@ -158,6 +231,8 @@ export const IressTable = <TRow extends object = never, TVal = never>({
                 rowProps={rowProps}
                 scope={scope}
                 hiddenHeader={hiddenHeader}
+                virtualise={virtualise}
+                scrollContainerRef={scrollContainerRef}
               />
               <TableEmpty>{empty}</TableEmpty>
             </tbody>
