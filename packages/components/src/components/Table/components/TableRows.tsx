@@ -2,12 +2,12 @@ import { flexRender, type Row } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { TableBodyCell } from './TableBodyCell';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
-import { type IressStyledProps } from '@/types';
-import { type AriaRelationshipProps } from '@/hooks/useAriaRelationship';
+import type { IressStyledProps } from '@/types';
+import type { AriaRelationshipProps } from '@/hooks/useAriaRelationship';
 import { type RefObject, useContext } from 'react';
 import { getTableContext } from '../TableProvider';
 import { styled } from '@/styled-system/jsx';
-import { type TableVirtualiseOptions } from '../Table';
+import type { TableVirtualiseOptions } from '../Table';
 
 export interface TableRowsProps<TRow extends object = never> extends Partial<
   Pick<AriaRelationshipProps, 'setControlViaRef'>

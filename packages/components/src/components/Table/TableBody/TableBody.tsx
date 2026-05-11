@@ -9,8 +9,8 @@ import {
   useAriaRelationship,
 } from '@/hooks/useAriaRelationship';
 import { table } from '../Table.styles';
-import { type IressTableProps } from '../Table';
-import { type TableVirtualiseOptions } from '../Table';
+import type { IressTableProps } from '../Table';
+import type { TableVirtualiseOptions } from '../Table';
 import { TableContext, TableProvider } from '../TableProvider';
 import { IressExpanderChevron } from '../../ExpanderChevron';
 import { styled } from '@/styled-system/jsx';

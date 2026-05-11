@@ -11,6 +11,7 @@ import { styled } from '@/styled-system/jsx';
 import { type TableColumn } from './helpers/composeTableColumnDefs';
 import { type IressStyledProps } from '@/types';
 import { GlobalCSSClass } from '@/enums';
+import type { UIEvent } from 'react';
 
 export interface TableVirtualiseOptions {
   /**
@@ -177,7 +178,7 @@ export const IressTable = <TRow extends object = never, TVal = never>({
     return { height, maxHeight: '100%' };
   }, [virtualise]);
 
-  const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+  const handleScroll = useCallback((e: UIEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
     const tableEl = el.querySelector('table');
     const theadEl = el.querySelector('thead');
