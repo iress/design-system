@@ -64,12 +64,13 @@ export const TableRows = <TRow extends object = never>({
     const paddingTop = virtualItems[0].start;
     const paddingBottom =
       virtualizer.getTotalSize() - virtualItems[virtualItems.length - 1].end;
+    const colSpan = rows[0].getVisibleCells().length;
 
     return (
       <>
         {paddingTop > 0 && (
-          <tr>
-            <td style={{ height: paddingTop, padding: 0, border: 'none' }} />
+          <tr aria-hidden="true">
+            <td colSpan={colSpan} style={{ height: paddingTop }} />
           </tr>
         )}
         {virtualItems.map((virtualRow) => {
@@ -112,8 +113,8 @@ export const TableRows = <TRow extends object = never>({
           );
         })}
         {paddingBottom > 0 && (
-          <tr>
-            <td style={{ height: paddingBottom, padding: 0, border: 'none' }} />
+          <tr aria-hidden="true">
+            <td colSpan={colSpan} style={{ height: paddingBottom }} />
           </tr>
         )}
       </>

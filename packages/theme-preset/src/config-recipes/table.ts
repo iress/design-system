@@ -211,6 +211,11 @@ export const tableRecipe = defineSlotRecipe({
             zIndex: 1,
             bg: 'colour.neutral.10',
           },
+
+          '& tr[aria-hidden] td': {
+            padding: '0',
+            border: 'none',
+          },
         },
         root: {
           '&[data-scrolled] table > thead:first-of-type > :first-child > :first-child':

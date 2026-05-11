@@ -150,7 +150,16 @@ export const IressTableBody = <TRow extends object = never, TVal = never>({
     useAriaRelationship<HTMLTableCellElement>('aria-controls');
   const id = useIdIfNeeded({ id: restProps.id });
   const showTable = children ?? (empty && columns?.length) ?? !!rows?.length;
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const tbodyRef = useRef<HTMLTableSectionElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (virtualise && tbodyRef.current) {
+      scrollContainerRef.current = tbodyRef.current.closest<HTMLDivElement>(
+        '[class*="table__root"]',
+      );
+    }
+  }, [virtualise]);
 
   useEffect((): void => {
     setIsOpen(open);
@@ -174,7 +183,11 @@ export const IressTableBody = <TRow extends object = never, TVal = never>({
 
   return (
     <TableProvider columns={columns} rows={rows}>
-      <styled.tbody aria-labelledby={`${id}--caption`} {...restProps}>
+      <styled.tbody
+        ref={tbodyRef}
+        aria-labelledby={`${id}--caption`}
+        {...restProps}
+      >
         <TableBodyHeader
           setController={setController}
           caption={caption}
