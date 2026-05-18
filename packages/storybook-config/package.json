@@ -79,7 +79,7 @@
     "eslint-plugin-mdx": "3.7.0",
     "eslint-plugin-prettier": "^5.5.5",
     "happy-dom": "20.9.0",
-    "jsdom": "^29.0.0",
+    "jsdom": "^29.1.1",
     "json5": "^2.2.3",
     "prettier": "^3.8.2",
     "react": "^19.2.5",
