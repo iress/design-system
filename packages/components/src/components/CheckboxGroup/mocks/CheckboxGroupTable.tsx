@@ -39,6 +39,7 @@ export const CheckboxGroupTable = () => (
         label="Let them eat cake"
         name="let-them-eat-cake"
         hiddenLabel
+        mb="none"
         rules={{ required: 'Please select a cake' }}
         render={(field) => (
           <IressCheckboxGroup {...field} layout="stack">
@@ -78,7 +79,7 @@ export const CheckboxGroupTable = () => (
           </IressCheckboxGroup>
         )}
       />
-      <IressButton type="submit" mode="primary">
+      <IressButton type="submit" mode="primary" alignSelf="start">
         Submit
       </IressButton>
     </IressStack>
