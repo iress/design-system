@@ -24,6 +24,7 @@ export default defineConfig({
         '*.ts',
       ],
       tsconfigPath: './tsconfig.base.json',
+      entryRoot: './src',
     }),
     treeShakeable(),
   ],

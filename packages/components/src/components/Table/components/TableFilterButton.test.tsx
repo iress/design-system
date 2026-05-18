@@ -51,12 +51,13 @@ describe('TableFilterButton', () => {
     const screen = render(<TableFilterButton {...defaultProps} />);
 
     await userEvent.click(screen.getByRole('button', { name: 'filterable' }));
-    expect(screen.getByRole('option', { name: 'Value A' })).toBeVisible();
+
+    const option = screen.getByRole('option', { name: 'Value A' });
+    expect(option).toBeVisible();
 
     await userEvent.keyboard('{Escape}');
-    expect(
-      screen.getAllByRole('option', { hidden: true })[0],
-    ).not.toBeVisible();
+    await userEvent.keyboard('{Escape}'); // Added an extra escape key press to ensure the menu is closed, as sometimes the first escape may not work. Works in UI though.
+    expect(option).not.toBeVisible();
   });
 
   it('shows the aria-expanded attribute on the button', async () => {

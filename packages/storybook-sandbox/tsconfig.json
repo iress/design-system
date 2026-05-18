@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "target": "esnext", // Node 20 according to https://github.com/microsoft/TypeScript/wiki/Node-Target-Mapping#node-20
@@ -16,7 +17,6 @@
     "noImplicitOverride": true,
     "noImplicitAny": true,
     "lib": ["es2023", "dom", "dom.iterable"],
-    "baseUrl": ".",
     "rootDir": "./src",
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
