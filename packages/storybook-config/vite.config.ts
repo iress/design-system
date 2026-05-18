@@ -27,6 +27,7 @@ export default defineConfig({
         '**/*.template.tsx',
       ],
       tsconfigPath: './tsconfig.base.json',
+      entryRoot: resolve(__dirname, 'src'),
     }),
     treeShakeable(),
     libInjectCss(),

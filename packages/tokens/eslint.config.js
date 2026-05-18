@@ -19,7 +19,6 @@ export default [
   createTypeScriptConfig(import.meta.dirname, [
     './tsconfig.json',
     './tsconfig.lib.json',
-    './tsconfig.base.json',
     './tsconfig.node.json',
   ]),
   await createSonarConfig(),

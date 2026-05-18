@@ -40,11 +40,7 @@ export default defineConfig({
         {
           src: 'src/styled-system/**/*.d.ts',
           dest: 'styled-system',
-          rename: (name, ext, fullPath) => {
-            // Extract everything after 'src/styled-system/' from the absolute path
-            const match = /src\/styled-system\/(.+)$/.exec(fullPath);
-            return match ? match[1] : `${name}${ext}`;
-          },
+          rename: { stripBase: 2 },
         },
       ],
     }),
