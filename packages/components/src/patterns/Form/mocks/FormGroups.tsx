@@ -65,7 +65,11 @@ const defaultValues = {
 
 const ClientSection: React.FC<ClientProps> = ({ control }) => {
   return (
-    <IressFieldGroup label={<IressText element="h2">Client</IressText>} inline>
+    <IressFieldGroup
+      label={<IressText element="h2">Client</IressText>}
+      inline
+      mb="none"
+    >
       <IressFormField
         name="client.name"
         label="Name"
@@ -111,6 +115,7 @@ const DependantSection: React.FC<DependantProps> = ({
         <IressFieldGroup
           label={<IressText element="h2">Dependant {index + 1}</IressText>}
           inline
+          mb="none"
         >
           <IressFormField
             name={`dependants.${index}.name`}

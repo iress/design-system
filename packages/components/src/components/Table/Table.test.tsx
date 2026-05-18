@@ -285,4 +285,139 @@ describe('IressTable', () => {
       expect(results).toHaveNoViolations();
     });
   });
+
+  describe('virtualise', () => {
+    const LARGE_ROWS = Array.from({ length: 300 }, (_, i) => ({
+      key: `${i}`,
+      value: `row-${i}`,
+    }));
+
+    const virtualiseWithRect = {
+      overscan: 5,
+      estimateSize: 40,
+      initialRect: { width: 800, height: 400 },
+    };
+
+    beforeAll(() => {
+      Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
+        configurable: true,
+        get: () => 400,
+      });
+      Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+        configurable: true,
+        get: () => 800,
+      });
+    });
+
+    afterAll(() => {
+      Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
+        configurable: true,
+        get: () => 0,
+      });
+      Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+        configurable: true,
+        get: () => 0,
+      });
+    });
+
+    it('renders only a subset of rows when virtualise is enabled', () => {
+      const screen = renderComponent({
+        rows: LARGE_ROWS,
+        virtualise: virtualiseWithRect,
+      });
+
+      const renderedRows = screen.queryAllByTestId(`${TEST_ID}__row`);
+      expect(renderedRows.length).toBeGreaterThan(0);
+      expect(renderedRows.length).toBeLessThan(LARGE_ROWS.length);
+    });
+
+    it('sets aria-rowcount on the table element', () => {
+      const screen = renderComponent({
+        rows: LARGE_ROWS,
+        virtualise: virtualiseWithRect,
+      });
+
+      const tableEl = screen.getByTestId(`${TEST_ID}__table`);
+      expect(tableEl).toHaveAttribute(
+        'aria-rowcount',
+        String(LARGE_ROWS.length),
+      );
+    });
+
+    it('sets aria-rowindex on each visible row', () => {
+      const screen = renderComponent({
+        rows: LARGE_ROWS,
+        virtualise: virtualiseWithRect,
+      });
+
+      const renderedRows = screen.queryAllByTestId(`${TEST_ID}__row`);
+      expect(renderedRows.length).toBeGreaterThan(0);
+      renderedRows.forEach((row) => {
+        expect(row).toHaveAttribute('aria-rowindex');
+      });
+    });
+
+    it('does not set aria-rowcount when virtualise is not enabled', () => {
+      const screen = renderComponent({ rows: TEST_ROWS });
+
+      const tableEl = screen.getByTestId(`${TEST_ID}__table`);
+      expect(tableEl).not.toHaveAttribute('aria-rowcount');
+    });
+
+    it('renders all rows when virtualise is not enabled', () => {
+      const screen = renderComponent({ rows: TEST_ROWS });
+
+      const renderedRows = screen.getAllByTestId(`${TEST_ID}__row`);
+      expect(renderedRows.length).toBe(TEST_ROWS.length);
+    });
+
+    it('accepts virtualise options with custom overscan', () => {
+      const screen = renderComponent({
+        rows: LARGE_ROWS,
+        virtualise: { ...virtualiseWithRect, overscan: 10 },
+      });
+
+      const renderedRows = screen.queryAllByTestId(`${TEST_ID}__row`);
+      expect(renderedRows.length).toBeGreaterThan(0);
+      expect(renderedRows.length).toBeLessThan(LARGE_ROWS.length);
+    });
+
+    it('does not break when sorting with virtualise enabled', async () => {
+      const screen = renderComponent({
+        rows: LARGE_ROWS,
+        columns: [
+          { key: 'key', label: 'Key', sort: true },
+          { key: 'value', label: 'Value' },
+        ],
+        virtualise: virtualiseWithRect,
+      });
+
+      const sortButton = screen.getByRole('button', { name: 'Keysortable' });
+      await userEvent.click(sortButton);
+
+      // Sorting should not throw or remove the table
+      expect(screen.getByRole('table')).toBeInTheDocument();
+    });
+
+    it('does not break when filtering with virtualise enabled', async () => {
+      const filterRows = Array.from({ length: 50 }, (_, i) => ({
+        key: `${i}`,
+        value: `row-${i}`,
+      }));
+      const screen = renderComponent({
+        rows: filterRows,
+        columns: [
+          { key: 'key', label: 'Key', filter: true },
+          { key: 'value', label: 'Value' },
+        ],
+        virtualise: virtualiseWithRect,
+      });
+
+      await userEvent.click(screen.getByRole('button', { name: 'filterable' }));
+      await userEvent.click(screen.getByRole('option', { name: '0' }));
+
+      // Filtering should not throw or remove the table
+      expect(screen.getByRole('table')).toBeInTheDocument();
+    });
+  });
 });

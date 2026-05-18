@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-components",
-  "version": "6.0.0-beta.6",
+  "version": "6.0.0-beta.7",
   "description": "Iress React Component Library",
   "license": "Apache-2.0",
   "type": "module",
@@ -31,7 +31,7 @@
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json"
   },
   "devDependencies": {
-    "@iress-oss/ids-theme-preset": "^6.0.0-beta.2",
+    "@iress-oss/ids-theme-preset": "^6.0.0-beta.3",
     "@iress-oss/ids-tokens": "^6.0.0-beta.2",
     "@pandacss/dev": "1.9.1",
     "@testing-library/dom": "10.4.1",
@@ -78,6 +78,7 @@
     "@floating-ui/react": "0.27.19",
     "@fortawesome/fontawesome-common-types": "0.2.36",
     "@tanstack/react-table": "8.21.3",
+    "@tanstack/react-virtual": "3.13.12",
     "@types/mdx": "^2.0.13",
     "fuzzysort": "3.1.0",
     "material-symbols": "0.44.1",

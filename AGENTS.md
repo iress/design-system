@@ -80,6 +80,9 @@ ESLint 10 with flat config. Key rules:
 - TypeScript strict, single quotes, semicolons, trailing commas (`all`), 2-space indent
 - LF line endings, UTF-8
 - Markdown/MDX: 80 char line length
+- Mock/example components (in `mocks/` dirs, used by Storybook stories) must NOT use `styled` from `@/styled-system/jsx` — use plain HTML elements with inline styles or CSS classes instead. `styled` is an internal implementation detail not exposed to consumers.
+- Mock/example components must import IDS components from `@/main` (e.g. `import { IressButton } from '@/main'`). The build replaces `@/main` with `@iress-oss/ids-components` in displayed source examples.
+- Styling should be in CSS (recipes/styles files) where possible, not inline styles. Inline styles are a last resort for truly dynamic values (e.g. user-provided dimensions).
 - See `.prettierrc.cjs` and `.editorconfig` for full config
 
 ## Monorepo structure

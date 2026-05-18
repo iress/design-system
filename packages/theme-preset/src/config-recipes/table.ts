@@ -200,6 +200,39 @@ export const tableRecipe = defineSlotRecipe({
         },
       },
     },
+    virtualise: {
+      true: {
+        table: {
+          tableLayout: 'fixed',
+
+          '& thead': {
+            position: 'sticky',
+            top: 0,
+            zIndex: 1,
+            bg: 'colour.neutral.10',
+          },
+
+          '& tr[aria-hidden] td': {
+            padding: '0',
+            border: 'none',
+          },
+        },
+        root: {
+          '&[data-scrolled] table > thead:first-of-type > :first-child > :first-child':
+            {
+              borderTopLeftRadius: '0',
+            },
+          '&[data-scrolled] table > thead:first-of-type > :first-child > :last-child':
+            {
+              borderTopRightRadius: '0',
+            },
+          '&[data-scrolled] table > thead:first-of-type > :first-child > th, &[data-scrolled] table > thead:first-of-type > :first-child > td':
+            {
+              borderTopWidth: '1px',
+            },
+        },
+      },
+    },
     sortButtonNoWrap: {
       true: {
         sortHeader: {
