@@ -299,12 +299,12 @@ describe('radiusCssShorthand', () => {
       // Create a token that simulates an already transformed string value
       const stringToken: TransformedToken = {
         ...baseToken,
-        $value: '5px 10px 15px 20px' as unknown as CompositeValue['radius'],
+        $value: '5px 10px 15px 20px',
         name: 'test.radius',
         path: ['test', 'radius'],
         original: {
           ...baseToken,
-          $value: '5px 10px 15px 20px' as unknown as CompositeValue['radius'],
+          $value: '5px 10px 15px 20px',
         },
         filePath: '',
         isSource: false,

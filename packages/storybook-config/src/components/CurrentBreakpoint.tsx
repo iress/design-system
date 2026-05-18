@@ -66,10 +66,7 @@ export const CurrentBreakpoint = ({
   renderLabel,
 }: CurrentBreakpointProps) => {
   const { useBreakpoint } = use(IressStorybookContext);
-  const { breakpoint, detail } = useBreakpoint() as {
-    breakpoint: Breakpoints;
-    detail: BreakpointDetail;
-  };
+  const { breakpoint, detail } = useBreakpoint();
 
   return (
     <Tag>

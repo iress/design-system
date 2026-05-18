@@ -5,7 +5,6 @@ import {
   useImperativeHandle,
   useRef,
   useState,
-  type CSSProperties,
 } from 'react';
 import { createPortal } from 'react-dom';
 import idsCss from '../../styled-system/styles.css?raw';
@@ -152,17 +151,15 @@ export const IressShadow = forwardRef<ShadowRoot | null, IressShadowProps>(
       <div
         ref={hostRef}
         {...restProps}
-        style={
-          {
-            ...restProps.style,
-            ...(zIndexOffset !== undefined && {
-              [Z_INDEX_OFFSET_VAR]: String(zIndexOffset),
-            }),
-            ...(toasterOffset !== undefined && {
-              [TOASTER_OFFSET_VAR]: toasterOffset,
-            }),
-          } as CSSProperties
-        }
+        style={{
+          ...restProps.style,
+          ...(zIndexOffset !== undefined && {
+            [Z_INDEX_OFFSET_VAR]: String(zIndexOffset),
+          }),
+          ...(toasterOffset !== undefined && {
+            [TOASTER_OFFSET_VAR]: toasterOffset,
+          }),
+        }}
       >
         <IressProvider
           container={containerRef}

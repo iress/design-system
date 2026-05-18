@@ -39,7 +39,6 @@ const VirtualTableRows = <TRow extends object = never>({
   const virtualiseOptions =
     typeof virtualise === 'object' ? virtualise : undefined;
 
-  // eslint-disable-next-line react-hooks/incompatible-library -- TanStack Virtual's API is intentionally non-memoizable
   const virtualizer = useVirtualizer({
     count: rows.length,
     getScrollElement: () => scrollContainerRef?.current ?? null,

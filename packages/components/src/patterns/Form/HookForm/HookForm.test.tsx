@@ -191,7 +191,7 @@ describe('IressHookForm', () => {
         });
 
         const { clearErrors, setError, watch } = form;
-        // eslint-disable-next-line react-hooks/incompatible-library
+
         const field1Value = watch('field1');
         const field2Value = watch('field2');
 

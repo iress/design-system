@@ -58,7 +58,7 @@ export const useSandboxCanvasProps = ({
     addonConfig.current = parameters?.[ADDON_ID] as AddonConfig;
   });
 
-  const getTsxFiles = useCallback(() => {
+  const getTsxFiles = useCallback((): IFiles => {
     // If no custom source code, use the main template
     if (!docsConfig?.source?.code) {
       return {
@@ -66,7 +66,7 @@ export const useSandboxCanvasProps = ({
           content: sandboxCode.current ?? '',
           isBinary: false,
         },
-      } as IFiles;
+      };
     }
 
     // If custom source code exists, use the custom template

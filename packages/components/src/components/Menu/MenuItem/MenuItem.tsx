@@ -349,7 +349,6 @@ const MenuItem = <
   );
 
   const classes = useMemo(
-    // eslint-disable-next-line react-hooks/refs -- popover uses elementRef.current; exhaustive deps warning is intentionally suppressed
     () =>
       menuItem({
         active: !!popover?.isActiveActivator(elementRef.current as HTMLElement),
@@ -491,7 +490,6 @@ const MenuItem = <
         >
           <Component
             aria-label={childrenLabel}
-            // eslint-disable-next-line react-hooks/refs -- we are forwarding the ref
             {...spreadUnlessUndefined(renderProps, nonStyleProps as object)}
             {...buttonProps}
           />
@@ -501,7 +499,6 @@ const MenuItem = <
 
     return (
       <Component
-        // eslint-disable-next-line react-hooks/refs -- we are forwarding the ref
         {...spreadUnlessUndefined(renderProps, nonStyleProps as object)}
         {...buttonProps}
       />

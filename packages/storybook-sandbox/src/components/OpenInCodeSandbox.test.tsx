@@ -71,13 +71,13 @@ describe('OpenInCodeSandbox', () => {
 
     vi.mocked(useParameter).mockImplementation(
       (key: string, defaultValue: unknown) => {
-        if (key === 'docs') return {} as Record<string, unknown>;
+        if (key === 'docs') return {};
         if (key === ADDON_ID)
           return {
             html: '<div id="root"></div>',
             template: 'import React from "react";\n<Story />',
             ...(defaultValue as Record<string, unknown>),
-          } as Record<string, unknown>;
+          };
         return defaultValue;
       },
     );
@@ -206,7 +206,7 @@ describe('OpenInCodeSandbox', () => {
   it('includes additional dependencies from config', () => {
     vi.mocked(useParameter).mockImplementation(
       (key: string, defaultValue: unknown) => {
-        if (key === 'docs') return {} as Record<string, unknown>;
+        if (key === 'docs') return {};
         if (key === ADDON_ID)
           return {
             ...(defaultValue as Record<string, unknown>),
@@ -235,7 +235,7 @@ describe('OpenInCodeSandbox', () => {
   it('includes additional files from config', () => {
     vi.mocked(useParameter).mockImplementation(
       (key: string, defaultValue: unknown) => {
-        if (key === 'docs') return {} as Record<string, unknown>;
+        if (key === 'docs') return {};
         if (key === ADDON_ID)
           return {
             ...(defaultValue as Record<string, unknown>),
@@ -267,7 +267,7 @@ describe('OpenInCodeSandbox', () => {
   it('uses custom HTML from config', () => {
     vi.mocked(useParameter).mockImplementation(
       (key: string, defaultValue: unknown) => {
-        if (key === 'docs') return {} as Record<string, unknown>;
+        if (key === 'docs') return {};
         if (key === ADDON_ID)
           return {
             ...(defaultValue as Record<string, unknown>),

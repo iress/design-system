@@ -295,12 +295,12 @@ describe('borderCssShorthand', () => {
       // Create a token that simulates an already transformed string value
       const stringToken: TransformedToken = {
         ...baseToken,
-        $value: '2px solid #FFFFFF' as unknown as CompositeValue['border'],
+        $value: '2px solid #FFFFFF',
         name: 'test.border',
         path: ['test', 'border'],
         original: {
           ...baseToken,
-          $value: '2px solid #FFFFFF' as unknown as CompositeValue['border'],
+          $value: '2px solid #FFFFFF',
         },
         filePath: '',
         isSource: false,

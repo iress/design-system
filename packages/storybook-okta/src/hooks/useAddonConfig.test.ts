@@ -90,7 +90,7 @@ describe('useAddonConfig', () => {
 
       vi.spyOn(process, 'env', 'get').mockReturnValue({
         IDS_OKTA: JSON.stringify(previewConfig),
-      } as NodeJS.ProcessEnv);
+      });
 
       const { result } = renderHook(() => useAddonConfigForManager());
 
@@ -98,7 +98,7 @@ describe('useAddonConfig', () => {
     });
 
     it('initializes with undefined when no preview config available', () => {
-      vi.spyOn(process, 'env', 'get').mockReturnValue({} as NodeJS.ProcessEnv);
+      vi.spyOn(process, 'env', 'get').mockReturnValue({});
 
       const { result } = renderHook(() => useAddonConfigForManager());
 
@@ -128,7 +128,7 @@ describe('useAddonConfig', () => {
       const { result } = renderHook(() => useAddonConfigForManager());
 
       // Initially undefined (assuming no env config)
-      vi.spyOn(process, 'env', 'get').mockReturnValue({} as NodeJS.ProcessEnv);
+      vi.spyOn(process, 'env', 'get').mockReturnValue({});
 
       act(() => {
         channelCallback(mockAddonConfig);
@@ -333,7 +333,7 @@ describe('useAddonConfig', () => {
 
       vi.spyOn(process, 'env', 'get').mockReturnValue({
         IDS_OKTA: JSON.stringify(envConfig),
-      } as NodeJS.ProcessEnv);
+      });
 
       const result = getAddonConfigForPreview();
 
@@ -341,7 +341,7 @@ describe('useAddonConfig', () => {
     });
 
     it('returns undefined when IDS_OKTA is not set', () => {
-      vi.spyOn(process, 'env', 'get').mockReturnValue({} as NodeJS.ProcessEnv);
+      vi.spyOn(process, 'env', 'get').mockReturnValue({});
 
       const result = getAddonConfigForPreview();
 
@@ -378,7 +378,7 @@ describe('useAddonConfig', () => {
 
       vi.spyOn(process, 'env', 'get').mockReturnValue({
         IDS_OKTA: JSON.stringify(complexConfig),
-      } as NodeJS.ProcessEnv);
+      });
 
       const result = getAddonConfigForPreview();
 
@@ -396,7 +396,7 @@ describe('useAddonConfig', () => {
 
       vi.spyOn(process, 'env', 'get').mockReturnValue({
         IDS_OKTA: JSON.stringify(previewConfig),
-      } as NodeJS.ProcessEnv);
+      });
 
       const { result } = renderHook(() => useAddonConfigForManager());
 
@@ -412,7 +412,7 @@ describe('useAddonConfig', () => {
 
       vi.spyOn(process, 'env', 'get').mockReturnValue({
         IDS_OKTA: JSON.stringify(previewConfig),
-      } as NodeJS.ProcessEnv);
+      });
 
       let channelCallback: (options: AddonConfig) => void = () => {};
 
