@@ -80,6 +80,11 @@ When mapping Figma components to IDS, read [references/component-mapping.md](ref
 
 When converting Figma design values (colours, spacing, radius, typography) to IDS tokens, read [references/token-mapping.md](references/token-mapping.md).
 
+For neutral text colours, treat `colour.neutral.90` as a backwards-compatible
+alias of `colour.neutral.80` (both resolve to `#141F4D`). Prefer
+`colour.neutral.80` in new IDS implementations, but handle either token name
+when translating older Figma files.
+
 ## Translation Examples
 
 ### Figma: Login Form Frame
