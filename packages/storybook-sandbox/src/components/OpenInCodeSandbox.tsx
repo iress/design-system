@@ -28,27 +28,26 @@ export const OpenInCodeSandbox = ({
   });
 
   const tsxFiles = useMemo<IFiles>(() => {
-    // If no custom source code, use the main template
-    if (!docsConfig?.source?.code) {
-      return {
-        'index.tsx': {
-          content: source ?? '',
-          isBinary: false,
-        },
-      } as IFiles;
-    }
-
-    // If custom source code exists, use the custom template
-    return {
+    const files: IFiles = {
       'index.tsx': {
-        content: OpenInCodeSandboxCustomTemplate,
-        isBinary: false,
-      },
-      'component.tsx': {
-        content: source,
+        content: source ?? '',
         isBinary: false,
       },
     };
+
+    // If custom source code exists, use the custom template
+    if (docsConfig?.source?.code) {
+      files['index.tsx'] = {
+        content: OpenInCodeSandboxCustomTemplate,
+        isBinary: false,
+      };
+      files['component.tsx'] = {
+        content: source,
+        isBinary: false,
+      };
+    }
+
+    return files;
   }, [docsConfig, source]);
 
   const handlePreviewSnippet = useCallback(

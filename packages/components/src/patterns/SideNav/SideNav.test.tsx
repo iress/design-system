@@ -17,12 +17,12 @@ import type { SideNavItem } from './SideNav';
 const renderSideNav = (props: Partial<IressSideNavProps> = {}) =>
   render(
     <IressSideNav
-      {...({
+      {...{
         items: MOCK_SIDE_NAV_ITEMS,
         activeItemKey: 'hubs',
         'data-testid': 'sidenav',
         ...props,
-      } as IressSideNavProps)}
+      }}
     />,
   );
 

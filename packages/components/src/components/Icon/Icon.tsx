@@ -96,9 +96,8 @@ export const IressIcon = <P extends IconType = 'material'>({
   // Compute Material Symbol icon name once (with auto-mapping from Font Awesome names)
   let materialIconName: MaterialSymbol | undefined;
   if (effectiveProvider === 'material') {
-    materialIconName = (FA_TO_MATERIAL_MAP[
-      name as FontAwesomeIconWithMaterialEquivalent
-    ] ?? name) as MaterialSymbol;
+    materialIconName =
+      FA_TO_MATERIAL_MAP[name as FontAwesomeIconWithMaterialEquivalent] ?? name;
   }
 
   // Register Material Symbol icons with provider context if available

@@ -88,7 +88,7 @@ export const OktaGuard = ({ api }: OktaGuardProps) => {
             api.addNotification({
               id: 'okta-login-error',
               content: {
-                headline: String(error as Error),
+                headline: String(error),
               },
             });
           }
