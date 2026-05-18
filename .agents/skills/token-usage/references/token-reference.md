@@ -26,7 +26,7 @@ Neutral colours apply to most backgrounds, text, and shapes in our experiences. 
 | `colour.neutral.60` | `--iress-colour-neutral-60` | `#828F9D` | Used for placeholder text in form controls and disabled states. | — | neutral.80, neutral.90 |
 | `colour.neutral.70` | `--iress-colour-neutral-70` | `#5D6C7E` | Used for muted text such as hints and descriptions to allow for content hierarchy. | `muted` | neutral.10, neutral.20 |
 | `colour.neutral.80` | `--iress-colour-neutral-80` | `#141F4D` | Used as the default text colour for most components. For tooltips, it is used as the background colour. This token now uses the previous Neutral 90 value to improve visual hierarchy. | `text` | neutral.10, neutral.20, neutral.30, neutral.40 |
-| `colour.neutral.90` | `--iress-colour-neutral-90` | `#141F4D` | Backwards-compatible alias for colour.neutral.80. Use colour.neutral.80 for new work; this token resolves to the same value. | `text` | neutral.10, neutral.20, neutral.30, neutral.40 |
+| `colour.neutral.90` | `--iress-colour-neutral-90` | `#141F4D` | Backwards-compatible alias for colour.neutral.80. Prefer colour.neutral.80 for new work; this token resolves to the same value. | — | neutral.10, neutral.20, neutral.30, neutral.40 |
 
 ### Primary
 

@@ -201,11 +201,10 @@ const colour = {
     },
     90: {
       $description:
-        'Backwards-compatible alias for colour.neutral.80. Use colour.neutral.80 for new work; this token resolves to the same value.',
+        'Backwards-compatible alias for colour.neutral.80. Prefer colour.neutral.80 for new work; this token resolves to the same value.',
       $type: Type.Color,
       $value: '#141F4D',
       $extensions: {
-        'iress.aliases': ['text'],
         'iress.contrast.AA': [
           'colour.neutral.10',
           'colour.neutral.20',
