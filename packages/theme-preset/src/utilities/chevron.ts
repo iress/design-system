@@ -20,7 +20,7 @@ export const selectChevron = defineUtility({
           value === true
             ? 'translateY(-50%)'
             : 'translateY(-50%) rotate(180deg)',
-        backgroundColor: `var(--iress-chevron-color, ${cssVars.colour.neutral[90]})`,
+        backgroundColor: `var(--iress-chevron-color, ${cssVars.colour.neutral[80]})`,
         pointerEvents: 'none',
       },
       '&[aria-expanded="true"]:after, [aria-expanded="true"] > &:after': {

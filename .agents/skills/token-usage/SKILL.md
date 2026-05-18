@@ -316,7 +316,7 @@ import { cssVars } from '@iress-oss/ids-tokens';
   style={{
     background: cssVars.colour.neutral[10],
     border: `1px solid ${cssVars.colour.neutral[30]}`,
-    color: cssVars.colour.neutral[90],
+    color: cssVars.colour.neutral[80],
     padding: cssVars.spacing[4],
     gap: cssVars.spacing[2],
     borderRadius: cssVars.radius[3],
