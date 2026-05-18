@@ -116,13 +116,7 @@ export const IressRadioGroup: RadioGroupWithEnums = forwardRef<
 
     // Uses pure helper for focus transition decision (testable in isolation)
     const handleBlur: FocusEventHandler<HTMLDivElement> = (e) => {
-      if (
-        shouldFireRadioGroupBlur(
-          divRef.current,
-          e.relatedTarget as Node | null,
-          e.target,
-        )
-      ) {
+      if (shouldFireRadioGroupBlur(divRef.current, e.relatedTarget, e.target)) {
         onBlur?.(e);
       }
     };

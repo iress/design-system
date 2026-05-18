@@ -68,7 +68,7 @@ describe('IressInput', () => {
       );
     });
 
-    await userEvent.click(getByRole('button') as HTMLButtonElement);
+    await userEvent.click(getByRole('button'));
     await waitFor(() => {
       expect(input.value).toBe('');
     });

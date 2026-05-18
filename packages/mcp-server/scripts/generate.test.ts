@@ -928,7 +928,7 @@ describe('generate.ts', () => {
         turndown: vi.fn().mockReturnValue('# Test content'),
       };
       MockedTurndownService.mockImplementation(function (this: unknown) {
-        return mockTurndownInstance as unknown as TurndownService;
+        return mockTurndownInstance;
       });
 
       const result = await generateDocumentation({ force: false });

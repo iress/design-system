@@ -172,7 +172,7 @@ export const IressLoadingSuspense = ({
     <>
       {showFallback && (
         <IressLoading
-          pattern={pattern as never}
+          pattern={pattern}
           loaded={loaded}
           {...(restProps as object)}
         />

@@ -37,6 +37,7 @@ export const IressExpander: ExpanderWithEnums = ({
   });
 
   useEffect((): void => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsOpen(open);
   }, [open]);
 

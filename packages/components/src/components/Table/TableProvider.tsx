@@ -29,6 +29,7 @@ const TableProvider = <TRow extends object, TVal = unknown>(
     return composeIDSTableColumnDefs(rows, columns);
   }, [columns, rows]);
 
+  // eslint-disable-next-line react-hooks/incompatible-library -- TanStack Table is intentionally used here
   const api = useReactTable({
     columns: columnDefinitions,
     data: rows,

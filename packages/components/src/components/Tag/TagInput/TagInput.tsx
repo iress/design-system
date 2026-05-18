@@ -1,6 +1,6 @@
 import { forwardRef, useCallback, useState } from 'react';
 import { type IressTagInputProps } from './TagInput.types';
-import { type InputBaseElement, type InputRef } from '@/components/Input';
+import { type InputRef } from '@/components/Input';
 import { useControlledState } from '@/hooks/useControlledState';
 import { TagListInput } from '../components/TagListInput/TagListInput';
 import { getValueAsEvent } from '@/helpers/form/getValueAsEvent';
@@ -58,7 +58,7 @@ export const IressTagInput = forwardRef(
         onChange?.(getValueAsEvent(newValue), newValue);
         setValue(newValue);
       } else if (e.key === 'Enter') {
-        const inputElement = e.currentTarget as InputBaseElement;
+        const inputElement = e.currentTarget;
         updateTags(inputElement.value);
         setQuery('');
       }

@@ -40,7 +40,7 @@ const addHideClassesForTick = (
         ),
       },
     }),
-    { ...tickLabel, className: {} as Record<string, boolean> },
+    { ...tickLabel, className: {} },
   );
 };
 

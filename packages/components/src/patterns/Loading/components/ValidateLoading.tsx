@@ -68,6 +68,7 @@ export const ValidateLoading = ({
 
   useEffect(() => {
     if (!loading) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowMessage(false);
       return;
     }
