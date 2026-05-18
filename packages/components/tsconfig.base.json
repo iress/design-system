@@ -36,6 +36,7 @@
 
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
+    "rootDir": "..",
     "declaration": true,
     "paths": {
       "@/*": ["src/*"],
