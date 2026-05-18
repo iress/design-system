@@ -35,7 +35,7 @@ export const OpenInCodeSandbox = ({
           content: source ?? '',
           isBinary: false,
         },
-      } as IFiles;
+      };
     }
 
     // If custom source code exists, use the custom template

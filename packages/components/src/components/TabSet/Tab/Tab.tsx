@@ -178,7 +178,6 @@ const Tab = <THref extends string | undefined = undefined>(
     }
   }, [register, unregister, value]);
 
-  // eslint-disable-next-line react-hooks/refs -- forwards ref
   const isActive = tabSet ? tabSet.isActive(element.current) : active;
 
   // Scroll into view when tab becomes active (for keyboard navigation)

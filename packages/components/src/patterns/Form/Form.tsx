@@ -18,9 +18,7 @@ const Form = <T extends FieldValues, TContext = object>(
     );
   }
 
-  return (
-    <ShortForm {...(restProps as ShortFormProps<T, TContext>)} ref={ref} />
-  );
+  return <ShortForm {...restProps} ref={ref} />;
 };
 
 Form.displayName = 'IressForm';

@@ -335,12 +335,12 @@ describe('shadowCssShorthand', () => {
       // Create a token that simulates an already transformed string value
       const stringToken: TransformedToken = {
         ...baseShadowToken,
-        $value: '0px 2px 4px #000000' as unknown as CompositeValue['shadow'],
+        $value: '0px 2px 4px #000000',
         name: 'test.shadow',
         path: ['test', 'shadow'],
         original: {
           ...baseShadowToken,
-          $value: '0px 2px 4px #000000' as unknown as CompositeValue['shadow'],
+          $value: '0px 2px 4px #000000',
         },
         filePath: '',
         isSource: false,

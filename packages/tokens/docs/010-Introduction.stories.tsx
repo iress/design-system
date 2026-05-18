@@ -196,7 +196,7 @@ const mapTokensToMetadata = (tokens: IressTokenSchema) => {
         };
       } else {
         // If the token does not have a type, it means it is a group, so we iterate over it
-        iterate(value as IressTokenSchema);
+        iterate(value);
       }
 
       // We remove the last path element to go back to the parent token
@@ -211,7 +211,7 @@ const mapTokensToMetadata = (tokens: IressTokenSchema) => {
     readonly = [
       (value as IressDesignToken).$extensions?.['iress.readonly'] ?? false,
     ];
-    iterate(value as IressTokenSchema);
+    iterate(value);
   }
 
   return tokenMetadata;

@@ -6,7 +6,7 @@ import componentVersions from './component-versions.json' with { type: 'json' };
 
 const basePreview = getPreview({
   docsProps: {
-    componentMapping: componentMapping as never,
+    componentMapping,
     noStyles: true,
   },
   sandboxConfig: {

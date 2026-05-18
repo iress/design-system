@@ -71,7 +71,7 @@ describe('IressInput', () => {
       );
     });
 
-    await userEvent.click(getByRole('button') as HTMLButtonElement);
+    await userEvent.click(getByRole('button'));
     await waitFor(() => {
       expect(input.value).toBe('');
     });
@@ -90,7 +90,7 @@ describe('IressInput', () => {
     await userEvent.type(input, 'test');
     handleChange.mockClear();
 
-    await userEvent.click(getByRole('button') as HTMLButtonElement);
+    await userEvent.click(getByRole('button'));
     await waitFor(() => {
       expect(handleChange).toHaveBeenCalledWith(
         expect.objectContaining({

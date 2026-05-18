@@ -243,7 +243,6 @@ export const IressSlideout = ({
 
   const pushElementHookConfig = useMemo(
     () => ({
-      // eslint-disable-next-line react-hooks/refs -- we want to forward the ref
       element: pushElement.current ?? null,
       isActive: mode === 'push',
       position,

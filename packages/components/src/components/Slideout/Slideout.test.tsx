@@ -116,7 +116,7 @@ function disableAnimations() {
         if (prop === 'transition-duration') return '0s';
         return computedStyle.getPropertyValue(prop);
       },
-    } as CSSStyleDeclaration;
+    };
   };
 
   if (!animationStyleTag) {

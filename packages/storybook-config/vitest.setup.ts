@@ -60,5 +60,5 @@ if (typeof window !== 'undefined') {
   };
 
   // Replace the original method
-  document.createElement = customCreateElement as Document['createElement'];
+  document.createElement = customCreateElement;
 }

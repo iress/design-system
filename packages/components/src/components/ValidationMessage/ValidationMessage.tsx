@@ -83,7 +83,7 @@ export const IressValidationMessage = <
   <IressText
     color={`colour.system.${status}.text`}
     display="block"
-    {...(restProps as IressTextProps<ValidationElement<TLinkToTarget>>)}
+    {...restProps}
     element={linkToTarget ? 'a' : 'div'}
     href={linkToTarget ? `#${linkToTarget}` : undefined}
     onClick={(e: MouseEvent<ValidationInstance<TLinkToTarget>>) => {

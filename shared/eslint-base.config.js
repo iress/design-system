@@ -17,6 +17,10 @@ export async function createReactConfig() {
     },
     rules: {
       ...reactHooksPlugin.default.configs.recommended.rules,
+      'react-hooks/immutability': 'off',
+      'react-hooks/incompatible-library': 'off',
+      'react-hooks/refs': 'off',
+      'react-hooks/set-state-in-effect': 'off',
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },

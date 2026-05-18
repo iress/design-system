@@ -547,7 +547,7 @@ const Select = <
       if (!onBlur) return;
 
       // Check if the related target (where focus is moving to) is outside the IressField component
-      const currentTarget = event.currentTarget as HTMLElement;
+      const currentTarget = event.currentTarget;
       const relatedTarget = event.relatedTarget as HTMLElement;
 
       // If there's no related target or it's not contained within the current field component
@@ -648,7 +648,7 @@ const Select = <
         name={name}
         renderHiddenInput={renderHiddenInput}
         required={required}
-        value={value as ControlledValue<LabelValueMeta, TMultiple>}
+        value={value}
         disabled={disabled}
         ref={hiddenInputRef}
       />
@@ -675,7 +675,7 @@ const Select = <
             setValue={setValue}
             setShow={setShow}
             show={show}
-            value={value as ControlledValue<LabelValueMeta, TMultiple>}
+            value={value}
           />
         }
         align={align}
@@ -715,7 +715,7 @@ const Select = <
             shouldShowInstructions={shouldShowInstructions}
             shouldShowNoResults={shouldShowNoResults}
             show={showPopover}
-            value={value as ControlledValue<LabelValueMeta, TMultiple>}
+            value={value}
           />
           {footer}
         </div>

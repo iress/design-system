@@ -7,7 +7,7 @@ const makeArtifacts = (code: string): Artifact[] => [
   {
     id: 'css-fn',
     files: [{ file: 'css.mjs', code }],
-  } as Artifact,
+  },
 ];
 
 describe('codegenPrepareHook', () => {
