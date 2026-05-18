@@ -83,7 +83,8 @@ export const IressValidationMessage = <
   <IressText
     color={`colour.system.${status}.text`}
     display="block"
-    {...restProps}
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- required to satisfy generic spread typing for IressText
+    {...(restProps as IressTextProps<ValidationElement<TLinkToTarget>>)}
     element={linkToTarget ? 'a' : 'div'}
     href={linkToTarget ? `#${linkToTarget}` : undefined}
     onClick={(e: MouseEvent<ValidationInstance<TLinkToTarget>>) => {
