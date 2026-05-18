@@ -306,7 +306,7 @@ export function handleListComponents(args: unknown) {
     output += `**Foundations (${categorized.foundations.length})**\n${foundationsList}\n\n`;
     output += `**Resources (${categorized.resources.length})**\n${resourcesList}`;
   } else {
-    const items = categorized[category as keyof typeof categorized];
+    const items = categorized[category];
     const itemsList = items.map((c) => `- ${c}`).join('\n');
     const categoryTitle = category.charAt(0).toUpperCase() + category.slice(1);
 

@@ -133,7 +133,7 @@ export const IressRichSelect = forwardRef(
         if (!onBlur) return;
 
         // Check if the related target (where focus is moving to) is outside the IressField component
-        const currentTarget = event.currentTarget as HTMLElement;
+        const currentTarget = event.currentTarget;
         const relatedTarget = event.relatedTarget as HTMLElement;
 
         // If there's no related target or it's not contained within the current field component

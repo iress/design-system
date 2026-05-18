@@ -106,6 +106,7 @@ export const IressTableBody = <TRow extends object = never, TVal = never>({
     children ?? (empty && hasColumns(columns)) ?? !!rows?.length;
 
   useEffect((): void => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsOpen(open);
   }, [open]);
 
