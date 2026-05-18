@@ -172,7 +172,8 @@ export const IressLoadingSuspense = ({
     <>
       {showFallback && (
         <IressLoading
-          pattern={pattern}
+          // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- required for discriminated union compatibility
+          pattern={pattern as never}
           loaded={loaded}
           {...(restProps as object)}
         />

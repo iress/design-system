@@ -27,7 +27,7 @@ const getRelativeWidthOfTick = (
 const addHideClassesForTick = (
   tickLabel: SliderTickLabelValue,
 ): SliderTickLabelValueWithClassName => {
-  return BREAKPOINTS.reduce(
+  return BREAKPOINTS.reduce<SliderTickLabelValueWithClassName>(
     (tickWithClasses, breakpoint, index) => ({
       ...tickWithClasses,
       className: {
