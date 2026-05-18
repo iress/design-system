@@ -21,7 +21,7 @@ export const menuItem = sva({
 
       '&:active': {
         bg: 'colour.neutral.30',
-        color: 'colour.neutral.90',
+        color: 'colour.neutral.80',
       },
     },
     contents: {
@@ -150,7 +150,7 @@ export const menuItem = sva({
         root: {
           _focusVisible: {
             bg: 'colour.neutral.30',
-            color: 'colour.neutral.90',
+            color: 'colour.neutral.80',
             outline: '[0]',
           },
         },
@@ -159,7 +159,7 @@ export const menuItem = sva({
     selected: {
       true: {
         root: {
-          color: 'colour.neutral.90',
+          color: 'colour.neutral.80',
           position: 'relative',
 
           _after: {

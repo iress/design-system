@@ -14,7 +14,6 @@ interface ColourSchema extends IressDesignTokenGroup {
     60: IressDesignToken;
     70: IressDesignToken;
     80: IressDesignToken;
-    90: IressDesignToken;
   };
   primary: IressDesignTokenGroup & {
     fill: IressDesignToken;
@@ -109,11 +108,7 @@ const colour = {
       $value: '#FFFFFF',
       $extensions: {
         'iress.aliases': ['page'],
-        'iress.contrast.AA': [
-          'colour.neutral.70',
-          'colour.neutral.80',
-          'colour.neutral.90',
-        ],
+        'iress.contrast.AA': ['colour.neutral.70', 'colour.neutral.80'],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -124,11 +119,7 @@ const colour = {
       $value: '#F5F6F8',
       $extensions: {
         'iress.aliases': ['alt'],
-        'iress.contrast.AA': [
-          'colour.neutral.70',
-          'colour.neutral.80',
-          'colour.neutral.90',
-        ],
+        'iress.contrast.AA': ['colour.neutral.70', 'colour.neutral.80'],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -138,7 +129,7 @@ const colour = {
       $type: Type.Color,
       $value: '#E2E6EA',
       $extensions: {
-        'iress.contrast.AA': ['colour.neutral.80', 'colour.neutral.90'],
+        'iress.contrast.AA': ['colour.neutral.80'],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -148,7 +139,7 @@ const colour = {
       $type: Type.Color,
       $value: '#CFD5DA',
       $extensions: {
-        'iress.contrast.AA': ['colour.neutral.80', 'colour.neutral.90'],
+        'iress.contrast.AA': ['colour.neutral.80'],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -158,7 +149,7 @@ const colour = {
       $type: Type.Color,
       $value: '#A8B2BB',
       $extensions: {
-        'iress.contrast.AA': ['colour.neutral.80', 'colour.neutral.90'],
+        'iress.contrast.AA': ['colour.neutral.80'],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -168,7 +159,7 @@ const colour = {
       $type: Type.Color,
       $value: '#828F9D',
       $extensions: {
-        'iress.contrast.AA': ['colour.neutral.80', 'colour.neutral.90'],
+        'iress.contrast.AA': ['colour.neutral.80'],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -189,22 +180,7 @@ const colour = {
       $type: Type.Color,
       $value: '#141F4D',
       $extensions: {
-        'iress.aliases': ['text'],
-        'iress.contrast.AA': [
-          'colour.neutral.10',
-          'colour.neutral.20',
-          'colour.neutral.30',
-          'colour.neutral.40',
-        ],
-        'styler.panel': 'colour.neutral',
-      },
-    },
-    90: {
-      $description:
-        'Backwards-compatible alias for colour.neutral.80. Prefer colour.neutral.80 for new work; this token resolves to the same value.',
-      $type: Type.Color,
-      $value: '#141F4D',
-      $extensions: {
+        'iress.aliases': ['text', 'colour.neutral.90'],
         'iress.contrast.AA': [
           'colour.neutral.10',
           'colour.neutral.20',
@@ -386,7 +362,6 @@ const colour = {
           'iress.contrast.AA': [
             'colour.system.success.text',
             'colour.neutral.80',
-            'colour.neutral.90',
           ],
           'styler.panel': 'colour.system.success',
         },
@@ -399,7 +374,6 @@ const colour = {
           'iress.contrast.AA': [
             'colour.system.success.text',
             'colour.neutral.80',
-            'colour.neutral.90',
           ],
           'styler.panel': 'colour.system.success',
         },
@@ -456,7 +430,6 @@ const colour = {
           'iress.contrast.AA': [
             'colour.system.danger.text',
             'colour.neutral.80',
-            'colour.neutral.90',
           ],
           'styler.panel': 'colour.system.danger',
         },
@@ -469,7 +442,6 @@ const colour = {
           'iress.contrast.AA': [
             'colour.system.danger.text',
             'colour.neutral.80',
-            'colour.neutral.90',
           ],
           'styler.panel': 'colour.system.danger',
         },
@@ -524,7 +496,6 @@ const colour = {
           'iress.contrast.AA': [
             'colour.system.warning.text',
             'colour.neutral.80',
-            'colour.neutral.90',
           ],
           'styler.panel': 'colour.system.warning',
         },
@@ -537,7 +508,6 @@ const colour = {
           'iress.contrast.AA': [
             'colour.system.warning.text',
             'colour.neutral.80',
-            'colour.neutral.90',
           ],
           'styler.panel': 'colour.system.warning',
         },
@@ -588,11 +558,7 @@ const colour = {
         $type: Type.Color,
         $value: '#E5EEFF',
         $extensions: {
-          'iress.contrast.AA': [
-            'colour.system.info.text',
-            'colour.neutral.80',
-            'colour.neutral.90',
-          ],
+          'iress.contrast.AA': ['colour.system.info.text', 'colour.neutral.80'],
           'styler.panel': 'colour.system.info',
         },
       },
@@ -601,11 +567,7 @@ const colour = {
         $type: Type.Color,
         $value: '#CCDEFF',
         $extensions: {
-          'iress.contrast.AA': [
-            'colour.system.info.text',
-            'colour.neutral.80',
-            'colour.neutral.90',
-          ],
+          'iress.contrast.AA': ['colour.system.info.text', 'colour.neutral.80'],
           'styler.panel': 'colour.system.info',
         },
       },
@@ -631,11 +593,7 @@ const colour = {
         $type: Type.Color,
         $value: '#FFE6F2',
         $extensions: {
-          'iress.contrast.AA': [
-            'colour.data.bold.10',
-            'colour.neutral.80',
-            'colour.neutral.90',
-          ],
+          'iress.contrast.AA': ['colour.data.bold.10', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },
@@ -644,11 +602,7 @@ const colour = {
         $type: Type.Color,
         $value: '#FEEAFF',
         $extensions: {
-          'iress.contrast.AA': [
-            'colour.data.bold.20',
-            'colour.neutral.80',
-            'colour.neutral.90',
-          ],
+          'iress.contrast.AA': ['colour.data.bold.20', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },
@@ -657,11 +611,7 @@ const colour = {
         $type: Type.Color,
         $value: '#F1E6FF',
         $extensions: {
-          'iress.contrast.AA': [
-            'colour.data.bold.30',
-            'colour.neutral.80',
-            'colour.neutral.90',
-          ],
+          'iress.contrast.AA': ['colour.data.bold.30', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },
@@ -670,11 +620,7 @@ const colour = {
         $type: Type.Color,
         $value: '#E5F5FF',
         $extensions: {
-          'iress.contrast.AA': [
-            'colour.data.bold.40',
-            'colour.neutral.80',
-            'colour.neutral.90',
-          ],
+          'iress.contrast.AA': ['colour.data.bold.40', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },
@@ -683,11 +629,7 @@ const colour = {
         $type: Type.Color,
         $value: '#E6EEFF',
         $extensions: {
-          'iress.contrast.AA': [
-            'colour.data.bold.50',
-            'colour.neutral.80',
-            'colour.neutral.90',
-          ],
+          'iress.contrast.AA': ['colour.data.bold.50', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },
@@ -696,11 +638,7 @@ const colour = {
         $type: Type.Color,
         $value: '#C8D7FF',
         $extensions: {
-          'iress.contrast.AA': [
-            'colour.data.bold.60',
-            'colour.neutral.80',
-            'colour.neutral.90',
-          ],
+          'iress.contrast.AA': ['colour.data.bold.60', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },
@@ -710,11 +648,7 @@ const colour = {
         $type: Type.Color,
         $value: '#E4FFFD',
         $extensions: {
-          'iress.contrast.AA': [
-            'colour.data.bold.70',
-            'colour.neutral.80',
-            'colour.neutral.90',
-          ],
+          'iress.contrast.AA': ['colour.data.bold.70', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },
@@ -723,11 +657,7 @@ const colour = {
         $type: Type.Color,
         $value: '#BADFD4',
         $extensions: {
-          'iress.contrast.AA': [
-            'colour.data.bold.80',
-            'colour.neutral.80',
-            'colour.neutral.90',
-          ],
+          'iress.contrast.AA': ['colour.data.bold.80', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },
@@ -736,11 +666,7 @@ const colour = {
         $type: Type.Color,
         $value: '#ECECEC',
         $extensions: {
-          'iress.contrast.AA': [
-            'colour.data.bold.90',
-            'colour.neutral.80',
-            'colour.neutral.90',
-          ],
+          'iress.contrast.AA': ['colour.data.bold.90', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },

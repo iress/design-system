@@ -30,7 +30,7 @@ export const radio = sva({
     },
     content: {
       font: 'inherit',
-      color: 'colour.neutral.90',
+      color: 'colour.neutral.80',
     },
     heading: {
       display: 'block',

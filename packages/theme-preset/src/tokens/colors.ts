@@ -34,8 +34,9 @@ export const colors = {
     value: cssVars.colour.neutral['80'],
   },
   'colour.neutral.90': {
-    description: colour.neutral['90'].$description,
-    value: cssVars.colour.neutral['90'],
+    description: colour.neutral['80'].$description,
+    value: cssVars.colour.neutral['80'],
+    deprecated: true,
   },
   'colour.primary.fill': {
     description: colour.primary.fill.$description,

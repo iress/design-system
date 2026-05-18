@@ -69,7 +69,7 @@ export const input = sva({
       paddingInline: 'spacing.3',
       paddingBlock: 'spacing.1',
       textStyle: 'typography.body.md',
-      color: 'colour.neutral.90',
+      color: 'colour.neutral.80',
       display: 'block',
       boxSizing: 'border-box',
       flex: 'auto',
@@ -113,8 +113,8 @@ export const input = sva({
 
       _active: {
         bg: 'colour.neutral.10',
-        borderColor: 'colour.neutral.90',
-        boxShadow: '{colors.colour.neutral.90} 0px 0px 0px 1px',
+        borderColor: 'colour.neutral.80',
+        boxShadow: '{colors.colour.neutral.80} 0px 0px 0px 1px',
       },
     },
   },

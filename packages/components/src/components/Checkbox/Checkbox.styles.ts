@@ -28,7 +28,7 @@ export const checkbox = sva({
     },
     content: {
       font: 'inherit',
-      color: 'colour.neutral.90',
+      color: 'colour.neutral.80',
     },
     mark: {
       color: '[currentColor]',

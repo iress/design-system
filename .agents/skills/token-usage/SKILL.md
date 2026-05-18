@@ -11,7 +11,7 @@ license: Apache-2.0
 compatibility: React 18+, TypeScript, @iress-oss/ids-tokens@beta
 metadata:
   author: iress
-  version: "1.0"
+  version: '1.0'
 ---
 
 # Skill: IDS Token Usage
@@ -175,8 +175,8 @@ import { convertReferencesToVariables } from '@iress-oss/ids-tokens/convertRefer
 | ----------------- | ---------------------------- | --------------------------- |
 | Page background   | `colour.neutral.10`          | `bg="colour.neutral.10"`    |
 | Subtle background | `colour.neutral.20`          | `bg="colour.neutral.20"`    |
-| Default text      | `colour.neutral.90`          | `color="colour.neutral.90"` |
-| Secondary text    | `colour.neutral.80`          | `color="colour.neutral.80"` |
+| Default text      | `colour.neutral.80`          | `color="colour.neutral.80"` |
+| Secondary text    | `colour.neutral.70`          | `color="colour.neutral.70"` |
 | Borders           | `colour.neutral.30`          | _Use component props_       |
 | Primary action    | `colour.primary.fill`        | _Use Button mode="primary"_ |
 | Success indicator | `colour.system.success.fill` | _Use Alert/Tag status_      |
@@ -424,15 +424,15 @@ Layout components accept responsive objects for spacing props:
 
 ## Decision Table: Component Props vs CSS Variables vs cssVars
 
-| Situation                        | Use                                             |
-| -------------------------------- | ----------------------------------------------- |
-| Spacing on IDS layout components | Props: `gap`, `p`, `m`                          |
-| Colours on IDS components        | Props: `bg`, `color`                            |
+| Situation                        | Use                                                         |
+| -------------------------------- | ----------------------------------------------------------- |
+| Spacing on IDS layout components | Props: `gap`, `p`, `m`                                      |
+| Colours on IDS components        | Props: `bg`, `color`                                        |
 | Custom CSS / SCSS                | CSS variables (`var(--colour-*)`, `var(--spacing-*)`, etc.) |
-| Inline styles / CSS-in-JS        | `cssVars` object (`cssVars.colour.neutral[10]`) |
-| Custom CSS with Panda CSS        | `@iress-oss/ids-theme-preset` preset            |
-| Theming / overrides              | CSS variables on custom properties              |
-| Internal theme editors           | `mapTokensToCssVariables()` helper              |
+| Inline styles / CSS-in-JS        | `cssVars` object (`cssVars.colour.neutral[10]`)             |
+| Custom CSS with Panda CSS        | `@iress-oss/ids-theme-preset` preset                        |
+| Theming / overrides              | CSS variables on custom properties                          |
+| Internal theme editors           | `mapTokensToCssVariables()` helper                          |
 
 **General Rule:** Prefer component props when available. For custom styling, use CSS variables in stylesheets or `cssVars` in JavaScript. Only use `mapTokensToCssVariables` / `convertReferencesToVariables` for internal tooling like theme editors.
 
