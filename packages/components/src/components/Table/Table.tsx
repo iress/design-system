@@ -151,9 +151,14 @@ export const IressTable = <TRow extends object = never, TVal = never>({
   const hasContent = (empty && columns?.length) ?? !!rows?.length;
   const showTable = children ?? hasContent;
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const tableElRef = useRef<HTMLTableElement | null>(null);
+  const theadElRef = useRef<HTMLElement | null>(null);
+  // Force re-render so virtualizer picks up scrollContainerRef
   const [, setScrollReady] = useState(false);
   const scrollCallbackRef = useCallback((node: HTMLDivElement | null) => {
     scrollContainerRef.current = node;
+    tableElRef.current = node?.querySelector('table') ?? null;
+    theadElRef.current = node?.querySelector('thead') ?? null;
     setScrollReady(!!node);
   }, []);
 
@@ -175,15 +180,13 @@ export const IressTable = <TRow extends object = never, TVal = never>({
       typeof virtualise === 'object' ? virtualise.height : undefined;
     const height =
       typeof rawHeight === 'number' ? `${rawHeight}px` : (rawHeight ?? '400px');
-    return { height, maxHeight: '100%' };
+    return { height };
   }, [virtualise]);
 
   const handleScroll = useCallback((e: UIEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
-    const tableEl = el.querySelector('table');
-    const theadEl = el.querySelector('thead');
-    const offset = tableEl?.offsetTop
-      ? tableEl?.offsetTop - (theadEl?.offsetHeight ?? 0)
+    const offset = tableElRef.current?.offsetTop
+      ? tableElRef.current.offsetTop - (theadElRef.current?.offsetHeight ?? 0)
       : 0;
     if (el.scrollTop > offset) {
       el.setAttribute('data-scrolled', '');
