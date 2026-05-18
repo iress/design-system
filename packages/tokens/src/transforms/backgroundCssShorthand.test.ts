@@ -230,12 +230,12 @@ describe('backgroundCssShorthand', () => {
       // Create a token that simulates an already transformed string value
       const stringToken: TransformedToken = {
         ...baseToken,
-        $value: '#FFFFFF' as unknown as CompositeValue['background'],
+        $value: '#FFFFFF',
         name: 'test.background',
         path: ['test', 'background'],
         original: {
           ...baseToken,
-          $value: '#FFFFFF' as unknown as CompositeValue['background'],
+          $value: '#FFFFFF',
         },
         filePath: '',
         isSource: false,

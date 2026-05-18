@@ -6,11 +6,7 @@ import {
   TableColumnFilterHookProps,
   useTableColumnFilter,
 } from './useTableColumnFilter';
-import {
-  TableContext,
-  TableContextValue,
-  TableProviderProps,
-} from '../TableProvider';
+import { TableContext, TableProviderProps } from '../TableProvider';
 
 const columnApi = {
   getCanFilter: () => true,
@@ -53,15 +49,13 @@ function renderHookInTable(
   return renderHook(() => useTableColumnFilter(props), {
     wrapper: ({ children }: PropsWithChildren) => (
       <TableContext.Provider
-        value={
-          {
-            api: mockApi,
-            getColumnByKey: (key: string) =>
-              (wrapperProps.columns ?? columns).find(
-                (column) => column.key === key,
-              ),
-          } as TableContextValue<object, unknown>
-        }
+        value={{
+          api: mockApi,
+          getColumnByKey: (key: string) =>
+            (wrapperProps.columns ?? columns).find(
+              (column) => column.key === key,
+            ),
+        }}
       >
         {children}
       </TableContext.Provider>

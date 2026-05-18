@@ -44,7 +44,7 @@ const isHeading = <E extends TextElements = 'div'>(
         'typography.heading.3',
         'typography.heading.4',
         'typography.heading.5',
-      ].includes(textStyle as string))
+      ].includes(textStyle))
   );
 };
 

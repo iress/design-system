@@ -172,7 +172,7 @@ const RadioGroup = <T = FormControlValue,>(
   const handleBlur: FocusEventHandler<HTMLDivElement> = (e) => {
     // Only trigger onBlur if the focus is leaving the group
     // and not just moving between radios within the group.
-    if (e.relatedTarget && !divRef.current?.contains(e.relatedTarget as Node)) {
+    if (e.relatedTarget && !divRef.current?.contains(e.relatedTarget)) {
       onBlur?.(e);
     }
   };

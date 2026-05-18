@@ -49,7 +49,6 @@ const Component = <TMultiple extends boolean = false>(
   ref: ForwardedRef<HTMLInputElement>,
 ) => {
   if (renderHiddenInput)
-    // eslint-disable-next-line react-hooks/refs -- we want to forward the ref
     return renderHiddenInput({
       getValuesString,
       value,

@@ -27,7 +27,6 @@ export const HookFormExample = () => {
   const form = useForm<FieldValues>();
   const { watch, control } = form;
 
-  // eslint-disable-next-line react-hooks/incompatible-library
   const firstName = watch('firstName');
   const lastName = watch('lastName');
   const insuredAtPolicyLevel = watch('insuredAtPolicyLevel');

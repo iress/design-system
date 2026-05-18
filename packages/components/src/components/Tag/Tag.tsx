@@ -146,7 +146,7 @@ export const IressTag = <E extends ElementType = 'span'>({
       )}
       data-testid={dataTestId}
       {...(StyledElement === 'button' ? { type: 'button' as const } : {})}
-      {...(nonStyleProps as object)}
+      {...nonStyleProps}
     >
       <span ref={contentRef} className={classes.content}>
         {children}

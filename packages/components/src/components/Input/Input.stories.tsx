@@ -118,9 +118,7 @@ export const FileType: Story = {
           {...args}
           onChange={(e) =>
             success({
-              content: `File uploaded: ${
-                (e.target as HTMLInputElement).files?.[0].name
-              }`,
+              content: `File uploaded: ${e.target.files?.[0].name}`,
             })
           }
         />
