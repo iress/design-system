@@ -1,8 +1,9 @@
 import { cleanup } from '@testing-library/react';
-import '@testing-library/jest-dom/vitest';
+import * as jestDomMatchers from '@testing-library/jest-dom/matchers';
 import { toHaveNoViolations } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 
+expect.extend(jestDomMatchers);
 expect.extend(toHaveNoViolations);
 
 const idsLoggerMock = vi.fn();
