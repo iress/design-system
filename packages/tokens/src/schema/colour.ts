@@ -14,6 +14,7 @@ interface ColourSchema extends IressDesignTokenGroup {
     60: IressDesignToken;
     70: IressDesignToken;
     80: IressDesignToken;
+    90: IressDesignToken;
   };
   primary: IressDesignTokenGroup & {
     fill: IressDesignToken;
@@ -108,7 +109,11 @@ const colour = {
       $value: '#FFFFFF',
       $extensions: {
         'iress.aliases': ['page'],
-        'iress.contrast.AA': ['colour.neutral.70', 'colour.neutral.80'],
+        'iress.contrast.AA': [
+          'colour.neutral.70',
+          'colour.neutral.80',
+          'colour.neutral.90',
+        ],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -119,7 +124,11 @@ const colour = {
       $value: '#F5F6F8',
       $extensions: {
         'iress.aliases': ['alt'],
-        'iress.contrast.AA': ['colour.neutral.70', 'colour.neutral.80'],
+        'iress.contrast.AA': [
+          'colour.neutral.70',
+          'colour.neutral.80',
+          'colour.neutral.90',
+        ],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -129,7 +138,7 @@ const colour = {
       $type: Type.Color,
       $value: '#E2E6EA',
       $extensions: {
-        'iress.contrast.AA': ['colour.neutral.80'],
+        'iress.contrast.AA': ['colour.neutral.80', 'colour.neutral.90'],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -139,7 +148,7 @@ const colour = {
       $type: Type.Color,
       $value: '#CFD5DA',
       $extensions: {
-        'iress.contrast.AA': ['colour.neutral.80'],
+        'iress.contrast.AA': ['colour.neutral.80', 'colour.neutral.90'],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -149,7 +158,7 @@ const colour = {
       $type: Type.Color,
       $value: '#A8B2BB',
       $extensions: {
-        'iress.contrast.AA': ['colour.neutral.80'],
+        'iress.contrast.AA': ['colour.neutral.80', 'colour.neutral.90'],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -159,7 +168,7 @@ const colour = {
       $type: Type.Color,
       $value: '#828F9D',
       $extensions: {
-        'iress.contrast.AA': ['colour.neutral.80'],
+        'iress.contrast.AA': ['colour.neutral.80', 'colour.neutral.90'],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -181,6 +190,23 @@ const colour = {
       $value: '#141F4D',
       $extensions: {
         'iress.aliases': ['text', 'colour.neutral.90'],
+        'iress.contrast.AA': [
+          'colour.neutral.10',
+          'colour.neutral.20',
+          'colour.neutral.30',
+          'colour.neutral.40',
+        ],
+        'styler.panel': 'colour.neutral',
+      },
+    },
+    90: {
+      $deprecated:
+        'Use colour.neutral.80 instead. This token is a backwards-compatible alias and will be removed in a future major version.',
+      $description:
+        'Deprecated alias for colour.neutral.80. Resolves to the same value (#141F4D).',
+      $type: Type.Color,
+      $value: '#141F4D',
+      $extensions: {
         'iress.contrast.AA': [
           'colour.neutral.10',
           'colour.neutral.20',
