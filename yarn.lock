@@ -1761,7 +1761,7 @@ __metadata:
     "@iress-oss/ids-storybook-toggle-stories": "npm:^0.1.0"
     "@iress-oss/ids-storybook-version-badge": "npm:^0.1.1"
     "@mermaid-js/mermaid-cli": "npm:^11.12.0"
-    "@size-limit/file": "npm:12.0.1"
+    "@size-limit/file": "npm:12.1.0"
     "@storybook/addon-a11y": "npm:10.3.6"
     "@storybook/addon-docs": "npm:10.3.6"
     "@storybook/react-vite": "npm:10.3.6"
@@ -3302,12 +3302,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@size-limit/file@npm:12.0.1":
-  version: 12.0.1
-  resolution: "@size-limit/file@npm:12.0.1"
+"@size-limit/file@npm:12.1.0":
+  version: 12.1.0
+  resolution: "@size-limit/file@npm:12.1.0"
   peerDependencies:
-    size-limit: 12.0.1
-  checksum: 10c0/36a4d44786d3c953361cd3b482ef98fa7d6f4580ed499d2432d11b1be24055005b897746a1aad25218c6904f6cab5037b104acf4c2e3a4ca182f34ebcb428747
+    size-limit: 12.1.0
+  checksum: 10c0/14d9fb0267e56520cb960008631ef4b037a1085bbb34ac8e509d3cf3391578234129e5ffc3acc6f4eedfb69282e7499b407518e5d0765cc8d7d4e7b76baba569
   languageName: node
   linkType: hard
 
