@@ -1427,8 +1427,8 @@ __metadata:
     postcss: "npm:8.5.14"
     prettier: "npm:^3.8.2"
     query-selector-shadow-dom: "npm:1.0.1"
-    react: "npm:^19.2.5"
-    react-dom: "npm:^19.2.5"
+    react: "npm:^19.2.6"
+    react-dom: "npm:^19.2.6"
     react-dropzone: "npm:15.0.0"
     react-hook-form: "npm:7.72.1"
     rimraf: "npm:^6.1.3"
@@ -1493,9 +1493,9 @@ __metadata:
     json5: "npm:^2.2.3"
     prettier: "npm:^3.8.2"
     radash: "npm:12.1.1"
-    react: "npm:^19.2.5"
+    react: "npm:^19.2.6"
     react-diff-viewer: "npm:^3.1.1"
-    react-dom: "npm:^19.2.5"
+    react-dom: "npm:^19.2.6"
     react-element-to-jsx-string: "npm:^17.0.1"
     react-is: "npm:^19.2.6"
     remark-gfm: "npm:^4.0.1"
@@ -1553,8 +1553,8 @@ __metadata:
     eslint-plugin-mdx: "npm:3.7.0"
     eslint-plugin-prettier: "npm:^5.5.5"
     prettier: "npm:^3.8.2"
-    react: "npm:^19.2.5"
-    react-dom: "npm:^19.2.5"
+    react: "npm:^19.2.6"
+    react-dom: "npm:^19.2.6"
     rimraf: "npm:6.1.3"
     storybook: "npm:10.3.6"
     tsup: "npm:^8.5.1"
@@ -1590,8 +1590,8 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.5.5"
     lz-string: "npm:^1.5.0"
     prettier: "npm:^3.8.2"
-    react: "npm:^19.2.5"
-    react-dom: "npm:^19.2.5"
+    react: "npm:^19.2.6"
+    react-dom: "npm:^19.2.6"
     rimraf: "npm:6.1.3"
     storybook: "npm:10.3.6"
     tsup: "npm:^8.5.1"
@@ -1627,8 +1627,8 @@ __metadata:
     eslint-plugin-mdx: "npm:3.7.0"
     eslint-plugin-prettier: "npm:^5.5.5"
     prettier: "npm:^3.8.2"
-    react: "npm:^19.2.5"
-    react-dom: "npm:^19.2.5"
+    react: "npm:^19.2.6"
+    react-dom: "npm:^19.2.6"
     rimraf: "npm:6.1.3"
     storybook: "npm:10.3.6"
     tsup: "npm:^8.5.1"
@@ -1662,8 +1662,8 @@ __metadata:
     eslint-plugin-mdx: "npm:3.7.0"
     eslint-plugin-prettier: "npm:^5.5.5"
     prettier: "npm:^3.8.2"
-    react: "npm:^19.2.5"
-    react-dom: "npm:^19.2.5"
+    react: "npm:^19.2.6"
+    react-dom: "npm:^19.2.6"
     rimraf: "npm:6.1.3"
     storybook: "npm:10.3.6"
     tsup: "npm:^8.5.1"
@@ -1725,8 +1725,8 @@ __metadata:
     nodemon: "npm:^3.1.14"
     prettier: "npm:^3.8.2"
     radash: "npm:^12.1.1"
-    react: "npm:^19.2.5"
-    react-dom: "npm:^19.2.5"
+    react: "npm:^19.2.6"
+    react-dom: "npm:^19.2.6"
     remark-gfm: "npm:^4.0.1"
     rimraf: "npm:^6.1.3"
     rollup-plugin-tree-shakeable: "npm:^2.0.0"
@@ -1785,8 +1785,8 @@ __metadata:
     pinst: "npm:^3.0.0"
     prettier: "npm:^3.8.2"
     puppeteer: "npm:^24.43.0"
-    react: "npm:^19.2.5"
-    react-dom: "npm:^19.2.5"
+    react: "npm:^19.2.6"
+    react-dom: "npm:^19.2.6"
     size-limit: "npm:12.1.0"
     storybook: "npm:10.3.6"
     storybook-addon-tag-badges: "npm:^3.1.0"
@@ -8244,9 +8244,9 @@ __metadata:
   linkType: hard
 
 "hono@npm:^4.11.4":
-  version: 4.12.21
-  resolution: "hono@npm:4.12.21"
-  checksum: 10c0/2d26049eadc7dc879f7a442e127bea5c896b029050dc9fb81c950c190d5bd15da66a161b5132331451584d6a596a59162200f8840e796ddb9ae34a0e358e48a7
+  version: 4.12.16
+  resolution: "hono@npm:4.12.16"
+  checksum: 10c0/3afee13722bf574780a641bd6d8812663c650fb7ac86df390f2d90293e1a6e2413aa9c45e4bc5b626a29c1b534fdb8353dd2151aab09bc4a95cd277aad4bd5c7
   languageName: node
   linkType: hard
 
@@ -11940,14 +11940,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react-dom@npm:^19.2.3, react-dom@npm:^19.2.5":
-  version: 19.2.5
-  resolution: "react-dom@npm:19.2.5"
+"react-dom@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react-dom@npm:^19.2.3, react-dom@npm:^19.2.6":
+  version: 19.2.6
+  resolution: "react-dom@npm:19.2.6"
   dependencies:
     scheduler: "npm:^0.27.0"
   peerDependencies:
-    react: ^19.2.5
-  checksum: 10c0/8067606e9f58e4c2e8cb5f09570217dbc71c4843ebcaa20ae2085912d3e3a351f17d8f7c1713313cdda7f272840c8c34ff6c860fcb840862071bceea218e0c63
+    react: ^19.2.6
+  checksum: 10c0/dbf2aef67857c03a612bc9316a4562e5066f43fa04bf28f7f0734963fc1350da2c9f8eb973930655453281079f30cc8222bab383dbec4b5097084e2c081e3334
   languageName: node
   linkType: hard
 
@@ -12031,10 +12031,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react@npm:^19.2.3, react@npm:^19.2.5":
-  version: 19.2.5
-  resolution: "react@npm:19.2.5"
-  checksum: 10c0/4b5f231dbef92886f602533c9ce3bde04d99f0e71dfb5d794c43e02726efaad0421c08688f75fc98a6d6e1dc017372e1af7abbfecdc86a79968f461675931a7a
+"react@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react@npm:^19.2.3, react@npm:^19.2.6":
+  version: 19.2.6
+  resolution: "react@npm:19.2.6"
+  checksum: 10c0/66afde33b9a9ee87b1e1cae39d8e7e040d1262e719524fd70660c4d4ce79929c532ac19fc3df5a911edaf02768fdf2c49de4ede1ba99bc6aad72796e0e26e798
   languageName: node
   linkType: hard
 
