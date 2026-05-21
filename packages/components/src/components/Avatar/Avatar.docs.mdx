@@ -1,0 +1,84 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  ComponentOverview,
+  ComponentExample,
+} from '@iress-oss/ids-storybook-config';
+import * as ComponentStories from './Avatar.stories';
+import * as GroupStories from './AvatarGroup/AvatarGroup.stories';
+
+<Meta of={ComponentStories} />
+
+# Avatar
+
+<ComponentOverview
+  description="Avatars display user identity in a circular frame, with optional badge and type indicators."
+  of={ComponentStories.Default}
+  meta={ComponentStories}
+/>
+
+## When to use
+
+Use avatars to **represent users or entities** in your interface:
+
+- Displaying user profile identity (initials, icons, or images)
+- Showing assignment or ownership of items
+- Indicating shared/joint entities with the `type` icon
+- Stacking multiple users with `AvatarGroup`
+
+## Examples
+
+### Badge
+
+Pass a `badge` object with an `icon` name and optional `mode` colour to show an indicator at the top-right.
+
+<ComponentExample of={ComponentStories.WithBadge} />
+
+### Badge with colour
+
+The badge `mode` accepts any value from the data palette (10-90) or system status spectrum (`danger`, `info`, `success`, `warning`).
+
+<ComponentExample of={ComponentStories.WithBadgeColor} />
+
+### Type
+
+Pass a `type` object with an `icon` name to display a secondary circle at the bottom-right, useful for indicating shared entities or roles.
+
+<ComponentExample of={ComponentStories.WithType} />
+
+### Mode
+
+The `mode` prop controls the avatar's background and text colour using the data palette (10-90) or system status colours.
+
+<ComponentExample of={ComponentStories.Mode} />
+
+### Compact
+
+Set `compact={true}` for a smaller avatar with a white stroke border, designed for stacking.
+
+<ComponentExample of={ComponentStories.Compact} />
+
+## Avatar Group
+
+Use `IressAvatarGroup` to stack multiple avatars with proper overlap and z-ordering. The first avatar appears in the foreground.
+
+<ComponentExample of={GroupStories.Compact} />
+
+### Max avatars
+
+Set `max` to limit visible avatars. An overflow indicator shows the remaining count.
+
+<ComponentExample of={GroupStories.MaxAvatars} />
+
+### Custom overflow label
+
+Pass a render prop to `overflowLabel` for full control over the overflow indicator.
+
+<ComponentExample of={GroupStories.CustomOverflowLabel} />
+
+## Testing
+
+Query avatars by their accessible role and label:
+
+```tsx
+const avatar = screen.getByRole('img', { name: 'Baron-Cohen, Sacha' });
+```
