@@ -1,6 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { stylingProps } from '@iress-oss/ids-storybook-config';
-import { IressAvatar, IressInline } from '@/main';
+import { IressAvatar, IressIcon, IressInline } from '@/main';
 
 type Story = StoryObj<typeof IressAvatar>;
 
@@ -65,7 +65,7 @@ export const Mode: Story = {
         40
       </IressAvatar>
       <IressAvatar {...args} mode={50}>
-        50
+        <IressIcon name="star" filled aria-label="I am a star" />
       </IressAvatar>
     </IressInline>
   ),
