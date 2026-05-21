@@ -84,7 +84,7 @@
     "prettier": "^3.8.2",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-is": "^19.2.5",
+    "react-is": "^19.2.6",
     "rimraf": "^6.1.3",
     "rollup-plugin-tree-shakeable": "^2.0.0",
     "storybook": "10.3.6",
