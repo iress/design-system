@@ -122,7 +122,11 @@ export const IressAvatar = ({
       role="img"
       aria-labelledby={labelId}
     >
-      <span className={classes.initials} id={labelId}>
+      <span
+        className={classes.initials}
+        id={labelId}
+        aria-label={restProps['aria-label']}
+      >
         {children}
       </span>
       {badge && (

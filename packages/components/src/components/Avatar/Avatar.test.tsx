@@ -13,6 +13,12 @@ describe('IressAvatar', () => {
     expect(el).toHaveTextContent('BC');
   });
 
+  it('tests with a different name', () => {
+    render(<IressAvatar aria-label="Luke Skywalker">LS</IressAvatar>);
+    const el = screen.getByRole('img', { name: 'Luke Skywalker' });
+    expect(el).toBeInTheDocument();
+  });
+
   describe('props', () => {
     describe('badge', () => {
       it('renders badge with icon', () => {

@@ -52,19 +52,19 @@ export const WithType: Story = {
 export const Mode: Story = {
   render: (args) => (
     <IressInline gap="xs">
-      <IressAvatar {...args} aria-label="A" mode={10}>
+      <IressAvatar {...args} mode={10}>
         10
       </IressAvatar>
-      <IressAvatar {...args} aria-label="B" mode={20}>
+      <IressAvatar {...args} mode={20}>
         20
       </IressAvatar>
-      <IressAvatar {...args} aria-label="C" mode={30}>
+      <IressAvatar {...args} mode={30}>
         30
       </IressAvatar>
-      <IressAvatar {...args} aria-label="D" mode={40}>
+      <IressAvatar {...args} mode={40}>
         40
       </IressAvatar>
-      <IressAvatar {...args} aria-label="E" mode={50}>
+      <IressAvatar {...args} mode={50}>
         50
       </IressAvatar>
     </IressInline>
