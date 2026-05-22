@@ -62,7 +62,9 @@ export const IressAvatarGroup = ({
           className={classes.item}
           style={{ zIndex: total - index }}
         >
-          {compact && isValidElement<IressAvatarProps>(child) && child.type === IressAvatar
+          {compact &&
+          isValidElement<IressAvatarProps>(child) &&
+          child.type === IressAvatar
             ? cloneElement(child, { compact: true })
             : child}
         </span>
