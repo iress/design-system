@@ -5,7 +5,7 @@ import { IressAvatar, IressAvatarGroup } from '@/main';
 type Story = StoryObj<typeof IressAvatarGroup>;
 
 export default {
-  title: 'Components/Avatar/Avatar Group',
+  title: 'Components/Avatar/AvatarGroup',
   component: IressAvatarGroup,
   argTypes: {
     ...stylingProps,

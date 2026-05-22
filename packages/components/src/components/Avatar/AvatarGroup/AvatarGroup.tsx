@@ -4,7 +4,7 @@ import { splitCssProps } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 import { avatarGroup } from './AvatarGroup.styles';
 import type { IressStyledProps } from '@/types';
-import type { IressAvatarProps } from '../Avatar';
+import { IressAvatar, type IressAvatarProps } from '../Avatar';
 
 export interface IressAvatarGroupProps extends IressStyledProps<'div'> {
   /** Avatar components to stack. */
@@ -62,7 +62,7 @@ export const IressAvatarGroup = ({
           className={classes.item}
           style={{ zIndex: total - index }}
         >
-          {compact && isValidElement<IressAvatarProps>(child)
+          {compact && isValidElement<IressAvatarProps>(child) && child.type === IressAvatar
             ? cloneElement(child, { compact: true })
             : child}
         </span>

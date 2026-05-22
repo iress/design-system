@@ -13,7 +13,7 @@ describe('IressAvatar', () => {
     expect(el).toHaveTextContent('BC');
   });
 
-  it('tests with a different name', () => {
+  it('uses aria-label as accessible name when provided', () => {
     render(<IressAvatar aria-label="Luke Skywalker">LS</IressAvatar>);
     const el = screen.getByRole('img', { name: 'Luke Skywalker' });
     expect(el).toBeInTheDocument();

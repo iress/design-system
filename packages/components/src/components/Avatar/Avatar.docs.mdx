@@ -80,9 +80,11 @@ Pass a render prop to `overflowLabel` for full control over the overflow indicat
 Query avatars by their accessible role and label:
 
 ```tsx
-// Test <IressAvatar>BT</IressAvatar>
+// Accessible name defaults to text content
+// <IressAvatar>LS</IressAvatar>
 const avatar = screen.getByRole('img', { name: 'LS' });
 
-// Test with a more unique name: <IressAvatar aria-label="Luke Skywalker">LS</IressAvatar>
+// Or use aria-label for a custom accessible name
+// <IressAvatar aria-label="Luke Skywalker">LS</IressAvatar>
 const avatar = screen.getByRole('img', { name: 'Luke Skywalker' });
 ```

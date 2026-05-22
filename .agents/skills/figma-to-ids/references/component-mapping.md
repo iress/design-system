@@ -43,6 +43,8 @@
 | Table              | `IressTable`                                 | Data-driven: `rows`, `columns`, `caption` props |
 | Tag                | `IressTag`                                   | `bordered` for visible border; `element="button"` for clickable, `element="a"` for link; `onClick` alone also auto-renders as button |
 | Pill               | `IressPill`                                  |                            |
+| Avatar             | `IressAvatar`                                | `mode` for colour, `badge` for status indicator, `type` for secondary icon |
+| CompactAvatar      | `IressAvatarGroup` + `IressAvatar compact`   | `max` limits visible; `overflowLabel` render prop for overflow |
 | Tooltip            | `IressTooltip`                               |                            |
 | Icon               | `IressIcon name="..."`                       | Material Symbols name      |
 | Divider            | `IressDivider`                               |                            |

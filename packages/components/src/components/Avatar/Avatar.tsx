@@ -101,7 +101,7 @@ export const IressAvatar = ({
   const classes = avatar({ compact, mode: mode as AvatarCssMode });
   const styles = avatar.raw({
     badgeMode:
-      typeof badge === 'object'
+      typeof badge === 'object' && badge.mode
         ? (String(badge.mode) as AvatarCssMode)
         : undefined,
     compact,
