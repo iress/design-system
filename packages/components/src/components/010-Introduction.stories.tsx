@@ -16,6 +16,7 @@ import {
 import { useState, useMemo, Suspense } from 'react';
 
 import alert from './Alert/meta';
+import avatar from './Avatar/meta';
 import autocomplete from './Autocomplete/meta';
 import button from './Button/meta';
 import buttonGroup from './ButtonGroup/meta';
@@ -69,6 +70,7 @@ const components: {
   Thumbnail: React.FC;
 }[] = [
   alert,
+  avatar,
   autocomplete,
   button,
   buttonGroup,
