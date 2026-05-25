@@ -22,7 +22,7 @@ export const nativeSelect = sva({
     },
     element: {
       textStyle: 'typography.body.md',
-      color: 'colour.neutral.90',
+      color: 'colour.neutral.80',
       display: 'block',
       width: '12/12',
       height: 'input.innerHeight',

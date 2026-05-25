@@ -41,15 +41,15 @@ export const focusable = defineUtility({
           },
         '&:has(input:focus:not(:disabled), textarea:focus:not(:disabled), select:focus:not(:disabled), [contenteditable="true"]:focus:not([aria-disabled="true"]))':
           {
-            borderColor: `var(--iress-border-color, ${cssVars.colour.neutral[90]})`,
-            boxShadow: `var(--iress-shadow-focus, 0 0 0 1px var(--iress-border-color, ${cssVars.colour.neutral[90]}))`,
+            borderColor: `var(--iress-border-color, ${cssVars.colour.neutral[80]})`,
+            boxShadow: `var(--iress-shadow-focus, 0 0 0 1px var(--iress-border-color, ${cssVars.colour.neutral[80]}))`,
 
             '&:hover': {
               background: cssVars.colour.neutral[10],
             },
 
             '& .ids-input__addon': {
-              color: cssVars.colour.neutral[90],
+              color: cssVars.colour.neutral[80],
             },
           },
       };
@@ -143,8 +143,8 @@ export const focusable = defineUtility({
         '&:focus-within, &:active, &[aria-expanded="true"]': {
           backgroundColor: cssVars.colour.neutral[10],
           outline: 'none',
-          borderColor: `var(--iress-border-color, ${cssVars.colour.neutral[90]})`,
-          boxShadow: `0 0 0 1px var(--iress-border-color, ${cssVars.colour.neutral[90]})`,
+          borderColor: `var(--iress-border-color, ${cssVars.colour.neutral[80]})`,
+          boxShadow: `0 0 0 1px var(--iress-border-color, ${cssVars.colour.neutral[80]})`,
         },
         '&:disabled, &[aria-disabled="true"]': {
           backgroundColor: cssVars.colour.neutral[30],

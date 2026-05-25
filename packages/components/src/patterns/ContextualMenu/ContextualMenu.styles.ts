@@ -8,7 +8,7 @@ export const contextualMenu = sva({
       position: 'relative',
     },
     trigger: {
-      color: 'colour.neutral.90',
+      color: 'colour.neutral.80',
       transition: 'all',
     },
     menu: {

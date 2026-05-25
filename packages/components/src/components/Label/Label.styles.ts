@@ -5,7 +5,7 @@ export const label = sva({
   base: {
     root: {
       display: 'block',
-      color: 'colour.neutral.90',
+      color: 'colour.neutral.80',
     },
     required: {
       color: 'colour.system.danger.text',
