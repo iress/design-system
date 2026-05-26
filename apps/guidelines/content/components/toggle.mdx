@@ -1,0 +1,145 @@
+export const meta = {
+  title: 'Toggle',
+  description: 'Toggles allow users to turn things on or off. When toggled, the associated change happens straight away.',
+  component: 'IressToggle',
+  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs',
+};
+
+# Toggle
+
+Toggles allow users to turn things on or off. When toggled, the associated change happens straight away.
+
+```tsx
+import { IressToggle } from '@iress-oss/ids-components';
+```
+
+## Quick Start
+
+```tsx
+import { IressToggle } from '@iress-oss/ids-components';
+
+<IressToggle defaultChecked={false} hiddenLabel={false} layout="inline">
+  Toggle
+</IressToggle>
+```
+
+## Usage
+
+Toggles are typically on / off switches, similar to a household light switch. They allow users to choose between two mutually exclusive options, and will always have a default value.
+
+The `IressToggle` component should only be used for actions that happen immediately, for example switching a device's WiFi connection on or off.
+
+> [!WARNING]
+> **Don't use Toggles in forms**
+>
+> Toggles shouldn’t be used as part of a form as they don’t have the correct
+>   semantics, and won’t submit a value when the form data is submitted. If you
+>   need a toggleable component in a form, use a checkbox or radio group instead.
+
+### Labels
+
+Toggles should always have a label, which is set via its `children`.
+
+```tsx
+<IressToggle defaultChecked={false} hiddenLabel={false} layout="inline">
+  Toggle
+</IressToggle>
+```
+
+[View "Default" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-toggle--default)
+
+### Hidden labels
+
+Labels can be hidden via the `hiddenLabel` prop; this will hide the label from view, but it'll still be available to screen reader users.
+
+```tsx
+<IressToggle hiddenLabel />
+```
+
+[View "HiddenLabel" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-toggle--hidden-label)
+
+### Checked
+
+The on / off state of the toggle can be controlled by setting the `checked` prop (for controlled components). If you want an uncontrolled component, you can set the `defaultChecked` prop instead to set it checked by default.
+
+```tsx
+<ControlledToggle />
+```
+
+[View "Checked" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-toggle--checked)
+
+### Layout
+
+The `layout` prop allows you to control the position of the label in relation to the control. The default layout is `inline`, but you can also choose the following options:',
+
+- `inline-between` similar to inline, but this positions the label and control at opposite ends of their container
+- `inline-reverse` renders the label after the control instead of before the control
+- `stack` positions the label above the control
+
+```tsx
+<IressStack gap="lg">
+<IressText>
+<h3>inline</h3>
+<IressPanel bg="alt">
+<IressToggle layout="inline">
+Toggle
+</IressToggle>
+</IressPanel>
+</IressText>
+<IressText>
+<h3>inline-between</h3>
+<IressPanel bg="alt">
+<IressToggle layout="inline-between" checked>
+Toggle
+</IressToggle>
+</IressPanel>
+</IressText>
+<IressText>
+<h3>inline-reverse</h3>
+<IressPanel bg="alt">
+<IressToggle layout="inline-reverse">
+Toggle
+</IressToggle>
+</IressPanel>
+</IressText>
+<IressText>
+<h3>stack</h3>
+<IressPanel bg="alt">
+<IressToggle layout="stack" checked>
+Toggle
+</IressToggle>
+</IressPanel>
+</IressText>
+</IressStack>
+```
+
+[View "Layout" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-toggle--layout)
+
+## Testing
+
+Query the toggle by its `switch` role (not `checkbox`):
+
+```tsx
+const toggle = screen.getByRole('switch', { name: 'Dark mode' });
+await user.click(toggle);
+expect(toggle).toBeChecked();
+```
+
+### Gotchas
+
+- **Role is `switch`, not `checkbox`**: Although the toggle looks like a
+  checkbox, it uses `role="switch"`. Use `getByRole('switch')`.
+
+### Test IDs
+
+When you pass a `data-testid` to `IressToggle`, the following nested test IDs
+are generated automatically:
+
+| Suffix | Example | Description |
+| --- | --- | --- |
+| `label` | `my-toggle__label` | The toggle label element |
+| `button__button` | `my-toggle__button__button` | The toggle switch button |
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs)

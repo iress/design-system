@@ -1,0 +1,674 @@
+export const meta = {
+  title: 'Migrating from v5 to v6',
+  description: 'This guide covers all breaking changes, deprecations, and new features introduced in version 6 of the Iress Design System. While the list is extensive, most changes relate to look-and-feel rather than code.',
+  category: 'guide',
+  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-v5-to-v6--docs',
+};
+
+# Migrating from v5 to v6
+
+This guide covers all breaking changes, deprecations, and new features introduced in version 6 of the Iress Design System. While the list is extensive, most changes relate to look-and-feel rather than code.
+
+---
+
+## Overview
+
+### Optimised token system
+
+The design token count has been reduced from **940 to 88**, focusing on the essentials required to rebrand an application from a client style guide — similar to the original global tokens in previous IDS versions.
+
+The new token system enables closer brand parity, including:
+
+- Custom **remote font stylesheets** attached to a theme
+- An **accent colour** to further emphasise a client's brand
+- **Radius tokens** controlled at group level (badge, button, form, layout)
+
+**What this means in practice:**
+
+- Border widths and styles are no longer customisable via tokens. Inputs will always have a `1px` border; tabs always look the same except for colours and radius.
+- Animations and transitions have been removed from theme customisation.
+- Old themes have been translated to the new tokens as closely as possible, but minor visual inconsistencies may appear where tokens are now hard-coded.
+
+### Default theme
+
+Version 6 ships with a **fully styled Iress-branded default theme**. Loading a theme is now **optional** — only required for theme switching (e.g. multi-client applications) or backwards compatibility with older IDS versions.
+
+### Styling props
+
+Utility classes (e.g. `iress-hide--sm`) and internal component tokens (e.g. `--iress-text-color`) have been replaced with **global styling props** available on every component.
+
+```tsx
+// Padding and margin via props
+<IressPanel p="lg" m="xl" bg="alt" />
+
+// Responsive values
+<IressPanel p={{ base: 'sm', xl: 'lg' }} bg="alt" />
+```
+
+Utility classes for components have been changed to functions:
+
+```tsx
+// Apply Panel styling to a native div
+<div className={panel()} />
+```
+
+> **Note:** Styling props only accept design token values. For custom values, use standard CSS. Not every internal component token has a matching styling prop — only those needed for rebranding.
+
+### Cascade layers
+
+All component CSS now lives in its own cascade layer, making overrides straightforward. However, un-layered CSS now takes priority over component styles by default.
+
+To control priority, declare your own layer order:
+
+```css
+@layer reset, base, tokens, recipes, utilities;
+```
+
+### Panda CSS (for contributors)
+
+SASS modules have been replaced with [Panda CSS](https://panda-css.com/) for type-safe styles and styling props. See the updated contributing guidelines for details.
+
+---
+
+## Component changes
+
+### Alert
+
+| Change                 | Details                                                                         |
+| ---------------------- | ------------------------------------------------------------------------------- |
+| Removed `headingLevel` | Use a native heading tag inside the `heading` prop                              |
+| Removed `headingText`  | Use the `heading` prop                                                          |
+| Deprecated `footer`    | Use `actions` or `children` instead                                             |
+| New `actions`          | Styled buttons based on alert status. Accepts `IressButtonProps[]`              |
+| New `icon`             | Change or remove the icon                                                       |
+| New `variant`          | Change alert style depending on context                                         |
+| New `onDismiss`        | Add dismiss functionality                                                       |
+| New `multiLine`        | Display on multiple lines for longer content (single row after `md` by default) |
+
+### Autocomplete
+
+| Change                   | Details                                              |
+| ------------------------ | ---------------------------------------------------- |
+| Removed `watermark`      | No longer supported                                  |
+| Hook: `options` required | `options` is now required in `useAutocompleteSearch` |
+| Hook: `displayResults`   | Removed from hook return                             |
+
+### Badge → Pill (renamed)
+
+`IressBadge` has been renamed to `IressPill`. Use the new component.
+
+### Button
+
+| Change                             | Details                                                                        |
+| ---------------------------------- | ------------------------------------------------------------------------------ |
+| Removed `attrs`                    | Pass attributes directly to the component                                      |
+| Removed `link` mode                | Use other button modes for actions, or the new `IressLink` for paragraph links |
+| Removed `danger` mode              | Use `status="danger"`                                                          |
+| Removed `positive` mode            | Use `status="success"`                                                         |
+| Removed `negative` mode            | Use `status="danger"`                                                          |
+| New `quaternary` and `muted` modes | —                                                                              |
+| New `element` prop                 | Render as a custom component (e.g. React Router `Link`, Next.js `Link`)        |
+| New `icon` prop                    | Render an icon-only button with even padding. `children` becomes the tooltip   |
+
+### ButtonGroup
+
+| Change                            | Details                                                                                 |
+| --------------------------------- | --------------------------------------------------------------------------------------- |
+| Removed `options`                 | Use `IressButton` children instead                                                      |
+| `onChange` simplified             | Returns the selected value directly (no longer `{ selected }`)                          |
+| `defaultValue`/`onChange`/`value` | Now type-aware based on `multiple` prop — arrays when `true`, single value when `false` |
+
+### Card
+
+| Change                        | Details                                                                          |
+| ----------------------------- | -------------------------------------------------------------------------------- |
+| Removed `composeIDSCardSlots` | Use the `card` styling function                                                  |
+| Removed `composeIDSCard`      | Use the `card` styling function                                                  |
+| New `element` prop            | Render as button or link. Alternatively use `IressButtonCard` or `IressLinkCard` |
+| Layout change                 | Now stretches to container width by default                                      |
+
+### Checkbox
+
+| Change                              | Details                                                                        |
+| ----------------------------------- | ------------------------------------------------------------------------------ |
+| `readonly` → `readOnly`             | —                                                                              |
+| Removed `mapCheckboxGroupOptions`   | Map arrays directly to `IressCheckboxGroup`                                    |
+| Removed `hiddenControl` and `touch` | Use the new `variant` prop (`"card"` or `"touch"`)                             |
+| New `variant` prop                  | `"card"` — checkbox on top right with heading. `"touch"` — larger touch target |
+| Updated `ref`                       | Now exposes `blur()`, `focus()`, and `input` (underlying DOM element)          |
+| Removed ref methods                 | `check()` and `reset()` removed from ref                                       |
+
+### CheckboxGroup
+
+| Change                              | Details                                            |
+| ----------------------------------- | -------------------------------------------------- |
+| `readonly` → `readOnly`             | —                                                  |
+| Removed `full` layout               | Use `stack` or `block`                             |
+| Removed `hiddenControl` and `touch` | Use the new `variant` prop (`"card"` or `"touch"`) |
+
+### CheckboxMark
+
+No longer has a `ref` prop. Wrap the element in a `<div ref={elementRef} />` and query from there.
+
+### Col
+
+No changes.
+
+### Combobox (removed)
+
+`IressCombobox` and `IressMultiCombobox` have been removed. Use:
+
+- `IressSelect` for restricted selection from options
+- `IressAutocomplete` for free-text input with suggestions
+
+### Container
+
+No changes.
+
+### Divider
+
+| Change            | Details                                                                 |
+| ----------------- | ----------------------------------------------------------------------- |
+| Removed `gutter`  | Use `my` (or `mx` if vertical) styling prop                             |
+| No default margin | Works correctly inside `IressStack` and `IressInline` without overrides |
+
+### Editor
+
+| Change                                   | Details                                                                                               |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Removed second `onChange` parameter      | Use the new `onUpdate` handler to react to Tiptap update events                                       |
+| New `IressEditor.SimpleToolbar` children | Children are appended to the toolbar                                                                  |
+| SSR/Next.js change                       | Styles are no longer injected into the DOM. Include `@iress/ids-editor/dist/style.css` in your bundle |
+
+### Expander
+
+| Change                    | Details                                                |
+| ------------------------- | ------------------------------------------------------ |
+| Removed `mode="heading"`  | Use `mode="section"` or custom styles                  |
+| `onChange` simplified     | Returns the open state directly (no longer `{ open }`) |
+| New `activatorStyle` prop | Customise the activator button directly                |
+
+### Field
+
+| Change                                      | Details                                                                                         |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Removed `optional`                          | Use `required` instead                                                                          |
+| New `supplementary` / `renderSupplementary` | Shown below the field; hidden when `error` or `errorMessages` is set                            |
+| Errors now below field                      | Errors animate in below the field                                                               |
+| Built-in bottom margin                      | Fields have bottom margin for error/supplementary area — **do not wrap fields in `IressStack`** |
+| New `horizontal`                            | Inline label/input layout                                                                       |
+| New `labelWidth`                            | Control label container width                                                                   |
+| New `removeErrorMargin`                     | Removes error space reservation                                                                 |
+
+### FieldGroup
+
+| Change                 | Details                                                              |
+| ---------------------- | -------------------------------------------------------------------- |
+| Removed `optional`     | Use `required` instead                                               |
+| New `supplementary`    | Shown below the group; hidden when `error` or `errorMessages` is set |
+| Errors below group     | Shown with a border to distinguish from child field errors           |
+| Built-in bottom margin | Same as `Field` — **do not wrap in `IressStack`**                    |
+
+### Filter → DropdownMenu (renamed)
+
+`IressFilter` has been renamed and moved to the `DropdownMenu` pattern component.
+
+### Hide (deprecated)
+
+Use the `srOnly` or `hide` styling props available on any component.
+
+### Icon
+
+| Change                  | Details                                                                                                                                             |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Removed `mode`          | Use `color` instead                                                                                                                                 |
+| `name` is now type-safe | IDE autocompletion available                                                                                                                        |
+| Removed `size`          | Inherits font size from parent. Use custom CSS for specific sizes; use `IressImage` for large icons                                                 |
+| New `IressIconProvider` | Required for optimal Material Symbols usage with font subsetting. Already included in `IressProvider` and `IressShadow` — no need to add separately |
+| New `type` prop         | Select icon provider (`'fontawesome'` \| `'material'`)                                                                                              |
+| New `filled` prop       | Material Symbols filled variant                                                                                                                     |
+
+### Image
+
+New component for displaying responsive images.
+
+### Inline
+
+| Change           | Details                                   |
+| ---------------- | ----------------------------------------- |
+| `gutter` → `gap` | Accepts the larger spacing token spectrum |
+| New `rowGap`     | Set top/bottom gap when content wraps     |
+
+### Input
+
+| Change                     | Details                                                      |
+| -------------------------- | ------------------------------------------------------------ |
+| Removed `watermark`        | —                                                            |
+| Clearing `clearable` input | Now triggers `onChange`                                      |
+| New `variant` prop         | Change the look of the input for certain contexts            |
+| New `actions` prop         | Add buttons with opinionated styling to the end of the input |
+| New hover and focus states | `prepend` and `append` change colour when focused            |
+
+### InputCurrency
+
+No code changes (inherits Input styling changes).
+
+### Label
+
+Removed `optional` prop. Use `required` instead.
+
+### Link
+
+New component for anchor links in text paragraphs. Accepts the same props as `IressButton` except `mode` and `status`.
+
+### Menu
+
+| Change                            | Details                                                                                 |
+| --------------------------------- | --------------------------------------------------------------------------------------- |
+| `defaultValue`/`onChange`/`value` | Type-aware based on `multiSelect` — arrays when `true`, single value when `false`       |
+| Removed `MenuSelected` interface  | Menu is now generic extending `FormControlValue`                                        |
+| Removed `mapMenuItems`            | Map `IressMenuItem` using arrays directly                                               |
+| Removed `role="nav"`              | Nav styling removed. For navigation menus, use `IressSideNav` pattern or custom styling |
+| New `radio` variant               | Radio prepend to show selection                                                         |
+| New `subdraw` variant             | Menu groups as popovers                                                                 |
+| New `side` variant                | Side menu with collapsible groups                                                       |
+| New `rail` variant                | Blue background, best with icons                                                        |
+
+### MenuItem
+
+| Change                            | Details                                                |
+| --------------------------------- | ------------------------------------------------------ |
+| `defaultValue`/`onChange`/`value` | Same `multiSelect` typing changes as Menu              |
+| Removed `MenuSelected` interface  | —                                                      |
+| Removed `attrs`                   | Add props directly                                     |
+| Removed custom menu item hooks    | Use the new `element` prop to wrap a routing component |
+| New `icon` prop                   | Shows an icon; children becomes a tooltip              |
+
+### MenuGroup
+
+New component for grouping menu items, headings, and text. Renders differently based on the menu variant.
+
+### MenuHeading
+
+Removed `level`. Use `element` instead.
+
+### MenuText
+
+No changes.
+
+### Modal
+
+| Change                       | Details                                                                                                                              |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `padding` → `p` styling prop | Default padding changed from `'md'` to `'lg'`                                                                                        |
+| Removed `fullpage`           | Modal no longer covers the entire screen on small devices                                                                            |
+| Custom heading node          | `id` is no longer automatically added. Set the `id` prop on your custom node to connect to the modal. String headings work as before |
+| No shadow                    | Slight blur on the background instead                                                                                                |
+
+### Navbar (removed)
+
+This component has been removed. Since IDS serves multiple parent applications with different navbars, this is best kept in individual applications (built with IDS components for consistency).
+
+### Panel
+
+| Change                       | Details                                                         |
+| ---------------------------- | --------------------------------------------------------------- |
+| Removed `background`         | Use the `bg` prop (e.g. `bg="alt"` or `bg="colour.neutral.20"`) |
+| Removed `bg="page"`          | —                                                               |
+| `padding` → `p` styling prop | —                                                               |
+| Responsive padding           | Set each edge individually per breakpoint                       |
+
+**Before:**
+
+```tsx
+<IressPanel
+  padding={{
+    xs: { b: 'sm', t: 'lg', r: 'sm', l: 'lg' },
+    xl: { b: 'none', t: 'sm', r: 'lg', l: 'sm' },
+  }}
+/>
+```
+
+**After:**
+
+```tsx
+<IressPanel pb={{ xs: 'sm', xl: 'none' }} pt={{ xs: 'lg', xl: 'sm' }} />
+```
+
+### Pill
+
+New component supporting the data colour spectrum with automatic rounded corners. For static content only (status indicators, counters). For interactive use, see `IressTag`.
+
+### Placeholder
+
+| Change                | Details                              |
+| --------------------- | ------------------------------------ |
+| Removed `transparent` | Use `bg="transparent"`               |
+| New colour scheme     | Uses `data.50` for better visibility |
+
+### Popover
+
+| Change                        | Details                                                                                                                                                |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Removed `disabledAutoToggle`  | Use `show`, `onActivated`, and `onDeactivated` for controlled popovers. `ref` is reserved for uncontrolled                                             |
+| Removed `width`               | Use `contentStyle` prop with custom CSS                                                                                                                |
+| Deprecated `contentClassName` | Use `contentStyle.className`                                                                                                                           |
+| New `contentStyle`            | Customise `className`, `style`, and styling props on the popover content                                                                               |
+| New `fluid`                   | Full container width                                                                                                                                   |
+| New `offset`                  | Number or object for popover positioning offset (default: 5)                                                                                           |
+| New `nested`                  | Nested navigation behaviour                                                                                                                            |
+| Z-index                       | Now uses z-index for consistent layering                                                                                                               |
+| Default padding               | ⚠️ Content now has `padding: spacing.4` by default. If you were adding your own inner padding, override with `contentStyle={{ padding: 'spacing.0' }}` |
+
+### Progress
+
+| Change                            | Details                                                                              |
+| --------------------------------- | ------------------------------------------------------------------------------------ |
+| Renders `<meter>` or `<progress>` | `<meter>` when `min` is set; `<progress>` otherwise                                  |
+| Single element                    | No more `__progressbar` test id                                                      |
+| Simplified ARIA                   | Only `aria-label` is rendered. If testing by attribute (not role), update your tests |
+
+### Provider
+
+| Change                     | Details                                                                |
+| -------------------------- | ---------------------------------------------------------------------- |
+| Removed `noIcons`          | Use `noDefaultFont` instead                                            |
+| Removed `injectPushStyles` | No longer available                                                    |
+| New `noSubsetting`         | Controls automatic font subsetting via Google Fonts CDN for icons      |
+| New `noDefaultFont`        | Controls loading of default Iress font from CDN                        |
+| Icon handling              | Now uses `IressIconProvider` with Material Symbols instead of icon CSS |
+
+> **Note:** `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, and `IressIconProvider`. You do not need to add these separately. `IressShadow` includes `IressProvider` internally, so no additional providers are needed when using `IressShadow` either.
+
+### Radio
+
+| Change                              | Details                                            |
+| ----------------------------------- | -------------------------------------------------- |
+| Removed `mapRadioGroupOptions`      | Map arrays directly to `IressRadioGroup`           |
+| Removed `hiddenControl` and `touch` | Use the new `variant` prop (`"card"` or `"touch"`) |
+
+### RadioGroup
+
+| Change                              | Details                                            |
+| ----------------------------------- | -------------------------------------------------- |
+| `readonly` → `readOnly`             | —                                                  |
+| Removed `hiddenControl` and `touch` | Use the new `variant` prop (`"card"` or `"touch"`) |
+
+### RadioMark
+
+New component for rendering a standalone radio mark indicator (similar to `IressCheckboxMark`).
+
+### Readonly
+
+| Change               | Details                                                                                                                                                              |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Styled to match      | Styled to match other input text sizes. Use the new `textStyle` prop for larger text (e.g. statistics)                                                               |
+| New `actions` prop   | Array of button props rendered alongside the readonly value (e.g. edit/save toggles). Actions passed to `IressInput` in `readOnly` mode are also forwarded           |
+| DOM structure change | ⚠️ Inner content is now wrapped in an additional `wrapper` div inside `root`. CSS selectors targeting direct children of the readonly root element may need updating |
+
+### RichSelect → Select (renamed)
+
+`IressRichSelect` has been renamed to `IressSelect`. See the **Select** section below for full details.
+
+### Row
+
+| Change              | Details                                                         |
+| ------------------- | --------------------------------------------------------------- |
+| New `rowGap` prop   | Set a different gap between rows vs `gutter`                    |
+| Removed `useColGap` | Use `IressInline` to add gaps between non-`IressCol` components |
+
+### Select
+
+| Change                                 | Details                                                                                                                     |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Renamed from `IressRichSelect`         | Now uses `LabelValueMeta` via `options`                                                                                     |
+| `readonly` → `readOnly`                | —                                                                                                                           |
+| `defaultValue`/`onChange`/`value`      | Type-aware based on `multiSelect` — arrays when `true`, single value when `false`                                           |
+| `value`/`defaultValue` accepts strings | Now also accepts a plain string or `FormControlValue` that resolves to the matching option automatically                    |
+| New `multiSelectLimit` prop            | Limits visible selected tags before collapsing to "+N more" summary (default `5`). Display only — does not limit selections |
+| New `native` prop                      | Renders a browser-native select (replaces the old `IressSelect`)                                                             |
+| `onChange` signature                   | `onChange(event, value, labelValue)` — `value` is the primitive (`FormControlValue`), `labelValue` is the full `LabelValueMeta` |
+| Grouped items                          | Now supported                                                                                                               |
+| New hover and focus states             | —                                                                                                                           |
+
+The v5 native `IressSelect` with `children` (option elements) is replaced by `IressSelect` with the `native` prop:
+
+**Before (v5):**
+
+```tsx
+<IressSelect>
+  <IressSelectOption value="1">Option 1</IressSelectOption>
+</IressSelect>
+```
+
+**After (v6):**
+
+```tsx
+<IressSelect native options={[{ label: 'Option 1', value: '1' }]} />
+```
+
+### SelectOption (removed)
+
+Use the `options` prop on `IressSelect` instead.
+
+### Skeleton
+
+`textVariant` changed to `textStyle`.
+
+### SkipLink
+
+| Change                     | Details                     |
+| -------------------------- | --------------------------- |
+| Removed `targetId`         | Use `href` instead          |
+| Styled as secondary button | No more custom skip link UI |
+
+### Slider
+
+| Change                  | Details                          |
+| ----------------------- | -------------------------------- |
+| `readonly` → `readOnly` | —                                |
+| `hiddenOn` → `srOnly`   | Consistent with other components |
+
+### Slideout
+
+| Change                       | Details                                                     |
+| ---------------------------- | ----------------------------------------------------------- |
+| Removed `backdrop`           | Use `IressModal` instead                                    |
+| Removed `size="lg"`          | Use a separate page for large content                       |
+| `padding` → `p` styling prop | —                                                           |
+| Single slideout only         | Only one open at a time                                     |
+| Removed `injectPushStyles`   | Styles are applied via the `style` attribute on `eleToPush` |
+| Custom heading node          | Same `id` handling change as Modal                          |
+
+### Spinner
+
+Removed `name` prop. All spinners are now consistent across Iress products.
+
+### Stack
+
+| Change                  | Details                                                                                                                                          |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `gutter` → `gap`        | Accepts the larger spacing token spectrum                                                                                                        |
+| No longer uses `margin` | Uses flexbox. Use `horizontalAlign` or wrap children with `IressInline` for inline display. Use `alignSelf` on children for individual alignment |
+| New `element` prop      | Render as a different HTML element (e.g. `<ul>` for lists)                                                                                       |
+| New `horizontalAlign`   | Set horizontal alignment of stack content                                                                                                        |
+| New `verticalAlign`     | Set vertical alignment with additional options (`'between'`, `'around'`, `'evenly'`)                                                             |
+
+### Styled
+
+New component for applying IDS styling props to any element or component without using the styled-system JSX components directly.
+
+### Table
+
+| Change                            | Details                                                                               |
+| --------------------------------- | ------------------------------------------------------------------------------------- |
+| `IressTableFormattedValue`        | No more `currencyCode` prop. Use `currencyFormatOptions={{ withSymbol: true/false }}` |
+| Columns must be an array          | Object format removed                                                                 |
+| New `rowProps`                    | Set styling props for the entire row                                                  |
+| New `alternate` prop              | Control row striping                                                                  |
+| New `removeRowBorders` prop       | —                                                                                     |
+| `TableColumn.align` → `textAlign` | Consistent with styling props                                                         |
+| `TableColumn` styling props       | `bg`, `color`, `noGutter`, `srOnly`, `textAlign`, `textStyle` applied to the column   |
+| Removed `IressTable.useTable()`   | Import `useTable` directly                                                            |
+| Updated default styling           | More display-friendly, print-friendly. `compact` version has a stylised heading       |
+
+### TabSet
+
+| Change               | Details                                                                                                                                    |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Removed `mapTabs`    | Use `Array.map` to map objects to `IressTab`                                                                                               |
+| Selected tabs        | Now have a highlighted background                                                                                                          |
+| New `panelStyle`     | Custom style for panel area                                                                                                                |
+| New `tabHolderStyle` | Custom style for tab holder area                                                                                                           |
+| New `type`           | Tab styling type (`'primary'` \| `'secondary'`)                                                                                            |
+| Active indicator     | Now uses `ResizeObserver` and `getBoundingClientRect()` for positioning — correctly updates when tab content changes size or layout shifts |
+
+### Tag
+
+| Change               | Details                                            |
+| -------------------- | -------------------------------------------------- |
+| Data colour spectrum | Now supported                                      |
+| New compact version  | For placing inside inputs (e.g. `TagInput`)        |
+| Delete hover         | Red hover on the delete button to warn of deletion |
+
+### TagInput
+
+| Change                         | Details                                   |
+| ------------------------------ | ----------------------------------------- |
+| Removed `testid__input__input` | Use `testid__input` instead               |
+| Removed `testid__items`        | —                                         |
+| `onTagDelete` signature        | Now includes event: `(label, e) => void`  |
+| `onTagDeleteAll` signature     | Now includes event: `(label, e) => void`  |
+| New `tagLimit`                 | Limit tags before shortening (default: 5) |
+| New `selectedOptionsTagText`   | Text for tag count display                |
+
+### Text
+
+| Change                       | Details                                                                                      |
+| ---------------------------- | -------------------------------------------------------------------------------------------- |
+| Removed `display` variations | Use `textStyle` with `typography.body.lg`, `typography.heading.4`, or `typography.heading.5` |
+| `variant` → `textStyle`      | —                                                                                            |
+| `mode` → `color`             | —                                                                                            |
+| `align` → `textAlign`        | —                                                                                            |
+| Nested elements              | Now styles nested `<table>` and `<pre>` tags                                                 |
+| Icons in headings            | No longer have automatic padding. Use `ml`/`mr` on `IressIcon` or wrap with `IressInline`    |
+
+### Toast
+
+`IressToast` is no longer directly available. Use `IressToasterProvider` and `useToaster` to create toasts. For static toasts, use `IressAlert`.
+
+> **Note:** `IressToasterProvider` is already included in `IressProvider` and `IressShadow` — you do not need to add it separately if you are using either of these.
+
+### Toaster
+
+| Change                      | Details                                                   |
+| --------------------------- | --------------------------------------------------------- |
+| `IressToaster` removed      | Use `IressToasterProvider` and `useToaster`               |
+| Multiple providers          | Use different `id` props for different positions/contexts |
+| `children` → `content`      | In `useToaster`                                           |
+| `headingLevel` → `heading`  | —                                                         |
+| `headingText` → `heading`   | —                                                         |
+| No `position` at hook level | Set `position` on `IressToasterProvider`                  |
+| Simple string toasts        | Pass a string directly for a simple message               |
+| `status` value change       | `'error'` is now `'danger'` (Alert-based)                 |
+
+### Toggle
+
+| Change                  | Details                                                                              |
+| ----------------------- | ------------------------------------------------------------------------------------ |
+| Controlled/uncontrolled | Now uses `checked`/`defaultChecked` like checkbox. Explicitly set whether controlled |
+| Removed forwarded `ref` | Wrap in a `<div>` and use query selectors if needed                                  |
+| New `defaultChecked`    | For uncontrolled mode                                                                |
+| New `disabled`          | Disable the toggle                                                                   |
+
+### Tooltip
+
+| Change                       | Details                                                  |
+| ---------------------------- | -------------------------------------------------------- |
+| `align` prop simplified      | Removed deprecated enum option, now uses string literals |
+| Removed `IressTooltip.Align` | Use string values directly                               |
+
+### ValidationLink
+
+No changes.
+
+### ValidationMessage
+
+No changes.
+
+### ValidationSummary
+
+New `itemStyle` prop for customising each item's `className`, `style`, and styling props.
+
+---
+
+## New pattern components
+
+### Breadcrumbs
+
+Display a list of links as breadcrumbs showing navigation hierarchy.
+
+### Contextual Menu
+
+Show a context or "more actions" menu.
+
+### Dropdown Menu
+
+Show a filtering/navigation menu in a dropdown (replaces `IressFilter`).
+
+### Form (refactored to pattern)
+
+| Change              | Details                                                                                                                                                         |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Now a pattern       | Accepts `short` and `long` patterns for form template and validation                                                                                            |
+| Removed `form` prop | Use `IressHookForm` to pass a custom `react-hook-form` instance                                                                                                 |
+| Validation summary  | No longer shown by default. Use `IressFormValidationSummary` via the `alert` prop                                                                               |
+| Peer dependency     | `react-hook-form` is now a peer dependency — add it to your project. IDS wrappers (e.g. `IressForm.useWatch`) are removed; use `react-hook-form` hooks directly |
+
+### Loading
+
+No changes.
+
+### Shadow
+
+Render IDS inside a **shadow DOM** for micro-frontends. Styles are automatically imported and encapsulated. Supports custom style injection and wraps `IressProvider` automatically.
+
+### Side Nav
+
+Combines the `rail` and `side` menu variants into a side navigation component for large applications.
+
+---
+
+## Theme changes
+
+| Change                        | Details                                                                                                                                                           |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Removed `theme` export        | Use `cssVars` from `@iress-oss/ids-tokens`                                                                                                                        |
+| Removed `designTokens` export | Use `designTokens` from `@iress-oss/ids-tokens`                                                                                                                   |
+| Removed view modes            | For touch mode, use the touch sub-theme (e.g. `iress-beta-theme-light--touch`). Compact has been removed; use component-level `compact` variants or styling props |
+
+### AG Grid
+
+| Change                         | Details                                                    |
+| ------------------------------ | ---------------------------------------------------------- |
+| Removed `IressAgGridContainer` | Import `getAgGridThemeProps` and spread onto `AgGridReact` |
+| AG Grid &lt; 33 dropped        | Minimum version is now 33                                  |
+| Removed utility classes        | Use custom CSS classes for cell styling                    |
+
+**Before:**
+
+```tsx
+<IressAgGridContainer>
+  <AgGridReact {...gridProps} />
+</IressAgGridContainer>
+```
+
+**After:**
+
+```tsx
+<AgGridReact {...getAgGridThemeProps()} {...gridProps} />
+```
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-v5-to-v6--docs)

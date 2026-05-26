@@ -1,0 +1,487 @@
+export const meta = {
+  title: 'Field',
+  description: 'The field component is used to place label, hint and error information around form controls.',
+  component: 'IressField',
+  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs',
+};
+
+# Field
+
+The field component is used to place label, hint and error information around form controls.
+
+```tsx
+import { IressField } from '@iress-oss/ids-components';
+```
+
+## Quick Start
+
+```tsx
+import { IressField } from '@iress-oss/ids-components';
+
+<IressField label="First name" />
+```
+
+## Examples
+
+### Label
+
+The `label` prop is required to describe the field.
+
+[View "Label" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--label)
+
+### Hint
+
+Extra information on the field can be provided using the `hint` prop. It can accept any React node, so you can add your own custom mark up (eg. external links) to the hint text.
+
+```tsx
+<IressField hint="For us to be able to contact you in the future" label="Email address" />
+```
+
+[View "Hint" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--hint)
+
+### Error message
+
+To display error messages associated with the field, you can use the `errorMessages` prop. This prop accepts an array of `ValidationMessageObj`, and will display each error message in a separate paragraph.
+
+**Note:** `IressField` requires validation to be handled by the consumer. If you want out-of-the-box validation, use [`IressFormField` alongside `IressForm` instead](/docs/components-form--docs#fields).
+
+```tsx
+<IressField label="Error message" />
+```
+
+[View "ErrorMessage" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--error-message)
+
+### Custom error
+
+For more control over the formatting of the error, you can use the `error` prop. This prop accepts any React node, so you can add your own custom mark up (eg. icons) to the error message.
+
+**Note:** `IressField` requires validation to be handled by the consumer. If you want out-of-the-box validation, use [`IressFormField` alongside `IressForm` instead](/docs/components-form--docs#fields).
+
+```tsx
+<IressField label="Custom error" />
+```
+
+[View "CustomError" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--custom-error)
+
+### Hidden label
+
+There may be certain situations where you might want to (accessibly) hide the field label (in a search field for instance). This can be done by setting the `hiddenLabel` prop.
+
+```tsx
+<IressField label="This label is hidden" hint="This hint text is hidden" hiddenLabel />
+```
+
+[View "HiddenLabel" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--hidden-label)
+
+```tsx
+<IressField label="This label is hidden" hint="This hint text is hidden" hiddenLabel />
+```
+
+[View "HiddenLabelWithError" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--hidden-label-with-error)
+
+### Required
+
+Fields marked as `required` will have an asterisk prepended to the label.
+
+```tsx
+<IressField label="This field is required" required />
+```
+
+[View "Required" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--required)
+
+### Readonly data
+
+Fields can be used to display read-only data. This is useful when you want to display data that the user can't change, but you still want to display it in a form-like layout.
+
+You can also pass `readOnly` prop to remove the asterisk symbol (\*) even when the field is `required`.
+
+```tsx
+<IressField>
+<IressReadonly {...input} />
+</IressField>
+```
+
+[View "ReadonlyData" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--readonly-data)
+
+Use `readOnly="locked"` when a value is read-only due to user permissions.
+This variation adds a lock icon to the label for a stronger visual cue while
+keeping the field value and label relationship accessible.
+
+```tsx
+<IressField>
+<IressInput {...input} />
+</IressField>
+```
+
+[View "LockedReadonlyData" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--locked-readonly-data)
+
+### Supplementary
+
+The `supplementary` prop can be used to display additional information about the field.
+
+This is used to display some metadata based on the value of the field in context. Examples include:
+
+- A trading share field that displays the current price of the share.
+- A commission percentage field that displays the expected commission based on the value of multiple fields.
+
+#### Notes
+
+- The `supplementary` prop is not a replacement for the `hint` prop. The `hint` prop should be used to provide additional information about the field itself, while the `supplementary` prop should be used to display additional information about the value of the field.
+- The `supplementary` prop will only be displayed if the field is not in an error state. If the field is in an error state, the `error` and `errorMessages` prop will be displayed instead.
+
+```tsx
+const [error, setError] = useState<string | undefined>();
+
+    return (
+      <IressStack gap="spacing.5">
+        <IressToggle
+          onChange={(checked) =>
+            setError(checked ? 'This field is required' : undefined)
+          }
+          checked={error !== undefined}
+        >
+          Show error
+        </IressToggle>
+        <IressField {...args} error={error}>
+          <IressInput {...input} />
+        </IressField>
+      </IressStack>
+    );
+```
+
+[View "Supplementary" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--supplementary)
+
+### Horizontal layout
+
+Fields can be displayed with a horizontal layout where the label and input are on the same line, which can save vertical space in forms. Use the `horizontal` prop to enable this layout.
+In horizontal mode, hint text is displayed as a tooltip when hovering over the info icon, rather than being shown below the label as in the default vertical layout.
+
+#### Avoid using horizontal mode for majority of cases
+
+Vertical layout is preferred, it is more accessible in more scenarios by ensuring a consistent layout on different devices and keep the label closer to the input ensuring its relationship and making forms easier to scan. There are studies showing [vertical layouts can be faster to fill out](https://content-and-marketing.com/blog/10-mobile-form-design-best-practices-2024).
+Here are a few cases where you may use a horizontal layout:
+
+- On dashboards where space is limited, it may be necessary to display fields in a horizontal layout to make use of the space and give prominence to dashboard visuals.
+- Collaborative visual tools that require real-time editing and previews, such as Styler, Miro, Figma, where fields are less prominent to give prominence to the intended output.
+
+```tsx
+<IressField horizontal labelWidth="250px" label="Email address" hint="Enter your email address for contact" supplementary="We will not share your email with third parties (Supplementary text)" />
+```
+
+[View "Horizontal" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--horizontal)
+
+#### Horizontal with error
+
+Error messages in horizontal layout are displayed below both the label and input field, spanning the full width.
+
+```tsx
+<IressField horizontal labelWidth="250px" label="Email address" hint="Enter your email address for contact" supplementary="We will not share your email with third parties (Supplementary text)" />
+```
+
+[View "HorizontalWithError" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--horizontal-with-error)
+
+#### Horizontal label width
+
+In horizontal layout, you can control the width of the label using the `labelWidth` prop. This accepts CSS width values like pixels, percentages, or `auto`.
+
+```tsx
+<IressStack gap="spacing.5">
+<IressField labelWidth="100px" label="labelWidth: 100px">
+<IressInput {...input} placeholder="Label width: 100px" />
+</IressField>
+<IressField labelWidth="200px" label="labelWidth: 200px">
+<IressInput {...input} placeholder="Label width: 200px" />
+</IressField>
+<IressField labelWidth="25%" label="labelWidth: 25%">
+<IressInput {...input} placeholder="Label width: 25%" />
+</IressField>
+<IressField labelWidth="auto" label="labelWidth: auto">
+<IressInput {...input} placeholder="Label width: auto" />
+</IressField>
+<IressField label="Default (no labelWidth)">
+<IressInput {...input} placeholder="Default horizontal layout" />
+</IressField>
+</IressStack>
+```
+
+[View "HorizontalLabelWidthExamples" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--horizontal-label-width-examples)
+
+### Remove error margin
+
+By default, fields reserve space for error messages to maintain consistent spacing. Use the `removeErrorMargin` prop to remove this reserved space, creating tighter field spacing when stacking multiple fields.
+
+This is particularly useful in dense forms or when you want to minimize vertical space usage.
+
+**Note:** When `removeErrorMargin` is enabled, subsequent fields will be pushed down when error or supplementary messages appear, as no space is reserved for these messages. You can use the `IressStack` component to control field gaps and spacing as needed.
+
+```tsx
+const [removeErrorMargin, setRemoveErrorMargin] = useState(false);
+    const [showError, setShowError] = useState(false);
+
+    const fieldProps = {
+      removeErrorMargin,
+      ...(showError
+        ? {
+            errorMessages: [
+              {
+                message: 'This field is required',
+              },
+            ],
+          }
+        : {}),
+    };
+
+    const fieldPropsWithContent = {
+      removeErrorMargin,
+      ...(showError
+        ? {
+            errorMessages: [
+              {
+                message: 'This field is required',
+              },
+            ],
+          }
+        : {
+            supplementary: 'This is always-displayed supplementary text',
+          }),
+    };
+
+    return (
+      <IressStack gap="spacing.5">
+        <IressInline gap="spacing.4">
+          <IressToggle
+            onChange={(checked) => setRemoveErrorMargin(checked)}
+            checked={removeErrorMargin}
+          >
+            Remove error margin (tighter field spacing)
+          </IressToggle>
+
+          <IressToggle
+            onChange={(checked) => setShowError(checked)}
+            checked={showError}
+          >
+            Show error message
+          </IressToggle>
+        </IressInline>
+
+        <IressRow gutter="spacing.6">
+          {/* Vertical Layout Column */}
+          <IressCol span="6">
+            <IressStack gap="spacing.2">
+              <IressText element="h3">Vertical Label Layout</IressText>
+              <IressStack gap="spacing.0">
+                <IressField {...args} {...fieldProps} label="First Name">
+                  <IressInput {...input} placeholder="Enter first name" />
+                </IressField>
+                <IressField
+                  {...args}
+                  {...fieldPropsWithContent}
+                  label="Last Name"
+                >
+                  <IressInput {...input} placeholder="Enter last name" />
+                </IressField>
+                <IressField {...args} {...fieldProps} label="Email Address">
+                  <IressInput
+                    {...input}
+                    type="email"
+                    placeholder="Enter email"
+                  />
+                </IressField>
+              </IressStack>
+            </IressStack>
+          </IressCol>
+
+          {/* Horizontal Layout Column */}
+          <IressCol span="6">
+            <IressStack gap="spacing.2">
+              <IressText element="h3">Horizontal Label Layout</IressText>
+              <IressStack gap="spacing.0">
+                <IressField
+                  {...args}
+                  {...fieldProps}
+                  horizontal
+                  labelWidth="120px"
+                  label="First Name"
+                >
+                  <IressInput {...input} placeholder="Enter first name" />
+                </IressField>
+                <IressField
+                  {...args}
+                  {...fieldPropsWithContent}
+                  horizontal
+                  labelWidth="120px"
+                  label="Last Name"
+                >
+                  <IressInput {...input} placeholder="Enter last name" />
+                </IressField>
+                <IressField
+                  {...args}
+                  {...fieldProps}
+                  horizontal
+                  labelWidth="120px"
+                  label="Email Address"
+                >
+                  <IressInput
+                    {...input}
+                    type="email"
+                    placeholder="Enter email"
+                  />
+                </IressField>
+              </IressStack>
+            </IressStack>
+          </IressCol>
+        </IressRow>
+      </IressStack>
+    );
+```
+
+[View "RemoveErrorMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--remove-error-margin)
+
+## `IressFieldGroup`
+
+The `IressFieldGroup` component is used to group multiple `Field` components together. This is useful when you have multiple fields that are related to each other, and you want to display them together.
+
+Under the hood it uses a `fieldset` and `legend` element to group the fields together, improving the semantics of your form if you use multiple inputs (eg. in the case of a checkbox group) and making it more accessible.
+
+```tsx
+<IressFieldGroup>
+{inputs?.map(({ field, input }: FieldAndInputProps, index) => (
+<IressField key={field.htmlFor ?? index} {...field}>
+<IressInput {...input} />
+</IressField>
+))}
+</IressFieldGroup>
+```
+
+[View "Default" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field-group--default)
+
+### Inline
+
+Multiple fields can be displayed inline using the `inline` prop. On smaller screens, inline elements will wrap on to a new line if there's not enough space for everything on one line.
+
+```tsx
+<IressFieldGroup inline />
+```
+
+[View "Inline" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field-group--inline)
+
+```tsx
+<form>
+<IressFieldGroup {...{ ...args, inputs: undefined }}>
+<IressField label="Emoji" htmlFor="emoji">
+<IressSelect
+width="2"
+id="emoji"
+options={[
+{ label: '🐶', value: 'dog' },
+{ label: '🐱', value: 'cat' },
+{ label: '🐭', value: 'mouse' },
+]}
+container={document.body}
+/>
+</IressField>
+
+<IressField label="Title" htmlFor="title">
+<IressSelect
+native
+width="2"
+id="title"
+options={[
+{ label: 'Mr', value: 'mr' },
+{ label: 'Mrs', value: 'mrs' },
+{ label: 'Miss', value: 'miss' },
+]}
+/>
+</IressField>
+
+<IressField label="First name" htmlFor="firstName" required>
+<IressInput id="firstName" required />
+</IressField>
+
+<IressField label="Last name" htmlFor="lastName" required>
+<IressInput id="lastName" required />
+</IressField>
+
+<IressButton type="submit">Submit</IressButton>
+
+<IressPopover
+activator={
+<IressButton>
+<IressIcon name="cog" />
+</IressButton>
+}
+>
+<IressPanel>Settings goes here</IressPanel>
+</IressPopover>
+</IressFieldGroup>
+</form>
+```
+
+[View "InlineSink" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field-group--inline-sink)
+
+### Join
+
+Elements can also be joined together using the `join` prop. Joined elements won't wrap on to a new line, so make sure you test your designs on small screens; depending on the use case, you may be better off with a standard inline layout (or two separate fields!).
+
+**Note:** The `join` prop works out of the box with IDS components. To enable your custom components to work with the `join` prop, you need to ensure the direct child of `IressFieldGroup` has the class `GlobalCSSClass.FormElement`. If the direct child is not the element with the border, add the class `GlobalCSSClass.FormElementInner` to the element with the border.
+
+```tsx
+<IressFieldGroup join />
+```
+
+[View "Join" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field-group--join)
+
+```tsx
+<IressFieldGroup join />
+```
+
+[View "JoinSink" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field-group--join-sink)
+
+## `IressForm` integration
+
+As of version 5, `IressField` is a standalone component and does not handle validation.
+
+If you want out-of-the-box validation, use the `IressFormField` inside an `IressForm`. This will handle validation for you, and provide a consistent way to handle form state.
+
+[View forms documentation for fields](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs#fields)
+
+## Testing
+
+### Querying
+
+`IressField` is a wrapper component — query the child form control directly
+using its accessible role:
+
+```tsx
+render(
+  <IressField label="Email" htmlFor="email">
+    <input id="email" type="email" />
+  </IressField>,
+);
+
+const input = screen.getByRole('textbox', { name: 'Email' });
+expect(input).toBeInTheDocument();
+```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressField`, the following nested test IDs
+are generated automatically:
+
+| Suffix | Example | Description |
+| --- | --- | --- |
+| `label` | `my-field__label` | The field label element |
+| `hint` | `my-field__hint` | The hint text below the label |
+| `error` | `my-field__error` | The error message container |
+
+### Gotchas
+
+- **Nested test ID propagation**: The `label` test ID is passed to `IressLabel`,
+  which further propagates a `text` suffix. This means you can query
+  `my-field__label__text` to reach the label text span.
+- **Hint and error are conditional**: The `__hint` and `__error` test IDs only
+  appear when `hint` or `errorMessages`/`error` props are provided.
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs)

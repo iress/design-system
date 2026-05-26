@@ -1,0 +1,111 @@
+export const meta = {
+  title: 'Iconography',
+  description: 'Icons are a key part of the Iress Design System, providing visual cues and enhancing user experience. This section outlines the principles and guidelines for using icons effectively within our products.',
+  category: 'guide',
+  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-iconography--docs',
+};
+
+# Iconography
+
+Icons are a key part of the Iress Design System, providing visual cues and enhancing user experience. This section outlines the principles and guidelines for using icons effectively within our products.
+
+## Principles
+
+1. **Clarity**: Icons should be easily recognizable and convey their intended meaning without ambiguity.
+2. **Consistency**: Use a consistent style and size for icons across the application to maintain visual harmony.
+3. **Simplicity**: Avoid overly complex icons; simplicity aids in quick recognition.
+4. **Accessibility**: Ensure icons are accessible to all users, including those using screen readers. Provide appropriate alternative text.
+
+## Usage Guidelines
+
+- Use icons to complement text, not replace it. Always provide a text label alongside an icon when its meaning may not be immediately clear.
+- Maintain adequate spacing around icons to prevent visual clutter.
+- Use icons sparingly to avoid overwhelming users. Only include icons that add value to the user experience.
+- Follow the established colour tokens for icons to ensure they align with the overall design aesthetic.
+- Do not use utility icons for decorative purposes; they should always serve a functional role. For decorative icons, consider using an illustration instead.
+
+## Icon Library
+
+### Material Symbols
+
+The chosen icon library for the Iress Design System is Material Symbols. This library offers a wide range of icons that are versatile and adaptable to various use cases.
+
+The settings we use for Material Symbols are.
+
+- Style: Rounded
+- Weight: (see Storybook)
+- Fill: 0 (1 for active icons)
+- Grade: (see Storybook)
+- Optical Size: (see Storybook)
+
+If you need to explore the available icons, you can visit the Material Symbols library here:
+
+- [Material Symbols](https://fonts.google.com/icons?icon.style=Rounded&icon.set=Material+Symbols)
+
+### Figma plugin
+
+If you are using Figma, we recommend the [Material Symbols plugin](https://www.figma.com/community/plugin/1088610476491668236/material-symbols) with the below settings:
+
+- Style: Rounded
+- Weight: (see Storybook)
+- Fill: Off (On for active icons)
+- Grade: (see Storybook)
+- Optical Size: (see Storybook)
+
+### `IressIcon` Component
+
+The `IressIcon` component is used to render icons from the Material Symbols library based on the guidelines outlined above.
+
+[View <code>IressIcon</code> documentation](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)
+
+```tsx
+<IressIconography name="home" />
+```
+
+[View "Default" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-iconography--default)
+
+### Migrating from Font Awesome
+
+To help with migrating, we have mapped some common Font Awesome icons to their Material Symbols equivalents.
+
+Please refer to the table below for guidance.
+
+```tsx
+<IressTable
+{...(args as object)}
+caption="Font Awesome to Material Symbols Migration Reference"
+columns={[
+{
+key: 'fontAwesome',
+label: 'Font Awesome',
+format: (icon: never) => (
+<IressText>
+<IressIcon type="fontawesome" name={icon} /> ({icon})
+</IressText>
+),
+},
+{
+key: 'materialSymbols',
+label: 'Material Symbols',
+format: (icon: never) => (
+<IressText>
+<IressIcon name={icon} /> ({icon})
+</IressText>
+),
+},
+]}
+rows={Object.entries(FA_TO_MATERIAL_MAP).map(
+([fontAwesome, materialSymbols]) => ({
+fontAwesome,
+materialSymbols,
+}),
+)}
+scope="col"
+/>
+```
+
+[View "FontAwesomeToMaterialMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-iconography--font-awesome-to-material-migration)
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-iconography--docs)

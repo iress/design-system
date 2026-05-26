@@ -1,0 +1,198 @@
+export const meta = {
+  title: 'Tag',
+  description: 'Tags represent individual units in a group of selected items.',
+  component: 'IressTag',
+  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs',
+};
+
+# Tag
+
+Tags represent individual units in a group of selected items.
+
+```tsx
+import { IressTag } from '@iress-oss/ids-components';
+```
+
+## Quick Start
+
+```tsx
+import { IressTag } from '@iress-oss/ids-components';
+
+<IressTag>
+  Label
+</IressTag>
+```
+
+## When to use
+
+Use tags for **categorization and selection** where users need to interact with items:
+
+- Displaying selected items in multi-select interfaces
+- Managing email recipients or domains
+- Showing applied filters that can be removed
+- Categorizing content with removable labels
+- Any scenario where users need to add or remove items from a collection
+
+Tags are **interactive** - they can be clicked and deleted by users.
+
+**Not sure?** If you need to display status or highlight information without user interaction, use [Pill](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs) instead.
+
+## Usage
+
+### Mode
+
+The `mode` prop controls the colour scheme of the tag. Use data palette colours (`10`-`90`) for non-semantic colour needs.
+
+```tsx
+<IressInline gap="sm">
+{BADGE_MODES.map((mode) => (
+<IressTag key={mode} mode={mode}>
+{mode}
+</IressTag>
+))}
+</IressInline>
+```
+
+[View "Mode" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--mode)
+
+### Status mode
+
+Use semantic status values (`danger`, `info`, `success`, `warning`) when tags need to communicate a system status.
+
+```tsx
+<IressInline gap="sm">
+{STATUSES.map((status) => (
+<IressTag key={status} mode={status}>
+{status}
+</IressTag>
+))}
+</IressInline>
+```
+
+[View "Status" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--status)
+
+### Bordered tags
+
+Set `bordered` to render a tag with a visible border using the tag's current
+colour, without altering its background. This enhances visibility and makes tags
+look more interactive — useful for dropdown filter tags or any context where
+tags need to stand out.
+
+```tsx
+<IressInline gap="sm">
+<IressTag bordered>
+No mode
+</IressTag>
+{BADGE_MODES.map((mode) => (
+<IressTag key={mode} mode={mode} bordered>
+{mode}
+</IressTag>
+))}
+{STATUSES.map((status) => (
+<IressTag key={status} mode={status} bordered>
+{status}
+</IressTag>
+))}
+</IressInline>
+```
+
+[View "Bordered" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--bordered)
+
+### Clickable tags
+
+Tags can be made clickable by setting `element="button"`. This is the
+recommended, explicit API and renders the tag as a `<button>` with hover
+styles to indicate it is clickable.
+
+For backwards compatibility, passing `onClick` without setting `element` is
+also supported and will automatically render the tag as a `<button>`.
+
+Use `element="a"` to render the tag as a link.
+
+```tsx
+<IressTag bordered>
+  Tag
+</IressTag>
+```
+
+[View "ClickableTag" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--clickable-tag)
+
+### Compact tags
+
+Set `compact` to render a smaller tag. This is useful in dense layouts, such as
+inside inputs where tags are displayed inline.
+
+```tsx
+<IressTag compact />
+```
+
+[View "Compact" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--compact)
+
+### Deleting tags
+
+The delete button will not automatically remove the tag from the screen. Instead it will trigger the `onDelete` event. Use this event within your app to handle the display of tags.
+
+The text a screen reader will announce defaults to "Delete" but can be changed using the `deleteButtonText` prop.
+
+```tsx
+<TagDeletion />
+```
+
+[View "DeletingTags" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--deleting-tags)
+
+### Custom button
+
+You can completely override the delete button by passing a custom component to the `deleteButton` prop.
+
+[View "CustomButton" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--custom-button)
+
+## IressTagInput
+
+`IressTagInput` allows you to manage multiple tags, and is often used for managing email addresses, domains or other simple metadata that does not have to be selected from a list.
+
+If you need to manage tags that are selected from a existing list, use `IressSelect` with the `multiple` prop.
+
+```tsx
+<IressTagInput placeholder="Type and hit enter to add a tag" tagLimit={999} />
+```
+
+[View "TagInput" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag-input--tag-input)
+
+## Testing
+
+Query tags by their text content:
+
+```tsx
+const tag = screen.getByText('Category');
+```
+
+When `element="button"` is set, the tag renders as a `<button>`:
+
+```tsx
+const tag = screen.getByRole('button', { name: 'Category' });
+```
+
+When `element="a"` is set, the tag renders as a link:
+
+```tsx
+const tag = screen.getByRole('link', { name: 'Category' });
+```
+
+For deletable tags, query the delete button:
+
+```tsx
+const deleteButton = screen.getByRole('button', { name: 'Delete Category' });
+```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressTag`, the following nested test IDs are
+generated automatically:
+
+| Suffix | Example | Description |
+| --- | --- | --- |
+| `delete-button__button` | `my-tag__delete-button__button` | The tag delete button |
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)

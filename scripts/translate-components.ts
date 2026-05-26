@@ -34,7 +34,8 @@ const ROOT = path.resolve(__dirname, '..');
 const COMPONENTS_SRC = path.join(ROOT, 'packages/components/src/components');
 const PATTERNS_SRC = path.join(ROOT, 'packages/components/src/patterns');
 const DOCS_SRC = path.join(ROOT, 'packages/components/docs');
-const OUTPUT_DIR = path.join(ROOT, 'packages/components/.ai');
+const OUTPUT_DIR_AI = path.join(ROOT, 'packages/components/.ai');
+const OUTPUT_DIR_GUIDELINES = path.join(ROOT, 'apps/guidelines/content/components');
 
 const STORYBOOK_URL =
   process.env.STORYBOOK_URL ||
@@ -44,6 +45,12 @@ const CHROMATIC_BASE = `${STORYBOOK_URL}/?path=/story/`;
 
 /** Composition storybook ref prefix — the components storybook is embedded under this ref */
 const STORYBOOK_REF_PREFIX = 'components_';
+
+type Target = 'ai' | 'guidelines';
+const targetArg = process.argv.find((a) => a.startsWith('--target='))?.split('=')[1];
+const TARGETS: Target[] = targetArg
+  ? [targetArg as Target]
+  : ['ai', 'guidelines'];
 
 const DRY_RUN = process.argv.includes('--dry-run');
 
@@ -1694,6 +1701,80 @@ function buildGuideOutput(
   return output;
 }
 
+// ─── Guidelines Output (MDX with meta export) ───────────────
+
+/**
+ * Build MDX output for the guidelines site.
+ * Exports a `meta` object for the router and renders clean markdown content.
+ */
+function buildGuidelinesComponentOutput(
+  doc: DocFile,
+  transformed: string,
+  title: string,
+  description: string,
+  componentExportName: string | null,
+  codeExample: string | null,
+): string {
+  const storybookPath =
+    doc.category === 'component' ? 'components' : 'patterns';
+  const storybookUrl = `${STORYBOOK_URL}/?path=/docs/${STORYBOOK_REF_PREFIX}${storybookPath}-${toKebab(doc.componentName)}--docs`;
+
+  let output = '';
+
+  // Meta export for the router
+  output += `export const meta = {\n`;
+  output += `  title: '${title.replace(/'/g, "\\'")}',\n`;
+  output += `  description: '${description.replace(/'/g, "\\'")}',\n`;
+  if (componentExportName) {
+    output += `  component: '${componentExportName}',\n`;
+  }
+  output += `  storybookUrl: '${storybookUrl}',\n`;
+  output += `};\n\n`;
+
+  // Content
+  output += `# ${title}\n\n`;
+  output += `${description}\n\n`;
+
+  if (componentExportName) {
+    output += `\`\`\`tsx\nimport { ${componentExportName} } from '@iress-oss/ids-components';\n\`\`\`\n\n`;
+  }
+
+  if (codeExample) {
+    output += `## Quick Start\n\n${codeExample}\n\n`;
+  }
+
+  output += transformed;
+  output += `\n\n---\n\n`;
+  output += `[View in Storybook →](${storybookUrl})\n`;
+
+  return output;
+}
+
+function buildGuidelinesGuideOutput(
+  doc: DocFile,
+  transformed: string,
+  title: string,
+  description: string,
+): string {
+  const storybookUrl = `${STORYBOOK_URL}/?path=/docs/${STORYBOOK_REF_PREFIX}${doc.guideSection}-${doc.guideSbSlug}--docs`;
+
+  let output = '';
+
+  output += `export const meta = {\n`;
+  output += `  title: '${title.replace(/'/g, "\\'")}',\n`;
+  output += `  description: '${description.replace(/'/g, "\\'")}',\n`;
+  output += `  category: 'guide',\n`;
+  output += `  storybookUrl: '${storybookUrl}',\n`;
+  output += `};\n\n`;
+
+  output += `# ${title}\n\n`;
+  output += transformed;
+  output += `\n\n---\n\n`;
+  output += `[View in Storybook →](${storybookUrl})\n`;
+
+  return output;
+}
+
 // ─── Manifest Generation ─────────────────────────────────────
 
 interface ManifestEntry {
@@ -1811,6 +1892,8 @@ async function main() {
       let finalOutput: string;
       let propsType: string | undefined;
       let componentSourceFile: string | undefined;
+      let componentExportName: string | null = null;
+      let codeExample: string | null = null;
 
       if (doc.category === 'guide') {
         // ── Guide: no Props, no Quick Start ──
@@ -1844,13 +1927,12 @@ async function main() {
           path.dirname(doc.filePath),
           `${doc.componentName}.tsx`,
         );
-        const componentExportName =
+        componentExportName =
           !doc.isRecipe && existsSync(componentFile)
             ? `Iress${doc.componentName}`
             : null;
 
         // Extract code example from stories Default export (or first story as fallback)
-        let codeExample: string | null = null;
         if (!doc.isRecipe) {
           const storiesFile = findStoriesFile(doc.filePath, doc.componentName);
           if (storiesFile) {
@@ -1888,14 +1970,50 @@ async function main() {
           : doc.category === 'pattern'
             ? 'patterns'
             : 'guides';
-      const outputPath = path.join(OUTPUT_DIR, outputSubDir, `${doc.slug}.md`);
 
-      if (!DRY_RUN) {
-        await fs.mkdir(path.dirname(outputPath), { recursive: true });
-        await fs.writeFile(outputPath, finalOutput, 'utf-8');
+      // AI target
+      if (TARGETS.includes('ai')) {
+        const outputPath = path.join(OUTPUT_DIR_AI, outputSubDir, `${doc.slug}.md`);
+        if (!DRY_RUN) {
+          await fs.mkdir(path.dirname(outputPath), { recursive: true });
+          await fs.writeFile(outputPath, finalOutput, 'utf-8');
+        }
+        console.log(`  ✓ [ai] ${title} → ${path.relative(process.cwd(), outputPath)}`);
       }
 
-      console.log(`  ✓ ${title} → ${path.relative(process.cwd(), outputPath)}`);
+      // Guidelines target
+      if (TARGETS.includes('guidelines')) {
+        const guidelinesOutput = doc.category === 'guide'
+          ? buildGuidelinesGuideOutput(doc, output, title, description)
+          : buildGuidelinesComponentOutput(
+              doc,
+              output,
+              title,
+              description,
+              componentExportName,
+              codeExample,
+            );
+        const guidelinesBase = path.join(ROOT, 'apps/guidelines/content');
+        let guidelinesSubDir: string;
+        let guidelinesSlug: string;
+        if (doc.category === 'guide') {
+          guidelinesSubDir = doc.guideSection ?? 'guides';
+          guidelinesSlug = doc.guideSbSlug ?? doc.slug;
+        } else if (doc.category === 'pattern') {
+          guidelinesSubDir = 'patterns';
+          guidelinesSlug = doc.slug;
+        } else {
+          guidelinesSubDir = 'components';
+          guidelinesSlug = doc.slug;
+        }
+        const guidelinesPath = path.join(guidelinesBase, guidelinesSubDir, `${guidelinesSlug}.mdx`);
+        if (!DRY_RUN) {
+          await fs.mkdir(path.dirname(guidelinesPath), { recursive: true });
+          await fs.writeFile(guidelinesPath, guidelinesOutput, 'utf-8');
+        }
+        console.log(`  ✓ [guidelines] ${title} → ${path.relative(process.cwd(), guidelinesPath)}`);
+      }
+
       translated++;
 
       translatedDocs.push({
@@ -1917,11 +2035,11 @@ async function main() {
     }
   }
 
-  // Generate manifest
-  if (!DRY_RUN) {
+  // Generate manifest (AI target only)
+  if (!DRY_RUN && TARGETS.includes('ai')) {
     const manifest = generateManifest(translatedDocs);
-    const manifestPath = path.join(OUTPUT_DIR, 'index.json');
-    await fs.mkdir(OUTPUT_DIR, { recursive: true });
+    const manifestPath = path.join(OUTPUT_DIR_AI, 'index.json');
+    await fs.mkdir(OUTPUT_DIR_AI, { recursive: true });
     await fs.writeFile(
       manifestPath,
       JSON.stringify(manifest, null, 2),

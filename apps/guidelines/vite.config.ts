@@ -11,6 +11,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
+      '@ai-docs': resolve(__dirname, '../../packages/components/.ai'),
     },
   },
   build: {

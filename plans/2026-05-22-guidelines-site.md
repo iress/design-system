@@ -109,154 +109,35 @@ Committed as `624f65fe chore: guidelines p1`
 > - Added `mdx.d.ts` for TypeScript MDX imports
 > - Uses `@vitejs/plugin-react` v6 + `tanstackRouter()` (non-deprecated APIs)
 
-## Phase 3: Code Examples from Storybook
 
-### Task 3.1: Build-time story source extraction
+## Phase 3: Translate Pipeline → Guidelines Content ✅
 
-**Files:**
-- Create: `apps/guidelines/scripts/extract-story-source.ts`
-- Create: `apps/guidelines/src/components/StoryExample.tsx`
-- Create: `apps/guidelines/src/data/story-sources.json` (generated)
+> **Approach changed:** Instead of extracting raw story source, we extended the existing
+> `translate-components.ts` pipeline with a `--target=guidelines` flag that outputs clean
+> MDX (with `export const meta`) into `apps/guidelines/content/` subfolders matching the
+> Storybook information architecture.
 
-- [ ] **Step 1: Create `apps/guidelines/scripts/extract-story-source.ts`**
+### Task 3.1: Extend translate pipeline
 
-This script reads Storybook CSF story files and extracts the source code of exported stories.
+- [x] Added `--target=ai|guidelines` flag (both by default)
+- [x] Created `buildGuidelinesComponentOutput()` and `buildGuidelinesGuideOutput()` functions
+- [x] Output goes to section subfolders: `content/{components,patterns,foundations,get-started,styling-props,resources-migration-guides}/*.mdx`
+- [x] Guide slugs use `guideSbSlug` (e.g. `accessibility` not `foundations-accessibility`)
 
-```typescript
-import { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';
-import { resolve, relative, basename } from 'path';
+### Task 3.2: Wire guidelines app routing
 
-const STORIES_DIR = resolve(__dirname, '../../../packages/components/src/components');
-const OUTPUT = resolve(__dirname, '../src/data/story-sources.json');
+- [x] Splat route (`src/routes/$.tsx`) loads all MDX from `content/**/*.mdx`
+- [x] URLs mirror Storybook IA: `/components/button`, `/foundations/accessibility`, etc.
+- [x] Nav links point to section entry pages
+- [x] Index redirects to `/get-started/develop`
+- [x] 404 shows all available pages grouped by section
 
-interface StorySource {
-  componentName: string;
-  storyName: string;
-  source: string;
-  filePath: string;
-}
+**Result:** 84 component/pattern docs + 23 guides, URLs match Storybook IA.
 
-function findStoryFiles(dir: string): string[] {
-  const results: string[] = [];
-  for (const entry of readdirSync(dir)) {
-    const full = resolve(dir, entry);
-    if (statSync(full).isDirectory()) {
-      results.push(...findStoryFiles(full));
-    } else if (entry.endsWith('.stories.tsx') || entry.endsWith('.stories.ts')) {
-      results.push(full);
-    }
-  }
-  return results;
-}
-
-function extractStories(filePath: string): StorySource[] {
-  const source = readFileSync(filePath, 'utf-8');
-  const componentName = basename(filePath).replace(/\.stories\.tsx?$/, '');
-  const exportRegex = /export const (\w+)[\s\S]*?(?=export const |\Z)/g;
-  const stories: StorySource[] = [];
-  let match;
-
-  while ((match = exportRegex.exec(source)) !== null) {
-    const storyName = match[1];
-    if (storyName === 'default') continue;
-    stories.push({
-      componentName,
-      storyName,
-      source: match[0].trim(),
-      filePath: relative(STORIES_DIR, filePath),
-    });
-  }
-  return stories;
-}
-
-const storyFiles = findStoryFiles(STORIES_DIR);
-const allStories = storyFiles.flatMap(extractStories);
-const grouped: Record<string, StorySource[]> = {};
-
-for (const story of allStories) {
-  if (!grouped[story.componentName]) grouped[story.componentName] = [];
-  grouped[story.componentName].push(story);
-}
-
-writeFileSync(OUTPUT, JSON.stringify(grouped, null, 2));
-console.log(`Extracted ${allStories.length} stories from ${storyFiles.length} files`);
-```
-
-- [ ] **Step 2: Create `apps/guidelines/src/components/StoryExample.tsx`**
-
-```tsx
-import { CodeBlock } from './CodeBlock';
-import storySources from '@/data/story-sources.json';
-
-const CHROMATIC_BASE = 'https://main--691abcc79dfa560a36d0a74f.chromatic.com';
-
-interface StoryExampleProps {
-  component: string;
-  story?: string;
-}
-
-export function StoryExample({ component, story }: StoryExampleProps) {
-  const componentStories = (storySources as Record<string, Array<{ storyName: string; source: string }>>)[component];
-  if (!componentStories) return <p>No examples found for {component}</p>;
-
-  const examples = story
-    ? componentStories.filter((s) => s.storyName === story)
-    : componentStories.slice(0, 3);
-
-  return (
-    <div>
-      {examples.map((ex) => (
-        <CodeBlock
-          key={ex.storyName}
-          language="tsx"
-          chromaticUrl={`${CHROMATIC_BASE}/?path=/story/${component.toLowerCase()}--${ex.storyName.toLowerCase()}`}
-        >
-          {ex.source}
-        </CodeBlock>
-      ))}
-    </div>
-  );
-}
-```
-
-- [ ] **Step 3: Add build script to `apps/guidelines/package.json`**
-
-Update scripts:
-```json
-"scripts": {
-  "prebuild": "tsx scripts/extract-story-source.ts",
-  "dev": "tsx scripts/extract-story-source.ts && vite",
-  "build": "tsx scripts/extract-story-source.ts && vite build",
-  "preview": "vite preview",
-  "typecheck": "tsc --noEmit"
-}
-```
-
-Add to devDependencies:
-```json
-"tsx": "^4.21.0"
-```
-
-- [ ] **Step 4: Create placeholder `apps/guidelines/src/data/story-sources.json`**
-
-```json
-{}
-```
-
-- [ ] **Step 5: Run extraction and verify**
-
-```bash
-yarn workspace @iress/ids-guidelines build
-```
-
-Expected: `story-sources.json` is populated and build succeeds.
-
-- [ ] **Step 6: Commit**
-
-```bash
-git add apps/guidelines/scripts apps/guidelines/src/components/StoryExample.tsx apps/guidelines/src/data
-git commit -m "feat(guidelines): add build-time Storybook story source extraction"
-```
+**Known issues (fix later):**
+- 3 MDX files have broken JSX (card, select, loading) — excluded
+- Code example quality needs improvement (Phase 7)
+- Bundle is 1.1MB — needs code splitting
 
 ---
 
@@ -751,13 +632,72 @@ git commit -m "feat(guidelines): add GitHub Actions deployment workflow for GitH
 |-------|-------------|----------------|
 | 1 | Working SPA shell with routing | None |
 | 2 | MDX pages rendering with navigation | Phase 1 |
-| 3 | Story source code displayed inline | Phase 2 |
+| 3 | Translate pipeline → guidelines MDX (from `.ai/` content) | Phase 2 |
 | 4 | Client-side full-text search | Phase 2 |
 | 5 | Knowledge Search panel (Flexsearch over IDS skills) | Phase 2 |
 | 6 | Automated GitHub Pages deploys | Phase 1 |
+| 7 | AI-improved code examples (skill + commit `.ai/`) | Phase 3 |
 | Future | WebLLM AI mode (private repo, pending approval) | Phase 5 context format |
 
-Phases 3, 4, 5, and 6 are independent of each other (only depend on Phase 2 or 1) and can be worked in parallel.
+Phases 3, 4, 5, 6, and 7 are independent of each other (only depend on Phase 2 or 1) and can be worked in parallel.
+
+---
+
+## Phase 7: AI-Improved Code Examples
+
+> **Strategy:** Create a skill that uses Bedrock (Claude) to improve code examples in `.ai/`.
+> Run locally with SSO credentials. Commit results to git — reviewable in PRs.
+> No CI cost. The `.ai/` folder is committed (not gitignored) and serves both
+> AI consumers and the guidelines site.
+
+### Task 7.1: Commit `.ai/` folder (stop ignoring it)
+
+- [ ] **Step 1:** Remove `packages/components/.ai/` from `.gitignore` if present
+- [ ] **Step 2:** Commit the current `.ai/` output as baseline
+- [ ] **Step 3:** Update `translate-components.ts` to not regenerate unchanged files (compare before write)
+
+### Task 7.2: Create `improve-code-examples` skill
+
+**Skill location:** `.kiro/skills/improve-code-examples/SKILL.md`
+
+The skill instructs the AI agent to:
+1. Read a component's `.ai/{component}.md` file
+2. Find code examples (fenced `tsx` blocks)
+3. For each example, evaluate quality:
+   - Does it have `{...args}` spreads? → replace with concrete props
+   - Does it use Storybook patterns (argTypes, render functions)? → simplify
+   - Is it missing an import statement? → add one
+   - Is it idiomatic React? → fix if not
+4. Rewrite the code block in-place
+5. Preserve all non-code content unchanged
+
+**Trigger:** "improve code examples", "fix code examples", "clean up .ai docs"
+
+**Usage:**
+```
+# Improve one component
+> improve code examples for Button
+
+# Improve all components
+> improve all code examples
+
+# Improve components that have {...args}
+> find and fix code examples with spread args
+```
+
+### Task 7.3: Add Bedrock-powered batch mode (optional)
+
+For bulk improvement without interactive agent sessions:
+
+- [ ] Create `scripts/improve-examples.ts` with `--component` or `--all` flag
+- [ ] Uses `@aws-sdk/client-bedrock-runtime` with Claude Sonnet
+- [ ] Reads from `.ai/components/*.md`, improves code blocks, writes back
+- [ ] Skips files where examples already look clean (no `{...args}`, has imports)
+- [ ] `--dry-run` shows proposed changes without writing
+
+**Run:** `npx tsx scripts/improve-examples.ts --all` (locally, with SSO auth)
+
+---
 
 ## Action Item (non-code)
 
