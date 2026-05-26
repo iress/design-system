@@ -1,5 +1,6 @@
 import { createRootRoute, Outlet, Link } from '@tanstack/react-router';
 import { Search } from '../components/Search';
+import { AiPanel } from '../components/AiPanel';
 
 export const Route = createRootRoute({
   component: RootLayout,
@@ -22,6 +23,7 @@ function RootLayout() {
       <main>
         <Outlet />
       </main>
+      <AiPanel />
     </div>
   );
 }

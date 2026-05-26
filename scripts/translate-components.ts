@@ -2068,6 +2068,24 @@ async function main() {
     console.log('\n(dry run — no files written)');
   }
 
+  // Generate concatenated reference files for Gemini Gem knowledge upload
+  if (!DRY_RUN && TARGETS.includes('ai')) {
+    const refParts: string[] = [];
+    const dirs = ['components', 'patterns', 'guides', 'skills'];
+    for (const dir of dirs) {
+      const dirPath = path.join(OUTPUT_DIR_AI, dir);
+      if (!existsSync(dirPath)) continue;
+      const files = (await fs.readdir(dirPath)).filter((f) => f.endsWith('.md')).sort();
+      for (const file of files) {
+        refParts.push(await fs.readFile(path.join(dirPath, file), 'utf-8'));
+      }
+    }
+    const refPath = path.join(ROOT, '.ai', 'IDS-FULL-REFERENCE.md');
+    await fs.mkdir(path.join(ROOT, '.ai'), { recursive: true });
+    await fs.writeFile(refPath, refParts.join('\n\n---\n\n'), 'utf-8');
+    console.log(`\n  ✓ Full reference → ${path.relative(process.cwd(), refPath)} (${Math.round(refParts.join('').length / 1024)}KB)`);
+  }
+
   if (errors > 0) {
     process.exit(1);
   }
