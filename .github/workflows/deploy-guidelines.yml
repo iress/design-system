@@ -11,6 +11,9 @@ on:
     #   - 'scripts/translate-components.ts'
   workflow_dispatch:
 
+env:
+  NODE_VERSION: '22'
+
 permissions:
   contents: read
   pages: write
@@ -25,12 +28,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          node-version: ${{ env.NODE_VERSION }}
       - run: corepack enable
       - run: yarn install --immutable
-      - run: yarn translate
+      - run: yarn translate:components --target=guidelines
       - run: yarn workspace @iress/ids-guidelines build
       - uses: actions/upload-pages-artifact@v3
         with:
