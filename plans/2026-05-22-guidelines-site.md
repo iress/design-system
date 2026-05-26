@@ -193,9 +193,12 @@ Source is `packages/components/.ai/` (AI-optimized format), not raw guidelines M
 - [x] Build verified: `dist/` contains `index.html`, `404.html`, `.nojekyll`, `assets/`
 - [x] Build script copies output to `docs/` at repo root (`vite build && rm -rf ../../docs && cp -r dist ../../docs`)
 - [x] GitHub Pages configured: source = `main` branch, folder = `/docs`
+- [x] CI `docs-check` job verifies `docs/` is up to date on every push (rebuilds and diffs)
 
 **Current implementation (manual deploy):** The `apps/guidelines` build script automatically
 copies output to the repo-root `docs/` folder. Commit and push `docs/` to `main` to deploy.
+A CI validation job (`docs-check` in the validate matrix) rebuilds the guidelines and fails
+if the committed `docs/` is stale.
 
 The CI-based `actions/deploy-pages@v4` job is **commented out** in `.github/workflows/ci-cd.yml`
 due to the `iress` org IP allowlist blocking GitHub-hosted runner IPs (403 on both the Pages API
@@ -208,8 +211,8 @@ and git push). `peaceiris/actions-gh-pages@v4` was also blocked for the same rea
 2. Add GitHub Actions runner IP ranges to the org IP allowlist, OR
 3. Provide a self-hosted runner whose IP is already allowlisted
 
-Once unblocked, uncomment the `deploy-guidelines` job in `ci-cd.yml` and switch Pages source
-back to "GitHub Actions" (removes the need to commit `docs/` to main).
+Once unblocked, uncomment the `deploy-guidelines` job in `ci-cd.yml`, switch Pages source
+back to "GitHub Actions", and remove the `docs-check` CI job and `docs/` from the repo.
 
 **TODO (after Phase 9):** Remove `yarn translate` from the deploy workflow once `.docs.mdx`
 files are deleted and content is fully human-authored. The deploy step becomes just
@@ -226,7 +229,7 @@ files are deleted and content is fully human-authored. The deploy step becomes j
 | 3      | One-time translate → guidelines MDX (from `.docs.mdx`)    | Phase 2                |
 | 4      | Client-side full-text search                              | Phase 2                |
 | 5      | AI assistance (Iris Gemini Gem)                           | Phase 2                |
-| 6      | Automated GitHub Pages deploys                            | Phase 1                |
+| 6      | GitHub Pages deploy (manual via `docs/`, CI staleness check) | Phase 1                |
 | 7      | AI-improved code examples (skill + ai-runner + derive)    | Phase 3                |
 | 8      | Dogfood IDS components in guidelines site UI              | Phase 1                |
 | 9      | Remove `.docs.mdx` — Storybook autodocs only             | Phase 3, 7             |
