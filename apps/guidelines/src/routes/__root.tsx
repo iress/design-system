@@ -12,11 +12,11 @@ function RootLayout() {
       <header>
         <nav>
           <Link to="/">IDS Guidelines</Link>
-          <Link to="/get-started/develop">Get Started</Link>
-          <Link to="/foundations/principles">Foundations</Link>
-          <Link to="/styling-props/styling-props">Styling Props</Link>
-          <Link to="/components/button">Components</Link>
-          <Link to="/patterns/form">Patterns</Link>
+          <Link to={'/get-started/develop' as string}>Get Started</Link>
+          <Link to={'/foundations/principles' as string}>Foundations</Link>
+          <Link to={'/styling-props/styling-props' as string}>Styling Props</Link>
+          <Link to={'/components/button' as string}>Components</Link>
+          <Link to={'/patterns/form' as string}>Patterns</Link>
           <Search />
         </nav>
       </header>

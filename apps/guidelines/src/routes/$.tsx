@@ -40,7 +40,7 @@ export const Route = createFileRoute('/$')({
 
 function SplatRoute() {
   const { _splat: splat } = Route.useParams();
-  const page = getPage(splat);
+  const page = getPage(splat ?? '');
 
   if (!page) {
     const all = getAllPages();
@@ -57,7 +57,7 @@ function SplatRoute() {
                 .filter((p) => p.section === section)
                 .map((p) => (
                   <li key={p.path}>
-                    <Link to={`/${p.path}`}>{p.title}</Link>
+                    <Link to={`/${p.path}` as string}>{p.title}</Link>
                   </li>
                 ))}
             </ul>

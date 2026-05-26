@@ -51,7 +51,6 @@ vi.mock('./OpenInCodeSandboxCustom.template?raw', () => ({
 import { getSandboxUrl } from '../helpers/getSandboxUrl';
 import { transformCodeWithParameters } from '../helpers/transformCode';
 import { useParameter } from 'storybook/manager-api';
-import type { NodeEventTarget } from 'events';
 
 describe('OpenInCodeSandbox', () => {
   let mockApi: Partial<API>;
@@ -142,7 +141,7 @@ describe('OpenInCodeSandbox', () => {
           content: expect.stringContaining('"react": "latest"') as string,
           isBinary: false,
         },
-      }) as NodeEventTarget,
+      }) as unknown,
     });
     expect(window.open).toHaveBeenCalledWith(
       'https://codesandbox.io/s/mock-sandbox',

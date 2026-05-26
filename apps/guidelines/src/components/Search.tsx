@@ -17,7 +17,7 @@ export function Search() {
         <ul style={{ position: 'absolute', listStyle: 'none', padding: 0, margin: 0 }}>
           {results.map((r) => (
             <li key={r.path}>
-              <Link to={`/${r.path}`}>{r.title}</Link>
+              <Link to={`/${r.path}` as string}>{r.title}</Link>
             </li>
           ))}
         </ul>
