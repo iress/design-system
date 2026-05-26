@@ -14,7 +14,7 @@
 
 ## Scope Breakdown
 
-This plan is split into 11 phases. Each phase produces working, testable software.
+This plan is split into 12 phases. Each phase produces working, testable software.
 
 1. **Project scaffolding** — Vite + React + TanStack Router app in `apps/guidelines`
 2. **MDX content infrastructure** — MDX plugin, layout, and first guideline page
@@ -24,9 +24,10 @@ This plan is split into 11 phases. Each phase produces working, testable softwar
 6. **GitHub Pages deployment** — GitHub Actions workflow for automated deploys
 7. **AI-improved code examples** — Skill, ai-runner, derive script, dev watcher
 8. **Dogfood IDS components** — Guidelines site UI uses IDS itself
-9. **Remove `.docs.mdx`** — Storybook becomes autodocs only
-10. **Story embeds + derived code examples** — Chromatic iframes in guidelines, derive resolves to code
-11. **Validation & cleanup** — Fix known issues, broken MDX, bundle size, transition cutover
+9. **Token documentation** — Design tokens in guidelines with values, usage, and CSS variables
+10. **Remove `.docs.mdx`** — Storybook becomes autodocs only, clean up storybook-config
+11. **Story embeds + derived code examples** — Chromatic iframes in guidelines, derive resolves to code
+12. **Validation & cleanup** — Fix known issues, broken MDX, bundle size, transition cutover
 
 ---
 
@@ -232,13 +233,14 @@ files are deleted and content is fully human-authored. The deploy step becomes j
 | 6      | GitHub Pages deploy (manual via `docs/`, CI staleness check) | Phase 1                |
 | 7      | AI-improved code examples (skill + ai-runner + derive)    | Phase 3                |
 | 8      | Dogfood IDS components in guidelines site UI              | Phase 1                |
-| 9      | Remove `.docs.mdx` — Storybook autodocs only             | Phase 3, 7             |
-| 10     | Story embeds (Chromatic iframes) + derived code examples  | Phase 7                |
-| 11     | Validation, cleanup, transition cutover                   | Phase 7, 9, 10         |
+| 9      | Token documentation in guidelines                         | Phase 2                |
+| 10     | Remove `.docs.mdx` — Storybook autodocs only             | Phase 3, 7, 9          |
+| 11     | Story embeds (Chromatic iframes) + derived code examples  | Phase 7, 9             |
+| 12     | Validation, cleanup, transition cutover                   | Phase 7, 10, 11        |
 | Future | WebLLM AI mode (private repo, pending approval)           | Phase 5 context format |
 
-**Parallelism:** Phases 3–8 are independent (depend only on Phase 1 or 2).
-Phase 9 requires 3 + 7. Phase 10 requires 7. Phase 11 is the final cutover after 7, 9, 10.
+**Parallelism:** Phases 3–9 are independent (depend only on Phase 1 or 2).
+Phase 10 requires 3 + 7 + 9. Phase 11 requires 7 + 9. Phase 12 is the final cutover after 7, 10, 11.
 
 ---
 
@@ -434,23 +436,63 @@ yarn dev
 
 ---
 
-## Phase 9: Remove `.docs.mdx` — Storybook Autodocs Only
+## Phase 9: Token Documentation in Guidelines
+
+> **Goal:** Add design token documentation to the guidelines site, matching the treatment
+> components receive. Token pages show available values, usage guidance, CSS variables, and
+> accessibility pairings. Source content lives in `apps/guidelines/content/tokens/`.
+
+**Existing sources:**
+- `packages/tokens/src/schema/*.mdx` — Storybook token docs (Colour, Spacing, Radius, Typography)
+- `packages/tokens/.ai/tokens-reference.md` — auto-generated full token reference with values
+- `packages/tokens/.ai/skills/token-usage.md` — usage guidance skill
+
+### Task 9.1: Create token content pages
+
+- [ ] **Step 1:** Create `apps/guidelines/content/tokens/` directory
+- [ ] **Step 2:** Create pages for each token category:
+  - `colour.mdx` — neutral, primary, success, warning, danger, info palettes with values & pairings
+  - `spacing.mdx` — spacing scale, usage guidance
+  - `radius.mdx` — border radius tokens
+  - `typography.mdx` — font families, sizes, weights, line heights
+- [ ] **Step 3:** Include CSS variable names, JS import paths, and concrete values
+- [ ] **Step 4:** Add usage examples showing tokens applied in CSS and via IDS styling props
+
+### Task 9.2: Add token navigation
+
+- [ ] **Step 1:** Add "Tokens" section to `__root.tsx` nav (link to `/tokens/colour`)
+- [ ] **Step 2:** Ensure splat route resolves `tokens/*` paths correctly
+
+### Task 9.3: Generate token content from source data
+
+- [ ] **Step 1:** Evaluate whether to hand-author or extend `translate-components.ts` (or future `derive-ai-docs.ts`) to generate token MDX from schema JSON
+- [ ] **Step 2:** If generated: add token generation to build pipeline so pages stay in sync with `@iress-oss/ids-tokens` releases
+- [ ] **Step 3:** Include the auto-generated token tables (from `tokens-reference.md` format) in each category page
+
+### Task 9.4: Derive token AI docs
+
+- [ ] **Step 1:** Ensure `packages/tokens/.ai/` is updated by the same derive workflow as components
+- [ ] **Step 2:** Include token pages in `IDS-FULL-REFERENCE.md` generation
+
+---
+
+## Phase 10: Remove `.docs.mdx` — Storybook Autodocs Only
 
 > **Goal:** Storybook becomes purely stories + autodocs. All narrative documentation lives
 > in `apps/guidelines/content/`. The 65 `.docs.mdx` files in `packages/components/src/` are
 > removed. Storybook auto-generates docs pages from component meta, JSDoc comments, and
 > stories — no hand-written MDX needed.
 
-**Prerequisite:** Phase 3 (translate) already migrated content to guidelines. This phase
-removes the originals and switches Storybook to autodocs mode.
+**Prerequisite:** Phase 3 (translate) migrated component content, Phase 9 added token content.
+This phase removes the originals and switches Storybook to autodocs mode.
 
-### Task 9.1: Enable autodocs in Storybook
+### Task 10.1: Enable autodocs in Storybook
 
 - [ ] **Step 1:** Add `tags: ['autodocs']` to each component's stories meta (or set globally in preview)
 - [ ] **Step 2:** Ensure component TSDoc/JSDoc on props is comprehensive (autodocs renders these)
 - [ ] **Step 3:** Verify autodocs generates acceptable pages for a sample (Button, Alert, Select)
 
-### Task 9.2: Update stories glob to exclude MDX
+### Task 10.2: Update stories glob to exclude MDX
 
 - [ ] **Step 1:** Change `getMainConfig` stories pattern from:
   ```ts
@@ -463,27 +505,46 @@ removes the originals and switches Storybook to autodocs mode.
 - [ ] **Step 2:** Keep `'../docs/**/*.mdx'` only if non-component docs (guides) remain in Storybook
   (or remove entirely if all guides are in the guidelines site)
 
-### Task 9.3: Remove `.docs.mdx` files
+### Task 10.3: Remove `.docs.mdx` files
 
 - [ ] **Step 1:** Delete all 65 `*.docs.mdx` files from `packages/components/src/`
-- [ ] **Step 2:** Remove `ComponentOverview`, `ComponentExample` imports from storybook-config (if no longer used)
-- [ ] **Step 3:** Remove `packages/components/docs/` folder (guides moved to guidelines site)
+- [ ] **Step 2:** Remove `packages/components/docs/` folder (guides moved to guidelines site)
+- [ ] **Step 3:** Delete all `.mdx` files from `packages/tokens/`:
+  - `packages/tokens/docs/010-Introduction.mdx`
+  - `packages/tokens/docs/020-Sandbox.mdx`
+  - `packages/tokens/src/schema/Colour.mdx`
+  - `packages/tokens/src/schema/Spacing.mdx`
+  - `packages/tokens/src/schema/Radius.mdx`
+  - `packages/tokens/src/schema/Typography.mdx`
 - [ ] **Step 4:** Update `translate-components.ts` — either delete entirely or simplify to only run `derive-ai-docs.ts`
 
-### Task 9.4: Remove stale docs infrastructure
+### Task 10.4: Clean up `@iress-oss/ids-storybook-config`
+
+With autodocs, the custom doc components are no longer needed. Remove them:
+
+- [ ] **Step 1:** Remove doc-specific components from `src/components/`:
+  - `ComponentOverview.tsx` (renders `.docs.mdx` header + status + API)
+  - `ComponentExample.tsx` (renders story examples in docs pages)
+  - `ComponentApi.tsx`, `ComponentApiExpander.tsx`, `ComponentApiHeading.tsx` (custom API tables — autodocs generates these)
+  - `ComponentStatus.tsx` (status badges in docs pages)
+- [ ] **Step 2:** Remove exports from `src/index.ts`
+- [ ] **Step 3:** Remove related tests and stories
+- [ ] **Step 4:** Update `packages/storybook-config/package.json` if docs-related deps can be dropped
+- [ ] **Step 5:** Keep utility helpers that are still used by stories (`disableArgTypes`, `removeArgTypes`, `stylingProps`, etc.)
+
+### Task 10.5: Remove stale docs infrastructure
 
 - [ ] Remove Storybook doc blocks that are no longer needed (`<Meta of=.../>` pattern)
-- [ ] Clean up `@iress-oss/ids-storybook-config` exports (ComponentOverview, ComponentExample, etc.) if unused
-- [ ] Update `packages/components/package.json` if docs-related deps can be dropped
+- [ ] Verify no remaining imports of removed components across the monorepo
 
-### Task 9.5: Add cross-links from Storybook to Guidelines
+### Task 10.6: Add cross-links from Storybook to Guidelines
 
 - [ ] Add a Storybook toolbar link or panel that points to the guidelines site
 - [ ] Optionally add a "📖 Full docs" link in each autodocs page pointing to `https://<pages-url>/components/<slug>`
 
 ---
 
-## Phase 10: Story Embeds in Guidelines + Derived Code Examples
+## Phase 11: Story Embeds in Guidelines + Derived Code Examples
 
 > **Goal:** Guidelines shows live rendered stories via Chromatic iframe embeds (Storybook
 > best practice). The `derive-ai-docs` script resolves story references, extracts source,
@@ -513,7 +574,7 @@ packages/components/.ai/components/button.md (shipped in npm)
     ```
 ```
 
-### Task 10.1: Create `<StoryEmbed>` component for guidelines site
+### Task 11.1: Create `<StoryEmbed>` component for guidelines site
 
 - [ ] **Step 1:** Create `apps/guidelines/src/components/StoryEmbed.tsx`
   - Accepts `id` (Storybook story ID, e.g. `components-button--default`)
@@ -521,13 +582,13 @@ packages/components/.ai/components/button.md (shipped in npm)
   - Responsive height, loading state, optional caption
   - Optionally shows "Open in Storybook" link
 
-### Task 10.2: Use `<StoryEmbed>` in guidelines content
+### Task 11.2: Use `<StoryEmbed>` in guidelines content
 
 - [ ] **Step 1:** Replace hardcoded JSX snippets in `apps/guidelines/content/components/*.mdx`
   with `<StoryEmbed id="..." />` where a live demo is needed
 - [ ] **Step 2:** Keep prose/written code snippets for simple prop demonstrations (not everything needs an iframe)
 
-### Task 10.3: Update `derive-ai-docs.ts` to resolve embeds
+### Task 11.3: Update `derive-ai-docs.ts` to resolve embeds
 
 - [ ] **Step 1:** When processing guidelines MDX → `.ai/`, find `<StoryEmbed id="..." />`
 - [ ] **Step 2:** Map story ID back to `.stories.tsx` file + export name
@@ -535,7 +596,7 @@ packages/components/.ai/components/button.md (shipped in npm)
 - [ ] **Step 4:** Replace the embed with a clean fenced code block in the `.ai/` output
 - [ ] **Step 5:** Run improve-code-examples skill on the result (validate props, add imports)
 
-### Task 10.4: Keeping examples in sync
+### Task 11.4: Keeping examples in sync
 
 - Stories change → Chromatic iframe automatically reflects the update (no rebuild needed)
 - `.ai/` code examples update on next `yarn dev` run (derive step re-extracts source)
@@ -543,23 +604,23 @@ packages/components/.ai/components/button.md (shipped in npm)
 
 ---
 
-## Phase 11: Validation & Cleanup
+## Phase 12: Validation & Cleanup
 
 > **Goal:** Fix all known issues accumulated during earlier phases, perform the cutover
 > from translate-based workflow to content-as-source-of-truth, and verify everything works.
 
-### Task 11.1: Fix broken MDX files
+### Task 12.1: Fix broken MDX files
 
 - [ ] Fix 3 broken MDX files excluded in Phase 3 (card, select, loading)
 - [ ] Validate all `apps/guidelines/content/**/*.mdx` files parse without errors
 
-### Task 11.2: Bundle size — code splitting
+### Task 12.2: Bundle size — code splitting
 
 - [ ] Add route-based code splitting (lazy-load each section)
 - [ ] Target: initial bundle < 300KB (currently 1.1MB)
 - [ ] Verify Lighthouse performance score
 
-### Task 11.3: Transition cutover (old → new workflow)
+### Task 12.3: Transition cutover (old → new workflow)
 
 Performed after Phases 7, 9, and 10 are complete:
 
@@ -573,14 +634,14 @@ Performed after Phases 7, 9, and 10 are complete:
 - [ ] **Step 8:** Verify CI builds pass without translate
 - [ ] **Step 9:** Verify `yarn dev` watcher correctly updates `.ai/` on content/story changes
 
-### Task 11.4: Update `IDS-FULL-REFERENCE.md` generation
+### Task 12.4: Update `IDS-FULL-REFERENCE.md` generation
 
 - [ ] Move concatenation logic from old translate script into `derive-ai-docs.ts`
 - [ ] Source: `packages/components/.ai/**/*.md` + `.kiro/skills/` (AI-optimized, not raw MDX)
 - [ ] Verify `.ai/IDS-FULL-REFERENCE.md` is regenerated correctly
 - [ ] Re-upload to Iris Gemini Gem
 
-### Task 11.5: Architecture diagrams
+### Task 12.5: Architecture diagrams
 
 - [ ] **Diagram 1: Content flow** — where content lives, what derives from what, what ships where
   ```
@@ -596,11 +657,28 @@ Performed after Phases 7, 9, and 10 are complete:
 - [ ] Add diagrams to `apps/guidelines/` README or `docs/ARCHITECTURE.md`
 - [ ] Use mermaid so they render in GitHub
 
-### Task 11.6: Documentation
+### Task 12.6: Documentation
 
 - [ ] Update `AGENTS.md` to reflect new workflow (no more `yarn translate`, use `yarn dev` for .ai updates)
 - [ ] Update `README.md` development section if needed
 - [ ] Add a `CONTRIBUTING.md` note about committing `.ai/` changes with PRs
+
+### Task 12.7: Contributor documentation
+
+Document how to add/edit guidelines content for contributors and AI agents:
+
+- [ ] **Step 1:** Create `apps/guidelines/CONTRIBUTING.md` covering:
+  - How to add a new guideline page (create MDX in `content/<section>/`, add meta export)
+  - Content structure (sections: `components`, `patterns`, `tokens`, `foundations`, `get-started`, etc.)
+  - MDX format requirements (frontmatter, meta export, code block conventions)
+  - How to preview locally (`yarn workspace @iress/ids-guidelines run dev`)
+  - How to deploy (build + commit `docs/`)
+- [ ] **Step 2:** Update `.github/instructions/` to reference guidelines as the docs source of truth
+- [ ] **Step 3:** Update `AGENTS.md` to document:
+  - All narrative docs live in `apps/guidelines/content/` (not `.docs.mdx`)
+  - `packages/components/.ai/` is a derived artifact, not hand-edited
+  - Token docs live in `apps/guidelines/content/tokens/`
+- [ ] **Step 4:** Add a note to the root `README.md` development section about the guidelines app
 
 ---
 
