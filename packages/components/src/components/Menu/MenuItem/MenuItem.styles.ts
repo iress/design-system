@@ -63,7 +63,17 @@ export const menuItem = sva({
     isHeading: {
       true: {
         root: {
+          cursor: 'default',
           pb: 'spacing.1',
+
+          _hover: {
+            bg: 'transparent',
+          },
+
+          '&:active': {
+            bg: 'transparent',
+            color: 'colour.neutral.70',
+          },
 
           '&:not(:first-child)': {
             pt: 'spacing.4',
