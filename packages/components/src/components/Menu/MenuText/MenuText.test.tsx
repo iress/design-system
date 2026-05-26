@@ -162,14 +162,10 @@ describe('IressMenuHeading', () => {
     expect(heading.closest(`.${GlobalCSSClass.MenuHeading}`)).not.toBeNull();
   });
 
-  it('renders as static text with default cursor', () => {
-    const screen = render(
-      <IressMenu>
-        <IressMenuHeading data-testid={TEST_ID}>Menu heading</IressMenuHeading>
-      </IressMenu>,
-    );
+  it('applies static heading styles', () => {
+    const headingStyles = menuItem.raw({ isHeading: true }).root;
 
-    const wrapper = screen.getByTestId(TEST_ID);
-    expect(wrapper).toHaveStyle({ cursor: 'default' });
+    expect(headingStyles.cursor).toBe('default');
+    expect(headingStyles._hover).toEqual({ background: 'transparent' });
   });
 });
