@@ -479,6 +479,7 @@ git commit -m "feat(guidelines): add GitHub Actions deployment workflow for GitH
 | 5 | Knowledge Search panel (Flexsearch over IDS skills) | Phase 2 |
 | 6 | Automated GitHub Pages deploys | Phase 1 |
 | 7 | AI-improved code examples (skill + commit `.ai/`) | Phase 3 |
+| 8 | Dogfood IDS components in guidelines site UI | Phase 1 |
 | Future | WebLLM AI mode (private repo, pending approval) | Phase 5 context format |
 
 Phases 3, 4, 5, 6, and 7 are independent of each other (only depend on Phase 2 or 1) and can be worked in parallel.
@@ -538,6 +539,36 @@ For bulk improvement without interactive agent sessions:
 - [ ] `--dry-run` shows proposed changes without writing
 
 **Run:** `npx tsx scripts/improve-examples.ts --all` (locally, with SSO auth)
+
+---
+
+## Phase 8: Dogfood IDS Components in Guidelines Site
+
+> **Goal:** Replace plain HTML elements in the guidelines site UI with IDS components.
+> The guidelines site *for* IDS should use IDS itself.
+
+### Task 8.1: Add IDS dependency and provider
+
+- [ ] Add `@iress-oss/ids-components` to `apps/guidelines/package.json` dependencies
+- [ ] Wrap app in IDS provider (if required) in `src/main.tsx`
+
+### Task 8.2: Convert layout and navigation
+
+- [ ] `__root.tsx` — Replace `<header>`, `<nav>`, `<Link>` with `IressAppShell`, `IressNavigation`, `IressButton` (or appropriate IDS layout components)
+- [ ] Add sidebar navigation with section grouping (matching Storybook IA)
+
+### Task 8.3: Convert content components
+
+- [ ] `Search.tsx` — Use `IressInput` with search icon for the search input
+- [ ] `CodeBlock.tsx` — Use `IressPanel` or appropriate container, `IressButton` for copy
+- [ ] `MdxLayout.tsx` — Use `IressText`, `IressStack` for article layout
+- [ ] 404 page — Use IDS components for the not-found state
+
+### Task 8.4: Add IDS styling/tokens
+
+- [ ] Import IDS CSS/theme in `main.tsx`
+- [ ] Use IDS spacing/typography tokens for layout
+- [ ] Ensure the site looks consistent with IDS design language
 
 ---
 
