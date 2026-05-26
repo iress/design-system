@@ -10,6 +10,9 @@ function RootLayout() {
       <header>
         <nav>
           <Link to="/">IDS Guidelines</Link>
+          <Link to="/$slug" params={{ slug: 'getting-started' }}>
+            Getting Started
+          </Link>
         </nav>
       </header>
       <main>

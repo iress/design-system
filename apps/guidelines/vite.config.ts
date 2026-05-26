@@ -1,10 +1,12 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import mdx from '@mdx-js/rollup';
+import remarkGfm from 'remark-gfm';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [tanstackRouter(), react()],
+  plugins: [tanstackRouter(), mdx({ remarkPlugins: [remarkGfm] }), react()],
   base: '/design-system/',
   resolve: {
     alias: {

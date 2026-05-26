@@ -39,110 +39,15 @@ This plan is split into 6 independent phases. Each phase produces working, testa
 - Create: `apps/guidelines/src/routes/index.tsx`
 - Modify: `package.json` (root — add `apps/*` to workspaces)
 
-- [ ] **Step 1: Clean existing build artifacts**
+- [x] **Step 1: Clean existing build artifacts**
+- [x] **Step 2: Update root package.json to include apps workspace**
+- [x] **Step 3: Create `apps/guidelines/package.json`**
+- [x] **Step 4: Create `apps/guidelines/tsconfig.json`**
+- [x] **Step 5: Create `apps/guidelines/vite.config.ts`**
 
-```bash
-rm -rf apps/guidelines/dist apps/guidelines/node_modules apps/guidelines/.tanstack
-```
+> **Note:** Updated from plan — uses `@vitejs/plugin-react` v6 (has OXC built in) and `tanstackRouter()` instead of deprecated `TanStackRouterVite()`.
 
-- [ ] **Step 2: Update root package.json to include apps workspace**
-
-In root `package.json`, change:
-```json
-"workspaces": {
-  "packages": [
-    "packages/*"
-  ]
-}
-```
-to:
-```json
-"workspaces": {
-  "packages": [
-    "packages/*",
-    "apps/*"
-  ]
-}
-```
-
-- [ ] **Step 3: Create `apps/guidelines/package.json`**
-
-```json
-{
-  "name": "@iress/ids-guidelines",
-  "version": "0.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@tanstack/react-router": "^1.120.3",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6"
-  },
-  "devDependencies": {
-    "@tanstack/router-plugin": "^1.120.3",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "@vitejs/plugin-react": "^4.7.0",
-    "typescript": "^6.0.3",
-    "vite": "8.0.11"
-  }
-}
-```
-
-- [ ] **Step 4: Create `apps/guidelines/tsconfig.json`**
-
-```json
-{
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "jsx": "react-jsx",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": ["src"]
-}
-```
-
-- [ ] **Step 5: Create `apps/guidelines/vite.config.ts`**
-
-```typescript
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
-import { resolve } from 'path';
-
-export default defineConfig({
-  plugins: [TanStackRouterVite(), react()],
-  base: '/design-system/',
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
-    },
-  },
-  build: {
-    outDir: 'dist',
-  },
-});
-```
-
-- [ ] **Step 6: Create `apps/guidelines/index.html`**
+- [x] **Step 6: Create `apps/guidelines/index.html`**
 
 ```html
 <!doctype html>
@@ -159,90 +64,16 @@ export default defineConfig({
 </html>
 ```
 
-- [ ] **Step 7: Create `apps/guidelines/src/main.tsx`**
+- [x] **Step 7: Create `apps/guidelines/src/main.tsx`**
+- [x] **Step 8: Create `apps/guidelines/src/routes/__root.tsx`**
+- [x] **Step 9: Create `apps/guidelines/src/routes/index.tsx`**
+- [x] **Step 10: Install dependencies and verify build**
 
-```tsx
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { RouterProvider, createHashHistory, createRouter } from '@tanstack/react-router';
-import { routeTree } from './routeTree.gen';
+Build succeeds: `dist/index.html` + `assets/index-C8yWASOB.js` (274KB, 87KB gzip) in 105ms.
 
-const hashHistory = createHashHistory();
-const router = createRouter({ routeTree, history: hashHistory });
+- [x] **Step 11: Commit**
 
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router;
-  }
-}
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
-);
-```
-
-- [ ] **Step 8: Create `apps/guidelines/src/routes/__root.tsx`**
-
-```tsx
-import { createRootRoute, Outlet, Link } from '@tanstack/react-router';
-
-export const Route = createRootRoute({
-  component: RootLayout,
-});
-
-function RootLayout() {
-  return (
-    <div>
-      <header>
-        <nav>
-          <Link to="/">IDS Guidelines</Link>
-        </nav>
-      </header>
-      <main>
-        <Outlet />
-      </main>
-    </div>
-  );
-}
-```
-
-- [ ] **Step 9: Create `apps/guidelines/src/routes/index.tsx`**
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router';
-
-export const Route = createFileRoute('/')({
-  component: HomePage,
-});
-
-function HomePage() {
-  return (
-    <div>
-      <h1>Iress Design System Guidelines</h1>
-      <p>Component usage guidance, patterns, and best practices.</p>
-    </div>
-  );
-}
-```
-
-- [ ] **Step 10: Install dependencies and verify build**
-
-```bash
-cd apps/guidelines
-yarn install
-yarn build
-```
-
-Expected: Build succeeds and produces `dist/index.html`.
-
-- [ ] **Step 11: Commit**
-
-```bash
-git add apps/guidelines package.json yarn.lock
-git commit -m "feat(guidelines): scaffold Vite + React + TanStack Router app"
-```
+Committed as `624f65fe chore: guidelines p1`
 
 ---
 
@@ -254,229 +85,29 @@ git commit -m "feat(guidelines): scaffold Vite + React + TanStack Router app"
 - Create: `apps/guidelines/src/components/MdxLayout.tsx`
 - Create: `apps/guidelines/src/components/CodeBlock.tsx`
 - Create: `apps/guidelines/content/getting-started.mdx`
-- Create: `apps/guidelines/src/routes/guides/$slug.tsx`
+- Create: `apps/guidelines/src/routes/$slug.tsx`
+- Create: `apps/guidelines/src/mdx.d.ts`
 - Modify: `apps/guidelines/vite.config.ts` (add MDX plugin)
 - Modify: `apps/guidelines/package.json` (add MDX deps)
+- Modify: `apps/guidelines/tsconfig.json` (include content dir)
+- Modify: `apps/guidelines/src/routes/index.tsx` (redirect to /getting-started)
 
-- [ ] **Step 1: Add MDX dependencies to `apps/guidelines/package.json`**
+- [x] **Step 1: Add MDX dependencies to `apps/guidelines/package.json`**
+- [x] **Step 2: Update `apps/guidelines/vite.config.ts` with MDX plugin**
+- [x] **Step 3: Create `apps/guidelines/src/components/CodeBlock.tsx`**
+- [x] **Step 4: Create `apps/guidelines/src/components/MdxLayout.tsx`**
+- [x] **Step 5: Create first MDX guideline `apps/guidelines/content/getting-started.mdx`**
+- [x] **Step 6: Create dynamic route `apps/guidelines/src/routes/$slug.tsx`**
+- [x] **Step 7: Update root layout navigation**
+- [x] **Step 8: Install deps and verify build**
+- [x] **Step 9: Commit**
 
-Add to `dependencies`:
-```json
-"@mdx-js/react": "^3.1.0"
-```
-
-Add to `devDependencies`:
-```json
-"@mdx-js/rollup": "^3.1.0",
-"remark-gfm": "^4.0.0"
-```
-
-- [ ] **Step 2: Update `apps/guidelines/vite.config.ts` with MDX plugin**
-
-```typescript
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
-import mdx from '@mdx-js/rollup';
-import remarkGfm from 'remark-gfm';
-import { resolve } from 'path';
-
-export default defineConfig({
-  plugins: [
-    TanStackRouterVite(),
-    mdx({ remarkPlugins: [remarkGfm] }),
-    react(),
-  ],
-  base: '/design-system/',
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
-    },
-  },
-  build: {
-    outDir: 'dist',
-  },
-});
-```
-
-- [ ] **Step 3: Create `apps/guidelines/src/components/CodeBlock.tsx`**
-
-```tsx
-import { useState } from 'react';
-
-interface CodeBlockProps {
-  children: string;
-  language?: string;
-  chromaticUrl?: string;
-}
-
-export function CodeBlock({ children, language, chromaticUrl }: CodeBlockProps) {
-  const [copied, setCopied] = useState(false);
-
-  const copy = () => {
-    navigator.clipboard.writeText(children);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  return (
-    <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        {language && <span>{language}</span>}
-        <div>
-          {chromaticUrl && (
-            <a href={chromaticUrl} target="_blank" rel="noopener noreferrer">
-              View in Storybook ↗
-            </a>
-          )}
-          <button onClick={copy}>{copied ? 'Copied!' : 'Copy'}</button>
-        </div>
-      </div>
-      <pre>
-        <code>{children}</code>
-      </pre>
-    </div>
-  );
-}
-```
-
-- [ ] **Step 4: Create `apps/guidelines/src/components/MdxLayout.tsx`**
-
-```tsx
-import type { ReactNode } from 'react';
-
-interface MdxLayoutProps {
-  children: ReactNode;
-  title: string;
-  description?: string;
-}
-
-export function MdxLayout({ children, title, description }: MdxLayoutProps) {
-  return (
-    <article>
-      <header>
-        <h1>{title}</h1>
-        {description && <p>{description}</p>}
-      </header>
-      <div>{children}</div>
-    </article>
-  );
-}
-```
-
-- [ ] **Step 5: Create first MDX guideline `apps/guidelines/content/getting-started.mdx`**
-
-```mdx
-export const meta = {
-  title: 'Getting Started',
-  description: 'How to install and configure the Iress Design System in your application.',
-};
-
-# Getting Started
-
-## Installation
-
-Install the IDS components package:
-
-```bash
-npm install @iress-oss/ids-components
-```
-
-## Basic Usage
-
-```tsx
-import { IressButton } from '@iress-oss/ids-components';
-
-function App() {
-  return <IressButton variant="primary">Click me</IressButton>;
-}
-```
-
-## Next Steps
-
-- Browse the [component guidelines](/guides/components) for detailed usage
-- Learn about [design tokens](/guides/tokens) for theming
-```
-
-- [ ] **Step 6: Create dynamic route `apps/guidelines/src/routes/guides/$slug.tsx`**
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router';
-
-const guides = import.meta.glob('../../content/*.mdx', { eager: true }) as Record<
-  string,
-  { default: React.ComponentType; meta?: { title: string; description?: string } }
->;
-
-function getGuide(slug: string) {
-  const key = Object.keys(guides).find((k) => k.includes(`/${slug}.mdx`));
-  return key ? guides[key] : undefined;
-}
-
-export const Route = createFileRoute('/guides/$slug')({
-  component: GuidePage,
-});
-
-function GuidePage() {
-  const { slug } = Route.useParams();
-  const guide = getGuide(slug);
-
-  if (!guide) {
-    return <div>Guide not found</div>;
-  }
-
-  const Content = guide.default;
-  return <Content />;
-}
-```
-
-- [ ] **Step 7: Update root layout navigation**
-
-Update `apps/guidelines/src/routes/__root.tsx` to add navigation links:
-
-```tsx
-import { createRootRoute, Outlet, Link } from '@tanstack/react-router';
-
-export const Route = createRootRoute({
-  component: RootLayout,
-});
-
-function RootLayout() {
-  return (
-    <div>
-      <header>
-        <nav>
-          <Link to="/">IDS Guidelines</Link>
-          <Link to="/guides/$slug" params={{ slug: 'getting-started' }}>
-            Getting Started
-          </Link>
-        </nav>
-      </header>
-      <main>
-        <Outlet />
-      </main>
-    </div>
-  );
-}
-```
-
-- [ ] **Step 8: Install deps and verify build**
-
-```bash
-yarn install
-yarn workspace @iress/ids-guidelines build
-```
-
-Expected: Build succeeds with MDX pages compiled into the bundle.
-
-- [ ] **Step 9: Commit**
-
-```bash
-git add apps/guidelines
-git commit -m "feat(guidelines): add MDX content infrastructure with dynamic routing"
-```
-
----
+> **Deviations from original plan:**
+> - Route is `/$slug` (not `/guides/$slug`) — simpler URLs
+> - Index redirects to `/getting-started`
+> - 404 page shows list of available guides
+> - Added `mdx.d.ts` for TypeScript MDX imports
+> - Uses `@vitejs/plugin-react` v6 + `tanstackRouter()` (non-deprecated APIs)
 
 ## Phase 3: Code Examples from Storybook
 
