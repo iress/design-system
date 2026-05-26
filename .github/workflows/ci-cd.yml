@@ -32,6 +32,7 @@ permissions:
   id-token: write
   contents: write
   actions: read
+  pages: write
 
 # Conflicts with merge_group events
 # concurrency:
@@ -474,3 +475,42 @@ jobs:
             yarn workspaces foreach -A --no-private npm publish --tag canary --access public --provenance
           fi
           echo "✅ Canary release published successfully!"
+
+  deploy-guidelines:
+    name: Deploy Guidelines
+    if: github.repository_owner == 'iress' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: [validated]
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Restore Yarn dependencies
+        uses: actions/cache/restore@v5
+        with:
+          path: ${{ env.INSTALL_CACHE_PATHS }}
+          key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          fail-on-cache-miss: true
+      - name: Restore build outputs
+        uses: actions/cache/restore@v5
+        with:
+          path: ${{ env.BUILD_CACHE_PATHS }}
+          key: yarn-${{ runner.os }}-${{ github.run_id }}
+          fail-on-cache-miss: true
+      - name: Install dependencies if needed
+        run: yarn install --immutable
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/guidelines/dist
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
