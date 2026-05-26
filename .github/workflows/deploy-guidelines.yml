@@ -3,12 +3,12 @@ name: Deploy Guidelines Site
 on:
   push:
     branches: [main, feat/guidelines]
-    paths:
-      - 'apps/guidelines/**'
-      - '.agents/skills/**'
-      - 'packages/components/src/components/**/*.stories.*'
-      - 'packages/components/src/components/**/*.docs.mdx'
-      - 'scripts/translate-components.ts'
+    # paths:
+    #   - 'apps/guidelines/**'
+    #   - '.agents/skills/**'
+    #   - 'packages/components/src/components/**/*.stories.*'
+    #   - 'packages/components/src/components/**/*.docs.mdx'
+    #   - 'scripts/translate-components.ts'
   workflow_dispatch:
 
 permissions:
