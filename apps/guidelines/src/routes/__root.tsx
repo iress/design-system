@@ -1,4 +1,5 @@
 import { createRootRoute, Outlet, Link } from '@tanstack/react-router';
+import { Search } from '../components/Search';
 
 export const Route = createRootRoute({
   component: RootLayout,
@@ -15,6 +16,7 @@ function RootLayout() {
           <Link to="/styling-props/styling-props">Styling Props</Link>
           <Link to="/components/button">Components</Link>
           <Link to="/patterns/form">Patterns</Link>
+          <Search />
         </nav>
       </header>
       <main>

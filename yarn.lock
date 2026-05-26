@@ -1840,10 +1840,10 @@ __metadata:
     "@types/react": "npm:^19.1.8"
     "@types/react-dom": "npm:^19.1.6"
     "@vitejs/plugin-react": "npm:^6.0.1"
+    flexsearch: "npm:0.7.43"
     react: "npm:^19.2.6"
     react-dom: "npm:^19.2.6"
     remark-gfm: "npm:^4.0.1"
-    tsx: "npm:^4.21.0"
     typescript: "npm:^6.0.3"
     vite: "npm:8.0.11"
   languageName: unknown
@@ -8068,6 +8068,13 @@ __metadata:
   version: 3.4.2
   resolution: "flatted@npm:3.4.2"
   checksum: 10c0/a65b67aae7172d6cdf63691be7de6c5cd5adbdfdfe2e9da1a09b617c9512ed794037741ee53d93114276bff3f93cd3b0d97d54f9b316e1e4885dde6e9ffdf7ed
+  languageName: node
+  linkType: hard
+
+"flexsearch@npm:0.7.43":
+  version: 0.7.43
+  resolution: "flexsearch@npm:0.7.43"
+  checksum: 10c0/797dc474ed97750b8e85c118b1af63eb2709da5fc05defcb13e96515774f28743ccb2448b63f3b703cf1ca571928c006069503dacf7d177bc07b9ee15e1f85d0
   languageName: node
   linkType: hard
 
