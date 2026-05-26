@@ -478,7 +478,7 @@ jobs:
 
   deploy-guidelines:
     name: Deploy Guidelines
-    if: github.repository_owner == 'iress' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.repository_owner == 'iress' && github.event_name == 'push' && contains(fromJSON('["refs/heads/main", "refs/heads/feat/guidelines"]'), github.ref)
     runs-on: ubuntu-latest
     needs: [validated]
     timeout-minutes: 15
