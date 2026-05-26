@@ -26,7 +26,7 @@ This repository includes specialized GitHub Copilot agents to assist with develo
 
 - **Bug-Fixing Agent**: Systematically fixes bugs from the issue tracker with comprehensive documentation
 
-**Learn more**: See the [Copilot Agent Setup Guide](docs/COPILOT-AGENT-SETUP.md) for detailed instructions on using these agents in VS Code and Slack.
+**Learn more**: See the [Copilot Agent Setup Guide](.github/docs/COPILOT-AGENT-SETUP.md) for detailed instructions on using these agents in VS Code and Slack.
 
 ## Development
 

@@ -476,36 +476,43 @@ jobs:
           fi
           echo "✅ Canary release published successfully!"
 
-  deploy-guidelines:
-    name: Deploy Guidelines
-    if: github.repository_owner == 'iress' && github.event_name == 'push' && contains(fromJSON('["refs/heads/main", "refs/heads/feat/guidelines"]'), github.ref)
-    runs-on: ubuntu-latest
-    needs: [validated]
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v6
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Enable Corepack
-        run: corepack enable
-      - name: Restore Yarn dependencies
-        uses: actions/cache/restore@v5
-        with:
-          path: ${{ env.INSTALL_CACHE_PATHS }}
-          key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          fail-on-cache-miss: true
-      - name: Restore build outputs
-        uses: actions/cache/restore@v5
-        with:
-          path: ${{ env.BUILD_CACHE_PATHS }}
-          key: yarn-${{ runner.os }}-${{ github.run_id }}
-          fail-on-cache-miss: true
-      - name: Install dependencies if needed
-        run: yarn install --immutable
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: apps/guidelines/dist
+  # TODO: Re-enable once Platform Tech adds GitHub Actions runner IPs to the org IP allowlist.
+  # See: https://github.com/iress/design-system/issues — deploy fails with 403 due to IP allowlist.
+  # deploy-guidelines:
+  #   name: Deploy Guidelines
+  #   if: github.repository_owner == 'iress' && github.event_name == 'push' && contains(fromJSON('["refs/heads/main", "refs/heads/feat/guidelines"]'), github.ref)
+  #   runs-on: ubuntu-latest
+  #   needs: [validated]
+  #   timeout-minutes: 15
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+  #   steps:
+  #     - uses: actions/checkout@v6
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v6
+  #       with:
+  #         node-version: ${{ env.NODE_VERSION }}
+  #     - name: Enable Corepack
+  #       run: corepack enable
+  #     - name: Restore Yarn dependencies
+  #       uses: actions/cache/restore@v5
+  #       with:
+  #         path: ${{ env.INSTALL_CACHE_PATHS }}
+  #         key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+  #         fail-on-cache-miss: true
+  #     - name: Restore build outputs
+  #       uses: actions/cache/restore@v5
+  #       with:
+  #         path: ${{ env.BUILD_CACHE_PATHS }}
+  #         key: yarn-${{ runner.os }}-${{ github.run_id }}
+  #         fail-on-cache-miss: true
+  #     - name: Install dependencies if needed
+  #       run: yarn install --immutable
+  #     - name: Upload Pages artifact
+  #       uses: actions/upload-pages-artifact@v3
+  #       with:
+  #         path: apps/guidelines/dist
+  #     - name: Deploy to GitHub Pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v4

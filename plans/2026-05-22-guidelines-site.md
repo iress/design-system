@@ -2,9 +2,9 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build a standalone IDS guidelines site with MDX documentation, code examples sourced from Storybook stories, full-text search, and an AI assistance panel — deployed to GitHub Pages.
+**Goal:** Build a standalone IDS guidelines site with MDX documentation, live Storybook story embeds via Chromatic iframes, full-text search, and an AI assistance panel — deployed to GitHub Pages. The guidelines site is the source of truth for all IDS documentation; `.ai/` docs are derived during dev for npm distribution.
 
-**Architecture:** React SPA using TanStack Router (hash-based routing for GH Pages), Vite for build, MDX for content pages. Code examples are extracted from Storybook CSF stories at build time. Flexsearch provides client-side search built at compile time. AI panel uses IDS skills compiled into static context with a client-side LLM API call.
+**Architecture:** React SPA using TanStack Router (hash-based routing for GH Pages), Vite for build, MDX for content pages. Live examples are rendered via Chromatic iframe embeds. `packages/components/.ai/` is derived from guidelines content with AI-improved code examples (validated against component source). Flexsearch provides client-side search. AI assistance via Iris Gemini Gem.
 
 **Tech Stack:** React 19, TanStack Router (file-based, hash history), Vite 8, MDX, Flexsearch, GitHub Actions, GitHub Pages
 
@@ -14,14 +14,19 @@
 
 ## Scope Breakdown
 
-This plan is split into 6 independent phases. Each phase produces working, testable software.
+This plan is split into 11 phases. Each phase produces working, testable software.
 
 1. **Project scaffolding** — Vite + React + TanStack Router app in `apps/guidelines`
 2. **MDX content infrastructure** — MDX plugin, layout, and first guideline page
-3. **Code examples from Storybook** — Build-time extraction of story source code
+3. **One-time translate** — Migrate `.docs.mdx` → `apps/guidelines/content/` (done once)
 4. **Client-side search** — Flexsearch index built at compile time from MDX content
-5. **AI assistance panel** — Contextual AI panel powered by compiled IDS skill knowledge
+5. **AI assistance panel** — Iris Gemini Gem linked from guidelines site
 6. **GitHub Pages deployment** — GitHub Actions workflow for automated deploys
+7. **AI-improved code examples** — Skill, ai-runner, derive script, dev watcher
+8. **Dogfood IDS components** — Guidelines site UI uses IDS itself
+9. **Remove `.docs.mdx`** — Storybook becomes autodocs only
+10. **Story embeds + derived code examples** — Chromatic iframes in guidelines, derive resolves to code
+11. **Validation & cleanup** — Fix known issues, broken MDX, bundle size, transition cutover
 
 ---
 
@@ -30,6 +35,7 @@ This plan is split into 6 independent phases. Each phase produces working, testa
 ### Task 1.1: Initialize the guidelines app package
 
 **Files:**
+
 - Create: `apps/guidelines/package.json`
 - Create: `apps/guidelines/tsconfig.json`
 - Create: `apps/guidelines/vite.config.ts`
@@ -82,6 +88,7 @@ Committed as `624f65fe chore: guidelines p1`
 ### Task 2.1: Add MDX support and layout components
 
 **Files:**
+
 - Create: `apps/guidelines/src/components/MdxLayout.tsx`
 - Create: `apps/guidelines/src/components/CodeBlock.tsx`
 - Create: `apps/guidelines/content/getting-started.mdx`
@@ -103,12 +110,12 @@ Committed as `624f65fe chore: guidelines p1`
 - [x] **Step 9: Commit**
 
 > **Deviations from original plan:**
+>
 > - Route is `/$slug` (not `/guides/$slug`) — simpler URLs
 > - Index redirects to `/getting-started`
 > - 404 page shows list of available guides
 > - Added `mdx.d.ts` for TypeScript MDX imports
 > - Uses `@vitejs/plugin-react` v6 + `tanstackRouter()` (non-deprecated APIs)
-
 
 ## Phase 3: Translate Pipeline → Guidelines Content ✅
 
@@ -135,12 +142,12 @@ Committed as `624f65fe chore: guidelines p1`
 **Result:** 84 component/pattern docs + 23 guides, URLs match Storybook IA.
 
 **Known issues (fix later):**
+
 - 3 MDX files have broken JSX (card, select, loading) — excluded
 - Code example quality needs improvement (Phase 7)
 - Bundle is 1.1MB — needs code splitting
 
 ---
-
 
 ## Phase 4: Client-Side Search ✅
 
@@ -151,8 +158,6 @@ Committed as `624f65fe chore: guidelines p1`
 - [x] Build verified (190 modules, 675ms)
 
 ---
-
-
 
 ## Phase 5: AI Assistance — "Iris" Gemini Gem ✅
 
@@ -168,14 +173,18 @@ Committed as `624f65fe chore: guidelines p1`
 - [x] Removed unused knowledge search code (compile-ai-context, useKnowledgeSearch, ai-context.json)
 
 **Gem config:**
+
 - Knowledge: upload `.ai/IDS-FULL-REFERENCE.md`
 - Instructions: scoped to IDS, adapts responses for developers and non-developers
 - Prompt starters configured in Gem settings
 
 **To update:** Re-run `yarn translate`, then re-upload `.ai/IDS-FULL-REFERENCE.md` to the Gem.
 
----
+**TODO (after Phase 9):** When `translate-components.ts` is removed, move `IDS-FULL-REFERENCE.md`
+generation into `derive-ai-docs.ts` (it concatenates all `.ai/*.md` files + skills into a single file).
+Source is `packages/components/.ai/` (AI-optimized format), not raw guidelines MDX.
 
+---
 
 ## Phase 6: GitHub Pages Deployment ✅
 
@@ -189,57 +198,85 @@ Committed as `624f65fe chore: guidelines p1`
 
 **Note:** GitHub Pages must be enabled in repo settings (Settings → Pages → Source: GitHub Actions).
 
+**TODO (after Phase 9):** Remove `yarn translate` from the deploy workflow once `.docs.mdx`
+files are deleted and content is fully human-authored. The deploy step becomes just
+`yarn workspace @iress/ids-guidelines build`.
+
 ---
 
 ## Summary
 
-| Phase | Deliverable | Key dependency |
-|-------|-------------|----------------|
-| 1 | Working SPA shell with routing | None |
-| 2 | MDX pages rendering with navigation | Phase 1 |
-| 3 | Translate pipeline → guidelines MDX (from `.ai/` content) | Phase 2 |
-| 4 | Client-side full-text search | Phase 2 |
-| 5 | Knowledge Search panel (Flexsearch over IDS skills) | Phase 2 |
-| 6 | Automated GitHub Pages deploys | Phase 1 |
-| 7 | AI-improved code examples (skill + commit `.ai/`) | Phase 3 |
-| 8 | Dogfood IDS components in guidelines site UI | Phase 1 |
-| Future | WebLLM AI mode (private repo, pending approval) | Phase 5 context format |
+| Phase  | Deliverable                                               | Key dependency         |
+| ------ | --------------------------------------------------------- | ---------------------- |
+| 1      | Working SPA shell with routing                            | None                   |
+| 2      | MDX pages rendering with navigation                       | Phase 1                |
+| 3      | One-time translate → guidelines MDX (from `.docs.mdx`)    | Phase 2                |
+| 4      | Client-side full-text search                              | Phase 2                |
+| 5      | AI assistance (Iris Gemini Gem)                           | Phase 2                |
+| 6      | Automated GitHub Pages deploys                            | Phase 1                |
+| 7      | AI-improved code examples (skill + ai-runner + derive)    | Phase 3                |
+| 8      | Dogfood IDS components in guidelines site UI              | Phase 1                |
+| 9      | Remove `.docs.mdx` — Storybook autodocs only             | Phase 3, 7             |
+| 10     | Story embeds (Chromatic iframes) + derived code examples  | Phase 7                |
+| 11     | Validation, cleanup, transition cutover                   | Phase 7, 9, 10         |
+| Future | WebLLM AI mode (private repo, pending approval)           | Phase 5 context format |
 
-Phases 3, 4, 5, 6, and 7 are independent of each other (only depend on Phase 2 or 1) and can be worked in parallel.
+**Parallelism:** Phases 3–8 are independent (depend only on Phase 1 or 2).
+Phase 9 requires 3 + 7. Phase 10 requires 7. Phase 11 is the final cutover after 7, 9, 10.
 
 ---
 
 ## Phase 7: AI-Improved Code Examples
 
-> **Strategy:** Create a skill that uses Bedrock (Claude) to improve code examples in `.ai/`.
-> Run locally with SSO credentials. Commit results to git — reviewable in PRs.
-> No CI cost. The `.ai/` folder is committed (not gitignored) and serves both
-> AI consumers and the guidelines site.
+> **Strategy:** `apps/guidelines/content/` is the **source of truth** for all documentation
+> (the old `.docs.mdx` files in `packages/components/` are being removed). A central skill
+> validates and improves code examples in-place. `packages/components/.ai/` is a **derived
+> artifact** generated from guidelines content for shipping in the npm package to external
+> consumers. An AI tool runner auto-detects which CLI is available (kiro-cli, copilot,
+> future: claude, codex) and runs the skill non-interactively.
 
-### Task 7.1: Commit `.ai/` folder (stop ignoring it)
+**Data flow:**
 
-- [ ] **Step 1:** Remove `packages/components/.ai/` from `.gitignore` if present
-- [ ] **Step 2:** Commit the current `.ai/` output as baseline
-- [ ] **Step 3:** Update `translate-components.ts` to not regenerate unchanged files (compare before write)
+```
+apps/guidelines/content/*.mdx     ← source of truth (committed, human-authored)
+    │
+    ├─▶ ai-runner (validate + improve examples in-place)
+    │
+    └─▶ scripts/derive-ai-docs.ts → packages/components/.ai/*.md (derived, committed)
+                                     └── shipped in @iress-oss/ids-components npm package
+```
+
+### Task 7.1: Commit `.ai/` folder and update .gitignore
+
+- [ ] **Step 1:** Remove `packages/*/.ai/*` from `.gitignore`
+- [ ] **Step 2:** Keep `!packages/tokens/.ai/index.json` exception (or remove if redundant)
+- [ ] **Step 3:** Commit the current `.ai/` output as baseline
 
 ### Task 7.2: Create `improve-code-examples` skill
 
 **Skill location:** `.kiro/skills/improve-code-examples/SKILL.md`
 
 The skill instructs the AI agent to:
-1. Read a component's `.ai/{component}.md` file
+
+1. Read the target `apps/guidelines/content/**/*.mdx` file(s)
 2. Find code examples (fenced `tsx` blocks)
-3. For each example, evaluate quality:
-   - Does it have `{...args}` spreads? → replace with concrete props
+3. For each example, **validate against implementation**:
+   - Does the component exist in `packages/components/src/components/`? → error if not
+   - Do the props used match the component's TypeScript interface? → fix or flag mismatches
+   - Are imported component names correct (`Iress` prefix, correct casing)? → fix
+   - Do enum/union prop values match the type definition? → fix invalid values
+4. For each example, evaluate quality:
+   - Does it have `{...args}` spreads? → replace with concrete props from the interface
    - Does it use Storybook patterns (argTypes, render functions)? → simplify
    - Is it missing an import statement? → add one
    - Is it idiomatic React? → fix if not
-4. Rewrite the code block in-place
-5. Preserve all non-code content unchanged
+5. Rewrite the code block in-place
+6. Preserve all non-code content unchanged
 
 **Trigger:** "improve code examples", "fix code examples", "clean up .ai docs"
 
 **Usage:**
+
 ```
 # Improve one component
 > improve code examples for Button
@@ -251,24 +288,110 @@ The skill instructs the AI agent to:
 > find and fix code examples with spread args
 ```
 
-### Task 7.3: Add Bedrock-powered batch mode (optional)
+### Task 7.3: Create AI tool runner (`scripts/ai-runner.ts`)
 
-For bulk improvement without interactive agent sessions:
+A central, repo-wide script that detects which AI CLI is available and invokes it
+non-interactively. Used by dev watchers, Copilot agent, and manual invocations.
 
-- [ ] Create `scripts/improve-examples.ts` with `--component` or `--all` flag
-- [ ] Uses `@aws-sdk/client-bedrock-runtime` with Claude Sonnet
-- [ ] Reads from `.ai/components/*.md`, improves code blocks, writes back
-- [ ] Skips files where examples already look clean (no `{...args}`, has imports)
-- [ ] `--dry-run` shows proposed changes without writing
+- [ ] **Step 1:** Create `scripts/ai-runner.ts`
 
-**Run:** `npx tsx scripts/improve-examples.ts --all` (locally, with SSO auth)
+**Tool detection order** (first available wins):
+
+| Tool              | Detection             | Invocation                                                    |
+| ----------------- | --------------------- | ------------------------------------------------------------- |
+| kiro-cli          | `command -v kiro-cli` | `kiro-cli chat --no-interactive --trust-all-tools "<prompt>"` |
+| copilot           | `command -v copilot`  | `copilot --allow-all-tools --allow-all-paths "<prompt>"`      |
+| _(future)_ claude | `command -v claude`   | `claude --print --allowedTools "..." "<prompt>"`              |
+| _(future)_ codex  | `command -v codex`    | `codex --quiet --approval-mode full-auto "<prompt>"`          |
+
+**Interface:**
+
+```ts
+// scripts/ai-runner.ts
+// Usage:
+//   npx tsx scripts/ai-runner.ts --target guidelines --files apps/guidelines/content/components/button.mdx
+//   npx tsx scripts/ai-runner.ts --target styling-props --files apps/guidelines/content/styling-props/spacing.mdx
+//   npx tsx scripts/ai-runner.ts --prompt "improve all code examples"
+```
+
+**Targets** (determines which skill/prompt to use):
+
+| Target | Watch paths | Skill invoked |
+|--------|-------------|---------------|
+| `guidelines` | `apps/guidelines/content/components/**/*.mdx` | improve-code-examples |
+| `styling-props` | `apps/guidelines/content/styling-props/**/*.mdx` | improve-code-examples + token-usage |
+| `patterns` | `apps/guidelines/content/patterns/**/*.mdx` | improve-code-examples |
+
+- Accepts `--target` (scopes the prompt context) + `--files` (paths to process)
+- Or `--prompt` for freeform invocations
+- Exits with error + helpful message if no AI tool found
+- Extensible: adding a new tool = one entry in `AI_TOOLS` array; adding a new target = one entry in `TARGETS` map
+
+- [ ] **Step 2:** Add `"ai-improve": "tsx scripts/ai-runner.ts"` to root `package.json` scripts
+
+### Task 7.4: Create derive script (`scripts/derive-ai-docs.ts`)
+
+Generates `packages/components/.ai/` from `apps/guidelines/content/` for npm distribution.
+
+- [ ] **Step 1:** Create `scripts/derive-ai-docs.ts`
+  - Reads `apps/guidelines/content/components/*.mdx` and `patterns/*.mdx`
+  - Strips MDX frontmatter/imports, converts to plain markdown
+  - Resolves `<StoryEmbed>` references → extracts story render source
+  - Writes to `packages/components/.ai/{components,patterns}/*.md`
+  - Generates `packages/components/.ai/index.json` manifest
+  - **Incremental:** compare-before-write (skip unchanged files)
+- [ ] **Step 2:** Add `"derive:ai-docs": "tsx scripts/derive-ai-docs.ts"` to root scripts
+- [ ] **Step 3:** Do NOT wire into `yarn build` — derive + AI improve runs only during dev (see Task 7.5)
+
+**`.ai/` is committed.** CI just publishes whatever is in git. No derive or AI in the pipeline.
+
+**Replaces:** the current `translate-components.ts` (which generated both `.ai/` and `content/`
+from `.docs.mdx`). The old script becomes obsolete once `.docs.mdx` files are removed.
+
+### Task 7.5: Wire dev watcher (derive + improve)
+
+The dev watcher runs the full chain: derive → AI improve. This is the **only** place
+where `.ai/` gets updated.
+
+- [ ] **Step 1:** Add chokidar watcher for:
+  - `apps/guidelines/content/**/*.mdx` (content changes)
+  - `packages/components/src/**/*.stories.tsx` (story changes)
+- [ ] **Step 2:** On change (debounced 2s):
+  1. Run `derive-ai-docs.ts --files <affected>` (incremental — only changed components)
+  2. Run `ai-runner.ts --target guidelines --files <affected>` (validate + improve)
+- [ ] **Step 3:** Wire into root `package.json` as `"dev:improve"` script
+- [ ] **Step 4:** Update root `yarn dev` or add `concurrently` to run both Vite + watcher
+
+**Dev experience:**
+
+```bash
+yarn dev
+# → Vite dev server starts (guidelines)
+# → Watcher detects story or content changes
+# → derive-ai-docs regenerates .ai/ (incremental)
+# → AI runner validates/improves code examples
+# → Developer commits updated .ai/ with their PR
+```
+
+### Task 7.6: Copilot agent integration
+
+- [ ] **Step 1:** Add to `.github/copilot-instructions.md`:
+
+> After modifying any file in `apps/guidelines/content/`, run:
+> `npx tsx scripts/ai-runner.ts --target <target> --files <changed-files>`
+> This validates code examples against component source before committing.
+
+### Task 7.7: Pre-commit hook (lightweight, no AI)
+
+- [ ] Add a check to the husky pre-commit hook that warns if staged `.mdx` files
+      contain `{...args}` spreads (quick grep, no AI invocation needed)
 
 ---
 
 ## Phase 8: Dogfood IDS Components in Guidelines Site
 
 > **Goal:** Replace plain HTML elements in the guidelines site UI with IDS components.
-> The guidelines site *for* IDS should use IDS itself.
+> The guidelines site _for_ IDS should use IDS itself.
 
 ### Task 8.1: Add IDS dependency and provider
 
@@ -295,9 +418,180 @@ For bulk improvement without interactive agent sessions:
 
 ---
 
+## Phase 9: Remove `.docs.mdx` — Storybook Autodocs Only
+
+> **Goal:** Storybook becomes purely stories + autodocs. All narrative documentation lives
+> in `apps/guidelines/content/`. The 65 `.docs.mdx` files in `packages/components/src/` are
+> removed. Storybook auto-generates docs pages from component meta, JSDoc comments, and
+> stories — no hand-written MDX needed.
+
+**Prerequisite:** Phase 3 (translate) already migrated content to guidelines. This phase
+removes the originals and switches Storybook to autodocs mode.
+
+### Task 9.1: Enable autodocs in Storybook
+
+- [ ] **Step 1:** Add `tags: ['autodocs']` to each component's stories meta (or set globally in preview)
+- [ ] **Step 2:** Ensure component TSDoc/JSDoc on props is comprehensive (autodocs renders these)
+- [ ] **Step 3:** Verify autodocs generates acceptable pages for a sample (Button, Alert, Select)
+
+### Task 9.2: Update stories glob to exclude MDX
+
+- [ ] **Step 1:** Change `getMainConfig` stories pattern from:
+  ```ts
+  '../src/**/*.@(stories.ts|stories.tsx|mdx)'
+  ```
+  to:
+  ```ts
+  '../src/**/*.stories.@(ts|tsx)'
+  ```
+- [ ] **Step 2:** Keep `'../docs/**/*.mdx'` only if non-component docs (guides) remain in Storybook
+  (or remove entirely if all guides are in the guidelines site)
+
+### Task 9.3: Remove `.docs.mdx` files
+
+- [ ] **Step 1:** Delete all 65 `*.docs.mdx` files from `packages/components/src/`
+- [ ] **Step 2:** Remove `ComponentOverview`, `ComponentExample` imports from storybook-config (if no longer used)
+- [ ] **Step 3:** Remove `packages/components/docs/` folder (guides moved to guidelines site)
+- [ ] **Step 4:** Update `translate-components.ts` — either delete entirely or simplify to only run `derive-ai-docs.ts`
+
+### Task 9.4: Remove stale docs infrastructure
+
+- [ ] Remove Storybook doc blocks that are no longer needed (`<Meta of=.../>` pattern)
+- [ ] Clean up `@iress-oss/ids-storybook-config` exports (ComponentOverview, ComponentExample, etc.) if unused
+- [ ] Update `packages/components/package.json` if docs-related deps can be dropped
+
+### Task 9.5: Add cross-links from Storybook to Guidelines
+
+- [ ] Add a Storybook toolbar link or panel that points to the guidelines site
+- [ ] Optionally add a "📖 Full docs" link in each autodocs page pointing to `https://<pages-url>/components/<slug>`
+
+---
+
+## Phase 10: Story Embeds in Guidelines + Derived Code Examples
+
+> **Goal:** Guidelines shows live rendered stories via Chromatic iframe embeds (Storybook
+> best practice). The `derive-ai-docs` script resolves story references, extracts source,
+> and produces standalone code examples for `.ai/`. No coupling to Storybook internals.
+
+**Prerequisite:** Phase 7 (derive script exists).
+
+**Architecture:**
+
+```
+apps/guidelines/content/components/button.mdx (human-authored)
+    │
+    │  <StoryEmbed id="components-button--default" />   ← live iframe in guidelines
+    │  <StoryEmbed id="components-button--with-icon" />
+    │
+    ▼
+scripts/derive-ai-docs.ts
+    │  reads story source (.stories.tsx) for each <StoryEmbed> reference
+    │  extracts render JSX, strips args/decorators/meta
+    │  runs improve-code-examples skill
+    │
+    ▼
+packages/components/.ai/components/button.md (shipped in npm)
+    ```tsx
+    import { IressButton } from '@iress-oss/ids-components';
+    <IressButton variant="primary">Click</IressButton>
+    ```
+```
+
+### Task 10.1: Create `<StoryEmbed>` component for guidelines site
+
+- [ ] **Step 1:** Create `apps/guidelines/src/components/StoryEmbed.tsx`
+  - Accepts `id` (Storybook story ID, e.g. `components-button--default`)
+  - Renders a Chromatic iframe: `<iframe src="https://main--691abcc79dfa560a36d0a74f.chromatic.com/iframe.html?id={id}&viewMode=story" />`
+  - Responsive height, loading state, optional caption
+  - Optionally shows "Open in Storybook" link
+
+### Task 10.2: Use `<StoryEmbed>` in guidelines content
+
+- [ ] **Step 1:** Replace hardcoded JSX snippets in `apps/guidelines/content/components/*.mdx`
+  with `<StoryEmbed id="..." />` where a live demo is needed
+- [ ] **Step 2:** Keep prose/written code snippets for simple prop demonstrations (not everything needs an iframe)
+
+### Task 10.3: Update `derive-ai-docs.ts` to resolve embeds
+
+- [ ] **Step 1:** When processing guidelines MDX → `.ai/`, find `<StoryEmbed id="..." />`
+- [ ] **Step 2:** Map story ID back to `.stories.tsx` file + export name
+- [ ] **Step 3:** Extract the render function source, strip Storybook boilerplate (args spread, decorators)
+- [ ] **Step 4:** Replace the embed with a clean fenced code block in the `.ai/` output
+- [ ] **Step 5:** Run improve-code-examples skill on the result (validate props, add imports)
+
+### Task 10.4: Keeping examples in sync
+
+- Stories change → Chromatic iframe automatically reflects the update (no rebuild needed)
+- `.ai/` code examples update on next `yarn dev` run (derive step re-extracts source)
+- improve-code-examples validates against current TypeScript interfaces
+
+---
+
+## Phase 11: Validation & Cleanup
+
+> **Goal:** Fix all known issues accumulated during earlier phases, perform the cutover
+> from translate-based workflow to content-as-source-of-truth, and verify everything works.
+
+### Task 11.1: Fix broken MDX files
+
+- [ ] Fix 3 broken MDX files excluded in Phase 3 (card, select, loading)
+- [ ] Validate all `apps/guidelines/content/**/*.mdx` files parse without errors
+
+### Task 11.2: Bundle size — code splitting
+
+- [ ] Add route-based code splitting (lazy-load each section)
+- [ ] Target: initial bundle < 300KB (currently 1.1MB)
+- [ ] Verify Lighthouse performance score
+
+### Task 11.3: Transition cutover (old → new workflow)
+
+Performed after Phases 7, 9, and 10 are complete:
+
+- [ ] **Step 1:** Run `derive-ai-docs.ts` to produce a clean `.ai/` baseline from current content
+- [ ] **Step 2:** Run `ai-runner.ts` on all files to validate/improve
+- [ ] **Step 3:** Commit `.ai/` as the authoritative baseline
+- [ ] **Step 4:** Remove `yarn translate` from `yarn build` script
+- [ ] **Step 5:** Remove `yarn translate` from CI deploy workflow (just `yarn workspace @iress/ids-guidelines build`)
+- [ ] **Step 6:** Delete `scripts/translate-components.ts` (or archive in git history)
+- [ ] **Step 7:** Remove `packages/*/.ai/*` ignore from `.gitignore`
+- [ ] **Step 8:** Verify CI builds pass without translate
+- [ ] **Step 9:** Verify `yarn dev` watcher correctly updates `.ai/` on content/story changes
+
+### Task 11.4: Update `IDS-FULL-REFERENCE.md` generation
+
+- [ ] Move concatenation logic from old translate script into `derive-ai-docs.ts`
+- [ ] Source: `packages/components/.ai/**/*.md` + `.kiro/skills/` (AI-optimized, not raw MDX)
+- [ ] Verify `.ai/IDS-FULL-REFERENCE.md` is regenerated correctly
+- [ ] Re-upload to Iris Gemini Gem
+
+### Task 11.5: Architecture diagrams
+
+- [ ] **Diagram 1: Content flow** — where content lives, what derives from what, what ships where
+  ```
+  .stories.tsx → Chromatic (visual) → <StoryEmbed> iframe in guidelines
+  content/*.mdx → guidelines site (GitHub Pages)
+  content/*.mdx → derive-ai-docs → .ai/*.md → npm package
+  content + skills → IDS-FULL-REFERENCE.md → Iris Gem
+  ```
+- [ ] **Diagram 2: Dev workflow** — what happens during `yarn dev`
+  ```
+  file change (story or content) → watcher → derive-ai-docs (incremental) → ai-runner (validate/improve) → .ai/ updated → developer commits
+  ```
+- [ ] Add diagrams to `apps/guidelines/` README or `docs/ARCHITECTURE.md`
+- [ ] Use mermaid so they render in GitHub
+
+### Task 11.6: Documentation
+
+- [ ] Update `AGENTS.md` to reflect new workflow (no more `yarn translate`, use `yarn dev` for .ai updates)
+- [ ] Update `README.md` development section if needed
+- [ ] Add a `CONTRIBUTING.md` note about committing `.ai/` changes with PRs
+
+---
+
 ## Action Item (non-code)
 
 Submit Llama 3.2 3B model approval request via [Alfred portal](https://iress.atlassian.net/servicedesk/customer/portal/91):
+
 - **Model:** Meta Llama 3.2 3B Instruct
 - **Use case:** In-browser AI assistant for developer documentation site (WebLLM/WebGPU)
 - **Data classification:** No sensitive data — only public IDS documentation as context
