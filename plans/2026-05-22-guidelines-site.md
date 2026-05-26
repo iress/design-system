@@ -176,99 +176,18 @@ Committed as `624f65fe chore: guidelines p1`
 
 ---
 
-## Phase 6: GitHub Pages Deployment
 
-### Task 6.1: GitHub Actions workflow
+## Phase 6: GitHub Pages Deployment ✅
 
-**Files:**
-- Create: `.github/workflows/deploy-guidelines.yml`
-- Modify: `apps/guidelines/vite.config.ts` (ensure base path is correct)
+- [x] Created `.github/workflows/deploy-guidelines.yml` — triggers on push to main (relevant paths) or manual dispatch
+- [x] Workflow runs `yarn translate` then `yarn workspace @iress/ids-guidelines build`
+- [x] Created `apps/guidelines/public/404.html` — SPA hash routing fallback
+- [x] Created `apps/guidelines/public/.nojekyll` — prevents Jekyll processing
+- [x] Build verified: `dist/` contains `index.html`, `404.html`, `.nojekyll`, `assets/`
 
-- [ ] **Step 1: Create `.github/workflows/deploy-guidelines.yml`**
+**Deploy URL:** `https://iress-wealth.github.io/design-system/`
 
-```yaml
-name: Deploy Guidelines Site
-
-on:
-  push:
-    branches: [main]
-    paths:
-      - 'apps/guidelines/**'
-      - '.agents/skills/**'
-      - 'packages/components/src/components/**/*.stories.*'
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-      - run: corepack enable
-      - run: yarn install --immutable
-      - run: yarn workspace @iress/ids-guidelines build
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: apps/guidelines/dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
-```
-
-- [ ] **Step 2: Create 404.html for SPA hash routing fallback**
-
-In `apps/guidelines/public/404.html`:
-```html
-<!doctype html>
-<html>
-  <head>
-    <script>
-      // Redirect all 404s to index.html for hash-based SPA routing
-      window.location.replace(
-        window.location.origin + '/design-system/' + '#' + window.location.pathname.replace('/design-system/', '')
-      );
-    </script>
-  </head>
-</html>
-```
-
-- [ ] **Step 3: Add `.nojekyll` file**
-
-Create `apps/guidelines/public/.nojekyll` (empty file) to prevent GitHub Pages from processing with Jekyll.
-
-- [ ] **Step 4: Verify full build pipeline**
-
-```bash
-yarn workspace @iress/ids-guidelines build
-ls apps/guidelines/dist
-```
-
-Expected: `index.html`, `404.html`, `.nojekyll`, and `assets/` directory present.
-
-- [ ] **Step 5: Commit**
-
-```bash
-git add .github/workflows/deploy-guidelines.yml apps/guidelines/public
-git commit -m "feat(guidelines): add GitHub Actions deployment workflow for GitHub Pages"
-```
+**Note:** GitHub Pages must be enabled in repo settings (Settings → Pages → Source: GitHub Actions).
 
 ---
 
