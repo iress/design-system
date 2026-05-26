@@ -2,7 +2,7 @@ name: Deploy Guidelines Site
 
 on:
   push:
-    branches: [main]
+    branches: [main, feat/guidelines]
     paths:
       - 'apps/guidelines/**'
       - '.agents/skills/**'
