@@ -188,15 +188,28 @@ Source is `packages/components/.ai/` (AI-optimized format), not raw guidelines M
 
 ## Phase 6: GitHub Pages Deployment ✅
 
-- [x] Created `.github/workflows/deploy-guidelines.yml` — triggers on push to main (relevant paths) or manual dispatch
-- [x] Workflow runs `yarn translate` then `yarn workspace @iress/ids-guidelines build`
 - [x] Created `apps/guidelines/public/404.html` — SPA hash routing fallback
 - [x] Created `apps/guidelines/public/.nojekyll` — prevents Jekyll processing
 - [x] Build verified: `dist/` contains `index.html`, `404.html`, `.nojekyll`, `assets/`
+- [x] Build script copies output to `docs/` at repo root (`vite build && rm -rf ../../docs && cp -r dist ../../docs`)
+- [x] GitHub Pages configured: source = `main` branch, folder = `/docs`
 
-**Deploy URL:** `https://iress-wealth.github.io/design-system/`
+**Current implementation (manual deploy):** The `apps/guidelines` build script automatically
+copies output to the repo-root `docs/` folder. Commit and push `docs/` to `main` to deploy.
 
-**Note:** GitHub Pages must be enabled in repo settings (Settings → Pages → Source: GitHub Actions).
+The CI-based `actions/deploy-pages@v4` job is **commented out** in `.github/workflows/ci-cd.yml`
+due to the `iress` org IP allowlist blocking GitHub-hosted runner IPs (403 on both the Pages API
+and git push). `peaceiris/actions-gh-pages@v4` was also blocked for the same reason.
+
+**Deploy URL:** `https://iress.github.io/design-system/`
+
+**⚠️ TODO — Contact Platform Tech to re-enable automated CI deployment:**
+1. Enable "Allow GitHub Actions" toggle in org IP allowlist settings (simplest), OR
+2. Add GitHub Actions runner IP ranges to the org IP allowlist, OR
+3. Provide a self-hosted runner whose IP is already allowlisted
+
+Once unblocked, uncomment the `deploy-guidelines` job in `ci-cd.yml` and switch Pages source
+back to "GitHub Actions" (removes the need to commit `docs/` to main).
 
 **TODO (after Phase 9):** Remove `yarn translate` from the deploy workflow once `.docs.mdx`
 files are deleted and content is fully human-authored. The deploy step becomes just

@@ -98,7 +98,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        check: [lint, typecheck, test:ci, lint:mermaid, size]
+        check: [lint, typecheck, test:ci, lint:mermaid, size, docs-check]
     steps:
       - uses: actions/checkout@v6
       - name: Setup Node.js
@@ -154,6 +154,15 @@ jobs:
                 ATTEMPT=$((ATTEMPT + 1))
               fi
             done
+          elif [ "${{ matrix.check }}" = "docs-check" ]; then
+            # Verify docs/ is up to date with the guidelines build
+            yarn workspace @iress/ids-guidelines run build
+            if [ -n "$(git diff --name-only docs/)" ] || [ -n "$(git ls-files --others --exclude-standard docs/)" ]; then
+              echo "❌ docs/ is out of date. Run 'yarn workspace @iress/ids-guidelines run build' and commit docs/."
+              git diff --stat docs/
+              exit 1
+            fi
+            echo "✅ docs/ is up to date."
           else
             # Run other checks normally (lint, typecheck, lint:mermaid) without retry
             yarn ${{ matrix.check }}
