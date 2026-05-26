@@ -2007,11 +2007,16 @@ async function main() {
           guidelinesSlug = doc.slug;
         }
         const guidelinesPath = path.join(guidelinesBase, guidelinesSubDir, `${guidelinesSlug}.mdx`);
-        if (!DRY_RUN) {
+
+        // Skip known broken MDX files (orphan closing tags from translate pipeline)
+        const GUIDELINES_SKIP = ['card', 'select', 'loading'];
+        if (GUIDELINES_SKIP.includes(guidelinesSlug)) {
+          console.log(`  ⊘ [guidelines] ${title} — skipped (known MDX issue)`);
+        } else if (!DRY_RUN) {
           await fs.mkdir(path.dirname(guidelinesPath), { recursive: true });
           await fs.writeFile(guidelinesPath, guidelinesOutput, 'utf-8');
+          console.log(`  ✓ [guidelines] ${title} → ${path.relative(process.cwd(), guidelinesPath)}`);
         }
-        console.log(`  ✓ [guidelines] ${title} → ${path.relative(process.cwd(), guidelinesPath)}`);
       }
 
       translated++;
