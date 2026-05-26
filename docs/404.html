@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // SPA redirect: convert path to hash and redirect to index
+      var path = window.location.pathname.replace('/design-system', '');
+      window.location.replace('/design-system/#' + path + window.location.search);
+    </script>
+  </head>
+  <body></body>
+</html>
