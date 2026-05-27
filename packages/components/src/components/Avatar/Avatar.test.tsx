@@ -83,6 +83,23 @@ describe('IressAvatar', () => {
         );
       });
     });
+
+    describe('tooltip', () => {
+      it('wraps avatar in a tooltip when tooltip prop is provided', () => {
+        render(<IressAvatar tooltip={{ name: 'John Doe' }}>JD</IressAvatar>);
+        expect(screen.getByRole('img', { name: 'JD' })).toBeInTheDocument();
+        expect(
+          document.querySelector(`.${GlobalCSSClass.Tooltip}`),
+        ).toBeInTheDocument();
+      });
+
+      it('does not render tooltip when tooltip prop is not provided', () => {
+        render(<IressAvatar>JD</IressAvatar>);
+        expect(
+          document.querySelector(`.${GlobalCSSClass.Tooltip}`),
+        ).not.toBeInTheDocument();
+      });
+    });
   });
 
   describe('accessibility', () => {

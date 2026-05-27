@@ -78,3 +78,17 @@ export const Compact: Story = {
     compact: true,
   },
 };
+
+export const WithTooltip: Story = {
+  args: {
+    children: 'JD',
+    'aria-label': 'John Doe',
+    tooltip: {
+      name: 'John Doe',
+      indicator: 'New',
+      type: 'Group',
+    },
+    badge: { icon: 'star', ariaLabel: 'New', mode: 'success' },
+    type: { icon: 'group', ariaLabel: 'Group' },
+  },
+};

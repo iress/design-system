@@ -21,6 +21,15 @@ import { type FloatingUIAligns, type IressStyledProps } from '@/types';
 import { styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
 
+export interface IressTooltipRichContent {
+  /** Primary name displayed in the tooltip. */
+  name: string;
+  /** Badge/indicator label (e.g. "New"). */
+  indicator?: string;
+  /** Type label (e.g. "Group"). */
+  type?: string;
+}
+
 export interface IressTooltipProps extends IressStyledProps {
   /**
    * Sets the alignment of the popover relative to the activator element.
@@ -49,6 +58,12 @@ export interface IressTooltipProps extends IressStyledProps {
    * Sets the tooltip text. Can accept a string or an array of strings - if given an array, will output each string on a new line.
    */
   tooltipText: string | string[];
+
+  /**
+   * Visual variant of the tooltip.
+   * - `rich`: Displays structured content with a prominent name and muted metadata.
+   */
+  variant?: 'rich';
 }
 
 export const IressTooltip = ({
@@ -58,10 +73,11 @@ export const IressTooltip = ({
   delay = 500,
   open = false,
   tooltipText,
+  variant,
   'data-testid': testid,
   ...restProps
 }: IressTooltipProps) => {
-  const classes = tooltip();
+  const classes = tooltip({ variant });
   const isAuto = align === 'auto';
 
   const [isOpen, setIsOpen] = useState(open);
@@ -135,3 +151,25 @@ export const IressTooltip = ({
   );
 };
 IressTooltip.displayName = 'IressTooltip';
+
+/**
+ * Renders rich tooltip content with a name and optional metadata line.
+ * Metadata items (indicator, type) are separated by a middle dot.
+ */
+export const IressTooltipRichContent = ({
+  name,
+  indicator,
+  type,
+}: IressTooltipRichContent) => {
+  const classes = tooltip({ variant: 'rich' });
+  const metaParts = [indicator, type].filter(Boolean);
+
+  return (
+    <>
+      <span className={classes.richName}>{name}</span>
+      {metaParts.length > 0 && (
+        <span className={classes.richMeta}>{metaParts.join(' · ')}</span>
+      )}
+    </>
+  );
+};
