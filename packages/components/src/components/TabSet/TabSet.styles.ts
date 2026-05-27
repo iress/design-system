@@ -123,7 +123,7 @@ export const tabSet = sva({
           },
 
           '& [role="tab"]': {
-            width: '[100%]',
+            width: '12/12',
             justifyContent: 'center',
           },
         },
