@@ -2,7 +2,7 @@ import { cssVars } from '@iress-oss/ids-tokens';
 import { defineRecipe, type SystemStyleObject } from '@pandacss/dev';
 
 const inlineStyles = {
-  '& code': {
+  '& code:not(pre > code)': {
     textStyle: 'typography.code',
     paddingBlock: 'spacing.0',
     paddingInline: 'spacing.1',
@@ -211,7 +211,7 @@ export const textRecipe = defineRecipe({
       h4: blockStyles['& h4'],
       h5: blockStyles['& h5'],
       h6: blockStyles['& h6'],
-      code: inlineStyles['& code'],
+      code: inlineStyles['& code:not(pre > code)'],
       mark: inlineStyles['& mark'],
       small: inlineStyles['& small'],
       cite: inlineStyles['& cite'],
