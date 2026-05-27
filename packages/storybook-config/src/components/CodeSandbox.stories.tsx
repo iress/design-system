@@ -35,7 +35,7 @@ export const IDS: Story = {
             dependencies: {
               react: 'latest',
               'react-dom': 'latest',
-              '@iress-oss/ids-components': 'alpha',
+              '@iress-oss/ids-components': 'beta',
             },
           },
           null,
