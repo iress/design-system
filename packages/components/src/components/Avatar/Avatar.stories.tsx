@@ -85,7 +85,7 @@ export const WithTooltip: Story = {
     'aria-label': 'John Doe',
     tooltip: {
       name: 'John Doe',
-      indicator: 'New',
+      badge: 'New',
       type: 'Group',
     },
     badge: { icon: 'star', ariaLabel: 'New', mode: 'success' },

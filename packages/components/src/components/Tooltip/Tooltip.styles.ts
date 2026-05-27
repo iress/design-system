@@ -37,7 +37,6 @@ export const tooltip = sva({
         content: {
           display: 'flex',
           flexDirection: 'column',
-          gap: 'spacing.1',
         },
       },
     },

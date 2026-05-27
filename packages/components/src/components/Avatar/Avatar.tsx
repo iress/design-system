@@ -36,8 +36,8 @@ type AvatarCssMode = Extract<AvatarMode, string>;
 export interface IressAvatarTooltip {
   /** The person's name, displayed prominently. */
   name: string;
-  /** Badge/indicator label (e.g. "New"). Shown as muted metadata. */
-  indicator?: string;
+  /** Badge label (e.g. "New"). Shown as muted metadata. */
+  badge?: string;
   /** Type label (e.g. "Group"). Shown as muted metadata. */
   type?: string;
 }
@@ -83,7 +83,7 @@ export interface IressAvatarProps extends IressStyledProps<'span'> {
 
   /**
    * Tooltip shown on hover. Displays the name prominently with optional
-   * metadata (indicator and type) in muted text separated by a dot.
+   * metadata (badge and type) in muted text separated by a dot.
    */
   tooltip?: IressAvatarTooltip;
 
@@ -130,7 +130,7 @@ export const IressAvatar = ({
 
   const buildTooltipText = (): string[] => {
     if (!tooltip) return [];
-    const metaParts = [tooltip.indicator, tooltip.type].filter(Boolean);
+    const metaParts = [tooltip.badge, tooltip.type].filter(Boolean);
     const lines = [tooltip.name];
     if (metaParts.length > 0) {
       lines.push(metaParts.join(' · '));
