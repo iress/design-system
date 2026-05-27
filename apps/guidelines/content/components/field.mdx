@@ -34,6 +34,8 @@ The `label` prop is required to describe the field.
 Extra information on the field can be provided using the `hint` prop. It can accept any React node, so you can add your own custom mark up (eg. external links) to the hint text.
 
 ```tsx
+import { IressField } from '@iress-oss/ids-components';
+
 <IressField hint="For us to be able to contact you in the future" label="Email address" />
 ```
 
@@ -46,7 +48,9 @@ To display error messages associated with the field, you can use the `errorMessa
 **Note:** `IressField` requires validation to be handled by the consumer. If you want out-of-the-box validation, use [`IressFormField` alongside `IressForm` instead](/docs/components-form--docs#fields).
 
 ```tsx
-<IressField label="Error message" />
+import { IressField } from '@iress-oss/ids-components';
+
+<IressField label="Email address" errorMessages={[{ message: 'Email is required' }]} />
 ```
 
 [View "ErrorMessage" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--error-message)
@@ -58,7 +62,9 @@ For more control over the formatting of the error, you can use the `error` prop.
 **Note:** `IressField` requires validation to be handled by the consumer. If you want out-of-the-box validation, use [`IressFormField` alongside `IressForm` instead](/docs/components-form--docs#fields).
 
 ```tsx
-<IressField label="Custom error" />
+import { IressField } from '@iress-oss/ids-components';
+
+<IressField label="Email address" error={<span>Please enter a valid email</span>} />
 ```
 
 [View "CustomError" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--custom-error)
@@ -68,12 +74,16 @@ For more control over the formatting of the error, you can use the `error` prop.
 There may be certain situations where you might want to (accessibly) hide the field label (in a search field for instance). This can be done by setting the `hiddenLabel` prop.
 
 ```tsx
+import { IressField } from '@iress-oss/ids-components';
+
 <IressField label="This label is hidden" hint="This hint text is hidden" hiddenLabel />
 ```
 
 [View "HiddenLabel" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--hidden-label)
 
 ```tsx
+import { IressField } from '@iress-oss/ids-components';
+
 <IressField label="This label is hidden" hint="This hint text is hidden" hiddenLabel />
 ```
 
@@ -84,6 +94,8 @@ There may be certain situations where you might want to (accessibly) hide the fi
 Fields marked as `required` will have an asterisk prepended to the label.
 
 ```tsx
+import { IressField } from '@iress-oss/ids-components';
+
 <IressField label="This field is required" required />
 ```
 
@@ -96,6 +108,8 @@ Fields can be used to display read-only data. This is useful when you want to di
 You can also pass `readOnly` prop to remove the asterisk symbol (\*) even when the field is `required`.
 
 ```tsx
+import { IressField, IressReadonly } from '@iress-oss/ids-components';
+
 <IressField label="Account name" readOnly>
   <IressReadonly value="John Smith" />
 </IressField>
@@ -108,6 +122,8 @@ This variation adds a lock icon to the label for a stronger visual cue while
 keeping the field value and label relationship accessible.
 
 ```tsx
+import { IressField, IressInput } from '@iress-oss/ids-components';
+
 <IressField label="Account name" readOnly="locked">
   <IressInput value="John Smith" readOnly />
 </IressField>
@@ -153,6 +169,8 @@ Here are a few cases where you may use a horizontal layout:
 - Collaborative visual tools that require real-time editing and previews, such as Styler, Miro, Figma, where fields are less prominent to give prominence to the intended output.
 
 ```tsx
+import { IressField } from '@iress-oss/ids-components';
+
 <IressField horizontal labelWidth="250px" label="Email address" hint="Enter your email address for contact" supplementary="We will not share your email with third parties (Supplementary text)" />
 ```
 
@@ -163,6 +181,8 @@ Here are a few cases where you may use a horizontal layout:
 Error messages in horizontal layout are displayed below both the label and input field, spanning the full width.
 
 ```tsx
+import { IressField } from '@iress-oss/ids-components';
+
 <IressField horizontal labelWidth="250px" label="Email address" hint="Enter your email address for contact" supplementary="We will not share your email with third parties (Supplementary text)" />
 ```
 
@@ -246,60 +266,66 @@ import { IressFieldGroup, IressField, IressInput } from '@iress-oss/ids-componen
 Multiple fields can be displayed inline using the `inline` prop. On smaller screens, inline elements will wrap on to a new line if there's not enough space for everything on one line.
 
 ```tsx
-<IressFieldGroup inline />
+import { IressFieldGroup } from '@iress-oss/ids-components';
+
+<IressFieldGroup inline label="Inline fields">
+  {/* Field children */}
+</IressFieldGroup>
 ```
 
 [View "Inline" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field-group--inline)
 
 ```tsx
+import { IressFieldGroup, IressField, IressInput, IressSelect, IressButton, IressPopover, IressPanel, IressIcon } from '@iress-oss/ids-components';
+
 <form>
-<IressFieldGroup {...{ ...args, inputs: undefined }}>
-<IressField label="Emoji" htmlFor="emoji">
-<IressSelect
-width="2"
-id="emoji"
-options={[
-{ label: '🐶', value: 'dog' },
-{ label: '🐱', value: 'cat' },
-{ label: '🐭', value: 'mouse' },
-]}
-container={document.body}
-/>
-</IressField>
+  <IressFieldGroup inline>
+    <IressField label="Emoji" htmlFor="emoji">
+      <IressSelect
+        width="2"
+        id="emoji"
+        options={[
+          { label: '🐶', value: 'dog' },
+          { label: '🐱', value: 'cat' },
+          { label: '🐭', value: 'mouse' },
+        ]}
+        container={document.body}
+      />
+    </IressField>
 
-<IressField label="Title" htmlFor="title">
-<IressSelect
-native
-width="2"
-id="title"
-options={[
-{ label: 'Mr', value: 'mr' },
-{ label: 'Mrs', value: 'mrs' },
-{ label: 'Miss', value: 'miss' },
-]}
-/>
-</IressField>
+    <IressField label="Title" htmlFor="title">
+      <IressSelect
+        native
+        width="2"
+        id="title"
+        options={[
+          { label: 'Mr', value: 'mr' },
+          { label: 'Mrs', value: 'mrs' },
+          { label: 'Miss', value: 'miss' },
+        ]}
+      />
+    </IressField>
 
-<IressField label="First name" htmlFor="firstName" required>
-<IressInput id="firstName" required />
-</IressField>
+    <IressField label="First name" htmlFor="firstName" required>
+      <IressInput id="firstName" required />
+    </IressField>
 
-<IressField label="Last name" htmlFor="lastName" required>
-<IressInput id="lastName" required />
-</IressField>
+    <IressField label="Last name" htmlFor="lastName" required>
+      <IressInput id="lastName" required />
+    </IressField>
 
-<IressButton type="submit">Submit</IressButton>
+    <IressButton type="submit">Submit</IressButton>
 
-<IressPopover
-activator={
-<IressButton>
-<IressIcon name="cog" />
-</IressButton>
-}
->
-<IressPanel>Settings goes here</IressPanel>
-</IressPopover>
-</IressFieldGroup>
+    <IressPopover
+      activator={
+        <IressButton>
+          <IressIcon name="cog" />
+        </IressButton>
+      }
+    >
+      <IressPanel>Settings goes here</IressPanel>
+    </IressPopover>
+  </IressFieldGroup>
 </form>
 ```
 
@@ -312,13 +338,21 @@ Elements can also be joined together using the `join` prop. Joined elements won'
 **Note:** The `join` prop works out of the box with IDS components. To enable your custom components to work with the `join` prop, you need to ensure the direct child of `IressFieldGroup` has the class `GlobalCSSClass.FormElement`. If the direct child is not the element with the border, add the class `GlobalCSSClass.FormElementInner` to the element with the border.
 
 ```tsx
-<IressFieldGroup join />
+import { IressFieldGroup } from '@iress-oss/ids-components';
+
+<IressFieldGroup join label="Joined fields">
+  {/* Field children */}
+</IressFieldGroup>
 ```
 
 [View "Join" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field-group--join)
 
 ```tsx
-<IressFieldGroup join />
+import { IressFieldGroup } from '@iress-oss/ids-components';
+
+<IressFieldGroup join label="Joined fields">
+  {/* Field children */}
+</IressFieldGroup>
 ```
 
 [View "JoinSink" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field-group--join-sink)

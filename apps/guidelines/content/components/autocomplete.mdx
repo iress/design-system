@@ -127,7 +127,7 @@ Autocomplete extends `IressInput`, hence it has the same properties as `IressInp
 It does have some defaults to help with user experience. `append` automatically has a search icon, and `clearable` is set to true by default.
 
 ```tsx
-<IressAutocomplete width={12} />
+<IressAutocomplete width="12" />
 ```
 
 [View "InputProps" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--input-props)
@@ -175,10 +175,10 @@ On smaller screens (< 768px), the number of options is further reduced by using 
 <IressAutocomplete options={...} />
 
 // 4 results on large screens, 3 on small screens
-<IressAutocomplete resultLimitDesktop={4} resultLimitMobile={3} options={...} />
+<IressAutocomplete limitDesktop={4} limitMobile={3} options={...} />
 
-// 4 results on all screens (resultLimitMobile > resultLimitDesktop so has no effect)
-<IressAutocomplete resultLimitDesktop={4} resultLimitMobile={5} options={...} />
+// 4 results on all screens (limitMobile > limitDesktop so has no effect)
+<IressAutocomplete limitDesktop={4} limitMobile={5} options={...} />
 ```
 
 The result limits will also affect the number of initial options displayed, if the `initialOptions` prop is set.

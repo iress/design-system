@@ -38,15 +38,21 @@ Expander has a `mode` prop which can be used to change how the expander is displ
 - `link` mode is used to expand a small section of content, usually used to provide additional context (eg. "Learn more" or "See more details").
 
 ```tsx
+import { IressExpander, IressStack, IressText } from '@iress-oss/ids-components';
+
 <IressStack gap="lg">
-<IressStack gap="xs">
-<IressText element="h2">Section (default)</IressText>
-<IressExpander mode="section" />
-</IressStack>
-<IressStack gap="xs">
-<IressText element="h2">Link</IressText>
-<IressExpander mode="link" />
-</IressStack>
+  <IressStack gap="xs">
+    <IressText element="h2">Section (default)</IressText>
+    <IressExpander mode="section" activator="Section expander">
+      Section content
+    </IressExpander>
+  </IressStack>
+  <IressStack gap="xs">
+    <IressText element="h2">Link</IressText>
+    <IressExpander mode="link" activator="Link expander">
+      Link content
+    </IressExpander>
+  </IressStack>
 </IressStack>
 ```
 
@@ -57,7 +63,11 @@ Expander has a `mode` prop which can be used to change how the expander is displ
 The `open` prop can be used to control the open state of the expander as can be seen below.
 
 ```tsx
-<IressExpander open />
+import { IressExpander } from '@iress-oss/ids-components';
+
+<IressExpander open activator="Show details">
+  Expanded content
+</IressExpander>
 ```
 
 [View "Open" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components---open)

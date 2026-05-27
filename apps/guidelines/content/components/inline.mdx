@@ -19,7 +19,9 @@ import { IressInline } from '@iress-oss/ids-components';
 import { IressInline } from '@iress-oss/ids-components';
 
 <IressInline gap="spacing.4">
-  uneven
+  <span>Item 1</span>
+  <span>Item 2</span>
+  <span>Item 3</span>
 </IressInline>
 ```
 
@@ -183,8 +185,12 @@ import { IressInline, IressContainer, IressStack, IressText } from '@iress-oss/i
 The `IressInline` component automatically wraps children. There may be some scenarios where you do not require children to be wrapped. For this you can use the `noWrap` prop.
 
 ```tsx
+import { IressInline } from '@iress-oss/ids-components';
+
 <IressInline gap="spacing.10" noWrap>
-  story
+  <span>Item 1</span>
+  <span>Item 2</span>
+  <span>Item 3</span>
 </IressInline>
 ```
 

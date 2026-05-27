@@ -123,7 +123,7 @@ If you are using Microfrontends or Web Components that use Shadow DOM, you need 
 The easiest way to do this is to use the `IressIconProvider` component with the `container` prop.
 
 ```tsx
-import { IressIconProvider, IressIcon as Icon } from '@iress/ids-components';
+import { IressIconProvider, IressIcon as Icon } from '@iress-oss/ids-components';
 
 <IressIconProvider type="fontawesome" container={shadowRoot}>
   <App />
@@ -137,7 +137,7 @@ import { IressIconProvider, IressIcon as Icon } from '@iress/ids-components';
 From version 6, the default icon type is Material Symbols. If you want to make Font Awesome the default icon type, you can wrap your application in the `IressIconProvider` component.
 
 ```tsx
-import { IressIconProvider, IressIcon as Icon } from '@iress/ids-components';
+import { IressIconProvider, IressIcon as Icon } from '@iress-oss/ids-components';
 
 // Export a version of IressIcon that uses Font Awesome by default for typing
 export const IressIcon = Icon<'fontawesome'>;
@@ -164,7 +164,9 @@ If you use an icon to improve the visual appeal of content, for example by repla
 If you use an icon to convey meaning, for example using an icon as the only content inside a button, you do need to supply a value for the `screenreaderText`; if you don't the button meaning will be completely lost for screen reader users.
 
 ```tsx
-<IressIcon screenreaderText="Home" />
+import { IressIcon } from '@iress-oss/ids-components';
+
+<IressIcon name="home" screenreaderText="Home" />
 ```
 
 [View "ScreenReaderText" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-icon--screen-reader-text)
@@ -174,17 +176,19 @@ If you use an icon to convey meaning, for example using an icon as the only cont
 The `filled` prop allows you to use a filled version of the icon, usually to indicate an active state.
 
 ```tsx
+import { IressIcon, IressInline, IressText } from '@iress-oss/ids-components';
+
 <IressInline gap="md">
-<IressText textAlign="center">
-<IressIcon textStyle="typography.heading.1" />
-<br />
-(default)
-</IressText>
-<IressText textAlign="center">
-<IressIcon filled textStyle="typography.heading.1" />
-<br />
-filled
-</IressText>
+  <IressText textAlign="center">
+    <IressIcon name="star" textStyle="typography.heading.1" />
+    <br />
+    (default)
+  </IressText>
+  <IressText textAlign="center">
+    <IressIcon name="star" filled textStyle="typography.heading.1" />
+    <br />
+    filled
+  </IressText>
 </IressInline>
 ```
 
@@ -237,23 +241,25 @@ Mode has been removed. Please use the `color` prop instead.
 The `flip` prop can be set to horizontal, vertical or both.
 
 ```tsx
+import { IressIcon, IressInline, IressStack, IressText } from '@iress-oss/ids-components';
+
 <IressInline gap="md">
-<IressStack horizontalAlign="center">
-<IressIcon />
-<IressText>(default)</IressText>
-</IressStack>
-<IressStack horizontalAlign="center">
-<IressIcon flip="horizontal" />
-<IressText>horizontal</IressText>
-</IressStack>
-<IressStack horizontalAlign="center">
-<IressIcon flip="vertical" />
-<IressText>vertical</IressText>
-</IressStack>
-<IressStack horizontalAlign="center">
-<IressIcon flip="both" />
-<IressText>both</IressText>
-</IressStack>
+  <IressStack horizontalAlign="center">
+    <IressIcon name="arrow_forward" />
+    <IressText>(default)</IressText>
+  </IressStack>
+  <IressStack horizontalAlign="center">
+    <IressIcon name="arrow_forward" flip="horizontal" />
+    <IressText>horizontal</IressText>
+  </IressStack>
+  <IressStack horizontalAlign="center">
+    <IressIcon name="arrow_forward" flip="vertical" />
+    <IressText>vertical</IressText>
+  </IressStack>
+  <IressStack horizontalAlign="center">
+    <IressIcon name="arrow_forward" flip="both" />
+    <IressText>both</IressText>
+  </IressStack>
 </IressInline>
 ```
 
@@ -264,27 +270,29 @@ The `flip` prop can be set to horizontal, vertical or both.
 The `rotate` prop can be set to 90, 180 or 270 degrees.
 
 ```tsx
+import { IressIcon, IressInline, IressText } from '@iress-oss/ids-components';
+
 <IressInline gap="md">
-<IressText textAlign="center">
-<IressIcon />
-<br />
-(default)
-</IressText>
-<IressText textAlign="center">
-<IressIcon rotate={90} />
-<br />
-90
-</IressText>
-<IressText textAlign="center">
-<IressIcon rotate={180} />
-<br />
-180
-</IressText>
-<IressText textAlign="center">
-<IressIcon rotate={270} />
-<br />
-270
-</IressText>
+  <IressText textAlign="center">
+    <IressIcon name="arrow_forward" />
+    <br />
+    (default)
+  </IressText>
+  <IressText textAlign="center">
+    <IressIcon name="arrow_forward" rotate={90} />
+    <br />
+    90
+  </IressText>
+  <IressText textAlign="center">
+    <IressIcon name="arrow_forward" rotate={180} />
+    <br />
+    180
+  </IressText>
+  <IressText textAlign="center">
+    <IressIcon name="arrow_forward" rotate={270} />
+    <br />
+    270
+  </IressText>
 </IressInline>
 ```
 
@@ -295,19 +303,21 @@ The `rotate` prop can be set to 90, 180 or 270 degrees.
 The `spin` prop can be set to half (fastest), 1, 2 or 3 (slowest) to control the speed of the icon spin animation, useful for loading spinners.
 
 ```tsx
+import { IressIcon, IressInline, IressText } from '@iress-oss/ids-components';
+
 <IressInline gap="md">
-<IressText>
-<IressIcon spin="half" /> half
-</IressText>
-<IressText>
-<IressIcon spin={1} /> 1
-</IressText>
-<IressText>
-<IressIcon spin={2} /> 2
-</IressText>
-<IressText>
-<IressIcon spin={3} /> 3
-</IressText>
+  <IressText>
+    <IressIcon name="progress_activity" spin="half" /> half
+  </IressText>
+  <IressText>
+    <IressIcon name="progress_activity" spin={1} /> 1
+  </IressText>
+  <IressText>
+    <IressIcon name="progress_activity" spin={2} /> 2
+  </IressText>
+  <IressText>
+    <IressIcon name="progress_activity" spin={3} /> 3
+  </IressText>
 </IressInline>
 ```
 
@@ -318,13 +328,15 @@ The `spin` prop can be set to half (fastest), 1, 2 or 3 (slowest) to control the
 Icons now inherit the size of the parent component. This means you can use them inside buttons, links and other components without needing to set a size.
 
 ```tsx
+import { IressIcon, IressLink } from '@iress-oss/ids-components';
+
 <IressLink
-href="https://www.iress.com/"
-target="_blank"
-rel="noreferrer"
-append={<IressIcon />}
+  href="https://www.iress.com/"
+  target="_blank"
+  rel="noreferrer"
+  append={<IressIcon name="open_in_new" />}
 >
-Go to this link
+  Go to this link
 </IressLink>
 ```
 

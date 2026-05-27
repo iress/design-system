@@ -16,9 +16,12 @@ import { IressCol } from '@iress-oss/ids-components';
 ## Quick Start
 
 ```tsx
-import { IressCol } from '@iress-oss/ids-components';
+import { IressCol, IressRow } from '@iress-oss/ids-components';
 
-<IressCol numberOfColumns={2} />
+<IressRow>
+  <IressCol span="6">Column 1</IressCol>
+  <IressCol span="6">Column 2</IressCol>
+</IressRow>
 ```
 
 ## Examples
