@@ -108,9 +108,9 @@ However, please be diligent as the component you use may not fit withing the con
 Use the `prepend` prop to add content to the left side of the card.
 
 ```tsx
-<IressCardSlots>
+<IressCard>
   I'm a card using the prepend render prop
-</IressCardSlots>
+</IressCard>
 ```
 
 [View "Prepend" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-card-slots--prepend)
@@ -120,9 +120,9 @@ Use the `prepend` prop to add content to the left side of the card.
 Use the `topRight` prop to add content to the top right of the card. This is useful for adding a badge, icon, or an actions menu.
 
 ```tsx
-<IressCardSlots>
+<IressCard>
   I'm a card using the topRight render prop
-</IressCardSlots>
+</IressCard>
 ```
 
 [View "TopRight" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-card-slots--top-right)
@@ -134,9 +134,9 @@ Use the `heading` prop to add a header to the card. The header can be any compon
 **Note:** `headingText` and `headingLevel` props have been replaced with the `heading` render prop to give you more control over the heading element and its content. To use the previous behaviour, you can pass a string which will automatically create a `h2` element, or pass a `h*` element with the text as a child.
 
 ```tsx
-<IressCardSlots>
+<IressCard>
   I'm a card using the heading render prop
-</IressCardSlots>
+</IressCard>
 ```
 
 [View "Heading" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-card-slots--heading)
@@ -146,9 +146,9 @@ Use the `heading` prop to add a header to the card. The header can be any compon
 Use the `media` prop to add media to the card. The media can be any component you like, but it is designed to support an image or video.
 
 ```tsx
-<IressCardSlots>
+<IressCard>
   I'm a card using the media render prop
-</IressCardSlots>
+</IressCard>
 ```
 
 [View "Media" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-card-slots--media)
@@ -164,9 +164,9 @@ Use the `content` prop to add content to the card. The content can be any compon
 Use the `footer` prop to add a footer to the card. The footer can be any component you like, but it is designed to support buttons.
 
 ```tsx
-<IressCardSlots>
+<IressCard>
   I'm a card using the footer render prop
-</IressCardSlots>
+</IressCard>
 ```
 
 [View "Footer" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-card-slots--footer)
@@ -190,9 +190,9 @@ Note: The `clickable` prop has been deprecated in favour of using component vari
 Since the `heading` prop now renders the component you give it, you have full control over the content of the `heading`. This means you can add pass it a heading with a link.
 
 ```tsx
-<IressCardClickable>
+<IressCard>
   I'm a card with a clickable heading. NEVER use me when the whole card is clickable.
-</IressCardClickable>
+</IressCard>
 ```
 
 [View "HeadingOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-card-clickable--heading-only)
@@ -204,9 +204,9 @@ The whole card can be made clickable by passing an `onClick` prop. All the appro
 It's recommended to add `role="button"` and `tabindex="0"` to the card to make it clear to screen readers that the card is clickable.
 
 ```tsx
-<IressCardClickable role="button" tabIndex={0}>
+<IressCard role="button" tabIndex={0}>
   I am a card with an onClick handler. Click me to see what happens.
-</IressCardClickable>
+</IressCard>
 ```
 
 [View "WholeCard" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-card-clickable--whole-card)

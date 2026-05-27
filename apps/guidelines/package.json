@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@iress-oss/ids-components": "workspace:*",
     "@mdx-js/react": "^3.1.0",
     "@tanstack/react-router": "^1.120.3",
     "flexsearch": "0.7.43",

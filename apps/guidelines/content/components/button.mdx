@@ -214,20 +214,20 @@ When the loading state is activated, any click events on the button are disabled
 
 ```tsx
 <IressInline gap="md">
-<IressButton mode="primary" loading>
-Primary
+<IressButton mode="primary">
+...
 </IressButton>
-<IressButton mode="secondary" loading>
-Secondary
+<IressButton mode="secondary">
+...
 </IressButton>
-<IressButton mode="tertiary" loading>
-Tertiary
+<IressButton mode="tertiary">
+...
 </IressButton>
-<IressButton mode="quaternary" loading>
-Quaternary
+<IressButton mode="quaternary">
+...
 </IressButton>
-<IressButton mode="muted" loading icon="edit">
-Edit
+<IressButton mode="muted">
+<IressIcon name="edit" />
 </IressButton>
 </IressInline>
 ```
@@ -368,9 +368,7 @@ Home
 When a `href` is provided, the `download` prop can be used to indicate that the link should download a file instead of navigating to it. This is useful for links to files such as PDFs or images.
 
 ```tsx
-<IressButton href="/file.pdf" download prepend={<IressIcon name="download" />}>
-  Download file
-</IressButton>
+<IressButton download prepend={<IressIcon name="download" />} />
 ```
 
 [View "DownloadButton" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-button--download-button)

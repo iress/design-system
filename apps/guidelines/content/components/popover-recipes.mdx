@@ -16,45 +16,43 @@ When an `IressMenu` is used inside `IressPopover`, it adds some additional funct
 - `IressMenu` will automatically focus the first menu item when the popover is opened.
 
 ```tsx
-import { IressStack, IressRow, IressCol, IressPopover, IressButton, IressMenu, IressToggle } from '@iress-oss/ids-components';
-
 const [multiSelect, setMultiSelect] = useState(false);
 
-return (
-  <IressStack gap="md" maxWidth="container.lg" px="lg" mx="auto">
-    {MENU_ROLES.map((role) => (
-      <IressRow gutter="lg" key={role} verticalAlign="middle">
-        <IressCol span={2}>
-          <IressPopover
-            activator={<IressButton fluid>role={role}</IressButton>}
-            container={document.body}
-            type={role === 'listbox' || role === 'menu' ? role : undefined}
-          >
-            <IressMenu
-              role={role}
-              defaultSelected={3}
-              multiSelect={multiSelect && role === 'listbox'}
-            >
-              {menuChildren}
-            </IressMenu>
-          </IressPopover>
-        </IressCol>
-        <IressCol>
-          <MenuInPopoverRoleDescription role={role}>
-            {role === 'listbox' && (
-              <IressToggle
-                checked={multiSelect}
-                onChange={() => setMultiSelect(!multiSelect)}
+    return (
+      <IressStack gap="md" maxWidth="container.lg" px="lg" mx="auto">
+        {MENU_ROLES.map((role) => (
+          <IressRow gutter="lg" key={role} verticalAlign="middle">
+            <IressCol span={2}>
+              <IressPopover
+                activator={<IressButton fluid>role={role}</IressButton>}
+                container={document.body}
+                type={role === 'listbox' || role === 'menu' ? role : undefined}
               >
-                Multi-select
-              </IressToggle>
-            )}
-          </MenuInPopoverRoleDescription>
-        </IressCol>
-      </IressRow>
-    ))}
-  </IressStack>
-);
+                <IressMenu
+                  role={role}
+                  defaultSelected={3}
+                  multiSelect={multiSelect && role === 'listbox'}
+                >
+                  {menuChildren}
+                </IressMenu>
+              </IressPopover>
+            </IressCol>
+            <IressCol>
+              <MenuInPopoverRoleDescription role={role}>
+                {role === 'listbox' && (
+                  <IressToggle
+                    checked={multiSelect}
+                    onChange={() => setMultiSelect(!multiSelect)}
+                  >
+                    Multi-select
+                  </IressToggle>
+                )}
+              </MenuInPopoverRoleDescription>
+            </IressCol>
+          </IressRow>
+        ))}
+      </IressStack>
+    );
 ```
 
 [View "WithMenu" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--with-menu)

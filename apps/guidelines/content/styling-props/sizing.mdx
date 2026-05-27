@@ -58,14 +58,9 @@ In some cases however, you may want to restrain the width even further (for exam
 - `container.xxl`: 1160px
 
 ```tsx
-<IressContainer bg="alt" fluid maxWidth={maxWidth} width={width} p="xl">
-This container is extra readable cause its maxWidth is set to:{' '}
-<code>
-{typeof maxWidth === 'object'
-? stringifyStorybookArgs(maxWidth)
-: maxWidth}
-</code>
-.
+<IressContainer bg="alt" fluid maxWidth="container.md" p="xl">
+  This container is extra readable cause its maxWidth is set to:{' '}
+  <code>container.md</code>.
 </IressContainer>
 ```
 

@@ -51,10 +51,13 @@ The previous `gutter` prop has been replaced by `gap`, which uses the latest set
 The `gap` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
 
 ```tsx
-<IressStack gap={{ xs: 'xs', sm: 'sm', md: 'md', lg: 'lg', xl: 'xl' }}>
-  <IressPanel bg="alt">Item 1</IressPanel>
-  <IressPanel bg="alt">Item 2</IressPanel>
-  <IressPanel bg="alt">Item 3</IressPanel>
+<IressStack gap={{ xs: "spacing.2", sm: "spacing.4", md: "spacing.6", lg: "spacing.8", xl: "spacing.10" }}>
+<IressPanel>
+<p>
+Current breakpoint: <CurrentBreakpoint />.
+</p>
+</IressPanel>
+<IressStack gap={{ xs: "spacing.2", sm: "spacing.4", md: "spacing.6", lg: "spacing.8", xl: "spacing.10" }} />
 </IressStack>
 ```
 
@@ -93,12 +96,12 @@ The `verticalAlign` prop controls how content is positioned vertically within th
 Use `top`, `middle`, or `bottom` to align items within the available space, and `between`, `around`, or `evenly` to distribute extra vertical space between items (similar to `space-between`, `space-around`, and `space-evenly` in CSS flexbox).
 
 ```tsx
-<IressPanel style={{ height: '300px' }}>
-  <IressStack stretch verticalAlign="middle">
-    <IressPanel bg="alt">First item</IressPanel>
-    <IressPanel bg="alt">Second item</IressPanel>
-    <IressPanel bg="alt">Third item</IressPanel>
-  </IressStack>
+<IressPanel style={{ height: '1000px' }}>
+<IressStack verticalAlign="middle" gap="spacing.4">
+<div>Item 1</div>
+<div>Item 2</div>
+<div>Item 3</div>
+</IressStack>
 </IressPanel>
 ```
 

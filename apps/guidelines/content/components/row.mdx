@@ -55,10 +55,12 @@ The `gutter` prop can take an object that takes five key/value pairs that correl
 
 ```tsx
 <IressContainer>
-  <IressRow gutter={{ xs: 'sm', sm: 'md', md: 'lg', lg: 'xl', xl: 'xl' }}>
-    <IressCol span={6}><IressPanel bg="alt">Column 1</IressPanel></IressCol>
-    <IressCol span={6}><IressPanel bg="alt">Column 2</IressPanel></IressCol>
-  </IressRow>
+<IressStack gap="md">
+<IressPanel bg="alt">
+Current breakpoint: <CurrentBreakpoint />
+</IressPanel>
+<IressRow />
+</IressStack>
 </IressContainer>
 ```
 
@@ -72,17 +74,17 @@ The `gutter` prop can take an object that takes five key/value pairs that correl
 
 ```tsx
 <IressContainer>
-  <IressStack gap="md">
-    <IressRow horizontalAlign="start">
-      <IressCol span={4}><IressPanel bg="alt">Start</IressPanel></IressCol>
-    </IressRow>
-    <IressRow horizontalAlign="center">
-      <IressCol span={4}><IressPanel bg="alt">Center</IressPanel></IressCol>
-    </IressRow>
-    <IressRow horizontalAlign="end">
-      <IressCol span={4}><IressPanel bg="alt">End</IressPanel></IressCol>
-    </IressRow>
-  </IressStack>
+<IressStack gap="md">
+{HORIZONTAL_ALIGNS.map((horizontalAlign, index) => (
+<IressText key={horizontalAlign}>
+{index !== 0 && <IressDivider mb="md" />}
+<h2>Horizontal align: {horizontalAlign}</h2>
+<IressRow horizontalAlign={horizontalAlign}
+key={horizontalAlign}
+/>
+</IressText>
+))}
+</IressStack>
 </IressContainer>
 ```
 
@@ -94,17 +96,19 @@ The `gutter` prop can take an object that takes five key/value pairs that correl
 
 ```tsx
 <IressContainer>
-  <IressStack gap="md">
-    <IressRow verticalAlign="top" style={{ height: '10rem' }}>
-      <IressCol span={6}><IressPanel bg="alt">Top</IressPanel></IressCol>
-    </IressRow>
-    <IressRow verticalAlign="middle" style={{ height: '10rem' }}>
-      <IressCol span={6}><IressPanel bg="alt">Middle</IressPanel></IressCol>
-    </IressRow>
-    <IressRow verticalAlign="bottom" style={{ height: '10rem' }}>
-      <IressCol span={6}><IressPanel bg="alt">Bottom</IressPanel></IressCol>
-    </IressRow>
-  </IressStack>
+<IressStack gap="md">
+{VERTICAL_ALIGNS.map((verticalAlign) => (
+<div key={verticalAlign}>
+<IressText element="h2">Vertical align: {verticalAlign}</IressText>
+<IressRow
+style={{
+height: '10rem',
+border: `1px solid ${cssVars.colour.neutral[30]}`,
+}} verticalAlign={verticalAlign}
+/>
+</div>
+))}
+</IressStack>
 </IressContainer>
 ```
 

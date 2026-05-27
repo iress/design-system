@@ -277,7 +277,7 @@ Use the `rules` prop on the `IressFormField` component to add validation rules. 
 A boolean which, if `true`, indicates that the input must have a value before the form can be submitted. You can assign a string to return a custom error message.
 
 ```tsx
-<IressFormRules element="IressInput" />
+<IressForm element="IressInput" />
 ```
 
 [View "Required" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--required)
@@ -292,7 +292,7 @@ The maximum character length of the value to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressFormRules element="IressInput" />
+<IressForm element="IressInput" />
 ```
 
 [View "MaxLength" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max-length)
@@ -307,7 +307,7 @@ The minimum character length of the value to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressFormRules element="IressInput" />
+<IressForm element="IressInput" />
 ```
 
 [View "MinLength" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min-length)
@@ -321,7 +321,7 @@ The maximum number to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressFormRules element="IressInput" />
+<IressForm element="IressInput" />
 ```
 
 [View "Max" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max)
@@ -335,7 +335,7 @@ The minimum number to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressFormRules element="IressInput" />
+<IressForm element="IressInput" />
 ```
 
 [View "Min" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min)
@@ -357,7 +357,7 @@ The minimum date to accept for this input.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-<IressFormRules element="IressInputDate" />
+<IressForm element="IressInputDate" />
 ```
 
 [View "MinDate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min-date)
@@ -369,7 +369,7 @@ The maximum date to accept for this input.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-<IressFormRules element="IressInputDate" />
+<IressForm element="IressInputDate" />
 ```
 
 [View "MaxDate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max-date)
@@ -381,7 +381,7 @@ Ensures the input is a valid email address.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-<IressFormRules element="IressInput" />
+<IressForm element="IressInput" />
 ```
 
 [View "Email" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--email)
@@ -395,7 +395,7 @@ You can pass a callback function as the argument to validate, or you can pass an
 - for `object` or `array` input data, it's recommended to use the validate function for validation as the other rules mostly apply to `string`, `string[]`, `number` and `boolean` data types.
 
 ```tsx
-<IressFormRules 2 element="IressCheckboxGroup" />
+<IressForm 2 element="IressCheckboxGroup" />
 ```
 
 [View "Validate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--validate)

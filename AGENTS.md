@@ -121,3 +121,11 @@ GitHub Actions workflow in `.github/workflows/ci-cd.yml`. Runs on all pushes and
 - `.github/instructions/` — domain-specific instructions for component creation, bug fixing, PR review, file organization, ESLint usage, and testing
 - `.agents/skills/` — agent skills for Figma-to-IDS translation, token usage, UI auditing, UI translation, and version migration
 - `packages/components/.ai/` and `packages/tokens/.ai/` — package-level AI context
+
+## UI work rules
+
+When writing or modifying React UI code that uses `@iress-oss/ids-components`:
+
+1. **Before writing**: Read `.agents/skills/ui-translation/SKILL.md` — it maps UI descriptions to correct IDS component usage, props, and patterns
+2. **After writing**: Validate with `.agents/skills/ui-doctor/SKILL.md` — it audits for correct prop usage, accessibility, and IDS compliance
+3. **Never guess props** — always verify against the component's TypeScript interface in `packages/components/src/components/`

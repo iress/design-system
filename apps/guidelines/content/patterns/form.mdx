@@ -247,80 +247,7 @@ It has three required props:
 Here are some examples of how to use `IressFormField` with different form controls. If you are using a form control that has multiple inputs inside (for example, `IressCheckboxGroup`), you can use `IressFormFieldset`, which changes the HTML structure to use a `fieldset` and `legend` element to group the inputs.
 
 ```tsx
-import {
-  IressForm,
-  IressFormField,
-  IressFormFieldset,
-  IressInput,
-  IressSelect,
-  IressCheckboxGroup,
-  IressCheckbox,
-  IressRadioGroup,
-  IressRadio,
-  IressAutocomplete,
-  IressSlider,
-  IressButton,
-} from '@iress-oss/ids-components';
-
-<IressForm heading="All supported form fields" pattern="long">
-  <IressFormField
-    name="name"
-    label="Name"
-    rules={{ required: true }}
-    render={(controlledProps) => <IressInput {...controlledProps} />}
-  />
-  <IressFormField
-    name="date"
-    label="Date"
-    rules={{ required: true }}
-    render={(controlledProps) => <IressInput {...controlledProps} type="date" />}
-  />
-  <IressFormField
-    name="gender"
-    label="Gender"
-    rules={{ required: true }}
-    render={(controlledProps) => (
-      <IressSelect
-        {...controlledProps}
-        options={[
-          { label: 'Male', value: 'male' },
-          { label: 'Female', value: 'female' },
-          { label: 'Other', value: 'other' },
-        ]}
-      />
-    )}
-  />
-  <IressFormFieldset
-    name="interests"
-    label="Interests"
-    render={(controlledProps) => (
-      <IressCheckboxGroup {...controlledProps}>
-        <IressCheckbox value="sports">Sports</IressCheckbox>
-        <IressCheckbox value="music">Music</IressCheckbox>
-        <IressCheckbox value="reading">Reading</IressCheckbox>
-      </IressCheckboxGroup>
-    )}
-  />
-  <IressFormFieldset
-    name="contactMethod"
-    label="Preferred contact method"
-    rules={{ required: true }}
-    render={(controlledProps) => (
-      <IressRadioGroup {...controlledProps}>
-        <IressRadio value="email">Email</IressRadio>
-        <IressRadio value="phone">Phone</IressRadio>
-      </IressRadioGroup>
-    )}
-  />
-  <IressFormField
-    name="volume"
-    label="Volume"
-    render={(controlledProps) => <IressSlider {...controlledProps} />}
-  />
-  <IressButton type="submit" mode="primary">
-    Submit
-  </IressButton>
-</IressForm>
+<IressForm heading="All supported form fields" pattern="long" />
 ```
 
 [View "Fields" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--fields)
@@ -342,30 +269,12 @@ Common use cases include:
 - **Custom validation feedback**: Display real-time validation feedback separate from error messages
 
 ```tsx
-import { IressForm, IressFormField, IressInput, IressText, IressButton } from '@iress-oss/ids-components';
-
-<IressForm heading="Supplementary content example">
-  <IressFormField
-    name="comment"
-    label="Comment"
-    render={(controlledProps) => (
-      <IressInput
-        {...controlledProps}
-        rows={3}
-        maxLength={200}
-        placeholder="Type your comment here..."
-      />
-    )}
-    renderSupplementary={(field) => (
-      <IressText size="sm">
-        {String(field.value ?? '').length}/200 characters
-      </IressText>
-    )}
-  />
-  <IressButton type="submit" mode="primary">
-    Submit
-  </IressButton>
-</IressForm>
+<IressInput
+{...controlledProps}
+rows={3}
+maxLength={200}
+placeholder="Type your comment here..."
+/>
 ```
 
 [View "RenderSupplementary" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-field--render-supplementary)
@@ -381,19 +290,7 @@ Use the `rules` prop on the `IressFormField` component to add validation rules. 
 A boolean which, if `true`, indicates that the input must have a value before the form can be submitted. You can assign a string to return a custom error message.
 
 ```tsx
-import { IressForm, IressFormField, IressInput, IressButton } from '@iress-oss/ids-components';
-
-<IressForm>
-  <IressFormField
-    name="name"
-    label="Name"
-    rules={{ required: 'Name is required' }}
-    render={(controlledProps) => <IressInput {...controlledProps} />}
-  />
-  <IressButton type="submit" mode="primary">
-    Validate
-  </IressButton>
-</IressForm>
+<IressForm element="IressInput" />
 ```
 
 [View "Required" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--required)
@@ -408,20 +305,7 @@ The maximum character length of the value to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-import { IressForm, IressFormField, IressInput, IressButton } from '@iress-oss/ids-components';
-
-<IressForm>
-  <IressFormField
-    name="username"
-    label="Username"
-    hint="Enter a maximum length of 5 characters"
-    rules={{ maxLength: { value: 5, message: 'Maximum 5 characters allowed' } }}
-    render={(controlledProps) => <IressInput {...controlledProps} maxLength={5} />}
-  />
-  <IressButton type="submit" mode="primary">
-    Validate
-  </IressButton>
-</IressForm>
+<IressForm element="IressInput" />
 ```
 
 [View "MaxLength" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max-length)
@@ -436,20 +320,7 @@ The minimum character length of the value to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-import { IressForm, IressFormField, IressInput, IressButton } from '@iress-oss/ids-components';
-
-<IressForm>
-  <IressFormField
-    name="password"
-    label="Password"
-    hint="Enter a minimum length of 7 characters"
-    rules={{ minLength: { value: 7, message: 'Minimum 7 characters required' } }}
-    render={(controlledProps) => <IressInput {...controlledProps} type="password" />}
-  />
-  <IressButton type="submit" mode="primary">
-    Validate
-  </IressButton>
-</IressForm>
+<IressForm element="IressInput" />
 ```
 
 [View "MinLength" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min-length)
@@ -463,20 +334,7 @@ The maximum number to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-import { IressForm, IressFormField, IressInput, IressButton } from '@iress-oss/ids-components';
-
-<IressForm>
-  <IressFormField
-    name="quantity"
-    label="Quantity"
-    hint="Select a maximum of 2"
-    rules={{ max: { value: 2, message: 'Maximum value is 2' } }}
-    render={(controlledProps) => <IressInput {...controlledProps} type="number" />}
-  />
-  <IressButton type="submit" mode="primary">
-    Validate
-  </IressButton>
-</IressForm>
+<IressForm element="IressInput" />
 ```
 
 [View "Max" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max)
@@ -490,20 +348,7 @@ The minimum number to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-import { IressForm, IressFormField, IressInput, IressButton } from '@iress-oss/ids-components';
-
-<IressForm>
-  <IressFormField
-    name="age"
-    label="Age"
-    hint="Select a minimum of 20"
-    rules={{ min: { value: 20, message: 'Minimum value is 20' } }}
-    render={(controlledProps) => <IressInput {...controlledProps} type="number" />}
-  />
-  <IressButton type="submit" mode="primary">
-    Validate
-  </IressButton>
-</IressForm>
+<IressForm element="IressInput" />
 ```
 
 [View "Min" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min)
@@ -525,20 +370,7 @@ The minimum date to accept for this input.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-import { IressForm, IressFormField, IressInput, IressButton } from '@iress-oss/ids-components';
-
-<IressForm>
-  <IressFormField
-    name="startDate"
-    label="Start date"
-    hint="Enter a date after today"
-    rules={{ minDate: new Date() }}
-    render={(controlledProps) => <IressInput {...controlledProps} type="date" />}
-  />
-  <IressButton type="submit" mode="primary">
-    Validate
-  </IressButton>
-</IressForm>
+<IressForm element="IressInputDate" />
 ```
 
 [View "MinDate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min-date)
@@ -550,20 +382,7 @@ The maximum date to accept for this input.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-import { IressForm, IressFormField, IressInput, IressButton } from '@iress-oss/ids-components';
-
-<IressForm>
-  <IressFormField
-    name="endDate"
-    label="End date"
-    hint="Enter a date before today"
-    rules={{ maxDate: new Date() }}
-    render={(controlledProps) => <IressInput {...controlledProps} type="date" />}
-  />
-  <IressButton type="submit" mode="primary">
-    Validate
-  </IressButton>
-</IressForm>
+<IressForm element="IressInputDate" />
 ```
 
 [View "MaxDate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max-date)
@@ -575,21 +394,10 @@ Ensures the input is a valid email address.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-import { IressForm, IressFormField, IressInput, IressButton } from '@iress-oss/ids-components';
-
-<IressForm>
-  <IressFormField
-    name="email"
-    label="Email"
-    hint="Enter an email address"
-    rules={{ email: 'Please enter a valid email address' }}
-    render={(controlledProps) => <IressInput {...controlledProps} type="email" />}
-  />
-  <IressButton type="submit" mode="primary">
-    Validate
-  </IressButton>
-</IressForm>
+<IressForm element="IressInput" />
 ```
+
+[View "Email" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--email)
 
 #### `validate`
 
@@ -600,31 +408,7 @@ You can pass a callback function as the argument to validate, or you can pass an
 - for `object` or `array` input data, it's recommended to use the validate function for validation as the other rules mostly apply to `string`, `string[]`, `number` and `boolean` data types.
 
 ```tsx
-import { IressForm, IressFormFieldset, IressCheckboxGroup, IressCheckbox, IressButton } from '@iress-oss/ids-components';
-
-<IressForm>
-  <IressFormFieldset
-    name="topics"
-    label="Topics"
-    hint="Select at least two items"
-    rules={{
-      validate: {
-        atLeastTwo: (value: string[]) =>
-          (Array.isArray(value) && value.length >= 2) || 'Please select at least two items',
-      },
-    }}
-    render={(controlledProps) => (
-      <IressCheckboxGroup {...controlledProps}>
-        <IressCheckbox value="sports">Sports</IressCheckbox>
-        <IressCheckbox value="music">Music</IressCheckbox>
-        <IressCheckbox value="reading">Reading</IressCheckbox>
-      </IressCheckboxGroup>
-    )}
-  />
-  <IressButton type="submit" mode="primary">
-    Validate
-  </IressButton>
-</IressForm>
+<IressForm 2 element="IressCheckboxGroup" />
 ```
 
 [View "Validate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--validate)
@@ -634,32 +418,7 @@ import { IressForm, IressFormFieldset, IressCheckboxGroup, IressCheckbox, IressB
 When the form passes validation (if not disabled), the `onSubmit` event is emitted. Its event details contain a map of the field names and the data entered by the user.
 
 ```tsx
-import { IressForm, IressFormField, IressInput, IressButton } from '@iress-oss/ids-components';
-import { useState } from 'react';
-
-const FormSubmissionExample = () => {
-  const [submitted, setSubmitted] = useState(null);
-
-  return (
-    <IressForm onSubmit={(data) => setSubmitted(data)}>
-      <IressFormField
-        name="name"
-        label="Name"
-        rules={{ required: 'Name is required' }}
-        render={(controlledProps) => <IressInput {...controlledProps} />}
-      />
-      <IressFormField
-        name="email"
-        label="Email address"
-        rules={{ required: 'Email is required' }}
-        render={(controlledProps) => <IressInput {...controlledProps} type="email" />}
-      />
-      <IressButton mode="primary" type="submit">
-        Sign up
-      </IressButton>
-    </IressForm>
-  );
-};
+<FormSubmission />
 ```
 
 [View "HandlingSubmission" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--handling-submission)
@@ -687,43 +446,7 @@ The `onError` prop allows you to listen to any field errors. It takes two argume
 One use case for this prop is to create your own visible error summary at the top of the form, or to log errors to an external service.
 
 ```tsx
-import { IressForm, IressFormField, IressInput, IressButton, IressModal, IressText } from '@iress-oss/ids-components';
-import { useState } from 'react';
-import { type FieldErrors } from 'react-hook-form';
-
-const CustomErrorHandlingExample = () => {
-  const [errors, setErrors] = useState<FieldErrors | undefined>(undefined);
-
-  return (
-    <IressForm onError={(data) => setErrors(data)}>
-      <IressFormField
-        name="name"
-        label="Name"
-        rules={{ required: 'Name is required' }}
-        render={(controlledProps) => <IressInput {...controlledProps} />}
-      />
-      <IressFormField
-        name="email"
-        label="Email address"
-        rules={{ required: 'Email is required' }}
-        render={(controlledProps) => <IressInput {...controlledProps} type="email" />}
-      />
-      <IressButton mode="primary" type="submit">
-        Sign up
-      </IressButton>
-      <IressModal show={!!errors} onShowChange={(show) => !show && setErrors(undefined)}>
-        <IressText>
-          <h3>Errors</h3>
-          <ul>
-            {Object.entries(errors ?? {}).map(([name, err]) => (
-              <li key={name}>{name}: {String(err?.message)}</li>
-            ))}
-          </ul>
-        </IressText>
-      </IressModal>
-    </IressForm>
-  );
-};
+<CustomErrorHandlingForm />
 ```
 
 [View "CustomErrorHandling" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--custom-error-handling)
@@ -740,32 +463,7 @@ Use cases where you may need the `values` prop:
 **Note:** `values` takes precedence over `defaultValues`. To ensure your form state is predictable, it is best to only use one prop to manage form values.
 
 ```tsx
-import { IressForm, IressFormField, IressInput, IressButton } from '@iress-oss/ids-components';
-import { useState } from 'react';
-
-const ControlledFormExample = () => {
-  const [values, setValues] = useState({ name: 'Leia Skywalker', email: 'leia.skywalker@iress.com' });
-
-  return (
-    <IressForm onSubmit={(data) => setValues(data)} values={values} mode="onChange">
-      <IressFormField
-        name="name"
-        label="Name"
-        rules={{ required: 'Name is required' }}
-        render={(controlledProps) => <IressInput {...controlledProps} />}
-      />
-      <IressFormField
-        name="email"
-        label="Email address"
-        rules={{ required: 'Email is required' }}
-        render={(controlledProps) => <IressInput {...controlledProps} type="email" />}
-      />
-      <IressButton mode="primary" type="submit">
-        Submit
-      </IressButton>
-    </IressForm>
-  );
-};
+<ControlledForm />
 ```
 
 [View "Values" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--values)

@@ -55,158 +55,32 @@ For more simpler applications, or if you need to customise the icon provider ind
 > **Note:** If you are already using `IressProvider` or `IressShadow`, you do not need to add `IressIconProvider` separately — it is already included.
 
 ```tsx
-const [showMoreIcons, setShowMoreIcons] = useState(false);
-    const [showEvenMore, setShowEvenMore] = useState(false);
+import { IressIconProvider, IressIcon, IressInline, IressText } from '@iress-oss/ids-components';
 
-    return (
-      <IressIconProvider>
-        <IressText element="h3" textStyle="typography.heading.4" mb="spacing.4">
-          Icons with Auto-Subsetting Enabled
-        </IressText>
-        <IressText mb="spacing.4" color="muted">
-          Initial set: 6 icons (~5-10KB from Google Fonts CDN vs 100KB full
-          font)
-        </IressText>
-        <IressInline gap="md" mb="spacing.6">
-          <IressText textAlign="center">
-            <IressIcon name="home" textStyle="typography.heading.2" />
-            <br />
-            home
-          </IressText>
-          <IressText textAlign="center">
-            <IressIcon name="search" textStyle="typography.heading.2" />
-            <br />
-            search
-          </IressText>
-          <IressText textAlign="center">
-            <IressIcon name="settings" textStyle="typography.heading.2" />
-            <br />
-            settings
-          </IressText>
-          <IressText textAlign="center">
-            <IressIcon name="star" filled textStyle="typography.heading.2" />
-            <br />
-            star (filled)
-          </IressText>
-          <IressText textAlign="center">
-            <IressIcon name="delete" textStyle="typography.heading.2" />
-            <br />
-            delete
-          </IressText>
-          <IressText textAlign="center">
-            <IressIcon name="check" textStyle="typography.heading.2" />
-            <br />
-            check
-          </IressText>
-        </IressInline>
-
-        {!showMoreIcons && (
-          <IressButton
-            onClick={() => setShowMoreIcons(true)}
-            style={{
-              padding: '8px 16px',
-              marginBottom: '16px',
-              cursor: 'pointer',
-            }}
-          >
-            Load More Icons (Set 2)
-          </IressButton>
-        )}
-
-        {showMoreIcons && (
-          <>
-            <IressText
-              element="h3"
-              textStyle="typography.heading.4"
-              mb="spacing.4"
-            >
-              Additional Icons (Set 2)
-            </IressText>
-            <IressText mb="spacing.4" color="muted">
-              Watch: Previous icons stay visible while these load!
-            </IressText>
-            <IressInline gap="md" mb="spacing.6">
-              <IressText textAlign="center">
-                <IressIcon name="folder" textStyle="typography.heading.2" />
-                <br />
-                folder
-              </IressText>
-              <IressText textAlign="center">
-                <IressIcon name="mail" textStyle="typography.heading.2" />
-                <br />
-                mail
-              </IressText>
-              <IressText textAlign="center">
-                <IressIcon
-                  name="notifications"
-                  textStyle="typography.heading.2"
-                />
-                <br />
-                notifications
-              </IressText>
-              <IressText textAlign="center">
-                <IressIcon
-                  name="calendar_today"
-                  textStyle="typography.heading.2"
-                />
-                <br />
-                calendar_today
-              </IressText>
-            </IressInline>
-          </>
-        )}
-
-        {showMoreIcons && !showEvenMore && (
-          <IressButton
-            onClick={() => setShowEvenMore(true)}
-            style={{
-              padding: '8px 16px',
-              marginBottom: '16px',
-              cursor: 'pointer',
-            }}
-          >
-            Load Even More Icons (Set 3)
-          </IressButton>
-        )}
-
-        {showEvenMore && (
-          <>
-            <IressText
-              element="h3"
-              textStyle="typography.heading.4"
-              mb="spacing.4"
-            >
-              Even More Icons (Set 3)
-            </IressText>
-            <IressText mb="spacing.4" color="muted">
-              All previous icons remain visible during this transition too!
-            </IressText>
-            <IressInline gap="md">
-              <IressText textAlign="center">
-                <IressIcon name="download" textStyle="typography.heading.2" />
-                <br />
-                download
-              </IressText>
-              <IressText textAlign="center">
-                <IressIcon name="upload" textStyle="typography.heading.2" />
-                <br />
-                upload
-              </IressText>
-              <IressText textAlign="center">
-                <IressIcon name="share" textStyle="typography.heading.2" />
-                <br />
-                share
-              </IressText>
-              <IressText textAlign="center">
-                <IressIcon name="print" textStyle="typography.heading.2" />
-                <br />
-                print
-              </IressText>
-            </IressInline>
-          </>
-        )}
-      </IressIconProvider>
-    );
+<IressIconProvider>
+  <IressInline gap="md">
+    <IressText textAlign="center">
+      <IressIcon name="home" textStyle="typography.heading.2" />
+      <br />
+      home
+    </IressText>
+    <IressText textAlign="center">
+      <IressIcon name="search" textStyle="typography.heading.2" />
+      <br />
+      search
+    </IressText>
+    <IressText textAlign="center">
+      <IressIcon name="settings" textStyle="typography.heading.2" />
+      <br />
+      settings
+    </IressText>
+    <IressText textAlign="center">
+      <IressIcon name="star" filled textStyle="typography.heading.2" />
+      <br />
+      star (filled)
+    </IressText>
+  </IressInline>
+</IressIconProvider>
 ```
 
 [View "IconProvider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-provider--icon-provider)
@@ -290,9 +164,7 @@ If you use an icon to improve the visual appeal of content, for example by repla
 If you use an icon to convey meaning, for example using an icon as the only content inside a button, you do need to supply a value for the `screenreaderText`; if you don't the button meaning will be completely lost for screen reader users.
 
 ```tsx
-import { IressIcon } from '@iress-oss/ids-components';
-
-<IressIcon name="home" screenreaderText="Home" />
+<IressIcon screenreaderText="Home" />
 ```
 
 [View "ScreenReaderText" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-icon--screen-reader-text)
@@ -302,16 +174,14 @@ import { IressIcon } from '@iress-oss/ids-components';
 The `filled` prop allows you to use a filled version of the icon, usually to indicate an active state.
 
 ```tsx
-import { IressIcon } from '@iress-oss/ids-components';
-
 <IressInline gap="md">
 <IressText textAlign="center">
-<IressIcon name="star" textStyle="typography.heading.1" />
+<IressIcon textStyle="typography.heading.1" />
 <br />
 (default)
 </IressText>
 <IressText textAlign="center">
-<IressIcon name="star" filled textStyle="typography.heading.1" />
+<IressIcon filled textStyle="typography.heading.1" />
 <br />
 filled
 </IressText>
@@ -329,160 +199,17 @@ This is a list of all the icons available in the Iress Design System (we only li
 It is a very basic search tool, so if you can't find the icon you are looking for, please refer to the [Material Symbols documentation](https://fonts.google.com/icons?icon.style=Rounded&icon.set=Material+Symbols).
 
 ```tsx
-const [query, setQuery] = useState('');
-    const [showFilled, setShowFilled] = useState(false);
-    const [showAllIcons, setShowAllIcons] = useState(false);
-    const [allIcons, setAllIcons] = useState<LabelValueMeta[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [copiedIcon, setCopiedIcon] = useState<string | null>(null);
+import { IressIconProvider, IressIcon, IressInput } from '@iress-oss/ids-components';
 
-    // Load icons on mount
-    React.useEffect(() => {
-      getMaterialSymbolsListCached()
-        .then((symbols) => {
-          const iconData: LabelValueMeta[] = symbols.map((name) => ({
-            label: name,
-            value: name,
-          }));
-          setAllIcons(iconData);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error('Failed to load Material Symbols:', error);
-          setLoading(false);
-        });
-    }, []);
-
-    const {
-      debouncedQuery,
-      loading: searching,
-      results,
-    } = useAutocompleteSearch({
-      debounceThreshold: 0,
-      initialOptions: allIcons,
-      options: allIcons,
-      query,
-    });
-
-    const handleCopyIconName = (iconName: string) => {
-      void navigator.clipboard.writeText(iconName);
-      setCopiedIcon(iconName);
-      setTimeout(() => setCopiedIcon(null), 2000);
-    };
-
-    const columns = useMemo(
-      () => [
-        {
-          key: 'value',
-          label: 'Preview',
-          width: '80px',
-          format: (name: MaterialSymbol) => (
-            <IressIcon
-              name={name}
-              filled={showFilled}
-              textStyle="typography.heading.3"
-            />
-          ),
-        },
-        {
-          key: debouncedQuery ? 'formattedLabel' : 'label',
-          label: 'Name (click to copy)',
-          format: (name: MaterialSymbol) => {
-            if (copiedIcon === name) {
-              return <IressTag>✓ Copied!</IressTag>;
-            }
-
-            return (
-              <IressTag onClick={() => handleCopyIconName(name)}>
-                {name}
-              </IressTag>
-            );
-          },
-        },
-      ],
-      [showFilled, copiedIcon, debouncedQuery],
-    );
-
-    const displayedResults = useMemo(() => {
-      // If searching or showing all icons, display full results
-      if (showAllIcons) {
-        return results;
-      }
-      // Otherwise, limit to first 100 icons
-      return results.slice(0, 100);
-    }, [results, showAllIcons]);
-
-    const caption = useMemo(() => {
-      if (loading) return 'Loading icons...';
-      if (searching) return 'Searching...';
-
-      let append = 'total';
-
-      if (debouncedQuery) {
-        append = `matching "${debouncedQuery}"`;
-      }
-
-      if (!showAllIcons) {
-        if (results.length < 100) {
-          return `Material Symbols (${results.length} ${append})`;
-        }
-
-        return `Material Symbols (showing first 100 of ${results.length} ${append})`;
-      }
-
-      return `Material Symbols (${results.length} ${append})`;
-    }, [loading, searching, debouncedQuery, results.length, showAllIcons]);
-
-    return (
-      <IressIconProvider noSubsetting>
-        <IressStack gap="xs">
-          <IressStack gap="sm">
-            <IressInput
-              clearable
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onClear={() => setQuery('')}
-              placeholder="Search by name (e.g., home, arrow, settings)..."
-              type="search"
-              prepend={<IressIcon name="search" />}
-              loading={searching || loading}
-              variant="search"
-            />
-            <IressInline
-              gap="md"
-              horizontalAlign="between"
-              verticalAlign="middle"
-            >
-              <IressText color="muted">
-                Click any icon name to copy it to clipboard
-              </IressText>
-              <IressInline gap="md" verticalAlign="middle">
-                <IressToggle checked={showFilled} onChange={setShowFilled}>
-                  Show filled variant
-                </IressToggle>
-                <IressToggle checked={showAllIcons} onChange={setShowAllIcons}>
-                  Show all icons{' '}
-                  <IressTooltip tooltipText="Enable to use browser search (Ctrl+F/Cmd+F) for easier browsing">
-                    <IressButton mode="muted">
-                      <IressIcon name="info-circle" />
-                    </IressButton>
-                  </IressTooltip>
-                </IressToggle>
-              </IressInline>
-            </IressInline>
-          </IressStack>
-
-          <IressTable
-            caption={caption}
-            columns={columns}
-            rows={displayedResults}
-            empty={loading ? 'Loading icons...' : 'No icons found'}
-            scope="col"
-            mb="none"
-          />
-        </IressStack>
-      </IressIconProvider>
-    );
+<IressIconProvider noSubsetting>
+  <IressInput
+    clearable
+    placeholder="Search by name (e.g., home, arrow, settings)..."
+    type="search"
+    prepend={<IressIcon name="search" />}
+    variant="search"
+  />
+</IressIconProvider>
 ```
 
 [View "Reference" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-icon--reference)
@@ -510,23 +237,21 @@ Mode has been removed. Please use the `color` prop instead.
 The `flip` prop can be set to horizontal, vertical or both.
 
 ```tsx
-import { IressIcon } from '@iress-oss/ids-components';
-
 <IressInline gap="md">
 <IressStack horizontalAlign="center">
-<IressIcon name="arrow_forward" />
+<IressIcon />
 <IressText>(default)</IressText>
 </IressStack>
 <IressStack horizontalAlign="center">
-<IressIcon name="arrow_forward" flip="horizontal" />
+<IressIcon flip="horizontal" />
 <IressText>horizontal</IressText>
 </IressStack>
 <IressStack horizontalAlign="center">
-<IressIcon name="arrow_forward" flip="vertical" />
+<IressIcon flip="vertical" />
 <IressText>vertical</IressText>
 </IressStack>
 <IressStack horizontalAlign="center">
-<IressIcon name="arrow_forward" flip="both" />
+<IressIcon flip="both" />
 <IressText>both</IressText>
 </IressStack>
 </IressInline>
@@ -539,26 +264,24 @@ import { IressIcon } from '@iress-oss/ids-components';
 The `rotate` prop can be set to 90, 180 or 270 degrees.
 
 ```tsx
-import { IressIcon } from '@iress-oss/ids-components';
-
 <IressInline gap="md">
 <IressText textAlign="center">
-<IressIcon name="arrow_forward" />
+<IressIcon />
 <br />
 (default)
 </IressText>
 <IressText textAlign="center">
-<IressIcon name="arrow_forward" rotate={90} />
+<IressIcon rotate={90} />
 <br />
 90
 </IressText>
 <IressText textAlign="center">
-<IressIcon name="arrow_forward" rotate={180} />
+<IressIcon rotate={180} />
 <br />
 180
 </IressText>
 <IressText textAlign="center">
-<IressIcon name="arrow_forward" rotate={270} />
+<IressIcon rotate={270} />
 <br />
 270
 </IressText>
@@ -572,20 +295,18 @@ import { IressIcon } from '@iress-oss/ids-components';
 The `spin` prop can be set to half (fastest), 1, 2 or 3 (slowest) to control the speed of the icon spin animation, useful for loading spinners.
 
 ```tsx
-import { IressIcon } from '@iress-oss/ids-components';
-
 <IressInline gap="md">
 <IressText>
-<IressIcon name="progress_activity" spin="half" /> half
+<IressIcon spin="half" /> half
 </IressText>
 <IressText>
-<IressIcon name="progress_activity" spin={1} /> 1
+<IressIcon spin={1} /> 1
 </IressText>
 <IressText>
-<IressIcon name="progress_activity" spin={2} /> 2
+<IressIcon spin={2} /> 2
 </IressText>
 <IressText>
-<IressIcon name="progress_activity" spin={3} /> 3
+<IressIcon spin={3} /> 3
 </IressText>
 </IressInline>
 ```
@@ -597,13 +318,11 @@ import { IressIcon } from '@iress-oss/ids-components';
 Icons now inherit the size of the parent component. This means you can use them inside buttons, links and other components without needing to set a size.
 
 ```tsx
-import { IressIcon } from '@iress-oss/ids-components';
-
 <IressLink
 href="https://www.iress.com/"
 target="_blank"
 rel="noreferrer"
-append={<IressIcon name="open_in_new" />}
+append={<IressIcon />}
 >
 Go to this link
 </IressLink>
@@ -618,37 +337,26 @@ To help with migrating, we have mapped some common Font Awesome icons to their M
 As of version 6, these names will automatically be mapped when using the `IressIcon` component with the default `type` of `material`. However, we strongly recommend you change them to the material equivalent as soon as possible as the automatic mapping will be removed in a future release.
 
 ```tsx
-import { IressIcon } from '@iress-oss/ids-components';
+import { IressTable, IressIcon, IressText } from '@iress-oss/ids-components';
 
 <IressTable
-caption="Font Awesome to Material Symbols Migration Reference"
-columns={[
-{
-key: 'fontAwesome',
-label: 'Font Awesome',
-format: (icon: never) => (
-<IressText>
-<IressIcon type="fontawesome" name={icon} /> ({icon})
-</IressText>
-),
-},
-{
-key: 'materialSymbols',
-label: 'Material Symbols',
-format: (icon: never) => (
-<IressText>
-<IressIcon name={icon} /> ({icon})
-</IressText>
-),
-},
-]}
-rows={Object.entries(FA_TO_MATERIAL_MAP).map(
-([fontAwesome, materialSymbols]) => ({
-fontAwesome,
-materialSymbols,
-}),
-)}
-scope="col"
+  caption="Font Awesome to Material Symbols Migration Reference"
+  columns={[
+    {
+      key: 'fontAwesome',
+      label: 'Font Awesome',
+    },
+    {
+      key: 'materialSymbols',
+      label: 'Material Symbols',
+    },
+  ]}
+  rows={[
+    { fontAwesome: 'home', materialSymbols: 'home' },
+    { fontAwesome: 'search', materialSymbols: 'search' },
+    { fontAwesome: 'cog', materialSymbols: 'settings' },
+  ]}
+  scope="col"
 />
 ```
 

@@ -1305,9 +1305,9 @@ However, please be diligent as the component you use may not fit withing the con
 Use the `prepend` prop to add content to the left side of the card.
 
 ```tsx
-<IressCardSlots>
+<IressCard>
   I'm a card using the prepend render prop
-</IressCardSlots>
+</IressCard>
 ```
 
 [View "Prepend" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-card-slots--prepend)
@@ -1317,9 +1317,9 @@ Use the `prepend` prop to add content to the left side of the card.
 Use the `topRight` prop to add content to the top right of the card. This is useful for adding a badge, icon, or an actions menu.
 
 ```tsx
-<IressCardSlots>
+<IressCard>
   I'm a card using the topRight render prop
-</IressCardSlots>
+</IressCard>
 ```
 
 [View "TopRight" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-card-slots--top-right)
@@ -1331,9 +1331,9 @@ Use the `heading` prop to add a header to the card. The header can be any compon
 **Note:** `headingText` and `headingLevel` props have been replaced with the `heading` render prop to give you more control over the heading element and its content. To use the previous behaviour, you can pass a string which will automatically create a `h2` element, or pass a `h*` element with the text as a child.
 
 ```tsx
-<IressCardSlots>
+<IressCard>
   I'm a card using the heading render prop
-</IressCardSlots>
+</IressCard>
 ```
 
 [View "Heading" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-card-slots--heading)
@@ -1343,9 +1343,9 @@ Use the `heading` prop to add a header to the card. The header can be any compon
 Use the `media` prop to add media to the card. The media can be any component you like, but it is designed to support an image or video.
 
 ```tsx
-<IressCardSlots>
+<IressCard>
   I'm a card using the media render prop
-</IressCardSlots>
+</IressCard>
 ```
 
 [View "Media" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-card-slots--media)
@@ -1361,9 +1361,9 @@ Use the `content` prop to add content to the card. The content can be any compon
 Use the `footer` prop to add a footer to the card. The footer can be any component you like, but it is designed to support buttons.
 
 ```tsx
-<IressCardSlots>
+<IressCard>
   I'm a card using the footer render prop
-</IressCardSlots>
+</IressCard>
 ```
 
 [View "Footer" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-card-slots--footer)
@@ -1387,9 +1387,9 @@ Note: The `clickable` prop has been deprecated in favour of using component vari
 Since the `heading` prop now renders the component you give it, you have full control over the content of the `heading`. This means you can add pass it a heading with a link.
 
 ```tsx
-<IressCardClickable>
+<IressCard>
   I'm a card with a clickable heading. NEVER use me when the whole card is clickable.
-</IressCardClickable>
+</IressCard>
 ```
 
 [View "HeadingOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-card-clickable--heading-only)
@@ -1401,9 +1401,9 @@ The whole card can be made clickable by passing an `onClick` prop. All the appro
 It's recommended to add `role="button"` and `tabindex="0"` to the card to make it clear to screen readers that the card is clickable.
 
 ```tsx
-<IressCardClickable role="button" tabIndex={0}>
+<IressCard role="button" tabIndex={0}>
   I am a card with an onClick handler. Click me to see what happens.
-</IressCardClickable>
+</IressCard>
 ```
 
 [View "WholeCard" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-card-clickable--whole-card)
@@ -2392,7 +2392,7 @@ Expander has a `mode` prop which can be used to change how the expander is displ
 The `open` prop can be used to control the open state of the expander as can be seen below.
 
 ```tsx
-<Iress open />
+<IressExpander open />
 ```
 
 [View "Open" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components---open)
@@ -6826,7 +6826,7 @@ A container for the options list. It accepts `header` and `footer` props, allowi
 A button designed to create an option if the desired option is not in the list. Use the `onCreate` prop to handle the creation of the new option.
 
 ```tsx
-<IressCreate heading="Add custom option" label="WX" />
+<IressSelectCreate heading="Add custom option" label="WX" />
 ```
 
 [View "Create" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-create--create)
@@ -6836,7 +6836,7 @@ A button designed to create an option if the desired option is not in the list. 
 A heading designed to allow clearing of a list. To show the clear all button, you can set `clearAll` (it can be a string if you want to override the text). Use the `onClearAll` prop to handle the clearing of the list.
 
 ```tsx
-<IressHeading clearAll />
+<IressSelectHeading clearAll />
 ```
 
 [View "Heading" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-heading--heading)
@@ -6871,7 +6871,7 @@ It is used to render the available options of the `IressSelect` in single select
 <IressRow gutter="md">
   <IressCol>
     ```tsx
-<IressMenu heading="Search results" noResults="No results found" fluid />
+<IressSelectMenu heading="Search results" noResults="No results found" fluid />
 ```
 
 [View "Results" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--results)
@@ -6892,7 +6892,7 @@ A custom inline search navigator, designed to create a search experience within 
 It is used to filter the available options of the `IressSelect` when an asynchronous `options` function is used and no `renderOptions` prop is provided.
 
 ```tsx
-<IressSearch autoHighlight={false} />
+<IressSelectSearch autoHighlight={false} />
 ```
 
 [View "Search" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-search--search)
@@ -6915,7 +6915,7 @@ It is used to render the activator of the `IressSelect` if `multiSelect` has bee
 <IressRow gutter="md">
   <IressCol>
     ```tsx
-<IressTags placeholder="Select an item" />
+<IressSelectTags placeholder="Select an item" />
 ```
 
 [View "NoneSelected" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tags--none-selected)
@@ -6931,7 +6931,7 @@ It is used to render the activator of the `IressSelect` if `multiSelect` has bee
 By default, the maximum number of tags that can be displayed is 5. If more than 5 tags are selected, the label will display the number of selected items. This can be changed using the `limit` prop.
 
 ```tsx
-<IressTags limit={3} />
+<IressSelectTags limit={3} />
 ```
 
 [View "LimitReached" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tags--limit-reached)
@@ -10797,7 +10797,7 @@ Use the `rules` prop on the `IressFormField` component to add validation rules. 
 A boolean which, if `true`, indicates that the input must have a value before the form can be submitted. You can assign a string to return a custom error message.
 
 ```tsx
-<IressFormRules element="IressInput" />
+<IressForm element="IressInput" />
 ```
 
 [View "Required" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--required)
@@ -10812,7 +10812,7 @@ The maximum character length of the value to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressFormRules element="IressInput" />
+<IressForm element="IressInput" />
 ```
 
 [View "MaxLength" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max-length)
@@ -10827,7 +10827,7 @@ The minimum character length of the value to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressFormRules element="IressInput" />
+<IressForm element="IressInput" />
 ```
 
 [View "MinLength" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min-length)
@@ -10841,7 +10841,7 @@ The maximum number to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressFormRules element="IressInput" />
+<IressForm element="IressInput" />
 ```
 
 [View "Max" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max)
@@ -10855,7 +10855,7 @@ The minimum number to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressFormRules element="IressInput" />
+<IressForm element="IressInput" />
 ```
 
 [View "Min" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min)
@@ -10877,7 +10877,7 @@ The minimum date to accept for this input.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-<IressFormRules element="IressInputDate" />
+<IressForm element="IressInputDate" />
 ```
 
 [View "MinDate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min-date)
@@ -10889,7 +10889,7 @@ The maximum date to accept for this input.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-<IressFormRules element="IressInputDate" />
+<IressForm element="IressInputDate" />
 ```
 
 [View "MaxDate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max-date)
@@ -10901,7 +10901,7 @@ Ensures the input is a valid email address.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-<IressFormRules element="IressInput" />
+<IressForm element="IressInput" />
 ```
 
 [View "Email" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--email)
@@ -10915,7 +10915,7 @@ You can pass a callback function as the argument to validate, or you can pass an
 - for `object` or `array` input data, it's recommended to use the validate function for validation as the other rules mostly apply to `string`, `string[]`, `number` and `boolean` data types.
 
 ```tsx
-<IressFormRules 2 element="IressCheckboxGroup" />
+<IressForm 2 element="IressCheckboxGroup" />
 ```
 
 [View "Validate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--validate)
@@ -12041,7 +12041,7 @@ The `IressIcon` component is used to render icons from the Material Symbols libr
 [View <code>IressIcon</code> documentation](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)
 
 ```tsx
-<IressIconography name="home" />
+<IressIcon name="home" />
 ```
 
 [View "Default" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-iconography--default)
@@ -14704,9 +14704,9 @@ It accepts the following values:
 | `'within:inset'`       | Inset focus ring when a child element is focused               |
 
 ```tsx
-<IressAccessibility focusable tabIndex={0}>
+<IressText focusable tabIndex={0}>
   This element will have focus styles applied when it is focused. This is useful for accessibility and keyboard navigation.
-</IressAccessibility>
+</IressText>
 ```
 
 [View "focusable" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-accessibility--focusable)
@@ -14714,9 +14714,9 @@ It accepts the following values:
 ### Inset focus ring
 
 ```tsx
-<IressAccessibility focusable="inset" tabIndex={0} p="spacing.4" bg="colour.neutral.20">
+<IressText focusable="inset" tabIndex={0} p="spacing.4" bg="colour.neutral.20">
   This element uses an inset focus ring, which renders inside the element boundary.
-</IressAccessibility>
+</IressText>
 ```
 
 [View "focusableInset" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-accessibility--focusable-inset)
@@ -14726,9 +14726,9 @@ It accepts the following values:
 The `srOnly` prop allows you to set a component to be only visible on screen readers. It is used to ensure the screen reader has context of the screen to help the user understand the tasks required of them.
 
 ```tsx
-<IressAccessibility srOnly>
+<IressText srOnly>
   Hello screen readers
-</IressAccessibility>
+</IressText>
 ```
 
 [View "srOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-accessibility--sr-only)
@@ -14738,9 +14738,9 @@ The `srOnly` prop allows you to set a component to be only visible on screen rea
 The `srOnly` prop is responsive, allowing you to show content on larger screens and hiding them on smaller ones, enabling screen readers to have the same context as larger screens as they are not limited by device size.
 
 ```tsx
-<IressAccessibility>
+<IressText>
   This content is visible on large screens and screen readers
-</IressAccessibility>
+</IressText>
 ```
 
 [View "srOnlyResponsive" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-accessibility--sr-only-responsive)
@@ -14773,7 +14773,7 @@ The `bg` prop allows you to change the background of any component to the value 
 Below is an example of a component using `bg` and `color` to create a featured panel that changes colour depending on the theme.
 
 ```tsx
-<IressColour bg="colour.primary.fill" color="colour.primary.onFill" />
+<IressPanel bg="colour.primary.fill" color="colour.primary.onFill" />
 ```
 
 [View "bg" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-colour--bg)
@@ -14955,16 +14955,16 @@ Note: We only allow `1` as a value to maintain design consistency.
 The `hideFrom` and `hideBelow` props allow you to hide content from both visual users and screen readers at different breakpoints. This is useful when certain content is not relevant on smaller screens, and you want to ensure that screen reader users have the same experience as visual users.
 
 ```tsx
-<IressLayout hideFrom="lg">
+<IressPanel hideFrom="lg">
   Only on mobile screens
-</IressLayout>
+</IressPanel>
 ```
 
 [View "hideFrom" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-layout--hide-from)
 ```tsx
-<IressLayout hideBelow="lg">
+<IressPanel hideBelow="lg">
   Only on large screens
-</IressLayout>
+</IressPanel>
 ```
 
 [View "hideBelow" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-layout--hide-below)
@@ -15501,9 +15501,9 @@ For variable data entry, you can use grid tokens. These are usually used inside 
 - `12/12`: 100% width of parent container
 
 ```tsx
-<IressSizing bg="alt" width="input.16">
+<IressPanel bg="alt" width="input.16">
   Credit card number wide panel
-</IressSizing>
+</IressPanel>
 ```
 
 [View "inputWidths" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-sizing--input-widths)
@@ -15570,9 +15570,9 @@ There are seven props you can use to customise the padding of any component. It 
 - `pb`: Change the padding on the bottom of a component
 
 ```tsx
-<IressSpacing bg="alt" p="xl">
+<IressPanel bg="alt" p="xl">
   A panel that has extra large padding on all sides.
-</IressSpacing>
+</IressPanel>
 ```
 
 [View "padding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--padding)
@@ -15586,9 +15586,9 @@ Submit
 [View "button" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--button)
 
 ```tsx
-<IressSpacing bg="alt" pb="xl" pt="spacing.1" pl="md" pr="spacing.6">
+<IressPanel bg="alt" pb="xl" pt="spacing.1" pl="md" pr="spacing.6">
   A panel that has different padding on each side.
-</IressSpacing>
+</IressPanel>
 ```
 
 [View "variablePadding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--variable-padding)
@@ -15598,17 +15598,17 @@ Submit
 All padding props are responsive and can be changed according to different screen sizes.
 
 ```tsx
-<IressSpacing bg="alt">
+<IressPanel bg="alt">
   A panel that has extra large padding on small screens and no padding on large screens.
-</IressSpacing>
+</IressPanel>
 ```
 
 [View "responsivePadding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-padding)
 
 ```tsx
-<IressSpacing bg="alt">
+<IressPanel bg="alt">
   A panel that has responsive padding on the vertical and horizontal axes.
-</IressSpacing>
+</IressPanel>
 ```
 
 [View "responsiveVariablePadding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-variable-padding)
@@ -15639,17 +15639,17 @@ There are seven props you can use to customise the margin of any component. It a
 - `mb`: Change the margin on the bottom of a component
 
 ```tsx
-<IressSpacing bg="alt" m="xl">
+<IressPanel bg="alt" m="xl">
   A panel that has the same margin on all sides.
-</IressSpacing>
+</IressPanel>
 ```
 
 [View "margin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--margin)
 
 ```tsx
-<IressSpacing bg="alt" mb="xl" mt="spacing.1" ml="md" mr="spacing.6">
+<IressPanel bg="alt" mb="xl" mt="spacing.1" ml="md" mr="spacing.6">
   A panel that has different margin on each side.
-</IressSpacing>
+</IressPanel>
 ```
 
 [View "variableMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--variable-margin)
@@ -15659,17 +15659,17 @@ There are seven props you can use to customise the margin of any component. It a
 All margin props are responsive and can be changed according to different screen sizes.
 
 ```tsx
-<IressSpacing bg="alt">
+<IressPanel bg="alt">
   A panel that has extra large margin on small screens and no margin on large screens.
-</IressSpacing>
+</IressPanel>
 ```
 
 [View "responsiveMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-margin)
 
 ```tsx
-<IressSpacing bg="alt">
+<IressPanel bg="alt">
   A panel that has responsive margin on the vertical and horizontal axes.
-</IressSpacing>
+</IressPanel>
 ```
 
 [View "responsiveVariableMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-variable-margin)
@@ -15847,9 +15847,9 @@ These are all styling props related to changing the typography of a component.
 The `textStyle` prop allows you to change the default text style of a component. For more control and nested element styling, it is recommended to use `IressText` instead.
 
 ```tsx
-<IressTypography bg="alt" textStyle="typography.heading.5">
+<IressPanel bg="alt" textStyle="typography.heading.5">
   A panel with large text
-</IressTypography>
+</IressPanel>
 ```
 
 [View "textStyle" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-typography--text-style)
@@ -15859,9 +15859,9 @@ The `textStyle` prop allows you to change the default text style of a component.
 The `textAlign` prop allows you to change the alignment of text inside a component. For more control, it is recommended to use `IressText` instead.
 
 ```tsx
-<IressTypography bg="alt" textAlign="center">
+<IressPanel bg="alt" textAlign="center">
   A panel with centered text
-</IressTypography>
+</IressPanel>
 ```
 
 [View "textAlign" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-typography--text-align)

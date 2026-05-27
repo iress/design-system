@@ -253,7 +253,7 @@ A container for the options list. It accepts `header` and `footer` props, allowi
 A button designed to create an option if the desired option is not in the list. Use the `onCreate` prop to handle the creation of the new option.
 
 ```tsx
-<IressCreate heading="Add custom option" label="WX" />
+<IressSelectCreate heading="Add custom option" label="WX" />
 ```
 
 [View "Create" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-create--create)
@@ -263,7 +263,7 @@ A button designed to create an option if the desired option is not in the list. 
 A heading designed to allow clearing of a list. To show the clear all button, you can set `clearAll` (it can be a string if you want to override the text). Use the `onClearAll` prop to handle the clearing of the list.
 
 ```tsx
-<IressHeading clearAll />
+<IressSelectHeading clearAll />
 ```
 
 [View "Heading" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-heading--heading)
@@ -298,7 +298,7 @@ It is used to render the available options of the `IressSelect` in single select
 <IressRow gutter="md">
   <IressCol>
     ```tsx
-<IressMenu heading="Search results" noResults="No results found" fluid />
+<IressSelectMenu heading="Search results" noResults="No results found" fluid />
 ```
 
 [View "Results" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--results)
@@ -319,7 +319,7 @@ A custom inline search navigator, designed to create a search experience within 
 It is used to filter the available options of the `IressSelect` when an asynchronous `options` function is used and no `renderOptions` prop is provided.
 
 ```tsx
-<IressSearch autoHighlight={false} />
+<IressSelectSearch autoHighlight={false} />
 ```
 
 [View "Search" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-search--search)
@@ -342,7 +342,7 @@ It is used to render the activator of the `IressSelect` if `multiSelect` has bee
 <IressRow gutter="md">
   <IressCol>
     ```tsx
-<IressTags placeholder="Select an item" />
+<IressSelectTags placeholder="Select an item" />
 ```
 
 [View "NoneSelected" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tags--none-selected)
@@ -358,7 +358,7 @@ It is used to render the activator of the `IressSelect` if `multiSelect` has bee
 By default, the maximum number of tags that can be displayed is 5. If more than 5 tags are selected, the label will display the number of selected items. This can be changed using the `limit` prop.
 
 ```tsx
-<IressTags limit={3} />
+<IressSelectTags limit={3} />
 ```
 
 [View "LimitReached" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tags--limit-reached)

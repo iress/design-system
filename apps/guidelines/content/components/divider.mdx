@@ -28,10 +28,14 @@ import { IressDivider } from '@iress-oss/ids-components';
 Use the `vertical` prop to change the divider from horizontal to vertical.
 
 ```tsx
+import { IressDivider, IressInline } from '@iress-oss/ids-components';
+
 <IressInline gap="spacing.4" verticalAlign="middle">
-  <span>Left</span>
+  <span>Item 1</span>
   <IressDivider vertical />
-  <span>Right</span>
+  <span>Item 2</span>
+  <IressDivider vertical />
+  <span>Item 3</span>
 </IressInline>
 ```
 
@@ -44,19 +48,12 @@ You can customise the gutter by using the `my` prop. If the divider is vertical,
 By default, dividers do not have a gutter, allowing them to adapt to `<IressStack>` and `<IressInline>` layouts.
 
 ```tsx
-<IressStack gap="md">
-  <IressPanel>
-    <IressText element="h2"><code>my="sm"</code></IressText>
-    <IressDivider my="sm" />
-  </IressPanel>
-  <IressPanel>
-    <IressText element="h2"><code>my="md"</code></IressText>
-    <IressDivider my="md" />
-  </IressPanel>
-  <IressPanel>
-    <IressText element="h2"><code>my="lg"</code></IressText>
-    <IressDivider my="lg" />
-  </IressPanel>
+import { IressDivider, IressStack } from '@iress-oss/ids-components';
+
+<IressStack gap="spacing.4">
+  <p>Content above</p>
+  <IressDivider my="spacing.2" />
+  <p>Content below</p>
 </IressStack>
 ```
 

@@ -15,11 +15,11 @@ The `alignSelf` prop allows you to override the alignItems value set by a parent
 
 ```tsx
 <IressStack gap="md" horizontalAlign="center">
-<IressPanel bg="alt">First panel (no alignSelf)</IressPanel>
-<IressPanel bg="colour.primary.surface" alignSelf={alignSelf}>
-Panel with alignSelf prop
-</IressPanel>
-<IressPanel bg="alt">Third panel (no alignSelf)</IressPanel>
+  <IressPanel bg="alt">First panel (no alignSelf)</IressPanel>
+  <IressPanel bg="colour.primary.surface" alignSelf="start">
+    Panel with alignSelf prop
+  </IressPanel>
+  <IressPanel bg="alt">Third panel (no alignSelf)</IressPanel>
 </IressStack>
 ```
 
@@ -73,7 +73,7 @@ You can set the value to `true` to enable scrolling on both axes, or specify `'x
 
 ```tsx
 <IressCard px="sm">
-  <IressPanel scrollable style={{ height: 200 }}>
+  <IressPanel scrollable="y" style={{ maxHeight: '300px' }}>
     <h1>History of Iress</h1>
     <p>
       <strong>Iress Limited</strong> (originally "Iress Market Technology")
@@ -97,25 +97,6 @@ You can set the value to `true` to enable scrolling on both axes, or specify `'x
 ## `stretch`
 
 The `stretch` prop is used to stretch a component to fill the available space. It is used in components such as `IressPanel` to ensure each column in a layout takes up the same amount of space.
-
-```tsx
-<IressContainer bg="alt" py="xl" px="xl" borderRadius="none" fluid>
-  <IressRow gutter="xl" verticalAlign="stretch">
-    <IressCol>
-      <IressPanel stretch>Short content</IressPanel>
-    </IressCol>
-    <IressCol>
-      <IressPanel stretch>
-        <h1>History of Iress</h1>
-        <p>
-          Iress was founded in 1993 in Melbourne, Australia, providing
-          technology solutions to the financial services industry.
-        </p>
-      </IressPanel>
-    </IressCol>
-  </IressRow>
-</IressContainer>
-```
 
 [View "stretch" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-layout--stretch)
 

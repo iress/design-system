@@ -1,0 +1,10 @@
+{
+  "name": "ids-dev",
+  "description": "IDS monorepo development agent with design system skills",
+  "tools": ["@builtin"],
+  "allowedTools": ["@builtin"],
+  "resources": [
+    "skill://.agents/skills/**/SKILL.md",
+    "skill://.kiro/skills/**/SKILL.md"
+  ]
+}

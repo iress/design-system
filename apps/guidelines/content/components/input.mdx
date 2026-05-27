@@ -31,12 +31,28 @@ For more information about each type, please see the [MDN documentation](https:/
 
 ```tsx
 <IressStack gap="md">
-  <IressInput placeholder="Text input" type="text" />
-  <IressInput placeholder="Email input" type="email" />
-  <IressInput placeholder="Password input" type="password" />
-  <IressInput placeholder="Search input" type="search" />
-  <IressInput type="number" placeholder="Number input" />
-  <IressInput type="date" />
+{/* Copied from: HTMLInputTypeAttribute */}
+{[
+'text',
+'color',
+'date',
+'datetime-local',
+'email',
+'file',
+'month',
+'number',
+'password',
+'search',
+'tel',
+'time',
+'url',
+'week',
+].map((type) => (
+<IressInput placeholder={placeholder ?? `${capitalizeFirstLetter(type)} input`}
+type={type}
+key={type}
+/>
+))}
 </IressStack>
 ```
 
@@ -57,11 +73,17 @@ For more information about each mode (and their expected user experience), pleas
 
 ```tsx
 <IressStack gap="md">
-  <IressInput placeholder="Numeric keyboard" inputMode="numeric" />
-  <IressInput placeholder="Telephone keyboard" inputMode="tel" />
-  <IressInput placeholder="Email keyboard" inputMode="email" />
-  <IressInput placeholder="URL keyboard" inputMode="url" />
-  <IressInput placeholder="Search keyboard" inputMode="search" />
+{inputModes.map((inputMode) => (
+<IressInput placeholder={
+placeholder ??
+`${capitalizeFirstLetter(
+inputMode,
+)} mode, usually best used when type="${inputMode}" `
+}
+inputMode={inputMode}
+key={inputMode}
+/>
+))}
 </IressStack>
 ```
 
@@ -72,22 +94,19 @@ For more information about each mode (and their expected user experience), pleas
 When using the `type="file"` attribute, the input allows users to select one or more files from their device. The appearance and behavior are controlled by the browser, and you can use the `onChange` handler to capture the selected files.
 
 ```tsx
-import { IressField, IressInput, useToaster } from '@iress-oss/ids-components';
-
 const { success } = useToaster();
-
-return (
-  <IressField label="File upload">
-    <IressInput
-      type="file"
-      onChange={(e) =>
-        success({
-          content: `File uploaded: ${e.target.files?.[0].name}`,
-        })
-      }
-    />
-  </IressField>
-);
+    return (
+      <IressField label="File upload">
+        <IressInput
+          {...args}
+          onChange={(e) =>
+            success({
+              content: `File uploaded: ${e.target.files?.[0].name}`,
+            })
+          }
+        />
+      </IressField>
+    );
 ```
 
 [View "FileType" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--file-type)
@@ -114,12 +133,12 @@ Widths can also be set as a percentage, allowing the input to take up a proporti
 
 ```tsx
 <IressStack gap="md">
-  <IressInput placeholder="4" width={4} />
-  <IressInput placeholder="8" width={8} />
-  <IressInput placeholder="12" width={12} />
-  <IressInput placeholder="16" width={16} />
-  <IressInput placeholder="50%" width="50%" />
-  <IressInput placeholder="100%" width="100%" />
+{FORM_ELEMENT_WIDTHS.map((width) => (
+<IressInput placeholder={placeholder ?? width}
+width={width}
+key={width}
+/>
+))}
 </IressStack>
 ```
 
@@ -146,8 +165,21 @@ Content (typically icons) can be added via the `prepend` and `append` props on `
 
 ```tsx
 <IressStack gap="md">
-  <IressInput prepend={<IressIcon name="search" />} placeholder="Prepend icon" />
-  <IressInput append={<IressIcon name="search" />} placeholder="Append icon" />
+<IressInput prepend={prepend ?? <IressIcon name="search" />}
+placeholder={placeholder ?? 'Prepend slot'}
+/>
+
+<IressInput append={append ?? <IressIcon name="search" />}
+placeholder={placeholder ?? 'Append slot'}
+/>
+
+<IressInput prepend={prepend ?? <IressIcon name="search" />}
+placeholder={placeholder ?? 'Prepend slot'}
+/>
+
+<IressInput append={append ?? <IressIcon name="search" />}
+placeholder={placeholder ?? 'Append slot'}
+/>
 </IressStack>
 ```
 

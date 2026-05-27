@@ -54,7 +54,9 @@ Sometimes you may wish to have an input with no visible label, but to still wrap
 You can render custom content into the label.
 
 ```tsx
-<IressLabel hiddenLabel={false} />
+<IressLabel>
+  <span>Custom <strong>rich</strong> content</span>
+</IressLabel>
 ```
 
 [View "RichContent" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-label--rich-content)

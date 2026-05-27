@@ -55,7 +55,7 @@ The `IressIcon` component is used to render icons from the Material Symbols libr
 [View <code>IressIcon</code> documentation](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)
 
 ```tsx
-<IressIconography name="home" />
+<IressIcon name="home" />
 ```
 
 [View "Default" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-iconography--default)
