@@ -1,6 +1,10 @@
 # Recipes
+
 Popover component documentation.
-> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)## With `IressMenu`
+
+> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)
+
+## With `IressMenu`
 
 When an `IressMenu` is used inside `IressPopover`, it adds some additional functionality to the popover, including:
 
@@ -72,4 +76,4 @@ The `usePopoverItem` hook returns an object with the following properties:
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)*

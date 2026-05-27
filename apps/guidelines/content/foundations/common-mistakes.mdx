@@ -16,8 +16,6 @@ In IDS v4 and earlier, child elements used `slot` attributes to position content
 ### Button
 
 ```tsx
-import { IressButton, IressIcon } from '@iress-oss/ids-components';
-
 // ❌ slot attribute — ignored in v5+
 <IressButton>
   <IressIcon slot="start" name="search" />
@@ -38,8 +36,6 @@ import { IressButton, IressIcon } from '@iress-oss/ids-components';
 ### Input
 
 ```tsx
-import { IressIcon, IressInput } from '@iress-oss/ids-components';
-
 // ❌
 <IressInput>
   <IressIcon slot="prepend" name="search" />
@@ -52,8 +48,6 @@ import { IressIcon, IressInput } from '@iress-oss/ids-components';
 ### Modal
 
 ```tsx
-import { IressButton, IressModal } from '@iress-oss/ids-components';
-
 // ❌
 <IressModal show={show}>
   Content
@@ -101,8 +95,6 @@ import { IressButton, IressModal } from '@iress-oss/ids-components';
 It does **not** mean your app uses Web Components or custom elements. Children inside `IressShadow` are standard React components — use normal React props, not `slot` attributes.
 
 ```tsx
-import { IressButton, IressIcon, IressShadow } from '@iress-oss/ids-components';
-
 // ❌
 <IressShadow>
   <IressButton>
@@ -126,8 +118,6 @@ import { IressButton, IressIcon, IressShadow } from '@iress-oss/ids-components';
 IDS components include built-in accessibility, theming, and consistent styling. Raw HTML elements bypass all of that.
 
 ```tsx
-import { IressButton, IressField, IressInput, IressText } from '@iress-oss/ids-components';
-
 // ❌
 <button onClick={handleClick}>Submit</button>
 <input type="text" placeholder="Name" />
@@ -146,8 +136,6 @@ import { IressButton, IressField, IressInput, IressText } from '@iress-oss/ids-c
 Don't hardcode colours, spacing, font sizes, or border radii. Use design tokens via styling props so your UI stays consistent across themes.
 
 ```tsx
-import { IressStack } from '@iress-oss/ids-components';
-
 // ❌
 <div style={{ padding: '16px', background: '#F5F6F8', borderRadius: '12px' }}>
 
@@ -160,8 +148,6 @@ import { IressStack } from '@iress-oss/ids-components';
 Use IDS layout components instead of writing your own flexbox or grid CSS.
 
 ```tsx
-import { IressStack, IressText } from '@iress-oss/ids-components';
-
 // ❌
 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
   <div>Item 1</div>
@@ -180,8 +166,6 @@ import { IressStack, IressText } from '@iress-oss/ids-components';
 Always wrap inputs in `IressField` (or `IressFormField` inside an `IressForm`) for proper labels, validation messages, and accessibility.
 
 ```tsx
-import { IressField, IressInput } from '@iress-oss/ids-components';
-
 // ❌ Input without a field wrapper — no label, no a11y
 <IressInput placeholder="Email" />
 
@@ -203,8 +187,6 @@ IDS discourages using the `disabled` pattern on `IressButton`. While the native 
 | Prerequisite not met | `disabled={!hasSelection}` | Keep enabled and show guidance on click (e.g. "Select an item first" via `IressAlert`) |
 
 ```tsx
-import { IressButton, IressForm, IressFormField, IressInput } from '@iress-oss/ids-components';
-
 // ❌ disabled is an anti-pattern
 <IressButton disabled={!isValid}>Submit</IressButton>
 
@@ -236,8 +218,6 @@ When `element` is set on `IressText`, the component already applies the correct 
 | `p`     | `typography.body.md`                     |
 
 ```tsx
-import { IressText } from '@iress-oss/ids-components';
-
 // ❌ Redundant — h1 already renders as typography.heading.1
 <IressText element="h1" textStyle="typography.heading.1">Page Title</IressText>
 

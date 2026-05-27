@@ -46,14 +46,12 @@ For a full comparison of feedback components, see the [Feedback pattern](https:/
 The alert offers four statuses that set a distinctive colour and icon. They can be set using the `status` prop. Their different use cases are described here.
 
 ```tsx
-import { IressAlert, IressStack } from '@iress-oss/ids-components';
-
 <IressStack gap="md">
-  <IressAlert status="info">This is an informational message.</IressAlert>
-  <IressAlert status="success">Operation completed successfully.</IressAlert>
-  <IressAlert status="warning">Please review before continuing.</IressAlert>
-  <IressAlert status="danger">An error has occurred.</IressAlert>
-  <IressAlert status="neutral">A neutral status message.</IressAlert>
+{[...STATUSES, 'neutral'].map((status) => (
+<IressAlert status={status as never} key={status}>
+{messages[status as never]}
+</IressAlert>
+))}
 </IressStack>
 ```
 
@@ -66,8 +64,6 @@ An alert can be displayed with a heading. This is controlled by the `heading` pr
 **Note**: The `heading` prop replaces the `headingText` and `headingLevel` props from previous versions of IDS. These prop are now deprecated and will be removed in a future version.
 
 ```tsx
-import { IressAlert } from '@iress-oss/ids-components';
-
 <IressAlert heading="Alert heading" />
 ```
 
@@ -78,8 +74,6 @@ import { IressAlert } from '@iress-oss/ids-components';
 The `actions` prop allows you to display call to action buttons within the alert. This is useful for providing users with options to take action based on the alert message.
 
 ```tsx
-import { IressAlert, IressStack } from '@iress-oss/ids-components';
-
 <IressStack gap="md">
 <IressAlert status="danger" />
 <IressAlert status="info" />
@@ -96,8 +90,6 @@ import { IressAlert, IressStack } from '@iress-oss/ids-components';
 The `icon` prop allows you to customise the icon displayed in the alert. It accepts a string for the icon name, or can be set to `false` to remove the icon entirely.
 
 ```tsx
-import { IressAlert } from '@iress-oss/ids-components';
-
 <IressAlert heading="Some information" multiLine icon={false}>
   This is an alert without an icon
 </IressAlert>
@@ -110,8 +102,6 @@ import { IressAlert } from '@iress-oss/ids-components';
 By default, the alert is designed to display short messages. If you need to display a longer message that spans multiple lines, you can set the `multiLine` prop to `true`. This will adjust the spacing and layout of the alert to accommodate longer content.
 
 ```tsx
-import { IressAlert, IressStack } from '@iress-oss/ids-components';
-
 <IressStack gap="md">
 <IressAlert status="danger" />
 <IressAlert status="info" />
@@ -131,8 +121,6 @@ The alert can be displayed in different variants to suit different use cases. Th
 - `full-width`: The alert is displayed in the site-wide banner, typically used for important messages that need to be seen by all users.
 
 ```tsx
-import { IressAlert, IressStack } from '@iress-oss/ids-components';
-
 <IressStack gap="md">
 <IressAlert variant="sidebar" />
 <IressAlert variant="full-width" />
@@ -146,8 +134,6 @@ import { IressAlert, IressStack } from '@iress-oss/ids-components';
 The alert can be made dismissable by setting the `onDismiss` prop. This will display a close button in the top right corner of the alert, allowing users to dismiss it.
 
 ```tsx
-import { IressAlert, IressStack } from '@iress-oss/ids-components';
-
 <IressStack gap="md">
 <IressAlert status="danger" />
 <IressAlert status="info" />
@@ -177,8 +163,6 @@ const alert = screen.getByRole('status');
 You can override the default role if needed:
 
 ```tsx
-import { IressAlert } from '@iress-oss/ids-components';
-
 <IressAlert status="info" role="alert">Urgent info</IressAlert>
 ```
 

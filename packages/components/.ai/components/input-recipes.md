@@ -1,6 +1,10 @@
 # Recipes
+
 Input component documentation.
-> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)## Percentage formatting
+
+> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)
+
+## Percentage formatting
 
 You can use `IressInput` to display percentage formatting. When the field is focused, it can display the raw value, and when blurred, it can display the formatted percentage value.
 
@@ -24,4 +28,4 @@ Where possible, please use `IressFormField` within an [`IressForm` component](/d
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)*

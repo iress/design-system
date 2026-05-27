@@ -32,8 +32,8 @@ import { IressTable } from '@iress-oss/ids-components';
   caption="Container breakpoints"
   columns={[
     { key: 'breakpoint', label: 'Breakpoint' },
-    { key: 'screenWidths', label: 'Screen Widths' },
-    { key: 'maxWidth', label: 'Max Width' },
+    { key: 'screenWidths', label: 'Screen widths' },
+    { key: 'maxWidth', label: 'Max width' },
   ]}
   rows={[
     { breakpoint: 'xs', screenWidths: '0–575px', maxWidth: '100%' },
@@ -41,9 +41,8 @@ import { IressTable } from '@iress-oss/ids-components';
     { breakpoint: 'md', screenWidths: '768–991px', maxWidth: '720px' },
     { breakpoint: 'lg', screenWidths: '992–1199px', maxWidth: '960px' },
     { breakpoint: 'xl', screenWidths: '1200–1399px', maxWidth: '1140px' },
-    { breakpoint: 'xxl', screenWidths: '≥1400px', maxWidth: '1320px' },
+    { breakpoint: 'xxl', screenWidths: '1400px+', maxWidth: '1320px' },
   ]}
-  scope="col"
 />
 ```
 
@@ -58,7 +57,9 @@ If you want the `IressContainer` to fill its containing element, you can set the
 ```tsx
 import { IressContainer } from '@iress-oss/ids-components';
 
-<IressContainer fluid />
+<IressContainer fluid>
+  Content fills the full width of its parent.
+</IressContainer>
 ```
 
 [View "Fluid" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-container--fluid)

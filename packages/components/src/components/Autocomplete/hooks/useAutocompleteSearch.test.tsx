@@ -6,6 +6,8 @@ import {
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
 import { LabelValueMeta } from '@/interfaces';
 
+const LOADING_DELAY = 250;
+
 const DEFAULT_PROPS = {
   debounceThreshold: 0,
   options: MOCK_LABEL_VALUE_META,
@@ -421,14 +423,13 @@ describe('useAutocompleteSearch', () => {
         { timeout: 300 },
       );
 
-      // Now loading should appear and API should be called
-      await waitFor(() => expect(hook.result.current.loading).toBe(true));
+      // With 250ms loading delay and fast search (100ms), loading never appears
       expect(mockSearch).toHaveBeenCalledTimes(1);
       expect(mockSearch).toHaveBeenCalledWith('apple');
 
       // Wait for search to complete
-      await waitFor(() => expect(hook.result.current.loading).toBe(false));
-      expect(hook.result.current.results).toHaveLength(1);
+      await waitFor(() => expect(hook.result.current.results).toHaveLength(1));
+      expect(hook.result.current.loading).toBe(false);
       expect(hook.result.current.results[0].label).toBe('Result for apple');
     });
 
@@ -1276,12 +1277,15 @@ describe('useAutocompleteSearch', () => {
       expect(mockSearch).toHaveBeenCalledWith('test');
 
       // Should display final results without any visual flashing
-      await waitFor(() => expect(hook.result.current.loading).toBe(false));
-      expect(hook.result.current.results).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ label: 'Result for test' }),
-        ]),
+      // With 250ms loading delay and fast search (50ms), loading never appears
+      await waitFor(() =>
+        expect(hook.result.current.results).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ label: 'Result for test' }),
+          ]),
+        ),
       );
+      expect(hook.result.current.loading).toBe(false);
     });
 
     it('Using initial options with search functionality works correctly', async () => {

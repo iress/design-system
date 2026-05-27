@@ -66,6 +66,7 @@ For more information about each mode (and their expected user experience), pleas
 import { IressInput, IressStack } from '@iress-oss/ids-components';
 
 <IressStack gap="md">
+  <IressInput placeholder="Text mode" inputMode="text" />
   <IressInput placeholder="Numeric mode" inputMode="numeric" />
   <IressInput placeholder="Decimal mode" inputMode="decimal" />
   <IressInput placeholder="Tel mode" inputMode="tel" />
@@ -87,7 +88,7 @@ import { IressField, IressInput } from '@iress-oss/ids-components';
 <IressField label="File upload">
   <IressInput
     type="file"
-    onChange={(e) => console.log(`File uploaded: ${e.target.files?.[0].name}`)}
+    onChange={(e) => console.log(`File uploaded: ${e.target.files?.[0]?.name}`)}
   />
 </IressField>
 ```
@@ -101,8 +102,6 @@ By setting the `clearable` prop to `true` a clear button will appear when the us
 Clearing will set the focus on the input and trigger the `onClear` handler. Use this handler to clear the input value if your input is controlled.
 
 ```tsx
-import { IressInput } from '@iress-oss/ids-components';
-
 <IressInput clearable placeholder="Search" />
 ```
 
@@ -120,11 +119,14 @@ Widths can also be set as a percentage, allowing the input to take up a proporti
 import { IressInput, IressStack } from '@iress-oss/ids-components';
 
 <IressStack gap="md">
-  <IressInput placeholder="Width 2" width="2" />
-  <IressInput placeholder="Width 4" width="4" />
-  <IressInput placeholder="Width 8" width="8" />
-  <IressInput placeholder="Width 12" width="12" />
-  <IressInput placeholder="Width 16" width="16" />
+  <IressInput placeholder="2" width={2} />
+  <IressInput placeholder="4" width={4} />
+  <IressInput placeholder="8" width={8} />
+  <IressInput placeholder="12" width={12} />
+  <IressInput placeholder="16" width={16} />
+  <IressInput placeholder="24" width={24} />
+  <IressInput placeholder="50%" width="50%" />
+  <IressInput placeholder="100%" width="100%" />
 </IressStack>
 ```
 
@@ -135,8 +137,6 @@ import { IressInput, IressStack } from '@iress-oss/ids-components';
 You can also use `IressInput` to render a `textarea` instead of an `input`. Simply set the rows prop to the number of lines of text you'd like to display. This will set the height of the `textarea`; if a user enters more lines of text than the number of rows, a scrollbar will be displayed.
 
 ```tsx
-import { IressInput } from '@iress-oss/ids-components';
-
 <IressInput rows={5} />
 ```
 
@@ -155,8 +155,8 @@ Content (typically icons) can be added via the `prepend` and `append` props on `
 import { IressInput, IressIcon, IressStack } from '@iress-oss/ids-components';
 
 <IressStack gap="md">
-  <IressInput prepend={<IressIcon name="search" />} placeholder="Prepend slot" />
-  <IressInput append={<IressIcon name="search" />} placeholder="Append slot" />
+  <IressInput prepend={<IressIcon name="search" />} placeholder="Prepend icon" />
+  <IressInput append={<IressIcon name="search" />} placeholder="Append icon" />
 </IressStack>
 ```
 
@@ -167,8 +167,6 @@ import { IressInput, IressIcon, IressStack } from '@iress-oss/ids-components';
 The `actions` prop allows you to add buttons to the input. These buttons will appear next to the input and can be used for actions such as copying the input value to the clipboard or triggering a search.
 
 ```tsx
-import { IressInput } from '@iress-oss/ids-components';
-
 <IressInput placeholder="Input with action button" />
 ```
 
@@ -181,8 +179,6 @@ The `readOnly` prop can be set to prevent the user from changing the value of th
 If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs).
 
 ```tsx
-import { IressInput } from '@iress-oss/ids-components';
-
 <IressInput readOnly value="Value" />
 ```
 
@@ -202,9 +198,7 @@ This prop powers the `IressInputCurrency` component to allow friendly and consis
 The example below changes the value entered to uppercase when the input is not focused.
 
 ```tsx
-import { IressInput } from '@iress-oss/ids-components';
-
-<IressInput placeholder="Enter a string and it will show in UPPERCASE when not focused, and show the raw value on focus" formatter={(value) => String(value).toUpperCase()} />
+<IressInput placeholder="Enter a string and it will show in UPPERCASE when not focused, and show the raw value on focus" />
 ```
 
 [View "Formatter" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--formatter)
@@ -214,12 +208,7 @@ import { IressInput } from '@iress-oss/ids-components';
 A common use case for the formatter is to display currency values with proper formatting. The following example shows how to format numbers as currency when the input is not focused:
 
 ```tsx
-import { IressInput } from '@iress-oss/ids-components';
-
-<IressInput defaultValue={0.00} placeholder="Enter any number and it will show in currency format when the input is not focused" type="number" formatter={(value = '') => {
-  const num = Number(value);
-  return isNaN(num) ? '' : num.toLocaleString('en-AU', { style: 'currency', currency: 'AUD' });
-}} />
+<IressInput defaultValue={0.00} placeholder="Enter any number and it will show in currency format when the input is not focused" type="number" />
 ```
 
 [View "CurrencyFormatter" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--currency-formatter)
@@ -229,8 +218,6 @@ import { IressInput } from '@iress-oss/ids-components';
 For textareas (when `rows` prop is set), you can enable the `autoGrow` prop to automatically expand the textarea height as the user types more lines. This provides a better user experience than forcing users to scroll within a fixed-height textarea.
 
 ```tsx
-import { IressInput } from '@iress-oss/ids-components';
-
 <IressInput rows={1} autoGrow />
 ```
 
@@ -243,8 +230,6 @@ The `variant` prop allows you to apply different styles to the input.
 - `search`: Used for search inputs, you can use the `prepend` or `append` prop to add a search icon.
 
 ```tsx
-import { IressInput } from '@iress-oss/ids-components';
-
 <IressInput variant="search" placeholder="Start your search..." />
 ```
 

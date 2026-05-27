@@ -1,12 +1,15 @@
 # Tab Set
+
 Tabs are used to display modular pieces of related data that do not need to be compared or accessed simultaneously.
+
 > **Component:** `import { IressTabSet } from '@iress-oss/ids-components'`
-> **Storybook:** [Tab Set in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab-set--docs)```tsx
-```
+> **Storybook:** [Tab Set in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab-set--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressTabSet } from '@iress-oss/ids-components';
+
 <IressTabSet />
 ```
 
@@ -138,6 +141,16 @@ are generated automatically:
 | --- | --- | --- |
 | `panel` | `my-tabset__panel` | The active tab panel |
 
+## Props
+
+- **Type:** `IressTabSetProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/TabSet/TabSet.d.ts`
+
+```typescript
+import type { IressTabSetProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab-set--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab-set--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab-set--docs)*

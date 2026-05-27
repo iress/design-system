@@ -1,6 +1,10 @@
 # Recipes
+
 InputCurrency component documentation.
-> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)## Using IressInputCurrency in table
+
+> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)
+
+## Using IressInputCurrency in table
 
 It is not recommended to use the `readOnly` prop for `IressInputCurrency` inside tables, as it was designed for forms.
 This example shows how to use currency in the table, by using the `format` prop of when defining a column inside `IressTable`.
@@ -24,4 +28,4 @@ Only able to input valid value when use `IressInputCurrency`. In this example, o
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)*

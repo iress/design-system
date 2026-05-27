@@ -1,10 +1,20 @@
-import { useCallback, useState } from 'react';
-import { useNavigate } from '@tanstack/react-router';
-import { IressAutocomplete, LabelValueMeta } from '@iress-oss/ids-components';
+import { useState, useCallback, useRef } from 'react';
+import { Link, useNavigate } from '@tanstack/react-router';
+import {
+  IressInput,
+  IressInputPopover,
+  IressMenu,
+  IressMenuItem,
+  IressText,
+  IressStack,
+  IressIcon,
+  PopoverRef,
+} from '@iress-oss/ids-components';
 
 interface PagefindResult {
   url: string;
-  meta?: { title?: string };
+  excerpt?: string;
+  meta?: { title?: string; description?: string };
 }
 
 interface PagefindAPI {
@@ -21,53 +31,87 @@ async function getPagefind(): Promise<PagefindAPI> {
   pagefind = await import(
     /* @vite-ignore */ `${import.meta.env.BASE_URL}pagefind/pagefind.js`
   );
+  await pagefind!.options({ excerptLength: 15 });
   await pagefind!.init();
   return pagefind!;
 }
 
-async function searchOptions(query: string) {
-  const pf = await getPagefind();
-  const search = await pf.search(query);
-  const results = await Promise.all(
-    search.results.slice(0, 8).map((r) => r.data()),
-  );
-  return results.map((r) => ({
-    label: r.meta?.title ?? r.url,
-    value: r.url.split('#')[1] ?? r.url, // Use the hash as the value if it exists, otherwise use the URL
-  }));
-}
-
 export function Search() {
   const navigate = useNavigate();
-  const [query, setQuery] = useState('');
+  const [results, setResults] = useState<PagefindResult[]>([]);
 
   const handleChange = useCallback(
-    (_e: unknown, query = '', labelValue?: LabelValueMeta) => {
-      if (!labelValue) {
-        setQuery(query);
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const query = e.target.value;
+      if (!query.trim()) {
+        setResults([]);
         return;
       }
-      navigate({ to: labelValue.value as string });
+      const pf = await getPagefind();
+      const search = await pf.search(query);
+      const data = await Promise.all(
+        search.results.slice(0, 8).map((r) => r.data()),
+      );
+      setResults(data);
     },
-    [navigate],
+    [],
   );
 
   return (
-    <IressAutocomplete
-      aria-label="Search guidelines"
-      placeholder="Search…"
-      options={searchOptions}
-      onChange={handleChange}
-      noResultsText="No results found"
-      clearable
-      debounceThreshold={0}
-      variant="search"
-      popoverProps={{
-        contentStyle: {
-          maxWidth: 'input.16',
-        },
+    <IressInputPopover
+      activator={
+        <IressInput
+          type="search"
+          aria-label="Search guidelines"
+          placeholder="Search..."
+          onChange={handleChange}
+          variant="search"
+          width="16"
+          append={<IressIcon name="search" />}
+        />
+      }
+      contentStyle={{
+        width: 'overlay.md',
       }}
-      value={query}
-    />
+      align="bottom-end"
+    >
+      {results.length > 0 ? (
+        <IressMenu>
+          {results.map((r) => (
+            <IressMenuItem
+              key={r.url}
+              element={Link}
+              to={r.url?.split('#')[1] as string}
+              onClick={() => {
+                navigate({ to: r.url?.split('#')[1] });
+                document
+                  .querySelector<HTMLElement>('[data-pagefind-body]')
+                  ?.focus({
+                    focusVisible: false,
+                    preventScroll: true,
+                  });
+              }}
+            >
+              <IressStack gap="none">
+                <IressText element="span">
+                  {r.meta?.title ?? r.url?.split('#')[1]}
+                </IressText>
+                {r.excerpt && (
+                  <IressText
+                    textStyle="typography.body.sm"
+                    color="colour.neutral.70"
+                    dangerouslySetInnerHTML={{ __html: r.excerpt }}
+                  />
+                )}
+              </IressStack>
+            </IressMenuItem>
+          ))}
+        </IressMenu>
+      ) : (
+        <IressText py="sm" px="md" color="colour.neutral.70">
+          No results found
+        </IressText>
+      )}
+    </IressInputPopover>
   );
 }

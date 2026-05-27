@@ -25,8 +25,6 @@ These replace the utility classes and internal component tokens provided by prev
 Props marked responsive can accept either a single value that affects all breakpoints, or a responsive object map that sets a different value based on breakpoint.
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 <IressPanel p="xs" /> // applies extra small padding to all breakpoints
 <IressPanel p={{ base: 'lg', md: 'sm' }} /> // applies large padding by default, and changes to small padding once on medium sized screens.
 ```
@@ -48,8 +46,6 @@ This will also work without JSX, allowing you to apply styling props to any elem
 The `IressStyled` component is a flexible wrapper that gives you direct access to all styling props. Use it when you need custom styling without creating a dedicated component or writing custom CSS.
 
 ```tsx
-import { IressStyled } from '@iress-oss/ids-components';
-
 <IressStyled p="xs" bg="colour.primary.surface">
   This div has extra small padding and a primary background colour.
 </IressStyled>
@@ -62,8 +58,6 @@ import { IressStyled } from '@iress-oss/ids-components';
 If you have been using the utility classes from previous versions of IDS (eg. `iress-p--xs`), you will need to replace them with the new styling props. The utility classes are no longer supported in version 6.
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 <DiffViewer oldValue={`<IressPanel className="iress-m--sm" />`}
 newValue={`<IressPanel m="sm" />`}
 />
@@ -83,8 +77,6 @@ If you have been using the internal component tokens (eg. `--iress-background-co
 - Styling props only allow token values, not custom values (eg. `colour.system.status.danger` is allowed but not `red`). This is to ensure that the styling props are theme agnostic and can be used with any theme. If you need to use a custom value, you can use custom CSS or inline styles.
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 <DiffViewer oldValue={`<IressPanel style={{ '--iress-background-color': 'var(--iress-g-success-color)' }} />`}
 newValue={`<IressPanel bg="colour.system.success.fill" />`}
 />
@@ -224,8 +216,6 @@ Avoid these common mistakes when styling components:
 **Problem**: Inline styles bypass the design system, making code non-themeable and inconsistent.
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 // ❌ INCORRECT - Inline styles with hardcoded values
 <IressPanel style={{ padding: '16px', backgroundColor: '#F5F5F5' }}>
   Content
@@ -244,8 +234,6 @@ import { IressPanel } from '@iress-oss/ids-components';
 **Problem**: Hardcoded color values don't adapt to different themes and may fail accessibility standards.
 
 ```tsx
-import { IressPanel, IressText } from '@iress-oss/ids-components';
-
 // ❌ INCORRECT - Hardcoded hex colors
 <IressText style={{ color: '#000000' }}>Primary text</IressText>
 <IressPanel style={{ backgroundColor: '#13213F', color: '#FFFFFF' }}>
@@ -266,8 +254,6 @@ import { IressPanel, IressText } from '@iress-oss/ids-components';
 **Problem**: Adding custom classes for basic spacing/colors adds unnecessary CSS and bypasses the design system.
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 // ❌ INCORRECT - Custom class for basic styling
 <IressPanel className="my-custom-padding">
   Content
@@ -291,8 +277,6 @@ import { IressPanel } from '@iress-oss/ids-components';
 **Problem**: Using spacing values outside the design system's scale creates inconsistency.
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 // ❌ INCORRECT - Arbitrary spacing value
 <IressPanel style={{ padding: '17px' }}>
   Content

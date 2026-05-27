@@ -31,6 +31,10 @@ const inlineStyles = {
       textDecoration: 'none',
     },
   },
+  '& mark': {
+    background: 'transparent',
+    fontWeight: cssVars.typography.body.md._medium.fontWeight,
+  },
 } satisfies SystemStyleObject;
 
 const blockStyles = {
@@ -208,6 +212,7 @@ export const textRecipe = defineRecipe({
       h5: blockStyles['& h5'],
       h6: blockStyles['& h6'],
       code: inlineStyles['& code'],
+      mark: inlineStyles['& mark'],
       small: inlineStyles['& small'],
       cite: inlineStyles['& cite'],
       caption: inlineStyles['& caption:not(table[class] *)'],

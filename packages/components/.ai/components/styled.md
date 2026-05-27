@@ -1,12 +1,15 @@
 # Styled
+
 The IressStyled component provides an unopinionated wrapper that gives you direct access to all supported styling properties. Use it when you need custom styling without creating a dedicated component or writing custom CSS.
+
 > **Component:** `import { IressStyled } from '@iress-oss/ids-components'`
-> **Storybook:** [Styled in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs)```tsx
-```
+> **Storybook:** [Styled in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressStyled } from '@iress-oss/ids-components';
+
 <IressStyled p="spacing.4" bg="colour.neutral.20" borderRadius="radius.2">
   This is styled content using Panda CSS
 </IressStyled>
@@ -203,4 +206,4 @@ create a rich, semantic HTML structure with custom styling.
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs)*

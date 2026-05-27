@@ -33,8 +33,6 @@ import { IressMenu } from '@iress-oss/ids-components';
 - `IressMenuText` can be used to display other non-interactive text. It supports all of the props of `IressText`.
 
 ```tsx
-import { IressMenu } from '@iress-oss/ids-components';
-
 <IressMenu defaultSelected={5}>
   basic
 </IressMenu>
@@ -49,8 +47,6 @@ import { IressMenu } from '@iress-oss/ids-components';
 Note: Instead of using the `divider` prop on `IressMenuItem`, you can use `IressMenuDivider` to separate items. This gives you more control over where the divider sits.
 
 ```tsx
-import { IressMenu } from '@iress-oss/ids-components';
-
 <IressMenu maxWidth="3/12">
   complex
 </IressMenu>
@@ -67,8 +63,6 @@ When the `href` prop is set on `IressMenuItem`, it will render as a link.
 When rendering a set of links for navigation purposes (as a secondary nav in this example) make sure you wrap the `IressMenu` in a nav element and set the menu's `role` prop to list.
 
 ```tsx
-import { IressMenu } from '@iress-oss/ids-components';
-
 <nav aria-label="Secondary">
 <IressMenu />
 </nav>
@@ -81,8 +75,6 @@ import { IressMenu } from '@iress-oss/ids-components';
 Using the `IressMenuHeading` component, you can create headings within the menu. Simply set the `element` or `textStyle` prop to your desired heading level.
 
 ```tsx
-import { IressMenu } from '@iress-oss/ids-components';
-
 <IressMenu>
   headings
 </IressMenu>
@@ -97,8 +89,6 @@ When the `divider` prop is set, the `IressMenuItem`, `IressMenuHeading` and `Ire
 In situations where a bottom border will not work, you can also use `IressMenuDivider` inside the menu to separate items.
 
 ```tsx
-import { IressMenu } from '@iress-oss/ids-components';
-
 <IressMenu>
   dividers
 </IressMenu>
@@ -111,8 +101,6 @@ import { IressMenu } from '@iress-oss/ids-components';
 By setting the `fluid` prop on the menu component, the menu will stretch to the width of its containing element.
 
 ```tsx
-import { IressMenu } from '@iress-oss/ids-components';
-
 <IressMenu fluid />
 ```
 
@@ -127,8 +115,6 @@ The `layout` prop comes with three options:
 - `inline-equal-width` - menu items will be inline and have equal width
 
 ```tsx
-import { IressMenu, IressStack, IressText } from '@iress-oss/ids-components';
-
 <IressStack gap="lg">
 <IressText>
 <h3>Stack (default)</h3>
@@ -152,8 +138,6 @@ import { IressMenu, IressStack, IressText } from '@iress-oss/ids-components';
 By default, menu item text will wrap on to the next line when it exceeds the menu width. Using the `noWrap` prop, you set the menu item text to not wrap.
 
 ```tsx
-import { IressInline, IressMenu, IressMenuItem } from '@iress-oss/ids-components';
-
 <IressInline>
 <IressMenu width="input.12">
 <IressMenuItem>Menu item with some text that wraps</IressMenuItem>
@@ -173,8 +157,6 @@ import { IressInline, IressMenu, IressMenuItem } from '@iress-oss/ids-components
 > **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
 ```tsx
-import { IressMenu } from '@iress-oss/ids-components';
-
 <IressMenu role="menu">
   slots
 </IressMenu>
@@ -199,8 +181,6 @@ There are four roles supported:
 The default role for the menu component is `list`. It is most often used for navigation and its items can be navigated (using the keyboard) with the `tab` key.
 
 ```tsx
-import { IressMenu } from '@iress-oss/ids-components';
-
 <IressMenu defaultSelected={5}>
   basic
 </IressMenu>
@@ -213,8 +193,6 @@ import { IressMenu } from '@iress-oss/ids-components';
 The `menu` role is used when the items in the menu has an action that performs a task in the application. The items can be navigated (using the keyboard) with the `arrow` keys, depending on the layout.
 
 ```tsx
-import { IressMenu } from '@iress-oss/ids-components';
-
 <IressMenu role="menu" />
 ```
 
@@ -229,8 +207,6 @@ A value is supplied to `IressMenuButton` (like you would with an option element 
 Set the `multiSelect` prop to true for a multi-selectable listbox.
 
 ```tsx
-import { IressMenu } from '@iress-oss/ids-components';
-
 <IressMenu role="listbox">
   selectable
 </IressMenu>
@@ -247,8 +223,6 @@ The `variant` prop can be used to change the style of the menu to suit different
 - `radio` - for use when you want the menu item to have a radio mark style indicator (only supports single select listbox role)
 
 ```tsx
-import { IressMenu, IressStack } from '@iress-oss/ids-components';
-
 <IressStack gap="lg">
 <IressMenu variant="radio" />
 <IressMenu variant="subdraw" maxWidth="input.12" />
@@ -271,8 +245,6 @@ variant="rail"
 By default, `IressMenuGroup` renders the label as a non-focusable heading with the children displayed inline below it.
 
 ```tsx
-import { IressMenu, IressMenuGroup, IressMenuItem } from '@iress-oss/ids-components';
-
 <IressMenu>
   <IressMenuGroup label="Recent Files">
     <IressMenuItem>Document.pdf</IressMenuItem>
@@ -286,8 +258,6 @@ import { IressMenu, IressMenuGroup, IressMenuItem } from '@iress-oss/ids-compone
 When `variant="subdraw"` is set, the group label becomes a clickable menu item that opens a fly-over submenu containing the group's children. This is useful for organizing large menus into collapsible sections.
 
 ```tsx
-import { IressMenu, IressMenuGroup, IressMenuItem } from '@iress-oss/ids-components';
-
 <IressMenu>
   <IressMenuGroup label="More Options" variant="subdraw">
     <IressMenuItem>Option 1</IressMenuItem>

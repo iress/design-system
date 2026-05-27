@@ -1,12 +1,15 @@
 # Text
+
 The IressText component allows you to set typographic styles either on one element, or a block on HTML elements.
+
 > **Component:** `import { IressText } from '@iress-oss/ids-components'`
-> **Storybook:** [Text in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs)```tsx
-```
+> **Storybook:** [Text in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressText } from '@iress-oss/ids-components';
+
 <IressText />
 ```
 
@@ -183,6 +186,16 @@ const heading = screen.getByRole('heading', { name: 'Page title' });
 const paragraph = screen.getByText('Some content');
 ```
 
+## Props
+
+- **Type:** `IressTextProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Text/Text.d.ts`
+
+```typescript
+import type { IressTextProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs)*

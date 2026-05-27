@@ -32,8 +32,6 @@ The `IressMenuItem` can be set to selected using the `selected` prop.
 **Note:** If you are using `IressMenu` with a `role` of `listbox`, you should use the `defaultSelected` or `selected` prop on the `IressMenu` to set the selected state of its `<IressMenuItem />` children, as the `selected` prop will be ignored.
 
 ```tsx
-import { IressMenuItem } from '@iress-oss/ids-components';
-
 <IressMenuItem selected />
 ```
 
@@ -44,8 +42,6 @@ import { IressMenuItem } from '@iress-oss/ids-components';
 A menu item can have a unique value set to it, used to determine its selected state in a `IressMenu` component with a `role` of `listbox`. The value is not visible to end users.
 
 ```tsx
-import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
-
 <IressMenu role="listbox">
 <IressMenuItem />
 </IressMenu>
@@ -58,8 +54,6 @@ import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
 When `canToggle` is set to true, the menu item can be toggled between selected and unselected states. This only works in a `IressMenu` component with a `role` of `listbox`.
 
 ```tsx
-import { IressMenuItem } from '@iress-oss/ids-components';
-
 <IressMenuItem canToggle />
 ```
 
@@ -76,8 +70,6 @@ You can prepend and append content to a menu item using the `prepend` and `appen
 Inside a `IressMenu` with a `role` of `listbox` and the `multiSelect` prop set to true, the menu item will display with a checkbox.
 
 ```tsx
-import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
-
 <IressMenu role="listbox" multiSelect>
 <IressMenuItem />
 <IressMenuItem />
@@ -101,8 +93,6 @@ You can use the `element` prop to render a custom component inside the menu item
 When `divider` is set to true, the menu item will render with a bottom border.
 
 ```tsx
-import { IressMenuItem } from '@iress-oss/ids-components';
-
 <IressMenuItem divider>
   Menu item with divider
 </IressMenuItem>
@@ -119,8 +109,6 @@ However, it is recommended to use the `IressMenuDivider` component instead.
 You can use the `IressMenuHeading` to render headings within a menu. This adds styling so the appropriate padding is applied.
 
 ```tsx
-import { IressMenu, IressMenuHeading } from '@iress-oss/ids-components';
-
 <IressMenu>
 <IressMenuHeading />
 </IressMenu>
@@ -133,8 +121,6 @@ import { IressMenu, IressMenuHeading } from '@iress-oss/ids-components';
 You can use the `IressMenuText` to render other text within a menu. This adds styling so the appropriate padding is applied.
 
 ```tsx
-import { IressMenu, IressMenuText } from '@iress-oss/ids-components';
-
 <IressMenu>
 <IressMenuText />
 </IressMenu>

@@ -1,12 +1,15 @@
 # Spinner
+
 Spinners notify the user that a task is being processed. They indicate that the app is busy, and should be used when the user has to wait for more than a few seconds.
+
 > **Component:** `import { IressSpinner } from '@iress-oss/ids-components'`
-> **Storybook:** [Spinner in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)```tsx
-```
+> **Storybook:** [Spinner in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressSpinner } from '@iress-oss/ids-components';
+
 <IressSpinner screenreaderText="Loading..." />
 ```
 
@@ -62,6 +65,16 @@ const spinner = screen.getByTestId('my-spinner');
 const spinner = screen.getByRole('status');
 ```
 
+## Props
+
+- **Type:** `IressSpinnerProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Spinner/Spinner.d.ts`
+
+```typescript
+import type { IressSpinnerProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)*

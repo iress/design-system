@@ -1,12 +1,15 @@
 # Panel
+
 A panel is used to group related content.
+
 > **Component:** `import { IressPanel } from '@iress-oss/ids-components'`
-> **Storybook:** [Panel in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs)```tsx
-```
+> **Storybook:** [Panel in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 <IressPanel heading="Panel Heading">
   text
 </IressPanel>
@@ -35,6 +38,16 @@ children directly:
 const panel = screen.getByTestId('my-panel');
 ```
 
+## Props
+
+- **Type:** `IressPanelProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Panel/Panel.d.ts`
+
+```typescript
+import type { IressPanelProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs)*

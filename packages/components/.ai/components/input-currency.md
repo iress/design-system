@@ -1,12 +1,15 @@
 # InputCurrency
+
 InputCurrency allows a user to input and interact with currency number. It works just like IressInput, with new props locale and currencyCode. This component meets ISO-4217 standard
+
 > **Component:** `import { IressInputCurrency } from '@iress-oss/ids-components'`
-> **Storybook:** [InputCurrency in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)```tsx
-```
+> **Storybook:** [InputCurrency in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressInputCurrency } from '@iress-oss/ids-components';
+
 <IressInputCurrency defaultValue={12345.678} locale="en-AU" currencyCode="AUD" />
 ```
 
@@ -84,6 +87,16 @@ const input = screen.getByRole('textbox', { name: 'Amount' });
 - **readOnly removes the input role**: When `readOnly` is set, the textbox role
   is removed and the formatted value is displayed as plain text.
 
+## Props
+
+- **Type:** `IressInputCurrencyProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/InputCurrency/InputCurrency.d.ts`
+
+```typescript
+import type { IressInputCurrencyProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)*

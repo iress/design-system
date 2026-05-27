@@ -1,12 +1,15 @@
 # Button
+
 A button is a clickable item used to perform an action.
+
 > **Component:** `import { IressButton } from '@iress-oss/ids-components'`
-> **Storybook:** [Button in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)```tsx
-```
+> **Storybook:** [Button in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressButton } from '@iress-oss/ids-components';
+
 <IressButton>
   Button
 </IressButton>
@@ -394,6 +397,16 @@ When `href` is provided, the button renders as a link:
 const link = screen.getByRole('link', { name: 'Go to dashboard' });
 ```
 
+## Props
+
+- **Type:** `IressButtonProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Button/Button.d.ts`
+
+```typescript
+import type { IressButtonProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)*

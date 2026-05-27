@@ -1,12 +1,15 @@
 # ButtonGroup
+
 ButtonGroup allows users to switch between two or more possible states. ButtonGroups are only used for actions that occur immediately after the user “flips the switch”.
+
 > **Component:** `import { IressButtonGroup } from '@iress-oss/ids-components'`
-> **Storybook:** [ButtonGroup in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs)```tsx
-```
+> **Storybook:** [ButtonGroup in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressButtonGroup } from '@iress-oss/ids-components';
+
 <IressButtonGroup label="Options" />
 ```
 
@@ -126,6 +129,16 @@ IDs are generated automatically:
 | --- | --- | --- |
 | `label` | `my-button-group__label` | The group label element |
 
+## Props
+
+- **Type:** `IressButtonGroupProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/ButtonGroup/ButtonGroup.d.ts`
+
+```typescript
+import type { IressButtonGroupProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs)*

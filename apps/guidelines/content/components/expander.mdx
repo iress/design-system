@@ -43,14 +43,14 @@ import { IressExpander, IressStack, IressText } from '@iress-oss/ids-components'
 <IressStack gap="lg">
   <IressStack gap="xs">
     <IressText element="h2">Section (default)</IressText>
-    <IressExpander mode="section" activator="Section expander">
-      Section content
+    <IressExpander mode="section" activator="View details">
+      This is the expanded content for the section mode.
     </IressExpander>
   </IressStack>
   <IressStack gap="xs">
     <IressText element="h2">Link</IressText>
-    <IressExpander mode="link" activator="Link expander">
-      Link content
+    <IressExpander mode="link" activator="Learn more">
+      This is the expanded content for the link mode.
     </IressExpander>
   </IressStack>
 </IressStack>
@@ -65,8 +65,8 @@ The `open` prop can be used to control the open state of the expander as can be 
 ```tsx
 import { IressExpander } from '@iress-oss/ids-components';
 
-<IressExpander open activator="Show details">
-  Expanded content
+<IressExpander open activator="Expander activator">
+  This expander is open by default.
 </IressExpander>
 ```
 

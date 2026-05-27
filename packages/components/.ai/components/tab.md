@@ -1,12 +1,15 @@
 # Tab
+
 A tab is an interactive element that controls the display of other content, usually a panel
+
 > **Component:** `import { IressTab } from '@iress-oss/ids-components'`
-> **Storybook:** [Tab in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs)```tsx
-```
+> **Storybook:** [Tab in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressTab } from '@iress-oss/ids-components';
+
 <IressTab label="Tab" />
 ```
 
@@ -48,6 +51,16 @@ A tab can set its `children` when used inside an `IressTabSet` component, and it
 
 [View "Panel" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab--panel)
 
+## Props
+
+- **Type:** `IressTabProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/TabSet/Tab/Tab.d.ts`
+
+```typescript
+import type { IressTabProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs)*

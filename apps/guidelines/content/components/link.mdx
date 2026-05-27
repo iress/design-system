@@ -45,8 +45,6 @@ The loading state can be activated by setting the `loading` prop to `true` and p
 When the loading state is activated, any click events on the link are disabled.
 
 ```tsx
-import { IressLink } from '@iress-oss/ids-components';
-
 <IressLink loading>
   Link text
 </IressLink>
@@ -64,8 +62,6 @@ Use the `prepend` and `append` props to correctly position icons or badges insid
 > **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
 ```tsx
-import { IressIcon, IressInline, IressLink } from '@iress-oss/ids-components';
-
 <IressInline gap="md">
 <IressLink prepend={<IressIcon name="home" />}>
 Prepend icon

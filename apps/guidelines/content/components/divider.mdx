@@ -28,15 +28,15 @@ import { IressDivider } from '@iress-oss/ids-components';
 Use the `vertical` prop to change the divider from horizontal to vertical.
 
 ```tsx
-import { IressDivider, IressInline } from '@iress-oss/ids-components';
+if (args.vertical) {
+      return (
+        <IressInline gap="spacing.4" verticalAlign="middle">
+          {getChildren(args)}
+        </IressInline>
+      );
+    }
 
-<IressInline gap="spacing.4" verticalAlign="middle">
-  <span>Item 1</span>
-  <IressDivider vertical />
-  <span>Item 2</span>
-  <IressDivider vertical />
-  <span>Item 3</span>
-</IressInline>
+    return <IressStack gap="spacing.4">{getChildren(args)}</IressStack>;
 ```
 
 [View "Vertical" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-divider--vertical)
@@ -48,13 +48,38 @@ You can customise the gutter by using the `my` prop. If the divider is vertical,
 By default, dividers do not have a gutter, allowing them to adapt to `<IressStack>` and `<IressInline>` layouts.
 
 ```tsx
-import { IressDivider, IressStack } from '@iress-oss/ids-components';
+if (args.vertical) {
+      return (
+        <IressStack gap="spacing.1">
+          {GUTTER_SIZES.map((mx) => (
+            <IressPanel key={mx}>
+              <IressText element="h2">
+                <code>mx="{mx}"</code>
+              </IressText>
+              <IressInline verticalAlign="middle">
+                {getChildren({
+                  ...args,
+                  mx,
+                } as IressDividerProps)}
+              </IressInline>
+            </IressPanel>
+          ))}
+        </IressStack>
+      );
+    }
 
-<IressStack gap="spacing.4">
-  <p>Content above</p>
-  <IressDivider my="spacing.2" />
-  <p>Content below</p>
-</IressStack>
+    return (
+      <IressInline gap="spacing.4">
+        {GUTTER_SIZES.map((my) => (
+          <IressPanel key={my}>
+            <IressText element="h2">
+              <code>my="{my}"</code>
+            </IressText>
+            {getChildren({ ...args, my } as IressDividerProps)}
+          </IressPanel>
+        ))}
+      </IressInline>
+    );
 ```
 
 [View "Gutter" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-divider--gutter)

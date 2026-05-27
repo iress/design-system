@@ -1,12 +1,15 @@
 # Validation message
+
 A validation message is used to inform the user of the status of a form input. If there are multiple messages, they can be combined using the IressValidationSummary component.
+
 > **Component:** `import { IressValidationMessage } from '@iress-oss/ids-components'`
-> **Storybook:** [Validation message in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs)```tsx
-```
+> **Storybook:** [Validation message in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressValidationMessage } from '@iress-oss/ids-components';
+
 <IressValidationMessage>
   Validation message
 </IressValidationMessage>
@@ -94,6 +97,16 @@ test IDs are generated automatically:
 | --- | --- | --- |
 | `error` | `my-validation__error` | An individual error message |
 
+## Props
+
+- **Type:** `IressValidationMessageProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/ValidationMessage/ValidationMessage.d.ts`
+
+```typescript
+import type { IressValidationMessageProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs)*

@@ -1,12 +1,15 @@
 # Provider
+
 Provider is a component that sets up the Iress Design System for your application. It ensures that the design system is correctly configured and ready to use.
+
 > **Component:** `import { IressProvider } from '@iress-oss/ids-components'`
-> **Storybook:** [Provider in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-provider--docs)```tsx
-```
+> **Storybook:** [Provider in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-provider--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressProvider } from '@iress-oss/ids-components';
+
 <IressProvider />
 ```
 
@@ -23,6 +26,8 @@ In most cases, you should wrap the entire application with the `IressProvider` c
 > **Note:** `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, `IressPopoverProvider`, and `IressIconProvider`. You do not need to add these providers separately when using `IressProvider`. Similarly, `IressShadow` includes `IressProvider` internally, so you do not need any additional providers when using `IressShadow`.
 
 ```tsx
+import { IressProvider } from '@iress-oss/ids-components';
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <IressProvider>
     <App />
@@ -30,6 +35,16 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 );
 ```
 
+## Props
+
+- **Type:** `IressProviderProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Provider/Provider.d.ts`
+
+```typescript
+import type { IressProviderProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-provider--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-provider--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-provider--docs)*

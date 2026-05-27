@@ -18,7 +18,11 @@ import { IressBreadcrumbs } from '@iress-oss/ids-components';
 ```tsx
 import { IressBreadcrumbs } from '@iress-oss/ids-components';
 
-<IressBreadcrumbs />
+<IressBreadcrumbs items={[
+  { label: 'Home', href: '/' },
+  { label: 'Products', href: '/products' },
+  { label: 'Current Page' },
+]} />
 ```
 
 ## Usage
@@ -67,8 +71,6 @@ The Breadcrumb component follows WCAG 2.1 AA guidelines and includes:
 This example demonstrates all supported breadcrumb configurations side by side.
 
 ```tsx
-import { IressBreadcrumbs, IressPanel, IressStack, IressText } from '@iress-oss/ids-components';
-
 <IressPanel>
 <IressStack gap="xl">
 <IressStack>
@@ -141,11 +143,9 @@ The Breadcrumb component supports custom elements for integration with routing l
 #### React Router
 
 ```tsx
-import { IressBreadcrumb } from '@iress-oss/ids-components';
-
 import { Link as RouterLink } from 'react-router-dom';
 
-<IressBreadcrumb
+<IressBreadcrumbs
   items={[
     { label: 'Home', href: '/', element: RouterLink },
     { label: 'Products', href: '/products', element: RouterLink },
@@ -157,11 +157,9 @@ import { Link as RouterLink } from 'react-router-dom';
 #### Next.js
 
 ```tsx
-import { IressBreadcrumb } from '@iress-oss/ids-components';
-
 import Link from 'next/link';
 
-<IressBreadcrumb
+<IressBreadcrumbs
   items={[
     { label: 'Home', href: '/', element: Link },
     { label: 'Products', href: '/products', element: Link },

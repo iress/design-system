@@ -1,12 +1,15 @@
 # Stack
+
 Use IressStack to control vertical spacing between content with consistent present values.
+
 > **Component:** `import { IressStack } from '@iress-oss/ids-components'`
-> **Storybook:** [Stack in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)```tsx
-```
+> **Storybook:** [Stack in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="spacing.1">
   even
 </IressStack>
@@ -107,6 +110,16 @@ directly or use a `data-testid`:
 const stack = screen.getByTestId('my-stack');
 ```
 
+## Props
+
+- **Type:** `IressStackProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Stack/Stack.d.ts`
+
+```typescript
+import type { IressStackProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)*

@@ -1,37 +1,38 @@
 # Search & selection
-Choosing between Autocomplete, Select, Popover, and DropdownMenu depends on whether users need freetext input, must choose from a fixed set, or are triggering an action menu.## Which component should I use?
+Choosing between InputPopover, Autocomplete, Select, DropdownMenu, and Popover depends on whether users need to navigate to results, pick a form value, or trigger actions.## Which component should I use?
 
 Answer the questions below to find the right component for your use case.
 
-1. **Does the user type freetext to find or filter results?**
+1. **Does the user type to search and then navigate to a result?**
+   - Yes → `IressInputPopover` + `IressMenu` + `IressMenuItem`
+2. **Does the user type freetext to select a value for a form?**
    - Yes → `IressAutocomplete`
-2. **Must the user pick from a fixed set of options?**
+3. **Must the user pick from a fixed set of options?**
    - Yes → `IressSelect`
-3. **Is the dropdown triggered by a button (not an input)?**
-   - Contains actions (edit, delete, etc.) → `IressDropdownMenu`
-   - Contains content or a form → `IressPopover`
+4. **Is the dropdown triggered by a button (not an input)?**
+   - Contains actions or filter options → `IressDropdownMenu`
+   - Needs custom/rich content that doesn't fit the above → `IressPopover`
 
 ## Decision guide
 
-| Criteria                  | Autocomplete               | Select                     | DropdownMenu              | Popover                   |
-| ------------------------- | -------------------------- | -------------------------- | ------------------------- | ------------------------- |
-| User types to filter      | Yes                        | Optional (searchable)      | No                        | No                        |
-| Freetext value allowed    | Yes                        | No (must pick an option)   | N/A                       | N/A                       |
-| Triggered by              | Input focus / typing       | Input click                | Button click              | Button click              |
-| Async options             | Yes (function)             | Yes (function)             | No                        | N/A                       |
-| Keyboard navigation       | Arrow keys + Enter         | Arrow keys + Enter         | Arrow keys + Enter        | Focus trap                |
-| Common use cases          | Search, lookup, city input | Country, status, category  | Row actions, context menu | Filters, settings form    |
+| Criteria                  | Autocomplete               | DropdownMenu              | InputPopover + Menu        | Popover                   | Select                     |
+| ------------------------- | -------------------------- | ------------------------- | -------------------------- | ------------------------- | -------------------------- |
+| User types to filter      | Yes                        | No                        | Yes                        | No                        | Optional (async options)   |
+| Result is navigation      | No (sets form value)       | Sometimes                 | Yes (links)                | N/A                       | No (sets form value)       |
+| Freetext value allowed    | Yes                        | N/A                       | N/A                        | N/A                       | No (must pick an option)   |
+| Triggered by              | Input focus / typing       | Button click              | Input focus / typing       | Button click              | Input click                |
+| Custom result rendering   | No (label + meta only)     | Limited                   | Full control               | Full control              | No (label + meta only)     |
+| Common use cases          | City input, tag input      | Actions, filters          | Site search, command palette | Custom content, previews | Country, status, category  |
 
 ## When to use each component
 
 ### Autocomplete (`IressAutocomplete`)
 
-Use Autocomplete when users type freetext and receive suggestions, but their input is not restricted to the suggestion list.
+Use Autocomplete when users type freetext and receive suggestions to **set a form value**. The input is not restricted to the suggestion list.
 
-- **Search fields**: Global search, page search, entity lookup
 - **Address / city input**: User types and gets matching suggestions
 - **Tag input**: Suggesting existing tags while allowing new ones
-- **Large datasets**: When the option list is too large for a dropdown (use an async `options` function)
+- **Form fields with large datasets**: When the option list is too large for a static dropdown
 
 ```tsx
 <IressField label="Search clients">
@@ -44,54 +45,71 @@ Use Autocomplete when users type freetext and receive suggestions, but their inp
 </IressField>
 ```
 
-### Select (`IressSelect`)
-
-Use Select when users must choose from a predefined set of valid options.
-
-- **Form fields**: Country, status, category, role
-- **Filters**: Where the filter values are a known set
-- **Configuration**: Choosing from predefined settings
-
-When the list is long, enable the built-in search by setting `searchable`:
-
-```tsx
-<IressField label="Country">
-  <IressSelect
-    options={countries}
-    searchable
-    placeholder="Select a country"
-  />
-</IressField>
-```
-
 **Autocomplete vs Select:** If the user can submit any text value (even one not in the list), use Autocomplete. If the value *must* be one of the options, use Select.
 
 ### DropdownMenu (`IressDropdownMenu`)
 
-Use DropdownMenu for a list of actions triggered by a button.
+Use DropdownMenu for a list of actions or filter options triggered by a button.
 
 - **Row actions**: Edit, delete, duplicate on a table row
 - **Context menus**: Right-click or overflow (...) menus
 - **Toolbar actions**: Grouped actions behind a single button
+- **Filter menus**: Selecting filter criteria from a predefined list
 
 ```tsx
 <IressDropdownMenu
-  activator={<IressButton icon="more_vert" mode="muted">Actions</IressButton>}
-  items={[
-    { label: 'Edit', icon: 'edit', onClick: handleEdit },
-    { label: 'Duplicate', icon: 'content_copy', onClick: handleDuplicate },
-    { label: 'Delete', icon: 'delete', onClick: handleDelete, status: 'danger' },
+  label="Actions"
+  options={[
+    { label: 'Edit', value: 'edit' },
+    { label: 'Duplicate', value: 'duplicate' },
+    { label: 'Delete', value: 'delete' },
   ]}
+  onChange={(selected) => {
+    if (selected.value === 'edit') handleEdit();
+    if (selected.value === 'duplicate') handleDuplicate();
+    if (selected.value === 'delete') handleDelete();
+  }}
 />
 ```
 
+### InputPopover + Menu (search navigation)
+
+Use InputPopover with a Menu when users type a query and **navigate to a result** rather than selecting a form value. This gives you full control over how results are rendered and supports real links with proper routing.
+
+- **Site search**: Type to find pages, click to navigate
+- **Command palette**: Type to find actions or pages
+- **Entity lookup with navigation**: Search for a record and go to its detail page
+
+```tsx
+<IressInputPopover
+  activator={
+    <IressInput
+      type="search"
+      placeholder="Search…"
+      onChange={handleSearch}
+      clearable
+    />
+  }
+>
+  <IressMenu>
+    {results.map((result) => (
+      <IressMenuItem key={result.url} element={Link} to={result.url}>
+        {result.title}
+      </IressMenuItem>
+    ))}
+  </IressMenu>
+</IressInputPopover>
+```
+
+**Why not Autocomplete?** Autocomplete is designed for form values — it sets a value on selection. For search-and-navigate, you want real links (`<a>` or router `Link` elements) so that users can right-click → open in new tab, and screen readers announce results as links rather than listbox options.
+
 ### Popover (`IressPopover`)
 
-Use Popover for non-action content triggered by a button — forms, filters, rich content panels.
+Use Popover for custom content triggered by a button that doesn't fit into the other categories. Popover gives you full control over what's rendered inside.
 
-- **Filter panels**: A small form with checkboxes/selects that narrows results
-- **Settings popovers**: Quick settings without navigating away
-- **Rich previews**: Showing additional details on click
+- **Rich previews**: Showing additional details or a summary on click
+- **Custom forms**: A small inline form that doesn't warrant a modal
+- **Composite content**: Anything that needs more than a simple list of options
 
 ```tsx
 <IressPopover
@@ -104,11 +122,29 @@ Use Popover for non-action content triggered by a button — forms, filters, ric
 </IressPopover>
 ```
 
+### Select (`IressSelect`)
+
+Use Select when users must choose from a predefined set of valid options.
+
+- **Form fields**: Country, status, category, role
+- **Filters**: Where the filter values are a known set
+- **Configuration**: Choosing from predefined settings
+
+When the list is long, use an async `options` function to enable built-in search:
+
+```tsx
+<IressField label="Country">
+  <IressSelect
+    options={(query) => fetchCountries(query)}
+    placeholder="Select a country"
+  />
+</IressField>
+```
+
 ## Quick reference
 
-- **User types to search or look up data?** → Autocomplete
-- **User must pick from a known list?** → Select (add `searchable` if >10 options)
-- **Button opens a list of actions?** → DropdownMenu
-- **Button opens a form or content panel?** → Popover
-- **Need async/remote data in a search?** → Autocomplete with an `options` function
-- **Need async/remote data in a select?** → Select with an `options` function
+- **User types to set a form value with suggestions?** → Autocomplete
+- **Button opens a list of actions or filters?** → DropdownMenu
+- **User types to search and navigate to a page?** → InputPopover + Menu + MenuItem
+- **Button opens custom content that doesn't fit the above?** → Popover
+- **User must pick from a known list?** → Select (use async `options` function if large)

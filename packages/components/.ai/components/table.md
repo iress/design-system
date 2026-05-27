@@ -1,12 +1,15 @@
 # Table
+
 Data driven component for displaying tabular data.
+
 > **Component:** `import { IressTable } from '@iress-oss/ids-components'`
-> **Storybook:** [Table in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)```tsx
-```
+> **Storybook:** [Table in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressTable } from '@iress-oss/ids-components';
+
 <IressTable caption="Data table" />
 ```
 
@@ -436,6 +439,16 @@ are generated automatically:
 | `thead` | `my-table__thead` | The table header section |
 | `tbody` | `my-table__tbody` | The table body section |
 
+## Props
+
+- **Type:** `IressTableProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Table/Table.d.ts`
+
+```typescript
+import type { IressTableProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)*

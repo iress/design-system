@@ -1,12 +1,15 @@
 # Progress
+
 A progress component is used to indicate to a user the completion of a set of tasks or a process.
+
 > **Component:** `import { IressProgress } from '@iress-oss/ids-components'`
-> **Storybook:** [Progress in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs)```tsx
-```
+> **Storybook:** [Progress in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressProgress } from '@iress-oss/ids-components';
+
 <IressProgress min={10} max={30} value={20} />
 ```
 
@@ -89,6 +92,16 @@ const progress = screen.getByRole('progressbar');
 expect(progress).toHaveValue(75);
 ```
 
+## Props
+
+- **Type:** `IressProgressProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Progress/Progress.d.ts`
+
+```typescript
+import type { IressProgressProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs)*

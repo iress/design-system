@@ -10,17 +10,15 @@ export const meta = {
 Toaster provide users with important, time-sensitive information.
 
 ```tsx
-import { IressToasterProvider, useToaster } from '@iress-oss/ids-components';
+import { IressToaster } from '@iress-oss/ids-components';
 ```
 
 ## Quick Start
 
 ```tsx
-import { IressToasterProvider, useToaster } from '@iress-oss/ids-components';
+import { IressToaster } from '@iress-oss/ids-components';
 
-<IressToasterProvider>
-  <App />
-</IressToasterProvider>
+<IressToaster />
 ```
 
 ## Usage
@@ -108,8 +106,6 @@ For your components to work as previously, you will need to set up the `IressToa
 > **Note:** If you are using `IressProvider` or `IressShadow`, you do not need to add `IressToasterProvider` separately — it is already included.
 
 ```tsx
-import { IressToasterProvider } from '@iress-oss/ids-components';
-
 const App = () => <IressToasterProvider>Rest of app here</IressToasterProvider>;
 ```
 

@@ -1,12 +1,15 @@
 # Modal
+
 Modals gather information, complete a subtask, or provide additional information without losing the context of an underlying page.
+
 > **Component:** `import { IressModal } from '@iress-oss/ids-components'`
-> **Storybook:** [Modal in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)```tsx
-```
+> **Storybook:** [Modal in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressModal } from '@iress-oss/ids-components';
+
 <IressModal heading="Modal Header" />
 ```
 
@@ -229,6 +232,8 @@ See below for an example in version 4 and version 5.
 <DiffViewer
 allowModeChange
 oldValue={`import { render, waitFor, screen } from '@testing-library/react';
+import { idsFireEvent, componentLoad } from '@iress/ids-react-test-utils';
+
 test('opening and closing a modal', async () => {
 await componentLoad([
 'modal-trigger',
@@ -250,6 +255,8 @@ idsFireEvent.click(closeButton);
 await waitFor(() => expect(modal).not.toBeVisible());
 });`}
 newValue={`import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
+
 test('opening and closing a modal', async () => {
 const trigger = screen.getByRole('button', { name: /open modal/i });
 
@@ -305,6 +312,16 @@ are generated automatically:
 | `status-icon` | `my-modal__status-icon` | The status icon (when status is set) |
 | `footer` | `my-modal__footer` | The modal footer |
 
+## Props
+
+- **Type:** `IressModalProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Modal/Modal.d.ts`
+
+```typescript
+import type { IressModalProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)*

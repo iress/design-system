@@ -1,12 +1,15 @@
 # Col
+
 Used in conjunction with the IressRow component to layout page content
+
 > **Component:** `import { IressCol } from '@iress-oss/ids-components'`
-> **Storybook:** [Col in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs)```tsx
-```
+> **Storybook:** [Col in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressCol } from '@iress-oss/ids-components';
+
 <IressCol numberOfColumns={2} />
 ```
 
@@ -271,6 +274,16 @@ directly or use a `data-testid`:
 const col = screen.getByTestId('my-col');
 ```
 
+## Props
+
+- **Type:** `IressColProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Col/Col.d.ts`
+
+```typescript
+import type { IressColProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs)*

@@ -1,12 +1,15 @@
 # Tooltip
+
 A component that shows concise, informative text about an element when focussed upon, hovered over or on a long touch.
+
 > **Component:** `import { IressTooltip } from '@iress-oss/ids-components'`
-> **Storybook:** [Tooltip in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)```tsx
-```
+> **Storybook:** [Tooltip in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressTooltip } from '@iress-oss/ids-components';
+
 <IressTooltip tooltipText="Hello! This is a really long tooltip to try and see if it goes behind the scrollbar" />
 ```
 
@@ -187,6 +190,16 @@ are generated automatically:
 | `activator` | `my-tooltip__activator` | The tooltip trigger element |
 | `tooltip-text` | `my-tooltip__tooltip-text` | The tooltip content |
 
+## Props
+
+- **Type:** `IressTooltipProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Tooltip/Tooltip.d.ts`
+
+```typescript
+import type { IressTooltipProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)*

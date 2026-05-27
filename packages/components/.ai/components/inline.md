@@ -1,12 +1,15 @@
 # Inline
+
 IressInline renders a set of components in a row with equal spacing around them, wrapping onto multiple lines when necessary.
+
 > **Component:** `import { IressInline } from '@iress-oss/ids-components'`
-> **Storybook:** [Inline in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs)```tsx
-```
+> **Storybook:** [Inline in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressInline } from '@iress-oss/ids-components';
+
 <IressInline gap="spacing.4">
   uneven
 </IressInline>
@@ -130,6 +133,16 @@ directly or use a `data-testid`:
 const inline = screen.getByTestId('my-inline');
 ```
 
+## Props
+
+- **Type:** `IressInlineProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Inline/Inline.d.ts`
+
+```typescript
+import type { IressInlineProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs)*

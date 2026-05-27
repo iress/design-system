@@ -59,8 +59,6 @@ The `IressIcon` component is used to render icons from the Material Symbols libr
 [View <code>IressIcon</code> documentation](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)
 
 ```tsx
-import { IressIcon } from '@iress-oss/ids-components';
-
 <IressIcon name="home" />
 ```
 
@@ -73,36 +71,36 @@ To help with migrating, we have mapped some common Font Awesome icons to their M
 Please refer to the table below for guidance.
 
 ```tsx
-import { IressTable, IressText, IressIcon } from '@iress-oss/ids-components';
-
 <IressTable
-  caption="Font Awesome to Material Symbols Migration Reference"
-  columns={[
-    {
-      key: 'fontAwesome',
-      label: 'Font Awesome',
-      format: (icon) => (
-        <IressText>
-          <IressIcon type="fontawesome" name={icon} /> ({icon})
-        </IressText>
-      ),
-    },
-    {
-      key: 'materialSymbols',
-      label: 'Material Symbols',
-      format: (icon) => (
-        <IressText>
-          <IressIcon name={icon} /> ({icon})
-        </IressText>
-      ),
-    },
-  ]}
-  rows={[
-    { fontAwesome: 'search', materialSymbols: 'search' },
-    { fontAwesome: 'home', materialSymbols: 'home' },
-    { fontAwesome: 'user', materialSymbols: 'person' },
-  ]}
-  scope="col"
+{...(args as object)}
+caption="Font Awesome to Material Symbols Migration Reference"
+columns={[
+{
+key: 'fontAwesome',
+label: 'Font Awesome',
+format: (icon: never) => (
+<IressText>
+<IressIcon type="fontawesome" name={icon} /> ({icon})
+</IressText>
+),
+},
+{
+key: 'materialSymbols',
+label: 'Material Symbols',
+format: (icon: never) => (
+<IressText>
+<IressIcon name={icon} /> ({icon})
+</IressText>
+),
+},
+]}
+rows={Object.entries(FA_TO_MATERIAL_MAP).map(
+([fontAwesome, materialSymbols]) => ({
+fontAwesome,
+materialSymbols,
+}),
+)}
+scope="col"
 />
 ```
 

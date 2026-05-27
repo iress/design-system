@@ -42,8 +42,6 @@ Pass an array of items with `key`, `label`, optional `icon` and `onClick` handle
 Use `size="small"` or `size="medium"` to match surrounding density.
 
 ```tsx
-import { IressContextualMenu, IressStack } from '@iress-oss/ids-components';
-
 <IressStack gap="sm">
 <IressContextualMenu size="small" />
 <IressContextualMenu size="medium" />
@@ -57,8 +55,6 @@ import { IressContextualMenu, IressStack } from '@iress-oss/ids-components';
 Use `align` to align the menu relative to the trigger. If there is not enough space in the preferred direction, it will flip to the opposite side.
 
 ```tsx
-import { IressContextualMenu, IressInline, IressStack, IressStyled } from '@iress-oss/ids-components';
-
 <IressStyled p="spacing.10">
 <IressStack gap="md">
 <IressInline horizontalAlign="center" gap="sm">
@@ -106,8 +102,6 @@ import { IressContextualMenu, IressInline, IressStack, IressStyled } from '@ires
 Use `bordered` when the trigger needs stronger visual affordance.
 
 ```tsx
-import { IressContextualMenu, IressInline } from '@iress-oss/ids-components';
-
 <IressInline gap="sm">
 <IressContextualMenu />
 <IressContextualMenu bordered />
@@ -121,8 +115,6 @@ import { IressContextualMenu, IressInline } from '@iress-oss/ids-components';
 Use `theme="dark"` on panels using `colour.neutral.20` or darker backgrounds.
 
 ```tsx
-import { IressContextualMenu, IressInline } from '@iress-oss/ids-components';
-
 <IressInline gap="sm" bg="alt" borderRadius="radius.system.layout" p="lg">
 <IressContextualMenu />
 <IressContextualMenu bordered />

@@ -1,12 +1,15 @@
 # Dropdown Menu
+
 A component designed to filter a section based on a list of options and quickly navigate to relevant content.
-> **Component:** `import { IressDropdownMenu } from '@iress-oss/ids-components'`
-> **Storybook:** [Dropdown Menu in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdown-menu--docs)```tsx
-```
+
+> **Pattern:** `import { IressDropdownMenu } from '@iress-oss/ids-components'`
+> **Storybook:** [Dropdown Menu in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdown-menu--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressDropdownMenu } from '@iress-oss/ids-components';
+
 <IressDropdownMenu label="Select an option" />
 ```
 
@@ -184,4 +187,4 @@ In `multiSelect` mode, the selections options are displayed using the `selectedO
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdown-menu--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdown-menu--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdown-menu--docs)*

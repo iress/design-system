@@ -28,6 +28,9 @@ import { IressSelectHeading } from '../SelectHeading/SelectHeading';
 import { IressMenuDivider } from '@/components/Menu';
 import { type IressButtonProps } from '@/components/Button';
 import { type ControlledValue } from '@/hooks';
+import { IressSpinner } from '@/components/Spinner';
+import { IressInline } from '@/components/Inline';
+import { IressText } from '@/components/Text';
 
 interface SelectOptionsProps<TMultiple extends boolean = false>
   extends
@@ -183,7 +186,6 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
       activator={
         <IressSelectSearchInput
           aria-label="Search"
-          loading={loading}
           onChange={(e) => setQuery?.(e.target.value)}
           ref={inputRef}
           placeholder="Search and select"
@@ -214,6 +216,12 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
         />
       )}
       {hasResultsAndSelected && <IressMenuDivider />}
+      {loading && !results.length && (
+        <IressInline gap="sm" verticalAlign="middle" p="spacing.3">
+          <IressSpinner color="colour.neutral.70" />
+          <IressText color="colour.neutral.70">Loading results...</IressText>
+        </IressInline>
+      )}
       {hasResults && (
         <SelectAsyncResults
           minSearchLength={minSearchLength}

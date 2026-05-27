@@ -28,8 +28,6 @@ import { IressInputCurrency } from '@iress-oss/ids-components';
 Display the GBP with `locale="en-GB"` and `currencyCode="GBP"` props (must pass both together)
 
 ```tsx
-import { IressInputCurrency } from '@iress-oss/ids-components';
-
 <IressInputCurrency locale="en-GB" currencyCode="GBP" placeholder="Enter amount and dispay currency currency separator on blur" />
 ```
 
@@ -38,8 +36,6 @@ import { IressInputCurrency } from '@iress-oss/ids-components';
 Display the JPY with `locale="ja-JPY"` and `currencyCode="JPY"` props (must pass both together)
 
 ```tsx
-import { IressInputCurrency } from '@iress-oss/ids-components';
-
 <IressInputCurrency defaultValue={12345678} locale="ja-JP" currencyCode="JPY" placeholder="Enter amount and dispay currency currency separator on blur" />
 ```
 
@@ -50,8 +46,6 @@ import { IressInputCurrency } from '@iress-oss/ids-components';
 Display the currency symbol with `withSymbol` props
 
 ```tsx
-import { IressInputCurrency } from '@iress-oss/ids-components';
-
 <IressInputCurrency withSymbol placeholder="Enter amount and dispay currency symbol on blur" />
 ```
 
@@ -62,9 +56,7 @@ import { IressInputCurrency } from '@iress-oss/ids-components';
 Pass more format options with `formatOptions` props. More format options in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat">here</a>
 
 ```tsx
-import { IressInputCurrency } from '@iress-oss/ids-components';
-
-<IressInputCurrency placeholder="Pass and play around with other native Intl.NumberFormat options to the code sandbox" formatOptions={{ minimumFractionDigits: 2 }} />
+<IressInputCurrency placeholder="Pass and play around with other native Intl.NumberFormat options to the code sandbox" />
 ```
 
 [View "FormatOptions" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input-currency--format-options)
@@ -74,9 +66,7 @@ import { IressInputCurrency } from '@iress-oss/ids-components';
 The `readOnly` prop can be set to prevent the user from changing the value of the input. This will change the input to a custom read-only style and the user will not be able to interact with the input. If you want to make the number align to right, please pass `alignRight` together.
 
 ```tsx
-import { IressInputCurrency } from '@iress-oss/ids-components';
-
-<IressInputCurrency readOnly alignRight withSymbol defaultValue={1234.56} />
+<IressInputCurrency readOnly alignRight withSymbol />
 ```
 
 [View "ReadOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input-currency--read-only)
@@ -86,9 +76,7 @@ import { IressInputCurrency } from '@iress-oss/ids-components';
 Set the input content align to right with `alignRight` prop, which is more friendly for number input.
 
 ```tsx
-import { IressInputCurrency } from '@iress-oss/ids-components';
-
-<IressInputCurrency alignRight defaultValue={1234.56} />
+<IressInputCurrency alignRight />
 ```
 
 [View "AlignRight" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input-currency--align-right)

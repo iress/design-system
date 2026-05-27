@@ -1,12 +1,15 @@
 # Autocomplete
+
 Autocomplete allow for users to fill in their input by providing suggestions as they type.
+
 > **Component:** `import { IressAutocomplete } from '@iress-oss/ids-components'`
-> **Storybook:** [Autocomplete in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)```tsx
-```
+> **Storybook:** [Autocomplete in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressAutocomplete } from '@iress-oss/ids-components';
+
 <IressAutocomplete />
 ```
 
@@ -255,6 +258,8 @@ We recommend using [Mock Service Worker](https://mswjs.io/) to mock the API call
 
 ```tsx
 // src/mocks/handlers.ts
+import { http, HttpResponse } from 'msw';
+
 export const handlers = [
   // Intercept "GET https://swapi.py4e.com/api/people" requests...
   http.get('https://swapi.py4e.com/api/people', () => {
@@ -267,9 +272,14 @@ export const handlers = [
 ];
 
 // src/mocks/node.js
+import { setupServer } from 'msw/node';
+import { handlers } from './handlers';
+
 export const server = setupServer(...handlers);
 
 // src/CustomAutocomplete.test.tsx
+import { server } from './mocks/node';
+
 server.listen();
 
 render(<IressAutocomplete options={searchStarWarsCharacters} />);
@@ -289,6 +299,16 @@ IDs are generated automatically:
 | `input` | `my-autocomplete__input` | The underlying input element |
 | `menu` | `my-autocomplete__menu` | The suggestions menu |
 
+## Props
+
+- **Type:** `IressAutocompleteProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Autocomplete/Autocomplete.d.ts`
+
+```typescript
+import type { IressAutocompleteProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)*

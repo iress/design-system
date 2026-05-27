@@ -102,6 +102,7 @@ export interface AutocompleteSearchHookReturn {
 
 const DEFAULT_DEBOUNCE_THRESHOLD = 500;
 const DEFAULT_MIN_SEARCH_LENGTH = 1;
+const LOADING_DELAY = 250;
 
 const translateReasonToError = (reason?: string | Error) => {
   if (reason instanceof Error && reason.message) {
@@ -179,6 +180,14 @@ const useSearchOperations = (
   requestIdCounter: React.MutableRefObject<number>,
 ) => {
   const lastQueryRun = useRef<string>('');
+  const loadingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearLoadingTimer = useCallback(() => {
+    if (loadingTimerRef.current) {
+      clearTimeout(loadingTimerRef.current);
+      loadingTimerRef.current = null;
+    }
+  }, []);
 
   const shouldSkipQuery = useCallback((query: string) => {
     return lastQueryRun.current === query;
@@ -201,8 +210,12 @@ const useSearchOperations = (
       updateQueryTracking(query);
 
       if (query.length >= minSearchLength || force) {
-        searchState.setLoadingState(true);
+        clearLoadingTimer();
         searchState.clearErrorState();
+
+        loadingTimerRef.current = setTimeout(() => {
+          searchState.setLoadingState(true);
+        }, LOADING_DELAY);
 
         try {
           const results = await searchFn(query);
@@ -210,22 +223,31 @@ const useSearchOperations = (
           // Only update if this request is still current (race condition protection)
           if (requestId !== requestIdCounter.current) return;
 
+          clearLoadingTimer();
           searchState.setSearched(true);
           searchState.updateWithResults(results, query);
         } catch (reason: unknown) {
           // Only update if this request is still current (race condition protection)
           if (requestId !== requestIdCounter.current) return;
 
+          clearLoadingTimer();
           searchState.setSearched(true);
           searchState.updateWithError(
             translateReasonToError(reason as string | Error | undefined),
           );
         }
       } else {
+        clearLoadingTimer();
         searchState.reset();
       }
     },
-    [searchState, shouldSkipQuery, updateQueryTracking, requestIdCounter],
+    [
+      searchState,
+      shouldSkipQuery,
+      updateQueryTracking,
+      requestIdCounter,
+      clearLoadingTimer,
+    ],
   );
 
   const handleSync = useCallback(

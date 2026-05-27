@@ -44,7 +44,7 @@ You can use the `IressSlideoutProvider` to open and close slideout from anywhere
 To use, wrap your `<App/>` or the component that you want to use the `useSlideout` hook with `<IressSlideoutProvider />`.
 
 ```tsx
-<AppWithSlideoutProvider />
+<AppWithSlideoutProvider {...args.slideout} />
 ```
 
 [View "Provider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-provider--provider)
@@ -56,8 +56,6 @@ To use, wrap your `<App/>` or the component that you want to use the `useSlideou
 Slideouts can be used in two modes - `overlay` and `push`. In `overlay` mode the slideout sits on top of the content, useful if space is at a premium. In `push` mode the slideout will push the page container to make it smaller; this means you can see all of the page content when the page is available. Overlay is the default.
 
 ```tsx
-import { IressButton, IressInline, IressPanel, IressSlideout, IressText } from '@iress-oss/ids-components';
-
 const { showSlideout } = useSlideout();
 
     return (
@@ -66,7 +64,7 @@ const { showSlideout } = useSlideout();
           <IressButton onClick={() => showSlideout('overlay')}>
             Overlay slideout
           </IressButton>
-          <IressSlideout id="overlay" mode="overlay">
+          <IressSlideout {...args} id="overlay" mode="overlay">
             <h2>Overlay</h2>
             For most situations <code>overlay</code> will be what you need,
             which is why this is the default behaviour. You do not need to
@@ -78,6 +76,7 @@ const { showSlideout } = useSlideout();
             Push slideout
           </IressButton>
           <IressSlideout
+            {...args}
             id="push"
             mode="push"
             eleToPush="#storybook-docs, html"
@@ -164,8 +163,6 @@ For your components to work as previously, you will need to set up the `IressSli
 > **Note:** If you are using `IressProvider` or `IressShadow`, you do not need to add `IressSlideoutProvider` separately — it is already included.
 
 ```tsx
-import { IressSlideoutProvider } from '@iress-oss/ids-components';
-
 const App = () => (
   <IressSlideoutProvider>Rest of app here</IressSlideoutProvider>
 );
@@ -230,8 +227,6 @@ await waitForElementToBeRemoved(slideout);
 You can speed up tests by wrapping your tests in a provider that overrides the theme tokens for animations.
 
 ```tsx
-import { IressProvider } from '@iress-oss/ids-components';
-
 const themeOverrides: Record<string, string> = {
   '--iress-slideout-animation-duration': '0s',
 };

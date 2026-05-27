@@ -1,6 +1,10 @@
 # Recipes
+
 Form pattern documentation.
-> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)## With readonly data
+
+> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
+
+## With readonly data
 
 You can use `IressForm` with readonly data by setting the `readOnly` prop to `true` on controlled elements. This will disable those form controls, but will include the values in the form submission.
 
@@ -174,4 +178,4 @@ npm install --save-dev @types/dompurify
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)*

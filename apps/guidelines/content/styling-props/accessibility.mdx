@@ -31,9 +31,7 @@ It accepts the following values:
 | `'within:inset'`       | Inset focus ring when a child element is focused               |
 
 ```tsx
-import { IressText } from '@iress-oss/ids-components';
-
-<IressText focusable="true" tabIndex={0}>
+<IressText focusable tabIndex={0}>
   This element will have focus styles applied when it is focused. This is useful for accessibility and keyboard navigation.
 </IressText>
 ```
@@ -43,8 +41,6 @@ import { IressText } from '@iress-oss/ids-components';
 ### Inset focus ring
 
 ```tsx
-import { IressText } from '@iress-oss/ids-components';
-
 <IressText focusable="inset" tabIndex={0} p="spacing.4" bg="colour.neutral.20">
   This element uses an inset focus ring, which renders inside the element boundary.
 </IressText>
@@ -57,8 +53,6 @@ import { IressText } from '@iress-oss/ids-components';
 The `srOnly` prop allows you to set a component to be only visible on screen readers. It is used to ensure the screen reader has context of the screen to help the user understand the tasks required of them.
 
 ```tsx
-import { IressText } from '@iress-oss/ids-components';
-
 <IressText srOnly>
   Hello screen readers
 </IressText>
@@ -71,8 +65,6 @@ import { IressText } from '@iress-oss/ids-components';
 The `srOnly` prop is responsive, allowing you to show content on larger screens and hiding them on smaller ones, enabling screen readers to have the same context as larger screens as they are not limited by device size.
 
 ```tsx
-import { IressText } from '@iress-oss/ids-components';
-
 <IressText>
   This content is visible on large screens and screen readers
 </IressText>

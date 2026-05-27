@@ -16,8 +16,6 @@ When an `IressMenu` is used inside `IressPopover`, it adds some additional funct
 - `IressMenu` will automatically focus the first menu item when the popover is opened.
 
 ```tsx
-import { IressButton, IressCol, IressMenu, IressPopover, IressRow, IressStack, IressToggle } from '@iress-oss/ids-components';
-
 const [multiSelect, setMultiSelect] = useState(false);
 
     return (
@@ -26,6 +24,7 @@ const [multiSelect, setMultiSelect] = useState(false);
           <IressRow gutter="lg" key={role} verticalAlign="middle">
             <IressCol span={2}>
               <IressPopover
+                {...args}
                 activator={<IressButton fluid>role={role}</IressButton>}
                 container={document.body}
                 type={role === 'listbox' || role === 'menu' ? role : undefined}

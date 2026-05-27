@@ -1,12 +1,15 @@
 # Form
+
 Use the IressForm component when you want to request, validate and process data from the user.
-> **Component:** `import { IressForm } from '@iress-oss/ids-components'`
-> **Storybook:** [Form in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)```tsx
-```
+
+> **Pattern:** `import { IressForm } from '@iress-oss/ids-components'`
+> **Storybook:** [Form in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressForm } from '@iress-oss/ids-components';
+
 <IressForm heading="Contact details" pattern="short" />
 ```
 
@@ -65,6 +68,8 @@ return (
 );
 };`}
 newValue={`import { IressForm, IressFormField, IressInput, IressCheckboxGroup, IressCheckbox } from '@iress-oss/ids-components';
+import { useWatch } from 'react-hook-form';
+
 const ConditionalFields = () => {
 // Instead of creating our own state, we can now use the form state via the useWatch hook, 
 // meaning we still have a single source of truth
@@ -605,4 +610,4 @@ This will properly reset the field to null and clear the field value.
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)*

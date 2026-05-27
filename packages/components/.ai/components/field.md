@@ -1,12 +1,15 @@
 # Field
+
 The field component is used to place label, hint and error information around form controls.
+
 > **Component:** `import { IressField } from '@iress-oss/ids-components'`
-> **Storybook:** [Field in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs)```tsx
-```
+> **Storybook:** [Field in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressField } from '@iress-oss/ids-components';
+
 <IressField label="First name" />
 ```
 
@@ -471,6 +474,16 @@ are generated automatically:
 - **Hint and error are conditional**: The `__hint` and `__error` test IDs only
   appear when `hint` or `errorMessages`/`error` props are provided.
 
+## Props
+
+- **Type:** `IressFieldProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Field/Field.d.ts`
+
+```typescript
+import type { IressFieldProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs)*

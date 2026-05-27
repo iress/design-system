@@ -150,8 +150,6 @@ OUI's `Scrollable` component is replaced by the `scrollable` styling prop, avail
 You can also use `scrollable` on any element — it is not limited to `IressPanel`:
 
 ```tsx
-import { IressStack } from '@iress-oss/ids-components';
-
 <IressStack scrollable="y" style={{ maxHeight: '400px' }}>
   <LongContent />
 </IressStack>
@@ -438,8 +436,6 @@ OUI and IDS v4 used different class naming conventions that no longer exist in v
 IDS v6 exposes global styling props on every component:
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 // Spacing
 <IressPanel p="lg" m="xl" />
 
@@ -475,8 +471,6 @@ All IDS v6 CSS lives in cascade layers. If your own un-layered CSS is being over
 ### Pattern 1: Simple form field
 
 ```tsx
-import { IressFormField, IressInput } from '@iress-oss/ids-components';
-
 <IressFormField
   name="fieldName"
   label="Field Label"
@@ -488,8 +482,6 @@ import { IressFormField, IressInput } from '@iress-oss/ids-components';
 ### Pattern 2: Complete form
 
 ```tsx
-import { IressButton, IressForm, IressFormField, IressInput } from '@iress-oss/ids-components';
-
 <IressForm onSubmit={handleSubmit} defaultValues={{ field1: '', field2: '' }}>
   <IressFormField
     name="field1"
@@ -510,8 +502,6 @@ import { IressButton, IressForm, IressFormField, IressInput } from '@iress-oss/i
 ### Pattern 3: Modal with form
 
 ```tsx
-import { IressButton, IressForm, IressFormField, IressInput, IressModal } from '@iress-oss/ids-components';
-
 <IressModal show={isOpen} onShowChange={setIsOpen} heading="Edit item">
   <IressForm onSubmit={handleSubmit}>
     <IressFormField
@@ -529,8 +519,6 @@ import { IressButton, IressForm, IressFormField, IressInput, IressModal } from '
 ### Pattern 4: Contextual menu
 
 ```tsx
-import { IressContextualMenu } from '@iress-oss/ids-components';
-
 <IressContextualMenu
   items={[
     { key: 'edit', label: 'Edit', onClick: handleEdit },

@@ -1,12 +1,15 @@
 # Label
+
 Use the IressLabel component when building bespoke form inputs and IressField is too restrictive.
+
 > **Component:** `import { IressLabel } from '@iress-oss/ids-components'`
-> **Storybook:** [Label in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)```tsx
-```
+> **Storybook:** [Label in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressLabel } from '@iress-oss/ids-components';
+
 <IressLabel>
   This is a label
 </IressLabel>
@@ -89,6 +92,16 @@ are generated automatically:
 | --- | --- | --- |
 | `text` | `my-label__text` | The label text content |
 
+## Props
+
+- **Type:** `IressLabelProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Label/Label.d.ts`
+
+```typescript
+import type { IressLabelProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)*

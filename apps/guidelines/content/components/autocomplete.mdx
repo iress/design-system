@@ -32,8 +32,6 @@ There is no validation done between the suggestions and the input value. They ar
 The `defaultValue` prop can be used to set the initial value of the input. The value will be managed by the component.
 
 ```tsx
-import { IressAutocomplete } from '@iress-oss/ids-components';
-
 <IressAutocomplete defaultValue="Option 1" />
 ```
 
@@ -117,8 +115,6 @@ There is a key difference:
 The `autoSelect` prop will automatically select the highlighted option when the user blurs the autocomplete. This is set to true by default, but can be switched off.
 
 ```tsx
-import { IressAutocomplete } from '@iress-oss/ids-components';
-
 <IressAutocomplete autoSelect={false} placeholder="Should no longer auto-select when an item is highlighted" />
 ```
 
@@ -131,9 +127,7 @@ Autocomplete extends `IressInput`, hence it has the same properties as `IressInp
 It does have some defaults to help with user experience. `append` automatically has a search icon, and `clearable` is set to true by default.
 
 ```tsx
-import { IressAutocomplete } from '@iress-oss/ids-components';
-
-<IressAutocomplete width="12" />
+<IressAutocomplete width={12} />
 ```
 
 [View "InputProps" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--input-props)
@@ -143,8 +137,6 @@ import { IressAutocomplete } from '@iress-oss/ids-components';
 If you would like to show a message when there are no results, you can use the `noResultsText` prop. It accepts any React node.
 
 ```tsx
-import { IressAutocomplete } from '@iress-oss/ids-components';
-
 <IressAutocomplete placeholder="Type "no" to see the no results text" />
 ```
 
@@ -165,8 +157,6 @@ The `debounceThreshold` prop can be used to set the time in milliseconds to wait
 By default there is a debounce, but it can be removed by setting it to `0`.
 
 ```tsx
-import { IressAutocomplete } from '@iress-oss/ids-components';
-
 <IressAutocomplete debounceThreshold={0} placeholder="Instant search!" />
 ```
 
@@ -181,23 +171,19 @@ On smaller screens (< 768px), the number of options is further reduced by using 
 `limitMobile` works by filtering the search results that have been filtered by `limitDesktop`, so must be a smaller value. For example:
 
 ```tsx
-import { IressAutocomplete } from '@iress-oss/ids-components';
-
 // 12 results on large screens, 6 on small screens (default values)
 <IressAutocomplete options={...} />
 
 // 4 results on large screens, 3 on small screens
-<IressAutocomplete limitDesktop={4} limitMobile={3} options={...} />
+<IressAutocomplete resultLimitDesktop={4} resultLimitMobile={3} options={...} />
 
-// 4 results on all screens (limitMobile > limitDesktop so has no effect)
-<IressAutocomplete limitDesktop={4} limitMobile={5} options={...} />
+// 4 results on all screens (resultLimitMobile > resultLimitDesktop so has no effect)
+<IressAutocomplete resultLimitDesktop={4} resultLimitMobile={5} options={...} />
 ```
 
 The result limits will also affect the number of initial options displayed, if the `initialOptions` prop is set.
 
 ```tsx
-import { IressAutocomplete, IressPanel, IressStack } from '@iress-oss/ids-components';
-
 <IressStack gap="md">
 <IressPanel>
 <CurrentBreakpoint />
@@ -215,8 +201,6 @@ The `readOnly` prop can be set to `true` to prevent the user from changing the v
 If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs).
 
 ```tsx
-import { IressAutocomplete } from '@iress-oss/ids-components';
-
 <IressAutocomplete readOnly />
 ```
 
@@ -235,8 +219,6 @@ The suggestions are filtered based on the input value. If the input value only m
 If you are using `meta`, `prepend` or `append` props in `LabelValueMeta`, you should also consider this in your search query for the option.
 
 ```tsx
-import { IressAutocomplete } from '@iress-oss/ids-components';
-
 render(
   <IressAutocomplete
     options={[
@@ -264,8 +246,6 @@ expect(option).toBeInTheDocument();
 If you are testing if a specific option appears in the autocomplete that returns asynchronous `options`, it is recommended to use the shortest possible query to return the desired result. The longer the query, the longer it will take to see the results.
 
 ```tsx
-import { IressAutocomplete } from '@iress-oss/ids-components';
-
 render(<IressAutocomplete options={searchStarWarsCharacters} />);
 const autocomplete = screen.getByRole('combobox');
 
@@ -285,8 +265,6 @@ When testing the autocomplete component with asynchronous `options`, you should 
 We recommend using [Mock Service Worker](https://mswjs.io/) to mock the API calls in your tests.
 
 ```tsx
-import { IressAutocomplete } from '@iress-oss/ids-components';
-
 // src/mocks/handlers.ts
 import { http, HttpResponse } from 'msw';
 

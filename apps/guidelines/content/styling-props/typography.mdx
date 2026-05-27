@@ -14,8 +14,6 @@ These are all styling props related to changing the typography of a component.
 The `textStyle` prop allows you to change the default text style of a component. For more control and nested element styling, it is recommended to use `IressText` instead.
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 <IressPanel bg="alt" textStyle="typography.heading.5">
   A panel with large text
 </IressPanel>
@@ -28,8 +26,6 @@ import { IressPanel } from '@iress-oss/ids-components';
 The `textAlign` prop allows you to change the alignment of text inside a component. For more control, it is recommended to use `IressText` instead.
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 <IressPanel bg="alt" textAlign="center">
   A panel with centered text
 </IressPanel>
@@ -48,8 +44,6 @@ For typography, the **IressText component is the preferred approach** for most u
 The `IressText` component is the recommended way to render text content. It handles typography tokens automatically and provides semantic HTML elements.
 
 ```tsx
-import { IressText } from '@iress-oss/ids-components';
-
 // ✅ CORRECT - Use IressText (recommended)
 <IressText>Default body text with proper styling</IressText>
 
@@ -68,8 +62,6 @@ import { IressText } from '@iress-oss/ids-components';
 When you need to apply typography styling to components that aren't text-specific (like `IressPanel`), use the `textStyle` prop with typography tokens.
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 // ✅ CORRECT - Using textStyle prop with tokens
 <IressPanel textStyle="typography.heading.1">
   Panel with heading-sized text
@@ -86,8 +78,6 @@ import { IressPanel } from '@iress-oss/ids-components';
 Inline styles with hardcoded font properties bypass the design system and don't respond to typography token updates.
 
 ```tsx
-import { IressText } from '@iress-oss/ids-components';
-
 // ❌ INCORRECT - Hardcoded typography
 <h1 style={{ fontSize: '24px', fontWeight: 'bold', lineHeight: '1.2' }}>
   Heading
@@ -126,8 +116,6 @@ const BodyText = styled.p`
 Hardcoded font sizes, weights, and families don't adapt to design system changes and break consistency.
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 // ❌ INCORRECT - Hardcoded font properties
 <div style={{
   fontSize: '16px',

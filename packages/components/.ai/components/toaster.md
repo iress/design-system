@@ -1,12 +1,15 @@
 # Toaster
+
 Toaster provide users with important, time-sensitive information.
+
 > **Component:** `import { IressToaster } from '@iress-oss/ids-components'`
-> **Storybook:** [Toaster in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs)```tsx
-```
+> **Storybook:** [Toaster in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressToaster } from '@iress-oss/ids-components';
+
 <IressToaster />
 ```
 
@@ -124,6 +127,16 @@ expect(toast).toBeInTheDocument();
 - **Toast status icons**: Each toast has a status label accessible via
   `getByLabelText('success:')` (or `danger:`, `info:`, etc.).
 
+## Props
+
+- **Type:** `ToasterProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Toaster/Toaster.d.ts`
+
+```typescript
+import type { ToasterProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs)*

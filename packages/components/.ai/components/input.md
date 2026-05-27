@@ -1,12 +1,15 @@
 # Input
+
 Inputs allow a user to input and interact with data. This component should be used as a child of the IressField component to ensure the correct placement of elements like label, error & hint text.
+
 > **Component:** `import { IressInput } from '@iress-oss/ids-components'`
-> **Storybook:** [Input in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)```tsx
-```
+> **Storybook:** [Input in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressInput } from '@iress-oss/ids-components';
+
 <IressInput placeholder="Enter your name" />
 ```
 
@@ -288,6 +291,16 @@ const input = screen.getByRole('spinbutton', { name: 'Quantity' });
 - **clearable inputs**: The clear button only appears when the input has a
   value. After clearing, focus returns to the input.
 
+## Props
+
+- **Type:** `IressInputProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Input/Input.d.ts`
+
+```typescript
+import type { IressInputProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)*

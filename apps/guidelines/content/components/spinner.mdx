@@ -28,8 +28,6 @@ import { IressSpinner } from '@iress-oss/ids-components';
 When using the spinner on its own, you can define the `screenreaderText` prop to provide context to screen readers.
 
 ```tsx
-import { IressSpinner } from '@iress-oss/ids-components';
-
 <IressSpinner screenreaderText="Making magic happen..." />
 ```
 
@@ -40,8 +38,6 @@ import { IressSpinner } from '@iress-oss/ids-components';
 The chatty variant displays an animated "typing" indicator with three dots. This is commonly used in chat interfaces to show that another user or system is currently typing a message.
 
 ```tsx
-import { IressSpinner } from '@iress-oss/ids-components';
-
 <IressSpinner variant="chatty" screenreaderText="User is typing..." />
 ```
 
@@ -52,8 +48,6 @@ import { IressSpinner } from '@iress-oss/ids-components';
 You can display a message alongside the spinner. In this case, you do not need to define the `screenreaderText` prop, as you have a visible message to the user telling them what is happening.
 
 ```tsx
-import { IressInline, IressSpinner, IressText } from '@iress-oss/ids-components';
-
 <IressInline gap="sm" verticalAlign="middle">
 <IressSpinner color="colour.neutral.70" />
 <IressText color="colour.neutral.70">Making magic happen...</IressText>

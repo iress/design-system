@@ -1,12 +1,15 @@
 # Radio
+
 A radio is a single option presented with a radio button. It is used to select a single option from multiple options. It is typically used in an IressRadioGroup.
+
 > **Component:** `import { IressRadio } from '@iress-oss/ids-components'`
-> **Storybook:** [Radio in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)```tsx
-```
+> **Storybook:** [Radio in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressRadio } from '@iress-oss/ids-components';
+
 <IressRadio>
   Radio button
 </IressRadio>
@@ -102,6 +105,16 @@ are generated automatically:
 | `input` | `my-radio__input` | The underlying radio input element |
 | `radioMark` | `my-radio__radioMark` | The visual radio indicator |
 
+## Props
+
+- **Type:** `IressRadioProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Radio/Radio.d.ts`
+
+```typescript
+import type { IressRadioProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)*

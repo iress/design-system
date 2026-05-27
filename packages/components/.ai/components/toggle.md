@@ -1,12 +1,15 @@
 # Toggle
+
 Toggles allow users to turn things on or off. When toggled, the associated change happens straight away.
+
 > **Component:** `import { IressToggle } from '@iress-oss/ids-components'`
-> **Storybook:** [Toggle in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs)```tsx
-```
+> **Storybook:** [Toggle in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressToggle } from '@iress-oss/ids-components';
+
 <IressToggle defaultChecked={false} hiddenLabel={false} layout="inline">
   Toggle
 </IressToggle>
@@ -129,6 +132,16 @@ are generated automatically:
 | `label` | `my-toggle__label` | The toggle label element |
 | `button__button` | `my-toggle__button__button` | The toggle switch button |
 
+## Props
+
+- **Type:** `IressToggleProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Toggle/Toggle.d.ts`
+
+```typescript
+import type { IressToggleProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs)*

@@ -1,12 +1,15 @@
 # Menu Item
+
 Menu items are headings, buttons and dividers used inside an `IressMenu`
+
 > **Component:** `import { IressMenuItem } from '@iress-oss/ids-components'`
-> **Storybook:** [Menu Item in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu-item--docs)```tsx
-```
+> **Storybook:** [Menu Item in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu-item--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressMenuItem } from '@iress-oss/ids-components';
+
 <IressMenuItem>
   Menu item
 </IressMenuItem>
@@ -117,6 +120,16 @@ You can use the `IressMenuText` to render other text within a menu. This adds st
 
 [View "Text" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-text--text)
 
+## Props
+
+- **Type:** `IressMenuItemProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Menu/MenuItem/MenuItem.d.ts`
+
+```typescript
+import type { IressMenuItemProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu-item--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu-item--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu-item--docs)*

@@ -31,8 +31,6 @@ To get started, the `IressTable` component only requires the `caption` and `rows
 - `rows` are an array of objects, each object represents a row in the table. The table will use the key of the first object to determine the columns, automatically made human readable if the key is camel case, snake case or kebab case.
 
 ```tsx
-import { IressTable } from '@iress-oss/ids-components';
-
 <IressTable caption="My investments" />
 ```
 
@@ -171,7 +169,7 @@ If you need to customise the sorting logic, you can use the `sortFn` property of
 - A custom sort function that takes two arguments: `a` and `b`, which are the two rows being compared. It should return `-1`, `0` or `1` depending on the comparison.
 
 ```tsx
-<TableSortingFn />
+<TableSortingFn {...(args as object)} />
 ```
 
 [View "CustomSortingLogic" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--custom-sorting-logic)
@@ -240,8 +238,6 @@ To add a vertical divider you can set the `divider` prop in the `TableColumn` to
 This can be enabled by setting the `hover` prop. This will bring attention to the row the user is hovering over, allowing users to focus on the relationship between the columns of a specific row.
 
 ```tsx
-import { IressTable } from '@iress-oss/ids-components';
-
 <IressTable hover />
 ```
 
@@ -252,8 +248,6 @@ import { IressTable } from '@iress-oss/ids-components';
 `scope` defaults to row, which means the first cell in the row will be a `<th>`. When it is set to col the first cell in the row will be a `<td>`.
 
 ```tsx
-import { IressTable } from '@iress-oss/ids-components';
-
 <IressTable scope="col" />
 ```
 
@@ -264,8 +258,6 @@ import { IressTable } from '@iress-oss/ids-components';
 For very simple tabular data, you have the option to hide the table header with the `hiddenHeader` prop. When this is set to true, the table header will not be rendered.
 
 ```tsx
-import { IressTable } from '@iress-oss/ids-components';
-
 <IressTable hiddenHeader />
 ```
 
@@ -278,8 +270,6 @@ The `rows` prop allows you to use `ReactNodes` as the value of a cell. This can 
 **Note:** If you are using the `sort` property, the sorting may not work properly with rich content. If this happens, either remove the `sort` property or use the `format` prop on the column to set a custom formatter.
 
 ```tsx
-import { IressTable } from '@iress-oss/ids-components';
-
 <IressTable caption="My rich investments" />
 ```
 
@@ -292,8 +282,6 @@ You can provide the table with some content to display when there is no row data
 This is reliant on `columns` prop to provide the information for the table header. If `columns` is not provided and there is no row data the table will not render.
 
 ```tsx
-import { IressTable } from '@iress-oss/ids-components';
-
 <IressTable empty="This table has no data" />
 ```
 
@@ -308,8 +296,6 @@ It accepts any of the table sub-elements. To ensure best display, please make us
 **Note:** Only the `caption`, `hiddenCaption`, `hiddenHeader` and `hover` props are supported when using `children` to render a table.
 
 ```tsx
-import { IressTable } from '@iress-oss/ids-components';
-
 <IressTable caption="My investments" />
 ```
 
@@ -326,8 +312,6 @@ You can customise the rows by passing in a `rowProps` object or function. It acc
 The `compact` prop can be used to reduce the padding around the table cells and reduce the font size. This can be useful when you have a lot of data to display and allow users to see as many columns as possible.
 
 ```tsx
-import { IressTable } from '@iress-oss/ids-components';
-
 <IressTable scope="col" compact alternate removeRowBorders />
 ```
 
@@ -382,8 +366,6 @@ In some cases you may have a table with multiple groups of rows inside it, howev
 It has been exposed so you can use it in your own components to format values in the same way as the table component.
 
 ```tsx
-import { IressTable, IressTableFormattedValue } from '@iress-oss/ids-components';
-
 <IressTable
 caption="IressTableFormattedValue"
 rows={[

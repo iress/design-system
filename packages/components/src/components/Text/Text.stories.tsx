@@ -33,6 +33,7 @@ const TEXT_ELEMENTS: TextElements[] = [
   'a',
   'blockquote',
   'pre',
+  'mark',
 ];
 
 export default {

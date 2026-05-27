@@ -8,6 +8,7 @@ import {
   IressText,
   IressContainer,
   IressSideNav,
+  IressStyled,
 } from '@iress-oss/ids-components';
 import { Search } from '../components/Search';
 import { AiPanel } from '../components/AiPanel';
@@ -41,13 +42,21 @@ function RootLayout() {
             </div>
           </IressContainer>
         </header>
-        <main style={{ flex: 1 }} data-pagefind-body>
-          <IressContainer py="lg">
+        <IressContainer py="md">
+          <IressStyled
+            element="main"
+            flex="1"
+            focusable="true"
+            data-pagefind-body
+            tabIndex={-1}
+            p="sm"
+            borderRadius="radius.system.button"
+          >
             <IressText>
               <Outlet />
             </IressText>
-          </IressContainer>
-        </main>
+          </IressStyled>
+        </IressContainer>
       </IressStack>
       <AiPanel />
     </div>

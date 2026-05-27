@@ -75,7 +75,7 @@ return (
 </IressForm>
 );
 };`}
-newValue={`import { IressCheckbox, IressCheckboxGroup, IressField, IressForm, IressFormField, IressInput } from '@iress-oss/ids-components';
+newValue={`import { IressForm, IressFormField, IressInput, IressCheckboxGroup, IressCheckbox } from '@iress-oss/ids-components';
 import { useWatch } from 'react-hook-form';
 
 const ConditionalFields = () => {
@@ -153,7 +153,7 @@ Sign up
 </IressButton>
 </IressForm>
 );`}
-newValue={`import { IressButton, IressField, IressForm, IressFormField, IressInput } from '@iress-oss/ids-components';
+newValue={`import { IressForm, IressFormField, IressInput, IressButton } from '@iress-oss/ids-components';
 
 export const App = () => (
 <IressForm>
@@ -191,8 +191,6 @@ Consider the following for your development:
 - If you need to set form with data coming from an external system, use the `ref` of the form to `reset` the form values.
 
 ```tsx
-import { IressForm } from '@iress-oss/ids-components';
-
 const ref = useRef<FormRef | null>(null);
 const api = useApi();
 
@@ -237,8 +235,6 @@ It has three required props:
 - `render`: A render prop that renders the form control. It is passed an object containing the props to be spread onto the form control to allow it to be controlled by the form.
 
 ```tsx
-import { IressFormField, IressInput } from '@iress-oss/ids-components';
-
 <IressFormField
   name="email"
   label="Email"
@@ -251,8 +247,6 @@ import { IressFormField, IressInput } from '@iress-oss/ids-components';
 Here are some examples of how to use `IressFormField` with different form controls. If you are using a form control that has multiple inputs inside (for example, `IressCheckboxGroup`), you can use `IressFormFieldset`, which changes the HTML structure to use a `fieldset` and `legend` element to group the inputs.
 
 ```tsx
-import { IressForm } from '@iress-oss/ids-components';
-
 <IressForm heading="All supported form fields" pattern="long" />
 ```
 
@@ -275,8 +269,6 @@ Common use cases include:
 - **Custom validation feedback**: Display real-time validation feedback separate from error messages
 
 ```tsx
-import { IressInput } from '@iress-oss/ids-components';
-
 <IressInput
 {...controlledProps}
 rows={3}
@@ -298,8 +290,6 @@ Use the `rules` prop on the `IressFormField` component to add validation rules. 
 A boolean which, if `true`, indicates that the input must have a value before the form can be submitted. You can assign a string to return a custom error message.
 
 ```tsx
-import { IressForm, IressInput } from '@iress-oss/ids-components';
-
 <IressForm element="IressInput" />
 ```
 
@@ -315,8 +305,6 @@ The maximum character length of the value to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-import { IressForm, IressInput } from '@iress-oss/ids-components';
-
 <IressForm element="IressInput" />
 ```
 
@@ -332,8 +320,6 @@ The minimum character length of the value to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-import { IressForm, IressInput } from '@iress-oss/ids-components';
-
 <IressForm element="IressInput" />
 ```
 
@@ -348,8 +334,6 @@ The maximum number to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-import { IressForm, IressInput } from '@iress-oss/ids-components';
-
 <IressForm element="IressInput" />
 ```
 
@@ -364,8 +348,6 @@ The minimum number to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-import { IressForm, IressInput } from '@iress-oss/ids-components';
-
 <IressForm element="IressInput" />
 ```
 
@@ -388,8 +370,6 @@ The minimum date to accept for this input.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-import { IressForm } from '@iress-oss/ids-components';
-
 <IressForm element="IressInputDate" />
 ```
 
@@ -402,8 +382,6 @@ The maximum date to accept for this input.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-import { IressForm } from '@iress-oss/ids-components';
-
 <IressForm element="IressInputDate" />
 ```
 
@@ -416,8 +394,6 @@ Ensures the input is a valid email address.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-import { IressForm, IressInput } from '@iress-oss/ids-components';
-
 <IressForm element="IressInput" />
 ```
 
@@ -432,8 +408,6 @@ You can pass a callback function as the argument to validate, or you can pass an
 - for `object` or `array` input data, it's recommended to use the validate function for validation as the other rules mostly apply to `string`, `string[]`, `number` and `boolean` data types.
 
 ```tsx
-import { IressCheckboxGroup, IressForm } from '@iress-oss/ids-components';
-
 <IressForm 2 element="IressCheckboxGroup" />
 ```
 
@@ -526,8 +500,6 @@ You can reset the form using the `ref` of the form. You must provide a `defaultV
 You can pass the `readOnly` prop to remove the asterisk symbol (\*) even when the field is `required`, and that field will be exempted from validation.
 
 ```tsx
-import { IressForm, IressStack, IressText } from '@iress-oss/ids-components';
-
 <IressStack gap="md">
 <IressText>
 <h2>Excludes read-only validation</h2>
@@ -561,8 +533,6 @@ Some use cases:
 `IressFormValidationSummary` is the error summary component that is added to the top of the form for screen readers to announce validation errors. It is automatically added to the form when there are validation errors, but you can also use it independently to create your own error summary, usually used if you want a visible error summary at the top of the form.
 
 ```tsx
-import { IressForm } from '@iress-oss/ids-components';
-
 <IressForm heading="Try hitting submit to see the validation summary" />
 ```
 
@@ -587,8 +557,6 @@ Unfortunately due to the asynchronous nature of React Hook Form validation, `Ire
 Here is an example of testing a form submission.
 
 ```tsx
-import { IressButton, IressForm, IressFormField, IressInput } from '@iress-oss/ids-components';
-
 render(
   <IressForm>
     <IressFormField

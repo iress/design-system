@@ -70,8 +70,6 @@ Using the `multiSelect` prop, the `IressDropdownMenu` will allow the user to mak
 The `options` prop is required for the combobox. You can provide an array of `LabelValueMeta[]` objects to the `options` prop. Filtering is done based on the `label` property. Unique selected value(s) will be determined by the `value` property, falling back to `label` if `value` is not provided.
 
 ```tsx
-import { IressDropdownMenu } from '@iress-oss/ids-components';
-
 <IressDropdownMenu label="Options" />
 ```
 
@@ -96,8 +94,6 @@ If you want to provide initial options to the user, you can use the `initialOpti
 **Note:** `initialOptions` only works if `searchable` is true.
 
 ```tsx
-import { IressDropdownMenu } from '@iress-oss/ids-components';
-
 <IressDropdownMenu label="Select an option" searchable />
 ```
 
@@ -114,8 +110,6 @@ The options prop also accepts further properties for each option. This is useful
 All `IressDropdownMenu`s accept meta as an attribute in the option array.
 
 ```tsx
-import { IressDropdownMenu } from '@iress-oss/ids-components';
-
 <IressDropdownMenu label="Contact" />
 ```
 
@@ -142,8 +136,6 @@ You can customise some settings of the query input by setting the `inputProps`.
 It does have some defaults to help with user experience. `prepend` automatically has a search icon, and `clearable` is set to true by default.
 
 ```tsx
-import { IressDropdownMenu } from '@iress-oss/ids-components';
-
 <IressDropdownMenu searchable />
 ```
 
@@ -156,8 +148,6 @@ When an `IressDropdownMenu` has 10 or more options, it is recommended that you e
 **Note:** When using asynchronous options, the `searchable` prop is automatically set to true.
 
 ```tsx
-import { IressDropdownMenu } from '@iress-oss/ids-components';
-
 <IressDropdownMenu searchable />
 ```
 
@@ -170,8 +160,6 @@ Adding the `visibleResetButton` prop adds a way for the user a way to easily res
 Below are examples of both single selects and multi selects with `visibleResetButton` enabled.
 
 ```tsx
-import { IressDropdownMenu } from '@iress-oss/ids-components';
-
 <IressDropdownMenu visibleResetButton />
 ```
 
@@ -182,8 +170,6 @@ import { IressDropdownMenu } from '@iress-oss/ids-components';
 If you would like to show a message when there are no results, you can use the `searchNoResultsText` prop. It accepts any React node.
 
 ```tsx
-import { IressDropdownMenu } from '@iress-oss/ids-components';
-
 <IressDropdownMenu searchable />
 ```
 
@@ -202,8 +188,6 @@ There are two additional props that filter accepts to customise the popover: `he
 In `multiSelect` mode, the selections options are displayed using the `selectedOptionsText` prop. You can customise this text to suit your needs. It will replace `{{numOptions}}` with the number of selected options.
 
 ```tsx
-import { IressDropdownMenu } from '@iress-oss/ids-components';
-
 <IressDropdownMenu multiSelect selectedOptionsText=" - " />
 ```
 

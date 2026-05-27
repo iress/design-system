@@ -70,6 +70,18 @@ To match the above image, the default behaviour of the loading patterns are as f
 - Between 5 - 10 seconds: Some components support additional loading messages. These will animate in and out to indicate that the content is still loading and as well as give the user the perception something is happening in the background.
 - After 10 seconds: Components display a list of messages to indicate what actions the system is doing to complete the user's request. These are checked off as they are completed. This is to give the user the perception that something is happening in the background and to keep them informed of what is happening.
 
+### Delay scales with component size
+
+The delay before showing a loading indicator should scale with the **size of the loading region**. The less visual content surrounding the loading area, the faster the user perceives the wait — when there's nothing else to occupy attention, time feels slower.
+
+| Loading region | Delay before indicator | Rationale |
+|---|---|---|
+| Full page / application | 500ms | User has surrounding content (nav, sidebar) to anchor them |
+| Component within a page (table, chart, card) | 300–500ms | Some surrounding context exists |
+| Small focused element (dropdown, popover, inline field) | 150–250ms | User's attention is fixed with no distraction |
+
+Components like `IressAutocomplete` and `IressSelect` should show loading feedback **within the dropdown/popover** (where the user's attention is focused), not solely within the input field. This avoids layout shifts from spinners appearing alongside append icons, and places the feedback where the user is actually looking for results.
+
 In future releases, we will be adding support for the following:
 
 - After 10 seconds (background): it is always best not to block the user from using the application even if the system is busy. This will be a future feature of the `long` loading pattern.

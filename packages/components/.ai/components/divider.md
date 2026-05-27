@@ -1,12 +1,15 @@
 # Divider
+
 A divider is a UI element that separates content in lists and layouts.
+
 > **Component:** `import { IressDivider } from '@iress-oss/ids-components'`
-> **Storybook:** [Divider in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)```tsx
-```
+> **Storybook:** [Divider in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressDivider } from '@iress-oss/ids-components';
+
 <IressDivider />
 ```
 
@@ -81,6 +84,16 @@ Query the divider by its `separator` role:
 const divider = screen.getByRole('separator');
 ```
 
+## Props
+
+- **Type:** `IressDividerProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Divider/Divider.d.ts`
+
+```typescript
+import type { IressDividerProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)*

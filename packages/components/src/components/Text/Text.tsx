@@ -23,6 +23,7 @@ export type TextElements =
   | 'em'
   | 'a'
   | 'blockquote'
+  | 'mark'
   | 'pre';
 
 export type IressTextProps<E extends TextElements = 'div'> =

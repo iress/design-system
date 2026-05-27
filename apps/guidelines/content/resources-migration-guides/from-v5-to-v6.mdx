@@ -38,8 +38,6 @@ Version 6 ships with a **fully styled Iress-branded default theme**. Loading a t
 Utility classes (e.g. `iress-hide--sm`) and internal component tokens (e.g. `--iress-text-color`) have been replaced with **global styling props** available on every component.
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 // Padding and margin via props
 <IressPanel p="lg" m="xl" bg="alt" />
 
@@ -323,8 +321,6 @@ This component has been removed. Since IDS serves multiple parent applications w
 **Before:**
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 <IressPanel
   padding={{
     xs: { b: 'sm', t: 'lg', r: 'sm', l: 'lg' },
@@ -336,8 +332,6 @@ import { IressPanel } from '@iress-oss/ids-components';
 **After:**
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 <IressPanel pb={{ xs: 'sm', xl: 'none' }} pt={{ xs: 'lg', xl: 'sm' }} />
 ```
 
@@ -442,8 +436,6 @@ The v5 native `IressSelect` with `children` (option elements) is replaced by `Ir
 **Before (v5):**
 
 ```tsx
-import { IressSelect, IressSelectOption } from '@iress-oss/ids-components';
-
 <IressSelect>
   <IressSelectOption value="1">Option 1</IressSelectOption>
 </IressSelect>
@@ -452,8 +444,6 @@ import { IressSelect, IressSelectOption } from '@iress-oss/ids-components';
 **After (v6):**
 
 ```tsx
-import { IressSelect } from '@iress-oss/ids-components';
-
 <IressSelect native options={[{ label: 'Option 1', value: '1' }]} />
 ```
 
@@ -668,8 +658,6 @@ Combines the `rail` and `side` menu variants into a side navigation component fo
 **Before:**
 
 ```tsx
-import { IressAgGridContainer } from '@iress-oss/ids-components';
-
 <IressAgGridContainer>
   <AgGridReact {...gridProps} />
 </IressAgGridContainer>

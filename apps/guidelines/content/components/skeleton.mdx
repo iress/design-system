@@ -28,10 +28,8 @@ import { IressSkeleton } from '@iress-oss/ids-components';
 The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
 ```tsx
-import { IressSkeleton, IressStack } from '@iress-oss/ids-components';
-
 <IressStack gap="md">
-<IressSkeleton mode="text" />
+<IressSkeleton {...(args as IressSkeletonProps<'text'>)} mode="text" />
 <IressSkeleton mode="rect" height="100px" />
 <IressSkeleton mode="circle" height="100px" width="100px" />
 </IressStack>
@@ -84,8 +82,6 @@ These props accept any unit of dimension, but if no unit is provided it will def
 **Note:** `height` will be ignored for text mode as this is calculated using the `IressText` component.
 
 ```tsx
-import { IressInline, IressSkeleton } from '@iress-oss/ids-components';
-
 <IressInline gap="md">
 {SKELETON_MODES.map((mode) => (
 <IressSkeleton key={mode} mode={mode} />

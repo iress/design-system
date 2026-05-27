@@ -30,8 +30,6 @@ This content can only be plain text; there is no parsing of any markup or stylin
 Text content will wrap on to a new line if it exceeds the tooltip's maximum width. You can also manually format your content into multiple lines by passing an array of strings into the `tooltipText` prop.
 
 ```tsx
-import { IressButton, IressInline, IressTooltip } from '@iress-oss/ids-components';
-
 <div style={{ paddingTop: '30px' }}>
 <IressInline gap="md">
 <IressTooltip tooltipText="Single line Hello! This is a really long tooltip to try and see if it goes behind the scrollbar"
@@ -85,8 +83,6 @@ The tooltip can be aligned in one of 12 positions relative to the activator elem
 The tooltip's position will change dynamically based on the amount of space available in its container window, so that it doesn't overflow the edge. For example, if the tooltip is about to scroll off the top of the screen, it will change its position to bottom. Likewise with left and right scrolling.
 
 ```tsx
-import { IressButton, IressInline, IressStack, IressTooltip } from '@iress-oss/ids-components';
-
 <div style={{ padding: '80px 150px' }}>
 <IressStack gap="md">
 <IressInline horizontalAlign="center" gap="sm">
@@ -158,8 +154,6 @@ import { IressButton, IressInline, IressStack, IressTooltip } from '@iress-oss/i
 The `delay` prop requires a number that is the number of milliseconds that pass after the activator has received a `mouseEnter` event and the display of the tooltip.
 
 ```tsx
-import { IressButton, IressInline, IressTooltip } from '@iress-oss/ids-components';
-
 <div style={{ paddingTop: '30px' }}>
 <IressInline horizontalAlign="center" gap="sm">
 <IressTooltip delay={0}>

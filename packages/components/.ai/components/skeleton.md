@@ -1,12 +1,15 @@
 # Skeleton
+
 Skeletons can increase perceived performance for users. As opposed to spinners, skeletons make it feel as though things are happening/loading immediately, then the information is incrementally displayed on the screen.
+
 > **Component:** `import { IressSkeleton } from '@iress-oss/ids-components'`
-> **Storybook:** [Skeleton in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)```tsx
-```
+> **Storybook:** [Skeleton in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressSkeleton } from '@iress-oss/ids-components';
+
 <IressSkeleton />
 ```
 
@@ -91,6 +94,16 @@ await waitFor(() => {
 });
 ```
 
+## Props
+
+- **Type:** `IressSkeletonProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Skeleton/Skeleton.d.ts`
+
+```typescript
+import type { IressSkeletonProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)*
