@@ -4,16 +4,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite\" \"tsx ../../scripts/dev-watcher.ts\"",
-    "build": "vite build && rm -rf ../../docs && cp -r dist ../../docs",
-    "preview": "vite preview",
+    "dev": "concurrently \"vite\" \"tsx ../../scripts/dev-watcher.ts\" \"tsx scripts/build-search-index.ts --watch\"",
+    "build": "vite build && tsx scripts/build-search-index.ts && rm -rf ../../docs && cp -r dist ../../docs",
+    "preview": "vite build && tsx scripts/build-search-index.ts && vite preview",
+    "search:build": "tsx scripts/build-search-index.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@iress-oss/ids-components": "workspace:*",
     "@mdx-js/react": "^3.1.0",
     "@tanstack/react-router": "^1.120.3",
-    "flexsearch": "0.7.43",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
@@ -24,6 +24,7 @@
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^6.0.1",
     "concurrently": "^9.2.1",
+    "pagefind": "^1.5.2",
     "remark-gfm": "^4.0.1",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3",

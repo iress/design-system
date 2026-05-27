@@ -30,6 +30,8 @@ With the `element` prop you can select which HTML element you would like the tex
 It renders as a `div` by default, but can also be set to any standard typography element.
 
 ```tsx
+import { IressStack, IressText } from '@iress-oss/ids-components';
+
 <IressStack gap="spacing.1">
 {TEXT_ELEMENTS.map((element) => (
 <IressText key={element} element={element}>
@@ -50,6 +52,8 @@ For example, in order to maintain the semantic structure of headings, you may ne
 > **⚠️ Do not add `textStyle` when the `element` already provides the correct styling.** For example, `element="h1"` already renders with `typography.heading.1` styling — adding `textStyle="typography.heading.1"` is redundant. Only use `textStyle` to intentionally override the default visual treatment (e.g. `element="h2" textStyle="typography.heading.4"` to make an h2 visually smaller), or when a designer has specified a different visual hierarchy in a Figma file.
 
 ```tsx
+import { IressStack, IressText } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
 {TEXT_STYLES.map((variant) => (
 <IressText key={variant} textStyle={variant}>
@@ -66,6 +70,8 @@ This is the {variant} text style.
 The `color` prop (previously `mode`) can be used to set the colour of the text to these predefined mode colours: Body, Muted, Primary, Info, Success, Warning, Danger, Positive and Negative.
 
 ```tsx
+import { IressStack, IressText } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
 {COLOR_TOKENS.map((mode) => (
 <IressText key={mode} color={mode}>
@@ -88,6 +94,8 @@ I am nested, and return to the original colour
 The `textAlign` prop (previously `align`) can be used to set the text's alignment.
 
 ```tsx
+import { IressStack, IressText } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
 <IressText textAlign="left">
 ...
@@ -116,6 +124,8 @@ The `textAlign` prop (previously `align`) can be used to set the text's alignmen
 If you just need to style a block of typography content, you can just wrap the entire block of HTML with the text component.
 
 ```tsx
+import { IressText } from '@iress-oss/ids-components';
+
 <IressText maxWidth="container.md" mx="auto" px="spacing.2">
 <h2>History</h2>
 <h3>Founding and Early Years (1993 - 2000)</h3>

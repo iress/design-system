@@ -32,6 +32,8 @@ For single checkboxes in controlled mode the `checked` prop sets the checked sta
 When used as part of an `IressCheckboxGroup`, the `checked` prop will be ignored. Instead, the `value` prop on the `IressCheckboxGroup` will determine the checked state of each checkbox. See the [checkbox group documentation](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkboxgroup--docs) for more details.
 
 ```tsx
+import { IressCheckbox } from '@iress-oss/ids-components';
+
 <IressCheckbox checked>
   A checkbox which is checked and in controlled mode
 </IressCheckbox>
@@ -44,6 +46,8 @@ When used as part of an `IressCheckboxGroup`, the `checked` prop will be ignored
 For single checkboxes in uncontrolled mode the `defaultChecked` prop sets the default checked state.
 
 ```tsx
+import { IressCheckbox } from '@iress-oss/ids-components';
+
 <IressCheckbox defaultChecked>
   A checkbox which is initially checked
 </IressCheckbox>
@@ -56,6 +60,8 @@ For single checkboxes in uncontrolled mode the `defaultChecked` prop sets the de
 The `indeterminate` prop sets the checkbox appearance to an indeterminate dash until it is clicked. It has no impact on the checkbox behavior beyond this purely visual indicator.
 
 ```tsx
+import { IressCheckbox } from '@iress-oss/ids-components';
+
 <IressCheckbox indeterminate>
   A checkbox which is initially in an indeterminate state
 </IressCheckbox>
@@ -115,6 +121,8 @@ The `readOnly` prop changes how the checkbox is rendered. It will only render if
 It is understandable that this may not be the desired behavior for all use cases. If you need a checkbox that is not editable, but still visible, simply do not set the `readOnly` prop and set the `checked` prop instead.
 
 ```tsx
+import { IressCheckbox, IressStack } from '@iress-oss/ids-components';
+
 <IressStack>
 <IressCheckbox defaultChecked />
 <IressCheckbox />
@@ -131,6 +139,8 @@ The checkbox component has multiple variants that can be used to change the appe
 - `touch` variant is used to display the checkbox with a larger touch target, which is useful for mobile devices. It is used in the `IressCheckboxGroup` component when the `variant` prop is set to `touch`.
 
 ```tsx
+import { IressCheckbox, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="lg">
 <IressCheckbox variant="card" heading="Widget">
 A description of the widget

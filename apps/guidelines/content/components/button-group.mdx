@@ -35,6 +35,8 @@ You can use the `onChange` prop to watch when a button is clicked.
 - The `mode` prop on `IressButton` is not supported when used inside an `IressButtonGroup`.
 
 ```tsx
+import { IressButtonGroup } from '@iress-oss/ids-components';
+
 <IressButtonGroup label="Button group" />
 ```
 
@@ -49,6 +51,8 @@ By passing the buttons as children you have more control over the display of the
 **Note:** In this case, please set the `value` prop on the `IressButton` component to ensure the correct value is used when the button is clicked.
 
 ```tsx
+import { IressButtonGroup } from '@iress-oss/ids-components';
+
 <IressButtonGroup label="Text alignment" />
 ```
 
@@ -59,6 +63,8 @@ By passing the buttons as children you have more control over the display of the
 By default, only one button in the group can be selected at a time. By setting the `multiple` prop, multiple buttons can be selected.
 
 ```tsx
+import { IressButtonGroup } from '@iress-oss/ids-components';
+
 <IressButtonGroup multiple label="Multiple options can be selected" />
 ```
 
@@ -73,11 +79,15 @@ If the button group is in its default single select mode, these props expects a 
 In multi-select mode, these props expects an array of matching strings.
 
 ```tsx
+import { IressButtonGroup } from '@iress-oss/ids-components';
+
 <IressButtonGroup defaultSelected="Option 2" label="Selected option for single select" />
 ```
 
 [View "SelectedSingle" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-button-group--selected-single)
 ```tsx
+import { IressButtonGroup } from '@iress-oss/ids-components';
+
 <IressButtonGroup label="Selected option for multi-select" />
 ```
 
@@ -105,6 +115,8 @@ import { IressButtonGroup } from '@iress-oss/ids-components';
 If you would like to visually hide the label, you can use the `hiddenLabel` prop.
 
 ```tsx
+import { IressButtonGroup } from '@iress-oss/ids-components';
+
 <IressButtonGroup hiddenLabel label="Options" />
 ```
 

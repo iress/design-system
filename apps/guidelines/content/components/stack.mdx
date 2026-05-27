@@ -34,6 +34,8 @@ Vertical spacing is applied to the direct children of the `IressStack` component
 The previous `gutter` prop has been replaced by `gap`, which uses the latest set of spacing tokens. In terms of how it is used to space items inside the `IressStack` component, it is now directly mapped to the [CSS gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/gap), which may change how your application is spaced. For most cases, there should be no change.
 
 ```tsx
+import { IressStack, IressText } from '@iress-oss/ids-components';
+
 <IressStack gap="spacing.4">
 {SPACING_AND_ALIAS_TOKENS.map((spacing) => (
 <IressText key={spacing}>
@@ -51,6 +53,8 @@ The previous `gutter` prop has been replaced by `gap`, which uses the latest set
 The `gap` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
 
 ```tsx
+import { IressPanel, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap={{ xs: "spacing.2", sm: "spacing.4", md: "spacing.6", lg: "spacing.8", xl: "spacing.10" }}>
 <IressPanel>
 <p>
@@ -70,6 +74,8 @@ The stack component will treat the direct children as a block element. If you wa
 In the example below: `IressButton` are inline because of wrapped by `IressInline`.
 
 ```tsx
+import { IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="spacing.4">
   inlineChildren
 </IressStack>
@@ -82,6 +88,8 @@ In the example below: `IressButton` are inline because of wrapped by `IressInlin
 `IressStack` can also apply gap between the list items by using the new `element` (e.g. `ul`) prop.
 
 ```tsx
+import { IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="spacing.7" element="ul">
   list
 </IressStack>
@@ -96,6 +104,8 @@ The `verticalAlign` prop controls how content is positioned vertically within th
 Use `top`, `middle`, or `bottom` to align items within the available space, and `between`, `around`, or `evenly` to distribute extra vertical space between items (similar to `space-between`, `space-around`, and `space-evenly` in CSS flexbox).
 
 ```tsx
+import { IressPanel, IressStack } from '@iress-oss/ids-components';
+
 <IressPanel style={{ height: '1000px' }}>
 <IressStack verticalAlign="middle" gap="spacing.4">
 <div>Item 1</div>

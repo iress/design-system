@@ -30,6 +30,8 @@ Individual checkboxes can be passed directly into `IressCheckboxGroup`.
 **Note:** The `mapCheckboxGroupOptions` helper function, originally used to map options to `IressCheckbox` components, is now deprecated. Instead, you can use `array.map` to map the options to `IressCheckbox` components.
 
 ```tsx
+import { IressCheckboxGroup } from '@iress-oss/ids-components';
+
 <IressCheckboxGroup name="let-them-eat-cake" />
 ```
 
@@ -64,6 +66,8 @@ The `layout` prop controls how the checkbox group is displayed and can have thre
 - **Inline:** Checkboxes are laid out horizontally. Labels are only as wide as their text.
 
 ```tsx
+import { IressCheckboxGroup, IressText } from '@iress-oss/ids-components';
+
 <IressText>
 <h3>block</h3>
 <IressCheckboxGroup layout="block" />
@@ -83,6 +87,8 @@ You can use the `hiddenCheckbox` prop to create custom checkboxes. When enabled,
 When `hiddenCheckbox` is enabled, the label will have no padding. Padding can be added by using an `IressPanel`.
 
 ```tsx
+import { IressCheckboxGroup, IressField } from '@iress-oss/ids-components';
+
 <IressField
 label="I'd like to discuss the following with my financial adviser:"
 hint="Select all that apply"
@@ -100,6 +106,8 @@ The checkbox group's `layout` prop gives you some default options to help contro
 The example below uses CSS grid to give us evenly spaced / sized checkboxes, which will wrap on to new lines as the screen size reduces. The grid wrapper element is a div that wraps around the `<IressCheckbox>` elements, as shown by the dashed border. Use the grab handle in the bottom right-hand corner of the grid wrapper to see how the controls change size to respond to the container's width.
 
 ```tsx
+import { IressCheckboxGroup, IressField } from '@iress-oss/ids-components';
+
 <IressField
 label="I'd like to discuss the following with my financial adviser:"
 hint="Select all that apply"
@@ -133,6 +141,8 @@ The `readOnly` prop changes how the checkbox group is rendered. It will only ren
 It is understandable that this may not be the desired behavior for all use cases. If you need a checkbox group that is not editable, but still visible, simply do not set the `readOnly` prop and set the `value` prop instead.
 
 ```tsx
+import { IressCheckboxGroup } from '@iress-oss/ids-components';
+
 <IressCheckboxGroup readOnly />
 ```
 
@@ -143,6 +153,8 @@ It is understandable that this may not be the desired behavior for all use cases
 The `touch` prop adds the button-like border and padding to checkbox.
 
 ```tsx
+import { IressCheckboxGroup } from '@iress-oss/ids-components';
+
 <IressCheckboxGroup variant="touch" />
 ```
 

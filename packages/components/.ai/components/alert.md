@@ -1,12 +1,15 @@
 # Alert
-An alert displays a short, important message in a way that attracts the user\
+
+An alert displays a short, important message in a way that attracts the user's attention without interrupting the user's task.
+
 > **Component:** `import { IressAlert } from '@iress-oss/ids-components'`
-> **Storybook:** [Alert in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)```tsx
-```
+> **Storybook:** [Alert in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)
 
 ## Quick Start
 
 ```tsx
+import { IressAlert } from '@iress-oss/ids-components';
+
 <IressAlert status="info">
   This is a simple info alert
 </IressAlert>
@@ -165,6 +168,16 @@ are generated automatically:
 | `heading` | `my-alert__heading` | The alert heading container |
 | `footer` | `my-alert__footer` | The alert footer/actions container |
 
+## Props
+
+- **Type:** `IressAlertProps`
+- **Type declarations:** `@iress-oss/ids-components/dist/components/Alert/Alert.d.ts`
+
+```typescript
+import type { IressAlertProps } from '@iress-oss/ids-components';
+```
+
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)*

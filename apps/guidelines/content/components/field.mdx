@@ -193,6 +193,8 @@ import { IressField } from '@iress-oss/ids-components';
 In horizontal layout, you can control the width of the label using the `labelWidth` prop. This accepts CSS width values like pixels, percentages, or `auto`.
 
 ```tsx
+import { IressField, IressInput, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="spacing.5">
   <IressField horizontal labelWidth="100px" label="labelWidth: 100px">
     <IressInput placeholder="Label width: 100px" />
@@ -373,6 +375,8 @@ If you want out-of-the-box validation, use the `IressFormField` inside an `Iress
 using its accessible role:
 
 ```tsx
+import { IressField } from '@iress-oss/ids-components';
+
 render(
   <IressField label="Email" htmlFor="email">
     <input id="email" type="email" />

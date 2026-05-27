@@ -67,6 +67,8 @@ The Breadcrumb component follows WCAG 2.1 AA guidelines and includes:
 This example demonstrates all supported breadcrumb configurations side by side.
 
 ```tsx
+import { IressBreadcrumbs, IressPanel, IressStack, IressText } from '@iress-oss/ids-components';
+
 <IressPanel>
 <IressStack gap="xl">
 <IressStack>
@@ -139,6 +141,8 @@ The Breadcrumb component supports custom elements for integration with routing l
 #### React Router
 
 ```tsx
+import { IressBreadcrumb } from '@iress-oss/ids-components';
+
 import { Link as RouterLink } from 'react-router-dom';
 
 <IressBreadcrumb
@@ -153,6 +157,8 @@ import { Link as RouterLink } from 'react-router-dom';
 #### Next.js
 
 ```tsx
+import { IressBreadcrumb } from '@iress-oss/ids-components';
+
 import Link from 'next/link';
 
 <IressBreadcrumb

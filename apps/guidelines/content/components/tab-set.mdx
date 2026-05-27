@@ -44,6 +44,8 @@ Using the `children` prop will automatically inject the content as a tab panel w
 If you would like to set a tab by default, use the `defaultSelected` prop.
 
 ```tsx
+import { IressTabSet } from '@iress-oss/ids-components';
+
 <IressTabSet defaultSelected={1} />
 ```
 
@@ -64,6 +66,8 @@ You can use state to control the active tab by setting the `selected` property t
 `IressTabSet` controls the layout of the tab buttons. These will always appear at the top of the tab container, and can be aligned to the left (default), centrally or to the right via the `layout` prop.
 
 ```tsx
+import { IressPanel, IressStack, IressTabSet, IressText } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
 <IressPanel>
 <IressText element="h2">top-left</IressText>
@@ -92,6 +96,8 @@ Use the `type` prop to control the visual emphasis of tab styles:
   indicator background fill.
 
 ```tsx
+import { IressExpander, IressPanel, IressStack, IressTabSet, IressText } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
 <IressPanel>
 <IressText element="h2">Primary</IressText>

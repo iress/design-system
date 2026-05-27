@@ -14,6 +14,8 @@ These are all styling props related to modifying layout.
 The `alignSelf` prop allows you to override the alignItems value set by a parent flex container for individual components. This is useful when you want to adjust the alignment of a single item without affecting the entire container.
 
 ```tsx
+import { IressPanel, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="md" horizontalAlign="center">
   <IressPanel bg="alt">First panel (no alignSelf)</IressPanel>
   <IressPanel bg="colour.primary.surface" alignSelf="start">
@@ -32,6 +34,8 @@ The `flex="1"` prop is used to make a component grow and fill available space in
 Note: We only allow `1` as a value to maintain design consistency.
 
 ```tsx
+import { IressPanel, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="md" horizontalAlign="center" style={{ height: 400 }}>
   <IressPanel bg="alt">First panel (no flex)</IressPanel>
   <IressPanel flex="1">
@@ -48,6 +52,8 @@ Note: We only allow `1` as a value to maintain design consistency.
 The `hideFrom` and `hideBelow` props allow you to hide content from both visual users and screen readers at different breakpoints. This is useful when certain content is not relevant on smaller screens, and you want to ensure that screen reader users have the same experience as visual users.
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 <IressPanel hideFrom="lg">
   Only on mobile screens
 </IressPanel>
@@ -55,6 +61,8 @@ The `hideFrom` and `hideBelow` props allow you to hide content from both visual 
 
 [View "hideFrom" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-layout--hide-from)
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 <IressPanel hideBelow="lg">
   Only on large screens
 </IressPanel>
@@ -72,6 +80,8 @@ design system.
 You can set the value to `true` to enable scrolling on both axes, or specify `'x'` or `'y'` to restrict scrolling to a single axis.
 
 ```tsx
+import { IressCard, IressPanel } from '@iress-oss/ids-components';
+
 <IressCard px="sm">
   <IressPanel scrollable="y" style={{ maxHeight: '300px' }}>
     <h1>History of Iress</h1>

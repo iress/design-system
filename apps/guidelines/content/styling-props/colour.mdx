@@ -17,6 +17,8 @@ The `bg` prop allows you to change the background of any component to the value 
 Below is an example of a component using `bg` and `color` to create a featured panel that changes colour depending on the theme.
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 <IressPanel bg="colour.primary.fill" color="colour.primary.onFill" />
 ```
 
@@ -41,6 +43,8 @@ When applying colors to components, always use design tokens instead of hardcode
 Semantic color tokens like `colour.primary.text`, `colour.primary.fill`, and `colour.system.success.text` automatically adapt to theme changes and maintain proper contrast ratios.
 
 ```tsx
+import { IressPanel, IressText } from '@iress-oss/ids-components';
+
 // ✅ CORRECT - Semantic color tokens
 <IressText color="colour.primary.text">Primary text</IressText>
 <IressPanel bg="colour.primary.fill" color="colour.primary.onFill">
@@ -54,6 +58,8 @@ Semantic color tokens like `colour.primary.text`, `colour.primary.fill`, and `co
 The special value `"alt"` provides an alternate background color that adapts to the current theme context.
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 // ✅ CORRECT - Using "alt" for alternate backgrounds
 <IressPanel bg="alt">Content with alternate background</IressPanel>
 ```
@@ -63,6 +69,8 @@ The special value `"alt"` provides an alternate background color that adapts to 
 When setting a background color, always pair it with an appropriate foreground color to ensure proper contrast and accessibility.
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 // ✅ CORRECT - Paired bg and color for accessibility
 <IressPanel bg="colour.primary.fill" color="colour.primary.onFill">
   Accessible content with proper contrast
@@ -78,6 +86,8 @@ When setting a background color, always pair it with an appropriate foreground c
 Hardcoded hex values don't respond to theme changes and may violate accessibility standards.
 
 ```tsx
+import { IressPanel, IressText } from '@iress-oss/ids-components';
+
 // ❌ INCORRECT - Hardcoded hex values
 <IressText style={{ color: '#000000' }}>Text</IressText>
 <IressPanel style={{ backgroundColor: '#13213F', color: '#FFFFFF' }}>
@@ -115,6 +125,8 @@ const SuccessText = styled.span`
 Inline styles bypass the design system and prevent theme adaptation.
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 // ❌ INCORRECT - Inline styles
 <IressPanel style={{ backgroundColor: '#F5F5F5', color: '#333333' }}>
   Content

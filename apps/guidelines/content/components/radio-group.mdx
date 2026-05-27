@@ -38,6 +38,8 @@ The default checked state of the radio children should always be set using the `
 **Note:** The `value` prop on the `IressRadioGroup` component will always override the `checked` state of the `IressRadio` children.
 
 ```tsx
+import { IressRadioGroup } from '@iress-oss/ids-components';
+
 <IressRadioGroup defaultValue="newspaper" />
 ```
 
@@ -60,6 +62,8 @@ The layout prop controls how the radio group is displayed and can have three bas
 >   needs the inline prop to be set for the inline layouts to take effect.
 
 ```tsx
+import { IressRadioGroup, IressStack, IressText } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
 <IressText>
 <h3>block (default)</h3>
@@ -93,6 +97,8 @@ You can use the `hiddenRadio` prop to create custom radio buttons. When enabled,
 When `hiddenRadio` is enabled, the label will have no padding. Padding can be added by using a Panel or utility classes.
 
 ```tsx
+import { IressField, IressRadioGroup } from '@iress-oss/ids-components';
+
 <IressField
 label="I'd like to discuss the following in my financial review:"
 hint="Select one option"
@@ -110,6 +116,8 @@ The radio group's `layout` prop gives you some default options to help control t
 The example below uses CSS grid to give us evenly spaced / sized radio buttons, which will wrap on to new lines as the screen size reduces. The grid wrapper element is a div that wraps around the `<IressRadio />` elements, as shown by the dashed border. Use the grab handle in the bottom right-hand corner of the grid wrapper to see how the controls change size to respond to the container's width.
 
 ```tsx
+import { IressField, IressRadioGroup } from '@iress-oss/ids-components';
+
 <IressField
 label="I'd like to discuss the following in my financial review:"
 hint="Select one option"
@@ -143,6 +151,8 @@ The `readOnly` prop changes how the radio group is rendered. It will only render
 It is understandable that this may not be the desired behavior for all use cases. If you need a radio group that is not editable, but still visible, simply do not set the `readOnly` prop and set the `value` prop instead.
 
 ```tsx
+import { IressRadioGroup } from '@iress-oss/ids-components';
+
 <IressRadioGroup readOnly />
 ```
 
@@ -153,6 +163,8 @@ It is understandable that this may not be the desired behavior for all use cases
 The `touch` prop adds the button-like border and padding to radio.
 
 ```tsx
+import { IressRadioGroup } from '@iress-oss/ids-components';
+
 <IressRadioGroup variant="touch" />
 ```
 

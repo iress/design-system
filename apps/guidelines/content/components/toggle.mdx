@@ -41,6 +41,8 @@ The `IressToggle` component should only be used for actions that happen immediat
 Toggles should always have a label, which is set via its `children`.
 
 ```tsx
+import { IressToggle } from '@iress-oss/ids-components';
+
 <IressToggle defaultChecked={false} hiddenLabel={false} layout="inline">
   Toggle
 </IressToggle>
@@ -53,6 +55,8 @@ Toggles should always have a label, which is set via its `children`.
 Labels can be hidden via the `hiddenLabel` prop; this will hide the label from view, but it'll still be available to screen reader users.
 
 ```tsx
+import { IressToggle } from '@iress-oss/ids-components';
+
 <IressToggle hiddenLabel />
 ```
 
@@ -77,6 +81,8 @@ The `layout` prop allows you to control the position of the label in relation to
 - `stack` positions the label above the control
 
 ```tsx
+import { IressPanel, IressStack, IressText, IressToggle } from '@iress-oss/ids-components';
+
 <IressStack gap="lg">
 <IressText>
 <h3>inline</h3>

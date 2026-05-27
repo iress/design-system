@@ -1,6 +1,10 @@
 # Recipes
+
 Autocomplete component documentation.
-> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)> [!NOTE]
+
+> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)
+
+> [!NOTE]
 > **Experimental**
 >
 > This API is experimental. It may change in the future based on usage. The team
@@ -22,4 +26,4 @@ It has been exposed in case you need it in your application to provide custom se
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)
+*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)*

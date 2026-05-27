@@ -48,6 +48,8 @@ The `activeItemKey` prop controls which rail item is currently selected — typi
 The side menu expands to show child items when a rail item is active. The `defaultExpanded` prop can be used to have the side menu open by default.
 
 ```tsx
+import { IressSideNav } from '@iress-oss/ids-components';
+
 <IressSideNav defaultExpanded />
 ```
 
@@ -58,6 +60,8 @@ The side menu expands to show child items when a rail item is active. The `defau
 Show numbered drawer headers in the expanded side menu.
 
 ```tsx
+import { IressSideNav } from '@iress-oss/ids-components';
+
 <IressSideNav activeItemKey="hubs" defaultExpanded numbered />
 ```
 
@@ -68,6 +72,8 @@ Show numbered drawer headers in the expanded side menu.
 The `header` and `footer` props accept any `ReactNode`, allowing you to place a search bar, branding, version info, or other content in the expanded panel.
 
 ```tsx
+import { IressSideNav } from '@iress-oss/ids-components';
+
 <IressSideNav activeItemKey="portfolios" defaultExpanded />
 ```
 
@@ -88,6 +94,8 @@ Manage `expanded` and `activeItemKey` externally for full control over the navig
 Use the `sideMenuItems` prop to override the side panel content with dynamically fetched or context-dependent sub-items.
 
 ```tsx
+import { IressSideNav } from '@iress-oss/ids-components';
+
 <IressSideNav activeItemKey="hubs" sideMenuLabel="Client Hub" defaultExpanded numbered width="300px" />
 ```
 

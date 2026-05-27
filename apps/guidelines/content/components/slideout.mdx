@@ -56,6 +56,8 @@ To use, wrap your `<App/>` or the component that you want to use the `useSlideou
 Slideouts can be used in two modes - `overlay` and `push`. In `overlay` mode the slideout sits on top of the content, useful if space is at a premium. In `push` mode the slideout will push the page container to make it smaller; this means you can see all of the page content when the page is available. Overlay is the default.
 
 ```tsx
+import { IressButton, IressInline, IressPanel, IressSlideout, IressText } from '@iress-oss/ids-components';
+
 const { showSlideout } = useSlideout();
 
     return (
@@ -162,6 +164,8 @@ For your components to work as previously, you will need to set up the `IressSli
 > **Note:** If you are using `IressProvider` or `IressShadow`, you do not need to add `IressSlideoutProvider` separately — it is already included.
 
 ```tsx
+import { IressSlideoutProvider } from '@iress-oss/ids-components';
+
 const App = () => (
   <IressSlideoutProvider>Rest of app here</IressSlideoutProvider>
 );
@@ -226,6 +230,8 @@ await waitForElementToBeRemoved(slideout);
 You can speed up tests by wrapping your tests in a provider that overrides the theme tokens for animations.
 
 ```tsx
+import { IressProvider } from '@iress-oss/ids-components';
+
 const themeOverrides: Record<string, string> = {
   '--iress-slideout-animation-duration': '0s',
 };

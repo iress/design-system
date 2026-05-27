@@ -30,6 +30,8 @@ import { IressLabel } from '@iress-oss/ids-components';
 To indicate that an input is required, you may use the `required` prop to distinguish the label with an asterix.
 
 ```tsx
+import { IressLabel } from '@iress-oss/ids-components';
+
 <IressLabel required>
   This is a label for a required input
 </IressLabel>
@@ -42,6 +44,8 @@ To indicate that an input is required, you may use the `required` prop to distin
 Sometimes you may wish to have an input with no visible label, but to still wrap the input in a label for accessibility. In this case, set `hiddenLabel` to `true`.
 
 ```tsx
+import { IressLabel } from '@iress-oss/ids-components';
+
 <IressLabel hiddenLabel>
   This text is visible to screen readers only
 </IressLabel>
@@ -54,6 +58,8 @@ Sometimes you may wish to have an input with no visible label, but to still wrap
 You can render custom content into the label.
 
 ```tsx
+import { IressLabel } from '@iress-oss/ids-components';
+
 <IressLabel>
   <span>Custom <strong>rich</strong> content</span>
 </IressLabel>
@@ -67,6 +73,8 @@ Use `readOnly="locked"` when the associated field is readonly due to
 permissions. This adds a lock indicator on the label.
 
 ```tsx
+import { IressLabel } from '@iress-oss/ids-components';
+
 <IressLabel readOnly="locked">
   This label is locked
 </IressLabel>

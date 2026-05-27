@@ -22,6 +22,8 @@ There are seven props you can use to customise the padding of any component. It 
 - `pb`: Change the padding on the bottom of a component
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 <IressPanel bg="alt" p="xl">
   A panel that has extra large padding on all sides.
 </IressPanel>
@@ -30,6 +32,8 @@ There are seven props you can use to customise the padding of any component. It 
 [View "padding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--padding)
 
 ```tsx
+import { IressButton } from '@iress-oss/ids-components';
+
 <IressButton px="lg" mode="primary">
   Submit
 </IressButton>
@@ -38,6 +42,8 @@ There are seven props you can use to customise the padding of any component. It 
 [View "button" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--button)
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 <IressPanel bg="alt" pb="xl" pt="spacing.1" pl="md" pr="spacing.6">
   A panel that has different padding on each side.
 </IressPanel>
@@ -50,6 +56,8 @@ There are seven props you can use to customise the padding of any component. It 
 All padding props are responsive and can be changed according to different screen sizes.
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 <IressPanel bg="alt">
   A panel that has extra large padding on small screens and no padding on large screens.
 </IressPanel>
@@ -58,6 +66,8 @@ All padding props are responsive and can be changed according to different scree
 [View "responsivePadding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-padding)
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 <IressPanel bg="alt">
   A panel that has responsive padding on the vertical and horizontal axes.
 </IressPanel>
@@ -70,6 +80,8 @@ All padding props are responsive and can be changed according to different scree
 Responsive padding worked differently in version 5. The `p` prop no longer accepts a nested object of axes to change the padding, you must change every prop based on the breakpoint.
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 <DiffViewer
 oldValue={`<IressPanel p={{ t: 'xl', b: 'xl' }} />`}
 newValue={`<IressPanel pt="xl" pb="xl" />`}
@@ -91,6 +103,8 @@ There are seven props you can use to customise the margin of any component. It a
 - `mb`: Change the margin on the bottom of a component
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 <IressPanel bg="alt" m="xl">
   A panel that has the same margin on all sides.
 </IressPanel>
@@ -99,6 +113,8 @@ There are seven props you can use to customise the margin of any component. It a
 [View "margin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--margin)
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 <IressPanel bg="alt" mb="xl" mt="spacing.1" ml="md" mr="spacing.6">
   A panel that has different margin on each side.
 </IressPanel>
@@ -111,6 +127,8 @@ There are seven props you can use to customise the margin of any component. It a
 All margin props are responsive and can be changed according to different screen sizes.
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 <IressPanel bg="alt">
   A panel that has extra large margin on small screens and no margin on large screens.
 </IressPanel>
@@ -119,6 +137,8 @@ All margin props are responsive and can be changed according to different screen
 [View "responsiveMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-margin)
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 <IressPanel bg="alt">
   A panel that has responsive margin on the vertical and horizontal axes.
 </IressPanel>
@@ -131,6 +151,8 @@ All margin props are responsive and can be changed according to different screen
 Negative margin is supported in the same way as positive margin. You can use the same props to set negative margin.
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 <IressPanel bg="colour.primary.surface" maxWidth="container.sm" mx="auto">
   <IressPanel mt="-spacing.2" />
 </IressPanel>
@@ -143,6 +165,8 @@ Negative margin is supported in the same way as positive margin. You can use the
 The `noGutter` prop removes the bottom margin of the last direct child of a component. This is useful when you have nested content inside a component with padding, such as `IressPanel` or `IressCard`, to remove unnecessary spacing in your layout.
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 <IressPanel noGutter>
   <ul>
     <li>
@@ -165,6 +189,8 @@ Always use spacing tokens from the design system scale instead of hardcoded pixe
 The spacing scale provides convenient aliases (`xs`, `sm`, `md`, `lg`, `xl`) that map to specific pixel values.
 
 ```tsx
+import { IressPanel, IressStack } from '@iress-oss/ids-components';
+
 // ✅ CORRECT - Using aliases
 <IressPanel p="xl">Extra large padding (48px)</IressPanel>
 <IressStack spacing="md">Medium gap between items (16px)</IressStack>
@@ -175,6 +201,8 @@ The spacing scale provides convenient aliases (`xs`, `sm`, `md`, `lg`, `xl`) tha
 You can also use the full token names (e.g., `spacing.4`) for the same effect as aliases.
 
 ```tsx
+import { IressPanel, IressStack } from '@iress-oss/ids-components';
+
 // ✅ CORRECT - Using full token names
 <IressPanel p="spacing.10">Same as xl (48px)</IressPanel>
 <IressStack spacing="spacing.4">Same as md (16px)</IressStack>
@@ -185,6 +213,8 @@ You can also use the full token names (e.g., `spacing.4`) for the same effect as
 Use directional spacing props (`px`, `py`, `pl`, `pr`, `pt`, `pb`) when you need different spacing on different axes.
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 // ✅ CORRECT - Directional spacing with tokens
 <IressPanel px="lg" py="sm">
   Horizontal padding: large (24px), Vertical padding: small (8px)
@@ -196,6 +226,8 @@ Use directional spacing props (`px`, `py`, `pl`, `pr`, `pt`, `pb`) when you need
 Hardcoded pixel values break the design system's visual rhythm and don't adapt to spacing scale changes.
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 // ❌ INCORRECT - Hardcoded pixel values
 <IressPanel style={{ padding: '24px' }}>Content</IressPanel>
 
@@ -208,6 +240,8 @@ Hardcoded pixel values break the design system's visual rhythm and don't adapt t
 Inline styles bypass the design system and make code non-themeable.
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 // ❌ INCORRECT - Inline styles
 <IressPanel style={{ margin: '16px 0', padding: '8px 24px' }}>
   Content
@@ -248,6 +282,8 @@ const StyledBox = styled.div`
 The spacing scale is designed to create visual consistency. Avoid arbitrary values that don't fit the scale.
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 // ❌ INCORRECT - Arbitrary spacing value
 <IressPanel style={{ padding: '17px' }}>Content</IressPanel>
 

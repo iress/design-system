@@ -16,6 +16,8 @@ influencing the overall user experience.
 The `borderRadius` prop allows you to change the border radius of any component. It should be used sparingly, and often used when creating custom components that are not part of the design system, however you still want to retain the look and feel of the rest of the system.
 
 ```tsx
+import { IressInput } from '@iress-oss/ids-components';
+
 <IressInput
   borderRadius="radius.3"
   px="spacing.4"
@@ -31,6 +33,8 @@ The `borderRadius` prop allows you to change the border radius of any component.
 In some cases you may need to remove the border-radius to achieve design requirements. This can be done using `radius.000` or `none`.
 
 ```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
 <IressPanel borderRadius="none" bg="alt">
   No radius here
 </IressPanel>

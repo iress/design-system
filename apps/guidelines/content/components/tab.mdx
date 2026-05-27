@@ -30,6 +30,8 @@ The tab can be set to active using the `active` prop.
 **Note:** If you are using `IressTabSet`, you should use the `selected` prop on the `IressTabSet` to set the active state of its `<IressTab />` children, as the `active` prop will be ignored.
 
 ```tsx
+import { IressTab } from '@iress-oss/ids-components';
+
 <IressTab label="Tab" active />
 ```
 
@@ -40,6 +42,8 @@ The tab can be set to active using the `active` prop.
 A tab can have a unique value set to it, used to determine its active state in a `IressTabSet` component. The value is not visible to end users.
 
 ```tsx
+import { IressTab, IressTabSet } from '@iress-oss/ids-components';
+
 <IressTabSet>
 <IressTab label="First" value="first" />
 <IressTab label="Second" value="second" />
@@ -53,6 +57,8 @@ A tab can have a unique value set to it, used to determine its active state in a
 A tab can set its `children` when used inside an `IressTabSet` component, and it will render as its panel. If the tab is not used inside an `IressTabSet` component, `children` will not render.
 
 ```tsx
+import { IressTab, IressTabSet } from '@iress-oss/ids-components';
+
 <IressTabSet>
 <IressTab label="Details">
 Panel content goes here.

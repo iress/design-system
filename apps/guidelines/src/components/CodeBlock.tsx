@@ -1,3 +1,5 @@
+import { IressButton, IressCard, IressInline, IressLink } from '@iress-oss/ids-components';
+
 interface CodeBlockProps {
   children: string;
   language?: string;
@@ -10,20 +12,22 @@ export function CodeBlock({ children, language, chromaticUrl }: CodeBlockProps) 
   };
 
   return (
-    <div>
+    <IressCard>
       <pre>
         <code className={language ? `language-${language}` : undefined}>
           {children}
         </code>
       </pre>
-      <button type="button" onClick={handleCopy}>
-        Copy
-      </button>
-      {chromaticUrl && (
-        <a href={chromaticUrl} target="_blank" rel="noopener noreferrer">
-          View in Storybook
-        </a>
-      )}
-    </div>
+      <IressInline gap="sm">
+        <IressButton mode="tertiary" compact onClick={handleCopy}>
+          Copy
+        </IressButton>
+        {chromaticUrl && (
+          <IressLink href={chromaticUrl} target="_blank" rel="noopener noreferrer">
+            View in Storybook
+          </IressLink>
+        )}
+      </IressInline>
+    </IressCard>
   );
 }

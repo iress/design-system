@@ -43,6 +43,7 @@ export const NAV_ITEMS: SideNavItem[] = [
     element: Link,
     children: [
       { key: 'form', label: 'Form', href: '/patterns/form', element: Link },
+      { key: 'search-selection', label: 'Search & Selection', href: '/patterns/search-selection', element: Link },
     ],
   },
   {

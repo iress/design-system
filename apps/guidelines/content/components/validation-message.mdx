@@ -30,6 +30,8 @@ import { IressValidationMessage } from '@iress-oss/ids-components';
 Validation status is controlled by the status prop. It defaults to `error`.
 
 ```tsx
+import { IressStack, IressValidationMessage } from '@iress-oss/ids-components';
+
 <IressStack>
 {STATUSES.map((status) => (
 <IressValidationMessage key={status} status={status}>
@@ -48,6 +50,8 @@ You can add a prefix to the message. If not provided, it uses the `status` prop 
 It is hidden by default, but can be shown by setting the `visiblePrefix` prop to `true`.
 
 ```tsx
+import { IressStack, IressValidationMessage } from '@iress-oss/ids-components';
+
 <IressStack>
 {STATUSES.map((status) => (
 <IressValidationMessage key={status} status={status}>
@@ -64,6 +68,8 @@ It is hidden by default, but can be shown by setting the `visiblePrefix` prop to
 You can use the `linkToTarget` prop to link the message to a specific target in the DOM. This is useful to take the user to a specific part of the form when they click on the message.
 
 ```tsx
+import { IressDivider, IressInput, IressStack, IressValidationMessage } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
 <IressStack>
 {STATUSES.map((status) => (

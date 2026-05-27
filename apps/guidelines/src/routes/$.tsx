@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
+import { IressStack, IressText, IressLink } from '@iress-oss/ids-components';
 
 interface MdxModule {
   default: React.ComponentType;
@@ -46,24 +47,28 @@ function SplatRoute() {
     const all = getAllPages();
     const sections = [...new Set(all.map((p) => p.section))].sort();
     return (
-      <div>
-        <h1>Page not found</h1>
-        <p>No page found for &ldquo;{splat}&rdquo;.</p>
+      <IressStack gap="lg">
+        <IressText element="h1">Page not found</IressText>
+        <IressText element="p" color="colour.neutral.70">
+          No page found for &ldquo;{splat}&rdquo;.
+        </IressText>
         {sections.map((section) => (
-          <div key={section}>
-            <h2>{section || 'Pages'}</h2>
-            <ul>
+          <IressStack key={section} gap="sm">
+            <IressText element="h2">{section || 'Pages'}</IressText>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {all
                 .filter((p) => p.section === section)
                 .map((p) => (
                   <li key={p.path}>
-                    <Link to={`/${p.path}` as string}>{p.title}</Link>
+                    <IressLink element={Link} to={`/${p.path}` as string}>
+                      {p.title}
+                    </IressLink>
                   </li>
                 ))}
             </ul>
-          </div>
+          </IressStack>
         ))}
-      </div>
+      </IressStack>
     );
   }
 

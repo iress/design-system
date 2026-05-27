@@ -34,6 +34,8 @@ The spacing between columns is controlled by the `gutter` prop. To change the sp
 Note: The `gutter` prop only works with `IressCol` components. If you are using other components, please use the `IressInline` component instead.
 
 ```tsx
+import { IressDivider, IressRow, IressStack, IressText } from '@iress-oss/ids-components';
+
 <IressStack maxWidth="container.xl" gap="xl">
 {SPACING_AND_ALIAS_TOKENS.map((spacing, index) => {
 return (
@@ -54,6 +56,8 @@ return (
 The `gutter` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
 
 ```tsx
+import { IressContainer, IressPanel, IressRow, IressStack } from '@iress-oss/ids-components';
+
 <IressContainer>
 <IressStack gap="md">
 <IressPanel bg="alt">
@@ -73,6 +77,8 @@ Current breakpoint: <CurrentBreakpoint />
 `IressRow` can be set to align horizontally using the `horizontalAlign` prop.
 
 ```tsx
+import { IressContainer, IressDivider, IressRow, IressStack, IressText } from '@iress-oss/ids-components';
+
 <IressContainer>
 <IressStack gap="md">
 {HORIZONTAL_ALIGNS.map((horizontalAlign, index) => (
@@ -95,6 +101,8 @@ key={horizontalAlign}
 `IressRow` can be set to align vertically using the `verticalAlign` prop.
 
 ```tsx
+import { IressContainer, IressRow, IressStack, IressText } from '@iress-oss/ids-components';
+
 <IressContainer>
 <IressStack gap="md">
 {VERTICAL_ALIGNS.map((verticalAlign) => (

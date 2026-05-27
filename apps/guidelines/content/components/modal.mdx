@@ -74,6 +74,8 @@ To use, wrap your `<App/>` or the component that you want to use the `useModal` 
 The `heading` prop can be used to set a heading for the modal. This will be rendered in the header of the modal, and will be announced by screen readers when the modal is opened.
 
 ```tsx
+import { IressModal } from '@iress-oss/ids-components';
+
 <IressModal heading="Modal heading" />
 ```
 
@@ -84,6 +86,8 @@ The `heading` prop can be used to set a heading for the modal. This will be rend
 Use the `footer` prop to place content underneath the main content. Usually used for extra controls like buttons etc.
 
 ```tsx
+import { IressModal } from '@iress-oss/ids-components';
+
 <IressModal heading="Modal Header">
   Normal modal content
 </IressModal>
@@ -108,6 +112,8 @@ The `fixedFooter` prop can be used to set the footer to be fixed to the bottom o
 >   should fix the issue.
 
 ```tsx
+import { IressModal } from '@iress-oss/ids-components';
+
 <IressModal heading="Modal Header" fixedFooter />
 ```
 
@@ -134,6 +140,8 @@ The `width` prop can take an object that takes five key/value pairs that correla
 If you set a responsive `width`, the modal becomes full width on screens smaller than the value you specified. For example, if you want to create a large modal on medium screens and above:
 
 ```tsx
+import { IressModal } from '@iress-oss/ids-components';
+
   <IressModal size="lg" width={{ md: 'overlay.lg' }}>
 ```
 
@@ -161,6 +169,8 @@ For instances where you require the user's full attention and you want to ensure
 **Note:** As these options remove the default handling of the closing the modal, please ensure you provide a clear way for the user to close the modal.
 
 ```tsx
+import { IressButton, IressModal, IressStack } from '@iress-oss/ids-components';
+
 const { showModal } = useModal();
 
     const noCloseButtonModal = (
@@ -227,6 +237,8 @@ For your components to work as previously, you will need to set up the `IressMod
 > **Note:** If you are using `IressProvider` or `IressShadow`, you do not need to add `IressModalProvider` separately — it is already included.
 
 ```tsx
+import { IressModalProvider } from '@iress-oss/ids-components';
+
 const App = () => <IressModalProvider>Rest of app here</IressModalProvider>;
 ```
 

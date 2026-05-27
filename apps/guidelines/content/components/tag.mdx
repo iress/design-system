@@ -44,6 +44,8 @@ Tags are **interactive** - they can be clicked and deleted by users.
 The `mode` prop controls the colour scheme of the tag. Use data palette colours (`10`-`90`) for non-semantic colour needs.
 
 ```tsx
+import { IressInline, IressTag } from '@iress-oss/ids-components';
+
 <IressInline gap="sm">
 {BADGE_MODES.map((mode) => (
 <IressTag key={mode} mode={mode}>
@@ -60,6 +62,8 @@ The `mode` prop controls the colour scheme of the tag. Use data palette colours 
 Use semantic status values (`danger`, `info`, `success`, `warning`) when tags need to communicate a system status.
 
 ```tsx
+import { IressInline, IressTag } from '@iress-oss/ids-components';
+
 <IressInline gap="sm">
 {STATUSES.map((status) => (
 <IressTag key={status} mode={status}>
@@ -79,6 +83,8 @@ look more interactive — useful for dropdown filter tags or any context where
 tags need to stand out.
 
 ```tsx
+import { IressInline, IressTag } from '@iress-oss/ids-components';
+
 <IressInline gap="sm">
 <IressTag bordered>
 No mode
@@ -110,6 +116,8 @@ also supported and will automatically render the tag as a `<button>`.
 Use `element="a"` to render the tag as a link.
 
 ```tsx
+import { IressTag } from '@iress-oss/ids-components';
+
 <IressTag bordered>
   Tag
 </IressTag>
@@ -123,6 +131,8 @@ Set `compact` to render a smaller tag. This is useful in dense layouts, such as
 inside inputs where tags are displayed inline.
 
 ```tsx
+import { IressTag } from '@iress-oss/ids-components';
+
 <IressTag compact />
 ```
 
@@ -153,6 +163,8 @@ You can completely override the delete button by passing a custom component to t
 If you need to manage tags that are selected from a existing list, use `IressSelect` with the `multiple` prop.
 
 ```tsx
+import { IressTagInput } from '@iress-oss/ids-components';
+
 <IressTagInput placeholder="Type and hit enter to add a tag" tagLimit={999} />
 ```
 
