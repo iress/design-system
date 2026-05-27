@@ -68,7 +68,7 @@
     "size:check": "size-limit --json",
     "dev": "concurrently \"wait-on tcp:6006 && wait-on tcp:6007 && yarn storybook\" \"yarn packages/components dev:no-open\" \"yarn packages/tokens dev:no-open\" \"yarn packages/guidelines dev\"",
     "dev:kill": "kill $(lsof -ti tcp:6005) || true; kill $(lsof -ti tcp:6006) || true; kill $(lsof -ti tcp:6007) || true; kill $(lsof -ti tcp:5555) || true",
-    "dev:stop": "pkill -f 'dev-watcher' || true; pkill -f 'ai-runner' || true; pkill -f 'build-search-index.ts --watch' || true; pkill -f 'kiro-cli-chat chat --no-interactive' || true",
+    "dev:improve:stop": "pkill -f 'ai-runner' || true; pkill -f 'kiro-cli-chat chat --no-interactive' || true",
     "prepublish": "tsx ./scripts/storybook-addon-prepublish.ts",
     "prepare": "husky && yarn build",
     "build-storybook": "storybook build",
