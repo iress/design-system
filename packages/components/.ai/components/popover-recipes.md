@@ -1,0 +1,75 @@
+# Recipes
+Popover component documentation.
+> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)## With `IressMenu`
+
+When an `IressMenu` is used inside `IressPopover`, it adds some additional functionality to the popover, including:
+
+- `IressPopover` will automatically close the popover when a menu item is clicked.
+- `IressMenu` will automatically focus the first menu item when the popover is opened.
+
+```tsx
+const [multiSelect, setMultiSelect] = useState(false);
+
+    return (
+      <IressStack gap="md" maxWidth="container.lg" px="lg" mx="auto">
+        {MENU_ROLES.map((role) => (
+          <IressRow gutter="lg" key={role} verticalAlign="middle">
+            <IressCol span={2}>
+              <IressPopover
+                {...args}
+                activator={<IressButton fluid>role={role}</IressButton>}
+                container={document.body}
+                type={role === 'listbox' || role === 'menu' ? role : undefined}
+              >
+                <IressMenu
+                  role={role}
+                  defaultSelected={3}
+                  multiSelect={multiSelect && role === 'listbox'}
+                >
+                  {menuChildren}
+                </IressMenu>
+              </IressPopover>
+            </IressCol>
+            <IressCol>
+              <MenuInPopoverRoleDescription role={role}>
+                {role === 'listbox' && (
+                  <IressToggle
+                    checked={multiSelect}
+                    onChange={() => setMultiSelect(!multiSelect)}
+                  >
+                    Multi-select
+                  </IressToggle>
+                )}
+              </MenuInPopoverRoleDescription>
+            </IressCol>
+          </IressRow>
+        ))}
+      </IressStack>
+    );
+```
+
+[View "WithMenu" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--with-menu)
+
+## Focusable children
+
+If you are using the `listbox` or `menu` type popovers, you will notice that focusable children (with the exception of `IressMenuItem`) are not automatically focusable with the arrow keys. To make them focusable, you will need to embed the focusable children using the `usePopoverItem` hook.
+
+The `usePopoverItem` hook will automatically handle the focus management for you. It has two optional arguments:
+
+- The first argument is the typeahead label of the item you are registering. This will allow it to have a keyboard shortcut to focus the item.
+- The second argument is a virtual node, which is used in `virtualFocus` enabled popovers and `IressInputPopover`, to mimic the `onKeyDown` and `onBlur` events of the original element when the item is virtually focused using `aria-activedescendant`. If not provided, nothing will happen when the element is virtually focused.
+
+The `usePopoverItem` hook returns an object with the following properties:
+
+- `isActiveInPopover`: A boolean that indicates if the item is currently focused in the popover. This can be used to style the item differently when it is focused.
+- `...popoverItemProps`: The rest of the props that you should spread on the focusable element to make it focusable.
+
+```tsx
+<UsePopoverExample />
+```
+
+[View "FocusableChildren" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--focusable-children)
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)

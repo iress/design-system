@@ -22,9 +22,9 @@ There are seven props you can use to customise the padding of any component. It 
 - `pb`: Change the padding on the bottom of a component
 
 ```tsx
-<IressSpacing bg="alt" p="xl">
+<IressPanel bg="alt" p="xl">
   A panel that has extra large padding on all sides.
-</IressSpacing>
+</IressPanel>
 ```
 
 [View "padding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--padding)
@@ -38,9 +38,9 @@ Submit
 [View "button" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--button)
 
 ```tsx
-<IressSpacing bg="alt" pb="xl" pt="spacing.1" pl="md" pr="spacing.6">
+<IressPanel bg="alt" pb="xl" pt="spacing.1" pl="md" pr="spacing.6">
   A panel that has different padding on each side.
-</IressSpacing>
+</IressPanel>
 ```
 
 [View "variablePadding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--variable-padding)
@@ -50,17 +50,17 @@ Submit
 All padding props are responsive and can be changed according to different screen sizes.
 
 ```tsx
-<IressSpacing bg="alt">
+<IressPanel bg="alt">
   A panel that has extra large padding on small screens and no padding on large screens.
-</IressSpacing>
+</IressPanel>
 ```
 
 [View "responsivePadding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-padding)
 
 ```tsx
-<IressSpacing bg="alt">
+<IressPanel bg="alt">
   A panel that has responsive padding on the vertical and horizontal axes.
-</IressSpacing>
+</IressPanel>
 ```
 
 [View "responsiveVariablePadding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-variable-padding)
@@ -91,17 +91,17 @@ There are seven props you can use to customise the margin of any component. It a
 - `mb`: Change the margin on the bottom of a component
 
 ```tsx
-<IressSpacing bg="alt" m="xl">
+<IressPanel bg="alt" m="xl">
   A panel that has the same margin on all sides.
-</IressSpacing>
+</IressPanel>
 ```
 
 [View "margin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--margin)
 
 ```tsx
-<IressSpacing bg="alt" mb="xl" mt="spacing.1" ml="md" mr="spacing.6">
+<IressPanel bg="alt" mb="xl" mt="spacing.1" ml="md" mr="spacing.6">
   A panel that has different margin on each side.
-</IressSpacing>
+</IressPanel>
 ```
 
 [View "variableMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--variable-margin)
@@ -111,17 +111,17 @@ There are seven props you can use to customise the margin of any component. It a
 All margin props are responsive and can be changed according to different screen sizes.
 
 ```tsx
-<IressSpacing bg="alt">
+<IressPanel bg="alt">
   A panel that has extra large margin on small screens and no margin on large screens.
-</IressSpacing>
+</IressPanel>
 ```
 
 [View "responsiveMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-margin)
 
 ```tsx
-<IressSpacing bg="alt">
+<IressPanel bg="alt">
   A panel that has responsive margin on the vertical and horizontal axes.
-</IressSpacing>
+</IressPanel>
 ```
 
 [View "responsiveVariableMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-variable-margin)
@@ -143,20 +143,10 @@ Negative margin is supported in the same way as positive margin. You can use the
 The `noGutter` prop removes the bottom margin of the last direct child of a component. This is useful when you have nested content inside a component with padding, such as `IressPanel` or `IressCard`, to remove unnecessary spacing in your layout.
 
 ```tsx
-<IressPanel>
-{children ?? (
-<ul>
-<li>
-{args.noGutter ? (
-<>
-Margin is removed due to <code>noGutter</code>
-</>
-) : (
-'Since lists have bottom margin, you can see there is extra white-space.'
-)}
-</li>
-</ul>
-)}
+<IressPanel noGutter>
+  <ul>
+    <li>Margin is removed due to <code>noGutter</code></li>
+  </ul>
 </IressPanel>
 ```
 

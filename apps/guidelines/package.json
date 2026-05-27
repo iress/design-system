@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"vite\" \"tsx ../../scripts/dev-watcher.ts\"",
     "build": "vite build && rm -rf ../../docs && cp -r dist ../../docs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"
@@ -22,6 +22,7 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^6.0.1",
+    "concurrently": "^9.2.1",
     "remark-gfm": "^4.0.1",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3",

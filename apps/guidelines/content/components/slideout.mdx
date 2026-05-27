@@ -30,7 +30,19 @@ import { IressSlideout } from '@iress-oss/ids-components';
 You can use state to control the slideout by setting the `show` property to `true` or `false`. To sync your state with the slideout, you can use the `onShowChange` prop, which is normally passed the set function from `useState`.
 
 ```tsx
-<SlideoutUsingState />
+import { useState } from 'react';
+import { IressSlideout, IressButton } from '@iress-oss/ids-components';
+
+const [show, setShow] = useState(false);
+
+return (
+  <>
+    <IressButton onClick={() => setShow(true)}>Open slideout</IressButton>
+    <IressSlideout heading="Controlled slideout" show={show} onShowChange={setShow}>
+      Slideout content
+    </IressSlideout>
+  </>
+);
 ```
 
 [View "ShowWithState" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slideout--show-with-state)
@@ -44,7 +56,21 @@ You can use the `IressSlideoutProvider` to open and close slideout from anywhere
 To use, wrap your `<App/>` or the component that you want to use the `useSlideout` hook with `<IressSlideoutProvider />`.
 
 ```tsx
-<AppWithSlideoutProvider {...args.slideout} />
+import { IressSlideoutProvider, IressSlideout, IressButton, useSlideout } from '@iress-oss/ids-components';
+
+const SlideoutTrigger = () => {
+  const { showSlideout } = useSlideout();
+  return <IressButton onClick={() => showSlideout('my-slideout')}>Open slideout</IressButton>;
+};
+
+const App = () => (
+  <IressSlideoutProvider>
+    <SlideoutTrigger />
+    <IressSlideout heading="Provider slideout" id="my-slideout">
+      Slideout content
+    </IressSlideout>
+  </IressSlideoutProvider>
+);
 ```
 
 [View "Provider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-provider--provider)
@@ -56,54 +82,39 @@ To use, wrap your `<App/>` or the component that you want to use the `useSlideou
 Slideouts can be used in two modes - `overlay` and `push`. In `overlay` mode the slideout sits on top of the content, useful if space is at a premium. In `push` mode the slideout will push the page container to make it smaller; this means you can see all of the page content when the page is available. Overlay is the default.
 
 ```tsx
-const { showSlideout } = useSlideout();
+import { IressSlideout, IressButton, IressPanel, IressInline, IressText, useSlideout } from '@iress-oss/ids-components';
 
-    return (
-      <IressPanel bg="alt">
-        <IressInline gap="md">
-          <IressButton onClick={() => showSlideout('overlay')}>
-            Overlay slideout
-          </IressButton>
-          <IressSlideout {...args} id="overlay" mode="overlay">
-            <h2>Overlay</h2>
-            For most situations <code>overlay</code> will be what you need,
-            which is why this is the default behaviour. You do not need to
-            specify the mode if you want your slideout to sit on top of the
-            page.
-          </IressSlideout>
+function SlideoutModes() {
+  const { showSlideout } = useSlideout();
 
-          <IressButton onClick={() => showSlideout('push')}>
-            Push slideout
-          </IressButton>
-          <IressSlideout
-            {...args}
-            id="push"
-            mode="push"
-            eleToPush="#storybook-docs, html"
-          >
-            <IressText>
-              <h2>Push</h2>
-              <p>
-                If you have a data-heavy screen where you need all of the data
-                to be visible when the slideout is open, use <code>push</code>.
-                To allow push to work you will need to supply the ID of the
-                element that needs to be pushed via the <code>eleToPush</code>{' '}
-                prop. If the ID is not supplied, or the element cannot be found,
-                the slideout will revert to <code>overlay</code> behaviour.
-              </p>
-              <p>
-                Be aware though that push will only work on larger screens
-                (&gt;1200px); on smaller screens the slideout will overlay the
-                content.
-              </p>
-              <IressPanel bg="alt">
-                <CurrentBreakpoint />
-              </IressPanel>
-            </IressText>
-          </IressSlideout>
-        </IressInline>
-      </IressPanel>
-    );
+  return (
+    <IressPanel bg="alt">
+      <IressInline gap="md">
+        <IressButton onClick={() => showSlideout('overlay')}>
+          Overlay slideout
+        </IressButton>
+        <IressSlideout heading="Slideout" id="overlay" mode="overlay">
+          <h2>Overlay</h2>
+          For most situations <code>overlay</code> will be what you need,
+          which is why this is the default behaviour.
+        </IressSlideout>
+
+        <IressButton onClick={() => showSlideout('push')}>
+          Push slideout
+        </IressButton>
+        <IressSlideout heading="Slideout" id="push" mode="push" eleToPush="#app">
+          <IressText>
+            <h2>Push</h2>
+            <p>
+              If you have a data-heavy screen where you need all of the data
+              to be visible when the slideout is open, use <code>push</code>.
+            </p>
+          </IressText>
+        </IressSlideout>
+      </IressInline>
+    </IressPanel>
+  );
+}
 ```
 
 [View "Modes" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slideout--modes)
@@ -113,7 +124,23 @@ const { showSlideout } = useSlideout();
 Slideouts can appear from the left or the right of the screen. The default is right, but you can use the `position` prop to set it to slide in from the left.
 
 ```tsx
-<SlideoutPositions />
+import { IressSlideout, IressButton, IressInline, useSlideout } from '@iress-oss/ids-components';
+
+const { showSlideout } = useSlideout();
+
+return (
+  <IressInline gap="md">
+    <IressButton onClick={() => showSlideout('right-slideout')}>Right (default)</IressButton>
+    <IressSlideout heading="Right slideout" id="right-slideout" position="right">
+      Content from the right
+    </IressSlideout>
+
+    <IressButton onClick={() => showSlideout('left-slideout')}>Left</IressButton>
+    <IressSlideout heading="Left slideout" id="left-slideout" position="left">
+      Content from the left
+    </IressSlideout>
+  </IressInline>
+);
 ```
 
 [View "Position" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slideout--position)
@@ -123,7 +150,23 @@ Slideouts can appear from the left or the right of the screen. The default is ri
 The width of your slideout can be set using the `size` prop. By default it is `sm`, but it can be made larger by setting `size` to `md`.
 
 ```tsx
-<SlideoutSizes />
+import { IressSlideout, IressButton, IressInline, useSlideout } from '@iress-oss/ids-components';
+
+const { showSlideout } = useSlideout();
+
+return (
+  <IressInline gap="md">
+    <IressButton onClick={() => showSlideout('sm-slideout')}>Small (default)</IressButton>
+    <IressSlideout heading="Small slideout" id="sm-slideout" size="sm">
+      Small slideout content
+    </IressSlideout>
+
+    <IressButton onClick={() => showSlideout('md-slideout')}>Medium</IressButton>
+    <IressSlideout heading="Medium slideout" id="md-slideout" size="md">
+      Medium slideout content
+    </IressSlideout>
+  </IressInline>
+);
 ```
 
 [View "Size" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slideout--size)
@@ -149,7 +192,25 @@ By default, slideout is set to `position: fixed` which means it will appear from
 If you're using an absolutely positioned slideout you may also want to change the vertical and horizontal positioning. By default this will be the top left or top right of the container, but you can use inline style `style={{top: '30px', height: 'calc(100% - 30px)'}}` to adjust that if you need to.
 
 ```tsx
-<AbsolutePositionSlideout />
+import { useRef } from 'react';
+import { IressSlideout, IressButton, useSlideout } from '@iress-oss/ids-components';
+
+const containerRef = useRef<HTMLDivElement>(null);
+const { showSlideout } = useSlideout();
+
+return (
+  <div ref={containerRef} style={{ position: 'relative', height: '400px', overflow: 'hidden' }}>
+    <IressButton onClick={() => showSlideout('absolute-slideout')}>Open slideout</IressButton>
+    <IressSlideout
+      heading="Absolute slideout"
+      id="absolute-slideout"
+      container={containerRef}
+      style={{ position: 'absolute' }}
+    >
+      This slideout is positioned absolutely within its container.
+    </IressSlideout>
+  </div>
+);
 ```
 
 [View "AbsolutePosition" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slideout--absolute-position)

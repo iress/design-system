@@ -91,12 +91,13 @@ When a label is set to hide on a certain breakpoint, it will be hidden on the sc
 
 ```tsx
 <IressStack gap="md">
-<IressPanel bg="alt">
-<IressText>
-<CurrentBreakpoint />
-</IressText>
-</IressPanel>
-<IressSlider />
+  <IressSlider
+    ticksAndLabels={[
+      { value: 0, label: 'Min', srOnly: { xs: true, md: false } },
+      { value: 50, label: 'Mid', srOnly: { xs: true, md: false } },
+      { value: 100, label: 'Max', srOnly: { xs: true, md: false } },
+    ]}
+  />
 </IressStack>
 ```
 

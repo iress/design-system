@@ -56,15 +56,11 @@ The `gap` prop can take an object that takes five key/value pairs that correlate
 
 ```tsx
 <IressStack gap="spacing.4">
-<IressPanel>
-<p>
-Current breakpoint: <CurrentBreakpoint />.
-</p>
-<p>
-<code>gap=&#123;{JSON.stringify(args.gap)}&#125;</code>
-</p>
-</IressPanel>
-<IressInline />
+  <IressInline gap={{ xs: 'xs', sm: 'sm', md: 'md', lg: 'lg', xl: 'xl' }}>
+    <IressPanel bg="alt">Item 1</IressPanel>
+    <IressPanel bg="alt">Item 2</IressPanel>
+    <IressPanel bg="alt">Item 3</IressPanel>
+  </IressInline>
 </IressStack>
 ```
 
@@ -83,14 +79,20 @@ Horizontal alignment of the children is controlled by the `horizontalAlign` prop
 
 ```tsx
 <IressContainer>
-<IressStack gap="spacing.10">
-{HORIZONTAL_ALIGNS.map((horizontalAlign) => (
-<IressText key={horizontalAlign}>
-<h2>{horizontalAlign}</h2>
-<IressInline horizontalAlign={horizontalAlign} />
-</IressText>
-))}
-</IressStack>
+  <IressStack gap="spacing.10">
+    <IressInline horizontalAlign="left">
+      <IressPanel bg="alt">Item 1</IressPanel>
+      <IressPanel bg="alt">Item 2</IressPanel>
+    </IressInline>
+    <IressInline horizontalAlign="center">
+      <IressPanel bg="alt">Item 1</IressPanel>
+      <IressPanel bg="alt">Item 2</IressPanel>
+    </IressInline>
+    <IressInline horizontalAlign="right">
+      <IressPanel bg="alt">Item 1</IressPanel>
+      <IressPanel bg="alt">Item 2</IressPanel>
+    </IressInline>
+  </IressStack>
 </IressContainer>
 ```
 
@@ -107,14 +109,20 @@ Vertical alignment of the children is controlled by the `verticalAlign` prop. It
 
 ```tsx
 <IressContainer>
-<IressStack gap="spacing.10">
-{VERTICAL_ALIGNS.map((verticalAlign) => (
-<IressText key={verticalAlign} textAlign="center">
-<h2>{verticalAlign}</h2>
-<IressInline verticalAlign={verticalAlign} />
-</IressText>
-))}
-</IressStack>
+  <IressStack gap="spacing.10">
+    <IressInline verticalAlign="top">
+      <IressPanel bg="alt" style={{ height: '4rem' }}>Tall</IressPanel>
+      <IressPanel bg="alt">Short</IressPanel>
+    </IressInline>
+    <IressInline verticalAlign="middle">
+      <IressPanel bg="alt" style={{ height: '4rem' }}>Tall</IressPanel>
+      <IressPanel bg="alt">Short</IressPanel>
+    </IressInline>
+    <IressInline verticalAlign="bottom">
+      <IressPanel bg="alt" style={{ height: '4rem' }}>Tall</IressPanel>
+      <IressPanel bg="alt">Short</IressPanel>
+    </IressInline>
+  </IressStack>
 </IressContainer>
 ```
 
@@ -126,7 +134,9 @@ The `IressInline` component automatically wraps children. There may be some scen
 
 ```tsx
 <IressInline gap="spacing.10" noWrap>
-  story
+  <IressPanel bg="alt">Item 1</IressPanel>
+  <IressPanel bg="alt">Item 2</IressPanel>
+  <IressPanel bg="alt">Item 3</IressPanel>
 </IressInline>
 ```
 

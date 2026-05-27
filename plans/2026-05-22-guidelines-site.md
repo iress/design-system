@@ -244,7 +244,7 @@ Phase 10 requires 3 + 7 + 9. Phase 11 requires 7 + 9. Phase 12 is the final cuto
 
 ---
 
-## Phase 7: AI-Improved Code Examples
+## Phase 7: AI-Improved Code Examples ✅
 
 > **Strategy:** `apps/guidelines/content/` is the **source of truth** for all documentation
 > (the old `.docs.mdx` files in `packages/components/` are being removed). A central skill
@@ -266,9 +266,9 @@ apps/guidelines/content/*.mdx     ← source of truth (committed, human-authored
 
 ### Task 7.1: Commit `.ai/` folder and update .gitignore
 
-- [ ] **Step 1:** Remove `packages/*/.ai/*` from `.gitignore`
-- [ ] **Step 2:** Keep `!packages/tokens/.ai/index.json` exception (or remove if redundant)
-- [ ] **Step 3:** Commit the current `.ai/` output as baseline
+- [x] **Step 1:** Remove `packages/*/.ai/*` from `.gitignore`
+- [x] **Step 2:** Keep `!packages/tokens/.ai/index.json` exception (or remove if redundant)
+- [x] **Step 3:** Commit the current `.ai/` output as baseline
 
 ### Task 7.2: Create `improve-code-examples` skill
 
@@ -311,7 +311,7 @@ The skill instructs the AI agent to:
 A central, repo-wide script that detects which AI CLI is available and invokes it
 non-interactively. Used by dev watchers, Copilot agent, and manual invocations.
 
-- [ ] **Step 1:** Create `scripts/ai-runner.ts`
+- [x] **Step 1:** Create `scripts/ai-runner.ts`
 
 **Tool detection order** (first available wins):
 
@@ -345,21 +345,21 @@ non-interactively. Used by dev watchers, Copilot agent, and manual invocations.
 - Exits with error + helpful message if no AI tool found
 - Extensible: adding a new tool = one entry in `AI_TOOLS` array; adding a new target = one entry in `TARGETS` map
 
-- [ ] **Step 2:** Add `"ai-improve": "tsx scripts/ai-runner.ts"` to root `package.json` scripts
+- [x] **Step 2:** Add `"ai-improve": "tsx scripts/ai-runner.ts"` to root `package.json` scripts
 
 ### Task 7.4: Create derive script (`scripts/derive-ai-docs.ts`)
 
 Generates `packages/components/.ai/` from `apps/guidelines/content/` for npm distribution.
 
-- [ ] **Step 1:** Create `scripts/derive-ai-docs.ts`
+- [x] **Step 1:** Create `scripts/derive-ai-docs.ts`
   - Reads `apps/guidelines/content/components/*.mdx` and `patterns/*.mdx`
   - Strips MDX frontmatter/imports, converts to plain markdown
   - Resolves `<StoryEmbed>` references → extracts story render source
   - Writes to `packages/components/.ai/{components,patterns}/*.md`
   - Generates `packages/components/.ai/index.json` manifest
   - **Incremental:** compare-before-write (skip unchanged files)
-- [ ] **Step 2:** Add `"derive:ai-docs": "tsx scripts/derive-ai-docs.ts"` to root scripts
-- [ ] **Step 3:** Do NOT wire into `yarn build` — derive + AI improve runs only during dev (see Task 7.5)
+- [x] **Step 2:** Add `"derive:ai-docs": "tsx scripts/derive-ai-docs.ts"` to root scripts
+- [x] **Step 3:** Do NOT wire into `yarn build` — derive + AI improve runs only during dev (see Task 7.5)
 
 **`.ai/` is committed.** CI just publishes whatever is in git. No derive or AI in the pipeline.
 
@@ -371,14 +371,14 @@ from `.docs.mdx`). The old script becomes obsolete once `.docs.mdx` files are re
 The dev watcher runs the full chain: derive → AI improve. This is the **only** place
 where `.ai/` gets updated.
 
-- [ ] **Step 1:** Add chokidar watcher for:
+- [x] **Step 1:** Add chokidar watcher for:
   - `apps/guidelines/content/**/*.mdx` (content changes)
   - `packages/components/src/**/*.stories.tsx` (story changes)
-- [ ] **Step 2:** On change (debounced 2s):
+- [x] **Step 2:** On change (debounced 2s):
   1. Run `derive-ai-docs.ts --files <affected>` (incremental — only changed components)
   2. Run `ai-runner.ts --target guidelines --files <affected>` (validate + improve)
-- [ ] **Step 3:** Wire into root `package.json` as `"dev:improve"` script
-- [ ] **Step 4:** Update root `yarn dev` or add `concurrently` to run both Vite + watcher
+- [x] **Step 3:** Wire into root `package.json` as `"dev:improve"` script
+- [x] **Step 4:** Update root `yarn dev` or add `concurrently` to run both Vite + watcher
 
 **Dev experience:**
 
@@ -393,15 +393,14 @@ yarn dev
 
 ### Task 7.6: Copilot agent integration
 
-- [ ] **Step 1:** Add to `.github/copilot-instructions.md`:
+- [x] **Step 1:** Add to `.github/copilot-instructions.md`:
 
-> After modifying any file in `apps/guidelines/content/`, run:
-> `npx tsx scripts/ai-runner.ts --target <target> --files <changed-files>`
-> This validates code examples against component source before committing.
+> After modifying any file in `apps/guidelines/content/`, follow the `improve-code-examples`
+> skill to validate examples, then run `npx tsx scripts/derive-ai-docs.ts` to sync `.ai/`.
 
 ### Task 7.7: Pre-commit hook (lightweight, no AI)
 
-- [ ] Add a check to the husky pre-commit hook that warns if staged `.mdx` files
+- [x] Add a check to the husky pre-commit hook that warns if staged `.mdx` files
       contain `{...args}` spreads (quick grep, no AI invocation needed)
 
 ---
@@ -620,7 +619,19 @@ packages/components/.ai/components/button.md (shipped in npm)
 - [ ] Target: initial bundle < 300KB (currently 1.1MB)
 - [ ] Verify Lighthouse performance score
 
-### Task 12.3: Transition cutover (old → new workflow)
+### Task 12.3: Simplify dev watcher (post Phase 11)
+
+After Phase 11, guidelines content uses `<StoryEmbed>` instead of inline code examples.
+The AI improve step only targets `.ai/` output (not content files), eliminating the
+write-back loop.
+
+- [ ] Update ai-runner to target `.ai/` files (not content MDX) — derive produces rough
+  examples, AI cleans them up in `.ai/` only
+- [ ] Remove `ignoreChanges` loop-prevention logic (AI no longer writes to watched content dir)
+- [ ] Watcher becomes: content/story change → derive → AI improve `.ai/` — no loop
+- [ ] Delete `apps/guidelines/.ai-improve.log` gitignore entry if unused
+
+### Task 12.4: Transition cutover (old → new workflow)
 
 Performed after Phases 7, 9, and 10 are complete:
 

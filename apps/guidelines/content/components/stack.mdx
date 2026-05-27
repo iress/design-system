@@ -51,16 +51,10 @@ The previous `gutter` prop has been replaced by `gap`, which uses the latest set
 The `gap` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
 
 ```tsx
-<IressStack gap="spacing.4">
-<IressPanel>
-<p>
-Current breakpoint: <CurrentBreakpoint />.
-</p>
-<p>
-<code>gap=&#123;{JSON.stringify(args.gap)}&#125;</code>
-</p>
-</IressPanel>
-<IressStack />
+<IressStack gap={{ xs: 'xs', sm: 'sm', md: 'md', lg: 'lg', xl: 'xl' }}>
+  <IressPanel bg="alt">Item 1</IressPanel>
+  <IressPanel bg="alt">Item 2</IressPanel>
+  <IressPanel bg="alt">Item 3</IressPanel>
 </IressStack>
 ```
 
@@ -99,12 +93,13 @@ The `verticalAlign` prop controls how content is positioned vertically within th
 Use `top`, `middle`, or `bottom` to align items within the available space, and `between`, `around`, or `evenly` to distribute extra vertical space between items (similar to `space-between`, `space-around`, and `space-evenly` in CSS flexbox).
 
 ```tsx
-<IressText>
-<h2>{args.verticalAlign}</h2>
-<IressPanel style={{ height: '1000px' }}>
-<IressStack stretch />
+<IressPanel style={{ height: '300px' }}>
+  <IressStack stretch verticalAlign="middle">
+    <IressPanel bg="alt">First item</IressPanel>
+    <IressPanel bg="alt">Second item</IressPanel>
+    <IressPanel bg="alt">Third item</IressPanel>
+  </IressStack>
 </IressPanel>
-</IressText>
 ```
 
 [View "VerticalAlign" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-stack--vertical-align)

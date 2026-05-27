@@ -1,0 +1,123 @@
+# Contextual Menu
+A compact overflow action pattern that surfaces contextual actions in a popover menu. Use this pattern for row-level or card-level secondary actions where space is constrained.
+> **Component:** `import { IressContextualMenu } from '@iress-oss/ids-components'`
+> **Storybook:** [Contextual Menu in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextual-menu--docs)```tsx
+```
+
+## Quick Start
+
+```tsx
+<IressContextualMenu />
+```
+
+## Usage
+
+Use `IressContextualMenu` when actions are related to a specific item (such as a row, card or panel) and should not dominate the layout.
+
+- Keep menus short and action-focused.
+- Prefer verbs for labels (`Edit`, `Lock`, `Delete`).
+- Place destructive actions at the end of the list.
+
+### Items
+
+Pass an array of items with `key`, `label`, optional `icon` and `onClick` handler.
+
+[View "Default" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-contextual-menu--default)
+
+## Examples
+
+### Size
+
+Use `size="small"` or `size="medium"` to match surrounding density.
+
+```tsx
+<IressStack gap="sm">
+<IressContextualMenu size="small" />
+<IressContextualMenu size="medium" />
+</IressStack>
+```
+
+[View "Sizes" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-contextual-menu--sizes)
+
+### Align
+
+Use `align` to align the menu relative to the trigger. If there is not enough space in the preferred direction, it will flip to the opposite side.
+
+```tsx
+<IressStyled p="spacing.10">
+<IressStack gap="md">
+<IressInline horizontalAlign="center" gap="sm">
+<IressContextualMenu align="top-start" />
+<IressContextualMenu align="top" />
+<IressContextualMenu align="top-end" />
+</IressInline>
+<IressInline horizontalAlign="between">
+<IressStack gap="sm">
+<IressInline horizontalAlign="left">
+<IressContextualMenu align="left-start" />
+</IressInline>
+<IressInline horizontalAlign="left">
+<IressContextualMenu align="left" />
+</IressInline>
+<IressInline horizontalAlign="left">
+<IressContextualMenu align="left-end" />
+</IressInline>
+</IressStack>
+<IressStack gap="sm">
+<IressInline horizontalAlign="right">
+<IressContextualMenu align="right-start" />
+</IressInline>
+<IressInline horizontalAlign="right">
+<IressContextualMenu align="right" />
+</IressInline>
+<IressInline horizontalAlign="right">
+<IressContextualMenu align="right-end" />
+</IressInline>
+</IressStack>
+</IressInline>
+<IressInline horizontalAlign="center" gap="sm">
+<IressContextualMenu align="bottom-start" />
+<IressContextualMenu align="bottom" />
+<IressContextualMenu align="bottom-end" />
+</IressInline>
+</IressStack>
+</IressStyled>
+```
+
+[View "Align" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-contextual-menu--align)
+
+### Bordered Trigger
+
+Use `bordered` when the trigger needs stronger visual affordance.
+
+```tsx
+<IressInline gap="sm">
+<IressContextualMenu />
+<IressContextualMenu bordered />
+</IressInline>
+```
+
+[View "Bordered" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-contextual-menu--bordered)
+
+### Themes
+
+Use `theme="dark"` on panels using `colour.neutral.20` or darker backgrounds.
+
+```tsx
+<IressInline gap="sm" bg="alt" borderRadius="radius.system.layout" p="lg">
+<IressContextualMenu />
+<IressContextualMenu bordered />
+</IressInline>
+```
+
+[View "Themes" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-contextual-menu--themes)
+
+## Accessibility
+
+- Provide a meaningful `ariaLabel` that describes the menu purpose in context. By default it is `More options...`.
+- Ensure destructive labels are explicit (for example, `Delete account`).
+- Keep item labels concise and unique within the menu.
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextual-menu--docs)

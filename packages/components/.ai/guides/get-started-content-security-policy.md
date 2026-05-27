@@ -1,0 +1,83 @@
+# Content Security Policy (CSP)
+
+> **Guide:** `@iress-oss/ids-components`
+> **Storybook:** [Content Security Policy (CSP) in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_get-started-content-security-policy--docs)
+
+IDS loads external stylesheets and fonts at runtime. If your application enforces a Content Security Policy, you need to allowlist the origins IDS loads from.
+
+## External Origins
+
+IDS components load resources from these domains:
+
+| Origin                 | Resource                                                | Loaded By                                            |
+| ---------------------- | ------------------------------------------------------- | ---------------------------------------------------- |
+| `fonts.googleapis.com` | Material Symbols icon font CSS, Inter & Ubuntu font CSS | `IressProvider`, `IressIconProvider`                 |
+| `fonts.gstatic.com`    | Font binary files (served by Google Fonts CSS)          | Google Fonts `@font-face` rules                      |
+| `cdn.iress.com`        | Font Awesome CSS (legacy v5 icon set), theme CSS        | `IressIconProvider` (fontawesome type), `IressTheme` |
+
+## Required CSP Directives
+
+Add the following origins to your Content Security Policy:
+
+```
+style-src 'self' https://fonts.googleapis.com https://cdn.iress.com;
+font-src  'self' https://fonts.gstatic.com https://cdn.iress.com;
+```
+
+If you use `IressThemeImport` (bundled themes, no CDN) instead of `IressTheme`, you can omit `cdn.iress.com` from `style-src`.
+
+---
+
+## Optional: Nonce Support for `IressShadow`
+
+`IressShadow` injects inline `<style>` tags into its Shadow DOM. If your CSP blocks inline styles, IDS supports nonce-based injection for this component. This is **optional** — most applications only need the origin allowlisting above.
+
+IDS reads a CSP nonce from a `<meta>` tag and applies it to `<style>` elements injected by `IressShadow`:
+
+```html
+<head>
+  <meta name="csp-nonce" content="<SERVER_GENERATED_NONCE>" />
+</head>
+```
+
+Your server must:
+
+1. Generate a unique nonce per request.
+2. Set it in both the `<meta>` tag and the CSP header.
+3. Ensure the nonce value matches exactly.
+
+### Example with Nonce
+
+```
+Content-Security-Policy: style-src 'self' 'nonce-abc123' https://fonts.googleapis.com https://cdn.iress.com; font-src 'self' https://fonts.gstatic.com https://cdn.iress.com;
+```
+
+```html
+<meta name="csp-nonce" content="abc123" />
+```
+
+---
+
+## How It Works
+
+- **`IressProvider`** injects `<link rel="stylesheet">` tags for default fonts (Inter, Ubuntu) from `fonts.googleapis.com`.
+- **`IressIconProvider`** injects `<link>` tags for Material Symbols from `fonts.googleapis.com` (with dynamic subsetting), or `<link>` tags for Font Awesome from `cdn.iress.com`.
+- **`IressShadow`** injects inline `<style>` tags into its Shadow DOM — this is the only component that requires a nonce when inline styles are blocked.
+
+All components use `<link>` tags for external stylesheets, which are covered by origin allowlisting alone. Only `IressShadow` calls `getNonce()` to apply a nonce to its inline `<style>` elements.
+
+---
+
+## Troubleshooting
+
+| Symptom                                        | Cause                                                 | Fix                                                                          |
+| ---------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Icons render as text (e.g. "search")           | `fonts.googleapis.com` or `fonts.gstatic.com` blocked | Add both to `style-src` and `font-src` respectively                          |
+| Console error: "Refused to load stylesheet"    | Missing origin in `style-src`                         | Add the blocked origin to `style-src`                                        |
+| Console error: "Refused to apply inline style" | Inline styles blocked and no nonce configured         | Add `<meta name="csp-nonce">` tag, or allow `'unsafe-inline'` in `style-src` |
+| Fonts load in dev but not production           | CSP only enforced in production                       | Test with CSP headers in all environments                                    |
+| Theme not applying                             | `cdn.iress.com` blocked in `style-src`                | Add `cdn.iress.com` to `style-src`, or use `IressThemeImport`                |
+
+---
+
+*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_get-started-content-security-policy--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_get-started-content-security-policy--docs)*

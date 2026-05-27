@@ -45,11 +45,11 @@ The `mode` prop controls the colour scheme of the badge. Use data palette colour
 
 ```tsx
 <IressInline gap="sm">
-{BADGE_MODES.map((mode) => (
-<IressPill key={mode} mode={mode}>
-{mode}
-</IressPill>
-))}
+  <IressPill mode="10">10</IressPill>
+  <IressPill mode="20">20</IressPill>
+  <IressPill mode="30">30</IressPill>
+  <IressPill mode="40">40</IressPill>
+  <IressPill mode="50">50</IressPill>
 </IressInline>
 ```
 
@@ -61,11 +61,10 @@ System status colours provide semantic meaning for feedback and state indication
 
 ```tsx
 <IressInline gap="sm">
-{STATUSES.map((status) => (
-<IressPill mode={status} key={status}>
-{status}
-</IressPill>
-))}
+  <IressPill mode="danger">danger</IressPill>
+  <IressPill mode="info">info</IressPill>
+  <IressPill mode="success">success</IressPill>
+  <IressPill mode="warning">warning</IressPill>
 </IressInline>
 ```
 

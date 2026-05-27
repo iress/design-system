@@ -31,11 +31,9 @@ Validation status is controlled by the status prop. It defaults to `error`.
 
 ```tsx
 <IressStack>
-{STATUSES.map((status) => (
-<IressValidationMessage key={status} status={status}>
-{messages[status]}
-</IressValidationMessage>
-))}
+  <IressValidationMessage status="error">This field is required</IressValidationMessage>
+  <IressValidationMessage status="warning">This value seems unusual</IressValidationMessage>
+  <IressValidationMessage status="success">Email is available</IressValidationMessage>
 </IressStack>
 ```
 
@@ -49,11 +47,9 @@ It is hidden by default, but can be shown by setting the `visiblePrefix` prop to
 
 ```tsx
 <IressStack>
-{STATUSES.map((status) => (
-<IressValidationMessage key={status} status={status}>
-{messages[status]}
-</IressValidationMessage>
-))}
+  <IressValidationMessage status="error" visiblePrefix>This field is required</IressValidationMessage>
+  <IressValidationMessage status="warning" visiblePrefix>This value seems unusual</IressValidationMessage>
+  <IressValidationMessage status="success" visiblePrefix>Email is available</IressValidationMessage>
 </IressStack>
 ```
 
@@ -65,18 +61,16 @@ You can use the `linkToTarget` prop to link the message to a specific target in 
 
 ```tsx
 <IressStack gap="md">
-<IressStack>
-{STATUSES.map((status) => (
-<IressValidationMessage key={status}
-status={status}
-linkToTarget={args.linkToTarget ?? ''}
->
-{messages[status]}
-</IressValidationMessage>
-))}
-</IressStack>
-<IressDivider />
-<IressInput id={args.linkToTarget} />
+  <IressStack>
+    <IressValidationMessage status="error" linkToTarget="email-input">
+      This field is required
+    </IressValidationMessage>
+    <IressValidationMessage status="warning" linkToTarget="email-input">
+      This value seems unusual
+    </IressValidationMessage>
+  </IressStack>
+  <IressDivider />
+  <IressInput id="email-input" />
 </IressStack>
 ```
 

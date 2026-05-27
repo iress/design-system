@@ -1,0 +1,241 @@
+# Popover
+A popover is panel that is toggled on/off by an activator button or text input. The panel is positioned relative to its activator element.
+> **Component:** `import { IressPopover } from '@iress-oss/ids-components'`
+> **Storybook:** [Popover in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)```tsx
+```
+
+## Quick Start
+
+```tsx
+<IressPopover>
+  basic
+</IressPopover>
+```
+
+## Usage
+
+### Activator
+
+For the popover to render, the `activator` property is required. It is the element used to trigger the popover, and works best with an `IressButton`.
+
+Anything added as the children of the `IressPopover` component will be displayed in the popover panel.
+
+```tsx
+<IressPopover>
+  basic
+</IressPopover>
+```
+
+[View "Activator" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--activator)
+
+### The `show` property
+
+You can use state to control the popover by setting the `show` property to `true` or `false`. To sync your state with the popover, you can use the `onActivated` and `onDeactivated` prop.
+
+```tsx
+<PopoverUsingState />
+```
+
+[View "ShowWithState" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--show-with-state)
+
+## Behaviour
+
+- The popover is opened when the activator is pressed
+- Once activated, the popover will set focus to popover content
+- When the activator is pressed whilst the popover is open, it will close
+- When the escape key is pressed while it is open, it will close
+- When the popover panel loses focus, it will close
+
+## Examples
+
+### Align
+
+The popover panel can be aligned in one of 12 positions relative to the activator element. The default value is `auto`.
+
+The popover panel's position will change dynamically based on the amount of space available in it's container window, so that it doesn't overflow.
+
+```tsx
+<div style={{ padding: '80px 150px' }}>
+<IressStack gap="md">
+<IressInline horizontalAlign="center" gap="sm">
+<IressPopover activator={
+<IressTooltip
+align="bottom-start"
+tooltipText="Tooltips and popovers can go together if needed!"
+>
+<IressButton>top-start</IressButton>
+</IressTooltip>
+}
+align="top-start"
+/>
+<IressPopover activator={<IressButton>top</IressButton>}
+align="top"
+/>
+<IressPopover activator={<IressButton>top-end</IressButton>}
+align="top-end"
+/>
+</IressInline>
+<IressInline horizontalAlign="between">
+<IressStack gap="sm">
+<IressInline horizontalAlign="left">
+<IressPopover activator={<IressButton>left-start</IressButton>}
+align="left-start"
+/>
+</IressInline>
+<IressInline horizontalAlign="left">
+<IressPopover activator={<IressButton>left</IressButton>}
+align="left"
+/>
+</IressInline>
+<IressInline horizontalAlign="left">
+<IressPopover activator={<IressButton>left-end</IressButton>}
+align="left-end"
+/>
+</IressInline>
+</IressStack>
+<IressStack gap="sm">
+<IressInline horizontalAlign="right">
+<IressPopover activator={<IressButton>right-start</IressButton>}
+align="right-start"
+/>
+</IressInline>
+<IressInline horizontalAlign="right">
+<IressPopover activator={<IressButton>right</IressButton>}
+align="right"
+/>
+</IressInline>
+<IressInline horizontalAlign="right">
+<IressPopover activator={<IressButton>right-end</IressButton>}
+align="right-end"
+/>
+</IressInline>
+</IressStack>
+</IressInline>
+<IressInline horizontalAlign="center" gap="sm">
+<IressPopover activator={<IressButton>bottom-start</IressButton>}
+align="bottom-start"
+/>
+<IressPopover activator={<IressButton>bottom</IressButton>}
+align="bottom"
+/>
+<IressPopover activator={<IressButton>bottom-end</IressButton>}
+align="bottom-end"
+/>
+</IressInline>
+</IressStack>
+</div>
+```
+
+[View "Align" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--align)
+
+### Width
+
+Occasionally, you may have more information to display than the width set by the theme can comfortably show.
+
+```tsx
+<IressPopover contentStyle={{ style: { maxWidth: '30rem' } }} />
+```
+
+[View "Width" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--width)
+
+### Overflow
+
+Popovers can contain a wide variety of different content, including components that use popovers themselves (like Combobox). This can cause issues with overflowing content, so by default we allow popovers to grow in height based on their content.
+
+If you need to fix the height of a popover, you can set a maximum height using the `maxHeight` and `overflowY` css on your popover's `contentStyle` prop.
+
+```tsx
+<IressInline gap="md">
+<IressPopover activator={<IressButton>Normal popover</IressButton>}
+/>
+<IressPopover activator={<IressButton>Fixed height popover</IressButton>}
+contentStyle={{ scrollable: 'y', style: { maxHeight: '200px' } }}
+/>
+</IressInline>
+```
+
+[View "Overflow" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--overflow)
+
+### Container
+
+By default, the popover will be rendered where its parent is rendered. If you need to render the popover in a different container, you can use the `container` prop.
+
+**Note:** If the `container` doesn’t exist when the portal is mounted, ensure you pass an element directly (not a ref) and specify null as the default value before it is set. This lets it wait for the root to be available.
+
+This will be the case when you are rendering into its parent container, which is not yet rendered when the popover is mounted. The example below shows how to use state instead of a reference to change where the popover is rendered.
+
+```tsx
+<PopoverParentContainer />
+```
+
+[View "ParentContainer" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--parent-container)
+
+### Using the `IressPopoverProvider`
+
+You can use the `IressPopoverProvider` to set a shared container for
+all nested popovers. This is useful when you want all popovers in a
+section of your application to render into the same DOM node, similar
+to how `IressModalProvider` and `IressSlideoutProvider` work.
+
+Individual popovers can still override the provider's container by
+setting their own `container` prop.
+
+> **Note:** If you are already using `IressProvider` or `IressShadow`,
+> you do not need to add `IressPopoverProvider` separately — it is
+> already included. To set a shared container for popovers through
+> `IressProvider`, use the `popoverContainer` prop. You can also set
+> `popoverContainer="container"` to reuse the same container that
+> modals, slideouts and toasts render into.
+
+```tsx
+<AppWithPopoverProvider />
+```
+
+[View "Provider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-provider--provider)
+
+## `IressInputPopover`
+
+If you need a popover that is triggered by input changes, you can use the `IressInputPopover` component. This component has an additional `minLength` prop that allows you to specify the minimum number of characters required before the popover is shown.
+
+### Behaviour
+
+Input popovers work slightly different to normal popovers, where the focus inside the popover is **virtual**. This means that the popover content will act as if it is in focus, but the input will still be the actual focus.
+
+- The popover is opened when the input has content that meets the `minLength` requirement
+- The popover is closed when the input no longer meets the `minLength` requirement
+- Once activated, virtual focus will be set to the popover content if it contains a menu (e.g. items will highlight as if in focus, but the user can still type in the input)
+- When the `minLength` is 0, it will open on focus
+- When the escape key is pressed while it is open, it will close
+- When the input loses focus, it will close
+
+```tsx
+<IressInputPopover>
+  basic
+</IressInputPopover>
+```
+
+[View "Activator" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input-popover--activator)
+
+## Testing
+
+Query the popover trigger, then interact to open the content:
+
+```tsx
+const trigger = screen.getByRole('button', { name: 'Open popover' });
+await user.click(trigger);
+expect(screen.getByText('Popover content')).toBeVisible();
+```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressPopover`, the following nested test IDs
+are generated automatically:
+
+| Suffix | Example | Description |
+| --- | --- | --- |
+| `activator` | `my-popover__activator` | The popover trigger element |
+| `content` | `my-popover__content` | The popover content panel |
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)

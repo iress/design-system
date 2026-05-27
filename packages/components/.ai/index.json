@@ -1,0 +1,561 @@
+{
+  "package": "@iress-oss/ids-components",
+  "urls": {
+    "storybook": "https://main--691abcc79dfa560a36d0a74f.chromatic.com"
+  },
+  "documentation": {
+    "components": [
+      {
+        "name": "Alert",
+        "description": "An alert displays a short, important message in a way that attracts the user\\",
+        "path": "components/alert.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs",
+        "propsType": "IressAlertProps",
+        "typeDeclPath": "dist/components/Alert/Alert.d.ts"
+      },
+      {
+        "name": "Autocomplete",
+        "description": "Autocomplete allow for users to fill in their input by providing suggestions as they type.",
+        "path": "components/autocomplete.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs",
+        "propsType": "IressAutocompleteProps",
+        "typeDeclPath": "dist/components/Autocomplete/Autocomplete.d.ts"
+      },
+      {
+        "name": "Breadcrumbs",
+        "description": "Breadcrumbs are a secondary navigation aid that helps users understand their current location within the site hierarchy and provides a simple way to navigate back to higher-level pages.",
+        "path": "patterns/breadcrumbs.md",
+        "category": "pattern",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs",
+        "propsType": "IressBreadcrumbsProps",
+        "typeDeclPath": "dist/components/Breadcrumbs/Breadcrumbs.d.ts"
+      },
+      {
+        "name": "Button",
+        "description": "A button is a clickable item used to perform an action.",
+        "path": "components/button.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs",
+        "propsType": "IressButtonProps",
+        "typeDeclPath": "dist/components/Button/Button.d.ts"
+      },
+      {
+        "name": "ButtonGroup",
+        "description": "ButtonGroup allows users to switch between two or more possible states. ButtonGroups are only used for actions that occur immediately after the user “flips the switch”.",
+        "path": "components/button-group.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs",
+        "propsType": "IressButtonGroupProps",
+        "typeDeclPath": "dist/components/ButtonGroup/ButtonGroup.d.ts"
+      },
+      {
+        "name": "Card",
+        "description": "Cards are used to group small, related pieces of information into one digestible unit.",
+        "path": "components/card.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-card--docs",
+        "propsType": "IressCardProps",
+        "typeDeclPath": "dist/components/Card/Card.d.ts"
+      },
+      {
+        "name": "Checkbox",
+        "description": "Checkboxes are used to let a user select one or more options for a limited number of choices. Also, works as a child of IressCheckboxGroup",
+        "path": "components/checkbox.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs",
+        "propsType": "IressCheckboxProps",
+        "typeDeclPath": "dist/components/Checkbox/Checkbox.d.ts"
+      },
+      {
+        "name": "Checkbox Group",
+        "description": "Checkbox groups allow users to make more than one choice in a set of related options.",
+        "path": "components/checkbox-group.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs",
+        "propsType": "IressCheckboxGroupProps",
+        "typeDeclPath": "dist/components/CheckboxGroup/CheckboxGroup.d.ts"
+      },
+      {
+        "name": "Col",
+        "description": "Used in conjunction with the IressRow component to layout page content",
+        "path": "components/col.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs",
+        "propsType": "IressColProps",
+        "typeDeclPath": "dist/components/Col/Col.d.ts"
+      },
+      {
+        "name": "Container",
+        "description": "IressContainer provides a means to center and horizontally pad your site’s contents.",
+        "path": "components/container.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs",
+        "propsType": "IressContainerProps",
+        "typeDeclPath": "dist/components/Container/Container.d.ts"
+      },
+      {
+        "name": "Contextual Menu",
+        "description": "A compact overflow action pattern that surfaces contextual actions in a popover menu. Use this pattern for row-level or card-level secondary actions where space is constrained.",
+        "path": "patterns/contextual-menu.md",
+        "category": "pattern",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextual-menu--docs",
+        "propsType": "IressContextualMenuProps",
+        "typeDeclPath": "dist/components/ContextualMenu/ContextualMenu.d.ts"
+      },
+      {
+        "name": "Divider",
+        "description": "A divider is a UI element that separates content in lists and layouts.",
+        "path": "components/divider.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs",
+        "propsType": "IressDividerProps",
+        "typeDeclPath": "dist/components/Divider/Divider.d.ts"
+      },
+      {
+        "name": "Dropdown Menu",
+        "description": "A component designed to filter a section based on a list of options and quickly navigate to relevant content.",
+        "path": "patterns/dropdown-menu.md",
+        "category": "pattern",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdown-menu--docs",
+        "propsType": "IressDropdownMenuProps",
+        "typeDeclPath": "dist/components/DropdownMenu/DropdownMenu.d.ts"
+      },
+      {
+        "name": "Expander",
+        "description": "Expanders are commonly used to reveal more information or details about an element or content on a page.",
+        "path": "components/expander.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs",
+        "propsType": "IressExpanderProps",
+        "typeDeclPath": "dist/components/Expander/Expander.d.ts"
+      },
+      {
+        "name": "Feedback",
+        "description": "Feedback components communicate information to users about actions, states, and processes. Choosing the right feedback component ensures users receive the right level of information at the right time without unnecessary disruption.",
+        "path": "patterns/feedback.md",
+        "category": "pattern",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-feedback--docs"
+      },
+      {
+        "name": "Field",
+        "description": "The field component is used to place label, hint and error information around form controls.",
+        "path": "components/field.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs",
+        "propsType": "IressFieldProps",
+        "typeDeclPath": "dist/components/Field/Field.d.ts"
+      },
+      {
+        "name": "Form",
+        "description": "Use the IressForm component when you want to request, validate and process data from the user.",
+        "path": "patterns/form.md",
+        "category": "pattern",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs",
+        "propsType": "IressFormProps",
+        "typeDeclPath": "dist/components/Form/Form.d.ts"
+      },
+      {
+        "name": "Icon",
+        "description": "Icons enhance experiences by visually communicating meaning, actions, status, and feedback.",
+        "path": "components/icon.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs",
+        "propsType": "IressIconProps",
+        "typeDeclPath": "dist/components/Icon/Icon.d.ts"
+      },
+      {
+        "name": "Image",
+        "description": "IressImage renders an image that resizes based on the user\\",
+        "path": "components/image.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs",
+        "propsType": "IressImageProps",
+        "typeDeclPath": "dist/components/Image/Image.d.ts"
+      },
+      {
+        "name": "Inline",
+        "description": "IressInline renders a set of components in a row with equal spacing around them, wrapping onto multiple lines when necessary.",
+        "path": "components/inline.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs",
+        "propsType": "IressInlineProps",
+        "typeDeclPath": "dist/components/Inline/Inline.d.ts"
+      },
+      {
+        "name": "Input",
+        "description": "Inputs allow a user to input and interact with data. This component should be used as a child of the IressField component to ensure the correct placement of elements like label, error & hint text.",
+        "path": "components/input.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs",
+        "propsType": "IressInputProps",
+        "typeDeclPath": "dist/components/Input/Input.d.ts"
+      },
+      {
+        "name": "InputCurrency",
+        "description": "InputCurrency allows a user to input and interact with currency number. It works just like IressInput, with new props locale and currencyCode. This component meets ISO-4217 standard",
+        "path": "components/input-currency.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs",
+        "propsType": "IressInputCurrencyProps",
+        "typeDeclPath": "dist/components/InputCurrency/InputCurrency.d.ts"
+      },
+      {
+        "name": "Label",
+        "description": "Use the IressLabel component when building bespoke form inputs and IressField is too restrictive.",
+        "path": "components/label.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs",
+        "propsType": "IressLabelProps",
+        "typeDeclPath": "dist/components/Label/Label.d.ts"
+      },
+      {
+        "name": "Link",
+        "description": "A link is used to navigate to another page or location.",
+        "path": "components/link.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs",
+        "propsType": "IressLinkProps",
+        "typeDeclPath": "dist/components/Link/Link.d.ts"
+      },
+      {
+        "name": "Menu",
+        "description": "A menu can display grouped action buttons, navigation items or headings.",
+        "path": "components/menu.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs",
+        "propsType": "IressMenuProps",
+        "typeDeclPath": "dist/components/Menu/Menu.d.ts"
+      },
+      {
+        "name": "Menu Item",
+        "description": "Menu items are headings, buttons and dividers used inside an `IressMenu`",
+        "path": "components/menu-item.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu-item--docs",
+        "propsType": "IressMenuItemProps",
+        "typeDeclPath": "dist/components/MenuItem/MenuItem.d.ts"
+      },
+      {
+        "name": "Modal",
+        "description": "Modals gather information, complete a subtask, or provide additional information without losing the context of an underlying page.",
+        "path": "components/modal.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs",
+        "propsType": "IressModalProps",
+        "typeDeclPath": "dist/components/Modal/Modal.d.ts"
+      },
+      {
+        "name": "Panel",
+        "description": "A panel is used to group related content.",
+        "path": "components/panel.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs",
+        "propsType": "IressPanelProps",
+        "typeDeclPath": "dist/components/Panel/Panel.d.ts"
+      },
+      {
+        "name": "Pill",
+        "description": "Pills are used primarily for status updates, notifications and counts.",
+        "path": "components/pill.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs",
+        "propsType": "IressPillProps",
+        "typeDeclPath": "dist/components/Pill/Pill.d.ts"
+      },
+      {
+        "name": "Placeholder",
+        "description": "A placeholder is a UI element that allows you to reserve space for content that has not been created yet, usually used for prototyping.",
+        "path": "components/placeholder.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs",
+        "propsType": "IressPlaceholderProps",
+        "typeDeclPath": "dist/components/Placeholder/Placeholder.d.ts"
+      },
+      {
+        "name": "Popover",
+        "description": "A popover is panel that is toggled on/off by an activator button or text input. The panel is positioned relative to its activator element.",
+        "path": "components/popover.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs",
+        "propsType": "IressPopoverProps",
+        "typeDeclPath": "dist/components/Popover/Popover.d.ts"
+      },
+      {
+        "name": "Progress",
+        "description": "A progress component is used to indicate to a user the completion of a set of tasks or a process.",
+        "path": "components/progress.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs",
+        "propsType": "IressProgressProps",
+        "typeDeclPath": "dist/components/Progress/Progress.d.ts"
+      },
+      {
+        "name": "Provider",
+        "description": "Provider is a component that sets up the Iress Design System for your application. It ensures that the design system is correctly configured and ready to use.",
+        "path": "components/provider.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-provider--docs",
+        "propsType": "IressProviderProps",
+        "typeDeclPath": "dist/components/Provider/Provider.d.ts"
+      },
+      {
+        "name": "Radio",
+        "description": "A radio is a single option presented with a radio button. It is used to select a single option from multiple options. It is typically used in an IressRadioGroup.",
+        "path": "components/radio.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs",
+        "propsType": "IressRadioProps",
+        "typeDeclPath": "dist/components/Radio/Radio.d.ts"
+      },
+      {
+        "name": "RadioGroup",
+        "description": "A radio group is a group of radio buttons that allows the user to select one option from multiple options, where all options are visible.",
+        "path": "components/radio-group.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio-group--docs",
+        "propsType": "IressRadioGroupProps",
+        "typeDeclPath": "dist/components/RadioGroup/RadioGroup.d.ts"
+      },
+      {
+        "name": "Readonly",
+        "description": "Readonly displays a value that cannot be edited by the user. It renders a hidden input field to ensure the value is submitted with the form.",
+        "path": "components/readonly.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs",
+        "propsType": "IressReadonlyProps",
+        "typeDeclPath": "dist/components/Readonly/Readonly.d.ts"
+      },
+      {
+        "name": "Recipes",
+        "description": "Autocomplete component documentation.",
+        "path": "components/autocomplete-recipes.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs"
+      },
+      {
+        "name": "Recipes",
+        "description": "CheckboxGroup component documentation.",
+        "path": "components/checkbox-group-recipes.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs"
+      },
+      {
+        "name": "Recipes",
+        "description": "Input component documentation.",
+        "path": "components/input-recipes.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs"
+      },
+      {
+        "name": "Recipes",
+        "description": "InputCurrency component documentation.",
+        "path": "components/input-currency-recipes.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs"
+      },
+      {
+        "name": "Recipes",
+        "description": "Popover component documentation.",
+        "path": "components/popover-recipes.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs"
+      },
+      {
+        "name": "Recipes",
+        "description": "Skeleton component documentation.",
+        "path": "components/skeleton-recipes.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs"
+      },
+      {
+        "name": "Recipes",
+        "description": "Form pattern documentation.",
+        "path": "patterns/form-recipes.md",
+        "category": "pattern",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs"
+      },
+      {
+        "name": "Row",
+        "description": "Used in conjunction with the IressCol component to lay out page content.",
+        "path": "components/row.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs",
+        "propsType": "IressRowProps",
+        "typeDeclPath": "dist/components/Row/Row.d.ts"
+      },
+      {
+        "name": "Select",
+        "description": "Selects provide select and multi-select functionality with the benefit of live filtering.",
+        "path": "components/select.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-select--docs",
+        "propsType": "IressSelectProps",
+        "typeDeclPath": "dist/components/Select/Select.d.ts"
+      },
+      {
+        "name": "Shadow",
+        "description": "The shadow pattern allows you to wrap your content in the shadow DOM, allowing you to isolate your styles from the rest of the application. This is useful when you want to create a component that has its own styles, without affecting the rest of the application (such as microfrontends).",
+        "path": "patterns/shadow.md",
+        "category": "pattern",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs",
+        "propsType": "IressShadowProps",
+        "typeDeclPath": "dist/components/Shadow/Shadow.d.ts"
+      },
+      {
+        "name": "SideNav",
+        "description": "A side navigation pattern that combines a rail (icon-only bar) with an expandable side menu panel. Provides a data-driven API where items are passed as an array, with the rail acting as the main navigation and the side menu showcasing children under each navigation group.",
+        "path": "patterns/side-nav.md",
+        "category": "pattern",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-side-nav--docs",
+        "propsType": "IressSideNavProps",
+        "typeDeclPath": "dist/components/SideNav/SideNav.d.ts"
+      },
+      {
+        "name": "Skeleton",
+        "description": "Skeletons can increase perceived performance for users. As opposed to spinners, skeletons make it feel as though things are happening/loading immediately, then the information is incrementally displayed on the screen.",
+        "path": "components/skeleton.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs",
+        "propsType": "IressSkeletonProps",
+        "typeDeclPath": "dist/components/Skeleton/Skeleton.d.ts"
+      },
+      {
+        "name": "SkipLink",
+        "description": "The skip link component allows keyboard users to quickly bypass the top-level navigation links and jump to the main content on a page.",
+        "path": "components/skip-link.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skip-link--docs",
+        "propsType": "IressSkipLinkProps",
+        "typeDeclPath": "dist/components/SkipLink/SkipLink.d.ts"
+      },
+      {
+        "name": "Slideout",
+        "description": "Slideouts are used to show additional information or to allow users to perform secondary tasks without leaving their normal workflow.",
+        "path": "components/slideout.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs",
+        "propsType": "IressSlideoutProps",
+        "typeDeclPath": "dist/components/Slideout/Slideout.d.ts"
+      },
+      {
+        "name": "Slider",
+        "description": "Sliders provide a visual indication of adjustable content, where the user can select a value from a range usually represented on a horizontal track.",
+        "path": "components/slider.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs",
+        "propsType": "IressSliderProps",
+        "typeDeclPath": "dist/components/Slider/Slider.d.ts"
+      },
+      {
+        "name": "Spinner",
+        "description": "Spinners notify the user that a task is being processed. They indicate that the app is busy, and should be used when the user has to wait for more than a few seconds.",
+        "path": "components/spinner.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs",
+        "propsType": "IressSpinnerProps",
+        "typeDeclPath": "dist/components/Spinner/Spinner.d.ts"
+      },
+      {
+        "name": "Stack",
+        "description": "Use IressStack to control vertical spacing between content with consistent present values.",
+        "path": "components/stack.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs",
+        "propsType": "IressStackProps",
+        "typeDeclPath": "dist/components/Stack/Stack.d.ts"
+      },
+      {
+        "name": "Styled",
+        "description": "The IressStyled component provides an unopinionated wrapper that gives you direct access to all supported styling properties. Use it when you need custom styling without creating a dedicated component or writing custom CSS.",
+        "path": "components/styled.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs",
+        "propsType": "IressStyledProps",
+        "typeDeclPath": "dist/components/Styled/Styled.d.ts"
+      },
+      {
+        "name": "Tab",
+        "description": "A tab is an interactive element that controls the display of other content, usually a panel",
+        "path": "components/tab.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs",
+        "propsType": "IressTabProps",
+        "typeDeclPath": "dist/components/Tab/Tab.d.ts"
+      },
+      {
+        "name": "Tab Set",
+        "description": "Tabs are used to display modular pieces of related data that do not need to be compared or accessed simultaneously.",
+        "path": "components/tab-set.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab-set--docs",
+        "propsType": "IressTabSetProps",
+        "typeDeclPath": "dist/components/TabSet/TabSet.d.ts"
+      },
+      {
+        "name": "Table",
+        "description": "Data driven component for displaying tabular data.",
+        "path": "components/table.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs",
+        "propsType": "IressTableProps",
+        "typeDeclPath": "dist/components/Table/Table.d.ts"
+      },
+      {
+        "name": "Tag",
+        "description": "Tags represent individual units in a group of selected items.",
+        "path": "components/tag.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs",
+        "propsType": "IressTagProps",
+        "typeDeclPath": "dist/components/Tag/Tag.d.ts"
+      },
+      {
+        "name": "Text",
+        "description": "The IressText component allows you to set typographic styles either on one element, or a block on HTML elements.",
+        "path": "components/text.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs",
+        "propsType": "IressTextProps",
+        "typeDeclPath": "dist/components/Text/Text.d.ts"
+      },
+      {
+        "name": "Toaster",
+        "description": "Toaster provide users with important, time-sensitive information.",
+        "path": "components/toaster.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs",
+        "propsType": "IressToasterProps",
+        "typeDeclPath": "dist/components/Toaster/Toaster.d.ts"
+      },
+      {
+        "name": "Toggle",
+        "description": "Toggles allow users to turn things on or off. When toggled, the associated change happens straight away.",
+        "path": "components/toggle.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs",
+        "propsType": "IressToggleProps",
+        "typeDeclPath": "dist/components/Toggle/Toggle.d.ts"
+      },
+      {
+        "name": "Tooltip",
+        "description": "A component that shows concise, informative text about an element when focussed upon, hovered over or on a long touch.",
+        "path": "components/tooltip.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs",
+        "propsType": "IressTooltipProps",
+        "typeDeclPath": "dist/components/Tooltip/Tooltip.d.ts"
+      },
+      {
+        "name": "Validation message",
+        "description": "A validation message is used to inform the user of the status of a form input. If there are multiple messages, they can be combined using the IressValidationSummary component.",
+        "path": "components/validation-message.md",
+        "category": "component",
+        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs",
+        "propsType": "IressValidationMessageProps",
+        "typeDeclPath": "dist/components/ValidationMessage/ValidationMessage.d.ts"
+      }
+    ]
+  }
+}

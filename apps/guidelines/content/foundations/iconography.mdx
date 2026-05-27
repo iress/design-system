@@ -59,7 +59,9 @@ The `IressIcon` component is used to render icons from the Material Symbols libr
 [View <code>IressIcon</code> documentation](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)
 
 ```tsx
-<IressIconography name="home" />
+import { IressIcon } from "@iress-oss/ids-components";
+
+<IressIcon name="home" />
 ```
 
 [View "Default" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-iconography--default)
@@ -71,36 +73,38 @@ To help with migrating, we have mapped some common Font Awesome icons to their M
 Please refer to the table below for guidance.
 
 ```tsx
+import { IressIcon, IressTable, IressText } from "@iress-oss/ids-components";
+
 <IressTable
-{...(args as object)}
-caption="Font Awesome to Material Symbols Migration Reference"
-columns={[
-{
-key: 'fontAwesome',
-label: 'Font Awesome',
-format: (icon: never) => (
-<IressText>
-<IressIcon type="fontawesome" name={icon} /> ({icon})
-</IressText>
-),
-},
-{
-key: 'materialSymbols',
-label: 'Material Symbols',
-format: (icon: never) => (
-<IressText>
-<IressIcon name={icon} /> ({icon})
-</IressText>
-),
-},
-]}
-rows={Object.entries(FA_TO_MATERIAL_MAP).map(
-([fontAwesome, materialSymbols]) => ({
-fontAwesome,
-materialSymbols,
-}),
-)}
-scope="col"
+  caption="Font Awesome to Material Symbols Migration Reference"
+  columns={[
+    {
+      key: 'fontAwesome',
+      label: 'Font Awesome',
+      format: (icon: never) => (
+        <IressText>
+          <IressIcon type="fontawesome" name={icon} /> ({icon})
+        </IressText>
+      ),
+    },
+    {
+      key: 'materialSymbols',
+      label: 'Material Symbols',
+      format: (icon: never) => (
+        <IressText>
+          <IressIcon name={icon} /> ({icon})
+        </IressText>
+      ),
+    },
+  ]}
+  rows={[
+    { fontAwesome: 'fa-home', materialSymbols: 'home' },
+    { fontAwesome: 'fa-search', materialSymbols: 'search' },
+    { fontAwesome: 'fa-user', materialSymbols: 'person' },
+    { fontAwesome: 'fa-cog', materialSymbols: 'settings' },
+    { fontAwesome: 'fa-trash', materialSymbols: 'delete' },
+  ]}
+  scope="col"
 />
 ```
 

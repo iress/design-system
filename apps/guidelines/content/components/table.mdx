@@ -31,7 +31,9 @@ To get started, the `IressTable` component only requires the `caption` and `rows
 - `rows` are an array of objects, each object represents a row in the table. The table will use the key of the first object to determine the columns, automatically made human readable if the key is camel case, snake case or kebab case.
 
 ```tsx
-<IressTable caption="My investments" />
+import { IressTable } from '@iress-oss/ids-components';
+
+<IressTable caption="My investments" rows={[{ name: 'BHP', price: 45.2 }]} />
 ```
 
 [View "AutomaticColumns" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--automatic-columns)
@@ -43,7 +45,19 @@ For more control over the columns, the `columns` prop can be used to define the 
 Each array item represents a key in the objects in your `rows` prop. If one of the keys in your `rows` prop is not defined in the `columns` prop, it will not be displayed in the table.
 
 ```tsx
-<TableCustomColumns />
+import { IressTable } from '@iress-oss/ids-components';
+
+<IressTable
+  caption="My investments"
+  columns={[
+    { key: 'name', label: 'Name' },
+    { key: 'price', label: 'Price', format: 'currency' },
+  ]}
+  rows={[
+    { name: 'BHP', price: 45.2 },
+    { name: 'CBA', price: 102.5 },
+  ]}
+/>
 ```
 
 [View "CustomColumns" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--custom-columns)
@@ -142,7 +156,21 @@ The table component provides some basic formatting. This is controlled by the `f
 To completely customise it, you can also send in a function that returns a ReactNode. It has two parameters, the original value and the row it is connected to.
 
 ```tsx
-<TableFormats />
+import { IressTable } from '@iress-oss/ids-components';
+
+<IressTable
+  caption="Formatted data"
+  columns={[
+    { key: 'name', label: 'Name', format: 'string' },
+    { key: 'price', label: 'Price', format: 'currency' },
+    { key: 'change', label: 'Change', format: 'percent' },
+    { key: 'date', label: 'Date', format: 'date' },
+  ]}
+  rows={[
+    { name: 'BHP', price: 45.2, change: 0.032, date: '2025-01-15' },
+    { name: 'CBA', price: 102.5, change: -0.01, date: '2025-02-20' },
+  ]}
+/>
 ```
 
 [View "Formats" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--formats)
@@ -154,7 +182,19 @@ Sorting can be enabled on a column by setting the `sort` property of the `TableC
 The sort button has some visually hidden text for screenreaders to signify that the column is sortable. If you need to change this (ie. for translation purposes), it can be done with the `sortableText` column option which defaults to: sortable.
 
 ```tsx
-<TableSorting />
+import { IressTable } from '@iress-oss/ids-components';
+
+<IressTable
+  caption="Sortable investments"
+  columns={[
+    { key: 'name', label: 'Name', sort: true },
+    { key: 'price', label: 'Price', format: 'currency', sort: 'desc' },
+  ]}
+  rows={[
+    { name: 'BHP', price: 45.2 },
+    { name: 'CBA', price: 102.5 },
+  ]}
+/>
 ```
 
 [View "Sorting" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--sorting)
@@ -169,7 +209,19 @@ If you need to customise the sorting logic, you can use the `sortFn` property of
 - A custom sort function that takes two arguments: `a` and `b`, which are the two rows being compared. It should return `-1`, `0` or `1` depending on the comparison.
 
 ```tsx
-<TableSortingFn {...(args as object)} />
+import { IressTable } from '@iress-oss/ids-components';
+
+<IressTable
+  caption="Custom sort logic"
+  columns={[
+    { key: 'name', label: 'Name', sort: true, sortFn: 'text' },
+    { key: 'price', label: 'Price', format: 'currency', sort: true },
+  ]}
+  rows={[
+    { name: 'BHP', price: 45.2 },
+    { name: 'CBA', price: 102.5 },
+  ]}
+/>
 ```
 
 [View "CustomSortingLogic" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--custom-sorting-logic)
@@ -192,7 +244,20 @@ The `TableColumnFilter` object accepts the following options:
 > **Note:** Column filtering is designed for selecting from discrete values. For more complex filtering needs (e.g., text search input, date ranges, or combining multiple filter criteria), use `IressDropdownMenu` with custom filter controls outside the table header.
 
 ```tsx
-<TableFiltering />
+import { IressTable } from '@iress-oss/ids-components';
+
+<IressTable
+  caption="Filterable investments"
+  columns={[
+    { key: 'name', label: 'Name', filter: true },
+    { key: 'sector', label: 'Sector', filter: { defaultValue: ['Mining'] } },
+    { key: 'price', label: 'Price', format: 'currency' },
+  ]}
+  rows={[
+    { name: 'BHP', sector: 'Mining', price: 45.2 },
+    { name: 'CBA', sector: 'Banking', price: 102.5 },
+  ]}
+/>
 ```
 
 [View "Filtering" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--filtering)
@@ -204,7 +269,24 @@ For server-side filtering, set `filterFn: false` to disable client-side row filt
 Wrap the table in `IressLoading pattern="component"` to show a skeleton on initial load and an "Updating..." overlay on subsequent filter changes.
 
 ```tsx
-<TableFilteringServerSide />
+import { IressTable } from '@iress-oss/ids-components';
+
+<IressTable
+  caption="Server-side filtered data"
+  columns={[
+    {
+      key: 'name',
+      label: 'Name',
+      filter: {
+        filterFn: false,
+        values: ['BHP', 'CBA', 'ANZ'],
+        onChange: (values) => fetchData(values),
+      },
+    },
+    { key: 'price', label: 'Price', format: 'currency' },
+  ]}
+  rows={rows}
+/>
 ```
 
 [View "ServerSideFiltering" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--server-side-filtering)
@@ -238,7 +320,9 @@ To add a vertical divider you can set the `divider` prop in the `TableColumn` to
 This can be enabled by setting the `hover` prop. This will bring attention to the row the user is hovering over, allowing users to focus on the relationship between the columns of a specific row.
 
 ```tsx
-<IressTable hover />
+import { IressTable } from '@iress-oss/ids-components';
+
+<IressTable caption="Hoverable table" hover rows={[{ name: 'BHP', price: 45.2 }]} />
 ```
 
 [View "HighlightOnHover" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--highlight-on-hover)
@@ -248,7 +332,9 @@ This can be enabled by setting the `hover` prop. This will bring attention to th
 `scope` defaults to row, which means the first cell in the row will be a `<th>`. When it is set to col the first cell in the row will be a `<td>`.
 
 ```tsx
-<IressTable scope="col" />
+import { IressTable } from '@iress-oss/ids-components';
+
+<IressTable caption="Column scoped table" scope="col" rows={[{ name: 'BHP', price: 45.2 }]} />
 ```
 
 [View "Scope" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--scope)
@@ -258,7 +344,9 @@ This can be enabled by setting the `hover` prop. This will bring attention to th
 For very simple tabular data, you have the option to hide the table header with the `hiddenHeader` prop. When this is set to true, the table header will not be rendered.
 
 ```tsx
-<IressTable hiddenHeader />
+import { IressTable } from '@iress-oss/ids-components';
+
+<IressTable caption="Simple table" hiddenHeader rows={[{ name: 'BHP', price: 45.2 }]} />
 ```
 
 [View "HiddenHeader" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--hidden-header)
@@ -270,7 +358,12 @@ The `rows` prop allows you to use `ReactNodes` as the value of a cell. This can 
 **Note:** If you are using the `sort` property, the sorting may not work properly with rich content. If this happens, either remove the `sort` property or use the `format` prop on the column to set a custom formatter.
 
 ```tsx
-<IressTable caption="My rich investments" />
+import { IressTable } from '@iress-oss/ids-components';
+
+<IressTable
+  caption="My rich investments"
+  rows={[{ name: <a href="/bhp">BHP</a>, price: 45.2 }]}
+/>
 ```
 
 [View "RichRows" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--rich-rows)
@@ -282,7 +375,13 @@ You can provide the table with some content to display when there is no row data
 This is reliant on `columns` prop to provide the information for the table header. If `columns` is not provided and there is no row data the table will not render.
 
 ```tsx
-<IressTable empty="This table has no data" />
+import { IressTable } from '@iress-oss/ids-components';
+
+<IressTable
+  caption="Empty table"
+  empty="This table has no data"
+  columns={[{ key: 'name', label: 'Name' }, { key: 'price', label: 'Price' }]}
+/>
 ```
 
 [View "EmptyState" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--empty-state)
@@ -296,7 +395,16 @@ It accepts any of the table sub-elements. To ensure best display, please make us
 **Note:** Only the `caption`, `hiddenCaption`, `hiddenHeader` and `hover` props are supported when using `children` to render a table.
 
 ```tsx
-<IressTable caption="My investments" />
+import { IressTable } from '@iress-oss/ids-components';
+
+<IressTable caption="My investments">
+  <thead>
+    <tr><th>Name</th><th>Price</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>BHP</td><td>$45.20</td></tr>
+  </tbody>
+</IressTable>
 ```
 
 [View "Static" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--static)
@@ -312,7 +420,16 @@ You can customise the rows by passing in a `rowProps` object or function. It acc
 The `compact` prop can be used to reduce the padding around the table cells and reduce the font size. This can be useful when you have a lot of data to display and allow users to see as many columns as possible.
 
 ```tsx
-<IressTable scope="col" compact alternate removeRowBorders />
+import { IressTable } from '@iress-oss/ids-components';
+
+<IressTable
+  caption="Compact table"
+  scope="col"
+  compact
+  alternate
+  removeRowBorders
+  rows={[{ name: 'BHP', price: 45.2 }]}
+/>
 ```
 
 [View "Compact" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--compact)
@@ -344,7 +461,17 @@ Enable it with the `virtualise` prop. The `virtualise` prop accepts `true` for d
   `aria-rowindex`.
 
 ```tsx
-<TableVirtualised />
+import { IressTable } from '@iress-oss/ids-components';
+
+<IressTable
+  caption="Large dataset"
+  virtualise={{ height: 400, overscan: 5 }}
+  columns={[
+    { key: 'name', label: 'Name', width: '200px' },
+    { key: 'price', label: 'Price', format: 'currency', width: '100px' },
+  ]}
+  rows={largeDataset}
+/>
 ```
 
 [View "Virtualised" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--virtualised)
@@ -354,7 +481,18 @@ Enable it with the `virtualise` prop. The `virtualise` prop accepts `true` for d
 In some cases you may have a table with multiple groups of rows inside it, however the columns are the same. For these cases, you can use the `IressTableBody` component.
 
 ```tsx
-<TableGroupedRows />
+import { IressTable, IressTableBody } from '@iress-oss/ids-components';
+
+<IressTable
+  caption="Grouped investments"
+  columns={[
+    { key: 'name', label: 'Name' },
+    { key: 'price', label: 'Price', format: 'currency' },
+  ]}
+>
+  <IressTableBody rows={[{ name: 'BHP', price: 45.2 }]} />
+  <IressTableBody rows={[{ name: 'CBA', price: 102.5 }]} />
+</IressTable>
 ```
 
 [View "Body" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table-body--body)
@@ -366,62 +504,64 @@ In some cases you may have a table with multiple groups of rows inside it, howev
 It has been exposed so you can use it in your own components to format values in the same way as the table component.
 
 ```tsx
+import { IressTable, IressTableFormattedValue } from '@iress-oss/ids-components';
+
 <IressTable
-caption="IressTableFormattedValue"
-rows={[
-{
-mode: 'string',
-example: <IressTableFormattedValue value="string" format="string" />,
-},
-{
-mode: 'number',
-example: <IressTableFormattedValue value="10000" format="number" />,
-},
-{
-mode: 'date',
-example: (
-<IressTableFormattedValue
-value={new Date('2025-11-14')}
-format="date"
-/>
-),
-},
-{
-mode: 'shortDate',
-example: (
-<IressTableFormattedValue
-value={new Date('2025-11-14')}
-format="shortDate"
-/>
-),
-},
-{
-mode: 'isoDateTime',
-example: (
-<IressTableFormattedValue
-value={new Date('2025-11-14')}
-format="isoDateTime"
-/>
-),
-},
-{
-mode: 'relativeTime',
-example: (
-<IressTableFormattedValue
-value={fourDaysAgo}
-format="relativeTime"
-/>
-),
-},
-{
-mode: 'currency',
-example: <IressTableFormattedValue value={10000} format="currency" />,
-},
-{
-mode: 'percent',
-example: <IressTableFormattedValue value={50} format="percent" />,
-},
-]}
+  caption="IressTableFormattedValue"
+  rows={[
+    {
+      mode: 'string',
+      example: <IressTableFormattedValue value="string" format="string" />,
+    },
+    {
+      mode: 'number',
+      example: <IressTableFormattedValue value="10000" format="number" />,
+    },
+    {
+      mode: 'date',
+      example: (
+        <IressTableFormattedValue
+          value={new Date('2025-11-14')}
+          format="date"
+        />
+      ),
+    },
+    {
+      mode: 'shortDate',
+      example: (
+        <IressTableFormattedValue
+          value={new Date('2025-11-14')}
+          format="shortDate"
+        />
+      ),
+    },
+    {
+      mode: 'isoDateTime',
+      example: (
+        <IressTableFormattedValue
+          value={new Date('2025-11-14')}
+          format="isoDateTime"
+        />
+      ),
+    },
+    {
+      mode: 'relativeTime',
+      example: (
+        <IressTableFormattedValue
+          value={fourDaysAgo}
+          format="relativeTime"
+        />
+      ),
+    },
+    {
+      mode: 'currency',
+      example: <IressTableFormattedValue value={10000} format="currency" />,
+    },
+    {
+      mode: 'percent',
+      example: <IressTableFormattedValue value={50} format="percent" />,
+    },
+  ]}
 />
 ```
 

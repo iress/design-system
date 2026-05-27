@@ -1,0 +1,293 @@
+# Input
+Inputs allow a user to input and interact with data. This component should be used as a child of the IressField component to ensure the correct placement of elements like label, error & hint text.
+> **Component:** `import { IressInput } from '@iress-oss/ids-components'`
+> **Storybook:** [Input in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)```tsx
+```
+
+## Quick Start
+
+```tsx
+<IressInput placeholder="Enter your name" />
+```
+
+## Examples
+
+### Types
+
+The input component's `type` can be set to one of the following value: `text` (default), `date`, `email`, `number`, `password`, `search`, `tel`, `url`, `time`, `color` and `file`.
+
+For more information about each type, please see the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types).
+
+```tsx
+<IressStack gap="md">
+{/* Copied from: HTMLInputTypeAttribute */}
+{[
+'text',
+'color',
+'date',
+'datetime-local',
+'email',
+'file',
+'month',
+'number',
+'password',
+'search',
+'tel',
+'time',
+'url',
+'week',
+].map((type) => (
+<IressInput placeholder={placeholder ?? `${capitalizeFirstLetter(type)} input`}
+type={type}
+key={type}
+/>
+))}
+</IressStack>
+```
+
+[View "Types" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--types)
+
+> [!NOTE]
+> **Hidden inputs**
+>
+> If you need to use a hidden input in a form, you can use a native Input
+>   element with its `type` set to `hidden`. Remember to set the `name` attribute
+>   so it can be included in form submissions.
+
+### Input modes
+
+The `inputmode` attribute provides a hint to browsers for devices with onscreen keyboards (usually mobile devices) to help them decide which keyboard to display when a user has selected any input or textarea element.
+
+For more information about each mode (and their expected user experience), please see the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode).
+
+```tsx
+<IressStack gap="md">
+{inputModes.map((inputMode) => (
+<IressInput placeholder={
+placeholder ??
+`${capitalizeFirstLetter(
+inputMode,
+)} mode, usually best used when type="${inputMode}" `
+}
+inputMode={inputMode}
+key={inputMode}
+/>
+))}
+</IressStack>
+```
+
+[View "InputModes" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--input-modes)
+
+### File uploads
+
+When using the `type="file"` attribute, the input allows users to select one or more files from their device. The appearance and behavior are controlled by the browser, and you can use the `onChange` handler to capture the selected files.
+
+```tsx
+const { success } = useToaster();
+    return (
+      <IressField label="File upload">
+        <IressInput
+          {...args}
+          onChange={(e) =>
+            success({
+              content: `File uploaded: ${e.target.files?.[0].name}`,
+            })
+          }
+        />
+      </IressField>
+    );
+```
+
+[View "FileType" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--file-type)
+
+### Clearable
+
+By setting the `clearable` prop to `true` a clear button will appear when the user has entered a value into the input.
+
+Clearing will set the focus on the input and trigger the `onClear` handler. Use this handler to clear the input value if your input is controlled.
+
+```tsx
+<IressInput clearable placeholder="Search" />
+```
+
+[View "Clearable" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--clearable)
+
+### Sizing
+
+Inputs can be resized to suit a specific number of characters. This sets an expectation of what data a user has to enter; for example using the `Sixteen` width for a credit card number.
+
+The width in this case refers to the actual input and ensures that it is wide enough for a set number of characters. If you add any appended or prepended content, the overall size of the `IressInput` will increase.
+
+Widths can also be set as a percentage, allowing the input to take up a proportion of the width of its container. In this case, the width of the actual input decreases if you add appended or prepended content.
+
+```tsx
+<IressStack gap="md">
+{FORM_ELEMENT_WIDTHS.map((width) => (
+<IressInput placeholder={placeholder ?? width}
+width={width}
+key={width}
+/>
+))}
+</IressStack>
+```
+
+[View "Sizing" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--sizing)
+
+### Textareas
+
+You can also use `IressInput` to render a `textarea` instead of an `input`. Simply set the rows prop to the number of lines of text you'd like to display. This will set the height of the `textarea`; if a user enters more lines of text than the number of rows, a scrollbar will be displayed.
+
+```tsx
+<IressInput rows={5} />
+```
+
+[View "TextAreas" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--text-areas)
+
+### Prepend & Append
+
+Content (typically icons) can be added via the `prepend` and `append` props on `IressInput`.
+
+- **`prepend`** — Appears before the input
+- **`append`** — Appears after the input
+
+> **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
+
+```tsx
+<IressStack gap="md">
+<IressInput prepend={prepend ?? <IressIcon name="search" />}
+placeholder={placeholder ?? 'Prepend slot'}
+/>
+
+<IressInput append={append ?? <IressIcon name="search" />}
+placeholder={placeholder ?? 'Append slot'}
+/>
+
+<IressInput prepend={prepend ?? <IressIcon name="search" />}
+placeholder={placeholder ?? 'Prepend slot'}
+/>
+
+<IressInput append={append ?? <IressIcon name="search" />}
+placeholder={placeholder ?? 'Append slot'}
+/>
+</IressStack>
+```
+
+[View "Slots" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--slots)
+
+### Actions
+
+The `actions` prop allows you to add buttons to the input. These buttons will appear next to the input and can be used for actions such as copying the input value to the clipboard or triggering a search.
+
+```tsx
+<IressInput placeholder="Input with action button" />
+```
+
+[View "Actions" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--actions)
+
+### Read only
+
+The `readOnly` prop can be set to prevent the user from changing the value of the input. This will change the input to a custom read-only style and the user will not be able to interact with the input.
+
+If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs).
+
+```tsx
+<IressInput readOnly value="Value" />
+```
+
+[View "ReadOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--read-only)
+
+### Formatter
+
+`formatter` allows you to display the value in a different format when the input is not focused. A typical use case is to format a string with currency symbols and commas.
+
+This prop powers the `IressInputCurrency` component to allow friendly and consistent currency display in Iress products.
+
+**Notes:**
+
+- When `formatter` is set, the `type` of the input is changed to `text` when not in focus. Keep this in mind when you are testing the component. If you have set the `type` to number and have set a `formatter`, the role of the input will be `textbox` when not in focus, but `spinbutton` when in focus.
+- The value of the native input will be the formatted value, not the raw value. If you need the raw value, you can use the `onChange` prop to capture the raw value.
+
+The example below changes the value entered to uppercase when the input is not focused.
+
+```tsx
+<IressInput placeholder="Enter a string and it will show in UPPERCASE when not focused, and show the raw value on focus" />
+```
+
+[View "Formatter" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--formatter)
+
+#### Currency formatting example
+
+A common use case for the formatter is to display currency values with proper formatting. The following example shows how to format numbers as currency when the input is not focused:
+
+```tsx
+<IressInput defaultValue={0.00} placeholder="Enter any number and it will show in currency format when the input is not focused" type="number" />
+```
+
+[View "CurrencyFormatter" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--currency-formatter)
+
+### Auto-growing textareas
+
+For textareas (when `rows` prop is set), you can enable the `autoGrow` prop to automatically expand the textarea height as the user types more lines. This provides a better user experience than forcing users to scroll within a fixed-height textarea.
+
+```tsx
+<IressInput rows={1} autoGrow />
+```
+
+[View "AutoGrow" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--auto-grow)
+
+### `variant`
+
+The `variant` prop allows you to apply different styles to the input.
+
+- `search`: Used for search inputs, you can use the `prepend` or `append` prop to add a search icon.
+
+```tsx
+<IressInput variant="search" placeholder="Start your search..." />
+```
+
+[View "Variant" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--variant)
+
+## `onChange` and `onInput`
+
+As of version 5, the `onChange` and `onInput` events are now consistent with how React handles the events. This means that the `onChange` event will fire at the same time as `onInput`.
+
+## Testing
+
+Query the input by its role:
+
+```tsx
+const input = screen.getByRole('textbox', { name: 'Email' });
+```
+
+For number inputs, use `spinbutton`:
+
+```tsx
+const input = screen.getByRole('spinbutton', { name: 'Quantity' });
+```
+
+### Gotchas
+
+- **formatter changes the role**: When `formatter` is set on a `type="number"`
+  input, the role changes between `textbox` (blurred) and `spinbutton`
+  (focused).
+- **readOnly removes the input role**: When `readOnly` is set, the textbox role
+  is removed. The value is displayed as plain text and a hidden `<input>`
+  preserves the form value.
+- **Textarea vs Input test IDs**: When `rows` is set, the component renders a
+  `<textarea>` with a `__textarea` test ID suffix. Without `rows`, it renders an
+  `<input>` with a `__input` suffix.
+
+  ```tsx
+  // Single-line input
+  screen.getByTestId('my-input__input');
+
+  // Textarea (rows > 0)
+  screen.getByTestId('my-input__textarea');
+  ```
+
+- **clearable inputs**: The clear button only appears when the input has a
+  value. After clearing, focus returns to the input.
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)

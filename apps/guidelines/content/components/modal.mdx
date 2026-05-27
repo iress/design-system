@@ -41,7 +41,19 @@ For a full comparison of feedback components, see the [Feedback pattern](https:/
 You can use state to control the modal by setting the `show` property to `true` or `false`. To sync your state with the modal, you can use the `onShowChange` prop, which is normally passed the set function from `useState`.
 
 ```tsx
-<ModalUsingState />
+import { useState } from 'react';
+import { IressModal, IressButton } from '@iress-oss/ids-components';
+
+const [show, setShow] = useState(false);
+
+return (
+  <>
+    <IressButton onClick={() => setShow(true)}>Open Modal</IressButton>
+    <IressModal heading="Modal Header" show={show} onShowChange={setShow}>
+      Modal content
+    </IressModal>
+  </>
+);
 ```
 
 [View "ShowWithState" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-modal--show-with-state)
@@ -55,7 +67,26 @@ You can use the `IressModalProvider` to open and close modals from anywhere in y
 To use, wrap your `<App/>` or the component that you want to use the `useModal` hook with `<IressModalProvider />`.
 
 ```tsx
-<AppWithModalProvider {...args.modal} />
+import { IressModalProvider, IressModal, IressButton, useModal } from '@iress-oss/ids-components';
+
+const App = () => {
+  const { showModal } = useModal();
+
+  return (
+    <>
+      <IressButton onClick={() => showModal('my-modal')}>Open Modal</IressButton>
+      <IressModal heading="Modal Header" id="my-modal">
+        Modal content
+      </IressModal>
+    </>
+  );
+};
+
+const Root = () => (
+  <IressModalProvider>
+    <App />
+  </IressModalProvider>
+);
 ```
 
 [View "Provider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-provider--provider)
@@ -74,6 +105,8 @@ To use, wrap your `<App/>` or the component that you want to use the `useModal` 
 The `heading` prop can be used to set a heading for the modal. This will be rendered in the header of the modal, and will be announced by screen readers when the modal is opened.
 
 ```tsx
+import { IressModal } from '@iress-oss/ids-components';
+
 <IressModal heading="Modal heading" />
 ```
 
@@ -84,6 +117,8 @@ The `heading` prop can be used to set a heading for the modal. This will be rend
 Use the `footer` prop to place content underneath the main content. Usually used for extra controls like buttons etc.
 
 ```tsx
+import { IressModal } from '@iress-oss/ids-components';
+
 <IressModal heading="Modal Header">
   Normal modal content
 </IressModal>
@@ -108,6 +143,8 @@ The `fixedFooter` prop can be used to set the footer to be fixed to the bottom o
 >   should fix the issue.
 
 ```tsx
+import { IressModal } from '@iress-oss/ids-components';
+
 <IressModal heading="Modal Header" fixedFooter />
 ```
 
@@ -120,7 +157,11 @@ The `size` prop can be set to `sm`, `md` or `lg`. It defaults to `md`.
 Below is a guide on when to use which size.
 
 ```tsx
-<ModalSizes />
+import { IressModal } from '@iress-oss/ids-components';
+
+<IressModal heading="Small Modal" size="sm">Small modal content</IressModal>
+<IressModal heading="Medium Modal" size="md">Medium modal content</IressModal>
+<IressModal heading="Large Modal" size="lg">Large modal content</IressModal>
 ```
 
 [View "Size" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-modal--size)
@@ -134,7 +175,9 @@ The `width` prop can take an object that takes five key/value pairs that correla
 If you set a responsive `width`, the modal becomes full width on screens smaller than the value you specified. For example, if you want to create a large modal on medium screens and above:
 
 ```tsx
-  <IressModal size="lg" width={{ md: 'overlay.lg' }}>
+import { IressModal } from '@iress-oss/ids-components';
+
+<IressModal size="lg" width={{ md: 'overlay.lg' }}>
 ```
 
 [View "ResponsiveSize" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-modal--responsive-size)
@@ -149,7 +192,17 @@ When `status` is set:
 - The `actions` prop is enabled, allowing you to provide buttons for user actions related to the status.
 
 ```tsx
-<ModalStatuses />
+import { IressModal } from '@iress-oss/ids-components';
+
+<IressModal heading="Danger" status="danger" actions={[{ children: 'Confirm' }]}>
+  Something went wrong.
+</IressModal>
+<IressModal heading="Success" status="success" actions={[{ children: 'Done' }]}>
+  Action completed successfully.
+</IressModal>
+<IressModal heading="Warning" status="warning" actions={[{ children: 'Proceed' }]}>
+  Please review before continuing.
+</IressModal>
 ```
 
 [View "Status" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-modal--status)
@@ -161,59 +214,61 @@ For instances where you require the user's full attention and you want to ensure
 **Note:** As these options remove the default handling of the closing the modal, please ensure you provide a clear way for the user to close the modal.
 
 ```tsx
+import { IressModal, IressButton, IressStack, useModal } from '@iress-oss/ids-components';
+
 const { showModal } = useModal();
 
-    const noCloseButtonModal = (
-      <IressModal
-        {...args}
-        id="no-close-button"
-        noCloseButton
-        footer={
-          <IressButton onClick={() => showModal('no-close-button', false)}>
-            Close
-          </IressButton>
-        }
-      />
-    );
+const noCloseButtonModal = (
+  <IressModal
+    heading="Confirm action"
+    id="no-close-button"
+    noCloseButton
+    footer={
+      <IressButton onClick={() => showModal('no-close-button', false)}>
+        Close
+      </IressButton>
+    }
+  />
+);
 
-    const bothModal = (
-      <IressModal
-        {...args}
-        id="both"
-        disableBackdropClick
-        noCloseButton
-        footer={
-          <IressButton onClick={() => showModal('both', false)}>
-            Close
-          </IressButton>
-        }
-      />
-    );
+const bothModal = (
+  <IressModal
+    heading="Confirm action"
+    id="both"
+    disableBackdropClick
+    noCloseButton
+    footer={
+      <IressButton onClick={() => showModal('both', false)}>
+        Close
+      </IressButton>
+    }
+  />
+);
 
-    return (
-      <IressStack gap="md">
-        <IressButton onClick={() => showModal('disable-backdrop-click')} fluid>
-          Disable backdrop click
-        </IressButton>
-        <IressModal
-          {...args}
-          id="disable-backdrop-click"
-          disableBackdropClick
-        />
+return (
+  <IressStack gap="md">
+    <IressButton onClick={() => showModal('disable-backdrop-click')} fluid>
+      Disable backdrop click
+    </IressButton>
+    <IressModal
+      heading="Confirm action"
+      id="disable-backdrop-click"
+      disableBackdropClick
+    />
 
-        <IressButton onClick={() => showModal('no-close-button')} fluid>
-          No close button (please provide one, if you decide to hide the close
-          button)
-        </IressButton>
-        {noCloseButtonModal}
+    <IressButton onClick={() => showModal('no-close-button')} fluid>
+      No close button (please provide one, if you decide to hide the close
+      button)
+    </IressButton>
+    {noCloseButtonModal}
 
-        <IressButton onClick={() => showModal('both')} fluid>
-          Both (If you hide the close button, ensure you provide another way to
-          close the modal)
-        </IressButton>
-        {bothModal}
-      </IressStack>
-    );
+    <IressButton onClick={() => showModal('both')} fluid>
+      Both (If you hide the close button, ensure you provide another way to
+      close the modal)
+    </IressButton>
+    {bothModal}
+  </IressStack>
+);
 ```
 
 [View "DisableClosing" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-modal--disable-closing)
@@ -227,6 +282,8 @@ For your components to work as previously, you will need to set up the `IressMod
 > **Note:** If you are using `IressProvider` or `IressShadow`, you do not need to add `IressModalProvider` separately — it is already included.
 
 ```tsx
+import { IressModalProvider } from '@iress-oss/ids-components';
+
 const App = () => <IressModalProvider>Rest of app here</IressModalProvider>;
 ```
 

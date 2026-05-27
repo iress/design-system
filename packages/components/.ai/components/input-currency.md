@@ -1,0 +1,89 @@
+# InputCurrency
+InputCurrency allows a user to input and interact with currency number. It works just like IressInput, with new props locale and currencyCode. This component meets ISO-4217 standard
+> **Component:** `import { IressInputCurrency } from '@iress-oss/ids-components'`
+> **Storybook:** [InputCurrency in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)```tsx
+```
+
+## Quick Start
+
+```tsx
+<IressInputCurrency defaultValue={12345.678} locale="en-AU" currencyCode="AUD" />
+```
+
+## Examples
+
+### Different Locale and CurrencyCode
+
+Display the GBP with `locale="en-GB"` and `currencyCode="GBP"` props (must pass both together)
+
+```tsx
+<IressInputCurrency locale="en-GB" currencyCode="GBP" placeholder="Enter amount and dispay currency currency separator on blur" />
+```
+
+[View "GBP" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input-currency--gbp)
+
+Display the JPY with `locale="ja-JPY"` and `currencyCode="JPY"` props (must pass both together)
+
+```tsx
+<IressInputCurrency defaultValue={12345678} locale="ja-JP" currencyCode="JPY" placeholder="Enter amount and dispay currency currency separator on blur" />
+```
+
+[View "JPY" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input-currency--jpy)
+
+### With Symbol
+
+Display the currency symbol with `withSymbol` props
+
+```tsx
+<IressInputCurrency withSymbol placeholder="Enter amount and dispay currency symbol on blur" />
+```
+
+[View "WithSymbol" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input-currency--with-symbol)
+
+### More Format Options
+
+Pass more format options with `formatOptions` props. More format options in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat">here</a>
+
+```tsx
+<IressInputCurrency placeholder="Pass and play around with other native Intl.NumberFormat options to the code sandbox" />
+```
+
+[View "FormatOptions" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input-currency--format-options)
+
+### Read Only
+
+The `readOnly` prop can be set to prevent the user from changing the value of the input. This will change the input to a custom read-only style and the user will not be able to interact with the input. If you want to make the number align to right, please pass `alignRight` together.
+
+```tsx
+<IressInputCurrency readOnly alignRight withSymbol />
+```
+
+[View "ReadOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input-currency--read-only)
+
+### Align Right
+
+Set the input content align to right with `alignRight` prop, which is more friendly for number input.
+
+```tsx
+<IressInputCurrency alignRight />
+```
+
+[View "AlignRight" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input-currency--align-right)
+
+## Testing
+
+Query the currency input by its role. Note that when a `formatter` is active,
+the input role changes between `textbox` (blurred) and `spinbutton` (focused):
+
+```tsx
+const input = screen.getByRole('textbox', { name: 'Amount' });
+```
+
+### Gotchas
+
+- **readOnly removes the input role**: When `readOnly` is set, the textbox role
+  is removed and the formatted value is displayed as plain text.
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)

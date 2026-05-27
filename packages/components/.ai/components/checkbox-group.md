@@ -1,0 +1,174 @@
+# Checkbox Group
+Checkbox groups allow users to make more than one choice in a set of related options.
+> **Component:** `import { IressCheckboxGroup } from '@iress-oss/ids-components'`
+> **Storybook:** [Checkbox Group in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs)```tsx
+```
+
+## Quick Start
+
+```tsx
+<IressCheckboxGroup name="preferences" />
+```
+
+## Examples
+
+### Checkbox children
+
+Individual checkboxes can be passed directly into `IressCheckboxGroup`.
+
+**Note:** The `mapCheckboxGroupOptions` helper function, originally used to map options to `IressCheckbox` components, is now deprecated. Instead, you can use `array.map` to map the options to `IressCheckbox` components.
+
+```tsx
+<IressCheckboxGroup name="let-them-eat-cake" />
+```
+
+[View "CheckboxChildren" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox-group--checkbox-children)
+
+### Default checked
+
+The default checked state of the checkbox children should always be set using the `defaultValue` prop (not directly on the checkbox component).
+
+The `defaultValue` prop can contain an array of strings, numbers or booleans.
+
+[View "DefaultChecked" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox-group--default-checked)
+
+### Changing the checked state
+
+The `value` prop can be updated if you need to change the checked state without interacting with the checkboxes.
+
+For example, if you want to clear down the selected options:
+
+```tsx
+<CheckboxGroupUsingState />
+```
+
+[View "Controlled" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox-group--controlled)
+
+### Layout
+
+The `layout` prop controls how the checkbox group is displayed and can have three basic layouts:
+
+- **Stack (Default):** Checkboxes are laid out vertically. Labels are only as wide as their text.
+- **Block:** Same as Stack, but labels take up the full width of the container.
+- **Inline:** Checkboxes are laid out horizontally. Labels are only as wide as their text.
+
+```tsx
+<IressText>
+<h3>block</h3>
+<IressCheckboxGroup layout="block" />
+<h3>inline</h3>
+<IressCheckboxGroup layout="inline" />
+<h3>stack</h3>
+<IressCheckboxGroup layout="stack" />
+</IressText>
+```
+
+[View "Layout" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox-group--layout)
+
+### Hidden checkboxes
+
+You can use the `hiddenCheckbox` prop to create custom checkboxes. When enabled, the actual checkbox will be visually hidden, allowing you to create more interesting controls. The checked state will be shown by the label's border, which is thicker when the checkbox is checked.
+
+When `hiddenCheckbox` is enabled, the label will have no padding. Padding can be added by using an `IressPanel`.
+
+```tsx
+<IressField
+label="I'd like to discuss the following with my financial adviser:"
+hint="Select all that apply"
+>
+<IressCheckboxGroup>...</IressCheckboxGroup>
+</IressField>
+```
+
+[View "HiddenCheckboxes" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox-group--hidden-checkboxes)
+
+### Laying out custom checkboxes
+
+The checkbox group's `layout` prop gives you some default options to help control the layout of your controls. But sometimes you need more granular control, which you can achieve with a bit of custom CSS.
+
+The example below uses CSS grid to give us evenly spaced / sized checkboxes, which will wrap on to new lines as the screen size reduces. The grid wrapper element is a div that wraps around the `<IressCheckbox>` elements, as shown by the dashed border. Use the grab handle in the bottom right-hand corner of the grid wrapper to see how the controls change size to respond to the container's width.
+
+```tsx
+<IressField
+label="I'd like to discuss the following with my financial adviser:"
+hint="Select all that apply"
+>
+<IressCheckboxGroup>
+<div
+style={{
+display: 'grid',
+gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+gridAutoRows: '1fr',
+gridGap: '16px',
+width: '100%',
+padding: '0.5rem',
+border: '1px dashed hsl(43deg 100% 45%)',
+resize: 'horizontal',
+overflow: 'auto',
+}}
+>
+...
+</div>
+</IressCheckboxGroup>
+</IressField>
+```
+
+[View "CustomCheckboxGroupLayout" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox-group--custom-checkbox-group-layout)
+
+### Read only
+
+The `readOnly` prop changes how the checkbox group is rendered. It will only render the children that are checked (alongside a hidden input that contains the `value` if it was set), otherwise it not be rendered.
+
+It is understandable that this may not be the desired behavior for all use cases. If you need a checkbox group that is not editable, but still visible, simply do not set the `readOnly` prop and set the `value` prop instead.
+
+```tsx
+<IressCheckboxGroup readOnly />
+```
+
+[View "ReadOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox-group--read-only)
+
+### Touch
+
+The `touch` prop adds the button-like border and padding to checkbox.
+
+```tsx
+<IressCheckboxGroup variant="touch" />
+```
+
+[View "Touch" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox-group--touch)
+
+## Testing
+
+Query checkboxes within the group by their role:
+
+```tsx
+const checkboxes = screen.getAllByRole('checkbox');
+await user.click(screen.getByRole('checkbox', { name: 'Option A' }));
+```
+
+Query the group itself by its `group` role:
+
+```tsx
+const group = screen.getByRole('group', { name: 'Select options' });
+```
+
+### Disambiguating multiple checkbox groups
+
+Use `within` to scope queries when multiple groups share the same option labels:
+
+```tsx
+const group = screen.getByRole('group', { name: 'Interests' });
+const option = within(group).getByRole('checkbox', { name: 'Music' });
+```
+
+### Gotchas
+
+- **readOnly mode**: When `readOnly` is set, all checkbox roles are removed from
+  the DOM. Only selected options' label text and hidden `<input>` elements
+  remain. If nothing is selected, the group renders empty.
+- **onChange returns an array**: The `onChange` callback receives the full array
+  of selected values, not just the changed item.
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs)

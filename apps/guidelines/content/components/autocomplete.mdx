@@ -32,6 +32,8 @@ There is no validation done between the suggestions and the input value. They ar
 The `defaultValue` prop can be used to set the initial value of the input. The value will be managed by the component.
 
 ```tsx
+import { IressAutocomplete } from '@iress-oss/ids-components';
+
 <IressAutocomplete defaultValue="Option 1" />
 ```
 
@@ -42,7 +44,26 @@ The `defaultValue` prop can be used to set the initial value of the input. The v
 The `value` prop can be used to completely control the state of the component. Use the `onChange` and `onClear` props to sync your state with the component.
 
 ```tsx
-<AutocompleteUsingState />
+import { useState } from 'react';
+import { IressAutocomplete } from '@iress-oss/ids-components';
+
+function ControlledAutocomplete() {
+  const [value, setValue] = useState('');
+
+  return (
+    <IressAutocomplete
+      value={value}
+      onChange={(e, newValue) => setValue(newValue ?? '')}
+      onClear={() => setValue('')}
+      options={[
+        { label: 'Australia' },
+        { label: 'Canada' },
+        { label: 'United Kingdom' },
+        { label: 'United States' },
+      ]}
+    />
+  );
+}
 ```
 
 [View "Controlled" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--controlled)
@@ -62,7 +83,15 @@ To use the suggestion functionality, you can provide an array of `LabelValueMeta
 If you would like to render suggestions from the server, you can pass a function to the `options` prop. It accepts a string parameter and returns a promise that resolves to an array of `LabelValueMeta[]` objects.
 
 ```tsx
-<AutocompleteUsingAsync />
+import { IressAutocomplete } from '@iress-oss/ids-components';
+
+const searchCountries = async (query: string) => {
+  const response = await fetch(`/api/countries?search=${query}`);
+  const data = await response.json();
+  return data.map((item: { name: string }) => ({ label: item.name }));
+};
+
+<IressAutocomplete options={searchCountries} placeholder="Search countries..." />
 ```
 
 [View "AsyncOptions" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--async-options)
@@ -74,7 +103,19 @@ When using asynchronous options, you can set a minimum number of characters requ
 By default, async searches are triggered after 1 character. Setting a higher value (e.g., 3) means no search request will be made and no loading spinner will appear until the user types at least that many characters.
 
 ```tsx
-<AutocompleteUsingAsync />
+import { IressAutocomplete } from '@iress-oss/ids-components';
+
+const searchCountries = async (query: string) => {
+  const response = await fetch(`/api/countries?search=${query}`);
+  const data = await response.json();
+  return data.map((item: { name: string }) => ({ label: item.name }));
+};
+
+<IressAutocomplete
+  options={searchCountries}
+  minSearchLength={3}
+  placeholder="Type at least 3 characters..."
+/>
 ```
 
 [View "AsyncOptionsMinSearchLength" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--async-options-min-search-length)
@@ -115,6 +156,8 @@ There is a key difference:
 The `autoSelect` prop will automatically select the highlighted option when the user blurs the autocomplete. This is set to true by default, but can be switched off.
 
 ```tsx
+import { IressAutocomplete } from '@iress-oss/ids-components';
+
 <IressAutocomplete autoSelect={false} placeholder="Should no longer auto-select when an item is highlighted" />
 ```
 
@@ -127,6 +170,8 @@ Autocomplete extends `IressInput`, hence it has the same properties as `IressInp
 It does have some defaults to help with user experience. `append` automatically has a search icon, and `clearable` is set to true by default.
 
 ```tsx
+import { IressAutocomplete } from '@iress-oss/ids-components';
+
 <IressAutocomplete width={12} />
 ```
 
@@ -137,6 +182,8 @@ It does have some defaults to help with user experience. `append` automatically 
 If you would like to show a message when there are no results, you can use the `noResultsText` prop. It accepts any React node.
 
 ```tsx
+import { IressAutocomplete } from '@iress-oss/ids-components';
+
 <IressAutocomplete placeholder="Type "no" to see the no results text" />
 ```
 
@@ -157,6 +204,8 @@ The `debounceThreshold` prop can be used to set the time in milliseconds to wait
 By default there is a debounce, but it can be removed by setting it to `0`.
 
 ```tsx
+import { IressAutocomplete } from '@iress-oss/ids-components';
+
 <IressAutocomplete debounceThreshold={0} placeholder="Instant search!" />
 ```
 
@@ -171,25 +220,52 @@ On smaller screens (< 768px), the number of options is further reduced by using 
 `limitMobile` works by filtering the search results that have been filtered by `limitDesktop`, so must be a smaller value. For example:
 
 ```tsx
+import { IressAutocomplete } from '@iress-oss/ids-components';
+
+const options = [
+  { label: 'Apple' },
+  { label: 'Banana' },
+  { label: 'Cherry' },
+  { label: 'Date' },
+  { label: 'Elderberry' },
+  { label: 'Fig' },
+  { label: 'Grape' },
+  { label: 'Honeydew' },
+  { label: 'Kiwi' },
+  { label: 'Lemon' },
+  { label: 'Mango' },
+  { label: 'Nectarine' },
+  { label: 'Orange' },
+];
+
 // 12 results on large screens, 6 on small screens (default values)
-<IressAutocomplete options={...} />
+<IressAutocomplete options={options} />
 
 // 4 results on large screens, 3 on small screens
-<IressAutocomplete resultLimitDesktop={4} resultLimitMobile={3} options={...} />
+<IressAutocomplete resultLimitDesktop={4} resultLimitMobile={3} options={options} />
 
 // 4 results on all screens (resultLimitMobile > resultLimitDesktop so has no effect)
-<IressAutocomplete resultLimitDesktop={4} resultLimitMobile={5} options={...} />
+<IressAutocomplete resultLimitDesktop={4} resultLimitMobile={5} options={options} />
 ```
 
 The result limits will also affect the number of initial options displayed, if the `initialOptions` prop is set.
 
 ```tsx
-<IressStack gap="md">
-<IressPanel>
-<CurrentBreakpoint />
-</IressPanel>
-<IressAutocomplete />
-</IressStack>
+import { IressAutocomplete } from '@iress-oss/ids-components';
+
+<IressAutocomplete
+  options={[
+    { label: 'Apple' },
+    { label: 'Banana' },
+    { label: 'Cherry' },
+    { label: 'Date' },
+    { label: 'Elderberry' },
+    { label: 'Fig' },
+    { label: 'Grape' },
+  ]}
+  resultLimitDesktop={5}
+  resultLimitMobile={3}
+/>
 ```
 
 [View "ResultLimits" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--result-limits)
@@ -201,6 +277,8 @@ The `readOnly` prop can be set to `true` to prevent the user from changing the v
 If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs).
 
 ```tsx
+import { IressAutocomplete } from '@iress-oss/ids-components';
+
 <IressAutocomplete readOnly />
 ```
 

@@ -1,0 +1,107 @@
+# Radio
+A radio is a single option presented with a radio button. It is used to select a single option from multiple options. It is typically used in an IressRadioGroup.
+> **Component:** `import { IressRadio } from '@iress-oss/ids-components'`
+> **Storybook:** [Radio in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)```tsx
+```
+
+## Quick Start
+
+```tsx
+<IressRadio>
+  Radio button
+</IressRadio>
+```
+
+## Examples
+
+### Checked
+
+You can set the radio to `checked` by default. This is useful when you want to pre-select an option.
+
+**Note:** If you are using an `IressRadioGroup`, you should use the `value` prop on the `IressRadioGroup` to set the checked state of its `<IressRadio />` children, as the `checked` prop will be ignored.
+
+```tsx
+<IressRadio checked>
+  Checked radio button
+</IressRadio>
+```
+
+[View "Checked" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio--checked)
+
+### Read only
+
+The `readOnly` prop changes how the radio is rendered. It will only render if the radio is checked (alongside a hidden input that contains the `value` if it was set), otherwise it not be rendered.
+
+It is understandable that this may not be the desired behavior for all use cases. If you need a radio that is not editable, but still visible, simply do not set the `readOnly` prop and set the `checked` prop instead.
+
+```tsx
+<IressStack gap="sm">
+<IressRadio defaultChecked />
+<IressRadio />
+</IressStack>
+```
+
+[View "ReadOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio--read-only)
+
+### Variants
+
+The `variant` prop changes the visual style of the radio. The `card` variant adds a card-like border and the `touch` variant adds button-like border and padding.
+
+```tsx
+<IressStack gap="lg">
+<IressRadio variant="card" heading="Widget">
+A description of the widget
+</IressRadio>
+<IressRadio
+{...(args as IressRadioProps<FormControlValue, 'touch'>)}
+variant="touch"
+>
+Touch variant
+</IressRadio>
+</IressStack>
+```
+
+[View "Variants" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio--variants)
+
+## Testing
+
+Query radio buttons by their accessible role and label text:
+
+```tsx
+const radio = screen.getByRole('radio', { name: 'Option A' });
+```
+
+When you have multiple radios on the same page (e.g. Yes/No questions), always
+query by the specific label text to disambiguate:
+
+```tsx
+// Multiple radio groups on the same page
+const yesRadio = screen.getByRole('radio', { name: 'Yes' });
+const noRadio = screen.getByRole('radio', { name: 'No' });
+
+// If labels are identical across groups, scope your query to a container
+const group = screen.getByRole('radiogroup', { name: 'Approve request' });
+const yes = within(group).getByRole('radio', { name: 'Yes' });
+```
+
+### Gotchas
+
+- **readOnly mode**: When `readOnly` is set, the radio role is removed from the
+  DOM entirely. Only the text label and a hidden `<input>` remain. Use
+  `queryByRole('radio')` to assert absence, and `getByText` to find the label.
+- **Unchecked readOnly radios render nothing**: If a radio is `readOnly` and not
+  checked, it renders no output at all.
+
+### Test IDs
+
+When you pass a `data-testid` to `IressRadio`, the following nested test IDs
+are generated automatically:
+
+| Suffix | Example | Description |
+| --- | --- | --- |
+| `input` | `my-radio__input` | The underlying radio input element |
+| `radioMark` | `my-radio__radioMark` | The visual radio indicator |
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)

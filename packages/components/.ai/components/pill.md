@@ -1,0 +1,73 @@
+# Pill
+Pills are used primarily for status updates, notifications and counts.
+> **Component:** `import { IressPill } from '@iress-oss/ids-components'`
+> **Storybook:** [Pill in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs)```tsx
+```
+
+## Quick Start
+
+```tsx
+<IressPill>
+  Label
+</IressPill>
+```
+
+## When to use
+
+Use pills for **status indication and notifications** where information needs to be highlighted:
+
+- Notification counts (e.g., unread messages, pending items)
+- Status indicators (success, warning, danger, info)
+- "New" or "Updated" labels
+- Drawing attention to important information
+- Quick visual highlights that don't require user interaction
+
+Pills are **informational** - they display information but are not meant to be interactive.
+
+**Not sure?** If users need to interact with items (click, delete, or manage selections), use [Tag](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs) instead.
+
+## Examples
+
+### Mode
+
+The `mode` prop controls the colour scheme of the badge. Use data palette colours (10-90) for data visualization and non-semantic colour needs, or system status colours (`danger`, `info`, `success`, `warning`) for semantic status indication.
+
+```tsx
+<IressInline gap="sm">
+{BADGE_MODES.map((mode) => (
+<IressPill key={mode} mode={mode}>
+{mode}
+</IressPill>
+))}
+</IressInline>
+```
+
+[View "Mode" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-pill--mode)
+
+### Status
+
+System status colours provide semantic meaning for feedback and state indication. Available options are: `danger`, `info`, `success`, and `warning`.
+
+```tsx
+<IressInline gap="sm">
+{STATUSES.map((status) => (
+<IressPill mode={status} key={status}>
+{status}
+</IressPill>
+))}
+</IressInline>
+```
+
+[View "Status" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-pill--status)
+
+## Testing
+
+Query pills by their text content:
+
+```tsx
+const pill = screen.getByText('Active');
+```
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs)

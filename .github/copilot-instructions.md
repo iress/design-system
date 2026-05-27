@@ -83,4 +83,15 @@ When assisting with this repository, GitHub Copilot should:
 
 ---
 
+## Code Examples Maintenance
+
+After modifying any file in `apps/guidelines/content/` or `packages/components/src/**/*.stories.tsx`:
+
+1. Follow the `improve-code-examples` skill (`.agents/skills/improve-code-examples/SKILL.md`) to validate and improve any tsx code blocks in the changed content files
+2. Run `npx tsx scripts/derive-ai-docs.ts --files <changed-content-files>` to sync `packages/components/.ai/`
+
+This ensures `.ai/` stays in sync and code examples are correct before committing.
+
+---
+
 For detailed guidance on specific tasks, refer to the instruction files in `.github/instructions/`.

@@ -1840,6 +1840,7 @@ __metadata:
     "@types/react": "npm:^19.1.8"
     "@types/react-dom": "npm:^19.1.6"
     "@vitejs/plugin-react": "npm:^6.0.1"
+    concurrently: "npm:^9.2.1"
     flexsearch: "npm:0.7.43"
     react: "npm:^19.2.6"
     react-dom: "npm:^19.2.6"

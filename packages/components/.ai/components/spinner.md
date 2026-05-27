@@ -1,0 +1,67 @@
+# Spinner
+Spinners notify the user that a task is being processed. They indicate that the app is busy, and should be used when the user has to wait for more than a few seconds.
+> **Component:** `import { IressSpinner } from '@iress-oss/ids-components'`
+> **Storybook:** [Spinner in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)```tsx
+```
+
+## Quick Start
+
+```tsx
+<IressSpinner screenreaderText="Loading..." />
+```
+
+## Examples
+
+### Standalone
+
+When using the spinner on its own, you can define the `screenreaderText` prop to provide context to screen readers.
+
+```tsx
+<IressSpinner screenreaderText="Making magic happen..." />
+```
+
+[View "Standalone" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-spinner--standalone)
+
+### Chatty variant
+
+The chatty variant displays an animated "typing" indicator with three dots. This is commonly used in chat interfaces to show that another user or system is currently typing a message.
+
+```tsx
+<IressSpinner variant="chatty" screenreaderText="User is typing..." />
+```
+
+[View "Chatty" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-spinner--chatty)
+
+### Message
+
+You can display a message alongside the spinner. In this case, you do not need to define the `screenreaderText` prop, as you have a visible message to the user telling them what is happening.
+
+```tsx
+<IressInline gap="sm" verticalAlign="middle">
+<IressSpinner color="colour.neutral.70" />
+<IressText color="colour.neutral.70">Making magic happen...</IressText>
+</IressInline>
+```
+
+[View "Message" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-spinner--message)
+
+## Testing
+
+The query depends on the spinner variant:
+
+**Default spinner** — renders as a decorative icon with `aria-hidden="true"`.
+Wrap it in a container with an accessible label, or query by `data-testid`:
+
+```tsx
+const spinner = screen.getByTestId('my-spinner');
+```
+
+**Chatty spinner** (`variant="chatty"`) — renders with `role="status"`:
+
+```tsx
+const spinner = screen.getByRole('status');
+```
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)

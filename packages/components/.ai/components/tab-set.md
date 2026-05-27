@@ -1,0 +1,143 @@
+# Tab Set
+Tabs are used to display modular pieces of related data that do not need to be compared or accessed simultaneously.
+> **Component:** `import { IressTabSet } from '@iress-oss/ids-components'`
+> **Storybook:** [Tab Set in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab-set--docs)```tsx
+```
+
+## Quick Start
+
+```tsx
+<IressTabSet />
+```
+
+## Usage
+
+The `IressTabSet` is a wrapper for `IressTab` components to make a up a set of tabs.
+
+### Navigation
+
+You can use the `IressTabSet` component to create tab navigation to control an area of the page, or even navigate between different pages.
+
+[View "TabNavigation" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab-set--tab-navigation)
+
+### With `children` prop
+
+Using the `children` prop will automatically inject the content as a tab panel when active, along with appropriate attributes for accessibility, ensuring the tab and its associated panel can be navigated by screenreaders.
+
+[View "Panels" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab-set--panels)
+
+## Examples
+
+### Default selected
+
+If you would like to set a tab by default, use the `defaultSelected` prop.
+
+```tsx
+<IressTabSet defaultSelected={1} />
+```
+
+[View "DefaultSelected" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab-set--default-selected)
+
+### Controlled
+
+You can use state to control the active tab by setting the `selected` property to which tab you would like to select. This should be the `value` of the tab you would like to select, or if you do not use the `value` prop, it's index.
+
+```tsx
+<TabsUsingState />
+```
+
+[View "Controlled" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab-set--controlled)
+
+### Layout
+
+`IressTabSet` controls the layout of the tab buttons. These will always appear at the top of the tab container, and can be aligned to the left (default), centrally or to the right via the `layout` prop.
+
+```tsx
+<IressStack gap="md">
+<IressPanel>
+<IressText element="h2">top-left</IressText>
+<IressTabSet layout="top-left" />
+</IressPanel>
+<IressPanel>
+<IressText element="h2">top-center</IressText>
+<IressTabSet layout="top-center" />
+</IressPanel>
+<IressPanel>
+<IressText element="h2">top-right</IressText>
+<IressTabSet layout="top-right" />
+</IressPanel>
+</IressStack>
+```
+
+[View "Layout" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab-set--layout)
+
+### Type
+
+Use the `type` prop to control the visual emphasis of tab styles:
+
+- `primary` (default): prominent active state with a raised active indicator.
+- `secondary`: subdued style intended for nested or secondary tab groups. The
+  active state uses the underline/border indicator without the active
+  indicator background fill.
+
+```tsx
+<IressStack gap="md">
+<IressPanel>
+<IressText element="h2">Primary</IressText>
+<IressTabSet type="primary" />
+</IressPanel>
+<IressExpander activator="Secondary">
+<IressTabSet type="secondary" mt="-md" />
+</IressExpander>
+</IressStack>
+```
+
+[View "Type" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab-set--type)
+
+### Lazy Loading
+
+Tabs can be lazy loaded via state, allowing you to add/remove tabs as needed.
+
+```tsx
+<TabsLazyLoading />
+```
+
+[View "LazyLoading" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab-set--lazy-loading)
+
+### Badges and icons
+
+You can add rich content into the `label` of the `IressTab` to customise the tab further.
+
+Some common examples include:
+
+- Adding a badge to the tab button.
+- Adding icons to the tab button.
+
+Notes:
+
+- For best accessibility, the `IressTab` component will find the first focusable element inside the custom label to add the tab role.
+
+[View "TabsWithBadges" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab-set--tabs-with-badges)
+
+## Testing
+
+Query tabs by their role. The tab's accessible name comes from the `label` prop:
+
+```tsx
+const tab = screen.getByRole('tab', { name: 'Details' });
+await user.click(tab);
+const panel = screen.getByRole('tabpanel');
+```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressTabSet`, the following nested test IDs
+are generated automatically:
+
+| Suffix | Example | Description |
+| --- | --- | --- |
+| `panel` | `my-tabset__panel` | The active tab panel |
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab-set--docs)

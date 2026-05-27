@@ -28,10 +28,13 @@ import { IressSkeleton } from '@iress-oss/ids-components';
 The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
 ```tsx
+import { IressSkeleton } from '@iress-oss/ids-components';
+import { IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
-<IressSkeleton {...(args as IressSkeletonProps<'text'>)} mode="text" />
-<IressSkeleton mode="rect" height="100px" />
-<IressSkeleton mode="circle" height="100px" width="100px" />
+  <IressSkeleton mode="text" />
+  <IressSkeleton mode="rect" height="100px" />
+  <IressSkeleton mode="circle" height="100px" width="100px" />
 </IressStack>
 ```
 
@@ -44,7 +47,14 @@ The `mode` prop can be set to `text` (default), `rect` or `circle`.
 `text` also accepts the width prop but does not use the `height` prop like other modes. The height is achieved through font size and line height.
 
 ```tsx
-<SkeletonText />
+import { IressSkeleton } from '@iress-oss/ids-components';
+import { IressStack } from '@iress-oss/ids-components';
+
+<IressStack gap="md">
+  <IressSkeleton mode="text" textStyle="typography.heading.1" />
+  <IressSkeleton mode="text" textStyle="typography.body.md" />
+  <IressSkeleton mode="text" textStyle="typography.body.sm" width="80%" />
+</IressStack>
 ```
 
 [View "Text" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--text)
@@ -56,7 +66,13 @@ The `mode` prop can be set to `text` (default), `rect` or `circle`.
 `rect` accepts both `width` and `height` props for sizing. It will default to 100% width and 100px height.
 
 ```tsx
-<SkeletonRect />
+import { IressSkeleton } from '@iress-oss/ids-components';
+import { IressStack } from '@iress-oss/ids-components';
+
+<IressStack gap="md">
+  <IressSkeleton mode="rect" height="100px" />
+  <IressSkeleton mode="rect" height="200px" width="300px" />
+</IressStack>
 ```
 
 [View "Rect" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--rect)
@@ -68,7 +84,13 @@ The `mode` prop can be set to `text` (default), `rect` or `circle`.
 `circle` accepts both `width` and `height` props for sizing. It will default to 100% width and 100px height.
 
 ```tsx
-<SkeletonCircle />
+import { IressSkeleton } from '@iress-oss/ids-components';
+import { IressStack } from '@iress-oss/ids-components';
+
+<IressStack gap="md">
+  <IressSkeleton mode="circle" height="50px" width="50px" />
+  <IressSkeleton mode="circle" height="100px" width="100px" />
+</IressStack>
 ```
 
 [View "Circle" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--circle)
@@ -82,10 +104,13 @@ These props accept any unit of dimension, but if no unit is provided it will def
 **Note:** `height` will be ignored for text mode as this is calculated using the `IressText` component.
 
 ```tsx
+import { IressSkeleton } from '@iress-oss/ids-components';
+import { IressInline } from '@iress-oss/ids-components';
+
 <IressInline gap="md">
-{SKELETON_MODES.map((mode) => (
-<IressSkeleton key={mode} mode={mode} />
-))}
+  <IressSkeleton mode="text" width="200px" />
+  <IressSkeleton mode="rect" width="200px" height="100px" />
+  <IressSkeleton mode="circle" width="100px" height="100px" />
 </IressInline>
 ```
 

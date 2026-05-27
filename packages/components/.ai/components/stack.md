@@ -1,0 +1,112 @@
+# Stack
+Use IressStack to control vertical spacing between content with consistent present values.
+> **Component:** `import { IressStack } from '@iress-oss/ids-components'`
+> **Storybook:** [Stack in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)```tsx
+```
+
+## Quick Start
+
+```tsx
+<IressStack gap="spacing.1">
+  even
+</IressStack>
+```
+
+## Examples
+
+### Gap
+
+Vertical spacing is applied to the direct children of the `IressStack` component. The amount of spacing is controlled by the gap prop which accepts from `spacing.0` to `spacing.10`.
+
+#### What happened to `gutter`?
+
+The previous `gutter` prop has been replaced by `gap`, which uses the latest set of spacing tokens. In terms of how it is used to space items inside the `IressStack` component, it is now directly mapped to the [CSS gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/gap), which may change how your application is spaced. For most cases, there should be no change.
+
+```tsx
+<IressStack gap="spacing.4">
+{SPACING_AND_ALIAS_TOKENS.map((spacing) => (
+<IressText key={spacing}>
+<h2>{spacing}</h2>
+<IressStack gap={spacing as never} />
+</IressText>
+))}
+</IressStack>
+```
+
+[View "Gap" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-stack--gap)
+
+### Responsive gap
+
+The `gap` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
+
+```tsx
+<IressStack gap="spacing.4">
+<IressPanel>
+<p>
+Current breakpoint: <CurrentBreakpoint />.
+</p>
+<p>
+<code>gap=&#123;{JSON.stringify(args.gap)}&#125;</code>
+</p>
+</IressPanel>
+<IressStack />
+</IressStack>
+```
+
+[View "ResponsiveGap" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-stack--responsive-gap)
+
+### Inline children
+
+The stack component will treat the direct children as a block element. If you want to wrap some items to display them inline, wrap them with `IressInline`.
+
+In the example below: `IressButton` are inline because of wrapped by `IressInline`.
+
+```tsx
+<IressStack gap="spacing.4">
+  inlineChildren
+</IressStack>
+```
+
+[View "InlineChildren" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-stack--inline-children)
+
+### Lists
+
+`IressStack` can also apply gap between the list items by using the new `element` (e.g. `ul`) prop.
+
+```tsx
+<IressStack gap="spacing.7" element="ul">
+  list
+</IressStack>
+```
+
+[View "Lists" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-stack--lists)
+
+### Vertical alignment
+
+The `verticalAlign` prop controls how content is positioned vertically within the stack. It accepts six values: `top`, `middle`, `bottom`, `between`, `around`, and `evenly`.
+
+Use `top`, `middle`, or `bottom` to align items within the available space, and `between`, `around`, or `evenly` to distribute extra vertical space between items (similar to `space-between`, `space-around`, and `space-evenly` in CSS flexbox).
+
+```tsx
+<IressText>
+<h2>{args.verticalAlign}</h2>
+<IressPanel style={{ height: '1000px' }}>
+<IressStack stretch />
+</IressPanel>
+</IressText>
+```
+
+[View "VerticalAlign" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-stack--vertical-align)
+
+## Testing
+
+`IressStack` is a layout primitive with no semantic role. Target its children
+directly or use a `data-testid`:
+
+```tsx
+const stack = screen.getByTestId('my-stack');
+```
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)

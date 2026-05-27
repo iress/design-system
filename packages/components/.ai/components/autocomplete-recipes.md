@@ -1,0 +1,25 @@
+# Recipes
+Autocomplete component documentation.
+> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)> [!NOTE]
+> **Experimental**
+>
+> This API is experimental. It may change in the future based on usage. The team
+>   is testing if these use cases exist and see if its worth maintaining this API.
+>   If you have any questions, concerns or feedback, please reach out to the
+>   design system team.
+
+## `useAutocompleteSearch`
+
+`IressAutocomplete` uses the `useAutocompleteSearch` hook to provide search functionality. If provided an array of `LabelValueMeta`, it will search options based on the `label` property. To fully customise how to search the objects, pass a function instead.
+
+It has been exposed in case you need it in your application to provide custom search functionality.
+
+### Use cases
+
+1. You want to provide filtering in a certain area of the application (eg. a table).
+
+[View "Table" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--table)
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)

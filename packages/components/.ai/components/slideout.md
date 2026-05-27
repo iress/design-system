@@ -1,0 +1,253 @@
+# Slideout
+Slideouts are used to show additional information or to allow users to perform secondary tasks without leaving their normal workflow.
+> **Component:** `import { IressSlideout } from '@iress-oss/ids-components'`
+> **Storybook:** [Slideout in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs)```tsx
+```
+
+## Quick Start
+
+```tsx
+<IressSlideout footer="Footer slot">
+  Slideout content
+</IressSlideout>
+```
+
+## Controlling the slideout
+
+### Using the `show` property
+
+You can use state to control the slideout by setting the `show` property to `true` or `false`. To sync your state with the slideout, you can use the `onShowChange` prop, which is normally passed the set function from `useState`.
+
+```tsx
+<SlideoutUsingState />
+```
+
+[View "ShowWithState" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slideout--show-with-state)
+
+### Using the `IressSlideoutProvider`
+
+You can use the `IressSlideoutProvider` to open and close slideout from anywhere in your application, as long as the slideout has a unique `id`. In this case you would use the `useSlideout` hook to open and close the slideout.
+
+> **Note:** If you are already using `IressProvider` or `IressShadow`, you do not need to add `IressSlideoutProvider` separately — it is already included.
+
+To use, wrap your `<App/>` or the component that you want to use the `useSlideout` hook with `<IressSlideoutProvider />`.
+
+```tsx
+<AppWithSlideoutProvider {...args.slideout} />
+```
+
+[View "Provider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-provider--provider)
+
+## Examples
+
+### Modes
+
+Slideouts can be used in two modes - `overlay` and `push`. In `overlay` mode the slideout sits on top of the content, useful if space is at a premium. In `push` mode the slideout will push the page container to make it smaller; this means you can see all of the page content when the page is available. Overlay is the default.
+
+```tsx
+const { showSlideout } = useSlideout();
+
+    return (
+      <IressPanel bg="alt">
+        <IressInline gap="md">
+          <IressButton onClick={() => showSlideout('overlay')}>
+            Overlay slideout
+          </IressButton>
+          <IressSlideout {...args} id="overlay" mode="overlay">
+            <h2>Overlay</h2>
+            For most situations <code>overlay</code> will be what you need,
+            which is why this is the default behaviour. You do not need to
+            specify the mode if you want your slideout to sit on top of the
+            page.
+          </IressSlideout>
+
+          <IressButton onClick={() => showSlideout('push')}>
+            Push slideout
+          </IressButton>
+          <IressSlideout
+            {...args}
+            id="push"
+            mode="push"
+            eleToPush="#storybook-docs, html"
+          >
+            <IressText>
+              <h2>Push</h2>
+              <p>
+                If you have a data-heavy screen where you need all of the data
+                to be visible when the slideout is open, use <code>push</code>.
+                To allow push to work you will need to supply the ID of the
+                element that needs to be pushed via the <code>eleToPush</code>{' '}
+                prop. If the ID is not supplied, or the element cannot be found,
+                the slideout will revert to <code>overlay</code> behaviour.
+              </p>
+              <p>
+                Be aware though that push will only work on larger screens
+                (&gt;1200px); on smaller screens the slideout will overlay the
+                content.
+              </p>
+              <IressPanel bg="alt">
+                <CurrentBreakpoint />
+              </IressPanel>
+            </IressText>
+          </IressSlideout>
+        </IressInline>
+      </IressPanel>
+    );
+```
+
+[View "Modes" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slideout--modes)
+
+### Position
+
+Slideouts can appear from the left or the right of the screen. The default is right, but you can use the `position` prop to set it to slide in from the left.
+
+```tsx
+<SlideoutPositions />
+```
+
+[View "Position" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slideout--position)
+
+### Size
+
+The width of your slideout can be set using the `size` prop. By default it is `sm`, but it can be made larger by setting `size` to `md`.
+
+```tsx
+<SlideoutSizes />
+```
+
+[View "Size" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slideout--size)
+
+### Padding
+
+Slideout padding now is a global styling prop.
+
+<div>
+  [Learn more](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-spacing--docs#padding)
+</div>
+
+### Footer
+
+The `footer` prop is used to set content that should appear underneath the main content. Usually used for extra controls like buttons etc.
+
+[View "Footer" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slideout--footer)
+
+### Absolute position slideouts
+
+By default, slideout is set to `position: fixed` which means it will appear from the edge of the browser window. By setting the `position: 'absolute'` in custom inline style, the slideout can appear from the edge of its closest relative positioned container. You will also need to set the `container` prop to the a reference of the relatively positioned container, so it can appear in the correct place in the DOM.
+
+If you're using an absolutely positioned slideout you may also want to change the vertical and horizontal positioning. By default this will be the top left or top right of the container, but you can use inline style `style={{top: '30px', height: 'calc(100% - 30px)'}}` to adjust that if you need to.
+
+```tsx
+<AbsolutePositionSlideout />
+```
+
+[View "AbsolutePosition" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slideout--absolute-position)
+
+## Migrating to version 5
+
+### Adding the provider
+
+For your components to work as previously, you will need to set up the `IressSlideoutProvider` at the root of your application. This will allow you to use the `useSlideout` hook to open and close slideouts from anywhere in your application using the ID of the slideout.
+
+> **Note:** If you are using `IressProvider` or `IressShadow`, you do not need to add `IressSlideoutProvider` separately — it is already included.
+
+```tsx
+const App = () => (
+  <IressSlideoutProvider>Rest of app here</IressSlideoutProvider>
+);
+```
+
+### Testing
+
+In version 5, slideouts are rendered conditionally, meaning they will not be available in the DOM until they are shown. This means that you will need to update your tests to account for this, as you cannot interact with its contents until it is shown, unlike in version 4.
+
+See below for an example in version 4 and version 5.
+
+```tsx
+<DiffViewer
+allowModeChange
+oldValue={`import { render, waitFor, screen } from '@testing-library/react';
+test('opening and closing a slideout', async () => {
+await componentLoad([
+'slideout-trigger',
+'slideout',
+]);
+
+const trigger = screen.getByTestId('slideout-trigger');
+const slideout = screen.getByTestId('slideout');
+
+// In version 4, you can already interact with the slideout here as its in the DOM at this stage.
+
+// activate slideout
+idsFireEvent.click(trigger);
+await waitFor(() => expect(slideout).toBeVisible());
+
+// close slideout
+const closeButton = screen.getByTestId('slideout__close-button');
+idsFireEvent.click(closeButton);
+await waitFor(() => expect(slideout).not.toBeVisible());
+});`}
+newValue={`import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+test('opening and closing a slideout', async () => {
+const trigger = screen.getByRole('button', { name: /open slideout/i });
+
+// activate slideout
+await userEvent.click(trigger);
+const slideout = await screen.findByRole('complementary'); // this assumes the slideout has the role="complementary"
+
+// In version 5, you can only interact with the slideout once it has been loaded here.
+
+// close slideout
+const closeButton = screen.getByRole('button', { name: /close/i });
+await userEvent.click(closeButton);
+await waitForElementToBeRemoved(slideout);
+});`}
+/>
+```
+
+[View "V5TestDiff" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slideout--v5test-diff)
+
+### Speed up tests
+
+You can speed up tests by wrapping your tests in a provider that overrides the theme tokens for animations.
+
+```tsx
+const themeOverrides: Record<string, string> = {
+  '--iress-slideout-animation-duration': '0s',
+};
+
+export const TestAppProvider = ({ children }: PropsWithChildren) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <IressProvider container={containerRef}>
+      <div style={themeOverrides} ref={containerRef}>
+        {children}
+      </div>
+    </IressProvider>
+  );
+};
+```
+
+### Test IDs
+
+When you pass a `data-testid` to `IressSlideout`, the following nested test IDs
+are generated automatically:
+
+| Suffix | Example | Description |
+| --- | --- | --- |
+| `heading` | `my-slideout__heading` | The slideout heading |
+| `close-button__button` | `my-slideout__close-button__button` | The close button |
+| `content` | `my-slideout__content` | The slideout content area |
+| `footer` | `my-slideout__footer` | The slideout footer |
+
+### Gotchas
+
+- **Conditional rendering**: Like modals, slideouts are not in the DOM until
+  shown. Use `findByRole` or `findByText` (async) to wait for content.
+- **Animation timing**: Slideout animations can affect test timing. Use the
+  speed-up technique above to set animation duration to `0s` in tests.
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs)

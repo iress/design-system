@@ -45,11 +45,11 @@ The `mode` prop controls the colour scheme of the tag. Use data palette colours 
 
 ```tsx
 <IressInline gap="sm">
-{BADGE_MODES.map((mode) => (
-<IressTag key={mode} mode={mode}>
-{mode}
-</IressTag>
-))}
+  <IressTag mode="10">10</IressTag>
+  <IressTag mode="20">20</IressTag>
+  <IressTag mode="30">30</IressTag>
+  <IressTag mode="40">40</IressTag>
+  <IressTag mode="50">50</IressTag>
 </IressInline>
 ```
 
@@ -61,11 +61,10 @@ Use semantic status values (`danger`, `info`, `success`, `warning`) when tags ne
 
 ```tsx
 <IressInline gap="sm">
-{STATUSES.map((status) => (
-<IressTag key={status} mode={status}>
-{status}
-</IressTag>
-))}
+  <IressTag mode="danger">danger</IressTag>
+  <IressTag mode="info">info</IressTag>
+  <IressTag mode="success">success</IressTag>
+  <IressTag mode="warning">warning</IressTag>
 </IressInline>
 ```
 
@@ -80,19 +79,12 @@ tags need to stand out.
 
 ```tsx
 <IressInline gap="sm">
-<IressTag bordered>
-No mode
-</IressTag>
-{BADGE_MODES.map((mode) => (
-<IressTag key={mode} mode={mode} bordered>
-{mode}
-</IressTag>
-))}
-{STATUSES.map((status) => (
-<IressTag key={status} mode={status} bordered>
-{status}
-</IressTag>
-))}
+  <IressTag bordered>No mode</IressTag>
+  <IressTag mode="10" bordered>10</IressTag>
+  <IressTag mode="20" bordered>20</IressTag>
+  <IressTag mode="30" bordered>30</IressTag>
+  <IressTag mode="danger" bordered>danger</IressTag>
+  <IressTag mode="success" bordered>success</IressTag>
 </IressInline>
 ```
 

@@ -1,0 +1,96 @@
+# Skeleton
+Skeletons can increase perceived performance for users. As opposed to spinners, skeletons make it feel as though things are happening/loading immediately, then the information is incrementally displayed on the screen.
+> **Component:** `import { IressSkeleton } from '@iress-oss/ids-components'`
+> **Storybook:** [Skeleton in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)```tsx
+```
+
+## Quick Start
+
+```tsx
+<IressSkeleton />
+```
+
+## Examples
+
+### Modes
+
+The `mode` prop can be set to `text` (default), `rect` or `circle`.
+
+```tsx
+<IressStack gap="md">
+<IressSkeleton {...(args as IressSkeletonProps<'text'>)} mode="text" />
+<IressSkeleton mode="rect" height="100px" />
+<IressSkeleton mode="circle" height="100px" width="100px" />
+</IressStack>
+```
+
+[View "Mode" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--mode)
+
+### Text
+
+`text` mode allows you to use `IressSkeleton` in place of `IressText` and keep the same sizing. To achieve this you can use `text` mode in conjunction with the `textVariant` prop.
+
+`text` also accepts the width prop but does not use the `height` prop like other modes. The height is achieved through font size and line height.
+
+```tsx
+<SkeletonText />
+```
+
+[View "Text" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--text)
+
+### Rect
+
+`rect` mode allows you to use `IressSkeleton` in place of block elements, a good example would be in place of images.
+
+`rect` accepts both `width` and `height` props for sizing. It will default to 100% width and 100px height.
+
+```tsx
+<SkeletonRect />
+```
+
+[View "Rect" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--rect)
+
+### Circle
+
+`circle` mode allows you to use `IressSkeleton` in place of circular elements, a good example would be for profile images.
+
+`circle` accepts both `width` and `height` props for sizing. It will default to 100% width and 100px height.
+
+```tsx
+<SkeletonCircle />
+```
+
+[View "Circle" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--circle)
+
+### Size
+
+`width` and `height` props can be used to match the layout of the loaded content.
+
+These props accept any unit of dimension, but if no unit is provided it will default to pixels.
+
+**Note:** `height` will be ignored for text mode as this is calculated using the `IressText` component.
+
+```tsx
+<IressInline gap="md">
+{SKELETON_MODES.map((mode) => (
+<IressSkeleton key={mode} mode={mode} />
+))}
+</IressInline>
+```
+
+[View "Size" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--size)
+
+## Testing
+
+`IressSkeleton` is a loading placeholder. Assert that the real content appears
+after loading:
+
+```tsx
+await waitFor(() => {
+  expect(screen.getByText('Loaded content')).toBeInTheDocument();
+});
+```
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)

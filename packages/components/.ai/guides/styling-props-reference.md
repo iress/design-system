@@ -1,0 +1,340 @@
+# Styling props
+
+> **Guide:** `@iress-oss/ids-components`
+> **Storybook:** [Styling props in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-styling-props--docs)
+
+This page lists all the custom styling properties available in our components,
+which design tokens they are mapped to and which CSS properties they affect.
+
+Styling properties are the recommended way of customising components for your needs, as they ensure your styles are compatible when any theme is applied to your application. If you need further customisation, you can use regular CSS and reference the tokens directly.
+
+These replace the utility classes and internal component tokens provided by previous versions of the design system.
+
+## Reference
+
+| JSX Prop | CSS Property | Token Mapping | Responsive |
+| --- | --- | --- | --- |
+| `alignSelf` | align-self | N/A |  |
+| `bg` | background | Colour |  |
+| `borderRadius` | border-radius | Radius |  |
+| `color` | color | Colour |  |
+| `flex` | flex | N/A |  |
+| `focusable` | border and box-shadow | Colour |  |
+| `hideBelow` | display | N/A |  |
+| `hideFrom` | display | N/A |  |
+| `maxWidth` | max-width | N/A |  |
+| `m` | margin | Spacing | ✓ |
+| `mx` | margin-inline | Spacing | ✓ |
+| `my` | margin-block | Spacing | ✓ |
+| `mb` | margin-bottom | Spacing | ✓ |
+| `ml` | margin-left | Spacing | ✓ |
+| `mr` | margin-right | Spacing | ✓ |
+| `mt` | margin-top | Spacing | ✓ |
+| `noGutter` | margin-block-end | N/A |  |
+| `p` | padding | Spacing | ✓ |
+| `px` | padding-inline | Spacing | ✓ |
+| `py` | padding-block | Spacing | ✓ |
+| `pb` | padding-bottom | Spacing | ✓ |
+| `pl` | padding-left | Spacing | ✓ |
+| `pr` | padding-right | Spacing | ✓ |
+| `pt` | padding-top | Spacing | ✓ |
+| `scrollable` | Multiple properties | N/A |  |
+| `srOnly` | Multiple properties | N/A | ✓ |
+| `stretch` | align-self, height and flex | N/A |  |
+| `textAlign` | text-align | N/A |  |
+| `textStyle` | font | Typography |  |
+| `width` | width | N/A | ✓ |
+
+[View "Reference" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-reference--reference)
+
+---
+
+## Responsive
+
+Props marked responsive can accept either a single value that affects all breakpoints, or a responsive object map that sets a different value based on breakpoint.
+
+```tsx
+<IressPanel p="xs" /> // applies extra small padding to all breakpoints
+<IressPanel p={{ base: 'lg', md: 'sm' }} /> // applies large padding by default, and changes to small padding once on medium sized screens.
+```
+
+## `iressCss`
+
+In some cases you may need to apply styling props to a non-IDS component. You can do this by using the `iressCss` prop, which accepts an object of styling props and returns a string of class names that can be applied to any element.
+
+This will also work without JSX, allowing you to apply styling props to any element in your application.
+
+```tsx
+<div className={iressCss({ p: 'xs', bg: 'colour.primary.surface' })}>
+  This div has extra small padding and a primary background colour.
+</div>
+```
+
+## `IressStyled`
+
+The `IressStyled` component is a flexible wrapper that gives you direct access to all styling props. Use it when you need custom styling without creating a dedicated component or writing custom CSS.
+
+```tsx
+<IressStyled p="xs" bg="colour.primary.surface">
+  This div has extra small padding and a primary background colour.
+</IressStyled>
+```
+
+## Migrating from version 5
+
+### Utility classes
+
+If you have been using the utility classes from previous versions of IDS (eg. `iress-p--xs`), you will need to replace them with the new styling props. The utility classes are no longer supported in version 6.
+
+```tsx
+<DiffViewer oldValue={`<IressPanel className="iress-m--sm" />`}
+newValue={`<IressPanel m="sm" />`}
+/>
+```
+
+[View "MigratingFromUtilities" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-reference--migrating-from-utilities)
+
+---
+
+### Internal component tokens
+
+If you have been using the internal component tokens (eg. `--iress-background-color`), you will need to replace them with the new styling props. The internal component tokens are no longer supported in version 6.
+
+#### Note
+
+- Not every single internal component token has a direct mapping to a styling prop. For example, things like border width are no longer customisable. This helps ensure a consistent and accessible experience for all applications no matter the theme that is applied to them.
+- Styling props only allow token values, not custom values (eg. `colour.system.status.danger` is allowed but not `red`). This is to ensure that the styling props are theme agnostic and can be used with any theme. If you need to use a custom value, you can use custom CSS or inline styles.
+
+```tsx
+<DiffViewer oldValue={`<IressPanel style={{ '--iress-background-color': 'var(--iress-g-success-color)' }} />`}
+newValue={`<IressPanel bg="colour.system.success.fill" />`}
+/>
+```
+
+[View "MigratingFromInternalTokens" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-reference--migrating-from-internal-tokens)
+
+---
+
+## Best Practices
+
+### When to use styling props
+
+Styling props should be your **first choice** for customizing components in most cases. They provide:
+
+- **Theme compatibility**: Automatically work with any theme
+- **Type safety**: TypeScript ensures you use valid tokens
+- **Consistency**: Design tokens enforce the design system's visual language
+- **Accessibility**: Semantic color tokens maintain proper contrast ratios
+- **Maintainability**: Changes to design tokens automatically update all usages
+
+**✅ Use styling props when:**
+
+- Customizing IDS components (`IressPanel`, `IressButton`, `IressText`, etc.)
+- Applying spacing, colors, or typography that exist in the design system
+- Building new features that should follow the design system
+- Creating reusable layouts and patterns
+
+### When to use `iressCss()`
+
+The `iressCss()` function is useful for applying styling props to **non-IDS components** or when you need to combine styling props programmatically.
+
+**✅ Use `iressCss()` when:**
+
+- Styling third-party library components that don't accept styling props
+- Applying styling props to native HTML elements (`<div>`, `<section>`, etc.)
+- Building complex, reusable style combinations
+- Working outside of JSX (e.g., in vanilla JavaScript)
+
+```tsx
+// ✅ CORRECT - Using iressCss for non-IDS component
+<ThirdPartyComponent
+  className={iressCss({ p: 'md', bg: 'colour.primary.surface' })}
+>
+  Content
+</ThirdPartyComponent>
+
+// ✅ CORRECT - Using iressCss with native HTML
+<div className={iressCss({ display: 'flex', gap: 'sm' })}>
+  Flexbox layout with design system spacing
+</div>
+```
+
+### When to use CSS-in-JS
+
+If you're using a CSS-in-JS library (like styled-components, emotion, or vanilla-extract), use the **`cssVars` object from `@iress-oss/ids-tokens`** to reference design tokens.
+
+**✅ Use CSS-in-JS with `cssVars` when:**
+
+- Building custom components with a CSS-in-JS library
+- Creating complex styling logic that needs JavaScript
+- Working with third-party CSS-in-JS frameworks
+- Need programmatic access to token values
+
+```tsx
+import { cssVars } from '@iress-oss/ids-tokens';
+import styled from 'styled-components';
+
+// ✅ CORRECT - Using cssVars in CSS-in-JS
+const StyledComponent = styled.div`
+  padding: ${cssVars.spacing[400]}; /* md spacing */
+  background-color: ${cssVars.colour.primary.fill};
+  color: ${cssVars.colour.primary.onFill};
+  font-family: ${cssVars.typography.fontFamily.body};
+`;
+
+// ❌ INCORRECT - Hardcoded values in CSS-in-JS
+const BadComponent = styled.div`
+  padding: 16px;
+  background-color: #13213f;
+  color: #ffffff;
+`;
+```
+
+### When to use custom CSS
+
+Custom CSS should be **reserved for edge cases** where styling props and `iressCss()` don't meet your needs.
+
+**✅ Use custom CSS when:**
+
+- Implementing complex selectors (`:hover:not(.disabled)`, `> * + *`)
+- Working with pseudo-elements (`::before`, `::after`)
+- Creating animations and transitions
+- Styling custom components with unique design requirements
+- Using CSS features not available in styling props (e.g., `grid-template-areas`)
+
+**Important**: Even in custom CSS, prefer referencing design tokens via CSS variables:
+
+```css
+.custom-component {
+  /* ✅ CORRECT - Reference tokens in custom CSS */
+  padding: var(--spacing-4); /* md spacing */
+  background-color: var(--colour-primary-fill);
+
+  /* ❌ INCORRECT - Hardcoded values */
+  padding: 16px;
+  background-color: #13213f;
+}
+```
+
+### Decision guide
+
+Use this flowchart to choose the right approach:
+
+1. **Is it an IDS component?**
+   - Yes → Use styling props (``)
+   - No → Go to step 2
+
+2. **Does it need design system styling?**
+   - Yes → Use `iressCss()` (`className={iressCss({ p: 'md' })}`)
+   - No → Go to step 3
+
+3. **Are you using a CSS-in-JS library?**
+   - Yes → Use `cssVars` from `@iress-oss/ids-tokens`
+   - No → Go to step 4
+
+4. **Does it need complex selectors or CSS features?**
+   - Yes → Use custom CSS with CSS variable references
+   - No → Reconsider if styling props or `iressCss()` can work
+
+## Common Anti-Patterns
+
+Avoid these common mistakes when styling components:
+
+### ❌ Using inline styles instead of styling props
+
+**Problem**: Inline styles bypass the design system, making code non-themeable and inconsistent.
+
+```tsx
+// ❌ INCORRECT - Inline styles with hardcoded values
+<IressPanel style={{ padding: '16px', backgroundColor: '#F5F5F5' }}>
+  Content
+</IressPanel>
+
+// ✅ CORRECT - Styling props with tokens
+<IressPanel p="md" bg="colour.neutral.10">
+  Content
+</IressPanel>
+```
+
+**Why this matters**: Inline styles won't respond to theme changes, breaking the visual consistency of your application.
+
+### ❌ Hardcoded colors instead of semantic tokens
+
+**Problem**: Hardcoded color values don't adapt to different themes and may fail accessibility standards.
+
+```tsx
+// ❌ INCORRECT - Hardcoded hex colors
+<IressText style={{ color: '#000000' }}>Primary text</IressText>
+<IressPanel style={{ backgroundColor: '#13213F', color: '#FFFFFF' }}>
+  Featured content
+</IressPanel>
+
+// ✅ CORRECT - Semantic color tokens
+<IressText color="colour.primary.text">Primary text</IressText>
+<IressPanel bg="colour.primary.fill" color="colour.primary.onFill">
+  Featured content
+</IressPanel>
+```
+
+**Why this matters**: Semantic tokens like `colour.primary.fill` and `colour.primary.onFill` are guaranteed to have proper contrast and automatically adapt to theme changes.
+
+### ❌ Using className for basic styling
+
+**Problem**: Adding custom classes for basic spacing/colors adds unnecessary CSS and bypasses the design system.
+
+```tsx
+// ❌ INCORRECT - Custom class for basic styling
+<IressPanel className="my-custom-padding">
+  Content
+</IressPanel>
+
+// CSS file:
+.my-custom-padding {
+  padding: 24px;
+}
+
+// ✅ CORRECT - Styling prop with token
+<IressPanel p="lg">
+  Content
+</IressPanel>
+```
+
+**Why this matters**: Styling props are more maintainable, type-safe, and ensure consistency. Custom classes should only be used for complex styling needs.
+
+### ❌ Arbitrary spacing values
+
+**Problem**: Using spacing values outside the design system's scale creates inconsistency.
+
+```tsx
+// ❌ INCORRECT - Arbitrary spacing value
+<IressPanel style={{ padding: '17px' }}>
+  Content
+</IressPanel>
+
+// ✅ CORRECT - Design system spacing scale
+<IressPanel p="md"> {/* 16px */}
+  Content
+</IressPanel>
+
+// ✅ ALSO CORRECT - If you need more, use the next step
+<IressPanel p="lg"> {/* 24px */}
+  Content
+</IressPanel>
+```
+
+**Why this matters**: The spacing scale (`xs`, `sm`, `md`, `lg`, `xl`) creates visual rhythm and consistency. Stick to the scale unless you have a very specific edge case.
+
+### When hardcoded values ARE acceptable
+
+There are rare cases where hardcoded values are acceptable:
+
+- **One-off edge cases** that don't fit the design system (after discussion with design team)
+- **Third-party library constraints** where styling props can't be applied
+- **Gradual migration** from legacy code (with a plan to refactor)
+- **Prototyping** (with the expectation to use tokens in production)
+
+Even in these cases, document why the exception exists and plan to revisit it.
+
+---
+
+*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-styling-props--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-styling-props--docs)*

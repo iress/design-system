@@ -450,6 +450,17 @@ function extractExportArgs(
 }
 
 /**
+ * Extract the `component:` name from a stories file's default export meta.
+ * Returns the component name as-is (e.g. "IressPanel", "IressText") or null.
+ */
+function extractMetaComponent(storiesContent: string): string | null {
+  const match = storiesContent.match(
+    /component:\s*(Iress\w+)/,
+  );
+  return match?.[1] ?? null;
+}
+
+/**
  * Generate a code example for a specific named story export.
  * Tries render-function extraction first, then falls back to args-based generation.
  * Returns null if no useful code can be extracted.
@@ -471,9 +482,11 @@ function generateStoryCodeExample(
     return code;
   }
 
-  // No render — try args-only approach
+  // No render — try args-only approach (use meta component: name if available)
   const args = extractExportArgs(storiesContent, exportName);
   if (args) {
+    const metaComponent =
+      extractMetaComponent(storiesContent) || componentExportName;
     const children = args.children;
     const otherArgs = { ...args };
     delete otherArgs.children;
@@ -490,9 +503,9 @@ function generateStoryCodeExample(
       propFragments.length > 0 ? ' ' + propFragments.join(' ') : '';
 
     if (children) {
-      return `<${componentExportName}${propsStr}>\n  ${children}\n</${componentExportName}>`;
+      return `<${metaComponent}${propsStr}>\n  ${children}\n</${metaComponent}>`;
     }
-    return `<${componentExportName}${propsStr} />`;
+    return `<${metaComponent}${propsStr} />`;
   }
 
   return null;
@@ -1927,10 +1940,20 @@ async function main() {
           path.dirname(doc.filePath),
           `${doc.componentName}.tsx`,
         );
-        componentExportName =
-          !doc.isRecipe && existsSync(componentFile)
-            ? `Iress${doc.componentName}`
-            : null;
+        if (!doc.isRecipe && existsSync(componentFile)) {
+          componentExportName = `Iress${doc.componentName}`;
+        } else if (!doc.isRecipe) {
+          // No component file — check stories meta for the actual component
+          const storiesFile = findStoriesFile(doc.filePath, doc.componentName);
+          if (storiesFile) {
+            const storiesContent = readFileSync(storiesFile, 'utf-8');
+            componentExportName = extractMetaComponent(storiesContent);
+          } else {
+            componentExportName = null;
+          }
+        } else {
+          componentExportName = null;
+        }
 
         // Extract code example from stories Default export (or first story as fallback)
         if (!doc.isRecipe) {
