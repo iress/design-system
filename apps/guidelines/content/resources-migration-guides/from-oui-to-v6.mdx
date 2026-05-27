@@ -120,10 +120,20 @@ OUI's `DropdownButton` can be replaced by several IDS v6 components depending on
 **IressDropdownMenu example:**
 
 ```tsx
-<IressOUI allowModeChange />
-```
+import { IressDropdownMenu } from '@iress-oss/ids-components';
 
-[View "DropdownMenuMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--dropdown-menu-migration)
+// Before (OUI):
+// <DropdownButton label="Actions" items={[{ label: 'Edit' }, { label: 'Delete' }]} />
+
+// After (IDS v6):
+<IressDropdownMenu
+  activator="Actions"
+  items={[
+    { key: 'edit', label: 'Edit', onClick: handleEdit },
+    { key: 'delete', label: 'Delete', onClick: handleDelete },
+  ]}
+/>;
+```
 
 **IressSelect example (in a form):**
 

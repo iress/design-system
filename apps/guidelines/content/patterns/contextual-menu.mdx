@@ -18,7 +18,10 @@ import { IressContextualMenu } from '@iress-oss/ids-components';
 ```tsx
 import { IressContextualMenu } from '@iress-oss/ids-components';
 
-<IressContextualMenu />
+<IressContextualMenu items={[
+  { key: 'edit', label: 'Edit' },
+  { key: 'delete', label: 'Delete' },
+]} />
 ```
 
 ## Usage
