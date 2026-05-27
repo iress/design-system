@@ -113,7 +113,7 @@ describe('IressField', () => {
             '& > .ids-radio-group:first-child, & > .ids-checkbox-group:first-child, & > .ids-checkbox:first-child'
           ],
         ).toEqual({
-          marginTop: 'none',
+          marginTop: 'spacing.0',
         });
       });
     });

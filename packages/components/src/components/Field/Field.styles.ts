@@ -78,7 +78,7 @@ export const field = sva({
         element: {
           '& > .ids-radio-group:first-child, & > .ids-checkbox-group:first-child, & > .ids-checkbox:first-child':
             {
-              mt: 'none',
+              mt: 'spacing.0',
             },
         },
       },
