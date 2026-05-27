@@ -17,10 +17,10 @@ The `borderRadius` prop allows you to change the border radius of any component.
 
 ```tsx
 <IressInput
-  borderRadius="radius.3"
-  px="spacing.4"
-  py="spacing.2"
-  placeholder="Search everything"
+borderRadius={borderRadius}
+px="spacing.4"
+py="spacing.2"
+placeholder="Search everything"
 />
 ```
 
@@ -31,8 +31,8 @@ The `borderRadius` prop allows you to change the border radius of any component.
 In some cases you may need to remove the border-radius to achieve design requirements. This can be done using `radius.000` or `none`.
 
 ```tsx
-<IressPanel borderRadius="radius.000" bg="alt">
-  No radius here
+<IressPanel borderRadius={borderRadius} bg="alt">
+No radius here
 </IressPanel>
 ```
 

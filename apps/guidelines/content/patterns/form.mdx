@@ -290,10 +290,10 @@ Use the `rules` prop on the `IressFormField` component to add validation rules. 
 A boolean which, if `true`, indicates that the input must have a value before the form can be submitted. You can assign a string to return a custom error message.
 
 ```tsx
-<IressForm heading="Required example" pattern="short">
+<IressForm heading="Required example">
 <IressFormField
-  name="name"
   label="Name"
+  name="name"
   rules={{ required: 'Name is required' }}
   render={(controlledProps) => <IressInput {...controlledProps} />}
 />
@@ -313,12 +313,12 @@ The maximum character length of the value to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressForm heading="Max length example" pattern="short">
+<IressForm heading="Max length example">
 <IressFormField
-  name="username"
   label="Username"
-  rules={{ maxLength: { value: 20, message: 'Max 20 characters' } }}
-  render={(controlledProps) => <IressInput {...controlledProps} maxLength={20} />}
+  name="username"
+  rules={{ maxLength: { value: 10, message: 'Max 10 characters' } }}
+  render={(controlledProps) => <IressInput {...controlledProps} maxLength={10} />}
 />
 <IressButton type="submit" mode="primary">Submit</IressButton>
 </IressForm>
@@ -336,10 +336,10 @@ The minimum character length of the value to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressForm heading="Min length example" pattern="short">
+<IressForm heading="Min length example">
 <IressFormField
-  name="password"
   label="Password"
+  name="password"
   rules={{ minLength: { value: 8, message: 'Min 8 characters' } }}
   render={(controlledProps) => <IressInput {...controlledProps} type="password" />}
 />
@@ -358,11 +358,11 @@ The maximum number to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressForm heading="Max example" pattern="short">
+<IressForm heading="Max example">
 <IressFormField
-  name="quantity"
-  label="Quantity"
-  rules={{ max: { value: 100, message: 'Max value is 100' } }}
+  label="Age"
+  name="age"
+  rules={{ max: { value: 120, message: 'Max value is 120' } }}
   render={(controlledProps) => <IressInput {...controlledProps} type="number" />}
 />
 <IressButton type="submit" mode="primary">Submit</IressButton>
@@ -380,11 +380,11 @@ The minimum number to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressForm heading="Min example" pattern="short">
+<IressForm heading="Min example">
 <IressFormField
-  name="age"
-  label="Age"
-  rules={{ min: { value: 18, message: 'Must be at least 18' } }}
+  label="Quantity"
+  name="quantity"
+  rules={{ min: { value: 1, message: 'Min value is 1' } }}
   render={(controlledProps) => <IressInput {...controlledProps} type="number" />}
 />
 <IressButton type="submit" mode="primary">Submit</IressButton>
@@ -410,10 +410,10 @@ The minimum date to accept for this input.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-<IressForm heading="Min date example" pattern="short">
+<IressForm heading="Min date example">
 <IressFormField
-  name="startDate"
   label="Start date"
+  name="startDate"
   rules={{ minDate: '2024-01-01' }}
   render={(controlledProps) => <IressInputDate {...controlledProps} />}
 />
@@ -430,10 +430,10 @@ The maximum date to accept for this input.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-<IressForm heading="Max date example" pattern="short">
+<IressForm heading="Max date example">
 <IressFormField
-  name="endDate"
   label="End date"
+  name="endDate"
   rules={{ maxDate: '2025-12-31' }}
   render={(controlledProps) => <IressInputDate {...controlledProps} />}
 />
@@ -450,11 +450,11 @@ Ensures the input is a valid email address.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-<IressForm heading="Email example" pattern="short">
+<IressForm heading="Email example">
 <IressFormField
-  name="email"
   label="Email"
-  rules={{ email: 'Please enter a valid email' }}
+  name="email"
+  rules={{ email: 'Please enter a valid email address' }}
   render={(controlledProps) => <IressInput {...controlledProps} type="email" />}
 />
 <IressButton type="submit" mode="primary">Submit</IressButton>
@@ -472,16 +472,16 @@ You can pass a callback function as the argument to validate, or you can pass an
 - for `object` or `array` input data, it's recommended to use the validate function for validation as the other rules mostly apply to `string`, `string[]`, `number` and `boolean` data types.
 
 ```tsx
-<IressForm heading="Validate example" pattern="short">
+<IressForm heading="Validate example">
 <IressFormField
-  name="interests"
   label="Interests"
+  name="interests"
   rules={{ validate: (value) => (value?.length >= 2) || 'Select at least 2' }}
   render={(controlledProps) => (
     <IressCheckboxGroup {...controlledProps}>
       <IressCheckbox value="sports">Sports</IressCheckbox>
       <IressCheckbox value="music">Music</IressCheckbox>
-      <IressCheckbox value="travel">Travel</IressCheckbox>
+      <IressCheckbox value="art">Art</IressCheckbox>
     </IressCheckboxGroup>
   )}
 />

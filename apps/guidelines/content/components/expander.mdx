@@ -41,15 +41,11 @@ Expander has a `mode` prop which can be used to change how the expander is displ
 <IressStack gap="lg">
 <IressStack gap="xs">
 <IressText element="h2">Section (default)</IressText>
-<IressExpander mode="section" activator="View details">
-  Expanded section content goes here.
-</IressExpander>
+<IressExpander mode="section" />
 </IressStack>
 <IressStack gap="xs">
 <IressText element="h2">Link</IressText>
-<IressExpander mode="link" activator="Learn more">
-  Additional context and details.
-</IressExpander>
+<IressExpander mode="link" />
 </IressStack>
 </IressStack>
 ```
@@ -61,9 +57,7 @@ Expander has a `mode` prop which can be used to change how the expander is displ
 The `open` prop can be used to control the open state of the expander as can be seen below.
 
 ```tsx
-<IressExpander open activator="Expander activator">
-  This content is visible because the expander is open.
-</IressExpander>
+<IressExpander open />
 ```
 
 [View "Open" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components---open)

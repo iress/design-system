@@ -34,7 +34,7 @@ import { IressImage } from '@iress-oss/ids-components';
 {MAX_WIDTHS.map((width, index) => (
 <React.Fragment key={index}>
 <IressText element="h3">{width ?? 'undefined'}</IressText>
-<IressImage maxWidth={width} src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp" alt="Example image" />
+<IressImage maxWidth={width} />
 </React.Fragment>
 ))}
 </IressStack>

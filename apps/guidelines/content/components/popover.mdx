@@ -16,10 +16,10 @@ import { IressPopover } from '@iress-oss/ids-components';
 ## Quick Start
 
 ```tsx
-import { IressPopover, IressButton } from '@iress-oss/ids-components';
+import { IressPopover } from '@iress-oss/ids-components';
 
-<IressPopover activator={<IressButton>Open</IressButton>}>
-  Popover content
+<IressPopover>
+  basic
 </IressPopover>
 ```
 
@@ -32,8 +32,8 @@ For the popover to render, the `activator` property is required. It is the eleme
 Anything added as the children of the `IressPopover` component will be displayed in the popover panel.
 
 ```tsx
-<IressPopover activator={<IressButton>Open</IressButton>}>
-  Popover content
+<IressPopover>
+  basic
 </IressPopover>
 ```
 
@@ -144,12 +144,7 @@ align="bottom-end"
 Occasionally, you may have more information to display than the width set by the theme can comfortably show.
 
 ```tsx
-<IressPopover
-  activator={<IressButton>Open wide popover</IressButton>}
-  contentStyle={{ style: { maxWidth: '30rem' } }}
->
-  Wide popover content
-</IressPopover>
+<IressPopover contentStyle={{ style: { maxWidth: '30rem' } }} />
 ```
 
 [View "Width" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--width)
@@ -162,14 +157,11 @@ If you need to fix the height of a popover, you can set a maximum height using t
 
 ```tsx
 <IressInline gap="md">
-<IressPopover activator={<IressButton>Normal popover</IressButton>}>
-  Popover content that can grow in height
-</IressPopover>
+<IressPopover activator={<IressButton>Normal popover</IressButton>}
+/>
 <IressPopover activator={<IressButton>Fixed height popover</IressButton>}
 contentStyle={{ scrollable: 'y', style: { maxHeight: '200px' } }}
->
-  Popover content with a fixed maximum height
-</IressPopover>
+/>
 </IressInline>
 ```
 
@@ -228,8 +220,8 @@ Input popovers work slightly different to normal popovers, where the focus insid
 - When the input loses focus, it will close
 
 ```tsx
-<IressInputPopover activator={<IressInput placeholder="Type to search..." />}>
-  Input popover content
+<IressInputPopover>
+  basic
 </IressInputPopover>
 ```
 

@@ -64,7 +64,7 @@ const { showSlideout } = useSlideout();
           <IressButton onClick={() => showSlideout('overlay')}>
             Overlay slideout
           </IressButton>
-          <IressSlideout heading="Overlay" id="overlay" mode="overlay">
+          <IressSlideout id="overlay" heading="Overlay" mode="overlay">
             <h2>Overlay</h2>
             For most situations <code>overlay</code> will be what you need,
             which is why this is the default behaviour. You do not need to
@@ -76,8 +76,8 @@ const { showSlideout } = useSlideout();
             Push slideout
           </IressButton>
           <IressSlideout
-            heading="Push"
             id="push"
+            heading="Push"
             mode="push"
             eleToPush="#storybook-docs, html"
           >

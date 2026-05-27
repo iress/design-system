@@ -165,8 +165,8 @@ const { showModal } = useModal();
 
     const noCloseButtonModal = (
       <IressModal
-        heading="No Close Button"
         id="no-close-button"
+        heading="Modal Header"
         noCloseButton
         footer={
           <IressButton onClick={() => showModal('no-close-button', false)}>
@@ -178,8 +178,8 @@ const { showModal } = useModal();
 
     const bothModal = (
       <IressModal
-        heading="Both Disabled"
         id="both"
+        heading="Modal Header"
         disableBackdropClick
         noCloseButton
         footer={
@@ -196,8 +196,8 @@ const { showModal } = useModal();
           Disable backdrop click
         </IressButton>
         <IressModal
-          heading="Disable Backdrop Click"
           id="disable-backdrop-click"
+          heading="Modal Header"
           disableBackdropClick
         />
 

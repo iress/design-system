@@ -30,8 +30,8 @@ There are seven props you can use to customise the padding of any component. It 
 [View "padding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--padding)
 
 ```tsx
-<IressButton px="lg" mode="primary">
-  Submit
+<IressButton px={px} mode="primary">
+Submit
 </IressButton>
 ```
 
@@ -132,9 +132,7 @@ Negative margin is supported in the same way as positive margin. You can use the
 
 ```tsx
 <IressPanel bg="colour.primary.surface" maxWidth="container.sm" mx="auto">
-  <IressPanel bg="alt" mx="-md" p="md">
-    This panel has negative horizontal margin.
-  </IressPanel>
+<IressPanel />
 </IressPanel>
 ```
 
@@ -145,12 +143,20 @@ Negative margin is supported in the same way as positive margin. You can use the
 The `noGutter` prop removes the bottom margin of the last direct child of a component. This is useful when you have nested content inside a component with padding, such as `IressPanel` or `IressCard`, to remove unnecessary spacing in your layout.
 
 ```tsx
-<IressPanel noGutter>
-  <ul>
-    <li>
-      Margin is removed due to <code>noGutter</code>
-    </li>
-  </ul>
+<IressPanel>
+{children ?? (
+<ul>
+<li>
+{args.noGutter ? (
+<>
+Margin is removed due to <code>noGutter</code>
+</>
+) : (
+'Since lists have bottom margin, you can see there is extra white-space.'
+)}
+</li>
+</ul>
+)}
 </IressPanel>
 ```
 

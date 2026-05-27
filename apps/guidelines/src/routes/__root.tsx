@@ -16,7 +16,7 @@ import {
 import { Search } from '../components/Search';
 import { AiPanel } from '../components/AiPanel';
 import { NAV_ITEMS } from '../nav';
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 export const Route = createRootRoute({
   component: RootLayout,
@@ -28,12 +28,19 @@ function RootLayout() {
     NAV_ITEMS.find((item) => pathname.startsWith(`/${item.key}`))?.key ??
     NAV_ITEMS[0].key;
   const [navHeight, setNavHeight] = useState(0);
+  const headerRef = useRef<HTMLElement>(null);
+
+  useLayoutEffect(() => {
+    if (headerRef.current) {
+      setNavHeight(headerRef.current.offsetHeight);
+    }
+  }, []);
 
   return (
     <>
       <IressStyled
         element="header"
-        ref={(element) => setNavHeight(element?.offsetHeight ?? 0)}
+        ref={headerRef}
       >
         <IressInline
           px="spacing.3"

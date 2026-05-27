@@ -137,14 +137,7 @@ It does have some defaults to help with user experience. `append` automatically 
 If you would like to show a message when there are no results, you can use the `noResultsText` prop. It accepts any React node.
 
 ```tsx
-<IressAutocomplete
-  placeholder='Type "no" to see the no results text'
-  noResultsText="No matching results found"
-  options={[
-    { label: 'Option 1', value: '1' },
-    { label: 'Option 2', value: '2' },
-  ]}
-/>
+<IressAutocomplete placeholder="Type "no" to see the no results text" />
 ```
 
 [View "NoResultsText" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--no-results-text)
@@ -182,10 +175,10 @@ On smaller screens (< 768px), the number of options is further reduced by using 
 <IressAutocomplete options={...} />
 
 // 4 results on large screens, 3 on small screens
-<IressAutocomplete limitDesktop={4} limitMobile={3} options={...} />
+<IressAutocomplete resultLimitDesktop={4} resultLimitMobile={3} options={...} />
 
-// 4 results on all screens (limitMobile > limitDesktop so has no effect)
-<IressAutocomplete limitDesktop={4} limitMobile={5} options={...} />
+// 4 results on all screens (resultLimitMobile > resultLimitDesktop so has no effect)
+<IressAutocomplete resultLimitDesktop={4} resultLimitMobile={5} options={...} />
 ```
 
 The result limits will also affect the number of initial options displayed, if the `initialOptions` prop is set.
@@ -195,16 +188,7 @@ The result limits will also affect the number of initial options displayed, if t
 <IressPanel>
 <CurrentBreakpoint />
 </IressPanel>
-<IressAutocomplete
-  limitDesktop={4}
-  limitMobile={3}
-  options={[
-    { label: 'Option 1', value: '1' },
-    { label: 'Option 2', value: '2' },
-    { label: 'Option 3', value: '3' },
-    { label: 'Option 4', value: '4' },
-  ]}
-/>
+<IressAutocomplete />
 </IressStack>
 ```
 

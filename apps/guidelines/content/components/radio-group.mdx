@@ -16,12 +16,9 @@ import { IressRadioGroup } from '@iress-oss/ids-components';
 ## Quick Start
 
 ```tsx
-import { IressRadioGroup, IressRadio } from '@iress-oss/ids-components';
+import { IressRadioGroup } from '@iress-oss/ids-components';
 
-<IressRadioGroup name="survey">
-  <IressRadio value="option-a">Option A</IressRadio>
-  <IressRadio value="option-b">Option B</IressRadio>
-</IressRadioGroup>
+<IressRadioGroup name="survey" />
 ```
 
 ## Examples
@@ -41,10 +38,7 @@ The default checked state of the radio children should always be set using the `
 **Note:** The `value` prop on the `IressRadioGroup` component will always override the `checked` state of the `IressRadio` children.
 
 ```tsx
-<IressRadioGroup defaultValue="newspaper">
-  <IressRadio value="newspaper">Newspaper</IressRadio>
-  <IressRadio value="online">Online</IressRadio>
-</IressRadioGroup>
+<IressRadioGroup defaultValue="newspaper" />
 ```
 
 [View "RadioSelection" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio-group--radio-selection)
@@ -69,38 +63,23 @@ The layout prop controls how the radio group is displayed and can have three bas
 <IressStack gap="md">
 <IressText>
 <h3>block (default)</h3>
-<IressRadioGroup layout="block">
-  <IressRadio value="a">Option A</IressRadio>
-  <IressRadio value="b">Option B</IressRadio>
-</IressRadioGroup>
+<IressRadioGroup layout="block" />
 </IressText>
 <IressText>
 <h3>inline</h3>
-<IressRadioGroup layout="inline">
-  <IressRadio value="a">Option A</IressRadio>
-  <IressRadio value="b">Option B</IressRadio>
-</IressRadioGroup>
+<IressRadioGroup layout="inline" />
 </IressText>
 <IressText>
 <h3>inlineEqualWidth</h3>
-<IressRadioGroup layout="inlineEqualWidth">
-  <IressRadio value="a">Option A</IressRadio>
-  <IressRadio value="b">Option B</IressRadio>
-</IressRadioGroup>
+<IressRadioGroup layout="inlineEqualWidth" />
 </IressText>
 <IressText>
 <h3>inlineFlex</h3>
-<IressRadioGroup layout="inlineFlex">
-  <IressRadio value="a">Option A</IressRadio>
-  <IressRadio value="b">Option B</IressRadio>
-</IressRadioGroup>
+<IressRadioGroup layout="inlineFlex" />
 </IressText>
 <IressText>
 <h3>stack</h3>
-<IressRadioGroup layout="stack">
-  <IressRadio value="a">Option A</IressRadio>
-  <IressRadio value="b">Option B</IressRadio>
-</IressRadioGroup>
+<IressRadioGroup layout="stack" />
 </IressText>
 </IressStack>
 ```
@@ -118,10 +97,7 @@ When `hiddenRadio` is enabled, the label will have no padding. Padding can be ad
 label="I'd like to discuss the following in my financial review:"
 hint="Select one option"
 >
-<IressRadioGroup>
-  <IressRadio value="investments">Investments</IressRadio>
-  <IressRadio value="retirement">Retirement</IressRadio>
-</IressRadioGroup>
+<IressRadioGroup />
 </IressField>
 ```
 
@@ -167,10 +143,7 @@ The `readOnly` prop changes how the radio group is rendered. It will only render
 It is understandable that this may not be the desired behavior for all use cases. If you need a radio group that is not editable, but still visible, simply do not set the `readOnly` prop and set the `value` prop instead.
 
 ```tsx
-<IressRadioGroup readOnly value="option-a">
-  <IressRadio value="option-a">Option A</IressRadio>
-  <IressRadio value="option-b">Option B</IressRadio>
-</IressRadioGroup>
+<IressRadioGroup readOnly />
 ```
 
 [View "ReadOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio-group--read-only)
@@ -180,10 +153,7 @@ It is understandable that this may not be the desired behavior for all use cases
 The `touch` prop adds the button-like border and padding to radio.
 
 ```tsx
-<IressRadioGroup variant="touch">
-  <IressRadio value="option-a">Option A</IressRadio>
-  <IressRadio value="option-b">Option B</IressRadio>
-</IressRadioGroup>
+<IressRadioGroup variant="touch" />
 ```
 
 [View "Touch" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio-group--touch)

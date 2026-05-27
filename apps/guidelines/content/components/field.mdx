@@ -18,9 +18,7 @@ import { IressField } from '@iress-oss/ids-components';
 ```tsx
 import { IressField } from '@iress-oss/ids-components';
 
-<IressField label="First name" htmlFor="firstName">
-  <IressInput id="firstName" />
-</IressField>
+<IressField label="First name" />
 ```
 
 ## Examples
@@ -48,9 +46,7 @@ To display error messages associated with the field, you can use the `errorMessa
 **Note:** `IressField` requires validation to be handled by the consumer. If you want out-of-the-box validation, use [`IressFormField` alongside `IressForm` instead](/docs/components-form--docs#fields).
 
 ```tsx
-<IressField label="Email address" htmlFor="email" errorMessages={[{ message: 'Email is required' }]}>
-  <IressInput id="email" />
-</IressField>
+<IressField label="Error message" />
 ```
 
 [View "ErrorMessage" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--error-message)
@@ -62,9 +58,7 @@ For more control over the formatting of the error, you can use the `error` prop.
 **Note:** `IressField` requires validation to be handled by the consumer. If you want out-of-the-box validation, use [`IressFormField` alongside `IressForm` instead](/docs/components-form--docs#fields).
 
 ```tsx
-<IressField label="Username" htmlFor="username" error="This username is already taken">
-  <IressInput id="username" />
-</IressField>
+<IressField label="Custom error" />
 ```
 
 [View "CustomError" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--custom-error)
@@ -103,7 +97,7 @@ You can also pass `readOnly` prop to remove the asterisk symbol (\*) even when t
 
 ```tsx
 <IressField label="Full name" readOnly>
-<IressReadonly value="John Smith" />
+  <IressReadonly value="John Smith" />
 </IressField>
 ```
 
@@ -114,12 +108,10 @@ This variation adds a lock icon to the label for a stronger visual cue while
 keeping the field value and label relationship accessible.
 
 ```tsx
-<IressField label="Email" readOnly="locked">
-<IressInput value="john@example.com" readOnly="locked" />
+<IressField label="Account number" readOnly="locked">
+  <IressInput value="123456789" readOnly />
 </IressField>
 ```
-
-[View "LockedReadonlyData" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--locked-readonly-data)
 
 ### Supplementary
 
@@ -136,9 +128,28 @@ This is used to display some metadata based on the value of the field in context
 - The `supplementary` prop will only be displayed if the field is not in an error state. If the field is in an error state, the `error` and `errorMessages` prop will be displayed instead.
 
 ```tsx
-<IressField label="Commission" supplementary="Expected commission: $1,234.56">
-  <IressInput placeholder="Enter percentage" />
-</IressField>
+import { IressField, IressInput, IressStack, IressToggle } from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+function SupplementaryExample() {
+  const [error, setError] = useState<string | undefined>();
+
+  return (
+    <IressStack gap="spacing.5">
+      <IressToggle
+        onChange={(checked) =>
+          setError(checked ? 'This field is required' : undefined)
+        }
+        checked={error !== undefined}
+      >
+        Show error
+      </IressToggle>
+      <IressField label="Commission" supplementary="Estimated: $150.00" error={error}>
+        <IressInput placeholder="Enter value" />
+      </IressField>
+    </IressStack>
+  );
+}
 ```
 
 [View "Supplementary" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--supplementary)
@@ -157,9 +168,7 @@ Here are a few cases where you may use a horizontal layout:
 - Collaborative visual tools that require real-time editing and previews, such as Styler, Miro, Figma, where fields are less prominent to give prominence to the intended output.
 
 ```tsx
-<IressField horizontal labelWidth="250px" label="Email address" hint="Enter your email address for contact" supplementary="We will not share your email with third parties (Supplementary text)">
-  <IressInput placeholder="email@example.com" type="email" />
-</IressField>
+<IressField horizontal labelWidth="250px" label="Email address" hint="Enter your email address for contact" supplementary="We will not share your email with third parties (Supplementary text)" />
 ```
 
 [View "Horizontal" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--horizontal)
@@ -169,9 +178,7 @@ Here are a few cases where you may use a horizontal layout:
 Error messages in horizontal layout are displayed below both the label and input field, spanning the full width.
 
 ```tsx
-<IressField horizontal labelWidth="250px" label="Email address" hint="Enter your email address for contact" error="Please enter a valid email address">
-  <IressInput placeholder="email@example.com" type="email" />
-</IressField>
+<IressField horizontal labelWidth="250px" label="Email address" hint="Enter your email address for contact" supplementary="We will not share your email with third parties (Supplementary text)" />
 ```
 
 [View "HorizontalWithError" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--horizontal-with-error)
@@ -181,22 +188,24 @@ Error messages in horizontal layout are displayed below both the label and input
 In horizontal layout, you can control the width of the label using the `labelWidth` prop. This accepts CSS width values like pixels, percentages, or `auto`.
 
 ```tsx
+import { IressField, IressInput, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="spacing.5">
-<IressField horizontal labelWidth="100px" label="labelWidth: 100px">
-<IressInput placeholder="Label width: 100px" />
-</IressField>
-<IressField horizontal labelWidth="200px" label="labelWidth: 200px">
-<IressInput placeholder="Label width: 200px" />
-</IressField>
-<IressField horizontal labelWidth="25%" label="labelWidth: 25%">
-<IressInput placeholder="Label width: 25%" />
-</IressField>
-<IressField horizontal labelWidth="auto" label="labelWidth: auto">
-<IressInput placeholder="Label width: auto" />
-</IressField>
-<IressField horizontal label="Default (no labelWidth)">
-<IressInput placeholder="Default horizontal layout" />
-</IressField>
+  <IressField horizontal labelWidth="100px" label="labelWidth: 100px">
+    <IressInput placeholder="Label width: 100px" />
+  </IressField>
+  <IressField horizontal labelWidth="200px" label="labelWidth: 200px">
+    <IressInput placeholder="Label width: 200px" />
+  </IressField>
+  <IressField horizontal labelWidth="25%" label="labelWidth: 25%">
+    <IressInput placeholder="Label width: 25%" />
+  </IressField>
+  <IressField horizontal labelWidth="auto" label="labelWidth: auto">
+    <IressInput placeholder="Label width: auto" />
+  </IressField>
+  <IressField horizontal label="Default (no labelWidth)">
+    <IressInput placeholder="Default horizontal layout" />
+  </IressField>
 </IressStack>
 ```
 
@@ -211,42 +220,57 @@ This is particularly useful in dense forms or when you want to minimize vertical
 **Note:** When `removeErrorMargin` is enabled, subsequent fields will be pushed down when error or supplementary messages appear, as no space is reserved for these messages. You can use the `IressStack` component to control field gaps and spacing as needed.
 
 ```tsx
-<IressStack gap="spacing.5">
-<IressRow gutter="spacing.6">
-<IressCol span="6">
-<IressStack gap="spacing.2">
-<IressText element="h3">Vertical Label Layout</IressText>
-<IressStack gap="spacing.0">
-<IressField removeErrorMargin label="First Name">
-<IressInput placeholder="Enter first name" />
-</IressField>
-<IressField removeErrorMargin label="Last Name">
-<IressInput placeholder="Enter last name" />
-</IressField>
-<IressField removeErrorMargin label="Email Address">
-<IressInput type="email" placeholder="Enter email" />
-</IressField>
-</IressStack>
-</IressStack>
-</IressCol>
-<IressCol span="6">
-<IressStack gap="spacing.2">
-<IressText element="h3">Horizontal Label Layout</IressText>
-<IressStack gap="spacing.0">
-<IressField removeErrorMargin horizontal labelWidth="120px" label="First Name">
-<IressInput placeholder="Enter first name" />
-</IressField>
-<IressField removeErrorMargin horizontal labelWidth="120px" label="Last Name">
-<IressInput placeholder="Enter last name" />
-</IressField>
-<IressField removeErrorMargin horizontal labelWidth="120px" label="Email Address">
-<IressInput type="email" placeholder="Enter email" />
-</IressField>
-</IressStack>
-</IressStack>
-</IressCol>
-</IressRow>
-</IressStack>
+import { IressField, IressInput, IressStack, IressToggle, IressInline, IressRow, IressCol, IressText } from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+function RemoveErrorMarginExample() {
+  const [removeErrorMargin, setRemoveErrorMargin] = useState(false);
+  const [showError, setShowError] = useState(false);
+
+  return (
+    <IressStack gap="spacing.5">
+      <IressInline gap="spacing.4">
+        <IressToggle
+          onChange={(checked) => setRemoveErrorMargin(checked)}
+          checked={removeErrorMargin}
+        >
+          Remove error margin (tighter field spacing)
+        </IressToggle>
+        <IressToggle
+          onChange={(checked) => setShowError(checked)}
+          checked={showError}
+        >
+          Show error message
+        </IressToggle>
+      </IressInline>
+
+      <IressStack gap="spacing.0">
+        <IressField
+          removeErrorMargin={removeErrorMargin}
+          label="First Name"
+          errorMessages={showError ? [{ message: 'This field is required' }] : undefined}
+        >
+          <IressInput placeholder="Enter first name" />
+        </IressField>
+        <IressField
+          removeErrorMargin={removeErrorMargin}
+          label="Last Name"
+          errorMessages={showError ? [{ message: 'This field is required' }] : undefined}
+          supplementary={!showError ? 'This is always-displayed supplementary text' : undefined}
+        >
+          <IressInput placeholder="Enter last name" />
+        </IressField>
+        <IressField
+          removeErrorMargin={removeErrorMargin}
+          label="Email Address"
+          errorMessages={showError ? [{ message: 'This field is required' }] : undefined}
+        >
+          <IressInput type="email" placeholder="Enter email" />
+        </IressField>
+      </IressStack>
+    </IressStack>
+  );
+}
 ```
 
 [View "RemoveErrorMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--remove-error-margin)
@@ -258,13 +282,15 @@ The `IressFieldGroup` component is used to group multiple `Field` components tog
 Under the hood it uses a `fieldset` and `legend` element to group the fields together, improving the semantics of your form if you use multiple inputs (eg. in the case of a checkbox group) and making it more accessible.
 
 ```tsx
+import { IressFieldGroup, IressField, IressInput } from '@iress-oss/ids-components';
+
 <IressFieldGroup label="Contact details">
-<IressField label="First name" htmlFor="firstName">
-<IressInput id="firstName" />
-</IressField>
-<IressField label="Last name" htmlFor="lastName">
-<IressInput id="lastName" />
-</IressField>
+  <IressField label="First name" htmlFor="first-name">
+    <IressInput id="first-name" placeholder="Enter first name" />
+  </IressField>
+  <IressField label="Last name" htmlFor="last-name">
+    <IressInput id="last-name" placeholder="Enter last name" />
+  </IressField>
 </IressFieldGroup>
 ```
 
@@ -275,21 +301,14 @@ Under the hood it uses a `fieldset` and `legend` element to group the fields tog
 Multiple fields can be displayed inline using the `inline` prop. On smaller screens, inline elements will wrap on to a new line if there's not enough space for everything on one line.
 
 ```tsx
-<IressFieldGroup label="Contact" inline>
-  <IressField label="First name" htmlFor="firstName">
-    <IressInput id="firstName" />
-  </IressField>
-  <IressField label="Last name" htmlFor="lastName">
-    <IressInput id="lastName" />
-  </IressField>
-</IressFieldGroup>
+<IressFieldGroup inline />
 ```
 
 [View "Inline" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field-group--inline)
 
 ```tsx
 <form>
-<IressFieldGroup label="New contact" inline>
+<IressFieldGroup {...{ ...args, inputs: undefined }}>
 <IressField label="Emoji" htmlFor="emoji">
 <IressSelect
 width="2"
@@ -328,8 +347,8 @@ options={[
 
 <IressPopover
 activator={
-<IressButton icon="settings">
-Settings
+<IressButton>
+<IressIcon name="cog" />
 </IressButton>
 }
 >
@@ -348,19 +367,13 @@ Elements can also be joined together using the `join` prop. Joined elements won'
 **Note:** The `join` prop works out of the box with IDS components. To enable your custom components to work with the `join` prop, you need to ensure the direct child of `IressFieldGroup` has the class `GlobalCSSClass.FormElement`. If the direct child is not the element with the border, add the class `GlobalCSSClass.FormElementInner` to the element with the border.
 
 ```tsx
-<IressFieldGroup label="Search" join>
-  <IressInput placeholder="Search..." />
-  <IressButton mode="primary">Search</IressButton>
-</IressFieldGroup>
+<IressFieldGroup join />
 ```
 
 [View "Join" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field-group--join)
 
 ```tsx
-<IressFieldGroup label="Amount" join>
-  <IressInput placeholder="0.00" type="number" />
-  <IressButton mode="secondary">Submit</IressButton>
-</IressFieldGroup>
+<IressFieldGroup join />
 ```
 
 [View "JoinSink" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field-group--join-sink)

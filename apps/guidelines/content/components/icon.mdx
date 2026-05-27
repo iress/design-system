@@ -290,7 +290,7 @@ If you use an icon to improve the visual appeal of content, for example by repla
 If you use an icon to convey meaning, for example using an icon as the only content inside a button, you do need to supply a value for the `screenreaderText`; if you don't the button meaning will be completely lost for screen reader users.
 
 ```tsx
-<IressIcon name="home" screenreaderText="Home" />
+<IressIcon screenreaderText="Home" />
 ```
 
 [View "ScreenReaderText" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-icon--screen-reader-text)
@@ -302,12 +302,12 @@ The `filled` prop allows you to use a filled version of the icon, usually to ind
 ```tsx
 <IressInline gap="md">
 <IressText textAlign="center">
-<IressIcon name="star" textStyle="typography.heading.1" />
+<IressIcon textStyle="typography.heading.1" />
 <br />
 (default)
 </IressText>
 <IressText textAlign="center">
-<IressIcon name="star" filled textStyle="typography.heading.1" />
+<IressIcon filled textStyle="typography.heading.1" />
 <br />
 filled
 </IressText>
@@ -460,7 +460,7 @@ const [query, setQuery] = useState('');
                   Show all icons{' '}
                   <IressTooltip tooltipText="Enable to use browser search (Ctrl+F/Cmd+F) for easier browsing">
                     <IressButton mode="muted">
-                      <IressIcon name="info" />
+                      <IressIcon name="info-circle" />
                     </IressButton>
                   </IressTooltip>
                 </IressToggle>
@@ -508,19 +508,19 @@ The `flip` prop can be set to horizontal, vertical or both.
 ```tsx
 <IressInline gap="md">
 <IressStack horizontalAlign="center">
-<IressIcon name="arrow_forward" />
+<IressIcon />
 <IressText>(default)</IressText>
 </IressStack>
 <IressStack horizontalAlign="center">
-<IressIcon name="arrow_forward" flip="horizontal" />
+<IressIcon flip="horizontal" />
 <IressText>horizontal</IressText>
 </IressStack>
 <IressStack horizontalAlign="center">
-<IressIcon name="arrow_forward" flip="vertical" />
+<IressIcon flip="vertical" />
 <IressText>vertical</IressText>
 </IressStack>
 <IressStack horizontalAlign="center">
-<IressIcon name="arrow_forward" flip="both" />
+<IressIcon flip="both" />
 <IressText>both</IressText>
 </IressStack>
 </IressInline>
@@ -535,22 +535,22 @@ The `rotate` prop can be set to 90, 180 or 270 degrees.
 ```tsx
 <IressInline gap="md">
 <IressText textAlign="center">
-<IressIcon name="arrow_forward" />
+<IressIcon />
 <br />
 (default)
 </IressText>
 <IressText textAlign="center">
-<IressIcon name="arrow_forward" rotate={90} />
+<IressIcon rotate={90} />
 <br />
 90
 </IressText>
 <IressText textAlign="center">
-<IressIcon name="arrow_forward" rotate={180} />
+<IressIcon rotate={180} />
 <br />
 180
 </IressText>
 <IressText textAlign="center">
-<IressIcon name="arrow_forward" rotate={270} />
+<IressIcon rotate={270} />
 <br />
 270
 </IressText>
@@ -566,16 +566,16 @@ The `spin` prop can be set to half (fastest), 1, 2 or 3 (slowest) to control the
 ```tsx
 <IressInline gap="md">
 <IressText>
-<IressIcon name="sync" spin="half" /> half
+<IressIcon spin="half" /> half
 </IressText>
 <IressText>
-<IressIcon name="sync" spin={1} /> 1
+<IressIcon spin={1} /> 1
 </IressText>
 <IressText>
-<IressIcon name="sync" spin={2} /> 2
+<IressIcon spin={2} /> 2
 </IressText>
 <IressText>
-<IressIcon name="sync" spin={3} /> 3
+<IressIcon spin={3} /> 3
 </IressText>
 </IressInline>
 ```
@@ -591,7 +591,7 @@ Icons now inherit the size of the parent component. This means you can use them 
 href="https://www.iress.com/"
 target="_blank"
 rel="noreferrer"
-append={<IressIcon name="open_in_new" />}
+append={<IressIcon />}
 >
 Go to this link
 </IressLink>
@@ -607,6 +607,7 @@ As of version 6, these names will automatically be mapped when using the `IressI
 
 ```tsx
 <IressTable
+{...(args as object)}
 caption="Font Awesome to Material Symbols Migration Reference"
 columns={[
 {

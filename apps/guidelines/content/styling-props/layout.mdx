@@ -15,11 +15,11 @@ The `alignSelf` prop allows you to override the alignItems value set by a parent
 
 ```tsx
 <IressStack gap="md" horizontalAlign="center">
-<IressPanel bg="alt">First panel (no alignSelf)</IressPanel>
-<IressPanel bg="colour.primary.surface" alignSelf="flex-start">
-Panel with alignSelf prop
-</IressPanel>
-<IressPanel bg="alt">Third panel (no alignSelf)</IressPanel>
+  <IressPanel bg="alt">First panel (no alignSelf)</IressPanel>
+  <IressPanel bg="colour.primary.surface" alignSelf="flex-start">
+    Panel with alignSelf prop
+  </IressPanel>
+  <IressPanel bg="alt">Third panel (no alignSelf)</IressPanel>
 </IressStack>
 ```
 
@@ -72,23 +72,89 @@ design system.
 You can set the value to `true` to enable scrolling on both axes, or specify `'x'` or `'y'` to restrict scrolling to a single axis.
 
 ```tsx
-<IressCard px="sm" scrollable="y" style={{ maxHeight: 200 }}>
-  <IressPanel>
-    <h1>History of Iress</h1>
+<IressCard px="sm">
+<IressPanel>
+<h1>History of Iress</h1>
 
-    <p>
-      <strong>Iress Limited</strong> is an Australian-based software company
-      that provides technology solutions to the financial services industry.
-    </p>
+<p>
+<strong>Iress Limited</strong> (originally “Iress Market Technology”)
+is an Australian-based software company that provides technology
+solutions to the financial services industry. Its clients span sectors
+including wealth management, financial advice, trading, investment
+management, mortgages, and superannuation.
+</p>
 
-    <section>
-      <h2>Early Years (1993 - 2000)</h2>
-      <p>
-        Iress was founded in <strong>1993</strong> in Melbourne, Australia.
-      </p>
-    </section>
-  </IressPanel>
+<section>
+<h2>Early Years (1993 – 2000)</h2>
+<p>
+Iress was founded in <strong>1993</strong> in Melbourne, Australia.
+The company's initial product offerings focused on market data and
+trading software for financial institutions and professionals
+needing live pricing and analytics tools.
+</p>
+<p>
+In <strong>2000</strong>, Iress listed on the{' '}
+<strong>Australian Stock Exchange (ASX)</strong> under the ticker{' '}
+<strong>IRE</strong>, signaling its growth beyond market data
+services.
+</p>
+</section>
+</IressPanel>
 </IressCard>
+),
+};
+
+export const stretch: Story = {
+...alignSelf,
+args: {
+stretch: true,
+},
+render: ({ children, ...args }) => (
+<IressContainer bg="alt" py="xl" px="xl" borderRadius="none" fluid>
+<IressRow gutter="xl" verticalAlign="stretch">
+<IressCol>
+<IressPanel>
+{children ?? (
+<>
+{args.stretch
+? 'Panel is set to stretch, so it will fill the available space.'
+: 'This panel is not set to stretch, so it will only take up the space it needs.'}
+</>
+)}
+</IressPanel>
+</IressCol>
+<IressCol>
+<IressPanel>
+<h1>History of Iress</h1>
+
+<p>
+<strong>Iress Limited</strong> (originally “Iress Market
+Technology”) is an Australian-based software company that provides
+technology solutions to the financial services industry. Its
+clients span sectors including wealth management, financial
+advice, trading, investment management, mortgages, and
+superannuation.
+</p>
+
+<section>
+<h2>Early Years (1993 – 2000)</h2>
+<p>
+Iress was founded in <strong>1993</strong> in Melbourne,
+Australia. The company's initial product offerings focused on
+market data and trading software for financial institutions and
+professionals needing live pricing and analytics tools.
+</p>
+<p>
+In <strong>2000</strong>, Iress listed on the{' '}
+<strong>Australian Stock Exchange (ASX)</strong> under the
+ticker <strong>IRE</strong>, signaling its growth beyond market
+data services.
+</p>
+</section>
+</IressPanel>
+</IressCol>
+</IressRow>
+</IressContainer>
 ```
 
 [View "scrollable" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-layout--scrollable)

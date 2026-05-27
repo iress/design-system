@@ -46,12 +46,14 @@ For a full comparison of feedback components, see the [Feedback pattern](https:/
 The alert offers four statuses that set a distinctive colour and icon. They can be set using the `status` prop. Their different use cases are described here.
 
 ```tsx
+import { IressAlert, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
-<IressAlert status="danger">Something went wrong. Please try again.</IressAlert>
-<IressAlert status="warning">Your session will expire in 5 minutes.</IressAlert>
-<IressAlert status="success">Your changes have been saved.</IressAlert>
-<IressAlert status="info">A new version is available.</IressAlert>
-<IressAlert status="neutral">No new notifications.</IressAlert>
+  <IressAlert status="info">This is an informational message.</IressAlert>
+  <IressAlert status="success">Operation completed successfully.</IressAlert>
+  <IressAlert status="warning">Please review before continuing.</IressAlert>
+  <IressAlert status="danger">An error has occurred.</IressAlert>
+  <IressAlert status="neutral">A neutral notification.</IressAlert>
 </IressStack>
 ```
 
@@ -74,13 +76,24 @@ An alert can be displayed with a heading. This is controlled by the `heading` pr
 The `actions` prop allows you to display call to action buttons within the alert. This is useful for providing users with options to take action based on the alert message.
 
 ```tsx
+import { IressAlert, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
-<IressAlert status="danger" actions={[{ children: 'Retry' }, { children: 'Dismiss', mode: 'tertiary' }]}>
-  An error occurred while saving your changes.
-</IressAlert>
-<IressAlert status="info" actions={[{ children: 'Learn more' }]}>
-  A new version of the application is available.
-</IressAlert>
+  <IressAlert status="danger" actions={[{ children: 'Retry' }, { children: 'Dismiss', mode: 'tertiary' }]}>
+    Something went wrong. Please try again.
+  </IressAlert>
+  <IressAlert status="info" actions={[{ children: 'Learn more' }]}>
+    A new version is available.
+  </IressAlert>
+  <IressAlert status="success" actions={[{ children: 'View details' }]}>
+    Your changes have been saved.
+  </IressAlert>
+  <IressAlert status="warning" actions={[{ children: 'Review' }]}>
+    Your session is about to expire.
+  </IressAlert>
+  <IressAlert status="neutral" actions={[{ children: 'Got it' }]}>
+    This is a neutral alert with an action.
+  </IressAlert>
 </IressStack>
 ```
 
@@ -101,13 +114,24 @@ The `icon` prop allows you to customise the icon displayed in the alert. It acce
 By default, the alert is designed to display short messages. If you need to display a longer message that spans multiple lines, you can set the `multiLine` prop to `true`. This will adjust the spacing and layout of the alert to accommodate longer content.
 
 ```tsx
+import { IressAlert, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
-<IressAlert status="danger" multiLine heading="Error">
-  We were unable to process your request. Please check your input and try again. If the problem persists, contact support.
-</IressAlert>
-<IressAlert status="info" multiLine heading="Information">
-  Your account settings have been updated. These changes may take a few minutes to propagate across all services.
-</IressAlert>
+  <IressAlert status="danger" multiLine heading="Error">
+    A detailed error message that spans multiple lines to provide more context about what went wrong and how to fix it.
+  </IressAlert>
+  <IressAlert status="info" multiLine heading="Information">
+    Here is some detailed information that requires more space to explain the context fully.
+  </IressAlert>
+  <IressAlert status="success" multiLine heading="Success">
+    Your operation completed successfully. Here are the details of what was processed.
+  </IressAlert>
+  <IressAlert status="warning" multiLine heading="Warning">
+    Please be aware of the following important details before proceeding with this action.
+  </IressAlert>
+  <IressAlert status="neutral" multiLine heading="Note">
+    This is a neutral multi-line alert with additional context for the user.
+  </IressAlert>
 </IressStack>
 ```
 
@@ -119,9 +143,15 @@ The alert can be displayed in different variants to suit different use cases. Th
 - `full-width`: The alert is displayed in the site-wide banner, typically used for important messages that need to be seen by all users.
 
 ```tsx
+import { IressAlert, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
-<IressAlert variant="sidebar" />
-<IressAlert variant="full-width" />
+  <IressAlert variant="sidebar" heading="Sidebar alert">
+    This alert is displayed in the sidebar layout.
+  </IressAlert>
+  <IressAlert variant="full-width" heading="Full-width alert">
+    This alert is displayed in the full-width layout.
+  </IressAlert>
 </IressStack>
 ```
 
@@ -129,17 +159,31 @@ The alert can be displayed in different variants to suit different use cases. Th
 
 ### Dimissable
 
-The alert can be made dismissable by setting the `onClose` prop. This will display a close button in the top right corner of the alert, allowing users to dismiss it.
+The alert can be made dismissable by setting the `onDismiss` prop. This will display a close button in the top right corner of the alert, allowing users to dismiss it.
 
 ```tsx
+import { IressAlert, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
-<IressAlert status="danger" onClose={() => {}}>Something went wrong.</IressAlert>
-<IressAlert status="info" onClose={() => {}}>A new update is available.</IressAlert>
-<IressAlert status="success" onClose={() => {}}>Your changes have been saved.</IressAlert>
-<IressAlert status="warning" onClose={() => {}}>Your session will expire soon.</IressAlert>
-<IressAlert status="neutral" onClose={() => {}}>No new notifications.</IressAlert>
+  <IressAlert status="danger" onClose={() => console.log('closed')}>
+    This danger alert can be dismissed.
+  </IressAlert>
+  <IressAlert status="info" onClose={() => console.log('closed')}>
+    This info alert can be dismissed.
+  </IressAlert>
+  <IressAlert status="success" onClose={() => console.log('closed')}>
+    This success alert can be dismissed.
+  </IressAlert>
+  <IressAlert status="warning" onClose={() => console.log('closed')}>
+    This warning alert can be dismissed.
+  </IressAlert>
+  <IressAlert status="neutral" onClose={() => console.log('closed')}>
+    This neutral alert can be dismissed.
+  </IressAlert>
 </IressStack>
 ```
+
+[View "Dismissable" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--dismissable)
 
 ## Testing
 

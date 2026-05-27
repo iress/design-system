@@ -19,9 +19,7 @@ import { IressInline } from '@iress-oss/ids-components';
 import { IressInline } from '@iress-oss/ids-components';
 
 <IressInline gap="spacing.4">
-  <span>Item 1</span>
-  <span>Item 2</span>
-  <span>Item 3</span>
+  uneven
 </IressInline>
 ```
 
@@ -44,11 +42,7 @@ The existing `gutter` values are still supported, as they are now aliases for th
 {SPACING_AND_ALIAS_TOKENS.map((spacing) => (
 <IressText key={spacing}>
 <h2>{spacing}</h2>
-<IressInline gap={spacing as never}>
-<IressPlaceholder>Item 1</IressPlaceholder>
-<IressPlaceholder>Item 2</IressPlaceholder>
-<IressPlaceholder>Item 3</IressPlaceholder>
-</IressInline>
+<IressInline gap={spacing as never} />
 </IressText>
 ))}
 </IressStack>
@@ -67,14 +61,10 @@ The `gap` prop can take an object that takes five key/value pairs that correlate
 Current breakpoint: <CurrentBreakpoint />.
 </p>
 <p>
-<code>gap=&#123;{{ xs: "spacing.2", md: "spacing.6", xl: "spacing.10" }}&#125;</code>
+<code>gap=&#123;{JSON.stringify(args.gap)}&#125;</code>
 </p>
 </IressPanel>
-<IressInline gap={{ xs: "spacing.2", md: "spacing.6", xl: "spacing.10" }}>
-<IressPlaceholder>Item 1</IressPlaceholder>
-<IressPlaceholder>Item 2</IressPlaceholder>
-<IressPlaceholder>Item 3</IressPlaceholder>
-</IressInline>
+<IressInline />
 </IressStack>
 ```
 
@@ -97,11 +87,7 @@ Horizontal alignment of the children is controlled by the `horizontalAlign` prop
 {HORIZONTAL_ALIGNS.map((horizontalAlign) => (
 <IressText key={horizontalAlign}>
 <h2>{horizontalAlign}</h2>
-<IressInline horizontalAlign={horizontalAlign}>
-<IressPlaceholder>Item 1</IressPlaceholder>
-<IressPlaceholder>Item 2</IressPlaceholder>
-<IressPlaceholder>Item 3</IressPlaceholder>
-</IressInline>
+<IressInline horizontalAlign={horizontalAlign} />
 </IressText>
 ))}
 </IressStack>
@@ -125,11 +111,7 @@ Vertical alignment of the children is controlled by the `verticalAlign` prop. It
 {VERTICAL_ALIGNS.map((verticalAlign) => (
 <IressText key={verticalAlign} textAlign="center">
 <h2>{verticalAlign}</h2>
-<IressInline verticalAlign={verticalAlign}>
-<IressPlaceholder>Short</IressPlaceholder>
-<IressPlaceholder>Medium height content</IressPlaceholder>
-<IressPlaceholder>Tall content that spans multiple lines</IressPlaceholder>
-</IressInline>
+<IressInline verticalAlign={verticalAlign} />
 </IressText>
 ))}
 </IressStack>
@@ -144,9 +126,7 @@ The `IressInline` component automatically wraps children. There may be some scen
 
 ```tsx
 <IressInline gap="spacing.10" noWrap>
-  <IressPlaceholder>Item 1</IressPlaceholder>
-  <IressPlaceholder>Item 2</IressPlaceholder>
-  <IressPlaceholder>Item 3</IressPlaceholder>
+  story
 </IressInline>
 ```
 

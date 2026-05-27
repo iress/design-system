@@ -19,8 +19,7 @@ import { IressStack } from '@iress-oss/ids-components';
 import { IressStack } from '@iress-oss/ids-components';
 
 <IressStack gap="spacing.1">
-  <div>Item 1</div>
-  <div>Item 2</div>
+  even
 </IressStack>
 ```
 
@@ -36,27 +35,12 @@ The previous `gutter` prop has been replaced by `gap`, which uses the latest set
 
 ```tsx
 <IressStack gap="spacing.4">
-<IressText>
-<h2>spacing.1</h2>
-<IressStack gap="spacing.1">
-<div>Item</div>
-<div>Item</div>
-</IressStack>
+{SPACING_AND_ALIAS_TOKENS.map((spacing) => (
+<IressText key={spacing}>
+<h2>{spacing}</h2>
+<IressStack gap={spacing as never} />
 </IressText>
-<IressText>
-<h2>spacing.4</h2>
-<IressStack gap="spacing.4">
-<div>Item</div>
-<div>Item</div>
-</IressStack>
-</IressText>
-<IressText>
-<h2>spacing.7</h2>
-<IressStack gap="spacing.7">
-<div>Item</div>
-<div>Item</div>
-</IressStack>
-</IressText>
+))}
 </IressStack>
 ```
 
@@ -70,14 +54,10 @@ The `gap` prop can take an object that takes five key/value pairs that correlate
 <IressStack gap="spacing.4">
 <IressPanel>
 <p>
-The gap prop accepts responsive values using breakpoint keys.
+Current breakpoint: <CurrentBreakpoint />.
 </p>
 </IressPanel>
-<IressStack gap={{ xs: "spacing.1", md: "spacing.4", lg: "spacing.7" }}>
-<div>Item 1</div>
-<div>Item 2</div>
-<div>Item 3</div>
-</IressStack>
+<IressStack gap={{ xs: "spacing.2", sm: "spacing.4", md: "spacing.6", lg: "spacing.8", xl: "spacing.10" }} />
 </IressStack>
 ```
 
@@ -91,11 +71,7 @@ In the example below: `IressButton` are inline because of wrapped by `IressInlin
 
 ```tsx
 <IressStack gap="spacing.4">
-<IressInline gap="spacing.2">
-<IressButton>Button 1</IressButton>
-<IressButton>Button 2</IressButton>
-</IressInline>
-<div>Block item</div>
+  inlineChildren
 </IressStack>
 ```
 
@@ -107,9 +83,7 @@ In the example below: `IressButton` are inline because of wrapped by `IressInlin
 
 ```tsx
 <IressStack gap="spacing.7" element="ul">
-<li>List item 1</li>
-<li>List item 2</li>
-<li>List item 3</li>
+  list
 </IressStack>
 ```
 
@@ -124,11 +98,8 @@ Use `top`, `middle`, or `bottom` to align items within the available space, and 
 ```tsx
 <IressText>
 <h2>middle</h2>
-<IressPanel style={{ height: '200px' }}>
-<IressStack verticalAlign="middle">
-<div>Item 1</div>
-<div>Item 2</div>
-</IressStack>
+<IressPanel style={{ height: '1000px' }}>
+<IressStack verticalAlign="middle" />
 </IressPanel>
 </IressText>
 ```
