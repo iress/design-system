@@ -20,6 +20,10 @@ export const field = sva({
     },
     element: {
       position: 'relative',
+      '& > .ids-radio-group:first-child, & > .ids-checkbox-group:first-child, & > .ids-checkbox:first-child':
+        {
+          mt: 'spacing.1',
+        },
     },
     hint: {
       color: 'colour.neutral.70',
@@ -70,6 +74,12 @@ export const field = sva({
         },
         label: {
           mb: 'none',
+        },
+        element: {
+          '& > .ids-radio-group:first-child, & > .ids-checkbox-group:first-child, & > .ids-checkbox:first-child':
+            {
+              mt: 'none',
+            },
         },
       },
     },

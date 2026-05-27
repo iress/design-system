@@ -92,6 +92,32 @@ describe('IressField', () => {
   });
 
   describe('props', () => {
+    describe('checkbox and radio group spacing', () => {
+      it('adds top spacing for direct checkbox/radio controls', () => {
+        const styles = field.raw({});
+
+        expect(
+          styles.element?.[
+            '& > .ids-radio-group:first-child, & > .ids-checkbox-group:first-child, & > .ids-checkbox:first-child'
+          ],
+        ).toEqual({
+          mt: 'spacing.1',
+        });
+      });
+
+      it('does not add extra top spacing in horizontal layout', () => {
+        const styles = field.raw({ horizontal: true });
+
+        expect(
+          styles.element?.[
+            '& > .ids-radio-group:first-child, & > .ids-checkbox-group:first-child, & > .ids-checkbox:first-child'
+          ],
+        ).toEqual({
+          mt: 'none',
+        });
+      });
+    });
+
     describe('hiddenLabel', () => {
       it('has a label accessible for screen readers', () => {
         const screen = renderComponent({
