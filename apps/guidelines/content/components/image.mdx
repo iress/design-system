@@ -30,13 +30,13 @@ import { IressImage } from '@iress-oss/ids-components';
 **Note:** Please consider not using this prop, but rather exporting images at the largest size required for your application (the maximum width).
 
 ```tsx
+import { IressImage, IressStack, IressText } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
-{MAX_WIDTHS.map((width, index) => (
-<React.Fragment key={index}>
-<IressText element="h3">{width ?? 'undefined'}</IressText>
-<IressImage maxWidth={width} />
-</React.Fragment>
-))}
+  <IressText element="h3">250px</IressText>
+  <IressImage src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp" alt="Example" maxWidth="250px" />
+  <IressText element="h3">50%</IressText>
+  <IressImage src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp" alt="Example" maxWidth="50%" />
 </IressStack>
 ```
 

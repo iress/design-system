@@ -38,13 +38,25 @@ The previous `gutter` prop has been replaced by `gap`, which uses the latest set
 The existing `gutter` values are still supported, as they are now aliases for the spacing tokens.
 
 ```tsx
+import { IressInline, IressStack, IressText } from '@iress-oss/ids-components';
+
 <IressStack gap="spacing.10">
-{SPACING_AND_ALIAS_TOKENS.map((spacing) => (
-<IressText key={spacing}>
-<h2>{spacing}</h2>
-<IressInline gap={spacing as never} />
-</IressText>
-))}
+  <IressText>
+    <h2>spacing.2</h2>
+    <IressInline gap="spacing.2">
+      <span>Item 1</span>
+      <span>Item 2</span>
+      <span>Item 3</span>
+    </IressInline>
+  </IressText>
+  <IressText>
+    <h2>spacing.4</h2>
+    <IressInline gap="spacing.4">
+      <span>Item 1</span>
+      <span>Item 2</span>
+      <span>Item 3</span>
+    </IressInline>
+  </IressText>
 </IressStack>
 ```
 
@@ -55,16 +67,14 @@ The existing `gutter` values are still supported, as they are now aliases for th
 The `gap` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
 
 ```tsx
+import { IressInline, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="spacing.4">
-<IressPanel>
-<p>
-Current breakpoint: <CurrentBreakpoint />.
-</p>
-<p>
-<code>gap=&#123;{JSON.stringify(args.gap)}&#125;</code>
-</p>
-</IressPanel>
-<IressInline />
+  <IressInline gap={{ xs: "spacing.2", md: "spacing.4", lg: "spacing.8" }}>
+    <span>Item 1</span>
+    <span>Item 2</span>
+    <span>Item 3</span>
+  </IressInline>
 </IressStack>
 ```
 
@@ -82,15 +92,39 @@ Horizontal alignment of the children is controlled by the `horizontalAlign` prop
 - `right` - children are aligned right, similar to `text-align: right`.
 
 ```tsx
+import { IressInline, IressContainer, IressStack, IressText } from '@iress-oss/ids-components';
+
 <IressContainer>
-<IressStack gap="spacing.10">
-{HORIZONTAL_ALIGNS.map((horizontalAlign) => (
-<IressText key={horizontalAlign}>
-<h2>{horizontalAlign}</h2>
-<IressInline horizontalAlign={horizontalAlign} />
-</IressText>
-))}
-</IressStack>
+  <IressStack gap="spacing.10">
+    <IressText>
+      <h2>left</h2>
+      <IressInline horizontalAlign="left">
+        <span>Item 1</span>
+        <span>Item 2</span>
+      </IressInline>
+    </IressText>
+    <IressText>
+      <h2>center</h2>
+      <IressInline horizontalAlign="center">
+        <span>Item 1</span>
+        <span>Item 2</span>
+      </IressInline>
+    </IressText>
+    <IressText>
+      <h2>right</h2>
+      <IressInline horizontalAlign="right">
+        <span>Item 1</span>
+        <span>Item 2</span>
+      </IressInline>
+    </IressText>
+    <IressText>
+      <h2>between</h2>
+      <IressInline horizontalAlign="between">
+        <span>Item 1</span>
+        <span>Item 2</span>
+      </IressInline>
+    </IressText>
+  </IressStack>
 </IressContainer>
 ```
 
@@ -106,15 +140,39 @@ Vertical alignment of the children is controlled by the `verticalAlign` prop. It
 - `top` - children are aligned to the top of the container.
 
 ```tsx
+import { IressInline, IressContainer, IressStack, IressText } from '@iress-oss/ids-components';
+
 <IressContainer>
-<IressStack gap="spacing.10">
-{VERTICAL_ALIGNS.map((verticalAlign) => (
-<IressText key={verticalAlign} textAlign="center">
-<h2>{verticalAlign}</h2>
-<IressInline verticalAlign={verticalAlign} />
-</IressText>
-))}
-</IressStack>
+  <IressStack gap="spacing.10">
+    <IressText textAlign="center">
+      <h2>top</h2>
+      <IressInline verticalAlign="top">
+        <span>Item 1</span>
+        <span>Item 2</span>
+      </IressInline>
+    </IressText>
+    <IressText textAlign="center">
+      <h2>middle</h2>
+      <IressInline verticalAlign="middle">
+        <span>Item 1</span>
+        <span>Item 2</span>
+      </IressInline>
+    </IressText>
+    <IressText textAlign="center">
+      <h2>bottom</h2>
+      <IressInline verticalAlign="bottom">
+        <span>Item 1</span>
+        <span>Item 2</span>
+      </IressInline>
+    </IressText>
+    <IressText textAlign="center">
+      <h2>stretch</h2>
+      <IressInline verticalAlign="stretch">
+        <span>Item 1</span>
+        <span>Item 2</span>
+      </IressInline>
+    </IressText>
+  </IressStack>
 </IressContainer>
 ```
 

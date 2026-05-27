@@ -30,29 +30,20 @@ The input component's `type` can be set to one of the following value: `text` (d
 For more information about each type, please see the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types).
 
 ```tsx
+import { IressInput, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
-{/* Copied from: HTMLInputTypeAttribute */}
-{[
-'text',
-'color',
-'date',
-'datetime-local',
-'email',
-'file',
-'month',
-'number',
-'password',
-'search',
-'tel',
-'time',
-'url',
-'week',
-].map((type) => (
-<IressInput placeholder={placeholder ?? `${capitalizeFirstLetter(type)} input`}
-type={type}
-key={type}
-/>
-))}
+  <IressInput placeholder="Text input" type="text" />
+  <IressInput placeholder="Email input" type="email" />
+  <IressInput placeholder="Number input" type="number" />
+  <IressInput placeholder="Password input" type="password" />
+  <IressInput placeholder="Search input" type="search" />
+  <IressInput placeholder="Tel input" type="tel" />
+  <IressInput placeholder="URL input" type="url" />
+  <IressInput type="date" />
+  <IressInput type="time" />
+  <IressInput type="color" />
+  <IressInput type="file" />
 </IressStack>
 ```
 
@@ -72,18 +63,15 @@ The `inputmode` attribute provides a hint to browsers for devices with onscreen 
 For more information about each mode (and their expected user experience), please see the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode).
 
 ```tsx
+import { IressInput, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
-{inputModes.map((inputMode) => (
-<IressInput placeholder={
-placeholder ??
-`${capitalizeFirstLetter(
-inputMode,
-)} mode, usually best used when type="${inputMode}" `
-}
-inputMode={inputMode}
-key={inputMode}
-/>
-))}
+  <IressInput placeholder="Numeric mode" inputMode="numeric" />
+  <IressInput placeholder="Decimal mode" inputMode="decimal" />
+  <IressInput placeholder="Tel mode" inputMode="tel" />
+  <IressInput placeholder="Search mode" inputMode="search" />
+  <IressInput placeholder="Email mode" inputMode="email" />
+  <IressInput placeholder="URL mode" inputMode="url" />
 </IressStack>
 ```
 
@@ -94,19 +82,14 @@ key={inputMode}
 When using the `type="file"` attribute, the input allows users to select one or more files from their device. The appearance and behavior are controlled by the browser, and you can use the `onChange` handler to capture the selected files.
 
 ```tsx
-const { success } = useToaster();
-    return (
-      <IressField label="File upload">
-        <IressInput
-          {...args}
-          onChange={(e) =>
-            success({
-              content: `File uploaded: ${e.target.files?.[0].name}`,
-            })
-          }
-        />
-      </IressField>
-    );
+import { IressField, IressInput } from '@iress-oss/ids-components';
+
+<IressField label="File upload">
+  <IressInput
+    type="file"
+    onChange={(e) => console.log(`File uploaded: ${e.target.files?.[0].name}`)}
+  />
+</IressField>
 ```
 
 [View "FileType" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--file-type)
@@ -132,13 +115,14 @@ The width in this case refers to the actual input and ensures that it is wide en
 Widths can also be set as a percentage, allowing the input to take up a proportion of the width of its container. In this case, the width of the actual input decreases if you add appended or prepended content.
 
 ```tsx
+import { IressInput, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
-{FORM_ELEMENT_WIDTHS.map((width) => (
-<IressInput placeholder={placeholder ?? width}
-width={width}
-key={width}
-/>
-))}
+  <IressInput placeholder="Width 2" width="2" />
+  <IressInput placeholder="Width 4" width="4" />
+  <IressInput placeholder="Width 8" width="8" />
+  <IressInput placeholder="Width 12" width="12" />
+  <IressInput placeholder="Width 16" width="16" />
 </IressStack>
 ```
 
@@ -164,22 +148,11 @@ Content (typically icons) can be added via the `prepend` and `append` props on `
 > **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
 ```tsx
+import { IressInput, IressIcon, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
-<IressInput prepend={prepend ?? <IressIcon name="search" />}
-placeholder={placeholder ?? 'Prepend slot'}
-/>
-
-<IressInput append={append ?? <IressIcon name="search" />}
-placeholder={placeholder ?? 'Append slot'}
-/>
-
-<IressInput prepend={prepend ?? <IressIcon name="search" />}
-placeholder={placeholder ?? 'Prepend slot'}
-/>
-
-<IressInput append={append ?? <IressIcon name="search" />}
-placeholder={placeholder ?? 'Append slot'}
-/>
+  <IressInput prepend={<IressIcon name="search" />} placeholder="Prepend slot" />
+  <IressInput append={<IressIcon name="search" />} placeholder="Append slot" />
 </IressStack>
 ```
 

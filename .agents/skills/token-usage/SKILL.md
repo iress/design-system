@@ -403,6 +403,19 @@ Examples:
 <IressStack gap="spacing.8">...</IressStack>
 ```
 
+### 6. Hardcoding Breakpoint/Constant Values
+
+```tsx
+// ❌ Wrong — hardcoded breakpoint values
+<IressText>Min screen width: 0px</IressText>
+<IressText>Max screen width: 575px</IressText>
+
+// ✅ Correct — use BREAKPOINT_DETAILS constant
+import { BREAKPOINT_DETAILS } from '@iress-oss/ids-components';
+<IressText>{BREAKPOINT_DETAILS.xs.minScreenWidth}</IressText>
+<IressText>{BREAKPOINT_DETAILS.xs.maxScreenWidth}</IressText>
+```
+
 ## Responsive Patterns
 
 Layout components accept responsive objects for spacing props:
@@ -447,6 +460,10 @@ Every available colour, spacing, radius, and typography token with CSS variable 
 ## Theming
 
 How themes override tokens via CSS variables, scoped theming, and guidance for AI agents. See [references/theming.md](references/theming.md).
+
+## Constants
+
+Exported runtime constants (`BREAKPOINT_DETAILS`, `GRID_SIZE`, `Z_INDEX`, `FORM_ELEMENT_WIDTHS`, etc.) for use in application logic and documentation. **Never hardcode breakpoint values or z-index numbers** — always import these constants. See [references/constants-reference.md](references/constants-reference.md).
 
 ## Cross-References
 

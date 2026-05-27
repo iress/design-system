@@ -72,35 +72,37 @@ When using a checkbox without a visible label, you must supply a label and apply
 It is also important to not hide the table headers.
 
 ```tsx
+import { IressCheckbox, IressTable } from '@iress-oss/ids-components';
+
 <IressTable
-caption="List of investments"
-columns={[
-{
-format: (value: boolean) => (
-<IressCheckbox defaultChecked={value} />
-),
-key: 'select',
-label: 'Select',
-sort: true,
-},
-{ key: 'name', label: 'Name' },
-{ key: 'date', label: 'Date' },
-{ key: 'cost', label: 'Cost' },
-]}
-rows={[
-{
-select: false,
-name: 'Artemis Fund Managers Limited',
-date: '2019-09-23',
-cost: 23898.12,
-},
-{
-select: true,
-name: 'CASH.CASH',
-date: '2020-06-28',
-cost: 49751.43,
-},
-]}
+  caption="List of investments"
+  columns={[
+    {
+      format: (value: boolean) => (
+        <IressCheckbox hiddenLabel defaultChecked={value}>Select</IressCheckbox>
+      ),
+      key: 'select',
+      label: 'Select',
+      sort: true,
+    },
+    { key: 'name', label: 'Name' },
+    { key: 'date', label: 'Date' },
+    { key: 'cost', label: 'Cost' },
+  ]}
+  rows={[
+    {
+      select: false,
+      name: 'Artemis Fund Managers Limited',
+      date: '2019-09-23',
+      cost: 23898.12,
+    },
+    {
+      select: true,
+      name: 'CASH.CASH',
+      date: '2020-06-28',
+      cost: 49751.43,
+    },
+  ]}
 />
 ```
 

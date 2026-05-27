@@ -46,12 +46,14 @@ For a full comparison of feedback components, see the [Feedback pattern](https:/
 The alert offers four statuses that set a distinctive colour and icon. They can be set using the `status` prop. Their different use cases are described here.
 
 ```tsx
+import { IressAlert, IressStack } from '@iress-oss/ids-components';
+
 <IressStack gap="md">
-{[...STATUSES, 'neutral'].map((status) => (
-<IressAlert status={status as never} key={status}>
-{messages[status as never]}
-</IressAlert>
-))}
+  <IressAlert status="info">This is an informational message.</IressAlert>
+  <IressAlert status="success">Operation completed successfully.</IressAlert>
+  <IressAlert status="warning">Please review before continuing.</IressAlert>
+  <IressAlert status="danger">An error has occurred.</IressAlert>
+  <IressAlert status="neutral">A neutral status message.</IressAlert>
 </IressStack>
 ```
 
