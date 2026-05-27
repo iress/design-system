@@ -83,17 +83,10 @@ Components are no longer loaded asynchronously, so you can test them as you woul
 Below is an example of a changed test using React Testing Library.
 
 ```tsx
-import { render, screen } from '@testing-library/react';
-import { IressButton } from '@iress-oss/ids-components';
-
-// Before (v4 test utilities):
-// const { findByTestId } = idsRender(<IressButton>Click</IressButton>);
-// const button = await findByTestId('button');
-
-// After (React Testing Library):
-render(<IressButton>Click</IressButton>);
-const button = screen.getByRole('button', { name: 'Click' });
+<Iressv5 allowModeChange />
 ```
+
+[View "TestDiff" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--test-diff)
 
 #### Component specific testing
 
@@ -218,13 +211,10 @@ yarn add @iress/ag-grid-theme@^5.0.0
 Then you can import the AG Grid theme CSS, import the relevant IDS theme, and hook up the styles by setting a class of ag-theme-alpine ag-theme-iress-lite on your grid wrapper.
 
 ```tsx
-import '@iress/ag-grid-theme/dist/ag-theme-iress-lite.css';
-import '@iress/themes/dist/iress-theme-light.css';
-
-<div className="ag-theme-alpine ag-theme-iress-lite iress-theme-light">
-  <AgGridReact {...gridProps} />
-</div>;
+<Iressv5 allowModeChange />
 ```
+
+[View "AgGridTheme" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--ag-grid-theme)
 
 ## Removing version 4
 

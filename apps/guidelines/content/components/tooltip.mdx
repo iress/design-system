@@ -86,60 +86,60 @@ The tooltip's position will change dynamically based on the amount of space avai
 <div style={{ padding: '80px 150px' }}>
 <IressStack gap="md">
 <IressInline horizontalAlign="center" gap="sm">
-<IressTooltip align="top-start">
+<IressTooltip align="top-start" tooltipText="Top start tooltip">
 <IressButton>Top Start</IressButton>
 </IressTooltip>
-<IressTooltip align="top">
+<IressTooltip align="top" tooltipText="Top tooltip">
 <IressButton>Top</IressButton>
 </IressTooltip>
-<IressTooltip align="top-end">
+<IressTooltip align="top-end" tooltipText="Top end tooltip">
 <IressButton>Top End</IressButton>
 </IressTooltip>
 </IressInline>
 <IressInline horizontalAlign="between">
 <IressStack gap="sm">
 <IressInline horizontalAlign="left">
-<IressTooltip align="left-start">
+<IressTooltip align="left-start" tooltipText="Left start tooltip">
 <IressButton>Left Start</IressButton>
 </IressTooltip>
 </IressInline>
 <IressInline horizontalAlign="left">
-<IressTooltip align="left">
+<IressTooltip align="left" tooltipText="Left tooltip">
 <IressButton>Left</IressButton>
 </IressTooltip>
 </IressInline>
 <IressInline horizontalAlign="left">
-<IressTooltip align="left-end">
+<IressTooltip align="left-end" tooltipText="Left end tooltip">
 <IressButton>Left End</IressButton>
 </IressTooltip>
 </IressInline>
 </IressStack>
 <IressStack gap="sm">
 <IressInline horizontalAlign="right">
-<IressTooltip align="right-start">
+<IressTooltip align="right-start" tooltipText="Right start tooltip">
 <IressButton>Right Start</IressButton>
 </IressTooltip>
 </IressInline>
 <IressInline horizontalAlign="right">
-<IressTooltip align="right">
+<IressTooltip align="right" tooltipText="Right tooltip">
 <IressButton>Right</IressButton>
 </IressTooltip>
 </IressInline>
 <IressInline horizontalAlign="right">
-<IressTooltip align="right-end">
+<IressTooltip align="right-end" tooltipText="Right end tooltip">
 <IressButton>Right End</IressButton>
 </IressTooltip>
 </IressInline>
 </IressStack>
 </IressInline>
 <IressInline horizontalAlign="center" gap="sm">
-<IressTooltip align="bottom-start">
+<IressTooltip align="bottom-start" tooltipText="Bottom start tooltip">
 <IressButton>Bottom Start</IressButton>
 </IressTooltip>
-<IressTooltip align="bottom">
+<IressTooltip align="bottom" tooltipText="Bottom tooltip">
 <IressButton>Bottom</IressButton>
 </IressTooltip>
-<IressTooltip align="bottom-end">
+<IressTooltip align="bottom-end" tooltipText="Bottom end tooltip">
 <IressButton>Bottom End</IressButton>
 </IressTooltip>
 </IressInline>
@@ -156,14 +156,14 @@ The `delay` prop requires a number that is the number of milliseconds that pass 
 ```tsx
 <div style={{ paddingTop: '30px' }}>
 <IressInline horizontalAlign="center" gap="sm">
-<IressTooltip delay={0}>
+<IressTooltip delay={0} tooltipText="No delay tooltip">
 <IressButton>0ms (no delay)</IressButton>
 </IressTooltip>
-<IressTooltip>
+<IressTooltip tooltipText="Default delay tooltip">
 <IressButton>500ms (default)</IressButton>
 </IressTooltip>
 
-<IressTooltip delay={2000}>
+<IressTooltip delay={2000} tooltipText="Long delay tooltip">
 <IressButton>2000ms</IressButton>
 </IressTooltip>
 </IressInline>

@@ -18,7 +18,7 @@ import { IressCol } from '@iress-oss/ids-components';
 ```tsx
 import { IressCol } from '@iress-oss/ids-components';
 
-<IressCol numberOfColumns={2} />
+<IressCol span={6}>Column content</IressCol>
 ```
 
 ## Examples
@@ -29,22 +29,22 @@ When no column widths are specified the `IressCol` component will render equal w
 
 ```tsx
 <IressStack gap="spacing.4">
-<IressRow {...row}>
-<IressCol {...column}>
+<IressRow>
+<IressCol>
 <IressPlaceholder>1 of 2</IressPlaceholder>
 </IressCol>
-<IressCol {...column}>
+<IressCol>
 <IressPlaceholder>2 of 2</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column}>
+<IressRow>
+<IressCol>
 <IressPlaceholder>1 of 3</IressPlaceholder>
 </IressCol>
-<IressCol {...column}>
+<IressCol>
 <IressPlaceholder>2 of 3</IressPlaceholder>
 </IressCol>
-<IressCol {...column}>
+<IressCol>
 <IressPlaceholder>3 of 3</IressPlaceholder>
 </IressCol>
 </IressRow>
@@ -61,56 +61,56 @@ If no `span` is provided it will default to `auto` which will make the column ei
 
 ```tsx
 <IressStack gap="spacing.4">
-<IressRow {...row}>
-<IressCol {...column} span="12">
+<IressRow>
+<IressCol span="12">
 <IressPlaceholder>12</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="1">
+<IressRow>
+<IressCol span="1">
 <IressPlaceholder>1</IressPlaceholder>
 </IressCol>
-<IressCol {...column}>
+<IressCol>
 <IressPlaceholder>11</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="2">
+<IressRow>
+<IressCol span="2">
 <IressPlaceholder>2</IressPlaceholder>
 </IressCol>
-<IressCol {...column}>
+<IressCol>
 <IressPlaceholder>10</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="3">
+<IressRow>
+<IressCol span="3">
 <IressPlaceholder>3</IressPlaceholder>
 </IressCol>
-<IressCol {...column}>
+<IressCol>
 <IressPlaceholder>9</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="4">
+<IressRow>
+<IressCol span="4">
 <IressPlaceholder>4</IressPlaceholder>
 </IressCol>
-<IressCol {...column}>
+<IressCol>
 <IressPlaceholder>8</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="5">
+<IressRow>
+<IressCol span="5">
 <IressPlaceholder>5</IressPlaceholder>
 </IressCol>
-<IressCol {...column}>
+<IressCol>
 <IressPlaceholder>7</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="6">
+<IressRow>
+<IressCol span="6">
 <IressPlaceholder>6</IressPlaceholder>
 </IressCol>
-<IressCol {...column}>
+<IressCol>
 <IressPlaceholder>6</IressPlaceholder>
 </IressCol>
 </IressRow>
@@ -131,9 +131,9 @@ The `span` prop can take an object that takes five key/value pairs that correlat
 Current breakpoint: <CurrentBreakpoint />.
 </IressPanel>
 
-<IressRow {...row}>
+<IressRow>
 {columns.map((column, index) => (
-<IressCol {...columnProps} {...column} key={index}>
+<IressCol span={column.span} key={index}>
 <IressPlaceholder>
 <IressText textAlign="center">
 Column {index + 1}
@@ -155,58 +155,58 @@ The `offset` prop controls the amount of grid columns to offset.
 
 ```tsx
 <IressStack gap="spacing.4">
-<IressRow {...row}>
-<IressCol {...column} offset="1">
+<IressRow>
+<IressCol offset="1">
 <IressPlaceholder>1</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="2">
+<IressRow>
+<IressCol offset="2">
 <IressPlaceholder>2</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="3">
+<IressRow>
+<IressCol offset="3">
 <IressPlaceholder>3</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="4">
+<IressRow>
+<IressCol offset="4">
 <IressPlaceholder>4</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="5">
+<IressRow>
+<IressCol offset="5">
 <IressPlaceholder>5</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="6">
+<IressRow>
+<IressCol offset="6">
 <IressPlaceholder>6</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="7">
+<IressRow>
+<IressCol offset="7">
 <IressPlaceholder>7</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="8">
+<IressRow>
+<IressCol offset="8">
 <IressPlaceholder>8</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="9">
+<IressRow>
+<IressCol offset="9">
 <IressPlaceholder>9</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="10">
+<IressRow>
+<IressCol offset="10">
 <IressPlaceholder>10</IressPlaceholder>
 </IressCol>
 </IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="11">
+<IressRow>
+<IressCol offset="11">
 <IressPlaceholder>11</IressPlaceholder>
 </IressCol>
 </IressRow>
@@ -227,9 +227,9 @@ For example, if you specify an offset for `md`, it will apply to `lg`, `xl` and 
 Current breakpoint: <CurrentBreakpoint />.
 </IressPanel>
 
-<IressRow {...row}>
+<IressRow>
 {columns.map((column, index) => (
-<IressCol {...columnProps} {...column} key={index}>
+<IressCol offset={column.offset} key={index}>
 <IressPlaceholder>
 <IressText textAlign="center">
 Column {index + 1}
@@ -252,19 +252,18 @@ The `alignSelf` prop controls the vertical alignment of the column (use if colum
 ```tsx
 <IressContainer>
 <IressRow
-{...row}
 style={{ border: '1px dashed hsl(43deg 100% 45%)', height: '10rem' }}
 >
-<IressCol {...column} alignSelf="start">
+<IressCol alignSelf="start">
 <IressPlaceholder>Start</IressPlaceholder>
 </IressCol>
-<IressCol {...column} alignSelf="center">
+<IressCol alignSelf="center">
 <IressPlaceholder>Center</IressPlaceholder>
 </IressCol>
-<IressCol {...column} alignSelf="end">
+<IressCol alignSelf="end">
 <IressPlaceholder>End</IressPlaceholder>
 </IressCol>
-<IressCol {...column} alignSelf="stretch">
+<IressCol alignSelf="stretch">
 <IressPlaceholder stretch>Stretch</IressPlaceholder>
 </IressCol>
 </IressRow>

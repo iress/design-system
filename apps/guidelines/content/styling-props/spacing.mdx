@@ -30,11 +30,9 @@ There are seven props you can use to customise the padding of any component. It 
 [View "padding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--padding)
 
 ```tsx
-import { IressButton } from '@iress-oss/ids-components';
-
 <IressButton px="lg" mode="primary">
   Submit
-</IressButton>;
+</IressButton>
 ```
 
 [View "button" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--button)
@@ -72,13 +70,10 @@ All padding props are responsive and can be changed according to different scree
 Responsive padding worked differently in version 5. The `p` prop no longer accepts a nested object of axes to change the padding, you must change every prop based on the breakpoint.
 
 ```tsx
-// Before (v5 nested padding object):
-// <IressPanel p={{ t: 'xl', b: 'xl' }} />
-
-// After (v6 individual padding props):
-import { IressPanel } from '@iress-oss/ids-components';
-
-<IressPanel pt="xl" pb="xl" />;
+<DiffViewer
+oldValue={`<IressPanel p={{ t: 'xl', b: 'xl' }} />`}
+newValue={`<IressPanel pt="xl" pb="xl" />`}
+/>
 ```
 
 [View "MigratingPadding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--migrating-padding)
@@ -136,11 +131,11 @@ All margin props are responsive and can be changed according to different screen
 Negative margin is supported in the same way as positive margin. You can use the same props to set negative margin.
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 <IressPanel bg="colour.primary.surface" maxWidth="container.sm" mx="auto">
-  <IressPanel mt="-spacing.2" />
-</IressPanel>;
+  <IressPanel bg="alt" mx="-md" p="md">
+    This panel has negative horizontal margin.
+  </IressPanel>
+</IressPanel>
 ```
 
 [View "negativeMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--negative-margin)
@@ -150,13 +145,13 @@ import { IressPanel } from '@iress-oss/ids-components';
 The `noGutter` prop removes the bottom margin of the last direct child of a component. This is useful when you have nested content inside a component with padding, such as `IressPanel` or `IressCard`, to remove unnecessary spacing in your layout.
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 <IressPanel noGutter>
   <ul>
-    <li>Margin is removed due to <code>noGutter</code></li>
+    <li>
+      Margin is removed due to <code>noGutter</code>
+    </li>
   </ul>
-</IressPanel>;
+</IressPanel>
 ```
 
 [View "noGutter" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--no-gutter)

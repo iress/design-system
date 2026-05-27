@@ -38,21 +38,19 @@ Expander has a `mode` prop which can be used to change how the expander is displ
 - `link` mode is used to expand a small section of content, usually used to provide additional context (eg. "Learn more" or "See more details").
 
 ```tsx
-import { IressExpander, IressStack, IressText } from '@iress-oss/ids-components';
-
 <IressStack gap="lg">
-  <IressStack gap="xs">
-    <IressText element="h2">Section (default)</IressText>
-    <IressExpander mode="section" activator="View details">
-      This is the expanded content for the section mode.
-    </IressExpander>
-  </IressStack>
-  <IressStack gap="xs">
-    <IressText element="h2">Link</IressText>
-    <IressExpander mode="link" activator="Learn more">
-      This is the expanded content for the link mode.
-    </IressExpander>
-  </IressStack>
+<IressStack gap="xs">
+<IressText element="h2">Section (default)</IressText>
+<IressExpander mode="section" activator="View details">
+  Expanded section content goes here.
+</IressExpander>
+</IressStack>
+<IressStack gap="xs">
+<IressText element="h2">Link</IressText>
+<IressExpander mode="link" activator="Learn more">
+  Additional context and details.
+</IressExpander>
+</IressStack>
 </IressStack>
 ```
 
@@ -63,10 +61,8 @@ import { IressExpander, IressStack, IressText } from '@iress-oss/ids-components'
 The `open` prop can be used to control the open state of the expander as can be seen below.
 
 ```tsx
-import { IressExpander } from '@iress-oss/ids-components';
-
 <IressExpander open activator="Expander activator">
-  This expander is open by default.
+  This content is visible because the expander is open.
 </IressExpander>
 ```
 

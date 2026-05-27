@@ -18,7 +18,9 @@ import { IressContainer } from '@iress-oss/ids-components';
 ```tsx
 import { IressContainer } from '@iress-oss/ids-components';
 
-<IressContainer />
+<IressContainer>
+  Content goes here
+</IressContainer>
 ```
 
 ## Behaviour
@@ -26,23 +28,13 @@ import { IressContainer } from '@iress-oss/ids-components';
 The `IressContainer` snaps to fixed max widths at different breakpoints. Those max widths are as follows:
 
 ```tsx
-import { IressTable } from '@iress-oss/ids-components';
-
 <IressTable
-  caption="Container breakpoints"
-  columns={[
-    { key: 'breakpoint', label: 'Breakpoint' },
-    { key: 'screenWidths', label: 'Screen widths' },
-    { key: 'maxWidth', label: 'Max width' },
-  ]}
-  rows={[
-    { breakpoint: 'xs', screenWidths: '0–575px', maxWidth: '100%' },
-    { breakpoint: 'sm', screenWidths: '576–767px', maxWidth: '540px' },
-    { breakpoint: 'md', screenWidths: '768–991px', maxWidth: '720px' },
-    { breakpoint: 'lg', screenWidths: '992–1199px', maxWidth: '960px' },
-    { breakpoint: 'xl', screenWidths: '1200–1399px', maxWidth: '1140px' },
-    { breakpoint: 'xxl', screenWidths: '1400px+', maxWidth: '1320px' },
-  ]}
+caption="Container breakpoints"
+rows={BREAKPOINTS.map((breakpoint) => ({
+breakpoint,
+screenWidths: BREAKPOINT_DETAILS[breakpoint].screenWidthRange,
+maxWidth: BREAKPOINT_DETAILS[breakpoint].containerMaxWidth,
+}))}
 />
 ```
 
@@ -55,10 +47,8 @@ import { IressTable } from '@iress-oss/ids-components';
 If you want the `IressContainer` to fill its containing element, you can set the `fluid` prop. Resize the example below to see how the IressContainer is 100% for all screen sizes.
 
 ```tsx
-import { IressContainer } from '@iress-oss/ids-components';
-
 <IressContainer fluid>
-  Content fills the full width of its parent.
+  This container fills its parent width.
 </IressContainer>
 ```
 

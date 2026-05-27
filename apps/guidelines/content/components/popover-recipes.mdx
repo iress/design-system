@@ -24,7 +24,6 @@ const [multiSelect, setMultiSelect] = useState(false);
           <IressRow gutter="lg" key={role} verticalAlign="middle">
             <IressCol span={2}>
               <IressPopover
-                {...args}
                 activator={<IressButton fluid>role={role}</IressButton>}
                 container={document.body}
                 type={role === 'listbox' || role === 'menu' ? role : undefined}
@@ -34,21 +33,11 @@ const [multiSelect, setMultiSelect] = useState(false);
                   defaultSelected={3}
                   multiSelect={multiSelect && role === 'listbox'}
                 >
-                  {menuChildren}
+                  <IressMenuItem value={1}>Item 1</IressMenuItem>
+                  <IressMenuItem value={2}>Item 2</IressMenuItem>
+                  <IressMenuItem value={3}>Item 3</IressMenuItem>
                 </IressMenu>
               </IressPopover>
-            </IressCol>
-            <IressCol>
-              <MenuInPopoverRoleDescription role={role}>
-                {role === 'listbox' && (
-                  <IressToggle
-                    checked={multiSelect}
-                    onChange={() => setMultiSelect(!multiSelect)}
-                  >
-                    Multi-select
-                  </IressToggle>
-                )}
-              </MenuInPopoverRoleDescription>
             </IressCol>
           </IressRow>
         ))}

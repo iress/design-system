@@ -16,7 +16,7 @@ The `alignSelf` prop allows you to override the alignItems value set by a parent
 ```tsx
 <IressStack gap="md" horizontalAlign="center">
 <IressPanel bg="alt">First panel (no alignSelf)</IressPanel>
-<IressPanel bg="colour.primary.surface" alignSelf={alignSelf}>
+<IressPanel bg="colour.primary.surface" alignSelf="flex-start">
 Panel with alignSelf prop
 </IressPanel>
 <IressPanel bg="alt">Third panel (no alignSelf)</IressPanel>
@@ -33,17 +33,11 @@ Note: We only allow `1` as a value to maintain design consistency.
 
 ```tsx
 <IressStack gap="md" horizontalAlign="center" style={{ height: 400 }}>
-<IressPanel bg="alt">First panel (no flex)</IressPanel>
-<IressPanel>
-{children ?? (
-<>
-{args.flex
-? 'Panel with flex set to 1, so it will fill the available space.'
-: 'This panel is not set to flex, so it will only take up the space it needs.'}
-</>
-)}
-</IressPanel>
-<IressPanel bg="alt">Third panel (no flex)</IressPanel>
+  <IressPanel bg="alt">First panel (no flex)</IressPanel>
+  <IressPanel flex="1">
+    Panel with flex set to 1, so it will fill the available space.
+  </IressPanel>
+  <IressPanel bg="alt">Third panel (no flex)</IressPanel>
 </IressStack>
 ```
 
@@ -78,27 +72,25 @@ design system.
 You can set the value to `true` to enable scrolling on both axes, or specify `'x'` or `'y'` to restrict scrolling to a single axis.
 
 ```tsx
-import { IressCard, IressPanel } from '@iress-oss/ids-components';
-
-<IressCard px="sm">
-  <IressPanel scrollable="y" style={{ maxHeight: '200px' }}>
+<IressCard px="sm" scrollable="y" style={{ maxHeight: 200 }}>
+  <IressPanel>
     <h1>History of Iress</h1>
 
     <p>
-      <strong>Iress Limited</strong> (originally "Iress Market Technology")
-      is an Australian-based software company that provides technology
-      solutions to the financial services industry.
+      <strong>Iress Limited</strong> is an Australian-based software company
+      that provides technology solutions to the financial services industry.
     </p>
 
     <section>
-      <h2>Early Years (1993 – 2000)</h2>
+      <h2>Early Years (1993 - 2000)</h2>
       <p>
         Iress was founded in <strong>1993</strong> in Melbourne, Australia.
       </p>
     </section>
   </IressPanel>
-</IressCard>;
+</IressCard>
 ```
+
 [View "scrollable" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-layout--scrollable)
 
 ## `stretch`

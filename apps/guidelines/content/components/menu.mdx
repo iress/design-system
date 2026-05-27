@@ -16,9 +16,12 @@ import { IressMenu } from '@iress-oss/ids-components';
 ## Quick Start
 
 ```tsx
-import { IressMenu } from '@iress-oss/ids-components';
+import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
 
-<IressMenu />
+<IressMenu>
+  <IressMenuItem>Item 1</IressMenuItem>
+  <IressMenuItem>Item 2</IressMenuItem>
+</IressMenu>
 ```
 
 ## Usage
@@ -33,8 +36,10 @@ import { IressMenu } from '@iress-oss/ids-components';
 - `IressMenuText` can be used to display other non-interactive text. It supports all of the props of `IressText`.
 
 ```tsx
-<IressMenu defaultSelected={5}>
-  basic
+<IressMenu defaultSelected={5} role="listbox">
+  <IressMenuItem value={1}>Item 1</IressMenuItem>
+  <IressMenuItem value={5}>Item 5</IressMenuItem>
+  <IressMenuItem value={10}>Item 10</IressMenuItem>
 </IressMenu>
 ```
 
@@ -48,7 +53,9 @@ Note: Instead of using the `divider` prop on `IressMenuItem`, you can use `Iress
 
 ```tsx
 <IressMenu maxWidth="3/12">
-  complex
+  <IressMenuHeading>Actions</IressMenuHeading>
+  <IressMenuItem prepend={<IressIcon name="edit" />} divider>Edit</IressMenuItem>
+  <IressMenuItem prepend={<IressIcon name="delete" />}>Delete</IressMenuItem>
 </IressMenu>
 ```
 
@@ -64,7 +71,10 @@ When rendering a set of links for navigation purposes (as a secondary nav in thi
 
 ```tsx
 <nav aria-label="Secondary">
-<IressMenu />
+<IressMenu role="list">
+  <IressMenuItem href="/dashboard">Dashboard</IressMenuItem>
+  <IressMenuItem href="/settings">Settings</IressMenuItem>
+</IressMenu>
 </nav>
 ```
 
@@ -76,7 +86,10 @@ Using the `IressMenuHeading` component, you can create headings within the menu.
 
 ```tsx
 <IressMenu>
-  headings
+  <IressMenuHeading>Section 1</IressMenuHeading>
+  <IressMenuItem>Item 1</IressMenuItem>
+  <IressMenuHeading>Section 2</IressMenuHeading>
+  <IressMenuItem>Item 2</IressMenuItem>
 </IressMenu>
 ```
 
@@ -90,7 +103,10 @@ In situations where a bottom border will not work, you can also use `IressMenuDi
 
 ```tsx
 <IressMenu>
-  dividers
+  <IressMenuItem divider>Item with divider</IressMenuItem>
+  <IressMenuItem>Item without divider</IressMenuItem>
+  <IressMenuDivider />
+  <IressMenuItem>Item after divider</IressMenuItem>
 </IressMenu>
 ```
 
@@ -101,7 +117,10 @@ In situations where a bottom border will not work, you can also use `IressMenuDi
 By setting the `fluid` prop on the menu component, the menu will stretch to the width of its containing element.
 
 ```tsx
-<IressMenu fluid />
+<IressMenu fluid>
+  <IressMenuItem>Item 1</IressMenuItem>
+  <IressMenuItem>Item 2</IressMenuItem>
+</IressMenu>
 ```
 
 [View "Fluid" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--fluid)
@@ -118,15 +137,24 @@ The `layout` prop comes with three options:
 <IressStack gap="lg">
 <IressText>
 <h3>Stack (default)</h3>
-<IressMenu layout="stack" />
+<IressMenu layout="stack">
+  <IressMenuItem>Item 1</IressMenuItem>
+  <IressMenuItem>Item 2</IressMenuItem>
+</IressMenu>
 </IressText>
 <IressText>
 <h3>Inline</h3>
-<IressMenu layout="inline" />
+<IressMenu layout="inline">
+  <IressMenuItem>Item 1</IressMenuItem>
+  <IressMenuItem>Item 2</IressMenuItem>
+</IressMenu>
 </IressText>
 <IressText>
 <h3>Inline Equal Width</h3>
-<IressMenu layout="inline-equal-width" />
+<IressMenu layout="inline-equal-width">
+  <IressMenuItem>Item 1</IressMenuItem>
+  <IressMenuItem>Item 2</IressMenuItem>
+</IressMenu>
 </IressText>
 </IressStack>
 ```
@@ -158,7 +186,8 @@ By default, menu item text will wrap on to the next line when it exceeds the men
 
 ```tsx
 <IressMenu role="menu">
-  slots
+  <IressMenuItem prepend={<IressIcon name="home" />}>Home</IressMenuItem>
+  <IressMenuItem append={<IressPill>3</IressPill>}>Notifications</IressMenuItem>
 </IressMenu>
 ```
 
@@ -181,8 +210,9 @@ There are four roles supported:
 The default role for the menu component is `list`. It is most often used for navigation and its items can be navigated (using the keyboard) with the `tab` key.
 
 ```tsx
-<IressMenu defaultSelected={5}>
-  basic
+<IressMenu defaultSelected={5} role="listbox">
+  <IressMenuItem value={1}>Item 1</IressMenuItem>
+  <IressMenuItem value={5}>Item 5</IressMenuItem>
 </IressMenu>
 ```
 
@@ -193,7 +223,11 @@ The default role for the menu component is `list`. It is most often used for nav
 The `menu` role is used when the items in the menu has an action that performs a task in the application. The items can be navigated (using the keyboard) with the `arrow` keys, depending on the layout.
 
 ```tsx
-<IressMenu role="menu" />
+<IressMenu role="menu">
+  <IressMenuItem>Cut</IressMenuItem>
+  <IressMenuItem>Copy</IressMenuItem>
+  <IressMenuItem>Paste</IressMenuItem>
+</IressMenu>
 ```
 
 [View "MenuRole" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--menu-role)
@@ -207,8 +241,9 @@ A value is supplied to `IressMenuButton` (like you would with an option element 
 Set the `multiSelect` prop to true for a multi-selectable listbox.
 
 ```tsx
-<IressMenu role="listbox">
-  selectable
+<IressMenu role="listbox" defaultSelected="option-1">
+  <IressMenuItem value="option-1">Option 1</IressMenuItem>
+  <IressMenuItem value="option-2">Option 2</IressMenuItem>
 </IressMenu>
 ```
 
@@ -224,13 +259,26 @@ The `variant` prop can be used to change the style of the menu to suit different
 
 ```tsx
 <IressStack gap="lg">
-<IressMenu variant="radio" />
-<IressMenu variant="subdraw" maxWidth="input.12" />
-<IressMenu variant="side" maxWidth="input.12" />
-<IressMenu variant="side" maxWidth="input.12" numbered />
-<IressMenu children={MENU_CHILDREN_OPTIONS.groupedIcons}
-variant="rail"
-/>
+<IressMenu variant="radio" role="listbox" defaultSelected="item-1">
+  <IressMenuItem value="item-1">Item 1</IressMenuItem>
+  <IressMenuItem value="item-2">Item 2</IressMenuItem>
+</IressMenu>
+<IressMenu variant="subdraw" maxWidth="input.12">
+  <IressMenuItem>Navigation item</IressMenuItem>
+  <IressMenuItem>Another item</IressMenuItem>
+</IressMenu>
+<IressMenu variant="side" maxWidth="input.12">
+  <IressMenuItem>Side item 1</IressMenuItem>
+  <IressMenuItem>Side item 2</IressMenuItem>
+</IressMenu>
+<IressMenu variant="side" maxWidth="input.12" numbered>
+  <IressMenuItem>Step 1</IressMenuItem>
+  <IressMenuItem>Step 2</IressMenuItem>
+</IressMenu>
+<IressMenu variant="rail">
+  <IressMenuItem icon="home">Home</IressMenuItem>
+  <IressMenuItem icon="settings">Settings</IressMenuItem>
+</IressMenu>
 </IressStack>
 ```
 

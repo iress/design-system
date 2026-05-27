@@ -55,7 +55,7 @@ You can use the `IressModalProvider` to open and close modals from anywhere in y
 To use, wrap your `<App/>` or the component that you want to use the `useModal` hook with `<IressModalProvider />`.
 
 ```tsx
-<AppWithModalProvider {...args.modal} />
+<AppWithModalProvider />
 ```
 
 [View "Provider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-provider--provider)
@@ -165,7 +165,7 @@ const { showModal } = useModal();
 
     const noCloseButtonModal = (
       <IressModal
-        {...args}
+        heading="No Close Button"
         id="no-close-button"
         noCloseButton
         footer={
@@ -178,7 +178,7 @@ const { showModal } = useModal();
 
     const bothModal = (
       <IressModal
-        {...args}
+        heading="Both Disabled"
         id="both"
         disableBackdropClick
         noCloseButton
@@ -196,7 +196,7 @@ const { showModal } = useModal();
           Disable backdrop click
         </IressButton>
         <IressModal
-          {...args}
+          heading="Disable Backdrop Click"
           id="disable-backdrop-click"
           disableBackdropClick
         />

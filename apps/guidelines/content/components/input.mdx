@@ -30,20 +30,28 @@ The input component's `type` can be set to one of the following value: `text` (d
 For more information about each type, please see the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types).
 
 ```tsx
-import { IressInput, IressStack } from '@iress-oss/ids-components';
-
 <IressStack gap="md">
-  <IressInput placeholder="Text input" type="text" />
-  <IressInput placeholder="Email input" type="email" />
-  <IressInput placeholder="Number input" type="number" />
-  <IressInput placeholder="Password input" type="password" />
-  <IressInput placeholder="Search input" type="search" />
-  <IressInput placeholder="Tel input" type="tel" />
-  <IressInput placeholder="URL input" type="url" />
-  <IressInput type="date" />
-  <IressInput type="time" />
-  <IressInput type="color" />
-  <IressInput type="file" />
+{[
+'text',
+'color',
+'date',
+'datetime-local',
+'email',
+'file',
+'month',
+'number',
+'password',
+'search',
+'tel',
+'time',
+'url',
+'week',
+].map((type) => (
+<IressInput placeholder={`${type} input`}
+type={type}
+key={type}
+/>
+))}
 </IressStack>
 ```
 
@@ -63,16 +71,13 @@ The `inputmode` attribute provides a hint to browsers for devices with onscreen 
 For more information about each mode (and their expected user experience), please see the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode).
 
 ```tsx
-import { IressInput, IressStack } from '@iress-oss/ids-components';
-
 <IressStack gap="md">
-  <IressInput placeholder="Text mode" inputMode="text" />
-  <IressInput placeholder="Numeric mode" inputMode="numeric" />
-  <IressInput placeholder="Decimal mode" inputMode="decimal" />
-  <IressInput placeholder="Tel mode" inputMode="tel" />
-  <IressInput placeholder="Search mode" inputMode="search" />
-  <IressInput placeholder="Email mode" inputMode="email" />
-  <IressInput placeholder="URL mode" inputMode="url" />
+{inputModes.map((inputMode) => (
+<IressInput placeholder={`${inputMode} mode`}
+inputMode={inputMode}
+key={inputMode}
+/>
+))}
 </IressStack>
 ```
 
@@ -83,8 +88,6 @@ import { IressInput, IressStack } from '@iress-oss/ids-components';
 When using the `type="file"` attribute, the input allows users to select one or more files from their device. The appearance and behavior are controlled by the browser, and you can use the `onChange` handler to capture the selected files.
 
 ```tsx
-import { IressField, IressInput } from '@iress-oss/ids-components';
-
 <IressField label="File upload">
   <IressInput
     type="file"
@@ -116,17 +119,13 @@ The width in this case refers to the actual input and ensures that it is wide en
 Widths can also be set as a percentage, allowing the input to take up a proportion of the width of its container. In this case, the width of the actual input decreases if you add appended or prepended content.
 
 ```tsx
-import { IressInput, IressStack } from '@iress-oss/ids-components';
-
 <IressStack gap="md">
-  <IressInput placeholder="2" width={2} />
-  <IressInput placeholder="4" width={4} />
-  <IressInput placeholder="8" width={8} />
-  <IressInput placeholder="12" width={12} />
-  <IressInput placeholder="16" width={16} />
-  <IressInput placeholder="24" width={24} />
-  <IressInput placeholder="50%" width="50%" />
-  <IressInput placeholder="100%" width="100%" />
+{FORM_ELEMENT_WIDTHS.map((width) => (
+<IressInput placeholder={width}
+width={width}
+key={width}
+/>
+))}
 </IressStack>
 ```
 
@@ -152,11 +151,22 @@ Content (typically icons) can be added via the `prepend` and `append` props on `
 > **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
 ```tsx
-import { IressInput, IressIcon, IressStack } from '@iress-oss/ids-components';
-
 <IressStack gap="md">
-  <IressInput prepend={<IressIcon name="search" />} placeholder="Prepend icon" />
-  <IressInput append={<IressIcon name="search" />} placeholder="Append icon" />
+<IressInput prepend={<IressIcon name="search" />}
+placeholder="Prepend slot"
+/>
+
+<IressInput append={<IressIcon name="search" />}
+placeholder="Append slot"
+/>
+
+<IressInput prepend={<IressIcon name="mail" />}
+placeholder="Prepend slot"
+/>
+
+<IressInput append={<IressIcon name="calendar_today" />}
+placeholder="Append slot"
+/>
 </IressStack>
 ```
 
@@ -167,7 +177,10 @@ import { IressInput, IressIcon, IressStack } from '@iress-oss/ids-components';
 The `actions` prop allows you to add buttons to the input. These buttons will appear next to the input and can be used for actions such as copying the input value to the clipboard or triggering a search.
 
 ```tsx
-<IressInput placeholder="Input with action button" />
+<IressInput
+  placeholder="Input with action button"
+  actions={[{ children: 'Copy', icon: 'content_copy' }]}
+/>
 ```
 
 [View "Actions" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--actions)
@@ -198,7 +211,10 @@ This prop powers the `IressInputCurrency` component to allow friendly and consis
 The example below changes the value entered to uppercase when the input is not focused.
 
 ```tsx
-<IressInput placeholder="Enter a string and it will show in UPPERCASE when not focused, and show the raw value on focus" />
+<IressInput
+  placeholder="Enter a string and it will show in UPPERCASE when not focused"
+  formatter={(value) => String(value).toUpperCase()}
+/>
 ```
 
 [View "Formatter" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--formatter)
@@ -208,7 +224,12 @@ The example below changes the value entered to uppercase when the input is not f
 A common use case for the formatter is to display currency values with proper formatting. The following example shows how to format numbers as currency when the input is not focused:
 
 ```tsx
-<IressInput defaultValue={0.00} placeholder="Enter any number and it will show in currency format when the input is not focused" type="number" />
+<IressInput
+  defaultValue={0.00}
+  placeholder="Enter any number and it will show in currency format when the input is not focused"
+  type="number"
+  formatter={(value) => new Intl.NumberFormat('en-AU', { style: 'currency', currency: 'AUD' }).format(Number(value))}
+/>
 ```
 
 [View "CurrencyFormatter" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--currency-formatter)

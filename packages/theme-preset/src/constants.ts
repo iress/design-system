@@ -81,7 +81,7 @@ export const BREAKPOINT_DETAILS = {
   xl: {
     mediaQuery: '(min-width: 1280px) and (max-width: 1599px)',
     screenWidthRange: '1280px - 1599px',
-    margin: 'spacing.8',
+    margin: 'spacing.6',
     minScreenWidth: '1280px',
     maxScreenWidth: '1599px',
     containerMaxWidth: '1440px',
@@ -92,7 +92,7 @@ export const BREAKPOINT_DETAILS = {
    */
   xxl: {
     mediaQuery: '(min-width: 1600px)',
-    margin: 'spacing.8',
+    margin: 'spacing.6',
     screenWidthRange: '1600px and above',
     minScreenWidth: '1600px',
     containerMaxWidth: '1690px',

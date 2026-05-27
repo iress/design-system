@@ -18,6 +18,7 @@ interface PagefindResult {
 }
 
 interface PagefindAPI {
+  options: (opts: { excerptLength?: number }) => Promise<void>;
   init: () => Promise<void>;
   search: (
     query: string,

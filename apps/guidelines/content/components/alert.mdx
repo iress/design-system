@@ -47,11 +47,11 @@ The alert offers four statuses that set a distinctive colour and icon. They can 
 
 ```tsx
 <IressStack gap="md">
-{[...STATUSES, 'neutral'].map((status) => (
-<IressAlert status={status as never} key={status}>
-{messages[status as never]}
-</IressAlert>
-))}
+<IressAlert status="danger">Something went wrong. Please try again.</IressAlert>
+<IressAlert status="warning">Your session will expire in 5 minutes.</IressAlert>
+<IressAlert status="success">Your changes have been saved.</IressAlert>
+<IressAlert status="info">A new version is available.</IressAlert>
+<IressAlert status="neutral">No new notifications.</IressAlert>
 </IressStack>
 ```
 
@@ -75,15 +75,14 @@ The `actions` prop allows you to display call to action buttons within the alert
 
 ```tsx
 <IressStack gap="md">
-<IressAlert status="danger" />
-<IressAlert status="info" />
-<IressAlert status="success" />
-<IressAlert status="warning" />
-<IressAlert status="neutral" />
+<IressAlert status="danger" actions={[{ children: 'Retry' }, { children: 'Dismiss', mode: 'tertiary' }]}>
+  An error occurred while saving your changes.
+</IressAlert>
+<IressAlert status="info" actions={[{ children: 'Learn more' }]}>
+  A new version of the application is available.
+</IressAlert>
 </IressStack>
 ```
-
-[View "Footer" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--footer)
 
 ### Icon
 
@@ -103,15 +102,14 @@ By default, the alert is designed to display short messages. If you need to disp
 
 ```tsx
 <IressStack gap="md">
-<IressAlert status="danger" />
-<IressAlert status="info" />
-<IressAlert status="success" />
-<IressAlert status="warning" />
-<IressAlert status="neutral" />
+<IressAlert status="danger" multiLine heading="Error">
+  We were unable to process your request. Please check your input and try again. If the problem persists, contact support.
+</IressAlert>
+<IressAlert status="info" multiLine heading="Information">
+  Your account settings have been updated. These changes may take a few minutes to propagate across all services.
+</IressAlert>
 </IressStack>
 ```
-
-[View "MultiLine" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--multi-line)
 
 ### Variants
 
@@ -131,19 +129,17 @@ The alert can be displayed in different variants to suit different use cases. Th
 
 ### Dimissable
 
-The alert can be made dismissable by setting the `onDismiss` prop. This will display a close button in the top right corner of the alert, allowing users to dismiss it.
+The alert can be made dismissable by setting the `onClose` prop. This will display a close button in the top right corner of the alert, allowing users to dismiss it.
 
 ```tsx
 <IressStack gap="md">
-<IressAlert status="danger" />
-<IressAlert status="info" />
-<IressAlert status="success" />
-<IressAlert status="warning" />
-<IressAlert status="neutral" />
+<IressAlert status="danger" onClose={() => {}}>Something went wrong.</IressAlert>
+<IressAlert status="info" onClose={() => {}}>A new update is available.</IressAlert>
+<IressAlert status="success" onClose={() => {}}>Your changes have been saved.</IressAlert>
+<IressAlert status="warning" onClose={() => {}}>Your session will expire soon.</IressAlert>
+<IressAlert status="neutral" onClose={() => {}}>No new notifications.</IressAlert>
 </IressStack>
 ```
-
-[View "Dismissable" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--dismissable)
 
 ## Testing
 

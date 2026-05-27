@@ -69,14 +69,14 @@ You can use the `linkToTarget` prop to link the message to a specific target in 
 {STATUSES.map((status) => (
 <IressValidationMessage key={status}
 status={status}
-linkToTarget={args.linkToTarget ?? ''}
+linkToTarget="target-input"
 >
 {messages[status]}
 </IressValidationMessage>
 ))}
 </IressStack>
 <IressDivider />
-<IressInput id={args.linkToTarget} />
+<IressInput id="target-input" />
 </IressStack>
 ```
 

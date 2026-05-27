@@ -37,11 +37,11 @@ export const container = cva({
         },
         xl: {
           maxWidth: 'container.xl',
-          px: 'spacing.8',
+          px: 'spacing.6',
         },
         xxl: {
           maxWidth: 'container.xxl',
-          px: 'spacing.8',
+          px: 'spacing.6',
         },
       },
     },

@@ -18,7 +18,10 @@ import { IressCheckboxGroup } from '@iress-oss/ids-components';
 ```tsx
 import { IressCheckboxGroup } from '@iress-oss/ids-components';
 
-<IressCheckboxGroup name="preferences" />
+<IressCheckboxGroup name="preferences">
+  <IressCheckbox value="email">Email</IressCheckbox>
+  <IressCheckbox value="sms">SMS</IressCheckbox>
+</IressCheckboxGroup>
 ```
 
 ## Examples
@@ -30,7 +33,11 @@ Individual checkboxes can be passed directly into `IressCheckboxGroup`.
 **Note:** The `mapCheckboxGroupOptions` helper function, originally used to map options to `IressCheckbox` components, is now deprecated. Instead, you can use `array.map` to map the options to `IressCheckbox` components.
 
 ```tsx
-<IressCheckboxGroup name="let-them-eat-cake" />
+<IressCheckboxGroup name="let-them-eat-cake">
+  <IressCheckbox value="chocolate">Chocolate</IressCheckbox>
+  <IressCheckbox value="vanilla">Vanilla</IressCheckbox>
+  <IressCheckbox value="strawberry">Strawberry</IressCheckbox>
+</IressCheckboxGroup>
 ```
 
 [View "CheckboxChildren" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox-group--checkbox-children)
@@ -66,11 +73,20 @@ The `layout` prop controls how the checkbox group is displayed and can have thre
 ```tsx
 <IressText>
 <h3>block</h3>
-<IressCheckboxGroup layout="block" />
+<IressCheckboxGroup layout="block">
+<IressCheckbox value="a">Option A</IressCheckbox>
+<IressCheckbox value="b">Option B</IressCheckbox>
+</IressCheckboxGroup>
 <h3>inline</h3>
-<IressCheckboxGroup layout="inline" />
+<IressCheckboxGroup layout="inline">
+<IressCheckbox value="a">Option A</IressCheckbox>
+<IressCheckbox value="b">Option B</IressCheckbox>
+</IressCheckboxGroup>
 <h3>stack</h3>
-<IressCheckboxGroup layout="stack" />
+<IressCheckboxGroup layout="stack">
+<IressCheckbox value="a">Option A</IressCheckbox>
+<IressCheckbox value="b">Option B</IressCheckbox>
+</IressCheckboxGroup>
 </IressText>
 ```
 
@@ -133,7 +149,10 @@ The `readOnly` prop changes how the checkbox group is rendered. It will only ren
 It is understandable that this may not be the desired behavior for all use cases. If you need a checkbox group that is not editable, but still visible, simply do not set the `readOnly` prop and set the `value` prop instead.
 
 ```tsx
-<IressCheckboxGroup readOnly />
+<IressCheckboxGroup readOnly value={["option-1"]}>
+  <IressCheckbox value="option-1">Option 1</IressCheckbox>
+  <IressCheckbox value="option-2">Option 2</IressCheckbox>
+</IressCheckboxGroup>
 ```
 
 [View "ReadOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox-group--read-only)
@@ -143,7 +162,11 @@ It is understandable that this may not be the desired behavior for all use cases
 The `touch` prop adds the button-like border and padding to checkbox.
 
 ```tsx
-<IressCheckboxGroup variant="touch" />
+<IressCheckboxGroup variant="touch">
+  <IressCheckbox value="option-1">Option 1</IressCheckbox>
+  <IressCheckbox value="option-2">Option 2</IressCheckbox>
+  <IressCheckbox value="option-3">Option 3</IressCheckbox>
+</IressCheckboxGroup>
 ```
 
 [View "Touch" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox-group--touch)
