@@ -36,7 +36,10 @@ export default {
         component: componentMeta.description,
       },
     },
-    testMeta: componentMeta.testMeta,
+    idsConfig: {
+      guidelinesUrl: 'https://iress.github.io/design-system/components/alert',
+      testMeta: componentMeta.testMeta,
+    },
   },
 } as Meta<typeof IressAlert>;
 

@@ -3,7 +3,6 @@ export * from './components/CodeSandbox';
 export * from './components/ComponentStatus';
 export * from './components/CurrentBreakpoint';
 export * from './components/DiffViewer';
-export * from './components/HideSidebar';
 export * from './components/Redirect';
 export * from './components/TestTable';
 

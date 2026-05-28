@@ -3,7 +3,7 @@ import {
   type DocsContainerProps,
   Unstyled,
 } from '@storybook/addon-docs/blocks';
-import { addons } from 'storybook/preview-api';
+import { addons } from 'storybook/internal/preview-api';
 import { DOCS_RENDERED } from 'storybook/internal/core-events';
 import { MDXProvider } from '@mdx-js/react';
 import { lazy, Suspense, type ReactNode } from 'react';

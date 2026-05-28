@@ -11,17 +11,18 @@ import { ComponentCanvas } from './ComponentCanvas';
 import { use, useContext, useEffect, useState } from 'react';
 import { IressStorybookContext } from './IressStorybookContext';
 import { ComponentStatus } from './ComponentStatus';
-import { HideSidebar } from './HideSidebar';
-import { TestTable, type TestComponentMeta } from './TestTable';
+import { TestTable } from './TestTable';
 import {
+  IressButton,
   IressCol,
+  IressIcon,
   IressMenu,
   IressMenuHeading,
   IressMenuItem,
   IressPanel,
   IressRow,
 } from '@iress-oss/ids-components';
-import { type BroadcastHashEvent } from '..';
+import type { BroadcastHashEvent, ParametersConfig } from '../types';
 import { cssVars } from '@iress-oss/ids-tokens';
 
 const TAB_NAMES = [
@@ -126,20 +127,22 @@ export const AutoDocsPage = () => {
   // componentStories() returns stories in file-definition order
   const stories = docsContext.componentStories();
   const primaryStory = stories[0];
+
   const examples = stories
     .slice(1)
     .filter((story) => !story.tags?.includes('recipe'));
+  const hasExamples = examples.length > 0;
+
   const recipes = stories
     .slice(1)
     .filter((story) => story.tags?.includes('recipe'));
-  const testMeta =
-    (resolvedMeta.preparedMeta.parameters?.testMeta as TestComponentMeta[]) ??
-    [];
-  const hasExamples = examples.length > 0;
   const hasRecipes = recipes.length > 0;
+
+  const config = resolvedMeta.preparedMeta.parameters
+    ?.idsConfig as ParametersConfig['idsConfig'];
+  const testMeta = config?.testMeta ?? [];
+  const guidelinesUrl = config?.guidelinesUrl;
   const hasTestMeta = testMeta.length > 0;
-  const hideSidebar =
-    stories.length < 2 || !!resolvedMeta.preparedMeta.parameters?.hideSidebar;
 
   const selectTab = (tab: TabName) => {
     setSelectedTab(tab);
@@ -168,7 +171,6 @@ export const AutoDocsPage = () => {
 
   return (
     <>
-      {hideSidebar && <HideSidebar />}
       <Title />
       <IressText textStyle="typography.heading.5">
         <Subtitle />
@@ -178,6 +180,21 @@ export const AutoDocsPage = () => {
       <IressTabSet
         selected={selectedTab}
         onChange={(e) => selectTab(e.value as TabName)}
+        append={
+          guidelinesUrl && (
+            <IressButton
+              href={guidelinesUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              append={
+                <IressIcon name="open_in_new" screenreaderText="(new window)" />
+              }
+              mode="muted"
+            >
+              Guidelines
+            </IressButton>
+          )
+        }
       >
         {primaryStory && (
           <IressTab label="Playground" value="playground">

@@ -1,5 +1,6 @@
 import { type SourceProps } from '@storybook/addon-docs/blocks';
 import type reactElementToJSXString from 'react-element-to-jsx-string';
+import { type TestComponentMeta } from './components/TestTable';
 
 export interface ParametersConfig {
   docs?: {
@@ -7,6 +8,21 @@ export interface ParametersConfig {
       code?: string;
       transform?: SourceProps['transform'];
     };
+  };
+
+  /**
+   * Optional configuration for IDs-specific Storybook features, such as testing metadata. This is not a standard Storybook parameter and is used internally by the Iress Storybook setup.
+   */
+  idsConfig?: {
+    /**
+     * URL for guidelines documentation. If provided, a link will be appended to the tab navigation in the generated documentation pages, directing users to the full documentation for the component. The URL should be the base URL for the guidelines, and the specific page will be constructed based on the component's title.
+     */
+    guidelinesUrl?: string;
+
+    /**
+     * Optional metadata for component testing, used to generate test information in the documentation.
+     */
+    testMeta?: TestComponentMeta[];
   };
 }
 
