@@ -10,6 +10,20 @@ Coding standards, domain knowledge, and preferences that AI should follow when r
 
 When reviewing a PR, always verify that AI-facing documentation stays in sync with code changes. Flag any missing updates as **required changes** (not suggestions).
 
+### Sandbox Dependency Tags
+
+**Trigger:** Any PR that modifies CodeSandbox examples, Storybook sandbox defaults, or docs/snippets that generate `package.json` files for sandbox usage.
+
+**What to verify:**
+
+- IDS v6 sandbox examples use the current prerelease tag: `@iress-oss/ids-components: 'beta'` and `@iress-oss/ids-tokens: 'beta'` when tokens are installed directly.
+- Review generated sandbox dependencies in Storybook previews, sandbox stories, mock stories, helper utilities, and README/MDX examples — not just the visible docs page.
+- Flag any use of `alpha` for IDS sandbox dependencies unless the PR explicitly documents a temporary rollback and explains why.
+
+**Review comment template:**
+
+> This PR updates a CodeSandbox or Storybook sandbox example but still references IDS `alpha` packages. IDS v6 sandboxes should use the `beta` tag for `@iress-oss/ids-components` and `@iress-oss/ids-tokens` so generated examples install the current prerelease.
+
 ### 1. Token Schema — `packages/tokens/.ai/index.json`
 
 **Trigger:** Any PR that modifies files under `packages/tokens/src/schema/` or changes the design token build pipeline (`packages/tokens/src/generated/`, token transforms, or token build config).
