@@ -1,9 +1,5 @@
 // Components
 export * from './components/CodeSandbox';
-export * from './components/ComponentApi';
-export * from './components/ComponentApiExpander';
-export * from './components/ComponentExample';
-export * from './components/ComponentOverview';
 export * from './components/ComponentStatus';
 export * from './components/CurrentBreakpoint';
 export * from './components/DiffViewer';
