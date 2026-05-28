@@ -6,8 +6,6 @@ import {
 import { MOCK_LABEL_VALUE_META } from '@/mocks/generateLabelValues';
 import { LabelValueMeta } from '@/interfaces';
 
-const LOADING_DELAY = 250;
-
 const DEFAULT_PROPS = {
   debounceThreshold: 0,
   options: MOCK_LABEL_VALUE_META,

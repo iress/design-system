@@ -449,30 +449,30 @@ yarn dev
 
 ### Task 9.1: Create token content pages
 
-- [ ] **Step 1:** Create `apps/guidelines/content/tokens/` directory
-- [ ] **Step 2:** Create pages for each token category:
+- [x] **Step 1:** Create `apps/guidelines/content/tokens/` directory
+- [x] **Step 2:** Create pages for each token category:
   - `colour.mdx` — neutral, primary, success, warning, danger, info palettes with values & pairings
   - `spacing.mdx` — spacing scale, usage guidance
   - `radius.mdx` — border radius tokens
   - `typography.mdx` — font families, sizes, weights, line heights
-- [ ] **Step 3:** Include CSS variable names, JS import paths, and concrete values
-- [ ] **Step 4:** Add usage examples showing tokens applied in CSS and via IDS styling props
+- [x] **Step 3:** Include CSS variable names, JS import paths, and concrete values
+- [x] **Step 4:** Add usage examples showing tokens applied in CSS and via IDS styling props
 
 ### Task 9.2: Add token navigation
 
-- [ ] **Step 1:** Add "Tokens" section to `__root.tsx` nav (link to `/tokens/colour`)
-- [ ] **Step 2:** Ensure splat route resolves `tokens/*` paths correctly
+- [x] **Step 1:** Add "Tokens" section to nav (link to `/tokens/colour`)
+- [x] **Step 2:** Ensure splat route resolves `tokens/*` paths correctly
 
 ### Task 9.3: Generate token content from source data
 
-- [ ] **Step 1:** Evaluate whether to hand-author or extend `translate-components.ts` (or future `derive-ai-docs.ts`) to generate token MDX from schema JSON
-- [ ] **Step 2:** If generated: add token generation to build pipeline so pages stay in sync with `@iress-oss/ids-tokens` releases
-- [ ] **Step 3:** Include the auto-generated token tables (from `tokens-reference.md` format) in each category page
+- [x] **Step 1:** Created `apps/guidelines/scripts/generate-token-pages.ts` — generates MDX from `packages/tokens/.ai/tokens-reference.md`
+- [x] **Step 2:** Run on demand via `npx tsx scripts/generate-token-pages.ts`; wire into build pipeline deferred to Phase 12
+- [x] **Step 3:** Include the auto-generated token tables in each category page
 
 ### Task 9.4: Derive token AI docs
 
-- [ ] **Step 1:** Ensure `packages/tokens/.ai/` is updated by the same derive workflow as components
-- [ ] **Step 2:** Include token pages in `IDS-FULL-REFERENCE.md` generation
+- [x] **Step 1:** `packages/tokens/.ai/` already maintained by `generate-token-reference.ts`
+- [ ] **Step 2:** Include token pages in `IDS-FULL-REFERENCE.md` generation — deferred to Phase 12
 
 ---
 

@@ -1555,7 +1555,9 @@ describe('IressSelect', () => {
       expect(options.length).toBeGreaterThan(0);
 
       // Check that the label highlighting is working
-      const highlightedLabels = await screen.findAllByText(/test/i, { selector: 'b' });
+      const highlightedLabels = await screen.findAllByText(/test/i, {
+        selector: 'b',
+      });
       expect(highlightedLabels.length).toBeGreaterThan(0);
 
       // Verify both label and meta can be highlighted
@@ -1616,7 +1618,9 @@ describe('IressSelect', () => {
       expect(reactMeta).toHaveTextContent('React Element Meta');
 
       // Check that we can find an option where meta is highlighted
-      const highlightedText = await screen.findAllByText('option', { selector: 'b' });
+      const highlightedText = await screen.findAllByText('option', {
+        selector: 'b',
+      });
       expect(highlightedText).toHaveLength(2);
       expect(highlightedText[1].parentElement).toHaveTextContent(
         'Regular option meta',
