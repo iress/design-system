@@ -114,6 +114,26 @@ export const tabSet = sva({
           justifyContent: 'flex-end',
         },
       },
+      'top-stretch': {
+        list: {
+          justifyContent: 'flex-start',
+
+          '& > *': {
+            flex: '1',
+          },
+
+          '& [role="tab"]': {
+            width: '12/12',
+            justifyContent: 'center',
+          },
+        },
+        activeIndicator: {
+          flex: 'none',
+        },
+        hoverIndicator: {
+          flex: 'none',
+        },
+      },
     },
     overflowEnd: {
       true: {

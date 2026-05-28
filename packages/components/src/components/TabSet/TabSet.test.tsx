@@ -165,6 +165,15 @@ describe('IressTabs', () => {
         const container = screen.getByTestId(TEST_ID);
         expect(container).toHaveClass(tabSet({ layout: 'top-center' }).root!);
       });
+
+      it('applies stretch layout', () => {
+        const screen = renderComponent({
+          layout: 'top-stretch',
+        });
+
+        const container = screen.getByTestId(TEST_ID);
+        expect(container).toHaveClass(tabSet({ layout: 'top-stretch' }).root!);
+      });
     });
 
     describe('type', () => {

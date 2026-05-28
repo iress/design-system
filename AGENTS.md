@@ -106,6 +106,7 @@ Supporting: `storybook-config/`, `storybook-okta/`, `storybook-sandbox/`, `story
 - Husky pre-commit and pre-push hooks enforce linting and tests
 - Follow existing patterns and conventions in the codebase
 - Prefer minimal, targeted changes over over-engineering
+- **Never bump package versions manually** — always use `yarn workspace <package-name> version <new-version>` (e.g. `yarn workspace @iress-oss/ids-components version 6.0.0-beta.9`). This updates the package version and all dependent packages in the monorepo atomically.
 
 ## CI/CD
 

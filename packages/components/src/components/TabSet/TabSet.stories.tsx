@@ -104,6 +104,10 @@ export const Layout: Story = {
         <IressText element="h2">top-right</IressText>
         <IressTabSet {...args} layout="top-right" />
       </IressPanel>
+      <IressPanel>
+        <IressText element="h2">top-stretch</IressText>
+        <IressTabSet {...args} layout="top-stretch" />
+      </IressPanel>
     </IressStack>
   ),
 };

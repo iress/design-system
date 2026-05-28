@@ -49,7 +49,12 @@ You can use state to control the active tab by setting the `selected` property t
 
 ### Layout
 
-`IressTabSet` controls the layout of the tab buttons. These will always appear at the top of the tab container, and can be aligned to the left (default), centrally or to the right via the `layout` prop.
+`IressTabSet` controls the layout of the tab buttons. These will always appear at the top of the tab container, and can be aligned to the left (default), centrally, to the right, or stretched to fill the full width via the `layout` prop.
+
+- `top-left` (default): tabs align to the start.
+- `top-center`: tabs align centrally.
+- `top-right`: tabs align to the end.
+- `top-stretch`: tabs stretch equally to fill the full available width.
 
 <ComponentExample of={ComponentStories.Layout} />
 

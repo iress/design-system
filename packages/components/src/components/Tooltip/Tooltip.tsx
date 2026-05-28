@@ -49,6 +49,13 @@ export interface IressTooltipProps extends IressStyledProps {
    * Sets the tooltip text. Can accept a string or an array of strings - if given an array, will output each string on a new line.
    */
   tooltipText: string | string[];
+
+  /**
+   * Visual variant of the tooltip.
+   * - When not set (default): renders plain text, with arrays shown as multiple lines separated by line breaks.
+   * - `rich`: Displays structured content with the first line as a prominent name and subsequent lines as muted metadata.
+   */
+  variant?: 'rich';
 }
 
 export const IressTooltip = ({
@@ -58,10 +65,11 @@ export const IressTooltip = ({
   delay = 500,
   open = false,
   tooltipText,
+  variant,
   'data-testid': testid,
   ...restProps
 }: IressTooltipProps) => {
-  const classes = tooltip();
+  const classes = tooltip({ variant });
   const isAuto = align === 'auto';
 
   const [isOpen, setIsOpen] = useState(open);
@@ -123,12 +131,21 @@ export const IressTooltip = ({
           ref={refs.setFloating}
           {...getFloatingProps()}
         >
-          {toArray(tooltipText).map((line, index, array) => (
-            <Fragment key={index}>
-              {line}
-              {index < array.length - 1 && <br />}
-            </Fragment>
-          ))}
+          {variant === 'rich'
+            ? toArray(tooltipText).map((line, index) => (
+                <span
+                  key={index}
+                  className={index === 0 ? classes.richName : classes.richMeta}
+                >
+                  {line}
+                </span>
+              ))
+            : toArray(tooltipText).map((line, index, array) => (
+                <Fragment key={index}>
+                  {line}
+                  {index < array.length - 1 && <br />}
+                </Fragment>
+              ))}
         </div>
       )}
     </styled.div>

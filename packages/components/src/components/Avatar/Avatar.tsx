@@ -5,6 +5,7 @@ import { GlobalCSSClass } from '@/enums';
 import { avatar } from './Avatar.styles';
 import type { IressStyledProps } from '@/types';
 import { IressIcon, type IressIconProps } from '../Icon';
+import { IressTooltip } from '../Tooltip';
 
 type AvatarMode =
   | 10
@@ -31,6 +32,15 @@ type AvatarMode =
   | 'warning';
 
 type AvatarCssMode = Extract<AvatarMode, string>;
+
+export interface IressAvatarTooltip {
+  /** The person's name, displayed prominently. */
+  name: string;
+  /** Badge label (e.g. "New"). Shown as muted metadata. */
+  badge?: string;
+  /** Type label (e.g. "Group"). Shown as muted metadata. */
+  type?: string;
+}
 
 export interface IressAvatarProps extends IressStyledProps<'span'> {
   /**
@@ -72,6 +82,12 @@ export interface IressAvatarProps extends IressStyledProps<'span'> {
   mode?: AvatarMode;
 
   /**
+   * Tooltip shown on hover. Displays the name prominently with optional
+   * metadata (badge and type) in muted text separated by a dot.
+   */
+  tooltip?: IressAvatarTooltip;
+
+  /**
    * Secondary circle at the bottom-right. Pass an icon `ReactNode` to display, or `false`/`undefined` to hide.
    * @default false
    */
@@ -95,6 +111,7 @@ export const IressAvatar = ({
   type = false,
   mode,
   compact = false,
+  tooltip,
   className,
   ...restProps
 }: IressAvatarProps) => {
@@ -111,9 +128,22 @@ export const IressAvatar = ({
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
   const labelId = useId();
 
-  return (
+  const buildTooltipText = (): string[] => {
+    if (!tooltip) return [];
+    const metaParts = [tooltip.badge, tooltip.type].filter(Boolean);
+    const lines = [tooltip.name];
+    if (metaParts.length > 0) {
+      lines.push(metaParts.join(' · '));
+    }
+    return lines;
+  };
+
+  const avatarElement = (
     <span
       {...nonStyleProps}
+      tabIndex={
+        tooltip ? (nonStyleProps.tabIndex ?? 0) : nonStyleProps.tabIndex
+      }
       className={cx(
         css(styles.root, styleProps),
         className,
@@ -151,6 +181,16 @@ export const IressAvatar = ({
       )}
     </span>
   );
+
+  if (tooltip) {
+    return (
+      <IressTooltip tooltipText={buildTooltipText()} variant="rich" delay={300}>
+        {avatarElement}
+      </IressTooltip>
+    );
+  }
+
+  return avatarElement;
 };
 
 IressAvatar.displayName = 'IressAvatar';

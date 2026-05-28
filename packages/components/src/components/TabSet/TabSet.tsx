@@ -41,7 +41,7 @@ export interface IressTabSetProps extends Omit<IressStyledProps, 'onChange'> {
    * Layout options for the positioning of tabs.
    * @default top-left
    */
-  layout?: 'top-left' | 'top-center' | 'top-right';
+  layout?: 'top-left' | 'top-center' | 'top-right' | 'top-stretch';
 
   /**
    * Emitted when a tab changes.
