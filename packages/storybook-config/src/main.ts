@@ -1,10 +1,10 @@
 import type { StorybookConfig } from '@storybook/react-vite';
-import remarkGfm from 'remark-gfm';
 
 import { dirname, resolve } from 'path';
 import { loadEnv, mergeConfig, type Plugin, type UserConfig } from 'vite';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
+import type { Indexer, IndexerOptions } from 'storybook/internal/types';
 
 // Get the directory name for ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -54,6 +54,17 @@ interface MainConfig extends Pick<Partial<StorybookConfig>, 'stories'> {
   viteFinal?: (config: UserConfig) => UserConfig;
 }
 
+/** Wraps an indexer's createIndex to inject 'autodocs' tag into all entries. */
+function addAutoDocsTag(indexer: Indexer) {
+  return async (fileName: string, options: IndexerOptions) => {
+    const entries = await indexer.createIndex(fileName, options);
+    return entries.map((entry) => ({
+      ...entry,
+      tags: [...(entry.tags ?? []), 'autodocs'],
+    }));
+  };
+}
+
 /**
  * Function to get the main Storybook configuration.
  * Used to centralise the configuration for all Storybook instances in multiple repositories.
@@ -76,33 +87,35 @@ export const getMainConfig = ({
       '@iress-oss/ids-storybook-sandbox',
       '@iress-oss/ids-storybook-toggle-stories',
       '@iress-oss/ids-storybook-version-badge',
+      '@storybook/addon-docs',
       // 'storybook-addon-tag-badges', TODO: Does not work in Storybook 10, as it does not work in composition mode
       // '@storybook/addon-interactions', TODO: Enable when ready
       // 'storybook-addon-rtl', TODO: Create our own addon that works with Storybook 10
-      {
-        name: '@storybook/addon-docs',
-        options: {
-          mdxPluginOptions: {
-            mdxCompileOptions: {
-              remarkPlugins: [remarkGfm],
-            },
-          },
-        },
-      },
     ],
 
     core: {
       disableTelemetry: true,
     },
 
+    docs: {
+      defaultName: 'API / Examples',
+    },
+
     framework: '@storybook/react-vite',
 
     staticDirs: [resolve(__dirname, '../public')],
 
-    stories: stories ?? [
-      '../docs/**/*.@(stories.ts|stories.tsx|mdx)',
-      '../src/**/*.@(stories.ts|stories.tsx|mdx)',
-    ],
+    stories: stories ?? ['../src/**/*.stories.@(ts|tsx)'],
+
+    // Inject 'autodocs' tag into all stories at index time so docs pages are generated
+    experimental_indexers: async (existingIndexers) => {
+      return Promise.resolve(
+        existingIndexers?.map((indexer) => ({
+          ...indexer,
+          createIndex: addAutoDocsTag(indexer),
+        })),
+      );
+    },
 
     viteFinal(config) {
       let modifiedConfig: UserConfig = {

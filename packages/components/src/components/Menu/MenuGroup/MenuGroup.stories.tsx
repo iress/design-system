@@ -10,7 +10,6 @@ export default {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
 } satisfies Meta<typeof IressMenuGroup>;
 
 type Story = StoryObj<IressMenuGroupProps>;

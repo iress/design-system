@@ -488,24 +488,35 @@ This phase removes the originals and switches Storybook to autodocs mode.
 
 ### Task 10.1: Enable autodocs in Storybook
 
-- [ ] **Step 1:** Add `tags: ['autodocs']` to each component's stories meta (or set globally in preview)
-- [ ] **Step 2:** Ensure component TSDoc/JSDoc on props is comprehensive (autodocs renders these)
-- [ ] **Step 3:** Verify autodocs generates acceptable pages for a sample (Button, Alert, Select)
+- [x] **Step 1:** Enabled globally via `experimental_indexers` in `main.ts` (injects `'autodocs'` tag at index time)
+- [x] **Step 2:** Verified autodocs generates acceptable pages (confirmed via Chrome DevTools)
+- [x] **Step 3:** Created `AutoDocsPage` custom template using `ComponentCanvas` for per-story sandbox
 
 ### Task 10.2: Update stories glob to exclude MDX
 
-- [ ] **Step 1:** Change `getMainConfig` stories pattern from:
-  ```ts
-  '../src/**/*.@(stories.ts|stories.tsx|mdx)'
-  ```
-  to:
-  ```ts
-  '../src/**/*.stories.@(ts|tsx)'
-  ```
-- [ ] **Step 2:** Keep `'../docs/**/*.mdx'` only if non-component docs (guides) remain in Storybook
-  (or remove entirely if all guides are in the guidelines site)
+- [x] **Step 1:** Changed `getMainConfig` stories pattern to `'../src/**/*.stories.@(ts|tsx)'`
+- [x] **Step 2:** Removed `'../docs/**/*.mdx'` (all guides are in guidelines site)
 
-### Task 10.3: Remove `.docs.mdx` files
+### Task 10.3: Formalize shared component meta
+
+Leverage the existing `meta/` folder in each component to provide a single source of truth
+for component metadata (title, description, tags, etc.) shared across Storybook, guidelines,
+and AI docs. This must happen before removing `.docs.mdx` files so the autodocs pages can
+render the same information that `.docs.mdx` provided (description, status, etc.).
+
+- [ ] **Step 1:** Add `description` field to each component's `meta/index.tsx`
+- [ ] **Step 2:** Create a `/meta` package export in `@iress-oss/ids-components` (re-exports all component metas)
+- [ ] **Step 3:** Wire stories to use meta for `title` and `tags` (e.g. `title: \`Components/${alertMeta.heading}\``)
+- [ ] **Step 4:** Wire guidelines `content/*.mdx` to import meta from `@iress-oss/ids-components/meta/<component>`
+- [ ] **Step 5:** Ensure `AutoDocsPage` can render component description from meta (via story parameters or CSF meta)
+- [ ] **Step 6:** Storybook URLs are inferred from title (no explicit URL needed in meta)
+
+**Design constraints:**
+- Meta must be data-only (no JSX in the shared export — `Thumbnail` stays in the local `meta/` but isn't re-exported via `/meta`)
+- Separate entry point keeps it tree-shakeable
+- Co-located with each component for easy authoring
+
+### Task 10.4: Remove `.docs.mdx` files
 
 - [ ] **Step 1:** Delete all 65 `*.docs.mdx` files from `packages/components/src/`
 - [ ] **Step 2:** Remove `packages/components/docs/` folder (guides moved to guidelines site)
@@ -518,26 +529,28 @@ This phase removes the originals and switches Storybook to autodocs mode.
   - `packages/tokens/src/schema/Typography.mdx`
 - [ ] **Step 4:** Update `translate-components.ts` — either delete entirely or simplify to only run `derive-ai-docs.ts`
 
-### Task 10.4: Clean up `@iress-oss/ids-storybook-config`
+### Task 10.5: Clean up `@iress-oss/ids-storybook-config`
 
-With autodocs, the custom doc components are no longer needed. Remove them:
+With autodocs + shared meta, some custom doc components are no longer needed but others
+can be retained and adapted to read from meta instead of `.docs.mdx`.
 
-- [ ] **Step 1:** Remove doc-specific components from `src/components/`:
-  - `ComponentOverview.tsx` (renders `.docs.mdx` header + status + API)
-  - `ComponentExample.tsx` (renders story examples in docs pages)
-  - `ComponentApi.tsx`, `ComponentApiExpander.tsx`, `ComponentApiHeading.tsx` (custom API tables — autodocs generates these)
-  - `ComponentStatus.tsx` (status badges in docs pages)
-- [ ] **Step 2:** Remove exports from `src/index.ts`
-- [ ] **Step 3:** Remove related tests and stories
-- [ ] **Step 4:** Update `packages/storybook-config/package.json` if docs-related deps can be dropped
-- [ ] **Step 5:** Keep utility helpers that are still used by stories (`disableArgTypes`, `removeArgTypes`, `stylingProps`, etc.)
+- [ ] **Step 1:** Evaluate which doc components to keep vs remove:
+  - `ComponentOverview.tsx` — **consider keeping** (can render description/status from meta in `AutoDocsPage`)
+  - `ComponentStatus.tsx` — **consider keeping** (can render status badge from meta)
+  - `ComponentExample.tsx` — **remove** (replaced by `ComponentCanvas` in `AutoDocsPage`)
+  - `ComponentApi.tsx`, `ComponentApiExpander.tsx`, `ComponentApiHeading.tsx` — **remove** (autodocs generates API tables)
+- [ ] **Step 2:** Refactor kept components to read from shared meta instead of `.docs.mdx` props
+- [ ] **Step 3:** Remove unused exports from `src/index.ts`
+- [ ] **Step 4:** Remove related tests and stories for deleted components
+- [ ] **Step 5:** Update `packages/storybook-config/package.json` if docs-related deps can be dropped
+- [ ] **Step 6:** Keep utility helpers that are still used by stories (`disableArgTypes`, `removeArgTypes`, `stylingProps`, etc.)
 
-### Task 10.5: Remove stale docs infrastructure
+### Task 10.6: Remove stale docs infrastructure
 
 - [ ] Remove Storybook doc blocks that are no longer needed (`<Meta of=.../>` pattern)
 - [ ] Verify no remaining imports of removed components across the monorepo
 
-### Task 10.6: Add cross-links from Storybook to Guidelines
+### Task 10.7: Add cross-links from Storybook to Guidelines
 
 - [ ] Add a Storybook toolbar link or panel that points to the guidelines site
 - [ ] Optionally add a "📖 Full docs" link in each autodocs page pointing to `https://<pages-url>/components/<slug>`

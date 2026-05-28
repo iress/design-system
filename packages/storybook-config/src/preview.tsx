@@ -3,6 +3,7 @@ import {
   IressStorybook,
   type IressStorybookProps,
 } from './components/IressStorybook';
+import { AutoDocsPage } from './components/AutoDocsPage';
 import {
   BREAKPOINT_DETAILS,
   type Breakpoints,
@@ -48,6 +49,7 @@ export const getPreview = ({
   const Provider = docsProps?.componentMapping?.IressProvider ?? IressProvider;
 
   return {
+    tags: ['autodocs'],
     decorators: [
       (Story, context) => {
         const disableProvider = !!context.parameters?.disableProvider;
@@ -81,15 +83,12 @@ export const getPreview = ({
         sort: 'alpha',
       },
       docs: {
-        // TODO: Code panel is being used in place of our custom addon. However it is missing a few features related to these PRs:
-        // - https://github.com/SchwarzIT/onyx/issues/2379
-        // - https://github.com/storybookjs/storybook/pull/30179
-        // We also have to come up for a way to open in Sandbox again, which might just be another button
         codePanel: true,
         componentVersions,
         container: (containerProps: IressStorybookProps) => (
           <IressStorybook {...containerProps} {...docsProps} />
         ),
+        page: AutoDocsPage,
         toc: {
           title: 'On this page',
           headingSelector: [
