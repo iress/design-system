@@ -12,15 +12,47 @@ import {
   IressImage,
   IressDivider,
   IressInline,
+  IressSkipLink,
+  IressAlert,
 } from '@iress-oss/ids-components';
 import { Search } from '../components/Search';
 import { AiPanel } from '../components/AiPanel';
 import { NAV_ITEMS } from '../nav';
-import { useLayoutEffect, useRef, useState } from 'react';
+import {
+  Component,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react';
 
 export const Route = createRootRoute({
   component: RootLayout,
 });
+
+class ErrorBoundary extends Component<
+  { children: ReactNode },
+  { error: Error | null }
+> {
+  state = { error: null as Error | null };
+  static getDerivedStateFromError(error: Error) {
+    return { error };
+  }
+  render() {
+    if (this.state.error) {
+      return (
+        <IressAlert
+          status="danger"
+          onClose={() => this.setState({ error: null })}
+        >
+          Something went wrong loading this page. Try navigating to a different
+          page.
+        </IressAlert>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 function RootLayout() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -32,16 +64,14 @@ function RootLayout() {
 
   useLayoutEffect(() => {
     if (headerRef.current) {
-      setNavHeight(headerRef.current.offsetHeight);
+      setNavHeight(headerRef.current.offsetHeight + 10);
     }
   }, []);
 
   return (
     <>
-      <IressStyled
-        element="header"
-        ref={headerRef}
-      >
+      <IressSkipLink href="#main-content">Skip to content</IressSkipLink>
+      <IressStyled element="header" ref={headerRef}>
         <IressInline
           px="spacing.3"
           p="spacing.2"
@@ -70,6 +100,7 @@ function RootLayout() {
         <IressContainer py="md" flex="1" scrollable="y">
           <IressStyled
             element="main"
+            id="main-content"
             flex="1"
             focusable="true"
             data-pagefind-body
@@ -79,7 +110,9 @@ function RootLayout() {
             borderRadius="radius.system.button"
           >
             <IressText>
-              <Outlet />
+              <ErrorBoundary>
+                <Outlet />
+              </ErrorBoundary>
             </IressText>
           </IressStyled>
         </IressContainer>

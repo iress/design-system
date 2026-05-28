@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { Link, useNavigate } from '@tanstack/react-router';
 import {
   IressInput,
@@ -40,6 +40,19 @@ async function getPagefind(): Promise<PagefindAPI> {
 export function Search() {
   const navigate = useNavigate();
   const [results, setResults] = useState<PagefindResult[]>([]);
+  const [searchError, setSearchError] = useState(false);
+  const inputRef = useRef<{ input: HTMLInputElement | null; focus: () => void; blur: () => void } | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        inputRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const handleChange = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,12 +61,18 @@ export function Search() {
         setResults([]);
         return;
       }
-      const pf = await getPagefind();
-      const search = await pf.search(query);
-      const data = await Promise.all(
-        search.results.slice(0, 8).map((r) => r.data()),
-      );
-      setResults(data);
+      try {
+        const pf = await getPagefind();
+        const search = await pf.search(query);
+        const data = await Promise.all(
+          search.results.slice(0, 8).map((r) => r.data()),
+        );
+        setResults(data);
+        setSearchError(false);
+      } catch {
+        setSearchError(true);
+        setResults([]);
+      }
     },
     [],
   );
@@ -62,6 +81,7 @@ export function Search() {
     <IressInputPopover
       activator={
         <IressInput
+          ref={inputRef}
           type="search"
           aria-label="Search guidelines"
           placeholder="Search..."
@@ -109,8 +129,8 @@ export function Search() {
           ))}
         </IressMenu>
       ) : (
-        <IressText py="sm" px="md" color="colour.neutral.70">
-          No results found
+        <IressText py="sm" px="md" color="colour.neutral.70" role="status">
+          {searchError ? 'Search unavailable' : 'No results found'}
         </IressText>
       )}
     </IressInputPopover>

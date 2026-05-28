@@ -412,26 +412,27 @@ yarn dev
 
 ### Task 8.1: Add IDS dependency and provider
 
-- [ ] Add `@iress-oss/ids-components` to `apps/guidelines/package.json` dependencies
-- [ ] Wrap app in IDS provider (if required) in `src/main.tsx`
+- [x] Add `@iress-oss/ids-components` to `apps/guidelines/package.json` dependencies
+- [x] Wrap app in IDS provider (if required) in `src/main.tsx`
 
 ### Task 8.2: Convert layout and navigation
 
-- [ ] `__root.tsx` — Replace `<header>`, `<nav>`, `<Link>` with `IressAppShell`, `IressNavigation`, `IressButton` (or appropriate IDS layout components)
-- [ ] Add sidebar navigation with section grouping (matching Storybook IA)
+- [x] `__root.tsx` — Replace `<header>`, `<nav>`, `<Link>` with `IressSideNav`, `IressContainer`, `IressStack`, `IressStyled`, `IressImage`, `IressText`, `IressInline`, `IressDivider`
+- [x] Add sidebar navigation with section grouping (matching Storybook IA)
 
 ### Task 8.3: Convert content components
 
-- [ ] `Search.tsx` — Use `IressInput` with search icon for the search input
-- [ ] `CodeBlock.tsx` — Use `IressPanel` or appropriate container, `IressButton` for copy
-- [ ] `MdxLayout.tsx` — Use `IressText`, `IressStack` for article layout
-- [ ] 404 page — Use IDS components for the not-found state
+- [x] `Search.tsx` — Use `IressInputPopover` + `IressMenu` + `IressMenuItem` for search with Pagefind
+- [x] `CodeBlock.tsx` — Use `IressCard`, `IressButton`, `IressInline`, `IressLink`
+- [x] `MdxLayout.tsx` — Use `IressStack`, `IressText`, `IressDivider`
+- [x] `$.tsx` (404/listing) — Use `IressStack`, `IressText`, `IressLink`
+- [x] `AiPanel.tsx` — Use `IressButton` (as link)
 
 ### Task 8.4: Add IDS styling/tokens
 
-- [ ] Import IDS CSS/theme in `main.tsx`
-- [ ] Use IDS spacing/typography tokens for layout
-- [ ] Ensure the site looks consistent with IDS design language
+- [x] Import IDS CSS/theme in `main.tsx` (`@iress-oss/ids-components/dist/style.css`)
+- [x] Use IDS spacing/typography tokens for layout (via `IressStyled` and component props)
+- [x] Ensure the site looks consistent with IDS design language
 
 ---
 
@@ -674,7 +675,24 @@ Performed after Phases 7, 9, and 10 are complete:
 - [ ] Update `README.md` development section if needed
 - [ ] Add a `CONTRIBUTING.md` note about committing `.ai/` changes with PRs
 
-### Task 12.7: Contributor documentation
+### Task 12.7: Sub-navigation and anchor link search
+
+- [ ] **Step 1:** Generate sub-menu items from MDX headings (h2/h3) for each page
+  - Parse MDX headings at build time or on page load
+  - Show heading-level navigation in the SideNav panel when a page is active
+  - Use `IressSideNav` `children` items with `href` anchor links (`#heading-id`)
+- [ ] **Step 2:** Add heading IDs to rendered MDX content
+  - Configure remark/rehype plugin to auto-generate `id` attributes on headings
+  - Ensure heading anchors work with hash routing (`/#/components/button#usage`)
+- [ ] **Step 3:** Enable Pagefind sub-results for anchor link search
+  - Pagefind `sub_results` returns section-level matches with `url` including `#anchor`
+  - Update `build-search-index.ts` to include heading structure in indexed content
+  - Update `Search.tsx` to render sub-results with section titles and anchor URLs
+- [ ] **Step 4:** Verify anchor navigation works end-to-end
+  - Clicking a search result with `#anchor` scrolls to the correct section
+  - Sub-menu items highlight the active section on scroll
+
+### Task 12.8: Contributor documentation
 
 Document how to add/edit guidelines content for contributors and AI agents:
 
