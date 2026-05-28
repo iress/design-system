@@ -141,7 +141,9 @@ export const IressAvatar = ({
   const avatarElement = (
     <span
       {...nonStyleProps}
-      tabIndex={tooltip ? (nonStyleProps.tabIndex ?? 0) : nonStyleProps.tabIndex}
+      tabIndex={
+        tooltip ? (nonStyleProps.tabIndex ?? 0) : nonStyleProps.tabIndex
+      }
       className={cx(
         css(styles.root, styleProps),
         className,

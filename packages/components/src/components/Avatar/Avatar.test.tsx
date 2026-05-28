@@ -123,7 +123,9 @@ describe('IressAvatar', () => {
 
       it('shows name and metadata in tooltip when badge and type are provided', async () => {
         render(
-          <IressAvatar tooltip={{ name: 'John Doe', badge: 'New', type: 'Group' }}>
+          <IressAvatar
+            tooltip={{ name: 'John Doe', badge: 'New', type: 'Group' }}
+          >
             JD
           </IressAvatar>,
         );
