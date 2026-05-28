@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { IressAvatar } from './Avatar';
 import { axe } from 'jest-axe';
 import { GlobalCSSClass } from '@/enums';
@@ -98,6 +98,41 @@ describe('IressAvatar', () => {
         expect(
           document.querySelector(`.${GlobalCSSClass.Tooltip}`),
         ).not.toBeInTheDocument();
+      });
+
+      it('makes the avatar focusable when tooltip is set', () => {
+        render(<IressAvatar tooltip={{ name: 'John Doe' }}>JD</IressAvatar>);
+        const avatar = screen.getByRole('img', { name: 'JD' });
+        expect(avatar).toHaveAttribute('tabindex', '0');
+      });
+
+      it('does not add tabIndex when tooltip is not set', () => {
+        render(<IressAvatar>JD</IressAvatar>);
+        const avatar = screen.getByRole('img', { name: 'JD' });
+        expect(avatar).not.toHaveAttribute('tabindex');
+      });
+
+      it('shows name in tooltip on focus', async () => {
+        render(<IressAvatar tooltip={{ name: 'John Doe' }}>JD</IressAvatar>);
+        const avatar = screen.getByRole('img', { name: 'JD' });
+        fireEvent.focus(avatar);
+        await waitFor(() => {
+          expect(screen.getByText('John Doe')).toBeInTheDocument();
+        });
+      });
+
+      it('shows name and metadata in tooltip when badge and type are provided', async () => {
+        render(
+          <IressAvatar tooltip={{ name: 'John Doe', badge: 'New', type: 'Group' }}>
+            JD
+          </IressAvatar>,
+        );
+        const avatar = screen.getByRole('img', { name: 'JD' });
+        fireEvent.focus(avatar);
+        await waitFor(() => {
+          expect(screen.getByText('John Doe')).toBeInTheDocument();
+          expect(screen.getByText('New · Group')).toBeInTheDocument();
+        });
       });
     });
   });

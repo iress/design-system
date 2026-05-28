@@ -5,7 +5,7 @@ import { GlobalCSSClass } from '@/enums';
 import { avatar } from './Avatar.styles';
 import type { IressStyledProps } from '@/types';
 import { IressIcon, type IressIconProps } from '../Icon';
-import { IressTooltip } from '../Tooltip/Tooltip';
+import { IressTooltip } from '../Tooltip';
 
 type AvatarMode =
   | 10
@@ -141,6 +141,7 @@ export const IressAvatar = ({
   const avatarElement = (
     <span
       {...nonStyleProps}
+      tabIndex={tooltip ? (nonStyleProps.tabIndex ?? 0) : nonStyleProps.tabIndex}
       className={cx(
         css(styles.root, styleProps),
         className,
