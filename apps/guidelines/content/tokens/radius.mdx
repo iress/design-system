@@ -1,0 +1,54 @@
+export const meta = {
+  title: 'Radius Tokens',
+  description: 'Border radius tokens for consistent rounded corners across components.',
+};
+
+# Radius Tokens
+
+Border radius tokens for consistent rounded corners across components.
+
+Border radius scale based on `0.25rem` (4px) base unit.
+
+### Scale Tokens
+
+| Token | CSS Variable | Value | Description |
+| --- | --- | --- | --- |
+| `radius.0` | `--iress-radius-0` | `0px` | No radius |
+| `radius.1` | `--iress-radius-1` | `0.25rem` | The base unit for radius |
+| `radius.2` | `--iress-radius-2` | `calc(2 * \{radius.1 || 0.25rem\})` | 2x radius |
+| `radius.3` | `--iress-radius-3` | `calc(3 * \{radius.1 || 0.25rem\})` | 3x radius |
+| `radius.4` | `--iress-radius-4` | `calc(4 * \{radius.1 || 0.25rem\})` | 4x radius |
+
+### System Tokens
+
+Component-specific radius tokens that can be overridden for branding.
+
+| Token | CSS Variable | Value | Description |
+| --- | --- | --- | --- |
+| `radius.system.button` | `--iress-radius-system-button` | `\{radius.1 || 0.25rem\} \{radius.1 || 0.25rem\} \{radius.1 || 0.25rem\} \{radius.1 || 0.25rem\}` | Applies to buttons and other interactive elements such as the hover state of links. |
+| `radius.system.form` | `--iress-radius-system-form` | `\{radius.1 || 0.25rem\} \{radius.1 || 0.25rem\} \{radius.1 || 0.25rem\} \{radius.1 || 0.25rem\}` | Applies to form inputs and alerts. |
+| `radius.system.layout` | `--iress-radius-system-layout` | `\{radius.3 || calc(3 * 0.25rem)\} \{radius.3 || calc(3 * 0.25rem)\} \{radius.3 || calc(3 * 0.25rem)\} \{radius.3 || calc(3 * 0.25rem)\}` | Applies to panels, modals and slideouts. |
+| `radius.system.pill` | `--iress-radius-system-pill` | `\{radius.4 || calc(4 * 0.25rem)\} \{radius.4 || calc(4 * 0.25rem)\} \{radius.4 || calc(4 * 0.25rem)\} \{radius.4 || calc(4 * 0.25rem)\}` | Applies to pills. |
+| `radius.system.tag` | `--iress-radius-system-tag` | `\{radius.1 || 0.25rem\} \{radius.1 || 0.25rem\} \{radius.1 || 0.25rem\} \{radius.1 || 0.25rem\}` | Applies to tags. |
+
+## Usage
+
+### Via component props
+
+```tsx
+import { IressStack } from '@iress-oss/ids-components';
+
+<IressStack borderRadius="radius.3">
+  Rounded container
+</IressStack>
+```
+
+### Via CSS variables
+
+```css
+.card { border-radius: var(--radius-3); }
+```
+
+> **Note:** Most IDS components already have correct border radius built in.
+> Only use radius tokens when building custom layout elements.
+

@@ -106,6 +106,19 @@ export const NAV_ITEMS: SideNavItem[] = [
     ],
   },
   {
+    key: 'tokens',
+    icon: 'colorize',
+    label: 'Tokens',
+    href: '/tokens/colour',
+    element: Link,
+    children: [
+      { key: 'colour', label: 'Colour', href: '/tokens/colour', element: Link },
+      { key: 'spacing', label: 'Spacing', href: '/tokens/spacing', element: Link },
+      { key: 'radius', label: 'Radius', href: '/tokens/radius', element: Link },
+      { key: 'typography', label: 'Typography', href: '/tokens/typography', element: Link },
+    ],
+  },
+  {
     key: 'styling-props',
     icon: 'palette',
     label: 'Styling Props',
