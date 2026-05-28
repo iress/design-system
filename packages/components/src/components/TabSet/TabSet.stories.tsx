@@ -175,6 +175,20 @@ export const DynamicBadge: Story = {
   },
 };
 
+export const Append: Story = {
+  args: {
+    append: <IressPill>3 items</IressPill>,
+    children: [
+      <IressTab key="address" label="Address">
+        Address information goes here
+      </IressTab>,
+      <IressTab key="employment" label="Employment">
+        Employment information goes here
+      </IressTab>,
+    ],
+  },
+};
+
 export const Type: Story = {
   ...Panels,
   args: {

@@ -118,6 +118,19 @@ Notes:
 
 [View "TabsWithBadges" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab-set--tabs-with-badges)
 
+### Append (extra content in the tab bar)
+
+Use the `append` prop to render content alongside the tabs but outside the tablist. This is useful for placing action buttons (e.g. "Add tab", "Close all") at the end of the tab bar row.
+
+The `append` content is rendered outside the `role="tablist"` element for accessibility compliance — only `role="tab"` elements are allowed inside a tablist.
+
+```tsx
+<IressTabSet append={<IressButton size="sm" variant="ghost">+ Add tab</IressButton>}>
+  <IressTab label="Tab 1">Content 1</IressTab>
+  <IressTab label="Tab 2">Content 2</IressTab>
+</IressTabSet>
+```
+
 ## Testing
 
 Query tabs by their role. The tab's accessible name comes from the `label` prop:
