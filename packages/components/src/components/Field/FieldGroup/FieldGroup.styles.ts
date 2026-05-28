@@ -27,6 +27,10 @@ export const fieldGroup = sva({
     fields: {
       display: 'flex',
       flexDirection: 'column',
+      '& > .ids-radio-group:first-child, & > .ids-checkbox-group:first-child, & > .ids-checkbox:first-child':
+        {
+          mt: 'spacing.1',
+        },
       _nestedFormLabels: {
         color: 'colour.neutral.70',
         mb: 'spacing.1',
