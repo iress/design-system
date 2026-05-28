@@ -181,10 +181,11 @@ describe('useAutocompleteSearch', () => {
       () => expect(hook.result.current.debouncedQuery).toBe('cus'),
       { timeout: 200 },
     );
-    await waitFor(() => expect(hook.result.current.loading).toBe(false));
-
-    expect(hook.result.current.debouncedQuery).toBe('cus');
-    expect(hook.result.current.results).toHaveLength(options.length);
+    // With 250ms loading delay and fast search (50ms), wait for results instead of loading state
+    await waitFor(() =>
+      expect(hook.result.current.results).toHaveLength(options.length),
+    );
+    expect(hook.result.current.loading).toBe(false);
 
     // The search results are sorted by relevance, so check the first result matches expected pattern
     const label = render(hook.result.current.results[0].formattedLabel);
@@ -201,10 +202,9 @@ describe('useAutocompleteSearch', () => {
       () => expect(hook.result.current.debouncedQuery).toBe('xyz'),
       { timeout: 200 },
     );
-    await waitFor(() => expect(hook.result.current.loading).toBe(false));
-
-    expect(hook.result.current.debouncedQuery).toBe('xyz');
-    expect(hook.result.current.results).toHaveLength(0);
+    // With 250ms loading delay and fast search (50ms), wait for results instead of loading state
+    await waitFor(() => expect(hook.result.current.results).toHaveLength(0));
+    expect(hook.result.current.loading).toBe(false);
   });
 
   it('does not call search function when the query is empty', async () => {
@@ -1729,10 +1729,10 @@ describe('useAutocompleteSearch', () => {
 
         await waitFor(() => {
           expect(asyncSearchFn).toHaveBeenCalledWith('');
-          expect(hook.result.current.loading).toBe(false);
+          expect(hook.result.current.error).toBe(errorMessage);
         });
 
-        expect(hook.result.current.error).toBe(errorMessage);
+        expect(hook.result.current.loading).toBe(false);
         expect(hook.result.current.results).toHaveLength(0);
       });
 
