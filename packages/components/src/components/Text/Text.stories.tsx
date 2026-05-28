@@ -9,6 +9,7 @@ import {
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import { COLOR_TOKENS } from '@theme-preset/tokens/colors';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressText>;
 type HeadingStory = StoryObj<
@@ -44,6 +45,11 @@ export default {
     ...stylingProps,
   },
   parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
     controls: { include: ['children', text.variantKeys] },
   },
   tags: ['updated'],

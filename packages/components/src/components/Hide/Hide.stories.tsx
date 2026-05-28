@@ -11,6 +11,7 @@ import {
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import { BREAKPOINT_DETAILS, BREAKPOINTS, IressTable } from '@/main';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressHide>;
 
@@ -21,6 +22,13 @@ export default {
   argsTypes: {
     children: reactNodeArgType,
     ...stylingProps,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressHide>;
 

@@ -72,6 +72,13 @@ export default {
     heading: reactNodeArgType,
     ...stylingProps,
   },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
+  },
 } as Meta<typeof IressModal>;
 
 export const Default: Story = {
@@ -484,6 +491,7 @@ test('opening and closing a modal', async () => {
 });`}
       newValue={`import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
+import componentMeta from './meta';
 
 test('opening and closing a modal', async () => {
   const trigger = screen.getByRole('button', { name: /open modal/i });

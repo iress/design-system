@@ -1,15 +1,11 @@
-# Table
-
-Data driven component for displaying tabular data.
-
+# 
 > **Component:** `import { IressTable } from '@iress-oss/ids-components'`
-> **Storybook:** [Table in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressTable } from '@iress-oss/ids-components';
-
 <IressTable caption="Data table" />
 ```
 
@@ -161,7 +157,7 @@ If you need to customise the sorting logic, you can use the `sortFn` property of
 - A custom sort function that takes two arguments: `a` and `b`, which are the two rows being compared. It should return `-1`, `0` or `1` depending on the comparison.
 
 ```tsx
-<TableSortingFn {...(args as object)} />
+<TableSortingFn />
 ```
 
 [View "CustomSortingLogic" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--custom-sorting-logic)
@@ -439,16 +435,6 @@ are generated automatically:
 | `thead` | `my-table__thead` | The table header section |
 | `tbody` | `my-table__tbody` | The table body section |
 
-## Props
-
-- **Type:** `IressTableProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Table/Table.d.ts`
-
-```typescript
-import type { IressTableProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)

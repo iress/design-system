@@ -1,15 +1,11 @@
-# Tooltip
-
-A component that shows concise, informative text about an element when focussed upon, hovered over or on a long touch.
-
+# 
 > **Component:** `import { IressTooltip } from '@iress-oss/ids-components'`
-> **Storybook:** [Tooltip in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressTooltip } from '@iress-oss/ids-components';
-
 <IressTooltip tooltipText="Hello! This is a really long tooltip to try and see if it goes behind the scrollbar" />
 ```
 
@@ -78,60 +74,60 @@ The tooltip's position will change dynamically based on the amount of space avai
 <div style={{ padding: '80px 150px' }}>
 <IressStack gap="md">
 <IressInline horizontalAlign="center" gap="sm">
-<IressTooltip align="top-start">
+<IressTooltip align="top-start" tooltipText="Top Start">
 <IressButton>Top Start</IressButton>
 </IressTooltip>
-<IressTooltip align="top">
+<IressTooltip align="top" tooltipText="Top">
 <IressButton>Top</IressButton>
 </IressTooltip>
-<IressTooltip align="top-end">
+<IressTooltip align="top-end" tooltipText="Top End">
 <IressButton>Top End</IressButton>
 </IressTooltip>
 </IressInline>
 <IressInline horizontalAlign="between">
 <IressStack gap="sm">
 <IressInline horizontalAlign="left">
-<IressTooltip align="left-start">
+<IressTooltip align="left-start" tooltipText="Left Start">
 <IressButton>Left Start</IressButton>
 </IressTooltip>
 </IressInline>
 <IressInline horizontalAlign="left">
-<IressTooltip align="left">
+<IressTooltip align="left" tooltipText="Left">
 <IressButton>Left</IressButton>
 </IressTooltip>
 </IressInline>
 <IressInline horizontalAlign="left">
-<IressTooltip align="left-end">
+<IressTooltip align="left-end" tooltipText="Left End">
 <IressButton>Left End</IressButton>
 </IressTooltip>
 </IressInline>
 </IressStack>
 <IressStack gap="sm">
 <IressInline horizontalAlign="right">
-<IressTooltip align="right-start">
+<IressTooltip align="right-start" tooltipText="Right Start">
 <IressButton>Right Start</IressButton>
 </IressTooltip>
 </IressInline>
 <IressInline horizontalAlign="right">
-<IressTooltip align="right">
+<IressTooltip align="right" tooltipText="Right">
 <IressButton>Right</IressButton>
 </IressTooltip>
 </IressInline>
 <IressInline horizontalAlign="right">
-<IressTooltip align="right-end">
+<IressTooltip align="right-end" tooltipText="Right End">
 <IressButton>Right End</IressButton>
 </IressTooltip>
 </IressInline>
 </IressStack>
 </IressInline>
 <IressInline horizontalAlign="center" gap="sm">
-<IressTooltip align="bottom-start">
+<IressTooltip align="bottom-start" tooltipText="Bottom Start">
 <IressButton>Bottom Start</IressButton>
 </IressTooltip>
-<IressTooltip align="bottom">
+<IressTooltip align="bottom" tooltipText="Bottom">
 <IressButton>Bottom</IressButton>
 </IressTooltip>
-<IressTooltip align="bottom-end">
+<IressTooltip align="bottom-end" tooltipText="Bottom End">
 <IressButton>Bottom End</IressButton>
 </IressTooltip>
 </IressInline>
@@ -148,14 +144,14 @@ The `delay` prop requires a number that is the number of milliseconds that pass 
 ```tsx
 <div style={{ paddingTop: '30px' }}>
 <IressInline horizontalAlign="center" gap="sm">
-<IressTooltip delay={0}>
+<IressTooltip delay={0} tooltipText="No delay">
 <IressButton>0ms (no delay)</IressButton>
 </IressTooltip>
-<IressTooltip>
+<IressTooltip tooltipText="Default delay">
 <IressButton>500ms (default)</IressButton>
 </IressTooltip>
 
-<IressTooltip delay={2000}>
+<IressTooltip delay={2000} tooltipText="Long delay">
 <IressButton>2000ms</IressButton>
 </IressTooltip>
 </IressInline>
@@ -190,16 +186,6 @@ are generated automatically:
 | `activator` | `my-tooltip__activator` | The tooltip trigger element |
 | `tooltip-text` | `my-tooltip__tooltip-text` | The tooltip content |
 
-## Props
-
-- **Type:** `IressTooltipProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Tooltip/Tooltip.d.ts`
-
-```typescript
-import type { IressTooltipProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)

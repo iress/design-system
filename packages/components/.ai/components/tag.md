@@ -1,15 +1,11 @@
-# Tag
-
-Tags represent individual units in a group of selected items.
-
+# 
 > **Component:** `import { IressTag } from '@iress-oss/ids-components'`
-> **Storybook:** [Tag in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressTag } from '@iress-oss/ids-components';
-
 <IressTag>
   Label
 </IressTag>
@@ -185,16 +181,6 @@ generated automatically:
 | --- | --- | --- |
 | `delete-button__button` | `my-tag__delete-button__button` | The tag delete button |
 
-## Props
-
-- **Type:** `IressTagProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Tag/Tag.d.ts`
-
-```typescript
-import type { IressTagProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)

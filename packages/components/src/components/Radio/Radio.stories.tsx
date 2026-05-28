@@ -7,6 +7,7 @@ import {
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import { type FormControlValue } from '@/types';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressRadio>;
 
@@ -17,6 +18,13 @@ export default {
   argTypes: {
     children: reactNodeArgType,
     ...stylingProps,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressRadio>;
 

@@ -1,15 +1,11 @@
-# Modal
-
-Modals gather information, complete a subtask, or provide additional information without losing the context of an underlying page.
-
+# 
 > **Component:** `import { IressModal } from '@iress-oss/ids-components'`
-> **Storybook:** [Modal in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressModal } from '@iress-oss/ids-components';
-
 <IressModal heading="Modal Header" />
 ```
 
@@ -47,7 +43,7 @@ You can use the `IressModalProvider` to open and close modals from anywhere in y
 To use, wrap your `<App/>` or the component that you want to use the `useModal` hook with `<IressModalProvider />`.
 
 ```tsx
-<AppWithModalProvider {...args.modal} />
+<AppWithModalProvider />
 ```
 
 [View "Provider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-provider--provider)
@@ -157,8 +153,8 @@ const { showModal } = useModal();
 
     const noCloseButtonModal = (
       <IressModal
-        {...args}
         id="no-close-button"
+        heading="Modal Header"
         noCloseButton
         footer={
           <IressButton onClick={() => showModal('no-close-button', false)}>
@@ -170,8 +166,8 @@ const { showModal } = useModal();
 
     const bothModal = (
       <IressModal
-        {...args}
         id="both"
+        heading="Modal Header"
         disableBackdropClick
         noCloseButton
         footer={
@@ -188,8 +184,8 @@ const { showModal } = useModal();
           Disable backdrop click
         </IressButton>
         <IressModal
-          {...args}
           id="disable-backdrop-click"
+          heading="Modal Header"
           disableBackdropClick
         />
 
@@ -232,8 +228,6 @@ See below for an example in version 4 and version 5.
 <DiffViewer
 allowModeChange
 oldValue={`import { render, waitFor, screen } from '@testing-library/react';
-import { idsFireEvent, componentLoad } from '@iress/ids-react-test-utils';
-
 test('opening and closing a modal', async () => {
 await componentLoad([
 'modal-trigger',
@@ -255,8 +249,6 @@ idsFireEvent.click(closeButton);
 await waitFor(() => expect(modal).not.toBeVisible());
 });`}
 newValue={`import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
-
 test('opening and closing a modal', async () => {
 const trigger = screen.getByRole('button', { name: /open modal/i });
 
@@ -312,16 +304,6 @@ are generated automatically:
 | `status-icon` | `my-modal__status-icon` | The status icon (when status is set) |
 | `footer` | `my-modal__footer` | The modal footer |
 
-## Props
-
-- **Type:** `IressModalProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Modal/Modal.d.ts`
-
-```typescript
-import type { IressModalProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)

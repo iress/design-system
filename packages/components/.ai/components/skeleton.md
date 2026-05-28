@@ -1,15 +1,11 @@
-# Skeleton
-
-Skeletons can increase perceived performance for users. As opposed to spinners, skeletons make it feel as though things are happening/loading immediately, then the information is incrementally displayed on the screen.
-
+# 
 > **Component:** `import { IressSkeleton } from '@iress-oss/ids-components'`
-> **Storybook:** [Skeleton in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressSkeleton } from '@iress-oss/ids-components';
-
 <IressSkeleton />
 ```
 
@@ -21,7 +17,7 @@ The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
 ```tsx
 <IressStack gap="md">
-<IressSkeleton {...(args as IressSkeletonProps<'text'>)} mode="text" />
+<IressSkeleton mode="text" />
 <IressSkeleton mode="rect" height="100px" />
 <IressSkeleton mode="circle" height="100px" width="100px" />
 </IressStack>
@@ -94,16 +90,6 @@ await waitFor(() => {
 });
 ```
 
-## Props
-
-- **Type:** `IressSkeletonProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Skeleton/Skeleton.d.ts`
-
-```typescript
-import type { IressSkeletonProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)

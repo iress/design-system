@@ -1,15 +1,11 @@
-# Contextual Menu
-
-A compact overflow action pattern that surfaces contextual actions in a popover menu. Use this pattern for row-level or card-level secondary actions where space is constrained.
-
-> **Pattern:** `import { IressContextualMenu } from '@iress-oss/ids-components'`
-> **Storybook:** [Contextual Menu in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextual-menu--docs)
+# 
+> **Component:** `import { IressContextualMenu } from '@iress-oss/ids-components'`
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextual-menu--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressContextualMenu } from '@iress-oss/ids-components';
-
 <IressContextualMenu />
 ```
 
@@ -123,4 +119,4 @@ Use `theme="dark"` on panels using `colour.neutral.20` or darker backgrounds.
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextual-menu--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextual-menu--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextual-menu--docs)

@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as ComponentStories from './Tooltip.stories';
+import * as ProviderStories from './TooltipProvider.stories';
 import {
   ComponentExample,
   ComponentOverview,
@@ -76,6 +77,30 @@ The `delay` prop requires a number that is the number of milliseconds that pass 
 The component will not make any provision for existing title HTML attributes. If one exists, it will be activated along with the tooltip, potentially overlaying it making it difficult to ascertain the information being imparted. The title could also contain different content to the tooltip increasing the chance of confusing the end user.
 
 We suggest removing the title attribute on elements that will use tooltip.
+
+### Using the `IressTooltipProvider`
+
+You can use the `IressTooltipProvider` to set a shared container for
+all nested tooltips. This is useful when you want all tooltips in a
+section of your application to render into the same DOM node.
+
+Individual tooltips can still override the provider's container by
+setting their own `container` prop.
+
+> **Note:** If you are already using `IressProvider` or `IressShadow`,
+> you do not need to add `IressTooltipProvider` separately — it is
+> already included. To set a shared container for tooltips through
+> `IressProvider`, use the `tooltipContainer` prop.
+
+<ComponentExample
+  api={{
+    details:
+      'These are some settings you can use to customise the provider, such as setting where the tooltips are rendered in the DOM.',
+    heading: 'Props',
+    headingId: 'provider-api',
+  }}
+  of={ProviderStories.Provider}
+/>
 
 ## Testing
 

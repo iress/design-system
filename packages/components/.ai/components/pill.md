@@ -1,15 +1,11 @@
-# Pill
-
-Pills are used primarily for status updates, notifications and counts.
-
+# 
 > **Component:** `import { IressPill } from '@iress-oss/ids-components'`
-> **Storybook:** [Pill in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressPill } from '@iress-oss/ids-components';
-
 <IressPill>
   Label
 </IressPill>
@@ -71,16 +67,6 @@ Query pills by their text content:
 const pill = screen.getByText('Active');
 ```
 
-## Props
-
-- **Type:** `IressPillProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Pill/Pill.d.ts`
-
-```typescript
-import type { IressPillProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs)

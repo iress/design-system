@@ -7,6 +7,7 @@ import {
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<IressCardProps>;
 
@@ -14,6 +15,11 @@ export default {
   title: 'Components/Card',
   component: IressCard,
   parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
     actions: {
       disable: true,
     },

@@ -6,6 +6,7 @@ import {
   addToStorybookCategory,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressSpinner>;
 
@@ -23,6 +24,13 @@ export default {
     ]),
   },
   tags: ['updated'],
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
+  },
 } as Meta<typeof IressSpinner>;
 
 export const Default: Story = {

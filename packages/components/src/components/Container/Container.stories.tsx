@@ -8,6 +8,7 @@ import {
 } from '@iress-oss/ids-storybook-config';
 import { IressTable } from '../Table';
 import { BREAKPOINT_DETAILS, BREAKPOINTS } from '@/constants';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressContainer>;
 
@@ -18,6 +19,13 @@ export default {
   argTypes: {
     children: reactNodeArgType,
     ...stylingProps,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressContainer>;
 

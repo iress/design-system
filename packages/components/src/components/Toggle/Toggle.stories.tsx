@@ -12,6 +12,7 @@ import {
 } from '@iress-oss/ids-storybook-config';
 import { ControlledToggle } from './mocks/ControlledToggle';
 import ControlledToggleSource from './mocks/ControlledToggle.tsx?raw';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressToggle>;
 
@@ -22,6 +23,13 @@ export default {
   argTypes: {
     children: reactNodeArgType,
     ...stylingProps,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressToggle>;
 

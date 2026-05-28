@@ -1,15 +1,11 @@
-# Container
-
-IressContainer provides a means to center and horizontally pad your site’s contents.
-
+# 
 > **Component:** `import { IressContainer } from '@iress-oss/ids-components'`
-> **Storybook:** [Container in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressContainer } from '@iress-oss/ids-components';
-
 <IressContainer />
 ```
 
@@ -51,16 +47,6 @@ children directly or use a `data-testid`:
 const container = screen.getByTestId('my-container');
 ```
 
-## Props
-
-- **Type:** `IressContainerProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Container/Container.d.ts`
-
-```typescript
-import type { IressContainerProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs)

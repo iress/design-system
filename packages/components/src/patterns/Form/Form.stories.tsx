@@ -38,6 +38,11 @@ export default {
     ...formArgTypes,
   },
   parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
     ...formParameters,
   },
 } as Meta<typeof IressForm>;
@@ -247,6 +252,7 @@ export const App = () => {
 };`}
       newValue={`import { IressForm, IressFormField, IressInput, IressCheckboxGroup, IressCheckbox } from '@iress-oss/ids-components';
 import { useWatch } from 'react-hook-form';
+import componentMeta from './meta';
 
 const ConditionalFields = () => {
   // Instead of creating our own state, we can now use the form state via the useWatch hook, 

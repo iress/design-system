@@ -9,6 +9,7 @@ import { IressTooltip } from '.';
 import { IressButton } from '../Button';
 import { IressStack } from '../Stack';
 import { IressInline } from '../Inline';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressTooltip>;
 
@@ -22,6 +23,13 @@ export default {
     }),
   },
   tags: ['updated'],
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
+  },
 } as Meta<typeof IressTooltip>;
 
 export const Default: Story = {

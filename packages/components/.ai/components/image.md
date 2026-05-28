@@ -1,15 +1,11 @@
-# Image
-
-IressImage renders an image that resizes based on the user's screen width. The component accepts standard image attributes like `src` and `alt`.
-
+# 
 > **Component:** `import { IressImage } from '@iress-oss/ids-components'`
-> **Storybook:** [Image in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressImage } from '@iress-oss/ids-components';
-
 <IressImage src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp" alt="Placeholder image" />
 ```
 
@@ -42,16 +38,6 @@ Query images by their `alt` text:
 const image = screen.getByRole('img', { name: 'Company logo' });
 ```
 
-## Props
-
-- **Type:** `IressImageProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Image/Image.d.ts`
-
-```typescript
-import type { IressImageProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs)

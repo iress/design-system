@@ -1,15 +1,11 @@
-# Menu
-
-A menu can display grouped action buttons, navigation items or headings.
-
+# 
 > **Component:** `import { IressMenu } from '@iress-oss/ids-components'`
-> **Storybook:** [Menu in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressMenu } from '@iress-oss/ids-components';
-
 <IressMenu />
 ```
 
@@ -288,16 +284,6 @@ nested test IDs are generated automatically:
 | `checkbox-mark` | `my-menu__checkbox-mark` | The checkbox indicator on selectable menu items |
 | `checkbox` | `my-menu__checkbox` | The checkbox on multi-select menu items |
 
-## Props
-
-- **Type:** `IressMenuProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Menu/Menu.d.ts`
-
-```typescript
-import type { IressMenuProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs)

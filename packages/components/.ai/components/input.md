@@ -1,15 +1,11 @@
-# Input
-
-Inputs allow a user to input and interact with data. This component should be used as a child of the IressField component to ensure the correct placement of elements like label, error & hint text.
-
+# 
 > **Component:** `import { IressInput } from '@iress-oss/ids-components'`
-> **Storybook:** [Input in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressInput } from '@iress-oss/ids-components';
-
 <IressInput placeholder="Enter your name" />
 ```
 
@@ -86,19 +82,12 @@ key={inputMode}
 When using the `type="file"` attribute, the input allows users to select one or more files from their device. The appearance and behavior are controlled by the browser, and you can use the `onChange` handler to capture the selected files.
 
 ```tsx
-const { success } = useToaster();
-    return (
-      <IressField label="File upload">
-        <IressInput
-          {...args}
-          onChange={(e) =>
-            success({
-              content: `File uploaded: ${e.target.files?.[0].name}`,
-            })
-          }
-        />
-      </IressField>
-    );
+<IressField label="File upload">
+  <IressInput
+    type="file"
+    onChange={(e) => console.log(`File uploaded: ${e.target.files?.[0]?.name}`)}
+  />
+</IressField>
 ```
 
 [View "FileType" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--file-type)
@@ -291,16 +280,6 @@ const input = screen.getByRole('spinbutton', { name: 'Quantity' });
 - **clearable inputs**: The clear button only appears when the input has a
   value. After clearing, focus returns to the input.
 
-## Props
-
-- **Type:** `IressInputProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Input/Input.d.ts`
-
-```typescript
-import type { IressInputProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)

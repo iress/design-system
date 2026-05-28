@@ -1,15 +1,11 @@
-# Validation message
-
-A validation message is used to inform the user of the status of a form input. If there are multiple messages, they can be combined using the IressValidationSummary component.
-
+# 
 > **Component:** `import { IressValidationMessage } from '@iress-oss/ids-components'`
-> **Storybook:** [Validation message in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressValidationMessage } from '@iress-oss/ids-components';
-
 <IressValidationMessage>
   Validation message
 </IressValidationMessage>
@@ -61,14 +57,14 @@ You can use the `linkToTarget` prop to link the message to a specific target in 
 {STATUSES.map((status) => (
 <IressValidationMessage key={status}
 status={status}
-linkToTarget={args.linkToTarget ?? ''}
+linkToTarget="target-input"
 >
 {messages[status]}
 </IressValidationMessage>
 ))}
 </IressStack>
 <IressDivider />
-<IressInput id={args.linkToTarget} />
+<IressInput id="target-input" />
 </IressStack>
 ```
 
@@ -97,16 +93,6 @@ test IDs are generated automatically:
 | --- | --- | --- |
 | `error` | `my-validation__error` | An individual error message |
 
-## Props
-
-- **Type:** `IressValidationMessageProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/ValidationMessage/ValidationMessage.d.ts`
-
-```typescript
-import type { IressValidationMessageProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs)

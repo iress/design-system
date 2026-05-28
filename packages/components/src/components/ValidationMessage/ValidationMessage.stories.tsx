@@ -14,6 +14,7 @@ import {
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 interface CustomArgs {
   messages: Record<Statuses, string>;
@@ -31,6 +32,13 @@ export default {
     children: reactNodeArgType,
     prefix: reactNodeArgType,
     ...stylingProps,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressValidationMessage>;
 

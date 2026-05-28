@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import type { TestId } from '@helpers/testing';
+import type { ComponentMeta } from '@helpers/meta/types';
 
 export const testIds: TestId[] = [
   { suffix: 'activator', description: 'The menu group activator item' },
@@ -17,7 +18,7 @@ export const testIds: TestId[] = [
 
 export default {
   heading: 'Menu',
-  href: '/?path=/docs/components-menu--docs',
+  description: 'Displays a list of navigational or actionable items.',
   tags: ['navigation', 'dropdown', 'interactive'],
   Thumbnail: lazy(() => import('./Thumbnail')),
-};
+} satisfies ComponentMeta;

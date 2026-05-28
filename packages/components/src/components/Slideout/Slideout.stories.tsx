@@ -63,6 +63,13 @@ export default {
     heading: reactNodeArgType,
     ...stylingProps,
   },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
+  },
 } as Meta<typeof IressSlideout>;
 
 export const Default: Story = {
@@ -283,6 +290,7 @@ test('opening and closing a slideout', async () => {
 });`}
       newValue={`import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
+import componentMeta from './meta';
 
 test('opening and closing a slideout', async () => {
   const trigger = screen.getByRole('button', { name: /open slideout/i });

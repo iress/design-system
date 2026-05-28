@@ -1,15 +1,11 @@
-# ButtonGroup
-
-ButtonGroup allows users to switch between two or more possible states. ButtonGroups are only used for actions that occur immediately after the user “flips the switch”.
-
+# 
 > **Component:** `import { IressButtonGroup } from '@iress-oss/ids-components'`
-> **Storybook:** [ButtonGroup in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressButtonGroup } from '@iress-oss/ids-components';
-
 <IressButtonGroup label="Options" />
 ```
 
@@ -80,18 +76,16 @@ In multi-select mode, these props expects an array of matching strings.
 The Button Group emits an event when any of the selected buttons change. The event detail (`ButtonGroupChange`) consist of a string or an array of strings (depending on if it's in single or multi select mode) that represents the selected button(s).
 
 ```tsx
-const { success } = useToaster();
-
-    return (
-      <IressButtonGroup
-        {...args}
-        onChange={(selected) => {
-          success({
-            content: `Selected: ${selected ? String(selected) : 'none'}`,
-          });
-        }}
-      />
-    );
+<IressButtonGroup
+  label="Options"
+  onChange={(selected) => {
+    console.log(`Selected: ${selected ? String(selected) : 'none'}`);
+  }}
+>
+  <IressButton>Option 1</IressButton>
+  <IressButton>Option 2</IressButton>
+  <IressButton>Option 3</IressButton>
+</IressButtonGroup>
 ```
 
 [View "OnChange" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-button-group--on-change)
@@ -129,16 +123,6 @@ IDs are generated automatically:
 | --- | --- | --- |
 | `label` | `my-button-group__label` | The group label element |
 
-## Props
-
-- **Type:** `IressButtonGroupProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/ButtonGroup/ButtonGroup.d.ts`
-
-```typescript
-import type { IressButtonGroupProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs)

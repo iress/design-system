@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import type { TestId } from '@helpers/testing';
+import type { ComponentMeta } from '@helpers/meta/types';
 
 export const testIds: TestId[] = [
   { suffix: 'heading', description: 'The modal heading' },
@@ -22,7 +23,7 @@ export const testIds: TestId[] = [
 
 export default {
   heading: 'Modal',
-  href: '/?path=/docs/components-modal--docs',
+  description: 'Displays content in a focused overlay dialog that requires user interaction.',
   tags: ['overlay', 'dialog', 'interactive'],
   Thumbnail: lazy(() => import('./Thumbnail')),
-};
+} satisfies ComponentMeta;

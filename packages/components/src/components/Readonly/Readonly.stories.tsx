@@ -11,6 +11,7 @@ import {
 } from '@iress-oss/ids-storybook-config';
 import { ReadonlyEditToggle } from './mocks/ReadonlyEditToggle';
 import ReadonlyEditToggleSource from './mocks/ReadonlyEditToggle.tsx?raw';
+import componentMeta from './meta';
 
 type Story = StoryObj<IressReadonlyProps>;
 
@@ -23,6 +24,13 @@ export default {
     ...stylingProps,
   },
   tags: ['updated'],
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
+  },
 } as Meta<typeof IressReadonly>;
 
 export const Default: Story = {

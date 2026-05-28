@@ -19,6 +19,7 @@ import {
   reactElementArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressPopover>;
 
@@ -81,6 +82,13 @@ export default {
       mapping: childrenOptions,
     },
     ...stylingProps,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressPopover>;
 

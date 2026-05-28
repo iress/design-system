@@ -1,15 +1,11 @@
-# Divider
-
-A divider is a UI element that separates content in lists and layouts.
-
+# 
 > **Component:** `import { IressDivider } from '@iress-oss/ids-components'`
-> **Storybook:** [Divider in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressDivider } from '@iress-oss/ids-components';
-
 <IressDivider />
 ```
 
@@ -20,15 +16,11 @@ import { IressDivider } from '@iress-oss/ids-components';
 Use the `vertical` prop to change the divider from horizontal to vertical.
 
 ```tsx
-if (args.vertical) {
-      return (
-        <IressInline gap="spacing.4" verticalAlign="middle">
-          {getChildren(args)}
-        </IressInline>
-      );
-    }
-
-    return <IressStack gap="spacing.4">{getChildren(args)}</IressStack>;
+<IressInline gap="spacing.4" verticalAlign="middle">
+  <span>Left content</span>
+  <IressDivider vertical />
+  <span>Right content</span>
+</IressInline>
 ```
 
 [View "Vertical" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-divider--vertical)
@@ -40,38 +32,11 @@ You can customise the gutter by using the `my` prop. If the divider is vertical,
 By default, dividers do not have a gutter, allowing them to adapt to `<IressStack>` and `<IressInline>` layouts.
 
 ```tsx
-if (args.vertical) {
-      return (
-        <IressStack gap="spacing.1">
-          {GUTTER_SIZES.map((mx) => (
-            <IressPanel key={mx}>
-              <IressText element="h2">
-                <code>mx="{mx}"</code>
-              </IressText>
-              <IressInline verticalAlign="middle">
-                {getChildren({
-                  ...args,
-                  mx,
-                } as IressDividerProps)}
-              </IressInline>
-            </IressPanel>
-          ))}
-        </IressStack>
-      );
-    }
-
-    return (
-      <IressInline gap="spacing.4">
-        {GUTTER_SIZES.map((my) => (
-          <IressPanel key={my}>
-            <IressText element="h2">
-              <code>my="{my}"</code>
-            </IressText>
-            {getChildren({ ...args, my } as IressDividerProps)}
-          </IressPanel>
-        ))}
-      </IressInline>
-    );
+<IressStack gap="spacing.4">
+  <span>Content above</span>
+  <IressDivider my="spacing.4" />
+  <span>Content below</span>
+</IressStack>
 ```
 
 [View "Gutter" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-divider--gutter)
@@ -84,16 +49,6 @@ Query the divider by its `separator` role:
 const divider = screen.getByRole('separator');
 ```
 
-## Props
-
-- **Type:** `IressDividerProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Divider/Divider.d.ts`
-
-```typescript
-import type { IressDividerProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)

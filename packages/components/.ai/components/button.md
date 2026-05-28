@@ -1,15 +1,11 @@
-# Button
-
-A button is a clickable item used to perform an action.
-
+# 
 > **Component:** `import { IressButton } from '@iress-oss/ids-components'`
-> **Storybook:** [Button in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressButton } from '@iress-oss/ids-components';
-
 <IressButton>
   Button
 </IressButton>
@@ -206,21 +202,21 @@ When the loading state is activated, any click events on the button are disabled
 
 ```tsx
 <IressInline gap="md">
-<IressButton mode="primary">
-...
-</IressButton>
-<IressButton mode="secondary">
-...
-</IressButton>
-<IressButton mode="tertiary">
-...
-</IressButton>
-<IressButton mode="quaternary">
-...
-</IressButton>
-<IressButton mode="muted">
-<IressIcon name="edit" />
-</IressButton>
+  <IressButton mode="primary" loading>
+    Primary
+  </IressButton>
+  <IressButton mode="secondary" loading>
+    Secondary
+  </IressButton>
+  <IressButton mode="tertiary" loading>
+    Tertiary
+  </IressButton>
+  <IressButton mode="quaternary" loading>
+    Quaternary
+  </IressButton>
+  <IressButton mode="muted" loading>
+    <IressIcon name="edit" />
+  </IressButton>
 </IressInline>
 ```
 
@@ -397,16 +393,6 @@ When `href` is provided, the button renders as a link:
 const link = screen.getByRole('link', { name: 'Go to dashboard' });
 ```
 
-## Props
-
-- **Type:** `IressButtonProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Button/Button.d.ts`
-
-```typescript
-import type { IressButtonProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)

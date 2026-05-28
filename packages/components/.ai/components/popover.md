@@ -1,15 +1,11 @@
-# Popover
-
-A popover is panel that is toggled on/off by an activator button or text input. The panel is positioned relative to its activator element.
-
+# 
 > **Component:** `import { IressPopover } from '@iress-oss/ids-components'`
-> **Storybook:** [Popover in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressPopover } from '@iress-oss/ids-components';
-
 <IressPopover>
   basic
 </IressPopover>
@@ -239,16 +235,6 @@ are generated automatically:
 | `activator` | `my-popover__activator` | The popover trigger element |
 | `content` | `my-popover__content` | The popover content panel |
 
-## Props
-
-- **Type:** `IressPopoverProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Popover/Popover.d.ts`
-
-```typescript
-import type { IressPopoverProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)

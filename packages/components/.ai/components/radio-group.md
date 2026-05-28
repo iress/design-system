@@ -1,15 +1,11 @@
-# RadioGroup
-
-A radio group is a group of radio buttons that allows the user to select one option from multiple options, where all options are visible.
-
+# 
 > **Component:** `import { IressRadioGroup } from '@iress-oss/ids-components'`
-> **Storybook:** [RadioGroup in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio-group--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio-group--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressRadioGroup } from '@iress-oss/ids-components';
-
 <IressRadioGroup name="survey" />
 ```
 
@@ -171,8 +167,6 @@ When you have multiple Yes/No radio groups on the same page, use `within` to
 scope queries to a specific group:
 
 ```tsx
-import { within } from '@testing-library/react';
-
 const approvalGroup = screen.getByRole('radiogroup', { name: 'Approve' });
 const yes = within(approvalGroup).getByRole('radio', { name: 'Yes' });
 await user.click(yes);
@@ -186,16 +180,6 @@ await user.click(yes);
 - **Focus behaviour**: Focusing the `radiogroup` element moves focus to the
   first radio child. The group needs `tabIndex` to be focusable programmatically.
 
-## Props
-
-- **Type:** `IressRadioGroupProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/RadioGroup/RadioGroup.d.ts`
-
-```typescript
-import type { IressRadioGroupProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio-group--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio-group--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio-group--docs)

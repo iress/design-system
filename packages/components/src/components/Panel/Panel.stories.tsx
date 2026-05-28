@@ -4,6 +4,7 @@ import { IressPlaceholder } from '../Placeholder';
 import { IressText } from '../Text';
 import { IressInline } from '@/main';
 import { stylingProps } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type PanelCustomArgs = React.ComponentProps<typeof IressPanel>;
 type Story = StoryObj<PanelCustomArgs>;
@@ -59,6 +60,13 @@ export default {
     ...stylingProps,
   },
   tags: ['updated'],
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
+  },
 } as Meta<typeof IressPanel>;
 
 export const Default: Story = {

@@ -17,6 +17,7 @@ import { IressPopover } from '../Popover';
 import { IressButton } from '../Button';
 import { IressPanel } from '../Panel';
 import { IressStack } from '../Stack';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressAutocomplete>;
 
@@ -34,6 +35,13 @@ export default {
     noResultsText: reactNodeArgType,
     prepend: reactNodeArgType,
     ...stylingProps,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressAutocomplete>;
 

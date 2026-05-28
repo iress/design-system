@@ -2,6 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressInline, IressStack, IressStyled } from '@/main';
 import { IressContextualMenu, type ContextualMenuItem } from './ContextualMenu';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressContextualMenu>;
 
@@ -33,6 +34,13 @@ export default {
   tags: ['beta'],
   args: {
     container: document.body,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressContextualMenu>;
 

@@ -1,15 +1,11 @@
-# Expander
-
-Expanders are commonly used to reveal more information or details about an element or content on a page.
-
+# 
 > **Component:** `import { IressExpander } from '@iress-oss/ids-components'`
-> **Storybook:** [Expander in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressExpander } from '@iress-oss/ids-components';
-
 <IressExpander activator="Expander activator">
   Expander content will go here
 </IressExpander>
@@ -93,16 +89,6 @@ are generated automatically:
 | `activator` | `my-expander__activator` | The expand/collapse trigger button |
 | `container` | `my-expander__container` | The collapsible content container |
 
-## Props
-
-- **Type:** `IressExpanderProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Expander/Expander.d.ts`
-
-```typescript
-import type { IressExpanderProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs)

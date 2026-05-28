@@ -1,15 +1,11 @@
-# Checkbox Group
-
-Checkbox groups allow users to make more than one choice in a set of related options.
-
+# 
 > **Component:** `import { IressCheckboxGroup } from '@iress-oss/ids-components'`
-> **Storybook:** [Checkbox Group in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressCheckboxGroup } from '@iress-oss/ids-components';
-
 <IressCheckboxGroup name="preferences" />
 ```
 
@@ -160,8 +156,6 @@ const group = screen.getByRole('group', { name: 'Select options' });
 Use `within` to scope queries when multiple groups share the same option labels:
 
 ```tsx
-import { within } from '@testing-library/react';
-
 const group = screen.getByRole('group', { name: 'Interests' });
 const option = within(group).getByRole('checkbox', { name: 'Music' });
 ```
@@ -174,16 +168,6 @@ const option = within(group).getByRole('checkbox', { name: 'Music' });
 - **onChange returns an array**: The `onChange` callback receives the full array
   of selected values, not just the changed item.
 
-## Props
-
-- **Type:** `IressCheckboxGroupProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/CheckboxGroup/CheckboxGroup.d.ts`
-
-```typescript
-import type { IressCheckboxGroupProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs)

@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import type { TestId } from '@helpers/testing';
+import type { ComponentMeta } from '@helpers/meta/types';
 
 export const testIds: TestId[] = [
   { suffix: 'input', description: 'The underlying input element' },
@@ -8,7 +9,7 @@ export const testIds: TestId[] = [
 
 export default {
   heading: 'Autocomplete',
-  href: '/?path=/docs/components-autocomplete--docs',
+  description: 'Provides a text input with suggestions that filter as the user types.',
   tags: ['form', 'data-entry', 'search'],
   Thumbnail: lazy(() => import('./Thumbnail')),
-};
+} satisfies ComponentMeta;

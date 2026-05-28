@@ -1,16 +1,12 @@
-# Col
-
-Used in conjunction with the IressRow component to layout page content
-
+# 
 > **Component:** `import { IressCol } from '@iress-oss/ids-components'`
-> **Storybook:** [Col in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressCol } from '@iress-oss/ids-components';
-
-<IressCol numberOfColumns={2} />
+<IressCol span="6" />
 ```
 
 ## Examples
@@ -21,25 +17,25 @@ When no column widths are specified the `IressCol` component will render equal w
 
 ```tsx
 <IressStack gap="spacing.4">
-<IressRow {...row}>
-<IressCol {...column}>
-<IressPlaceholder>1 of 2</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>2 of 2</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column}>
-<IressPlaceholder>1 of 3</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>2 of 3</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>3 of 3</IressPlaceholder>
-</IressCol>
-</IressRow>
+  <IressRow>
+    <IressCol>
+      <IressPlaceholder>1 of 2</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>2 of 2</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol>
+      <IressPlaceholder>1 of 3</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>2 of 3</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>3 of 3</IressPlaceholder>
+    </IressCol>
+  </IressRow>
 </IressStack>
 ```
 
@@ -53,59 +49,59 @@ If no `span` is provided it will default to `auto` which will make the column ei
 
 ```tsx
 <IressStack gap="spacing.4">
-<IressRow {...row}>
-<IressCol {...column} span="12">
-<IressPlaceholder>12</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="1">
-<IressPlaceholder>1</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>11</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="2">
-<IressPlaceholder>2</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>10</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="3">
-<IressPlaceholder>3</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>9</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="4">
-<IressPlaceholder>4</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>8</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="5">
-<IressPlaceholder>5</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>7</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="6">
-<IressPlaceholder>6</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>6</IressPlaceholder>
-</IressCol>
-</IressRow>
+  <IressRow>
+    <IressCol span="12">
+      <IressPlaceholder>12</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol span="1">
+      <IressPlaceholder>1</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>11</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol span="2">
+      <IressPlaceholder>2</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>10</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol span="3">
+      <IressPlaceholder>3</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>9</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol span="4">
+      <IressPlaceholder>4</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>8</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol span="5">
+      <IressPlaceholder>5</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>7</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol span="6">
+      <IressPlaceholder>6</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>6</IressPlaceholder>
+    </IressCol>
+  </IressRow>
 </IressStack>
 ```
 
@@ -119,27 +115,28 @@ The `span` prop can take an object that takes five key/value pairs that correlat
 
 ```tsx
 <IressStack gap="spacing.4">
-<IressPanel>
-Current breakpoint: <CurrentBreakpoint />.
-</IressPanel>
+  <IressPanel>
+    Current breakpoint: <CurrentBreakpoint />.
+  </IressPanel>
 
-<IressRow {...row}>
-{columns.map((column, index) => (
-<IressCol {...columnProps} {...column} key={index}>
-<IressPlaceholder>
-<IressText textAlign="center">
-Column {index + 1}
-<br />
-{column.span && JSON.stringify(column.span)}
-</IressText>
-</IressPlaceholder>
-</IressCol>
-))}
-</IressRow>
+  <IressRow>
+    <IressCol span={{ xs: "12", md: "6", lg: "4" }}>
+      <IressPlaceholder>
+        <IressText textAlign="center">
+          Column 1
+        </IressText>
+      </IressPlaceholder>
+    </IressCol>
+    <IressCol span={{ xs: "12", md: "6", lg: "8" }}>
+      <IressPlaceholder>
+        <IressText textAlign="center">
+          Column 2
+        </IressText>
+      </IressPlaceholder>
+    </IressCol>
+  </IressRow>
 </IressStack>
 ```
-
-[View "ResponsiveSpan" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-col--responsive-span)
 
 ### Offset
 
@@ -147,61 +144,61 @@ The `offset` prop controls the amount of grid columns to offset.
 
 ```tsx
 <IressStack gap="spacing.4">
-<IressRow {...row}>
-<IressCol {...column} offset="1">
-<IressPlaceholder>1</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="2">
-<IressPlaceholder>2</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="3">
-<IressPlaceholder>3</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="4">
-<IressPlaceholder>4</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="5">
-<IressPlaceholder>5</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="6">
-<IressPlaceholder>6</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="7">
-<IressPlaceholder>7</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="8">
-<IressPlaceholder>8</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="9">
-<IressPlaceholder>9</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="10">
-<IressPlaceholder>10</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="11">
-<IressPlaceholder>11</IressPlaceholder>
-</IressCol>
-</IressRow>
+  <IressRow>
+    <IressCol offset="1">
+      <IressPlaceholder>1</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="2">
+      <IressPlaceholder>2</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="3">
+      <IressPlaceholder>3</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="4">
+      <IressPlaceholder>4</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="5">
+      <IressPlaceholder>5</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="6">
+      <IressPlaceholder>6</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="7">
+      <IressPlaceholder>7</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="8">
+      <IressPlaceholder>8</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="9">
+      <IressPlaceholder>9</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="10">
+      <IressPlaceholder>10</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="11">
+      <IressPlaceholder>11</IressPlaceholder>
+    </IressCol>
+  </IressRow>
 </IressStack>
 ```
 
@@ -215,23 +212,19 @@ For example, if you specify an offset for `md`, it will apply to `lg`, `xl` and 
 
 ```tsx
 <IressStack gap="spacing.4">
-<IressPanel>
-Current breakpoint: <CurrentBreakpoint />.
-</IressPanel>
+  <IressPanel>
+    Current breakpoint: <CurrentBreakpoint />.
+  </IressPanel>
 
-<IressRow {...row}>
-{columns.map((column, index) => (
-<IressCol {...columnProps} {...column} key={index}>
-<IressPlaceholder>
-<IressText textAlign="center">
-Column {index + 1}
-<br />
-{column.offset && JSON.stringify(column.offset)}
-</IressText>
-</IressPlaceholder>
-</IressCol>
-))}
-</IressRow>
+  <IressRow>
+    <IressCol span="6" offset={{ xs: "0", md: "3", lg: "6" }}>
+      <IressPlaceholder>
+        <IressText textAlign="center">
+          Column 1
+        </IressText>
+      </IressPlaceholder>
+    </IressCol>
+  </IressRow>
 </IressStack>
 ```
 
@@ -243,23 +236,20 @@ The `alignSelf` prop controls the vertical alignment of the column (use if colum
 
 ```tsx
 <IressContainer>
-<IressRow
-{...row}
-style={{ border: '1px dashed hsl(43deg 100% 45%)', height: '10rem' }}
->
-<IressCol {...column} alignSelf="start">
-<IressPlaceholder>Start</IressPlaceholder>
-</IressCol>
-<IressCol {...column} alignSelf="center">
-<IressPlaceholder>Center</IressPlaceholder>
-</IressCol>
-<IressCol {...column} alignSelf="end">
-<IressPlaceholder>End</IressPlaceholder>
-</IressCol>
-<IressCol {...column} alignSelf="stretch">
-<IressPlaceholder stretch>Stretch</IressPlaceholder>
-</IressCol>
-</IressRow>
+  <IressRow style={{ border: '1px dashed hsl(43deg 100% 45%)', height: '10rem' }}>
+    <IressCol alignSelf="start">
+      <IressPlaceholder>Start</IressPlaceholder>
+    </IressCol>
+    <IressCol alignSelf="center">
+      <IressPlaceholder>Center</IressPlaceholder>
+    </IressCol>
+    <IressCol alignSelf="end">
+      <IressPlaceholder>End</IressPlaceholder>
+    </IressCol>
+    <IressCol alignSelf="stretch">
+      <IressPlaceholder stretch>Stretch</IressPlaceholder>
+    </IressCol>
+  </IressRow>
 </IressContainer>
 ```
 
@@ -274,16 +264,6 @@ directly or use a `data-testid`:
 const col = screen.getByTestId('my-col');
 ```
 
-## Props
-
-- **Type:** `IressColProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Col/Col.d.ts`
-
-```typescript
-import type { IressColProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs)

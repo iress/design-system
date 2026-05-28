@@ -1,15 +1,12 @@
 # Tab
-
 A tab is an interactive element that controls the display of other content, usually a panel
-
 > **Component:** `import { IressTab } from '@iress-oss/ids-components'`
-> **Storybook:** [Tab in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs)
+> **Storybook:** [Tab in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressTab } from '@iress-oss/ids-components';
-
 <IressTab label="Tab" />
 ```
 
@@ -22,7 +19,7 @@ The tab can be set to active using the `active` prop.
 **Note:** If you are using `IressTabSet`, you should use the `selected` prop on the `IressTabSet` to set the active state of its `<IressTab />` children, as the `active` prop will be ignored.
 
 ```tsx
-<IressTab active />
+<IressTab active label="Active Tab" />
 ```
 
 [View "Active" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab--active)
@@ -33,7 +30,7 @@ A tab can have a unique value set to it, used to determine its active state in a
 
 ```tsx
 <IressTabSet>
-<IressTab />
+<IressTab label="Tab 1" value="tab-1" />
 </IressTabSet>
 ```
 
@@ -45,22 +42,12 @@ A tab can set its `children` when used inside an `IressTabSet` component, and it
 
 ```tsx
 <IressTabSet>
-<IressTab />
+<IressTab label="Tab 1">Panel content</IressTab>
 </IressTabSet>
 ```
 
 [View "Panel" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab--panel)
 
-## Props
-
-- **Type:** `IressTabProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/TabSet/Tab/Tab.d.ts`
-
-```typescript
-import type { IressTabProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs)

@@ -8,6 +8,7 @@ import {
   withCustomSource,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressLoading>;
 
@@ -17,6 +18,13 @@ export default {
   tags: ['beta: '],
   argTypes: {
     ...stylingProps,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressLoading>;
 

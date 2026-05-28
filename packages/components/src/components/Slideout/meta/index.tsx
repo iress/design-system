@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import type { TestId } from '@helpers/testing';
+import type { ComponentMeta } from '@helpers/meta/types';
 
 export const testIds: TestId[] = [
   { suffix: 'heading', description: 'The slideout heading' },
@@ -13,7 +14,7 @@ export const testIds: TestId[] = [
 
 export default {
   heading: 'Slideout',
-  href: '/?path=/docs/components-slideout--docs',
+  description: 'Displays supplementary content in a panel that slides in from the edge of the viewport.',
   tags: ['overlay', 'navigation', 'panel'],
   Thumbnail: lazy(() => import('./Thumbnail')),
-};
+} satisfies ComponentMeta;

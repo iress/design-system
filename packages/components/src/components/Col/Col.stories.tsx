@@ -14,6 +14,7 @@ import {
   withJsxTransformer,
   omitStylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type ColWithCustomArgs = React.ComponentProps<typeof IressCol> & {
   numberOfColumns?: number;
@@ -54,6 +55,11 @@ export default {
     },
   },
   parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
     ...withJsxTransformer({
       filterProps: ['numberOfColumns', 'columns', 'row'],
     }),

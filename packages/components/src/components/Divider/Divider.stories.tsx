@@ -5,6 +5,7 @@ import { IressText } from '../Text';
 import { IressStack } from '../Stack/Stack';
 import { IressPanel } from '../Panel';
 import { disableArgTypes, stylingProps } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 const GUTTER_SIZES = ['none', 'xs', 'sm', 'md', 'lg', 'xl'];
 
@@ -22,6 +23,13 @@ export default {
   tags: ['updated'],
   argTypes: {
     ...stylingProps,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressDivider>;
 

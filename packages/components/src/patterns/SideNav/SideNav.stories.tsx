@@ -12,6 +12,7 @@ import SideNavControlledSource from './mocks/SideNavControlled.tsx?raw';
 import { SideNavRouting } from './mocks/SideNavRouting';
 import SideNavRoutingSource from './mocks/SideNavRouting.tsx?raw';
 import { IressInput, IressText } from '@/main';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressSideNav>;
 
@@ -23,6 +24,11 @@ export default {
     items: MOCK_SIDE_NAV_ITEMS,
   },
   parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
     layout: 'fullscreen',
   },
   decorators: [

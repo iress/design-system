@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import type { TestId } from '@helpers/testing';
+import type { ComponentMeta } from '@helpers/meta/types';
 
 export const testIds: TestId[] = [
   { suffix: 'activator', description: 'The popover trigger element' },
@@ -8,7 +9,7 @@ export const testIds: TestId[] = [
 
 export default {
   heading: 'Popover',
-  href: '/?path=/docs/components-popover--docs',
+  description: 'Displays floating content anchored to a trigger element.',
   tags: ['overlay', 'interactive', 'content'],
   Thumbnail: lazy(() => import('./Thumbnail')),
-};
+} satisfies ComponentMeta;

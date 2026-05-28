@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import type { TestId } from '@helpers/testing';
+import type { ComponentMeta } from '@helpers/meta/types';
 
 export const testIds: TestId[] = [
   { suffix: 'prepend', description: 'The prepend slot container' },
@@ -11,7 +12,7 @@ export const testIds: TestId[] = [
 
 export default {
   heading: 'Card',
-  href: '/?path=/docs/components-card--docs',
+  description: 'Groups related content and actions into a contained, visually distinct surface.',
   tags: ['layout', 'container', 'content'],
   Thumbnail: lazy(() => import('./Thumbnail')),
-};
+} satisfies ComponentMeta;

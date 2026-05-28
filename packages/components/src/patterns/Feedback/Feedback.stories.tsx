@@ -2,6 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { FeedbackExample } from './mocks/FeedbackExample';
 import FeedbackExampleSource from './mocks/FeedbackExample.tsx?raw';
 import { DecisionTreeDecorator } from './mocks/DecisionTreeDecorator';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof FeedbackExample>;
 
@@ -10,6 +11,11 @@ export default {
   component: FeedbackExample,
   tags: ['beta'],
   parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
     chromatic: {
       disableSnapshot: true,
     },

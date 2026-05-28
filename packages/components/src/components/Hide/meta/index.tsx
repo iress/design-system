@@ -1,8 +1,9 @@
 import { lazy } from 'react';
+import type { ComponentMeta } from '@helpers/meta/types';
 
 export default {
   heading: 'Hide',
-  href: '/?path=/docs/components-hide--docs',
+  description: 'Conditionally hides content based on responsive breakpoints.',
   tags: ['layout', 'responsive', 'utility'],
   Thumbnail: lazy(() => import('./Thumbnail')),
-};
+} satisfies ComponentMeta;

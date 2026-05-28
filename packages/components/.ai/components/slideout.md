@@ -1,15 +1,11 @@
-# Slideout
-
-Slideouts are used to show additional information or to allow users to perform secondary tasks without leaving their normal workflow.
-
+# 
 > **Component:** `import { IressSlideout } from '@iress-oss/ids-components'`
-> **Storybook:** [Slideout in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressSlideout } from '@iress-oss/ids-components';
-
 <IressSlideout footer="Footer slot">
   Slideout content
 </IressSlideout>
@@ -36,7 +32,7 @@ You can use the `IressSlideoutProvider` to open and close slideout from anywhere
 To use, wrap your `<App/>` or the component that you want to use the `useSlideout` hook with `<IressSlideoutProvider />`.
 
 ```tsx
-<AppWithSlideoutProvider {...args.slideout} />
+<AppWithSlideoutProvider />
 ```
 
 [View "Provider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-provider--provider)
@@ -56,7 +52,7 @@ const { showSlideout } = useSlideout();
           <IressButton onClick={() => showSlideout('overlay')}>
             Overlay slideout
           </IressButton>
-          <IressSlideout {...args} id="overlay" mode="overlay">
+          <IressSlideout id="overlay" heading="Overlay" mode="overlay">
             <h2>Overlay</h2>
             For most situations <code>overlay</code> will be what you need,
             which is why this is the default behaviour. You do not need to
@@ -68,8 +64,8 @@ const { showSlideout } = useSlideout();
             Push slideout
           </IressButton>
           <IressSlideout
-            {...args}
             id="push"
+            heading="Push"
             mode="push"
             eleToPush="#storybook-docs, html"
           >
@@ -170,8 +166,6 @@ See below for an example in version 4 and version 5.
 <DiffViewer
 allowModeChange
 oldValue={`import { render, waitFor, screen } from '@testing-library/react';
-import { idsFireEvent, componentLoad } from '@iress/ids-react-test-utils';
-
 test('opening and closing a slideout', async () => {
 await componentLoad([
 'slideout-trigger',
@@ -193,8 +187,6 @@ idsFireEvent.click(closeButton);
 await waitFor(() => expect(slideout).not.toBeVisible());
 });`}
 newValue={`import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
-
 test('opening and closing a slideout', async () => {
 const trigger = screen.getByRole('button', { name: /open slideout/i });
 
@@ -255,16 +247,6 @@ are generated automatically:
 - **Animation timing**: Slideout animations can affect test timing. Use the
   speed-up technique above to set animation duration to `0s` in tests.
 
-## Props
-
-- **Type:** `IressSlideoutProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Slideout/Slideout.d.ts`
-
-```typescript
-import type { IressSlideoutProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs)

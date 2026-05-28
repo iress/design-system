@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import type { TestId } from '@helpers/testing';
+import type { ComponentMeta } from '@helpers/meta/types';
 
 export const testIds: TestId[] = [
   { suffix: 'hidden-input', description: 'The hidden form input' },
@@ -14,7 +15,7 @@ export const testIds: TestId[] = [
 
 export default {
   heading: 'Select',
-  href: '/?path=/docs/components-select--docs',
+  description: 'Renders a dropdown select input for choosing one option from a list.',
   tags: ['form', 'data-entry', 'dropdown', 'rich-select'],
   Thumbnail: lazy(() => import('./Thumbnail')),
-};
+} satisfies ComponentMeta;

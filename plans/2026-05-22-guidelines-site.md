@@ -506,7 +506,7 @@ render the same information that `.docs.mdx` provided (description, status, etc.
 
 - [ ] **Step 1:** Add `description` field to each component's `meta/index.tsx`
 - [ ] **Step 2:** Create a `/meta` package export in `@iress-oss/ids-components` (re-exports all component metas)
-- [ ] **Step 3:** Wire stories to use meta for `title` and `tags` (e.g. `title: \`Components/${alertMeta.heading}\``)
+- [x] **Step 3:** ~~Wire stories to use meta for `title`~~ — **Not possible.** Storybook requires static string literal titles (parsed at index time without execution). Meta `heading` is used for guidelines and AI docs only. Story titles remain hardcoded strings.
 - [ ] **Step 4:** Wire guidelines `content/*.mdx` to import meta from `@iress-oss/ids-components/meta/<component>`
 - [ ] **Step 5:** Ensure `AutoDocsPage` can render component description from meta (via story parameters or CSF meta)
 - [ ] **Step 6:** Storybook URLs are inferred from title (no explicit URL needed in meta)
@@ -617,6 +617,52 @@ packages/components/.ai/components/button.md (shipped in npm)
 
 ---
 
+## Phase 11.5: Improve JSDoc for Autodocs
+
+> **Goal:** Add comprehensive JSDoc comments to all exported IDS components and patterns
+> so that Storybook autodocs automatically renders rich component descriptions with
+> usage examples. Descriptions must be in sync with the shared `meta/` descriptions.
+
+**Context:** Storybook autodocs renders the JSDoc comment above the component export as
+the component description on the docs page. Currently most IDS components have no JSDoc.
+Adding JSDoc with a description + usage example gives autodocs the same quality that the
+old `.docs.mdx` files provided — without maintaining separate documentation files.
+
+**Reference:** See `packages/storybook-config/src/components/CurrentBreakpoint.tsx` line 62
+for the pattern — a JSDoc comment with a brief description above the component export.
+
+### Task 11.5.1: Define JSDoc standards
+
+- [ ] **Step 1:** Define the required JSDoc format:
+  ```ts
+  /**
+   * <description from meta — must match meta.description>
+   *
+   * @example
+   * ```tsx
+   * import { IressAlert } from '@iress-oss/ids-components';
+   *
+   * <IressAlert status="success">Saved!</IressAlert>
+   * ```
+   */
+  export const IressAlert = ...
+  ```
+- [ ] **Step 2:** Description must match the component's `meta/index.tsx` `description` field
+- [ ] **Step 3:** Example should be a minimal, self-contained usage (import + JSX)
+
+### Task 11.5.2: Add JSDoc to all component exports
+
+- [ ] **Step 1:** Add JSDoc with description + `@example` to all 46 component exports
+- [ ] **Step 2:** Add JSDoc with description + `@example` to all 8 pattern exports
+- [ ] **Step 3:** Verify autodocs renders the description and example correctly in Storybook
+
+### Task 11.5.3: Lint rule to enforce JSDoc presence
+
+- [ ] **Step 1:** Add ESLint rule (`jsdoc/require-jsdoc`) targeting exported component functions/constants
+- [ ] **Step 2:** Optionally add a custom lint rule or script to verify description matches meta
+
+---
+
 ## Phase 12: Validation & Cleanup
 
 > **Goal:** Fix all known issues accumulated during earlier phases, perform the cutover
@@ -721,6 +767,99 @@ Document how to add/edit guidelines content for contributors and AI agents:
   - `packages/components/.ai/` is a derived artifact, not hand-edited
   - Token docs live in `apps/guidelines/content/tokens/`
 - [ ] **Step 4:** Add a note to the root `README.md` development section about the guidelines app
+
+### Task 12.9: Add Storybook introduction/cover page
+
+Add a single MDX introduction page to the components Storybook that explains its new role
+and directs users to the guidelines site for full documentation.
+
+- [ ] **Step 1:** Create an introduction MDX page (e.g. `packages/components/src/Introduction.mdx`) with:
+  - Clear statement: Storybook is for interactive examples, visual regression testing, and API documentation
+  - Link to the guidelines site for design guidance, usage patterns, and full component docs
+  - Brief explanation of how autodocs pages work (auto-generated from component props + stories)
+- [ ] **Step 2:** Ensure it appears first in the sidebar (via story sort order in preview config)
+
+### Task 12.10: Create story factory in storybook-config
+
+Create a `createComponentStories` helper in `@iress-oss/ids-storybook-config` that
+enforces conventions and reduces boilerplate across all component/pattern story files.
+
+- [ ] **Step 1:** Design the factory API:
+  ```ts
+  const { meta, Story } = createComponentStories({
+    component: IressAlert,
+    meta: componentMeta,       // shared meta (heading, description, tags)
+    category: 'Components',    // or 'Patterns'
+    argTypes: { ... },         // component-specific only
+  });
+  ```
+- [ ] **Step 2:** Factory auto-applies:
+  - `parameters.docs.description.component` from `meta.description`
+  - `stylingProps` helper appended to argTypes automatically
+  - `tags` from meta merged with defaults (`['autodocs']`)
+  - Correctly typed `Story` type for the component
+- [ ] **Step 3:** Enforce `description` as required in `ComponentMeta` (already done)
+- [ ] **Step 4:** Title remains a static string (Storybook indexer limitation) — factory sets everything else
+- [ ] **Step 5:** Migrate all 54 primary story files to use the factory
+- [ ] **Step 6:** Add lint rule or reviewer guidance: all new stories must use `createComponentStories`
+
+---
+
+## Phase 13: Tabbed Content Architecture + TypeDoc API Reference
+
+> **Goal:** Restructure component documentation pages into tabbed views (Design, Develop,
+> Specifications) to serve both designers and developers. Add TypeDoc as a generated API
+> reference linked from each component page.
+
+**Prerequisite:** Phases 10–12 complete (autodocs, shared meta, guidelines content stable).
+
+### Task 13.1: Implement tabbed component pages
+
+- [ ] **Step 1:** Design the tab structure per component page:
+  - **Design** — when to use, visual examples, do's/don'ts, design tokens used, Figma link
+  - **Develop** — quick start, code examples, common patterns, key props overview
+  - **Specifications** — expected behaviour, accessibility (WCAG), keyboard interactions, states matrix
+- [ ] **Step 2:** Implement tab UI using `IressTabSet` (dogfooding)
+- [ ] **Step 3:** Decide content file structure — either:
+  - Multiple MDX files per component (`button.design.mdx`, `button.develop.mdx`, `button.specs.mdx`)
+  - Or single file with sections rendered into tabs via frontmatter/headings
+- [ ] **Step 4:** Update the splat route to render tabbed pages for component/pattern content
+- [ ] **Step 5:** Update navigation to show component name (tabs appear within the page, not sidebar)
+
+### Task 13.2: Add design-focused content
+
+- [ ] **Step 1:** Define design content template (when to use, visual examples, do's/don'ts, related patterns)
+- [ ] **Step 2:** Add Figma embed or link per component (source of truth file)
+- [ ] **Step 3:** Document design token usage per component (which tokens apply, pairing guidance)
+- [ ] **Step 4:** Populate design content for key components (Button, Alert, Modal, Form, etc.)
+
+### Task 13.3: Add specifications content
+
+- [ ] **Step 1:** Define specs template:
+  - Expected behaviour (interaction states, edge cases)
+  - Accessibility (WCAG criteria, required ARIA, keyboard interaction table)
+  - States/variants matrix
+  - Token customisation points (stable system tokens that can be themed, e.g. `radius.system.button`)
+- [ ] **Step 2:** Link to Figma source file for each component (visual token mapping lives here)
+- [ ] **Step 3:** Link to Storybook autodocs (API / Examples) per component
+- [ ] **Step 4:** Link to TypeDoc API reference per component
+- [ ] **Step 5:** Link to component source in the repo (e.g. GitHub link to the component directory — shows styles/recipes for exact token usage, always up to date)
+- [ ] **Step 6:** Populate specs content for key components
+
+**Token mapping approach:**
+- Do NOT manually map tokens to component parts (drifts, unmaintainable)
+- Visual token mapping → Figma (designers inspect layers there)
+- Implementation details → link to source code (style file is always current)
+- Only document stable **customisation points** (system tokens the consumer can theme)
+
+### Task 13.4: Set up TypeDoc for API reference
+
+- [ ] **Step 1:** Install and configure TypeDoc for `@iress-oss/ids-components`
+- [ ] **Step 2:** Configure to read from component source + JSDoc comments (from Phase 11.5)
+- [ ] **Step 3:** Generate static HTML output to a `/api/` path (e.g. `docs/api/` or separate deploy)
+- [ ] **Step 4:** Add TypeDoc generation to the build pipeline
+- [ ] **Step 5:** Add "View full API →" link from each component's Specifications tab to the TypeDoc page
+- [ ] **Step 6:** Style TypeDoc output to match IDS design language (custom theme or CSS overrides)
 
 ---
 

@@ -1,15 +1,11 @@
-# Radio
-
-A radio is a single option presented with a radio button. It is used to select a single option from multiple options. It is typically used in an IressRadioGroup.
-
+# 
 > **Component:** `import { IressRadio } from '@iress-oss/ids-components'`
-> **Storybook:** [Radio in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressRadio } from '@iress-oss/ids-components';
-
 <IressRadio>
   Radio button
 </IressRadio>
@@ -52,15 +48,12 @@ The `variant` prop changes the visual style of the radio. The `card` variant add
 
 ```tsx
 <IressStack gap="lg">
-<IressRadio variant="card" heading="Widget">
-A description of the widget
-</IressRadio>
-<IressRadio
-{...(args as IressRadioProps<FormControlValue, 'touch'>)}
-variant="touch"
->
-Touch variant
-</IressRadio>
+  <IressRadio variant="card" heading="Widget">
+    A description of the widget
+  </IressRadio>
+  <IressRadio variant="touch">
+    Touch variant
+  </IressRadio>
 </IressStack>
 ```
 
@@ -105,16 +98,6 @@ are generated automatically:
 | `input` | `my-radio__input` | The underlying radio input element |
 | `radioMark` | `my-radio__radioMark` | The visual radio indicator |
 
-## Props
-
-- **Type:** `IressRadioProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Radio/Radio.d.ts`
-
-```typescript
-import type { IressRadioProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)

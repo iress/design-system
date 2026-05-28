@@ -1,15 +1,11 @@
-# Link
-
-A link is used to navigate to another page or location.
-
+# 
 > **Component:** `import { IressLink } from '@iress-oss/ids-components'`
-> **Storybook:** [Link in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressLink } from '@iress-oss/ids-components';
-
 <IressLink href="//iress.com">
   IressLink
 </IressLink>
@@ -91,16 +87,6 @@ When no `href` is provided, the link renders as a button:
 const button = screen.getByRole('button', { name: 'Show details' });
 ```
 
-## Props
-
-- **Type:** `IressLinkProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Link/Link.d.ts`
-
-```typescript
-import type { IressLinkProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs)

@@ -8,6 +8,7 @@ import { useArgs } from 'storybook/preview-api';
 import { MenuRoleDescription } from './mocks/MenuRoleDescription';
 import { IressToggle } from '../Toggle';
 import { disableArgTypes, stylingProps } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<IressMenuProps>;
 
@@ -24,6 +25,13 @@ export default {
       mapping: MENU_CHILDREN_OPTIONS,
     },
     ...stylingProps,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressMenu>;
 

@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import type { TestId } from '@helpers/testing';
+import type { ComponentMeta } from '@helpers/meta/types';
 
 export const testIds: TestId[] = [
   { suffix: 'label', description: 'The toggle label element' },
@@ -8,7 +9,7 @@ export const testIds: TestId[] = [
 
 export default {
   heading: 'Toggle',
-  href: '/?path=/docs/components-toggle--docs',
+  description: 'Renders a switch control for toggling between on and off states.',
   tags: ['form', 'switch', 'interactive'],
   Thumbnail: lazy(() => import('./Thumbnail')),
-};
+} satisfies ComponentMeta;

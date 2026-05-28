@@ -2,6 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressBreadcrumbs, IressStack, IressText } from '@/main';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 import { IressPanel } from '@/main';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressBreadcrumbs>;
 
@@ -16,6 +17,13 @@ export default {
   },
   argTypes: {
     ...disableArgTypes(['items']),
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressBreadcrumbs>;
 

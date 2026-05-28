@@ -1,15 +1,11 @@
-# Placeholder
-
-A placeholder is a UI element that allows you to reserve space for content that has not been created yet, usually used for prototyping.
-
+# 
 > **Component:** `import { IressPlaceholder } from '@iress-oss/ids-components'`
-> **Storybook:** [Placeholder in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressPlaceholder } from '@iress-oss/ids-components';
-
 <IressPlaceholder heading="Placeholder" width={300} height={300}>
   This should be a description of the expected content
 </IressPlaceholder>
@@ -29,16 +25,6 @@ It is recommended to use placeholders that emulate the content that will be plac
 const placeholder = screen.getByTestId('my-placeholder');
 ```
 
-## Props
-
-- **Type:** `IressPlaceholderProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Placeholder/Placeholder.d.ts`
-
-```typescript
-import type { IressPlaceholderProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs)

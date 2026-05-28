@@ -1,15 +1,11 @@
-# Shadow
-
-The shadow pattern allows you to wrap your content in the shadow DOM, allowing you to isolate your styles from the rest of the application. This is useful when you want to create a component that has its own styles, without affecting the rest of the application (such as microfrontends).
-
-> **Pattern:** `import { IressShadow } from '@iress-oss/ids-components'`
-> **Storybook:** [Shadow in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs)
+# 
+> **Component:** `import { IressShadow } from '@iress-oss/ids-components'`
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressShadow } from '@iress-oss/ids-components';
-
 <IressShadow />
 ```
 
@@ -33,4 +29,4 @@ It has similar props to the `IressProvider`, however it will apply the styles to
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs)

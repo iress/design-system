@@ -14,6 +14,7 @@ import { IressStack } from '../Stack';
 import { RoutingButton } from './mocks/RoutingButton';
 import RoutingButtonSource from './mocks/RoutingButton.tsx?raw';
 import { IressPill } from '@/main';
+import componentMeta from './meta';
 
 type ButtonStory = StoryObj<IressButtonProps>;
 type AnchorStory = StoryObj<IressButtonProps<undefined, string>>;
@@ -27,6 +28,13 @@ export default {
     children: reactNodeArgType,
     prepend: reactNodeArgType,
     ...stylingProps,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressButton>;
 

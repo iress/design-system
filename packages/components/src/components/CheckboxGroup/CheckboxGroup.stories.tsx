@@ -15,6 +15,7 @@ import {
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressCheckboxGroup>;
 
@@ -26,6 +27,13 @@ export default {
     ...stylingProps,
   },
   tags: ['updated'],
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
+  },
 } as Meta<typeof IressCheckboxGroup>;
 
 export const Default: Story = {

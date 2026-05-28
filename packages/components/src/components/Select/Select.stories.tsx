@@ -36,6 +36,7 @@ import {
   mergeStorybookConfig,
   withCustomSource,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressSelect>;
 
@@ -67,6 +68,13 @@ export default {
     ),
   },
   tags: ['updated'],
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
+  },
 } as Meta<typeof IressSelect>;
 
 export const SingleSelect: Story = {

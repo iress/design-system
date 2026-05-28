@@ -1,8 +1,9 @@
 import { lazy } from 'react';
+import type { ComponentMeta } from '@helpers/meta/types';
 
 export default {
   heading: 'Contextual Menu',
-  href: '/?path=/docs/patterns-contextualmenu--docs',
+  description: 'Displays a context-sensitive menu of actions triggered by user interaction.',
   tags: ['menu', 'actions', 'overflow'],
   Thumbnail: lazy(() => import('./Thumbnail')),
-};
+} satisfies ComponentMeta;

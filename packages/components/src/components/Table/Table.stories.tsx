@@ -25,6 +25,7 @@ import {
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import { IressPill } from '../Pill';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressTable>;
 
@@ -39,6 +40,11 @@ export default {
     ...stylingProps,
   },
   parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
     ...withJsxTransformer({
       sortProps: false,
     }),

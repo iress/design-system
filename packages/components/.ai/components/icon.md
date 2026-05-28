@@ -1,15 +1,11 @@
-# Icon
-
-Icons enhance experiences by visually communicating meaning, actions, status, and feedback.
-
+# 
 > **Component:** `import { IressIcon } from '@iress-oss/ids-components'`
-> **Storybook:** [Icon in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressIcon } from '@iress-oss/ids-components';
-
 <IressIcon name="home" />
 ```
 
@@ -24,8 +20,6 @@ From version 6, the `IressIcon` component supports Material Symbols icons from G
 If you are already using the `IressProvider` component in your application, no further action is required as the Material Symbols font will be automatically loaded for you as it contains the `IressIconProvider` component. The same applies if you are using `IressShadow`, which includes `IressProvider` internally.
 
 ```tsx
-import { IressProvider } from '@iress-oss/ids-components';
-
 <IressProvider>
   <App />
 </IressProvider>;
@@ -241,8 +235,6 @@ If you are using Microfrontends or Web Components that use Shadow DOM, you need 
 The easiest way to do this is to use the `IressIconProvider` component with the `container` prop.
 
 ```tsx
-import { IressIconProvider, IressIcon as Icon } from '@iress/ids-components';
-
 <IressIconProvider type="fontawesome" container={shadowRoot}>
   <App />
 </IressIconProvider>;
@@ -255,8 +247,6 @@ import { IressIconProvider, IressIcon as Icon } from '@iress/ids-components';
 From version 6, the default icon type is Material Symbols. If you want to make Font Awesome the default icon type, you can wrap your application in the `IressIconProvider` component.
 
 ```tsx
-import { IressIconProvider, IressIcon as Icon } from '@iress/ids-components';
-
 // Export a version of IressIcon that uses Font Awesome by default for typing
 export const IressIcon = Icon<'fontawesome'>;
 
@@ -644,16 +634,6 @@ const icon = screen.getByRole('img', { name: 'Close' });
 Decorative icons (without `screenreaderText`) are hidden from the accessibility
 tree and should not be queried directly.
 
-## Props
-
-- **Type:** `IressIconProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Icon/Icon.d.ts`
-
-```typescript
-import type { IressIconProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)

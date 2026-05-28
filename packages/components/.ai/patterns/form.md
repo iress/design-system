@@ -1,15 +1,11 @@
-# Form
-
-Use the IressForm component when you want to request, validate and process data from the user.
-
-> **Pattern:** `import { IressForm } from '@iress-oss/ids-components'`
-> **Storybook:** [Form in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
+# 
+> **Component:** `import { IressForm } from '@iress-oss/ids-components'`
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressForm } from '@iress-oss/ids-components';
-
 <IressForm heading="Contact details" pattern="short" />
 ```
 
@@ -68,8 +64,6 @@ return (
 );
 };`}
 newValue={`import { IressForm, IressFormField, IressInput, IressCheckboxGroup, IressCheckbox } from '@iress-oss/ids-components';
-import { useWatch } from 'react-hook-form';
-
 const ConditionalFields = () => {
 // Instead of creating our own state, we can now use the form state via the useWatch hook, 
 // meaning we still have a single source of truth
@@ -282,7 +276,15 @@ Use the `rules` prop on the `IressFormField` component to add validation rules. 
 A boolean which, if `true`, indicates that the input must have a value before the form can be submitted. You can assign a string to return a custom error message.
 
 ```tsx
-<IressForm element="IressInput" />
+<IressForm heading="Required example">
+<IressFormField
+  label="Name"
+  name="name"
+  rules={{ required: 'Name is required' }}
+  render={(controlledProps) => <IressInput {...controlledProps} />}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "Required" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--required)
@@ -297,7 +299,15 @@ The maximum character length of the value to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressForm element="IressInput" />
+<IressForm heading="Max length example">
+<IressFormField
+  label="Username"
+  name="username"
+  rules={{ maxLength: { value: 10, message: 'Max 10 characters' } }}
+  render={(controlledProps) => <IressInput {...controlledProps} maxLength={10} />}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "MaxLength" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max-length)
@@ -312,7 +322,15 @@ The minimum character length of the value to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressForm element="IressInput" />
+<IressForm heading="Min length example">
+<IressFormField
+  label="Password"
+  name="password"
+  rules={{ minLength: { value: 8, message: 'Min 8 characters' } }}
+  render={(controlledProps) => <IressInput {...controlledProps} type="password" />}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "MinLength" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min-length)
@@ -326,7 +344,15 @@ The maximum number to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressForm element="IressInput" />
+<IressForm heading="Max example">
+<IressFormField
+  label="Age"
+  name="age"
+  rules={{ max: { value: 120, message: 'Max value is 120' } }}
+  render={(controlledProps) => <IressInput {...controlledProps} type="number" />}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "Max" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max)
@@ -340,7 +366,15 @@ The minimum number to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressForm element="IressInput" />
+<IressForm heading="Min example">
+<IressFormField
+  label="Quantity"
+  name="quantity"
+  rules={{ min: { value: 1, message: 'Min value is 1' } }}
+  render={(controlledProps) => <IressInput {...controlledProps} type="number" />}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "Min" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min)
@@ -362,7 +396,15 @@ The minimum date to accept for this input.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-<IressForm element="IressInputDate" />
+<IressForm heading="Min date example">
+<IressFormField
+  label="Start date"
+  name="startDate"
+  rules={{ minDate: '2024-01-01' }}
+  render={(controlledProps) => <IressInputDate {...controlledProps} />}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "MinDate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min-date)
@@ -374,7 +416,15 @@ The maximum date to accept for this input.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-<IressForm element="IressInputDate" />
+<IressForm heading="Max date example">
+<IressFormField
+  label="End date"
+  name="endDate"
+  rules={{ maxDate: '2025-12-31' }}
+  render={(controlledProps) => <IressInputDate {...controlledProps} />}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "MaxDate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max-date)
@@ -386,7 +436,15 @@ Ensures the input is a valid email address.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-<IressForm element="IressInput" />
+<IressForm heading="Email example">
+<IressFormField
+  label="Email"
+  name="email"
+  rules={{ email: 'Please enter a valid email address' }}
+  render={(controlledProps) => <IressInput {...controlledProps} type="email" />}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "Email" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--email)
@@ -400,7 +458,21 @@ You can pass a callback function as the argument to validate, or you can pass an
 - for `object` or `array` input data, it's recommended to use the validate function for validation as the other rules mostly apply to `string`, `string[]`, `number` and `boolean` data types.
 
 ```tsx
-<IressForm 2 element="IressCheckboxGroup" />
+<IressForm heading="Validate example">
+<IressFormField
+  label="Interests"
+  name="interests"
+  rules={{ validate: (value) => (value?.length >= 2) || 'Select at least 2' }}
+  render={(controlledProps) => (
+    <IressCheckboxGroup {...controlledProps}>
+      <IressCheckbox value="sports">Sports</IressCheckbox>
+      <IressCheckbox value="music">Music</IressCheckbox>
+      <IressCheckbox value="art">Art</IressCheckbox>
+    </IressCheckboxGroup>
+  )}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "Validate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--validate)
@@ -610,4 +682,4 @@ This will properly reset the field to null and clear the field value.
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)

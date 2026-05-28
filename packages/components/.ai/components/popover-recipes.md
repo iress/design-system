@@ -1,10 +1,6 @@
 # Recipes
-
 Popover component documentation.
-
-> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)
-
-## With `IressMenu`
+> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)## With `IressMenu`
 
 When an `IressMenu` is used inside `IressPopover`, it adds some additional functionality to the popover, including:
 
@@ -20,9 +16,7 @@ const [multiSelect, setMultiSelect] = useState(false);
           <IressRow gutter="lg" key={role} verticalAlign="middle">
             <IressCol span={2}>
               <IressPopover
-                {...args}
                 activator={<IressButton fluid>role={role}</IressButton>}
-                container={document.body}
                 type={role === 'listbox' || role === 'menu' ? role : undefined}
               >
                 <IressMenu
@@ -76,4 +70,4 @@ The `usePopoverItem` hook returns an object with the following properties:
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)

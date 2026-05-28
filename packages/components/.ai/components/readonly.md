@@ -1,15 +1,11 @@
-# Readonly
-
-Readonly displays a value that cannot be edited by the user. It renders a hidden input field to ensure the value is submitted with the form.
-
+# 
 > **Component:** `import { IressReadonly } from '@iress-oss/ids-components'`
-> **Storybook:** [Readonly in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressReadonly } from '@iress-oss/ids-components';
-
 <IressReadonly value="AU" />
 ```
 
@@ -82,16 +78,6 @@ are generated automatically:
 | --- | --- | --- |
 | `input` | `my-readonly__input` | The hidden input element |
 
-## Props
-
-- **Type:** `IressReadonlyProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Readonly/Readonly.d.ts`
-
-```typescript
-import type { IressReadonlyProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs)

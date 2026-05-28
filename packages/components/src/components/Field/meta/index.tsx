@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import type { TestId } from '@helpers/testing';
+import type { ComponentMeta } from '@helpers/meta/types';
 
 export const testIds: TestId[] = [
   { suffix: 'label', description: 'The field label element' },
@@ -9,7 +10,7 @@ export const testIds: TestId[] = [
 
 export default {
   heading: 'Field',
-  href: '/?path=/docs/components-field--docs',
+  description: 'Wraps a form control with its label, description, and validation message.',
   tags: ['form', 'wrapper', 'validation'],
   Thumbnail: lazy(() => import('./Thumbnail')),
-};
+} satisfies ComponentMeta;

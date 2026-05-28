@@ -1,15 +1,11 @@
-# Alert
-
-An alert displays a short, important message in a way that attracts the user's attention without interrupting the user's task.
-
+# 
 > **Component:** `import { IressAlert } from '@iress-oss/ids-components'`
-> **Storybook:** [Alert in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressAlert } from '@iress-oss/ids-components';
-
 <IressAlert status="info">
   This is a simple info alert
 </IressAlert>
@@ -39,11 +35,11 @@ The alert offers four statuses that set a distinctive colour and icon. They can 
 
 ```tsx
 <IressStack gap="md">
-{[...STATUSES, 'neutral'].map((status) => (
-<IressAlert status={status as never} key={status}>
-{messages[status as never]}
-</IressAlert>
-))}
+  <IressAlert status="info">This is an informational message.</IressAlert>
+  <IressAlert status="success">Operation completed successfully.</IressAlert>
+  <IressAlert status="warning">Please review before continuing.</IressAlert>
+  <IressAlert status="danger">An error has occurred.</IressAlert>
+  <IressAlert status="neutral">A neutral notification.</IressAlert>
 </IressStack>
 ```
 
@@ -67,15 +63,23 @@ The `actions` prop allows you to display call to action buttons within the alert
 
 ```tsx
 <IressStack gap="md">
-<IressAlert status="danger" />
-<IressAlert status="info" />
-<IressAlert status="success" />
-<IressAlert status="warning" />
-<IressAlert status="neutral" />
+  <IressAlert status="danger" actions={[{ children: 'Retry' }, { children: 'Dismiss', mode: 'tertiary' }]}>
+    Something went wrong. Please try again.
+  </IressAlert>
+  <IressAlert status="info" actions={[{ children: 'Learn more' }]}>
+    A new version is available.
+  </IressAlert>
+  <IressAlert status="success" actions={[{ children: 'View details' }]}>
+    Your changes have been saved.
+  </IressAlert>
+  <IressAlert status="warning" actions={[{ children: 'Review' }]}>
+    Your session is about to expire.
+  </IressAlert>
+  <IressAlert status="neutral" actions={[{ children: 'Got it' }]}>
+    This is a neutral alert with an action.
+  </IressAlert>
 </IressStack>
 ```
-
-[View "Footer" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--footer)
 
 ### Icon
 
@@ -95,15 +99,23 @@ By default, the alert is designed to display short messages. If you need to disp
 
 ```tsx
 <IressStack gap="md">
-<IressAlert status="danger" />
-<IressAlert status="info" />
-<IressAlert status="success" />
-<IressAlert status="warning" />
-<IressAlert status="neutral" />
+  <IressAlert status="danger" multiLine heading="Error">
+    A detailed error message that spans multiple lines to provide more context about what went wrong and how to fix it.
+  </IressAlert>
+  <IressAlert status="info" multiLine heading="Information">
+    Here is some detailed information that requires more space to explain the context fully.
+  </IressAlert>
+  <IressAlert status="success" multiLine heading="Success">
+    Your operation completed successfully. Here are the details of what was processed.
+  </IressAlert>
+  <IressAlert status="warning" multiLine heading="Warning">
+    Please be aware of the following important details before proceeding with this action.
+  </IressAlert>
+  <IressAlert status="neutral" multiLine heading="Note">
+    This is a neutral multi-line alert with additional context for the user.
+  </IressAlert>
 </IressStack>
 ```
-
-[View "MultiLine" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--multi-line)
 
 ### Variants
 
@@ -114,8 +126,12 @@ The alert can be displayed in different variants to suit different use cases. Th
 
 ```tsx
 <IressStack gap="md">
-<IressAlert variant="sidebar" />
-<IressAlert variant="full-width" />
+  <IressAlert variant="sidebar" heading="Sidebar alert">
+    This alert is displayed in the sidebar layout.
+  </IressAlert>
+  <IressAlert variant="full-width" heading="Full-width alert">
+    This alert is displayed in the full-width layout.
+  </IressAlert>
 </IressStack>
 ```
 
@@ -127,11 +143,21 @@ The alert can be made dismissable by setting the `onDismiss` prop. This will dis
 
 ```tsx
 <IressStack gap="md">
-<IressAlert status="danger" />
-<IressAlert status="info" />
-<IressAlert status="success" />
-<IressAlert status="warning" />
-<IressAlert status="neutral" />
+  <IressAlert status="danger" onClose={() => console.log('closed')}>
+    This danger alert can be dismissed.
+  </IressAlert>
+  <IressAlert status="info" onClose={() => console.log('closed')}>
+    This info alert can be dismissed.
+  </IressAlert>
+  <IressAlert status="success" onClose={() => console.log('closed')}>
+    This success alert can be dismissed.
+  </IressAlert>
+  <IressAlert status="warning" onClose={() => console.log('closed')}>
+    This warning alert can be dismissed.
+  </IressAlert>
+  <IressAlert status="neutral" onClose={() => console.log('closed')}>
+    This neutral alert can be dismissed.
+  </IressAlert>
 </IressStack>
 ```
 
@@ -168,16 +194,6 @@ are generated automatically:
 | `heading` | `my-alert__heading` | The alert heading container |
 | `footer` | `my-alert__footer` | The alert footer/actions container |
 
-## Props
-
-- **Type:** `IressAlertProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Alert/Alert.d.ts`
-
-```typescript
-import type { IressAlertProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)

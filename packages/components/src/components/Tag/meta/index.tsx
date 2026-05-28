@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import type { TestId } from '@helpers/testing';
+import type { ComponentMeta } from '@helpers/meta/types';
 
 export const testIds: TestId[] = [
   {
@@ -10,7 +11,7 @@ export const testIds: TestId[] = [
 
 export default {
   heading: 'Tag',
-  href: '/?path=/docs/components-tag--docs',
+  description: 'Displays a compact label for categorisation, filtering, or metadata.',
   tags: ['data-display', 'label', 'categorization'],
   Thumbnail: lazy(() => import('./Thumbnail')),
-};
+} satisfies ComponentMeta;

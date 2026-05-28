@@ -5,6 +5,7 @@ import {
   flip,
   shift,
   offset,
+  FloatingPortal,
   useDismiss,
   useFloating,
   useFocus,
@@ -17,9 +18,14 @@ import { toArray } from '@helpers/formatting/toArray';
 import { idsLogger } from '@/helpers/utility/idsLogger';
 import { focusableElements } from '@/helpers/dom/focusableElements';
 import { tooltip } from './Tooltip.styles';
-import { type FloatingUIAligns, type IressStyledProps } from '@/types';
+import {
+  type FloatingUIAligns,
+  type FloatingUIContainer,
+  type IressStyledProps,
+} from '@/types';
 import { styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
+import { useTooltipContainer } from './hooks/useTooltipContainer';
 
 export interface IressTooltipProps extends IressStyledProps {
   /**
@@ -32,6 +38,12 @@ export interface IressTooltipProps extends IressStyledProps {
    * The element to add a tooltip to.
    */
   children: ReactNode;
+
+  /**
+   * The container element to render the tooltip into.
+   * Overrides the container set by `IressTooltipProvider`.
+   */
+  container?: FloatingUIContainer;
 
   /**
    * Sets the tooltip display delay in milliseconds.
@@ -55,6 +67,7 @@ export const IressTooltip = ({
   children,
   className,
   align = 'top',
+  container,
   delay = 500,
   open = false,
   tooltipText,
@@ -63,6 +76,9 @@ export const IressTooltip = ({
 }: IressTooltipProps) => {
   const classes = tooltip();
   const isAuto = align === 'auto';
+  const { container: providerContainer } = useTooltipContainer();
+  const resolvedContainer =
+    container !== undefined ? container : providerContainer;
 
   const [isOpen, setIsOpen] = useState(open);
   const { refs, floatingStyles, context } = useFloating({
@@ -101,6 +117,23 @@ export const IressTooltip = ({
     }
   }, [children, refs.reference]);
 
+  const floatingContent = isOpen && (
+    <div
+      className={classes.content}
+      style={floatingStyles}
+      data-testid={propagateTestid(testid, 'tooltip-text')}
+      ref={refs.setFloating}
+      {...getFloatingProps()}
+    >
+      {toArray(tooltipText).map((line, index, array) => (
+        <Fragment key={index}>
+          {line}
+          {index < array.length - 1 && <br />}
+        </Fragment>
+      ))}
+    </div>
+  );
+
   return (
     <styled.div
       className={cx(classes.root, className, GlobalCSSClass.Tooltip)}
@@ -115,21 +148,12 @@ export const IressTooltip = ({
       >
         {children}
       </div>
-      {isOpen && (
-        <div
-          className={classes.content}
-          style={floatingStyles}
-          data-testid={propagateTestid(testid, 'tooltip-text')}
-          ref={refs.setFloating}
-          {...getFloatingProps()}
-        >
-          {toArray(tooltipText).map((line, index, array) => (
-            <Fragment key={index}>
-              {line}
-              {index < array.length - 1 && <br />}
-            </Fragment>
-          ))}
-        </div>
+      {resolvedContainer ? (
+        <FloatingPortal root={resolvedContainer}>
+          {floatingContent}
+        </FloatingPortal>
+      ) : (
+        floatingContent
       )}
     </styled.div>
   );

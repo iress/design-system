@@ -22,6 +22,7 @@ import { ControlledDropdownMenuMultiselect } from './mocks/ControlledDropdownMen
 import ControlledDropdownMenuMultiselectSource from './mocks/ControlledDropdownMenuMultiselect.tsx?raw';
 import { ControlledDropdownMenuAsync } from './mocks/ControlledDropdownMenuAsync';
 import ControlledDropdownMenuAsyncSource from './mocks/ControlledDropdownMenuAsync.tsx?raw';
+import componentMeta from './meta';
 
 type Story = StoryObj<IressDropdownMenuProps<true>>;
 type SingleStory = StoryObj<IressDropdownMenuProps<false>>;
@@ -35,6 +36,13 @@ export default {
     header: reactNodeArgType,
     searchNoResultsText: reactNodeArgType,
     ...stylingProps,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressDropdownMenu>;
 

@@ -15,6 +15,7 @@ import {
 } from '@iress-oss/ids-storybook-config';
 import { IressInline } from '@/main';
 import { STATUSES } from '@/constants';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressTag>;
 const BADGE_MODES = [10, 20, 30, 40, 50, 60, 70, 80, 90] as const;
@@ -27,6 +28,13 @@ export default {
     children: reactNodeArgType,
     deleteButton: reactNodeArgType,
     ...stylingProps,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressTag>;
 

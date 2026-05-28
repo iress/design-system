@@ -18,6 +18,7 @@ import { type LabelValueMeta } from '@/interfaces';
 import { IressTag } from '../Tag';
 import { IressTooltip } from '../Tooltip';
 import { FA_TO_MATERIAL_MAP } from './helpers/iconMapping';
+import componentMeta from './meta';
 
 type Story = StoryObj<IressIconProps>;
 
@@ -27,6 +28,13 @@ export default {
   tags: ['updated'],
   argTypes: {
     ...stylingProps,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressIcon>;
 

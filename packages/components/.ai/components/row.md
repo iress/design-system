@@ -1,15 +1,11 @@
-# Row
-
-Used in conjunction with the IressCol component to lay out page content.
-
+# 
 > **Component:** `import { IressRow } from '@iress-oss/ids-components'`
-> **Storybook:** [Row in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressRow } from '@iress-oss/ids-components';
-
 <IressRow gutter="spacing.7" horizontalAlign="left" verticalAlign="top" />
 ```
 
@@ -115,16 +111,6 @@ directly or use a `data-testid`:
 const row = screen.getByTestId('my-row');
 ```
 
-## Props
-
-- **Type:** `IressRowProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Row/Row.d.ts`
-
-```typescript
-import type { IressRowProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs)

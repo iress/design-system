@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import type { TestId } from '@helpers/testing';
+import type { ComponentMeta } from '@helpers/meta/types';
 
 export const testIds: TestId[] = [
   { suffix: 'heading', description: 'The alert heading container' },
@@ -8,7 +9,8 @@ export const testIds: TestId[] = [
 
 export default {
   heading: 'Alert',
-  href: '/?path=/docs/components-alert--docs',
+  description:
+    'Communicates important information inline with page content, such as validation errors, warnings, or status messages.',
   tags: ['feedback', 'notification', 'status'],
   Thumbnail: lazy(() => import('./Thumbnail')),
-};
+} satisfies ComponentMeta;

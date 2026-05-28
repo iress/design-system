@@ -1,15 +1,11 @@
-# SideNav
-
-A side navigation pattern that combines a rail (icon-only bar) with an expandable side menu panel. Provides a data-driven API where items are passed as an array, with the rail acting as the main navigation and the side menu showcasing children under each navigation group.
-
-> **Pattern:** `import { IressSideNav } from '@iress-oss/ids-components'`
-> **Storybook:** [SideNav in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-side-nav--docs)
+# 
+> **Component:** `import { IressSideNav } from '@iress-oss/ids-components'`
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-side-nav--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressSideNav } from '@iress-oss/ids-components';
-
 <IressSideNav activeItemKey="hubs" />
 ```
 
@@ -110,15 +106,11 @@ SideNav is designed to work with any routing library:
 
 ```tsx
 // Next.js
-import Link from 'next/link';
-
 const items = [
   { key: 'home', icon: 'home', label: 'Home', href: '/', element: Link },
 ];
 
 // React Router
-import { Link } from 'react-router-dom';
-
 const items = [
   { key: 'home', icon: 'home', label: 'Home', href: '/', element: Link },
 ];
@@ -136,4 +128,4 @@ const activeSection = useLocation().pathname.split('/')[1];
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-side-nav--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-side-nav--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-side-nav--docs)

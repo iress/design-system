@@ -1,15 +1,11 @@
-# Stack
-
-Use IressStack to control vertical spacing between content with consistent present values.
-
+# 
 > **Component:** `import { IressStack } from '@iress-oss/ids-components'`
-> **Storybook:** [Stack in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressStack } from '@iress-oss/ids-components';
-
 <IressStack gap="spacing.1">
   even
 </IressStack>
@@ -48,11 +44,8 @@ The `gap` prop can take an object that takes five key/value pairs that correlate
 <p>
 Current breakpoint: <CurrentBreakpoint />.
 </p>
-<p>
-<code>gap=&#123;{JSON.stringify(args.gap)}&#125;</code>
-</p>
 </IressPanel>
-<IressStack />
+<IressStack gap={{ xs: "spacing.2", sm: "spacing.4", md: "spacing.6", lg: "spacing.8", xl: "spacing.10" }} />
 </IressStack>
 ```
 
@@ -92,9 +85,9 @@ Use `top`, `middle`, or `bottom` to align items within the available space, and 
 
 ```tsx
 <IressText>
-<h2>{args.verticalAlign}</h2>
+<h2>middle</h2>
 <IressPanel style={{ height: '1000px' }}>
-<IressStack stretch />
+<IressStack verticalAlign="middle" />
 </IressPanel>
 </IressText>
 ```
@@ -110,16 +103,6 @@ directly or use a `data-testid`:
 const stack = screen.getByTestId('my-stack');
 ```
 
-## Props
-
-- **Type:** `IressStackProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Stack/Stack.d.ts`
-
-```typescript
-import type { IressStackProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)

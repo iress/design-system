@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import type { TestId } from '@helpers/testing';
+import type { ComponentMeta } from '@helpers/meta/types';
 
 export const testIds: TestId[] = [
   { suffix: 'slider', description: 'The range input element' },
@@ -9,7 +10,7 @@ export const testIds: TestId[] = [
 
 export default {
   heading: 'Slider',
-  href: '/?path=/docs/components-slider--docs',
+  description: 'Allows users to select a value from a range by dragging a handle.',
   tags: ['form', 'data-entry', 'range'],
   Thumbnail: lazy(() => import('./Thumbnail')),
-};
+} satisfies ComponentMeta;

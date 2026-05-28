@@ -1,15 +1,11 @@
-# Checkbox
-
-Checkboxes are used to let a user select one or more options for a limited number of choices. Also, works as a child of IressCheckboxGroup
-
+# 
 > **Component:** `import { IressCheckbox } from '@iress-oss/ids-components'`
-> **Storybook:** [Checkbox in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressCheckbox } from '@iress-oss/ids-components';
-
 <IressCheckbox>
   A checkbox
 </IressCheckbox>
@@ -158,16 +154,6 @@ are generated automatically:
 | --- | --- | --- |
 | `checkboxMark` | `my-checkbox__checkboxMark` | The visual checkbox indicator |
 
-## Props
-
-- **Type:** `IressCheckboxProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Checkbox/Checkbox.d.ts`
-
-```typescript
-import type { IressCheckboxProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs)

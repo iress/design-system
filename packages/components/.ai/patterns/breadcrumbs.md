@@ -1,15 +1,11 @@
-# Breadcrumbs
-
-Breadcrumbs are a secondary navigation aid that helps users understand their current location within the site hierarchy and provides a simple way to navigate back to higher-level pages.
-
-> **Pattern:** `import { IressBreadcrumbs } from '@iress-oss/ids-components'`
-> **Storybook:** [Breadcrumbs in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs)
+# 
+> **Component:** `import { IressBreadcrumbs } from '@iress-oss/ids-components'`
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressBreadcrumbs } from '@iress-oss/ids-components';
-
 <IressBreadcrumbs />
 ```
 
@@ -131,9 +127,7 @@ The Breadcrumb component supports custom elements for integration with routing l
 #### React Router
 
 ```tsx
-import { Link as RouterLink } from 'react-router-dom';
-
-<IressBreadcrumb
+<IressBreadcrumbs
   items={[
     { label: 'Home', href: '/', element: RouterLink },
     { label: 'Products', href: '/products', element: RouterLink },
@@ -145,9 +139,7 @@ import { Link as RouterLink } from 'react-router-dom';
 #### Next.js
 
 ```tsx
-import Link from 'next/link';
-
-<IressBreadcrumb
+<IressBreadcrumbs
   items={[
     { label: 'Home', href: '/', element: Link },
     { label: 'Products', href: '/products', element: Link },
@@ -158,4 +150,4 @@ import Link from 'next/link';
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs)

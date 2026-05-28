@@ -1,15 +1,11 @@
-# Label
-
-Use the IressLabel component when building bespoke form inputs and IressField is too restrictive.
-
+# 
 > **Component:** `import { IressLabel } from '@iress-oss/ids-components'`
-> **Storybook:** [Label in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressLabel } from '@iress-oss/ids-components';
-
 <IressLabel>
   This is a label
 </IressLabel>
@@ -46,7 +42,9 @@ Sometimes you may wish to have an input with no visible label, but to still wrap
 You can render custom content into the label.
 
 ```tsx
-<IressLabel hiddenLabel={false} />
+<IressLabel>
+  <span>Custom <strong>rich</strong> content</span>
+</IressLabel>
 ```
 
 [View "RichContent" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-label--rich-content)
@@ -92,16 +90,6 @@ are generated automatically:
 | --- | --- | --- |
 | `text` | `my-label__text` | The label text content |
 
-## Props
-
-- **Type:** `IressLabelProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Label/Label.d.ts`
-
-```typescript
-import type { IressLabelProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)

@@ -1,15 +1,11 @@
-# Slider
-
-Sliders provide a visual indication of adjustable content, where the user can select a value from a range usually represented on a horizontal track.
-
+# 
 > **Component:** `import { IressSlider } from '@iress-oss/ids-components'`
-> **Storybook:** [Slider in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressSlider } from '@iress-oss/ids-components';
-
 <IressSlider />
 ```
 
@@ -140,16 +136,6 @@ are generated automatically:
 | `datalist` | `my-slider__datalist` | The tick marks datalist |
 | `option` | `my-slider__option` | An individual tick mark option |
 
-## Props
-
-- **Type:** `IressSliderProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Slider/Slider.d.ts`
-
-```typescript
-import type { IressSliderProps } from '@iress-oss/ids-components';
-```
-
-
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs)

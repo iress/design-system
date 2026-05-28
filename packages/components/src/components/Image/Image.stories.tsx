@@ -4,6 +4,7 @@ import { IressStack } from '@/components/Stack';
 import { IressText } from '@/components/Text';
 import React from 'react';
 import { stylingProps } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressImage>;
 const MAX_WIDTHS = [70, '250px', '50%', undefined] as const;
@@ -14,6 +15,13 @@ export default {
   tags: ['beta: '],
   argsTypes: {
     ...stylingProps,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressImage>;
 

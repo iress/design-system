@@ -13,6 +13,7 @@ import {
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type CustomArgs = Partial<IressAlertProps> & {
   messages: Record<Statuses | 'neutral', string>;
@@ -28,6 +29,13 @@ export default {
     footer: reactNodeArgType,
     heading: reactNodeArgType,
     ...stylingProps,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: componentMeta.description,
+      },
+    },
   },
 } as Meta<typeof IressAlert>;
 
