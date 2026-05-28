@@ -11,7 +11,7 @@ const basePreview = getPreview({
   },
   sandboxConfig: {
     dependencies: {
-      '@iress-oss/ids-components': 'alpha',
+      '@iress-oss/ids-components': 'beta',
       'react-hook-form': 'latest',
     },
   },
