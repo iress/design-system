@@ -89,18 +89,7 @@ export const getPreview = ({
           <IressStorybook {...containerProps} {...docsProps} />
         ),
         page: AutoDocsPage,
-        toc: {
-          title: 'On this page',
-          headingSelector: [
-            '.sbdocs > h2',
-            '.sbdocs > h3',
-            'h2[id]:not(.ids-read-more *, .sb-story *)',
-            'h3[id]:not(.ids-read-more *, .sb-story *)',
-          ].join(', '),
-          unsafeTocbotOptions: {
-            listClass: `toc-list textStyle_typography.body.sm`,
-          },
-        },
+        toc: false,
       },
       IDS_Sandbox: {
         additionalTransformers: {

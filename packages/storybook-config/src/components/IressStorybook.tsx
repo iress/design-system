@@ -13,6 +13,7 @@ import {
   IressStorybookContext,
 } from './IressStorybookContext';
 import { cssVars } from '@iress-oss/ids-tokens';
+import { BREAKPOINT_DETAILS } from '@iress-oss/ids-components';
 
 const IDSStyles = lazy(() => import('./IDSStyles'));
 
@@ -109,10 +110,21 @@ const IressStorybookStyles = () => (
       }
     }
 
+    .sbdocs-title { 
+      font: ${cssVars.typography.heading[1]};
+      margin-bottom: ${cssVars.spacing['1']};
+    }
+
     /* Add border to the code previews, so they look nice on any theme */
     .sbdocs.sbdocs-preview {
       border: 1px solid ${cssVars.colour.neutral['30']};
       background-color: transparent;
+    }
+
+    /* Use the container properties from IDS for the size of the docs, as the default Storybook docs container is too small */
+    .sbdocs.sbdocs-content {
+      max-width: ${BREAKPOINT_DETAILS.xxl.containerMaxWidth};
+      padding-inline: ${cssVars.spacing[4]};
     }
 
     /* Hide the sidebar on certain pages */

@@ -1,3 +1,4 @@
+import { type TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import type { FC, LazyExoticComponent } from 'react';
 
 /**
@@ -12,6 +13,8 @@ export interface ComponentMeta {
   description: string;
   /** Searchable/filterable tags */
   tags: string[];
+  /** Test metadata to help users with testing the component */
+  testMeta?: TestComponentMeta[];
   /** Thumbnail for the component, to be displayed as cards on index pages */
   Thumbnail: LazyExoticComponent<FC> | null;
 }

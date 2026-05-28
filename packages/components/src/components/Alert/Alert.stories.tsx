@@ -36,6 +36,7 @@ export default {
         component: componentMeta.description,
       },
     },
+    testMeta: componentMeta.testMeta,
   },
 } as Meta<typeof IressAlert>;
 

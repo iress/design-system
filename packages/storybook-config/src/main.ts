@@ -97,10 +97,6 @@ export const getMainConfig = ({
       disableTelemetry: true,
     },
 
-    docs: {
-      defaultName: 'API / Examples',
-    },
-
     framework: '@storybook/react-vite',
 
     staticDirs: [resolve(__dirname, '../public')],

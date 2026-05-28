@@ -1,10 +1,29 @@
 import { lazy } from 'react';
-import type { TestId } from '@helpers/testing';
 import type { ComponentMeta } from '@helpers/meta/types';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 
-export const testIds: TestId[] = [
-  { suffix: 'heading', description: 'The alert heading container' },
-  { suffix: 'footer', description: 'The alert footer/actions container' },
+export const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the alert',
+    role: (
+      <>
+        <code>getByRole('status')</code> if the alert has a status of "info" or
+        "neutral", otherwise <code>getByRole('alert')</code>
+      </>
+    ),
+    testId: 'alert',
+  },
+  {
+    part: 'heading',
+    description: 'The alert heading container',
+    testId: 'alert__heading',
+  },
+  {
+    part: 'footer',
+    description: 'The alert footer/actions container',
+    testId: 'alert__footer',
+  },
 ];
 
 export default {
@@ -12,5 +31,6 @@ export default {
   description:
     'Communicates important information inline with page content, such as validation errors, warnings, or status messages.',
   tags: ['feedback', 'notification', 'status'],
+  testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
 } satisfies ComponentMeta;

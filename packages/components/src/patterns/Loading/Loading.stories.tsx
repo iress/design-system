@@ -15,7 +15,6 @@ type Story = StoryObj<typeof IressLoading>;
 export default {
   title: 'Patterns/Loading',
   component: IressLoading,
-  tags: ['beta: '],
   argTypes: {
     ...stylingProps,
   },

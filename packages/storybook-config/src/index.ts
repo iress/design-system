@@ -9,7 +9,7 @@ export * from './components/CurrentBreakpoint';
 export * from './components/DiffViewer';
 export * from './components/HideSidebar';
 export * from './components/Redirect';
-export * from './components/TestIdTable';
+export * from './components/TestTable';
 
 // Stories/MDX helpers
 export * from './helpers/addToStorybookCategory';

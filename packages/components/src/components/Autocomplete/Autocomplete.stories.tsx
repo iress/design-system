@@ -7,6 +7,7 @@ import {
   withTransformedRawSource,
   reactNodeArgType,
   stylingProps,
+  withCustomSource,
 } from '@iress-oss/ids-storybook-config';
 import { AutocompleteUsingState } from './mocks/AutocompleteUsingState';
 import AutocompleteUsingStateSource from './mocks/AutocompleteUsingState.tsx?raw';
@@ -18,6 +19,8 @@ import { IressButton } from '../Button';
 import { IressPanel } from '../Panel';
 import { IressStack } from '../Stack';
 import componentMeta from './meta';
+import AutocompleteSearchTableSource from './mocks/AutocompleteSearchTable.tsx?raw';
+import { AutocompleteSearchTable } from './mocks/AutocompleteSearchTable';
 
 type Story = StoryObj<typeof IressAutocomplete>;
 
@@ -207,5 +210,13 @@ export const ReadOnly: Story = {
   args: {
     ...Uncontrolled.args,
     readOnly: true,
+  },
+};
+
+export const SearchTable: Story = {
+  tags: ['recipe'],
+  render: (args) => <AutocompleteSearchTable {...args} />,
+  parameters: {
+    ...withCustomSource(AutocompleteSearchTableSource),
   },
 };
