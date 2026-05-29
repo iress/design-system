@@ -80,6 +80,18 @@ export interface IressContextualMenuProps extends Omit<
   onAction?: (item: ContextualMenuItem) => void;
 }
 
+/**
+ * Displays a context-sensitive menu of actions triggered by user interaction.
+ *
+ * @example
+ * ```tsx
+ * import { IressContextualMenu } from '@iress-oss/ids-components';
+ *
+ * <IressContextualMenu
+ *   items={[{ key: 'copy', label: 'Copy' }, { key: 'paste', label: 'Paste' }]}
+ * />
+ * ```
+ */
 export const IressContextualMenu = ({
   ariaLabel = 'More options',
   align = 'bottom-end',

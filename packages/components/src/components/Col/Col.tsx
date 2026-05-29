@@ -36,6 +36,16 @@ export interface IressColProps extends IressStyledProps {
 
 const Component = styled('div', col) as FC<IressColProps>;
 
+/**
+ * Defines a column within a grid row layout.
+ *
+ * @example
+ * ```tsx
+ * import { IressCol } from '@iress-oss/ids-components';
+ *
+ * <IressCol span={6}>Column content</IressCol>
+ * ```
+ */
 export const IressCol = ({ className, ...restProps }: IressColProps) => (
   <Component {...restProps} className={cx(className, GlobalCSSClass.Col)} />
 );

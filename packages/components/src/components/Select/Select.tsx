@@ -724,6 +724,16 @@ const Select = <
   );
 };
 
+/**
+ * Renders a dropdown select input for choosing one option from a list.
+ *
+ * @example
+ * ```tsx
+ * import { IressSelect } from '@iress-oss/ids-components';
+ *
+ * <IressSelect placeholder="Choose a country" options={[{ label: 'Australia', value: 'AU' }]} />
+ * ```
+ */
 export const IressSelect = forwardRef(Select) as (<
   TMultiple extends boolean = false,
   TNative extends boolean | Breakpoints = false,

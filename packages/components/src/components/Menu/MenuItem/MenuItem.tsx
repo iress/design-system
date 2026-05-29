@@ -541,6 +541,18 @@ const MenuItem = <
   );
 };
 
+/**
+ * An interactive item within a menu that supports selection, checkboxes, radio marks, icons, and keyboard navigation.
+ *
+ * @example
+ * ```tsx
+ * import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
+ *
+ * <IressMenu>
+ *   <IressMenuItem icon="edit" onClick={handleEdit}>Edit</IressMenuItem>
+ * </IressMenu>
+ * ```
+ */
 export const IressMenuItem = forwardRef(MenuItem) as (<
   C extends ElementType | undefined = undefined,
   THref extends string | undefined = undefined,

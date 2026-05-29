@@ -82,6 +82,16 @@ const InputCurrency = <
   );
 };
 
+/**
+ * Provides a text input formatted for entering monetary values.
+ *
+ * @example
+ * ```tsx
+ * import { IressInputCurrency } from '@iress-oss/ids-components';
+ *
+ * <IressInputCurrency currencyCode="AUD" />
+ * ```
+ */
 export const IressInputCurrency = forwardRef(InputCurrency) as (<
   T extends Exclude<FormControlValue, boolean> = string | number,
 >(

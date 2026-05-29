@@ -127,6 +127,20 @@ export type IressTableProps<
   virtualise?: boolean | TableVirtualiseOptions;
 };
 
+/**
+ * Displays structured data in rows and columns.
+ *
+ * @example
+ * ```tsx
+ * import { IressTable } from '@iress-oss/ids-components';
+ *
+ * <IressTable
+ *   caption="Users"
+ *   columns={[{ accessorKey: 'name', header: 'Name' }]}
+ *   rows={[{ name: 'Alice' }]}
+ * />
+ * ```
+ */
 export const IressTable = <TRow extends object = never, TVal = never>({
   alternate = false,
   caption,

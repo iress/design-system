@@ -212,6 +212,23 @@ export const getMainConfig = ({
 
     return [
       head,
+      `<style>
+        .docblock-source {
+          position: relative;
+        }
+
+        .docblock-source > div:last-child {
+          position: fixed;
+          bottom: 0;
+          right: 0;
+          z-index: 100;
+        }
+          
+        .docblock-source > div:last-child button {
+          padding: 6px 12px !important;
+          font-size: 13px !important;
+        }
+      </style>`,
       `<script>
       // Clear persisted layout from session storage when embedded so that
       // the panel=0 URL param is respected on initial load.

@@ -29,6 +29,15 @@ export interface IressHideProps extends IressStyledProps {
 }
 
 /**
+ * Conditionally hides content based on responsive breakpoints.
+ *
+ * @example
+ * ```tsx
+ * import { IressHide } from '@iress-oss/ids-components';
+ *
+ * <IressHide hiddenOn={{ sm: true, md: false }}>Desktop only content</IressHide>
+ * ```
+ *
  * @deprecated IressHide has been deprecated.
  * - Please use the `srOnly` prop on any component to show or hide content from screen readers.
  * - Please use the `hideFrom` and `hideBelow` props on any component to show or hide content at different breakpoints. For more complex logic, consider using the `useBreakpoint` hook to conditionally render content.

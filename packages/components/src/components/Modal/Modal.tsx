@@ -161,6 +161,16 @@ const MODAL_STATUS_ICONS: Record<
   warning: 'warning',
 };
 
+/**
+ * Displays content in a focused overlay dialog that requires user interaction.
+ *
+ * @example
+ * ```tsx
+ * import { IressModal } from '@iress-oss/ids-components';
+ *
+ * <IressModal heading="Confirm" show>Are you sure?</IressModal>
+ * ```
+ */
 export const IressModal = <TStatus extends ModalStatus = undefined>({
   actions,
   children,

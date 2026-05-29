@@ -49,6 +49,19 @@ export interface IressButtonGroupProps<
   selected?: ControlledValue<T, TMultiple>;
 }
 
+/**
+ * Groups related buttons together with consistent spacing and alignment.
+ *
+ * @example
+ * ```tsx
+ * import { IressButtonGroup, IressButton } from '@iress-oss/ids-components';
+ *
+ * <IressButtonGroup>
+ *   <IressButton>One</IressButton>
+ *   <IressButton>Two</IressButton>
+ * </IressButtonGroup>
+ * ```
+ */
 export const IressButtonGroup = <
   T = FormControlValue,
   TMultiple extends boolean = false,

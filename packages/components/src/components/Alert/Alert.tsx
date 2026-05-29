@@ -100,6 +100,16 @@ const ALERT_ICONS: Record<Statuses | 'neutral', IressIconProps['name']> = {
   neutral: 'info',
 };
 
+/**
+ * Communicates important information inline with page content, such as validation errors, warnings, or status messages.
+ *
+ * @example
+ * ```tsx
+ * import { IressAlert } from '@iress-oss/ids-components';
+ *
+ * <IressAlert status="success">Changes saved successfully.</IressAlert>
+ * ```
+ */
 export const IressAlert = ({
   actions,
   children,

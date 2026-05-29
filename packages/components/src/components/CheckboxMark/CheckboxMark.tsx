@@ -21,6 +21,16 @@ export interface IressCheckboxMarkProps extends IressStyledProps<'svg'> {
   size?: 'sm';
 }
 
+/**
+ * A visual SVG checkbox mark that displays checked or indeterminate states.
+ *
+ * @example
+ * ```tsx
+ * import { IressCheckboxMark } from '@iress-oss/ids-components';
+ *
+ * <IressCheckboxMark checked />
+ * ```
+ */
 export const IressCheckboxMark = ({
   checked,
   className,

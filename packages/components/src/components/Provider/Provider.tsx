@@ -90,6 +90,18 @@ export interface IressProviderProps
   toasterOffset?: string;
 }
 
+/**
+ * The root provider for IDS components, supplying modal, slideout, toast, popover, and icon contexts to the application.
+ *
+ * @example
+ * ```tsx
+ * import { IressProvider } from '@iress-oss/ids-components';
+ *
+ * <IressProvider>
+ *   <App />
+ * </IressProvider>
+ * ```
+ */
 export const IressProvider = ({
   children,
   container,

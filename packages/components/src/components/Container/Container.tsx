@@ -19,6 +19,16 @@ export interface IressContainerProps extends IressStyledProps {
 
 const Component = styled('div', container) as FC<IressContainerProps>;
 
+/**
+ * Provides a max-width wrapper to constrain content within a page layout.
+ *
+ * @example
+ * ```tsx
+ * import { IressContainer } from '@iress-oss/ids-components';
+ *
+ * <IressContainer>Page content</IressContainer>
+ * ```
+ */
 export const IressContainer = ({
   className,
   ...restProps

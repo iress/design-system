@@ -290,6 +290,16 @@ const Checkbox = <
   );
 };
 
+/**
+ * Renders a checkbox input for toggling a boolean value.
+ *
+ * @example
+ * ```tsx
+ * import { IressCheckbox } from '@iress-oss/ids-components';
+ *
+ * <IressCheckbox>Accept terms</IressCheckbox>
+ * ```
+ */
 export const IressCheckbox = forwardRef(Checkbox) as (<
   T = FormControlValue,
   TVariant extends CheckboxVariants = undefined,

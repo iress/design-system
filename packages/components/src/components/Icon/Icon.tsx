@@ -73,6 +73,16 @@ export type IressIconProps<P extends IconType = 'material'> =
     type?: P;
   };
 
+/**
+ * Renders an SVG icon from the design system icon set.
+ *
+ * @example
+ * ```tsx
+ * import { IressIcon } from '@iress-oss/ids-components';
+ *
+ * <IressIcon name="check_circle" />
+ * ```
+ */
 export const IressIcon = <P extends IconType = 'material'>({
   className,
   flip,

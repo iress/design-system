@@ -11,6 +11,16 @@ export interface IressDividerProps extends IressStyledProps<'hr'> {
   vertical?: boolean;
 }
 
+/**
+ * Renders a horizontal or vertical line to visually separate content.
+ *
+ * @example
+ * ```tsx
+ * import { IressDivider } from '@iress-oss/ids-components';
+ *
+ * <IressDivider />
+ * ```
+ */
 export const IressDivider = ({
   className,
   stretch,

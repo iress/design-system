@@ -63,6 +63,18 @@ export interface IressTooltipProps extends IressStyledProps {
   tooltipText: string | string[];
 }
 
+/**
+ * Shows additional contextual information on hover or focus of a trigger element.
+ *
+ * @example
+ * ```tsx
+ * import { IressTooltip, IressButton } from '@iress-oss/ids-components';
+ *
+ * <IressTooltip tooltipText="More info">
+ *   <IressButton>Hover me</IressButton>
+ * </IressTooltip>
+ * ```
+ */
 export const IressTooltip = ({
   children,
   className,

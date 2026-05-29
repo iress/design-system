@@ -122,6 +122,18 @@ const TableBodyChildren = ({
 
 TableBodyChildren.displayName = 'TableBodyChildren';
 
+/**
+ * A collapsible row group within a table, toggled by a caption header.
+ *
+ * @example
+ * ```tsx
+ * import { IressTable, IressTableBody } from '@iress-oss/ids-components';
+ *
+ * <IressTable caption="Data">
+ *   <IressTableBody caption="Group A" rows={[{ name: 'Alice' }]} columns={columns} />
+ * </IressTable>
+ * ```
+ */
 export const IressTableBody = <TRow extends object = never, TVal = never>({
   caption,
   children,

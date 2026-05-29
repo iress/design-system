@@ -354,6 +354,21 @@ const HookForm = <T extends FieldValues, TContext = object>(
 
 HookForm.displayName = 'IressHookForm';
 
+/**
+ * A form component integrated with react-hook-form, providing validation, error summaries, and programmatic control via ref.
+ *
+ * @example
+ * ```tsx
+ * import { IressHookForm } from '@iress-oss/ids-components';
+ * import { useForm } from 'react-hook-form';
+ *
+ * const form = useForm({ defaultValues: { name: '' } });
+ *
+ * <IressHookForm form={form} onSubmit={(data) => {}}>
+ *   <IressFormField name="email" label="Email" />
+ * </IressHookForm>
+ * ```
+ */
 export const IressHookForm = forwardRef(HookForm) as (<
   T extends FieldValues,
   TContext = object,

@@ -48,6 +48,18 @@ const isHeading = <E extends TextElements = 'div'>(
   );
 };
 
+/**
+ * A non-interactive text item within a menu, used for descriptions or labels.
+ *
+ * @example
+ * ```tsx
+ * import { IressMenu, IressMenuText } from '@iress-oss/ids-components';
+ *
+ * <IressMenu>
+ *   <IressMenuText>No items available</IressMenuText>
+ * </IressMenu>
+ * ```
+ */
 export const IressMenuText = <E extends TextElements = 'div'>({
   append,
   children,
@@ -98,6 +110,19 @@ export const IressMenuText = <E extends TextElements = 'div'>({
 
 IressMenuText.displayName = 'IressMenuText';
 
+/**
+ * A heading element within a menu, used to label groups of menu items.
+ *
+ * @example
+ * ```tsx
+ * import { IressMenu, IressMenuHeading, IressMenuItem } from '@iress-oss/ids-components';
+ *
+ * <IressMenu>
+ *   <IressMenuHeading>Actions</IressMenuHeading>
+ *   <IressMenuItem>Edit</IressMenuItem>
+ * </IressMenu>
+ * ```
+ */
 export const IressMenuHeading = <E extends TextElements = 'h2'>({
   className,
   element = 'h2' as E,

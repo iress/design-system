@@ -72,6 +72,16 @@ export type IressCardProps<E extends ElementType = 'div'> = ElementProps<E> &
 export type IressButtonCardProps = IressCardProps<'button'>;
 export type IressLinkCardProps = IressCardProps<'a'>;
 
+/**
+ * Groups related content and actions into a contained, visually distinct surface.
+ *
+ * @example
+ * ```tsx
+ * import { IressCard } from '@iress-oss/ids-components';
+ *
+ * <IressCard heading="Title">Card content goes here.</IressCard>
+ * ```
+ */
 export const IressCard = <E extends ElementType = 'div'>({
   element,
   className,
@@ -190,6 +200,18 @@ export const IressCard = <E extends ElementType = 'div'>({
 
 IressCard.displayName = 'IressCard';
 
+/**
+ * A card rendered as a button element, making the entire card clickable.
+ *
+ * @example
+ * ```tsx
+ * import { IressButtonCard } from '@iress-oss/ids-components';
+ *
+ * <IressButtonCard heading="Settings" onClick={handleClick}>
+ *   Card content
+ * </IressButtonCard>
+ * ```
+ */
 export const IressButtonCard = (props: IressButtonCardProps) => {
   const { type = 'button', ...restProps } = props;
   return <IressCard element="button" type={type} {...restProps} />;
@@ -197,6 +219,18 @@ export const IressButtonCard = (props: IressButtonCardProps) => {
 
 IressButtonCard.displayName = 'IressButtonCard';
 
+/**
+ * A card rendered as an anchor element, making the entire card a navigable link.
+ *
+ * @example
+ * ```tsx
+ * import { IressLinkCard } from '@iress-oss/ids-components';
+ *
+ * <IressLinkCard heading="Documentation" href="/docs">
+ *   Card content
+ * </IressLinkCard>
+ * ```
+ */
 export const IressLinkCard = (props: IressLinkCardProps) => {
   return <IressCard element="a" {...props} />;
 };

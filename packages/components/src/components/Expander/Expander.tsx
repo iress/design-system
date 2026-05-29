@@ -45,6 +45,16 @@ export interface IressExpanderProps extends Omit<
   open?: boolean;
 }
 
+/**
+ * Reveals or hides a section of content with an expand/collapse toggle.
+ *
+ * @example
+ * ```tsx
+ * import { IressExpander } from '@iress-oss/ids-components';
+ *
+ * <IressExpander activator="More details">Hidden content here.</IressExpander>
+ * ```
+ */
 export const IressExpander = ({
   activator,
   activatorStyle = {},

@@ -633,7 +633,7 @@ for the pattern — a JSDoc comment with a brief description above the component
 
 ### Task 11.5.1: Define JSDoc standards
 
-- [ ] **Step 1:** Define the required JSDoc format:
+- [x] **Step 1:** Define the required JSDoc format:
   ```ts
   /**
    * <description from meta — must match meta.description>
@@ -647,14 +647,15 @@ for the pattern — a JSDoc comment with a brief description above the component
    */
   export const IressAlert = ...
   ```
-- [ ] **Step 2:** Description must match the component's `meta/index.tsx` `description` field
-- [ ] **Step 3:** Example should be a minimal, self-contained usage (import + JSX)
+- [x] **Step 2:** Description must match the component's `meta/index.tsx` `description` field
+- [x] **Step 3:** Example should be a minimal, self-contained usage (import + JSX)
 
 ### Task 11.5.2: Add JSDoc to all component exports
 
-- [ ] **Step 1:** Add JSDoc with description + `@example` to all 46 component exports
-- [ ] **Step 2:** Add JSDoc with description + `@example` to all 8 pattern exports
-- [ ] **Step 3:** Verify autodocs renders the description and example correctly in Storybook
+- [x] **Step 1:** Add JSDoc with description + `@example` to all 46 component exports
+- [x] **Step 2:** Add JSDoc with description + `@example` to all 8 pattern exports
+- [x] **Step 3:** Add JSDoc with description + `@example` to all 31 subcomponent exports (providers, sub-parts)
+- [x] **Step 4:** Verify autodocs renders the description and example correctly in Storybook
 
 ### Task 11.5.3: Lint rule to enforce JSDoc presence
 

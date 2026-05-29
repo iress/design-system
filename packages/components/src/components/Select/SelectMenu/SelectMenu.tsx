@@ -87,6 +87,19 @@ export interface IressSelectMenuItemProps
   hiddenOnMobile?: boolean;
 }
 
+/**
+ * Renders a list of selectable menu items within a select dropdown, with support for grouping, hiding selected items, and no-results messaging.
+ *
+ * @example
+ * ```tsx
+ * import { IressSelectMenu } from '@iress-oss/ids-components';
+ *
+ * <IressSelectMenu
+ *   items={[{ label: 'Option 1', value: '1' }]}
+ *   onChange={(selected) => {}}
+ * />
+ * ```
+ */
 export const IressSelectMenu = <TMultiple extends boolean = false>({
   heading,
   hideSelectedItems,

@@ -48,6 +48,16 @@ export type TableCellFormats =
   | 'currency'
   | 'percent';
 
+/**
+ * Formats a table cell value using built-in formatters (date, currency, percent, etc.) or a custom function.
+ *
+ * @example
+ * ```tsx
+ * import { IressTableFormattedValue } from '@iress-oss/ids-components';
+ *
+ * <IressTableFormattedValue value={1234.5} format="currency" />
+ * ```
+ */
 export const IressTableFormattedValue = <TRow extends object, TVal = unknown>({
   currencyFormatOptions,
   format,

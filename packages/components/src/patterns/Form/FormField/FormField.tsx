@@ -117,6 +117,13 @@ export interface FormFieldRenderState<T extends FieldValues> {
 /**
  * A `IressField` wrapper that can show error message and label automatically inside an `IressForm`.
  * It uses the `useController` hook from `react-hook-form` for form management.
+ *
+ * @example
+ * ```tsx
+ * import { IressFormField, IressInput } from '@iress-oss/ids-components';
+ *
+ * <IressFormField name="email" label="Email" render={(props) => <IressInput {...props} />} />
+ * ```
  */
 export const IressFormField = <T extends FieldValues>({
   control,

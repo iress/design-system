@@ -4,6 +4,16 @@ import { IressMenuDivider, IressMenuItem } from '@/components/Menu';
 import { cx } from '@/styled-system/css';
 import { IressText } from '@/components/Text';
 
+/**
+ * An individual item within a select menu, supporting formatted labels, meta text, and dividers.
+ *
+ * @example
+ * ```tsx
+ * import { IressSelectMenuItem } from '@iress-oss/ids-components';
+ *
+ * <IressSelectMenuItem label="Option 1" value="1" />
+ * ```
+ */
 export const IressSelectMenuItem = ({
   className,
   divider,

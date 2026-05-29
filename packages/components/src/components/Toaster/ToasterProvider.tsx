@@ -23,6 +23,16 @@ export interface IressToasterProviderProps
   id?: string;
 }
 
+/**
+ * Manages and displays temporary toast notifications to the user.
+ *
+ * @example
+ * ```tsx
+ * import { IressToasterProvider } from '@iress-oss/ids-components';
+ *
+ * <IressToasterProvider position="top-end">{children}</IressToasterProvider>
+ * ```
+ */
 export const IressToasterProvider = ({
   children,
   id,

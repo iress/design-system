@@ -12,6 +12,18 @@ export interface IressTooltipProviderProps extends PropsWithChildren {
   container?: FloatingUIContainer;
 }
 
+/**
+ * Provides a shared container context for nested tooltips to render into.
+ *
+ * @example
+ * ```tsx
+ * import { IressTooltipProvider } from '@iress-oss/ids-components';
+ *
+ * <IressTooltipProvider container={document.getElementById('tooltip-root')}>
+ *   {children}
+ * </IressTooltipProvider>
+ * ```
+ */
 export const IressTooltipProvider = ({
   children,
   container,

@@ -421,6 +421,19 @@ const DropdownMenu = <TMultiple extends boolean = false>(
   );
 };
 
+/**
+ * Presents a list of actions or options revealed by a trigger button.
+ *
+ * @example
+ * ```tsx
+ * import { IressDropdownMenu } from '@iress-oss/ids-components';
+ *
+ * <IressDropdownMenu
+ *   label="Actions"
+ *   options={[{ label: 'Edit', value: 'edit' }, { label: 'Delete', value: 'delete' }]}
+ * />
+ * ```
+ */
 export const IressDropdownMenu = forwardRef(DropdownMenu) as (<
   TMultiple extends boolean = false,
 >(

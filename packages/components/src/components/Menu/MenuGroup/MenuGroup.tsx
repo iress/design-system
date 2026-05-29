@@ -84,6 +84,16 @@ export type IressMenuGroupProps<
  *
  * When `variant="subdraw"`, the group label becomes a clickable trigger that opens
  * a fly-over submenu containing the group's children.
+ *
+ * @example
+ * ```tsx
+ * import { IressMenuGroup, IressMenuItem } from '@iress-oss/ids-components';
+ *
+ * <IressMenuGroup label="Actions">
+ *   <IressMenuItem>Edit</IressMenuItem>
+ *   <IressMenuItem>Delete</IressMenuItem>
+ * </IressMenuGroup>
+ * ```
  */
 export const IressMenuGroup = <
   E extends TextElements = 'div',

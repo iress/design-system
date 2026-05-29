@@ -68,6 +68,22 @@ export interface IressFormFieldsetProps<
 /**
  * A `IressFieldGroup` wrapper that can show error message and legend automatically inside an `IressForm`.
  * It uses the `useController` hook from `react-hook-form` for form management.
+ *
+ * @example
+ * ```tsx
+ * import { IressFormFieldset, IressCheckboxGroup, IressCheckbox } from '@iress-oss/ids-components';
+ *
+ * <IressFormFieldset
+ *   name="preferences"
+ *   label="Preferences"
+ *   render={(props) => (
+ *     <IressCheckboxGroup {...props}>
+ *       <IressCheckbox value="email">Email</IressCheckbox>
+ *       <IressCheckbox value="sms">SMS</IressCheckbox>
+ *     </IressCheckboxGroup>
+ *   )}
+ * />
+ * ```
  */
 export const IressFormFieldset = <TFieldValues extends FieldValues>({
   control,

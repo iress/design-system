@@ -209,6 +209,16 @@ const Radio = <
   );
 };
 
+/**
+ * Renders a single radio button for use within a group of mutually exclusive options.
+ *
+ * @example
+ * ```tsx
+ * import { IressRadio } from '@iress-oss/ids-components';
+ *
+ * <IressRadio value="a">Option A</IressRadio>
+ * ```
+ */
 export const IressRadio = forwardRef(Radio) as (<
   T = FormControlValue,
   TVariant extends CheckboxVariants = undefined,

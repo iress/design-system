@@ -34,6 +34,16 @@ export interface IressSkeletonProps<
   width?: string;
 }
 
+/**
+ * Renders placeholder shapes to indicate content is loading.
+ *
+ * @example
+ * ```tsx
+ * import { IressSkeleton } from '@iress-oss/ids-components';
+ *
+ * <IressSkeleton mode="text" textStyle="typography.body.md" />
+ * ```
+ */
 export const IressSkeleton = <TMode extends SkeletonMode = 'text'>({
   className,
   height,

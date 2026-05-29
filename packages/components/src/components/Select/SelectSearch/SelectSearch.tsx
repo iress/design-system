@@ -13,6 +13,18 @@ export type IressSelectSearchProps = Omit<
   'displayMode' | 'show' | 'width'
 >;
 
+/**
+ * An inline popover container for search functionality within a select dropdown.
+ *
+ * @example
+ * ```tsx
+ * import { IressSelectSearch } from '@iress-oss/ids-components';
+ *
+ * <IressSelectSearch>
+ *   <IressSelectSearchInput />
+ * </IressSelectSearch>
+ * ```
+ */
 export const IressSelectSearch = ({
   className,
   contentClassName,

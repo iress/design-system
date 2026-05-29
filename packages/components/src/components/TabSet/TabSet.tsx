@@ -162,6 +162,19 @@ const ActiveIndicator = (props: IressUnstyledProps) => {
   return <div {...props} ref={ref} style={style} />;
 };
 
+/**
+ * Organises content into tabbed panels, showing one panel at a time.
+ *
+ * @example
+ * ```tsx
+ * import { IressTabSet, IressTab } from '@iress-oss/ids-components';
+ *
+ * <IressTabSet>
+ *   <IressTab label="Tab 1">Content 1</IressTab>
+ *   <IressTab label="Tab 2">Content 2</IressTab>
+ * </IressTabSet>
+ * ```
+ */
 export const IressTabSet = ({
   append,
   children,

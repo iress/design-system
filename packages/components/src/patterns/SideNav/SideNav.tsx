@@ -214,6 +214,19 @@ export type IressSideNavProps =
 // Component
 // ---------------------------------------------------------------------------
 
+/**
+ * Provides a vertical navigation menu typically used in application sidebars.
+ *
+ * @example
+ * ```tsx
+ * import { IressSideNav } from '@iress-oss/ids-components';
+ *
+ * <IressSideNav
+ *   items={[{ key: 'home', label: 'Home', icon: 'home' }]}
+ *   activeItemKey="home"
+ * />
+ * ```
+ */
 export const IressSideNav = ({
   'aria-label': ariaLabel = 'Side navigation',
   activeItemKey,

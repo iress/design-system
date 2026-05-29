@@ -32,6 +32,16 @@ export interface IressSelectSearchInputProps extends Omit<
   prepend?: React.ReactNode;
 }
 
+/**
+ * A search input field used within a select dropdown, with a default search icon and placeholder.
+ *
+ * @example
+ * ```tsx
+ * import { IressSelectSearchInput } from '@iress-oss/ids-components';
+ *
+ * <IressSelectSearchInput placeholder="Search items" />
+ * ```
+ */
 export const IressSelectSearchInput = forwardRef(
   (
     {

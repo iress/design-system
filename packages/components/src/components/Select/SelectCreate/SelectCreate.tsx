@@ -54,6 +54,16 @@ export interface IressSelectCreateProps
   prepend?: ReactNode;
 }
 
+/**
+ * A menu with a create button, used within a select to allow users to add new options.
+ *
+ * @example
+ * ```tsx
+ * import { IressSelectCreate } from '@iress-oss/ids-components';
+ *
+ * <IressSelectCreate heading="Add item" label="New option" onCreate={() => {}} />
+ * ```
+ */
 export const IressSelectCreate = ({
   fluid = true,
   heading,

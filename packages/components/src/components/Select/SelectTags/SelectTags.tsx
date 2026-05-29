@@ -199,6 +199,20 @@ const Tags = ({
   );
 };
 
+/**
+ * Displays selected items as deletable tags within a select, collapsing to a summary when the limit is exceeded.
+ *
+ * @example
+ * ```tsx
+ * import { IressSelectTags } from '@iress-oss/ids-components';
+ *
+ * <IressSelectTags
+ *   selected={[{ label: 'Item 1', value: '1' }]}
+ *   onDelete={(item) => {}}
+ *   placeholder="Select items"
+ * />
+ * ```
+ */
 export const IressSelectTags = ({
   append = '',
   className,

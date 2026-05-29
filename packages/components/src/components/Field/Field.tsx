@@ -80,6 +80,18 @@ export type IressFieldProps<
     supplementary?: ReactNode;
   };
 
+/**
+ * Wraps a form control with its label, description, and validation message.
+ *
+ * @example
+ * ```tsx
+ * import { IressField, IressInput } from '@iress-oss/ids-components';
+ *
+ * <IressField label="Email">
+ *   <IressInput type="email" />
+ * </IressField>
+ * ```
+ */
 export const IressField = ({
   children,
   className,

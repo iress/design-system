@@ -378,6 +378,16 @@ const Input = <
   );
 };
 
+/**
+ * Renders a single-line text input for capturing user data.
+ *
+ * @example
+ * ```tsx
+ * import { IressInput } from '@iress-oss/ids-components';
+ *
+ * <IressInput placeholder="Enter your name" />
+ * ```
+ */
 export const IressInput = forwardRef(Input) as (<
   T extends FormControlValue = string | number,
   TRows extends number | undefined = undefined,

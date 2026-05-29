@@ -105,6 +105,16 @@ export interface AutocompletePopoverProps extends Pick<
   prepend?: ReactNode;
 }
 
+/**
+ * Provides a text input with suggestions that filter as the user types.
+ *
+ * @example
+ * ```tsx
+ * import { IressAutocomplete } from '@iress-oss/ids-components';
+ *
+ * <IressAutocomplete placeholder="Search" options={[{ label: 'Option 1', value: '1' }]} />
+ * ```
+ */
 export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
   (
     {

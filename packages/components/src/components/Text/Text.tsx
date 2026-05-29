@@ -34,6 +34,16 @@ export type IressTextProps<E extends TextElements = 'div'> =
     element?: E;
   };
 
+/**
+ * Renders styled text with consistent typography from the design system.
+ *
+ * @example
+ * ```tsx
+ * import { IressText } from '@iress-oss/ids-components';
+ *
+ * <IressText element="h2" textStyle="typography.heading.2">Hello world</IressText>
+ * ```
+ */
 export const IressText = <E extends TextElements = 'div'>({
   className,
   ...restProps
