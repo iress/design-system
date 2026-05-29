@@ -29,34 +29,19 @@ import { IressSpinner } from '@iress-oss/ids-components';
 
 When using the spinner on its own, you can define the `screenreaderText` prop to provide context to screen readers.
 
-```tsx
-<IressSpinner screenreaderText="Making magic happen..." />
-```
-
-[View "Standalone" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-spinner--standalone)
+<StoryEmbed id="components-spinner--standalone"/>
 
 ### Chatty variant
 
 The chatty variant displays an animated "typing" indicator with three dots. This is commonly used in chat interfaces to show that another user or system is currently typing a message.
 
-```tsx
-<IressSpinner variant="chatty" screenreaderText="User is typing..." />
-```
-
-[View "Chatty" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-spinner--chatty)
+<StoryEmbed id="components-spinner--chatty"/>
 
 ### Message
 
 You can display a message alongside the spinner. In this case, you do not need to define the `screenreaderText` prop, as you have a visible message to the user telling them what is happening.
 
-```tsx
-<IressInline gap="sm" verticalAlign="middle">
-<IressSpinner color="colour.neutral.70" />
-<IressText color="colour.neutral.70">Making magic happen...</IressText>
-</IressInline>
-```
-
-[View "Message" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-spinner--message)
+<StoryEmbed id="components-spinner--message"/>
 
 ## Testing
 

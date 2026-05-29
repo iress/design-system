@@ -45,33 +45,13 @@ Tags are **interactive** - they can be clicked and deleted by users.
 
 The `mode` prop controls the colour scheme of the tag. Use data palette colours (`10`-`90`) for non-semantic colour needs.
 
-```tsx
-<IressInline gap="sm">
-{BADGE_MODES.map((mode) => (
-<IressTag key={mode} mode={mode}>
-{mode}
-</IressTag>
-))}
-</IressInline>
-```
-
-[View "Mode" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--mode)
+<StoryEmbed id="components-tag--mode"/>
 
 ### Status mode
 
 Use semantic status values (`danger`, `info`, `success`, `warning`) when tags need to communicate a system status.
 
-```tsx
-<IressInline gap="sm">
-{STATUSES.map((status) => (
-<IressTag key={status} mode={status}>
-{status}
-</IressTag>
-))}
-</IressInline>
-```
-
-[View "Status" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--status)
+<StoryEmbed id="components-tag--status"/>
 
 ### Bordered tags
 
@@ -80,25 +60,7 @@ colour, without altering its background. This enhances visibility and makes tags
 look more interactive — useful for dropdown filter tags or any context where
 tags need to stand out.
 
-```tsx
-<IressInline gap="sm">
-<IressTag bordered>
-No mode
-</IressTag>
-{BADGE_MODES.map((mode) => (
-<IressTag key={mode} mode={mode} bordered>
-{mode}
-</IressTag>
-))}
-{STATUSES.map((status) => (
-<IressTag key={status} mode={status} bordered>
-{status}
-</IressTag>
-))}
-</IressInline>
-```
-
-[View "Bordered" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--bordered)
+<StoryEmbed id="components-tag--bordered"/>
 
 ### Clickable tags
 
@@ -111,24 +73,14 @@ also supported and will automatically render the tag as a `<button>`.
 
 Use `element="a"` to render the tag as a link.
 
-```tsx
-<IressTag bordered>
-  Tag
-</IressTag>
-```
-
-[View "ClickableTag" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--clickable-tag)
+<StoryEmbed id="components-tag--clickable-tag"/>
 
 ### Compact tags
 
 Set `compact` to render a smaller tag. This is useful in dense layouts, such as
 inside inputs where tags are displayed inline.
 
-```tsx
-<IressTag compact />
-```
-
-[View "Compact" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--compact)
+<StoryEmbed id="components-tag--compact"/>
 
 ### Deleting tags
 
@@ -136,17 +88,13 @@ The delete button will not automatically remove the tag from the screen. Instead
 
 The text a screen reader will announce defaults to "Delete" but can be changed using the `deleteButtonText` prop.
 
-```tsx
-<TagDeletion />
-```
-
-[View "DeletingTags" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--deleting-tags)
+<StoryEmbed id="components-tag--deleting-tags"/>
 
 ### Custom button
 
 You can completely override the delete button by passing a custom component to the `deleteButton` prop.
 
-[View "CustomButton" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--custom-button)
+<StoryEmbed id="components-tag--custom-button"/>
 
 ## IressTagInput
 
@@ -154,11 +102,7 @@ You can completely override the delete button by passing a custom component to t
 
 If you need to manage tags that are selected from a existing list, use `IressSelect` with the `multiple` prop.
 
-```tsx
-<IressTagInput placeholder="Type and hit enter to add a tag" tagLimit={999} />
-```
-
-[View "TagInput" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag-input--tag-input)
+<StoryEmbed id="components-tag-input--tag-input"/>
 
 ## Testing
 

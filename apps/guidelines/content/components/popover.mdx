@@ -18,10 +18,10 @@ import { IressPopover } from '@iress-oss/ids-components';
 ## Quick Start
 
 ```tsx
-import { IressPopover } from '@iress-oss/ids-components';
+import { IressPopover, IressButton } from '@iress-oss/ids-components';
 
-<IressPopover>
-  basic
+<IressPopover activator={<IressButton>Open</IressButton>}>
+  Popover content
 </IressPopover>
 ```
 
@@ -33,23 +33,13 @@ For the popover to render, the `activator` property is required. It is the eleme
 
 Anything added as the children of the `IressPopover` component will be displayed in the popover panel.
 
-```tsx
-<IressPopover>
-  basic
-</IressPopover>
-```
-
-[View "Activator" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--activator)
+<StoryEmbed id="components-popover--activator"/>
 
 ### The `show` property
 
 You can use state to control the popover by setting the `show` property to `true` or `false`. To sync your state with the popover, you can use the `onActivated` and `onDeactivated` prop.
 
-```tsx
-<PopoverUsingState />
-```
-
-[View "ShowWithState" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--show-with-state)
+<StoryEmbed id="components-popover--show-with-state"/>
 
 ## Behaviour
 
@@ -67,89 +57,13 @@ The popover panel can be aligned in one of 12 positions relative to the activato
 
 The popover panel's position will change dynamically based on the amount of space available in it's container window, so that it doesn't overflow.
 
-```tsx
-<div style={{ padding: '80px 150px' }}>
-<IressStack gap="md">
-<IressInline horizontalAlign="center" gap="sm">
-<IressPopover activator={
-<IressTooltip
-align="bottom-start"
-tooltipText="Tooltips and popovers can go together if needed!"
->
-<IressButton>top-start</IressButton>
-</IressTooltip>
-}
-align="top-start"
-/>
-<IressPopover activator={<IressButton>top</IressButton>}
-align="top"
-/>
-<IressPopover activator={<IressButton>top-end</IressButton>}
-align="top-end"
-/>
-</IressInline>
-<IressInline horizontalAlign="between">
-<IressStack gap="sm">
-<IressInline horizontalAlign="left">
-<IressPopover activator={<IressButton>left-start</IressButton>}
-align="left-start"
-/>
-</IressInline>
-<IressInline horizontalAlign="left">
-<IressPopover activator={<IressButton>left</IressButton>}
-align="left"
-/>
-</IressInline>
-<IressInline horizontalAlign="left">
-<IressPopover activator={<IressButton>left-end</IressButton>}
-align="left-end"
-/>
-</IressInline>
-</IressStack>
-<IressStack gap="sm">
-<IressInline horizontalAlign="right">
-<IressPopover activator={<IressButton>right-start</IressButton>}
-align="right-start"
-/>
-</IressInline>
-<IressInline horizontalAlign="right">
-<IressPopover activator={<IressButton>right</IressButton>}
-align="right"
-/>
-</IressInline>
-<IressInline horizontalAlign="right">
-<IressPopover activator={<IressButton>right-end</IressButton>}
-align="right-end"
-/>
-</IressInline>
-</IressStack>
-</IressInline>
-<IressInline horizontalAlign="center" gap="sm">
-<IressPopover activator={<IressButton>bottom-start</IressButton>}
-align="bottom-start"
-/>
-<IressPopover activator={<IressButton>bottom</IressButton>}
-align="bottom"
-/>
-<IressPopover activator={<IressButton>bottom-end</IressButton>}
-align="bottom-end"
-/>
-</IressInline>
-</IressStack>
-</div>
-```
-
-[View "Align" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--align)
+<StoryEmbed id="components-popover--align"/>
 
 ### Width
 
 Occasionally, you may have more information to display than the width set by the theme can comfortably show.
 
-```tsx
-<IressPopover contentStyle={{ style: { maxWidth: '30rem' } }} />
-```
-
-[View "Width" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--width)
+<StoryEmbed id="components-popover--width"/>
 
 ### Overflow
 
@@ -157,17 +71,7 @@ Popovers can contain a wide variety of different content, including components t
 
 If you need to fix the height of a popover, you can set a maximum height using the `maxHeight` and `overflowY` css on your popover's `contentStyle` prop.
 
-```tsx
-<IressInline gap="md">
-<IressPopover activator={<IressButton>Normal popover</IressButton>}
-/>
-<IressPopover activator={<IressButton>Fixed height popover</IressButton>}
-contentStyle={{ scrollable: 'y', style: { maxHeight: '200px' } }}
-/>
-</IressInline>
-```
-
-[View "Overflow" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--overflow)
+<StoryEmbed id="components-popover--overflow"/>
 
 ### Container
 
@@ -177,11 +81,7 @@ By default, the popover will be rendered where its parent is rendered. If you ne
 
 This will be the case when you are rendering into its parent container, which is not yet rendered when the popover is mounted. The example below shows how to use state instead of a reference to change where the popover is rendered.
 
-```tsx
-<PopoverParentContainer />
-```
-
-[View "ParentContainer" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--parent-container)
+<StoryEmbed id="components-popover--parent-container"/>
 
 ### Using the `IressPopoverProvider`
 
@@ -200,11 +100,7 @@ setting their own `container` prop.
 > `popoverContainer="container"` to reuse the same container that
 > modals, slideouts and toasts render into.
 
-```tsx
-<AppWithPopoverProvider />
-```
-
-[View "Provider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-provider--provider)
+<StoryEmbed id="components-provider--provider"/>
 
 ## `IressInputPopover`
 
@@ -221,13 +117,7 @@ Input popovers work slightly different to normal popovers, where the focus insid
 - When the escape key is pressed while it is open, it will close
 - When the input loses focus, it will close
 
-```tsx
-<IressInputPopover>
-  basic
-</IressInputPopover>
-```
-
-[View "Activator" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input-popover--activator)
+<StoryEmbed id="components-input-popover--activator"/>
 
 ## Testing
 

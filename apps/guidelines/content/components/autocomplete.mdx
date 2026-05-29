@@ -33,21 +33,13 @@ There is no validation done between the suggestions and the input value. They ar
 
 The `defaultValue` prop can be used to set the initial value of the input. The value will be managed by the component.
 
-```tsx
-<IressAutocomplete defaultValue="Option 1" />
-```
-
-[View "Uncontrolled" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--uncontrolled)
+<StoryEmbed id="components-autocomplete--uncontrolled"/>
 
 ### Controlled
 
 The `value` prop can be used to completely control the state of the component. Use the `onChange` and `onClear` props to sync your state with the component.
 
-```tsx
-<AutocompleteUsingState />
-```
-
-[View "Controlled" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--controlled)
+<StoryEmbed id="components-autocomplete--controlled"/>
 
 ### Providing suggestions
 
@@ -57,17 +49,13 @@ To use the suggestion functionality, you can provide an array of `LabelValueMeta
 
 **Note:** If `value` is provided on a suggestion item, it will be used (casted to a string) instead of the `label` key. This is useful when you want to display a different value to the user than what is used for filtering.
 
-[View "Options" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--options)
+<StoryEmbed id="components-autocomplete--options"/>
 
 #### Asynchronous `options`
 
 If you would like to render suggestions from the server, you can pass a function to the `options` prop. It accepts a string parameter and returns a promise that resolves to an array of `LabelValueMeta[]` objects.
 
-```tsx
-<AutocompleteUsingAsync />
-```
-
-[View "AsyncOptions" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--async-options)
+<StoryEmbed id="components-autocomplete--async-options"/>
 
 #### Minimum search length for async options
 
@@ -75,17 +63,13 @@ When using asynchronous options, you can set a minimum number of characters requ
 
 By default, async searches are triggered after 1 character. Setting a higher value (e.g., 3) means no search request will be made and no loading spinner will appear until the user types at least that many characters.
 
-```tsx
-<AutocompleteUsingAsync />
-```
-
-[View "AsyncOptionsMinSearchLength" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--async-options-min-search-length)
+<StoryEmbed id="components-autocomplete--async-options-min-search-length"/>
 
 #### `initialOptions`
 
 If you want to provide initial options to the user, you can use the `initialOptions` prop. This is useful when you want to provide a list of options to the user before they start typing (eg. recommended search terms).
 
-[View "InitialOptions" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--initial-options)
+<StoryEmbed id="components-autocomplete--initial-options"/>
 
 ## Behaviour
 
@@ -116,11 +100,7 @@ There is a key difference:
 
 The `autoSelect` prop will automatically select the highlighted option when the user blurs the autocomplete. This is set to true by default, but can be switched off.
 
-```tsx
-<IressAutocomplete autoSelect={false} placeholder="Should no longer auto-select when an item is highlighted" />
-```
-
-[View "RemoveAutoSelect" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--remove-auto-select)
+<StoryEmbed id="components-autocomplete--remove-auto-select"/>
 
 ### Input props
 
@@ -128,21 +108,13 @@ Autocomplete extends `IressInput`, hence it has the same properties as `IressInp
 
 It does have some defaults to help with user experience. `append` automatically has a search icon, and `clearable` is set to true by default.
 
-```tsx
-<IressAutocomplete width={12} />
-```
-
-[View "InputProps" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--input-props)
+<StoryEmbed id="components-autocomplete--input-props"/>
 
 ### No results
 
 If you would like to show a message when there are no results, you can use the `noResultsText` prop. It accepts any React node.
 
-```tsx
-<IressAutocomplete placeholder="Type "no" to see the no results text" />
-```
-
-[View "NoResultsText" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--no-results-text)
+<StoryEmbed id="components-autocomplete--no-results-text"/>
 
 ### Popover props
 
@@ -150,7 +122,7 @@ Under the hood, autocomplete uses `IressInputPopover` to display the suggestions
 
 There are two additional props that autocomplete accepts to customise the popover: `append` and `prepend`. You can place additional content above or below the results using these props.
 
-[View "PopoverProps" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--popover-props)
+<StoryEmbed id="components-autocomplete--popover-props"/>
 
 ### Debounce threshold
 
@@ -158,11 +130,7 @@ The `debounceThreshold` prop can be used to set the time in milliseconds to wait
 
 By default there is a debounce, but it can be removed by setting it to `0`.
 
-```tsx
-<IressAutocomplete debounceThreshold={0} placeholder="Instant search!" />
-```
-
-[View "DebounceThreshold" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--debounce-threshold)
+<StoryEmbed id="components-autocomplete--debounce-threshold"/>
 
 ### Result limits
 
@@ -172,29 +140,11 @@ On smaller screens (< 768px), the number of options is further reduced by using 
 
 `limitMobile` works by filtering the search results that have been filtered by `limitDesktop`, so must be a smaller value. For example:
 
-```tsx
-// 12 results on large screens, 6 on small screens (default values)
-<IressAutocomplete options={...} />
-
-// 4 results on large screens, 3 on small screens
-<IressAutocomplete resultLimitDesktop={4} resultLimitMobile={3} options={...} />
-
-// 4 results on all screens (resultLimitMobile > resultLimitDesktop so has no effect)
-<IressAutocomplete resultLimitDesktop={4} resultLimitMobile={5} options={...} />
-```
+<StoryEmbed id="components-autocomplete--result-limits"/>
 
 The result limits will also affect the number of initial options displayed, if the `initialOptions` prop is set.
 
-```tsx
-<IressStack gap="md">
-<IressPanel>
-<CurrentBreakpoint />
-</IressPanel>
-<IressAutocomplete />
-</IressStack>
-```
-
-[View "ResultLimits" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--result-limits)
+<StoryEmbed id="components-autocomplete--result-limits"/>
 
 ### Read only
 
@@ -202,11 +152,7 @@ The `readOnly` prop can be set to `true` to prevent the user from changing the v
 
 If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs).
 
-```tsx
-<IressAutocomplete readOnly />
-```
-
-[View "ReadOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--read-only)
+<StoryEmbed id="components-autocomplete--read-only"/>
 
 ## Testing
 

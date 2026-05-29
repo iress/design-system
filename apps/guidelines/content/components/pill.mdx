@@ -45,33 +45,13 @@ Pills are **informational** - they display information but are not meant to be i
 
 The `mode` prop controls the colour scheme of the badge. Use data palette colours (10-90) for data visualization and non-semantic colour needs, or system status colours (`danger`, `info`, `success`, `warning`) for semantic status indication.
 
-```tsx
-<IressInline gap="sm">
-{BADGE_MODES.map((mode) => (
-<IressPill key={mode} mode={mode}>
-{mode}
-</IressPill>
-))}
-</IressInline>
-```
-
-[View "Mode" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-pill--mode)
+<StoryEmbed id="components-pill--mode"/>
 
 ### Status
 
 System status colours provide semantic meaning for feedback and state indication. Available options are: `danger`, `info`, `success`, and `warning`.
 
-```tsx
-<IressInline gap="sm">
-{STATUSES.map((status) => (
-<IressPill mode={status} key={status}>
-{status}
-</IressPill>
-))}
-</IressInline>
-```
-
-[View "Status" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-pill--status)
+<StoryEmbed id="components-pill--status"/>
 
 ## Testing
 

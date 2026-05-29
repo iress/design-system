@@ -31,17 +31,7 @@ import { IressValidationMessage } from '@iress-oss/ids-components';
 
 Validation status is controlled by the status prop. It defaults to `error`.
 
-```tsx
-<IressStack>
-{STATUSES.map((status) => (
-<IressValidationMessage key={status} status={status}>
-{messages[status]}
-</IressValidationMessage>
-))}
-</IressStack>
-```
-
-[View "Status" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-validation-message--status)
+<StoryEmbed id="components-validation-message--status"/>
 
 ### Prefix
 
@@ -49,46 +39,19 @@ You can add a prefix to the message. If not provided, it uses the `status` prop 
 
 It is hidden by default, but can be shown by setting the `visiblePrefix` prop to `true`.
 
-```tsx
-<IressStack>
-{STATUSES.map((status) => (
-<IressValidationMessage key={status} status={status}>
-{messages[status]}
-</IressValidationMessage>
-))}
-</IressStack>
-```
-
-[View "Prefix" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-validation-message--prefix)
+<StoryEmbed id="components-validation-message--prefix"/>
 
 ### Link to target
 
 You can use the `linkToTarget` prop to link the message to a specific target in the DOM. This is useful to take the user to a specific part of the form when they click on the message.
 
-```tsx
-<IressStack gap="md">
-<IressStack>
-{STATUSES.map((status) => (
-<IressValidationMessage key={status}
-status={status}
-linkToTarget="target-input"
->
-{messages[status]}
-</IressValidationMessage>
-))}
-</IressStack>
-<IressDivider />
-<IressInput id="target-input" />
-</IressStack>
-```
-
-[View "LinkToTarget" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-validation-message--link-to-target)
+<StoryEmbed id="components-validation-message--link-to-target"/>
 
 ## `IressValidationSummary`
 
 Messages can be passed programmatically as a `ValidationMessageObj[]` using the `messages` prop of the `IressValidationSummary` component.
 
-[View "ValidationSummary" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-validation-summary--validation-summary)
+<StoryEmbed id="components-validation-summary--validation-summary"/>
 
 ## Testing
 

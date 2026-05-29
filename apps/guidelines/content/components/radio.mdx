@@ -33,13 +33,7 @@ You can set the radio to `checked` by default. This is useful when you want to p
 
 **Note:** If you are using an `IressRadioGroup`, you should use the `value` prop on the `IressRadioGroup` to set the checked state of its `<IressRadio />` children, as the `checked` prop will be ignored.
 
-```tsx
-<IressRadio checked>
-  Checked radio button
-</IressRadio>
-```
-
-[View "Checked" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio--checked)
+<StoryEmbed id="components-radio--checked"/>
 
 ### Read only
 
@@ -47,31 +41,13 @@ The `readOnly` prop changes how the radio is rendered. It will only render if th
 
 It is understandable that this may not be the desired behavior for all use cases. If you need a radio that is not editable, but still visible, simply do not set the `readOnly` prop and set the `checked` prop instead.
 
-```tsx
-<IressStack gap="sm">
-<IressRadio defaultChecked />
-<IressRadio />
-</IressStack>
-```
-
-[View "ReadOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio--read-only)
+<StoryEmbed id="components-radio--read-only"/>
 
 ### Variants
 
 The `variant` prop changes the visual style of the radio. The `card` variant adds a card-like border and the `touch` variant adds button-like border and padding.
 
-```tsx
-<IressStack gap="lg">
-  <IressRadio variant="card" heading="Widget">
-    A description of the widget
-  </IressRadio>
-  <IressRadio variant="touch">
-    Touch variant
-  </IressRadio>
-</IressStack>
-```
-
-[View "Variants" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio--variants)
+<StoryEmbed id="components-radio--variants"/>
 
 ## Testing
 

@@ -31,7 +31,7 @@ Individual radio buttons can be passed directly into `IressRadioGroup`.
 
 **Note:** The `mapRadioGroupOptions` helper function, originally used to map options to `IressRadio` components, is now deprecated. Instead, you can use `array.map` to map the options to `IressRadio` components.
 
-[View "RadioChildren" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio-group--radio-children)
+<StoryEmbed id="components-radio-group--radio-children"/>
 
 ### Radio selection
 
@@ -39,11 +39,7 @@ The default checked state of the radio children should always be set using the `
 
 **Note:** The `value` prop on the `IressRadioGroup` component will always override the `checked` state of the `IressRadio` children.
 
-```tsx
-<IressRadioGroup defaultValue="newspaper" />
-```
-
-[View "RadioSelection" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio-group--radio-selection)
+<StoryEmbed id="components-radio-group--radio-selection"/>
 
 ### Layout
 
@@ -61,32 +57,7 @@ The layout prop controls how the radio group is displayed and can have three bas
 > If using any of the inline* props within a `Field` component, the `Field` also
 >   needs the inline prop to be set for the inline layouts to take effect.
 
-```tsx
-<IressStack gap="md">
-<IressText>
-<h3>block (default)</h3>
-<IressRadioGroup layout="block" />
-</IressText>
-<IressText>
-<h3>inline</h3>
-<IressRadioGroup layout="inline" />
-</IressText>
-<IressText>
-<h3>inlineEqualWidth</h3>
-<IressRadioGroup layout="inlineEqualWidth" />
-</IressText>
-<IressText>
-<h3>inlineFlex</h3>
-<IressRadioGroup layout="inlineFlex" />
-</IressText>
-<IressText>
-<h3>stack</h3>
-<IressRadioGroup layout="stack" />
-</IressText>
-</IressStack>
-```
-
-[View "Layout" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio-group--layout)
+<StoryEmbed id="components-radio-group--layout"/>
 
 ### Hidden radio buttons
 
@@ -94,16 +65,7 @@ You can use the `hiddenRadio` prop to create custom radio buttons. When enabled,
 
 When `hiddenRadio` is enabled, the label will have no padding. Padding can be added by using a Panel or utility classes.
 
-```tsx
-<IressField
-label="I'd like to discuss the following in my financial review:"
-hint="Select one option"
->
-<IressRadioGroup />
-</IressField>
-```
-
-[View "HiddenRadioButtons" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio-group--hidden-radio-buttons)
+<StoryEmbed id="components-radio-group--hidden-radio-buttons"/>
 
 ### Laying out custom radio buttons
 
@@ -111,32 +73,7 @@ The radio group's `layout` prop gives you some default options to help control t
 
 The example below uses CSS grid to give us evenly spaced / sized radio buttons, which will wrap on to new lines as the screen size reduces. The grid wrapper element is a div that wraps around the `<IressRadio />` elements, as shown by the dashed border. Use the grab handle in the bottom right-hand corner of the grid wrapper to see how the controls change size to respond to the container's width.
 
-```tsx
-<IressField
-label="I'd like to discuss the following in my financial review:"
-hint="Select one option"
->
-<IressRadioGroup>
-<div
-style={{
-display: 'grid',
-gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-gridAutoRows: '1fr',
-gridGap: '0.75rem',
-width: '100%',
-padding: '0.5rem',
-border: '1px dashed hsl(43deg 100% 45%)',
-resize: 'horizontal',
-overflow: 'auto',
-}}
->
-...
-</div>
-</IressRadioGroup>
-</IressField>
-```
-
-[View "CustomRadioGroupLayout" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio-group--custom-radio-group-layout)
+<StoryEmbed id="components-radio-group--custom-radio-group-layout"/>
 
 ### Read only
 
@@ -144,21 +81,13 @@ The `readOnly` prop changes how the radio group is rendered. It will only render
 
 It is understandable that this may not be the desired behavior for all use cases. If you need a radio group that is not editable, but still visible, simply do not set the `readOnly` prop and set the `value` prop instead.
 
-```tsx
-<IressRadioGroup readOnly />
-```
-
-[View "ReadOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio-group--read-only)
+<StoryEmbed id="components-radio-group--read-only"/>
 
 ### Touch
 
 The `touch` prop adds the button-like border and padding to radio.
 
-```tsx
-<IressRadioGroup variant="touch" />
-```
-
-[View "Touch" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio-group--touch)
+<StoryEmbed id="components-radio-group--touch"/>
 
 ## Testing
 

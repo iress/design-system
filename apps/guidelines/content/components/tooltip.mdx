@@ -18,9 +18,11 @@ import { IressTooltip } from '@iress-oss/ids-components';
 ## Quick Start
 
 ```tsx
-import { IressTooltip } from '@iress-oss/ids-components';
+import { IressTooltip, IressButton } from '@iress-oss/ids-components';
 
-<IressTooltip tooltipText="Hello! This is a really long tooltip to try and see if it goes behind the scrollbar" />
+<IressTooltip tooltipText="Hello! This is a really long tooltip to try and see if it goes behind the scrollbar">
+  <IressButton>Hover me</IressButton>
+</IressTooltip>
 ```
 
 ## Usage
@@ -31,22 +33,7 @@ This content can only be plain text; there is no parsing of any markup or stylin
 
 Text content will wrap on to a new line if it exceeds the tooltip's maximum width. You can also manually format your content into multiple lines by passing an array of strings into the `tooltipText` prop.
 
-```tsx
-<div style={{ paddingTop: '30px' }}>
-<IressInline gap="md">
-<IressTooltip tooltipText="Single line Hello! This is a really long tooltip to try and see if it goes behind the scrollbar"
->
-<IressButton>Single line</IressButton>
-</IressTooltip>
-<IressTooltip tooltipText={['This tooltip', 'has multiple lines']}
->
-<IressButton>Multi line</IressButton>
-</IressTooltip>
-</IressInline>
-</div>
-```
-
-[View "TooltipText" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tooltip--tooltip-text)
+<StoryEmbed id="components-tooltip--tooltip-text"/>
 
 ## Behaviour
 
@@ -84,95 +71,13 @@ The tooltip can be aligned in one of 12 positions relative to the activator elem
 
 The tooltip's position will change dynamically based on the amount of space available in its container window, so that it doesn't overflow the edge. For example, if the tooltip is about to scroll off the top of the screen, it will change its position to bottom. Likewise with left and right scrolling.
 
-```tsx
-<div style={{ padding: '80px 150px' }}>
-<IressStack gap="md">
-<IressInline horizontalAlign="center" gap="sm">
-<IressTooltip align="top-start" tooltipText="Top Start">
-<IressButton>Top Start</IressButton>
-</IressTooltip>
-<IressTooltip align="top" tooltipText="Top">
-<IressButton>Top</IressButton>
-</IressTooltip>
-<IressTooltip align="top-end" tooltipText="Top End">
-<IressButton>Top End</IressButton>
-</IressTooltip>
-</IressInline>
-<IressInline horizontalAlign="between">
-<IressStack gap="sm">
-<IressInline horizontalAlign="left">
-<IressTooltip align="left-start" tooltipText="Left Start">
-<IressButton>Left Start</IressButton>
-</IressTooltip>
-</IressInline>
-<IressInline horizontalAlign="left">
-<IressTooltip align="left" tooltipText="Left">
-<IressButton>Left</IressButton>
-</IressTooltip>
-</IressInline>
-<IressInline horizontalAlign="left">
-<IressTooltip align="left-end" tooltipText="Left End">
-<IressButton>Left End</IressButton>
-</IressTooltip>
-</IressInline>
-</IressStack>
-<IressStack gap="sm">
-<IressInline horizontalAlign="right">
-<IressTooltip align="right-start" tooltipText="Right Start">
-<IressButton>Right Start</IressButton>
-</IressTooltip>
-</IressInline>
-<IressInline horizontalAlign="right">
-<IressTooltip align="right" tooltipText="Right">
-<IressButton>Right</IressButton>
-</IressTooltip>
-</IressInline>
-<IressInline horizontalAlign="right">
-<IressTooltip align="right-end" tooltipText="Right End">
-<IressButton>Right End</IressButton>
-</IressTooltip>
-</IressInline>
-</IressStack>
-</IressInline>
-<IressInline horizontalAlign="center" gap="sm">
-<IressTooltip align="bottom-start" tooltipText="Bottom Start">
-<IressButton>Bottom Start</IressButton>
-</IressTooltip>
-<IressTooltip align="bottom" tooltipText="Bottom">
-<IressButton>Bottom</IressButton>
-</IressTooltip>
-<IressTooltip align="bottom-end" tooltipText="Bottom End">
-<IressButton>Bottom End</IressButton>
-</IressTooltip>
-</IressInline>
-</IressStack>
-</div>
-```
-
-[View "Align" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tooltip--align)
+<StoryEmbed id="components-tooltip--align"/>
 
 ### Delay
 
 The `delay` prop requires a number that is the number of milliseconds that pass after the activator has received a `mouseEnter` event and the display of the tooltip.
 
-```tsx
-<div style={{ paddingTop: '30px' }}>
-<IressInline horizontalAlign="center" gap="sm">
-<IressTooltip delay={0} tooltipText="No delay">
-<IressButton>0ms (no delay)</IressButton>
-</IressTooltip>
-<IressTooltip tooltipText="Default delay">
-<IressButton>500ms (default)</IressButton>
-</IressTooltip>
-
-<IressTooltip delay={2000} tooltipText="Long delay">
-<IressButton>2000ms</IressButton>
-</IressTooltip>
-</IressInline>
-</div>
-```
-
-[View "Delay" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tooltip--delay)
+<StoryEmbed id="components-tooltip--delay"/>
 
 ### The title attribute
 

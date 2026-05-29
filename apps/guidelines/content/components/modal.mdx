@@ -42,11 +42,7 @@ For a full comparison of feedback components, see the [Feedback pattern](https:/
 
 You can use state to control the modal by setting the `show` property to `true` or `false`. To sync your state with the modal, you can use the `onShowChange` prop, which is normally passed the set function from `useState`.
 
-```tsx
-<ModalUsingState />
-```
-
-[View "ShowWithState" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-modal--show-with-state)
+<StoryEmbed id="components-modal--show-with-state"/>
 
 ### Using the `IressModalProvider`
 
@@ -56,11 +52,7 @@ You can use the `IressModalProvider` to open and close modals from anywhere in y
 
 To use, wrap your `<App/>` or the component that you want to use the `useModal` hook with `<IressModalProvider />`.
 
-```tsx
-<AppWithModalProvider />
-```
-
-[View "Provider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-provider--provider)
+<StoryEmbed id="components-provider--provider"/>
 
 ## Behaviour
 
@@ -75,23 +67,13 @@ To use, wrap your `<App/>` or the component that you want to use the `useModal` 
 
 The `heading` prop can be used to set a heading for the modal. This will be rendered in the header of the modal, and will be announced by screen readers when the modal is opened.
 
-```tsx
-<IressModal heading="Modal heading" />
-```
-
-[View "Heading" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-modal--heading)
+<StoryEmbed id="components-modal--heading"/>
 
 ### Footer
 
 Use the `footer` prop to place content underneath the main content. Usually used for extra controls like buttons etc.
 
-```tsx
-<IressModal heading="Modal Header">
-  Normal modal content
-</IressModal>
-```
-
-[View "FooterSlot" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-modal--footer-slot)
+<StoryEmbed id="components-modal--footer-slot"/>
 
 ### Fixed footer
 
@@ -109,11 +91,7 @@ The `fixedFooter` prop can be used to set the footer to be fixed to the bottom o
 >   a modal without a fixed footer. Normal modals allow content to overflow, which
 >   should fix the issue.
 
-```tsx
-<IressModal heading="Modal Header" fixedFooter />
-```
-
-[View "FixedFooter" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-modal--fixed-footer)
+<StoryEmbed id="components-modal--fixed-footer"/>
 
 ### Size
 
@@ -121,11 +99,7 @@ The `size` prop can be set to `sm`, `md` or `lg`. It defaults to `md`.
 
 Below is a guide on when to use which size.
 
-```tsx
-<ModalSizes />
-```
-
-[View "Size" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-modal--size)
+<StoryEmbed id="components-modal--size"/>
 
 ### Responsive size
 
@@ -135,11 +109,7 @@ The `width` prop can take an object that takes five key/value pairs that correla
 
 If you set a responsive `width`, the modal becomes full width on screens smaller than the value you specified. For example, if you want to create a large modal on medium screens and above:
 
-```tsx
-  <IressModal size="lg" width={{ md: 'overlay.lg' }}>
-```
-
-[View "ResponsiveSize" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-modal--responsive-size)
+<StoryEmbed id="components-modal--responsive-size"/>
 
 ### Status
 
@@ -150,11 +120,7 @@ When `status` is set:
 - The `size` prop is restricted to `sm` or `md` (defaults to `sm`).
 - The `actions` prop is enabled, allowing you to provide buttons for user actions related to the status.
 
-```tsx
-<ModalStatuses />
-```
-
-[View "Status" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-modal--status)
+<StoryEmbed id="components-modal--status"/>
 
 ### Disable closing
 
@@ -162,63 +128,7 @@ For instances where you require the user's full attention and you want to ensure
 
 **Note:** As these options remove the default handling of the closing the modal, please ensure you provide a clear way for the user to close the modal.
 
-```tsx
-const { showModal } = useModal();
-
-    const noCloseButtonModal = (
-      <IressModal
-        id="no-close-button"
-        heading="Modal Header"
-        noCloseButton
-        footer={
-          <IressButton onClick={() => showModal('no-close-button', false)}>
-            Close
-          </IressButton>
-        }
-      />
-    );
-
-    const bothModal = (
-      <IressModal
-        id="both"
-        heading="Modal Header"
-        disableBackdropClick
-        noCloseButton
-        footer={
-          <IressButton onClick={() => showModal('both', false)}>
-            Close
-          </IressButton>
-        }
-      />
-    );
-
-    return (
-      <IressStack gap="md">
-        <IressButton onClick={() => showModal('disable-backdrop-click')} fluid>
-          Disable backdrop click
-        </IressButton>
-        <IressModal
-          id="disable-backdrop-click"
-          heading="Modal Header"
-          disableBackdropClick
-        />
-
-        <IressButton onClick={() => showModal('no-close-button')} fluid>
-          No close button (please provide one, if you decide to hide the close
-          button)
-        </IressButton>
-        {noCloseButtonModal}
-
-        <IressButton onClick={() => showModal('both')} fluid>
-          Both (If you hide the close button, ensure you provide another way to
-          close the modal)
-        </IressButton>
-        {bothModal}
-      </IressStack>
-    );
-```
-
-[View "DisableClosing" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-modal--disable-closing)
+<StoryEmbed id="components-modal--disable-closing"/>
 
 ## Migrating to version 5
 
@@ -228,9 +138,7 @@ For your components to work as previously, you will need to set up the `IressMod
 
 > **Note:** If you are using `IressProvider` or `IressShadow`, you do not need to add `IressModalProvider` separately — it is already included.
 
-```tsx
-const App = () => <IressModalProvider>Rest of app here</IressModalProvider>;
-```
+<StoryEmbed id="components-modal--adding-the-provider"/>
 
 ### Testing
 
@@ -238,53 +146,7 @@ In version 5, modals are rendered conditionally, meaning they will not be availa
 
 See below for an example in version 4 and version 5.
 
-```tsx
-<DiffViewer
-allowModeChange
-oldValue={`import { render, waitFor, screen } from '@testing-library/react';
-import { idsFireEvent, componentLoad } from '@iress/ids-react-test-utils';
-
-test('opening and closing a modal', async () => {
-await componentLoad([
-'modal-trigger',
-'modal',
-]);
-
-const trigger = screen.getByTestId('modal-trigger');
-const modal = screen.getByTestId('modal');
-
-// In version 4, you can already interact with the modal here as its in the DOM at this stage.
-
-// activate modal
-idsFireEvent.click(trigger);
-await waitFor(() => expect(modal).toBeVisible());
-
-// close modal
-const closeButton = screen.getByTestId('modal__close-button');
-idsFireEvent.click(closeButton);
-await waitFor(() => expect(modal).not.toBeVisible());
-});`}
-newValue={`import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
-
-test('opening and closing a modal', async () => {
-const trigger = screen.getByRole('button', { name: /open modal/i });
-
-// activate modal
-await userEvent.click(trigger);
-const modal = await screen.findByRole('dialog');
-
-// In version 5, you can only interact with the modal once it has been loaded here.
-
-// close modal
-const closeButton = screen.getByRole('button', { name: /close/i });
-await userEvent.click(closeButton);
-await waitForElementToBeRemoved(modal);
-});`}
-/>
-```
-
-[View "V5ModalDiff" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-modal--v5modal-diff)
+<StoryEmbed id="components-modal--v5modal-diff"/>
 
 ## Testing
 

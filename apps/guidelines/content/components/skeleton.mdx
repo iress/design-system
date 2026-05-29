@@ -29,15 +29,7 @@ import { IressSkeleton } from '@iress-oss/ids-components';
 
 The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
-```tsx
-<IressStack gap="md">
-<IressSkeleton mode="text" />
-<IressSkeleton mode="rect" height="100px" />
-<IressSkeleton mode="circle" height="100px" width="100px" />
-</IressStack>
-```
-
-[View "Mode" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--mode)
+<StoryEmbed id="components-skeleton--mode"/>
 
 ### Text
 
@@ -45,11 +37,7 @@ The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
 `text` also accepts the width prop but does not use the `height` prop like other modes. The height is achieved through font size and line height.
 
-```tsx
-<SkeletonText />
-```
-
-[View "Text" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--text)
+<StoryEmbed id="components-skeleton--text"/>
 
 ### Rect
 
@@ -57,11 +45,7 @@ The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
 `rect` accepts both `width` and `height` props for sizing. It will default to 100% width and 100px height.
 
-```tsx
-<SkeletonRect />
-```
-
-[View "Rect" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--rect)
+<StoryEmbed id="components-skeleton--rect"/>
 
 ### Circle
 
@@ -69,11 +53,7 @@ The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
 `circle` accepts both `width` and `height` props for sizing. It will default to 100% width and 100px height.
 
-```tsx
-<SkeletonCircle />
-```
-
-[View "Circle" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--circle)
+<StoryEmbed id="components-skeleton--circle"/>
 
 ### Size
 
@@ -83,15 +63,7 @@ These props accept any unit of dimension, but if no unit is provided it will def
 
 **Note:** `height` will be ignored for text mode as this is calculated using the `IressText` component.
 
-```tsx
-<IressInline gap="md">
-{SKELETON_MODES.map((mode) => (
-<IressSkeleton key={mode} mode={mode} />
-))}
-</IressInline>
-```
-
-[View "Size" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--size)
+<StoryEmbed id="components-skeleton--size"/>
 
 ## Testing
 

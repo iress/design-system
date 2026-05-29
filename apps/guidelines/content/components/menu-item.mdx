@@ -31,102 +31,59 @@ The `IressMenuItem` can be set to selected using the `selected` prop.
 
 **Note:** If you are using `IressMenu` with a `role` of `listbox`, you should use the `defaultSelected` or `selected` prop on the `IressMenu` to set the selected state of its `<IressMenuItem />` children, as the `selected` prop will be ignored.
 
-```tsx
-<IressMenuItem selected />
-```
-
-[View "Selected" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-item--selected)
+<StoryEmbed id="components-menu-item--selected"/>
 
 ### Value
 
 A menu item can have a unique value set to it, used to determine its selected state in a `IressMenu` component with a `role` of `listbox`. The value is not visible to end users.
 
-```tsx
-<IressMenu role="listbox">
-<IressMenuItem />
-</IressMenu>
-```
-
-[View "Value" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-item--value)
+<StoryEmbed id="components-menu-item--value"/>
 
 ### `canToggle`
 
 When `canToggle` is set to true, the menu item can be toggled between selected and unselected states. This only works in a `IressMenu` component with a `role` of `listbox`.
 
-```tsx
-<IressMenuItem canToggle />
-```
-
-[View "CanToggle" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-item--can-toggle)
+<StoryEmbed id="components-menu-item--can-toggle"/>
 
 ### Prepend and append
 
 You can prepend and append content to a menu item using the `prepend` and `append` props.
 
-[View "PrependAndAppend" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-item--prepend-and-append)
+<StoryEmbed id="components-menu-item--prepend-and-append"/>
 
 ### Multi-select menus
 
 Inside a `IressMenu` with a `role` of `listbox` and the `multiSelect` prop set to true, the menu item will display with a checkbox.
 
-```tsx
-<IressMenu role="listbox" multiSelect>
-<IressMenuItem />
-<IressMenuItem />
-</IressMenu>
-```
-
-[View "MultiSelect" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-item--multi-select)
+<StoryEmbed id="components-menu-item--multi-select"/>
 
 ### Element
 
 You can use the `element` prop to render a custom component inside the menu item. This is useful for rendering a component from a third-party library, such as `react-router-dom`.
 
-```tsx
-<RoutingLinkMenu />
-```
-
-[View "Element" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-item--element)
+<StoryEmbed id="components-menu-item--element"/>
 
 ### Divider
 
 When `divider` is set to true, the menu item will render with a bottom border.
 
-```tsx
-<IressMenuItem divider>
-  Menu item with divider
-</IressMenuItem>
-```
-
-[View "Divider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-item--divider)
+<StoryEmbed id="components-menu-item--divider"/>
 
 However, it is recommended to use the `IressMenuDivider` component instead.
 
-[View "Divider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-divider--divider)
+<StoryEmbed id="components-menu-divider--divider"/>
 
 ### Heading
 
 You can use the `IressMenuHeading` to render headings within a menu. This adds styling so the appropriate padding is applied.
 
-```tsx
-<IressMenu>
-<IressMenuHeading />
-</IressMenu>
-```
-
-[View "Heading" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-heading--heading)
+<StoryEmbed id="components-menu-heading--heading"/>
 
 ### Text
 
 You can use the `IressMenuText` to render other text within a menu. This adds styling so the appropriate padding is applied.
 
-```tsx
-<IressMenu>
-<IressMenuText />
-</IressMenu>
-```
-
-[View "Text" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-text--text)
+<StoryEmbed id="components-menu-text--text"/>
 
 ---
 

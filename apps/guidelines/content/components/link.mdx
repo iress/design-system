@@ -46,13 +46,7 @@ The loading state can be activated by setting the `loading` prop to `true` and p
 
 When the loading state is activated, any click events on the link are disabled.
 
-```tsx
-<IressLink loading>
-  Link text
-</IressLink>
-```
-
-[View "Loading" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-link--loading)
+<StoryEmbed id="components-link--loading"/>
 
 ### Prepend & Append
 
@@ -63,29 +57,13 @@ Use the `prepend` and `append` props to correctly position icons or badges insid
 
 > **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
-```tsx
-<IressInline gap="md">
-<IressLink prepend={<IressIcon name="home" />}>
-Prepend icon
-</IressLink>
-
-<IressLink append={<IressIcon name="home" />}>
-Append icon
-</IressLink>
-</IressInline>
-```
-
-[View "Slots" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-link--slots)
+<StoryEmbed id="components-link--slots"/>
 
 ### Element
 
 You can use the `element` prop to render a custom component as the link. This is useful for rendering a component from a third-party library, such as `react-router-dom`.
 
-```tsx
-<RoutingLink />
-```
-
-[View "Element" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-link--element)
+<StoryEmbed id="components-link--element"/>
 
 ## Testing
 

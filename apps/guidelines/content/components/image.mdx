@@ -31,18 +31,7 @@ import { IressImage } from '@iress-oss/ids-components';
 
 **Note:** Please consider not using this prop, but rather exporting images at the largest size required for your application (the maximum width).
 
-```tsx
-<IressStack gap="md">
-{MAX_WIDTHS.map((width, index) => (
-<React.Fragment key={index}>
-<IressText element="h3">{width ?? 'undefined'}</IressText>
-<IressImage maxWidth={width} />
-</React.Fragment>
-))}
-</IressStack>
-```
-
-[View "MaxWidth" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-image--max-width)
+<StoryEmbed id="components-image--max-width"/>
 
 ## Testing
 

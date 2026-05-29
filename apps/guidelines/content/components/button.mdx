@@ -40,60 +40,19 @@ IDS discourages using `disabled` on `IressButton`. Although the native HTML `dis
 
 **"Form is incomplete"** — Keep the submit button enabled. Use `IressForm` with `rules` validation — it will show inline errors on submit and prevent submission until the form is valid.
 
-```tsx
-// ❌ Disabling submit until form is valid
-<IressButton disabled={!isValid} type="submit">Save</IressButton>
-
-// ✅ Let IressForm handle validation on submit
-<IressForm onSubmit={handleSubmit}>
-  <IressFormField
-    name="email"
-    label="Email"
-    rules={{ required: 'Email is required' }}
-    render={(props) => <IressInput {...props} type="email" />}
-  />
-  <IressButton mode="primary" type="submit">Save</IressButton>
-</IressForm>
-```
+<StoryEmbed id="components-button--avoid-using-`disabled`"/>
 
 **"Action is in progress"** — Use the `loading` prop. It shows a spinner, announces the state to screen readers, and automatically prevents duplicate clicks.
 
-```tsx
-// ❌ Disabling during submission
-<IressButton disabled={isSubmitting}>Save</IressButton>
-
-// ✅ Use loading — prevents clicks and communicates state
-<IressButton loading={isSubmitting} mode="primary" type="submit">Save</IressButton>
-```
+<StoryEmbed id="components-button--avoid-using-`disabled`"/>
 
 **"User lacks permission"** — Hide the button entirely, or keep it enabled and show an explanation when clicked.
 
-```tsx
-// ❌ Showing a disabled button the user can never enable
-<IressButton disabled={!canEdit}>Edit</IressButton>;
-
-// ✅ Option A — don't render the button at all
-{
-  canEdit && <IressButton onClick={handleEdit}>Edit</IressButton>;
-}
-
-// ✅ Option B — explain on click
-<IressButton onClick={() => (canEdit ? handleEdit() : showPermissionError())}>
-  Edit
-</IressButton>;
-```
+<StoryEmbed id="components-button--avoid-using-`disabled`"/>
 
 **"Prerequisite step not completed"** — Guide the user to the prerequisite instead of silently disabling.
 
-```tsx
-// ❌ Disabled with no explanation
-<IressButton disabled={!hasSelectedItem}>Delete</IressButton>
-
-// ✅ Explain what's needed
-<IressButton onClick={() => !hasSelectedItem ? showAlert('Select an item first') : confirmDelete()}>
-  Delete
-</IressButton>
-```
+<StoryEmbed id="components-button--avoid-using-`disabled`"/>
 
 **"Destructive action needs confirmation"** — Use `IressModal` with `status="danger"` for a confirmation step.
 
@@ -111,27 +70,7 @@ The `mode` prop controls the visual appearance and priority of the button.
 - **Quaternary:** Use for less prominent actions, often used for preference toggles (eg. Collapse all).
 - **Muted:** Use for less prominent actions, often in toolbars or inline with headings. Mainly used for icon-only buttons.
 
-```tsx
-<IressInline gap="md">
-<IressButton mode="primary">
-Primary button
-</IressButton>
-<IressButton mode="secondary">
-Secondary button
-</IressButton>
-<IressButton mode="tertiary">
-Tertiary button
-</IressButton>
-<IressButton mode="quaternary">
-Quaternary button
-</IressButton>
-<IressButton mode="muted" icon="share">
-Share
-</IressButton>
-</IressInline>
-```
-
-[View "Mode" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-button--mode)
+<StoryEmbed id="components-button--mode"/>
 
 ### Status
 
@@ -140,49 +79,7 @@ The `status` prop allows you to apply a visual status to the button.
 - **Success:** Usually used to indicate an action that should be perceived as positive, such as "Confirm" or "Buy".
 - **Danger:** Use for destructive actions, such as "Delete" or "Remove". Also used for actions that are perceived as negative, such as "Cancel" or "Sell".
 
-```tsx
-<IressStack gap="md">
-<IressInline gap="md">
-<IressButton mode="primary" status="success">
-Primary button
-</IressButton>
-<IressButton mode="secondary" status="success">
-Secondary button
-</IressButton>
-<IressButton mode="tertiary" status="success">
-Tertiary button
-</IressButton>
-<IressButton mode="quaternary" status="success">
-Quaternary button
-</IressButton>
-<IressButton
-mode="muted"
-status="success"
-icon="shopping_cart">
-Add to cart
-</IressButton>
-</IressInline>
-<IressInline gap="md">
-<IressButton mode="primary" status="danger">
-Primary button
-</IressButton>
-<IressButton mode="secondary" status="danger">
-Secondary button
-</IressButton>
-<IressButton mode="tertiary" status="danger">
-Tertiary button
-</IressButton>
-<IressButton mode="quaternary" status="danger">
-Quaternary button
-</IressButton>
-<IressButton mode="muted" status="danger" icon="delete">
-Delete
-</IressButton>
-</IressInline>
-</IressStack>
-```
-
-[View "Status" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-button--status)
+<StoryEmbed id="components-button--status"/>
 
 ### Types
 
@@ -190,21 +87,7 @@ The `type` property controls the behaviour of the button. It defaults to `button
 
 **Please note:** this differs from a standard HTML button element, where the `type` defaults to submit.
 
-```tsx
-<IressInline gap="md">
-<IressButton type="button">
-button
-</IressButton>
-<IressButton type="submit">
-submit
-</IressButton>
-<IressButton type="reset">
-reset
-</IressButton>
-</IressInline>
-```
-
-[View "Types" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-button--types)
+<StoryEmbed id="components-button--types"/>
 
 ### Loading
 
@@ -214,29 +97,7 @@ The loading state can be activated by setting the `loading` prop to `true`. To c
 
 When the loading state is activated, any click events on the button are disabled.
 
-```tsx
-import { IressButton, IressInline, IressIcon } from '@iress-oss/ids-components';
-
-<IressInline gap="md">
-  <IressButton mode="primary" loading>
-    Primary
-  </IressButton>
-  <IressButton mode="secondary" loading>
-    Secondary
-  </IressButton>
-  <IressButton mode="tertiary" loading>
-    Tertiary
-  </IressButton>
-  <IressButton mode="quaternary" loading>
-    Quaternary
-  </IressButton>
-  <IressButton mode="muted" loading>
-    <IressIcon name="edit" />
-  </IressButton>
-</IressInline>
-```
-
-[View "Loading" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-button--loading)
+<StoryEmbed id="components-button--loading"/>
 
 ### Buttons as links
 
@@ -246,13 +107,7 @@ A good example of this is the Next and Previous links in a wizard layout. These 
 
 You can also use the link specific props `target` and `rel`.
 
-```tsx
-<IressButton href="https://www.iress.com/" rel="opener noreferrer" target="_blank">
-  This is a link (anchor tag)
-</IressButton>
-```
-
-[View "ButtonsAsLinks" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-button--buttons-as-links)
+<StoryEmbed id="components-button--buttons-as-links"/>
 
 ### Delete confirmation
 
@@ -266,13 +121,7 @@ The confirmation step should be a modal with a simple message, as with the examp
 
 If you're using a heading, ensure that it has an appropriate heading level to match the document structure. You should use a danger variant of the `IressText` element, with the element prop set to the appropriate heading level.
 
-```tsx
-<IressButton status="danger">
-  Delete button with confirm
-</IressButton>
-```
-
-[View "DeleteConfirmation" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-button--delete-confirmation)
+<StoryEmbed id="components-button--delete-confirmation"/>
 
 ### Fluid
 
@@ -280,22 +129,7 @@ If the `fluid` prop is set to true, the button will expand to be 100% of the wid
 
 The `fluid` prop can also be set to a breakpoint size, which means the button will be fluid up until its breakpoint is passed.
 
-```tsx
-<IressInline gap="md">
-<IressText element="p">
-Please resize your screen to see how the fluid value changes. Current
-breakpoint: <CurrentBreakpoint renderLabel="and-above" />.
-</IressText>
-<IressButton fluid>
-Always fluid
-</IressButton>
-<IressButton fluid="md">
-Fluid on xs and sm
-</IressButton>
-</IressInline>
-```
-
-[View "Fluid" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-button--fluid)
+<StoryEmbed id="components-button--fluid"/>
 
 ### Wrapping text
 
@@ -303,29 +137,7 @@ Button text will wrap on to a new line if there's not enough space for the text 
 
 If your button contains a lot of text, the text may wrap on to more than one line. You can manage this on a case by case basis by setting a minimum width on your button via CSS if you need to.
 
-```tsx
-<IressText style={{ width: 250 }}>
-<p>
-<IressButton>
-Button with lots of text content that will wrap (default behaviour)
-</IressButton>
-</p>
-
-<p>
-<IressButton style={{ minWidth: 300 }}>
-Button with lots of text content and a minimum width set via CSS
-</IressButton>
-</p>
-
-<p>
-<IressButton noWrap>
-Button with lots of text content with the noWrap prop set to true
-</IressButton>
-</p>
-</IressText>
-```
-
-[View "WrappingText" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-button--wrapping-text)
+<StoryEmbed id="components-button--wrapping-text"/>
 
 ### Prepend & Append
 
@@ -339,53 +151,19 @@ The `iconOnly` slot from previous versions of IDS (v4 and below) has been remove
 
 > **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
-```tsx
-<IressStack gap="md">
-<IressInline gap="md">
-<IressButton prepend={<IressIcon name="home" />}>
-Prepend icon
-</IressButton>
-</IressInline>
-
-<IressInline gap="md">
-<IressButton append={<IressIcon name="home" />}>
-Append icon
-</IressButton>
-
-<IressButton append={<IressPill>+999</IressPill>}>
-Append pill
-</IressButton>
-</IressInline>
-
-<IressInline gap="md">
-<IressButton icon="home">
-Home
-</IressButton>
-</IressInline>
-</IressStack>
-```
-
-[View "Slots" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-button--slots)
+<StoryEmbed id="components-button--slots"/>
 
 ### Download button
 
 When a `href` is provided, the `download` prop can be used to indicate that the link should download a file instead of navigating to it. This is useful for links to files such as PDFs or images.
 
-```tsx
-<IressButton download prepend={<IressIcon name="download" />} />
-```
-
-[View "DownloadButton" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-button--download-button)
+<StoryEmbed id="components-button--download-button"/>
 
 ### Element
 
 You can use the `element` prop to render a custom component as the button. This is useful for rendering a component from a third-party library, such as `react-router-dom`.
 
-```tsx
-<RoutingButton />
-```
-
-[View "Element" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-button--element)
+<StoryEmbed id="components-button--element"/>
 
 ## `IressCloseButton`
 
@@ -393,7 +171,7 @@ You can use the `element` prop to render a custom component as the button. This 
 
 It has one additional prop, `screenReaderText`, which is used to provide a screen reader only label for the close button.
 
-[View "CloseButton" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-close-button--close-button)
+<StoryEmbed id="components-close-button--close-button"/>
 
 ## Testing
 

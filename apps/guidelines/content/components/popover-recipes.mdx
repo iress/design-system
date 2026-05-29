@@ -15,46 +15,7 @@ When an `IressMenu` is used inside `IressPopover`, it adds some additional funct
 - `IressPopover` will automatically close the popover when a menu item is clicked.
 - `IressMenu` will automatically focus the first menu item when the popover is opened.
 
-```tsx
-const [multiSelect, setMultiSelect] = useState(false);
-
-    return (
-      <IressStack gap="md" maxWidth="container.lg" px="lg" mx="auto">
-        {MENU_ROLES.map((role) => (
-          <IressRow gutter="lg" key={role} verticalAlign="middle">
-            <IressCol span={2}>
-              <IressPopover
-                activator={<IressButton fluid>role={role}</IressButton>}
-                type={role === 'listbox' || role === 'menu' ? role : undefined}
-              >
-                <IressMenu
-                  role={role}
-                  defaultSelected={3}
-                  multiSelect={multiSelect && role === 'listbox'}
-                >
-                  {menuChildren}
-                </IressMenu>
-              </IressPopover>
-            </IressCol>
-            <IressCol>
-              <MenuInPopoverRoleDescription role={role}>
-                {role === 'listbox' && (
-                  <IressToggle
-                    checked={multiSelect}
-                    onChange={() => setMultiSelect(!multiSelect)}
-                  >
-                    Multi-select
-                  </IressToggle>
-                )}
-              </MenuInPopoverRoleDescription>
-            </IressCol>
-          </IressRow>
-        ))}
-      </IressStack>
-    );
-```
-
-[View "WithMenu" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--with-menu)
+<StoryEmbed id="components-popover--with-menu"/>
 
 ## Focusable children
 
@@ -70,11 +31,7 @@ The `usePopoverItem` hook returns an object with the following properties:
 - `isActiveInPopover`: A boolean that indicates if the item is currently focused in the popover. This can be used to style the item differently when it is focused.
 - `...popoverItemProps`: The rest of the props that you should spread on the focusable element to make it focusable.
 
-```tsx
-<UsePopoverExample />
-```
-
-[View "FocusableChildren" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-popover--focusable-children)
+<StoryEmbed id="components-popover--focusable-children"/>
 
 ---
 

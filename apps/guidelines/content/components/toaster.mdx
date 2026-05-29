@@ -12,15 +12,17 @@ export const meta = {
 Toaster provide users with important, time-sensitive information.
 
 ```tsx
-import { IressToaster } from '@iress-oss/ids-components';
+import { IressToasterProvider, useToaster } from '@iress-oss/ids-components';
 ```
 
 ## Quick Start
 
 ```tsx
-import { IressToaster } from '@iress-oss/ids-components';
+import { IressToasterProvider, useToaster } from '@iress-oss/ids-components';
 
-<IressToaster />
+<IressToasterProvider position="top-end">
+  <App />
+</IressToasterProvider>
 ```
 
 ## Usage
@@ -47,21 +49,13 @@ To use the toaster, wrap your `<App/>` or the component that you want to use the
 
 You can use the `success`, `info` and `error` methods from the hook to trigger toasts in your application.
 
-```tsx
-<SimpleToasterExample />
-```
-
-[View "Provider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-toaster--provider)
+<StoryEmbed id="components-toaster--provider"/>
 
 ### Closing toasts via the provider
 
 If you want to dismiss a toast programmatically, you can use the `close` method from the `useToaster` hook. This method takes a toast ID as an argument, which is returned when you create a toast using the `useToaster` hook.
 
-```tsx
-<CloseToastViaProvider />
-```
-
-[View "Close" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-toaster--close)
+<StoryEmbed id="components-toaster--close"/>
 
 ## Examples
 
@@ -69,11 +63,7 @@ If you want to dismiss a toast programmatically, you can use the `close` method 
 
 The toast offers three status that set a distinctive colour and icon. They can be set using the `status` prop. Their different use cases are described here.
 
-```tsx
-<ToastStatuses />
-```
-
-[View "Statuses" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-toaster--statuses)
+<StoryEmbed id="components-toaster--statuses"/>
 
 ### Timeout
 
@@ -81,11 +71,7 @@ By default, toasts will time out after six seconds, after which they will animat
 
 Timeouts must be set in milliseconds; as an example, if you want a timeout of five seconds, set the timeout to 5000.
 
-```tsx
-<ToasterTimeout />
-```
-
-[View "Timeout" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-toaster--timeout)
+<StoryEmbed id="components-toaster--timeout"/>
 
 ### Position
 
@@ -93,11 +79,7 @@ By default, the `IressToasterProvider`'s `position` is set to `top-end`, but the
 
 **Note:** The toast position should be consistent based on context, so users can find them easily.
 
-```tsx
-<ToasterPositionExamples />
-```
-
-[View "Position" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-toaster--position)
+<StoryEmbed id="components-toaster--position"/>
 
 ## Migrating from version 4 and below
 
@@ -107,9 +89,7 @@ For your components to work as previously, you will need to set up the `IressToa
 
 > **Note:** If you are using `IressProvider` or `IressShadow`, you do not need to add `IressToasterProvider` separately — it is already included.
 
-```tsx
-const App = () => <IressToasterProvider>Rest of app here</IressToasterProvider>;
-```
+<StoryEmbed id="components-toaster--adding-the-provider"/>
 
 ## Testing
 
