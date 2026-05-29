@@ -8,6 +8,7 @@ import {
   createSonarConfig,
   createMdxConfig,
 } from '../../shared/eslint-base.config.js';
+import jsdocPlugin from 'eslint-plugin-jsdoc';
 
 export default [
   {
@@ -36,6 +37,23 @@ export default [
     rules: {
       ...(await createMdxConfig()).rules,
       'sonarjs/todo-tag': 'off', // MDX-specific SonarJS override
+    },
+  },
+  {
+    files: ['src/components/**/*.tsx', 'src/patterns/**/*.tsx'],
+    ignores: ['**/*.test.tsx', '**/*.stories.tsx', '**/mocks/**'],
+    plugins: { jsdoc: jsdocPlugin },
+    rules: {
+      'jsdoc/require-jsdoc': [
+        'warn',
+        {
+          require: { FunctionDeclaration: false, MethodDefinition: false },
+          contexts: [
+            'ExportNamedDeclaration:has(VariableDeclarator[id.name=/^Iress/])',
+          ],
+          checkConstructors: false,
+        },
+      ],
     },
   },
 ];
