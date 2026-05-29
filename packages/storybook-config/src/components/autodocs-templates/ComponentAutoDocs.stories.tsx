@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { StoryStub } from './mocks/StoryStub';
-import type { ParametersConfig } from '../types';
+import { StoryStub } from '../mocks/StoryStub';
+import type { ParametersConfig } from '../../types';
 
 type Story = StoryObj<typeof StoryStub>;
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta: Meta<typeof StoryStub> = {
-  title: 'Components/AutoDocs',
+  title: 'Components/AutoDocs/Component',
   component: StoryStub,
   parameters: {
     idsConfig: {

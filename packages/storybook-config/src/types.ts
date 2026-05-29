@@ -17,7 +17,7 @@ export interface ParametersConfig {
     /**
      * Template to use for autodocs generation. 'default' uses the standard Storybook template, while 'component' uses a custom template designed for component documentation with enhanced prop tables and sections for guidelines and testing information.
      */
-    autodocsTemplate?: 'default' | 'component';
+    autodocsTemplate?: 'default' | 'component' | 'landing';
 
     /**
      * URL or URL resolver for guidelines documentation. If provided, a "Guidelines" link

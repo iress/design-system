@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
 import { addons } from 'storybook/manager-api';
 import { create } from 'storybook/theming';
-import { Addon_TypesEnum } from 'storybook/internal/types';
 import { cssVars } from '@iress-oss/ids-tokens';
 import { type TagBadgeParameters } from 'storybook-addon-tag-badges/manager-helpers';
 
@@ -49,124 +46,28 @@ export const setUpManager = ({
   const config = addons.getConfig();
 
   if (guidelines) {
-    const GuidelinesWidget = () => {
-      const [container, setContainer] = useState<HTMLElement | null>(null);
+    const injectGuidelinesLink = () => {
+      const target = document.getElementById('storybook-checklist-widget');
+      if (!target || target.dataset.idsGuidelines) return;
+      target.dataset.idsGuidelines = 'true';
+      const container = target.parentElement ?? target;
+      container.innerHTML = '';
+      container.style.padding = '0';
 
-      useEffect(() => {
-        const hijack = (el: HTMLElement) => {
-          const elToUse = el.parentElement ?? el;
-          elToUse.innerHTML = '';
-          elToUse.style.padding = '0';
-          setContainer(elToUse);
-        };
-
-        const target = document.getElementById('storybook-checklist-widget');
-        if (target) {
-          hijack(target);
-          return;
-        }
-
-        const observer = new MutationObserver(() => {
-          const el = document.getElementById('storybook-checklist-widget');
-          if (el) {
-            hijack(el);
-            observer.disconnect();
-          }
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
-        return () => observer.disconnect();
-      }, []);
-
-      if (!container) return null;
-
-      return createPortal(
-        <a
-          href={guidelines.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '4px',
-            padding: '8px 12px',
-            fontSize: '13px',
-            fontWeight: 600,
-            textDecoration: 'none',
-            color: cssVars.colour.neutral[10],
-            background: `color-mix(in srgb, ${cssVars.colour.neutral[80]}, transparent 5%)`,
-            zIndex: 100,
-            position: 'relative',
-          }}
-        >
-          <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-            </svg>
-            {guidelines.title ?? 'Guidelines'}
-            <span
-              style={{
-                background: cssVars.colour.data.bold[10],
-                color: cssVars.colour.data.subtle[10],
-                fontSize: '11px',
-                padding: '0px 4px',
-                borderRadius: '4px',
-              }}
-            >
-              NEW
-            </span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="12"
-              height="12"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{ marginLeft: 'auto', opacity: 0.5 }}
-            >
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-              <polyline points="15 3 21 3 21 9" />
-              <line x1="10" y1="14" x2="21" y2="3" />
-            </svg>
-          </span>
-          {guidelines?.description && (
-            <span
-              style={{
-                fontSize: '11px',
-                color: cssVars.colour.neutral[20],
-                fontWeight: 400,
-              }}
-            >
-              {guidelines.description}
-            </span>
-          )}
-        </a>,
-        container,
-      );
+      const link = document.createElement('a');
+      link.href = guidelines.url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.style.cssText = `display:flex;flex-direction:column;gap:4px;padding:8px 12px;font-size:13px;font-weight:600;text-decoration:none;color:${cssVars.colour.neutral[10]};background:color-mix(in srgb, ${cssVars.colour.neutral[80]}, transparent 5%);z-index:100;position:relative;`;
+      link.innerHTML = `<span style="display:flex;align-items:center;gap:8px"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>${guidelines.title ?? 'Guidelines'}<span style="background:${cssVars.colour.data.bold[10]};color:${cssVars.colour.data.subtle[10]};font-size:11px;padding:0px 4px;border-radius:4px">NEW</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>${guidelines.description ? `<span style="font-size:11px;color:${cssVars.colour.neutral[20]};font-weight:400">${guidelines.description}</span>` : ''}`;
+      container.appendChild(link);
     };
 
-    addons.register('ids/guidelines-link', () => {
-      addons.add('ids/guidelines-link/tool', {
-        title: guidelines.title ?? 'Guidelines',
-        type: Addon_TypesEnum.TOOLEXTRA,
-        match: () => true,
-        render: () => <GuidelinesWidget />,
-      });
-    });
+    injectGuidelinesLink();
+    const observer = new MutationObserver(injectGuidelinesLink);
+    observer.observe(document.body, { childList: true, subtree: true });
   }
+
 
   addons.setConfig({
     theme: create({

@@ -7,6 +7,7 @@ import {
 } from '@storybook/addon-docs/blocks';
 import type { ParametersConfig } from '../types';
 import { ComponentAutoDocs } from './autodocs-templates/ComponentAutoDocs';
+import { LandingAutoDocs } from './autodocs-templates/LandingAutoDocs';
 
 export interface AutoDocsProps {
   /**
@@ -14,7 +15,7 @@ export interface AutoDocsProps {
    * Can be overridden on a per-story basis using the `idsConfig` parameter.
    * Used by the components package to provide a richer documentation experience.
    */
-  template?: 'default' | 'component';
+  template?: 'default' | 'component' | 'landing';
 }
 
 export const AutoDocs = ({
@@ -28,6 +29,10 @@ export const AutoDocs = ({
 
   if (template === 'component') {
     return <ComponentAutoDocs />;
+  }
+
+  if (template === 'landing') {
+    return <LandingAutoDocs />;
   }
 
   return (

@@ -547,13 +547,18 @@ can be retained and adapted to read from meta instead of `.docs.mdx`.
 
 ### Task 10.6: Remove stale docs infrastructure
 
-- [ ] Remove Storybook doc blocks that are no longer needed (`<Meta of=.../>` pattern)
-- [ ] Verify no remaining imports of removed components across the monorepo
+- [x] Remove Storybook doc blocks that are no longer needed (`<Meta of=.../>` pattern)
+- [x] Verify no remaining imports of removed components across the monorepo
 
 ### Task 10.7: Add cross-links from Storybook to Guidelines
 
-- [ ] Add a Storybook toolbar link or panel that points to the guidelines site
-- [ ] Optionally add a "📖 Full docs" link in each autodocs page pointing to `https://<pages-url>/components/<slug>`
+- [x] Add a Storybook toolbar link or panel that points to the guidelines site
+- [x] Optionally add a "📖 Full docs" link in each autodocs page pointing to `https://<pages-url>/components/<slug>`
+
+> **Implementation:** Guidelines link portals into `#storybook-checklist-widget` (replacing the
+> onboarding checklist). Configured via `setUpManager({ guidelines: { url, title } })`.
+> Autodocs "Guidelines" button auto-derives URL from story title via `guidelinesUrl` function
+> in `getPreview()`.
 
 ---
 
@@ -774,11 +779,11 @@ Document how to add/edit guidelines content for contributors and AI agents:
 Add a single MDX introduction page to the components Storybook that explains its new role
 and directs users to the guidelines site for full documentation.
 
-- [ ] **Step 1:** Create an introduction MDX page (e.g. `packages/components/src/Introduction.mdx`) with:
+- [x] **Step 1:** Create an introduction MDX page (e.g. `packages/components/src/Introduction.mdx`) with:
   - Clear statement: Storybook is for interactive examples, visual regression testing, and API documentation
   - Link to the guidelines site for design guidance, usage patterns, and full component docs
   - Brief explanation of how autodocs pages work (auto-generated from component props + stories)
-- [ ] **Step 2:** Ensure it appears first in the sidebar (via story sort order in preview config)
+- [x] **Step 2:** Ensure it appears first in the sidebar (via story sort order in preview config)
 
 ### Task 12.10: Create story factory in storybook-config
 
