@@ -38,7 +38,7 @@ export default defineConfig({
         index: resolve(__dirname, 'src/index.ts'),
         main: resolve(__dirname, 'src/main.ts'),
         preview: resolve(__dirname, 'src/preview.tsx'),
-        manager: resolve(__dirname, 'src/manager.ts'),
+        manager: resolve(__dirname, 'src/manager.tsx'),
       },
     },
     rollupOptions: {

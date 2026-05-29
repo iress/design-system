@@ -62,6 +62,13 @@ export interface PreviewProps {
   autodocsTemplate?: 'default' | 'component';
 
   /**
+   * URL or URL resolver for guidelines documentation links in autodocs pages.
+   * - `string`: used as-is for all components
+   * - `(title: string) => string | undefined`: called with the story title (e.g. "Components/Button")
+   */
+  guidelinesUrl?: string | ((title: string) => string | undefined);
+
+  /**
    * Additional props to pass to the IressStorybook docs container.
    * Used by the components package to declare the component mapping so that we can view components in-development without needing to publish first.
    */
@@ -87,6 +94,7 @@ export interface PreviewProps {
 export const getPreview = ({
   autodocsTemplate = 'default',
   docsProps,
+  guidelinesUrl,
   sandboxConfig,
   componentVersions,
 }: PreviewProps): Preview => {
@@ -139,6 +147,7 @@ export const getPreview = ({
       },
       idsConfig: {
         autodocsTemplate,
+        guidelinesUrl,
       } satisfies ParametersConfig['idsConfig'],
       IDS_Sandbox: {
         additionalTransformers: {

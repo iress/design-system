@@ -19,7 +19,7 @@ const subStorybooks = {
 interface StoryEmbedProps {
   /** Storybook story ID, e.g. "components-button--default" */
   id: string;
-  /** Optional height in px. Defaults to 300. */
+  /** Optional height in px. Defaults to 110. */
   height?: number;
   type?: keyof typeof subStorybooks;
   /** Panel to auto-select on load */
@@ -32,7 +32,7 @@ interface StoryEmbedProps {
 
 export function StoryEmbed({
   id,
-  height = 300,
+  height = 110,
   type = 'components',
   panel: defaultPanel,
   panels = ['storybook/docs/panel', 'storybook/a11y/panel'],
@@ -44,9 +44,27 @@ export function StoryEmbed({
     '[title="Open in CodeSandbox"]',
   ],
 }: StoryEmbedProps) {
+  const [inView, setInView] = useState(false);
   const [loading, setLoading] = useState(true);
   const [panelOpen, setPanelOpen] = useState(defaultPanel ? true : false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
   const iframeSrc = `${subStorybooks[type]}/?path=/story/${id}&shortcuts=false&singleStory=true&embedded=true&panel=0`;
   const storybookUrl = `${mainStorybook}/?path=/docs/${type}_${id}`;
 
@@ -106,8 +124,11 @@ export function StoryEmbed({
 
   return (
     <IressCard p="none" style={{ overflow: 'hidden' }}>
-      <div style={{ position: 'relative', minHeight: height }}>
-        {loading && (
+      <div
+        ref={containerRef}
+        style={{ position: 'relative', minHeight: height }}
+      >
+        {(!inView || loading) && (
           <IressText
             element="p"
             textStyle="typography.body.sm"
@@ -127,19 +148,21 @@ export function StoryEmbed({
             <IressSpinner mr="sm" /> Loading example...
           </IressText>
         )}
-        <iframe
-          ref={iframeRef}
-          src={iframeSrc}
-          title={`Story: ${id}`}
-          style={{
-            width: '100%',
-            height,
-            border: 'none',
-            display: loading ? 'none' : 'block',
-            transition: 'height 0.2s ease',
-          }}
-          onLoad={() => handleLoad()}
-        />
+        {inView && (
+          <iframe
+            ref={iframeRef}
+            src={iframeSrc}
+            title={`Story: ${id}`}
+            style={{
+              width: '100%',
+              height,
+              border: 'none',
+              display: loading ? 'none' : 'block',
+              transition: 'height 0.2s ease',
+            }}
+            onLoad={() => handleLoad()}
+          />
+        )}
         <IressInline gap="xs" bg="colour.neutral.20" p="sm">
           <IressButton
             mode="muted"

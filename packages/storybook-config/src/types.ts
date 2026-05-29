@@ -20,9 +20,13 @@ export interface ParametersConfig {
     autodocsTemplate?: 'default' | 'component';
 
     /**
-     * URL for guidelines documentation. If provided, a link will be appended to the tab navigation in the generated documentation pages, directing users to the full documentation for the component. The URL should be the base URL for the guidelines, and the specific page will be constructed based on the component's title.
+     * URL or URL resolver for guidelines documentation. If provided, a "Guidelines" link
+     * is appended to the tab navigation in autodocs pages.
+     * - `string`: used as-is
+     * - `(title: string) => string | undefined`: called with the story title (e.g. "Components/Button"),
+     *   return a URL or `undefined` to hide the link for that component.
      */
-    guidelinesUrl?: string;
+    guidelinesUrl?: string | ((title: string) => string | undefined);
 
     /**
      * Optional metadata for component testing, used to generate test information in the documentation.

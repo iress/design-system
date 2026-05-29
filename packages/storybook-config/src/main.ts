@@ -95,6 +95,7 @@ export const getMainConfig = ({
 
     core: {
       disableTelemetry: true,
+      disableWhatsNewNotifications: true,
     },
 
     framework: '@storybook/react-vite',

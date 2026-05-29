@@ -37,7 +37,6 @@ export default {
       },
     },
     idsConfig: {
-      guidelinesUrl: 'https://iress.github.io/design-system/components/alert',
       testMeta: componentMeta.testMeta,
     },
   },

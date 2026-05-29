@@ -137,7 +137,10 @@ export const ComponentAutoDocs = () => {
   const config = resolvedMeta.preparedMeta.parameters
     ?.idsConfig as ParametersConfig['idsConfig'];
   const testMeta = config?.testMeta ?? [];
-  const guidelinesUrl = config?.guidelinesUrl;
+  const guidelinesUrl =
+    typeof config?.guidelinesUrl === 'function'
+      ? config.guidelinesUrl(resolvedMeta.preparedMeta.title ?? '')
+      : config?.guidelinesUrl;
   const hasTestMeta = testMeta.length > 0;
 
   const selectTab = (tab: TabName) => {
@@ -182,12 +185,9 @@ export const ComponentAutoDocs = () => {
               href={guidelinesUrl}
               target="_blank"
               rel="noopener noreferrer"
-              append={
-                <IressIcon name="open_in_new" screenreaderText="(new window)" />
-              }
               mode="muted"
             >
-              Guidelines
+              How to use this component?
             </IressButton>
           )
         }

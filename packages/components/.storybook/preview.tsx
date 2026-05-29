@@ -10,6 +10,10 @@ const basePreview = getPreview({
     componentMapping,
     noStyles: true,
   },
+  guidelinesUrl: (title) => {
+    const slug = title.toLowerCase().replace(/\s*\/\s*/g, '/');
+    return `https://iress.github.io/design-system/#/${slug}`;
+  },
   sandboxConfig: {
     dependencies: {
       '@iress-oss/ids-components': 'alpha',
@@ -29,7 +33,6 @@ const preview: Preview = {
       storySort: {
         order: [
           'Introduction',
-          'Get Started',
           'Foundations',
           'Patterns',
           'Components',
