@@ -540,10 +540,10 @@ can be retained and adapted to read from meta instead of `.docs.mdx`.
   - `ComponentExample.tsx` — **removed** (replaced by `ComponentCanvas` in `AutoDocsPage`)
   - `ComponentApi.tsx`, `ComponentApiExpander.tsx`, `ComponentApiHeading.tsx` — **removed** (autodocs generates API tables)
 - [x] **Step 2:** Refactor kept components to read from shared meta instead of `.docs.mdx` props
-- [ ] **Step 3:** Remove unused exports from `src/index.ts`
-- [ ] **Step 4:** Remove related tests and stories for deleted components
-- [ ] **Step 5:** Update `packages/storybook-config/package.json` if docs-related deps can be dropped
-- [ ] **Step 6:** Keep utility helpers that are still used by stories (`disableArgTypes`, `removeArgTypes`, `stylingProps`, etc.)
+- [x] **Step 3:** Remove unused exports from `src/index.ts`
+- [x] **Step 4:** Remove related tests and stories for deleted components
+- [x] **Step 5:** Update `packages/storybook-config/package.json` if docs-related deps can be dropped
+- [x] **Step 6:** Keep utility helpers that are still used by stories (`disableArgTypes`, `removeArgTypes`, `stylingProps`, etc.)
 
 ### Task 10.6: Remove stale docs infrastructure
 
@@ -659,7 +659,7 @@ for the pattern — a JSDoc comment with a brief description above the component
 
 ### Task 11.5.3: Lint rule to enforce JSDoc presence
 
-- [ ] **Step 1:** Add ESLint rule (`jsdoc/require-jsdoc`) targeting exported component functions/constants
+- [x] **Step 1:** Add `eslint-plugin-jsdoc` with `require-jsdoc` rule targeting `export const Iress*` in components/patterns
 - [ ] **Step 2:** Optionally add a custom lint rule or script to verify description matches meta
 
 ---
