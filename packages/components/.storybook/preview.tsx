@@ -5,6 +5,7 @@ import '../src/styled-system/styles.css';
 import componentVersions from './component-versions.json' with { type: 'json' };
 
 const basePreview = getPreview({
+  autodocsTemplate: 'component',
   docsProps: {
     componentMapping,
     noStyles: true,

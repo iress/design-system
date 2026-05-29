@@ -504,12 +504,12 @@ for component metadata (title, description, tags, etc.) shared across Storybook,
 and AI docs. This must happen before removing `.docs.mdx` files so the autodocs pages can
 render the same information that `.docs.mdx` provided (description, status, etc.).
 
-- [ ] **Step 1:** Add `description` field to each component's `meta/index.tsx`
-- [ ] **Step 2:** Create a `/meta` package export in `@iress-oss/ids-components` (re-exports all component metas)
+- [x] **Step 1:** Add `description` field to each component's `meta/index.tsx`
+- [x] **Step 2:** Create a `/meta` package export in `@iress-oss/ids-components` (re-exports all component metas)
 - [x] **Step 3:** ~~Wire stories to use meta for `title`~~ — **Not possible.** Storybook requires static string literal titles (parsed at index time without execution). Meta `heading` is used for guidelines and AI docs only. Story titles remain hardcoded strings.
-- [ ] **Step 4:** Wire guidelines `content/*.mdx` to import meta from `@iress-oss/ids-components/meta/<component>`
-- [ ] **Step 5:** Ensure `AutoDocsPage` can render component description from meta (via story parameters or CSF meta)
-- [ ] **Step 6:** Storybook URLs are inferred from title (no explicit URL needed in meta)
+- [x] **Step 4:** Wire guidelines `content/*.mdx` to import meta from `@iress-oss/ids-components/meta/<component>`
+- [x] **Step 5:** Ensure `AutoDocsPage` can render component description from meta (via story parameters or CSF meta)
+- [x] **Step 6:** Storybook URLs are inferred from title (no explicit URL needed in meta)
 
 **Design constraints:**
 - Meta must be data-only (no JSX in the shared export — `Thumbnail` stays in the local `meta/` but isn't re-exported via `/meta`)
@@ -518,28 +518,28 @@ render the same information that `.docs.mdx` provided (description, status, etc.
 
 ### Task 10.4: Remove `.docs.mdx` files
 
-- [ ] **Step 1:** Delete all 65 `*.docs.mdx` files from `packages/components/src/`
-- [ ] **Step 2:** Remove `packages/components/docs/` folder (guides moved to guidelines site)
-- [ ] **Step 3:** Delete all `.mdx` files from `packages/tokens/`:
+- [x] **Step 1:** Delete all 65 `*.docs.mdx` files from `packages/components/src/`
+- [x] **Step 2:** Remove `packages/components/docs/` folder (guides moved to guidelines site)
+- [x] **Step 3:** Delete all `.mdx` files from `packages/tokens/`:
   - `packages/tokens/docs/010-Introduction.mdx`
   - `packages/tokens/docs/020-Sandbox.mdx`
   - `packages/tokens/src/schema/Colour.mdx`
   - `packages/tokens/src/schema/Spacing.mdx`
   - `packages/tokens/src/schema/Radius.mdx`
   - `packages/tokens/src/schema/Typography.mdx`
-- [ ] **Step 4:** Update `translate-components.ts` — either delete entirely or simplify to only run `derive-ai-docs.ts`
+- [x] **Step 4:** Update `translate-components.ts` — either delete entirely or simplify to only run `derive-ai-docs.ts`
 
 ### Task 10.5: Clean up `@iress-oss/ids-storybook-config`
 
 With autodocs + shared meta, some custom doc components are no longer needed but others
 can be retained and adapted to read from meta instead of `.docs.mdx`.
 
-- [ ] **Step 1:** Evaluate which doc components to keep vs remove:
-  - `ComponentOverview.tsx` — **consider keeping** (can render description/status from meta in `AutoDocsPage`)
-  - `ComponentStatus.tsx` — **consider keeping** (can render status badge from meta)
-  - `ComponentExample.tsx` — **remove** (replaced by `ComponentCanvas` in `AutoDocsPage`)
-  - `ComponentApi.tsx`, `ComponentApiExpander.tsx`, `ComponentApiHeading.tsx` — **remove** (autodocs generates API tables)
-- [ ] **Step 2:** Refactor kept components to read from shared meta instead of `.docs.mdx` props
+- [x] **Step 1:** Evaluate which doc components to keep vs remove:
+  - `ComponentOverview.tsx` — **removed** (autodocs uses Description block)
+  - `ComponentStatus.tsx` — **kept** (renders status badge in AutoDocsPage)
+  - `ComponentExample.tsx` — **removed** (replaced by `ComponentCanvas` in `AutoDocsPage`)
+  - `ComponentApi.tsx`, `ComponentApiExpander.tsx`, `ComponentApiHeading.tsx` — **removed** (autodocs generates API tables)
+- [x] **Step 2:** Refactor kept components to read from shared meta instead of `.docs.mdx` props
 - [ ] **Step 3:** Remove unused exports from `src/index.ts`
 - [ ] **Step 4:** Remove related tests and stories for deleted components
 - [ ] **Step 5:** Update `packages/storybook-config/package.json` if docs-related deps can be dropped
@@ -589,7 +589,7 @@ packages/components/.ai/components/button.md (shipped in npm)
 
 ### Task 11.1: Create `<StoryEmbed>` component for guidelines site
 
-- [ ] **Step 1:** Create `apps/guidelines/src/components/StoryEmbed.tsx`
+- [x] **Step 1:** Create `apps/guidelines/src/components/StoryEmbed.tsx`
   - Accepts `id` (Storybook story ID, e.g. `components-button--default`)
   - Renders a Chromatic iframe: `<iframe src="https://main--691abcc79dfa560a36d0a74f.chromatic.com/iframe.html?id={id}&viewMode=story" />`
   - Responsive height, loading state, optional caption
@@ -872,3 +872,37 @@ Submit Llama 3.2 3B model approval request via [Alfred portal](https://iress.atl
 - **Data classification:** No sensitive data — only public IDS documentation as context
 - **Justification:** Same Meta Llama family already approved (3.3 70B). Runs entirely in user's browser — no data leaves device. Internal developer tool, not client-facing.
 - **Note:** WebLLM code will live in a separate private repo for security.
+
+---
+
+## Known Issues: StoryEmbed Panel Control
+
+The `StoryEmbed` component (`apps/guidelines/src/components/StoryEmbed.tsx`) and its
+Storybook-side handlers (`packages/storybook-config/src/main.ts` managerHead scripts)
+have the following outstanding issues to resolve:
+
+1. **Panel should start hidden**: Stories should always load with the addon panel closed.
+   Currently Storybook may open the panel by default before `EMBED_STORYBOOK` fires.
+   Fix: either use a URL param Storybook respects, or add a CSS rule that hides the panel
+   initially and reveals it only after `EMBED_STORYBOOK` runs.
+
+2. **Animate loading overlay**: Add a fade-out transition on the "Loading example…" overlay
+   to give time for the `EMBED_STORYBOOK` setup (hide elements, close panel, filter tabs)
+   to complete before the user sees the iframe content. This avoids a flash of unstyled
+   Storybook chrome.
+
+3. **Show Code / Accessibility should toggle**: Clicking "Show code" when the code panel
+   is already open should close it (and vice versa). Currently it always sends `showPanel: true`
+   with the panel ID. Needs state tracking of which panel is currently open.
+
+4. **Controls tab showing by default**: When the addon panel opens, it sometimes defaults
+   to the Controls tab instead of the panel specified in `EMBED_STORYBOOK`. This is a timing
+   issue — the `allowedPanels` filter hides Controls but Storybook's internal state may
+   re-select it. Fix: delay the `SELECT_PANEL` click until after `FILTER_PANELS` completes,
+   or use `_waitFor` on the specific tab becoming visible before clicking.
+
+5. **Search not indexing dynamic content**: Since component pages now import metadata
+   dynamically (from `meta/index.tsx`), the Pagefind search index may not capture the
+   full page content at build time. Fix: either pre-render pages at build time so Pagefind
+   can crawl them, or switch to a search index built from the MDX source files directly
+   (like the original FlexSearch approach that indexed `meta.title` + `meta.description`).

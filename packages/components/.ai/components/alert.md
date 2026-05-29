@@ -1,14 +1,11 @@
 # 
 > **Component:** `import { IressAlert } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)```tsx
-```
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)> [View live example in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--status)
 
 ## Quick Start
 
 ```tsx
-<IressAlert status="info">
-  This is a simple info alert
-</IressAlert>
+<IressAlert status="info">This is a simple info alert</IressAlert>;
 ```
 
 ## Usage
@@ -31,7 +28,7 @@ For a full comparison of feedback components, see the [Feedback pattern](https:/
 
 ### Status
 
-The alert offers four statuses that set a distinctive colour and icon. They can be set using the `status` prop. Their different use cases are described here.
+The alert offers five statuses that set a distinctive colour and icon. They can be set using the `status` prop. Their different use cases are described here.
 
 ```tsx
 <IressStack gap="md">
@@ -40,7 +37,7 @@ The alert offers four statuses that set a distinctive colour and icon. They can 
   <IressAlert status="warning">Please review before continuing.</IressAlert>
   <IressAlert status="danger">An error has occurred.</IressAlert>
   <IressAlert status="neutral">A neutral notification.</IressAlert>
-</IressStack>
+</IressStack>;
 ```
 
 [View "Status" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--status)
@@ -52,7 +49,9 @@ An alert can be displayed with a heading. This is controlled by the `heading` pr
 **Note**: The `heading` prop replaces the `headingText` and `headingLevel` props from previous versions of IDS. These prop are now deprecated and will be removed in a future version.
 
 ```tsx
-<IressAlert heading="Alert heading" />
+<IressAlert heading="Alert heading">
+  This is an alert with a heading.
+</IressAlert>;
 ```
 
 [View "Heading" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--heading)
@@ -63,7 +62,10 @@ The `actions` prop allows you to display call to action buttons within the alert
 
 ```tsx
 <IressStack gap="md">
-  <IressAlert status="danger" actions={[{ children: 'Retry' }, { children: 'Dismiss', mode: 'tertiary' }]}>
+  <IressAlert
+    status="danger"
+    actions={[{ children: 'Retry' }, { children: 'Dismiss', mode: 'tertiary' }]}
+  >
     Something went wrong. Please try again.
   </IressAlert>
   <IressAlert status="info" actions={[{ children: 'Learn more' }]}>
@@ -78,7 +80,7 @@ The `actions` prop allows you to display call to action buttons within the alert
   <IressAlert status="neutral" actions={[{ children: 'Got it' }]}>
     This is a neutral alert with an action.
   </IressAlert>
-</IressStack>
+</IressStack>;
 ```
 
 ### Icon
@@ -88,7 +90,7 @@ The `icon` prop allows you to customise the icon displayed in the alert. It acce
 ```tsx
 <IressAlert heading="Some information" multiLine icon={false}>
   This is an alert without an icon
-</IressAlert>
+</IressAlert>;
 ```
 
 [View "Icon" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--icon)
@@ -100,21 +102,25 @@ By default, the alert is designed to display short messages. If you need to disp
 ```tsx
 <IressStack gap="md">
   <IressAlert status="danger" multiLine heading="Error">
-    A detailed error message that spans multiple lines to provide more context about what went wrong and how to fix it.
+    A detailed error message that spans multiple lines to provide more context
+    about what went wrong and how to fix it.
   </IressAlert>
   <IressAlert status="info" multiLine heading="Information">
-    Here is some detailed information that requires more space to explain the context fully.
+    Here is some detailed information that requires more space to explain the
+    context fully.
   </IressAlert>
   <IressAlert status="success" multiLine heading="Success">
-    Your operation completed successfully. Here are the details of what was processed.
+    Your operation completed successfully. Here are the details of what was
+    processed.
   </IressAlert>
   <IressAlert status="warning" multiLine heading="Warning">
-    Please be aware of the following important details before proceeding with this action.
+    Please be aware of the following important details before proceeding with
+    this action.
   </IressAlert>
   <IressAlert status="neutral" multiLine heading="Note">
     This is a neutral multi-line alert with additional context for the user.
   </IressAlert>
-</IressStack>
+</IressStack>;
 ```
 
 ### Variants
@@ -132,14 +138,14 @@ The alert can be displayed in different variants to suit different use cases. Th
   <IressAlert variant="full-width" heading="Full-width alert">
     This alert is displayed in the full-width layout.
   </IressAlert>
-</IressStack>
+</IressStack>;
 ```
 
 [View "Variant" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--variant)
 
 ### Dimissable
 
-The alert can be made dismissable by setting the `onDismiss` prop. This will display a close button in the top right corner of the alert, allowing users to dismiss it.
+The alert can be made dismissable by setting the `onClose` prop. This will display a close button in the top right corner of the alert, allowing users to dismiss it.
 
 ```tsx
 <IressStack gap="md">
@@ -158,7 +164,7 @@ The alert can be made dismissable by setting the `onDismiss` prop. This will dis
   <IressAlert status="neutral" onClose={() => console.log('closed')}>
     This neutral alert can be dismissed.
   </IressAlert>
-</IressStack>
+</IressStack>;
 ```
 
 [View "Dismissable" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--dismissable)
@@ -181,7 +187,9 @@ const alert = screen.getByRole('status');
 You can override the default role if needed:
 
 ```tsx
-<IressAlert status="info" role="alert">Urgent info</IressAlert>
+<IressAlert status="info" role="alert">
+  Urgent info
+</IressAlert>
 ```
 
 ### Test IDs
@@ -189,10 +197,10 @@ You can override the default role if needed:
 When you pass a `data-testid` to `IressAlert`, the following nested test IDs
 are generated automatically:
 
-| Suffix | Example | Description |
-| --- | --- | --- |
-| `heading` | `my-alert__heading` | The alert heading container |
-| `footer` | `my-alert__footer` | The alert footer/actions container |
+| Suffix    | Example             | Description                        |
+| --------- | ------------------- | ---------------------------------- |
+| `heading` | `my-alert__heading` | The alert heading container        |
+| `footer`  | `my-alert__footer`  | The alert footer/actions container |
 
 ---
 

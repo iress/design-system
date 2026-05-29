@@ -81,13 +81,13 @@ export const getMainConfig = ({
     addons: [
       '@iress-oss/ids-storybook-okta',
       '@storybook/addon-links',
+      '@storybook/addon-docs',
       '@storybook/addon-a11y',
       '@vueless/storybook-dark-mode',
       '@chromatic-com/storybook',
       '@iress-oss/ids-storybook-sandbox',
       '@iress-oss/ids-storybook-toggle-stories',
       '@iress-oss/ids-storybook-version-badge',
-      '@storybook/addon-docs',
       // 'storybook-addon-tag-badges', TODO: Does not work in Storybook 10, as it does not work in composition mode
       // '@storybook/addon-interactions', TODO: Enable when ready
       // 'storybook-addon-rtl', TODO: Create our own addon that works with Storybook 10
@@ -213,6 +213,19 @@ export const getMainConfig = ({
     return [
       head,
       `<script>
+      // Clear persisted layout from session storage when embedded so that
+      // the panel=0 URL param is respected on initial load.
+      if (new URLSearchParams(window.location.search).has('embedded')) {
+        try {
+          Object.keys(sessionStorage).forEach(function(k) {
+            if (k.includes('storybook') && k.includes('layout')) {
+              sessionStorage.removeItem(k);
+            }
+          });
+        } catch(e) {}
+      }
+</script>`,
+      `<script>
   function broadcastHash() {
     const hash = window.location.hash;
     const frames = document.querySelectorAll('iframe');
@@ -220,7 +233,7 @@ export const getMainConfig = ({
       try {
         f.contentWindow?.postMessage({ type: 'UPDATE_HASH', hash }, '*');
       } catch (err) {
-        console.debug('[Storybook Host] Skipped frame broadcast:', err);
+        console.log('[Storybook Host] Skipped frame broadcast:', err);
       }
     });
   }
@@ -245,11 +258,236 @@ export const getMainConfig = ({
           try {
             f.contentWindow?.postMessage({ type: 'LOAD_THEME', ...data }, '*');
           } catch (err) {
-            console.debug('[Storybook Host] Skipped frame broadcast:', err);
+            console.log('[Storybook Host] Skipped frame broadcast:', err);
           }
         });
       });
     </script>`,
+      `<script>
+      const _queryForClosedPanel = '[aria-label="Show addon panel"], [aria-label="Exit full screen"]';
+      const _queryToOpenPanel = _queryForClosedPanel;
+      var _queryToClosePanel = '[aria-label="Hide addon panel"]';
+      const embedded = new URLSearchParams(window.location.search).has('embedded');
+
+      if (embedded) {
+        var _queryToClosePanel = '[aria-label="Hide addon panel"], [aria-label="Enter full screen"]';
+      }
+
+      window.addEventListener('message', function requestSize(event) {
+        if (!event.data) return;
+        var type = event.data.type;
+
+        if (type !== 'REQUEST_SIZE') {
+          return;
+        }
+
+        // Relay resize request down to preview iframe
+        var frames = document.querySelectorAll('iframe');
+        frames.forEach(function(f) {
+          try { f.contentWindow.postMessage(event.data, '*'); } catch(e) {}
+        });
+      });
+      </script>`,
+      `<script>
+      function _waitFor(sel, cb, t) {
+        var el = document.querySelector(sel);
+        if (el) return cb(el);
+        var o = new MutationObserver(function() {
+          el = document.querySelector(sel);
+          if (el) { o.disconnect(); cb(el); }
+        });
+        o.observe(document.body, { childList: true, subtree: true });
+        if (t) setTimeout(function() { o.disconnect(); }, t);
+      }
+
+      window.addEventListener('message', function embedStorybook(event) {
+        if (!event.data) return;
+        const { type, ...params } = event.data;
+
+        if (type !== 'EMBED_STORYBOOK') {
+          return;
+        }
+
+        window.postMessage({ type: 'REQUEST_SIZE' }, '*');
+        window.postMessage({ type: 'REQUEST_PANEL' }, '*');
+
+        if (params.panel) {
+          // If panel is open, select the specified panel tab.
+          _waitFor(_queryToClosePanel, function(hidePanel) { 
+            console.log('[Storybook Host] Panel is open', hidePanel);
+
+            _waitFor('[role="tab"][data-key="' + params.panel + '"]', function(panelEl) { 
+              panelEl.click(); 
+              console.log('[Storybook Host] Selected panel:', params.panel);
+
+              if (params.showPanel === false) {
+                hidePanel.click();
+                console.log('[Storybook Host] Closed panel as per showPanel=false');
+              }
+            }, 5000);
+          }, 5000);
+          
+          // Open panel and then select a specific addon panel tab
+          _waitFor(_queryToOpenPanel, function(addonPanel) {
+            if (params.showPanel !== false) {
+              addonPanel.click();
+              console.log('[Storybook Host] Opened addon panel');
+            } 
+
+            _waitFor('[role="tab"][data-key="' + params.panel + '"]', function(panelEl) { 
+              panelEl.click(); 
+              console.log('[Storybook Host] Selected panel:', params.panel);
+            }, 5000);
+          }, 5000);
+        } else if (params.showPanel === true) {
+          // Just open the addon panel without selecting a tab
+          _waitFor(_queryToOpenPanel, function(addonPanel) { 
+            addonPanel.click();
+            console.log('[Storybook Host] Opened addon panel (showPanel)');
+          }, 5000);
+        } else if (params.showPanel === false) {
+          // Just close the addon panel without selecting a tab
+          _waitFor(_queryToClosePanel, function(toggle) { 
+            toggle.click();
+            console.log('[Storybook Host] Closed addon panel (showPanel)');
+          }, 5000);
+        }
+
+        if (params.allowedPanels?.length > 0) {
+          var allowedPanels = params.allowedPanels;
+          var newOpenPanel = params.panel;
+
+          _waitFor('[role="tablist"][aria-label="Available addons"]', function(tabList) { 
+            tabList.querySelectorAll('[role="tab"]').forEach(function(tab) {
+              var key = tab.getAttribute('data-key');
+
+              if (allowedPanels.includes(key)) {
+                console.log('[Storybook Host] Keeping panel:', key);
+                if (!newOpenPanel) {
+                  tab.click();
+                  newOpenPanel = key;
+                  console.log('[Storybook Host] Clicking panel:', key);
+                }
+              } else {
+                tab.style.display = 'none';
+                  console.log('[Storybook Host] Hiding panel:', key);
+              }
+            });
+          }, 5000);
+        }
+
+        // Hide elements by CSS selector
+        if (params.selectorsToHide) {
+          params.selectorsToHide.forEach(function(sel) {
+            _waitFor(sel, function() { 
+              document.querySelectorAll(sel).forEach(function(el) {
+                el.style.display = 'none';
+                console.log('[Storybook Host] Hiding:', sel);
+              });
+            }, 5000);
+          });
+        }
+      });
+    </script>`,
+      `<script>
+      document.addEventListener('click', function(e) {
+        const target = e.target;
+
+        if (!target) return;
+
+        // Send that panel is open when clicking the "Exit full screen" button in the addon panel
+        if (target.matches(_queryToOpenPanel) || target.closest(_queryToOpenPanel)) {
+          window.parent.postMessage({ 
+            type: 'RELAY_PANEL', 
+            flag: true, 
+            height: document.getElementById('storybook-panel-root').offsetHeight,
+          }, '*');
+          console.log('[Storybook Host] Opening panel');
+        }
+
+        // Send that panel is closed when clicking the "Enter full screen" button in the addon panel
+        if (target.matches(_queryToClosePanel) || target.closest(_queryToClosePanel)) {
+          window.parent.postMessage({ 
+            type: 'RELAY_PANEL', 
+            flag: false, 
+            height: document.getElementById('storybook-panel-root').offsetHeight,
+          }, '*');
+          console.log('[Storybook Host] Closing panel');
+        }
+      });
+
+      window.addEventListener('load', function(event) {
+        setTimeout(function() {
+          window.parent.postMessage({ 
+            type: 'RELAY_PANEL', 
+            flag: document.querySelector(_queryForClosedPanel) === null, 
+            height: document.getElementById('storybook-panel-root').offsetHeight,
+          }, '*');
+          console.log('[Storybook Host] Loading initial panel state');
+        }, 500);
+      });
+
+      window.addEventListener('message', function(event) {
+        if (!event.data) return;
+
+        if (event.data.type !== 'REQUEST_PANEL') {
+          return;
+        }
+
+        setTimeout(function() {
+          window.parent.postMessage({ 
+            type: 'RELAY_PANEL', 
+            flag: document.querySelector(_queryForClosedPanel) === null,
+            height: document.getElementById('storybook-panel-root').offsetHeight,
+          }, '*');
+        }, 500);
+        console.log('[Storybook Host] Loading panel state by request');
+      }); 
+    </script>`,
+      `<script>
+      var _managedSizeInit = false;
+      function _getManagerContentHeight(previewH = 300) {
+        // The preview iframe inside the manager reports its content height via RELAY_SIZE.
+        // We need to add the manager chrome (toolbar + panel) on top.
+        var toolbar = document.querySelector('[role="toolbar"]');
+        var panel = document.getElementById('storybook-panel-root');
+        var panelClosed = document.querySelector(_queryForClosedPanel) !== null;
+        
+        var toolbarH = toolbar ? toolbar.offsetHeight : 0;
+        var panelH = panel ? panel.offsetHeight : 0;
+        
+        console.log('[Storybook Host] Calculated content height', { toolbarH, panelH, previewH, panelClosed });
+
+        return toolbarH + previewH + panelH;
+      }
+
+      window.addEventListener('message', function(event) {
+        if (!event.data) return;
+
+        if (event.data.type !== 'RELAY_SIZE' || window.parent === window) {
+          return;
+        }
+
+        // Use the preview's reported height + manager chrome
+        setTimeout(function () {
+          var fullHeight = _getManagerContentHeight(event.data.height);
+          window.parent.postMessage({ type: 'RELAY_SIZE', height: fullHeight }, '*');
+          console.log('[Storybook Host] Relaying size to parent:', fullHeight);
+          _managedSizeInit = true;
+        }, _managedSizeInit ? 0 : 500);
+      }); 
+      </script>`,
+      `<script>
+      window.addEventListener('message', function(event) {
+        if (!event.data) return;
+
+        if (event.data.type !== 'OPEN_SANDBOX') {
+          return;
+        }
+
+        document.querySelector('[title="Open in CodeSandbox"]')?.click();
+      });
+      </script>`,
       env.BASE_PATH ? `<base href="${env.BASE_PATH}">` : false,
     ]
       .filter(Boolean)

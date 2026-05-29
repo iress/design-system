@@ -11,7 +11,6 @@ import {
 import type Channel from 'storybook/internal/channels';
 import { convert, ThemeProvider, themes } from 'storybook/theming';
 import { IressStorybook } from '../src/components/IressStorybook';
-import { HideSidebar } from '../src/components/HideSidebar';
 
 const loaders = [
   /**
@@ -85,7 +84,6 @@ const preview: Preview = {
     (Story, { loaded: { docsContext } }) =>
       docsContext ? (
         <IressStorybook context={docsContext as never}>
-          <HideSidebar />
           <Story />
         </IressStorybook>
       ) : (

@@ -7,11 +7,11 @@ import {
   useOf,
   ArgTypes,
 } from '@storybook/addon-docs/blocks';
-import { ComponentCanvas } from './ComponentCanvas';
+import { ComponentCanvas } from '../ComponentCanvas';
 import { use, useContext, useEffect, useState } from 'react';
-import { IressStorybookContext } from './IressStorybookContext';
-import { ComponentStatus } from './ComponentStatus';
-import { TestTable } from './TestTable';
+import { IressStorybookContext } from '../IressStorybookContext';
+import { ComponentStatus } from '../ComponentStatus';
+import { TestTable } from '../TestTable';
 import {
   IressButton,
   IressCol,
@@ -22,7 +22,7 @@ import {
   IressPanel,
   IressRow,
 } from '@iress-oss/ids-components';
-import type { BroadcastHashEvent, ParametersConfig } from '../types';
+import type { BroadcastHashEvent, ParametersConfig } from '../../types';
 import { cssVars } from '@iress-oss/ids-tokens';
 
 const TAB_NAMES = [
@@ -114,11 +114,7 @@ const StoriesTabContent = ({
   );
 };
 
-/**
- * Custom autodocs page that renders each story using ComponentCanvas,
- * which includes the "Open in Sandbox" action via useSandboxCanvasProps.
- */
-export const AutoDocsPage = () => {
+export const ComponentAutoDocs = () => {
   const { IressText, IressTabSet, IressTab } = use(IressStorybookContext);
   const [selectedTab, setSelectedTab] = useState<TabName>('playground');
   const docsContext = useContext(DocsContext);

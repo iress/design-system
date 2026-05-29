@@ -15,7 +15,8 @@
     "@mdx-js/react": "^3.1.0",
     "@tanstack/react-router": "^1.120.3",
     "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "react-dom": "^19.2.6",
+    "rehype-prism-plus": "^2.0.0"
   },
   "devDependencies": {
     "@mdx-js/rollup": "^3.1.0",
