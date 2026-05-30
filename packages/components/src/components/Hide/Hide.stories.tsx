@@ -2,16 +2,15 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressHide } from '.';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
-import { IressPanel } from '../Panel';
 import { IressDivider } from '../Divider';
 import {
-  CurrentBreakpoint,
   disableArgTypes,
   reactNodeArgType,
   stylingProps,
+  withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
-import { BREAKPOINT_DETAILS, BREAKPOINTS, IressTable } from '@/main';
 import componentMeta from './meta';
+import { BREAKPOINT_DETAILS, BREAKPOINTS, IressTable } from '@/main';
 
 type Story = StoryObj<typeof IressHide>;
 
@@ -47,14 +46,12 @@ export const HiddenOn: Story = {
   argTypes: {
     ...disableArgTypes(['children', 'hiddenOn']),
   },
+  decorators: [withBreakpointLabel()],
   render: (args) => {
     const description = args.visuallyHidden ? 'visually ' : 'totally ';
 
     return (
       <IressStack gap="spacing.1">
-        <IressPanel>
-          <CurrentBreakpoint />
-        </IressPanel>
         <IressDivider />
         <IressHide {...args} hiddenOn={{ xs: true }}>
           <IressText>
@@ -95,6 +92,13 @@ export const VisuallyHidden: Story = {
 };
 
 export const BreakpointTable: Story = {
+  parameters: {
+    docs: {
+      description: {
+        component: 'This table shows the expected',
+      },
+    },
+  },
   render: () => (
     <IressTable
       caption="Hide breakpoints"
@@ -108,4 +112,6 @@ export const BreakpointTable: Story = {
       }))}
     />
   ),
+  decorators: [withBreakpointLabel()],
+  tags: ['reference'],
 };

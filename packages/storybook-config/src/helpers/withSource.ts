@@ -1,4 +1,8 @@
 import type { SourceProps } from '@storybook/addon-docs/blocks';
+import {
+  applySourceReplacements,
+  type SourceReplacement,
+} from './sourceReplacements';
 
 interface WithSourceOptions {
   /** Language for syntax highlighting. Defaults to 'tsx'. */
@@ -13,6 +17,8 @@ interface WithSourceOptions {
   stripExportFunction?: boolean;
   /** Format the source with prettier. Defaults to true. */
   format?: boolean;
+  /** Additional replacements for non-serializable values. Applied after all other transforms. */
+  sourceReplacements?: SourceReplacement[];
 }
 
 /**
@@ -66,7 +72,7 @@ function transformSource(source: string, options?: WithSourceOptions): string {
   code = code.replace(/\n{3,}/g, '\n\n').trim();
 
   // Replace serialized DOM elements with their readable equivalents
-  code = code.replace(/\{\s*_react[^}]*\}/gs, 'document.body');
+  code = applySourceReplacements(code, options?.sourceReplacements);
 
   return code;
 }

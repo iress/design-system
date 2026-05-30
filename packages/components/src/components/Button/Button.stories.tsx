@@ -2,10 +2,10 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressButton, type IressButtonProps } from './Button';
 import {
   disableArgTypes,
-  CurrentBreakpoint,
   reactNodeArgType,
   stylingProps,
   withSource,
+  withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
 import { IressText } from '../Text';
 import { IressIcon } from '../Icon';
@@ -58,7 +58,10 @@ export const Mode: ButtonStory = {
   render: (args) => <ButtonMode {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ButtonModeSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ButtonModeSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -66,7 +69,10 @@ export const Status: ButtonStory = {
   render: (args) => <ButtonStatus {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ButtonStatusSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ButtonStatusSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -79,9 +85,15 @@ export const Types: ButtonStory = {
   },
   render: (args) => (
     <IressInline gap="md">
-      <IressButton {...args} type="button">button</IressButton>
-      <IressButton {...args} type="submit">submit</IressButton>
-      <IressButton {...args} type="reset">reset</IressButton>
+      <IressButton {...args} type="button">
+        button
+      </IressButton>
+      <IressButton {...args} type="submit">
+        submit
+      </IressButton>
+      <IressButton {...args} type="reset">
+        reset
+      </IressButton>
     </IressInline>
   ),
 };
@@ -90,7 +102,10 @@ export const Loading: ButtonStory = {
   render: (args) => <ButtonLoading {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ButtonLoadingSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ButtonLoadingSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -115,14 +130,15 @@ export const Fluid: ButtonStory = {
   args: {
     children: 'Fluid button',
   },
+  decorators: [withBreakpointLabel()],
   render: (args) => (
     <IressInline gap="md">
-      <IressText element="p">
-        Please resize your screen to see how the fluid value changes. Current
-        breakpoint: <CurrentBreakpoint renderLabel="and-above" />.
-      </IressText>
-      <IressButton {...args} fluid>Always fluid</IressButton>
-      <IressButton {...args} fluid="md">Fluid on xs and sm</IressButton>
+      <IressButton {...args} fluid>
+        Always fluid
+      </IressButton>
+      <IressButton {...args} fluid="md">
+        Fluid on xs and sm
+      </IressButton>
     </IressInline>
   ),
 };
@@ -153,7 +169,10 @@ export const Slots: ButtonStory = {
   render: (args) => <ButtonSlots {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ButtonSlotsSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ButtonSlotsSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -189,7 +208,10 @@ export const Element: ButtonStory = {
   render: (args) => <RoutingButton {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(RoutingButtonSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(RoutingButtonSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -197,6 +219,9 @@ export const Active: ButtonStory = {
   render: (args) => <ButtonActive {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ButtonActiveSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ButtonActiveSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };

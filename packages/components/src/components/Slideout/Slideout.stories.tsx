@@ -22,11 +22,9 @@ import AbsolutePositionSlideoutSource from './mocks/AbsolutePositionSlideout.tsx
 import { SlideoutMicrofrontend } from './mocks/SlideoutMicrofrontend';
 import SlideoutMicrofrontendSource from './mocks/SlideoutMicrofrontend.tsx?raw';
 import {
-  CurrentBreakpoint,
   DiffViewer,
   disableArgTypes,
   withSource,
-  withTransformedProviderSource,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
@@ -131,7 +129,10 @@ export const ShowWithState: Story = {
   render: (args) => <SlideoutUsingState {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SlideoutUsingStateSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SlideoutUsingStateSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -185,9 +186,6 @@ export const Modes: Story = {
                 (&gt;1200px); on smaller screens the slideout will overlay the
                 content.
               </p>
-              <IressPanel bg="alt">
-                <CurrentBreakpoint />
-              </IressPanel>
             </IressText>
           </IressSlideout>
         </IressInline>
@@ -204,7 +202,10 @@ export const Position: Story = {
   render: (args) => <SlideoutPositions {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SlideoutPositionsSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SlideoutPositionsSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -219,7 +220,10 @@ export const Size: Story = {
   render: (args) => <SlideoutSizes {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SlideoutSizesSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SlideoutSizesSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -246,7 +250,10 @@ export const AbsolutePosition: Story = {
   render: (args) => <AbsolutePositionSlideout {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(AbsolutePositionSlideoutSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(AbsolutePositionSlideoutSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -258,7 +265,10 @@ export const Microfrontend: Story = {
   render: (args) => <SlideoutMicrofrontend {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SlideoutMicrofrontendSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SlideoutMicrofrontendSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
     layout: 'fullscreen',
   },
 };

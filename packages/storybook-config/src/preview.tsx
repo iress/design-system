@@ -15,6 +15,10 @@ import sandboxHtml from './sandbox.html?raw';
 import sandboxTemplate from './sandbox.template.tsx?raw';
 import { AutoDocs } from './components/AutoDocs';
 import { type RequestSizeEvent, type ParametersConfig } from './types';
+import {
+  applySourceReplacements,
+  type SourceReplacement,
+} from './helpers/sourceReplacements';
 
 const IDSStyles = lazy(() => import('./components/IDSStyles'));
 
@@ -85,6 +89,13 @@ export interface PreviewProps {
    * When provided, the version is displayed on each component's docs page.
    */
   componentVersions?: Record<string, string>;
+
+  /**
+   * Replacements applied to auto-generated source code in the docs panel.
+   * Useful for fixing non-serializable values (e.g. `document.body` renders as `{}`).
+   * Defaults include common patterns like `container: {}` → `container: document.body`.
+   */
+  sourceReplacements?: SourceReplacement[];
 }
 
 /**
@@ -97,6 +108,7 @@ export const getPreview = ({
   guidelinesUrl,
   sandboxConfig,
   componentVersions,
+  sourceReplacements,
 }: PreviewProps): Preview => {
   const Provider = docsProps?.componentMapping?.IressProvider ?? IressProvider;
 
@@ -143,6 +155,10 @@ export const getPreview = ({
           <IressStorybook {...containerProps} {...docsProps} />
         ),
         page: AutoDocs,
+        source: {
+          transform: (code: string) =>
+            applySourceReplacements(code, sourceReplacements),
+        },
         toc: false,
       },
       idsConfig: {

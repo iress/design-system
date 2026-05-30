@@ -8,10 +8,10 @@ import { IressButton } from '../Button';
 import { IressInline } from '../Inline';
 import { SPACING_AND_ALIAS_TOKENS } from '@theme-preset/tokens/spacing';
 import {
-  CurrentBreakpoint,
   disableArgTypes,
   reactNodeArgType,
   stylingProps,
+  withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -115,15 +115,13 @@ export const ResponsiveGap: Story = {
     <IressStack gap="spacing.4">
       <IressPanel>
         <p>
-          Current breakpoint: <CurrentBreakpoint />.
-        </p>
-        <p>
           <code>gap=&#123;{JSON.stringify(args.gap)}&#125;</code>
         </p>
       </IressPanel>
       <IressStack {...args} />
     </IressStack>
   ),
+  decorators: [withBreakpointLabel()],
 };
 
 export const InlineChildren: Story = {

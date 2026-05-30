@@ -162,11 +162,10 @@ export function AlertStatus() {
 
     it('replaces serialized document.body with document.body', () => {
       const result = transformSource(
-        `<Component container={{ _reactListeningabc123: true }} />`,
+        `<Component\n  container: {}\n/>`,
       );
 
-      expect(result).toContain('container={document.body}');
-      expect(result).not.toContain('_react');
+      expect(result).toContain('container: document.body');
     });
   });
 

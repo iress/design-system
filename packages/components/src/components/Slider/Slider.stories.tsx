@@ -1,12 +1,9 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSlider } from '.';
-import { IressStack } from '../Stack';
-import { IressPanel } from '../Panel';
-import { IressText } from '../Text';
 import {
-  CurrentBreakpoint,
   reactNodeArgType,
   stylingProps,
+  withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -144,16 +141,8 @@ export const HiddenLabels: Story = {
       { value: 200, label: 'All' },
     ],
   },
-  render: (args) => (
-    <IressStack gap="md">
-      <IressPanel bg="alt">
-        <IressText>
-          <CurrentBreakpoint />
-        </IressText>
-      </IressPanel>
-      <IressSlider {...args} />
-    </IressStack>
-  ),
+  render: (args) => <IressSlider {...args} />,
+  decorators: [withBreakpointLabel()],
 };
 
 export const ReadOnly: Story = {

@@ -810,7 +810,7 @@ enforces conventions and reduces boilerplate across all component/pattern story 
   });
   ```
 - [ ] **Step 2:** Factory auto-applies:
-  - `parameters.docs.description.component` from `meta.description`
+  - `parameters.docs.subtitle` from `meta.description`
   - `stylingProps` helper appended to argTypes automatically
   - `tags` from meta merged with defaults (`['autodocs']`)
   - Correctly typed `Story` type for the component

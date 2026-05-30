@@ -1,10 +1,9 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressContainer } from '.';
-import { IressPanel } from '../Panel';
 import {
-  CurrentBreakpoint,
   reactNodeArgType,
   stylingProps,
+  withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
 import { IressTable } from '../Table';
 import { BREAKPOINT_DETAILS, BREAKPOINTS } from '@/constants';
@@ -49,14 +48,9 @@ export const Container: Story = {
       ) : (
         <p>Try resizing the screen to see the difference.</p>
       )}
-
-      <IressPanel>
-        <CurrentBreakpoint
-          renderLabel={args.fluid ? 'container-fluid' : 'container'}
-        />
-      </IressPanel>
     </IressContainer>
   ),
+  decorators: [withBreakpointLabel('container')],
 };
 
 export const Fluid: Story = {

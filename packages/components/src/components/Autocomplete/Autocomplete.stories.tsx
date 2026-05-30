@@ -1,10 +1,10 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressAutocomplete } from '.';
 import {
-  CurrentBreakpoint,
   disableArgTypes,
   withJsxTransformer,
   withSource,
+  withBreakpointLabel,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
@@ -16,7 +16,6 @@ import { IressIcon } from '../Icon';
 import { IressPopover } from '../Popover';
 import { IressButton } from '../Button';
 import { IressPanel } from '../Panel';
-import { IressStack } from '../Stack';
 import componentMeta from './meta';
 import AutocompleteSearchTableSource from './mocks/AutocompleteSearchTable.tsx?raw';
 import { AutocompleteSearchTable } from './mocks/AutocompleteSearchTable';
@@ -42,10 +41,6 @@ export default {
     docs: {
       description: {
         component: componentMeta.description,
-      },
-      source: {
-        transform: (code: string) =>
-          code.replace(/\{\s*_react[^}]*\}/gs, 'document.body'),
       },
     },
   },
@@ -74,7 +69,10 @@ export const Controlled: Story = {
   render: (args) => <AutocompleteUsingState {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(AutocompleteUsingStateSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(AutocompleteUsingStateSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -93,7 +91,10 @@ export const AsyncOptions: Story = {
   render: (args) => <AutocompleteUsingAsync {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(AutocompleteUsingAsyncSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(AutocompleteUsingAsyncSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -107,7 +108,10 @@ export const AsyncOptionsMinSearchLength: Story = {
   render: (args) => <AutocompleteUsingAsync {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(AutocompleteUsingAsyncSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(AutocompleteUsingAsyncSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -192,14 +196,7 @@ export const ResultLimits: Story = {
     limitDesktop: 6,
     limitMobile: 3,
   },
-  render: (args) => (
-    <IressStack gap="md">
-      <IressPanel>
-        <CurrentBreakpoint />
-      </IressPanel>
-      <IressAutocomplete {...args} />
-    </IressStack>
-  ),
+  decorators: [withBreakpointLabel()],
 };
 
 export const ReadOnly: Story = {
@@ -215,6 +212,9 @@ export const SearchTable: Story = {
   render: (args) => <AutocompleteSearchTable {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(AutocompleteSearchTableSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(AutocompleteSearchTableSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };

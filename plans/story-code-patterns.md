@@ -1186,6 +1186,12 @@ parameters: {
 - [x] Added to `transformSource` in `withSource` (handles mock-based stories)
 - [ ] Add to `createMeta` factory as global fallback (handles args-only stories)
 
+### Removed `CurrentBreakpoint` from stories
+
+`CurrentBreakpoint` is a Storybook-only component from `storybook-config` that doesn't serialize properly in the code panel (renders as `<p />`). Replaced with static text `(resize to see changes)` in inline stories.
+
+For mock files that need the live breakpoint value, use `useBreakpoint` from `@iress-oss/ids-components` inside the mock component (since mocks are proper components that can use hooks).
+
 ### Add Guidelines panel to Storybook addon panel
 
 Add a "Guidelines" tab to the Storybook addon panel that shows:

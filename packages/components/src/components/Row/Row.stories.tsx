@@ -6,18 +6,13 @@ import { IressPlaceholder } from '../Placeholder';
 import { IressText } from '../Text';
 import { IressCol } from '../Col';
 import { IressDivider } from '../Divider';
-import {
-  HORIZONTAL_ALIGNS,
-  IressPanel,
-  IressStack,
-  VERTICAL_ALIGNS,
-} from '@/main';
+import { HORIZONTAL_ALIGNS, IressStack, VERTICAL_ALIGNS } from '@/main';
 import { SPACING_AND_ALIAS_TOKENS } from '@theme-preset/tokens/spacing';
 import {
-  CurrentBreakpoint,
   disableArgTypes,
   reactNodeArgType,
   stylingProps,
+  withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
 import { cssVars } from '@iress-oss/ids-tokens';
 import componentMeta from './meta';
@@ -195,14 +190,10 @@ export const ResponsiveGutter: Story = {
   },
   render: (args) => (
     <IressContainer>
-      <IressStack gap="md">
-        <IressPanel bg="alt">
-          Current breakpoint: <CurrentBreakpoint />
-        </IressPanel>
-        <IressRow {...args} />
-      </IressStack>
+      <IressRow {...args} />
     </IressContainer>
   ),
+  decorators: [withBreakpointLabel()],
 };
 
 export const HorizontalAlignment: Story = {

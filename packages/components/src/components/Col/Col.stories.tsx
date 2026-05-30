@@ -3,16 +3,15 @@ import { IressCol, type IressColProps } from '.';
 import { IressPlaceholder } from '../Placeholder';
 import { IressRow, type IressRowProps } from '../Row';
 import { IressStack } from '../Stack';
-import { IressPanel } from '../Panel';
 import { IressText } from '../Text';
 import { IressContainer } from '../Container';
 import {
-  CurrentBreakpoint,
   disableArgTypes,
   removeArgTypes,
   STORYBOOK_ONLY_CATEGORY,
   withJsxTransformer,
   omitStylingProps,
+  withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -207,12 +206,9 @@ export const ResponsiveSpan: Story = {
     ...removeArgTypes(['numberOfColumns', 'span']),
     columns: columnsArgType,
   },
+  decorators: [withBreakpointLabel()],
   render: ({ numberOfColumns: _noc, row, columns = [], ...columnProps }) => (
     <IressStack gap="spacing.4">
-      <IressPanel>
-        Current breakpoint: <CurrentBreakpoint />.
-      </IressPanel>
-
       <IressRow {...row}>
         {columns.map((column, index) => (
           <IressCol {...columnProps} {...column} key={index}>
@@ -317,12 +313,9 @@ export const ResponsiveOffset: Story = {
     ...removeArgTypes(['numberOfColumns', 'offset']),
     columns: columnsArgType,
   },
+  decorators: [withBreakpointLabel()],
   render: ({ numberOfColumns: _noc, row, columns = [], ...columnProps }) => (
     <IressStack gap="spacing.4">
-      <IressPanel>
-        Current breakpoint: <CurrentBreakpoint />.
-      </IressPanel>
-
       <IressRow {...row}>
         {columns.map((column, index) => (
           <IressCol {...columnProps} {...column} key={index}>

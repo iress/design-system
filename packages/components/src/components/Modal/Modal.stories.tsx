@@ -29,14 +29,13 @@ import ModalSizesSource from './mocks/ModalSizes.tsx?raw';
 import { ModalStatuses } from './mocks/ModalStatuses';
 import ModalStatusesSource from './mocks/ModalStatuses.tsx?raw';
 import {
-  CurrentBreakpoint,
   DiffViewer,
   disableArgTypes,
   withSource,
   withJsxTransformer,
-  withTransformedProviderSource,
   reactNodeArgType,
   stylingProps,
+  withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -187,7 +186,10 @@ export const ShowWithState: Story = {
   render: (args) => <ModalUsingState {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ModalUsingStateSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ModalUsingStateSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -258,14 +260,17 @@ export const Size: Story = {
   render: (args) => <ModalSizes {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ModalSizesSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ModalSizesSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
 export const ResponsiveSize: Story = {
   ...Default,
   args: {
-    children: <CurrentBreakpoint />,
+    children: 'Resize your screen to see the modal width change.',
     footer: '',
     id: MODAL_ID,
     width: {
@@ -278,6 +283,7 @@ export const ResponsiveSize: Story = {
     ...disableArgTypes(['show', 'children']),
   },
   render: renderWithButtonFn('Responsive modal'),
+  decorators: [withBreakpointLabel()],
 };
 
 export const DisableClosing: Story = {
@@ -358,7 +364,10 @@ export const Status: StatusStory = {
   render: (args) => <ModalStatuses {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ModalStatusesSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ModalStatusesSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
