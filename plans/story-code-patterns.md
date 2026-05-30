@@ -1102,6 +1102,77 @@ export function AlertStatus({ ...args }) {
 
 The `withSource` helper's `stripImports` option will strip the `{...args}` from the displayed code, so consumers see clean output. The derive script also ignores the spread.
 
+### ⚠️ Disable controls on gallery stories
+
+Mock-based gallery stories (showing all variants) don't respond to controls since props are hardcoded in the mock. Add `parameters.controls.disable` to prevent confusion:
+
+```tsx
+export const Mode: ButtonStory = {
+  render: (args) => <ButtonMode {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ButtonModeSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+```
+
+This should be applied during the bulk migration to all stories that use standalone mock files with no interactive args.
+
+### Consolidate recipe stories into the main stories file
+
+Instead of having separate `*Recipes.stories.tsx` files, put recipe stories in the main component stories file and tag them with `tags: ['recipe']`:
+
+```tsx
+// In Button.stories.tsx (at the bottom)
+export const WithConfirmModal: ButtonStory = {
+  tags: ['recipe'],
+  render: (args) => <ButtonWithConfirmModal {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ButtonWithConfirmModalSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+```
+
+The `AutoDocsPage` already separates recipes into their own "Recipes" tab via the `recipe` tag. This keeps everything in one file, reduces file count, and makes it easier to find all stories for a component.
+
+**During bulk migration:** Move stories from `*Recipes.stories.tsx` into the main file with `tags: ['recipe']`, then delete the recipes file.
+
+### Add `reference` tag for interactive reference stories
+
+Stories like Icon Reference, Breakpoint Details, and migration tables are not code examples — they're interactive reference tools. Tag them with `tags: ['reference']` and render in a dedicated "References" tab in AutoDocsPage.
+
+```tsx
+export const IconReference: Story = {
+  tags: ['reference'],
+  name: 'Icon Reference',
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: { story: 'Search and browse all available Material Symbols icons.' },
+      source: { code: '' }, // hide code panel
+    },
+  },
+  render: () => <IconReferenceApp />,
+};
+```
+
+**Implementation steps:**
+- [ ] Add `reference` tag filtering in AutoDocsPage (same pattern as `recipe`)
+- [ ] Create a "References" tab that renders these stories with their descriptions
+- [ ] Hide code panel for reference stories (`source.code: ''`)
+- [ ] Disable controls for reference stories
+- [ ] These also appear in the guidelines site Specifications tab via StoryEmbed
+
+### Add Guidelines panel to Storybook addon panel
+
+Add a "Guidelines" tab to the Storybook addon panel that shows:
+- Component description (from meta)
+- Link to the full guidelines page
+- Quick reference info (status, owner, related components)
+
+This gives developers in-Storybook access to documentation without switching to the guidelines site. Implementation as part of Phase 13.5 (component specifications in Storybook).
+
 ### Old → New Pattern Mapping
 
 | # | Old Pattern | New Pattern | Action |

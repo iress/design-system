@@ -69,6 +69,7 @@ export const setUpManager = ({
   }
 
   addons.setConfig({
+    selectedPanel: 'storybook/docs/panel',
     theme: create({
       base: 'light',
       brandTitle: title,

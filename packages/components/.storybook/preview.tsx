@@ -29,7 +29,7 @@ const preview: Preview = {
     ...basePreview.parameters,
     options: {
       ...(basePreview.parameters?.options as Record<string, unknown>),
-      selectedPanel: 'controls',
+      selectedPanel: 'storybook/docs/panel',
       storySort: {
         order: [
           'Introduction',
