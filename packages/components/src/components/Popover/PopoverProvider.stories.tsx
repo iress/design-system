@@ -4,7 +4,7 @@ import { App as AppWithPopoverProvider } from './mocks/AppWithPopoverProvider';
 import AppWithPopoverProviderSource from './mocks/AppWithPopoverProvider.tsx?raw';
 import {
   disableArgTypes,
-  withCustomSource,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressPopoverProviderProps>;
@@ -26,6 +26,7 @@ export default {
 export const Provider: Story = {
   render: () => <AppWithPopoverProvider />,
   parameters: {
-    ...withCustomSource(AppWithPopoverProviderSource),
+    controls: { disable: true },
+    ...withSource(AppWithPopoverProviderSource, { stripImports: true, stripExportFunction: true }),
   },
 };

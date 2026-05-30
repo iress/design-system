@@ -1,12 +1,12 @@
 import { IressExpander } from '.';
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressText } from '../Text';
 import { MultipleExpander } from './mocks/MultipleExpander';
 import MultipleExpanderSource from './mocks/MultipleExpander.tsx?raw';
-import { IressStack } from '../Stack';
+import { ExpanderMode } from './mocks/ExpanderMode';
+import ExpanderModeSource from './mocks/ExpanderMode.tsx?raw';
 import {
   disableArgTypes,
-  withCustomSource,
+  withSource,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
@@ -37,24 +37,11 @@ export const Default: StoryObj<typeof IressExpander> = {
 };
 
 export const Mode: StoryObj<typeof IressExpander> = {
-  args: {
-    ...Default.args,
+  render: (args) => <ExpanderMode {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ExpanderModeSource, { stripImports: true, stripExportFunction: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['mode', 'activator', 'children']),
-  },
-  render: (args) => (
-    <IressStack gap="lg">
-      <IressStack gap="xs">
-        <IressText element="h2">Section (default)</IressText>
-        <IressExpander {...args} mode="section" />
-      </IressStack>
-      <IressStack gap="xs">
-        <IressText element="h2">Link</IressText>
-        <IressExpander {...args} mode="link" />
-      </IressStack>
-    </IressStack>
-  ),
 };
 
 export const Open: StoryObj<typeof IressExpander> = {
@@ -74,6 +61,7 @@ export const Multiple: StoryObj<typeof IressExpander> = {
   ]),
   render: () => <MultipleExpander />,
   parameters: {
-    ...withCustomSource(MultipleExpanderSource),
+    controls: { disable: true },
+    ...withSource(MultipleExpanderSource, { stripImports: true, stripExportFunction: true }),
   },
 };

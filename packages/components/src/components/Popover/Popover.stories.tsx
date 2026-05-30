@@ -12,10 +12,11 @@ import { IressCol } from '../Col';
 import { IressText } from '../Text';
 import { PopoverParentContainer } from './mocks/PopoverParentContainer';
 import PopoverParentContainerSource from './mocks/PopoverParentContainer.tsx?raw';
+import { UsePopoverExample } from './mocks/UsePopoverExample';
+import UsePopoverExampleSource from './mocks/UsePopoverExample.tsx?raw';
 import {
   disableArgTypes,
-  withCustomSource,
-  withTransformedRawSource,
+  withSource,
   reactElementArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
@@ -115,10 +116,8 @@ export const ShowWithState: Story = {
   },
   render: (args) => <PopoverUsingState {...args} />,
   parameters: {
-    ...withTransformedRawSource(PopoverUsingStateSource, 'IressPopoverProps', [
-      'activator',
-      'children',
-    ]),
+    controls: { disable: true },
+    ...withSource(PopoverUsingStateSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -303,6 +302,16 @@ export const VirtualFocus: Story = {
 export const ParentContainer: Story = {
   render: (args) => <PopoverParentContainer {...args} />,
   parameters: {
-    ...withCustomSource(PopoverParentContainerSource),
+    controls: { disable: true },
+    ...withSource(PopoverParentContainerSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const FocusableChildren: Story = {
+  tags: ['recipe'],
+  render: (args) => <UsePopoverExample {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(UsePopoverExampleSource, { stripImports: true, stripExportFunction: true }),
   },
 };

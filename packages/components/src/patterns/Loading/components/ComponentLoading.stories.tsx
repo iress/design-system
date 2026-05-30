@@ -4,7 +4,7 @@ import { LoadingGraph } from '../mocks/LoadingGraph';
 import LoadingGraphSource from '../mocks/LoadingGraph.tsx?raw';
 import { type FC } from 'react';
 import {
-  withCustomSource,
+  withSource,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
@@ -29,6 +29,6 @@ export default {
 export const Component: Story = {
   render: () => <LoadingGraph />,
   parameters: {
-    ...withCustomSource(LoadingGraphSource),
+    ...withSource(LoadingGraphSource, { stripImports: true, stripExportFunction: true }),
   },
 };

@@ -65,6 +65,9 @@ function transformSource(source: string, options?: WithSourceOptions): string {
   // Clean up empty lines left by removals and trim
   code = code.replace(/\n{3,}/g, '\n\n').trim();
 
+  // Replace serialized DOM elements with their readable equivalents
+  code = code.replace(/\{\s*_react[^}]*\}/gs, 'document.body');
+
   return code;
 }
 

@@ -1,24 +1,27 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTag } from '.';
-import { TagDeletion } from './mocks/TagDeletion';
-import TagDeletionSource from './mocks/TagDeletion.tsx?raw';
 import { IressPopover } from '../Popover';
 import { IressButton } from '../Button';
 import { IressIcon } from '../Icon';
 import { IressPanel } from '../Panel';
 import {
-  withCustomSource,
+  withSource,
   withJsxTransformer,
-  disableArgTypes,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { IressInline } from '@/main';
-import { STATUSES } from '@/constants';
 import componentMeta from './meta';
 
+import { TagMode } from './mocks/TagMode';
+import TagModeSource from './mocks/TagMode.tsx?raw';
+import { TagStatus } from './mocks/TagStatus';
+import TagStatusSource from './mocks/TagStatus.tsx?raw';
+import { TagBordered } from './mocks/TagBordered';
+import TagBorderedSource from './mocks/TagBordered.tsx?raw';
+import { TagDeletion } from './mocks/TagDeletion';
+import TagDeletionSource from './mocks/TagDeletion.tsx?raw';
+
 type Story = StoryObj<typeof IressTag>;
-const BADGE_MODES = [10, 20, 30, 40, 50, 60, 70, 80, 90] as const;
 
 export default {
   title: 'Components/Tag',
@@ -45,59 +48,27 @@ export const Default: Story = {
 };
 
 export const Mode: Story = {
-  ...Default,
-  argTypes: {
-    ...disableArgTypes(['mode']),
+  render: (args) => <TagMode {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(TagModeSource, { stripImports: true, stripExportFunction: true }),
   },
-  render: (args) => (
-    <IressInline gap="sm">
-      {BADGE_MODES.map((mode) => (
-        <IressTag {...args} key={mode} mode={mode}>
-          {mode}
-        </IressTag>
-      ))}
-    </IressInline>
-  ),
 };
 
 export const Status: Story = {
-  ...Default,
-  argTypes: {
-    ...disableArgTypes(['mode']),
+  render: (args) => <TagStatus {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(TagStatusSource, { stripImports: true, stripExportFunction: true }),
   },
-  render: (args) => (
-    <IressInline gap="sm">
-      {STATUSES.map((status) => (
-        <IressTag {...args} key={status} mode={status}>
-          {status}
-        </IressTag>
-      ))}
-    </IressInline>
-  ),
 };
 
 export const Bordered: Story = {
-  ...Default,
-  argTypes: {
-    ...disableArgTypes(['mode', 'bordered']),
+  render: (args) => <TagBordered {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(TagBorderedSource, { stripImports: true, stripExportFunction: true }),
   },
-  render: (args) => (
-    <IressInline gap="sm">
-      <IressTag {...args} bordered>
-        No mode
-      </IressTag>
-      {BADGE_MODES.map((mode) => (
-        <IressTag {...args} key={mode} mode={mode} bordered>
-          {mode}
-        </IressTag>
-      ))}
-      {STATUSES.map((status) => (
-        <IressTag {...args} key={status} mode={status} bordered>
-          {status}
-        </IressTag>
-      ))}
-    </IressInline>
-  ),
 };
 
 export const ClickableTag: Story = {
@@ -141,7 +112,8 @@ export const Compact: Story = {
 export const DeletingTags: Story = {
   render: (args) => <TagDeletion {...args} />,
   parameters: {
-    ...withCustomSource(TagDeletionSource),
+    controls: { disable: true },
+    ...withSource(TagDeletionSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 

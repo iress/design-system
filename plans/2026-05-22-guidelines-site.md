@@ -910,10 +910,14 @@ to related resources without leaving Storybook.
   - 📖 Guidelines link (from meta)
   - 🎨 Figma link (from meta)
   - 💻 GitHub source link (from meta)
+  - 🐛 Report issue link (auto-generated, pre-fills GitHub issue template with component name)
   - 📦 Version introduced (from auto-generated `component-versions.json` — already available)
   - 👥 Owner/team (from meta)
   - 🔗 Related components (from meta — links to their autodocs pages)
   - ♿ Accessibility status badge (from meta — audited/partial/unaudited)
+
+  **Issue link format:** `https://github.com/iress/design-system/issues/new?template=bug_report.md&title=[BUG]+ComponentName:+&labels=bug,component:component-name`
+  — derived automatically from the component's meta heading (no manual config needed).
 - [ ] **Step 5:** Style the resources section to be compact and non-intrusive (e.g. a collapsible panel or inline chips at the top of the page)
 - [ ] **Step 6:** Enhance the existing Introduction page (from Task 12.9) to also show library-level resources:
   - 📦 NPM package link (`@iress-oss/ids-components`)
@@ -921,6 +925,9 @@ to related resources without leaving Storybook.
   - 🔗 Guidelines site link
   - 📋 Changelog link
   - 🏷️ Current version
+  - 🐛 Report an issue (`https://github.com/iress/design-system/issues/new/choose`)
+  - 💡 Request a feature (`https://github.com/iress/design-system/issues/new?template=feature_request.md`)
+  - 🧩 Propose a component (`https://github.com/iress/design-system/issues/new?template=new-component-proposal.md`)
 
 ### Task 13.6: Add `related` field for patterns as well as components
 

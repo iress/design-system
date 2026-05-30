@@ -10,15 +10,22 @@ import {
 describe('withSource', () => {
   describe('basic usage', () => {
     it('returns parameters with source code when format is false', () => {
-      const result = withSource('<IressButton>Click</IressButton>', { format: false });
+      const result = withSource('<IressButton>Click</IressButton>', {
+        format: false,
+      });
 
       expect(result).toEqual({
-        docs: { source: { code: '<IressButton>Click</IressButton>', language: 'tsx' } },
+        docs: {
+          source: { code: '<IressButton>Click</IressButton>', language: 'tsx' },
+        },
       });
     });
 
     it('accepts a custom language', () => {
-      const result = withSource('.class { color: red; }', { language: 'css', format: false });
+      const result = withSource('.class { color: red; }', {
+        language: 'css',
+        format: false,
+      });
 
       expect(result).toEqual({
         docs: { source: { code: '.class { color: red; }', language: 'css' } },
@@ -28,14 +35,18 @@ describe('withSource', () => {
 
   describe('@/main transformation', () => {
     it('replaces @/main with @iress-oss/ids-components', () => {
-      const result = transformSource(`import { IressButton } from '@/main';\n\n<IressButton />`);
+      const result = transformSource(
+        `import { IressButton } from '@/main';\n\n<IressButton />`,
+      );
 
       expect(result).toContain("from '@iress-oss/ids-components'");
       expect(result).not.toContain('@/main');
     });
 
     it('handles multiple @/main imports', () => {
-      const result = transformSource(`import { IressButton } from '@/main';\nimport { IressStack } from '@/main';`);
+      const result = transformSource(
+        `import { IressButton } from '@/main';\nimport { IressStack } from '@/main';`,
+      );
 
       expect(result).not.toContain('@/main');
       expect(result.match(/@iress-oss\/ids-components/g)).toHaveLength(2);
@@ -62,7 +73,9 @@ describe('withSource', () => {
     it('removes a type declaration', () => {
       const source = `type CustomProps = {\n  value: string;\n};\n\nexport function Example({ value }: CustomProps) {\n  return <div />;\n}`;
 
-      const result = transformSource(source, { replacePropsType: 'CustomProps' });
+      const result = transformSource(source, {
+        replacePropsType: 'CustomProps',
+      });
 
       expect(result).not.toContain('type CustomProps');
       expect(result).not.toContain(': CustomProps');
@@ -71,14 +84,19 @@ describe('withSource', () => {
 
   describe('removeProps option', () => {
     it('removes props from component usage', () => {
-      const result = transformSource(`<Foo container={document.body} position="top" />`, { removeProps: ['container'] });
+      const result = transformSource(
+        `<Foo container={document.body} position="top" />`,
+        { removeProps: ['container'] },
+      );
 
       expect(result).not.toContain('container');
       expect(result).toContain('position="top"');
     });
 
     it('removes multiple props', () => {
-      const result = transformSource(`<Foo a={1} b="2" c />`, { removeProps: ['a', 'b'] });
+      const result = transformSource(`<Foo a={1} b="2" c />`, {
+        removeProps: ['a', 'b'],
+      });
 
       expect(result).not.toContain('a=');
       expect(result).not.toContain('b=');
@@ -99,7 +117,10 @@ export function AlertStatus() {
   );
 }`;
 
-      const result = transformSource(source, { stripImports: true, stripExportFunction: true });
+      const result = transformSource(source, {
+        stripImports: true,
+        stripExportFunction: true,
+      });
 
       expect(result).not.toContain('export function');
       expect(result).not.toContain('return');
@@ -110,7 +131,9 @@ export function AlertStatus() {
 
   describe('stripImports option', () => {
     it('removes import statements', () => {
-      const result = transformSource(`import { X } from 'y';\n\n<X />`, { stripImports: true });
+      const result = transformSource(`import { X } from 'y';\n\n<X />`, {
+        stripImports: true,
+      });
 
       expect(result).not.toContain('import');
       expect(result).toContain('<X />');
@@ -136,6 +159,15 @@ export function AlertStatus() {
       expect(result).not.toMatch(/^\s/);
       expect(result).not.toMatch(/\s$/);
     });
+
+    it('replaces serialized document.body with document.body', () => {
+      const result = transformSource(
+        `<Component container={{ _reactListeningabc123: true }} />`,
+      );
+
+      expect(result).toContain('container={document.body}');
+      expect(result).not.toContain('_react');
+    });
   });
 
   describe('formatWithPrettier', () => {
@@ -156,14 +188,18 @@ export function AlertStatus() {
 
   describe('format option', () => {
     it('uses async transform when format is true (default)', () => {
-      const result = withSource('<X />') as { docs: { source: { transform?: unknown; code?: string } } };
+      const result = withSource('<X />') as {
+        docs: { source: { transform?: unknown; code?: string } };
+      };
 
       expect(result.docs.source.transform).toBeDefined();
       expect(result.docs.source.code).toBeDefined(); // code is always set for sandbox addon
     });
 
     it('returns static code when format is false', () => {
-      const result = withSource('<X />', { format: false }) as { docs: { source: { transform?: unknown; code?: string } } };
+      const result = withSource('<X />', { format: false }) as {
+        docs: { source: { transform?: unknown; code?: string } };
+      };
 
       expect(result.docs.source.code).toBeDefined();
       expect(result.docs.source.transform).toBeUndefined();
@@ -175,7 +211,9 @@ export function AlertStatus() {
       const transform = (code: string) => code.replace(/a/g, 'b');
       const result = withSource(transform);
 
-      expect(result).toEqual({ docs: { source: { transform, language: 'tsx' } } });
+      expect(result).toEqual({
+        docs: { source: { transform, language: 'tsx' } },
+      });
     });
   });
 
@@ -183,13 +221,16 @@ export function AlertStatus() {
     it('withCustomSource works', () => {
       const result = withCustomSource('const x = 1;', 'js');
 
-      expect(result).toEqual({ docs: { source: { code: 'const x = 1;', language: 'js' } } });
+      expect(result).toEqual({
+        docs: { source: { code: 'const x = 1;', language: 'js' } },
+      });
     });
 
     it('withTransformedRawSource works', () => {
       const source = `interface Props { x: number; }\nexport function C({ x }: Props) { return <F x={x} bad={1} />; }`;
       const result = withTransformedRawSource(source, 'Props', ['bad']);
-      const code = (result as { docs: { source: { code: string } } }).docs.source.code;
+      const code = (result as { docs: { source: { code: string } } }).docs
+        .source.code;
 
       expect(code).not.toContain('interface Props');
       expect(code).not.toContain(': Props');

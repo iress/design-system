@@ -78,6 +78,15 @@ export default {
   },
   parameters: {
     ...formParameters,
+    docs: {
+      description: {
+        component:
+          'Form validation rules are determined from React Hook Form. Here you can see how to use the built-in validation rules, how to add custom validation messages and how to use the `validate` option to create your own rules.',
+      },
+    },
+    idsConfig: {
+      autodocsTemplate: 'default',
+    },
   },
 } as Meta<typeof IressForm>;
 

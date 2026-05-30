@@ -4,7 +4,7 @@ import { LongLoading } from './LongLoading';
 import { LoadingLongWithError } from '../mocks/LoadingLongWithError';
 import LoadingLongWithErrorSource from '../mocks/LoadingLongWithError.tsx?raw';
 import {
-  withCustomSource,
+  withSource,
   customTypeArgType,
   reactNodeArgType,
   stylingProps,
@@ -40,6 +40,6 @@ export const Long: Story = {
 export const LongError: Story = {
   render: () => <LoadingLongWithError />,
   parameters: {
-    ...withCustomSource(LoadingLongWithErrorSource),
+    ...withSource(LoadingLongWithErrorSource, { stripImports: true, stripExportFunction: true }),
   },
 };

@@ -3,7 +3,7 @@ import { IressTableBody } from '..';
 import { TableGroupedRows } from '../mocks/TableGroupedRows';
 import GroupedRowsSource from '../mocks/TableGroupedRows.tsx?raw';
 import {
-  withCustomSource,
+  withSource,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
@@ -23,6 +23,7 @@ export default {
 export const Body: Story = {
   render: (args) => <TableGroupedRows {...args} />,
   parameters: {
-    ...withCustomSource(GroupedRowsSource),
+    controls: { disable: true },
+    ...withSource(GroupedRowsSource, { stripImports: true, stripExportFunction: true }),
   },
 };

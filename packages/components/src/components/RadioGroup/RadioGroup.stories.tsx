@@ -1,20 +1,21 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressRadioGroup } from '.';
 import { IressRadio } from '../Radio';
-import { IressText } from '../Text';
 import { IressField } from '../Field';
-import { IressStack } from '../Stack';
 import {
   getFinancialReviewChildren,
   getFinancialReviewManyChildren,
 } from './mocks/radioGroupChildren';
 import {
   disableArgTypes,
+  withSource,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
-import { cssVars } from '@iress-oss/ids-tokens';
 import componentMeta from './meta';
+
+import { RadioGroupLayout } from './mocks/RadioGroupLayout';
+import RadioGroupLayoutSource from './mocks/RadioGroupLayout.tsx?raw';
 
 type Story = StoryObj<typeof IressRadioGroup>;
 
@@ -40,6 +41,20 @@ export default {
 export const Default: Story = {
   args: {
     name: 'survey',
+    children: [
+      <IressRadio value="google" key="google">
+        Google
+      </IressRadio>,
+      <IressRadio value="newspaper" key="newspaper">
+        Newspaper
+      </IressRadio>,
+      <IressRadio value="friend" key="friend">
+        Friend
+      </IressRadio>,
+      <IressRadio value="other" key="other">
+        Other
+      </IressRadio>,
+    ],
   },
 };
 
@@ -70,65 +85,11 @@ export const RadioSelection: Story = {
 };
 
 export const Layout: Story = {
-  args: {
-    children: [
-      <IressRadio
-        value="google"
-        key="google"
-        style={{ border: `1px solid ${cssVars.colour.neutral[30]}` }}
-      >
-        Google
-      </IressRadio>,
-      <IressRadio
-        value="newspaper"
-        key="google"
-        style={{ border: `1px solid ${cssVars.colour.neutral[30]}` }}
-      >
-        Newspaper
-      </IressRadio>,
-      <IressRadio
-        value="friend"
-        key="google"
-        style={{ border: `1px solid ${cssVars.colour.neutral[30]}` }}
-      >
-        Friend
-      </IressRadio>,
-      <IressRadio
-        value="other"
-        key="google"
-        style={{ border: `1px solid ${cssVars.colour.neutral[30]}` }}
-      >
-        Other
-      </IressRadio>,
-    ],
+  render: (args) => <RadioGroupLayout {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(RadioGroupLayoutSource, { stripImports: true, stripExportFunction: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['layout']),
-  },
-  render: (args) => (
-    <IressStack gap="md">
-      <IressText>
-        <h3>block (default)</h3>
-        <IressRadioGroup {...args} layout="block" />
-      </IressText>
-      <IressText>
-        <h3>inline</h3>
-        <IressRadioGroup {...args} layout="inline" />
-      </IressText>
-      <IressText>
-        <h3>inlineEqualWidth</h3>
-        <IressRadioGroup {...args} layout="inlineEqualWidth" />
-      </IressText>
-      <IressText>
-        <h3>inlineFlex</h3>
-        <IressRadioGroup {...args} layout="inlineFlex" />
-      </IressText>
-      <IressText>
-        <h3>stack</h3>
-        <IressRadioGroup {...args} layout="stack" />
-      </IressText>
-    </IressStack>
-  ),
 };
 
 export const HiddenRadioButtons: Story = {

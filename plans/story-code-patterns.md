@@ -1164,6 +1164,28 @@ export const IconReference: Story = {
 - [ ] Disable controls for reference stories
 - [ ] These also appear in the guidelines site Specifications tab via StoryEmbed
 
+### Hide non-serializable Storybook-internal args from code display
+
+Several components set `container: document.body` or `popoverProps: { container: document.body }` in their meta-level args — this is a Storybook workaround for rendering popovers outside the iframe. Storybook serializes `document.body` as its React internal properties (e.g. `{ _reactListeningabc123: true }`), which is confusing.
+
+**Fix implemented:** `transformSource` in `withSource` replaces serialized DOM elements with `document.body`. This handles all stories that use `withSource`.
+
+For args-only stories (no `withSource`), use a meta-level `docs.source.transform`:
+```tsx
+parameters: {
+  docs: {
+    source: {
+      transform: (code) => code.replace(/\{\s*_react[^}]*\}/gs, 'document.body'),
+    },
+  },
+}
+```
+
+**Plan:** Add this transform to the `createMeta` factory so it applies globally to all components without per-file configuration.
+
+- [x] Added to `transformSource` in `withSource` (handles mock-based stories)
+- [ ] Add to `createMeta` factory as global fallback (handles args-only stories)
+
 ### Add Guidelines panel to Storybook addon panel
 
 Add a "Guidelines" tab to the Storybook addon panel that shows:

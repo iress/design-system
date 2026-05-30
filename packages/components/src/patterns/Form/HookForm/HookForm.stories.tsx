@@ -5,7 +5,7 @@ import { HookFormExample } from '../mocks/HookFormExample';
 import HookFormExampleSource from '../mocks/HookFormExample.tsx?raw';
 import {
   removeArgTypes,
-  withCustomSource,
+  withSource,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
@@ -30,6 +30,6 @@ export default {
 export const HookForm: Story = {
   render: (args) => <HookFormExample {...args} />,
   parameters: {
-    ...withCustomSource(HookFormExampleSource),
+    ...withSource(HookFormExampleSource, { stripImports: true, stripExportFunction: true }),
   },
 };

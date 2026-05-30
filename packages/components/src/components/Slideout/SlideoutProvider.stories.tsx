@@ -9,7 +9,7 @@ import AppWithSlideoutProviderSource from './mocks/AppWithSlideoutProvider.tsx?r
 import {
   disableArgTypes,
   STORYBOOK_ONLY_CATEGORY,
-  withCustomSource,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
 
 type CustomArgs = Partial<IressSlideoutProviderProps> & {
@@ -47,6 +47,7 @@ export const Provider: Story = {
   },
   render: (args) => <AppWithSlideoutProvider {...args.slideout} />,
   parameters: {
-    ...withCustomSource(AppWithSlideoutProviderSource),
+    controls: { disable: true },
+    ...withSource(AppWithSlideoutProviderSource, { stripImports: true, stripExportFunction: true }),
   },
 };

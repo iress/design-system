@@ -129,3 +129,17 @@ export const customTypeArgType = (typeSummary: string): ArgTypes[string] => ({
     type: { summary: typeSummary },
   },
 });
+
+/**
+ * Args that are Storybook-internal and should be hidden from controls and generated source.
+ * These are typically workarounds for rendering in the Storybook iframe (e.g., `container: document.body`).
+ *
+ * Spread into `argTypes` at the meta level:
+ * ```tsx
+ * argTypes: { ...stylingProps, ...internalArgs }
+ * ```
+ */
+export const internalArgs: ArgTypes = {
+  container: { table: { disable: true } },
+  popoverProps: { table: { disable: true } },
+};

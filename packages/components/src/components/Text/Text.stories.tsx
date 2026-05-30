@@ -1,41 +1,28 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressText, type IressTextProps, text, type TextElements } from '.';
+import { IressText, type IressTextProps, text } from '.';
 import { IressStack } from '../Stack';
 import { IressIcon } from '../Icon';
-import { TEXT_STYLES } from '@theme-preset/tokens/textStyles';
 import {
   disableArgTypes,
   reactNodeArgType,
   stylingProps,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
-import { COLOR_TOKENS } from '@theme-preset/tokens/colors';
 import componentMeta from './meta';
+
+import { TextElement } from './mocks/TextElement';
+import TextElementSource from './mocks/TextElement.tsx?raw';
+import { TextVariant } from './mocks/TextVariant';
+import TextVariantSource from './mocks/TextVariant.tsx?raw';
+import { TextMode } from './mocks/TextMode';
+import TextModeSource from './mocks/TextMode.tsx?raw';
+import { TextAlign } from './mocks/TextAlign';
+import TextAlignSource from './mocks/TextAlign.tsx?raw';
 
 type Story = StoryObj<typeof IressText>;
 type HeadingStory = StoryObj<
   IressTextProps<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'>
 >;
-
-const TEXT_ELEMENTS: TextElements[] = [
-  'p',
-  'div',
-  'span',
-  'h1',
-  'h2',
-  'h3',
-  'h4',
-  'h5',
-  'h6',
-  'code',
-  'small',
-  'cite',
-  'strong',
-  'em',
-  'a',
-  'blockquote',
-  'pre',
-  'mark',
-];
 
 export default {
   title: 'Components/Text',
@@ -64,78 +51,34 @@ export const Default: Story = {
 };
 
 export const Element: Story = {
-  render: (args) => (
-    <IressStack gap="spacing.1">
-      {TEXT_ELEMENTS.map((element) => (
-        <IressText {...args} key={element} element={element}>
-          This is a {element} element.
-        </IressText>
-      ))}
-    </IressStack>
-  ),
-  argTypes: {
-    ...disableArgTypes(['element']),
+  render: (args) => <TextElement {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(TextElementSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
 export const Variant: Story = {
-  render: (args) => (
-    <IressStack gap="md">
-      {TEXT_STYLES.map((variant) => (
-        <IressText {...args} key={variant} textStyle={variant}>
-          This is the {variant} text style.
-        </IressText>
-      ))}
-    </IressStack>
-  ),
-  argTypes: {
-    ...disableArgTypes(['variant']),
+  render: (args) => <TextVariant {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(TextVariantSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
 export const Mode: Story = {
-  render: (args) => (
-    <IressStack gap="md">
-      {COLOR_TOKENS.map((mode) => (
-        <IressText {...args} key={mode} color={mode}>
-          This is {mode} mode.
-        </IressText>
-      ))}
-      <IressText {...args} color="colour.primary.text">
-        Nested text mode demonstration:{' '}
-        <IressText {...args}>
-          I am nested, and return to the original colour
-        </IressText>
-      </IressText>
-    </IressStack>
-  ),
-  argTypes: {
-    ...disableArgTypes(['mode']),
+  render: (args) => <TextMode {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(TextModeSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
 export const Align: Story = {
-  render: (args) => (
-    <IressStack gap="md">
-      <IressText {...args} textAlign="left">
-        {children}
-      </IressText>
-      <IressText {...args} textAlign="center">
-        {children}
-      </IressText>
-      <IressText {...args} textAlign="right">
-        {children}
-      </IressText>
-      <IressText {...args} textAlign="justify">
-        {children}
-      </IressText>
-      <IressText {...args} textAlign="inherit">
-        {children}
-      </IressText>
-    </IressStack>
-  ),
-  argTypes: {
-    ...disableArgTypes(['textAlign']),
+  render: (args) => <TextAlign {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(TextAlignSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -157,21 +100,6 @@ export const HeadingsWithIcons: HeadingStory = {
         <span>H3 heading with icons</span>
         <IressIcon name="sentiment_calm" />
       </IressText>
-      <IressText {...args} element="h4">
-        <IressIcon name="sentiment_calm" />
-        <span>H4 heading with icons</span>
-        <IressIcon name="sentiment_calm" />
-      </IressText>
-      <IressText {...args} element="h5">
-        <IressIcon name="sentiment_calm" />
-        <span>H5 heading with icons</span>
-        <IressIcon name="sentiment_calm" />
-      </IressText>
-      <IressText {...args} element="h6">
-        <IressIcon name="sentiment_calm" />
-        <span>H6 heading with icons</span>
-        <IressIcon name="sentiment_calm" />
-      </IressText>
     </IressStack>
   ),
   argTypes: {
@@ -189,60 +117,13 @@ export const TypographicBlock: Story = {
           Iress Limited (ASX: IRE)
         </a>{' '}
         was founded in 1993 in Melbourne, Australia, as a provider of financial
-        market data and trading software. Initially, the company focused on
-        delivering technology solutions for stockbrokers and traders, providing
-        real-time market data, order management, and trading execution tools.
+        market data and trading software.
       </p>
       <h3>Expansion and IPO (2001 - 2010)</h3>
       <p>
         In 2001, Iress went public, listing on the Australian Securities
         Exchange (ASX). This move provided the company with capital to expand
-        its operations and invest in new technologies. During this period, Iress
-        expanded its services beyond trading platforms to include financial
-        planning software, portfolio management, and wealth management
-        solutions. The company also started expanding internationally, entering
-        markets such as the UK, Canada, New Zealand, and South Africa, through
-        organic growth and acquisitions.
-      </p>
-      <h3>Global Growth and Acquisitions (2011 - 2020)</h3>
-      <p>
-        Between 2011 and 2020, Iress continued its global expansion through
-        acquisitions and product diversification. Key acquisitions included:
-      </p>
-      <ul>
-        <li>
-          Avelo (2013): Strengthened its presence in the UK financial services
-          market.
-        </li>
-        <li>
-          Pulse Software (2014): Added financial advice solutions to its
-          portfolio.
-        </li>
-        <li>
-          INET BFA (2016): Expanded its reach into South Africa’s financial
-          market.
-        </li>
-        <li>
-          OneVue (2020): Enhanced its superannuation and investment
-          administration capabilities.
-        </li>
-      </ul>
-      <p>
-        During this period, Iress also expanded into mortgage lending technology
-        and digital financial services, adapting to the increasing demand for
-        automation and efficiency in financial markets.
-      </p>
-      <h3>Recent Developments (2021 - Present)</h3>
-      <p>
-        In 2021, Iress announced a strategic review of its business, focusing on
-        streamlining operations and improving profitability. The company also
-        experienced leadership changes, including new CEO appointments to drive
-        digital transformation.{' '}
-      </p>
-      <p>
-        Iress has continued to innovate with cloud-based solutions, artificial
-        intelligence (AI), and data analytics, catering to financial
-        institutions, brokers, and wealth management firms globally.
+        its operations and invest in new technologies.
       </p>
       <pre>Some code in here</pre>
     </IressText>

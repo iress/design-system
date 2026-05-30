@@ -5,7 +5,7 @@ import LoadingWizardSource from './mocks/LoadingWizard.tsx?raw';
 import { LoadingWizardFast } from './mocks/LoadingWizardFast';
 import LoadingWizardFastSource from './mocks/LoadingWizardFast.tsx?raw';
 import {
-  withCustomSource,
+  withSource,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
@@ -34,17 +34,19 @@ export const Default: Story = {
 };
 
 export const Wizard: Story = {
-  render: () => <LoadingWizard />,
   parameters: {
-    ...withCustomSource(LoadingWizardSource),
+    controls: { disable: true },
+    ...withSource(LoadingWizardSource, { stripImports: true, stripExportFunction: true }),
     layout: 'fullscreen',
   },
+  render: (args) => <LoadingWizard {...args} />,
 };
 
 export const FastWizard: Story = {
-  render: () => <LoadingWizardFast />,
   parameters: {
-    ...withCustomSource(LoadingWizardFastSource),
+    controls: { disable: true },
+    ...withSource(LoadingWizardFastSource, { stripImports: true, stripExportFunction: true }),
     layout: 'fullscreen',
   },
+  render: (args) => <LoadingWizardFast {...args} />,
 };

@@ -1,5 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { withCustomSource } from '@iress-oss/ids-storybook-config';
+import { withSource } from '@iress-oss/ids-storybook-config';
 import { IressSideNav } from './SideNav';
 import {
   MOCK_SIDE_NAV_ITEMS,
@@ -93,10 +93,11 @@ export const WithHeaderFooter: Story = {
  * Click rail items to navigate between sections.
  */
 export const Controlled: Story = {
-  render: () => <SideNavControlled />,
   parameters: {
-    ...withCustomSource(SideNavControlledSource),
+    controls: { disable: true },
+    ...withSource(SideNavControlledSource, { stripImports: true, stripExportFunction: true }),
   },
+  render: (args) => <SideNavControlled {...args} />,
 };
 
 /**
@@ -131,9 +132,9 @@ export const DynamicSideMenu: Story = {
  * In a real app, you would use React Router's `Link` or Next.js `Link`.
  */
 export const CustomRouting: Story = {
-  render: () => <SideNavRouting />,
   parameters: {
-    ...withCustomSource(SideNavRoutingSource),
+    controls: { disable: true },
+    ...withSource(SideNavRoutingSource, { stripImports: true, stripExportFunction: true }),
     docs: {
       description: {
         story:
@@ -141,4 +142,5 @@ export const CustomRouting: Story = {
       },
     },
   },
+  render: (args) => <SideNavRouting {...args} />,
 };

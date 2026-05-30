@@ -1,16 +1,19 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import {
-  disableArgTypes,
   reactElementArgType,
   reactNodeArgType,
   stylingProps,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
-import { IressPill, IressInline } from '@/main';
-import { STATUSES } from '@/constants';
+import { IressPill } from '@/main';
 import componentMeta from './meta';
 
+import { PillMode } from './mocks/PillMode';
+import PillModeSource from './mocks/PillMode.tsx?raw';
+import { PillStatus } from './mocks/PillStatus';
+import PillStatusSource from './mocks/PillStatus.tsx?raw';
+
 type Story = StoryObj<typeof IressPill>;
-const BADGE_MODES = [10, 20, 30, 40, 50, 60, 70, 80, 90] as const;
 
 export default {
   title: 'Components/Pill',
@@ -37,33 +40,17 @@ export const Default: Story = {
 };
 
 export const Mode: Story = {
-  ...Default,
-  argTypes: {
-    ...disableArgTypes(['mode']),
+  render: (args) => <PillMode {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(PillModeSource, { stripImports: true, stripExportFunction: true }),
   },
-  render: (args) => (
-    <IressInline gap="sm">
-      {BADGE_MODES.map((mode) => (
-        <IressPill {...args} key={mode} mode={mode}>
-          {mode}
-        </IressPill>
-      ))}
-    </IressInline>
-  ),
 };
 
 export const Status: Story = {
-  ...Default,
-  argTypes: {
-    ...disableArgTypes(['mode']),
+  render: (args) => <PillStatus {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(PillStatusSource, { stripImports: true, stripExportFunction: true }),
   },
-  render: (args) => (
-    <IressInline gap="sm">
-      {STATUSES.map((status) => (
-        <IressPill {...args} mode={status} key={status}>
-          {status}
-        </IressPill>
-      ))}
-    </IressInline>
-  ),
 };

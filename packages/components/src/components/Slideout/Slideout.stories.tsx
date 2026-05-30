@@ -25,12 +25,12 @@ import {
   CurrentBreakpoint,
   DiffViewer,
   disableArgTypes,
-  withCustomSource,
+  withSource,
   withTransformedProviderSource,
-  withTransformedRawSource,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 const SLIDEOUT_ID = 'storybook-slideout';
 
@@ -130,7 +130,8 @@ export const ShowWithState: Story = {
   },
   render: (args) => <SlideoutUsingState {...args} />,
   parameters: {
-    ...withTransformedRawSource(SlideoutUsingStateSource, 'IressSlideoutProps'),
+    controls: { disable: true },
+    ...withSource(SlideoutUsingStateSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -202,7 +203,8 @@ export const Position: Story = {
   },
   render: (args) => <SlideoutPositions {...args} />,
   parameters: {
-    ...withCustomSource(SlideoutPositionsSource),
+    controls: { disable: true },
+    ...withSource(SlideoutPositionsSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -216,7 +218,8 @@ export const Size: Story = {
   },
   render: (args) => <SlideoutSizes {...args} />,
   parameters: {
-    ...withCustomSource(SlideoutSizesSource),
+    controls: { disable: true },
+    ...withSource(SlideoutSizesSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -242,10 +245,8 @@ export const AbsolutePosition: Story = {
   },
   render: (args) => <AbsolutePositionSlideout {...args} />,
   parameters: {
-    ...withTransformedRawSource(
-      AbsolutePositionSlideoutSource,
-      'IressSlideoutProps',
-    ),
+    controls: { disable: true },
+    ...withSource(AbsolutePositionSlideoutSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -256,7 +257,8 @@ export const Microfrontend: Story = {
   },
   render: (args) => <SlideoutMicrofrontend {...args} />,
   parameters: {
-    ...withCustomSource(SlideoutMicrofrontendSource),
+    controls: { disable: true },
+    ...withSource(SlideoutMicrofrontendSource, { stripImports: true, stripExportFunction: true }),
     layout: 'fullscreen',
   },
 };

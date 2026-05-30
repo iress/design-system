@@ -32,13 +32,13 @@ import {
   CurrentBreakpoint,
   DiffViewer,
   disableArgTypes,
-  withCustomSource,
+  withSource,
   withJsxTransformer,
   withTransformedProviderSource,
-  withTransformedRawSource,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 const MODAL_ID = 'storybook-modal';
 
@@ -186,7 +186,8 @@ export const ShowWithState: Story = {
   },
   render: (args) => <ModalUsingState {...args} />,
   parameters: {
-    ...withTransformedRawSource(ModalUsingStateSource, 'IressModalProps'),
+    controls: { disable: true },
+    ...withSource(ModalUsingStateSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -229,102 +230,10 @@ export const FixedFooter: Story = {
           <p>
             I still don&apos;t understand, how am I supposed to go to the dance
             with her, if she&apos;s already going to the dance with you.
-            Alright, okay Jennifer. What if I send in the tape and they
-            don&apos;t like it. I mean, what if they say I&apos;m no good. What
-            if they say, &apos;Get out of here, kid, you got no future.&apos; I
-            mean, I just don&apos;t think I can take that kind of rejection.
-            Jesus, I&apos;m beginning to sound like my old man. Ahh. Alright,
-            take it up, go. Doc. This is it. This is the answer. It says here
-            that a bolt of lightning is gonna strike the clock tower precisely
-            at 10:04 p.m. next Saturday night. If we could somehow harness this
-            bolt of lightning, channel it into the flux capacitor, it just might
-            work. Next Saturday night, we&apos;re sending you back to the
-            future.
           </p>
           <p>
             Go. Yeah, it&apos;s in the back. The future, it&apos;s where
-            you&apos;re going? Mother, with Marty&apos;s parents out of town,
-            don&apos;t you think he oughta spend the night, after all, Dad
-            almost killed him with the car. What&apos;s going on? Where have you
-            been all week?
-          </p>
-          <p>
-            But I can&apos;t go to the dance, I&apos;ll miss my favorite
-            television program, Science Fiction Theater. Well uh, good, fine.
-            Ahh. Ahh. Right, okay, so right around 9:00 she&apos;s gonna get
-            very angry with me. That&apos;s right.
-          </p>
-          <h3>I just don&apos;t think I can take that kind of rejection</h3>
-          <p>
-            I still don&apos;t understand, how am I supposed to go to the dance
-            with her, if she&apos;s already going to the dance with you.
-            Alright, okay Jennifer. What if I send in the tape and they
-            don&apos;t like it. I mean, what if they say I&apos;m no good. What
-            if they say, &apos;Get out of here, kid, you got no future.&apos; I
-            mean, I just don&apos;t think I can take that kind of rejection.
-            Jesus, I&apos;m beginning to sound like my old man. Ahh. Alright,
-            take it up, go. Doc. This is it. This is the answer. It says here
-            that a bolt of lightning is gonna strike the clock tower precisely
-            at 10:04 p.m. next Saturday night. If we could somehow harness this
-            bolt of lightning, channel it into the flux capacitor, it just might
-            work. Next Saturday night, we&apos;re sending you back to the
-            future.
-          </p>
-          <p>
-            Go. Yeah, it&apos;s in the back. The future, it&apos;s where
-            you&apos;re going? Mother, with Marty&apos;s parents out of town,
-            don&apos;t you think he oughta spend the night, after all, Dad
-            almost killed him with the car. What&apos;s going on? Where have you
-            been all week?
-          </p>
-          <p>
-            But I can&apos;t go to the dance, I&apos;ll miss my favorite
-            television program, Science Fiction Theater. Well uh, good, fine.
-            Ahh. Ahh. Right, okay, so right around 9:00 she&apos;s gonna get
-            very angry with me. That&apos;s right.
-          </p>
-          <p>
-            I still don&apos;t understand, how am I supposed to go to the dance
-            with her, if she&apos;s already going to the dance with you.
-            Alright, okay Jennifer. What if I send in the tape and they
-            don&apos;t like it. I mean, what if they say I&apos;m no good. What
-            if they say, &apos;Get out of here, kid, you got no future.&apos; I
-            mean, I just don&apos;t think I can take that kind of rejection.
-            Jesus, I&apos;m beginning to sound like my old man. Ahh. Alright,
-            take it up, go. Doc. This is it. This is the answer. It says here
-            that a bolt of lightning is gonna strike the clock tower precisely
-            at 10:04 p.m. next Saturday night. If we could somehow harness this
-            bolt of lightning, channel it into the flux capacitor, it just might
-            work. Next Saturday night, we&apos;re sending you back to the
-            future.
-          </p>
-          <p>
-            Go. Yeah, it&apos;s in the back. The future, it&apos;s where
-            you&apos;re going? Mother, with Marty&apos;s parents out of town,
-            don&apos;t you think he oughta spend the night, after all, Dad
-            almost killed him with the car. What&apos;s going on? Where have you
-            been all week?
-          </p>
-          <p>
-            But I can&apos;t go to the dance, I&apos;ll miss my favorite
-            television program, Science Fiction Theater. Well uh, good, fine.
-            Ahh. Ahh. Right, okay, so right around 9:00 she&apos;s gonna get
-            very angry with me. That&apos;s right.
-          </p>
-          <p>
-            I still don&apos;t understand, how am I supposed to go to the dance
-            with her, if she&apos;s already going to the dance with you.
-            Alright, okay Jennifer. What if I send in the tape and they
-            don&apos;t like it. I mean, what if they say I&apos;m no good. What
-            if they say, &apos;Get out of here, kid, you got no future.&apos; I
-            mean, I just don&apos;t think I can take that kind of rejection.
-            Jesus, I&apos;m beginning to sound like my old man. Ahh. Alright,
-            take it up, go. Doc. This is it. This is the answer. It says here
-            that a bolt of lightning is gonna strike the clock tower precisely
-            at 10:04 p.m. next Saturday night. If we could somehow harness this
-            bolt of lightning, channel it into the flux capacitor, it just might
-            work. Next Saturday night, we&apos;re sending you back to the
-            future.
+            you&apos;re going?
           </p>
         </IressText>
       </>
@@ -348,7 +257,8 @@ export const Size: Story = {
   },
   render: (args) => <ModalSizes {...args} />,
   parameters: {
-    ...withCustomSource(ModalSizesSource),
+    controls: { disable: true },
+    ...withSource(ModalSizesSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -417,14 +327,12 @@ export const DisableClosing: Story = {
         />
 
         <IressButton onClick={() => showModal('no-close-button')} fluid>
-          No close button (please provide one, if you decide to hide the close
-          button)
+          No close button
         </IressButton>
         {noCloseButtonModal}
 
         <IressButton onClick={() => showModal('both')} fluid>
-          Both (If you hide the close button, ensure you provide another way to
-          close the modal)
+          Both
         </IressButton>
         {bothModal}
       </IressStack>
@@ -449,7 +357,8 @@ export const Status: StatusStory = {
   },
   render: (args) => <ModalStatuses {...args} />,
   parameters: {
-    ...withCustomSource(ModalStatusesSource),
+    controls: { disable: true },
+    ...withSource(ModalStatusesSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -470,39 +379,22 @@ export const V5ModalDiff: Story = {
 import { idsFireEvent, componentLoad } from '@iress/ids-react-test-utils';
   
 test('opening and closing a modal', async () => {
-  await componentLoad([
-    'modal-trigger',
-    'modal',
-  ]);
-
+  await componentLoad(['modal-trigger', 'modal']);
   const trigger = screen.getByTestId('modal-trigger');
   const modal = screen.getByTestId('modal');
-
-  // In version 4, you can already interact with the modal here as its in the DOM at this stage.
-
-  // activate modal
   idsFireEvent.click(trigger);
   await waitFor(() => expect(modal).toBeVisible());
-
-  // close modal
   const closeButton = screen.getByTestId('modal__close-button');
   idsFireEvent.click(closeButton);
   await waitFor(() => expect(modal).not.toBeVisible());
 });`}
       newValue={`import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import componentMeta from './meta';
 
 test('opening and closing a modal', async () => {
   const trigger = screen.getByRole('button', { name: /open modal/i });
-
-  // activate modal
   await userEvent.click(trigger);
   const modal = await screen.findByRole('dialog');
-
-  // In version 5, you can only interact with the modal once it has been loaded here.
-
-  // close modal
   const closeButton = screen.getByRole('button', { name: /close/i });
   await userEvent.click(closeButton);
   await waitForElementToBeRemoved(modal);

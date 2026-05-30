@@ -41,3 +41,13 @@ export const Recipe: Story = {
   render: () => <StoryStub />,
   tags: ['recipe'],
 };
+
+export const Reference: Story = {
+  render: () => (
+    <>
+      This is a reference, probably some sort of additional information and a
+      table, etc.
+    </>
+  ),
+  tags: ['reference'],
+};

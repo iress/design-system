@@ -6,7 +6,7 @@ import LoadingDashboardSource from '../mocks/LoadingDashboard.tsx?raw';
 import { LoadingDashboardError } from '../mocks/LoadingDashboardError';
 import LoadingDashboardErrorSource from '../mocks/LoadingDashboardError.tsx?raw';
 import {
-  withCustomSource,
+  withSource,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
@@ -31,13 +31,13 @@ export default {
 export const Page: Story = {
   render: () => <LoadingDashboard />,
   parameters: {
-    ...withCustomSource(LoadingDashboardSource),
+    ...withSource(LoadingDashboardSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
 export const PageError: Story = {
   render: () => <LoadingDashboardError />,
   parameters: {
-    ...withCustomSource(LoadingDashboardErrorSource),
+    ...withSource(LoadingDashboardErrorSource, { stripImports: true, stripExportFunction: true }),
   },
 };

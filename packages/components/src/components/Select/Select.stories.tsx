@@ -18,8 +18,8 @@ import { SelectNewOption } from './mocks/SelectNewOption';
 import SelectNewOptionSource from './mocks/SelectNewOption.tsx?raw';
 import { OptionsLongText } from './mocks/SelectOptionLongText';
 import SelectOptionLongTextSource from './mocks/SelectOptionLongText.tsx?raw';
-import { IressStack } from '../Stack';
-import { FORM_ELEMENT_WIDTHS } from '@/constants';
+import { SelectSizing } from './mocks/SelectSizing';
+import SelectSizingSource from './mocks/SelectSizing.tsx?raw';
 import {
   type IressSelectProps,
   IressDivider,
@@ -34,7 +34,7 @@ import {
   addToStorybookCategory,
   disableArgTypes,
   mergeStorybookConfig,
-  withCustomSource,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -147,65 +147,56 @@ export const Placeholder: Story = {
 export const AsyncOptions: Story = {
   render: (args) => <SelectAsync {...args} />,
   parameters: {
-    ...withCustomSource(SelectAsyncSource),
+    controls: { disable: true },
+    ...withSource(SelectAsyncSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
 export const AsyncOptionsMinSearchLength: Story = {
   render: (args) => <SelectAsyncMinLength {...args} />,
   parameters: {
-    ...withCustomSource(SelectAsyncMinLengthSource),
+    controls: { disable: true },
+    ...withSource(SelectAsyncMinLengthSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
 export const InitialOptions: Story = {
   render: (args) => <SelectInitialOptions {...args} />,
   parameters: {
-    ...withCustomSource(SelectInitialOptionsSource),
+    controls: { disable: true },
+    ...withSource(SelectInitialOptionsSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
 export const Sizing: Story = {
-  args: {
-    ...SingleSelect.args,
+  render: (args) => <SelectSizing {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(SelectSizingSource, { stripImports: true, stripExportFunction: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['placeholder', 'width']),
-  },
-  render: (args) => (
-    <IressStack gap="md">
-      {FORM_ELEMENT_WIDTHS.map((width) => (
-        <div key={width}>
-          <IressSelect
-            {...args}
-            placeholder={width}
-            width={width}
-            aria-label={`Select option (width: ${width})`}
-          />
-        </div>
-      ))}
-    </IressStack>
-  ),
 };
 
 export const CustomLabel: Story = {
   render: (args) => <SelectCustomLabel {...args} />,
   parameters: {
-    ...withCustomSource(SelectCustomLabelSource),
+    controls: { disable: true },
+    ...withSource(SelectCustomLabelSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
 export const CustomOptions: Story = {
   render: (args) => <SelectCustomOptions {...args} />,
   parameters: {
-    ...withCustomSource(SelectCustomOptionsSource),
+    controls: { disable: true },
+    ...withSource(SelectCustomOptionsSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
 export const CreateNewOption: Story = {
   render: (args) => <SelectNewOption {...args} />,
   parameters: {
-    ...withCustomSource(SelectNewOptionSource),
+    controls: { disable: true },
+    ...withSource(SelectNewOptionSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -255,7 +246,8 @@ export const LotsOfOptions: Story = {
 export const LongTextOptions: Story = {
   render: (args) => <OptionsLongText {...args} />,
   parameters: {
-    ...withCustomSource(SelectOptionLongTextSource),
+    controls: { disable: true },
+    ...withSource(SelectOptionLongTextSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -306,15 +298,6 @@ export const GroupedOptions: Story = {
       },
     ],
   },
-  parameters: {
-    docs: {
-      description: {
-        story: `Use the \`children\` property in \`LabelValueMeta\` to create grouped options. 
-        Groups provide visual organization for related options. The group label is non-selectable, 
-        and only the child items can be selected.`,
-      },
-    },
-  },
 };
 
 export const GroupedMultiSelect: Story = {
@@ -329,7 +312,6 @@ export const GroupedWithSearch: Story = {
   args: {
     ...GroupedOptions.args,
     options: async (query: string) => {
-      // Simulate async search with grouped results
       const allOptions = [
         {
           label: 'Fruits',
@@ -352,7 +334,6 @@ export const GroupedWithSearch: Story = {
 
       if (!query) return Promise.resolve(allOptions);
 
-      // Filter groups and their children based on query
       return Promise.resolve(
         allOptions
           .map((group) => ({
@@ -363,14 +344,6 @@ export const GroupedWithSearch: Story = {
           }))
           .filter((group) => group.children.length > 0),
       );
-    },
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: `When using async options with groups, filter the children based on the search query 
-        and return only groups that have matching children.`,
-      },
     },
   },
 };

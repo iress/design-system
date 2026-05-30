@@ -1,17 +1,16 @@
 import { type StoryObj, type Meta } from '@storybook/react-vite';
 
 import { IressToggle } from '.';
-import { IressPanel } from '../Panel';
-import { IressText } from '../Text';
-import { IressStack } from '../Stack';
 import {
   disableArgTypes,
-  withTransformedRawSource,
+  withSource,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import { ControlledToggle } from './mocks/ControlledToggle';
 import ControlledToggleSource from './mocks/ControlledToggle.tsx?raw';
+import { ToggleLayout } from './mocks/ToggleLayout';
+import ToggleLayoutSource from './mocks/ToggleLayout.tsx?raw';
 import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressToggle>;
@@ -57,53 +56,15 @@ export const Checked: Story = {
   argTypes: disableArgTypes(['checked', 'onChange']),
   render: (args) => <ControlledToggle {...args} />,
   parameters: {
-    ...withTransformedRawSource(
-      ControlledToggleSource,
-      'IressToasterProviderProps',
-      ['container'],
-    ),
+    controls: { disable: true },
+    ...withSource(ControlledToggleSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
 export const Layout: Story = {
-  args: {
-    layout: 'inline',
+  render: (args) => <ToggleLayout {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ToggleLayoutSource, { stripImports: true, stripExportFunction: true }),
   },
-  argTypes: disableArgTypes(['label', 'checked', 'hiddenLabel', 'layout']),
-  render: (args) => (
-    <IressStack gap="lg">
-      <IressText>
-        <h3>inline</h3>
-        <IressPanel bg="alt">
-          <IressToggle {...args} layout="inline">
-            Toggle
-          </IressToggle>
-        </IressPanel>
-      </IressText>
-      <IressText>
-        <h3>inline-between</h3>
-        <IressPanel bg="alt">
-          <IressToggle {...args} layout="inline-between" checked>
-            Toggle
-          </IressToggle>
-        </IressPanel>
-      </IressText>
-      <IressText>
-        <h3>inline-reverse</h3>
-        <IressPanel bg="alt">
-          <IressToggle {...args} layout="inline-reverse">
-            Toggle
-          </IressToggle>
-        </IressPanel>
-      </IressText>
-      <IressText>
-        <h3>stack</h3>
-        <IressPanel bg="alt">
-          <IressToggle {...args} layout="stack" checked>
-            Toggle
-          </IressToggle>
-        </IressPanel>
-      </IressText>
-    </IressStack>
-  ),
 };

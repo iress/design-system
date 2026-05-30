@@ -1,5 +1,4 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { capitalizeFirstLetter } from '@helpers/formatting/capitalizeFirstLetter';
 import { IressIcon } from '../Icon';
 import {
   IressInput,
@@ -9,14 +8,27 @@ import {
   type IressInputProps,
 } from '../../main';
 import { IressField } from '../Field';
-import { FORM_ELEMENT_WIDTHS } from '@/constants';
 import {
   disableArgTypes,
   withJsxTransformer,
+  withSource,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
+
+import { InputTypes } from './mocks/InputTypes';
+import InputTypesSource from './mocks/InputTypes.tsx?raw';
+import { InputModes } from './mocks/InputModes';
+import InputModesSource from './mocks/InputModes.tsx?raw';
+import { InputSizing } from './mocks/InputSizing';
+import InputSizingSource from './mocks/InputSizing.tsx?raw';
+import { InputSlots } from './mocks/InputSlots';
+import InputSlotsSource from './mocks/InputSlots.tsx?raw';
+import { ReactHookFormsInput } from './mocks/ReactHookFormsInput';
+import ReactHookFormsInputSource from './mocks/ReactHookFormsInput.tsx?raw';
+import { InputPercentage } from './mocks/InputPercentage';
+import InputPercentageSource from './mocks/InputPercentage.tsx?raw';
 
 type Story = StoryObj<IressInputProps>;
 type TextareaStory = StoryObj<IressInputProps<string, number>>;
@@ -48,69 +60,20 @@ export const Default: Story = {
 };
 
 export const Types: Story = {
-  argTypes: {
-    ...disableArgTypes(['type']),
+  render: (args) => <InputTypes {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(InputTypesSource, { stripImports: true, stripExportFunction: true }),
   },
-  render: ({ placeholder, ...args }) => (
-    <IressStack gap="md">
-      {/* Copied from: HTMLInputTypeAttribute */}
-      {[
-        'text',
-        'color',
-        'date',
-        'datetime-local',
-        'email',
-        'file',
-        'month',
-        'number',
-        'password',
-        'search',
-        'tel',
-        'time',
-        'url',
-        'week',
-      ].map((type) => (
-        <IressInput
-          {...args}
-          placeholder={placeholder ?? `${capitalizeFirstLetter(type)} input`}
-          type={type}
-          key={type}
-        />
-      ))}
-    </IressStack>
-  ),
 };
 
-const inputModes: Exclude<IressInputProps['inputMode'], undefined>[] = [
-  'text',
-  'tel',
-  'url',
-  'email',
-  'numeric',
-  'decimal',
-  'search',
-];
-export const InputModes: Story = {
-  argTypes: {
-    ...disableArgTypes(['inputMode']),
+export const InputModesStory: Story = {
+  name: 'InputModes',
+  render: (args) => <InputModes {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(InputModesSource, { stripImports: true, stripExportFunction: true }),
   },
-  render: ({ placeholder, ...args }) => (
-    <IressStack gap="md">
-      {inputModes.map((inputMode) => (
-        <IressInput
-          {...args}
-          placeholder={
-            placeholder ??
-            `${capitalizeFirstLetter(
-              inputMode,
-            )} mode, usually best used when type="${inputMode}" `
-          }
-          inputMode={inputMode}
-          key={inputMode}
-        />
-      ))}
-    </IressStack>
-  ),
 };
 
 export const FileType: Story = {
@@ -151,21 +114,11 @@ export const Clearable: Story = {
 };
 
 export const Sizing: Story = {
-  argTypes: {
-    ...disableArgTypes(['width']),
+  render: (args) => <InputSizing {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(InputSizingSource, { stripImports: true, stripExportFunction: true }),
   },
-  render: ({ placeholder, ...args }) => (
-    <IressStack gap="md">
-      {FORM_ELEMENT_WIDTHS.map((width) => (
-        <IressInput
-          {...args}
-          placeholder={placeholder ?? width}
-          width={width}
-          key={width}
-        />
-      ))}
-    </IressStack>
-  ),
 };
 
 export const TextAreas: TextareaStory = {
@@ -175,34 +128,11 @@ export const TextAreas: TextareaStory = {
 };
 
 export const Slots: Story = {
-  argTypes: {},
-  render: ({ placeholder, prepend, append, ...args }) => (
-    <IressStack gap="md">
-      <IressInput
-        {...args}
-        prepend={prepend ?? <IressIcon name="search" />}
-        placeholder={placeholder ?? 'Prepend slot'}
-      />
-
-      <IressInput
-        {...args}
-        append={append ?? <IressIcon name="search" />}
-        placeholder={placeholder ?? 'Append slot'}
-      />
-
-      <IressInput
-        {...args}
-        prepend={prepend ?? <IressIcon name="search" />}
-        placeholder={placeholder ?? 'Prepend slot'}
-      />
-
-      <IressInput
-        {...args}
-        append={append ?? <IressIcon name="search" />}
-        placeholder={placeholder ?? 'Append slot'}
-      />
-    </IressStack>
-  ),
+  render: (args) => <InputSlots {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(InputSlotsSource, { stripImports: true, stripExportFunction: true }),
+  },
 };
 
 export const Actions: Story = {
@@ -218,7 +148,6 @@ export const Actions: Story = {
     ],
     placeholder: 'Input with action button',
   },
-  argTypes: {},
 };
 
 export const ReadOnly: Story = {
@@ -295,5 +224,26 @@ export const Variant: Story = {
     variant: 'search',
     placeholder: 'Start your search...',
     prepend: <IressIcon name="search" />,
+  },
+};
+
+export const ReactHookForms: Story = {
+  tags: ['recipe'],
+  render: (args) => <ReactHookFormsInput {...args} />,
+  parameters: {
+    controls: { disable: true },
+    actions: { disable: true },
+    IDS_Sandbox: { scopes: ['react-hook-form'] },
+    ...withSource(ReactHookFormsInputSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const Percentage: Story = {
+  tags: ['recipe'],
+  render: (args) => <InputPercentage {...args} />,
+  parameters: {
+    controls: { disable: true },
+    actions: { disable: true },
+    ...withSource(InputPercentageSource, { stripImports: true, stripExportFunction: true }),
   },
 };

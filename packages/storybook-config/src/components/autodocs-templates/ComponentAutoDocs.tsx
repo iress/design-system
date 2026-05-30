@@ -6,6 +6,7 @@ import {
   DocsContext,
   useOf,
   ArgTypes,
+  Story,
 } from '@storybook/addon-docs/blocks';
 import { ComponentCanvas } from '../ComponentCanvas';
 import { use, useContext, useEffect, useState } from 'react';
@@ -15,7 +16,6 @@ import { TestTable } from '../TestTable';
 import {
   IressButton,
   IressCol,
-  IressIcon,
   IressMenu,
   IressMenuHeading,
   IressMenuItem,
@@ -29,6 +29,7 @@ const TAB_NAMES = [
   'playground',
   'examples',
   'recipes',
+  'references',
   'testing',
   'api',
 ] as const;
@@ -102,7 +103,15 @@ const StoriesTabContent = ({
           {stories.map((story) => (
             <div key={story.id}>
               <h3 id={story.id}>{story.name}</h3>
-              <ComponentCanvas of={story.moduleExport as never} />
+              <Description of={story.moduleExport as never} />
+
+              {type !== 'references' && (
+                <ComponentCanvas of={story.moduleExport as never} />
+              )}
+
+              {type === 'references' && (
+                <Story of={story.moduleExport as never} />
+              )}
             </div>
           ))}
         </IressCol>
@@ -123,16 +132,22 @@ export const ComponentAutoDocs = () => {
   // componentStories() returns stories in file-definition order
   const stories = docsContext.componentStories();
   const primaryStory = stories[0];
+  const restOfStories = stories.slice(1);
 
-  const examples = stories
-    .slice(1)
-    .filter((story) => !story.tags?.includes('recipe'));
-  const hasExamples = examples.length > 0;
-
-  const recipes = stories
-    .slice(1)
-    .filter((story) => story.tags?.includes('recipe'));
+  const recipes = restOfStories.filter((story) =>
+    story.tags?.includes('recipe'),
+  );
   const hasRecipes = recipes.length > 0;
+
+  const references = restOfStories.filter((story) =>
+    story.tags?.includes('reference'),
+  );
+  const hasReferences = references.length > 0;
+
+  const examples = restOfStories.filter(
+    (story) => !recipes.includes(story) && !references.includes(story),
+  );
+  const hasExamples = examples.length > 0;
 
   const config = resolvedMeta.preparedMeta.parameters
     ?.idsConfig as ParametersConfig['idsConfig'];
@@ -173,8 +188,8 @@ export const ComponentAutoDocs = () => {
       <Title />
       <IressText textStyle="typography.heading.5">
         <Subtitle />
-        <Description />
       </IressText>
+      <Description />
       <ComponentStatus of={resolvedMeta.preparedMeta} />
       <IressTabSet
         selected={selectedTab}
@@ -216,6 +231,15 @@ export const ComponentAutoDocs = () => {
               stories={recipes}
               type="recipes"
               description="Recipes are more complex examples showcasing integration between different components and external libraries."
+            />
+          </IressTab>
+        )}
+        {hasReferences && (
+          <IressTab label="References" value="references">
+            <StoriesTabContent
+              stories={references}
+              type="references"
+              description="View the background and rationale for how this component was designed and built, including links to relevant Figma designs, RFC discussions, and PRs."
             />
           </IressTab>
         )}

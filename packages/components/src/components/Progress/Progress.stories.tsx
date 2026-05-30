@@ -1,9 +1,11 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 
 import { IressProgress } from '.';
-import { IressStack } from '../Stack';
-import { disableArgTypes, stylingProps } from '@iress-oss/ids-storybook-config';
+import { stylingProps, withSource } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
+
+import { ProgressExamples } from './mocks/ProgressExamples';
+import ProgressExamplesSource from './mocks/ProgressExamples.tsx?raw';
 
 type Story = StoryObj<typeof IressProgress>;
 
@@ -29,28 +31,11 @@ export const Default: Story = {
   },
 };
 
-export const ProgressExamples: Story = {
-  argTypes: {
-    ...disableArgTypes(['min', 'max', 'value', 'sectionTitle']),
+export const ProgressExamplesStory: Story = {
+  name: 'ProgressExamples',
+  render: (args) => <ProgressExamples {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ProgressExamplesSource, { stripImports: true, stripExportFunction: true }),
   },
-  render: (args) => (
-    <IressStack gap="md">
-      <IressProgress {...args} min={0} max={50} value={0} />
-      <IressProgress {...args} min={10} max={30} value={20} />
-      <IressProgress
-        {...args}
-        min={0}
-        max={50}
-        value={30}
-        sectionTitle="Step {{current}} of {{max}}"
-      />
-      <IressProgress
-        {...args}
-        min={0}
-        max={100}
-        value={75}
-        backgroundImage="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=2858&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      />
-    </IressStack>
-  ),
 };

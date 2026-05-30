@@ -4,7 +4,7 @@ import { App as AppWithTooltipProvider } from './mocks/AppWithTooltipProvider';
 import AppWithTooltipProviderSource from './mocks/AppWithTooltipProvider.tsx?raw';
 import {
   disableArgTypes,
-  withCustomSource,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressTooltipProviderProps>;
@@ -26,6 +26,7 @@ export default {
 export const Provider: Story = {
   render: () => <AppWithTooltipProvider />,
   parameters: {
-    ...withCustomSource(AppWithTooltipProviderSource),
+    controls: { disable: true },
+    ...withSource(AppWithTooltipProviderSource, { stripImports: true, stripExportFunction: true }),
   },
 };

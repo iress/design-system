@@ -2,7 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressIcon, type IressIconProps } from './Icon';
 import { IressText } from '../Text';
 import { IressInline } from '../Inline';
-import { disableArgTypes, stylingProps } from '@iress-oss/ids-storybook-config';
+import { disableArgTypes, stylingProps, withSource } from '@iress-oss/ids-storybook-config';
 import { IressLink } from '../Link';
 import { IressIconProvider } from './IconProvider';
 import React, { useMemo, useState } from 'react';
@@ -19,6 +19,15 @@ import { IressTag } from '../Tag';
 import { IressTooltip } from '../Tooltip';
 import { FA_TO_MATERIAL_MAP } from './helpers/iconMapping';
 import componentMeta from './meta';
+
+import { IconFilled } from './mocks/IconFilled';
+import IconFilledSource from './mocks/IconFilled.tsx?raw';
+import { IconFlip } from './mocks/IconFlip';
+import IconFlipSource from './mocks/IconFlip.tsx?raw';
+import { IconRotate } from './mocks/IconRotate';
+import IconRotateSource from './mocks/IconRotate.tsx?raw';
+import { IconSpin } from './mocks/IconSpin';
+import IconSpinSource from './mocks/IconSpin.tsx?raw';
 
 type Story = StoryObj<IressIconProps>;
 
@@ -229,7 +238,10 @@ export const ScreenReaderText: Story = {
 };
 
 export const Filled: Story = {
+  render: (args) => <IconFilled {...args} />,
   parameters: {
+    controls: { disable: true },
+    ...withSource(IconFilledSource, { stripImports: true, stripExportFunction: true }),
     docs: {
       description: {
         story: `
@@ -239,117 +251,30 @@ Useful for active/selected states in navigation or buttons.
       },
     },
   },
-  args: {
-    name: 'favorite',
-  },
-  argTypes: {
-    ...disableArgTypes(['filled']),
-  },
-  render: (args) => (
-    <IressInline gap="md">
-      <IressText textAlign="center">
-        <IressIcon {...args} textStyle="typography.heading.1" />
-        <br />
-        (default)
-      </IressText>
-      <IressText textAlign="center">
-        <IressIcon {...args} filled textStyle="typography.heading.1" />
-        <br />
-        filled
-      </IressText>
-    </IressInline>
-  ),
 };
 
 export const Flip: Story = {
-  args: {
-    ...Default.args,
-    textStyle: 'typography.heading.1',
+  render: (args) => <IconFlip {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(IconFlipSource, { stripImports: true, stripExportFunction: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['flip']),
-  },
-  render: (args) => (
-    <IressInline gap="md">
-      <IressStack horizontalAlign="center">
-        <IressIcon {...args} />
-        <IressText>(default)</IressText>
-      </IressStack>
-      <IressStack horizontalAlign="center">
-        <IressIcon {...args} flip="horizontal" />
-        <IressText>horizontal</IressText>
-      </IressStack>
-      <IressStack horizontalAlign="center">
-        <IressIcon {...args} flip="vertical" />
-        <IressText>vertical</IressText>
-      </IressStack>
-      <IressStack horizontalAlign="center">
-        <IressIcon {...args} flip="both" />
-        <IressText>both</IressText>
-      </IressStack>
-    </IressInline>
-  ),
 };
 
 export const Rotate: Story = {
-  args: {
-    ...Default.args,
-    textStyle: 'typography.heading.1',
+  render: (args) => <IconRotate {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(IconRotateSource, { stripImports: true, stripExportFunction: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['rotate']),
-  },
-  render: (args) => (
-    <IressInline gap="md">
-      <IressText textAlign="center">
-        <IressIcon {...args} />
-        <br />
-        (default)
-      </IressText>
-      <IressText textAlign="center">
-        <IressIcon {...args} rotate={90} />
-        <br />
-        90
-      </IressText>
-      <IressText textAlign="center">
-        <IressIcon {...args} rotate={180} />
-        <br />
-        180
-      </IressText>
-      <IressText textAlign="center">
-        <IressIcon {...args} rotate={270} />
-        <br />
-        270
-      </IressText>
-    </IressInline>
-  ),
 };
 
 export const Spin: Story = {
-  args: {
-    ...Default.args,
-    name: 'spinner',
-    screenreaderText: 'Loading...',
+  render: (args) => <IconSpin {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(IconSpinSource, { stripImports: true, stripExportFunction: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['spin']),
-  },
-  render: (args) => (
-    <IressInline gap="md">
-      <IressText>
-        <IressIcon {...args} spin="half" /> half
-      </IressText>
-      <IressText>
-        <IressIcon {...args} spin={1} /> 1
-      </IressText>
-      <IressText>
-        <IressIcon {...args} spin={2} /> 2
-      </IressText>
-      <IressText>
-        <IressIcon {...args} spin={3} /> 3
-      </IressText>
-    </IressInline>
-  ),
 };
 
 export const ExternalLink: Story = {

@@ -4,10 +4,9 @@ import {
   CurrentBreakpoint,
   disableArgTypes,
   withJsxTransformer,
-  withTransformedRawSource,
+  withSource,
   reactNodeArgType,
   stylingProps,
-  withCustomSource,
 } from '@iress-oss/ids-storybook-config';
 import { AutocompleteUsingState } from './mocks/AutocompleteUsingState';
 import AutocompleteUsingStateSource from './mocks/AutocompleteUsingState.tsx?raw';
@@ -44,6 +43,10 @@ export default {
       description: {
         component: componentMeta.description,
       },
+      source: {
+        transform: (code: string) =>
+          code.replace(/\{\s*_react[^}]*\}/gs, 'document.body'),
+      },
     },
   },
 } as Meta<typeof IressAutocomplete>;
@@ -70,10 +73,8 @@ export const Controlled: Story = {
   },
   render: (args) => <AutocompleteUsingState {...args} />,
   parameters: {
-    ...withTransformedRawSource(
-      AutocompleteUsingStateSource,
-      'IressAutocompleteProps',
-    ),
+    controls: { disable: true },
+    ...withSource(AutocompleteUsingStateSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -91,10 +92,8 @@ export const AsyncOptions: Story = {
   },
   render: (args) => <AutocompleteUsingAsync {...args} />,
   parameters: {
-    ...withTransformedRawSource(
-      AutocompleteUsingAsyncSource,
-      'IressAutocompleteProps',
-    ),
+    controls: { disable: true },
+    ...withSource(AutocompleteUsingAsyncSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -107,10 +106,8 @@ export const AsyncOptionsMinSearchLength: Story = {
   },
   render: (args) => <AutocompleteUsingAsync {...args} />,
   parameters: {
-    ...withTransformedRawSource(
-      AutocompleteUsingAsyncSource,
-      'IressAutocompleteProps',
-    ),
+    controls: { disable: true },
+    ...withSource(AutocompleteUsingAsyncSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -217,6 +214,7 @@ export const SearchTable: Story = {
   tags: ['recipe'],
   render: (args) => <AutocompleteSearchTable {...args} />,
   parameters: {
-    ...withCustomSource(AutocompleteSearchTableSource),
+    controls: { disable: true },
+    ...withSource(AutocompleteSearchTableSource, { stripImports: true, stripExportFunction: true }),
   },
 };

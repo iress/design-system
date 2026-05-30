@@ -7,7 +7,7 @@ import {
   disableArgTypes,
   reactNodeArgType,
   stylingProps,
-  withTransformedRawSource,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
 import { ReadonlyEditToggle } from './mocks/ReadonlyEditToggle';
 import ReadonlyEditToggleSource from './mocks/ReadonlyEditToggle.tsx?raw';
@@ -79,11 +79,8 @@ export const Actions: Story = {
   },
   render: (args) => <ReadonlyEditToggle {...args} />,
   parameters: {
-    ...withTransformedRawSource(
-      ReadonlyEditToggleSource,
-      'IressReadonlyProps',
-      ['actions'],
-    ),
+    controls: { disable: true },
+    ...withSource(ReadonlyEditToggleSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 

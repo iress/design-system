@@ -1,14 +1,21 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressMenu, IressMenuItem, type IressMenuProps } from '.';
-import { IressStack } from '../Stack';
-import { IressText } from '../Text';
-import { MENU_CHILDREN_OPTIONS } from './mocks/menuChildrenOptions';
 import { IressInline } from '../Inline';
 import { useArgs } from 'storybook/preview-api';
 import { MenuRoleDescription } from './mocks/MenuRoleDescription';
 import { IressToggle } from '../Toggle';
-import { disableArgTypes, stylingProps } from '@iress-oss/ids-storybook-config';
+import { MENU_CHILDREN_OPTIONS } from './mocks/menuChildrenOptions';
+import {
+  disableArgTypes,
+  stylingProps,
+  withSource,
+} from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
+
+import { MenuLayout } from './mocks/MenuLayout';
+import MenuLayoutSource from './mocks/MenuLayout.tsx?raw';
+import { MenuVariants } from './mocks/MenuVariants';
+import MenuVariantsSource from './mocks/MenuVariants.tsx?raw';
 
 type Story = StoryObj<IressMenuProps>;
 
@@ -82,28 +89,11 @@ export const Fluid: Story = {
 };
 
 export const Layout: Story = {
-  args: {
-    ...Basic.args,
+  render: (args) => <MenuLayout {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(MenuLayoutSource, { stripImports: true, stripExportFunction: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['children', 'layout']),
-  },
-  render: (args) => (
-    <IressStack gap="lg">
-      <IressText>
-        <h3>Stack (default)</h3>
-        <IressMenu {...args} layout="stack" />
-      </IressText>
-      <IressText>
-        <h3>Inline</h3>
-        <IressMenu {...args} layout="inline" />
-      </IressText>
-      <IressText>
-        <h3>Inline Equal Width</h3>
-        <IressMenu {...args} layout="inline-equal-width" />
-      </IressText>
-    </IressStack>
-  ),
 };
 
 export const NoWrap: Story = {
@@ -193,24 +183,9 @@ export const ListboxRole: Story = {
 };
 
 export const Variants: Story = {
-  args: {
-    children: 'grouped',
-    defaultSelected: '5',
+  render: (args) => <MenuVariants {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(MenuVariantsSource, { stripImports: true, stripExportFunction: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['variant']),
-  },
-  render: (args) => (
-    <IressStack gap="lg">
-      <IressMenu {...args} variant="radio" />
-      <IressMenu {...args} variant="subdraw" maxWidth="input.12" />
-      <IressMenu {...args} variant="side" maxWidth="input.12" />
-      <IressMenu {...args} variant="side" maxWidth="input.12" numbered />
-      <IressMenu
-        {...args}
-        children={MENU_CHILDREN_OPTIONS.groupedIcons}
-        variant="rail"
-      />
-    </IressStack>
-  ),
 };

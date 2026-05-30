@@ -1,12 +1,11 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTab, IressTabSet } from '.';
-import { IressStack } from '../Stack';
 import {
   IressExpander,
   IressIcon,
   IressInline,
-  IressPanel,
   IressPill,
+  IressStack,
   IressText,
 } from '../../main';
 import { TabsUsingState } from './mocks/TabsUsingState';
@@ -15,10 +14,12 @@ import { TabsLazyLoading } from './mocks/TabsLazyLoading';
 import TabsLazyLoadingSource from './mocks/TabsLazyLoading.tsx?raw';
 import { TabsWithDynamicBadge } from './mocks/TabsWithDynamicBadge';
 import TabsWithDynamicBadgeSource from './mocks/TabsWithDynamicBadge.tsx?raw';
+import { TabSetLayout } from './mocks/TabSetLayout';
+import TabSetLayoutSource from './mocks/TabSetLayout.tsx?raw';
 import {
   disableArgTypes,
   mergeStorybookConfig,
-  withTransformedRawSource,
+  withSource,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
@@ -87,33 +88,17 @@ export const Controlled: Story = {
   },
   render: (args) => <TabsUsingState {...args} />,
   parameters: {
-    ...withTransformedRawSource(TabsUsingStateSource, 'IressTabSetProps', [
-      'children',
-    ]),
+    controls: { disable: true },
+    ...withSource(TabsUsingStateSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
 export const Layout: Story = {
-  ...Panels,
-  argTypes: {
-    ...disableArgTypes(['layout']),
+  render: (args) => <TabSetLayout {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(TabSetLayoutSource, { stripImports: true, stripExportFunction: true }),
   },
-  render: (args) => (
-    <IressStack gap="md">
-      <IressPanel>
-        <IressText element="h2">top-left</IressText>
-        <IressTabSet {...args} layout="top-left" />
-      </IressPanel>
-      <IressPanel>
-        <IressText element="h2">top-center</IressText>
-        <IressTabSet {...args} layout="top-center" />
-      </IressPanel>
-      <IressPanel>
-        <IressText element="h2">top-right</IressText>
-        <IressTabSet {...args} layout="top-right" />
-      </IressPanel>
-    </IressStack>
-  ),
 };
 
 export const LazyLoading: Story = {
@@ -122,9 +107,8 @@ export const LazyLoading: Story = {
   },
   render: (args) => <TabsLazyLoading {...args} />,
   parameters: {
-    ...withTransformedRawSource(TabsLazyLoadingSource, 'IressTabSetProps', [
-      'children',
-    ]),
+    controls: { disable: true },
+    ...withSource(TabsLazyLoadingSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -161,11 +145,8 @@ export const TabsWithBadges: Story = {
 export const DynamicBadge: Story = {
   render: (args) => <TabsWithDynamicBadge {...args} />,
   parameters: {
-    ...withTransformedRawSource(
-      TabsWithDynamicBadgeSource,
-      'IressTabSetProps',
-      ['children'],
-    ),
+    controls: { disable: true },
+    ...withSource(TabsWithDynamicBadgeSource, { stripImports: true, stripExportFunction: true }),
     docs: {
       description: {
         story:
@@ -197,10 +178,8 @@ export const Type: Story = {
   },
   render: (args) => (
     <IressStack gap="md">
-      <IressPanel>
-        <IressText element="h2">Primary</IressText>
-        <IressTabSet {...args} type="primary" />
-      </IressPanel>
+      <IressText element="h2">Primary</IressText>
+      <IressTabSet {...args} type="primary" />
       <IressExpander activator="Secondary">
         <IressTabSet {...args} type="secondary" mt="-md" />
       </IressExpander>

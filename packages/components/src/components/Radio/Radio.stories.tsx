@@ -1,13 +1,16 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressRadio, type IressRadioProps } from '.';
-import { IressStack } from '../Stack';
+import { IressRadio } from '.';
 import {
-  disableArgTypes,
   reactNodeArgType,
   stylingProps,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
-import { type FormControlValue } from '@/types';
 import componentMeta from './meta';
+
+import { RadioVariants } from './mocks/RadioVariants';
+import RadioVariantsSource from './mocks/RadioVariants.tsx?raw';
+import { RadioReadOnly } from './mocks/RadioReadOnly';
+import RadioReadOnlySource from './mocks/RadioReadOnly.tsx?raw';
 
 type Story = StoryObj<typeof IressRadio>;
 
@@ -42,34 +45,17 @@ export const Checked: Story = {
 };
 
 export const ReadOnly: Story = {
-  ...Default,
-  args: {
-    ...Default.args,
-    readOnly: true,
+  render: (args) => <RadioReadOnly {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(RadioReadOnlySource, { stripImports: true, stripExportFunction: true }),
   },
-  render: (args) => (
-    <IressStack gap="sm">
-      <IressRadio {...args} defaultChecked />
-      <IressRadio {...args} />
-    </IressStack>
-  ),
 };
 
 export const Variants: Story = {
-  argTypes: {
-    ...disableArgTypes(['children', 'variant', 'heading']),
+  render: (args) => <RadioVariants {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(RadioVariantsSource, { stripImports: true, stripExportFunction: true }),
   },
-  render: (args) => (
-    <IressStack gap="lg">
-      <IressRadio {...args} variant="card" heading="Widget">
-        A description of the widget
-      </IressRadio>
-      <IressRadio
-        {...(args as IressRadioProps<FormControlValue, 'touch'>)}
-        variant="touch"
-      >
-        Touch variant
-      </IressRadio>
-    </IressStack>
-  ),
 };

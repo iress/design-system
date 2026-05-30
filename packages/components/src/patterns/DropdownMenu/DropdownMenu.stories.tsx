@@ -2,8 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { TableWithFilters } from './mocks/TableWithFilters';
 import TableWithFiltersSource from './mocks/TableWithFilters.tsx?raw';
 import {
-  withCustomSource,
-  withTransformedRawSource,
+  withSource,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
@@ -55,16 +54,16 @@ export const Default: SingleStory = {
 export const Controlled: SingleStory = {
   render: (args) => <ControlledDropdownMenu {...args} />,
   parameters: {
-    ...withCustomSource(ControlledDropdownMenuSource),
+    ...withSource(ControlledDropdownMenuSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
 export const SearchTable: SingleStory = {
   render: (args) => <TableWithFilters {...args} />,
   parameters: {
-    ...withTransformedRawSource(
+    ...withSource(
       TableWithFiltersSource,
-      'IressDropdownMenuProps',
+      { stripImports: true, stripExportFunction: true, replacePropsType: 'IressDropdownMenuProps' },
     ),
   },
 };
@@ -72,7 +71,7 @@ export const SearchTable: SingleStory = {
 export const MultiSelect: Story = {
   render: (args) => <ControlledDropdownMenuMultiselect {...args} />,
   parameters: {
-    ...withCustomSource(ControlledDropdownMenuMultiselectSource),
+    ...withSource(ControlledDropdownMenuMultiselectSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -90,7 +89,7 @@ export const Options: SingleStory = {
 export const AsyncOptions: SingleStory = {
   render: (args) => <ControlledDropdownMenuAsync {...args} />,
   parameters: {
-    ...withCustomSource(ControlledDropdownMenuAsyncSource),
+    ...withSource(ControlledDropdownMenuAsyncSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 

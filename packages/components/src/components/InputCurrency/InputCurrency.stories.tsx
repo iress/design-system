@@ -3,8 +3,14 @@ import { IressInputCurrency } from './InputCurrency';
 import {
   reactNodeArgType,
   stylingProps,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
+
+import { ValidValueOnChage } from './mocks/ValidValueOnChage';
+import ValidValueOnChageSource from './mocks/ValidValueOnChage.tsx?raw';
+import { CurrencyInTable } from './mocks/CurrencyInTable';
+import CurrencyInTableSource from './mocks/CurrencyInTable.tsx?raw';
 
 type Story = StoryObj<typeof IressInputCurrency>;
 
@@ -91,5 +97,25 @@ export const AlignRight: Story = {
   args: {
     ...Default.args,
     alignRight: true,
+  },
+};
+
+export const CurrencyInTableRecipe: Story = {
+  name: 'CurrencyInTable',
+  tags: ['recipe'],
+  render: (args) => <CurrencyInTable {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(CurrencyInTableSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const ValidValueOnChageRecipe: Story = {
+  name: 'ValidValueOnChage',
+  tags: ['recipe'],
+  render: (args) => <ValidValueOnChage {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ValidValueOnChageSource, { stripImports: true, stripExportFunction: true }),
   },
 };

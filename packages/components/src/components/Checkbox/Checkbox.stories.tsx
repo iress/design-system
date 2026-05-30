@@ -2,15 +2,19 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 
 import { IressCheckbox } from '.';
 import { IressCheckboxMark } from '../CheckboxMark';
-import { IressTable } from '../Table';
-import { IressStack } from '../Stack';
 import {
-  disableArgTypes,
-  withJsxTransformer,
   reactNodeArgType,
   stylingProps,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
+
+import { CheckboxVariants } from './mocks/CheckboxVariants';
+import CheckboxVariantsSource from './mocks/CheckboxVariants.tsx?raw';
+import { CheckboxReadOnly } from './mocks/CheckboxReadOnly';
+import CheckboxReadOnlySource from './mocks/CheckboxReadOnly.tsx?raw';
+import { CheckboxWithTable } from './mocks/CheckboxWithTable';
+import CheckboxWithTableSource from './mocks/CheckboxWithTable.tsx?raw';
 
 type Story = StoryObj<typeof IressCheckbox>;
 
@@ -68,80 +72,25 @@ export const Indeterminate: Story = {
 };
 
 export const Variants: Story = {
-  argTypes: {
-    ...disableArgTypes(['children', 'variant', 'heading']),
+  render: (args) => <CheckboxVariants {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(CheckboxVariantsSource, { stripImports: true, stripExportFunction: true }),
   },
-  render: (args) => (
-    <IressStack gap="lg">
-      <IressCheckbox {...args} variant="card" heading="Widget">
-        A description of the widget
-      </IressCheckbox>
-      <IressCheckbox {...args} variant="touch">
-        Touch variant
-      </IressCheckbox>
-    </IressStack>
-  ),
 };
 
 export const WithTableData: Story = {
-  args: {
-    hiddenLabel: true,
-    children: 'Toggle row',
-  },
-  render: (args) => (
-    <IressTable
-      caption="List of investments"
-      columns={[
-        {
-          format: (value: boolean) => (
-            <IressCheckbox {...args} defaultChecked={value} />
-          ),
-          key: 'select',
-          label: 'Select',
-          sort: true,
-        },
-        { key: 'name', label: 'Name' },
-        { key: 'date', label: 'Date' },
-        { key: 'cost', label: 'Cost' },
-      ]}
-      rows={[
-        {
-          select: false,
-          name: 'Artemis Fund Managers Limited',
-          date: '2019-09-23',
-          cost: 23898.12,
-        },
-        {
-          select: true,
-          name: 'CASH.CASH',
-          date: '2020-06-28',
-          cost: 49751.43,
-        },
-      ]}
-    />
-  ),
+  render: (args) => <CheckboxWithTable {...args} />,
   parameters: {
-    ...withJsxTransformer({
-      functionValue: () =>
-        `(value: boolean) => <IressCheckbox defaultChecked={value} hiddenLabel>Toggle row</IressCheckbox>`,
-      showFunctions: true,
-    }),
+    controls: { disable: true },
+    ...withSource(CheckboxWithTableSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
 export const ReadOnly: Story = {
-  args: {
-    children: 'I agree to the terms and conditions',
-    readOnly: true,
-    value: 'readOnly',
+  render: (args) => <CheckboxReadOnly {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(CheckboxReadOnlySource, { stripImports: true, stripExportFunction: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['checked', 'readOnly']),
-  },
-  render: (args) => (
-    <IressStack>
-      <IressCheckbox {...args} defaultChecked />
-      <IressCheckbox {...args} />
-    </IressStack>
-  ),
 };

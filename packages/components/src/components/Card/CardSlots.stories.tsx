@@ -9,7 +9,7 @@ import {
 import supportedCardSlotsSource from './mocks/supportedCardSlots.tsx?raw';
 import {
   disableArgTypes,
-  withCustomSource,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressCardProps>;
@@ -76,13 +76,15 @@ export const AllSlots: Story = {
   },
   render: (args) => <CardAllSlots {...args} />,
   parameters: {
-    ...withCustomSource(
+    controls: { disable: true },
+    ...withSource(
       CardAllSlotsSource.replace('args: IressCardProps', '')
         .replace(
           `import { SUPPORTED_CARD_SLOTS, SupportedCardSlots } from './supportedCardSlots';`,
           supportedCardSlotsSource.replace(/export /g, ''),
         )
         .replace(`(args)`, '(supportedCardSlots)'),
+      { stripImports: true, stripExportFunction: true },
     ),
   },
 };

@@ -19,7 +19,7 @@ import { type Row } from '@tanstack/react-table';
 import {
   withJsxTransformer,
   disableArgTypes,
-  withTransformedRawSource,
+  withSource,
   mergeStorybookConfig,
   reactNodeArgType,
   stylingProps,
@@ -92,7 +92,8 @@ export const CustomColumns: Story = {
   },
   render: (args) => <TableCustomColumns {...args} />,
   parameters: {
-    ...withTransformedRawSource(TableCustomColumnsSource, 'Props'),
+    controls: { disable: true },
+    ...withSource(TableCustomColumnsSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -103,7 +104,8 @@ export const Formats: Story = {
   },
   render: (args) => <TableFormats {...args} />,
   parameters: {
-    ...withTransformedRawSource(TableFormatsSource, 'Props'),
+    controls: { disable: true },
+    ...withSource(TableFormatsSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -111,7 +113,8 @@ export const Sorting: Story = {
   ...CustomColumns,
   render: (args) => <TableSorting {...args} />,
   parameters: {
-    ...withTransformedRawSource(TableSortingSource, 'Props'),
+    controls: { disable: true },
+    ...withSource(TableSortingSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -119,7 +122,8 @@ export const CustomSortingLogic: Story = {
   ...CustomColumns,
   render: (args) => <TableSortingFn {...(args as object)} />,
   parameters: {
-    ...withTransformedRawSource(TableSortingFnSource, 'Props'),
+    controls: { disable: true },
+    ...withSource(TableSortingFnSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -127,7 +131,8 @@ export const Filtering: Story = {
   ...CustomColumns,
   render: (args) => <TableFiltering {...args} />,
   parameters: {
-    ...withTransformedRawSource(TableFilteringSource, 'Props'),
+    controls: { disable: true },
+    ...withSource(TableFilteringSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -135,7 +140,8 @@ export const ServerSideFiltering: Story = {
   ...CustomColumns,
   render: (args) => <TableFilteringServerSide {...args} />,
   parameters: {
-    ...withTransformedRawSource(TableFilteringServerSideSource, 'Props'),
+    controls: { disable: true },
+    ...withSource(TableFilteringServerSideSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -414,6 +420,7 @@ export const Virtualised: Story = {
   },
   render: () => <TableVirtualised />,
   parameters: {
-    ...withTransformedRawSource(TableVirtualisedSource, 'Props'),
+    controls: { disable: true },
+    ...withSource(TableVirtualisedSource, { stripImports: true, stripExportFunction: true }),
   },
 };

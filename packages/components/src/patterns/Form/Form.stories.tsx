@@ -22,9 +22,37 @@ import {
 import {
   DiffViewer,
   disableArgTypes,
-  withCustomSource,
-  withTransformedRawSource,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
+import { WithReadonlyDataForm } from './mocks/WithReadonlyDataForm';
+import WithReadonlyDataFormSource from './mocks/WithReadonlyDataForm.tsx?raw';
+import { SwitchEditReadonlyForm } from './mocks/SwitchEditReadonlyForm';
+import SwitchEditReadonlyFormSource from './mocks/SwitchEditReadonlyForm.tsx?raw';
+import { NativeValidationForm } from './mocks/NativeValidationForm';
+import NativeValidationFormSource from './mocks/NativeValidationForm.tsx?raw';
+import { NestedFormsExample } from './mocks/NestedForms';
+import NestedFormsSource from './mocks/NestedForms.tsx?raw';
+import { FormGroups as FormGroupsExample } from './mocks/FormGroups';
+import FormGroupsSource from './mocks/FormGroups.tsx?raw';
+import { FormExpanders } from './mocks/FormExpanders';
+import FormExpandersSource from './mocks/FormExpanders.tsx?raw';
+import { UseWatchForm } from './mocks/UseWatchForm';
+import UseWatchFormSource from './mocks/UseWatchForm.tsx?raw';
+import { HiddenInputsForm } from './mocks/HiddenInputsForm';
+import HiddenInputsFormSource from './mocks/HiddenInputsForm.tsx?raw';
+import ValidationDependOnOtherFieldsSource from './mocks/ValidationDependOnOtherFields.tsx?raw';
+import { ValidationDependOnOtherFields as ValidationDependOnOtherFieldsExample } from './mocks/ValidationDependOnOtherFields';
+import { CustomFormFieldComponents as CustomFormFieldComponentsExample } from './mocks/CustomFormFieldComponents';
+import CustomFormFieldComponentsSource from './mocks/CustomFormFieldComponents.tsx?raw';
+import SanitisedInputFormSource from './mocks/SanitisedInputForm.tsx?raw';
+import { lazy } from 'react';
+import { IressLoadingSuspense } from '../Loading';
+
+const SanitisedInputForm = lazy(() =>
+  import('./mocks/SanitisedInputForm').then((m) => ({
+    default: m.SanitisedInputForm,
+  })),
+);
 
 type Story = StoryObj<typeof IressForm>;
 
@@ -96,10 +124,9 @@ export const HandlingSubmission: Story = {
   },
   render: (args) => <FormSubmission {...args} />,
   parameters: {
-    ...withTransformedRawSource(
+    ...withSource(
       FormSubmissionSource,
-      'IressFormProps<FieldValues>',
-      ['children'],
+      { stripImports: true, stripExportFunction: true, replacePropsType: 'IressFormProps<FieldValues>', removeProps: ['children'] },
     ),
   },
 };
@@ -121,10 +148,9 @@ export const CustomErrorHandling: Story = {
   },
   render: (args) => <CustomErrorHandlingForm {...args} />,
   parameters: {
-    ...withTransformedRawSource(
+    ...withSource(
       CustomErrorHandlingFormSource,
-      'IressFormProps<FieldValues>',
-      ['children'],
+      { stripImports: true, stripExportFunction: true, replacePropsType: 'IressFormProps<FieldValues>', removeProps: ['children'] },
     ),
   },
 };
@@ -165,7 +191,7 @@ export const Values: Story = {
   },
   render: (args) => <ControlledForm {...args} />,
   parameters: {
-    ...withCustomSource(ControlledFormSource),
+    ...withSource(ControlledFormSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
@@ -177,10 +203,9 @@ export const DisableValidation: Story = {
   },
   render: (args) => <DisableValidationForm {...args} />,
   parameters: {
-    ...withTransformedRawSource(
+    ...withSource(
       DisableValidationFormSource,
-      'IressFormProps<FieldValues>',
-      ['children'],
+      { stripImports: true, stripExportFunction: true, replacePropsType: 'IressFormProps<FieldValues>', removeProps: ['children'] },
     ),
   },
 };
@@ -201,10 +226,9 @@ export const ResetForm: Story = {
   },
   render: (args) => <FormReset {...args} />,
   parameters: {
-    ...withTransformedRawSource(
+    ...withSource(
       FormResetSource,
-      'IressFormProps<FieldValues>',
-      ['children'],
+      { stripImports: true, stripExportFunction: true, replacePropsType: 'IressFormProps<FieldValues>', removeProps: ['children'] },
     ),
   },
 };
@@ -219,6 +243,9 @@ export const UpdateErrorSummaryOnSubmit: Story = {
 };
 
 export const StateManagementV4ToV5: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
   render: () => (
     <DiffViewer
       allowModeChange
@@ -299,6 +326,9 @@ export const App = () => (
 };
 
 export const ValidationV4ToV5: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
   render: () => (
     <DiffViewer
       allowModeChange
@@ -339,5 +369,100 @@ export const App = () => (
   </IressForm>
 );`}
     />
+  ),
+};
+
+// Recipe stories (merged from FormRecipes.stories.tsx)
+
+export const WithReadonlyData: Story = {
+  tags: ['recipe'],
+  render: (args) => <WithReadonlyDataForm {...args} />,
+  parameters: {
+    ...withSource(WithReadonlyDataFormSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const SwitchEditReadonly: Story = {
+  tags: ['recipe'],
+  render: (args) => <SwitchEditReadonlyForm {...args} />,
+  parameters: {
+    ...withSource(SwitchEditReadonlyFormSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const NativeValidation: Story = {
+  tags: ['recipe'],
+  render: (args) => <NativeValidationForm {...args} />,
+  parameters: {
+    ...withSource(NativeValidationFormSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const NestedForms: Story = {
+  tags: ['recipe'],
+  render: (args) => <NestedFormsExample {...args} />,
+  parameters: {
+    ...withSource(NestedFormsSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const FormGroups: Story = {
+  tags: ['recipe'],
+  render: (args) => <FormGroupsExample {...args} />,
+  parameters: {
+    ...withSource(FormGroupsSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const FormsInExpanders: Story = {
+  tags: ['recipe'],
+  render: (args) => <FormExpanders {...args} />,
+  parameters: {
+    ...withSource(FormExpandersSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const UseWatch: Story = {
+  tags: ['recipe'],
+  render: (args) => <UseWatchForm {...args} />,
+  parameters: {
+    ...withSource(UseWatchFormSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const HiddenInputs: Story = {
+  tags: ['recipe'],
+  render: (args) => <HiddenInputsForm {...args} />,
+  parameters: {
+    ...withSource(HiddenInputsFormSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const ValidationDependOnOtherFields: Story = {
+  tags: ['recipe'],
+  render: (args) => <ValidationDependOnOtherFieldsExample {...args} />,
+  parameters: {
+    ...withSource(ValidationDependOnOtherFieldsSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const CustomFormFieldComponents: Story = {
+  tags: ['recipe'],
+  render: (args) => <CustomFormFieldComponentsExample {...args} />,
+  parameters: {
+    ...withSource(CustomFormFieldComponentsSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const SanitisingInput: Story = {
+  tags: ['recipe'],
+  parameters: {
+    controls: { disable: true },
+    ...withSource(SanitisedInputFormSource, { stripImports: true, stripExportFunction: true }),
+  },
+  render: () => (
+    <IressLoadingSuspense>
+      <SanitisedInputForm />
+    </IressLoadingSuspense>
   ),
 };

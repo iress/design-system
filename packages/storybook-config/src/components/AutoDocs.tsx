@@ -1,13 +1,8 @@
-import {
-  Title,
-  Subtitle,
-  Description,
-  useOf,
-  Stories,
-} from '@storybook/addon-docs/blocks';
+import { useOf } from '@storybook/addon-docs/blocks';
 import type { ParametersConfig } from '../types';
 import { ComponentAutoDocs } from './autodocs-templates/ComponentAutoDocs';
 import { LandingAutoDocs } from './autodocs-templates/LandingAutoDocs';
+import { DefaultAutoDocs } from './autodocs-templates/DefaultAutoDocs';
 
 export interface AutoDocsProps {
   /**
@@ -35,12 +30,5 @@ export const AutoDocs = ({
     return <LandingAutoDocs />;
   }
 
-  return (
-    <>
-      <Title />
-      <Subtitle />
-      <Description />
-      <Stories title="" />
-    </>
-  );
+  return <DefaultAutoDocs />;
 };

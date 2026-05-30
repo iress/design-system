@@ -7,7 +7,7 @@ import { RoutingLink } from './mocks/RoutingLink';
 import RoutingLinkSource from './mocks/RoutingLink.tsx?raw';
 import {
   disableArgTypes,
-  withCustomSource,
+  withSource,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
@@ -87,6 +87,7 @@ export const ExternalLink: Story = {
 export const Element: Story = {
   render: () => <RoutingLink />,
   parameters: {
-    ...withCustomSource(RoutingLinkSource),
+    controls: { disable: true },
+    ...withSource(RoutingLinkSource, { stripImports: true, stripExportFunction: true }),
   },
 };
