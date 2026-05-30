@@ -7,7 +7,7 @@ export const buttonGroup = sva({
       display: 'contents',
     },
     label: {
-      marginBlockEnd: 'sm',
+      mb: 'xs',
       textStyle: 'typography.body.md.strong',
     },
     values: {

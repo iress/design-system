@@ -983,3 +983,95 @@ have the following outstanding issues to resolve:
    full page content at build time. Fix: either pre-render pages at build time so Pagefind
    can crawl them, or switch to a search index built from the MDX source files directly
    (like the original FlexSearch approach that indexed `meta.title` + `meta.description`).
+
+---
+
+## Phase 14: AI Skill Improvements — Discoverability & Type Verification
+
+**Goal:** Make it trivial for AI agents (and the skills that drive them) to find IDS documentation, locate types, and verify props exist — without relying on MCP or dumping full component metadata into context.
+
+**Rationale:** The MCP approach (`addon-mcp`) eats context by preloading all component metadata upfront. Instead, AI agents should:
+1. Know *where* to find docs (`.ai/` folder, `llms.txt`)
+2. Know *where* to verify types (`node_modules` installed package types)
+3. Look up only what they need, when they need it
+
+### Task 14.1: Create `llms.txt` for the IDS package
+
+Publish a `llms.txt` at the package root (included in npm distribution) that indexes all available AI documentation:
+
+```
+# Iress Design System
+> Component library for building Iress applications
+
+## Docs
+- [Component list](/docs/components.md): All available components
+- [Alert](/docs/alert.md): Alert component usage, examples, accessibility
+- [Button](/docs/button.md): Button component usage, examples, routing
+...
+```
+
+- [ ] Generate `llms.txt` as part of the derive/translate pipeline
+- [ ] Include in `package.json` `files` array so it ships with npm
+- [ ] Index: component docs, pattern docs, token docs
+
+### Task 14.2: Create a resolver script for AI agents
+
+A small script (or instructions in the skill) that helps AI locate the right files:
+
+```bash
+# Find .ai docs for a component
+find node_modules/@iress-oss/ids-components/.ai -name "*.md"
+
+# Find type definitions for a component
+find node_modules/@iress-oss/ids-components/dist/types -name "Alert*"
+```
+
+Or a helper the skill can call:
+
+```bash
+npx ids-docs find Alert
+# → .ai/alert.md
+# → dist/types/components/Alert/Alert.d.ts
+```
+
+- [ ] Create `bin/ids-docs.ts` CLI helper (or document in skill as shell commands)
+- [ ] Outputs: path to `.ai/` doc, path to type definition, path to `llms.txt`
+- [ ] Works from consumer's `node_modules` (no monorepo dependency)
+
+### Task 14.3: Update `ui-translation` and `figma-to-ids` skills
+
+Add instructions to both skills:
+
+1. **Before using a component:** Read its type definition from `node_modules/@iress-oss/ids-components/dist/types/` to verify props exist
+2. **For usage guidance:** Read the `.ai/` markdown doc for the component
+3. **For discovery:** Read `llms.txt` to find available components and their doc paths
+4. **Never assume props** — always verify against installed types
+
+- [ ] Update `.agents/skills/ui-translation/SKILL.md`
+- [ ] Update `.agents/skills/figma-to-ids/SKILL.md`
+- [ ] Add verification step: "read the `.d.ts` to confirm the prop exists before using it"
+- [ ] Add fallback: "if `.ai/` doc not found, check `llms.txt` for the correct path"
+
+### Task 14.4: Ensure types are discoverable in published package
+
+Verify the published package structure makes type lookup easy:
+
+```
+@iress-oss/ids-components/
+├── .ai/
+│   ├── llms.txt
+│   ├── alert.md
+│   ├── button.md
+│   └── ...
+├── dist/
+│   └── types/
+│       └── components/
+│           ├── Alert/Alert.d.ts
+│           ├── Button/Button.d.ts
+│           └── ...
+└── package.json
+```
+
+- [ ] Verify `.ai/` is included in `files` in `package.json`
+- [ ] Verify `dist/types/` has per-component `.d.ts` files (not a single bundled type)
+- [ ] Verify paths are stable across versions (no hash suffixes, etc.)

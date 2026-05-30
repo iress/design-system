@@ -6,12 +6,14 @@ import {
 } from '@storybook/addon-docs/blocks';
 import { use, useContext } from 'react';
 import { IressStorybookContext } from '../IressStorybookContext';
-import { ComponentCanvas } from '../ComponentCanvas';
+import { StoriesWithToc, useHashNavigation } from '../StoriesWithToc';
 
 export const DefaultAutoDocs = () => {
   const docsContext = useContext(DocsContext);
   const { IressText } = use(IressStorybookContext);
   const stories = docsContext.componentStories();
+
+  useHashNavigation();
 
   return (
     <>
@@ -20,9 +22,7 @@ export const DefaultAutoDocs = () => {
         <Subtitle />
       </IressText>
       <Description />
-      {stories?.map((story) => (
-        <ComponentCanvas of={story.moduleExport as never} withToolbar />
-      ))}
+      <StoriesWithToc stories={stories} />
     </>
   );
 };

@@ -9,23 +9,15 @@ import {
   Story,
 } from '@storybook/addon-docs/blocks';
 import { ComponentCanvas } from '../ComponentCanvas';
-import { use, useContext, useEffect, useState } from 'react';
+import { use, useContext, useState } from 'react';
 import { IressStorybookContext } from '../IressStorybookContext';
 import { ComponentStatus } from '../ComponentStatus';
 import { TestTable } from '../TestTable';
-import {
-  IressButton,
-  IressCol,
-  IressMenu,
-  IressMenuHeading,
-  IressMenuItem,
-  IressPanel,
-  IressRow,
-} from '@iress-oss/ids-components';
-import type { BroadcastHashEvent, ParametersConfig } from '../../types';
-import { cssVars } from '@iress-oss/ids-tokens';
+import { IressButton, IressCol, IressRow } from '@iress-oss/ids-components';
+import type { ParametersConfig } from '../../types';
+import { StoryToc, useHashNavigation, type StoryItem } from '../StoriesWithToc';
 
-const TAB_NAMES = [
+const BUILT_IN_TABS = [
   'playground',
   'examples',
   'recipes',
@@ -33,50 +25,11 @@ const TAB_NAMES = [
   'testing',
   'api',
 ] as const;
-type TabName = (typeof TAB_NAMES)[number];
+type TabName = string;
 
 const isTabName = (value: string): value is TabName =>
-  TAB_NAMES.includes(value as TabName);
-
-const setParentHash = (hash: string) => {
-  window.parent.location.hash = hash;
-};
-
-const scrollToStory = (storyId: string) => {
-  document.getElementById(storyId)?.scrollIntoView({ behavior: 'smooth' });
-};
-
-interface StoryItem {
-  id: string;
-  name: string;
-  moduleExport: unknown;
-}
-
-/**
- * Inline table of contents for a list of stories within a tab.
- */
-const TabToc = ({ stories, type }: { stories: StoryItem[]; type: TabName }) => (
-  <nav style={{ position: 'sticky', top: cssVars.spacing[3] }}>
-    <IressPanel px="none" py="sm">
-      <IressMenuHeading element="h2">Jump to</IressMenuHeading>
-      <IressMenu variant="side" width="12/12">
-        {stories.map((story) => (
-          <IressMenuItem
-            key={story.id}
-            href={`#${story.id}`}
-            onClick={(e: React.MouseEvent) => {
-              e.preventDefault();
-              scrollToStory(story.id);
-              setParentHash(`${type}_${story.id}`);
-            }}
-          >
-            {story.name}
-          </IressMenuItem>
-        ))}
-      </IressMenu>
-    </IressPanel>
-  </nav>
-);
+  BUILT_IN_TABS.includes(value as (typeof BUILT_IN_TABS)[number]) ||
+  value.length > 0;
 
 /**
  * Tab content for Examples/Recipes — renders stories in a two-column layout with a sticky TOC.
@@ -116,7 +69,7 @@ const StoriesTabContent = ({
           ))}
         </IressCol>
         <IressCol span={{ xs: 12, md: 4, lg: 3, xl: 2 }} pt="md">
-          <TabToc stories={stories} type={type} />
+          <StoryToc stories={stories} hashPrefix={type} />
         </IressCol>
       </IressRow>
     </>
@@ -144,8 +97,25 @@ export const ComponentAutoDocs = () => {
   );
   const hasReferences = references.length > 0;
 
+  // Dynamic tabs from `tab:<name>` tags (e.g. tags: ['tab:configuration'])
+  const customTabs = (() => {
+    const tabs = new Map<string, StoryItem[]>();
+    for (const story of restOfStories) {
+      const tabTag = story.tags?.find((t: string) => t.startsWith('tab:'));
+      if (tabTag) {
+        const tabName = tabTag.replace('tab:', '');
+        if (!tabs.has(tabName)) tabs.set(tabName, []);
+        tabs.get(tabName)!.push(story);
+      }
+    }
+    return tabs;
+  })();
+
   const examples = restOfStories.filter(
-    (story) => !recipes.includes(story) && !references.includes(story),
+    (story) =>
+      !recipes.includes(story) &&
+      !references.includes(story) &&
+      !story.tags?.some((t: string) => t.startsWith('tab:')),
   );
   const hasExamples = examples.length > 0;
 
@@ -160,28 +130,12 @@ export const ComponentAutoDocs = () => {
 
   const selectTab = (tab: TabName) => {
     setSelectedTab(tab);
-    setParentHash(tab);
   };
 
-  useEffect(() => {
-    const handleHashMessage = (event: MessageEvent<BroadcastHashEvent>) => {
-      if (event.data?.type !== 'UPDATE_HASH' || !event.data.hash) return;
-
-      const [tab, storyId] = event.data.hash.split('_');
-      if (isTabName(tab)) setSelectedTab(tab);
-      if (storyId) scrollToStory(storyId);
-    };
-
-    const initialHash = window.parent.location.hash.substring(1);
-    if (initialHash) {
-      const [tab, storyId] = initialHash.split('_');
-      if (isTabName(tab)) setSelectedTab(tab);
-      if (storyId) setTimeout(() => scrollToStory(storyId), 200);
-    }
-
-    window.addEventListener('message', handleHashMessage);
-    return () => window.removeEventListener('message', handleHashMessage);
-  }, []);
+  useHashNavigation((hash) => {
+    const [tab] = hash.split('_');
+    if (isTabName(tab)) setSelectedTab(tab);
+  });
 
   return (
     <>
@@ -225,6 +179,19 @@ export const ComponentAutoDocs = () => {
             />
           </IressTab>
         )}
+        {Array.from(customTabs.entries()).map(([tabName, tabStories]) => (
+          <IressTab
+            key={tabName}
+            label={tabName.charAt(0).toUpperCase() + tabName.slice(1)}
+            value={tabName}
+          >
+            <StoriesTabContent
+              stories={tabStories}
+              type={tabName}
+              description=""
+            />
+          </IressTab>
+        ))}
         {hasRecipes && (
           <IressTab label="Recipes" value="recipes">
             <StoriesTabContent

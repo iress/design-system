@@ -1118,6 +1118,82 @@ export const Mode: ButtonStory = {
 
 This should be applied during the bulk migration to all stories that use standalone mock files with no interactive args.
 
+### ⚠️ Interactivity in mock files uses useState, not Storybook controls
+
+When a mock benefits from interactivity (toggling props, selecting options), use `useState` inside the mock itself rather than relying on Storybook args. This keeps the mock as a complete, copy-paste-able example:
+
+```tsx
+// mocks/AlertInteractive.tsx
+import { useState } from 'react';
+import { IressAlert, IressStack, IressRadioGroup, IressRadio } from '@/main';
+
+export function AlertInteractive() {
+  const [status, setStatus] = useState('info');
+
+  return (
+    <IressStack gap="md">
+      <IressRadioGroup name="status" onChange={setStatus} defaultValue="info">
+        <IressRadio value="info">Info</IressRadio>
+        <IressRadio value="danger">Danger</IressRadio>
+      </IressRadioGroup>
+      <IressAlert status={status}>Alert message</IressAlert>
+    </IressStack>
+  );
+}
+```
+
+This pattern:
+- Keeps the mock self-contained (no Storybook dependency)
+- AI translation picks it up as a working example with state management
+- Storybook controls stay disabled (`controls: { disable: true }`)
+- Only use where interactivity adds genuine value — most galleries stay frozen
+
+### ⚠️ Inline JSX in args — no external variable references
+
+Args that contain JSX (slots like `prepend`, `footer`, `children`) must be inlined directly in the story args — NOT referenced from shared objects or external files:
+
+```tsx
+// ❌ Bad — translator can't resolve the variable
+import { supportedCardSlots } from './mocks/supportedCardSlots';
+export const Prepend: Story = {
+  args: { prepend: supportedCardSlots.prepend },
+};
+
+// ✅ Good — self-contained, translator maps directly to props
+export const Prepend: Story = {
+  args: { prepend: <IressIcon name="star" /> },
+};
+```
+
+If slot interactivity is needed (e.g. swapping between different slot contents), use a P2 mock with `useState` — NOT Storybook `argTypes.mapping`:
+
+```tsx
+// ❌ Bad — Storybook-only, can't be translated
+argTypes: {
+  icon: {
+    options: ['Star', 'Heart'],
+    mapping: { Star: <IconStar />, Heart: <IconHeart /> },
+    control: { type: 'select' },
+  },
+};
+
+// ✅ Good — self-contained mock with real React patterns
+export function CardSlotPicker() {
+  const [icon, setIcon] = useState<'star' | 'heart'>('star');
+  return (
+    <IressStack gap="md">
+      <IressRadioGroup name="icon" onChange={setIcon} defaultValue="star">
+        <IressRadio value="star">Star</IressRadio>
+        <IressRadio value="heart">Heart</IressRadio>
+      </IressRadioGroup>
+      <IressCard prepend={<IressIcon name={icon} />}>Card content</IressCard>
+    </IressStack>
+  );
+}
+```
+
+This ensures the translation pipeline can always produce complete, working code without resolving external references.
+
 ### Consolidate recipe stories into the main stories file
 
 Instead of having separate `*Recipes.stories.tsx` files, put recipe stories in the main component stories file and tag them with `tags: ['recipe']`:
@@ -1185,6 +1261,40 @@ parameters: {
 
 - [x] Added to `transformSource` in `withSource` (handles mock-based stories)
 - [ ] Add to `createMeta` factory as global fallback (handles args-only stories)
+
+### Replace shared render factories with mock files (Modal/Slideout)
+
+Modal and Slideout use a `renderWithButtonFn` factory that returns a render function. This is opaque to contributors and AI. Replace with individual mock files per story:
+
+```tsx
+// mocks/ModalDefault.tsx
+import { IressModal, IressButton, IressModalProvider, useModal } from '@/main';
+
+export function ModalDefault() {
+  const { showModal } = useModal();
+  return (
+    <IressModalProvider>
+      <IressButton onClick={() => showModal('my-modal')}>Show modal</IressButton>
+      <IressModal id="my-modal" show={false}>Modal content</IressModal>
+    </IressModalProvider>
+  );
+}
+```
+
+Each mock is a complete, copy-paste-able example including the Provider. Removes the need for the decorator + factory pattern.
+
+- [ ] Migrate Modal stories (~5) to mock files
+- [ ] Migrate Slideout stories (~3) to mock files
+- [ ] Remove `renderWithButtonFn` from both files
+
+### Move DiffViewer migration stories to guidelines
+
+DiffViewer stories (v4→v5 migration guides) don't belong in Storybook — it's a library reference, not a guide. Move them to `apps/guidelines/content/`:
+
+- [ ] Move Modal v4→v5 diff content to guidelines
+- [ ] Move Slideout v4→v5 diff content to guidelines
+- [ ] Move Form v4→v5 diff content to guidelines
+- [ ] Remove DiffViewer stories from component story files
 
 ### Removed `CurrentBreakpoint` from stories
 

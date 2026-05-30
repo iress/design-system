@@ -7,10 +7,7 @@ import {
   supportedCardSlots,
 } from './mocks/supportedCardSlots';
 import supportedCardSlotsSource from './mocks/supportedCardSlots.tsx?raw';
-import {
-  disableArgTypes,
-  withSource,
-} from '@iress-oss/ids-storybook-config';
+import { disableArgTypes, withSource } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressCardProps>;
 
@@ -20,6 +17,15 @@ export default {
   parameters: {
     actions: {
       disable: true,
+    },
+    docs: {
+      description: {
+        component:
+          'The Card component provides several render props for different sections of the card. These stories demonstrate how to use these render props to customize the content and layout of the card.',
+      },
+    },
+    idsConfig: {
+      autodocsTemplate: 'default',
     },
   },
   tags: ['updated'],
