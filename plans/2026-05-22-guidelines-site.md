@@ -606,13 +606,22 @@ packages/components/.ai/components/button.md (shipped in npm)
   with `<StoryEmbed id="..." />` where a live demo is needed
 - [ ] **Step 2:** Keep prose/written code snippets for simple prop demonstrations (not everything needs an iframe)
 
-### Task 11.3: Update `derive-ai-docs.ts` to resolve embeds
+### Task 11.3: Build unified `translate.ts` pipeline
 
-- [ ] **Step 1:** When processing guidelines MDX → `.ai/`, find `<StoryEmbed id="..." />`
-- [ ] **Step 2:** Map story ID back to `.stories.tsx` file + export name
-- [ ] **Step 3:** Extract the render function source, strip Storybook boilerplate (args spread, decorators)
-- [ ] **Step 4:** Replace the embed with a clean fenced code block in the `.ai/` output
-- [ ] **Step 5:** Run improve-code-examples skill on the result (validate props, add imports)
+> **Expanded from original scope.** See `plans/ai-docs-pipeline-consolidation.md` for full details
+> and `plans/story-code-patterns.md` for the story migration that simplifies extraction.
+
+- [ ] **Step 1:** Migrate complex stories to mock files (prerequisite — simplifies extraction)
+- [ ] **Step 2:** Create `scripts/translate.ts` with `--components` subcommand
+  - Reads `apps/guidelines/content/{components,patterns}/*.mdx`
+  - Resolves `<StoryEmbed id="..."/>` → reads raw source from mock files or extracts render bodies
+  - Applies `transformSource` (from `withSource` helper) to clean up code
+  - Writes to `packages/components/.ai/{components,patterns}/*.md`
+- [ ] **Step 3:** Add `--tokens` subcommand (port from `generate-token-reference.ts`)
+- [ ] **Step 4:** Add `--skills` subcommand (port skill concatenation)
+- [ ] **Step 5:** Add `--full-reference` subcommand (generates `IDS-FULL-REFERENCE.md`)
+- [ ] **Step 6:** Add `--all` (default) that runs all subcommands
+- [ ] **Step 7:** Wire into `package.json` as `"translate": "tsx scripts/translate.ts"`
 
 ### Task 11.4: Keeping examples in sync
 
@@ -699,21 +708,22 @@ write-back loop.
 
 ### Task 12.4: Transition cutover (old → new workflow)
 
-Performed after Phases 7, 9, and 10 are complete:
+Performed after Phases 7, 9, 10, and 11.3 are complete:
 
-- [ ] **Step 1:** Run `derive-ai-docs.ts` to produce a clean `.ai/` baseline from current content
-- [ ] **Step 2:** Run `ai-runner.ts` on all files to validate/improve
+- [ ] **Step 1:** Run `translate.ts --all` to produce a clean `.ai/` baseline from current content
+- [ ] **Step 2:** Run `ai-improve.ts` on all files to validate/improve (optional)
 - [ ] **Step 3:** Commit `.ai/` as the authoritative baseline
-- [ ] **Step 4:** Remove `yarn translate` from `yarn build` script
-- [ ] **Step 5:** Remove `yarn translate` from CI deploy workflow (just `yarn workspace @iress/ids-guidelines build`)
-- [ ] **Step 6:** Delete `scripts/translate-components.ts` (or archive in git history)
-- [ ] **Step 7:** Remove `packages/*/.ai/*` ignore from `.gitignore`
-- [ ] **Step 8:** Verify CI builds pass without translate
-- [ ] **Step 9:** Verify `yarn dev` watcher correctly updates `.ai/` on content/story changes
+- [ ] **Step 4:** Update `yarn build` to use `yarn translate` (now runs `translate.ts`)
+- [ ] **Step 5:** Delete old scripts: `translate-components.ts`, `derive-ai-docs.ts`, `generate-token-reference.ts`
+- [ ] **Step 6:** Remove `packages/*/.ai/*` ignore from `.gitignore`
+- [ ] **Step 7:** Verify CI builds pass
+- [ ] **Step 8:** Verify `yarn dev` watcher correctly updates `.ai/` on content/story changes
+- [ ] **Step 9:** Remove deprecated `withCustomSource` / `withTransformedRawSource` exports (replaced by `withSource`)
+- [ ] **Step 10:** Remove old `withCustomSource.test.ts`
 
 ### Task 12.4: Update `IDS-FULL-REFERENCE.md` generation
 
-- [ ] Move concatenation logic from old translate script into `derive-ai-docs.ts`
+- [ ] Now handled by `translate.ts --full-reference` subcommand
 - [ ] Source: `packages/components/.ai/**/*.md` + `.kiro/skills/` (AI-optimized, not raw MDX)
 - [ ] Verify `.ai/IDS-FULL-REFERENCE.md` is regenerated correctly
 - [ ] Re-upload to Iris Gemini Gem
@@ -866,6 +876,60 @@ enforces conventions and reduces boilerplate across all component/pattern story 
 - [ ] **Step 4:** Add TypeDoc generation to the build pipeline
 - [ ] **Step 5:** Add "View full API →" link from each component's Specifications tab to the TypeDoc page
 - [ ] **Step 6:** Style TypeDoc output to match IDS design language (custom theme or CSS overrides)
+
+### Task 13.5: Surface component specifications in Storybook autodocs
+
+Add component-level metadata (links, resources, ownership) to `ComponentMeta` and display
+it in the Storybook autodocs page via `AutoDocsPage`. This gives developers quick access
+to related resources without leaving Storybook.
+
+- [ ] **Step 1:** Extend `ComponentMeta` interface with optional specification fields:
+  ```ts
+  interface ComponentMeta {
+    // existing fields...
+    heading: string;
+    description: string;
+    tags: string[];
+
+    // new specification fields (human-authored)
+    github?: string;         // e.g. 'packages/components/src/components/Alert'
+    figma?: string;          // Figma file/frame URL
+    guidelines?: string;     // guidelines site URL path (e.g. '/components/alert')
+    owner?: string;          // team or individual responsible
+    status?: 'stable' | 'beta' | 'deprecated' | 'experimental';
+    related?: string[];      // related components (e.g. ['IressToaster', 'IressModal'])
+    a11y?: 'audited' | 'partial' | 'unaudited'; // accessibility conformance level
+  }
+  ```
+  **Note:** `since` (version introduced) stays in the auto-generated `component-versions.json`
+  — it's already wired into `AutoDocsPage` via `parameters.docs.componentVersions`. Machine-derivable
+  data should not be hand-maintained in meta.
+- [ ] **Step 2:** Populate these fields in each component's `meta/index.tsx`
+- [ ] **Step 3:** Pass specification metadata through story parameters (via `createMeta` factory)
+- [ ] **Step 4:** Render a "Resources" section in `AutoDocsPage` showing:
+  - 📖 Guidelines link (from meta)
+  - 🎨 Figma link (from meta)
+  - 💻 GitHub source link (from meta)
+  - 📦 Version introduced (from auto-generated `component-versions.json` — already available)
+  - 👥 Owner/team (from meta)
+  - 🔗 Related components (from meta — links to their autodocs pages)
+  - ♿ Accessibility status badge (from meta — audited/partial/unaudited)
+- [ ] **Step 5:** Style the resources section to be compact and non-intrusive (e.g. a collapsible panel or inline chips at the top of the page)
+- [ ] **Step 6:** Enhance the existing Introduction page (from Task 12.9) to also show library-level resources:
+  - 📦 NPM package link (`@iress-oss/ids-components`)
+  - 📊 Total bundle size (from build artifacts)
+  - 🔗 Guidelines site link
+  - 📋 Changelog link
+  - 🏷️ Current version
+
+### Task 13.6: Add `related` field for patterns as well as components
+
+Components can reference related components (`related?: string[]`), but patterns should
+also be linkable. Extend `related` to accept both component and pattern names.
+
+- [ ] **Step 1:** Allow `related` to reference both components and patterns (e.g. `['IressToaster', 'Feedback']`)
+- [ ] **Step 2:** In `AutoDocsPage`, render related items as links — resolve component names to their autodocs URL, pattern names to their autodocs URL
+- [ ] **Step 3:** In guidelines, render related items as navigation links to other pages
 
 ---
 

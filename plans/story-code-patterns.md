@@ -1065,6 +1065,43 @@ This reduces the number of helper patterns from 3+ down to 1.
 
 ## Migration Path
 
+### Progress
+
+- [x] **Step 1: Create unified `withSource` helper** — `packages/storybook-config/src/helpers/withSource.ts`
+  - Always transforms `@/main` → `@iress-oss/ids-components`
+  - `replacePropsType` option strips interface/type declarations and annotations
+  - `removeProps` option strips specified props from JSX
+  - `stripImports` option removes import statements (for cleaner Storybook display)
+  - `format` option (default: true) runs prettier via Storybook's async transform API
+  - Exports `transformSource` for reuse by the derive script (no Storybook deps)
+  - Backwards-compatible: `withCustomSource` and `withTransformedRawSource` re-exported as deprecated aliases
+  - 20 tests passing (`packages/storybook-config/src/helpers/withSource.test.ts`)
+- [ ] **Step 2: Migrate ~50 complex render+args stories to mock files**
+- [ ] **Step 3: Create `createMeta` factory** (Phase 12.10 from guidelines plan)
+- [ ] **Step 4: Build `translate.ts`** (see `plans/ai-docs-pipeline-consolidation.md`)
+
+### ⚠️ Storybook Quirk: Always spread args into mock components
+
+Storybook's autodocs `ComponentCanvas` requires `render: (args) => <Mock {...args} />` — NOT `render: () => <Mock />`. Without the args parameter and spread, Storybook's internal source detection breaks and the code panel won't display properly.
+
+The mock component should accept and ignore the spread (it uses concrete props internally):
+
+```tsx
+// In the story:
+render: (args) => <AlertStatus {...args} />,
+
+// In the mock file (args are accepted but not used):
+export function AlertStatus({ ...args }) {
+  return (
+    <IressStack gap="md">
+      <IressAlert status="danger">...</IressAlert>
+    </IressStack>
+  );
+}
+```
+
+The `withSource` helper's `stripImports` option will strip the `{...args}` from the displayed code, so consumers see clean output. The derive script also ignores the spread.
+
 ### Old → New Pattern Mapping
 
 | # | Old Pattern | New Pattern | Action |

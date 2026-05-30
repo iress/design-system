@@ -5,7 +5,8 @@
   "allowedTools": ["@builtin", "@chrome-devtools", "@playwright"],
   "resources": [
     "skill://.agents/skills/**/SKILL.md",
-    "skill://.kiro/skills/**/SKILL.md"
+    "skill://.kiro/skills/**/SKILL.md",
+    "skill://~/.kiro/skills/confluence/**/SKILL.md"
   ],
   "mcpServers": {
     "chrome-devtools": {

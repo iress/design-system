@@ -1,24 +1,26 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 
-import {
-  IressAlert,
-  type IressAlertProps,
-  IressStack,
-  STATUSES,
-  type Statuses,
-} from '@/main';
+import { IressAlert, type IressAlertProps } from '@/main';
 import {
   disableArgTypes,
-  STORYBOOK_ONLY_CATEGORY,
   reactNodeArgType,
   stylingProps,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
-type CustomArgs = Partial<IressAlertProps> & {
-  messages: Record<Statuses | 'neutral', string>;
-};
-type Story = StoryObj<CustomArgs>;
+import { AlertStatus } from './mocks/AlertStatus';
+import AlertStatusSource from './mocks/AlertStatus.tsx?raw';
+import { AlertFooter } from './mocks/AlertFooter';
+import AlertFooterSource from './mocks/AlertFooter.tsx?raw';
+import { AlertMultiLine } from './mocks/AlertMultiLine';
+import AlertMultiLineSource from './mocks/AlertMultiLine.tsx?raw';
+import { AlertVariant } from './mocks/AlertVariant';
+import AlertVariantSource from './mocks/AlertVariant.tsx?raw';
+import { AlertDismissable } from './mocks/AlertDismissable';
+import AlertDismissableSource from './mocks/AlertDismissable.tsx?raw';
+
+type Story = StoryObj<IressAlertProps>;
 
 export default {
   title: 'Components/Alert',
@@ -52,39 +54,10 @@ export const Default: Story = {
 };
 
 export const Status: Story = {
-  args: {
-    ...Default.args,
-    messages: {
-      info: 'This is a simple info alert. It is used to provide context around a situation, such as rules around creating a compliant password, or a link to feature documentation or onboarding tips.',
-      danger:
-        'This is a simple danger alert. It is used for errors and malfunctions that must be resolved before moving forward, such as a summary of errors to correct in a Form.',
-      warning:
-        'This is a simple warning alert. It is used for a message requiring attention but not resolution in order to continue, such as noting data is not current or your password is about to expire.',
-      success:
-        'This is a simple success alert. It is used to communicate that an action has been successfully completed, such as saving changes in a Form.',
-      neutral:
-        'This is a simple neutral alert. It is normally used for general information that does not fit into the other categories, such as a note about requesting cookie consent, advertising a new feature or an upcoming change.',
-    },
+  render: (args) => <AlertStatus {...args} />,
+  parameters: {
+    ...withSource(AlertStatusSource, { stripImports: true, stripExportFunction: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['children', 'status']),
-    messages: {
-      control: 'object',
-      description: 'Messages for each status',
-      table: {
-        category: STORYBOOK_ONLY_CATEGORY,
-      },
-    },
-  },
-  render: ({ messages, ...args }) => (
-    <IressStack gap="md">
-      {[...STATUSES, 'neutral'].map((status) => (
-        <IressAlert {...args} status={status as never} key={status}>
-          {messages[status as never]}
-        </IressAlert>
-      ))}
-    </IressStack>
-  ),
 };
 
 export const Heading: Story = {
@@ -95,71 +68,17 @@ export const Heading: Story = {
 };
 
 export const Footer: Story = {
-  args: {
-    heading: 'Alert heading',
-    status: 'danger',
-    children: 'Are you sure you want to proceed with this action?',
-    onClose: () => console.log('Alert dismissed'),
-    actions: [
-      {
-        children: 'Action',
-        mode: 'tertiary',
-        onClick: () => 'Take me somewhere please',
-      },
-      {
-        children: 'Action',
-        mode: 'secondary',
-        onClick: () => 'Take me somewhere please',
-      },
-    ],
+  render: (args) => <AlertFooter {...args} />,
+  parameters: {
+    ...withSource(AlertFooterSource, { stripImports: true, stripExportFunction: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['status']),
-  },
-  render: (args) => (
-    <IressStack gap="md">
-      <IressAlert {...args} status="danger" />
-      <IressAlert {...args} status="info" />
-      <IressAlert {...args} status="success" />
-      <IressAlert {...args} status="warning" />
-      <IressAlert {...args} status="neutral" />
-    </IressStack>
-  ),
 };
 
 export const MultiLine: Story = {
-  args: {
-    heading: 'Alert heading',
-    status: 'danger',
-    children:
-      'Once you confirm, the system will begin re-indexing your entire library, which may temporarily limit access to certain collaborative features for approximately five to ten minutes depending on your connection speed. If you are currently working in a multi-user environment, other active contributors will be notified of these updates automatically. If you have any doubts regarding the integrity of the incoming data, we strongly recommend canceling this prompt and consulting your administrator.',
-    multiLine: true,
-    onClose: () => console.log('Alert dismissed'),
-    actions: [
-      {
-        children: 'Action',
-        mode: 'secondary',
-        onClick: () => 'Take me somewhere please',
-      },
-      {
-        children: 'Action',
-        mode: 'tertiary',
-        onClick: () => 'Take me somewhere please',
-      },
-    ],
+  render: (args) => <AlertMultiLine {...args} />,
+  parameters: {
+    ...withSource(AlertMultiLineSource, { stripImports: true, stripExportFunction: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['status']),
-  },
-  render: (args) => (
-    <IressStack gap="md">
-      <IressAlert {...args} status="danger" />
-      <IressAlert {...args} status="info" />
-      <IressAlert {...args} status="success" />
-      <IressAlert {...args} status="warning" />
-      <IressAlert {...args} status="neutral" />
-    </IressStack>
-  ),
 };
 
 export const Icon: Story = {
@@ -172,39 +91,21 @@ export const Icon: Story = {
 };
 
 export const Variant: Story = {
-  args: {
-    heading: 'Did you know?',
-    children: 'You can use the alert component in different ways.',
-    icon: false,
-    variant: 'sidebar',
+  render: (args) => <AlertVariant {...args} />,
+  parameters: {
+    ...withSource(AlertVariantSource, { stripImports: true, stripExportFunction: true }),
   },
-  render: (args) => (
-    <IressStack gap="md">
-      <IressAlert {...args} variant="sidebar" />
-      <IressAlert {...args} variant="full-width" />
-    </IressStack>
-  ),
 };
 
 export const Dismissable: Story = {
   args: {
     ...Default.args,
-    onClose: () => {
-      console.log(
-        'Some logic to dismiss the alert, probably saving its dismissed state in local storage or in a database',
-      );
-    },
   },
   argTypes: {
     ...disableArgTypes(['status']),
   },
-  render: (args) => (
-    <IressStack gap="md">
-      <IressAlert {...args} status="danger" />
-      <IressAlert {...args} status="info" />
-      <IressAlert {...args} status="success" />
-      <IressAlert {...args} status="warning" />
-      <IressAlert {...args} status="neutral" />
-    </IressStack>
-  ),
+  render: (args) => <AlertDismissable {...args} />,
+  parameters: {
+    ...withSource(AlertDismissableSource, { stripImports: true, stripExportFunction: true }),
+  },
 };
