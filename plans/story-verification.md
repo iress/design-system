@@ -130,12 +130,11 @@ For each story file, check:
 | # | File | Type | Key checks |
 |---|------|------|-----------|
 | 6 | Card/Card | P1/P3 | No external variable refs (supportedCardSlots removed?) |
-| 7 | Card/CardClickable | P1 | Verify pattern |
-| 8 | Card/CardSlots | P1/P2 | Inline JSX in args, no `supportedCardSlots` external ref |
-| 9 | Checkbox/Checkbox | P2 | Variants, ReadOnly, WithTable mocks |
-| 10 | CheckboxGroup/CheckboxGroup | P1+P2 | Playground has children, Layout mock, Table recipe |
-| 11 | Col/Col | P3 | ResponsiveSpan/Offset: withBreakpointLabel() |
-| 12 | Container/Container | P3 | withBreakpointLabel('container') |
+| 7 | Card/CardSlots | P1/P2 | Inline JSX in args, no `supportedCardSlots` external ref |
+| 8 | Checkbox/Checkbox | P2 | Variants, ReadOnly, WithTable mocks |
+| 9 | CheckboxGroup/CheckboxGroup | P1+P2 | Playground has children, Layout mock, Table recipe |
+| 10 | Col/Col | P3 | ResponsiveSpan/Offset: withBreakpointLabel() |
+| 11 | Container/Container | P3 | withBreakpointLabel('container') |
 
 ### Batch 3: Components D-H
 
@@ -271,10 +270,16 @@ Each component has exactly **one** `.stories.tsx` file. This keeps maintenance s
 - Recipes merge into the main file with `tags: ['recipe']`
 
 **Planned merges:**
-- [ ] `Card/CardSlots.stories.tsx` → merge into `Card/Card.stories.tsx` (use `tags: ['slots']` or similar)
-- [ ] `patterns/Form/FormRules.stories.tsx` → merge into `patterns/Form/Form.stories.tsx`
+- [x] `Card/CardSlots.stories.tsx` → merged into `Card/Card.stories.tsx` with `tags: ['slots']`
 - [ ] `patterns/Form/components/ShortForm.stories.tsx` + `LongForm.stories.tsx` → merge into `patterns/Form/Form.stories.tsx`
 - [ ] `patterns/Loading/components/*.stories.tsx` (6 files) → merge into `patterns/Loading/Loading.stories.tsx`
+
+**Stays as separate file (reference stories):**
+- `patterns/Form/FormRules.stories.tsx` — interactive validation playground, tag as `['reference']`
+
+**Planned moves:**
+- [x] `Menu/MenuText/MenuHeading.stories.tsx` → moved to `Menu/MenuHeading/MenuHeading.stories.tsx`
+- [ ] Extract `IressMenuHeading` component from `MenuText/MenuText.tsx` into `MenuHeading/MenuHeading.tsx` (depends on IressMenuText, needs careful refactor)
 
 ---
 

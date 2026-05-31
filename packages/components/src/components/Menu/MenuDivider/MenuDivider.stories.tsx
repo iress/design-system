@@ -5,7 +5,7 @@ import { stylingProps } from '@iress-oss/ids-storybook-config';
 type Story = StoryObj<typeof IressMenuDivider>;
 
 export default {
-  title: 'Components/Menu/MenuItem/Divider',
+  title: 'Components/Menu/MenuDivider',
   component: IressMenuDivider,
   argTypes: stylingProps,
 } as Meta<typeof IressMenuDivider>;

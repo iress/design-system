@@ -6,7 +6,7 @@ import { stylingProps } from '@iress-oss/ids-storybook-config';
 type Story = StoryObj<typeof IressMenuText>;
 
 export default {
-  title: 'Components/Menu/MenuItem/Text',
+  title: 'Components/Menu/MenuText',
   component: IressMenuText,
   argTypes: stylingProps,
 } as Meta<typeof IressMenuText>;

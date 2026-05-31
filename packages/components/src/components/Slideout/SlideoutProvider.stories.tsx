@@ -18,7 +18,7 @@ type CustomArgs = Partial<IressSlideoutProviderProps> & {
 type Story = StoryObj<CustomArgs>;
 
 export default {
-  title: 'Components/Slideout/Provider',
+  title: 'Components/Slideout/SlideoutProvider',
   component: IressSlideoutProvider,
   argTypes: {
     ...disableArgTypes(['children', 'container']),
@@ -48,6 +48,9 @@ export const Provider: Story = {
   render: (args) => <AppWithSlideoutProvider {...args.slideout} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(AppWithSlideoutProviderSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(AppWithSlideoutProviderSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };

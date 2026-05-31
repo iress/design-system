@@ -10,12 +10,21 @@ import {
 import { IressRow } from '../Row';
 import { IressCol } from '../Col';
 import { IressStack } from '../Stack';
+import { IressIcon } from '../Icon';
+import { IressInline } from '../Inline';
+import { IressTag } from '../Tag';
+import { IressPill } from '../Pill';
+import { IressPanel } from '../Panel';
+import { IressContextualMenu } from '@/main';
 import {
   reactNodeArgType,
   stylingProps,
   withJsxTransformer,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
+import { CardAllSlots } from './mocks/CardAllSlots';
+import CardAllSlotsSource from './mocks/CardAllSlots.tsx?raw';
 
 type Story = StoryObj<IressCardProps>;
 type ButtonStory = StoryObj<IressButtonCardProps>;
@@ -28,6 +37,12 @@ export default {
     docs: {
       description: {
         component: componentMeta.description,
+      },
+    },
+    idsConfig: {
+      tabDescriptions: {
+        slots:
+          'Cards have several slots for rendering different types of content. Use these slots to build more complex card layouts and designs.',
       },
     },
     actions: {
@@ -171,4 +186,76 @@ export const LinkCard: LinkStory = {
   render: ({ ...args }) => (
     <IressLinkCard {...args}>I am a card with an anchor element</IressLinkCard>
   ),
+};
+
+// Slot stories (merged from CardSlots.stories.tsx)
+
+export const Prepend: Story = {
+  tags: ['tab:slots'],
+  args: {
+    children: "I'm a card using the prepend render prop",
+    prepend: <IressIcon name="star" />,
+  },
+};
+
+export const TopRight: Story = {
+  tags: ['tab:slots'],
+  args: {
+    children: "I'm a card using the topRight render prop",
+    topRight: (
+      <IressContextualMenu>
+        <IressPanel>More actions in here</IressPanel>
+      </IressContextualMenu>
+    ),
+  },
+};
+
+export const Heading: Story = {
+  tags: ['tab:slots'],
+  args: {
+    children: "I'm a card using the heading render prop",
+    heading: <h2>Welcome to Iress!</h2>,
+  },
+};
+
+export const Media: Story = {
+  tags: ['tab:slots'],
+  args: {
+    children: "I'm a card using the media render prop",
+    media: (
+      <img
+        src="https://www.iress.com/media/images/media-contact.width-600.png"
+        width="250"
+        alt="A man in an Iress branded t-shirt smiles at the camera"
+      />
+    ),
+  },
+};
+
+export const Footer: Story = {
+  tags: ['tab:slots'],
+  args: {
+    children: "I'm a card using the footer render prop",
+    footer: (
+      <IressInline gap="sm" horizontalAlign="between" verticalAlign="middle">
+        <IressInline gap="sm">
+          <IressTag mode="30">#new-starter</IressTag>
+          <IressTag mode="60">#first-day</IressTag>
+        </IressInline>
+        <IressPill mode="70">NEW</IressPill>
+      </IressInline>
+    ),
+  },
+};
+
+export const AllSlots: Story = {
+  tags: ['tab:slots'],
+  render: (args) => <CardAllSlots {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(CardAllSlotsSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
+  },
 };

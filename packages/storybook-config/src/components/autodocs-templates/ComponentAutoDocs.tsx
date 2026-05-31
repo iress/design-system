@@ -170,6 +170,22 @@ export const ComponentAutoDocs = () => {
             <Controls />
           </IressTab>
         )}
+        {Array.from(customTabs.entries()).map(([tabName, tabStories]) => {
+          const tabDescription = config?.tabDescriptions?.[tabName] ?? '';
+          return (
+            <IressTab
+              key={tabName}
+              label={tabName.charAt(0).toUpperCase() + tabName.slice(1)}
+              value={tabName}
+            >
+              <StoriesTabContent
+                stories={tabStories}
+                type={tabName}
+                description={tabDescription}
+              />
+            </IressTab>
+          );
+        })}
         {hasExamples && (
           <IressTab label="Examples" value="examples">
             <StoriesTabContent
@@ -179,19 +195,6 @@ export const ComponentAutoDocs = () => {
             />
           </IressTab>
         )}
-        {Array.from(customTabs.entries()).map(([tabName, tabStories]) => (
-          <IressTab
-            key={tabName}
-            label={tabName.charAt(0).toUpperCase() + tabName.slice(1)}
-            value={tabName}
-          >
-            <StoriesTabContent
-              stories={tabStories}
-              type={tabName}
-              description=""
-            />
-          </IressTab>
-        ))}
         {hasRecipes && (
           <IressTab label="Recipes" value="recipes">
             <StoriesTabContent

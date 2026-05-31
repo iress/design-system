@@ -6,7 +6,7 @@ import { IressText } from '../Text';
 type Story = StoryObj<typeof IressExpanderChevron>;
 
 export default {
-  title: 'Components/ExpanderChevron',
+  title: 'Components/Expander/ExpanderChevron',
   component: IressExpanderChevron,
   tags: ['updated'],
   parameters: {

@@ -17,7 +17,7 @@ type CustomArgs = Partial<IressModalProviderProps> & {
 type Story = StoryObj<CustomArgs>;
 
 export default {
-  title: 'Components/Modal/Provider',
+  title: 'Components/Modal/ModalProvider',
   component: IressModalProvider,
   argTypes: {
     ...disableArgTypes(['children', 'container']),

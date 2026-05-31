@@ -32,6 +32,12 @@ export interface ParametersConfig {
      * Optional metadata for component testing, used to generate test information in the documentation.
      */
     testMeta?: TestComponentMeta[];
+
+    /**
+     * Descriptions for custom tabs created via `tab:<name>` story tags.
+     * Key is the tab name (e.g. 'configuration'), value is the description shown at the top.
+     */
+    tabDescriptions?: Record<string, string>;
   };
 }
 

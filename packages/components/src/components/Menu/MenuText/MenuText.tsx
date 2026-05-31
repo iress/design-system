@@ -109,32 +109,3 @@ export const IressMenuText = <E extends TextElements = 'div'>({
 };
 
 IressMenuText.displayName = 'IressMenuText';
-
-/**
- * A heading element within a menu, used to label groups of menu items.
- *
- * @example
- * ```tsx
- * import { IressMenu, IressMenuHeading, IressMenuItem } from '@iress-oss/ids-components';
- *
- * <IressMenu>
- *   <IressMenuHeading>Actions</IressMenuHeading>
- *   <IressMenuItem>Edit</IressMenuItem>
- * </IressMenu>
- * ```
- */
-export const IressMenuHeading = <E extends TextElements = 'h2'>({
-  className,
-  element = 'h2' as E,
-  textStyle = 'typography.body.md.medium',
-  ...restProps
-}: IressMenuTextProps<E>) => (
-  <IressMenuText
-    element={element}
-    textStyle={textStyle}
-    {...(restProps as IressMenuTextProps<E>)}
-    className={cx(className, GlobalCSSClass.MenuHeading)}
-  />
-);
-
-IressMenuHeading.displayName = 'IressMenuHeading';

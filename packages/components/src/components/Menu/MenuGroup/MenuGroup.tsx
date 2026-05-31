@@ -1,10 +1,7 @@
 import { useContext, type ReactNode } from 'react';
 import type { TextElements } from '@/components/Text';
 import { IressMenuDivider } from '../MenuDivider/MenuDivider';
-import {
-  IressMenuHeading,
-  type IressMenuTextProps,
-} from '../MenuText/MenuText';
+import { type IressMenuTextProps } from '../MenuText/MenuText';
 import {
   IressPopover,
   type IressPopoverProps,
@@ -18,6 +15,7 @@ import { menuGroup } from './MenuGroup.styles';
 import { useControlledState, useIdIfNeeded } from '@/hooks';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
+import { IressMenuHeading } from '../MenuHeading/MenuHeading';
 
 type MenuGroupRestProps<
   TLabel extends TextElements = 'h2',

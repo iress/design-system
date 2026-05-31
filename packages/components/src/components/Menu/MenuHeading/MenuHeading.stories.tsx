@@ -1,11 +1,11 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressMenuHeading } from './MenuText';
+import { IressMenuHeading } from './MenuHeading';
 import { IressMenu } from '../Menu';
 
 type Story = StoryObj<typeof IressMenuHeading>;
 
 export default {
-  title: 'Components/Menu/MenuItem/Heading',
+  title: 'Components/Menu/MenuHeading',
   component: IressMenuHeading,
 } as Meta<typeof IressMenuHeading>;
 
