@@ -59,7 +59,7 @@ const StoriesTabContent = ({
               <Description of={story.moduleExport as never} />
 
               {type !== 'references' && (
-                <ComponentCanvas of={story.moduleExport as never} />
+                <ComponentCanvas of={story.moduleExport as never} refresh />
               )}
 
               {type === 'references' && (
@@ -166,6 +166,7 @@ export const ComponentAutoDocs = () => {
             <ComponentCanvas
               of={primaryStory.moduleExport as never}
               withToolbar
+              refresh
             />
             <Controls />
           </IressTab>

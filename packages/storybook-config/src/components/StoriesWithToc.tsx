@@ -106,7 +106,7 @@ export const StoriesWithToc = ({
         <div key={story.id}>
           <h3 id={story.id}>{story.name}</h3>
           <Description of={story.moduleExport as never} />
-          <ComponentCanvas of={story.moduleExport as never} />
+          <ComponentCanvas of={story.moduleExport as never} refresh />
         </div>
       ))}
     </IressCol>

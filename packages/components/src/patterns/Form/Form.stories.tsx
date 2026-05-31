@@ -70,6 +70,11 @@ import FormRuleEmailSource from './mocks/FormRuleEmail.tsx?raw';
 import { FormRuleValidate } from './mocks/FormRuleValidate';
 import FormRuleValidateSource from './mocks/FormRuleValidate.tsx?raw';
 
+import { FormPatternShort } from './mocks/FormPatternShort';
+import FormPatternShortSource from './mocks/FormPatternShort.tsx?raw';
+import { FormPatternLong } from './mocks/FormPatternLong';
+import FormPatternLongSource from './mocks/FormPatternLong.tsx?raw';
+
 const SanitisedInputForm = lazy(() =>
   import('./mocks/SanitisedInputForm').then((m) => ({
     default: m.SanitisedInputForm,
@@ -97,6 +102,8 @@ export default {
       tabDescriptions: {
         rules:
           'Form validation rules are determined from React Hook Form. Here you can see how to use the built-in validation rules, how to add custom validation messages and how to use the `validate` option to create your own rules.',
+        patterns:
+          'Form patterns are pre-defined layouts and configurations of the form to suit common use cases. They are designed to help you get started quickly with building forms that follow best practices for UX and accessibility.',
       },
     },
     ...formParameters,
@@ -655,6 +662,32 @@ export const Validate: Story = {
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleValidateSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
+  },
+};
+
+// Form Patterns (merged from ShortForm/LongForm stories)
+
+export const Short: Story = {
+  tags: ['tab:patterns'],
+  render: (args) => <FormPatternShort {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(FormPatternShortSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
+  },
+};
+
+export const Long: Story = {
+  tags: ['tab:patterns'],
+  render: (args) => <FormPatternLong {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(FormPatternLongSource, {
       stripImports: true,
       stripExportFunction: true,
     }),

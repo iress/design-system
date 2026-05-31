@@ -4,13 +4,27 @@ import { LoadingWizard } from './mocks/LoadingWizard';
 import LoadingWizardSource from './mocks/LoadingWizard.tsx?raw';
 import { LoadingWizardFast } from './mocks/LoadingWizardFast';
 import LoadingWizardFastSource from './mocks/LoadingWizardFast.tsx?raw';
-import {
-  withSource,
-  stylingProps,
-} from '@iress-oss/ids-storybook-config';
+import { withSource, stylingProps } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
+import { LoadingGraph } from './mocks/LoadingGraph';
+import LoadingGraphSource from './mocks/LoadingGraph.tsx?raw';
+import { LoadingLongWithError } from './mocks/LoadingLongWithError';
+import LoadingLongWithErrorSource from './mocks/LoadingLongWithError.tsx?raw';
+import { LoadingDashboard } from './mocks/LoadingDashboard';
+import LoadingDashboardSource from './mocks/LoadingDashboard.tsx?raw';
+import { LoadingDashboardError } from './mocks/LoadingDashboardError';
+import LoadingDashboardErrorSource from './mocks/LoadingDashboardError.tsx?raw';
+import { IressButton, IressInline, IressText } from '@/main';
+import type { LongLoading } from './components/LongLoading';
+import type { StartUpLoading } from './components/StartUpLoading';
+import type { DefaultLoading } from './components/DefaultLoading';
+import type { ValidateLoading } from './components/ValidateLoading';
 
 type Story = StoryObj<typeof IressLoading>;
+type LongLoadingStory = StoryObj<typeof LongLoading>;
+type StartUpLoadingStory = StoryObj<typeof StartUpLoading>;
+type DefaultLoadingStory = StoryObj<typeof DefaultLoading>;
+type ValidateLoadingStory = StoryObj<typeof ValidateLoading>;
 
 export default {
   title: 'Patterns/Loading',
@@ -24,10 +38,16 @@ export default {
         component: componentMeta.description,
       },
     },
+    idsConfig: {
+      tabDescriptions: {
+        patterns:
+          'Loading patterns are pre-built configurations of the `IressLoading` component that are designed to cover common loading scenarios. They provide a consistent user experience while saving development time. Each pattern is built with accessibility in mind and can be easily customized to fit your specific use case.',
+      },
+    },
   },
 } as Meta<typeof IressLoading>;
 
-export const Default: Story = {
+export const Playground: Story = {
   args: {
     screenReaderText: 'Loading...',
   },
@@ -36,7 +56,10 @@ export const Default: Story = {
 export const Wizard: Story = {
   parameters: {
     controls: { disable: true },
-    ...withSource(LoadingWizardSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(LoadingWizardSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
     layout: 'fullscreen',
   },
   render: (args) => <LoadingWizard {...args} />,
@@ -45,8 +68,121 @@ export const Wizard: Story = {
 export const FastWizard: Story = {
   parameters: {
     controls: { disable: true },
-    ...withSource(LoadingWizardFastSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(LoadingWizardFastSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
     layout: 'fullscreen',
   },
   render: (args) => <LoadingWizardFast {...args} />,
+};
+
+// Loading Patterns (merged from components/*.stories.tsx)
+
+export const Default: DefaultLoadingStory = {
+  tags: ['tab:patterns'],
+  render: (args) => <IressLoading {...args} pattern="default" />,
+};
+
+export const Component: Story = {
+  tags: ['tab:patterns'],
+  render: (args) => <LoadingGraph {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(LoadingGraphSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
+  },
+};
+
+export const Page: Story = {
+  tags: ['tab:patterns'],
+  render: (args) => <LoadingDashboard {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(LoadingDashboardSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
+  },
+};
+
+export const PageError: Story = {
+  tags: ['tab:patterns'],
+  render: (args) => <LoadingDashboardError {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(LoadingDashboardErrorSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
+  },
+};
+
+export const Long: LongLoadingStory = {
+  tags: ['tab:patterns'],
+  render: (args) => (
+    <IressLoading
+      {...args}
+      pattern="long"
+      messageList={{
+        3000: 'Processing transcript',
+        5000: 'Noting key information',
+        7000: 'Generating summary',
+      }}
+    />
+  ),
+};
+
+export const LongError: Story = {
+  tags: ['tab:patterns'],
+  render: (args) => <LoadingLongWithError {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(LoadingLongWithErrorSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
+  },
+};
+
+export const StartUp: StartUpLoadingStory = {
+  tags: ['tab:patterns'],
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      story: {
+        height: '600px',
+      },
+    },
+  },
+  render: (args) => (
+    <IressLoading
+      {...args}
+      pattern="start-up"
+      messageList={{
+        0: (
+          <IressText color="colour.neutral.70">
+            Switching applications...
+          </IressText>
+        ),
+        4500: (
+          <IressText color="colour.neutral.70">
+            This is taking longer than expected...
+          </IressText>
+        ),
+      }}
+    />
+  ),
+};
+
+export const Validate: ValidateLoadingStory = {
+  tags: ['tab:patterns'],
+  render: (args) => (
+    <IressInline gap="sm">
+      <IressLoading {...args} pattern="validate" loading />
+      <IressButton mode="tertiary">Cancel</IressButton>
+    </IressInline>
+  ),
 };
