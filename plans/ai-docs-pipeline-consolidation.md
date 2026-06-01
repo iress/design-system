@@ -276,18 +276,19 @@ dev-watcher.ts detects change
 
 1. **Resolve source-of-truth:** Confirm guidelines content is canonical. Run `translate-components.ts --target=guidelines` one final time to ensure guidelines are up to date, then freeze.
 2. **Extract `derive-ai-docs.ts` logic** as the new `--components` path in `translate.ts` (reads from `apps/guidelines/content/`, writes to `packages/components/.ai/`).
-3. **Move token-reference, skills, llms-txt** into `translate.ts` as subcommands (or keep as imported modules called sequentially).
-4. **Remove `translate-components.ts`** — its `--target=ai` logic is replaced by the new derive path; its `--target=guidelines` is no longer needed.
-5. **Remove `derive-ai-docs.ts`** — absorbed into `translate.ts`.
-6. **Update `package.json`** scripts:
+3. **Add `testMeta` → guidelines sync** to `translate.ts --components`: import `testMeta` from each component's `meta/index.tsx`, generate/update the `## Testing` section's test ID table in guidelines MDX (see `plans/testing-documentation.md` Phase 4).
+4. **Move token-reference, skills, llms-txt** into `translate.ts` as subcommands (or keep as imported modules called sequentially).
+5. **Remove `translate-components.ts`** — its `--target=ai` logic is replaced by the new derive path; its `--target=guidelines` is no longer needed.
+6. **Remove `derive-ai-docs.ts`** — absorbed into `translate.ts`.
+7. **Update `package.json`** scripts:
    ```json
    "translate": "tsx ./scripts/translate.ts",
    "translate:components": "tsx ./scripts/translate.ts --components",
    "ai-improve": "tsx ./scripts/ai-improve.ts",
    "dev:improve": "tsx ./scripts/dev-watcher.ts"
    ```
-7. **Update `dev-watcher.ts`** to call `translate.ts --components --files <changed>` instead of `derive-ai-docs.ts`.
-8. **Verify CI** — `yarn build` still calls `yarn translate` which now runs the unified script.
+8. **Update `dev-watcher.ts`** to call `translate.ts --components --files <changed>` instead of `derive-ai-docs.ts`.
+9. **Verify CI** — `yarn build` still calls `yarn translate` which now runs the unified script.
 
 ### Risk Assessment
 
