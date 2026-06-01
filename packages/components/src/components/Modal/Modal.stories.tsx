@@ -1,15 +1,5 @@
-import {
-  type Meta,
-  type ReactRenderer,
-  type StoryObj,
-} from '@storybook/react-vite';
-import { type ArgsStoryFn } from 'storybook/internal/types';
-import {
-  IressModal,
-  type IressModalProps,
-  IressModalProvider,
-  type ModalStatus,
-} from '.';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressModal, type IressModalProps, IressModalProvider } from '.';
 import { IressButton } from '../Button';
 import { useModal } from './hooks/useModal';
 import { ModalUsingState } from './mocks/ModalUsingState';
@@ -28,8 +18,9 @@ import { ModalSizes } from './mocks/ModalSizes';
 import ModalSizesSource from './mocks/ModalSizes.tsx?raw';
 import { ModalStatuses } from './mocks/ModalStatuses';
 import ModalStatusesSource from './mocks/ModalStatuses.tsx?raw';
+import { ModalWithButton } from './mocks/ModalWithButton';
+import ModalWithButtonSource from './mocks/ModalWithButton.tsx?raw';
 import {
-  DiffViewer,
   disableArgTypes,
   withSource,
   withJsxTransformer,
@@ -40,23 +31,6 @@ import {
 import componentMeta from './meta';
 
 const MODAL_ID = 'storybook-modal';
-
-const renderWithButtonFn = <TStatus extends ModalStatus>(
-  buttonTitle = 'Show modal',
-): ArgsStoryFn<ReactRenderer, IressModalProps<TStatus>> => {
-  return (args) => {
-    const { showModal } = useModal();
-
-    return (
-      <>
-        <IressButton onClick={() => showModal(MODAL_ID)}>
-          {buttonTitle}
-        </IressButton>
-        <IressModal {...args} show={false} />
-      </>
-    );
-  };
-};
 
 type Story = StoryObj<IressModalProps>;
 type StatusStory = StoryObj<IressModalProps<'danger' | 'success' | 'warning'>>;
@@ -146,23 +120,12 @@ export const Default: Story = {
       </IressModalProvider>
     ),
   ],
-  render: renderWithButtonFn(),
+  render: (args) => <ModalWithButton {...args} />,
   parameters: {
-    ...withTransformedProviderSource(
-      `<IressModalProvider>
-        <Story />
-      </IressModalProvider>`,
-      `const { showModal } = useModal();
-
-const MODAL_ID = '${MODAL_ID}';
-
-return (
-  <Story />
-);`,
-    ),
-    ...withJsxTransformer({
-      showFunctions: true,
-      useFragmentShortSyntax: true,
+    controls: { disable: true },
+    ...withSource(ModalWithButtonSource, {
+      stripImports: true,
+      stripExportFunction: true,
     }),
   },
 };
@@ -215,7 +178,7 @@ export const FooterSlot: Story = {
   argTypes: {
     ...disableArgTypes(['show', 'footer']),
   },
-  render: renderWithButtonFn('Footer slot modal'),
+  render: (args) => <ModalWithButton {...args} />,
 };
 
 export const FixedFooter: Story = {
@@ -246,7 +209,7 @@ export const FixedFooter: Story = {
   argTypes: {
     ...disableArgTypes(['show', 'footer', 'children']),
   },
-  render: renderWithButtonFn('Fixed footer modal'),
+  render: (args) => <ModalWithButton {...args} />,
 };
 
 export const Size: Story = {
@@ -282,7 +245,7 @@ export const ResponsiveSize: Story = {
   argTypes: {
     ...disableArgTypes(['show', 'children']),
   },
-  render: renderWithButtonFn('Responsive modal'),
+  render: (args) => <ModalWithButton {...args} />,
   decorators: [withBreakpointLabel()],
 };
 
@@ -378,36 +341,4 @@ export const Static: Story = {
     show: true,
     static: true,
   },
-};
-
-export const V5ModalDiff: Story = {
-  render: () => (
-    <DiffViewer
-      allowModeChange
-      oldValue={`import { render, waitFor, screen } from '@testing-library/react';
-import { idsFireEvent, componentLoad } from '@iress/ids-react-test-utils';
-  
-test('opening and closing a modal', async () => {
-  await componentLoad(['modal-trigger', 'modal']);
-  const trigger = screen.getByTestId('modal-trigger');
-  const modal = screen.getByTestId('modal');
-  idsFireEvent.click(trigger);
-  await waitFor(() => expect(modal).toBeVisible());
-  const closeButton = screen.getByTestId('modal__close-button');
-  idsFireEvent.click(closeButton);
-  await waitFor(() => expect(modal).not.toBeVisible());
-});`}
-      newValue={`import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
-
-test('opening and closing a modal', async () => {
-  const trigger = screen.getByRole('button', { name: /open modal/i });
-  await userEvent.click(trigger);
-  const modal = await screen.findByRole('dialog');
-  const closeButton = screen.getByRole('button', { name: /close/i });
-  await userEvent.click(closeButton);
-  await waitForElementToBeRemoved(modal);
-});`}
-    />
-  ),
 };

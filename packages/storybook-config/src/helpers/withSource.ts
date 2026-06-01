@@ -62,9 +62,22 @@ function transformSource(source: string, options?: WithSourceOptions): string {
 
   // Extract just the return JSX from export function
   if (options?.stripExportFunction) {
-    const match = code.match(/export function \w+\([^)]*\)\s*\{[\s\S]*?return\s*\(\s*([\s\S]*)\s*\);\s*\}/);
-    if (match) {
-      code = match[1];
+    // Match: export function X(...) { ... return (...) }
+    const fnMatch = code.match(/export function \w+\([^)]*\)\s*\{[\s\S]*?return\s*\(\s*([\s\S]*)\s*\);\s*\}/);
+    if (fnMatch) {
+      code = fnMatch[1];
+    } else {
+      // Match: export const X = (...) => { ... return (...) }
+      const arrowReturnMatch = code.match(/export const \w+\s*=\s*(?:\([^)]*\)|[^=]*)\s*=>\s*\{[\s\S]*?return\s*\(\s*([\s\S]*)\s*\);\s*\}/);
+      if (arrowReturnMatch) {
+        code = arrowReturnMatch[1];
+      } else {
+        // Match: export const X = (...) => (...)
+        const arrowExprMatch = code.match(/export const \w+\s*=\s*(?:\([^)]*\)|[^=]*)\s*=>\s*\(\s*([\s\S]*)\s*\);?\s*$/);
+        if (arrowExprMatch) {
+          code = arrowExprMatch[1];
+        }
+      }
     }
   }
 

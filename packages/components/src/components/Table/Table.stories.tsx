@@ -418,7 +418,7 @@ export const Virtualised: Story = {
   argTypes: {
     ...disableArgTypes(['caption', 'rows', 'columns']),
   },
-  render: () => <TableVirtualised />,
+  render: (args) => <TableVirtualised {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(TableVirtualisedSource, { stripImports: true, stripExportFunction: true }),

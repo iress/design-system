@@ -127,6 +127,48 @@ export function AlertStatus() {
       expect(result).toContain('<IressStack gap="md">');
       expect(result).toContain('<IressAlert status="danger">');
     });
+
+    it('extracts JSX from arrow function with return statement', () => {
+      const source = `import { IressAutocomplete } from '@/main';
+
+export const AutocompleteUsingState = (args: IressAutocompleteProps) => {
+  const [value, setValue] = useState('Option 1');
+
+  return (
+    <IressAutocomplete
+      value={value}
+      onChange={(_e, newValue) => setValue(newValue ?? '')}
+    />
+  );
+};`;
+
+      const result = transformSource(source, {
+        stripImports: true,
+        stripExportFunction: true,
+      });
+
+      expect(result).not.toContain('export const');
+      expect(result).not.toContain('return');
+      expect(result).toContain('<IressAutocomplete');
+    });
+
+    it('extracts JSX from arrow function with expression body', () => {
+      const source = `import { IressStack } from '@/main';
+
+export const MultipleExpander = () => (
+  <IressStack gap="md">
+    <p>Content</p>
+  </IressStack>
+);`;
+
+      const result = transformSource(source, {
+        stripImports: true,
+        stripExportFunction: true,
+      });
+
+      expect(result).not.toContain('export const');
+      expect(result).toContain('<IressStack gap="md">');
+    });
   });
 
   describe('stripImports option', () => {

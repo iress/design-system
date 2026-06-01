@@ -59,7 +59,7 @@ export const Multiple: StoryObj<typeof IressExpander> = {
     'onChange',
     'children',
   ]),
-  render: () => <MultipleExpander />,
+  render: (args) => <MultipleExpander {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(MultipleExpanderSource, { stripImports: true, stripExportFunction: true }),

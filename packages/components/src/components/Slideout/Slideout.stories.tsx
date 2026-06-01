@@ -1,9 +1,4 @@
-import {
-  type Meta,
-  type ReactRenderer,
-  type StoryObj,
-} from '@storybook/react-vite';
-import { type ArgsStoryFn } from 'storybook/internal/types';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSlideout, type IressSlideoutProps } from '.';
 import { IressButton } from '../Button';
 import { useSlideout } from './hooks/useSlideout';
@@ -21,8 +16,9 @@ import { AbsolutePositionSlideout } from './mocks/AbsolutePositionSlideout';
 import AbsolutePositionSlideoutSource from './mocks/AbsolutePositionSlideout.tsx?raw';
 import { SlideoutMicrofrontend } from './mocks/SlideoutMicrofrontend';
 import SlideoutMicrofrontendSource from './mocks/SlideoutMicrofrontend.tsx?raw';
+import { SlideoutWithButton } from './mocks/SlideoutWithButton';
+import SlideoutWithButtonSource from './mocks/SlideoutWithButton.tsx?raw';
 import {
-  DiffViewer,
   disableArgTypes,
   withSource,
   reactNodeArgType,
@@ -31,23 +27,6 @@ import {
 import componentMeta from './meta';
 
 const SLIDEOUT_ID = 'storybook-slideout';
-
-const renderWithButtonFn = (
-  buttonTitle = 'Toggle slideout',
-): ArgsStoryFn<ReactRenderer, IressSlideoutProps> => {
-  return (args) => {
-    const { showSlideout } = useSlideout();
-
-    return (
-      <>
-        <IressButton onClick={() => showSlideout(SLIDEOUT_ID)}>
-          {buttonTitle}
-        </IressButton>
-        <IressSlideout {...args} />
-      </>
-    );
-  };
-};
 
 type Story = StoryObj<typeof IressSlideout>;
 
@@ -86,18 +65,13 @@ export const Default: Story = {
       </IressSlideoutProvider>
     ),
   ],
-  render: renderWithButtonFn(),
+  render: (args) => <SlideoutWithButton {...args} />,
   parameters: {
-    ...withTransformedProviderSource(
-      `<IressSlideoutProvider>
-        <Story />
-      </IressSlideoutProvider>`,
-      `const { showSlideout } = useSlideout();
-      const SLIDEOUT_ID = '${SLIDEOUT_ID}';
-      return (
-        <Story />
-      );`,
-    ),
+    controls: { disable: true },
+    ...withSource(SlideoutWithButtonSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -236,7 +210,7 @@ export const Footer: Story = {
   argTypes: {
     ...disableArgTypes(['footer', 'show']),
   },
-  render: renderWithButtonFn('Show slideout with footer'),
+  render: (args) => <SlideoutWithButton {...args} />,
 };
 
 export const AbsolutePosition: Story = {
@@ -271,53 +245,4 @@ export const Microfrontend: Story = {
     }),
     layout: 'fullscreen',
   },
-};
-
-export const V5TestDiff: Story = {
-  render: () => (
-    <DiffViewer
-      allowModeChange
-      oldValue={`import { render, waitFor, screen } from '@testing-library/react';
-import { idsFireEvent, componentLoad } from '@iress/ids-react-test-utils';
-  
-test('opening and closing a slideout', async () => {
-  await componentLoad([
-    'slideout-trigger',
-    'slideout',
-  ]);
-
-  const trigger = screen.getByTestId('slideout-trigger');
-  const slideout = screen.getByTestId('slideout');
-
-  // In version 4, you can already interact with the slideout here as its in the DOM at this stage.
-
-  // activate slideout
-  idsFireEvent.click(trigger);
-  await waitFor(() => expect(slideout).toBeVisible());
-
-  // close slideout
-  const closeButton = screen.getByTestId('slideout__close-button');
-  idsFireEvent.click(closeButton);
-  await waitFor(() => expect(slideout).not.toBeVisible());
-});`}
-      newValue={`import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
-import componentMeta from './meta';
-
-test('opening and closing a slideout', async () => {
-  const trigger = screen.getByRole('button', { name: /open slideout/i });
-
-  // activate slideout
-  await userEvent.click(trigger);
-  const slideout = await screen.findByRole('complementary'); // this assumes the slideout has the role="complementary"
-
-  // In version 5, you can only interact with the slideout once it has been loaded here.
-
-  // close slideout
-  const closeButton = screen.getByRole('button', { name: /close/i });
-  await userEvent.click(closeButton);
-  await waitForElementToBeRemoved(slideout);
-});`}
-    />
-  ),
 };
