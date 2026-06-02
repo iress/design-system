@@ -81,16 +81,10 @@ export const DefaultChecked: Story = {
 };
 
 export const Controlled: Story = {
-  args: {
-    ...CheckboxChildren.args,
-  },
-  argTypes: {
-    ...disableArgTypes(['children', 'value']),
-  },
   render: (args) => <CheckboxGroupUsingState {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(CheckboxGroupUsingStateSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(CheckboxGroupUsingStateSource, { stripImports: true }),
   },
 };
 
@@ -98,7 +92,10 @@ export const Layout: Story = {
   render: (args) => <CheckboxGroupLayout {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(CheckboxGroupLayoutSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(CheckboxGroupLayoutSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -178,6 +175,9 @@ export const Table: Story = {
   render: (args) => <CheckboxGroupTable {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(CheckboxGroupTableSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(CheckboxGroupTableSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };

@@ -45,7 +45,7 @@ const columns: TableColumn<Row, string>[] = [
   },
 ];
 
-export const TableVirtualised = () => {
+export function TableVirtualised() {
   const [rows, setRows] = useState(() => generateRows(ROW_COUNT));
   const [virtualised, setVirtualised] = useState(true);
   const [lastDuration, setLastDuration] = useState<number | null>(null);
@@ -92,4 +92,4 @@ export const TableVirtualised = () => {
       />
     </IressStack>
   );
-};
+}

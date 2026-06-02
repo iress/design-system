@@ -27,6 +27,6 @@ export const Provider: Story = {
   render: () => <AppWithPopoverProvider />,
   parameters: {
     controls: { disable: true },
-    ...withSource(AppWithPopoverProviderSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(AppWithPopoverProviderSource, { stripImports: true }),
   },
 };

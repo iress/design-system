@@ -17,7 +17,7 @@ export default {
 export const Suspense: Story = {
   parameters: {
     controls: { disable: true },
-    ...withSource(LoadingSuspenseWizardSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(LoadingSuspenseWizardSource, { stripImports: true }),
     layout: 'fullscreen',
   },
   render: (args) => <LoadingSuspenseWizard {...args} />,
@@ -26,7 +26,7 @@ export const Suspense: Story = {
 export const FastSuspense: Story = {
   parameters: {
     controls: { disable: true },
-    ...withSource(LoadingSuspenseWizardFastSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(LoadingSuspenseWizardFastSource, { stripImports: true }),
     layout: 'fullscreen',
   },
   render: (args) => <LoadingSuspenseWizardFast {...args} />,

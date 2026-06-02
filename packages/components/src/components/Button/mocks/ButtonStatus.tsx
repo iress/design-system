@@ -13,6 +13,9 @@ export function ButtonStatus() {
         <IressButton mode="tertiary" status="success">
           Tertiary
         </IressButton>
+        <IressButton mode="quaternary" status="success">
+          Quaternary
+        </IressButton>
         <IressButton mode="muted" status="success" icon="shopping_cart">
           Add to cart
         </IressButton>
@@ -26,6 +29,9 @@ export function ButtonStatus() {
         </IressButton>
         <IressButton mode="tertiary" status="danger">
           Tertiary
+        </IressButton>
+        <IressButton mode="quaternary" status="danger">
+          Quaternary
         </IressButton>
         <IressButton mode="muted" status="danger" icon="delete">
           Delete

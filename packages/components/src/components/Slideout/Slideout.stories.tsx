@@ -50,14 +50,6 @@ export default {
 } as Meta<typeof IressSlideout>;
 
 export const Default: Story = {
-  args: {
-    children: 'Slideout content',
-    footer: 'Footer slot',
-    id: SLIDEOUT_ID,
-  },
-  argTypes: {
-    ...disableArgTypes(['show']),
-  },
   decorators: [
     (Story) => (
       <IressSlideoutProvider>
@@ -65,23 +57,21 @@ export const Default: Story = {
       </IressSlideoutProvider>
     ),
   ],
-  render: (args) => <SlideoutWithButton {...args} />,
+  render: () => <SlideoutWithButton />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SlideoutWithButtonSource, {
-      stripImports: true,
-      stripExportFunction: true,
-    }),
+    ...withSource(SlideoutWithButtonSource, { stripImports: true }),
   },
 };
 
 export const DefaultShow: Story = {
   ...Default,
   args: {
-    ...Default.args,
+    children: 'Slideout content',
     defaultShow: true,
     mode: 'push',
     eleToPush: '#default-show-page',
+    id: SLIDEOUT_ID,
   },
   render: (args) => (
     <IressPanel bg="alt" id="default-show-page">
@@ -94,19 +84,10 @@ export const DefaultShow: Story = {
 };
 
 export const ShowWithState: Story = {
-  args: {
-    children: 'This slideout was opened via state',
-  },
-  argTypes: {
-    ...disableArgTypes(['footer', 'show']),
-  },
-  render: (args) => <SlideoutUsingState {...args} />,
+  render: () => <SlideoutUsingState />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SlideoutUsingStateSource, {
-      stripImports: true,
-      stripExportFunction: true,
-    }),
+    ...withSource(SlideoutUsingStateSource, { stripImports: true }),
   },
 };
 
@@ -170,34 +151,19 @@ export const Modes: Story = {
 
 export const Position: Story = {
   ...Default,
-  argTypes: {
-    ...disableArgTypes(['children', 'show']),
-  },
-  render: (args) => <SlideoutPositions {...args} />,
+  render: () => <SlideoutPositions />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SlideoutPositionsSource, {
-      stripImports: true,
-      stripExportFunction: true,
-    }),
+    ...withSource(SlideoutPositionsSource, { stripImports: true }),
   },
 };
 
 export const Size: Story = {
   ...Default,
-  args: {
-    footer: 'Size slideout footer',
-  },
-  argTypes: {
-    ...disableArgTypes(['children', 'show', 'size', 'id']),
-  },
-  render: (args) => <SlideoutSizes {...args} />,
+  render: () => <SlideoutSizes />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SlideoutSizesSource, {
-      stripImports: true,
-      stripExportFunction: true,
-    }),
+    ...withSource(SlideoutSizesSource, { stripImports: true }),
   },
 };
 
@@ -210,39 +176,24 @@ export const Footer: Story = {
   argTypes: {
     ...disableArgTypes(['footer', 'show']),
   },
-  render: (args) => <SlideoutWithButton {...args} />,
+  render: () => <SlideoutWithButton />,
 };
 
 export const AbsolutePosition: Story = {
   ...Default,
-  args: {
-    ...Default.args,
-    eleToPush: '#contents',
-    position: 'left',
-    mode: 'push',
-  },
-  render: (args) => <AbsolutePositionSlideout {...args} />,
+  render: () => <AbsolutePositionSlideout />,
   parameters: {
     controls: { disable: true },
-    ...withSource(AbsolutePositionSlideoutSource, {
-      stripImports: true,
-      stripExportFunction: true,
-    }),
+    ...withSource(AbsolutePositionSlideoutSource, { stripImports: true }),
   },
 };
 
 export const Microfrontend: Story = {
   ...Default,
-  argTypes: {
-    ...disableArgTypes(['children', 'show']),
-  },
-  render: (args) => <SlideoutMicrofrontend {...args} />,
+  render: () => <SlideoutMicrofrontend />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SlideoutMicrofrontendSource, {
-      stripImports: true,
-      stripExportFunction: true,
-    }),
+    ...withSource(SlideoutMicrofrontendSource, { stripImports: true }),
     layout: 'fullscreen',
   },
 };

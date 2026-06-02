@@ -125,7 +125,6 @@ export const Default: Story = {
     controls: { disable: true },
     ...withSource(ModalWithButtonSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
@@ -140,18 +139,11 @@ export const DefaultShow: Story = {
 };
 
 export const ShowWithState: Story = {
-  args: {
-    children: 'This modal was opened via state',
-  },
-  argTypes: {
-    ...disableArgTypes(['footer', 'show']),
-  },
   render: (args) => <ModalUsingState {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(ModalUsingStateSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
@@ -225,7 +217,6 @@ export const Size: Story = {
     controls: { disable: true },
     ...withSource(ModalSizesSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
@@ -310,26 +301,11 @@ export const DisableClosing: Story = {
 };
 
 export const Status: StatusStory = {
-  args: {
-    children: (
-      <IressText element="p">
-        Optional contextual information added here, this can be introductory
-        text or any other relevant copy.
-      </IressText>
-    ),
-    actions: [{ children: 'Button', mode: 'tertiary' }, { children: 'Button' }],
-    heading: 'Modal Header',
-    status: 'danger',
-  },
-  argTypes: {
-    ...disableArgTypes(['show', 'status', 'size', 'id']),
-  },
   render: (args) => <ModalStatuses {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(ModalStatusesSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };

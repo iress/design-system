@@ -7,7 +7,7 @@ export function CheckboxReadOnly() {
         I agree to the terms and conditions
       </IressCheckbox>
       <IressCheckbox readOnly value="readOnly">
-        I agree to the terms and conditions
+        I agree to the privacy policy
       </IressCheckbox>
     </IressStack>
   );

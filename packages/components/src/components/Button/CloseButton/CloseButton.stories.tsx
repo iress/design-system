@@ -19,9 +19,4 @@ export default {
   },
 } as Meta<typeof IressCloseButton>;
 
-export const CloseButton: Story = {
-  args: {
-    append: '',
-    prepend: '',
-  },
-};
+export const CloseButton: Story = {};

@@ -113,7 +113,7 @@ export const DeletingTags: Story = {
   render: (args) => <TagDeletion {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TagDeletionSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TagDeletionSource, { stripImports: true }),
   },
 };
 

@@ -82,14 +82,10 @@ export const DefaultSelected: Story = {
 };
 
 export const Controlled: Story = {
-  ...Panels,
-  argTypes: {
-    ...disableArgTypes(['children', 'selected']),
-  },
-  render: (args) => <TabsUsingState {...args} />,
+  render: () => <TabsUsingState />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TabsUsingStateSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TabsUsingStateSource, { stripImports: true }),
   },
 };
 
@@ -102,13 +98,10 @@ export const Layout: Story = {
 };
 
 export const LazyLoading: Story = {
-  args: {
-    defaultSelected: 2,
-  },
-  render: (args) => <TabsLazyLoading {...args} />,
+  render: () => <TabsLazyLoading />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TabsLazyLoadingSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TabsLazyLoadingSource, { stripImports: true }),
   },
 };
 
@@ -143,10 +136,10 @@ export const TabsWithBadges: Story = {
 };
 
 export const DynamicBadge: Story = {
-  render: (args) => <TabsWithDynamicBadge {...args} />,
+  render: () => <TabsWithDynamicBadge />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TabsWithDynamicBadgeSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TabsWithDynamicBadgeSource, { stripImports: true }),
     docs: {
       description: {
         story:

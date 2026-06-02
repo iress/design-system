@@ -90,7 +90,7 @@ export const CustomColumns: Story = {
   argTypes: {
     ...disableArgTypes(['caption', 'rows', 'columns']),
   },
-  render: (args) => <TableCustomColumns {...args} />,
+  render: () => <TableCustomColumns />,
   parameters: {
     controls: { disable: true },
     ...withSource(TableCustomColumnsSource, { stripImports: true, stripExportFunction: true }),
@@ -102,7 +102,7 @@ export const Formats: Story = {
   argTypes: {
     ...disableArgTypes(['caption', 'rows', 'columns']),
   },
-  render: (args) => <TableFormats {...args} />,
+  render: () => <TableFormats />,
   parameters: {
     controls: { disable: true },
     ...withSource(TableFormatsSource, { stripImports: true, stripExportFunction: true }),
@@ -111,7 +111,7 @@ export const Formats: Story = {
 
 export const Sorting: Story = {
   ...CustomColumns,
-  render: (args) => <TableSorting {...args} />,
+  render: () => <TableSorting />,
   parameters: {
     controls: { disable: true },
     ...withSource(TableSortingSource, { stripImports: true, stripExportFunction: true }),
@@ -120,7 +120,7 @@ export const Sorting: Story = {
 
 export const CustomSortingLogic: Story = {
   ...CustomColumns,
-  render: (args) => <TableSortingFn {...(args as object)} />,
+  render: () => <TableSortingFn />,
   parameters: {
     controls: { disable: true },
     ...withSource(TableSortingFnSource, { stripImports: true, stripExportFunction: true }),
@@ -129,7 +129,7 @@ export const CustomSortingLogic: Story = {
 
 export const Filtering: Story = {
   ...CustomColumns,
-  render: (args) => <TableFiltering {...args} />,
+  render: () => <TableFiltering />,
   parameters: {
     controls: { disable: true },
     ...withSource(TableFilteringSource, { stripImports: true, stripExportFunction: true }),
@@ -138,10 +138,10 @@ export const Filtering: Story = {
 
 export const ServerSideFiltering: Story = {
   ...CustomColumns,
-  render: (args) => <TableFilteringServerSide {...args} />,
+  render: () => <TableFilteringServerSide />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TableFilteringServerSideSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TableFilteringServerSideSource, { stripImports: true }),
   },
 };
 
@@ -418,9 +418,9 @@ export const Virtualised: Story = {
   argTypes: {
     ...disableArgTypes(['caption', 'rows', 'columns']),
   },
-  render: (args) => <TableVirtualised {...args} />,
+  render: () => <TableVirtualised />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TableVirtualisedSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TableVirtualisedSource, { stripImports: true }),
   },
 };

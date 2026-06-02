@@ -62,6 +62,6 @@ export const Multiple: StoryObj<typeof IressExpander> = {
   render: (args) => <MultipleExpander {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(MultipleExpanderSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(MultipleExpanderSource, { stripImports: true }),
   },
 };

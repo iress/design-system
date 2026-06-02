@@ -157,11 +157,10 @@ export const HandlingSubmission: Story = {
     ...Simple.argTypes,
     ...disableArgTypes(['children', 'onSubmit']),
   },
-  render: (args) => <FormSubmission {...args} />,
+  render: () => <FormSubmission />,
   parameters: {
     ...withSource(FormSubmissionSource, {
       stripImports: true,
-      stripExportFunction: true,
       replacePropsType: 'IressFormProps<FieldValues>',
       removeProps: ['children'],
     }),
@@ -183,11 +182,10 @@ export const CustomErrorHandling: Story = {
     ...HandlingSubmission.argTypes,
     ...disableArgTypes(['children', 'onError']),
   },
-  render: (args) => <CustomErrorHandlingForm {...args} />,
+  render: () => <CustomErrorHandlingForm />,
   parameters: {
     ...withSource(CustomErrorHandlingFormSource, {
       stripImports: true,
-      stripExportFunction: true,
       replacePropsType: 'IressFormProps<FieldValues>',
       removeProps: ['children'],
     }),
@@ -228,11 +226,10 @@ export const Values: Story = {
     ...Simple.argTypes,
     ...disableArgTypes(['values', 'onSubmit']),
   },
-  render: (args) => <ControlledForm {...args} />,
+  render: () => <ControlledForm />,
   parameters: {
     ...withSource(ControlledFormSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
@@ -243,11 +240,10 @@ export const DisableValidation: Story = {
     ...Simple.argTypes,
     ...disableArgTypes(['children', 'onError', 'onSubmit']),
   },
-  render: (args) => <DisableValidationForm {...args} />,
+  render: () => <DisableValidationForm />,
   parameters: {
     ...withSource(DisableValidationFormSource, {
       stripImports: true,
-      stripExportFunction: true,
       replacePropsType: 'IressFormProps<FieldValues>',
       removeProps: ['children'],
     }),
@@ -268,11 +264,10 @@ export const ResetForm: Story = {
     ...Simple.argTypes,
     ...disableArgTypes(['children']),
   },
-  render: (args) => <FormReset {...args} />,
+  render: () => <FormReset />,
   parameters: {
     ...withSource(FormResetSource, {
       stripImports: true,
-      stripExportFunction: true,
       replacePropsType: 'IressFormProps<FieldValues>',
       removeProps: ['children'],
     }),
@@ -422,110 +417,100 @@ export const App = () => (
 
 export const WithReadonlyData: Story = {
   tags: ['recipe'],
-  render: (args) => <WithReadonlyDataForm {...args} />,
+  render: () => <WithReadonlyDataForm />,
   parameters: {
     ...withSource(WithReadonlyDataFormSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const SwitchEditReadonly: Story = {
   tags: ['recipe'],
-  render: (args) => <SwitchEditReadonlyForm {...args} />,
+  render: () => <SwitchEditReadonlyForm />,
   parameters: {
     ...withSource(SwitchEditReadonlyFormSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const NativeValidation: Story = {
   tags: ['recipe'],
-  render: (args) => <NativeValidationForm {...args} />,
+  render: () => <NativeValidationForm />,
   parameters: {
     ...withSource(NativeValidationFormSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const NestedForms: Story = {
   tags: ['recipe'],
-  render: (args) => <NestedFormsExample {...args} />,
+  render: () => <NestedFormsExample />,
   parameters: {
     ...withSource(NestedFormsSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const FormGroups: Story = {
   tags: ['recipe'],
-  render: (args) => <FormGroupsExample {...args} />,
+  render: () => <FormGroupsExample />,
   parameters: {
     ...withSource(FormGroupsSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const FormsInExpanders: Story = {
   tags: ['recipe'],
-  render: (args) => <FormExpanders {...args} />,
+  render: () => <FormExpanders />,
   parameters: {
     ...withSource(FormExpandersSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const UseWatch: Story = {
   tags: ['recipe'],
-  render: (args) => <UseWatchForm {...args} />,
+  render: () => <UseWatchForm />,
   parameters: {
     ...withSource(UseWatchFormSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const HiddenInputs: Story = {
   tags: ['recipe'],
-  render: (args) => <HiddenInputsForm {...args} />,
+  render: () => <HiddenInputsForm />,
   parameters: {
     ...withSource(HiddenInputsFormSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const ValidationDependOnOtherFields: Story = {
   tags: ['recipe'],
-  render: (args) => <ValidationDependOnOtherFieldsExample {...args} />,
+  render: () => <ValidationDependOnOtherFieldsExample />,
   parameters: {
     ...withSource(ValidationDependOnOtherFieldsSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const CustomFormFieldComponents: Story = {
   tags: ['recipe'],
-  render: (args) => <CustomFormFieldComponentsExample {...args} />,
+  render: () => <CustomFormFieldComponentsExample />,
   parameters: {
     ...withSource(CustomFormFieldComponentsSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
@@ -536,7 +521,6 @@ export const SanitisingInput: Story = {
     controls: { disable: true },
     ...withSource(SanitisedInputFormSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
   render: () => (
@@ -550,120 +534,110 @@ export const SanitisingInput: Story = {
 
 export const Required: Story = {
   tags: ['tab:rules'],
-  render: (args) => <FormRuleRequired {...args} />,
+  render: () => <FormRuleRequired />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleRequiredSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const MaxLength: Story = {
   tags: ['tab:rules'],
-  render: (args) => <FormRuleMaxLength {...args} />,
+  render: () => <FormRuleMaxLength />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleMaxLengthSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const MinLength: Story = {
   tags: ['tab:rules'],
-  render: (args) => <FormRuleMinLength {...args} />,
+  render: () => <FormRuleMinLength />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleMinLengthSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const Max: Story = {
   tags: ['tab:rules'],
-  render: (args) => <FormRuleMax {...args} />,
+  render: () => <FormRuleMax />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleMaxSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const Min: Story = {
   tags: ['tab:rules'],
-  render: (args) => <FormRuleMin {...args} />,
+  render: () => <FormRuleMin />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleMinSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const Pattern: Story = {
   tags: ['tab:rules'],
-  render: (args) => <FormRulePattern {...args} />,
+  render: () => <FormRulePattern />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRulePatternSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const MinDate: Story = {
   tags: ['tab:rules'],
-  render: (args) => <FormRuleMinDate {...args} />,
+  render: () => <FormRuleMinDate />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleMinDateSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const MaxDate: Story = {
   tags: ['tab:rules'],
-  render: (args) => <FormRuleMaxDate {...args} />,
+  render: () => <FormRuleMaxDate />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleMaxDateSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const Email: Story = {
   tags: ['tab:rules'],
-  render: (args) => <FormRuleEmail {...args} />,
+  render: () => <FormRuleEmail />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleEmailSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const Validate: Story = {
   tags: ['tab:rules'],
-  render: (args) => <FormRuleValidate {...args} />,
+  render: () => <FormRuleValidate />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleValidateSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
@@ -672,24 +646,22 @@ export const Validate: Story = {
 
 export const Short: Story = {
   tags: ['tab:patterns'],
-  render: (args) => <FormPatternShort {...args} />,
+  render: () => <FormPatternShort />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormPatternShortSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
 
 export const Long: Story = {
   tags: ['tab:patterns'],
-  render: (args) => <FormPatternLong {...args} />,
+  render: () => <FormPatternLong />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormPatternLongSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };

@@ -1,41 +1,40 @@
 import {
   IressButton,
   IressSlideout,
-  type IressSlideoutProps,
   IressSlideoutProvider,
   useSlideout,
 } from '@/main';
 
 const SLIDEOUT_ID = 'storybook-slideout';
 
-export const App = (slideoutProps: IressSlideoutProps) => (
-  <IressSlideoutProvider>
-    <SlideoutWithTrigger {...slideoutProps} />
-  </IressSlideoutProvider>
-);
+export function AppWithSlideoutProvider() {
+  return (
+    <IressSlideoutProvider>
+      <SlideoutWithTrigger />
+    </IressSlideoutProvider>
+  );
+}
 
-const SlideoutWithTrigger = ({
-  id = SLIDEOUT_ID,
-  ...slideoutProps
-}: IressSlideoutProps) => {
+function SlideoutWithTrigger() {
   const { showSlideout } = useSlideout();
 
   return (
     <>
-      <IressButton onClick={() => showSlideout(id)}>
+      <IressButton onClick={() => showSlideout(SLIDEOUT_ID)}>
         Show slideout using provider
       </IressButton>
       <IressSlideout
-        {...slideoutProps}
-        id={id}
+        id={SLIDEOUT_ID}
+        heading="Provider slideout"
         footer={
-          <IressButton onClick={() => showSlideout(id, false)}>
+          <IressButton onClick={() => showSlideout(SLIDEOUT_ID, false)}>
             Close slideout
           </IressButton>
         }
       >
-        {slideoutProps.children ?? 'Slideout content'}
+        This slideout was opened via IressSlideoutProvider and the useSlideout
+        hook.
       </IressSlideout>
     </>
   );
-};
+}

@@ -5,7 +5,6 @@ import {
   IressStack,
   IressText,
   IressToasterProvider,
-  type IressToasterProviderProps,
   type NewToast,
   useToaster,
 } from '@/main';
@@ -57,18 +56,20 @@ const Toaster = () => {
   );
 };
 
-export const ToasterPositionExamples = (args: IressToasterProviderProps) => (
-  <IressToasterProvider {...args} id="bottom-end" position="bottom-end">
-    <IressToasterProvider {...args} id="bottom-center" position="bottom-center">
-      <IressToasterProvider {...args} id="bottom-start" position="bottom-start">
-        <IressToasterProvider {...args} id="top-start" position="top-start">
-          <IressToasterProvider {...args} id="top-center" position="top-center">
-            <IressToasterProvider {...args} id="top-end" position="top-end">
-              <Toaster />
+export function ToasterPositionExamples() {
+  return (
+    <IressToasterProvider container={document.body} id="bottom-end" position="bottom-end">
+      <IressToasterProvider container={document.body} id="bottom-center" position="bottom-center">
+        <IressToasterProvider container={document.body} id="bottom-start" position="bottom-start">
+          <IressToasterProvider container={document.body} id="top-start" position="top-start">
+            <IressToasterProvider container={document.body} id="top-center" position="top-center">
+              <IressToasterProvider container={document.body} id="top-end" position="top-end">
+                <Toaster />
+              </IressToasterProvider>
             </IressToasterProvider>
           </IressToasterProvider>
         </IressToasterProvider>
       </IressToasterProvider>
     </IressToasterProvider>
-  </IressToasterProvider>
-);
+  );
+}

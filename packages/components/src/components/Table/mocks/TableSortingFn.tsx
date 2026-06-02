@@ -1,11 +1,8 @@
 import {
   IressTable,
   IressTableFormattedValue,
-  type IressTableProps,
   type TableColumn,
 } from '@/main';
-
-type Props = Partial<IressTableProps<Row, never>>;
 
 interface Row {
   investment_name: string;
@@ -62,31 +59,32 @@ const columns: TableColumn<Row>[] = [
   },
 ];
 
-export const TableSortingFn = (args: Props) => (
-  <IressTable<Row>
-    caption="My investments"
-    rows={[
-      {
-        investment_name: 'Artemis Fund Managers Limited',
-        cost: 23898,
-        investmentDate: '2019-09-23',
-        totalPercentage: 24.8,
-      },
-      {
-        investment_name: 'CASH.CASH',
-        cost: 49751.4,
-        netCost: 20000,
-        investmentDate: '2020-06-28',
-        totalPercentage: 49,
-      },
-      {
-        investment_name: 'VODAFONE GRP',
-        cost: 26382.456,
-        investmentDate: '2019-02-05',
-        totalPercentage: 26.2,
-      },
-    ]}
-    {...args}
-    columns={columns}
-  />
-);
+export function TableSortingFn() {
+  return (
+    <IressTable<Row>
+      caption="My investments"
+      rows={[
+        {
+          investment_name: 'Artemis Fund Managers Limited',
+          cost: 23898,
+          investmentDate: '2019-09-23',
+          totalPercentage: 24.8,
+        },
+        {
+          investment_name: 'CASH.CASH',
+          cost: 49751.4,
+          netCost: 20000,
+          investmentDate: '2020-06-28',
+          totalPercentage: 49,
+        },
+        {
+          investment_name: 'VODAFONE GRP',
+          cost: 26382.456,
+          investmentDate: '2019-02-05',
+          totalPercentage: 26.2,
+        },
+      ]}
+      columns={columns}
+    />
+  );
+}

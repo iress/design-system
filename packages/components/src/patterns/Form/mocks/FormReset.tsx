@@ -1,5 +1,4 @@
 import {
-  type IressFormProps,
   IressForm,
   type FormRef,
   IressDivider,
@@ -14,11 +13,11 @@ interface FieldValues {
   email?: string;
 }
 
-export const FormReset = (args: IressFormProps<FieldValues>) => {
+export function FormReset() {
   const ref = useRef<FormRef<FieldValues>>(null);
 
   return (
-    <IressForm {...args} ref={ref}>
+    <IressForm ref={ref}>
       <IressFormField
         label="Name"
         name="name"

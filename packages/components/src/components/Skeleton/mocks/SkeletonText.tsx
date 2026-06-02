@@ -2,13 +2,19 @@ import { useState } from 'react';
 import {
   IressButton,
   IressSkeleton,
-  type IressSkeletonProps,
   IressStack,
   IressText,
 } from '@/main';
-import { TEXT_STYLES } from '@theme-preset/tokens/textStyles';
 
-export const SkeletonText = (args: IressSkeletonProps) => {
+const TEXT_STYLES = [
+  'typography.heading.1',
+  'typography.heading.2',
+  'typography.heading.3',
+  'typography.body',
+  'typography.body.small',
+] as const;
+
+export function SkeletonText() {
   const [loading, setLoading] = useState(true);
 
   return (
@@ -20,8 +26,8 @@ export const SkeletonText = (args: IressSkeletonProps) => {
         {TEXT_STYLES.map((textStyle) => [
           loading && (
             <IressSkeleton
-              {...args}
               key={`skeleton-${textStyle}`}
+              mode="text"
               textStyle={textStyle}
             />
           ),
@@ -34,4 +40,4 @@ export const SkeletonText = (args: IressSkeletonProps) => {
       </IressStack>
     </IressStack>
   );
-};
+}

@@ -255,7 +255,6 @@ export const AllSlots: Story = {
     controls: { disable: true },
     ...withSource(CardAllSlotsSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };

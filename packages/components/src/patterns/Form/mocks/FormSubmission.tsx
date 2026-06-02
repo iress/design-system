@@ -1,6 +1,5 @@
 import {
   IressTable,
-  type IressFormProps,
   IressForm,
   IressModal,
   IressFormField,
@@ -14,7 +13,7 @@ interface FieldValues {
   email?: string;
 }
 
-export const FormSubmission = (args: IressFormProps<FieldValues>) => {
+export function FormSubmission() {
   const [showModal, setShowModal] = useState(false);
   const [submitted, setSubmitted] = useState<FieldValues | undefined>(
     undefined,
@@ -22,7 +21,6 @@ export const FormSubmission = (args: IressFormProps<FieldValues>) => {
 
   return (
     <IressForm
-      {...args}
       onSubmit={(data) => {
         setSubmitted(data);
         setShowModal(true);

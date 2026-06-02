@@ -1,7 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressAutocomplete } from '.';
 import {
-  disableArgTypes,
   withJsxTransformer,
   withSource,
   withBreakpointLabel,
@@ -12,13 +11,16 @@ import { AutocompleteUsingState } from './mocks/AutocompleteUsingState';
 import AutocompleteUsingStateSource from './mocks/AutocompleteUsingState.tsx?raw';
 import { AutocompleteUsingAsync } from './mocks/AutocompleteUsingAsync';
 import AutocompleteUsingAsyncSource from './mocks/AutocompleteUsingAsync.tsx?raw';
-import { IressIcon } from '../Icon';
-import { IressPopover } from '../Popover';
 import { IressButton } from '../Button';
 import { IressPanel } from '../Panel';
 import componentMeta from './meta';
 import AutocompleteSearchTableSource from './mocks/AutocompleteSearchTable.tsx?raw';
 import { AutocompleteSearchTable } from './mocks/AutocompleteSearchTable';
+import { AutocompleteUsingAsyncMinSearch } from './mocks/AutocompleteUsingAsyncMinSearch';
+import AutocompleteUsingAsyncMinSearchSource from './mocks/AutocompleteUsingAsyncMinSearch.tsx?raw';
+import { AutocompleteInputProps } from './mocks/AutocompleteInputProps';
+import AutocompleteInputPropsSource from './mocks/AutocompleteInputProps.tsx?raw';
+import { IressDivider } from '../Divider';
 
 type Story = StoryObj<typeof IressAutocomplete>;
 
@@ -62,16 +64,11 @@ export const Uncontrolled: Story = {
 };
 
 export const Controlled: Story = {
-  ...Default,
-  argTypes: {
-    ...disableArgTypes(['defaultValue', 'value']),
-  },
   render: (args) => <AutocompleteUsingState {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(AutocompleteUsingStateSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
@@ -81,13 +78,6 @@ export const Options: Story = {
 };
 
 export const AsyncOptions: Story = {
-  args: {
-    placeholder:
-      'Search star wars characters, or type "error" to see the error text',
-  },
-  argTypes: {
-    ...disableArgTypes(['options']),
-  },
   render: (args) => <AutocompleteUsingAsync {...args} />,
   parameters: {
     controls: { disable: true },
@@ -99,16 +89,10 @@ export const AsyncOptions: Story = {
 };
 
 export const AsyncOptionsMinSearchLength: Story = {
-  argTypes: {
-    ...disableArgTypes(['options']),
-  },
-  args: {
-    minSearchLength: 3,
-  },
-  render: (args) => <AutocompleteUsingAsync {...args} />,
+  render: (args) => <AutocompleteUsingAsyncMinSearch {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(AutocompleteUsingAsyncSource, {
+    ...withSource(AutocompleteUsingAsyncMinSearchSource, {
       stripImports: true,
       stripExportFunction: true,
     }),
@@ -138,23 +122,13 @@ export const RemoveAutoSelect: Story = {
 };
 
 export const InputProps: Story = {
-  args: {
-    ...Options.args,
-    append: (
-      <IressPopover
-        activator={
-          <IressButton mode="tertiary">
-            <IressIcon name="cog" />
-          </IressButton>
-        }
-        align="bottom-end"
-        container={document.body}
-      >
-        <IressPanel>Some settings in here</IressPanel>
-      </IressPopover>
-    ),
-    prepend: <IressIcon name="search" />,
-    width: '12',
+  render: (args) => <AutocompleteInputProps {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(AutocompleteInputPropsSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -162,7 +136,7 @@ export const NoResultsText: Story = {
   args: {
     ...Options.args,
     placeholder: 'Type "no" to see the no results text',
-    noResultsText: <IressPanel>No results found</IressPanel>,
+    noResultsText: <IressPanel noBorder>No results found</IressPanel>,
   },
 };
 
@@ -171,9 +145,12 @@ export const PopoverProps: Story = {
     ...Options.args,
     popoverProps: {
       append: (
-        <IressPanel>
-          <IressButton>Add an option</IressButton>
-        </IressPanel>
+        <>
+          <IressDivider />
+          <IressPanel noBorder>
+            <IressButton>Add an option</IressButton>
+          </IressPanel>
+        </>
       ),
       container: document.body,
     },
@@ -214,7 +191,6 @@ export const SearchTable: Story = {
     controls: { disable: true },
     ...withSource(AutocompleteSearchTableSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };

@@ -35,8 +35,6 @@ export default {
 
 export const Default: Story = {
   args: {
-    append: '',
-    prepend: '',
     value: 'AU',
   },
 };
@@ -80,7 +78,7 @@ export const Actions: Story = {
   render: (args) => <ReadonlyEditToggle {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ReadonlyEditToggleSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ReadonlyEditToggleSource, { stripImports: true }),
   },
 };
 

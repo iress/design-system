@@ -28,7 +28,12 @@ export default {
   },
 } as Meta<typeof IressContainer>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    children:
+      'This content is inside a container that snaps to fixed max widths at different breakpoints.',
+  },
+};
 
 export const Container: Story = {
   render: (args) => (

@@ -15,7 +15,12 @@ import { ComponentStatus } from '../ComponentStatus';
 import { TestTable } from '../TestTable';
 import { IressButton, IressCol, IressRow } from '@iress-oss/ids-components';
 import type { ParametersConfig } from '../../types';
-import { StoryToc, useHashNavigation, type StoryItem } from '../StoriesWithToc';
+import {
+  StoryToc,
+  useHashNavigation,
+  setParentHash,
+  type StoryItem,
+} from '../StoriesWithToc';
 
 const BUILT_IN_TABS = [
   'playground',
@@ -48,7 +53,7 @@ const StoriesTabContent = ({
   return (
     <>
       <IressRow gutter="lg">
-        <IressCol>
+        <IressCol span={{ xs: 12, md: 8, lg: 9, xl: 10 }} maxWidth="10/12">
           <IressText element="p" pt="md">
             {description}
           </IressText>
@@ -130,6 +135,7 @@ export const ComponentAutoDocs = () => {
 
   const selectTab = (tab: TabName) => {
     setSelectedTab(tab);
+    setParentHash(tab);
   };
 
   useHashNavigation((hash) => {

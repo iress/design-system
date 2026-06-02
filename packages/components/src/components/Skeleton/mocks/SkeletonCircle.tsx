@@ -3,11 +3,10 @@ import {
   IressButton,
   IressPlaceholder,
   IressSkeleton,
-  type IressSkeletonProps,
   IressStack,
 } from '@/main';
 
-export const SkeletonCircle = (args: IressSkeletonProps<'circle'>) => {
+export function SkeletonCircle() {
   const [loading, setLoading] = useState(true);
 
   return (
@@ -15,12 +14,12 @@ export const SkeletonCircle = (args: IressSkeletonProps<'circle'>) => {
       <IressButton onClick={() => setLoading(!loading)}>
         Toggle load
       </IressButton>
-      {loading && <IressSkeleton {...args} />}
+      {loading && <IressSkeleton mode="circle" width="150" height="150" />}
       {!loading && (
-        <IressPlaceholder {...args} style={{ borderRadius: '50%' }}>
+        <IressPlaceholder width="150" height="150" style={{ borderRadius: '50%' }}>
           Image
         </IressPlaceholder>
       )}
     </IressStack>
   );
-};
+}

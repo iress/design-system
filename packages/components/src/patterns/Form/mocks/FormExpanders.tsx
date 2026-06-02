@@ -2,7 +2,6 @@ import {
   IressExpander,
   IressForm,
   IressFormField,
-  type IressFormProps,
   IressInput,
   IressStack,
 } from '@/main';
@@ -13,8 +12,8 @@ interface FieldValues {
   email?: string;
 }
 
-const Form = (args: IressFormProps<FieldValues>) => (
-  <IressForm {...args}>
+const Form = () => (
+  <IressForm>
     <IressStack gap="md">
       <IressFormField
         label="Name"
@@ -40,7 +39,7 @@ const Form = (args: IressFormProps<FieldValues>) => (
   </IressForm>
 );
 
-export const FormExpanders = (args: IressFormProps<FieldValues>) => {
+export function FormExpanders() {
   const [expander, setExpander] = useState('');
 
   const isOpen = (name: string) => expander === name;
@@ -52,15 +51,15 @@ export const FormExpanders = (args: IressFormProps<FieldValues>) => {
         open={isOpen('Sender')}
         onChange={(open) => open && setExpander('Sender')}
       >
-        {isOpen('Sender') && <Form {...args} />}
+        {isOpen('Sender') && <Form />}
       </IressExpander>
       <IressExpander
         activator="Recipient"
         open={isOpen('Recipient')}
         onChange={(open) => open && setExpander('Recipient')}
       >
-        {isOpen('Recipient') && <Form {...args} />}
+        {isOpen('Recipient') && <Form />}
       </IressExpander>
     </IressStack>
   );
-};
+}

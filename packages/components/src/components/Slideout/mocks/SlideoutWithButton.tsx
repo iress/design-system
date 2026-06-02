@@ -1,9 +1,9 @@
-import { IressButton, IressSlideout, type IressSlideoutProps } from '@/main';
+import { IressButton, IressSlideout } from '@/main';
 import { useSlideout } from '../hooks/useSlideout';
 
 const SLIDEOUT_ID = 'storybook-slideout';
 
-export function SlideoutWithButton(args: Readonly<IressSlideoutProps>) {
+export function SlideoutWithButton() {
   const { showSlideout } = useSlideout();
 
   return (
@@ -11,7 +11,9 @@ export function SlideoutWithButton(args: Readonly<IressSlideoutProps>) {
       <IressButton onClick={() => showSlideout(SLIDEOUT_ID)}>
         Toggle slideout
       </IressButton>
-      <IressSlideout {...args} id={SLIDEOUT_ID} />
+      <IressSlideout id={SLIDEOUT_ID} heading="Slideout">
+        Slideout content
+      </IressSlideout>
     </>
   );
 }

@@ -108,16 +108,10 @@ export const Activator: Story = {
 };
 
 export const ShowWithState: Story = {
-  args: {
-    ...Activator.args,
-  },
-  argTypes: {
-    ...disableArgTypes(['activator', 'children', 'show']),
-  },
   render: (args) => <PopoverUsingState {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(PopoverUsingStateSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(PopoverUsingStateSource, { stripImports: true }),
   },
 };
 
@@ -303,7 +297,7 @@ export const ParentContainer: Story = {
   render: (args) => <PopoverParentContainer {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(PopoverParentContainerSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(PopoverParentContainerSource, { stripImports: true }),
   },
 };
 
@@ -312,6 +306,6 @@ export const FocusableChildren: Story = {
   render: (args) => <UsePopoverExample {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(UsePopoverExampleSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(UsePopoverExampleSource, { stripImports: true }),
   },
 };

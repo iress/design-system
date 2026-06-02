@@ -54,8 +54,6 @@ export default {
 export const Default: Story = {
   args: {
     placeholder: 'Enter your name',
-    prepend: '',
-    append: '',
   },
 };
 
@@ -234,7 +232,7 @@ export const ReactHookForms: Story = {
     controls: { disable: true },
     actions: { disable: true },
     IDS_Sandbox: { scopes: ['react-hook-form'] },
-    ...withSource(ReactHookFormsInputSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ReactHookFormsInputSource, { stripImports: true }),
   },
 };
 

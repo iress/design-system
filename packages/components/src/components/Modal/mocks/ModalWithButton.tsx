@@ -1,15 +1,22 @@
-import { IressButton, IressModal, type IressModalProps } from '@/main';
+import { IressButton, IressModal } from '@/main';
 import { useModal } from '../hooks/useModal';
 
 const MODAL_ID = 'storybook-modal';
 
-export function ModalWithButton(args: Readonly<IressModalProps>) {
+export function ModalWithButton() {
   const { showModal } = useModal();
 
   return (
     <>
       <IressButton onClick={() => showModal(MODAL_ID)}>Show modal</IressButton>
-      <IressModal {...args} id={MODAL_ID} show={false} />
+      <IressModal
+        id={MODAL_ID}
+        show={false}
+        heading="Modal heading"
+        footer={<IressButton>Close</IressButton>}
+      >
+        Modal content goes here.
+      </IressModal>
     </>
   );
 }

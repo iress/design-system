@@ -54,7 +54,7 @@ export const Default: SingleStory = {
 export const Controlled: SingleStory = {
   render: (args) => <ControlledDropdownMenu {...args} />,
   parameters: {
-    ...withSource(ControlledDropdownMenuSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ControlledDropdownMenuSource, { stripImports: true }),
   },
 };
 
@@ -63,7 +63,7 @@ export const SearchTable: SingleStory = {
   parameters: {
     ...withSource(
       TableWithFiltersSource,
-      { stripImports: true, stripExportFunction: true, replacePropsType: 'IressDropdownMenuProps' },
+      { stripImports: true, replacePropsType: 'IressDropdownMenuProps' },
     ),
   },
 };
@@ -71,7 +71,7 @@ export const SearchTable: SingleStory = {
 export const MultiSelect: Story = {
   render: (args) => <ControlledDropdownMenuMultiselect {...args} />,
   parameters: {
-    ...withSource(ControlledDropdownMenuMultiselectSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ControlledDropdownMenuMultiselectSource, { stripImports: true }),
   },
 };
 

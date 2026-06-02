@@ -1,6 +1,5 @@
 import {
   IressTable,
-  type IressFormProps,
   IressForm,
   IressModal,
   IressStack,
@@ -17,13 +16,13 @@ interface FieldValues {
   email?: string;
 }
 
-export const CustomErrorHandlingForm = (args: IressFormProps<FieldValues>) => {
+export function CustomErrorHandlingForm() {
   const [errors, setErrors] = useState<FieldErrors<FieldValues> | undefined>(
     undefined,
   );
 
   return (
-    <IressForm {...args} onError={(data) => setErrors(data)}>
+    <IressForm onError={(data) => setErrors(data)}>
       <IressText mb="md">
         <h2>Custom error handling</h2>
         <p>

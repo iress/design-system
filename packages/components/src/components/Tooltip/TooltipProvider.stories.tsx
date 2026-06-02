@@ -26,7 +26,6 @@ export const Provider: Story = {
     controls: { disable: true },
     ...withSource(AppWithTooltipProviderSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };

@@ -14,6 +14,8 @@ Use for: Simple prop demos, single-component stories with interactive controls.
 
 ### P2: Mock file + `withSource`
 
+**Presentational mocks** (no hooks — galleries, multi-variant displays):
+
 ```tsx
 export const Status: Story = {
   render: (args) => <AlertStatus {...args} />,
@@ -26,6 +28,22 @@ export const Status: Story = {
   },
 };
 ```
+
+**Stateful mocks** (uses `useState` or other hooks):
+
+```tsx
+export const Controlled: Story = {
+  render: (args) => <AutocompleteUsingState {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(AutocompleteUsingStateSource, {
+      stripImports: true,
+    }),
+  },
+};
+```
+
+> **Rule:** If the mock uses hooks (`useState`, `useEffect`, `useModal`, etc.), do NOT use `stripExportFunction: true` — the function wrapper and hook declarations must remain visible so the code panel shows a complete, copy-paste-able example. Only strip the export function for purely presentational mocks where the return JSX is self-explanatory.
 
 Use for: Multi-variant galleries, complex compositions, recipes, stateful examples, provider-wrapped components (Modal, Slideout, Toaster).
 
@@ -83,7 +101,7 @@ For each story file, check:
 3. [ ] No `(resize to see changes)` text
 4. [ ] All mock-based stories use `render: (args) => <Mock {...args} />`
 5. [ ] All mock-based stories have `controls: { disable: true }`
-6. [ ] All mock-based stories use `withSource(Source, { stripImports: true, stripExportFunction: true })`
+6. [ ] All mock-based stories use `withSource(Source, { stripImports: true, stripExportFunction: true })` for presentational mocks, or `withSource(Source, { stripImports: true })` for stateful mocks (those using hooks)
 7. [ ] Recipe stories have `tags: ['recipe']` and are in main file (no separate Recipes file)
 8. [ ] Responsive stories use `decorators: [withBreakpointLabel()]` (factory call, not bare reference)
 9. [ ] `withBreakpointLabel` import is from `@iress-oss/ids-storybook-config`
@@ -115,6 +133,8 @@ For each component, navigate to its docs page and verify ALL of the following:
 3. [ ] **Examples tab**: Click the Examples tab and verify:
    - All example stories render (not blank, no error boundaries)
    - Each story's code panel shows clean JSX (no imports, no function wrapper, no `@/main`)
+   - Stateful mocks (with hooks) show the full function including `useState`/`useEffect` — no undefined references like `setValue` or `value` without context
+   - No `{...args}` spread in any code panel
    - Mock-based stories do NOT show a controls table (controls disabled)
 4. [ ] **Recipes tab** (if applicable): Click Recipes tab, verify stories render and code panels are clean
 5. [ ] **Testing tab**: Exists and shows test stories

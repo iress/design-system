@@ -3,14 +3,16 @@ import { IressButtonGroup, type IressButtonGroupProps } from '.';
 import { IressButton } from '../Button/Button';
 import { IressTooltip } from '../Tooltip';
 import { IressIcon } from '../Icon';
-import { IressToasterProvider, useToaster } from '../Toaster';
 import { IressText } from '../Text';
 import { IressDivider } from '../Divider';
 import {
   reactNodeArgType,
   stylingProps,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
+import { ButtonGroupOnChange } from './mocks/ButtonGroupOnChange';
+import ButtonGroupOnChangeSource from './mocks/ButtonGroupOnChange.tsx?raw';
 
 type Story = StoryObj<IressButtonGroupProps<string>>;
 type MultipleStory = StoryObj<IressButtonGroupProps<string, true>>;
@@ -109,31 +111,11 @@ export const SelectedMultiple: MultipleStory = {
 };
 
 export const OnChange: Story = {
-  args: {
-    ...ButtonChildren.args,
-    label: 'Trigger toasts by selecting an option below',
+  render: (args) => <ButtonGroupOnChange {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ButtonGroupOnChangeSource, { stripImports: true }),
   },
-  render: (args) => {
-    const { success } = useToaster();
-
-    return (
-      <IressButtonGroup
-        {...args}
-        onChange={(selected) => {
-          success({
-            content: `Selected: ${selected ? String(selected) : 'none'}`,
-          });
-        }}
-      />
-    );
-  },
-  decorators: [
-    (Story) => (
-      <IressToasterProvider>
-        <Story />
-      </IressToasterProvider>
-    ),
-  ],
 };
 
 export const HiddenLabel: Story = {

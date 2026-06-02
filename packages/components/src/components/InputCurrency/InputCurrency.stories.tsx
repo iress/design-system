@@ -116,6 +116,6 @@ export const ValidValueOnChageRecipe: Story = {
   render: (args) => <ValidValueOnChage {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ValidValueOnChageSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ValidValueOnChageSource, { stripImports: true }),
   },
 };

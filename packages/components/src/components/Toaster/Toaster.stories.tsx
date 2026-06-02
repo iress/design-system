@@ -45,44 +45,35 @@ export default {
 export const Default: Story = {};
 
 export const Provider: Story = {
-  args: {
-    container: document.body,
-  },
   argTypes: {
     ...removeArgTypes(['toast']),
   },
-  render: (args) => <SimpleToasterExample {...args} />,
+  render: () => <SimpleToasterExample />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SimpleToasterExampleSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SimpleToasterExampleSource, { stripImports: true }),
   },
 };
 
 export const Close: Story = {
-  args: {
-    container: document.body,
-  },
   argTypes: {
     ...removeArgTypes(['toast']),
   },
-  render: (args) => <CloseToastViaProvider {...args} />,
+  render: () => <CloseToastViaProvider />,
   parameters: {
     controls: { disable: true },
-    ...withSource(CloseToastViaProviderSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(CloseToastViaProviderSource, { stripImports: true }),
   },
 };
 
 export const Position: Story = {
-  args: {
-    ...Provider.args,
-  },
   argTypes: {
     ...disableArgTypes(['position']),
   },
-  render: (args) => <ToasterPositionExamples {...args} />,
+  render: () => <ToasterPositionExamples />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ToasterPositionExamplesSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ToasterPositionExamplesSource, { stripImports: true }),
   },
 };
 
@@ -90,23 +81,20 @@ export const Statuses: Story = {
   argTypes: {
     ...removeArgTypes(['toast']),
   },
-  render: (args) => <ToastStatuses {...args} />,
+  render: () => <ToastStatuses />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ToastStatusesSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ToastStatusesSource, { stripImports: true }),
   },
 };
 
 export const Timeout: Story = {
-  args: {
-    ...Provider.args,
-  },
   argTypes: {
     ...removeArgTypes(['toast']),
   },
-  render: (args) => <ToasterTimeout {...args} />,
+  render: () => <ToasterTimeout />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ToasterTimeoutSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ToasterTimeoutSource, { stripImports: true }),
   },
 };

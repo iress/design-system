@@ -58,7 +58,6 @@ export const Wizard: Story = {
     controls: { disable: true },
     ...withSource(LoadingWizardSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
     layout: 'fullscreen',
   },
@@ -70,7 +69,6 @@ export const FastWizard: Story = {
     controls: { disable: true },
     ...withSource(LoadingWizardFastSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
     layout: 'fullscreen',
   },
@@ -91,7 +89,6 @@ export const Component: Story = {
     controls: { disable: true },
     ...withSource(LoadingGraphSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
@@ -103,7 +100,6 @@ export const Page: Story = {
     controls: { disable: true },
     ...withSource(LoadingDashboardSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
@@ -115,7 +111,6 @@ export const PageError: Story = {
     controls: { disable: true },
     ...withSource(LoadingDashboardErrorSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };
@@ -142,7 +137,6 @@ export const LongError: Story = {
     controls: { disable: true },
     ...withSource(LoadingLongWithErrorSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
 };

@@ -5,11 +5,10 @@ import {
   IressTab,
   IressTabSet,
   IressText,
-  type IressTabSetProps,
 } from '@/main';
 import { useState } from 'react';
 
-export const TabsWithDynamicBadge = (args: IressTabSetProps) => {
+export function TabsWithDynamicBadge() {
   const [showBadge, setShowBadge] = useState(true);
 
   return (
@@ -23,7 +22,7 @@ export const TabsWithDynamicBadge = (args: IressTabSetProps) => {
           {showBadge ? 'Remove pill' : 'Add pill'}
         </IressButton>
       </IressStack>
-      <IressTabSet {...args}>
+      <IressTabSet>
         <IressTab
           key="address"
           label={
@@ -47,4 +46,4 @@ export const TabsWithDynamicBadge = (args: IressTabSetProps) => {
       </IressTabSet>
     </IressStack>
   );
-};
+}

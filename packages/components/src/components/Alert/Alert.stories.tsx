@@ -48,8 +48,6 @@ export const Default: Story = {
   args: {
     children: 'This is a simple info alert',
     status: 'info',
-    heading: '',
-    footer: '',
   },
 };
 
@@ -57,7 +55,10 @@ export const Status: Story = {
   render: (args) => <AlertStatus {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(AlertStatusSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(AlertStatusSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -72,7 +73,10 @@ export const Footer: Story = {
   render: (args) => <AlertFooter {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(AlertFooterSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(AlertFooterSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -80,7 +84,10 @@ export const MultiLine: Story = {
   render: (args) => <AlertMultiLine {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(AlertMultiLineSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(AlertMultiLineSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -97,7 +104,10 @@ export const Variant: Story = {
   render: (args) => <AlertVariant {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(AlertVariantSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(AlertVariantSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -111,6 +121,9 @@ export const Dismissable: Story = {
   render: (args) => <AlertDismissable {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(AlertDismissableSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(AlertDismissableSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };

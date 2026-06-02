@@ -57,7 +57,7 @@ export const Checked: Story = {
   render: (args) => <ControlledToggle {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ControlledToggleSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ControlledToggleSource, { stripImports: true }),
   },
 };
 

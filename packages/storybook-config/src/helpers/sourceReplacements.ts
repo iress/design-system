@@ -9,6 +9,7 @@ export interface SourceReplacement {
  */
 export const DEFAULT_SOURCE_REPLACEMENTS: SourceReplacement[] = [
   { pattern: /container:\s*\{\}/g, replacement: 'container: document.body' },
+  { pattern: /\s*ref=\{undefined\}/g, replacement: '' },
 ];
 
 /**

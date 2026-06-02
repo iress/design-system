@@ -1,7 +1,7 @@
-import { IressButton, IressModal, type IressModalProps } from '@/main';
+import { IressButton, IressModal } from '@/main';
 import { useState } from 'react';
 
-export const ModalUsingState = (args: IressModalProps) => {
+export function ModalUsingState() {
   const [show, setShow] = useState(false);
 
   return (
@@ -10,11 +10,13 @@ export const ModalUsingState = (args: IressModalProps) => {
         Show modal using state
       </IressButton>
       <IressModal
-        {...args}
+        heading="Modal heading"
         show={show}
         onShowChange={setShow}
         footer={<IressButton onClick={() => setShow(false)}>Close</IressButton>}
-      />
+      >
+        Modal content goes here.
+      </IressModal>
     </>
   );
-};
+}

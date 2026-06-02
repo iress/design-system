@@ -9,10 +9,10 @@ interface StarWarsCharacterApi {
   results: StarWarsCharacter[];
 }
 
-export function AutocompleteUsingAsync() {
+export function AutocompleteUsingAsyncMinSearch() {
   return (
     <IressAutocomplete
-      placeholder="Search star wars characters, or type &quot;error&quot; to see the error text"
+      minSearchLength={3}
       options={async (query: string) => {
         if (query === 'error') {
           throw new Error('This is an error');

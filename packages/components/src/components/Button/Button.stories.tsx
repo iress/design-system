@@ -10,7 +10,6 @@ import {
 import { IressText } from '../Text';
 import { IressIcon } from '../Icon';
 import { IressInline } from '../Inline';
-import { IressPill } from '@/main';
 import componentMeta from './meta';
 
 import { ButtonMode } from './mocks/ButtonMode';
@@ -25,6 +24,8 @@ import { ButtonActive } from './mocks/ButtonActive';
 import ButtonActiveSource from './mocks/ButtonActive.tsx?raw';
 import { RoutingButton } from './mocks/RoutingButton';
 import RoutingButtonSource from './mocks/RoutingButton.tsx?raw';
+import { ButtonDeleteConfirmation } from './mocks/ButtonDeleteConfirmation';
+import ButtonDeleteConfirmationSource from './mocks/ButtonDeleteConfirmation.tsx?raw';
 
 type ButtonStory = StoryObj<IressButtonProps>;
 type AnchorStory = StoryObj<IressButtonProps<undefined, string>>;
@@ -119,10 +120,10 @@ export const ButtonsAsLinks: AnchorStory = {
 };
 
 export const DeleteConfirmation: ButtonStory = {
-  args: {
-    status: 'danger',
-    children: 'Delete button with confirm',
-    onClick: () => confirm('TODO: Change this to a modal'),
+  render: (args) => <ButtonDeleteConfirmation {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ButtonDeleteConfirmationSource, { stripImports: true }),
   },
 };
 
@@ -210,9 +211,9 @@ export const Element: ButtonStory = {
     controls: { disable: true },
     ...withSource(RoutingButtonSource, {
       stripImports: true,
-      stripExportFunction: true,
     }),
   },
+  tags: ['recipe'],
 };
 
 export const Active: ButtonStory = {

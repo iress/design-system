@@ -95,7 +95,7 @@ export const WithHeaderFooter: Story = {
 export const Controlled: Story = {
   parameters: {
     controls: { disable: true },
-    ...withSource(SideNavControlledSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SideNavControlledSource, { stripImports: true }),
   },
   render: (args) => <SideNavControlled {...args} />,
 };

@@ -53,42 +53,26 @@ export const Mode: Story = {
 };
 
 export const Text: TextStory = {
-  args: {
-    mode: 'text',
-  },
-  argTypes: {
-    ...disableArgTypes(['textVariant']),
-  },
   render: (args) => <SkeletonText {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SkeletonTextSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SkeletonTextSource, { stripImports: true }),
   },
 };
 
 export const Rect: RectStory = {
-  args: {
-    mode: 'rect',
-    width: '250',
-    height: '150',
-  },
   render: (args) => <SkeletonRect {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SkeletonRectSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SkeletonRectSource, { stripImports: true }),
   },
 };
 
 export const Circle: CircleStory = {
-  args: {
-    mode: 'circle',
-    width: '150',
-    height: '150',
-  },
   render: (args) => <SkeletonCircle {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SkeletonCircleSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SkeletonCircleSource, { stripImports: true }),
   },
 };
 
@@ -105,6 +89,6 @@ export const Card: Story = {
   render: (args) => <SkeletonCard {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SkeletonCardSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SkeletonCardSource, { stripImports: true }),
   },
 };

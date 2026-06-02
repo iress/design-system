@@ -101,7 +101,7 @@ export const StoriesWithToc = ({
   hashPrefix?: string;
 }) => (
   <IressRow gutter="lg">
-    <IressCol>
+    <IressCol span={{ xs: 12, md: 8, lg: 9, xl: 10 }} maxWidth="10/12">
       {stories.map((story) => (
         <div key={story.id}>
           <h3 id={story.id}>{story.name}</h3>

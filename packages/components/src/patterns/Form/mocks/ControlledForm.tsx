@@ -1,5 +1,4 @@
 import {
-  type IressFormProps,
   IressForm,
   IressModal,
   IressDivider,
@@ -16,7 +15,7 @@ interface FieldValues {
   email?: string;
 }
 
-export const ControlledForm = (args: IressFormProps<FieldValues>) => {
+export function ControlledForm() {
   const [values, setValues] = useState<FieldValues>({
     name: 'Leia Skywalker',
     email: 'leia.skywalker@iress.com',
@@ -26,7 +25,6 @@ export const ControlledForm = (args: IressFormProps<FieldValues>) => {
   return (
     <>
       <IressForm
-        {...args}
         onSubmit={(data) => {
           setValues(data);
           setPreview(true);

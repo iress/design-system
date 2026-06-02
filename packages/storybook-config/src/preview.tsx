@@ -19,6 +19,7 @@ import {
   applySourceReplacements,
   type SourceReplacement,
 } from './helpers/sourceReplacements';
+import { formatWithPrettier } from './helpers/withSource';
 
 const IDSStyles = lazy(() => import('./components/IDSStyles'));
 
@@ -156,8 +157,8 @@ export const getPreview = ({
         ),
         page: AutoDocs,
         source: {
-          transform: (code: string) =>
-            applySourceReplacements(code, sourceReplacements),
+          transform: async (code: string) =>
+            formatWithPrettier(applySourceReplacements(code, sourceReplacements)),
         },
         toc: false,
       },

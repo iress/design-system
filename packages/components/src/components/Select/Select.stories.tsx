@@ -196,7 +196,7 @@ export const CreateNewOption: Story = {
   render: (args) => <SelectNewOption {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SelectNewOptionSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SelectNewOptionSource, { stripImports: true }),
   },
 };
 
@@ -247,7 +247,7 @@ export const LongTextOptions: Story = {
   render: (args) => <OptionsLongText {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SelectOptionLongTextSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SelectOptionLongTextSource, { stripImports: true }),
   },
 };
 
