@@ -59,7 +59,7 @@
     "chokidar": "^5.0.0",
     "concurrently": "^9.2.1",
     "dotenv": "^17.4.2",
-    "eslint": "^10.2.0",
+    "eslint": "^10.4.0",
     "eslint-plugin-file-progress": "^4.0.0",
     "eslint-plugin-mdx": "3.7.0",
     "eslint-plugin-prettier": "^5.5.5",
