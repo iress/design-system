@@ -64,7 +64,7 @@ Click "Load More Icons" below to see how new icons are added without the existin
       },
     },
   },
-  render: () => {
+  render: (_args) => {
     const [showMoreIcons, setShowMoreIcons] = useState(false);
     const [showEvenMore, setShowEvenMore] = useState(false);
 

@@ -92,7 +92,7 @@ export const IressValidationMessage = <
 }: IressValidationMessageProps<TLinkToTarget>) => (
   <IressText
     color={`colour.system.${status}.text`}
-    display="block"
+    display="flex"
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- required to satisfy generic spread typing for IressText
     {...(restProps as IressTextProps<ValidationElement<TLinkToTarget>>)}
     element={linkToTarget ? 'a' : 'div'}
@@ -124,7 +124,7 @@ export const IressValidationMessage = <
   >
     <styled.div
       srOnly={visiblePrefix ? undefined : true}
-      display="inline"
+      display="inline-flex"
       pe="spacing.1"
     >
       <ValidationPrefix prefix={prefix} status={status} />

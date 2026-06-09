@@ -1,7 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressModal, type IressModalProps, IressModalProvider } from '.';
 import { IressButton } from '../Button';
-import { useModal } from './hooks/useModal';
 import { ModalUsingState } from './mocks/ModalUsingState';
 import ModalUsingStateSource from './mocks/ModalUsingState.tsx?raw';
 import {
@@ -20,6 +19,12 @@ import { ModalStatuses } from './mocks/ModalStatuses';
 import ModalStatusesSource from './mocks/ModalStatuses.tsx?raw';
 import { ModalWithButton } from './mocks/ModalWithButton';
 import ModalWithButtonSource from './mocks/ModalWithButton.tsx?raw';
+import { ModalFixedFooter } from './mocks/ModalFixedFooter';
+import ModalFixedFooterSource from './mocks/ModalFixedFooter.tsx?raw';
+import { ModalResponsiveSize } from './mocks/ModalResponsiveSize';
+import ModalResponsiveSizeSource from './mocks/ModalResponsiveSize.tsx?raw';
+import { ModalDisableClosing } from './mocks/ModalDisableClosing';
+import ModalDisableClosingSource from './mocks/ModalDisableClosing.tsx?raw';
 import {
   disableArgTypes,
   withSource,
@@ -130,6 +135,7 @@ export const Default: Story = {
 };
 
 export const DefaultShow: Story = {
+  tags: ['!autodocs', 'boo'],
   args: {
     children: 'Modal content',
     footer: 'Footer slot',
@@ -175,33 +181,11 @@ export const FooterSlot: Story = {
 
 export const FixedFooter: Story = {
   ...Default,
-  args: {
-    heading: 'Modal Header',
-    id: MODAL_ID,
-    children: (
-      <>
-        <IressText element="h2">
-          Next Saturday night, we&apos;re sending you back to the future
-        </IressText>
-        <IressText>
-          <p>
-            I still don&apos;t understand, how am I supposed to go to the dance
-            with her, if she&apos;s already going to the dance with you.
-          </p>
-          <p>
-            Go. Yeah, it&apos;s in the back. The future, it&apos;s where
-            you&apos;re going?
-          </p>
-        </IressText>
-      </>
-    ),
-    footer: <IressButton>Button in footer</IressButton>,
-    fixedFooter: true,
+  render: (args) => <ModalFixedFooter {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ModalFixedFooterSource, { stripImports: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['show', 'footer', 'children']),
-  },
-  render: (args) => <ModalWithButton {...args} />,
 };
 
 export const Size: Story = {
@@ -223,80 +207,20 @@ export const Size: Story = {
 
 export const ResponsiveSize: Story = {
   ...Default,
-  args: {
-    children: 'Resize your screen to see the modal width change.',
-    footer: '',
-    id: MODAL_ID,
-    width: {
-      xs: 'overlay.sm',
-      md: 'overlay.md',
-      xxl: 'overlay.lg',
-    },
+  render: (args) => <ModalResponsiveSize {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ModalResponsiveSizeSource, { stripImports: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['show', 'children']),
-  },
-  render: (args) => <ModalWithButton {...args} />,
   decorators: [withBreakpointLabel()],
 };
 
 export const DisableClosing: Story = {
   ...Default,
-  argTypes: {
-    ...disableArgTypes(['disableBackdropClick', 'noCloseButton', 'show', 'id']),
-  },
-  render: (args) => {
-    const { showModal } = useModal();
-
-    const noCloseButtonModal = (
-      <IressModal
-        {...args}
-        id="no-close-button"
-        noCloseButton
-        footer={
-          <IressButton onClick={() => showModal('no-close-button', false)}>
-            Close
-          </IressButton>
-        }
-      />
-    );
-
-    const bothModal = (
-      <IressModal
-        {...args}
-        id="both"
-        disableBackdropClick
-        noCloseButton
-        footer={
-          <IressButton onClick={() => showModal('both', false)}>
-            Close
-          </IressButton>
-        }
-      />
-    );
-
-    return (
-      <IressStack gap="md">
-        <IressButton onClick={() => showModal('disable-backdrop-click')} fluid>
-          Disable backdrop click
-        </IressButton>
-        <IressModal
-          {...args}
-          id="disable-backdrop-click"
-          disableBackdropClick
-        />
-
-        <IressButton onClick={() => showModal('no-close-button')} fluid>
-          No close button
-        </IressButton>
-        {noCloseButtonModal}
-
-        <IressButton onClick={() => showModal('both')} fluid>
-          Both
-        </IressButton>
-        {bothModal}
-      </IressStack>
-    );
+  render: (args) => <ModalDisableClosing {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ModalDisableClosingSource, { stripImports: true }),
   },
 };
 

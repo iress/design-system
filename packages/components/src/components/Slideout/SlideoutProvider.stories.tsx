@@ -21,7 +21,7 @@ export default {
 } as Meta<typeof IressSlideoutProvider>;
 
 export const Provider: Story = {
-  render: () => <AppWithSlideoutProvider />,
+  render: (_args) => <AppWithSlideoutProvider />,
   parameters: {
     controls: { disable: true },
     ...withSource(AppWithSlideoutProviderSource, { stripImports: true }),

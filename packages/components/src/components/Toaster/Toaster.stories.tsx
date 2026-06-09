@@ -48,7 +48,7 @@ export const Provider: Story = {
   argTypes: {
     ...removeArgTypes(['toast']),
   },
-  render: () => <SimpleToasterExample />,
+  render: (args) => <SimpleToasterExample {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(SimpleToasterExampleSource, { stripImports: true }),
@@ -59,7 +59,7 @@ export const Close: Story = {
   argTypes: {
     ...removeArgTypes(['toast']),
   },
-  render: () => <CloseToastViaProvider />,
+  render: (args) => <CloseToastViaProvider {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(CloseToastViaProviderSource, { stripImports: true }),
@@ -70,7 +70,7 @@ export const Position: Story = {
   argTypes: {
     ...disableArgTypes(['position']),
   },
-  render: () => <ToasterPositionExamples />,
+  render: (args) => <ToasterPositionExamples {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(ToasterPositionExamplesSource, { stripImports: true }),
@@ -81,7 +81,7 @@ export const Statuses: Story = {
   argTypes: {
     ...removeArgTypes(['toast']),
   },
-  render: () => <ToastStatuses />,
+  render: (args) => <ToastStatuses {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(ToastStatusesSource, { stripImports: true }),
@@ -92,7 +92,7 @@ export const Timeout: Story = {
   argTypes: {
     ...removeArgTypes(['toast']),
   },
-  render: () => <ToasterTimeout />,
+  render: (args) => <ToasterTimeout {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(ToasterTimeoutSource, { stripImports: true }),

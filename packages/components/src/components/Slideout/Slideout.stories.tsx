@@ -57,7 +57,7 @@ export const Default: Story = {
       </IressSlideoutProvider>
     ),
   ],
-  render: () => <SlideoutWithButton />,
+  render: (args) => <SlideoutWithButton {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(SlideoutWithButtonSource, { stripImports: true }),
@@ -84,7 +84,7 @@ export const DefaultShow: Story = {
 };
 
 export const ShowWithState: Story = {
-  render: () => <SlideoutUsingState />,
+  render: (args) => <SlideoutUsingState {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(SlideoutUsingStateSource, { stripImports: true }),
@@ -151,7 +151,7 @@ export const Modes: Story = {
 
 export const Position: Story = {
   ...Default,
-  render: () => <SlideoutPositions />,
+  render: (args) => <SlideoutPositions {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(SlideoutPositionsSource, { stripImports: true }),
@@ -160,7 +160,7 @@ export const Position: Story = {
 
 export const Size: Story = {
   ...Default,
-  render: () => <SlideoutSizes />,
+  render: (args) => <SlideoutSizes {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(SlideoutSizesSource, { stripImports: true }),
@@ -176,12 +176,12 @@ export const Footer: Story = {
   argTypes: {
     ...disableArgTypes(['footer', 'show']),
   },
-  render: () => <SlideoutWithButton />,
+  render: (args) => <SlideoutWithButton {...args} />,
 };
 
 export const AbsolutePosition: Story = {
   ...Default,
-  render: () => <AbsolutePositionSlideout />,
+  render: (args) => <AbsolutePositionSlideout {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(AbsolutePositionSlideoutSource, { stripImports: true }),
@@ -190,7 +190,7 @@ export const AbsolutePosition: Story = {
 
 export const Microfrontend: Story = {
   ...Default,
-  render: () => <SlideoutMicrofrontend />,
+  render: (args) => <SlideoutMicrofrontend {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(SlideoutMicrofrontendSource, { stripImports: true }),

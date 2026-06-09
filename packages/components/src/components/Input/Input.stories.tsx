@@ -29,6 +29,8 @@ import { ReactHookFormsInput } from './mocks/ReactHookFormsInput';
 import ReactHookFormsInputSource from './mocks/ReactHookFormsInput.tsx?raw';
 import { InputPercentage } from './mocks/InputPercentage';
 import InputPercentageSource from './mocks/InputPercentage.tsx?raw';
+import { InputCurrencyFormatter } from './mocks/InputCurrencyFormatter';
+import InputCurrencyFormatterSource from './mocks/InputCurrencyFormatter.tsx?raw';
 
 type Story = StoryObj<IressInputProps>;
 type TextareaStory = StoryObj<IressInputProps<string, number>>;
@@ -182,30 +184,10 @@ export const Formatter: Story = {
 };
 
 export const CurrencyFormatter: Story = {
-  ...Default,
-  args: {
-    ...Default.args,
-    defaultValue: '0.00',
-    placeholder:
-      'Enter any number and it will show in currency format when the input is not focused',
-    type: 'number',
-    formatter: (value = '') => {
-      const numberValue = Number(value);
-
-      if (Number.isNaN(numberValue)) {
-        return value;
-      }
-
-      return new Intl.NumberFormat('en-AU', {
-        style: 'currency',
-        currency: 'AUD',
-      }).format(numberValue);
-    },
-  },
+  render: (args) => <InputCurrencyFormatter {...args} />,
   parameters: {
-    ...withJsxTransformer({
-      showFunctions: true,
-    }),
+    controls: { disable: true },
+    ...withSource(InputCurrencyFormatterSource, { stripImports: true }),
   },
 };
 

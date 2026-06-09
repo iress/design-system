@@ -7,7 +7,6 @@ import {
   IressIcon,
   IressInput,
   type IressInputProps,
-  IressPanel,
   IressPopover,
   IressReadonly,
   IressSelect,
@@ -171,7 +170,7 @@ export const InlineSink: Story = {
             </IressButton>
           }
         >
-          <IressPanel>Settings goes here</IressPanel>
+          Settings goes here
         </IressPopover>
       </IressFieldGroup>
     </form>
@@ -216,7 +215,7 @@ export const InlineAndReadonly: Story = {
             </IressButton>
           }
         >
-          <IressPanel>Settings goes here</IressPanel>
+          Settings goes here
         </IressPopover>
       </IressFieldGroup>
     </form>

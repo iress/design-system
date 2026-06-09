@@ -7,6 +7,7 @@ import RoutingLinkMenuSource from './mocks/RoutingLinkMenu.tsx?raw';
 import {
   reactNodeArgType,
   stylingProps,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressMenuItem>;
@@ -93,12 +94,8 @@ export const MultiSelect: Story = {
 export const Element: Story = {
   render: (args) => <RoutingLinkMenu {...args} />,
   parameters: {
-    docs: {
-      source: {
-        code: RoutingLinkMenuSource,
-        language: 'tsx',
-      },
-    },
+    controls: { disable: true },
+    ...withSource(RoutingLinkMenuSource, { stripImports: true }),
   },
 };
 

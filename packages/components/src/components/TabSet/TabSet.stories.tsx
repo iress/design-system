@@ -82,7 +82,7 @@ export const DefaultSelected: Story = {
 };
 
 export const Controlled: Story = {
-  render: () => <TabsUsingState />,
+  render: (args) => <TabsUsingState {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(TabsUsingStateSource, { stripImports: true }),
@@ -98,7 +98,7 @@ export const Layout: Story = {
 };
 
 export const LazyLoading: Story = {
-  render: () => <TabsLazyLoading />,
+  render: (args) => <TabsLazyLoading {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(TabsLazyLoadingSource, { stripImports: true }),
@@ -136,7 +136,7 @@ export const TabsWithBadges: Story = {
 };
 
 export const DynamicBadge: Story = {
-  render: () => <TabsWithDynamicBadge />,
+  render: (args) => <TabsWithDynamicBadge {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(TabsWithDynamicBadgeSource, { stripImports: true }),

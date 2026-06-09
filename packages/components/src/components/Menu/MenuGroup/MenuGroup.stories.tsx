@@ -80,11 +80,11 @@ export const Selectable: Story = {
 };
 
 export const SubdrawVariant: Story = {
-  render: () => (
+  render: (args) => (
     <IressPanel>
       <IressMenu>
         <IressMenuItem>Regular Item</IressMenuItem>
-        <IressMenuGroup label="More Options" variant="subdraw">
+        <IressMenuGroup {...args} label="More Options" variant="subdraw">
           <IressMenuItem>Submenu Item 1</IressMenuItem>
           <IressMenuItem>Submenu Item 2</IressMenuItem>
           <IressMenuItem>Submenu Item 3</IressMenuItem>
@@ -104,15 +104,15 @@ export const SubdrawVariant: Story = {
 };
 
 export const SubdrawWithDividers: Story = {
-  render: () => (
+  render: (args) => (
     <IressPanel>
       <IressMenu>
-        <IressMenuGroup label="File" variant="subdraw" divider>
+        <IressMenuGroup {...args} label="File" variant="subdraw" divider>
           <IressMenuItem>New</IressMenuItem>
           <IressMenuItem>Open</IressMenuItem>
           <IressMenuItem>Save</IressMenuItem>
         </IressMenuGroup>
-        <IressMenuGroup label="Edit" variant="subdraw" divider>
+        <IressMenuGroup {...args} label="Edit" variant="subdraw" divider>
           <IressMenuItem>Cut</IressMenuItem>
           <IressMenuItem>Copy</IressMenuItem>
           <IressMenuItem>Paste</IressMenuItem>
@@ -132,15 +132,15 @@ export const SubdrawWithDividers: Story = {
 };
 
 export const NestedSubdraw: Story = {
-  render: () => (
+  render: (args) => (
     <IressPanel>
       <IressMenu role="menu">
-        <IressMenuGroup label="Settings" variant="subdraw">
+        <IressMenuGroup {...args} label="Settings" variant="subdraw">
           <IressMenuItem>General</IressMenuItem>
-          <IressMenuGroup label="Advanced" variant="subdraw">
+          <IressMenuGroup {...args} label="Advanced" variant="subdraw">
             <IressMenuItem>Developer Options</IressMenuItem>
             <IressMenuItem>Debug Mode</IressMenuItem>
-            <IressMenuGroup label="Experimental" variant="subdraw">
+            <IressMenuGroup {...args} label="Experimental" variant="subdraw">
               <IressMenuItem>Feature A</IressMenuItem>
               <IressMenuItem>Feature B</IressMenuItem>
             </IressMenuGroup>

@@ -6,19 +6,20 @@ import { IressIcon } from '../Icon';
 import { IressReadonly } from '../Readonly';
 import { IressText } from '../Text';
 import { IressStack } from '../Stack';
-import { IressInline } from '../Inline';
-import { IressRow } from '../Row';
-import { IressCol } from '../Col';
-import { type ComponentProps, useState } from 'react';
-import { IressToggle } from '../Toggle';
+import { type ComponentProps } from 'react';
 import {
   disableArgTypes,
   STORYBOOK_ONLY_CATEGORY,
   withJsxTransformer,
+  withSource,
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
+import { FieldSupplementary } from './mocks/FieldSupplementary';
+import FieldSupplementarySource from './mocks/FieldSupplementary.tsx?raw';
+import { FieldRemoveErrorMargin } from './mocks/FieldRemoveErrorMargin';
+import FieldRemoveErrorMarginSource from './mocks/FieldRemoveErrorMargin.tsx?raw';
 
 type IressFieldPropsAndCustomArgs = ComponentProps<typeof IressField> & {
   input: Omit<IressInputProps, 'onChange'>;
@@ -78,9 +79,9 @@ export const Label: Story = {
   args: {
     ...Default.args,
     label: (
-      <span>
+      <>
         <IressIcon name="home" /> Find your address
-      </span>
+      </>
     ),
   },
   argTypes: {
@@ -225,29 +226,10 @@ export const Supplementary: Story = {
   argTypes: {
     ...disableArgTypes(['error', 'errorMessages']),
   },
-  render: ({ input, ...args }) => {
-    const [error, setError] = useState<string | undefined>();
-
-    return (
-      <IressStack gap="spacing.5">
-        <IressToggle
-          onChange={(checked) =>
-            setError(checked ? 'This field is required' : undefined)
-          }
-          checked={error !== undefined}
-        >
-          Show error
-        </IressToggle>
-        <IressField {...args} error={error}>
-          <IressInput {...input} />
-        </IressField>
-      </IressStack>
-    );
-  },
+  render: (args) => <FieldSupplementary {...args} />,
   parameters: {
-    ...withJsxTransformer({
-      showFunctions: true,
-    }),
+    controls: { disable: true },
+    ...withSource(FieldSupplementarySource, { stripImports: true }),
   },
 };
 
@@ -335,129 +317,9 @@ export const RemoveErrorMargin: Story = {
     ...Default.args,
     label: 'Field Label',
   },
-  render: ({ input, ...args }) => {
-    const [removeErrorMargin, setRemoveErrorMargin] = useState(false);
-    const [showError, setShowError] = useState(false);
-
-    const fieldProps = {
-      removeErrorMargin,
-      ...(showError
-        ? {
-            errorMessages: [
-              {
-                message: 'This field is required',
-              },
-            ],
-          }
-        : {}),
-    };
-
-    const fieldPropsWithContent = {
-      removeErrorMargin,
-      ...(showError
-        ? {
-            errorMessages: [
-              {
-                message: 'This field is required',
-              },
-            ],
-          }
-        : {
-            supplementary: 'This is always-displayed supplementary text',
-          }),
-    };
-
-    return (
-      <IressStack gap="spacing.5">
-        <IressInline gap="spacing.4">
-          <IressToggle
-            onChange={(checked) => setRemoveErrorMargin(checked)}
-            checked={removeErrorMargin}
-          >
-            Remove error margin (tighter field spacing)
-          </IressToggle>
-
-          <IressToggle
-            onChange={(checked) => setShowError(checked)}
-            checked={showError}
-          >
-            Show error message
-          </IressToggle>
-        </IressInline>
-
-        <IressRow gutter="spacing.6">
-          {/* Vertical Layout Column */}
-          <IressCol span="6">
-            <IressStack gap="spacing.2">
-              <IressText element="h3">Vertical Label Layout</IressText>
-              <IressStack gap="spacing.0">
-                <IressField {...args} {...fieldProps} label="First Name">
-                  <IressInput {...input} placeholder="Enter first name" />
-                </IressField>
-                <IressField
-                  {...args}
-                  {...fieldPropsWithContent}
-                  label="Last Name"
-                >
-                  <IressInput {...input} placeholder="Enter last name" />
-                </IressField>
-                <IressField {...args} {...fieldProps} label="Email Address">
-                  <IressInput
-                    {...input}
-                    type="email"
-                    placeholder="Enter email"
-                  />
-                </IressField>
-              </IressStack>
-            </IressStack>
-          </IressCol>
-
-          {/* Horizontal Layout Column */}
-          <IressCol span="6">
-            <IressStack gap="spacing.2">
-              <IressText element="h3">Horizontal Label Layout</IressText>
-              <IressStack gap="spacing.0">
-                <IressField
-                  {...args}
-                  {...fieldProps}
-                  horizontal
-                  labelWidth="120px"
-                  label="First Name"
-                >
-                  <IressInput {...input} placeholder="Enter first name" />
-                </IressField>
-                <IressField
-                  {...args}
-                  {...fieldPropsWithContent}
-                  horizontal
-                  labelWidth="120px"
-                  label="Last Name"
-                >
-                  <IressInput {...input} placeholder="Enter last name" />
-                </IressField>
-                <IressField
-                  {...args}
-                  {...fieldProps}
-                  horizontal
-                  labelWidth="120px"
-                  label="Email Address"
-                >
-                  <IressInput
-                    {...input}
-                    type="email"
-                    placeholder="Enter email"
-                  />
-                </IressField>
-              </IressStack>
-            </IressStack>
-          </IressCol>
-        </IressRow>
-      </IressStack>
-    );
-  },
+  render: (args) => <FieldRemoveErrorMargin {...args} />,
   parameters: {
-    ...withJsxTransformer({
-      showFunctions: true,
-    }),
+    controls: { disable: true },
+    ...withSource(FieldRemoveErrorMarginSource, { stripImports: true }),
   },
 };

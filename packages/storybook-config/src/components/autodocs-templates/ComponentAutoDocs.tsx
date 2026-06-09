@@ -88,17 +88,21 @@ export const ComponentAutoDocs = () => {
   const resolvedMeta = useOf<'meta'>('meta');
 
   // componentStories() returns stories in file-definition order
-  const stories = docsContext.componentStories();
+  const stories = docsContext.componentStories().filter(
+    (story) => !story.moduleExport.tags?.includes('!autodocs'),
+  );
   const primaryStory = stories[0];
   const restOfStories = stories.slice(1);
 
-  const recipes = restOfStories.filter((story) =>
-    story.tags?.includes('recipe'),
+  const recipes = restOfStories.filter(
+    (story) =>
+      story.tags?.includes('recipe'),
   );
   const hasRecipes = recipes.length > 0;
 
-  const references = restOfStories.filter((story) =>
-    story.tags?.includes('reference'),
+  const references = restOfStories.filter(
+    (story) =>
+      story.tags?.includes('reference'),
   );
   const hasReferences = references.length > 0;
 

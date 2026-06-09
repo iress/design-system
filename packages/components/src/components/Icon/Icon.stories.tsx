@@ -28,6 +28,7 @@ import { IconRotate } from './mocks/IconRotate';
 import IconRotateSource from './mocks/IconRotate.tsx?raw';
 import { IconSpin } from './mocks/IconSpin';
 import IconSpinSource from './mocks/IconSpin.tsx?raw';
+import { IressDivider } from '../Divider';
 
 type Story = StoryObj<IressIconProps>;
 
@@ -53,7 +54,7 @@ export const Default: Story = {
   },
 };
 
-export const Reference: Story = {
+export const Icons: Story = {
   parameters: {
     docs: {
       description: {
@@ -72,7 +73,7 @@ Icons are loaded lazily from the material-symbols library for optimal performanc
       },
     },
   },
-  render: () => {
+  render: (_args) => {
     const [query, setQuery] = useState('');
     const [showFilled, setShowFilled] = useState(false);
     const [showAllIcons, setShowAllIcons] = useState(false);
@@ -179,6 +180,7 @@ Icons are loaded lazily from the material-symbols library for optimal performanc
 
     return (
       <IressIconProvider noSubsetting>
+        <IressDivider my="spacing.10" />
         <IressStack gap="xs">
           <IressStack gap="sm">
             <IressInput
@@ -222,12 +224,14 @@ Icons are loaded lazily from the material-symbols library for optimal performanc
             rows={displayedResults}
             empty={loading ? 'Loading icons...' : 'No icons found'}
             scope="col"
-            mb="none"
+            compact
           />
         </IressStack>
+        <IressDivider my="spacing.10" />
       </IressIconProvider>
     );
   },
+  tags: ['reference'],
 };
 
 export const ScreenReaderText: Story = {
@@ -238,18 +242,10 @@ export const ScreenReaderText: Story = {
 };
 
 export const Filled: Story = {
-  render: (args) => <IconFilled {...args} />,
+  render: (_args) => <IconFilled />,
   parameters: {
     controls: { disable: true },
     ...withSource(IconFilledSource, { stripImports: true, stripExportFunction: true }),
-    docs: {
-      description: {
-        story: `
-The \`filled\` prop toggles between outlined (default) and filled variants.
-Useful for active/selected states in navigation or buttons.
-        `,
-      },
-    },
   },
 };
 
@@ -297,10 +293,10 @@ export const ExternalLink: Story = {
 };
 
 export const FontAwesomeToMaterialMigration: Story = {
-  render: (args) => (
+  render: () => (
     <IressTable
-      {...(args as object)}
       caption="Font Awesome to Material Symbols Migration Reference"
+      compact
       columns={[
         {
           key: 'fontAwesome',
@@ -339,4 +335,5 @@ export const FontAwesomeToMaterialMigration: Story = {
       </IressIconProvider>
     ),
   ],
+  tags: ['reference'],
 };

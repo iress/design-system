@@ -157,7 +157,7 @@ export const HandlingSubmission: Story = {
     ...Simple.argTypes,
     ...disableArgTypes(['children', 'onSubmit']),
   },
-  render: () => <FormSubmission />,
+  render: (args) => <FormSubmission {...args} />,
   parameters: {
     ...withSource(FormSubmissionSource, {
       stripImports: true,
@@ -182,7 +182,7 @@ export const CustomErrorHandling: Story = {
     ...HandlingSubmission.argTypes,
     ...disableArgTypes(['children', 'onError']),
   },
-  render: () => <CustomErrorHandlingForm />,
+  render: (args) => <CustomErrorHandlingForm {...args} />,
   parameters: {
     ...withSource(CustomErrorHandlingFormSource, {
       stripImports: true,
@@ -226,7 +226,7 @@ export const Values: Story = {
     ...Simple.argTypes,
     ...disableArgTypes(['values', 'onSubmit']),
   },
-  render: () => <ControlledForm />,
+  render: (args) => <ControlledForm {...args} />,
   parameters: {
     ...withSource(ControlledFormSource, {
       stripImports: true,
@@ -240,7 +240,7 @@ export const DisableValidation: Story = {
     ...Simple.argTypes,
     ...disableArgTypes(['children', 'onError', 'onSubmit']),
   },
-  render: () => <DisableValidationForm />,
+  render: (args) => <DisableValidationForm {...args} />,
   parameters: {
     ...withSource(DisableValidationFormSource, {
       stripImports: true,
@@ -264,7 +264,7 @@ export const ResetForm: Story = {
     ...Simple.argTypes,
     ...disableArgTypes(['children']),
   },
-  render: () => <FormReset />,
+  render: (args) => <FormReset {...args} />,
   parameters: {
     ...withSource(FormResetSource, {
       stripImports: true,
@@ -287,7 +287,7 @@ export const StateManagementV4ToV5: Story = {
   parameters: {
     controls: { disable: true },
   },
-  render: () => (
+  render: (_args) => (
     <DiffViewer
       allowModeChange
       oldValue={`import { IressForm, IressField, IressInput, IressCheckboxGroup, IressCheckbox } from '@iress/components';
@@ -370,7 +370,7 @@ export const ValidationV4ToV5: Story = {
   parameters: {
     controls: { disable: true },
   },
-  render: () => (
+  render: (_args) => (
     <DiffViewer
       allowModeChange
       oldValue={`import { IressForm, IressField, IressInput, IressButton } from '@iress/components';
@@ -417,7 +417,7 @@ export const App = () => (
 
 export const WithReadonlyData: Story = {
   tags: ['recipe'],
-  render: () => <WithReadonlyDataForm />,
+  render: (args) => <WithReadonlyDataForm {...args} />,
   parameters: {
     ...withSource(WithReadonlyDataFormSource, {
       stripImports: true,
@@ -427,7 +427,7 @@ export const WithReadonlyData: Story = {
 
 export const SwitchEditReadonly: Story = {
   tags: ['recipe'],
-  render: () => <SwitchEditReadonlyForm />,
+  render: (args) => <SwitchEditReadonlyForm {...args} />,
   parameters: {
     ...withSource(SwitchEditReadonlyFormSource, {
       stripImports: true,
@@ -437,7 +437,7 @@ export const SwitchEditReadonly: Story = {
 
 export const NativeValidation: Story = {
   tags: ['recipe'],
-  render: () => <NativeValidationForm />,
+  render: (args) => <NativeValidationForm {...args} />,
   parameters: {
     ...withSource(NativeValidationFormSource, {
       stripImports: true,
@@ -447,7 +447,7 @@ export const NativeValidation: Story = {
 
 export const NestedForms: Story = {
   tags: ['recipe'],
-  render: () => <NestedFormsExample />,
+  render: (args) => <NestedFormsExample {...args} />,
   parameters: {
     ...withSource(NestedFormsSource, {
       stripImports: true,
@@ -457,7 +457,7 @@ export const NestedForms: Story = {
 
 export const FormGroups: Story = {
   tags: ['recipe'],
-  render: () => <FormGroupsExample />,
+  render: (args) => <FormGroupsExample {...args} />,
   parameters: {
     ...withSource(FormGroupsSource, {
       stripImports: true,
@@ -467,7 +467,7 @@ export const FormGroups: Story = {
 
 export const FormsInExpanders: Story = {
   tags: ['recipe'],
-  render: () => <FormExpanders />,
+  render: (args) => <FormExpanders {...args} />,
   parameters: {
     ...withSource(FormExpandersSource, {
       stripImports: true,
@@ -477,7 +477,7 @@ export const FormsInExpanders: Story = {
 
 export const UseWatch: Story = {
   tags: ['recipe'],
-  render: () => <UseWatchForm />,
+  render: (args) => <UseWatchForm {...args} />,
   parameters: {
     ...withSource(UseWatchFormSource, {
       stripImports: true,
@@ -487,7 +487,7 @@ export const UseWatch: Story = {
 
 export const HiddenInputs: Story = {
   tags: ['recipe'],
-  render: () => <HiddenInputsForm />,
+  render: (args) => <HiddenInputsForm {...args} />,
   parameters: {
     ...withSource(HiddenInputsFormSource, {
       stripImports: true,
@@ -497,7 +497,7 @@ export const HiddenInputs: Story = {
 
 export const ValidationDependOnOtherFields: Story = {
   tags: ['recipe'],
-  render: () => <ValidationDependOnOtherFieldsExample />,
+  render: (args) => <ValidationDependOnOtherFieldsExample {...args} />,
   parameters: {
     ...withSource(ValidationDependOnOtherFieldsSource, {
       stripImports: true,
@@ -507,7 +507,7 @@ export const ValidationDependOnOtherFields: Story = {
 
 export const CustomFormFieldComponents: Story = {
   tags: ['recipe'],
-  render: () => <CustomFormFieldComponentsExample />,
+  render: (args) => <CustomFormFieldComponentsExample {...args} />,
   parameters: {
     ...withSource(CustomFormFieldComponentsSource, {
       stripImports: true,
@@ -523,9 +523,9 @@ export const SanitisingInput: Story = {
       stripImports: true,
     }),
   },
-  render: () => (
+  render: (args) => (
     <IressLoadingSuspense>
-      <SanitisedInputForm />
+      <SanitisedInputForm {...args} />
     </IressLoadingSuspense>
   ),
 };
@@ -534,7 +534,7 @@ export const SanitisingInput: Story = {
 
 export const Required: Story = {
   tags: ['tab:rules'],
-  render: () => <FormRuleRequired />,
+  render: (args) => <FormRuleRequired {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleRequiredSource, {
@@ -545,7 +545,7 @@ export const Required: Story = {
 
 export const MaxLength: Story = {
   tags: ['tab:rules'],
-  render: () => <FormRuleMaxLength />,
+  render: (args) => <FormRuleMaxLength {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleMaxLengthSource, {
@@ -556,7 +556,7 @@ export const MaxLength: Story = {
 
 export const MinLength: Story = {
   tags: ['tab:rules'],
-  render: () => <FormRuleMinLength />,
+  render: (args) => <FormRuleMinLength {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleMinLengthSource, {
@@ -567,7 +567,7 @@ export const MinLength: Story = {
 
 export const Max: Story = {
   tags: ['tab:rules'],
-  render: () => <FormRuleMax />,
+  render: (args) => <FormRuleMax {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleMaxSource, {
@@ -578,7 +578,7 @@ export const Max: Story = {
 
 export const Min: Story = {
   tags: ['tab:rules'],
-  render: () => <FormRuleMin />,
+  render: (args) => <FormRuleMin {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleMinSource, {
@@ -589,7 +589,7 @@ export const Min: Story = {
 
 export const Pattern: Story = {
   tags: ['tab:rules'],
-  render: () => <FormRulePattern />,
+  render: (args) => <FormRulePattern {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRulePatternSource, {
@@ -600,7 +600,7 @@ export const Pattern: Story = {
 
 export const MinDate: Story = {
   tags: ['tab:rules'],
-  render: () => <FormRuleMinDate />,
+  render: (args) => <FormRuleMinDate {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleMinDateSource, {
@@ -611,7 +611,7 @@ export const MinDate: Story = {
 
 export const MaxDate: Story = {
   tags: ['tab:rules'],
-  render: () => <FormRuleMaxDate />,
+  render: (args) => <FormRuleMaxDate {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleMaxDateSource, {
@@ -622,7 +622,7 @@ export const MaxDate: Story = {
 
 export const Email: Story = {
   tags: ['tab:rules'],
-  render: () => <FormRuleEmail />,
+  render: (args) => <FormRuleEmail {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleEmailSource, {
@@ -633,7 +633,7 @@ export const Email: Story = {
 
 export const Validate: Story = {
   tags: ['tab:rules'],
-  render: () => <FormRuleValidate />,
+  render: (args) => <FormRuleValidate {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormRuleValidateSource, {
@@ -646,7 +646,7 @@ export const Validate: Story = {
 
 export const Short: Story = {
   tags: ['tab:patterns'],
-  render: () => <FormPatternShort />,
+  render: (args) => <FormPatternShort {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormPatternShortSource, {
@@ -657,7 +657,7 @@ export const Short: Story = {
 
 export const Long: Story = {
   tags: ['tab:patterns'],
-  render: () => <FormPatternLong />,
+  render: (args) => <FormPatternLong {...args} />,
   parameters: {
     controls: { disable: true },
     ...withSource(FormPatternLongSource, {

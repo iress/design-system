@@ -3,8 +3,19 @@ import { cx } from '@/styled-system/css';
 import { expanderChevron } from './ExpanderChevron.styles';
 
 export interface IressExpanderChevronProps {
+  /**
+   * Additional class names to apply to the chevron.
+   */
   className?: string;
+
+  /**
+   * Whether the chevron is in the open state.
+   */
   open?: boolean;
+  
+  /**
+   * Whether the chevron should be displayed inline.
+   */
   inline?: boolean;
 }
 

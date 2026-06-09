@@ -2,7 +2,6 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressHide } from '.';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
-import { IressDivider } from '../Divider';
 import {
   disableArgTypes,
   reactNodeArgType,
@@ -52,7 +51,6 @@ export const HiddenOn: Story = {
 
     return (
       <IressStack gap="spacing.1">
-        <IressDivider />
         <IressHide {...args} hiddenOn={{ xs: true }}>
           <IressText>
             This text is {description} hidden on xs screens and above.
@@ -99,8 +97,9 @@ export const BreakpointTable: Story = {
       },
     },
   },
-  render: () => (
+  render: (args) => (
     <IressTable
+      {...args}
       caption="Hide breakpoints"
       rows={BREAKPOINTS.map((breakpoint) => ({
         breakpoint: <code>{breakpoint}</code>,

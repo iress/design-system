@@ -14,7 +14,6 @@ export function PopoverUsingState() {
       show={show}
       onActivated={() => setShow(true)}
       onDeactivated={() => setShow(false)}
-      container={document.body}
     >
       A little more information about this area.
     </IressPopover>

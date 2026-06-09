@@ -24,7 +24,7 @@ export default {
 } as Meta<typeof IressPopoverProvider>;
 
 export const Provider: Story = {
-  render: () => <AppWithPopoverProvider />,
+  render: (_args) => <AppWithPopoverProvider />,
   parameters: {
     controls: { disable: true },
     ...withSource(AppWithPopoverProviderSource, { stripImports: true }),

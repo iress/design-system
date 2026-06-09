@@ -23,7 +23,7 @@ export default {
 export const Default: Story = {};
 
 export const Provider: Story = {
-  render: () => <AppWithProvider />,
+  render: (_args) => <AppWithProvider />,
   parameters: {
     docs: {
       source: {

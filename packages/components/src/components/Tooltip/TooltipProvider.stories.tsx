@@ -21,7 +21,7 @@ export default {
 } as Meta<typeof IressTooltipProvider>;
 
 export const Provider: Story = {
-  render: () => <AppWithTooltipProvider />,
+  render: (_args) => <AppWithTooltipProvider />,
   parameters: {
     controls: { disable: true },
     ...withSource(AppWithTooltipProviderSource, {

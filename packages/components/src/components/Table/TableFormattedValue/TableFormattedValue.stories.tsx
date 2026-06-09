@@ -28,22 +28,23 @@ export const FormattedValue: Story = {
   argTypes: {
     ...disableArgTypes(['format', 'value']),
   },
-  render: () => (
+  render: (args) => (
     <IressTable
       caption="IressTableFormattedValue"
       rows={[
         {
           mode: 'string',
-          example: <IressTableFormattedValue value="string" format="string" />,
+          example: <IressTableFormattedValue {...args} value="string" format="string" />,
         },
         {
           mode: 'number',
-          example: <IressTableFormattedValue value="10000" format="number" />,
+          example: <IressTableFormattedValue {...args} value="10000" format="number" />,
         },
         {
           mode: 'date',
           example: (
             <IressTableFormattedValue
+              {...args}
               value={new Date('2025-11-14')}
               format="date"
             />
@@ -53,6 +54,7 @@ export const FormattedValue: Story = {
           mode: 'shortDate',
           example: (
             <IressTableFormattedValue
+              {...args}
               value={new Date('2025-11-14')}
               format="shortDate"
             />
@@ -62,6 +64,7 @@ export const FormattedValue: Story = {
           mode: 'isoDateTime',
           example: (
             <IressTableFormattedValue
+              {...args}
               value={new Date('2025-11-14')}
               format="isoDateTime"
             />
@@ -71,6 +74,7 @@ export const FormattedValue: Story = {
           mode: 'relativeTime',
           example: (
             <IressTableFormattedValue
+              {...args}
               value={fourDaysAgo}
               format="relativeTime"
             />
@@ -78,11 +82,11 @@ export const FormattedValue: Story = {
         },
         {
           mode: 'currency',
-          example: <IressTableFormattedValue value={10000} format="currency" />,
+          example: <IressTableFormattedValue {...args} value={10000} format="currency" />,
         },
         {
           mode: 'percent',
-          example: <IressTableFormattedValue value={50} format="percent" />,
+          example: <IressTableFormattedValue {...args} value={50} format="percent" />,
         },
       ]}
     />

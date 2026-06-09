@@ -28,7 +28,7 @@ export default {
 } as Meta<typeof IressHookForm>;
 
 export const HookForm: Story = {
-  render: () => <HookFormExample />,
+  render: (args) => <HookFormExample {...args} />,
   parameters: {
     ...withSource(HookFormExampleSource, { stripImports: true }),
   },

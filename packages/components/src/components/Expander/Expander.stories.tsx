@@ -51,7 +51,7 @@ export const Open: StoryObj<typeof IressExpander> = {
   },
 };
 
-export const Multiple: StoryObj<typeof IressExpander> = {
+export const Accordion: StoryObj<typeof IressExpander> = {
   argTypes: disableArgTypes([
     'open',
     'mode',

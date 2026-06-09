@@ -66,8 +66,9 @@ export const Fluid: Story = {
 };
 
 export const BreakpointTable: Story = {
-  render: () => (
+  render: (args) => (
     <IressTable
+      {...args}
       caption="Container breakpoints"
       rows={BREAKPOINTS.map((breakpoint) => ({
         breakpoint,
@@ -76,4 +77,5 @@ export const BreakpointTable: Story = {
       }))}
     />
   ),
+  tags: ['reference'],
 };

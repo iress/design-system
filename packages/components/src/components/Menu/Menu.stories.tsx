@@ -1,10 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressMenu, IressMenuItem, type IressMenuProps } from '.';
 import { IressInline } from '../Inline';
-import { useArgs } from 'storybook/preview-api';
-import { MenuRoleDescription } from './mocks/MenuRoleDescription';
-import { IressToggle } from '../Toggle';
-import { MENU_CHILDREN_OPTIONS } from './mocks/menuChildrenOptions';
 import {
   disableArgTypes,
   stylingProps,
@@ -12,10 +8,26 @@ import {
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
+import { MenuBasic } from './mocks/MenuBasic';
+import MenuBasicSource from './mocks/MenuBasic.tsx?raw';
+import { MenuNavigation } from './mocks/MenuNavigation';
+import MenuNavigationSource from './mocks/MenuNavigation.tsx?raw';
+import { MenuSlots } from './mocks/MenuSlots';
+import MenuSlotsSource from './mocks/MenuSlots.tsx?raw';
 import { MenuLayout } from './mocks/MenuLayout';
 import MenuLayoutSource from './mocks/MenuLayout.tsx?raw';
 import { MenuVariants } from './mocks/MenuVariants';
 import MenuVariantsSource from './mocks/MenuVariants.tsx?raw';
+import { MenuComplex } from './mocks/MenuComplex';
+import MenuComplexSource from './mocks/MenuComplex.tsx?raw';
+import { MenuHeadings } from './mocks/MenuHeadings';
+import MenuHeadingsSource from './mocks/MenuHeadings.tsx?raw';
+import { MenuDividers } from './mocks/MenuDividers';
+import MenuDividersSource from './mocks/MenuDividers.tsx?raw';
+import { MenuExtraInformation } from './mocks/MenuExtraInformation';
+import MenuExtraInformationSource from './mocks/MenuExtraInformation.tsx?raw';
+import { MenuRoles } from './mocks/MenuRoles';
+import MenuRolesSource from './mocks/MenuRoles.tsx?raw';
 
 type Story = StoryObj<IressMenuProps>;
 
@@ -24,13 +36,6 @@ export default {
   component: IressMenu,
   tags: ['updated'],
   argTypes: {
-    children: {
-      control: {
-        type: 'select',
-      },
-      options: Object.keys(MENU_CHILDREN_OPTIONS),
-      mapping: MENU_CHILDREN_OPTIONS,
-    },
     ...stylingProps,
   },
   parameters: {
@@ -42,48 +47,48 @@ export default {
   },
 } as Meta<typeof IressMenu>;
 
-export const Default: Story = {};
-
-export const Basic: Story = {
+export const Default: Story = {
   args: {
-    children: 'basic',
-    defaultSelected: '5',
+    children: [
+      <IressMenuItem key="1" value="1">
+        Menu item 1
+      </IressMenuItem>,
+      <IressMenuItem key="2" value="2">
+        Menu item 2
+      </IressMenuItem>,
+      <IressMenuItem key="3" value="3">
+        Menu item 3
+      </IressMenuItem>,
+    ],
   },
 };
 
-export const Complex: Story = {
-  args: {
-    children: 'complex',
-    maxWidth: '3/12',
+export const Basic: Story = {
+  render: (args) => <MenuBasic {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(MenuBasicSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
 export const SecondaryNavigation: Story = {
-  args: {
-    children: 'navigation',
-  },
-  render: (args) => (
-    <nav aria-label="Secondary">
-      <IressMenu {...args} />
-    </nav>
-  ),
-};
-
-export const Headings: Story = {
-  args: {
-    children: 'headings',
-  },
-};
-
-export const Dividers: Story = {
-  args: {
-    children: 'dividers',
+  render: (args) => <MenuNavigation {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(MenuNavigationSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
 export const Fluid: Story = {
   args: {
-    ...Basic.args,
+    children: [
+      <IressMenuItem key="1" value="1">
+        Menu item 1
+      </IressMenuItem>,
+      <IressMenuItem key="2" value="2">
+        Menu item 2
+      </IressMenuItem>,
+    ],
     fluid: true,
   },
 };
@@ -97,9 +102,6 @@ export const Layout: Story = {
 };
 
 export const NoWrap: Story = {
-  args: {
-    ...Basic.args,
-  },
   argTypes: {
     ...disableArgTypes(['children', 'noWrap']),
   },
@@ -116,69 +118,50 @@ export const NoWrap: Story = {
 };
 
 export const SlotProps: Story = {
-  args: {
-    children: 'slots',
-    role: 'menu',
+  render: (args) => <MenuSlots {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(MenuSlotsSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const Complex: Story = {
+  render: (args) => <MenuComplex {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(MenuComplexSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const Headings: Story = {
+  render: (args) => <MenuHeadings {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(MenuHeadingsSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const Dividers: Story = {
+  render: (args) => <MenuDividers {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(MenuDividersSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
 export const ExtraInformation: Story = {
-  args: {
-    children: 'extraInformation',
+  render: (args) => <MenuExtraInformation {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(MenuExtraInformationSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 
-export const ListRole: Story = {
-  args: {
-    children: 'basic',
-    defaultSelected: 5,
-  },
-  decorators: [
-    (Story, options) => {
-      const [{ multiSelect }, updateArgs] = useArgs<IressMenuProps>();
-
-      return (
-        <IressInline gap="md" verticalAlign="stretch">
-          <div style={{ minWidth: 200 }}>
-            <Story />
-          </div>
-          <MenuRoleDescription
-            role={options.args.role ?? 'list'}
-            style={{ flex: 1 }}
-          >
-            {options.args.role === 'listbox' && (
-              <IressToggle
-                mb="md"
-                checked={multiSelect}
-                onChange={() =>
-                  updateArgs({ multiSelect: !multiSelect as never })
-                }
-              >
-                Multi-select
-              </IressToggle>
-            )}
-          </MenuRoleDescription>
-        </IressInline>
-      );
-    },
-  ],
-};
-
-export const MenuRole: Story = {
-  ...ListRole,
-  args: {
-    ...ListRole.args,
-    role: 'menu',
-  },
-};
-
-export const ListboxRole: Story = {
-  ...ListRole,
-  args: {
-    ...ListRole.args,
-    children: 'selectable',
-    role: 'listbox',
-    'aria-label': 'Selectable listbox',
+export const Roles: Story = {
+  render: (args) => <MenuRoles {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(MenuRolesSource, { stripImports: true }),
   },
 };
 

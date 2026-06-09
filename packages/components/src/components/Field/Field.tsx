@@ -140,7 +140,6 @@ export const IressField = ({
         required={isReadOnly ? false : !!required}
       >
         {label}
-        {horizontal && hint && <FieldHintIcon hint={hint} />}
       </IressLabel>
     );
 

@@ -29,13 +29,6 @@ This is used internally by the \`IressExpander\` and \`IressTableBody\` componen
 
 export const Default: Story = {
   args: {},
-  render: (args) => (
-    <IressStack gap="md">
-      <IressText>
-        <IressExpanderChevron {...args} /> Closed (default)
-      </IressText>
-    </IressStack>
-  ),
 };
 
 export const States: Story = {
@@ -46,13 +39,13 @@ export const States: Story = {
       },
     },
   },
-  render: () => (
+  render: (args) => (
     <IressStack gap="md">
       <IressText>
-        <IressExpanderChevron open={false} /> Closed
+        <IressExpanderChevron {...args} open={false} /> Closed
       </IressText>
       <IressText>
-        <IressExpanderChevron open={true} /> Open
+        <IressExpanderChevron {...args} open={true} /> Open
       </IressText>
     </IressStack>
   ),
