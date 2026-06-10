@@ -5,6 +5,7 @@ import AppWithProviderSource from './mocks/AppWithProvider.tsx?raw';
 import {
   disableArgTypes,
   reactNodeArgType,
+  withSource,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
 
@@ -20,16 +21,10 @@ export default {
   },
 } as Meta<typeof IressProvider>;
 
-export const Default: Story = {};
-
-export const Provider: Story = {
+export const Default: Story = {
   render: (_args) => <AppWithProvider />,
   parameters: {
-    docs: {
-      source: {
-        code: AppWithProviderSource,
-        language: 'tsx',
-      },
-    },
+    controls: { disable: true },
+    ...withSource(AppWithProviderSource, { stripImports: true }),
   },
 };

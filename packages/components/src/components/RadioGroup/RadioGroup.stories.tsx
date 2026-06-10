@@ -22,7 +22,6 @@ type Story = StoryObj<typeof IressRadioGroup>;
 export default {
   title: 'Components/RadioGroup',
   component: IressRadioGroup,
-  subcomponents: { IressRadio },
   argTypes: {
     ...disableArgTypes(['children', 'onChange']),
     children: reactNodeArgType,

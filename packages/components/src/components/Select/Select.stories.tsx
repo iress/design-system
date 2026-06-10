@@ -20,6 +20,8 @@ import { OptionsLongText } from './mocks/SelectOptionLongText';
 import SelectOptionLongTextSource from './mocks/SelectOptionLongText.tsx?raw';
 import { SelectSizing } from './mocks/SelectSizing';
 import SelectSizingSource from './mocks/SelectSizing.tsx?raw';
+import { SelectLotsOfOptions } from './mocks/SelectLotsOfOptions';
+import SelectLotsOfOptionsSource from './mocks/SelectLotsOfOptions.tsx?raw';
 import {
   type IressSelectProps,
   IressDivider,
@@ -35,6 +37,7 @@ import {
   disableArgTypes,
   mergeStorybookConfig,
   withSource,
+  withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -148,7 +151,7 @@ export const AsyncOptions: Story = {
   render: (args) => <SelectAsync {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SelectAsyncSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SelectAsyncSource, { stripImports: true }),
   },
 };
 
@@ -156,7 +159,7 @@ export const AsyncOptionsMinSearchLength: Story = {
   render: (args) => <SelectAsyncMinLength {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SelectAsyncMinLengthSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SelectAsyncMinLengthSource, { stripImports: true }),
   },
 };
 
@@ -172,7 +175,7 @@ export const Sizing: Story = {
   render: (args) => <SelectSizing {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SelectSizingSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SelectSizingSource, { stripImports: true }),
   },
 };
 
@@ -180,16 +183,18 @@ export const CustomLabel: Story = {
   render: (args) => <SelectCustomLabel {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SelectCustomLabelSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SelectCustomLabelSource, { stripImports: true }),
   },
+  tags: ['recipe'],
 };
 
 export const CustomOptions: Story = {
   render: (args) => <SelectCustomOptions {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SelectCustomOptionsSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SelectCustomOptionsSource, { stripImports: true }),
   },
+  tags: ['recipe'],
 };
 
 export const CreateNewOption: Story = {
@@ -198,6 +203,7 @@ export const CreateNewOption: Story = {
     controls: { disable: true },
     ...withSource(SelectNewOptionSource, { stripImports: true }),
   },
+  tags: ['recipe'],
 };
 
 export const HeaderFooter: Story = {
@@ -236,10 +242,10 @@ export const Readonly: Story = {
 };
 
 export const LotsOfOptions: Story = {
-  args: {
-    ...SingleSelect.args,
-    options: async () => Promise.resolve(generateLabelValueMeta(200)),
-    autoHighlight: false,
+  render: (args) => <SelectLotsOfOptions {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(SelectLotsOfOptionsSource, { stripImports: true }),
   },
 };
 
@@ -257,6 +263,14 @@ export const Native: Story = {
     native: 'md',
     defaultValue: '2',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'This shows how to set the native prop to use the native select element instead of the custom dropdown. This is useful for mobile devices or when you want to leverage the native select behavior and styling.',
+      }
+    },
+  },
+  decorators: [withBreakpointLabel()],
 };
 
 export const Disabled: Story = {

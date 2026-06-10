@@ -7,7 +7,7 @@ import { stylingProps } from '@iress-oss/ids-storybook-config';
 type Story = StoryObj<typeof IressRadioMark>;
 
 export default {
-  title: 'Components/RadioMark',
+  title: 'Components/Radio/RadioMark',
   component: IressRadioMark,
   tags: ['updated'],
   argTypes: {

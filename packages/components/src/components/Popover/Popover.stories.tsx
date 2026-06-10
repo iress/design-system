@@ -14,6 +14,10 @@ import { PopoverParentContainer } from './mocks/PopoverParentContainer';
 import PopoverParentContainerSource from './mocks/PopoverParentContainer.tsx?raw';
 import { UsePopoverExample } from './mocks/UsePopoverExample';
 import UsePopoverExampleSource from './mocks/UsePopoverExample.tsx?raw';
+import { PopoverWithMenu } from './mocks/PopoverWithMenu';
+import PopoverWithMenuSource from './mocks/PopoverWithMenu.tsx?raw';
+import { PopoverWithListbox } from './mocks/PopoverWithListbox';
+import PopoverWithListboxSource from './mocks/PopoverWithListbox.tsx?raw';
 import {
   disableArgTypes,
   withSource,
@@ -307,5 +311,23 @@ export const FocusableChildren: Story = {
   parameters: {
     controls: { disable: true },
     ...withSource(UsePopoverExampleSource, { stripImports: true }),
+  },
+};
+
+export const WithMenu: Story = {
+  tags: ['recipe'],
+  render: (args) => <PopoverWithMenu {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(PopoverWithMenuSource, { stripImports: true, stripExportFunction: true }),
+  },
+};
+
+export const WithListbox: Story = {
+  tags: ['recipe'],
+  render: (args) => <PopoverWithListbox {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(PopoverWithListboxSource, { stripImports: true }),
   },
 };

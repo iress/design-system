@@ -16,6 +16,7 @@ import {
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import { cssVars } from '@iress-oss/ids-tokens';
 
 type Story = StoryObj<typeof IressSelectBody>;
 
@@ -55,7 +56,7 @@ export const Body: Story = {
     ),
     footer: <IressPanel>This will always be fixed to the bottom</IressPanel>,
     style: {
-      border: '1px solid var(--iress-g-border-color)',
+      border: `1px solid ${cssVars.colour.neutral[30]}`,
     },
   },
 };

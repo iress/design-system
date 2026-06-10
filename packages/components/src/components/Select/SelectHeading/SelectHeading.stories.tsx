@@ -30,7 +30,7 @@ export default {
 
 export const Heading: Story = {
   args: {
-    children: <h2>Selected (2)</h2>,
+    children: 'Selected (2)',
     clearAll: true,
   },
 };
