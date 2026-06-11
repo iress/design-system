@@ -16,7 +16,7 @@ export function SkeletonCircle() {
       </IressButton>
       {loading && <IressSkeleton mode="circle" width="150" height="150" />}
       {!loading && (
-        <IressPlaceholder width="150" height="150" style={{ borderRadius: '50%' }}>
+        <IressPlaceholder width="150" height="150" borderRadius="50%">
           Image
         </IressPlaceholder>
       )}

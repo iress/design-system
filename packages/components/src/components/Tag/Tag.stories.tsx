@@ -3,7 +3,6 @@ import { IressTag } from '.';
 import { IressPopover } from '../Popover';
 import { IressButton } from '../Button';
 import { IressIcon } from '../Icon';
-import { IressPanel } from '../Panel';
 import {
   withSource,
   withJsxTransformer,
@@ -129,7 +128,7 @@ export const CustomButton: Story = {
         }
         align="bottom-start"
       >
-        <IressPanel>Some actions go in here</IressPanel>
+        Some actions go in here
       </IressPopover>
     ),
   },

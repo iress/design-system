@@ -24,6 +24,6 @@ export const Body: Story = {
   render: (args) => <TableGroupedRows {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(GroupedRowsSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(GroupedRowsSource, { stripImports: true }),
   },
 };

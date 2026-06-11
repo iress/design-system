@@ -15,6 +15,8 @@ import { TableSortingFn } from './mocks/TableSortingFn';
 import TableSortingFnSource from './mocks/TableSortingFn.tsx?raw';
 import { TableVirtualised } from './mocks/TableVirtualised';
 import TableVirtualisedSource from './mocks/TableVirtualised.tsx?raw';
+import { TableCompact } from './mocks/TableCompact';
+import TableCompactSource from './mocks/TableCompact.tsx?raw';
 import { type Row } from '@tanstack/react-table';
 import {
   withJsxTransformer,
@@ -52,11 +54,6 @@ export default {
   tags: ['updated'],
 } as Meta<typeof IressTable>;
 
-export const Default: Story = {
-  args: {
-    caption: 'Data table',
-  },
-};
 
 export const AutomaticColumns: Story = {
   args: {
@@ -93,7 +90,7 @@ export const CustomColumns: Story = {
   render: (args) => <TableCustomColumns {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TableCustomColumnsSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TableCustomColumnsSource, { stripImports: true }),
   },
 };
 
@@ -105,7 +102,7 @@ export const Formats: Story = {
   render: (args) => <TableFormats {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TableFormatsSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TableFormatsSource, { stripImports: true }),
   },
 };
 
@@ -114,7 +111,7 @@ export const Sorting: Story = {
   render: (args) => <TableSorting {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TableSortingSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TableSortingSource, { stripImports: true }),
   },
 };
 
@@ -123,7 +120,7 @@ export const CustomSortingLogic: Story = {
   render: (args) => <TableSortingFn {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TableSortingFnSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TableSortingFnSource, { stripImports: true }),
   },
 };
 
@@ -132,7 +129,7 @@ export const Filtering: Story = {
   render: (args) => <TableFiltering {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TableFilteringSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TableFilteringSource, { stripImports: true }),
   },
 };
 
@@ -143,6 +140,7 @@ export const ServerSideFiltering: Story = {
     controls: { disable: true },
     ...withSource(TableFilteringServerSideSource, { stripImports: true }),
   },
+  tags: ['recipe'],
 };
 
 export const Width: Story = {
@@ -377,39 +375,10 @@ export const RowProps: Story = {
 };
 
 export const Compact: Story = {
-  ...AutomaticColumns,
-  args: {
-    ...AutomaticColumns.args,
-    scope: 'col',
-    compact: true,
-    columns: [
-      {
-        key: 'investment_name',
-        label: 'Investment',
-        divider: true,
-        sort: 'asc',
-      },
-      {
-        key: 'investmentDate',
-        label: 'Date',
-        format: 'date',
-        sort: true,
-      },
-      {
-        key: 'totalPercentage',
-        label: 'Share',
-        format: 'percent',
-        sort: true,
-      },
-    ],
-    alternate: true,
-    removeRowBorders: true,
-    rowProps: (row: Row<{ investment_name?: string }>) => ({
-      bg:
-        row.original.investment_name === 'VODAFONE GRP'
-          ? 'colour.data.subtle.30'
-          : undefined,
-    }),
+  render: (args) => <TableCompact {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(TableCompactSource, { stripImports: true, stripExportFunction: true }),
   },
 };
 

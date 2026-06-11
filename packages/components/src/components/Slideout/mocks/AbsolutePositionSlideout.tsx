@@ -38,7 +38,7 @@ export function AbsolutePositionSlideout() {
           style={
             {
               position: 'absolute',
-            } as never
+            }
           }
         >
           Slideout content

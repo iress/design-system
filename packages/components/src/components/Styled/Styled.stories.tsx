@@ -15,7 +15,7 @@ export default {
 
 export const Default: Story = {
   args: {
-    children: 'This is styled content using Panda CSS',
+    children: 'This is styled content using design tokens from the Iress Design System.',
     p: 'spacing.4',
     bg: 'colour.neutral.20',
     borderRadius: 'radius.2',

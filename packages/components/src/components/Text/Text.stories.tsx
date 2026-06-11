@@ -86,25 +86,26 @@ export const HeadingsWithIcons: HeadingStory = {
   render: (args) => (
     <IressStack>
       <IressText {...args} element="h1">
-        <IressIcon name="sentiment_calm" />
-        <span>H1 heading with icons</span>
-        <IressIcon name="sentiment_calm" />
+        <IressIcon name="sentiment_calm" pr="sm" />
+        H1 heading with icons
+        <IressIcon name="sentiment_calm" pl="sm" />
       </IressText>
       <IressText {...args} element="h2">
-        <IressIcon name="sentiment_calm" />
-        <span>H2 heading with icons</span>
-        <IressIcon name="sentiment_calm" />
+        <IressIcon name="sentiment_calm" pr="sm" />
+        H2 heading with icons
+        <IressIcon name="sentiment_calm" pl="sm" />
       </IressText>
       <IressText {...args} element="h3">
-        <IressIcon name="sentiment_calm" />
-        <span>H3 heading with icons</span>
-        <IressIcon name="sentiment_calm" />
+        <IressIcon name="sentiment_calm" pr="sm" />
+        H3 heading with icons
+        <IressIcon name="sentiment_calm" pl="sm" />
       </IressText>
     </IressStack>
   ),
   argTypes: {
     ...disableArgTypes(['element']),
   },
+  tags: ['recipe']
 };
 
 export const TypographicBlock: Story = {

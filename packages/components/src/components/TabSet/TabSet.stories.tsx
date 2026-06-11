@@ -46,7 +46,21 @@ export default {
   },
 } as Meta<typeof IressTabSet>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    children: [
+      <IressTab key="tab1" label="Tab 1">
+        Tab 1 content
+      </IressTab>,
+      <IressTab key="tab2" label="Tab 2">
+        Tab 2 content
+      </IressTab>,
+      <IressTab key="tab3" label="Tab 3">
+        Tab 3 content
+      </IressTab>,
+    ],
+  },
+};
 
 export const TabNavigation: Story = {
   args: {
@@ -139,12 +153,12 @@ export const DynamicBadge: Story = {
   render: (args) => <TabsWithDynamicBadge {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TabsWithDynamicBadgeSource, { stripImports: true }),
     docs: {
       description: {
         story:
           'Toggle the pill on the active tab to see the active indicator resize and reposition automatically. This demonstrates that `ResizeObserver` correctly tracks tab size changes at runtime.',
       },
+      ...withSource(TabsWithDynamicBadgeSource, { stripImports: true }).docs,
     },
   },
 };

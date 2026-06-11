@@ -135,7 +135,7 @@ export const Default: Story = {
 };
 
 export const DefaultShow: Story = {
-  tags: ['!autodocs', 'boo'],
+  tags: ['!autodocs'],
   args: {
     children: 'Modal content',
     footer: 'Footer slot',

@@ -18,11 +18,15 @@ import { SlideoutMicrofrontend } from './mocks/SlideoutMicrofrontend';
 import SlideoutMicrofrontendSource from './mocks/SlideoutMicrofrontend.tsx?raw';
 import { SlideoutWithButton } from './mocks/SlideoutWithButton';
 import SlideoutWithButtonSource from './mocks/SlideoutWithButton.tsx?raw';
+import { SlideoutWithFooter } from './mocks/SlideoutWithFooter';
+import SlideoutWithFooterSource from './mocks/SlideoutWithFooter.tsx?raw';
 import {
   disableArgTypes,
   withSource,
   reactNodeArgType,
   stylingProps,
+  withBreakpointLabel,
+  mergeStorybookConfig,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -81,6 +85,7 @@ export const DefaultShow: Story = {
       <IressSlideout {...args} />
     </IressPanel>
   ),
+  tags: ['!autodocs'],
 };
 
 export const ShowWithState: Story = {
@@ -147,6 +152,9 @@ export const Modes: Story = {
       </IressPanel>
     );
   },
+  decorators: [
+    withBreakpointLabel(),
+  ]
 };
 
 export const Position: Story = {
@@ -169,14 +177,11 @@ export const Size: Story = {
 
 export const Footer: Story = {
   ...Default,
-  args: {
-    ...Default.args,
-    footer: <IressButton>Footer button</IressButton>,
+  render: (args) => <SlideoutWithFooter {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(SlideoutWithFooterSource, { stripImports: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['footer', 'show']),
-  },
-  render: (args) => <SlideoutWithButton {...args} />,
 };
 
 export const AbsolutePosition: Story = {
@@ -193,7 +198,17 @@ export const Microfrontend: Story = {
   render: (args) => <SlideoutMicrofrontend {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SlideoutMicrofrontendSource, { stripImports: true }),
     layout: 'fullscreen',
+    ...mergeStorybookConfig(
+      withSource(SlideoutMicrofrontendSource, { stripImports: true }),
+      {
+        docs: {
+          story: {
+            height: '600px',
+          },
+        },
+      },
+    )
   },
+  tags: ['recipe'],
 };

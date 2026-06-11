@@ -28,19 +28,13 @@ export default {
   },
 } as Meta<typeof IressSkipLink>;
 
-export const Default: Story = {
-  args: {
-    href: '#main',
-  },
-};
-
 export const SkipLink: Story = {
   args: {
     href: '#main',
     id: 'skip-link',
   },
   render: (args) => (
-    <IressContainer>
+    <IressContainer py="xl">
       <IressSkipLink {...args} />
       <main id="main" tabIndex={-1}>
         <IressPanel>
@@ -73,5 +67,6 @@ export const SkipLink: Story = {
     ...withJsxTransformer({
       showFunctions: true,
     }),
+    layout: 'fullscreen',
   },
 };
