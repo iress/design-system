@@ -21,6 +21,7 @@ describe('useDropdownMenuFlags', () => {
 
     expect(hook.result.current.showHeader).toBeFalsy();
     expect(hook.result.current.showResults).toBeFalsy();
+    expect(hook.result.current.showLoading).toBeFalsy();
     expect(hook.result.current.showNoResults).toBeFalsy();
   });
 
@@ -73,6 +74,32 @@ describe('useDropdownMenuFlags', () => {
       );
 
       expect(hook.result.current.showNoResults).toBeTruthy();
+    });
+  });
+
+  describe('showLoading', () => {
+    it('shows loading when loading and no results', () => {
+      const hook = renderHook(() =>
+        useDropdownMenuFlags({
+          ...DEFAULT_PROPS,
+          loading: true,
+          results: [],
+        }),
+      );
+
+      expect(hook.result.current.showLoading).toBeTruthy();
+    });
+
+    it('does not show loading when results exist', () => {
+      const hook = renderHook(() =>
+        useDropdownMenuFlags({
+          ...DEFAULT_PROPS,
+          loading: true,
+          results: MOCK_LABEL_VALUE_META,
+        }),
+      );
+
+      expect(hook.result.current.showLoading).toBeFalsy();
     });
   });
 });

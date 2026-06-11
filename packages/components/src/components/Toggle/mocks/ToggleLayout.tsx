@@ -5,28 +5,28 @@ export function ToggleLayout() {
     <IressStack gap="lg">
       <IressText>
         <h3>inline</h3>
-        <IressPanel bg="alt">
+        <IressPanel>
           <IressToggle layout="inline">Toggle</IressToggle>
         </IressPanel>
       </IressText>
       <IressText>
         <h3>inline-between</h3>
-        <IressPanel bg="alt">
-          <IressToggle layout="inline-between" checked>
+        <IressPanel>
+          <IressToggle layout="inline-between" defaultChecked>
             Toggle
           </IressToggle>
         </IressPanel>
       </IressText>
       <IressText>
         <h3>inline-reverse</h3>
-        <IressPanel bg="alt">
+        <IressPanel>
           <IressToggle layout="inline-reverse">Toggle</IressToggle>
         </IressPanel>
       </IressText>
       <IressText>
         <h3>stack</h3>
-        <IressPanel bg="alt">
-          <IressToggle layout="stack" checked>
+        <IressPanel>
+          <IressToggle layout="stack" defaultChecked>
             Toggle
           </IressToggle>
         </IressPanel>

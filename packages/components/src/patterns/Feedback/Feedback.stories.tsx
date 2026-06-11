@@ -1,14 +1,14 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { FeedbackExample } from './mocks/FeedbackExample';
-import FeedbackExampleSource from './mocks/FeedbackExample.tsx?raw';
-import { DecisionTreeDecorator } from './mocks/DecisionTreeDecorator';
+import { FeedbackDecisionTree } from './mocks/FeedbackDecisionTree';
+import FeedbackDecisionTreeSource from './mocks/FeedbackDecisionTree.tsx?raw';
+import { withSource } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
-type Story = StoryObj<typeof FeedbackExample>;
+type Story = StoryObj<typeof FeedbackDecisionTree>;
 
 export default {
   title: 'Patterns/Feedback',
-  component: FeedbackExample,
+  component: FeedbackDecisionTree,
   tags: ['beta'],
   parameters: {
     docs: {
@@ -22,22 +22,15 @@ export default {
     controls: {
       disable: true,
     },
+    idsConfig: {
+      autodocsTemplate: 'landing',
+    },
   },
-} as Meta<typeof FeedbackExample>;
+} as Meta<typeof FeedbackDecisionTree>;
 
 export const DecisionTree: Story = {
-  decorators: [
-    (Story) => (
-      <DecisionTreeDecorator>
-        <Story />
-      </DecisionTreeDecorator>
-    ),
-  ],
+  render: (_args) => <FeedbackDecisionTree />,
   parameters: {
-    docs: {
-      source: {
-        code: FeedbackExampleSource,
-      },
-    },
+    ...withSource(FeedbackDecisionTreeSource, { stripImports: true }),
   },
 };

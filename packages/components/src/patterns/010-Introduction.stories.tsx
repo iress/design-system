@@ -5,6 +5,7 @@ import {
   IressStack,
   IressCol,
   IressSkeleton,
+  IressContainer,
 } from '@/main';
 import { Suspense } from 'react';
 
@@ -35,7 +36,8 @@ const patterns: {
 
 const Reference = () => {
   return (
-    <IressStack gap="lg" mt="lg">
+    <IressContainer>
+        <IressStack gap="lg" my="lg" maxWidth="overlay.lg" mx="auto">
       <IressRow gutter="lg">
         {patterns.map(({ Thumbnail, ...component }) => (
           <IressCol key={component.heading} span={{ md: 3 }}>
@@ -57,6 +59,7 @@ const Reference = () => {
         ))}
       </IressRow>
     </IressStack>
+    </IressContainer>
   );
 };
 
@@ -66,11 +69,11 @@ export default {
   title: 'Patterns/Introduction',
   component: Reference,
   parameters: {
-    chromatic: {
-      disableSnapshot: true,
-    },
-    controls: {
-      disable: true,
+    chromatic: { disableSnapshot: true },
+    controls: { disable: true },
+    layout: 'fullscreen',
+    idsConfig: {
+      autodocsTemplate: 'landing',
     },
   },
 } as Meta<typeof Reference>;

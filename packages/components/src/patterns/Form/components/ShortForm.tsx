@@ -97,7 +97,7 @@ const ShortFormPattern = <T extends FieldValues, TContext = object>(
 
   const heading = useMemo(() => {
     if (typeof headingProp === 'string') {
-      return <IressText element="h2">{headingProp}</IressText>;
+      return <IressText element="h2" mb="spacing.4">{headingProp}</IressText>;
     }
     return headingProp;
   }, [headingProp]);

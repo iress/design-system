@@ -48,6 +48,12 @@ export default {
 export const Default: SingleStory = {
   args: {
     label: 'Select an option',
+    options: [
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+    ],
+    container: document.body,
   },
 };
 
@@ -75,27 +81,16 @@ export const MultiSelect: Story = {
   },
 };
 
-export const Options: SingleStory = {
-  args: {
-    options: [
-      { label: 'Option 1', value: 'opt1' },
-      { label: 'Option 2', value: 'opt2' },
-      { label: 'Option 3', value: 'opt3' },
-    ],
-    label: 'Options',
-  },
-};
-
 export const AsyncOptions: SingleStory = {
   render: (args) => <ControlledDropdownMenuAsync {...args} />,
   parameters: {
-    ...withSource(ControlledDropdownMenuAsyncSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ControlledDropdownMenuAsyncSource, { stripImports: true }),
   },
 };
 
 export const InitialOptions: SingleStory = {
   args: {
-    ...Options.args,
+    ...Default.args,
     label: 'Select an option',
     initialOptions: [...Array(3).keys()].map((number) => ({
       label: `Favourite option ${number + 1}`,
@@ -179,12 +174,13 @@ export const ComplexOptions: SingleStory = {
         ],
       },
     ],
+    container: document.body,
   },
 };
 
 export const InputProps: SingleStory = {
   args: {
-    ...Options.args,
+    ...Default.args,
     inputProps: {
       placeholder: 'Search some stuff...',
     },
@@ -194,21 +190,21 @@ export const InputProps: SingleStory = {
 
 export const Searchable: SingleStory = {
   args: {
-    ...Options.args,
+    ...Default.args,
     searchable: true,
   },
 };
 
 export const ResetFilters: SingleStory = {
   args: {
-    ...Options.args,
+    ...Default.args,
     visibleResetButton: true,
   },
 };
 
 export const NoResultsText: SingleStory = {
   args: {
-    ...Options.args,
+    ...Default.args,
     inputProps: {
       placeholder: 'Type "no" to see the no results text',
     },
@@ -223,7 +219,7 @@ export const NoResultsText: SingleStory = {
 
 export const PopoverProps: SingleStory = {
   args: {
-    ...Options.args,
+    ...Default.args,
     footer: (
       <>
         <IressMenuDivider />
@@ -235,7 +231,7 @@ export const PopoverProps: SingleStory = {
 
 export const SelectedOptionsText: Story = {
   args: {
-    ...(Options as Story).args,
+    ...(Default as Story).args,
     multiSelect: true,
     selectedOptionsText: ' - {{numOptions}}',
   },
@@ -243,8 +239,10 @@ export const SelectedOptionsText: Story = {
 
 export const StylingProps: SingleStory = {
   args: {
-    ...Options.args,
-    p: 'spacing.4',
+    ...Default.args,
+    activatorStyle: {
+      bg: 'colour.data.subtle.10',
+    }
   },
-  render: (args) => <IressDropdownMenu {...args} p="spacing.4" />,
+  render: (args) => <IressDropdownMenu {...args} p="spacing.2" borderRadius="radius.system.button" bg="colour.accent.surface" />,
 };

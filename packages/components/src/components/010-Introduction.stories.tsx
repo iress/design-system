@@ -12,6 +12,7 @@ import {
   IressInline,
   type LabelValueMeta,
   IressSkeleton,
+  IressContainer,
 } from '@/main';
 import { useState, useMemo, Suspense } from 'react';
 
@@ -189,7 +190,8 @@ const Reference = () => {
   }, [searchQuery, results, selectedTags]);
 
   return (
-    <IressStack gap="lg" mt="lg">
+    <IressContainer>
+    <IressStack gap="lg" my="lg" maxWidth="overlay.lg" mx="auto">
       <IressInline gap="md" horizontalAlign="between" verticalAlign="bottom">
         <IressField label="Search components" mb="none" stretch>
           <IressInput
@@ -233,6 +235,7 @@ const Reference = () => {
         ))}
       </IressRow>
     </IressStack>
+    </IressContainer>
   );
 };
 
@@ -242,11 +245,11 @@ export default {
   title: 'Components/Introduction',
   component: Reference,
   parameters: {
-    chromatic: {
-      disableSnapshot: true,
-    },
-    controls: {
-      disable: true,
+    chromatic: { disableSnapshot: true },
+    controls: { disable: true },
+    layout: 'fullscreen',
+    idsConfig: {
+      autodocsTemplate: 'landing',
     },
   },
 } as Meta<typeof Reference>;
