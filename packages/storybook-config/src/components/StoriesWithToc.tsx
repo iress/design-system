@@ -1,4 +1,4 @@
-import { Description } from '@storybook/addon-docs/blocks';
+import { Description, Story } from '@storybook/addon-docs/blocks';
 import { useEffect } from 'react';
 import { ComponentCanvas } from './ComponentCanvas';
 import {
@@ -8,6 +8,7 @@ import {
   IressMenuItem,
   IressPanel,
   IressRow,
+  IressStyled,
 } from '@iress-oss/ids-components';
 import type { BroadcastHashEvent } from '../types';
 import { cssVars } from '@iress-oss/ids-tokens';
@@ -96,9 +97,11 @@ export const StoryToc = ({
 export const StoriesWithToc = ({
   stories,
   hashPrefix,
+  storyOnly = false,
 }: {
   stories: StoryItem[];
   hashPrefix?: string;
+  storyOnly?: boolean;
 }) => (
   <IressRow gutter="lg">
     <IressCol span={{ xs: 12, md: 8, lg: 9, xl: 10 }} maxWidth="10/12">
@@ -106,7 +109,8 @@ export const StoriesWithToc = ({
         <div key={story.id}>
           <h3 id={story.id}>{story.name}</h3>
           <Description of={story.moduleExport as never} />
-          <ComponentCanvas of={story.moduleExport as never} refresh />
+          {!storyOnly && <ComponentCanvas of={story.moduleExport as never} refresh />}
+          {storyOnly && <IressStyled mb="spacing.6"><Story of={story.moduleExport as never} /></IressStyled>}
         </div>
       ))}
     </IressCol>

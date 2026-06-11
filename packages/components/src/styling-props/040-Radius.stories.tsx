@@ -1,0 +1,43 @@
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressInput, IressPanel } from '@/main';
+
+type Story = StoryObj<typeof IressPanel>;
+
+export default {
+  title: 'Styling props/Radius',
+  component: IressPanel,
+  parameters: {
+    idsConfig: {
+      autodocsTemplate: 'default',
+    }
+  },
+} as Meta<typeof IressPanel>;
+
+export const borderRadius: Story = {
+  args: {
+    borderRadius: 'radius.system.layout',
+  },
+  parameters: {
+    controls: { include: ['borderRadius'] },
+  },
+  render: ({ borderRadius }) => (
+    <IressInput
+      borderRadius={borderRadius}
+      px="spacing.4"
+      py="spacing.2"
+      placeholder="Search everything"
+    />
+  ),
+};
+
+export const noBorderRadius: Story = {
+  ...borderRadius,
+  args: {
+    borderRadius: 'none',
+  },
+  render: ({ borderRadius }) => (
+    <IressPanel borderRadius={borderRadius} bg="alt">
+      No radius here
+    </IressPanel>
+  ),
+};

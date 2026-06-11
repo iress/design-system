@@ -718,8 +718,8 @@ Performed after Phases 7, 9, 10, and 11.3 are complete:
 - [ ] **Step 6:** Remove `packages/*/.ai/*` ignore from `.gitignore`
 - [ ] **Step 7:** Verify CI builds pass
 - [ ] **Step 8:** Verify `yarn dev` watcher correctly updates `.ai/` on content/story changes
-- [ ] **Step 9:** Remove deprecated `withCustomSource` / `withTransformedRawSource` exports (replaced by `withSource`)
-- [ ] **Step 10:** Remove old `withCustomSource.test.ts`
+- [x] **Step 9:** Remove deprecated `withCustomSource` / `withTransformedRawSource` exports (replaced by `withSource`)
+- [x] **Step 10:** Remove old `withCustomSource.test.ts`
 
 ### Task 12.4: Update `IDS-FULL-REFERENCE.md` generation
 

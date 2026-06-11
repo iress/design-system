@@ -106,6 +106,12 @@ export const ComponentAutoDocs = () => {
   );
   const hasReferences = references.length > 0;
 
+  const migrations = restOfStories.filter(
+    (story) =>
+      story.tags?.includes('migration'),
+  );
+  const hasMigrations = migrations.length > 0;
+
   // Dynamic tabs from `tab:<name>` tags (e.g. tags: ['tab:configuration'])
   const customTabs = (() => {
     const tabs = new Map<string, StoryItem[]>();
@@ -124,6 +130,7 @@ export const ComponentAutoDocs = () => {
     (story) =>
       !recipes.includes(story) &&
       !references.includes(story) &&
+      !migrations.includes(story) &&
       !story.tags?.some((t: string) => t.startsWith('tab:')),
   );
   const hasExamples = examples.length > 0;
@@ -221,6 +228,15 @@ export const ComponentAutoDocs = () => {
               stories={references}
               type="references"
               description="View the background and rationale for how this component was designed and built, including links to relevant Figma designs, RFC discussions, and PRs."
+            />
+          </IressTab>
+        )}
+        {hasMigrations && (
+          <IressTab label="Migration" value="migration">
+            <StoriesTabContent
+              stories={migrations}
+              type="migration"
+              description="Migration guides for upgrading from previous versions of this component."
             />
           </IressTab>
         )}

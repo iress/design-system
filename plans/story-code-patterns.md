@@ -1076,7 +1076,14 @@ This reduces the number of helper patterns from 3+ down to 1.
   - Exports `transformSource` for reuse by the derive script (no Storybook deps)
   - Backwards-compatible: `withCustomSource` and `withTransformedRawSource` re-exported as deprecated aliases
   - 20 tests passing (`packages/storybook-config/src/helpers/withSource.test.ts`)
-- [ ] **Step 2: Migrate ~50 complex render+args stories to mock files**
+- [x] **Step 2: Migrate ~50 complex render+args stories to mock files**
+  - All `render: () =>` patterns eliminated (71 stories converted to `render: (args) =>`)
+  - Migrated complex inline stories to self-contained mock files (Field, Input, Menu, Modal, Popover, Select, Slideout, TabSet, Table, Toggle, Provider, Feedback, SideNav, Form patterns)
+  - Fixed `withSource`/`docs` parameter merge conflicts across multiple components
+  - Fixed `stripExportFunction: true` misuse on stateful mocks (Select, Table, Icon)
+  - Added `!autodocs` tag support to custom ComponentAutoDocs template
+  - Removed unused `MENU_CHILDREN_OPTIONS` mapping pattern
+  - Storybook fully tested — all code panels show complete, copy-paste-able examples
 - [ ] **Step 3: Create `createMeta` factory** (Phase 12.10 from guidelines plan)
 - [ ] **Step 4: Build `translate.ts`** (see `plans/ai-docs-pipeline-consolidation.md`)
 

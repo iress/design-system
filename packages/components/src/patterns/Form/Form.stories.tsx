@@ -286,7 +286,7 @@ export const UpdateErrorSummaryOnSubmit: Story = {
   },
 };
 
-export const StateManagementV4ToV5: Story = {
+export const StateManagementVersion4ToVersion5: Story = {
   parameters: {
     controls: { disable: true },
   },
@@ -367,9 +367,10 @@ export const App = () => (
 );`}
     />
   ),
+  tags: ['migration'],
 };
 
-export const ValidationV4ToV5: Story = {
+export const ValidationVersion4ToVersion5: Story = {
   parameters: {
     controls: { disable: true },
   },
@@ -414,6 +415,7 @@ export const App = () => (
 );`}
     />
   ),
+  tags: ['migration'],
 };
 
 // Recipe stories (merged from FormRecipes.stories.tsx)

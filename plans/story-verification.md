@@ -115,8 +115,8 @@ For each story file, check:
 
 ### Known tech debt (flag as warning, planned migration)
 
-- [ ] `renderWithButtonFn` factory in Modal/Slideout → planned: replace with mock files
-- [ ] `DiffViewer` stories in Modal/Slideout/Form → planned: move to guidelines
+- [x] `renderWithButtonFn` factory in Modal/Slideout → replaced with mock files
+- [x] `DiffViewer` stories in Modal/Slideout/Form → kept in Form (planned: move to guidelines)
 
 ### Visual checks (via Chrome DevTools MCP on http://localhost:6006)
 
@@ -318,8 +318,8 @@ Each component has exactly **one** `.stories.tsx` file. This keeps maintenance s
 **Planned merges:**
 
 - [x] `Card/CardSlots.stories.tsx` → merged into `Card/Card.stories.tsx` with `tags: ['slots']`
-- [ ] `patterns/Form/components/ShortForm.stories.tsx` + `LongForm.stories.tsx` → merge into `patterns/Form/Form.stories.tsx`
-- [ ] `patterns/Loading/components/*.stories.tsx` (6 files) → merge into `patterns/Loading/Loading.stories.tsx`
+- [x] `patterns/Form/components/ShortForm.stories.tsx` + `LongForm.stories.tsx` → merge into `patterns/Form/Form.stories.tsx`
+- [x] `patterns/Loading/components/*.stories.tsx` (6 files) → merge into `patterns/Loading/Loading.stories.tsx`
 
 **Stays as separate file (reference stories):**
 
@@ -334,13 +334,13 @@ Each component has exactly **one** `.stories.tsx` file. This keeps maintenance s
 
 ## Global checks (run once)
 
-- [ ] No `withCustomSource` or `withTransformedRawSource` usage anywhere in `packages/components/src/`
-- [ ] No remaining `*Recipes.stories.tsx` files (all merged)
-- [ ] No `<CurrentBreakpoint` usage in any stories file
-- [ ] No `(resize to see changes)` text in any stories file
-- [ ] No `supportedCardSlots` or other external variable references in args
-- [ ] No `internalArgs` usage (removed helper)
-- [ ] No `stripInternalPropsFromSource` usage (removed helper)
+- [x] No `withCustomSource` or `withTransformedRawSource` usage anywhere in `packages/components/src/`
+- [x] No remaining `*Recipes.stories.tsx` files (all merged)
+- [x] No `<CurrentBreakpoint` usage in any stories file
+- [x] No `(resize to see changes)` text in any stories file
+- [x] No `supportedCardSlots` or other external variable references in args
+- [x] No `internalArgs` usage (removed helper)
+- [x] No `stripInternalPropsFromSource` usage (removed helper)
 - [ ] `sourceReplacements` default in `getPreview` handles `container: {}`
 - [ ] `withSource` `transformSource` handles `container: {}`
 - [ ] `withBreakpointLabel` exported from storybook-config (factory function)
