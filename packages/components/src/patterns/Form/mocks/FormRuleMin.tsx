@@ -1,4 +1,4 @@
-import { IressForm, IressFormField, IressInput, IressButton, IressStack } from '@/main';
+import { IressForm, IressFormField, IressInput, IressButton } from '@/main';
 
 /**
  * The `min` rule works with numeric inputs.
@@ -6,7 +6,6 @@ import { IressForm, IressFormField, IressInput, IressButton, IressStack } from '
 export function FormRuleMin() {
   return (
     <IressForm>
-      <IressStack gap="md">
         <IressFormField
           label="Default message"
           name="default"
@@ -24,7 +23,6 @@ export function FormRuleMin() {
         <IressButton type="submit" mode="primary">
           Validate
         </IressButton>
-      </IressStack>
     </IressForm>
   );
 }

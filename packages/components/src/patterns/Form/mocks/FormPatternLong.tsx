@@ -3,7 +3,6 @@ import {
   IressText,
   IressFormField,
   IressInput,
-  IressStack,
   IressInline,
   IressForm,
 } from '@/main';
@@ -27,12 +26,12 @@ export function FormPatternLong() {
         </IressText>
       }
       actions={
-        <IressInline gap="md">
+        <IressInline gap="sm" noWrap mb="spacing.2">
+          <IressButton type="reset" mode="quaternary">
+            Cancel
+          </IressButton>
           <IressButton type="submit" mode="primary">
             Save
-          </IressButton>
-          <IressButton type="reset" mode="secondary">
-            Cancel
           </IressButton>
         </IressInline>
       }
@@ -42,26 +41,24 @@ export function FormPatternLong() {
         </IressText>
       }
     >
-      <IressStack gap="md">
-        <IressFormField
-          label="First name"
-          name="firstName"
-          rules={{ required: 'First name is required' }}
-          render={(controlledProps) => <IressInput {...controlledProps} />}
-        />
-        <IressFormField
-          label="Last name"
-          name="lastName"
-          rules={{ required: 'Last name is required' }}
-          render={(controlledProps) => <IressInput {...controlledProps} />}
-        />
-        <IressFormField
-          label="Email"
-          name="email"
-          rules={{ email: 'Please enter a valid email' }}
-          render={(controlledProps) => <IressInput {...controlledProps} />}
-        />
-      </IressStack>
+      <IressFormField
+        label="First name"
+        name="firstName"
+        rules={{ required: 'First name is required' }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressFormField
+        label="Last name"
+        name="lastName"
+        rules={{ required: 'Last name is required' }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressFormField
+        label="Email"
+        name="email"
+        rules={{ email: 'Please enter a valid email' }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
     </IressForm>
   );
 }

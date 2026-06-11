@@ -14,28 +14,26 @@ interface FieldValues {
 
 const Form = () => (
   <IressForm>
-    <IressStack gap="md">
-      <IressFormField
-        label="Name"
-        name="name"
-        render={(controlledProps) => <IressInput {...controlledProps} />}
-        rules={{
-          required: 'Name is required',
-        }}
-      />
-      <IressFormField
-        label="Email address"
-        name="email"
-        render={(controlledProps) => <IressInput {...controlledProps} />}
-        rules={{
-          minLength: {
-            message: 'Use a longer email address',
-            value: 6,
-          },
-          required: 'Email is required',
-        }}
-      />
-    </IressStack>
+    <IressFormField
+      label="Name"
+      name="name"
+      render={(controlledProps) => <IressInput {...controlledProps} />}
+      rules={{
+        required: 'Name is required',
+      }}
+    />
+    <IressFormField
+      label="Email address"
+      name="email"
+      render={(controlledProps) => <IressInput {...controlledProps} />}
+      rules={{
+        minLength: {
+          message: 'Use a longer email address',
+          value: 6,
+        },
+        required: 'Email is required',
+      }}
+    />
   </IressForm>
 );
 

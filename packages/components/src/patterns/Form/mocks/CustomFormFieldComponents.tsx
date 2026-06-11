@@ -229,6 +229,7 @@ const TranscriptTextBox = ({
         mode="secondary"
         onClick={handleUploadClick}
         prepend={<IressIcon name="upload" />}
+        alignSelf="start"
       >
         Upload
       </IressButton>
@@ -313,7 +314,6 @@ export const CustomFormFieldComponents = () => {
         onSubmit={handleSubmit}
         defaultValues={{ transcript: { content: '', type: 'text' } }}
       >
-        <IressStack gap="md">
           <IressFormField
             label="Transcript"
             name="transcript"
@@ -336,7 +336,6 @@ export const CustomFormFieldComponents = () => {
             Submit
           </IressButton>
           <SubmittedValuesDisplay submittedValues={submittedValues} />
-        </IressStack>
       </IressForm>
     </>
   );

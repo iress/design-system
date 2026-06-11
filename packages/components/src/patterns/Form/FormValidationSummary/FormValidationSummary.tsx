@@ -126,7 +126,8 @@ export const IressFormValidationSummary = ({
         icon={icon}
         role="none"
         status="danger"
-        variant={variant}
+        variant={variant} 
+        multiLine
       >
         <IressValidationSummary
           {...restProps}

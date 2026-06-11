@@ -1,4 +1,4 @@
-import { IressForm, IressFormField, IressInput, IressButton, IressStack } from '@/main';
+import { IressForm, IressFormField, IressInput, IressButton } from '@/main';
 
 /**
  * The `minDate` rule works with date inputs. Validates that the date is after the specified value.
@@ -6,7 +6,6 @@ import { IressForm, IressFormField, IressInput, IressButton, IressStack } from '
 export function FormRuleMinDate() {
   return (
     <IressForm>
-      <IressStack gap="md">
         <IressFormField
           label="Default message"
           name="default"
@@ -24,7 +23,6 @@ export function FormRuleMinDate() {
         <IressButton type="submit" mode="primary">
           Validate
         </IressButton>
-      </IressStack>
     </IressForm>
   );
 }

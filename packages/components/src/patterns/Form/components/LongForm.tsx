@@ -89,7 +89,9 @@ const LongFormPattern = <T extends FieldValues, TContext = object>(
     footer,
     heading: headingProp,
     mode = 'onBlur',
-    panelStyle = { bg: 'alt' },
+    panelStyle = {
+      p: 'spacing.0',
+    },
     progressive,
     resetOptions,
     resolver,
@@ -137,14 +139,15 @@ const LongFormPattern = <T extends FieldValues, TContext = object>(
         gap="sm"
         horizontalAlign="between"
         verticalAlign="bottom"
-        className={styles.header}
+        className={styles.header} 
+        noWrap
       >
         {heading}
         <div className={styles.actions}>{actions}</div>
       </IressInline>
       <IressPanel
         {...panelStyle}
-        className={cx(styles.children, panelStyle.className)}
+        className={cx(styles.children, panelStyle.className)} noBorder
       >
         {alert}
         {children}

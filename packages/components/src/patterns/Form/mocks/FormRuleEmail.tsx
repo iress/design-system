@@ -1,4 +1,4 @@
-import { IressForm, IressFormField, IressInput, IressButton, IressStack } from '@/main';
+import { IressForm, IressFormField, IressInput, IressButton } from '@/main';
 
 /**
  * The `email` rule is a shorthand for email validation. Works with text-based controls.
@@ -6,7 +6,6 @@ import { IressForm, IressFormField, IressInput, IressButton, IressStack } from '
 export function FormRuleEmail() {
   return (
     <IressForm>
-      <IressStack gap="md">
         <IressFormField
           label="Default message"
           name="default"
@@ -24,7 +23,6 @@ export function FormRuleEmail() {
         <IressButton type="submit" mode="primary">
           Validate
         </IressButton>
-      </IressStack>
     </IressForm>
   );
 }

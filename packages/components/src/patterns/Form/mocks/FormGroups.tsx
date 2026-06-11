@@ -66,7 +66,7 @@ const defaultValues = {
 const ClientSection: React.FC<ClientProps> = ({ control }) => {
   return (
     <IressFieldGroup
-      label={<IressText element="h2">Client</IressText>}
+      label="Client"
       inline
       mb="none"
     >
@@ -103,7 +103,7 @@ const DependantSection: React.FC<DependantProps> = ({
   getValues,
 }: DependantProps) => {
   return (
-    <IressPanel bg="alt">
+    <IressPanel bg="alt" noBorder mb="spacing.4">
       <IressInline horizontalAlign="right">
         <IressCloseButton
           onClick={() => remove(index)}
@@ -111,12 +111,11 @@ const DependantSection: React.FC<DependantProps> = ({
           style={{ zIndex: 1 }}
         />
       </IressInline>
-      <IressStack gap="md">
-        <IressFieldGroup
-          label={<IressText element="h2">Dependant {index + 1}</IressText>}
-          inline
-          mb="none"
-        >
+      <IressFieldGroup
+        label={`Dependant ${index + 1}`}
+        inline
+        mb="none"
+      >
           <IressFormField
             name={`dependants.${index}.name`}
             label="Name"
@@ -150,7 +149,6 @@ const DependantSection: React.FC<DependantProps> = ({
             Save
           </IressButton>
         </IressFieldGroup>
-      </IressStack>
     </IressPanel>
   );
 };
@@ -178,7 +176,6 @@ export const FormGroups = () => {
         add/edit/delete child form sections:
       </p>
       <IressHookForm<FormValues> id="mainForm" form={form} onSubmit={onSubmit}>
-        <IressStack gap="md">
           <ClientSection control={control} />
           {fields.map((field, index) => (
             <DependantSection
@@ -196,10 +193,10 @@ export const FormGroups = () => {
             onClick={() => {
               append({ name: '', relationship: '', age: undefined });
             }}
+            status="success"
           >
             Add Dependant
           </IressButton>
-        </IressStack>
         <IressDivider my="md" />
         <IressButton type="submit" mode="primary">
           Submit All

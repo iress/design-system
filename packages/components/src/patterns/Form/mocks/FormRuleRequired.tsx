@@ -1,4 +1,4 @@
-import { IressForm, IressFormField, IressInput, IressButton, IressStack } from '@/main';
+import { IressForm, IressFormField, IressInput, IressButton } from '@/main';
 
 /**
  * The `required` rule works with all form controls (Input, Select, Checkbox, etc.).
@@ -7,7 +7,6 @@ import { IressForm, IressFormField, IressInput, IressButton, IressStack } from '
 export function FormRuleRequired() {
   return (
     <IressForm>
-      <IressStack gap="md">
         <IressFormField
           label="Default message"
           name="default"
@@ -20,10 +19,9 @@ export function FormRuleRequired() {
           rules={{ required: 'Please check this field' }}
           render={(controlledProps) => <IressInput {...controlledProps} />}
         />
-        <IressButton type="submit" mode="primary">
+        <IressButton type="submit" mode="primary" >
           Validate
         </IressButton>
-      </IressStack>
     </IressForm>
   );
 }

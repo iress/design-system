@@ -1,4 +1,4 @@
-import { IressForm, IressFormField, IressInput, IressButton, IressStack } from '@/main';
+import { IressForm, IressFormField, IressInput, IressButton } from '@/main';
 
 /**
  * The `maxLength` rule works with text-based controls (Input, InputCurrency).
@@ -6,7 +6,6 @@ import { IressForm, IressFormField, IressInput, IressButton, IressStack } from '
 export function FormRuleMaxLength() {
   return (
     <IressForm>
-      <IressStack gap="md">
         <IressFormField
           label="Default message"
           name="default"
@@ -24,7 +23,6 @@ export function FormRuleMaxLength() {
         <IressButton type="submit" mode="primary">
           Validate
         </IressButton>
-      </IressStack>
     </IressForm>
   );
 }

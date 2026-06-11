@@ -156,16 +156,8 @@ export const StartUp: StartUpLoadingStory = {
       {...args}
       pattern="start-up"
       messageList={{
-        0: (
-          <IressText color="colour.neutral.70">
-            Switching applications...
-          </IressText>
-        ),
-        4500: (
-          <IressText color="colour.neutral.70">
-            This is taking longer than expected...
-          </IressText>
-        ),
+        0: 'Switching applications...',
+        4500: 'This is taking longer than expected...',
       }}
     />
   ),
@@ -176,7 +168,7 @@ export const Validate: ValidateLoadingStory = {
   render: (args) => (
     <IressInline gap="sm">
       <IressLoading {...args} pattern="validate" loading />
-      <IressButton mode="tertiary">Cancel</IressButton>
+      <IressButton mode="quaternary">Cancel</IressButton>
     </IressInline>
   ),
 };

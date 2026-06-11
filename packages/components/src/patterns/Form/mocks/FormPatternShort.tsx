@@ -3,7 +3,6 @@ import {
   IressText,
   IressFormField,
   IressInput,
-  IressStack,
   IressForm,
 } from '@/main';
 
@@ -16,7 +15,7 @@ export function FormPatternShort() {
     <IressForm
       pattern="short"
       heading={
-        <IressText>
+        <IressText mb="spacing.4">
           <h2>Short Form</h2>
           <p>
             The short form pattern uses <code>onSubmit</code> validation before
@@ -31,20 +30,18 @@ export function FormPatternShort() {
         </IressButton>
       }
     >
-      <IressStack gap="md">
-        <IressFormField
-          label="First name"
-          name="firstName"
-          rules={{ required: 'First name is required' }}
-          render={(controlledProps) => <IressInput {...controlledProps} />}
-        />
-        <IressFormField
-          label="Last name"
-          name="lastName"
-          rules={{ required: 'Last name is required' }}
-          render={(controlledProps) => <IressInput {...controlledProps} />}
-        />
-      </IressStack>
+      <IressFormField
+        label="First name"
+        name="firstName"
+        rules={{ required: 'First name is required' }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressFormField
+        label="Last name"
+        name="lastName"
+        rules={{ required: 'Last name is required' }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
     </IressForm>
   );
 }

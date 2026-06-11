@@ -9,7 +9,6 @@ import {
   IressInput,
   IressRow,
   IressSelect,
-  IressStack,
   IressText,
   IressToasterProvider,
   useToaster,
@@ -52,8 +51,7 @@ const Form = () => {
       values={values}
     >
       <IressContainer>
-        <IressStack gap="md">
-          <IressText element="h2">User Details</IressText>
+          <IressText element="h2" mb="spacing.4">User Details</IressText>
           <IressRow gutter="md">
             <IressCol>
               <IressFormField
@@ -102,7 +100,7 @@ const Form = () => {
               />
             </IressCol>
           </IressRow>
-          {editable ? (
+        {editable ? (
             <IressInline gap="sm">
               <IressButton type="submit" mode="primary">
                 Save
@@ -119,7 +117,6 @@ const Form = () => {
               Edit
             </IressButton>
           )}
-        </IressStack>
       </IressContainer>
     </IressForm>
   );

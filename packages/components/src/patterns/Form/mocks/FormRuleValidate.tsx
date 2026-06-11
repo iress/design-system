@@ -1,4 +1,4 @@
-import { IressForm, IressFormField, IressInput, IressButton, IressStack } from '@/main';
+import { IressForm, IressFormField, IressInput, IressButton } from '@/main';
 
 /**
  * The `validate` rule allows custom validation functions. Works with all form controls.
@@ -7,7 +7,6 @@ import { IressForm, IressFormField, IressInput, IressButton, IressStack } from '
 export function FormRuleValidate() {
   return (
     <IressForm>
-      <IressStack gap="md">
         <IressFormField
           label="Must contain 'hello'"
           name="default"
@@ -35,7 +34,6 @@ export function FormRuleValidate() {
         <IressButton type="submit" mode="primary">
           Validate
         </IressButton>
-      </IressStack>
     </IressForm>
   );
 }

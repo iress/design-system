@@ -3,7 +3,6 @@ import {
   IressFormField,
   IressHookForm,
   IressInput,
-  IressStack,
 } from '@/main';
 import { useForm } from 'react-hook-form';
 
@@ -25,22 +24,20 @@ export const HiddenInputsForm = () => {
         });
       }}
     >
-      <IressStack gap="md">
-        <IressFormField
-          label="Visible Input"
-          name="visibleInput"
-          render={(controlledProps) => <IressInput {...controlledProps} />}
-        />
+      <IressFormField
+        label="Visible Input"
+        name="visibleInput"
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
 
-        {/* Hidden field - NOT RECOMMENDED */}
-        <input
-          type="hidden"
-          {...register('hiddenField')} // Manually register the hidden field with react-hook-form
-          value="hiddenValue"
-        />
+      {/* Hidden field - NOT RECOMMENDED */}
+      <input
+        type="hidden"
+        {...register('hiddenField')} // Manually register the hidden field with react-hook-form
+        value="hiddenValue"
+      />
 
-        <IressButton type="submit">Submit</IressButton>
-      </IressStack>
+      <IressButton type="submit">Submit</IressButton>
     </IressHookForm>
   );
 };

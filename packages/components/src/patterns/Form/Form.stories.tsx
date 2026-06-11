@@ -100,6 +100,7 @@ export default {
     },
     idsConfig: {
       tabDescriptions: {
+        fields: 'All form controls (Input, Select, Checkbox, etc.) should be wrapped in an IressFormField component which is responsible for the layout of the label, form control and error message, as well as providing accessibility features such as associating the label with the form control and announcing error messages to screen readers.',
         rules:
           'Form validation rules are determined from React Hook Form. Here you can see how to use the built-in validation rules, how to add custom validation messages and how to use the `validate` option to create your own rules.',
         patterns:
@@ -146,6 +147,7 @@ export const Fields: Story = {
     children: formArgTypes.children.mapping.supportedControls,
     pattern: 'long',
   },
+  tags: ['tab:fields'],
 };
 
 export const HandlingSubmission: Story = {
@@ -174,6 +176,7 @@ export const ValidationSummary: Story = {
     alert: <IressFormValidationSummary />,
     heading: 'Try hitting submit to see the validation summary',
   },
+  tags: ['!tab:fields'],
 };
 
 export const CustomErrorHandling: Story = {
@@ -449,9 +452,7 @@ export const NestedForms: Story = {
   tags: ['recipe'],
   render: (args) => <NestedFormsExample {...args} />,
   parameters: {
-    ...withSource(NestedFormsSource, {
-      stripImports: true,
-    }),
+    ...withSource(NestedFormsSource),
   },
 };
 
@@ -459,9 +460,7 @@ export const FormGroups: Story = {
   tags: ['recipe'],
   render: (args) => <FormGroupsExample {...args} />,
   parameters: {
-    ...withSource(FormGroupsSource, {
-      stripImports: true,
-    }),
+    ...withSource(FormGroupsSource),
   },
 };
 
@@ -469,9 +468,7 @@ export const FormsInExpanders: Story = {
   tags: ['recipe'],
   render: (args) => <FormExpanders {...args} />,
   parameters: {
-    ...withSource(FormExpandersSource, {
-      stripImports: true,
-    }),
+    ...withSource(FormExpandersSource),
   },
 };
 
@@ -479,9 +476,7 @@ export const UseWatch: Story = {
   tags: ['recipe'],
   render: (args) => <UseWatchForm {...args} />,
   parameters: {
-    ...withSource(UseWatchFormSource, {
-      stripImports: true,
-    }),
+    ...withSource(UseWatchFormSource),
   },
 };
 
@@ -489,9 +484,7 @@ export const HiddenInputs: Story = {
   tags: ['recipe'],
   render: (args) => <HiddenInputsForm {...args} />,
   parameters: {
-    ...withSource(HiddenInputsFormSource, {
-      stripImports: true,
-    }),
+    ...withSource(HiddenInputsFormSource),
   },
 };
 
@@ -499,9 +492,7 @@ export const ValidationDependOnOtherFields: Story = {
   tags: ['recipe'],
   render: (args) => <ValidationDependOnOtherFieldsExample {...args} />,
   parameters: {
-    ...withSource(ValidationDependOnOtherFieldsSource, {
-      stripImports: true,
-    }),
+    ...withSource(ValidationDependOnOtherFieldsSource),
   },
 };
 
@@ -509,9 +500,7 @@ export const CustomFormFieldComponents: Story = {
   tags: ['recipe'],
   render: (args) => <CustomFormFieldComponentsExample {...args} />,
   parameters: {
-    ...withSource(CustomFormFieldComponentsSource, {
-      stripImports: true,
-    }),
+    ...withSource(CustomFormFieldComponentsSource),
   },
 };
 
@@ -519,9 +508,7 @@ export const SanitisingInput: Story = {
   tags: ['recipe'],
   parameters: {
     controls: { disable: true },
-    ...withSource(SanitisedInputFormSource, {
-      stripImports: true,
-    }),
+    ...withSource(SanitisedInputFormSource),
   },
   render: (args) => (
     <IressLoadingSuspense>

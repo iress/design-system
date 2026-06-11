@@ -26,18 +26,8 @@ export default {
   },
 } as Meta<typeof IressShadow>;
 
-export const Default: Story = {
-  args: {
-    children: <IressPanel>Content inside shadow DOM</IressPanel>,
-  },
-};
-
 export const Shadow: Story = {
   args: {
-    children: (
-      <IressPanel>
-        Content inside shadow DOM <IressIcon name="heart_smile" />
-      </IressPanel>
-    ),
+    children: <IressPanel>Content inside shadow DOM <IressIcon name="heart_smile" /></IressPanel>,
   },
 };

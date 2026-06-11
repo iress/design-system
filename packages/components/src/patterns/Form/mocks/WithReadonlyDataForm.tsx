@@ -33,7 +33,6 @@ export const WithReadonlyDataForm = () => {
         values={values}
       >
         <IressContainer>
-          <IressStack gap="md">
             <IressText element="h2">User Details</IressText>
             <IressRow gutter="md">
               <IressCol>
@@ -57,9 +56,7 @@ export const WithReadonlyDataForm = () => {
                 />
               </IressCol>
             </IressRow>
-            <IressDivider />
-            <IressRow>
-              <IressCol>
+            <IressDivider my="spacing.4" />
                 <IressFormField
                   name="email"
                   label="Email"
@@ -67,12 +64,9 @@ export const WithReadonlyDataForm = () => {
                     <IressInput {...controlledProps} type="email" />
                   )}
                 />
-              </IressCol>
-            </IressRow>
             <IressButton type="submit" mode="primary">
               Submit
             </IressButton>
-          </IressStack>
         </IressContainer>
       </IressForm>
       <IressModal show={!!preview} onShowChange={(show) => setPreview(show)}>
