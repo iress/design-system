@@ -30,6 +30,12 @@ export const testMeta: TestComponentMeta[] = [
     testId: 'select__menu-group',
   },
   {
+    part: 'menu',
+    description: 'The options dropdown (visible when open)',
+    query: <code>getByRole('listbox')</code>,
+    testId: 'select__menu',
+  },
+  {
     part: 'menu item',
     description: 'An individual menu option',
     query: <code>getByRole('option', {'{'} name: '...' {'}'})</code>,

@@ -5,7 +5,12 @@ import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
-    description: 'The root element of the autocomplete',
+    description: 'The root wrapper element (no semantic role)',
+    query: (
+      <>
+        No role-based query — use <code>getByTestId('autocomplete')</code>
+      </>
+    ),
     testId: 'autocomplete',
   },
   {

@@ -5,11 +5,13 @@ import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
-    description: 'The root element of the field',
+    description: 'The root wrapper element (a div with no role)',
     query: (
       <>
-        <code>getByRole('textbox', {'{'} name: '...' {'}'})</code> to query the
-        input by its label, or <code>getByLabelText('...')</code>
+        No role-based query — use <code>getByTestId('field')</code>. To query
+        the child input, use{' '}
+        <code>getByRole('textbox', {'{'} name: '...' {'}'})</code> or{' '}
+        <code>getByLabelText('...')</code>
       </>
     ),
     testId: 'field',

@@ -8,8 +8,9 @@ export const testMeta: TestComponentMeta[] = [
     description: 'The root element of the slideout',
     query: (
       <>
-        <code>findByRole('complementary')</code> by default, or{' '}
-        <code>findByRole('dialog')</code> if role is set to "dialog"
+        <code>findByRole('dialog')</code> by default, or{' '}
+        <code>findByRole('complementary')</code> if role is set to
+        "complementary"
       </>
     ),
     testId: 'slideout',

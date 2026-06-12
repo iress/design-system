@@ -4,8 +4,13 @@ import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 
 export const testMeta: TestComponentMeta[] = [
   {
+    part: 'backdrop',
+    description: 'The overlay backdrop (outermost element)',
+    testId: 'modal__backdrop',
+  },
+  {
     part: 'main',
-    description: 'The root element of the modal',
+    description: 'The dialog element (nested inside backdrop)',
     query: <code>findByRole('dialog', {'{'} name: '...' {'}'})</code>,
     testId: 'modal',
   },
@@ -14,11 +19,6 @@ export const testMeta: TestComponentMeta[] = [
     description: 'The modal heading',
     query: <code>getByRole('heading', {'{'} name: '...' {'}'})</code>,
     testId: 'modal__heading',
-  },
-  {
-    part: 'backdrop',
-    description: 'The overlay backdrop',
-    testId: 'modal__backdrop',
   },
   {
     part: 'close button',

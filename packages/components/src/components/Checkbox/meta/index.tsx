@@ -5,9 +5,14 @@ import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
-    description: 'The root element of the checkbox',
-    query: <code>getByRole('checkbox', {'{'} name: '...' {'}'})</code>,
+    description: 'The root wrapper element',
     testId: 'checkbox',
+  },
+  {
+    part: 'input',
+    description: 'The checkbox input element',
+    query: <code>getByRole('checkbox', {'{'} name: '...' {'}'})</code>,
+    testId: 'checkbox__input',
   },
   {
     part: 'checkboxMark',

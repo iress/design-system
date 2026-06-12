@@ -31,8 +31,14 @@ export const testMeta: TestComponentMeta[] = [
     testId: 'table__tbody',
   },
   {
-    part: 'row',
-    description: 'A table row (header or body)',
+    part: 'header row',
+    description: 'A header row (uses dash separator)',
+    query: <code>getByRole('row')</code>,
+    testId: 'table__thead-row',
+  },
+  {
+    part: 'body row',
+    description: 'A body row',
     query: <code>getByRole('row')</code>,
     testId: 'table__row',
   },

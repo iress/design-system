@@ -28,6 +28,7 @@ import {
   type SelectHiddenInputRenderProps,
 } from './components/SelectHiddenInput';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
+import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { GlobalCSSClass } from '@/enums';
 import type { IressInputProps } from '../Input';
 import { useResponsiveProps, type ControlledValue } from '@/hooks';
@@ -698,6 +699,7 @@ const Select = <
           {header}
           <SelectOptions
             autoHighlight={autoHighlight}
+            data-testid={propagateTestid(restProps['data-testid'], 'menu')}
             debouncedQuery={debouncedQuery}
             error={error}
             initialOptions={initialOptions}

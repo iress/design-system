@@ -10,13 +10,8 @@ export const testMeta: TestComponentMeta[] = [
     testId: 'expander__activator',
   },
   {
-    part: 'content',
-    description: 'The expandable content container',
-    testId: 'expander__content',
-  },
-  {
     part: 'container',
-    description: 'The collapsible content container',
+    description: 'The collapsible content container (visible when expanded)',
     testId: 'expander__container',
   },
 ];

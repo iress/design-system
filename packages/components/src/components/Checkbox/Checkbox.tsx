@@ -258,6 +258,7 @@ const Checkbox = <
         value={getFormControlValueAsString(value)}
         type="checkbox"
         id={inputId}
+        data-testid={propagateTestid(dataTestId, 'input')}
         defaultChecked={isControlled ? undefined : checked}
         checked={isControlled ? checked : undefined}
         onChange={handleChange}

@@ -6,34 +6,45 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the menu',
-    query: <code>getByRole('list')</code>,
+    query: (
+      <>
+        <code>getByRole('list')</code> by default, or{' '}
+        <code>getByRole('menu')</code> /{' '}
+        <code>getByRole('listbox')</code> depending on role prop
+      </>
+    ),
     testId: 'menu',
   },
   {
     part: 'activator',
-    description: 'The menu group activator item',
+    description:
+      'A menu group activator (propagated from IressMenuGroup data-testid)',
     query: <code>getByRole('button', {'{'} name: '...' {'}'})</code>,
-    testId: 'menu__activator',
+    testId: '<menugroup-testid>__activator',
   },
   {
     part: 'subdraw',
-    description: 'The subdraw menu container',
-    testId: 'menu__subdraw',
+    description:
+      'A subdraw container (propagated from IressMenuGroup data-testid)',
+    testId: '<menugroup-testid>__subdraw',
   },
   {
     part: 'subdraw trigger',
-    description: 'The subdraw trigger item',
-    testId: 'menu__subdraw__trigger',
+    description:
+      'A subdraw trigger item (propagated from IressMenuGroup data-testid)',
+    testId: '<menugroup-testid>__subdraw__trigger',
   },
   {
     part: 'checkbox mark',
-    description: 'The checkbox indicator on selectable menu items',
-    testId: 'menu__checkbox-mark',
+    description:
+      'Checkbox indicator on a selectable item (propagated from IressMenuItem data-testid)',
+    testId: '<menuitem-testid>__checkbox-mark',
   },
   {
     part: 'checkbox',
-    description: 'The checkbox on multi-select menu items',
-    testId: 'menu__checkbox',
+    description:
+      'Checkbox on a multi-select item (propagated from IressMenuItem data-testid)',
+    testId: '<menuitem-testid>__checkbox',
   },
 ];
 

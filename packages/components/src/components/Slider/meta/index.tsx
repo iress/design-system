@@ -22,7 +22,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'option',
     description: 'An individual tick mark option',
-    testId: 'slider__option',
+    testId: 'slider__datalist__option',
   },
 ];
 

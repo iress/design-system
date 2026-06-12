@@ -1,51 +1,34 @@
 # Testing Documentation in Storybook
 
 > Generated: 2026-06-01
+> **Status: ✅ Complete** (Phase 1, 2, and 3 all done as of 2026-06-12)
 
-## Overview
+## Summary of Completed Work
 
-Add a "Testing" tab to every component's Storybook docs page, documenting available test IDs and roles for consumers. Currently only **Alert** has this tab. 22 other components already have `testIds` metadata defined but not wired up to Storybook.
+- [x] **Phase 1:** Converted 21 components from `testIds` → `testMeta` format
+- [x] **Phase 2:** Authored `testMeta` for all remaining components (46 total with testMeta in meta/)
+- [x] **Phase 3:** Added `testMeta` to patterns (Breadcrumbs, ContextualMenu, DropdownMenu, Form, FormField, FormValidationSummary, HookForm, Loading, SideNav)
+- [x] All sub-component stories also have inline `testMeta` (26 sub-components)
+- [x] Renamed `role` field to `query` (matching Testing Library priority)
+- [x] Renamed table column from "By Role" to "Recommended Query"
+- [x] Reviewed all queries against actual `.test.tsx` files for accuracy
+- [x] Added contextual query guidance (e.g. Alert shows different role per status prop)
+- [x] Added missing testable parts (Table rows/cells/headers, etc.)
+- [x] Wired `idsConfig: { testMeta }` into all story meta parameters
+- [x] `TestComponentMeta` interface updated: `role` → `query` (ReactNode)
+- [x] storybook-config rebuilt with updated type
 
----
-
-## Current State
-
-### Alert (the reference implementation)
-
-Alert uses `TestComponentMeta[]` from `@iress-oss/ids-storybook-config`:
+## Changes to `TestComponentMeta` interface
 
 ```tsx
-// meta/index.tsx
-export const testMeta: TestComponentMeta[] = [
-  {
-    part: 'main',
-    description: 'The root element of the alert',
-    role: (<><code>getByRole('status')</code> if info/neutral, otherwise <code>getByRole('alert')</code></>),
-    testId: 'alert',
-  },
-  { part: 'heading', description: 'The alert heading container', testId: 'alert__heading' },
-  { part: 'footer', description: 'The alert footer/actions container', testId: 'alert__footer' },
-];
+// packages/storybook-config/src/components/TestTable.tsx
+export interface TestComponentMeta {
+  part: string;
+  description: string;
+  query?: ReactNode;    // Renamed from 'role' — shows best Testing Library query
+  testId: string;
+}
 ```
-
-The stories file passes it via:
-```tsx
-parameters: {
-  idsConfig: {
-    testMeta: componentMeta.testMeta,
-  },
-},
-```
-
-### Other components (22 with existing `testIds`)
-
-These use a simpler `TestId[]` type (`{ suffix, description }`) exported as a named export but **not** connected to Storybook:
-
-- Autocomplete, ButtonGroup, Card, Checkbox, Expander, Field, Label, Menu, Modal, Popover, Radio, Readonly, Select, Slideout, Slider, Table, TabSet, Tag, Toggle, Tooltip, ValidationMessage
-
-### Components without any test metadata
-
-All remaining components (Button, Col, Container, Divider, Hide, Icon, Image, Inline, Input, InputCurrency, Link, Panel, Pill, Placeholder, Progress, Row, Skeleton, SkipLink, Spinner, Stack, Text, etc.) need test metadata authored from scratch by reading their source.
 
 ---
 
