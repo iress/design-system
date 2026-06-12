@@ -3,9 +3,9 @@ import { IressText, type IressTextProps, text } from '.';
 import { IressStack } from '../Stack';
 import { IressIcon } from '../Icon';
 import {
+  componentStoryMeta,
   disableArgTypes,
   reactNodeArgType,
-  stylingProps,
   withSource,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
@@ -27,20 +27,14 @@ type HeadingStory = StoryObj<
 export default {
   title: 'Components/Text',
   component: IressText,
-  argTypes: {
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: { testMeta: componentMeta.testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
     },
-    controls: { include: ['children', text.variantKeys] },
-  },
-  tags: ['updated'],
+    parameters: {
+      controls: { include: ['children', text.variantKeys] },
+    },
+  }),
 } as Meta<typeof IressText>;
 
 const children = 'The quick brown fox jumps over the lazy dog';

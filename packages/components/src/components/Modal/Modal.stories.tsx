@@ -26,10 +26,10 @@ import ModalResponsiveSizeSource from './mocks/ModalResponsiveSize.tsx?raw';
 import { ModalDisableClosing } from './mocks/ModalDisableClosing';
 import ModalDisableClosingSource from './mocks/ModalDisableClosing.tsx?raw';
 import {
+  componentStoryMeta,
   disableArgTypes,
   withSource,
   reactNodeArgType,
-  stylingProps,
   withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
@@ -42,23 +42,13 @@ type StatusStory = StoryObj<IressModalProps<'danger' | 'success' | 'warning'>>;
 export default {
   title: 'Components/Modal',
   component: IressModal,
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    footer: reactNodeArgType,
-    heading: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
+      footer: reactNodeArgType,
+      heading: reactNodeArgType,
     },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  }),
 } as Meta<typeof IressModal>;
 
 export const Default: Story = {

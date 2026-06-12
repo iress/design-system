@@ -14,10 +14,10 @@ import ToasterTimeoutSource from './mocks/ToasterTimeout.tsx?raw';
 import { CloseToastViaProvider } from './mocks/CloseToastViaProvider';
 import CloseToastViaProviderSource from './mocks/CloseToastViaProvider.tsx?raw';
 import {
+  componentStoryMeta,
   disableArgTypes,
   removeArgTypes,
   withSource,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -29,18 +29,11 @@ export default {
   args: {
     container: document.body,
   },
-  argTypes: {
-    ...disableArgTypes(['container']),
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: { testMeta: componentMeta.testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...disableArgTypes(['container']),
     },
-  },
+  }),
 } as Meta<typeof IressToasterProvider>;
 
 export const Default: Story = {};

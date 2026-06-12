@@ -2,10 +2,10 @@ import { type StoryObj, type Meta } from '@storybook/react-vite';
 
 import { IressToggle } from '.';
 import {
+  componentStoryMeta,
   disableArgTypes,
   withSource,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import { ControlledToggle } from './mocks/ControlledToggle';
 import ControlledToggleSource from './mocks/ControlledToggle.tsx?raw';
@@ -18,21 +18,11 @@ type Story = StoryObj<typeof IressToggle>;
 export default {
   title: 'Components/Toggle',
   component: IressToggle,
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
     },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  }),
 } as Meta<typeof IressToggle>;
 
 export const Default: Story = {

@@ -17,11 +17,11 @@ import TabsWithDynamicBadgeSource from './mocks/TabsWithDynamicBadge.tsx?raw';
 import { TabSetLayout } from './mocks/TabSetLayout';
 import TabSetLayoutSource from './mocks/TabSetLayout.tsx?raw';
 import {
+  componentStoryMeta,
   disableArgTypes,
   mergeStorybookConfig,
   withSource,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -30,23 +30,13 @@ type Story = StoryObj<typeof IressTabSet>;
 export default {
   title: 'Components/TabSet',
   component: IressTabSet,
-  argTypes: {
-    ...mergeStorybookConfig(disableArgTypes(['children']), {
-      children: reactNodeArgType,
-    }),
-    ...stylingProps,
-  },
-  tags: ['updated'],
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...mergeStorybookConfig(disableArgTypes(['children']), {
+        children: reactNodeArgType,
+      }),
     },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  }),
 } as Meta<typeof IressTabSet>;
 
 export const Default: Story = {

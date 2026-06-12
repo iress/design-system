@@ -1,8 +1,8 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSlider } from '.';
 import {
+  componentStoryMeta,
   reactNodeArgType,
-  stylingProps,
   withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
@@ -12,21 +12,11 @@ type Story = StoryObj<typeof IressSlider>;
 export default {
   title: 'Components/Slider',
   component: IressSlider,
-  tags: ['updated'],
-  argTypes: {
-    label: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      label: reactNodeArgType,
     },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  }),
 } as Meta<typeof IressSlider>;
 
 export const Default: Story = {};

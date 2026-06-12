@@ -30,8 +30,8 @@ import {
   IressMenuText,
 } from '@/main';
 import {
+  componentStoryMeta,
   reactNodeArgType,
-  stylingProps,
   addToStorybookCategory,
   disableArgTypes,
   mergeStorybookConfig,
@@ -49,37 +49,27 @@ export default {
     container: document.body,
     placeholder: '',
   },
-  argTypes: {
-    footer: reactNodeArgType,
-    header: reactNodeArgType,
-    placeholder: reactNodeArgType,
-    ...stylingProps,
-    ...mergeStorybookConfig(
-      disableArgTypes(['container']),
-      addToStorybookCategory<IressSelectProps>('Popover props', [
-        'align',
-        'container',
-        'displayMode',
-        'focusStartIndex',
-        'onActivated',
-        'onDeactivated',
-        'onNavigate',
-        'type',
-        'virtualFocus',
-      ]),
-    ),
-  },
-  tags: ['updated'],
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      footer: reactNodeArgType,
+      header: reactNodeArgType,
+      placeholder: reactNodeArgType,
+      ...mergeStorybookConfig(
+        disableArgTypes(['container']),
+        addToStorybookCategory<IressSelectProps>('Popover props', [
+          'align',
+          'container',
+          'displayMode',
+          'focusStartIndex',
+          'onActivated',
+          'onDeactivated',
+          'onNavigate',
+          'type',
+          'virtualFocus',
+        ]),
+      ),
     },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  }),
 } as Meta<typeof IressSelect>;
 
 export const SingleSelect: Story = {

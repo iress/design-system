@@ -2,8 +2,8 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressMenu, IressMenuItem, type IressMenuProps } from '.';
 import { IressInline } from '../Inline';
 import {
+  componentStoryMeta,
   disableArgTypes,
-  stylingProps,
   withSource,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
@@ -34,20 +34,7 @@ type Story = StoryObj<IressMenuProps>;
 export default {
   title: 'Components/Menu',
   component: IressMenu,
-  tags: ['updated'],
-  argTypes: {
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
-    },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  ...componentStoryMeta(componentMeta),
 } as Meta<typeof IressMenu>;
 
 export const Default: Story = {

@@ -4,7 +4,7 @@ import { LoadingWizard } from './mocks/LoadingWizard';
 import LoadingWizardSource from './mocks/LoadingWizard.tsx?raw';
 import { LoadingWizardFast } from './mocks/LoadingWizardFast';
 import LoadingWizardFastSource from './mocks/LoadingWizardFast.tsx?raw';
-import { withSource, stylingProps } from '@iress-oss/ids-storybook-config';
+import { componentStoryMeta, withSource } from '@iress-oss/ids-storybook-config';
 import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 import { LoadingGraph } from './mocks/LoadingGraph';
@@ -36,23 +36,15 @@ type ValidateLoadingStory = StoryObj<typeof ValidateLoading>;
 export default {
   title: 'Patterns/Loading',
   component: IressLoading,
-  argTypes: {
-    ...stylingProps,
-  },
-  parameters: {
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
+  ...componentStoryMeta(componentMeta, {
     idsConfig: {
-      testMeta,
       tabDescriptions: {
         patterns:
           'Loading patterns are pre-built configurations of the `IressLoading` component that are designed to cover common loading scenarios. They provide a consistent user experience while saving development time. Each pattern is built with accessibility in mind and can be easily customized to fit your specific use case.',
       },
+      testMeta,
     },
-  },
+  }),
 } as Meta<typeof IressLoading>;
 
 export const Playground: Story = {

@@ -9,10 +9,10 @@ import {
   type Statuses,
 } from '@/main';
 import {
+  componentStoryMeta,
   disableArgTypes,
   STORYBOOK_ONLY_CATEGORY,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -27,22 +27,12 @@ type LinkToTargetStory = StoryObj<
 export default {
   title: 'Components/ValidationMessage',
   component: IressValidationMessage,
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    prefix: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
+      prefix: reactNodeArgType,
     },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  }),
 } as Meta<typeof IressValidationMessage>;
 
 export const Default: Story = {

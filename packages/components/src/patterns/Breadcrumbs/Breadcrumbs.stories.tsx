@@ -1,6 +1,10 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressBreadcrumbs } from '@/main';
-import { disableArgTypes, withSource } from '@iress-oss/ids-storybook-config';
+import {
+  componentStoryMeta,
+  disableArgTypes,
+  withSource,
+} from '@iress-oss/ids-storybook-config';
 import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 import { BreadcrumbsAllConfigurations } from './mocks/BreadcrumbsAllConfigurations';
@@ -24,17 +28,14 @@ export default {
       container: document.body,
     },
   },
-  argTypes: {
-    ...disableArgTypes(['items']),
-  },
-  parameters: {
-    idsConfig: { testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...disableArgTypes(['items']),
     },
-  },
+    idsConfig: {
+      testMeta,
+    },
+  }),
 } as Meta<typeof IressBreadcrumbs>;
 
 export const Default: Story = {

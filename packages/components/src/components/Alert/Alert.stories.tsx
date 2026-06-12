@@ -2,9 +2,9 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 
 import { IressAlert, type IressAlertProps } from '@/main';
 import {
+  componentStoryMeta,
   disableArgTypes,
   reactNodeArgType,
-  stylingProps,
   withSource,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
@@ -25,23 +25,13 @@ type Story = StoryObj<IressAlertProps>;
 export default {
   title: 'Components/Alert',
   component: IressAlert,
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    footer: reactNodeArgType,
-    heading: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
+      footer: reactNodeArgType,
+      heading: reactNodeArgType,
     },
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
-    },
-  },
+  }),
 } as Meta<typeof IressAlert>;
 
 export const Default: Story = {

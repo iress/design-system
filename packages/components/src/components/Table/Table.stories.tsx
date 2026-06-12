@@ -19,12 +19,12 @@ import { TableCompact } from './mocks/TableCompact';
 import TableCompactSource from './mocks/TableCompact.tsx?raw';
 import { type Row } from '@tanstack/react-table';
 import {
+  componentStoryMeta,
   withJsxTransformer,
   disableArgTypes,
   withSource,
   mergeStorybookConfig,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import { IressPill } from '../Pill';
 import componentMeta from './meta';
@@ -34,27 +34,19 @@ type Story = StoryObj<typeof IressTable>;
 export default {
   title: 'Components/Table',
   component: IressTable,
-  argTypes: {
-    ...mergeStorybookConfig(disableArgTypes(['children']), {
-      children: reactNodeArgType,
-    }),
-    empty: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...mergeStorybookConfig(disableArgTypes(['children']), {
+        children: reactNodeArgType,
+      }),
+      empty: reactNodeArgType,
     },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
+    parameters: {
+      ...withJsxTransformer({
+        sortProps: false,
+      }),
     },
-    ...withJsxTransformer({
-      sortProps: false,
-    }),
-  },
-  tags: ['updated'],
+  }),
 } as Meta<typeof IressTable>;
 
 

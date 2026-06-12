@@ -21,10 +21,10 @@ import SlideoutWithButtonSource from './mocks/SlideoutWithButton.tsx?raw';
 import { SlideoutWithFooter } from './mocks/SlideoutWithFooter';
 import SlideoutWithFooterSource from './mocks/SlideoutWithFooter.tsx?raw';
 import {
+  componentStoryMeta,
   disableArgTypes,
   withSource,
   reactNodeArgType,
-  stylingProps,
   withBreakpointLabel,
   mergeStorybookConfig,
 } from '@iress-oss/ids-storybook-config';
@@ -37,23 +37,13 @@ type Story = StoryObj<typeof IressSlideout>;
 export default {
   title: 'Components/Slideout',
   component: IressSlideout,
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    footer: reactNodeArgType,
-    heading: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
+      footer: reactNodeArgType,
+      heading: reactNodeArgType,
     },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  }),
 } as Meta<typeof IressSlideout>;
 
 export const Default: Story = {

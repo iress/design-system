@@ -2,7 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressIcon, type IressIconProps } from './Icon';
 import { IressText } from '../Text';
 import { IressInline } from '../Inline';
-import { stylingProps, withSource } from '@iress-oss/ids-storybook-config';
+import { componentStoryMeta, withSource } from '@iress-oss/ids-storybook-config';
 import { IressLink } from '../Link';
 import { IressIconProvider } from './IconProvider';
 import React, { useMemo, useState } from 'react';
@@ -35,18 +35,7 @@ type Story = StoryObj<IressIconProps>;
 export default {
   title: 'Components/Icon',
   component: IressIcon,
-  tags: ['updated'],
-  argTypes: {
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: { testMeta: componentMeta.testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  ...componentStoryMeta(componentMeta),
 } as Meta<typeof IressIcon>;
 
 export const Default: Story = {

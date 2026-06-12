@@ -1,5 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { withSource } from '@iress-oss/ids-storybook-config';
+import { componentStoryMeta, withSource } from '@iress-oss/ids-storybook-config';
 import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import { IressSideNav } from './SideNav';
 import { SideNavDefault } from './mocks/SideNavDefault';
@@ -31,15 +31,14 @@ export default {
   title: 'Patterns/SideNav',
   component: IressSideNav,
   tags: ['beta'],
-  parameters: {
-    idsConfig: { testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
+  ...componentStoryMeta(componentMeta, {
+    idsConfig: {
+      testMeta,
     },
-    layout: 'fullscreen',
-  },
+    parameters: {
+      layout: 'fullscreen',
+    },
+  }),
   decorators: [
     (Story) => (
       <div style={{ height: '100vh' }}>

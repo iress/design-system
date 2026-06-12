@@ -1,8 +1,8 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import {
+  componentStoryMeta,
   reactElementArgType,
   reactNodeArgType,
-  stylingProps,
   withSource,
 } from '@iress-oss/ids-storybook-config';
 import { IressPill } from '@/main';
@@ -18,20 +18,12 @@ type Story = StoryObj<typeof IressPill>;
 export default {
   title: 'Components/Pill',
   component: IressPill,
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    host: reactElementArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: { testMeta: componentMeta.testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
+      host: reactElementArgType,
     },
-  },
+  }),
 } as Meta<typeof IressPill>;
 
 export const Default: Story = {

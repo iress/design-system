@@ -1,8 +1,8 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressRadio } from '.';
 import {
+  componentStoryMeta,
   reactNodeArgType,
-  stylingProps,
   withSource,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
@@ -17,21 +17,11 @@ type Story = StoryObj<typeof IressRadio>;
 export default {
   title: 'Components/Radio',
   component: IressRadio,
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
     },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  }),
 } as Meta<typeof IressRadio>;
 
 export const Default: Story = {

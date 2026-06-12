@@ -17,8 +17,8 @@ import { IressPill } from '../Pill';
 import { IressPanel } from '../Panel';
 import { IressContextualMenu } from '@/main';
 import {
+  componentStoryMeta,
   reactNodeArgType,
-  stylingProps,
   withJsxTransformer,
   withSource,
 } from '@iress-oss/ids-storybook-config';
@@ -33,33 +33,25 @@ type LinkStory = StoryObj<IressLinkCardProps>;
 export default {
   title: 'Components/Card',
   component: IressCard,
-  parameters: {
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
+      footer: reactNodeArgType,
+      heading: reactNodeArgType,
+      media: reactNodeArgType,
+      prepend: reactNodeArgType,
+      topRight: reactNodeArgType,
     },
     idsConfig: {
-      testMeta: componentMeta.testMeta,
       tabDescriptions: {
         slots:
           'Cards have several slots for rendering different types of content. Use these slots to build more complex card layouts and designs.',
       },
     },
-    actions: {
-      disable: true,
+    parameters: {
+      actions: { disable: true },
     },
-  },
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    footer: reactNodeArgType,
-    heading: reactNodeArgType,
-    media: reactNodeArgType,
-    prepend: reactNodeArgType,
-    topRight: reactNodeArgType,
-    ...stylingProps,
-  },
+  }),
 } as Meta<typeof IressCard>;
 
 export const Default: Story = {

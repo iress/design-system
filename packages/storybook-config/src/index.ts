@@ -6,9 +6,11 @@ export * from './decorators/withBreakpointLabel';
 export * from './components/DiffViewer';
 export * from './components/Redirect';
 export * from './components/TestTable';
+export * from './components/ComponentMeta';
 
 // Stories/MDX helpers
 export * from './helpers/addToStorybookCategory';
+export * from './helpers/createComponentMeta';
 export * from './helpers/disableArgTypes';
 export * from './helpers/mergeStorybookConfig';
 export * from './helpers/removeArgTypes';

@@ -817,7 +817,7 @@ enforces conventions and reduces boilerplate across all component/pattern story 
 - [ ] **Step 3:** Enforce `description` as required in `ComponentMeta` (already done)
 - [ ] **Step 4:** Title remains a static string (Storybook indexer limitation) — factory sets everything else
 - [ ] **Step 5:** Migrate all 54 primary story files to use the factory
-- [ ] **Step 6:** Add lint rule or reviewer guidance: all new stories must use `createComponentStories`
+- [ ] **Step 6:** Add ESLint rule to enforce story meta quality: all story files must use `componentStoryMeta()` or include `idsConfig.testMeta`, `docs.description.component`, and `stylingProps` in argTypes. This guards the AI pipeline data quality.
 
 ---
 

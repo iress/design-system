@@ -13,10 +13,10 @@ import {
 } from './mocks/checkboxGroupChildren';
 import { IressCheckbox } from '../Checkbox/Checkbox';
 import {
+  componentStoryMeta,
   disableArgTypes,
   withSource,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -25,19 +25,11 @@ type Story = StoryObj<typeof IressCheckboxGroup>;
 export default {
   title: 'Components/CheckboxGroup',
   component: IressCheckboxGroup,
-  argTypes: {
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
-  tags: ['updated'],
-  parameters: {
-    idsConfig: { testMeta: componentMeta.testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
     },
-  },
+  }),
 } as Meta<typeof IressCheckboxGroup>;
 
 export const Default: Story = {

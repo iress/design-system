@@ -8,12 +8,12 @@ import { IressText } from '../Text';
 import { IressStack } from '../Stack';
 import { type ComponentProps } from 'react';
 import {
+  componentStoryMeta,
   disableArgTypes,
   STORYBOOK_ONLY_CATEGORY,
   withJsxTransformer,
   withSource,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 import { FieldSupplementary } from './mocks/FieldSupplementary';
@@ -37,32 +37,22 @@ const defaultInput = {
 export default {
   title: 'Components/Field',
   component: IressField,
-  argTypes: {
-    ...disableArgTypes(['children']),
-    error: reactNodeArgType,
-    hint: reactNodeArgType,
-    supplementary: reactNodeArgType,
-    ...stylingProps,
-    input: {
-      name: 'Input settings',
-      type: 'array',
-      table: {
-        category: STORYBOOK_ONLY_CATEGORY,
-      },
-      defaultValue: defaultInput,
-    },
-  },
-  tags: ['updated'],
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
-    },
-    docs: {
-      description: {
-        component: componentMeta.description,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...disableArgTypes(['children']),
+      error: reactNodeArgType,
+      hint: reactNodeArgType,
+      supplementary: reactNodeArgType,
+      input: {
+        name: 'Input settings',
+        type: 'array',
+        table: {
+          category: STORYBOOK_ONLY_CATEGORY,
+        },
+        defaultValue: defaultInput,
       },
     },
-  },
+  }),
 } as Meta<typeof IressField>;
 
 export const Default: Story = {

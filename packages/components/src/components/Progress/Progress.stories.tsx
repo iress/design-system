@@ -1,7 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 
 import { IressProgress } from '.';
-import { stylingProps, withSource } from '@iress-oss/ids-storybook-config';
+import { componentStoryMeta, withSource } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
 import { ProgressExamples } from './mocks/ProgressExamples';
@@ -12,16 +12,7 @@ type Story = StoryObj<typeof IressProgress>;
 export default {
   title: 'Components/Progress',
   component: IressProgress,
-  tags: ['updated'],
-  argTypes: stylingProps,
-  parameters: {
-    idsConfig: { testMeta: componentMeta.testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  ...componentStoryMeta(componentMeta),
 } as Meta<typeof IressProgress>;
 
 export const Default: Story = {

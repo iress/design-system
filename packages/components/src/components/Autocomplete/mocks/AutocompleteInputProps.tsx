@@ -19,7 +19,7 @@ export function AutocompleteInputProps() {
       append={
         <IressPopover
           activator={
-            <IressButton mode="tertiary">
+            <IressButton mode="muted" mr="-spacing.3">
               <IressIcon name="cog" />
             </IressButton>
           }

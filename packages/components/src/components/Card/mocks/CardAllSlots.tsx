@@ -27,7 +27,7 @@ const SLOT_CONTENT = {
   heading: <h2>Welcome to Iress!</h2>,
   topRight: (
     <IressContextualMenu>
-      <IressPanel>More actions in here</IressPanel>
+      More actions in here
     </IressContextualMenu>
   ),
   children: (

@@ -4,9 +4,9 @@ import { IressInline } from '../Inline';
 import { IressIcon } from '../Icon';
 import { IressText } from '../Text';
 import {
+  componentStoryMeta,
   disableArgTypes,
   reactNodeArgType,
-  stylingProps,
   withSource,
 } from '@iress-oss/ids-storybook-config';
 import { ReadonlyEditToggle } from './mocks/ReadonlyEditToggle';
@@ -18,22 +18,12 @@ type Story = StoryObj<IressReadonlyProps>;
 export default {
   title: 'Components/Readonly',
   component: IressReadonly,
-  argTypes: {
-    ...disableArgTypes(['children']),
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
-  tags: ['updated'],
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...disableArgTypes(['children']),
+      children: reactNodeArgType,
     },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  }),
 } as Meta<typeof IressReadonly>;
 
 export const Default: Story = {

@@ -8,9 +8,9 @@ import { IressButton } from '../Button';
 import { IressInline } from '../Inline';
 import { SPACING_AND_ALIAS_TOKENS } from '@theme-preset/tokens/spacing';
 import {
+  componentStoryMeta,
   disableArgTypes,
   reactNodeArgType,
-  stylingProps,
   withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
@@ -52,26 +52,18 @@ const childrenOptions = {
 export default {
   title: 'Components/Stack',
   component: IressStack,
-  argTypes: {
-    children: {
-      ...reactNodeArgType,
-      control: {
-        type: 'select',
-      },
-      options: Object.keys(childrenOptions),
-      mapping: childrenOptions,
-    },
-    ...stylingProps,
-  },
-  tags: ['updated'],
-  parameters: {
-    idsConfig: { testMeta: componentMeta.testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: {
+        ...reactNodeArgType,
+        control: {
+          type: 'select',
+        },
+        options: Object.keys(childrenOptions),
+        mapping: childrenOptions,
       },
     },
-  },
+  }),
 } as Meta<typeof IressStack>;
 
 export const Default: Story = {

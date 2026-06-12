@@ -3,7 +3,7 @@ import { IressPanel } from './Panel';
 import { IressPlaceholder } from '../Placeholder';
 import { IressText } from '../Text';
 import { IressInline } from '@/main';
-import { stylingProps } from '@iress-oss/ids-storybook-config';
+import { componentStoryMeta } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
 type PanelCustomArgs = React.ComponentProps<typeof IressPanel>;
@@ -49,25 +49,17 @@ const childrenOptions = {
 export default {
   title: 'Components/Panel',
   component: IressPanel,
-  argTypes: {
-    children: {
-      control: {
-        type: 'select',
-      },
-      options: Object.keys(childrenOptions),
-      mapping: childrenOptions,
-    },
-    ...stylingProps,
-  },
-  tags: ['updated'],
-  parameters: {
-    idsConfig: { testMeta: componentMeta.testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: {
+        control: {
+          type: 'select',
+        },
+        options: Object.keys(childrenOptions),
+        mapping: childrenOptions,
       },
     },
-  },
+  }),
 } as Meta<typeof IressPanel>;
 
 export const Default: Story = {

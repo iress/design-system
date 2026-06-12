@@ -1,9 +1,9 @@
 import { type StoryObj, type Meta } from '@storybook/react-vite';
 import {
+  componentStoryMeta,
   disableArgTypes,
   mergeStorybookConfig,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import { IressTooltip } from '.';
 import { IressButton } from '../Button';
@@ -17,23 +17,13 @@ type Story = StoryObj<typeof IressTooltip>;
 export default {
   title: 'Components/Tooltip',
   component: IressTooltip,
-  argTypes: {
-    ...mergeStorybookConfig(disableArgTypes(['children', 'open']), {
-      children: reactNodeArgType,
-      ...stylingProps,
-    }),
-  },
-  tags: ['updated'],
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...mergeStorybookConfig(disableArgTypes(['children', 'open']), {
+        children: reactNodeArgType,
+      }),
     },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  }),
 } as Meta<typeof IressTooltip>;
 
 export const Default: Story = {

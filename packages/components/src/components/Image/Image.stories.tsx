@@ -3,7 +3,7 @@ import { IressImage } from '.';
 import { IressStack } from '@/components/Stack';
 import { IressText } from '@/components/Text';
 import React from 'react';
-import { stylingProps } from '@iress-oss/ids-storybook-config';
+import { componentStoryMeta } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressImage>;
@@ -13,17 +13,7 @@ export default {
   title: 'Components/Image',
   component: IressImage,
   tags: ['beta: '],
-  argsTypes: {
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: { testMeta: componentMeta.testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  ...componentStoryMeta(componentMeta),
 } as Meta<typeof IressImage>;
 
 export const Default: Story = {

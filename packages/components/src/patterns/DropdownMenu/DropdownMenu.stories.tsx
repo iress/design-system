@@ -2,9 +2,9 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { TableWithFilters } from './mocks/TableWithFilters';
 import TableWithFiltersSource from './mocks/TableWithFilters.tsx?raw';
 import {
+  componentStoryMeta,
   withSource,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
@@ -38,21 +38,16 @@ const testMeta: TestComponentMeta[] = [
 export default {
   title: 'Patterns/DropdownMenu',
   component: IressDropdownMenu,
-  tags: ['updated'],
-  argTypes: {
-    footer: reactNodeArgType,
-    header: reactNodeArgType,
-    searchNoResultsText: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: { testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      footer: reactNodeArgType,
+      header: reactNodeArgType,
+      searchNoResultsText: reactNodeArgType,
     },
-  },
+    idsConfig: {
+      testMeta,
+    },
+  }),
 } as Meta<typeof IressDropdownMenu>;
 
 export const Default: SingleStory = {

@@ -4,10 +4,10 @@ import { IressPopover } from '../Popover';
 import { IressButton } from '../Button';
 import { IressIcon } from '../Icon';
 import {
+  componentStoryMeta,
   withSource,
   withJsxTransformer,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -25,22 +25,12 @@ type Story = StoryObj<typeof IressTag>;
 export default {
   title: 'Components/Tag',
   component: IressTag,
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    deleteButton: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
+      deleteButton: reactNodeArgType,
     },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  }),
 } as Meta<typeof IressTag>;
 
 export const Default: Story = {

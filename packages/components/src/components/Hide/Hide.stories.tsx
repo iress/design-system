@@ -3,9 +3,9 @@ import { IressHide } from '.';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
 import {
+  componentStoryMeta,
   disableArgTypes,
   reactNodeArgType,
-  stylingProps,
   withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
@@ -17,18 +17,11 @@ export default {
   title: 'Components/Hide',
   component: IressHide,
   tags: ['caution:srOnly, hideFrom and hideBelow props'],
-  argsTypes: {
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: { testMeta: componentMeta.testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
     },
-  },
+  }),
 } as Meta<typeof IressHide>;
 
 export const Default: Story = {

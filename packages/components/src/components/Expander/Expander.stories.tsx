@@ -5,31 +5,21 @@ import MultipleExpanderSource from './mocks/MultipleExpander.tsx?raw';
 import { ExpanderMode } from './mocks/ExpanderMode';
 import ExpanderModeSource from './mocks/ExpanderMode.tsx?raw';
 import {
+  componentStoryMeta,
   disableArgTypes,
   withSource,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
 export default {
   title: 'Components/Expander',
   component: IressExpander,
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
     },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  }),
 } as Meta<typeof IressExpander>;
 
 export const Default: StoryObj<typeof IressExpander> = {

@@ -9,9 +9,9 @@ import { IressDivider } from '../Divider';
 import { HORIZONTAL_ALIGNS, IressStack, VERTICAL_ALIGNS } from '@/main';
 import { SPACING_AND_ALIAS_TOKENS } from '@theme-preset/tokens/spacing';
 import {
+  componentStoryMeta,
   disableArgTypes,
   reactNodeArgType,
-  stylingProps,
   withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
 import { cssVars } from '@iress-oss/ids-tokens';
@@ -22,19 +22,11 @@ type Story = StoryObj<typeof IressRow>;
 export default {
   title: 'Components/Row',
   component: IressRow,
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: { testMeta: componentMeta.testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
     },
-  },
+  }),
 } as Meta<typeof IressRow>;
 
 const ROW_CHILDREN_OPTIONS = {

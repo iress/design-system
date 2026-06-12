@@ -20,6 +20,7 @@ import {
   formParameters,
 } from './mocks/storybookFormHelpers';
 import {
+  componentStoryMeta,
   DiffViewer,
   disableArgTypes,
   withSource,
@@ -94,17 +95,11 @@ export default {
   args: {
     ...formArgs,
   },
-  argTypes: {
-    ...formArgTypes,
-  },
-  parameters: {
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...formArgTypes,
     },
     idsConfig: {
-      testMeta,
       tabDescriptions: {
         fields: 'All form controls (Input, Select, Checkbox, etc.) should be wrapped in an IressFormField component which is responsible for the layout of the label, form control and error message, as well as providing accessibility features such as associating the label with the form control and announcing error messages to screen readers.',
         rules:
@@ -112,9 +107,12 @@ export default {
         patterns:
           'Form patterns are pre-defined layouts and configurations of the form to suit common use cases. They are designed to help you get started quickly with building forms that follow best practices for UX and accessibility.',
       },
+      testMeta,
     },
-    ...formParameters,
-  },
+    parameters: {
+      ...formParameters,
+    },
+  }),
 } as Meta<typeof IressForm>;
 
 export const Default: Story = {

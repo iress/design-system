@@ -7,10 +7,10 @@ import {
   getFinancialReviewManyChildren,
 } from './mocks/radioGroupChildren';
 import {
+  componentStoryMeta,
   disableArgTypes,
   withSource,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -22,20 +22,12 @@ type Story = StoryObj<typeof IressRadioGroup>;
 export default {
   title: 'Components/RadioGroup',
   component: IressRadioGroup,
-  argTypes: {
-    ...disableArgTypes(['children', 'onChange']),
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
-  tags: ['updated'],
-  parameters: {
-    idsConfig: { testMeta: componentMeta.testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...disableArgTypes(['children', 'onChange']),
+      children: reactNodeArgType,
     },
-  },
+  }),
 } as Meta<typeof IressRadioGroup>;
 
 export const Default: Story = {

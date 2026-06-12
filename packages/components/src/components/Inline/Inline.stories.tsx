@@ -9,8 +9,8 @@ import { IressContainer } from '../Container';
 import { HORIZONTAL_ALIGNS, VERTICAL_ALIGNS } from '@/constants';
 import { SPACING_AND_ALIAS_TOKENS } from '@theme-preset/tokens/spacing';
 import {
+  componentStoryMeta,
   disableArgTypes,
-  stylingProps,
   withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
@@ -73,25 +73,17 @@ const childrenOptions = {
 export default {
   title: 'Components/Inline',
   component: IressInline,
-  argTypes: {
-    children: {
-      control: {
-        type: 'select',
-      },
-      options: Object.keys(childrenOptions),
-      mapping: childrenOptions,
-    },
-    ...stylingProps,
-  },
-  tags: ['updated'],
-  parameters: {
-    idsConfig: { testMeta: componentMeta.testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: {
+        control: {
+          type: 'select',
+        },
+        options: Object.keys(childrenOptions),
+        mapping: childrenOptions,
       },
     },
-  },
+  }),
 } as Meta<typeof IressInline>;
 
 export const Default: Story = {

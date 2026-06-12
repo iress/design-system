@@ -6,6 +6,7 @@ import { IressStack } from '../Stack';
 import { IressText } from '../Text';
 import { IressContainer } from '../Container';
 import {
+  componentStoryMeta,
   disableArgTypes,
   removeArgTypes,
   STORYBOOK_ONLY_CATEGORY,
@@ -33,38 +34,33 @@ const columnsArgType = {
 export default {
   title: 'Components/Col',
   component: IressCol,
-  argTypes: {
-    ...disableArgTypes(['children']),
-    ...omitStylingProps(['alignSelf']),
-    numberOfColumns: {
-      name: 'Number of columns',
-      description: 'Number of columns to render',
-      type: 'number',
-      table: {
-        category: STORYBOOK_ONLY_CATEGORY,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...disableArgTypes(['children']),
+      ...omitStylingProps(['alignSelf']),
+      numberOfColumns: {
+        name: 'Number of columns',
+        description: 'Number of columns to render',
+        type: 'number',
+        table: {
+          category: STORYBOOK_ONLY_CATEGORY,
+        },
+      },
+      row: {
+        name: 'Row settings',
+        description: 'Change the row settings to see how the columns respond',
+        type: 'object',
+        table: {
+          category: STORYBOOK_ONLY_CATEGORY,
+        },
       },
     },
-    row: {
-      name: 'Row settings',
-      description: 'Change the row settings to see how the columns respond',
-      type: 'object',
-      table: {
-        category: STORYBOOK_ONLY_CATEGORY,
-      },
+    parameters: {
+      ...withJsxTransformer({
+        filterProps: ['numberOfColumns', 'columns', 'row'],
+      }),
     },
-  },
-  parameters: {
-    idsConfig: { testMeta: componentMeta.testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-    ...withJsxTransformer({
-      filterProps: ['numberOfColumns', 'columns', 'row'],
-    }),
-  },
-  tags: ['updated'],
+  }),
 } as Meta<typeof IressCol>;
 
 export const Default: Story = {

@@ -8,10 +8,10 @@ import {
 } from '../../main';
 import { IressField } from '../Field';
 import {
+  componentStoryMeta,
   withJsxTransformer,
   withSource,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -36,20 +36,12 @@ type TextareaStory = StoryObj<IressInputProps<string, number>>;
 export default {
   title: 'Components/Input',
   component: IressInput,
-  tags: ['updated'],
-  argTypes: {
-    append: reactNodeArgType,
-    prepend: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: { testMeta: componentMeta.testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      append: reactNodeArgType,
+      prepend: reactNodeArgType,
     },
-  },
+  }),
 } as Meta<typeof IressInput>;
 
 export const Default: Story = {

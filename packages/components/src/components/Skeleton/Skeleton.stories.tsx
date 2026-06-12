@@ -13,9 +13,9 @@ import SkeletonSizeSource from './mocks/SkeletonSize.tsx?raw';
 import { SkeletonCard } from './mocks/SkeletonCard';
 import SkeletonCardSource from './mocks/SkeletonCard.tsx?raw';
 import {
+  componentStoryMeta,
   withSource,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -27,19 +27,11 @@ type CircleStory = StoryObj<IressSkeletonProps<'circle'>>;
 export default {
   title: 'Components/Skeleton',
   component: IressSkeleton,
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: { testMeta: componentMeta.testMeta },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
     },
-  },
+  }),
 } as Meta<typeof IressSkeleton>;
 
 export const Default: Story = {};

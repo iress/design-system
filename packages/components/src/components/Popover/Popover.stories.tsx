@@ -19,10 +19,10 @@ import PopoverWithMenuSource from './mocks/PopoverWithMenu.tsx?raw';
 import { PopoverWithListbox } from './mocks/PopoverWithListbox';
 import PopoverWithListboxSource from './mocks/PopoverWithListbox.tsx?raw';
 import {
+  componentStoryMeta,
   disableArgTypes,
   withSource,
   reactElementArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -73,31 +73,22 @@ const childrenOptions = {
 export default {
   title: 'Components/Popover',
   component: IressPopover,
-  argTypes: {
-    ...disableArgTypes(['activator']),
-    activator: reactElementArgType,
-    children: {
-      control: {
-        type: 'select',
-        labels: {
-          Heading: 'With Custom Children',
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...disableArgTypes(['activator']),
+      activator: reactElementArgType,
+      children: {
+        control: {
+          type: 'select',
+          labels: {
+            Heading: 'With Custom Children',
+          },
         },
-      },
-      options: Object.keys(childrenOptions),
-      mapping: childrenOptions,
-    },
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
-    },
-    docs: {
-      description: {
-        component: componentMeta.description,
+        options: Object.keys(childrenOptions),
+        mapping: childrenOptions,
       },
     },
-  },
+  }),
 } as Meta<typeof IressPopover>;
 
 export const Default: Story = {

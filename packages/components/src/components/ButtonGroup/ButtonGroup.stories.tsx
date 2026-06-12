@@ -6,8 +6,8 @@ import { IressIcon } from '../Icon';
 import { IressText } from '../Text';
 import { IressDivider } from '../Divider';
 import {
+  componentStoryMeta,
   reactNodeArgType,
-  stylingProps,
   withSource,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
@@ -20,21 +20,11 @@ type MultipleStory = StoryObj<IressButtonGroupProps<string, true>>;
 export default {
   title: 'Components/ButtonGroup',
   component: IressButtonGroup,
-  argTypes: {
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
-  tags: ['updated'],
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
     },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  }),
 } as Meta<typeof IressButtonGroup>;
 
 export const Default: Story = {

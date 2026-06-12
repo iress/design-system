@@ -1,11 +1,11 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressAutocomplete } from '.';
 import {
+  componentStoryMeta,
   withJsxTransformer,
   withSource,
   withBreakpointLabel,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import { AutocompleteUsingState } from './mocks/AutocompleteUsingState';
 import AutocompleteUsingStateSource from './mocks/AutocompleteUsingState.tsx?raw';
@@ -32,23 +32,14 @@ export default {
       container: document.body,
     },
   },
-  argTypes: {
-    append: reactNodeArgType,
-    errorText: reactNodeArgType,
-    noResultsText: reactNodeArgType,
-    prepend: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    idsConfig: {
-      testMeta: componentMeta.testMeta,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      append: reactNodeArgType,
+      errorText: reactNodeArgType,
+      noResultsText: reactNodeArgType,
+      prepend: reactNodeArgType,
     },
-    docs: {
-      description: {
-        component: componentMeta.description,
-      },
-    },
-  },
+  }),
 } as Meta<typeof IressAutocomplete>;
 
 export const Default: Story = {
