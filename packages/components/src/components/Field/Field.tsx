@@ -9,7 +9,7 @@ import { splitCssProps, styled } from '@/styled-system/jsx';
 import { field } from './Field.styles';
 import { css, cx } from '@/styled-system/css';
 import { FieldFooter } from './components/FieldFooter';
-import { FieldHint, FieldHintIcon } from './components/FieldHint';
+import { FieldHint } from './components/FieldHint';
 import { GlobalCSSClass } from '@/enums';
 
 export type IressFieldProps<

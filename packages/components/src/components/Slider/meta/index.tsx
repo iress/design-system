@@ -6,12 +6,12 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the slider',
-    query: <code>getByRole('slider')</code>,
     testId: 'slider',
   },
   {
     part: 'slider',
     description: 'The range input element',
+    query: <code>getByRole('slider')</code>,
     testId: 'slider__slider',
   },
   {

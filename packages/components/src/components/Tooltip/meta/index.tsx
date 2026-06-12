@@ -12,11 +12,13 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'activator',
     description: 'The tooltip trigger element',
+    query: <code>getByRole('button')</code>,
     testId: 'tooltip__activator',
   },
   {
     part: 'tooltip text',
     description: 'The tooltip content',
+    query: <code>getByRole('tooltip')</code>,
     testId: 'tooltip__tooltip-text',
   },
 ];

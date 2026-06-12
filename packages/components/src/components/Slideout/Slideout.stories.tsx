@@ -1,5 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressSlideout, type IressSlideoutProps } from '.';
+import { IressSlideout } from '.';
 import { IressButton } from '../Button';
 import { useSlideout } from './hooks/useSlideout';
 import { IressSlideoutProvider } from './SlideoutProvider';

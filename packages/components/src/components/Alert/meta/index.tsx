@@ -17,11 +17,13 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'heading',
     description: 'The alert heading container',
+    query: <code>getByRole('heading')</code>,
     testId: 'alert__heading',
   },
   {
     part: 'footer',
     description: 'The alert footer/actions container',
+    query: <code>getByText('...')</code>,
     testId: 'alert__footer',
   },
 ];

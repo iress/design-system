@@ -13,7 +13,6 @@ import SkeletonSizeSource from './mocks/SkeletonSize.tsx?raw';
 import { SkeletonCard } from './mocks/SkeletonCard';
 import SkeletonCardSource from './mocks/SkeletonCard.tsx?raw';
 import {
-  disableArgTypes,
   withSource,
   reactNodeArgType,
   stylingProps,

@@ -12,6 +12,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'activator',
     description: 'The menu group activator item',
+    query: <code>getByRole('button', {'{'} name: '...' {'}'})</code>,
     testId: 'menu__activator',
   },
   {

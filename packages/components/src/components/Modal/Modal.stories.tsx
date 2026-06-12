@@ -28,7 +28,6 @@ import ModalDisableClosingSource from './mocks/ModalDisableClosing.tsx?raw';
 import {
   disableArgTypes,
   withSource,
-  withJsxTransformer,
   reactNodeArgType,
   stylingProps,
   withBreakpointLabel,

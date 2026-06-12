@@ -6,12 +6,12 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the radio',
-    query: <code>getByRole('radio', {'{'} name: '...' {'}'})</code>,
     testId: 'radio',
   },
   {
     part: 'input',
     description: 'The underlying radio input element',
+    query: <code>getByRole('radio', {'{'} name: '...' {'}'})</code>,
     testId: 'radio__input',
   },
   {

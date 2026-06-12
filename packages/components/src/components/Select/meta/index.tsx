@@ -32,6 +32,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'menu item',
     description: 'An individual menu option',
+    query: <code>getByRole('option', {'{'} name: '...' {'}'})</code>,
     testId: 'select__menu-item',
   },
   {

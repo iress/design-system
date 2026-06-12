@@ -7,11 +7,6 @@ import {
 } from '@/main';
 import { useState } from 'react';
 
-interface FieldValues {
-  name?: string;
-  email?: string;
-}
-
 const Form = () => (
   <IressForm>
     <IressFormField

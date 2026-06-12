@@ -2,14 +2,12 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressIcon } from '../Icon';
 import {
   IressInput,
-  IressStack,
   IressToasterProvider,
   useToaster,
   type IressInputProps,
 } from '../../main';
 import { IressField } from '../Field';
 import {
-  disableArgTypes,
   withJsxTransformer,
   withSource,
   reactNodeArgType,

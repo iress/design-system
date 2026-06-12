@@ -27,6 +27,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'heading',
     description: 'The card heading container',
+    query: <code>getByRole('heading')</code>,
     testId: 'card__heading',
   },
   {

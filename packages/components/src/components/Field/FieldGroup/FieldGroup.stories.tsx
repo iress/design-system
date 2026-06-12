@@ -78,12 +78,13 @@ const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root fieldset element of the field group',
-    query: <code>getByRole('group')</code>,
+    query: <code>getByRole('group', {'{'} name: 'label' {'}'})</code>,
     testId: 'field-group',
   },
   {
     part: 'legend',
     description: 'The legend/label of the field group',
+    query: <code>getByText('...')</code>,
     testId: 'field-group__legend',
   },
   {

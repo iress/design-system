@@ -5,7 +5,7 @@ export function SkeletonSize() {
     <IressInline gap="md">
       <IressSkeleton mode="rect" width="150" height="150" />
       <IressSkeleton mode="circle" width="150" height="150" />
-      <IressSkeleton mode="text" width="150" height="150" />
+      <IressSkeleton mode="text" width="150" />
     </IressInline>
   );
 }

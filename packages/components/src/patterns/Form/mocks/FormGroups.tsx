@@ -6,7 +6,6 @@ import {
   IressInline,
   IressInput,
   IressPanel,
-  IressStack,
   IressText,
   IressIcon,
   IressCloseButton,

@@ -2,7 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressIcon, type IressIconProps } from './Icon';
 import { IressText } from '../Text';
 import { IressInline } from '../Inline';
-import { disableArgTypes, stylingProps, withSource } from '@iress-oss/ids-storybook-config';
+import { stylingProps, withSource } from '@iress-oss/ids-storybook-config';
 import { IressLink } from '../Link';
 import { IressIconProvider } from './IconProvider';
 import React, { useMemo, useState } from 'react';

@@ -12,6 +12,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'label',
     description: 'The group label element',
+    query: <code>getByText('...')</code>,
     testId: 'buttongroup__label',
   },
 ];

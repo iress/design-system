@@ -14,7 +14,7 @@ import { LoadingDashboard } from './mocks/LoadingDashboard';
 import LoadingDashboardSource from './mocks/LoadingDashboard.tsx?raw';
 import { LoadingDashboardError } from './mocks/LoadingDashboardError';
 import LoadingDashboardErrorSource from './mocks/LoadingDashboardError.tsx?raw';
-import { IressButton, IressInline, IressText } from '@/main';
+import { IressButton, IressInline } from '@/main';
 import type { LongLoading } from './components/LongLoading';
 import type { StartUpLoading } from './components/StartUpLoading';
 import type { DefaultLoading } from './components/DefaultLoading';

@@ -12,6 +12,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'label',
     description: 'The toggle label element',
+    query: <code>getByText('...')</code>,
     testId: 'toggle__label',
   },
   {

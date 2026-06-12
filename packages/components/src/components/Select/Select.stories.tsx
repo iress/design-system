@@ -1,7 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSelect } from './Select';
 import {
-  generateLabelValueMeta,
   MOCK_LABEL_VALUE_META,
 } from '@/mocks/generateLabelValues';
 import { SelectAsync } from './mocks/SelectAsync';

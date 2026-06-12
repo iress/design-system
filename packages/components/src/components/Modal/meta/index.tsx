@@ -12,6 +12,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'heading',
     description: 'The modal heading',
+    query: <code>getByRole('heading', {'{'} name: '...' {'}'})</code>,
     testId: 'modal__heading',
   },
   {
@@ -43,6 +44,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'footer',
     description: 'The modal footer',
+    query: <code>getByText('...')</code>,
     testId: 'modal__footer',
   },
 ];

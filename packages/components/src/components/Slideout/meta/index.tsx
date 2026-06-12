@@ -17,6 +17,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'heading',
     description: 'The slideout heading',
+    query: <code>getByRole('heading', {'{'} name: '...' {'}'})</code>,
     testId: 'slideout__heading',
   },
   {
@@ -33,6 +34,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'footer',
     description: 'The slideout footer',
+    query: <code>getByText('...')</code>,
     testId: 'slideout__footer',
   },
 ];

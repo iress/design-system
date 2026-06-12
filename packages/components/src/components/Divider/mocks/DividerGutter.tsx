@@ -1,4 +1,4 @@
-import { IressDivider, IressInline, IressPanel, IressStack, IressText } from '@/main';
+import { IressDivider, IressInline, IressPanel, IressText } from '@/main';
 
 export function DividerGutter() {
   return (

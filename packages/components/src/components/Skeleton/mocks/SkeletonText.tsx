@@ -10,8 +10,8 @@ const TEXT_STYLES = [
   'typography.heading.1',
   'typography.heading.2',
   'typography.heading.3',
-  'typography.body',
-  'typography.body.small',
+  'typography.body.md',
+  'typography.body.sm',
 ] as const;
 
 export function SkeletonText() {
