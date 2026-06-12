@@ -9,11 +9,21 @@ import {
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The form element',
+    query: <code>getByRole('form')</code>,
+    testId: 'hook-form',
+  },
+];
 
 type Story = StoryObj<typeof IressHookForm>;
 
 export default {
-  title: 'Patterns/Form',
+  title: 'Patterns/Form/HookForm',
   component: IressHookForm,
   argTypes: {
     ...removeArgTypes(['ref']),
@@ -21,6 +31,7 @@ export default {
     ...stylingProps,
   },
   parameters: {
+    idsConfig: { testMeta },
     IDS_Sandbox: {
       scopes: ['react-hook-form'],
     },

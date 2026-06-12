@@ -24,6 +24,7 @@ import {
   disableArgTypes,
   withSource,
 } from '@iress-oss/ids-storybook-config';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import { WithReadonlyDataForm } from './mocks/WithReadonlyDataForm';
 import WithReadonlyDataFormSource from './mocks/WithReadonlyDataForm.tsx?raw';
 import { SwitchEditReadonlyForm } from './mocks/SwitchEditReadonlyForm';
@@ -83,6 +84,10 @@ const SanitisedInputForm = lazy(() =>
 
 type Story = StoryObj<typeof IressForm>;
 
+const testMeta: TestComponentMeta[] = [
+  { part: 'main', description: 'The form element', query: <code>getByRole('form')</code>, testId: 'form' },
+];
+
 export default {
   title: 'Patterns/Form',
   component: IressForm,
@@ -99,6 +104,7 @@ export default {
       },
     },
     idsConfig: {
+      testMeta,
       tabDescriptions: {
         fields: 'All form controls (Input, Select, Checkbox, etc.) should be wrapped in an IressFormField component which is responsible for the layout of the label, form control and error message, as well as providing accessibility features such as associating the label with the form control and announcing error messages to screen readers.',
         rules:

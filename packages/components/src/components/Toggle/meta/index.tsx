@@ -6,7 +6,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the toggle',
-    query: <code>getByRole('switch')</code>,
+    query: <code>getByRole('switch', {'{'} name: 'label' {'}'})</code>,
     testId: 'toggle',
   },
   {

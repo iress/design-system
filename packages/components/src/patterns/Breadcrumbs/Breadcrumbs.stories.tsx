@@ -1,11 +1,19 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressBreadcrumbs } from '@/main';
 import { disableArgTypes, withSource } from '@iress-oss/ids-storybook-config';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 import { BreadcrumbsAllConfigurations } from './mocks/BreadcrumbsAllConfigurations';
 import BreadcrumbsAllConfigurationsSource from './mocks/BreadcrumbsAllConfigurations.tsx?raw';
 
 type Story = StoryObj<typeof IressBreadcrumbs>;
+
+const testMeta: TestComponentMeta[] = [
+  { part: 'main', description: 'The root navigation element', query: <code>getByRole('navigation')</code>, testId: 'breadcrumbs' },
+  { part: 'item', description: 'A breadcrumb link item', query: <code>getByRole('link', {'{'} name: '...' {'}'})</code>, testId: 'breadcrumbs__item-*' },
+  { part: 'overflow', description: 'The overflow trigger button', query: <code>getByRole('button')</code>, testId: 'breadcrumbs__overflow' },
+  { part: 'menu', description: 'The overflow menu', query: <code>getByRole('menu')</code>, testId: 'breadcrumbs__menu' },
+];
 
 export default {
   title: 'Patterns/Breadcrumbs',
@@ -20,6 +28,7 @@ export default {
     ...disableArgTypes(['items']),
   },
   parameters: {
+    idsConfig: { testMeta },
     docs: {
       description: {
         component: componentMeta.description,

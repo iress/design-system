@@ -2,9 +2,16 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressInline, IressStack, IressStyled } from '@/main';
 import { IressContextualMenu, type ContextualMenuItem } from './ContextualMenu';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressContextualMenu>;
+
+const testMeta: TestComponentMeta[] = [
+  { part: 'main', description: 'The root contextual menu element', testId: 'contextual-menu' },
+  { part: 'activator', description: 'The trigger button', query: <code>getByRole('button')</code>, testId: 'contextual-menu__activator' },
+  { part: 'menu', description: 'The menu container', query: <code>getByRole('menu')</code>, testId: 'contextual-menu__menu' },
+];
 
 const DEFAULT_ITEMS: ContextualMenuItem[] = [
   {
@@ -36,6 +43,7 @@ export default {
     container: document.body,
   },
   parameters: {
+    idsConfig: { testMeta },
     docs: {
       description: {
         component: componentMeta.description,

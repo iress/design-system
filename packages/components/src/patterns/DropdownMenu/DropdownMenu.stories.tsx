@@ -6,6 +6,7 @@ import {
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
   IressAlert,
   IressDropdownMenu,
@@ -26,6 +27,14 @@ import componentMeta from './meta';
 type Story = StoryObj<IressDropdownMenuProps<true>>;
 type SingleStory = StoryObj<IressDropdownMenuProps<false>>;
 
+const testMeta: TestComponentMeta[] = [
+  { part: 'main', description: 'The root dropdown menu element', testId: 'dropdown-menu' },
+  { part: 'activator', description: 'The activator button', query: <code>getByRole('button')</code>, testId: 'dropdown-menu__activator-button__button' },
+  { part: 'input', description: 'The search input', query: <code>getByRole('searchbox')</code>, testId: 'dropdown-menu__input' },
+  { part: 'menu', description: 'The menu listbox', query: <code>getByRole('listbox')</code>, testId: 'dropdown-menu__menu' },
+  { part: 'reset button', description: 'The reset filter button', query: <code>getByRole('button', {'{'} name: 'Reset filter' {'}'})</code>, testId: 'dropdown-menu__reset-button' },
+];
+
 export default {
   title: 'Patterns/DropdownMenu',
   component: IressDropdownMenu,
@@ -37,6 +46,7 @@ export default {
     ...stylingProps,
   },
   parameters: {
+    idsConfig: { testMeta },
     docs: {
       description: {
         component: componentMeta.description,

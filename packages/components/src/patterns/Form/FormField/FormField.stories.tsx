@@ -13,14 +13,32 @@ import {
   withSource,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import { FormFieldSupplementary } from './mocks/FormFieldSupplementary';
 import FormFieldSupplementarySource from './mocks/FormFieldSupplementary.tsx?raw';
 
 type Story = StoryObj<typeof IressFormField>;
 
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element wrapping the form field',
+    testId: 'form-field',
+  },
+  {
+    part: 'input',
+    description: 'The controlled input rendered by the render prop',
+    query: <code>getByLabelText('...')</code>,
+    testId: 'form-field__input',
+  },
+];
+
 export default {
   title: 'Patterns/Form/FormField',
   component: IressFormField,
+  parameters: {
+    idsConfig: { testMeta },
+  },
   args: {
     label: 'Label',
     name: 'field',

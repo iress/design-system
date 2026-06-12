@@ -1,5 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { withSource } from '@iress-oss/ids-storybook-config';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import { IressSideNav } from './SideNav';
 import { SideNavDefault } from './mocks/SideNavDefault';
 import SideNavDefaultSource from './mocks/SideNavDefault.tsx?raw';
@@ -17,11 +18,21 @@ import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressSideNav>;
 
+const testMeta: TestComponentMeta[] = [
+  { part: 'main', description: 'The root navigation element', query: <code>getByRole('navigation')</code>, testId: 'sidenav' },
+  { part: 'rail', description: 'The side rail', testId: 'sidenav__rail' },
+  { part: 'panel', description: 'The navigation panel', testId: 'sidenav__panel' },
+  { part: 'panel heading', description: 'The panel heading', query: <code>getByRole('heading')</code>, testId: 'sidenav__panel-heading' },
+  { part: 'header', description: 'The header slot', testId: 'sidenav__header' },
+  { part: 'footer', description: 'The footer slot', testId: 'sidenav__footer' },
+];
+
 export default {
   title: 'Patterns/SideNav',
   component: IressSideNav,
   tags: ['beta'],
   parameters: {
+    idsConfig: { testMeta },
     docs: {
       description: {
         component: componentMeta.description,
