@@ -3,11 +3,32 @@ import { IressMenuGroup, type IressMenuGroupProps } from './MenuGroup';
 import { IressMenu } from '../Menu';
 import { IressMenuItem } from '../MenuItem/MenuItem';
 import { IressPanel } from '@/main';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the menu group',
+    query: <code>getByRole('group')</code>,
+    testId: 'menu-group',
+  },
+  {
+    part: 'activator',
+    description: 'The activator element for subdraw variant',
+    testId: 'menu-group__activator',
+  },
+  {
+    part: 'subdraw',
+    description: 'The subdraw container',
+    testId: 'menu-group__subdraw',
+  },
+];
 
 export default {
   title: 'Components/Menu/MenuGroup',
   component: IressMenuGroup,
   parameters: {
+    idsConfig: { testMeta },
     layout: 'centered',
   },
 } satisfies Meta<typeof IressMenuGroup>;

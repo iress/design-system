@@ -6,7 +6,13 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the link',
-    query: <code>getByRole('link')</code>,
+    query: (
+      <>
+        <code>getByRole('link', {'{'} name: '...' {'}'})</code> when an href is
+        provided, otherwise{' '}
+        <code>getByRole('button', {'{'} name: '...' {'}'})</code>
+      </>
+    ),
     testId: 'link',
   },
 ];

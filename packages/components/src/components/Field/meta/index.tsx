@@ -6,21 +6,30 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the field',
+    query: (
+      <>
+        <code>getByRole('textbox', {'{'} name: '...' {'}'})</code> to query the
+        input by its label, or <code>getByLabelText('...')</code>
+      </>
+    ),
     testId: 'field',
   },
   {
     part: 'label',
     description: 'The field label element',
+    query: <code>getByText('...')</code>,
     testId: 'field__label',
   },
   {
     part: 'hint',
     description: 'The hint text below the label',
+    query: <code>getByText('...')</code>,
     testId: 'field__hint',
   },
   {
     part: 'error',
     description: 'The error message container',
+    query: <code>getByText('...')</code>,
     testId: 'field__error',
   },
 ];

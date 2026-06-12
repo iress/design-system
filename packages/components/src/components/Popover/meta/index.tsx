@@ -11,6 +11,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'activator',
     description: 'The popover trigger element',
+    query: <code>getByRole('button')</code>,
     testId: 'popover__activator',
   },
   {

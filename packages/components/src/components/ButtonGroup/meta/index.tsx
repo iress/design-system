@@ -6,7 +6,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the button group',
-    query: <code>getByRole('group')</code>,
+    query: <code>getByRole('group', {'{'} name: '...' {'}'})</code>,
     testId: 'buttongroup',
   },
   {

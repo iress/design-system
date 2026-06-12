@@ -2,9 +2,18 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressRadioMark } from './RadioMark';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import { stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressRadioMark>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the radio mark',
+    testId: 'radio-mark',
+  },
+];
 
 export default {
   title: 'Components/Radio/RadioMark',
@@ -14,6 +23,7 @@ export default {
     ...stylingProps,
   },
   parameters: {
+    idsConfig: { testMeta },
     docs: {
       description: {
         component: `

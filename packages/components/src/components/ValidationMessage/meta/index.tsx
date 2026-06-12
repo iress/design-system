@@ -6,11 +6,13 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the validation message',
+    query: <code>getByText('...')</code>,
     testId: 'validationmessage',
   },
   {
     part: 'error',
     description: 'An individual error message',
+    query: <code>getByRole('link')</code>,
     testId: 'validationmessage__error',
   },
 ];

@@ -1,11 +1,21 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTab, type IressTabProps, IressTabSet } from '..';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressTabProps<undefined>>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the tab',
+    query: <code>getByRole('tab')</code>,
+    testId: 'tab',
+  },
+];
 
 export default {
   title: 'Components/TabSet/Tab',
@@ -14,6 +24,9 @@ export default {
   argTypes: {
     children: reactNodeArgType,
     ...stylingProps,
+  },
+  parameters: {
+    idsConfig: { testMeta },
   },
 } as Meta<IressTabProps<undefined>>;
 

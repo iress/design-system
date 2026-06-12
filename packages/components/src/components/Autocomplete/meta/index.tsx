@@ -6,7 +6,12 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the autocomplete',
-    query: <code>getByRole('combobox')</code>,
+    query: (
+      <>
+        <code>getByRole('combobox')</code> for the input, or{' '}
+        <code>getByLabelText('...')</code> when inside a Field
+      </>
+    ),
     testId: 'autocomplete',
   },
   {

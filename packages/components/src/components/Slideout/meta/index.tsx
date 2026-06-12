@@ -6,7 +6,12 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the slideout',
-    query: <code>getByRole('dialog')</code>,
+    query: (
+      <>
+        <code>findByRole('complementary')</code> by default, or{' '}
+        <code>findByRole('dialog')</code> if role is set to "dialog"
+      </>
+    ),
     testId: 'slideout',
   },
   {
@@ -17,6 +22,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'close button',
     description: 'The close button',
+    query: <code>findByRole('button', {'{'} name: 'Close' {'}'})</code>,
     testId: 'slideout__close-button__button',
   },
   {

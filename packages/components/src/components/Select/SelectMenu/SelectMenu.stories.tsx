@@ -1,6 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSelectMenu, type IressSelectMenuProps } from './SelectMenu';
 import { MOCK_LABEL_VALUES } from '../../../mocks/generateLabelValues';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
   addToStorybookCategory,
   reactNodeArgType,
@@ -8,6 +9,15 @@ import {
 } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSelectMenu>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the select menu',
+    query: <code>getByRole('listbox')</code>,
+    testId: 'select-menu',
+  },
+];
 
 export default {
   title: 'Components/Select/Subcomponents/Menu',
@@ -22,6 +32,9 @@ export default {
       'layout',
       'noWrap',
     ]),
+  },
+  parameters: {
+    idsConfig: { testMeta },
   },
 } as Meta<typeof IressSelectMenu>;
 

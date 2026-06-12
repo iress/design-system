@@ -6,7 +6,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the skip link',
-    query: <code>getByRole('link')</code>,
+    query: <code>getByRole('link', {'{'} name: 'Skip to content' {'}'})</code>,
     testId: 'skip-link',
   },
 ];

@@ -2,6 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 
 import { IressInputPopover } from './InputPopover';
 import { IressInput, IressMenu, IressMenuItem, IressPanel } from '@/main';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
   disableArgTypes,
   reactElementArgType,
@@ -9,6 +10,24 @@ import {
 } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressInputPopover>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the input popover',
+    testId: 'input-popover',
+  },
+  {
+    part: 'activator',
+    description: 'The activator input element',
+    testId: 'input-popover__activator',
+  },
+  {
+    part: 'content',
+    description: 'The popover content container',
+    testId: 'input-popover__content',
+  },
+];
 
 const childrenOptions = {
   none: null,
@@ -39,6 +58,9 @@ export default {
       mapping: childrenOptions,
     },
     ...stylingProps,
+  },
+  parameters: {
+    idsConfig: { testMeta },
   },
 } as Meta<typeof IressInputPopover>;
 

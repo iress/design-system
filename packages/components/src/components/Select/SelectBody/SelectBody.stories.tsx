@@ -8,6 +8,7 @@ import {
   IressSelectMenu,
 } from '@/main';
 import { MOCK_LARGE_LABEL_VALUES_DATASET } from '../../../mocks/generateLabelValues';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
   addToStorybookCategory,
   disableArgTypes,
@@ -19,6 +20,14 @@ import {
 import { cssVars } from '@iress-oss/ids-tokens';
 
 type Story = StoryObj<typeof IressSelectBody>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the select body',
+    testId: 'select-body',
+  },
+];
 
 export default {
   title: 'Components/Select/Subcomponents/Body',
@@ -36,6 +45,9 @@ export default {
         'noGutter',
       ]),
     ),
+  },
+  parameters: {
+    idsConfig: { testMeta },
   },
 } as Meta<typeof IressSelectBody>;
 

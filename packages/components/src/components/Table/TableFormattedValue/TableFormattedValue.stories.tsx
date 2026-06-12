@@ -1,5 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTable, IressTableFormattedValue } from '..';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
   disableArgTypes,
   reactNodeArgType,
@@ -8,6 +9,14 @@ import {
 
 type Story = StoryObj<typeof IressTableFormattedValue<object, string>>;
 
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the table formatted value',
+    testId: 'table-formatted-value',
+  },
+];
+
 export default {
   title: 'Components/Table/FormattedValue',
   component: IressTableFormattedValue,
@@ -15,6 +24,9 @@ export default {
   argTypes: {
     children: reactNodeArgType,
     ...stylingProps,
+  },
+  parameters: {
+    idsConfig: { testMeta },
   },
 } as Meta<typeof IressTableFormattedValue>;
 

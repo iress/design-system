@@ -6,7 +6,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the table',
-    query: <code>getByRole('table')</code>,
+    query: <code>getByRole('table', {'{'} name: '...' {'}'})</code>,
     testId: 'table',
   },
   {

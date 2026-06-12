@@ -3,14 +3,26 @@ import { IressStyled } from '.';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
 import { IressIcon } from '../Icon';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import { disableArgTypes } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressStyled>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the styled component',
+    testId: 'styled',
+  },
+];
 
 export default {
   title: 'Components/Styled',
   component: IressStyled,
   tags: ['updated'],
+  parameters: {
+    idsConfig: { testMeta },
+  },
 } as Meta<typeof IressStyled>;
 
 export const Default: Story = {

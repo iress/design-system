@@ -6,7 +6,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the checkbox',
-    query: <code>getByRole('checkbox')</code>,
+    query: <code>getByRole('checkbox', {'{'} name: '...' {'}'})</code>,
     testId: 'checkbox',
   },
   {

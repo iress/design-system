@@ -6,7 +6,12 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the image',
-    query: <code>getByRole('img')</code>,
+    query: (
+      <>
+        <code>getByRole('img')</code>, or{' '}
+        <code>getByAltText('...')</code> to match by alt text
+      </>
+    ),
     testId: 'image',
   },
 ];

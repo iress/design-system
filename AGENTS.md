@@ -118,9 +118,13 @@ GitHub Actions workflow in `.github/workflows/ci-cd.yml`. Runs on all pushes and
 
 ## Additional context
 
-- `.github/instructions/` — domain-specific instructions for component creation, bug fixing, PR review, file organization, ESLint usage, and testing
+- `.github/instructions/` — domain-specific instructions for component creation, bug fixing, PR review, file organization, ESLint usage, testing, and **story patterns**
 - `.agents/skills/` — agent skills for Figma-to-IDS translation, token usage, UI auditing, UI translation, and version migration
 - `packages/components/.ai/` and `packages/tokens/.ai/` — package-level AI context
+
+## Story patterns
+
+When creating or modifying `.stories.tsx` files, follow `.github/instructions/story-patterns.instructions.md`. It defines the three allowed patterns (P1 args-only, P2 mock+withSource, P3 inline render), modifiers, and disallowed patterns. ESLint enforces the mechanical checks automatically.
 
 ## UI work rules
 

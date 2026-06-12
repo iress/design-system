@@ -6,7 +6,13 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the icon',
-    query: <code>getByRole('img')</code>,
+    query: (
+      <>
+        <code>getByRole('img', {'{'} name: '...' {'}'})</code> when a label is
+        provided, otherwise{' '}
+        <code>getByRole('img', {'{'} hidden: true {'}'})</code>
+      </>
+    ),
     testId: 'icon',
   },
 ];

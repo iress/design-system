@@ -6,7 +6,12 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the progress',
-    query: <code>getByRole('progressbar')</code>,
+    query: (
+      <>
+        <code>getByRole('meter')</code> when min, max, and value are all
+        provided, otherwise <code>getByRole('progressbar')</code>
+      </>
+    ),
     testId: 'progress',
   },
 ];

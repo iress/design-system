@@ -6,6 +6,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the label',
+    query: <code>getByText('...')</code>,
     testId: 'label',
   },
   {

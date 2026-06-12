@@ -6,7 +6,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the spinner',
-    query: <code>getByRole('status')</code>,
+    query: <code>getByLabelText('...')</code>,
     testId: 'spinner',
   },
 ];

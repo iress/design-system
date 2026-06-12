@@ -6,7 +6,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the modal',
-    query: <code>getByRole('dialog')</code>,
+    query: <code>findByRole('dialog', {'{'} name: '...' {'}'})</code>,
     testId: 'modal',
   },
   {
@@ -22,6 +22,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'close button',
     description: 'The close button',
+    query: <code>findByRole('button', {'{'} name: 'Close' {'}'})</code>,
     testId: 'modal__close-button__button',
   },
   {

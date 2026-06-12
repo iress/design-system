@@ -4,6 +4,7 @@ import { IressMenu } from '../Menu';
 import { IressIcon, IressPanel, IressPill, IressPopover } from '@/main';
 import { RoutingLinkMenu } from './mocks/RoutingLinkMenu';
 import RoutingLinkMenuSource from './mocks/RoutingLinkMenu.tsx?raw';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
   reactNodeArgType,
   stylingProps,
@@ -11,6 +12,15 @@ import {
 } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressMenuItem>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the menu item',
+    query: <code>getByRole('menuitem')</code>,
+    testId: 'menu-item',
+  },
+];
 
 export default {
   title: 'Components/Menu/MenuItem',
@@ -21,6 +31,9 @@ export default {
     children: reactNodeArgType,
     prepend: reactNodeArgType,
     ...stylingProps,
+  },
+  parameters: {
+    idsConfig: { testMeta },
   },
 } as Meta<typeof IressMenuItem>;
 

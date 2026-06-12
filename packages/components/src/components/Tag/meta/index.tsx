@@ -6,11 +6,19 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the tag',
+    query: (
+      <>
+        <code>getByRole('button', {'{'} name: '...' {'}'})</code> when
+        interactive, or <code>getByRole('link', {'{'} name: '...' {'}'})</code>{' '}
+        when rendered as a link
+      </>
+    ),
     testId: 'tag',
   },
   {
     part: 'delete button',
     description: 'The tag delete button',
+    query: <code>getByRole('button', {'{'} name: 'Remove item' {'}'})</code>,
     testId: 'tag__delete-button__button',
   },
 ];

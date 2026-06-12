@@ -6,7 +6,12 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the input',
-    query: <code>getByRole('textbox')</code>,
+    query: (
+      <>
+        <code>getByRole('textbox')</code>, or{' '}
+        <code>getByLabelText('...')</code> when inside a Field
+      </>
+    ),
     testId: 'input',
   },
 ];

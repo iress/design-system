@@ -10,6 +10,7 @@ import {
   type IressSelectSearchProps,
 } from '@/main';
 import { MOCK_LARGE_LABEL_VALUES_DATASET } from '../../../mocks/generateLabelValues';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
   addToStorybookCategory,
   disableArgTypes,
@@ -22,6 +23,14 @@ import {
 import { cssVars } from '@iress-oss/ids-tokens';
 
 type Story = StoryObj<typeof IressSelectSearch>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the select search',
+    testId: 'select-search',
+  },
+];
 
 export default {
   title: 'Components/Select/Subcomponents/Search',
@@ -48,6 +57,9 @@ export default {
         'type',
       ]),
     ),
+  },
+  parameters: {
+    idsConfig: { testMeta },
   },
 } as Meta<typeof IressSelectSearch>;
 

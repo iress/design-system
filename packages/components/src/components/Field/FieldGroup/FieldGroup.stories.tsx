@@ -12,6 +12,7 @@ import {
   IressSelect,
 } from '@/main';
 import { type ComponentProps } from 'react';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
   disableArgTypes,
   STORYBOOK_ONLY_CATEGORY,
@@ -73,6 +74,30 @@ const defaultInputs: FieldAndInputProps[] = [
   },
 ];
 
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root fieldset element of the field group',
+    query: <code>getByRole('group')</code>,
+    testId: 'field-group',
+  },
+  {
+    part: 'legend',
+    description: 'The legend/label of the field group',
+    testId: 'field-group__legend',
+  },
+  {
+    part: 'hint',
+    description: 'The hint text of the field group',
+    testId: 'field-group__hint',
+  },
+  {
+    part: 'error',
+    description: 'The error message of the field group',
+    testId: 'field-group__error',
+  },
+];
+
 export default {
   title: 'Components/Field/FieldGroup',
   argTypes: {
@@ -92,6 +117,9 @@ export default {
   },
   component: IressFieldGroup,
   tags: ['updated'],
+  parameters: {
+    idsConfig: { testMeta },
+  },
 } as Meta<typeof IressFieldGroup>;
 
 export const Default: Story = {

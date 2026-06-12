@@ -6,7 +6,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the menu',
-    query: <code>getByRole('menu')</code>,
+    query: <code>getByRole('list')</code>,
     testId: 'menu',
   },
   {

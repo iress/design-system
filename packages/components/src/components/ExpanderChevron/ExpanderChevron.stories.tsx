@@ -2,14 +2,24 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressExpanderChevron } from './ExpanderChevron';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressExpanderChevron>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the expander chevron',
+    testId: 'expander-chevron',
+  },
+];
 
 export default {
   title: 'Components/Expander/ExpanderChevron',
   component: IressExpanderChevron,
   tags: ['updated'],
   parameters: {
+    idsConfig: { testMeta },
     docs: {
       description: {
         component: `

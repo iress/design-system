@@ -4,14 +4,15 @@ import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 
 export const testMeta: TestComponentMeta[] = [
   {
-    part: 'main',
-    description: 'The root element of the expander',
-    testId: 'expander',
-  },
-  {
     part: 'activator',
     description: 'The expand/collapse trigger button',
+    query: <code>getByRole('button', {'{'} name: '...' {'}'})</code>,
     testId: 'expander__activator',
+  },
+  {
+    part: 'content',
+    description: 'The expandable content container',
+    testId: 'expander__content',
   },
   {
     part: 'container',

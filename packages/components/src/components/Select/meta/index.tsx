@@ -6,7 +6,12 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the select',
-    query: <code>getByRole('combobox')</code>,
+    query: (
+      <>
+        <code>getByRole('combobox')</code> for the activator, or{' '}
+        <code>getByLabelText('...')</code> when inside a Field
+      </>
+    ),
     testId: 'select',
   },
   {
