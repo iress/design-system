@@ -15,6 +15,7 @@ export default {
   tags: ['updated'],
   argTypes: stylingProps,
   parameters: {
+    idsConfig: { testMeta: componentMeta.testMeta },
     docs: {
       description: {
         component: componentMeta.description,

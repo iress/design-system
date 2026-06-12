@@ -6,7 +6,7 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the alert',
-    role: (
+    query: (
       <>
         <code>getByRole('status')</code> if the alert has a status of "info" or
         "neutral", otherwise <code>getByRole('alert')</code>

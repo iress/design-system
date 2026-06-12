@@ -25,6 +25,7 @@ export default {
     ...stylingProps,
   },
   parameters: {
+    idsConfig: { testMeta: componentMeta.testMeta },
     docs: {
       description: {
         component: componentMeta.description,

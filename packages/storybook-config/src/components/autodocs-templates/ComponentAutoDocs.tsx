@@ -245,7 +245,7 @@ export const ComponentAutoDocs = () => {
             <IressText element="p" pt="md">
               This the testing reference for this component. Test IDs are
               provided as data attributes on the DOM elements to facilitate
-              testing. Where possible, please use the role.
+              testing. Where possible, please use the recommended query.
             </IressText>
             <TestTable items={testMeta} />
           </IressTab>

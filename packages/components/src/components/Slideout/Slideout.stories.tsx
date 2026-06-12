@@ -45,6 +45,9 @@ export default {
     ...stylingProps,
   },
   parameters: {
+    idsConfig: {
+      testMeta: componentMeta.testMeta,
+    },
     docs: {
       description: {
         component: componentMeta.description,
@@ -202,7 +205,7 @@ export const Microfrontend: Story = {
     ...mergeStorybookConfig(
       withSource(SlideoutMicrofrontendSource, { stripImports: true }),
       {
-        docs: {
+    docs: {
           story: {
             height: '600px',
           },

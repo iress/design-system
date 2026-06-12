@@ -1,29 +1,55 @@
 import { lazy } from 'react';
-import type { TestId } from '@helpers/testing';
 import type { ComponentMeta } from '@helpers/meta/types';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 
-export const testIds: TestId[] = [
-  { suffix: 'heading', description: 'The modal heading' },
-  { suffix: 'backdrop', description: 'The overlay backdrop' },
+export const testMeta: TestComponentMeta[] = [
   {
-    suffix: 'close-button__button',
+    part: 'main',
+    description: 'The root element of the modal',
+    query: <code>getByRole('dialog')</code>,
+    testId: 'modal',
+  },
+  {
+    part: 'heading',
+    description: 'The modal heading',
+    testId: 'modal__heading',
+  },
+  {
+    part: 'backdrop',
+    description: 'The overlay backdrop',
+    testId: 'modal__backdrop',
+  },
+  {
+    part: 'close button',
     description: 'The close button',
+    testId: 'modal__close-button__button',
   },
-  { suffix: 'content', description: 'The modal content area' },
   {
-    suffix: 'status-header',
+    part: 'content',
+    description: 'The modal content area',
+    testId: 'modal__content',
+  },
+  {
+    part: 'status header',
     description: 'The status icon header (when status is set)',
+    testId: 'modal__status-header',
   },
   {
-    suffix: 'status-icon',
+    part: 'status icon',
     description: 'The status icon (when status is set)',
+    testId: 'modal__status-icon',
   },
-  { suffix: 'footer', description: 'The modal footer' },
+  {
+    part: 'footer',
+    description: 'The modal footer',
+    testId: 'modal__footer',
+  },
 ];
 
 export default {
   heading: 'Modal',
   description: 'Displays content in a focused overlay dialog that requires user interaction.',
   tags: ['overlay', 'dialog', 'interactive'],
+  testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
 } satisfies ComponentMeta;

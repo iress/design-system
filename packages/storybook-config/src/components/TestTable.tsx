@@ -4,7 +4,7 @@ import { IressStorybookContext } from './IressStorybookContext';
 export interface TestComponentMeta {
   part: string;
   description: string;
-  role?: ReactNode;
+  query?: ReactNode;
   testId: string;
 }
 
@@ -13,8 +13,8 @@ export interface TestTableProps {
 }
 
 /**
- * Renders a table of `data-testid` suffixes for a component's propagated test IDs.
- * Used in Storybook docs pages to document available test IDs.
+ * Renders a table of test queries for a component's testable parts.
+ * Used in Storybook docs pages to document available test selectors.
  */
 export const TestTable = ({ items }: TestTableProps) => {
   const { IressText } = use(IressStorybookContext);
@@ -29,17 +29,21 @@ export const TestTable = ({ items }: TestTableProps) => {
         <tr>
           <th>Part</th>
           <th>Description</th>
-          <th>By Role</th>
-          <th>By Test ID</th>
+          <th>Recommended Query</th>
+          <th>Test ID</th>
         </tr>
       </thead>
       <tbody>
-        {items.map(({ part, description, role, testId }) => (
+        {items.map(({ part, description, query, testId }) => (
           <tr key={part}>
             <td>{part}</td>
             <td>{description}</td>
             <td>
-              {role ?? <IressText color="colour.neutral.70">N/A</IressText>}
+              {query ?? (
+                <IressText color="colour.neutral.70">
+                  Use test ID →
+                </IressText>
+              )}
             </td>
             <td>
               <code>{`getByTestId('${testId}')`}</code>

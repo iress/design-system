@@ -1,14 +1,25 @@
 import { lazy } from 'react';
-import type { TestId } from '@helpers/testing';
 import type { ComponentMeta } from '@helpers/meta/types';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 
-export const testIds: TestId[] = [
-  { suffix: 'label', description: 'The group label element' },
+export const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the button group',
+    query: <code>getByRole('group')</code>,
+    testId: 'buttongroup',
+  },
+  {
+    part: 'label',
+    description: 'The group label element',
+    testId: 'buttongroup__label',
+  },
 ];
 
 export default {
   heading: 'ButtonGroup',
   description: 'Groups related buttons together with consistent spacing and alignment.',
   tags: ['form', 'action', 'group'],
+  testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
 } satisfies ComponentMeta;

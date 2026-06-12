@@ -38,6 +38,9 @@ export default {
   },
   tags: ['updated'],
   parameters: {
+    idsConfig: {
+      testMeta: componentMeta.testMeta,
+    },
     docs: {
       description: {
         component: componentMeta.description,

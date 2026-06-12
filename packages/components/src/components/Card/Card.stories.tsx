@@ -40,6 +40,7 @@ export default {
       },
     },
     idsConfig: {
+      testMeta: componentMeta.testMeta,
       tabDescriptions: {
         slots:
           'Cards have several slots for rendering different types of content. Use these slots to build more complex card layouts and designs.',

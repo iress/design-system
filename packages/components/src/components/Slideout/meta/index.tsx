@@ -1,20 +1,40 @@
 import { lazy } from 'react';
-import type { TestId } from '@helpers/testing';
 import type { ComponentMeta } from '@helpers/meta/types';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 
-export const testIds: TestId[] = [
-  { suffix: 'heading', description: 'The slideout heading' },
+export const testMeta: TestComponentMeta[] = [
   {
-    suffix: 'close-button__button',
-    description: 'The close button',
+    part: 'main',
+    description: 'The root element of the slideout',
+    query: <code>getByRole('dialog')</code>,
+    testId: 'slideout',
   },
-  { suffix: 'content', description: 'The slideout content area' },
-  { suffix: 'footer', description: 'The slideout footer' },
+  {
+    part: 'heading',
+    description: 'The slideout heading',
+    testId: 'slideout__heading',
+  },
+  {
+    part: 'close button',
+    description: 'The close button',
+    testId: 'slideout__close-button__button',
+  },
+  {
+    part: 'content',
+    description: 'The slideout content area',
+    testId: 'slideout__content',
+  },
+  {
+    part: 'footer',
+    description: 'The slideout footer',
+    testId: 'slideout__footer',
+  },
 ];
 
 export default {
   heading: 'Slideout',
   description: 'Displays supplementary content in a panel that slides in from the edge of the viewport.',
   tags: ['overlay', 'navigation', 'panel'],
+  testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
 } satisfies ComponentMeta;
