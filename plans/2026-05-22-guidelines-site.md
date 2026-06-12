@@ -823,52 +823,77 @@ enforces conventions and reduces boilerplate across all component/pattern story 
 
 ## Phase 13: Tabbed Content Architecture + TypeDoc API Reference
 
-> **Goal:** Restructure component documentation pages into tabbed views (Design, Develop,
-> Specifications) to serve both designers and developers. Add TypeDoc as a generated API
-> reference linked from each component page.
+> **Goal:** Restructure component documentation into a multi-file tabbed architecture serving all audiences (developers, designers, PMs, QA, compliance). Add TypeDoc as a generated API reference.
 
 **Prerequisite:** Phases 10–12 complete (autodocs, shared meta, guidelines content stable).
 
+### Content file structure (decided)
+
+Each component gets multiple MDX files:
+
+```
+apps/guidelines/content/components/
+  alert.mdx              ← Overview tab (metadata, links, quick import, bundle size)
+  alert.design.mdx       ← Design tab (when to use, do's/don'ts, content guidelines, Figma)
+  alert.develop.mdx      ← Develop tab (code examples, props, recipes, testing, migration)
+  alert.specifications.mdx ← Specifications tab (behaviour, accessibility, keyboard, states)
+```
+
+### Tab structure and audiences
+
+| Tab | Primary audience | Key sections |
+|-----|-----------------|--------------|
+| **Overview** | Everyone | Quick import, links (Storybook, GitHub, Figma, npm `.ai/`, edit page), bundle size |
+| **Design** | Designers, PMs, content designers | When to use / when not to, do's/don'ts, content guidelines (labels, errors, tone), related patterns, Figma link |
+| **Develop** | Developers, AI agents | Quick Start, Props (from react-docgen), Examples (from stories), Recipes, Dynamic tabs (slots, rules, etc.), Migration, Testing |
+| **Specifications** | QA, compliance, BAs | Expected behaviour per state, accessibility (WCAG level, ARIA roles, keyboard table), states matrix, edge cases |
+
+### How the translate pipeline uses this
+
+- `translate.ts --components` reads primarily from `*.develop.mdx` for `.ai/` output
+- Also reads `*.design.mdx` for "when to use" context (included as a brief section in `.ai/`)
+- Also reads `*.specifications.mdx` for accessibility notes (included in `.ai/`)
+- `*.mdx` (overview) is for the site only, not for `.ai/`
+
 ### Task 13.1: Implement tabbed component pages
 
-- [ ] **Step 1:** Design the tab structure per component page:
-  - **Design** — when to use, visual examples, do's/don'ts, design tokens used, Figma link
-  - **Develop** — quick start, code examples, common patterns, key props overview
-  - **Specifications** — expected behaviour, accessibility (WCAG), keyboard interactions, states matrix
-- [ ] **Step 2:** Implement tab UI using `IressTabSet` (dogfooding)
-- [ ] **Step 3:** Decide content file structure — either:
-  - Multiple MDX files per component (`button.design.mdx`, `button.develop.mdx`, `button.specs.mdx`)
-  - Or single file with sections rendered into tabs via frontmatter/headings
-- [ ] **Step 4:** Update the splat route to render tabbed pages for component/pattern content
-- [ ] **Step 5:** Update navigation to show component name (tabs appear within the page, not sidebar)
+- [ ] **Step 1:** Create the multi-file structure for Alert as reference implementation
+- [ ] **Step 2:** Implement tab UI using `IressTabSet` (dogfooding) — route renders tabs based on available `*.{design,develop,specifications}.mdx` files
+- [ ] **Step 3:** Update the splat route to detect multi-file components and render tabbed pages
+- [ ] **Step 4:** Update navigation to show component name (tabs appear within the page, not sidebar)
+- [ ] **Step 5:** Migrate remaining component content into the multi-file structure
 
-### Task 13.2: Add design-focused content
+### Task 13.2: Define content templates
 
-- [ ] **Step 1:** Define design content template (when to use, visual examples, do's/don'ts, related patterns)
-- [ ] **Step 2:** Add Figma embed or link per component (source of truth file)
-- [ ] **Step 3:** Document design token usage per component (which tokens apply, pairing guidance)
-- [ ] **Step 4:** Populate design content for key components (Button, Alert, Modal, Form, etc.)
+- [ ] **Step 1:** Define Overview template:
+  - Component name + one-line description
+  - Quick import code block
+  - Links: Storybook | GitHub source | Figma | npm `.ai/` | Edit this page
+  - Bundle size (from `.size-limit.json` or calculated)
+- [ ] **Step 2:** Define Design template:
+  - When to use / When not to use
+  - Do's and don'ts (with visual examples or descriptions)
+  - Content guidelines (label conventions, error messages, character limits)
+  - Related patterns
+  - Figma link (source of truth for visual specs)
+- [ ] **Step 3:** Define Develop template:
+  - Quick Start (minimal working example)
+  - Props table (generated from react-docgen-typescript at translate time)
+  - Examples (from stories — P1/P2/P3 extraction)
+  - Recipes (from `tags: ['recipe']` stories)
+  - Dynamic tab sections (from `tags: ['tab:<name>']` stories)
+  - Migration (from `tags: ['migration']` stories or inline diffs)
+  - Testing (from `testMeta` — recommended queries + test IDs table)
+  - Styling props reference
+- [ ] **Step 4:** Define Specifications template:
+  - Behaviour by state (default, hover, focus, active, disabled, error, loading)
+  - Accessibility (WCAG criteria met, required ARIA attributes, screen reader announcements)
+  - Keyboard interaction table (key → action)
+  - Edge cases (overflow, empty, long text, many items)
+  - Customisation points (stable system tokens that can be themed)
+- [ ] **Step 5:** Populate content for key components (Alert, Button, Modal, Form, Select)
 
-### Task 13.3: Add specifications content
-
-- [ ] **Step 1:** Define specs template:
-  - Expected behaviour (interaction states, edge cases)
-  - Accessibility (WCAG criteria, required ARIA, keyboard interaction table)
-  - States/variants matrix
-  - Token customisation points (stable system tokens that can be themed, e.g. `radius.system.button`)
-- [ ] **Step 2:** Link to Figma source file for each component (visual token mapping lives here)
-- [ ] **Step 3:** Link to Storybook autodocs (API / Examples) per component
-- [ ] **Step 4:** Link to TypeDoc API reference per component
-- [ ] **Step 5:** Link to component source in the repo (e.g. GitHub link to the component directory — shows styles/recipes for exact token usage, always up to date)
-- [ ] **Step 6:** Populate specs content for key components
-
-**Token mapping approach:**
-- Do NOT manually map tokens to component parts (drifts, unmaintainable)
-- Visual token mapping → Figma (designers inspect layers there)
-- Implementation details → link to source code (style file is always current)
-- Only document stable **customisation points** (system tokens the consumer can theme)
-
-### Task 13.4: Set up TypeDoc for API reference
+### Task 13.3: Set up TypeDoc for API reference
 
 - [ ] **Step 1:** Install and configure TypeDoc for `@iress-oss/ids-components`
 - [ ] **Step 2:** Configure to read from component source + JSDoc comments (from Phase 11.5)

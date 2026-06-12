@@ -59,7 +59,7 @@ export const Heading: Story = {
   },
 };
 
-export const Footer: Story = {
+export const Actions: Story = {
   render: (args) => <AlertFooter {...args} />,
   parameters: {
     controls: { disable: true },

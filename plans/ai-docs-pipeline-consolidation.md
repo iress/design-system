@@ -195,8 +195,10 @@ The `.ai/` directory is a **derived artifact** for npm distribution.
 ┌─────────────────────────────────────────────────────────────────────┐
 │                        SOURCE OF TRUTH                               │
 ├─────────────────────────────────────────────────────────────────────┤
-│  apps/guidelines/content/**/*.mdx     (component/pattern/guide docs)│
-│  packages/components/src/**/*.stories.tsx (story source for embeds) │
+│  apps/guidelines/content/**/*.mdx     (prose, usage docs, embeds)   │
+│  packages/components/src/**/mocks/*.tsx (code examples via ?raw)    │
+│  packages/components/src/**/meta/index.tsx (description, testMeta)  │
+│  packages/components/src/**/*.stories.tsx (story→mock mapping)      │
 │  .agents/skills/*/SKILL.md            (skill definitions)           │
 │  @iress-oss/ids-tokens schema         (token data)                  │
 └──────────────────────────────┬──────────────────────────────────────┘
@@ -275,10 +277,41 @@ dev-watcher.ts detects change
 ### Migration Steps
 
 1. **Resolve source-of-truth:** Confirm guidelines content is canonical. Run `translate-components.ts --target=guidelines` one final time to ensure guidelines are up to date, then freeze.
-2. **Extract `derive-ai-docs.ts` logic** as the new `--components` path in `translate.ts` (reads from `apps/guidelines/content/`, writes to `packages/components/.ai/`).
-3. **Add `testMeta` → guidelines sync** to `translate.ts --components`: import `testMeta` from each component's `meta/index.tsx`, generate/update the `## Testing` section's test ID table in guidelines MDX (see `plans/testing-documentation.md` Phase 4).
+2. **Build `translate.ts --components`** — the core subcommand that produces `.ai/` docs:
+   - Reads `apps/guidelines/content/{components,patterns}/*.mdx` for prose (usage, do's/don'ts)
+   - When encountering `<StoryEmbed storyId="..." />`, resolves it to a code example:
+     - **P2 (mock + withSource):** Follow `withSource(XxxSource, ...)` → `?raw` import → read mock file → strip `@/main` → inline as fenced code block
+     - **P1 (args-only):** Read the story's `args` object → generate JSX from component + args (e.g. `{ mode: 'primary', children: 'Button' }` → `<IressButton mode="primary">Button</IressButton>`)
+     - **P3 (inline render):** Extract the JSX from the `render` function body → inline as code block
+   - Also appends ALL mock source files for the component as "Additional Examples" (even those not referenced by `<StoryEmbed>`)
+   - For P1/P3 stories without mocks, generates code examples from args/render and appends those too
+   - Reads `meta/index.tsx` for `description` and `testMeta` → generates `## Testing` section
+   - Reads `componentStoryMeta` from stories for structured metadata
+   - **Props extraction:** Uses `react-docgen-typescript` (already a dep) to extract the public props interface → generates `## Props` table with prop name, type, default, and JSDoc description. Resolves extended interfaces into a flat table.
+   - **Recipe extraction:** Stories tagged `['recipe']` are grouped under a `## Recipes` section with their story name as heading and code example beneath
+   - **Dynamic tab extraction:** Stories tagged `['tab:<name>']` are each grouped under a dedicated section. The section heading and description come from `parameters.idsConfig.tabDescriptions[name]` in the story meta. Handles slots, rules, patterns, and any future tabs generically — no hardcoding per tab type.
+   - **Migration extraction:** Stories tagged `['migration']` are grouped under a `## Migration` section with old→new code diffs
+   - **Styling props:** Appends a `## Styling Props` section noting that the component accepts all IDS styling props (spacing, colour, layout, typography, radius) with a reference to the full styling props documentation. The pipeline reads from `apps/guidelines/content/styling-props/` to generate a shared props summary.
+   - **Component relationships:** Extracts decorator patterns (e.g. `IressForm` wrapping `IressFormField`) and documents required providers/parents in a `## Composition` note
+   - Output structure per component:
+     ```markdown
+     # ComponentName
+     > description from meta
+     ## Import
+     ## Props
+     ## Usage (prose from guidelines)
+     ## Examples (code from stories)
+     ## Recipes (tagged recipe stories)
+     ## Slots (if applicable)
+     ## Validation Rules (if applicable)
+     ## Migration (if applicable)
+     ## Composition (required parents/providers)
+     ## Testing (from testMeta)
+     ```
+   - Output: `packages/components/.ai/{components,patterns}/*.md` + `index.json`
+3. **Add `testMeta` → .ai/ sync** to `translate.ts --components`: import `testMeta` from each component's `meta/index.tsx`, generate the `## Testing` section with test ID table in the `.ai/` output.
 4. **Move token-reference, skills, llms-txt** into `translate.ts` as subcommands (or keep as imported modules called sequentially).
-5. **Remove `translate-components.ts`** — its `--target=ai` logic is replaced by the new derive path; its `--target=guidelines` is no longer needed.
+5. **Remove `translate-components.ts`** — its logic is replaced by the new `--components` path.
 6. **Remove `derive-ai-docs.ts`** — absorbed into `translate.ts`.
 7. **Update `package.json`** scripts:
    ```json
