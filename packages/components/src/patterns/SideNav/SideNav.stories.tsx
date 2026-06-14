@@ -1,5 +1,8 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { componentStoryMeta, withSource } from '@iress-oss/ids-storybook-config';
+import {
+  componentStoryMeta,
+  withSource,
+} from '@iress-oss/ids-storybook-config';
 import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import { IressSideNav } from './SideNav';
 import { SideNavDefault } from './mocks/SideNavDefault';
@@ -19,10 +22,45 @@ import componentMeta from './meta';
 type Story = StoryObj<typeof IressSideNav>;
 
 const testMeta: TestComponentMeta[] = [
-  { part: 'main', description: 'The root navigation element', query: <code>getByRole('navigation')</code>, testId: 'sidenav' },
+  {
+    part: 'main',
+    description: 'The root navigation element',
+    query: <code>getByRole('navigation')</code>,
+    testId: 'sidenav',
+  },
   { part: 'rail', description: 'The side rail', testId: 'sidenav__rail' },
-  { part: 'panel', description: 'The navigation panel', testId: 'sidenav__panel' },
-  { part: 'panel heading', description: 'The panel heading', query: <code>getByRole('heading')</code>, testId: 'sidenav__panel-heading' },
+  {
+    part: 'rail item',
+    description: 'A rail navigation item',
+    testId: 'sidenav__rail-item-*',
+  },
+  {
+    part: 'toggle',
+    description: 'The expand/collapse toggle button',
+    query: (
+      <>
+        <code>
+          getByRole('button', {'{'} name: 'Expand navigation' {'}'})
+        </code>{' '}
+        or{' '}
+        <code>
+          getByRole('button', {'{'} name: 'Collapse navigation' {'}'})
+        </code>
+      </>
+    ),
+    testId: 'sidenav__toggle',
+  },
+  {
+    part: 'panel',
+    description: 'The navigation panel',
+    testId: 'sidenav__panel',
+  },
+  {
+    part: 'panel heading',
+    description: 'The panel heading',
+    query: <code>getByRole('heading')</code>,
+    testId: 'sidenav__panel-heading',
+  },
   { part: 'header', description: 'The header slot', testId: 'sidenav__header' },
   { part: 'footer', description: 'The footer slot', testId: 'sidenav__footer' },
 ];
@@ -52,7 +90,10 @@ export const Default: Story = {
   render: (args) => <SideNavDefault {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SideNavDefaultSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SideNavDefaultSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -60,7 +101,10 @@ export const WithHeaderFooter: Story = {
   render: (args) => <SideNavWithHeaderFooter {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SideNavWithHeaderFooterSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SideNavWithHeaderFooterSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -68,7 +112,10 @@ export const GroupedChildren: Story = {
   render: (args) => <SideNavGrouped {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SideNavGroupedSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SideNavGroupedSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 

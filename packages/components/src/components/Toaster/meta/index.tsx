@@ -5,15 +5,22 @@ import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
-    description: 'The root element of the toaster',
-    query: <code>getByRole('alert')</code>,
+    description:
+      'The visible toast list container (rendered inside the aria-live region)',
     testId: 'toaster',
+  },
+  {
+    part: 'toast',
+    description: 'An individual toast notification within the Toaster',
+    query: <code>getByRole('alert')</code>,
+    testId: 'toast',
   },
 ];
 
 export default {
   heading: 'Toaster',
-  description: 'Manages and displays temporary toast notifications to the user.',
+  description:
+    'Manages and displays temporary toast notifications to the user.',
   tags: ['feedback', 'notification', 'toast'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),

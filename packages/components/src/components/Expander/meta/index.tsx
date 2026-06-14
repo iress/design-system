@@ -4,9 +4,18 @@ import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 
 export const testMeta: TestComponentMeta[] = [
   {
+    part: 'main',
+    description: 'The root element of the expander',
+    testId: 'expander',
+  },
+  {
     part: 'activator',
     description: 'The expand/collapse trigger button',
-    query: <code>getByRole('button', {'{'} name: '...' {'}'})</code>,
+    query: (
+      <code>
+        getByRole('button', {'{'} name: '...' {'}'})
+      </code>
+    ),
     testId: 'expander__activator',
   },
   {
@@ -18,7 +27,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Expander',
-  description: 'Reveals or hides a section of content with an expand/collapse toggle.',
+  description:
+    'Reveals or hides a section of content with an expand/collapse toggle.',
   tags: ['layout', 'collapsible', 'interactive'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),

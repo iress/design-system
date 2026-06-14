@@ -850,10 +850,13 @@ apps/guidelines/content/components/
 
 ### How the translate pipeline uses this
 
-- `translate.ts --components` reads primarily from `*.develop.mdx` for `.ai/` output
-- Also reads `*.design.mdx` for "when to use" context (included as a brief section in `.ai/`)
-- Also reads `*.specifications.mdx` for accessibility notes (included in `.ai/`)
-- `*.mdx` (overview) is for the site only, not for `.ai/`
+- `translate.ts --components` reads from ALL tab files to produce comprehensive `.ai/` output:
+  - `*.design.mdx` → "When to Use", "When Not to Use", "Related Patterns" sections
+  - `*.develop.mdx` → "Quick Start", "Usage" (examples + notes), "Testing" sections
+  - `*.specifications.mdx` → "Behaviour", "Accessibility", "Keyboard Interaction" sections
+  - `*.mdx` (overview) → component description, import statement
+- The `.ai/` doc is the **assembled view** combining all perspectives into one self-contained reference
+- Additionally pulls from: react-docgen (Props), testMeta (test IDs), story mocks (code examples)
 
 ### Task 13.1: Implement tabbed component pages
 

@@ -6,7 +6,11 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the toggle',
-    query: <code>getByRole('switch', {'{'} name: 'label' {'}'})</code>,
+    query: (
+      <code>
+        getByRole('switch', {'{'} name: '...' {'}'})
+      </code>
+    ),
     testId: 'toggle',
   },
   {
@@ -24,7 +28,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Toggle',
-  description: 'Renders a switch control for toggling between on and off states.',
+  description:
+    'Renders a switch control for toggling between on and off states.',
   tags: ['form', 'switch', 'interactive'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),

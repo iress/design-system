@@ -6,6 +6,7 @@ import {
   IressLink,
   IressSkeleton,
 } from '@iress-oss/ids-components';
+import { TabbedContent } from '../components/TabbedContent';
 
 interface MdxModule {
   default: React.ComponentType;
@@ -107,7 +108,9 @@ function SplatRoute() {
   const Content = page.default;
   return (
     <article>
-      <Content />
+      <TabbedContent>
+        <Content />
+      </TabbedContent>
     </article>
   );
 }

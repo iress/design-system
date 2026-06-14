@@ -35,7 +35,7 @@ function stripMdx(source: string): string {
   return source
     .replace(/export\s+const\s+meta\s*=\s*\{[\s\S]*?\};/g, '') // remove meta export
     .replace(/import\s+.*?from\s+['"].*?['"];?/g, '')           // remove imports
-    .replace(/```[\s\S]*?```/g, '')                              // remove code blocks
+    .replace(/```\w*\n?/g, '')                                   // remove code fences (keep content)
     .replace(/<[^>]+>/g, ' ')                                    // strip JSX/HTML tags
     .replace(/[#*_`\[\]()]/g, '')                                // strip markdown syntax
     .replace(/\n{2,}/g, '\n')                                    // collapse newlines
