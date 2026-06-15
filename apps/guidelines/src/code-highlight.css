@@ -16,6 +16,7 @@ pre[class*='language-'] {
   overflow-x: auto;
   border-radius: 6px;
   background: #f6f8fa;
+  margin-bottom: 1rem;
 }
 
 /* Tokens */

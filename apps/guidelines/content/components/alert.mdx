@@ -1,18 +1,13 @@
 import { alertMeta } from '@iress-oss/ids-components/meta';
-
-export const meta = {
-  title: alertMeta.heading,
-  description: alertMeta.description,
-  component: 'IressAlert',
-  storybookUrl:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs',
-};
+import { IressButton, IressInline } from '@iress-oss/ids-components';
 
 # Alert
 
 An alert displays a short, important message in a way that attracts the user's attention without interrupting the user's task.
 
-<StoryEmbed id="components-alert--status" />
+<Metadata meta={alertMeta} />
+
+<StoryEmbed id="components-alert--heading" />
 
 ## Design
 
@@ -68,7 +63,7 @@ import { IressAlert } from '@iress-oss/ids-components';
 <IressAlert status="info">This is a simple info alert</IressAlert>
 ```
 
-[View all props →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs#api-props)
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs#api-props">View all props</IressButton>
 
 ### Status
 
@@ -141,7 +136,17 @@ Override with the `role` prop if the default doesn't fit your use case:
 </IressAlert>
 ```
 
-For test IDs and sub-parts, see the [Testing tab in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs#testing).
+For test roles, IDs and sub-parts, see the Testing tab in Storybook:
+
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs#testing">View test roles/IDs</IressButton>
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
+
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs">View in Storybook</IressButton>
 
 ## Specifications
 
@@ -190,4 +195,8 @@ For test IDs and sub-parts, see the [Testing tab in Storybook](https://main--691
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs)
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes. Use the "Testing" tab to find test roles, IDs, and sub-parts for querying in automated tests.
+
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs">View in Storybook</IressButton>

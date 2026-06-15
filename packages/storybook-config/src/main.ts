@@ -364,11 +364,17 @@ export const getMainConfig = ({
             console.log('[Storybook Host] Opened addon panel (showPanel)');
           }, 5000);
         } else if (params.showPanel === false) {
-          // Just close the addon panel without selecting a tab
-          _waitFor(_queryToClosePanel, function(toggle) { 
-            toggle.click();
-            console.log('[Storybook Host] Closed addon panel (showPanel)');
-          }, 5000);
+          // Close addon panel — poll to handle the race where Storybook's
+          // SET_CONFIG re-opens the panel after the URL-based close.
+          var _closePanelCheck = setInterval(function() {
+            var toggle = document.querySelector(_queryToClosePanel);
+            if (toggle) {
+              toggle.click();
+              clearInterval(_closePanelCheck);
+              console.log('[Storybook Host] Closed addon panel (showPanel)');
+            }
+          }, 500);
+          setTimeout(function() { clearInterval(_closePanelCheck); }, 15000);
         }
 
         if (params.allowedPanels?.length > 0) {
