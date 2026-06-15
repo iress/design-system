@@ -1,3 +1,4 @@
+import { lazy } from 'react';
 import type { ComponentMeta } from '@helpers/meta/types';
 
 export default {
@@ -5,7 +6,7 @@ export default {
   description:
     'A polymorphic utility component that applies design tokens and styling props to any HTML element or custom component.',
   tags: ['utility', 'layout', 'styling', 'polymorphic'],
-  Thumbnail: null,
+  Thumbnail: lazy(() => import('./Thumbnail')),
   import: "import { IressStyled } from '@iress-oss/ids-components';",
   github: {
     source:

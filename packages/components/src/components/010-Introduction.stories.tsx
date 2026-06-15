@@ -55,6 +55,7 @@ import slider from './Slider/meta';
 import slideout from './Slideout/meta';
 import skipLink from './SkipLink/meta';
 import stack from './Stack/meta';
+import styled from './Styled/meta';
 import table from './Table/meta';
 import tabSet from './TabSet/meta';
 import tag from './Tag/meta';
@@ -107,6 +108,7 @@ const components = [
   slider,
   spinner,
   stack,
+  styled,
   table,
   tabSet,
   tag,
