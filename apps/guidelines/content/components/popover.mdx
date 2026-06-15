@@ -1,21 +1,66 @@
 import { popoverMeta } from '@iress-oss/ids-components/meta';
-
-export const meta = {
-  title: popoverMeta.heading,
-  description: popoverMeta.description,
-  component: 'IressPopover',
-  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs',
-};
+import { IressButton } from '@iress-oss/ids-components';
 
 # Popover
 
-A popover is panel that is toggled on/off by an activator button or text input. The panel is positioned relative to its activator element.
+A popover is a panel that is toggled on/off by an activator button or text input. The panel is positioned relative to its activator element.
 
-```tsx
-import { IressPopover } from '@iress-oss/ids-components';
-```
+<Metadata meta={popoverMeta} />
 
-## Quick Start
+<StoryEmbed id="components-popover--activator"/>
+
+## Design
+
+### When to use
+
+Most popover use cases are already covered by higher-level components. Use `IressPopover` directly only when none of these fit:
+
+| Need | Use instead |
+|------|-------------|
+| Action menu on a button | [ContextualMenu](/patterns/contextual-menu) |
+| Filterable dropdown | [DropdownMenu](/patterns/dropdown-menu) |
+| Select from options | [Select](/components/select) |
+| Search with suggestions | [Autocomplete](/components/autocomplete) |
+| Overflow navigation | [Breadcrumbs](/patterns/breadcrumbs) |
+| Brief hover hint | [Tooltip](/components/tooltip) |
+
+Use raw `IressPopover` for **custom floating content** that doesn't fit the patterns above (e.g. colour pickers, date pickers, custom filter panels).
+
+### When not to use
+
+- **Brief helpful text** — use [Tooltip](/components/tooltip) instead
+- **Blocking decisions** — use a [Modal](/components/modal)
+- **Large secondary workflows** — use a [Slideout](/components/slideout)
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Keep popover content focused and concise | Put complex multi-step forms inside a popover |
+| Use an `IressButton` as the activator | Use non-interactive elements as activators |
+| Allow the popover to close on outside click | Prevent all dismissal methods without clear reason |
+| Consider mobile viewports — popovers reposition automatically | Assume a fixed position will work on all screen sizes |
+
+### Content guidelines
+
+- **Activator**: Use a clear label or icon that indicates content will appear
+- **Content**: Keep focused on a single purpose — if it grows complex, consider a Modal or Slideout
+- **Actions within**: Clicking a menu item should close the popover automatically
+
+### Related patterns
+
+- [ContextualMenu](/patterns/contextual-menu) — action menu triggered by a button
+- [DropdownMenu](/patterns/dropdown-menu) — filterable dropdown with search
+- [Select](/components/select) — select from a list of options
+- [Autocomplete](/components/autocomplete) — search with suggestions
+- [Breadcrumbs](/patterns/breadcrumbs) — overflow navigation menu
+- [Tooltip](/components/tooltip) — for brief hover/focus descriptions
+- [Modal](/components/modal) — for blocking overlay dialogs
+- [Menu](/components/menu) — often used inside popovers for action lists
+
+## Develop
+
+### Quick Start
 
 ```tsx
 import { IressPopover, IressButton } from '@iress-oss/ids-components';
@@ -25,103 +70,70 @@ import { IressPopover, IressButton } from '@iress-oss/ids-components';
 </IressPopover>
 ```
 
-## Usage
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs#api-props" mode="secondary">View all props</IressButton>
 
-### Activator
+### Examples
 
-For the popover to render, the `activator` property is required. It is the element used to trigger the popover, and works best with an `IressButton`.
+#### Activator
 
-Anything added as the children of the `IressPopover` component will be displayed in the popover panel.
+The `activator` prop is required. It is the element used to trigger the popover, and works best with an `IressButton`.
 
 <StoryEmbed id="components-popover--activator"/>
 
-### The `show` property
+#### The `show` property
 
-You can use state to control the popover by setting the `show` property to `true` or `false`. To sync your state with the popover, you can use the `onActivated` and `onDeactivated` prop.
+Control the popover with state using `show`, `onActivated` and `onDeactivated`.
 
 <StoryEmbed id="components-popover--show-with-state"/>
 
-## Behaviour
+#### Align
 
-- The popover is opened when the activator is pressed
-- Once activated, the popover will set focus to popover content
-- When the activator is pressed whilst the popover is open, it will close
-- When the escape key is pressed while it is open, it will close
-- When the popover panel loses focus, it will close
-
-## Examples
-
-### Align
-
-The popover panel can be aligned in one of 12 positions relative to the activator element. The default value is `auto`.
-
-The popover panel's position will change dynamically based on the amount of space available in it's container window, so that it doesn't overflow.
+The popover panel can be aligned in one of 12 positions relative to the activator. Defaults to `auto` and repositions dynamically to avoid overflow.
 
 <StoryEmbed id="components-popover--align"/>
 
-### Width
+#### Width
 
-Occasionally, you may have more information to display than the width set by the theme can comfortably show.
+Set a custom width when content needs more space than the theme default.
 
 <StoryEmbed id="components-popover--width"/>
 
-### Overflow
+#### Overflow
 
-Popovers can contain a wide variety of different content, including components that use popovers themselves (like Select). This can cause issues with overflowing content, so by default we allow popovers to grow in height based on their content.
-
-If you need to fix the height of a popover, you can set a maximum height using the `maxHeight` and `overflowY` css on your popover's `contentStyle` prop.
+By default popovers grow in height based on content. Use `maxHeight` and `overflowY` via `contentStyle` to fix the height.
 
 <StoryEmbed id="components-popover--overflow"/>
 
-### Container
+#### Container
 
-By default, the popover will be rendered where its parent is rendered. If you need to render the popover in a different container, you can use the `container` prop.
-
-**Note:** If the `container` doesn’t exist when the portal is mounted, ensure you pass an element directly (not a ref) and specify null as the default value before it is set. This lets it wait for the root to be available.
-
-This will be the case when you are rendering into its parent container, which is not yet rendered when the popover is mounted. The example below shows how to use state instead of a reference to change where the popover is rendered.
+Use the `container` prop to render the popover in a different DOM node.
 
 <StoryEmbed id="components-popover--parent-container"/>
 
-### Using the `IressPopoverProvider`
+#### Using the `IressPopoverProvider`
 
-You can use the `IressPopoverProvider` to set a shared container for
-all nested popovers. This is useful when you want all popovers in a
-section of your application to render into the same DOM node, similar
-to how `IressModalProvider` and `IressSlideoutProvider` work.
+Use `IressPopoverProvider` to set a shared container for all nested popovers. Individual popovers can override with their own `container` prop.
 
-Individual popovers can still override the provider's container by
-setting their own `container` prop.
+> **Note:** If using `IressProvider` or `IressShadow`, the popover provider is already included.
 
-> **Note:** If you are already using `IressProvider` or `IressShadow`,
-> you do not need to add `IressPopoverProvider` separately — it is
-> already included. To set a shared container for popovers through
-> `IressProvider`, use the `popoverContainer` prop. You can also set
-> `popoverContainer="container"` to reuse the same container that
-> modals, slideouts and toasts render into.
+<StoryEmbed id="components-popover-provider--provider"/>
 
-<StoryEmbed id="components-provider--provider"/>
+#### Input popover
 
-## `IressInputPopover`
-
-If you need a popover that is triggered by input changes, you can use the `IressInputPopover` component. This component has an additional `minLength` prop that allows you to specify the minimum number of characters required before the popover is shown.
-
-### Behaviour
-
-Input popovers work slightly different to normal popovers, where the focus inside the popover is **virtual**. This means that the popover content will act as if it is in focus, but the input will still be the actual focus.
-
-- The popover is opened when the input has content that meets the `minLength` requirement
-- The popover is closed when the input no longer meets the `minLength` requirement
-- Once activated, virtual focus will be set to the popover content if it contains a menu (e.g. items will highlight as if in focus, but the user can still type in the input)
-- When the `minLength` is 0, it will open on focus
-- When the escape key is pressed while it is open, it will close
-- When the input loses focus, it will close
+A popover triggered by input changes. The `minLength` prop specifies the minimum characters before the popover shows. Focus inside is **virtual** (using `aria-activedescendant`).
 
 <StoryEmbed id="components-input-popover--activator"/>
 
-## Testing
+#### With menus
 
-Query the popover trigger, then interact to open the content:
+When `IressMenu` is inside `IressPopover`, the popover auto-closes on menu item click and focus moves to the first item on open.
+
+<StoryEmbed id="components-popover--with-menu"/>
+
+
+### Testing
+
+Query the popover trigger, then interact to open:
 
 ```tsx
 const trigger = screen.getByRole('button', { name: 'Open popover' });
@@ -129,16 +141,64 @@ await user.click(trigger);
 expect(screen.getByText('Popover content')).toBeVisible();
 ```
 
-### Test IDs
-
-When you pass a `data-testid` to `IressPopover`, the following nested test IDs
-are generated automatically:
-
-| Suffix | Example | Description |
-| --- | --- | --- |
-| `activator` | `my-popover__activator` | The popover trigger element |
-| `content` | `my-popover__content` | The popover content panel |
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs#testing" mode="secondary">View test IDs</IressButton>
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
+
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs">View in Storybook</IressButton>
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Closed | Popover panel is hidden |
+| Opened | Panel appears positioned relative to activator, focus moves to content |
+| Activator pressed while open | Popover closes |
+| Focus lost | Popover closes when panel loses focus |
+| Input popover | Opens when input meets `minLength`, uses virtual focus |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **2.1.1 Keyboard** — Popover is fully keyboard accessible via activator
+- **1.3.1 Info and Relationships** — Content is associated with its activator
+- **4.1.2 Name, Role, Value** — Activator communicates expanded state via `aria-expanded`
+
+**ARIA attributes:**
+
+| Element | Attribute | Description |
+|---------|-----------|-------------|
+| Activator | `aria-expanded` | Indicates whether the popover is open |
+| Activator | `aria-controls` | References the popover content panel |
+| Content (input popover) | `aria-activedescendant` | Points to the virtually focused item |
+
+### Keyboard interaction
+
+| Key | Action |
+|-----|--------|
+| `Enter` / `Space` | Opens/closes the popover via the activator |
+| `Escape` | Closes the popover |
+| `Tab` | Moves focus through focusable content inside the popover |
+| `ArrowDown` / `ArrowUp` | Navigates items in menu/listbox popovers |
+
+### Edge cases
+
+- **Dynamic repositioning**: Panel moves automatically to stay within viewport bounds
+- **Nested popovers**: Supported (e.g. Select inside a popover) — content grows in height by default
+- **Container portals**: When using `container`, ensure the target element exists before mount
+- **Virtual focus**: `IressInputPopover` keeps real focus on the input while virtually highlighting items
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs">View in Storybook</IressButton>

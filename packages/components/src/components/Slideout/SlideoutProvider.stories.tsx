@@ -7,7 +7,7 @@ import { disableArgTypes, withSource } from '@iress-oss/ids-storybook-config';
 type Story = StoryObj<IressSlideoutProviderProps>;
 
 export default {
-  title: 'Components/Slideout/SlideoutProvider',
+  title: 'Components/Slideout/Provider',
   component: IressSlideoutProvider,
   argTypes: {
     ...disableArgTypes(['children', 'container']),

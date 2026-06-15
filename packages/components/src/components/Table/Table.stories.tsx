@@ -17,6 +17,7 @@ import { TableVirtualised } from './mocks/TableVirtualised';
 import TableVirtualisedSource from './mocks/TableVirtualised.tsx?raw';
 import { TableCompact } from './mocks/TableCompact';
 import TableCompactSource from './mocks/TableCompact.tsx?raw';
+import { TableColumnReference } from './mocks/TableColumnReference';
 import { type Row } from '@tanstack/react-table';
 import {
   componentStoryMeta,
@@ -386,5 +387,13 @@ export const Virtualised: Story = {
   parameters: {
     controls: { disable: true },
     ...withSource(TableVirtualisedSource, { stripImports: true }),
+  },
+};
+
+export const ColumnAPI: Story = {
+  tags: ['reference'],
+  render: (_args) => <TableColumnReference />,
+  parameters: {
+    controls: { disable: true },
   },
 };

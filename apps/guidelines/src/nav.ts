@@ -70,6 +70,7 @@ export const NAV_ITEMS: SideNavItem[] = [
       { key: 'radio-group', label: 'Radio Group', href: '/components/radio-group', element: Link },
       { key: 'readonly', label: 'Readonly', href: '/components/readonly', element: Link },
       { key: 'row', label: 'Row', href: '/components/row', element: Link },
+      { key: 'select', label: 'Select', href: '/components/select', element: Link },
       { key: 'skeleton', label: 'Skeleton', href: '/components/skeleton', element: Link },
       { key: 'skip-link', label: 'Skip Link', href: '/components/skip-link', element: Link },
       { key: 'slideout', label: 'Slideout', href: '/components/slideout', element: Link },

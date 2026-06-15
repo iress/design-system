@@ -59,6 +59,14 @@ function RootLayout() {
   const activeKey =
     NAV_ITEMS.find((item) => pathname.startsWith(`/${item.key}`))?.key ??
     NAV_ITEMS[0].key;
+
+  const navItems = NAV_ITEMS.map((item) => ({
+    ...item,
+    children: item.children?.map((child) => ({
+      ...child,
+      active: 'href' in child && child.href === pathname,
+    })),
+  }));
   const [navHeight, setNavHeight] = useState(0);
   const headerRef = useRef<HTMLElement>(null);
 
@@ -96,7 +104,7 @@ function RootLayout() {
         <IressDivider />
       </IressStyled>
       <IressInline noWrap style={{ height: `calc(100vh - ${navHeight}px)` }}>
-        <IressSideNav items={NAV_ITEMS} activeItemKey={activeKey} />
+        <IressSideNav items={navItems} activeItemKey={activeKey} />
         <IressContainer py="md" flex="1" scrollable="y">
           <IressStyled
             element="main"

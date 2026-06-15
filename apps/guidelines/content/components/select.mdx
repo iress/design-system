@@ -1,0 +1,218 @@
+import { selectMeta } from '@iress-oss/ids-components/meta';
+import { IressButton } from '@iress-oss/ids-components';
+
+# Select
+
+Renders a dropdown select input for choosing one option from a list.
+
+<Metadata meta={selectMeta} />
+
+<StoryEmbed id="components-select--single-select"/>
+
+## Design
+
+### When to use
+
+- **Choosing from a predefined list**: When users need to pick one (or multiple) options from a known set
+- **Form inputs**: Standard form fields where a dropdown is appropriate
+- **Async search**: When options are loaded dynamically based on user input
+- **Grouped options**: When options are logically grouped into categories
+
+### When not to use
+
+- **Free text input** — use [Input](/components/input) instead
+- **Boolean choices** — use a [Toggle](/components/toggle) or [Checkbox](/components/checkbox)
+- **Very few options (2–3)** — consider [Radio Group](/components/radio-group) for better visibility
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Provide a placeholder that hints at what to select | Leave placeholder empty with no context |
+| Use async options for large datasets | Load thousands of options upfront |
+| Group related options for easier scanning | Mix unrelated options without grouping |
+| Set a sensible `limit` for multi-select | Allow unlimited selections when a max makes sense |
+
+### Content guidelines
+
+- **Placeholder**: Use a descriptive hint (e.g. "Select a country", "Choose an account")
+- **Option labels**: Keep concise, use sentence case
+- **Groups**: Use clear heading labels for grouped options
+- **Empty state**: Provide helpful text when no options match a search
+
+### Related patterns
+
+- [Autocomplete](/components/autocomplete) — for free-text input with suggestions
+- [Field](/components/field) — for wrapping Select with label and validation
+- [Form](/components/form) — for form submission with validation
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressSelect } from '@iress-oss/ids-components';
+
+<IressSelect
+  options={[
+    { label: 'Option 1', value: '1' },
+    { label: 'Option 2', value: '2' },
+  ]}
+/>
+```
+
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs#api-props" mode="secondary">View all props</IressButton>
+
+### Examples
+
+#### Single Select
+
+Basic single-value selection from a list of options.
+
+<StoryEmbed id="components-select--single-select"/>
+
+#### Multi Select
+
+Enable multiple selection with the `multi` prop. Use `limit` to cap the number of selections.
+
+<StoryEmbed id="components-select--multi-select"/>
+
+#### Multi Select Limit
+
+<StoryEmbed id="components-select--multi-select-limit"/>
+
+#### Async Options
+
+Load options dynamically using the `onSearch` callback.
+
+<StoryEmbed id="components-select--async-options"/>
+
+#### Async Options Min Search Length
+
+<StoryEmbed id="components-select--async-options-min-search-length"/>
+
+#### Pre-selected Value
+
+<StoryEmbed id="components-select--pre-selected-value"/>
+
+#### Placeholder
+
+<StoryEmbed id="components-select--placeholder"/>
+
+#### Sizing
+
+<StoryEmbed id="components-select--sizing"/>
+
+#### Custom Label
+
+<StoryEmbed id="components-select--custom-label"/>
+
+#### Custom Options
+
+<StoryEmbed id="components-select--custom-options"/>
+
+#### Create New Option
+
+Allow users to create new options on the fly.
+
+<StoryEmbed id="components-select--create-new-option"/>
+
+#### Header & Footer
+
+<StoryEmbed id="components-select--header-footer"/>
+
+#### Grouped Options
+
+<StoryEmbed id="components-select--grouped-options"/>
+
+#### Native
+
+Use the `native` prop to render a native `<select>` element on mobile devices.
+
+<StoryEmbed id="components-select--native"/>
+
+### Testing
+
+Query the select activator by its combobox role:
+
+```tsx
+const select = screen.getByRole('combobox', { name: 'Label text' });
+```
+
+When inside a `Field`, query by label:
+
+```tsx
+const select = screen.getByLabelText('Label text');
+```
+
+For the options menu:
+
+```tsx
+const menu = screen.getByRole('listbox');
+const option = screen.getByRole('option', { name: 'Option 1' });
+```
+
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs#testing" mode="secondary">View test IDs</IressButton>
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
+
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs">View in Storybook</IressButton>
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Closed | Displays selected value or placeholder |
+| Open | Shows options list positioned below the activator |
+| Searching | Filters options based on typed input |
+| Multi-select | Selected values shown as tags; removable individually |
+| Native mode | Renders a native `<select>` element |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **4.1.2 Name, Role, Value** — Uses `role="combobox"` for the activator, `role="listbox"` for the menu
+- **1.3.1 Info and Relationships** — Options grouped with proper heading structure
+- **2.1.1 Keyboard** — Fully keyboard navigable
+
+**ARIA roles:**
+
+| Element | Role | Description |
+|---------|------|-------------|
+| Activator | `combobox` | The select trigger input |
+| Menu | `listbox` | The dropdown options list |
+| Option | `option` | Individual selectable items |
+
+### Keyboard interaction
+
+| Key | Action |
+|-----|--------|
+| `Enter` / `Space` | Opens the menu or selects the focused option |
+| `ArrowDown` | Moves focus to the next option |
+| `ArrowUp` | Moves focus to the previous option |
+| `Escape` | Closes the menu |
+| `Home` | Moves focus to the first option |
+| `End` | Moves focus to the last option |
+| Type-ahead | Jumps to the first matching option |
+
+### Edge cases
+
+- **No matching options**: Displays empty state message when search yields no results
+- **Async loading**: Shows loading indicator while options are being fetched
+- **Long option text**: Text truncates with ellipsis in the activator
+- **Popover clipping**: In fixed-footer modals, the dropdown may be clipped — use non-fixed footer modals
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs">View in Storybook</IressButton>

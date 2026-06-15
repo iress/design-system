@@ -233,4 +233,7 @@ export const Static: Story = {
     show: true,
     static: true,
   },
+  parameters: {
+    layout: 'fullscreen',
+  }
 };
