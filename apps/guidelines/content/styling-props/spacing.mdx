@@ -1,8 +1,7 @@
+import { IressButton } from '@iress-oss/ids-components';
 export const meta = {
   title: 'Spacing',
   description: 'These are all styling props related to changing the spacing of a component.',
-  category: 'guide',
-  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-spacing--docs',
 };
 
 # Spacing
@@ -27,56 +26,30 @@ There are seven props you can use to customise the padding of any component. It 
 </IressPanel>
 ```
 
-[View "padding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--padding)
+<StoryEmbed id="styling-props-spacing--padding" />
 
-```tsx
-<IressButton px={px} mode="primary">
-Submit
-</IressButton>
-```
+<StoryEmbed id="styling-props-spacing--button" />
 
-[View "button" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--button)
 
-```tsx
-<IressPanel bg="alt" pb="xl" pt="spacing.1" pl="md" pr="spacing.6">
-  A panel that has different padding on each side.
-</IressPanel>
-```
-
-[View "variablePadding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--variable-padding)
+<StoryEmbed id="styling-props-spacing--variable-padding" />
 
 ### Responsive padding
 
 All padding props are responsive and can be changed according to different screen sizes.
 
-```tsx
-<IressPanel bg="alt">
-  A panel that has extra large padding on small screens and no padding on large screens.
-</IressPanel>
-```
 
-[View "responsivePadding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-padding)
+<StoryEmbed id="styling-props-spacing--responsive-padding" />
 
-```tsx
-<IressPanel bg="alt">
-  A panel that has responsive padding on the vertical and horizontal axes.
-</IressPanel>
-```
-
-[View "responsiveVariablePadding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-variable-padding)
+<StoryEmbed id="styling-props-spacing--responsive-variable-padding" />
 
 ### Migrating from version 5
 
 Responsive padding worked differently in version 5. The `p` prop no longer accepts a nested object of axes to change the padding, you must change every prop based on the breakpoint.
 
-```tsx
-<DiffViewer
-oldValue={`<IressPanel p={{ t: 'xl', b: 'xl' }} />`}
-newValue={`<IressPanel pt="xl" pb="xl" />`}
-/>
+```diff
+-<IressPanel p={{ t: 'xl', b: 'xl' }} />
++<IressPanel pt="xl" pb="xl" />
 ```
-
-[View "MigratingPadding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--migrating-padding)
 
 ## Margin
 
@@ -90,77 +63,34 @@ There are seven props you can use to customise the margin of any component. It a
 - `mt`: Change the margin on the top of a component
 - `mb`: Change the margin on the bottom of a component
 
-```tsx
-<IressPanel bg="alt" m="xl">
-  A panel that has the same margin on all sides.
-</IressPanel>
-```
 
-[View "margin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--margin)
+<StoryEmbed id="styling-props-spacing--margin" />
 
-```tsx
-<IressPanel bg="alt" mb="xl" mt="spacing.1" ml="md" mr="spacing.6">
-  A panel that has different margin on each side.
-</IressPanel>
-```
 
-[View "variableMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--variable-margin)
+<StoryEmbed id="styling-props-spacing--variable-margin" />
 
 ### Responsive margin
 
 All margin props are responsive and can be changed according to different screen sizes.
 
-```tsx
-<IressPanel bg="alt">
-  A panel that has extra large margin on small screens and no margin on large screens.
-</IressPanel>
-```
 
-[View "responsiveMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-margin)
+<StoryEmbed id="styling-props-spacing--responsive-margin" />
 
-```tsx
-<IressPanel bg="alt">
-  A panel that has responsive margin on the vertical and horizontal axes.
-</IressPanel>
-```
 
-[View "responsiveVariableMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-variable-margin)
+<StoryEmbed id="styling-props-spacing--responsive-variable-margin" />
 
 ### Negative margin
 
 Negative margin is supported in the same way as positive margin. You can use the same props to set negative margin.
 
-```tsx
-<IressPanel bg="colour.primary.surface" maxWidth="container.sm" mx="auto">
-<IressPanel />
-</IressPanel>
-```
-
-[View "negativeMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--negative-margin)
+<StoryEmbed id="styling-props-spacing--negative-margin" />
 
 ## `noGutter`
 
 The `noGutter` prop removes the bottom margin of the last direct child of a component. This is useful when you have nested content inside a component with padding, such as `IressPanel` or `IressCard`, to remove unnecessary spacing in your layout.
 
-```tsx
-<IressPanel>
-{children ?? (
-<ul>
-<li>
-{args.noGutter ? (
-<>
-Margin is removed due to <code>noGutter</code>
-</>
-) : (
-'Since lists have bottom margin, you can see there is extra white-space.'
-)}
-</li>
-</ul>
-)}
-</IressPanel>
-```
 
-[View "noGutter" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--no-gutter)
+<StoryEmbed id="styling-props-spacing--no-gutter" />
 
 ---
 
@@ -282,4 +212,4 @@ For a complete reference of the full spacing scale with all available tokens (sp
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-spacing--docs)
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-spacing--docs">View in Storybook →</IressButton>

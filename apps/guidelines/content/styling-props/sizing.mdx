@@ -1,8 +1,7 @@
+import { IressButton } from '@iress-oss/ids-components';
 export const meta = {
   title: 'Sizing',
   description: 'These are all styling props related to changing the size of a component,',
-  category: 'guide',
-  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-sizing--docs',
 };
 
 # Sizing
@@ -36,13 +35,7 @@ For variable data entry, you can use grid tokens. These are usually used inside 
 - `9/12`: 75% width of parent container
 - `12/12`: 100% width of parent container
 
-```tsx
-<IressPanel bg="alt" width="input.16">
-  Credit card number wide panel
-</IressPanel>
-```
-
-[View "inputWidths" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-sizing--input-widths)
+<StoryEmbed id="styling-props-sizing--input-widths" />
 
 ## Container widths
 
@@ -50,26 +43,8 @@ Container widths are sizes that define the maximum width where content is consid
 
 In some cases however, you may want to restrain the width even further (for example, single column content is usually easiest to read when it is confined to the centre of the screen). The container widths have been exposed so they can be used in the `maxWidth` prop of your own components.
 
-- `container.xs`: 100% of the screen's width
-- `container.sm`: 520px
-- `container.md`: 740px
-- `container.lg`: 960px
-- `container.xl`: 1160px
-- `container.xxl`: 1160px
-
-```tsx
-<IressContainer bg="alt" fluid maxWidth={maxWidth} width={width} p="xl">
-This container is extra readable cause its maxWidth is set to:{' '}
-<code>
-{typeof maxWidth === 'object'
-? stringifyStorybookArgs(maxWidth)
-: maxWidth}
-</code>
-.
-</IressContainer>
-```
-
-[View "containerWidths" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-sizing--container-widths)
+- `container.xl`: 1140px
+- `container.xxl`: 1400px
 
 ## Overlay widths
 
@@ -79,6 +54,8 @@ Overlay widths are sizes that define the width of overlay components such as Mod
 - `overlay.md`: 628px
 - `overlay.lg`: 800px
 
+<StoryEmbed id="styling-props-sizing--container-widths" />
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-sizing--docs)
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-sizing--docs">View in Storybook →</IressButton>

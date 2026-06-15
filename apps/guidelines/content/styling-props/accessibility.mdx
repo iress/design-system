@@ -1,3 +1,4 @@
+import { IressButton } from '@iress-oss/ids-components';
 export const meta = {
   title: 'Accessibility',
   description: 'These are all styling props related to screen readers and accessibility. They allow you to hide content from visual users while still providing context for screen reader users, ensuring an inclusive experience for all users.',
@@ -30,47 +31,27 @@ It accepts the following values:
 | `'group'`              | Focus ring triggered by a parent `.group` container            |
 | `'within:inset'`       | Inset focus ring when a child element is focused               |
 
-```tsx
-<IressText focusable tabIndex={0}>
-  This element will have focus styles applied when it is focused. This is useful for accessibility and keyboard navigation.
-</IressText>
-```
 
-[View "focusable" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-accessibility--focusable)
+<StoryEmbed id="styling-props-accessibility--focusable" />
 
 ### Inset focus ring
 
-```tsx
-<IressText focusable="inset" tabIndex={0} p="spacing.4" bg="colour.neutral.20">
-  This element uses an inset focus ring, which renders inside the element boundary.
-</IressText>
-```
 
-[View "focusableInset" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-accessibility--focusable-inset)
+<StoryEmbed id="styling-props-accessibility--focusable-inset" />
 
 ## `srOnly`
 
 The `srOnly` prop allows you to set a component to be only visible on screen readers. It is used to ensure the screen reader has context of the screen to help the user understand the tasks required of them.
 
-```tsx
-<IressText srOnly>
-  Hello screen readers
-</IressText>
-```
 
-[View "srOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-accessibility--sr-only)
+<StoryEmbed id="styling-props-accessibility--sr-only" />
 
 ### Responsive
 
 The `srOnly` prop is responsive, allowing you to show content on larger screens and hiding them on smaller ones, enabling screen readers to have the same context as larger screens as they are not limited by device size.
 
-```tsx
-<IressText>
-  This content is visible on large screens and screen readers
-</IressText>
-```
 
-[View "srOnlyResponsive" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-accessibility--sr-only-responsive)
+<StoryEmbed id="styling-props-accessibility--sr-only-responsive" />
 
 ---
 
@@ -80,4 +61,4 @@ The `srOnly` prop is responsive, allowing you to show content on larger screens 
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-accessibility--docs)
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-accessibility--docs">View in Storybook →</IressButton>
