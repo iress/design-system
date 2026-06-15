@@ -44,9 +44,9 @@ export default {
     storybook:
       'https://github.com/iress/design-system/edit/main/packages/components/src/components/Alert/Alert.stories.tsx',
     reportIssue:
-      'https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=alert',
+      'https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=alert&title=[Alert]+Bug:+',
     requestFeature:
-      'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=alert,enhancement',
+      'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=alert,enhancement&title=[Alert]+Feature:+',
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs',
