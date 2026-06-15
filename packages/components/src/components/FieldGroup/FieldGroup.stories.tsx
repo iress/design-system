@@ -100,7 +100,7 @@ const testMeta: TestComponentMeta[] = [
 ];
 
 export default {
-  title: 'Components/Field/FieldGroup',
+  title: 'Components/FieldGroup',
   argTypes: {
     ...disableArgTypes(['children']),
     error: reactNodeArgType,

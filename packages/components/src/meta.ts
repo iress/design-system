@@ -23,6 +23,7 @@ export { default as containerMeta } from '@/components/Container/meta';
 export { default as dividerMeta } from '@/components/Divider/meta';
 export { default as expanderMeta } from '@/components/Expander/meta';
 export { default as fieldMeta } from '@/components/Field/meta';
+export { default as fieldGroupMeta } from '@/components/FieldGroup/meta';
 export { default as hideMeta } from '@/components/Hide/meta';
 export { default as iconMeta } from '@/components/Icon/meta';
 export { default as imageMeta } from '@/components/Image/meta';

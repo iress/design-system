@@ -13,6 +13,7 @@ export * from './components/Container';
 export * from './components/Divider';
 export * from './components/Expander';
 export * from './components/Field';
+export * from './components/FieldGroup';
 export * from './components/Hide';
 export * from './components/Icon';
 export * from './components/Image';

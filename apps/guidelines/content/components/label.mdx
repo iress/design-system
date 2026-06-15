@@ -1,85 +1,127 @@
 import { labelMeta } from '@iress-oss/ids-components/meta';
-
-export const meta = {
-  title: labelMeta.heading,
-  description: labelMeta.description,
-  component: 'IressLabel',
-  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs',
-};
+import { IressButton } from '@iress-oss/ids-components';
 
 # Label
 
 Use the IressLabel component when building bespoke form inputs and IressField is too restrictive.
 
-```tsx
-import { IressLabel } from '@iress-oss/ids-components';
-```
-
-## Quick Start
-
-```tsx
-import { IressLabel } from '@iress-oss/ids-components';
-
-<IressLabel>
-  This is a label
-</IressLabel>
-```
-
-## Examples
-
-### Required
-
-To indicate that an input is required, you may use the `required` prop to distinguish the label with an asterix.
+<Metadata meta={labelMeta} />
 
 <StoryEmbed id="components-label--required"/>
 
-### Hidden label
+## Design
 
-Sometimes you may wish to have an input with no visible label, but to still wrap the input in a label for accessibility. In this case, set `hiddenLabel` to `true`.
+### When to use
+
+- **Custom form controls**: When `IressField` is too opinionated for your layout
+- **Non-interactive content**: Label read-only data without a `htmlFor` association
+- **Required indicators**: Show an asterisk to indicate mandatory fields
+
+### When not to use
+
+- **Standard form fields** — use `IressField` which includes label, hint, and error support
+- **Standalone text** — use `IressText` for non-label content
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Pair with a form control using `htmlFor` | Place interactive elements (links, buttons) inside the label |
+| Use `hiddenLabel` for visually hidden but accessible labels | Omit labels entirely — screen readers need them |
+| Use `readOnly="locked"` for permission-based read-only | Use a label without any associated content |
+
+### Content guidelines
+
+- **Text**: Use sentence case, keep concise and descriptive
+- **Required**: Use the `required` prop to add an asterisk; don't manually add asterisks
+
+### Related patterns
+
+- [Field](/components/field) — full-featured form field wrapper with hint and error support
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressLabel } from '@iress-oss/ids-components';
+
+<IressLabel>This is a label</IressLabel>
+```
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs#api-props">View all props</IressButton>
+
+### Examples
+
+#### Required
+
+Use the `required` prop to distinguish the label with an asterisk.
+
+<StoryEmbed id="components-label--required"/>
+
+#### Hidden label
+
+Set `hiddenLabel` to visually hide the label while keeping it accessible.
 
 <StoryEmbed id="components-label--hidden-label"/>
 
-### Rich content
+#### Rich content
 
-You can render custom content into the label.
+Render custom content into the label.
 
 <StoryEmbed id="components-label--rich-content"/>
 
-### Locked readonly
+#### Locked readonly
 
-Use `readOnly="locked"` when the associated field is readonly due to
-permissions. This adds a lock indicator on the label.
+Use `readOnly="locked"` when the field is read-only due to permissions. Adds a lock indicator.
 
 <StoryEmbed id="components-label--locked-readonly"/>
 
-## Accessibility
+### Testing
 
-Don't place interactive elements such as anchors or buttons inside the `IressLabel`. Doing so makes it difficult for people to activate the form input associated with the label.
-
-See the [MDN Label Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#accessibility_concerns) for more info.
-
-### Labelling non-interactive content
-
-`IressLabel` can be used to label non-interactive content, such as readonly data. In this case, do not provide a `htmlFor` prop. This will render the label using a `strong` tag instead of a `label` tag.
-
-## Testing
-
-Labels are typically queried indirectly through the form control they describe.
-Use `getByLabelText` to find the associated input:
+Labels are typically queried indirectly through the form control they describe:
 
 ```tsx
 const input = screen.getByLabelText('Email address');
 ```
 
-### Test IDs
-
-When you pass a `data-testid` to `IressLabel`, the following nested test IDs
-are generated automatically:
-
-| Suffix | Example | Description |
-| --- | --- | --- |
-| `text` | `my-label__text` | The label text content |
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs#testing">View test IDs</IressButton>
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)
+### Storybook
+
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs">View in Storybook</IressButton>
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | Renders as a `<label>` element associated via `htmlFor` |
+| Without `htmlFor` | Renders as a `<strong>` element for non-interactive content |
+| Required | Displays an asterisk before the label text |
+| Hidden | Visually hidden but remains in the accessibility tree |
+| Locked readonly | Displays a lock icon indicator |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **1.3.1 Info and Relationships** — Programmatically associates label with input via `htmlFor`
+- **2.5.3 Label in Name** — Visible label text matches the accessible name
+
+**Do not** place interactive elements (anchors, buttons) inside `IressLabel`. This makes it difficult to activate the associated form input. See [MDN Label accessibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#accessibility_concerns).
+
+**Keyboard interaction:**
+
+| Key | Action |
+|-----|--------|
+| Click on label | Focuses the associated form control |
+
+### Edge cases
+
+- **Labelling non-interactive content**: Omit `htmlFor` to render as `<strong>` instead of `<label>`
+- **Nested test IDs**: `my-label__text` reaches the label text span
+- **Rich content**: Custom children are rendered inside the label element

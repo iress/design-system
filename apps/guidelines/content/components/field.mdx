@@ -1,21 +1,51 @@
 import { fieldMeta } from '@iress-oss/ids-components/meta';
-
-export const meta = {
-  title: fieldMeta.heading,
-  description: fieldMeta.description,
-  component: 'IressField',
-  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs',
-};
+import { IressButton } from '@iress-oss/ids-components';
 
 # Field
 
 The field component is used to place label, hint and error information around form controls.
 
-```tsx
-import { IressField } from '@iress-oss/ids-components';
-```
+<Metadata meta={fieldMeta} />
 
-## Quick Start
+<StoryEmbed id="components-field--label"/>
+
+## Design
+
+### When to use
+
+- **Form inputs**: Wrap any form control with a label, hint text, and error messages
+- **Read-only data**: Display data in a form-like layout with labels
+- **Grouped fields**: Use `IressFieldGroup` for multiple related inputs (e.g. checkbox groups)
+
+### When not to use
+
+- **Out-of-the-box validation** — use `IressFormField` inside `IressForm` instead
+- **Standalone labels** — use `IressLabel` directly if Field is too restrictive
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Always provide a `label` prop | Leave form controls without a label |
+| Use `hint` for supplementary guidance | Put lengthy instructions in the label |
+| Use `errorMessages` for validation feedback | Use `disabled` fields — keep enabled and validate on interaction |
+| Use `required` to show the asterisk indicator | Hide required indicators from users |
+
+### Content guidelines
+
+- **Labels**: Use sentence case, keep concise (e.g. "Email address", "Date of birth")
+- **Hints**: Provide format or requirement info (e.g. "Must be at least 8 characters")
+- **Errors**: Explain what went wrong and how to fix it
+
+### Related patterns
+
+- [Label](/components/label) — standalone label component
+- [Field Group](/components/field-group) — for grouping multiple related fields
+- [Form](/components/form) — provides validation with `IressFormField`
+
+## Develop
+
+### Quick Start
 
 ```tsx
 import { IressField } from '@iress-oss/ids-components';
@@ -23,157 +53,77 @@ import { IressField } from '@iress-oss/ids-components';
 <IressField label="First name" />
 ```
 
-## Examples
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field--docs#api-props">View all props</IressButton>
 
-### Label
+### Examples
+
+#### Label
 
 The `label` prop is required to describe the field.
 
 <StoryEmbed id="components-field--label"/>
 
-### Hint
+#### Hint
 
-Extra information on the field can be provided using the `hint` prop. It can accept any React node, so you can add your own custom mark up (eg. external links) to the hint text.
+Provide extra information using the `hint` prop. Accepts any React node.
 
 <StoryEmbed id="components-field--hint"/>
 
-### Error message
+#### Error message
 
-To display error messages associated with the field, you can use the `errorMessages` prop. This prop accepts an array of `ValidationMessageObj`, and will display each error message in a separate paragraph.
-
-**Note:** `IressField` requires validation to be handled by the consumer. If you want out-of-the-box validation, use [`IressFormField` alongside `IressForm` instead](/docs/components-form--docs#fields).
+Display errors with the `errorMessages` prop (array of `ValidationMessageObj`).
 
 <StoryEmbed id="components-field--error-message"/>
 
-### Custom error
+#### Custom error
 
-For more control over the formatting of the error, you can use the `error` prop. This prop accepts any React node, so you can add your own custom mark up (eg. icons) to the error message.
-
-**Note:** `IressField` requires validation to be handled by the consumer. If you want out-of-the-box validation, use [`IressFormField` alongside `IressForm` instead](/docs/components-form--docs#fields).
+Use the `error` prop for custom error markup (e.g. icons).
 
 <StoryEmbed id="components-field--custom-error"/>
 
-### Hidden label
+#### Hidden label
 
-There may be certain situations where you might want to (accessibly) hide the field label (in a search field for instance). This can be done by setting the `hiddenLabel` prop.
+Use `hiddenLabel` to accessibly hide the label (e.g. for search fields).
 
 <StoryEmbed id="components-field--hidden-label"/>
 
+Fields with hidden labels should still provide error feedback in an accessible way, either via `error` or `errorMessages`.
+
 <StoryEmbed id="components-field--hidden-label-with-error"/>
 
-### Required
+#### Required
 
-Fields marked as `required` will have an asterisk prepended to the label.
+Fields marked `required` display an asterisk on the label.
 
 <StoryEmbed id="components-field--required"/>
 
-### Readonly data
+#### Readonly data
 
-Fields can be used to display read-only data. This is useful when you want to display data that the user can't change, but you still want to display it in a form-like layout.
-
-You can also pass `readOnly` prop to remove the asterisk symbol (\*) even when the field is `required`.
+Display read-only data in a form-like layout. Use `readOnly="locked"` for permission-based read-only with a lock icon.
 
 <StoryEmbed id="components-field--readonly-data"/>
 
-Use `readOnly="locked"` when a value is read-only due to user permissions.
-This variation adds a lock icon to the label for a stronger visual cue while
-keeping the field value and label relationship accessible.
+#### Supplementary
 
-<StoryEmbed id="components-field--readonly-data"/>
-
-### Supplementary
-
-The `supplementary` prop can be used to display additional information about the field.
-
-This is used to display some metadata based on the value of the field in context. Examples include:
-
-- A trading share field that displays the current price of the share.
-- A commission percentage field that displays the expected commission based on the value of multiple fields.
-
-#### Notes
-
-- The `supplementary` prop is not a replacement for the `hint` prop. The `hint` prop should be used to provide additional information about the field itself, while the `supplementary` prop should be used to display additional information about the value of the field.
-- The `supplementary` prop will only be displayed if the field is not in an error state. If the field is in an error state, the `error` and `errorMessages` prop will be displayed instead.
+The `supplementary` prop displays metadata based on the field value (e.g. calculated values). Only shown when the field is not in an error state.
 
 <StoryEmbed id="components-field--supplementary"/>
 
-### Horizontal layout
+#### Horizontal layout
 
-Fields can be displayed with a horizontal layout where the label and input are on the same line, which can save vertical space in forms. Use the `horizontal` prop to enable this layout.
-In horizontal mode, hint text is displayed as a tooltip when hovering over the info icon, rather than being shown below the label as in the default vertical layout.
-
-#### Avoid using horizontal mode for majority of cases
-
-Vertical layout is preferred, it is more accessible in more scenarios by ensuring a consistent layout on different devices and keep the label closer to the input ensuring its relationship and making forms easier to scan. There are studies showing [vertical layouts can be faster to fill out](https://content-and-marketing.com/blog/10-mobile-form-design-best-practices-2024).
-Here are a few cases where you may use a horizontal layout:
-
-- On dashboards where space is limited, it may be necessary to display fields in a horizontal layout to make use of the space and give prominence to dashboard visuals.
-- Collaborative visual tools that require real-time editing and previews, such as Styler, Miro, Figma, where fields are less prominent to give prominence to the intended output.
+Use `horizontal` for label and input on the same line. In horizontal mode, hints display as a tooltip.
 
 <StoryEmbed id="components-field--horizontal"/>
 
-#### Horizontal with error
+#### Remove error margin
 
-Error messages in horizontal layout are displayed below both the label and input field, spanning the full width.
-
-<StoryEmbed id="components-field--horizontal-with-error"/>
-
-#### Horizontal label width
-
-In horizontal layout, you can control the width of the label using the `labelWidth` prop. This accepts CSS width values like pixels, percentages, or `auto`.
-
-<StoryEmbed id="components-field--horizontal-label-width-examples"/>
-
-### Remove error margin
-
-By default, fields reserve space for error messages to maintain consistent spacing. Use the `removeErrorMargin` prop to remove this reserved space, creating tighter field spacing when stacking multiple fields.
-
-This is particularly useful in dense forms or when you want to minimize vertical space usage.
-
-**Note:** When `removeErrorMargin` is enabled, subsequent fields will be pushed down when error or supplementary messages appear, as no space is reserved for these messages. You can use the `IressStack` component to control field gaps and spacing as needed.
+Use `removeErrorMargin` to remove reserved space for error messages for tighter spacing.
 
 <StoryEmbed id="components-field--remove-error-margin"/>
 
-## `IressFieldGroup`
+### Testing
 
-The `IressFieldGroup` component is used to group multiple `Field` components together. This is useful when you have multiple fields that are related to each other, and you want to display them together.
-
-Under the hood it uses a `fieldset` and `legend` element to group the fields together, improving the semantics of your form if you use multiple inputs (eg. in the case of a checkbox group) and making it more accessible.
-
-<StoryEmbed id="components-field-group--default"/>
-
-### Inline
-
-Multiple fields can be displayed inline using the `inline` prop. On smaller screens, inline elements will wrap on to a new line if there's not enough space for everything on one line.
-
-<StoryEmbed id="components-field-group--inline"/>
-
-<StoryEmbed id="components-field-group--inline-sink"/>
-
-### Join
-
-Elements can also be joined together using the `join` prop. Joined elements won't wrap on to a new line, so make sure you test your designs on small screens; depending on the use case, you may be better off with a standard inline layout (or two separate fields!).
-
-**Note:** The `join` prop works out of the box with IDS components. To enable your custom components to work with the `join` prop, you need to ensure the direct child of `IressFieldGroup` has the class `GlobalCSSClass.FormElement`. If the direct child is not the element with the border, add the class `GlobalCSSClass.FormElementInner` to the element with the border.
-
-<StoryEmbed id="components-field-group--join"/>
-
-<StoryEmbed id="components-field-group--join-sink"/>
-
-## `IressForm` integration
-
-As of version 5, `IressField` is a standalone component and does not handle validation.
-
-If you want out-of-the-box validation, use the `IressFormField` inside an `IressForm`. This will handle validation for you, and provide a consistent way to handle form state.
-
-[View forms documentation for fields](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs#fields)
-
-## Testing
-
-### Querying
-
-`IressField` is a wrapper component — query the child form control directly
-using its accessible role:
+`IressField` is a wrapper — query the child form control by its accessible role:
 
 ```tsx
 render(
@@ -186,25 +136,45 @@ const input = screen.getByRole('textbox', { name: 'Email' });
 expect(input).toBeInTheDocument();
 ```
 
-### Test IDs
-
-When you pass a `data-testid` to `IressField`, the following nested test IDs
-are generated automatically:
-
-| Suffix | Example | Description |
-| --- | --- | --- |
-| `label` | `my-field__label` | The field label element |
-| `hint` | `my-field__hint` | The hint text below the label |
-| `error` | `my-field__error` | The error message container |
-
-### Gotchas
-
-- **Nested test ID propagation**: The `label` test ID is passed to `IressLabel`,
-  which further propagates a `text` suffix. This means you can query
-  `my-field__label__text` to reach the label text span.
-- **Hint and error are conditional**: The `__hint` and `__error` test IDs only
-  appear when `hint` or `errorMessages`/`error` props are provided.
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field--docs#testing">View test IDs</IressButton>
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs)
+### Storybook
+
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field--docs">View in Storybook</IressButton>
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | Label and input displayed vertically with reserved error space |
+| Label click | Clicking the label focuses its associated form control |
+| With hint | Hint text appears below the label |
+| With error | Error messages appear below the input; supplementary is hidden |
+| Horizontal | Label and input on the same line; hint shown as tooltip |
+| Read only | Displays value as text; removes form control appearance |
+| Required | Asterisk prepended to label |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **1.3.1 Info and Relationships** — Label is programmatically associated with the input via `htmlFor`
+- **3.3.1 Error Identification** — Errors are described via `aria-describedby`
+- **3.3.2 Labels or Instructions** — Label and hint text provide clear instructions
+
+**Keyboard interaction:**
+
+| Key | Action |
+|-----|--------|
+| `Tab` | Move focus to the form control within the field |
+
+### Edge cases
+
+- **No children**: Field renders label, hint, and error without an input
+- **Nested test ID propagation**: `my-field__label__text` reaches the label text span
+- **Conditional hint/error**: `__hint` and `__error` test IDs only appear when those props are provided
+- **Horizontal on mobile**: Consider vertical layout for smaller screens

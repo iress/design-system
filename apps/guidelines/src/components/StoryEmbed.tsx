@@ -123,7 +123,7 @@ export function StoryEmbed({
   };
 
   return (
-    <IressCard p="none" style={{ overflow: 'hidden' }}>
+    <IressCard p="none" style={{ overflow: 'hidden' }} mb="spacing.8">
       <div
         ref={containerRef}
         style={{ position: 'relative', minHeight: height }}
@@ -139,10 +139,10 @@ export function StoryEmbed({
               left: 0,
               right: 0,
               bottom: 0,
+              zIndex: 1,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              zIndex: 1,
             }}
           >
             <IressSpinner mr="sm" /> Loading example...

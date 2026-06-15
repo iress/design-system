@@ -11,7 +11,7 @@ import {
   type FormFieldErrorType,
   getErrorTypeMessage,
 } from './helpers/getErrorTypeMessage';
-import { IressFieldGroup, type IressFieldGroupProps } from '@/components/Field';
+import { IressFieldGroup, type IressFieldGroupProps } from '@/components/FieldGroup';
 import { FormContext } from '../FormContext';
 import {
   type CustomRules,

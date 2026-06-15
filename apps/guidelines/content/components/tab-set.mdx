@@ -1,97 +1,119 @@
 import { tabSetMeta } from '@iress-oss/ids-components/meta';
-
-export const meta = {
-  title: tabSetMeta.heading,
-  description: tabSetMeta.description,
-  component: 'IressTabSet',
-  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab-set--docs',
-};
+import { IressButton } from '@iress-oss/ids-components';
 
 # Tab Set
 
 Tabs are used to display modular pieces of related data that do not need to be compared or accessed simultaneously.
 
+<Metadata meta={tabSetMeta} />
+
+<StoryEmbed id="components-tabset--tab-navigation"/>
+
+## Design
+
+### When to use
+
+- **Organising related content**: Group related information into panels users can switch between
+- **Reducing page length**: Hide secondary content behind tabs to keep the page scannable
+- **Navigation within a section**: Control which content panel is visible without navigating to a new page
+
+### When not to use
+
+- **Sequential steps** — use a Stepper or Wizard pattern instead
+- **Comparing content side by side** — tabs hide content; use a layout that shows both panels
+- **Very few items** — if there are only two short sections, consider showing both inline
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Keep tab labels short (1–2 words) | Use long sentences as tab labels |
+| Use tabs for content at the same level of hierarchy | Nest tabs within tabs |
+| Ensure the default tab is the most relevant | Hide critical information in non-default tabs |
+| Provide keyboard navigation between tabs | Rely solely on mouse interaction |
+
+### Content guidelines
+
+- **Labels**: Use sentence case, keep concise and descriptive
+- **Panel content**: Each panel should be self-contained and not require content from other tabs
+- **Tab count**: Aim for 2–7 tabs; more than 7 becomes difficult to scan
+
+### Related patterns
+
+- [Expander](/components/expander) — for progressive disclosure without navigation
+- [SideNav](/patterns/side-nav) — for persistent section navigation in a sidebar
+- [Menu](/components/menu) — for navigation link lists (non-tabbed)
+- [Stack](/components/stack) — for stacking content vertically when tabs aren't needed
+
+## Develop
+
+### Quick Start
+
 ```tsx
-import { IressTabSet } from '@iress-oss/ids-components';
+import { IressTabSet, IressTab } from '@iress-oss/ids-components';
+
+<IressTabSet>
+  <IressTab label="First">Panel one</IressTab>
+  <IressTab label="Second">Panel two</IressTab>
+</IressTabSet>
 ```
 
-## Quick Start
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tabset--docs#api-props">View all props</IressButton>
 
-```tsx
-import { IressTabSet } from '@iress-oss/ids-components';
+### Examples
 
-<IressTabSet />
-```
+#### Navigation
 
-## Usage
+You can use `IressTabSet` to create tab navigation to control an area of the page, or navigate between pages.
 
-The `IressTabSet` is a wrapper for `IressTab` components to make a up a set of tabs.
+<StoryEmbed id="components-tabset--tab-navigation"/>
 
-### Navigation
+#### With children prop
 
-You can use the `IressTabSet` component to create tab navigation to control an area of the page, or even navigate between different pages.
+Using the `children` prop will automatically inject the content as a tab panel when active, along with appropriate attributes for accessibility.
 
-<StoryEmbed id="components-tab-set--tab-navigation"/>
+<StoryEmbed id="components-tabset--panels"/>
 
-### With `children` prop
+#### Default selected
 
-Using the `children` prop will automatically inject the content as a tab panel when active, along with appropriate attributes for accessibility, ensuring the tab and its associated panel can be navigated by screenreaders.
+Set a tab by default using the `defaultSelected` prop.
 
-<StoryEmbed id="components-tab-set--panels"/>
+<StoryEmbed id="components-tabset--default-selected"/>
 
-## Examples
+#### Controlled
 
-### Default selected
+Use state to control the active tab by setting the `selected` property.
 
-If you would like to set a tab by default, use the `defaultSelected` prop.
+<StoryEmbed id="components-tabset--controlled"/>
 
-<StoryEmbed id="components-tab-set--default-selected"/>
+#### Layout
 
-### Controlled
+`IressTabSet` controls the layout of the tab buttons. These can be aligned left (default), center, or right via the `layout` prop.
 
-You can use state to control the active tab by setting the `selected` property to which tab you would like to select. This should be the `value` of the tab you would like to select, or if you do not use the `value` prop, it's index.
+<StoryEmbed id="components-tabset--layout"/>
 
-<StoryEmbed id="components-tab-set--controlled"/>
+#### Type
 
-### Layout
+Use the `type` prop to control visual emphasis:
 
-`IressTabSet` controls the layout of the tab buttons. These will always appear at the top of the tab container, and can be aligned to the left (default), centrally or to the right via the `layout` prop.
+- `primary` (default): prominent active state with a raised indicator
+- `secondary`: subdued style for nested or secondary tab groups
 
-<StoryEmbed id="components-tab-set--layout"/>
+<StoryEmbed id="components-tabset--type"/>
 
-### Type
-
-Use the `type` prop to control the visual emphasis of tab styles:
-
-- `primary` (default): prominent active state with a raised active indicator.
-- `secondary`: subdued style intended for nested or secondary tab groups. The
-  active state uses the underline/border indicator without the active
-  indicator background fill.
-
-<StoryEmbed id="components-tab-set--type"/>
-
-### Lazy Loading
+#### Lazy Loading
 
 Tabs can be lazy loaded via state, allowing you to add/remove tabs as needed.
 
-<StoryEmbed id="components-tab-set--lazy-loading"/>
+<StoryEmbed id="components-tabset--lazy-loading"/>
 
-### Badges and icons
+#### Badges and icons
 
-You can add rich content into the `label` of the `IressTab` to customise the tab further.
+Add rich content into the `label` of `IressTab` to customise tabs with badges or icons.
 
-Some common examples include:
+<StoryEmbed id="components-tabset--tabs-with-badges"/>
 
-- Adding a badge to the tab button.
-- Adding icons to the tab button.
-
-Notes:
-
-- For best accessibility, the `IressTab` component will find the first focusable element inside the custom label to add the tab role.
-
-<StoryEmbed id="components-tab-set--tabs-with-badges"/>
-
-## Testing
+### Testing
 
 Query tabs by their role. The tab's accessible name comes from the `label` prop:
 
@@ -101,15 +123,45 @@ await user.click(tab);
 const panel = screen.getByRole('tabpanel');
 ```
 
-### Test IDs
-
-When you pass a `data-testid` to `IressTabSet`, the following nested test IDs
-are generated automatically:
-
-| Suffix | Example | Description |
-| --- | --- | --- |
-| `panel` | `my-tabset__panel` | The active tab panel |
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tabset--docs#testing">View test IDs</IressButton>
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab-set--docs)
+### Storybook
+
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tabset--docs">View in Storybook</IressButton>
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | First tab is active unless `defaultSelected` is set |
+| Active | Selected tab is visually highlighted, its panel is rendered |
+| Controlled | Active tab is driven by external state via `selected` prop |
+| Lazy loaded | Tabs are rendered dynamically as needed |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **1.3.1 Info and Relationships** — Uses `role="tablist"`, `role="tab"`, and `role="tabpanel"` semantics
+- **2.1.1 Keyboard** — All tabs are operable via keyboard
+- **4.1.2 Name, Role, Value** — `aria-selected` indicates active tab; `aria-controls` links tab to panel
+
+**Keyboard interaction:**
+
+| Key | Action |
+|-----|--------|
+| `Arrow Left` / `Arrow Right` | Move focus between tabs |
+| `Enter` / `Space` | Activate the focused tab |
+| `Home` | Move focus to first tab |
+| `End` | Move focus to last tab |
+| `Tab` | Move focus into the active panel |
+
+### Edge cases
+
+- **Single tab**: Renders without tab navigation controls
+- **Dynamic tabs**: Adding/removing tabs updates the tablist; if the active tab is removed, the first remaining tab becomes active
+- **Overflow**: When tabs exceed container width, they may scroll or wrap depending on container constraints

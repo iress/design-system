@@ -364,17 +364,19 @@ export const getMainConfig = ({
             console.log('[Storybook Host] Opened addon panel (showPanel)');
           }, 5000);
         } else if (params.showPanel === false) {
-          // Close addon panel — poll to handle the race where Storybook's
-          // SET_CONFIG re-opens the panel after the URL-based close.
+          // Close addon panel — poll to catch Storybook's SET_CONFIG
+          // re-opening the panel after the URL-based close.
           var _closePanelCheck = setInterval(function() {
-            var toggle = document.querySelector(_queryToClosePanel);
-            if (toggle) {
-              toggle.click();
-              clearInterval(_closePanelCheck);
-              console.log('[Storybook Host] Closed addon panel (showPanel)');
+            var panel = document.getElementById('storybook-panel-root');
+            if (panel && panel.offsetHeight > 0) {
+              var toggle = document.querySelector(_queryToClosePanel);
+              if (toggle) {
+                toggle.click();
+                console.log('[Storybook Host] Closed addon panel (showPanel)');
+              }
             }
           }, 500);
-          setTimeout(function() { clearInterval(_closePanelCheck); }, 15000);
+          setTimeout(function() { clearInterval(_closePanelCheck); }, 8000);
         }
 
         if (params.allowedPanels?.length > 0) {
@@ -387,7 +389,7 @@ export const getMainConfig = ({
 
               if (allowedPanels.includes(key)) {
                 console.log('[Storybook Host] Keeping panel:', key);
-                if (!newOpenPanel) {
+                if (!newOpenPanel && params.showPanel !== false) {
                   tab.click();
                   newOpenPanel = key;
                   console.log('[Storybook Host] Clicking panel:', key);

@@ -45,6 +45,14 @@ const RelaySize = () => {
 
     window.addEventListener('message', relaySize);
 
+    // Auto-report size changes via ResizeObserver
+    const target = document.querySelector('.sb-show-main');
+    let resizeObserver: ResizeObserver | undefined;
+    if (target) {
+      resizeObserver = new ResizeObserver(() => sendSize());
+      resizeObserver.observe(target);
+    }
+
     setTimeout(() => {
       console.log('[Storybook Preview] Sending initial size');
       sendSize(); // Send initial size on load
@@ -52,6 +60,7 @@ const RelaySize = () => {
 
     return () => {
       window.removeEventListener('message', relaySize);
+      resizeObserver?.disconnect();
     };
   }, []);
 
