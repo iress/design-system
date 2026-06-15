@@ -34,7 +34,7 @@ export const NAV_ITEMS: SideNavItem[] = [
       { key: 'user-experience', label: 'User Experience', href: '/foundations/user-experience', element: Link },
       { key: 'using-components-consistently', label: 'Using Components Consistently', href: '/foundations/using-components-consistently', element: Link },
       { key: 'visual-design-standards', label: 'Visual Design Standards', href: '/foundations/visual-design-standards', element: Link },
-      { key: 'z-index-stacking', label: 'Z-Index Stacking', href: '/foundations/z-index-stacking', element: Link },
+      { key: 'z-index-stacking', label: 'Z-Index (stacking)', href: '/foundations/z-index-stacking', element: Link },
     ],
   },
   {

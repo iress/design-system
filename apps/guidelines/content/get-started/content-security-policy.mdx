@@ -1,8 +1,6 @@
 export const meta = {
   title: 'Content Security Policy (CSP)',
   description: 'IDS loads external stylesheets and fonts at runtime. If your application enforces a Content Security Policy, you need to allowlist the origins IDS loads from.',
-  category: 'guide',
-  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_get-started-content-security-policy--docs',
 };
 
 # Content Security Policy (CSP)
@@ -81,7 +79,3 @@ All components use `<link>` tags for external stylesheets, which are covered by 
 | Console error: "Refused to apply inline style" | Inline styles blocked and no nonce configured         | Add `<meta name="csp-nonce">` tag, or allow `'unsafe-inline'` in `style-src` |
 | Fonts load in dev but not production           | CSP only enforced in production                       | Test with CSP headers in all environments                                    |
 | Theme not applying                             | `cdn.iress.com` blocked in `style-src`                | Add `cdn.iress.com` to `style-src`, or use `IressThemeImport`                |
-
----
-
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_get-started-content-security-policy--docs)

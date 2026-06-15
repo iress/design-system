@@ -1,8 +1,6 @@
 export const meta = {
   title: 'Iconography',
   description: 'Icons are a key part of the Iress Design System, providing visual cues and enhancing user experience. This section outlines the principles and guidelines for using icons effectively within our products.',
-  category: 'guide',
-  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-iconography--docs',
 };
 
 # Iconography
@@ -56,13 +54,7 @@ If you are using Figma, we recommend the [Material Symbols plugin](https://www.f
 
 The `IressIcon` component is used to render icons from the Material Symbols library based on the guidelines outlined above.
 
-[View <code>IressIcon</code> documentation](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)
-
-```tsx
-<IressIcon name="home" />
-```
-
-[View "Default" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-iconography--default)
+<StoryEmbed id="components-icon--default"/>
 
 ### Migrating from Font Awesome
 
@@ -70,42 +62,4 @@ To help with migrating, we have mapped some common Font Awesome icons to their M
 
 Please refer to the table below for guidance.
 
-```tsx
-import { IressTable, IressText, IressIcon } from '@iress-oss/ids-components';
-
-<IressTable
-  caption="Font Awesome to Material Symbols Migration Reference"
-  columns={[
-    {
-      key: 'fontAwesome',
-      label: 'Font Awesome',
-      format: (icon) => (
-        <IressText>
-          <IressIcon type="fontawesome" name={icon} /> ({icon})
-        </IressText>
-      ),
-    },
-    {
-      key: 'materialSymbols',
-      label: 'Material Symbols',
-      format: (icon) => (
-        <IressText>
-          <IressIcon name={icon} /> ({icon})
-        </IressText>
-      ),
-    },
-  ]}
-  rows={[
-    { fontAwesome: 'search', materialSymbols: 'search' },
-    { fontAwesome: 'home', materialSymbols: 'home' },
-    { fontAwesome: 'user', materialSymbols: 'person' },
-  ]}
-  scope="col"
-/>
-```
-
-[View "FontAwesomeToMaterialMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-iconography--font-awesome-to-material-migration)
-
----
-
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-iconography--docs)
+<StoryEmbed id="components-icon--font-awesome-to-material-migration"/>
