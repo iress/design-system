@@ -65,7 +65,7 @@ export function StoryEmbed({
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
-  const iframeSrc = `${subStorybooks[type]}/?path=/story/${id}&shortcuts=false&singleStory=true&embedded=true&panel=false`;
+  const iframeSrc = `${subStorybooks[type]}/?path=/story/${id}&shortcuts=false&singleStory=true&embedded=true&full=1`;
   const storybookUrl = `${mainStorybook}/?path=/docs/${type}_${id}`;
 
   useEffect(() => {

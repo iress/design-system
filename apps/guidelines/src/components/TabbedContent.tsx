@@ -1,17 +1,21 @@
-import { useRef, useEffect, useState, type ReactNode } from 'react';
+import {
+  useRef,
+  useEffect,
+  useState,
+  type ReactNode,
+} from 'react';
+import { createPortal } from 'react-dom';
 import { IressTabSet, IressTab } from '@iress-oss/ids-components';
 
 const TAB_HEADINGS = ['Design', 'Develop', 'Specifications'];
 
-interface Section {
-  title: string;
-  content: HTMLElement[];
-}
-
 function getTabFromUrl(): string | undefined {
   const params = new URLSearchParams(window.location.hash.split('?')[1] ?? '');
   const tab = params.get('tab');
-  if (tab && TAB_HEADINGS.map((t) => t.toLowerCase()).includes(tab.toLowerCase())) {
+  if (
+    tab &&
+    TAB_HEADINGS.map((t) => t.toLowerCase()).includes(tab.toLowerCase())
+  ) {
     return TAB_HEADINGS.find((t) => t.toLowerCase() === tab.toLowerCase());
   }
   return undefined;
@@ -20,107 +24,116 @@ function getTabFromUrl(): string | undefined {
 /**
  * Renders MDX content with tabs when `## Design`, `## Develop`, or `## Specifications`
  * headings are detected. Content before any tab heading renders above the tabs.
- * Selected tab syncs with URL hash (e.g. #design, #develop, #specifications).
+ * Uses CSS visibility to preserve React component lifecycle in all sections.
+ * Selected tab syncs with URL hash (e.g. ?tab=design).
  */
 export function TabbedContent({ children }: { children: ReactNode }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [sections, setSections] = useState<Section[] | null>(null);
-  const [preamble, setPreamble] = useState<HTMLElement[]>([]);
-  const [selectedTab, setSelectedTab] = useState<number | undefined>(undefined);
+  const tabHostRef = useRef<HTMLDivElement | null>(null);
+  const [tabs, setTabs] = useState<string[]>([]);
+  const [selectedTab, setSelectedTab] = useState<number | undefined>(
+    undefined,
+  );
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    const headings = Array.from(container.querySelectorAll('h2'));
+    const headings = Array.from(container.querySelectorAll(':scope > h2'));
     const tabHeadings = headings.filter((h) =>
       TAB_HEADINGS.includes(h.textContent?.trim() ?? ''),
     );
 
-    if (tabHeadings.length === 0) {
-      setSections(null);
-      return;
+    if (tabHeadings.length === 0) return;
+
+    setTabs(tabHeadings.map((h) => h.textContent!.trim()));
+
+    // Insert a host element for the tab bar before the first tab heading
+    if (!tabHostRef.current) {
+      const host = document.createElement('div');
+      container.insertBefore(host, tabHeadings[0]);
+      tabHostRef.current = host;
     }
 
-    const pre: HTMLElement[] = [];
-    const tabs: Section[] = [];
-    let currentSection: Section | null = null;
-
+    // Mark DOM sections with data attributes for CSS-based show/hide
+    let currentTab: string | null = null;
     for (const child of Array.from(container.children) as HTMLElement[]) {
       if (
         child.tagName === 'H2' &&
         TAB_HEADINGS.includes(child.textContent?.trim() ?? '')
       ) {
-        currentSection = { title: child.textContent!.trim(), content: [] };
-        tabs.push(currentSection);
-      } else if (currentSection) {
-        currentSection.content.push(child);
-      } else {
-        pre.push(child);
+        currentTab = child.textContent!.trim();
+        child.dataset.tabSection = currentTab;
+        child.style.display = 'none';
+      } else if (currentTab) {
+        child.dataset.tabSection = currentTab;
       }
     }
 
-    setPreamble(pre);
-    setSections(tabs);
-
-    // Set initial tab from URL
+    // Set initial tab from URL or first tab
     const urlTab = getTabFromUrl();
-    if (urlTab) {
-      const idx = tabs.findIndex((t) => t.title === urlTab);
-      if (idx >= 0) setSelectedTab(idx);
-    }
+    const idx = urlTab
+      ? tabHeadings.findIndex((h) => h.textContent?.trim() === urlTab)
+      : 0;
+    setSelectedTab(idx >= 0 ? idx : 0);
   }, []);
+
+  // Apply visibility based on selected tab
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || tabs.length === 0 || selectedTab === undefined) return;
+
+    const activeTab = tabs[selectedTab];
+    for (const child of Array.from(container.children) as HTMLElement[]) {
+      const section = child.dataset.tabSection;
+      if (section) {
+        child.style.display = section === activeTab ? '' : 'none';
+      }
+    }
+  }, [selectedTab, tabs]);
 
   // Listen for hash changes
   useEffect(() => {
     const onHashChange = () => {
       const urlTab = getTabFromUrl();
-      if (urlTab && sections) {
-        const idx = sections.findIndex((t) => t.title === urlTab);
+      if (urlTab && tabs.length > 0) {
+        const idx = tabs.findIndex((t) => t === urlTab);
         if (idx >= 0) setSelectedTab(idx);
       }
     };
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
-  }, [sections]);
-
-  if (sections === null) {
-    return (
-      <div ref={containerRef}>
-        {children}
-      </div>
-    );
-  }
+  }, [tabs]);
 
   return (
     <>
-      <div>
-        {preamble.map((el, i) => (
-          <div key={i} dangerouslySetInnerHTML={{ __html: el.outerHTML }} />
-        ))}
-      </div>
-      <IressTabSet
-        selected={selectedTab}
-        onChange={(e) => {
-          const idx = e.index;
-          setSelectedTab(idx);
-          const tab = sections[idx];
-          if (tab) {
-            const basePath = window.location.hash.split('?')[0];
-            window.history.replaceState(null, '', `${basePath}?tab=${tab.title.toLowerCase()}`);
-          }
-        }}
-      >
-        {sections.map((section) => (
-          <IressTab key={section.title} label={section.title}>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: section.content.map((el) => el.outerHTML).join(''),
-              }}
-            />
-          </IressTab>
-        ))}
-      </IressTabSet>
+      <div ref={containerRef}>{children}</div>
+      {tabs.length > 0 &&
+        tabHostRef.current &&
+        createPortal(
+          <IressTabSet
+            selected={selectedTab}
+            onChange={(e) => {
+              const idx = e.index;
+              setSelectedTab(idx);
+              const tab = tabs[idx];
+              if (tab) {
+                const basePath = window.location.hash.split('?')[0];
+                window.history.replaceState(
+                  null,
+                  '',
+                  `${basePath}?tab=${tab.toLowerCase()}`,
+                );
+              }
+            }}
+            mt="spacing.4"
+          >
+            {tabs.map((tab) => (
+              <IressTab key={tab} label={tab} />
+            ))}
+          </IressTabSet>,
+          tabHostRef.current,
+        )}
     </>
   );
 }
