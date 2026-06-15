@@ -8,14 +8,25 @@ interface Section {
   content: HTMLElement[];
 }
 
+function getTabFromUrl(): string | undefined {
+  const params = new URLSearchParams(window.location.hash.split('?')[1] ?? '');
+  const tab = params.get('tab');
+  if (tab && TAB_HEADINGS.map((t) => t.toLowerCase()).includes(tab.toLowerCase())) {
+    return TAB_HEADINGS.find((t) => t.toLowerCase() === tab.toLowerCase());
+  }
+  return undefined;
+}
+
 /**
  * Renders MDX content with tabs when `## Design`, `## Develop`, or `## Specifications`
  * headings are detected. Content before any tab heading renders above the tabs.
+ * Selected tab syncs with URL hash (e.g. #design, #develop, #specifications).
  */
 export function TabbedContent({ children }: { children: ReactNode }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [sections, setSections] = useState<Section[] | null>(null);
   const [preamble, setPreamble] = useState<HTMLElement[]>([]);
+  const [selectedTab, setSelectedTab] = useState<number | undefined>(undefined);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -51,10 +62,29 @@ export function TabbedContent({ children }: { children: ReactNode }) {
 
     setPreamble(pre);
     setSections(tabs);
+
+    // Set initial tab from URL
+    const urlTab = getTabFromUrl();
+    if (urlTab) {
+      const idx = tabs.findIndex((t) => t.title === urlTab);
+      if (idx >= 0) setSelectedTab(idx);
+    }
   }, []);
 
+  // Listen for hash changes
+  useEffect(() => {
+    const onHashChange = () => {
+      const urlTab = getTabFromUrl();
+      if (urlTab && sections) {
+        const idx = sections.findIndex((t) => t.title === urlTab);
+        if (idx >= 0) setSelectedTab(idx);
+      }
+    };
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, [sections]);
+
   if (sections === null) {
-    // No tab headings found or first render — show as-is
     return (
       <div ref={containerRef}>
         {children}
@@ -69,7 +99,18 @@ export function TabbedContent({ children }: { children: ReactNode }) {
           <div key={i} dangerouslySetInnerHTML={{ __html: el.outerHTML }} />
         ))}
       </div>
-      <IressTabSet panelStyle={{ py: 'spacing.4' }}>
+      <IressTabSet
+        selected={selectedTab}
+        onChange={(e) => {
+          const idx = e.index;
+          setSelectedTab(idx);
+          const tab = sections[idx];
+          if (tab) {
+            const basePath = window.location.hash.split('?')[0];
+            window.history.replaceState(null, '', `${basePath}?tab=${tab.title.toLowerCase()}`);
+          }
+        }}
+      >
         {sections.map((section) => (
           <IressTab key={section.title} label={section.title}>
             <div
