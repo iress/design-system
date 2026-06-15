@@ -104,7 +104,7 @@ function RootLayout() {
         <IressDivider />
       </IressStyled>
       <IressInline noWrap style={{ height: `calc(100vh - ${navHeight}px)` }}>
-        <IressSideNav items={navItems} activeItemKey={activeKey} />
+        <IressSideNav items={navItems} activeItemKey={activeKey} defaultExpanded />
         <IressContainer py="md" flex="1" scrollable="y">
           <IressStyled
             element="main"

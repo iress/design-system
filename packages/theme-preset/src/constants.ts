@@ -44,6 +44,7 @@ export const BREAKPOINT_DETAILS = {
     mediaQuery: '(min-width: 576px) and (max-width: 767px)',
     screenWidthRange: '576px - 767px',
     margin: 'spacing.4',
+    maxColumns: 4,
     minScreenWidth: '576px',
     maxScreenWidth: '767px',
     containerMaxWidth: '100%',

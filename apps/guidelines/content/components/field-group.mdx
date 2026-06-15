@@ -1,10 +1,13 @@
+import { fieldGroupMeta } from '@iress-oss/ids-components/meta';
 import { IressButton } from '@iress-oss/ids-components';
 
 # Field Group
 
 Groups multiple related fields together using a `fieldset` and `legend` for accessibility.
 
-<StoryEmbed id="components-field-fieldgroup--inline"/>
+<Metadata meta={fieldGroupMeta} />
+
+<StoryEmbed id="components-fieldgroup--inline"/>
 
 ## Design
 
@@ -48,7 +51,7 @@ import { IressFieldGroup, IressField, IressInput } from '@iress-oss/ids-componen
 </IressFieldGroup>
 ```
 
-<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field-fieldgroup--docs#api-props">View all props</IressButton>
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-fieldgroup--docs#api-props">View all props</IressButton>
 
 ### Usage
 
@@ -56,25 +59,25 @@ import { IressFieldGroup, IressField, IressInput } from '@iress-oss/ids-componen
 
 Fields arranged horizontally within the group.
 
-<StoryEmbed id="components-field-fieldgroup--inline"/>
+<StoryEmbed id="components-fieldgroup--inline"/>
 
 #### Inline with sink
 
 Inline fields with error messages that sink below without disrupting layout.
 
-<StoryEmbed id="components-field-fieldgroup--inline-sink"/>
+<StoryEmbed id="components-fieldgroup--inline-sink"/>
 
 #### Joined
 
 Visually connected fields that form a single value.
 
-<StoryEmbed id="components-field-fieldgroup--join"/>
+<StoryEmbed id="components-fieldgroup--join"/>
 
 #### Joined with sink
 
 Joined fields with error sink behaviour.
 
-<StoryEmbed id="components-field-fieldgroup--join-sink"/>
+<StoryEmbed id="components-fieldgroup--join-sink"/>
 
 ### Testing
 
@@ -84,7 +87,13 @@ Query the field group by its `group` role:
 const group = screen.getByRole('group', { name: 'Full name' });
 ```
 
-<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field-fieldgroup--docs#testing">View test IDs</IressButton>
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-fieldgroup--docs#testing">View test IDs</IressButton>
+
+---
+
+### Storybook
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-fieldgroup--docs">View in Storybook</IressButton>
 
 ## Specifications
 

@@ -1,21 +1,33 @@
 import { placeholderMeta } from '@iress-oss/ids-components/meta';
-
-export const meta = {
-  title: placeholderMeta.heading,
-  description: placeholderMeta.description,
-  component: 'IressPlaceholder',
-  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs',
-};
+import { IressButton } from '@iress-oss/ids-components';
 
 # Placeholder
 
 A placeholder is a UI element that allows you to reserve space for content that has not been created yet, usually used for prototyping.
 
-```tsx
-import { IressPlaceholder } from '@iress-oss/ids-components';
-```
+<Metadata meta={placeholderMeta} />
 
-## Quick Start
+<StoryEmbed id="components-placeholder--default"/>
+
+## Design
+
+### When to use
+
+- **Prototyping**: Reserve space for content not yet designed or built
+- **Layout testing**: Visualise how content will fill available space
+
+### When not to use
+
+- **Production UIs** — placeholders are a development/prototyping aid, not a user-facing component
+- **Loading states** — use [Skeleton](/components/skeleton) instead
+
+### Related patterns
+
+- [Skeleton](/components/skeleton) — for loading state placeholders in production UIs
+
+## Develop
+
+### Quick Start
 
 ```tsx
 import { IressPlaceholder } from '@iress-oss/ids-components';
@@ -25,13 +37,15 @@ import { IressPlaceholder } from '@iress-oss/ids-components';
 </IressPlaceholder>
 ```
 
-## Usage
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-placeholder--docs#api-props">View all props</IressButton>
+
+### Usage
 
 The `IressPlaceholder` component is a **last resort** component, as it provides very little context to the product team and/or user about what content will be placed in the placeholder.
 
 It is recommended to use placeholders that emulate the content that will be placed in the placeholder, such as images or text that is similar to the final content. This will help the product team and/or user understand what to expect in the final product.
 
-## Testing
+### Testing
 
 `IressPlaceholder` is a visual placeholder. Query by `data-testid`:
 
@@ -41,4 +55,12 @@ const placeholder = screen.getByTestId('my-placeholder');
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs)
+### Storybook
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-placeholder--docs">View in Storybook</IressButton>
+
+## Specifications
+
+### Behaviour
+
+Renders a visual box with configurable width, height, heading, and description text. Development/prototyping aid only.

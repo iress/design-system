@@ -1,35 +1,54 @@
 import { rowMeta } from '@iress-oss/ids-components/meta';
-
-export const meta = {
-  title: rowMeta.heading,
-  description: rowMeta.description,
-  component: 'IressRow',
-  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs',
-};
+import { IressButton } from '@iress-oss/ids-components';
 
 # Row
 
 Used in conjunction with the IressCol component to lay out page content.
 
+<Metadata meta={rowMeta} />
+
+<StoryEmbed id="components-row--default"/>
+
+## Design
+
+### When to use
+
+- **Grid layouts**: Create multi-column layouts with `IressCol` children
+- **Responsive grids**: Columns that reflow at different breakpoints
+
+### When not to use
+
+- **Simple horizontal lists** — use [Inline](/components/inline) instead
+- **Without Col children** — Row is designed to work with `IressCol`
+
+### Related patterns
+
+- [Col](/components/col) — column children for the row grid
+- [Container](/components/container) — centres and pads the page
+- [Inline](/components/inline) — simpler horizontal layout
+
+## Develop
+
+### Quick Start
+
 ```tsx
-import { IressRow } from '@iress-oss/ids-components';
+import { IressRow, IressCol } from '@iress-oss/ids-components';
+
+<IressRow>
+  <IressCol span="6">Left</IressCol>
+  <IressCol span="6">Right</IressCol>
+</IressRow>
 ```
 
-## Quick Start
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-row--docs#api-props">View all props</IressButton>
 
-```tsx
-import { IressRow } from '@iress-oss/ids-components';
-
-<IressRow gutter="spacing.7" horizontalAlign="left" verticalAlign="top" />
-```
-
-## Usage
+### Usage
 
 `IressRow` supports visual hierarchy by allowing you to add multiple columns in your layout, allowing the user to see more content on the screen at the same time.
 
 It works best alongside the `IressContainer` and `IressCol` components.
 
-### Gutter
+#### Gutter
 
 The spacing between columns is controlled by the `gutter` prop. To change the spacing between multiple columns once the row wraps, you can use the `rowGrap` prop.
 
@@ -37,27 +56,25 @@ Note: The `gutter` prop only works with `IressCol` components. If you are using 
 
 <StoryEmbed id="components-row--gutter"/>
 
-### Responsive Gutter
+#### Responsive Gutter
 
 The `gutter` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
 
 <StoryEmbed id="components-row--responsive-gutter"/>
 
-### Alignment
-
-### Horizontal alignment
+#### Horizontal alignment
 
 `IressRow` can be set to align horizontally using the `horizontalAlign` prop.
 
 <StoryEmbed id="components-row--horizontal-alignment"/>
 
-### Vertical alignment
+#### Vertical alignment
 
 `IressRow` can be set to align vertically using the `verticalAlign` prop.
 
 <StoryEmbed id="components-row--vertical-alignment"/>
 
-## Testing
+### Testing
 
 `IressRow` is a layout primitive with no semantic role. Target its children
 directly or use a `data-testid`:
@@ -68,4 +85,15 @@ const row = screen.getByTestId('my-row');
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs)
+### Storybook
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-row--docs">View in Storybook</IressButton>
+
+## Specifications
+
+### Behaviour
+
+A CSS grid row container. Supports `gutter`, `horizontalAlign`, and `verticalAlign` props with responsive object values.
+
+<StoryEmbed id="foundations--col-breakpoints"/>
+

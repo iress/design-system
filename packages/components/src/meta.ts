@@ -39,6 +39,7 @@ export { default as pillMeta } from '@/components/Pill/meta';
 export { default as placeholderMeta } from '@/components/Placeholder/meta';
 export { default as popoverMeta } from '@/components/Popover/meta';
 export { default as progressMeta } from '@/components/Progress/meta';
+export { default as providerMeta } from '@/components/Provider/meta';
 export { default as radioMeta } from '@/components/Radio/meta';
 export { default as radioGroupMeta } from '@/components/RadioGroup/meta';
 export { default as readonlyMeta } from '@/components/Readonly/meta';

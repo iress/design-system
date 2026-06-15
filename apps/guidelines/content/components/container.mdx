@@ -1,43 +1,58 @@
 import { containerMeta } from '@iress-oss/ids-components/meta';
-
-export const meta = {
-  title: containerMeta.heading,
-  description: containerMeta.description,
-  component: 'IressContainer',
-  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs',
-};
+import { IressButton } from '@iress-oss/ids-components';
 
 # Container
 
-IressContainer provides a means to center and horizontally pad your site’s contents.
+IressContainer provides a means to center and horizontally pad your site's contents.
+
+<Metadata meta={containerMeta} />
+
+<StoryEmbed id="components-container--container"/>
+
+## Design
+
+### When to use
+
+- **Page wrapper**: Centre content and apply consistent horizontal padding
+- **Max-width constraint**: Prevent content from stretching too wide on large screens
+
+### When not to use
+
+- **Full-bleed layouts** — set `fluid` or use no container at all
+- **Component-level spacing** — use [Stack](/components/stack) or [Inline](/components/inline)
+
+### Related patterns
+
+- [Row](/components/row) + [Col](/components/col) — grid layout within a container
+- [Stack](/components/stack) — vertical spacing between sections
+
+## Develop
+
+### Quick Start
 
 ```tsx
 import { IressContainer } from '@iress-oss/ids-components';
+
+<IressContainer>
+  <p>Centred content</p>
+</IressContainer>
 ```
 
-## Quick Start
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-container--docs#api-props">View all props</IressButton>
 
-```tsx
-import { IressContainer } from '@iress-oss/ids-components';
+### Usage
 
-<IressContainer />
-```
-
-## Behaviour
-
-The `IressContainer` snaps to fixed max widths at different breakpoints. Those max widths are as follows:
+The `IressContainer` snaps to fixed max widths at different breakpoints:
 
 <StoryEmbed id="components-container--breakpoint-table"/>
 
-## Examples
-
-### Fluid
+#### Fluid
 
 If you want the `IressContainer` to fill its containing element, you can set the `fluid` prop. Resize the example below to see how the IressContainer is 100% for all screen sizes.
 
 <StoryEmbed id="components-container--fluid"/>
 
-## Testing
+### Testing
 
 `IressContainer` is a layout primitive with no semantic role. Target its
 children directly or use a `data-testid`:
@@ -48,4 +63,15 @@ const container = screen.getByTestId('my-container');
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs)
+### Storybook
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-container--docs">View in Storybook</IressButton>
+
+## Specifications
+
+### Behaviour
+
+Centres content with horizontal padding. Snaps to fixed max-widths at each breakpoint unless `fluid` is set.
+
+<StoryEmbed id="foundations--container-breakpoints"/>
+

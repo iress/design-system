@@ -1,37 +1,56 @@
 import { colMeta } from '@iress-oss/ids-components/meta';
-
-export const meta = {
-  title: colMeta.heading,
-  description: colMeta.description,
-  component: 'IressCol',
-  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs',
-};
+import { IressButton } from '@iress-oss/ids-components';
 
 # Col
 
-Used in conjunction with the IressRow component to layout page content
+Used in conjunction with the IressRow component to layout page content.
+
+<Metadata meta={colMeta} />
+
+<StoryEmbed id="components-col--auto-sized"/>
+
+## Design
+
+### When to use
+
+- **Grid layouts**: Divide content into columns within an `IressRow`
+- **Responsive layouts**: Adjust column widths at different breakpoints. There are suggested max columns to show at each breakpoint (visible via the Specifications), but these are not hard rules. Use your judgement to determine the best layout for your content and users.
+
+### When not to use
+
+- **Simple horizontal spacing** — use [Inline](/components/inline) instead
+- **Without a Row** — `IressCol` must be a direct child of `IressRow`
+
+### Related patterns
+
+- [Row](/components/row) — parent container for columns
+- [Container](/components/container) — centres and pads page content
+- [Inline](/components/inline) — simpler horizontal layout without grid semantics
+
+## Develop
+
+### Quick Start
 
 ```tsx
-import { IressCol } from '@iress-oss/ids-components';
+import { IressRow, IressCol } from '@iress-oss/ids-components';
+
+<IressRow>
+  <IressCol span="6">Left</IressCol>
+  <IressCol span="6">Right</IressCol>
+</IressRow>
 ```
 
-## Quick Start
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-col--docs#api-props">View all props</IressButton>
 
-```tsx
-import { IressCol } from '@iress-oss/ids-components';
+### Usage
 
-<IressCol span="6" />
-```
-
-## Examples
-
-### Auto-sized
+#### Auto-sized
 
 When no column widths are specified the `IressCol` component will render equal width columns.
 
 <StoryEmbed id="components-col--auto-sized"/>
 
-### Span
+#### Span
 
 The `span` prop controls the number of grid columns the component should span.
 
@@ -39,7 +58,7 @@ If no `span` is provided it will default to `auto` which will make the column ei
 
 <StoryEmbed id="components-col--span"/>
 
-### Responsive span
+#### Responsive span
 
 The `span` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints. Any missing keys will fall back to the value defined for the next smallest key.
 
@@ -47,13 +66,13 @@ The `span` prop can take an object that takes five key/value pairs that correlat
 
 <StoryEmbed id="components-col--responsive-span"/>
 
-### Offset
+#### Offset
 
 The `offset` prop controls the amount of grid columns to offset.
 
 <StoryEmbed id="components-col--offset"/>
 
-### Responsive offset
+#### Responsive offset
 
 When a `ResponsiveSizing` object is passed into the `offset` prop, the offset will change at the specified breakpoints. It will apply to all breakpoints above the specified breakpoint.
 
@@ -61,13 +80,13 @@ For example, if you specify an offset for `md`, it will apply to `lg`, `xl` and 
 
 <StoryEmbed id="components-col--responsive-offset"/>
 
-### Align self
+#### Align self
 
 The `alignSelf` prop controls the vertical alignment of the column (use if column alignment needs to differ from other columns in the row).
 
 <StoryEmbed id="components-col--align-self"/>
 
-## Testing
+### Testing
 
 `IressCol` is a layout primitive with no semantic role. Target its children
 directly or use a `data-testid`:
@@ -78,4 +97,14 @@ const col = screen.getByTestId('my-col');
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs)
+### Storybook
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-col--docs">View in Storybook</IressButton>
+
+## Specifications
+
+### Behaviour
+
+A CSS grid column wrapper. Supports `span`, `offset`, and `alignSelf` props with responsive object values.
+
+<StoryEmbed id="foundations--col-breakpoints"/>
