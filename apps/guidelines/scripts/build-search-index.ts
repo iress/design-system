@@ -21,9 +21,28 @@ function getMdxFiles(dir: string): string[] {
   return files;
 }
 
+import * as componentMetas from '@iress-oss/ids-components/meta';
+
+const metaLookup = componentMetas as Record<string, { heading?: string; description?: string }>;
+
 function extractMeta(source: string): { title?: string; description?: string } {
   const metaMatch = source.match(/export\s+const\s+meta\s*=\s*(\{[\s\S]*?\});/);
   if (!metaMatch) return {};
+
+  // Try to resolve imported meta references (e.g. alertMeta.heading)
+  const importMatch = source.match(/import\s+\{\s*(\w+)\s*\}\s*from\s+['"]@iress-oss\/ids-components\/meta['"]/);
+  if (importMatch) {
+    const varName = importMatch[1];
+    const resolved = metaLookup[varName];
+    if (resolved) {
+      return {
+        title: resolved.heading,
+        description: resolved.description,
+      };
+    }
+  }
+
+  // Fallback: try to evaluate as a literal object
   try {
     return new Function(`return ${metaMatch[1]}`)();
   } catch {
@@ -36,10 +55,18 @@ function stripMdx(source: string): string {
     .replace(/export\s+const\s+meta\s*=\s*\{[\s\S]*?\};/g, '') // remove meta export
     .replace(/import\s+.*?from\s+['"].*?['"];?/g, '')           // remove imports
     .replace(/```\w*\n?/g, '')                                   // remove code fences (keep content)
+    .replace(/^\|[-:| ]+\|$/gm, '')                              // remove table separator rows
+    .replace(/^\|(.+)\|$/gm, '$1')                               // unwrap table cells
     .replace(/<[^>]+>/g, ' ')                                    // strip JSX/HTML tags
-    .replace(/[#*_`\[\]()]/g, '')                                // strip markdown syntax
+    .replace(/[#*_`\[\]()|\-]/g, '')                             // strip markdown syntax + pipes
     .replace(/\n{2,}/g, '\n')                                    // collapse newlines
     .trim();
+}
+
+function titleCase(slug: string): string {
+  return slug
+    .replace(/[-_]/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 async function main() {
@@ -64,7 +91,7 @@ async function main() {
       content,
       language: 'en',
       meta: {
-        title: meta.title ?? rel.split('/').pop()!,
+        title: meta.title ?? titleCase(rel.split('/').pop()!),
         ...(meta.description ? { description: meta.description } : {}),
       },
     });
