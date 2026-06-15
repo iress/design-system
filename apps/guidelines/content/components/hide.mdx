@@ -1,0 +1,108 @@
+import { hideMeta } from '@iress-oss/ids-components/meta';
+import { IressButton } from '@iress-oss/ids-components';
+
+# Hide
+
+Makes it easier to create adaptive designs that show or hide content based on screen size.
+
+<Metadata meta={hideMeta} />
+
+<StoryEmbed id="components-hide--hidden-on" />
+
+## Design
+
+### When to use
+
+- **Responsive layouts**: Hide content on smaller screens that isn't essential for mobile
+- **Progressive disclosure**: Show additional detail only on larger screens
+- **Screen reader content**: Use `visuallyHidden` to provide context for assistive technology without visual clutter
+
+### When not to use
+
+- **Interactive show/hide** (user-triggered) — use [Expander](/components/expander) instead
+- **Conditional rendering based on data** — use standard React conditional rendering
+- **Layout changes** — use [Row](/components/row)/[Col](/components/col) with responsive `span` props
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Hide supplementary content on mobile | Hide primary content or navigation on any screen size |
+| Use `visuallyHidden` for screen reader labels | Use `display: none` directly — it removes from accessibility tree |
+| Specify both hide and show breakpoints clearly | Assume content is only viewed on desktop |
+
+### Related patterns
+
+- [Col](/components/col) — responsive column spans
+- [Container](/components/container) — responsive max-width
+- [Expander](/components/expander) — user-triggered show/hide
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressHide } from '@iress-oss/ids-components';
+
+<IressHide hiddenOn={{ md: true }}>
+  This content is hidden on medium screens and above.
+</IressHide>
+```
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-hide--docs#api-props">View all props</IressButton>
+
+### Usage
+
+#### `hiddenOn`
+
+The `hiddenOn` prop accepts a responsive object. Set a breakpoint to `true` to hide content from that breakpoint upward. Set it to `false` to make content visible again at a larger breakpoint.
+
+<StoryEmbed id="components-hide--hidden-on" />
+
+#### Visually hidden
+
+Use `visuallyHidden` for content that should be accessible to screen readers but not visible on screen:
+
+<StoryEmbed id="components-hide--visually-hidden" />
+
+### Testing
+
+Hidden content is removed from both visual and accessibility trees (unless `visuallyHidden` is used):
+
+```tsx
+// Content is not in the DOM when hidden
+expect(screen.queryByText('Hidden content')).not.toBeInTheDocument();
+
+// Visually hidden content is still accessible
+const srContent = screen.getByText('Screen reader only');
+```
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-hide--docs#testing">View test IDs</IressButton>
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| `hiddenOn` breakpoint active | Content removed from DOM (not rendered) |
+| `hiddenOn` breakpoint inactive | Content rendered normally |
+| `visuallyHidden` | Content rendered but positioned off-screen; accessible to screen readers |
+
+<StoryEmbed id="components-hide--breakpoint-table" />
+
+### Accessibility
+
+- Hidden content (`hiddenOn`) is completely removed — not accessible to any user
+- `visuallyHidden` uses CSS positioning to hide visually while keeping in accessibility tree
+- Use `visuallyHidden` for labels, skip links, or context that sighted users get from visual cues
+
+### Edge cases
+
+- **No breakpoints specified**: Content always visible
+- **Only one breakpoint**: Hidden from that breakpoint upward (mobile-first)
+- **Nested hides**: Work independently — inner hide doesn't inherit parent's visibility
+
+---
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-hide--docs">View in Storybook →</IressButton>

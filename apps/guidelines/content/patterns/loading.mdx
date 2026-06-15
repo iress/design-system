@@ -1,0 +1,152 @@
+import { loadingMeta } from '@iress-oss/ids-components/meta';
+import { IressButton } from '@iress-oss/ids-components';
+
+# Loading
+
+The loading pattern is used to indicate that content is being loaded or processed consistently across Iress products.
+
+<Metadata meta={loadingMeta} />
+
+<StoryEmbed id="patterns-loading--wizard" />
+
+## Design
+
+### When to use
+
+Choose the pattern based on the type of content loading:
+
+| Pattern | Use case | Examples |
+|---------|----------|----------|
+| `component` | A specific component is loading | Table with many rows, chart loading data |
+| `default` | Long loading times are not expected | Navigation transitions |
+| `long` | Expected to take 10+ seconds | Multiple API calls, AI generation, bulk uploads |
+| `page` | An entire page is loading | Detail pages, forms, dashboards |
+| `start-up` | Application is loading | First launch, switching applications, theme changes |
+| `validate` | Server-side validation in progress | Form submission, saving a record |
+
+### When not to use
+
+- **Instant operations** (< 500ms) — no indicator needed; the system should feel instant
+- **Background tasks** that don't block the UI — don't show a loading indicator; let the user continue working
+- **Individual skeleton elements** — use [Skeleton](/components/skeleton) directly for custom layouts
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Use one loading pattern per user action | Mix multiple loading patterns for the same task |
+| Match the loading pattern across app transitions | Show a different indicator on each page |
+| Set `estimatedFinishTime` based on real metrics | Guess at loading times |
+| Use `IressLoading.shouldRender` for smooth transitions | Unmount loading abruptly without fade-out |
+
+### Content guidelines
+
+- **Messages**: Keep short and informative (e.g. "Processing transcript", not "Please wait while we process your data")
+- **Message lists** (long pattern): Use action verbs describing what the system is doing
+- **Screen reader text**: Always provide via `screenReaderText` prop
+
+### Related patterns
+
+- [Skeleton](/components/skeleton) — building blocks for custom loading templates
+- [Spinner](/components/spinner) — low-level spinner for custom uses
+- [Progress](/components/progress) — standalone progress bar
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressLoading } from '@iress-oss/ids-components';
+
+<IressLoading pattern="page" />
+```
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs#api-props">View all props</IressButton>
+
+### Behaviour timing
+
+The default behaviour follows UX best practices:
+
+- **0–500ms**: No indicator shown (assumes content loaded)
+- **500ms–2s**: Loading indicator animates in (skeleton or progress bar)
+- **2–5s**: Loading message animates in
+- **5–10s**: Additional messages rotate to show progress
+- **10s+**: Checklist of items being completed
+
+### Usage
+
+#### Page loading
+
+<StoryEmbed id="patterns-loading--page" />
+
+#### Start-up
+
+<StoryEmbed id="patterns-loading--start-up" height={300} autoHeight={false} />
+
+#### Long running tasks
+
+<StoryEmbed id="patterns-loading--long" />
+
+#### Validate (form submission)
+
+<StoryEmbed id="patterns-loading--validate" height={150} autoHeight={false} />
+
+### Suspense
+
+Use `IressLoadingSuspense` with React 19's `use` hook for automatic loading state management:
+
+```tsx
+import { IressLoadingSuspense } from '@iress-oss/ids-components';
+import { use, useRef } from 'react';
+
+const HomePage = () => {
+  const dataRef = useRef(API.fetchPage('home'));
+  const data = use(dataRef.current);
+  return <h2>{data.title}</h2>;
+};
+
+export const App = () => (
+  <IressLoadingSuspense pattern="page">
+    <HomePage />
+  </IressLoadingSuspense>
+);
+```
+
+### Testing
+
+The loading component uses `aria-live` regions for accessibility. Query by the message text:
+
+```tsx
+const message = screen.getByText('Loading...');
+```
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs#testing">View test IDs</IressButton>
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Not loaded | Shows skeleton/progress after timeout (default 500ms) |
+| Message timeout | Message appears after 2.5s (configurable) |
+| Loaded | Fades out smoothly (use `IressLoading.shouldRender` hook) |
+| Error (long pattern) | Displays error state, overriding progress |
+
+### Accessibility
+
+- Uses `aria-live` regions to announce loading state changes to screen readers
+- `screenReaderText` prop provides immediate announcement
+- Progress bar announces percentage loaded
+- Message changes are announced via polite live region
+
+### Edge cases
+
+- **Fast loads (< 500ms)**: No indicator shown — prevents flash of loading content
+- **Nested loading**: `IressLoadingSuspense` nests — only the outermost shows an indicator
+- **Multiple patterns on one page**: Use `component` pattern for slower elements within an already-loaded page
+- **Stale content during update**: `component` pattern fades content and shows "Updating..." message
+
+---
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs">View in Storybook →</IressButton>

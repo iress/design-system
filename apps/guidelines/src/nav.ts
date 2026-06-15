@@ -41,7 +41,7 @@ export const NAV_ITEMS: SideNavItem[] = [
     key: 'components',
     icon: 'widgets',
     label: 'Components',
-    href: '/components/button',
+    href: '/components/alert',
     element: Link,
     children: [
       { key: 'alert', label: 'Alert', href: '/components/alert', element: Link },
@@ -56,6 +56,7 @@ export const NAV_ITEMS: SideNavItem[] = [
       { key: 'expander', label: 'Expander', href: '/components/expander', element: Link },
       { key: 'field', label: 'Field', href: '/components/field', element: Link },
       { key: 'field-group', label: 'Field Group', href: '/components/field-group', element: Link },
+      { key: 'hide', label: 'Hide', href: '/components/hide', element: Link },
       { key: 'icon', label: 'Icon', href: '/components/icon', element: Link },
       { key: 'image', label: 'Image', href: '/components/image', element: Link },
       { key: 'inline', label: 'Inline', href: '/components/inline', element: Link },
@@ -98,7 +99,7 @@ export const NAV_ITEMS: SideNavItem[] = [
     key: 'patterns',
     icon: 'dashboard',
     label: 'Patterns',
-    href: '/patterns/form',
+    href: '/patterns/breadcrumbs',
     element: Link,
     children: [
       { key: 'breadcrumbs', label: 'Breadcrumbs', href: '/patterns/breadcrumbs', element: Link },
@@ -106,6 +107,7 @@ export const NAV_ITEMS: SideNavItem[] = [
       { key: 'dropdown-menu', label: 'Dropdown Menu', href: '/patterns/dropdown-menu', element: Link },
       { key: 'feedback', label: 'Feedback', href: '/patterns/feedback', element: Link },
       { key: 'form', label: 'Form', href: '/patterns/form', element: Link },
+      { key: 'loading', label: 'Loading', href: '/patterns/loading', element: Link },
       { key: 'search-selection', label: 'Search & Selection', href: '/patterns/search-selection', element: Link },
       { key: 'shadow', label: 'Shadow', href: '/patterns/shadow', element: Link },
       { key: 'side-nav', label: 'Side Nav', href: '/patterns/side-nav', element: Link },
