@@ -5,7 +5,12 @@ import {
   type ReactNode,
 } from 'react';
 import { createPortal } from 'react-dom';
-import { IressTabSet, IressTab } from '@iress-oss/ids-components';
+import {
+  IressButton,
+  IressTabSet,
+  IressTab,
+  IressIcon,
+} from '@iress-oss/ids-components';
 
 const TAB_HEADINGS = ['Design', 'Develop', 'Specifications'];
 
@@ -27,10 +32,15 @@ function getTabFromUrl(): string | undefined {
  * Uses CSS visibility to preserve React component lifecycle in all sections.
  * Selected tab syncs with URL hash (e.g. ?tab=design).
  */
-export function TabbedContent({ children }: { children: ReactNode }) {
+export function TabbedContent({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const tabHostRef = useRef<HTMLDivElement | null>(null);
   const [tabs, setTabs] = useState<string[]>([]);
+  const [storybookUrl, setStorybookUrl] = useState<string | undefined>();
   const [selectedTab, setSelectedTab] = useState<number | undefined>(
     undefined,
   );
@@ -39,21 +49,37 @@ export function TabbedContent({ children }: { children: ReactNode }) {
     const container = containerRef.current;
     if (!container) return;
 
+    // Clean up previous run
+    if (tabHostRef.current) {
+      tabHostRef.current.remove();
+      tabHostRef.current = null;
+    }
+    for (const child of Array.from(container.children) as HTMLElement[]) {
+      delete child.dataset.tabSection;
+      child.style.display = '';
+    }
+
     const headings = Array.from(container.querySelectorAll(':scope > h2'));
     const tabHeadings = headings.filter((h) =>
       TAB_HEADINGS.includes(h.textContent?.trim() ?? ''),
     );
 
-    if (tabHeadings.length === 0) return;
+    if (tabHeadings.length === 0) {
+      setTabs([]);
+      setSelectedTab(undefined);
+      return;
+    }
 
     setTabs(tabHeadings.map((h) => h.textContent!.trim()));
 
+    // Extract storybook URL from Metadata component's rendered link
+    const sbLink = container.querySelector<HTMLAnchorElement>('a[href*="chromatic.com"]');
+    setStorybookUrl(sbLink?.href);
+
     // Insert a host element for the tab bar before the first tab heading
-    if (!tabHostRef.current) {
-      const host = document.createElement('div');
-      container.insertBefore(host, tabHeadings[0]);
-      tabHostRef.current = host;
-    }
+    const host = document.createElement('div');
+    container.insertBefore(host, tabHeadings[0]);
+    tabHostRef.current = host;
 
     // Mark DOM sections with data attributes for CSS-based show/hide
     let currentTab: string | null = null;
@@ -76,7 +102,7 @@ export function TabbedContent({ children }: { children: ReactNode }) {
       ? tabHeadings.findIndex((h) => h.textContent?.trim() === urlTab)
       : 0;
     setSelectedTab(idx >= 0 ? idx : 0);
-  }, []);
+  }, [children]);
 
   // Apply visibility based on selected tab
   useEffect(() => {
@@ -87,7 +113,11 @@ export function TabbedContent({ children }: { children: ReactNode }) {
     for (const child of Array.from(container.children) as HTMLElement[]) {
       const section = child.dataset.tabSection;
       if (section) {
-        child.style.display = section === activeTab ? '' : 'none';
+        if (child.tagName === 'H2') {
+          child.style.display = 'none'; // Always hide tab headings
+        } else {
+          child.style.display = section === activeTab ? '' : 'none';
+        }
       }
     }
   }, [selectedTab, tabs]);
@@ -127,6 +157,19 @@ export function TabbedContent({ children }: { children: ReactNode }) {
               }
             }}
             mt="spacing.4"
+            append={
+              storybookUrl && (
+                <IressButton
+                  href={storybookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  mode="muted"
+                  append={<IressIcon name="menu_book" />}
+                >
+                  Storybook (API reference)
+                </IressButton>
+              )
+            }
           >
             {tabs.map((tab) => (
               <IressTab key={tab} label={tab} />
