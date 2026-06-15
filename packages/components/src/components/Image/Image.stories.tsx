@@ -1,12 +1,12 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressImage } from '.';
+import { IressImage, IressImageProps } from '.';
 import { IressStack } from '@/components/Stack';
 import { IressText } from '@/components/Text';
 import React from 'react';
 import { componentStoryMeta } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
-type Story = StoryObj<typeof IressImage>;
+type Story = StoryObj<IressImageProps & { stylingProps?: boolean }>;
 const MAX_WIDTHS = [70, '250px', '50%', undefined] as const;
 
 export default {
@@ -20,7 +20,12 @@ export const Default: Story = {
   args: {
     src: 'https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp',
     alt: 'Placeholder image',
+    maxWidth: '200px',
+    stylingProps: true,
   },
+  render: ({ stylingProps, ...args }) => (
+    <IressImage {...args} />
+  ),
 };
 
 export const MaxWidth: Story = {
@@ -28,7 +33,7 @@ export const MaxWidth: Story = {
   args: {
     ...Default.args,
   },
-  render: (args) => (
+  render: ({ stylingProps, ...args }) => (
     <IressStack gap="md">
       {MAX_WIDTHS.map((width, index) => (
         <React.Fragment key={index}>

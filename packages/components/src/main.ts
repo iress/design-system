@@ -47,6 +47,7 @@ export * from './components/Styled';
 export * from './components/Table';
 export * from './components/TabSet';
 export * from './components/Tag';
+export * from './components/TagInput';
 export * from './components/Text';
 export * from './components/Toaster';
 export * from './components/Toggle';

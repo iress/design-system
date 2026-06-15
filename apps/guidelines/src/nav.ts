@@ -81,6 +81,7 @@ export const NAV_ITEMS: SideNavItem[] = [
       { key: 'tab-set', label: 'Tab Set', href: '/components/tab-set', element: Link },
       { key: 'table', label: 'Table', href: '/components/table', element: Link },
       { key: 'tag', label: 'Tag', href: '/components/tag', element: Link },
+      { key: 'tag-input', label: 'Tag Input', href: '/components/tag-input', element: Link },
       { key: 'text', label: 'Text', href: '/components/text', element: Link },
       { key: 'toaster', label: 'Toaster', href: '/components/toaster', element: Link },
       { key: 'toggle', label: 'Toggle', href: '/components/toggle', element: Link },

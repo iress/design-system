@@ -59,6 +59,8 @@ Icons are loaded lazily from the material-symbols library for optimal performanc
 - Table view for easy browsing
 
 **Note:** Icons are loaded dynamically the first time you open this story.
+
+---
         `,
       },
     },
@@ -170,7 +172,6 @@ Icons are loaded lazily from the material-symbols library for optimal performanc
 
     return (
       <IressIconProvider noSubsetting>
-        <IressDivider my="spacing.10" />
         <IressStack gap="xs">
           <IressStack gap="sm">
             <IressInput

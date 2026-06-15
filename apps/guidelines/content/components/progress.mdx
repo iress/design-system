@@ -1,71 +1,90 @@
 import { progressMeta } from '@iress-oss/ids-components/meta';
-
-export const meta = {
-  title: progressMeta.heading,
-  description: progressMeta.description,
-  component: 'IressProgress',
-  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs',
-};
+import { IressButton } from '@iress-oss/ids-components';
 
 # Progress
 
 A progress component is used to indicate to a user the completion of a set of tasks or a process.
 
+<Metadata meta={progressMeta} />
+
+<StoryEmbed id="components-progress--default"/>
+
+## Design
+
+### When to use
+
+> **Prefer [IressLoading](/patterns/loading)** for page/component loading states — it handles skeleton display, timing, and accessibility automatically.
+
+- **Determinate progress**: When you know the completion percentage (e.g. file uploads, multi-step forms)
+- **Step indicators**: Show progress through a multi-part process using `sectionTitle`
+- **Upload/download progress**: Visualise file transfer progress
+
+### When not to use
+
+- **Indeterminate loading** (unknown duration) — use [Spinner](/components/spinner) or [Loading](/patterns/loading)
+- **Content placeholders** — use [Skeleton](/components/skeleton) for layout-preserving loading states
+- **Navigation between steps** — use a stepper or wizard pattern with interactive controls
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Set `min` and `max` to match your data range | Leave default 0–100 when your values differ |
+| Use `sectionTitle` with tokens for screen readers | Display a progress bar without context for the user |
+| Update progress in meaningful increments | Animate progress too frequently (causes layout thrashing) |
+
+### Content guidelines
+
+- **Section title**: Use the `{{current}}` and `{{max}}` tokens to provide context (e.g. "Step {'{{current}}'} of {'{{max}}'}")
+- **Visual context**: Pair the progress bar with a text label explaining what is being loaded
+
+### Related patterns
+
+- [Loading](/patterns/loading) — full loading pattern with timing and accessibility
+- [Spinner](/components/spinner) — for indeterminate loading
+- [Skeleton](/components/skeleton) — for layout-preserving placeholders
+
+## Develop
+
+### Quick Start
+
 ```tsx
 import { IressProgress } from '@iress-oss/ids-components';
+
+<IressProgress min={0} max={100} value={50} />
 ```
 
-## Quick Start
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-progress--docs#api-props">View all props</IressButton>
 
-```tsx
-import { IressProgress } from '@iress-oss/ids-components';
-
-<IressProgress min={10} max={30} value={20} />
-```
-
-## Usage
+### Usage
 
 Progress shows how far through a task or operation you are in a graphical way. The simplest way to use it to set the `value` to specify how much of the task the user has completed, relative to the `max` value (which defaults to 100).
 
-### Calculation to convert value in to width
+#### Calculation to convert value into width
 
-The following calculation is used to derive the width percentage:
-
-```
-Math.round(
-    ((this.value - this.min) / (this.max - this.min)) * 100,
-)
+```tsx
+Math.round(((this.value - this.min) / (this.max - this.min)) * 100)
 ```
 
 This caters for those scenarios where the `min` or `max` values change.
 
-### Boundary limits
+#### Boundary limits
 
-There is a danger that the value can exceed the boundaries set in the `min` and `max` values, and cause the percentage width of the bar to overflow the indicator. To prevent this the following rules are applied:
+There is a danger that the value can exceed the boundaries set in the `min` and `max` values. To prevent this:
 
-- If the `value` is less than the `min` prop, it is reset to the `min` prop;
-- If the `value` is more than the `max` prop, it is reset to the `max` prop;
+- If the `value` is less than the `min` prop, it is reset to the `min` prop
+- If the `value` is more than the `max` prop, it is reset to the `max` prop
 
-### Section Title
+#### Section Title
 
-The `section-title` prop is used by assistive technologies and allows you to tailor the message announced when the progress component is selected. This could be to add extra context about where the user is in a process or section with a multi-part form.
+The `sectionTitle` prop is used by assistive technologies and allows you to tailor the message announced when the progress component is selected. It supports two tokens:
 
-### Use of tokens
+- `{'{{current}}'}` — replaced with the `value`
+- `{'{{max}}'}` — replaced with the maximum limit
 
-The message supports the use of two tokens within the announcement, which are replaced when the component is rendered. They are:
+For example, with a max of 10 and value of 6, the screen reader will announce: "Step 6 of 10"
 
-- `{{current}}` - replaced with the `value`;
-- `{{max}}` - replaced with the maximum limit;
-
-For example, if the component has been implemented with a max of 10, a value of 6 has been set, and the default section title, the screen reader will announce:
-
-```
-Step 6 of 10
-```
-
-## Examples
-
-### Progress variants
+#### Progress variants
 
 The following examples demonstrate different ways to use the Progress component:
 
@@ -74,9 +93,9 @@ The following examples demonstrate different ways to use the Progress component:
 - **With section title**: Uses the `sectionTitle` prop with tokens to display "Step X of Y"
 - **With background image**: Demonstrates using a custom background image for visual interest
 
-<StoryEmbed id="components-progress--progress-examples"/>
+<StoryEmbed id="components-progress--progress-examples-story"/>
 
-## Testing
+### Testing
 
 Query the progress bar by its role:
 
@@ -87,4 +106,44 @@ expect(progress).toHaveValue(75);
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs)
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-progress--docs">View in Storybook</IressButton>
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | Renders a horizontal bar filled to the calculated percentage |
+| Value below min | Clamped to `min` value |
+| Value above max | Clamped to `max` value |
+| With section title | Assistive technologies announce contextual progress message |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **4.1.2 Name, Role, Value** — Uses `role="progressbar"` with `aria-valuenow`, `aria-valuemin`, `aria-valuemax`
+- **1.3.1 Info and Relationships** — `sectionTitle` provides programmatic context for screen readers
+
+**Keyboard interaction:**
+
+Progress bars are not interactive and do not receive focus.
+
+### Edge cases
+
+- **Value equals min**: Renders an empty bar (0% width)
+- **Value equals max**: Renders a full bar (100% width)
+- **Dynamic min/max changes**: Width recalculates automatically based on the formula
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-progress--docs">View in Storybook</IressButton>

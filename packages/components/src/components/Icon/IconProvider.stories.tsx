@@ -9,11 +9,11 @@ import { useState } from 'react';
 type Story = StoryObj<IressIconProviderProps>;
 
 export default {
-  title: 'Components/Icon/IconProvider',
+  title: 'Components/Icon/Provider',
   component: IressIconProvider,
 } as Meta<typeof IressIconProvider>;
 
-export const IconProvider: Story = {
+export const Provider: Story = {
   name: 'Icon Provider',
   parameters: {
     disableProvider: true, // Disable the default provider wrapper to test the provider in isolation

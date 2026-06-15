@@ -116,6 +116,9 @@ const blockStyles = {
     '& > li': {
       marginBlockEnd: 'spacing.1',
     },
+    '& ul, & ol': {
+      marginBlockEnd: 'spacing.0',
+    },
     _siblingHeadings: {
       marginBlockStart: 'spacing.8',
     },
@@ -126,6 +129,9 @@ const blockStyles = {
     paddingInlineStart: 'spacing.6',
     '& > li': {
       marginBlockEnd: 'spacing.1',
+    },
+    '& ul, & ol': {
+      marginBlockEnd: 'spacing.0',
     },
     _siblingHeadings: {
       marginBlockStart: 'spacing.8',

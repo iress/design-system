@@ -1,29 +1,61 @@
 import { textMeta } from '@iress-oss/ids-components/meta';
-
-export const meta = {
-  title: textMeta.heading,
-  description: textMeta.description,
-  component: 'IressText',
-  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs',
-};
+import { IressButton } from '@iress-oss/ids-components';
 
 # Text
 
-The IressText component allows you to set typographic styles either on one element, or a block on HTML elements.
+The IressText component allows you to set typographic styles either on one element, or a block of HTML elements.
+
+<Metadata meta={textMeta} />
+
+<StoryEmbed id="components-text--element"/>
+
+## Design
+
+### When to use
+
+- **Semantic headings with custom styling**: Render an `h2` visually as an `h4` to maintain document outline
+- **Display text**: Apply display typography styles to content headings
+- **Colour modes**: Apply semantic colour (e.g. muted, danger) to text blocks
+- **Typographic blocks**: Wrap a block of HTML content to inherit consistent typography
+
+### When not to use
+
+- **Single paragraphs without styling** — use standard HTML `<p>` elements
+- **Interactive text** — use [Link](/components/link) or [Button](/components/button) instead
+- **Status messages** — use [Alert](/components/alert) for contextual feedback
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Use `element` to set the correct semantic element | Rely solely on `textStyle` for document structure |
+| Only add `textStyle` when overriding the default visual treatment | Add redundant `textStyle` matching the element's default (e.g. `element="h1" textStyle="typography.heading.1"`) |
+| Use `color` for semantic text colouring | Use inline styles for text colour |
+| Maintain heading hierarchy in the document | Skip heading levels for visual reasons without using `textStyle` |
+
+### Content guidelines
+
+- **Heading hierarchy**: Ensure headings follow a logical order (h1 → h2 → h3) for accessibility
+- **Text alignment**: Use left alignment for body text (default); centre for short labels or headings where appropriate
+- **Colour usage**: Reserve `danger` and `warning` colours for error/warning text; use `muted` for secondary information
+
+### Related patterns
+
+- [Link](/components/link) — for interactive inline text
+- [Alert](/components/alert) — for status messages
+- [Readonly](/components/readonly) — for displaying non-editable form values
+
+## Develop
+
+### Quick Start
 
 ```tsx
 import { IressText } from '@iress-oss/ids-components';
+
+<IressText element="h1">Page Title</IressText>
 ```
 
-## Quick Start
-
-```tsx
-import { IressText } from '@iress-oss/ids-components';
-
-<IressText />
-```
-
-## Usage
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-text--docs#api-props">View all props</IressButton>
 
 ### The `element` prop
 
@@ -55,15 +87,13 @@ The `textAlign` prop (previously `align`) can be used to set the text's alignmen
 
 <StoryEmbed id="components-text--align"/>
 
-## Behaviour
-
 ### Block of typographic content
 
 If you just need to style a block of typography content, you can just wrap the entire block of HTML with the text component.
 
 <StoryEmbed id="components-text--typographic-block"/>
 
-## Testing
+### Testing
 
 Query text elements by their content:
 
@@ -74,4 +104,39 @@ const paragraph = screen.getByText('Some content');
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs)
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-text--docs">View in Storybook</IressButton>
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | Renders as `<div>` with inherited typography styles |
+| With `element` | Renders as the specified semantic HTML element |
+| With `textStyle` | Overrides the element's default visual styling |
+| With `color` | Applies the specified semantic colour token |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **1.3.1 Info and Relationships** — Use correct `element` to maintain semantic heading hierarchy
+- **1.4.1 Use of Color** — Text colour supplements (not replaces) semantic meaning
+- **2.4.6 Headings and Labels** — Headings should describe the content that follows
+
+**Keyboard interaction:**
+
+Text is not interactive. When content within text is interactive, those elements handle their own keyboard interaction.
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-text--docs">View in Storybook</IressButton>

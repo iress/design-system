@@ -1,21 +1,43 @@
 import { dividerMeta } from '@iress-oss/ids-components/meta';
-
-export const meta = {
-  title: dividerMeta.heading,
-  description: dividerMeta.description,
-  component: 'IressDivider',
-  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs',
-};
+import { IressButton } from '@iress-oss/ids-components';
 
 # Divider
 
 A divider is a UI element that separates content in lists and layouts.
 
-```tsx
-import { IressDivider } from '@iress-oss/ids-components';
-```
+<Metadata meta={dividerMeta} />
 
-## Quick Start
+<StoryEmbed id="components-divider--horizontal"/>
+
+## Design
+
+### When to use
+
+- **Separating content sections**: Visual break between distinct groups of content
+- **List item separation**: Horizontal line between items in a vertical list
+- **Toolbar separation**: Vertical divider between groups of actions in a toolbar
+
+### When not to use
+
+- **Creating borders around containers** — use card or box components with borders
+- **Spacing content** — use layout components like `IressStack` with appropriate gap values
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Use within `IressStack` or `IressInline` layouts | Add dividers between every single element in a list |
+| Use vertical dividers in horizontal layouts | Use dividers as decorative elements without semantic purpose |
+| Let dividers inherit spacing from parent layout | Override gutter on every divider when layout spacing suffices |
+
+### Related patterns
+
+- [Stack](/components/stack) — vertical layout with consistent spacing
+- [Inline](/components/inline) — horizontal layout with consistent spacing
+
+## Develop
+
+### Quick Start
 
 ```tsx
 import { IressDivider } from '@iress-oss/ids-components';
@@ -23,7 +45,7 @@ import { IressDivider } from '@iress-oss/ids-components';
 <IressDivider />
 ```
 
-## Examples
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-divider--docs#api-props">View all props</IressButton>
 
 ### Vertical divider
 
@@ -39,7 +61,7 @@ By default, dividers do not have a gutter, allowing them to adapt to `<IressStac
 
 <StoryEmbed id="components-divider--gutter"/>
 
-## Testing
+### Testing
 
 Query the divider by its `separator` role:
 
@@ -49,4 +71,36 @@ const divider = screen.getByRole('separator');
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-divider--docs">View in Storybook</IressButton>
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Horizontal (default) | Renders a full-width horizontal line |
+| Vertical | Renders a full-height vertical line |
+| With gutter | Adds vertical (`my`) or horizontal (`mx`) spacing around the divider |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **4.1.2 Name, Role, Value** — Renders with `role="separator"` for assistive technologies
+
+**Keyboard interaction:**
+
+Dividers are not interactive and do not receive focus.
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-divider--docs">View in Storybook</IressButton>

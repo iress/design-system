@@ -53,6 +53,7 @@ export { default as stackMeta } from '@/components/Stack/meta';
 export { default as tableMeta } from '@/components/Table/meta';
 export { default as tabSetMeta } from '@/components/TabSet/meta';
 export { default as tagMeta } from '@/components/Tag/meta';
+export { default as tagInputMeta } from '@/components/TagInput/meta';
 export { default as textMeta } from '@/components/Text/meta';
 export { default as toasterMeta } from '@/components/Toaster/meta';
 export { default as toggleMeta } from '@/components/Toggle/meta';

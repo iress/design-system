@@ -20,7 +20,7 @@ const testMeta: TestComponentMeta[] = [
 ];
 
 export default {
-  title: 'Components/Tag/TagInput',
+  title: 'Components/TagInput',
   component: IressTagInput,
   tags: ['updated'],
   argTypes: stylingProps,
