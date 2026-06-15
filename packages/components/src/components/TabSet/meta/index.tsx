@@ -35,4 +35,19 @@ export default {
   tags: ['navigation', 'layout', 'interactive'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
+  import: "import { IressTabSet } from '@iress-oss/ids-components';",
+  github: {
+    source:
+      'https://github.com/iress/design-system/tree/main/packages/components/src/components/TabSet',
+    guidelines:
+      'https://github.com/iress/design-system/edit/main/apps/guidelines/content/components/tab-set.mdx',
+    storybook:
+      'https://github.com/iress/design-system/edit/main/packages/components/src/components/TabSet/TabSet.stories.tsx',
+    reportIssue:
+      'https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tab-set&title=[TabSet]+Bug:+',
+    requestFeature:
+      'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tab-set,enhancement&title=[TabSet]+Feature:+',
+  },
+  storybook:
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tab-set--docs',
 } satisfies ComponentMeta;

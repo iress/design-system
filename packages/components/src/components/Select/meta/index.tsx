@@ -54,4 +54,19 @@ export default {
   tags: ['form', 'data-entry', 'dropdown', 'rich-select'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
+  import: "import { IressSelect } from '@iress-oss/ids-components';",
+  github: {
+    source:
+      'https://github.com/iress/design-system/tree/main/packages/components/src/components/Select',
+    guidelines:
+      'https://github.com/iress/design-system/edit/main/apps/guidelines/content/components/select.mdx',
+    storybook:
+      'https://github.com/iress/design-system/edit/main/packages/components/src/components/Select/Select.stories.tsx',
+    reportIssue:
+      'https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=select&title=[Select]+Bug:+',
+    requestFeature:
+      'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=select,enhancement&title=[Select]+Feature:+',
+  },
+  storybook:
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs',
 } satisfies ComponentMeta;

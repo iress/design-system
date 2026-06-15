@@ -17,4 +17,19 @@ export default {
   tags: ['accessibility', 'navigation', 'link'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
+  import: "import { IressSkipLink } from '@iress-oss/ids-components';",
+  github: {
+    source:
+      'https://github.com/iress/design-system/tree/main/packages/components/src/components/SkipLink',
+    guidelines:
+      'https://github.com/iress/design-system/edit/main/apps/guidelines/content/components/skip-link.mdx',
+    storybook:
+      'https://github.com/iress/design-system/edit/main/packages/components/src/components/SkipLink/SkipLink.stories.tsx',
+    reportIssue:
+      'https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=skip-link&title=[SkipLink]+Bug:+',
+    requestFeature:
+      'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=skip-link,enhancement&title=[SkipLink]+Feature:+',
+  },
+  storybook:
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skip-link--docs',
 } satisfies ComponentMeta;

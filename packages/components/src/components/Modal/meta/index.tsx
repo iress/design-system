@@ -55,4 +55,19 @@ export default {
   tags: ['overlay', 'dialog', 'interactive'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
+  import: "import { IressModal } from '@iress-oss/ids-components';",
+  github: {
+    source:
+      'https://github.com/iress/design-system/tree/main/packages/components/src/components/Modal',
+    guidelines:
+      'https://github.com/iress/design-system/edit/main/apps/guidelines/content/components/modal.mdx',
+    storybook:
+      'https://github.com/iress/design-system/edit/main/packages/components/src/components/Modal/Modal.stories.tsx',
+    reportIssue:
+      'https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=modal&title=[Modal]+Bug:+',
+    requestFeature:
+      'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=modal,enhancement&title=[Modal]+Feature:+',
+  },
+  storybook:
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-modal--docs',
 } satisfies ComponentMeta;

@@ -46,4 +46,19 @@ export default {
   tags: ['overlay', 'navigation', 'panel'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
+  import: "import { IressSlideout } from '@iress-oss/ids-components';",
+  github: {
+    source:
+      'https://github.com/iress/design-system/tree/main/packages/components/src/components/Slideout',
+    guidelines:
+      'https://github.com/iress/design-system/edit/main/apps/guidelines/content/components/slideout.mdx',
+    storybook:
+      'https://github.com/iress/design-system/edit/main/packages/components/src/components/Slideout/Slideout.stories.tsx',
+    reportIssue:
+      'https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=slideout&title=[Slideout]+Bug:+',
+    requestFeature:
+      'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=slideout,enhancement&title=[Slideout]+Feature:+',
+  },
+  storybook:
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slideout--docs',
 } satisfies ComponentMeta;

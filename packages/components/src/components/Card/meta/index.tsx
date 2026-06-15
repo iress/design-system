@@ -43,4 +43,19 @@ export default {
   tags: ['layout', 'container', 'content'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
+  import: "import { IressCard } from '@iress-oss/ids-components';",
+  github: {
+    source:
+      'https://github.com/iress/design-system/tree/main/packages/components/src/components/Card',
+    guidelines:
+      'https://github.com/iress/design-system/edit/main/apps/guidelines/content/components/card.mdx',
+    storybook:
+      'https://github.com/iress/design-system/edit/main/packages/components/src/components/Card/Card.stories.tsx',
+    reportIssue:
+      'https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=card&title=[Card]+Bug:+',
+    requestFeature:
+      'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=card,enhancement&title=[Card]+Feature:+',
+  },
+  storybook:
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-card--docs',
 } satisfies ComponentMeta;

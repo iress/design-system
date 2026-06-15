@@ -24,4 +24,19 @@ export default {
   tags: ['feedback', 'notification', 'toast'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
+  import: "import { IressToaster } from '@iress-oss/ids-components';",
+  github: {
+    source:
+      'https://github.com/iress/design-system/tree/main/packages/components/src/components/Toaster',
+    guidelines:
+      'https://github.com/iress/design-system/edit/main/apps/guidelines/content/components/toaster.mdx',
+    storybook:
+      'https://github.com/iress/design-system/edit/main/packages/components/src/components/Toaster/Toaster.stories.tsx',
+    reportIssue:
+      'https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=toaster&title=[Toaster]+Bug:+',
+    requestFeature:
+      'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=toaster,enhancement&title=[Toaster]+Feature:+',
+  },
+  storybook:
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toaster--docs',
 } satisfies ComponentMeta;

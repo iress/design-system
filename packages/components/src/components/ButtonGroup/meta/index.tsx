@@ -23,4 +23,19 @@ export default {
   tags: ['form', 'action', 'group'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
+  import: "import { IressButtonGroup } from '@iress-oss/ids-components';",
+  github: {
+    source:
+      'https://github.com/iress/design-system/tree/main/packages/components/src/components/ButtonGroup',
+    guidelines:
+      'https://github.com/iress/design-system/edit/main/apps/guidelines/content/components/button-group.mdx',
+    storybook:
+      'https://github.com/iress/design-system/edit/main/packages/components/src/components/ButtonGroup/ButtonGroup.stories.tsx',
+    reportIssue:
+      'https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=button-group&title=[ButtonGroup]+Bug:+',
+    requestFeature:
+      'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=button-group,enhancement&title=[ButtonGroup]+Feature:+',
+  },
+  storybook:
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button-group--docs',
 } satisfies ComponentMeta;

@@ -29,4 +29,19 @@ export default {
   tags: ['data-display', 'label', 'categorization'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
+  import: "import { IressTag } from '@iress-oss/ids-components';",
+  github: {
+    source:
+      'https://github.com/iress/design-system/tree/main/packages/components/src/components/Tag',
+    guidelines:
+      'https://github.com/iress/design-system/edit/main/apps/guidelines/content/components/tag.mdx',
+    storybook:
+      'https://github.com/iress/design-system/edit/main/packages/components/src/components/Tag/Tag.stories.tsx',
+    reportIssue:
+      'https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tag&title=[Tag]+Bug:+',
+    requestFeature:
+      'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tag,enhancement&title=[Tag]+Feature:+',
+  },
+  storybook:
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs',
 } satisfies ComponentMeta;

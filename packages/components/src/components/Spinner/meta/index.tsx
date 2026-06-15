@@ -24,4 +24,19 @@ export default {
   tags: ['feedback', 'loading', 'indicator'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
+  import: "import { IressSpinner } from '@iress-oss/ids-components';",
+  github: {
+    source:
+      'https://github.com/iress/design-system/tree/main/packages/components/src/components/Spinner',
+    guidelines:
+      'https://github.com/iress/design-system/edit/main/apps/guidelines/content/components/spinner.mdx',
+    storybook:
+      'https://github.com/iress/design-system/edit/main/packages/components/src/components/Spinner/Spinner.stories.tsx',
+    reportIssue:
+      'https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=spinner&title=[Spinner]+Bug:+',
+    requestFeature:
+      'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=spinner,enhancement&title=[Spinner]+Feature:+',
+  },
+  storybook:
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-spinner--docs',
 } satisfies ComponentMeta;

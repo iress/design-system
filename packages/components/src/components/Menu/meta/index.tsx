@@ -54,4 +54,19 @@ export default {
   tags: ['navigation', 'dropdown', 'interactive'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
+  import: "import { IressMenu } from '@iress-oss/ids-components';",
+  github: {
+    source:
+      'https://github.com/iress/design-system/tree/main/packages/components/src/components/Menu',
+    guidelines:
+      'https://github.com/iress/design-system/edit/main/apps/guidelines/content/components/menu.mdx',
+    storybook:
+      'https://github.com/iress/design-system/edit/main/packages/components/src/components/Menu/Menu.stories.tsx',
+    reportIssue:
+      'https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=menu&title=[Menu]+Bug:+',
+    requestFeature:
+      'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=menu,enhancement&title=[Menu]+Feature:+',
+  },
+  storybook:
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu--docs',
 } satisfies ComponentMeta;
