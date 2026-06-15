@@ -9,8 +9,13 @@ export const NAV_ITEMS: SideNavItem[] = [
     href: '/get-started/develop',
     element: Link,
     children: [
-      { key: 'develop', label: 'Develop', href: '/get-started/develop', element: Link },
-      { key: 'content-security-policy', label: 'Content Security Policy', href: '/get-started/content-security-policy', element: Link },
+      { key: 'design', label: 'Design', href: '/get-started/design', element: Link },
+      { key: 'develop', label: 'Develop', href: '/get-started/develop', element: Link,
+        children: [
+          { key: 'install', label: 'Install', href: '/get-started/develop', element: Link },
+          { key: 'content-security-policy', label: 'Content Security Policy', href: '/get-started/content-security-policy', element: Link },
+        ]
+       },
     ],
   },
   {
@@ -101,7 +106,6 @@ export const NAV_ITEMS: SideNavItem[] = [
       { key: 'dropdown-menu', label: 'Dropdown Menu', href: '/patterns/dropdown-menu', element: Link },
       { key: 'feedback', label: 'Feedback', href: '/patterns/feedback', element: Link },
       { key: 'form', label: 'Form', href: '/patterns/form', element: Link },
-      { key: 'form-recipes', label: 'Form Recipes', href: '/patterns/form-recipes', element: Link },
       { key: 'search-selection', label: 'Search & Selection', href: '/patterns/search-selection', element: Link },
       { key: 'shadow', label: 'Shadow', href: '/patterns/shadow', element: Link },
       { key: 'side-nav', label: 'Side Nav', href: '/patterns/side-nav', element: Link },

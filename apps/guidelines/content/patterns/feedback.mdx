@@ -1,24 +1,17 @@
 import { feedbackMeta } from '@iress-oss/ids-components/meta';
-
-export const meta = {
-  title: feedbackMeta.heading,
-  description: feedbackMeta.description,
-  storybookUrl: 'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-feedback--docs',
-};
+import { IressButton } from '@iress-oss/ids-components';
 
 # Feedback
 
 Feedback components communicate information to users about actions, states, and processes. Choosing the right feedback component ensures users receive the right level of information at the right time without unnecessary disruption.
 
-Feedback components communicate information to users about actions, states, and processes. Choosing the right feedback component ensures users receive the right level of information at the right time without unnecessary disruption.
+<Metadata meta={feedbackMeta} />
 
-## Which component should I use?
+<StoryEmbed id="patterns-feedback--decision-tree"/>
 
-Answer the questions below to find the right feedback component for your use case.
+## Design
 
-[View "DecisionTree" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns---decision-tree)
-
-## Decision guide
+### Decision guide
 
 | Criteria             | Alert                  | Toast                         | Modal                          |
 | -------------------- | ---------------------- | ----------------------------- | ------------------------------ |
@@ -28,9 +21,9 @@ Answer the questions below to find the right feedback component for your use cas
 | Placement            | Inline with content    | Overlay, corner of screen     | Overlay, centre of screen      |
 | Blocks interaction   | No                     | No                            | Yes (backdrop)                 |
 
-## When to use each component
+### When to use each component
 
-### Alert (`IressAlert`)
+#### Alert (`IressAlert`)
 
 Use an alert for contextual, non-blocking messages that relate to the content around them.
 
@@ -43,7 +36,7 @@ Alerts stay in the page flow and do not steal focus, making them ideal for infor
 
 [Alert documentation →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)
 
-### Toaster (`IressToasterProvider` + `useToaster`)
+#### Toaster (`IressToasterProvider` + `useToaster`)
 
 Use a toast for brief, transient confirmations of background processes or completed actions.
 
@@ -55,7 +48,7 @@ Toasts auto-dismiss and should not contain critical information or actions the u
 
 [Toaster documentation →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs)
 
-### Modal (`IressModal`)
+#### Modal (`IressModal`)
 
 Use a modal for tasks that require the user's full attention or an explicit decision before continuing.
 
@@ -68,7 +61,7 @@ Modals block interaction with the underlying page. Avoid using them for simple m
 
 [Modal documentation →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)
 
-## Quick reference
+### Quick reference
 
 - **Something happened in the background?** → Toast
 - **The user needs to know something about this page?** → Alert
@@ -77,6 +70,3 @@ Modals block interaction with the underlying page. Avoid using them for simple m
 - **The message is a brief confirmation?** → Toast
 - **The content requires full attention?** → Modal
 
----
-
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-feedback--docs)

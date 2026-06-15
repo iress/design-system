@@ -2,12 +2,14 @@ import { useState } from 'react';
 import {
   IressAlert,
   IressButton,
+  IressCol,
   IressContainer,
   IressField,
   IressModal,
   IressPanel,
   IressRadio,
   IressRadioGroup,
+  IressRow,
   IressStyled,
   IressText,
   IressToasterProvider,
@@ -158,6 +160,8 @@ export function FeedbackDecisionTree() {
           Answer the questions below to determine which feedback pattern is most
           appropriate for your use case.
         </IressAlert>
+        <IressRow>
+          <IressCol>
         {questions.map((q) => (
           <IressField key={q.id} label={q.label}>
             <IressRadioGroup
@@ -167,7 +171,6 @@ export function FeedbackDecisionTree() {
                 if (value === undefined) return;
                 setAnswers((prev) => ({ ...prev, [q.id]: value }));
               }}
-              layout="inline"
               id={q.id}
             >
               {q.options.map((opt) => (
@@ -178,11 +181,15 @@ export function FeedbackDecisionTree() {
             </IressRadioGroup>
           </IressField>
         ))}
+        </IressCol>
+        <IressCol>
         {recommendation && (
-          <IressPanel>
+          <IressPanel stretch>
             <RecommendationResult recommendation={recommendation} />
           </IressPanel>
         )}
+        </IressCol>
+        </IressRow>
       </IressStyled>
     </IressContainer>
   );

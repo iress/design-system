@@ -15,6 +15,7 @@ import dropdownMenu from './DropdownMenu/meta';
 import feedback from './Feedback/meta';
 import form from './Form/meta';
 import loading from './Loading/meta';
+import searchSelection from './SearchSelection/meta';
 import shadow from './Shadow/meta';
 import sideNav from './SideNav/meta';
 
@@ -30,6 +31,7 @@ const patterns: {
   feedback,
   form,
   loading,
+  searchSelection,
   shadow,
   sideNav,
 ];

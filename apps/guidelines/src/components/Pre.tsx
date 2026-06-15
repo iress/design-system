@@ -5,6 +5,8 @@ export function Pre(props: HTMLAttributes<HTMLPreElement>) {
   const preRef = useRef<HTMLPreElement>(null);
   const [copied, setCopied] = useState(false);
 
+  const hideCopy = props.className?.includes('language-diff');
+
   const handleCopy = () => {
     const code = preRef.current?.textContent ?? '';
     navigator.clipboard.writeText(code);
@@ -15,17 +17,19 @@ export function Pre(props: HTMLAttributes<HTMLPreElement>) {
   return (
     <div style={{ position: 'relative' }}>
       <pre ref={preRef} {...props} />
-      <IressButton
-        mode="muted"
-        onClick={handleCopy}
-        style={{ position: 'absolute', top: '.5em', right: 0 }}
-      >
-        {copied ? (
-          'Copied!'
-        ) : (
-          <IressIcon name="content_copy" screenreaderText="Copy code" />
-        )}
-      </IressButton>
+      {!hideCopy && (
+        <IressButton
+          mode="muted"
+          onClick={handleCopy}
+          style={{ position: 'absolute', top: '.5em', right: 0 }}
+        >
+          {copied ? (
+            'Copied!'
+          ) : (
+            <IressIcon name="content_copy" screenreaderText="Copy code" />
+          )}
+        </IressButton>
+      )}
     </div>
   );
 }

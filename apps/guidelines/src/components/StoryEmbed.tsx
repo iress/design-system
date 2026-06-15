@@ -28,6 +28,8 @@ interface StoryEmbedProps {
   panels?: string[];
   /** CSS selectors to hide inside the iframe */
   hide?: string[];
+  /** Whether to auto-resize the iframe to fit content. Defaults to true. */
+  autoHeight?: boolean;
 }
 
 export function StoryEmbed({
@@ -43,6 +45,7 @@ export function StoryEmbed({
     '[aria-label="Exit full screen"]',
     '[title="Open in CodeSandbox"]',
   ],
+  autoHeight = true,
 }: StoryEmbedProps) {
   const [inView, setInView] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -72,7 +75,7 @@ export function StoryEmbed({
     const handleMessage = (event: MessageEvent) => {
       if (event.source !== iframeRef.current?.contentWindow) return;
 
-      if (event.data?.type === 'RELAY_SIZE' && iframeRef.current) {
+      if (event.data?.type === 'RELAY_SIZE' && iframeRef.current && autoHeight) {
         iframeRef.current.style.height = `${event.data.height + 10}px`;
       }
 
