@@ -176,7 +176,7 @@ export const Base: Story = {
 export const Headings: Story = {
   args: {
     children: (
-      <IressStack gap="xl">
+      <IressStack gap="xl" p="xs">
         {headings.map(({ name, token, tokenName }) => {
           const cssVar = get<string>(cssVars, tokenName);
           const headingCssVars = get<Record<string, string>>(
@@ -245,7 +245,7 @@ export const Headings: Story = {
 export const Body: Story = {
   args: {
     children: (
-      <IressStack gap="xl">
+      <IressStack gap="xl" p="xs">
         {body.map(({ name, token, tokenName }) => (
           <IressRow gutter="xl" key={tokenName} verticalAlign="stretch">
             <IressCol span={{ lg: 4 }}>
@@ -350,6 +350,7 @@ export const Body: Story = {
 export const Code: Story = {
   args: {
     children: (
+      <IressStack gap="xl" p="xs">
       <IressRow gutter="xl">
         <IressCol span={{ lg: 4 }}>
           <IressText
@@ -402,6 +403,7 @@ export const Code: Story = {
           </IressStack>
         </IressCol>
       </IressRow>
+      </IressStack>
     ),
   },
 };

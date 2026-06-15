@@ -28,6 +28,7 @@ import container from './Container/meta';
 import divider from './Divider/meta';
 import expander from './Expander/meta';
 import field from './Field/meta';
+import fieldGroup from './FieldGroup/meta';
 import hide from './Hide/meta';
 import icon from './Icon/meta';
 import image from './Image/meta';
@@ -43,6 +44,7 @@ import pill from './Pill/meta';
 import placeholder from './Placeholder/meta';
 import popover from './Popover/meta';
 import progress from './Progress/meta';
+import provider from './Provider/meta';
 import radio from './Radio/meta';
 import radioGroup from './RadioGroup/meta';
 import readonly from './Readonly/meta';
@@ -56,6 +58,7 @@ import stack from './Stack/meta';
 import table from './Table/meta';
 import tabSet from './TabSet/meta';
 import tag from './Tag/meta';
+import tagInput from './TagInput/meta';
 import text from './Text/meta';
 import toggle from './Toggle/meta';
 import tooltip from './Tooltip/meta';
@@ -63,12 +66,7 @@ import spinner from './Spinner/meta';
 import validationMessage from './ValidationMessage/meta';
 import toaster from './Toaster/meta';
 
-const components: {
-  heading: string;
-  href: string;
-  tags?: string[];
-  Thumbnail: React.FC;
-}[] = [
+const components = [
   alert,
   autocomplete,
   button,
@@ -81,6 +79,7 @@ const components: {
   divider,
   expander,
   field,
+  fieldGroup,
   hide,
   icon,
   image,
@@ -96,6 +95,7 @@ const components: {
   placeholder,
   popover,
   progress,
+  provider,
   radio,
   radioGroup,
   readonly,
@@ -110,6 +110,7 @@ const components: {
   table,
   tabSet,
   tag,
+  tagInput,
   text,
   toaster,
   toggle,
@@ -216,10 +217,11 @@ const Reference = () => {
       </IressInline>
       <IressRow gutter="lg">
         {filteredComponents.map(({ Thumbnail, ...component }) => (
-          <IressCol key={component.heading} span={{ md: 3 }}>
+          <IressCol key={component.heading} span={{ md: 4 }}>
             <IressCard
-              {...component}
               element="a"
+              heading={component.heading}
+              href={'storybook' in component ? component.storybook : undefined}
               media={
                 <Suspense
                   fallback={
@@ -230,7 +232,9 @@ const Reference = () => {
                 </Suspense>
               }
               stretch
-            />
+            >
+              {component.description}
+            </IressCard>
           </IressCol>
         ))}
       </IressRow>

@@ -1,0 +1,68 @@
+import { IressTab, IressTabSet } from '@iress-oss/ids-components';
+export const meta = {
+  title: 'Components Overview',
+  description: 'An introduction to IDS components — what they are, how they are structured, and how to choose the right one.',
+};
+
+# Components
+
+<IressTabSet panelStyle={{ pt: 'spacing.4' }}>
+
+<IressTab label="Explore">
+
+<StoryEmbed id="components-introduction--docs" controls={false} />
+
+</IressTab>
+
+<IressTab label="What are components?">
+
+IDS components are pre-built React elements that implement the Iress Design
+System. Each component encodes accessibility, theming, and consistent behaviour
+so product teams can focus on business logic rather than UI plumbing.
+
+## How components are structured
+
+Every component page in this documentation follows the same format:
+
+| Section | What it covers |
+|---------|---------------|
+| **Design** | When to use, when not to use, do's and don'ts, content guidelines, and related patterns. |
+| **Develop** | Quick start code, prop highlights, usage examples with live Storybook embeds, and testing guidance. |
+| **Specifications** | Behaviour states, WCAG compliance, keyboard interaction, and edge cases. |
+
+## Component categories
+
+| Category | Components | Purpose |
+|----------|-----------|---------|
+| **Layout** | Container, Row, Col, Stack, Inline, Hide | Structure and position content on the page. |
+| **Typography** | Text, Label | Render text with correct tokens and semantic elements. |
+| **Forms** | Input, InputCurrency, Select, Checkbox, Radio, Toggle, Slider, TagInput, Field, FieldGroup, ValidationMessage | Collect and validate user input. |
+| **Actions** | Button, ButtonGroup, Link | Trigger actions or navigate. |
+| **Feedback** | Alert, Toaster, Spinner, Progress, Skeleton, Placeholder | Communicate status, loading, and errors. |
+| **Overlays** | Modal, Slideout, Popover, Tooltip | Surface content above the page. |
+| **Navigation** | Menu, TabSet, SkipLink | Move between views or sections. |
+| **Data display** | Table, Tag, Pill, Readonly, Icon, Image, Divider | Present and organise information. |
+| **Utilities** | Provider, Styled, Panel, Expander | App-level setup, style escape hatches, and content grouping. |
+
+## Choosing a component
+
+- **Need user input?** → Start with [Input](/components/input), [Select](/components/select), or [Checkbox](/components/checkbox). Always wrap in [Field](/components/field).
+- **Need to show status?** → See the [Feedback pattern](/patterns/feedback) to pick between Alert, Toaster, and Modal.
+- **Need layout?** → Use [Stack](/components/stack) (vertical) or [Inline](/components/inline) (horizontal) before reaching for custom CSS.
+- **Need an overlay?** → [Modal](/components/modal) for blocking tasks, [Slideout](/components/slideout) for supplementary, [Popover](/components/popover) for ephemeral.
+
+## Naming convention
+
+All IDS components are prefixed with `Iress` (e.g. `IressButton`,
+`IressModal`). This avoids collisions with native HTML elements and third-party
+libraries, and makes IDS usage instantly recognisable in code reviews.
+
+## Next steps
+
+Browse the component list in the sidebar, or jump to:
+
+- [Button](/components/button) — the most common interactive element
+- [Form pattern](/patterns/form) — end-to-end form guidance
+- [Common Mistakes](/foundations/common-mistakes) — pitfalls to avoid
+</IressTab>
+</IressTabSet>

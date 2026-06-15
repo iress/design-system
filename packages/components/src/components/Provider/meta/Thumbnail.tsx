@@ -50,15 +50,6 @@ const Thumbnail = () => (
       rx="12"
       style={{ fill: cssVars.colour.primary.surface }}
     />
-    {/* Label */}
-    <text
-      x="375"
-      y="85"
-      textAnchor="middle"
-      style={{ fill: cssVars.colour.primary.text, fontSize: '24px', fontFamily: 'sans-serif' }}
-    >
-      IressProvider
-    </text>
   </svg>
 );
 

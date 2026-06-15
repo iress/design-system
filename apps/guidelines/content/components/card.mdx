@@ -1,0 +1,112 @@
+import { cardMeta } from '@iress-oss/ids-components/meta';
+import { IressButton } from '@iress-oss/ids-components';
+
+# Card
+
+A container for grouping related content and actions with optional heading, footer, and media slots.
+
+<Metadata meta={cardMeta} />
+
+<StoryEmbed id="components-card--all-slots" />
+
+## Design
+
+### When to use
+
+- **Content grouping**: Visually separate distinct pieces of content on a page
+- **Actionable items**: Cards with clickable headings or entire card clickable
+- **Dashboard widgets**: Self-contained content blocks in grid layouts
+- **List items**: Repeatable content in a grid or list
+
+### When not to use
+
+- **Full-width sections** — use [Panel](/components/panel) instead
+- **Navigation items** — use [Menu](/components/menu) or [SideNav](/patterns/side-nav)
+- **Modals or overlays** — use [Modal](/components/modal) or [Popover](/components/popover)
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Keep card content focused on a single topic | Overload cards with too much information |
+| Use consistent card sizes in a grid | Mix different card heights in the same row |
+| Use `stretch` prop to fill available height | Manually set fixed heights |
+| Use slots (heading, footer, prepend) for structure | Use arbitrary nested markup for layout |
+
+### Content guidelines
+
+- **Heading**: Keep concise — summarises the card's content
+- **Footer**: Use for actions (buttons/links) related to the card content
+- **Media**: Images should have descriptive alt text
+
+### Related patterns
+
+- [Panel](/components/panel) — for full-width content sections
+- [Expander](/components/expander) — for progressive disclosure within cards
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressCard } from '@iress-oss/ids-components';
+
+<IressCard heading="Card title">
+  Card content goes here.
+</IressCard>
+```
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-card--docs#api-props">View all props</IressButton>
+
+### Usage
+
+#### Clickable card
+
+<StoryEmbed id="components-card--clickable-card" />
+
+#### Selected state
+
+<StoryEmbed id="components-card--selected" />
+
+#### No border
+
+<StoryEmbed id="components-card--no-border" />
+
+### Testing
+
+Query the card by its test ID:
+
+```tsx
+const card = screen.getByTestId('my-card');
+```
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-card--docs#testing">View test IDs</IressButton>
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | Static container with optional heading/footer slots |
+| Clickable heading | Heading renders as a link or button |
+| Clickable card | Entire card is interactive |
+| Selected | Visual highlight applied via `selected` prop |
+| Stretch | Card fills available height in a flex/grid container |
+
+### Accessibility
+
+- Clickable cards use appropriate `role` and keyboard support
+- Card heading level can be configured via `headingLevel` prop
+- Selected state communicated via `aria-selected`
+
+### Keyboard interaction
+
+| Key | Action |
+|-----|--------|
+| `Enter` / `Space` | Activates clickable card or heading link |
+| `Tab` | Moves focus to next interactive element |
+
+---
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-card--docs">View in Storybook →</IressButton>

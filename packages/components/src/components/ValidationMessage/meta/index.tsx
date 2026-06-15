@@ -18,7 +18,7 @@ export const testMeta: TestComponentMeta[] = [
 ];
 
 export default {
-  heading: 'ValidationMessage',
+  heading: 'Validation Message',
   description: 'Displays a validation error or helper message associated with a form field.',
   tags: ['form', 'feedback', 'validation'],
   testMeta,

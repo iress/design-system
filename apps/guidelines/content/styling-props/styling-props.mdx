@@ -17,7 +17,7 @@ These replace the utility classes and internal component tokens provided by prev
 
 ## Reference
 
-<StoryEmbed id="styling-props-reference--reference" />
+<StoryEmbed id="styling-props-reference--reference" controls={false} />
 
 ---
 
@@ -58,13 +58,10 @@ The `IressStyled` component is a flexible wrapper that gives you direct access t
 
 If you have been using the utility classes from previous versions of IDS (eg. `iress-p--xs`), you will need to replace them with the new styling props. The utility classes are no longer supported in version 6.
 
-```tsx
-<DiffViewer oldValue={`<IressPanel className="iress-m--sm" />`}
-newValue={`<IressPanel m="sm" />`}
-/>
+```diff
+-<IressPanel className="iress-p--xs" />
++<IressPanel p="xs" />
 ```
-
-<StoryEmbed id="styling-props-reference--migrating-from-utilities" />
 
 ---
 
@@ -77,13 +74,10 @@ If you have been using the internal component tokens (eg. `--iress-background-co
 - Not every single internal component token has a direct mapping to a styling prop. For example, things like border width are no longer customisable. This helps ensure a consistent and accessible experience for all applications no matter the theme that is applied to them.
 - Styling props only allow token values, not custom values (eg. `colour.system.status.danger` is allowed but not `red`). This is to ensure that the styling props are theme agnostic and can be used with any theme. If you need to use a custom value, you can use custom CSS or inline styles.
 
-```tsx
-<DiffViewer oldValue={`<IressPanel style={{ '--iress-background-color': 'var(--iress-g-success-color)' }} />`}
-newValue={`<IressPanel bg="colour.system.success.fill" />`}
-/>
+```diff
+-<IressPanel style={{ '--iress-background-color': 'var(--iress-g-success-color)' }} />
++<IressPanel bg="colour.system.success.fill" />
 ```
-
-<StoryEmbed id="styling-props-reference--migrating-from-internal-tokens" />
 
 ---
 
@@ -306,7 +300,3 @@ There are rare cases where hardcoded values are acceptable:
 - **Prototyping** (with the expectation to use tokens in production)
 
 Even in these cases, document why the exception exists and plan to revisit it.
-
----
-
-<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-styling-props--docs">View in Storybook →</IressButton>

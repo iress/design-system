@@ -286,7 +286,7 @@ export const ExternalLink: Story = {
 export const FontAwesomeToMaterialMigration: Story = {
   render: () => (
     <IressTable
-      caption="Font Awesome to Material Symbols Migration Reference"
+      caption="Font Awesome to Material Symbols Migration Reference" hiddenCaption
       compact
       columns={[
         {

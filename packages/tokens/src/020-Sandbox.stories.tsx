@@ -15,6 +15,9 @@ export default {
     controls: {
       disable: true,
     },
+    idsConfig: {
+      autodocsTemplate: 'landing',
+    }
   },
 } as Meta<typeof CodeSandbox>;
 

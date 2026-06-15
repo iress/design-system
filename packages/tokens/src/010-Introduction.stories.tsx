@@ -14,12 +14,12 @@ import {
   useAutocompleteSearch,
 } from '@iress-oss/ids-components';
 import { useMemo, useState, type PropsWithChildren } from 'react';
-import { type Type } from '../src/enums';
-import { type IressTokenSchema } from '../src/types';
-import { type IressDesignToken } from '../src/interfaces';
-import { designTokens } from '../src/schema';
+import { type Type } from './enums';
+import { type IressTokenSchema } from './types';
+import { type IressDesignToken } from './interfaces';
+import { designTokens } from './schema';
 import { unique } from 'radash';
-import { TokenTag } from './components/TokenTag';
+import { TokenTag } from '../docs/components/TokenTag';
 
 type Story = StoryObj<typeof IressTable>;
 

@@ -13,7 +13,7 @@ const mainStorybook = 'https://main--691abcc79dfa560a36d0a74f.chromatic.com';
 
 const subStorybooks = {
   components: `http://localhost:6006`,
-  tokens: `https://main--69169618e0408bbf7684f876.chromatic.com`,
+  tokens: `http://localhost:6007`,
 };
 
 interface StoryEmbedProps {
@@ -30,6 +30,8 @@ interface StoryEmbedProps {
   hide?: string[];
   /** Whether to auto-resize the iframe to fit content. Defaults to true. */
   autoHeight?: boolean;
+  /** Whether to show the controls bar (code, accessibility, sandbox buttons). Defaults to true. */
+  controls?: boolean;
 }
 
 export function StoryEmbed({
@@ -46,6 +48,7 @@ export function StoryEmbed({
     '[title="Open in CodeSandbox"]',
   ],
   autoHeight = true,
+  controls = true,
 }: StoryEmbedProps) {
   const [inView, setInView] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -68,7 +71,9 @@ export function StoryEmbed({
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
-  const iframeSrc = `${subStorybooks[type]}/?path=/story/${id}&shortcuts=false&singleStory=true&embedded=true&full=1`;
+  const iframeSrc = controls
+    ? `${subStorybooks[type]}/?path=/story/${id}&shortcuts=false&singleStory=true&embedded=true&full=1`
+    : `${subStorybooks[type]}/iframe.html?id=${id}&viewMode=story&singleStory=true`;
   const storybookUrl = `${mainStorybook}/?path=/docs/${type}_${id}`;
 
   useEffect(() => {
@@ -166,6 +171,7 @@ export function StoryEmbed({
             onLoad={() => handleLoad()}
           />
         )}
+        {controls && (
         <IressInline gap="xs" bg="colour.neutral.20" p="sm">
           <IressButton
             mode="muted"
@@ -199,6 +205,7 @@ export function StoryEmbed({
             Open in Storybook
           </IressButton>
         </IressInline>
+        )}
       </div>
     </IressCard>
   );

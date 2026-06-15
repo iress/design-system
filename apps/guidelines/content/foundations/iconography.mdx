@@ -1,11 +1,57 @@
 export const meta = {
-  title: 'Iconography',
-  description: 'Icons are a key part of the Iress Design System, providing visual cues and enhancing user experience. This section outlines the principles and guidelines for using icons effectively within our products.',
+  title: 'Content & Iconography',
+  description: 'Guidelines for writing clear interface text (microcopy) and using icons effectively across Iress products.',
 };
 
-# Iconography
+# Content & Iconography
 
-Icons are a key part of the Iress Design System, providing visual cues and enhancing user experience. This section outlines the principles and guidelines for using icons effectively within our products.
+Clear language and purposeful icons work together to guide users through
+complex financial workflows. This page covers both written content (microcopy)
+and visual symbols (icons).
+
+---
+
+## Microcopy
+
+Microcopy is the short text that appears on buttons, labels, tooltips, error
+messages, and empty states. In financial software, precise language reduces
+errors and builds trust.
+
+### Principles
+
+- **Match user mental models** — use terms your users already know from their
+  domain (e.g. "adviser", "portfolio", "settlement date") rather than internal
+  system terminology.
+- **Be concise** — every word in the UI should earn its place. If a label can
+  be two words, don't make it five.
+- **Be actionable** — error messages should explain what went wrong *and* what
+  to do next (e.g. "Enter a valid email address" not "Invalid input").
+- **Use sentence case** — for labels, headings, and button text. Title Case is
+  reserved for proper nouns only.
+- **Maintain consistent tone** — professional, clear, and helpful. Avoid jargon,
+  humour, or overly casual language in transactional flows.
+
+### Common patterns
+
+| Element | Guidance | Example |
+|---------|----------|---------|
+| Button label | Start with a verb, keep to 1–3 words | "Save changes", "Delete record" |
+| Error message | State the problem and the fix | "Email is required. Enter a valid email address." |
+| Empty state | Explain what belongs here and how to add it | "No transactions yet. Import a CSV or add one manually." |
+| Tooltip | One sentence max, no period | "Opens in a new tab" |
+| Confirmation | Describe the consequence | "This will permanently delete 3 records." |
+
+### Progressive disclosure
+
+Reveal information as users need it rather than all at once. Use hints, expand
+sections, and tooltips to layer detail without overwhelming the primary flow.
+
+---
+
+## Iconography
+
+Icons are a key part of the Iress Design System, providing visual cues and
+enhancing user experience.
 
 ## Principles
 
@@ -62,4 +108,4 @@ To help with migrating, we have mapped some common Font Awesome icons to their M
 
 Please refer to the table below for guidance.
 
-<StoryEmbed id="components-icon--font-awesome-to-material-migration"/>
+<StoryEmbed id="components-icon--font-awesome-to-material-migration" controls={false} />

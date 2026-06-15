@@ -19,12 +19,7 @@ import searchSelection from './SearchSelection/meta';
 import shadow from './Shadow/meta';
 import sideNav from './SideNav/meta';
 
-const patterns: {
-  heading: string;
-  href: string;
-  tags?: string[];
-  Thumbnail: React.FC;
-}[] = [
+const patterns = [
   breadcrumbs,
   contextualMenu,
   dropdownMenu,
@@ -42,9 +37,8 @@ const Reference = () => {
         <IressStack gap="lg" my="lg" maxWidth="overlay.lg" mx="auto">
       <IressRow gutter="lg">
         {patterns.map(({ Thumbnail, ...component }) => (
-          <IressCol key={component.heading} span={{ md: 3 }}>
+          <IressCol key={component.heading} span={{ md: 4 }}>
             <IressCard
-              {...component}
               element="a"
               media={
                 <Suspense
@@ -55,8 +49,12 @@ const Reference = () => {
                   <Thumbnail />
                 </Suspense>
               }
+              heading={component.heading}
               stretch
-            />
+              href={'storybook' in component ? component.storybook : undefined}
+            >
+              {component.description}
+            </IressCard>
           </IressCol>
         ))}
       </IressRow>
