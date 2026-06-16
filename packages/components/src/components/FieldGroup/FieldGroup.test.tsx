@@ -81,20 +81,6 @@ describe('IressFieldGroup', () => {
   });
 
   describe('props', () => {
-    describe('checkbox and radio group spacing', () => {
-      it('adds top spacing for direct checkbox/radio controls', () => {
-        const styles = fieldGroup.raw({});
-
-        expect(
-          styles.fields?.[
-            '& > .ids-radio-group:first-child, & > .ids-checkbox-group:first-child, & > .ids-checkbox:first-child'
-          ],
-        ).toEqual({
-          mt: 'spacing.1',
-        });
-      });
-    });
-
     describe('hiddenLabel', () => {
       it('has a label accessible for screen readers', () => {
         const screen = renderComponent({

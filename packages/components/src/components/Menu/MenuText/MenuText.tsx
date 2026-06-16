@@ -58,6 +58,7 @@ export const IressMenuText = <E extends TextElements = 'div'>({
   prepend,
   role,
   textStyle,
+  width = '12/12',
   ...restProps
 }: IressMenuTextProps<E>) => {
   const menu = useContext(MenuContext);
@@ -74,7 +75,7 @@ export const IressMenuText = <E extends TextElements = 'div'>({
       <div
         className={cx(
           className,
-          css(classes.root, styleProps),
+          css(classes.root, styleProps, { width }),
           GlobalCSSClass.MenuText,
         )}
         data-testid={dataTestid}
@@ -86,6 +87,7 @@ export const IressMenuText = <E extends TextElements = 'div'>({
           className={css(classes.contents)}
           element={element}
           textStyle={textStyle}
+          width={width}
         >
           {children}
         </IressText>
@@ -98,18 +100,3 @@ export const IressMenuText = <E extends TextElements = 'div'>({
 
 IressMenuText.displayName = 'IressMenuText';
 
-export const IressMenuHeading = <E extends TextElements = 'h2'>({
-  className,
-  element = 'h2' as E,
-  textStyle = 'typography.body.md.medium',
-  ...restProps
-}: IressMenuTextProps<E>) => (
-  <IressMenuText
-    element={element}
-    textStyle={textStyle}
-    {...(restProps as IressMenuTextProps<E>)}
-    className={cx(className, GlobalCSSClass.MenuHeading)}
-  />
-);
-
-IressMenuHeading.displayName = 'IressMenuHeading';
