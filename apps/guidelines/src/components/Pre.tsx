@@ -1,5 +1,5 @@
 import { type HTMLAttributes, useRef, useState } from 'react';
-import { IressButton, IressIcon } from '@iress-oss/ids-components';
+import { IressButton, IressIcon, IressInline } from '@iress-oss/ids-components';
 
 export function Pre(props: HTMLAttributes<HTMLPreElement>) {
   const preRef = useRef<HTMLPreElement>(null);
@@ -16,12 +16,13 @@ export function Pre(props: HTMLAttributes<HTMLPreElement>) {
 
   return (
     <div style={{ position: 'relative' }}>
-      <pre ref={preRef} {...props} />
+      <IressInline noWrap bg="colour.neutral.20" mb="spacing.4">
+      <pre ref={preRef} {...props} style={{ flex: 1, marginBlockEnd: 0 }} />
       {!hideCopy && (
         <IressButton
           mode="muted"
-          onClick={handleCopy}
-          style={{ position: 'absolute', top: '.5em', right: 0 }}
+          onClick={handleCopy} 
+          bg="colour.neutral.20"
         >
           {copied ? (
             'Copied!'
@@ -30,6 +31,7 @@ export function Pre(props: HTMLAttributes<HTMLPreElement>) {
           )}
         </IressButton>
       )}
+      </IressInline>
     </div>
   );
 }

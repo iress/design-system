@@ -36,11 +36,18 @@ The minimum required version of React is 17. If you are using an older version o
 
 Update your imports to the new package name:
 
-[View "ComponentsImport" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--components-import)
+```diff
+-import { IressButton } from '@iress/components-react';
++import { IressButton } from '@iress-oss/ids-components';
+```
 
 You can run both packages together, so you can migrate components one by one.
 
-[View "MigrateComponentsOneByOne" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--migrate-components-one-by-one)
+```diff
+-import { IressModal, IressButton } from '@iress/components-react';
++import { IressModal } from '@iress/components-react';
++import { IressButton } from '@iress-oss/ids-components';
+```
 
 ### Importing component styles
 
@@ -64,7 +71,15 @@ If you are using Jest, you will need to update your Jest configuration to add th
 
 If you are mocking CSS files for your tests, you'll also need to make sure the new stylesheet is matched by your `moduleNameMapper`:
 
-[View "JestModuleNameMapper" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--jest-module-name-mapper)
+```diff
+  "moduleNameMapper": {
+    "^.+\.(scss|less)$": "<rootDir>/test/style-mock.ts",
+    "ids-web-components.css$": "<rootDir>/test/style-mock.ts",
+-    "global.css$": "<rootDir>/test/style-mock.ts"
++    "global.css$": "<rootDir>/test/style-mock.ts",
++    "@iress-oss/ids-components/(.*).css": "<rootDir>/test/style-mock.ts"
+  },
+```
 
 ## Handling breaking changes
 
@@ -80,11 +95,32 @@ Components are no longer loaded asynchronously, so you can test them as you woul
 
 Below is an example of a changed test using React Testing Library.
 
-```tsx
-<Iressv5 allowModeChange />
-```
+```diff
+-import { render } from '@testing-library/react';
+-import { idsFireEvent } from '@iress/ids-react-test-utils';
++import { render, fireEvent } from '@testing-library/react';
+  
+-test('login form', async () => {
++test('login form', () => {
+    const loginMock = jest.fn();
+    const screen = render(<LoginForm loginUser={loginMock}/>);
 
-[View "TestDiff" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--test-diff)
+-    const usernameInput = await screen.findByTestId('username__input');
+-    const passwordInput = await screen.findByTestId('password__input');
+-    const submitBtn = await screen.findByTestId('submit-btn__button');
+-    idsFireEvent.change(usernameInput, { target: { value: 'joe.bloggs' }});
+-    idsFireEvent.change(passwordInput, { target: { value: '1234' }});
+-    idsFireEvent.click(submitBtn);
++    const usernameInput = screen.getByRole('textbox', { name: 'Username' });
++    const passwordInput = screen.getByRole('textbox', { name: 'Password' });
++    const submitBtn = screen.getByRole('button');
++    fireEvent.change(usernameInput, { target: { value: 'joe.bloggs' }});
++    fireEvent.change(passwordInput, { target: { value: '1234' }});
++    fireEvent.click(submitBtn);
+
+    expect(loginMock).toHaveBeenCalledWith("joe.bloggs", "1234");
+});
+```
 
 #### Component specific testing
 
@@ -208,11 +244,25 @@ yarn add @iress/ag-grid-theme@^5.0.0
 
 Then you can import the AG Grid theme CSS, import the relevant IDS theme, and hook up the styles by setting a class of ag-theme-alpine ag-theme-iress-lite on your grid wrapper.
 
-```tsx
-<Iressv5 allowModeChange />
-```
+```diff
+import "@iress/themes/build/css/iress-theme-dark.css";
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+-import "@iress/themes/global.css";
+-import '@iress/ag-grid-theme/dist/lite/css/all.css';
++import '@iress/ag-grid-theme/dist/ag-theme-iress-lite.css';
 
-[View "AgGridTheme" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--ag-grid-theme)
+// You can also include variables, styles and utilities separately for easy debugging
+-// import '@iress/ag-grid-theme/dist/lite/css/variables.css';
+-// import '@iress/ag-grid-theme/dist/lite/css/styles.css';
+-// import '@iress/ag-grid-theme/dist/lite/css/utilities.css';
++// import '@iress/ag-grid-theme/dist/css/variables.css';
++// import '@iress/ag-grid-theme/dist/css/styles.css';
++// import '@iress/ag-grid-theme/dist/css/utilities.css';
+<div className="ag-theme-alpine ag-theme-iress-lite">
+  <AgGridReact />
+</div>
+```
 
 ## Removing version 4
 
@@ -220,7 +270,7 @@ Version 5 and version 4 can be run in parallel, but it is recommended to remove 
 
 Run the following to remove version 4 and its related packages:
 
-```
+```sh
 yarn remove @iress/components @iress/components-react @iress/components-react-custom-elements @iress/ids-react-test-utils
 ```
 
@@ -228,18 +278,36 @@ yarn remove @iress/components @iress/components-react @iress/components-react-cu
 
 The `global.css` file has been removed, it is now recommended to include the Roboto font directly using Google Fonts.
 
-[View "RemoveGlobalCss" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--remove-global-css)
+```diff
+-import '@iress/themes/global.css';
++<link
++  href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap"
++  rel="stylesheet"
++/>
+```
 
 ### Remove from Jest configuration
 
 If you are using Jest, you will need to update your Jest configuration to remove the old IDS packages from your `transformIgnorePatterns`.
 
-[View "RemoveFromJestTransforms" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--remove-from-jest-transforms)
+```diff
+"transformIgnorePatterns": [
+-  "node_modules/(?!(@iress/components-react|@iress/components|@iress/components-react-custom-elements|@stencil/core)/)"
++  "/node_modules/(?!@iress-oss/ids-components)"
+]
+```
 
 You can also remove the `mockLazyLoadedComponents` function from your Jest setup.
 
-[View "RemoveFromJestSetup" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--remove-from-jest-setup)
+```diff
+-import { mockLazyLoadedComponents } from '@iress/ids-react-test-utils/dist/react-test-utils/src/mocks/mockLazyLoadedComponents';
+-mockLazyLoadedComponents();
+```
 
 You should also be able to remove the style mocks from your Jest configuration's `moduleNameMapper`, unless you are using CSS-in-JS, as IDS no longer injects CSS into the DOM.
 
-[View "RemoveFromJestModuleMapper" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--remove-from-jest-module-mapper)
+```diff
+-"moduleNameMapper": {
+-  "\.css$": "<rootDir>/PATH/TO/style-mock.ts"
+-}
+```

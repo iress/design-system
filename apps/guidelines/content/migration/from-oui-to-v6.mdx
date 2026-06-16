@@ -40,13 +40,32 @@ The migration covers three main areas:
 
 Remove legacy packages and add IDS v6:
 
-[View "UpdateDependencies" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--update-dependencies)
+```diff
+{
+  "dependencies": {
+-   "@iress/oui": "^x.y.z",
+-   "@iress/components-react": "^x.y.z",
+-   "formik": "^x.y.z",
+-   "yup": "^x.y.z",
++   "@iress-oss/ids-components": "^6.0.0",
++   "react-hook-form": "^7.0.0"
+  }
+}
+```
 
 > `react-hook-form` is a peer dependency of `IressForm` in v6. You must add it to your own dependencies.
 
 ### Update imports
 
-[View "UpdateImports" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--update-imports)
+```diff
+// OUI imports
+-import { Button, Input, Modal } from '@iress/oui';
++import { IressButton, IressInput, IressModal } from '@iress-oss/ids-components';
+
+// IDS v4 imports
+-import { IressButton, IressText } from '@iress/components-react';
++import { IressButton, IressText } from '@iress-oss/ids-components';
+```
 
 ### Add the stylesheet
 
@@ -66,7 +85,13 @@ These OUI components map directly to an IDS v6 equivalent with minimal prop chan
 
 #### Button → IressButton
 
-[View "ButtonMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--button-migration)
+```diff
+-<Button variant="primary" onClick={handleClick} disabled={false}>
++<IressButton mode="primary" onClick={handleClick} disabled={false}>
+   Submit
+-</Button>
++</IressButton>
+```
 
 | OUI prop   | IDS v6 prop | Notes                                           |
 | ---------- | ----------- | ----------------------------------------------- |
@@ -79,13 +104,19 @@ These OUI components map directly to an IDS v6 equivalent with minimal prop chan
 
 #### ProgressBar → IressProgress
 
-[View "ProgressBarMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--progress-bar-migration)
+```diff
+-<ProgressBar value={50} max={100} />
++<IressProgress value={50} max={100} />
+```
 
 Props are unchanged.
 
 #### Badge → IressPill
 
-[View "BadgeMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--badge-migration)
+```diff
+-<Badge variant="info">Info</Badge>
++<IressPill mode="info">Info</IressPill>
+```
 
 | OUI prop  | IDS v6 prop |
 | --------- | ----------- |
@@ -97,7 +128,13 @@ Props are unchanged.
 
 #### Modal → IressModal
 
-[View "ModalMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--modal-migration)
+```diff
+-<Modal isOpen={isOpen} title="My Modal" onClose={handleClose}>
++<IressModal show={isOpen} heading="My Modal" onShowChange={handleClose}>
+   Modal content
+-</Modal>
++</IressModal>
+```
 
 | OUI prop  | IDS v6 prop    |
 | --------- | -------------- |
@@ -117,19 +154,42 @@ OUI's `DropdownButton` can be replaced by several IDS v6 components depending on
 
 **IressDropdownMenu example:**
 
-```tsx
-<IressOUI allowModeChange />
+```diff
+-<DropdownButton>
++<IressDropdownMenu
+-  <MenuItem onClick={action1}>Action 1</MenuItem>
++  label="Actions"
+-  <MenuItem onClick={action2}>Action 2</MenuItem>
++  options={[
+-</DropdownButton>
++    { label: 'Action 1', value: 'action1' },
++    { label: 'Action 2', value: 'action2' },
++  ]}
++  onChange={(value) => handleAction(value)}
++/>
 ```
-
-[View "DropdownMenuMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--dropdown-menu-migration)
 
 **IressSelect example (in a form):**
 
-```tsx
-<IressOUI allowModeChange />
+```diff
+-<DropdownButton>
++<IressFormField
+-  <MenuItem value="opt1">Option 1</MenuItem>
++  name="selection"
+-  <MenuItem value="opt2">Option 2</MenuItem>
++  label="Choose option"
+-</DropdownButton>
++  render={(props) => (
++    <IressSelect
++      {...props}
++      options={[
++        { label: 'Option 1', value: 'opt1' },
++        { label: 'Option 2', value: 'opt2' },
++      ]}
++    />
++  )}
++ />
 ```
-
-[View "DropdownSelectMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--dropdown-select-migration)
 
 ### Using styling props
 
@@ -143,7 +203,13 @@ OUI's `Scrollable` component is replaced by the `scrollable` styling prop, avail
 | `"x"`  | Horizontal scroll only |
 | `"y"`  | Vertical scroll only   |
 
-[View "ScrollableMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--scrollable-migration)
+```diff
+-<Scrollable height="300px" maxHeight="500px">
++<IressPanel scrollable="y" style={{ height: '300px', maxHeight: '500px' }}>
+  <Content />
+-</Scrollable>
++</IressPanel>
+```
 
 You can also use `scrollable` on any element — it is not limited to `IressPanel`:
 
@@ -283,55 +349,92 @@ function LoginForm() {
 
 #### Input → IressFormField + IressInput
 
-```tsx
-<IressOUI allowModeChange />
+```diff
+-<Input type="text" value={value} onChange={onChange} placeholder="Enter text" required />
++<IressFormField
++  name="fieldName"
++  label="Label Text"
++  render={(props) => <IressInput {...props} type="text" placeholder="Enter text" />}
++  rules={{ required: 'This field is required' }}
++/>
 ```
-
-[View "InputMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--input-migration)
 
 #### TextArea → IressFormField + IressInput (with rows)
 
-```tsx
-<IressOUI allowModeChange />
+```diff
+-<TextArea value={value} onChange={onChange} rows={5} />
++<IressFormField
++  name="textField"
++  label="Description"
++  render={(props) => <IressInput {...props} rows={5} />}
++  rules={{ required: 'This field is required' }}
++/>
 ```
-
-[View "TextAreaMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--text-area-migration)
 
 #### Label → IressFormField (label prop)
 
 Labels are now integrated into `IressFormField` — no separate component needed:
 
-```tsx
-<IressOUI allowModeChange />
+```diff
+-<Label htmlFor="fieldId">Field Label</Label>
++<IressFormField
+-<Input id="fieldId" />
++  name="fieldName"
++  label="Field Label"
++  render={(props) => <IressInput {...props} />}
++/>
 ```
-
-[View "LabelMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--label-migration)
 
 #### FormGroup / Fieldset → IressFormField or IressFieldGroup
 
 `FormGroup` functionality is built into `IressFormField`. For `Fieldset` grouping, use `IressFieldGroup` which provides a semantic `<fieldset>` with a legend:
 
-```tsx
-<IressOUI allowModeChange />
+```diff
+-<Fieldset legend="Personal Info">
++<IressFieldGroup label="Personal Info">
+-  <Label>Name</Label>
++  <IressFormField
+-  <Input name="name" />
++    name="name"
+-</Fieldset>
++    label="Name"
++    render={(props) => <IressInput {...props} />}
++  />
++</IressFieldGroup>
 ```
-
-[View "FieldsetMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--fieldset-migration)
 
 #### RadioGroup → IressFormField + IressRadioGroup
 
-```tsx
-<IressOUI allowModeChange />
+```diff
+-<RadioGroup name="gender" value={value} onChange={onChange}>
++<IressFormField
+-  <Radio value="male">Male</Radio>
++  name="gender"
+-  <Radio value="female">Female</Radio>
++  label="Gender"
+-</RadioGroup>
++  render={(props) => (
++    <IressRadioGroup {...props}>
++      <IressRadio value="male">Male</IressRadio>
++      <IressRadio value="female">Female</IressRadio>
++    </IressRadioGroup>
++  )}
++/>
 ```
 
-[View "RadioGroupMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--radio-group-migration)
 
 #### Checkbox → IressFormField + IressCheckbox
 
-```tsx
-<IressOUI allowModeChange />
+```diff
+-<Checkbox checked={checked} onChange={onChange}>Accept terms</Checkbox>
++<IressFormField
++  name="acceptTerms"
++  render={(props) => (
++    <IressCheckbox {...props}>Accept terms</IressCheckbox>
++  )}
++  rules={{ required: 'You must accept terms' }}
++/>
 ```
-
-[View "CheckboxMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--checkbox-migration)
 
 ---
 
@@ -378,7 +481,12 @@ These components only need an import path update:
 
 IDS v6 uses standard React Testing Library — no special test utilities needed.
 
-[View "RemoveTestUtils" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--remove-test-utils)
+```diff
+// jest.setup.js or vitest.setup.ts
+-import { mockLazyLoadedComponents } from '@iress/ids-react-test-utils/dist/react-test-utils/src/mocks/mockLazyLoadedComponents';
++import '@testing-library/jest-dom';
+-mockLazyLoadedComponents();
+```
 
 ### Update test patterns
 
@@ -391,23 +499,47 @@ IDS v6 uses standard React Testing Library — no special test utilities needed.
 
 ### Prefer accessibility queries
 
-[View "AccessibilityQueries" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--accessibility-queries)
+```diff
+-const button = await findByTestId('submit-btn__button');
+-idsFireEvent.click(button);
++const button = getByRole('button', { name: 'Submit' });
++fireEvent.click(button);
+```
 
 ### Update Jest / Vitest configuration
 
-```tsx
-<IressOUI allowModeChange />
-```
+```diff
 
-[View "JestVitestConfig" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--jest-vitest-config)
+// Transform patterns
+{
+  transformIgnorePatterns: [
+-    "node_modules/(?!(@iress/components-react|@iress/components|@stencil/core)/)"
++    "/node_modules/(?!@iress-oss/ids-components)"
+  ]
+}
+// CSS module mocking
+{
+  moduleNameMapper: {
+-    "ids-web-components.css$": "<rootDir>/test/style-mock.ts"
++    "@iress-oss/ids-components/(.*).css": "<rootDir>/test/style-mock.ts"
+  }
+}
+```
 
 ### Form test migration
 
-```tsx
-<IressOUI allowModeChange />
+```diff
+test('form validation', async () => {
+-  const { findByTestId } = render(<Form />);
+-  const input = await findByTestId('email__input');
+-  idsFireEvent.click(await findByTestId('submit-btn__button'));
+-  const error = await findByTestId('email__error');
+-  expect(error).toBeInTheDocument();
++  const { getByRole, findByText } = render(<Form />);
++  fireEvent.click(getByRole('button', { name: 'Submit' }));
++  expect(await findByText('Email is required')).toBeInTheDocument();
+});
 ```
-
-[View "FormTestMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--form-test-migration)
 
 ---
 

@@ -309,6 +309,75 @@ dev-watcher.ts detects change
      ## Testing (from testMeta)
      ```
    - Output: `packages/components/.ai/{components,patterns}/*.md` + `index.json`
+   - **Guides copy:** Also copies and strips MDX from non-component content directories into `.ai/`, mirroring the guidelines content structure:
+     - `apps/guidelines/content/foundations/*.mdx` → `packages/components/.ai/foundations/*.md`
+     - `apps/guidelines/content/get-started/*.mdx` → `packages/components/.ai/get-started/*.md`
+     - `apps/guidelines/content/resources-migration-guides/*.mdx` → `packages/components/.ai/migration/*.md`
+     - `apps/guidelines/content/styling-props/*.mdx` → `packages/components/.ai/styling-props/*.md`
+     - These are stripped of MDX syntax (imports, JSX components) and converted to plain markdown
+     - The `.ai/` directory mirrors the guidelines site navigation — no flattening
+
+---
+
+## Implementation Phases
+
+### Phase A: Scaffold + guides copy
+
+- Create `scripts/translate.ts` CLI entry point with subcommand routing
+- Create `scripts/translate/helpers/strip-mdx.ts` — strips MDX imports, exports, JSX components → clean markdown
+- Create `scripts/translate/helpers/transform-imports.ts` — `@/main` → `@iress-oss/ids-components`
+- Implement guides copy: read all MDX from foundations/get-started/migration/styling-props, strip, write to `.ai/`
+- Wire `--tokens`, `--skills`, `--llms-txt` as delegating wrappers to existing scripts
+- **Test:** `yarn tsx scripts/translate.ts` produces `.ai/{foundations,get-started,migration,styling-props}/` with clean markdown
+
+### Phase B: Component docs — guidelines prose + meta
+
+- For each component/pattern guidelines MDX:
+  - Read and strip MDX to markdown (but keep `<StoryEmbed>` markers for Phase C)
+  - Read `meta/index.tsx` for `description` and `import` statement
+  - Assemble with correct section order: `# Name` → `> description` → `## Import` → `## Props` (placeholder) → guidelines prose → `## Testing`
+- Render `testMeta` into a markdown table for the Testing section
+- **Test:** `yarn tsx scripts/translate.ts --components` produces `.ai/components/*.md` with prose + testing tables
+
+### Phase C: StoryEmbed resolution + mock extraction
+
+- Parse `<StoryEmbed id="...">` markers left in the markdown
+- Resolve story ID → find story export in `.stories.tsx` → find `withSource(XxxSource, ...)` → follow `?raw` import → read mock file
+- Transform imports in mock source, inline as fenced code block replacing the StoryEmbed marker
+- For P1 (args-only) stories referenced by StoryEmbed: generate JSX from component + args
+- For P3 (inline render) stories: extract render function body
+- Append ALL mock files not already referenced as "Additional Examples"
+- **Test:** Alert/Button `.ai/` docs have inline code examples instead of `<StoryEmbed>` markers
+
+### Phase D: Props extraction
+
+- Use `react-docgen-typescript` to extract public props interface per component
+- Render as markdown table (prop | type | default | description)
+- Insert into the `## Props` placeholder from Phase B
+- **Test:** `.ai/components/alert.md` has a complete Props table
+
+### Phase E: Tag-based sections
+
+- Parse story file exports for `tags: ['recipe']`, `tags: ['migration']`, `tags: ['tab:<name>']`
+- For each tagged story, extract code (mock file or inline) and group under dedicated sections
+- Recipes → `## Recipes`, Migration → `## Migration`, tab:X → section named from `tabDescriptions[X]`
+- **Test:** Form `.ai/` has Recipes, Table has dynamic tab sections
+
+### Phase F: Composition + styling props + full-reference + index
+
+- Detect decorator patterns in stories (e.g. `IressForm` wrapping children) → generate `## Composition` notes
+- Append shared `## Styling Props` section to each component doc
+- Implement `--full-reference` subcommand (concatenates all `.ai/` files)
+- Generate `index.json` manifest listing all docs with metadata
+- **Test:** Full pipeline produces complete, self-contained `.ai/` output
+
+### Phase G: Wire into build + cleanup
+
+- Update `package.json`: `"translate": "tsx scripts/translate.ts"`
+- Remove old scripts (translate-components.ts, derive-ai-docs.ts)
+- Update `dev-watcher.ts` to call new script
+- Verify `yarn build` → `yarn translate` works end-to-end
+- **Test:** CI-equivalent build succeeds
 3. **Add `testMeta` → .ai/ sync** to `translate.ts --components`: import `testMeta` from each component's `meta/index.tsx`, generate the `## Testing` section with test ID table in the `.ai/` output.
 4. **Move token-reference, skills, llms-txt** into `translate.ts` as subcommands (or keep as imported modules called sequentially).
 5. **Remove `translate-components.ts`** — its logic is replaced by the new `--components` path.

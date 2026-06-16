@@ -156,12 +156,12 @@ export const NAV_ITEMS: SideNavItem[] = [
     key: 'resources-migration-guides',
     icon: 'update',
     label: 'Migration Guides',
-    href: '/resources-migration-guides/from-v5-to-v6',
+    href: '/migration/from-v5-to-v6',
     element: Link,
     children: [
-      { key: 'from-v5-to-v6', label: 'From v5 to v6', href: '/resources-migration-guides/from-v5-to-v6', element: Link },
-      { key: 'from-oui-to-v6', label: 'From OUI to v6', href: '/resources-migration-guides/from-oui-to-v6', element: Link },
-      { key: 'migration-from-v4-to-v5', label: 'From v4 to v5', href: '/resources-migration-guides/migration-from-v4-to-v5', element: Link },
+      { key: 'from-v5-to-v6', label: 'From v5 to v6', href: '/migration/from-v5-to-v6', element: Link },
+      { key: 'from-oui-to-v6', label: 'From OUI to v6', href: '/migration/from-oui-to-v6', element: Link },
+      { key: 'migration-from-v4-to-v5', label: 'From v4 to v5', href: '/migration/migration-from-v4-to-v5', element: Link },
     ],
   },
   {

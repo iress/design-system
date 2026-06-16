@@ -116,7 +116,7 @@ function HomePage() {
             heading="Migration Guides"
             stretch
             element={Link}
-            to="/resources-migration-guides/from-v5-to-v6"
+            to="/migration/from-v5-to-v6"
             onClick={() => {}}
           >
             Step-by-step guides for upgrading from previous versions (v4→v5,
