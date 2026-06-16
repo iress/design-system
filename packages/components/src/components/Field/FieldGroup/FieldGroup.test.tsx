@@ -81,6 +81,21 @@ describe('IressFieldGroup', () => {
   });
 
   describe('props', () => {
+    describe('label, hint and input spacing', () => {
+      it('uses spacing.2 between legend label and fields when hint is not present', () => {
+        const styles = fieldGroup.raw({});
+
+        expect(styles.legend?.mb).toBe('spacing.2');
+      });
+
+      it('uses spacing.1 between legend label and hint and between hint and fields when hint is present', () => {
+        const styles = fieldGroup.raw({ hasHint: true });
+
+        expect(styles.hint?.mt).toBe('spacing.1');
+        expect(styles.legend?.mb).toBe('spacing.1');
+      });
+    });
+
     describe('checkbox and radio group spacing', () => {
       it('adds top spacing for direct checkbox/radio controls', () => {
         const styles = fieldGroup.raw({});

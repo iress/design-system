@@ -14,9 +14,10 @@ export const fieldGroup = sva({
     hint: {
       color: 'colour.neutral.70',
       textStyle: 'typography.body.sm',
+      mt: 'spacing.1',
     },
     legend: {
-      mb: 'spacing.1',
+      mb: 'spacing.2',
       px: 'spacing.0',
       float: 'start',
 
@@ -44,6 +45,13 @@ export const fieldGroup = sva({
           _nestedFormElements: {
             borderColor: 'colour.system.danger.fill',
           },
+        },
+      },
+    },
+    hasHint: {
+      true: {
+        legend: {
+          mb: 'spacing.1',
         },
       },
     },
