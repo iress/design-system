@@ -4,6 +4,8 @@ import {
   IressRow,
   IressStack,
   IressCol,
+  IressInline,
+  IressButton,
   IressSkeleton,
   IressContainer,
 } from '@/main';
@@ -39,7 +41,6 @@ const Reference = () => {
         {patterns.map(({ Thumbnail, ...component }) => (
           <IressCol key={component.heading} span={{ md: 4 }}>
             <IressCard
-              element="a"
               media={
                 <Suspense
                   fallback={
@@ -50,8 +51,31 @@ const Reference = () => {
                 </Suspense>
               }
               heading={component.heading}
+              footer={
+                <IressInline gap="sm">
+                  {'storybook' in component && component.storybook && (
+                    <IressButton
+                      mode="secondary"
+                      compact
+                      href={component.storybook}
+                      target="_blank"
+                    >
+                      Storybook
+                    </IressButton>
+                  )}
+                  {'guidelines' in component && component.guidelines && (
+                    <IressButton
+                      mode="secondary"
+                      compact
+                      href={component.guidelines}
+                      target="_blank"
+                    >
+                      Guidelines
+                    </IressButton>
+                  )}
+                </IressInline>
+              }
               stretch
-              href={'storybook' in component ? component.storybook : undefined}
             >
               {component.description}
             </IressCard>

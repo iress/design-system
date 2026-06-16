@@ -7,6 +7,7 @@ import {
   MOCK_SIDE_NAV_ITEMS,
   MOCK_RAIL_ONLY_ITEMS,
   MOCK_SIDE_MENU_OVERRIDE,
+  MOCK_GROUPED_ITEMS,
 } from './mocks/sideNavItems';
 import type { SideNavItem } from './SideNav';
 
@@ -557,6 +558,129 @@ describe('IressSideNav', () => {
 
       expect(screen.getByText('Investment Returns')).toBeInTheDocument();
       expect(screen.queryByText('Basic Details')).not.toBeInTheDocument();
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // Accordion behavior (groups)
+  // -------------------------------------------------------------------------
+
+  describe('accordion behavior', () => {
+    it('only allows one group open at a time', async () => {
+      const user = userEvent.setup();
+      renderSideNav({
+        items: MOCK_GROUPED_ITEMS,
+        activeItemKey: 'hubs',
+        defaultExpanded: true,
+      });
+
+      // First group starts open (active: true in mock)
+      const firstActivator = screen.getByTestId(
+        'sidenav__side-group-client-details__activator',
+      );
+      expect(firstActivator).toHaveAttribute('aria-expanded', 'true');
+
+      // Click the second group activator
+      const secondActivator = screen.getByTestId(
+        'sidenav__side-group-financial__activator',
+      );
+      await user.click(secondActivator);
+
+      // Second group is now open, first is closed
+      expect(secondActivator).toHaveAttribute('aria-expanded', 'true');
+      expect(firstActivator).toHaveAttribute('aria-expanded', 'false');
+    });
+
+    it('closes the open group when clicking its activator again', async () => {
+      const user = userEvent.setup();
+      renderSideNav({
+        items: MOCK_GROUPED_ITEMS,
+        activeItemKey: 'hubs',
+        defaultExpanded: true,
+      });
+
+      const firstActivator = screen.getByTestId(
+        'sidenav__side-group-client-details__activator',
+      );
+      expect(firstActivator).toHaveAttribute('aria-expanded', 'true');
+
+      await user.click(firstActivator);
+      expect(firstActivator).toHaveAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // Group activator href/onClick
+  // -------------------------------------------------------------------------
+
+  describe('group activator props', () => {
+    it('fires onClick on the group activator', async () => {
+      const user = userEvent.setup();
+      const onClick = vi.fn();
+
+      const items: SideNavItem[] = [
+        {
+          key: 'test',
+          icon: 'hub',
+          label: 'Test',
+          children: [
+            {
+              key: 'group1',
+              label: 'Group 1',
+              onClick,
+              children: [{ key: 'child', label: 'Child' }],
+            },
+          ],
+        },
+      ];
+
+      render(
+        <IressSideNav
+          items={items}
+          activeItemKey="test"
+          defaultExpanded={true}
+          data-testid="sidenav"
+        />,
+      );
+
+      const activator = screen.getByTestId(
+        'sidenav__side-group-group1__activator',
+      );
+      await user.click(activator);
+      expect(onClick).toHaveBeenCalled();
+    });
+
+    it('renders group activator as a link when href is provided', () => {
+      const items: SideNavItem[] = [
+        {
+          key: 'test',
+          icon: 'hub',
+          label: 'Test',
+          children: [
+            {
+              key: 'group1',
+              label: 'Group 1',
+              href: '/group1',
+              children: [{ key: 'child', label: 'Child' }],
+            },
+          ],
+        },
+      ];
+
+      render(
+        <IressSideNav
+          items={items}
+          activeItemKey="test"
+          defaultExpanded={true}
+          data-testid="sidenav"
+        />,
+      );
+
+      const activator = screen.getByTestId(
+        'sidenav__side-group-group1__activator',
+      );
+      const anchor = activator.closest('a');
+      expect(anchor).toHaveAttribute('href', '/group1');
     });
   });
 

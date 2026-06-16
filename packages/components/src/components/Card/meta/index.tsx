@@ -58,4 +58,6 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-card--docs',
+  guidelines:
+    'https://iress.github.io/design-system/#/components/card',
 } satisfies ComponentMeta;

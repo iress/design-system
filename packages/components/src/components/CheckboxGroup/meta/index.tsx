@@ -32,4 +32,6 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox-group--docs',
+  guidelines:
+    'https://iress.github.io/design-system/#/components/checkbox-group',
 } satisfies ComponentMeta;

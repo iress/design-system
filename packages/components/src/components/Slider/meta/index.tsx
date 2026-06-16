@@ -47,4 +47,6 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slider--docs',
+  guidelines:
+    'https://iress.github.io/design-system/#/components/slider',
 } satisfies ComponentMeta;

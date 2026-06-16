@@ -1751,7 +1751,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@iress-oss/ids-tokens@npm:^6.0.0-beta.1, @iress-oss/ids-tokens@npm:^6.0.0-beta.2, @iress-oss/ids-tokens@workspace:packages/tokens":
+"@iress-oss/ids-tokens@npm:^6.0.0-beta.1, @iress-oss/ids-tokens@npm:^6.0.0-beta.2, @iress-oss/ids-tokens@workspace:*, @iress-oss/ids-tokens@workspace:packages/tokens":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-tokens@workspace:packages/tokens"
   dependencies:
@@ -1854,6 +1854,7 @@ __metadata:
   resolution: "@iress/ids-guidelines@workspace:apps/guidelines"
   dependencies:
     "@iress-oss/ids-components": "workspace:*"
+    "@iress-oss/ids-tokens": "workspace:*"
     "@mdx-js/react": "npm:^3.1.0"
     "@mdx-js/rollup": "npm:^3.1.0"
     "@tanstack/react-router": "npm:^1.120.3"

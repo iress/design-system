@@ -10,6 +10,7 @@ import {
   IressField,
   IressDropdownMenu,
   IressInline,
+  IressButton,
   type LabelValueMeta,
   IressSkeleton,
   IressContainer,
@@ -221,9 +222,7 @@ const Reference = () => {
         {filteredComponents.map(({ Thumbnail, ...component }) => (
           <IressCol key={component.heading} span={{ md: 4 }}>
             <IressCard
-              element="a"
               heading={component.heading}
-              href={'storybook' in component ? component.storybook : undefined}
               media={
                 <Suspense
                   fallback={
@@ -232,6 +231,30 @@ const Reference = () => {
                 >
                   <Thumbnail />
                 </Suspense>
+              }
+              footer={
+                <IressInline gap="sm">
+                  {'storybook' in component && component.storybook && (
+                    <IressButton
+                      mode="secondary"
+                      compact
+                      href={component.storybook}
+                      target="_blank"
+                    >
+                      Storybook
+                    </IressButton>
+                  )}
+                  {'guidelines' in component && component.guidelines && (
+                    <IressButton
+                      mode="secondary"
+                      compact
+                      href={component.guidelines}
+                      target="_blank"
+                    >
+                      Guidelines
+                    </IressButton>
+                  )}
+                </IressInline>
               }
               stretch
             >

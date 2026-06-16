@@ -4,6 +4,7 @@ import {
   type MouseEventHandler,
   type ReactNode,
   useMemo,
+  useState,
 } from 'react';
 import { css, cx } from '@/styled-system/css';
 import { splitCssProps, styled } from '@/styled-system/jsx';
@@ -61,6 +62,15 @@ export interface SideNavSideMenuGroup {
 
   /** Whether this drawer is active/expanded. */
   active?: boolean;
+
+  /** URL for the group activator link. */
+  href?: string;
+
+  /** Custom element type for third-party routing libraries. */
+  element?: ElementType;
+
+  /** Optional click handler for the group activator. */
+  onClick?: MouseEventHandler;
 }
 
 /**
@@ -273,6 +283,14 @@ export const IressSideNav = ({
     onExpandedChange,
   });
 
+  // Accordion: track which group is open (only one at a time)
+  const [openGroupKey, setOpenGroupKey] = useState<string | undefined>(() => {
+    const activeGroup = panelContent.find(
+      (entry) => isSideNavGroup(entry) && entry.active,
+    );
+    return activeGroup?.key;
+  });
+
   const classes = sideNav({ expanded: isExpanded });
   const styles = sideNav.raw({ expanded: isExpanded });
 
@@ -379,7 +397,13 @@ export const IressSideNav = ({
                     <IressMenuGroup
                       key={entry.key ?? index}
                       label={entry.label}
-                      defaultActive={entry.active}
+                      href={entry.href}
+                      element={entry.element}
+                      onClick={entry.onClick}
+                      active={openGroupKey === entry.key}
+                      onActiveChange={(isOpen) =>
+                        setOpenGroupKey(isOpen ? entry.key : undefined)
+                      }
                       data-testid={propagateTestid(
                         dataTestId,
                         `side-group-${entry.key ?? index}`,
@@ -406,7 +430,10 @@ export const IressSideNav = ({
                       key={entry.key ?? index}
                       href={entry.href}
                       element={entry.element}
-                      onClick={entry.onClick}
+                      onClick={(e) => {
+                        setOpenGroupKey(undefined);
+                        entry.onClick?.(e);
+                      }}
                       selected={entry.active}
                       data-testid={propagateTestid(
                         dataTestId,

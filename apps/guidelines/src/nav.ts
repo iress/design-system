@@ -6,9 +6,13 @@ export const NAV_ITEMS: SideNavItem[] = [
     key: 'get-started',
     icon: 'rocket_launch',
     label: 'Get Started',
-    href: '/get-started/develop',
+    href: '/',
     element: Link,
     children: [
+      { key: 'home', label: 'Home', href: '/', element: Link, children: [
+          { key: 'versions', label: 'Versions', href: '/get-started/versions', element: Link },
+          { key: 'faq', label: 'FAQ', href: '/get-started/faq', element: Link },
+      ] },
       { key: 'design', label: 'Design', href: '/get-started/design', element: Link },
       { key: 'develop', label: 'Develop', href: '/get-started/develop', element: Link,
         children: [
@@ -16,6 +20,7 @@ export const NAV_ITEMS: SideNavItem[] = [
           { key: 'content-security-policy', label: 'Content Security Policy', href: '/get-started/content-security-policy', element: Link },
         ]
        },
+      { key: 'ai', label: 'AI', href: '/get-started/ai', element: Link },
     ],
   },
   {
@@ -158,5 +163,15 @@ export const NAV_ITEMS: SideNavItem[] = [
       { key: 'from-oui-to-v6', label: 'From OUI to v6', href: '/resources-migration-guides/from-oui-to-v6', element: Link },
       { key: 'migration-from-v4-to-v5', label: 'From v4 to v5', href: '/resources-migration-guides/migration-from-v4-to-v5', element: Link },
     ],
+  },
+  {
+    key: 'contact',
+    icon: 'mail',
+    label: 'Contact Us',
+    href: '/contact',
+    element: Link,
+    children: [
+      { key: 'report-issue', label: 'Report issue', href: 'https://github.com/iress/design-system/issues' },
+    ]
   },
 ];

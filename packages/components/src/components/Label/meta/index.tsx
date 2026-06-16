@@ -37,4 +37,6 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs',
+  guidelines:
+    'https://iress.github.io/design-system/#/components/label',
 } satisfies ComponentMeta;

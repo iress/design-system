@@ -39,6 +39,8 @@ export interface ComponentMeta {
   };
   /** Storybook/Chromatic documentation URL */
   storybook?: string;
+  /** Live guidelines site URL */
+  guidelines?: string;
   /** Figma design file URL */
   figma?: string;
 }

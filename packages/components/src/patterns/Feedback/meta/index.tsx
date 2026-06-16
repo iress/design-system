@@ -18,4 +18,6 @@ export default {
     requestFeature:
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=feedback,enhancement&title=[Feedback]+Feature:+',
   },
+  guidelines:
+    'https://iress.github.io/design-system/#/patterns/feedback',
 } satisfies ComponentMeta;
