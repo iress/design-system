@@ -41,6 +41,9 @@ export const loading = sva({
           opacity: 0,
           transition: '[opacity 0.3s ease-in-out]',
           zIndex: '100',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 'spacing.2',
         },
         overlay: {
           position: 'absolute',

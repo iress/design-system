@@ -222,7 +222,7 @@ export const input = sva({
       },
       '25%': {
         wrapper: {
-          width: '3/12',
+          maxWidth: '3/12',
         },
         formControl: {
           width: '12/12',
@@ -230,7 +230,7 @@ export const input = sva({
       },
       '50%': {
         wrapper: {
-          width: '6/12',
+          maxWidth: '6/12',
         },
         formControl: {
           width: '12/12',
@@ -238,7 +238,7 @@ export const input = sva({
       },
       '75%': {
         wrapper: {
-          width: '9/12',
+          maxWidth: '9/12',
         },
         formControl: {
           width: '12/12',
@@ -246,7 +246,7 @@ export const input = sva({
       },
       '100%': {
         wrapper: {
-          width: '12/12',
+          maxWidth: '12/12',
         },
         formControl: {
           width: '12/12',
