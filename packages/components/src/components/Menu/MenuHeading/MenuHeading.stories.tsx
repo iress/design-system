@@ -1,5 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressMenuHeading } from './MenuText';
+import { IressMenuHeading } from './MenuHeading';
 import { IressMenu } from '../Menu';
 
 type Story = StoryObj<typeof IressMenuHeading>;

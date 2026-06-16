@@ -1,4 +1,9 @@
-import { useContext, type ElementType, type MouseEventHandler, type ReactNode } from 'react';
+import {
+  useContext,
+  type ElementType,
+  type MouseEventHandler,
+  type ReactNode,
+} from 'react';
 import type { TextElements } from '@/components/Text';
 import { IressMenuDivider } from '../MenuDivider/MenuDivider';
 import { type IressMenuTextProps } from '../MenuText/MenuText';
@@ -22,7 +27,7 @@ type MenuGroupRestProps<
   TVariant extends MenuVariants = undefined,
 > = TVariant extends 'subdraw'
   ? Omit<IressPopoverProps, 'children' | 'activator'>
-  : Omit<IressMenuTextProps<TLabel>, 'children'>;
+  : Omit<IressMenuTextProps<TLabel>, 'children' | 'element'>;
 
 export type IressMenuGroupProps<
   TLabel extends TextElements = 'h2',
@@ -157,7 +162,7 @@ export const IressMenuGroup = <
             data-testid={propagateTestid(dataTestId, 'activator')}
             href={href}
             element={element}
-            onClick={(e) => {
+            onClick={(e: Parameters<MouseEventHandler>[0]) => {
               setActive(!active);
               onClick?.(e);
             }}
