@@ -99,11 +99,19 @@ describe('IressField', () => {
         expect(styles.label?.mb).toBe('spacing.2');
       });
 
-      it('uses spacing.1 between label and hint and between hint and input when hint is present', () => {
-        const styles = field.raw({ hasHint: true });
+      it('uses hint spacing variant when hint is present', () => {
+        const baseClasses = field();
+        const hasHintClasses = field({ hasHint: true });
+        const styles = field.raw({});
+        const screen = renderComponent({
+          hint: 'Helpful hint',
+        });
 
-        expect(styles.label?.mb).toBe('spacing.1');
+        const label = screen.getByText(TEST_LABEL).closest('label');
+
+        expect(hasHintClasses.label).not.toBe(baseClasses.label);
         expect(styles.hint?.mb).toBe('spacing.1');
+        expect(label).toHaveClass(hasHintClasses.label!);
       });
     });
 

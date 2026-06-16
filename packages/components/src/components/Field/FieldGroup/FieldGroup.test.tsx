@@ -89,10 +89,17 @@ describe('IressFieldGroup', () => {
       });
 
       it('uses spacing.1 between legend label and hint and between hint and fields when hint is present', () => {
-        const styles = fieldGroup.raw({ hasHint: true });
+        const styles = fieldGroup.raw({});
+        const baseClasses = fieldGroup();
+        const hasHintClasses = fieldGroup({ hasHint: true });
+        const screen = renderComponent({
+          hint: 'Helpful hint',
+        });
+        const legend = screen.getByText(TEST_LABEL).closest('legend');
 
         expect(styles.hint?.mt).toBe('spacing.1');
-        expect(styles.legend?.mb).toBe('spacing.1');
+        expect(hasHintClasses.legend).not.toBe(baseClasses.legend);
+        expect(legend).toHaveClass(hasHintClasses.legend!);
       });
     });
 
