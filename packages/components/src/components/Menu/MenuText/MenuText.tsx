@@ -99,4 +99,3 @@ export const IressMenuText = <E extends TextElements = 'div'>({
 };
 
 IressMenuText.displayName = 'IressMenuText';
-
