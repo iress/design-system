@@ -1,19 +1,17 @@
-# Search & selection
-Choosing between InputPopover, Autocomplete, Select, DropdownMenu, and Popover depends on whether users need to navigate to results, pick a form value, or trigger actions.## Which component should I use?
+# SearchSelection
 
-Answer the questions below to find the right component for your use case.
+> Decision guide for choosing between Autocomplete, Select, DropdownMenu, InputPopover, and Popover.
 
-1. **Does the user type to search and then navigate to a result?**
-   - Yes → `IressInputPopover` + `IressMenu` + `IressMenuItem`
-2. **Does the user type freetext to select a value for a form?**
-   - Yes → `IressAutocomplete`
-3. **Must the user pick from a fixed set of options?**
-   - Yes → `IressSelect`
-4. **Is the dropdown triggered by a button (not an input)?**
-   - Contains actions or filter options → `IressDropdownMenu`
-   - Needs custom/rich content that doesn't fit the above → `IressPopover`
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-search-selection--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/SearchSelection)
 
-## Decision guide
+Choosing between InputPopover, Autocomplete, Select, DropdownMenu, and Popover depends on whether users need to navigate to results, pick a form value, or trigger actions.
+
+<StoryEmbed id="patterns-search-selection--decision-tree"/>
+
+## Design
+
+### Decision guide
 
 | Criteria                  | Autocomplete               | DropdownMenu              | InputPopover + Menu        | Popover                   | Select                     |
 | ------------------------- | -------------------------- | ------------------------- | -------------------------- | ------------------------- | -------------------------- |
@@ -24,9 +22,9 @@ Answer the questions below to find the right component for your use case.
 | Custom result rendering   | No (label + meta only)     | Limited                   | Full control               | Full control              | No (label + meta only)     |
 | Common use cases          | City input, tag input      | Actions, filters          | Site search, command palette | Custom content, previews | Country, status, category  |
 
-## When to use each component
+### When to use each component
 
-### Autocomplete (`IressAutocomplete`)
+#### Autocomplete (`IressAutocomplete`)
 
 Use Autocomplete when users type freetext and receive suggestions to **set a form value**. The input is not restricted to the suggestion list.
 
@@ -35,6 +33,8 @@ Use Autocomplete when users type freetext and receive suggestions to **set a for
 - **Form fields with large datasets**: When the option list is too large for a static dropdown
 
 ```tsx
+import { IressAutocomplete, IressField } from '@iress-oss/ids-components';
+
 <IressField label="Search clients">
   <IressAutocomplete
     placeholder="Type a name…"
@@ -47,7 +47,7 @@ Use Autocomplete when users type freetext and receive suggestions to **set a for
 
 **Autocomplete vs Select:** If the user can submit any text value (even one not in the list), use Autocomplete. If the value *must* be one of the options, use Select.
 
-### DropdownMenu (`IressDropdownMenu`)
+#### DropdownMenu (`IressDropdownMenu`)
 
 Use DropdownMenu for a list of actions or filter options triggered by a button.
 
@@ -57,6 +57,8 @@ Use DropdownMenu for a list of actions or filter options triggered by a button.
 - **Filter menus**: Selecting filter criteria from a predefined list
 
 ```tsx
+import { IressDropdownMenu } from '@iress-oss/ids-components';
+
 <IressDropdownMenu
   label="Actions"
   options={[
@@ -72,7 +74,7 @@ Use DropdownMenu for a list of actions or filter options triggered by a button.
 />
 ```
 
-### InputPopover + Menu (search navigation)
+#### InputPopover + Menu (search navigation)
 
 Use InputPopover with a Menu when users type a query and **navigate to a result** rather than selecting a form value. This gives you full control over how results are rendered and supports real links with proper routing.
 
@@ -81,6 +83,9 @@ Use InputPopover with a Menu when users type a query and **navigate to a result*
 - **Entity lookup with navigation**: Search for a record and go to its detail page
 
 ```tsx
+import { Link } from 'your-router';
+import { IressInput, IressInputPopover, IressMenu, IressMenuItem } from '@iress-oss/ids-components';
+
 <IressInputPopover
   activator={
     <IressInput
@@ -103,7 +108,7 @@ Use InputPopover with a Menu when users type a query and **navigate to a result*
 
 **Why not Autocomplete?** Autocomplete is designed for form values — it sets a value on selection. For search-and-navigate, you want real links (`<a>` or router `Link` elements) so that users can right-click → open in new tab, and screen readers announce results as links rather than listbox options.
 
-### Popover (`IressPopover`)
+#### Popover (`IressPopover`)
 
 Use Popover for custom content triggered by a button that doesn't fit into the other categories. Popover gives you full control over what's rendered inside.
 
@@ -112,6 +117,8 @@ Use Popover for custom content triggered by a button that doesn't fit into the o
 - **Composite content**: Anything that needs more than a simple list of options
 
 ```tsx
+import { IressPopover, IressButton, IressStack, IressCheckbox } from '@iress-oss/ids-components';
+
 <IressPopover
   activator={<IressButton icon="filter_list" mode="tertiary">Filters</IressButton>}
 >
@@ -122,7 +129,7 @@ Use Popover for custom content triggered by a button that doesn't fit into the o
 </IressPopover>
 ```
 
-### Select (`IressSelect`)
+#### Select (`IressSelect`)
 
 Use Select when users must choose from a predefined set of valid options.
 
@@ -133,6 +140,8 @@ Use Select when users must choose from a predefined set of valid options.
 When the list is long, use an async `options` function to enable built-in search:
 
 ```tsx
+import { IressSelect, IressField } from '@iress-oss/ids-components';
+
 <IressField label="Country">
   <IressSelect
     options={(query) => fetchCountries(query)}
@@ -141,7 +150,7 @@ When the list is long, use an async `options` function to enable built-in search
 </IressField>
 ```
 
-## Quick reference
+### Quick reference
 
 - **User types to set a form value with suggestions?** → Autocomplete
 - **Button opens a list of actions or filters?** → DropdownMenu

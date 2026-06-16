@@ -1,109 +1,100 @@
-# 
-> **Component:** `import { IressToggle } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs)```tsx
-```
+# Toggle
 
-## Quick Start
+> Renders a switch control for toggling between on and off states.
+
+## Import
 
 ```tsx
+import { IressToggle } from '@iress-oss/ids-components';
+```
+
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toggle--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Toggle)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=toggle&title=[Toggle]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=toggle,enhancement&title=[Toggle]+Feature:+)
+
+Toggles allow users to turn things on or off. When toggled, the associated change happens straight away.
+
+<StoryEmbed id="components-toggle--default"/>
+
+## Design
+
+### When to use
+
+- **Immediate effect settings**: WiFi on/off, dark mode, notifications
+- **Binary preferences**: Any setting with exactly two mutually exclusive states
+- **Standalone controls**: Settings that take effect instantly without a save action
+
+### When not to use
+
+- **Form submissions** — use a Checkbox instead; toggles don't submit values with forms
+- **Multiple related options** — use a Checkbox group or Radio group
+- **Actions that need confirmation** — use a Button with a confirmation dialog
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Use for immediate on/off changes | Use toggles inside forms that need submission |
+| Always provide a label (visible or hidden) | Use a toggle without any label |
+| Use `defaultChecked` for uncontrolled usage | Use toggles for actions that require a save step |
+
+### Content guidelines
+
+- **Labels**: Use sentence case, describe what will happen when on (e.g. "Show notifications")
+- **State clarity**: The toggle's visual state should make it obvious whether the feature is on or off
+
+### Related patterns
+
+- [Checkbox](../components/checkbox.md) — for form inputs that submit values
+- [Radio Group](../components/radio-group.md) — for mutually exclusive selections in forms
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressToggle } from '@iress-oss/ids-components';
+
 <IressToggle defaultChecked={false} hiddenLabel={false} layout="inline">
   Toggle
 </IressToggle>
 ```
 
-## Usage
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toggle--docs#api-props)
 
-Toggles are typically on / off switches, similar to a household light switch. They allow users to choose between two mutually exclusive options, and will always have a default value.
+### Usage
 
-The `IressToggle` component should only be used for actions that happen immediately, for example switching a device's WiFi connection on or off.
+#### Labels
 
-> [!WARNING]
-> **Don't use Toggles in forms**
->
-> Toggles shouldn’t be used as part of a form as they don’t have the correct
->   semantics, and won’t submit a value when the form data is submitted. If you
->   need a toggleable component in a form, use a checkbox or radio group instead.
+Toggles should always have a label, set via `children`.
 
-### Labels
+<StoryEmbed id="components-toggle--default"/>
 
-Toggles should always have a label, which is set via its `children`.
+#### Hidden labels
 
-```tsx
-<IressToggle defaultChecked={false} hiddenLabel={false} layout="inline">
-  Toggle
-</IressToggle>
-```
+Use `hiddenLabel` to visually hide the label while keeping it accessible to screen readers.
 
-[View "Default" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-toggle--default)
+<StoryEmbed id="components-toggle--hidden-label"/>
 
-### Hidden labels
+#### Checked
 
-Labels can be hidden via the `hiddenLabel` prop; this will hide the label from view, but it'll still be available to screen reader users.
+Use `checked` for controlled state, or `defaultChecked` for uncontrolled.
 
-```tsx
-<IressToggle hiddenLabel />
-```
+<StoryEmbed id="components-toggle--checked"/>
 
-[View "HiddenLabel" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-toggle--hidden-label)
+#### Layout
 
-### Checked
+The `layout` prop controls label position:
 
-The on / off state of the toggle can be controlled by setting the `checked` prop (for controlled components). If you want an uncontrolled component, you can set the `defaultChecked` prop instead to set it checked by default.
+- `inline` (default)
+- `inline-between` — label and control at opposite ends
+- `inline-reverse` — label after the control
+- `stack` — label above the control
 
-```tsx
-<ControlledToggle />
-```
+<StoryEmbed id="components-toggle--layout"/>
 
-[View "Checked" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-toggle--checked)
-
-### Layout
-
-The `layout` prop allows you to control the position of the label in relation to the control. The default layout is `inline`, but you can also choose the following options:',
-
-- `inline-between` similar to inline, but this positions the label and control at opposite ends of their container
-- `inline-reverse` renders the label after the control instead of before the control
-- `stack` positions the label above the control
-
-```tsx
-<IressStack gap="lg">
-<IressText>
-<h3>inline</h3>
-<IressPanel bg="alt">
-<IressToggle layout="inline">
-Toggle
-</IressToggle>
-</IressPanel>
-</IressText>
-<IressText>
-<h3>inline-between</h3>
-<IressPanel bg="alt">
-<IressToggle layout="inline-between" checked>
-Toggle
-</IressToggle>
-</IressPanel>
-</IressText>
-<IressText>
-<h3>inline-reverse</h3>
-<IressPanel bg="alt">
-<IressToggle layout="inline-reverse">
-Toggle
-</IressToggle>
-</IressPanel>
-</IressText>
-<IressText>
-<h3>stack</h3>
-<IressPanel bg="alt">
-<IressToggle layout="stack" checked>
-Toggle
-</IressToggle>
-</IressPanel>
-</IressText>
-</IressStack>
-```
-
-[View "Layout" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-toggle--layout)
-
-## Testing
+### Testing
 
 Query the toggle by its `switch` role (not `checkbox`):
 
@@ -113,21 +104,52 @@ await user.click(toggle);
 expect(toggle).toBeChecked();
 ```
 
-### Gotchas
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toggle--docs#testing)
 
-- **Role is `switch`, not `checkbox`**: Although the toggle looks like a
-  checkbox, it uses `role="switch"`. Use `getByRole('switch')`.
 
-### Test IDs
+#### Test selectors
 
-When you pass a `data-testid` to `IressToggle`, the following nested test IDs
-are generated automatically:
-
-| Suffix | Example | Description |
-| --- | --- | --- |
-| `label` | `my-toggle__label` | The toggle label element |
-| `button__button` | `my-toggle__button__button` | The toggle switch button |
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root element of the toggle | — | `toggle` |
+| label | The toggle label element | — | `toggle__label` |
+| button | The toggle switch button | — | `toggle__button__button` |
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs)
+### Storybook
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toggle--docs)
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Unchecked | Toggle is in the off position |
+| Checked | Toggle is in the on position; change takes effect immediately |
+| Controlled | State driven by `checked` prop and `onChange` handler |
+| Uncontrolled | Initial state set by `defaultChecked`; internal state management |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **4.1.2 Name, Role, Value** — Uses `role="switch"` with `aria-checked` to communicate state
+- **2.1.1 Keyboard** — Toggle is operable via keyboard
+- **1.3.1 Info and Relationships** — Label is programmatically associated
+
+**Keyboard interaction:**
+
+| Key | Action |
+|-----|--------|
+| `Space` | Toggle the switch on/off |
+| `Enter` | Toggle the switch on/off |
+| `Tab` | Move focus to/from the toggle |
+
+### Edge cases
+
+- **No label**: Always provide a label; use `hiddenLabel` if it must be visually hidden
+- **Inside forms**: Toggle does not participate in form submission — use Checkbox instead
+- **Rapid toggling**: Each toggle fires `onChange` immediately; debounce in the handler if needed

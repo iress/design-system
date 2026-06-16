@@ -1,50 +1,83 @@
-# 
-> **Component:** `import { IressSpinner } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)```tsx
-```
+# Spinner
 
-## Quick Start
+> Displays an animated loading indicator to signal an ongoing process.
+
+## Import
 
 ```tsx
+import { IressSpinner } from '@iress-oss/ids-components';
+```
+
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-spinner--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Spinner)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=spinner&title=[Spinner]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=spinner,enhancement&title=[Spinner]+Feature:+)
+
+Spinners notify the user that a task is being processed. They indicate that the app is busy, and should be used when the user has to wait for more than a few seconds.
+
+<StoryEmbed id="components-spinner--standalone"/>
+
+## Design
+
+### When to use
+
+> **Prefer [IressLoading](../patterns/loading.md)** — the Loading pattern handles timing and accessibility automatically. Use `IressSpinner` directly only when you need a standalone spinning indicator outside of a loading state.
+
+- **Inline loading indicators**: Show a spinner next to a button or field during an async action
+- **Chat typing indicators**: Use the `chatty` variant to show someone is typing
+- **Custom loading UIs**: When building a bespoke loading experience not covered by `IressLoading`
+
+### When not to use
+
+- **Page or component loading states** — use [IressLoading](../patterns/loading.md) which handles skeleton display, timing, and accessibility
+- **Determinate progress** — use [Progress](../components/progress.md) when you know the completion percentage
+- **Content placeholders** — use [Skeleton](../components/skeleton.md) for layout-preserving loading states
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Provide `screenreaderText` or a visible `message` | Use a spinner without any accessible label |
+| Use for indeterminate waits (unknown duration) | Use a spinner when you can show a progress bar |
+| Keep messages concise ("Loading...", "Saving...") | Display spinners indefinitely without timeout handling |
+
+### Related patterns
+
+- [Loading](../patterns/loading.md) — full loading pattern with timing, fade-in, and accessibility
+- [Skeleton](../components/skeleton.md) — layout-preserving placeholders
+- [Progress](../components/progress.md) — for determinate progress indicators
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressSpinner } from '@iress-oss/ids-components';
+
 <IressSpinner screenreaderText="Loading..." />
 ```
 
-## Examples
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-spinner--docs#api-props)
 
 ### Standalone
 
 When using the spinner on its own, you can define the `screenreaderText` prop to provide context to screen readers.
 
-```tsx
-<IressSpinner screenreaderText="Making magic happen..." />
-```
-
-[View "Standalone" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-spinner--standalone)
+<StoryEmbed id="components-spinner--standalone"/>
 
 ### Chatty variant
 
 The chatty variant displays an animated "typing" indicator with three dots. This is commonly used in chat interfaces to show that another user or system is currently typing a message.
 
-```tsx
-<IressSpinner variant="chatty" screenreaderText="User is typing..." />
-```
-
-[View "Chatty" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-spinner--chatty)
+<StoryEmbed id="components-spinner--chatty"/>
 
 ### Message
 
 You can display a message alongside the spinner. In this case, you do not need to define the `screenreaderText` prop, as you have a visible message to the user telling them what is happening.
 
-```tsx
-<IressInline gap="sm" verticalAlign="middle">
-<IressSpinner color="colour.neutral.70" />
-<IressText color="colour.neutral.70">Making magic happen...</IressText>
-</IressInline>
-```
+<StoryEmbed id="components-spinner--message"/>
 
-[View "Message" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-spinner--message)
-
-## Testing
+### Testing
 
 The query depends on the spinner variant:
 
@@ -61,6 +94,51 @@ const spinner = screen.getByTestId('my-spinner');
 const spinner = screen.getByRole('status');
 ```
 
+
+#### Test selectors
+
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root element of the spinner. Default variant is decorative (aria-hidden); chatty variant has role="status" | — | `spinner` |
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-spinner--docs)
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | Renders an animated spinning indicator |
+| Chatty | Renders three animated dots for typing indication |
+| With message | Displays visible text alongside the spinner |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **1.1.1 Non-text Content** — `screenreaderText` provides an accessible name for the spinner
+- **4.1.3 Status Messages** — Chatty variant uses `role="status"` for polite announcements
+
+**Keyboard interaction:**
+
+Spinners are not interactive and do not receive focus.
+
+### Edge cases
+
+- **No `screenreaderText` or `message`**: The spinner is purely decorative and hidden from assistive technologies — ensure context is provided by a parent element
+- **Long-running operations**: Consider adding a timeout and showing an error state if the operation takes too long
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-spinner--docs)

@@ -12,7 +12,7 @@ interface MetadataProps {
 }
 
 export function Metadata({ meta }: MetadataProps) {
-  const hasDocs = meta.storybook || meta.github?.guidelines || meta.github?.storybook || meta.figma;
+  const hasDocs = meta.storybook || meta.guidelines || meta.github?.guidelines || meta.github?.storybook || meta.figma;
   const hasDocsEdit = meta.github?.guidelines || meta.github?.storybook;
 
   return (
@@ -48,6 +48,11 @@ export function Metadata({ meta }: MetadataProps) {
       {hasDocs && (
         <IressInline verticalAlign="middle">
             <IressText element="strong" color="muted" width="input.4">Docs</IressText>
+            {meta.guidelines && (
+                <IressButton mode="muted" href={meta.guidelines} prepend={<IressIcon name="developer_guide" />} target="_blank" rel="noopener noreferrer">
+                    Guidelines
+                </IressButton>
+            )}
             {meta.storybook && (
                 <IressButton mode="muted" href={meta.storybook} prepend={<IressIcon name="menu_book" />} target="_blank" rel="noopener noreferrer">
                     Storybook

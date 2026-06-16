@@ -1,100 +1,96 @@
-# 
-> **Component:** `import { IressStack } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)```tsx
-```
+# Stack
 
-## Quick Start
+> Lays out children vertically with consistent spacing between items.
+
+## Import
 
 ```tsx
-<IressStack gap="spacing.1">
-  even
+import { IressStack } from '@iress-oss/ids-components';
+```
+
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-stack--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Stack)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=stack&title=[Stack]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=stack,enhancement&title=[Stack]+Feature:+)
+
+Use IressStack to control vertical spacing between content with consistent preset values.
+
+<StoryEmbed id="components-stack--default"/>
+
+## Design
+
+### When to use
+
+- **Vertical spacing**: Apply consistent vertical gaps between content blocks
+- **Form layouts**: Stack fields vertically with even spacing
+- **Section spacing**: Space content sections within a page
+
+### When not to use
+
+- **Horizontal layout** — use [Inline](../components/inline.md) instead
+- **Grid columns** — use [Row](../components/row.md) + [Col](../components/col.md)
+
+### Related patterns
+
+- [Inline](../components/inline.md) — horizontal equivalent
+- [Row](../components/row.md) + [Col](../components/col.md) — grid-based layout
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressStack } from '@iress-oss/ids-components';
+
+<IressStack gap="spacing.4">
+  <p>Item 1</p>
+  <p>Item 2</p>
 </IressStack>
 ```
 
-## Examples
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-stack--docs#api-props)
 
-### Gap
+### Usage
+
+#### Gap
 
 Vertical spacing is applied to the direct children of the `IressStack` component. The amount of spacing is controlled by the gap prop which accepts from `spacing.0` to `spacing.10`.
 
-#### What happened to `gutter`?
+##### What happened to `gutter`?
 
 The previous `gutter` prop has been replaced by `gap`, which uses the latest set of spacing tokens. In terms of how it is used to space items inside the `IressStack` component, it is now directly mapped to the [CSS gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/gap), which may change how your application is spaced. For most cases, there should be no change.
 
-```tsx
-<IressStack gap="spacing.4">
-{SPACING_AND_ALIAS_TOKENS.map((spacing) => (
-<IressText key={spacing}>
-<h2>{spacing}</h2>
-<IressStack gap={spacing as never} />
-</IressText>
-))}
-</IressStack>
-```
+<StoryEmbed id="components-stack--gap"/>
 
-[View "Gap" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-stack--gap)
-
-### Responsive gap
+#### Responsive gap
 
 The `gap` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
 
-```tsx
-<IressStack gap="spacing.4">
-<IressPanel>
-<p>
-Current breakpoint: <CurrentBreakpoint />.
-</p>
-</IressPanel>
-<IressStack gap={{ xs: "spacing.2", sm: "spacing.4", md: "spacing.6", lg: "spacing.8", xl: "spacing.10" }} />
-</IressStack>
-```
+<StoryEmbed id="components-stack--responsive-gap"/>
 
-[View "ResponsiveGap" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-stack--responsive-gap)
-
-### Inline children
+#### Inline children
 
 The stack component will treat the direct children as a block element. If you want to wrap some items to display them inline, wrap them with `IressInline`.
 
 In the example below: `IressButton` are inline because of wrapped by `IressInline`.
 
-```tsx
-<IressStack gap="spacing.4">
-  inlineChildren
-</IressStack>
-```
+<StoryEmbed id="components-stack--inline-children"/>
 
-[View "InlineChildren" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-stack--inline-children)
-
-### Lists
+#### Lists
 
 `IressStack` can also apply gap between the list items by using the new `element` (e.g. `ul`) prop.
 
-```tsx
-<IressStack gap="spacing.7" element="ul">
-  list
-</IressStack>
-```
+<StoryEmbed id="components-stack--lists"/>
 
-[View "Lists" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-stack--lists)
-
-### Vertical alignment
+#### Vertical alignment
 
 The `verticalAlign` prop controls how content is positioned vertically within the stack. It accepts six values: `top`, `middle`, `bottom`, `between`, `around`, and `evenly`.
 
 Use `top`, `middle`, or `bottom` to align items within the available space, and `between`, `around`, or `evenly` to distribute extra vertical space between items (similar to `space-between`, `space-around`, and `space-evenly` in CSS flexbox).
 
-```tsx
-<IressText>
-<h2>middle</h2>
-<IressPanel style={{ height: '1000px' }}>
-<IressStack verticalAlign="middle" />
-</IressPanel>
-</IressText>
-```
+<StoryEmbed id="components-stack--vertical-align"/>
 
-[View "VerticalAlign" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-stack--vertical-align)
-
-## Testing
+### Testing
 
 `IressStack` is a layout primitive with no semantic role. Target its children
 directly or use a `data-testid`:
@@ -103,6 +99,21 @@ directly or use a `data-testid`:
 const stack = screen.getByTestId('my-stack');
 ```
 
+
+#### Test selectors
+
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root element of the stack | — | `stack` |
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)
+### Storybook
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-stack--docs)
+
+## Specifications
+
+### Behaviour
+
+A CSS flexbox column wrapper with configurable gap, vertical alignment, and optional `element` prop for rendering as a list.

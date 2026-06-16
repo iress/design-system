@@ -42,3 +42,5 @@ The `stretch` prop is used to stretch a component to fill the available space. I
 <StoryEmbed id="styling-props-layout--stretch" />
 
 ---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-layout--docs)

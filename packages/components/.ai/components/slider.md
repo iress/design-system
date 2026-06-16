@@ -1,108 +1,106 @@
-# 
-> **Component:** `import { IressSlider } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs)```tsx
-```
+# Slider
 
-## Quick Start
+> Allows users to select a value from a range by dragging a handle.
 
-```tsx
-<IressSlider />
-```
-
-## Examples
-
-### Default value
-
-You can set the initial value of the slider using the `defaultValue` prop. If you would like to use a controlled slider, use the `value` prop and sync it with your state using `onChange`.
+## Import
 
 ```tsx
-<IressSlider defaultValue={3} />
+import { IressSlider } from '@iress-oss/ids-components';
 ```
 
-[View "DefaultValue" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slider--default-value)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slider--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Slider)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=slider&title=[Slider]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=slider,enhancement&title=[Slider]+Feature:+)
 
-### Min, max and step
+Sliders provide a visual indication of adjustable content, where the user can select a value from a range usually represented on a horizontal track.
 
-To change the selectable values of the default slider you can change the `min`, `max` and `step` properties.
+<StoryEmbed id="components-slider--default-value"/>
 
-For instance, if you set `min` to 10 and `max` to 100 the user is able to select any number between 10 and 100.
+## Design
 
-By setting the `step` property to 10, for example, the user will only be able to select numbers in increments of ten i.e. 10, 20, 30, 40, 50, 60, 70, 80, 90, 100; as shown in the below example.
+### When to use
+
+- **Numeric ranges**: Allow users to select a value within a defined range (e.g. volume, price)
+- **Visual feedback**: When users benefit from seeing their position within a range
+- **Approximate values**: When an exact number is less important than a relative position
+
+### When not to use
+
+- **Exact numeric entry** — use an Input with type `number`
+- **Very large ranges** — a slider with hundreds of steps is hard to control precisely
+- **Non-numeric values** — use a Select or Radio group
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Use tick labels for key values | Use a slider without any indication of the range |
+| Set meaningful `min`, `max`, and `step` | Use very large step counts that make precise selection difficult |
+| Provide a label via `IressField` | Use a slider without an accessible label |
+| Use `formatValue` for custom display | Rely solely on the tooltip for value communication |
+
+### Content guidelines
+
+- **Labels**: Always pair with a Field or label that describes what the slider controls
+- **Tick labels**: Use short values; hide less important labels on small screens with `srOnly`
+
+### Related patterns
+
+- [Field](../components/field.md) — wraps the slider with a label, hint, and error support
+- [Input](../components/input.md) — for precise numeric entry
+
+## Develop
+
+### Quick Start
 
 ```tsx
-<IressSlider min={10} max={100} step={10} />
+import { IressSlider } from '@iress-oss/ids-components';
+
+<IressSlider min={0} max={100} defaultValue={50} />
 ```
 
-[View "MinMaxAndStep" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slider--min-max-and-step)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slider--docs#api-props)
 
-### Ticks and labels
+### Usage
 
-It is also possible to include ticks and labels for selectable values. This can be done by using the `tickLabels` property and providing an array of numbers and/or `TickLabel` objects.
+#### Default value
 
-The `TickLabel` object takes value/label pairs. The value is required, however, an optional label property can be provided. If the label property is not specified, slider will display the value for the label.
+Set the initial value with `defaultValue`. Use `value` + `onChange` for controlled state.
 
-If you provide an array of `TickLabel` objects, the value tooltip (the one that appears above the slider's thumb) will use the label from its matching value.
+<StoryEmbed id="components-slider--default-value"/>
 
-The `tickLabels` prop can also be set to true, in which case they will automatically be inferred from `min`, `max` and `step`.
+#### Min, max and step
 
-```tsx
-<IressSlider min={0} max={200} step={20} />
-```
+Configure the selectable range and increment size.
 
-[View "TicksAndLabels" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slider--ticks-and-labels)
+<StoryEmbed id="components-slider--min-max-and-step"/>
 
-### Flexible ticks and labels
+#### Ticks and labels
 
-As of version 5, `min`, `max` and `step` is no longer automatically inferred from `tickLabels`, allowing you to have more flexible `tickLabels`.
+Use `tickLabels` to display value markers along the track. Pass an array of numbers, `TickLabel` objects, or `true` to auto-infer from min/max/step.
 
-You can also use the `formatValue` prop to provide a formatted node to replace the value tooltip.
+<StoryEmbed id="components-slider--ticks-and-labels"/>
 
-```tsx
-<IressSlider max={50} />
-```
+#### Flexible ticks and labels
 
-[View "FlexibleTicksAndLabels" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slider--flexible-ticks-and-labels)
+`min`, `max` and `step` are no longer automatically inferred from `tickLabels`. Use `formatValue` for custom tooltip display.
 
-### Hidden labels
+<StoryEmbed id="components-slider--flexible-ticks-and-labels"/>
 
-Specific labels can be hidden for all or specified breakpoints. This can be done by using the `srOnly` property in the `TickLabel` object.
+#### Hidden labels
 
-When a label is set to hide on a certain breakpoint, it will be hidden on the screen from that breakpoint onwards. You can reveal it on a larger breakpoint by setting the larger breakpoint to false.
+Use the `srOnly` property in `TickLabel` objects to hide labels on specific breakpoints while keeping them accessible.
 
-1. To set the label to hide on all breakpoints you can set the xs property to true: `srOnly: { xs: true }`.
-2. To only show on md and above you can `srOnly: { xs: true, md: false }`.
+<StoryEmbed id="components-slider--hidden-labels"/>
 
-#### Behavior considerations
+#### Read only
 
-- The labels will always be available to screen readers to ensure best accessibility, as screen readers are not confined by screen space.
-- The `ticksAndLabels` prop will still be used to match the `value` of the slider, even if its been set to be hidden on the user's screen.
+Use the `readOnly` prop to render the slider as read-only with a displayed value.
 
-```tsx
-<IressStack gap="md">
-<IressPanel bg="alt">
-<IressText>
-<CurrentBreakpoint />
-</IressText>
-</IressPanel>
-<IressSlider />
-</IressStack>
-```
+<StoryEmbed id="components-slider--read-only"/>
 
-[View "HiddenLabels" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slider--hidden-labels)
-
-### Read only
-
-Sliders can be set to read only by using the `readOnly` property. When set to read only the slider will render a read only input and display the specified value.
-
-If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs).
-
-```tsx
-<IressSlider min={0} max={200} step={20} value={0} readOnly />
-```
-
-[View "ReadOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-slider--read-only)
-
-## Testing
+### Testing
 
 Query the slider by its role:
 
@@ -110,32 +108,64 @@ Query the slider by its role:
 const slider = screen.getByRole('slider', { name: 'Volume' });
 ```
 
-### Gotchas
+**Note:** `userEvent` does not work with range inputs. Use `fireEvent.change`:
 
-- **`userEvent` does not work on range inputs**: Due to a
-  [known limitation](https://github.com/testing-library/user-event/issues/1067),
-  `userEvent` cannot change range input values. Use `fireEvent.change` instead:
+```tsx
+import { fireEvent } from '@testing-library/react';
+fireEvent.change(screen.getByRole('slider'), { target: { value: '5' } });
+```
 
-  ```tsx
-  import { fireEvent } from '@testing-library/react';
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slider--docs#testing)
 
-  fireEvent.change(screen.getByRole('slider'), { target: { value: '5' } });
-  ```
 
-- **readOnly removes the slider role**: When `readOnly` is set, the slider role
-  is removed and the value is displayed as plain text via `IressReadonly`.
+#### Test selectors
 
-### Test IDs
-
-When you pass a `data-testid` to `IressSlider`, the following nested test IDs
-are generated automatically:
-
-| Suffix | Example | Description |
-| --- | --- | --- |
-| `slider` | `my-slider__slider` | The range input element |
-| `datalist` | `my-slider__datalist` | The tick marks datalist |
-| `option` | `my-slider__option` | An individual tick mark option |
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root element of the slider | — | `slider` |
+| slider | The range input element | — | `slider__slider` |
+| datalist | The tick marks datalist | — | `slider__datalist` |
+| option | An individual tick mark option | — | `slider__datalist__option` |
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs)
+### Storybook
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slider--docs)
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | Slider shows at `defaultValue` or `min` position |
+| Dragging | Thumb follows pointer; value updates in real time |
+| Controlled | Value driven by `value` prop and `onChange` |
+| Read only | Renders value as plain text; slider role removed |
+| Step constraint | Thumb snaps to nearest valid step value |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **4.1.2 Name, Role, Value** — Uses `role="slider"` with `aria-valuemin`, `aria-valuemax`, `aria-valuenow`
+- **2.1.1 Keyboard** — Fully operable via keyboard
+- **1.3.1 Info and Relationships** — Label associated via `aria-labelledby` or wrapping Field
+
+**Keyboard interaction:**
+
+| Key | Action |
+|-----|--------|
+| `Arrow Right` / `Arrow Up` | Increase value by one step |
+| `Arrow Left` / `Arrow Down` | Decrease value by one step |
+| `Home` | Set to minimum value |
+| `End` | Set to maximum value |
+| `Page Up` | Increase by a larger step (10× step or 10% of range) |
+| `Page Down` | Decrease by a larger step |
+
+### Edge cases
+
+- **readOnly removes slider role**: Query by text content instead of role when read-only
+- **Tick labels with `srOnly`**: Labels are always available to screen readers regardless of visibility
+- **`formatValue`**: Custom formatted node replaces the value tooltip but does not affect `aria-valuenow`

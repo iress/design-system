@@ -1,31 +1,58 @@
-# 
-> **Component:** `import { IressPanel } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs)```tsx
-```
+# Panel
 
-## Quick Start
+> Provides a sectioned container for grouping related content with an optional heading.
+
+## Import
 
 ```tsx
-<IressPanel heading="Panel Heading">
-  text
-</IressPanel>
+import { IressPanel } from '@iress-oss/ids-components';
 ```
 
-## Usage
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-panel--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Panel)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=panel&title=[Panel]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=panel,enhancement&title=[Panel]+Feature:+)
 
-`IressPanel` uses `IressCard` under the hood, so it inherits all of the same props and styling options. It is purely a semantic component that provides a more specific name for grouping related content together.
+A panel is used to group related content.
 
-[View the API documentation for `IressCard`](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-card--docs)
+<StoryEmbed id="components-panel--default"/>
+
+## Design
 
 ### When to use
 
-Panels are used to group related content. They can be used to create sections within a page, as well as group lists of items together.
+- **Grouping content**: Create sections within a page that share a common purpose
+- **Lists of items**: Group related items together visually
 
-- If you need to display micro-content, use [IressCard](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-card--docs) instead.
-- If you need to add padding or a background to a section of content, use [IressStyled](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs) or [styling props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-reference--docs) on the component itself.
-- Otherwise, use `IressPanel` to group related content together.
+### When not to use
 
-## Testing
+- **Micro-content** — use [Card](../components/card.md) for smaller, self-contained items
+- **Custom padding/background** — use [Styled](../components/styled.md) or styling props directly
+
+### Related patterns
+
+- [Card](../components/card.md) — for smaller, self-contained content blocks
+- [Expander](../components/expander.md) — for collapsible content sections
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressPanel } from '@iress-oss/ids-components';
+
+<IressPanel heading="Panel Heading">
+  Panel content
+</IressPanel>
+```
+
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-panel--docs#api-props)
+
+### Usage
+
+`IressPanel` uses `IressCard` under the hood, so it inherits all of the same props and styling options. It is purely a semantic component that provides a more specific name for grouping related content together.
+
+### Testing
 
 `IressPanel` is a layout container. Query by `data-testid` or target its
 children directly:
@@ -34,6 +61,21 @@ children directly:
 const panel = screen.getByTestId('my-panel');
 ```
 
+
+#### Test selectors
+
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root element of the panel | — | `panel` |
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs)
+### Storybook
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-panel--docs)
+
+## Specifications
+
+### Behaviour
+
+A semantic wrapper around `IressCard` for grouping related content. Inherits all Card props and styling.

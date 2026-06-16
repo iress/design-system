@@ -130,3 +130,5 @@ For a complete reference of all available color tokens, including WCAG contrast 
 [View Full Colour Token Reference](../tokens/colour.md)
 
 ---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-colour--docs)

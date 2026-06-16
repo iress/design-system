@@ -1,65 +1,76 @@
-# 
-> **Component:** `import { IressRadio } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)```tsx
-```
+# Radio
 
-## Quick Start
+> Renders a single radio button for use within a group of mutually exclusive options.
+
+## Import
 
 ```tsx
-<IressRadio>
-  Radio button
-</IressRadio>
+import { IressRadio } from '@iress-oss/ids-components';
 ```
 
-## Examples
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Radio)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=radio&title=[Radio]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=radio,enhancement&title=[Radio]+Feature:+)
 
-### Checked
+A radio is a single option presented with a radio button. It is used to select a single option from multiple options. It is typically used in an IressRadioGroup.
+
+<StoryEmbed id="components-radio--checked"/>
+
+## Design
+
+### When to use
+
+- **Inside a RadioGroup**: As individual options within an `IressRadioGroup`
+- **Standalone toggle**: Rare — typically only when a single binary choice is needed with radio semantics
+
+### When not to use
+
+- **Multiple selections** — use [Checkbox](../components/checkbox.md) instead
+- **On/off toggles** — use [Toggle](../components/toggle.md) for boolean switches
+
+### Related patterns
+
+- [RadioGroup](../components/radio-group.md) — the parent container for radio options
+- [Checkbox](../components/checkbox.md) — for multi-select options
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressRadio } from '@iress-oss/ids-components';
+
+<IressRadio>Radio button</IressRadio>
+```
+
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio--docs#api-props)
+
+### Usage
+
+#### Checked
 
 You can set the radio to `checked` by default. This is useful when you want to pre-select an option.
 
 **Note:** If you are using an `IressRadioGroup`, you should use the `value` prop on the `IressRadioGroup` to set the checked state of its `<IressRadio />` children, as the `checked` prop will be ignored.
 
-```tsx
-<IressRadio checked>
-  Checked radio button
-</IressRadio>
-```
+<StoryEmbed id="components-radio--checked"/>
 
-[View "Checked" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio--checked)
-
-### Read only
+#### Read only
 
 The `readOnly` prop changes how the radio is rendered. It will only render if the radio is checked (alongside a hidden input that contains the `value` if it was set), otherwise it not be rendered.
 
 It is understandable that this may not be the desired behavior for all use cases. If you need a radio that is not editable, but still visible, simply do not set the `readOnly` prop and set the `checked` prop instead.
 
-```tsx
-<IressStack gap="sm">
-<IressRadio defaultChecked />
-<IressRadio />
-</IressStack>
-```
+<StoryEmbed id="components-radio--read-only"/>
 
-[View "ReadOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio--read-only)
-
-### Variants
+#### Variants
 
 The `variant` prop changes the visual style of the radio. The `card` variant adds a card-like border and the `touch` variant adds button-like border and padding.
 
-```tsx
-<IressStack gap="lg">
-  <IressRadio variant="card" heading="Widget">
-    A description of the widget
-  </IressRadio>
-  <IressRadio variant="touch">
-    Touch variant
-  </IressRadio>
-</IressStack>
-```
+<StoryEmbed id="components-radio--variants"/>
 
-[View "Variants" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-radio--variants)
-
-## Testing
+### Testing
 
 Query radio buttons by their accessible role and label text:
 
@@ -80,7 +91,7 @@ const group = screen.getByRole('radiogroup', { name: 'Approve request' });
 const yes = within(group).getByRole('radio', { name: 'Yes' });
 ```
 
-### Gotchas
+#### Gotchas
 
 - **readOnly mode**: When `readOnly` is set, the radio role is removed from the
   DOM entirely. Only the text label and a hidden `<input>` remain. Use
@@ -88,16 +99,42 @@ const yes = within(group).getByRole('radio', { name: 'Yes' });
 - **Unchecked readOnly radios render nothing**: If a radio is `readOnly` and not
   checked, it renders no output at all.
 
-### Test IDs
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio--docs#testing)
 
-When you pass a `data-testid` to `IressRadio`, the following nested test IDs
-are generated automatically:
 
-| Suffix | Example | Description |
-| --- | --- | --- |
-| `input` | `my-radio__input` | The underlying radio input element |
-| `radioMark` | `my-radio__radioMark` | The visual radio indicator |
+#### Test selectors
+
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root element of the radio | — | `radio` |
+| input | The underlying radio input element | — | `radio__input` |
+| radioMark | The visual radio indicator | — | `radio__radioMark` |
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)
+### Storybook
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio--docs)
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | Unchecked radio with label |
+| Checked | Radio indicator filled |
+| Read only | Only renders if checked; otherwise renders nothing |
+| Variants | `card` adds border; `touch` adds border + padding |
+
+### Accessibility
+
+- Renders as `radio` role with accessible name from children text
+- **WCAG 4.1.2 Name, Role, Value** — checked state communicated programmatically
+
+### Keyboard interaction
+
+| Key | Action |
+|-----|--------|
+| `Space` | Selects the radio if not already selected |
+| `Arrow keys` | Moves between radios when inside a RadioGroup |

@@ -1,210 +1,169 @@
-# 
-> **Component:** `import { IressAutocomplete } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)```tsx
-```
+# Autocomplete
 
-## Quick Start
+> Provides a text input with suggestions that filter as the user types.
+
+## Import
 
 ```tsx
+import { IressAutocomplete } from '@iress-oss/ids-components';
+```
+
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-autocomplete--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Autocomplete)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=autocomplete&title=[Autocomplete]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=autocomplete,enhancement&title=[Autocomplete]+Feature:+)
+
+Autocomplete allow for users to fill in their input by providing suggestions as they type.
+
+<StoryEmbed id="components-autocomplete--uncontrolled"/>
+
+## Design
+
+### When to use
+
+- **Large option sets**: When the user needs to select from many possible values (e.g. country, city)
+- **Known values with free text**: When suggestions help but the user can still type a custom value
+- **Search fields**: When filtering results as the user types improves discovery
+
+### When not to use
+
+- **Small fixed lists** (< 10 items) — use a Select or RadioGroup instead
+- **Strict selection required** — use Select which restricts input to available options
+- **No suggestions available** — use a plain Input
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Provide clear `noResultsText` when no matches found | Leave the dropdown empty with no feedback |
+| Use debounce for async options to reduce API calls | Fire API requests on every keystroke |
+| Set appropriate `minSearchLength` for async options | Trigger searches on a single character for expensive APIs |
+| Use `initialOptions` for recommended/recent items | Overload the dropdown with hundreds of unfiltered results |
+
+### Content guidelines
+
+- **Placeholder**: Use a hint like "Search by name…" to indicate search behaviour
+- **No results text**: Provide actionable guidance (e.g. "No matches found. Try a different term.")
+- **Options**: Keep labels concise; use `meta` for supplementary info
+
+### Related patterns
+
+- [Select](../components/select.md) — for strict selection from a list
+- [Input](../components/input.md) — for free text without suggestions
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressAutocomplete } from '@iress-oss/ids-components';
+
 <IressAutocomplete />
 ```
 
-## Usage
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-autocomplete--docs#api-props)
+
+### Usage
 
 The `IressAutocomplete` element extends `IressInput` with additional functionality to provide suggestions to the user as they type.
 
-There is no validation done between the suggestions and the input value. They are strictly suggestions to improve the user experience. If you would like to restrict the input to the suggestions, you can use `IressCombobox`.
+There is no validation done between the suggestions and the input value. They are strictly suggestions to improve the user experience. If you would like to restrict the input to the suggestions, use `IressSelect` instead.
 
-### Uncontrolled
+#### Uncontrolled
 
 The `defaultValue` prop can be used to set the initial value of the input. The value will be managed by the component.
 
-```tsx
-<IressAutocomplete defaultValue="Option 1" />
-```
+<StoryEmbed id="components-autocomplete--uncontrolled"/>
 
-[View "Uncontrolled" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--uncontrolled)
-
-### Controlled
+#### Controlled
 
 The `value` prop can be used to completely control the state of the component. Use the `onChange` and `onClear` props to sync your state with the component.
 
-```tsx
-<AutocompleteUsingState />
-```
+<StoryEmbed id="components-autocomplete--controlled"/>
 
-[View "Controlled" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--controlled)
+#### Providing suggestions
 
-### Providing suggestions
-
-#### `options`
+##### `options`
 
 To use the suggestion functionality, you can provide an array of `LabelValueMeta[]` objects to the `options` prop.
 
-**Note:** If `value` is provided on a suggestion item, it will be used (casted to a string) instead of the `label` key. This is useful when you want to display a different value to the user than what is used for filtering.
+**Note:** If `value` is provided on a suggestion item, it will be used (casted to a string) instead of the `label` key.
 
-[View "Options" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--options)
+<StoryEmbed id="components-autocomplete--options"/>
 
-#### Asynchronous `options`
+##### Asynchronous `options`
 
 If you would like to render suggestions from the server, you can pass a function to the `options` prop. It accepts a string parameter and returns a promise that resolves to an array of `LabelValueMeta[]` objects.
 
-```tsx
-<AutocompleteUsingAsync />
-```
+<StoryEmbed id="components-autocomplete--async-options"/>
 
-[View "AsyncOptions" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--async-options)
+##### Minimum search length for async options
 
-#### Minimum search length for async options
+When using asynchronous options, you can set a minimum number of characters required before triggering the search using the `minSearchLength` prop.
 
-When using asynchronous options, you can set a minimum number of characters required before triggering the search using the `minSearchLength` prop. This prevents unnecessary API calls and loading states for very short queries.
+<StoryEmbed id="components-autocomplete--async-options-min-search-length"/>
 
-By default, async searches are triggered after 1 character. Setting a higher value (e.g., 3) means no search request will be made and no loading spinner will appear until the user types at least that many characters.
-
-```tsx
-<AutocompleteUsingAsync />
-```
-
-[View "AsyncOptionsMinSearchLength" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--async-options-min-search-length)
-
-#### `initialOptions`
+##### `initialOptions`
 
 If you want to provide initial options to the user, you can use the `initialOptions` prop. This is useful when you want to provide a list of options to the user before they start typing (eg. recommended search terms).
 
-[View "InitialOptions" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--initial-options)
+<StoryEmbed id="components-autocomplete--initial-options"/>
 
-## Behaviour
-
-- As long as there is a single character in the input, the suggestions will be displayed in a popover. Unless `initialOptions` are provided where the popover will be displayed immediately on focus.
-- The popover will close when the input is empty, unless `initialOptions` are provided.
-- The suggestions will be filtered based on the input value.
-- Tapping on a suggestion with the mouse will change the input value to the selection and close the popover.
-- When the user presses the arrows keys while the input is focussed, suggestions will be highlighted, but focus remains on the input.
-- When the user presses the enter key while a suggestion is highlighted, the suggestion will be selected and the popover will close.
-- When the user presses the down key while the popover is closed, it will open the popover.
-- When the user pressed the up key while the first suggestion is highlighted, it will close the popover.
-- When the user tabs away while no suggestion is highlighted, the input will not be changed.
-- When the user tabs away while a suggestion is highlighted, the suggestion will be selected.
-- When the user tabs away while the popover is open, the popover will close.
-
-## Accessibility
-
-The autocomplete component follows the [WAI combobox pattern: List autocomplete with manual selection](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#:~:text=List%20autocomplete%20with%20manual,value%20in%20the%20popup). An example of this pattern outside of IDS can be seen at [WAI-ARIA combobox example](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/).
-
-There is a key difference:
-
-- For better usability, virtual focus is used to highlight the suggestions inside the popover. This means focus remains on the input, but the suggestions are highlighted as if they are in focus, allowing the user to type and navigate the suggestions with the arrow keys.
-- To denote the highlighted suggestion to screen readers, the `aria-activedescendant` attribute is used.
-
-## Examples
-
-### `autoSelect`
+#### `autoSelect`
 
 The `autoSelect` prop will automatically select the highlighted option when the user blurs the autocomplete. This is set to true by default, but can be switched off.
 
-```tsx
-<IressAutocomplete autoSelect={false} placeholder="Should no longer auto-select when an item is highlighted" />
-```
+<StoryEmbed id="components-autocomplete--remove-auto-select"/>
 
-[View "RemoveAutoSelect" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--remove-auto-select)
-
-### Input props
+#### Input props
 
 Autocomplete extends `IressInput`, hence it has the same properties as `IressInput`.
 
 It does have some defaults to help with user experience. `append` automatically has a search icon, and `clearable` is set to true by default.
 
-```tsx
-<IressAutocomplete width={12} />
-```
+<StoryEmbed id="components-autocomplete--input-props"/>
 
-[View "InputProps" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--input-props)
-
-### No results
+#### No results
 
 If you would like to show a message when there are no results, you can use the `noResultsText` prop. It accepts any React node.
 
-```tsx
-<IressAutocomplete placeholder="Type "no" to see the no results text" />
-```
+<StoryEmbed id="components-autocomplete--no-results-text"/>
 
-[View "NoResultsText" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--no-results-text)
-
-### Popover props
+#### Popover props
 
 Under the hood, autocomplete uses `IressInputPopover` to display the suggestions. It accepts `autoHighlight`, `align`, `className` and `displayMode`.
 
-There are two additional props that autocomplete accepts to customise the popover: `append` and `prepend`. You can place additional content above or below the results using these props.
+There are two additional props that autocomplete accepts to customise the popover: `append` and `prepend`.
 
-[View "PopoverProps" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--popover-props)
+<StoryEmbed id="components-autocomplete--popover-props"/>
 
-### Debounce threshold
+#### Debounce threshold
 
-The `debounceThreshold` prop can be used to set the time in milliseconds to wait before making a request to the `options` function. This is useful when you want to prevent making too many requests to the server.
+The `debounceThreshold` prop can be used to set the time in milliseconds to wait before making a request to the `options` function.
 
-By default there is a debounce, but it can be removed by setting it to `0`.
+<StoryEmbed id="components-autocomplete--debounce-threshold"/>
 
-```tsx
-<IressAutocomplete debounceThreshold={0} placeholder="Instant search!" />
-```
-
-[View "DebounceThreshold" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--debounce-threshold)
-
-### Result limits
+#### Result limits
 
 You can limit the maximum amount of search results displayed in the suggestions by setting the `limitDesktop` prop. This defaults to 12.
 
 On smaller screens (< 768px), the number of options is further reduced by using the `limitMobile` prop, which defaults to 6.
 
-`limitMobile` works by filtering the search results that have been filtered by `limitDesktop`, so must be a smaller value. For example:
+<StoryEmbed id="components-autocomplete--result-limits"/>
 
-```tsx
-// 12 results on large screens, 6 on small screens (default values)
-<IressAutocomplete options={...} />
+#### Read only
 
-// 4 results on large screens, 3 on small screens
-<IressAutocomplete resultLimitDesktop={4} resultLimitMobile={3} options={...} />
+The `readOnly` prop can be set to `true` to prevent the user from changing the value of the autocomplete.
 
-// 4 results on all screens (resultLimitMobile > resultLimitDesktop so has no effect)
-<IressAutocomplete resultLimitDesktop={4} resultLimitMobile={5} options={...} />
-```
+<StoryEmbed id="components-autocomplete--read-only"/>
 
-The result limits will also affect the number of initial options displayed, if the `initialOptions` prop is set.
-
-```tsx
-<IressStack gap="md">
-<IressPanel>
-<CurrentBreakpoint />
-</IressPanel>
-<IressAutocomplete />
-</IressStack>
-```
-
-[View "ResultLimits" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--result-limits)
-
-### Read only
-
-The `readOnly` prop can be set to `true` to prevent the user from changing the value of the autocomplete. This will change the input to a custom read-only style and the user will not be able to interact with the input.
-
-If you need more control over the read-only state (for example, rendering a stylised version of the value), you can use the [`IressReadonly` component](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs).
-
-```tsx
-<IressAutocomplete readOnly />
-```
-
-[View "ReadOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-autocomplete--read-only)
-
-## Testing
+### Testing
 
 To help you effectively test the autocomplete component, we have provided a few tips based on the behaviour of the component and our own experience.
 
-**Note:** These are suggestions and not requirements. You should test the component in a way that best suits your use case.
+#### Partial query matching
 
-### Partial query matching
-
-The suggestions are filtered based on the input value. If the input value only matches a part of the option, the input value is highlighted by a `<b />` tag in each option. You will need to account for this in your tests, either using an exact string match with a space to denote the highlighted value, or using a regex to match the string.
-
-If you are using `meta`, `prepend` or `append` props in `LabelValueMeta`, you should also consider this in your search query for the option.
+The suggestions are filtered based on the input value. If the input value only matches a part of the option, the input value is highlighted by a `<b />` tag in each option.
 
 ```tsx
 render(
@@ -222,72 +181,105 @@ await user.type(autocomplete, 'lu');
 const option = await screen.findByRole('option', {
   name: 'Lu ke Skywalker male',
 });
-expect(option).toBeInTheDocument();
 
 // Using a regex to match the string
 const option = await screen.findByRole('option', { name: /Skywalker/ });
-expect(option).toBeInTheDocument();
 ```
 
-### Query for minimal characters
+#### Query for minimal characters
 
-If you are testing if a specific option appears in the autocomplete that returns asynchronous `options`, it is recommended to use the shortest possible query to return the desired result. The longer the query, the longer it will take to see the results.
+If you are testing if a specific option appears in the autocomplete that returns asynchronous `options`, it is recommended to use the shortest possible query to return the desired result.
 
 ```tsx
-render(<IressAutocomplete options={searchStarWarsCharacters} />);
-const autocomplete = screen.getByRole('combobox');
-
 // DO: Use the shortest query to return the desired result
 await user.type(autocomplete, 'lu');
-const option = await screen.findAllByRole('option');
 
 // DON'T: Use a long query to return the desired result
 await user.type(autocomplete, 'luke skywalker');
-const option = await screen.findAllByRole('option');
 ```
 
-### Use mocking when testing APIs
+#### Use mocking when testing APIs
 
-When testing the autocomplete component with asynchronous `options`, you should mock the API call to return a known set of results, rather than rely on a public prototyping API (eg. https://swapi.py4e.com/). This will allow you to test the component in isolation without relying on the API to return the expected results, as well as reduce chance of flakiness due to timeouts in your tests.
-
-We recommend using [Mock Service Worker](https://mswjs.io/) to mock the API calls in your tests.
+When testing the autocomplete component with asynchronous `options`, you should mock the API call to return a known set of results. We recommend using [Mock Service Worker](https://mswjs.io/).
 
 ```tsx
-// src/mocks/handlers.ts
-export const handlers = [
-  // Intercept "GET https://swapi.py4e.com/api/people" requests...
+import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
+
+const server = setupServer(
   http.get('https://swapi.py4e.com/api/people', () => {
-    // ...and respond to them using this JSON response.
     return HttpResponse.json([
       { name: 'Luke Skywalker', gender: 'male' },
-      { name: 'Leia Skywalker', gender: 'female' },
     ]);
   }),
-];
+);
 
-// src/mocks/node.js
-export const server = setupServer(...handlers);
-
-// src/CustomAutocomplete.test.tsx
 server.listen();
-
-render(<IressAutocomplete options={searchStarWarsCharacters} />);
-const autocomplete = screen.getByRole('combobox');
-
-await user.type(autocomplete, 'lu');
-const option = await screen.findAllByRole('option');
 ```
 
-### Test IDs
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-autocomplete--docs#testing)
 
-When you pass a `data-testid` to `IressAutocomplete`, the following nested test
-IDs are generated automatically:
 
-| Suffix | Example | Description |
-| --- | --- | --- |
-| `input` | `my-autocomplete__input` | The underlying input element |
-| `menu` | `my-autocomplete__menu` | The suggestions menu |
+#### Test selectors
+
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root wrapper element (no semantic role) | — | `autocomplete` |
+| input | The text input element | — | `autocomplete__input` |
+| menu | The suggestions menu | — | `autocomplete__menu` |
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-autocomplete--docs)
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Idle | Input is empty, no popover shown |
+| Typing | Suggestions popover appears after first character (or `minSearchLength`) |
+| Highlighted | Arrow keys highlight suggestions; focus stays on input (virtual focus) |
+| Selected | Clicking or pressing Enter on a suggestion sets the input value and closes popover |
+| Blurred with highlight | If `autoSelect` is true, highlighted option is selected on blur |
+| No results | Shows `noResultsText` content if provided |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **4.1.2 Name, Role, Value** — Uses `role="combobox"` with `aria-expanded` and `aria-activedescendant`
+- **1.3.1 Info and Relationships** — Options use `role="option"` within a `role="listbox"`
+- **2.1.1 Keyboard** — Full keyboard navigation via arrow keys, Enter, and Escape
+
+**ARIA pattern:** [WAI combobox with list autocomplete and manual selection](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)
+
+**Keyboard interaction:**
+
+| Key | Action |
+|-----|--------|
+| `↓` | Opens popover or moves highlight to next option |
+| `↑` | Moves highlight to previous option; closes popover from first option |
+| `Enter` | Selects highlighted option and closes popover |
+| `Escape` | Closes the popover without selecting |
+| `Tab` | Selects highlighted option (if any) and moves focus away |
+
+### Edge cases
+
+- **Async loading**: Shows a loading spinner while options are being fetched
+- **Debounce**: Prevents excessive API calls with configurable `debounceThreshold`
+- **Empty input with `initialOptions`**: Popover shows initial options on focus
+- **Long option labels**: Text truncates within the popover option
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-autocomplete--docs)

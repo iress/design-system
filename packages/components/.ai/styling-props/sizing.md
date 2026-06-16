@@ -51,3 +51,5 @@ Overlay widths are sizes that define the width of overlay components such as Mod
 <StoryEmbed id="styling-props-sizing--container-widths" />
 
 ---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-sizing--docs)

@@ -1,135 +1,114 @@
-# 
-> **Component:** `import { IressCheckbox } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs)```tsx
-```
+# Checkbox
 
-## Quick Start
+> Renders a checkbox input for toggling a boolean value.
+
+## Import
 
 ```tsx
-<IressCheckbox>
-  A checkbox
-</IressCheckbox>
+import { IressCheckbox } from '@iress-oss/ids-components';
 ```
 
-## Usage
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Checkbox)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=checkbox&title=[Checkbox]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=checkbox,enhancement&title=[Checkbox]+Feature:+)
 
-### Checked
+Checkboxes are used to let a user select one or more options for a limited number of choices. Also, works as a child of IressCheckboxGroup
+
+<StoryEmbed id="components-checkbox--default"/>
+
+## Design
+
+### When to use
+
+- **Multiple selections**: Let users select one or more options from a list
+- **Binary toggles**: A single checkbox for opt-in/opt-out (e.g. "Accept terms")
+- **Table row selection**: Select individual rows for bulk actions
+- **Indeterminate state**: Show partial selection in a parent checkbox
+
+### When not to use
+
+- **Mutually exclusive options** — use RadioGroup instead
+- **Immediate effect toggles** — use a Toggle component
+- **Large option sets** — use a multi-select Select
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Use a visible label for every checkbox | Hide labels without providing `hiddenLabel` for accessibility |
+| Group related checkboxes in a CheckboxGroup | Use standalone checkboxes for related multi-select options |
+| Use `indeterminate` only as a visual indicator of partial selection | Rely on `indeterminate` as a third state in form logic |
+| Use `readOnly` for confirmed/locked selections | Use `disabled` to prevent interaction without explanation |
+
+### Content guidelines
+
+- **Labels**: Use sentence case, be specific about what the option does
+- **Positive framing**: "Send me updates" not "Don't send me updates"
+- **Consistent length**: Keep labels similar length within a group
+
+### Related patterns
+
+- [Checkbox Group](../components/checkbox-group.md) — for managing multiple related checkboxes
+- [Switch](../components/toggle.md) — for immediate on/off toggles
+- [Radio Group](../components/radio-group.md) — for single-select options
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressCheckbox } from '@iress-oss/ids-components';
+
+<IressCheckbox>A checkbox</IressCheckbox>
+```
+
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs#api-props)
+
+### Usage
+
+#### Controlled
 
 For single checkboxes in controlled mode the `checked` prop sets the checked state.
 
-When used as part of an `IressCheckboxGroup`, the `checked` prop will be ignored. Instead, the `value` prop on the `IressCheckboxGroup` will determine the checked state of each checkbox. See the [checkbox group documentation](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkboxgroup--docs) for more details.
+When used as part of an `IressCheckboxGroup`, the `checked` prop will be ignored. Instead, the `value` prop on the `IressCheckboxGroup` will determine the checked state of each checkbox.
 
-```tsx
-<IressCheckbox checked>
-  A checkbox which is checked and in controlled mode
-</IressCheckbox>
-```
+<StoryEmbed id="components-checkbox--controlled"/>
 
-[View "Checked" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox--checked)
-
-### Default Checked
+#### Default Checked
 
 For single checkboxes in uncontrolled mode the `defaultChecked` prop sets the default checked state.
 
-```tsx
-<IressCheckbox defaultChecked>
-  A checkbox which is initially checked
-</IressCheckbox>
-```
+<StoryEmbed id="components-checkbox--default-checked"/>
 
-[View "DefaultChecked" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox--default-checked)
-
-### Indeterminate
+#### Indeterminate
 
 The `indeterminate` prop sets the checkbox appearance to an indeterminate dash until it is clicked. It has no impact on the checkbox behavior beyond this purely visual indicator.
 
-```tsx
-<IressCheckbox indeterminate>
-  A checkbox which is initially in an indeterminate state
-</IressCheckbox>
-```
+<StoryEmbed id="components-checkbox--indeterminate"/>
 
-[View "Indeterminate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox--indeterminate)
-
-### Hidden Label
-
-It is very rare to want to render a checkbox without a visible label. However, one case where you might want to is within tables.
+#### Hidden Label
 
 When using a checkbox without a visible label, you must supply a label and apply the `hiddenLabel` property to still be accessible by screen readers.
 
-It is also important to not hide the table headers.
+<StoryEmbed id="components-checkbox--with-table-data"/>
 
-```tsx
-<IressTable
-caption="List of investments"
-columns={[
-{
-format: (value: boolean) => (
-<IressCheckbox defaultChecked={value} />
-),
-key: 'select',
-label: 'Select',
-sort: true,
-},
-{ key: 'name', label: 'Name' },
-{ key: 'date', label: 'Date' },
-{ key: 'cost', label: 'Cost' },
-]}
-rows={[
-{
-select: false,
-name: 'Artemis Fund Managers Limited',
-date: '2019-09-23',
-cost: 23898.12,
-},
-{
-select: true,
-name: 'CASH.CASH',
-date: '2020-06-28',
-cost: 49751.43,
-},
-]}
-/>
-```
-
-[View "WithTableData" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox--with-table-data)
-
-### Read only
+#### Read only
 
 The `readOnly` prop changes how the checkbox is rendered. It will only render if the checkbox is checked (alongside a hidden input that contains the `value` if it was set), otherwise it will not be rendered.
 
-It is understandable that this may not be the desired behavior for all use cases. If you need a checkbox that is not editable, but still visible, simply do not set the `readOnly` prop and set the `checked` prop instead.
+<StoryEmbed id="components-checkbox--read-only"/>
 
-```tsx
-<IressStack>
-<IressCheckbox defaultChecked />
-<IressCheckbox />
-</IressStack>
-```
+#### Variants
 
-[View "ReadOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox--read-only)
+The checkbox component has multiple variants that can be used to change the appearance of the checkbox. The `variant` prop can be set to `default`, `card`, or `touch`.
 
-### Variants
+- `card` variant is used to display the checkbox as a card, which is useful when the checkbox needs to contain more information than just a label.
+- `touch` variant is used to display the checkbox with a larger touch target, which is useful for mobile devices.
 
-The checkbox component has multiple variants that can be used to change the appearance of the checkbox. The `variant` prop can be set to `default`, `card`, or `touch`. The default variant is `default`.
+<StoryEmbed id="components-checkbox--variants"/>
 
-- `card` variant is used to display the checkbox as a card, which is useful when the checkbox needs to contain more information than just a label. It is used in the `IressCheckboxGroup` component when the `variant` prop is set to `card`.
-- `touch` variant is used to display the checkbox with a larger touch target, which is useful for mobile devices. It is used in the `IressCheckboxGroup` component when the `variant` prop is set to `touch`.
-
-```tsx
-<IressStack gap="lg">
-<IressCheckbox variant="card" heading="Widget">
-A description of the widget
-</IressCheckbox>
-<IressCheckbox variant="touch">
-Touch variant
-</IressCheckbox>
-</IressStack>
-```
-
-[View "Variants" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-checkbox--variants)
-
-## Testing
+### Testing
 
 Query checkboxes by their accessible role:
 
@@ -137,7 +116,7 @@ Query checkboxes by their accessible role:
 const checkbox = screen.getByRole('checkbox', { name: 'Accept terms' });
 ```
 
-### Gotchas
+#### Gotchas
 
 - **readOnly mode**: When `readOnly` is set, the checkbox role is removed from
   the DOM entirely. Only the text label and a hidden `<input>` remain. If the
@@ -145,15 +124,63 @@ const checkbox = screen.getByRole('checkbox', { name: 'Accept terms' });
 - **indeterminate state**: An indeterminate checkbox starts unchecked
   (`not.toBeChecked()`). Clicking it transitions to checked.
 
-### Test IDs
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs#testing)
 
-When you pass a `data-testid` to `IressCheckbox`, the following nested test IDs
-are generated automatically:
 
-| Suffix | Example | Description |
-| --- | --- | --- |
-| `checkboxMark` | `my-checkbox__checkboxMark` | The visual checkbox indicator |
+#### Test selectors
+
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root wrapper element | — | `checkbox` |
+| input | The checkbox input element | — | `checkbox__input` |
+| checkboxMark | The visual checkbox indicator | — | `checkbox__checkboxMark` |
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs)
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs)
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Unchecked | Checkbox is empty, clicking toggles to checked |
+| Checked | Checkbox shows a tick mark, clicking toggles to unchecked |
+| Indeterminate | Checkbox shows a dash (visual only), clicking transitions to checked |
+| Read only (checked) | Renders label text and hidden input only |
+| Read only (unchecked) | Renders nothing |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **4.1.2 Name, Role, Value** — Uses `role="checkbox"` with `aria-checked` state
+- **1.3.1 Info and Relationships** — Label is programmatically associated via `<label>`
+- **2.1.1 Keyboard** — Checkbox is focusable and togglable via keyboard
+
+**Keyboard interaction:**
+
+| Key | Action |
+|-----|--------|
+| `Space` | Toggles the checkbox checked state |
+| `Tab` | Moves focus to the next focusable element |
+
+### Edge cases
+
+- **readOnly + unchecked**: Renders nothing — no DOM element present
+- **indeterminate**: Purely visual; `aria-checked` reports the actual checked state
+- **Within CheckboxGroup**: `checked` prop is ignored; group `value` controls state
+- **hiddenLabel**: Label text exists for screen readers but is visually hidden
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs)

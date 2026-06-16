@@ -1,120 +1,105 @@
-# 
-> **Component:** `import { IressTag } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)```tsx
-```
+# Tag
 
-## Quick Start
+> Displays a compact label for categorisation, filtering, or metadata.
+
+## Import
 
 ```tsx
-<IressTag>
-  Label
-</IressTag>
+import { IressTag } from '@iress-oss/ids-components';
 ```
 
-## When to use
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Tag)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tag&title=[Tag]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tag,enhancement&title=[Tag]+Feature:+)
 
-Use tags for **categorization and selection** where users need to interact with items:
+Tags represent individual units in a group of selected items.
 
-- Displaying selected items in multi-select interfaces
-- Managing email recipients or domains
-- Showing applied filters that can be removed
-- Categorizing content with removable labels
-- Any scenario where users need to add or remove items from a collection
+<StoryEmbed id="components-tag--mode"/>
 
-Tags are **interactive** - they can be clicked and deleted by users.
+## Design
 
-**Not sure?** If you need to display status or highlight information without user interaction, use [Pill](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs) instead.
+### When to use
 
-## Usage
+- **Multi-select display**: Showing selected items in multi-select interfaces
+- **Email recipients or domains**: Managing collections of addresses
+- **Applied filters**: Showing removable filter criteria
+- **Categorization**: Labelling content with removable categories
+
+Tags are **interactive** — they can be clicked and deleted by users.
+
+### When not to use
+
+- **Status indicators** — use [Pill](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-pill--docs) for non-interactive status badges or category labels
+- **Action buttons** — use [Button](../components/button.md) or [ButtonGroup](../components/button-group.md) for triggering actions
+- **Navigation items** — use [Link](../components/link.md) or navigation patterns
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Use `element="button"` explicitly for clickable tags | Rely on `onClick` alone to make tags interactive |
+| Use semantic status modes (`danger`, `info`) for system states | Use status colours for decorative categorisation (use data palette `10`–`90`) |
+| Use `compact` in dense layouts (e.g. inside inputs) | Mix compact and regular tags in the same context |
+| Provide `deleteButtonText` for accessible delete labels | Use generic "Delete" text when context is needed |
+
+### Content guidelines
+
+- **Label**: Keep tag text short (1–3 words) and meaningful
+- **Delete label**: Use `deleteButtonText` to provide context (e.g. "Remove john@example.com")
+- **Colour**: Use data palette colours (`10`–`90`) for non-semantic categorisation; reserve status colours for system states
+
+### Related patterns
+
+- [Select](../components/select.md) — for selecting from an existing list (use `multiple` prop for multi-select with tags)
+- [Pill](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-pill--docs) — for non-interactive status/category display
+- [TagInput](#iresstagsinput) — for free-form tag entry
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressTag } from '@iress-oss/ids-components';
+
+<IressTag>Label</IressTag>
+```
+
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs#api-props)
 
 ### Mode
 
-The `mode` prop controls the colour scheme of the tag. Use data palette colours (`10`-`90`) for non-semantic colour needs.
+The `mode` prop controls the colour scheme of the tag. Use data palette colours (`10`–`90`) for non-semantic colour needs.
 
-```tsx
-<IressInline gap="sm">
-{BADGE_MODES.map((mode) => (
-<IressTag key={mode} mode={mode}>
-{mode}
-</IressTag>
-))}
-</IressInline>
-```
-
-[View "Mode" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--mode)
+<StoryEmbed id="components-tag--mode"/>
 
 ### Status mode
 
 Use semantic status values (`danger`, `info`, `success`, `warning`) when tags need to communicate a system status.
 
-```tsx
-<IressInline gap="sm">
-{STATUSES.map((status) => (
-<IressTag key={status} mode={status}>
-{status}
-</IressTag>
-))}
-</IressInline>
-```
-
-[View "Status" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--status)
+<StoryEmbed id="components-tag--status"/>
 
 ### Bordered tags
 
-Set `bordered` to render a tag with a visible border using the tag's current
-colour, without altering its background. This enhances visibility and makes tags
-look more interactive — useful for dropdown filter tags or any context where
-tags need to stand out.
+Set `bordered` to render a tag with a visible border using the tag's current colour, without altering its background. This enhances visibility and makes tags look more interactive — useful for dropdown filter tags or any context where tags need to stand out.
 
-```tsx
-<IressInline gap="sm">
-<IressTag bordered>
-No mode
-</IressTag>
-{BADGE_MODES.map((mode) => (
-<IressTag key={mode} mode={mode} bordered>
-{mode}
-</IressTag>
-))}
-{STATUSES.map((status) => (
-<IressTag key={status} mode={status} bordered>
-{status}
-</IressTag>
-))}
-</IressInline>
-```
-
-[View "Bordered" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--bordered)
+<StoryEmbed id="components-tag--bordered"/>
 
 ### Clickable tags
 
-Tags can be made clickable by setting `element="button"`. This is the
-recommended, explicit API and renders the tag as a `<button>` with hover
-styles to indicate it is clickable.
+Tags can be made clickable by setting `element="button"`. This is the recommended, explicit API and renders the tag as a `<button>` with hover styles to indicate it is clickable.
 
-For backwards compatibility, passing `onClick` without setting `element` is
-also supported and will automatically render the tag as a `<button>`.
+For backwards compatibility, passing `onClick` without setting `element` is also supported and will automatically render the tag as a `<button>`.
 
 Use `element="a"` to render the tag as a link.
 
-```tsx
-<IressTag bordered>
-  Tag
-</IressTag>
-```
-
-[View "ClickableTag" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--clickable-tag)
+<StoryEmbed id="components-tag--clickable-tag"/>
 
 ### Compact tags
 
-Set `compact` to render a smaller tag. This is useful in dense layouts, such as
-inside inputs where tags are displayed inline.
+Set `compact` to render a smaller tag. This is useful in dense layouts, such as inside inputs where tags are displayed inline.
 
-```tsx
-<IressTag compact />
-```
-
-[View "Compact" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--compact)
+<StoryEmbed id="components-tag--compact"/>
 
 ### Deleting tags
 
@@ -122,31 +107,23 @@ The delete button will not automatically remove the tag from the screen. Instead
 
 The text a screen reader will announce defaults to "Delete" but can be changed using the `deleteButtonText` prop.
 
-```tsx
-<TagDeletion />
-```
-
-[View "DeletingTags" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--deleting-tags)
+<StoryEmbed id="components-tag--deleting-tags"/>
 
 ### Custom button
 
 You can completely override the delete button by passing a custom component to the `deleteButton` prop.
 
-[View "CustomButton" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag--custom-button)
+<StoryEmbed id="components-tag--custom-button"/>
 
-## IressTagInput
+### IressTagInput
 
 `IressTagInput` allows you to manage multiple tags, and is often used for managing email addresses, domains or other simple metadata that does not have to be selected from a list.
 
-If you need to manage tags that are selected from a existing list, use `IressSelect` with the `multiple` prop.
+If you need to manage tags that are selected from an existing list, use `IressSelect` with the `multiple` prop.
 
-```tsx
-<IressTagInput placeholder="Type and hit enter to add a tag" tagLimit={999} />
-```
+<StoryEmbed id="components-tag-input--tag-input"/>
 
-[View "TagInput" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tag-input--tag-input)
-
-## Testing
+### Testing
 
 Query tags by their text content:
 
@@ -172,15 +149,67 @@ For deletable tags, query the delete button:
 const deleteButton = screen.getByRole('button', { name: 'Delete Category' });
 ```
 
-### Test IDs
+**Test IDs:**
 
-When you pass a `data-testid` to `IressTag`, the following nested test IDs are
-generated automatically:
+When you pass a `data-testid` to `IressTag`, the following nested test IDs are generated automatically:
 
 | Suffix | Example | Description |
 | --- | --- | --- |
 | `delete-button__button` | `my-tag__delete-button__button` | The tag delete button |
 
+
+#### Test selectors
+
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root element of the tag | — | `tag` |
+| delete button | The tag delete button | — | `tag__delete-button__button` |
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs)
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | Renders as a static `<span>` with label text |
+| Clickable (`element="button"`) | Renders as a `<button>` with hover/active styles |
+| Deletable | Shows a delete button that triggers `onDelete` callback |
+| Compact | Renders at smaller size for dense layouts |
+| Bordered | Adds a visible border using the tag's colour |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **4.1.2 Name, Role, Value** — Clickable tags render with `role="button"`; link tags with `role="link"`
+- **2.4.4 Link Purpose** — Tag labels should describe their content or category
+- **1.4.1 Use of Color** — Status is communicated via text label, not colour alone
+
+**Keyboard interaction:**
+
+| Key | Action |
+|-----|--------|
+| `Tab` | Moves focus to the tag (if clickable) or delete button |
+| `Enter` / `Space` | Activates the tag click or delete action |
+
+### Edge cases
+
+- **Empty label**: Renders a tag with only the delete button — always provide meaningful text
+- **Many tags**: Wrap in a scrollable container or use pagination to avoid overwhelming the user
+- **Long labels**: Text truncates with ellipsis when exceeding available width
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs)

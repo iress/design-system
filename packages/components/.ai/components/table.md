@@ -1,421 +1,193 @@
-# 
-> **Component:** `import { IressTable } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)```tsx
-```
+# Table
 
-## Quick Start
+> Displays structured data in rows and columns.
 
-```tsx
-<IressTable caption="Data table" />
-```
-
-## Usage
-
-### Automatic columns
-
-To get started, the `IressTable` component only requires the `caption` and `rows` props to be set.
-
-- `caption` a string describing what the table is displaying (required for accessibility, it can be visually hidden by setting the `hiddenCaption` prop).
-- `rows` are an array of objects, each object represents a row in the table. The table will use the key of the first object to determine the columns, automatically made human readable if the key is camel case, snake case or kebab case.
+## Import
 
 ```tsx
-<IressTable caption="My investments" />
+import { IressTable } from '@iress-oss/ids-components';
 ```
 
-[View "AutomaticColumns" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--automatic-columns)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Table)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=table&title=[Table]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=table,enhancement&title=[Table]+Feature:+)
 
-### Custom columns
+Data driven component for displaying tabular data.
 
-For more control over the columns, the `columns` prop can be used to define the columns. This accepts an array of `TableColumn` objects.
+<StoryEmbed id="components-table--automatic-columns"/>
 
-Each array item represents a key in the objects in your `rows` prop. If one of the keys in your `rows` prop is not defined in the `columns` prop, it will not be displayed in the table.
+## Design
+
+### When to use
+
+- **Structured data**: Displaying rows of related data with consistent columns
+- **Comparison**: Allowing users to compare values across rows
+- **Data-heavy views**: Presenting large datasets with sorting, filtering, and formatting
+- **Reports**: Tabular output for financial, analytical, or administrative data
+
+### When not to use
+
+- **Key-value pairs** — use a description list or simple layout
+- **Card-based layouts** — use cards when each item has distinct visual treatment
+- **Single column lists** — use a list component instead
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Always provide a `caption` for accessibility | Omit captions — screen readers need them |
+| Use appropriate column formats (currency, date, etc.) | Display raw unformatted data |
+| Enable sorting on columns where comparison matters | Enable sorting on every column by default |
+| Use virtualisation for large datasets (hundreds+ rows) | Render thousands of rows without virtualisation |
+
+### Content guidelines
+
+- **Caption**: Every table must have a `caption` for accessibility. When the surrounding context already makes the table's purpose obvious (e.g. a heading directly above), use `hiddenCaption` to visually hide the caption while keeping it accessible to screen readers.
+- **Column labels**: Keep concise, use sentence case
+- **Empty state**: Provide helpful message when no data matches filters
+- **Numeric alignment**: Currency and number columns auto-align right for readability
+
+### Related patterns
+
+- [Skeleton](../components/skeleton.md) — for table loading placeholders
+- [Loading pattern](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs) — for loading states with tables
+
+## Develop
+
+### Quick Start
 
 ```tsx
-<TableCustomColumns />
+import { IressTable } from '@iress-oss/ids-components';
+
+<IressTable caption="Data table" rows={[{ name: 'Alice', age: 30 }]} />
 ```
 
-[View "CustomColumns" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--custom-columns)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs#api-props)
 
-### Column API
+### Usage
 
-These are the configuration options available for each column.
+#### Automatic columns
 
-**Note:** The `id` prop has been removed. The `key` is always used for the id of the table cell, alongside its row index.
+Only `caption` and `rows` are required. Columns are derived from the keys of the first row object.
 
-```ts
-export interface TableColumn<TRow extends object, TVal = unknown> {
-  /**
-   * Aligns the content of the cell.
-   * @default left
-   */
-  align?: TableColumnAligns;
+<StoryEmbed id="components-table--automatic-columns"/>
 
-  /**
-   * The currency code to prefix to the value if `format` is set to currency.
-   * @default $
-   */
-  currencyCode?: string;
+#### Custom columns
 
-  /**
-   * When set to true, a divider will be rendered after the column.
-   */
-  divider?: boolean;
+Use the `columns` prop for full control over which columns display and how.
 
-  /**
-   * Enables column filtering. Set to `true` to enable with defaults, or pass
-   * a `TableColumnFilter` object to configure filtering options.
-   *
-   * When enabled, a filter icon will appear in the column header, and clicking
-   * it will open a panel showing unique column values as checkboxes.
-   *
-   * The `TableColumnFilter` object accepts:
-   * - `defaultValue`: Pre-filters the column with these values on initial render.
-   * - `filterableText`: Screen reader text for the filter button (defaults to "filterable").
-   * - `filterFn`: Custom filter function or a built-in TanStack filter function name to override the default matching logic.
-   * - `format`: Custom display for filter dropdown options. Falls back to the column's `format`.
-   * - `values`: Explicit list of filter options. When provided, these are used instead of deriving values from the data.
-   */
-  filter?: boolean | TableColumnFilter;
+<StoryEmbed id="components-table--custom-columns"/>
 
-  /**
-   * Formats the cell content.
-   * To use the in-built formatters, set this to: string, number, date, currency, percent.
-   * Use a custom formatter by passing a function that returns a ReactNode.
-   */
-  format?: TableCellFormats | ((value: TVal, row?: TRow) => ReactNode);
+#### Formats
 
-  /**
-   * The unique key for the column.
-   */
-  key: string;
+Built-in formatters: `date`, `currency`, `percent`, `number`, `shortDate`, `isoDateTime`, `relativeTime`. Or pass a custom function returning a ReactNode.
 
-  /**
-   * The label for the column header.
-   */
-  label?: ReactNode;
+<StoryEmbed id="components-table--formats"/>
 
-  /**
-   * When set to true, the column will be sortable.
-   * Setting it to either `asc` or `desc` will set the initial sort order.
-   */
-  sort?: boolean | SortDirection;
+#### Sorting
 
-  /**
-   * Text to be read by a screen reader when a column is sortable (but not currently sorted).
-   * @default sortable
-   */
-  sortableText?: string;
+Enable with `sort: true` on a column. Set to `asc` or `desc` for initial sort direction.
 
-  /**
-   * The width of the column.
-   */
-  width?: string;
-}
-```
+<StoryEmbed id="components-table--sorting"/>
 
-## Examples
+#### Custom sorting logic
 
-### Formats
+Use `sortFn` for custom sort — pass a built-in name or a custom comparison function.
 
-The table component provides some basic formatting. This is controlled by the `format` property of the `TableColumn` object.
+<StoryEmbed id="components-table--custom-sorting-logic"/>
 
-- `date`: the value (which can be a Date object, timestamp or a ISO8601 formatted string) will be formatted to render as DD/MM/YYYY.
-- `currency`: the value (which should be a number or a string containing a number) is formatted with the `currencyCode` (also a prop on `TableColumn` which defaults to `$`) prepended to the number (formatted to 2 decimal places). Currency formatted columns are automatically right aligned for readability.
-- `percent`: the value (which should be a number or a string containing a number) is formatted as a percentage (multiplied by 100 and rounded to 2 decimal places).
-- `number`: the number format aligns the number to the right, and converts strings to a number.
-- `shortDate`: the value (which can be a Date object, timestamp or a ISO8601 formatted string) will be formatted to render as DD MMM YYYY.
-- `isoDateTime`: the value (which can be a Date object, timestamp or a ISO8601 formatted string) will be formatted to render as YYYY-MM-DD HH:mm:ss (Timezone)
-- `relativeTime`: the value (which can be a Date object, timestamp or a ISO8601 formatted string) will be formatted to render as a relative time (eg. 2 days ago, 3 hours ago, etc). It will fallback to the `shortDate` format if the date is more than one week in the past.
+#### Filtering
 
-To completely customise it, you can also send in a function that returns a ReactNode. It has two parameters, the original value and the row it is connected to.
+Enable with `filter: true` on a column, or pass a `TableColumnFilter` object for control over default values, custom filter functions, and explicit option lists.
 
-```tsx
-<TableFormats />
-```
-
-[View "Formats" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--formats)
-
-### Sorting
-
-Sorting can be enabled on a column by setting the `sort` property of the `TableColumn` to true. It can also be set to `asc` or `desc` if you would like it to initally sort in a certain direction.
-
-The sort button has some visually hidden text for screenreaders to signify that the column is sortable. If you need to change this (ie. for translation purposes), it can be done with the `sortableText` column option which defaults to: sortable.
-
-```tsx
-<TableSorting />
-```
-
-[View "Sorting" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--sorting)
-
-### Custom sorting logic
-
-By default, sorting is automatically inferred from the raw column values.
-
-If you need to customise the sorting logic, you can use the `sortFn` property of the `TableColumn`. It accepts one of the following values:
-
-- A `string` referencing a built-in sort function: `alphanumeric`, `alphanumericCaseSensitive`, `text`, `textCaseSensitive`, `datetime` and `basic`. To understand how they work, visit the [Tanstack Table documentation](https://tanstack.com/table/v8/docs/api/features/sorting/#sorting-functions).
-- A custom sort function that takes two arguments: `a` and `b`, which are the two rows being compared. It should return `-1`, `0` or `1` depending on the comparison.
-
-```tsx
-<TableSortingFn />
-```
-
-[View "CustomSortingLogic" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--custom-sorting-logic)
-
-### Filtering
-
-Filtering can be enabled on a column by setting the `filter` property of the `TableColumn` to `true` for default behaviour, or to a `TableColumnFilter` object for more control.
-
-When enabled, a filter icon will appear in the column header, and clicking it opens a popover with the unique column values as checkboxes. Users can select one or more values to filter the table rows.
-
-The `TableColumnFilter` object accepts the following options:
-
-- `defaultValue`: An array of string values to pre-filter the column on initial render. The user can still clear or change the filter interactively.
-- `filterableText`: Screen reader text for the filter button. Defaults to "filterable". Useful for translation purposes.
-- `filterFn`: The filter function to use for this column. Can be a custom function that receives `(row, columnId, filterValue)` and returns `true`/`false`, or the name of a built-in TanStack filter function: `includesString`, `includesStringSensitive`, `equalsString`, `equalsStringSensitive`, `arrIncludes`, `arrIncludesAll`, `arrIncludesSome`, `equals`, `weakEquals`, `inNumberRange`. Set to `false` to disable client-side filtering entirely (useful for server-side filtering). See the [TanStack Table filtering documentation](https://tanstack.com/table/v8/docs/api/features/column-filtering#filterfn) for details.
-- `format`: Customises the display of filter option values in the dropdown. When not provided, falls back to the column's `format`. Accepts the same built-in formatters (`string`, `number`, `date`, `currency`, `percent`) or a custom function returning a ReactNode.
-- `onChange`: Called whenever the selected filter values change. Receives an array of selected values (empty array when cleared). Useful for triggering server-side data fetching.
-- `values`: Explicit list of values to show in the filter dropdown. When provided, these are used instead of deriving values from the column data. Useful for stable filter options, server-side filtering, or showing all possible values regardless of current data.
-
-> **Note:** Column filtering is designed for selecting from discrete values. For more complex filtering needs (e.g., text search input, date ranges, or combining multiple filter criteria), use `IressDropdownMenu` with custom filter controls outside the table header.
-
-```tsx
-<TableFiltering />
-```
-
-[View "Filtering" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--filtering)
+<StoryEmbed id="components-table--filtering"/>
 
 #### Server-side filtering
 
-For server-side filtering, set `filterFn: false` to disable client-side row filtering and use `onChange` to fetch new data when the user changes the filter selection. Provide explicit `values` so the filter dropdown always shows the full set of options regardless of which rows are currently loaded.
+Set `filterFn: false` to disable client-side filtering. Use `onChange` to fetch new data and `values` for explicit options.
 
-Wrap the table in `IressLoading pattern="component"` to show a skeleton on initial load and an "Updating..." overlay on subsequent filter changes.
+<StoryEmbed id="components-table--server-side-filtering"/>
 
-```tsx
-<TableFilteringServerSide />
-```
+#### Width
 
-[View "ServerSideFiltering" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--server-side-filtering)
+Control column width via the `width` property. Horizontal scrollbar appears when the table exceeds container width.
 
-### Width
+<StoryEmbed id="components-table--width"/>
 
-The width of a column is controlled by the `width` property on the `TableColumn` object. It takes a string so it can be set to a pixel value or a percentage.
+#### Alignment
 
-When the table exceeds the width of the container, a horizontal scrollbar is triggered. This makes it possible to view larger tables on mobile devices.
+Columns can be aligned `left`, `right`, or `center`. Currency/number formats auto-align right.
 
-[View "Width" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--width)
+<StoryEmbed id="components-table--alignment"/>
 
-### Alignment
+#### Dividers
 
-Columns can be aligned using the `align` property on the `TableColumn` object. Columns can be aligned to the left, right or center.
+Set `divider: true` on a column to add a vertical border after it.
 
-Currency and number formats are automatically right aligned to make the values easier to compare, but this can be overriden by setting the `align` property.
+<StoryEmbed id="components-table--dividers"/>
 
-[View "Alignment" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--alignment)
+#### Highlight on hover
 
-### Dividers
+Enable row highlighting on hover with the `hover` prop.
 
-As a general rule we don't add vertical column borders to our tables. Sometimes though, it can be useful to add a vertical divider between columns to help group content and create visual separation.
+<StoryEmbed id="components-table--highlight-on-hover"/>
 
-To add a vertical divider you can set the `divider` prop in the `TableColumn` to true. This will add a vertical border to the end of the column.
+#### Hidden header
 
-[View "Dividers" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--dividers)
+Use `hiddenHeader` to visually hide the table header for simple data.
 
-### Highlight on hover
+<StoryEmbed id="components-table--hidden-header"/>
 
-This can be enabled by setting the `hover` prop. This will bring attention to the row the user is hovering over, allowing users to focus on the relationship between the columns of a specific row.
+#### Rich rows (JSX)
 
-```tsx
-<IressTable hover />
-```
+Use ReactNodes as cell values for links, buttons, or icons.
 
-[View "HighlightOnHover" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--highlight-on-hover)
+<StoryEmbed id="components-table--rich-rows"/>
 
-### Scope
+#### Empty state
 
-`scope` defaults to row, which means the first cell in the row will be a `<th>`. When it is set to col the first cell in the row will be a `<td>`.
+Use the `empty` prop to display content when there is no row data. Requires `columns` prop.
 
-```tsx
-<IressTable scope="col" />
-```
+<StoryEmbed id="components-table--empty-state"/>
 
-[View "Scope" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--scope)
+#### Static table
 
-### Hidden header
+Use `children` for a styled table without data-driven features. Only `caption`, `hiddenCaption`, `hiddenHeader`, and `hover` props are supported.
 
-For very simple tabular data, you have the option to hide the table header with the `hiddenHeader` prop. When this is set to true, the table header will not be rendered.
+<StoryEmbed id="components-table--static"/>
 
-```tsx
-<IressTable hiddenHeader />
-```
+#### Row props
 
-[View "HiddenHeader" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--hidden-header)
+Customise rows with `rowProps` — pass an object or a function receiving the row data.
 
-### Rich rows (JSX)
+<StoryEmbed id="components-table--row-props"/>
 
-The `rows` prop allows you to use `ReactNodes` as the value of a cell. This can be useful for adding rich content to a cell, such as links, buttons or icons.
+#### Compact
 
-**Note:** If you are using the `sort` property, the sorting may not work properly with rich content. If this happens, either remove the `sort` property or use the `format` prop on the column to set a custom formatter.
+The `compact` prop reduces padding and font size for dense data display.
 
-```tsx
-<IressTable caption="My rich investments" />
-```
+<StoryEmbed id="components-table--compact"/>
 
-[View "RichRows" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--rich-rows)
+#### Virtualisation
 
-### Empty state
+For large datasets, `virtualise` renders only visible rows. Accepts `true` or `{ height, overscan, estimateSize }`.
 
-You can provide the table with some content to display when there is no row data by using the `empty` prop.
+<StoryEmbed id="components-table--virtualised"/>
 
-This is reliant on `columns` prop to provide the information for the table header. If `columns` is not provided and there is no row data the table will not render.
+### Tables with grouped rows
 
-```tsx
-<IressTable empty="This table has no data" />
-```
+For tables with multiple groups of rows sharing the same columns.
 
-[View "EmptyState" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--empty-state)
+<StoryEmbed id="components-table-body--body"/>
 
-### Static table
+### Formatted values
 
-If you don't need all the fancy features of the table component, but would still like a styled table, you can use the `children` prop.
+Exposed component for formatting values the same way the table does.
 
-It accepts any of the table sub-elements. To ensure best display, please make use of the `thead` and `tbody` tags.
+<StoryEmbed id="components-table-formatted-value--formatted-value"/>
 
-**Note:** Only the `caption`, `hiddenCaption`, `hiddenHeader` and `hover` props are supported when using `children` to render a table.
-
-```tsx
-<IressTable caption="My investments" />
-```
-
-[View "Static" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--static)
-
-### Row props
-
-You can customise the rows by passing in a `rowProps` object or function. It accepts a map of table row props that can be passed to a `tr` element, or a function that accepts the row data currently being rendered, and returns a map of table props.
-
-[View "RowProps" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--row-props)
-
-### Compact
-
-The `compact` prop can be used to reduce the padding around the table cells and reduce the font size. This can be useful when you have a lot of data to display and allow users to see as many columns as possible.
-
-```tsx
-<IressTable scope="col" compact alternate removeRowBorders />
-```
-
-[View "Compact" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--compact)
-
-### Virtualisation
-
-For tables with large datasets (hundreds or thousands of rows), virtualisation
-renders only the visible rows to the DOM. This eliminates UI freezes during
-bulk state updates and keeps scrolling smooth.
-
-Enable it with the `virtualise` prop. The `virtualise` prop accepts `true` for defaults, or an options object:
-
-| Option         | Type               | Default | Description                                      |
-| -------------- | ------------------ | ------- | ------------------------------------------------ |
-| `height`       | `number \| string` | `400`   | Height of the scroll container (px or CSS value) |
-| `overscan`     | `number`           | `5`     | Extra rows rendered above/below the viewport     |
-| `estimateSize` | `number`           | `40`    | Estimated row height in pixels                   |
-
-**Requirements:**
-
-- The table container must have a bounded height (set via `height` option or
-  CSS on a parent). Without a fixed height, the browser cannot determine which
-  rows are visible.
-- Specify `width` on each column for stable column sizing. Without explicit
-  widths, columns may shift as rows with different content lengths scroll in
-  and out of view.
-- Sorting and filtering work normally with virtualisation enabled.
-- Screen readers announce the correct row position via `aria-rowcount` and
-  `aria-rowindex`.
-
-```tsx
-<TableVirtualised />
-```
-
-[View "Virtualised" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--virtualised)
-
-## `IressTableBody`
-
-In some cases you may have a table with multiple groups of rows inside it, however the columns are the same. For these cases, you can use the `IressTableBody` component.
-
-```tsx
-<TableGroupedRows />
-```
-
-[View "Body" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table-body--body)
-
-## `IressTableFormattedValue`
-
-`IressTableFormattedValue` is the component used to format the table columns when the `format` property is not a render function.
-
-It has been exposed so you can use it in your own components to format values in the same way as the table component.
-
-```tsx
-<IressTable
-caption="IressTableFormattedValue"
-rows={[
-{
-mode: 'string',
-example: <IressTableFormattedValue value="string" format="string" />,
-},
-{
-mode: 'number',
-example: <IressTableFormattedValue value="10000" format="number" />,
-},
-{
-mode: 'date',
-example: (
-<IressTableFormattedValue
-value={new Date('2025-11-14')}
-format="date"
-/>
-),
-},
-{
-mode: 'shortDate',
-example: (
-<IressTableFormattedValue
-value={new Date('2025-11-14')}
-format="shortDate"
-/>
-),
-},
-{
-mode: 'isoDateTime',
-example: (
-<IressTableFormattedValue
-value={new Date('2025-11-14')}
-format="isoDateTime"
-/>
-),
-},
-{
-mode: 'relativeTime',
-example: (
-<IressTableFormattedValue
-value={fourDaysAgo}
-format="relativeTime"
-/>
-),
-},
-{
-mode: 'currency',
-example: <IressTableFormattedValue value={10000} format="currency" />,
-},
-{
-mode: 'percent',
-example: <IressTableFormattedValue value={50} format="percent" />,
-},
-]}
-/>
-```
-
-[View "FormattedValue" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table-formatted-value--formatted-value)
-
-## Testing
+### Testing
 
 Query the table by its role:
 
@@ -423,18 +195,80 @@ Query the table by its role:
 const table = screen.getByRole('table', { name: 'Users' });
 ```
 
-### Test IDs
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs#testing)
 
-When you pass a `data-testid` to `IressTable`, the following nested test IDs
-are generated automatically:
 
-| Suffix | Example | Description |
-| --- | --- | --- |
-| `table` | `my-table__table` | The table element |
-| `caption` | `my-table__caption` | The table caption |
-| `thead` | `my-table__thead` | The table header section |
-| `tbody` | `my-table__tbody` | The table body section |
+#### Test selectors
+
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root element of the table | — | `table` |
+| table | The table element | — | `table__table` |
+| caption | The table caption | — | `table__caption` |
+| thead | The table header section | — | `table__thead` |
+| tbody | The table body section | — | `table__tbody` |
+| header row | A header row (uses dash separator) | — | `table__thead-row` |
+| body row | A body row | — | `table__row` |
+| cell | A table body cell | — | `table__cell__row_*__col_*` |
+| header | A column header cell | — | `table__header__*` |
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs)
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | Renders table with auto-generated or custom columns |
+| Sorted | Column sorted ascending or descending, indicated visually and to screen readers |
+| Filtered | Rows filtered by selected column values via popover checkboxes |
+| Virtualised | Only visible rows rendered to DOM; scrolling loads more |
+| Empty | Displays empty state content when no rows match |
+| Compact | Reduced padding and font size for dense layouts |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **1.3.1 Info and Relationships** — Uses semantic `<table>`, `<thead>`, `<tbody>`, `<th>`, `<td>` elements
+- **4.1.2 Name, Role, Value** — Caption provides accessible name; sort state announced
+- **2.1.1 Keyboard** — Sort and filter controls are keyboard accessible
+
+**ARIA attributes:**
+
+| Element | Attribute | Description |
+|---------|-----------|-------------|
+| Table | `aria-rowcount` | Total row count (virtualised tables) |
+| Row | `aria-rowindex` | Row position (virtualised tables) |
+| Sort header | `aria-sort` | Current sort direction |
+| Column header | `scope="col"` or `scope="row"` | Identifies header scope |
+
+### Keyboard interaction
+
+| Key | Action |
+|-----|--------|
+| `Enter` / `Space` | Activates sort button or filter button in column header |
+| `Tab` | Moves focus between interactive elements (sort/filter buttons) |
+| `Escape` | Closes filter popover |
+
+### Edge cases
+
+- **Virtualisation requires fixed height**: Without a bounded container height, all rows render
+- **Rich row sorting**: Custom `sortFn` needed when cells contain JSX
+- **Column width stability**: Set explicit `width` on columns when using virtualisation
+- **Server-side filtering**: Set `filterFn: false` and handle data fetching in `onChange`
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs)

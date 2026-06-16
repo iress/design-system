@@ -1,61 +1,98 @@
-# 
-> **Component:** `import { IressReadonly } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs)```tsx
-```
+# Readonly
 
-## Quick Start
+> Displays a form value in a non-editable, read-only format.
+
+## Import
 
 ```tsx
+import { IressReadonly } from '@iress-oss/ids-components';
+```
+
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-readonly--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Readonly)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=readonly&title=[Readonly]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=readonly,enhancement&title=[Readonly]+Feature:+)
+
+Readonly displays a value that cannot be edited by the user. It renders a hidden input field to ensure the value is submitted with the form.
+
+<StoryEmbed id="components-readonly--rich-content"/>
+
+## Design
+
+### When to use
+
+- **Displaying form values**: Show submitted or pre-populated data the user cannot change
+- **Permission-restricted fields**: Display values the current user doesn't have permission to edit
+- **Confirmation views**: Show collected data before final submission
+- **Inline read-only data**: Display values alongside editable form fields
+
+### When not to use
+
+- **Static text** that isn't part of a form — use [Text](../components/text.md) instead
+- **Disabled fields** that may become editable — use a disabled input state instead
+- **Displaying status** — use [Alert](../components/alert.md) or [Tag](../components/tag.md) instead
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Use `variant="locked"` for permission-restricted values | Use readonly for fields the user will later edit |
+| Provide `actions` for copy-to-clipboard or related actions | Add edit actions that navigate away from the current view |
+| Use `children` for rich content that represents the value | Put interactive form controls inside a readonly field |
+
+### Content guidelines
+
+- **Value text**: Display the actual form value clearly — avoid abbreviations unless space-constrained
+- **Actions**: Use icon-only buttons (e.g. copy, view) to keep the layout compact
+- **Labels**: Always pair with a form label via `IressField` for accessibility
+
+### Related patterns
+
+- [Input](../components/input.md) — for editable text input
+- [Text](../components/text.md) — for static display text outside forms
+- [Field](../components/field.md) — for labelling form controls including readonly
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressReadonly } from '@iress-oss/ids-components';
+
 <IressReadonly value="AU" />
 ```
 
-## Examples
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-readonly--docs#api-props)
 
-### Rich Content
+### Usage
+
+#### Rich Content
 
 You can pass in stylised content that represents the value by using the `children` prop. If no `children` is provided, it will display the `value` directly.
 
-[View "RichContent" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-readonly--rich-content)
+<StoryEmbed id="components-readonly--rich-content"/>
 
-### Inline
+#### Inline
 
 You can make the prepend/append element closer to the input content using the `inline` prop.
 
-```tsx
-<IressReadonly inline />
-```
+<StoryEmbed id="components-readonly--inline-style"/>
 
-[View "InlineStyle" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-readonly--inline-style)
-
-### Actions
+#### Actions
 
 The `actions` prop allows you to add buttons next to the readonly field. These can be used to trigger actions related to the displayed value, such as copying it to the clipboard or opening an edit dialog.
 
-```tsx
-<ReadonlyEditToggle />
-```
+<StoryEmbed id="components-readonly--actions"/>
 
-[View "Actions" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-readonly--actions)
+#### Locked
 
-### Locked
+Use `variant="locked"` to indicate the value is read-only due to permissions. This applies disabled-like styling (greyed out, `not-allowed` cursor) and still submits the value via a hidden input, but the locked field itself is not focusable or announced as an editable form control by assistive technologies.
 
-Use `variant="locked"` to indicate the value is read-only due to permissions.
-This applies disabled-like styling (greyed out, `not-allowed` cursor) and
-still submits the value via a hidden input, but the locked field itself is
-not focusable or announced as an editable form control by assistive
-technologies.
+When form controls such as `IressInput` or `IressSelect` are rendered with `readOnly="locked"`, they automatically pass the locked variant through to `IressReadonly`.
 
-When form controls such as `IressInput` or `IressSelect` are rendered with
-`readOnly="locked"`, they automatically pass the locked variant through to
-`IressReadonly`.
+<StoryEmbed id="components-readonly--locked"/>
 
-```tsx
-<IressReadonly value="AU" variant="locked" />
-```
-
-[View "Locked" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-readonly--locked)
-
-## Testing
+### Testing
 
 Query the readonly display by its text content:
 
@@ -63,21 +100,61 @@ Query the readonly display by its text content:
 const value = screen.getByText('Read-only value');
 ```
 
-### Gotchas
+**Gotchas:**
 
-- **No input role**: `IressReadonly` does not render a visible input element.
-  The value is displayed as plain text. A hidden `<input>` preserves the form
-  value but is not queryable by role.
+- **No input role**: `IressReadonly` does not render a visible input element. The value is displayed as plain text. A hidden `<input>` preserves the form value but is not queryable by role.
 
-### Test IDs
 
-When you pass a `data-testid` to `IressReadonly`, the following nested test IDs
-are generated automatically:
+#### Test selectors
 
-| Suffix | Example | Description |
-| --- | --- | --- |
-| `input` | `my-readonly__input` | The hidden input element |
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root element of the readonly | — | `readonly` |
+| input | The hidden input element | — | `readonly__input` |
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs)
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-readonly--docs)
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | Displays the `value` as plain text with a hidden `<input>` for form submission |
+| Rich content | Displays `children` visually while submitting the `value` via hidden input |
+| Inline | Prepend/append elements are positioned closer to the content |
+| Locked | Greyed out styling with `not-allowed` cursor; not focusable |
+| With actions | Displays action buttons adjacent to the readonly value |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **1.3.1 Info and Relationships** — Should be paired with a label via `IressField` to provide context
+- **4.1.2 Name, Role, Value** — Hidden input preserves form value; visible text is presentational
+
+**Keyboard interaction:**
+
+| Key | Action |
+|-----|--------|
+| `Tab` | Moves focus to action buttons (if present); skips the readonly value itself |
+
+### Edge cases
+
+- **Empty value**: Renders an empty text area — consider showing a placeholder like "—" or "Not set"
+- **Locked variant**: Not focusable by keyboard; assistive technologies skip it entirely
+- **Long values**: Text wraps within the container; no truncation by default
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-readonly--docs)

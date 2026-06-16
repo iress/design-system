@@ -36,7 +36,13 @@ export function stripMdx(source: string, keepStoryEmbeds = false): string {
         // Remove standalone JSX components (full line)
         if (/^\s*<Metadata[^/]*\/>/.test(line)) return '';
         if (/^\s*<Breakpoints\s*\/>/.test(line)) return '';
-        if (/^\s*<IressButton[\s\S]*<\/IressButton>/.test(line)) return '';
+        // Convert <IressButton href="url">text</IressButton> to [text](url)
+        if (/<IressButton/.test(line)) {
+          return line.replace(
+            /<IressButton[^>]*href="([^"]+)"[^>]*>([^<]+)<\/IressButton>/g,
+            '[$2]($1)',
+          );
+        }
 
         if (!keepStoryEmbeds && /^\s*<StoryEmbed[^/]*\/>/.test(line)) return '';
 

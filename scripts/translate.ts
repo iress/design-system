@@ -16,6 +16,7 @@
  */
 
 import { translateGuides } from './translate/guides';
+import { translateComponents } from './translate/components';
 import { translateTokens } from './translate/tokens';
 import { translateSkills } from './translate/skills';
 import { generateLlmsTxt } from './translate/llms-txt';
@@ -26,9 +27,7 @@ import { generateFullReference } from './translate/full-reference';
 const args = process.argv.slice(2);
 
 const commands: Record<string, () => Promise<void>> = {
-  '--components': async () => {
-    console.log('  (Phase B — not yet implemented)');
-  },
+  '--components': translateComponents,
   '--guides': translateGuides,
   '--tokens': translateTokens,
   '--skills': translateSkills,

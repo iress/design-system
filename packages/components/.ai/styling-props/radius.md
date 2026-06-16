@@ -17,3 +17,5 @@ In some cases you may need to remove the border-radius to achieve design require
 <StoryEmbed id="styling-props-radius--no-border-radius" />
 
 ---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-radius--docs)

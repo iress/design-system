@@ -48,3 +48,5 @@ The `srOnly` prop is responsive, allowing you to show content on larger screens 
 - [Accessibility foundations](../foundations/accessibility.md) — Key practices and principles for building accessible components in IDS
 
 ---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-accessibility--docs)

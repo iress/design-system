@@ -1,36 +1,78 @@
-# 
-> **Component:** `import { IressImage } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs)```tsx
-```
+# Image
 
-## Quick Start
+> Renders a responsive image with optional fallback and loading behaviour.
+
+## Import
 
 ```tsx
-<IressImage src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp" alt="Placeholder image" />
+import { IressImage } from '@iress-oss/ids-components';
 ```
 
-## Examples
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-image--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Image)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=image&title=[Image]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=image,enhancement&title=[Image]+Feature:+)
 
-### MaxWidth
+IressImage renders an image that resizes based on the user's screen width. The component accepts standard image attributes like `src` and `alt`.
+
+<StoryEmbed id="components-image--default"/>
+
+## Design
+
+### When to use
+
+- **Responsive images**: Display photos or illustrations that adapt to screen size
+- **Avatars and thumbnails**: Small images within cards, lists, or profiles
+- **Content imagery**: Supporting visuals within articles or documentation
+
+### When not to use
+
+- **Icons or symbols** — use [Icon](../components/icon.md) for scalable iconography
+- **Decorative backgrounds** — use CSS `background-image` instead
+- **Charts or data visualisations** — use a dedicated charting library
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Always provide meaningful `alt` text | Leave `alt` empty for informational images |
+| Export images at the largest required size | Use `maxWidth` to downscale oversized source images |
+| Use appropriate image formats (WebP for photos) | Use PNG for complex photographs |
+
+### Content guidelines
+
+- **`alt` text**: Describe the image content concisely — what it shows, not what it looks like technically
+- **Decorative images**: Set `alt=""` for images that don't add informational value
+- **File naming**: Use descriptive file names to support SEO and maintainability
+
+### Related patterns
+
+- [Icon](../components/icon.md) — for scalable UI iconography
+- [Skeleton](../components/skeleton.md) — for image loading placeholders
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressImage } from '@iress-oss/ids-components';
+
+<IressImage src="https://example.com/photo.webp" alt="Placeholder image" />
+```
+
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-image--docs#api-props)
+
+### Usage
+
+#### Max width
 
 `maxWidth` accepts formats like `70 (numbers)` `250px (pixels)` `50% (percentages)` `undefined (fall back to default 100%)`, allowing you to display the image smaller than its original size, yet still responsive on smaller screen sizes.
 
 **Note:** Please consider not using this prop, but rather exporting images at the largest size required for your application (the maximum width).
 
-```tsx
-<IressStack gap="md">
-{MAX_WIDTHS.map((width, index) => (
-<React.Fragment key={index}>
-<IressText element="h3">{width ?? 'undefined'}</IressText>
-<IressImage maxWidth={width} />
-</React.Fragment>
-))}
-</IressStack>
-```
+<StoryEmbed id="components-image--max-width"/>
 
-[View "MaxWidth" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-image--max-width)
-
-## Testing
+### Testing
 
 Query images by their `alt` text:
 
@@ -38,6 +80,46 @@ Query images by their `alt` text:
 const image = screen.getByRole('img', { name: 'Company logo' });
 ```
 
+
+#### Test selectors
+
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root element of the image | — | `image` |
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs)
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-image--docs)
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | Renders at 100% width of container, maintaining aspect ratio |
+| With `maxWidth` | Constrains to specified width while remaining responsive |
+| Broken `src` | Browser default broken image indicator is shown |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **1.1.1 Non-text Content** — Requires `alt` attribute for screen reader announcement
+- **1.4.5 Images of Text** — Do not use images to display text content
+
+**Keyboard interaction:**
+
+Images are not interactive. When wrapped in a link or button, the parent element handles keyboard interaction.
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-image--docs)

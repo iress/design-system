@@ -1,88 +1,112 @@
-# 
-> **Component:** `import { IressSkeleton } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)```tsx
-```
+# Skeleton
 
-## Quick Start
+> Renders placeholder shapes to indicate content is loading.
+
+## Import
 
 ```tsx
+import { IressSkeleton } from '@iress-oss/ids-components';
+```
+
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Skeleton)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=skeleton&title=[Skeleton]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=skeleton,enhancement&title=[Skeleton]+Feature:+)
+
+Skeletons can increase perceived performance for users. As opposed to spinners, skeletons make it feel as though things are happening immediately, then the information is incrementally displayed on the screen.
+
+<StoryEmbed id="components-skeleton--mode"/>
+
+## Design
+
+### When to use
+
+> **Prefer [IressLoading](../patterns/loading.md)** — the Loading pattern handles skeleton display automatically with built-in timing, fade-in, and accessibility. Use `IressSkeleton` directly only when you need a custom skeleton layout that `IressLoading` doesn't support.
+
+- **Custom skeleton layouts**: When `IressLoading` templates (`page`, `form`, `dashboard`) don't match your layout
+- **Inline placeholders**: Individual skeleton elements within a larger component (e.g. an avatar placeholder)
+- **Composition**: Building blocks for custom loading templates passed to `IressLoading`'s `template` prop
+
+### When not to use
+
+- **Indeterminate actions** with no layout structure — use [Spinner](../components/spinner.md) instead
+- **Blocking full-page loads** — use [Progress](../components/progress.md) for determinate progress
+- **Content that loads instantly** — avoid skeleton flash for fast responses
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Match the skeleton shape to the actual content layout | Use a single generic rectangle for all loading states |
+| Use `text` mode with matching `textVariant` for text content | Show skeletons for longer than 3 seconds without explanation |
+| Transition smoothly from skeleton to real content | Animate skeletons with jarring effects |
+| Keep skeleton layouts stable to avoid layout shift | Change layout dimensions when real content appears |
+
+### Content guidelines
+
+- Skeletons are visual-only — no text content is needed
+- Ensure the skeleton matches the dimensions of the final content
+- Use `aria-hidden="true"` (set automatically) to hide from screen readers
+
+### Related patterns
+
+- [Spinner](../components/spinner.md) — for indeterminate loading without layout structure
+- [Progress](../components/progress.md) — for determinate progress indicators
+- [Loading pattern](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs) — for full loading patterns
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressSkeleton } from '@iress-oss/ids-components';
+
 <IressSkeleton />
 ```
 
-## Examples
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs#api-props)
 
-### Modes
+### Usage
+
+#### Modes
 
 The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
-```tsx
-<IressStack gap="md">
-<IressSkeleton mode="text" />
-<IressSkeleton mode="rect" height="100px" />
-<IressSkeleton mode="circle" height="100px" width="100px" />
-</IressStack>
-```
+<StoryEmbed id="components-skeleton--mode"/>
 
-[View "Mode" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--mode)
+#### Text
 
-### Text
+`text` mode works in place of `IressText`, matching sizing via the `textVariant` prop. Accepts `width` but not `height` (determined by font size and line height).
 
-`text` mode allows you to use `IressSkeleton` in place of `IressText` and keep the same sizing. To achieve this you can use `text` mode in conjunction with the `textVariant` prop.
+<StoryEmbed id="components-skeleton--text"/>
 
-`text` also accepts the width prop but does not use the `height` prop like other modes. The height is achieved through font size and line height.
+#### Rect
 
-```tsx
-<SkeletonText />
-```
+`rect` mode replaces block elements like images. Accepts `width` and `height` (defaults to 100% × 100px).
 
-[View "Text" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--text)
+<StoryEmbed id="components-skeleton--rect"/>
 
-### Rect
+#### Circle
 
-`rect` mode allows you to use `IressSkeleton` in place of block elements, a good example would be in place of images.
+`circle` mode replaces circular elements like profile images. Accepts `width` and `height` (defaults to 100% × 100px).
 
-`rect` accepts both `width` and `height` props for sizing. It will default to 100% width and 100px height.
+<StoryEmbed id="components-skeleton--circle"/>
 
-```tsx
-<SkeletonRect />
-```
+#### Size
 
-[View "Rect" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--rect)
+`width` and `height` props accept any CSS unit. Defaults to pixels if no unit is provided.
 
-### Circle
+<StoryEmbed id="components-skeleton--size"/>
 
-`circle` mode allows you to use `IressSkeleton` in place of circular elements, a good example would be for profile images.
+#### Card
 
-`circle` accepts both `width` and `height` props for sizing. It will default to 100% width and 100px height.
+A common use case is placing skeletons within card components as loading placeholders.
 
-```tsx
-<SkeletonCircle />
-```
+<StoryEmbed id="components-skeleton--card"/>
 
-[View "Circle" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--circle)
+### Testing
 
-### Size
-
-`width` and `height` props can be used to match the layout of the loaded content.
-
-These props accept any unit of dimension, but if no unit is provided it will default to pixels.
-
-**Note:** `height` will be ignored for text mode as this is calculated using the `IressText` component.
-
-```tsx
-<IressInline gap="md">
-{SKELETON_MODES.map((mode) => (
-<IressSkeleton key={mode} mode={mode} />
-))}
-</IressInline>
-```
-
-[View "Size" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-skeleton--size)
-
-## Testing
-
-`IressSkeleton` is a loading placeholder. Assert that the real content appears
-after loading:
+`IressSkeleton` is a loading placeholder. Assert that real content appears after loading:
 
 ```tsx
 await waitFor(() => {
@@ -90,6 +114,61 @@ await waitFor(() => {
 });
 ```
 
+The skeleton has `aria-hidden="true"` and cannot be queried by role. Query by test ID if needed, or assert on the loaded content appearing.
+
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs#testing)
+
+
+#### Test selectors
+
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root element of the skeleton | — | `skeleton` |
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs)
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Loading | Displays animated placeholder matching the expected content shape |
+| Loaded | Skeleton is replaced by real content (conditional rendering) |
+| Text mode | Height derived from font size/line height, width configurable |
+| Rect mode | Block placeholder with configurable width and height |
+| Circle mode | Circular placeholder with configurable dimensions |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **4.1.2 Name, Role, Value** — Uses `aria-hidden="true"` to hide from assistive technology
+- **1.4.1 Use of Color** — Animation communicates loading state visually
+
+**Note:** Skeletons are purely decorative and hidden from screen readers. Ensure loading states are communicated through other means if needed (e.g. `aria-busy` on the container).
+
+### Keyboard interaction
+
+No keyboard interaction — skeletons are non-interactive placeholder elements.
+
+### Edge cases
+
+- **Flash of skeleton**: For fast loads, consider delaying skeleton render by ~200ms to avoid flash
+- **Layout shift**: Match skeleton dimensions exactly to final content to prevent CLS
+- **Multiple skeletons**: Compose multiple skeleton elements to represent complex layouts
+- **Dark mode**: Skeleton animation adapts to the current theme automatically
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs)

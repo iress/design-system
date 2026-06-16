@@ -1,144 +1,87 @@
-# 
-> **Component:** `import { IressBreadcrumbs } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs)```tsx
-```
+# Breadcrumbs
 
-## Quick Start
+> Shows the current location within a navigational hierarchy.
+
+## Import
 
 ```tsx
-<IressBreadcrumbs />
+import { IressBreadcrumbs } from '@iress-oss/ids-components';
 ```
 
-## Usage
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-breadcrumbs--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/Breadcrumbs)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=breadcrumbs&title=[Breadcrumbs]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=breadcrumbs,enhancement&title=[Breadcrumbs]+Feature:+)
 
-### Items
+Breadcrumbs are a secondary navigation aid that helps users understand their current location within the site hierarchy and provides a simple way to navigate back to higher-level pages.
 
-This is the only required prop for the `IressBreadcrumbs` component, which defines the breadcrumb items to be displayed.
+<StoryEmbed id="patterns-breadcrumbs--default"/>
 
-- **label**: The text displayed for the breadcrumb item
-- **href**: The URL to navigate to when the item is clicked (optional for the current page)
-- **element**: The component used for rendering links, allowing integration with routing libraries
+## Design
 
-[View "Default" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-breadcrumbs--default)
-
-### When to Use
+### When to use
 
 - **Site hierarchy navigation**: Help users understand where they are in a multi-level site structure
 - **Secondary navigation**: Provide an alternative way to navigate back to parent pages
 - **Context awareness**: Show the current page's relationship to parent sections
 
-### When Not to Use
+### When not to use
 
 - **Single-level sites**: If your site has no hierarchy, breadcrumbs aren't necessary
 - **Primary navigation**: Breadcrumbs are supplementary; don't rely on them as the only navigation
 
-### Best Practices
+### Do's and Don'ts
 
-1. **Keep labels concise**: Use short, descriptive labels that clearly identify each level
-2. **Current page**: The last item should represent the current page and not be clickable
-3. **Consistent placement**: Position breadcrumbs near the top of the page, below primary navigation and close to the current page title
-4. **Mobile consideration**: On small screens, consider showing only the parent page link
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Keep labels concise and descriptive | Use breadcrumbs as primary navigation |
+| Make the current page the last item and not clickable | Make the current page item a clickable link |
+| Position breadcrumbs near the top of the page, below primary navigation | Place breadcrumbs at the bottom of the page |
+| On mobile, consider showing only the parent page link | Show the full breadcrumb trail on small screens |
 
-## Behaviour
+### Content guidelines
 
-The Breadcrumb component follows WCAG 2.1 AA guidelines and includes:
+- Use the actual page title as the breadcrumb label for consistency
+- The last item should represent the current page and not be a link
 
-- **Semantic HTML**: Uses `<nav>`, `<ol>`, and `<li>` elements for proper structure
-- **ARIA labels**: `aria-label` identifies the navigation as breadcrumbs
-- **Current page**: `aria-current="page"` marks the current page item
-- **Keyboard navigation**: All links are keyboard accessible via Tab key
-- **Screen readers**: Separators are hidden from screen readers with `aria-hidden="true"`
-- **Focus indicators**: Visible focus rings for keyboard navigation
+### Related patterns
 
-## Examples
+- [SideNav](../patterns/side-nav.md) — for persistent hierarchical navigation
+- [Menu](../components/menu.md) — for navigation link lists
+- [Link](../components/link.md) — for inline navigation to other pages
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressBreadcrumbs } from '@iress-oss/ids-components';
+
+<IressBreadcrumbs />
+```
+
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-breadcrumbs--docs#api-props)
+
+### Usage
+
+#### Items
+
+This is the only required prop for the `IressBreadcrumbs` component, which defines the breadcrumb items to be displayed.
+
+- **label**: The text displayed for the breadcrumb item
+- **href**: The URL to navigate to when the item is clicked (optional for the current page)
 
 This example demonstrates all supported breadcrumb configurations side by side.
 
-```tsx
-<IressPanel>
-<IressStack gap="xl">
-<IressStack>
-<IressText element="h3">2 Breadcrumbs</IressText>
-<IressBreadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Current' }]}
-/>
-</IressStack>
+<StoryEmbed id="patterns-breadcrumbs--all-configurations" />
 
-<IressStack>
-<IressText element="h3">3 Breadcrumbs</IressText>
-<IressBreadcrumbs items={[
-{ label: 'Home', href: '/' },
-{ label: 'Products', href: '/products' },
-{ label: 'Details' },
-]}
-/>
-</IressStack>
+#### Integration with routing libraries
 
-<IressStack>
-<IressText element="h3">4 Breadcrumbs</IressText>
-<IressBreadcrumbs items={[
-{ label: 'Home', href: '/' },
-{ label: 'Category', href: '/category' },
-{ label: 'Subcategory', href: '/subcategory' },
-{ label: 'Details' },
-]}
-/>
-</IressStack>
-
-<IressStack>
-<IressText element="h3">
-5+ Breadcrumbs (with default overflow)
-</IressText>
-<IressBreadcrumbs items={[
-{ label: 'Home', href: '/' },
-{ label: 'Level 1', href: '/l1' },
-{ label: 'Level 2', href: '/l2' },
-{ label: 'Level 3', href: '/l3' },
-{ label: 'Level 4', href: '/l4' },
-{ label: 'Current' },
-]}
-/>
-</IressStack>
-
-<IressStack>
-<IressText element="h3">
-5+ Breadcrumbs (with overflow disabled)
-</IressText>
-<IressBreadcrumbs items={[
-{ label: 'Home', href: '/' },
-{ label: 'Level 1', href: '/l1' },
-{ label: 'Level 2', href: '/l2' },
-{ label: 'Level 3', href: '/l3' },
-{ label: 'Level 4', href: '/l4' },
-{ label: 'Current' },
-]}
-limit={0}
-/>
-</IressStack>
-</IressStack>
-</IressPanel>
-```
-
-[View "AllConfigurations" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-breadcrumbs--all-configurations)
-
-### Integration with Routing Libraries
-
-The Breadcrumb component supports custom elements for integration with routing libraries:
-
-#### React Router
+##### React Router
 
 ```tsx
-<IressBreadcrumbs
-  items={[
-    { label: 'Home', href: '/', element: RouterLink },
-    { label: 'Products', href: '/products', element: RouterLink },
-    { label: 'Details' },
-  ]}
-/>;
-```
+import { Link } from 'react-router-dom';
 
-#### Next.js
-
-```tsx
 <IressBreadcrumbs
   items={[
     { label: 'Home', href: '/', element: Link },
@@ -148,6 +91,39 @@ The Breadcrumb component supports custom elements for integration with routing l
 />;
 ```
 
+##### Next.js
+
+```tsx
+import Link from 'next/link';
+
+<IressBreadcrumbs
+  items={[
+    { label: 'Home', href: '/', element: Link },
+    { label: 'Products', href: '/products', element: Link },
+    { label: 'Details' },
+  ]}
+/>;
+```
+
+## Specifications
+
+### Accessibility
+
+- **Semantic HTML**: Uses `<nav>`, `<ol>`, and `<li>` elements for proper structure
+- **ARIA labels**: `aria-label` identifies the navigation as breadcrumbs
+- **Current page**: `aria-current="page"` marks the current page item
+- **Keyboard navigation**: All links are keyboard accessible via Tab key
+- **Screen readers**: Separators are hidden from screen readers with `aria-hidden="true"`
+- **Focus indicators**: Visible focus rings for keyboard navigation
+
+### Keyboard interaction
+
+| Key | Action |
+|-----|--------|
+| `Tab` | Moves focus to the next breadcrumb link |
+| `Shift+Tab` | Moves focus to the previous breadcrumb link |
+| `Enter` | Activates the focused breadcrumb link |
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-breadcrumbs--docs)

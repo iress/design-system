@@ -1,174 +1,93 @@
-# 
-> **Component:** `import { IressTooltip } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)```tsx
-```
+# Tooltip
 
-## Quick Start
+> Shows additional contextual information on hover or focus of a trigger element.
 
-```tsx
-<IressTooltip tooltipText="Hello! This is a really long tooltip to try and see if it goes behind the scrollbar" />
-```
-
-## Usage
-
-The content that will be displayed in the tooltip is passed using the `tooltipText` prop.
-
-This content can only be plain text; there is no parsing of any markup or styling. This is by design as we do not allow complex structures in a tooltip as they are meant to be concise, informative pieces of text.
-
-Text content will wrap on to a new line if it exceeds the tooltip's maximum width. You can also manually format your content into multiple lines by passing an array of strings into the `tooltipText` prop.
+## Import
 
 ```tsx
-<div style={{ paddingTop: '30px' }}>
-<IressInline gap="md">
-<IressTooltip tooltipText="Single line Hello! This is a really long tooltip to try and see if it goes behind the scrollbar"
->
-<IressButton>Single line</IressButton>
-</IressTooltip>
-<IressTooltip tooltipText={['This tooltip', 'has multiple lines']}
->
-<IressButton>Multi line</IressButton>
-</IressTooltip>
-</IressInline>
-</div>
+import { IressTooltip } from '@iress-oss/ids-components';
 ```
 
-[View "TooltipText" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tooltip--tooltip-text)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tooltip--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Tooltip)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tooltip&title=[Tooltip]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tooltip,enhancement&title=[Tooltip]+Feature:+)
 
-## Behaviour
+A component that shows concise, informative text about an element when focussed upon, hovered over or on a long touch.
 
-The behaviour of tooltips varies according to how they're shown:
+<StoryEmbed id="components-tooltip--tooltip-text"/>
 
-- When a pointer is moved over the activator the tooltip will be shown, and will remain visible for a short period of time after the pointer has moved away (500ms is the default time)
-- If the activator receives keyboard focus the tooltip will be visible. The tooltip will hide immediately after the focus moves away from the activator.
-- If the user long presses on the activator (on a touch device). The tooltip will remain visible until the user taps somewhere else on the screen
+## Design
 
-If the user activates a tooltip via a pointing device and then moves the pointer over the tooltip, it will remain on screen until the pointer is moved away. This is for accessibility purposes where a user may be using magnifying software for example.
+### When to use
 
-## Accessibility
+- **Icon-only buttons**: Provide a text label for buttons that only show an icon
+- **Truncated content**: Show the full text of a truncated label
+- **Supplementary info**: Add brief context to an element without cluttering the UI
 
-The WCAG guidelines for content that is displayed on hover or focus can be found here: [WCAG 2.1 - 1.4.13 (AA)](https://www.w3.org/TR/WCAG21/#content-on-hover-or-focus).
+### When not to use
 
-Other things to keep in mind:
+- **Help text for form fields** — use hint text on the Field component instead
+- **Rich or interactive content** — use a Popover or Modal
+- **Critical information** — tooltips are not immediately visible; use inline text
 
-- For best accessibility, you should only use tooltips on focusable items (eg. `IressButton` and `IressMenuItem`), allowing them to be seen when navigating to the tooltip activator by keyboard
+### Do's and Don'ts
 
-**Notes:**
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Keep tooltip text concise (a few words) | Put paragraph-length content in a tooltip |
+| Only attach tooltips to focusable elements | Attach tooltips to non-focusable elements |
+| Remove any `title` attribute from the trigger | Leave `title` attributes that duplicate or conflict with the tooltip |
+| Use `align` to avoid obscuring content | Let tooltips cover interactive elements |
 
-- If the text you wish to display is more than a handful of words then
-  consider using an IressModal with an information button.
-- Tooltips must not be used for help text as they are not immediately visible
-  to the user. We suggest adding hint text to assist the user when filling out
-  forms.
-- Also think about placement using the align prop. The tooltip should not
-  obscure any critical screen content. Another reason to keep them short.
+### Content guidelines
 
-## Examples
+- **Text**: Plain text only — no HTML, links, or formatting
+- **Length**: A few words to a short sentence; use a Popover for anything longer
+- **Multi-line**: Pass an array of strings for line breaks
 
-### Align
+### Related patterns
 
-The tooltip can be aligned in one of 12 positions relative to the activator element.
+- [Popover](../components/popover.md) — for rich, interactive content on hover/click
+- [Field](../components/field.md) — use `hint` prop instead of tooltips for form help text
 
-The tooltip's position will change dynamically based on the amount of space available in its container window, so that it doesn't overflow the edge. For example, if the tooltip is about to scroll off the top of the screen, it will change its position to bottom. Likewise with left and right scrolling.
+## Develop
+
+### Quick Start
 
 ```tsx
-<div style={{ padding: '80px 150px' }}>
-<IressStack gap="md">
-<IressInline horizontalAlign="center" gap="sm">
-<IressTooltip align="top-start" tooltipText="Top Start">
-<IressButton>Top Start</IressButton>
+import { IressTooltip, IressButton } from '@iress-oss/ids-components';
+
+<IressTooltip tooltipText="Save your changes">
+  <IressButton>Save</IressButton>
 </IressTooltip>
-<IressTooltip align="top" tooltipText="Top">
-<IressButton>Top</IressButton>
-</IressTooltip>
-<IressTooltip align="top-end" tooltipText="Top End">
-<IressButton>Top End</IressButton>
-</IressTooltip>
-</IressInline>
-<IressInline horizontalAlign="between">
-<IressStack gap="sm">
-<IressInline horizontalAlign="left">
-<IressTooltip align="left-start" tooltipText="Left Start">
-<IressButton>Left Start</IressButton>
-</IressTooltip>
-</IressInline>
-<IressInline horizontalAlign="left">
-<IressTooltip align="left" tooltipText="Left">
-<IressButton>Left</IressButton>
-</IressTooltip>
-</IressInline>
-<IressInline horizontalAlign="left">
-<IressTooltip align="left-end" tooltipText="Left End">
-<IressButton>Left End</IressButton>
-</IressTooltip>
-</IressInline>
-</IressStack>
-<IressStack gap="sm">
-<IressInline horizontalAlign="right">
-<IressTooltip align="right-start" tooltipText="Right Start">
-<IressButton>Right Start</IressButton>
-</IressTooltip>
-</IressInline>
-<IressInline horizontalAlign="right">
-<IressTooltip align="right" tooltipText="Right">
-<IressButton>Right</IressButton>
-</IressTooltip>
-</IressInline>
-<IressInline horizontalAlign="right">
-<IressTooltip align="right-end" tooltipText="Right End">
-<IressButton>Right End</IressButton>
-</IressTooltip>
-</IressInline>
-</IressStack>
-</IressInline>
-<IressInline horizontalAlign="center" gap="sm">
-<IressTooltip align="bottom-start" tooltipText="Bottom Start">
-<IressButton>Bottom Start</IressButton>
-</IressTooltip>
-<IressTooltip align="bottom" tooltipText="Bottom">
-<IressButton>Bottom</IressButton>
-</IressTooltip>
-<IressTooltip align="bottom-end" tooltipText="Bottom End">
-<IressButton>Bottom End</IressButton>
-</IressTooltip>
-</IressInline>
-</IressStack>
-</div>
 ```
 
-[View "Align" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tooltip--align)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tooltip--docs#api-props)
 
-### Delay
+### Usage
 
-The `delay` prop requires a number that is the number of milliseconds that pass after the activator has received a `mouseEnter` event and the display of the tooltip.
+#### Tooltip text
 
-```tsx
-<div style={{ paddingTop: '30px' }}>
-<IressInline horizontalAlign="center" gap="sm">
-<IressTooltip delay={0} tooltipText="No delay">
-<IressButton>0ms (no delay)</IressButton>
-</IressTooltip>
-<IressTooltip tooltipText="Default delay">
-<IressButton>500ms (default)</IressButton>
-</IressTooltip>
+The `tooltipText` prop sets the content. Pass a string or an array of strings for multiple lines.
 
-<IressTooltip delay={2000} tooltipText="Long delay">
-<IressButton>2000ms</IressButton>
-</IressTooltip>
-</IressInline>
-</div>
-```
+<StoryEmbed id="components-tooltip--tooltip-text"/>
 
-[View "Delay" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tooltip--delay)
+#### Align
 
-### The title attribute
+The tooltip can be aligned in 12 positions relative to the activator. Position changes dynamically to avoid overflow.
 
-The component will not make any provision for existing title HTML attributes. If one exists, it will be activated along with the tooltip, potentially overlaying it making it difficult to ascertain the information being imparted. The title could also contain different content to the tooltip increasing the chance of confusing the end user.
+<StoryEmbed id="components-tooltip--align"/>
 
-We suggest removing the title attribute on elements that will use tooltip.
+#### Delay
 
-## Testing
+The `delay` prop sets milliseconds before the tooltip appears after `mouseEnter`.
 
-Hover over the trigger to show the tooltip, then query the tooltip content:
+<StoryEmbed id="components-tooltip--delay"/>
+
+### Testing
+
+Hover over the trigger to show the tooltip, then query the content:
 
 ```tsx
 const trigger = screen.getByText('Hover me');
@@ -176,16 +95,53 @@ await user.hover(trigger);
 expect(screen.getByRole('tooltip')).toHaveTextContent('Tooltip text');
 ```
 
-### Test IDs
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tooltip--docs#testing)
 
-When you pass a `data-testid` to `IressTooltip`, the following nested test IDs
-are generated automatically:
 
-| Suffix | Example | Description |
-| --- | --- | --- |
-| `activator` | `my-tooltip__activator` | The tooltip trigger element |
-| `tooltip-text` | `my-tooltip__tooltip-text` | The tooltip content |
+#### Test selectors
+
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root wrapper element (contains activator and tooltip) | — | `tooltip` |
+| activator | The tooltip trigger element | — | `tooltip__activator` |
+| tooltip text | The floating tooltip content (visible on hover/focus) | — | `tooltip__tooltip-text` |
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)
+### Storybook
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tooltip--docs)
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Hidden | Tooltip is not rendered in the DOM |
+| Visible (hover) | Shows on `mouseEnter`, hides 500ms after `mouseLeave` |
+| Visible (focus) | Shows on focus, hides immediately on blur |
+| Visible (touch) | Shows on long press, hides on tap elsewhere |
+| Pointer on tooltip | Tooltip remains visible while pointer is over it |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **1.4.13 Content on Hover or Focus** — Tooltip is dismissable, hoverable, and persistent per WCAG requirements
+- **4.1.2 Name, Role, Value** — Uses `role="tooltip"` and `aria-describedby` linking
+
+**Keyboard interaction:**
+
+| Key | Action |
+|-----|--------|
+| `Tab` | Focus the activator, showing the tooltip |
+| `Escape` | Dismiss the tooltip while it is visible |
+| `Tab` (away) | Blur the activator, hiding the tooltip |
+
+### Edge cases
+
+- **Existing title attribute**: Not suppressed — remove it manually to avoid duplicate text
+- **Non-focusable activator**: Tooltip won't show on keyboard; always use a focusable trigger
+- **Overflow positioning**: Tooltip auto-repositions to stay within the viewport
+- **Very long text**: Text wraps at the tooltip's max-width

@@ -1,15 +1,62 @@
-# 
-> **Component:** `import { IressShadow } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs)```tsx
-```
+# Shadow
 
-## Quick Start
+> Applies an elevated shadow effect to visually separate content layers.
+
+## Import
 
 ```tsx
-<IressShadow />
+import { IressShadow } from '@iress-oss/ids-components';
 ```
 
-## Usage
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-shadow--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/Shadow)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=shadow&title=[Shadow]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=shadow,enhancement&title=[Shadow]+Feature:+)
+
+The shadow pattern allows you to wrap your content in the shadow DOM, allowing you to isolate your styles from the rest of the application. This is useful when you want to create a component that has its own styles, without affecting the rest of the application (such as microfrontends).
+
+<StoryEmbed id="patterns-shadow--shadow"/>
+
+## Design
+
+### When to use
+
+- **Microfrontends**: Isolate styles between independently deployed applications
+- **Third-party embedding**: Prevent host page styles from leaking into your components
+- **Style encapsulation**: When CSS modules or naming conventions aren't sufficient isolation
+
+### When not to use
+
+- **Standard applications**: If you control the full page, use `IressProvider` directly
+- **Web Components**: `IressShadow` does not create custom elements — it simply creates a shadow root on a `div` element
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Use for style isolation in microfrontends | Use when you control the full page styles |
+| Ensure font faces are loaded in the document head | Assume shadow DOM will isolate JavaScript state |
+| Match provider configuration with the host app | Apply multiple nested `IressShadow` wrappers on the same element |
+
+### Related patterns
+
+- [Panel](../components/panel.md) — for content grouping with visual boundaries
+- [Card](../components/card.md) — for self-contained content blocks
+- [Popover](../components/popover.md) — for overlay content requiring style isolation
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressShadow } from '@iress-oss/ids-components';
+
+<IressShadow>
+    {/* Your content here */}
+</IressShadow>
+```
+
+### Usage
 
 This is a simple component that is an alternative to the `IressProvider`. To use it, simply wrap your content in the `IressShadow` component.
 
@@ -23,10 +70,13 @@ It has similar props to the `IressProvider`, however it will apply the styles to
 
 **Note:** The `IressShadow` component does not create a custom element, it simply creates a shadow root on a `div` element. All children inside `IressShadow` are standard React components — **not** custom elements or Web Components. The `slot` HTML attribute is not used; content positioning uses React props (`prepend`, `append`, `footer`, etc.).
 
-> **⚠️ Common AI mistake:** Agents see "Shadow" in `IressShadow` and incorrectly assume the application uses Web Components or custom elements with `slot` attributes. This is wrong — `IressShadow` is purely for CSS isolation in microfrontend scenarios. IDS has not offered Web Components since v4.
+<Details>
+<summary>⚠️ Common AI mistake: "Shadow" means Web Components — **WRONG**</summary>
 
-[View "Shadow" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns---shadow)
+Agents see "Shadow" in `IressShadow` and incorrectly assume the application uses Web Components or custom elements with `slot` attributes. This is wrong — `IressShadow` is purely for CSS isolation in microfrontend scenarios. IDS has not offered Web Components since v4.
+
+</Details>
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-shadow--docs)

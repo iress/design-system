@@ -1,15 +1,72 @@
-# 
-> **Component:** `import { IressForm } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)```tsx
-```
+# Form
 
-## Quick Start
+> Manages form state, validation, and submission for a group of input fields.
+
+## Import
 
 ```tsx
-<IressForm heading="Contact details" pattern="short" />
+import { IressForm } from '@iress-oss/ids-components';
 ```
 
-## Installation
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/Form)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=form&title=[Form]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=form,enhancement&title=[Form]+Feature:+)
+
+Use the IressForm component when you want to request, validate and process data from the user.
+
+<StoryEmbed id="patterns-form--simple"/>
+
+```tsx
+import { IressForm } from '@iress-oss/ids-components';
+```
+
+## Design
+
+### When to use
+
+- Collecting user input that needs validation
+- Multi-field data entry with structured layout
+- Progressive disclosure of form sections
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Validate on submit for short forms (≤ 8 fields) | Disable the submit button to indicate errors |
+| Use `IressFormField` for every input in the form | Use `useState` to manage form field values |
+| Mark required fields with the `required` rule | Rely solely on colour to indicate errors |
+
+### Content guidelines
+
+- Write error messages that are actionable (e.g. "Enter a valid email address" not "Invalid input")
+- Use sentence case for labels and placeholders
+- Mark required fields — the form will display an asterisk automatically
+
+### Related patterns
+
+- [Field](../components/field.md) — for standalone field layout without form validation
+- [FormField](../patterns/form.md) — for individual validated form fields
+- [Input](../components/input.md) — for text input controls
+- [Select](../components/select.md) — for single-value selection
+- [Checkbox](../components/checkbox.md) — for boolean or multi-select options
+
+### Patterns
+
+The `IressForm` component supports different patterns to ensure consistency in how forms are displayed depending on the context of the form.
+
+1. `long`: This pattern is used when a form has more than 8 fields. It has the following characteristics:
+   - The `heading` and `actions` are displayed at the top of the form and can be `sticky`, ensuring they are always visible to the user.
+   - The validation errors are displayed when the user blurs out of a field (ie. moves to the next field), ensuring that the user is informed of any errors before submitting the form.
+2. `short`: This is the default pattern and should be used when a form has 8 or fewer fields, usually for familiar data such as the user's login details. It has the following characteristics:
+   - The `heading` is displayed at the top of the for and the `actions` are displayed at the bottom of the form.
+   - The validation errors are displayed when the user submits the form to ensure that the user is not overwhelmed with errors when filling out the form.
+
+**Note:** It is recommended to use the patterns above for new applications, or those doing an overhaul, as they provide a consistent user experience across forms. For older products, please follow the existing patterns in your application to ensure consistency with the rest of the product.
+
+## Develop
+
+### Installation
 
 As of version 6, `react-hook-form` has been moved to a peer dependency. You will need to install it alongside `@iress-oss/ids-components` in order to use the `IressForm` or `IressHookForm` component.
 
@@ -17,11 +74,19 @@ As of version 6, `react-hook-form` has been moved to a peer dependency. You will
 yarn add @iress-oss/ids-components react-hook-form
 ```
 
-## Key concepts
+### Quick Start
 
-`IressForm` is built on top of [React Hook Forms](https://react-hook-form.com/). This provides you the power of React Hook Forms with the convenience of IDS form components. However, there are some key differences to be aware of as it may affect how you build your forms.
+```tsx
+import { IressForm } from '@iress-oss/ids-components';
 
-### State management
+<IressForm heading="Contact details" pattern="short" />
+```
+
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs#api-props)
+
+### Key concepts
+
+#### State management
 
 `IressForm` manages the state of the form, including the form data and validation. This is done using the `useForm` hook from React Hook Forms. This hook provides a way to manage the form state, and provides methods to interact with the form. This was done to simplify the form components, make them more predictable (as the form becomes the single source of truth for all form related data) and improve performance by reducing re-renders (very important for large forms).
 
@@ -32,84 +97,70 @@ Due to this change, there are a few things you should consider during developmen
 
 See below an example comparing a version 4 and version 5 `IressForm` when managing form state.
 
-```tsx
-<DiffViewer
-allowModeChange
-oldValue={`import { IressForm, IressField, IressInput, IressCheckboxGroup, IressCheckbox } from '@iress/components';
+```diff
+-import { IressForm, IressField, IressInput, IressCheckboxGroup, IressCheckbox } from '@iress/components';
++import { IressForm, IressFormField, IressInput, IressCheckboxGroup, IressCheckbox } from '@iress-oss/ids-components';
++import { useWatch } from 'react-hook-form';
 
-export const App = () => {
-// We need to create our own state to manage the visibility of the fields, 
-// which means we have two sources of truth potentially making our code harder to maintain
-const [show, setShow] = useState(['name']);
-
-return (
-<IressForm>
-<IressField label="Show fields">
-<IressCheckboxGroup value={show} onChange={(newValues) => setShow(newValues)}>
-<IressCheckbox value="name">Name</IressCheckbox>
-<IressCheckbox value="email">Email</IressCheckbox>
-</IressCheckboxGroup>
-</IressField>
-{show.includes('name') && (
-<IressField label="Name">
-<IressInput name="name" />
-</IressField>
-)}
-{show.includes('email') && (
-<IressField label="Email">
-<IressInput name="email" type="email" />
-</IressField>
-)}
-</IressForm>
-);
-};`}
-newValue={`import { IressForm, IressFormField, IressInput, IressCheckboxGroup, IressCheckbox } from '@iress-oss/ids-components';
-const ConditionalFields = () => {
-// Instead of creating our own state, we can now use the form state via the useWatch hook, 
-// meaning we still have a single source of truth
-const show = useWatch({ name: 'show'});
-
-return (
-<>
-<IressFormField 
-label="Show fields" 
-name="show"
-render={(controlledProps) => (
-<IressCheckboxGroup {...controlledProps}>
-<IressCheckbox value="name">Name</IressCheckbox>
-<IressCheckbox value="email">Email</IressCheckbox>
-</IressCheckboxGroup>
-)}
-/>
-{show?.includes('name') && (
-<IressFormField 
-label="Name" 
-name="name"
-render={(controlledProps) => <IressInput {...controlledProps} />}
-/>
-)}
-{show?.includes('email') && (
-<IressFormField 
-label="Email" 
-name="email"
-render={(controlledProps) => <IressInput {...controlledProps} type="email" />}
-/>
-)}
-</>
-);
-};
-
-export const App = () => (
-<IressForm defaultValues={{ show: ['name'] }}>
-<ConditionalFields /> 
-</IressForm>
-);`}
-/>
+-export const App = () => {
+-  const [show, setShow] = useState(['name']);
+-
+-  return (
+-    <IressForm>
+-      <IressField label="Show fields">
+-        <IressCheckboxGroup value={show} onChange={(newValues) => setShow(newValues)}>
++const ConditionalFields = () => {
++  const show = useWatch({ name: 'show' });
++
++  return (
++    <>
++      <IressFormField
++        label="Show fields"
++        name="show"
++        render={(controlledProps) => (
++          <IressCheckboxGroup {...controlledProps}>
+             <IressCheckbox value="name">Name</IressCheckbox>
+             <IressCheckbox value="email">Email</IressCheckbox>
+           </IressCheckboxGroup>
+-        </IressField>
+-        {show.includes('name') && (
+-          <IressField label="Name">
+-            <IressInput name="name" />
+-          </IressField>
+-        )}
+-        {show.includes('email') && (
+-          <IressField label="Email">
+-            <IressInput name="email" type="email" />
+-          </IressField>
+-        )}
+-    </IressForm>
+-  );
+-};
++        )}
++      />
++      {show?.includes('name') && (
++        <IressFormField label="Name" name="name"
++          render={(controlledProps) => <IressInput {...controlledProps} />}
++        />
++      )}
++      {show?.includes('email') && (
++        <IressFormField label="Email" name="email"
++          render={(controlledProps) => <IressInput {...controlledProps} type="email" />}
++        />
++      )}
++    </>
++  );
++};
++
++export const App = () => (
++  <IressForm defaultValues={{ show: ['name'] }}>
++    <ConditionalFields />
++  </IressForm>
++);
 ```
 
-[View "StateManagementV4ToV5" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--state-management-v4to-v5)
-
-### Validation
+#### Validation
+#### Validation
 
 Validation is now done declaratively using the `rules` prop on the `IressFormField` component. This is based on the [rules available in React Hook Forms](https://www.react-hook-form.com/api/useform/register/#options). This change was made to allow for more complex validation rules to be implemented.
 
@@ -121,51 +172,39 @@ Due to this change, there are a few things you should consider during developmen
 
 See below an example comparing a version 4 and version 5 `IressForm` when adding validation rules.
 
-```tsx
-<DiffViewer
-allowModeChange
-oldValue={`import { IressForm, IressField, IressInput, IressButton } from '@iress/components';
+```diff
+-import { IressForm, IressField, IressInput, IressButton } from '@iress/components';
++import { IressForm, IressFormField, IressInput, IressButton } from '@iress-oss/ids-components';
 
-export const App = () => (
-<IressForm valueMissing="{{fieldName}} needs to be filled in!">
-<IressField label="Name">
-<IressInput name="name" required />
-</IressField>
-<IressField label="Email">
-<IressInput name="email" maxLength={10} />
-</IressField>
-<IressButton type="submit" mode="primary">
-Sign up
-</IressButton>
-</IressForm>
-);`}
-newValue={`import { IressForm, IressFormField, IressInput, IressButton } from '@iress-oss/ids-components';
-
-export const App = () => (
-<IressForm>
-<IressFormField 
-label="Name"
-name="name"
-render={(controlledProps) => <IressInput {...controlledProps} />}
-rules={{ required: 'Name needs to be filled in!' }}
-/>
-<IressFormField 
-label="Email"
-name="email"
-render={(controlledProps) => <IressInput {...controlledProps} type="email" maxLength={10} />}
-rules={{ maxLength: 10 }}
-/>
-<IressButton type="submit" mode="primary">
-Sign up
-</IressButton>
-</IressForm>
-);`}
-/>
+ export const App = () => (
+-  <IressForm valueMissing="{{fieldName}} needs to be filled in!">
+-    <IressField label="Name">
+-      <IressInput name="name" required />
+-    </IressField>
+-    <IressField label="Email">
+-      <IressInput name="email" maxLength={10} />
+-    </IressField>
++  <IressForm>
++    <IressFormField
++      label="Name"
++      name="name"
++      render={(controlledProps) => <IressInput {...controlledProps} />}
++      rules={{ required: 'Name needs to be filled in!' }}
++    />
++    <IressFormField
++      label="Email"
++      name="email"
++      render={(controlledProps) => <IressInput {...controlledProps} type="email" maxLength={10} />}
++      rules={{ maxLength: 10 }}
++    />
+     <IressButton type="submit" mode="primary">
+       Sign up
+     </IressButton>
+   </IressForm>
+ );
 ```
 
-[View "ValidationV4ToV5" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--validation-v4to-v5)
-
-### Syncing state
+#### Syncing state
 
 For most scenarios, you should use the `onSubmit` event to sync the form data with other state management systems (eg. server, browser storage or state management libraries such as Redux). This event is emitted when the form passes validation, and contains a map of the field names and the data entered by the user.
 
@@ -195,22 +234,9 @@ return (
 );
 ```
 
-## Usage
+### Usage
 
-### Patterns
-
-The `IressForm` component supports different patterns to ensure consistency in how forms are displayed depending on the context of the form.
-
-1. `long`: This pattern is used when a form has more than 8 fields. It has the following characteristics:
-   - The `heading` and `actions` are displayed at the top of the form and can be `sticky`, ensuring they are always visible to the user.
-   - The validation errors are displayed when the user blurs out of a field (ie. moves to the next field), ensuring that the user is informed of any errors before submitting the form.
-2. `short`: This is the default pattern and should be used when a form has 8 or fewer fields, usually for familiar data such as the user's login details. It has the following characteristics:
-   - The `heading` is displayed at the top of the for and the `actions` are displayed at the bottom of the form.
-   - The validation errors are displayed when the user submits the form to ensure that the user is not overwhelmed with errors when filling out the form.
-
-**Note:** It is recommended to use the patterns above for new applications, or those doing an overhaul, as they provide a consistent user experience across forms. For older products, please follow the existing patterns in your application to ensure consistency with the rest of the product.
-
-### Fields
+#### Fields
 
 Use the `IressFormField` component to create form fields. This component is a layout component that wraps around form controls such as `IressInput`. It provides a consistent layout for form fields, and hooks into the `IressForm` component to provide validation and error handling.
 
@@ -232,13 +258,9 @@ It has three required props:
 
 Here are some examples of how to use `IressFormField` with different form controls. If you are using a form control that has multiple inputs inside (for example, `IressCheckboxGroup`), you can use `IressFormFieldset`, which changes the HTML structure to use a `fieldset` and `legend` element to group the inputs.
 
-```tsx
-<IressForm heading="All supported form fields" pattern="long" />
-```
+<StoryEmbed id="patterns-form--fields"/>
 
-[View "Fields" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--fields)
-
-### Supplementary content
+#### Supplementary content
 
 The `renderSupplementary` prop allows you to render additional content alongside the field that has access to the field props and state. This is useful for displaying dynamic information such as character counters, password strength meters, or custom help text that responds to user input.
 
@@ -254,42 +276,21 @@ Common use cases include:
 - **Dynamic hints**: Provide contextual help based on the field value
 - **Custom validation feedback**: Display real-time validation feedback separate from error messages
 
-```tsx
-<IressInput
-{...controlledProps}
-rows={3}
-maxLength={200}
-placeholder="Type your comment here..."
-/>
-```
+<StoryEmbed id="patterns-form-formfield--render-supplementary"/>
 
-[View "RenderSupplementary" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-field--render-supplementary)
-
-### Rules
+#### Rules
 
 Use the `rules` prop on the `IressFormField` component to add validation rules. These are based on the [rules available in React Hook Forms](https://www.react-hook-form.com/api/useform/register/#options). The following rules are supported.
 
 **Note:** In version 5, you can no longer override default error messages for the whole form. To override the default messages, you must specify them in the `rules` prop per `IressFormField`.
 
-#### `required`
+##### `required`
 
 A boolean which, if `true`, indicates that the input must have a value before the form can be submitted. You can assign a string to return a custom error message.
 
-```tsx
-<IressForm heading="Required example">
-<IressFormField
-  label="Name"
-  name="name"
-  rules={{ required: 'Name is required' }}
-  render={(controlledProps) => <IressInput {...controlledProps} />}
-/>
-<IressButton type="submit" mode="primary">Submit</IressButton>
-</IressForm>
-```
+<StoryEmbed id="patterns-form--required"/>
 
-[View "Required" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--required)
-
-#### `maxLength`
+##### `maxLength`
 
 The maximum character length of the value to accept for this input.
 
@@ -298,21 +299,9 @@ The maximum character length of the value to accept for this input.
 - For `IressInput`, you should also set the `maxLength` to stop the user from entering more characters than allowed.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
-```tsx
-<IressForm heading="Max length example">
-<IressFormField
-  label="Username"
-  name="username"
-  rules={{ maxLength: { value: 10, message: 'Max 10 characters' } }}
-  render={(controlledProps) => <IressInput {...controlledProps} maxLength={10} />}
-/>
-<IressButton type="submit" mode="primary">Submit</IressButton>
-</IressForm>
-```
+<StoryEmbed id="patterns-form--max-length"/>
 
-[View "MaxLength" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max-length)
-
-#### `minLength`
+##### `minLength`
 
 The minimum character length of the value to accept for this input.
 
@@ -321,21 +310,9 @@ The minimum character length of the value to accept for this input.
 - For `IressInput`, you should also set the `minLength` to stop the user from entering more characters than allowed.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
-```tsx
-<IressForm heading="Min length example">
-<IressFormField
-  label="Password"
-  name="password"
-  rules={{ minLength: { value: 8, message: 'Min 8 characters' } }}
-  render={(controlledProps) => <IressInput {...controlledProps} type="password" />}
-/>
-<IressButton type="submit" mode="primary">Submit</IressButton>
-</IressForm>
-```
+<StoryEmbed id="patterns-form--min-length"/>
 
-[View "MinLength" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min-length)
-
-#### `max`
+##### `max`
 
 The maximum number to accept for this input.
 
@@ -343,21 +320,9 @@ The maximum number to accept for this input.
 
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
-```tsx
-<IressForm heading="Max example">
-<IressFormField
-  label="Age"
-  name="age"
-  rules={{ max: { value: 120, message: 'Max value is 120' } }}
-  render={(controlledProps) => <IressInput {...controlledProps} type="number" />}
-/>
-<IressButton type="submit" mode="primary">Submit</IressButton>
-</IressForm>
-```
+<StoryEmbed id="patterns-form--max"/>
 
-[View "Max" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max)
-
-#### `min`
+##### `min`
 
 The minimum number to accept for this input.
 
@@ -365,21 +330,9 @@ The minimum number to accept for this input.
 
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
-```tsx
-<IressForm heading="Min example">
-<IressFormField
-  label="Quantity"
-  name="quantity"
-  rules={{ min: { value: 1, message: 'Min value is 1' } }}
-  render={(controlledProps) => <IressInput {...controlledProps} type="number" />}
-/>
-<IressButton type="submit" mode="primary">Submit</IressButton>
-</IressForm>
-```
+<StoryEmbed id="patterns-form--min"/>
 
-[View "Min" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min)
-
-#### `pattern`
+##### `pattern`
 
 The accepted regex pattern for the input.
 
@@ -387,69 +340,33 @@ The accepted regex pattern for the input.
 
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
-[View "Pattern" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--pattern)
+<StoryEmbed id="patterns-form--pattern"/>
 
-#### `minDate`
+##### `minDate`
 
 The minimum date to accept for this input.
 
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
-```tsx
-<IressForm heading="Min date example">
-<IressFormField
-  label="Start date"
-  name="startDate"
-  rules={{ minDate: '2024-01-01' }}
-  render={(controlledProps) => <IressInputDate {...controlledProps} />}
-/>
-<IressButton type="submit" mode="primary">Submit</IressButton>
-</IressForm>
-```
+<StoryEmbed id="patterns-form--min-date"/>
 
-[View "MinDate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min-date)
-
-#### `maxDate`
+##### `maxDate`
 
 The maximum date to accept for this input.
 
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
-```tsx
-<IressForm heading="Max date example">
-<IressFormField
-  label="End date"
-  name="endDate"
-  rules={{ maxDate: '2025-12-31' }}
-  render={(controlledProps) => <IressInputDate {...controlledProps} />}
-/>
-<IressButton type="submit" mode="primary">Submit</IressButton>
-</IressForm>
-```
+<StoryEmbed id="patterns-form--max-date"/>
 
-[View "MaxDate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max-date)
-
-#### `email`
+##### `email`
 
 Ensures the input is a valid email address.
 
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
-```tsx
-<IressForm heading="Email example">
-<IressFormField
-  label="Email"
-  name="email"
-  rules={{ email: 'Please enter a valid email address' }}
-  render={(controlledProps) => <IressInput {...controlledProps} type="email" />}
-/>
-<IressButton type="submit" mode="primary">Submit</IressButton>
-</IressForm>
-```
+<StoryEmbed id="patterns-form--email"/>
 
-[View "Email" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--email)
-
-#### `validate`
+##### `validate`
 
 You can pass a callback function as the argument to validate, or you can pass an object of callback functions to validate against all of them. This function will be executed on its own without depending on other validation rules included.
 
@@ -457,65 +374,29 @@ You can pass a callback function as the argument to validate, or you can pass an
 
 - for `object` or `array` input data, it's recommended to use the validate function for validation as the other rules mostly apply to `string`, `string[]`, `number` and `boolean` data types.
 
-```tsx
-<IressForm heading="Validate example">
-<IressFormField
-  label="Interests"
-  name="interests"
-  rules={{ validate: (value) => (value?.length >= 2) || 'Select at least 2' }}
-  render={(controlledProps) => (
-    <IressCheckboxGroup {...controlledProps}>
-      <IressCheckbox value="sports">Sports</IressCheckbox>
-      <IressCheckbox value="music">Music</IressCheckbox>
-      <IressCheckbox value="art">Art</IressCheckbox>
-    </IressCheckboxGroup>
-  )}
-/>
-<IressButton type="submit" mode="primary">Submit</IressButton>
-</IressForm>
-```
+<StoryEmbed id="patterns-form--validate"/>
 
-[View "Validate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--validate)
-
-### Handling submission
+#### Handling submission
 
 When the form passes validation (if not disabled), the `onSubmit` event is emitted. Its event details contain a map of the field names and the data entered by the user.
 
-```tsx
-<FormSubmission />
-```
+<StoryEmbed id="patterns-form--handling-submission" />
 
-[View "HandlingSubmission" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--handling-submission)
-
-## Behaviour
-
-- Initial form validation is done when the user first submits the form. This allows them to focus on entering data without being overwhelmed by validation errors.
-- If there are validation errors on submission, they will be shown at the form level as a summary, as well as per field. Only the first failing error will be displayed per field.
-- After the first submission, fields are validated on change, to provide users instant feedback as they are now at the validation phase.
-
-**Note:** The default user experience regarding validation is different to previous versions of IDS. This change was done to align IDS with the typical user experience found in other applications. If you would like to change the behaviour to be more consistent with the original IDS, set the `mode` prop of the form to `onBlur`.
-
-## Examples
-
-### Pre-fill the form
+#### Pre-fill the form
 
 You can set the `defaultValues` prop to pre-fill the form values.
 
-[View "DefaultValues" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--default-values)
+<StoryEmbed id="patterns-form--default-values" />
 
-### Custom error handling
+#### Custom error handling
 
 The `onError` prop allows you to listen to any field errors. It takes two arguments. The first is a map of the field name and an object containing the first error message and type. The second is a ref to the original element that caused the error (the ref of the underlying input).
 
 One use case for this prop is to create your own visible error summary at the top of the form, or to log errors to an external service.
 
-```tsx
-<CustomErrorHandlingForm />
-```
+<StoryEmbed id="patterns-form--custom-error-handling" />
 
-[View "CustomErrorHandling" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--custom-error-handling)
-
-### `values`
+#### `values`
 
 If you would like more control over each value of the form, you should use the `values` prop. This will make the form controlled, meaning it will rely completely on the `values` state to render the value of each field. You will need to use the `onSubmit` prop to sync the form value with your state.
 
@@ -526,13 +407,9 @@ Use cases where you may need the `values` prop:
 
 **Note:** `values` takes precedence over `defaultValues`. To ensure your form state is predictable, it is best to only use one prop to manage form values.
 
-```tsx
-<ControlledForm />
-```
+<StoryEmbed id="patterns-form--values" />
 
-[View "Values" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--values)
-
-### Disable validation
+#### Disable validation
 
 Disabling validation is not possible with the `IressForm` component. In cases where you do need to disable validation, please consider the following:
 
@@ -541,41 +418,17 @@ Disabling validation is not possible with the `IressForm` component. In cases wh
 
 Here we have an example showcasing option one.
 
-```tsx
-<DisableValidationForm />
-```
+<StoryEmbed id="patterns-form--disable-validation" />
 
-[View "DisableValidation" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--disable-validation)
-
-### Resetting the form
+#### Resetting the form
 
 You can reset the form using the `ref` of the form. You must provide a `defaultValues` prop that contains all the fields in the form to ensure it resets properly.
 
 **Note:** `<button type="reset" />` does not work with `IressForm`. You need to add an `onClick` prop to the button and use the `ref.reset` method to reset the form.
 
-```tsx
-<FormReset />
-```
+<StoryEmbed id="patterns-form--reset-form" />
 
-[View "ResetForm" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--reset-form)
-
-### Read only
-
-You can pass the `readOnly` prop to remove the asterisk symbol (\*) even when the field is `required`, and that field will be exempted from validation.
-
-```tsx
-<IressStack gap="md">
-<IressText>
-<h2>Excludes read-only validation</h2>
-<p>Try hitting submit to see that only email is being validated</p>
-</IressText>
-<IressForm />
-</IressStack>
-```
-
-[View "ExcludeReadOnlyValidation" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--exclude-read-only-validation)
-
-## `IressHookForm`
+#### `IressHookForm`
 
 `IressHookForm` is the underlying component that `IressForm` is built upon. It has a single required prop, `form`, which expects the return value of the `useForm` hook from React Hook Forms.
 
@@ -586,35 +439,111 @@ Some use cases:
 1. You may need to use the `useForm` hook in a parent component to share the form state with multiple child components.
 2. You would like to use the return value of the `useForm` hook without having to use a ref to access the `react-hook-form` api.
 
-```tsx
-<HookFormExample />
-```
+<StoryEmbed id="patterns-form-hookform--hook-form" />
 
-[View "HookForm" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-hook-form--hook-form)
-
-## `IressFormValidationSummary`
+#### `IressFormValidationSummary`
 
 `IressFormValidationSummary` is the error summary component that is added to the top of the form for screen readers to announce validation errors. It is automatically added to the form when there are validation errors, but you can also use it independently to create your own error summary, usually used if you want a visible error summary at the top of the form.
 
-```tsx
-<IressForm heading="Try hitting submit to see the validation summary" />
+<StoryEmbed id="patterns-form-formvalidationsummary--default" />
+
+#### With readonly data
+
+You can use `IressForm` with readonly data by setting the `readOnly` prop to `true` on controlled elements. This will disable those form controls, but will include the values in the form submission.
+
+Please take note of the following when displaying read only data.
+
+- It is best to keep readonly data in a separate section of the form, to further avoid confusion with editable fields.
+
+<StoryEmbed id="patterns-form--with-readonly-data" />
+
+#### Switching between readonly and edit modes
+
+It is recommended to use a button to toggle between read-only and editable input modes.
+
+Please take note of the following when switching between modes:
+
+- Switching is done on a per-section basis, not on a per-field basis.
+- When the user saves the data, it should switch back to read-only mode to avoid any confusion about whether the changes have been saved.
+
+<StoryEmbed id="patterns-form--switch-edit-readonly" />
+
+#### Nested forms
+
+Unfortunately, it is [forbidden to nest form elements as per the HTML specifications](https://developer.mozilla.org/en-US/docs/Learn/Forms/How_to_structure_a_web_form).
+
+To achieve a similar effect, you can use multiple `IressForm` components, and trigger validation in multiple ways:
+
+1. You can trigger specific forms using the `form` attribute of `IressButton`. The [`form` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#form) allows you to specify the form ID to submit when the button is clicked, which can be any form on the page, and will take precedence over the parent form of a button.
+2. If you need to trigger multiple forms, you can use the [`requestSubmit` method](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/requestSubmit) on the form element to trigger the validation of multiple forms.
+3. If you only want to trigger validation and not trigger submission even if the validation passes, you can use the `ref` attribute of `IressForm` and trigger validation manually using `ref.current?.api.trigger()`, which is based on the [React Hook Form API](https://react-hook-form.com/docs/useform/trigger).
+
+The example here showcases triggering validation using the `form` attribute of `IressButton` and the `requestSubmit` method on the form element.
+
+<StoryEmbed id="patterns-form--nested-forms" />
+
+#### Form groups
+
+Powered by [React Hook Form](https://react-hook-form.com/docs/usefieldarray)'s `useFieldArray`, this example allows you add/edit/delete multiple children sections within ONE form (not nested form).
+
+<StoryEmbed id="patterns-form--form-groups" />
+
+#### Conditional fields (`useWatch`)
+
+When you have fields that are conditionally shown, you can use the `useWatch` hook to watch the value of another field and conditionally render the field.
+
+**Notes:**
+
+- You can use the `api.watch` method on the `IressForm`'s ref to watch the value of a field, but it is recommended to use the hook for better performance by isolating re-rendering at the component level.
+
+<StoryEmbed id="patterns-form--use-watch" />
+
+#### Validation depend on other fields
+
+This example shows how to validate one field based on another field's value.
+
+The budget amount input validates against the selected budget range using the custom `validateBudgetInput` rules.
+
+<StoryEmbed id="patterns-form--validation-depend-on-other-fields" />
+
+#### Custom form field components
+
+You can integrate custom components within `IressFormField` to create enhanced form experiences.
+
+This demo showcases how to embed a custom `TranscriptTextBox` component into `IressFormField` while leveraging its built-in validation rules, error handling, and state management without additional implementation.
+
+**Reminder:** When building custom form components, avoid managing error message state internally. This helps maintain the IressForm as the single source of truth and ensures consistent, predictable UI behavior.
+
+Key features demonstrated:
+
+- **Universal Integration Pattern**: Shows how any custom component can be embedded in IressFormField
+- **Built-in Validation**: Leverages IressFormField's validation rules with custom validation logic
+- **Multiple Error Messages**: Displays simultaneous validation errors (e.g., wrong file type AND too large)
+- **Drag & Drop**: Files can be dragged and dropped directly onto the textarea
+- **File Upload Button**: Traditional file selection via button click
+- **Visual Feedback**: UI changes during drag operations with border and background updates
+- **Form State Management**: Automatically integrates with form context using controlled props
+- **File Management**: Display uploaded files with remove functionality using `IressPanel`
+
+<StoryEmbed id="patterns-form--custom-form-field-components" />
+
+#### Sanitising input
+
+When sending user input to a server or third-party API, it is important to
+sanitise the data to prevent cross-site scripting (XSS) attacks. This example
+uses [DOMPurify](https://github.com/cure53/DOMPurify) to recursively strip
+malicious HTML from all string values in the form data before submission.
+
+Install DOMPurify in your project:
+
+```bash
+npm install dompurify
+npm install --save-dev @types/dompurify
 ```
 
-[View "ValidationSummary" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--validation-summary)
+<StoryEmbed id="patterns-form--sanitising-input" />
 
-## Migration to version 5 and beyond
-
-The previous form components contained a lot of logic to translate the HTML5 validation API to a format that matched the design system’s guidelines. This allowed users to use the default props of input such as `pattern` and `required`, and be assured that the `IressField` would display errors accordingly.
-
-Although this worked for simple forms, it did not work for forms which had complex business requirements. This was due to the logic inside the form components being hard to override. Additionally, it was seemingly impossible to implement the business requirements using the HTML5 validation API, which itself is very restricted.
-
-In version 5 we have decided to provide two alternative methods of using form components to better accommodate our consumer’s needs.
-
-The validation logic has been stripped from all of the existing form components. They are now closer to their native implementation, with a few customisations to match the IDS guidelines. IressField has transformed into a layout component to allow you to lay out form fields consistent with IDS guidelines, using your own validation tools.
-
-Automated validation is now solely contained in `IressForm` and `IressFormField`, using [React Hook Form](https://react-hook-form.com/docs/useform) under the hood to simplify maintenance.
-
-## Testing
+### Testing
 
 Unfortunately due to the asynchronous nature of React Hook Form validation, `IressForm` still needs to be tested using `screen.findBy` queries (at least in the first query after render). If `findBy` is not used, you will start to see the dreaded `act warnings`. For more information on testing IressForm, please refer to the (React Hook Form testing documentation)[https://react-hook-form.com/advanced-usage#TestingForm]
 
@@ -650,9 +579,11 @@ const summaryError = await screen.findByText(
 expect(summaryError).toBeInTheDocument();
 ```
 
-## Caveat
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs#testing)
 
-### Properly resetting fields
+### Caveats
+
+#### Properly resetting fields
 
 When resetting fields that accept non-string values (like `IressSelect`), you should reset them to `null` or `undefined` instead of an empty string. This is because the underlying component is strictly typed and expects a specific value type.
 
@@ -682,4 +613,30 @@ This will properly reset the field to null and clear the field value.
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs)
+
+## Specifications
+
+### Behaviour
+
+- Initial form validation is done when the user first submits the form. This allows them to focus on entering data without being overwhelmed by validation errors.
+- If there are validation errors on submission, they will be shown at the form level as a summary, as well as per field. Only the first failing error will be displayed per field.
+- After the first submission, fields are validated on change, to provide users instant feedback as they are now at the validation phase.
+
+**Note:** The default user experience regarding validation is different to previous versions of IDS. This change was done to align IDS with the typical user experience found in other applications. If you would like to change the behaviour to be more consistent with the original IDS, set the `mode` prop of the form to `onBlur`.
+
+### Migration to version 5 and beyond
+
+The previous form components contained a lot of logic to translate the HTML5 validation API to a format that matched the design system's guidelines. This allowed users to use the default props of input such as `pattern` and `required`, and be assured that the `IressField` would display errors accordingly.
+
+Although this worked for simple forms, it did not work for forms which had complex business requirements. This was due to the logic inside the form components being hard to override. Additionally, it was seemingly impossible to implement the business requirements using the HTML5 validation API, which itself is very restricted.
+
+In version 5 we have decided to provide two alternative methods of using form components to better accommodate our consumer's needs.
+
+The validation logic has been stripped from all of the existing form components. They are now closer to their native implementation, with a few customisations to match the IDS guidelines. IressField has transformed into a layout component to allow you to lay out form fields consistent with IDS guidelines, using your own validation tools.
+
+Automated validation is now solely contained in `IressForm` and `IressFormField`, using [React Hook Form](https://react-hook-form.com/docs/useform) under the hood to simplify maintenance.
+
+---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs)

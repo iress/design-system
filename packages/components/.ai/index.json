@@ -1,561 +1,246 @@
-{
-  "package": "@iress-oss/ids-components",
-  "urls": {
-    "storybook": "https://main--691abcc79dfa560a36d0a74f.chromatic.com"
+[
+  {
+    "slug": "alert",
+    "type": "components"
   },
-  "documentation": {
-    "components": [
-      {
-        "name": "",
-        "description": "",
-        "path": "components/alert.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs",
-        "propsType": "IressAlertProps",
-        "typeDeclPath": "dist/components/Alert/Alert.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/autocomplete.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs",
-        "propsType": "IressAutocompleteProps",
-        "typeDeclPath": "dist/components/Autocomplete/Autocomplete.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/button.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs",
-        "propsType": "IressButtonProps",
-        "typeDeclPath": "dist/components/Button/Button.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/button-group.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs",
-        "propsType": "IressButtonGroupProps",
-        "typeDeclPath": "dist/components/ButtonGroup/ButtonGroup.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/checkbox.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs",
-        "propsType": "IressCheckboxProps",
-        "typeDeclPath": "dist/components/Checkbox/Checkbox.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/checkbox-group.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs",
-        "propsType": "IressCheckboxGroupProps",
-        "typeDeclPath": "dist/components/CheckboxGroup/CheckboxGroup.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/col.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs",
-        "propsType": "IressColProps",
-        "typeDeclPath": "dist/components/Col/Col.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/container.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs",
-        "propsType": "IressContainerProps",
-        "typeDeclPath": "dist/components/Container/Container.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/divider.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs",
-        "propsType": "IressDividerProps",
-        "typeDeclPath": "dist/components/Divider/Divider.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/expander.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs",
-        "propsType": "IressExpanderProps",
-        "typeDeclPath": "dist/components/Expander/Expander.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/field.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs",
-        "propsType": "IressFieldProps",
-        "typeDeclPath": "dist/components/Field/Field.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/icon.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs",
-        "propsType": "IressIconProps",
-        "typeDeclPath": "dist/components/Icon/Icon.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/image.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs",
-        "propsType": "IressImageProps",
-        "typeDeclPath": "dist/components/Image/Image.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/inline.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs",
-        "propsType": "IressInlineProps",
-        "typeDeclPath": "dist/components/Inline/Inline.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/input.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs",
-        "propsType": "IressInputProps",
-        "typeDeclPath": "dist/components/Input/Input.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/input-currency.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs",
-        "propsType": "IressInputCurrencyProps",
-        "typeDeclPath": "dist/components/InputCurrency/InputCurrency.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/label.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs",
-        "propsType": "IressLabelProps",
-        "typeDeclPath": "dist/components/Label/Label.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/link.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs",
-        "propsType": "IressLinkProps",
-        "typeDeclPath": "dist/components/Link/Link.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/menu.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs",
-        "propsType": "IressMenuProps",
-        "typeDeclPath": "dist/components/Menu/Menu.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/modal.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs",
-        "propsType": "IressModalProps",
-        "typeDeclPath": "dist/components/Modal/Modal.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/panel.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs",
-        "propsType": "IressPanelProps",
-        "typeDeclPath": "dist/components/Panel/Panel.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/pill.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs",
-        "propsType": "IressPillProps",
-        "typeDeclPath": "dist/components/Pill/Pill.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/placeholder.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs",
-        "propsType": "IressPlaceholderProps",
-        "typeDeclPath": "dist/components/Placeholder/Placeholder.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/popover.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs",
-        "propsType": "IressPopoverProps",
-        "typeDeclPath": "dist/components/Popover/Popover.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/progress.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs",
-        "propsType": "IressProgressProps",
-        "typeDeclPath": "dist/components/Progress/Progress.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/radio.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs",
-        "propsType": "IressRadioProps",
-        "typeDeclPath": "dist/components/Radio/Radio.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/radio-group.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio-group--docs",
-        "propsType": "IressRadioGroupProps",
-        "typeDeclPath": "dist/components/RadioGroup/RadioGroup.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/readonly.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs",
-        "propsType": "IressReadonlyProps",
-        "typeDeclPath": "dist/components/Readonly/Readonly.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/row.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs",
-        "propsType": "IressRowProps",
-        "typeDeclPath": "dist/components/Row/Row.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/skeleton.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs",
-        "propsType": "IressSkeletonProps",
-        "typeDeclPath": "dist/components/Skeleton/Skeleton.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/skip-link.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skip-link--docs",
-        "propsType": "IressSkipLinkProps",
-        "typeDeclPath": "dist/components/SkipLink/SkipLink.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/slideout.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs",
-        "propsType": "IressSlideoutProps",
-        "typeDeclPath": "dist/components/Slideout/Slideout.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/slider.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs",
-        "propsType": "IressSliderProps",
-        "typeDeclPath": "dist/components/Slider/Slider.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/spinner.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs",
-        "propsType": "IressSpinnerProps",
-        "typeDeclPath": "dist/components/Spinner/Spinner.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/stack.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs",
-        "propsType": "IressStackProps",
-        "typeDeclPath": "dist/components/Stack/Stack.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/tab-set.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab-set--docs",
-        "propsType": "IressTabSetProps",
-        "typeDeclPath": "dist/components/TabSet/TabSet.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/table.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs",
-        "propsType": "IressTableProps",
-        "typeDeclPath": "dist/components/Table/Table.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/tag.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs",
-        "propsType": "IressTagProps",
-        "typeDeclPath": "dist/components/Tag/Tag.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/text.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs",
-        "propsType": "IressTextProps",
-        "typeDeclPath": "dist/components/Text/Text.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/toaster.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs",
-        "propsType": "IressToasterProps",
-        "typeDeclPath": "dist/components/Toaster/Toaster.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/toggle.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs",
-        "propsType": "IressToggleProps",
-        "typeDeclPath": "dist/components/Toggle/Toggle.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/tooltip.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs",
-        "propsType": "IressTooltipProps",
-        "typeDeclPath": "dist/components/Tooltip/Tooltip.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "components/validation-message.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs",
-        "propsType": "IressValidationMessageProps",
-        "typeDeclPath": "dist/components/ValidationMessage/ValidationMessage.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "patterns/side-nav.md",
-        "category": "pattern",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-side-nav--docs",
-        "propsType": "IressSideNavProps",
-        "typeDeclPath": "dist/components/SideNav/SideNav.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "patterns/shadow.md",
-        "category": "pattern",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs",
-        "propsType": "IressShadowProps",
-        "typeDeclPath": "dist/components/Shadow/Shadow.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "patterns/form.md",
-        "category": "pattern",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs",
-        "propsType": "IressFormProps",
-        "typeDeclPath": "dist/components/Form/Form.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "patterns/feedback.md",
-        "category": "pattern",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-feedback--docs"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "patterns/dropdown-menu.md",
-        "category": "pattern",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdown-menu--docs",
-        "propsType": "IressDropdownMenuProps",
-        "typeDeclPath": "dist/components/DropdownMenu/DropdownMenu.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "patterns/contextual-menu.md",
-        "category": "pattern",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextual-menu--docs",
-        "propsType": "IressContextualMenuProps",
-        "typeDeclPath": "dist/components/ContextualMenu/ContextualMenu.d.ts"
-      },
-      {
-        "name": "",
-        "description": "",
-        "path": "patterns/breadcrumbs.md",
-        "category": "pattern",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs",
-        "propsType": "IressBreadcrumbsProps",
-        "typeDeclPath": "dist/components/Breadcrumbs/Breadcrumbs.d.ts"
-      },
-      {
-        "name": "Card",
-        "description": "Cards are used to group small, related pieces of information into one digestible unit.",
-        "path": "components/card.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-card--docs",
-        "propsType": "IressCardProps",
-        "typeDeclPath": "dist/components/Card/Card.d.ts"
-      },
-      {
-        "name": "Menu Item",
-        "description": "Menu items are headings, buttons and dividers used inside an `IressMenu`",
-        "path": "components/menu-item.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu-item--docs",
-        "propsType": "IressMenuItemProps",
-        "typeDeclPath": "dist/components/MenuItem/MenuItem.d.ts"
-      },
-      {
-        "name": "Provider",
-        "description": "Provider is a component that sets up the Iress Design System for your application. It ensures that the design system is correctly configured and ready to use.",
-        "path": "components/provider.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-provider--docs",
-        "propsType": "IressProviderProps",
-        "typeDeclPath": "dist/components/Provider/Provider.d.ts"
-      },
-      {
-        "name": "Recipes",
-        "description": "Autocomplete component documentation.",
-        "path": "components/autocomplete-recipes.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs"
-      },
-      {
-        "name": "Recipes",
-        "description": "CheckboxGroup component documentation.",
-        "path": "components/checkbox-group-recipes.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs"
-      },
-      {
-        "name": "Recipes",
-        "description": "Input component documentation.",
-        "path": "components/input-recipes.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs"
-      },
-      {
-        "name": "Recipes",
-        "description": "InputCurrency component documentation.",
-        "path": "components/input-currency-recipes.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs"
-      },
-      {
-        "name": "Recipes",
-        "description": "Popover component documentation.",
-        "path": "components/popover-recipes.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs"
-      },
-      {
-        "name": "Recipes",
-        "description": "Skeleton component documentation.",
-        "path": "components/skeleton-recipes.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs"
-      },
-      {
-        "name": "Recipes",
-        "description": "Form pattern documentation.",
-        "path": "patterns/form-recipes.md",
-        "category": "pattern",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs"
-      },
-      {
-        "name": "Select",
-        "description": "Selects provide select and multi-select functionality with the benefit of live filtering.",
-        "path": "components/select.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-select--docs",
-        "propsType": "IressSelectProps",
-        "typeDeclPath": "dist/components/Select/Select.d.ts"
-      },
-      {
-        "name": "Styled",
-        "description": "The IressStyled component provides an unopinionated wrapper that gives you direct access to all supported styling properties. Use it when you need custom styling without creating a dedicated component or writing custom CSS.",
-        "path": "components/styled.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs",
-        "propsType": "IressStyledProps",
-        "typeDeclPath": "dist/components/Styled/Styled.d.ts"
-      },
-      {
-        "name": "Tab",
-        "description": "A tab is an interactive element that controls the display of other content, usually a panel",
-        "path": "components/tab.md",
-        "category": "component",
-        "storybookUrl": "https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs",
-        "propsType": "IressTabProps",
-        "typeDeclPath": "dist/components/Tab/Tab.d.ts"
-      }
-    ]
+  {
+    "slug": "autocomplete",
+    "type": "components"
+  },
+  {
+    "slug": "button-group",
+    "type": "components"
+  },
+  {
+    "slug": "button",
+    "type": "components"
+  },
+  {
+    "slug": "card",
+    "type": "components"
+  },
+  {
+    "slug": "checkbox-group",
+    "type": "components"
+  },
+  {
+    "slug": "checkbox",
+    "type": "components"
+  },
+  {
+    "slug": "col",
+    "type": "components"
+  },
+  {
+    "slug": "container",
+    "type": "components"
+  },
+  {
+    "slug": "divider",
+    "type": "components"
+  },
+  {
+    "slug": "expander",
+    "type": "components"
+  },
+  {
+    "slug": "field-group",
+    "type": "components"
+  },
+  {
+    "slug": "field",
+    "type": "components"
+  },
+  {
+    "slug": "hide",
+    "type": "components"
+  },
+  {
+    "slug": "icon",
+    "type": "components"
+  },
+  {
+    "slug": "image",
+    "type": "components"
+  },
+  {
+    "slug": "inline",
+    "type": "components"
+  },
+  {
+    "slug": "input-currency",
+    "type": "components"
+  },
+  {
+    "slug": "input",
+    "type": "components"
+  },
+  {
+    "slug": "label",
+    "type": "components"
+  },
+  {
+    "slug": "link",
+    "type": "components"
+  },
+  {
+    "slug": "menu",
+    "type": "components"
+  },
+  {
+    "slug": "modal",
+    "type": "components"
+  },
+  {
+    "slug": "overview",
+    "type": "components"
+  },
+  {
+    "slug": "panel",
+    "type": "components"
+  },
+  {
+    "slug": "pill",
+    "type": "components"
+  },
+  {
+    "slug": "placeholder",
+    "type": "components"
+  },
+  {
+    "slug": "popover",
+    "type": "components"
+  },
+  {
+    "slug": "progress",
+    "type": "components"
+  },
+  {
+    "slug": "provider",
+    "type": "components"
+  },
+  {
+    "slug": "radio-group",
+    "type": "components"
+  },
+  {
+    "slug": "radio",
+    "type": "components"
+  },
+  {
+    "slug": "readonly",
+    "type": "components"
+  },
+  {
+    "slug": "row",
+    "type": "components"
+  },
+  {
+    "slug": "select",
+    "type": "components"
+  },
+  {
+    "slug": "skeleton",
+    "type": "components"
+  },
+  {
+    "slug": "skip-link",
+    "type": "components"
+  },
+  {
+    "slug": "slideout",
+    "type": "components"
+  },
+  {
+    "slug": "slider",
+    "type": "components"
+  },
+  {
+    "slug": "spinner",
+    "type": "components"
+  },
+  {
+    "slug": "stack",
+    "type": "components"
+  },
+  {
+    "slug": "styled",
+    "type": "components"
+  },
+  {
+    "slug": "tab-set",
+    "type": "components"
+  },
+  {
+    "slug": "table",
+    "type": "components"
+  },
+  {
+    "slug": "tag-input",
+    "type": "components"
+  },
+  {
+    "slug": "tag",
+    "type": "components"
+  },
+  {
+    "slug": "text",
+    "type": "components"
+  },
+  {
+    "slug": "toaster",
+    "type": "components"
+  },
+  {
+    "slug": "toggle",
+    "type": "components"
+  },
+  {
+    "slug": "tooltip",
+    "type": "components"
+  },
+  {
+    "slug": "validation-message",
+    "type": "components"
+  },
+  {
+    "slug": "breadcrumbs",
+    "type": "patterns"
+  },
+  {
+    "slug": "contextual-menu",
+    "type": "patterns"
+  },
+  {
+    "slug": "dropdown-menu",
+    "type": "patterns"
+  },
+  {
+    "slug": "feedback",
+    "type": "patterns"
+  },
+  {
+    "slug": "form",
+    "type": "patterns"
+  },
+  {
+    "slug": "loading",
+    "type": "patterns"
+  },
+  {
+    "slug": "overview",
+    "type": "patterns"
+  },
+  {
+    "slug": "search-selection",
+    "type": "patterns"
+  },
+  {
+    "slug": "shadow",
+    "type": "patterns"
+  },
+  {
+    "slug": "side-nav",
+    "type": "patterns"
   }
-}
+]

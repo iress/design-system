@@ -136,3 +136,5 @@ Typography tokens include font family, size, weight, and line height specificati
 [View Full Typography Token Reference](../tokens/typography.md)
 
 ---
+
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-typography--docs)

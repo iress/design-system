@@ -1,269 +1,199 @@
-# 
-> **Component:** `import { IressMenu } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs)```tsx
-```
+# Menu
 
-## Quick Start
+> Displays a list of navigational or actionable items.
 
-```tsx
-<IressMenu />
-```
-
-## Usage
-
-### Basic
-
-`IressMenuDivider`, `IressMenuHeading`, `IressMenuItem` and `IressMenuText` should be supplied as `children` of the menu.
-
-- `IressMenuDivider` can be used to display a divider, it supports all of the props of `hr`. It will adjust according to the menu's role and layout.
-- `IressMenuHeading` is used to display headings. It supports all of the props of `IressText` and will adjust according to the menu's role and layout.
-- `IressMenuItem` is used to display an interactive item. If provided a `href` prop will render the item as a link, otherwise it will render as a button.
-- `IressMenuText` can be used to display other non-interactive text. It supports all of the props of `IressText`.
+## Import
 
 ```tsx
-<IressMenu defaultSelected={5}>
-  basic
-</IressMenu>
+import { IressMenu } from '@iress-oss/ids-components';
 ```
 
-[View "Basic" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--basic)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Menu)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=menu&title=[Menu]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=menu,enhancement&title=[Menu]+Feature:+)
 
-### Complex
+A menu can display grouped action buttons, navigation items or headings.
 
-`IressMenuItem`, `IressMenuHeading` and `IressMenuText` support `prepend`, `divider` and `append` props, to allow you to create complex menu items.
+<StoryEmbed id="components-menu--basic"/>
 
-Note: Instead of using the `divider` prop on `IressMenuItem`, you can use `IressMenuDivider` to separate items. This gives you more control over where the divider sits.
+## Design
+
+### When to use
+
+Most menu use cases are already covered by higher-level patterns. Use `IressMenu` directly only when these don't fit:
+
+| Need | Use instead |
+|------|-------------|
+| Action menu on a button click | [ContextualMenu](../patterns/contextual-menu.md) |
+| Filterable option list in a dropdown | [DropdownMenu](../patterns/dropdown-menu.md) |
+| Select from a list of options | [Select](../components/select.md) |
+| Sidebar navigation with sections | [SideNav](../patterns/side-nav.md) |
+| Overflow items in breadcrumbs | [Breadcrumbs](../patterns/breadcrumbs.md) |
+
+Use raw `IressMenu` for:
+
+- **Standalone visible menus** — navigation or action lists that are always visible (not in a popover)
+- **Custom list interactions** — when you need `listbox` role with custom rendering
+- **Inside a Popover** — when building your own popover + menu composition
+
+### When not to use
+
+- **Primary navigation** — use a dedicated navigation component or layout
+- **Simple link lists** — use plain links if there's no grouping or interactivity needed
+- **Form selects** — use a Select component for form submissions
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Set the correct `role` for the menu's purpose | Mix navigation links and action buttons in the same menu |
+| Wrap navigation menus in a `<nav>` element | Use `slot` attributes on children (legacy v4 pattern) |
+| Use `IressMenuDivider` to separate logical groups | Stack too many items without headings or dividers |
+| Use `prepend` and `append` props for icons | Place complex interactive content inside menu items |
+
+### Content guidelines
+
+- **Labels**: Use sentence case, keep action-oriented (e.g. "Edit profile", "Delete")
+- **Headings**: Use `IressMenuHeading` to label groups of related items
+- **Dividers**: Separate logical sections visually
+
+### Related patterns
+
+- [ContextualMenu](../patterns/contextual-menu.md) — action menu triggered by a button
+- [DropdownMenu](../patterns/dropdown-menu.md) — filterable dropdown with search
+- [Select](../components/select.md) — select from a list of options
+- [SideNav](../patterns/side-nav.md) — sidebar navigation with sections
+- [Breadcrumbs](../patterns/breadcrumbs.md) — overflow navigation menu
+- [Popover](../components/popover.md) — commonly wraps menus for contextual display
+
+## Develop
+
+### Quick Start
 
 ```tsx
-<IressMenu maxWidth="3/12">
-  complex
-</IressMenu>
-```
+import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
 
-[View "Complex" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--complex)
-
-## Examples
-
-### Secondary navigation
-
-When the `href` prop is set on `IressMenuItem`, it will render as a link.
-
-When rendering a set of links for navigation purposes (as a secondary nav in this example) make sure you wrap the `IressMenu` in a nav element and set the menu's `role` prop to list.
-
-```tsx
-<nav aria-label="Secondary">
-<IressMenu />
-</nav>
-```
-
-[View "SecondaryNavigation" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--secondary-navigation)
-
-### Headings
-
-Using the `IressMenuHeading` component, you can create headings within the menu. Simply set the `element` or `textStyle` prop to your desired heading level.
-
-```tsx
 <IressMenu>
-  headings
+  <IressMenuItem>Action one</IressMenuItem>
+  <IressMenuItem>Action two</IressMenuItem>
 </IressMenu>
 ```
 
-[View "Headings" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--headings)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu--docs#api-props)
 
-### Dividers
+### Usage
 
-When the `divider` prop is set, the `IressMenuItem`, `IressMenuHeading` and `IressMenuText` will render a bottom border.
+#### Basic
 
-In situations where a bottom border will not work, you can also use `IressMenuDivider` inside the menu to separate items.
+`IressMenuDivider`, `IressMenuHeading`, `IressMenuItem` and `IressMenuText` are supplied as children of the menu.
+
+<StoryEmbed id="components-menu--basic"/>
+
+#### Complex
+
+`IressMenuItem`, `IressMenuHeading` and `IressMenuText` support `prepend`, `divider` and `append` props.
+
+<StoryEmbed id="components-menu--complex"/>
+
+#### Secondary navigation
+
+When `href` is set on `IressMenuItem`, it renders as a link. Wrap in a `<nav>` and set `role` to `list`.
+
+<StoryEmbed id="components-menu--secondary-navigation"/>
+
+#### Headings
+
+Use `IressMenuHeading` with the `element` or `textStyle` prop for heading levels.
+
+<StoryEmbed id="components-menu--headings"/>
+
+#### Dividers
+
+Use `IressMenuDivider` or the `divider` prop on items for visual separation.
+
+<StoryEmbed id="components-menu--dividers"/>
+
+#### Fluid menus
+
+Set `fluid` to stretch the menu to its container width.
+
+<StoryEmbed id="components-menu--fluid"/>
+
+#### Layout
+
+The `layout` prop supports `stack` (default), `inline`, and `inline-equal-width`.
+
+<StoryEmbed id="components-menu--layout"/>
+
+#### Text wrapping
+
+Use `noWrap` to prevent menu item text from wrapping.
+
+<StoryEmbed id="components-menu--no-wrap"/>
+
+#### Prepend & Append
+
+Use `prepend` and `append` props to position content before or after item text.
+
+<StoryEmbed id="components-menu--slot-props"/>
+
+#### Roles
+
+The `role` prop changes both the ARIA role and interaction model:
+
+- `list` (default): navigated with `Tab`
+- `menu`: navigated with arrow keys
+- `listbox`: selectable items, navigated with arrow keys
+
+<StoryEmbed id="components-menu--roles"/>
+
+#### Variants
+
+- Default — for popovers, side menus, and navigation
+- `subdraw` — adds arrow icons for sub-menu navigation
+- `radio` — radio mark style (single select listbox only)
+
+<StoryEmbed id="components-menu--variants"/>
+
+### Menu Group
+
+`IressMenuGroup` groups related items under a common label.
+
+<StoryEmbed id="components-menu-menugroup--multiple-groups"/>
+
+### Menu Item
+
+`IressMenuItem` is the individual item within a menu. It can be a button, link, or selectable option depending on the menu's role.
 
 ```tsx
+import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
+
 <IressMenu>
-  dividers
+  <IressMenuItem value="edit">Edit</IressMenuItem>
+  <IressMenuItem href="/settings">Settings</IressMenuItem>
 </IressMenu>
 ```
 
-[View "Dividers" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--dividers)
+[View MenuItem props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu-menuitem--docs#api-props)
 
-### Fluid menus
+#### Selected
 
-By setting the `fluid` prop on the menu component, the menu will stretch to the width of its containing element.
+<StoryEmbed id="components-menu-menuitem--selected"/>
 
-```tsx
-<IressMenu fluid />
-```
+#### canToggle
 
-[View "Fluid" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--fluid)
+<StoryEmbed id="components-menu-menuitem--can-toggle"/>
 
-### Layout
+#### Prepend and append
 
-The `layout` prop comes with three options:
+<StoryEmbed id="components-menu-menuitem--prepend-and-append"/>
 
-- `stack` (default) - menu items will stack on top of each other
-- `inline` - menu items will be inline
-- `inline-equal-width` - menu items will be inline and have equal width
+#### Element (custom routing)
 
-```tsx
-<IressStack gap="lg">
-<IressText>
-<h3>Stack (default)</h3>
-<IressMenu layout="stack" />
-</IressText>
-<IressText>
-<h3>Inline</h3>
-<IressMenu layout="inline" />
-</IressText>
-<IressText>
-<h3>Inline Equal Width</h3>
-<IressMenu layout="inline-equal-width" />
-</IressText>
-</IressStack>
-```
+<StoryEmbed id="components-menu-menuitem--element"/>
 
-[View "Layout" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--layout)
-
-### Text wrapping
-
-By default, menu item text will wrap on to the next line when it exceeds the menu width. Using the `noWrap` prop, you set the menu item text to not wrap.
-
-```tsx
-<IressInline>
-<IressMenu width="input.12">
-<IressMenuItem>Menu item with some text that wraps</IressMenuItem>
-</IressMenu>
-<IressMenu width="input.12" noWrap>
-<IressMenuItem>Non wrapping menu item with some text</IressMenuItem>
-</IressMenu>
-</IressInline>
-```
-
-[View "NoWrap" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--no-wrap)
-
-### Prepend & Append
-
-`IressMenuItem`, `IressMenuHeading` and `IressMenuText` provide `prepend` and `append` props to position content either before or after its content.
-
-> **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
-
-```tsx
-<IressMenu role="menu">
-  slots
-</IressMenu>
-```
-
-[View "SlotProps" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--slot-props)
-
-### Roles
-
-The `role` prop that comes with the menu component not only changes the aria-role of the menu to allow it to be easily recognised in screen readers, but also changes how the menu is interacted with.
-
-There are four roles supported:
-
-- `list` (default): The menu is treated as a list of items. Child menu subcomponents render with the `listitem` role where appropriate. The user navigates using the `tab` key.
-- `menu`: The menu is treated as a menu of items. Child menu subcomponents render with the `menuitem` role where appropriate. The user navigates using `arrow` keys.
-- `listbox`: The menu is treated as a list of selectable items, similar to a `<select />`. Child menu subcomponents render with the `option` role where appropriate. The user navigates using `arrow` keys.
-
-**Note:** When menu is used as a child of popover, the `type` that is set on popover will be applied to menu (so you don't need to set it twice).
-
-#### List
-
-The default role for the menu component is `list`. It is most often used for navigation and its items can be navigated (using the keyboard) with the `tab` key.
-
-```tsx
-<IressMenu defaultSelected={5}>
-  basic
-</IressMenu>
-```
-
-[View "ListRole" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--list-role)
-
-#### Menu
-
-The `menu` role is used when the items in the menu has an action that performs a task in the application. The items can be navigated (using the keyboard) with the `arrow` keys, depending on the layout.
-
-```tsx
-<IressMenu role="menu" />
-```
-
-[View "MenuRole" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--menu-role)
-
-#### Listbox
-
-The `listbox` role is used for lists from which a user may select one or more items.
-
-A value is supplied to `IressMenuButton` (like you would with an option element inside a select) and a `onChange` event is emitted with the selected value(s) whenever the selection is changed by the user.
-
-Set the `multiSelect` prop to true for a multi-selectable listbox.
-
-```tsx
-<IressMenu role="listbox">
-  selectable
-</IressMenu>
-```
-
-[View "ListboxRole" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--listbox-role)
-
-### Variants
-
-The `variant` prop can be used to change the style of the menu to suit different contexts. There are two variants:
-
-- Not defined - for use inside popovers, side menus and navigation
-- `subdraw` - for use with navigation drawers, it adds an arrow icon to the end of menu items to indicate that they will open a sub-menu.
-- `radio` - for use when you want the menu item to have a radio mark style indicator (only supports single select listbox role)
-
-```tsx
-<IressStack gap="lg">
-<IressMenu variant="radio" />
-<IressMenu variant="subdraw" maxWidth="input.12" />
-<IressMenu variant="side" maxWidth="input.12" />
-<IressMenu variant="side" maxWidth="input.12" numbered />
-<IressMenu children={MENU_CHILDREN_OPTIONS.groupedIcons}
-variant="rail"
-/>
-</IressStack>
-```
-
-[View "Variants" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu--variants)
-
-### Menu Groups
-
-`IressMenuGroup` can be used to group related menu items together under a common label.
-
-#### Default (Inline)
-
-By default, `IressMenuGroup` renders the label as a non-focusable heading with the children displayed inline below it.
-
-```tsx
-<IressMenu>
-  <IressMenuGroup label="Recent Files">
-    <IressMenuItem>Document.pdf</IressMenuItem>
-    <IressMenuItem>Spreadsheet.xlsx</IressMenuItem>
-  </IressMenuGroup>
-</IressMenu>
-```
-
-#### Subdraw Variant
-
-When `variant="subdraw"` is set, the group label becomes a clickable menu item that opens a fly-over submenu containing the group's children. This is useful for organizing large menus into collapsible sections.
-
-```tsx
-<IressMenu>
-  <IressMenuGroup label="More Options" variant="subdraw">
-    <IressMenuItem>Option 1</IressMenuItem>
-    <IressMenuItem>Option 2</IressMenuItem>
-    <IressMenuItem>Option 3</IressMenuItem>
-  </IressMenuGroup>
-</IressMenu>
-```
-
-The subdraw variant:
-
-- Renders the label as a `IressMenuItem` with a chevron icon
-- Opens a popover submenu when clicked
-- Supports proper ARIA attributes (`aria-haspopup`, `aria-expanded`)
-- Can be nested for multi-level submenus
-- Closes on Escape key or click outside
-
-## Testing
+### Testing
 
 Query menu items by their role:
 
@@ -271,19 +201,58 @@ Query menu items by their role:
 const menuItem = screen.getByRole('menuitem', { name: 'Settings' });
 ```
 
-### Test IDs
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu--docs#testing)
 
-When you pass a `data-testid` to `IressMenu` sub-components, the following
-nested test IDs are generated automatically:
 
-| Suffix | Example | Description |
-| --- | --- | --- |
-| `activator` | `my-menu__activator` | The menu group activator item |
-| `subdraw` | `my-menu__subdraw` | The subdraw menu container |
-| `subdraw__trigger` | `my-menu__subdraw__trigger` | The subdraw trigger item |
-| `checkbox-mark` | `my-menu__checkbox-mark` | The checkbox indicator on selectable menu items |
-| `checkbox` | `my-menu__checkbox` | The checkbox on multi-select menu items |
+#### Test selectors
+
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root element of the menu | — | `menu` |
+| activator | A menu group activator (propagated from IressMenuGroup data-testid) | — | `<menugroup-testid>__activator` |
+| subdraw | A subdraw container (propagated from IressMenuGroup data-testid) | — | `<menugroup-testid>__subdraw` |
+| subdraw trigger | A subdraw trigger item (propagated from IressMenuGroup data-testid) | — | `<menugroup-testid>__subdraw__trigger` |
+| checkbox mark | Checkbox indicator on a selectable item (propagated from IressMenuItem data-testid) | — | `<menuitem-testid>__checkbox-mark` |
+| checkbox | Checkbox on a multi-select item (propagated from IressMenuItem data-testid) | — | `<menuitem-testid>__checkbox` |
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs)
+### Storybook
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu--docs)
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| List role | Items navigated with `Tab`, rendered as `listitem` |
+| Menu role | Items navigated with arrow keys, rendered as `menuitem` |
+| Listbox role | Items are selectable, rendered as `option` |
+| Fluid | Menu stretches to container width |
+| Subdraw variant | Group labels open fly-over submenus on click |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **4.1.2 Name, Role, Value** — Uses appropriate ARIA roles (`list`, `menu`, `listbox`) based on `role` prop
+- **2.1.1 Keyboard** — All items are keyboard accessible with role-appropriate navigation
+- **1.3.1 Info and Relationships** — Headings and groups provide semantic structure
+
+**Keyboard interaction:**
+
+| Key | Action |
+|-----|--------|
+| `Tab` | Navigate items (list role) |
+| `Arrow Up` / `Arrow Down` | Navigate items (menu/listbox role) |
+| `Enter` / `Space` | Activate focused item or toggle selection |
+| `Escape` | Close subdraw menus |
+| `Home` / `End` | Jump to first/last item (menu/listbox role) |
+
+### Edge cases
+
+- **Empty menu**: Renders an empty container with the appropriate role
+- **Nested subdraws**: Support multi-level nesting; close on Escape or outside click
+- **Mixed content**: Non-interactive items (`IressMenuText`, `IressMenuHeading`) are skipped during keyboard navigation

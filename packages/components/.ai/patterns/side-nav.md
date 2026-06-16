@@ -1,116 +1,123 @@
-# 
-> **Component:** `import { IressSideNav } from '@iress-oss/ids-components'`
-> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-side-nav--docs)```tsx
-```
+# SideNav
 
-## Quick Start
+> Provides a vertical navigation menu typically used in application sidebars.
+
+## Import
 
 ```tsx
-<IressSideNav activeItemKey="hubs" />
+import { IressSideNav } from '@iress-oss/ids-components';
 ```
 
-## Usage
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-side-nav--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/SideNav)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=side-nav&title=[Side Nav]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=side-nav,enhancement&title=[Side Nav]+Feature:+)
 
-The `IressSideNav` component accepts an `items` array that defines the rail navigation items. Each item can optionally include `children` sub-items that are shown in the expandable side panel when that item is active.
+A side navigation pattern that combines a rail (icon-only bar) with an expandable side menu panel. Provides a data-driven API where items are passed as an array, with the rail acting as the main navigation and the side menu showcasing children under each navigation group.
 
-The `activeItemKey` prop controls which rail item is currently selected — typically derived from the current route in your application.
+<StoryEmbed id="patterns-sidenav--default" autoHeight={false} height={300} />
 
-### When to Use
+## Design
+
+### When to use
 
 - **Application shell navigation**: Provide persistent top-level navigation alongside content areas
 - **Multi-section apps**: When the application has several major sections, each with its own sub-navigation
 - **Progressive disclosure**: Show high-level categories on the rail and reveal detail in the expandable panel
 - **Compact layouts**: Maximise content space by defaulting to a collapsed icon rail
 
-### When Not to Use
+### When not to use
 
 - **Simple sites with few pages**: Use a standard horizontal nav or sidebar link list instead
 - **Deeply nested hierarchies**: SideNav supports one level of children; for deeper nesting consider tree views
 - **Temporary or contextual actions**: Use `IressContextualMenu` or `IressDropdownMenu` for action menus
 - **Mobile-first layouts**: The rail + panel pattern is designed for desktop viewports; on mobile consider a hamburger menu or bottom navigation
 
-## Examples
+### Do's and Don'ts
 
-### Expanded
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Limit to 7 top-level navigation items | Exceed 7 top-level items — it overwhelms users |
+| Use icons consistently across all rail items | Mix items with and without icons in the rail |
+| Highlight the active section clearly | Use SideNav for temporary or contextual actions |
 
-The side menu expands to show child items when a rail item is active. The `defaultExpanded` prop can be used to have the side menu open by default.
+### Content guidelines
+
+- Keep labels short — 1–2 words per navigation item
+- Use sentence case for all labels
+- Ensure labels clearly describe the destination section
+
+### Related patterns
+
+- [Menu](../components/menu.md) — for simpler navigation lists
+- [TabSet](../components/tab-set.md) — for switching between views within a page
+- [Breadcrumbs](../patterns/breadcrumbs.md) — for showing hierarchical location
+
+## Develop
+
+### Quick Start
 
 ```tsx
-<IressSideNav defaultExpanded />
+import { IressSideNav } from '@iress-oss/ids-components';
+
+<IressSideNav activeItemKey="hubs" />
 ```
 
-[View "Expanded" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-side-nav--expanded)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-side-nav--docs#api-props)
 
-### Numbered
+### Usage
 
-Show numbered drawer headers in the expanded side menu.
+The `IressSideNav` component accepts an `items` array that defines the rail navigation items. Each item can optionally include `children` sub-items that are shown in the expandable side panel when that item is active.
 
-```tsx
-<IressSideNav activeItemKey="hubs" defaultExpanded numbered />
-```
+The `activeItemKey` prop controls which rail item is currently selected — typically derived from the current route in your application.
 
-[View "Numbered" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-side-nav--numbered)
+<StoryEmbed id="patterns-sidenav--default" autoHeight={false} height={300} />
 
-### With Header & Footer
+#### Header and footer
 
 The `header` and `footer` props accept any `ReactNode`, allowing you to place a search bar, branding, version info, or other content in the expanded panel.
 
-```tsx
-<IressSideNav activeItemKey="portfolios" defaultExpanded />
-```
+<StoryEmbed id="patterns-sidenav--with-header-footer" autoHeight={false} height={400}/>
 
-[View "WithHeaderFooter" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-side-nav--with-header-footer)
+#### Grouped children
 
-### Controlled State
+If your navigation has logical groupings, you can use the `children` property on child items to visually separate them in the side panel.
+
+<StoryEmbed id="patterns-sidenav--grouped-children" autoHeight={false} height={400}/>
+
+#### Controlled state
 
 Manage `expanded` and `activeItemKey` externally for full control over the navigation state.
 
-```tsx
-<SideNavControlled />
-```
+<StoryEmbed id="patterns-sidenav--controlled" autoHeight={false} height={300}/>
 
-[View "Controlled" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-side-nav--controlled)
-
-### Dynamic Side Menu
+#### Dynamic side menu
 
 Use the `sideMenuItems` prop to override the side panel content with dynamically fetched or context-dependent sub-items.
 
-```tsx
-<IressSideNav activeItemKey="hubs" sideMenuLabel="Client Hub" defaultExpanded numbered width="300px" />
-```
+<StoryEmbed id="patterns-sidenav--dynamic-side-menu" autoHeight={false} height={400}/>
 
-[View "DynamicSideMenu" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-side-nav--dynamic-side-menu)
-
-### Custom Routing
+#### Custom routing
 
 Use the `element` prop on each item for integration with third-party routing libraries like React Router or Next.js.
 
-```tsx
-<SideNavRouting />
-```
+<StoryEmbed id="patterns-sidenav--custom-routing" autoHeight={false} height={300}/>
 
-[View "CustomRouting" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-side-nav--custom-routing)
-
-## Accessibility
-
-- The root element is a `<nav>` landmark with a configurable `aria-label` (default: "Side navigation")
-- The expand/collapse toggle button includes `aria-expanded` to communicate state
-- Rail items use tooltips with the item label for screen reader accessibility
-- The side panel is marked `aria-hidden` when collapsed
-- Keyboard navigation is supported through the underlying `IressMenu` component
-- Custom `expandLabel` and `collapseLabel` props allow localisation of toggle button labels
-
-## Integration with Routing
+##### Integration with routing
 
 SideNav is designed to work with any routing library:
 
 ```tsx
 // Next.js
+import Link from 'next/link';
+
 const items = [
   { key: 'home', icon: 'home', label: 'Home', href: '/', element: Link },
 ];
 
 // React Router
+import { Link } from 'react-router-dom';
+
 const items = [
   { key: 'home', icon: 'home', label: 'Home', href: '/', element: Link },
 ];
@@ -126,6 +133,26 @@ const activeSection = usePathname().split('/')[1];
 const activeSection = useLocation().pathname.split('/')[1];
 ```
 
+## Specifications
+
+### Accessibility
+
+- The root element is a `<nav>` landmark with a configurable `aria-label` (default: "Side navigation")
+- The expand/collapse toggle button includes `aria-expanded` to communicate state
+- Rail items use tooltips with the item label for screen reader accessibility
+- The side panel is marked `aria-hidden` when collapsed
+- Keyboard navigation is supported through the underlying `IressMenu` component
+- Custom `expandLabel` and `collapseLabel` props allow localisation of toggle button labels
+
+### Keyboard interaction
+
+| Key | Action |
+|-----|--------|
+| `Tab` | Moves focus between rail items and side panel items |
+| `Enter` / `Space` | Activates the focused rail item or expands/collapses the panel |
+| `ArrowDown` | Moves focus to the next item in the rail or side panel |
+| `ArrowUp` | Moves focus to the previous item in the rail or side panel |
+
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-side-nav--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-side-nav--docs)
