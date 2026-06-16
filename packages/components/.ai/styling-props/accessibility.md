@@ -1,9 +1,3 @@
-import { IressButton } from '@iress-oss/ids-components';
-export const meta = {
-  title: 'Accessibility',
-  description: 'These are all styling props related to screen readers and accessibility. They allow you to hide content from visual users while still providing context for screen reader users, ensuring an inclusive experience for all users.',
-};
-
 # Accessibility
 
 These are all styling props related to screen readers and accessibility. They allow you to hide content from visual users while still providing context for screen reader users, ensuring an inclusive experience for all users.
@@ -29,11 +23,9 @@ It accepts the following values:
 | `'group'`              | Focus ring triggered by a parent `.group` container            |
 | `'within:inset'`       | Inset focus ring when a child element is focused               |
 
-
 <StoryEmbed id="styling-props-accessibility--focusable" />
 
 ### Inset focus ring
-
 
 <StoryEmbed id="styling-props-accessibility--focusable-inset" />
 
@@ -41,13 +33,11 @@ It accepts the following values:
 
 The `srOnly` prop allows you to set a component to be only visible on screen readers. It is used to ensure the screen reader has context of the screen to help the user understand the tasks required of them.
 
-
 <StoryEmbed id="styling-props-accessibility--sr-only" />
 
 ### Responsive
 
 The `srOnly` prop is responsive, allowing you to show content on larger screens and hiding them on smaller ones, enabling screen readers to have the same context as larger screens as they are not limited by device size.
-
 
 <StoryEmbed id="styling-props-accessibility--sr-only-responsive" />
 
@@ -55,8 +45,6 @@ The `srOnly` prop is responsive, allowing you to show content on larger screens 
 
 ## See also
 
-- [Accessibility foundations](/foundations/accessibility) — Key practices and principles for building accessible components in IDS
+- [Accessibility foundations](../foundations/accessibility.md) — Key practices and principles for building accessible components in IDS
 
 ---
-
-<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-accessibility--docs">View in Storybook →</IressButton>

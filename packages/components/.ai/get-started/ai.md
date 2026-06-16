@@ -1,0 +1,73 @@
+# AI
+
+IDS provides agent skills that give AI coding assistants contextual knowledge about the design system — no runtime dependencies required.
+
+## Available Skills
+
+| Skill | Description |
+|-------|-------------|
+| `figma-to-ids` | Translate Figma design properties into IDS component implementations |
+| `ui-translation` | Translate natural language UI descriptions into IDS component code |
+| `ui-doctor` | Audit and validate IDS component usage and compliance |
+| `token-usage` | Guide on correctly using IDS design tokens in React components and CSS |
+| `version-migration` | Migrate applications between IDS major versions (v4→v5, v5→v6, OUI→v6) |
+
+## Installation
+
+Install skills using the [skills CLI](https://github.com/vercel-labs/skills):
+
+```bash
+# Install all IDS skills (interactive — choose your agents)
+npx skills add iress/design-system
+
+# Install a specific skill
+npx skills add iress/design-system --skill token-usage
+
+# Install to a specific agent
+npx skills add iress/design-system -a github-copilot
+npx skills add iress/design-system -a claude-code
+npx skills add iress/design-system -a cursor
+npx skills add iress/design-system -a kiro-cli
+```
+
+## How it works
+
+Skills are markdown files that provide context to AI tools. They include:
+
+- **Component API knowledge** — correct prop usage, available options, TypeScript interfaces
+- **Design patterns** — when to use which component, composition rules, accessibility requirements
+- **Code examples** — verified examples extracted from Storybook stories
+- **Migration rules** — automated transformation patterns for version upgrades
+
+## Using with AI assistants
+
+### GitHub Copilot
+
+Skills are installed as custom instructions in `.github/copilot-instructions.md`.
+
+### Kiro CLI
+
+Skills are symlinked to `.kiro/skills/` and loaded automatically.
+
+### Cursor / Claude Code
+
+Skills are installed in the respective agent configuration directories.
+
+## Figma Integration
+
+The `figma-to-ids` skill can translate Figma designs directly into IDS code. If you have a Figma MCP server configured, AI agents can read Figma files and generate implementations. Without MCP, paste exported design specs into your prompt.
+
+## `.ai/` Directory
+
+Each published package includes an `.ai/` directory with AI-optimised documentation:
+
+```
+node_modules/@iress-oss/ids-components/.ai/
+  components/alert.md
+  components/button.md
+  patterns/form.md
+  skills/ui-translation.md
+  index.json
+```
+
+These files are automatically generated from the guidelines content and Storybook examples. They are designed to be easily parsed by AI tools, providing up-to-date information on component APIs, usage patterns, and design tokens.

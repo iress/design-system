@@ -1,9 +1,3 @@
-import { IressButton } from '@iress-oss/ids-components';
-export const meta = {
-  title: 'Spacing',
-  description: 'These are all styling props related to changing the spacing of a component.',
-};
-
 # Spacing
 
 These are all styling props related to changing the spacing of a component.
@@ -30,13 +24,11 @@ There are seven props you can use to customise the padding of any component. It 
 
 <StoryEmbed id="styling-props-spacing--button" />
 
-
 <StoryEmbed id="styling-props-spacing--variable-padding" />
 
 ### Responsive padding
 
 All padding props are responsive and can be changed according to different screen sizes.
-
 
 <StoryEmbed id="styling-props-spacing--responsive-padding" />
 
@@ -63,9 +55,7 @@ There are seven props you can use to customise the margin of any component. It a
 - `mt`: Change the margin on the top of a component
 - `mb`: Change the margin on the bottom of a component
 
-
 <StoryEmbed id="styling-props-spacing--margin" />
-
 
 <StoryEmbed id="styling-props-spacing--variable-margin" />
 
@@ -73,9 +63,7 @@ There are seven props you can use to customise the margin of any component. It a
 
 All margin props are responsive and can be changed according to different screen sizes.
 
-
 <StoryEmbed id="styling-props-spacing--responsive-margin" />
-
 
 <StoryEmbed id="styling-props-spacing--responsive-variable-margin" />
 
@@ -88,7 +76,6 @@ Negative margin is supported in the same way as positive margin. You can use the
 ## `noGutter`
 
 The `noGutter` prop removes the bottom margin of the last direct child of a component. This is useful when you have nested content inside a component with padding, such as `IressPanel` or `IressCard`, to remove unnecessary spacing in your layout.
-
 
 <StoryEmbed id="styling-props-spacing--no-gutter" />
 
@@ -208,8 +195,6 @@ For a complete reference of the full spacing scale with all available tokens (sp
 - `spacing.6` / `lg`: 24px - Large spacing
 - `spacing.10` / `xl`: 40px - Extra large spacing
 
-[View Full Spacing Token Reference](/tokens/spacing)
+[View Full Spacing Token Reference](../tokens/spacing.md)
 
 ---
-
-<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-spacing--docs">View in Storybook →</IressButton>

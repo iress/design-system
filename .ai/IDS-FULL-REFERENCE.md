@@ -1,18 +1,19 @@
-# Alert
+# IDS Full Reference
 
-An alert displays a short, important message in a way that attracts the user's attention without interrupting the user's task.
+> Auto-generated from 97 docs. Do not edit manually.
 
+---
+
+<!-- components/alert.md -->
+
+# 
 > **Component:** `import { IressAlert } from '@iress-oss/ids-components'`
-> **Storybook:** [Alert in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)> [View live example in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components-alert--status)
 
 ## Quick Start
 
 ```tsx
-import { IressAlert } from '@iress-oss/ids-components';
-
-<IressAlert status="info">
-  This is a simple info alert
-</IressAlert>
+<IressAlert status="info">This is a simple info alert</IressAlert>;
 ```
 
 ## Usage
@@ -35,16 +36,16 @@ For a full comparison of feedback components, see the [Feedback pattern](https:/
 
 ### Status
 
-The alert offers four statuses that set a distinctive colour and icon. They can be set using the `status` prop. Their different use cases are described here.
+The alert offers five statuses that set a distinctive colour and icon. They can be set using the `status` prop. Their different use cases are described here.
 
 ```tsx
 <IressStack gap="md">
-{[...STATUSES, 'neutral'].map((status) => (
-<IressAlert status={status as never} key={status}>
-{messages[status as never]}
-</IressAlert>
-))}
-</IressStack>
+  <IressAlert status="info">This is an informational message.</IressAlert>
+  <IressAlert status="success">Operation completed successfully.</IressAlert>
+  <IressAlert status="warning">Please review before continuing.</IressAlert>
+  <IressAlert status="danger">An error has occurred.</IressAlert>
+  <IressAlert status="neutral">A neutral notification.</IressAlert>
+</IressStack>;
 ```
 
 [View "Status" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--status)
@@ -56,7 +57,9 @@ An alert can be displayed with a heading. This is controlled by the `heading` pr
 **Note**: The `heading` prop replaces the `headingText` and `headingLevel` props from previous versions of IDS. These prop are now deprecated and will be removed in a future version.
 
 ```tsx
-<IressAlert heading="Alert heading" />
+<IressAlert heading="Alert heading">
+  This is an alert with a heading.
+</IressAlert>;
 ```
 
 [View "Heading" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--heading)
@@ -67,15 +70,26 @@ The `actions` prop allows you to display call to action buttons within the alert
 
 ```tsx
 <IressStack gap="md">
-<IressAlert status="danger" />
-<IressAlert status="info" />
-<IressAlert status="success" />
-<IressAlert status="warning" />
-<IressAlert status="neutral" />
-</IressStack>
+  <IressAlert
+    status="danger"
+    actions={[{ children: 'Retry' }, { children: 'Dismiss', mode: 'tertiary' }]}
+  >
+    Something went wrong. Please try again.
+  </IressAlert>
+  <IressAlert status="info" actions={[{ children: 'Learn more' }]}>
+    A new version is available.
+  </IressAlert>
+  <IressAlert status="success" actions={[{ children: 'View details' }]}>
+    Your changes have been saved.
+  </IressAlert>
+  <IressAlert status="warning" actions={[{ children: 'Review' }]}>
+    Your session is about to expire.
+  </IressAlert>
+  <IressAlert status="neutral" actions={[{ children: 'Got it' }]}>
+    This is a neutral alert with an action.
+  </IressAlert>
+</IressStack>;
 ```
-
-[View "Footer" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--footer)
 
 ### Icon
 
@@ -84,7 +98,7 @@ The `icon` prop allows you to customise the icon displayed in the alert. It acce
 ```tsx
 <IressAlert heading="Some information" multiLine icon={false}>
   This is an alert without an icon
-</IressAlert>
+</IressAlert>;
 ```
 
 [View "Icon" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--icon)
@@ -95,15 +109,27 @@ By default, the alert is designed to display short messages. If you need to disp
 
 ```tsx
 <IressStack gap="md">
-<IressAlert status="danger" />
-<IressAlert status="info" />
-<IressAlert status="success" />
-<IressAlert status="warning" />
-<IressAlert status="neutral" />
-</IressStack>
+  <IressAlert status="danger" multiLine heading="Error">
+    A detailed error message that spans multiple lines to provide more context
+    about what went wrong and how to fix it.
+  </IressAlert>
+  <IressAlert status="info" multiLine heading="Information">
+    Here is some detailed information that requires more space to explain the
+    context fully.
+  </IressAlert>
+  <IressAlert status="success" multiLine heading="Success">
+    Your operation completed successfully. Here are the details of what was
+    processed.
+  </IressAlert>
+  <IressAlert status="warning" multiLine heading="Warning">
+    Please be aware of the following important details before proceeding with
+    this action.
+  </IressAlert>
+  <IressAlert status="neutral" multiLine heading="Note">
+    This is a neutral multi-line alert with additional context for the user.
+  </IressAlert>
+</IressStack>;
 ```
-
-[View "MultiLine" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--multi-line)
 
 ### Variants
 
@@ -114,25 +140,39 @@ The alert can be displayed in different variants to suit different use cases. Th
 
 ```tsx
 <IressStack gap="md">
-<IressAlert variant="sidebar" />
-<IressAlert variant="full-width" />
-</IressStack>
+  <IressAlert variant="sidebar" heading="Sidebar alert">
+    This alert is displayed in the sidebar layout.
+  </IressAlert>
+  <IressAlert variant="full-width" heading="Full-width alert">
+    This alert is displayed in the full-width layout.
+  </IressAlert>
+</IressStack>;
 ```
 
 [View "Variant" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--variant)
 
 ### Dimissable
 
-The alert can be made dismissable by setting the `onDismiss` prop. This will display a close button in the top right corner of the alert, allowing users to dismiss it.
+The alert can be made dismissable by setting the `onClose` prop. This will display a close button in the top right corner of the alert, allowing users to dismiss it.
 
 ```tsx
 <IressStack gap="md">
-<IressAlert status="danger" />
-<IressAlert status="info" />
-<IressAlert status="success" />
-<IressAlert status="warning" />
-<IressAlert status="neutral" />
-</IressStack>
+  <IressAlert status="danger" onClose={() => console.log('closed')}>
+    This danger alert can be dismissed.
+  </IressAlert>
+  <IressAlert status="info" onClose={() => console.log('closed')}>
+    This info alert can be dismissed.
+  </IressAlert>
+  <IressAlert status="success" onClose={() => console.log('closed')}>
+    This success alert can be dismissed.
+  </IressAlert>
+  <IressAlert status="warning" onClose={() => console.log('closed')}>
+    This warning alert can be dismissed.
+  </IressAlert>
+  <IressAlert status="neutral" onClose={() => console.log('closed')}>
+    This neutral alert can be dismissed.
+  </IressAlert>
+</IressStack>;
 ```
 
 [View "Dismissable" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-alert--dismissable)
@@ -155,7 +195,9 @@ const alert = screen.getByRole('status');
 You can override the default role if needed:
 
 ```tsx
-<IressAlert status="info" role="alert">Urgent info</IressAlert>
+<IressAlert status="info" role="alert">
+  Urgent info
+</IressAlert>
 ```
 
 ### Test IDs
@@ -163,35 +205,23 @@ You can override the default role if needed:
 When you pass a `data-testid` to `IressAlert`, the following nested test IDs
 are generated automatically:
 
-| Suffix | Example | Description |
-| --- | --- | --- |
-| `heading` | `my-alert__heading` | The alert heading container |
-| `footer` | `my-alert__footer` | The alert footer/actions container |
+| Suffix    | Example             | Description                        |
+| --------- | ------------------- | ---------------------------------- |
+| `heading` | `my-alert__heading` | The alert heading container        |
+| `footer`  | `my-alert__footer`  | The alert footer/actions container |
 
-## Props
+---
 
-- **Type:** `IressAlertProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Alert/Alert.d.ts`
-
-```typescript
-import type { IressAlertProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)*
-
-
----
+<!-- components/autocomplete-recipes.md -->
 
 # Recipes
-
 Autocomplete component documentation.
-
-> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)
-
-> [!NOTE]
+> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)> [!NOTE]
 > **Experimental**
 >
 > This API is experimental. It may change in the future based on usage. The team
@@ -213,23 +243,21 @@ It has been exposed in case you need it in your application to provide custom se
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)
 
 
 ---
 
-# Autocomplete
+<!-- components/autocomplete.md -->
 
-Autocomplete allow for users to fill in their input by providing suggestions as they type.
-
+# 
 > **Component:** `import { IressAutocomplete } from '@iress-oss/ids-components'`
-> **Storybook:** [Autocomplete in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressAutocomplete } from '@iress-oss/ids-components';
-
 <IressAutocomplete />
 ```
 
@@ -478,8 +506,6 @@ We recommend using [Mock Service Worker](https://mswjs.io/) to mock the API call
 
 ```tsx
 // src/mocks/handlers.ts
-import { http, HttpResponse } from 'msw';
-
 export const handlers = [
   // Intercept "GET https://swapi.py4e.com/api/people" requests...
   http.get('https://swapi.py4e.com/api/people', () => {
@@ -492,14 +518,9 @@ export const handlers = [
 ];
 
 // src/mocks/node.js
-import { setupServer } from 'msw/node';
-import { handlers } from './handlers';
-
 export const server = setupServer(...handlers);
 
 // src/CustomAutocomplete.test.tsx
-import { server } from './mocks/node';
-
 server.listen();
 
 render(<IressAutocomplete options={searchStarWarsCharacters} />);
@@ -519,22 +540,14 @@ IDs are generated automatically:
 | `input` | `my-autocomplete__input` | The underlying input element |
 | `menu` | `my-autocomplete__menu` | The suggestions menu |
 
-## Props
+---
 
-- **Type:** `IressAutocompleteProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Autocomplete/Autocomplete.d.ts`
-
-```typescript
-import type { IressAutocompleteProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)*
-
-
----
+<!-- components/avatar.md -->
 
 # Avatar
 
@@ -631,18 +644,16 @@ import type { IressAvatarProps } from '@iress-oss/ids-components';
 
 ---
 
-# ButtonGroup
+<!-- components/button-group.md -->
 
-ButtonGroup allows users to switch between two or more possible states. ButtonGroups are only used for actions that occur immediately after the user “flips the switch”.
-
+# 
 > **Component:** `import { IressButtonGroup } from '@iress-oss/ids-components'`
-> **Storybook:** [ButtonGroup in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressButtonGroup } from '@iress-oss/ids-components';
-
 <IressButtonGroup label="Options" />
 ```
 
@@ -713,18 +724,16 @@ In multi-select mode, these props expects an array of matching strings.
 The Button Group emits an event when any of the selected buttons change. The event detail (`ButtonGroupChange`) consist of a string or an array of strings (depending on if it's in single or multi select mode) that represents the selected button(s).
 
 ```tsx
-const { success } = useToaster();
-
-    return (
-      <IressButtonGroup
-        {...args}
-        onChange={(selected) => {
-          success({
-            content: `Selected: ${selected ? String(selected) : 'none'}`,
-          });
-        }}
-      />
-    );
+<IressButtonGroup
+  label="Options"
+  onChange={(selected) => {
+    console.log(`Selected: ${selected ? String(selected) : 'none'}`);
+  }}
+>
+  <IressButton>Option 1</IressButton>
+  <IressButton>Option 2</IressButton>
+  <IressButton>Option 3</IressButton>
+</IressButtonGroup>
 ```
 
 [View "OnChange" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-button-group--on-change)
@@ -762,35 +771,23 @@ IDs are generated automatically:
 | --- | --- | --- |
 | `label` | `my-button-group__label` | The group label element |
 
-## Props
+---
 
-- **Type:** `IressButtonGroupProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/ButtonGroup/ButtonGroup.d.ts`
-
-```typescript
-import type { IressButtonGroupProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button-group--docs)*
+<!-- components/button.md -->
 
-
----
-
-# Button
-
-A button is a clickable item used to perform an action.
-
+# 
 > **Component:** `import { IressButton } from '@iress-oss/ids-components'`
-> **Storybook:** [Button in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressButton } from '@iress-oss/ids-components';
-
 <IressButton>
   Button
 </IressButton>
@@ -987,21 +984,21 @@ When the loading state is activated, any click events on the button are disabled
 
 ```tsx
 <IressInline gap="md">
-<IressButton mode="primary">
-...
-</IressButton>
-<IressButton mode="secondary">
-...
-</IressButton>
-<IressButton mode="tertiary">
-...
-</IressButton>
-<IressButton mode="quaternary">
-...
-</IressButton>
-<IressButton mode="muted">
-<IressIcon name="edit" />
-</IressButton>
+  <IressButton mode="primary" loading>
+    Primary
+  </IressButton>
+  <IressButton mode="secondary" loading>
+    Secondary
+  </IressButton>
+  <IressButton mode="tertiary" loading>
+    Tertiary
+  </IressButton>
+  <IressButton mode="quaternary" loading>
+    Quaternary
+  </IressButton>
+  <IressButton mode="muted" loading>
+    <IressIcon name="edit" />
+  </IressButton>
 </IressInline>
 ```
 
@@ -1178,22 +1175,14 @@ When `href` is provided, the button renders as a link:
 const link = screen.getByRole('link', { name: 'Go to dashboard' });
 ```
 
-## Props
+---
 
-- **Type:** `IressButtonProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Button/Button.d.ts`
-
-```typescript
-import type { IressButtonProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)*
-
-
----
+<!-- components/card.md -->
 
 # Card
 
@@ -1482,13 +1471,11 @@ import type { IressCardProps } from '@iress-oss/ids-components';
 
 ---
 
+<!-- components/checkbox-group-recipes.md -->
+
 # Recipes
-
 CheckboxGroup component documentation.
-
-> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs)
-
-## Checkboxes inside an `IressTable`
+> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs)## Checkboxes inside an `IressTable`
 
 You can use `IressCheckboxGroup` and `IressTable` to create a table with checkboxes, allowing the users to select multiple rows.
 
@@ -1500,23 +1487,21 @@ You can use `IressCheckboxGroup` and `IressTable` to create a table with checkbo
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs)
 
 
 ---
 
-# Checkbox Group
+<!-- components/checkbox-group.md -->
 
-Checkbox groups allow users to make more than one choice in a set of related options.
-
+# 
 > **Component:** `import { IressCheckboxGroup } from '@iress-oss/ids-components'`
-> **Storybook:** [Checkbox Group in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressCheckboxGroup } from '@iress-oss/ids-components';
-
 <IressCheckboxGroup name="preferences" />
 ```
 
@@ -1667,8 +1652,6 @@ const group = screen.getByRole('group', { name: 'Select options' });
 Use `within` to scope queries when multiple groups share the same option labels:
 
 ```tsx
-import { within } from '@testing-library/react';
-
 const group = screen.getByRole('group', { name: 'Interests' });
 const option = within(group).getByRole('checkbox', { name: 'Music' });
 ```
@@ -1681,35 +1664,23 @@ const option = within(group).getByRole('checkbox', { name: 'Music' });
 - **onChange returns an array**: The `onChange` callback receives the full array
   of selected values, not just the changed item.
 
-## Props
+---
 
-- **Type:** `IressCheckboxGroupProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/CheckboxGroup/CheckboxGroup.d.ts`
-
-```typescript
-import type { IressCheckboxGroupProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox-group--docs)*
+<!-- components/checkbox.md -->
 
-
----
-
-# Checkbox
-
-Checkboxes are used to let a user select one or more options for a limited number of choices. Also, works as a child of IressCheckboxGroup
-
+# 
 > **Component:** `import { IressCheckbox } from '@iress-oss/ids-components'`
-> **Storybook:** [Checkbox in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressCheckbox } from '@iress-oss/ids-components';
-
 <IressCheckbox>
   A checkbox
 </IressCheckbox>
@@ -1858,36 +1829,24 @@ are generated automatically:
 | --- | --- | --- |
 | `checkboxMark` | `my-checkbox__checkboxMark` | The visual checkbox indicator |
 
-## Props
+---
 
-- **Type:** `IressCheckboxProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Checkbox/Checkbox.d.ts`
-
-```typescript
-import type { IressCheckboxProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs)*
+<!-- components/col.md -->
 
-
----
-
-# Col
-
-Used in conjunction with the IressRow component to layout page content
-
+# 
 > **Component:** `import { IressCol } from '@iress-oss/ids-components'`
-> **Storybook:** [Col in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressCol } from '@iress-oss/ids-components';
-
-<IressCol numberOfColumns={2} />
+<IressCol span="6" />
 ```
 
 ## Examples
@@ -1898,25 +1857,25 @@ When no column widths are specified the `IressCol` component will render equal w
 
 ```tsx
 <IressStack gap="spacing.4">
-<IressRow {...row}>
-<IressCol {...column}>
-<IressPlaceholder>1 of 2</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>2 of 2</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column}>
-<IressPlaceholder>1 of 3</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>2 of 3</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>3 of 3</IressPlaceholder>
-</IressCol>
-</IressRow>
+  <IressRow>
+    <IressCol>
+      <IressPlaceholder>1 of 2</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>2 of 2</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol>
+      <IressPlaceholder>1 of 3</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>2 of 3</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>3 of 3</IressPlaceholder>
+    </IressCol>
+  </IressRow>
 </IressStack>
 ```
 
@@ -1930,59 +1889,59 @@ If no `span` is provided it will default to `auto` which will make the column ei
 
 ```tsx
 <IressStack gap="spacing.4">
-<IressRow {...row}>
-<IressCol {...column} span="12">
-<IressPlaceholder>12</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="1">
-<IressPlaceholder>1</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>11</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="2">
-<IressPlaceholder>2</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>10</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="3">
-<IressPlaceholder>3</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>9</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="4">
-<IressPlaceholder>4</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>8</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="5">
-<IressPlaceholder>5</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>7</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} span="6">
-<IressPlaceholder>6</IressPlaceholder>
-</IressCol>
-<IressCol {...column}>
-<IressPlaceholder>6</IressPlaceholder>
-</IressCol>
-</IressRow>
+  <IressRow>
+    <IressCol span="12">
+      <IressPlaceholder>12</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol span="1">
+      <IressPlaceholder>1</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>11</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol span="2">
+      <IressPlaceholder>2</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>10</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol span="3">
+      <IressPlaceholder>3</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>9</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol span="4">
+      <IressPlaceholder>4</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>8</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol span="5">
+      <IressPlaceholder>5</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>7</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol span="6">
+      <IressPlaceholder>6</IressPlaceholder>
+    </IressCol>
+    <IressCol>
+      <IressPlaceholder>6</IressPlaceholder>
+    </IressCol>
+  </IressRow>
 </IressStack>
 ```
 
@@ -1996,27 +1955,28 @@ The `span` prop can take an object that takes five key/value pairs that correlat
 
 ```tsx
 <IressStack gap="spacing.4">
-<IressPanel>
-Current breakpoint: <CurrentBreakpoint />.
-</IressPanel>
+  <IressPanel>
+    Current breakpoint: <CurrentBreakpoint />.
+  </IressPanel>
 
-<IressRow {...row}>
-{columns.map((column, index) => (
-<IressCol {...columnProps} {...column} key={index}>
-<IressPlaceholder>
-<IressText textAlign="center">
-Column {index + 1}
-<br />
-{column.span && JSON.stringify(column.span)}
-</IressText>
-</IressPlaceholder>
-</IressCol>
-))}
-</IressRow>
+  <IressRow>
+    <IressCol span={{ xs: "12", md: "6", lg: "4" }}>
+      <IressPlaceholder>
+        <IressText textAlign="center">
+          Column 1
+        </IressText>
+      </IressPlaceholder>
+    </IressCol>
+    <IressCol span={{ xs: "12", md: "6", lg: "8" }}>
+      <IressPlaceholder>
+        <IressText textAlign="center">
+          Column 2
+        </IressText>
+      </IressPlaceholder>
+    </IressCol>
+  </IressRow>
 </IressStack>
 ```
-
-[View "ResponsiveSpan" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-col--responsive-span)
 
 ### Offset
 
@@ -2024,61 +1984,61 @@ The `offset` prop controls the amount of grid columns to offset.
 
 ```tsx
 <IressStack gap="spacing.4">
-<IressRow {...row}>
-<IressCol {...column} offset="1">
-<IressPlaceholder>1</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="2">
-<IressPlaceholder>2</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="3">
-<IressPlaceholder>3</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="4">
-<IressPlaceholder>4</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="5">
-<IressPlaceholder>5</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="6">
-<IressPlaceholder>6</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="7">
-<IressPlaceholder>7</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="8">
-<IressPlaceholder>8</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="9">
-<IressPlaceholder>9</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="10">
-<IressPlaceholder>10</IressPlaceholder>
-</IressCol>
-</IressRow>
-<IressRow {...row}>
-<IressCol {...column} offset="11">
-<IressPlaceholder>11</IressPlaceholder>
-</IressCol>
-</IressRow>
+  <IressRow>
+    <IressCol offset="1">
+      <IressPlaceholder>1</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="2">
+      <IressPlaceholder>2</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="3">
+      <IressPlaceholder>3</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="4">
+      <IressPlaceholder>4</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="5">
+      <IressPlaceholder>5</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="6">
+      <IressPlaceholder>6</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="7">
+      <IressPlaceholder>7</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="8">
+      <IressPlaceholder>8</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="9">
+      <IressPlaceholder>9</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="10">
+      <IressPlaceholder>10</IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressRow>
+    <IressCol offset="11">
+      <IressPlaceholder>11</IressPlaceholder>
+    </IressCol>
+  </IressRow>
 </IressStack>
 ```
 
@@ -2092,23 +2052,19 @@ For example, if you specify an offset for `md`, it will apply to `lg`, `xl` and 
 
 ```tsx
 <IressStack gap="spacing.4">
-<IressPanel>
-Current breakpoint: <CurrentBreakpoint />.
-</IressPanel>
+  <IressPanel>
+    Current breakpoint: <CurrentBreakpoint />.
+  </IressPanel>
 
-<IressRow {...row}>
-{columns.map((column, index) => (
-<IressCol {...columnProps} {...column} key={index}>
-<IressPlaceholder>
-<IressText textAlign="center">
-Column {index + 1}
-<br />
-{column.offset && JSON.stringify(column.offset)}
-</IressText>
-</IressPlaceholder>
-</IressCol>
-))}
-</IressRow>
+  <IressRow>
+    <IressCol span="6" offset={{ xs: "0", md: "3", lg: "6" }}>
+      <IressPlaceholder>
+        <IressText textAlign="center">
+          Column 1
+        </IressText>
+      </IressPlaceholder>
+    </IressCol>
+  </IressRow>
 </IressStack>
 ```
 
@@ -2120,23 +2076,20 @@ The `alignSelf` prop controls the vertical alignment of the column (use if colum
 
 ```tsx
 <IressContainer>
-<IressRow
-{...row}
-style={{ border: '1px dashed hsl(43deg 100% 45%)', height: '10rem' }}
->
-<IressCol {...column} alignSelf="start">
-<IressPlaceholder>Start</IressPlaceholder>
-</IressCol>
-<IressCol {...column} alignSelf="center">
-<IressPlaceholder>Center</IressPlaceholder>
-</IressCol>
-<IressCol {...column} alignSelf="end">
-<IressPlaceholder>End</IressPlaceholder>
-</IressCol>
-<IressCol {...column} alignSelf="stretch">
-<IressPlaceholder stretch>Stretch</IressPlaceholder>
-</IressCol>
-</IressRow>
+  <IressRow style={{ border: '1px dashed hsl(43deg 100% 45%)', height: '10rem' }}>
+    <IressCol alignSelf="start">
+      <IressPlaceholder>Start</IressPlaceholder>
+    </IressCol>
+    <IressCol alignSelf="center">
+      <IressPlaceholder>Center</IressPlaceholder>
+    </IressCol>
+    <IressCol alignSelf="end">
+      <IressPlaceholder>End</IressPlaceholder>
+    </IressCol>
+    <IressCol alignSelf="stretch">
+      <IressPlaceholder stretch>Stretch</IressPlaceholder>
+    </IressCol>
+  </IressRow>
 </IressContainer>
 ```
 
@@ -2151,35 +2104,23 @@ directly or use a `data-testid`:
 const col = screen.getByTestId('my-col');
 ```
 
-## Props
+---
 
-- **Type:** `IressColProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Col/Col.d.ts`
-
-```typescript
-import type { IressColProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs)*
+<!-- components/container.md -->
 
-
----
-
-# Container
-
-IressContainer provides a means to center and horizontally pad your site’s contents.
-
+# 
 > **Component:** `import { IressContainer } from '@iress-oss/ids-components'`
-> **Storybook:** [Container in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressContainer } from '@iress-oss/ids-components';
-
 <IressContainer />
 ```
 
@@ -2221,35 +2162,23 @@ children directly or use a `data-testid`:
 const container = screen.getByTestId('my-container');
 ```
 
-## Props
+---
 
-- **Type:** `IressContainerProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Container/Container.d.ts`
-
-```typescript
-import type { IressContainerProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs)*
+<!-- components/divider.md -->
 
-
----
-
-# Divider
-
-A divider is a UI element that separates content in lists and layouts.
-
+# 
 > **Component:** `import { IressDivider } from '@iress-oss/ids-components'`
-> **Storybook:** [Divider in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressDivider } from '@iress-oss/ids-components';
-
 <IressDivider />
 ```
 
@@ -2260,15 +2189,11 @@ import { IressDivider } from '@iress-oss/ids-components';
 Use the `vertical` prop to change the divider from horizontal to vertical.
 
 ```tsx
-if (args.vertical) {
-      return (
-        <IressInline gap="spacing.4" verticalAlign="middle">
-          {getChildren(args)}
-        </IressInline>
-      );
-    }
-
-    return <IressStack gap="spacing.4">{getChildren(args)}</IressStack>;
+<IressInline gap="spacing.4" verticalAlign="middle">
+  <span>Left content</span>
+  <IressDivider vertical />
+  <span>Right content</span>
+</IressInline>
 ```
 
 [View "Vertical" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-divider--vertical)
@@ -2280,38 +2205,11 @@ You can customise the gutter by using the `my` prop. If the divider is vertical,
 By default, dividers do not have a gutter, allowing them to adapt to `<IressStack>` and `<IressInline>` layouts.
 
 ```tsx
-if (args.vertical) {
-      return (
-        <IressStack gap="spacing.1">
-          {GUTTER_SIZES.map((mx) => (
-            <IressPanel key={mx}>
-              <IressText element="h2">
-                <code>mx="{mx}"</code>
-              </IressText>
-              <IressInline verticalAlign="middle">
-                {getChildren({
-                  ...args,
-                  mx,
-                } as IressDividerProps)}
-              </IressInline>
-            </IressPanel>
-          ))}
-        </IressStack>
-      );
-    }
-
-    return (
-      <IressInline gap="spacing.4">
-        {GUTTER_SIZES.map((my) => (
-          <IressPanel key={my}>
-            <IressText element="h2">
-              <code>my="{my}"</code>
-            </IressText>
-            {getChildren({ ...args, my } as IressDividerProps)}
-          </IressPanel>
-        ))}
-      </IressInline>
-    );
+<IressStack gap="spacing.4">
+  <span>Content above</span>
+  <IressDivider my="spacing.4" />
+  <span>Content below</span>
+</IressStack>
 ```
 
 [View "Gutter" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-divider--gutter)
@@ -2324,35 +2222,23 @@ Query the divider by its `separator` role:
 const divider = screen.getByRole('separator');
 ```
 
-## Props
+---
 
-- **Type:** `IressDividerProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Divider/Divider.d.ts`
-
-```typescript
-import type { IressDividerProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)*
+<!-- components/expander.md -->
 
-
----
-
-# Expander
-
-Expanders are commonly used to reveal more information or details about an element or content on a page.
-
+# 
 > **Component:** `import { IressExpander } from '@iress-oss/ids-components'`
-> **Storybook:** [Expander in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressExpander } from '@iress-oss/ids-components';
-
 <IressExpander activator="Expander activator">
   Expander content will go here
 </IressExpander>
@@ -2436,35 +2322,23 @@ are generated automatically:
 | `activator` | `my-expander__activator` | The expand/collapse trigger button |
 | `container` | `my-expander__container` | The collapsible content container |
 
-## Props
+---
 
-- **Type:** `IressExpanderProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Expander/Expander.d.ts`
-
-```typescript
-import type { IressExpanderProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs)*
+<!-- components/field.md -->
 
-
----
-
-# Field
-
-The field component is used to place label, hint and error information around form controls.
-
+# 
 > **Component:** `import { IressField } from '@iress-oss/ids-components'`
-> **Storybook:** [Field in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressField } from '@iress-oss/ids-components';
-
 <IressField label="First name" />
 ```
 
@@ -2543,8 +2417,8 @@ Fields can be used to display read-only data. This is useful when you want to di
 You can also pass `readOnly` prop to remove the asterisk symbol (\*) even when the field is `required`.
 
 ```tsx
-<IressField>
-<IressReadonly {...input} />
+<IressField label="Full name" readOnly>
+  <IressReadonly value="John Smith" />
 </IressField>
 ```
 
@@ -2555,12 +2429,10 @@ This variation adds a lock icon to the label for a stronger visual cue while
 keeping the field value and label relationship accessible.
 
 ```tsx
-<IressField>
-<IressInput {...input} />
+<IressField label="Account number" readOnly="locked">
+  <IressInput value="123456789" readOnly />
 </IressField>
 ```
-
-[View "LockedReadonlyData" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--locked-readonly-data)
 
 ### Supplementary
 
@@ -2577,23 +2449,25 @@ This is used to display some metadata based on the value of the field in context
 - The `supplementary` prop will only be displayed if the field is not in an error state. If the field is in an error state, the `error` and `errorMessages` prop will be displayed instead.
 
 ```tsx
-const [error, setError] = useState<string | undefined>();
+function SupplementaryExample() {
+  const [error, setError] = useState<string | undefined>();
 
-    return (
-      <IressStack gap="spacing.5">
-        <IressToggle
-          onChange={(checked) =>
-            setError(checked ? 'This field is required' : undefined)
-          }
-          checked={error !== undefined}
-        >
-          Show error
-        </IressToggle>
-        <IressField {...args} error={error}>
-          <IressInput {...input} />
-        </IressField>
-      </IressStack>
-    );
+  return (
+    <IressStack gap="spacing.5">
+      <IressToggle
+        onChange={(checked) =>
+          setError(checked ? 'This field is required' : undefined)
+        }
+        checked={error !== undefined}
+      >
+        Show error
+      </IressToggle>
+      <IressField label="Commission" supplementary="Estimated: $150.00" error={error}>
+        <IressInput placeholder="Enter value" />
+      </IressField>
+    </IressStack>
+  );
+}
 ```
 
 [View "Supplementary" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--supplementary)
@@ -2633,21 +2507,21 @@ In horizontal layout, you can control the width of the label using the `labelWid
 
 ```tsx
 <IressStack gap="spacing.5">
-<IressField labelWidth="100px" label="labelWidth: 100px">
-<IressInput {...input} placeholder="Label width: 100px" />
-</IressField>
-<IressField labelWidth="200px" label="labelWidth: 200px">
-<IressInput {...input} placeholder="Label width: 200px" />
-</IressField>
-<IressField labelWidth="25%" label="labelWidth: 25%">
-<IressInput {...input} placeholder="Label width: 25%" />
-</IressField>
-<IressField labelWidth="auto" label="labelWidth: auto">
-<IressInput {...input} placeholder="Label width: auto" />
-</IressField>
-<IressField label="Default (no labelWidth)">
-<IressInput {...input} placeholder="Default horizontal layout" />
-</IressField>
+  <IressField horizontal labelWidth="100px" label="labelWidth: 100px">
+    <IressInput placeholder="Label width: 100px" />
+  </IressField>
+  <IressField horizontal labelWidth="200px" label="labelWidth: 200px">
+    <IressInput placeholder="Label width: 200px" />
+  </IressField>
+  <IressField horizontal labelWidth="25%" label="labelWidth: 25%">
+    <IressInput placeholder="Label width: 25%" />
+  </IressField>
+  <IressField horizontal labelWidth="auto" label="labelWidth: auto">
+    <IressInput placeholder="Label width: auto" />
+  </IressField>
+  <IressField horizontal label="Default (no labelWidth)">
+    <IressInput placeholder="Default horizontal layout" />
+  </IressField>
 </IressStack>
 ```
 
@@ -2662,124 +2536,54 @@ This is particularly useful in dense forms or when you want to minimize vertical
 **Note:** When `removeErrorMargin` is enabled, subsequent fields will be pushed down when error or supplementary messages appear, as no space is reserved for these messages. You can use the `IressStack` component to control field gaps and spacing as needed.
 
 ```tsx
-const [removeErrorMargin, setRemoveErrorMargin] = useState(false);
-    const [showError, setShowError] = useState(false);
+function RemoveErrorMarginExample() {
+  const [removeErrorMargin, setRemoveErrorMargin] = useState(false);
+  const [showError, setShowError] = useState(false);
 
-    const fieldProps = {
-      removeErrorMargin,
-      ...(showError
-        ? {
-            errorMessages: [
-              {
-                message: 'This field is required',
-              },
-            ],
-          }
-        : {}),
-    };
+  return (
+    <IressStack gap="spacing.5">
+      <IressInline gap="spacing.4">
+        <IressToggle
+          onChange={(checked) => setRemoveErrorMargin(checked)}
+          checked={removeErrorMargin}
+        >
+          Remove error margin (tighter field spacing)
+        </IressToggle>
+        <IressToggle
+          onChange={(checked) => setShowError(checked)}
+          checked={showError}
+        >
+          Show error message
+        </IressToggle>
+      </IressInline>
 
-    const fieldPropsWithContent = {
-      removeErrorMargin,
-      ...(showError
-        ? {
-            errorMessages: [
-              {
-                message: 'This field is required',
-              },
-            ],
-          }
-        : {
-            supplementary: 'This is always-displayed supplementary text',
-          }),
-    };
-
-    return (
-      <IressStack gap="spacing.5">
-        <IressInline gap="spacing.4">
-          <IressToggle
-            onChange={(checked) => setRemoveErrorMargin(checked)}
-            checked={removeErrorMargin}
-          >
-            Remove error margin (tighter field spacing)
-          </IressToggle>
-
-          <IressToggle
-            onChange={(checked) => setShowError(checked)}
-            checked={showError}
-          >
-            Show error message
-          </IressToggle>
-        </IressInline>
-
-        <IressRow gutter="spacing.6">
-          {/* Vertical Layout Column */}
-          <IressCol span="6">
-            <IressStack gap="spacing.2">
-              <IressText element="h3">Vertical Label Layout</IressText>
-              <IressStack gap="spacing.0">
-                <IressField {...args} {...fieldProps} label="First Name">
-                  <IressInput {...input} placeholder="Enter first name" />
-                </IressField>
-                <IressField
-                  {...args}
-                  {...fieldPropsWithContent}
-                  label="Last Name"
-                >
-                  <IressInput {...input} placeholder="Enter last name" />
-                </IressField>
-                <IressField {...args} {...fieldProps} label="Email Address">
-                  <IressInput
-                    {...input}
-                    type="email"
-                    placeholder="Enter email"
-                  />
-                </IressField>
-              </IressStack>
-            </IressStack>
-          </IressCol>
-
-          {/* Horizontal Layout Column */}
-          <IressCol span="6">
-            <IressStack gap="spacing.2">
-              <IressText element="h3">Horizontal Label Layout</IressText>
-              <IressStack gap="spacing.0">
-                <IressField
-                  {...args}
-                  {...fieldProps}
-                  horizontal
-                  labelWidth="120px"
-                  label="First Name"
-                >
-                  <IressInput {...input} placeholder="Enter first name" />
-                </IressField>
-                <IressField
-                  {...args}
-                  {...fieldPropsWithContent}
-                  horizontal
-                  labelWidth="120px"
-                  label="Last Name"
-                >
-                  <IressInput {...input} placeholder="Enter last name" />
-                </IressField>
-                <IressField
-                  {...args}
-                  {...fieldProps}
-                  horizontal
-                  labelWidth="120px"
-                  label="Email Address"
-                >
-                  <IressInput
-                    {...input}
-                    type="email"
-                    placeholder="Enter email"
-                  />
-                </IressField>
-              </IressStack>
-            </IressStack>
-          </IressCol>
-        </IressRow>
+      <IressStack gap="spacing.0">
+        <IressField
+          removeErrorMargin={removeErrorMargin}
+          label="First Name"
+          errorMessages={showError ? [{ message: 'This field is required' }] : undefined}
+        >
+          <IressInput placeholder="Enter first name" />
+        </IressField>
+        <IressField
+          removeErrorMargin={removeErrorMargin}
+          label="Last Name"
+          errorMessages={showError ? [{ message: 'This field is required' }] : undefined}
+          supplementary={!showError ? 'This is always-displayed supplementary text' : undefined}
+        >
+          <IressInput placeholder="Enter last name" />
+        </IressField>
+        <IressField
+          removeErrorMargin={removeErrorMargin}
+          label="Email Address"
+          errorMessages={showError ? [{ message: 'This field is required' }] : undefined}
+        >
+          <IressInput type="email" placeholder="Enter email" />
+        </IressField>
       </IressStack>
-    );
+    </IressStack>
+  );
+}
 ```
 
 [View "RemoveErrorMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-field--remove-error-margin)
@@ -2791,12 +2595,13 @@ The `IressFieldGroup` component is used to group multiple `Field` components tog
 Under the hood it uses a `fieldset` and `legend` element to group the fields together, improving the semantics of your form if you use multiple inputs (eg. in the case of a checkbox group) and making it more accessible.
 
 ```tsx
-<IressFieldGroup>
-{inputs?.map(({ field, input }: FieldAndInputProps, index) => (
-<IressField key={field.htmlFor ?? index} {...field}>
-<IressInput {...input} />
-</IressField>
-))}
+<IressFieldGroup label="Contact details">
+  <IressField label="First name" htmlFor="first-name">
+    <IressInput id="first-name" placeholder="Enter first name" />
+  </IressField>
+  <IressField label="Last name" htmlFor="last-name">
+    <IressInput id="last-name" placeholder="Enter last name" />
+  </IressField>
 </IressFieldGroup>
 ```
 
@@ -2929,35 +2734,23 @@ are generated automatically:
 - **Hint and error are conditional**: The `__hint` and `__error` test IDs only
   appear when `hint` or `errorMessages`/`error` props are provided.
 
-## Props
+---
 
-- **Type:** `IressFieldProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Field/Field.d.ts`
-
-```typescript
-import type { IressFieldProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs)*
+<!-- components/icon.md -->
 
-
----
-
-# Icon
-
-Icons enhance experiences by visually communicating meaning, actions, status, and feedback.
-
+# 
 > **Component:** `import { IressIcon } from '@iress-oss/ids-components'`
-> **Storybook:** [Icon in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressIcon } from '@iress-oss/ids-components';
-
 <IressIcon name="home" />
 ```
 
@@ -2972,8 +2765,6 @@ From version 6, the `IressIcon` component supports Material Symbols icons from G
 If you are already using the `IressProvider` component in your application, no further action is required as the Material Symbols font will be automatically loaded for you as it contains the `IressIconProvider` component. The same applies if you are using `IressShadow`, which includes `IressProvider` internally.
 
 ```tsx
-import { IressProvider } from '@iress-oss/ids-components';
-
 <IressProvider>
   <App />
 </IressProvider>;
@@ -3189,8 +2980,6 @@ If you are using Microfrontends or Web Components that use Shadow DOM, you need 
 The easiest way to do this is to use the `IressIconProvider` component with the `container` prop.
 
 ```tsx
-import { IressIconProvider, IressIcon as Icon } from '@iress/ids-components';
-
 <IressIconProvider type="fontawesome" container={shadowRoot}>
   <App />
 </IressIconProvider>;
@@ -3203,8 +2992,6 @@ import { IressIconProvider, IressIcon as Icon } from '@iress/ids-components';
 From version 6, the default icon type is Material Symbols. If you want to make Font Awesome the default icon type, you can wrap your application in the `IressIconProvider` component.
 
 ```tsx
-import { IressIconProvider, IressIcon as Icon } from '@iress/ids-components';
-
 // Export a version of IressIcon that uses Font Awesome by default for typing
 export const IressIcon = Icon<'fontawesome'>;
 
@@ -3592,35 +3379,23 @@ const icon = screen.getByRole('img', { name: 'Close' });
 Decorative icons (without `screenreaderText`) are hidden from the accessibility
 tree and should not be queried directly.
 
-## Props
+---
 
-- **Type:** `IressIconProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Icon/Icon.d.ts`
-
-```typescript
-import type { IressIconProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)*
+<!-- components/image.md -->
 
-
----
-
-# Image
-
-IressImage renders an image that resizes based on the user's screen width. The component accepts standard image attributes like `src` and `alt`.
-
+# 
 > **Component:** `import { IressImage } from '@iress-oss/ids-components'`
-> **Storybook:** [Image in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressImage } from '@iress-oss/ids-components';
-
 <IressImage src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp" alt="Placeholder image" />
 ```
 
@@ -3653,35 +3428,23 @@ Query images by their `alt` text:
 const image = screen.getByRole('img', { name: 'Company logo' });
 ```
 
-## Props
+---
 
-- **Type:** `IressImageProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Image/Image.d.ts`
-
-```typescript
-import type { IressImageProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs)*
+<!-- components/inline.md -->
 
-
----
-
-# Inline
-
-IressInline renders a set of components in a row with equal spacing around them, wrapping onto multiple lines when necessary.
-
+# 
 > **Component:** `import { IressInline } from '@iress-oss/ids-components'`
-> **Storybook:** [Inline in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressInline } from '@iress-oss/ids-components';
-
 <IressInline gap="spacing.4">
   uneven
 </IressInline>
@@ -3805,30 +3568,18 @@ directly or use a `data-testid`:
 const inline = screen.getByTestId('my-inline');
 ```
 
-## Props
+---
 
-- **Type:** `IressInlineProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Inline/Inline.d.ts`
-
-```typescript
-import type { IressInlineProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs)*
-
-
----
+<!-- components/input-currency-recipes.md -->
 
 # Recipes
-
 InputCurrency component documentation.
-
-> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)
-
-## Using IressInputCurrency in table
+> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)## Using IressInputCurrency in table
 
 It is not recommended to use the `readOnly` prop for `IressInputCurrency` inside tables, as it was designed for forms.
 This example shows how to use currency in the table, by using the `format` prop of when defining a column inside `IressTable`.
@@ -3852,23 +3603,21 @@ Only able to input valid value when use `IressInputCurrency`. In this example, o
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)
 
 
 ---
 
-# InputCurrency
+<!-- components/input-currency.md -->
 
-InputCurrency allows a user to input and interact with currency number. It works just like IressInput, with new props locale and currencyCode. This component meets ISO-4217 standard
-
+# 
 > **Component:** `import { IressInputCurrency } from '@iress-oss/ids-components'`
-> **Storybook:** [InputCurrency in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressInputCurrency } from '@iress-oss/ids-components';
-
 <IressInputCurrency defaultValue={12345.678} locale="en-AU" currencyCode="AUD" />
 ```
 
@@ -3946,30 +3695,18 @@ const input = screen.getByRole('textbox', { name: 'Amount' });
 - **readOnly removes the input role**: When `readOnly` is set, the textbox role
   is removed and the formatted value is displayed as plain text.
 
-## Props
+---
 
-- **Type:** `IressInputCurrencyProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/InputCurrency/InputCurrency.d.ts`
-
-```typescript
-import type { IressInputCurrencyProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input-currency--docs)*
-
-
----
+<!-- components/input-recipes.md -->
 
 # Recipes
-
 Input component documentation.
-
-> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)
-
-## Percentage formatting
+> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)## Percentage formatting
 
 You can use `IressInput` to display percentage formatting. When the field is focused, it can display the raw value, and when blurred, it can display the formatted percentage value.
 
@@ -3993,23 +3730,21 @@ Where possible, please use `IressFormField` within an [`IressForm` component](/d
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)
 
 
 ---
 
-# Input
+<!-- components/input.md -->
 
-Inputs allow a user to input and interact with data. This component should be used as a child of the IressField component to ensure the correct placement of elements like label, error & hint text.
-
+# 
 > **Component:** `import { IressInput } from '@iress-oss/ids-components'`
-> **Storybook:** [Input in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressInput } from '@iress-oss/ids-components';
-
 <IressInput placeholder="Enter your name" />
 ```
 
@@ -4086,19 +3821,12 @@ key={inputMode}
 When using the `type="file"` attribute, the input allows users to select one or more files from their device. The appearance and behavior are controlled by the browser, and you can use the `onChange` handler to capture the selected files.
 
 ```tsx
-const { success } = useToaster();
-    return (
-      <IressField label="File upload">
-        <IressInput
-          {...args}
-          onChange={(e) =>
-            success({
-              content: `File uploaded: ${e.target.files?.[0].name}`,
-            })
-          }
-        />
-      </IressField>
-    );
+<IressField label="File upload">
+  <IressInput
+    type="file"
+    onChange={(e) => console.log(`File uploaded: ${e.target.files?.[0]?.name}`)}
+  />
+</IressField>
 ```
 
 [View "FileType" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-input--file-type)
@@ -4291,35 +4019,23 @@ const input = screen.getByRole('spinbutton', { name: 'Quantity' });
 - **clearable inputs**: The clear button only appears when the input has a
   value. After clearing, focus returns to the input.
 
-## Props
+---
 
-- **Type:** `IressInputProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Input/Input.d.ts`
-
-```typescript
-import type { IressInputProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)*
+<!-- components/label.md -->
 
-
----
-
-# Label
-
-Use the IressLabel component when building bespoke form inputs and IressField is too restrictive.
-
+# 
 > **Component:** `import { IressLabel } from '@iress-oss/ids-components'`
-> **Storybook:** [Label in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressLabel } from '@iress-oss/ids-components';
-
 <IressLabel>
   This is a label
 </IressLabel>
@@ -4356,7 +4072,9 @@ Sometimes you may wish to have an input with no visible label, but to still wrap
 You can render custom content into the label.
 
 ```tsx
-<IressLabel hiddenLabel={false} />
+<IressLabel>
+  <span>Custom <strong>rich</strong> content</span>
+</IressLabel>
 ```
 
 [View "RichContent" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-label--rich-content)
@@ -4402,35 +4120,23 @@ are generated automatically:
 | --- | --- | --- |
 | `text` | `my-label__text` | The label text content |
 
-## Props
+---
 
-- **Type:** `IressLabelProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Label/Label.d.ts`
-
-```typescript
-import type { IressLabelProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)*
+<!-- components/link.md -->
 
-
----
-
-# Link
-
-A link is used to navigate to another page or location.
-
+# 
 > **Component:** `import { IressLink } from '@iress-oss/ids-components'`
-> **Storybook:** [Link in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressLink } from '@iress-oss/ids-components';
-
 <IressLink href="//iress.com">
   IressLink
 </IressLink>
@@ -4512,35 +4218,24 @@ When no `href` is provided, the link renders as a button:
 const button = screen.getByRole('button', { name: 'Show details' });
 ```
 
-## Props
+---
 
-- **Type:** `IressLinkProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Link/Link.d.ts`
-
-```typescript
-import type { IressLinkProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs)*
-
-
----
+<!-- components/menu-item.md -->
 
 # Menu Item
-
 Menu items are headings, buttons and dividers used inside an `IressMenu`
-
 > **Component:** `import { IressMenuItem } from '@iress-oss/ids-components'`
-> **Storybook:** [Menu Item in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu-item--docs)
+> **Storybook:** [Menu Item in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu-item--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressMenuItem } from '@iress-oss/ids-components';
-
 <IressMenuItem>
   Menu item
 </IressMenuItem>
@@ -4651,35 +4346,23 @@ You can use the `IressMenuText` to render other text within a menu. This adds st
 
 [View "Text" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-text--text)
 
-## Props
+---
 
-- **Type:** `IressMenuItemProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Menu/MenuItem/MenuItem.d.ts`
-
-```typescript
-import type { IressMenuItemProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu-item--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu-item--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu-item--docs)*
+<!-- components/menu.md -->
 
-
----
-
-# Menu
-
-A menu can display grouped action buttons, navigation items or headings.
-
+# 
 > **Component:** `import { IressMenu } from '@iress-oss/ids-components'`
-> **Storybook:** [Menu in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressMenu } from '@iress-oss/ids-components';
-
 <IressMenu />
 ```
 
@@ -4958,35 +4641,23 @@ nested test IDs are generated automatically:
 | `checkbox-mark` | `my-menu__checkbox-mark` | The checkbox indicator on selectable menu items |
 | `checkbox` | `my-menu__checkbox` | The checkbox on multi-select menu items |
 
-## Props
+---
 
-- **Type:** `IressMenuProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Menu/Menu.d.ts`
-
-```typescript
-import type { IressMenuProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs)*
+<!-- components/modal.md -->
 
-
----
-
-# Modal
-
-Modals gather information, complete a subtask, or provide additional information without losing the context of an underlying page.
-
+# 
 > **Component:** `import { IressModal } from '@iress-oss/ids-components'`
-> **Storybook:** [Modal in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressModal } from '@iress-oss/ids-components';
-
 <IressModal heading="Modal Header" />
 ```
 
@@ -5024,7 +4695,7 @@ You can use the `IressModalProvider` to open and close modals from anywhere in y
 To use, wrap your `<App/>` or the component that you want to use the `useModal` hook with `<IressModalProvider />`.
 
 ```tsx
-<AppWithModalProvider {...args.modal} />
+<AppWithModalProvider />
 ```
 
 [View "Provider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-provider--provider)
@@ -5134,8 +4805,8 @@ const { showModal } = useModal();
 
     const noCloseButtonModal = (
       <IressModal
-        {...args}
         id="no-close-button"
+        heading="Modal Header"
         noCloseButton
         footer={
           <IressButton onClick={() => showModal('no-close-button', false)}>
@@ -5147,8 +4818,8 @@ const { showModal } = useModal();
 
     const bothModal = (
       <IressModal
-        {...args}
         id="both"
+        heading="Modal Header"
         disableBackdropClick
         noCloseButton
         footer={
@@ -5165,8 +4836,8 @@ const { showModal } = useModal();
           Disable backdrop click
         </IressButton>
         <IressModal
-          {...args}
           id="disable-backdrop-click"
+          heading="Modal Header"
           disableBackdropClick
         />
 
@@ -5209,8 +4880,6 @@ See below for an example in version 4 and version 5.
 <DiffViewer
 allowModeChange
 oldValue={`import { render, waitFor, screen } from '@testing-library/react';
-import { idsFireEvent, componentLoad } from '@iress/ids-react-test-utils';
-
 test('opening and closing a modal', async () => {
 await componentLoad([
 'modal-trigger',
@@ -5232,8 +4901,6 @@ idsFireEvent.click(closeButton);
 await waitFor(() => expect(modal).not.toBeVisible());
 });`}
 newValue={`import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
-
 test('opening and closing a modal', async () => {
 const trigger = screen.getByRole('button', { name: /open modal/i });
 
@@ -5289,35 +4956,23 @@ are generated automatically:
 | `status-icon` | `my-modal__status-icon` | The status icon (when status is set) |
 | `footer` | `my-modal__footer` | The modal footer |
 
-## Props
+---
 
-- **Type:** `IressModalProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Modal/Modal.d.ts`
-
-```typescript
-import type { IressModalProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)*
+<!-- components/panel.md -->
 
-
----
-
-# Panel
-
-A panel is used to group related content.
-
+# 
 > **Component:** `import { IressPanel } from '@iress-oss/ids-components'`
-> **Storybook:** [Panel in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressPanel } from '@iress-oss/ids-components';
-
 <IressPanel heading="Panel Heading">
   text
 </IressPanel>
@@ -5346,35 +5001,23 @@ children directly:
 const panel = screen.getByTestId('my-panel');
 ```
 
-## Props
+---
 
-- **Type:** `IressPanelProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Panel/Panel.d.ts`
-
-```typescript
-import type { IressPanelProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs)*
+<!-- components/pill.md -->
 
-
----
-
-# Pill
-
-Pills are used primarily for status updates, notifications and counts.
-
+# 
 > **Component:** `import { IressPill } from '@iress-oss/ids-components'`
-> **Storybook:** [Pill in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressPill } from '@iress-oss/ids-components';
-
 <IressPill>
   Label
 </IressPill>
@@ -5436,35 +5079,23 @@ Query pills by their text content:
 const pill = screen.getByText('Active');
 ```
 
-## Props
+---
 
-- **Type:** `IressPillProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Pill/Pill.d.ts`
-
-```typescript
-import type { IressPillProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs)*
+<!-- components/placeholder.md -->
 
-
----
-
-# Placeholder
-
-A placeholder is a UI element that allows you to reserve space for content that has not been created yet, usually used for prototyping.
-
+# 
 > **Component:** `import { IressPlaceholder } from '@iress-oss/ids-components'`
-> **Storybook:** [Placeholder in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressPlaceholder } from '@iress-oss/ids-components';
-
 <IressPlaceholder heading="Placeholder" width={300} height={300}>
   This should be a description of the expected content
 </IressPlaceholder>
@@ -5484,30 +5115,18 @@ It is recommended to use placeholders that emulate the content that will be plac
 const placeholder = screen.getByTestId('my-placeholder');
 ```
 
-## Props
+---
 
-- **Type:** `IressPlaceholderProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Placeholder/Placeholder.d.ts`
-
-```typescript
-import type { IressPlaceholderProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs)*
-
-
----
+<!-- components/popover-recipes.md -->
 
 # Recipes
-
 Popover component documentation.
-
-> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)
-
-## With `IressMenu`
+> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)## With `IressMenu`
 
 When an `IressMenu` is used inside `IressPopover`, it adds some additional functionality to the popover, including:
 
@@ -5523,9 +5142,7 @@ const [multiSelect, setMultiSelect] = useState(false);
           <IressRow gutter="lg" key={role} verticalAlign="middle">
             <IressCol span={2}>
               <IressPopover
-                {...args}
                 activator={<IressButton fluid>role={role}</IressButton>}
-                container={document.body}
                 type={role === 'listbox' || role === 'menu' ? role : undefined}
               >
                 <IressMenu
@@ -5579,23 +5196,21 @@ The `usePopoverItem` hook returns an object with the following properties:
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)
 
 
 ---
 
-# Popover
+<!-- components/popover.md -->
 
-A popover is panel that is toggled on/off by an activator button or text input. The panel is positioned relative to its activator element.
-
+# 
 > **Component:** `import { IressPopover } from '@iress-oss/ids-components'`
-> **Storybook:** [Popover in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressPopover } from '@iress-oss/ids-components';
-
 <IressPopover>
   basic
 </IressPopover>
@@ -5825,35 +5440,23 @@ are generated automatically:
 | `activator` | `my-popover__activator` | The popover trigger element |
 | `content` | `my-popover__content` | The popover content panel |
 
-## Props
+---
 
-- **Type:** `IressPopoverProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Popover/Popover.d.ts`
-
-```typescript
-import type { IressPopoverProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)*
+<!-- components/progress.md -->
 
-
----
-
-# Progress
-
-A progress component is used to indicate to a user the completion of a set of tasks or a process.
-
+# 
 > **Component:** `import { IressProgress } from '@iress-oss/ids-components'`
-> **Storybook:** [Progress in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressProgress } from '@iress-oss/ids-components';
-
 <IressProgress min={10} max={30} value={20} />
 ```
 
@@ -5936,35 +5539,24 @@ const progress = screen.getByRole('progressbar');
 expect(progress).toHaveValue(75);
 ```
 
-## Props
+---
 
-- **Type:** `IressProgressProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Progress/Progress.d.ts`
-
-```typescript
-import type { IressProgressProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs)*
-
-
----
+<!-- components/provider.md -->
 
 # Provider
-
 Provider is a component that sets up the Iress Design System for your application. It ensures that the design system is correctly configured and ready to use.
-
 > **Component:** `import { IressProvider } from '@iress-oss/ids-components'`
-> **Storybook:** [Provider in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-provider--docs)
+> **Storybook:** [Provider in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-provider--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressProvider } from '@iress-oss/ids-components';
-
 <IressProvider />
 ```
 
@@ -5981,8 +5573,6 @@ In most cases, you should wrap the entire application with the `IressProvider` c
 > **Note:** `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, `IressPopoverProvider`, and `IressIconProvider`. You do not need to add these providers separately when using `IressProvider`. Similarly, `IressShadow` includes `IressProvider` internally, so you do not need any additional providers when using `IressShadow`.
 
 ```tsx
-import { IressProvider } from '@iress-oss/ids-components';
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <IressProvider>
     <App />
@@ -5990,35 +5580,23 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 );
 ```
 
-## Props
+---
 
-- **Type:** `IressProviderProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Provider/Provider.d.ts`
-
-```typescript
-import type { IressProviderProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-provider--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-provider--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-provider--docs)*
+<!-- components/radio-group.md -->
 
-
----
-
-# RadioGroup
-
-A radio group is a group of radio buttons that allows the user to select one option from multiple options, where all options are visible.
-
+# 
 > **Component:** `import { IressRadioGroup } from '@iress-oss/ids-components'`
-> **Storybook:** [RadioGroup in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio-group--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio-group--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressRadioGroup } from '@iress-oss/ids-components';
-
 <IressRadioGroup name="survey" />
 ```
 
@@ -6180,8 +5758,6 @@ When you have multiple Yes/No radio groups on the same page, use `within` to
 scope queries to a specific group:
 
 ```tsx
-import { within } from '@testing-library/react';
-
 const approvalGroup = screen.getByRole('radiogroup', { name: 'Approve' });
 const yes = within(approvalGroup).getByRole('radio', { name: 'Yes' });
 await user.click(yes);
@@ -6195,35 +5771,23 @@ await user.click(yes);
 - **Focus behaviour**: Focusing the `radiogroup` element moves focus to the
   first radio child. The group needs `tabIndex` to be focusable programmatically.
 
-## Props
+---
 
-- **Type:** `IressRadioGroupProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/RadioGroup/RadioGroup.d.ts`
-
-```typescript
-import type { IressRadioGroupProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio-group--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio-group--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio-group--docs)*
+<!-- components/radio.md -->
 
-
----
-
-# Radio
-
-A radio is a single option presented with a radio button. It is used to select a single option from multiple options. It is typically used in an IressRadioGroup.
-
+# 
 > **Component:** `import { IressRadio } from '@iress-oss/ids-components'`
-> **Storybook:** [Radio in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressRadio } from '@iress-oss/ids-components';
-
 <IressRadio>
   Radio button
 </IressRadio>
@@ -6266,15 +5830,12 @@ The `variant` prop changes the visual style of the radio. The `card` variant add
 
 ```tsx
 <IressStack gap="lg">
-<IressRadio variant="card" heading="Widget">
-A description of the widget
-</IressRadio>
-<IressRadio
-{...(args as IressRadioProps<FormControlValue, 'touch'>)}
-variant="touch"
->
-Touch variant
-</IressRadio>
+  <IressRadio variant="card" heading="Widget">
+    A description of the widget
+  </IressRadio>
+  <IressRadio variant="touch">
+    Touch variant
+  </IressRadio>
 </IressStack>
 ```
 
@@ -6319,35 +5880,23 @@ are generated automatically:
 | `input` | `my-radio__input` | The underlying radio input element |
 | `radioMark` | `my-radio__radioMark` | The visual radio indicator |
 
-## Props
+---
 
-- **Type:** `IressRadioProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Radio/Radio.d.ts`
-
-```typescript
-import type { IressRadioProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)*
+<!-- components/readonly.md -->
 
-
----
-
-# Readonly
-
-Readonly displays a value that cannot be edited by the user. It renders a hidden input field to ensure the value is submitted with the form.
-
+# 
 > **Component:** `import { IressReadonly } from '@iress-oss/ids-components'`
-> **Storybook:** [Readonly in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressReadonly } from '@iress-oss/ids-components';
-
 <IressReadonly value="AU" />
 ```
 
@@ -6420,35 +5969,23 @@ are generated automatically:
 | --- | --- | --- |
 | `input` | `my-readonly__input` | The hidden input element |
 
-## Props
+---
 
-- **Type:** `IressReadonlyProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Readonly/Readonly.d.ts`
-
-```typescript
-import type { IressReadonlyProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs)*
+<!-- components/row.md -->
 
-
----
-
-# Row
-
-Used in conjunction with the IressCol component to lay out page content.
-
+# 
 > **Component:** `import { IressRow } from '@iress-oss/ids-components'`
-> **Storybook:** [Row in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressRow } from '@iress-oss/ids-components';
-
 <IressRow gutter="spacing.7" horizontalAlign="left" verticalAlign="top" />
 ```
 
@@ -6554,22 +6091,14 @@ directly or use a `data-testid`:
 const row = screen.getByTestId('my-row');
 ```
 
-## Props
+---
 
-- **Type:** `IressRowProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Row/Row.d.ts`
-
-```typescript
-import type { IressRowProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs)*
-
-
----
+<!-- components/select.md -->
 
 # Select
 
@@ -7000,13 +6529,11 @@ import type { IressSelectProps } from '@iress-oss/ids-components';
 
 ---
 
+<!-- components/skeleton-recipes.md -->
+
 # Recipes
-
 Skeleton component documentation.
-
-> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)
-
-## `IressCard`
+> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)## `IressCard`
 
 A common use case of the skeleton component is within a card component. Below are some examples of how you might use `IressSkeleton` within `IressCard`.
 
@@ -7018,23 +6545,21 @@ A common use case of the skeleton component is within a card component. Below ar
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)
 
 
 ---
 
-# Skeleton
+<!-- components/skeleton.md -->
 
-Skeletons can increase perceived performance for users. As opposed to spinners, skeletons make it feel as though things are happening/loading immediately, then the information is incrementally displayed on the screen.
-
+# 
 > **Component:** `import { IressSkeleton } from '@iress-oss/ids-components'`
-> **Storybook:** [Skeleton in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressSkeleton } from '@iress-oss/ids-components';
-
 <IressSkeleton />
 ```
 
@@ -7046,7 +6571,7 @@ The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
 ```tsx
 <IressStack gap="md">
-<IressSkeleton {...(args as IressSkeletonProps<'text'>)} mode="text" />
+<IressSkeleton mode="text" />
 <IressSkeleton mode="rect" height="100px" />
 <IressSkeleton mode="circle" height="100px" width="100px" />
 </IressStack>
@@ -7119,35 +6644,23 @@ await waitFor(() => {
 });
 ```
 
-## Props
+---
 
-- **Type:** `IressSkeletonProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Skeleton/Skeleton.d.ts`
-
-```typescript
-import type { IressSkeletonProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)*
+<!-- components/skip-link.md -->
 
-
----
-
-# SkipLink
-
-The skip link component allows keyboard users to quickly bypass the top-level navigation links and jump to the main content on a page.
-
+# 
 > **Component:** `import { IressSkipLink } from '@iress-oss/ids-components'`
-> **Storybook:** [SkipLink in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skip-link--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skip-link--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressSkipLink } from '@iress-oss/ids-components';
-
 <IressSkipLink href="#main" />
 ```
 
@@ -7164,35 +6677,23 @@ otherwise as a button:
 const skipLink = screen.getByRole('link', { name: 'Skip to content' });
 ```
 
-## Props
+---
 
-- **Type:** `IressSkipLinkProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/SkipLink/SkipLink.d.ts`
-
-```typescript
-import type { IressSkipLinkProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skip-link--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skip-link--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skip-link--docs)*
+<!-- components/slideout.md -->
 
-
----
-
-# Slideout
-
-Slideouts are used to show additional information or to allow users to perform secondary tasks without leaving their normal workflow.
-
+# 
 > **Component:** `import { IressSlideout } from '@iress-oss/ids-components'`
-> **Storybook:** [Slideout in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressSlideout } from '@iress-oss/ids-components';
-
 <IressSlideout footer="Footer slot">
   Slideout content
 </IressSlideout>
@@ -7219,7 +6720,7 @@ You can use the `IressSlideoutProvider` to open and close slideout from anywhere
 To use, wrap your `<App/>` or the component that you want to use the `useSlideout` hook with `<IressSlideoutProvider />`.
 
 ```tsx
-<AppWithSlideoutProvider {...args.slideout} />
+<AppWithSlideoutProvider />
 ```
 
 [View "Provider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-provider--provider)
@@ -7239,7 +6740,7 @@ const { showSlideout } = useSlideout();
           <IressButton onClick={() => showSlideout('overlay')}>
             Overlay slideout
           </IressButton>
-          <IressSlideout {...args} id="overlay" mode="overlay">
+          <IressSlideout id="overlay" heading="Overlay" mode="overlay">
             <h2>Overlay</h2>
             For most situations <code>overlay</code> will be what you need,
             which is why this is the default behaviour. You do not need to
@@ -7251,8 +6752,8 @@ const { showSlideout } = useSlideout();
             Push slideout
           </IressButton>
           <IressSlideout
-            {...args}
             id="push"
+            heading="Push"
             mode="push"
             eleToPush="#storybook-docs, html"
           >
@@ -7353,8 +6854,6 @@ See below for an example in version 4 and version 5.
 <DiffViewer
 allowModeChange
 oldValue={`import { render, waitFor, screen } from '@testing-library/react';
-import { idsFireEvent, componentLoad } from '@iress/ids-react-test-utils';
-
 test('opening and closing a slideout', async () => {
 await componentLoad([
 'slideout-trigger',
@@ -7376,8 +6875,6 @@ idsFireEvent.click(closeButton);
 await waitFor(() => expect(slideout).not.toBeVisible());
 });`}
 newValue={`import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
-
 test('opening and closing a slideout', async () => {
 const trigger = screen.getByRole('button', { name: /open slideout/i });
 
@@ -7438,35 +6935,23 @@ are generated automatically:
 - **Animation timing**: Slideout animations can affect test timing. Use the
   speed-up technique above to set animation duration to `0s` in tests.
 
-## Props
+---
 
-- **Type:** `IressSlideoutProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Slideout/Slideout.d.ts`
-
-```typescript
-import type { IressSlideoutProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs)*
+<!-- components/slider.md -->
 
-
----
-
-# Slider
-
-Sliders provide a visual indication of adjustable content, where the user can select a value from a range usually represented on a horizontal track.
-
+# 
 > **Component:** `import { IressSlider } from '@iress-oss/ids-components'`
-> **Storybook:** [Slider in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressSlider } from '@iress-oss/ids-components';
-
 <IressSlider />
 ```
 
@@ -7597,35 +7082,23 @@ are generated automatically:
 | `datalist` | `my-slider__datalist` | The tick marks datalist |
 | `option` | `my-slider__option` | An individual tick mark option |
 
-## Props
+---
 
-- **Type:** `IressSliderProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Slider/Slider.d.ts`
-
-```typescript
-import type { IressSliderProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs)*
+<!-- components/spinner.md -->
 
-
----
-
-# Spinner
-
-Spinners notify the user that a task is being processed. They indicate that the app is busy, and should be used when the user has to wait for more than a few seconds.
-
+# 
 > **Component:** `import { IressSpinner } from '@iress-oss/ids-components'`
-> **Storybook:** [Spinner in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressSpinner } from '@iress-oss/ids-components';
-
 <IressSpinner screenreaderText="Loading..." />
 ```
 
@@ -7681,35 +7154,23 @@ const spinner = screen.getByTestId('my-spinner');
 const spinner = screen.getByRole('status');
 ```
 
-## Props
+---
 
-- **Type:** `IressSpinnerProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Spinner/Spinner.d.ts`
-
-```typescript
-import type { IressSpinnerProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)*
+<!-- components/stack.md -->
 
-
----
-
-# Stack
-
-Use IressStack to control vertical spacing between content with consistent present values.
-
+# 
 > **Component:** `import { IressStack } from '@iress-oss/ids-components'`
-> **Storybook:** [Stack in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressStack } from '@iress-oss/ids-components';
-
 <IressStack gap="spacing.1">
   even
 </IressStack>
@@ -7748,11 +7209,8 @@ The `gap` prop can take an object that takes five key/value pairs that correlate
 <p>
 Current breakpoint: <CurrentBreakpoint />.
 </p>
-<p>
-<code>gap=&#123;{JSON.stringify(args.gap)}&#125;</code>
-</p>
 </IressPanel>
-<IressStack />
+<IressStack gap={{ xs: "spacing.2", sm: "spacing.4", md: "spacing.6", lg: "spacing.8", xl: "spacing.10" }} />
 </IressStack>
 ```
 
@@ -7792,9 +7250,9 @@ Use `top`, `middle`, or `bottom` to align items within the available space, and 
 
 ```tsx
 <IressText>
-<h2>{args.verticalAlign}</h2>
+<h2>middle</h2>
 <IressPanel style={{ height: '1000px' }}>
-<IressStack stretch />
+<IressStack verticalAlign="middle" />
 </IressPanel>
 </IressText>
 ```
@@ -7810,35 +7268,24 @@ directly or use a `data-testid`:
 const stack = screen.getByTestId('my-stack');
 ```
 
-## Props
+---
 
-- **Type:** `IressStackProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Stack/Stack.d.ts`
-
-```typescript
-import type { IressStackProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)*
-
-
----
+<!-- components/styled.md -->
 
 # Styled
-
 The IressStyled component provides an unopinionated wrapper that gives you direct access to all supported styling properties. Use it when you need custom styling without creating a dedicated component or writing custom CSS.
-
 > **Component:** `import { IressStyled } from '@iress-oss/ids-components'`
-> **Storybook:** [Styled in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs)
+> **Storybook:** [Styled in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressStyled } from '@iress-oss/ids-components';
-
 <IressStyled p="spacing.4" bg="colour.neutral.20" borderRadius="radius.2">
   This is styled content using Panda CSS
 </IressStyled>
@@ -8035,23 +7482,21 @@ create a rich, semantic HTML structure with custom styling.
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs)
 
 
 ---
 
-# Tab Set
+<!-- components/tab-set.md -->
 
-Tabs are used to display modular pieces of related data that do not need to be compared or accessed simultaneously.
-
+# 
 > **Component:** `import { IressTabSet } from '@iress-oss/ids-components'`
-> **Storybook:** [Tab Set in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab-set--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab-set--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressTabSet } from '@iress-oss/ids-components';
-
 <IressTabSet />
 ```
 
@@ -8164,6 +7609,19 @@ Notes:
 
 [View "TabsWithBadges" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab-set--tabs-with-badges)
 
+### Append (extra content in the tab bar)
+
+Use the `append` prop to render content alongside the tabs but outside the tablist. This is useful for placing action buttons (e.g. "Add tab", "Close all") at the end of the tab bar row.
+
+The `append` content is rendered outside the `role="tablist"` element for accessibility compliance — only `role="tab"` elements are allowed inside a tablist.
+
+```tsx
+<IressTabSet append={<IressButton size="sm" variant="ghost">+ Add tab</IressButton>}>
+  <IressTab label="Tab 1">Content 1</IressTab>
+  <IressTab label="Tab 2">Content 2</IressTab>
+</IressTabSet>
+```
+
 ## Testing
 
 Query tabs by their role. The tab's accessible name comes from the `label` prop:
@@ -8183,35 +7641,24 @@ are generated automatically:
 | --- | --- | --- |
 | `panel` | `my-tabset__panel` | The active tab panel |
 
-## Props
+---
 
-- **Type:** `IressTabSetProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/TabSet/TabSet.d.ts`
-
-```typescript
-import type { IressTabSetProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab-set--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab-set--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab-set--docs)*
-
-
----
+<!-- components/tab.md -->
 
 # Tab
-
 A tab is an interactive element that controls the display of other content, usually a panel
-
 > **Component:** `import { IressTab } from '@iress-oss/ids-components'`
-> **Storybook:** [Tab in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs)
+> **Storybook:** [Tab in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressTab } from '@iress-oss/ids-components';
-
 <IressTab label="Tab" />
 ```
 
@@ -8224,7 +7671,7 @@ The tab can be set to active using the `active` prop.
 **Note:** If you are using `IressTabSet`, you should use the `selected` prop on the `IressTabSet` to set the active state of its `<IressTab />` children, as the `active` prop will be ignored.
 
 ```tsx
-<IressTab active />
+<IressTab active label="Active Tab" />
 ```
 
 [View "Active" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab--active)
@@ -8235,7 +7682,7 @@ A tab can have a unique value set to it, used to determine its active state in a
 
 ```tsx
 <IressTabSet>
-<IressTab />
+<IressTab label="Tab 1" value="tab-1" />
 </IressTabSet>
 ```
 
@@ -8247,41 +7694,29 @@ A tab can set its `children` when used inside an `IressTabSet` component, and it
 
 ```tsx
 <IressTabSet>
-<IressTab />
+<IressTab label="Tab 1">Panel content</IressTab>
 </IressTabSet>
 ```
 
 [View "Panel" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab--panel)
 
-## Props
+---
 
-- **Type:** `IressTabProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/TabSet/Tab/Tab.d.ts`
-
-```typescript
-import type { IressTabProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs)*
+<!-- components/table.md -->
 
-
----
-
-# Table
-
-Data driven component for displaying tabular data.
-
+# 
 > **Component:** `import { IressTable } from '@iress-oss/ids-components'`
-> **Storybook:** [Table in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressTable } from '@iress-oss/ids-components';
-
 <IressTable caption="Data table" />
 ```
 
@@ -8433,7 +7868,7 @@ If you need to customise the sorting logic, you can use the `sortFn` property of
 - A custom sort function that takes two arguments: `a` and `b`, which are the two rows being compared. It should return `-1`, `0` or `1` depending on the comparison.
 
 ```tsx
-<TableSortingFn {...(args as object)} />
+<TableSortingFn />
 ```
 
 [View "CustomSortingLogic" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-table--custom-sorting-logic)
@@ -8711,35 +8146,23 @@ are generated automatically:
 | `thead` | `my-table__thead` | The table header section |
 | `tbody` | `my-table__tbody` | The table body section |
 
-## Props
+---
 
-- **Type:** `IressTableProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Table/Table.d.ts`
-
-```typescript
-import type { IressTableProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)*
+<!-- components/tag.md -->
 
-
----
-
-# Tag
-
-Tags represent individual units in a group of selected items.
-
+# 
 > **Component:** `import { IressTag } from '@iress-oss/ids-components'`
-> **Storybook:** [Tag in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressTag } from '@iress-oss/ids-components';
-
 <IressTag>
   Label
 </IressTag>
@@ -8915,35 +8338,23 @@ generated automatically:
 | --- | --- | --- |
 | `delete-button__button` | `my-tag__delete-button__button` | The tag delete button |
 
-## Props
+---
 
-- **Type:** `IressTagProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Tag/Tag.d.ts`
-
-```typescript
-import type { IressTagProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)*
+<!-- components/text.md -->
 
-
----
-
-# Text
-
-The IressText component allows you to set typographic styles either on one element, or a block on HTML elements.
-
+# 
 > **Component:** `import { IressText } from '@iress-oss/ids-components'`
-> **Storybook:** [Text in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressText } from '@iress-oss/ids-components';
-
 <IressText />
 ```
 
@@ -9120,35 +8531,23 @@ const heading = screen.getByRole('heading', { name: 'Page title' });
 const paragraph = screen.getByText('Some content');
 ```
 
-## Props
+---
 
-- **Type:** `IressTextProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Text/Text.d.ts`
-
-```typescript
-import type { IressTextProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs)*
+<!-- components/toaster.md -->
 
-
----
-
-# Toaster
-
-Toaster provide users with important, time-sensitive information.
-
+# 
 > **Component:** `import { IressToaster } from '@iress-oss/ids-components'`
-> **Storybook:** [Toaster in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressToaster } from '@iress-oss/ids-components';
-
 <IressToaster />
 ```
 
@@ -9266,35 +8665,23 @@ expect(toast).toBeInTheDocument();
 - **Toast status icons**: Each toast has a status label accessible via
   `getByLabelText('success:')` (or `danger:`, `info:`, etc.).
 
-## Props
+---
 
-- **Type:** `ToasterProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Toaster/Toaster.d.ts`
-
-```typescript
-import type { ToasterProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs)*
+<!-- components/toggle.md -->
 
-
----
-
-# Toggle
-
-Toggles allow users to turn things on or off. When toggled, the associated change happens straight away.
-
+# 
 > **Component:** `import { IressToggle } from '@iress-oss/ids-components'`
-> **Storybook:** [Toggle in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressToggle } from '@iress-oss/ids-components';
-
 <IressToggle defaultChecked={false} hiddenLabel={false} layout="inline">
   Toggle
 </IressToggle>
@@ -9417,35 +8804,23 @@ are generated automatically:
 | `label` | `my-toggle__label` | The toggle label element |
 | `button__button` | `my-toggle__button__button` | The toggle switch button |
 
-## Props
+---
 
-- **Type:** `IressToggleProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Toggle/Toggle.d.ts`
-
-```typescript
-import type { IressToggleProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs)*
+<!-- components/tooltip.md -->
 
-
----
-
-# Tooltip
-
-A component that shows concise, informative text about an element when focussed upon, hovered over or on a long touch.
-
+# 
 > **Component:** `import { IressTooltip } from '@iress-oss/ids-components'`
-> **Storybook:** [Tooltip in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressTooltip } from '@iress-oss/ids-components';
-
 <IressTooltip tooltipText="Hello! This is a really long tooltip to try and see if it goes behind the scrollbar" />
 ```
 
@@ -9514,60 +8889,60 @@ The tooltip's position will change dynamically based on the amount of space avai
 <div style={{ padding: '80px 150px' }}>
 <IressStack gap="md">
 <IressInline horizontalAlign="center" gap="sm">
-<IressTooltip align="top-start">
+<IressTooltip align="top-start" tooltipText="Top Start">
 <IressButton>Top Start</IressButton>
 </IressTooltip>
-<IressTooltip align="top">
+<IressTooltip align="top" tooltipText="Top">
 <IressButton>Top</IressButton>
 </IressTooltip>
-<IressTooltip align="top-end">
+<IressTooltip align="top-end" tooltipText="Top End">
 <IressButton>Top End</IressButton>
 </IressTooltip>
 </IressInline>
 <IressInline horizontalAlign="between">
 <IressStack gap="sm">
 <IressInline horizontalAlign="left">
-<IressTooltip align="left-start">
+<IressTooltip align="left-start" tooltipText="Left Start">
 <IressButton>Left Start</IressButton>
 </IressTooltip>
 </IressInline>
 <IressInline horizontalAlign="left">
-<IressTooltip align="left">
+<IressTooltip align="left" tooltipText="Left">
 <IressButton>Left</IressButton>
 </IressTooltip>
 </IressInline>
 <IressInline horizontalAlign="left">
-<IressTooltip align="left-end">
+<IressTooltip align="left-end" tooltipText="Left End">
 <IressButton>Left End</IressButton>
 </IressTooltip>
 </IressInline>
 </IressStack>
 <IressStack gap="sm">
 <IressInline horizontalAlign="right">
-<IressTooltip align="right-start">
+<IressTooltip align="right-start" tooltipText="Right Start">
 <IressButton>Right Start</IressButton>
 </IressTooltip>
 </IressInline>
 <IressInline horizontalAlign="right">
-<IressTooltip align="right">
+<IressTooltip align="right" tooltipText="Right">
 <IressButton>Right</IressButton>
 </IressTooltip>
 </IressInline>
 <IressInline horizontalAlign="right">
-<IressTooltip align="right-end">
+<IressTooltip align="right-end" tooltipText="Right End">
 <IressButton>Right End</IressButton>
 </IressTooltip>
 </IressInline>
 </IressStack>
 </IressInline>
 <IressInline horizontalAlign="center" gap="sm">
-<IressTooltip align="bottom-start">
+<IressTooltip align="bottom-start" tooltipText="Bottom Start">
 <IressButton>Bottom Start</IressButton>
 </IressTooltip>
-<IressTooltip align="bottom">
+<IressTooltip align="bottom" tooltipText="Bottom">
 <IressButton>Bottom</IressButton>
 </IressTooltip>
-<IressTooltip align="bottom-end">
+<IressTooltip align="bottom-end" tooltipText="Bottom End">
 <IressButton>Bottom End</IressButton>
 </IressTooltip>
 </IressInline>
@@ -9584,14 +8959,14 @@ The `delay` prop requires a number that is the number of milliseconds that pass 
 ```tsx
 <div style={{ paddingTop: '30px' }}>
 <IressInline horizontalAlign="center" gap="sm">
-<IressTooltip delay={0}>
+<IressTooltip delay={0} tooltipText="No delay">
 <IressButton>0ms (no delay)</IressButton>
 </IressTooltip>
-<IressTooltip>
+<IressTooltip tooltipText="Default delay">
 <IressButton>500ms (default)</IressButton>
 </IressTooltip>
 
-<IressTooltip delay={2000}>
+<IressTooltip delay={2000} tooltipText="Long delay">
 <IressButton>2000ms</IressButton>
 </IressTooltip>
 </IressInline>
@@ -9626,35 +9001,23 @@ are generated automatically:
 | `activator` | `my-tooltip__activator` | The tooltip trigger element |
 | `tooltip-text` | `my-tooltip__tooltip-text` | The tooltip content |
 
-## Props
+---
 
-- **Type:** `IressTooltipProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Tooltip/Tooltip.d.ts`
-
-```typescript
-import type { IressTooltipProps } from '@iress-oss/ids-components';
-```
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)
 
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)*
+<!-- components/validation-message.md -->
 
-
----
-
-# Validation message
-
-A validation message is used to inform the user of the status of a form input. If there are multiple messages, they can be combined using the IressValidationSummary component.
-
+# 
 > **Component:** `import { IressValidationMessage } from '@iress-oss/ids-components'`
-> **Storybook:** [Validation message in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs)
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressValidationMessage } from '@iress-oss/ids-components';
-
 <IressValidationMessage>
   Validation message
 </IressValidationMessage>
@@ -9706,14 +9069,14 @@ You can use the `linkToTarget` prop to link the message to a specific target in 
 {STATUSES.map((status) => (
 <IressValidationMessage key={status}
 status={status}
-linkToTarget={args.linkToTarget ?? ''}
+linkToTarget="target-input"
 >
 {messages[status]}
 </IressValidationMessage>
 ))}
 </IressStack>
 <IressDivider />
-<IressInput id={args.linkToTarget} />
+<IressInput id="target-input" />
 </IressStack>
 ```
 
@@ -9742,35 +9105,2766 @@ test IDs are generated automatically:
 | --- | --- | --- |
 | `error` | `my-validation__error` | An individual error message |
 
-## Props
+---
 
-- **Type:** `IressValidationMessageProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/ValidationMessage/ValidationMessage.d.ts`
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs)
 
-```typescript
-import type { IressValidationMessageProps } from '@iress-oss/ids-components';
+
+---
+
+<!-- foundations/accessibility.md -->
+
+# Accessibility
+
+Accessibility is everyone's responsibility. It ensures that all users, regardless of their abilities or disabilities, can access and interact with our components effectively. This document outlines the key practices for building accessible components we follow within IDS.
+
+Please note: The default behaviour of our components is to be accessible, but it is the responsibility of the product to ensure that they are used correctly in accessible context, or any modifications made to them do not compromise accessibility.
+
+## Interaction Patterns
+
+### Keyboard Navigation
+
+- Support standard keyboard shortcuts (Tab, Arrow keys, Enter, Space, Escape)
+- Implement proper focus order and visual focus indicators
+- Provide keyboard alternatives for mouse-only interactions
+- Follow established ARIA patterns for complex widgets
+
+### Touch Interactions
+
+- Provide adequate touch target sizes
+- Implement touch-friendly spacing between interactive elements
+- Support gesture-based interactions where appropriate
+- Ensure consistent behaviour across device types
+
+### Loading and Feedback
+
+- Use appropriate loading patterns based on context:
+  - **Page**: Full page loading states
+  - **Component**: Local loading within sections
+  - **Button**: Inline loading for form submissions
+  - **Validate**: Server-side validation feedback
+- Provide clear success and error feedback
+- Use progressive enhancement for better perceived performance
+
+---
+
+<!-- foundations/common-mistakes.md -->
+
+# Common mistakes
+
+Patterns we see trip people up when building with IDS. Each section shows what goes wrong, why, and the fix.
+
+## Using `slot` attributes (legacy v4 pattern)
+
+In IDS v4 and earlier, child elements used `slot` attributes to position content (e.g. ``). This is **no longer supported**. Use the equivalent React props instead.
+
+### Button
+
+```tsx
+// ❌ slot attribute — ignored in v5+
+
+// ✅ Use prepend/append props
+
+// ✅ Icon-only button
+
 ```
 
+### Input
+
+```tsx
+// ❌
+
+  
+
+// ✅
+} />
+```
+
+### Modal
+
+```tsx
+// ❌
+
+  Content
+  <div slot="footer">
+    
+  </div>
+
+// ✅ Use footer prop
+
+  Content
+
+// ✅ Or actions prop for status modals
+
+  This action cannot be undone.
+
+```
+
+### Quick reference
+
+| Legacy v4 pattern                 | Modern prop           |
+| --------------------------------- | --------------------- |
+| ``        | `prepend={}` |
+| ``         | `append={}`  |
+| ``          | `prepend={}` |
+| ``            | `append={}`  |
+| ``      | `icon="iconName"`     |
+| `<div slot="footer">...</div>`    | `footer={...}`        |
+| `<div slot="activator">...</div>` | `activator={...}`     |
+
+## Misunderstanding `IressShadow`
+
+`IressShadow` is a **CSS isolation wrapper** — it attaches a shadow root to a `<div>` so IDS styles don't leak into or get affected by your host application's CSS. It's useful in microfrontend setups.
+
+It does **not** mean your app uses Web Components or custom elements. Children inside `IressShadow` are standard React components — use normal React props, not `slot` attributes.
+
+```tsx
+// ❌
+
+  
+
+// ✅
+
+  
+
+```
+
+`IressShadow` is an alternative to `IressProvider` — choose one as your app's root wrapper depending on whether you need style isolation.
+
+## Using raw HTML instead of IDS components
+
+IDS components include built-in accessibility, theming, and consistent styling. Raw HTML elements bypass all of that.
+
+```tsx
+// ❌
+<button onClick={handleClick}>Submit</button>
+<input type="text" placeholder="Name" />
+<h2>Section Title</h2>
+
+// ✅
+
+  
+
+Section Title
+```
+
+## Hardcoded styling values
+
+Don't hardcode colours, spacing, font sizes, or border radii. Use design tokens via styling props so your UI stays consistent across themes.
+
+```tsx
+// ❌
+<div style={{ padding: '16px', background: '#F5F6F8', borderRadius: '12px' }}>
+
+// ✅
+
+```
+
+## Custom CSS for basic layout
+
+Use IDS layout components instead of writing your own flexbox or grid CSS.
+
+```tsx
+// ❌
+<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+  <div>Item 1</div>
+  <div>Item 2</div>
+</div>
+
+// ✅
+<IressStack gap="spacing.4">
+  <IressText>Item 1
+  Item 2
+</IressStack>
+```
+
+## Missing form field wrappers
+
+Always wrap inputs in `IressField` (or `IressFormField` inside an `IressForm`) for proper labels, validation messages, and accessibility.
+
+```tsx
+// ❌ Input without a field wrapper — no label, no a11y
+
+// ✅
+
+  
+
+```
+
+## Using `disabled` on IressButton
+
+IDS discourages using the `disabled` pattern on `IressButton`. While the native `disabled` attribute is still available, disabled buttons are invisible to screen readers and provide no way for users to understand how to enable the action.
+
+| Use case | Anti-pattern | IDS alternative |
+| --- | --- | --- |
+| Form is incomplete | `disabled={!isValid}` | Use `IressForm` with `rules` validation — validates on submit with inline errors |
+| Action in progress | `disabled={isSubmitting}` | Use `loading={isSubmitting}` — shows spinner, announces to screen readers, prevents clicks |
+| User lacks permission | `disabled={!canEdit}` | Hide the button (`{canEdit && }`), or keep enabled and explain on click |
+| Prerequisite not met | `disabled={!hasSelection}` | Keep enabled and show guidance on click (e.g. "Select an item first" via `IressAlert`) |
+
+```tsx
+// ❌ disabled is an anti-pattern
+
+// ✅ Form validation — let IressForm handle it
+
+  <IressFormField name="email" label="Email" rules={{ required: 'Email is required' }}
+    render={(props) => } />
+  
+
+// ✅ In-progress — use loading
+
+// ✅ Permission — hide or explain
+{canEdit && }
+```
+
+## Redundant `textStyle` on IressText
+
+When `element` is set on `IressText`, the component already applies the correct typography. Adding a matching `textStyle` is redundant. Only use `textStyle` to intentionally override the visual treatment (e.g. making an h2 look like an h4).
+
+| Element | Default textStyle (redundant if matched) |
+| ------- | ---------------------------------------- |
+| `h1`    | `typography.heading.1`                   |
+| `h2`    | `typography.heading.2`                   |
+| `h3`    | `typography.heading.3`                   |
+| `h4`    | `typography.heading.4`                   |
+| `h5`    | `typography.heading.5`                   |
+| `p`     | `typography.body.md`                     |
+
+```tsx
+// ❌ Redundant — h1 already renders as typography.heading.1
+Page Title
+
+// ✅ Element alone is sufficient
+Page Title
+
+// ✅ Intentional override for visual hierarchy
+Section Title
+```
+
+## Further reading
+
+When in doubt, check the component docs in [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com) — each component page includes props, examples, and usage guidelines.
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validation-message--docs)*
+<!-- foundations/iconography.md -->
 
+# Content & Iconography
+
+Clear language and purposeful icons work together to guide users through
+complex financial workflows. This page covers both written content (microcopy)
+and visual symbols (icons).
 
 ---
 
-# Breadcrumbs
+## Microcopy
 
-Breadcrumbs are a secondary navigation aid that helps users understand their current location within the site hierarchy and provides a simple way to navigate back to higher-level pages.
+Microcopy is the short text that appears on buttons, labels, tooltips, error
+messages, and empty states. In financial software, precise language reduces
+errors and builds trust.
 
-> **Pattern:** `import { IressBreadcrumbs } from '@iress-oss/ids-components'`
-> **Storybook:** [Breadcrumbs in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs)
+### Principles
+
+- **Match user mental models** — use terms your users already know from their
+  domain (e.g. "adviser", "portfolio", "settlement date") rather than internal
+  system terminology.
+- **Be concise** — every word in the UI should earn its place. If a label can
+  be two words, don't make it five.
+- **Be actionable** — error messages should explain what went wrong *and* what
+  to do next (e.g. "Enter a valid email address" not "Invalid input").
+- **Use sentence case** — for labels, headings, and button text. Title Case is
+  reserved for proper nouns only.
+- **Maintain consistent tone** — professional, clear, and helpful. Avoid jargon,
+  humour, or overly casual language in transactional flows.
+
+### Common patterns
+
+| Element | Guidance | Example |
+|---------|----------|---------|
+| Button label | Start with a verb, keep to 1–3 words | "Save changes", "Delete record" |
+| Error message | State the problem and the fix | "Email is required. Enter a valid email address." |
+| Empty state | Explain what belongs here and how to add it | "No transactions yet. Import a CSV or add one manually." |
+| Tooltip | One sentence max, no period | "Opens in a new tab" |
+| Confirmation | Describe the consequence | "This will permanently delete 3 records." |
+
+### Progressive disclosure
+
+Reveal information as users need it rather than all at once. Use hints, expand
+sections, and tooltips to layer detail without overwhelming the primary flow.
+
+---
+
+## Iconography
+
+Icons are a key part of the Iress Design System, providing visual cues and
+enhancing user experience.
+
+## Principles
+
+1. **Clarity**: Icons should be easily recognizable and convey their intended meaning without ambiguity.
+2. **Consistency**: Use a consistent style and size for icons across the application to maintain visual harmony.
+3. **Simplicity**: Avoid overly complex icons; simplicity aids in quick recognition.
+4. **Accessibility**: Ensure icons are accessible to all users, including those using screen readers. Provide appropriate alternative text.
+
+## Usage Guidelines
+
+- Use icons to complement text, not replace it. Always provide a text label alongside an icon when its meaning may not be immediately clear.
+- Maintain adequate spacing around icons to prevent visual clutter.
+- Use icons sparingly to avoid overwhelming users. Only include icons that add value to the user experience.
+- Follow the established colour tokens for icons to ensure they align with the overall design aesthetic.
+- Do not use utility icons for decorative purposes; they should always serve a functional role. For decorative icons, consider using an illustration instead.
+
+## Icon Library
+
+### Material Symbols
+
+The chosen icon library for the Iress Design System is Material Symbols. This library offers a wide range of icons that are versatile and adaptable to various use cases.
+
+The settings we use for Material Symbols are.
+
+- Style: Rounded
+- Weight: (see Storybook)
+- Fill: 0 (1 for active icons)
+- Grade: (see Storybook)
+- Optical Size: (see Storybook)
+
+If you need to explore the available icons, you can visit the Material Symbols library here:
+
+- [Material Symbols](https://fonts.google.com/icons?icon.style=Rounded&icon.set=Material+Symbols)
+
+### Figma plugin
+
+If you are using Figma, we recommend the [Material Symbols plugin](https://www.figma.com/community/plugin/1088610476491668236/material-symbols) with the below settings:
+
+- Style: Rounded
+- Weight: (see Storybook)
+- Fill: Off (On for active icons)
+- Grade: (see Storybook)
+- Optical Size: (see Storybook)
+
+### `IressIcon` Component
+
+The `IressIcon` component is used to render icons from the Material Symbols library based on the guidelines outlined above.
+
+### Migrating from Font Awesome
+
+To help with migrating, we have mapped some common Font Awesome icons to their Material Symbols equivalents.
+
+Please refer to the table below for guidance.
+
+---
+
+<!-- foundations/overview.md -->
+
+# Overview
+
+The Iress Design System (IDS) is a shared library of React components, design
+tokens, and guidelines that Iress product teams use to build consistent,
+accessible, and performant user interfaces.
+
+## Why a design system?
+
+Iress builds financial software used by advisers, traders, lenders, and their
+clients. These users work in complex, data-rich environments where clarity and
+reliability are non-negotiable. A design system helps us:
+
+- **Ship faster** — teams reuse proven components instead of rebuilding common
+  UI patterns from scratch.
+- **Stay consistent** — shared tokens and components mean every product looks
+  and behaves the same, reducing cognitive load for users who switch between
+  Iress tools.
+- **Meet accessibility standards** — components are built to WCAG 2.1 AA by
+  default, so teams start compliant rather than retrofitting later.
+- **Reduce maintenance** — bug fixes and improvements propagate to every product
+  through a single dependency update.
+
+## Who is it for?
+
+| Audience | How they use IDS |
+|----------|-----------------|
+| **Designers** | Use the Figma library to create layouts that map directly to coded components. |
+| **Developers** | Install `@iress-oss/ids-components` and compose UIs using React components and design tokens. |
+| **Product managers** | Reference the guidelines to understand available patterns and make informed scope decisions. |
+| **QA engineers** | Use the documented accessibility and keyboard specs to verify implementations. |
+| **Business analysts** | Reference components and patterns to write accurate requirements and map user flows to existing UI capabilities. |
+
+## How this documentation is organised
+
+| Section | What you'll find |
+|---------|-----------------|
+| **Get Started** | Installation, Figma setup, and CSP configuration. |
+| **Foundations** | The *why* — design principles, accessibility philosophy, UX heuristics, and visual standards. |
+| **Tokens** | The design language — colour, typography, spacing, and radius values used across all components. |
+| **Styling Props** | How to apply tokens via component props for layout, spacing, colour, and typography. |
+| **Components** | Individual component documentation with design guidance, code examples, and accessibility specs. |
+| **Patterns** | Multi-component recipes for common UI tasks like forms, loading states, and navigation. |
+| **Resources** | Migration guides for upgrading between major versions. |
+
+## Guiding principles
+
+IDS is built on four pillars. Each is explored in detail in its own page:
+
+1. [Consistency](/foundations/principles#consistency) — predictable patterns
+   reduce user friction and speed up development.
+2. [Accessibility First](/foundations/principles#accessibility-first) — every
+   component meets WCAG 2.1 AA out of the box.
+3. [Clarity and Usability](/foundations/principles#clarity-and-usability) — clear
+   hierarchy and immediate feedback over visual novelty.
+4. [Developer Experience](/foundations/principles#developer-experience) — clean
+   APIs, comprehensive docs, and efficient testing.
+
+## Next steps
+
+- **Designers**: [Set up Figma](/get-started/design)
+- **Developers**: [Install and start building](/get-started/develop)
+- **Everyone**: [Core design principles](/foundations/principles)
+
+---
+
+<!-- foundations/principles.md -->
+
+# Core Design Principles
+
+## Consistency
+
+- Maintain brand consistency across all applications and experiences
+- Use standardised component naming conventions (all components start with `Iress` prefix)
+- Leverage shared design tokens for spacing, colours, typography, and interactive states
+- Ensure consistent behaviour patterns across similar components
+
+## Accessibility First
+
+- Meet or exceed WCAG 2.1 Level AA Accessibility Guidelines
+- Provide proper colour contrast ratios (minimum 4.5:1 for AA, 7:1 for AAA)
+- Implement comprehensive keyboard navigation support
+- Include screen reader compatibility with appropriate ARIA attributes
+- Support focus management and skip navigation patterns
+- Document accessibility considerations and requirements
+
+## Clarity and Usability
+
+- Prioritise clear visual hierarchy through typography scales and spacing systems
+- Use progressive disclosure to manage complexity
+- Provide immediate feedback for user actions (loading states, validation, etc.)
+- Design for touch-friendly interfaces with adequate target sizes
+
+## Developer Experience
+
+- Maintain clean component APIs with predictable prop patterns
+- Provide comprehensive documentation with usage examples
+- Include common patterns and anti-patterns
+- Support both controlled and uncontrolled component patterns
+- Enable efficient testing strategies with semantic roles and accessible queries
+- Maintain up-to-date prop documentation and type definitions
+
+## Quality assurance
+
+- Test components across supported browsers and devices
+- Validate accessibility compliance with automated and manual testing
+- Ensure proper keyboard navigation functionality
+- Test with assistive technologies (screen readers, voice control)
+
+### Code Standards
+
+- Follow consistent naming conventions for CSS classes and component props
+- Use semantic HTML elements where appropriate
+- Implement proper TypeScript typing for better developer experience
+- Maintain clean separation between presentation and logic
+
+### Performance Considerations
+
+- Optimise component rendering and re-rendering
+- Implement appropriate code splitting strategies
+- Use efficient animation and transition patterns
+- Consider bundle size impact of component dependencies
+
+---
+
+<!-- foundations/responsive-layout.md -->
+
+# Responsive layout
+
+The Iress Design System (IDS) is built with responsive design principles in mind. This means that our components are designed to adapt to different screen sizes and orientations, ensuring a consistent user experience across devices.
+
+## Breakpoints
+
+- Implement mobile-first responsive design
+- Use consistent breakpoint values across all components
+- Provide appropriate component variants for different screen sizes
+- Consider content priority and progressive disclosure on smaller screens
+
+### Extra-small screens (`xs`)
+
+### Small screens (`sm`)
+
+### Medium screens (`md`)
+
+### Large screens (`lg`)
+
+### Extra-large screens (`xl`)
+
+### Extremely large screens (`xxl`)
+
+---
+
+## For designers
+
+When designing for responsive layouts, consider how your designs will adapt to different screen sizes. Use the breakpoints defined in the design system to guide your layout decisions and ensure that your designs are flexible and adaptable.
+
+### Tips
+
+1. Use the example viewport sizes provided in the breakpoints table to show your designs at different screen widths.
+2. Prioritise content based on screen size — identify the primary task on each page and ensure the mobile layout focuses on it.
+3. Relocate secondary content (filters, sidebars, metadata panels) into a slideout or collapsible section on mobile rather than simply stacking everything vertically.
+4. Reduce option counts on mobile devices where appropriate.
+5. Implement responsive navigation patterns.
+6. Adjust spacing and sizing for different contexts.
+7. Maintain usability across all supported devices — all functionality should remain accessible on mobile, just reorganised into appropriate containers.
+
+---
+
+## For developers
+
+If you are using the IDS components, the breakpoints have already been mapped out to their respective props. You can use props such as `gap` to change the visual properties of the component at certain breakpoints.
+
+```jsx
+
+;
+```
+
+### Hooks
+
+#### `useBreakpoint`
+
+We also provide a `useBreakpoint` hook that allows you to access the current breakpoint in your components. This can be useful for conditionally rendering components based on the current screen size.
+
+**Note:** It is best to use media queries for responsive styling. Most props that require responsive values already support breakpoints which map to CSS values. Only use the `useBreakpoint` hook when there is no other way to achieve the desired responsive behavior.
+
+```jsx
+
+const MyComponent = () => {
+  const { breakpoint } = useBreakpoint();
+
+  return (
+    <div>
+      {breakpoint === 'xs' && <p>This is extra small screen</p>}
+      {breakpoint === 'md' && <p>This is medium screen</p>}
+    </div>
+  );
+};
+```
+
+#### `useResponsiveProps`
+
+Another hook is `useResponsiveProps`, which allows you to define responsive properties that change based on the current breakpoint. This is particularly useful for completely changing components at various screen sizes.
+
+**Note:** It is best to use media queries for responsive styling. Most props that require responsive values already support breakpoints which map to CSS values. Only use the `useResponsiveProps` hook when there is no other way to achieve the desired responsive behavior.
+
+### Constant
+
+You can also use the breakpoints directly in your CSS or styled components. The breakpoints are defined in the `@iress-oss/ids-components` package.
+
+```jsx
+
+const css = `
+  @media (${BREAKPOINT_DETAILS.md.mediaQuery}}) {
+    .my-class {
+      padding: 20px;
+    }
+  }
+`;
+
+<style>{css}</style>;
+```
+
+The base grid size is exported as `GRID_SIZE` from the `@iress-oss/ids-components` package, in case you need to reference it in your own code.
+
+---
+
+<!-- foundations/user-experience.md -->
+
+# User experience
+
+We use heuristic guidelines to assess the usability and user-centred design quality of all Iress products.
+
+## System Feedback
+
+- Always show users where they are, what just happened, and what’s possible next.
+- Provide immediate visual and textual feedback for all actions and states.
+- Ensure feedback is clear, contextual, and proportionate to the importance of the action.
+
+## Language and Mental Models
+
+- Use user-centred language and avoid technical jargon.
+- Follow cultural and industry conventions for colour, iconography, terminology, and layout.
+- Align interaction patterns with real-world analogues wherever feasible.
+
+## Control and Forgiveness
+
+- Make actions reversible and provide undo where errors may occur.
+- Let users easily backtrack, edit inputs, or abandon flows.
+- Provide escape hatches from any process without penalty.
+
+## Standards and Consistency
+
+- Use consistent layout, labelling, iconography, and grammar.
+- Reinforce expectations by placing similar elements in predictable positions.
+- Apply colour, spacing, and visual patterns consistently across all screens.
+
+## Error Prevention and Recovery
+
+- Prevent errors by anticipating misuse and validating early.
+- Phrase error messages with clarity, empathy, and constructive suggestions.
+- Where errors occur, explain why and how they can be resolved.
+
+## Recognition Over Recall
+
+- Display necessary information at the point of decision.
+- Use visual grouping, spacing, and affordance to reveal hierarchy.
+- Prioritise visual clarity over novelty.
+
+## Simplicity and Minimalism
+
+- Remove unnecessary detail—every word, element, or feature should earn its place.
+- Design for clarity of purpose with visually distinct, semantically meaningful UI components.
+- Use whitespace, clean alignment, and simplified flows to reduce cognitive load.
+
+---
+
+<!-- foundations/using-components-consistently.md -->
+
+# Using components consistently
+
+Consistency isn't about rigid rules — it's about reducing surprise. When a
+primary button always means "this is the main action", users learn to scan a
+screen and act with confidence. When the same component behaves differently
+across products, that confidence erodes.
+
+This page summarises the key consistency rules for the most common component
+categories. Each links to the full component documentation for details.
+
+---
+
+## Buttons
+
+Buttons are the primary way users take action. Use mode to signal priority:
+
+| Mode | Role | Rule |
+|------|------|------|
+| **Primary** | The main call-to-action | One per view. If you have two primary buttons competing, one should be secondary. |
+| **Secondary** | Supporting actions | Use alongside or below the primary action. |
+| **Tertiary** | Low-emphasis alternative | Extra affordance when secondary isn't distinct enough. |
+| **Muted** | Minimal chrome | Toolbars, inline with headings, icon-only actions. |
+| **Danger** | Destructive actions | Always pair with a confirmation step (Modal or inline). |
+| **Positive/Negative** | Financial transactions | Buy/sell contexts only. |
+
+Avoid `disabled` — keep buttons enabled and use validation or loading states
+instead. See [Button](/components/button) and
+[Common Mistakes](/foundations/common-mistakes#using-disabled-on-iressbutton).
+
+---
+
+## Forms
+
+Forms collect and validate user input. Consistency here directly reduces
+data-entry errors:
+
+- Always wrap inputs in `IressField` (standalone) or `IressFormField` (inside
+  `IressForm`) for labels, hints, and error placement.
+- Use the `short` pattern (≤ 8 fields, validate on submit) or `long` pattern
+  (> 8 fields, validate on blur) — don't mix them in the same product.
+- Size inputs to hint at expected length (`sizing` prop) — a postcode field
+  shouldn't be the same width as an address field.
+- Mark required fields with the `required` rule; IDS renders the asterisk
+  automatically.
+
+See [Form](/patterns/form) and [Field](/components/field).
+
+---
+
+## Navigation
+
+- Use `IressSideNav` or `IressBreadcrumbs` for structural navigation — never
+  raw `<nav>` with custom links.
+- Provide `IressSkipLink` at the top of every page for keyboard users.
+- Apply `aria-current="page"` via the component's built-in active state rather
+  than styling it manually.
+
+See [SideNav](/patterns/side-nav) and [Breadcrumbs](/patterns/breadcrumbs).
+
+---
+
+## Data Display
+
+- Use `IressTable` with proper `<thead>` column headers for tabular data.
+- Use consistent row hover (`colour.primary.surfaceHover`) and selected row
+  (`colour.accent.surface`) tokens.
+- Apply the [Loading pattern](/patterns/loading) with `pattern="component"` for
+  table-level loading, not a full-page spinner.
+
+See [Table](/components/table).
+
+---
+
+## Modals and Overlays
+
+- **Modal** — blocks interaction; use for tasks that need full attention or
+  confirmation.
+- **Slideout** — doesn't fully block; use for supplementary tasks where the user
+  may reference the underlying page.
+- **Popover / Tooltip** — non-blocking, ephemeral; use for hints and secondary
+  controls.
+
+Never nest modals. If a flow requires two layers of overlay, consider whether
+the first layer should be a page instead.
+
+See [Modal](/components/modal), [Slideout](/components/slideout), and the
+[Feedback pattern](/patterns/feedback) for a full decision guide.
+
+---
+
+<!-- foundations/visual-design-standards.md -->
+
+# Visual Design Standards
+
+Visual consistency builds user trust. When every Iress product uses the same
+type scale, colour semantics, spacing rhythm, and interaction patterns, users
+learn the interface once and can transfer that knowledge across tools. These
+standards are encoded in our [design tokens](/tokens/colour) so teams don't need
+to memorise values — just use the tokens and the consistency follows.
+
+## Typography
+
+IDS uses a deliberate type hierarchy to create scannable, data-rich screens:
+
+- **Heading font (Ubuntu)** — friendly and distinctive; establishes brand
+  presence without competing with data.
+- **Body font (Inter)** — optimised for screen legibility at small sizes, which
+  matters in tables and forms.
+- **Systematic scale (H1–H5, body.md, body.sm)** — each step is mathematically
+  derived from a 14px base, so relationships between headings and body text are
+  predictable.
+- **Weight as meaning** — `regular` for content, `medium` for interactive
+  elements (links, buttons), `strong` for emphasis within a paragraph.
+
+See [Typography Tokens](/tokens/typography) for exact values.
+
+## Colour System
+
+Colour carries meaning in financial interfaces. IDS enforces semantic colour so
+that users can scan a screen and instantly distinguish positive from negative,
+primary actions from secondary ones:
+
+| Role | Purpose | Example tokens |
+|------|---------|---------------|
+| **Neutral** | Backgrounds, text, borders — no inherent meaning | `colour.neutral.10`–`90` |
+| **Primary** | Brand identity, interactive controls, focus | `colour.primary.fill`, `.text` |
+| **Success** | Positive outcomes, confirmations | `colour.system.success.*` |
+| **Danger** | Errors, destructive actions | `colour.system.danger.*` |
+| **Warning** | Caution, non-blocking alerts | `colour.system.warning.*` |
+| **Positive/Negative** | Financial context (buy/sell) | `colour.system.positive.*`, `.negative.*` |
+
+Every colour pairing in the system meets WCAG 2.1 AA contrast (4.5:1 minimum).
+See [Colour Tokens](/tokens/colour) for the full palette with compliant
+pairings.
+
+## Spacing and Layout
+
+Consistent spacing creates rhythm and helps users parse dense screens:
+
+- **4px base unit** — all spacing values are multiples of 4px (`spacing.1` =
+  4px, `spacing.4` = 16px). This prevents arbitrary gaps and ensures alignment
+  across components.
+- **Responsive spacing** — components accept responsive objects so padding and
+  gaps adapt to screen size without custom media queries.
+- **Layout primitives** — use `IressStack`, `IressInline`, `IressRow`/`IressCol`
+  instead of writing custom flexbox. They enforce the spacing scale
+  automatically.
+
+See [Spacing Tokens](/tokens/spacing) for the full scale.
+
+## Interactive States
+
+Every interactive element must communicate its state clearly:
+
+| State | Visual treatment |
+|-------|-----------------|
+| **Default** | Resting appearance with adequate contrast |
+| **Hover** | Subtle background or border colour shift (never colour alone) |
+| **Focus** | Visible focus ring — never remove or hide the outline |
+| **Active/Pressed** | Momentary feedback (darker shade or depression) |
+| **Disabled** | Reduced opacity; avoid where possible — prefer validation on click |
+| **Loading** | Spinner replaces content; prevents duplicate actions |
+
+Transitions use a consistent 150ms ease-out timing to feel responsive without
+being distracting.
+
+## Applying these standards
+
+You don't need to memorise values. The standards are baked into:
+
+1. **Design tokens** — use `colour.primary.fill` not `#003271`
+2. **Component props** — `<IressButton mode="primary">` applies correct fill,
+   hover, focus, and loading states automatically
+3. **Styling props** — `<IressStack gap="spacing.4" p="spacing.6">` enforces
+   the spacing scale
+
+When building custom elements outside the component library, reference the
+tokens via CSS variables (e.g. `var(--iress-spacing-4)`) to stay aligned.
+
+---
+
+<!-- foundations/z-index-stacking.md -->
+
+# Z-index (stacking)
+
+The z-index determines the stacking order of elements. Elements with a higher z-index always sit in front of elements with a lower z-index. Each index has been mapped to the appropriate elevation(s).
+
+---
+
+## For developers
+
+If you are using the IDS components, the z-indexes have already been mapped out to their respective components based on the usage above. They are hardcoded into the components, so you don't need to worry about them.
+
+The mapping is exported as `Z_INDEX` from the `@iress-oss/ids-components` package, in case you need to reference it in your own code.
+
+---
+
+<!-- get-started/ai.md -->
+
+# AI
+
+IDS provides agent skills that give AI coding assistants contextual knowledge about the design system — no runtime dependencies required.
+
+## Available Skills
+
+| Skill | Description |
+|-------|-------------|
+| `figma-to-ids` | Translate Figma design properties into IDS component implementations |
+| `ui-translation` | Translate natural language UI descriptions into IDS component code |
+| `ui-doctor` | Audit and validate IDS component usage and compliance |
+| `token-usage` | Guide on correctly using IDS design tokens in React components and CSS |
+| `version-migration` | Migrate applications between IDS major versions (v4→v5, v5→v6, OUI→v6) |
+
+## Installation
+
+Install skills using the [skills CLI](https://github.com/vercel-labs/skills):
+
+```bash
+# Install all IDS skills (interactive — choose your agents)
+npx skills add iress/design-system
+
+# Install a specific skill
+npx skills add iress/design-system --skill token-usage
+
+# Install to a specific agent
+npx skills add iress/design-system -a github-copilot
+npx skills add iress/design-system -a claude-code
+npx skills add iress/design-system -a cursor
+npx skills add iress/design-system -a kiro-cli
+```
+
+## How it works
+
+Skills are markdown files that provide context to AI tools. They include:
+
+- **Component API knowledge** — correct prop usage, available options, TypeScript interfaces
+- **Design patterns** — when to use which component, composition rules, accessibility requirements
+- **Code examples** — verified examples extracted from Storybook stories
+- **Migration rules** — automated transformation patterns for version upgrades
+
+## Using with AI assistants
+
+### GitHub Copilot
+
+Skills are installed as custom instructions in `.github/copilot-instructions.md`.
+
+### Kiro CLI
+
+Skills are symlinked to `.kiro/skills/` and loaded automatically.
+
+### Cursor / Claude Code
+
+Skills are installed in the respective agent configuration directories.
+
+## Figma Integration
+
+The `figma-to-ids` skill can translate Figma designs directly into IDS code. If you have a Figma MCP server configured, AI agents can read Figma files and generate implementations. Without MCP, paste exported design specs into your prompt.
+
+## `.ai/` Directory
+
+Each published package includes an `.ai/` directory with AI-optimised documentation:
+
+```
+node_modules/@iress-oss/ids-components/.ai/
+  components/alert.md
+  components/button.md
+  patterns/form.md
+  skills/ui-translation.md
+  index.json
+```
+
+These files are automatically generated from the guidelines content and Storybook examples. They are designed to be easily parsed by AI tools, providing up-to-date information on component APIs, usage patterns, and design tokens.
+
+---
+
+<!-- get-started/content-security-policy.md -->
+
+# Content Security Policy (CSP)
+
+IDS loads external stylesheets and fonts at runtime. If your application enforces a Content Security Policy, you need to allowlist the origins IDS loads from.
+
+## External Origins
+
+IDS components load resources from these domains:
+
+| Origin                 | Resource                                                | Loaded By                                            |
+| ---------------------- | ------------------------------------------------------- | ---------------------------------------------------- |
+| `fonts.googleapis.com` | Material Symbols icon font CSS, Inter & Ubuntu font CSS | `IressProvider`, `IressIconProvider`                 |
+| `fonts.gstatic.com`    | Font binary files (served by Google Fonts CSS)          | Google Fonts `@font-face` rules                      |
+| `cdn.iress.com`        | Font Awesome CSS (legacy v5 icon set), theme CSS        | `IressIconProvider` (fontawesome type), `IressTheme` |
+
+## Required CSP Directives
+
+Add the following origins to your Content Security Policy:
+
+```
+style-src 'self' https://fonts.googleapis.com https://cdn.iress.com;
+font-src  'self' https://fonts.gstatic.com https://cdn.iress.com;
+```
+
+If you use `IressThemeImport` (bundled themes, no CDN) instead of `IressTheme`, you can omit `cdn.iress.com` from `style-src`.
+
+---
+
+## Optional: Nonce Support for `IressShadow`
+
+`IressShadow` injects inline `<style>` tags into its Shadow DOM. If your CSP blocks inline styles, IDS supports nonce-based injection for this component. This is **optional** — most applications only need the origin allowlisting above.
+
+IDS reads a CSP nonce from a `<meta>` tag and applies it to `<style>` elements injected by `IressShadow`:
+
+```html
+<head>
+  <meta name="csp-nonce" content="<SERVER_GENERATED_NONCE>" />
+</head>
+```
+
+Your server must:
+
+1. Generate a unique nonce per request.
+2. Set it in both the `<meta>` tag and the CSP header.
+3. Ensure the nonce value matches exactly.
+
+### Example with Nonce
+
+```
+Content-Security-Policy: style-src 'self' 'nonce-abc123' https://fonts.googleapis.com https://cdn.iress.com; font-src 'self' https://fonts.gstatic.com https://cdn.iress.com;
+```
+
+```html
+<meta name="csp-nonce" content="abc123" />
+```
+
+---
+
+## How It Works
+
+- **`IressProvider`** injects `<link rel="stylesheet">` tags for default fonts (Inter, Ubuntu) from `fonts.googleapis.com`.
+- **`IressIconProvider`** injects `<link>` tags for Material Symbols from `fonts.googleapis.com` (with dynamic subsetting), or `<link>` tags for Font Awesome from `cdn.iress.com`.
+- **`IressShadow`** injects inline `<style>` tags into its Shadow DOM — this is the only component that requires a nonce when inline styles are blocked.
+
+All components use `<link>` tags for external stylesheets, which are covered by origin allowlisting alone. Only `IressShadow` calls `getNonce()` to apply a nonce to its inline `<style>` elements.
+
+---
+
+## Troubleshooting
+
+| Symptom                                        | Cause                                                 | Fix                                                                          |
+| ---------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Icons render as text (e.g. "search")           | `fonts.googleapis.com` or `fonts.gstatic.com` blocked | Add both to `style-src` and `font-src` respectively                          |
+| Console error: "Refused to load stylesheet"    | Missing origin in `style-src`                         | Add the blocked origin to `style-src`                                        |
+| Console error: "Refused to apply inline style" | Inline styles blocked and no nonce configured         | Add `<meta name="csp-nonce">` tag, or allow `'unsafe-inline'` in `style-src` |
+| Fonts load in dev but not production           | CSP only enforced in production                       | Test with CSP headers in all environments                                    |
+| Theme not applying                             | `cdn.iress.com` blocked in `style-src`                | Add `cdn.iress.com` to `style-src`, or use `IressThemeImport`                |
+
+---
+
+<!-- get-started/design.md -->
+
+# Design
+
+Set up your environment to use the latest version of the Iress Design System (IDS). You can use this library to build React applications that align to IDS, and ensure a consistent and modern look and feel across all Iress products.
+
+## Requirements
+
+- [Figma](https://www.figma.com/)
+
+## Set up
+
+1. Request access to the [Figma design system file](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6).
+2. Set up the required fonts:
+    - [Inter](https://fonts.google.com/specimen/Inter) for UI text
+    - [Ubuntu](https://fonts.google.com/specimen/Ubuntu) for headings
+    - [Space Mono](https://fonts.google.com/specimen/Space+Mono) for code snippets
+3. Set up the required Figma plugins:
+    -  [Material Symbols](https://www.figma.com/community/plugin/1036040127479628855/Material-Symbols) for icons
+
+---
+
+<!-- get-started/develop.md -->
+
+# Develop
+
+Set up your environment to use the latest version of the Iress Design System (IDS). You can use this library to build React applications that align to IDS, and ensure a consistent and modern look and feel across all Iress products.
+
+## Requirements
+
+- [React 17 or later](https://reactjs.org/)
+
+## Set up
+
+1. Install using the command line:
+   ```sh
+   yarn add @iress-oss/ids-components
+   ```
+2. Import the styles:
+   ```tsx
+   import '@iress-oss/ids-components/dist/style.css';
+   ```
+3. Import the components. The provider is optional, but recommended for most applications. It sets up the design system and provides a consistent container for components like modals, slideouts, and toasts. If you are using `IressProvider`, you do not need to add `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, or `IressIconProvider` separately — they are all included. The same applies when using `IressShadow`, which includes `IressProvider` internally.
+   ```tsx
+   import { IressProvider, IressButton } from '@iress-oss/ids-components';
+   ```
+4. Use the components:
+
+   ```tsx
+   const App = () => {
+     const { success } = useToaster();
+
+     return (
+       
+     );
+   };
+
+   ReactDOM.createRoot(document.getElementById('root')!).render(
+     
+       
+     ,
+   );
+   ```
+
+---
+
+<!-- get-started/faq.md -->
+
+# Frequently Asked Questions
+
+---
+
+## Which version should I use?
+
+Use **version 6** for all new development. It includes the latest components, tokens, and accessibility improvements. See the [versions page](/get-started/versions) for details.
+
+## Do I need to upgrade from v5?
+
+v5 remains maintained for security fixes, but new features and components are only added to v6. We recommend planning your migration. See the [v5 to v6 migration guide](/migration/from-v5-to-v6).
+
+## What support is available for migration?
+
+A comprehensive [migration guide](/migration/from-v5-to-v6) covers all breaking changes. If you plan to migrate soon, reach out to the design system team — we partner with teams during migration.
+
+## How do I report a bug or request a feature?
+
+Each component page has "Report issue" and "Request feature" links that open pre-filled GitHub issues. You can also [create an issue directly](https://github.com/iress/design-system/issues/new/choose).
+
+## Can I use IDS with AI coding tools?
+
+Yes — IDS ships AI-optimised documentation via the `.ai/` directory in the npm package, and provides [agent skills](/get-started/ai) for GitHub Copilot, Kiro CLI, Cursor, and Claude Code.
+
+## Does IDS support server-side rendering (SSR)?
+
+IDS components are client-side React components. For SSR frameworks (Next.js, Remix), ensure you wrap the app in `IressProvider` and follow the [CSP guide](/get-started/content-security-policy) for font/style loading.
+
+## How do I customise the theme?
+
+IDS uses design tokens that can be overridden via CSS custom properties. See the [tokens documentation](/tokens/colour) for available customisation points.
+
+---
+
+<!-- get-started/versions.md -->
+
+# Versions
+
+Version 6 is the latest release and recommended for all new development.
+
+## Version history
+
+| Version | Status | Documentation |
+|---------|--------|---------------|
+| v6 | **Current** | You're reading it |
+| v5 | Maintained (security fixes only) | [v5 Documentation](https://design.wm.iress.com) |
+| v4 | End of life (Dec 2024) | [v4 Archive](https://archive.design.aws-wmcore-production-au.iress.online/index.html) |
+| OneUI | Deprecated | No longer available |
+
+## Upgrading
+
+- [Migrating from v5 to v6](/migration/from-v5-to-v6)
+- [Migrating from v4 to v5](/migration/migration-from-v4-to-v5)
+- [Migrating from OneUI to v6](/migration/from-oui-to-v6)
+
+---
+
+<!-- migration/from-oui-to-v6.md -->
+
+# Migrating from OUI to IDS v6
+
+This guide covers migrating from the legacy OUI component library (`@iress/oui`) to the Iress Design System v6 (`@iress-oss/ids-components`). It also covers upgrading existing IDS v4 (`@iress/components-react`) components, replacing Formik with IDS v6's React Hook Form integration, and updating your test infrastructure.
+
+> **If you are migrating from IDS v5**, see [Migrating from v5](/migration/from-v5-to-v6) instead — that guide focuses on v5-to-v6 breaking changes only.
+
+---
+
+## Overview
+
+### Why migrate?
+
+| Benefit             | Details                                                            |
+| ------------------- | ------------------------------------------------------------------ |
+| **Consistency**     | A single component library aligned with IDS v6 standards           |
+| **Accessibility**   | Improved WCAG compliance built into every component                |
+| **Maintainability** | OUI and IDS v4 are legacy — IDS v6 is actively maintained          |
+| **TypeScript**      | Full type-safety for components, styling props, and forms          |
+| **Performance**     | React Hook Form is lighter than Formik; IDS v6 ships optimised CSS |
+| **Bundle size**     | Removing OUI, Formik, and Yup can save 200–300 KB                  |
+
+### Migration scope
+
+The migration covers three main areas:
+
+1. **OUI → IDS v6** — Replace all `@iress/oui` components with `@iress-oss/ids-components` equivalents
+2. **IDS v4 → IDS v6** — Update all `@iress/components-react` imports and adapt to v6 API changes
+3. **Formik → React Hook Form** — Replace Formik forms with IDS v6's built-in form architecture
+
+---
+
+## 1. Dependencies
+
+### Update `package.json`
+
+Remove legacy packages and add IDS v6:
+
+```diff
+{
+  "dependencies": {
+-   "@iress/oui": "^x.y.z",
+-   "@iress/components-react": "^x.y.z",
+-   "formik": "^x.y.z",
+-   "yup": "^x.y.z",
++   "@iress-oss/ids-components": "^6.0.0",
++   "react-hook-form": "^7.0.0"
+  }
+}
+```
+
+> `react-hook-form` is a peer dependency of `IressForm` in v6. You must add it to your own dependencies.
+
+### Update imports
+
+```diff
+// OUI imports
+-import { Button, Input, Modal } from '@iress/oui';
++import { IressButton, IressInput, IressModal } from '@iress-oss/ids-components';
+
+// IDS v4 imports
+-import { IressButton, IressText } from '@iress/components-react';
++import { IressButton, IressText } from '@iress-oss/ids-components';
+```
+
+### Add the stylesheet
+
+IDS v6 no longer injects CSS into the DOM. Add this **once** in your app entry point:
+
+```tsx
+
+```
+
+---
+
+## 2. OUI component mapping
+
+### Direct mappings (low complexity)
+
+These OUI components map directly to an IDS v6 equivalent with minimal prop changes.
+
+#### Button → IressButton
+
+```diff
+-
++
+```
+
+| OUI prop   | IDS v6 prop | Notes                                           |
+| ---------- | ----------- | ----------------------------------------------- |
+| `variant`  | `mode`      | Same values: `primary`, `secondary`, `tertiary` |
+| `loading`  | `loading`   | Unchanged                                       |
+| `disabled` | `disabled`  | Unchanged                                       |
+| `type`     | `type`      | Unchanged                                       |
+
+> **New in v6:** `element` prop to render as a routing `Link`, `icon` prop for icon-only buttons, and `status` prop for `danger`/`success` states.
+
+#### ProgressBar → IressProgress
+
+```diff
+-
++
+```
+
+Props are unchanged.
+
+#### Badge → IressPill
+
+```diff
+-<Badge variant="info">Info
++Info
+```
+
+| OUI prop  | IDS v6 prop |
+| --------- | ----------- |
+| `variant` | `mode`      |
+
+> In IDS v6, `IressBadge` has been renamed to `IressPill`. Use `IressPill` for static indicators and `IressTag` for interactive elements.
+
+### Medium complexity
+
+#### Modal → IressModal
+
+```diff
+-
++<IressModal show={isOpen} heading="My Modal" onShowChange={handleClose}>
+   Modal content
+-
++</IressModal>
+```
+
+| OUI prop  | IDS v6 prop    |
+| --------- | -------------- |
+| `isOpen`  | `show`         |
+| `title`   | `heading`      |
+| `onClose` | `onShowChange` |
+
+#### DropdownButton → IressDropdownMenu / IressSelect / IressPopover
+
+OUI's `DropdownButton` can be replaced by several IDS v6 components depending on the use case:
+
+| Use case                | IDS v6 component    | When to use                                                                    |
+| ----------------------- | ------------------- | ------------------------------------------------------------------------------ |
+| Menu of actions         | `IressDropdownMenu` | Selecting from a list of options with built-in search and multi-select support |
+| Form select             | `IressSelect`       | Selecting a value within a form                                                |
+| Custom dropdown content | `IressPopover`      | Full control over the dropdown content                                         |
+
+**IressDropdownMenu example:**
+
+```diff
+-
++<IressDropdownMenu
+-  <MenuItem onClick={action1}>Action 1
++  label="Actions"
+-  Action 2
++  options={[
+-</DropdownButton>
++    { label: 'Action 1', value: 'action1' },
++    { label: 'Action 2', value: 'action2' },
++  ]}
++  onChange={(value) => handleAction(value)}
++/>
+```
+
+**IressSelect example (in a form):**
+
+```diff
+-
++<IressFormField
+-  <MenuItem value="opt1">Option 1
++  name="selection"
+-  Option 2
++  label="Choose option"
+-</DropdownButton>
++  render={(props) => (
++    
++  )}
++ />
+```
+
+### Using styling props
+
+#### Scrollable
+
+OUI's `Scrollable` component is replaced by the `scrollable` styling prop, available on any IDS v6 component. It sets `overflow: auto` with design-system-styled scrollbars.
+
+| Value  | Behaviour              |
+| ------ | ---------------------- |
+| `true` | Scroll on both axes    |
+| `"x"`  | Horizontal scroll only |
+| `"y"`  | Vertical scroll only   |
+
+```diff
+-
++<IressPanel scrollable="y" style={{ height: '300px', maxHeight: '500px' }}>
+  
+-
++</IressPanel>
+```
+
+You can also use `scrollable` on any element — it is not limited to `IressPanel`:
+
+```tsx
+
+  
+
+```
+
+---
+
+## 3. Form migration (Formik → IDS v6)
+
+This is the most significant architectural change. IDS v6 forms use **React Hook Form** under the hood via `IressForm` and `IressFormField`.
+
+### Key differences
+
+| Formik                                | IDS v6                                         |
+| ------------------------------------- | ---------------------------------------------- |
+| `` wrapper with render props  | `<IressForm>` with declarative children        |
+| `<Field>` with `as` prop              | `<IressFormField>` with `render` prop          |
+| Yup validation schemas                | Per-field `rules` prop (React Hook Form rules) |
+| `<ErrorMessage>` component            | Automatic error display by `IressFormField`    |
+| Standalone `<Label>` + `<Input>`      | Integrated `IressFormField` with `label` prop  |
+| `<FormGroup>` / `<Fieldset>` wrappers | `IressFormField` or `IressFieldGroup`          |
+
+### Basic form migration
+
+**Before (Formik + OUI):**
+
+```tsx
+
+const schema = Yup.object({
+  email: Yup.string().email('Invalid email').required('Email is required'),
+  password: Yup.string()
+    .min(8, 'Min 8 characters')
+    .required('Password is required'),
+});
+
+function LoginForm() {
+  return (
+    <Formik
+      initialValues={{ email: '', password: '' }}
+      validationSchema={schema}
+      onSubmit={handleSubmit}
+    >
+      {({ errors, touched }) => (
+        <Form>
+          <FormGroup>
+            <Label htmlFor="email">Email
+            
+            {errors.email && touched.email && <span>{errors.email}</span>}
+          </FormGroup>
+
+          
+            <Label htmlFor="password">Password
+            
+            {errors.password && touched.password && (
+              <span>{errors.password}</span>
+            )}
+          </FormGroup>
+
+          
+            Login
+          
+        </Form>
+      )}
+    </Formik>
+  );
+}
+```
+
+**After (IDS v6):**
+
+```tsx
+
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressButton,
+} from '@iress-oss/ids-components';
+
+function LoginForm() {
+  return (
+    
+      <IressFormField
+        name="email"
+        label="Email"
+        render={(props) => }
+        rules={{
+          required: 'Email is required',
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: 'Invalid email',
+          },
+        }}
+      />
+
+      <IressFormField
+        name="password"
+        label="Password"
+        render={(props) => }
+        rules={{
+          required: 'Password is required',
+          minLength: { value: 8, message: 'Min 8 characters' },
+        }}
+      />
+
+      
+    
+  );
+}
+```
+
+### Validation migration (Yup → rules)
+
+| Yup                      | React Hook Form `rules`                                                |
+| ------------------------ | ---------------------------------------------------------------------- |
+| `.required('msg')`       | `required: 'msg'`                                                      |
+| `.min(n, 'msg')`         | `minLength: { value: n, message: 'msg' }`                              |
+| `.max(n, 'msg')`         | `maxLength: { value: n, message: 'msg' }`                              |
+| `.email('msg')`          | `pattern: { value: /…/, message: 'msg' }`                              |
+| `.matches(regex, 'msg')` | `pattern: { value: regex, message: 'msg' }`                            |
+| `.positive('msg')`       | `validate: { positive: (v) => v > 0 \|\| 'msg' }`                      |
+| `.integer('msg')`        | `validate: { integer: (v) => Number.isInteger(Number(v)) \|\| 'msg' }` |
+| `.url('msg')`            | `pattern: { value: /^https?:\/\/.+/, message: 'msg' }`                 |
+
+### Form component mapping
+
+#### Input → IressFormField + IressInput
+
+```diff
+-
++ }
++  rules={{ required: 'This field is required' }}
++/>
+```
+
+#### TextArea → IressFormField + IressInput (with rows)
+
+```diff
+-
++<IressFormField
++  name="textField"
++  label="Description"
++  render={(props) => }
++  rules={{ required: 'This field is required' }}
++/>
+```
+
+#### Label → IressFormField (label prop)
+
+Labels are now integrated into `IressFormField` — no separate component needed:
+
+```diff
+-<Label htmlFor="fieldId">Field Label
++
++  name="fieldName"
++  label="Field Label"
++  render={(props) => }
++/>
+```
+
+#### FormGroup / Fieldset → IressFormField or IressFieldGroup
+
+`FormGroup` functionality is built into `IressFormField`. For `Fieldset` grouping, use `IressFieldGroup` which provides a semantic `<fieldset>` with a legend:
+
+```diff
+-
++<IressFieldGroup label="Personal Info">
+-  <Label>Name
++  
++    name="name"
+-</Fieldset>
++    label="Name"
++    render={(props) => }
++  />
++</IressFieldGroup>
+```
+
+#### RadioGroup → IressFormField + IressRadioGroup
+
+```diff
+-
++<IressFormField
+-  <Radio value="male">Male
++  name="gender"
+-  Female
++  label="Gender"
+-</RadioGroup>
++  render={(props) => (
++    
++      <IressRadio value="male">Male
++      Female
++    </IressRadioGroup>
++  )}
++/>
+```
+
+#### Checkbox → IressFormField + IressCheckbox
+
+```diff
+-Accept terms
++ (
++    <IressCheckbox {...props}>Accept terms
++  )}
++  rules={{ required: 'You must accept terms' }}
++/>
+```
+
+---
+
+## 4. IDS v4 → v6 component changes
+
+If your project also uses IDS v4 (`@iress/components-react`), these components need updating alongside the OUI migration.
+
+### Package import
+
+All imports change from `@iress/components-react` to `@iress-oss/ids-components`. Component names stay the same.
+
+### Breaking changes
+
+| Component                       | Change                                                             | Migration                                              |
+| ------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------ |
+| `IressButton`                   | `variant` → `mode`                                                 | Find and replace                                       |
+| `IressAlert`                    | `variant` → `status`; `error` → `danger`                           | Find and replace                                       |
+| `IressModal`                    | `isOpen` → `show`, `title` → `heading`, `onClose` → `onShowChange` | Find and replace                                       |
+| `IressForm`                     | Complete React Hook Form architecture                              | See [Form migration](#3-form-migration-formik--ids-v6) |
+| `IressField` → `IressFormField` | Renamed; uses `render` prop pattern                                | See [Form migration](#3-form-migration-formik--ids-v6) |
+| `IressText`                     | `variant` → `textStyle`, `mode` → `color`, `align` → `textAlign`   | Find and replace                                       |
+| `IressStack`                    | `gutter` → `gap`                                                   | Find and replace                                       |
+| `IressDivider`                  | `gutter` removed                                                   | Use `my` / `mx` styling props                          |
+| `IressBadge` → `IressPill`      | Renamed                                                            | Find and replace                                       |
+
+### Low-risk components (unchanged API)
+
+These components only need an import path update:
+
+- `IressPanel`
+- `IressInline`
+- `IressIcon`
+- `IressSkeleton`
+- `IressSpinner`
+- `IressProgress`
+
+> For a comprehensive list of all v5-to-v6 component changes, see [Migrating from v5](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-v5-to-v6--docs).
+
+---
+
+## 5. Testing migration
+
+### Remove IDS v4 test utilities
+
+IDS v6 uses standard React Testing Library — no special test utilities needed.
+
+```diff
+// jest.setup.js or vitest.setup.ts
+-import { mockLazyLoadedComponents } from '@iress/ids-react-test-utils/dist/react-test-utils/src/mocks/mockLazyLoadedComponents';
++import '@testing-library/jest-dom';
+-mockLazyLoadedComponents();
+```
+
+### Update test patterns
+
+| IDS v4 pattern                       | IDS v6 pattern                                       |
+| ------------------------------------ | ---------------------------------------------------- |
+| `idsFireEvent.click(el)`             | `fireEvent.click(el)` or `await userEvent.click(el)` |
+| `await findByTestId('x__button')`    | `getByRole('button', { name: 'X' })`                 |
+| `mockLazyLoadedComponents()`         | Remove — components load synchronously               |
+| Async `findBy*` for component render | Synchronous `getBy*` in most cases                   |
+
+### Prefer accessibility queries
+
+```diff
+-const button = await findByTestId('submit-btn__button');
+-idsFireEvent.click(button);
++const button = getByRole('button', { name: 'Submit' });
++fireEvent.click(button);
+```
+
+### Update Jest / Vitest configuration
+
+```diff
+
+// Transform patterns
+{
+  transformIgnorePatterns: [
+-    "node_modules/(?!(@iress/components-react|@iress/components|@stencil/core)/)"
++    "/node_modules/(?!@iress-oss/ids-components)"
+  ]
+}
+// CSS module mocking
+{
+  moduleNameMapper: {
+-    "ids-web-components.css$": "<rootDir>/test/style-mock.ts"
++    "@iress-oss/ids-components/(.*).css": "<rootDir>/test/style-mock.ts"
+  }
+}
+```
+
+### Form test migration
+
+```diff
+test('form validation', async () => {
+-  const { findByTestId } = render();
+-  const input = await findByTestId('email__input');
+-  idsFireEvent.click(await findByTestId('submit-btn__button'));
+-  const error = await findByTestId('email__error');
+-  expect(error).toBeInTheDocument();
++  const { getByRole, findByText } = render();
++  fireEvent.click(getByRole('button', { name: 'Submit' }));
++  expect(await findByText('Email is required')).toBeInTheDocument();
+});
+```
+
+---
+
+## 6. Styling migration
+
+### CSS class changes
+
+OUI and IDS v4 used different class naming conventions that no longer exist in v6:
+
+```css
+/* ❌ OUI classes — no longer exist */
+.oui-button {
+}
+
+/* ❌ IDS v4 Stencil classes — no longer exist */
+.sc-iress-button-h {
+}
+
+/* ✅ IDS v6 — use styling props or design tokens */
+```
+
+### Use styling props instead of custom CSS
+
+IDS v6 exposes global styling props on every component:
+
+```tsx
+// Spacing
+
+// Responsive
+
+// Colour
+
+```
+
+### Use design tokens for custom styles
+
+```css
+/* ✅ Preferred — design tokens */
+.custom-element {
+  color: var(--iress-color-text-primary);
+  padding: var(--iress-spacing-md);
+}
+```
+
+### Cascade layers
+
+All IDS v6 CSS lives in cascade layers. If your own un-layered CSS is being overridden, declare layer order:
+
+```css
+@layer reset, base, tokens, recipes, utilities;
+```
+
+---
+
+## 7. Common patterns
+
+### Pattern 1: Simple form field
+
+```tsx
+ }
+  rules={{ required: 'Required' }}
+/>
+```
+
+### Pattern 2: Complete form
+
+```tsx
+<IressForm onSubmit={handleSubmit} defaultValues={{ field1: '', field2: '' }}>
+  <IressFormField
+    name="field1"
+    label="First field"
+    render={(props) => }
+  />
+  <IressFormField
+    name="field2"
+    label="Second field"
+    render={(props) => }
+  />
+  
+
+```
+
+### Pattern 3: Modal with form
+
+```tsx
+
+  <IressForm onSubmit={handleSubmit}>
+    <IressFormField
+      name="name"
+      label="Name"
+      render={(props) => }
+    />
+    
+  
+</IressModal>
+```
+
+### Pattern 4: Contextual menu
+
+```tsx
+
+```
+
+---
+
+## 8. Common gotchas
+
+| Problem                              | Cause                                            | Solution                                                                  |
+| ------------------------------------ | ------------------------------------------------ | ------------------------------------------------------------------------- |
+| Components have no styles            | Missing CSS import                               | Add `import '@iress-oss/ids-components/dist/style.css'` to your app entry |
+| Form validation not working          | Using HTML5 attributes (`required`, `maxLength`) | Move all validation to the `rules` prop on `IressFormField`               |
+| Modal won't close                    | Using `isOpen` prop                              | Rename to `show`                                                          |
+| Button variant not applying          | Using `variant` prop                             | Rename to `mode`                                                          |
+| Tests fail with "Cannot find module" | Jest can't transform IDS v6                      | Update `transformIgnorePatterns` in your test config                      |
+| `idsFireEvent` not found             | Using removed IDS v4 test utils                  | Replace with standard `fireEvent` from React Testing Library              |
+| Form fields render without labels    | Using standalone `<Label>`                       | Move the label text into the `label` prop on `IressFormField`             |
+| Custom CSS overriding components     | Cascade layer ordering                           | Declare `@layer` order in your stylesheet                                 |
+
+---
+
+## 9. Full component reference
+
+| OUI component    | IDS v6 equivalent                                    | Complexity | Notes                                  |
+| ---------------- | ---------------------------------------------------- | ---------- | -------------------------------------- |
+| `Button`         | `IressButton`                                        | Low        | `variant` → `mode`                     |
+| `Input`          | `IressFormField` + `IressInput`                      | High       | Requires form context                  |
+| `TextArea`       | `IressFormField` + `IressInput`                      | High       | Use `rows` prop                        |
+| `Label`          | `IressFormField` `label` prop                        | Medium     | No separate component                  |
+| `FormGroup`      | `IressFormField`                                     | High       | Built-in to FormField                  |
+| `Fieldset`       | `IressFieldGroup`                                    | Low        | Use `label` prop                       |
+| `RadioGroup`     | `IressFormField` + `IressRadioGroup`                 | High       | Requires form context                  |
+| `Radio`          | `IressRadio`                                         | Medium     | Must be in `IressRadioGroup`           |
+| `Checkbox`       | `IressFormField` + `IressCheckbox`                   | Medium     | —                                      |
+| `Modal`          | `IressModal`                                         | Medium     | `isOpen` → `show`, `title` → `heading` |
+| `DropdownButton` | `IressDropdownMenu` / `IressSelect` / `IressPopover` | Medium     | Depends on use case — see above        |
+| `ProgressBar`    | `IressProgress`                                      | Low        | Props unchanged                        |
+| `Badge`          | `IressPill`                                          | Low        | `variant` → `mode`                     |
+| `Scrollable`     | `scrollable` styling prop                            | Low        | Available on any component             |
+
+| IDS v4 component           | IDS v6 change                             | Complexity |
+| -------------------------- | ----------------------------------------- | ---------- |
+| `IressButton`              | `variant` → `mode`                        | Low        |
+| `IressAlert`               | `variant` → `status`; `error` → `danger`  | Low        |
+| `IressText`                | `variant` → `textStyle`, `mode` → `color` | Low        |
+| `IressStack`               | `gutter` → `gap`                          | Low        |
+| `IressModal`               | `isOpen` → `show`, `title` → `heading`    | Medium     |
+| `IressForm` / `IressField` | React Hook Form architecture              | High       |
+| `IressBadge`               | Renamed to `IressPill`                    | Low        |
+| `IressPanel`               | Import path only                          | Low        |
+| `IressInline`              | Import path only                          | Low        |
+| `IressDivider`             | `gutter` removed; use `my`/`mx`           | Low        |
+
+---
+
+<!-- migration/from-v5-to-v6.md -->
+
+# Migrating from v5 to v6
+
+This guide covers all breaking changes, deprecations, and new features introduced in version 6 of the Iress Design System. While the list is extensive, most changes relate to look-and-feel rather than code.
+
+---
+
+## Overview
+
+### Optimised token system
+
+The design token count has been reduced from **940 to 88**, focusing on the essentials required to rebrand an application from a client style guide — similar to the original global tokens in previous IDS versions.
+
+The new token system enables closer brand parity, including:
+
+- Custom **remote font stylesheets** attached to a theme
+- An **accent colour** to further emphasise a client's brand
+- **Radius tokens** controlled at group level (badge, button, form, layout)
+
+**What this means in practice:**
+
+- Border widths and styles are no longer customisable via tokens. Inputs will always have a `1px` border; tabs always look the same except for colours and radius.
+- Animations and transitions have been removed from theme customisation.
+- Old themes have been translated to the new tokens as closely as possible, but minor visual inconsistencies may appear where tokens are now hard-coded.
+
+### Default theme
+
+Version 6 ships with a **fully styled Iress-branded default theme**. Loading a theme is now **optional** — only required for theme switching (e.g. multi-client applications) or backwards compatibility with older IDS versions.
+
+### Styling props
+
+Utility classes (e.g. `iress-hide--sm`) and internal component tokens (e.g. `--iress-text-color`) have been replaced with **global styling props** available on every component.
+
+```tsx
+// Padding and margin via props
+
+// Responsive values
+
+```
+
+Utility classes for components have been changed to functions:
+
+```tsx
+// Apply Panel styling to a native div
+<div className={panel()} />
+```
+
+> **Note:** Styling props only accept design token values. For custom values, use standard CSS. Not every internal component token has a matching styling prop — only those needed for rebranding.
+
+### Cascade layers
+
+All component CSS now lives in its own cascade layer, making overrides straightforward. However, un-layered CSS now takes priority over component styles by default.
+
+To control priority, declare your own layer order:
+
+```css
+@layer reset, base, tokens, recipes, utilities;
+```
+
+### Panda CSS (for contributors)
+
+SASS modules have been replaced with [Panda CSS](https://panda-css.com/) for type-safe styles and styling props. See the updated contributing guidelines for details.
+
+---
+
+## Component changes
+
+### Alert
+
+| Change                 | Details                                                                         |
+| ---------------------- | ------------------------------------------------------------------------------- |
+| Removed `headingLevel` | Use a native heading tag inside the `heading` prop                              |
+| Removed `headingText`  | Use the `heading` prop                                                          |
+| Deprecated `footer`    | Use `actions` or `children` instead                                             |
+| New `actions`          | Styled buttons based on alert status. Accepts `IressButtonProps[]`              |
+| New `icon`             | Change or remove the icon                                                       |
+| New `variant`          | Change alert style depending on context                                         |
+| New `onDismiss`        | Add dismiss functionality                                                       |
+| New `multiLine`        | Display on multiple lines for longer content (single row after `md` by default) |
+
+### Autocomplete
+
+| Change                   | Details                                              |
+| ------------------------ | ---------------------------------------------------- |
+| Removed `watermark`      | No longer supported                                  |
+| Hook: `options` required | `options` is now required in `useAutocompleteSearch` |
+| Hook: `displayResults`   | Removed from hook return                             |
+
+### Badge → Pill (renamed)
+
+`IressBadge` has been renamed to `IressPill`. Use the new component.
+
+### Button
+
+| Change                             | Details                                                                        |
+| ---------------------------------- | ------------------------------------------------------------------------------ |
+| Removed `attrs`                    | Pass attributes directly to the component                                      |
+| Removed `link` mode                | Use other button modes for actions, or the new `IressLink` for paragraph links |
+| Removed `danger` mode              | Use `status="danger"`                                                          |
+| Removed `positive` mode            | Use `status="success"`                                                         |
+| Removed `negative` mode            | Use `status="danger"`                                                          |
+| New `quaternary` and `muted` modes | —                                                                              |
+| New `element` prop                 | Render as a custom component (e.g. React Router `Link`, Next.js `Link`)        |
+| New `icon` prop                    | Render an icon-only button with even padding. `children` becomes the tooltip   |
+
+### ButtonGroup
+
+| Change                            | Details                                                                                 |
+| --------------------------------- | --------------------------------------------------------------------------------------- |
+| Removed `options`                 | Use `IressButton` children instead                                                      |
+| `onChange` simplified             | Returns the selected value directly (no longer `{ selected }`)                          |
+| `defaultValue`/`onChange`/`value` | Now type-aware based on `multiple` prop — arrays when `true`, single value when `false` |
+
+### Card
+
+| Change                        | Details                                                                          |
+| ----------------------------- | -------------------------------------------------------------------------------- |
+| Removed `composeIDSCardSlots` | Use the `card` styling function                                                  |
+| Removed `composeIDSCard`      | Use the `card` styling function                                                  |
+| New `element` prop            | Render as button or link. Alternatively use `IressButtonCard` or `IressLinkCard` |
+| Layout change                 | Now stretches to container width by default                                      |
+
+### Checkbox
+
+| Change                              | Details                                                                        |
+| ----------------------------------- | ------------------------------------------------------------------------------ |
+| `readonly` → `readOnly`             | —                                                                              |
+| Removed `mapCheckboxGroupOptions`   | Map arrays directly to `IressCheckboxGroup`                                    |
+| Removed `hiddenControl` and `touch` | Use the new `variant` prop (`"card"` or `"touch"`)                             |
+| New `variant` prop                  | `"card"` — checkbox on top right with heading. `"touch"` — larger touch target |
+| Updated `ref`                       | Now exposes `blur()`, `focus()`, and `input` (underlying DOM element)          |
+| Removed ref methods                 | `check()` and `reset()` removed from ref                                       |
+
+### CheckboxGroup
+
+| Change                              | Details                                            |
+| ----------------------------------- | -------------------------------------------------- |
+| `readonly` → `readOnly`             | —                                                  |
+| Removed `full` layout               | Use `stack` or `block`                             |
+| Removed `hiddenControl` and `touch` | Use the new `variant` prop (`"card"` or `"touch"`) |
+
+### CheckboxMark
+
+No longer has a `ref` prop. Wrap the element in a `<div ref={elementRef} />` and query from there.
+
+### Col
+
+No changes.
+
+### Combobox (removed)
+
+`IressCombobox` and `IressMultiCombobox` have been removed. Use:
+
+- `IressSelect` for restricted selection from options
+- `IressAutocomplete` for free-text input with suggestions
+
+### Container
+
+No changes.
+
+### Divider
+
+| Change            | Details                                                                 |
+| ----------------- | ----------------------------------------------------------------------- |
+| Removed `gutter`  | Use `my` (or `mx` if vertical) styling prop                             |
+| No default margin | Works correctly inside `IressStack` and `IressInline` without overrides |
+
+### Editor
+
+| Change                                   | Details                                                                                               |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Removed second `onChange` parameter      | Use the new `onUpdate` handler to react to Tiptap update events                                       |
+| New `IressEditor.SimpleToolbar` children | Children are appended to the toolbar                                                                  |
+| SSR/Next.js change                       | Styles are no longer injected into the DOM. Include `@iress/ids-editor/dist/style.css` in your bundle |
+
+### Expander
+
+| Change                    | Details                                                |
+| ------------------------- | ------------------------------------------------------ |
+| Removed `mode="heading"`  | Use `mode="section"` or custom styles                  |
+| `onChange` simplified     | Returns the open state directly (no longer `{ open }`) |
+| New `activatorStyle` prop | Customise the activator button directly                |
+
+### Field
+
+| Change                                      | Details                                                                                         |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Removed `optional`                          | Use `required` instead                                                                          |
+| New `supplementary` / `renderSupplementary` | Shown below the field; hidden when `error` or `errorMessages` is set                            |
+| Errors now below field                      | Errors animate in below the field                                                               |
+| Built-in bottom margin                      | Fields have bottom margin for error/supplementary area — **do not wrap fields in `IressStack`** |
+| New `horizontal`                            | Inline label/input layout                                                                       |
+| New `labelWidth`                            | Control label container width                                                                   |
+| New `removeErrorMargin`                     | Removes error space reservation                                                                 |
+
+### FieldGroup
+
+| Change                 | Details                                                              |
+| ---------------------- | -------------------------------------------------------------------- |
+| Removed `optional`     | Use `required` instead                                               |
+| New `supplementary`    | Shown below the group; hidden when `error` or `errorMessages` is set |
+| Errors below group     | Shown with a border to distinguish from child field errors           |
+| Built-in bottom margin | Same as `Field` — **do not wrap in `IressStack`**                    |
+
+### Filter → DropdownMenu (renamed)
+
+`IressFilter` has been renamed and moved to the `DropdownMenu` pattern component.
+
+### Hide (deprecated)
+
+Use the `srOnly` or `hide` styling props available on any component.
+
+### Icon
+
+| Change                  | Details                                                                                                                                             |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Removed `mode`          | Use `color` instead                                                                                                                                 |
+| `name` is now type-safe | IDE autocompletion available                                                                                                                        |
+| Removed `size`          | Inherits font size from parent. Use custom CSS for specific sizes; use `IressImage` for large icons                                                 |
+| New `IressIconProvider` | Required for optimal Material Symbols usage with font subsetting. Already included in `IressProvider` and `IressShadow` — no need to add separately |
+| New `type` prop         | Select icon provider (`'fontawesome'` \| `'material'`)                                                                                              |
+| New `filled` prop       | Material Symbols filled variant                                                                                                                     |
+
+### Image
+
+New component for displaying responsive images.
+
+### Inline
+
+| Change           | Details                                   |
+| ---------------- | ----------------------------------------- |
+| `gutter` → `gap` | Accepts the larger spacing token spectrum |
+| New `rowGap`     | Set top/bottom gap when content wraps     |
+
+### Input
+
+| Change                     | Details                                                      |
+| -------------------------- | ------------------------------------------------------------ |
+| Removed `watermark`        | —                                                            |
+| Clearing `clearable` input | Now triggers `onChange`                                      |
+| New `variant` prop         | Change the look of the input for certain contexts            |
+| New `actions` prop         | Add buttons with opinionated styling to the end of the input |
+| New hover and focus states | `prepend` and `append` change colour when focused            |
+
+### InputCurrency
+
+No code changes (inherits Input styling changes).
+
+### Label
+
+Removed `optional` prop. Use `required` instead.
+
+### Link
+
+New component for anchor links in text paragraphs. Accepts the same props as `IressButton` except `mode` and `status`.
+
+### Menu
+
+| Change                            | Details                                                                                 |
+| --------------------------------- | --------------------------------------------------------------------------------------- |
+| `defaultValue`/`onChange`/`value` | Type-aware based on `multiSelect` — arrays when `true`, single value when `false`       |
+| Removed `MenuSelected` interface  | Menu is now generic extending `FormControlValue`                                        |
+| Removed `mapMenuItems`            | Map `IressMenuItem` using arrays directly                                               |
+| Removed `role="nav"`              | Nav styling removed. For navigation menus, use `IressSideNav` pattern or custom styling |
+| New `radio` variant               | Radio prepend to show selection                                                         |
+| New `subdraw` variant             | Menu groups as popovers                                                                 |
+| New `side` variant                | Side menu with collapsible groups                                                       |
+| New `rail` variant                | Blue background, best with icons                                                        |
+
+### MenuItem
+
+| Change                            | Details                                                |
+| --------------------------------- | ------------------------------------------------------ |
+| `defaultValue`/`onChange`/`value` | Same `multiSelect` typing changes as Menu              |
+| Removed `MenuSelected` interface  | —                                                      |
+| Removed `attrs`                   | Add props directly                                     |
+| Removed custom menu item hooks    | Use the new `element` prop to wrap a routing component |
+| New `icon` prop                   | Shows an icon; children becomes a tooltip              |
+
+### MenuGroup
+
+New component for grouping menu items, headings, and text. Renders differently based on the menu variant.
+
+### MenuHeading
+
+Removed `level`. Use `element` instead.
+
+### MenuText
+
+No changes.
+
+### Modal
+
+| Change                       | Details                                                                                                                              |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `padding` → `p` styling prop | Default padding changed from `'md'` to `'lg'`                                                                                        |
+| Removed `fullpage`           | Modal no longer covers the entire screen on small devices                                                                            |
+| Custom heading node          | `id` is no longer automatically added. Set the `id` prop on your custom node to connect to the modal. String headings work as before |
+| No shadow                    | Slight blur on the background instead                                                                                                |
+
+### Navbar (removed)
+
+This component has been removed. Since IDS serves multiple parent applications with different navbars, this is best kept in individual applications (built with IDS components for consistency).
+
+### Panel
+
+| Change                       | Details                                                         |
+| ---------------------------- | --------------------------------------------------------------- |
+| Removed `background`         | Use the `bg` prop (e.g. `bg="alt"` or `bg="colour.neutral.20"`) |
+| Removed `bg="page"`          | —                                                               |
+| `padding` → `p` styling prop | —                                                               |
+| Responsive padding           | Set each edge individually per breakpoint                       |
+
+**Before:**
+
+```tsx
+
+```
+
+**After:**
+
+```tsx
+
+```
+
+### Pill
+
+New component supporting the data colour spectrum with automatic rounded corners. For static content only (status indicators, counters). For interactive use, see `IressTag`.
+
+### Placeholder
+
+| Change                | Details                              |
+| --------------------- | ------------------------------------ |
+| Removed `transparent` | Use `bg="transparent"`               |
+| New colour scheme     | Uses `data.50` for better visibility |
+
+### Popover
+
+| Change                        | Details                                                                                                                                                |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Removed `disabledAutoToggle`  | Use `show`, `onActivated`, and `onDeactivated` for controlled popovers. `ref` is reserved for uncontrolled                                             |
+| Removed `width`               | Use `contentStyle` prop with custom CSS                                                                                                                |
+| Deprecated `contentClassName` | Use `contentStyle.className`                                                                                                                           |
+| New `contentStyle`            | Customise `className`, `style`, and styling props on the popover content                                                                               |
+| New `fluid`                   | Full container width                                                                                                                                   |
+| New `offset`                  | Number or object for popover positioning offset (default: 5)                                                                                           |
+| New `nested`                  | Nested navigation behaviour                                                                                                                            |
+| Z-index                       | Now uses z-index for consistent layering                                                                                                               |
+| Default padding               | ⚠️ Content now has `padding: spacing.4` by default. If you were adding your own inner padding, override with `contentStyle={{ padding: 'spacing.0' }}` |
+
+### Progress
+
+| Change                            | Details                                                                              |
+| --------------------------------- | ------------------------------------------------------------------------------------ |
+| Renders `<meter>` or `<progress>` | `<meter>` when `min` is set; `<progress>` otherwise                                  |
+| Single element                    | No more `__progressbar` test id                                                      |
+| Simplified ARIA                   | Only `aria-label` is rendered. If testing by attribute (not role), update your tests |
+
+### Provider
+
+| Change                     | Details                                                                |
+| -------------------------- | ---------------------------------------------------------------------- |
+| Removed `noIcons`          | Use `noDefaultFont` instead                                            |
+| Removed `injectPushStyles` | No longer available                                                    |
+| New `noSubsetting`         | Controls automatic font subsetting via Google Fonts CDN for icons      |
+| New `noDefaultFont`        | Controls loading of default Iress font from CDN                        |
+| Icon handling              | Now uses `IressIconProvider` with Material Symbols instead of icon CSS |
+
+> **Note:** `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, and `IressIconProvider`. You do not need to add these separately. `IressShadow` includes `IressProvider` internally, so no additional providers are needed when using `IressShadow` either.
+
+### Radio
+
+| Change                              | Details                                            |
+| ----------------------------------- | -------------------------------------------------- |
+| Removed `mapRadioGroupOptions`      | Map arrays directly to `IressRadioGroup`           |
+| Removed `hiddenControl` and `touch` | Use the new `variant` prop (`"card"` or `"touch"`) |
+
+### RadioGroup
+
+| Change                              | Details                                            |
+| ----------------------------------- | -------------------------------------------------- |
+| `readonly` → `readOnly`             | —                                                  |
+| Removed `hiddenControl` and `touch` | Use the new `variant` prop (`"card"` or `"touch"`) |
+
+### RadioMark
+
+New component for rendering a standalone radio mark indicator (similar to `IressCheckboxMark`).
+
+### Readonly
+
+| Change               | Details                                                                                                                                                              |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Styled to match      | Styled to match other input text sizes. Use the new `textStyle` prop for larger text (e.g. statistics)                                                               |
+| New `actions` prop   | Array of button props rendered alongside the readonly value (e.g. edit/save toggles). Actions passed to `IressInput` in `readOnly` mode are also forwarded           |
+| DOM structure change | ⚠️ Inner content is now wrapped in an additional `wrapper` div inside `root`. CSS selectors targeting direct children of the readonly root element may need updating |
+
+### RichSelect → Select (renamed)
+
+`IressRichSelect` has been renamed to `IressSelect`. See the **Select** section below for full details.
+
+### Row
+
+| Change              | Details                                                         |
+| ------------------- | --------------------------------------------------------------- |
+| New `rowGap` prop   | Set a different gap between rows vs `gutter`                    |
+| Removed `useColGap` | Use `IressInline` to add gaps between non-`IressCol` components |
+
+### Select
+
+| Change                                 | Details                                                                                                                     |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Renamed from `IressRichSelect`         | Now uses `LabelValueMeta` via `options`                                                                                     |
+| `readonly` → `readOnly`                | —                                                                                                                           |
+| `defaultValue`/`onChange`/`value`      | Type-aware based on `multiSelect` — arrays when `true`, single value when `false`                                           |
+| `value`/`defaultValue` accepts strings | Now also accepts a plain string or `FormControlValue` that resolves to the matching option automatically                    |
+| New `multiSelectLimit` prop            | Limits visible selected tags before collapsing to "+N more" summary (default `5`). Display only — does not limit selections |
+| New `native` prop                      | Renders a browser-native select (replaces the old `IressSelect`)                                                             |
+| `onChange` signature                   | `onChange(event, value, labelValue)` — `value` is the primitive (`FormControlValue`), `labelValue` is the full `LabelValueMeta` |
+| Grouped items                          | Now supported                                                                                                               |
+| New hover and focus states             | —                                                                                                                           |
+
+The v5 native `IressSelect` with `children` (option elements) is replaced by `IressSelect` with the `native` prop:
+
+**Before (v5):**
+
+```tsx
+
+  <IressSelectOption value="1">Option 1
+</IressSelect>
+```
+
+**After (v6):**
+
+```tsx
+
+```
+
+### SelectOption (removed)
+
+Use the `options` prop on `IressSelect` instead.
+
+### Skeleton
+
+`textVariant` changed to `textStyle`.
+
+### SkipLink
+
+| Change                     | Details                     |
+| -------------------------- | --------------------------- |
+| Removed `targetId`         | Use `href` instead          |
+| Styled as secondary button | No more custom skip link UI |
+
+### Slider
+
+| Change                  | Details                          |
+| ----------------------- | -------------------------------- |
+| `readonly` → `readOnly` | —                                |
+| `hiddenOn` → `srOnly`   | Consistent with other components |
+
+### Slideout
+
+| Change                       | Details                                                     |
+| ---------------------------- | ----------------------------------------------------------- |
+| Removed `backdrop`           | Use `IressModal` instead                                    |
+| Removed `size="lg"`          | Use a separate page for large content                       |
+| `padding` → `p` styling prop | —                                                           |
+| Single slideout only         | Only one open at a time                                     |
+| Removed `injectPushStyles`   | Styles are applied via the `style` attribute on `eleToPush` |
+| Custom heading node          | Same `id` handling change as Modal                          |
+
+### Spinner
+
+Removed `name` prop. All spinners are now consistent across Iress products.
+
+### Stack
+
+| Change                  | Details                                                                                                                                          |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `gutter` → `gap`        | Accepts the larger spacing token spectrum                                                                                                        |
+| No longer uses `margin` | Uses flexbox. Use `horizontalAlign` or wrap children with `IressInline` for inline display. Use `alignSelf` on children for individual alignment |
+| New `element` prop      | Render as a different HTML element (e.g. `<ul>` for lists)                                                                                       |
+| New `horizontalAlign`   | Set horizontal alignment of stack content                                                                                                        |
+| New `verticalAlign`     | Set vertical alignment with additional options (`'between'`, `'around'`, `'evenly'`)                                                             |
+
+### Styled
+
+New component for applying IDS styling props to any element or component without using the styled-system JSX components directly.
+
+### Table
+
+| Change                            | Details                                                                               |
+| --------------------------------- | ------------------------------------------------------------------------------------- |
+| `IressTableFormattedValue`        | No more `currencyCode` prop. Use `currencyFormatOptions={{ withSymbol: true/false }}` |
+| Columns must be an array          | Object format removed                                                                 |
+| New `rowProps`                    | Set styling props for the entire row                                                  |
+| New `alternate` prop              | Control row striping                                                                  |
+| New `removeRowBorders` prop       | —                                                                                     |
+| `TableColumn.align` → `textAlign` | Consistent with styling props                                                         |
+| `TableColumn` styling props       | `bg`, `color`, `noGutter`, `srOnly`, `textAlign`, `textStyle` applied to the column   |
+| Removed `IressTable.useTable()`   | Import `useTable` directly                                                            |
+| Updated default styling           | More display-friendly, print-friendly. `compact` version has a stylised heading       |
+
+### TabSet
+
+| Change               | Details                                                                                                                                    |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Removed `mapTabs`    | Use `Array.map` to map objects to `IressTab`                                                                                               |
+| Selected tabs        | Now have a highlighted background                                                                                                          |
+| New `panelStyle`     | Custom style for panel area                                                                                                                |
+| New `tabHolderStyle` | Custom style for tab holder area                                                                                                           |
+| New `type`           | Tab styling type (`'primary'` \| `'secondary'`)                                                                                            |
+| Active indicator     | Now uses `ResizeObserver` and `getBoundingClientRect()` for positioning — correctly updates when tab content changes size or layout shifts |
+
+### Tag
+
+| Change               | Details                                            |
+| -------------------- | -------------------------------------------------- |
+| Data colour spectrum | Now supported                                      |
+| New compact version  | For placing inside inputs (e.g. `TagInput`)        |
+| Delete hover         | Red hover on the delete button to warn of deletion |
+
+### TagInput
+
+| Change                         | Details                                   |
+| ------------------------------ | ----------------------------------------- |
+| Removed `testid__input__input` | Use `testid__input` instead               |
+| Removed `testid__items`        | —                                         |
+| `onTagDelete` signature        | Now includes event: `(label, e) => void`  |
+| `onTagDeleteAll` signature     | Now includes event: `(label, e) => void`  |
+| New `tagLimit`                 | Limit tags before shortening (default: 5) |
+| New `selectedOptionsTagText`   | Text for tag count display                |
+
+### Text
+
+| Change                       | Details                                                                                      |
+| ---------------------------- | -------------------------------------------------------------------------------------------- |
+| Removed `display` variations | Use `textStyle` with `typography.body.lg`, `typography.heading.4`, or `typography.heading.5` |
+| `variant` → `textStyle`      | —                                                                                            |
+| `mode` → `color`             | —                                                                                            |
+| `align` → `textAlign`        | —                                                                                            |
+| Nested elements              | Now styles nested `<table>` and `<pre>` tags                                                 |
+| Icons in headings            | No longer have automatic padding. Use `ml`/`mr` on `IressIcon` or wrap with `IressInline`    |
+
+### Toast
+
+`IressToast` is no longer directly available. Use `IressToasterProvider` and `useToaster` to create toasts. For static toasts, use `IressAlert`.
+
+> **Note:** `IressToasterProvider` is already included in `IressProvider` and `IressShadow` — you do not need to add it separately if you are using either of these.
+
+### Toaster
+
+| Change                      | Details                                                   |
+| --------------------------- | --------------------------------------------------------- |
+| `IressToaster` removed      | Use `IressToasterProvider` and `useToaster`               |
+| Multiple providers          | Use different `id` props for different positions/contexts |
+| `children` → `content`      | In `useToaster`                                           |
+| `headingLevel` → `heading`  | —                                                         |
+| `headingText` → `heading`   | —                                                         |
+| No `position` at hook level | Set `position` on `IressToasterProvider`                  |
+| Simple string toasts        | Pass a string directly for a simple message               |
+| `status` value change       | `'error'` is now `'danger'` (Alert-based)                 |
+
+### Toggle
+
+| Change                  | Details                                                                              |
+| ----------------------- | ------------------------------------------------------------------------------------ |
+| Controlled/uncontrolled | Now uses `checked`/`defaultChecked` like checkbox. Explicitly set whether controlled |
+| Removed forwarded `ref` | Wrap in a `<div>` and use query selectors if needed                                  |
+| New `defaultChecked`    | For uncontrolled mode                                                                |
+| New `disabled`          | Disable the toggle                                                                   |
+
+### Tooltip
+
+| Change                       | Details                                                  |
+| ---------------------------- | -------------------------------------------------------- |
+| `align` prop simplified      | Removed deprecated enum option, now uses string literals |
+| Removed `IressTooltip.Align` | Use string values directly                               |
+
+### ValidationLink
+
+No changes.
+
+### ValidationMessage
+
+No changes.
+
+### ValidationSummary
+
+New `itemStyle` prop for customising each item's `className`, `style`, and styling props.
+
+---
+
+## New pattern components
+
+### Breadcrumbs
+
+Display a list of links as breadcrumbs showing navigation hierarchy.
+
+### Contextual Menu
+
+Show a context or "more actions" menu.
+
+### Dropdown Menu
+
+Show a filtering/navigation menu in a dropdown (replaces `IressFilter`).
+
+### Form (refactored to pattern)
+
+| Change              | Details                                                                                                                                                         |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Now a pattern       | Accepts `short` and `long` patterns for form template and validation                                                                                            |
+| Removed `form` prop | Use `IressHookForm` to pass a custom `react-hook-form` instance                                                                                                 |
+| Validation summary  | No longer shown by default. Use `IressFormValidationSummary` via the `alert` prop                                                                               |
+| Peer dependency     | `react-hook-form` is now a peer dependency — add it to your project. IDS wrappers (e.g. `IressForm.useWatch`) are removed; use `react-hook-form` hooks directly |
+
+### Loading
+
+No changes.
+
+### Shadow
+
+Render IDS inside a **shadow DOM** for micro-frontends. Styles are automatically imported and encapsulated. Supports custom style injection and wraps `IressProvider` automatically.
+
+### Side Nav
+
+Combines the `rail` and `side` menu variants into a side navigation component for large applications.
+
+---
+
+## Theme changes
+
+| Change                        | Details                                                                                                                                                           |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Removed `theme` export        | Use `cssVars` from `@iress-oss/ids-tokens`                                                                                                                        |
+| Removed `designTokens` export | Use `designTokens` from `@iress-oss/ids-tokens`                                                                                                                   |
+| Removed view modes            | For touch mode, use the touch sub-theme (e.g. `iress-beta-theme-light--touch`). Compact has been removed; use component-level `compact` variants or styling props |
+
+### AG Grid
+
+| Change                         | Details                                                    |
+| ------------------------------ | ---------------------------------------------------------- |
+| Removed `IressAgGridContainer` | Import `getAgGridThemeProps` and spread onto `AgGridReact` |
+| AG Grid &lt; 33 dropped        | Minimum version is now 33                                  |
+| Removed utility classes        | Use custom CSS classes for cell styling                    |
+
+**Before:**
+
+```tsx
+
+  
+
+```
+
+**After:**
+
+```tsx
+
+```
+
+---
+
+<!-- migration/migration-from-v4-to-v5.md -->
+
+# Migration from v4 to v5
+
+This is a step-by-step guide for upgrading your application from IDS v4 to v5.
+
+## Updating your dependencies
+
+### Upgrade IDS and themes
+
+Update your dependencies in your `package.json` file to the following:
+
+```json
+"dependencies": {
+  "@iress-oss/ids-components": "^5.0.0",
+  "@iress/themes": "^5.0.0"
+}
+```
+
+or run:
+
+```
+yarn add @iress-oss/ids-components@^5.0.0 @iress/themes@^5.0.0
+```
+
+### Upgrade React
+
+The minimum required version of React is 17. If you are using an older version of React, you will need to update it.
+
+## Updating imports
+
+### Changing components
+
+Update your imports to the new package name:
+
+```diff
+-import { IressButton } from '@iress/components-react';
++import { IressButton } from '@iress-oss/ids-components';
+```
+
+You can run both packages together, so you can migrate components one by one.
+
+```diff
+-import { IressModal, IressButton } from '@iress/components-react';
++import { IressModal } from '@iress/components-react';
++import { IressButton } from '@iress-oss/ids-components';
+```
+
+### Importing component styles
+
+IDS v5 no longer injects CSS into the DOM. You will need to import the stylesheet directly into your application.
+
+```ts
+
+```
+
+## Update Jest configuration
+
+If you are using Jest, you will need to update your Jest configuration to add the new IDS package to your `transformIgnorePatterns`.
+
+**Note:** If you are using version 4 and version 5 in parallel, you will need to keep the old IDS packages in your `transformIgnorePatterns` until you have completely migrated over your components.
+
+```json
+"transformIgnorePatterns": [
+  "/node_modules/(?!@iress-oss/ids-components)"
+]
+```
+
+If you are mocking CSS files for your tests, you'll also need to make sure the new stylesheet is matched by your `moduleNameMapper`:
+
+```diff
+  "moduleNameMapper": {
+    "^.+\.(scss|less)$": "<rootDir>/test/style-mock.ts",
+    "ids-web-components.css$": "<rootDir>/test/style-mock.ts",
+-    "global.css$": "<rootDir>/test/style-mock.ts"
++    "global.css$": "<rootDir>/test/style-mock.ts",
++    "@iress-oss/ids-components/(.*).css": "<rootDir>/test/style-mock.ts"
+  },
+```
+
+## Handling breaking changes
+
+### Components
+
+Since the move to React, the majority of the components have been simplified to improve developer experience. We have listed the changes in this google doc by component, so you can attend to each component separately.
+
+[{`Google doc`}](https://docs.google.com/document/d/1H3-zFDftCHDjwaFkwFxVo1uziPsOj8qJn7p3NFG3aUg/edit)
+
+### Testing
+
+Components are no longer loaded asynchronously, so you can test them as you would any other React component. The testing utilities have been removed from the package, so you will need to update your tests to use [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) or another testing library.
+
+Below is an example of a changed test using React Testing Library.
+
+```diff
+-import { render } from '@testing-library/react';
+-import { idsFireEvent } from '@iress/ids-react-test-utils';
++import { render, fireEvent } from '@testing-library/react';
+  
+-test('login form', async () => {
++test('login form', () => {
+    const loginMock = jest.fn();
+    const screen = render();
+
+-    const usernameInput = await screen.findByTestId('username__input');
+-    const passwordInput = await screen.findByTestId('password__input');
+-    const submitBtn = await screen.findByTestId('submit-btn__button');
+-    idsFireEvent.change(usernameInput, { target: { value: 'joe.bloggs' }});
+-    idsFireEvent.change(passwordInput, { target: { value: '1234' }});
+-    idsFireEvent.click(submitBtn);
++    const usernameInput = screen.getByRole('textbox', { name: 'Username' });
++    const passwordInput = screen.getByRole('textbox', { name: 'Password' });
++    const submitBtn = screen.getByRole('button');
++    fireEvent.change(usernameInput, { target: { value: 'joe.bloggs' }});
++    fireEvent.change(passwordInput, { target: { value: '1234' }});
++    fireEvent.click(submitBtn);
+
+    expect(loginMock).toHaveBeenCalledWith("joe.bloggs", "1234");
+});
+```
+
+#### Component specific testing
+
+Some components have additional testing requirements. The changed testing requirements will be listed on each component's docs page.
+
+These include:
+
+- [Form](/docs/components-form--docs#testing)
+- [Modal](/docs/components-modal--docs#testing)
+- [Slideout](/docs/components-slideout--docs#testing)
+
+### Styling
+
+The original CSS framework used for IDS was based on the Stencil library. It was lightly scoped (no shadow DOM) using CSS classes like: `sc-iress-radio-h sc-iress-radio-s`.
+
+These classes have been removed from version 5. If you are targeting components using these classes, it will be good for you review if you should adapt the CSS in a different way (ie. using design tokens/CSS variables instead, which should work no matter the class name, or adding custom classes to the IDS components). If targeting elements is still required, the new classes will be formatted as: `.ids-radio-${ids-version}`, and nested elements will use a modified BEM naming convention: `.ids-radio--label-${ids-version}`. The version number will be exposed; you can import it via Javascript, SASS and CSS module values to make future upgrades easier.
+
+#### Option 1: Use design tokens and custom classes
+
+This is the recommended approach. You can use design tokens and custom classes to style the components.
+
+```css
+.custom-radio {
+  --iress-text-color: red;
+  align-self: center;
+}
+```
+
+```tsx
+
+```
+
+#### Option 2: Target the new classes
+
+This option is **not recommended** and should be used as a last resort, as the class names can change in future, in which case your stylesheet will no longer have any effect. It is recommended to use design tokens or custom classes instead.
+
+```scss
+@use '@iress-oss/ids-components/dist/constants/index.scss' as *;
+
+.ids-radio-#{$ids-version} {
+  align-self: center;
+}
+
+.ids-radio--label-#{$ids-version} {
+  color: red;
+}
+```
+
+### Theme tokens
+
+There are a few token changes that have changed (though this has been relatively minor). The version 5 themes have been updated to use the new design tokens, however if you are using version 4 in parallel with version 5, you may notice that the version 4 styles can no longer find the removed/changed tokens.
+
+To fix this issue, please backfill the tokens in your application until you have finished your migration.
+
+```scss
+/* TODO: Will be removed once we have moved to IDS version 5 */
+/* Change to the name(s) of the themes you want to back fill. */
+.iress-theme-light {
+  --iress-alert-error-text-color: var(--iress-alert-danger-text-color);
+  --iress-alert-error-background-color: var(
+    --iress-alert-danger-background-color
+  );
+  --iress-alert-error-border-color: var(--iress-alert-danger-border-color);
+  --iress-alert-error-heading-icon-text-color: var(
+    --iress-alert-danger-heading-icon-text-color
+  );
+
+  --iress-button-margin-right: var(--iress-g-spacing-xs);
+
+  --iress-combobox-option-meta-font-weight: var(
+    --iress-a-muted-font-weight,
+    var(--iress-g-font-weight, normal)
+  );
+  --iress-combobox-option-meta-text-color: var(
+    --iress-g-muted-text-color,
+    var(--iress-default-text-color--light)
+  );
+
+  --iress-filter-option-meta-font-weight: var(
+    --iress-a-muted-font-weight,
+    var(--iress-g-font-weight, normal)
+  );
+  --iress-filter-option-meta-text-color: var(
+    --iress-g-muted-text-color,
+    var(--iress-default-text-color--light)
+  );
+
+  --iress-form-field-margin-bottom: var(
+    --iress-a-vertical-spacing-lg,
+    var(--iress-g-spacing-lg)
+  );
+
+  --iress-table-cell-buy-text-color: var(
+    --iress-table-cell-positive-text-color
+  );
+  --iress-table-cell-sell-text-color: var(
+    --iress-table-cell-negative-text-color
+  );
+  --iress-table-cell-selected-buy-text-color: var(
+    --iress-table-cell-selected-positive-text-color
+  );
+  --iress-table-cell-selected-sell-text-color: var(
+    --iress-table-cell-selected-negative-text-color
+  );
+
+  --iress-validation-message-error-text-color: var(
+    --iress-validation-message-danger-text-color
+  );
+}
+```
+
+## AG grid theme
+
+As of version 5, we only support the lite AG grid theme, which is used in conjunction with the default alpine theme. In version 5, its imports have changed slightly.
+
+Run the following command to install the AG grid lite theme:
+
+```
+yarn add @iress/ag-grid-theme@^5.0.0
+```
+
+Then you can import the AG Grid theme CSS, import the relevant IDS theme, and hook up the styles by setting a class of ag-theme-alpine ag-theme-iress-lite on your grid wrapper.
+
+```diff
+
+-import "@iress/themes/global.css";
+-import '@iress/ag-grid-theme/dist/lite/css/all.css';
++import '@iress/ag-grid-theme/dist/ag-theme-iress-lite.css';
+
+// You can also include variables, styles and utilities separately for easy debugging
+-// import '@iress/ag-grid-theme/dist/lite/css/variables.css';
+-// import '@iress/ag-grid-theme/dist/lite/css/styles.css';
+-// import '@iress/ag-grid-theme/dist/lite/css/utilities.css';
++// import '@iress/ag-grid-theme/dist/css/variables.css';
++// import '@iress/ag-grid-theme/dist/css/styles.css';
++// import '@iress/ag-grid-theme/dist/css/utilities.css';
+<div className="ag-theme-alpine ag-theme-iress-lite">
+  
+</div>
+```
+
+## Removing version 4
+
+Version 5 and version 4 can be run in parallel, but it is recommended to remove version 4 to avoid any conflicts once you have completely migrated over your components.
+
+Run the following to remove version 4 and its related packages:
+
+```sh
+yarn remove @iress/components @iress/components-react @iress/components-react-custom-elements @iress/ids-react-test-utils
+```
+
+### Remove `global.css`
+
+The `global.css` file has been removed, it is now recommended to include the Roboto font directly using Google Fonts.
+
+```diff
+-import '@iress/themes/global.css';
++<link
++  href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap"
++  rel="stylesheet"
++/>
+```
+
+### Remove from Jest configuration
+
+If you are using Jest, you will need to update your Jest configuration to remove the old IDS packages from your `transformIgnorePatterns`.
+
+```diff
+"transformIgnorePatterns": [
+-  "node_modules/(?!(@iress/components-react|@iress/components|@iress/components-react-custom-elements|@stencil/core)/)"
++  "/node_modules/(?!@iress-oss/ids-components)"
+]
+```
+
+You can also remove the `mockLazyLoadedComponents` function from your Jest setup.
+
+```diff
+-import { mockLazyLoadedComponents } from '@iress/ids-react-test-utils/dist/react-test-utils/src/mocks/mockLazyLoadedComponents';
+-mockLazyLoadedComponents();
+```
+
+You should also be able to remove the style mocks from your Jest configuration's `moduleNameMapper`, unless you are using CSS-in-JS, as IDS no longer injects CSS into the DOM.
+
+```diff
+-"moduleNameMapper": {
+-  "\.css$": "<rootDir>/PATH/TO/style-mock.ts"
+-}
+```
+
+---
+
+<!-- patterns/breadcrumbs.md -->
+
+# 
+> **Component:** `import { IressBreadcrumbs } from '@iress-oss/ids-components'`
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressBreadcrumbs } from '@iress-oss/ids-components';
-
 <IressBreadcrumbs />
 ```
 
@@ -9892,9 +11986,7 @@ The Breadcrumb component supports custom elements for integration with routing l
 #### React Router
 
 ```tsx
-import { Link as RouterLink } from 'react-router-dom';
-
-<IressBreadcrumb
+<IressBreadcrumbs
   items={[
     { label: 'Home', href: '/', element: RouterLink },
     { label: 'Products', href: '/products', element: RouterLink },
@@ -9906,9 +11998,7 @@ import { Link as RouterLink } from 'react-router-dom';
 #### Next.js
 
 ```tsx
-import Link from 'next/link';
-
-<IressBreadcrumb
+<IressBreadcrumbs
   items={[
     { label: 'Home', href: '/', element: Link },
     { label: 'Products', href: '/products', element: Link },
@@ -9919,23 +12009,21 @@ import Link from 'next/link';
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs)
 
 
 ---
 
-# Contextual Menu
+<!-- patterns/contextual-menu.md -->
 
-A compact overflow action pattern that surfaces contextual actions in a popover menu. Use this pattern for row-level or card-level secondary actions where space is constrained.
-
-> **Pattern:** `import { IressContextualMenu } from '@iress-oss/ids-components'`
-> **Storybook:** [Contextual Menu in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextual-menu--docs)
+# 
+> **Component:** `import { IressContextualMenu } from '@iress-oss/ids-components'`
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextual-menu--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressContextualMenu } from '@iress-oss/ids-components';
-
 <IressContextualMenu />
 ```
 
@@ -10049,23 +12137,21 @@ Use `theme="dark"` on panels using `colour.neutral.20` or darker backgrounds.
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextual-menu--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextual-menu--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextual-menu--docs)
 
 
 ---
 
-# Dropdown Menu
+<!-- patterns/dropdown-menu.md -->
 
-A component designed to filter a section based on a list of options and quickly navigate to relevant content.
-
-> **Pattern:** `import { IressDropdownMenu } from '@iress-oss/ids-components'`
-> **Storybook:** [Dropdown Menu in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdown-menu--docs)
+# 
+> **Component:** `import { IressDropdownMenu } from '@iress-oss/ids-components'`
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdown-menu--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressDropdownMenu } from '@iress-oss/ids-components';
-
 <IressDropdownMenu label="Select an option" />
 ```
 
@@ -10243,18 +12329,15 @@ In `multiSelect` mode, the selections options are displayed using the `selectedO
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdown-menu--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdown-menu--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdown-menu--docs)
 
 
 ---
 
-# Feedback
+<!-- patterns/feedback.md -->
 
-Feedback components communicate information to users about actions, states, and processes. Choosing the right feedback component ensures users receive the right level of information at the right time without unnecessary disruption.
-
-> **Storybook:** [Feedback in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-feedback--docs)
-
-Feedback components communicate information to users about actions, states, and processes. Choosing the right feedback component ensures users receive the right level of information at the right time without unnecessary disruption.
+# 
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-feedback--docs)Feedback components communicate information to users about actions, states, and processes. Choosing the right feedback component ensures users receive the right level of information at the right time without unnecessary disruption.
 
 ## Which component should I use?
 
@@ -10323,18 +12406,16 @@ Modals block interaction with the underlying page. Avoid using them for simple m
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-feedback--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-feedback--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-feedback--docs)
 
 
 ---
 
+<!-- patterns/form-recipes.md -->
+
 # Recipes
-
 Form pattern documentation.
-
-> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
-
-## With readonly data
+> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)## With readonly data
 
 You can use `IressForm` with readonly data by setting the `readOnly` prop to `true` on controlled elements. This will disable those form controls, but will include the values in the form submission.
 
@@ -10508,23 +12589,21 @@ npm install --save-dev @types/dompurify
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
 
 
 ---
 
-# Form
+<!-- patterns/form.md -->
 
-Use the IressForm component when you want to request, validate and process data from the user.
-
-> **Pattern:** `import { IressForm } from '@iress-oss/ids-components'`
-> **Storybook:** [Form in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
+# 
+> **Component:** `import { IressForm } from '@iress-oss/ids-components'`
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressForm } from '@iress-oss/ids-components';
-
 <IressForm heading="Contact details" pattern="short" />
 ```
 
@@ -10583,8 +12662,6 @@ return (
 );
 };`}
 newValue={`import { IressForm, IressFormField, IressInput, IressCheckboxGroup, IressCheckbox } from '@iress-oss/ids-components';
-import { useWatch } from 'react-hook-form';
-
 const ConditionalFields = () => {
 // Instead of creating our own state, we can now use the form state via the useWatch hook, 
 // meaning we still have a single source of truth
@@ -10797,7 +12874,15 @@ Use the `rules` prop on the `IressFormField` component to add validation rules. 
 A boolean which, if `true`, indicates that the input must have a value before the form can be submitted. You can assign a string to return a custom error message.
 
 ```tsx
-<IressForm element="IressInput" />
+<IressForm heading="Required example">
+<IressFormField
+  label="Name"
+  name="name"
+  rules={{ required: 'Name is required' }}
+  render={(controlledProps) => <IressInput {...controlledProps} />}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "Required" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--required)
@@ -10812,7 +12897,15 @@ The maximum character length of the value to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressForm element="IressInput" />
+<IressForm heading="Max length example">
+<IressFormField
+  label="Username"
+  name="username"
+  rules={{ maxLength: { value: 10, message: 'Max 10 characters' } }}
+  render={(controlledProps) => <IressInput {...controlledProps} maxLength={10} />}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "MaxLength" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max-length)
@@ -10827,7 +12920,15 @@ The minimum character length of the value to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressForm element="IressInput" />
+<IressForm heading="Min length example">
+<IressFormField
+  label="Password"
+  name="password"
+  rules={{ minLength: { value: 8, message: 'Min 8 characters' } }}
+  render={(controlledProps) => <IressInput {...controlledProps} type="password" />}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "MinLength" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min-length)
@@ -10841,7 +12942,15 @@ The maximum number to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressForm element="IressInput" />
+<IressForm heading="Max example">
+<IressFormField
+  label="Age"
+  name="age"
+  rules={{ max: { value: 120, message: 'Max value is 120' } }}
+  render={(controlledProps) => <IressInput {...controlledProps} type="number" />}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "Max" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max)
@@ -10855,7 +12964,15 @@ The minimum number to accept for this input.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
 ```tsx
-<IressForm element="IressInput" />
+<IressForm heading="Min example">
+<IressFormField
+  label="Quantity"
+  name="quantity"
+  rules={{ min: { value: 1, message: 'Min value is 1' } }}
+  render={(controlledProps) => <IressInput {...controlledProps} type="number" />}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "Min" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min)
@@ -10877,7 +12994,15 @@ The minimum date to accept for this input.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-<IressForm element="IressInputDate" />
+<IressForm heading="Min date example">
+<IressFormField
+  label="Start date"
+  name="startDate"
+  rules={{ minDate: '2024-01-01' }}
+  render={(controlledProps) => <IressInputDate {...controlledProps} />}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "MinDate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--min-date)
@@ -10889,7 +13014,15 @@ The maximum date to accept for this input.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-<IressForm element="IressInputDate" />
+<IressForm heading="Max date example">
+<IressFormField
+  label="End date"
+  name="endDate"
+  rules={{ maxDate: '2025-12-31' }}
+  render={(controlledProps) => <IressInputDate {...controlledProps} />}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "MaxDate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--max-date)
@@ -10901,7 +13034,15 @@ Ensures the input is a valid email address.
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
 ```tsx
-<IressForm element="IressInput" />
+<IressForm heading="Email example">
+<IressFormField
+  label="Email"
+  name="email"
+  rules={{ email: 'Please enter a valid email address' }}
+  render={(controlledProps) => <IressInput {...controlledProps} type="email" />}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "Email" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--email)
@@ -10915,7 +13056,21 @@ You can pass a callback function as the argument to validate, or you can pass an
 - for `object` or `array` input data, it's recommended to use the validate function for validation as the other rules mostly apply to `string`, `string[]`, `number` and `boolean` data types.
 
 ```tsx
-<IressForm 2 element="IressCheckboxGroup" />
+<IressForm heading="Validate example">
+<IressFormField
+  label="Interests"
+  name="interests"
+  rules={{ validate: (value) => (value?.length >= 2) || 'Select at least 2' }}
+  render={(controlledProps) => (
+    <IressCheckboxGroup {...controlledProps}>
+      <IressCheckbox value="sports">Sports</IressCheckbox>
+      <IressCheckbox value="music">Music</IressCheckbox>
+      <IressCheckbox value="art">Art</IressCheckbox>
+    </IressCheckboxGroup>
+  )}
+/>
+<IressButton type="submit" mode="primary">Submit</IressButton>
+</IressForm>
 ```
 
 [View "Validate" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form-rules--validate)
@@ -11125,10 +13280,12 @@ This will properly reset the field to null and clear the field value.
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
 
 
 ---
+
+<!-- patterns/loading.md -->
 
 # Loading
 
@@ -11459,6 +13616,8 @@ Here you can see how a wizard can use the `IressLoading` component at different 
 
 ---
 
+<!-- patterns/search-selection.md -->
+
 # Search & selection
 Choosing between InputPopover, Autocomplete, Select, DropdownMenu, and Popover depends on whether users need to navigate to results, pick a form value, or trigger actions.## Which component should I use?
 
@@ -11613,18 +13772,16 @@ When the list is long, use an async `options` function to enable built-in search
 
 ---
 
-# Shadow
+<!-- patterns/shadow.md -->
 
-The shadow pattern allows you to wrap your content in the shadow DOM, allowing you to isolate your styles from the rest of the application. This is useful when you want to create a component that has its own styles, without affecting the rest of the application (such as microfrontends).
-
-> **Pattern:** `import { IressShadow } from '@iress-oss/ids-components'`
-> **Storybook:** [Shadow in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs)
+# 
+> **Component:** `import { IressShadow } from '@iress-oss/ids-components'`
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressShadow } from '@iress-oss/ids-components';
-
 <IressShadow />
 ```
 
@@ -11648,23 +13805,21 @@ It has similar props to the `IressProvider`, however it will apply the styles to
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs)
 
 
 ---
 
-# SideNav
+<!-- patterns/side-nav.md -->
 
-A side navigation pattern that combines a rail (icon-only bar) with an expandable side menu panel. Provides a data-driven API where items are passed as an array, with the rail acting as the main navigation and the side menu showcasing children under each navigation group.
-
-> **Pattern:** `import { IressSideNav } from '@iress-oss/ids-components'`
-> **Storybook:** [SideNav in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-side-nav--docs)
+# 
+> **Component:** `import { IressSideNav } from '@iress-oss/ids-components'`
+> **Storybook:** [ in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-side-nav--docs)```tsx
+```
 
 ## Quick Start
 
 ```tsx
-import { IressSideNav } from '@iress-oss/ids-components';
-
 <IressSideNav activeItemKey="hubs" />
 ```
 
@@ -11765,15 +13920,11 @@ SideNav is designed to work with any routing library:
 
 ```tsx
 // Next.js
-import Link from 'next/link';
-
 const items = [
   { key: 'home', icon: 'home', label: 'Home', href: '/', element: Link },
 ];
 
 // React Router
-import { Link } from 'react-router-dom';
-
 const items = [
   { key: 'home', icon: 'home', label: 'Home', href: '/', element: Link },
 ];
@@ -11791,4374 +13942,12 @@ const activeSection = useLocation().pathname.split('/')[1];
 
 ---
 
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-side-nav--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-side-nav--docs)*
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-side-nav--docs)
 
 
 ---
 
-# Accessibility
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Accessibility in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-accessibility--docs)
-
-Accessibility is everyone's responsibility. It ensures that all users, regardless of their abilities or disabilities, can access and interact with our components effectively. This document outlines the key practices for building accessible components we follow within IDS.
-
-Please note: The default behaviour of our components is to be accessible, but it is the responsibility of the product to ensure that they are used correctly in accessibile context, or any modifications made to them do not compromise accessibility.
-
-## Interaction Patterns
-
-### Keyboard Navigation
-
-- Support standard keyboard shortcuts (Tab, Arrow keys, Enter, Space, Escape)
-- Implement proper focus order and visual focus indicators
-- Provide keyboard alternatives for mouse-only interactions
-- Follow established ARIA patterns for complex widgets
-
-### Touch Interactions
-
-- Provide adequate touch target sizes
-- Implement touch-friendly spacing between interactive elements
-- Support gesture-based interactions where appropriate
-- Ensure consistent behaviour across device types
-
-### Loading and Feedback
-
-- Use appropriate loading patterns based on context:
-  - **Page**: Full page loading states
-  - **Component**: Local loading within sections
-  - **Button**: Inline loading for form submissions
-  - **Validate**: Server-side validation feedback
-- Provide clear success and error feedback
-- Use progressive enhancement for better perceived performance
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-accessibility--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-accessibility--docs)*
-
-
----
-
-# Common mistakes
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Common mistakes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-common-mistakes--docs)
-
-Patterns we see trip people up when building with IDS. Each section shows what goes wrong, why, and the fix.
-
-## Using `slot` attributes (legacy v4 pattern)
-
-In IDS v4 and earlier, child elements used `slot` attributes to position content (e.g. `<IressIcon slot="prepend" />`). This is **no longer supported**. Use the equivalent React props instead.
-
-### Button
-
-```tsx
-// ❌ slot attribute — ignored in v5+
-<IressButton>
-  <IressIcon slot="start" name="search" />
-  Search
-</IressButton>
-
-// ✅ Use prepend/append props
-<IressButton prepend={<IressIcon name="search" />}>
-  Search
-</IressButton>
-
-// ✅ Icon-only button
-<IressButton icon="edit" mode="muted">
-  Edit
-</IressButton>
-```
-
-### Input
-
-```tsx
-// ❌
-<IressInput>
-  <IressIcon slot="prepend" name="search" />
-</IressInput>
-
-// ✅
-<IressInput prepend={<IressIcon name="search" />} />
-```
-
-### Modal
-
-```tsx
-// ❌
-<IressModal show={show}>
-  Content
-  <div slot="footer">
-    <IressButton>Close</IressButton>
-  </div>
-</IressModal>
-
-// ✅ Use footer prop
-<IressModal show={show} footer={<IressButton>Close</IressButton>}>
-  Content
-</IressModal>
-
-// ✅ Or actions prop for status modals
-<IressModal
-  status="danger"
-  heading="Delete record?"
-  actions={[
-    { children: 'Cancel', mode: 'tertiary' },
-    { children: 'Delete' },
-  ]}
-  show={show}
-  onShowChange={setShow}
->
-  This action cannot be undone.
-</IressModal>
-```
-
-### Quick reference
-
-| Legacy v4 pattern                 | Modern prop           |
-| --------------------------------- | --------------------- |
-| `<Child slot="prepend" />`        | `prepend={<Child />}` |
-| `<Child slot="append" />`         | `append={<Child />}`  |
-| `<Child slot="start" />`          | `prepend={<Child />}` |
-| `<Child slot="end" />`            | `append={<Child />}`  |
-| `<Child slot="icon-only" />`      | `icon="iconName"`     |
-| `<div slot="footer">...</div>`    | `footer={...}`        |
-| `<div slot="activator">...</div>` | `activator={...}`     |
-
-## Misunderstanding `IressShadow`
-
-`IressShadow` is a **CSS isolation wrapper** — it attaches a shadow root to a `<div>` so IDS styles don't leak into or get affected by your host application's CSS. It's useful in microfrontend setups.
-
-It does **not** mean your app uses Web Components or custom elements. Children inside `IressShadow` are standard React components — use normal React props, not `slot` attributes.
-
-```tsx
-// ❌
-<IressShadow>
-  <IressButton>
-    <IressIcon slot="start" name="search" />
-    Search
-  </IressButton>
-</IressShadow>
-
-// ✅
-<IressShadow>
-  <IressButton prepend={<IressIcon name="search" />}>
-    Search
-  </IressButton>
-</IressShadow>
-```
-
-`IressShadow` is an alternative to `IressProvider` — choose one as your app's root wrapper depending on whether you need style isolation.
-
-## Using raw HTML instead of IDS components
-
-IDS components include built-in accessibility, theming, and consistent styling. Raw HTML elements bypass all of that.
-
-```tsx
-// ❌
-<button onClick={handleClick}>Submit</button>
-<input type="text" placeholder="Name" />
-<h2>Section Title</h2>
-
-// ✅
-<IressButton mode="primary" onClick={handleClick}>Submit</IressButton>
-<IressField label="Name" htmlFor="name">
-  <IressInput id="name" placeholder="Name" />
-</IressField>
-<IressText element="h2">Section Title</IressText>
-```
-
-## Hardcoded styling values
-
-Don't hardcode colours, spacing, font sizes, or border radii. Use design tokens via styling props so your UI stays consistent across themes.
-
-```tsx
-// ❌
-<div style={{ padding: '16px', background: '#F5F6F8', borderRadius: '12px' }}>
-
-// ✅
-<IressStack p="spacing.4" bg="colour.neutral.20" borderRadius="radius.3">
-```
-
-## Custom CSS for basic layout
-
-Use IDS layout components instead of writing your own flexbox or grid CSS.
-
-```tsx
-// ❌
-<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-  <div>Item 1</div>
-  <div>Item 2</div>
-</div>
-
-// ✅
-<IressStack gap="spacing.4">
-  <IressText>Item 1</IressText>
-  <IressText>Item 2</IressText>
-</IressStack>
-```
-
-## Missing form field wrappers
-
-Always wrap inputs in `IressField` (or `IressFormField` inside an `IressForm`) for proper labels, validation messages, and accessibility.
-
-```tsx
-// ❌ Input without a field wrapper — no label, no a11y
-<IressInput placeholder="Email" />
-
-// ✅
-<IressField label="Email" htmlFor="email" required>
-  <IressInput id="email" type="email" placeholder="Enter your email" />
-</IressField>
-```
-
-## Using `disabled` on IressButton
-
-IDS discourages using the `disabled` pattern on `IressButton`. While the native `disabled` attribute is still available, disabled buttons are invisible to screen readers and provide no way for users to understand how to enable the action.
-
-| Use case | Anti-pattern | IDS alternative |
-| --- | --- | --- |
-| Form is incomplete | `disabled={!isValid}` | Use `IressForm` with `rules` validation — validates on submit with inline errors |
-| Action in progress | `disabled={isSubmitting}` | Use `loading={isSubmitting}` — shows spinner, announces to screen readers, prevents clicks |
-| User lacks permission | `disabled={!canEdit}` | Hide the button (`{canEdit && <IressButton>…</IressButton>}`), or keep enabled and explain on click |
-| Prerequisite not met | `disabled={!hasSelection}` | Keep enabled and show guidance on click (e.g. "Select an item first" via `IressAlert`) |
-
-```tsx
-// ❌ disabled is an anti-pattern
-<IressButton disabled={!isValid}>Submit</IressButton>
-
-// ✅ Form validation — let IressForm handle it
-<IressForm onSubmit={handleSubmit}>
-  <IressFormField name="email" label="Email" rules={{ required: 'Email is required' }}
-    render={(props) => <IressInput {...props} type="email" />} />
-  <IressButton mode="primary" type="submit">Submit</IressButton>
-</IressForm>
-
-// ✅ In-progress — use loading
-<IressButton loading={isSubmitting} mode="primary" type="submit">Submit</IressButton>
-
-// ✅ Permission — hide or explain
-{canEdit && <IressButton onClick={handleEdit}>Edit</IressButton>}
-```
-
-## Redundant `textStyle` on IressText
-
-When `element` is set on `IressText`, the component already applies the correct typography. Adding a matching `textStyle` is redundant. Only use `textStyle` to intentionally override the visual treatment (e.g. making an h2 look like an h4).
-
-| Element | Default textStyle (redundant if matched) |
-| ------- | ---------------------------------------- |
-| `h1`    | `typography.heading.1`                   |
-| `h2`    | `typography.heading.2`                   |
-| `h3`    | `typography.heading.3`                   |
-| `h4`    | `typography.heading.4`                   |
-| `h5`    | `typography.heading.5`                   |
-| `p`     | `typography.body.md`                     |
-
-```tsx
-// ❌ Redundant — h1 already renders as typography.heading.1
-<IressText element="h1" textStyle="typography.heading.1">Page Title</IressText>
-
-// ✅ Element alone is sufficient
-<IressText element="h1">Page Title</IressText>
-
-// ✅ Intentional override for visual hierarchy
-<IressText element="h2" textStyle="typography.heading.4">Section Title</IressText>
-```
-
-## Further reading
-
-When in doubt, check the component docs in [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com) — each component page includes props, examples, and usage guidelines.
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-common-mistakes--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-common-mistakes--docs)*
-
-
----
-
-# Using components consistently
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Using components consistently in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-using-components-consistently--docs)
-
-## Buttons
-
-- **Primary**: Limit to one per view for main call-to-action
-- **Secondary**: Use for secondary actions
-- **Tertiary**: Extra affordance between secondary actions
-- **Link**: Button styled as link (avoid with icon-only content)
-- **Danger**: Destructive actions requiring extra confirmation
-- **Positive/Negative**: Financial transactions (buy/sell)
-
-## Forms
-
-- Always use `IressField` wrapper for proper label, hint, and error placement
-- Provide clear validation feedback with appropriate error messages
-- Use consistent input sizing based on expected content length
-- Implement proper form state management and accessibility
-
-## Navigation
-
-- Use semantic HTML5 navigation elements
-- Provide skip links for keyboard users
-- Implement proper ARIA labelling for navigation sections
-- Ensure consistent navigation patterns across applications
-
-## Data Display
-
-- Use semantic table structures with proper headers
-- Provide clear visual hierarchy in data presentations
-- Implement consistent sorting and filtering patterns
-- Use appropriate loading states for data-heavy components
-
-## Modals and Overlays
-
-- Reserve modals for critical tasks requiring full attention
-- Provide multiple dismissal methods (backdrop, escape key, close button)
-- Implement proper focus management and restoration
-- Use slideouts for supplementary tasks where underlying content needs visibility
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-using-components-consistently--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-using-components-consistently--docs)*
-
-
----
-
-# Content
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Content in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-content--docs)
-
-## Microcopy Guidelines
-
-- Use clear, concise language that matches user mental models
-- Provide helpful error messages with actionable guidance
-- Implement consistent tone of voice across all interface text
-- Use progressive disclosure for complex information
-
-## Iconography
-
-- Use icons consistently with established meanings
-- Provide screen reader text for meaningful icons
-- Avoid using icons as the sole means of communication
-- Maintain consistent icon sizing and alignment
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-content--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-content--docs)*
-
-
----
-
-# Iconography
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Iconography in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-iconography--docs)
-
-Icons are a key part of the Iress Design System, providing visual cues and enhancing user experience. This section outlines the principles and guidelines for using icons effectively within our products.
-
-## Principles
-
-1. **Clarity**: Icons should be easily recognizable and convey their intended meaning without ambiguity.
-2. **Consistency**: Use a consistent style and size for icons across the application to maintain visual harmony.
-3. **Simplicity**: Avoid overly complex icons; simplicity aids in quick recognition.
-4. **Accessibility**: Ensure icons are accessible to all users, including those using screen readers. Provide appropriate alternative text.
-
-## Usage Guidelines
-
-- Use icons to complement text, not replace it. Always provide a text label alongside an icon when its meaning may not be immediately clear.
-- Maintain adequate spacing around icons to prevent visual clutter.
-- Use icons sparingly to avoid overwhelming users. Only include icons that add value to the user experience.
-- Follow the established colour tokens for icons to ensure they align with the overall design aesthetic.
-- Do not use utility icons for decorative purposes; they should always serve a functional role. For decorative icons, consider using an illustration instead.
-
-## Icon Library
-
-### Material Symbols
-
-The chosen icon library for the Iress Design System is Material Symbols. This library offers a wide range of icons that are versatile and adaptable to various use cases.
-
-The settings we use for Material Symbols are.
-
-- Style: Rounded
-- Weight: (see Storybook)
-- Fill: 0 (1 for active icons)
-- Grade: (see Storybook)
-- Optical Size: (see Storybook)
-
-If you need to explore the available icons, you can visit the Material Symbols library here:
-
-- [Material Symbols](https://fonts.google.com/icons?icon.style=Rounded&icon.set=Material+Symbols)
-
-### Figma plugin
-
-If you are using Figma, we recommend the [Material Symbols plugin](https://www.figma.com/community/plugin/1088610476491668236/material-symbols) with the below settings:
-
-- Style: Rounded
-- Weight: (see Storybook)
-- Fill: Off (On for active icons)
-- Grade: (see Storybook)
-- Optical Size: (see Storybook)
-
-### `IressIcon` Component
-
-The `IressIcon` component is used to render icons from the Material Symbols library based on the guidelines outlined above.
-
-[View <code>IressIcon</code> documentation](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)
-
-```tsx
-<IressIcon name="home" />
-```
-
-[View "Default" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-iconography--default)
-
-### Migrating from Font Awesome
-
-To help with migrating, we have mapped some common Font Awesome icons to their Material Symbols equivalents.
-
-Please refer to the table below for guidance.
-
-```tsx
-<IressTable
-{...(args as object)}
-caption="Font Awesome to Material Symbols Migration Reference"
-columns={[
-{
-key: 'fontAwesome',
-label: 'Font Awesome',
-format: (icon: never) => (
-<IressText>
-<IressIcon type="fontawesome" name={icon} /> ({icon})
-</IressText>
-),
-},
-{
-key: 'materialSymbols',
-label: 'Material Symbols',
-format: (icon: never) => (
-<IressText>
-<IressIcon name={icon} /> ({icon})
-</IressText>
-),
-},
-]}
-rows={Object.entries(FA_TO_MATERIAL_MAP).map(
-([fontAwesome, materialSymbols]) => ({
-fontAwesome,
-materialSymbols,
-}),
-)}
-scope="col"
-/>
-```
-
-[View "FontAwesomeToMaterialMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-iconography--font-awesome-to-material-migration)
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-iconography--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-iconography--docs)*
-
-
----
-
-# Core Design Principles
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Core Design Principles in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-principles--docs)
-
-## Consistency
-
-- Maintain brand consistency across all applications and experiences
-- Use standardised component naming conventions (all components start with `Iress` prefix)
-- Leverage shared design tokens for spacing, colours, typography, and interactive states
-- Ensure consistent behaviour patterns across similar components
-
-## Accessibility First
-
-- Meet or exceed WCAG 2.1 Level AA Accessibility Guidelines
-- Provide proper colour contrast ratios (minimum 4.5:1 for AA, 7:1 for AAA)
-- Implement comprehensive keyboard navigation support
-- Include screen reader compatibility with appropriate ARIA attributes
-- Support focus management and skip navigation patterns
-- Document accessibility considerations and requirements
-
-## Clarity and Usability
-
-- Prioritise clear visual hierarchy through typography scales and spacing systems
-- Use progressive disclosure to manage complexity
-- Provide immediate feedback for user actions (loading states, validation, etc.)
-- Design for touch-friendly interfaces with adequate target sizes
-
-## Developer Experience
-
-- Maintain clean component APIs with predictable prop patterns
-- Provide comprehensive documentation with usage examples
-- Include common patterns and anti-patterns
-- Support both controlled and uncontrolled component patterns
-- Enable efficient testing strategies with semantic roles and accessible queries
-- Maintain up-to-date prop documentation and type definitions
-
-## Quality assurance
-
-- Test components across supported browsers and devices
-- Validate accessibility compliance with automated and manual testing
-- Ensure proper keyboard navigation functionality
-- Test with assistive technologies (screen readers, voice control)
-
-### Code Standards
-
-- Follow consistent naming conventions for CSS classes and component props
-- Use semantic HTML elements where appropriate
-- Implement proper TypeScript typing for better developer experience
-- Maintain clean separation between presentation and logic
-
-### Performance Considerations
-
-- Optimise component rendering and re-rendering
-- Implement appropriate code splitting strategies
-- Use efficient animation and transition patterns
-- Consider bundle size impact of component dependencies
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-principles--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-principles--docs)*
-
-
----
-
-# Responsive layout
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Responsive layout in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-responsive-layout--docs)
-
-The Iress Design System (IDS) is built with responsive design principles in mind. This means that our components are designed to adapt to different screen sizes and orientations, ensuring a consistent user experience across devices.
-
-## Breakpoints
-
-- Implement mobile-first responsive design
-- Use consistent breakpoint values across all components
-- Provide appropriate component variants for different screen sizes
-- Consider content priority and progressive disclosure on smaller screens
-
-  [View "Breakpoints" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-responsive--breakpoints)
-
-### Extra-small screens (`xs`)
-
-```tsx
-<IressStack gap="lg">
-<IressInline gap="md" verticalAlign="bottom">
-<IressStack gap="xs" maxWidth="input.16">
-<Suspense>
-<BreakpointXs />
-</Suspense>
-<IressText>
-<strong>{caption}</strong>
-<br />
-The mobile breakpoint is used for small mobile devices.
-</IressText>
-</IressStack>
-<IressStack gap="xs">
-<IressInline gap="sm">
-<IressText element="strong">Min screen width</IressText>
-<IressText>{BREAKPOINT_DETAILS.xs.minScreenWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Max screen width</IressText>
-<IressText>{BREAKPOINT_DETAILS.xs.maxScreenWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Active viewport</IressText>
-<IressText>{BREAKPOINT_DETAILS.xs.containerMaxWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Margin</IressText>
-<MarginToken token={BREAKPOINT_DETAILS.xs.margin} />
-</IressInline>
-</IressStack>
-</IressInline>
-<IressDivider />
-<IressText>
-<h2>Grid example</h2>
-<p>
-To ensure the best usability and accessibility, please do not use
-grids with more than 4 columns maximum on extra small screens. For
-developers, this means the minimum span on mobile devices is 3.
-</p>
-<IressPanel bg="alt">
-<CurrentBreakpoint renderLabel="viewing" />
-</IressPanel>
-</IressText>
-<IressContainer
-style={{ maxWidth: `${BREAKPOINT_DETAILS.xs.viewportWidth}px` }}
->
-<IressRow gutter="md">
-<IressCol span={12}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={6}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={6}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={3}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={3}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={3}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={3}>
-<IressPlaceholder height="5em" />
-</IressCol>
-</IressRow>
-</IressContainer>
-</IressStack>
-```
-
-[View "Xs" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-responsive--xs)
-
-### Small screens (`sm`)
-
-```tsx
-<IressStack gap="lg">
-<IressInline gap="md" verticalAlign="bottom">
-<IressStack gap="xs" maxWidth="input.16">
-<Suspense>
-<BreakpointSm />
-</Suspense>
-<IressText>
-<strong>{caption}</strong>
-<br />
-Small breakpoint, for larger mobile devices and tablet portrait.
-</IressText>
-</IressStack>
-<IressStack gap="xs">
-<IressInline gap="sm">
-<IressText element="strong">Min screen width</IressText>
-<IressText>{BREAKPOINT_DETAILS.sm.minScreenWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Max screen width</IressText>
-<IressText>{BREAKPOINT_DETAILS.sm.maxScreenWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Active viewport</IressText>
-<IressText>{BREAKPOINT_DETAILS.sm.containerMaxWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Margin</IressText>
-<MarginToken token={BREAKPOINT_DETAILS.sm.margin} />
-</IressInline>
-</IressStack>
-</IressInline>
-<IressDivider />
-<IressText>
-<h2>Grid example</h2>
-<p>
-To ensure the best usability and accessibility, please do not use
-grids with more than 4 columns maximum on small screens. For
-developers, this means the minimum span on mobile devices is 3.
-</p>
-<IressPanel bg="alt">
-<CurrentBreakpoint renderLabel="viewing" />
-</IressPanel>
-</IressText>
-<IressContainer
-style={{ maxWidth: `${BREAKPOINT_DETAILS.sm.viewportWidth}px` }}
->
-<IressRow gutter="md">
-<IressCol span={{ base: 12, sm: 12 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, sm: 6 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, sm: 6 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, sm: 3 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, sm: 3 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, sm: 3 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, sm: 3 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-</IressRow>
-</IressContainer>
-</IressStack>
-```
-
-[View "Sm" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-responsive--sm)
-
-### Medium screens (`md`)
-
-```tsx
-<IressStack gap="lg">
-<IressInline gap="md" verticalAlign="bottom">
-<IressStack gap="xs" maxWidth="input.16">
-<Suspense>
-<BreakpointMd />
-</Suspense>
-<IressText>
-<strong>{caption}</strong>
-<br />
-Medium breakpoint for tablets and small laptops such as Chromebooks.
-</IressText>
-</IressStack>
-<IressStack gap="xs">
-<IressInline gap="sm">
-<IressText element="strong">Min screen width</IressText>
-<IressText>{BREAKPOINT_DETAILS.md.minScreenWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Max screen width</IressText>
-<IressText>{BREAKPOINT_DETAILS.md.maxScreenWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Active viewport</IressText>
-<IressText>{BREAKPOINT_DETAILS.md.containerMaxWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Margin</IressText>
-<MarginToken token={BREAKPOINT_DETAILS.md.margin} />
-</IressInline>
-</IressStack>
-</IressInline>
-<IressDivider />
-<IressText>
-<h2>Grid example</h2>
-<p>
-To ensure the best usability and accessibility, please do not use
-grids with more than 6 columns maximum on medium screens. For
-developers, this means the minimum span on medium screems is 2.
-</p>
-<IressPanel bg="alt">
-<CurrentBreakpoint renderLabel="viewing" />
-</IressPanel>
-</IressText>
-<IressContainer
-style={{ maxWidth: `${BREAKPOINT_DETAILS.md.viewportWidth}px` }}
->
-<IressRow gutter="md">
-<IressCol span={{ base: 12, md: 12 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, md: 6 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, md: 6 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, md: 4 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, md: 4 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, md: 4 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, md: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, md: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, md: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, md: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, md: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, md: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-</IressRow>
-</IressContainer>
-</IressStack>
-```
-
-[View "Md" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-responsive--md)
-
-### Large screens (`lg`)
-
-```tsx
-<IressStack gap="lg">
-<IressInline gap="md" verticalAlign="bottom">
-<IressStack gap="xs" maxWidth="input.16">
-<Suspense>
-<BreakpointLg />
-</Suspense>
-<IressText>
-<strong>{caption}</strong>
-<br />
-Large breakpoint for desktops and laptops, such as 13inch MacBooks.
-</IressText>
-</IressStack>
-<IressStack gap="xs">
-<IressInline gap="sm">
-<IressText element="strong">Min screen width</IressText>
-<IressText>{BREAKPOINT_DETAILS.lg.minScreenWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Max screen width</IressText>
-<IressText>{BREAKPOINT_DETAILS.lg.maxScreenWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Active viewport</IressText>
-<IressText>{BREAKPOINT_DETAILS.lg.containerMaxWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Margin</IressText>
-<MarginToken token={BREAKPOINT_DETAILS.lg.margin} />
-</IressInline>
-</IressStack>
-</IressInline>
-<IressDivider />
-<IressText>
-<h2>Grid example</h2>
-<p>
-From large screens onwards, all 12 columns of the grid can be used.
-For developers, this means the minimum span on large screens is 1.
-</p>
-<IressPanel bg="alt">
-<CurrentBreakpoint renderLabel="viewing" />
-</IressPanel>
-</IressText>
-<IressContainer
-style={{ maxWidth: `${BREAKPOINT_DETAILS.lg.viewportWidth}px` }}
->
-<IressRow gutter="md">
-<IressCol span={{ base: 12, lg: 12 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 6 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 6 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 4 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 4 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 4 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, lg: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-</IressRow>
-</IressContainer>
-</IressStack>
-```
-
-[View "Lg" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-responsive--lg)
-
-### Extra-large screens (`xl`)
-
-```tsx
-<IressStack gap="lg">
-<IressInline gap="md" verticalAlign="bottom">
-<IressStack gap="xs" maxWidth="input.16">
-<Suspense>
-<BreakpointXl />
-</Suspense>
-<IressText>
-<strong>{caption}</strong>
-<br />
-Large breakpoint for desktops and laptops, such as 15inch laptops
-and monitors.
-</IressText>
-</IressStack>
-<IressStack gap="xs">
-<IressInline gap="sm">
-<IressText element="strong">Min screen width</IressText>
-<IressText>{BREAKPOINT_DETAILS.xl.minScreenWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Max screen width</IressText>
-<IressText>{BREAKPOINT_DETAILS.xl.maxScreenWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Active viewport</IressText>
-<IressText>{BREAKPOINT_DETAILS.xl.containerMaxWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Margin</IressText>
-<MarginToken token={BREAKPOINT_DETAILS.xl.margin} />
-</IressInline>
-</IressStack>
-</IressInline>
-<IressDivider />
-<IressText>
-<h2>Grid example</h2>
-<p>
-From large screens onwards, all 12 columns of the grid can be used.
-For developers, this means the minimum span on extra large screens is
-1. At this screen the container max width is applied, but can be opted
-out by using the <code>fluid</code> prop. It is recommended to keep
-the max width in most scenarios to ensure optimal readability.
-</p>
-<IressPanel bg="alt">
-<CurrentBreakpoint renderLabel="viewing" />
-</IressPanel>
-</IressText>
-<IressContainer>
-<IressRow gutter="md">
-<IressCol span={{ base: 12, xl: 12 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 6 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 6 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 4 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 4 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 4 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-</IressRow>
-</IressContainer>
-</IressStack>
-```
-
-[View "Xl" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-responsive--xl)
-
-### Extremely large screens (`xxl`)
-
-```tsx
-<IressStack gap="lg">
-<IressInline gap="md" verticalAlign="bottom">
-<IressStack gap="xs" maxWidth="input.16">
-<Suspense>
-<BreakpointXl />
-</Suspense>
-<IressText>
-<strong>{caption}</strong>
-<br />
-Extra-large breakpoint for modern desktop monitors and large laptops
-(17inch+).
-</IressText>
-</IressStack>
-<IressStack gap="xs">
-<IressInline gap="sm">
-<IressText element="strong">Min screen width</IressText>
-<IressText>{BREAKPOINT_DETAILS.xxl.minScreenWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Max screen width</IressText>
-<IressText>N/A</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Active viewport</IressText>
-<IressText>{BREAKPOINT_DETAILS.xxl.containerMaxWidth}</IressText>
-</IressInline>
-<IressInline gap="sm">
-<IressText element="strong">Margin</IressText>
-<MarginToken token={BREAKPOINT_DETAILS.xxl.margin} />
-</IressInline>
-</IressStack>
-</IressInline>
-<IressDivider />
-<IressText>
-<h2>Grid example</h2>
-<p>
-From large screens onwards, all 12 columns of the grid can be used.
-For developers, this means the minimum span on extra large screens is
-1. At this screen the container max width is applied, but can be opted
-out by using the <code>fluid</code> prop. It is recommended to keep
-the max width in most scenarios to ensure optimal readability.
-</p>
-<IressPanel bg="alt">
-<CurrentBreakpoint renderLabel="viewing" />
-</IressPanel>
-</IressText>
-<IressContainer>
-<IressRow gutter="md">
-<IressCol span={{ base: 12, xxl: 12 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 6 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 6 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 4 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 4 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 4 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 2 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-<IressCol span={{ base: 12, xxl: 1 }}>
-<IressPlaceholder height="5em" />
-</IressCol>
-</IressRow>
-</IressContainer>
-</IressStack>
-```
-
-[View "Xxl" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-responsive--xxl)
-
----
-
-## For designers
-
-When designing for responsive layouts, consider how your designs will adapt to different screen sizes. Use the breakpoints defined in the design system to guide your layout decisions and ensure that your designs are flexible and adaptable.
-
-### Tips
-
-1. Use the example viewport sizes provided in the breakpoints table to show your designs at different screen widths.
-2. Prioritise content based on screen size — identify the primary task on each page and ensure the mobile layout focuses on it.
-3. Relocate secondary content (filters, sidebars, metadata panels) into a slideout or collapsible section on mobile rather than simply stacking everything vertically.
-4. Reduce option counts on mobile devices where appropriate.
-5. Implement responsive navigation patterns.
-6. Adjust spacing and sizing for different contexts.
-7. Maintain usability across all supported devices — all functionality should remain accessible on mobile, just reorganised into appropriate containers.
-
----
-
-## For developers
-
-If you are using the IDS components, the breakpoints have already been mapped out to their respective props. You can use props such as `gap` to change the visual properties of the component at certain breakpoints.
-
-```jsx
-import { IressStack } from '@iress-oss/ids-components';
-
-<IressStack gap={{ xs: 'spacing.1', md: 'spacing.2' }} />;
-```
-
-### Hooks
-
-#### `useBreakpoint`
-
-We also provide a `useBreakpoint` hook that allows you to access the current breakpoint in your components. This can be useful for conditionally rendering components based on the current screen size.
-
-**Note:** It is best to use media queries for responsive styling. Most props that require responsive values already support breakpoints which map to CSS values. Only use the `useBreakpoint` hook when there is no other way to achieve the desired responsive behavior.
-
-```jsx
-import { useBreakpoint } from '@iress-oss/ids-components';
-
-const MyComponent = () => {
-  const { breakpoint } = useBreakpoint();
-
-  return (
-    <div>
-      {breakpoint === 'xs' && <p>This is extra small screen</p>}
-      {breakpoint === 'md' && <p>This is medium screen</p>}
-    </div>
-  );
-};
-```
-
-#### `useResponsiveProps`
-
-Another hook is `useResponsiveProps`, which allows you to define responsive properties that change based on the current breakpoint. This is particularly useful for completely changing components at various screen sizes.
-
-**Note:** It is best to use media queries for responsive styling. Most props that require responsive values already support breakpoints which map to CSS values. Only use the `useResponsiveProps` hook when there is no other way to achieve the desired responsive behavior.
-
-```tsx
-<ResponsiveTableColumns />
-```
-
-[View "ResponsiveProps" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-responsive--responsive-props)
-
-### Constant
-
-You can also use the breakpoints directly in your CSS or styled components. The breakpoints are defined in the `@iress-oss/ids-components` package.
-
-```jsx
-import { BREAKPOINT_DETAILS } from '@iress-oss/ids-components';
-
-const css = `
-  @media (${BREAKPOINT_DETAILS.md.mediaQuery}}) {
-    .my-class {
-      padding: 20px;
-    }
-  }
-`;
-
-<style>{css}</style>;
-```
-
-The base grid size is exported as `GRID_SIZE` from the `@iress-oss/ids-components` package, in case you need to reference it in your own code.
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-responsive-layout--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-responsive-layout--docs)*
-
-
----
-
-# User experience
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [User experience in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-user-experience--docs)
-
-We use heuristic guidelines to assess the usability and user-centred design quality of all Iress products.
-
-## System Feedback
-
-- Always show users where they are, what just happened, and what’s possible next.
-- Provide immediate visual and textual feedback for all actions and states.
-- Ensure feedback is clear, contextual, and proportionate to the importance of the action.
-
-## Language and Mental Models
-
-- Use user-centred language and avoid technical jargon.
-- Follow cultural and industry conventions for colour, iconography, terminology, and layout.
-- Align interaction patterns with real-world analogues wherever feasible.
-
-## Control and Forgiveness
-
-- Make actions reversible and provide undo where errors may occur.
-- Let users easily backtrack, edit inputs, or abandon flows.
-- Provide escape hatches from any process without penalty.
-
-## Standards and Consistency
-
-- Use consistent layout, labelling, iconography, and grammar.
-- Reinforce expectations by placing similar elements in predictable positions.
-- Apply colour, spacing, and visual patterns consistently across all screens.
-
-## Error Prevention and Recovery
-
-- Prevent errors by anticipating misuse and validating early.
-- Phrase error messages with clarity, empathy, and constructive suggestions.
-- Where errors occur, explain why and how they can be resolved.
-
-## Recognition Over Recall
-
-- Display necessary information at the point of decision.
-- Use visual grouping, spacing, and affordance to reveal hierarchy.
-- Prioritise visual clarity over novelty.
-
-## Simplicity and Minimalism
-
-- Remove unnecessary detail—every word, element, or feature should earn its place.
-- Design for clarity of purpose with visually distinct, semantically meaningful UI components.
-- Use whitespace, clean alignment, and simplified flows to reduce cognitive load.
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-user-experience--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-user-experience--docs)*
-
-
----
-
-# Visual Design Standards
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Visual Design Standards in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-visual-design-standards--docs)
-
-## Typography
-
-- Use systematic font sizing with heading scales (H1-H6)
-- Implement consistent line heights and font weights
-- Provide text colour hierarchies (primary, muted, success, warning, danger)
-- Support responsive typography scaling
-
-## Colour System
-
-- Maintain semantic colour meanings:
-  - **Primary**: Main call-to-action colour with high contrast
-  - **Success**: Positive outcomes and confirmations
-  - **Warning**: Caution and important notices
-  - **Danger**: Errors and destructive actions
-  - **Info**: Neutral information and guidance
-  - **Positive/Negative**: Financial context (buy/sell actions)
-- Ensure all colour combinations meet accessibility contrast requirements
-- Provide consistent hover and active state colours
-
-## Spacing and Layout
-
-- Use systematic spacing scale (xs, sm, md, lg, xl)
-- Apply consistent gutter systems for layout components
-- Implement responsive breakpoints for adaptive layouts
-- Maintain proper margin and padding relationships
-
-## Interactive States
-
-- Provide clear hover, focus, active, and disabled states
-- Use consistent transition timing and easing
-- Implement proper focus indicators for keyboard navigation
-- Show loading states for asynchronous operations
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-visual-design-standards--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-visual-design-standards--docs)*
-
-
----
-
-# Z-index (stacking)
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Z-index (stacking) in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-z-index-stacking--docs)
-
-The z-index determines the stacking order of elements. Elements with a higher z-index always sit in front of elements with a lower z-index. Each index has been mapped to the appropriate elevation(s).
-
-## Reference
-
-[View "Reference" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_foundations-zindex--reference)
-
----
-
-## For developers
-
-If you are using the IDS components, the z-indexes have already been mapped out to their respective components based on the usage above. They are hardcoded into the components, so you don't need to worry about them.
-
-The mapping is exported as `Z_INDEX` from the `@iress-oss/ids-components` package, in case you need to reference it in your own code.
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-z-index-stacking--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-z-index-stacking--docs)*
-
-
----
-
-# Content Security Policy (CSP)
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Content Security Policy (CSP) in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_get-started-content-security-policy--docs)
-
-IDS loads external stylesheets and fonts at runtime. If your application enforces a Content Security Policy, you need to allowlist the origins IDS loads from.
-
-## External Origins
-
-IDS components load resources from these domains:
-
-| Origin                 | Resource                                                | Loaded By                                            |
-| ---------------------- | ------------------------------------------------------- | ---------------------------------------------------- |
-| `fonts.googleapis.com` | Material Symbols icon font CSS, Inter & Ubuntu font CSS | `IressProvider`, `IressIconProvider`                 |
-| `fonts.gstatic.com`    | Font binary files (served by Google Fonts CSS)          | Google Fonts `@font-face` rules                      |
-| `cdn.iress.com`        | Font Awesome CSS (legacy v5 icon set), theme CSS        | `IressIconProvider` (fontawesome type), `IressTheme` |
-
-## Required CSP Directives
-
-Add the following origins to your Content Security Policy:
-
-```
-style-src 'self' https://fonts.googleapis.com https://cdn.iress.com;
-font-src  'self' https://fonts.gstatic.com https://cdn.iress.com;
-```
-
-If you use `IressThemeImport` (bundled themes, no CDN) instead of `IressTheme`, you can omit `cdn.iress.com` from `style-src`.
-
----
-
-## Optional: Nonce Support for `IressShadow`
-
-`IressShadow` injects inline `<style>` tags into its Shadow DOM. If your CSP blocks inline styles, IDS supports nonce-based injection for this component. This is **optional** — most applications only need the origin allowlisting above.
-
-IDS reads a CSP nonce from a `<meta>` tag and applies it to `<style>` elements injected by `IressShadow`:
-
-```html
-<head>
-  <meta name="csp-nonce" content="<SERVER_GENERATED_NONCE>" />
-</head>
-```
-
-Your server must:
-
-1. Generate a unique nonce per request.
-2. Set it in both the `<meta>` tag and the CSP header.
-3. Ensure the nonce value matches exactly.
-
-### Example with Nonce
-
-```
-Content-Security-Policy: style-src 'self' 'nonce-abc123' https://fonts.googleapis.com https://cdn.iress.com; font-src 'self' https://fonts.gstatic.com https://cdn.iress.com;
-```
-
-```html
-<meta name="csp-nonce" content="abc123" />
-```
-
----
-
-## How It Works
-
-- **`IressProvider`** injects `<link rel="stylesheet">` tags for default fonts (Inter, Ubuntu) from `fonts.googleapis.com`.
-- **`IressIconProvider`** injects `<link>` tags for Material Symbols from `fonts.googleapis.com` (with dynamic subsetting), or `<link>` tags for Font Awesome from `cdn.iress.com`.
-- **`IressShadow`** injects inline `<style>` tags into its Shadow DOM — this is the only component that requires a nonce when inline styles are blocked.
-
-All components use `<link>` tags for external stylesheets, which are covered by origin allowlisting alone. Only `IressShadow` calls `getNonce()` to apply a nonce to its inline `<style>` elements.
-
----
-
-## Troubleshooting
-
-| Symptom                                        | Cause                                                 | Fix                                                                          |
-| ---------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Icons render as text (e.g. "search")           | `fonts.googleapis.com` or `fonts.gstatic.com` blocked | Add both to `style-src` and `font-src` respectively                          |
-| Console error: "Refused to load stylesheet"    | Missing origin in `style-src`                         | Add the blocked origin to `style-src`                                        |
-| Console error: "Refused to apply inline style" | Inline styles blocked and no nonce configured         | Add `<meta name="csp-nonce">` tag, or allow `'unsafe-inline'` in `style-src` |
-| Fonts load in dev but not production           | CSP only enforced in production                       | Test with CSP headers in all environments                                    |
-| Theme not applying                             | `cdn.iress.com` blocked in `style-src`                | Add `cdn.iress.com` to `style-src`, or use `IressThemeImport`                |
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_get-started-content-security-policy--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_get-started-content-security-policy--docs)*
-
-
----
-
-# Develop
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Develop in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_get-started-develop--docs)
-
-Set up your environment to use the latest version of the Iress Design System (IDS). You can use this library to build React applications that align to IDS, and ensure a consistent and modern look and feel across all Iress products.
-
-## Requirements
-
-- [React 17 or later](https://reactjs.org/)
-
-## Set up
-
-1. Install using the command line:
-   ```sh
-   yarn add @iress-oss/ids-components
-   ```
-2. Import the styles:
-   ```tsx
-   import '@iress-oss/ids-components/dist/style.css';
-   ```
-3. Import the components. The provider is optional, but recommended for most applications. It sets up the design system and provides a consistent container for components like modals, slideouts, and toasts. If you are using `IressProvider`, you do not need to add `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, or `IressIconProvider` separately — they are all included. The same applies when using `IressShadow`, which includes `IressProvider` internally.
-   ```tsx
-   import { IressProvider, IressButton } from '@iress-oss/ids-components';
-   ```
-4. Use the components:
-
-   ```tsx
-   const App = () => {
-     const { success } = useToaster();
-
-     return (
-       <IressButton onClick={() => success({ children: 'Toast triggered' })}>
-         Trigger toast
-       </IressButton>
-     );
-   };
-
-   ReactDOM.createRoot(document.getElementById('root')!).render(
-     <IressProvider>
-       <App />
-     </IressProvider>,
-   );
-   ```
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_get-started-develop--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_get-started-develop--docs)*
-
-
----
-
-# Migrating from OUI to IDS v6
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Migrating from OUI to IDS v6 in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-oui-to-v6--docs)
-
-This guide covers migrating from the legacy OUI component library (`@iress/oui`) to the Iress Design System v6 (`@iress-oss/ids-components`). It also covers upgrading existing IDS v4 (`@iress/components-react`) components, replacing Formik with IDS v6's React Hook Form integration, and updating your test infrastructure.
-
-> **If you are migrating from IDS v5**, see [Migrating from v5](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-v5-to-v6--docs) instead — that guide focuses on v5-to-v6 breaking changes only.
-
----
-
-## Overview
-
-### Why migrate?
-
-| Benefit             | Details                                                            |
-| ------------------- | ------------------------------------------------------------------ |
-| **Consistency**     | A single component library aligned with IDS v6 standards           |
-| **Accessibility**   | Improved WCAG compliance built into every component                |
-| **Maintainability** | OUI and IDS v4 are legacy — IDS v6 is actively maintained          |
-| **TypeScript**      | Full type-safety for components, styling props, and forms          |
-| **Performance**     | React Hook Form is lighter than Formik; IDS v6 ships optimised CSS |
-| **Bundle size**     | Removing OUI, Formik, and Yup can save 200–300 KB                  |
-
-### Migration scope
-
-The migration covers three main areas:
-
-1. **OUI → IDS v6** — Replace all `@iress/oui` components with `@iress-oss/ids-components` equivalents
-2. **IDS v4 → IDS v6** — Update all `@iress/components-react` imports and adapt to v6 API changes
-3. **Formik → React Hook Form** — Replace Formik forms with IDS v6's built-in form architecture
-
----
-
-## 1. Dependencies
-
-### Update `package.json`
-
-Remove legacy packages and add IDS v6:
-
-[View "UpdateDependencies" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--update-dependencies)
-
-> `react-hook-form` is a peer dependency of `IressForm` in v6. You must add it to your own dependencies.
-
-### Update imports
-
-[View "UpdateImports" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--update-imports)
-
-### Add the stylesheet
-
-IDS v6 no longer injects CSS into the DOM. Add this **once** in your app entry point:
-
-```tsx
-import '@iress-oss/ids-components/dist/style.css';
-```
-
----
-
-## 2. OUI component mapping
-
-### Direct mappings (low complexity)
-
-These OUI components map directly to an IDS v6 equivalent with minimal prop changes.
-
-#### Button → IressButton
-
-[View "ButtonMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--button-migration)
-
-| OUI prop   | IDS v6 prop | Notes                                           |
-| ---------- | ----------- | ----------------------------------------------- |
-| `variant`  | `mode`      | Same values: `primary`, `secondary`, `tertiary` |
-| `loading`  | `loading`   | Unchanged                                       |
-| `disabled` | `disabled`  | Unchanged                                       |
-| `type`     | `type`      | Unchanged                                       |
-
-> **New in v6:** `element` prop to render as a routing `Link`, `icon` prop for icon-only buttons, and `status` prop for `danger`/`success` states.
-
-#### ProgressBar → IressProgress
-
-[View "ProgressBarMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--progress-bar-migration)
-
-Props are unchanged.
-
-#### Badge → IressPill
-
-[View "BadgeMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--badge-migration)
-
-| OUI prop  | IDS v6 prop |
-| --------- | ----------- |
-| `variant` | `mode`      |
-
-> In IDS v6, `IressBadge` has been renamed to `IressPill`. Use `IressPill` for static indicators and `IressTag` for interactive elements.
-
-### Medium complexity
-
-#### Modal → IressModal
-
-[View "ModalMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--modal-migration)
-
-| OUI prop  | IDS v6 prop    |
-| --------- | -------------- |
-| `isOpen`  | `show`         |
-| `title`   | `heading`      |
-| `onClose` | `onShowChange` |
-
-#### DropdownButton → IressDropdownMenu / IressSelect / IressPopover
-
-OUI's `DropdownButton` can be replaced by several IDS v6 components depending on the use case:
-
-| Use case                | IDS v6 component    | When to use                                                                    |
-| ----------------------- | ------------------- | ------------------------------------------------------------------------------ |
-| Menu of actions         | `IressDropdownMenu` | Selecting from a list of options with built-in search and multi-select support |
-| Form select             | `IressSelect`       | Selecting a value within a form                                                |
-| Custom dropdown content | `IressPopover`      | Full control over the dropdown content                                         |
-
-**IressDropdownMenu example:**
-
-```tsx
-<IressOUI allowModeChange />
-```
-
-[View "DropdownMenuMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--dropdown-menu-migration)
-
-**IressSelect example (in a form):**
-
-```tsx
-<IressOUI allowModeChange />
-```
-
-[View "DropdownSelectMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--dropdown-select-migration)
-
-### Using styling props
-
-#### Scrollable
-
-OUI's `Scrollable` component is replaced by the `scrollable` styling prop, available on any IDS v6 component. It sets `overflow: auto` with design-system-styled scrollbars.
-
-| Value  | Behaviour              |
-| ------ | ---------------------- |
-| `true` | Scroll on both axes    |
-| `"x"`  | Horizontal scroll only |
-| `"y"`  | Vertical scroll only   |
-
-[View "ScrollableMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--scrollable-migration)
-
-You can also use `scrollable` on any element — it is not limited to `IressPanel`:
-
-```tsx
-<IressStack scrollable="y" style={{ maxHeight: '400px' }}>
-  <LongContent />
-</IressStack>
-```
-
----
-
-## 3. Form migration (Formik → IDS v6)
-
-This is the most significant architectural change. IDS v6 forms use **React Hook Form** under the hood via `IressForm` and `IressFormField`.
-
-### Key differences
-
-| Formik                                | IDS v6                                         |
-| ------------------------------------- | ---------------------------------------------- |
-| `<Formik>` wrapper with render props  | `<IressForm>` with declarative children        |
-| `<Field>` with `as` prop              | `<IressFormField>` with `render` prop          |
-| Yup validation schemas                | Per-field `rules` prop (React Hook Form rules) |
-| `<ErrorMessage>` component            | Automatic error display by `IressFormField`    |
-| Standalone `<Label>` + `<Input>`      | Integrated `IressFormField` with `label` prop  |
-| `<FormGroup>` / `<Fieldset>` wrappers | `IressFormField` or `IressFieldGroup`          |
-
-### Basic form migration
-
-**Before (Formik + OUI):**
-
-```tsx
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
-import { Input, Label, FormGroup, Button } from '@iress/oui';
-
-const schema = Yup.object({
-  email: Yup.string().email('Invalid email').required('Email is required'),
-  password: Yup.string()
-    .min(8, 'Min 8 characters')
-    .required('Password is required'),
-});
-
-function LoginForm() {
-  return (
-    <Formik
-      initialValues={{ email: '', password: '' }}
-      validationSchema={schema}
-      onSubmit={handleSubmit}
-    >
-      {({ errors, touched }) => (
-        <Form>
-          <FormGroup>
-            <Label htmlFor="email">Email</Label>
-            <Field name="email" as={Input} type="email" />
-            {errors.email && touched.email && <span>{errors.email}</span>}
-          </FormGroup>
-
-          <FormGroup>
-            <Label htmlFor="password">Password</Label>
-            <Field name="password" as={Input} type="password" />
-            {errors.password && touched.password && (
-              <span>{errors.password}</span>
-            )}
-          </FormGroup>
-
-          <Button type="submit" variant="primary">
-            Login
-          </Button>
-        </Form>
-      )}
-    </Formik>
-  );
-}
-```
-
-**After (IDS v6):**
-
-```tsx
-import {
-  IressForm,
-  IressFormField,
-  IressInput,
-  IressButton,
-} from '@iress-oss/ids-components';
-
-function LoginForm() {
-  return (
-    <IressForm
-      defaultValues={{ email: '', password: '' }}
-      onSubmit={handleSubmit}
-    >
-      <IressFormField
-        name="email"
-        label="Email"
-        render={(props) => <IressInput {...props} type="email" />}
-        rules={{
-          required: 'Email is required',
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: 'Invalid email',
-          },
-        }}
-      />
-
-      <IressFormField
-        name="password"
-        label="Password"
-        render={(props) => <IressInput {...props} type="password" />}
-        rules={{
-          required: 'Password is required',
-          minLength: { value: 8, message: 'Min 8 characters' },
-        }}
-      />
-
-      <IressButton type="submit" mode="primary">
-        Login
-      </IressButton>
-    </IressForm>
-  );
-}
-```
-
-### Validation migration (Yup → rules)
-
-| Yup                      | React Hook Form `rules`                                                |
-| ------------------------ | ---------------------------------------------------------------------- |
-| `.required('msg')`       | `required: 'msg'`                                                      |
-| `.min(n, 'msg')`         | `minLength: { value: n, message: 'msg' }`                              |
-| `.max(n, 'msg')`         | `maxLength: { value: n, message: 'msg' }`                              |
-| `.email('msg')`          | `pattern: { value: /…/, message: 'msg' }`                              |
-| `.matches(regex, 'msg')` | `pattern: { value: regex, message: 'msg' }`                            |
-| `.positive('msg')`       | `validate: { positive: (v) => v > 0 \|\| 'msg' }`                      |
-| `.integer('msg')`        | `validate: { integer: (v) => Number.isInteger(Number(v)) \|\| 'msg' }` |
-| `.url('msg')`            | `pattern: { value: /^https?:\/\/.+/, message: 'msg' }`                 |
-
-### Form component mapping
-
-#### Input → IressFormField + IressInput
-
-```tsx
-<IressOUI allowModeChange />
-```
-
-[View "InputMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--input-migration)
-
-#### TextArea → IressFormField + IressInput (with rows)
-
-```tsx
-<IressOUI allowModeChange />
-```
-
-[View "TextAreaMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--text-area-migration)
-
-#### Label → IressFormField (label prop)
-
-Labels are now integrated into `IressFormField` — no separate component needed:
-
-```tsx
-<IressOUI allowModeChange />
-```
-
-[View "LabelMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--label-migration)
-
-#### FormGroup / Fieldset → IressFormField or IressFieldGroup
-
-`FormGroup` functionality is built into `IressFormField`. For `Fieldset` grouping, use `IressFieldGroup` which provides a semantic `<fieldset>` with a legend:
-
-```tsx
-<IressOUI allowModeChange />
-```
-
-[View "FieldsetMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--fieldset-migration)
-
-#### RadioGroup → IressFormField + IressRadioGroup
-
-```tsx
-<IressOUI allowModeChange />
-```
-
-[View "RadioGroupMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--radio-group-migration)
-
-#### Checkbox → IressFormField + IressCheckbox
-
-```tsx
-<IressOUI allowModeChange />
-```
-
-[View "CheckboxMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--checkbox-migration)
-
----
-
-## 4. IDS v4 → v6 component changes
-
-If your project also uses IDS v4 (`@iress/components-react`), these components need updating alongside the OUI migration.
-
-### Package import
-
-All imports change from `@iress/components-react` to `@iress-oss/ids-components`. Component names stay the same.
-
-### Breaking changes
-
-| Component                       | Change                                                             | Migration                                              |
-| ------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------ |
-| `IressButton`                   | `variant` → `mode`                                                 | Find and replace                                       |
-| `IressAlert`                    | `variant` → `status`; `error` → `danger`                           | Find and replace                                       |
-| `IressModal`                    | `isOpen` → `show`, `title` → `heading`, `onClose` → `onShowChange` | Find and replace                                       |
-| `IressForm`                     | Complete React Hook Form architecture                              | See [Form migration](#3-form-migration-formik--ids-v6) |
-| `IressField` → `IressFormField` | Renamed; uses `render` prop pattern                                | See [Form migration](#3-form-migration-formik--ids-v6) |
-| `IressText`                     | `variant` → `textStyle`, `mode` → `color`, `align` → `textAlign`   | Find and replace                                       |
-| `IressStack`                    | `gutter` → `gap`                                                   | Find and replace                                       |
-| `IressDivider`                  | `gutter` removed                                                   | Use `my` / `mx` styling props                          |
-| `IressBadge` → `IressPill`      | Renamed                                                            | Find and replace                                       |
-
-### Low-risk components (unchanged API)
-
-These components only need an import path update:
-
-- `IressPanel`
-- `IressInline`
-- `IressIcon`
-- `IressSkeleton`
-- `IressSpinner`
-- `IressProgress`
-
-> For a comprehensive list of all v5-to-v6 component changes, see [Migrating from v5](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-v5-to-v6--docs).
-
----
-
-## 5. Testing migration
-
-### Remove IDS v4 test utilities
-
-IDS v6 uses standard React Testing Library — no special test utilities needed.
-
-[View "RemoveTestUtils" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--remove-test-utils)
-
-### Update test patterns
-
-| IDS v4 pattern                       | IDS v6 pattern                                       |
-| ------------------------------------ | ---------------------------------------------------- |
-| `idsFireEvent.click(el)`             | `fireEvent.click(el)` or `await userEvent.click(el)` |
-| `await findByTestId('x__button')`    | `getByRole('button', { name: 'X' })`                 |
-| `mockLazyLoadedComponents()`         | Remove — components load synchronously               |
-| Async `findBy*` for component render | Synchronous `getBy*` in most cases                   |
-
-### Prefer accessibility queries
-
-[View "AccessibilityQueries" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--accessibility-queries)
-
-### Update Jest / Vitest configuration
-
-```tsx
-<IressOUI allowModeChange />
-```
-
-[View "JestVitestConfig" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--jest-vitest-config)
-
-### Form test migration
-
-```tsx
-<IressOUI allowModeChange />
-```
-
-[View "FormTestMigration" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-oui--form-test-migration)
-
----
-
-## 6. Styling migration
-
-### CSS class changes
-
-OUI and IDS v4 used different class naming conventions that no longer exist in v6:
-
-```css
-/* ❌ OUI classes — no longer exist */
-.oui-button {
-}
-
-/* ❌ IDS v4 Stencil classes — no longer exist */
-.sc-iress-button-h {
-}
-
-/* ✅ IDS v6 — use styling props or design tokens */
-```
-
-### Use styling props instead of custom CSS
-
-IDS v6 exposes global styling props on every component:
-
-```tsx
-// Spacing
-<IressPanel p="lg" m="xl" />
-
-// Responsive
-<IressPanel p={{ base: 'sm', xl: 'lg' }} />
-
-// Colour
-<IressPanel bg="alt" />
-```
-
-### Use design tokens for custom styles
-
-```css
-/* ✅ Preferred — design tokens */
-.custom-element {
-  color: var(--iress-color-text-primary);
-  padding: var(--iress-spacing-md);
-}
-```
-
-### Cascade layers
-
-All IDS v6 CSS lives in cascade layers. If your own un-layered CSS is being overridden, declare layer order:
-
-```css
-@layer reset, base, tokens, recipes, utilities;
-```
-
----
-
-## 7. Common patterns
-
-### Pattern 1: Simple form field
-
-```tsx
-<IressFormField
-  name="fieldName"
-  label="Field Label"
-  render={(props) => <IressInput {...props} />}
-  rules={{ required: 'Required' }}
-/>
-```
-
-### Pattern 2: Complete form
-
-```tsx
-<IressForm onSubmit={handleSubmit} defaultValues={{ field1: '', field2: '' }}>
-  <IressFormField
-    name="field1"
-    label="First field"
-    render={(props) => <IressInput {...props} />}
-  />
-  <IressFormField
-    name="field2"
-    label="Second field"
-    render={(props) => <IressInput {...props} />}
-  />
-  <IressButton type="submit" mode="primary">
-    Submit
-  </IressButton>
-</IressForm>
-```
-
-### Pattern 3: Modal with form
-
-```tsx
-<IressModal show={isOpen} onShowChange={setIsOpen} heading="Edit item">
-  <IressForm onSubmit={handleSubmit}>
-    <IressFormField
-      name="name"
-      label="Name"
-      render={(props) => <IressInput {...props} />}
-    />
-    <IressButton type="submit" mode="primary">
-      Save
-    </IressButton>
-  </IressForm>
-</IressModal>
-```
-
-### Pattern 4: Contextual menu
-
-```tsx
-<IressContextualMenu
-  items={[
-    { key: 'edit', label: 'Edit', onClick: handleEdit },
-    { key: 'delete', label: 'Delete', onClick: handleDelete },
-  ]}
-/>
-```
-
----
-
-## 8. Common gotchas
-
-| Problem                              | Cause                                            | Solution                                                                  |
-| ------------------------------------ | ------------------------------------------------ | ------------------------------------------------------------------------- |
-| Components have no styles            | Missing CSS import                               | Add `import '@iress-oss/ids-components/dist/style.css'` to your app entry |
-| Form validation not working          | Using HTML5 attributes (`required`, `maxLength`) | Move all validation to the `rules` prop on `IressFormField`               |
-| Modal won't close                    | Using `isOpen` prop                              | Rename to `show`                                                          |
-| Button variant not applying          | Using `variant` prop                             | Rename to `mode`                                                          |
-| Tests fail with "Cannot find module" | Jest can't transform IDS v6                      | Update `transformIgnorePatterns` in your test config                      |
-| `idsFireEvent` not found             | Using removed IDS v4 test utils                  | Replace with standard `fireEvent` from React Testing Library              |
-| Form fields render without labels    | Using standalone `<Label>`                       | Move the label text into the `label` prop on `IressFormField`             |
-| Custom CSS overriding components     | Cascade layer ordering                           | Declare `@layer` order in your stylesheet                                 |
-
----
-
-## 9. Full component reference
-
-| OUI component    | IDS v6 equivalent                                    | Complexity | Notes                                  |
-| ---------------- | ---------------------------------------------------- | ---------- | -------------------------------------- |
-| `Button`         | `IressButton`                                        | Low        | `variant` → `mode`                     |
-| `Input`          | `IressFormField` + `IressInput`                      | High       | Requires form context                  |
-| `TextArea`       | `IressFormField` + `IressInput`                      | High       | Use `rows` prop                        |
-| `Label`          | `IressFormField` `label` prop                        | Medium     | No separate component                  |
-| `FormGroup`      | `IressFormField`                                     | High       | Built-in to FormField                  |
-| `Fieldset`       | `IressFieldGroup`                                    | Low        | Use `label` prop                       |
-| `RadioGroup`     | `IressFormField` + `IressRadioGroup`                 | High       | Requires form context                  |
-| `Radio`          | `IressRadio`                                         | Medium     | Must be in `IressRadioGroup`           |
-| `Checkbox`       | `IressFormField` + `IressCheckbox`                   | Medium     | —                                      |
-| `Modal`          | `IressModal`                                         | Medium     | `isOpen` → `show`, `title` → `heading` |
-| `DropdownButton` | `IressDropdownMenu` / `IressSelect` / `IressPopover` | Medium     | Depends on use case — see above        |
-| `ProgressBar`    | `IressProgress`                                      | Low        | Props unchanged                        |
-| `Badge`          | `IressPill`                                          | Low        | `variant` → `mode`                     |
-| `Scrollable`     | `scrollable` styling prop                            | Low        | Available on any component             |
-
-| IDS v4 component           | IDS v6 change                             | Complexity |
-| -------------------------- | ----------------------------------------- | ---------- |
-| `IressButton`              | `variant` → `mode`                        | Low        |
-| `IressAlert`               | `variant` → `status`; `error` → `danger`  | Low        |
-| `IressText`                | `variant` → `textStyle`, `mode` → `color` | Low        |
-| `IressStack`               | `gutter` → `gap`                          | Low        |
-| `IressModal`               | `isOpen` → `show`, `title` → `heading`    | Medium     |
-| `IressForm` / `IressField` | React Hook Form architecture              | High       |
-| `IressBadge`               | Renamed to `IressPill`                    | Low        |
-| `IressPanel`               | Import path only                          | Low        |
-| `IressInline`              | Import path only                          | Low        |
-| `IressDivider`             | `gutter` removed; use `my`/`mx`           | Low        |
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-oui-to-v6--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-oui-to-v6--docs)*
-
-
----
-
-# Migration from v4 to v5
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Migration from v4 to v5 in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-migration-from-v4-to-v5--docs)
-
-This is a step-by-step guide for upgrading your application from IDS v4 to v5.
-
-## Updating your dependencies
-
-### Upgrade IDS and themes
-
-Update your dependencies in your `package.json` file to the following:
-
-```json
-"dependencies": {
-  "@iress-oss/ids-components": "^5.0.0",
-  "@iress/themes": "^5.0.0"
-}
-```
-
-or run:
-
-```
-yarn add @iress-oss/ids-components@^5.0.0 @iress/themes@^5.0.0
-```
-
-### Upgrade React
-
-The minimum required version of React is 17. If you are using an older version of React, you will need to update it.
-
-## Updating imports
-
-### Changing components
-
-Update your imports to the new package name:
-
-[View "ComponentsImport" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--components-import)
-
-You can run both packages together, so you can migrate components one by one.
-
-[View "MigrateComponentsOneByOne" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--migrate-components-one-by-one)
-
-### Importing component styles
-
-IDS v5 no longer injects CSS into the DOM. You will need to import the stylesheet directly into your application.
-
-```ts
-import '@iress-oss/ids-components/dist/style.css';
-```
-
-## Update Jest configuration
-
-If you are using Jest, you will need to update your Jest configuration to add the new IDS package to your `transformIgnorePatterns`.
-
-**Note:** If you are using version 4 and version 5 in parallel, you will need to keep the old IDS packages in your `transformIgnorePatterns` until you have completely migrated over your components.
-
-```json
-"transformIgnorePatterns": [
-  "/node_modules/(?!@iress-oss/ids-components)"
-]
-```
-
-If you are mocking CSS files for your tests, you'll also need to make sure the new stylesheet is matched by your `moduleNameMapper`:
-
-[View "JestModuleNameMapper" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--jest-module-name-mapper)
-
-## Handling breaking changes
-
-### Components
-
-Since the move to React, the majority of the components have been simplified to improve developer experience. We have listed the changes in this google doc by component, so you can attend to each component separately.
-
-[{`Google doc`}](https://docs.google.com/document/d/1H3-zFDftCHDjwaFkwFxVo1uziPsOj8qJn7p3NFG3aUg/edit)
-
-### Testing
-
-Components are no longer loaded asynchronously, so you can test them as you would any other React component. The testing utilities have been removed from the package, so you will need to update your tests to use [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) or another testing library.
-
-Below is an example of a changed test using React Testing Library.
-
-```tsx
-<Iressv5 allowModeChange />
-```
-
-[View "TestDiff" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--test-diff)
-
-#### Component specific testing
-
-Some components have additional testing requirements. The changed testing requirements will be listed on each component's docs page.
-
-These include:
-
-- [Form](/docs/components-form--docs#testing)
-- [Modal](/docs/components-modal--docs#testing)
-- [Slideout](/docs/components-slideout--docs#testing)
-
-### Styling
-
-The original CSS framework used for IDS was based on the Stencil library. It was lightly scoped (no shadow DOM) using CSS classes like: `sc-iress-radio-h sc-iress-radio-s`.
-
-These classes have been removed from version 5. If you are targeting components using these classes, it will be good for you review if you should adapt the CSS in a different way (ie. using design tokens/CSS variables instead, which should work no matter the class name, or adding custom classes to the IDS components). If targeting elements is still required, the new classes will be formatted as: `.ids-radio-${ids-version}`, and nested elements will use a modified BEM naming convention: `.ids-radio--label-${ids-version}`. The version number will be exposed; you can import it via Javascript, SASS and CSS module values to make future upgrades easier.
-
-#### Option 1: Use design tokens and custom classes
-
-This is the recommended approach. You can use design tokens and custom classes to style the components.
-
-```css
-.custom-radio {
-  --iress-text-color: red;
-  align-self: center;
-}
-```
-
-```tsx
-<IressRadio className="custom-radio" />
-```
-
-#### Option 2: Target the new classes
-
-This option is **not recommended** and should be used as a last resort, as the class names can change in future, in which case your stylesheet will no longer have any effect. It is recommended to use design tokens or custom classes instead.
-
-```scss
-@use '@iress-oss/ids-components/dist/constants/index.scss' as *;
-
-.ids-radio-#{$ids-version} {
-  align-self: center;
-}
-
-.ids-radio--label-#{$ids-version} {
-  color: red;
-}
-```
-
-### Theme tokens
-
-There are a few token changes that have changed (though this has been relatively minor). The version 5 themes have been updated to use the new design tokens, however if you are using version 4 in parallel with version 5, you may notice that the version 4 styles can no longer find the removed/changed tokens.
-
-To fix this issue, please backfill the tokens in your application until you have finished your migration.
-
-```scss
-/* TODO: Will be removed once we have moved to IDS version 5 */
-/* Change to the name(s) of the themes you want to back fill. */
-.iress-theme-light {
-  --iress-alert-error-text-color: var(--iress-alert-danger-text-color);
-  --iress-alert-error-background-color: var(
-    --iress-alert-danger-background-color
-  );
-  --iress-alert-error-border-color: var(--iress-alert-danger-border-color);
-  --iress-alert-error-heading-icon-text-color: var(
-    --iress-alert-danger-heading-icon-text-color
-  );
-
-  --iress-button-margin-right: var(--iress-g-spacing-xs);
-
-  --iress-combobox-option-meta-font-weight: var(
-    --iress-a-muted-font-weight,
-    var(--iress-g-font-weight, normal)
-  );
-  --iress-combobox-option-meta-text-color: var(
-    --iress-g-muted-text-color,
-    var(--iress-default-text-color--light)
-  );
-
-  --iress-filter-option-meta-font-weight: var(
-    --iress-a-muted-font-weight,
-    var(--iress-g-font-weight, normal)
-  );
-  --iress-filter-option-meta-text-color: var(
-    --iress-g-muted-text-color,
-    var(--iress-default-text-color--light)
-  );
-
-  --iress-form-field-margin-bottom: var(
-    --iress-a-vertical-spacing-lg,
-    var(--iress-g-spacing-lg)
-  );
-
-  --iress-table-cell-buy-text-color: var(
-    --iress-table-cell-positive-text-color
-  );
-  --iress-table-cell-sell-text-color: var(
-    --iress-table-cell-negative-text-color
-  );
-  --iress-table-cell-selected-buy-text-color: var(
-    --iress-table-cell-selected-positive-text-color
-  );
-  --iress-table-cell-selected-sell-text-color: var(
-    --iress-table-cell-selected-negative-text-color
-  );
-
-  --iress-validation-message-error-text-color: var(
-    --iress-validation-message-danger-text-color
-  );
-}
-```
-
-## AG grid theme
-
-As of version 5, we only support the lite AG grid theme, which is used in conjunction with the default alpine theme. In version 5, its imports have changed slightly.
-
-Run the following command to install the AG grid lite theme:
-
-```
-yarn add @iress/ag-grid-theme@^5.0.0
-```
-
-Then you can import the AG Grid theme CSS, import the relevant IDS theme, and hook up the styles by setting a class of ag-theme-alpine ag-theme-iress-lite on your grid wrapper.
-
-```tsx
-<Iressv5 allowModeChange />
-```
-
-[View "AgGridTheme" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--ag-grid-theme)
-
-## Removing version 4
-
-Version 5 and version 4 can be run in parallel, but it is recommended to remove version 4 to avoid any conflicts once you have completely migrated over your components.
-
-Run the following to remove version 4 and its related packages:
-
-```
-yarn remove @iress/components @iress/components-react @iress/components-react-custom-elements @iress/ids-react-test-utils
-```
-
-### Remove `global.css`
-
-The `global.css` file has been removed, it is now recommended to include the Roboto font directly using Google Fonts.
-
-[View "RemoveGlobalCss" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--remove-global-css)
-
-### Remove from Jest configuration
-
-If you are using Jest, you will need to update your Jest configuration to remove the old IDS packages from your `transformIgnorePatterns`.
-
-[View "RemoveFromJestTransforms" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--remove-from-jest-transforms)
-
-You can also remove the `mockLazyLoadedComponents` function from your Jest setup.
-
-[View "RemoveFromJestSetup" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--remove-from-jest-setup)
-
-You should also be able to remove the style mocks from your Jest configuration's `moduleNameMapper`, unless you are using CSS-in-JS, as IDS no longer injects CSS into the DOM.
-
-[View "RemoveFromJestModuleMapper" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_resources-migration-guides-v5--remove-from-jest-module-mapper)
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-migration-from-v4-to-v5--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-migration-from-v4-to-v5--docs)*
-
-
----
-
-# Migrating from v5 to v6
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Migrating from v5 to v6 in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-v5-to-v6--docs)
-
-This guide covers all breaking changes, deprecations, and new features introduced in version 6 of the Iress Design System. While the list is extensive, most changes relate to look-and-feel rather than code.
-
----
-
-## Overview
-
-### Optimised token system
-
-The design token count has been reduced from **940 to 88**, focusing on the essentials required to rebrand an application from a client style guide — similar to the original global tokens in previous IDS versions.
-
-The new token system enables closer brand parity, including:
-
-- Custom **remote font stylesheets** attached to a theme
-- An **accent colour** to further emphasise a client's brand
-- **Radius tokens** controlled at group level (badge, button, form, layout)
-
-**What this means in practice:**
-
-- Border widths and styles are no longer customisable via tokens. Inputs will always have a `1px` border; tabs always look the same except for colours and radius.
-- Animations and transitions have been removed from theme customisation.
-- Old themes have been translated to the new tokens as closely as possible, but minor visual inconsistencies may appear where tokens are now hard-coded.
-
-### Default theme
-
-Version 6 ships with a **fully styled Iress-branded default theme**. Loading a theme is now **optional** — only required for theme switching (e.g. multi-client applications) or backwards compatibility with older IDS versions.
-
-### Styling props
-
-Utility classes (e.g. `iress-hide--sm`) and internal component tokens (e.g. `--iress-text-color`) have been replaced with **global styling props** available on every component.
-
-```tsx
-// Padding and margin via props
-<IressPanel p="lg" m="xl" bg="alt" />
-
-// Responsive values
-<IressPanel p={{ base: 'sm', xl: 'lg' }} bg="alt" />
-```
-
-Utility classes for components have been changed to functions:
-
-```tsx
-// Apply Panel styling to a native div
-<div className={panel()} />
-```
-
-> **Note:** Styling props only accept design token values. For custom values, use standard CSS. Not every internal component token has a matching styling prop — only those needed for rebranding.
-
-### Cascade layers
-
-All component CSS now lives in its own cascade layer, making overrides straightforward. However, un-layered CSS now takes priority over component styles by default.
-
-To control priority, declare your own layer order:
-
-```css
-@layer reset, base, tokens, recipes, utilities;
-```
-
-### Panda CSS (for contributors)
-
-SASS modules have been replaced with [Panda CSS](https://panda-css.com/) for type-safe styles and styling props. See the updated contributing guidelines for details.
-
----
-
-## Component changes
-
-### Alert
-
-| Change                 | Details                                                                         |
-| ---------------------- | ------------------------------------------------------------------------------- |
-| Removed `headingLevel` | Use a native heading tag inside the `heading` prop                              |
-| Removed `headingText`  | Use the `heading` prop                                                          |
-| Deprecated `footer`    | Use `actions` or `children` instead                                             |
-| New `actions`          | Styled buttons based on alert status. Accepts `IressButtonProps[]`              |
-| New `icon`             | Change or remove the icon                                                       |
-| New `variant`          | Change alert style depending on context                                         |
-| New `onDismiss`        | Add dismiss functionality                                                       |
-| New `multiLine`        | Display on multiple lines for longer content (single row after `md` by default) |
-
-### Autocomplete
-
-| Change                   | Details                                              |
-| ------------------------ | ---------------------------------------------------- |
-| Removed `watermark`      | No longer supported                                  |
-| Hook: `options` required | `options` is now required in `useAutocompleteSearch` |
-| Hook: `displayResults`   | Removed from hook return                             |
-
-### Badge → Pill (renamed)
-
-`IressBadge` has been renamed to `IressPill`. Use the new component.
-
-### Button
-
-| Change                             | Details                                                                        |
-| ---------------------------------- | ------------------------------------------------------------------------------ |
-| Removed `attrs`                    | Pass attributes directly to the component                                      |
-| Removed `link` mode                | Use other button modes for actions, or the new `IressLink` for paragraph links |
-| Removed `danger` mode              | Use `status="danger"`                                                          |
-| Removed `positive` mode            | Use `status="success"`                                                         |
-| Removed `negative` mode            | Use `status="danger"`                                                          |
-| New `quaternary` and `muted` modes | —                                                                              |
-| New `element` prop                 | Render as a custom component (e.g. React Router `Link`, Next.js `Link`)        |
-| New `icon` prop                    | Render an icon-only button with even padding. `children` becomes the tooltip   |
-
-### ButtonGroup
-
-| Change                            | Details                                                                                 |
-| --------------------------------- | --------------------------------------------------------------------------------------- |
-| Removed `options`                 | Use `IressButton` children instead                                                      |
-| `onChange` simplified             | Returns the selected value directly (no longer `{ selected }`)                          |
-| `defaultValue`/`onChange`/`value` | Now type-aware based on `multiple` prop — arrays when `true`, single value when `false` |
-
-### Card
-
-| Change                        | Details                                                                          |
-| ----------------------------- | -------------------------------------------------------------------------------- |
-| Removed `composeIDSCardSlots` | Use the `card` styling function                                                  |
-| Removed `composeIDSCard`      | Use the `card` styling function                                                  |
-| New `element` prop            | Render as button or link. Alternatively use `IressButtonCard` or `IressLinkCard` |
-| Layout change                 | Now stretches to container width by default                                      |
-
-### Checkbox
-
-| Change                              | Details                                                                        |
-| ----------------------------------- | ------------------------------------------------------------------------------ |
-| `readonly` → `readOnly`             | —                                                                              |
-| Removed `mapCheckboxGroupOptions`   | Map arrays directly to `IressCheckboxGroup`                                    |
-| Removed `hiddenControl` and `touch` | Use the new `variant` prop (`"card"` or `"touch"`)                             |
-| New `variant` prop                  | `"card"` — checkbox on top right with heading. `"touch"` — larger touch target |
-| Updated `ref`                       | Now exposes `blur()`, `focus()`, and `input` (underlying DOM element)          |
-| Removed ref methods                 | `check()` and `reset()` removed from ref                                       |
-
-### CheckboxGroup
-
-| Change                              | Details                                            |
-| ----------------------------------- | -------------------------------------------------- |
-| `readonly` → `readOnly`             | —                                                  |
-| Removed `full` layout               | Use `stack` or `block`                             |
-| Removed `hiddenControl` and `touch` | Use the new `variant` prop (`"card"` or `"touch"`) |
-
-### CheckboxMark
-
-No longer has a `ref` prop. Wrap the element in a `<div ref={elementRef} />` and query from there.
-
-### Col
-
-No changes.
-
-### Combobox (removed)
-
-`IressCombobox` and `IressMultiCombobox` have been removed. Use:
-
-- `IressSelect` for restricted selection from options
-- `IressAutocomplete` for free-text input with suggestions
-
-### Container
-
-No changes.
-
-### Divider
-
-| Change            | Details                                                                 |
-| ----------------- | ----------------------------------------------------------------------- |
-| Removed `gutter`  | Use `my` (or `mx` if vertical) styling prop                             |
-| No default margin | Works correctly inside `IressStack` and `IressInline` without overrides |
-
-### Editor
-
-| Change                                   | Details                                                                                               |
-| ---------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Removed second `onChange` parameter      | Use the new `onUpdate` handler to react to Tiptap update events                                       |
-| New `IressEditor.SimpleToolbar` children | Children are appended to the toolbar                                                                  |
-| SSR/Next.js change                       | Styles are no longer injected into the DOM. Include `@iress/ids-editor/dist/style.css` in your bundle |
-
-### Expander
-
-| Change                    | Details                                                |
-| ------------------------- | ------------------------------------------------------ |
-| Removed `mode="heading"`  | Use `mode="section"` or custom styles                  |
-| `onChange` simplified     | Returns the open state directly (no longer `{ open }`) |
-| New `activatorStyle` prop | Customise the activator button directly                |
-
-### Field
-
-| Change                                      | Details                                                                                         |
-| ------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| Removed `optional`                          | Use `required` instead                                                                          |
-| New `supplementary` / `renderSupplementary` | Shown below the field; hidden when `error` or `errorMessages` is set                            |
-| Errors now below field                      | Errors animate in below the field                                                               |
-| Built-in bottom margin                      | Fields have bottom margin for error/supplementary area — **do not wrap fields in `IressStack`** |
-| New `horizontal`                            | Inline label/input layout                                                                       |
-| New `labelWidth`                            | Control label container width                                                                   |
-| New `removeErrorMargin`                     | Removes error space reservation                                                                 |
-
-### FieldGroup
-
-| Change                 | Details                                                              |
-| ---------------------- | -------------------------------------------------------------------- |
-| Removed `optional`     | Use `required` instead                                               |
-| New `supplementary`    | Shown below the group; hidden when `error` or `errorMessages` is set |
-| Errors below group     | Shown with a border to distinguish from child field errors           |
-| Built-in bottom margin | Same as `Field` — **do not wrap in `IressStack`**                    |
-
-### Filter → DropdownMenu (renamed)
-
-`IressFilter` has been renamed and moved to the `DropdownMenu` pattern component.
-
-### Hide (deprecated)
-
-Use the `srOnly` or `hide` styling props available on any component.
-
-### Icon
-
-| Change                  | Details                                                                                                                                             |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Removed `mode`          | Use `color` instead                                                                                                                                 |
-| `name` is now type-safe | IDE autocompletion available                                                                                                                        |
-| Removed `size`          | Inherits font size from parent. Use custom CSS for specific sizes; use `IressImage` for large icons                                                 |
-| New `IressIconProvider` | Required for optimal Material Symbols usage with font subsetting. Already included in `IressProvider` and `IressShadow` — no need to add separately |
-| New `type` prop         | Select icon provider (`'fontawesome'` \| `'material'`)                                                                                              |
-| New `filled` prop       | Material Symbols filled variant                                                                                                                     |
-
-### Image
-
-New component for displaying responsive images.
-
-### Inline
-
-| Change           | Details                                   |
-| ---------------- | ----------------------------------------- |
-| `gutter` → `gap` | Accepts the larger spacing token spectrum |
-| New `rowGap`     | Set top/bottom gap when content wraps     |
-
-### Input
-
-| Change                     | Details                                                      |
-| -------------------------- | ------------------------------------------------------------ |
-| Removed `watermark`        | —                                                            |
-| Clearing `clearable` input | Now triggers `onChange`                                      |
-| New `variant` prop         | Change the look of the input for certain contexts            |
-| New `actions` prop         | Add buttons with opinionated styling to the end of the input |
-| New hover and focus states | `prepend` and `append` change colour when focused            |
-
-### InputCurrency
-
-No code changes (inherits Input styling changes).
-
-### Label
-
-Removed `optional` prop. Use `required` instead.
-
-### Link
-
-New component for anchor links in text paragraphs. Accepts the same props as `IressButton` except `mode` and `status`.
-
-### Menu
-
-| Change                            | Details                                                                                 |
-| --------------------------------- | --------------------------------------------------------------------------------------- |
-| `defaultValue`/`onChange`/`value` | Type-aware based on `multiSelect` — arrays when `true`, single value when `false`       |
-| Removed `MenuSelected` interface  | Menu is now generic extending `FormControlValue`                                        |
-| Removed `mapMenuItems`            | Map `IressMenuItem` using arrays directly                                               |
-| Removed `role="nav"`              | Nav styling removed. For navigation menus, use `IressSideNav` pattern or custom styling |
-| New `radio` variant               | Radio prepend to show selection                                                         |
-| New `subdraw` variant             | Menu groups as popovers                                                                 |
-| New `side` variant                | Side menu with collapsible groups                                                       |
-| New `rail` variant                | Blue background, best with icons                                                        |
-
-### MenuItem
-
-| Change                            | Details                                                |
-| --------------------------------- | ------------------------------------------------------ |
-| `defaultValue`/`onChange`/`value` | Same `multiSelect` typing changes as Menu              |
-| Removed `MenuSelected` interface  | —                                                      |
-| Removed `attrs`                   | Add props directly                                     |
-| Removed custom menu item hooks    | Use the new `element` prop to wrap a routing component |
-| New `icon` prop                   | Shows an icon; children becomes a tooltip              |
-
-### MenuGroup
-
-New component for grouping menu items, headings, and text. Renders differently based on the menu variant.
-
-### MenuHeading
-
-Removed `level`. Use `element` instead.
-
-### MenuText
-
-No changes.
-
-### Modal
-
-| Change                       | Details                                                                                                                              |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `padding` → `p` styling prop | Default padding changed from `'md'` to `'lg'`                                                                                        |
-| Removed `fullpage`           | Modal no longer covers the entire screen on small devices                                                                            |
-| Custom heading node          | `id` is no longer automatically added. Set the `id` prop on your custom node to connect to the modal. String headings work as before |
-| No shadow                    | Slight blur on the background instead                                                                                                |
-
-### Navbar (removed)
-
-This component has been removed. Since IDS serves multiple parent applications with different navbars, this is best kept in individual applications (built with IDS components for consistency).
-
-### Panel
-
-| Change                       | Details                                                         |
-| ---------------------------- | --------------------------------------------------------------- |
-| Removed `background`         | Use the `bg` prop (e.g. `bg="alt"` or `bg="colour.neutral.20"`) |
-| Removed `bg="page"`          | —                                                               |
-| `padding` → `p` styling prop | —                                                               |
-| Responsive padding           | Set each edge individually per breakpoint                       |
-
-**Before:**
-
-```tsx
-<IressPanel
-  padding={{
-    xs: { b: 'sm', t: 'lg', r: 'sm', l: 'lg' },
-    xl: { b: 'none', t: 'sm', r: 'lg', l: 'sm' },
-  }}
-/>
-```
-
-**After:**
-
-```tsx
-<IressPanel pb={{ xs: 'sm', xl: 'none' }} pt={{ xs: 'lg', xl: 'sm' }} />
-```
-
-### Pill
-
-New component supporting the data colour spectrum with automatic rounded corners. For static content only (status indicators, counters). For interactive use, see `IressTag`.
-
-### Placeholder
-
-| Change                | Details                              |
-| --------------------- | ------------------------------------ |
-| Removed `transparent` | Use `bg="transparent"`               |
-| New colour scheme     | Uses `data.50` for better visibility |
-
-### Popover
-
-| Change                        | Details                                                                                                                                                |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Removed `disabledAutoToggle`  | Use `show`, `onActivated`, and `onDeactivated` for controlled popovers. `ref` is reserved for uncontrolled                                             |
-| Removed `width`               | Use `contentStyle` prop with custom CSS                                                                                                                |
-| Deprecated `contentClassName` | Use `contentStyle.className`                                                                                                                           |
-| New `contentStyle`            | Customise `className`, `style`, and styling props on the popover content                                                                               |
-| New `fluid`                   | Full container width                                                                                                                                   |
-| New `offset`                  | Number or object for popover positioning offset (default: 5)                                                                                           |
-| New `nested`                  | Nested navigation behaviour                                                                                                                            |
-| Z-index                       | Now uses z-index for consistent layering                                                                                                               |
-| Default padding               | ⚠️ Content now has `padding: spacing.4` by default. If you were adding your own inner padding, override with `contentStyle={{ padding: 'spacing.0' }}` |
-
-### Progress
-
-| Change                            | Details                                                                              |
-| --------------------------------- | ------------------------------------------------------------------------------------ |
-| Renders `<meter>` or `<progress>` | `<meter>` when `min` is set; `<progress>` otherwise                                  |
-| Single element                    | No more `__progressbar` test id                                                      |
-| Simplified ARIA                   | Only `aria-label` is rendered. If testing by attribute (not role), update your tests |
-
-### Provider
-
-| Change                     | Details                                                                |
-| -------------------------- | ---------------------------------------------------------------------- |
-| Removed `noIcons`          | Use `noDefaultFont` instead                                            |
-| Removed `injectPushStyles` | No longer available                                                    |
-| New `noSubsetting`         | Controls automatic font subsetting via Google Fonts CDN for icons      |
-| New `noDefaultFont`        | Controls loading of default Iress font from CDN                        |
-| Icon handling              | Now uses `IressIconProvider` with Material Symbols instead of icon CSS |
-
-> **Note:** `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, and `IressIconProvider`. You do not need to add these separately. `IressShadow` includes `IressProvider` internally, so no additional providers are needed when using `IressShadow` either.
-
-### Radio
-
-| Change                              | Details                                            |
-| ----------------------------------- | -------------------------------------------------- |
-| Removed `mapRadioGroupOptions`      | Map arrays directly to `IressRadioGroup`           |
-| Removed `hiddenControl` and `touch` | Use the new `variant` prop (`"card"` or `"touch"`) |
-
-### RadioGroup
-
-| Change                              | Details                                            |
-| ----------------------------------- | -------------------------------------------------- |
-| `readonly` → `readOnly`             | —                                                  |
-| Removed `hiddenControl` and `touch` | Use the new `variant` prop (`"card"` or `"touch"`) |
-
-### RadioMark
-
-New component for rendering a standalone radio mark indicator (similar to `IressCheckboxMark`).
-
-### Readonly
-
-| Change               | Details                                                                                                                                                              |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Styled to match      | Styled to match other input text sizes. Use the new `textStyle` prop for larger text (e.g. statistics)                                                               |
-| New `actions` prop   | Array of button props rendered alongside the readonly value (e.g. edit/save toggles). Actions passed to `IressInput` in `readOnly` mode are also forwarded           |
-| DOM structure change | ⚠️ Inner content is now wrapped in an additional `wrapper` div inside `root`. CSS selectors targeting direct children of the readonly root element may need updating |
-
-### RichSelect → Select (renamed)
-
-`IressRichSelect` has been renamed to `IressSelect`. See the **Select** section below for full details.
-
-### Row
-
-| Change              | Details                                                         |
-| ------------------- | --------------------------------------------------------------- |
-| New `rowGap` prop   | Set a different gap between rows vs `gutter`                    |
-| Removed `useColGap` | Use `IressInline` to add gaps between non-`IressCol` components |
-
-### Select
-
-| Change                                 | Details                                                                                                                     |
-| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| Renamed from `IressRichSelect`         | Now uses `LabelValueMeta` via `options`                                                                                     |
-| `readonly` → `readOnly`                | —                                                                                                                           |
-| `defaultValue`/`onChange`/`value`      | Type-aware based on `multiSelect` — arrays when `true`, single value when `false`                                           |
-| `value`/`defaultValue` accepts strings | Now also accepts a plain string or `FormControlValue` that resolves to the matching option automatically                    |
-| New `multiSelectLimit` prop            | Limits visible selected tags before collapsing to "+N more" summary (default `5`). Display only — does not limit selections |
-| New `native` prop                      | Renders a browser-native select (replaces the old `IressSelect`)                                                             |
-| `onChange` signature                   | `onChange(event, value, labelValue)` — `value` is the primitive (`FormControlValue`), `labelValue` is the full `LabelValueMeta` |
-| Grouped items                          | Now supported                                                                                                               |
-| New hover and focus states             | —                                                                                                                           |
-
-The v5 native `IressSelect` with `children` (option elements) is replaced by `IressSelect` with the `native` prop:
-
-**Before (v5):**
-
-```tsx
-<IressSelect>
-  <IressSelectOption value="1">Option 1</IressSelectOption>
-</IressSelect>
-```
-
-**After (v6):**
-
-```tsx
-<IressSelect native options={[{ label: 'Option 1', value: '1' }]} />
-```
-
-### SelectOption (removed)
-
-Use the `options` prop on `IressSelect` instead.
-
-### Skeleton
-
-`textVariant` changed to `textStyle`.
-
-### SkipLink
-
-| Change                     | Details                     |
-| -------------------------- | --------------------------- |
-| Removed `targetId`         | Use `href` instead          |
-| Styled as secondary button | No more custom skip link UI |
-
-### Slider
-
-| Change                  | Details                          |
-| ----------------------- | -------------------------------- |
-| `readonly` → `readOnly` | —                                |
-| `hiddenOn` → `srOnly`   | Consistent with other components |
-
-### Slideout
-
-| Change                       | Details                                                     |
-| ---------------------------- | ----------------------------------------------------------- |
-| Removed `backdrop`           | Use `IressModal` instead                                    |
-| Removed `size="lg"`          | Use a separate page for large content                       |
-| `padding` → `p` styling prop | —                                                           |
-| Single slideout only         | Only one open at a time                                     |
-| Removed `injectPushStyles`   | Styles are applied via the `style` attribute on `eleToPush` |
-| Custom heading node          | Same `id` handling change as Modal                          |
-
-### Spinner
-
-Removed `name` prop. All spinners are now consistent across Iress products.
-
-### Stack
-
-| Change                  | Details                                                                                                                                          |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `gutter` → `gap`        | Accepts the larger spacing token spectrum                                                                                                        |
-| No longer uses `margin` | Uses flexbox. Use `horizontalAlign` or wrap children with `IressInline` for inline display. Use `alignSelf` on children for individual alignment |
-| New `element` prop      | Render as a different HTML element (e.g. `<ul>` for lists)                                                                                       |
-| New `horizontalAlign`   | Set horizontal alignment of stack content                                                                                                        |
-| New `verticalAlign`     | Set vertical alignment with additional options (`'between'`, `'around'`, `'evenly'`)                                                             |
-
-### Styled
-
-New component for applying IDS styling props to any element or component without using the styled-system JSX components directly.
-
-### Table
-
-| Change                            | Details                                                                               |
-| --------------------------------- | ------------------------------------------------------------------------------------- |
-| `IressTableFormattedValue`        | No more `currencyCode` prop. Use `currencyFormatOptions={{ withSymbol: true/false }}` |
-| Columns must be an array          | Object format removed                                                                 |
-| New `rowProps`                    | Set styling props for the entire row                                                  |
-| New `alternate` prop              | Control row striping                                                                  |
-| New `removeRowBorders` prop       | —                                                                                     |
-| `TableColumn.align` → `textAlign` | Consistent with styling props                                                         |
-| `TableColumn` styling props       | `bg`, `color`, `noGutter`, `srOnly`, `textAlign`, `textStyle` applied to the column   |
-| Removed `IressTable.useTable()`   | Import `useTable` directly                                                            |
-| Updated default styling           | More display-friendly, print-friendly. `compact` version has a stylised heading       |
-
-### TabSet
-
-| Change               | Details                                                                                                                                    |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Removed `mapTabs`    | Use `Array.map` to map objects to `IressTab`                                                                                               |
-| Selected tabs        | Now have a highlighted background                                                                                                          |
-| New `panelStyle`     | Custom style for panel area                                                                                                                |
-| New `tabHolderStyle` | Custom style for tab holder area                                                                                                           |
-| New `type`           | Tab styling type (`'primary'` \| `'secondary'`)                                                                                            |
-| Active indicator     | Now uses `ResizeObserver` and `getBoundingClientRect()` for positioning — correctly updates when tab content changes size or layout shifts |
-
-### Tag
-
-| Change               | Details                                            |
-| -------------------- | -------------------------------------------------- |
-| Data colour spectrum | Now supported                                      |
-| New compact version  | For placing inside inputs (e.g. `TagInput`)        |
-| Delete hover         | Red hover on the delete button to warn of deletion |
-
-### TagInput
-
-| Change                         | Details                                   |
-| ------------------------------ | ----------------------------------------- |
-| Removed `testid__input__input` | Use `testid__input` instead               |
-| Removed `testid__items`        | —                                         |
-| `onTagDelete` signature        | Now includes event: `(label, e) => void`  |
-| `onTagDeleteAll` signature     | Now includes event: `(label, e) => void`  |
-| New `tagLimit`                 | Limit tags before shortening (default: 5) |
-| New `selectedOptionsTagText`   | Text for tag count display                |
-
-### Text
-
-| Change                       | Details                                                                                      |
-| ---------------------------- | -------------------------------------------------------------------------------------------- |
-| Removed `display` variations | Use `textStyle` with `typography.body.lg`, `typography.heading.4`, or `typography.heading.5` |
-| `variant` → `textStyle`      | —                                                                                            |
-| `mode` → `color`             | —                                                                                            |
-| `align` → `textAlign`        | —                                                                                            |
-| Nested elements              | Now styles nested `<table>` and `<pre>` tags                                                 |
-| Icons in headings            | No longer have automatic padding. Use `ml`/`mr` on `IressIcon` or wrap with `IressInline`    |
-
-### Toast
-
-`IressToast` is no longer directly available. Use `IressToasterProvider` and `useToaster` to create toasts. For static toasts, use `IressAlert`.
-
-> **Note:** `IressToasterProvider` is already included in `IressProvider` and `IressShadow` — you do not need to add it separately if you are using either of these.
-
-### Toaster
-
-| Change                      | Details                                                   |
-| --------------------------- | --------------------------------------------------------- |
-| `IressToaster` removed      | Use `IressToasterProvider` and `useToaster`               |
-| Multiple providers          | Use different `id` props for different positions/contexts |
-| `children` → `content`      | In `useToaster`                                           |
-| `headingLevel` → `heading`  | —                                                         |
-| `headingText` → `heading`   | —                                                         |
-| No `position` at hook level | Set `position` on `IressToasterProvider`                  |
-| Simple string toasts        | Pass a string directly for a simple message               |
-| `status` value change       | `'error'` is now `'danger'` (Alert-based)                 |
-
-### Toggle
-
-| Change                  | Details                                                                              |
-| ----------------------- | ------------------------------------------------------------------------------------ |
-| Controlled/uncontrolled | Now uses `checked`/`defaultChecked` like checkbox. Explicitly set whether controlled |
-| Removed forwarded `ref` | Wrap in a `<div>` and use query selectors if needed                                  |
-| New `defaultChecked`    | For uncontrolled mode                                                                |
-| New `disabled`          | Disable the toggle                                                                   |
-
-### Tooltip
-
-| Change                       | Details                                                  |
-| ---------------------------- | -------------------------------------------------------- |
-| `align` prop simplified      | Removed deprecated enum option, now uses string literals |
-| Removed `IressTooltip.Align` | Use string values directly                               |
-
-### ValidationLink
-
-No changes.
-
-### ValidationMessage
-
-No changes.
-
-### ValidationSummary
-
-New `itemStyle` prop for customising each item's `className`, `style`, and styling props.
-
----
-
-## New pattern components
-
-### Breadcrumbs
-
-Display a list of links as breadcrumbs showing navigation hierarchy.
-
-### Contextual Menu
-
-Show a context or "more actions" menu.
-
-### Dropdown Menu
-
-Show a filtering/navigation menu in a dropdown (replaces `IressFilter`).
-
-### Form (refactored to pattern)
-
-| Change              | Details                                                                                                                                                         |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Now a pattern       | Accepts `short` and `long` patterns for form template and validation                                                                                            |
-| Removed `form` prop | Use `IressHookForm` to pass a custom `react-hook-form` instance                                                                                                 |
-| Validation summary  | No longer shown by default. Use `IressFormValidationSummary` via the `alert` prop                                                                               |
-| Peer dependency     | `react-hook-form` is now a peer dependency — add it to your project. IDS wrappers (e.g. `IressForm.useWatch`) are removed; use `react-hook-form` hooks directly |
-
-### Loading
-
-No changes.
-
-### Shadow
-
-Render IDS inside a **shadow DOM** for micro-frontends. Styles are automatically imported and encapsulated. Supports custom style injection and wraps `IressProvider` automatically.
-
-### Side Nav
-
-Combines the `rail` and `side` menu variants into a side navigation component for large applications.
-
----
-
-## Theme changes
-
-| Change                        | Details                                                                                                                                                           |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Removed `theme` export        | Use `cssVars` from `@iress-oss/ids-tokens`                                                                                                                        |
-| Removed `designTokens` export | Use `designTokens` from `@iress-oss/ids-tokens`                                                                                                                   |
-| Removed view modes            | For touch mode, use the touch sub-theme (e.g. `iress-beta-theme-light--touch`). Compact has been removed; use component-level `compact` variants or styling props |
-
-### AG Grid
-
-| Change                         | Details                                                    |
-| ------------------------------ | ---------------------------------------------------------- |
-| Removed `IressAgGridContainer` | Import `getAgGridThemeProps` and spread onto `AgGridReact` |
-| AG Grid &lt; 33 dropped        | Minimum version is now 33                                  |
-| Removed utility classes        | Use custom CSS classes for cell styling                    |
-
-**Before:**
-
-```tsx
-<IressAgGridContainer>
-  <AgGridReact {...gridProps} />
-</IressAgGridContainer>
-```
-
-**After:**
-
-```tsx
-<AgGridReact {...getAgGridThemeProps()} {...gridProps} />
-```
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-v5-to-v6--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-v5-to-v6--docs)*
-
-
----
-
-# Accessibility
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Accessibility in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-accessibility--docs)
-
-These are all styling props related to screen readers and accessibility. They allow you to hide content from visual users while still providing context for screen reader users, ensuring an inclusive experience for all users.
-
-## `focusable`
-
-The `focusable` prop allows you to set the focus state of a component. This is useful for components that need to be interactive via keyboard, but are not necessarily a button or input.
-
-It accepts the following values:
-
-| Value                  | Description                                                    |
-| ---------------------- | -------------------------------------------------------------- |
-| `'true'`               | Standard focus-visible ring on the element itself              |
-| `'within'`             | Focus ring when the element or any of its children are focused |
-| `'inset'`              | Inset focus ring inside the element                            |
-| `'has-button'`         | Focus ring delegated from a child button                       |
-| `'has-input'`          | Focus ring delegated from a child input, textarea, or select   |
-| `'has-switch'`         | Focus ring delegated from a child switch                       |
-| `'label-after'`        | Focus ring applied to the adjacent label                       |
-| `'expander-activator'` | Focus ring for expander/activator elements                     |
-| `'select-activator'`   | Focus ring for select activator elements                       |
-| `'slider'`             | Focus ring for range slider thumbs                             |
-| `'group'`              | Focus ring triggered by a parent `.group` container            |
-| `'within:inset'`       | Inset focus ring when a child element is focused               |
-
-```tsx
-<IressText focusable tabIndex={0}>
-  This element will have focus styles applied when it is focused. This is useful for accessibility and keyboard navigation.
-</IressText>
-```
-
-[View "focusable" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-accessibility--focusable)
-
-### Inset focus ring
-
-```tsx
-<IressText focusable="inset" tabIndex={0} p="spacing.4" bg="colour.neutral.20">
-  This element uses an inset focus ring, which renders inside the element boundary.
-</IressText>
-```
-
-[View "focusableInset" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-accessibility--focusable-inset)
-
-## `srOnly`
-
-The `srOnly` prop allows you to set a component to be only visible on screen readers. It is used to ensure the screen reader has context of the screen to help the user understand the tasks required of them.
-
-```tsx
-<IressText srOnly>
-  Hello screen readers
-</IressText>
-```
-
-[View "srOnly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-accessibility--sr-only)
-
-### Responsive
-
-The `srOnly` prop is responsive, allowing you to show content on larger screens and hiding them on smaller ones, enabling screen readers to have the same context as larger screens as they are not limited by device size.
-
-```tsx
-<IressText>
-  This content is visible on large screens and screen readers
-</IressText>
-```
-
-[View "srOnlyResponsive" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-accessibility--sr-only-responsive)
-
----
-
-## See also
-
-- [Accessibility foundations](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_foundations-accessibility--docs) — Key practices and principles for building accessible components in IDS
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-accessibility--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-accessibility--docs)*
-
-
----
-
-# Colour
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Colour in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-colour--docs)
-
-These are all styling props related to changing the foreground and background
-colours of a component.
-
-## Background (`bg`)
-
-The `bg` prop allows you to change the background of any component to the value of a colour token. It should be used sparingly, and usually alongside the `color` prop to ensure accessibility.
-
-Below is an example of a component using `bg` and `color` to create a featured panel that changes colour depending on the theme.
-
-```tsx
-<IressPanel bg="colour.primary.fill" color="colour.primary.onFill" />
-```
-
-[View "bg" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-colour--bg)
-
-## Foreground (`color`)
-
-The `color` prop allows you to change the foreground of any component to the value of a colour token. It should be used sparingly, and usually alongside the `bg` prop to ensure accessibility.
-
-Below is an example of using the `color` prop to highlight text throughout a component.
-
-[View "color" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-colour--color)
-
----
-
-## Best Practices
-
-When applying colors to components, always use design tokens instead of hardcoded values. This ensures theme compatibility, accessibility, and consistency across your application.
-
-### ✅ DO: Use semantic color tokens
-
-Semantic color tokens like `colour.primary.text`, `colour.primary.fill`, and `colour.system.success.text` automatically adapt to theme changes and maintain proper contrast ratios.
-
-```tsx
-// ✅ CORRECT - Semantic color tokens
-<IressText color="colour.primary.text">Primary text</IressText>
-<IressPanel bg="colour.primary.fill" color="colour.primary.onFill">
-  Featured content
-</IressPanel>
-<IressText color="colour.system.success.text">Success message</IressText>
-```
-
-### ✅ DO: Use the special "alt" value for alternate backgrounds
-
-The special value `"alt"` provides an alternate background color that adapts to the current theme context.
-
-```tsx
-// ✅ CORRECT - Using "alt" for alternate backgrounds
-<IressPanel bg="alt">Content with alternate background</IressPanel>
-```
-
-### ✅ DO: Pair `bg` and `color` props together for accessibility
-
-When setting a background color, always pair it with an appropriate foreground color to ensure proper contrast and accessibility.
-
-```tsx
-// ✅ CORRECT - Paired bg and color for accessibility
-<IressPanel bg="colour.primary.fill" color="colour.primary.onFill">
-  Accessible content with proper contrast
-</IressPanel>
-
-<IressPanel bg="colour.system.success.fill" color="colour.system.success.onFill">
-  Success message with guaranteed contrast
-</IressPanel>
-```
-
-### ❌ DON'T: Use hardcoded hex values
-
-Hardcoded hex values don't respond to theme changes and may violate accessibility standards.
-
-```tsx
-// ❌ INCORRECT - Hardcoded hex values
-<IressText style={{ color: '#000000' }}>Text</IressText>
-<IressPanel style={{ backgroundColor: '#13213F', color: '#FFFFFF' }}>
-  Content
-</IressPanel>
-
-// ✅ CORRECT - Semantic tokens
-<IressText color="colour.primary.text">Text</IressText>
-<IressPanel bg="colour.primary.fill" color="colour.primary.onFill">
-  Content
-</IressPanel>
-```
-
-### ✅ DO: Use `cssVars` for CSS-in-JS
-
-If you're using a CSS-in-JS library, use `cssVars` from `@iress-oss/ids-tokens` to reference color tokens.
-
-```tsx
-import { cssVars } from '@iress-oss/ids-tokens';
-import styled from 'styled-components';
-
-// ✅ CORRECT - Using cssVars for colors in CSS-in-JS
-const StyledPanel = styled.div`
-  background-color: ${cssVars.colour.primary.fill};
-  color: ${cssVars.colour.primary.onFill};
-`;
-
-const SuccessText = styled.span`
-  color: ${cssVars.colour.system.success.text};
-`;
-```
-
-### ❌ DON'T: Use inline styles for colors
-
-Inline styles bypass the design system and prevent theme adaptation.
-
-```tsx
-// ❌ INCORRECT - Inline styles
-<IressPanel style={{ backgroundColor: '#F5F5F5', color: '#333333' }}>
-  Content
-</IressPanel>
-
-// ✅ CORRECT - Styling props
-<IressPanel bg="colour.neutral.10" color="colour.neutral.80">
-  Content
-</IressPanel>
-```
-
-## Token Reference
-
-For a complete reference of all available color tokens, including WCAG contrast ratios and allowed foreground/background combinations, see the tokens documentation.
-
-**Most commonly used color tokens:**
-
-- `colour.primary.fill`, `colour.primary.onFill` - Primary brand colors with guaranteed contrast
-- `colour.primary.text`, `colour.primary.surface` - Primary text and surface colors
-- `colour.neutral.10`, `colour.neutral.20`, `colour.neutral.80` - Neutral grays for backgrounds and text
-- `colour.system.success.text`, `colour.system.danger.text`, `colour.system.warning.text` - System status colors
-- `"alt"` - Special value for alternate backgrounds
-
-[View Full Colour Token Reference](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/tokens_colour--docs)
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-colour--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-colour--docs)*
-
-
----
-
-# Layout
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Layout in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-layout--docs)
-
-These are all styling props related to modifying layout.
-
-## `alignSelf`
-
-The `alignSelf` prop allows you to override the alignItems value set by a parent flex container for individual components. This is useful when you want to adjust the alignment of a single item without affecting the entire container.
-
-```tsx
-<IressStack gap="md" horizontalAlign="center">
-<IressPanel bg="alt">First panel (no alignSelf)</IressPanel>
-<IressPanel bg="colour.primary.surface" alignSelf={alignSelf}>
-Panel with alignSelf prop
-</IressPanel>
-<IressPanel bg="alt">Third panel (no alignSelf)</IressPanel>
-</IressStack>
-```
-
-[View "alignSelf" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-layout--align-self)
-
-## `flex="1"`
-
-The `flex="1"` prop is used to make a component grow and fill available space in a flex container. Setting `flex` to `1` allows the component to take up one unit of available space, ensuring consistent behavior across components.
-
-Note: We only allow `1` as a value to maintain design consistency.
-
-```tsx
-<IressStack gap="md" horizontalAlign="center" style={{ height: 400 }}>
-<IressPanel bg="alt">First panel (no flex)</IressPanel>
-<IressPanel>
-{children ?? (
-<>
-{args.flex
-? 'Panel with flex set to 1, so it will fill the available space.'
-: 'This panel is not set to flex, so it will only take up the space it needs.'}
-</>
-)}
-</IressPanel>
-<IressPanel bg="alt">Third panel (no flex)</IressPanel>
-</IressStack>
-```
-
-[View "flex1" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-layout--flex1)
-
-## `hideFrom` and `hideBelow`
-
-The `hideFrom` and `hideBelow` props allow you to hide content from both visual users and screen readers at different breakpoints. This is useful when certain content is not relevant on smaller screens, and you want to ensure that screen reader users have the same experience as visual users.
-
-```tsx
-<IressPanel hideFrom="lg">
-  Only on mobile screens
-</IressPanel>
-```
-
-[View "hideFrom" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-layout--hide-from)
-```tsx
-<IressPanel hideBelow="lg">
-  Only on large screens
-</IressPanel>
-```
-
-[View "hideBelow" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-layout--hide-below)
-
-## `scrollable`
-
-The scrollable prop enables scrolling behavior for an element when its content
-overflows its bounds. It sets the `overflow` CSS property to `auto`, allowing
-scrollbars to appear as needed. The scrollbar has been styled to match the
-design system.
-
-You can set the value to `true` to enable scrolling on both axes, or specify `'x'` or `'y'` to restrict scrolling to a single axis.
-
-```tsx
-<IressCard px="sm">
-<IressPanel>
-<h1>History of Iress</h1>
-
-<p>
-<strong>Iress Limited</strong> (originally “Iress Market Technology”)
-is an Australian-based software company that provides technology
-solutions to the financial services industry. Its clients span sectors
-including wealth management, financial advice, trading, investment
-management, mortgages, and superannuation.
-</p>
-
-<section>
-<h2>Early Years (1993 – 2000)</h2>
-<p>
-Iress was founded in <strong>1993</strong> in Melbourne, Australia.
-The company's initial product offerings focused on market data and
-trading software for financial institutions and professionals
-needing live pricing and analytics tools.
-</p>
-<p>
-In <strong>2000</strong>, Iress listed on the{' '}
-<strong>Australian Stock Exchange (ASX)</strong> under the ticker{' '}
-<strong>IRE</strong>, signaling its growth beyond market data
-services.
-</p>
-</section>
-</IressPanel>
-</IressCard>
-),
-};
-
-export const stretch: Story = {
-...alignSelf,
-args: {
-stretch: true,
-},
-render: ({ children, ...args }) => (
-<IressContainer bg="alt" py="xl" px="xl" borderRadius="none" fluid>
-<IressRow gutter="xl" verticalAlign="stretch">
-<IressCol>
-<IressPanel>
-{children ?? (
-<>
-{args.stretch
-? 'Panel is set to stretch, so it will fill the available space.'
-: 'This panel is not set to stretch, so it will only take up the space it needs.'}
-</>
-)}
-</IressPanel>
-</IressCol>
-<IressCol>
-<IressPanel>
-<h1>History of Iress</h1>
-
-<p>
-<strong>Iress Limited</strong> (originally “Iress Market
-Technology”) is an Australian-based software company that provides
-technology solutions to the financial services industry. Its
-clients span sectors including wealth management, financial
-advice, trading, investment management, mortgages, and
-superannuation.
-</p>
-
-<section>
-<h2>Early Years (1993 – 2000)</h2>
-<p>
-Iress was founded in <strong>1993</strong> in Melbourne,
-Australia. The company's initial product offerings focused on
-market data and trading software for financial institutions and
-professionals needing live pricing and analytics tools.
-</p>
-<p>
-In <strong>2000</strong>, Iress listed on the{' '}
-<strong>Australian Stock Exchange (ASX)</strong> under the
-ticker <strong>IRE</strong>, signaling its growth beyond market
-data services.
-</p>
-</section>
-</IressPanel>
-</IressCol>
-</IressRow>
-</IressContainer>
-```
-
-[View "scrollable" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-layout--scrollable)
-
-## `stretch`
-
-The `stretch` prop is used to stretch a component to fill the available space. It is used in components such as `IressPanel` to ensure each column in a layout takes up the same amount of space.
-
-[View "stretch" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-layout--stretch)
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-layout--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-layout--docs)*
-
-
----
-
-# Radius
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Radius in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-radius--docs)
-
-These are all styling props related to changing the radius of a component
-affects the visual softness and perceived friendliness of the interface,
-influencing the overall user experience.
-
-## `borderRadius`
-
-The `borderRadius` prop allows you to change the border radius of any component. It should be used sparingly, and often used when creating custom components that are not part of the design system, however you still want to retain the look and feel of the rest of the system.
-
-```tsx
-<IressInput
-borderRadius={borderRadius}
-px="spacing.4"
-py="spacing.2"
-placeholder="Search everything"
-/>
-```
-
-[View "borderRadius" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-radius--border-radius)
-
-### Removing border radius
-
-In some cases you may need to remove the border-radius to achieve design requirements. This can be done using `radius.000` or `none`.
-
-```tsx
-<IressPanel borderRadius={borderRadius} bg="alt">
-No radius here
-</IressPanel>
-```
-
-[View "noBorderRadius" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-radius--no-border-radius)
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-radius--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-radius--docs)*
-
-
----
-
-# Styling props
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Styling props in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-styling-props--docs)
-
-This page lists all the custom styling properties available in our components,
-which design tokens they are mapped to and which CSS properties they affect.
-
-Styling properties are the recommended way of customising components for your needs, as they ensure your styles are compatible when any theme is applied to your application. If you need further customisation, you can use regular CSS and reference the tokens directly.
-
-These replace the utility classes and internal component tokens provided by previous versions of the design system.
-
-## Reference
-
-| JSX Prop | CSS Property | Token Mapping | Responsive |
-| --- | --- | --- | --- |
-| `alignSelf` | align-self | N/A |  |
-| `bg` | background | Colour |  |
-| `borderRadius` | border-radius | Radius |  |
-| `color` | color | Colour |  |
-| `flex` | flex | N/A |  |
-| `focusable` | border and box-shadow | Colour |  |
-| `hideBelow` | display | N/A |  |
-| `hideFrom` | display | N/A |  |
-| `maxWidth` | max-width | N/A |  |
-| `m` | margin | Spacing | ✓ |
-| `mx` | margin-inline | Spacing | ✓ |
-| `my` | margin-block | Spacing | ✓ |
-| `mb` | margin-bottom | Spacing | ✓ |
-| `ml` | margin-left | Spacing | ✓ |
-| `mr` | margin-right | Spacing | ✓ |
-| `mt` | margin-top | Spacing | ✓ |
-| `noGutter` | margin-block-end | N/A |  |
-| `p` | padding | Spacing | ✓ |
-| `px` | padding-inline | Spacing | ✓ |
-| `py` | padding-block | Spacing | ✓ |
-| `pb` | padding-bottom | Spacing | ✓ |
-| `pl` | padding-left | Spacing | ✓ |
-| `pr` | padding-right | Spacing | ✓ |
-| `pt` | padding-top | Spacing | ✓ |
-| `scrollable` | Multiple properties | N/A |  |
-| `srOnly` | Multiple properties | N/A | ✓ |
-| `stretch` | align-self, height and flex | N/A |  |
-| `textAlign` | text-align | N/A |  |
-| `textStyle` | font | Typography |  |
-| `width` | width | N/A | ✓ |
-
-[View "Reference" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-reference--reference)
-
----
-
-## Responsive
-
-Props marked responsive can accept either a single value that affects all breakpoints, or a responsive object map that sets a different value based on breakpoint.
-
-```tsx
-<IressPanel p="xs" /> // applies extra small padding to all breakpoints
-<IressPanel p={{ base: 'lg', md: 'sm' }} /> // applies large padding by default, and changes to small padding once on medium sized screens.
-```
-
-## `iressCss`
-
-In some cases you may need to apply styling props to a non-IDS component. You can do this by using the `iressCss` prop, which accepts an object of styling props and returns a string of class names that can be applied to any element.
-
-This will also work without JSX, allowing you to apply styling props to any element in your application.
-
-```tsx
-<div className={iressCss({ p: 'xs', bg: 'colour.primary.surface' })}>
-  This div has extra small padding and a primary background colour.
-</div>
-```
-
-## `IressStyled`
-
-The `IressStyled` component is a flexible wrapper that gives you direct access to all styling props. Use it when you need custom styling without creating a dedicated component or writing custom CSS.
-
-```tsx
-<IressStyled p="xs" bg="colour.primary.surface">
-  This div has extra small padding and a primary background colour.
-</IressStyled>
-```
-
-## Migrating from version 5
-
-### Utility classes
-
-If you have been using the utility classes from previous versions of IDS (eg. `iress-p--xs`), you will need to replace them with the new styling props. The utility classes are no longer supported in version 6.
-
-```tsx
-<DiffViewer oldValue={`<IressPanel className="iress-m--sm" />`}
-newValue={`<IressPanel m="sm" />`}
-/>
-```
-
-[View "MigratingFromUtilities" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-reference--migrating-from-utilities)
-
----
-
-### Internal component tokens
-
-If you have been using the internal component tokens (eg. `--iress-background-color`), you will need to replace them with the new styling props. The internal component tokens are no longer supported in version 6.
-
-#### Note
-
-- Not every single internal component token has a direct mapping to a styling prop. For example, things like border width are no longer customisable. This helps ensure a consistent and accessible experience for all applications no matter the theme that is applied to them.
-- Styling props only allow token values, not custom values (eg. `colour.system.status.danger` is allowed but not `red`). This is to ensure that the styling props are theme agnostic and can be used with any theme. If you need to use a custom value, you can use custom CSS or inline styles.
-
-```tsx
-<DiffViewer oldValue={`<IressPanel style={{ '--iress-background-color': 'var(--iress-g-success-color)' }} />`}
-newValue={`<IressPanel bg="colour.system.success.fill" />`}
-/>
-```
-
-[View "MigratingFromInternalTokens" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-reference--migrating-from-internal-tokens)
-
----
-
-## Best Practices
-
-### When to use styling props
-
-Styling props should be your **first choice** for customizing components in most cases. They provide:
-
-- **Theme compatibility**: Automatically work with any theme
-- **Type safety**: TypeScript ensures you use valid tokens
-- **Consistency**: Design tokens enforce the design system's visual language
-- **Accessibility**: Semantic color tokens maintain proper contrast ratios
-- **Maintainability**: Changes to design tokens automatically update all usages
-
-**✅ Use styling props when:**
-
-- Customizing IDS components (`IressPanel`, `IressButton`, `IressText`, etc.)
-- Applying spacing, colors, or typography that exist in the design system
-- Building new features that should follow the design system
-- Creating reusable layouts and patterns
-
-### When to use `iressCss()`
-
-The `iressCss()` function is useful for applying styling props to **non-IDS components** or when you need to combine styling props programmatically.
-
-**✅ Use `iressCss()` when:**
-
-- Styling third-party library components that don't accept styling props
-- Applying styling props to native HTML elements (`<div>`, `<section>`, etc.)
-- Building complex, reusable style combinations
-- Working outside of JSX (e.g., in vanilla JavaScript)
-
-```tsx
-// ✅ CORRECT - Using iressCss for non-IDS component
-<ThirdPartyComponent
-  className={iressCss({ p: 'md', bg: 'colour.primary.surface' })}
->
-  Content
-</ThirdPartyComponent>
-
-// ✅ CORRECT - Using iressCss with native HTML
-<div className={iressCss({ display: 'flex', gap: 'sm' })}>
-  Flexbox layout with design system spacing
-</div>
-```
-
-### When to use CSS-in-JS
-
-If you're using a CSS-in-JS library (like styled-components, emotion, or vanilla-extract), use the **`cssVars` object from `@iress-oss/ids-tokens`** to reference design tokens.
-
-**✅ Use CSS-in-JS with `cssVars` when:**
-
-- Building custom components with a CSS-in-JS library
-- Creating complex styling logic that needs JavaScript
-- Working with third-party CSS-in-JS frameworks
-- Need programmatic access to token values
-
-```tsx
-import { cssVars } from '@iress-oss/ids-tokens';
-import styled from 'styled-components';
-
-// ✅ CORRECT - Using cssVars in CSS-in-JS
-const StyledComponent = styled.div`
-  padding: ${cssVars.spacing[400]}; /* md spacing */
-  background-color: ${cssVars.colour.primary.fill};
-  color: ${cssVars.colour.primary.onFill};
-  font-family: ${cssVars.typography.fontFamily.body};
-`;
-
-// ❌ INCORRECT - Hardcoded values in CSS-in-JS
-const BadComponent = styled.div`
-  padding: 16px;
-  background-color: #13213f;
-  color: #ffffff;
-`;
-```
-
-### When to use custom CSS
-
-Custom CSS should be **reserved for edge cases** where styling props and `iressCss()` don't meet your needs.
-
-**✅ Use custom CSS when:**
-
-- Implementing complex selectors (`:hover:not(.disabled)`, `> * + *`)
-- Working with pseudo-elements (`::before`, `::after`)
-- Creating animations and transitions
-- Styling custom components with unique design requirements
-- Using CSS features not available in styling props (e.g., `grid-template-areas`)
-
-**Important**: Even in custom CSS, prefer referencing design tokens via CSS variables:
-
-```css
-.custom-component {
-  /* ✅ CORRECT - Reference tokens in custom CSS */
-  padding: var(--spacing-4); /* md spacing */
-  background-color: var(--colour-primary-fill);
-
-  /* ❌ INCORRECT - Hardcoded values */
-  padding: 16px;
-  background-color: #13213f;
-}
-```
-
-### Decision guide
-
-Use this flowchart to choose the right approach:
-
-1. **Is it an IDS component?**
-   - Yes → Use styling props (``)
-   - No → Go to step 2
-
-2. **Does it need design system styling?**
-   - Yes → Use `iressCss()` (`className={iressCss({ p: 'md' })}`)
-   - No → Go to step 3
-
-3. **Are you using a CSS-in-JS library?**
-   - Yes → Use `cssVars` from `@iress-oss/ids-tokens`
-   - No → Go to step 4
-
-4. **Does it need complex selectors or CSS features?**
-   - Yes → Use custom CSS with CSS variable references
-   - No → Reconsider if styling props or `iressCss()` can work
-
-## Common Anti-Patterns
-
-Avoid these common mistakes when styling components:
-
-### ❌ Using inline styles instead of styling props
-
-**Problem**: Inline styles bypass the design system, making code non-themeable and inconsistent.
-
-```tsx
-// ❌ INCORRECT - Inline styles with hardcoded values
-<IressPanel style={{ padding: '16px', backgroundColor: '#F5F5F5' }}>
-  Content
-</IressPanel>
-
-// ✅ CORRECT - Styling props with tokens
-<IressPanel p="md" bg="colour.neutral.10">
-  Content
-</IressPanel>
-```
-
-**Why this matters**: Inline styles won't respond to theme changes, breaking the visual consistency of your application.
-
-### ❌ Hardcoded colors instead of semantic tokens
-
-**Problem**: Hardcoded color values don't adapt to different themes and may fail accessibility standards.
-
-```tsx
-// ❌ INCORRECT - Hardcoded hex colors
-<IressText style={{ color: '#000000' }}>Primary text</IressText>
-<IressPanel style={{ backgroundColor: '#13213F', color: '#FFFFFF' }}>
-  Featured content
-</IressPanel>
-
-// ✅ CORRECT - Semantic color tokens
-<IressText color="colour.primary.text">Primary text</IressText>
-<IressPanel bg="colour.primary.fill" color="colour.primary.onFill">
-  Featured content
-</IressPanel>
-```
-
-**Why this matters**: Semantic tokens like `colour.primary.fill` and `colour.primary.onFill` are guaranteed to have proper contrast and automatically adapt to theme changes.
-
-### ❌ Using className for basic styling
-
-**Problem**: Adding custom classes for basic spacing/colors adds unnecessary CSS and bypasses the design system.
-
-```tsx
-// ❌ INCORRECT - Custom class for basic styling
-<IressPanel className="my-custom-padding">
-  Content
-</IressPanel>
-
-// CSS file:
-.my-custom-padding {
-  padding: 24px;
-}
-
-// ✅ CORRECT - Styling prop with token
-<IressPanel p="lg">
-  Content
-</IressPanel>
-```
-
-**Why this matters**: Styling props are more maintainable, type-safe, and ensure consistency. Custom classes should only be used for complex styling needs.
-
-### ❌ Arbitrary spacing values
-
-**Problem**: Using spacing values outside the design system's scale creates inconsistency.
-
-```tsx
-// ❌ INCORRECT - Arbitrary spacing value
-<IressPanel style={{ padding: '17px' }}>
-  Content
-</IressPanel>
-
-// ✅ CORRECT - Design system spacing scale
-<IressPanel p="md"> {/* 16px */}
-  Content
-</IressPanel>
-
-// ✅ ALSO CORRECT - If you need more, use the next step
-<IressPanel p="lg"> {/* 24px */}
-  Content
-</IressPanel>
-```
-
-**Why this matters**: The spacing scale (`xs`, `sm`, `md`, `lg`, `xl`) creates visual rhythm and consistency. Stick to the scale unless you have a very specific edge case.
-
-### When hardcoded values ARE acceptable
-
-There are rare cases where hardcoded values are acceptable:
-
-- **One-off edge cases** that don't fit the design system (after discussion with design team)
-- **Third-party library constraints** where styling props can't be applied
-- **Gradual migration** from legacy code (with a plan to refactor)
-- **Prototyping** (with the expectation to use tokens in production)
-
-Even in these cases, document why the exception exists and plan to revisit it.
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-styling-props--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-styling-props--docs)*
-
-
----
-
-# Sizing
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Sizing in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-sizing--docs)
-
-These are all styling props related to changing the size of a component,
-refining the users expectation of the content and making screens easier to
-scan.
-
-## Overview
-
-The sizing props are a collection of widths that are used throughout the design system. Although they are not part of the design tokens (which is more related to theming), we have exposed them to you to allow you to build consistent user experiences where you may need to deviate from the default props of a component.
-
-The sizes here can be used in the `maxWidth` or `width` prop of any component, but they have been documented here according to their designated component.
-
-## Input widths
-
-Input widths are sizes that suit a specific number of characters. This sets an expectation of what data a user has to enter. The following list is the widths we have created for inputs, and have been designed to be used with `IressInput` but can be used with any component.
-
-- `input.2`: Two character width, usually used for accessor codes
-- `input.4`: Four character width, usually used for CVC, one-time passwords and pin numbers
-- `input.6`: Six character width, usually used for one-time passwords and pin numbers
-- `input.8`: Eight character width
-- `input.10`: Ten character width, usually used for dates
-- `input.12`: Twelve character width
-- `input.16`: Sixteen character width, usually used for credit cards
-
-For variable data entry, you can use grid tokens. These are usually used inside `IressFieldGroup`, and denote a connection between fields with different widths (eg. First name and Last name under Name). In most cases where there is no relationship but you would like to compact the layout to make it easier to scan, and you should use `IressRow` and `IressCol` instead with the `span` prop.
-
-- `3/12`: 25% width of parent container
-- `6/12`: 50% width of parent container
-- `9/12`: 75% width of parent container
-- `12/12`: 100% width of parent container
-
-```tsx
-<IressPanel bg="alt" width="input.16">
-  Credit card number wide panel
-</IressPanel>
-```
-
-[View "inputWidths" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-sizing--input-widths)
-
-## Container widths
-
-Container widths are sizes that define the maximum width where content is considered easy to read on specific screen ranges. They are used by `IressContainer` to help ensure content is readable no matter the screen size.
-
-In some cases however, you may want to restrain the width even further (for example, single column content is usually easiest to read when it is confined to the centre of the screen). The container widths have been exposed so they can be used in the `maxWidth` prop of your own components.
-
-- `container.xs`: 100% of the screen's width
-- `container.sm`: 520px
-- `container.md`: 740px
-- `container.lg`: 960px
-- `container.xl`: 1160px
-- `container.xxl`: 1160px
-
-```tsx
-<IressContainer bg="alt" fluid maxWidth={maxWidth} width={width} p="xl">
-This container is extra readable cause its maxWidth is set to:{' '}
-<code>
-{typeof maxWidth === 'object'
-? stringifyStorybookArgs(maxWidth)
-: maxWidth}
-</code>
-.
-</IressContainer>
-```
-
-[View "containerWidths" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-sizing--container-widths)
-
-## Overlay widths
-
-Overlay widths are sizes that define the width of overlay components such as Modals and Slideouts.
-
-- `overlay.sm`: 368px
-- `overlay.md`: 628px
-- `overlay.lg`: 800px
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-sizing--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-sizing--docs)*
-
-
----
-
-# Spacing
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Spacing in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-spacing--docs)
-
-These are all styling props related to changing the spacing of a component.
-
-## Padding
-
-There are seven props you can use to customise the padding of any component. It accepts the entire spacing token spectrum.
-
-- `p`: Change the padding on all axes
-- `px`: Change the padding on the left and right of a component
-- `py`: Change the padding on the top and bottom of a component
-- `pl`: Change the padding on the left of a component
-- `pr`: Change the padding on the right of a component
-- `pt`: Change the padding on the top of a component
-- `pb`: Change the padding on the bottom of a component
-
-```tsx
-<IressPanel bg="alt" p="xl">
-  A panel that has extra large padding on all sides.
-</IressPanel>
-```
-
-[View "padding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--padding)
-
-```tsx
-<IressButton px={px} mode="primary">
-Submit
-</IressButton>
-```
-
-[View "button" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--button)
-
-```tsx
-<IressPanel bg="alt" pb="xl" pt="spacing.1" pl="md" pr="spacing.6">
-  A panel that has different padding on each side.
-</IressPanel>
-```
-
-[View "variablePadding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--variable-padding)
-
-### Responsive padding
-
-All padding props are responsive and can be changed according to different screen sizes.
-
-```tsx
-<IressPanel bg="alt">
-  A panel that has extra large padding on small screens and no padding on large screens.
-</IressPanel>
-```
-
-[View "responsivePadding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-padding)
-
-```tsx
-<IressPanel bg="alt">
-  A panel that has responsive padding on the vertical and horizontal axes.
-</IressPanel>
-```
-
-[View "responsiveVariablePadding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-variable-padding)
-
-### Migrating from version 5
-
-Responsive padding worked differently in version 5. The `p` prop no longer accepts a nested object of axes to change the padding, you must change every prop based on the breakpoint.
-
-```tsx
-<DiffViewer
-oldValue={`<IressPanel p={{ t: 'xl', b: 'xl' }} />`}
-newValue={`<IressPanel pt="xl" pb="xl" />`}
-/>
-```
-
-[View "MigratingPadding" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--migrating-padding)
-
-## Margin
-
-There are seven props you can use to customise the margin of any component. It accepts the entire spacing token spectrum, `auto` and negative values of the spacing token spectrum.
-
-- `m`: Change the margin on all axes
-- `mx`: Change the margin on the left and right of a component
-- `my`: Change the margin on the top and bottom of a component
-- `ml`: Change the margin on the left of a component
-- `mr`: Change the margin on the right of a component
-- `mt`: Change the margin on the top of a component
-- `mb`: Change the margin on the bottom of a component
-
-```tsx
-<IressPanel bg="alt" m="xl">
-  A panel that has the same margin on all sides.
-</IressPanel>
-```
-
-[View "margin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--margin)
-
-```tsx
-<IressPanel bg="alt" mb="xl" mt="spacing.1" ml="md" mr="spacing.6">
-  A panel that has different margin on each side.
-</IressPanel>
-```
-
-[View "variableMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--variable-margin)
-
-### Responsive margin
-
-All margin props are responsive and can be changed according to different screen sizes.
-
-```tsx
-<IressPanel bg="alt">
-  A panel that has extra large margin on small screens and no margin on large screens.
-</IressPanel>
-```
-
-[View "responsiveMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-margin)
-
-```tsx
-<IressPanel bg="alt">
-  A panel that has responsive margin on the vertical and horizontal axes.
-</IressPanel>
-```
-
-[View "responsiveVariableMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--responsive-variable-margin)
-
-### Negative margin
-
-Negative margin is supported in the same way as positive margin. You can use the same props to set negative margin.
-
-```tsx
-<IressPanel bg="colour.primary.surface" maxWidth="container.sm" mx="auto">
-<IressPanel />
-</IressPanel>
-```
-
-[View "negativeMargin" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--negative-margin)
-
-## `noGutter`
-
-The `noGutter` prop removes the bottom margin of the last direct child of a component. This is useful when you have nested content inside a component with padding, such as `IressPanel` or `IressCard`, to remove unnecessary spacing in your layout.
-
-```tsx
-<IressPanel>
-{children ?? (
-<ul>
-<li>
-{args.noGutter ? (
-<>
-Margin is removed due to <code>noGutter</code>
-</>
-) : (
-'Since lists have bottom margin, you can see there is extra white-space.'
-)}
-</li>
-</ul>
-)}
-</IressPanel>
-```
-
-[View "noGutter" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-spacing--no-gutter)
-
----
-
-## Best Practices
-
-Always use spacing tokens from the design system scale instead of hardcoded pixel values. This ensures visual consistency and rhythm across your application.
-
-### ✅ DO: Use spacing token aliases
-
-The spacing scale provides convenient aliases (`xs`, `sm`, `md`, `lg`, `xl`) that map to specific pixel values.
-
-```tsx
-// ✅ CORRECT - Using aliases
-<IressPanel p="xl">Extra large padding (48px)</IressPanel>
-<IressStack spacing="md">Medium gap between items (16px)</IressStack>
-```
-
-### ✅ DO: Use full token names
-
-You can also use the full token names (e.g., `spacing.4`) for the same effect as aliases.
-
-```tsx
-// ✅ CORRECT - Using full token names
-<IressPanel p="spacing.10">Same as xl (48px)</IressPanel>
-<IressStack spacing="spacing.4">Same as md (16px)</IressStack>
-```
-
-### ✅ DO: Use directional props for precise control
-
-Use directional spacing props (`px`, `py`, `pl`, `pr`, `pt`, `pb`) when you need different spacing on different axes.
-
-```tsx
-// ✅ CORRECT - Directional spacing with tokens
-<IressPanel px="lg" py="sm">
-  Horizontal padding: large (24px), Vertical padding: small (8px)
-</IressPanel>
-```
-
-### ❌ DON'T: Use hardcoded pixel values
-
-Hardcoded pixel values break the design system's visual rhythm and don't adapt to spacing scale changes.
-
-```tsx
-// ❌ INCORRECT - Hardcoded pixel values
-<IressPanel style={{ padding: '24px' }}>Content</IressPanel>
-
-// ✅ CORRECT - Spacing token
-<IressPanel p="lg">Content</IressPanel>
-```
-
-### ❌ DON'T: Use inline styles for spacing
-
-Inline styles bypass the design system and make code non-themeable.
-
-```tsx
-// ❌ INCORRECT - Inline styles
-<IressPanel style={{ margin: '16px 0', padding: '8px 24px' }}>
-  Content
-</IressPanel>
-
-// ✅ CORRECT - Styling props with tokens
-<IressPanel my="md" px="lg" py="sm">
-  Content
-</IressPanel>
-```
-
-### ✅ DO: Use `cssVars` for CSS-in-JS
-
-If you're using a CSS-in-JS library, use `cssVars` from `@iress-oss/ids-tokens` to reference spacing tokens.
-
-```tsx
-import { cssVars } from '@iress-oss/ids-tokens';
-import styled from 'styled-components';
-
-// ✅ CORRECT - Using cssVars for spacing in CSS-in-JS
-const StyledPanel = styled.div`
-  padding: ${cssVars.spacing[10]}; /* xl - 40px */
-  margin: ${cssVars.spacing[4]} 0; /* md - 16px vertical */
-  gap: ${cssVars.spacing[2]}; /* sm - 8px */
-`;
-
-// ✅ CORRECT - Directional spacing
-const StyledBox = styled.div`
-  padding-left: ${cssVars.spacing[6]}; /* lg - 24px */
-  padding-right: ${cssVars.spacing[6]};
-  padding-top: ${cssVars.spacing[2]}; /* sm - 8px */
-  padding-bottom: ${cssVars.spacing[2]};
-`;
-```
-
-### ❌ DON'T: Use arbitrary values - stick to the spacing scale
-
-The spacing scale is designed to create visual consistency. Avoid arbitrary values that don't fit the scale.
-
-```tsx
-// ❌ INCORRECT - Arbitrary spacing value
-<IressPanel style={{ padding: '17px' }}>Content</IressPanel>
-
-// ✅ CORRECT - Use the closest value from the scale
-<IressPanel p="md">Content (16px)</IressPanel>
-
-// ✅ ALSO CORRECT - If you need more, use the next step
-<IressPanel p="lg">Content (24px)</IressPanel>
-```
-
-## Token Reference
-
-For a complete reference of the full spacing scale with all available tokens (spacing.0 through spacing.10), visual examples, and pixel values, see the documentation.
-
-**Quick reference - Most commonly used spacing tokens:**
-
-- `spacing.1` / `xs`: 4px - Extra small spacing
-- `spacing.2` / `sm`: 8px - Small spacing
-- `spacing.4` / `md`: 16px - Medium spacing (default for many components)
-- `spacing.6` / `lg`: 24px - Large spacing
-- `spacing.10` / `xl`: 40px - Extra large spacing
-
-[View Full Spacing Token Reference](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/tokens_spacing--docs)
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-spacing--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-spacing--docs)*
-
-
----
-
-# Typography
-
-> **Guide:** `@iress-oss/ids-components`
-> **Storybook:** [Typography in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-typography--docs)
-
-These are all styling props related to changing the typography of a component.
-
-## `textStyle`
-
-The `textStyle` prop allows you to change the default text style of a component. For more control and nested element styling, it is recommended to use `IressText` instead.
-
-```tsx
-<IressPanel bg="alt" textStyle="typography.heading.5">
-  A panel with large text
-</IressPanel>
-```
-
-[View "textStyle" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-typography--text-style)
-
-## `textAlign`
-
-The `textAlign` prop allows you to change the alignment of text inside a component. For more control, it is recommended to use `IressText` instead.
-
-```tsx
-<IressPanel bg="alt" textAlign="center">
-  A panel with centered text
-</IressPanel>
-```
-
-[View "textAlign" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_styling-props-typography--text-align)
-
----
-
-## Best Practices
-
-For typography, the **IressText component is the preferred approach** for most use cases. It provides semantic HTML elements, accessibility features, and proper text styling out of the box.
-
-### ✅ DO (PREFERRED): Use the `IressText` component
-
-The `IressText` component is the recommended way to render text content. It handles typography tokens automatically and provides semantic HTML elements.
-
-```tsx
-// ✅ CORRECT - Use IressText (recommended)
-<IressText>Default body text with proper styling</IressText>
-
-<IressText element="h1">Heading rendered as h1 element</IressText>
-```
-
-**Why use IressText:**
-
-- Provides semantic HTML elements (`h1`, `h2`, `p`, `span`, etc.)
-- Handles typography tokens automatically
-- Ensures accessibility with proper heading hierarchy
-- No need to manage font properties manually
-
-### ✅ DO (ALTERNATIVE): Use `textStyle` prop with typography tokens
-
-When you need to apply typography styling to components that aren't text-specific (like `IressPanel`), use the `textStyle` prop with typography tokens.
-
-```tsx
-// ✅ CORRECT - Using textStyle prop with tokens
-<IressPanel textStyle="typography.heading.1">
-  Panel with heading-sized text
-</IressPanel>
-```
-
-**Available typography tokens:**
-
-- `typography.body.sm`, `typography.body.md` - Body text variants
-- `typography.heading.1`, `typography.heading.2`, `typography.heading.3` - Heading text variants
-
-### ❌ DON'T: Use inline styles for typography
-
-Inline styles with hardcoded font properties bypass the design system and don't respond to typography token updates.
-
-```tsx
-// ❌ INCORRECT - Hardcoded typography
-<h1 style={{ fontSize: '24px', fontWeight: 'bold', lineHeight: '1.2' }}>
-  Heading
-</h1>
-
-<p style={{ fontSize: '16px', fontFamily: 'Arial' }}>
-  Body text
-</p>
-
-// ✅ CORRECT - Use IressText
-<IressText element="h1">Heading</IressText>
-
-<IressText>Body text</IressText>
-```
-
-### ✅ DO: Use `cssVars` for CSS-in-JS
-
-If you're using a CSS-in-JS library, use `cssVars` from `@iress-oss/ids-tokens` to reference typography tokens.
-
-```tsx
-import { cssVars } from '@iress-oss/ids-tokens';
-import styled from 'styled-components';
-
-// ✅ CORRECT - Using cssVars for typography in CSS-in-JS
-const Heading = styled.h1`
-  font: ${cssVars.typography.heading[1]};
-`;
-
-const BodyText = styled.p`
-  font: ${cssVars.typography.md.regular};
-`;
-```
-
-### ❌ DON'T: Use hardcoded font properties
-
-Hardcoded font sizes, weights, and families don't adapt to design system changes and break consistency.
-
-```tsx
-// ❌ INCORRECT - Hardcoded font properties
-<div style={{
-  fontSize: '16px',
-  fontWeight: '600',
-  fontFamily: 'Inter, sans-serif'
-}}>
-  Content
-</div>
-
-// ✅ CORRECT - Use textStyle prop with token
-<IressPanel textStyle="typography.body.md">
-  Content
-</IressPanel>
-```
-
-### When to use IressText vs textStyle prop
-
-**Use `IressText` when:**
-
-- Rendering text content (paragraphs, headings, labels)
-- You need semantic HTML elements
-- Building accessible content with proper heading hierarchy
-- Creating text-focused UI components
-
-**Use `textStyle` prop when:**
-
-- Applying typography styling to non-text components
-- You already have a component and just need text styling
-- Working with layout components like `IressPanel` or `IressStack`
-
-## Token Reference
-
-For a complete reference of all available typography tokens with font families, sizes, weights, and line heights, see the documentation.
-
-Typography tokens include font family, size, weight, and line height specifications
-
-[View Full Typography Token Reference](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/tokens_typography--docs)
-
----
-
-*View in Storybook: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-typography--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-typography--docs)*
-
-
----
+<!-- skills/figma-to-ids.md -->
 
 # Skill: Figma to IDS Translation
 
@@ -16678,6 +14467,8 @@ For the full list of common anti-patterns (disabled buttons, redundant textStyle
 
 
 ---
+
+<!-- skills/ui-doctor.md -->
 
 # Skill: UI Doctor
 
@@ -18814,6 +16605,8 @@ For the full list of common anti-patterns with code examples, read the Common Mi
 
 ---
 
+<!-- skills/ui-translation.md -->
+
 # Skill: UI Translation
 
 ## Purpose
@@ -19369,6 +17162,8 @@ For the full list of common anti-patterns (disabled buttons, redundant textStyle
 
 
 ---
+
+<!-- skills/version-migration.md -->
 
 # Skill: IDS Version Migration
 
@@ -22455,3 +20250,893 @@ See references/common-gotchas.md for a comprehensive troubleshooting guide cover
 ## Reference
 
 - **Storybook and Guidelines:** https://main--691abcc79dfa560a36d0a74f.chromatic.com
+
+
+---
+
+<!-- styling-props/accessibility.md -->
+
+# Accessibility
+
+These are all styling props related to screen readers and accessibility. They allow you to hide content from visual users while still providing context for screen reader users, ensuring an inclusive experience for all users.
+
+## `focusable`
+
+The `focusable` prop allows you to set the focus state of a component. This is useful for components that need to be interactive via keyboard, but are not necessarily a button or input.
+
+It accepts the following values:
+
+| Value                  | Description                                                    |
+| ---------------------- | -------------------------------------------------------------- |
+| `'true'`               | Standard focus-visible ring on the element itself              |
+| `'within'`             | Focus ring when the element or any of its children are focused |
+| `'inset'`              | Inset focus ring inside the element                            |
+| `'has-button'`         | Focus ring delegated from a child button                       |
+| `'has-input'`          | Focus ring delegated from a child input, textarea, or select   |
+| `'has-switch'`         | Focus ring delegated from a child switch                       |
+| `'label-after'`        | Focus ring applied to the adjacent label                       |
+| `'expander-activator'` | Focus ring for expander/activator elements                     |
+| `'select-activator'`   | Focus ring for select activator elements                       |
+| `'slider'`             | Focus ring for range slider thumbs                             |
+| `'group'`              | Focus ring triggered by a parent `.group` container            |
+| `'within:inset'`       | Inset focus ring when a child element is focused               |
+
+### Inset focus ring
+
+## `srOnly`
+
+The `srOnly` prop allows you to set a component to be only visible on screen readers. It is used to ensure the screen reader has context of the screen to help the user understand the tasks required of them.
+
+### Responsive
+
+The `srOnly` prop is responsive, allowing you to show content on larger screens and hiding them on smaller ones, enabling screen readers to have the same context as larger screens as they are not limited by device size.
+
+---
+
+## See also
+
+- [Accessibility foundations](/foundations/accessibility) — Key practices and principles for building accessible components in IDS
+
+---
+
+---
+
+<!-- styling-props/colour.md -->
+
+# Colour
+
+These are all styling props related to changing the foreground and background
+colours of a component.
+
+## Background (`bg`)
+
+The `bg` prop allows you to change the background of any component to the value of a colour token. It should be used sparingly, and usually alongside the `color` prop to ensure accessibility.
+
+Below is an example of a component using `bg` and `color` to create a featured panel that changes colour depending on the theme.
+
+## Foreground (`color`)
+
+The `color` prop allows you to change the foreground of any component to the value of a colour token. It should be used sparingly, and usually alongside the `bg` prop to ensure accessibility.
+
+Below is an example of using the `color` prop to highlight text throughout a component.
+
+---
+
+## Best Practices
+
+When applying colors to components, always use design tokens instead of hardcoded values. This ensures theme compatibility, accessibility, and consistency across your application.
+
+### ✅ DO: Use semantic color tokens
+
+Semantic color tokens like `colour.primary.text`, `colour.primary.fill`, and `colour.system.success.text` automatically adapt to theme changes and maintain proper contrast ratios.
+
+```tsx
+// ✅ CORRECT - Semantic color tokens
+Primary text
+
+  Featured content
+
+Success message
+```
+
+### ✅ DO: Use the special "alt" value for alternate backgrounds
+
+The special value `"alt"` provides an alternate background color that adapts to the current theme context.
+
+```tsx
+// ✅ CORRECT - Using "alt" for alternate backgrounds
+Content with alternate background
+```
+
+### ✅ DO: Pair `bg` and `color` props together for accessibility
+
+When setting a background color, always pair it with an appropriate foreground color to ensure proper contrast and accessibility.
+
+```tsx
+// ✅ CORRECT - Paired bg and color for accessibility
+
+  Accessible content with proper contrast
+
+  Success message with guaranteed contrast
+
+```
+
+### ❌ DON'T: Use hardcoded hex values
+
+Hardcoded hex values don't respond to theme changes and may violate accessibility standards.
+
+```tsx
+// ❌ INCORRECT - Hardcoded hex values
+Text
+
+  Content
+
+// ✅ CORRECT - Semantic tokens
+Text
+
+  Content
+
+```
+
+### ✅ DO: Use `cssVars` for CSS-in-JS
+
+If you're using a CSS-in-JS library, use `cssVars` from `@iress-oss/ids-tokens` to reference color tokens.
+
+```tsx
+
+// ✅ CORRECT - Using cssVars for colors in CSS-in-JS
+const StyledPanel = styled.div`
+  background-color: ${cssVars.colour.primary.fill};
+  color: ${cssVars.colour.primary.onFill};
+`;
+
+const SuccessText = styled.span`
+  color: ${cssVars.colour.system.success.text};
+`;
+```
+
+### ❌ DON'T: Use inline styles for colors
+
+Inline styles bypass the design system and prevent theme adaptation.
+
+```tsx
+// ❌ INCORRECT - Inline styles
+
+  Content
+
+// ✅ CORRECT - Styling props
+
+  Content
+
+```
+
+## Token Reference
+
+For a complete reference of all available color tokens, including WCAG contrast ratios and allowed foreground/background combinations, see the tokens documentation.
+
+**Most commonly used color tokens:**
+
+- `colour.primary.fill`, `colour.primary.onFill` - Primary brand colors with guaranteed contrast
+- `colour.primary.text`, `colour.primary.surface` - Primary text and surface colors
+- `colour.neutral.10`, `colour.neutral.20`, `colour.neutral.80` - Neutral grays for backgrounds and text
+- `colour.system.success.text`, `colour.system.danger.text`, `colour.system.warning.text` - System status colors
+- `"alt"` - Special value for alternate backgrounds
+
+[View Full Colour Token Reference](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/tokens_colour--docs)
+
+---
+
+---
+
+<!-- styling-props/layout.md -->
+
+# Layout
+
+These are all styling props related to modifying layout.
+
+## `alignSelf`
+
+The `alignSelf` prop allows you to override the alignItems value set by a parent flex container for individual components. This is useful when you want to adjust the alignment of a single item without affecting the entire container.
+
+## `flex="1"`
+
+The `flex="1"` prop is used to make a component grow and fill available space in a flex container. Setting `flex` to `1` allows the component to take up one unit of available space, ensuring consistent behavior across components.
+
+Note: We only allow `1` as a value to maintain design consistency.
+
+## `hideFrom` and `hideBelow`
+
+The `hideFrom` and `hideBelow` props allow you to hide content from both visual users and screen readers at different breakpoints. This is useful when certain content is not relevant on smaller screens, and you want to ensure that screen reader users have the same experience as visual users.
+
+## `scrollable`
+
+The scrollable prop enables scrolling behavior for an element when its content
+overflows its bounds. It sets the `overflow` CSS property to `auto`, allowing
+scrollbars to appear as needed. The scrollbar has been styled to match the
+design system.
+
+You can set the value to `true` to enable scrolling on both axes, or specify `'x'` or `'y'` to restrict scrolling to a single axis.
+
+## `stretch`
+
+The `stretch` prop is used to stretch a component to fill the available space. It is used in components such as `IressPanel` to ensure each column in a layout takes up the same amount of space.
+
+---
+
+---
+
+<!-- styling-props/radius.md -->
+
+# Radius
+
+These are all styling props related to changing the radius of a component
+affects the visual softness and perceived friendliness of the interface,
+influencing the overall user experience.
+
+## `borderRadius`
+
+The `borderRadius` prop allows you to change the border radius of any component. It should be used sparingly, and often used when creating custom components that are not part of the design system, however you still want to retain the look and feel of the rest of the system.
+
+### Removing border radius
+
+In some cases you may need to remove the border-radius to achieve design requirements. This can be done using `radius.000` or `none`.
+
+---
+
+---
+
+<!-- styling-props/sizing.md -->
+
+# Sizing
+
+These are all styling props related to changing the size of a component,
+refining the users expectation of the content and making screens easier to
+scan.
+
+## Overview
+
+The sizing props are a collection of widths that are used throughout the design system. Although they are not part of the design tokens (which is more related to theming), we have exposed them to you to allow you to build consistent user experiences where you may need to deviate from the default props of a component.
+
+The sizes here can be used in the `maxWidth` or `width` prop of any component, but they have been documented here according to their designated component.
+
+## Input widths
+
+Input widths are sizes that suit a specific number of characters. This sets an expectation of what data a user has to enter. The following list is the widths we have created for inputs, and have been designed to be used with `IressInput` but can be used with any component.
+
+- `input.2`: Two character width, usually used for accessor codes
+- `input.4`: Four character width, usually used for CVC, one-time passwords and pin numbers
+- `input.6`: Six character width, usually used for one-time passwords and pin numbers
+- `input.8`: Eight character width
+- `input.10`: Ten character width, usually used for dates
+- `input.12`: Twelve character width
+- `input.16`: Sixteen character width, usually used for credit cards
+
+For variable data entry, you can use grid tokens. These are usually used inside `IressFieldGroup`, and denote a connection between fields with different widths (eg. First name and Last name under Name). In most cases where there is no relationship but you would like to compact the layout to make it easier to scan, and you should use `IressRow` and `IressCol` instead with the `span` prop.
+
+- `3/12`: 25% width of parent container
+- `6/12`: 50% width of parent container
+- `9/12`: 75% width of parent container
+- `12/12`: 100% width of parent container
+
+## Container widths
+
+Container widths are sizes that define the maximum width where content is considered easy to read on specific screen ranges. They are used by `IressContainer` to help ensure content is readable no matter the screen size.
+
+In some cases however, you may want to restrain the width even further (for example, single column content is usually easiest to read when it is confined to the centre of the screen). The container widths have been exposed so they can be used in the `maxWidth` prop of your own components.
+
+- `container.xl`: 1140px
+- `container.xxl`: 1400px
+
+## Overlay widths
+
+Overlay widths are sizes that define the width of overlay components such as Modals and Slideouts.
+
+- `overlay.sm`: 368px
+- `overlay.md`: 628px
+- `overlay.lg`: 800px
+
+---
+
+---
+
+<!-- styling-props/spacing.md -->
+
+# Spacing
+
+These are all styling props related to changing the spacing of a component.
+
+## Padding
+
+There are seven props you can use to customise the padding of any component. It accepts the entire spacing token spectrum.
+
+- `p`: Change the padding on all axes
+- `px`: Change the padding on the left and right of a component
+- `py`: Change the padding on the top and bottom of a component
+- `pl`: Change the padding on the left of a component
+- `pr`: Change the padding on the right of a component
+- `pt`: Change the padding on the top of a component
+- `pb`: Change the padding on the bottom of a component
+
+```tsx
+
+  A panel that has extra large padding on all sides.
+
+```
+
+### Responsive padding
+
+All padding props are responsive and can be changed according to different screen sizes.
+
+### Migrating from version 5
+
+Responsive padding worked differently in version 5. The `p` prop no longer accepts a nested object of axes to change the padding, you must change every prop based on the breakpoint.
+
+```diff
+-
++
+```
+
+## Margin
+
+There are seven props you can use to customise the margin of any component. It accepts the entire spacing token spectrum, `auto` and negative values of the spacing token spectrum.
+
+- `m`: Change the margin on all axes
+- `mx`: Change the margin on the left and right of a component
+- `my`: Change the margin on the top and bottom of a component
+- `ml`: Change the margin on the left of a component
+- `mr`: Change the margin on the right of a component
+- `mt`: Change the margin on the top of a component
+- `mb`: Change the margin on the bottom of a component
+
+### Responsive margin
+
+All margin props are responsive and can be changed according to different screen sizes.
+
+### Negative margin
+
+Negative margin is supported in the same way as positive margin. You can use the same props to set negative margin.
+
+## `noGutter`
+
+The `noGutter` prop removes the bottom margin of the last direct child of a component. This is useful when you have nested content inside a component with padding, such as `IressPanel` or `IressCard`, to remove unnecessary spacing in your layout.
+
+---
+
+## Best Practices
+
+Always use spacing tokens from the design system scale instead of hardcoded pixel values. This ensures visual consistency and rhythm across your application.
+
+### ✅ DO: Use spacing token aliases
+
+The spacing scale provides convenient aliases (`xs`, `sm`, `md`, `lg`, `xl`) that map to specific pixel values.
+
+```tsx
+// ✅ CORRECT - Using aliases
+Extra large padding (48px)
+Medium gap between items (16px)
+```
+
+### ✅ DO: Use full token names
+
+You can also use the full token names (e.g., `spacing.4`) for the same effect as aliases.
+
+```tsx
+// ✅ CORRECT - Using full token names
+Same as xl (48px)
+Same as md (16px)
+```
+
+### ✅ DO: Use directional props for precise control
+
+Use directional spacing props (`px`, `py`, `pl`, `pr`, `pt`, `pb`) when you need different spacing on different axes.
+
+```tsx
+// ✅ CORRECT - Directional spacing with tokens
+
+  Horizontal padding: large (24px), Vertical padding: small (8px)
+
+```
+
+### ❌ DON'T: Use hardcoded pixel values
+
+Hardcoded pixel values break the design system's visual rhythm and don't adapt to spacing scale changes.
+
+```tsx
+// ❌ INCORRECT - Hardcoded pixel values
+Content
+
+// ✅ CORRECT - Spacing token
+Content
+```
+
+### ❌ DON'T: Use inline styles for spacing
+
+Inline styles bypass the design system and make code non-themeable.
+
+```tsx
+// ❌ INCORRECT - Inline styles
+
+  Content
+
+// ✅ CORRECT - Styling props with tokens
+
+  Content
+
+```
+
+### ✅ DO: Use `cssVars` for CSS-in-JS
+
+If you're using a CSS-in-JS library, use `cssVars` from `@iress-oss/ids-tokens` to reference spacing tokens.
+
+```tsx
+
+// ✅ CORRECT - Using cssVars for spacing in CSS-in-JS
+const StyledPanel = styled.div`
+  padding: ${cssVars.spacing[10]}; /* xl - 40px */
+  margin: ${cssVars.spacing[4]} 0; /* md - 16px vertical */
+  gap: ${cssVars.spacing[2]}; /* sm - 8px */
+`;
+
+// ✅ CORRECT - Directional spacing
+const StyledBox = styled.div`
+  padding-left: ${cssVars.spacing[6]}; /* lg - 24px */
+  padding-right: ${cssVars.spacing[6]};
+  padding-top: ${cssVars.spacing[2]}; /* sm - 8px */
+  padding-bottom: ${cssVars.spacing[2]};
+`;
+```
+
+### ❌ DON'T: Use arbitrary values - stick to the spacing scale
+
+The spacing scale is designed to create visual consistency. Avoid arbitrary values that don't fit the scale.
+
+```tsx
+// ❌ INCORRECT - Arbitrary spacing value
+Content
+
+// ✅ CORRECT - Use the closest value from the scale
+Content (16px)
+
+// ✅ ALSO CORRECT - If you need more, use the next step
+Content (24px)
+```
+
+## Token Reference
+
+For a complete reference of the full spacing scale with all available tokens (spacing.0 through spacing.10), visual examples, and pixel values, see the documentation.
+
+**Quick reference - Most commonly used spacing tokens:**
+
+- `spacing.1` / `xs`: 4px - Extra small spacing
+- `spacing.2` / `sm`: 8px - Small spacing
+- `spacing.4` / `md`: 16px - Medium spacing (default for many components)
+- `spacing.6` / `lg`: 24px - Large spacing
+- `spacing.10` / `xl`: 40px - Extra large spacing
+
+[View Full Spacing Token Reference](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/tokens_spacing--docs)
+
+---
+
+---
+
+<!-- styling-props/styling-props.md -->
+
+# Styling props
+
+This page lists all the custom styling properties available in our components,
+which design tokens they are mapped to and which CSS properties they affect.
+
+Styling properties are the recommended way of customising components for your needs, as they ensure your styles are compatible when any theme is applied to your application. If you need further customisation, you can use regular CSS and reference the tokens directly.
+
+These replace the utility classes and internal component tokens provided by previous versions of the design system.
+
+## Reference
+
+---
+
+## Responsive
+
+Props marked responsive can accept either a single value that affects all breakpoints, or a responsive object map that sets a different value based on breakpoint.
+
+```tsx
+ // applies extra small padding to all breakpoints
+ // applies large padding by default, and changes to small padding once on medium sized screens.
+```
+
+## `iressCss`
+
+In some cases you may need to apply styling props to a non-IDS component. You can do this by using the `iressCss` prop, which accepts an object of styling props and returns a string of class names that can be applied to any element.
+
+This will also work without JSX, allowing you to apply styling props to any element in your application.
+
+```tsx
+<div className={iressCss({ p: 'xs', bg: 'colour.primary.surface' })}>
+  This div has extra small padding and a primary background colour.
+</div>
+```
+
+## `IressStyled`
+
+The `IressStyled` component is a flexible wrapper that gives you direct access to all styling props. Use it when you need custom styling without creating a dedicated component or writing custom CSS.
+
+```tsx
+
+  This div has extra small padding and a primary background colour.
+
+```
+
+## Migrating from version 5
+
+### Utility classes
+
+If you have been using the utility classes from previous versions of IDS (eg. `iress-p--xs`), you will need to replace them with the new styling props. The utility classes are no longer supported in version 6.
+
+```diff
+-
++
+```
+
+---
+
+### Internal component tokens
+
+If you have been using the internal component tokens (eg. `--iress-background-color`), you will need to replace them with the new styling props. The internal component tokens are no longer supported in version 6.
+
+#### Note
+
+- Not every single internal component token has a direct mapping to a styling prop. For example, things like border width are no longer customisable. This helps ensure a consistent and accessible experience for all applications no matter the theme that is applied to them.
+- Styling props only allow token values, not custom values (eg. `colour.system.status.danger` is allowed but not `red`). This is to ensure that the styling props are theme agnostic and can be used with any theme. If you need to use a custom value, you can use custom CSS or inline styles.
+
+```diff
+-
++
+```
+
+---
+
+## Best Practices
+
+### When to use styling props
+
+Styling props should be your **first choice** for customizing components in most cases. They provide:
+
+- **Theme compatibility**: Automatically work with any theme
+- **Type safety**: TypeScript ensures you use valid tokens
+- **Consistency**: Design tokens enforce the design system's visual language
+- **Accessibility**: Semantic color tokens maintain proper contrast ratios
+- **Maintainability**: Changes to design tokens automatically update all usages
+
+**✅ Use styling props when:**
+
+- Customizing IDS components (`IressPanel`, `IressButton`, `IressText`, etc.)
+- Applying spacing, colors, or typography that exist in the design system
+- Building new features that should follow the design system
+- Creating reusable layouts and patterns
+
+### When to use `iressCss()`
+
+The `iressCss()` function is useful for applying styling props to **non-IDS components** or when you need to combine styling props programmatically.
+
+**✅ Use `iressCss()` when:**
+
+- Styling third-party library components that don't accept styling props
+- Applying styling props to native HTML elements (`<div>`, `<section>`, etc.)
+- Building complex, reusable style combinations
+- Working outside of JSX (e.g., in vanilla JavaScript)
+
+```tsx
+// ✅ CORRECT - Using iressCss for non-IDS component
+
+  Content
+
+// ✅ CORRECT - Using iressCss with native HTML
+<div className={iressCss({ display: 'flex', gap: 'sm' })}>
+  Flexbox layout with design system spacing
+</div>
+```
+
+### When to use CSS-in-JS
+
+If you're using a CSS-in-JS library (like styled-components, emotion, or vanilla-extract), use the **`cssVars` object from `@iress-oss/ids-tokens`** to reference design tokens.
+
+**✅ Use CSS-in-JS with `cssVars` when:**
+
+- Building custom components with a CSS-in-JS library
+- Creating complex styling logic that needs JavaScript
+- Working with third-party CSS-in-JS frameworks
+- Need programmatic access to token values
+
+```tsx
+
+// ✅ CORRECT - Using cssVars in CSS-in-JS
+const StyledComponent = styled.div`
+  padding: ${cssVars.spacing[400]}; /* md spacing */
+  background-color: ${cssVars.colour.primary.fill};
+  color: ${cssVars.colour.primary.onFill};
+  font-family: ${cssVars.typography.fontFamily.body};
+`;
+
+// ❌ INCORRECT - Hardcoded values in CSS-in-JS
+const BadComponent = styled.div`
+  padding: 16px;
+  background-color: #13213f;
+  color: #ffffff;
+`;
+```
+
+### When to use custom CSS
+
+Custom CSS should be **reserved for edge cases** where styling props and `iressCss()` don't meet your needs.
+
+**✅ Use custom CSS when:**
+
+- Implementing complex selectors (`:hover:not(.disabled)`, `> * + *`)
+- Working with pseudo-elements (`::before`, `::after`)
+- Creating animations and transitions
+- Styling custom components with unique design requirements
+- Using CSS features not available in styling props (e.g., `grid-template-areas`)
+
+**Important**: Even in custom CSS, prefer referencing design tokens via CSS variables:
+
+```css
+.custom-component {
+  /* ✅ CORRECT - Reference tokens in custom CSS */
+  padding: var(--spacing-4); /* md spacing */
+  background-color: var(--colour-primary-fill);
+
+  /* ❌ INCORRECT - Hardcoded values */
+  padding: 16px;
+  background-color: #13213f;
+}
+```
+
+### Decision guide
+
+Use this flowchart to choose the right approach:
+
+1. **Is it an IDS component?**
+   - Yes → Use styling props (``)
+   - No → Go to step 2
+
+2. **Does it need design system styling?**
+   - Yes → Use `iressCss()` (`className={iressCss({ p: 'md' })}`)
+   - No → Go to step 3
+
+3. **Are you using a CSS-in-JS library?**
+   - Yes → Use `cssVars` from `@iress-oss/ids-tokens`
+   - No → Go to step 4
+
+4. **Does it need complex selectors or CSS features?**
+   - Yes → Use custom CSS with CSS variable references
+   - No → Reconsider if styling props or `iressCss()` can work
+
+## Common Anti-Patterns
+
+Avoid these common mistakes when styling components:
+
+### ❌ Using inline styles instead of styling props
+
+**Problem**: Inline styles bypass the design system, making code non-themeable and inconsistent.
+
+```tsx
+// ❌ INCORRECT - Inline styles with hardcoded values
+
+  Content
+
+// ✅ CORRECT - Styling props with tokens
+
+  Content
+
+```
+
+**Why this matters**: Inline styles won't respond to theme changes, breaking the visual consistency of your application.
+
+### ❌ Hardcoded colors instead of semantic tokens
+
+**Problem**: Hardcoded color values don't adapt to different themes and may fail accessibility standards.
+
+```tsx
+// ❌ INCORRECT - Hardcoded hex colors
+Primary text
+
+  Featured content
+
+// ✅ CORRECT - Semantic color tokens
+Primary text
+
+  Featured content
+
+```
+
+**Why this matters**: Semantic tokens like `colour.primary.fill` and `colour.primary.onFill` are guaranteed to have proper contrast and automatically adapt to theme changes.
+
+### ❌ Using className for basic styling
+
+**Problem**: Adding custom classes for basic spacing/colors adds unnecessary CSS and bypasses the design system.
+
+```tsx
+// ❌ INCORRECT - Custom class for basic styling
+
+  Content
+
+// CSS file:
+.my-custom-padding {
+  padding: 24px;
+}
+
+// ✅ CORRECT - Styling prop with token
+
+  Content
+
+```
+
+**Why this matters**: Styling props are more maintainable, type-safe, and ensure consistency. Custom classes should only be used for complex styling needs.
+
+### ❌ Arbitrary spacing values
+
+**Problem**: Using spacing values outside the design system's scale creates inconsistency.
+
+```tsx
+// ❌ INCORRECT - Arbitrary spacing value
+
+  Content
+
+// ✅ CORRECT - Design system spacing scale
+ {/* 16px */}
+  Content
+
+// ✅ ALSO CORRECT - If you need more, use the next step
+ {/* 24px */}
+  Content
+
+```
+
+**Why this matters**: The spacing scale (`xs`, `sm`, `md`, `lg`, `xl`) creates visual rhythm and consistency. Stick to the scale unless you have a very specific edge case.
+
+### When hardcoded values ARE acceptable
+
+There are rare cases where hardcoded values are acceptable:
+
+- **One-off edge cases** that don't fit the design system (after discussion with design team)
+- **Third-party library constraints** where styling props can't be applied
+- **Gradual migration** from legacy code (with a plan to refactor)
+- **Prototyping** (with the expectation to use tokens in production)
+
+Even in these cases, document why the exception exists and plan to revisit it.
+
+---
+
+<!-- styling-props/typography.md -->
+
+# Typography
+
+These are all styling props related to changing the typography of a component.
+
+## `textStyle`
+
+The `textStyle` prop allows you to change the default text style of a component. For more control and nested element styling, it is recommended to use `IressText` instead.
+
+## `textAlign`
+
+The `textAlign` prop allows you to change the alignment of text inside a component. For more control, it is recommended to use `IressText` instead.
+
+---
+
+## Best Practices
+
+For typography, the **IressText component is the preferred approach** for most use cases. It provides semantic HTML elements, accessibility features, and proper text styling out of the box.
+
+### ✅ DO (PREFERRED): Use the `IressText` component
+
+The `IressText` component is the recommended way to render text content. It handles typography tokens automatically and provides semantic HTML elements.
+
+```tsx
+// ✅ CORRECT - Use IressText (recommended)
+Default body text with proper styling
+
+Heading rendered as h1 element
+```
+
+**Why use IressText:**
+
+- Provides semantic HTML elements (`h1`, `h2`, `p`, `span`, etc.)
+- Handles typography tokens automatically
+- Ensures accessibility with proper heading hierarchy
+- No need to manage font properties manually
+
+### ✅ DO (ALTERNATIVE): Use `textStyle` prop with typography tokens
+
+When you need to apply typography styling to components that aren't text-specific (like `IressPanel`), use the `textStyle` prop with typography tokens.
+
+```tsx
+// ✅ CORRECT - Using textStyle prop with tokens
+
+  Panel with heading-sized text
+
+```
+
+**Available typography tokens:**
+
+- `typography.body.sm`, `typography.body.md` - Body text variants
+- `typography.heading.1`, `typography.heading.2`, `typography.heading.3` - Heading text variants
+
+### ❌ DON'T: Use inline styles for typography
+
+Inline styles with hardcoded font properties bypass the design system and don't respond to typography token updates.
+
+```tsx
+// ❌ INCORRECT - Hardcoded typography
+<h1 style={{ fontSize: '24px', fontWeight: 'bold', lineHeight: '1.2' }}>
+  Heading
+</h1>
+
+<p style={{ fontSize: '16px', fontFamily: 'Arial' }}>
+  Body text
+</p>
+
+// ✅ CORRECT - Use IressText
+Heading
+
+Body text
+```
+
+### ✅ DO: Use `cssVars` for CSS-in-JS
+
+If you're using a CSS-in-JS library, use `cssVars` from `@iress-oss/ids-tokens` to reference typography tokens.
+
+```tsx
+
+// ✅ CORRECT - Using cssVars for typography in CSS-in-JS
+const Heading = styled.h1`
+  font: ${cssVars.typography.heading[1]};
+`;
+
+const BodyText = styled.p`
+  font: ${cssVars.typography.md.regular};
+`;
+```
+
+### ❌ DON'T: Use hardcoded font properties
+
+Hardcoded font sizes, weights, and families don't adapt to design system changes and break consistency.
+
+```tsx
+// ❌ INCORRECT - Hardcoded font properties
+<div style={{
+  fontSize: '16px',
+  fontWeight: '600',
+  fontFamily: 'Inter, sans-serif'
+}}>
+  Content
+</div>
+
+// ✅ CORRECT - Use textStyle prop with token
+
+  Content
+
+```
+
+### When to use IressText vs textStyle prop
+
+**Use `IressText` when:**
+
+- Rendering text content (paragraphs, headings, labels)
+- You need semantic HTML elements
+- Building accessible content with proper heading hierarchy
+- Creating text-focused UI components
+
+**Use `textStyle` prop when:**
+
+- Applying typography styling to non-text components
+- You already have a component and just need text styling
+- Working with layout components like `IressPanel` or `IressStack`
+
+## Token Reference
+
+For a complete reference of all available typography tokens with font families, sizes, weights, and line heights, see the documentation.
+
+Typography tokens include font family, size, weight, and line height specifications
+
+[View Full Typography Token Reference](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/tokens_typography--docs)
+
+---

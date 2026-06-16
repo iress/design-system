@@ -1,0 +1,226 @@
+# Common mistakes
+
+Patterns we see trip people up when building with IDS. Each section shows what goes wrong, why, and the fix.
+
+## Using `slot` attributes (legacy v4 pattern)
+
+In IDS v4 and earlier, child elements used `slot` attributes to position content (e.g. `<IressIcon slot="prepend" />`). This is **no longer supported**. Use the equivalent React props instead.
+
+### Button
+
+```tsx
+// ❌ slot attribute — ignored in v5+
+<IressButton>
+  <IressIcon slot="start" name="search" />
+  Search
+</IressButton>
+
+// ✅ Use prepend/append props
+<IressButton prepend={<IressIcon name="search" />}>
+  Search
+</IressButton>
+
+// ✅ Icon-only button
+<IressButton icon="edit" mode="muted">
+  Edit
+</IressButton>
+```
+
+### Input
+
+```tsx
+// ❌
+<IressInput>
+  <IressIcon slot="prepend" name="search" />
+</IressInput>
+
+// ✅
+<IressInput prepend={<IressIcon name="search" />} />
+```
+
+### Modal
+
+```tsx
+// ❌
+<IressModal show={show}>
+  Content
+  <div slot="footer">
+    <IressButton>Close</IressButton>
+  </div>
+</IressModal>
+
+// ✅ Use footer prop
+<IressModal show={show} footer={<IressButton>Close</IressButton>}>
+  Content
+</IressModal>
+
+// ✅ Or actions prop for status modals
+<IressModal
+  status="danger"
+  heading="Delete record?"
+  actions={[
+    { children: 'Cancel', mode: 'tertiary' },
+    { children: 'Delete' },
+  ]}
+  show={show}
+  onShowChange={setShow}
+>
+  This action cannot be undone.
+</IressModal>
+```
+
+### Quick reference
+
+| Legacy v4 pattern                 | Modern prop           |
+| --------------------------------- | --------------------- |
+| `<Child slot="prepend" />`        | `prepend={<Child />}` |
+| `<Child slot="append" />`         | `append={<Child />}`  |
+| `<Child slot="start" />`          | `prepend={<Child />}` |
+| `<Child slot="end" />`            | `append={<Child />}`  |
+| `<Child slot="icon-only" />`      | `icon="iconName"`     |
+| `<div slot="footer">...</div>`    | `footer={...}`        |
+| `<div slot="activator">...</div>` | `activator={...}`     |
+
+## Misunderstanding `IressShadow`
+
+`IressShadow` is a **CSS isolation wrapper** — it attaches a shadow root to a `<div>` so IDS styles don't leak into or get affected by your host application's CSS. It's useful in microfrontend setups.
+
+It does **not** mean your app uses Web Components or custom elements. Children inside `IressShadow` are standard React components — use normal React props, not `slot` attributes.
+
+```tsx
+// ❌
+<IressShadow>
+  <IressButton>
+    <IressIcon slot="start" name="search" />
+    Search
+  </IressButton>
+</IressShadow>
+
+// ✅
+<IressShadow>
+  <IressButton prepend={<IressIcon name="search" />}>
+    Search
+  </IressButton>
+</IressShadow>
+```
+
+`IressShadow` is an alternative to `IressProvider` — choose one as your app's root wrapper depending on whether you need style isolation.
+
+## Using raw HTML instead of IDS components
+
+IDS components include built-in accessibility, theming, and consistent styling. Raw HTML elements bypass all of that.
+
+```tsx
+// ❌
+<button onClick={handleClick}>Submit</button>
+<input type="text" placeholder="Name" />
+<h2>Section Title</h2>
+
+// ✅
+<IressButton mode="primary" onClick={handleClick}>Submit</IressButton>
+<IressField label="Name" htmlFor="name">
+  <IressInput id="name" placeholder="Name" />
+</IressField>
+<IressText element="h2">Section Title</IressText>
+```
+
+## Hardcoded styling values
+
+Don't hardcode colours, spacing, font sizes, or border radii. Use design tokens via styling props so your UI stays consistent across themes.
+
+```tsx
+// ❌
+<div style={{ padding: '16px', background: '#F5F6F8', borderRadius: '12px' }}>
+
+// ✅
+<IressStack p="spacing.4" bg="colour.neutral.20" borderRadius="radius.3">
+```
+
+## Custom CSS for basic layout
+
+Use IDS layout components instead of writing your own flexbox or grid CSS.
+
+```tsx
+// ❌
+<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+  <div>Item 1</div>
+  <div>Item 2</div>
+</div>
+
+// ✅
+<IressStack gap="spacing.4">
+  <IressText>Item 1</IressText>
+  <IressText>Item 2</IressText>
+</IressStack>
+```
+
+## Missing form field wrappers
+
+Always wrap inputs in `IressField` (or `IressFormField` inside an `IressForm`) for proper labels, validation messages, and accessibility.
+
+```tsx
+// ❌ Input without a field wrapper — no label, no a11y
+<IressInput placeholder="Email" />
+
+// ✅
+<IressField label="Email" htmlFor="email" required>
+  <IressInput id="email" type="email" placeholder="Enter your email" />
+</IressField>
+```
+
+## Using `disabled` on IressButton
+
+IDS discourages using the `disabled` pattern on `IressButton`. While the native `disabled` attribute is still available, disabled buttons are invisible to screen readers and provide no way for users to understand how to enable the action.
+
+| Use case | Anti-pattern | IDS alternative |
+| --- | --- | --- |
+| Form is incomplete | `disabled={!isValid}` | Use `IressForm` with `rules` validation — validates on submit with inline errors |
+| Action in progress | `disabled={isSubmitting}` | Use `loading={isSubmitting}` — shows spinner, announces to screen readers, prevents clicks |
+| User lacks permission | `disabled={!canEdit}` | Hide the button (`{canEdit && <IressButton>…</IressButton>}`), or keep enabled and explain on click |
+| Prerequisite not met | `disabled={!hasSelection}` | Keep enabled and show guidance on click (e.g. "Select an item first" via `IressAlert`) |
+
+```tsx
+// ❌ disabled is an anti-pattern
+<IressButton disabled={!isValid}>Submit</IressButton>
+
+// ✅ Form validation — let IressForm handle it
+<IressForm onSubmit={handleSubmit}>
+  <IressFormField name="email" label="Email" rules={{ required: 'Email is required' }}
+    render={(props) => <IressInput {...props} type="email" />} />
+  <IressButton mode="primary" type="submit">Submit</IressButton>
+</IressForm>
+
+// ✅ In-progress — use loading
+<IressButton loading={isSubmitting} mode="primary" type="submit">Submit</IressButton>
+
+// ✅ Permission — hide or explain
+{canEdit && <IressButton onClick={handleEdit}>Edit</IressButton>}
+```
+
+## Redundant `textStyle` on IressText
+
+When `element` is set on `IressText`, the component already applies the correct typography. Adding a matching `textStyle` is redundant. Only use `textStyle` to intentionally override the visual treatment (e.g. making an h2 look like an h4).
+
+| Element | Default textStyle (redundant if matched) |
+| ------- | ---------------------------------------- |
+| `h1`    | `typography.heading.1`                   |
+| `h2`    | `typography.heading.2`                   |
+| `h3`    | `typography.heading.3`                   |
+| `h4`    | `typography.heading.4`                   |
+| `h5`    | `typography.heading.5`                   |
+| `p`     | `typography.body.md`                     |
+
+```tsx
+// ❌ Redundant — h1 already renders as typography.heading.1
+<IressText element="h1" textStyle="typography.heading.1">Page Title</IressText>
+
+// ✅ Element alone is sufficient
+<IressText element="h1">Page Title</IressText>
+
+// ✅ Intentional override for visual hierarchy
+<IressText element="h2" textStyle="typography.heading.4">Section Title</IressText>
+```
+
+## Further reading
+
+When in doubt, check the component docs in [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com) — each component page includes props, examples, and usage guidelines.

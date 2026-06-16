@@ -125,10 +125,10 @@ export const NAV_ITEMS: SideNavItem[] = [
     key: 'styling-props',
     icon: 'palette',
     label: 'Styling Props',
-    href: '/styling-props/styling-props',
+    href: '/styling-props/overview',
     element: Link,
     children: [
-      { key: 'styling-props', label: 'Overview', href: '/styling-props/styling-props', element: Link },
+      { key: 'overview', label: 'Overview', href: '/styling-props/overview', element: Link },
       { key: 'accessibility', label: 'Accessibility', href: '/styling-props/accessibility', element: Link },
       { key: 'colour', label: 'Colour', href: '/styling-props/colour', element: Link },
       { key: 'layout', label: 'Layout', href: '/styling-props/layout', element: Link },

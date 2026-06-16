@@ -1,9 +1,3 @@
-import { IressButton } from '@iress-oss/ids-components';
-export const meta = {
-  title: 'Layout',
-  description: 'These are all styling props related to modifying layout.',
-};
-
 # Layout
 
 These are all styling props related to modifying layout.
@@ -11,7 +5,6 @@ These are all styling props related to modifying layout.
 ## `alignSelf`
 
 The `alignSelf` prop allows you to override the alignItems value set by a parent flex container for individual components. This is useful when you want to adjust the alignment of a single item without affecting the entire container.
-
 
 <StoryEmbed id="styling-props-layout--align-self" />
 
@@ -27,7 +20,6 @@ Note: We only allow `1` as a value to maintain design consistency.
 
 The `hideFrom` and `hideBelow` props allow you to hide content from both visual users and screen readers at different breakpoints. This is useful when certain content is not relevant on smaller screens, and you want to ensure that screen reader users have the same experience as visual users.
 
-
 <StoryEmbed id="styling-props-layout--hide-from" />
 
 <StoryEmbed id="styling-props-layout--hide-below" />
@@ -41,7 +33,6 @@ design system.
 
 You can set the value to `true` to enable scrolling on both axes, or specify `'x'` or `'y'` to restrict scrolling to a single axis.
 
-
 <StoryEmbed id="styling-props-layout--scrollable" />
 
 ## `stretch`
@@ -51,5 +42,3 @@ The `stretch` prop is used to stretch a component to fill the available space. I
 <StoryEmbed id="styling-props-layout--stretch" />
 
 ---
-
-<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-layout--docs">View in Storybook →</IressButton>

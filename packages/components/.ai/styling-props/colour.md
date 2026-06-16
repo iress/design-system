@@ -1,9 +1,3 @@
-import { IressButton } from '@iress-oss/ids-components';
-export const meta = {
-  title: 'Colour',
-  description: 'These are all styling props related to changing the foreground and background',
-};
-
 # Colour
 
 These are all styling props related to changing the foreground and background
@@ -133,8 +127,6 @@ For a complete reference of all available color tokens, including WCAG contrast 
 - `colour.system.success.text`, `colour.system.danger.text`, `colour.system.warning.text` - System status colors
 - `"alt"` - Special value for alternate backgrounds
 
-[View Full Colour Token Reference](/tokens/colour)
+[View Full Colour Token Reference](../tokens/colour.md)
 
 ---
-
-<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-colour--docs">View in Storybook →</IressButton>

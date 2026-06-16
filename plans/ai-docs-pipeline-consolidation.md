@@ -349,6 +349,16 @@ dev-watcher.ts detects change
 - Append ALL mock files not already referenced as "Additional Examples"
 - **Test:** Alert/Button `.ai/` docs have inline code examples instead of `<StoryEmbed>` markers
 
+### Phase C2: Reference story data extraction
+
+- For StoryEmbeds with `controls={false}` or stories tagged `['reference']`:
+  - Instead of showing the React source code, extract the static data from the mock
+  - Parse data arrays/objects from the mock file (e.g. `stylingPropsReference`, `TableColumnReference`)
+  - Render the data as a markdown table directly
+  - This produces AI-consumable reference content (the "output") rather than implementation code
+- Applies to: styling props reference table, Table column API, any future reference stories
+- **Test:** `.ai/styling-props/overview.md` has an actual props reference table, not React code
+
 ### Phase D: Props extraction
 
 - Use `react-docgen-typescript` to extract public props interface per component

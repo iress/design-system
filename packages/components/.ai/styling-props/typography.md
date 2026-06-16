@@ -1,9 +1,3 @@
-import { IressButton } from '@iress-oss/ids-components';
-export const meta = {
-  title: 'Typography',
-  description: 'These are all styling props related to changing the typography of a component.',
-};
-
 # Typography
 
 These are all styling props related to changing the typography of a component.
@@ -139,8 +133,6 @@ For a complete reference of all available typography tokens with font families, 
 
 Typography tokens include font family, size, weight, and line height specifications
 
-[View Full Typography Token Reference](/tokens/typography)
+[View Full Typography Token Reference](../tokens/typography.md)
 
 ---
-
-<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-typography--docs">View in Storybook →</IressButton>

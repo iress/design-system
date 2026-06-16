@@ -1,9 +1,3 @@
-import { IressButton } from '@iress-oss/ids-components';
-export const meta = {
-  title: 'Radius',
-  description: 'These are all styling props related to changing the radius of a component',
-};
-
 # Radius
 
 These are all styling props related to changing the radius of a component
@@ -14,7 +8,6 @@ influencing the overall user experience.
 
 The `borderRadius` prop allows you to change the border radius of any component. It should be used sparingly, and often used when creating custom components that are not part of the design system, however you still want to retain the look and feel of the rest of the system.
 
-
 <StoryEmbed id="styling-props-radius--border-radius" />
 
 ### Removing border radius
@@ -24,5 +17,3 @@ In some cases you may need to remove the border-radius to achieve design require
 <StoryEmbed id="styling-props-radius--no-border-radius" />
 
 ---
-
-<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-radius--docs">View in Storybook →</IressButton>
