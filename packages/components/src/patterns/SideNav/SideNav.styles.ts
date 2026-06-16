@@ -32,6 +32,7 @@ export const sideNav = sva({
     },
     panelContent: {
       width: 'var(--iress-width, 260px)',
+      height: '12/12',
     },
     panelContentInner: {
       display: 'flex',
@@ -41,6 +42,7 @@ export const sideNav = sva({
       m: 'spacing.4',
       boxShadow: '0 4px 20px #00327126',
       pb: 'spacing.2',
+      maxHeight: '[calc(100% - ({spacing.spacing.4} * 2))]',
     },
     panelHeading: {
       flexShrink: 0,

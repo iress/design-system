@@ -21,6 +21,11 @@ export const useDropdownMenuFlags = ({
 
   const showResults = useMemo(() => !!results.length, [results]);
 
+  const showLoading = useMemo(
+    () => loading && !results.length,
+    [loading, results.length],
+  );
+
   const showNoResults = useMemo(
     () => results.length === 0 && !loading && debouncedQuery,
     [debouncedQuery, loading, results.length],
@@ -28,6 +33,7 @@ export const useDropdownMenuFlags = ({
 
   return {
     showHeader,
+    showLoading,
     showNoResults,
     showResults,
   };

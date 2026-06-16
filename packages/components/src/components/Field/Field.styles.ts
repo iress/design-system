@@ -5,6 +5,7 @@ export const field = sva({
     'root',
     'hint',
     'label',
+    'horizontalLabelWithHint',
     'footer',
     'footerIcon',
     'supplementary',
@@ -42,6 +43,11 @@ export const field = sva({
     },
     label: {
       mb: 'spacing.1',
+    },
+    horizontalLabelWithHint: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 'spacing.1',
     },
     labelContainer: {},
     fieldContainer: {
