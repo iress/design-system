@@ -92,6 +92,29 @@ describe('IressField', () => {
   });
 
   describe('props', () => {
+    describe('label, hint and input spacing', () => {
+      it('uses spacing.2 between label and input when hint is not present', () => {
+        const styles = field.raw({});
+
+        expect(styles.label?.mb).toBe('spacing.2');
+      });
+
+      it('uses hint spacing variant when hint is present', () => {
+        const baseClasses = field();
+        const hasHintClasses = field({ hasHint: true });
+        const styles = field.raw({});
+        const screen = renderComponent({
+          hint: 'Helpful hint',
+        });
+
+        const label = screen.getByText(TEST_LABEL).closest('label');
+
+        expect(hasHintClasses.label).not.toBe(baseClasses.label);
+        expect(styles.hint?.mb).toBe('spacing.1');
+        expect(label).toHaveClass(hasHintClasses.label!);
+      });
+    });
+
     describe('checkbox and radio group spacing', () => {
       const directControlSelector =
         '& > .ids-radio-group:first-child, & > .ids-checkbox-group:first-child, & > .ids-checkbox:first-child';
