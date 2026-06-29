@@ -54,7 +54,8 @@ export const Status: Story = {
 
 export const Heading: Story = {
   args: {
-    ...Default.args,
+    children: 'This is a simple info alert',
+    status: 'info',
     heading: 'Alert heading',
   },
 };

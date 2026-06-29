@@ -17,22 +17,47 @@ There are seven props you can use to customise the padding of any component. It 
 ```tsx
 <IressPanel bg="alt" p="xl">
   A panel that has extra large padding on all sides.
-</IressPanel>
+</IressPanel>;
 ```
 
-<StoryEmbed id="styling-props-spacing--padding" />
+```tsx
+<IressPanel bg="alt" p="xl">
+  A panel that has extra large padding on all sides.
+</IressPanel>;
+```
 
-<StoryEmbed id="styling-props-spacing--button" />
+```tsx
+<IressButton px={px} mode="primary">
+  Submit
+</IressButton>;
+```
 
-<StoryEmbed id="styling-props-spacing--variable-padding" />
+```tsx
+<IressPanel bg="alt" pb="xl" pt="spacing.1" pl="md" pr="spacing.6">
+  A panel that has different padding on each side.
+</IressPanel>;
+```
 
 ### Responsive padding
 
 All padding props are responsive and can be changed according to different screen sizes.
 
-<StoryEmbed id="styling-props-spacing--responsive-padding" />
+```tsx
+<IressPanel bg="alt" p={{ base: 'xl', lg: 'none' }}>
+  A panel that has extra large padding on small screens and no padding on large
+  screens.
+</IressPanel>;
+```
 
-<StoryEmbed id="styling-props-spacing--responsive-variable-padding" />
+```tsx
+<IressPanel
+  bg="alt"
+  px={{ base: 'none', lg: 'xl' }}
+  py={{ base: 'xl', lg: 'none' }}
+>
+  A panel that has responsive padding on the vertical and horizontal axes.
+</IressPanel>;
+```
 
 ### Migrating from version 5
 
@@ -55,29 +80,63 @@ There are seven props you can use to customise the margin of any component. It a
 - `mt`: Change the margin on the top of a component
 - `mb`: Change the margin on the bottom of a component
 
-<StoryEmbed id="styling-props-spacing--margin" />
+```tsx
+<IressPanel bg="alt" m="xl">
+  A panel that has the same margin on all sides.
+</IressPanel>;
+```
 
-<StoryEmbed id="styling-props-spacing--variable-margin" />
+```tsx
+<IressPanel bg="alt" mb="xl" mt="spacing.1" ml="md" mr="spacing.6">
+  A panel that has different margin on each side.
+</IressPanel>;
+```
 
 ### Responsive margin
 
 All margin props are responsive and can be changed according to different screen sizes.
 
-<StoryEmbed id="styling-props-spacing--responsive-margin" />
+```tsx
+<IressPanel bg="alt" m={{ base: 'xl', lg: 'none' }}>
+  A panel that has extra large margin on small screens and no margin on large
+  screens.
+</IressPanel>;
+```
 
-<StoryEmbed id="styling-props-spacing--responsive-variable-margin" />
+```tsx
+<IressPanel
+  bg="alt"
+  mx={{ base: 'none', lg: 'xl' }}
+  my={{ base: 'xl', lg: 'none' }}
+>
+  A panel that has responsive margin on the vertical and horizontal axes.
+</IressPanel>;
+```
 
 ### Negative margin
 
 Negative margin is supported in the same way as positive margin. You can use the same props to set negative margin.
 
-<StoryEmbed id="styling-props-spacing--negative-margin" />
+```tsx
+<IressPanel bg="colour.primary.surface" maxWidth="container.sm" mx="auto">
+  <IressPanel bg="colour.primary.fill" color="colour.primary.onFill" mx="-xl" />
+</IressPanel>;
+```
 
 ## `noGutter`
 
 The `noGutter` prop removes the bottom margin of the last direct child of a component. This is useful when you have nested content inside a component with padding, such as `IressPanel` or `IressCard`, to remove unnecessary spacing in your layout.
 
-<StoryEmbed id="styling-props-spacing--no-gutter" />
+```tsx
+<IressPanel bg="alt" noGutter>
+  <ul>
+    <li>
+      Margin is removed due to <code>noGutter</code>
+    </li>
+    <li>Last child has no bottom margin</li>
+  </ul>
+</IressPanel>;
+```
 
 ---
 
@@ -113,7 +172,7 @@ Use directional spacing props (`px`, `py`, `pl`, `pr`, `pt`, `pb`) when you need
 // ✅ CORRECT - Directional spacing with tokens
 <IressPanel px="lg" py="sm">
   Horizontal padding: large (24px), Vertical padding: small (8px)
-</IressPanel>
+</IressPanel>;
 ```
 
 ### ❌ DON'T: Use hardcoded pixel values

@@ -15,7 +15,25 @@ import { IressTag } from '@iress-oss/ids-components';
 
 Tags represent individual units in a group of selected items.
 
-<StoryEmbed id="components-tag--mode"/>
+```tsx
+import { IressInline, IressTag } from '@iress-oss/ids-components';
+
+export function TagMode() {
+  return (
+    <IressInline gap="sm">
+      <IressTag mode={10}>10</IressTag>
+      <IressTag mode={20}>20</IressTag>
+      <IressTag mode={30}>30</IressTag>
+      <IressTag mode={40}>40</IressTag>
+      <IressTag mode={50}>50</IressTag>
+      <IressTag mode={60}>60</IressTag>
+      <IressTag mode={70}>70</IressTag>
+      <IressTag mode={80}>80</IressTag>
+      <IressTag mode={90}>90</IressTag>
+    </IressInline>
+  );
+}
+```
 
 ## Design
 
@@ -62,7 +80,7 @@ Tags are **interactive** — they can be clicked and deleted by users.
 ```tsx
 import { IressTag } from '@iress-oss/ids-components';
 
-<IressTag>Label</IressTag>
+<IressTag>Label</IressTag>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs#api-props)
@@ -71,19 +89,99 @@ import { IressTag } from '@iress-oss/ids-components';
 
 The `mode` prop controls the colour scheme of the tag. Use data palette colours (`10`–`90`) for non-semantic colour needs.
 
-<StoryEmbed id="components-tag--mode"/>
+```tsx
+import { IressInline, IressTag } from '@iress-oss/ids-components';
+
+export function TagMode() {
+  return (
+    <IressInline gap="sm">
+      <IressTag mode={10}>10</IressTag>
+      <IressTag mode={20}>20</IressTag>
+      <IressTag mode={30}>30</IressTag>
+      <IressTag mode={40}>40</IressTag>
+      <IressTag mode={50}>50</IressTag>
+      <IressTag mode={60}>60</IressTag>
+      <IressTag mode={70}>70</IressTag>
+      <IressTag mode={80}>80</IressTag>
+      <IressTag mode={90}>90</IressTag>
+    </IressInline>
+  );
+}
+```
 
 ### Status mode
 
 Use semantic status values (`danger`, `info`, `success`, `warning`) when tags need to communicate a system status.
 
-<StoryEmbed id="components-tag--status"/>
+```tsx
+import { IressInline, IressTag } from '@iress-oss/ids-components';
+
+export function TagStatus() {
+  return (
+    <IressInline gap="sm">
+      <IressTag mode="danger">danger</IressTag>
+      <IressTag mode="info">info</IressTag>
+      <IressTag mode="success">success</IressTag>
+      <IressTag mode="warning">warning</IressTag>
+    </IressInline>
+  );
+}
+```
 
 ### Bordered tags
 
 Set `bordered` to render a tag with a visible border using the tag's current colour, without altering its background. This enhances visibility and makes tags look more interactive — useful for dropdown filter tags or any context where tags need to stand out.
 
-<StoryEmbed id="components-tag--bordered"/>
+```tsx
+import { IressInline, IressTag } from '@iress-oss/ids-components';
+
+export function TagBordered() {
+  return (
+    <IressInline gap="sm">
+      <IressTag bordered>No mode</IressTag>
+      <IressTag mode={10} bordered>
+        10
+      </IressTag>
+      <IressTag mode={20} bordered>
+        20
+      </IressTag>
+      <IressTag mode={30} bordered>
+        30
+      </IressTag>
+      <IressTag mode={40} bordered>
+        40
+      </IressTag>
+      <IressTag mode={50} bordered>
+        50
+      </IressTag>
+      <IressTag mode={60} bordered>
+        60
+      </IressTag>
+      <IressTag mode={70} bordered>
+        70
+      </IressTag>
+      <IressTag mode={80} bordered>
+        80
+      </IressTag>
+      <IressTag mode={90} bordered>
+        90
+      </IressTag>
+      <IressTag mode="danger" bordered>
+        danger
+      </IressTag>
+      <IressTag mode="info" bordered>
+        info
+      </IressTag>
+      <IressTag mode="success" bordered>
+        success
+      </IressTag>
+      <IressTag mode="warning" bordered>
+        warning
+      </IressTag>
+    </IressInline>
+  );
+}
+```
 
 ### Clickable tags
 
@@ -93,13 +191,31 @@ For backwards compatibility, passing `onClick` without setting `element` is also
 
 Use `element="a"` to render the tag as a link.
 
-<StoryEmbed id="components-tag--clickable-tag"/>
+```tsx
+<IressTag
+  bordered
+  onClick={() => {
+    console.log('Tag clicked');
+  }}
+>
+  Tag
+</IressTag>;
+```
 
 ### Compact tags
 
 Set `compact` to render a smaller tag. This is useful in dense layouts, such as inside inputs where tags are displayed inline.
 
-<StoryEmbed id="components-tag--compact"/>
+```tsx
+<IressTag
+  compact
+  onDelete={() => {
+    console.log('Tag deleted');
+  }}
+>
+  Label
+</IressTag>;
+```
 
 ### Deleting tags
 
@@ -107,21 +223,70 @@ The delete button will not automatically remove the tag from the screen. Instead
 
 The text a screen reader will announce defaults to "Delete" but can be changed using the `deleteButtonText` prop.
 
-<StoryEmbed id="components-tag--deleting-tags"/>
+```tsx
+import {
+  IressButton,
+  type IressButtonProps,
+  IressInline,
+  IressTag,
+  type IressTagProps,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export const TagDeletion = () => {
+  const [tags, setTags] = useState(['Tag 1', 'Tag 2', 'Tag 3']);
+
+  const handleAdd: IressButtonProps['onClick'] = () => {
+    setTags([...tags, `Tag ${tags.length + 1}`]);
+  };
+
+  const handleDelete: IressTagProps['onDelete'] = (tag) => {
+    setTags((existingTags) =>
+      existingTags.filter((existingTag) => existingTag !== tag),
+    );
+  };
+
+  return (
+    <IressInline gap="sm" verticalAlign="middle">
+      {tags.map((tag) => (
+        <IressTag
+          key={tag}
+          deleteButtonText={`Delete ${tag}`}
+          onDelete={handleDelete}
+        >
+          {tag}
+        </IressTag>
+      ))}
+      <IressButton onClick={handleAdd} icon="add" mode="muted">
+        Add tag
+      </IressButton>
+    </IressInline>
+  );
+};
+```
 
 ### Custom button
 
 You can completely override the delete button by passing a custom component to the `deleteButton` prop.
 
-<StoryEmbed id="components-tag--custom-button"/>
-
-### IressTagInput
-
-`IressTagInput` allows you to manage multiple tags, and is often used for managing email addresses, domains or other simple metadata that does not have to be selected from a list.
-
-If you need to manage tags that are selected from an existing list, use `IressSelect` with the `multiple` prop.
-
-<StoryEmbed id="components-tag-input--tag-input"/>
+```tsx
+<IressTag
+  deleteButton={
+    <IressPopover
+      activator={
+        <IressButton mode="muted">
+          <IressIcon name="chevron-circle-down" screenreaderText="Actions" />
+        </IressButton>
+      }
+      align="bottom-start"
+    >
+      Some actions go in here
+    </IressPopover>
+  }
+>
+  Label
+</IressTag>;
+```
 
 ### Testing
 
@@ -162,8 +327,8 @@ When you pass a `data-testid` to `IressTag`, the following nested test IDs are g
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the tag | — | `tag` |
-| delete button | The tag delete button | — | `tag__delete-button__button` |
+| main | The root element of the tag | `getByRole('button', { name: '...' })` when interactive, or `getByRole('link', { name: '...' })` when rendered as a link | `tag` |
+| delete button | The tag delete button | `getByRole('button', { name: 'Remove item' })` | `tag__delete-button__button` |
 
 ---
 

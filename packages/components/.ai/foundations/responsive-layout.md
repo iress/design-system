@@ -9,31 +9,73 @@ The Iress Design System (IDS) is built with responsive design principles in mind
 - Provide appropriate component variants for different screen sizes
 - Consider content priority and progressive disclosure on smaller screens
 
-<StoryEmbed id="foundations--designer-breakpoints" controls={false} />
+| Breakpoint | Screen Widths |
+|------------|---------------|
+| `xs` | 0 - 575px |
+| `sm` | 576px - 767px |
+| `md` | 768px - 1023px |
+| `lg` | 1024px - 1279px |
+| `xl` | 1280px - 1599px |
+| `xxl` | 1600px and above |
 
 ### Extra-small screens (`xs`)
 
-<StoryEmbed id="foundations--xs"/>
+| Property | Value |
+|----------|-------|
+| Screen widths | 0 - 575px |
+| Min screen width | 0px |
+| Max screen width | 575px |
+| Container max width | 100% |
+| Margin | `spacing.4` |
 
 ### Small screens (`sm`)
 
-<StoryEmbed id="foundations--sm"/>
+| Property | Value |
+|----------|-------|
+| Screen widths | 576px - 767px |
+| Min screen width | 576px |
+| Max screen width | 767px |
+| Container max width | 100% |
+| Margin | `spacing.4` |
 
 ### Medium screens (`md`)
 
-<StoryEmbed id="foundations--md"/>
+| Property | Value |
+|----------|-------|
+| Screen widths | 768px - 1023px |
+| Min screen width | 768px |
+| Max screen width | 1023px |
+| Container max width | 100% |
+| Margin | `spacing.6` |
 
 ### Large screens (`lg`)
 
-<StoryEmbed id="foundations--lg"/>
+| Property | Value |
+|----------|-------|
+| Screen widths | 1024px - 1279px |
+| Min screen width | 1024px |
+| Max screen width | 1279px |
+| Container max width | 100% |
+| Margin | `spacing.6` |
 
 ### Extra-large screens (`xl`)
 
-<StoryEmbed id="foundations--xl"/>
+| Property | Value |
+|----------|-------|
+| Screen widths | 1280px - 1599px |
+| Min screen width | 1280px |
+| Max screen width | 1599px |
+| Container max width | 1440px |
+| Margin | `spacing.6` |
 
 ### Extremely large screens (`xxl`)
 
-<StoryEmbed id="foundations--xxl"/>
+| Property | Value |
+|----------|-------|
+| Screen widths | 1600px and above |
+| Min screen width | 1600px |
+| Container max width | 1690px |
+| Margin | `spacing.6` |
 
 ---
 
@@ -92,7 +134,31 @@ Another hook is `useResponsiveProps`, which allows you to define responsive prop
 
 **Note:** It is best to use media queries for responsive styling. Most props that require responsive values already support breakpoints which map to CSS values. Only use the `useResponsiveProps` hook when there is no other way to achieve the desired responsive behavior.
 
-<StoryEmbed id="foundations--responsive-props"/>
+```tsx
+import { IressTable, useResponsiveProps } from '@iress-oss/ids-components';
+
+export function ResponsiveTableColumns() {
+  const { value: columns } = useResponsiveProps({
+    base: [{ key: 'name', label: 'Name' }],
+    lg: [
+      { key: 'name', label: 'Name' },
+      { key: 'age', label: 'Age' },
+    ],
+  });
+
+  return (
+    <IressTable
+      caption="Responsive columns example"
+      columns={columns}
+      rows={[
+        { name: 'Luke Skywalker', age: 19 },
+        { name: 'Princess Leia', age: 19 },
+        { name: 'Han Solo', age: 32 },
+      ]}
+    />
+  );
+}
+```
 
 ### Constant
 

@@ -15,7 +15,16 @@ import { IressFieldGroup } from '@iress-oss/ids-components';
 
 Groups multiple related fields together using a `fieldset` and `legend` for accessibility.
 
-<StoryEmbed id="components-fieldgroup--inline"/>
+```tsx
+<IressFieldGroup label="Full name" inline>
+  <IressField label="First name" htmlFor="firstName">
+    <IressInput id="firstName" />
+  </IressField>
+  <IressField label="Last name" htmlFor="lastName">
+    <IressInput id="lastName" />
+  </IressField>
+</IressFieldGroup>;
+```
 
 ## Design
 
@@ -47,7 +56,11 @@ Groups multiple related fields together using a `fieldset` and `legend` for acce
 ### Quick Start
 
 ```tsx
-import { IressFieldGroup, IressField, IressInput } from '@iress-oss/ids-components';
+import {
+  IressFieldGroup,
+  IressField,
+  IressInput,
+} from '@iress-oss/ids-components';
 
 <IressFieldGroup label="Full name" inline>
   <IressField label="First name">
@@ -56,7 +69,7 @@ import { IressFieldGroup, IressField, IressInput } from '@iress-oss/ids-componen
   <IressField label="Last name">
     <IressInput />
   </IressField>
-</IressFieldGroup>
+</IressFieldGroup>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-fieldgroup--docs#api-props)
@@ -67,25 +80,120 @@ import { IressFieldGroup, IressField, IressInput } from '@iress-oss/ids-componen
 
 Fields arranged horizontally within the group.
 
-<StoryEmbed id="components-fieldgroup--inline"/>
+```tsx
+<IressFieldGroup label="Full name" inline>
+  <IressField label="First name" htmlFor="firstName">
+    <IressInput id="firstName" />
+  </IressField>
+  <IressField label="Last name" htmlFor="lastName">
+    <IressInput id="lastName" />
+  </IressField>
+</IressFieldGroup>;
+```
 
 #### Inline with sink
 
 Inline fields with error messages that sink below without disrupting layout.
 
-<StoryEmbed id="components-fieldgroup--inline-sink"/>
+```tsx
+<form>
+  <IressFieldGroup {...{ ...args, inputs: undefined }}>
+    <IressField label="Emoji" htmlFor="emoji">
+      <IressSelect
+        width="2"
+        id="emoji"
+        options={[
+          { label: '🐶', value: 'dog' },
+          { label: '🐱', value: 'cat' },
+          { label: '🐭', value: 'mouse' },
+        ]}
+        container={document.body}
+      />
+    </IressField>
+
+    <IressField label="Title" htmlFor="title">
+      <IressSelect
+        native
+        width="2"
+        id="title"
+        options={[
+          { label: 'Mr', value: 'mr' },
+          { label: 'Mrs', value: 'mrs' },
+          { label: 'Miss', value: 'miss' },
+        ]}
+      />
+    </IressField>
+
+    <IressField label="First name" htmlFor="firstName" required>
+      <IressInput id="firstName" required />
+    </IressField>
+
+    <IressField label="Last name" htmlFor="lastName" required>
+      <IressInput id="lastName" required />
+    </IressField>
+
+    <IressButton type="submit">Submit</IressButton>
+
+    <IressPopover
+      activator={
+        <IressButton>
+          <IressIcon name="cog" />
+        </IressButton>
+      }
+    >
+      Settings goes here
+    </IressPopover>
+  </IressFieldGroup>
+</form>;
+```
 
 #### Joined
 
 Visually connected fields that form a single value.
 
-<StoryEmbed id="components-fieldgroup--join"/>
+```tsx
+<IressFieldGroup label="Full name" join>
+  <IressField label="First name" htmlFor="firstName">
+    <IressInput id="firstName" />
+  </IressField>
+  <IressField label="Last name" htmlFor="lastName">
+    <IressInput id="lastName" />
+  </IressField>
+</IressFieldGroup>;
+```
 
 #### Joined with sink
 
 Joined fields with error sink behaviour.
 
-<StoryEmbed id="components-fieldgroup--join-sink"/>
+```tsx
+<form>
+  <IressFieldGroup label="Full name" inline join>
+    <IressField label="Emoji" htmlFor="emoji">
+      <IressSelect
+        width="2"
+        id="emoji"
+        options={[
+          { label: '🐶', value: 'dog' },
+          { label: '🐱', value: 'cat' },
+          { label: '🐭', value: 'mouse' },
+        ]}
+        container={document.body}
+      />
+    </IressField>
+
+    <IressField label="First name" htmlFor="firstName" required>
+      <IressInput id="firstName" required />
+    </IressField>
+
+    <IressField label="Last name" htmlFor="lastName" required>
+      <IressInput id="lastName" required />
+    </IressField>
+
+    <IressButton type="submit">Submit</IressButton>
+  </IressFieldGroup>
+</form>;
+```
 
 ### Testing
 

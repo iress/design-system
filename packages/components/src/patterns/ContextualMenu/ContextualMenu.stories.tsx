@@ -51,13 +51,21 @@ export default {
 
 export const Default: Story = {
   args: {
-    items: DEFAULT_ITEMS,
+    items: [
+      { key: 'edit', label: 'Edit', icon: 'edit' },
+      { key: 'lock', label: 'Lock', icon: 'lock', divider: true },
+      { key: 'delete', label: 'Delete', icon: 'delete' },
+    ],
   },
 };
 
 export const Sizes: Story = {
   args: {
-    items: DEFAULT_ITEMS,
+    items: [
+      { key: 'edit', label: 'Edit', icon: 'edit' },
+      { key: 'lock', label: 'Lock', icon: 'lock', divider: true },
+      { key: 'delete', label: 'Delete', icon: 'delete' },
+    ],
   },
   render: (args) => (
     <IressStack gap="sm">
@@ -69,7 +77,11 @@ export const Sizes: Story = {
 
 export const Align: Story = {
   args: {
-    ...Default.args,
+    items: [
+      { key: 'edit', label: 'Edit', icon: 'edit' },
+      { key: 'lock', label: 'Lock', icon: 'lock', divider: true },
+      { key: 'delete', label: 'Delete', icon: 'delete' },
+    ],
   },
   argTypes: {
     ...disableArgTypes(['align']),
@@ -118,7 +130,11 @@ export const Align: Story = {
 
 export const Bordered: Story = {
   args: {
-    items: DEFAULT_ITEMS,
+    items: [
+      { key: 'edit', label: 'Edit', icon: 'edit' },
+      { key: 'lock', label: 'Lock', icon: 'lock', divider: true },
+      { key: 'delete', label: 'Delete', icon: 'delete' },
+    ],
   },
   render: (args) => (
     <IressInline gap="sm">
@@ -130,7 +146,11 @@ export const Bordered: Story = {
 
 export const Themes: Story = {
   args: {
-    items: DEFAULT_ITEMS,
+    items: [
+      { key: 'edit', label: 'Edit', icon: 'edit' },
+      { key: 'lock', label: 'Lock', icon: 'lock', divider: true },
+      { key: 'delete', label: 'Delete', icon: 'delete' },
+    ],
     theme: 'dark',
   },
   render: (args) => (

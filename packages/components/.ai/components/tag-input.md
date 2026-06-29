@@ -15,7 +15,13 @@ import { IressTagInput } from '@iress-oss/ids-components';
 
 A form control that allows users to enter and manage a collection of tags via keyboard input.
 
-<StoryEmbed id="components-taginput--tag-input" />
+```tsx
+<IressTagInput
+  defaultValue={['Tag']}
+  placeholder="Type and hit enter to add a tag"
+  tagLimit={999}
+/>;
+```
 
 ## Design
 
@@ -63,7 +69,7 @@ import { IressTagInput } from '@iress-oss/ids-components';
 <IressTagInput
   defaultValue={['Tag 1', 'Tag 2']}
   placeholder="Type and press Enter"
-/>
+/>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-taginput--docs#api-props)
@@ -75,11 +81,7 @@ Use `value` and `onChange` for controlled tag management:
 ```tsx
 const [tags, setTags] = useState(['initial']);
 
-<IressTagInput
-  value={tags}
-  onChange={setTags}
-  placeholder="Add tags"
-/>
+<IressTagInput value={tags} onChange={setTags} placeholder="Add tags" />;
 ```
 
 ### With Field
@@ -89,7 +91,7 @@ Wrap in a Field for label, hint, and validation:
 ```tsx
 <IressField label="Keywords" hint="Press Enter after each keyword">
   <IressTagInput placeholder="Add keyword" />
-</IressField>
+</IressField>;
 ```
 
 ### Tag limit
@@ -97,7 +99,7 @@ Wrap in a Field for label, hint, and validation:
 Restrict the number of tags a user can add:
 
 ```tsx
-<IressTagInput tagLimit={5} placeholder="Max 5 tags" />
+<IressTagInput tagLimit={5} placeholder="Max 5 tags" />;
 ```
 
 ## Specifications

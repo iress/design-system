@@ -15,7 +15,19 @@ import { IressSkeleton } from '@iress-oss/ids-components';
 
 Skeletons can increase perceived performance for users. As opposed to spinners, skeletons make it feel as though things are happening immediately, then the information is incrementally displayed on the screen.
 
-<StoryEmbed id="components-skeleton--mode"/>
+```tsx
+import { IressSkeleton, IressStack } from '@iress-oss/ids-components';
+
+export function SkeletonMode() {
+  return (
+    <IressStack gap="md">
+      <IressSkeleton mode="text" />
+      <IressSkeleton mode="rect" height="100px" />
+      <IressSkeleton mode="circle" height="100px" width="100px" />
+    </IressStack>
+  );
+}
+```
 
 ## Design
 
@@ -61,7 +73,7 @@ Skeletons can increase perceived performance for users. As opposed to spinners, 
 ```tsx
 import { IressSkeleton } from '@iress-oss/ids-components';
 
-<IressSkeleton />
+<IressSkeleton />;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs#api-props)
@@ -72,37 +84,225 @@ import { IressSkeleton } from '@iress-oss/ids-components';
 
 The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
-<StoryEmbed id="components-skeleton--mode"/>
+```tsx
+import { IressSkeleton, IressStack } from '@iress-oss/ids-components';
+
+export function SkeletonMode() {
+  return (
+    <IressStack gap="md">
+      <IressSkeleton mode="text" />
+      <IressSkeleton mode="rect" height="100px" />
+      <IressSkeleton mode="circle" height="100px" width="100px" />
+    </IressStack>
+  );
+}
+```
 
 #### Text
 
 `text` mode works in place of `IressText`, matching sizing via the `textVariant` prop. Accepts `width` but not `height` (determined by font size and line height).
 
-<StoryEmbed id="components-skeleton--text"/>
+```tsx
+import { useState } from 'react';
+import {
+  IressButton,
+  IressSkeleton,
+  IressStack,
+  IressText,
+} from '@iress-oss/ids-components';
+
+const TEXT_STYLES = [
+  'typography.heading.1',
+  'typography.heading.2',
+  'typography.heading.3',
+  'typography.body.md',
+  'typography.body.sm',
+] as const;
+
+export function SkeletonText() {
+  const [loading, setLoading] = useState(true);
+
+  return (
+    <IressStack gap="md">
+      <IressButton onClick={() => setLoading(!loading)}>
+        Toggle load
+      </IressButton>
+      <IressStack gap="md">
+        {TEXT_STYLES.map((textStyle) => [
+          loading && (
+            <IressSkeleton
+              key={`skeleton-${textStyle}`}
+              mode="text"
+              textStyle={textStyle}
+            />
+          ),
+          !loading && (
+            <IressText key={`text-${textStyle}`} textStyle={textStyle}>
+              {textStyle}
+            </IressText>
+          ),
+        ])}
+      </IressStack>
+    </IressStack>
+  );
+}
+```
 
 #### Rect
 
 `rect` mode replaces block elements like images. Accepts `width` and `height` (defaults to 100% × 100px).
 
-<StoryEmbed id="components-skeleton--rect"/>
+```tsx
+import { useState } from 'react';
+import {
+  IressButton,
+  IressPlaceholder,
+  IressSkeleton,
+  IressStack,
+} from '@iress-oss/ids-components';
+
+export function SkeletonRect() {
+  const [loading, setLoading] = useState(true);
+
+  return (
+    <IressStack gap="md">
+      <IressButton onClick={() => setLoading(!loading)}>
+        Toggle load
+      </IressButton>
+      {loading && <IressSkeleton mode="rect" width="250" height="150" />}
+      {!loading && (
+        <IressPlaceholder width="250" height="150">
+          Image
+        </IressPlaceholder>
+      )}
+    </IressStack>
+  );
+}
+```
 
 #### Circle
 
 `circle` mode replaces circular elements like profile images. Accepts `width` and `height` (defaults to 100% × 100px).
 
-<StoryEmbed id="components-skeleton--circle"/>
+```tsx
+import { useState } from 'react';
+import {
+  IressButton,
+  IressPlaceholder,
+  IressSkeleton,
+  IressStack,
+} from '@iress-oss/ids-components';
+
+export function SkeletonCircle() {
+  const [loading, setLoading] = useState(true);
+
+  return (
+    <IressStack gap="md">
+      <IressButton onClick={() => setLoading(!loading)}>
+        Toggle load
+      </IressButton>
+      {loading && <IressSkeleton mode="circle" width="150" height="150" />}
+      {!loading && (
+        <IressPlaceholder width="150" height="150" borderRadius="50%">
+          Image
+        </IressPlaceholder>
+      )}
+    </IressStack>
+  );
+}
+```
 
 #### Size
 
 `width` and `height` props accept any CSS unit. Defaults to pixels if no unit is provided.
 
-<StoryEmbed id="components-skeleton--size"/>
+```tsx
+import { IressInline, IressSkeleton } from '@iress-oss/ids-components';
+
+export function SkeletonSize() {
+  return (
+    <IressInline gap="md">
+      <IressSkeleton mode="rect" width="150" height="150" />
+      <IressSkeleton mode="circle" width="150" height="150" />
+      <IressSkeleton mode="text" width="150" />
+    </IressInline>
+  );
+}
+```
 
 #### Card
 
 A common use case is placing skeletons within card components as loading placeholders.
 
-<StoryEmbed id="components-skeleton--card"/>
+```tsx
+import { useState } from 'react';
+import {
+  IressButton,
+  IressCard,
+  IressSkeleton,
+  IressStack,
+  IressText,
+} from '@iress-oss/ids-components';
+
+const CARD_LINE_SIZES = ['100%', '91%', '95%', '89%', '83%'];
+
+const CardLoading = () => (
+  <IressCard
+    heading={<IressSkeleton textStyle="typography.heading.4" width="75%" />}
+    media={<IressSkeleton mode="rect" height="200" />}
+    stretch
+  >
+    <IressStack gap="md">
+      <IressStack gap="xs">
+        {CARD_LINE_SIZES.map((size) => (
+          <IressSkeleton key={`${size}-1`} width={size} />
+        ))}
+      </IressStack>
+      <IressStack gap="xs">
+        {CARD_LINE_SIZES.map((size) => (
+          <IressSkeleton key={`${size}-2`} width={size} />
+        ))}
+      </IressStack>
+    </IressStack>
+  </IressCard>
+);
+
+const CardItem = () => (
+  <IressCard
+    heading={<h4>This is the card heading</h4>}
+    media={
+      <img
+        src="https://www.iress.com/media/images/media-contact.width-600.png"
+        alt=""
+      />
+    }
+  >
+    <IressText element="p">
+      Non cupiditate, libero ex, voluptates ea ipsum deleniti sequi sed eveniet
+      ab enim sunt itaque qui ullam, adipisci quo expedita laboriosam deserunt?
+    </IressText>
+    <IressText element="p">
+      Impedit, quasi voluptas quae quibusdam officiis corporis. Distinctio et
+      aspernatur quo atque non enim, recusandae at, eum dicta ullam commodi modi
+      debitis.
+    </IressText>
+  </IressCard>
+);
+
+export const SkeletonCard = () => {
+  const [loading, setLoading] = useState(true);
+
+  return (
+    <IressStack gap="md">
+      <IressButton onClick={() => setLoading(!loading)}>
+        Toggle load
+      </IressButton>
+      {loading && <CardLoading />}
+      {!loading && <CardItem />}
+    </IressStack>
+  );
+};
+```
 
 ### Testing
 

@@ -15,7 +15,16 @@ import { IressContainer } from '@iress-oss/ids-components';
 
 IressContainer provides a means to center and horizontally pad your site's contents.
 
-<StoryEmbed id="components-container--container"/>
+```tsx
+<IressContainer>
+  <p>
+    IressContainer improves the scannability and visual hierarchy of a user
+    interface by snapping the layout to fixed max widths at different
+    breakpoints.
+  </p>
+  <p>Try resizing the screen to see the difference.</p>
+</IressContainer>;
+```
 
 ## Design
 
@@ -43,7 +52,7 @@ import { IressContainer } from '@iress-oss/ids-components';
 
 <IressContainer>
   <p>Centred content</p>
-</IressContainer>
+</IressContainer>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-container--docs#api-props)
@@ -52,13 +61,24 @@ import { IressContainer } from '@iress-oss/ids-components';
 
 The `IressContainer` snaps to fixed max widths at different breakpoints:
 
-<StoryEmbed id="components-container--breakpoint-table"/>
+```tsx
+<IressTable
+  caption="Container breakpoints"
+  rows={BREAKPOINTS.map((breakpoint) => ({
+    breakpoint,
+    screenWidths: BREAKPOINT_DETAILS[breakpoint].screenWidthRange,
+    maxWidth: BREAKPOINT_DETAILS[breakpoint].containerMaxWidth,
+  }))}
+/>;
+```
 
 #### Fluid
 
 If you want the `IressContainer` to fill its containing element, you can set the `fluid` prop. Resize the example below to see how the IressContainer is 100% for all screen sizes.
 
-<StoryEmbed id="components-container--fluid"/>
+```tsx
+<IressContainer fluid />;
+```
 
 ### Testing
 
@@ -88,4 +108,11 @@ const container = screen.getByTestId('my-container');
 
 Centres content with horizontal padding. Snaps to fixed max-widths at each breakpoint unless `fluid` is set.
 
-<StoryEmbed id="foundations--container-breakpoints" controls={false} />
+| Breakpoint | Screen Widths |
+|------------|---------------|
+| `xs` | 0 - 575px |
+| `sm` | 576px - 767px |
+| `md` | 768px - 1023px |
+| `lg` | 1024px - 1279px |
+| `xl` | 1280px - 1599px |
+| `xxl` | 1600px and above |

@@ -12,13 +12,14 @@ import {
   IressStyled,
   IressTable,
   IressText,
-  useResponsiveProps,
   type PositiveSpacingToken,
 } from '@/main';
 import { useState } from 'react';
 import { cssVars } from '@iress-oss/ids-tokens';
-import { withBreakpointLabel } from '@iress-oss/ids-storybook-config';
+import { withBreakpointLabel, withSource } from '@iress-oss/ids-storybook-config';
 import { GRID_SIZE, Z_INDEX } from '@theme-preset/constants';
+import { ResponsiveTableColumns } from './mocks/ResponsiveTableColumns';
+import ResponsiveTableColumnsSource from './mocks/ResponsiveTableColumns.tsx?raw';
 
 type Story = StoryObj<typeof IressTable>;
 
@@ -165,40 +166,6 @@ const MarginToken = ({ token }: { token?: PositiveSpacingToken }) => {
         }}
       />
     </IressInline>
-  );
-};
-
-const ResponsiveTableColumns = () => {
-  const { value } = useResponsiveProps({
-    base: [{ key: 'name', label: 'Name' }],
-    lg: [
-      { key: 'name', label: 'Name' },
-      { key: 'age', label: 'Age' },
-    ],
-  });
-
-  return (
-    <IressTable
-      caption={
-        <IressText textAlign="left">
-          <h2>
-            <code>useResponsiveProps</code>
-          </h2>
-          <p>
-            This example demonstrates a use case for{' '}
-            <code>useResponsiveProps</code>, for changing the columns on a table
-            based on the breakpoint.
-          </p>
-          <p>Resize the screen to see the columns change</p>
-        </IressText>
-      }
-      columns={value}
-      rows={[
-        { name: 'Luke Skywalker', age: 19 },
-        { name: 'Princess Leia', age: 19 },
-        { name: 'Han Solo', age: 32 },
-      ]}
-    />
   );
 };
 
@@ -897,8 +864,12 @@ export const Xxl: Story = {
 };
 
 export const ResponsiveProps: Story = {
-   decorators: [withBreakpointLabel()],
-  render: (args) => <ResponsiveTableColumns {...args} />,
+  render: () => <ResponsiveTableColumns />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ResponsiveTableColumnsSource, { stripImports: true }),
+  },
+  decorators: [withBreakpointLabel()],
 };
 
 const zIndexUsage: Record<keyof typeof Z_INDEX, string> = {

@@ -15,7 +15,9 @@ import { IressIcon } from '@iress-oss/ids-components';
 
 Icons enhance experiences by visually communicating meaning, actions, status, and feedback.
 
-<StoryEmbed id="components-icon--screen-reader-text"/>
+```tsx
+<IressIcon name="home" screenreaderText="Home" />;
+```
 
 ## Design
 
@@ -51,7 +53,15 @@ Icons enhance experiences by visually communicating meaning, actions, status, an
 
 A list of all the icons available in the Iress Design System. If you can't find the icon you are looking for, please refer to the [Material Symbols documentation](https://fonts.google.com/icons?icon.style=Rounded&icon.set=Material+Symbols).
 
-<StoryEmbed id="components-icon--icons"/>
+Icons use [Material Symbols](https://fonts.google.com/icons?icon.set=Material+Symbols) via the `name` prop. The AI model already knows Material Symbol names — use any valid name directly.
+
+```tsx
+<IressIcon name="home" />
+<IressIcon name="settings" filled />
+<IressIcon name="arrow_forward" />
+```
+
+Also supports legacy Font Awesome names (e.g. `info-circle`, `times`, `chevron-down`) for migration compatibility.
 
 ### Related patterns
 
@@ -66,7 +76,7 @@ A list of all the icons available in the Iress Design System. If you can't find 
 ```tsx
 import { IressIcon } from '@iress-oss/ids-components';
 
-<IressIcon name="home" />
+<IressIcon name="home" />;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-icon--docs#api-props)
@@ -84,9 +94,7 @@ If you are already using the `IressProvider` component in your application, no f
 ```tsx
 import { IressProvider } from '@iress-oss/ids-components';
 
-<IressProvider>
-  {/* Your application */}
-</IressProvider>
+<IressProvider>{/* Your application */}</IressProvider>;
 ```
 
 <Details>
@@ -108,9 +116,7 @@ For more simpler applications, or if you need to customise the icon provider ind
 
 ```tsx
 import { IressIconProvider } from '@iress-oss/ids-components';
-<IressIconProvider>
-  {/* Your application */}
-</IressIconProvider>
+<IressIconProvider>{/* Your application */}</IressIconProvider>;
 ```
 
 **Option 3: Manual font loading**
@@ -152,7 +158,7 @@ The easiest way to do this is to use the `IressIconProvider` component with the 
 import { IressIconProvider } from '@iress-oss/ids-components';
 <IressIconProvider container={document.head}>
   {/* Your application */}
-</IressIconProvider>
+</IressIconProvider>;
 ```
 
 </Details>
@@ -165,44 +171,169 @@ From version 6, the default icon type is Material Symbols. If you want to make F
 import { IressIconProvider } from '@iress-oss/ids-components';
 <IressIconProvider type="fontawesome">
   {/* Your application */}
-</IressIconProvider>
+</IressIconProvider>;
 ```
 
 ### Screen Reader Text
 
 By default icons are hidden from screen readers. The `screenreaderText` prop makes icons visible to screen readers users, providing a description of the icon.
 
-<StoryEmbed id="components-icon--screen-reader-text"/>
+```tsx
+<IressIcon name="home" screenreaderText="Home" />;
+```
 
 ### Filled
 
 The `filled` prop allows you to use a filled version of the icon, usually to indicate an active state.
 
-<StoryEmbed id="components-icon--filled"/>
+```tsx
+import { IressIcon, IressInline, IressText } from '@iress-oss/ids-components';
+
+export function IconFilled() {
+  return (
+    <IressInline gap="md">
+      <IressText textAlign="center">
+        <IressIcon name="favorite" textStyle="typography.heading.1" />
+        <br />
+        (default)
+      </IressText>
+      <IressText textAlign="center">
+        <IressIcon name="favorite" filled textStyle="typography.heading.1" />
+        <br />
+        filled
+      </IressText>
+    </IressInline>
+  );
+}
+```
 
 ### Flip
 
 The `flip` prop can be set to horizontal, vertical or both.
 
-<StoryEmbed id="components-icon--flip"/>
+```tsx
+import {
+  IressIcon,
+  IressInline,
+  IressStack,
+  IressText,
+} from '@iress-oss/ids-components';
+
+export function IconFlip() {
+  return (
+    <IressInline gap="md">
+      <IressStack horizontalAlign="center">
+        <IressIcon name="home" textStyle="typography.heading.1" />
+        <IressText>(default)</IressText>
+      </IressStack>
+      <IressStack horizontalAlign="center">
+        <IressIcon
+          name="home"
+          textStyle="typography.heading.1"
+          flip="horizontal"
+        />
+        <IressText>horizontal</IressText>
+      </IressStack>
+      <IressStack horizontalAlign="center">
+        <IressIcon
+          name="home"
+          textStyle="typography.heading.1"
+          flip="vertical"
+        />
+        <IressText>vertical</IressText>
+      </IressStack>
+      <IressStack horizontalAlign="center">
+        <IressIcon name="home" textStyle="typography.heading.1" flip="both" />
+        <IressText>both</IressText>
+      </IressStack>
+    </IressInline>
+  );
+}
+```
 
 ### Rotate
 
 The `rotate` prop can be set to 90, 180 or 270 degrees.
 
-<StoryEmbed id="components-icon--rotate"/>
+```tsx
+import { IressIcon, IressInline, IressText } from '@iress-oss/ids-components';
+
+export function IconRotate() {
+  return (
+    <IressInline gap="md">
+      <IressText textAlign="center">
+        <IressIcon name="home" textStyle="typography.heading.1" />
+        <br />
+        (default)
+      </IressText>
+      <IressText textAlign="center">
+        <IressIcon name="home" textStyle="typography.heading.1" rotate={90} />
+        <br />
+        90
+      </IressText>
+      <IressText textAlign="center">
+        <IressIcon name="home" textStyle="typography.heading.1" rotate={180} />
+        <br />
+        180
+      </IressText>
+      <IressText textAlign="center">
+        <IressIcon name="home" textStyle="typography.heading.1" rotate={270} />
+        <br />
+        270
+      </IressText>
+    </IressInline>
+  );
+}
+```
 
 ### Spin
 
 The `spin` prop can be set to half (fastest), 1, 2 or 3 (slowest) to control the speed of the icon spin animation, useful for loading spinners.
 
-<StoryEmbed id="components-icon--spin"/>
+```tsx
+import { IressIcon, IressInline, IressText } from '@iress-oss/ids-components';
+
+export function IconSpin() {
+  return (
+    <IressInline gap="md">
+      <IressText>
+        <IressIcon name="spinner" screenreaderText="Loading..." spin="half" />{' '}
+        half
+      </IressText>
+      <IressText>
+        <IressIcon name="spinner" screenreaderText="Loading..." spin={1} /> 1
+      </IressText>
+      <IressText>
+        <IressIcon name="spinner" screenreaderText="Loading..." spin={2} /> 2
+      </IressText>
+      <IressText>
+        <IressIcon name="spinner" screenreaderText="Loading..." spin={3} /> 3
+      </IressText>
+    </IressInline>
+  );
+}
+```
 
 ### External link
 
 Icons now inherit the size of the parent component. This means you can use them inside buttons, links and other components without needing to set a size.
 
-<StoryEmbed id="components-icon--external-link"/>
+```tsx
+<IressLink
+  href="https://www.iress.com/"
+  target="_blank"
+  rel="noreferrer"
+  append={
+    <IressIcon
+      name="external-link"
+      pl="spacing.2"
+      screenreaderText="(Opens in a new tab)"
+    />
+  }
+>
+  Go to this link
+</IressLink>;
+```
 
 ### Reference
 
@@ -210,7 +341,15 @@ A list of all the icons available in the Iress Design System (Material Symbols o
 
 If you can't find the icon you are looking for, please refer to the [Material Symbols documentation](https://fonts.google.com/icons?icon.style=Rounded&icon.set=Material+Symbols).
 
-<StoryEmbed id="components-icon--icons"/>
+Icons use [Material Symbols](https://fonts.google.com/icons?icon.set=Material+Symbols) via the `name` prop. The AI model already knows Material Symbol names — use any valid name directly.
+
+```tsx
+<IressIcon name="home" />
+<IressIcon name="settings" filled />
+<IressIcon name="arrow_forward" />
+```
+
+Also supports legacy Font Awesome names (e.g. `info-circle`, `times`, `chevron-down`) for migration compatibility.
 
 ### Migrating from Font Awesome
 
@@ -218,7 +357,42 @@ To help with migrating, we have mapped some common Font Awesome icons to their M
 
 As of version 6, these names will automatically be mapped when using the `IressIcon` component with the default `type` of `material`. However, we strongly recommend you change them to the material equivalent as soon as possible as the automatic mapping will be removed in a future release.
 
-<StoryEmbed id="components-icon--font-awesome-to-material-migration"/>
+| Font Awesome | Material Symbol |
+|-------------|-----------------|
+| `times-circle` | `cancel` |
+| `lock-alt` | `lock` |
+| `chevron-down` | `keyboard_arrow_down` |
+| `chevron-up` | `keyboard_arrow_up` |
+| `chevron-left` | `keyboard_arrow_left` |
+| `chevron-right` | `keyboard_arrow_right` |
+| `chevron-double-down` | `keyboard_double_arrow_down` |
+| `chevron-double-up` | `keyboard_double_arrow_up` |
+| `chevron-circle-down` | `expand_circle_down` |
+| `arrow-left` | `arrow_back` |
+| `arrow-right` | `arrow_forward` |
+| `arrow-up` | `arrow_upward` |
+| `arrow-down` | `arrow_downward` |
+| `user-circle` | `account_circle` |
+| `power-off` | `power_settings_new` |
+| `ellipsis-v` | `more_vert` |
+| `ellipsis-h` | `more_horiz` |
+| `file-image` | `image` |
+| `file-pdf` | `picture_as_pdf` |
+| `file-spreadsheet` | `table_chart` |
+| `file-word` | `description` |
+| `folder-open` | `folder_open` |
+| `info-circle` | `info` |
+| `question-circle` | `help` |
+| `exclamation-triangle` | `warning` |
+| `external-link` | `open_in_new` |
+| `info-square` | `info` |
+| `align-left` | `format_align_left` |
+| `align-center` | `format_align_center` |
+| `align-right` | `format_align_right` |
+| `align-justify` | `format_align_justify` |
+| `spinner-third` | `progress_activity` |
+| `file-alt` | `draft` |
+| `plus-circle` | `add_circle` |
 
 ### Testing
 
@@ -235,7 +409,7 @@ Decorative icons (without `screenreaderText`) are hidden from the accessibility 
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the icon | — | `icon` |
+| main | The root element of the icon | `getByRole('img', { name: '...' })` when a label is provided, otherwise `getByRole('img', { hidden: true })` | `icon` |
 
 ---
 

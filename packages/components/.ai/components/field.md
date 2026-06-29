@@ -15,7 +15,17 @@ import { IressField } from '@iress-oss/ids-components';
 
 The field component is used to place label, hint and error information around form controls.
 
-<StoryEmbed id="components-field--label"/>
+```tsx
+<IressField
+  label={
+    <>
+      <IressIcon name="home" /> Find your address
+    </>
+  }
+>
+  <IressInput id="address" name="address" />
+</IressField>;
+```
 
 ## Design
 
@@ -56,9 +66,11 @@ The field component is used to place label, hint and error information around fo
 ### Quick Start
 
 ```tsx
-import { IressField } from '@iress-oss/ids-components';
+import { IressField, IressInput } from '@iress-oss/ids-components';
 
-<IressField label="First name" />
+<IressField label="First name">
+  <IressInput id="first-name" />
+</IressField>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field--docs#api-props)
@@ -69,65 +81,285 @@ import { IressField } from '@iress-oss/ids-components';
 
 The `label` prop is required to describe the field.
 
-<StoryEmbed id="components-field--label"/>
+```tsx
+<IressField
+  label={
+    <>
+      <IressIcon name="home" /> Find your address
+    </>
+  }
+>
+  <IressInput id="address" name="address" />
+</IressField>;
+```
 
 #### Hint
 
 Provide extra information using the `hint` prop. Accepts any React node.
 
-<StoryEmbed id="components-field--hint"/>
+```tsx
+<IressField
+  label="Email address"
+  hint="For us to be able to contact you in the future"
+>
+  <IressInput id="email" name="email" required type="email" />
+</IressField>;
+```
 
 #### Error message
 
 Display errors with the `errorMessages` prop (array of `ValidationMessageObj`).
 
-<StoryEmbed id="components-field--error-message"/>
+```tsx
+<IressField
+  label="Error message"
+  errorMessages={[{ message: 'This field is required' }]}
+>
+  <IressInput id="name" name="name" required />
+</IressField>;
+```
 
 #### Custom error
 
 Use the `error` prop for custom error markup (e.g. icons).
 
-<StoryEmbed id="components-field--custom-error"/>
+```tsx
+<IressField
+  label="Custom error"
+  error={
+    <IressText element="small" color="colour.system.danger.text">
+      This is a custom error message
+    </IressText>
+  }
+>
+  <IressInput id="name" name="name" required />
+</IressField>;
+```
 
 #### Hidden label
 
 Use `hiddenLabel` to accessibly hide the label (e.g. for search fields).
 
-<StoryEmbed id="components-field--hidden-label"/>
+```tsx
+<IressField
+  label="This label is hidden"
+  hint="This hint text is hidden"
+  hiddenLabel
+>
+  <IressInput id="name" name="input1" required type="text" />
+</IressField>;
+```
 
 Fields with hidden labels should still provide error feedback in an accessible way, either via `error` or `errorMessages`.
 
-<StoryEmbed id="components-field--hidden-label-with-error"/>
+```tsx
+<IressField
+  label="This label is hidden"
+  hint="This hint text is hidden"
+  error={
+    <IressText element="small" color="colour.system.danger.text">
+      Even fields with hidden labels will show their validation message
+    </IressText>
+  }
+  hiddenLabel
+>
+  <IressInput id="name" name="input1" required type="text" />
+</IressField>;
+```
 
 #### Required
 
 Fields marked `required` display an asterisk on the label.
 
-<StoryEmbed id="components-field--required"/>
+```tsx
+<IressField label="This field is required" required>
+  <IressInput id="name" name="input1" required type="text" />
+</IressField>;
+```
 
 #### Readonly data
 
 Display read-only data in a form-like layout. Use `readOnly="locked"` for permission-based read-only with a lock icon.
 
-<StoryEmbed id="components-field--readonly-data"/>
+```tsx
+<IressField label="First name" hint="This field is readonly" readOnly required>
+  <IressReadonly />
+</IressField>;
+```
 
 #### Supplementary
 
 The `supplementary` prop displays metadata based on the field value (e.g. calculated values). Only shown when the field is not in an error state.
 
-<StoryEmbed id="components-field--supplementary"/>
+```tsx
+import { useState } from 'react';
+import {
+  IressField,
+  IressInput,
+  IressStack,
+  IressToggle,
+} from '@iress-oss/ids-components';
+
+export function FieldSupplementary() {
+  const [error, setError] = useState<string | undefined>();
+
+  return (
+    <IressStack gap="spacing.5">
+      <IressToggle
+        onChange={(checked) =>
+          setError(checked ? 'This field is required' : undefined)
+        }
+        checked={error !== undefined}
+      >
+        Show error
+      </IressToggle>
+      <IressField
+        label="First name"
+        supplementary="I only show if there is no error"
+        error={error}
+      >
+        <IressInput id="name" name="input1" required type="text" />
+      </IressField>
+    </IressStack>
+  );
+}
+```
 
 #### Horizontal layout
 
 Use `horizontal` for label and input on the same line. In horizontal mode, hints display as a tooltip.
 
-<StoryEmbed id="components-field--horizontal"/>
+```tsx
+<IressField
+  horizontal
+  labelWidth="250px"
+  label="Email address"
+  hint="Enter your email address for contact"
+  supplementary="We will not share your email with third parties (Supplementary text)"
+>
+  <IressInput
+    id="email"
+    name="email"
+    required
+    type="email"
+    placeholder="john.doe@example.com"
+  />
+</IressField>;
+```
 
 #### Remove error margin
 
 Use `removeErrorMargin` to remove reserved space for error messages for tighter spacing.
 
-<StoryEmbed id="components-field--remove-error-margin"/>
+```tsx
+import { useState } from 'react';
+import {
+  IressCol,
+  IressField,
+  IressInline,
+  IressInput,
+  IressRow,
+  IressStack,
+  IressText,
+  IressToggle,
+} from '@iress-oss/ids-components';
+
+export function FieldRemoveErrorMargin() {
+  const [removeErrorMargin, setRemoveErrorMargin] = useState(false);
+  const [showError, setShowError] = useState(false);
+
+  const fieldProps = {
+    removeErrorMargin,
+    ...(showError
+      ? {
+          errorMessages: [{ message: 'This field is required' }],
+        }
+      : {}),
+  };
+
+  const fieldPropsWithContent = {
+    removeErrorMargin,
+    ...(showError
+      ? {
+          errorMessages: [{ message: 'This field is required' }],
+        }
+      : {
+          supplementary: 'This is always-displayed supplementary text',
+        }),
+  };
+
+  return (
+    <IressStack gap="spacing.5">
+      <IressInline gap="spacing.4">
+        <IressToggle
+          onChange={(checked) => setRemoveErrorMargin(checked)}
+          checked={removeErrorMargin}
+        >
+          Remove error margin (tighter field spacing)
+        </IressToggle>
+
+        <IressToggle
+          onChange={(checked) => setShowError(checked)}
+          checked={showError}
+        >
+          Show error message
+        </IressToggle>
+      </IressInline>
+
+      <IressRow gutter="spacing.6">
+        <IressCol span="6">
+          <IressStack gap="spacing.2">
+            <IressText element="h3">Vertical Label Layout</IressText>
+            <IressStack gap="spacing.0">
+              <IressField {...fieldProps} label="First Name">
+                <IressInput placeholder="Enter first name" />
+              </IressField>
+              <IressField {...fieldPropsWithContent} label="Last Name">
+                <IressInput placeholder="Enter last name" />
+              </IressField>
+              <IressField {...fieldProps} label="Email Address">
+                <IressInput type="email" placeholder="Enter email" />
+              </IressField>
+            </IressStack>
+          </IressStack>
+        </IressCol>
+
+        <IressCol span="6">
+          <IressStack gap="spacing.2">
+            <IressText element="h3">Horizontal Label Layout</IressText>
+            <IressStack gap="spacing.0">
+              <IressField
+                {...fieldProps}
+                horizontal
+                labelWidth="120px"
+                label="First Name"
+              >
+                <IressInput placeholder="Enter first name" />
+              </IressField>
+              <IressField
+                {...fieldPropsWithContent}
+                horizontal
+                labelWidth="120px"
+                label="Last Name"
+              >
+                <IressInput placeholder="Enter last name" />
+              </IressField>
+              <IressField
+                {...fieldProps}
+                horizontal
+                labelWidth="120px"
+                label="Email Address"
+              >
+                <IressInput type="email" placeholder="Enter email" />
+              </IressField>
+            </IressStack>
+          </IressStack>
+        </IressCol>
+      </IressRow>
+    </IressStack>
+  );
+}
+```
 
 ### Testing
 
@@ -151,10 +383,10 @@ expect(input).toBeInTheDocument();
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root wrapper element (a div with no role) | — | `field` |
-| label | The field label element | — | `field__label` |
-| hint | The hint text below the label | — | `field__hint` |
-| error | The error message container | — | `field__error` |
+| main | The root wrapper element (a div with no role) | No role-based query — use `getByTestId('field')`. To query the child input, use `getByRole('textbox', { name: '...' })` or `getByLabelText('...')` | `field` |
+| label | The field label element | `getByText('...')` | `field__label` |
+| hint | The hint text below the label | `getByText('...')` | `field__hint` |
+| error | The error message container | `getByText('...')` | `field__error` |
 
 ---
 

@@ -15,7 +15,28 @@ import { IressMenu } from '@iress-oss/ids-components';
 
 A menu can display grouped action buttons, navigation items or headings.
 
-<StoryEmbed id="components-menu--basic"/>
+```tsx
+import {
+  IressMenu,
+  IressMenuDivider,
+  IressMenuHeading,
+  IressMenuItem,
+} from '@iress-oss/ids-components';
+
+export function MenuBasic() {
+  return (
+    <IressMenu defaultSelected="5">
+      <IressMenuHeading>Menu heading</IressMenuHeading>
+      <IressMenuItem value="2">Menu item (button)</IressMenuItem>
+      <IressMenuDivider />
+      <IressMenuItem href="https://iress.com">Menu item (link)</IressMenuItem>
+      <IressMenuItem selected value="5">
+        Menu item (selected)
+      </IressMenuItem>
+    </IressMenu>
+  );
+}
+```
 
 ## Design
 
@@ -77,7 +98,7 @@ import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
 <IressMenu>
   <IressMenuItem>Action one</IressMenuItem>
   <IressMenuItem>Action two</IressMenuItem>
-</IressMenu>
+</IressMenu>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu--docs#api-props)
@@ -88,55 +109,285 @@ import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
 
 `IressMenuDivider`, `IressMenuHeading`, `IressMenuItem` and `IressMenuText` are supplied as children of the menu.
 
-<StoryEmbed id="components-menu--basic"/>
+```tsx
+import {
+  IressMenu,
+  IressMenuDivider,
+  IressMenuHeading,
+  IressMenuItem,
+} from '@iress-oss/ids-components';
+
+export function MenuBasic() {
+  return (
+    <IressMenu defaultSelected="5">
+      <IressMenuHeading>Menu heading</IressMenuHeading>
+      <IressMenuItem value="2">Menu item (button)</IressMenuItem>
+      <IressMenuDivider />
+      <IressMenuItem href="https://iress.com">Menu item (link)</IressMenuItem>
+      <IressMenuItem selected value="5">
+        Menu item (selected)
+      </IressMenuItem>
+    </IressMenu>
+  );
+}
+```
 
 #### Complex
 
 `IressMenuItem`, `IressMenuHeading` and `IressMenuText` support `prepend`, `divider` and `append` props.
 
-<StoryEmbed id="components-menu--complex"/>
+```tsx
+import {
+  IressIcon,
+  IressMenu,
+  IressMenuDivider,
+  IressMenuHeading,
+  IressMenuItem,
+} from '@iress-oss/ids-components';
+
+export function MenuComplex() {
+  return (
+    <IressMenu maxWidth="3/12">
+      <IressMenuHeading prepend={<IressIcon name="sentiment_excited" />}>
+        Heading with prepend
+      </IressMenuHeading>
+      <IressMenuItem
+        value="3"
+        divider
+        selected
+        prepend={<IressIcon name="flag" />}
+        append={<IressIcon name="chevron-right" />}
+      >
+        Button with append and prepend
+      </IressMenuItem>
+      <IressMenuHeading
+        element="h3"
+        append={<IressIcon name="sentiment_excited" />}
+        prepend={<IressIcon name="sentiment_excited" />}
+      >
+        Heading with append and prepend
+      </IressMenuHeading>
+      <IressMenuItem
+        value="4"
+        append={<IressIcon name="chevron-right" />}
+        href="https://iress.com"
+      >
+        Link with append
+      </IressMenuItem>
+      <IressMenuDivider />
+      <IressMenuItem value="6" append={<IressIcon name="chevron-right" />}>
+        Button with append
+      </IressMenuItem>
+    </IressMenu>
+  );
+}
+```
 
 #### Secondary navigation
 
 When `href` is set on `IressMenuItem`, it renders as a link. Wrap in a `<nav>` and set `role` to `list`.
 
-<StoryEmbed id="components-menu--secondary-navigation"/>
+```tsx
+import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
+
+export function MenuNavigation() {
+  return (
+    <nav aria-label="Secondary">
+      <IressMenu>
+        <IressMenuItem href="https://www.iress.com/software/financial-advice/">
+          Financial advice
+        </IressMenuItem>
+        <IressMenuItem
+          selected
+          href="https://www.iress.com/software/trading-and-market-data/"
+        >
+          Trading and market data
+        </IressMenuItem>
+        <IressMenuItem href="https://www.iress.com/software/investment-management/">
+          Investment management
+        </IressMenuItem>
+        <IressMenuItem href="https://www.iress.com/software/mortgages/">
+          Mortgages
+        </IressMenuItem>
+      </IressMenu>
+    </nav>
+  );
+}
+```
 
 #### Headings
 
 Use `IressMenuHeading` with the `element` or `textStyle` prop for heading levels.
 
-<StoryEmbed id="components-menu--headings"/>
+```tsx
+import {
+  IressMenu,
+  IressMenuHeading,
+  IressMenuItem,
+} from '@iress-oss/ids-components';
+
+export function MenuHeadings() {
+  return (
+    <IressMenu>
+      <IressMenuHeading element="h4">Menu heading (h4)</IressMenuHeading>
+      <IressMenuItem>Menu item 1</IressMenuItem>
+      <IressMenuHeading element="h5">Menu heading (h5)</IressMenuHeading>
+      <IressMenuItem>Menu item 2</IressMenuItem>
+    </IressMenu>
+  );
+}
+```
 
 #### Dividers
 
 Use `IressMenuDivider` or the `divider` prop on items for visual separation.
 
-<StoryEmbed id="components-menu--dividers"/>
+```tsx
+import {
+  IressMenu,
+  IressMenuDivider,
+  IressMenuHeading,
+  IressMenuItem,
+} from '@iress-oss/ids-components';
+
+export function MenuDividers() {
+  return (
+    <IressMenu>
+      <IressMenuHeading element="h4" divider>
+        Menu heading (h4)
+      </IressMenuHeading>
+      <IressMenuItem>Menu item 1</IressMenuItem>
+      <IressMenuItem divider>Menu item 2</IressMenuItem>
+      <IressMenuHeading element="h5">Menu heading (h5)</IressMenuHeading>
+      <IressMenuItem selected>Menu item 3</IressMenuItem>
+      <IressMenuItem>Menu item 4</IressMenuItem>
+      <IressMenuDivider />
+      <IressMenuItem>Menu item 5</IressMenuItem>
+    </IressMenu>
+  );
+}
+```
 
 #### Fluid menus
 
 Set `fluid` to stretch the menu to its container width.
 
-<StoryEmbed id="components-menu--fluid"/>
+```tsx
+<IressMenu fluid>
+  <IressMenuItem value="1">Menu item 1</IressMenuItem>
+  <IressMenuItem value="2">Menu item 2</IressMenuItem>
+</IressMenu>;
+```
 
 #### Layout
 
 The `layout` prop supports `stack` (default), `inline`, and `inline-equal-width`.
 
-<StoryEmbed id="components-menu--layout"/>
+```tsx
+import {
+  IressMenu,
+  IressMenuItem,
+  IressStack,
+  IressText,
+} from '@iress-oss/ids-components';
+
+export function MenuLayout() {
+  return (
+    <IressStack gap="lg">
+      <IressText>
+        <h3>Stack (default)</h3>
+        <IressMenu layout="stack" defaultSelected="1">
+          <IressMenuItem value="1">Option 1</IressMenuItem>
+          <IressMenuItem value="2">Option 2</IressMenuItem>
+          <IressMenuItem value="3">Option 3</IressMenuItem>
+          <IressMenuItem value="4">Option 4</IressMenuItem>
+          <IressMenuItem value="5">Option 5</IressMenuItem>
+        </IressMenu>
+      </IressText>
+      <IressText>
+        <h3>Inline</h3>
+        <IressMenu layout="inline" defaultSelected="1">
+          <IressMenuItem value="1">Option 1</IressMenuItem>
+          <IressMenuItem value="2">Option 2</IressMenuItem>
+          <IressMenuItem value="3">Option 3</IressMenuItem>
+          <IressMenuItem value="4">Option 4</IressMenuItem>
+          <IressMenuItem value="5">Option 5</IressMenuItem>
+        </IressMenu>
+      </IressText>
+      <IressText>
+        <h3>Inline Equal Width</h3>
+        <IressMenu layout="inline-equal-width" defaultSelected="1">
+          <IressMenuItem value="1">Option 1</IressMenuItem>
+          <IressMenuItem value="2">Option 2</IressMenuItem>
+          <IressMenuItem value="3">Option 3</IressMenuItem>
+          <IressMenuItem value="4">Option 4</IressMenuItem>
+          <IressMenuItem value="5">Option 5</IressMenuItem>
+        </IressMenu>
+      </IressText>
+    </IressStack>
+  );
+}
+```
 
 #### Text wrapping
 
 Use `noWrap` to prevent menu item text from wrapping.
 
-<StoryEmbed id="components-menu--no-wrap"/>
+```tsx
+<IressInline>
+  <IressMenu width="input.12">
+    <IressMenuItem>Menu item with some text that wraps</IressMenuItem>
+  </IressMenu>
+  <IressMenu width="input.12" noWrap>
+    <IressMenuItem>Non wrapping menu item with some text</IressMenuItem>
+  </IressMenu>
+</IressInline>;
+```
 
 #### Prepend & Append
 
 Use `prepend` and `append` props to position content before or after item text.
 
-<StoryEmbed id="components-menu--slot-props"/>
+```tsx
+import {
+  IressIcon,
+  IressMenu,
+  IressMenuHeading,
+  IressMenuItem,
+  IressPill,
+} from '@iress-oss/ids-components';
+
+export function MenuSlots() {
+  return (
+    <IressMenu role="menu">
+      <IressMenuHeading prepend={<IressIcon name="cog" />}>
+        Prepend slot
+      </IressMenuHeading>
+      <IressMenuItem prepend={<IressIcon name="file-alt" />}>
+        New file
+      </IressMenuItem>
+      <IressMenuItem divider prepend={<IressIcon name="save" />}>
+        Save file as
+      </IressMenuItem>
+      <IressMenuHeading append={<IressIcon name="link" />}>
+        Append slot
+      </IressMenuHeading>
+      <IressMenuItem
+        href="https://www.iress.com"
+        append={<IressIcon name="chevron-right" />}
+      >
+        Visit the Iress website
+      </IressMenuItem>
+      <IressMenuItem
+        href="https://google.com"
+        append={<IressPill>8+</IressPill>}
+      >
+        Visit Google
+      </IressMenuItem>
+    </IressMenu>
+  );
+}
+```
 
 #### Roles
 
@@ -146,7 +397,79 @@ The `role` prop changes both the ARIA role and interaction model:
 - `menu`: navigated with arrow keys
 - `listbox`: selectable items, navigated with arrow keys
 
-<StoryEmbed id="components-menu--roles"/>
+```tsx
+import { useState } from 'react';
+import {
+  IressButton,
+  IressButtonGroup,
+  IressInline,
+  IressMenu,
+  IressMenuItem,
+  IressStack,
+  IressText,
+  IressToggle,
+} from '@iress-oss/ids-components';
+
+export function MenuRoles() {
+  const [role, setRole] = useState<'list' | 'menu' | 'listbox'>('list');
+  const [multiSelect, setMultiSelect] = useState(false);
+
+  return (
+    <IressStack gap="md">
+      <IressInline gap="md" verticalAlign="middle">
+        <IressButtonGroup label="Menu role">
+          <IressButton
+            mode={role === 'list' ? 'primary' : 'secondary'}
+            onClick={() => setRole('list')}
+          >
+            list
+          </IressButton>
+          <IressButton
+            mode={role === 'menu' ? 'primary' : 'secondary'}
+            onClick={() => setRole('menu')}
+          >
+            menu
+          </IressButton>
+          <IressButton
+            mode={role === 'listbox' ? 'primary' : 'secondary'}
+            onClick={() => setRole('listbox')}
+          >
+            listbox
+          </IressButton>
+        </IressButtonGroup>
+
+        {role === 'listbox' && (
+          <IressToggle
+            checked={multiSelect}
+            onChange={(checked) => setMultiSelect(checked)}
+          >
+            Multi-select
+          </IressToggle>
+        )}
+      </IressInline>
+
+      <IressText element="p" color="colour.neutral.70">
+        {role === 'list' &&
+          'List role: items are related context, navigated with tab key.'}
+        {role === 'menu' &&
+          'Menu role: items perform actions, arrow keys wrap around.'}
+        {role === 'listbox' &&
+          'Listbox role: items are selectable, like a <select> element.'}
+      </IressText>
+
+      <IressMenu
+        role={role}
+        multiSelect={role === 'listbox' ? multiSelect : undefined}
+        aria-label="Role example"
+      >
+        <IressMenuItem value="1">Option 1</IressMenuItem>
+        <IressMenuItem value="2">Option 2</IressMenuItem>
+        <IressMenuItem value="3">Option 3</IressMenuItem>
+      </IressMenu>
+    </IressStack>
+  );
+}
+```
 
 #### Variants
 
@@ -154,13 +477,71 @@ The `role` prop changes both the ARIA role and interaction model:
 - `subdraw` — adds arrow icons for sub-menu navigation
 - `radio` — radio mark style (single select listbox only)
 
-<StoryEmbed id="components-menu--variants"/>
+```tsx
+import {
+  IressMenu,
+  IressMenuItem,
+  IressStack,
+} from '@iress-oss/ids-components';
+
+export function MenuVariants() {
+  return (
+    <IressStack gap="lg">
+      <IressMenu variant="radio" defaultSelected="5">
+        <IressMenuItem value="1">Option 1</IressMenuItem>
+        <IressMenuItem value="2">Option 2</IressMenuItem>
+        <IressMenuItem value="3">Option 3</IressMenuItem>
+        <IressMenuItem value="4">Option 4</IressMenuItem>
+        <IressMenuItem value="5">Option 5</IressMenuItem>
+      </IressMenu>
+      <IressMenu variant="subdraw" maxWidth="input.12" defaultSelected="5">
+        <IressMenuItem value="1">Option 1</IressMenuItem>
+        <IressMenuItem value="2">Option 2</IressMenuItem>
+        <IressMenuItem value="3">Option 3</IressMenuItem>
+        <IressMenuItem value="4">Option 4</IressMenuItem>
+        <IressMenuItem value="5">Option 5</IressMenuItem>
+      </IressMenu>
+      <IressMenu variant="side" maxWidth="input.12" defaultSelected="5">
+        <IressMenuItem value="1">Option 1</IressMenuItem>
+        <IressMenuItem value="2">Option 2</IressMenuItem>
+        <IressMenuItem value="3">Option 3</IressMenuItem>
+        <IressMenuItem value="4">Option 4</IressMenuItem>
+        <IressMenuItem value="5">Option 5</IressMenuItem>
+      </IressMenu>
+      <IressMenu
+        variant="side"
+        maxWidth="input.12"
+        defaultSelected="5"
+        numbered
+      >
+        <IressMenuItem value="1">Option 1</IressMenuItem>
+        <IressMenuItem value="2">Option 2</IressMenuItem>
+        <IressMenuItem value="3">Option 3</IressMenuItem>
+        <IressMenuItem value="4">Option 4</IressMenuItem>
+        <IressMenuItem value="5">Option 5</IressMenuItem>
+      </IressMenu>
+    </IressStack>
+  );
+}
+```
 
 ### Menu Group
 
 `IressMenuGroup` groups related items under a common label.
 
-<StoryEmbed id="components-menu-menugroup--multiple-groups"/>
+```tsx
+<IressMenu>
+  <IressMenuGroup label="Fruits">
+    <IressMenuItem>Apple</IressMenuItem>
+    <IressMenuItem>Banana</IressMenuItem>
+    <IressMenuItem>Orange</IressMenuItem>
+  </IressMenuGroup>
+  <IressMenuGroup label="Vegetables" divider>
+    <IressMenuItem>Carrot</IressMenuItem>
+    <IressMenuItem>Broccoli</IressMenuItem>
+  </IressMenuGroup>
+</IressMenu>;
+```
 
 ### Menu Item
 
@@ -172,26 +553,65 @@ import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
 <IressMenu>
   <IressMenuItem value="edit">Edit</IressMenuItem>
   <IressMenuItem href="/settings">Settings</IressMenuItem>
-</IressMenu>
+</IressMenu>;
 ```
 
 [View MenuItem props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu-menuitem--docs#api-props)
 
 #### Selected
 
-<StoryEmbed id="components-menu-menuitem--selected"/>
+```tsx
+<IressMenuItem selected>Menu item</IressMenuItem>;
+```
 
 #### canToggle
 
-<StoryEmbed id="components-menu-menuitem--can-toggle"/>
+```tsx
+<IressMenuItem value={9} canToggle>
+  Menu item
+</IressMenuItem>;
+```
 
 #### Prepend and append
 
-<StoryEmbed id="components-menu-menuitem--prepend-and-append"/>
+```tsx
+<IressMenuItem
+  prepend={<IressIcon name="home" />}
+  append={<IressPill mode="70">New</IressPill>}
+>
+  Menu item
+</IressMenuItem>;
+```
 
 #### Element (custom routing)
 
-<StoryEmbed id="components-menu-menuitem--element"/>
+```tsx
+import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
+import { type HTMLAttributes } from 'react';
+
+/**
+ * This could be the `Link` component from `react-router-dom` or any other routing library.
+ */
+const Link = ({
+  to,
+  ...restProps
+}: Omit<HTMLAttributes<HTMLAnchorElement>, 'href'> & { to: string }) => (
+  <a {...restProps} href={to} />
+);
+
+export const RoutingLinkMenu = () => {
+  return (
+    <IressMenu role="menu" fluid>
+      <IressMenuItem element={Link} to="https://iress.com" selected>
+        Iress
+      </IressMenuItem>
+      <IressMenuItem element={Link} to="https://google.com">
+        Google
+      </IressMenuItem>
+    </IressMenu>
+  );
+};
+```
 
 ### Testing
 
@@ -208,8 +628,8 @@ const menuItem = screen.getByRole('menuitem', { name: 'Settings' });
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the menu | — | `menu` |
-| activator | A menu group activator (propagated from IressMenuGroup data-testid) | — | `<menugroup-testid>__activator` |
+| main | The root element of the menu | `getByRole('list')` by default, or `getByRole('menu')` / `getByRole('listbox')` depending on role prop | `menu` |
+| activator | A menu group activator (propagated from IressMenuGroup data-testid) | `getByRole('button', { name: '...' })` | `<menugroup-testid>__activator` |
 | subdraw | A subdraw container (propagated from IressMenuGroup data-testid) | — | `<menugroup-testid>__subdraw` |
 | subdraw trigger | A subdraw trigger item (propagated from IressMenuGroup data-testid) | — | `<menugroup-testid>__subdraw__trigger` |
 | checkbox mark | Checkbox indicator on a selectable item (propagated from IressMenuItem data-testid) | — | `<menuitem-testid>__checkbox-mark` |

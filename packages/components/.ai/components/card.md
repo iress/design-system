@@ -15,7 +15,102 @@ import { IressCard } from '@iress-oss/ids-components';
 
 A container for grouping related content and actions with optional heading, footer, and media slots.
 
-<StoryEmbed id="components-card--all-slots" />
+```tsx
+import {
+  IressInline,
+  IressToggle,
+  IressRow,
+  IressCol,
+  IressDivider,
+  IressCard,
+  IressStack,
+  IressIcon,
+  IressText,
+  IressTag,
+  IressPill,
+  IressContextualMenu,
+  IressPanel,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+const SLOT_CONTENT = {
+  prepend: <IressIcon name="star" />,
+  media: (
+    <img
+      src="https://www.iress.com/media/images/media-contact.width-600.png"
+      width="250"
+      alt="A man in an Iress branded t-shirt smiles at the camera"
+    />
+  ),
+  heading: <h2>Welcome to Iress!</h2>,
+  topRight: <IressContextualMenu>More actions in here</IressContextualMenu>,
+  children: (
+    <IressText>
+      Find out all the onboarding material you need{' '}
+      <a href="https://iress.com">with this easy guide</a>.
+    </IressText>
+  ),
+  footer: (
+    <IressInline gap="sm" horizontalAlign="between" verticalAlign="middle">
+      <IressInline gap="sm">
+        <IressTag mode="30">#new-starter</IressTag>
+        <IressTag mode="60">#first-day</IressTag>
+      </IressInline>
+      <IressPill mode="70">NEW</IressPill>
+    </IressInline>
+  ),
+};
+
+const SLOT_NAMES = Object.keys(SLOT_CONTENT) as Array<
+  keyof typeof SLOT_CONTENT
+>;
+
+export function CardAllSlots() {
+  const [show, setShow] = useState({
+    children: true,
+    prepend: false,
+    media: true,
+    heading: true,
+    topRight: true,
+    footer: true,
+  });
+
+  const cardProps = Object.fromEntries(
+    SLOT_NAMES.filter((slot) => show[slot]).map((slot) => [
+      slot,
+      SLOT_CONTENT[slot],
+    ]),
+  );
+
+  return (
+    <IressStack maxWidth="container.lg" gap="md" mx="auto">
+      <IressInline gap="md">
+        {SLOT_NAMES.map((slot) => (
+          <IressToggle
+            key={slot}
+            checked={show[slot]}
+            onChange={(checked) => setShow({ ...show, [slot]: checked })}
+          >
+            {slot}
+          </IressToggle>
+        ))}
+      </IressInline>
+      <IressDivider />
+      <IressRow gutter="md">
+        <IressCol>
+          <IressCard {...cardProps} />
+        </IressCol>
+        <IressCol>
+          <IressCard {...cardProps} />
+        </IressCol>
+        <IressCol>
+          <IressCard {...cardProps} />
+        </IressCol>
+      </IressRow>
+    </IressStack>
+  );
+}
+```
 
 ## Design
 
@@ -59,9 +154,7 @@ A container for grouping related content and actions with optional heading, foot
 ```tsx
 import { IressCard } from '@iress-oss/ids-components';
 
-<IressCard heading="Card title">
-  Card content goes here.
-</IressCard>
+<IressCard heading="Card title">Card content goes here.</IressCard>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-card--docs#api-props)
@@ -70,15 +163,28 @@ import { IressCard } from '@iress-oss/ids-components';
 
 #### Clickable card
 
-<StoryEmbed id="components-card--clickable-card" />
+```tsx
+<IressCard
+  role="button"
+  onClick={() => alert('Card clicked')}
+  onKeyDown={() => alert('Key down on card (for keyboard users)')}
+  tabIndex={0}
+>
+  I am a card with an onClick handler. Click me to see what happens.
+</IressCard>;
+```
 
 #### Selected state
 
-<StoryEmbed id="components-card--selected" />
+```tsx
+<IressCard selected>I'm a selected card</IressCard>;
+```
 
 #### No border
 
-<StoryEmbed id="components-card--no-border" />
+```tsx
+<IressCard noBorder>I'm a card</IressCard>;
+```
 
 ### Testing
 
@@ -95,11 +201,11 @@ const card = screen.getByTestId('my-card');
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the card | — | `card` |
+| main | The root element of the card | `getByText('...')` | `card` |
 | prepend | The prepend slot container | — | `card__prepend` |
 | topRight | The top-right slot container | — | `card__topRight` |
 | media | The media slot container | — | `card__media` |
-| heading | The card heading container | — | `card__heading` |
+| heading | The card heading container | `getByRole('heading')` | `card__heading` |
 | body | The card body container | — | `card__body` |
 
 ## Specifications

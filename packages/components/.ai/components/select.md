@@ -15,7 +15,17 @@ import { IressSelect } from '@iress-oss/ids-components';
 
 Renders a dropdown select input for choosing one option from a list.
 
-<StoryEmbed id="components-select--single-select"/>
+```tsx
+<IressSelect
+  options={[
+    { label: 'Option 1', value: '1' },
+    { label: 'Option 2', value: '2' },
+    { label: 'Option 3', value: '3' },
+    { label: 'Option 4', value: '4' },
+    { label: 'Option 5', value: '5' },
+  ]}
+/>;
+```
 
 ## Design
 
@@ -66,7 +76,7 @@ import { IressSelect } from '@iress-oss/ids-components';
     { label: 'Option 1', value: '1' },
     { label: 'Option 2', value: '2' },
   ]}
-/>
+/>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs#api-props)
@@ -77,67 +87,683 @@ import { IressSelect } from '@iress-oss/ids-components';
 
 Basic single-value selection from a list of options.
 
-<StoryEmbed id="components-select--single-select"/>
+```tsx
+<IressSelect
+  options={[
+    { label: 'Option 1', value: '1' },
+    { label: 'Option 2', value: '2' },
+    { label: 'Option 3', value: '3' },
+    { label: 'Option 4', value: '4' },
+    { label: 'Option 5', value: '5' },
+  ]}
+/>;
+```
 
 #### Multi Select
 
 Enable multiple selection with the `multi` prop. Use `limit` to cap the number of selections.
 
-<StoryEmbed id="components-select--multi-select"/>
+```tsx
+<IressSelect
+  options={[
+    { label: 'Option 1', value: '1' },
+    { label: 'Option 2', value: '2' },
+    { label: 'Option 3', value: '3' },
+    { label: 'Option 4', value: '4' },
+    { label: 'Option 5', value: '5' },
+  ]}
+  multiSelect
+/>;
+```
 
-#### Multi Select Limit
+##### Limit the multi-select
 
-<StoryEmbed id="components-select--multi-select-limit"/>
+Add a `multiSelectLimit` prop to restrict the number of selections visible to the user. Note: this only limits the visible selection, not disabling the ability to select more options.
+
+```tsx
+<IressSelect
+  options={[
+    { label: 'Option 1', value: '1' },
+    { label: 'Option 2', value: '2' },
+    { label: 'Option 3', value: '3' },
+    { label: 'Option 4', value: '4' },
+    { label: 'Option 5', value: '5' },
+  ]}
+  multiSelect
+  multiSelectLimit={2}
+  defaultValue={['1', '2', '3', '4', '5']}
+/>;
+```
 
 #### Async Options
 
 Load options dynamically using the `onSearch` callback.
 
-<StoryEmbed id="components-select--async-options"/>
+```tsx
+import {
+  IressCol,
+  IressField,
+  IressRow,
+  IressSelect,
+} from '@iress-oss/ids-components';
 
-#### Async Options Min Search Length
+interface StarWarsCharacter {
+  name: string;
+  gender: string;
+}
 
-<StoryEmbed id="components-select--async-options-min-search-length"/>
+interface StarWarsCharacterApi {
+  results: StarWarsCharacter[];
+}
+
+const options = async (query: string) => {
+  if (!query) return [];
+
+  if (query === 'error') {
+    throw new Error();
+  }
+
+  const data = await fetch(
+    `https://swapi.py4e.com/api/people/?search=${query}`,
+  ).then((response) => response.json() as Promise<StarWarsCharacterApi>);
+
+  return data.results.map((character: StarWarsCharacter) => ({
+    label: character.name,
+    value: character.name,
+    meta: character.gender,
+  }));
+};
+
+export const SelectAsync = () => (
+  <IressRow gutter="md">
+    <IressCol>
+      <IressField label="Single select" htmlFor="single-select">
+        <IressSelect
+          container={document.body}
+          options={options}
+          id="single-select"
+        />
+      </IressField>
+    </IressCol>
+    <IressCol>
+      <IressField label="Multi-select" htmlFor="multi-select">
+        <IressSelect
+          container={document.body}
+          options={options}
+          id="multi-select"
+          multiSelect
+        />
+      </IressField>
+    </IressCol>
+  </IressRow>
+);
+```
+
+#### Async Options with Minimum Search Length
+
+To avoid unnecessary API calls, use the `minSearchLength` prop to require a minimum number of characters before triggering the search.
+
+```tsx
+import {
+  IressCol,
+  IressField,
+  IressRow,
+  IressSelect,
+} from '@iress-oss/ids-components';
+
+interface StarWarsCharacter {
+  name: string;
+  gender: string;
+}
+
+interface StarWarsCharacterApi {
+  results: StarWarsCharacter[];
+}
+
+const options = async (query: string) => {
+  if (!query) return [];
+
+  if (query === 'error') {
+    throw new Error();
+  }
+
+  const data = await fetch(
+    `https://swapi.py4e.com/api/people/?search=${query}`,
+  ).then((response) => response.json() as Promise<StarWarsCharacterApi>);
+
+  return data.results.map((character: StarWarsCharacter) => ({
+    label: character.name,
+    value: character.name,
+    meta: character.gender,
+  }));
+};
+
+export const SelectAsyncMinLength = () => (
+  <IressRow gutter="md">
+    <IressCol>
+      <IressField
+        label="Default behavior (1 character)"
+        htmlFor="default-select"
+      >
+        <IressSelect
+          container={document.body}
+          options={options}
+          id="default-select"
+          placeholder="Type any character..."
+        />
+      </IressField>
+    </IressCol>
+    <IressCol>
+      <IressField
+        label="Search requires 3+ characters"
+        htmlFor="min-length-select"
+      >
+        <IressSelect
+          container={document.body}
+          options={options}
+          id="min-length-select"
+          minSearchLength={3}
+          placeholder="Type at least 3 characters..."
+        />
+      </IressField>
+    </IressCol>
+  </IressRow>
+);
+```
 
 #### Pre-selected Value
 
-<StoryEmbed id="components-select--pre-selected-value"/>
+You can set a default selected value using the `defaultValue` prop. This is useful for forms where you want to pre-fill a selection.
+
+```tsx
+<IressSelect
+  options={[
+    { label: 'Option 1', value: '1' },
+    { label: 'Option 2', value: '2' },
+    { label: 'Option 3', value: '3' },
+    { label: 'Option 4', value: '4' },
+    { label: 'Option 5', value: '5' },
+  ]}
+  defaultValue="2"
+/>;
+```
 
 #### Placeholder
 
-<StoryEmbed id="components-select--placeholder"/>
+You can provide a placeholder to guide users on what to select. The placeholder will be displayed when no option is selected.
+
+```tsx
+<IressSelect
+  placeholder="Select an option"
+  options={[
+    { label: 'Option 1', value: '1' },
+    { label: 'Option 2', value: '2' },
+    { label: 'Option 3', value: '3' },
+    { label: 'Option 4', value: '4' },
+    { label: 'Option 5', value: '5' },
+  ]}
+/>;
+```
 
 #### Sizing
 
-<StoryEmbed id="components-select--sizing"/>
+These are the available sizes for the Select component. Use the `width` prop to adjust the size of the select input.
+
+```tsx
+import { IressSelect, IressStack } from '@iress-oss/ids-components';
+
+const options = [
+  { label: 'Option 1', value: '1' },
+  { label: 'Option 2', value: '2' },
+  { label: 'Option 3', value: '3' },
+];
+
+export function SelectSizing() {
+  return (
+    <IressStack gap="md">
+      <IressSelect
+        options={options}
+        placeholder="2"
+        width="2"
+        aria-label="Select option (width: 2)"
+      />
+      <IressSelect
+        options={options}
+        placeholder="4"
+        width="4"
+        aria-label="Select option (width: 4)"
+      />
+      <IressSelect
+        options={options}
+        placeholder="6"
+        width="6"
+        aria-label="Select option (width: 6)"
+      />
+      <IressSelect
+        options={options}
+        placeholder="8"
+        width="8"
+        aria-label="Select option (width: 8)"
+      />
+      <IressSelect
+        options={options}
+        placeholder="10"
+        width="10"
+        aria-label="Select option (width: 10)"
+      />
+      <IressSelect
+        options={options}
+        placeholder="12"
+        width="12"
+        aria-label="Select option (width: 12)"
+      />
+      <IressSelect
+        options={options}
+        placeholder="16"
+        width="16"
+        aria-label="Select option (width: 16)"
+      />
+      <IressSelect
+        options={options}
+        placeholder="25%"
+        width="25%"
+        aria-label="Select option (width: 25%)"
+      />
+      <IressSelect
+        options={options}
+        placeholder="50%"
+        width="50%"
+        aria-label="Select option (width: 50%)"
+      />
+      <IressSelect
+        options={options}
+        placeholder="75%"
+        width="75%"
+        aria-label="Select option (width: 75%)"
+      />
+      <IressSelect
+        options={options}
+        placeholder="100%"
+        width="100%"
+        aria-label="Select option (width: 100%)"
+      />
+    </IressStack>
+  );
+}
+```
 
 #### Custom Label
 
-<StoryEmbed id="components-select--custom-label"/>
+The `IressSelect` component is fully customisable, allowing you to provide a custom label for the select input whilst keeping all the other functionality. Use the `renderLabel` prop to specify your own label text.
+
+```tsx
+import {
+  IressSelect,
+  type IressSelectProps,
+  IressSelectLabel,
+} from '@iress-oss/ids-components';
+
+const CustomLabel: IressSelectProps<true>['renderLabel'] = ({ value }) => (
+  <IressSelectLabel role="combobox" selected={value} />
+);
+
+export const SelectCustomLabel = () => (
+  <IressSelect
+    multiSelect
+    options={[
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+    ]}
+    placeholder="Select an item"
+    renderLabel={CustomLabel}
+    container={document.body}
+  />
+);
+```
 
 #### Custom Options
 
-<StoryEmbed id="components-select--custom-options"/>
+If you want to render a custom selection experience, you can use the `renderOptions` prop to provide your own option rendering logic. This allows for more complex option layouts, such as multi-level options or additional stateful metadata display using rows and columns.
+
+```tsx
+import {
+  type FormattedLabelValueMeta,
+  IressMenuDivider,
+  IressSelect,
+  type IressSelectProps,
+  IressSelectMenu,
+  IressSelectSearch,
+  IressSelectSearchInput,
+  type LabelValueMeta,
+} from '@iress-oss/ids-components';
+
+const CustomOptions: IressSelectProps<true>['renderOptions'] = ({
+  loading,
+  query,
+  results,
+  setQuery,
+  handleMenuChange, // Use handleMenuChange instead of setValue to trigger onChange
+  value,
+}) => {
+  const valueArray = Array.isArray(value) ? value : [value];
+  const selected = value ? (valueArray as LabelValueMeta[]) : [];
+  const simpleSelected = selected.map(
+    (selectedItem: FormattedLabelValueMeta) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- We only need the unformatted object keys when displaying the selected value
+      const { formattedLabel, ...unformatted } = selectedItem;
+      return unformatted;
+    },
+  );
+  const hasResults = !!results.length || (query && !loading);
+  const hasSelected = !!selected.length;
+  const hasResultsAndSelected = hasResults && hasSelected;
+
+  return (
+    <IressSelectSearch
+      activator={
+        <IressSelectSearchInput
+          onChange={(e) => setQuery(e.currentTarget.value)}
+          value={query}
+          loading={loading}
+          placeholder="Search and select"
+        />
+      }
+      style={{
+        maxHeight: '210px',
+      }}
+    >
+      {hasSelected && (
+        <IressSelectMenu
+          heading={`Selected (${selected.length})`}
+          items={simpleSelected}
+          multiSelect
+          // Use handleMenuChange to trigger parent onChange callback
+          onChange={handleMenuChange}
+          selected={value}
+        />
+      )}
+      {hasResultsAndSelected && <IressMenuDivider my="xs" />}
+      {hasResults && (
+        <IressSelectMenu
+          heading={query ? 'Search results' : 'All options'}
+          items={results}
+          multiSelect
+          noResults={query ? 'No results found' : undefined}
+          // Use handleMenuChange to trigger parent onChange callback
+          onChange={handleMenuChange}
+          selected={value}
+          hideSelectedItems
+        />
+      )}
+    </IressSelectSearch>
+  );
+};
+
+export const SelectCustomOptions = () => (
+  <IressSelect
+    container={document.body}
+    multiSelect
+    options={[
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+      { label: 'Option 4', value: 'option-4' },
+      { label: 'Option 5', value: 'option-5' },
+    ]}
+    renderOptions={CustomOptions}
+    virtualFocus={false}
+  />
+);
+```
 
 #### Create New Option
 
-Allow users to create new options on the fly.
+Allow users to create new options on the fly using the custom sub-components with `renderOptions`.
 
-<StoryEmbed id="components-select--create-new-option"/>
+```tsx
+import {
+  type FormattedLabelValueMeta,
+  type InputRef,
+  IressMenuDivider,
+  IressSelect,
+  type IressSelectProps,
+  IressSelectBody,
+  IressSelectCreate,
+  IressSelectHeading,
+  IressSelectMenu,
+  IressSelectSearch,
+  IressSelectSearchInput,
+} from '@iress-oss/ids-components';
+import { toArray } from '@helpers/formatting/toArray';
+import { useId, useRef } from 'react';
+
+const FREQUENTLY_SELECTED = [
+  { label: 'Frequently selected 1', value: 'freq-1' },
+  { label: 'Frequently selected 2', value: 'freq-2' },
+];
+
+const OPTIONS = [
+  { label: 'Option 1', value: 'option-1' },
+  { label: 'Option 2', value: 'option-2' },
+  { label: 'Option 3', value: 'option-3' },
+  { label: 'Option 4', value: 'option-4' },
+  { label: 'Option 5', value: 'option-5' },
+];
+
+const WithNewOption: IressSelectProps<true>['renderOptions'] = ({
+  loading,
+  debouncedQuery,
+  query,
+  results,
+  setQuery,
+  setValue,
+  value,
+}) => {
+  const selectedArray = toArray(value);
+  const simpleSelected = selectedArray.map(
+    (selectedItem: FormattedLabelValueMeta) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- We only need the unformatted object keys when displaying the selected value
+      const { formattedLabel, ...unformatted } = selectedItem;
+      return unformatted;
+    },
+  );
+  const hasResults =
+    (!!results.length && results !== OPTIONS) || (debouncedQuery && !loading);
+  const hasSelected = !!selectedArray.length;
+  const hasResultsAndSelected = hasResults && hasSelected;
+  const showFrequentlySelected =
+    !hasResults &&
+    !FREQUENTLY_SELECTED.every((frequent) =>
+      selectedArray.some((selected) => selected.value === frequent.value),
+    );
+  const canCreate =
+    debouncedQuery &&
+    !results.some((result) => result.label === debouncedQuery) &&
+    !selectedArray.some((selected) => selected.label === debouncedQuery);
+  const hasFrequentlyAndOther =
+    showFrequentlySelected && (hasResults || hasSelected);
+  const headingId = useId();
+  const inputRef = useRef<InputRef | null>(null);
+
+  return (
+    <IressSelectSearch
+      activator={
+        <IressSelectSearchInput
+          onChange={(e) => setQuery(e.currentTarget.value)}
+          value={query}
+          loading={loading}
+          placeholder="Search for items"
+          ref={inputRef}
+        />
+      }
+    >
+      <IressSelectBody
+        header={
+          canCreate && (
+            <IressSelectCreate
+              heading="Add custom option"
+              label={debouncedQuery}
+              loading={loading}
+              onCreate={() => {
+                setValue([...selectedArray, { label: query, value: query }]);
+                setQuery('');
+                close();
+              }}
+            />
+          )
+        }
+      >
+        {hasSelected && (
+          <IressSelectMenu
+            aria-labelledby={headingId}
+            heading={
+              <IressSelectHeading
+                clearAll
+                onClearAll={() => {
+                  setValue([]);
+                  inputRef.current?.focus();
+                }}
+              >
+                <h2 id={headingId}>Selected ({selectedArray.length})</h2>
+              </IressSelectHeading>
+            }
+            items={simpleSelected}
+            multiSelect
+            onChange={setValue}
+            selected={value}
+          />
+        )}
+        {hasResultsAndSelected && <IressMenuDivider my="xs" />}
+        {hasResults && (
+          <IressSelectMenu
+            heading="Search results"
+            items={results}
+            multiSelect
+            noResults={debouncedQuery ? 'No results found' : undefined}
+            onChange={setValue}
+            selected={value}
+            hideSelectedItems
+          />
+        )}
+        {hasFrequentlyAndOther && <IressMenuDivider my="xs" />}
+        {showFrequentlySelected && (
+          <IressSelectMenu
+            heading="Frequently selected"
+            items={FREQUENTLY_SELECTED}
+            multiSelect
+            onChange={setValue}
+            selected={value}
+            hideSelectedItems
+          />
+        )}
+      </IressSelectBody>
+    </IressSelectSearch>
+  );
+};
+
+export const SelectNewOption = () => (
+  <IressSelect
+    container={document.body}
+    multiSelect
+    options={OPTIONS}
+    placeholder="Select an item"
+    renderOptions={WithNewOption}
+    virtualFocus={false}
+  />
+);
+```
 
 #### Header & Footer
 
-<StoryEmbed id="components-select--header-footer"/>
+You can add a header and footer to the options menu using the `header` and `footer` props. This is useful for adding additional context or actions related to the options list.
+
+```tsx
+<IressSelect
+  options={[
+    { label: 'Option 1', value: '1' },
+    { label: 'Option 2', value: '2' },
+    { label: 'Option 3', value: '3' },
+    { label: 'Option 4', value: '4' },
+    { label: 'Option 5', value: '5' },
+  ]}
+  header={
+    <>
+      <IressMenuText>
+        <IressText element="h3" style={{ margin: 0 }}>
+          Header
+        </IressText>
+      </IressMenuText>
+      <IressDivider style={{ marginTop: 0 }} />
+    </>
+  }
+  footer={
+    <>
+      <IressDivider style={{ marginBottom: 0 }} />
+      <IressMenuText>
+        <IressInline gap="sm">
+          <IressButton>Button 1</IressButton>
+          <IressButton>Button 2</IressButton>
+        </IressInline>
+      </IressMenuText>
+    </>
+  }
+/>;
+```
 
 #### Grouped Options
 
-<StoryEmbed id="components-select--grouped-options"/>
+You can group related options together using the `children` key of each item in the `options` array. This allows for better organisation and easier scanning of options.
+
+```tsx
+<IressSelect
+  placeholder="Select a food"
+  options={[
+    {
+      label: 'Fruits',
+      children: [
+        { label: 'Apple', value: 'apple' },
+        { label: 'Banana', value: 'banana' },
+        { label: 'Orange', value: 'orange' },
+        { label: 'Strawberry', value: 'strawberry' },
+      ],
+    },
+    {
+      label: 'Vegetables',
+      children: [
+        { label: 'Carrot', value: 'carrot' },
+        { label: 'Broccoli', value: 'broccoli' },
+        { label: 'Spinach', value: 'spinach' },
+      ],
+    },
+    {
+      label: 'Grains',
+      children: [
+        { label: 'Rice', value: 'rice' },
+        { label: 'Wheat', value: 'wheat' },
+        { label: 'Oats', value: 'oats' },
+      ],
+    },
+  ]}
+/>;
+```
 
 #### Native
 
 Use the `native` prop to render a native `<select>` element on mobile devices.
 
-<StoryEmbed id="components-select--native"/>
+```tsx
+<IressSelect
+  options={[
+    { label: 'Option 1', value: '1' },
+    { label: 'Option 2', value: '2' },
+    { label: 'Option 3', value: '3' },
+    { label: 'Option 4', value: '4' },
+    { label: 'Option 5', value: '5' },
+  ]}
+  native="md"
+  defaultValue="2"
+/>;
+```
 
 ### Testing
 
@@ -167,12 +793,12 @@ const option = screen.getByRole('option', { name: 'Option 1' });
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the select | — | `select` |
+| main | The root element of the select | `getByRole('combobox')` for the activator, or `getByLabelText('...')` when inside a Field | `select` |
 | hidden input | The hidden form input | — | `select__hidden-input` |
 | select | The native select element (when native mode is enabled) | — | `select__select` |
 | menu group | A grouped options heading | — | `select__menu-group` |
-| menu | The options dropdown (visible when open) | — | `select__menu` |
-| menu item | An individual menu option | — | `select__menu-item` |
+| menu | The options dropdown (visible when open) | `getByRole('listbox')` | `select__menu` |
+| menu item | An individual menu option | `getByRole('option', { name: '...' })` | `select__menu-item` |
 | tag | A selected value tag (multi-select) | — | `select__tag` |
 
 ---

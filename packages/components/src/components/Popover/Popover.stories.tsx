@@ -228,7 +228,9 @@ export const Width: Story = {
     ...disableArgTypes(['show', 'width']),
   },
   render: (args) => (
-    <IressPopover {...args} contentStyle={{ style: { maxWidth: '30rem' } }} />
+    <IressPopover {...args} contentStyle={{ style: { maxWidth: '30rem' } }}>
+      {args.children}
+    </IressPopover>
   ),
 };
 
@@ -244,12 +246,16 @@ export const Overflow: Story = {
       <IressPopover
         {...args}
         activator={<IressButton>Normal popover</IressButton>}
-      />
+      >
+        {args.children}
+      </IressPopover>
       <IressPopover
         {...args}
         activator={<IressButton>Fixed height popover</IressButton>}
         contentStyle={{ scrollable: 'y', style: { maxHeight: '200px' } }}
-      />
+      >
+        {args.children}
+      </IressPopover>
     </IressInline>
   ),
 };
@@ -268,23 +274,21 @@ export const Inline: Story = {
 };
 
 export const MatchActivatorWidth: Story = {
-  ...Activator,
   args: {
-    ...Activator.args,
     activator: (
       <IressButton>
         This popover will match the width of its activator
       </IressButton>
     ),
+    children: 'basic',
     align: 'bottom',
     matchActivatorWidth: true,
   },
 };
 
 export const VirtualFocus: Story = {
-  ...Activator,
   args: {
-    ...Activator.args,
+    activator: <IressButton>Toggle popover</IressButton>,
     children: 'menu',
     type: 'listbox',
     virtualFocus: true,

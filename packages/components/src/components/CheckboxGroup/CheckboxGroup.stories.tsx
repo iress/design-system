@@ -68,7 +68,18 @@ export const CheckboxChildren: Story = {
 
 export const DefaultChecked: Story = {
   args: {
-    ...CheckboxChildren.args,
+    name: 'let-them-eat-cake',
+    children: [
+      <IressCheckbox key={1} value="lemon-drizzle">
+        Lemon drizzle
+      </IressCheckbox>,
+      <IressCheckbox key={2} value="victoria-sponge">
+        Victoria Sponge
+      </IressCheckbox>,
+      <IressCheckbox key={3} value="carrot-cake">
+        Carrot Cake
+      </IressCheckbox>,
+    ],
     defaultValue: ['lemon-drizzle', 'victoria-sponge'],
   },
 };
@@ -145,17 +156,39 @@ export const CustomCheckboxGroupLayout: Story = {
 };
 
 export const ReadOnly: Story = {
-  ...DefaultChecked,
   args: {
-    ...DefaultChecked.args,
+    name: 'let-them-eat-cake',
+    children: [
+      <IressCheckbox key={1} value="lemon-drizzle">
+        Lemon drizzle
+      </IressCheckbox>,
+      <IressCheckbox key={2} value="victoria-sponge">
+        Victoria Sponge
+      </IressCheckbox>,
+      <IressCheckbox key={3} value="carrot-cake">
+        Carrot Cake
+      </IressCheckbox>,
+    ],
+    defaultValue: ['lemon-drizzle', 'victoria-sponge'],
     readOnly: true,
   },
 };
 
 export const Touch: Story = {
-  ...DefaultChecked,
   args: {
-    ...DefaultChecked.args,
+    name: 'let-them-eat-cake',
+    children: [
+      <IressCheckbox key={1} value="lemon-drizzle">
+        Lemon drizzle
+      </IressCheckbox>,
+      <IressCheckbox key={2} value="victoria-sponge">
+        Victoria Sponge
+      </IressCheckbox>,
+      <IressCheckbox key={3} value="carrot-cake">
+        Carrot Cake
+      </IressCheckbox>,
+    ],
+    defaultValue: ['lemon-drizzle', 'victoria-sponge'],
     variant: 'touch',
   },
 };

@@ -18,6 +18,8 @@ import componentMeta from './meta';
 import { InputTypes } from './mocks/InputTypes';
 import InputTypesSource from './mocks/InputTypes.tsx?raw';
 import { InputModes } from './mocks/InputModes';
+import { InputFileType } from './mocks/InputFileType';
+import InputFileTypeSource from './mocks/InputFileType.tsx?raw';
 import InputModesSource from './mocks/InputModes.tsx?raw';
 import { InputSizing } from './mocks/InputSizing';
 import InputSizingSource from './mocks/InputSizing.tsx?raw';
@@ -68,32 +70,11 @@ export const InputModesStory: Story = {
 };
 
 export const FileType: Story = {
-  args: {
-    type: 'file',
-    required: true,
+  render: () => <InputFileType />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(InputFileTypeSource, { stripImports: true }),
   },
-  render: (args) => {
-    const { success } = useToaster();
-    return (
-      <IressField label="File upload">
-        <IressInput
-          {...args}
-          onChange={(e) =>
-            success({
-              content: `File uploaded: ${e.target.files?.[0].name}`,
-            })
-          }
-        />
-      </IressField>
-    );
-  },
-  decorators: [
-    (Story) => (
-      <IressToasterProvider>
-        <Story />
-      </IressToasterProvider>
-    ),
-  ],
 };
 
 export const Clearable: Story = {
@@ -142,27 +123,23 @@ export const Actions: Story = {
 };
 
 export const ReadOnly: Story = {
-  ...Default,
   args: {
-    ...Default.args,
+    placeholder: 'Enter your name',
     readOnly: true,
     value: 'Value',
   },
 };
 
 export const Disabled: Story = {
-  ...Default,
   args: {
-    ...Default.args,
+    placeholder: 'Enter your name',
     disabled: true,
     value: 'Value',
   },
 };
 
 export const Formatter: Story = {
-  ...Default,
   args: {
-    ...Default.args,
     placeholder:
       'Enter a string and it will show in UPPERCASE when not focused, and show the raw value on focus',
     formatter: (value) => (value ? value.toString().toUpperCase() : ''),

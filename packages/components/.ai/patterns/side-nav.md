@@ -15,7 +15,69 @@ import { IressSideNav } from '@iress-oss/ids-components';
 
 A side navigation pattern that combines a rail (icon-only bar) with an expandable side menu panel. Provides a data-driven API where items are passed as an array, with the rail acting as the main navigation and the side menu showcasing children under each navigation group.
 
-<StoryEmbed id="patterns-sidenav--default" autoHeight={false} height={300} />
+```tsx
+import { IressSideNav } from '@iress-oss/ids-components';
+
+export function SideNavDefault() {
+  return (
+    <IressSideNav
+      activeItemKey="hubs"
+      items={[
+        {
+          key: 'hubs',
+          label: 'Hubs',
+          icon: 'hub',
+          href: '/hubs',
+          children: [
+            {
+              key: 'basic',
+              label: 'Basic Details',
+              href: '/hubs/basic-details',
+            },
+            {
+              key: 'dependants',
+              label: 'Dependants',
+              href: '/hubs/dependants',
+            },
+            {
+              key: 'employment',
+              label: 'Employment',
+              href: '/hubs/employment',
+            },
+          ],
+          onClick: (e) => e.preventDefault(), // Required to make item selectable in this story
+        },
+        {
+          key: 'portfolios',
+          label: 'Portfolios',
+          icon: 'bar_chart',
+          href: '/portfolios',
+          divider: true,
+          children: [
+            {
+              key: 'holdings',
+              label: 'Holdings',
+              href: '/portfolios/holdings',
+            },
+            {
+              key: 'transactions',
+              label: 'Transactions',
+              href: '/portfolios/transactions',
+            },
+          ],
+          onClick: (e) => e.preventDefault(), // Required to make item selectable in this story
+        },
+        {
+          key: 'admin',
+          label: 'Admin',
+          icon: 'admin_panel_settings',
+          href: '/admin',
+        },
+      ]}
+    />
+  );
+}
+```
 
 ## Design
 
@@ -60,7 +122,24 @@ A side navigation pattern that combines a rail (icon-only bar) with an expandabl
 ```tsx
 import { IressSideNav } from '@iress-oss/ids-components';
 
-<IressSideNav activeItemKey="hubs" />
+<IressSideNav
+  activeItemKey="hubs"
+  items={[
+    {
+      key: 'hubs',
+      label: 'Hubs',
+      icon: 'hub',
+      href: '/hubs',
+      children: [
+        {
+          key: 'basic',
+          label: 'Basic Details',
+          href: '/hubs/basic-details',
+        },
+      ],
+    },
+  ]}
+/>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-side-nav--docs#api-props)
@@ -71,37 +150,474 @@ The `IressSideNav` component accepts an `items` array that defines the rail navi
 
 The `activeItemKey` prop controls which rail item is currently selected — typically derived from the current route in your application.
 
-<StoryEmbed id="patterns-sidenav--default" autoHeight={false} height={300} />
+```tsx
+import { IressSideNav } from '@iress-oss/ids-components';
+
+export function SideNavDefault() {
+  return (
+    <IressSideNav
+      activeItemKey="hubs"
+      items={[
+        {
+          key: 'hubs',
+          label: 'Hubs',
+          icon: 'hub',
+          href: '/hubs',
+          children: [
+            {
+              key: 'basic',
+              label: 'Basic Details',
+              href: '/hubs/basic-details',
+            },
+            {
+              key: 'dependants',
+              label: 'Dependants',
+              href: '/hubs/dependants',
+            },
+            {
+              key: 'employment',
+              label: 'Employment',
+              href: '/hubs/employment',
+            },
+          ],
+          onClick: (e) => e.preventDefault(), // Required to make item selectable in this story
+        },
+        {
+          key: 'portfolios',
+          label: 'Portfolios',
+          icon: 'bar_chart',
+          href: '/portfolios',
+          divider: true,
+          children: [
+            {
+              key: 'holdings',
+              label: 'Holdings',
+              href: '/portfolios/holdings',
+            },
+            {
+              key: 'transactions',
+              label: 'Transactions',
+              href: '/portfolios/transactions',
+            },
+          ],
+          onClick: (e) => e.preventDefault(), // Required to make item selectable in this story
+        },
+        {
+          key: 'admin',
+          label: 'Admin',
+          icon: 'admin_panel_settings',
+          href: '/admin',
+        },
+      ]}
+    />
+  );
+}
+```
 
 #### Header and footer
 
 The `header` and `footer` props accept any `ReactNode`, allowing you to place a search bar, branding, version info, or other content in the expanded panel.
 
-<StoryEmbed id="patterns-sidenav--with-header-footer" autoHeight={false} height={400}/>
+```tsx
+import { IressInput, IressSideNav, IressText } from '@iress-oss/ids-components';
+
+export function SideNavWithHeaderFooter() {
+  return (
+    <IressSideNav
+      activeItemKey="portfolios"
+      defaultExpanded
+      header={
+        <IressInput
+          type="search"
+          placeholder="Search navigation..."
+          variant="search"
+        />
+      }
+      footer={<IressText element="small">v2.4.1</IressText>}
+      items={[
+        {
+          key: 'hubs',
+          label: 'Hubs',
+          icon: 'hub',
+          href: '/hubs',
+          children: [
+            {
+              key: 'basic',
+              label: 'Basic Details',
+              href: '/hubs/basic-details',
+            },
+            {
+              key: 'dependants',
+              label: 'Dependants',
+              href: '/hubs/dependants',
+            },
+          ],
+        },
+        {
+          key: 'portfolios',
+          label: 'Portfolios',
+          icon: 'bar_chart',
+          href: '/portfolios',
+          children: [
+            {
+              key: 'holdings',
+              label: 'Holdings',
+              href: '/portfolios/holdings',
+            },
+            {
+              key: 'transactions',
+              label: 'Transactions',
+              href: '/portfolios/transactions',
+            },
+          ],
+        },
+        {
+          key: 'admin',
+          label: 'Admin',
+          icon: 'admin_panel_settings',
+          href: '/admin',
+        },
+      ]}
+    />
+  );
+}
+```
 
 #### Grouped children
 
 If your navigation has logical groupings, you can use the `children` property on child items to visually separate them in the side panel.
 
-<StoryEmbed id="patterns-sidenav--grouped-children" autoHeight={false} height={400}/>
+```tsx
+import { IressSideNav } from '@iress-oss/ids-components';
+
+export function SideNavGrouped() {
+  return (
+    <IressSideNav
+      activeItemKey="hubs"
+      defaultExpanded
+      numbered
+      items={[
+        {
+          key: 'hubs',
+          label: 'Hubs',
+          icon: 'hub',
+          href: '/hubs',
+          children: [
+            {
+              key: 'personal',
+              label: 'Personal',
+              active: true,
+              children: [
+                {
+                  key: 'basic',
+                  label: 'Basic Details',
+                  href: '/hubs/basic-details',
+                },
+                {
+                  key: 'dependants',
+                  label: 'Dependants',
+                  href: '/hubs/dependants',
+                },
+              ],
+            },
+            {
+              key: 'financial',
+              label: 'Financial',
+              children: [
+                {
+                  key: 'employment',
+                  label: 'Employment',
+                  href: '/hubs/employment',
+                },
+                { key: 'tax', label: 'Tax Details', href: '/hubs/tax' },
+              ],
+            },
+          ],
+        },
+        {
+          key: 'portfolios',
+          label: 'Portfolios',
+          icon: 'bar_chart',
+          href: '/portfolios',
+          children: [
+            {
+              key: 'holdings',
+              label: 'Holdings',
+              href: '/portfolios/holdings',
+            },
+            {
+              key: 'transactions',
+              label: 'Transactions',
+              href: '/portfolios/transactions',
+            },
+          ],
+        },
+      ]}
+    />
+  );
+}
+```
 
 #### Controlled state
 
 Manage `expanded` and `activeItemKey` externally for full control over the navigation state.
 
-<StoryEmbed id="patterns-sidenav--controlled" autoHeight={false} height={300}/>
+```tsx
+import { useState } from 'react';
+import {
+  IressCol,
+  IressContainer,
+  IressRow,
+  IressSideNav,
+  IressText,
+  type SideNavItem,
+} from '@iress-oss/ids-components';
+
+const items: SideNavItem[] = [
+  {
+    key: 'hubs',
+    icon: 'hub',
+    label: 'Hubs',
+    children: [
+      { key: 'basic', label: 'Basic Details', href: '/hubs/basic-details' },
+      { key: 'dependants', label: 'Dependants', href: '/hubs/dependants' },
+      { key: 'individual', label: 'Individual', href: '/hubs/individual' },
+    ],
+  },
+  {
+    key: 'portfolios',
+    icon: 'bar_chart',
+    label: 'Portfolios',
+    divider: true,
+    children: [
+      {
+        key: 'returns',
+        label: 'Investment Returns',
+        href: '/portfolios/returns',
+      },
+      { key: 'strategy', label: 'Strategy', href: '/portfolios/strategy' },
+      { key: 'holdings', label: 'Holdings', href: '/portfolios/holdings' },
+    ],
+  },
+  {
+    key: 'admin',
+    icon: 'admin_panel_settings',
+    label: 'Admin',
+    href: '/admin',
+  },
+];
+
+export const SideNavControlled = () => {
+  const [activeKey, setActiveKey] = useState('hubs');
+  const [expanded, setExpanded] = useState(true);
+
+  return (
+    <IressContainer fluid stretch px="spacing.2">
+      <IressRow stretch gutter="spacing.4">
+        <IressSideNav
+          items={items}
+          activeItemKey={activeKey}
+          onActiveItemKeyChange={setActiveKey}
+          expanded={expanded}
+          onExpandedChange={setExpanded}
+        />
+        <IressCol p="spacing.4">
+          <IressText>
+            <h2>Active section: {activeKey}</h2>
+            <p>
+              Expanded: <strong>{expanded ? 'Yes' : 'No'}</strong>
+            </p>
+          </IressText>
+        </IressCol>
+      </IressRow>
+    </IressContainer>
+  );
+};
+```
 
 #### Dynamic side menu
 
 Use the `sideMenuItems` prop to override the side panel content with dynamically fetched or context-dependent sub-items.
 
-<StoryEmbed id="patterns-sidenav--dynamic-side-menu" autoHeight={false} height={400}/>
+```tsx
+import { useState } from 'react';
+import { IressSideNav, type SideNavPanelItem } from '@iress-oss/ids-components';
+
+const menusBySection: Record<string, SideNavPanelItem[]> = {
+  hubs: [
+    {
+      key: 'client-details',
+      label: 'Client Details',
+      active: true,
+      children: [
+        { key: 'basic', label: 'Basic Details', href: '/hubs/basic-details' },
+        { key: 'dependants', label: 'Dependants', href: '/hubs/dependants' },
+        { key: 'individual', label: 'Individual', href: '/hubs/individual' },
+      ],
+    },
+    {
+      key: 'financial',
+      label: 'Financial Information',
+      children: [
+        { key: 'employment', label: 'Employment', href: '/hubs/employment' },
+        { key: 'tax', label: 'Tax Details', href: '/hubs/tax' },
+      ],
+    },
+  ],
+  portfolios: [
+    {
+      key: 'investments',
+      label: 'Investments',
+      active: true,
+      children: [
+        { key: 'holdings', label: 'Holdings', href: '/portfolios/holdings' },
+        { key: 'returns', label: 'Returns', href: '/portfolios/returns' },
+      ],
+    },
+    {
+      key: 'trading',
+      label: 'Trading',
+      children: [
+        { key: 'orders', label: 'Orders', href: '/portfolios/orders' },
+        { key: 'history', label: 'History', href: '/portfolios/history' },
+      ],
+    },
+  ],
+};
+
+const labels: Record<string, string> = {
+  hubs: 'Client Hub',
+  portfolios: 'Portfolio Manager',
+};
+
+export function SideNavDynamicMenu() {
+  const [activeKey, setActiveKey] = useState('hubs');
+
+  return (
+    <IressSideNav
+      activeItemKey={activeKey}
+      expanded
+      numbered
+      width="300px"
+      sideMenuLabel={labels[activeKey] ?? 'Navigation'}
+      sideMenuItems={menusBySection[activeKey]}
+      items={[
+        {
+          key: 'hubs',
+          label: 'Hubs',
+          icon: 'hub',
+          onClick: () => {
+            setActiveKey('hubs');
+          },
+        },
+        {
+          key: 'portfolios',
+          label: 'Portfolios',
+          icon: 'bar_chart',
+          divider: true,
+          onClick: () => {
+            setActiveKey('portfolios');
+          },
+        },
+        {
+          key: 'admin',
+          label: 'Admin',
+          icon: 'admin_panel_settings',
+          href: '/admin',
+          onClick: () => {
+            setActiveKey('admin');
+          },
+        },
+      ]}
+    />
+  );
+}
+```
 
 #### Custom routing
 
 Use the `element` prop on each item for integration with third-party routing libraries like React Router or Next.js.
 
-<StoryEmbed id="patterns-sidenav--custom-routing" autoHeight={false} height={300}/>
+```tsx
+import { IressSideNav, type SideNavItem } from '@iress-oss/ids-components';
+import { type HTMLAttributes, forwardRef } from 'react';
+
+/**
+ * This could be the `Link` component from `react-router-dom`, Next.js, or any other routing library.
+ * It receives `href` and renders as an anchor internally.
+ */
+const Link = forwardRef<
+  HTMLAnchorElement,
+  HTMLAttributes<HTMLAnchorElement> & { href: string }
+>(({ children, className, href, ...restProps }, ref) => (
+  <a className={className} href={href} ref={ref} {...restProps}>
+    {children}
+  </a>
+));
+
+const items: SideNavItem[] = [
+  {
+    key: 'hubs',
+    icon: 'hub',
+    label: 'Hubs',
+    href: '/hubs',
+    element: Link,
+    children: [
+      {
+        key: 'basic',
+        label: 'Basic Details',
+        href: '/hubs/basic-details',
+        element: Link,
+      },
+      {
+        key: 'dependants',
+        label: 'Dependants',
+        href: '/hubs/dependants',
+        element: Link,
+      },
+      {
+        key: 'individual',
+        label: 'Individual',
+        href: '/hubs/individual',
+        element: Link,
+      },
+    ],
+  },
+  {
+    key: 'portfolios',
+    icon: 'bar_chart',
+    label: 'Portfolios',
+    href: '/portfolios',
+    element: Link,
+    divider: true,
+    children: [
+      {
+        key: 'returns',
+        label: 'Investment Returns',
+        href: '/portfolios/returns',
+        element: Link,
+      },
+      {
+        key: 'strategy',
+        label: 'Strategy',
+        href: '/portfolios/strategy',
+        element: Link,
+      },
+    ],
+  },
+  {
+    key: 'admin',
+    icon: 'admin_panel_settings',
+    label: 'Admin',
+    href: '/admin',
+    element: Link,
+  },
+];
+
+export const SideNavRouting = () => (
+  <IressSideNav items={items} activeItemKey="hubs" defaultExpanded />
+);
+```
 
 ##### Integration with routing
 

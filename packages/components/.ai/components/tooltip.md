@@ -15,7 +15,18 @@ import { IressTooltip } from '@iress-oss/ids-components';
 
 A component that shows concise, informative text about an element when focussed upon, hovered over or on a long touch.
 
-<StoryEmbed id="components-tooltip--tooltip-text"/>
+```tsx
+<IressStyled pt="spacing.6">
+  <IressInline gap="md">
+    <IressTooltip tooltipText="Single line Hello! This is a really long tooltip to try and see if it goes behind the scrollbar">
+      <IressButton>Single line</IressButton>
+    </IressTooltip>
+    <IressTooltip tooltipText={['This tooltip', 'has multiple lines']}>
+      <IressButton>Multi line</IressButton>
+    </IressTooltip>
+  </IressInline>
+</IressStyled>;
+```
 
 ## Design
 
@@ -60,7 +71,7 @@ import { IressTooltip, IressButton } from '@iress-oss/ids-components';
 
 <IressTooltip tooltipText="Save your changes">
   <IressButton>Save</IressButton>
-</IressTooltip>
+</IressTooltip>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tooltip--docs#api-props)
@@ -71,19 +82,108 @@ import { IressTooltip, IressButton } from '@iress-oss/ids-components';
 
 The `tooltipText` prop sets the content. Pass a string or an array of strings for multiple lines.
 
-<StoryEmbed id="components-tooltip--tooltip-text"/>
+```tsx
+<IressStyled pt="spacing.6">
+  <IressInline gap="md">
+    <IressTooltip tooltipText="Single line Hello! This is a really long tooltip to try and see if it goes behind the scrollbar">
+      <IressButton>Single line</IressButton>
+    </IressTooltip>
+    <IressTooltip tooltipText={['This tooltip', 'has multiple lines']}>
+      <IressButton>Multi line</IressButton>
+    </IressTooltip>
+  </IressInline>
+</IressStyled>;
+```
 
 #### Align
 
 The tooltip can be aligned in 12 positions relative to the activator. Position changes dynamically to avoid overflow.
 
-<StoryEmbed id="components-tooltip--align"/>
+```tsx
+<div style={{ padding: '80px 150px' }}>
+  <IressStack gap="md">
+    <IressInline horizontalAlign="center" gap="sm">
+      <IressTooltip tooltipText="Hello!" align="top-start">
+        <IressButton>Top Start</IressButton>
+      </IressTooltip>
+      <IressTooltip tooltipText="Hello!" align="top">
+        <IressButton>Top</IressButton>
+      </IressTooltip>
+      <IressTooltip tooltipText="Hello!" align="top-end">
+        <IressButton>Top End</IressButton>
+      </IressTooltip>
+    </IressInline>
+    <IressInline horizontalAlign="between">
+      <IressStack gap="sm">
+        <IressInline horizontalAlign="left">
+          <IressTooltip tooltipText="Hello!" align="left-start">
+            <IressButton>Left Start</IressButton>
+          </IressTooltip>
+        </IressInline>
+        <IressInline horizontalAlign="left">
+          <IressTooltip tooltipText="Hello!" align="left">
+            <IressButton>Left</IressButton>
+          </IressTooltip>
+        </IressInline>
+        <IressInline horizontalAlign="left">
+          <IressTooltip tooltipText="Hello!" align="left-end">
+            <IressButton>Left End</IressButton>
+          </IressTooltip>
+        </IressInline>
+      </IressStack>
+      <IressStack gap="sm">
+        <IressInline horizontalAlign="right">
+          <IressTooltip tooltipText="Hello!" align="right-start">
+            <IressButton>Right Start</IressButton>
+          </IressTooltip>
+        </IressInline>
+        <IressInline horizontalAlign="right">
+          <IressTooltip tooltipText="Hello!" align="right">
+            <IressButton>Right</IressButton>
+          </IressTooltip>
+        </IressInline>
+        <IressInline horizontalAlign="right">
+          <IressTooltip tooltipText="Hello!" align="right-end">
+            <IressButton>Right End</IressButton>
+          </IressTooltip>
+        </IressInline>
+      </IressStack>
+    </IressInline>
+    <IressInline horizontalAlign="center" gap="sm">
+      <IressTooltip tooltipText="Hello!" align="bottom-start">
+        <IressButton>Bottom Start</IressButton>
+      </IressTooltip>
+      <IressTooltip tooltipText="Hello!" align="bottom">
+        <IressButton>Bottom</IressButton>
+      </IressTooltip>
+      <IressTooltip tooltipText="Hello!" align="bottom-end">
+        <IressButton>Bottom End</IressButton>
+      </IressTooltip>
+    </IressInline>
+  </IressStack>
+</div>;
+```
 
 #### Delay
 
 The `delay` prop sets milliseconds before the tooltip appears after `mouseEnter`.
 
-<StoryEmbed id="components-tooltip--delay"/>
+```tsx
+<IressStyled pt="spacing.6">
+  <IressInline horizontalAlign="center" gap="sm">
+    <IressTooltip tooltipText="Hello!" delay={0}>
+      <IressButton>0ms (no delay)</IressButton>
+    </IressTooltip>
+    <IressTooltip tooltipText="Hello!">
+      <IressButton>500ms (default)</IressButton>
+    </IressTooltip>
+
+    <IressTooltip tooltipText="Hello!" delay={2000}>
+      <IressButton>2000ms</IressButton>
+    </IressTooltip>
+  </IressInline>
+</IressStyled>;
+```
 
 ### Testing
 
@@ -104,7 +204,7 @@ expect(screen.getByRole('tooltip')).toHaveTextContent('Tooltip text');
 |------|-------------|-------------------|---------|
 | main | The root wrapper element (contains activator and tooltip) | — | `tooltip` |
 | activator | The tooltip trigger element | — | `tooltip__activator` |
-| tooltip text | The floating tooltip content (visible on hover/focus) | — | `tooltip__tooltip-text` |
+| tooltip text | The floating tooltip content (visible on hover/focus) | `getByRole('tooltip')` | `tooltip__tooltip-text` |
 
 ---
 

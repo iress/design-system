@@ -84,14 +84,28 @@ export const OptionGroups: Story = {
 
 export const Placeholder: Story = {
   args: {
-    ...Options.args,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: 2 },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: 4 },
+      { label: 'Option 5', value: '5' },
+    ],
+    native: true,
     placeholder: 'Please select an option',
   },
 };
 
 export const SelectedOption: Story = {
   args: {
-    ...Options.args,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: 2 },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: 4 },
+      { label: 'Option 5', value: '5' },
+    ],
+    native: true,
     value: { label: 'Option 2', value: 2 },
   },
 };
@@ -114,7 +128,15 @@ export const Sizing: Story = {
 
 export const Disabled: Story = {
   args: {
-    ...SelectedOption.args,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: 2 },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: 4 },
+      { label: 'Option 5', value: '5' },
+    ],
+    native: true,
+    value: { label: 'Option 2', value: 2 },
     disabled: true,
   },
 };

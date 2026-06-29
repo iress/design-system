@@ -15,7 +15,18 @@ import { IressAutocomplete } from '@iress-oss/ids-components';
 
 Autocomplete allow for users to fill in their input by providing suggestions as they type.
 
-<StoryEmbed id="components-autocomplete--uncontrolled"/>
+```tsx
+<IressAutocomplete
+  options={[
+    { label: 'Option 1' },
+    { label: 'Option 2' },
+    { label: 'Option 3' },
+    { label: 'Option 4' },
+    { label: 'Option 5' },
+  ]}
+  defaultValue="Option 1"
+/>;
+```
 
 ## Design
 
@@ -58,7 +69,7 @@ Autocomplete allow for users to fill in their input by providing suggestions as 
 ```tsx
 import { IressAutocomplete } from '@iress-oss/ids-components';
 
-<IressAutocomplete />
+<IressAutocomplete />;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-autocomplete--docs#api-props)
@@ -73,13 +84,46 @@ There is no validation done between the suggestions and the input value. They ar
 
 The `defaultValue` prop can be used to set the initial value of the input. The value will be managed by the component.
 
-<StoryEmbed id="components-autocomplete--uncontrolled"/>
+```tsx
+<IressAutocomplete
+  options={[
+    { label: 'Option 1' },
+    { label: 'Option 2' },
+    { label: 'Option 3' },
+    { label: 'Option 4' },
+    { label: 'Option 5' },
+  ]}
+  defaultValue="Option 1"
+/>;
+```
 
 #### Controlled
 
 The `value` prop can be used to completely control the state of the component. Use the `onChange` and `onClear` props to sync your state with the component.
 
-<StoryEmbed id="components-autocomplete--controlled"/>
+```tsx
+import { IressAutocomplete } from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export function AutocompleteUsingState() {
+  const [value, setValue] = useState('Option 1');
+
+  return (
+    <IressAutocomplete
+      options={[
+        { label: 'Option 1' },
+        { label: 'Option 2' },
+        { label: 'Option 3' },
+        { label: 'Option 4' },
+        { label: 'Option 5' },
+      ]}
+      onChange={(_e, newValue) => setValue(newValue ?? '')}
+      onClear={() => setValue('')}
+      value={value}
+    />
+  );
+}
+```
 
 #### Providing suggestions
 
@@ -89,31 +133,138 @@ To use the suggestion functionality, you can provide an array of `LabelValueMeta
 
 **Note:** If `value` is provided on a suggestion item, it will be used (casted to a string) instead of the `label` key.
 
-<StoryEmbed id="components-autocomplete--options"/>
+```tsx
+<IressAutocomplete
+  options={[
+    { label: 'Option 1' },
+    { label: 'Option 2' },
+    { label: 'Option 3' },
+    { label: 'Option 4' },
+    { label: 'Option 5' },
+  ]}
+/>;
+```
 
 ##### Asynchronous `options`
 
 If you would like to render suggestions from the server, you can pass a function to the `options` prop. It accepts a string parameter and returns a promise that resolves to an array of `LabelValueMeta[]` objects.
 
-<StoryEmbed id="components-autocomplete--async-options"/>
+```tsx
+import { IressAutocomplete } from '@iress-oss/ids-components';
+
+interface StarWarsCharacter {
+  name: string;
+  gender: string;
+}
+
+interface StarWarsCharacterApi {
+  results: StarWarsCharacter[];
+}
+
+export function AutocompleteUsingAsync() {
+  return (
+    <IressAutocomplete
+      placeholder='Search star wars characters, or type "error" to see the error text'
+      options={async (query: string) => {
+        if (query === 'error') {
+          throw new Error('This is an error');
+        }
+
+        const data = await fetch(
+          `https://swapi.py4e.com/api/people/?search=${query}`,
+        ).then((response) => response.json() as Promise<StarWarsCharacterApi>);
+
+        return data.results.map((character: StarWarsCharacter) => ({
+          label: character.name,
+          value: character.name,
+          meta: character.gender,
+        }));
+      }}
+      errorText="Something went wrong. Please try again."
+    />
+  );
+}
+```
 
 ##### Minimum search length for async options
 
 When using asynchronous options, you can set a minimum number of characters required before triggering the search using the `minSearchLength` prop.
 
-<StoryEmbed id="components-autocomplete--async-options-min-search-length"/>
+```tsx
+import { IressAutocomplete } from '@iress-oss/ids-components';
+
+interface StarWarsCharacter {
+  name: string;
+  gender: string;
+}
+
+interface StarWarsCharacterApi {
+  results: StarWarsCharacter[];
+}
+
+export function AutocompleteUsingAsyncMinSearch() {
+  return (
+    <IressAutocomplete
+      minSearchLength={3}
+      options={async (query: string) => {
+        if (query === 'error') {
+          throw new Error('This is an error');
+        }
+
+        const data = await fetch(
+          `https://swapi.py4e.com/api/people/?search=${query}`,
+        ).then((response) => response.json() as Promise<StarWarsCharacterApi>);
+
+        return data.results.map((character: StarWarsCharacter) => ({
+          label: character.name,
+          value: character.name,
+          meta: character.gender,
+        }));
+      }}
+      errorText="Something went wrong. Please try again."
+    />
+  );
+}
+```
 
 ##### `initialOptions`
 
 If you want to provide initial options to the user, you can use the `initialOptions` prop. This is useful when you want to provide a list of options to the user before they start typing (eg. recommended search terms).
 
-<StoryEmbed id="components-autocomplete--initial-options"/>
+```tsx
+<IressAutocomplete
+  options={[
+    { label: 'Option 1' },
+    { label: 'Option 2' },
+    { label: 'Option 3' },
+    { label: 'Option 4' },
+    { label: 'Option 5' },
+  ]}
+  initialOptions={[
+    { label: 'Favourite option 1' },
+    { label: 'Favourite option 2' },
+    { label: 'Favourite option 3' },
+  ]}
+/>;
+```
 
 #### `autoSelect`
 
 The `autoSelect` prop will automatically select the highlighted option when the user blurs the autocomplete. This is set to true by default, but can be switched off.
 
-<StoryEmbed id="components-autocomplete--remove-auto-select"/>
+```tsx
+<IressAutocomplete
+  options={[
+    { label: 'Option 1' },
+    { label: 'Option 2' },
+    { label: 'Option 3' },
+    { label: 'Option 4' },
+    { label: 'Option 5' },
+  ]}
+  autoSelect={false}
+  placeholder="Should no longer auto-select when an item is highlighted"
+/>;
+```
 
 #### Input props
 
@@ -121,13 +272,62 @@ Autocomplete extends `IressInput`, hence it has the same properties as `IressInp
 
 It does have some defaults to help with user experience. `append` automatically has a search icon, and `clearable` is set to true by default.
 
-<StoryEmbed id="components-autocomplete--input-props"/>
+```tsx
+import {
+  IressAutocomplete,
+  IressButton,
+  IressIcon,
+  IressPanel,
+  IressPopover,
+} from '@iress-oss/ids-components';
+
+export function AutocompleteInputProps() {
+  return (
+    <IressAutocomplete
+      options={[
+        { label: 'Option 1' },
+        { label: 'Option 2' },
+        { label: 'Option 3' },
+        { label: 'Option 4' },
+        { label: 'Option 5' },
+      ]}
+      append={
+        <IressPopover
+          activator={
+            <IressButton mode="muted" mr="-spacing.3">
+              <IressIcon name="cog" />
+            </IressButton>
+          }
+          align="bottom-end"
+          container={document.body}
+        >
+          <IressPanel>Some settings in here</IressPanel>
+        </IressPopover>
+      }
+      prepend={<IressIcon name="search" />}
+      width="12"
+    />
+  );
+}
+```
 
 #### No results
 
 If you would like to show a message when there are no results, you can use the `noResultsText` prop. It accepts any React node.
 
-<StoryEmbed id="components-autocomplete--no-results-text"/>
+```tsx
+<IressAutocomplete
+  options={[
+      { label: 'Option 1' },
+      { label: 'Option 2' },
+      { label: 'Option 3' },
+      { label: 'Option 4' },
+      { label: 'Option 5' },
+    ]}
+  placeholder="Type "no" to see the no results text"
+  noResultsText={<IressPanel noBorder>No results found</IressPanel>}
+/>
+```
 
 #### Popover props
 
@@ -135,13 +335,46 @@ Under the hood, autocomplete uses `IressInputPopover` to display the suggestions
 
 There are two additional props that autocomplete accepts to customise the popover: `append` and `prepend`.
 
-<StoryEmbed id="components-autocomplete--popover-props"/>
+```tsx
+<IressAutocomplete
+  options={[
+    { label: 'Option 1' },
+    { label: 'Option 2' },
+    { label: 'Option 3' },
+    { label: 'Option 4' },
+    { label: 'Option 5' },
+  ]}
+  popoverProps={{
+    append: (
+      <>
+        <IressDivider />
+        <IressPanel noBorder>
+          <IressButton>Add an option</IressButton>
+        </IressPanel>
+      </>
+    ),
+    container: document.body,
+  }}
+/>;
+```
 
 #### Debounce threshold
 
 The `debounceThreshold` prop can be used to set the time in milliseconds to wait before making a request to the `options` function.
 
-<StoryEmbed id="components-autocomplete--debounce-threshold"/>
+```tsx
+<IressAutocomplete
+  options={[
+    { label: 'Option 1' },
+    { label: 'Option 2' },
+    { label: 'Option 3' },
+    { label: 'Option 4' },
+    { label: 'Option 5' },
+  ]}
+  debounceThreshold={0}
+  placeholder="Instant search!"
+/>;
+```
 
 #### Result limits
 
@@ -149,13 +382,47 @@ You can limit the maximum amount of search results displayed in the suggestions 
 
 On smaller screens (< 768px), the number of options is further reduced by using the `limitMobile` prop, which defaults to 6.
 
-<StoryEmbed id="components-autocomplete--result-limits"/>
+```tsx
+<IressAutocomplete
+  options={[
+    { label: 'Option 1' },
+    { label: 'Option 2' },
+    { label: 'Option 3' },
+    { label: 'Option 4' },
+    { label: 'Option 5' },
+    { label: 'Option 6' },
+    { label: 'Option 7' },
+    { label: 'Option 8' },
+    { label: 'Option 9' },
+    { label: 'Option 10' },
+    { label: 'Option 11' },
+    { label: 'Option 12' },
+    { label: 'Option 13' },
+    { label: 'Option 14' },
+    { label: 'Option 15' },
+  ]}
+  limitDesktop={6}
+  limitMobile={3}
+/>;
+```
 
 #### Read only
 
 The `readOnly` prop can be set to `true` to prevent the user from changing the value of the autocomplete.
 
-<StoryEmbed id="components-autocomplete--read-only"/>
+```tsx
+<IressAutocomplete
+  options={[
+    { label: 'Option 1' },
+    { label: 'Option 2' },
+    { label: 'Option 3' },
+    { label: 'Option 4' },
+    { label: 'Option 5' },
+  ]}
+  defaultValue="Option 1"
+  readOnly
+/>;
+```
 
 ### Testing
 
@@ -208,9 +475,7 @@ import { setupServer } from 'msw/node';
 
 const server = setupServer(
   http.get('https://swapi.py4e.com/api/people', () => {
-    return HttpResponse.json([
-      { name: 'Luke Skywalker', gender: 'male' },
-    ]);
+    return HttpResponse.json([{ name: 'Luke Skywalker', gender: 'male' }]);
   }),
 );
 
@@ -224,9 +489,9 @@ server.listen();
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root wrapper element (no semantic role) | — | `autocomplete` |
-| input | The text input element | — | `autocomplete__input` |
-| menu | The suggestions menu | — | `autocomplete__menu` |
+| main | The root wrapper element (no semantic role) | No role-based query — use `getByTestId('autocomplete')` | `autocomplete` |
+| input | The text input element | `getByRole('combobox')` for the input, or `getByLabelText('...')` when inside a Field | `autocomplete__input` |
+| menu | The suggestions menu | `getByRole('listbox')` | `autocomplete__menu` |
 
 ---
 

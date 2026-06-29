@@ -15,7 +15,9 @@ import { IressDivider } from '@iress-oss/ids-components';
 
 A divider is a UI element that separates content in lists and layouts.
 
-<StoryEmbed id="components-divider--horizontal"/>
+```tsx
+<IressDivider />;
+```
 
 ## Design
 
@@ -50,7 +52,7 @@ A divider is a UI element that separates content in lists and layouts.
 ```tsx
 import { IressDivider } from '@iress-oss/ids-components';
 
-<IressDivider />
+<IressDivider />;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-divider--docs#api-props)
@@ -59,7 +61,13 @@ import { IressDivider } from '@iress-oss/ids-components';
 
 Use the `vertical` prop to change the divider from horizontal to vertical.
 
-<StoryEmbed id="components-divider--vertical"/>
+```tsx
+<IressInline gap="spacing.4" verticalAlign="middle">
+  <IressText>Separate</IressText>
+  <IressDivider vertical />
+  <IressText>this</IressText>
+</IressInline>;
+```
 
 ### Gutter
 
@@ -67,7 +75,69 @@ You can customise the gutter by using the `my` prop. If the divider is vertical,
 
 By default, dividers do not have a gutter, allowing them to adapt to `<IressStack>` and `<IressInline>` layouts.
 
-<StoryEmbed id="components-divider--gutter"/>
+```tsx
+import {
+  IressDivider,
+  IressInline,
+  IressPanel,
+  IressText,
+} from '@iress-oss/ids-components';
+
+export function DividerGutter() {
+  return (
+    <IressInline gap="spacing.4">
+      <IressPanel>
+        <IressText element="h2">
+          <code>my="none"</code>
+        </IressText>
+        <IressText>Separate</IressText>
+        <IressDivider my="none" />
+        <IressText>this</IressText>
+      </IressPanel>
+      <IressPanel>
+        <IressText element="h2">
+          <code>my="xs"</code>
+        </IressText>
+        <IressText>Separate</IressText>
+        <IressDivider my="xs" />
+        <IressText>this</IressText>
+      </IressPanel>
+      <IressPanel>
+        <IressText element="h2">
+          <code>my="sm"</code>
+        </IressText>
+        <IressText>Separate</IressText>
+        <IressDivider my="sm" />
+        <IressText>this</IressText>
+      </IressPanel>
+      <IressPanel>
+        <IressText element="h2">
+          <code>my="md"</code>
+        </IressText>
+        <IressText>Separate</IressText>
+        <IressDivider my="md" />
+        <IressText>this</IressText>
+      </IressPanel>
+      <IressPanel>
+        <IressText element="h2">
+          <code>my="lg"</code>
+        </IressText>
+        <IressText>Separate</IressText>
+        <IressDivider my="lg" />
+        <IressText>this</IressText>
+      </IressPanel>
+      <IressPanel>
+        <IressText element="h2">
+          <code>my="xl"</code>
+        </IressText>
+        <IressText>Separate</IressText>
+        <IressDivider my="xl" />
+        <IressText>this</IressText>
+      </IressPanel>
+    </IressInline>
+  );
+}
+```
 
 ### Testing
 
@@ -82,7 +152,7 @@ const divider = screen.getByRole('separator');
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the divider | — | `divider` |
+| main | The root element of the divider | `getByRole('separator')` | `divider` |
 
 ---
 

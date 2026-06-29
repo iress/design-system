@@ -174,11 +174,11 @@ export const HandlingSubmission: Story = {
 };
 
 export const ValidationSummary: Story = {
-  ...Fields,
   args: {
-    ...Fields.args,
-    alert: <IressFormValidationSummary />,
     heading: 'Try hitting submit to see the validation summary',
+    children: formArgTypes.children.mapping.supportedControls,
+    pattern: 'long',
+    alert: <IressFormValidationSummary />,
   },
   tags: ['!tab:fields'],
 };
@@ -217,9 +217,9 @@ export const ExcludeReadOnlyValidation: Story = {
 };
 
 export const DefaultValues: Story = {
-  ...Simple,
   args: {
-    ...Simple.args,
+    children: formArgTypes.children.mapping.simple,
+    pattern: 'short',
     defaultValues: {
       name: 'Luke Skywalker',
       email: 'luke.skywalker@iress.com',
@@ -282,9 +282,9 @@ export const ResetForm: Story = {
 };
 
 export const UpdateErrorSummaryOnSubmit: Story = {
-  ...Simple,
   args: {
-    ...Simple.args,
+    children: formArgTypes.children.mapping.simple,
+    pattern: 'short',
     alert: <IressFormValidationSummary />,
     updateErrorSummaryOnSubmit: true,
   },

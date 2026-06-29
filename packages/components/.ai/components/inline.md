@@ -15,7 +15,13 @@ import { IressInline } from '@iress-oss/ids-components';
 
 IressInline renders a set of components in a row with equal spacing around them, wrapping onto multiple lines when necessary.
 
-<StoryEmbed id="components-inline--default"/>
+```tsx
+<IressInline gap="spacing.4">
+  <IressPlaceholder width="50" style={{ minHeight: '30px' }} />
+  <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+  <IressPlaceholder width="50" style={{ minHeight: '40px' }} />
+</IressInline>;
+```
 
 ## Design
 
@@ -45,7 +51,7 @@ import { IressInline } from '@iress-oss/ids-components';
 <IressInline gap="spacing.4">
   <span>Item 1</span>
   <span>Item 2</span>
-</IressInline>
+</IressInline>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inline--docs#api-props)
@@ -64,13 +70,46 @@ The previous `gutter` prop has been replaced by `gap`, which uses the latest set
 
 The existing `gutter` values are still supported, as they are now aliases for the spacing tokens.
 
-<StoryEmbed id="components-inline--gap"/>
+```tsx
+<IressStack gap="spacing.10">
+  <IressText element="h3">spacing.1</IressText>
+  <IressInline gap="spacing.1">
+    <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+    <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+    <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+  </IressInline>
+  <IressText element="h3">spacing.4</IressText>
+  <IressInline gap="spacing.4">
+    <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+    <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+    <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+  </IressInline>
+  <IressText element="h3">spacing.8</IressText>
+  <IressInline gap="spacing.8">
+    <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+    <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+    <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+  </IressInline>
+</IressStack>;
+```
 
 #### Responsive gap
 
 The `gap` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
 
-<StoryEmbed id="components-inline--responsive-gap"/>
+```tsx
+<IressInline
+  gap={{
+    xs: 'spacing.1',
+    sm: 'spacing.2',
+    md: 'spacing.4',
+  }}
+>
+  <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+  <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+  <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+</IressInline>;
+```
 
 #### Horizontal align
 
@@ -83,7 +122,32 @@ Horizontal alignment of the children is controlled by the `horizontalAlign` prop
 - `left` - children are aligned left, similar to `text-align: left`.
 - `right` - children are aligned right, similar to `text-align: right`.
 
-<StoryEmbed id="components-inline--horizontal-align"/>
+```tsx
+<IressContainer>
+  <IressStack gap="spacing.10">
+    <IressText element="h3">left</IressText>
+    <IressInline gap="spacing.2" horizontalAlign="left">
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+    </IressInline>
+    <IressText element="h3">center</IressText>
+    <IressInline gap="spacing.2" horizontalAlign="center">
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+    </IressInline>
+    <IressText element="h3">right</IressText>
+    <IressInline gap="spacing.2" horizontalAlign="right">
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+    </IressInline>
+    <IressText element="h3">between</IressText>
+    <IressInline gap="spacing.2" horizontalAlign="between">
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+    </IressInline>
+  </IressStack>
+</IressContainer>;
+```
 
 #### Vertical align
 
@@ -94,13 +158,62 @@ Vertical alignment of the children is controlled by the `verticalAlign` prop. It
 - `stretch` - each direct child stretches to the full height of the inline container.
 - `top` - children are aligned to the top of the container.
 
-<StoryEmbed id="components-inline--vertical-align"/>
+```tsx
+<IressContainer>
+  <IressStack gap="spacing.10">
+    <IressText element="h3">top</IressText>
+    <IressInline gap="spacing.2" horizontalAlign="center" verticalAlign="top">
+      <IressPlaceholder width="50" style={{ minHeight: '30px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '40px' }} />
+    </IressInline>
+    <IressText element="h3">middle</IressText>
+    <IressInline
+      gap="spacing.2"
+      horizontalAlign="center"
+      verticalAlign="middle"
+    >
+      <IressPlaceholder width="50" style={{ minHeight: '30px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '40px' }} />
+    </IressInline>
+    <IressText element="h3">bottom</IressText>
+    <IressInline
+      gap="spacing.2"
+      horizontalAlign="center"
+      verticalAlign="bottom"
+    >
+      <IressPlaceholder width="50" style={{ minHeight: '30px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '40px' }} />
+    </IressInline>
+    <IressText element="h3">stretch</IressText>
+    <IressInline
+      gap="spacing.2"
+      horizontalAlign="center"
+      verticalAlign="stretch"
+    >
+      <IressPlaceholder width="50" style={{ minHeight: '30px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '40px' }} />
+    </IressInline>
+  </IressStack>
+</IressContainer>;
+```
 
 #### No wrap
 
 The `IressInline` component automatically wraps children. There may be some scenarios where you do not require children to be wrapped. For this you can use the `noWrap` prop.
 
-<StoryEmbed id="components-inline--no-wrap"/>
+```tsx
+<IressInline gap="spacing.4" noWrap>
+  <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+  <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+  <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+  <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+  <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+</IressInline>;
+```
 
 ### Testing
 

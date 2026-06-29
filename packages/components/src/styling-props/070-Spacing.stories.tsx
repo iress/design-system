@@ -166,21 +166,12 @@ export const noGutter: Story = {
     bg: 'alt',
     noGutter: true,
   },
-  render: ({ children, ...args }) => (
+  render: (args) => (
     <IressPanel {...args}>
-      {children ?? (
-        <ul>
-          <li>
-            {args.noGutter ? (
-              <>
-                Margin is removed due to <code>noGutter</code>
-              </>
-            ) : (
-              'Since lists have bottom margin, you can see there is extra white-space.'
-            )}
-          </li>
-        </ul>
-      )}
+      <ul>
+        <li>Margin is removed due to <code>noGutter</code></li>
+        <li>Last child has no bottom margin</li>
+      </ul>
     </IressPanel>
   ),
 };

@@ -15,7 +15,33 @@ import { IressHide } from '@iress-oss/ids-components';
 
 Makes it easier to create adaptive designs that show or hide content based on screen size.
 
-<StoryEmbed id="components-hide--hidden-on" />
+```tsx
+<IressStack gap="spacing.1">
+  <IressHide hiddenOn={{ xs: true }}>
+    <IressText>This text is hidden on xs screens and above.</IressText>
+  </IressHide>
+  <IressHide hiddenOn={{ md: true }}>
+    <IressText color="colour.system.success.text">
+      This text is hidden on md screens and above.
+    </IressText>
+  </IressHide>
+  <IressHide hiddenOn={{ xs: true, lg: false }}>
+    <IressText color="colour.system.danger.text">
+      This text is hidden on md screens and below.
+    </IressText>
+  </IressHide>
+  <IressHide hiddenOn={{ xs: true, sm: false }}>
+    <IressText color="colour.system.info.text">
+      This text is hidden on xs screens only.
+    </IressText>
+  </IressHide>
+  <IressHide hiddenOn={{ xl: true, xxl: false }}>
+    <IressText color="colour.neutral.70">
+      This text is hidden on xl screens only.
+    </IressText>
+  </IressHide>
+</IressStack>;
+```
 
 ## Design
 
@@ -54,7 +80,7 @@ import { IressHide } from '@iress-oss/ids-components';
 
 <IressHide hiddenOn={{ md: true }}>
   This content is hidden on medium screens and above.
-</IressHide>
+</IressHide>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-hide--docs#api-props)
@@ -65,13 +91,50 @@ import { IressHide } from '@iress-oss/ids-components';
 
 The `hiddenOn` prop accepts a responsive object. Set a breakpoint to `true` to hide content from that breakpoint upward. Set it to `false` to make content visible again at a larger breakpoint.
 
-<StoryEmbed id="components-hide--hidden-on" />
+```tsx
+<IressStack gap="spacing.1">
+  <IressHide hiddenOn={{ xs: true }}>
+    <IressText>This text is hidden on xs screens and above.</IressText>
+  </IressHide>
+  <IressHide hiddenOn={{ md: true }}>
+    <IressText color="colour.system.success.text">
+      This text is hidden on md screens and above.
+    </IressText>
+  </IressHide>
+  <IressHide hiddenOn={{ xs: true, lg: false }}>
+    <IressText color="colour.system.danger.text">
+      This text is hidden on md screens and below.
+    </IressText>
+  </IressHide>
+  <IressHide hiddenOn={{ xs: true, sm: false }}>
+    <IressText color="colour.system.info.text">
+      This text is hidden on xs screens only.
+    </IressText>
+  </IressHide>
+  <IressHide hiddenOn={{ xl: true, xxl: false }}>
+    <IressText color="colour.neutral.70">
+      This text is hidden on xl screens only.
+    </IressText>
+  </IressHide>
+</IressStack>;
+```
 
 #### Visually hidden
 
 Use `visuallyHidden` for content that should be accessible to screen readers but not visible on screen:
 
-<StoryEmbed id="components-hide--visually-hidden" />
+```tsx
+<IressStack gap="spacing.1">
+  <IressHide visuallyHidden hiddenOn={{ xs: true }}>
+    <IressText>This text is visually hidden on xs screens and above.</IressText>
+  </IressHide>
+  <IressHide visuallyHidden hiddenOn={{ md: true }}>
+    <IressText color="colour.system.success.text">
+      This text is visually hidden on md screens and above.
+    </IressText>
+  </IressHide>
+</IressStack>;
+```
 
 ### Testing
 
@@ -104,7 +167,14 @@ const srContent = screen.getByText('Screen reader only');
 | `hiddenOn` breakpoint inactive | Content rendered normally |
 | `visuallyHidden` | Content rendered but positioned off-screen; accessible to screen readers |
 
-<StoryEmbed id="components-hide--breakpoint-table" />
+| Breakpoint | Screen Widths |
+|------------|---------------|
+| `xs` | 0 - 575px |
+| `sm` | 576px - 767px |
+| `md` | 768px - 1023px |
+| `lg` | 1024px - 1279px |
+| `xl` | 1280px - 1599px |
+| `xxl` | 1600px and above |
 
 ### Accessibility
 

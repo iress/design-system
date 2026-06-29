@@ -9,7 +9,15 @@ The `bg` prop allows you to change the background of any component to the value 
 
 Below is an example of a component using `bg` and `color` to create a featured panel that changes colour depending on the theme.
 
-<StoryEmbed id="styling-props-colour--bg" />
+```tsx
+<IressPanel bg="colour.primary.fill" color="colour.primary.onFill">
+  <h5>Featured panel</h5>
+  <p>
+    This is a featured panel, in case you want to highlight something important
+    or draw attention to a specific piece of content.
+  </p>
+</IressPanel>;
+```
 
 ## Foreground (`color`)
 
@@ -17,7 +25,21 @@ The `color` prop allows you to change the foreground of any component to the val
 
 Below is an example of using the `color` prop to highlight text throughout a component.
 
-<StoryEmbed id="styling-props-colour--color" />
+```tsx
+<IressPanel>
+  <p>
+    Sometimes actions are{' '}
+    <IressText element="strong" color="colour.system.success.text">
+      successful
+    </IressText>
+    , and sometimes they are{' '}
+    <IressText element="strong" color="colour.system.danger.text">
+      dangerous
+    </IressText>
+    .
+  </p>
+</IressPanel>;
+```
 
 ---
 
@@ -44,7 +66,7 @@ The special value `"alt"` provides an alternate background color that adapts to 
 
 ```tsx
 // ✅ CORRECT - Using "alt" for alternate backgrounds
-<IressPanel bg="alt">Content with alternate background</IressPanel>
+<IressPanel bg="alt">Content with alternate background</IressPanel>;
 ```
 
 ### ✅ DO: Pair `bg` and `color` props together for accessibility

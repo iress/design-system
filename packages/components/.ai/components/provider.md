@@ -54,7 +54,61 @@ In most cases, you should wrap the entire application with the `IressProvider` c
 
 > **Note:** `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, `IressPopoverProvider`, and `IressIconProvider`. You do not need to add these providers separately when using `IressProvider`. Similarly, `IressShadow` includes `IressProvider` internally, so you do not need any additional providers when using `IressShadow`.
 
-<StoryEmbed id="components-provider--default"/>
+```tsx
+import {
+  IressButton,
+  IressInline,
+  IressModal,
+  IressPanel,
+  IressProvider,
+  IressSlideout,
+  IressText,
+  useModal,
+  useSlideout,
+  useToaster,
+} from '@iress-oss/ids-components';
+
+const Page = () => {
+  const { showModal } = useModal();
+  const { showSlideout } = useSlideout();
+  const toaster = useToaster();
+
+  return (
+    <IressPanel
+      bg="alt"
+      style={{
+        height: '300px',
+      }}
+    >
+      <IressInline gap="md">
+        <IressButton onClick={() => showModal('test-modal')}>
+          Show modal
+        </IressButton>
+        <IressModal id="test-modal">
+          <IressText>Some modal content</IressText>
+        </IressModal>
+        <IressButton onClick={() => showSlideout('test-slideout')}>
+          Show slideout
+        </IressButton>
+        <IressSlideout id="test-slideout">
+          <IressText>Some slideout content</IressText>
+        </IressSlideout>
+        <IressButton
+          onClick={() => toaster.success({ content: 'A toast message' })}
+        >
+          Show toast
+        </IressButton>
+      </IressInline>
+    </IressPanel>
+  );
+};
+
+export const AppWithProvider = () => (
+  <IressProvider>
+    <Page />
+  </IressProvider>
+);
+```
 
 ---
 

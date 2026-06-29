@@ -145,6 +145,16 @@ export const Inline: Story = {
     ...Default.args,
     inline: true,
   },
+  render: () => (
+    <IressFieldGroup label="Full name" inline>
+      <IressField label="First name" htmlFor="firstName">
+        <IressInput id="firstName" />
+      </IressField>
+      <IressField label="Last name" htmlFor="lastName">
+        <IressInput id="lastName" />
+      </IressField>
+    </IressFieldGroup>
+  ),
 };
 
 export const InlineSink: Story = {
@@ -257,6 +267,16 @@ export const Join: Story = {
     ...Default.args,
     join: true,
   },
+  render: () => (
+    <IressFieldGroup label="Full name" join>
+      <IressField label="First name" htmlFor="firstName">
+        <IressInput id="firstName" />
+      </IressField>
+      <IressField label="Last name" htmlFor="lastName">
+        <IressInput id="lastName" />
+      </IressField>
+    </IressFieldGroup>
+  ),
 };
 
 export const JoinSink: Story = {
@@ -265,6 +285,34 @@ export const JoinSink: Story = {
     ...InlineSink.args,
     join: true,
   },
+  render: () => (
+    <form>
+      <IressFieldGroup label="Full name" inline join>
+        <IressField label="Emoji" htmlFor="emoji">
+          <IressSelect
+            width="2"
+            id="emoji"
+            options={[
+              { label: '🐶', value: 'dog' },
+              { label: '🐱', value: 'cat' },
+              { label: '🐭', value: 'mouse' },
+            ]}
+            container={document.body}
+          />
+        </IressField>
+
+        <IressField label="First name" htmlFor="firstName" required>
+          <IressInput id="firstName" required />
+        </IressField>
+
+        <IressField label="Last name" htmlFor="lastName" required>
+          <IressInput id="lastName" required />
+        </IressField>
+
+        <IressButton type="submit">Submit</IressButton>
+      </IressFieldGroup>
+    </form>
+  ),
 };
 
 export const JoinAndReadonly: Story = {

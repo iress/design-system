@@ -36,16 +36,7 @@ export const Container: Story = {
         interface by snapping the layout to fixed max widths at different
         breakpoints.
       </p>
-
-      {args.fluid ? (
-        <p>
-          When the <code>fluid</code> prop is enabled, the container will span
-          the full width of its containing element. Try resizing the screen to
-          see how the IressContainer is 100% for all screen sizes.
-        </p>
-      ) : (
-        <p>Try resizing the screen to see the difference.</p>
-      )}
+      <p>Try resizing the screen to see the difference.</p>
     </IressContainer>
   ),
   decorators: [withBreakpointLabel('container')],

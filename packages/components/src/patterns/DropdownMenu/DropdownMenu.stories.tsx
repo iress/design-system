@@ -95,12 +95,18 @@ export const AsyncOptions: SingleStory = {
 
 export const InitialOptions: SingleStory = {
   args: {
-    ...Default.args,
     label: 'Select an option',
-    initialOptions: [...Array(3).keys()].map((number) => ({
-      label: `Favourite option ${number + 1}`,
-      value: `fav-${number + 1}`,
-    })),
+    options: [
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+    ],
+    container: document.body,
+    initialOptions: [
+      { label: 'Favourite option 1', value: 'fav-1' },
+      { label: 'Favourite option 2', value: 'fav-2' },
+      { label: 'Favourite option 3', value: 'fav-3' },
+    ],
     searchable: true,
   },
 };
@@ -185,7 +191,13 @@ export const ComplexOptions: SingleStory = {
 
 export const InputProps: SingleStory = {
   args: {
-    ...Default.args,
+    label: 'Select an option',
+    options: [
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+    ],
+    container: document.body,
     inputProps: {
       placeholder: 'Search some stuff...',
     },
@@ -195,21 +207,39 @@ export const InputProps: SingleStory = {
 
 export const Searchable: SingleStory = {
   args: {
-    ...Default.args,
+    label: 'Select an option',
+    options: [
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+    ],
+    container: document.body,
     searchable: true,
   },
 };
 
 export const ResetFilters: SingleStory = {
   args: {
-    ...Default.args,
+    label: 'Select an option',
+    options: [
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+    ],
+    container: document.body,
     visibleResetButton: true,
   },
 };
 
 export const NoResultsText: SingleStory = {
   args: {
-    ...Default.args,
+    label: 'Select an option',
+    options: [
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+    ],
+    container: document.body,
     inputProps: {
       placeholder: 'Type "no" to see the no results text',
     },
@@ -224,7 +254,13 @@ export const NoResultsText: SingleStory = {
 
 export const PopoverProps: SingleStory = {
   args: {
-    ...Default.args,
+    label: 'Select an option',
+    options: [
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+    ],
+    container: document.body,
     footer: (
       <>
         <IressMenuDivider />
@@ -236,7 +272,13 @@ export const PopoverProps: SingleStory = {
 
 export const SelectedOptionsText: Story = {
   args: {
-    ...(Default as Story).args,
+    label: 'Select an option',
+    options: [
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+    ],
+    container: document.body,
     multiSelect: true,
     selectedOptionsText: ' - {{numOptions}}',
   },

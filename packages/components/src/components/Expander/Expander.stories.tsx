@@ -39,7 +39,8 @@ export const Mode: StoryObj<typeof IressExpander> = {
 
 export const Open: StoryObj<typeof IressExpander> = {
   args: {
-    ...Default.args,
+    activator: 'Expander activator',
+    children: 'Expander content will go here',
     open: true,
   },
 };

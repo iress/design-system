@@ -15,7 +15,196 @@ import { IressLoading } from '@iress-oss/ids-components';
 
 The loading pattern is used to indicate that content is being loaded or processed consistently across Iress products.
 
-<StoryEmbed id="patterns-loading--wizard" />
+```tsx
+import {
+  IressButton,
+  IressContainer,
+  IressForm,
+  IressFormField,
+  IressInputCurrency,
+  IressLoading,
+  IressPanel,
+  IressText,
+} from '@iress-oss/ids-components';
+import { useDeferredValue, useEffect, useState } from 'react';
+import retirementGraph from './retirement-graph.png';
+
+interface PageProps {
+  setPage: (page: number) => void;
+}
+
+interface ChartProps {
+  money: number | null;
+}
+
+const API = {
+  initialise: async () =>
+    new Promise<boolean>((resolve) => {
+      // Simulate a slow network request.
+      setTimeout(() => {
+        resolve(true);
+      }, 3000);
+    }),
+  data: async () =>
+    new Promise<boolean>((resolve) => {
+      // Simulate a slow network request.
+      setTimeout(() => {
+        resolve(true);
+      }, 2000);
+    }),
+  chart: async () =>
+    new Promise<boolean>((resolve) => {
+      // Simulate a slow network request.
+      setTimeout(() => {
+        resolve(true);
+      }, 2000);
+    }),
+  chartUpdate: async () =>
+    new Promise<boolean>((resolve) => {
+      // Simulate a slow network request.
+      setTimeout(() => {
+        resolve(true);
+      }, 2000);
+    }),
+};
+
+const Graph = () => (
+  <img
+    src={retirementGraph}
+    alt=""
+    style={{ maxWidth: '100%', height: 'auto' }}
+  />
+);
+
+const Chart = () => {
+  const [chart, setChart] = useState(false);
+  const [money, setMoney] = useState<number | null>(null);
+  const [loaded, setLoaded] = useState(false);
+  const [updating, setUpdating] = useState(false);
+  const safeLoaded = IressLoading.shouldRender(loaded);
+  const deferredMoney = useDeferredValue(money);
+
+  useEffect(() => {
+    const initialise = async () => {
+      const newChart = await API.chart();
+      setChart(newChart);
+      setLoaded(() => true);
+    };
+
+    void initialise();
+  }, []);
+
+  useEffect(() => {
+    if (deferredMoney === null) {
+      return;
+    }
+
+    const update = async () => {
+      setUpdating(() => true);
+      const newChart = await API.chartUpdate();
+      setChart(newChart);
+      setUpdating(() => false);
+    };
+
+    void update();
+  }, [deferredMoney]);
+
+  return (
+    <IressLoading pattern="component" loaded={!safeLoaded} update={updating}>
+      {chart && <Graph />}
+      <IressPanel mt="spacing.4">
+        <IressForm<ChartProps>
+          onSubmit={(projectionData) => setMoney(projectionData.money)}
+          heading="Update projection"
+        >
+          <IressFormField
+            name="money"
+            label="My money"
+            render={(controlledProps) => (
+              <IressInputCurrency {...controlledProps} />
+            )}
+          />
+          <IressButton type="submit">Update projection</IressButton>
+        </IressForm>
+      </IressPanel>
+    </IressLoading>
+  );
+};
+
+const StartPage = ({ setPage }: PageProps) => (
+  <IressText>
+    <h2>Maximise your retirement</h2>
+    <p>
+      Maximize your retirement in Australia by contributing to your super early
+      and making voluntary top-ups to benefit from compounding. Take advantage
+      of employer contributions, government co-contributions, and tax benefits.
+      Diversify your investments and review your strategy regularly to stay on
+      track. Consider additional income streams and seek professional advice for
+      a secure future.
+    </p>
+    <hr />
+    <IressButton onClick={() => setPage(2)}>Next</IressButton>
+  </IressText>
+);
+
+const RetirementIncomeProjectionPage = () => {
+  const [data, setData] = useState(false);
+  const loaded = data !== false;
+  const renderLoading = IressLoading.shouldRender(loaded);
+
+  useEffect(() => {
+    const initialise = async () => {
+      const newData = await API.data();
+      setData(newData);
+    };
+
+    void initialise();
+  }, []);
+
+  if (renderLoading) {
+    return <IressLoading pattern="page" template="form" loaded={loaded} />;
+  }
+
+  return (
+    <IressText>
+      <h2>Retirement Income Projection</h2>
+      <p>
+        We've got enough information to provide you with a retirement income
+        projection. This will help you understand how much you can expect to
+        receive in retirement based on your current super balance, your
+        contributions, and your investment strategy.
+      </p>
+      <Chart />
+    </IressText>
+  );
+};
+
+export const LoadingWizard = () => {
+  const [page, setPage] = useState(0);
+  const loaded = page > 0;
+  const renderLoading = IressLoading.shouldRender(loaded);
+
+  useEffect(() => {
+    const initialise = async () => {
+      await API.initialise();
+      setPage(1);
+    };
+
+    void initialise();
+  }, []);
+
+  if (renderLoading) {
+    return <IressLoading pattern="start-up" loaded={loaded} />;
+  }
+
+  return (
+    <IressContainer style={{ maxWidth: '600px', paddingBlock: '3rem' }}>
+      {page === 1 && <StartPage setPage={setPage} />}
+      {page === 2 && <RetirementIncomeProjectionPage />}
+    </IressContainer>
+  );
+};
+```
 
 ## Design
 
@@ -66,7 +255,7 @@ Choose the pattern based on the type of content loading:
 ```tsx
 import { IressLoading } from '@iress-oss/ids-components';
 
-<IressLoading pattern="page" />
+<IressLoading pattern="page" />;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs#api-props)
@@ -85,19 +274,131 @@ The default behaviour follows UX best practices:
 
 #### Page loading
 
-<StoryEmbed id="patterns-loading--page" />
+```tsx
+import {
+  IressCard,
+  IressCol,
+  IressContainer,
+  IressDivider,
+  IressInline,
+  IressLoading,
+  IressRow,
+  IressSkeleton,
+  IressStack,
+  IressText,
+} from '@iress-oss/ids-components';
+import { type ReactNode, useEffect, useState } from 'react';
+
+const API = {
+  criticalContent: async () =>
+    new Promise<ReactNode>((resolve) => {
+      // Simulate a slow network request.
+      setTimeout(() => {
+        resolve(
+          <IressContainer>
+            <IressStack gap="lg">
+              <IressRow horizontalAlign="between" verticalAlign="middle">
+                <IressText element="h1" mb="none">
+                  Dashboard
+                </IressText>
+                <IressInline gap="lg">
+                  <IressSkeleton
+                    textStyle="typography.heading.4"
+                    width="200px"
+                  />
+                  <IressSkeleton
+                    textStyle="typography.heading.4"
+                    width="200px"
+                  />
+                </IressInline>
+              </IressRow>
+              <IressDivider />
+              <IressRow gutter="lg">
+                <IressCol span="4">
+                  <IressCard
+                    stretch
+                    heading="Financial update 2025"
+                    media={<IressSkeleton mode="rect" height="300px" />}
+                  >
+                    <IressSkeleton textStyle="typography.body.md" width="50%" />
+                  </IressCard>
+                </IressCol>
+                <IressCol span="4">
+                  <IressCard
+                    stretch
+                    heading="The ASX update"
+                    media={<IressSkeleton mode="rect" height="300px" />}
+                  >
+                    <IressSkeleton textStyle="typography.body.md" width="50%" />
+                  </IressCard>
+                </IressCol>
+                <IressCol span="4">
+                  <IressCard
+                    stretch
+                    heading="In the news"
+                    media={<IressSkeleton mode="rect" height="300px" />}
+                  >
+                    <IressSkeleton textStyle="typography.body.md" width="50%" />
+                  </IressCard>
+                </IressCol>
+              </IressRow>
+            </IressStack>
+          </IressContainer>,
+        );
+      }, 3000);
+    }),
+};
+
+export const LoadingDashboard = () => {
+  const [critical, setCritical] = useState<ReactNode | undefined>();
+
+  useEffect(() => {
+    const initialise = async () => {
+      setCritical(await API.criticalContent());
+    };
+
+    void initialise();
+  }, []);
+
+  return (
+    <IressLoading pattern="page" critical={critical} template="dashboard" />
+  );
+};
+```
 
 #### Start-up
 
-<StoryEmbed id="patterns-loading--start-up" height={300} autoHeight={false} />
+```tsx
+<IressLoading
+  pattern="start-up"
+  messageList={{
+    0: 'Switching applications...',
+    4500: 'This is taking longer than expected...',
+  }}
+/>;
+```
 
 #### Long running tasks
 
-<StoryEmbed id="patterns-loading--long" />
+```tsx
+<IressLoading
+  pattern="long"
+  messageList={{
+    3000: 'Processing transcript',
+    5000: 'Noting key information',
+    7000: 'Generating summary',
+  }}
+/>;
+```
 
 #### Validate (form submission)
 
-<StoryEmbed id="patterns-loading--validate" height={150} autoHeight={false} />
+```tsx
+<IressInline gap="sm">
+  <IressLoading pattern="validate" loading />
+  <IressButton mode="quaternary">Cancel</IressButton>
+</IressInline>;
+```
 
 ### Suspense
 

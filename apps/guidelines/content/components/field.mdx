@@ -48,9 +48,11 @@ The field component is used to place label, hint and error information around fo
 ### Quick Start
 
 ```tsx
-import { IressField } from '@iress-oss/ids-components';
+import { IressField, IressInput } from '@iress-oss/ids-components';
 
-<IressField label="First name" />
+<IressField label="First name">
+  <IressInput id="first-name" />
+</IressField>
 ```
 
 <IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field--docs#api-props">View all props</IressButton>

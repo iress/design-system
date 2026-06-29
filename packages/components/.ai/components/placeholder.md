@@ -15,7 +15,11 @@ import { IressPlaceholder } from '@iress-oss/ids-components';
 
 A placeholder is a UI element that allows you to reserve space for content that has not been created yet, usually used for prototyping.
 
-<StoryEmbed id="components-placeholder--default"/>
+```tsx
+<IressPlaceholder heading="Placeholder" width="300" height="300">
+  This should be a description of the expected content
+</IressPlaceholder>;
+```
 
 ## Design
 
@@ -42,7 +46,7 @@ import { IressPlaceholder } from '@iress-oss/ids-components';
 
 <IressPlaceholder heading="Placeholder" width={300} height={300}>
   This should be a description of the expected content
-</IressPlaceholder>
+</IressPlaceholder>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-placeholder--docs#api-props)
@@ -66,7 +70,7 @@ const placeholder = screen.getByTestId('my-placeholder');
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the placeholder | — | `placeholder` |
+| main | The root element of the placeholder | `getByText('...')` | `placeholder` |
 
 ---
 

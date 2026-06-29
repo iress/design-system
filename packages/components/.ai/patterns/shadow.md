@@ -15,7 +15,13 @@ import { IressShadow } from '@iress-oss/ids-components';
 
 The shadow pattern allows you to wrap your content in the shadow DOM, allowing you to isolate your styles from the rest of the application. This is useful when you want to create a component that has its own styles, without affecting the rest of the application (such as microfrontends).
 
-<StoryEmbed id="patterns-shadow--shadow"/>
+```tsx
+<IressShadow>
+  <IressPanel>
+    Content inside shadow DOM <IressIcon name="heart_smile" />
+  </IressPanel>
+</IressShadow>;
+```
 
 ## Design
 
@@ -51,9 +57,7 @@ The shadow pattern allows you to wrap your content in the shadow DOM, allowing y
 ```tsx
 import { IressShadow } from '@iress-oss/ids-components';
 
-<IressShadow>
-    {/* Your content here */}
-</IressShadow>
+<IressShadow>{/* Your content here */}</IressShadow>;
 ```
 
 ### Usage

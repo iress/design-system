@@ -49,8 +49,10 @@ export const Results: Story = {
 
 export const NoResults: Story = {
   args: {
-    ...Results.args,
+    heading: 'Search results',
     items: [],
+    noResults: 'No results found',
+    fluid: true,
   },
 };
 
@@ -90,7 +92,35 @@ export const GroupedOptions: Story = {
 
 export const GroupedWithSelection: Story = {
   args: {
-    ...GroupedOptions.args,
+    heading: 'Select a food',
+    items: [
+      {
+        label: 'Fruits',
+        children: [
+          { label: 'Apple', value: 'apple' },
+          { label: 'Banana', value: 'banana' },
+          { label: 'Orange', value: 'orange' },
+          { label: 'Strawberry', value: 'strawberry' },
+        ],
+      },
+      {
+        label: 'Vegetables',
+        children: [
+          { label: 'Carrot', value: 'carrot' },
+          { label: 'Broccoli', value: 'broccoli' },
+          { label: 'Spinach', value: 'spinach' },
+        ],
+      },
+      {
+        label: 'Grains',
+        children: [
+          { label: 'Rice', value: 'rice' },
+          { label: 'Wheat', value: 'wheat' },
+          { label: 'Oats', value: 'oats' },
+        ],
+      },
+    ],
+    fluid: true,
     selected: { label: 'Apple', value: 'apple' },
   },
 };

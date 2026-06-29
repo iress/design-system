@@ -15,7 +15,30 @@ import { IressSlideout } from '@iress-oss/ids-components';
 
 Slideouts are used to show additional information or to allow users to perform secondary tasks without leaving their normal workflow.
 
-<StoryEmbed id="components-slideout--show-with-state"/>
+```tsx
+import { IressButton, IressSlideout } from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export function SlideoutUsingState() {
+  const [show, setShow] = useState(false);
+
+  return (
+    <>
+      <IressButton onClick={() => setShow(true)}>
+        Show slideout using state
+      </IressButton>
+      <IressSlideout
+        show={show}
+        onShowChange={setShow}
+        heading="Slideout"
+        footer={<IressButton onClick={() => setShow(false)}>Close</IressButton>}
+      >
+        This slideout was opened via state
+      </IressSlideout>
+    </>
+  );
+}
+```
 
 ## Design
 
@@ -69,9 +92,7 @@ Slideouts are used to show additional information or to allow users to perform s
 ```tsx
 import { IressSlideout } from '@iress-oss/ids-components';
 
-<IressSlideout footer="Footer slot">
-  Slideout content
-</IressSlideout>
+<IressSlideout footer="Footer slot">Slideout content</IressSlideout>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slideout--docs#api-props)
@@ -82,7 +103,30 @@ import { IressSlideout } from '@iress-oss/ids-components';
 
 Control the slideout with state via `show` and `onShowChange`.
 
-<StoryEmbed id="components-slideout--show-with-state"/>
+```tsx
+import { IressButton, IressSlideout } from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export function SlideoutUsingState() {
+  const [show, setShow] = useState(false);
+
+  return (
+    <>
+      <IressButton onClick={() => setShow(true)}>
+        Show slideout using state
+      </IressButton>
+      <IressSlideout
+        show={show}
+        onShowChange={setShow}
+        heading="Slideout"
+        footer={<IressButton onClick={() => setShow(false)}>Close</IressButton>}
+      >
+        This slideout was opened via state
+      </IressSlideout>
+    </>
+  );
+}
+```
 
 #### Using the `IressSlideoutProvider`
 
@@ -90,37 +134,288 @@ Use `IressSlideoutProvider` to open/close slideouts from anywhere via a unique `
 
 > **Note:** If using `IressProvider` or `IressShadow`, the slideout provider is already included.
 
-<StoryEmbed id="components-slideout-provider--provider"/>
+```tsx
+import {
+  IressButton,
+  IressSlideout,
+  type IressSlideoutProps,
+  IressSlideoutProvider,
+  useSlideout,
+} from '@iress-oss/ids-components';
+
+const SLIDEOUT_ID = 'storybook-slideout';
+
+export function AppWithSlideoutProvider(
+  props: Partial<IressSlideoutProps> = {},
+) {
+  return (
+    <IressSlideoutProvider>
+      <SlideoutWithTrigger {...props} />
+    </IressSlideoutProvider>
+  );
+}
+
+function SlideoutWithTrigger({
+  id = SLIDEOUT_ID,
+  ...slideoutProps
+}: Partial<IressSlideoutProps>) {
+  const { showSlideout } = useSlideout();
+
+  return (
+    <>
+      <IressButton onClick={() => showSlideout(id)}>
+        Show slideout using provider
+      </IressButton>
+      <IressSlideout
+        id={id}
+        heading="Provider slideout"
+        footer={
+          <IressButton onClick={() => showSlideout(id, false)}>
+            Close slideout
+          </IressButton>
+        }
+        {...slideoutProps}
+      >
+        This slideout was opened via IressSlideoutProvider and the useSlideout
+        hook.
+      </IressSlideout>
+    </>
+  );
+}
+```
 
 #### Modes
 
 Slideouts support `overlay` (default, sits on top of content) and `push` (pushes page content aside).
 
-<StoryEmbed id="components-slideout--modes"/>
+```tsx
+import {
+  IressButton,
+  IressInline,
+  IressSlideout,
+  IressSlideoutProvider,
+  IressText,
+  useSlideout,
+} from '@iress-oss/ids-components';
+
+function SlideoutModeExample() {
+  const { showSlideout } = useSlideout();
+
+  return (
+    <IressInline gap="md">
+      <IressButton onClick={() => showSlideout('overlay-example')}>
+        Overlay slideout
+      </IressButton>
+      <IressSlideout id="overlay-example" heading="Overlay mode" mode="overlay">
+        <IressText>
+          The default mode. The slideout sits on top of page content.
+        </IressText>
+      </IressSlideout>
+
+      <IressButton onClick={() => showSlideout('push-example')}>
+        Push slideout
+      </IressButton>
+      <IressSlideout
+        id="push-example"
+        heading="Push mode"
+        mode="push"
+        eleToPush="#storybook-docs, html"
+      >
+        <IressText>
+          Pushes page content aside. Requires the `eleToPush` prop with the ID
+          of the element to push. Falls back to overlay on smaller screens.
+        </IressText>
+      </IressSlideout>
+    </IressInline>
+  );
+}
+
+export function SlideoutModes() {
+  return (
+    <IressSlideoutProvider>
+      <SlideoutModeExample />
+    </IressSlideoutProvider>
+  );
+}
+```
 
 #### Position
 
 Use the `position` prop to slide in from `left` or `right` (default).
 
-<StoryEmbed id="components-slideout--position"/>
+```tsx
+import {
+  IressButton,
+  IressInline,
+  IressSlideout,
+  IressSlideoutProvider,
+  useSlideout,
+} from '@iress-oss/ids-components';
+
+const Slideouts = () => {
+  const { showSlideout } = useSlideout();
+
+  return (
+    <IressInline gap="md" horizontalAlign="between">
+      <IressButton onClick={() => showSlideout('right')}>right</IressButton>
+      <IressSlideout id="right" position="right">
+        Slideout opened on the right
+      </IressSlideout>
+      <IressButton onClick={() => showSlideout('left')}>left</IressButton>
+      <IressSlideout id="left" position="left">
+        Slideout opened on the left
+      </IressSlideout>
+    </IressInline>
+  );
+};
+
+export function SlideoutPositions() {
+  return (
+    <IressSlideoutProvider>
+      <Slideouts />
+    </IressSlideoutProvider>
+  );
+}
+```
 
 #### Size
 
 The `size` prop sets the width: `sm` (default) or `md`.
 
-<StoryEmbed id="components-slideout--size"/>
+```tsx
+import {
+  IressButton,
+  IressInline,
+  IressSlideout,
+  IressSlideoutProvider,
+  useSlideout,
+} from '@iress-oss/ids-components';
+
+const Slideouts = () => {
+  const { showSlideout } = useSlideout();
+
+  return (
+    <IressInline gap="spacing.4">
+      <IressButton onClick={() => showSlideout('sm')}>sm</IressButton>
+      <IressSlideout id="sm" size="sm">
+        Small slideout
+      </IressSlideout>
+      <IressButton onClick={() => showSlideout('md')}>md</IressButton>
+      <IressSlideout id="md" size="md">
+        Medium slideout
+      </IressSlideout>
+    </IressInline>
+  );
+};
+
+export function SlideoutSizes() {
+  return (
+    <IressSlideoutProvider>
+      <Slideouts />
+    </IressSlideoutProvider>
+  );
+}
+```
 
 #### Footer
 
 The `footer` prop adds content below the main content, typically buttons.
 
-<StoryEmbed id="components-slideout--footer"/>
+```tsx
+import {
+  IressButton,
+  IressInline,
+  IressSlideout,
+} from '@iress-oss/ids-components';
+import { useSlideout } from '../hooks/useSlideout';
+
+const SLIDEOUT_ID = 'slideout-footer';
+
+export function SlideoutWithFooter() {
+  const { showSlideout } = useSlideout();
+
+  return (
+    <>
+      <IressButton onClick={() => showSlideout(SLIDEOUT_ID)}>
+        Open slideout with footer
+      </IressButton>
+      <IressSlideout
+        id={SLIDEOUT_ID}
+        heading="Slideout with footer"
+        footer={
+          <IressInline gap="sm">
+            <IressButton mode="primary">Save</IressButton>
+            <IressButton onClick={() => showSlideout(SLIDEOUT_ID, false)}>
+              Cancel
+            </IressButton>
+          </IressInline>
+        }
+      >
+        The footer stays fixed at the bottom of the slideout.
+      </IressSlideout>
+    </>
+  );
+}
+```
 
 #### Absolute position slideouts
 
 Set `position: 'absolute'` in inline style to appear from the edge of a relative container instead of the browser window. Use the `container` prop to reference the container.
 
-<StoryEmbed id="components-slideout--absolute-position"/>
+```tsx
+import {
+  IressStack,
+  IressButton,
+  IressText,
+  IressSlideout,
+} from '@iress-oss/ids-components';
+import { useRef, useState } from 'react';
+import { cssVars } from '@iress-oss/ids-tokens';
+
+export function AbsolutePositionSlideout() {
+  const [show, setShow] = useState(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  return (
+    <IressStack gap="md">
+      <IressButton onClick={() => setShow(true)}>Show slideout</IressButton>
+      <div
+        ref={containerRef}
+        style={{
+          height: '300px',
+          border: `1px solid ${cssVars.colour.neutral[30]}`,
+          padding: '1rem',
+          overflow: 'hidden',
+          position: 'relative',
+        }}
+      >
+        <IressText id="contents">
+          <h3>Absolute slideout</h3>
+          <p>
+            Almost before was mighty present had him time. But scorching counsel
+            if mine dote men have or, one yet from pangs and for and despair
+            there. If below nor but the name these deemed oh..
+          </p>
+        </IressText>
+        <IressSlideout
+          container={containerRef}
+          show={show}
+          onShowChange={setShow}
+          eleToPush="#contents"
+          position="left"
+          mode="push"
+          heading="Absolute slideout"
+          style={{
+            position: 'absolute',
+          }}
+        >
+          Slideout content
+        </IressSlideout>
+      </div>
+    </IressStack>
+  );
+}
+```
 
 ### Testing
 
@@ -146,11 +441,11 @@ await waitForElementToBeRemoved(slideout);
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the slideout | — | `slideout` |
-| heading | The slideout heading | — | `slideout__heading` |
-| close button | The close button | — | `slideout__close-button__button` |
+| main | The root element of the slideout | `findByRole('dialog')` by default, or `findByRole('complementary')` if role is set to "complementary" | `slideout` |
+| heading | The slideout heading | `getByRole('heading', { name: '...' })` | `slideout__heading` |
+| close button | The close button | `findByRole('button', { name: 'Close' })` | `slideout__close-button__button` |
 | content | The slideout content area | — | `slideout__content` |
-| footer | The slideout footer | — | `slideout__footer` |
+| footer | The slideout footer | `getByText('...')` | `slideout__footer` |
 
 ---
 

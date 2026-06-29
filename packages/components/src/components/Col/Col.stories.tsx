@@ -1,6 +1,8 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressCol, type IressColProps } from '.';
 import { IressPlaceholder } from '../Placeholder';
+import { ColResponsiveSpan } from './mocks/ColResponsiveSpan';
+import ColResponsiveSpanSource from './mocks/ColResponsiveSpan.tsx?raw';
 import { IressRow, type IressRowProps } from '../Row';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
@@ -13,6 +15,7 @@ import {
   withJsxTransformer,
   omitStylingProps,
   withBreakpointLabel,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
@@ -181,46 +184,12 @@ export const Span: Story = {
 };
 
 export const ResponsiveSpan: Story = {
-  ...Default,
-  args: {
-    ...Default.args,
-    columns: [
-      {
-        span: {
-          xs: 12,
-          md: 3,
-        },
-      },
-      {
-        span: {
-          xs: 12,
-          md: 9,
-        },
-      },
-    ],
-  },
-  argTypes: {
-    ...removeArgTypes(['numberOfColumns', 'span']),
-    columns: columnsArgType,
+  render: () => <ColResponsiveSpan />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ColResponsiveSpanSource, { stripImports: true }),
   },
   decorators: [withBreakpointLabel()],
-  render: ({ numberOfColumns: _noc, row, columns = [], ...columnProps }) => (
-    <IressStack gap="spacing.4">
-      <IressRow {...row}>
-        {columns.map((column, index) => (
-          <IressCol {...columnProps} {...column} key={index}>
-            <IressPlaceholder>
-              <IressText textAlign="center">
-                Column {index + 1}
-                <br />
-                {column.span && JSON.stringify(column.span)}
-              </IressText>
-            </IressPlaceholder>
-          </IressCol>
-        ))}
-      </IressRow>
-    </IressStack>
-  ),
 };
 
 export const Offset: Story = {
@@ -295,36 +264,20 @@ export const Offset: Story = {
 
 export const ResponsiveOffset: Story = {
   ...Default,
-  args: {
-    ...Default.args,
-    columns: [
-      {
-        offset: {
-          md: 5,
-          lg: 2,
-        },
-      },
-    ],
-  },
   argTypes: {
     ...removeArgTypes(['numberOfColumns', 'offset']),
-    columns: columnsArgType,
   },
   decorators: [withBreakpointLabel()],
-  render: ({ numberOfColumns: _noc, row, columns = [], ...columnProps }) => (
+  render: () => (
     <IressStack gap="spacing.4">
-      <IressRow {...row}>
-        {columns.map((column, index) => (
-          <IressCol {...columnProps} {...column} key={index}>
-            <IressPlaceholder>
-              <IressText textAlign="center">
-                Column {index + 1}
-                <br />
-                {column.offset && JSON.stringify(column.offset)}
-              </IressText>
-            </IressPlaceholder>
-          </IressCol>
-        ))}
+      <IressRow>
+        <IressCol offset={{ md: 5, lg: 2 }}>
+          <IressPlaceholder>
+            <IressText textAlign="center">
+              offset: {'{'} md: 5, lg: 2 {'}'}
+            </IressText>
+          </IressPlaceholder>
+        </IressCol>
       </IressRow>
     </IressStack>
   ),

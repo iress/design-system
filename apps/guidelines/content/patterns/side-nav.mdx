@@ -52,7 +52,24 @@ A side navigation pattern that combines a rail (icon-only bar) with an expandabl
 ```tsx
 import { IressSideNav } from '@iress-oss/ids-components';
 
-<IressSideNav activeItemKey="hubs" />
+<IressSideNav 
+  activeItemKey="hubs" 
+  items={[
+    {
+      key: 'hubs',
+      label: 'Hubs',
+      icon: 'hub',
+      href: '/hubs',
+      children: [
+        {
+          key: 'basic',
+          label: 'Basic Details',
+          href: '/hubs/basic-details',
+        },
+      ],
+    },
+  ]} 
+/>
 ```
 
 <IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-side-nav--docs#api-props">View all props</IressButton>

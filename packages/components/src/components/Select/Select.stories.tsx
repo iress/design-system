@@ -1,8 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSelect } from './Select';
-import {
-  MOCK_LABEL_VALUE_META,
-} from '@/mocks/generateLabelValues';
 import { SelectAsync } from './mocks/SelectAsync';
 import SelectAsyncSource from './mocks/SelectAsync.tsx?raw';
 import { SelectAsyncMinLength } from './mocks/SelectAsyncMinLength';
@@ -74,13 +71,25 @@ export default {
 
 export const SingleSelect: Story = {
   args: {
-    options: MOCK_LABEL_VALUE_META,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
   },
 };
 
 export const PreSelectedValue: Story = {
   args: {
-    options: MOCK_LABEL_VALUE_META,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
     defaultValue: '2',
   },
   parameters: {
@@ -103,7 +112,13 @@ This means you can work directly with the raw values your API returns, without c
 
 export const PreSelectedMultiValue: Story = {
   args: {
-    options: MOCK_LABEL_VALUE_META,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
     multiSelect: true,
     defaultValue: ['1', '3', '5'],
   },
@@ -118,14 +133,26 @@ export const PreSelectedMultiValue: Story = {
 
 export const MultiSelect: Story = {
   args: {
-    ...SingleSelect.args,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
     multiSelect: true,
   },
 };
 
 export const MultiSelectLimit: Story = {
   args: {
-    options: MOCK_LABEL_VALUE_META,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
     multiSelect: true,
     multiSelectLimit: 2,
     defaultValue: ['1', '2', '3', '4', '5'],
@@ -135,7 +162,13 @@ export const MultiSelectLimit: Story = {
 export const Placeholder: Story = {
   args: {
     placeholder: 'Select an option',
-    options: MOCK_LABEL_VALUE_META,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
   },
 };
 
@@ -200,7 +233,13 @@ export const CreateNewOption: Story = {
 
 export const HeaderFooter: Story = {
   args: {
-    options: MOCK_LABEL_VALUE_META,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
     header: (
       <>
         <IressMenuText>
@@ -227,7 +266,14 @@ export const HeaderFooter: Story = {
 
 export const Readonly: Story = {
   args: {
-    ...MultiSelect.args,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
+    multiSelect: true,
     readOnly: true,
     value: ['1', '2', '3'],
   },
@@ -251,7 +297,13 @@ export const LongTextOptions: Story = {
 
 export const Native: Story = {
   args: {
-    ...SingleSelect.args,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
     native: 'md',
     defaultValue: '2',
   },
@@ -267,7 +319,13 @@ export const Native: Story = {
 
 export const Disabled: Story = {
   args: {
-    ...SingleSelect.args,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
     defaultValue: '1',
     disabled: true,
   },
@@ -308,7 +366,33 @@ export const GroupedOptions: Story = {
 
 export const GroupedMultiSelect: Story = {
   args: {
-    ...GroupedOptions.args,
+    options: [
+      {
+        label: 'Fruits',
+        children: [
+          { label: 'Apple', value: 'apple' },
+          { label: 'Banana', value: 'banana' },
+          { label: 'Orange', value: 'orange' },
+          { label: 'Strawberry', value: 'strawberry' },
+        ],
+      },
+      {
+        label: 'Vegetables',
+        children: [
+          { label: 'Carrot', value: 'carrot' },
+          { label: 'Broccoli', value: 'broccoli' },
+          { label: 'Spinach', value: 'spinach' },
+        ],
+      },
+      {
+        label: 'Grains',
+        children: [
+          { label: 'Rice', value: 'rice' },
+          { label: 'Wheat', value: 'wheat' },
+          { label: 'Oats', value: 'oats' },
+        ],
+      },
+    ],
     multiSelect: true,
     placeholder: 'Select multiple foods',
   },
@@ -316,7 +400,7 @@ export const GroupedMultiSelect: Story = {
 
 export const GroupedWithSearch: Story = {
   args: {
-    ...GroupedOptions.args,
+    placeholder: 'Select a food',
     options: async (query: string) => {
       const allOptions = [
         {

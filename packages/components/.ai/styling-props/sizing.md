@@ -29,7 +29,11 @@ For variable data entry, you can use grid tokens. These are usually used inside 
 - `9/12`: 75% width of parent container
 - `12/12`: 100% width of parent container
 
-<StoryEmbed id="styling-props-sizing--input-widths" />
+```tsx
+<IressPanel bg="alt" width="input.16">
+  Credit card number wide panel
+</IressPanel>;
+```
 
 ## Container widths
 
@@ -48,7 +52,11 @@ Overlay widths are sizes that define the width of overlay components such as Mod
 - `overlay.md`: 628px
 - `overlay.lg`: 800px
 
-<StoryEmbed id="styling-props-sizing--container-widths" />
+```tsx
+<IressContainer maxWidth="overlay.lg" bg="alt" fluid p="lg">
+  This container has maxWidth set to <code>overlay.lg</code>.
+</IressContainer>;
+```
 
 ---
 

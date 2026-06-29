@@ -71,7 +71,20 @@ export const RadioChildren: Story = {
 
 export const RadioSelection: Story = {
   args: {
-    ...RadioChildren.args,
+    children: [
+      <IressRadio value="google" key="google">
+        Google
+      </IressRadio>,
+      <IressRadio value="newspaper" key="newspaper">
+        Newspaper
+      </IressRadio>,
+      <IressRadio value="friend" key="friend">
+        Friend
+      </IressRadio>,
+      <IressRadio value="other" key="other">
+        Other
+      </IressRadio>,
+    ],
     defaultValue: 'newspaper',
   },
 };
@@ -137,17 +150,43 @@ export const CustomRadioGroupLayout: Story = {
 };
 
 export const ReadOnly: Story = {
-  ...RadioSelection,
   args: {
-    ...RadioSelection.args,
+    children: [
+      <IressRadio value="google" key="google">
+        Google
+      </IressRadio>,
+      <IressRadio value="newspaper" key="newspaper">
+        Newspaper
+      </IressRadio>,
+      <IressRadio value="friend" key="friend">
+        Friend
+      </IressRadio>,
+      <IressRadio value="other" key="other">
+        Other
+      </IressRadio>,
+    ],
+    defaultValue: 'newspaper',
     readOnly: true,
   },
 };
 
 export const Touch: Story = {
-  ...RadioSelection,
   args: {
-    ...RadioSelection.args,
+    children: [
+      <IressRadio value="google" key="google">
+        Google
+      </IressRadio>,
+      <IressRadio value="newspaper" key="newspaper">
+        Newspaper
+      </IressRadio>,
+      <IressRadio value="friend" key="friend">
+        Friend
+      </IressRadio>,
+      <IressRadio value="other" key="other">
+        Other
+      </IressRadio>,
+    ],
+    defaultValue: 'newspaper',
     variant: 'touch',
   },
 };

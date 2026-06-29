@@ -15,7 +15,13 @@ import { IressImage } from '@iress-oss/ids-components';
 
 IressImage renders an image that resizes based on the user's screen width. The component accepts standard image attributes like `src` and `alt`.
 
-<StoryEmbed id="components-image--default"/>
+```tsx
+<IressImage
+  src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp"
+  alt="Placeholder image"
+  maxWidth="200px"
+/>;
+```
 
 ## Design
 
@@ -57,7 +63,7 @@ IressImage renders an image that resizes based on the user's screen width. The c
 ```tsx
 import { IressImage } from '@iress-oss/ids-components';
 
-<IressImage src="https://example.com/photo.webp" alt="Placeholder image" />
+<IressImage src="https://example.com/photo.webp" alt="Placeholder image" />;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-image--docs#api-props)
@@ -70,7 +76,36 @@ import { IressImage } from '@iress-oss/ids-components';
 
 **Note:** Please consider not using this prop, but rather exporting images at the largest size required for your application (the maximum width).
 
-<StoryEmbed id="components-image--max-width"/>
+```tsx
+<IressStack gap="md">
+  <IressText element="h3">70</IressText>
+  <IressImage
+    src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp"
+    alt="Placeholder image"
+    maxWidth={70}
+  />
+
+  <IressText element="h3">250px</IressText>
+  <IressImage
+    src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp"
+    alt="Placeholder image"
+    maxWidth="250px"
+  />
+
+  <IressText element="h3">50%</IressText>
+  <IressImage
+    src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp"
+    alt="Placeholder image"
+    maxWidth="50%"
+  />
+
+  <IressText element="h3">undefined</IressText>
+  <IressImage
+    src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp"
+    alt="Placeholder image"
+  />
+</IressStack>;
+```
 
 ### Testing
 
@@ -85,7 +120,7 @@ const image = screen.getByRole('img', { name: 'Company logo' });
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the image | — | `image` |
+| main | The root element of the image | `getByRole('img')`, or `getByAltText('...')` to match by alt text | `image` |
 
 ---
 

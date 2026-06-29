@@ -20,9 +20,9 @@ export const borderRadius: Story = {
   parameters: {
     controls: { include: ['borderRadius'] },
   },
-  render: ({ borderRadius }) => (
+  render: (args) => (
     <IressInput
-      borderRadius={borderRadius}
+      {...args}
       px="spacing.4"
       py="spacing.2"
       placeholder="Search everything"
@@ -35,8 +35,8 @@ export const noBorderRadius: Story = {
   args: {
     borderRadius: 'none',
   },
-  render: ({ borderRadius }) => (
-    <IressPanel borderRadius={borderRadius} bg="alt">
+  render: (args) => (
+    <IressPanel {...args} bg="alt">
       No radius here
     </IressPanel>
   ),

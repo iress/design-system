@@ -43,14 +43,7 @@ export const Default: Story = {
 
 export const Status: Story = {
   ...Default,
-  args: {
-    messages: {
-      info: 'Something you should know.',
-      danger: 'Something is wrong.',
-      warning: 'Something could go wrong.',
-      success: 'Something went right.',
-    },
-  },
+  args: {},
   argTypes: {
     ...disableArgTypes(['children', 'status']),
     messages: {
@@ -61,13 +54,20 @@ export const Status: Story = {
       },
     },
   },
-  render: ({ messages, ...args }) => (
+  render: (args) => (
     <IressStack>
-      {STATUSES.map((status) => (
-        <IressValidationMessage {...args} key={status} status={status}>
-          {messages[status]}
-        </IressValidationMessage>
-      ))}
+      <IressValidationMessage {...args} status="info">
+        Something you should know.
+      </IressValidationMessage>
+      <IressValidationMessage {...args} status="danger">
+        Something is wrong.
+      </IressValidationMessage>
+      <IressValidationMessage {...args} status="warning">
+        Something could go wrong.
+      </IressValidationMessage>
+      <IressValidationMessage {...args} status="success">
+        Something went right.
+      </IressValidationMessage>
     </IressStack>
   ),
 };
@@ -76,12 +76,6 @@ export const Prefix: Story = {
   ...Default,
   args: {
     prefix: 'Prefix: ',
-    messages: {
-      info: 'Something you should know.',
-      danger: 'Something is wrong.',
-      warning: 'Something could go wrong.',
-      success: 'Something went right.',
-    },
     visiblePrefix: true,
   },
   argTypes: {
@@ -94,13 +88,20 @@ export const Prefix: Story = {
       },
     },
   },
-  render: ({ messages, ...args }) => (
+  render: (args) => (
     <IressStack>
-      {STATUSES.map((status) => (
-        <IressValidationMessage {...args} key={status} status={status}>
-          {messages[status]}
-        </IressValidationMessage>
-      ))}
+      <IressValidationMessage {...args} status="info">
+        Something you should know.
+      </IressValidationMessage>
+      <IressValidationMessage {...args} status="danger">
+        Something is wrong.
+      </IressValidationMessage>
+      <IressValidationMessage {...args} status="warning">
+        Something could go wrong.
+      </IressValidationMessage>
+      <IressValidationMessage {...args} status="success">
+        Something went right.
+      </IressValidationMessage>
     </IressStack>
   ),
 };
@@ -108,12 +109,6 @@ export const Prefix: Story = {
 export const LinkToTarget: LinkToTargetStory = {
   args: {
     linkToTarget: 'input',
-    messages: {
-      info: 'Something you should know.',
-      danger: 'Something is wrong.',
-      warning: 'Something could go wrong.',
-      success: 'Something went right.',
-    },
   },
   argTypes: {
     ...disableArgTypes(['children', 'status']),
@@ -125,22 +120,24 @@ export const LinkToTarget: LinkToTargetStory = {
       },
     },
   },
-  render: ({ messages, ...args }) => (
+  render: (args) => (
     <IressStack gap="md">
       <IressStack>
-        {STATUSES.map((status) => (
-          <IressValidationMessage
-            {...args}
-            key={status}
-            status={status}
-            linkToTarget={args.linkToTarget ?? ''}
-          >
-            {messages[status]}
-          </IressValidationMessage>
-        ))}
+        <IressValidationMessage {...args} status="info" linkToTarget="input">
+          Something you should know.
+        </IressValidationMessage>
+        <IressValidationMessage {...args} status="danger" linkToTarget="input">
+          Something is wrong.
+        </IressValidationMessage>
+        <IressValidationMessage {...args} status="warning" linkToTarget="input">
+          Something could go wrong.
+        </IressValidationMessage>
+        <IressValidationMessage {...args} status="success" linkToTarget="input">
+          Something went right.
+        </IressValidationMessage>
       </IressStack>
       <IressDivider />
-      <IressInput id={args.linkToTarget} />
+      <IressInput id="input" />
     </IressStack>
   ),
 };

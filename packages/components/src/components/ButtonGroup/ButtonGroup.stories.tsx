@@ -81,7 +81,12 @@ export const RichButtons: Story = {
 
 export const MultiSelect: MultipleStory = {
   args: {
-    ...(ButtonChildren as MultipleStory).args,
+    children: [
+      <IressButton key="1">Option 1</IressButton>,
+      <IressButton key="2">Option 2</IressButton>,
+      <IressButton key="3">Option 3</IressButton>,
+      <IressButton key="4">Option 4</IressButton>,
+    ],
     multiple: true,
     label: 'Multiple options can be selected',
   },
@@ -89,7 +94,12 @@ export const MultiSelect: MultipleStory = {
 
 export const SelectedSingle: Story = {
   args: {
-    ...ButtonChildren.args,
+    children: [
+      <IressButton key="1">Option 1</IressButton>,
+      <IressButton key="2">Option 2</IressButton>,
+      <IressButton key="3">Option 3</IressButton>,
+      <IressButton key="4">Option 4</IressButton>,
+    ],
     defaultSelected: 'Option 2',
     label: 'Selected option for single select',
   },
@@ -97,7 +107,13 @@ export const SelectedSingle: Story = {
 
 export const SelectedMultiple: MultipleStory = {
   args: {
-    ...MultiSelect.args,
+    children: [
+      <IressButton key="1">Option 1</IressButton>,
+      <IressButton key="2">Option 2</IressButton>,
+      <IressButton key="3">Option 3</IressButton>,
+      <IressButton key="4">Option 4</IressButton>,
+    ],
+    multiple: true,
     defaultSelected: ['Option 2', 'Option 4'],
     label: 'Selected option for multi-select',
   },
@@ -113,14 +129,25 @@ export const OnChange: Story = {
 
 export const HiddenLabel: Story = {
   args: {
-    ...ButtonChildren.args,
+    children: [
+      <IressButton key="1">Option 1</IressButton>,
+      <IressButton key="2">Option 2</IressButton>,
+      <IressButton key="3">Option 3</IressButton>,
+      <IressButton key="4">Option 4</IressButton>,
+    ],
+    label: 'Button group',
     hiddenLabel: true,
   },
 };
 
 export const HeadingLabel: Story = {
   args: {
-    ...ButtonChildren.args,
+    children: [
+      <IressButton key="1">Option 1</IressButton>,
+      <IressButton key="2">Option 2</IressButton>,
+      <IressButton key="3">Option 3</IressButton>,
+      <IressButton key="4">Option 4</IressButton>,
+    ],
     label: <IressText element="h2">Heading as label</IressText>,
   },
 };

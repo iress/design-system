@@ -48,7 +48,14 @@ This component is **not** designed to be used within forms and should be used to
 ```tsx
 import { IressDropdownMenu } from '@iress-oss/ids-components';
 
-<IressDropdownMenu label="Select an option" />
+<IressDropdownMenu
+  label="Select an option"
+  options={[
+    { label: 'Option 1', value: 'option-1' },
+    { label: 'Option 2', value: 'option-2' },
+    { label: 'Option 3', value: 'option-3' },
+  ]}
+/>;
 ```
 
 <IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-dropdown-menu--docs#api-props">View all props</IressButton>

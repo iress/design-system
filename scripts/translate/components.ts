@@ -8,7 +8,10 @@
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, basename, relative } from 'path';
 import { stripMdx } from './helpers/strip-mdx';
+import { resolveStoryEmbeds } from './helpers/resolve-stories';
+import { formatCodeBlocks } from './helpers/format-code';
 import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 const ROOT = join(import.meta.dirname, '../..');
 const GUIDELINES_DIR = join(ROOT, 'apps/guidelines/content');
@@ -35,10 +38,16 @@ function renderTestMetaFromArray(testMeta: Array<{ part: string; description: st
     // query is ReactNode — extract text content by rendering to string
     let query = '\u2014';
     if (entry.query) {
-      // Convert ReactNode to plain text (strip JSX)
-      const str = String(entry.query);
-      if (str && str !== '[object Object]') {
-        query = str;
+      try {
+        const html = renderToStaticMarkup(entry.query as React.ReactElement);
+        // Strip HTML tags, keep backtick-wrapped code, decode entities
+        query = html
+          .replace(/<code>/g, '`').replace(/<\/code>/g, '`').replace(/<[^>]+>/g, '')
+          .replace(/&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&')
+          .replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+      } catch {
+        const str = String(entry.query);
+        if (str && str !== '[object Object]') query = str;
       }
     }
     return `| ${entry.part} | ${entry.description} | ${query} | \`${entry.testId}\` |`;
@@ -64,16 +73,19 @@ function findMeta(name: string, type: string): string | null {
 async function buildDoc(file: string, type: string): Promise<{ slug: string; markdown: string } | null> {
   const slug = basename(file, '.mdx');
   const name = slugToName(slug);
+  const isComponent = type === 'components' || type === 'patterns';
 
   // Read and strip guidelines MDX (keep StoryEmbed markers for Phase C)
   const source = readFileSync(file, 'utf-8');
   let prose = stripMdx(source, true);
 
-  // Remove the top-level heading (we add our own from meta)
-  prose = prose.replace(/^# .+\n+/, '');
+  // For components/patterns: remove top-level heading (we add our own from meta)
+  if (isComponent) {
+    prose = prose.replace(/^# .+\n+/, '');
+  }
 
-  // Find meta file
-  const metaFile = findMeta(name, type);
+  // Find meta file (only for components/patterns)
+  const metaFile = isComponent ? findMeta(name, type) : null;
 
   // Read meta by importing the module directly
   let description = '';
@@ -111,26 +123,29 @@ async function buildDoc(file: string, type: string): Promise<{ slug: string; mar
   // Assemble output per plan structure
   const sections: string[] = [];
 
-  // # Name + description
-  sections.push(`# ${name}\n`);
-  if (description) sections.push(`> ${description}\n`);
+  if (isComponent) {
+    // # Name + description
+    sections.push(`# ${name}\n`);
+    if (description) sections.push(`> ${description}\n`);
 
-  // ## Import
-  if (importStatement) {
-    sections.push('## Import\n');
-    sections.push('```tsx');
-    sections.push(importStatement);
-    sections.push('```\n');
+    // ## Import
+    if (importStatement) {
+      sections.push('## Import\n');
+      sections.push('```tsx');
+      sections.push(importStatement);
+      sections.push('```\n');
+    }
+
+    if (metaLinks.length > 0) {
+      sections.push(metaLinks.join('\n') + '\n');
+    }
   }
 
-  if (metaLinks.length > 0) {
-    sections.push(metaLinks.join('\n') + '\n');
-  }
+  // Resolve <StoryEmbed> markers to inline code blocks
+  prose = resolveStoryEmbeds(prose);
 
   // Guidelines prose (includes Design, Develop, Specifications headings)
-  // Props placeholder will be inserted by Phase D at the "View all props" link location
-  // Inject testMeta table after the ### Testing section if it exists
-  if (testMetaTable && prose.includes('### Testing')) {
+  if (isComponent && testMetaTable && prose.includes('### Testing')) {
     prose = prose.replace(
       /(### Testing[\s\S]*?)(\n### |\n## |\n---|\s*$)/,
       `$1\n\n#### Test selectors\n\n${testMetaTable}\n$2`,
@@ -138,8 +153,7 @@ async function buildDoc(file: string, type: string): Promise<{ slug: string; mar
     sections.push(prose);
   } else {
     sections.push(prose);
-    // Append at the end if no Testing section exists
-    if (testMetaTable) {
+    if (isComponent && testMetaTable) {
       sections.push('\n## Test Selectors\n');
       sections.push(testMetaTable);
     }
@@ -151,7 +165,7 @@ async function buildDoc(file: string, type: string): Promise<{ slug: string; mar
 export async function translateComponents() {
   const index: DocEntry[] = [];
 
-  for (const type of ['components', 'patterns']) {
+  for (const type of ['components', 'patterns', 'foundations', 'get-started', 'migration', 'styling-props']) {
     const files = getGuidelineFiles(type);
     const outDir = join(OUTPUT_DIR, type);
     mkdirSync(outDir, { recursive: true });
@@ -161,7 +175,8 @@ export async function translateComponents() {
     for (const file of files) {
       const doc = await buildDoc(file, type);
       if (!doc) continue;
-      writeFileSync(join(outDir, `${doc.slug}.md`), doc.markdown);
+      const formatted = await formatCodeBlocks(doc.markdown);
+      writeFileSync(join(outDir, `${doc.slug}.md`), formatted);
       index.push({ slug: doc.slug, type });
     }
   }

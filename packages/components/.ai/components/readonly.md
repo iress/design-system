@@ -15,7 +15,13 @@ import { IressReadonly } from '@iress-oss/ids-components';
 
 Readonly displays a value that cannot be edited by the user. It renders a hidden input field to ensure the value is submitted with the form.
 
-<StoryEmbed id="components-readonly--rich-content"/>
+```tsx
+<IressReadonly value="AU">
+  <IressInline verticalAlign="middle" gap="sm">
+    <IressIcon name="flag" /> Australia
+  </IressInline>
+</IressReadonly>;
+```
 
 ## Design
 
@@ -59,7 +65,7 @@ Readonly displays a value that cannot be edited by the user. It renders a hidden
 ```tsx
 import { IressReadonly } from '@iress-oss/ids-components';
 
-<IressReadonly value="AU" />
+<IressReadonly value="AU" />;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-readonly--docs#api-props)
@@ -70,19 +76,79 @@ import { IressReadonly } from '@iress-oss/ids-components';
 
 You can pass in stylised content that represents the value by using the `children` prop. If no `children` is provided, it will display the `value` directly.
 
-<StoryEmbed id="components-readonly--rich-content"/>
+```tsx
+<IressReadonly value="AU">
+  <IressInline verticalAlign="middle" gap="sm">
+    <IressIcon name="flag" /> Australia
+  </IressInline>
+</IressReadonly>;
+```
 
 #### Inline
 
 You can make the prepend/append element closer to the input content using the `inline` prop.
 
-<StoryEmbed id="components-readonly--inline-style"/>
+```tsx
+<IressReadonly
+  value="AU"
+  prepend={<IressText color="colour.neutral.70">Prepend</IressText>}
+  append={<IressText color="colour.neutral.70">Append</IressText>}
+  inline
+>
+  <IressInline verticalAlign="middle" gap="sm">
+    <IressIcon name="flag" /> Australia
+  </IressInline>
+</IressReadonly>;
+```
 
 #### Actions
 
 The `actions` prop allows you to add buttons next to the readonly field. These can be used to trigger actions related to the displayed value, such as copying it to the clipboard or opening an edit dialog.
 
-<StoryEmbed id="components-readonly--actions"/>
+```tsx
+import {
+  IressInput,
+  IressReadonly,
+  type IressReadonlyProps,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export const ReadonlyEditToggle = (props: IressReadonlyProps) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [value, setValue] = useState(String(props.value ?? ''));
+
+  if (isEditing) {
+    return (
+      <IressInput
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        actions={[
+          {
+            icon: 'check',
+            children: 'Save',
+            onClick: () => setIsEditing(false),
+          },
+        ]}
+        autoFocus
+      />
+    );
+  }
+
+  return (
+    <IressReadonly
+      {...props}
+      value={value}
+      actions={[
+        {
+          icon: 'edit',
+          children: 'Edit',
+          onClick: () => setIsEditing(true),
+        },
+      ]}
+    />
+  );
+};
+```
 
 #### Locked
 
@@ -90,7 +156,9 @@ Use `variant="locked"` to indicate the value is read-only due to permissions. Th
 
 When form controls such as `IressInput` or `IressSelect` are rendered with `readOnly="locked"`, they automatically pass the locked variant through to `IressReadonly`.
 
-<StoryEmbed id="components-readonly--locked"/>
+```tsx
+<IressReadonly value="AU" variant="locked" />;
+```
 
 ### Testing
 
@@ -109,7 +177,7 @@ const value = screen.getByText('Read-only value');
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the readonly | — | `readonly` |
+| main | The root element of the readonly | `getByText('...')` | `readonly` |
 | input | The hidden input element | — | `readonly__input` |
 
 ---

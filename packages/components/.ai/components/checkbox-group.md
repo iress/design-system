@@ -15,7 +15,19 @@ import { IressCheckboxGroup } from '@iress-oss/ids-components';
 
 Checkbox groups allow users to make more than one choice in a set of related options.
 
-<StoryEmbed id="components-checkboxgroup--checkbox-children"/>
+```tsx
+<IressCheckboxGroup name="let-them-eat-cake">
+  <IressCheckbox key={1} value="lemon-drizzle">
+    Lemon drizzle
+  </IressCheckbox>
+  <IressCheckbox key={2} value="victoria-sponge">
+    Victoria Sponge
+  </IressCheckbox>
+  <IressCheckbox key={3} value="carrot-cake">
+    Carrot Cake
+  </IressCheckbox>
+</IressCheckboxGroup>;
+```
 
 ## Design
 
@@ -60,7 +72,7 @@ Checkbox groups allow users to make more than one choice in a set of related opt
 ```tsx
 import { IressCheckboxGroup } from '@iress-oss/ids-components';
 
-<IressCheckboxGroup name="preferences" />
+<IressCheckboxGroup name="preferences" />;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkboxgroup--docs#api-props)
@@ -73,19 +85,72 @@ Individual checkboxes can be passed directly into `IressCheckboxGroup`.
 
 **Note:** The `mapCheckboxGroupOptions` helper function is now deprecated. Use `array.map` to map options to `IressCheckbox` components instead.
 
-<StoryEmbed id="components-checkboxgroup--checkbox-children"/>
+```tsx
+<IressCheckboxGroup name="let-them-eat-cake">
+  <IressCheckbox key={1} value="lemon-drizzle">
+    Lemon drizzle
+  </IressCheckbox>
+  <IressCheckbox key={2} value="victoria-sponge">
+    Victoria Sponge
+  </IressCheckbox>
+  <IressCheckbox key={3} value="carrot-cake">
+    Carrot Cake
+  </IressCheckbox>
+</IressCheckboxGroup>;
+```
 
 #### Default checked
 
 The default checked state of the checkbox children should always be set using the `defaultValue` prop (not directly on the checkbox component).
 
-<StoryEmbed id="components-checkboxgroup--default-checked"/>
+```tsx
+<IressCheckboxGroup
+  name="let-them-eat-cake"
+  defaultValue={['lemon-drizzle', 'victoria-sponge']}
+>
+  <IressCheckbox key={1} value="lemon-drizzle">
+    Lemon drizzle
+  </IressCheckbox>
+  <IressCheckbox key={2} value="victoria-sponge">
+    Victoria Sponge
+  </IressCheckbox>
+  <IressCheckbox key={3} value="carrot-cake">
+    Carrot Cake
+  </IressCheckbox>
+</IressCheckboxGroup>;
+```
 
 #### Changing the checked state
 
 The `value` prop can be updated if you need to change the checked state without interacting with the checkboxes.
 
-<StoryEmbed id="components-checkboxgroup--controlled"/>
+```tsx
+import {
+  IressButton,
+  IressCheckbox,
+  IressCheckboxGroup,
+  IressStack,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export function CheckboxGroupUsingState() {
+  const [value, setValue] = useState<string[]>([]);
+
+  return (
+    <IressStack gap="sm">
+      <IressCheckboxGroup
+        value={value}
+        onChange={(newValue) => setValue(newValue ?? [])}
+      >
+        <IressCheckbox value="lemon-drizzle">Lemon drizzle</IressCheckbox>
+        <IressCheckbox value="victoria-sponge">Victoria Sponge</IressCheckbox>
+        <IressCheckbox value="carrot-cake">Carrot Cake</IressCheckbox>
+      </IressCheckboxGroup>
+      <IressButton onClick={() => setValue([])}>Clear</IressButton>
+    </IressStack>
+  );
+}
+```
 
 #### Layout
 
@@ -95,37 +160,257 @@ The `layout` prop controls how the checkbox group is displayed:
 - **Block:** Same as Stack, but labels take up the full width of the container.
 - **Inline:** Checkboxes are laid out horizontally.
 
-<StoryEmbed id="components-checkboxgroup--layout"/>
+```tsx
+import {
+  IressCheckbox,
+  IressCheckboxGroup,
+  IressText,
+} from '@iress-oss/ids-components';
+
+export function CheckboxGroupLayout() {
+  return (
+    <IressText>
+      <h3>block</h3>
+      <IressCheckboxGroup layout="block">
+        <IressCheckbox value="google" bg="alt">
+          Google
+        </IressCheckbox>
+        <IressCheckbox value="newspaper" bg="alt">
+          Newspaper
+        </IressCheckbox>
+        <IressCheckbox value="friend" bg="alt">
+          Friend
+        </IressCheckbox>
+        <IressCheckbox value="other" bg="alt">
+          Other
+        </IressCheckbox>
+      </IressCheckboxGroup>
+      <h3>inline</h3>
+      <IressCheckboxGroup layout="inline">
+        <IressCheckbox value="google" bg="alt">
+          Google
+        </IressCheckbox>
+        <IressCheckbox value="newspaper" bg="alt">
+          Newspaper
+        </IressCheckbox>
+        <IressCheckbox value="friend" bg="alt">
+          Friend
+        </IressCheckbox>
+        <IressCheckbox value="other" bg="alt">
+          Other
+        </IressCheckbox>
+      </IressCheckboxGroup>
+      <h3>stack</h3>
+      <IressCheckboxGroup layout="stack">
+        <IressCheckbox value="google" bg="alt">
+          Google
+        </IressCheckbox>
+        <IressCheckbox value="newspaper" bg="alt">
+          Newspaper
+        </IressCheckbox>
+        <IressCheckbox value="friend" bg="alt">
+          Friend
+        </IressCheckbox>
+        <IressCheckbox value="other" bg="alt">
+          Other
+        </IressCheckbox>
+      </IressCheckboxGroup>
+    </IressText>
+  );
+}
+```
 
 #### Hidden checkboxes
 
 You can use the `hiddenCheckbox` prop to create custom checkboxes. When enabled, the actual checkbox will be visually hidden, allowing you to create more interesting controls.
 
-<StoryEmbed id="components-checkboxgroup--hidden-checkboxes"/>
+```tsx
+<IressField
+  label="I'd like to discuss the following with my financial adviser:"
+  hint="Select all that apply"
+>
+  <IressCheckboxGroup
+    defaultValue={['home']}
+    variant="card"
+    name="financial-review"
+    layout="inline"
+  >
+    {children}
+  </IressCheckboxGroup>
+</IressField>;
+```
 
 #### Custom checkbox group layout
 
 The checkbox group's `layout` prop gives you some default options to help control the layout of your controls. But sometimes you need more granular control, which you can achieve with a bit of custom CSS.
 
-<StoryEmbed id="components-checkboxgroup--custom-checkbox-group-layout"/>
+```tsx
+<IressField
+  label="I'd like to discuss the following with my financial adviser:"
+  hint="Select all that apply"
+>
+  <IressCheckboxGroup
+    defaultValue={['home']}
+    variant="card"
+    name="financial-review"
+    layout="block"
+  >
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+        gridAutoRows: '1fr',
+        gridGap: '16px',
+        width: '100%',
+        padding: '0.5rem',
+        border: '1px dashed hsl(43deg 100% 45%)',
+        resize: 'horizontal',
+        overflow: 'auto',
+      }}
+    >
+      {children}
+    </div>
+  </IressCheckboxGroup>
+</IressField>;
+```
 
 #### Read only
 
 The `readOnly` prop changes how the checkbox group is rendered. It will only render the children that are checked (alongside a hidden input that contains the `value` if it was set).
 
-<StoryEmbed id="components-checkboxgroup--read-only"/>
+```tsx
+<IressCheckboxGroup
+  name="let-them-eat-cake"
+  defaultValue={['lemon-drizzle', 'victoria-sponge']}
+  readOnly
+>
+  <IressCheckbox key={1} value="lemon-drizzle">
+    Lemon drizzle
+  </IressCheckbox>
+  <IressCheckbox key={2} value="victoria-sponge">
+    Victoria Sponge
+  </IressCheckbox>
+  <IressCheckbox key={3} value="carrot-cake">
+    Carrot Cake
+  </IressCheckbox>
+</IressCheckboxGroup>;
+```
 
 #### Touch
 
 The `touch` prop adds the button-like border and padding to checkbox.
 
-<StoryEmbed id="components-checkboxgroup--touch"/>
+```tsx
+<IressCheckboxGroup
+  name="let-them-eat-cake"
+  defaultValue={['lemon-drizzle', 'victoria-sponge']}
+  variant="touch"
+>
+  <IressCheckbox key={1} value="lemon-drizzle">
+    Lemon drizzle
+  </IressCheckbox>
+  <IressCheckbox key={2} value="victoria-sponge">
+    Victoria Sponge
+  </IressCheckbox>
+  <IressCheckbox key={3} value="carrot-cake">
+    Carrot Cake
+  </IressCheckbox>
+</IressCheckboxGroup>;
+```
 
 #### Checkboxes inside an `IressTable`
 
 You can use `IressCheckboxGroup` and `IressTable` to create a table with checkboxes, allowing the users to select multiple rows.
 
-<StoryEmbed id="components-checkboxgroup--table"/>
+```tsx
+import {
+  type FormControlValue,
+  IressButton,
+  IressCheckbox,
+  IressForm,
+  IressFormFieldset,
+  IressPanel,
+  IressStack,
+  IressTable,
+} from '@iress-oss/ids-components';
+import { IressCheckboxGroup } from '../CheckboxGroup';
+import { toArray } from '../../../helpers/formatting/toArray';
+import { useWatch } from 'react-hook-form';
+
+interface FieldValues {
+  'let-them-eat-cake'?: FormControlValue[];
+}
+
+const SelectedValues = () => {
+  const value = useWatch<FieldValues>({ name: 'let-them-eat-cake' });
+  const valueString = toArray(value).join(', ');
+
+  return (
+    <IressPanel>
+      Selected values: {valueString ? valueString : 'None'}
+    </IressPanel>
+  );
+};
+
+export const CheckboxGroupTable = () => (
+  <IressForm
+    defaultValues={{
+      'let-them-eat-cake': ['lemon-drizzle', 'victoria-sponge'],
+    }}
+  >
+    <IressStack gap="md">
+      <SelectedValues />
+      <IressFormFieldset
+        label="Let them eat cake"
+        name="let-them-eat-cake"
+        hiddenLabel
+        mb="none"
+        rules={{ required: 'Please select a cake' }}
+        render={(field) => (
+          <IressCheckboxGroup {...field} layout="stack">
+            <IressTable
+              caption="Available options"
+              columns={[
+                { key: 'select', label: 'Select', width: '2rem' },
+                { key: 'name', label: 'Name' },
+              ]}
+              rows={[
+                {
+                  select: (
+                    <IressCheckbox hiddenLabel value="lemon-drizzle">
+                      Select lemon drizzle
+                    </IressCheckbox>
+                  ),
+                  name: 'Lemon drizzle',
+                },
+                {
+                  select: (
+                    <IressCheckbox hiddenLabel value="victoria-sponge">
+                      Select Victoria Sponge
+                    </IressCheckbox>
+                  ),
+                  name: 'Victoria Sponge',
+                },
+                {
+                  select: (
+                    <IressCheckbox hiddenLabel value="carrot-cake">
+                      Select Carrot Cake
+                    </IressCheckbox>
+                  ),
+                  name: 'Carrot Cake',
+                },
+              ]}
+            />
+          </IressCheckboxGroup>
+        )}
+      />
+      <IressButton type="submit" mode="primary" alignSelf="start">
+        Submit
+      </IressButton>
+    </IressStack>
+  </IressForm>
+);
+```
 
 ### Testing
 
@@ -167,7 +452,7 @@ const option = within(group).getByRole('checkbox', { name: 'Music' });
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the checkbox group | — | `checkbox-group` |
+| main | The root element of the checkbox group | `getByRole('group')` | `checkbox-group` |
 
 ---
 

@@ -33,9 +33,8 @@ export const Default: Story = {
 };
 
 export const RichContent: Story = {
-  ...Default,
   args: {
-    ...Default.args,
+    value: 'AU',
     children: (
       <IressInline verticalAlign="middle" gap="sm">
         <IressIcon name="flag" /> Australia
@@ -45,9 +44,8 @@ export const RichContent: Story = {
 };
 
 export const InlineStyle: Story = {
-  ...Default,
   args: {
-    ...Default.args,
+    value: 'AU',
     children: (
       <IressInline verticalAlign="middle" gap="sm">
         <IressIcon name="flag" /> Australia

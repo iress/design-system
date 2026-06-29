@@ -15,7 +15,14 @@ import { IressButtonGroup } from '@iress-oss/ids-components';
 
 ButtonGroup allows users to switch between two or more possible states. ButtonGroups are only used for actions that occur immediately after the user "flips the switch".
 
-<StoryEmbed id="components-buttongroup--button-children"/>
+```tsx
+<IressButtonGroup label="Button group">
+  <IressButton>Option 1</IressButton>
+  <IressButton>Option 2</IressButton>
+  <IressButton>Option 3</IressButton>
+  <IressButton>Option 4</IressButton>
+</IressButtonGroup>;
+```
 
 ## Design
 
@@ -52,7 +59,7 @@ import { IressButtonGroup, IressButton } from '@iress-oss/ids-components';
 <IressButtonGroup label="Options">
   <IressButton>Option A</IressButton>
   <IressButton>Option B</IressButton>
-</IressButtonGroup>
+</IressButtonGroup>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-buttongroup--docs#api-props)
@@ -70,7 +77,14 @@ You can use the `onChange` prop to watch when a button is clicked.
 - The `options` props, originally used to map a set of strings to `IressButton`, has been deprecated. Instead, you can use array.map to map the options to `IressButton` in your own application.
 - The `mode` prop on `IressButton` is not supported when used inside an `IressButtonGroup`.
 
-<StoryEmbed id="components-buttongroup--button-children"/>
+```tsx
+<IressButtonGroup label="Button group">
+  <IressButton>Option 1</IressButton>
+  <IressButton>Option 2</IressButton>
+  <IressButton>Option 3</IressButton>
+  <IressButton>Option 4</IressButton>
+</IressButtonGroup>;
+```
 
 #### Rich buttons
 
@@ -78,13 +92,44 @@ By passing the buttons as children you have more control over the display of the
 
 **Note:** In this case, please set the `value` prop on the `IressButton` component to ensure the correct value is used when the button is clicked.
 
-<StoryEmbed id="components-buttongroup--rich-buttons"/>
+```tsx
+<IressButtonGroup label="Text alignment">
+  <IressTooltip tooltipText="Left">
+    <IressButton value="left">
+      <IressIcon name="align-left" screenreaderText="Left" />
+    </IressButton>
+  </IressTooltip>
+  <IressTooltip tooltipText="Center">
+    <IressButton value="center">
+      <IressIcon name="align-center" screenreaderText="Center" />
+    </IressButton>
+  </IressTooltip>
+  <IressTooltip tooltipText="Right">
+    <IressButton value="right">
+      <IressIcon name="align-right" screenreaderText="Right" />
+    </IressButton>
+  </IressTooltip>
+  <IressDivider vertical mx="xs" />
+  <IressTooltip tooltipText="Justify">
+    <IressButton value="justify">
+      <IressIcon name="align-justify" screenreaderText="Justify" />
+    </IressButton>
+  </IressTooltip>
+</IressButtonGroup>;
+```
 
 #### Multi-select
 
 By default, only one button in the group can be selected at a time. By setting the `multiple` prop, multiple buttons can be selected.
 
-<StoryEmbed id="components-buttongroup--multi-select"/>
+```tsx
+<IressButtonGroup multiple label="Multiple options can be selected">
+  <IressButton>Option 1</IressButton>
+  <IressButton>Option 2</IressButton>
+  <IressButton>Option 3</IressButton>
+  <IressButton>Option 4</IressButton>
+</IressButtonGroup>;
+```
 
 #### Pre-selecting buttons
 
@@ -94,26 +139,96 @@ If the button group is in its default single select mode, these props expects a 
 
 In multi-select mode, these props expects an array of matching strings.
 
-<StoryEmbed id="components-buttongroup--selected-single"/>
-<StoryEmbed id="components-buttongroup--selected-multiple"/>
+```tsx
+<IressButtonGroup
+  defaultSelected="Option 2"
+  label="Selected option for single select"
+>
+  <IressButton>Option 1</IressButton>
+  <IressButton>Option 2</IressButton>
+  <IressButton>Option 3</IressButton>
+  <IressButton>Option 4</IressButton>
+</IressButtonGroup>;
+```
+```tsx
+<IressButtonGroup
+  multiple
+  defaultSelected={['Option 2', 'Option 4']}
+  label="Selected option for multi-select"
+>
+  <IressButton>Option 1</IressButton>
+  <IressButton>Option 2</IressButton>
+  <IressButton>Option 3</IressButton>
+  <IressButton>Option 4</IressButton>
+</IressButtonGroup>;
+```
 
 #### `onChange` event
 
 The Button Group emits an event when any of the selected buttons change. The event detail (`ButtonGroupChange`) consist of a string or an array of strings (depending on if it's in single or multi select mode) that represents the selected button(s).
 
-<StoryEmbed id="components-buttongroup--on-change"/>
+```tsx
+import {
+  IressButton,
+  IressButtonGroup,
+  IressToasterProvider,
+  useToaster,
+} from '@iress-oss/ids-components';
+
+function ButtonGroupWithToaster() {
+  const { success } = useToaster();
+
+  return (
+    <IressButtonGroup
+      label="Trigger toasts by selecting an option below"
+      onChange={(selected) => {
+        success({
+          content: `Selected: ${selected ? String(selected) : 'none'}`,
+        });
+      }}
+    >
+      <IressButton>Option 1</IressButton>
+      <IressButton>Option 2</IressButton>
+      <IressButton>Option 3</IressButton>
+      <IressButton>Option 4</IressButton>
+    </IressButtonGroup>
+  );
+}
+
+export function ButtonGroupOnChange() {
+  return (
+    <IressToasterProvider container={document.body}>
+      <ButtonGroupWithToaster />
+    </IressToasterProvider>
+  );
+}
+```
 
 #### Hidden label
 
 If you would like to visually hide the label, you can use the `hiddenLabel` prop.
 
-<StoryEmbed id="components-buttongroup--hidden-label"/>
+```tsx
+<IressButtonGroup label="Button group" hiddenLabel>
+  <IressButton>Option 1</IressButton>
+  <IressButton>Option 2</IressButton>
+  <IressButton>Option 3</IressButton>
+  <IressButton>Option 4</IressButton>
+</IressButtonGroup>;
+```
 
 #### Headings as labels
 
 For semantic reasons, you may need the label to be rendered as a heading. In this case, you can pass the element directly to the `label` prop. The component will automatically add the `id` required to connect the button group to its label.
 
-<StoryEmbed id="components-buttongroup--heading-label"/>
+```tsx
+<IressButtonGroup label={<IressText element="h2">Heading as label</IressText>}>
+  <IressButton>Option 1</IressButton>
+  <IressButton>Option 2</IressButton>
+  <IressButton>Option 3</IressButton>
+  <IressButton>Option 4</IressButton>
+</IressButtonGroup>;
+```
 
 ### Testing
 
@@ -130,8 +245,8 @@ const group = screen.getByRole('group', { name: 'Alignment' });
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the button group | — | `buttongroup` |
-| label | The group label element | — | `buttongroup__label` |
+| main | The root element of the button group | `getByRole('group', { name: '...' })` | `buttongroup` |
+| label | The group label element | `getByText('...')` | `buttongroup__label` |
 
 ---
 

@@ -15,7 +15,9 @@ import { IressSpinner } from '@iress-oss/ids-components';
 
 Spinners notify the user that a task is being processed. They indicate that the app is busy, and should be used when the user has to wait for more than a few seconds.
 
-<StoryEmbed id="components-spinner--standalone"/>
+```tsx
+<IressSpinner screenreaderText="Making magic happen..." />;
+```
 
 ## Design
 
@@ -54,7 +56,7 @@ Spinners notify the user that a task is being processed. They indicate that the 
 ```tsx
 import { IressSpinner } from '@iress-oss/ids-components';
 
-<IressSpinner screenreaderText="Loading..." />
+<IressSpinner screenreaderText="Loading..." />;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-spinner--docs#api-props)
@@ -63,19 +65,28 @@ import { IressSpinner } from '@iress-oss/ids-components';
 
 When using the spinner on its own, you can define the `screenreaderText` prop to provide context to screen readers.
 
-<StoryEmbed id="components-spinner--standalone"/>
+```tsx
+<IressSpinner screenreaderText="Making magic happen..." />;
+```
 
 ### Chatty variant
 
 The chatty variant displays an animated "typing" indicator with three dots. This is commonly used in chat interfaces to show that another user or system is currently typing a message.
 
-<StoryEmbed id="components-spinner--chatty"/>
+```tsx
+<IressSpinner variant="chatty" screenreaderText="User is typing..." />;
+```
 
 ### Message
 
 You can display a message alongside the spinner. In this case, you do not need to define the `screenreaderText` prop, as you have a visible message to the user telling them what is happening.
 
-<StoryEmbed id="components-spinner--message"/>
+```tsx
+<IressInline gap="sm" verticalAlign="middle">
+  <IressSpinner color="colour.neutral.70" />
+  <IressText color="colour.neutral.70">Making magic happen...</IressText>
+</IressInline>;
+```
 
 ### Testing
 
@@ -99,7 +110,7 @@ const spinner = screen.getByRole('status');
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the spinner. Default variant is decorative (aria-hidden); chatty variant has role="status" | — | `spinner` |
+| main | The root element of the spinner. Default variant is decorative (aria-hidden); chatty variant has role="status" | `getByRole('status')` for the chatty variant, or `getByTestId('...')` for the decorative default | `spinner` |
 
 ---
 

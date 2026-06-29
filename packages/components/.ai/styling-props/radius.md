@@ -8,13 +8,24 @@ influencing the overall user experience.
 
 The `borderRadius` prop allows you to change the border radius of any component. It should be used sparingly, and often used when creating custom components that are not part of the design system, however you still want to retain the look and feel of the rest of the system.
 
-<StoryEmbed id="styling-props-radius--border-radius" />
+```tsx
+<IressInput
+  borderRadius="radius.system.layout"
+  px="spacing.4"
+  py="spacing.2"
+  placeholder="Search everything"
+/>;
+```
 
 ### Removing border radius
 
 In some cases you may need to remove the border-radius to achieve design requirements. This can be done using `radius.000` or `none`.
 
-<StoryEmbed id="styling-props-radius--no-border-radius" />
+```tsx
+<IressPanel borderRadius="none" bg="alt">
+  No radius here
+</IressPanel>;
+```
 
 ---
 

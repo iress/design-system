@@ -15,7 +15,34 @@ import { IressText } from '@iress-oss/ids-components';
 
 The IressText component allows you to set typographic styles either on one element, or a block of HTML elements.
 
-<StoryEmbed id="components-text--element"/>
+```tsx
+import { IressStack, IressText } from '@iress-oss/ids-components';
+
+export function TextElement() {
+  return (
+    <IressStack gap="spacing.1">
+      <IressText element="p">This is a p element.</IressText>
+      <IressText element="div">This is a div element.</IressText>
+      <IressText element="span">This is a span element.</IressText>
+      <IressText element="h1">This is a h1 element.</IressText>
+      <IressText element="h2">This is a h2 element.</IressText>
+      <IressText element="h3">This is a h3 element.</IressText>
+      <IressText element="h4">This is a h4 element.</IressText>
+      <IressText element="h5">This is a h5 element.</IressText>
+      <IressText element="h6">This is a h6 element.</IressText>
+      <IressText element="code">This is a code element.</IressText>
+      <IressText element="small">This is a small element.</IressText>
+      <IressText element="cite">This is a cite element.</IressText>
+      <IressText element="strong">This is a strong element.</IressText>
+      <IressText element="em">This is a em element.</IressText>
+      <IressText element="a">This is a a element.</IressText>
+      <IressText element="blockquote">This is a blockquote element.</IressText>
+      <IressText element="pre">This is a pre element.</IressText>
+      <IressText element="mark">This is a mark element.</IressText>
+    </IressStack>
+  );
+}
+```
 
 ## Design
 
@@ -60,7 +87,7 @@ The IressText component allows you to set typographic styles either on one eleme
 ```tsx
 import { IressText } from '@iress-oss/ids-components';
 
-<IressText element="h1">Page Title</IressText>
+<IressText element="h1">Page Title</IressText>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-text--docs#api-props)
@@ -71,7 +98,34 @@ With the `element` prop you can select which HTML element you would like the tex
 
 It renders as a `div` by default, but can also be set to any standard typography element.
 
-<StoryEmbed id="components-text--element"/>
+```tsx
+import { IressStack, IressText } from '@iress-oss/ids-components';
+
+export function TextElement() {
+  return (
+    <IressStack gap="spacing.1">
+      <IressText element="p">This is a p element.</IressText>
+      <IressText element="div">This is a div element.</IressText>
+      <IressText element="span">This is a span element.</IressText>
+      <IressText element="h1">This is a h1 element.</IressText>
+      <IressText element="h2">This is a h2 element.</IressText>
+      <IressText element="h3">This is a h3 element.</IressText>
+      <IressText element="h4">This is a h4 element.</IressText>
+      <IressText element="h5">This is a h5 element.</IressText>
+      <IressText element="h6">This is a h6 element.</IressText>
+      <IressText element="code">This is a code element.</IressText>
+      <IressText element="small">This is a small element.</IressText>
+      <IressText element="cite">This is a cite element.</IressText>
+      <IressText element="strong">This is a strong element.</IressText>
+      <IressText element="em">This is a em element.</IressText>
+      <IressText element="a">This is a a element.</IressText>
+      <IressText element="blockquote">This is a blockquote element.</IressText>
+      <IressText element="pre">This is a pre element.</IressText>
+      <IressText element="mark">This is a mark element.</IressText>
+    </IressStack>
+  );
+}
+```
 
 ### The `textStyle` prop
 
@@ -81,25 +135,126 @@ For example, in order to maintain the semantic structure of headings, you may ne
 
 > **⚠️ Do not add `textStyle` when the `element` already provides the correct styling.** For example, `element="h1"` already renders with `typography.heading.1` styling — adding `textStyle="typography.heading.1"` is redundant. Only use `textStyle` to intentionally override the default visual treatment (e.g. `element="h2" textStyle="typography.heading.4"` to make an h2 visually smaller), or when a designer has specified a different visual hierarchy in a Figma file.
 
-<StoryEmbed id="components-text--variant"/>
+```tsx
+import { IressStack, IressText } from '@iress-oss/ids-components';
+
+export function TextVariant() {
+  return (
+    <IressStack gap="md">
+      <IressText textStyle="typography.heading.1">
+        This is the typography.heading.1 text style.
+      </IressText>
+      <IressText textStyle="typography.heading.2">
+        This is the typography.heading.2 text style.
+      </IressText>
+      <IressText textStyle="typography.heading.3">
+        This is the typography.heading.3 text style.
+      </IressText>
+      <IressText textStyle="typography.heading.4">
+        This is the typography.heading.4 text style.
+      </IressText>
+      <IressText textStyle="typography.heading.5">
+        This is the typography.heading.5 text style.
+      </IressText>
+      <IressText textStyle="typography.body.sm">
+        This is the typography.body.sm text style.
+      </IressText>
+    </IressStack>
+  );
+}
+```
 
 ### The `color` prop
 
 The `color` prop (previously `mode`) can be used to set the colour of the text to these predefined mode colours: Body, Muted, Primary, Info, Success, Warning, Danger, Positive and Negative.
 
-<StoryEmbed id="components-text--mode"/>
+```tsx
+import { IressStack, IressText } from '@iress-oss/ids-components';
+
+export function TextMode() {
+  return (
+    <IressStack gap="md">
+      <IressText color="colour.neutral.70">
+        This is colour.neutral.70 mode.
+      </IressText>
+      <IressText color="colour.primary.text">
+        This is colour.primary.text mode.
+      </IressText>
+      <IressText color="colour.system.danger.text">
+        This is colour.system.danger.text mode.
+      </IressText>
+      <IressText color="colour.system.success.text">
+        This is colour.system.success.text mode.
+      </IressText>
+      <IressText color="colour.system.warning.text">
+        This is colour.system.warning.text mode.
+      </IressText>
+      <IressText color="colour.system.info.text">
+        This is colour.system.info.text mode.
+      </IressText>
+      <IressText color="colour.system.danger.text">
+        Nested text mode demonstration:{' '}
+        <IressText>I am nested, and return to the original colour</IressText>
+      </IressText>
+    </IressStack>
+  );
+}
+```
 
 ### The `textAlign` prop
 
 The `textAlign` prop (previously `align`) can be used to set the text's alignment.
 
-<StoryEmbed id="components-text--align"/>
+```tsx
+import { IressStack, IressText } from '@iress-oss/ids-components';
+
+export function TextAlign() {
+  return (
+    <IressStack gap="md">
+      <IressText textAlign="left">
+        The quick brown fox jumps over the lazy dog
+      </IressText>
+      <IressText textAlign="center">
+        The quick brown fox jumps over the lazy dog
+      </IressText>
+      <IressText textAlign="right">
+        The quick brown fox jumps over the lazy dog
+      </IressText>
+      <IressText textAlign="justify">
+        The quick brown fox jumps over the lazy dog
+      </IressText>
+      <IressText textAlign="inherit">
+        The quick brown fox jumps over the lazy dog
+      </IressText>
+    </IressStack>
+  );
+}
+```
 
 ### Block of typographic content
 
 If you just need to style a block of typography content, you can just wrap the entire block of HTML with the text component.
 
-<StoryEmbed id="components-text--typographic-block"/>
+```tsx
+<IressText maxWidth="container.md" mx="auto" px="spacing.2">
+  <h2>History</h2>
+  <h3>Founding and Early Years (1993 - 2000)</h3>
+  <p>
+    <a href="https://iress.com" target="_blank">
+      Iress Limited (ASX: IRE)
+    </a>{' '}
+    was founded in 1993 in Melbourne, Australia, as a provider of financial
+    market data and trading software.
+  </p>
+  <h3>Expansion and IPO (2001 - 2010)</h3>
+  <p>
+    In 2001, Iress went public, listing on the Australian Securities Exchange
+    (ASX). This move provided the company with capital to expand its operations
+    and invest in new technologies.
+  </p>
+  <pre>Some code in here</pre>
+</IressText>;
+```
 
 ### Testing
 
@@ -115,7 +270,7 @@ const paragraph = screen.getByText('Some content');
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the text | — | `text` |
+| main | The root element of the text | `getByText('...')` | `text` |
 
 ---
 

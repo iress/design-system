@@ -29,15 +29,9 @@ export const containerWidths: Story = {
   args: {
     maxWidth: 'overlay.lg',
   },
-  render: ({ maxWidth, width }) => (
-    <IressContainer bg="alt" fluid maxWidth={maxWidth} width={width} p="lg">
-      This container is extra readable cause its maxWidth is set to:{' '}
-      <code>
-        {typeof maxWidth === 'object'
-          ? JSON.stringify(maxWidth)
-          : maxWidth}
-      </code>
-      .
+  render: (args) => (
+    <IressContainer {...args} bg="alt" fluid p="lg">
+      This container has maxWidth set to <code>overlay.lg</code>.
     </IressContainer>
   ),
 };

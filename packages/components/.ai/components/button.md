@@ -15,7 +15,23 @@ import { IressButton } from '@iress-oss/ids-components';
 
 A button is a clickable item used to perform an action.
 
-<StoryEmbed id="components-button--mode"/>
+```tsx
+import { IressButton, IressInline } from '@iress-oss/ids-components';
+
+export function ButtonMode() {
+  return (
+    <IressInline gap="md">
+      <IressButton mode="primary">Primary button</IressButton>
+      <IressButton mode="secondary">Secondary button</IressButton>
+      <IressButton mode="tertiary">Tertiary button</IressButton>
+      <IressButton mode="quaternary">Quaternary button</IressButton>
+      <IressButton mode="muted" icon="share">
+        Share
+      </IressButton>
+    </IressInline>
+  );
+}
+```
 
 ## Design
 
@@ -78,7 +94,7 @@ See below for recommended alternatives to common disabled button scenarios.
 ```tsx
 import { IressButton } from '@iress-oss/ids-components';
 
-<IressButton>Button</IressButton>
+<IressButton>Button</IressButton>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs#api-props)
@@ -95,7 +111,23 @@ The `mode` prop controls the visual appearance and priority of the button.
 - **Quaternary:** Use for less prominent actions, often used for preference toggles (eg. Collapse all).
 - **Muted:** Use for less prominent actions, often in toolbars or inline with headings. Mainly used for icon-only buttons.
 
-<StoryEmbed id="components-button--mode"/>
+```tsx
+import { IressButton, IressInline } from '@iress-oss/ids-components';
+
+export function ButtonMode() {
+  return (
+    <IressInline gap="md">
+      <IressButton mode="primary">Primary button</IressButton>
+      <IressButton mode="secondary">Secondary button</IressButton>
+      <IressButton mode="tertiary">Tertiary button</IressButton>
+      <IressButton mode="quaternary">Quaternary button</IressButton>
+      <IressButton mode="muted" icon="share">
+        Share
+      </IressButton>
+    </IressInline>
+  );
+}
+```
 
 #### Status
 
@@ -104,7 +136,54 @@ The `status` prop allows you to apply a visual status to the button.
 - **Success:** Usually used to indicate an action that should be perceived as positive, such as "Confirm" or "Buy".
 - **Danger:** Use for destructive actions, such as "Delete" or "Remove". Also used for actions that are perceived as negative, such as "Cancel" or "Sell".
 
-<StoryEmbed id="components-button--status"/>
+```tsx
+import {
+  IressButton,
+  IressInline,
+  IressStack,
+} from '@iress-oss/ids-components';
+
+export function ButtonStatus() {
+  return (
+    <IressStack gap="md">
+      <IressInline gap="md">
+        <IressButton mode="primary" status="success">
+          Primary
+        </IressButton>
+        <IressButton mode="secondary" status="success">
+          Secondary
+        </IressButton>
+        <IressButton mode="tertiary" status="success">
+          Tertiary
+        </IressButton>
+        <IressButton mode="quaternary" status="success">
+          Quaternary
+        </IressButton>
+        <IressButton mode="muted" status="success" icon="shopping_cart">
+          Add to cart
+        </IressButton>
+      </IressInline>
+      <IressInline gap="md">
+        <IressButton mode="primary" status="danger">
+          Primary
+        </IressButton>
+        <IressButton mode="secondary" status="danger">
+          Secondary
+        </IressButton>
+        <IressButton mode="tertiary" status="danger">
+          Tertiary
+        </IressButton>
+        <IressButton mode="quaternary" status="danger">
+          Quaternary
+        </IressButton>
+        <IressButton mode="muted" status="danger" icon="delete">
+          Delete
+        </IressButton>
+      </IressInline>
+    </IressStack>
+  );
+}
+```
 
 #### Types
 
@@ -112,7 +191,13 @@ The `type` property controls the behaviour of the button. It defaults to `button
 
 **Please note:** this differs from a standard HTML button element, where the `type` defaults to submit.
 
-<StoryEmbed id="components-button--types"/>
+```tsx
+<IressInline gap="md">
+  <IressButton type="button">button</IressButton>
+  <IressButton type="submit">submit</IressButton>
+  <IressButton type="reset">reset</IressButton>
+</IressInline>;
+```
 
 #### Loading
 
@@ -122,7 +207,29 @@ The loading state can be activated by setting the `loading` prop to `true`. To c
 
 When the loading state is activated, any click events on the button are disabled.
 
-<StoryEmbed id="components-button--loading"/>
+```tsx
+import { IressButton, IressInline } from '@iress-oss/ids-components';
+
+export function ButtonLoading() {
+  return (
+    <IressInline gap="md">
+      <IressButton mode="primary" loading>
+        Primary
+      </IressButton>
+      <IressButton mode="secondary" loading>
+        Secondary
+      </IressButton>
+      <IressButton mode="tertiary" loading>
+        Tertiary
+      </IressButton>
+      <IressButton mode="quaternary" loading>
+        Quaternary
+      </IressButton>
+      <IressButton mode="muted" loading icon="edit" />
+    </IressInline>
+  );
+}
+```
 
 #### Buttons as links
 
@@ -130,7 +237,15 @@ The `href` prop allows you to create a link that looks like a button. When set, 
 
 You can also use the link specific props `target` and `rel`.
 
-<StoryEmbed id="components-button--buttons-as-links"/>
+```tsx
+<IressButton
+  href="https://www.iress.com/"
+  rel="opener noreferrer"
+  target="_blank"
+>
+  This is a link (anchor tag)
+</IressButton>;
+```
 
 #### Delete confirmation
 
@@ -142,7 +257,38 @@ You can also use the link specific props `target` and `rel`.
 
 The confirmation step should be a modal with a simple message, as with the example below. Use a delete button for the modal's primary call to action, and use a secondary button for the cancel action.
 
-<StoryEmbed id="components-button--delete-confirmation"/>
+```tsx
+import { IressButton, IressModal } from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export function ButtonDeleteConfirmation() {
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  return (
+    <>
+      <IressButton status="danger" onClick={() => setShowConfirm(true)}>
+        Delete item
+      </IressButton>
+      <IressModal
+        heading="Confirm deletion"
+        status="danger"
+        show={showConfirm}
+        onShowChange={setShowConfirm}
+        actions={[
+          {
+            children: 'Cancel',
+            mode: 'tertiary',
+            onClick: () => setShowConfirm(false),
+          },
+          { children: 'Delete', onClick: () => setShowConfirm(false) },
+        ]}
+      >
+        Are you sure you want to delete this item? This action cannot be undone.
+      </IressModal>
+    </>
+  );
+}
+```
 
 #### Fluid
 
@@ -150,13 +296,36 @@ If the `fluid` prop is set to true, the button will expand to be 100% of the wid
 
 The `fluid` prop can also be set to a breakpoint size, which means the button will be fluid up until its breakpoint is passed.
 
-<StoryEmbed id="components-button--fluid"/>
+```tsx
+<IressInline gap="md">
+  <IressButton fluid>Always fluid</IressButton>
+  <IressButton fluid="md">Fluid on xs and sm</IressButton>
+</IressInline>;
+```
 
 #### Wrapping text
 
 Button text will wrap on to a new line if there's not enough space for the text to sit on a single line. If you want to prevent the text from wrapping, you can set the `noWrap` prop to `true`.
 
-<StoryEmbed id="components-button--wrapping-text"/>
+```tsx
+<IressText style={{ width: 250 }}>
+  <p>
+    <IressButton>
+      Button with lots of text content that will wrap (default behaviour)
+    </IressButton>
+  </p>
+  <p>
+    <IressButton style={{ minWidth: 300 }}>
+      Button with lots of text content and a minimum width set via CSS
+    </IressButton>
+  </p>
+  <p>
+    <IressButton noWrap>
+      Button with lots of text content with the noWrap prop set to true
+    </IressButton>
+  </p>
+</IressText>;
+```
 
 #### Prepend & Append
 
@@ -168,19 +337,81 @@ Use the `prepend` and `append` props to correctly position icons or badges insid
 
 > **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
-<StoryEmbed id="components-button--slots"/>
+```tsx
+import {
+  IressButton,
+  IressIcon,
+  IressInline,
+  IressPill,
+  IressStack,
+} from '@iress-oss/ids-components';
+
+export function ButtonSlots() {
+  return (
+    <IressStack gap="md">
+      <IressInline gap="md">
+        <IressButton prepend={<IressIcon name="home" />}>
+          Prepend icon
+        </IressButton>
+      </IressInline>
+
+      <IressInline gap="md">
+        <IressButton append={<IressIcon name="home" />}>
+          Append icon
+        </IressButton>
+        <IressButton append={<IressPill>+999</IressPill>}>
+          Append pill
+        </IressButton>
+      </IressInline>
+
+      <IressInline gap="md">
+        <IressButton icon="home">Home</IressButton>
+      </IressInline>
+    </IressStack>
+  );
+}
+```
 
 #### Download button
 
 When a `href` is provided, the `download` prop can be used to indicate that the link should download a file instead of navigating to it.
 
-<StoryEmbed id="components-button--download-button"/>
+```tsx
+<IressButton
+  href="assets/iress-logo.png"
+  download
+  prepend={<IressIcon name="download" />}
+/>;
+```
 
 #### Element
 
 You can use the `element` prop to render a custom component as the button. This is useful for rendering a component from a third-party library, such as `react-router-dom`.
 
-<StoryEmbed id="components-button--element"/>
+```tsx
+import { IressButton } from '@iress-oss/ids-components';
+import { type HTMLAttributes, forwardRef } from 'react';
+
+/**
+ * This could be the `Link` component from `react-router-dom` or any other routing library.
+ */
+const Link = forwardRef<
+  HTMLAnchorElement,
+  HTMLAttributes<HTMLSpanElement> & { to: string }
+>(({ children, className, to, ...restProps }, ref) => (
+  <div className={className}>
+    <span onClick={() => console.log(to)} ref={ref} {...restProps}>
+      {children}
+    </span>
+  </div>
+));
+
+export const RoutingButton = () => (
+  <IressButton element={Link} to="https://iress.com">
+    Iress
+  </IressButton>
+);
+```
 
 ### Close button
 
@@ -188,7 +419,9 @@ You can use the `element` prop to render a custom component as the button. This 
 
 It has one additional prop, `screenReaderText`, which is used to provide a screen reader only label for the close button.
 
-<StoryEmbed id="components-button-closebutton--close-button"/>
+```tsx
+<IressCloseButton />;
+```
 
 ### Testing
 
@@ -211,7 +444,7 @@ const link = screen.getByRole('link', { name: 'Go to dashboard' });
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the button | — | `button` |
+| main | The root element of the button | `getByRole('button', { name: '...' })` | `button` |
 
 ---
 

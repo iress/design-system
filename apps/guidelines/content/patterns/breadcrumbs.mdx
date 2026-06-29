@@ -49,7 +49,9 @@ Breadcrumbs are a secondary navigation aid that helps users understand their cur
 ```tsx
 import { IressBreadcrumbs } from '@iress-oss/ids-components';
 
-<IressBreadcrumbs />
+<IressBreadcrumbs
+  items={[{ label: 'Home', href: '/' }, { label: 'Current Page' }]}
+/>
 ```
 
 <IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-breadcrumbs--docs#api-props">View all props</IressButton>

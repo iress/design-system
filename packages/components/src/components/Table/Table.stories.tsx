@@ -140,9 +140,28 @@ export const ServerSideFiltering: Story = {
 };
 
 export const Width: Story = {
-  ...AutomaticColumns,
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     columns: [
       {
         key: 'investment_name',
@@ -161,9 +180,28 @@ export const Width: Story = {
 };
 
 export const Alignment: Story = {
-  ...AutomaticColumns,
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     columns: [
       {
         key: 'investment_name',
@@ -194,7 +232,27 @@ export const Alignment: Story = {
 
 export const Dividers: Story = {
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     columns: [
       {
         key: 'investment_name',
@@ -222,21 +280,81 @@ export const Dividers: Story = {
 
 export const HighlightOnHover: Story = {
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     hover: true,
   },
 };
 
 export const Alternate: Story = {
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     alternate: true,
   },
 };
 
 export const RemoveRowBorders: Story = {
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     alternate: true,
     removeRowBorders: true,
   },
@@ -244,14 +362,54 @@ export const RemoveRowBorders: Story = {
 
 export const Scope: Story = {
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     scope: 'col',
   },
 };
 
 export const HiddenHeader: Story = {
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     hiddenHeader: true,
   },
 };
@@ -352,7 +510,27 @@ export const Static: Story = {
 
 export const RowProps: Story = {
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     rowProps: (row: Row<{ cost?: number }>) => ({
       bg:
         row.original.cost && row.original.cost > 30000

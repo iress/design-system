@@ -242,5 +242,113 @@
   {
     "slug": "side-nav",
     "type": "patterns"
+  },
+  {
+    "slug": "accessibility",
+    "type": "foundations"
+  },
+  {
+    "slug": "iconography",
+    "type": "foundations"
+  },
+  {
+    "slug": "overview",
+    "type": "foundations"
+  },
+  {
+    "slug": "principles",
+    "type": "foundations"
+  },
+  {
+    "slug": "responsive-layout",
+    "type": "foundations"
+  },
+  {
+    "slug": "user-experience",
+    "type": "foundations"
+  },
+  {
+    "slug": "using-components-consistently",
+    "type": "foundations"
+  },
+  {
+    "slug": "visual-design-standards",
+    "type": "foundations"
+  },
+  {
+    "slug": "z-index-stacking",
+    "type": "foundations"
+  },
+  {
+    "slug": "ai",
+    "type": "get-started"
+  },
+  {
+    "slug": "common-mistakes",
+    "type": "get-started"
+  },
+  {
+    "slug": "content-security-policy",
+    "type": "get-started"
+  },
+  {
+    "slug": "design",
+    "type": "get-started"
+  },
+  {
+    "slug": "develop",
+    "type": "get-started"
+  },
+  {
+    "slug": "faq",
+    "type": "get-started"
+  },
+  {
+    "slug": "versions",
+    "type": "get-started"
+  },
+  {
+    "slug": "from-oui-to-v6",
+    "type": "migration"
+  },
+  {
+    "slug": "from-v5-to-v6",
+    "type": "migration"
+  },
+  {
+    "slug": "migration-from-v4-to-v5",
+    "type": "migration"
+  },
+  {
+    "slug": "accessibility",
+    "type": "styling-props"
+  },
+  {
+    "slug": "colour",
+    "type": "styling-props"
+  },
+  {
+    "slug": "layout",
+    "type": "styling-props"
+  },
+  {
+    "slug": "overview",
+    "type": "styling-props"
+  },
+  {
+    "slug": "radius",
+    "type": "styling-props"
+  },
+  {
+    "slug": "sizing",
+    "type": "styling-props"
+  },
+  {
+    "slug": "spacing",
+    "type": "styling-props"
+  },
+  {
+    "slug": "typography",
+    "type": "styling-props"
   }
 ]

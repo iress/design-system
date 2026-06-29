@@ -6,7 +6,15 @@ These are all styling props related to modifying layout.
 
 The `alignSelf` prop allows you to override the alignItems value set by a parent flex container for individual components. This is useful when you want to adjust the alignment of a single item without affecting the entire container.
 
-<StoryEmbed id="styling-props-layout--align-self" />
+```tsx
+<IressStack gap="md" horizontalAlign="center">
+  <IressPanel bg="alt">First panel (no alignSelf)</IressPanel>
+  <IressPanel bg="colour.primary.surface" alignSelf={alignSelf}>
+    Panel with alignSelf prop
+  </IressPanel>
+  <IressPanel bg="alt">Third panel (no alignSelf)</IressPanel>
+</IressStack>;
+```
 
 ## `flex="1"`
 
@@ -14,15 +22,25 @@ The `flex="1"` prop is used to make a component grow and fill available space in
 
 Note: We only allow `1` as a value to maintain design consistency.
 
-<StoryEmbed id="styling-props-layout--flex-1" />
+```tsx
+<IressStack gap="md" horizontalAlign="center" style={{ height: 400 }}>
+      <IressPanel bg="alt">First panel (no flex)</IressPanel>
+      <IressPanel bg="alt" flex="1">
+        {children ?? (
+          <></>
+```
 
 ## `hideFrom` and `hideBelow`
 
 The `hideFrom` and `hideBelow` props allow you to hide content from both visual users and screen readers at different breakpoints. This is useful when certain content is not relevant on smaller screens, and you want to ensure that screen reader users have the same experience as visual users.
 
-<StoryEmbed id="styling-props-layout--hide-from" />
+```tsx
+<IressPanel hideFrom="lg">Only on mobile screens</IressPanel>;
+```
 
-<StoryEmbed id="styling-props-layout--hide-below" />
+```tsx
+<IressPanel hideBelow="lg">Only on large screens</IressPanel>;
+```
 
 ## `scrollable`
 
@@ -33,13 +51,61 @@ design system.
 
 You can set the value to `true` to enable scrolling on both axes, or specify `'x'` or `'y'` to restrict scrolling to a single axis.
 
-<StoryEmbed id="styling-props-layout--scrollable" />
+```tsx
+<IressCard px="sm">
+  <IressPanel scrollable="y" style={{ height: '200px' }} noBorder>
+    <h1>History of Iress</h1>
+
+    <p>
+      <strong>Iress Limited</strong> (originally “Iress Market Technology”) is
+      an Australian-based software company that provides technology solutions to
+      the financial services industry. Its clients span sectors including wealth
+      management, financial advice, trading, investment management, mortgages,
+      and superannuation.
+    </p>
+
+    <section>
+      <h2>Early Years (1993 – 2000)</h2>
+      <p>
+        Iress was founded in <strong>1993</strong> in Melbourne, Australia. The
+        company's initial product offerings focused on market data and trading
+        software for financial institutions and professionals needing live
+        pricing and analytics tools.
+      </p>
+      <p>
+        In <strong>2000</strong>, Iress listed on the{' '}
+        <strong>Australian Stock Exchange (ASX)</strong> under the ticker{' '}
+        <strong>IRE</strong>, signaling its growth beyond market data services.
+      </p>
+    </section>
+  </IressPanel>
+</IressCard>;
+```
 
 ## `stretch`
 
 The `stretch` prop is used to stretch a component to fill the available space. It is used in components such as `IressPanel` to ensure each column in a layout takes up the same amount of space.
 
-<StoryEmbed id="styling-props-layout--stretch" />
+```tsx
+<IressContainer bg="alt" py="xl" px="xl" borderRadius="none" fluid>
+  <IressRow gutter="xl" verticalAlign="stretch">
+    <IressCol>
+      <IressPanel stretch stretch>
+        Panel is set to stretch, so it will fill the available space.
+      </IressPanel>
+    </IressCol>
+    <IressCol>
+      <IressPanel>
+        <h1>Taller content</h1>
+        <p>
+          This panel has more content, making the row taller. The stretched
+          panel on the left will grow to match this height.
+        </p>
+      </IressPanel>
+    </IressCol>
+  </IressRow>
+</IressContainer>;
+```
 
 ---
 

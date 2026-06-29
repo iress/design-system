@@ -227,7 +227,7 @@ Icons are loaded lazily from the material-symbols library for optimal performanc
 
 export const ScreenReaderText: Story = {
   args: {
-    ...Default.args,
+    name: 'home',
     screenreaderText: 'Home',
   },
 };

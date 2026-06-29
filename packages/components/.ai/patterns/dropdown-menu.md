@@ -15,7 +15,17 @@ import { IressDropdownMenu } from '@iress-oss/ids-components';
 
 A component designed to filter a section based on a list of options and quickly navigate to relevant content.
 
-<StoryEmbed id="patterns-dropdownmenu--default"/>
+```tsx
+<IressDropdownMenu
+  label="Select an option"
+  options={[
+    { label: 'Option 1', value: 'option-1' },
+    { label: 'Option 2', value: 'option-2' },
+    { label: 'Option 3', value: 'option-3' },
+  ]}
+  container={document.body}
+/>;
+```
 
 ## Design
 
@@ -56,7 +66,14 @@ This component is **not** designed to be used within forms and should be used to
 ```tsx
 import { IressDropdownMenu } from '@iress-oss/ids-components';
 
-<IressDropdownMenu label="Select an option" />
+<IressDropdownMenu
+  label="Select an option"
+  options={[
+    { label: 'Option 1', value: 'option-1' },
+    { label: 'Option 2', value: 'option-2' },
+    { label: 'Option 3', value: 'option-3' },
+  ]}
+/>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-dropdown-menu--docs#api-props)
@@ -67,7 +84,175 @@ The `IressDropdownMenu` component is a fully controlled component. It is designe
 
 Here is an example using multiple `IressDropdownMenu`s to filter an `IressTable`.
 
-<StoryEmbed id="patterns-dropdownmenu--search-table"/>
+```tsx
+import {
+  IressInline,
+  IressStack,
+  IressTable,
+  type LabelValueMeta,
+  IressButton,
+  IressDivider,
+  IressDropdownMenu,
+} from '@iress-oss/ids-components';
+import { useMemo, useState } from 'react';
+
+interface StarWarsCharacter {
+  name: string;
+  gender: string;
+}
+
+interface StarWarsCharacterApi {
+  results: StarWarsCharacter[];
+}
+
+const USERS = [
+  {
+    user: 'farmboy',
+    name: 'Luke Skywalker',
+    location: 'Temple Island',
+    gender: 'male',
+    status: 'Inactive',
+  },
+  {
+    user: 'nevertellmetheodds',
+    name: 'Han Solo',
+    location: 'unknown',
+    gender: 'male',
+    status: 'Inactive',
+  },
+  {
+    user: 'goldenrod',
+    name: 'C-3PO',
+    location: 'Space',
+    gender: 'n/a',
+    status: 'Active',
+  },
+  {
+    user: 'whistles',
+    name: 'R2-D2',
+    location: 'Space',
+    gender: 'n/a',
+    status: 'Active',
+  },
+  {
+    user: 'princess',
+    name: 'Leia Organa',
+    location: 'unknown',
+    gender: 'female',
+    status: 'Inactive',
+  },
+];
+
+const getUniqueValues = (key: string): LabelValueMeta[] => {
+  const unique: string[] = [];
+
+  USERS.forEach((user) => {
+    const propVal = user[key as never];
+    if (!unique.includes(propVal)) unique.push(propVal);
+  });
+
+  return unique.map((item: string) => ({
+    label: item,
+    value: item,
+  }));
+};
+
+async function searchStarWarsCharacters(query: string) {
+  const data = await fetch(
+    `https://swapi.py4e.com/api/people/?search=${query}`,
+  ).then((response) => response.json() as Promise<StarWarsCharacterApi>);
+
+  return data.results.map((character: StarWarsCharacter) => ({
+    label: character.name,
+    value: character.name,
+    meta: character.gender,
+  }));
+}
+
+export const TableWithFilters = () => {
+  const [name, setName] = useState<LabelValueMeta | undefined>();
+  const [status, setStatus] = useState<LabelValueMeta | undefined>();
+  const [location, setLocation] = useState<LabelValueMeta | undefined>();
+  const [gender, setGender] = useState<LabelValueMeta | undefined>();
+
+  const columns = [
+    { key: 'user', label: 'User' },
+    { key: 'name', label: 'Name' },
+    { key: 'status', label: 'Status' },
+    { key: 'location', label: 'Location' },
+    { key: 'gender', label: 'Gender' },
+  ];
+
+  const rows = useMemo(() => {
+    const match = (filterItem?: LabelValueMeta, detail?: string): boolean => {
+      if (!filterItem?.value) return true;
+
+      return (filterItem?.value ?? filterItem?.label) == detail;
+    };
+
+    return USERS.filter(
+      (user) =>
+        match(name, user.name) &&
+        match(status, user.status) &&
+        match(location, user.location) &&
+        match(gender, user.gender),
+    );
+  }, [name, status, location, gender]);
+
+  const handleReset = () => {
+    setName(undefined);
+    setStatus(undefined);
+    setLocation(undefined);
+    setGender(undefined);
+  };
+
+  return (
+    <IressStack gap="md">
+      <IressInline gap="md">
+        <IressDropdownMenu
+          label="Name"
+          options={searchStarWarsCharacters}
+          selected={name}
+          onChange={setName}
+          onReset={() => setName(undefined)}
+          visibleResetButton
+        />
+        <IressDropdownMenu
+          label="Status"
+          options={getUniqueValues('status')}
+          selected={status}
+          onChange={setStatus}
+          onReset={() => setStatus(undefined)}
+        />
+        <IressDropdownMenu
+          label="Location"
+          options={getUniqueValues('location')}
+          selected={location}
+          onChange={setLocation}
+          onReset={() => setLocation(undefined)}
+        />
+        <IressDropdownMenu
+          label="Gender"
+          options={getUniqueValues('gender')}
+          selected={gender}
+          onChange={setGender}
+          onReset={() => setGender(undefined)}
+        />
+        <IressButton onClick={handleReset} mode="quaternary">
+          Reset filters
+        </IressButton>
+      </IressInline>
+      <IressDivider />
+      <IressTable
+        caption="System users"
+        columns={columns}
+        rows={rows}
+        empty={'No results found'}
+      />
+    </IressStack>
+  );
+};
+```
 
 #### Controlled
 
@@ -75,13 +260,79 @@ The `value` prop can be used to completely control the state of the component. U
 
 **Note:** The `value` prop is not checked against the options provided, allowing it to work with asynchronous options.
 
-<StoryEmbed id="patterns-dropdownmenu--controlled"/>
+```tsx
+import {
+  IressDropdownMenu,
+  type IressDropdownMenuProps,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+const ALL_OPTIONS = [
+  {
+    label: 'This financial year',
+    value: 'this_financial_year',
+  },
+  {
+    label: 'Last financial year',
+    value: 'last_financial_year',
+  },
+];
+
+export const ControlledDropdownMenu = () => {
+  const [selected, setSelected] =
+    useState<IressDropdownMenuProps<false>['selected']>();
+
+  return (
+    <IressDropdownMenu
+      container={document.body}
+      label="Portfolio performance"
+      options={ALL_OPTIONS}
+      onChange={(newValue) => setSelected(newValue)}
+      onReset={() => setSelected(ALL_OPTIONS[0])}
+      selected={selected}
+    />
+  );
+};
+```
 
 #### Multiple selection
 
 Using the `multiSelect` prop, the `IressDropdownMenu` will allow the user to make multiple selections.
 
-<StoryEmbed id="patterns-dropdownmenu--multi-select"/>
+```tsx
+import {
+  IressDropdownMenu,
+  type IressDropdownMenuProps,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+const ALL_OPTIONS = [
+  {
+    label: 'Awesome',
+  },
+  {
+    label: 'Great',
+  },
+];
+
+export const ControlledDropdownMenuMultiselect = () => {
+  const [selected, setSelected] = useState<
+    IressDropdownMenuProps<true>['selected']
+  >([ALL_OPTIONS[0]]);
+
+  return (
+    <IressDropdownMenu
+      label="Descriptors"
+      options={ALL_OPTIONS}
+      multiSelect
+      onChange={(newValue) => setSelected(newValue)}
+      onReset={() => setSelected([ALL_OPTIONS[0]])}
+      selected={selected}
+      container={document.body}
+    />
+  );
+};
+```
 
 #### Providing options
 
@@ -89,7 +340,17 @@ Using the `multiSelect` prop, the `IressDropdownMenu` will allow the user to mak
 
 The `options` prop is required for the select dropdown. You can provide an array of `LabelValueMeta[]` objects to the `options` prop. Filtering is done based on the `label` property. Unique selected value(s) will be determined by the `value` property, falling back to `label` if `value` is not provided.
 
-<StoryEmbed id="patterns-dropdownmenu--default"/>
+```tsx
+<IressDropdownMenu
+  label="Select an option"
+  options={[
+    { label: 'Option 1', value: 'option-1' },
+    { label: 'Option 2', value: 'option-2' },
+    { label: 'Option 3', value: 'option-3' },
+  ]}
+  container={document.body}
+/>;
+```
 
 ##### Asynchronous `options`
 
@@ -97,7 +358,38 @@ If you would like to render suggestions from the server, you can pass a function
 
 **Note:** Asynchronous `options` will automatically set the `searchable` prop to true.
 
-<StoryEmbed id="patterns-dropdownmenu--async-options"/>
+```tsx
+import { IressDropdownMenu } from '@iress-oss/ids-components';
+
+interface StarWarsCharacter {
+  name: string;
+  gender: string;
+}
+
+interface StarWarsCharacterApi {
+  results: StarWarsCharacter[];
+}
+
+export const ControlledDropdownMenuAsync = () => (
+  <IressDropdownMenu
+    label="Character"
+    options={async (query: string) => {
+      if (!query) return [];
+
+      const data = await fetch(
+        `https://swapi.py4e.com/api/people/?search=${query}`,
+      ).then((response) => response.json() as Promise<StarWarsCharacterApi>);
+
+      return data.results.map((character: StarWarsCharacter) => ({
+        label: character.name,
+        value: character.name,
+        meta: character.gender,
+      }));
+    }}
+    container={document.body}
+  />
+);
+```
 
 ##### `initialOptions`
 
@@ -105,7 +397,23 @@ If you want to provide initial options to the user, you can use the `initialOpti
 
 **Note:** `initialOptions` only works if `searchable` is true.
 
-<StoryEmbed id="patterns-dropdownmenu--initial-options"/>
+```tsx
+<IressDropdownMenu
+  label="Select an option"
+  options={[
+    { label: 'Option 1', value: 'option-1' },
+    { label: 'Option 2', value: 'option-2' },
+    { label: 'Option 3', value: 'option-3' },
+  ]}
+  container={document.body}
+  initialOptions={[
+    { label: 'Favourite option 1', value: 'fav-1' },
+    { label: 'Favourite option 2', value: 'fav-2' },
+    { label: 'Favourite option 3', value: 'fav-3' },
+  ]}
+  searchable
+/>;
+```
 
 #### Complex options
 
@@ -117,7 +425,75 @@ The options prop also accepts further properties for each option. This is useful
 
 All `IressDropdownMenu`s accept meta as an attribute in the option array.
 
-<StoryEmbed id="patterns-dropdownmenu--complex-options"/>
+```tsx
+<IressDropdownMenu
+  label="Contact"
+  options={[
+    {
+      value: 'opt1',
+      label: 'John Smith',
+      meta: [
+        <IressText key="opt1-type" color="colour.neutral.70" element="small">
+          Individual
+        </IressText>,
+        <IressText key="opt1-email" color="colour.neutral.70" element="small">
+          test@iress.com
+        </IressText>,
+      ],
+    },
+    {
+      value: 'opt2',
+      label: 'Tom Wilson',
+      meta: [
+        <IressText key="opt2-type" color="colour.neutral.70" element="small">
+          Individual
+        </IressText>,
+      ],
+    },
+    {
+      value: 'opt3',
+      label: 'Alice Kay',
+      meta: [
+        <IressText key="opt3-type" color="colour.neutral.70" element="small">
+          Individual
+        </IressText>,
+      ],
+      append: <IressPill mode="70">Active</IressPill>,
+    },
+    {
+      value: 'opt4',
+      label: 'John Smith',
+      meta: [
+        <IressText key="opt4-type" color="colour.neutral.70" element="small">
+          Business
+        </IressText>,
+        <IressText key="opt4-phone" color="colour.neutral.70" element="small">
+          0432325675
+        </IressText>,
+      ],
+    },
+    {
+      value: 'opt5',
+      label: 'Eelin Team',
+      meta: [
+        <IressText key="opt5-contact" color="colour.neutral.70" element="small">
+          test2@iress.com, 0432325675
+        </IressText>,
+      ],
+    },
+    {
+      value: 'opt6',
+      label: 'Eelin Team',
+      meta: [
+        <IressText key="opt6-contact" color="colour.neutral.70" element="small">
+          test3@iress.com, 0439873244
+        </IressText>,
+      ],
+    },
+  ]}
+  container={document.body}
+/>;
+```
 
 #### Input props
 
@@ -125,7 +501,21 @@ You can customise some settings of the query input by setting the `inputProps`.
 
 It does have some defaults to help with user experience. `prepend` automatically has a search icon, and `clearable` is set to true by default.
 
-<StoryEmbed id="patterns-dropdownmenu--input-props"/>
+```tsx
+<IressDropdownMenu
+  label="Select an option"
+  options={[
+    { label: 'Option 1', value: 'option-1' },
+    { label: 'Option 2', value: 'option-2' },
+    { label: 'Option 3', value: 'option-3' },
+  ]}
+  container={document.body}
+  inputProps={{
+    placeholder: 'Search some stuff...',
+  }}
+  searchable
+/>;
+```
 
 #### Searchable
 
@@ -133,7 +523,18 @@ When an `IressDropdownMenu` has 10 or more options, it is recommended that you e
 
 **Note:** When using asynchronous options, the `searchable` prop is automatically set to true.
 
-<StoryEmbed id="patterns-dropdownmenu--searchable"/>
+```tsx
+<IressDropdownMenu
+  label="Select an option"
+  options={[
+    { label: 'Option 1', value: 'option-1' },
+    { label: 'Option 2', value: 'option-2' },
+    { label: 'Option 3', value: 'option-3' },
+  ]}
+  container={document.body}
+  searchable
+/>;
+```
 
 #### Reset filters
 
@@ -141,13 +542,43 @@ Adding the `visibleResetButton` prop adds a way for the user a way to easily res
 
 Below are examples of both single selects and multi selects with `visibleResetButton` enabled.
 
-<StoryEmbed id="patterns-dropdownmenu--reset-filters"/>
+```tsx
+<IressDropdownMenu
+  label="Select an option"
+  options={[
+    { label: 'Option 1', value: 'option-1' },
+    { label: 'Option 2', value: 'option-2' },
+    { label: 'Option 3', value: 'option-3' },
+  ]}
+  container={document.body}
+  visibleResetButton
+/>;
+```
 
 #### No results
 
 If you would like to show a message when there are no results, you can use the `searchNoResultsText` prop. It accepts any React node.
 
-<StoryEmbed id="patterns-dropdownmenu--no-results-text"/>
+```tsx
+<IressDropdownMenu
+  label="Select an option"
+  options={[
+    { label: 'Option 1', value: 'option-1' },
+    { label: 'Option 2', value: 'option-2' },
+    { label: 'Option 3', value: 'option-3' },
+  ]}
+  container={document.body}
+  inputProps={{
+    placeholder: 'Type "no" to see the no results text',
+  }}
+  searchable
+  searchNoResultsText={
+    <IressAlert variant="full-width" mb="none">
+      No results found
+    </IressAlert>
+  }
+/>;
+```
 
 #### Popover props
 
@@ -155,13 +586,41 @@ Under the hood, filter uses `IressPopover` to display the filter options. You ca
 
 There are two additional props that filter accepts to customise the popover: `header` and `footer`. You can place additional content above or below the results using these props.
 
-<StoryEmbed id="patterns-dropdownmenu--popover-props"/>
+```tsx
+<IressDropdownMenu
+  label="Select an option"
+  options={[
+    { label: 'Option 1', value: 'option-1' },
+    { label: 'Option 2', value: 'option-2' },
+    { label: 'Option 3', value: 'option-3' },
+  ]}
+  container={document.body}
+  footer={
+    <>
+      <IressMenuDivider />
+      <IressSelectCreate label="Add an option" />
+    </>
+  }
+/>;
+```
 
 #### Selected options text
 
 In `multiSelect` mode, the selections options are displayed using the `selectedOptionsText` prop. You can customise this text to suit your needs. It will replace `{{numOptions}}` with the number of selected options.
 
-<StoryEmbed id="patterns-dropdownmenu--selected-options-text"/>
+```tsx
+<IressDropdownMenu
+  label="Select an option"
+  options={[
+    { label: 'Option 1', value: 'option-1' },
+    { label: 'Option 2', value: 'option-2' },
+    { label: 'Option 3', value: 'option-3' },
+  ]}
+  container={document.body}
+  multiSelect
+  selectedOptionsText=" - {{numOptions}}"
+/>;
+```
 
 ## Specifications
 

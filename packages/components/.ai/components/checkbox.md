@@ -15,7 +15,9 @@ import { IressCheckbox } from '@iress-oss/ids-components';
 
 Checkboxes are used to let a user select one or more options for a limited number of choices. Also, works as a child of IressCheckboxGroup
 
-<StoryEmbed id="components-checkbox--default"/>
+```tsx
+<IressCheckbox>A checkbox</IressCheckbox>;
+```
 
 ## Design
 
@@ -60,7 +62,7 @@ Checkboxes are used to let a user select one or more options for a limited numbe
 ```tsx
 import { IressCheckbox } from '@iress-oss/ids-components';
 
-<IressCheckbox>A checkbox</IressCheckbox>
+<IressCheckbox>A checkbox</IressCheckbox>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs#api-props)
@@ -73,31 +75,109 @@ For single checkboxes in controlled mode the `checked` prop sets the checked sta
 
 When used as part of an `IressCheckboxGroup`, the `checked` prop will be ignored. Instead, the `value` prop on the `IressCheckboxGroup` will determine the checked state of each checkbox.
 
-<StoryEmbed id="components-checkbox--controlled"/>
+```tsx
+import { IressCheckbox } from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export function CheckboxControlled() {
+  const [checked, setChecked] = useState(true);
+
+  return (
+    <IressCheckbox
+      checked={checked}
+      onChange={(_e, newChecked) => setChecked(newChecked ?? false)}
+    >
+      A controlled checkbox
+    </IressCheckbox>
+  );
+}
+```
 
 #### Default Checked
 
 For single checkboxes in uncontrolled mode the `defaultChecked` prop sets the default checked state.
 
-<StoryEmbed id="components-checkbox--default-checked"/>
+```tsx
+<IressCheckbox defaultChecked>
+  A checkbox which is initially checked
+</IressCheckbox>;
+```
 
 #### Indeterminate
 
 The `indeterminate` prop sets the checkbox appearance to an indeterminate dash until it is clicked. It has no impact on the checkbox behavior beyond this purely visual indicator.
 
-<StoryEmbed id="components-checkbox--indeterminate"/>
+```tsx
+<IressCheckbox indeterminate>
+  A checkbox which is initially in an indeterminate state
+</IressCheckbox>;
+```
 
 #### Hidden Label
 
 When using a checkbox without a visible label, you must supply a label and apply the `hiddenLabel` property to still be accessible by screen readers.
 
-<StoryEmbed id="components-checkbox--with-table-data"/>
+```tsx
+import { IressCheckbox, IressTable } from '@iress-oss/ids-components';
+
+export function CheckboxWithTable() {
+  return (
+    <IressTable
+      caption="List of investments"
+      columns={[
+        {
+          format: (value: boolean) => (
+            <IressCheckbox defaultChecked={value} hiddenLabel>
+              Toggle row
+            </IressCheckbox>
+          ),
+          key: 'select',
+          label: 'Select',
+          sort: true,
+        },
+        { key: 'name', label: 'Name' },
+        { key: 'date', label: 'Date' },
+        { key: 'cost', label: 'Cost' },
+      ]}
+      rows={[
+        {
+          select: false,
+          name: 'Artemis Fund Managers Limited',
+          date: '2019-09-23',
+          cost: 23898.12,
+        },
+        {
+          select: true,
+          name: 'CASH.CASH',
+          date: '2020-06-28',
+          cost: 49751.43,
+        },
+      ]}
+    />
+  );
+}
+```
 
 #### Read only
 
 The `readOnly` prop changes how the checkbox is rendered. It will only render if the checkbox is checked (alongside a hidden input that contains the `value` if it was set), otherwise it will not be rendered.
 
-<StoryEmbed id="components-checkbox--read-only"/>
+```tsx
+import { IressCheckbox, IressStack } from '@iress-oss/ids-components';
+
+export function CheckboxReadOnly() {
+  return (
+    <IressStack>
+      <IressCheckbox readOnly value="readOnly" defaultChecked>
+        I agree to the terms and conditions
+      </IressCheckbox>
+      <IressCheckbox readOnly value="readOnly">
+        I agree to the privacy policy
+      </IressCheckbox>
+    </IressStack>
+  );
+}
+```
 
 #### Variants
 
@@ -106,7 +186,20 @@ The checkbox component has multiple variants that can be used to change the appe
 - `card` variant is used to display the checkbox as a card, which is useful when the checkbox needs to contain more information than just a label.
 - `touch` variant is used to display the checkbox with a larger touch target, which is useful for mobile devices.
 
-<StoryEmbed id="components-checkbox--variants"/>
+```tsx
+import { IressCheckbox, IressStack } from '@iress-oss/ids-components';
+
+export function CheckboxVariants() {
+  return (
+    <IressStack gap="lg">
+      <IressCheckbox variant="card" heading="Widget">
+        A description of the widget
+      </IressCheckbox>
+      <IressCheckbox variant="touch">Touch variant</IressCheckbox>
+    </IressStack>
+  );
+}
+```
 
 ### Testing
 
@@ -132,7 +225,7 @@ const checkbox = screen.getByRole('checkbox', { name: 'Accept terms' });
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
 | main | The root wrapper element | — | `checkbox` |
-| input | The checkbox input element | — | `checkbox__input` |
+| input | The checkbox input element | `getByRole('checkbox', { name: '...' })` | `checkbox__input` |
 | checkboxMark | The visual checkbox indicator | — | `checkbox__checkboxMark` |
 
 ---

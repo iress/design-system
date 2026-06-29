@@ -28,16 +28,15 @@ export default {
 export const Default: Story = {
   args: {
     children: 'Toggle',
-    defaultChecked: false,
-    hiddenLabel: false,
     layout: 'inline',
   },
 };
 
 export const HiddenLabel: Story = {
   args: {
-    ...Default.args,
+    children: 'Toggle',
     hiddenLabel: true,
+    layout: 'inline',
   },
 };
 

@@ -15,7 +15,19 @@ import { IressRow } from '@iress-oss/ids-components';
 
 Used in conjunction with the IressCol component to lay out page content.
 
-<StoryEmbed id="components-row--default"/>
+```tsx
+<IressRow gutter="spacing.7" horizontalAlign="left" verticalAlign="top">
+  <IressCol span={4}>
+    <IressPlaceholder>Column 1</IressPlaceholder>
+  </IressCol>
+  <IressCol span={4}>
+    <IressPlaceholder>Column 2</IressPlaceholder>
+  </IressCol>
+  <IressCol span={4}>
+    <IressPlaceholder>Column 3</IressPlaceholder>
+  </IressCol>
+</IressRow>;
+```
 
 ## Design
 
@@ -45,7 +57,7 @@ import { IressRow, IressCol } from '@iress-oss/ids-components';
 <IressRow>
   <IressCol span="6">Left</IressCol>
   <IressCol span="6">Right</IressCol>
-</IressRow>
+</IressRow>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-row--docs#api-props)
@@ -62,25 +74,299 @@ The spacing between columns is controlled by the `gutter` prop. To change the sp
 
 Note: The `gutter` prop only works with `IressCol` components. If you are using other components, please use the `IressInline` component instead.
 
-<StoryEmbed id="components-row--gutter"/>
+```tsx
+<IressStack maxWidth="container.xl" gap="xl">
+  <IressText element="h3">spacing.2</IressText>
+  <IressRow gutter="spacing.2">
+    <IressCol span={6}>
+      <IressPlaceholder>
+        <IressText noGutter textAlign="center" className="iress-p--md">
+          1 of 4<br />
+          <small>Slightly taller</small>
+        </IressText>
+      </IressPlaceholder>
+    </IressCol>
+    <IressCol span={6}>
+      <IressPlaceholder>
+        <IressText noGutter>2 of 4</IressText>
+      </IressPlaceholder>
+    </IressCol>
+    <IressCol span={6}>
+      <IressPlaceholder>
+        <IressText noGutter>3 of 4</IressText>
+      </IressPlaceholder>
+    </IressCol>
+    <IressCol span={6}>
+      <IressPlaceholder>
+        <IressText noGutter>4 of 4</IressText>
+      </IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressDivider mb="xl" />
+  <IressText element="h3">spacing.4</IressText>
+  <IressRow gutter="spacing.4">
+    <IressCol span={6}>
+      <IressPlaceholder>
+        <IressText noGutter textAlign="center" className="iress-p--md">
+          1 of 4<br />
+          <small>Slightly taller</small>
+        </IressText>
+      </IressPlaceholder>
+    </IressCol>
+    <IressCol span={6}>
+      <IressPlaceholder>
+        <IressText noGutter>2 of 4</IressText>
+      </IressPlaceholder>
+    </IressCol>
+    <IressCol span={6}>
+      <IressPlaceholder>
+        <IressText noGutter>3 of 4</IressText>
+      </IressPlaceholder>
+    </IressCol>
+    <IressCol span={6}>
+      <IressPlaceholder>
+        <IressText noGutter>4 of 4</IressText>
+      </IressPlaceholder>
+    </IressCol>
+  </IressRow>
+  <IressDivider mb="xl" />
+  <IressText element="h3">spacing.7</IressText>
+  <IressRow gutter="spacing.7">
+    <IressCol span={6}>
+      <IressPlaceholder>
+        <IressText noGutter textAlign="center" className="iress-p--md">
+          1 of 4<br />
+          <small>Slightly taller</small>
+        </IressText>
+      </IressPlaceholder>
+    </IressCol>
+    <IressCol span={6}>
+      <IressPlaceholder>
+        <IressText noGutter>2 of 4</IressText>
+      </IressPlaceholder>
+    </IressCol>
+    <IressCol span={6}>
+      <IressPlaceholder>
+        <IressText noGutter>3 of 4</IressText>
+      </IressPlaceholder>
+    </IressCol>
+    <IressCol span={6}>
+      <IressPlaceholder>
+        <IressText noGutter>4 of 4</IressText>
+      </IressPlaceholder>
+    </IressCol>
+  </IressRow>
+</IressStack>;
+```
 
 #### Responsive Gutter
 
 The `gutter` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
 
-<StoryEmbed id="components-row--responsive-gutter"/>
+```tsx
+<IressContainer>
+  <IressRow
+    gutter={{
+      xs: 'spacing.1',
+      sm: 'spacing.2',
+      md: 'spacing.4',
+      lg: 'spacing.7',
+      xl: 'spacing.10',
+      xxl: 'spacing.1',
+    }}
+  >
+    <IressCol span={6}>
+      <IressPlaceholder>
+        <IressText noGutter textAlign="center" className="iress-p--md">
+          1 of 4<br />
+          <small>Slightly taller</small>
+        </IressText>
+      </IressPlaceholder>
+    </IressCol>
+    <IressCol span={6}>
+      <IressPlaceholder>
+        <IressText noGutter>2 of 4</IressText>
+      </IressPlaceholder>
+    </IressCol>
+    <IressCol span={6}>
+      <IressPlaceholder>
+        <IressText noGutter>3 of 4</IressText>
+      </IressPlaceholder>
+    </IressCol>
+    <IressCol span={6}>
+      <IressPlaceholder>
+        <IressText noGutter>4 of 4</IressText>
+      </IressPlaceholder>
+    </IressCol>
+  </IressRow>
+</IressContainer>;
+```
 
 #### Horizontal alignment
 
 `IressRow` can be set to align horizontally using the `horizontalAlign` prop.
 
-<StoryEmbed id="components-row--horizontal-alignment"/>
+```tsx
+<IressContainer>
+  <IressStack gap="md">
+    <IressText element="h3">left</IressText>
+    <IressRow horizontalAlign="left">
+      <IressCol span={2}>
+        <IressPlaceholder>
+          <IressText noGutter>1 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+      <IressCol span={2}>
+        <IressPlaceholder>
+          <IressText noGutter>2 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+      <IressCol span={2}>
+        <IressPlaceholder>
+          <IressText noGutter>3 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+    </IressRow>
+    <IressText element="h3">center</IressText>
+    <IressRow horizontalAlign="center">
+      <IressCol span={2}>
+        <IressPlaceholder>
+          <IressText noGutter>1 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+      <IressCol span={2}>
+        <IressPlaceholder>
+          <IressText noGutter>2 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+      <IressCol span={2}>
+        <IressPlaceholder>
+          <IressText noGutter>3 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+    </IressRow>
+    <IressText element="h3">right</IressText>
+    <IressRow horizontalAlign="right">
+      <IressCol span={2}>
+        <IressPlaceholder>
+          <IressText noGutter>1 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+      <IressCol span={2}>
+        <IressPlaceholder>
+          <IressText noGutter>2 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+      <IressCol span={2}>
+        <IressPlaceholder>
+          <IressText noGutter>3 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+    </IressRow>
+    <IressText element="h3">between</IressText>
+    <IressRow horizontalAlign="between">
+      <IressCol span={2}>
+        <IressPlaceholder>
+          <IressText noGutter>1 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+      <IressCol span={2}>
+        <IressPlaceholder>
+          <IressText noGutter>2 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+      <IressCol span={2}>
+        <IressPlaceholder>
+          <IressText noGutter>3 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+    </IressRow>
+  </IressStack>
+</IressContainer>;
+```
 
 #### Vertical alignment
 
 `IressRow` can be set to align vertically using the `verticalAlign` prop.
 
-<StoryEmbed id="components-row--vertical-alignment"/>
+```tsx
+<IressContainer>
+  <IressStack gap="md">
+    <IressText element="h3">top</IressText>
+    <IressRow style={{ height: '10rem' }} verticalAlign="top">
+      <IressCol>
+        <IressPlaceholder height="100%">
+          <IressText noGutter>1 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+      <IressCol>
+        <IressPlaceholder height="100%">
+          <IressText noGutter>2 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+      <IressCol>
+        <IressPlaceholder height="100%">
+          <IressText noGutter>3 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+    </IressRow>
+    <IressText element="h3">middle</IressText>
+    <IressRow style={{ height: '10rem' }} verticalAlign="middle">
+      <IressCol>
+        <IressPlaceholder height="100%">
+          <IressText noGutter>1 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+      <IressCol>
+        <IressPlaceholder height="100%">
+          <IressText noGutter>2 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+      <IressCol>
+        <IressPlaceholder height="100%">
+          <IressText noGutter>3 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+    </IressRow>
+    <IressText element="h3">bottom</IressText>
+    <IressRow style={{ height: '10rem' }} verticalAlign="bottom">
+      <IressCol>
+        <IressPlaceholder height="100%">
+          <IressText noGutter>1 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+      <IressCol>
+        <IressPlaceholder height="100%">
+          <IressText noGutter>2 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+      <IressCol>
+        <IressPlaceholder height="100%">
+          <IressText noGutter>3 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+    </IressRow>
+    <IressText element="h3">stretch</IressText>
+    <IressRow style={{ height: '10rem' }} verticalAlign="stretch">
+      <IressCol>
+        <IressPlaceholder height="100%">
+          <IressText noGutter>1 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+      <IressCol>
+        <IressPlaceholder height="100%">
+          <IressText noGutter>2 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+      <IressCol>
+        <IressPlaceholder height="100%">
+          <IressText noGutter>3 of 3</IressText>
+        </IressPlaceholder>
+      </IressCol>
+    </IressRow>
+  </IressStack>
+</IressContainer>;
+```
 
 ### Testing
 
@@ -110,4 +396,11 @@ const row = screen.getByTestId('my-row');
 
 A CSS grid row container. Supports `gutter`, `horizontalAlign`, and `verticalAlign` props with responsive object values.
 
-<StoryEmbed id="foundations--col-breakpoints" controls={false}/>
+| Breakpoint | Screen Widths |
+|------------|---------------|
+| `xs` | 0 - 575px |
+| `sm` | 576px - 767px |
+| `md` | 768px - 1023px |
+| `lg` | 1024px - 1279px |
+| `xl` | 1280px - 1599px |
+| `xxl` | 1600px and above |

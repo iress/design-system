@@ -80,6 +80,17 @@ export const Label: Story = {
   argTypes: {
     ...disableArgTypes(['label']),
   },
+  render: () => (
+    <IressField
+      label={
+        <>
+          <IressIcon name="home" /> Find your address
+        </>
+      }
+    >
+      <IressInput id="address" name="address" />
+    </IressField>
+  ),
 };
 
 export const Hint: Story = {
@@ -95,6 +106,11 @@ export const Hint: Story = {
       type: 'email',
     },
   },
+  render: () => (
+    <IressField label="Email address" hint="For us to be able to contact you in the future">
+      <IressInput id="email" name="email" required type="email" />
+    </IressField>
+  ),
 };
 
 export const ErrorMessage: Story = {
@@ -119,12 +135,16 @@ export const ErrorMessage: Story = {
       ],
     },
   },
+  render: () => (
+    <IressField label="Error message" errorMessages={[{ message: 'This field is required' }]}>
+      <IressInput id="name" name="name" required />
+    </IressField>
+  ),
 };
 
 export const CustomError: Story = {
   ...Default,
   args: {
-    ...Default.args,
     label: 'Custom error',
     error: (
       <IressText element="small" color="colour.system.danger.text">
@@ -142,17 +162,21 @@ export const CustomError: Story = {
 export const HiddenLabel = {
   ...Default,
   args: {
-    ...Default.args,
     label: 'This label is hidden',
     hint: 'This hint text is hidden',
     hiddenLabel: true,
+    input: {
+      id: 'name',
+      name: 'input1',
+      required: true,
+      type: 'text',
+    },
   },
 };
 
 export const HiddenLabelWithError = {
   ...Default,
   args: {
-    ...Default.args,
     label: 'This label is hidden',
     hint: 'This hint text is hidden',
     error: (
@@ -161,15 +185,26 @@ export const HiddenLabelWithError = {
       </IressText>
     ),
     hiddenLabel: true,
+    input: {
+      id: 'name',
+      name: 'input1',
+      required: true,
+      type: 'text',
+    },
   },
 };
 
 export const Required = {
   ...Default,
   args: {
-    ...Default.args,
     label: 'This field is required',
     required: true,
+    input: {
+      id: 'name',
+      name: 'input1',
+      required: true,
+      type: 'text',
+    },
   },
 };
 
@@ -229,7 +264,6 @@ export const Supplementary: Story = {
 export const Horizontal: Story = {
   ...Default,
   args: {
-    ...Default.args,
     horizontal: true,
     labelWidth: '250px',
     label: 'Email address',
@@ -249,7 +283,6 @@ export const Horizontal: Story = {
 export const HorizontalWithError: Story = {
   ...Default,
   args: {
-    ...Default.args,
     horizontal: true,
     labelWidth: '250px',
     label: 'Email address',

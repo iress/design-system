@@ -15,7 +15,13 @@ import { IressInput } from '@iress-oss/ids-components';
 
 Inputs allow a user to input and interact with data. This component should be used as a child of the IressField component to ensure the correct placement of elements like label, error & hint text.
 
-<StoryEmbed id="components-input--clearable"/>
+```tsx
+<IressInput
+  clearable
+  placeholder="Search"
+  prepend={<IressIcon name="search" />}
+/>;
+```
 
 ## Design
 
@@ -60,7 +66,7 @@ Inputs allow a user to input and interact with data. This component should be us
 ```tsx
 import { IressInput } from '@iress-oss/ids-components';
 
-<IressInput placeholder="Enter your name" />
+<IressInput placeholder="Enter your name" />;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs#api-props)
@@ -71,37 +77,114 @@ import { IressInput } from '@iress-oss/ids-components';
 
 The input component's `type` can be set to one of the following value: `text` (default), `date`, `email`, `number`, `password`, `search`, `tel`, `url`, `time`, `color` and `file`.
 
-<StoryEmbed id="components-input--types"/>
+```tsx
+import { IressInput, IressStack } from '@iress-oss/ids-components';
+
+export function InputTypes() {
+  return (
+    <IressStack gap="md">
+      <IressInput type="text" placeholder="Text input" />
+      <IressInput type="color" placeholder="Color input" />
+      <IressInput type="date" placeholder="Date input" />
+      <IressInput type="datetime-local" placeholder="Datetime-local input" />
+      <IressInput type="email" placeholder="Email input" />
+      <IressInput type="file" placeholder="File input" />
+      <IressInput type="month" placeholder="Month input" />
+      <IressInput type="number" placeholder="Number input" />
+      <IressInput type="password" placeholder="Password input" />
+      <IressInput type="search" placeholder="Search input" />
+      <IressInput type="tel" placeholder="Tel input" />
+      <IressInput type="time" placeholder="Time input" />
+      <IressInput type="url" placeholder="Url input" />
+      <IressInput type="week" placeholder="Week input" />
+    </IressStack>
+  );
+}
+```
 
 #### Input modes
 
 The `inputmode` attribute provides a hint to browsers for devices with onscreen keyboards to help them decide which keyboard to display.
 
-<StoryEmbed id="components-input--input-modes-story"/>
+```tsx
+import { IressInput, IressStack } from '@iress-oss/ids-components';
+
+export function InputModes() {
+  return (
+    <IressStack gap="md">
+      <IressInput inputMode="text" placeholder="Text mode" />
+      <IressInput inputMode="tel" placeholder="Tel mode" />
+      <IressInput inputMode="url" placeholder="Url mode" />
+      <IressInput inputMode="email" placeholder="Email mode" />
+      <IressInput inputMode="numeric" placeholder="Numeric mode" />
+      <IressInput inputMode="decimal" placeholder="Decimal mode" />
+      <IressInput inputMode="search" placeholder="Search mode" />
+    </IressStack>
+  );
+}
+```
 
 #### File uploads
 
 When using the `type="file"` attribute, the input allows users to select one or more files from their device.
 
-<StoryEmbed id="components-input--file-type"/>
+```tsx
+import { IressField, IressInput } from '@iress-oss/ids-components';
+
+export function InputFileType() {
+  return (
+    <IressField label="File upload">
+      <IressInput type="file" required />
+    </IressField>
+  );
+}
+```
 
 #### Clearable
 
 By setting the `clearable` prop to `true` a clear button will appear when the user has entered a value into the input.
 
-<StoryEmbed id="components-input--clearable"/>
+```tsx
+<IressInput
+  clearable
+  placeholder="Search"
+  prepend={<IressIcon name="search" />}
+/>;
+```
 
 #### Sizing
 
 Inputs can be resized to suit a specific number of characters. Widths can also be set as a percentage.
 
-<StoryEmbed id="components-input--sizing"/>
+```tsx
+import { IressInput, IressStack } from '@iress-oss/ids-components';
+
+export function InputSizing() {
+  return (
+    <IressStack gap="md">
+      <IressInput width="2" placeholder="2" />
+      <IressInput width="4" placeholder="4" />
+      <IressInput width="6" placeholder="6" />
+      <IressInput width="8" placeholder="8" />
+      <IressInput width="10" placeholder="10" />
+      <IressInput width="12" placeholder="12" />
+      <IressInput width="16" placeholder="16" />
+      <IressInput width="25%" placeholder="25%" />
+      <IressInput width="50%" placeholder="50%" />
+      <IressInput width="75%" placeholder="75%" />
+      <IressInput width="100%" placeholder="100%" />
+    </IressStack>
+  );
+}
+```
 
 #### Textareas
 
 Set the `rows` prop to render a `textarea` instead of an `input`.
 
-<StoryEmbed id="components-input--text-areas"/>
+```tsx
+<IressInput rows={5} />;
+```
 
 #### Prepend & Append
 
@@ -109,19 +192,59 @@ Content (typically icons) can be added via the `prepend` and `append` props on `
 
 > **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
-<StoryEmbed id="components-input--slots"/>
+```tsx
+import { IressIcon, IressInput, IressStack } from '@iress-oss/ids-components';
+
+export function InputSlots() {
+  return (
+    <IressStack gap="md">
+      <IressInput
+        prepend={<IressIcon name="search" />}
+        placeholder="Prepend slot"
+      />
+      <IressInput
+        append={<IressIcon name="search" />}
+        placeholder="Append slot"
+      />
+      <IressInput
+        prepend={<IressIcon name="search" />}
+        placeholder="Prepend slot"
+      />
+      <IressInput
+        append={<IressIcon name="search" />}
+        placeholder="Append slot"
+      />
+    </IressStack>
+  );
+}
+```
 
 #### Actions
 
 The `actions` prop allows you to add buttons to the input.
 
-<StoryEmbed id="components-input--actions"/>
+```tsx
+<IressInput
+  actions={[
+    {
+      icon: 'content_copy',
+      children: 'Copy to clipboard',
+      onClick: () => {
+        void navigator.clipboard.writeText('Copied text!');
+      },
+    },
+  ]}
+  placeholder="Input with action button"
+/>;
+```
 
 #### Read only
 
 The `readOnly` prop can be set to prevent the user from changing the value of the input.
 
-<StoryEmbed id="components-input--read-only"/>
+```tsx
+<IressInput placeholder="Enter your name" readOnly value="Value" />;
+```
 
 #### Formatter
 
@@ -132,17 +255,50 @@ The `readOnly` prop can be set to prevent the user from changing the value of th
 - When `formatter` is set, the `type` of the input is changed to `text` when not in focus.
 - The value of the native input will be the formatted value, not the raw value.
 
-<StoryEmbed id="components-input--formatter"/>
+```tsx
+<IressInput
+  placeholder="Enter a string and it will show in UPPERCASE when not focused, and show the raw value on focus"
+  formatter={(value) => (value ? value.toString().toUpperCase() : '')}
+/>;
+```
 
 ##### Currency formatting example
 
-<StoryEmbed id="components-input--currency-formatter"/>
+```tsx
+import { IressInput } from '@iress-oss/ids-components';
+
+export function InputCurrencyFormatter() {
+  const formatter = (value = '') => {
+    const numberValue = Number(value);
+
+    if (Number.isNaN(numberValue)) {
+      return value;
+    }
+
+    return new Intl.NumberFormat('en-AU', {
+      style: 'currency',
+      currency: 'AUD',
+    }).format(numberValue);
+  };
+
+  return (
+    <IressInput
+      defaultValue="0.00"
+      formatter={formatter}
+      placeholder="Enter any number and it will show in currency format when the input is not focused"
+      type="number"
+    />
+  );
+}
+```
 
 #### Auto-growing textareas
 
 For textareas (when `rows` prop is set), you can enable the `autoGrow` prop to automatically expand the textarea height as the user types more lines.
 
-<StoryEmbed id="components-input--auto-grow"/>
+```tsx
+<IressInput rows={1} autoGrow append={<IressIcon name="wand_shine" />} />;
+```
 
 #### `variant`
 
@@ -150,13 +306,41 @@ The `variant` prop allows you to apply different styles to the input.
 
 - `search`: Used for search inputs, you can use the `prepend` or `append` prop to add a search icon.
 
-<StoryEmbed id="components-input--variant"/>
+```tsx
+<IressInput
+  variant="search"
+  placeholder="Start your search..."
+  prepend={<IressIcon name="search" />}
+/>;
+```
 
 #### Percentage formatting
 
 You can use `IressInput` to display percentage formatting. When the field is focused, it can display the raw value, and when blurred, it can display the formatted percentage value.
 
-<StoryEmbed id="components-input--percentage"/>
+```tsx
+import { IressInput } from '@iress-oss/ids-components';
+
+export const InputPercentage = () => (
+  <IressInput<string | number>
+    defaultValue="0.5"
+    formatter={(value = '') => {
+      if (value === '') return '';
+
+      const numericValue = Number(value);
+
+      if (Number.isNaN(numericValue)) {
+        return String(value) ?? '';
+      }
+
+      return new Intl.NumberFormat('en-AU', {
+        style: 'percent',
+      }).format(numericValue);
+    }}
+    type="number"
+  />
+);
+```
 
 ### Testing
 
@@ -183,9 +367,9 @@ const input = screen.getByRole('spinbutton', { name: 'Quantity' });
   `<input>` with a `__input` suffix.
 
   ```tsx
-  screen.getByTestId('my-input__input');     // Single-line
-  screen.getByTestId('my-input__textarea');  // Textarea (rows > 0)
-  ```
+screen.getByTestId('my-input__input'); // Single-line
+screen.getByTestId('my-input__textarea'); // Textarea (rows > 0)
+```
 
 - **clearable inputs**: The clear button only appears when the input has a value.
 
@@ -196,7 +380,7 @@ const input = screen.getByRole('spinbutton', { name: 'Quantity' });
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the input | — | `input` |
+| main | The root element of the input | `getByRole('textbox')`, or `getByLabelText('...')` when inside a Field | `input` |
 
 ---
 

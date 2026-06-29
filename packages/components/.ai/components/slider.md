@@ -15,7 +15,9 @@ import { IressSlider } from '@iress-oss/ids-components';
 
 Sliders provide a visual indication of adjustable content, where the user can select a value from a range usually represented on a horizontal track.
 
-<StoryEmbed id="components-slider--default-value"/>
+```tsx
+<IressSlider defaultValue={3} />;
+```
 
 ## Design
 
@@ -57,7 +59,7 @@ Sliders provide a visual indication of adjustable content, where the user can se
 ```tsx
 import { IressSlider } from '@iress-oss/ids-components';
 
-<IressSlider min={0} max={100} defaultValue={50} />
+<IressSlider min={0} max={100} defaultValue={50} />;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slider--docs#api-props)
@@ -68,37 +70,128 @@ import { IressSlider } from '@iress-oss/ids-components';
 
 Set the initial value with `defaultValue`. Use `value` + `onChange` for controlled state.
 
-<StoryEmbed id="components-slider--default-value"/>
+```tsx
+<IressSlider defaultValue={3} />;
+```
 
 #### Min, max and step
 
 Configure the selectable range and increment size.
 
-<StoryEmbed id="components-slider--min-max-and-step"/>
+```tsx
+<IressSlider min={10} max={100} step={10} />;
+```
 
 #### Ticks and labels
 
 Use `tickLabels` to display value markers along the track. Pass an array of numbers, `TickLabel` objects, or `true` to auto-infer from min/max/step.
 
-<StoryEmbed id="components-slider--ticks-and-labels"/>
+```tsx
+<IressSlider
+  min={0}
+  max={200}
+  step={20}
+  tickLabels={[
+    { value: 0, label: 'Zero' },
+    { value: 20 },
+    { value: 40 },
+    { value: 60 },
+    { value: 80 },
+    { value: 100 },
+    { value: 120 },
+    { value: 140 },
+    { value: 160 },
+    { value: 180 },
+    { value: 200, label: 'All' },
+  ]}
+/>;
+```
 
 #### Flexible ticks and labels
 
 `min`, `max` and `step` are no longer automatically inferred from `tickLabels`. Use `formatValue` for custom tooltip display.
 
-<StoryEmbed id="components-slider--flexible-ticks-and-labels"/>
+```tsx
+<IressSlider
+  min={-10}
+  max={50}
+  formatValue={(value) => `${value}°C`}
+  tickLabels={[
+    {
+      value: 0,
+      label: (
+        <>
+          0°C <br />
+          Hypothermia
+        </>
+      ),
+    },
+    {
+      value: 37,
+      label: (
+        <>
+          37°C <br />
+          Normal
+        </>
+      ),
+    },
+    {
+      value: 45,
+      label: (
+        <>
+          45°C <br />
+          Wicked witch
+          <br />
+          of the west
+        </>
+      ),
+    },
+  ]}
+/>;
+```
 
 #### Hidden labels
 
 Use the `srOnly` property in `TickLabel` objects to hide labels on specific breakpoints while keeping them accessible.
 
-<StoryEmbed id="components-slider--hidden-labels"/>
+```tsx
+<IressSlider
+  min={0}
+  max={200}
+  step={20}
+  tickLabels={[
+    { value: 0, label: 'Zero' },
+    { value: 20, srOnly: { base: true, xl: false } },
+    { value: 40, srOnly: { base: true, xl: false } },
+    { value: 60, srOnly: { base: true, xl: false } },
+    { value: 80, srOnly: { base: true, xl: false } },
+    { value: 100 },
+    { value: 120, srOnly: { base: true, xl: false } },
+    { value: 140, srOnly: { base: true, xl: false } },
+    { value: 160, srOnly: { base: true, xl: false } },
+    { value: 180, srOnly: { base: true, xl: false } },
+    { value: 200, label: 'All' },
+  ]}
+/>;
+```
 
 #### Read only
 
 Use the `readOnly` prop to render the slider as read-only with a displayed value.
 
-<StoryEmbed id="components-slider--read-only"/>
+```tsx
+<IressSlider
+  min={0}
+  max={200}
+  step={20}
+  value={0}
+  readOnly
+  tickLabels={[
+    { value: 0, label: 'Zero' },
+    { value: 200, label: 'All' },
+  ]}
+/>;
+```
 
 ### Testing
 
@@ -123,7 +216,7 @@ fireEvent.change(screen.getByRole('slider'), { target: { value: '5' } });
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
 | main | The root element of the slider | — | `slider` |
-| slider | The range input element | — | `slider__slider` |
+| slider | The range input element | `getByRole('slider')` | `slider__slider` |
 | datalist | The tick marks datalist | — | `slider__datalist` |
 | option | An individual tick mark option | — | `slider__datalist__option` |
 

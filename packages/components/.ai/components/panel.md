@@ -15,7 +15,11 @@ import { IressPanel } from '@iress-oss/ids-components';
 
 A panel is used to group related content.
 
-<StoryEmbed id="components-panel--default"/>
+```tsx
+<IressPanel heading="Panel Heading">
+  <p>Content goes here.</p>
+</IressPanel>;
+```
 
 ## Design
 
@@ -41,9 +45,7 @@ A panel is used to group related content.
 ```tsx
 import { IressPanel } from '@iress-oss/ids-components';
 
-<IressPanel heading="Panel Heading">
-  Panel content
-</IressPanel>
+<IressPanel heading="Panel Heading">Panel content</IressPanel>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-panel--docs#api-props)

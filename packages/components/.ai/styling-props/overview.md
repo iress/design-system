@@ -9,7 +9,38 @@ These replace the utility classes and internal component tokens provided by prev
 
 ## Reference
 
-<StoryEmbed id="styling-props-reference--reference" controls={false} />
+| Prop | CSS Property | Token | Responsive |
+|------|-------------|-------|------------|
+| `alignSelf` | `align-self` | N/A |  |
+| `bg` | `background` | Colour |  |
+| `borderRadius` | `border-radius` | Radius |  |
+| `color` | `color` | Colour |  |
+| `flex` | `flex` | N/A |  |
+| `focusable` | `border and box-shadow` | Colour |  |
+| `hideBelow` | `display` | N/A |  |
+| `hideFrom` | `display` | N/A |  |
+| `maxWidth` | `max-width` | N/A |  |
+| `m` | `margin` | Spacing | ✓ |
+| `mx` | `margin-inline` | Spacing | ✓ |
+| `my` | `margin-block` | Spacing | ✓ |
+| `mb` | `margin-bottom` | Spacing | ✓ |
+| `ml` | `margin-left` | Spacing | ✓ |
+| `mr` | `margin-right` | Spacing | ✓ |
+| `mt` | `margin-top` | Spacing | ✓ |
+| `noGutter` | `margin-block-end` | N/A |  |
+| `p` | `padding` | Spacing | ✓ |
+| `px` | `padding-inline` | Spacing | ✓ |
+| `py` | `padding-block` | Spacing | ✓ |
+| `pb` | `padding-bottom` | Spacing | ✓ |
+| `pl` | `padding-left` | Spacing | ✓ |
+| `pr` | `padding-right` | Spacing | ✓ |
+| `pt` | `padding-top` | Spacing | ✓ |
+| `scrollable` | `Multiple properties` | N/A |  |
+| `srOnly` | `Multiple properties` | N/A | ✓ |
+| `stretch` | `align-self, height and flex` | N/A |  |
+| `textAlign` | `text-align` | N/A |  |
+| `textStyle` | `font` | Typography |  |
+| `width` | `width` | N/A | ✓ |
 
 ---
 
@@ -31,7 +62,7 @@ This will also work without JSX, allowing you to apply styling props to any elem
 ```tsx
 <div className={iressCss({ p: 'xs', bg: 'colour.primary.surface' })}>
   This div has extra small padding and a primary background colour.
-</div>
+</div>;
 ```
 
 ## `IressStyled`
@@ -41,7 +72,7 @@ The `IressStyled` component is a flexible wrapper that gives you direct access t
 ```tsx
 <IressStyled p="xs" bg="colour.primary.surface">
   This div has extra small padding and a primary background colour.
-</IressStyled>
+</IressStyled>;
 ```
 
 ## Migrating from version 5

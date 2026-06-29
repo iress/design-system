@@ -15,7 +15,11 @@ import { IressPopover } from '@iress-oss/ids-components';
 
 A popover is a panel that is toggled on/off by an activator button or text input. The panel is positioned relative to its activator element.
 
-<StoryEmbed id="components-popover--activator"/>
+```tsx
+<IressPopover activator={<IressButton>Toggle popover</IressButton>}>
+  <p>Content goes here.</p>
+</IressPopover>;
+```
 
 ## Design
 
@@ -75,7 +79,7 @@ import { IressPopover, IressButton } from '@iress-oss/ids-components';
 
 <IressPopover activator={<IressButton>Open</IressButton>}>
   Popover content
-</IressPopover>
+</IressPopover>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs#api-props)
@@ -86,37 +90,187 @@ import { IressPopover, IressButton } from '@iress-oss/ids-components';
 
 The `activator` prop is required. It is the element used to trigger the popover, and works best with an `IressButton`.
 
-<StoryEmbed id="components-popover--activator"/>
+```tsx
+<IressPopover activator={<IressButton>Toggle popover</IressButton>}>
+  <p>Content goes here.</p>
+</IressPopover>;
+```
 
 #### The `show` property
 
 Control the popover with state using `show`, `onActivated` and `onDeactivated`.
 
-<StoryEmbed id="components-popover--show-with-state"/>
+```tsx
+import { IressButton, IressPopover } from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export function PopoverUsingState() {
+  const [show, setShow] = useState(false);
+
+  return (
+    <IressPopover
+      activator={
+        <IressButton onClick={() => setShow(!show)}>
+          Show popover using state
+        </IressButton>
+      }
+      show={show}
+      onActivated={() => setShow(true)}
+      onDeactivated={() => setShow(false)}
+    >
+      A little more information about this area.
+    </IressPopover>
+  );
+}
+```
 
 #### Align
 
 The popover panel can be aligned in one of 12 positions relative to the activator. Defaults to `auto` and repositions dynamically to avoid overflow.
 
-<StoryEmbed id="components-popover--align"/>
+```tsx
+<div style={{ padding: '80px 150px' }}>
+  <IressStack gap="md">
+    <IressInline horizontalAlign="center" gap="sm">
+      <IressPopover
+        activator={
+          <IressTooltip
+            align="bottom-start"
+            tooltipText="Tooltips and popovers can go together if needed!"
+          >
+            <IressButton>top-start</IressButton>
+          </IressTooltip>
+        }
+        align="top-start"
+      />
+      <IressPopover activator={<IressButton>top</IressButton>} align="top" />
+      <IressPopover
+        activator={<IressButton>top-end</IressButton>}
+        align="top-end"
+      />
+    </IressInline>
+    <IressInline horizontalAlign="between">
+      <IressStack gap="sm">
+        <IressInline horizontalAlign="left">
+          <IressPopover
+            activator={<IressButton>left-start</IressButton>}
+            align="left-start"
+          />
+        </IressInline>
+        <IressInline horizontalAlign="left">
+          <IressPopover
+            activator={<IressButton>left</IressButton>}
+            align="left"
+          />
+        </IressInline>
+        <IressInline horizontalAlign="left">
+          <IressPopover
+            activator={<IressButton>left-end</IressButton>}
+            align="left-end"
+          />
+        </IressInline>
+      </IressStack>
+      <IressStack gap="sm">
+        <IressInline horizontalAlign="right">
+          <IressPopover
+            activator={<IressButton>right-start</IressButton>}
+            align="right-start"
+          />
+        </IressInline>
+        <IressInline horizontalAlign="right">
+          <IressPopover
+            activator={<IressButton>right</IressButton>}
+            align="right"
+          />
+        </IressInline>
+        <IressInline horizontalAlign="right">
+          <IressPopover
+            activator={<IressButton>right-end</IressButton>}
+            align="right-end"
+          />
+        </IressInline>
+      </IressStack>
+    </IressInline>
+    <IressInline horizontalAlign="center" gap="sm">
+      <IressPopover
+        activator={<IressButton>bottom-start</IressButton>}
+        align="bottom-start"
+      />
+      <IressPopover
+        activator={<IressButton>bottom</IressButton>}
+        align="bottom"
+      />
+      <IressPopover
+        activator={<IressButton>bottom-end</IressButton>}
+        align="bottom-end"
+      />
+    </IressInline>
+  </IressStack>
+</div>;
+```
 
 #### Width
 
 Set a custom width when content needs more space than the theme default.
 
-<StoryEmbed id="components-popover--width"/>
+```tsx
+<IressPopover
+  container={document.body}
+  contentStyle={{ style: { maxWidth: '30rem' } }}
+>
+  details
+</IressPopover>;
+```
 
 #### Overflow
 
 By default popovers grow in height based on content. Use `maxHeight` and `overflowY` via `contentStyle` to fix the height.
 
-<StoryEmbed id="components-popover--overflow"/>
+```tsx
+<IressInline gap="md">
+  <IressPopover
+    align="bottom-start"
+    container={document.body}
+    activator={<IressButton>Normal popover</IressButton>}
+  >
+    paragraph
+  </IressPopover>
+  <IressPopover
+    align="bottom-start"
+    container={document.body}
+    activator={<IressButton>Fixed height popover</IressButton>}
+    contentStyle={{ scrollable: 'y', style: { maxHeight: '200px' } }}
+  >
+    paragraph
+  </IressPopover>
+</IressInline>;
+```
 
 #### Container
 
 Use the `container` prop to render the popover in a different DOM node.
 
-<StoryEmbed id="components-popover--parent-container"/>
+```tsx
+import { useState } from 'react';
+import { IressButton, IressPopover } from '@iress-oss/ids-components';
+
+export const PopoverParentContainer = () => {
+  const [parentContainer, setParentContainer] = useState<HTMLDivElement | null>(
+    null,
+  );
+
+  return (
+    <div id="parent" ref={setParentContainer}>
+      <IressPopover
+        activator={<IressButton>Toggle</IressButton>}
+        container={parentContainer}
+      >
+        This content will be rendered in the parent container
+      </IressPopover>
+    </div>
+  );
+};
+```
 
 #### Using the `IressPopoverProvider`
 
@@ -124,19 +278,113 @@ Use `IressPopoverProvider` to set a shared container for all nested popovers. In
 
 > **Note:** If using `IressProvider` or `IressShadow`, the popover provider is already included.
 
-<StoryEmbed id="components-popover-provider--provider"/>
+```tsx
+import { useRef, useState } from 'react';
+import {
+  IressButton,
+  IressPopover,
+  IressPopoverProvider,
+  IressStack,
+  IressText,
+} from '@iress-oss/ids-components';
+
+export const App = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [container, setContainer] = useState<HTMLDivElement | null>(null);
+
+  return (
+    <IressStack gap="md">
+      <IressText>
+        The provider below delegates all nested popovers into the green
+        container. The second popover overrides the provider&apos;s container
+        and renders inline (no portal).
+      </IressText>
+
+      <IressPopoverProvider container={container}>
+        <IressStack gap="md">
+          <IressPopover activator={<IressButton>Uses provider</IressButton>}>
+            This popover is rendered inside the provider&apos;s container below.
+          </IressPopover>
+
+          <IressPopover
+            activator={<IressButton>Overrides provider</IressButton>}
+            container={null}
+          >
+            This popover overrides the provider and renders inline.
+          </IressPopover>
+        </IressStack>
+      </IressPopoverProvider>
+
+      <div
+        ref={(node) => {
+          containerRef.current = node;
+          setContainer(node);
+        }}
+        style={{
+          border: '2px dashed green',
+          padding: '16px',
+          minHeight: '80px',
+        }}
+      >
+        <IressText>
+          <strong>Provider container</strong> — popovers using the provider will
+          render here.
+        </IressText>
+      </div>
+    </IressStack>
+  );
+};
+```
 
 #### Input popover
 
 A popover triggered by input changes. The `minLength` prop specifies the minimum characters before the popover shows. Focus inside is **virtual** (using `aria-activedescendant`).
 
-<StoryEmbed id="components-input-popover--activator"/>
+```tsx
+<IressInputPopover activator={<IressInput />} container={document.body}>
+  basic
+</IressInputPopover>;
+```
 
 #### With menus
 
 When `IressMenu` is inside `IressPopover`, the popover auto-closes on menu item click and focus moves to the first item on open.
 
-<StoryEmbed id="components-popover--with-menu"/>
+```tsx
+import {
+  IressButton,
+  IressIcon,
+  IressMenu,
+  IressMenuItem,
+  IressPopover,
+} from '@iress-oss/ids-components';
+
+export function PopoverWithMenu() {
+  return (
+    <IressPopover
+      activator={<IressButton>Open menu</IressButton>}
+      container={document.body}
+      type="menu"
+      contentStyle={{ p: 'none' }}
+    >
+      <IressMenu role="menu">
+        <IressMenuItem value="edit" prepend={<IressIcon name="edit" />}>
+          Edit
+        </IressMenuItem>
+        <IressMenuItem
+          value="duplicate"
+          prepend={<IressIcon name="content_copy" />}
+        >
+          Duplicate
+        </IressMenuItem>
+        <IressMenuItem value="delete" prepend={<IressIcon name="delete" />}>
+          Delete
+        </IressMenuItem>
+      </IressMenu>
+    </IressPopover>
+  );
+}
+```
 
 ### Testing
 
@@ -156,7 +404,7 @@ expect(screen.getByText('Popover content')).toBeVisible();
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
 | main | The root element of the popover | — | `popover` |
-| activator | The popover trigger element | — | `popover__activator` |
+| activator | The popover trigger element | `getByRole('button')` | `popover__activator` |
 | content | The popover content panel | — | `popover__content` |
 
 ---

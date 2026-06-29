@@ -37,21 +37,22 @@ export const NoneSelected: Story = {
 
 export const OneSelected: Story = {
   args: {
-    ...NoneSelected.args,
+    placeholder: '',
     selected: MOCK_LABEL_VALUE_META[0],
   },
 };
 
 export const MultipleSelected: Story = {
   args: {
-    ...NoneSelected.args,
+    placeholder: '',
     selected: MOCK_LABEL_VALUE_META,
   },
 };
 
 export const Disabled: Story = {
   args: {
-    ...OneSelected.args,
+    placeholder: '',
+    selected: MOCK_LABEL_VALUE_META[0],
     disabled: true,
   },
 };

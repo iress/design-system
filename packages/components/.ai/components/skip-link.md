@@ -15,7 +15,36 @@ import { IressSkipLink } from '@iress-oss/ids-components';
 
 The skip link component allows keyboard users to quickly bypass the top-level navigation links and jump to the main content on a page.
 
-<StoryEmbed id="components-skiplink--skip-link"/>
+```tsx
+<IressContainer py="xl">
+  <IressSkipLink href="#main" id="skip-link" />
+  <main id="main" tabIndex={-1}>
+    <IressPanel>
+      <p>
+        This is where the main content <code>id=&quot;main&quot;</code> of the
+        application is located. It is important that whatever your skip link is
+        targeting is <strong>focusable</strong>. If its a non-interactive
+        element, this can be done by adding <code>tabindex=&quot;-1&quot;</code>{' '}
+        to the element.
+      </p>
+
+      <p>
+        The skip link is{' '}
+        <a
+          href="#skip-link"
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById('skip-link')?.focus();
+          }}
+        >
+          hidden until it is focused
+        </a>
+        .
+      </p>
+    </IressPanel>
+  </main>
+</IressContainer>;
+```
 
 ## Design
 
@@ -39,7 +68,7 @@ The skip link component allows keyboard users to quickly bypass the top-level na
 ```tsx
 import { IressSkipLink } from '@iress-oss/ids-components';
 
-<IressSkipLink href="#main" />
+<IressSkipLink href="#main" />;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skiplink--docs#api-props)
@@ -62,7 +91,7 @@ const skipLink = screen.getByRole('link', { name: 'Skip to content' });
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the skip link | — | `skip-link` |
+| main | The root element of the skip link | `getByRole('link', { name: 'Skip to content' })` | `skip-link` |
 
 ---
 

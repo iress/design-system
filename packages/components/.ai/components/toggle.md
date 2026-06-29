@@ -15,7 +15,9 @@ import { IressToggle } from '@iress-oss/ids-components';
 
 Toggles allow users to turn things on or off. When toggled, the associated change happens straight away.
 
-<StoryEmbed id="components-toggle--default"/>
+```tsx
+<IressToggle layout="inline">Toggle</IressToggle>;
+```
 
 ## Design
 
@@ -56,9 +58,7 @@ Toggles allow users to turn things on or off. When toggled, the associated chang
 ```tsx
 import { IressToggle } from '@iress-oss/ids-components';
 
-<IressToggle defaultChecked={false} hiddenLabel={false} layout="inline">
-  Toggle
-</IressToggle>
+<IressToggle>Toggle</IressToggle>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toggle--docs#api-props)
@@ -69,19 +69,38 @@ import { IressToggle } from '@iress-oss/ids-components';
 
 Toggles should always have a label, set via `children`.
 
-<StoryEmbed id="components-toggle--default"/>
+```tsx
+<IressToggle layout="inline">Toggle</IressToggle>;
+```
 
 #### Hidden labels
 
 Use `hiddenLabel` to visually hide the label while keeping it accessible to screen readers.
 
-<StoryEmbed id="components-toggle--hidden-label"/>
+```tsx
+<IressToggle hiddenLabel layout="inline">
+  Toggle
+</IressToggle>;
+```
 
 #### Checked
 
 Use `checked` for controlled state, or `defaultChecked` for uncontrolled.
 
-<StoryEmbed id="components-toggle--checked"/>
+```tsx
+import { IressToggle } from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export function ControlledToggle() {
+  const [isChecked, setIsChecked] = useState(true);
+
+  return (
+    <IressToggle checked={isChecked} onChange={() => setIsChecked(!isChecked)}>
+      Controlled Toggle
+    </IressToggle>
+  );
+}
+```
 
 #### Layout
 
@@ -92,7 +111,49 @@ The `layout` prop controls label position:
 - `inline-reverse` — label after the control
 - `stack` — label above the control
 
-<StoryEmbed id="components-toggle--layout"/>
+```tsx
+import {
+  IressPanel,
+  IressStack,
+  IressText,
+  IressToggle,
+} from '@iress-oss/ids-components';
+
+export function ToggleLayout() {
+  return (
+    <IressStack gap="lg">
+      <IressText>
+        <h3>inline</h3>
+        <IressPanel>
+          <IressToggle layout="inline">Toggle</IressToggle>
+        </IressPanel>
+      </IressText>
+      <IressText>
+        <h3>inline-between</h3>
+        <IressPanel>
+          <IressToggle layout="inline-between" defaultChecked>
+            Toggle
+          </IressToggle>
+        </IressPanel>
+      </IressText>
+      <IressText>
+        <h3>inline-reverse</h3>
+        <IressPanel>
+          <IressToggle layout="inline-reverse">Toggle</IressToggle>
+        </IressPanel>
+      </IressText>
+      <IressText>
+        <h3>stack</h3>
+        <IressPanel>
+          <IressToggle layout="stack" defaultChecked>
+            Toggle
+          </IressToggle>
+        </IressPanel>
+      </IressText>
+    </IressStack>
+  );
+}
+```
 
 ### Testing
 
@@ -111,8 +172,8 @@ expect(toggle).toBeChecked();
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the toggle | — | `toggle` |
-| label | The toggle label element | — | `toggle__label` |
+| main | The root element of the toggle | `getByRole('switch', { name: '...' })` | `toggle` |
+| label | The toggle label element | `getByText('...')` | `toggle__label` |
 | button | The toggle switch button | — | `toggle__button__button` |
 
 ---

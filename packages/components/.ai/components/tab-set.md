@@ -15,7 +15,12 @@ import { IressTabSet } from '@iress-oss/ids-components';
 
 Tabs are used to display modular pieces of related data that do not need to be compared or accessed simultaneously.
 
-<StoryEmbed id="components-tabset--tab-navigation"/>
+```tsx
+<IressTabSet>
+  <IressTab label="Iress" href="https://iress.com" />
+  <IressTab label="Google" href="https://google.com" />
+</IressTabSet>;
+```
 
 ## Design
 
@@ -63,7 +68,7 @@ import { IressTabSet, IressTab } from '@iress-oss/ids-components';
 <IressTabSet>
   <IressTab label="First">Panel one</IressTab>
   <IressTab label="Second">Panel two</IressTab>
-</IressTabSet>
+</IressTabSet>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tabset--docs#api-props)
@@ -74,31 +79,123 @@ import { IressTabSet, IressTab } from '@iress-oss/ids-components';
 
 You can use `IressTabSet` to create tab navigation to control an area of the page, or navigate between pages.
 
-<StoryEmbed id="components-tabset--tab-navigation"/>
+```tsx
+<IressTabSet>
+  <IressTab label="Iress" href="https://iress.com" />
+  <IressTab label="Google" href="https://google.com" />
+</IressTabSet>;
+```
 
 #### With children prop
 
 Using the `children` prop will automatically inject the content as a tab panel when active, along with appropriate attributes for accessibility.
 
-<StoryEmbed id="components-tabset--panels"/>
+```tsx
+<IressTabSet>
+  <IressTab label="Address">Address information goes here</IressTab>
+  <IressTab label="Employment">Employment information goes here</IressTab>
+  <IressTab label="History">Medical history goes here</IressTab>
+</IressTabSet>;
+```
 
 #### Default selected
 
 Set a tab by default using the `defaultSelected` prop.
 
-<StoryEmbed id="components-tabset--default-selected"/>
+```tsx
+<IressTabSet defaultSelected={1}>
+  <IressTab label="Iress" href="https://iress.com" />
+  <IressTab label="Google" href="https://google.com" />
+</IressTabSet>;
+```
 
 #### Controlled
 
 Use state to control the active tab by setting the `selected` property.
 
-<StoryEmbed id="components-tabset--controlled"/>
+```tsx
+import {
+  IressButton,
+  IressStack,
+  IressTab,
+  IressTabSet,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export function TabsUsingState() {
+  const [selected, setSelected] = useState<number>();
+
+  return (
+    <IressStack gap="md">
+      <IressButton
+        onClick={() => setSelected(selected === 2 ? 0 : 2)}
+        alignSelf="start"
+      >
+        {selected === 2 ? `Back to first tab` : `Change to last tab`}
+      </IressButton>
+      <IressTabSet
+        selected={selected}
+        onChange={({ index }) => setSelected(index)}
+      >
+        <IressTab label="Address">Address information goes here</IressTab>
+        <IressTab label="Employment">Employment information goes here</IressTab>
+        <IressTab label="History">Medical history goes here</IressTab>
+      </IressTabSet>
+    </IressStack>
+  );
+}
+```
 
 #### Layout
 
 `IressTabSet` controls the layout of the tab buttons. These can be aligned left (default), center, or right via the `layout` prop.
 
-<StoryEmbed id="components-tabset--layout"/>
+```tsx
+import {
+  IressPanel,
+  IressStack,
+  IressTab,
+  IressTabSet,
+  IressText,
+} from '@iress-oss/ids-components';
+
+export function TabSetLayout() {
+  return (
+    <IressStack gap="md">
+      <IressPanel>
+        <IressText element="h2">top-left</IressText>
+        <IressTabSet layout="top-left">
+          <IressTab label="Address">Address information goes here</IressTab>
+          <IressTab label="Employment">
+            Employment information goes here
+          </IressTab>
+          <IressTab label="History">Medical history goes here</IressTab>
+        </IressTabSet>
+      </IressPanel>
+      <IressPanel>
+        <IressText element="h2">top-center</IressText>
+        <IressTabSet layout="top-center">
+          <IressTab label="Address">Address information goes here</IressTab>
+          <IressTab label="Employment">
+            Employment information goes here
+          </IressTab>
+          <IressTab label="History">Medical history goes here</IressTab>
+        </IressTabSet>
+      </IressPanel>
+      <IressPanel>
+        <IressText element="h2">top-right</IressText>
+        <IressTabSet layout="top-right">
+          <IressTab label="Address">Address information goes here</IressTab>
+          <IressTab label="Employment">
+            Employment information goes here
+          </IressTab>
+          <IressTab label="History">Medical history goes here</IressTab>
+        </IressTabSet>
+      </IressPanel>
+    </IressStack>
+  );
+}
+```
 
 #### Type
 
@@ -107,19 +204,82 @@ Use the `type` prop to control visual emphasis:
 - `primary` (default): prominent active state with a raised indicator
 - `secondary`: subdued style for nested or secondary tab groups
 
-<StoryEmbed id="components-tabset--type"/>
+```tsx
+<IressStack gap="md">
+  <IressText element="h2">Primary</IressText>
+  <IressTabSet defaultSelected={1} type="primary" />
+  <IressExpander activator="Secondary">
+    <IressTabSet defaultSelected={1} type="secondary" mt="-md" />
+  </IressExpander>
+</IressStack>;
+```
 
 #### Lazy Loading
 
 Tabs can be lazy loaded via state, allowing you to add/remove tabs as needed.
 
-<StoryEmbed id="components-tabset--lazy-loading"/>
+```tsx
+import {
+  IressButton,
+  IressStack,
+  IressTab,
+  IressTabSet,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export function TabsLazyLoading() {
+  const [loadTabs, setLoadTabs] = useState<boolean>();
+
+  return (
+    <IressStack gap="md">
+      <IressButton onClick={() => setLoadTabs(!loadTabs)} alignSelf="start">
+        Toggle tabs
+      </IressButton>
+      <IressTabSet>
+        {loadTabs && (
+          <>
+            <IressTab label="Address">Address information goes here</IressTab>
+            <IressTab label="Employment">
+              Employment information goes here
+            </IressTab>
+            <IressTab label="Medical history">
+              Medical history goes here
+            </IressTab>
+          </>
+        )}
+      </IressTabSet>
+    </IressStack>
+  );
+}
+```
 
 #### Badges and icons
 
 Add rich content into the `label` of `IressTab` to customise tabs with badges or icons.
 
-<StoryEmbed id="components-tabset--tabs-with-badges"/>
+```tsx
+<IressTabSet>
+  <IressTab
+    label={
+      <>
+        Address <IressPill ml="xs">3</IressPill>
+      </>
+    }
+  >
+    Address information goes here{' '}
+  </IressTab>
+  <IressTab
+    label={
+      <IressInline gap="sm" verticalAlign="middle" noWrap>
+        <IressIcon name="user" /> Employment
+      </IressInline>
+    }
+  >
+    Employment information goes here
+  </IressTab>
+  <IressTab label="History">Medical history goes here</IressTab>
+</IressTabSet>;
+```
 
 ### Testing
 
@@ -139,9 +299,9 @@ const panel = screen.getByRole('tabpanel');
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
 | main | The root wrapper element (tablist is a nested child) | — | `tabset` |
-| tablist | The tab list container (nested inside root) | — | `—` |
-| tab | An individual tab item (rendered by IressTab, receives its own data-testid) | — | `<tab-testid>` |
-| panel | The active tab panel | — | `tabset__panel` |
+| tablist | The tab list container (nested inside root) | `getByRole('tablist')` | `—` |
+| tab | An individual tab item (rendered by IressTab, receives its own data-testid) | `getByRole('tab', { name: '...' })` | `<tab-testid>` |
+| panel | The active tab panel | `getByRole('tabpanel')` | `tabset__panel` |
 
 ---
 

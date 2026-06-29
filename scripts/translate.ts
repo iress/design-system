@@ -7,28 +7,24 @@
  *
  * Usage:
  *   tsx scripts/translate.ts                  # Run all
- *   tsx scripts/translate.ts --components     # Components + patterns
- *   tsx scripts/translate.ts --guides         # Foundations, get-started, migration, styling-props
+ *   tsx scripts/translate.ts --components     # All guidelines content (components, patterns, foundations, styling-props, etc.)
  *   tsx scripts/translate.ts --tokens         # Token reference
  *   tsx scripts/translate.ts --skills         # Skills
  *   tsx scripts/translate.ts --llms-txt       # llms.txt
  *   tsx scripts/translate.ts --full-reference # IDS-FULL-REFERENCE.md
  */
 
-import { translateGuides } from './translate/guides';
 import { translateComponents } from './translate/components';
 import { translateTokens } from './translate/tokens';
 import { translateSkills } from './translate/skills';
 import { generateLlmsTxt } from './translate/llms-txt';
 import { generateFullReference } from './translate/full-reference';
 
-// Phase B will add: import { translateComponents } from './translate/components';
-
 const args = process.argv.slice(2);
 
 const commands: Record<string, () => Promise<void>> = {
   '--components': translateComponents,
-  '--guides': translateGuides,
+  '--guides': translateComponents, // alias — unified pipeline
   '--tokens': translateTokens,
   '--skills': translateSkills,
   '--llms-txt': generateLlmsTxt,
@@ -40,7 +36,7 @@ async function main() {
 
   const selected = args.length
     ? args.filter((a) => a in commands)
-    : Object.keys(commands);
+    : ['--components', '--tokens', '--skills', '--llms-txt', '--full-reference'];
 
   if (selected.length === 0) {
     console.error('Unknown command. Available:', Object.keys(commands).join(', '));

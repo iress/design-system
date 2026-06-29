@@ -88,7 +88,7 @@ export const LinkTag: Story = {
 
 export const Compact: Story = {
   args: {
-    ...Default.args,
+    children: 'Label',
     compact: true,
     onDelete: () => {
       console.log('Tag deleted');
@@ -111,7 +111,7 @@ export const DeletingTags: Story = {
 
 export const CustomButton: Story = {
   args: {
-    ...Default.args,
+    children: 'Label',
     deleteButton: (
       <IressPopover
         activator={

@@ -15,7 +15,14 @@ import { IressRadioGroup } from '@iress-oss/ids-components';
 
 A radio group is a group of radio buttons that allows the user to select one option from multiple options, where all options are visible.
 
-<StoryEmbed id="components-radiogroup--radio-children"/>
+```tsx
+<IressRadioGroup>
+  <IressRadio value="google">Google</IressRadio>
+  <IressRadio value="newspaper">Newspaper</IressRadio>
+  <IressRadio value="friend">Friend</IressRadio>
+  <IressRadio value="other">Other</IressRadio>
+</IressRadioGroup>;
+```
 
 ## Design
 
@@ -53,7 +60,7 @@ import { IressRadioGroup, IressRadio } from '@iress-oss/ids-components';
 <IressRadioGroup name="survey">
   <IressRadio value="a">Option A</IressRadio>
   <IressRadio value="b">Option B</IressRadio>
-</IressRadioGroup>
+</IressRadioGroup>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radiogroup--docs#api-props)
@@ -64,7 +71,14 @@ Individual radio buttons can be passed directly into `IressRadioGroup`.
 
 **Note:** The `mapRadioGroupOptions` helper function, originally used to map options to `IressRadio` components, is now deprecated. Instead, you can use `array.map` to map the options to `IressRadio` components.
 
-<StoryEmbed id="components-radiogroup--radio-children"/>
+```tsx
+<IressRadioGroup>
+  <IressRadio value="google">Google</IressRadio>
+  <IressRadio value="newspaper">Newspaper</IressRadio>
+  <IressRadio value="friend">Friend</IressRadio>
+  <IressRadio value="other">Other</IressRadio>
+</IressRadioGroup>;
+```
 
 #### Selection
 
@@ -72,7 +86,14 @@ The default checked state of the radio children should always be set using the `
 
 **Note:** The `value` prop on the `IressRadioGroup` component will always override the `checked` state of the `IressRadio` children.
 
-<StoryEmbed id="components-radiogroup--radio-selection"/>
+```tsx
+<IressRadioGroup defaultValue="newspaper">
+  <IressRadio value="google">Google</IressRadio>
+  <IressRadio value="newspaper">Newspaper</IressRadio>
+  <IressRadio value="friend">Friend</IressRadio>
+  <IressRadio value="other">Other</IressRadio>
+</IressRadioGroup>;
+```
 
 #### Layout
 
@@ -89,7 +110,66 @@ The layout prop controls how the radio group is displayed and can have three bas
 > If using any of the inline* props within a `Field` component, the `Field` also
 >   needs the inline prop to be set for the inline layouts to take effect.
 
-<StoryEmbed id="components-radiogroup--layout"/>
+```tsx
+import {
+  IressRadio,
+  IressRadioGroup,
+  IressStack,
+  IressText,
+} from '@iress-oss/ids-components';
+
+export function RadioGroupLayout() {
+  return (
+    <IressStack gap="md">
+      <IressText>
+        <h3>block (default)</h3>
+        <IressRadioGroup layout="block" variant="touch">
+          <IressRadio value="google">Google</IressRadio>
+          <IressRadio value="newspaper">Newspaper</IressRadio>
+          <IressRadio value="friend">Friend</IressRadio>
+          <IressRadio value="other">Other</IressRadio>
+        </IressRadioGroup>
+      </IressText>
+      <IressText>
+        <h3>inline</h3>
+        <IressRadioGroup layout="inline" variant="touch">
+          <IressRadio value="google">Google</IressRadio>
+          <IressRadio value="newspaper">Newspaper</IressRadio>
+          <IressRadio value="friend">Friend</IressRadio>
+          <IressRadio value="other">Other</IressRadio>
+        </IressRadioGroup>
+      </IressText>
+      <IressText>
+        <h3>inlineEqualWidth</h3>
+        <IressRadioGroup layout="inlineEqualWidth" variant="touch">
+          <IressRadio value="google">Google</IressRadio>
+          <IressRadio value="newspaper">Newspaper</IressRadio>
+          <IressRadio value="friend">Friend</IressRadio>
+          <IressRadio value="other">Other</IressRadio>
+        </IressRadioGroup>
+      </IressText>
+      <IressText>
+        <h3>inlineFlex</h3>
+        <IressRadioGroup layout="inlineFlex" variant="touch">
+          <IressRadio value="google">Google</IressRadio>
+          <IressRadio value="newspaper">Newspaper</IressRadio>
+          <IressRadio value="friend">Friend</IressRadio>
+          <IressRadio value="other">Other</IressRadio>
+        </IressRadioGroup>
+      </IressText>
+      <IressText>
+        <h3>stack</h3>
+        <IressRadioGroup layout="stack" variant="touch">
+          <IressRadio value="google">Google</IressRadio>
+          <IressRadio value="newspaper">Newspaper</IressRadio>
+          <IressRadio value="friend">Friend</IressRadio>
+          <IressRadio value="other">Other</IressRadio>
+        </IressRadioGroup>
+      </IressText>
+    </IressStack>
+  );
+}
+```
 
 #### Hidden radio buttons
 
@@ -97,7 +177,19 @@ You can use the `hiddenRadio` prop to create custom radio buttons. When enabled,
 
 When `hiddenRadio` is enabled, the label will have no padding. Padding can be added by using a Panel or utility classes.
 
-<StoryEmbed id="components-radiogroup--hidden-radio-buttons"/>
+```tsx
+<IressField
+  label="I'd like to discuss the following in my financial review:"
+  hint="Select one option"
+>
+  <IressRadioGroup
+    defaultValue="home"
+    required
+    layout="inline"
+    variant="card"
+  />
+</IressField>;
+```
 
 #### Laying out custom radio buttons
 
@@ -105,7 +197,35 @@ The radio group's `layout` prop gives you some default options to help control t
 
 The example below uses CSS grid to give us evenly spaced / sized radio buttons, which will wrap on to new lines as the screen size reduces. The grid wrapper element is a div that wraps around the `<IressRadio />` elements, as shown by the dashed border. Use the grab handle in the bottom right-hand corner of the grid wrapper to see how the controls change size to respond to the container's width.
 
-<StoryEmbed id="components-radiogroup--custom-radio-group-layout"/>
+```tsx
+<IressField
+  label="I'd like to discuss the following in my financial review:"
+  hint="Select one option"
+>
+  <IressRadioGroup
+    name="financial-review"
+    required
+    layout="block"
+    variant="card"
+  >
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+        gridAutoRows: '1fr',
+        gridGap: '0.75rem',
+        width: '100%',
+        padding: '0.5rem',
+        border: '1px dashed hsl(43deg 100% 45%)',
+        resize: 'horizontal',
+        overflow: 'auto',
+      }}
+    >
+      {children}
+    </div>
+  </IressRadioGroup>
+</IressField>;
+```
 
 #### Read only
 
@@ -113,13 +233,27 @@ The `readOnly` prop changes how the radio group is rendered. It will only render
 
 It is understandable that this may not be the desired behavior for all use cases. If you need a radio group that is not editable, but still visible, simply do not set the `readOnly` prop and set the `value` prop instead.
 
-<StoryEmbed id="components-radiogroup--read-only"/>
+```tsx
+<IressRadioGroup defaultValue="newspaper" readOnly>
+  <IressRadio value="google">Google</IressRadio>
+  <IressRadio value="newspaper">Newspaper</IressRadio>
+  <IressRadio value="friend">Friend</IressRadio>
+  <IressRadio value="other">Other</IressRadio>
+</IressRadioGroup>;
+```
 
 #### Touch
 
 The `touch` prop adds the button-like border and padding to radio.
 
-<StoryEmbed id="components-radiogroup--touch"/>
+```tsx
+<IressRadioGroup defaultValue="newspaper" variant="touch">
+  <IressRadio value="google">Google</IressRadio>
+  <IressRadio value="newspaper">Newspaper</IressRadio>
+  <IressRadio value="friend">Friend</IressRadio>
+  <IressRadio value="other">Other</IressRadio>
+</IressRadioGroup>;
+```
 
 ### Testing
 
@@ -164,7 +298,7 @@ await user.click(yes);
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the radio group | — | `radio-group` |
+| main | The root element of the radio group | `getByRole('radiogroup')` | `radio-group` |
 
 ---
 

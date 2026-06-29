@@ -220,7 +220,7 @@ const Reference = () => {
       </IressInline>
       <IressRow gutter="lg">
         {filteredComponents.map(({ Thumbnail, ...component }) => (
-          <IressCol key={component.heading} span={{ md: 4 }}>
+          <IressCol key={component.heading} span={{ xs: 12, md: 4 }}>
             <IressCard
               heading={component.heading}
               media={

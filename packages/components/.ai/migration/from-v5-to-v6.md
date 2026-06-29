@@ -42,7 +42,7 @@ Utility classes for components have been changed to functions:
 
 ```tsx
 // Apply Panel styling to a native div
-<div className={panel()} />
+<div className={panel()} />;
 ```
 
 > **Note:** Styling props only accept design token values. For custom values, use standard CSS. Not every internal component token has a matching styling prop — only those needed for rebranding.
@@ -319,13 +319,13 @@ This component has been removed. Since IDS serves multiple parent applications w
     xs: { b: 'sm', t: 'lg', r: 'sm', l: 'lg' },
     xl: { b: 'none', t: 'sm', r: 'lg', l: 'sm' },
   }}
-/>
+/>;
 ```
 
 **After:**
 
 ```tsx
-<IressPanel pb={{ xs: 'sm', xl: 'none' }} pt={{ xs: 'lg', xl: 'sm' }} />
+<IressPanel pb={{ xs: 'sm', xl: 'none' }} pt={{ xs: 'lg', xl: 'sm' }} />;
 ```
 
 ### Pill
@@ -431,13 +431,13 @@ The v5 native `IressSelect` with `children` (option elements) is replaced by `Ir
 ```tsx
 <IressSelect>
   <IressSelectOption value="1">Option 1</IressSelectOption>
-</IressSelect>
+</IressSelect>;
 ```
 
 **After (v6):**
 
 ```tsx
-<IressSelect native options={[{ label: 'Option 1', value: '1' }]} />
+<IressSelect native options={[{ label: 'Option 1', value: '1' }]} />;
 ```
 
 ### SelectOption (removed)
@@ -653,11 +653,11 @@ Combines the `rail` and `side` menu variants into a side navigation component fo
 ```tsx
 <IressAgGridContainer>
   <AgGridReact {...gridProps} />
-</IressAgGridContainer>
+</IressAgGridContainer>;
 ```
 
 **After:**
 
 ```tsx
-<AgGridReact {...getAgGridThemeProps()} {...gridProps} />
+<AgGridReact {...getAgGridThemeProps()} {...gridProps} />;
 ```

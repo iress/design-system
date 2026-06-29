@@ -15,7 +15,9 @@ import { IressLabel } from '@iress-oss/ids-components';
 
 Use the IressLabel component when building bespoke form inputs and IressField is too restrictive.
 
-<StoryEmbed id="components-label--required"/>
+```tsx
+<IressLabel required>This is a label for a required input</IressLabel>;
+```
 
 ## Design
 
@@ -54,7 +56,7 @@ Use the IressLabel component when building bespoke form inputs and IressField is
 ```tsx
 import { IressLabel } from '@iress-oss/ids-components';
 
-<IressLabel>This is a label</IressLabel>
+<IressLabel>This is a label</IressLabel>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs#api-props)
@@ -65,25 +67,41 @@ import { IressLabel } from '@iress-oss/ids-components';
 
 Use the `required` prop to distinguish the label with an asterisk.
 
-<StoryEmbed id="components-label--required"/>
+```tsx
+<IressLabel required>This is a label for a required input</IressLabel>;
+```
 
 #### Hidden label
 
 Set `hiddenLabel` to visually hide the label while keeping it accessible.
 
-<StoryEmbed id="components-label--hidden-label"/>
+```tsx
+<IressLabel hiddenLabel>
+  This text is visible to screen readers only
+</IressLabel>;
+```
 
 #### Rich content
 
 Render custom content into the label.
 
-<StoryEmbed id="components-label--rich-content"/>
+```tsx
+<IressLabel>
+  <IressInline gap="md" verticalAlign="middle">
+    <IressIcon name="home" />
+    Home settings
+    <IressIcon name="cog" />
+  </IressInline>
+</IressLabel>;
+```
 
 #### Locked readonly
 
 Use `readOnly="locked"` when the field is read-only due to permissions. Adds a lock indicator.
 
-<StoryEmbed id="components-label--locked-readonly"/>
+```tsx
+<IressLabel readOnly="locked">This label is locked</IressLabel>;
+```
 
 ### Testing
 
@@ -100,7 +118,7 @@ const input = screen.getByLabelText('Email address');
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the label | — | `label` |
+| main | The root element of the label | `getByText('...')` | `label` |
 | text | The label text content | — | `label__text` |
 
 ---

@@ -16,6 +16,8 @@ import { AbsolutePositionSlideout } from './mocks/AbsolutePositionSlideout';
 import AbsolutePositionSlideoutSource from './mocks/AbsolutePositionSlideout.tsx?raw';
 import { SlideoutMicrofrontend } from './mocks/SlideoutMicrofrontend';
 import SlideoutMicrofrontendSource from './mocks/SlideoutMicrofrontend.tsx?raw';
+import { SlideoutModes } from './mocks/SlideoutModes';
+import SlideoutModesSource from './mocks/SlideoutModes.tsx?raw';
 import { SlideoutWithButton } from './mocks/SlideoutWithButton';
 import SlideoutWithButtonSource from './mocks/SlideoutWithButton.tsx?raw';
 import { SlideoutWithFooter } from './mocks/SlideoutWithFooter';
@@ -90,64 +92,14 @@ export const ShowWithState: Story = {
 };
 
 export const Modes: Story = {
-  ...Default,
-  args: {
-    children: '',
-    footer: '',
-  },
-  argTypes: {
-    ...disableArgTypes(['children', 'show', 'id', 'mode']),
-  },
-  render: (args) => {
-    const { showSlideout } = useSlideout();
-
-    return (
-      <IressPanel bg="alt">
-        <IressInline gap="md">
-          <IressButton onClick={() => showSlideout('overlay')}>
-            Overlay slideout
-          </IressButton>
-          <IressSlideout {...args} id="overlay" mode="overlay">
-            <h2>Overlay</h2>
-            For most situations <code>overlay</code> will be what you need,
-            which is why this is the default behaviour. You do not need to
-            specify the mode if you want your slideout to sit on top of the
-            page.
-          </IressSlideout>
-
-          <IressButton onClick={() => showSlideout('push')}>
-            Push slideout
-          </IressButton>
-          <IressSlideout
-            {...args}
-            id="push"
-            mode="push"
-            eleToPush="#storybook-docs, html"
-          >
-            <IressText>
-              <h2>Push</h2>
-              <p>
-                If you have a data-heavy screen where you need all of the data
-                to be visible when the slideout is open, use <code>push</code>.
-                To allow push to work you will need to supply the ID of the
-                element that needs to be pushed via the <code>eleToPush</code>{' '}
-                prop. If the ID is not supplied, or the element cannot be found,
-                the slideout will revert to <code>overlay</code> behaviour.
-              </p>
-              <p>
-                Be aware though that push will only work on larger screens
-                (&gt;1200px); on smaller screens the slideout will overlay the
-                content.
-              </p>
-            </IressText>
-          </IressSlideout>
-        </IressInline>
-      </IressPanel>
-    );
+  render: () => <SlideoutModes />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(SlideoutModesSource, { stripImports: true }),
   },
   decorators: [
     withBreakpointLabel(),
-  ]
+  ],
 };
 
 export const Position: Story = {

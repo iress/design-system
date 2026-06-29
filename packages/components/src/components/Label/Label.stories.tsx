@@ -52,7 +52,6 @@ export const LockedReadonly: Story = {
 
 export const RichContent: Story = {
   args: {
-    hiddenLabel: false,
     children: (
       <IressInline gap="md" verticalAlign="middle">
         <IressIcon name="home" />

@@ -145,7 +145,7 @@ This is the recommended approach. You can use design tokens and custom classes t
 ```
 
 ```tsx
-<IressRadio className="custom-radio" />
+<IressRadio className="custom-radio" />;
 ```
 
 #### Option 2: Target the new classes

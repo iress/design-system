@@ -71,7 +71,18 @@ yarn add @iress-oss/ids-components react-hook-form
 ```tsx
 import { IressForm } from '@iress-oss/ids-components';
 
-<IressForm heading="Contact details" pattern="short" />
+<IressForm
+  actions={<IressButton mode="primary" type="submit">Submit</IressButton>}
+>
+  <IressFormField
+    label="Name"
+    name="name"
+    render={(controlledProps) => <IressInput {...controlledProps} />}
+    rules={{
+      required: true,
+    }}
+  />
+</IressForm>
 ```
 
 <IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs#api-props">View all props</IressButton>
@@ -557,7 +568,7 @@ render(
 );
 
 // May be needed sometimes to get over the act warning
-await screen.getByRole('form');
+await screen.findByRole('form');
 
 const emailInput = screen.getByRole('textbox');
 const submitButton = screen.getByRole('button', { name: 'Submit' });

@@ -62,14 +62,13 @@ export const Default: Story = {
 
 export const Simple: Story = {
   args: {
-    ...Default.args,
     children: "I'm a simple card",
   },
 };
 
 export const NoBorder: Story = {
   args: {
-    ...Default.args,
+    children: "I'm a card",
     noBorder: true,
   },
 };
@@ -120,7 +119,6 @@ export const Stretch: Story = {
 
 export const Selected: Story = {
   args: {
-    ...Default.args,
     children: "I'm a selected card",
     selected: true,
   },

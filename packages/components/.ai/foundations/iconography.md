@@ -95,7 +95,9 @@ If you are using Figma, we recommend the [Material Symbols plugin](https://www.f
 
 The `IressIcon` component is used to render icons from the Material Symbols library based on the guidelines outlined above.
 
-<StoryEmbed id="components-icon--default"/>
+```tsx
+<IressIcon name="home" />;
+```
 
 ### Migrating from Font Awesome
 
@@ -103,4 +105,39 @@ To help with migrating, we have mapped some common Font Awesome icons to their M
 
 Please refer to the table below for guidance.
 
-<StoryEmbed id="components-icon--font-awesome-to-material-migration" controls={false} />
+| Font Awesome | Material Symbol |
+|-------------|-----------------|
+| `times-circle` | `cancel` |
+| `lock-alt` | `lock` |
+| `chevron-down` | `keyboard_arrow_down` |
+| `chevron-up` | `keyboard_arrow_up` |
+| `chevron-left` | `keyboard_arrow_left` |
+| `chevron-right` | `keyboard_arrow_right` |
+| `chevron-double-down` | `keyboard_double_arrow_down` |
+| `chevron-double-up` | `keyboard_double_arrow_up` |
+| `chevron-circle-down` | `expand_circle_down` |
+| `arrow-left` | `arrow_back` |
+| `arrow-right` | `arrow_forward` |
+| `arrow-up` | `arrow_upward` |
+| `arrow-down` | `arrow_downward` |
+| `user-circle` | `account_circle` |
+| `power-off` | `power_settings_new` |
+| `ellipsis-v` | `more_vert` |
+| `ellipsis-h` | `more_horiz` |
+| `file-image` | `image` |
+| `file-pdf` | `picture_as_pdf` |
+| `file-spreadsheet` | `table_chart` |
+| `file-word` | `description` |
+| `folder-open` | `folder_open` |
+| `info-circle` | `info` |
+| `question-circle` | `help` |
+| `exclamation-triangle` | `warning` |
+| `external-link` | `open_in_new` |
+| `info-square` | `info` |
+| `align-left` | `format_align_left` |
+| `align-center` | `format_align_center` |
+| `align-right` | `format_align_right` |
+| `align-justify` | `format_align_justify` |
+| `spinner-third` | `progress_activity` |
+| `file-alt` | `draft` |
+| `plus-circle` | `add_circle` |

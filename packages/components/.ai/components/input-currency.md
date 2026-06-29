@@ -15,7 +15,14 @@ import { IressInputCurrency } from '@iress-oss/ids-components';
 
 InputCurrency allows a user to input and interact with currency number. It works just like IressInput, with new props locale and currencyCode. This component meets ISO-4217 standard
 
-<StoryEmbed id="components-inputcurrency--gbp"/>
+```tsx
+<IressInputCurrency
+  defaultValue={12345.678}
+  locale="en-GB"
+  currencyCode="GBP"
+  placeholder="Enter amount and dispay currency currency separator on blur"
+/>;
+```
 
 ## Design
 
@@ -57,7 +64,11 @@ InputCurrency allows a user to input and interact with currency number. It works
 ```tsx
 import { IressInputCurrency } from '@iress-oss/ids-components';
 
-<IressInputCurrency defaultValue={12345.678} locale="en-AU" currencyCode="AUD" />
+<IressInputCurrency
+  defaultValue={12345.678}
+  locale="en-AU"
+  currencyCode="AUD"
+/>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inputcurrency--docs#api-props)
@@ -68,35 +79,81 @@ import { IressInputCurrency } from '@iress-oss/ids-components';
 
 Display the GBP with `locale="en-GB"` and `currencyCode="GBP"` props (must pass both together)
 
-<StoryEmbed id="components-inputcurrency--gbp"/>
+```tsx
+<IressInputCurrency
+  defaultValue={12345.678}
+  locale="en-GB"
+  currencyCode="GBP"
+  placeholder="Enter amount and dispay currency currency separator on blur"
+/>;
+```
 
 Display the JPY with `locale="ja-JPY"` and `currencyCode="JPY"` props (must pass both together)
 
-<StoryEmbed id="components-inputcurrency--jpy"/>
+```tsx
+<IressInputCurrency
+  defaultValue={12345678}
+  locale="ja-JP"
+  currencyCode="JPY"
+  placeholder="Enter amount and dispay currency currency separator on blur"
+/>;
+```
 
 #### With Symbol
 
 Display the currency symbol with `withSymbol` props
 
-<StoryEmbed id="components-inputcurrency--with-symbol"/>
+```tsx
+<IressInputCurrency
+  defaultValue={12345.678}
+  locale="en-AU"
+  currencyCode="AUD"
+  withSymbol
+  placeholder="Enter amount and dispay currency symbol on blur"
+/>;
+```
 
 #### More Format Options
 
 Pass more format options with `formatOptions` props. More format options in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat">here</a>
 
-<StoryEmbed id="components-inputcurrency--format-options"/>
+```tsx
+<IressInputCurrency
+  defaultValue={12345.678}
+  locale="en-AU"
+  currencyCode="AUD"
+  placeholder="Pass and play around with other native Intl.NumberFormat options to the code sandbox"
+  formatOptions={{ minimumFractionDigits: 2, maximumFractionDigits: 4 }}
+/>;
+```
 
 #### Read Only
 
 The `readOnly` prop can be set to prevent the user from changing the value of the input. If you want to make the number align to right, please pass `alignRight` together.
 
-<StoryEmbed id="components-inputcurrency--read-only"/>
+```tsx
+<IressInputCurrency
+  defaultValue={12345.678}
+  locale="en-AU"
+  currencyCode="AUD"
+  readOnly
+  alignRight
+  withSymbol
+/>;
+```
 
 #### Align Right
 
 Set the input content align to right with `alignRight` prop, which is more friendly for number input.
 
-<StoryEmbed id="components-inputcurrency--align-right"/>
+```tsx
+<IressInputCurrency
+  defaultValue={12345.678}
+  locale="en-AU"
+  currencyCode="AUD"
+  alignRight
+/>;
+```
 
 ### Recipes
 
@@ -104,13 +161,95 @@ Set the input content align to right with `alignRight` prop, which is more frien
 
 It is not recommended to use the `readOnly` prop for `IressInputCurrency` inside tables, as it was designed for forms. This example shows how to use currency in the table, by using the `format` prop of when defining a column inside `IressTable`. Additionally, when all rows have the same currency, it is recommended to add the currency code on the column `label` and remove the `currencyCode` on all rows.
 
-<StoryEmbed id="components-inputcurrency--currency-in-table"/>
+```tsx
+import { IressTable } from '@iress-oss/ids-components';
+
+export const CurrencyInTable = () => {
+  return (
+    <IressTable
+      caption="My investments"
+      columns={[
+        {
+          key: 'investmentName',
+          label: 'Investment Name',
+          format: 'string',
+          width: '30%',
+        },
+        {
+          key: 'investmentDate',
+          label: 'Investment Date',
+          format: 'date',
+          width: '30%',
+        },
+        {
+          key: 'totalPercentage',
+          label: 'Total %',
+          format: 'percent',
+          width: '15%',
+        },
+        {
+          key: 'amount',
+          label: 'Investment Amount (AUD)',
+          format: 'currency',
+          currencyCode: '',
+          width: '25%',
+        },
+      ]}
+      rows={[
+        {
+          investmentName: 'US Stocks',
+          investmentDate: '2019-09-23',
+          totalPercentage: 24.8,
+          amount: 23898,
+        },
+        {
+          investmentName: 'US Bonds',
+          investmentDate: '2019-02-05',
+          totalPercentage: 26.2,
+          amount: 26382.456,
+        },
+        {
+          investmentName: 'AU Stocks',
+          investmentDate: '2019-02-05',
+          totalPercentage: 26.2,
+          amount: 9342.1569,
+        },
+        {
+          investmentName: 'UK Stocks',
+          investmentDate: '2020-06-28',
+          totalPercentage: 49,
+          amount: 49751.4,
+        },
+      ]}
+    />
+  );
+};
+```
 
 #### OnChange with valid value
 
 Only able to input valid value when use `IressInputCurrency`. In this example, only number and 2 decimal places are allowed.
 
-<StoryEmbed id="components-inputcurrency--valid-value-on-chage"/>
+```tsx
+import { IressInputCurrency } from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export const ValidValueOnChage = () => {
+  const [value, setValue] = useState('');
+
+  return (
+    <IressInputCurrency
+      value={value}
+      onChange={(_e, value) => {
+        if (typeof value === 'string' && /^-?\d*(\.\d{0,2})?$/.test(value)) {
+          console.log('Valid value:', value);
+          setValue(value);
+        }
+      }}
+    />
+  );
+};
+```
 
 ### Testing
 
@@ -132,7 +271,7 @@ const input = screen.getByRole('textbox', { name: 'Amount' });
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the input currency | — | `input-currency` |
+| main | The root element of the input currency | `getByRole('textbox')`, or `getByLabelText('...')` when inside a Field. In focus, the input will have the role of `spinbutton`. | `input-currency` |
 
 ---
 

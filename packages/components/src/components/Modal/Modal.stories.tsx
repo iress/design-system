@@ -149,8 +149,9 @@ export const ShowWithState: Story = {
 export const Heading: Story = {
   ...Default,
   args: {
-    ...Default.args,
     heading: 'Modal heading',
+    children: 'Modal content goes here.',
+    id: MODAL_ID,
   },
   argTypes: {
     ...disableArgTypes(['show', 'heading']),

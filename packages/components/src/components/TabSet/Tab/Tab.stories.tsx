@@ -44,7 +44,7 @@ export const Inactive: Story = {
 
 export const Active: Story = {
   args: {
-    ...Inactive.args,
+    label: 'Tab',
     active: true,
   },
 };

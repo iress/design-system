@@ -8,7 +8,28 @@
 
 Feedback components communicate information to users about actions, states, and processes. Choosing the right feedback component ensures users receive the right level of information at the right time without unnecessary disruption.
 
-<StoryEmbed id="patterns-feedback--decision-tree"/>
+**Choose the right feedback component:**
+
+| Scenario | Component | Example |
+|----------|-----------|---------|
+| Brief confirmation (auto-dismisses) | Toast | `success({ content: 'Record saved' })` |
+| Persistent page-level info | Alert | `<IressAlert status="info">Session info</IressAlert>` |
+| Blocking decision required | Modal | `<IressModal heading="Confirm">Are you sure?</IressModal>` |
+| Inline field-level error | ValidationMessage | `<IressValidationMessage status="danger">Required</IressValidationMessage>` |
+
+```tsx
+// Toast — transient confirmation
+const { success } = useToaster();
+success({ content: 'Record saved' });
+
+// Alert — persistent inline message
+<IressAlert status="warning">Session expires in 5 minutes</IressAlert>
+
+// Modal — blocking decision
+<IressModal heading="Delete record?" show={showModal}>
+  Are you sure you want to delete this?
+</IressModal>
+```
 
 ## Design
 

@@ -33,14 +33,19 @@ export const MaxWidth: Story = {
   args: {
     ...Default.args,
   },
-  render: ({ stylingProps, ...args }) => (
+  render: () => (
     <IressStack gap="md">
-      {MAX_WIDTHS.map((width, index) => (
-        <React.Fragment key={index}>
-          <IressText element="h3">{width ?? 'undefined'}</IressText>
-          <IressImage {...args} maxWidth={width} />
-        </React.Fragment>
-      ))}
+      <IressText element="h3">70</IressText>
+      <IressImage src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp" alt="Placeholder image" maxWidth={70} />
+
+      <IressText element="h3">250px</IressText>
+      <IressImage src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp" alt="Placeholder image" maxWidth="250px" />
+
+      <IressText element="h3">50%</IressText>
+      <IressImage src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp" alt="Placeholder image" maxWidth="50%" />
+
+      <IressText element="h3">undefined</IressText>
+      <IressImage src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp" alt="Placeholder image" />
     </IressStack>
   ),
 };

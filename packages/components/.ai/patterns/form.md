@@ -15,7 +15,24 @@ import { IressForm } from '@iress-oss/ids-components';
 
 Use the IressForm component when you want to request, validate and process data from the user.
 
-<StoryEmbed id="patterns-form--simple"/>
+```tsx
+<IressForm pattern="short">
+  <IressFormField
+    name="name"
+    label="Name"
+    rules={{ required: 'Name is required' }}
+    render={(controlledProps) => <IressInput {...controlledProps} />}
+  />
+  <IressFormField
+    name="email"
+    label="Email"
+    rules={{ required: 'Email is required' }}
+    render={(controlledProps) => (
+      <IressInput {...controlledProps} type="email" />
+    )}
+  />
+</IressForm>;
+```
 
 ```tsx
 import { IressForm } from '@iress-oss/ids-components';
@@ -79,7 +96,22 @@ yarn add @iress-oss/ids-components react-hook-form
 ```tsx
 import { IressForm } from '@iress-oss/ids-components';
 
-<IressForm heading="Contact details" pattern="short" />
+<IressForm
+  actions={
+    <IressButton mode="primary" type="submit">
+      Submit
+    </IressButton>
+  }
+>
+  <IressFormField
+    label="Name"
+    name="name"
+    render={(controlledProps) => <IressInput {...controlledProps} />}
+    rules={{
+      required: true,
+    }}
+  />
+</IressForm>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs#api-props)
@@ -251,14 +283,24 @@ It has three required props:
   name="email"
   label="Email"
   render={(controlledProps) => <IressInput {...controlledProps} type="email" />}
-/>
+/>;
 ```
 
 #### Supported form controls
 
 Here are some examples of how to use `IressFormField` with different form controls. If you are using a form control that has multiple inputs inside (for example, `IressCheckboxGroup`), you can use `IressFormFieldset`, which changes the HTML structure to use a `fieldset` and `legend` element to group the inputs.
 
-<StoryEmbed id="patterns-form--fields"/>
+| Control | Wrapper | `render` prop |
+|---------|---------|--------------|
+| `IressInput` | `IressFormField` | `render={(controlledProps) => <IressInput {...controlledProps} />}` |
+| `IressInputDate` | `IressFormField` | `render={(controlledProps) => <IressInput {...controlledProps} type="date" />}` |
+| `IressSelect` | `IressFormField` | `render={(controlledProps) => ( <IressSelect {...controlledProps} options={[ { label: 'Male', value: 'male', prepend: <IressIcon name="mars" />, }, { label: 'Female', value: 'female', prepend: <IressIcon name="venus" />, }, { label: 'Other', value: 'other', prepend: <IressIcon name="otter" />, }, ]} /> )}` |
+| `IressCheckboxGroup` | `IressFormFieldset` | `render={(controlledProps) => ( <IressCheckboxGroup {...controlledProps}> <IressCheckbox value="reading">Reading</IressCheckbox> <IressCheckbox value="writing">Writing</IressCheckbox> </IressCheckboxGroup> )}` |
+| `IressRadioGroup` | `IressFormFieldset` | `render={(controlledProps) => ( <IressRadioGroup {...controlledProps}> <IressRadio value="steak">Steak</IressRadio> <IressRadio value="fish">Fish</IressRadio> <IressRadio value="salad">Salad</IressRadio> </IressRadioGroup> )}` |
+| `IressCheckbox` | `IressFormField` | `render={({ value, ...controlledProps }) => ( <IressCheckbox {...controlledProps}>I agree to the terms and conditions</IressCheckbox> )}` |
+| `IressAutocomplete` | `IressFormField` | `render={(controlledProps) => ( <IressAutocomplete {...controlledProps} options={searchStarWarsCharacters} /> )}` |
+| `IressSlider` | `IressFormField` | `render={(controlledProps) => <IressSlider {...controlledProps} />}` |
+| `IressTagInput` | `IressFormField` | `render={(controlledProps) => <IressTagInput {...controlledProps} />}` |
 
 #### Supplementary content
 
@@ -276,7 +318,45 @@ Common use cases include:
 - **Dynamic hints**: Provide contextual help based on the field value
 - **Custom validation feedback**: Display real-time validation feedback separate from error messages
 
-<StoryEmbed id="patterns-form-formfield--render-supplementary"/>
+```tsx
+import {
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressText,
+} from '@iress-oss/ids-components';
+
+export function FormFieldSupplementary() {
+  return (
+    <IressForm>
+      <IressFormField
+        label="Comment"
+        name="comment"
+        hint="Enter your feedback (max 200 characters)"
+        render={(controlledProps) => (
+          <IressInput
+            {...controlledProps}
+            rows={3}
+            maxLength={200}
+            placeholder="Type your comment here..."
+          />
+        )}
+        renderSupplementary={({ value }) => (
+          <IressText textStyle="typography.body.sm" color="muted">
+            {(value as string)?.length || 0} / 200 characters
+          </IressText>
+        )}
+        rules={{
+          maxLength: {
+            value: 200,
+            message: 'Comment must not exceed 200 characters',
+          },
+        }}
+      />
+    </IressForm>
+  );
+}
+```
 
 #### Rules
 
@@ -288,7 +368,40 @@ Use the `rules` prop on the `IressFormField` component to add validation rules. 
 
 A boolean which, if `true`, indicates that the input must have a value before the form can be submitted. You can assign a string to return a custom error message.
 
-<StoryEmbed id="patterns-form--required"/>
+```tsx
+import {
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressButton,
+} from '@iress-oss/ids-components';
+
+/**
+ * The `required` rule works with all form controls (Input, Select, Checkbox, etc.).
+ * Pass `true` for the default message, or a string for a custom message.
+ */
+export function FormRuleRequired() {
+  return (
+    <IressForm>
+      <IressFormField
+        label="Default message"
+        name="default"
+        rules={{ required: true }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressFormField
+        label="Custom message"
+        name="custom"
+        rules={{ required: 'Please check this field' }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressButton type="submit" mode="primary">
+        Validate
+      </IressButton>
+    </IressForm>
+  );
+}
+```
 
 ##### `maxLength`
 
@@ -299,7 +412,46 @@ The maximum character length of the value to accept for this input.
 - For `IressInput`, you should also set the `maxLength` to stop the user from entering more characters than allowed.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
-<StoryEmbed id="patterns-form--max-length"/>
+```tsx
+import {
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressButton,
+} from '@iress-oss/ids-components';
+
+/**
+ * The `maxLength` rule works with text-based controls (Input, InputCurrency).
+ */
+export function FormRuleMaxLength() {
+  return (
+    <IressForm>
+      <IressFormField
+        label="Default message"
+        name="default"
+        hint="Enter a maximum of 5 characters"
+        rules={{ maxLength: 5 }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressFormField
+        label="Custom message"
+        name="custom"
+        hint="Enter a maximum of 5 characters"
+        rules={{
+          maxLength: {
+            value: 5,
+            message: 'Please enter a max of 5 characters!',
+          },
+        }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressButton type="submit" mode="primary">
+        Validate
+      </IressButton>
+    </IressForm>
+  );
+}
+```
 
 ##### `minLength`
 
@@ -310,7 +462,46 @@ The minimum character length of the value to accept for this input.
 - For `IressInput`, you should also set the `minLength` to stop the user from entering more characters than allowed.
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
-<StoryEmbed id="patterns-form--min-length"/>
+```tsx
+import {
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressButton,
+} from '@iress-oss/ids-components';
+
+/**
+ * The `minLength` rule works with text-based controls (Input, InputCurrency).
+ */
+export function FormRuleMinLength() {
+  return (
+    <IressForm>
+      <IressFormField
+        label="Default message"
+        name="default"
+        hint="Enter a minimum of 7 characters"
+        rules={{ minLength: 7 }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressFormField
+        label="Custom message"
+        name="custom"
+        hint="Enter a minimum of 7 characters"
+        rules={{
+          minLength: {
+            value: 7,
+            message: 'Please enter a min of 7 characters!',
+          },
+        }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressButton type="submit" mode="primary">
+        Validate
+      </IressButton>
+    </IressForm>
+  );
+}
+```
 
 ##### `max`
 
@@ -320,7 +511,46 @@ The maximum number to accept for this input.
 
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
-<StoryEmbed id="patterns-form--max"/>
+```tsx
+import {
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressButton,
+} from '@iress-oss/ids-components';
+
+/**
+ * The `maxLength` rule works with text-based controls (Input, InputCurrency).
+ */
+export function FormRuleMaxLength() {
+  return (
+    <IressForm>
+      <IressFormField
+        label="Default message"
+        name="default"
+        hint="Enter a maximum of 5 characters"
+        rules={{ maxLength: 5 }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressFormField
+        label="Custom message"
+        name="custom"
+        hint="Enter a maximum of 5 characters"
+        rules={{
+          maxLength: {
+            value: 5,
+            message: 'Please enter a max of 5 characters!',
+          },
+        }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressButton type="submit" mode="primary">
+        Validate
+      </IressButton>
+    </IressForm>
+  );
+}
+```
 
 ##### `min`
 
@@ -330,7 +560,46 @@ The minimum number to accept for this input.
 
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
-<StoryEmbed id="patterns-form--min"/>
+```tsx
+import {
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressButton,
+} from '@iress-oss/ids-components';
+
+/**
+ * The `minLength` rule works with text-based controls (Input, InputCurrency).
+ */
+export function FormRuleMinLength() {
+  return (
+    <IressForm>
+      <IressFormField
+        label="Default message"
+        name="default"
+        hint="Enter a minimum of 7 characters"
+        rules={{ minLength: 7 }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressFormField
+        label="Custom message"
+        name="custom"
+        hint="Enter a minimum of 7 characters"
+        rules={{
+          minLength: {
+            value: 7,
+            message: 'Please enter a min of 7 characters!',
+          },
+        }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressButton type="submit" mode="primary">
+        Validate
+      </IressButton>
+    </IressForm>
+  );
+}
+```
 
 ##### `pattern`
 
@@ -340,7 +609,49 @@ The accepted regex pattern for the input.
 
 - Only applies to: `IressAutocomplete`, `IressInput`, `IressRadioGroup` and `IressSelect`.
 
-<StoryEmbed id="patterns-form--pattern"/>
+```tsx
+import {
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressButton,
+} from '@iress-oss/ids-components';
+
+/**
+ * The `pattern` rule works with text-based controls. Uses a regex to validate input.
+ */
+export function FormRulePattern() {
+  const emailRegex =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+  return (
+    <IressForm>
+      <IressFormField
+        label="Default message"
+        name="default"
+        hint="Enter a valid email address"
+        rules={{ pattern: emailRegex }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressFormField
+        label="Custom message"
+        name="custom"
+        hint="Enter a valid email address"
+        rules={{
+          pattern: {
+            value: emailRegex,
+            message: 'Please enter a valid email address!',
+          },
+        }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressButton type="submit" mode="primary">
+        Validate
+      </IressButton>
+    </IressForm>
+  );
+}
+```
 
 ##### `minDate`
 
@@ -348,7 +659,50 @@ The minimum date to accept for this input.
 
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
-<StoryEmbed id="patterns-form--min-date"/>
+```tsx
+import {
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressButton,
+} from '@iress-oss/ids-components';
+
+/**
+ * The `minDate` rule works with date inputs. Validates that the date is after the specified value.
+ */
+export function FormRuleMinDate() {
+  return (
+    <IressForm>
+      <IressFormField
+        label="Default message"
+        name="default"
+        hint="Enter a date after today"
+        rules={{ minDate: new Date() }}
+        render={(controlledProps) => (
+          <IressInput {...controlledProps} type="date" />
+        )}
+      />
+      <IressFormField
+        label="Custom message"
+        name="custom"
+        hint="Enter a date after today"
+        rules={{
+          minDate: {
+            value: new Date(),
+            message: 'Please enter a date after today!',
+          },
+        }}
+        render={(controlledProps) => (
+          <IressInput {...controlledProps} type="date" />
+        )}
+      />
+      <IressButton type="submit" mode="primary">
+        Validate
+      </IressButton>
+    </IressForm>
+  );
+}
+```
 
 ##### `maxDate`
 
@@ -356,7 +710,50 @@ The maximum date to accept for this input.
 
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
-<StoryEmbed id="patterns-form--max-date"/>
+```tsx
+import {
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressButton,
+} from '@iress-oss/ids-components';
+
+/**
+ * The `maxDate` rule works with date inputs. Validates that the date is before the specified value.
+ */
+export function FormRuleMaxDate() {
+  return (
+    <IressForm>
+      <IressFormField
+        label="Default message"
+        name="default"
+        hint="Enter a date before today"
+        rules={{ maxDate: new Date() }}
+        render={(controlledProps) => (
+          <IressInput {...controlledProps} type="date" />
+        )}
+      />
+      <IressFormField
+        label="Custom message"
+        name="custom"
+        hint="Enter a date before today"
+        rules={{
+          maxDate: {
+            value: new Date(),
+            message: 'Please enter a date before today!',
+          },
+        }}
+        render={(controlledProps) => (
+          <IressInput {...controlledProps} type="date" />
+        )}
+      />
+      <IressButton type="submit" mode="primary">
+        Validate
+      </IressButton>
+    </IressForm>
+  );
+}
+```
 
 ##### `email`
 
@@ -364,7 +761,41 @@ Ensures the input is a valid email address.
 
 **Note:** This is a custom rule created for `IressForm` and its sub-components. It will translate the rule into a `validate` rule for react-hook-forms. It will not work with a `validate` function, only if you set the `validate` prop to an `object` of functions.
 
-<StoryEmbed id="patterns-form--email"/>
+```tsx
+import {
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressButton,
+} from '@iress-oss/ids-components';
+
+/**
+ * The `email` rule is a shorthand for email validation. Works with text-based controls.
+ */
+export function FormRuleEmail() {
+  return (
+    <IressForm>
+      <IressFormField
+        label="Default message"
+        name="default"
+        hint="Enter an email address"
+        rules={{ email: true }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressFormField
+        label="Custom message"
+        name="custom"
+        hint="Enter an email address"
+        rules={{ email: 'Please enter a valid email address!' }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressButton type="submit" mode="primary">
+        Validate
+      </IressButton>
+    </IressForm>
+  );
+}
+```
 
 ##### `validate`
 
@@ -374,19 +805,140 @@ You can pass a callback function as the argument to validate, or you can pass an
 
 - for `object` or `array` input data, it's recommended to use the validate function for validation as the other rules mostly apply to `string`, `string[]`, `number` and `boolean` data types.
 
-<StoryEmbed id="patterns-form--validate"/>
+```tsx
+import {
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressButton,
+} from '@iress-oss/ids-components';
+
+/**
+ * The `validate` rule allows custom validation functions. Works with all form controls.
+ * Return `true` for valid, or a string message for invalid.
+ */
+export function FormRuleValidate() {
+  return (
+    <IressForm>
+      <IressFormField
+        label="Must contain 'hello'"
+        name="default"
+        hint="Type something containing 'hello'"
+        rules={{
+          validate: {
+            containsHello: (value: string) =>
+              value?.includes('hello') || 'Value must contain "hello"',
+          },
+        }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressFormField
+        label="Must be Google"
+        name="custom"
+        hint="Type 'Google' to pass"
+        rules={{
+          validate: {
+            isGoogle: (value: string) =>
+              value === 'Google' || 'Only Google is accepted!',
+          },
+        }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressButton type="submit" mode="primary">
+        Validate
+      </IressButton>
+    </IressForm>
+  );
+}
+```
 
 #### Handling submission
 
 When the form passes validation (if not disabled), the `onSubmit` event is emitted. Its event details contain a map of the field names and the data entered by the user.
 
-<StoryEmbed id="patterns-form--handling-submission" />
+```tsx
+import {
+  IressTable,
+  IressForm,
+  IressModal,
+  IressFormField,
+  IressInput,
+  IressButton,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+interface FieldValues {
+  name?: string;
+  email?: string;
+}
+
+export function FormSubmission() {
+  const [showModal, setShowModal] = useState(false);
+  const [submitted, setSubmitted] = useState<FieldValues | undefined>(
+    undefined,
+  );
+
+  return (
+    <IressForm
+      onSubmit={(data) => {
+        setSubmitted(data);
+        setShowModal(true);
+      }}
+    >
+      <IressFormField
+        label="Name"
+        name="name"
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+        rules={{
+          required: 'Name is required',
+        }}
+      />
+      <IressFormField
+        label="Email address"
+        name="email"
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+        rules={{
+          minLength: {
+            message: 'Use a longer email address',
+            value: 6,
+          },
+          required: 'Email is required',
+        }}
+      />
+      <IressButton mode="primary" type="submit">
+        Sign up
+      </IressButton>
+      <IressModal
+        show={showModal}
+        onShowChange={setShowModal}
+        onExited={() => setSubmitted(undefined)}
+      >
+        <IressTable
+          caption="Submitted details"
+          rows={Object.entries(submitted ?? {}).map((entry) => ({
+            name: entry[0],
+            value: JSON.stringify(entry[1], null, 2),
+          }))}
+        />
+      </IressModal>
+    </IressForm>
+  );
+}
+```
 
 #### Pre-fill the form
 
 You can set the `defaultValues` prop to pre-fill the form values.
 
-<StoryEmbed id="patterns-form--default-values" />
+```tsx
+<IressForm
+  pattern="short"
+  defaultValues={{
+    name: 'Luke Skywalker',
+    email: 'luke.skywalker@iress.com',
+  }}
+/>;
+```
 
 #### Custom error handling
 
@@ -394,7 +946,85 @@ The `onError` prop allows you to listen to any field errors. It takes two argume
 
 One use case for this prop is to create your own visible error summary at the top of the form, or to log errors to an external service.
 
-<StoryEmbed id="patterns-form--custom-error-handling" />
+```tsx
+import {
+  IressTable,
+  IressForm,
+  IressModal,
+  IressStack,
+  IressFormField,
+  IressInput,
+  IressButton,
+  IressText,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+import { type FieldErrors } from 'react-hook-form';
+
+interface FieldValues {
+  name?: string;
+  email?: string;
+}
+
+export function CustomErrorHandlingForm() {
+  const [errors, setErrors] = useState<FieldErrors<FieldValues> | undefined>(
+    undefined,
+  );
+
+  return (
+    <IressForm onError={(data) => setErrors(data)}>
+      <IressText mb="md">
+        <h2>Custom error handling</h2>
+        <p>
+          Demonstrates usage of the <code>onError</code> prop to show a modal
+          when there are issues with the form.
+        </p>
+      </IressText>
+      <IressFormField
+        label="Name"
+        name="name"
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+        rules={{
+          required: 'Name is required',
+        }}
+      />
+      <IressFormField
+        label="Email address"
+        name="email"
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+        rules={{
+          minLength: {
+            message: 'Use a longer email address',
+            value: 6,
+          },
+          required: 'Email is required',
+        }}
+      />
+      <IressButton mode="primary" type="submit">
+        Sign up
+      </IressButton>
+      <IressModal
+        show={!!errors}
+        onShowChange={(show) => !show && setErrors(undefined)}
+      >
+        <IressTable
+          caption="Errors"
+          rows={Object.entries(errors ?? {}).map(([name, errorDetails]) => ({
+            name,
+            errorDetails: (
+              <IressStack gap="sm">
+                <ul>
+                  <li>Error type: {String(errorDetails?.type)}</li>
+                  <li>Error message: {String(errorDetails?.message)}</li>
+                </ul>
+              </IressStack>
+            ),
+          }))}
+        />
+      </IressModal>
+    </IressForm>
+  );
+}
+```
 
 #### `values`
 
@@ -407,7 +1037,89 @@ Use cases where you may need the `values` prop:
 
 **Note:** `values` takes precedence over `defaultValues`. To ensure your form state is predictable, it is best to only use one prop to manage form values.
 
-<StoryEmbed id="patterns-form--values" />
+```tsx
+import {
+  IressForm,
+  IressModal,
+  IressDivider,
+  IressButton,
+  IressTable,
+  IressInline,
+  IressFormField,
+  IressInput,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+interface FieldValues {
+  name?: string;
+  email?: string;
+}
+
+export function ControlledForm() {
+  const [values, setValues] = useState<FieldValues>({
+    name: 'Leia Skywalker',
+    email: 'leia.skywalker@iress.com',
+  });
+  const [preview, setPreview] = useState(false);
+
+  return (
+    <>
+      <IressForm
+        onSubmit={(data) => {
+          setValues(data);
+          setPreview(true);
+        }}
+        values={values}
+        mode="onChange"
+      >
+        <IressFormField
+          label="Name"
+          name="name"
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          rules={{
+            required: 'Name is required',
+          }}
+        />
+        <IressFormField
+          label="Email address"
+          name="email"
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          rules={{
+            minLength: {
+              message: 'Use a longer email address',
+              value: 6,
+            },
+            required: 'Email is required',
+          }}
+        />
+      </IressForm>
+      <IressDivider my="md" />
+      <IressInline gap="sm">
+        <IressButton onClick={() => setPreview(true)}>Last update</IressButton>
+        <IressButton
+          onClick={() =>
+            setValues({
+              name: '',
+              email: '',
+            })
+          }
+        >
+          Clear
+        </IressButton>
+      </IressInline>
+      <IressModal show={!!preview} onShowChange={(show) => setPreview(show)}>
+        <IressTable
+          caption="Last update"
+          rows={Object.entries(values).map((entry) => ({
+            name: entry[0],
+            value: JSON.stringify(entry[1], null, 2),
+          }))}
+        />
+      </IressModal>
+    </>
+  );
+}
+```
 
 #### Disable validation
 
@@ -418,7 +1130,89 @@ Disabling validation is not possible with the `IressForm` component. In cases wh
 
 Here we have an example showcasing option one.
 
-<StoryEmbed id="patterns-form--disable-validation" />
+```tsx
+import {
+  type FormRef,
+  IressButton,
+  IressDivider,
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressToasterProvider,
+  useToaster,
+} from '@iress-oss/ids-components';
+import { useRef } from 'react';
+
+interface FieldValues {
+  name?: string;
+  email?: string;
+}
+
+const Form = () => {
+  const { success, error } = useToaster();
+  const formRef = useRef<FormRef<FieldValues>>(null);
+
+  return (
+    <>
+      <IressForm
+        onSubmit={() =>
+          success({
+            heading: 'Passed validation',
+            content: JSON.stringify(formRef.current?.api.getValues(), null, 2),
+          })
+        }
+        onError={() =>
+          error({
+            heading: 'Failed validation',
+            content: JSON.stringify(formRef.current?.api.getValues(), null, 2),
+          })
+        }
+        ref={formRef}
+      >
+        <IressFormField
+          label="Name"
+          name="name"
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          rules={{
+            required: 'Name is required',
+          }}
+        />
+        <IressFormField
+          label="Email address"
+          name="email"
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          rules={{
+            minLength: {
+              message: 'Use a longer email address',
+              value: 6,
+            },
+            required: 'Email is required',
+          }}
+        />
+      </IressForm>
+      <IressDivider my="md" />
+      <IressButton
+        onClick={() => {
+          success({
+            heading: 'Saved as draft (no validation)',
+            content: JSON.stringify(formRef.current?.api.getValues(), null, 2),
+          });
+        }}
+      >
+        Save as draft
+      </IressButton>
+    </>
+  );
+};
+
+export function DisableValidationForm() {
+  return (
+    <IressToasterProvider>
+      <Form />
+    </IressToasterProvider>
+  );
+}
+```
 
 #### Resetting the form
 
@@ -426,7 +1220,58 @@ You can reset the form using the `ref` of the form. You must provide a `defaultV
 
 **Note:** `<button type="reset" />` does not work with `IressForm`. You need to add an `onClick` prop to the button and use the `ref.reset` method to reset the form.
 
-<StoryEmbed id="patterns-form--reset-form" />
+```tsx
+import {
+  IressForm,
+  type FormRef,
+  IressDivider,
+  IressButton,
+  IressFormField,
+  IressInput,
+} from '@iress-oss/ids-components';
+import { useRef } from 'react';
+
+interface FieldValues {
+  name?: string;
+  email?: string;
+}
+
+export function FormReset() {
+  const ref = useRef<FormRef<FieldValues>>(null);
+
+  return (
+    <IressForm ref={ref}>
+      <IressFormField
+        label="Name"
+        name="name"
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+        rules={{
+          required: 'Name is required',
+        }}
+      />
+      <IressFormField
+        label="Email address"
+        name="email"
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+        rules={{
+          minLength: {
+            message: 'Use a longer email address',
+            value: 6,
+          },
+          required: 'Email is required',
+        }}
+      />
+      <IressButton mode="primary" type="submit">
+        Sign up
+      </IressButton>
+      <IressDivider my="md" />
+      <IressButton type="reset" onClick={() => ref.current?.reset()}>
+        Reset
+      </IressButton>
+    </IressForm>
+  );
+}
+```
 
 #### `IressHookForm`
 
@@ -439,13 +1284,118 @@ Some use cases:
 1. You may need to use the `useForm` hook in a parent component to share the form state with multiple child components.
 2. You would like to use the return value of the `useForm` hook without having to use a ref to access the `react-hook-form` api.
 
-<StoryEmbed id="patterns-form-hookform--hook-form" />
+```tsx
+import {
+  IressButton,
+  IressCheckbox,
+  IressContainer,
+  IressDivider,
+  IressFormField,
+  IressHookForm,
+  IressInput,
+  IressInputCurrency,
+  IressPanel,
+  IressText,
+} from '@iress-oss/ids-components';
+import { useForm } from 'react-hook-form';
+
+interface FieldValues {
+  firstName: string;
+  lastName: string;
+  insuredAtPolicyLevel?: boolean;
+  sumInsured?: number;
+  sumInsured_na?: string;
+}
+
+export const HookFormExample = () => {
+  const initialInsuredAtPolicyLevel = false;
+  const initialSumInsured = 5000;
+
+  const form = useForm<FieldValues>();
+  const { watch, control } = form;
+
+  const firstName = watch('firstName');
+  const lastName = watch('lastName');
+  const insuredAtPolicyLevel = watch('insuredAtPolicyLevel');
+
+  return (
+    <IressContainer>
+      <IressText>
+        <h2>Hook Form Example</h2>
+        <p>
+          This example demonstrates how to use the <code>IressHookForm</code>{' '}
+          component to create a form with controlled fields and conditional
+          rendering based on form values.
+        </p>
+        <IressHookForm form={form}>
+          {firstName && lastName && (
+            <IressPanel mb="md" bg="alt">
+              Name: {firstName} {lastName}
+            </IressPanel>
+          )}
+          <IressFormField
+            name="firstName"
+            label="First Name"
+            render={(controlledProps) => <IressInput {...controlledProps} />}
+            rules={{ required: true }}
+          />
+          <IressFormField
+            name="lastName"
+            label="Last Name"
+            render={(controlledProps) => (
+              <IressInput {...controlledProps} type="email" />
+            )}
+            rules={{ required: true }}
+          />
+          <IressDivider mt="lg" mb="md" />
+          <IressFormField
+            name="insuredAtPolicyLevel"
+            defaultChecked={initialInsuredAtPolicyLevel}
+            label="Insurance options"
+            control={control}
+            render={(controlledProps) => (
+              <IressCheckbox {...controlledProps}>
+                Insured at policy level
+              </IressCheckbox>
+            )}
+          />
+          {insuredAtPolicyLevel && (
+            <IressFormField
+              name="sumInsured"
+              defaultValue={initialSumInsured}
+              label="Sum insured"
+              control={control}
+              render={(controlledProps) => (
+                <IressInputCurrency {...controlledProps} currencyCode="GBP" />
+              )}
+            />
+          )}
+          {!insuredAtPolicyLevel && (
+            <IressFormField
+              name="sumInsured_na"
+              defaultValue="N/A"
+              label="Sum insured"
+              control={control}
+              render={(properties) => <IressInput {...properties} readOnly />}
+            />
+          )}
+          <IressButton type="submit" mode="primary">
+            Submit
+          </IressButton>
+        </IressHookForm>
+      </IressText>
+    </IressContainer>
+  );
+};
+```
 
 #### `IressFormValidationSummary`
 
 `IressFormValidationSummary` is the error summary component that is added to the top of the form for screen readers to announce validation errors. It is automatically added to the form when there are validation errors, but you can also use it independently to create your own error summary, usually used if you want a visible error summary at the top of the form.
 
-<StoryEmbed id="patterns-form-formvalidationsummary--default" />
+```tsx
+<IressFormValidationSummary />;
+```
 
 #### With readonly data
 
@@ -455,7 +1405,90 @@ Please take note of the following when displaying read only data.
 
 - It is best to keep readonly data in a separate section of the form, to further avoid confusion with editable fields.
 
-<StoryEmbed id="patterns-form--with-readonly-data" />
+```tsx
+import {
+  IressButton,
+  IressCol,
+  IressContainer,
+  IressDivider,
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressModal,
+  IressRow,
+  IressTable,
+  IressText,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+import { type FieldValues } from 'react-hook-form';
+
+export const WithReadonlyDataForm = () => {
+  const [values, setValues] = useState<FieldValues>({
+    firstName: 'Leia',
+    lastName: 'Skywalker',
+    email: 'leia.skywalker@iress.com',
+  });
+  const [preview, setPreview] = useState(false);
+
+  return (
+    <>
+      <IressForm
+        onSubmit={(data) => {
+          setValues(data);
+          setPreview(true);
+        }}
+        values={values}
+      >
+        <IressContainer>
+          <IressText element="h2">User Details</IressText>
+          <IressRow gutter="md">
+            <IressCol>
+              <IressFormField
+                name="firstName"
+                label="First Name"
+                render={(controlledProps) => (
+                  <IressInput {...controlledProps} readOnly />
+                )}
+                mb="none"
+              />
+            </IressCol>
+            <IressCol>
+              <IressFormField
+                name="lastName"
+                label="Last Name"
+                render={(controlledProps) => (
+                  <IressInput {...controlledProps} readOnly />
+                )}
+                mb="none"
+              />
+            </IressCol>
+          </IressRow>
+          <IressDivider my="spacing.4" />
+          <IressFormField
+            name="email"
+            label="Email"
+            render={(controlledProps) => (
+              <IressInput {...controlledProps} type="email" />
+            )}
+          />
+          <IressButton type="submit" mode="primary">
+            Submit
+          </IressButton>
+        </IressContainer>
+      </IressForm>
+      <IressModal show={!!preview} onShowChange={(show) => setPreview(show)}>
+        <IressTable
+          caption="Submitted"
+          rows={Object.entries(values).map((entry) => ({
+            name: entry[0],
+            value: JSON.stringify(entry[1], null, 2),
+          }))}
+        />
+      </IressModal>
+    </>
+  );
+};
+```
 
 #### Switching between readonly and edit modes
 
@@ -466,7 +1499,137 @@ Please take note of the following when switching between modes:
 - Switching is done on a per-section basis, not on a per-field basis.
 - When the user saves the data, it should switch back to read-only mode to avoid any confusion about whether the changes have been saved.
 
-<StoryEmbed id="patterns-form--switch-edit-readonly" />
+```tsx
+import {
+  IressButton,
+  IressCol,
+  IressContainer,
+  IressForm,
+  IressFormField,
+  IressIcon,
+  IressInline,
+  IressInput,
+  IressRow,
+  IressSelect,
+  IressText,
+  IressToasterProvider,
+  useToaster,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+import { type FieldValues } from 'react-hook-form';
+
+const Form = () => {
+  const dependentOptions = [
+    { value: 0, label: '0' },
+    { value: 1, label: '1' },
+    { value: 2, label: '2' },
+    { value: 3, label: '3' },
+    { value: 4, label: '4' },
+    { value: 5, label: '5' },
+    { value: 6, label: '6' },
+    { value: 7, label: '7' },
+    { value: 8, label: '8' },
+    { value: 9, label: '9' },
+    { value: 10, label: '10' },
+  ];
+  const [values, setValues] = useState<FieldValues>({
+    firstName: 'Leia',
+    lastName: 'Skywalker',
+    email: 'leia.skywalker@iress.com',
+    dependents: 0,
+  });
+  const [editable, setEditable] = useState(false);
+  const { success } = useToaster();
+
+  return (
+    <IressForm
+      onSubmit={(data) => {
+        setValues(data);
+        setEditable(false);
+        success({
+          content: 'Saved successfully',
+        });
+      }}
+      values={values}
+    >
+      <IressContainer>
+        <IressText element="h2" mb="spacing.4">
+          User Details
+        </IressText>
+        <IressRow gutter="md">
+          <IressCol>
+            <IressFormField
+              name="firstName"
+              label="First Name"
+              render={(controlledProps) => (
+                <IressInput {...controlledProps} readOnly={!editable} />
+              )}
+            />
+          </IressCol>
+          <IressCol>
+            <IressFormField
+              name="lastName"
+              label="Last Name"
+              render={(controlledProps) => (
+                <IressInput {...controlledProps} readOnly={!editable} />
+              )}
+            />
+          </IressCol>
+        </IressRow>
+        <IressRow gutter="md">
+          <IressCol>
+            <IressFormField
+              name="email"
+              label="Email"
+              render={(controlledProps) => (
+                <IressInput
+                  {...controlledProps}
+                  readOnly={!editable}
+                  type="email"
+                />
+              )}
+            />
+          </IressCol>
+          <IressCol>
+            <IressFormField
+              name="dependents"
+              label="Dependents"
+              render={(controlledProps) => (
+                <IressSelect
+                  {...controlledProps}
+                  readOnly={!editable}
+                  options={dependentOptions}
+                />
+              )}
+            />
+          </IressCol>
+        </IressRow>
+        {editable ? (
+          <IressInline gap="sm">
+            <IressButton type="submit" mode="primary">
+              Save
+            </IressButton>
+            <IressButton onClick={() => setEditable(false)}>Cancel</IressButton>
+          </IressInline>
+        ) : (
+          <IressButton
+            onClick={() => setEditable(true)}
+            prepend={<IressIcon name="pencil" />}
+          >
+            Edit
+          </IressButton>
+        )}
+      </IressContainer>
+    </IressForm>
+  );
+};
+
+export const SwitchEditReadonlyForm = () => (
+  <IressToasterProvider>
+    <Form />
+  </IressToasterProvider>
+);
+```
 
 #### Nested forms
 
@@ -480,13 +1643,333 @@ To achieve a similar effect, you can use multiple `IressForm` components, and tr
 
 The example here showcases triggering validation using the `form` attribute of `IressButton` and the `requestSubmit` method on the form element.
 
-<StoryEmbed id="patterns-form--nested-forms" />
+```tsx
+import {
+  IressButton,
+  IressDivider,
+  IressFieldGroup,
+  IressForm,
+  IressFormField,
+  IressFormValidationSummary,
+  IressInline,
+  IressInput,
+  IressModal,
+  IressPanel,
+  IressStack,
+  IressTable,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+interface FormData {
+  name: string;
+}
+
+const MainForm = () => {
+  const [details, setDetails] = useState<FormData | undefined>();
+
+  return (
+    <>
+      <IressForm<FormData>
+        alert={
+          <IressFormValidationSummary heading="Please fix the errors for the main form" />
+        }
+        id="mainForm"
+        onSubmit={(data) => {
+          setDetails(data);
+        }}
+      >
+        <IressFormField<FormData>
+          name="name"
+          label="Name"
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          rules={{ required: true }}
+        />
+      </IressForm>
+      <IressModal
+        show={!!details}
+        onShowChange={(show) => !show && setDetails(undefined)}
+      >
+        {details && (
+          <IressTable
+            caption="Submitted main form"
+            rows={Object.entries(details).map((entry) => ({
+              name: entry[0],
+              value: JSON.stringify(entry[1], null, 2),
+            }))}
+          />
+        )}
+      </IressModal>
+    </>
+  );
+};
+
+const SubForm = () => {
+  const [details, setDetails] = useState<FormData | undefined>();
+
+  return (
+    <IressPanel bg="alt">
+      <IressStack gap="md">
+        <IressForm<FormData>
+          alert={
+            <IressFormValidationSummary heading="Please fix the errors for the dependants" />
+          }
+          id="subForm"
+          onSubmit={(data) => {
+            setDetails(data);
+          }}
+        >
+          <IressFieldGroup label="Add new dependant" inline mb="none">
+            <IressFormField
+              name="name"
+              label="Name"
+              render={(controlledProps) => <IressInput {...controlledProps} />}
+              rules={{ required: true }}
+            />
+            <IressButton type="submit">Save</IressButton>
+          </IressFieldGroup>
+        </IressForm>
+        <IressTable
+          caption="Dependants"
+          columns={[
+            { key: 'name', label: 'Name' },
+            { key: 'value', label: 'Value' },
+          ]}
+          rows={Object.entries(details ?? {}).map((entry) => ({
+            name: entry[0],
+            value: JSON.stringify(entry[1], null, 2),
+          }))}
+        />
+      </IressStack>
+    </IressPanel>
+  );
+};
+
+export const NestedFormsExample = () => {
+  const submitAllForms = () => {
+    document.querySelector<HTMLFormElement>('[id=mainForm]')?.requestSubmit();
+    document.querySelector<HTMLFormElement>('[id=subForm]')?.requestSubmit();
+  };
+
+  return (
+    <IressStack gap="md">
+      <MainForm />
+      <SubForm />
+      <IressDivider />
+      <IressInline gap="md">
+        <IressButton type="submit" form="mainForm">
+          Submit main form
+        </IressButton>
+        <IressButton onClick={submitAllForms}>Submit all forms</IressButton>
+      </IressInline>
+    </IressStack>
+  );
+};
+```
 
 #### Form groups
 
 Powered by [React Hook Form](https://react-hook-form.com/docs/usefieldarray)'s `useFieldArray`, this example allows you add/edit/delete multiple children sections within ONE form (not nested form).
 
-<StoryEmbed id="patterns-form--form-groups" />
+```tsx
+import {
+  IressButton,
+  IressDivider,
+  IressFieldGroup,
+  IressFormField,
+  IressInline,
+  IressInput,
+  IressPanel,
+  IressText,
+  IressIcon,
+  IressCloseButton,
+  IressHookForm,
+} from '@iress-oss/ids-components';
+import {
+  useFieldArray,
+  useForm,
+  type Control,
+  type UseFormGetValues,
+} from 'react-hook-form';
+
+interface Client {
+  name: string | undefined;
+  salary: number | undefined;
+  goal: string | undefined;
+}
+
+interface Dependant {
+  name: string | undefined;
+  relationship: string | undefined;
+  age: number | undefined;
+}
+
+interface FormValues {
+  client: Client;
+  dependants: Dependant[];
+}
+
+interface ClientProps {
+  control: Control<FormValues> | undefined;
+}
+
+interface DependantProps {
+  index: number;
+  control: Control<FormValues> | undefined;
+  update: (index: number, data: Dependant) => void;
+  remove: (index: number) => void;
+  getValues: UseFormGetValues<FormValues>;
+}
+
+const defaultValues = {
+  client: {
+    name: '',
+    salary: undefined,
+    goal: '',
+  },
+  dependants: [
+    {
+      name: '',
+      relationship: '',
+      age: undefined,
+    },
+  ],
+};
+
+const ClientSection: React.FC<ClientProps> = ({ control }) => {
+  return (
+    <IressFieldGroup label="Client" inline mb="none">
+      <IressFormField
+        name="client.name"
+        label="Name"
+        control={control}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+        rules={{ required: true }}
+      />
+      <IressFormField
+        name="client.salary"
+        label="Salary"
+        control={control}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+        rules={{ required: true }}
+      />
+      <IressFormField
+        name="client.goal"
+        label="Goal"
+        control={control}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+        rules={{ required: true }}
+      />
+    </IressFieldGroup>
+  );
+};
+
+const DependantSection: React.FC<DependantProps> = ({
+  index,
+  update,
+  remove,
+  control,
+  getValues,
+}: DependantProps) => {
+  return (
+    <IressPanel bg="alt" noBorder mb="spacing.4">
+      <IressInline horizontalAlign="right">
+        <IressCloseButton
+          onClick={() => remove(index)}
+          mb="-lg"
+          style={{ zIndex: 1 }}
+        />
+      </IressInline>
+      <IressFieldGroup label={`Dependant ${index + 1}`} inline mb="none">
+        <IressFormField
+          name={`dependants.${index}.name`}
+          label="Name"
+          control={control}
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          rules={{ required: true }}
+        />
+        <IressFormField
+          name={`dependants.${index}.relationship`}
+          label="Relationship"
+          control={control}
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          rules={{ required: true }}
+        />
+        <IressFormField
+          name={`dependants.${index}.age`}
+          label="Age"
+          control={control}
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          rules={{ required: true }}
+        />
+        <IressButton
+          type="button"
+          prepend={<IressIcon name="check" />}
+          onClick={() => {
+            const data = getValues();
+            const value = data?.dependants[index];
+            update(index, value);
+          }}
+        >
+          Save
+        </IressButton>
+      </IressFieldGroup>
+    </IressPanel>
+  );
+};
+
+export const FormGroups = () => {
+  const form = useForm<FormValues>({
+    defaultValues: defaultValues,
+    mode: 'onBlur',
+  });
+
+  const { control, getValues } = form;
+
+  const { fields, append, update, remove } = useFieldArray({
+    name: 'dependants',
+    control,
+  });
+
+  const onSubmit = (data: FormValues) => console.log(data);
+
+  return (
+    <IressText>
+      <h1>Form groups</h1>
+      <p>
+        This is one form with child sections (not nested forms). Play around to
+        add/edit/delete child form sections:
+      </p>
+      <IressHookForm<FormValues> id="mainForm" form={form} onSubmit={onSubmit}>
+        <ClientSection control={control} />
+        {fields.map((field, index) => (
+          <DependantSection
+            key={field.id}
+            index={index}
+            control={control}
+            update={update}
+            remove={remove}
+            getValues={getValues}
+          />
+        ))}
+        <IressButton
+          type="button"
+          prepend={<IressIcon name="plus" />}
+          onClick={() => {
+            append({ name: '', relationship: '', age: undefined });
+          }}
+          status="success"
+        >
+          Add Dependant
+        </IressButton>
+        <IressDivider my="md" />
+        <IressButton type="submit" mode="primary">
+          Submit All
+        </IressButton>
+      </IressHookForm>
+    </IressText>
+  );
+};
+```
 
 #### Conditional fields (`useWatch`)
 
@@ -496,7 +1979,92 @@ When you have fields that are conditionally shown, you can use the `useWatch` ho
 
 - You can use the `api.watch` method on the `IressForm`'s ref to watch the value of a field, but it is recommended to use the hook for better performance by isolating re-rendering at the component level.
 
-<StoryEmbed id="patterns-form--use-watch" />
+```tsx
+import {
+  IressCheckbox,
+  IressCheckboxGroup,
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressText,
+} from '@iress-oss/ids-components';
+import { useWatch } from 'react-hook-form';
+
+interface FieldValues {
+  show?: string[];
+  name?: string;
+  email?: string;
+}
+
+/**
+ * Conditional fields need to be rendered in a sub-component, to allow it to use the `useWatch`
+ * hook to watch the value of the field dictating the display of conditional fields.
+ */
+const FormSectionWithConditionalFields = () => {
+  const show = useWatch<FieldValues>({ name: 'show' });
+
+  return (
+    <IressText>
+      <h2>
+        Conditional fields using <code>useWatch</code>
+      </h2>
+      <p>
+        This example demonstrates how to use the <code>useWatch()</code> hook to
+        watch the value of a field and conditionally render other fields based
+        on that value.
+      </p>
+      <IressFormField
+        name="show"
+        label="Select fields to show"
+        rules={{
+          required: 'Please select at least one field to show',
+        }}
+        render={(controlledProps) => (
+          <IressCheckboxGroup {...controlledProps} layout="inline">
+            <IressCheckbox value="name">Name</IressCheckbox>
+            <IressCheckbox value="email">Email</IressCheckbox>
+          </IressCheckboxGroup>
+        )}
+      />
+      {show?.includes('name') && (
+        <IressFormField
+          name="name"
+          label="Name"
+          rules={{
+            required: 'Name is required',
+          }}
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+        />
+      )}
+      {show?.includes('email') && (
+        <IressFormField
+          name="email"
+          label="Email"
+          rules={{
+            required: 'Email is required',
+            pattern: {
+              value:
+                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+              message: 'Please enter a valid email address',
+            },
+          }}
+          render={(controlledProps) => (
+            <IressInput {...controlledProps} type="email" />
+          )}
+        />
+      )}
+    </IressText>
+  );
+};
+
+export function UseWatchForm() {
+  return (
+    <IressForm>
+      <FormSectionWithConditionalFields />
+    </IressForm>
+  );
+}
+```
 
 #### Validation depend on other fields
 
@@ -504,7 +2072,140 @@ This example shows how to validate one field based on another field's value.
 
 The budget amount input validates against the selected budget range using the custom `validateBudgetInput` rules.
 
-<StoryEmbed id="patterns-form--validation-depend-on-other-fields" />
+```tsx
+import {
+  IressStack,
+  IressRow,
+  IressCol,
+  IressFormField,
+  IressInputCurrency,
+  IressSelect,
+  IressButton,
+  IressText,
+  IressDivider,
+  IressHookForm,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+interface FormData {
+  primaryField: string;
+  dependentField: string;
+}
+
+const budgetOptions = [
+  { value: 'less-than-499', label: 'Less than $499' },
+  { value: 'between-500-999', label: 'Between $500 to $999' },
+  { value: 'more-than-1000', label: 'More than $1000' },
+];
+
+const validateBudgetInput = (
+  value: string,
+  selectedBudget: string,
+): string | true => {
+  if (!selectedBudget) return 'Select budget range first';
+
+  const numericValue = parseFloat(value);
+  if (isNaN(numericValue)) return 'Enter a valid number';
+
+  switch (selectedBudget) {
+    case 'less-than-499':
+      return numericValue < 499 || 'Must be less than $499';
+    case 'between-500-999':
+      return (
+        (numericValue >= 500 && numericValue <= 999) ||
+        'Must be between $500-$999'
+      );
+    case 'more-than-1000':
+      return numericValue > 1000 || 'Must be more than $1000';
+    default:
+      return true;
+  }
+};
+
+export const ValidationDependOnOtherFields = () => {
+  const [submitted, setSubmitted] = useState<FormData | undefined>(undefined);
+
+  const form = useForm<FormData>({
+    defaultValues: {
+      primaryField: '',
+      dependentField: '',
+    },
+  });
+
+  const onSubmit = (data: FormData) => {
+    console.log(data);
+    setSubmitted(data);
+  };
+
+  const onError = (errors: Record<string, unknown>) => {
+    console.log('Form validation errors:', errors);
+  };
+
+  return (
+    <>
+      <IressText element="h1">Validation depend on other fields</IressText>
+      <IressText element="p">
+        This form demonstrates how to validate a field based on the value of
+        another field. The budget amount field is validated against the selected
+        budget range.
+      </IressText>
+      <IressHookForm form={form} onSubmit={onSubmit} onError={onError}>
+        <IressStack gap="md">
+          <IressRow>
+            <IressCol>
+              <IressFormField
+                name="primaryField"
+                label="Monthly investment budget"
+                rules={{
+                  required: 'Budget range is required',
+                }}
+                render={(field) => (
+                  <IressSelect
+                    {...field}
+                    placeholder="Select your budget range"
+                    options={budgetOptions}
+                  />
+                )}
+              />
+            </IressCol>
+          </IressRow>
+          <IressRow>
+            <IressCol>
+              <IressFormField
+                name="dependentField"
+                label="Enter your budget amount ($)"
+                rules={{
+                  required: 'Budget amount is required',
+                  validate: (value: string, formValues: FormData) =>
+                    validateBudgetInput(value, formValues.primaryField),
+                }}
+                render={(field) => (
+                  <IressInputCurrency {...field} type="number" />
+                )}
+              />
+            </IressCol>
+          </IressRow>
+          <IressButton type="submit">Submit</IressButton>
+        </IressStack>
+      </IressHookForm>
+      <IressDivider />
+      {submitted && (
+        <IressStack gap="md">
+          <IressText element="h3">Submitted Values</IressText>
+          <IressText>
+            Budget Range:{' '}
+            {budgetOptions.find(
+              (option) => option.value === submitted.primaryField,
+            )?.label ?? submitted.primaryField}
+          </IressText>
+          <IressText>Budget Amount: ${submitted.dependentField}</IressText>
+        </IressStack>
+      )}
+    </>
+  );
+};
+```
 
 #### Custom form field components
 
@@ -525,7 +2226,350 @@ Key features demonstrated:
 - **Form State Management**: Automatically integrates with form context using controlled props
 - **File Management**: Display uploaded files with remove functionality using `IressPanel`
 
-<StoryEmbed id="patterns-form--custom-form-field-components" />
+```tsx
+import {
+  IressButton,
+  IressForm,
+  IressInput,
+  IressFormField,
+  IressStack,
+  IressIcon,
+  IressText,
+  IressPanel,
+  IressInline,
+  type IressInputProps,
+} from '@iress-oss/ids-components';
+import React, { useState } from 'react';
+import { useDropzone } from 'react-dropzone';
+
+interface TranscriptFormValues {
+  transcript: TranscriptData | string;
+}
+
+interface TranscriptData {
+  content: string;
+  size?: number;
+  type: 'file' | 'text';
+  extension?: string;
+  fileName?: string;
+  rejectedReasons?: REJECTION_REASONS[];
+}
+
+interface TranscriptTextBoxProps {
+  value: TranscriptData | string;
+  onChange: (data: TranscriptData) => void;
+  placeholder?: string;
+  rows?: number;
+  style?: React.CSSProperties;
+  allowedExtensions?: string[];
+  maxSizeInMB?: number;
+}
+
+interface SubmittedValuesDisplayProps {
+  submittedValues: TranscriptFormValues | null;
+  title?: string;
+}
+
+enum REJECTION_REASONS {
+  TYPE = 'type',
+  SIZE = 'size',
+}
+
+const validateFile =
+  (allowedExtensions: string[], maxSizeInMB: number) =>
+  (data: TranscriptData | string) => {
+    if (
+      !!data &&
+      typeof data === 'object' &&
+      data.type === 'file' &&
+      Array.isArray(data.rejectedReasons) &&
+      data.rejectedReasons.length > 0
+    ) {
+      const errors: string[] = [];
+
+      if (data.rejectedReasons.includes(REJECTION_REASONS.TYPE)) {
+        errors.push(`Only .${allowedExtensions.join(', ')} accepted`);
+      }
+
+      if (data.rejectedReasons.includes(REJECTION_REASONS.SIZE)) {
+        errors.push(`File size must be less than ${maxSizeInMB}MB`);
+      }
+
+      if (errors.length > 0) {
+        return errors.join('. ');
+      }
+    }
+
+    return true;
+  };
+
+const TranscriptTextBox = ({
+  value,
+  onChange,
+  placeholder = 'Copy and paste transcripts OR drag and drop / upload recordings, transcripts or documents here (.txt format).',
+  rows = 10,
+  style,
+  allowedExtensions = ['txt'],
+  maxSizeInMB = 10,
+}: TranscriptTextBoxProps) => {
+  // Extract content and file info from value
+  const currentData =
+    typeof value === 'string'
+      ? { content: value, type: 'text' as const }
+      : value;
+  const currentFile =
+    currentData?.type === 'file' &&
+    (!currentData.rejectedReasons || currentData.rejectedReasons.length === 0)
+      ? {
+          name: currentData.fileName ?? 'Unknown file',
+          size: currentData.size,
+        }
+      : null;
+
+  const createTranscriptData = (
+    content: string,
+    type: 'file' | 'text',
+    additionalData?: Partial<TranscriptData>,
+  ): TranscriptData => ({
+    content,
+    type,
+    ...additionalData,
+  });
+
+  const handleFileRead = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const content = e.target?.result as string;
+      onChange(
+        createTranscriptData(content, 'file', {
+          size: file.size,
+          extension: file.name.split('.').pop()?.toLowerCase(),
+          fileName: file.name,
+        }),
+      );
+    };
+    reader.onerror = () => {
+      // Let parent handle errors through validation
+      onChange(
+        createTranscriptData('', 'file', {
+          fileName: file.name,
+        }),
+      );
+    };
+    reader.readAsText(file);
+  };
+
+  const handleTextChange: IressInputProps<string, number>['onChange'] = (
+    _e,
+    textContent = '',
+  ) => {
+    onChange(createTranscriptData(textContent, 'text'));
+  };
+
+  const onFileSelected = (files: File[]) => {
+    if (files.length === 0) return;
+
+    const file = files[0];
+    handleFileRead(file);
+  };
+
+  const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
+    multiple: false,
+    noClick: true,
+    maxSize: maxSizeInMB * 1024 * 1024,
+    accept: allowedExtensions.reduce(
+      (acc, ext) => {
+        const mimeType =
+          ext === 'txt' ? 'text/plain' : 'application/octet-stream';
+        acc[mimeType] = acc[mimeType] || [];
+        acc[mimeType].push(`.${ext}`);
+        return acc;
+      },
+      {} as Record<string, string[]>,
+    ),
+    onDrop: (acceptedFiles, rejectedFiles) => {
+      if (acceptedFiles.length > 0) {
+        onFileSelected(acceptedFiles);
+        return;
+      }
+
+      if (rejectedFiles.length > 0) {
+        const rejectedFile = rejectedFiles[0];
+        const { file, errors } = rejectedFile;
+
+        // Map error codes to rejection reasons
+        const errorCodeMap = {
+          'file-invalid-type': REJECTION_REASONS.TYPE,
+          'file-too-large': REJECTION_REASONS.SIZE,
+        } as const;
+
+        const rejectedReasons = errors
+          .map((error) => errorCodeMap[error.code as keyof typeof errorCodeMap])
+          .filter((reason): reason is REJECTION_REASONS => Boolean(reason));
+
+        onChange(
+          createTranscriptData('', 'file', {
+            fileName: file.name,
+            rejectedReasons,
+          }),
+        );
+      }
+    },
+  });
+
+  const handleUploadClick = () => {
+    open();
+  };
+
+  const removeFile = () => {
+    onChange(createTranscriptData('', 'text'));
+  };
+
+  return (
+    <IressStack gap="sm">
+      <div {...getRootProps()} style={{ position: 'relative' }}>
+        <input {...getInputProps()} />
+        <IressInput
+          value={currentData?.content || ''}
+          onChange={handleTextChange}
+          rows={rows}
+          placeholder={isDragActive ? 'Drop your file here...' : placeholder}
+          style={{
+            boxSizing: 'border-box',
+            border: isDragActive ? '1px dashed #007acc' : undefined,
+            backgroundColor: isDragActive ? '#f0f8ff' : undefined,
+            ...style,
+          }}
+        />
+      </div>
+
+      {currentFile && (
+        <IressPanel>
+          <IressInline horizontalAlign="between" verticalAlign="middle">
+            <IressText>📄 {currentFile.name}</IressText>
+            <IressButton mode="secondary" onClick={removeFile}>
+              Remove
+            </IressButton>
+          </IressInline>
+        </IressPanel>
+      )}
+
+      <IressButton
+        mode="secondary"
+        onClick={handleUploadClick}
+        prepend={<IressIcon name="upload" />}
+        alignSelf="start"
+      >
+        Upload
+      </IressButton>
+    </IressStack>
+  );
+};
+
+const SubmittedValuesDisplay: React.FC<SubmittedValuesDisplayProps> = ({
+  submittedValues,
+  title = 'Submitted Values:',
+}) => {
+  if (!submittedValues) {
+    return null;
+  }
+
+  return (
+    <IressPanel>
+      <IressStack gap="sm">
+        <IressText textStyle="typography.body.md.strong">{title}</IressText>
+        <IressText>
+          <strong>Type:</strong>
+          {typeof submittedValues.transcript === 'string'
+            ? 'text'
+            : submittedValues.transcript.type}
+        </IressText>
+        <IressText>
+          <strong>Content:</strong>
+          {typeof submittedValues.transcript === 'string'
+            ? submittedValues.transcript
+            : submittedValues.transcript.content}
+        </IressText>
+        {typeof submittedValues.transcript === 'object' &&
+          submittedValues.transcript.fileName && (
+            <IressText>
+              <strong>File Name:</strong> {submittedValues.transcript.fileName}
+            </IressText>
+          )}
+        {typeof submittedValues.transcript === 'object' &&
+          submittedValues.transcript.size && (
+            <IressText>
+              <strong>File Size:</strong>
+              {(submittedValues.transcript.size / 1024).toFixed(2)} KB
+            </IressText>
+          )}
+      </IressStack>
+    </IressPanel>
+  );
+};
+
+const Heading = () => {
+  return (
+    <>
+      <IressText element="h1">Custom FormField Components</IressText>
+      <IressText element="p">
+        This demo showcases how to embed any custom component
+        (TranscriptTextBox) into IressFormField while leveraging its form
+        validation, error handling, and state management without additional
+        implementation. When building custom form components, avoid managing
+        error message state internally. This helps maintain the IressForm as the
+        single source of truth and ensures consistent, predictable UI behavior.
+      </IressText>
+    </>
+  );
+};
+
+export const CustomFormFieldComponents = () => {
+  const [submittedValues, setSubmittedValues] =
+    useState<TranscriptFormValues | null>(null);
+  const allowedExtensions = ['txt'];
+  const maxSizeInMB = 0.1;
+
+  const handleSubmit = (data: TranscriptFormValues) => {
+    setSubmittedValues(data);
+    console.log('Form submitted:', data);
+  };
+
+  return (
+    <>
+      <Heading />
+      <IressForm<TranscriptFormValues>
+        mode="onChange"
+        onSubmit={handleSubmit}
+        defaultValues={{ transcript: { content: '', type: 'text' } }}
+      >
+        <IressFormField
+          label="Transcript"
+          name="transcript"
+          hint="Upload or copy and paste transcript here"
+          render={(controlledProps) => (
+            <TranscriptTextBox
+              {...controlledProps}
+              allowedExtensions={allowedExtensions}
+              maxSizeInMB={maxSizeInMB}
+            />
+          )}
+          rules={{
+            required: 'Transcript is required',
+            validate: {
+              file: validateFile(allowedExtensions, maxSizeInMB),
+            },
+          }}
+        />
+        <IressButton type="submit" mode="primary">
+          Submit
+        </IressButton>
+        <SubmittedValuesDisplay submittedValues={submittedValues} />
+      </IressForm>
+    </>
+  );
+};
+```
 
 #### Sanitising input
 
@@ -541,7 +2585,72 @@ npm install dompurify
 npm install --save-dev @types/dompurify
 ```
 
-<StoryEmbed id="patterns-form--sanitising-input" />
+```tsx
+import {
+  IressAlert,
+  IressButton,
+  IressForm,
+  IressFormField,
+  IressInput,
+} from '@iress-oss/ids-components';
+import DOMPurify from 'dompurify';
+import { useState } from 'react';
+import type { FieldValues } from 'react-hook-form';
+
+const sanitiseDeep = (value: unknown): unknown => {
+  if (typeof value === 'string') return DOMPurify.sanitize(value);
+  if (Array.isArray(value)) return value.map(sanitiseDeep);
+  if (value !== null && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value).map(([k, v]) => [k, sanitiseDeep(v)]),
+    );
+  }
+  return value;
+};
+
+export const SanitisedInputForm = () => {
+  const [sanitisedData, setSanitisedData] = useState<FieldValues | null>(null);
+
+  return (
+    <>
+      <IressForm
+        onSubmit={(data) => {
+          const clean = sanitiseDeep(data) as FieldValues;
+          setSanitisedData(clean);
+          console.log('Sanitised form data:', clean);
+        }}
+      >
+        <IressFormField
+          label="Name"
+          name="name"
+          rules={{ required: 'Name is required' }}
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+        />
+        <IressFormField
+          label="Bio"
+          name="bio"
+          hint="Try entering HTML like <img src=x onerror=alert(1)> to see it sanitised"
+          rules={{ required: 'Bio is required' }}
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+        />
+        <IressButton mode="primary" type="submit">
+          Submit
+        </IressButton>
+      </IressForm>
+      {sanitisedData && (
+        <IressAlert
+          status="success"
+          heading="Sanitised output"
+          mt="lg"
+          multiLine
+        >
+          <pre>{JSON.stringify(sanitisedData, null, 2)}</pre>
+        </IressAlert>
+      )}
+    </>
+  );
+};
+```
 
 ### Testing
 
@@ -565,7 +2674,7 @@ render(
 );
 
 // May be needed sometimes to get over the act warning
-await screen.getByRole('form');
+await screen.findByRole('form');
 
 const emailInput = screen.getByRole('textbox');
 const submitButton = screen.getByRole('button', { name: 'Submit' });

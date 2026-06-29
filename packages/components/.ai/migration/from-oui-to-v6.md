@@ -211,7 +211,7 @@ You can also use `scrollable` on any element — it is not limited to `IressPane
 ```tsx
 <IressStack scrollable="y" style={{ maxHeight: '400px' }}>
   <LongContent />
-</IressStack>
+</IressStack>;
 ```
 
 ---
@@ -600,7 +600,7 @@ All IDS v6 CSS lives in cascade layers. If your own un-layered CSS is being over
   label="Field Label"
   render={(props) => <IressInput {...props} />}
   rules={{ required: 'Required' }}
-/>
+/>;
 ```
 
 ### Pattern 2: Complete form
@@ -620,7 +620,7 @@ All IDS v6 CSS lives in cascade layers. If your own un-layered CSS is being over
   <IressButton type="submit" mode="primary">
     Submit
   </IressButton>
-</IressForm>
+</IressForm>;
 ```
 
 ### Pattern 3: Modal with form
@@ -637,7 +637,7 @@ All IDS v6 CSS lives in cascade layers. If your own un-layered CSS is being over
       Save
     </IressButton>
   </IressForm>
-</IressModal>
+</IressModal>;
 ```
 
 ### Pattern 4: Contextual menu
@@ -648,7 +648,7 @@ All IDS v6 CSS lives in cascade layers. If your own un-layered CSS is being over
     { key: 'edit', label: 'Edit', onClick: handleEdit },
     { key: 'delete', label: 'Delete', onClick: handleDelete },
   ]}
-/>
+/>;
 ```
 
 ---

@@ -15,7 +15,31 @@ import { IressTable } from '@iress-oss/ids-components';
 
 Data driven component for displaying tabular data.
 
-<StoryEmbed id="components-table--automatic-columns"/>
+```tsx
+<IressTable
+  caption="My investments"
+  rows={[
+    {
+      investment_name: 'Artemis Fund Managers Limited',
+      cost: 23898,
+      investmentDate: '2019-09-23',
+      totalPercentage: 24.8,
+    },
+    {
+      investment_name: 'CASH.CASH',
+      cost: 49751.4,
+      investmentDate: '2020-06-28',
+      totalPercentage: 49,
+    },
+    {
+      investment_name: 'VODAFONE GRP',
+      cost: 26382.456,
+      investmentDate: '2019-02-05',
+      totalPercentage: 26.2,
+    },
+  ]}
+/>;
+```
 
 ## Design
 
@@ -60,7 +84,7 @@ Data driven component for displaying tabular data.
 ```tsx
 import { IressTable } from '@iress-oss/ids-components';
 
-<IressTable caption="Data table" rows={[{ name: 'Alice', age: 30 }]} />
+<IressTable caption="Data table" rows={[{ name: 'Alice', age: 30 }]} />;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs#api-props)
@@ -71,121 +95,1285 @@ import { IressTable } from '@iress-oss/ids-components';
 
 Only `caption` and `rows` are required. Columns are derived from the keys of the first row object.
 
-<StoryEmbed id="components-table--automatic-columns"/>
+```tsx
+<IressTable
+  caption="My investments"
+  rows={[
+    {
+      investment_name: 'Artemis Fund Managers Limited',
+      cost: 23898,
+      investmentDate: '2019-09-23',
+      totalPercentage: 24.8,
+    },
+    {
+      investment_name: 'CASH.CASH',
+      cost: 49751.4,
+      investmentDate: '2020-06-28',
+      totalPercentage: 49,
+    },
+    {
+      investment_name: 'VODAFONE GRP',
+      cost: 26382.456,
+      investmentDate: '2019-02-05',
+      totalPercentage: 26.2,
+    },
+  ]}
+/>;
+```
 
 #### Custom columns
 
 Use the `columns` prop for full control over which columns display and how.
 
-<StoryEmbed id="components-table--custom-columns"/>
+```tsx
+import {
+  IressPill,
+  IressTable,
+  IressTableFormattedValue,
+} from '@iress-oss/ids-components';
+
+const renderColumn = (value: number) => (
+  <IressPill mode={value > 30000 ? '70' : '10'}>
+    <IressTableFormattedValue value={value} format="currency" />
+  </IressPill>
+);
+
+export function TableCustomColumns() {
+  return (
+    <IressTable
+      caption="My investments"
+      rows={[
+        {
+          investment_name: 'Artemis Fund Managers Limited',
+          cost: 23898,
+          investmentDate: '2019-09-23',
+          totalPercentage: 24.8,
+        },
+        {
+          investment_name: 'CASH.CASH',
+          cost: 49751.4,
+          investmentDate: '2020-06-28',
+          totalPercentage: 49,
+        },
+        {
+          investment_name: 'VODAFONE GRP',
+          cost: 26382.456,
+          investmentDate: '2019-02-05',
+          totalPercentage: 26.2,
+        },
+      ]}
+      columns={[
+        {
+          key: 'investment_name',
+          label: 'Investment',
+          divider: true,
+        },
+        {
+          key: 'investmentDate',
+          label: 'Date',
+          format: 'date',
+        },
+        {
+          key: 'totalPercentage',
+          label: 'Share',
+          format: 'percent',
+        },
+        {
+          key: 'cost',
+          label: 'Cost',
+          textAlign: 'right',
+          format: renderColumn,
+        },
+      ]}
+    />
+  );
+}
+```
 
 #### Formats
 
 Built-in formatters: `date`, `currency`, `percent`, `number`, `shortDate`, `isoDateTime`, `relativeTime`. Or pass a custom function returning a ReactNode.
 
-<StoryEmbed id="components-table--formats"/>
+```tsx
+import { IressPill, IressTable } from '@iress-oss/ids-components';
+
+const renderColumn = (value: string) => <IressPill>{value}</IressPill>;
+
+// https://blog.devgenius.io/javascript-date-subtract-seconds-83b3285b7959
+const subtractSeconds = (date: Date, seconds: number) => {
+  // make copy with Date() constructor
+  const dateCopy = new Date(date);
+  dateCopy.setSeconds(date.getSeconds() - seconds);
+  return dateCopy;
+};
+
+const tenSecondsAgo = subtractSeconds(new Date(), 10);
+
+export function TableFormats() {
+  return (
+    <IressTable
+      caption="Available formats"
+      compact
+      rows={[
+        {
+          string: 'Hello, world!',
+          number: 123456,
+          date: '2020-06-28',
+          shortDate: '2020-06-28',
+          isoDateTime: '2020-06-28',
+          relativeTime: tenSecondsAgo,
+          currency: 123456.78,
+          percent: 12,
+          custom: 'Custom',
+        },
+      ]}
+      columns={[
+        { key: 'string', label: 'String', format: 'string' },
+        { key: 'number', label: 'Number', format: 'number' },
+        { key: 'date', label: 'Date', format: 'date' },
+        { key: 'shortDate', label: 'Short date', format: 'shortDate' },
+        { key: 'isoDateTime', label: 'ISO Date & Time', format: 'isoDateTime' },
+        { key: 'relativeTime', label: 'Relative time', format: 'relativeTime' },
+        {
+          key: 'currency',
+          label: 'Currency (AUD)',
+          format: 'currency',
+          currencyCode: '',
+        },
+        { key: 'percent', label: 'Percent', format: 'percent' },
+        {
+          key: 'custom',
+          label: 'Custom',
+          format: renderColumn,
+        },
+      ]}
+    />
+  );
+}
+```
 
 #### Sorting
 
 Enable with `sort: true` on a column. Set to `asc` or `desc` for initial sort direction.
 
-<StoryEmbed id="components-table--sorting"/>
+```tsx
+import {
+  IressPill,
+  IressTable,
+  IressTableFormattedValue,
+} from '@iress-oss/ids-components';
+
+const renderColumn = (value: number) => (
+  <IressPill mode={value > 30000 ? '70' : '10'}>
+    <IressTableFormattedValue value={value} format="currency" />
+  </IressPill>
+);
+
+export function TableSorting() {
+  return (
+    <IressTable
+      caption="My investments"
+      rows={[
+        {
+          investment_name: 'Artemis Fund Managers Limited',
+          cost: 23898,
+          investmentDate: '2019-09-23',
+          totalPercentage: 24.8,
+        },
+        {
+          investment_name: 'CASH.CASH',
+          cost: 49751.4,
+          investmentDate: '2020-06-28',
+          totalPercentage: 49,
+        },
+        {
+          investment_name: 'VODAFONE GRP',
+          cost: 26382.456,
+          investmentDate: '2019-02-05',
+          totalPercentage: 26.2,
+        },
+      ]}
+      columns={[
+        {
+          key: 'investment_name',
+          label: 'Investment',
+          divider: true,
+          sort: 'asc',
+        },
+        {
+          key: 'investmentDate',
+          label: 'Date',
+          format: 'date',
+          sort: true,
+        },
+        {
+          key: 'totalPercentage',
+          label: 'Share',
+          format: 'percent',
+          sort: true,
+        },
+        {
+          key: 'cost',
+          label: 'Cost',
+          textAlign: 'right',
+          sort: true,
+          format: renderColumn,
+        },
+      ]}
+    />
+  );
+}
+```
 
 #### Custom sorting logic
 
 Use `sortFn` for custom sort — pass a built-in name or a custom comparison function.
 
-<StoryEmbed id="components-table--custom-sorting-logic"/>
+```tsx
+import {
+  IressTable,
+  IressTableFormattedValue,
+  type TableColumn,
+} from '@iress-oss/ids-components';
+
+interface Row {
+  investment_name: string;
+  cost: number;
+  netCost?: number;
+  investmentDate: string;
+  totalPercentage: number;
+}
+
+const columns: TableColumn<Row>[] = [
+  {
+    key: 'investment_name',
+    label: 'Investment',
+    divider: true,
+    sort: 'asc',
+    sortFn: 'textCaseSensitive',
+  },
+  {
+    key: 'investmentDate',
+    label: 'Date',
+    format: 'date',
+    sort: true,
+    sortFn: 'datetime',
+  },
+  {
+    key: 'totalPercentage',
+    label: 'Share',
+    format: 'percent',
+    sort: true,
+    sortFn: 'alphanumeric',
+  },
+  {
+    key: 'cost',
+    label: 'Cost (sorts by net cost if available)',
+    textAlign: 'right',
+    format: (value: number, row) => {
+      return (
+        <>
+          <IressTableFormattedValue value={value} format="currency" /> (net:{' '}
+          {row?.netCost ? (
+            <IressTableFormattedValue value={row.netCost} format="currency" />
+          ) : (
+            'N/A'
+          )}
+          )
+        </>
+      );
+    },
+    sortFn: (a, b) => {
+      const aCost = a.original.netCost ?? a.original.cost;
+      const bCost = b.original.netCost ?? b.original.cost;
+      return aCost - bCost;
+    },
+  },
+];
+
+export function TableSortingFn() {
+  return (
+    <IressTable<Row>
+      caption="My investments"
+      rows={[
+        {
+          investment_name: 'Artemis Fund Managers Limited',
+          cost: 23898,
+          investmentDate: '2019-09-23',
+          totalPercentage: 24.8,
+        },
+        {
+          investment_name: 'CASH.CASH',
+          cost: 49751.4,
+          netCost: 20000,
+          investmentDate: '2020-06-28',
+          totalPercentage: 49,
+        },
+        {
+          investment_name: 'VODAFONE GRP',
+          cost: 26382.456,
+          investmentDate: '2019-02-05',
+          totalPercentage: 26.2,
+        },
+      ]}
+      columns={columns}
+    />
+  );
+}
+```
 
 #### Filtering
 
 Enable with `filter: true` on a column, or pass a `TableColumnFilter` object for control over default values, custom filter functions, and explicit option lists.
 
-<StoryEmbed id="components-table--filtering"/>
+```tsx
+import { IressTable } from '@iress-oss/ids-components';
+import { IressPill } from '@iress-oss/ids-components';
+
+const STATUS_MODES: Record<string, 'success' | 'info' | 'warning' | 'danger'> =
+  {
+    Current: 'success',
+    Proposed: 'info',
+    Alternative: 'warning',
+    Archived: 'danger',
+  };
+
+export function TableFiltering() {
+  return (
+    <IressTable
+      caption="My investments"
+      compact
+      rows={[
+        {
+          investment_name: 'Artemis Fund Managers Limited',
+          status: 'Current',
+          cost: 23898,
+          investmentDate: '2019-09-23',
+          totalPercentage: 24.8,
+        },
+        {
+          investment_name: 'CASH.CASH',
+          status: 'Proposed',
+          cost: 49751.4,
+          investmentDate: '2020-06-28',
+          totalPercentage: 49,
+        },
+        {
+          investment_name: 'VODAFONE GRP',
+          status: 'Alternative',
+          cost: 26382.456,
+          investmentDate: '2019-02-05',
+          totalPercentage: 26.2,
+        },
+        {
+          investment_name: 'APPLE INC',
+          status: 'Archived',
+          cost: 12000,
+          investmentDate: '2021-11-15',
+          totalPercentage: 12.1,
+        },
+      ]}
+      columns={[
+        {
+          key: 'investment_name',
+          label: 'Investment',
+          divider: true,
+          filter: true,
+          sort: true,
+        },
+        {
+          key: 'status',
+          label: 'Status',
+          filter: {
+            defaultValue: ['Current', 'Proposed'],
+            format: (value: string) => (
+              <IressPill mode={STATUS_MODES[value] ?? 'info'}>
+                {value}
+              </IressPill>
+            ),
+          },
+          format: (value: string) => (
+            <IressPill mode={STATUS_MODES[value] ?? 'info'}>{value}</IressPill>
+          ),
+        },
+        {
+          key: 'investmentDate',
+          label: 'Date',
+          format: 'date',
+          filter: true,
+        },
+        {
+          key: 'totalPercentage',
+          label: 'Share',
+          format: 'percent',
+          sort: true,
+        },
+        {
+          key: 'cost',
+          label: 'Cost',
+          textAlign: 'right',
+          format: 'currency',
+        },
+      ]}
+    />
+  );
+}
+```
 
 #### Server-side filtering
 
 Set `filterFn: false` to disable client-side filtering. Use `onChange` to fetch new data and `values` for explicit options.
 
-<StoryEmbed id="components-table--server-side-filtering"/>
+```tsx
+import { useState, useCallback, useRef } from 'react';
+import { IressTable } from '@iress-oss/ids-components';
+import { IressPill } from '@iress-oss/ids-components';
+import { IressLoading } from '@/patterns/Loading';
+
+const STATUS_MODES: Record<string, 'success' | 'info' | 'warning' | 'danger'> =
+  {
+    Current: 'success',
+    Proposed: 'info',
+    Alternative: 'warning',
+    Archived: 'danger',
+  };
+
+const ALL_ROWS = [
+  {
+    investment_name: 'Artemis Fund Managers Limited',
+    status: 'Current',
+    cost: 23898,
+    investmentDate: '2019-09-23',
+    totalPercentage: 24.8,
+  },
+  {
+    investment_name: 'CASH.CASH',
+    status: 'Proposed',
+    cost: 49751.4,
+    investmentDate: '2020-06-28',
+    totalPercentage: 49,
+  },
+  {
+    investment_name: 'VODAFONE GRP',
+    status: 'Alternative',
+    cost: 26382.456,
+    investmentDate: '2019-02-05',
+    totalPercentage: 26.2,
+  },
+  {
+    investment_name: 'APPLE INC',
+    status: 'Archived',
+    cost: 12000,
+    investmentDate: '2021-11-15',
+    totalPercentage: 12.1,
+  },
+];
+
+/**
+ * Simulates a server-side fetch with a delay. In a real application,
+ * replace this with an actual API call.
+ */
+const simulateServerFetch = (statusFilter: string[]): Promise<object[]> =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      const filtered =
+        statusFilter.length === 0
+          ? ALL_ROWS
+          : ALL_ROWS.filter((row) => statusFilter.includes(row.status));
+      resolve(filtered);
+    }, 800);
+  });
+
+export function TableFilteringServerSide() {
+  const [rows, setRows] = useState<object[]>(ALL_ROWS);
+  const [loaded, setLoaded] = useState(true);
+  const [updating, setUpdating] = useState(false);
+  const latestRequest = useRef(0);
+
+  const handleStatusFilter = useCallback(async (selectedValues: string[]) => {
+    const requestId = ++latestRequest.current;
+    setUpdating(true);
+    const data = await simulateServerFetch(selectedValues);
+    // Only apply the result if this is still the latest request
+    if (requestId === latestRequest.current) {
+      setRows(data);
+      setUpdating(false);
+      setLoaded(true);
+    }
+  }, []);
+
+  return (
+    <IressLoading
+      pattern="component"
+      loaded={loaded}
+      update={updating}
+      width="12/12"
+    >
+      <IressTable<object>
+        caption="My investments"
+        compact
+        rows={rows}
+        columns={[
+          {
+            key: 'investment_name',
+            label: 'Investment',
+            divider: true,
+          },
+          {
+            key: 'status',
+            label: 'Status',
+            filter: {
+              // Provide all possible values so the dropdown is always complete,
+              // even when the current rows are already filtered server-side.
+              values: Object.keys(STATUS_MODES),
+              // Disable client-side filtering — the server controls which rows
+              // are shown.
+              filterFn: false,
+              // Fetch new data when the user changes the filter selection.
+              onChange: (values: string[]) => void handleStatusFilter(values),
+              format: (value: string) => (
+                <IressPill mode={STATUS_MODES[value] ?? 'info'}>
+                  {value}
+                </IressPill>
+              ),
+            },
+            format: (value: string) => (
+              <IressPill mode={STATUS_MODES[value] ?? 'info'}>
+                {value}
+              </IressPill>
+            ),
+          },
+          {
+            key: 'investmentDate',
+            label: 'Date',
+            format: 'date',
+          },
+          {
+            key: 'totalPercentage',
+            label: 'Share',
+            format: 'percent',
+          },
+          {
+            key: 'cost',
+            label: 'Cost',
+            textAlign: 'right',
+            format: 'currency',
+          },
+        ]}
+      />
+    </IressLoading>
+  );
+}
+```
 
 #### Width
 
 Control column width via the `width` property. Horizontal scrollbar appears when the table exceeds container width.
 
-<StoryEmbed id="components-table--width"/>
+```tsx
+<IressTable
+  caption="My investments"
+  rows={[
+    {
+      investment_name: 'Artemis Fund Managers Limited',
+      cost: 23898,
+      investmentDate: '2019-09-23',
+      totalPercentage: 24.8,
+    },
+    {
+      investment_name: 'CASH.CASH',
+      cost: 49751.4,
+      investmentDate: '2020-06-28',
+      totalPercentage: 49,
+    },
+    {
+      investment_name: 'VODAFONE GRP',
+      cost: 26382.456,
+      investmentDate: '2019-02-05',
+      totalPercentage: 26.2,
+    },
+  ]}
+  columns={[
+    {
+      key: 'investment_name',
+      label: 'Investment',
+      width: '450px',
+    },
+    {
+      key: 'cost',
+      label: 'Cost',
+      width: '220px',
+    },
+    { key: 'investmentDate', label: 'Investment date', width: '220px' },
+    { key: 'totalPercentage', label: 'Share', format: 'percent' },
+  ]}
+/>;
+```
 
 #### Alignment
 
 Columns can be aligned `left`, `right`, or `center`. Currency/number formats auto-align right.
 
-<StoryEmbed id="components-table--alignment"/>
+```tsx
+<IressTable
+  caption="My investments"
+  rows={[
+    {
+      investment_name: 'Artemis Fund Managers Limited',
+      cost: 23898,
+      investmentDate: '2019-09-23',
+      totalPercentage: 24.8,
+    },
+    {
+      investment_name: 'CASH.CASH',
+      cost: 49751.4,
+      investmentDate: '2020-06-28',
+      totalPercentage: 49,
+    },
+    {
+      investment_name: 'VODAFONE GRP',
+      cost: 26382.456,
+      investmentDate: '2019-02-05',
+      totalPercentage: 26.2,
+    },
+  ]}
+  columns={[
+    {
+      key: 'investment_name',
+      label: 'Investment (left)',
+      textAlign: 'left',
+    },
+    {
+      key: 'cost',
+      label: 'Cost (center)',
+      textAlign: 'center',
+      format: 'currency',
+    },
+    {
+      key: 'investmentDate',
+      label: 'Date (center)',
+      textAlign: 'center',
+      format: 'date',
+    },
+    {
+      key: 'totalPercentage',
+      label: 'Share (right)',
+      textAlign: 'right',
+      format: 'percent',
+    },
+  ]}
+/>;
+```
 
 #### Dividers
 
 Set `divider: true` on a column to add a vertical border after it.
 
-<StoryEmbed id="components-table--dividers"/>
+```tsx
+<IressTable
+  caption="My investments"
+  rows={[
+    {
+      investment_name: 'Artemis Fund Managers Limited',
+      cost: 23898,
+      investmentDate: '2019-09-23',
+      totalPercentage: 24.8,
+    },
+    {
+      investment_name: 'CASH.CASH',
+      cost: 49751.4,
+      investmentDate: '2020-06-28',
+      totalPercentage: 49,
+    },
+    {
+      investment_name: 'VODAFONE GRP',
+      cost: 26382.456,
+      investmentDate: '2019-02-05',
+      totalPercentage: 26.2,
+    },
+  ]}
+  columns={[
+    {
+      key: 'investment_name',
+      label: 'Investment',
+      divider: true,
+    },
+    {
+      key: 'investmentDate',
+      label: 'Date',
+      format: 'date',
+    },
+    {
+      key: 'totalPercentage',
+      label: 'Share',
+      format: 'percent',
+    },
+    {
+      key: 'cost',
+      label: 'Cost',
+      format: 'currency',
+    },
+  ]}
+/>;
+```
 
 #### Highlight on hover
 
 Enable row highlighting on hover with the `hover` prop.
 
-<StoryEmbed id="components-table--highlight-on-hover"/>
+```tsx
+<IressTable
+  caption="My investments"
+  rows={[
+    {
+      investment_name: 'Artemis Fund Managers Limited',
+      cost: 23898,
+      investmentDate: '2019-09-23',
+      totalPercentage: 24.8,
+    },
+    {
+      investment_name: 'CASH.CASH',
+      cost: 49751.4,
+      investmentDate: '2020-06-28',
+      totalPercentage: 49,
+    },
+    {
+      investment_name: 'VODAFONE GRP',
+      cost: 26382.456,
+      investmentDate: '2019-02-05',
+      totalPercentage: 26.2,
+    },
+  ]}
+  hover
+/>;
+```
 
 #### Hidden header
 
 Use `hiddenHeader` to visually hide the table header for simple data.
 
-<StoryEmbed id="components-table--hidden-header"/>
+```tsx
+<IressTable
+  caption="My investments"
+  rows={[
+    {
+      investment_name: 'Artemis Fund Managers Limited',
+      cost: 23898,
+      investmentDate: '2019-09-23',
+      totalPercentage: 24.8,
+    },
+    {
+      investment_name: 'CASH.CASH',
+      cost: 49751.4,
+      investmentDate: '2020-06-28',
+      totalPercentage: 49,
+    },
+    {
+      investment_name: 'VODAFONE GRP',
+      cost: 26382.456,
+      investmentDate: '2019-02-05',
+      totalPercentage: 26.2,
+    },
+  ]}
+  hiddenHeader
+/>;
+```
 
 #### Rich rows (JSX)
 
 Use ReactNodes as cell values for links, buttons, or icons.
 
-<StoryEmbed id="components-table--rich-rows"/>
+```tsx
+<IressTable
+  caption="My rich investments"
+  rows={[
+    {
+      investment_name: <IressButton>Artemis Fund Managers Limited</IressButton>,
+      cost: '$23,898',
+      investmentDate: '2019/09/23',
+      totalPercentage: <IressPill mode="20">24.8%</IressPill>,
+    },
+    {
+      investment_name: <IressButton>CASH.CASH</IressButton>,
+      cost: '$49,751.40',
+      investmentDate: '2020/06/28',
+      totalPercentage: <IressPill mode="30">49%</IressPill>,
+    },
+    {
+      investment_name: <IressButton>VODAFONE GRP</IressButton>,
+      cost: '$26,382.46',
+      investmentDate: '2019/02/05',
+      totalPercentage: <IressPill mode="40">26.2%</IressPill>,
+    },
+  ]}
+/>;
+```
 
 #### Empty state
 
 Use the `empty` prop to display content when there is no row data. Requires `columns` prop.
 
-<StoryEmbed id="components-table--empty-state"/>
+```tsx
+<IressTable
+  columns={[
+    {
+      key: 'investment_name',
+      label: 'Investment',
+      divider: true,
+    },
+    {
+      key: 'investmentDate',
+      label: 'Date',
+      format: 'date',
+    },
+    {
+      key: 'totalPercentage',
+      label: 'Share',
+      format: 'percent',
+    },
+    {
+      key: 'cost',
+      label: 'Cost',
+      textAlign: 'right',
+      format: 'currency',
+    },
+  ]}
+  empty="This table has no data"
+  rows={[]}
+/>;
+```
 
 #### Static table
 
 Use `children` for a styled table without data-driven features. Only `caption`, `hiddenCaption`, `hiddenHeader`, and `hover` props are supported.
 
-<StoryEmbed id="components-table--static"/>
+```tsx
+<IressTable caption="My investments">
+  <thead>
+    <tr>
+      <th>Investment</th>
+      <th>Cost</th>
+      <th>Investment date</th>
+      <th>Share</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Artemis Fund Managers Limited</th>
+      <td>$23,898</td>
+      <td>2019/09/23</td>
+      <td>24.8%</td>
+    </tr>
+    <tr>
+      <th>CASH.CASH</th>
+      <td>$49,751.40</td>
+      <td>2020/06/28</td>
+      <td>49%</td>
+    </tr>
+    <tr>
+      <th>VODAFONE GRP</th>
+      <td>$26,382.46</td>
+      <td>2019/02/05</td>
+      <td>26.2%</td>
+    </tr>
+  </tbody>
+</IressTable>;
+```
 
 #### Row props
 
 Customise rows with `rowProps` — pass an object or a function receiving the row data.
 
-<StoryEmbed id="components-table--row-props"/>
+```tsx
+<IressTable
+  caption="My investments"
+  rows={[
+    {
+      investment_name: 'Artemis Fund Managers Limited',
+      cost: 23898,
+      investmentDate: '2019-09-23',
+      totalPercentage: 24.8,
+    },
+    {
+      investment_name: 'CASH.CASH',
+      cost: 49751.4,
+      investmentDate: '2020-06-28',
+      totalPercentage: 49,
+    },
+    {
+      investment_name: 'VODAFONE GRP',
+      cost: 26382.456,
+      investmentDate: '2019-02-05',
+      totalPercentage: 26.2,
+    },
+  ]}
+  rowProps={(row: Row<{ cost?: number }>) => ({
+    bg:
+      row.original.cost && row.original.cost > 30000
+        ? 'colour.neutral.10'
+        : 'colour.system.success.surface',
+  })}
+/>;
+```
 
 #### Compact
 
 The `compact` prop reduces padding and font size for dense data display.
 
-<StoryEmbed id="components-table--compact"/>
+```tsx
+import { IressTable } from '@iress-oss/ids-components';
+
+export function TableCompact() {
+  return (
+    <IressTable
+      caption="My investments"
+      compact
+      alternate
+      removeRowBorders
+      scope="col"
+      rows={[
+        {
+          investment_name: 'Artemis Fund Managers Limited',
+          cost: 23898,
+          investmentDate: '2019-09-23',
+          totalPercentage: 24.8,
+        },
+        {
+          investment_name: 'CASH.CASH',
+          cost: 49751.4,
+          investmentDate: '2020-06-28',
+          totalPercentage: 49,
+        },
+        {
+          investment_name: 'VODAFONE GRP',
+          cost: 26382.456,
+          investmentDate: '2019-02-05',
+          totalPercentage: 26.2,
+        },
+      ]}
+      columns={[
+        { key: 'investment_name', label: 'Investment', divider: true },
+        { key: 'investmentDate', label: 'Date', format: 'date' },
+        { key: 'totalPercentage', label: 'Share', format: 'percent' },
+      ]}
+      rowProps={(row) => ({
+        bg:
+          row.original.investment_name === 'VODAFONE GRP'
+            ? 'colour.data.subtle.30'
+            : undefined,
+      })}
+    />
+  );
+}
+```
 
 #### Virtualisation
 
 For large datasets, `virtualise` renders only visible rows. Accepts `true` or `{ height, overscan, estimateSize }`.
 
-<StoryEmbed id="components-table--virtualised"/>
+```tsx
+import { useState } from 'react';
+import {
+  IressButton,
+  IressInline,
+  IressPill,
+  IressStack,
+  IressTable,
+  IressText,
+  IressToggle,
+  type TableColumn,
+} from '@iress-oss/ids-components';
+
+interface Row {
+  id: string;
+  name: string;
+  value: string;
+  status: 'pending' | 'approved' | 'rejected';
+}
+
+const ROW_COUNT = 1000;
+
+const generateRows = (count: number): Row[] =>
+  Array.from({ length: count }, (_, i) => ({
+    id: `${i}`,
+    name: `Item ${i}`,
+    value: `Value ${i}`,
+    status: 'pending' as const,
+  }));
+
+const columns: TableColumn<Row, string>[] = [
+  { key: 'name', label: 'Name', width: '35%' },
+  { key: 'value', label: 'Value', width: '35%' },
+  {
+    key: 'status',
+    label: 'Status',
+    width: '30%',
+    format: (value: string) => {
+      const modeMap = {
+        approved: 'success',
+        rejected: 'danger',
+      } as const;
+      const mode = modeMap[value as keyof typeof modeMap] ?? 'info';
+      return <IressPill mode={mode}>{value}</IressPill>;
+    },
+  },
+];
+
+export function TableVirtualised() {
+  const [rows, setRows] = useState(() => generateRows(ROW_COUNT));
+  const [virtualised, setVirtualised] = useState(true);
+  const [lastDuration, setLastDuration] = useState<number | null>(null);
+
+  const updateAll = (status: Row['status']) => {
+    const start = performance.now();
+    setRows((prev) => prev.map((r) => ({ ...r, status })));
+    requestAnimationFrame(() => {
+      setLastDuration(Math.round(performance.now() - start));
+    });
+  };
+
+  return (
+    <IressStack gap="md">
+      <IressInline gap="sm" verticalAlign="middle">
+        <IressToggle
+          checked={virtualised}
+          onChange={() => setVirtualised((v) => !v)}
+        >
+          Virtualisation {virtualised ? 'on' : 'off'}
+        </IressToggle>
+        <IressButton mode="primary" onClick={() => updateAll('approved')}>
+          Approve All
+        </IressButton>
+        <IressButton mode="secondary" onClick={() => updateAll('rejected')}>
+          Reject All
+        </IressButton>
+        <IressButton mode="tertiary" onClick={() => updateAll('pending')}>
+          Reset
+        </IressButton>
+        {lastDuration !== null && (
+          <IressText>Last update: {lastDuration}ms</IressText>
+        )}
+      </IressInline>
+      <IressText>
+        {ROW_COUNT} rows — toggle virtualisation off to feel the difference.
+      </IressText>
+      <IressTable
+        caption="Virtualisation demo"
+        rows={rows}
+        columns={columns}
+        virtualise={virtualised ? { height: 500 } : undefined}
+        compact
+      />
+    </IressStack>
+  );
+}
+```
 
 ### Tables with grouped rows
 
 For tables with multiple groups of rows sharing the same columns.
 
-<StoryEmbed id="components-table-body--body"/>
+```tsx
+import {
+  IressButton,
+  IressIcon,
+  IressTable,
+  IressTableBody,
+  type TableColumn,
+} from '@iress-oss/ids-components';
+
+interface Liability {
+  owner: string;
+  type: string;
+  provider?: string;
+  status: string;
+  outstanding: number;
+  interestRate: number;
+  repayment: number;
+  frequency: string;
+}
+
+const currentLiabilities = [
+  {
+    owner: 'Client',
+    type: 'Credit card',
+    status: 'Current',
+    outstanding: 5000,
+    interestRate: 0,
+    repayment: 300,
+    frequency: 'Monthly',
+  },
+];
+
+const longTermLiabilities = [
+  {
+    owner: 'Joint',
+    type: 'Primary residence mortgage',
+    provider: 'Other',
+    status: 'Current',
+    outstanding: 1000000,
+    interestRate: 0,
+    repayment: 0,
+    frequency: 'Monthly',
+  },
+  {
+    owner: 'Joint',
+    type: 'Buy to let mortgage',
+    status: 'Current',
+    outstanding: 1000000,
+    interestRate: 0,
+    repayment: 0,
+    frequency: 'Monthly',
+  },
+  {
+    owner: 'Joint',
+    type: 'Buy to let mortgage',
+    status: 'Current',
+    outstanding: 5000,
+    interestRate: 0,
+    repayment: 0,
+    frequency: 'Monthly',
+  },
+];
+
+const contingentLiabilities = [
+  {
+    owner: 'Partner',
+    type: 'Limited',
+    status: 'Current',
+    outstanding: 1000,
+    interestRate: 0,
+    repayment: 100,
+    frequency: 'Monthly',
+  },
+];
+
+const columns: TableColumn<Liability>[] = [
+  {
+    key: 'owner',
+    label: 'Owner',
+    width: '75px',
+  },
+  {
+    key: 'type',
+    label: 'Type',
+    width: '100px',
+  },
+  {
+    key: 'provider',
+    label: 'Provider',
+  },
+  {
+    key: 'status',
+    label: 'Status',
+    divider: true,
+  },
+  {
+    key: 'frequency',
+    label: 'Frequency',
+  },
+  {
+    key: 'outstanding',
+    label: 'Outstanding (GBP)',
+    format: 'currency',
+    currencyCode: '',
+    sort: true,
+  },
+  {
+    key: 'interestRate',
+    label: 'Interest rate p.a.',
+    format: 'percent',
+    textAlign: 'right',
+    sort: true,
+  },
+  {
+    key: 'repayment',
+    label: 'Repayment (GBP)',
+    format: 'currency',
+    currencyCode: '',
+    sort: true,
+  },
+];
+
+export const TableGroupedRows = () => (
+  <IressTable caption="My liabilities">
+    <IressTableBody
+      rows={currentLiabilities}
+      columns={columns}
+      caption="Current liabilities"
+      scope="col"
+      open
+    >
+      <IressButton prepend={<IressIcon name="plus-circle" />}>
+        Add current liability
+      </IressButton>
+    </IressTableBody>
+    <IressTableBody
+      rows={longTermLiabilities}
+      columns={columns}
+      caption="Long term liabilities"
+      scope="col"
+    >
+      <IressButton prepend={<IressIcon name="plus-circle" />}>
+        Add long term liability
+      </IressButton>
+    </IressTableBody>
+    <IressTableBody
+      rows={contingentLiabilities}
+      columns={columns}
+      caption="Contingent liabilities"
+      scope="col"
+    >
+      <IressButton prepend={<IressIcon name="plus-circle" />}>
+        Add contingent liability
+      </IressButton>
+    </IressTableBody>
+  </IressTable>
+);
+```
 
 ### Formatted values
 
 Exposed component for formatting values the same way the table does.
 
-<StoryEmbed id="components-table-formatted-value--formatted-value"/>
+```tsx
+import {
+  IressTable,
+  IressTableFormattedValue,
+} from '@iress-oss/ids-components';
+
+export function TableFormattedValueExample() {
+  return (
+    <IressTable
+      caption="IressTableFormattedValue"
+      rows={[
+        {
+          format: 'string',
+          example: <IressTableFormattedValue value="Hello" format="string" />,
+        },
+        {
+          format: 'number',
+          example: <IressTableFormattedValue value={10000} format="number" />,
+        },
+        {
+          format: 'date',
+          example: (
+            <IressTableFormattedValue value="2024-01-15" format="date" />
+          ),
+        },
+        {
+          format: 'currency',
+          example: <IressTableFormattedValue value={10000} format="currency" />,
+        },
+        {
+          format: 'percent',
+          example: <IressTableFormattedValue value={50} format="percent" />,
+        },
+      ]}
+    />
+  );
+}
+```
 
 ### Testing
 
@@ -203,14 +1391,14 @@ const table = screen.getByRole('table', { name: 'Users' });
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
 | main | The root element of the table | — | `table` |
-| table | The table element | — | `table__table` |
-| caption | The table caption | — | `table__caption` |
+| table | The table element | `getByRole('table', { name: '...' })` | `table__table` |
+| caption | The table caption | `getByText('...')` | `table__caption` |
 | thead | The table header section | — | `table__thead` |
 | tbody | The table body section | — | `table__tbody` |
-| header row | A header row (uses dash separator) | — | `table__thead-row` |
-| body row | A body row | — | `table__row` |
-| cell | A table body cell | — | `table__cell__row_*__col_*` |
-| header | A column header cell | — | `table__header__*` |
+| header row | A header row (uses dash separator) | `getByRole('row')` | `table__thead-row` |
+| body row | A body row | `getByRole('row')` | `table__row` |
+| cell | A table body cell | `getByRole('cell')` | `table__cell__row_*__col_*` |
+| header | A column header cell | `getByRole('columnheader')` | `table__header__*` |
 
 ---
 

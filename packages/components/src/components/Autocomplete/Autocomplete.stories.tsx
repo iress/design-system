@@ -44,15 +44,25 @@ export default {
 
 export const Default: Story = {
   args: {
-    options: [...Array(5).keys()].map((number) => ({
-      label: `Option ${number + 1}`,
-    })),
+    options: [
+      { label: 'Option 1' },
+      { label: 'Option 2' },
+      { label: 'Option 3' },
+      { label: 'Option 4' },
+      { label: 'Option 5' },
+    ],
   },
 };
 
 export const Uncontrolled: Story = {
   args: {
-    ...Default.args,
+    options: [
+      { label: 'Option 1' },
+      { label: 'Option 2' },
+      { label: 'Option 3' },
+      { label: 'Option 4' },
+      { label: 'Option 5' },
+    ],
     defaultValue: 'Option 1',
   },
 };
@@ -68,7 +78,15 @@ export const Controlled: Story = {
 };
 
 export const Options: Story = {
-  ...Default,
+  args: {
+    options: [
+      { label: 'Option 1' },
+      { label: 'Option 2' },
+      { label: 'Option 3' },
+      { label: 'Option 4' },
+      { label: 'Option 5' },
+    ],
+  },
 };
 
 export const AsyncOptions: Story = {
@@ -95,16 +113,30 @@ export const AsyncOptionsMinSearchLength: Story = {
 
 export const InitialOptions: Story = {
   args: {
-    ...Options.args,
-    initialOptions: [...Array(3).keys()].map((number) => ({
-      label: `Favourite option ${number + 1}`,
-    })),
+    options: [
+      { label: 'Option 1' },
+      { label: 'Option 2' },
+      { label: 'Option 3' },
+      { label: 'Option 4' },
+      { label: 'Option 5' },
+    ],
+    initialOptions: [
+      { label: 'Favourite option 1' },
+      { label: 'Favourite option 2' },
+      { label: 'Favourite option 3' },
+    ],
   },
 };
 
 export const RemoveAutoSelect: Story = {
   args: {
-    ...Options.args,
+    options: [
+      { label: 'Option 1' },
+      { label: 'Option 2' },
+      { label: 'Option 3' },
+      { label: 'Option 4' },
+      { label: 'Option 5' },
+    ],
     autoSelect: false,
     placeholder: 'Should no longer auto-select when an item is highlighted',
   },
@@ -128,7 +160,13 @@ export const InputProps: Story = {
 
 export const NoResultsText: Story = {
   args: {
-    ...Options.args,
+    options: [
+      { label: 'Option 1' },
+      { label: 'Option 2' },
+      { label: 'Option 3' },
+      { label: 'Option 4' },
+      { label: 'Option 5' },
+    ],
     placeholder: 'Type "no" to see the no results text',
     noResultsText: <IressPanel noBorder>No results found</IressPanel>,
   },
@@ -136,7 +174,13 @@ export const NoResultsText: Story = {
 
 export const PopoverProps: Story = {
   args: {
-    ...Options.args,
+    options: [
+      { label: 'Option 1' },
+      { label: 'Option 2' },
+      { label: 'Option 3' },
+      { label: 'Option 4' },
+      { label: 'Option 5' },
+    ],
     popoverProps: {
       append: (
         <>
@@ -153,7 +197,13 @@ export const PopoverProps: Story = {
 
 export const DebounceThreshold: Story = {
   args: {
-    ...Options.args,
+    options: [
+      { label: 'Option 1' },
+      { label: 'Option 2' },
+      { label: 'Option 3' },
+      { label: 'Option 4' },
+      { label: 'Option 5' },
+    ],
     debounceThreshold: 0,
     placeholder: 'Instant search!',
   },
@@ -161,9 +211,23 @@ export const DebounceThreshold: Story = {
 
 export const ResultLimits: Story = {
   args: {
-    options: [...Array(15).keys()].map((number) => ({
-      label: `Option ${number + 1}`,
-    })),
+    options: [
+      { label: 'Option 1' },
+      { label: 'Option 2' },
+      { label: 'Option 3' },
+      { label: 'Option 4' },
+      { label: 'Option 5' },
+      { label: 'Option 6' },
+      { label: 'Option 7' },
+      { label: 'Option 8' },
+      { label: 'Option 9' },
+      { label: 'Option 10' },
+      { label: 'Option 11' },
+      { label: 'Option 12' },
+      { label: 'Option 13' },
+      { label: 'Option 14' },
+      { label: 'Option 15' },
+    ],
     limitDesktop: 6,
     limitMobile: 3,
   },
@@ -171,9 +235,15 @@ export const ResultLimits: Story = {
 };
 
 export const ReadOnly: Story = {
-  ...Uncontrolled,
   args: {
-    ...Uncontrolled.args,
+    options: [
+      { label: 'Option 1' },
+      { label: 'Option 2' },
+      { label: 'Option 3' },
+      { label: 'Option 4' },
+      { label: 'Option 5' },
+    ],
+    defaultValue: 'Option 1',
     readOnly: true,
   },
 };

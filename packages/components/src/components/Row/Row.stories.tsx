@@ -90,6 +90,19 @@ export const Default: Story = {
       mapping: ROW_CHILDREN_OPTIONS,
     },
   },
+  render: (args) => (
+    <IressRow {...args}>
+      <IressCol span={4}>
+        <IressPlaceholder>Column 1</IressPlaceholder>
+      </IressCol>
+      <IressCol span={4}>
+        <IressPlaceholder>Column 2</IressPlaceholder>
+      </IressCol>
+      <IressCol span={4}>
+        <IressPlaceholder>Column 3</IressPlaceholder>
+      </IressCol>
+    </IressRow>
+  ),
 };
 
 export const Gutter: Story = {
@@ -127,15 +140,14 @@ export const Gutter: Story = {
   },
   render: (args) => (
     <IressStack maxWidth="container.xl" gap="xl">
-      {SPACING_AND_ALIAS_TOKENS.map((spacing, index) => {
-        return (
-          <IressText key={spacing}>
-            {index > 0 && <IressDivider mb="xl" />}
-            <h2>Gutter: {spacing}</h2>
-            <IressRow {...args} gutter={spacing as never} />
-          </IressText>
-        );
-      })}
+      <IressText element="h3">spacing.2</IressText>
+      <IressRow {...args} gutter="spacing.2">{args.children}</IressRow>
+      <IressDivider mb="xl" />
+      <IressText element="h3">spacing.4</IressText>
+      <IressRow {...args} gutter="spacing.4">{args.children}</IressRow>
+      <IressDivider mb="xl" />
+      <IressText element="h3">spacing.7</IressText>
+      <IressRow {...args} gutter="spacing.7">{args.children}</IressRow>
     </IressStack>
   ),
 };
@@ -183,7 +195,9 @@ export const ResponsiveGutter: Story = {
   },
   render: (args) => (
     <IressContainer>
-      <IressRow {...args} />
+      <IressRow {...args}>
+        {args.children}
+      </IressRow>
     </IressContainer>
   ),
   decorators: [withBreakpointLabel()],
@@ -217,17 +231,14 @@ export const HorizontalAlignment: Story = {
   render: (args) => (
     <IressContainer>
       <IressStack gap="md">
-        {HORIZONTAL_ALIGNS.map((horizontalAlign, index) => (
-          <IressText key={horizontalAlign}>
-            {index !== 0 && <IressDivider mb="md" />}
-            <h2>Horizontal align: {horizontalAlign}</h2>
-            <IressRow
-              {...args}
-              horizontalAlign={horizontalAlign}
-              key={horizontalAlign}
-            />
-          </IressText>
-        ))}
+        <IressText element="h3">left</IressText>
+        <IressRow {...args} horizontalAlign="left">{args.children}</IressRow>
+        <IressText element="h3">center</IressText>
+        <IressRow {...args} horizontalAlign="center">{args.children}</IressRow>
+        <IressText element="h3">right</IressText>
+        <IressRow {...args} horizontalAlign="right">{args.children}</IressRow>
+        <IressText element="h3">between</IressText>
+        <IressRow {...args} horizontalAlign="between">{args.children}</IressRow>
       </IressStack>
     </IressContainer>
   ),
@@ -261,19 +272,14 @@ export const VerticalAlignment: Story = {
   render: (args) => (
     <IressContainer>
       <IressStack gap="md">
-        {VERTICAL_ALIGNS.map((verticalAlign) => (
-          <div key={verticalAlign}>
-            <IressText element="h2">Vertical align: {verticalAlign}</IressText>
-            <IressRow
-              style={{
-                height: '10rem',
-                border: `1px solid ${cssVars.colour.neutral[30]}`,
-              }}
-              {...args}
-              verticalAlign={verticalAlign}
-            />
-          </div>
-        ))}
+        <IressText element="h3">top</IressText>
+        <IressRow {...args} style={{ height: '10rem' }} verticalAlign="top">{args.children}</IressRow>
+        <IressText element="h3">middle</IressText>
+        <IressRow {...args} style={{ height: '10rem' }} verticalAlign="middle">{args.children}</IressRow>
+        <IressText element="h3">bottom</IressText>
+        <IressRow {...args} style={{ height: '10rem' }} verticalAlign="bottom">{args.children}</IressRow>
+        <IressText element="h3">stretch</IressText>
+        <IressRow {...args} style={{ height: '10rem' }} verticalAlign="stretch">{args.children}</IressRow>
       </IressStack>
     </IressContainer>
   ),

@@ -81,9 +81,11 @@ export const Panels: Story = {
 };
 
 export const DefaultSelected: Story = {
-  ...Panels,
   args: {
-    ...TabNavigation.args,
+    children: [
+      <IressTab key="iress" label="Iress" href="https://iress.com" />,
+      <IressTab key="google" label="Google" href="https://google.com" />,
+    ],
     defaultSelected: 1,
   },
 };

@@ -14,28 +14,28 @@ Set up your environment to use the latest version of the Iress Design System (ID
    ```
 2. Import the styles:
    ```tsx
-   import '@iress-oss/ids-components/dist/style.css';
-   ```
+import '@iress-oss/ids-components/dist/style.css';
+```
 3. Import the components. The provider is optional, but recommended for most applications. It sets up the design system and provides a consistent container for components like modals, slideouts, and toasts. If you are using `IressProvider`, you do not need to add `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, or `IressIconProvider` separately — they are all included. The same applies when using `IressShadow`, which includes `IressProvider` internally.
    ```tsx
-   import { IressProvider, IressButton } from '@iress-oss/ids-components';
-   ```
+import { IressProvider, IressButton } from '@iress-oss/ids-components';
+```
 4. Use the components:
 
    ```tsx
-   const App = () => {
-     const { success } = useToaster();
+const App = () => {
+  const { success } = useToaster();
 
-     return (
-       <IressButton onClick={() => success({ children: 'Toast triggered' })}>
-         Trigger toast
-       </IressButton>
-     );
-   };
+  return (
+    <IressButton onClick={() => success({ children: 'Toast triggered' })}>
+      Trigger toast
+    </IressButton>
+  );
+};
 
-   ReactDOM.createRoot(document.getElementById('root')!).render(
-     <IressProvider>
-       <App />
-     </IressProvider>,
-   );
-   ```
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <IressProvider>
+    <App />
+  </IressProvider>,
+);
+```

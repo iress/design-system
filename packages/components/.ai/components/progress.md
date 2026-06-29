@@ -15,7 +15,9 @@ import { IressProgress } from '@iress-oss/ids-components';
 
 A progress component is used to indicate to a user the completion of a set of tasks or a process.
 
-<StoryEmbed id="components-progress--default"/>
+```tsx
+<IressProgress min={10} max={30} value={20} />;
+```
 
 ## Design
 
@@ -59,7 +61,7 @@ A progress component is used to indicate to a user the completion of a set of ta
 ```tsx
 import { IressProgress } from '@iress-oss/ids-components';
 
-<IressProgress min={0} max={100} value={50} />
+<IressProgress min={0} max={100} value={50} />;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-progress--docs#api-props)
@@ -71,7 +73,7 @@ Progress shows how far through a task or operation you are in a graphical way. T
 #### Calculation to convert value into width
 
 ```tsx
-Math.round(((this.value - this.min) / (this.max - this.min)) * 100)
+Math.round(((this.value - this.min) / (this.max - this.min)) * 100);
 ```
 
 This caters for those scenarios where the `min` or `max` values change.
@@ -101,7 +103,30 @@ The following examples demonstrate different ways to use the Progress component:
 - **With section title**: Uses the `sectionTitle` prop with tokens to display "Step X of Y"
 - **With background image**: Demonstrates using a custom background image for visual interest
 
-<StoryEmbed id="components-progress--progress-examples-story"/>
+```tsx
+import { IressProgress, IressStack } from '@iress-oss/ids-components';
+
+export function ProgressExamples() {
+  return (
+    <IressStack gap="md">
+      <IressProgress min={0} max={50} value={0} />
+      <IressProgress min={10} max={30} value={20} />
+      <IressProgress
+        min={0}
+        max={50}
+        value={30}
+        sectionTitle="Step {{current}} of {{max}}"
+      />
+      <IressProgress
+        min={0}
+        max={100}
+        value={75}
+        backgroundImage="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=2858&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      />
+    </IressStack>
+  );
+}
+```
 
 ### Testing
 
@@ -117,7 +142,7 @@ expect(progress).toHaveValue(75);
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the progress | — | `progress` |
+| main | The root element of the progress | `getByRole('meter')` when min, max, and value are all provided, otherwise `getByRole('progressbar')` | `progress` |
 
 ---
 

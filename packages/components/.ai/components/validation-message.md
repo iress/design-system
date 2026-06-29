@@ -15,7 +15,22 @@ import { IressValidationMessage } from '@iress-oss/ids-components';
 
 A validation message is used to inform the user of the status of a form input. If there are multiple messages, they can be combined using the IressValidationSummary component.
 
-<StoryEmbed id="components-validationmessage--status"/>
+```tsx
+<IressStack>
+  <IressValidationMessage status="info">
+    Something you should know.
+  </IressValidationMessage>
+  <IressValidationMessage status="danger">
+    Something is wrong.
+  </IressValidationMessage>
+  <IressValidationMessage status="warning">
+    Something could go wrong.
+  </IressValidationMessage>
+  <IressValidationMessage status="success">
+    Something went right.
+  </IressValidationMessage>
+</IressStack>;
+```
 
 ## Design
 
@@ -49,9 +64,7 @@ A validation message is used to inform the user of the status of a form input. I
 ```tsx
 import { IressValidationMessage } from '@iress-oss/ids-components';
 
-<IressValidationMessage>
-  This field is required
-</IressValidationMessage>
+<IressValidationMessage>This field is required</IressValidationMessage>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-validationmessage--docs#api-props)
@@ -62,7 +75,22 @@ import { IressValidationMessage } from '@iress-oss/ids-components';
 
 Validation status is controlled by the status prop. It defaults to `error`.
 
-<StoryEmbed id="components-validationmessage--status"/>
+```tsx
+<IressStack>
+  <IressValidationMessage status="info">
+    Something you should know.
+  </IressValidationMessage>
+  <IressValidationMessage status="danger">
+    Something is wrong.
+  </IressValidationMessage>
+  <IressValidationMessage status="warning">
+    Something could go wrong.
+  </IressValidationMessage>
+  <IressValidationMessage status="success">
+    Something went right.
+  </IressValidationMessage>
+</IressStack>;
+```
 
 #### Prefix
 
@@ -70,19 +98,90 @@ You can add a prefix to the message. If not provided, it uses the `status` prop 
 
 It is hidden by default, but can be shown by setting the `visiblePrefix` prop to `true`.
 
-<StoryEmbed id="components-validationmessage--prefix"/>
+```tsx
+<IressStack>
+  <IressValidationMessage prefix="Prefix: " visiblePrefix status="info">
+    Something you should know.
+  </IressValidationMessage>
+  <IressValidationMessage prefix="Prefix: " visiblePrefix status="danger">
+    Something is wrong.
+  </IressValidationMessage>
+  <IressValidationMessage prefix="Prefix: " visiblePrefix status="warning">
+    Something could go wrong.
+  </IressValidationMessage>
+  <IressValidationMessage prefix="Prefix: " visiblePrefix status="success">
+    Something went right.
+  </IressValidationMessage>
+</IressStack>;
+```
 
 #### Link to target
 
 You can use the `linkToTarget` prop to link the message to a specific target in the DOM. This is useful to take the user to a specific part of the form when they click on the message.
 
-<StoryEmbed id="components-validationmessage--link-to-target"/>
+```tsx
+<IressStack gap="md">
+  <IressStack>
+    <IressValidationMessage
+      linkToTarget="input"
+      status="info"
+      linkToTarget="input"
+    >
+      Something you should know.
+    </IressValidationMessage>
+    <IressValidationMessage
+      linkToTarget="input"
+      status="danger"
+      linkToTarget="input"
+    >
+      Something is wrong.
+    </IressValidationMessage>
+    <IressValidationMessage
+      linkToTarget="input"
+      status="warning"
+      linkToTarget="input"
+    >
+      Something could go wrong.
+    </IressValidationMessage>
+    <IressValidationMessage
+      linkToTarget="input"
+      status="success"
+      linkToTarget="input"
+    >
+      Something went right.
+    </IressValidationMessage>
+  </IressStack>
+  <IressDivider />
+  <IressInput id="input" />
+</IressStack>;
+```
 
 #### ValidationSummary
 
 Messages can be passed programmatically as a `ValidationMessageObj[]` using the `messages` prop of the `IressValidationSummary` component.
 
-<StoryEmbed id="components-validationmessage-validationsummary--validation-summary"/>
+```tsx
+<IressValidationSummary
+  messages={[
+    {
+      message: 'Something you should know.',
+      status: 'info',
+    },
+    {
+      message: 'Something is wrong.',
+      status: 'danger',
+    },
+    {
+      message: 'Something could go wrong.',
+      status: 'warning',
+    },
+    {
+      message: 'Something went right.',
+      status: 'success',
+    },
+  ]}
+/>;
+```
 
 ### Testing
 
@@ -99,8 +198,8 @@ const error = screen.getByText('This field is required');
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the validation message | — | `validationmessage` |
-| error | An individual error message | — | `validationmessage__error` |
+| main | The root element of the validation message | `getByText('...')` | `validationmessage` |
+| error | An individual error message | `getByRole('link')` | `validationmessage__error` |
 
 ---
 

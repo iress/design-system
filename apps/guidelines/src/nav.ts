@@ -18,6 +18,7 @@ export const NAV_ITEMS: SideNavItem[] = [
         children: [
           { key: 'install', label: 'Install', href: '/get-started/develop', element: Link },
           { key: 'content-security-policy', label: 'Content Security Policy', href: '/get-started/content-security-policy', element: Link },
+          { key: 'common-mistakes', label: 'Common Mistakes', href: '/get-started/common-mistakes', element: Link },
         ]
        },
       { key: 'ai', label: 'AI', href: '/get-started/ai', element: Link },
@@ -33,7 +34,6 @@ export const NAV_ITEMS: SideNavItem[] = [
       { key: 'overview', label: 'Overview', href: '/foundations/overview', element: Link },
       { key: 'principles', label: 'Principles', href: '/foundations/principles', element: Link },
       { key: 'accessibility', label: 'Accessibility', href: '/foundations/accessibility', element: Link },
-      { key: 'common-mistakes', label: 'Common Mistakes', href: '/foundations/common-mistakes', element: Link },
       { key: 'iconography', label: 'Content & Iconography', href: '/foundations/iconography', element: Link },
       { key: 'responsive-layout', label: 'Responsive Layout', href: '/foundations/responsive-layout', element: Link },
       { key: 'user-experience', label: 'User Experience', href: '/foundations/user-experience', element: Link },

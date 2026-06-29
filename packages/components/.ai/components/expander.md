@@ -15,7 +15,32 @@ import { IressExpander } from '@iress-oss/ids-components';
 
 Expanders are commonly used to reveal more information or details about an element or content on a page.
 
-<StoryEmbed id="components-expander--mode"/>
+```tsx
+import {
+  IressExpander,
+  IressStack,
+  IressText,
+} from '@iress-oss/ids-components';
+
+export function ExpanderMode() {
+  return (
+    <IressStack gap="lg">
+      <IressStack gap="xs">
+        <IressText element="h2">Section (default)</IressText>
+        <IressExpander activator="Expander activator" mode="section">
+          Expander content will go here
+        </IressExpander>
+      </IressStack>
+      <IressStack gap="xs">
+        <IressText element="h2">Link</IressText>
+        <IressExpander activator="Expander activator" mode="link">
+          Expander content will go here
+        </IressExpander>
+      </IressStack>
+    </IressStack>
+  );
+}
+```
 
 ## Design
 
@@ -60,7 +85,7 @@ import { IressExpander } from '@iress-oss/ids-components';
 
 <IressExpander activator="Expander activator">
   Expander content will go here
-</IressExpander>
+</IressExpander>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-expander--docs#api-props)
@@ -74,19 +99,78 @@ The `mode` prop controls display style:
 - `section` (default): for larger sections of rich content
 - `link`: for small inline expansions
 
-<StoryEmbed id="components-expander--mode"/>
+```tsx
+import {
+  IressExpander,
+  IressStack,
+  IressText,
+} from '@iress-oss/ids-components';
+
+export function ExpanderMode() {
+  return (
+    <IressStack gap="lg">
+      <IressStack gap="xs">
+        <IressText element="h2">Section (default)</IressText>
+        <IressExpander activator="Expander activator" mode="section">
+          Expander content will go here
+        </IressExpander>
+      </IressStack>
+      <IressStack gap="xs">
+        <IressText element="h2">Link</IressText>
+        <IressExpander activator="Expander activator" mode="link">
+          Expander content will go here
+        </IressExpander>
+      </IressStack>
+    </IressStack>
+  );
+}
+```
 
 #### Open
 
 The `open` prop controls the expanded state programmatically.
 
-<StoryEmbed id="components-expander--open"/>
+```tsx
+<IressExpander activator="Expander activator" open>
+  Expander content will go here
+</IressExpander>;
+```
 
 #### Multiple expanders (accordion)
 
 Use multiple expanders with controlled state for accordion behaviour.
 
-<StoryEmbed id="components-expander--accordion"/>
+```tsx
+import { IressExpander, IressStack } from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export const MultipleExpander = () => {
+  const [openActivator, setOpenActivator] = useState('');
+
+  const handleChange = (newOpenActivator: string, open?: boolean) => {
+    setOpenActivator(open ? newOpenActivator : '');
+  };
+
+  return (
+    <IressStack gap="spacing.4">
+      <IressExpander
+        activator="Top"
+        open={openActivator === 'top'}
+        onChange={(open) => handleChange('top', open)}
+      >
+        Expander content for the top activator goes here.
+      </IressExpander>
+      <IressExpander
+        activator="Bottom"
+        open={openActivator === 'bottom'}
+        onChange={(open) => handleChange('bottom', open)}
+      >
+        Expander content for the bottom activator goes here.
+      </IressExpander>
+    </IressStack>
+  );
+};
+```
 
 ### Testing
 
@@ -107,7 +191,7 @@ expect(screen.getByText('Expanded content')).toBeVisible();
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
 | main | The root element of the expander | — | `expander` |
-| activator | The expand/collapse trigger button | — | `expander__activator` |
+| activator | The expand/collapse trigger button | `getByRole('button', { name: '...' })` | `expander__activator` |
 | container | The collapsible content container (visible when expanded) | — | `expander__container` |
 
 ---

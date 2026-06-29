@@ -15,7 +15,9 @@ import { IressRadio } from '@iress-oss/ids-components';
 
 A radio is a single option presented with a radio button. It is used to select a single option from multiple options. It is typically used in an IressRadioGroup.
 
-<StoryEmbed id="components-radio--checked"/>
+```tsx
+<IressRadio defaultChecked>Checked radio button</IressRadio>;
+```
 
 ## Design
 
@@ -41,7 +43,7 @@ A radio is a single option presented with a radio button. It is used to select a
 ```tsx
 import { IressRadio } from '@iress-oss/ids-components';
 
-<IressRadio>Radio button</IressRadio>
+<IressRadio>Radio button</IressRadio>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio--docs#api-props)
@@ -54,7 +56,9 @@ You can set the radio to `checked` by default. This is useful when you want to p
 
 **Note:** If you are using an `IressRadioGroup`, you should use the `value` prop on the `IressRadioGroup` to set the checked state of its `<IressRadio />` children, as the `checked` prop will be ignored.
 
-<StoryEmbed id="components-radio--checked"/>
+```tsx
+<IressRadio defaultChecked>Checked radio button</IressRadio>;
+```
 
 #### Read only
 
@@ -62,13 +66,39 @@ The `readOnly` prop changes how the radio is rendered. It will only render if th
 
 It is understandable that this may not be the desired behavior for all use cases. If you need a radio that is not editable, but still visible, simply do not set the `readOnly` prop and set the `checked` prop instead.
 
-<StoryEmbed id="components-radio--read-only"/>
+```tsx
+import { IressRadio, IressStack } from '@iress-oss/ids-components';
+
+export function RadioReadOnly() {
+  return (
+    <IressStack gap="sm">
+      <IressRadio readOnly defaultChecked>
+        Radio button
+      </IressRadio>
+      <IressRadio readOnly>Radio button</IressRadio>
+    </IressStack>
+  );
+}
+```
 
 #### Variants
 
 The `variant` prop changes the visual style of the radio. The `card` variant adds a card-like border and the `touch` variant adds button-like border and padding.
 
-<StoryEmbed id="components-radio--variants"/>
+```tsx
+import { IressRadio, IressStack } from '@iress-oss/ids-components';
+
+export function RadioVariants() {
+  return (
+    <IressStack gap="lg">
+      <IressRadio variant="card" heading="Widget">
+        A description of the widget
+      </IressRadio>
+      <IressRadio variant="touch">Touch variant</IressRadio>
+    </IressStack>
+  );
+}
+```
 
 ### Testing
 
@@ -107,7 +137,7 @@ const yes = within(group).getByRole('radio', { name: 'Yes' });
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
 | main | The root element of the radio | — | `radio` |
-| input | The underlying radio input element | — | `radio__input` |
+| input | The underlying radio input element | `getByRole('radio', { name: '...' })` | `radio__input` |
 | radioMark | The visual radio indicator | — | `radio__radioMark` |
 
 ---

@@ -15,7 +15,39 @@ import { IressToaster } from '@iress-oss/ids-components';
 
 Toaster provide users with important, time-sensitive information.
 
-<StoryEmbed id="components-toaster--provider"/>
+```tsx
+import {
+  IressButton,
+  IressToasterProvider,
+  useToaster,
+} from '@iress-oss/ids-components';
+
+const ToastWithTrigger = () => {
+  const toaster = useToaster();
+
+  return (
+    <IressButton
+      onClick={() =>
+        toaster.error({
+          heading: 'Error',
+          content:
+            'Connection failure. Longer text description should wrap and look like this. Try to limit to 3 lines or less.',
+        })
+      }
+    >
+      Show toast using provider
+    </IressButton>
+  );
+};
+
+export function SimpleToasterExample() {
+  return (
+    <IressToasterProvider container={document.body}>
+      <ToastWithTrigger />
+    </IressToasterProvider>
+  );
+}
+```
 
 ## Design
 
@@ -76,7 +108,7 @@ function App() {
 
 <IressToasterProvider position="top-end">
   <App />
-</IressToasterProvider>
+</IressToasterProvider>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toaster--docs#api-props)
@@ -89,19 +121,141 @@ To use the toaster, wrap your `<App/>` or the component that you want to use the
 
 You can use the `success`, `info` and `error` methods from the hook to trigger toasts in your application.
 
-<StoryEmbed id="components-toaster--provider"/>
+```tsx
+import {
+  IressButton,
+  IressToasterProvider,
+  useToaster,
+} from '@iress-oss/ids-components';
+
+const ToastWithTrigger = () => {
+  const toaster = useToaster();
+
+  return (
+    <IressButton
+      onClick={() =>
+        toaster.error({
+          heading: 'Error',
+          content:
+            'Connection failure. Longer text description should wrap and look like this. Try to limit to 3 lines or less.',
+        })
+      }
+    >
+      Show toast using provider
+    </IressButton>
+  );
+};
+
+export function SimpleToasterExample() {
+  return (
+    <IressToasterProvider container={document.body}>
+      <ToastWithTrigger />
+    </IressToasterProvider>
+  );
+}
+```
 
 #### Closing toasts via the provider
 
 If you want to dismiss a toast programmatically, you can use the `close` method from the `useToaster` hook. This method takes a toast ID as an argument, which is returned when you create a toast using the `useToaster` hook.
 
-<StoryEmbed id="components-toaster--close"/>
+```tsx
+import {
+  IressButton,
+  IressInline,
+  IressToasterProvider,
+  useToaster,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+const ToastWithTrigger = () => {
+  const toaster = useToaster();
+  const [lastToastId, setLastToastId] = useState<string | null>(null);
+
+  return (
+    <IressInline gap="sm">
+      <IressButton
+        onClick={() => {
+          const toastId = toaster.error({
+            heading: 'Error',
+            content:
+              'Connection failure. Longer text description should wrap and look like this. Try to limit to 3 lines or less.',
+            onClose: () => {
+              setLastToastId(null);
+            },
+          });
+
+          setLastToastId(toastId);
+        }}
+      >
+        Show toast using provider
+      </IressButton>
+      {lastToastId && (
+        <IressButton onClick={() => toaster.close(lastToastId)}>
+          Close the last toast opened
+        </IressButton>
+      )}
+    </IressInline>
+  );
+};
+
+export function CloseToastViaProvider() {
+  return (
+    <IressToasterProvider container={document.body}>
+      <ToastWithTrigger />
+    </IressToasterProvider>
+  );
+}
+```
 
 #### Status
 
 The toast offers three statuses that set a distinctive colour and icon. They can be set using the `status` prop.
 
-<StoryEmbed id="components-toaster--statuses"/>
+```tsx
+import {
+  IressButton,
+  IressInline,
+  IressToasterProvider,
+  useToaster,
+} from '@iress-oss/ids-components';
+
+const ToastWithTrigger = ({
+  status,
+}: {
+  status: 'error' | 'success' | 'info';
+}) => {
+  const toaster = useToaster();
+
+  return (
+    <IressButton
+      onClick={() =>
+        toaster[status]({
+          heading: `${status[0].toUpperCase() + status.slice(1)} toast`,
+          content: `Hello, I am a ${status} toast`,
+          actions: [
+            { onClick: () => alert('Action clicked!'), children: 'Click me' },
+          ],
+        })
+      }
+    >
+      {status}
+    </IressButton>
+  );
+};
+
+export function ToastStatuses() {
+  return (
+    <IressToasterProvider container={document.body}>
+      <IressInline gap="sm">
+        <ToastWithTrigger status="error" />
+        <ToastWithTrigger status="info" />
+        <ToastWithTrigger status="success" />
+      </IressInline>
+    </IressToasterProvider>
+  );
+}
+```
 
 #### Timeout
 
@@ -109,7 +263,38 @@ By default, toasts will time out after six seconds, after which they will animat
 
 Timeouts must be set in milliseconds; as an example, if you want a timeout of five seconds, set the timeout to 5000.
 
-<StoryEmbed id="components-toaster--timeout"/>
+```tsx
+import {
+  IressButton,
+  IressToasterProvider,
+  useToaster,
+} from '@iress-oss/ids-components';
+
+const ToastWithTrigger = () => {
+  const toaster = useToaster();
+
+  return (
+    <IressButton
+      onClick={() =>
+        toaster.success({
+          content: 'This is a really quick toast',
+          timeout: 1000,
+        })
+      }
+    >
+      1000ms timeout
+    </IressButton>
+  );
+};
+
+export function ToasterTimeout() {
+  return (
+    <IressToasterProvider container={document.body}>
+      <ToastWithTrigger />
+    </IressToasterProvider>
+  );
+}
+```
 
 #### Position
 
@@ -117,7 +302,107 @@ By default, the `IressToasterProvider`'s `position` is set to `top-end`, but the
 
 **Note:** The toast position should be consistent based on context, so users can find them easily.
 
-<StoryEmbed id="components-toaster--position"/>
+```tsx
+import {
+  IressButton,
+  IressInline,
+  IressPanel,
+  IressStack,
+  IressText,
+  IressToasterProvider,
+  type NewToast,
+  useToaster,
+} from '@iress-oss/ids-components';
+
+const DEFAULT_TOAST: NewToast = {
+  content: 'Message sent successfully',
+  heading: 'Success',
+  status: 'success',
+};
+
+const Toaster = () => {
+  const topStart = useToaster('top-start');
+  const topCenter = useToaster('top-center');
+  const topEnd = useToaster('top-end');
+  const bottomStart = useToaster('bottom-start');
+  const bottomCenter = useToaster('bottom-center');
+  const bottomEnd = useToaster('bottom-end');
+
+  return (
+    <div style={{ padding: '80px 150px' }}>
+      <IressStack gap="md">
+        <IressInline horizontalAlign="between" gap="sm">
+          <IressButton onClick={() => topStart.success(DEFAULT_TOAST)}>
+            top-start
+          </IressButton>
+          <IressButton onClick={() => topCenter.success(DEFAULT_TOAST)}>
+            top-center
+          </IressButton>
+          <IressButton onClick={() => topEnd.success(DEFAULT_TOAST)}>
+            top-end
+          </IressButton>
+        </IressInline>
+        <IressPanel bg="transparent" p="lg">
+          <IressText textAlign="center">Toaster positions</IressText>
+        </IressPanel>
+        <IressInline horizontalAlign="between">
+          <IressButton onClick={() => bottomStart.success(DEFAULT_TOAST)}>
+            bottom-start
+          </IressButton>
+          <IressButton onClick={() => bottomCenter.success(DEFAULT_TOAST)}>
+            bottom-center
+          </IressButton>
+          <IressButton onClick={() => bottomEnd.success(DEFAULT_TOAST)}>
+            bottom-end
+          </IressButton>
+        </IressInline>
+      </IressStack>
+    </div>
+  );
+};
+
+export function ToasterPositionExamples() {
+  return (
+    <IressToasterProvider
+      container={document.body}
+      id="bottom-end"
+      position="bottom-end"
+    >
+      <IressToasterProvider
+        container={document.body}
+        id="bottom-center"
+        position="bottom-center"
+      >
+        <IressToasterProvider
+          container={document.body}
+          id="bottom-start"
+          position="bottom-start"
+        >
+          <IressToasterProvider
+            container={document.body}
+            id="top-start"
+            position="top-start"
+          >
+            <IressToasterProvider
+              container={document.body}
+              id="top-center"
+              position="top-center"
+            >
+              <IressToasterProvider
+                container={document.body}
+                id="top-end"
+                position="top-end"
+              >
+                <Toaster />
+              </IressToasterProvider>
+            </IressToasterProvider>
+          </IressToasterProvider>
+        </IressToasterProvider>
+      </IressToasterProvider>
+    </IressToasterProvider>
+  );
+}
+```
 
 ### Testing
 
@@ -134,11 +419,11 @@ expect(toast).toBeInTheDocument();
 - **Dismissing toasts**: After clicking the dismiss button, use `waitForElementToBeRemoved` to wait for the exit animation:
 
   ```tsx
-  const toast = await screen.findByText('Changes saved');
-  const dismiss = screen.getByRole('button', { name: 'Dismiss' });
-  await user.click(dismiss);
-  await waitForElementToBeRemoved(toast);
-  ```
+const toast = await screen.findByText('Changes saved');
+const dismiss = screen.getByRole('button', { name: 'Dismiss' });
+await user.click(dismiss);
+await waitForElementToBeRemoved(toast);
+```
 
 - **Toast status icons**: Each toast has a status label accessible via `getByLabelText('success:')` (or `danger:`, `info:`, etc.).
 
@@ -148,7 +433,7 @@ expect(toast).toBeInTheDocument();
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
 | main | The visible toast list container (rendered inside the aria-live region) | — | `toaster` |
-| toast | An individual toast notification within the Toaster | — | `toast` |
+| toast | An individual toast notification within the Toaster | `getByRole('alert')` | `toast` |
 
 ---
 

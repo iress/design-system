@@ -71,6 +71,13 @@ export const Default: Story = {
     children: 'even',
     gap: 'spacing.1',
   },
+  render: (args) => (
+    <IressStack {...args}>
+      <IressPlaceholder height="50" />
+      <IressPlaceholder height="50" />
+      <IressPlaceholder height="50" />
+    </IressStack>
+  ),
 };
 
 export const Gap: Story = {
@@ -84,12 +91,24 @@ export const Gap: Story = {
   },
   render: (args) => (
     <IressStack gap="spacing.4">
-      {SPACING_AND_ALIAS_TOKENS.map((spacing) => (
-        <IressText key={spacing}>
-          <h2>{spacing}</h2>
-          <IressStack {...args} gap={spacing as never} />
-        </IressText>
-      ))}
+      <IressText element="h3">spacing.1</IressText>
+      <IressStack {...args} gap="spacing.1">
+        <IressPlaceholder height="50" />
+        <IressPlaceholder height="50" />
+        <IressPlaceholder height="50" />
+      </IressStack>
+      <IressText element="h3">spacing.4</IressText>
+      <IressStack {...args} gap="spacing.4">
+        <IressPlaceholder height="50" />
+        <IressPlaceholder height="50" />
+        <IressPlaceholder height="50" />
+      </IressStack>
+      <IressText element="h3">spacing.8</IressText>
+      <IressStack {...args} gap="spacing.8">
+        <IressPlaceholder height="50" />
+        <IressPlaceholder height="50" />
+        <IressPlaceholder height="50" />
+      </IressStack>
     </IressStack>
   ),
 };
@@ -105,13 +124,10 @@ export const ResponsiveGap: Story = {
     },
   },
   render: (args) => (
-    <IressStack gap="spacing.4">
-      <IressPanel>
-        <p>
-          <code>gap=&#123;{JSON.stringify(args.gap)}&#125;</code>
-        </p>
-      </IressPanel>
-      <IressStack {...args} />
+    <IressStack {...args}>
+      <IressPlaceholder height="50" />
+      <IressPlaceholder height="50" />
+      <IressPlaceholder height="50" />
     </IressStack>
   ),
   decorators: [withBreakpointLabel()],
@@ -122,6 +138,13 @@ export const InlineChildren: Story = {
     children: 'inlineChildren',
     gap: 'spacing.4',
   },
+  render: (args) => (
+    <IressStack {...args}>
+      <IressPanel bg="alt">Panel 1 (block)</IressPanel>
+      <span>I am a block span with the same margin</span>
+      <IressPanel bg="alt">Panel 2 (block)</IressPanel>
+    </IressStack>
+  ),
 };
 
 export const Lists: Story = {
@@ -130,6 +153,13 @@ export const Lists: Story = {
     gap: 'spacing.7',
     element: 'ul',
   },
+  render: (args) => (
+    <IressStack {...args}>
+      <li>List item 1</li>
+      <li>List item 2</li>
+      <li>List item 3</li>
+    </IressStack>
+  ),
 };
 
 export const VerticalAlign: Story = {
@@ -139,11 +169,12 @@ export const VerticalAlign: Story = {
     verticalAlign: 'bottom',
   },
   render: (args) => (
-    <IressText>
-      <h2>{args.verticalAlign}</h2>
-      <IressPanel style={{ height: '1000px' }}>
-        <IressStack {...args} stretch />
-      </IressPanel>
-    </IressText>
+    <IressPanel style={{ height: '300px' }}>
+      <IressStack {...args} stretch>
+        <IressPlaceholder height="50" />
+        <IressPlaceholder height="50" />
+        <IressPlaceholder height="50" />
+      </IressStack>
+    </IressPanel>
   ),
 };

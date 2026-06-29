@@ -36,14 +36,16 @@ export const Default: Story = {
 
 export const InputCurrency: Story = {
   args: {
-    ...Default.args,
+    defaultValue: 12345.678,
+    locale: 'en-AU',
+    currencyCode: 'AUD',
     placeholder: 'Enter amount and dispay currency currency separator on blur',
   },
 };
 
 export const GBP: Story = {
   args: {
-    ...Default.args,
+    defaultValue: 12345.678,
     locale: 'en-GB',
     currencyCode: 'GBP',
     placeholder: 'Enter amount and dispay currency currency separator on blur',
@@ -52,7 +54,6 @@ export const GBP: Story = {
 
 export const JPY: Story = {
   args: {
-    ...Default.args,
     defaultValue: 12345678,
     locale: 'ja-JP',
     currencyCode: 'JPY',
@@ -62,7 +63,9 @@ export const JPY: Story = {
 
 export const WithSymbol: Story = {
   args: {
-    ...Default.args,
+    defaultValue: 12345.678,
+    locale: 'en-AU',
+    currencyCode: 'AUD',
     withSymbol: true,
     placeholder: 'Enter amount and dispay currency symbol on blur',
   },
@@ -70,7 +73,9 @@ export const WithSymbol: Story = {
 
 export const FormatOptions: Story = {
   args: {
-    ...Default.args,
+    defaultValue: 12345.678,
+    locale: 'en-AU',
+    currencyCode: 'AUD',
     placeholder:
       'Pass and play around with other native Intl.NumberFormat options to the code sandbox',
     formatOptions: { minimumFractionDigits: 2, maximumFractionDigits: 4 },
@@ -79,7 +84,9 @@ export const FormatOptions: Story = {
 
 export const ReadOnly: Story = {
   args: {
-    ...Default.args,
+    defaultValue: 12345.678,
+    locale: 'en-AU',
+    currencyCode: 'AUD',
     readOnly: true,
     alignRight: true,
     withSymbol: true,
@@ -88,7 +95,9 @@ export const ReadOnly: Story = {
 
 export const AlignRight: Story = {
   args: {
-    ...Default.args,
+    defaultValue: 12345.678,
+    locale: 'en-AU',
+    currencyCode: 'AUD',
     alignRight: true,
   },
 };

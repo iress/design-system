@@ -15,7 +15,13 @@ import { IressLink } from '@iress-oss/ids-components';
 
 A link is used to navigate to another page or location.
 
-<StoryEmbed id="components-link--slots"/>
+```tsx
+<IressInline gap="md">
+  <IressLink prepend={<IressIcon name="home" />}>Prepend icon</IressLink>
+
+  <IressLink append={<IressIcon name="home" />}>Append icon</IressLink>
+</IressInline>;
+```
 
 ## Design
 
@@ -59,9 +65,7 @@ A link is used to navigate to another page or location.
 ```tsx
 import { IressLink } from '@iress-oss/ids-components';
 
-<IressLink href="//iress.com">
-  IressLink
-</IressLink>
+<IressLink href="//iress.com">IressLink</IressLink>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-link--docs#api-props)
@@ -80,7 +84,9 @@ The loading state can be activated by setting the `loading` prop to `true` and p
 
 When the loading state is activated, any click events on the link are disabled.
 
-<StoryEmbed id="components-link--loading"/>
+```tsx
+<IressLink loading>Link text</IressLink>;
+```
 
 #### Prepend & Append
 
@@ -91,13 +97,42 @@ Use the `prepend` and `append` props to correctly position icons or badges insid
 
 > **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
-<StoryEmbed id="components-link--slots"/>
+```tsx
+<IressInline gap="md">
+  <IressLink prepend={<IressIcon name="home" />}>Prepend icon</IressLink>
+
+  <IressLink append={<IressIcon name="home" />}>Append icon</IressLink>
+</IressInline>;
+```
 
 #### Element
 
 You can use the `element` prop to render a custom component as the link. This is useful for rendering a component from a third-party library, such as `react-router-dom`.
 
-<StoryEmbed id="components-link--element"/>
+```tsx
+import { IressLink } from '@iress-oss/ids-components';
+import { type HTMLAttributes, forwardRef } from 'react';
+
+/**
+ * This could be the `Link` component from `react-router-dom` or any other routing library.
+ */
+const Link = forwardRef<
+  HTMLAnchorElement,
+  HTMLAttributes<HTMLAnchorElement> & { to: string }
+>(({ children, className, to, ...restProps }, ref) => (
+  <div className={className}>
+    <a href={to} ref={ref} {...restProps}>
+      {children}
+    </a>
+  </div>
+));
+
+export const RoutingLink = () => (
+  <IressLink element={Link} to="https://iress.com">
+    Iress
+  </IressLink>
+);
+```
 
 ### Testing
 
@@ -118,7 +153,7 @@ const button = screen.getByRole('button', { name: 'Show details' });
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the link | — | `link` |
+| main | The root element of the link | `getByRole('link', { name: '...' })` when an href is provided, otherwise `getByRole('button', { name: '...' })` | `link` |
 
 ---
 

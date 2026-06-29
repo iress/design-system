@@ -15,7 +15,13 @@ import { IressStack } from '@iress-oss/ids-components';
 
 Use IressStack to control vertical spacing between content with consistent preset values.
 
-<StoryEmbed id="components-stack--default"/>
+```tsx
+<IressStack gap="spacing.1">
+  <IressPlaceholder height="50" />
+  <IressPlaceholder height="50" />
+  <IressPlaceholder height="50" />
+</IressStack>;
+```
 
 ## Design
 
@@ -45,7 +51,7 @@ import { IressStack } from '@iress-oss/ids-components';
 <IressStack gap="spacing.4">
   <p>Item 1</p>
   <p>Item 2</p>
-</IressStack>
+</IressStack>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-stack--docs#api-props)
@@ -60,13 +66,46 @@ Vertical spacing is applied to the direct children of the `IressStack` component
 
 The previous `gutter` prop has been replaced by `gap`, which uses the latest set of spacing tokens. In terms of how it is used to space items inside the `IressStack` component, it is now directly mapped to the [CSS gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/gap), which may change how your application is spaced. For most cases, there should be no change.
 
-<StoryEmbed id="components-stack--gap"/>
+```tsx
+<IressStack gap="spacing.4">
+  <IressText element="h3">spacing.1</IressText>
+  <IressStack gap="spacing.1">
+    <IressPlaceholder height="50" />
+    <IressPlaceholder height="50" />
+    <IressPlaceholder height="50" />
+  </IressStack>
+  <IressText element="h3">spacing.4</IressText>
+  <IressStack gap="spacing.4">
+    <IressPlaceholder height="50" />
+    <IressPlaceholder height="50" />
+    <IressPlaceholder height="50" />
+  </IressStack>
+  <IressText element="h3">spacing.8</IressText>
+  <IressStack gap="spacing.8">
+    <IressPlaceholder height="50" />
+    <IressPlaceholder height="50" />
+    <IressPlaceholder height="50" />
+  </IressStack>
+</IressStack>;
+```
 
 #### Responsive gap
 
 The `gap` prop can take an object that takes five key/value pairs that correlate with the IDS breakpoints.
 
-<StoryEmbed id="components-stack--responsive-gap"/>
+```tsx
+<IressStack
+  gap={{
+    xs: 'spacing.1',
+    sm: 'spacing.2',
+    md: 'spacing.4',
+  }}
+>
+  <IressPlaceholder height="50" />
+  <IressPlaceholder height="50" />
+  <IressPlaceholder height="50" />
+</IressStack>;
+```
 
 #### Inline children
 
@@ -74,13 +113,25 @@ The stack component will treat the direct children as a block element. If you wa
 
 In the example below: `IressButton` are inline because of wrapped by `IressInline`.
 
-<StoryEmbed id="components-stack--inline-children"/>
+```tsx
+<IressStack gap="spacing.4">
+  <IressPanel bg="alt">Panel 1 (block)</IressPanel>
+  <span>I am a block span with the same margin</span>
+  <IressPanel bg="alt">Panel 2 (block)</IressPanel>
+</IressStack>;
+```
 
 #### Lists
 
 `IressStack` can also apply gap between the list items by using the new `element` (e.g. `ul`) prop.
 
-<StoryEmbed id="components-stack--lists"/>
+```tsx
+<IressStack gap="spacing.7" element="ul">
+  <li>List item 1</li>
+  <li>List item 2</li>
+  <li>List item 3</li>
+</IressStack>;
+```
 
 #### Vertical alignment
 
@@ -88,7 +139,15 @@ The `verticalAlign` prop controls how content is positioned vertically within th
 
 Use `top`, `middle`, or `bottom` to align items within the available space, and `between`, `around`, or `evenly` to distribute extra vertical space between items (similar to `space-between`, `space-around`, and `space-evenly` in CSS flexbox).
 
-<StoryEmbed id="components-stack--vertical-align"/>
+```tsx
+<IressPanel style={{ height: '300px' }}>
+  <IressStack gap="spacing.4" verticalAlign="bottom" stretch>
+    <IressPlaceholder height="50" />
+    <IressPlaceholder height="50" />
+    <IressPlaceholder height="50" />
+  </IressStack>
+</IressPanel>;
+```
 
 ### Testing
 

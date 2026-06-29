@@ -6,6 +6,8 @@
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, relative } from 'path';
 import { stripMdx } from './helpers/strip-mdx';
+import { resolveStoryEmbeds } from './helpers/resolve-stories';
+import { formatCodeBlocks } from './helpers/format-code';
 
 const ROOT = join(import.meta.dirname, '../..');
 const GUIDELINES_DIR = join(ROOT, 'apps/guidelines/content');
@@ -18,7 +20,7 @@ const GUIDE_DIRS: Record<string, string> = {
   'styling-props': 'styling-props',
 };
 
-function copyGuideDir(sourceDir: string, outputSubdir: string): number {
+async function copyGuideDir(sourceDir: string, outputSubdir: string): Promise<number> {
   const srcPath = join(GUIDELINES_DIR, sourceDir);
   const outPath = join(OUTPUT_DIR, outputSubdir);
 
@@ -30,9 +32,10 @@ function copyGuideDir(sourceDir: string, outputSubdir: string): number {
 
   for (const file of files) {
     const source = readFileSync(join(srcPath, file), 'utf-8');
-    const markdown = stripMdx(source, true);
+    const markdown = resolveStoryEmbeds(stripMdx(source, true));
+    const formatted = await formatCodeBlocks(markdown);
     const outFile = file.replace('.mdx', '.md');
-    writeFileSync(join(outPath, outFile), markdown);
+    writeFileSync(join(outPath, outFile), formatted);
     count++;
   }
 
@@ -42,7 +45,7 @@ function copyGuideDir(sourceDir: string, outputSubdir: string): number {
 export async function translateGuides() {
   let total = 0;
   for (const [srcDir, outDir] of Object.entries(GUIDE_DIRS)) {
-    const count = copyGuideDir(srcDir, outDir);
+    const count = await copyGuideDir(srcDir, outDir);
     total += count;
     if (count > 0) console.log(`  ${outDir}/ — ${count} files`);
   }

@@ -44,14 +44,14 @@ export const NoneSelected: Story = {
 
 export const Selected: Story = {
   args: {
-    ...NoneSelected.args,
+    placeholder: 'Select an item',
     selected: MOCK_LABEL_VALUE_META[0],
   },
 };
 
 export const LimitReached: Story = {
   args: {
-    ...NoneSelected.args,
+    placeholder: 'Select an item',
     limit: 3,
     selected: MOCK_LABEL_VALUE_META,
   },

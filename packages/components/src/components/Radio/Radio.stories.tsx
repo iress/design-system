@@ -32,7 +32,7 @@ export const Default: Story = {
 
 export const Checked: Story = {
   args: {
-    checked: true,
+    defaultChecked: true,
     children: 'Checked radio button',
   },
 };

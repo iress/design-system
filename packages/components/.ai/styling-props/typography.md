@@ -6,13 +6,21 @@ These are all styling props related to changing the typography of a component.
 
 The `textStyle` prop allows you to change the default text style of a component. For more control and nested element styling, it is recommended to use `IressText` instead.
 
-<StoryEmbed id="styling-props-typography--text-style" />
+```tsx
+<IressPanel bg="alt" textStyle="typography.heading.5">
+  A panel with large text
+</IressPanel>;
+```
 
 ## `textAlign`
 
 The `textAlign` prop allows you to change the alignment of text inside a component. For more control, it is recommended to use `IressText` instead.
 
-<StoryEmbed id="styling-props-typography--text-align" />
+```tsx
+<IressPanel bg="alt" textAlign="center">
+  A panel with centered text
+</IressPanel>;
+```
 
 ---
 
@@ -46,7 +54,7 @@ When you need to apply typography styling to components that aren't text-specifi
 // ✅ CORRECT - Using textStyle prop with tokens
 <IressPanel textStyle="typography.heading.1">
   Panel with heading-sized text
-</IressPanel>
+</IressPanel>;
 ```
 
 **Available typography tokens:**

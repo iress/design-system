@@ -15,7 +15,25 @@ import { IressPill } from '@iress-oss/ids-components';
 
 Pills are used for status indicators and badges — primarily for status updates, notifications and counts.
 
-<StoryEmbed id="components-pill--mode"/>
+```tsx
+import { IressInline, IressPill } from '@iress-oss/ids-components';
+
+export function PillMode() {
+  return (
+    <IressInline gap="sm">
+      <IressPill mode={10}>10</IressPill>
+      <IressPill mode={20}>20</IressPill>
+      <IressPill mode={30}>30</IressPill>
+      <IressPill mode={40}>40</IressPill>
+      <IressPill mode={50}>50</IressPill>
+      <IressPill mode={60}>60</IressPill>
+      <IressPill mode={70}>70</IressPill>
+      <IressPill mode={80}>80</IressPill>
+      <IressPill mode={90}>90</IressPill>
+    </IressInline>
+  );
+}
+```
 
 ## Design
 
@@ -52,7 +70,7 @@ Pills are **informational** — they display information but are not meant to be
 ```tsx
 import { IressPill } from '@iress-oss/ids-components';
 
-<IressPill>Label</IressPill>
+<IressPill>Label</IressPill>;
 ```
 
 [View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-pill--docs#api-props)
@@ -63,13 +81,44 @@ import { IressPill } from '@iress-oss/ids-components';
 
 The `mode` prop controls the colour scheme of the badge. Use data palette colours (10-90) for data visualization and non-semantic colour needs, or system status colours (`danger`, `info`, `success`, `warning`) for semantic status indication.
 
-<StoryEmbed id="components-pill--mode"/>
+```tsx
+import { IressInline, IressPill } from '@iress-oss/ids-components';
+
+export function PillMode() {
+  return (
+    <IressInline gap="sm">
+      <IressPill mode={10}>10</IressPill>
+      <IressPill mode={20}>20</IressPill>
+      <IressPill mode={30}>30</IressPill>
+      <IressPill mode={40}>40</IressPill>
+      <IressPill mode={50}>50</IressPill>
+      <IressPill mode={60}>60</IressPill>
+      <IressPill mode={70}>70</IressPill>
+      <IressPill mode={80}>80</IressPill>
+      <IressPill mode={90}>90</IressPill>
+    </IressInline>
+  );
+}
+```
 
 #### Status
 
 System status colours provide semantic meaning for feedback and state indication. Available options are: `danger`, `info`, `success`, and `warning`.
 
-<StoryEmbed id="components-pill--status"/>
+```tsx
+import { IressInline, IressPill } from '@iress-oss/ids-components';
+
+export function PillStatus() {
+  return (
+    <IressInline gap="sm">
+      <IressPill mode="danger">danger</IressPill>
+      <IressPill mode="info">info</IressPill>
+      <IressPill mode="success">success</IressPill>
+      <IressPill mode="warning">warning</IressPill>
+    </IressInline>
+  );
+}
+```
 
 ### Testing
 
@@ -84,7 +133,7 @@ const pill = screen.getByText('Active');
 
 | Part | Description | Recommended Query | Test ID |
 |------|-------------|-------------------|---------|
-| main | The root element of the pill | — | `pill` |
+| main | The root element of the pill | `getByText('...')` | `pill` |
 
 ---
 

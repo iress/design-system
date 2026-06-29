@@ -7,7 +7,23 @@
 
 Choosing between InputPopover, Autocomplete, Select, DropdownMenu, and Popover depends on whether users need to navigate to results, pick a form value, or trigger actions.
 
-<StoryEmbed id="patterns-search-selection--decision-tree"/>
+**Choose the right search/selection component:**
+
+| Scenario | Component |
+|----------|-----------|
+| User types to filter, selects a form value | `IressAutocomplete` |
+| User picks from a predefined list (single or multi) | `IressSelect` |
+| User picks an action from a filtered menu | `IressDropdownMenu` |
+| Custom popover triggered by input (e.g. date picker) | `IressInputPopover` |
+| Fully custom floating content | `IressPopover` |
+
+**Key differences:**
+
+- **Autocomplete**: Free-text allowed, async options, value is a string
+- **Select**: Must pick from list, supports multi-select and grouped options
+- **DropdownMenu**: Actions (not form values), filterable, supports sections
+- **InputPopover**: Low-level building block for custom input-triggered popovers
+- **Popover**: Generic floating panel, no built-in search/selection logic
 
 ## Design
 
@@ -42,7 +58,7 @@ import { IressAutocomplete, IressField } from '@iress-oss/ids-components';
     noResultsText="No clients found"
     clearable
   />
-</IressField>
+</IressField>;
 ```
 
 **Autocomplete vs Select:** If the user can submit any text value (even one not in the list), use Autocomplete. If the value *must* be one of the options, use Select.
@@ -71,7 +87,7 @@ import { IressDropdownMenu } from '@iress-oss/ids-components';
     if (selected.value === 'duplicate') handleDuplicate();
     if (selected.value === 'delete') handleDelete();
   }}
-/>
+/>;
 ```
 
 #### InputPopover + Menu (search navigation)
@@ -84,7 +100,12 @@ Use InputPopover with a Menu when users type a query and **navigate to a result*
 
 ```tsx
 import { Link } from 'your-router';
-import { IressInput, IressInputPopover, IressMenu, IressMenuItem } from '@iress-oss/ids-components';
+import {
+  IressInput,
+  IressInputPopover,
+  IressMenu,
+  IressMenuItem,
+} from '@iress-oss/ids-components';
 
 <IressInputPopover
   activator={
@@ -103,7 +124,7 @@ import { IressInput, IressInputPopover, IressMenu, IressMenuItem } from '@iress-
       </IressMenuItem>
     ))}
   </IressMenu>
-</IressInputPopover>
+</IressInputPopover>;
 ```
 
 **Why not Autocomplete?** Autocomplete is designed for form values — it sets a value on selection. For search-and-navigate, you want real links (`<a>` or router `Link` elements) so that users can right-click → open in new tab, and screen readers announce results as links rather than listbox options.
@@ -117,16 +138,25 @@ Use Popover for custom content triggered by a button that doesn't fit into the o
 - **Composite content**: Anything that needs more than a simple list of options
 
 ```tsx
-import { IressPopover, IressButton, IressStack, IressCheckbox } from '@iress-oss/ids-components';
+import {
+  IressPopover,
+  IressButton,
+  IressStack,
+  IressCheckbox,
+} from '@iress-oss/ids-components';
 
 <IressPopover
-  activator={<IressButton icon="filter_list" mode="tertiary">Filters</IressButton>}
+  activator={
+    <IressButton icon="filter_list" mode="tertiary">
+      Filters
+    </IressButton>
+  }
 >
   <IressStack gap="sm">
     <IressCheckbox value="active">Active</IressCheckbox>
     <IressCheckbox value="archived">Archived</IressCheckbox>
   </IressStack>
-</IressPopover>
+</IressPopover>;
 ```
 
 #### Select (`IressSelect`)
@@ -147,7 +177,7 @@ import { IressSelect, IressField } from '@iress-oss/ids-components';
     options={(query) => fetchCountries(query)}
     placeholder="Select a country"
   />
-</IressField>
+</IressField>;
 ```
 
 ### Quick reference

@@ -51,7 +51,13 @@ A compact overflow action pattern that surfaces contextual actions in a popover 
 ```tsx
 import { IressContextualMenu } from '@iress-oss/ids-components';
 
-<IressContextualMenu />
+<IressContextualMenu 
+  items={[
+    { key: 'edit', label: 'Edit', icon: 'edit' },
+    { key: 'lock', label: 'Lock', icon: 'lock', divider: true },
+    { key: 'delete', label: 'Delete', icon: 'delete' },
+  ]} 
+/>
 ```
 
 <IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-contextual-menu--docs#api-props">View all props</IressButton>

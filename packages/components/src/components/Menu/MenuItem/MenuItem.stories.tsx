@@ -51,7 +51,7 @@ export const Unselected: Story = {
 
 export const Selected: Story = {
   args: {
-    ...Unselected.args,
+    children: 'Menu item',
     selected: true,
   },
 };
@@ -71,14 +71,14 @@ export const Value: Story = {
 export const CanToggle: Story = {
   ...Value,
   args: {
-    ...Value.args,
+    children: 'Menu item',
+    value: 9,
     canToggle: true,
   },
 };
 
 export const Divider: Story = {
   args: {
-    ...Unselected.args,
     children: 'Menu item with divider',
     divider: true,
   },
@@ -86,9 +86,8 @@ export const Divider: Story = {
 };
 
 export const PrependAndAppend: Story = {
-  ...Unselected,
   args: {
-    ...Unselected.args,
+    children: 'Menu item',
     prepend: <IressIcon name="home" />,
     append: <IressPill mode="70">New</IressPill>,
   },

@@ -77,7 +77,9 @@ Enable multiple selection with the `multi` prop. Use `limit` to cap the number o
 
 <StoryEmbed id="components-select--multi-select"/>
 
-#### Multi Select Limit
+##### Limit the multi-select
+
+Add a `multiSelectLimit` prop to restrict the number of selections visible to the user. Note: this only limits the visible selection, not disabling the ability to select more options.
 
 <StoryEmbed id="components-select--multi-select-limit"/>
 
@@ -87,41 +89,57 @@ Load options dynamically using the `onSearch` callback.
 
 <StoryEmbed id="components-select--async-options"/>
 
-#### Async Options Min Search Length
+#### Async Options with Minimum Search Length
+
+To avoid unnecessary API calls, use the `minSearchLength` prop to require a minimum number of characters before triggering the search.
 
 <StoryEmbed id="components-select--async-options-min-search-length"/>
 
 #### Pre-selected Value
 
+You can set a default selected value using the `defaultValue` prop. This is useful for forms where you want to pre-fill a selection.
+
 <StoryEmbed id="components-select--pre-selected-value"/>
 
 #### Placeholder
+
+You can provide a placeholder to guide users on what to select. The placeholder will be displayed when no option is selected.
 
 <StoryEmbed id="components-select--placeholder"/>
 
 #### Sizing
 
+These are the available sizes for the Select component. Use the `width` prop to adjust the size of the select input.
+
 <StoryEmbed id="components-select--sizing"/>
 
 #### Custom Label
+
+The `IressSelect` component is fully customisable, allowing you to provide a custom label for the select input whilst keeping all the other functionality. Use the `renderLabel` prop to specify your own label text.
 
 <StoryEmbed id="components-select--custom-label"/>
 
 #### Custom Options
 
+If you want to render a custom selection experience, you can use the `renderOptions` prop to provide your own option rendering logic. This allows for more complex option layouts, such as multi-level options or additional stateful metadata display using rows and columns.
+
 <StoryEmbed id="components-select--custom-options"/>
 
 #### Create New Option
 
-Allow users to create new options on the fly.
+Allow users to create new options on the fly using the custom sub-components with `renderOptions`.
 
 <StoryEmbed id="components-select--create-new-option"/>
 
 #### Header & Footer
 
+You can add a header and footer to the options menu using the `header` and `footer` props. This is useful for adding additional context or actions related to the options list.
+
 <StoryEmbed id="components-select--header-footer"/>
 
 #### Grouped Options
+
+You can group related options together using the `children` key of each item in the `options` array. This allows for better organisation and easier scanning of options.
 
 <StoryEmbed id="components-select--grouped-options"/>
 
