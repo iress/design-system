@@ -1,5 +1,4 @@
-import { IressButton, IressSlideout } from '@/main';
-import { useSlideout } from '../hooks/useSlideout';
+import { IressButton, IressSlideout, useSlideout } from '@/main';
 
 const SLIDEOUT_ID = 'storybook-slideout';
 

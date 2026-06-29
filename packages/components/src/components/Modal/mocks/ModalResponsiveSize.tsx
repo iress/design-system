@@ -1,5 +1,4 @@
-import { IressButton, IressModal } from '@/main';
-import { useModal } from '../hooks/useModal';
+import { IressButton, IressModal, useModal } from '@/main';
 
 const MODAL_ID = 'responsive-modal';
 

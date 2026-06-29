@@ -2,6 +2,26 @@
 
 > Generated: 2026-05-30
 
+## Status (Updated 2026-06-29)
+
+| Phase | Status | Notes |
+|-------|--------|-------|
+| Phase A: Scaffold + guides copy | ✅ Done | CLI, strip-mdx, transform-imports, all subcommands |
+| Phase B: Component docs — prose + meta | ✅ Done | 88 docs, meta enrichment, testMeta tables |
+| Phase C: StoryEmbed resolution | ✅ Done | P1/P2/P3 extraction, prettier formatting, case-insensitive matching, sub-component paths, Foundation stories |
+| Phase C2: Reference data extraction | ✅ Done | Plugin system (StoryPlugin + StoryOverridePlugin), 10+ plugins for breakpoints, icons, z-index, forms, feedback, etc. |
+| Pipeline unification | ✅ Done | Single `--components` pass over all `apps/guidelines/content/` dirs. `--guides` is now an alias. |
+| Phase D: Props extraction | ❌ Not started | |
+| Phase E: Tag-based sections | ❌ Not started | |
+| Phase F: Composition + styling props | ❌ Not started | |
+| Phase G: Wire into build + cleanup | ❌ Not started | |
+
+### Future Phases
+
+| Phase | Status | Notes |
+|-------|--------|-------|
+| Phase H: Enriched index.json + llms.txt | ❌ Not started | Component catalog with descriptions, imports, keywords; fix llms.txt generation |
+
 ## Overview
 
 The repository has **7 scripts** and **2 orchestration mechanisms** involved in translating, generating, or deriving AI-consumable documentation. This document catalogues each, identifies overlaps, and proposes a simplified architecture.
@@ -424,3 +444,31 @@ apps/guidelines/content/
 ```
 
 Single source of truth (guidelines content) → multiple derived outputs. No circular dependencies.
+
+### Phase H: Enriched index.json + llms.txt
+
+Transform `index.json` from a bare slug list into a searchable component catalog, and fix `llms.txt` generation to use it:
+
+```json
+{
+  "components": [
+    {
+      "slug": "alert",
+      "name": "IressAlert",
+      "description": "Communicates important information inline with page content.",
+      "import": "import { IressAlert } from '@iress-oss/ids-components';",
+      "keywords": ["feedback", "error", "warning", "info", "status"],
+      "category": "components",
+      "path": "components/alert.md"
+    }
+  ]
+}
+```
+
+- [ ] Generate from meta (description, import) already available at translate time
+- [ ] Add keywords from guidelines content (extracted from "When to use" sections)
+- [ ] Include all types: components, patterns, foundations, styling-props, get-started
+- [ ] Rewrite `generate-llms-txt.ts` to read from enriched manifest (fixes current error)
+- [ ] Generate proper `llms.txt` with component descriptions and file paths
+- [ ] Consider: should skills be listed here too?
+

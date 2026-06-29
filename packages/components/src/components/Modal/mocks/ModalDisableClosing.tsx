@@ -1,5 +1,4 @@
-import { IressButton, IressModal, IressStack } from '@/main';
-import { useModal } from '../hooks/useModal';
+import { IressButton, IressModal, IressStack, useModal } from '@/main';
 
 export function ModalDisableClosing() {
   const { showModal } = useModal();

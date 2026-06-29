@@ -30,7 +30,7 @@ Skeletons can increase perceived performance for users. As opposed to spinners, 
 | ✅ Do | ❌ Don't |
 |-------|----------|
 | Match the skeleton shape to the actual content layout | Use a single generic rectangle for all loading states |
-| Use `text` mode with matching `textVariant` for text content | Show skeletons for longer than 3 seconds without explanation |
+| Use `text` mode with matching `textStyle` for text content | Show skeletons for longer than 3 seconds without explanation |
 | Transition smoothly from skeleton to real content | Animate skeletons with jarring effects |
 | Keep skeleton layouts stable to avoid layout shift | Change layout dimensions when real content appears |
 
@@ -68,7 +68,7 @@ The `mode` prop can be set to `text` (default), `rect` or `circle`.
 
 #### Text
 
-`text` mode works in place of `IressText`, matching sizing via the `textVariant` prop. Accepts `width` but not `height` (determined by font size and line height).
+`text` mode works in place of `IressText`, matching sizing via the `textStyle` prop. Accepts `width` but not `height` (determined by font size and line height).
 
 <StoryEmbed id="components-skeleton--text"/>
 

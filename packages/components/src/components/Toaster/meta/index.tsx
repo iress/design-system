@@ -24,7 +24,7 @@ export default {
   tags: ['feedback', 'notification', 'toast'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
-  import: "import { IressToaster } from '@iress-oss/ids-components';",
+  import: "import { IressToasterProvider, useToaster } from '@iress-oss/ids-components';",
   github: {
     source:
       'https://github.com/iress/design-system/tree/main/packages/components/src/components/Toaster',

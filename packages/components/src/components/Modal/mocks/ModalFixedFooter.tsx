@@ -1,5 +1,4 @@
-import { IressButton, IressModal, IressText } from '@/main';
-import { useModal } from '../hooks/useModal';
+import { IressButton, IressModal, IressText, useModal } from '@/main';
 
 const MODAL_ID = 'fixed-footer-modal';
 

@@ -1,5 +1,4 @@
-import { IressButton, IressInline, IressSlideout } from '@/main';
-import { useSlideout } from '../hooks/useSlideout';
+import { IressButton, IressInline, IressSlideout, useSlideout } from '@/main';
 
 const SLIDEOUT_ID = 'slideout-footer';
 

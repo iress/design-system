@@ -27,5 +27,4 @@ generated
 packages/components/src/styled-system
 storybook-static
 packages/components/.storybook/component-versions.json
-packages/*/llms.txt
 .ai-improve.log
