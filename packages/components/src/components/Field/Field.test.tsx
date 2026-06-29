@@ -202,8 +202,10 @@ describe('IressField', () => {
       expect(label).toBeInTheDocument();
       expect(infoIcon).toBeInTheDocument();
 
+      // In horizontal mode, label and hint icon are siblings inside a flex wrapper
       const labelElement = label.closest('label');
-      expect(labelElement).toContainElement(infoIcon);
+      const wrapper = labelElement?.parentElement;
+      expect(wrapper).toContainElement(infoIcon);
     });
 
     describe('removeErrorMargin', () => {
