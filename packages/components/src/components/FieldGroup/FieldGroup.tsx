@@ -46,6 +46,7 @@ export const IressFieldGroup = ({
 }: IressFieldGroupProps) => {
   const styles = fieldGroup.raw({
     hasError: !!error || !!errorMessages?.length,
+    hasHint: !!hint,
     hiddenLabel,
     inline,
     join,

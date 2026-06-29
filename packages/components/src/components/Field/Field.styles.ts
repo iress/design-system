@@ -42,7 +42,7 @@ export const field = sva({
       fontSize: 'inherit',
     },
     label: {
-      mb: 'spacing.1',
+      mb: 'spacing.2',
     },
     horizontalLabelWithHint: {
       display: 'inline-flex',
@@ -101,7 +101,7 @@ export const field = sva({
     hasHint: {
       true: {
         label: {
-          mb: 'spacing.0',
+          mb: 'spacing.1',
         },
       },
     },
