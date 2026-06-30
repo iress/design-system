@@ -115,7 +115,7 @@ Also accepts all [styling props](../styling-props/overview.md) (spacing, colour,
 | heading | `ReactNode` | `<h3>There was a problem submitting this form</h3>` | Text for alert heading. If a string, it will use a heading with level 2. |
 | icon | [MaterialSymbol](https://fonts.google.com/icons?icon.set=Material+Symbols) | — | Icon to display in the alert. If set to `false`, no icon will be displayed. If not provided, the icon will be determined by the `status` prop. |
 | multiLine | `boolean` | — | If true, the alert will have a layout that supports longer content, with increased spacing and the icon aligned to the top of the alert instead of centered. Should be used when the content of the alert is more than a couple of sentences. |
-| onClose | `((e?: MouseEvent<HTMLButtonElement, MouseEvent>) => void)` | — | Icon to display in the alert. If set to `false`, no icon will be displayed. If not provided, the icon will be determined by the `status` prop. |
+| onClose | `((e?: MouseEvent<HTMLButtonElement, MouseEvent>) => void)` | — | Emitted when the alert is dismissed by the user via the close button. |
 | variant | `full-width`, `sidebar`  | — | Variants of the alert, allowing it to be styled differently based on where its used in the application. - Sidebar: The icon will be aligned to the heading, and the text will appear below the icon. - Full-width: The border will be removed, except for the bottom border. |
 
 📄 [Full type definition](../../dist/patterns/FormValidationSummary/FormValidationSummary.d.ts)

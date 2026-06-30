@@ -2,7 +2,7 @@
 
 > Generated: 2026-05-30
 
-## Status (Updated 2026-06-29)
+## Status (Updated 2026-06-30)
 
 | Phase | Status | Notes |
 |-------|--------|-------|
@@ -11,10 +11,10 @@
 | Phase C: StoryEmbed resolution | ✅ Done | P1/P2/P3 extraction, prettier formatting, case-insensitive matching, sub-component paths, Foundation stories |
 | Phase C2: Reference data extraction | ✅ Done | Plugin system (StoryPlugin + StoryOverridePlugin), 10+ plugins for breakpoints, icons, z-index, forms, feedback, etc. |
 | Pipeline unification | ✅ Done | Single `--components` pass over all `apps/guidelines/content/` dirs. `--guides` is now an alias. |
-| Phase D: Props extraction | ❌ Not started | |
-| Phase E: Tag-based sections | ❌ Not started | |
+| Phase D: Props extraction | ✅ Done | react-docgen-typescript + .d.ts fallback, type linking, MaterialSymbol detection, enum expansion, subComponents, additionalProps, CI check planned |
+| Phase E: Append unreferenced recipes + cleanup | ❌ Not started | Only recipe-tagged stories not already in guidelines; delete stale files |
 | Phase F: Composition + styling props | ❌ Not started | |
-| Phase G: Wire into build + cleanup | ❌ Not started | |
+| Phase G: Wire into build + cleanup | ❌ Not started | Includes CI prop table validation |
 
 ### Future Phases
 
@@ -392,12 +392,15 @@ dev-watcher.ts detects change
 - Insert into the `## Props` placeholder from Phase B
 - **Test:** `.ai/components/alert.md` has a complete Props table
 
-### Phase E: Tag-based sections
+### Phase E: Append unreferenced recipe stories + cleanup
 
-- Parse story file exports for `tags: ['recipe']`, `tags: ['migration']`, `tags: ['tab:<name>']`
-- For each tagged story, extract code (mock file or inline) and group under dedicated sections
-- Recipes → `## Recipes`, Migration → `## Migration`, tab:X → section named from `tabDescriptions[X]`
-- **Test:** Form `.ai/` has Recipes, Table has dynamic tab sections
+- Scan stories files for `tags: ['recipe']` exports after StoryEmbed resolution
+- Track which story IDs were already resolved during Phase C
+- Append unreferenced recipe stories (P2 mocks only) under a `## Recipes` section at the bottom of the component doc
+- Skip `['migration']` stories — migration content lives in guidelines MDX with diff code blocks (remove migration stories from Storybook in a separate task)
+- Skip `['tab:*']` stories — Storybook UI groupings, not documentation content
+- Delete stale files from old pipeline (`form-recipes.md`, `styling-props.md`, etc.)
+- **Test:** Recipe stories not in guidelines MDX are appended to the component doc
 
 ### Phase F: Composition + styling props + full-reference + index
 

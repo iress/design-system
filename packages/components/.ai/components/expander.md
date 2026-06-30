@@ -23,7 +23,7 @@ import { IressExpander } from '@iress-oss/ids-components';
 | activatorStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | `{}` | This allows you to customise the content styling specifically, which is the floating element. It accepts an object with any of the styling properties available on `IressCSSProps`, as well as `className` and `style`. |
 | children | `ReactNode` | — | Contents that will be expanded/collapsed when the expander is activated. |
 | onChange | `((newValue: boolean) => void)` | — | Emitted when the open state changes. |
-| mode | `link` , `section` | `section` | Controls the display mode of the activator element. Can be Section, Heading or Link. |
+| mode | `link` , `section` | `section` | Controls the display mode of the activator element. Can be Section or Link. |
 | open | `boolean` | `false` | When true the expandable container will be visible and the activator will display as open. |
 | data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
 
