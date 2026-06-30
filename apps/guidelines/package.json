@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite\" \"tsx scripts/build-search-index.ts --watch\"",
+    "dev": "concurrently \"vite\" \"tsx scripts/build-search-index.ts --watch\" \"yarn dev:ai\"",
+    "dev:no-open": "concurrently \"vite\" \"tsx scripts/build-search-index.ts --watch\"",
     "build": "vite build && tsx scripts/build-search-index.ts && rm -rf ../../docs && cp -r dist ../../docs",
     "preview": "vite build && tsx scripts/build-search-index.ts && vite preview",
     "search:build": "tsx scripts/build-search-index.ts",

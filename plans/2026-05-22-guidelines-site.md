@@ -377,7 +377,7 @@ where `.ai/` gets updated.
 - [x] **Step 2:** On change (debounced 2s):
   1. Run `derive-ai-docs.ts --files <affected>` (incremental — only changed components)
   2. Run `ai-runner.ts --target guidelines --files <affected>` (validate + improve)
-- [x] **Step 3:** Wire into root `package.json` as `"dev:improve"` script
+- [x] **Step 3:** Wire into root `package.json` as `"dev:ai"` script
 - [x] **Step 4:** Update root `yarn dev` or add `concurrently` to run both Vite + watcher
 
 **Dev experience:**

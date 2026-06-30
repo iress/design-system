@@ -84,10 +84,17 @@ Node 22, Yarn 4 (Berry). The `packageManager` field in root `package.json` pins 
 Build order: `tokens` → `theme-preset` → `components`. Always respect this when building.
 
 `yarn build` runs all package builds in topological order, then runs `yarn translate` which generates:
-- AI component docs (`packages/*/.ai/`)
-- Token reference (`token-reference.md`)
-- Skills translations
-- `llms.txt` files for each package
+- AI component docs (`packages/*/.ai/`) — from `apps/guidelines/content/` MDX + component meta + stories
+- Token reference (`token-reference.md`) — from `@iress-oss/ids-tokens` schema
+- Skills translations — from `.agents/skills/` to package `.ai/skills/`
+- `llms.txt` discovery files for each package
+- `IDS-FULL-REFERENCE.md` — concatenation of all docs
+
+The translate pipeline (`scripts/translate.ts`) uses:
+- **StoryEmbed resolution** — extracts code from stories (P1 args, P2 mocks, P3 inline renders)
+- **Plugin system** — overrides for reference tables, decision trees, interactive stories
+- **react-docgen-typescript** — extracts props tables from component source
+- **ComponentMeta** — `subComponents` and `additionalProps` for documentation enrichment
 
 | Package | Path | Purpose |
 |---|---|---|

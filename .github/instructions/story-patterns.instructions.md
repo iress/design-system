@@ -116,3 +116,38 @@ These determine which tab the story appears in:
 ## One file per component
 
 Each component has exactly one `.stories.tsx` file. Recipes, slots, and other tabs merge in using tags.
+
+## AI Translate Pipeline Requirements
+
+The `scripts/translate.ts` pipeline extracts code examples from stories for `.ai/` documentation. Follow these rules to ensure clean extraction:
+
+### P1 stories (args-only, no render)
+
+- Args must be **self-contained literals** — no `...Default.args` or `...OtherStory.args` spreads
+- No computed expressions (e.g. `[...Array(5).keys()].map(...)`) — use literal arrays
+- No imported constants as arg values (e.g. `MOCK_LABEL_VALUE_META`) — inline the values
+- `false` boolean args that are defaults should be omitted (they add noise to the output)
+
+### P2 stories (mock + withSource)
+
+- ✅ These always translate well — the mock file is read directly
+- Preferred for complex examples
+
+### P3 stories (inline render)
+
+- Use `(args) =>` with `{...args}` spread — the translator inlines arg values
+- Do NOT use `.map()` over constants — use explicit repeated elements
+- Do NOT use `{args.propName ? ... : ...}` ternaries — Storybook control logic that confuses translation
+- Do NOT destructure args like `({ messages, ...args })` unless necessary — the translator excludes destructured params from inlining
+- Props that are the point of the story should be explicit on the element (e.g. `<IressInline {...args} noWrap>`)
+
+### Children control mappings
+
+- `children: 'text'`, `'even'`, `'story'` etc. are Storybook control keys handled by translate plugins
+- The translator replaces them with placeholder content — this is expected behaviour
+
+### Stories referenced by `<StoryEmbed>`
+
+- Ensure they produce standalone, complete code examples
+- If a story can't be cleanly extracted, convert it to P2 (mock + withSource)
+- The translate pipeline leaves unresolvable StoryEmbeds in place (visible in output)

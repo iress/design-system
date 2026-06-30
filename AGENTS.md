@@ -27,6 +27,13 @@ Any `dev`, `test` (without `:coverage`), or `watch` command starts a persistent 
 yarn build           # builds all packages (topological order) then runs translate scripts
 ```
 
+The `yarn translate` command runs the unified `scripts/translate.ts` pipeline which generates all `.ai/` documentation:
+- `--tokens` — generates token reference from schema
+- `--components` — translates all `apps/guidelines/content/` MDX to `.ai/` markdown (components, patterns, foundations, tokens, styling-props, etc.)
+- `--skills` — copies skills to package `.ai/skills/` directories
+- `--llms-txt` — generates `llms.txt` discovery files
+- `--full-reference` — concatenates all docs into `IDS-FULL-REFERENCE.md`
+
 The `yarn monorepo` alias runs `yarn workspaces foreach -Ai --topological-dev --exclude=@iress/design-system-monorepo`. Use it for cross-package commands.
 
 ## Testing

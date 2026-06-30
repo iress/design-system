@@ -21,11 +21,7 @@
 
 | Phase | Status | Notes |
 |-------|--------|-------|
-| Phase I: Documentation & skills sync | ❌ Not started | Update instructions, skills, and AGENTS.md to reflect new pipeline |
-
-| Phase | Status | Notes |
-|-------|--------|-------|
-| Phase I: Documentation & skills sync | ❌ Not started | Update instructions, skills, and AGENTS.md to reflect new pipeline |
+| Phase I: Documentation & skills sync | ✅ Done | story-patterns, improve-code-examples, repo-maintenance, AGENTS.md, component-creation all updated |
 
 ## Overview
 
@@ -75,7 +71,7 @@ The repository has **7 scripts** and **2 orchestration mechanisms** involved in 
 | **Purpose** | Watches `apps/guidelines/content/` and `packages/components/src/` for `.mdx` and `.stories.tsx` changes. On change: (1) runs `derive-ai-docs.ts` to sync `.ai/`, then (2) runs `ai-runner.ts` to improve code examples. |
 | **Input** | File system events (chokidar) |
 | **Output** | Triggers `derive-ai-docs.ts` and `ai-runner.ts` |
-| **Trigger** | `yarn dev:improve` (manual, long-running watcher) |
+| **Trigger** | `yarn dev:ai` (manual, long-running watcher) |
 | **Dependencies** | `chokidar`, `tsx`, AI CLI tools (optional — degrades gracefully) |
 | **Status** | **Active** — development convenience tool. |
 
@@ -128,7 +124,7 @@ yarn translate
 
 Called by `yarn build` and `yarn prepare`. This is the **production pipeline**.
 
-### `yarn dev:improve` (development watcher)
+### `yarn dev:ai` (development watcher)
 
 ```
 dev-watcher.ts (chokidar)
@@ -426,7 +422,7 @@ dev-watcher.ts detects change
    "translate": "tsx ./scripts/translate.ts",
    "translate:components": "tsx ./scripts/translate.ts --components",
    "ai-improve": "tsx ./scripts/ai-improve.ts",
-   "dev:improve": "tsx ./scripts/dev-watcher.ts"
+   "dev:ai": "tsx ./scripts/dev-watcher.ts"
    ```
 8. **Update `dev-watcher.ts`** to call `translate.ts --components --files <changed>` instead of `derive-ai-docs.ts`.
 9. **Verify CI** — `yarn build` still calls `yarn translate` which now runs the unified script.
