@@ -497,3 +497,87 @@ Storybook provides an interactive playground for testing different prop combinat
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
 [View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs)
+
+## Recipes
+
+### Focusable Children
+
+```tsx
+import { useState } from 'react';
+import {
+  IressButton,
+  IressPopover,
+  usePopoverItem,
+} from '@iress-oss/ids-components';
+
+const CountButton = () => {
+  const [count, setCount] = useState(0);
+  const { isActiveInPopover, ...popoverItemProps } = usePopoverItem('Count', {
+    onKeyDown: (e) => {
+      if (e.key === '+') {
+        setCount(count + 1);
+      }
+    },
+  });
+
+  return (
+    <IressButton
+      {...popoverItemProps}
+      active={isActiveInPopover}
+      mode="tertiary"
+      fluid
+    >
+      Increase count using the + key: {count}
+    </IressButton>
+  );
+};
+
+export const UsePopoverExample = () => (
+  <IressPopover
+    activator={<IressButton>Toggle</IressButton>}
+    container={document.body}
+    type="listbox"
+    virtualFocus
+  >
+    <CountButton />
+    <CountButton />
+  </IressPopover>
+);
+```
+
+### With Listbox
+
+```tsx
+import { useState } from 'react';
+import {
+  IressButton,
+  IressMenu,
+  IressMenuItem,
+  IressPopover,
+} from '@iress-oss/ids-components';
+
+export function PopoverWithListbox() {
+  const [selected, setSelected] = useState<string | undefined>('aus');
+
+  return (
+    <IressPopover
+      activator={<IressButton>Select country</IressButton>}
+      container={document.body}
+      type="listbox"
+      contentStyle={{ p: 'none' }}
+    >
+      <IressMenu
+        role="listbox"
+        aria-label="Country"
+        selected={selected}
+        onChange={(value) => setSelected(value as string)}
+      >
+        <IressMenuItem value="aus">Australia</IressMenuItem>
+        <IressMenuItem value="nz">New Zealand</IressMenuItem>
+        <IressMenuItem value="uk">United Kingdom</IressMenuItem>
+        <IressMenuItem value="sg">Singapore</IressMenuItem>
+      </IressMenu>
+    </IressPopover>
+  );
+}
+```

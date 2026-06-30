@@ -194,7 +194,81 @@ async function buildDoc(file: string, type: string): Promise<{ slug: string; mar
     }
   }
 
+  // Append unreferenced recipe stories (Phase E)
+  if (isComponent) {
+    const recipes = getUnreferencedRecipes(name, type, prose);
+    if (recipes.length > 0) {
+      sections.push('\n## Recipes\n');
+      for (const recipe of recipes) {
+        sections.push(`### ${recipe.name}\n`);
+        sections.push('```tsx\n' + recipe.code + '\n```\n');
+      }
+    }
+  }
+
   return { slug, markdown: sections.join('\n') };
+}
+
+interface RecipeEntry {
+  name: string;
+  code: string;
+}
+
+function getUnreferencedRecipes(componentName: string, type: string, resolvedProse: string): RecipeEntry[] {
+  const COMPONENTS_SRC_DIR = join(ROOT, 'packages/components/src');
+  const dirName = componentName;
+
+  // Find the stories file
+  const storiesDir = join(COMPONENTS_SRC_DIR, type, dirName);
+  if (!existsSync(storiesDir)) return [];
+
+  const storiesFile = readdirSync(storiesDir).find((f) => f.endsWith('.stories.tsx'));
+  if (!storiesFile) return [];
+
+  const storiesPath = join(storiesDir, storiesFile);
+  const source = readFileSync(storiesPath, 'utf-8');
+
+  // Find recipe-tagged story exports
+  const recipeRegex = /export const (\w+)[^=]*=\s*\{([\s\S]*?)\n\};/g;
+  const recipes: RecipeEntry[] = [];
+  let match;
+
+  while ((match = recipeRegex.exec(source)) !== null) {
+    const storyName = match[1];
+    const storyBody = match[2];
+
+    // Only process recipe-tagged stories
+    if (!storyBody.includes("tags: ['recipe']") && !storyBody.includes("tags: ['recipe'")) continue;
+
+    // Convert export name to kebab slug to check if it was already referenced
+    const slug = storyName.replace(/([A-Z])/g, (_, c, i) => (i > 0 ? '-' : '') + c.toLowerCase());
+    const spacedName = storyName.replace(/([A-Z])/g, ' $1').trim().toLowerCase();
+    const proseLC = resolvedProse.toLowerCase();
+    if (proseLC.includes(slug) || proseLC.includes(storyName.toLowerCase()) || proseLC.includes(spacedName)) continue;
+
+    // Only extract P2 stories (withSource)
+    const sourceVarMatch = storyBody.match(/withSource\((\w+Source)/);
+    if (!sourceVarMatch) continue;
+
+    const sourceVar = sourceVarMatch[1];
+    const rawImportRegex = new RegExp(`import\\s+${sourceVar}\\s+from\\s+['"]([^'"]+)\\?raw['"]`);
+    const rawImportMatch = source.match(rawImportRegex);
+    if (!rawImportMatch) continue;
+
+    const mockPath = join(storiesDir, rawImportMatch[1]);
+    if (!existsSync(mockPath)) continue;
+
+    let mockSource = readFileSync(mockPath, 'utf-8');
+    // Transform @/main imports
+    mockSource = mockSource.replace(/@\/main/g, '@iress-oss/ids-components');
+
+    // Format the name for display
+    const displayName = storyName.replace(/([A-Z])/g, ' $1').trim();
+
+    recipes.push({ name: displayName, code: mockSource.trim() });
+  }
+
+  return recipes;
 }
 
 export async function translateComponents() {

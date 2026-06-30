@@ -2856,3 +2856,202 @@ Automated validation is now solely contained in `IressForm` and `IressFormField`
 ---
 
 [View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs)
+
+## Recipes
+
+### Native Validation
+
+```tsx
+import {
+  IressInput,
+  IressButton,
+  IressField,
+  IressAlert,
+  type InputBaseElement,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export const NativeValidationForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+  });
+  const [errors, setErrors] = useState<Record<string, boolean>>({
+    name: false,
+    email: false,
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const hasErrors = Object.values(errors).some((error) => !!error);
+
+  const handleInputChange = (e: React.ChangeEvent<InputBaseElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({
+      ...errors,
+      [e.target.name]: !e.currentTarget.reportValidity(),
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setIsSubmitted(true);
+
+    if (!form.checkValidity()) {
+      const fieldData = Object.fromEntries(new FormData(form).entries());
+      const fieldNames = Object.keys(fieldData);
+
+      setErrors(
+        fieldNames.reduce(
+          (newErrors, fieldName) => {
+            newErrors[fieldName] = !form
+              .querySelector<HTMLInputElement>(`[name=${fieldName}]`)
+              ?.checkValidity();
+            return newErrors;
+          },
+          {} as Record<string, boolean>,
+        ),
+      );
+    }
+
+    console.log(formData);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} noValidate>
+      {isSubmitted && hasErrors && (
+        <IressAlert status="danger">
+          There's a problem with your submission.
+        </IressAlert>
+      )}
+      <IressField
+        label="Name"
+        error={errors.name && 'Name is required'}
+        required
+      >
+        <IressInput name="name" onChange={handleInputChange} required />
+      </IressField>
+      <IressField
+        label="Email address"
+        error={errors.email && 'Email is required'}
+        required
+      >
+        <IressInput name="email" onChange={handleInputChange} required />
+      </IressField>
+      <IressButton mode="primary" type="submit">
+        Sign up
+      </IressButton>
+    </form>
+  );
+};
+```
+
+### Forms In Expanders
+
+```tsx
+import {
+  IressExpander,
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressStack,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+const Form = () => (
+  <IressForm>
+    <IressFormField
+      label="Name"
+      name="name"
+      render={(controlledProps) => <IressInput {...controlledProps} />}
+      rules={{
+        required: 'Name is required',
+      }}
+    />
+    <IressFormField
+      label="Email address"
+      name="email"
+      render={(controlledProps) => <IressInput {...controlledProps} />}
+      rules={{
+        minLength: {
+          message: 'Use a longer email address',
+          value: 6,
+        },
+        required: 'Email is required',
+      }}
+    />
+  </IressForm>
+);
+
+export function FormExpanders() {
+  const [expander, setExpander] = useState('');
+
+  const isOpen = (name: string) => expander === name;
+
+  return (
+    <IressStack gap="sm">
+      <IressExpander
+        activator="Sender"
+        open={isOpen('Sender')}
+        onChange={(open) => open && setExpander('Sender')}
+      >
+        {isOpen('Sender') && <Form />}
+      </IressExpander>
+      <IressExpander
+        activator="Recipient"
+        open={isOpen('Recipient')}
+        onChange={(open) => open && setExpander('Recipient')}
+      >
+        {isOpen('Recipient') && <Form />}
+      </IressExpander>
+    </IressStack>
+  );
+}
+```
+
+### Hidden Inputs
+
+```tsx
+import {
+  IressButton,
+  IressFormField,
+  IressHookForm,
+  IressInput,
+} from '@iress-oss/ids-components';
+import { useForm } from 'react-hook-form';
+
+export const HiddenInputsForm = () => {
+  const form = useForm();
+  const { register } = form;
+
+  // This is a hidden input field that the user cannot see or interact with.
+  // This is the recommended way to handle hidden inputs in Iress forms.
+  const hiddenInputStoredInVariable = 'hiddenValue';
+
+  return (
+    <IressHookForm
+      form={form}
+      onSubmit={(data) => {
+        console.log('Form submitted with data:', {
+          ...data,
+          hiddenInputStoredInVariable,
+        });
+      }}
+    >
+      <IressFormField
+        label="Visible Input"
+        name="visibleInput"
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+
+      {/* Hidden field - NOT RECOMMENDED */}
+      <input
+        type="hidden"
+        {...register('hiddenField')} // Manually register the hidden field with react-hook-form
+        value="hiddenValue"
+      />
+
+      <IressButton type="submit">Submit</IressButton>
+    </IressHookForm>
+  );
+};
+```
