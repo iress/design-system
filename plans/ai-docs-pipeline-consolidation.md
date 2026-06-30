@@ -2,27 +2,26 @@
 
 > Generated: 2026-05-30
 
-## Status (Updated 2026-06-30)
+## Status (Updated 2026-07-01)
 
 | Phase | Status | Notes |
 |-------|--------|-------|
 | Phase A: Scaffold + guides copy | ✅ Done | CLI, strip-mdx, transform-imports, all subcommands |
-| Phase B: Component docs — prose + meta | ✅ Done | 88 docs, meta enrichment, testMeta tables |
+| Phase B: Component docs — prose + meta | ✅ Done | 93 docs, meta enrichment, testMeta tables |
 | Phase C: StoryEmbed resolution | ✅ Done | P1/P2/P3 extraction, prettier formatting, case-insensitive matching, sub-component paths, Foundation stories |
-| Phase C2: Reference data extraction | ✅ Done | Plugin system (StoryPlugin + StoryOverridePlugin), 10+ plugins for breakpoints, icons, z-index, forms, feedback, etc. |
-| Pipeline unification | ✅ Done | Single `--components` pass over all `apps/guidelines/content/` dirs. `--guides` is now an alias. |
-| Phase D: Props extraction | ✅ Done | react-docgen-typescript + .d.ts fallback, type linking, MaterialSymbol detection, enum expansion, subComponents, additionalProps, CI check planned |
+| Phase C2: Reference data extraction | ✅ Done | Plugin system (StoryPlugin + StoryOverridePlugin), 10+ plugins for breakpoints, icons, z-index, forms, feedback, tokens, etc. |
+| Pipeline unification | ✅ Done | Single `--components` pass over all `apps/guidelines/content/` dirs (dynamic scanning). `--guides` is alias. |
+| Phase D: Props extraction | ✅ Done | react-docgen-typescript + .d.ts fallback, type linking, MaterialSymbol detection, enum expansion, subComponents, additionalProps |
 | Phase E: Append unreferenced recipes + cleanup | ✅ Done | Recipe stories appended to form/popover; stale files deleted |
 | Phase F: Composition + styling props | ✅ Done | Styling props linked (overview + type def + token values); composition documented in prose; full-reference working |
-| Phase G: Wire into build + cleanup | ❌ Not started | Includes CI prop table validation |
+| Phase H: Enriched index.json + llms.txt | ✅ Done | Enriched manifest (name, description, import, path); llms.txt rewritten; tokens co-located in components/.ai/ |
+| Phase G: Wire into build + cleanup | ✅ Done | package.json updated, old scripts removed, helpers consolidated, dev-watcher updated (incl. tokens), CI prop validation deferred to Phase 12 Step 10 |
 
 ### Future Phases
 
 | Phase | Status | Notes |
 |-------|--------|-------|
-| Phase H: Enriched index.json + llms.txt | ❌ Not started | Component catalog with descriptions, imports, keywords; fix llms.txt generation |
-
-### Future Phases
+| Phase I: Documentation & skills sync | ❌ Not started | Update instructions, skills, and AGENTS.md to reflect new pipeline |
 
 | Phase | Status | Notes |
 |-------|--------|-------|

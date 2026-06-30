@@ -2,7 +2,7 @@
 
 /**
  * Dev Watcher — watches guidelines content and stories for changes,
- * then runs derive-ai-docs + ai-runner to keep .ai/ in sync.
+ * then runs translate + ai-runner to keep .ai/ in sync.
  *
  * Usage: npx tsx scripts/dev-watcher.ts
  */
@@ -22,6 +22,7 @@ const AI_LOG = path.join(ROOT, 'apps/guidelines/.ai-improve.log');
 const WATCH_PATHS = [
   path.join(ROOT, 'apps/guidelines/content'),
   path.join(ROOT, 'packages/components/src'),
+  path.join(ROOT, 'packages/tokens/src'),
 ];
 
 const DEBOUNCE_MS = 2000;
@@ -74,23 +75,29 @@ function processChanges() {
 
   const contentFiles = files.filter((f) => f.includes('apps/guidelines/content'));
   const storyFiles = files.filter((f) => f.includes('.stories.tsx'));
+  const tokenFiles = files.filter((f) => f.includes('packages/tokens/src'));
 
   try {
     // Suppress watcher events caused by our own writes
     ignoreChanges = true;
 
-    // Step 1: Derive .ai/ (synchronous, fast)
-    if (contentFiles.length > 0) {
-      console.log(`\n📄 Deriving .ai/ for ${contentFiles.length} file(s)...`);
-      execSync(`npx tsx scripts/derive-ai-docs.ts --files ${contentFiles.join(' ')}`, {
+    // Step 1: Regenerate tokens if token source changed
+    if (tokenFiles.length > 0) {
+      console.log(`\n🎨 Token source changed — regenerating token reference...`);
+      execSync('npx tsx scripts/translate.ts --tokens --components', {
         cwd: ROOT,
         stdio: 'inherit',
       });
-    }
-
-    if (storyFiles.length > 0) {
+    } else if (contentFiles.length > 0) {
+      // Step 2: Derive .ai/ for content changes
+      console.log(`\n📄 Deriving .ai/ for ${contentFiles.length} file(s)...`);
+      execSync(`npx tsx scripts/translate.ts --components`, {
+        cwd: ROOT,
+        stdio: 'inherit',
+      });
+    } else if (storyFiles.length > 0) {
       console.log(`\n📄 Story changed — deriving all .ai/ docs...`);
-      execSync('npx tsx scripts/derive-ai-docs.ts', { cwd: ROOT, stdio: 'inherit' });
+      execSync('npx tsx scripts/translate.ts --components', { cwd: ROOT, stdio: 'inherit' });
     }
 
     // Step 2: AI improve (async, killable on next change)
@@ -137,12 +144,12 @@ console.log('👀 Watching for content and story changes...');
 if (!hasAiTool()) {
   console.log('   ⚠️  No AI tool found — will only run derive (no improvement step)');
 }
-console.log('   Paths: apps/guidelines/content/, packages/components/src/\n');
+console.log('   Paths: apps/guidelines/content/, packages/components/src/, packages/tokens/src/\n');
 
 const watcher = watch(WATCH_PATHS, { ignoreInitial: true });
 
 function isRelevant(filePath: string): boolean {
-  return filePath.endsWith('.mdx') || filePath.endsWith('.stories.tsx');
+  return filePath.endsWith('.mdx') || filePath.endsWith('.stories.tsx') || filePath.includes('packages/tokens/src');
 }
 
 watcher.on('change', (filePath) => {

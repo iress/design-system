@@ -1,6 +1,275 @@
 # IDS Full Reference
 
-> Auto-generated from 100 docs. Do not edit manually.
+> Auto-generated from 101 docs. Do not edit manually.
+
+---
+
+<!-- REVIEW.md -->
+
+# .ai Folder Review
+
+Review of `packages/components/.ai/` — structure, content quality, cross-references,
+and gaps. Since this folder is **entirely generated** by the translate pipeline, all
+fixes must target either the pipeline scripts or the source documents.
+
+**Date:** 2025-07-01
+
+---
+
+## Generation Pipeline
+
+```
+scripts/translate.ts (orchestrator)
+├── scripts/translate/components.ts    → .ai/{components,patterns,foundations,get-started,styling-props,tokens,migration}/*.md + index.json
+├── scripts/translate/tokens.ts        → packages/tokens/.ai/tokens-reference.md (then copied into .ai/tokens/)
+├── scripts/translate/skills.ts        → .ai/skills/*.md (via scripts/translate-skills.ts)
+├── scripts/translate/llms-txt.ts      → llms.txt
+└── scripts/translate/full-reference.ts → IDS-FULL-REFERENCE.md
+
+Sources:
+- apps/guidelines/content/**/*.mdx         (prose, design guidance, code examples)
+- @iress-oss/ids-components/meta           (component descriptions, imports, links)
+- packages/components/dist/**/*.d.ts       (prop types)
+- packages/tokens/src/schema/              (token values)
+- .agents/skills/*/SKILL.md                (skill docs)
+```
+
+---
+
+## What's Working Well
+
+- **Component docs are high quality.** Consistent format: Import → Props → Code → Design guidance.
+- **index.json is well-organised.** 87 entries with slugs, types, and relative paths.
+- **Patterns decision guides are excellent** (feedback.md, search-selection.md).
+- **tokens-reference.md is comprehensive.** Full values, CSS vars, descriptions, a11y pairings.
+- **Skills docs are self-contained.** Frontmatter stripped, references inlined.
+- **Cross-links to Storybook and GitHub work correctly.**
+- **`dist/` type definition links resolve correctly.**
+
+---
+
+## Issues & Root Causes
+
+### 1. Broken Link: tokens-reference.md (57 files)
+
+**Symptom:** Every component/pattern doc contains:
+```
+[token values](../../tokens/.ai/tokens-reference.md)
+```
+This path doesn't resolve. From `.ai/components/button.md`, `../../tokens/.ai/` points outside the repo structure to a non-existent location.
+
+**Root cause:** Hardcoded on **line 168** of `scripts/translate/components.ts`:
+```typescript
+sections.push('Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).\n');
+```
+
+The file is actually copied into `packages/components/.ai/tokens/tokens-reference.md` by lines 313–318 of the same script.
+
+**Fix:** Change line 168 to use the correct relative path:
+```typescript
+sections.push('Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).\n');
+```
+
+**File:** `scripts/translate/components.ts:168`
+
+---
+
+### 2. Broken Link: common-mistakes (2 files)
+
+**Symptom:** Two output files link to `../foundations/common-mistakes.md` which doesn't exist — the file is at `../get-started/common-mistakes.md`.
+
+**Root cause:** The **source MDX files** use the wrong route:
+- `apps/guidelines/content/components/overview.mdx:66` — `[Common Mistakes](/foundations/common-mistakes)`
+- `apps/guidelines/content/foundations/using-components-consistently.mdx:33` — `[Common Mistakes](/foundations/common-mistakes#using-disabled-on-iressbutton)`
+
+The `stripMdx` helper (line 60 of `scripts/translate/helpers/strip-mdx.ts`) faithfully converts `/path` to `../path.md`. The bug is upstream in the source MDX, not the pipeline.
+
+**Fix:** Update the source MDX files:
+```diff
+# apps/guidelines/content/components/overview.mdx
+- [Common Mistakes](/foundations/common-mistakes)
++ [Common Mistakes](/get-started/common-mistakes)
+
+# apps/guidelines/content/foundations/using-components-consistently.mdx
+- [Common Mistakes](/foundations/common-mistakes#using-disabled-on-iressbutton)
++ [Common Mistakes](/get-started/common-mistakes#using-disabled-on-iressbutton)
+```
+
+**Files:**
+- `apps/guidelines/content/components/overview.mdx:66`
+- `apps/guidelines/content/foundations/using-components-consistently.mdx:33`
+
+---
+
+### 3. Missing Index Entry: tokens-reference
+
+**Symptom:** `tokens/tokens-reference.md` exists on disk but has no entry in `index.json`.
+
+**Root cause:** `translateComponents()` builds the index only from the `apps/guidelines/content/` scan loop. The tokens-reference copy (lines 313–318) happens after index writing (line 310) and never appends an entry.
+
+**Fix:** Add an index entry after the copy in `scripts/translate/components.ts`:
+```typescript
+// After the copy block (line 318), add:
+index.push({
+  slug: 'tokens-reference',
+  type: 'tokens',
+  name: 'Token Reference',
+  description: 'Complete enumeration of all IDS design tokens with values, descriptions, and accessibility pairings.',
+  path: 'tokens/tokens-reference.md',
+});
+```
+
+Also move the `writeFileSync(join(OUTPUT_DIR, 'index.json'), ...)` call to **after** this push.
+
+**File:** `scripts/translate/components.ts:310–318`
+
+---
+
+### 4. Missing Index Entries: skills (4 files)
+
+**Symptom:** The `skills/` folder contains 4 files (figma-to-ids.md, ui-doctor.md, ui-translation.md, version-migration.md) with no index entries.
+
+**Root cause:** `translateSkills()` is a separate pipeline step that shells out to `scripts/translate-skills.ts`. It writes files directly to `.ai/skills/` but never touches `index.json` — index.json is owned by `translateComponents()`.
+
+**Fix options:**
+1. **(Preferred)** Have `translateComponents()` scan the `.ai/skills/` directory after skills are generated and append entries:
+   ```typescript
+   const skillsDir = join(OUTPUT_DIR, 'skills');
+   if (existsSync(skillsDir)) {
+     for (const file of readdirSync(skillsDir).filter(f => f.endsWith('.md'))) {
+       const slug = basename(file, '.md');
+       index.push({ slug, type: 'skills', path: `skills/${file}` });
+     }
+   }
+   ```
+   This requires skills to run before components in translate.ts — currently the order is `['--tokens', '--components', '--skills', ...]`. Change to `['--tokens', '--skills', '--components', ...]`.
+
+2. **(Alternative)** Have `translate-skills.ts` append to the existing index.json after writing skill files.
+
+**Files:**
+- `scripts/translate.ts:37` (run order)
+- `scripts/translate/components.ts` (add skills scan before index write)
+
+---
+
+### 5. Missing Descriptions for Non-Component Types (32 entries)
+
+**Symptom:** All `foundations`, `get-started`, `styling-props`, `tokens`, and `migration` entries in index.json have no `name` or `description`.
+
+**Root cause:** The `buildDoc()` function (line 95-97) only reads descriptions from `@iress-oss/ids-components/meta`, which only contains component/pattern metadata. For non-component types, `isComponent` is false, so `metaFile` is never looked up and `description` stays empty.
+
+However, the **source MDX files DO have descriptions** in their `export const meta`:
+```tsx
+export const meta = {
+  title: 'Accessibility',
+  description: 'Accessibility is everyone\'s responsibility...',
+};
+```
+
+But `stripMdx` removes these blocks (line 30: `.replace(/export\s+const\s+meta\s*=\s*\{[\s\S]*?\};\n*/g, '')`) and `buildDoc` never extracts them first.
+
+**Fix:** In `buildDoc()`, extract the meta object from the MDX source **before** calling `stripMdx`:
+```typescript
+// Before: const source = readFileSync(file, 'utf-8');
+// After reading, extract meta for non-component types:
+const source = readFileSync(file, 'utf-8');
+
+if (!isComponent) {
+  const metaMatch = source.match(/export\s+const\s+meta\s*=\s*\{([^}]*)\}/s);
+  if (metaMatch) {
+    const titleMatch = metaMatch[1].match(/title:\s*['"]([^'"]+)['"]/);
+    const descMatch = metaMatch[1].match(/description:\s*['"]([^'"]+)['"]/);
+    if (descMatch) description = descMatch[1];
+    // Optionally use title as name
+  }
+}
+```
+
+**File:** `scripts/translate/components.ts` — inside `buildDoc()`, around line 82
+
+---
+
+### 6. Orphaned Files: menu-item.md and tab.md
+
+**Symptom:** Two files exist in `.ai/components/` that aren't in index.json, use a different format (quick-start style, no props table, no design section), and are dated Jun 9 while all generated files are Jun 29-30.
+
+**Root cause:** There are **no source MDX files** for these:
+- No `apps/guidelines/content/components/menu-item.mdx`
+- No `apps/guidelines/content/components/tab.mdx`
+
+They were manually committed in earlier PRs (git shows `ba3b26c0`, `a729655f`, `93f30f0f`). The pipeline doesn't generate them and doesn't clean them up either — it only writes files, never deletes.
+
+**Fix options:**
+1. **(Preferred)** Create source MDX files for them:
+   - `apps/guidelines/content/components/menu-item.mdx`
+   - `apps/guidelines/content/components/tab.mdx`
+
+   The pipeline will then generate proper docs from meta + MDX + props extraction.
+
+2. **(Alternative)** Add a cleanup step at the start of `translateComponents()` that removes existing `.md` files before regenerating:
+   ```typescript
+   // At start of translateComponents():
+   for (const type of contentTypes) {
+     const outDir = join(OUTPUT_DIR, type);
+     if (existsSync(outDir)) {
+       for (const f of readdirSync(outDir).filter(f => f.endsWith('.md'))) {
+         unlinkSync(join(outDir, f));
+       }
+     }
+   }
+   ```
+   This ensures no stale manually-committed files persist.
+
+3. **(Minimum)** Document them as exceptions and add them to the index manually in the pipeline.
+
+**Files:**
+- `apps/guidelines/content/components/` (create new MDX files)
+- OR `scripts/translate/components.ts` (add cleanup step)
+
+---
+
+### 7. Overview Entry Naming: "IressOverview"
+
+**Symptom:** Overview index entries get `"name": "IressOverview"` which is misleading — they're category landing pages, not components.
+
+**Root cause:** `slugToName("overview")` returns `"Overview"`, and line 83 returns `name: isComponent ? \`Iress${name}\` : undefined`. Since overviews in `components` and `patterns` directories pass `isComponent = true`, they get prefixed.
+
+**Fix:** Add a special case in `buildDoc()`:
+```typescript
+// When determining the name for the index entry:
+name: isComponent && slug !== 'overview' ? `Iress${name}` : undefined
+```
+
+**File:** `scripts/translate/components.ts` — return value of `buildDoc()`, around line 193
+
+---
+
+## Summary Table
+
+| # | Issue | Scope | Fix Location | Effort |
+|---|-------|-------|-------------|--------|
+| 1 | Broken tokens-reference link | 57 files | `scripts/translate/components.ts:168` | 1 line change |
+| 2 | Broken common-mistakes link | 2 files | 2 source MDX files in `apps/guidelines/content/` | 2 line changes |
+| 3 | Missing tokens-reference index | 1 entry | `scripts/translate/components.ts:310-318` | ~5 lines |
+| 4 | Missing skills index entries | 4 entries | `scripts/translate/components.ts` + run order | ~10 lines |
+| 5 | Missing descriptions (32 entries) | 32 entries | `scripts/translate/components.ts` buildDoc() | ~10 lines |
+| 6 | Orphaned menu-item/tab files | 2 files | Create source MDX or add cleanup step | Medium |
+| 7 | "IressOverview" naming | 2 entries | `scripts/translate/components.ts` buildDoc() | 1 line change |
+
+---
+
+## Recommended Fix Order
+
+1. **Issue 1** — biggest impact, simplest fix (1 line)
+2. **Issue 2** — fix the source MDX files (2 lines)
+3. **Issue 3** — add tokens-reference to index (5 lines)
+4. **Issue 7** — overview naming (1 line)
+5. **Issue 5** — extract descriptions from MDX meta (10 lines)
+6. **Issue 4** — skills indexing (10 lines + ordering change)
+7. **Issue 6** — decide on menu-item/tab strategy (create MDX or cleanup step)
+
+After applying fixes 1–7, run `yarn translate` to regenerate all output and verify.
+
 
 ---
 

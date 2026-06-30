@@ -1,8 +1,10 @@
-import { execSync } from 'child_process';
-import { join } from 'path';
+/**
+ * --skills subcommand
+ * Translates skills from .agents/skills/ to package .ai/skills/ directories.
+ */
 
-const ROOT = join(import.meta.dirname, '../..');
+import { translateSkillsImpl } from './helpers/translate-skills';
 
 export async function translateSkills() {
-  execSync('tsx ./scripts/translate-skills.ts', { cwd: ROOT, stdio: 'inherit' });
+  await translateSkillsImpl();
 }

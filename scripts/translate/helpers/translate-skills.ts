@@ -24,14 +24,14 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SKILLS_DIR = path.resolve(__dirname, '../.agents/skills');
+const SKILLS_DIR = path.resolve(__dirname, '../../../.agents/skills');
 const COMPONENTS_AI_SKILLS = path.resolve(
   __dirname,
-  '../packages/components/.ai/skills',
+  '../../../packages/components/.ai/skills',
 );
 const TOKENS_AI_SKILLS = path.resolve(
   __dirname,
-  '../packages/tokens/.ai/skills',
+  '../../../packages/tokens/.ai/skills',
 );
 const DRY_RUN = process.argv.includes('--dry-run');
 
@@ -134,7 +134,7 @@ async function inlineReferences(
 
 // ─── Main ────────────────────────────────────────────────────
 
-async function main() {
+export async function translateSkillsImpl() {
   console.log('🔄 Translating skills from .agents/skills/ → .ai/skills/...\n');
 
   if (DRY_RUN) {
@@ -194,4 +194,4 @@ async function main() {
   }
 }
 
-main().catch(console.error);
+
