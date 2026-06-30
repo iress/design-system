@@ -37,7 +37,7 @@ import { IressCheckbox } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Checkbox/Checkbox.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Checkboxes are used to let a user select one or more options for a limited number of choices. Also, works as a child of IressCheckboxGroup
 

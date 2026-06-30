@@ -29,7 +29,7 @@ import { IressInline } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Inline/Inline.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 IressInline renders a set of components in a row with equal spacing around them, wrapping onto multiple lines when necessary.
 

@@ -25,7 +25,7 @@ import { IressBreadcrumbs } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/patterns/Breadcrumbs/Breadcrumbs.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Breadcrumbs are a secondary navigation aid that helps users understand their current location within the site hierarchy and provides a simple way to navigate back to higher-level pages.
 

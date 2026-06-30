@@ -25,7 +25,7 @@ import { IressContainer } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Container/Container.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 IressContainer provides a means to center and horizontally pad your site's contents.
 

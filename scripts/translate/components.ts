@@ -161,7 +161,7 @@ async function buildDoc(file: string, type: string): Promise<{ slug: string; mar
       sections.push('## Props\n');
       sections.push('> Required props are **bold**.\n');
       sections.push(renderPropsTable(allProps, `Iress${name}`, type) + '\n');
-      sections.push('Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).\n');
+      sections.push('Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).\n');
     }
 
     // Sub-component props (declared in meta.subComponents)

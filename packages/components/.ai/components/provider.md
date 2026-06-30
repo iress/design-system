@@ -31,7 +31,7 @@ import { IressProvider } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Provider/Provider.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Provider is a component that sets up the Iress Design System for your application. It ensures that the design system is correctly configured and ready to use. It is required for Modal, Slideout, Toaster, and Tooltip to function correctly.
 

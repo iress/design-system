@@ -58,7 +58,7 @@ import { IressDropdownMenu } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/patterns/DropdownMenu/DropdownMenu.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A component designed to filter a section based on a list of options and quickly navigate to relevant content.
 

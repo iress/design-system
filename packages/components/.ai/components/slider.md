@@ -34,7 +34,7 @@ import { IressSlider } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Slider/Slider.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Sliders provide a visual indication of adjustable content, where the user can select a value from a range usually represented on a horizontal track.
 

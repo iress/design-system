@@ -30,7 +30,7 @@ import { IressButtonGroup } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/ButtonGroup/ButtonGroup.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 ButtonGroup allows users to switch between two or more possible states. ButtonGroups are only used for actions that occur immediately after the user "flips the switch".
 

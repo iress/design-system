@@ -40,7 +40,7 @@ import { IressInput } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Input/Input.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Inputs allow a user to input and interact with data. This component should be used as a child of the IressField component to ensure the correct placement of elements like label, error & hint text.
 
@@ -395,7 +395,7 @@ const input = screen.getByRole('spinbutton', { name: 'Quantity' });
   `<textarea>` with a `__textarea` test ID suffix. Without `rows`, it renders an
   `<input>` with a `__input` suffix.
 
-```tsx
+  ```tsx
 screen.getByTestId('my-input__input'); // Single-line
 screen.getByTestId('my-input__textarea'); // Textarea (rows > 0)
 ```

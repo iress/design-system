@@ -26,7 +26,7 @@ import { IressImage } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Image/Image.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 IressImage renders an image that resizes based on the user's screen width. The component accepts standard image attributes like `src` and `alt`.
 

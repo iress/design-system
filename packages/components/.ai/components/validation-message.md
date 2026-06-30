@@ -28,7 +28,7 @@ import { IressValidationMessage } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/ValidationMessage/ValidationMessage.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A validation message is used to inform the user of the status of a form input. If there are multiple messages, they can be combined using the IressValidationSummary component.
 

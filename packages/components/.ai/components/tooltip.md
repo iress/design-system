@@ -29,7 +29,7 @@ import { IressTooltip } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Tooltip/Tooltip.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A component that shows concise, informative text about an element when focussed upon, hovered over or on a long touch.
 

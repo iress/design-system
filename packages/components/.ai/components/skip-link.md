@@ -38,7 +38,7 @@ import { IressSkipLink } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/SkipLink/SkipLink.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 The skip link component allows keyboard users to quickly bypass the top-level navigation links and jump to the main content on a page.
 

@@ -12,7 +12,7 @@
 | Phase C2: Reference data extraction | ✅ Done | Plugin system (StoryPlugin + StoryOverridePlugin), 10+ plugins for breakpoints, icons, z-index, forms, feedback, etc. |
 | Pipeline unification | ✅ Done | Single `--components` pass over all `apps/guidelines/content/` dirs. `--guides` is now an alias. |
 | Phase D: Props extraction | ✅ Done | react-docgen-typescript + .d.ts fallback, type linking, MaterialSymbol detection, enum expansion, subComponents, additionalProps, CI check planned |
-| Phase E: Append unreferenced recipes + cleanup | ❌ Not started | Only recipe-tagged stories not already in guidelines; delete stale files |
+| Phase E: Append unreferenced recipes + cleanup | ✅ Done | Recipe stories appended to form/popover; stale files deleted |
 | Phase F: Composition + styling props | ❌ Not started | |
 | Phase G: Wire into build + cleanup | ❌ Not started | Includes CI prop table validation |
 

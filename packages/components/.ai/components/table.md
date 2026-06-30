@@ -36,7 +36,7 @@ import { IressTable } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Table/Table.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Data driven component for displaying tabular data.
 

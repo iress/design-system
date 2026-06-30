@@ -28,7 +28,7 @@ import { IressLabel } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Label/Label.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Use the IressLabel component when building bespoke form inputs and IressField is too restrictive.
 

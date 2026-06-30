@@ -40,7 +40,7 @@ import { IressLoading } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/patterns/Loading/Loading.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 The loading pattern is used to indicate that content is being loaded or processed consistently across Iress products.
 

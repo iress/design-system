@@ -50,7 +50,7 @@ import { IressAutocomplete } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Autocomplete/Autocomplete.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Autocomplete allow for users to fill in their input by providing suggestions as they type.
 

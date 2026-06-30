@@ -38,7 +38,7 @@ import { IressButton } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Button/Button.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A button is a clickable item used to perform an action.
 

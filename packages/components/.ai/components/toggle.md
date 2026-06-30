@@ -30,7 +30,7 @@ import { IressToggle } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Toggle/Toggle.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Toggles allow users to turn things on or off. When toggled, the associated change happens straight away.
 

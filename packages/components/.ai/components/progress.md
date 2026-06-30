@@ -28,7 +28,7 @@ import { IressProgress } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Progress/Progress.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A progress component is used to indicate to a user the completion of a set of tasks or a process.
 
